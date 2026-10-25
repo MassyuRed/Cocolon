@@ -2,7 +2,7 @@
 
 **GPUの最新確認：** 今回のMashの「4B学習＋CMEE接続を進める・Jupyterへ直接接続」指示に従い、既存PodのJupyterへ直接接続。A4500/20470MiB/使用1MiBを実確認し、管理console/GPU一覧/API照会は0。今回Stop/再起動/削除/新Pod/チャージ0。§43の停止指示とHTTP429による停止未確認は履歴として保持し、停止済み・費用停止済みとはしない。今回のCPU診断でmodel読込/forward/生成/学習更新0。
 
-**現在の直接作業（quote18後のCPU診断完了）：** 終了済みquote18の意味9/9・本文6/9は不変。Jupyterで全9rawのtoken復号/教師とのparsed比較と原source/重みhash不変を確認し、daily3の差はreceptionだけと実測。各26文字・11tokenを既存方式で厳密にマスクでき、全文JSON+EOSの0.688〜0.706％。最初の相違tokenも全3で同マスク内。モデル読込/forward/新生成/更新0、終了済み18plan/条件付き後段call0は再開しない。保存138b9ff7から同3受け取り各2回＝新6更新、保存reload/FIT9、全9意味本文成功時だけ新ID2保存再読という一回候補を未承認planへ具体化。6が最適・原因がloss希釈と断定せず、既存reader/教師/prompt/quote方式を保持する。詳細は[最新weekly §44](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-quote-reception-cpu-and-fit6-proposal)と[固定CPU結果・新候補](training/2026-10-25-emlis-quote-address/README.md#quote-reception-cpu-and-fit6-proposal)。新観測会は今回不要、追加GPU試行未実施、商品0・正式0/3・54.50％据置。
+**現在の直接作業（quote18後のCPU診断完了）：** 終了済みquote18の意味9/9・本文6/9は不変。Jupyterで全9rawのtoken復号/教師とのparsed比較と原source/重みhash不変を確認し、daily3の差はreceptionだけと実測。各26文字・11tokenを既存方式で厳密にマスクでき、全文JSON+EOSの0.688〜0.706％。最初の相違tokenも全3で同マスク内。モデル読込/forward/新生成/更新0、終了済み18plan/条件付き後段call0は再開しない。保存138b9ff7から同3受け取り各2回＝新6更新、保存reload/FIT9、全9意味本文成功時だけ新ID2保存再読という一回候補をMash承認後に新runner/承認planへ実装。6が最適・原因がloss希釈と断定せず、既存reader/教師/prompt/quote方式を保持する。詳細は[最新weekly §44](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-quote-reception-cpu-and-fit6-proposal)と[固定CPU結果・新候補](training/2026-10-25-emlis-quote-address/README.md#quote-reception-cpu-and-fit6-proposal)。新観測会は今回不要、新GPU学習は実tokenizer照合前、商品0・正式0/3・54.50％据置。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 
@@ -83,7 +83,7 @@ Freeの当回体験、Plusの適格履歴を踏まえた理解、Premiumの本�
 
 ## 現在地（2026-10-25・三中核の開発基準選定、本番は未成立）
 
-**現在の直接作業（quote18後のCPU診断完了）：** 終了済みquote18の意味9/9・本文6/9は不変。Jupyterで全9rawのtoken復号/教師とのparsed比較と原source/重みhash不変を確認し、daily3の差はreceptionだけと実測。各26文字・11tokenを既存方式で厳密にマスクでき、全文JSON+EOSの0.688〜0.706％。最初の相違tokenも全3で同マスク内。モデル読込/forward/新生成/更新0、終了済み18plan/条件付き後段call0は再開しない。保存138b9ff7から同3受け取り各2回＝新6更新、保存reload/FIT9、全9意味本文成功時だけ新ID2保存再読という一回候補を未承認planへ具体化。6が最適・原因がloss希釈と断定せず、既存reader/教師/prompt/quote方式を保持する。詳細は[最新weekly §44](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-quote-reception-cpu-and-fit6-proposal)と[固定CPU結果・新候補](training/2026-10-25-emlis-quote-address/README.md#quote-reception-cpu-and-fit6-proposal)。新観測会は今回不要、追加GPU試行未実施、商品0・正式0/3・54.50％据置。
+**現在の直接作業（quote18後のCPU診断完了）：** 終了済みquote18の意味9/9・本文6/9は不変。Jupyterで全9rawのtoken復号/教師とのparsed比較と原source/重みhash不変を確認し、daily3の差はreceptionだけと実測。各26文字・11tokenを既存方式で厳密にマスクでき、全文JSON+EOSの0.688〜0.706％。最初の相違tokenも全3で同マスク内。モデル読込/forward/新生成/更新0、終了済み18plan/条件付き後段call0は再開しない。保存138b9ff7から同3受け取り各2回＝新6更新、保存reload/FIT9、全9意味本文成功時だけ新ID2保存再読という一回候補をMash承認後に新runner/承認planへ実装。6が最適・原因がloss希釈と断定せず、既存reader/教師/prompt/quote方式を保持する。詳細は[最新weekly §44](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-quote-reception-cpu-and-fit6-proposal)と[固定CPU結果・新候補](training/2026-10-25-emlis-quote-address/README.md#quote-reception-cpu-and-fit6-proposal)。新観測会は今回不要、新GPU学習は実tokenizer照合前、商品0・正式0/3・54.50％据置。
 
 [凍結6教師と実行source](training/2026-10-25-emlis-service-binding/README.md)／[全実結果](trials/2026-10-25-service-binding/README.md)。
 

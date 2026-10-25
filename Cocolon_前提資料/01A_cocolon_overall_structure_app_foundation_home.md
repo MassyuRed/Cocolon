@@ -4868,3 +4868,8 @@ observation_learning/trials/2026-10-25-quote-address-fit18/ はREADME.md（終�
 ## 2026-10-25 — quote受け取りCPU診断と新6更新案のfile所在
 
 既存observation_learning/training/2026-10-25-emlis-quote-address/へdiagnose_reception.py（Jupyterで実行したCPU cache tokenizer診断）、reception_cpu_result.json（全9raw/parsed・daily3の各11token/両端/causal mask・原sourcehash不変）、reception_fit6.proposed.json（未承認flags=false/新6更新/FIT9/成功時2保存再読）を追加。READMEのquote-reception-cpu-and-fit6-proposal節が実測、最初のCPU準備失敗、変更候補path、費用/停止/承認境界を所有する。製品責務追加0、旧18plan/teacher/raw/重み/reader不変。全体00§8はFIT途中表示を意味9/本文6/終了後段0へ補正。最新weekly§44へ進行を戻す。新学習/モデル生成0、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。
+
+
+## 2026-10-25 — 承認済み受け取り6更新の実装file
+
+既存quote-address packにrun_quote_reception_fit.py（daily3の各11tokenだけを2回学ぶ一回、全文context保持/直接causal loss/保存非学習reload/FIT9）、reception_fit6.plan.json（Mash承認scopeと固定hash）、reception_fit6_cpu_validation.json（stdlib6条件成功）を追加。元proposed/18plan/teacher/helper/raw/readerを上書きしない。実tokenizer確認/GPU実行前。全9成功時だけ別後段へ進む。構造差分なし、商品0、最新weekly§45/packへ戻る。

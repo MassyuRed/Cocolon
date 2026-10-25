@@ -2409,3 +2409,11 @@ Mashの今回指示は4B学習＋CMEE接続の再開とJupyter直接接続。全
 次の最小案は、保存138b9ff7からdaily3の既存受け取り各2回＝新6update、LR5e-5/新AdamW/既存32LoRA、保存非学習reload/FIT9。旧chair学習0・検証6、全9意味/本文成功時だけ未使用別ID2初回の実service/isolated SQL保存・中断再開・非生成再読。新planはflags=false、未実装/未実行。既存reception mask方式・teacher/prompt/quote/reader不変。6が最適とは未実証。1800秒+$0.13、条件成功時のみ900秒+$0.065、計$0.195の処理按分（継続保持等別、請求上限ではない）。旧18planをretryせず、新試行全体をRule18§11.3 LEVEL3の判断対象へまとめた。承認後CPU後/成功後に追加の小分け承認は不要。
 
 新観測会はこの局所不足には不要。独立2話・Piece/Analysis完成教師0・一般品質未確立は継続。意味9/9・本文6/9/後段0、商品0/正式0/3/54.50％を維持。全体00§8の途中3/9表記を終了済みへ置換し、観測入口/pack/01Aへ差分同期。STRUCTURE_MAP_DELTA_NONE（教材・reader・製品source/型/公開API/DB/RN不変）。Supabase/Render/本人DB/通常アプリ/merge/deploy変更0。
+
+
+<a id="20261025-quote-reception-fit6-authorized"></a>
+## 45. 10/25 — 受け取り6更新一回をMash承認、実装/CPU6条件確認（実行前）
+
+Mashは「受け取りだけ6更新→保存・再読込→9件検査→全件成功時に2件保存再読、GPU処理最大45分/処理按分$0.195以内（保持等別）」への実装・実行を明示承認。新plan/reception専用runnerを既存quote packに作り、旧18plan/教師/prompt/raw/重み/readerを保持した。stdlib6条件のCPU検証と別文脈agentの読取reviewは成功。実tokenizer再照合前で新学習/新model生成0。全9成功時だけ新後段へ進む承認は受領済みで、CPU後/成功後の小分け再承認は不要。後段は旧runnerにない意味保存後中断/明示再開を実際に追加する。
+
+実行ownerはroot華恋/CodeX Work/GPT-6、補助agentはread-only。商品0/正式0/3/54.50％、STRUCTURE_MAP_DELTA_NONE。GPU一覧/管理API操作0、Jupyter直接接続を使う。詳細とsourceはquote packのquote-reception-fit6-approved節へ戻る。本checkpointで学習完了・本文向上・後段成立を先取りしない。

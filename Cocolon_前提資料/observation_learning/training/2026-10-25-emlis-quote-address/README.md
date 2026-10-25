@@ -67,3 +67,13 @@ token座標は0-based。全9の原tokenを**元runnerと同じclean_up_tokenizat
 Rule18 §11.3 LEVEL3の「既に説明したbounded scopeから作業が広がる」「closed or consumed single-use authorityのreuse / retry / reactivation / repair」を踏まえ、旧18試行への追加ではなく**新しい6更新一回の実装＋検証＋成功時2保存再読**をまとめて判断対象とする。今回の依頼で診断/候補具体化/資料反映までは実施したが、proposed flags=falseで新学習/新生成は未実施。承認後も同scope内のCPU後/成功後に小分けの再承認は不要。
 
 STRUCTURE_MAP_DELTA_NONE（商品owner/型/reader/公開API/DB/RN/三中核責務に差分なし）。商品credit0、正式0/3・54.50％据置。今回の資料更新は全体00の§8に残ったFIT途中表示も終了9件へ補正し、最新weekly§44と01Aのfile所在を同期する。
+
+
+<a id="quote-reception-fit6-approved"></a>
+## 6更新一回案をMash承認後に実装（実行前checkpoint）
+
+Mashは直前の具体案「受け取りだけ6更新→保存・再読込→9件検査→全件成功時に2件保存再読、GPU処理最大45分/$0.195按分」へ「進めていいよ」と明示承認した。proposed版は未承認時点の原本として保持し、reception_fit6.plan.jsonを承認済み新実行planにする。run_quote_reception_fit.pyは旧quote runnerの検証/保存/reload/FITを再利用し、daily3各11tokenだけの直接causal lossへ限定。旧helperの全文専用teacher_loss/measure_nllは使わず、新runner内で元reception方式と同じlabel slice/logits位置を使う。NLLはdaily3の前後各一回、学習順はdaily各2回/計6で、chair学習0・FIT検証6を保持する。
+
+reception_fit6_cpu_validation.jsonのstdlib6条件（承認固定値/未承認拒否/順序/全contextとmask/境界越え拒否/causal呼出し）は成功、新model/更新0。別文脈agentのsource/plan read-only reviewでblocking defectなし。正式Pro/Ultra/human受入れではない。次はJupyterのcache tokenizerで全9/3maskを実照合後、一回だけ6update/FIT9を行う。実行前に新出力不存在・A4500・固定旧source/teacher/初期adapterを再確認し、1800秒で終了。後段の未使用別ID2は全9成功時だけ別runner/planへ新adapterを束縛し、少なくとも1件で実際の意味保存後中断/明示再開を確認する。元run_quote_address_holdout.pyはその中断を試さないため、そのままのrenameで成功とはしない。
+
+製品source/reader/DB/RN/Render/Supabase/GPU lifecycle変更0、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。このcheckpoint時点で新学習/新生成0。終了済み18試行の意味9/9・本文6/9/後段0は保持する。
