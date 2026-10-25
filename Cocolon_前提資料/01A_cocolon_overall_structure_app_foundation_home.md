@@ -4763,3 +4763,6 @@ F/unicode_check/diagnostic.pyとplan.jsonが、保存32更新adapterの非学習
 
 
 新入力32更新の実原本はtrials/2026-10-24-qwen4b-cmee-diagnostic/unicode_fit32_20261025/。run/continued_fit_plan/continuation_source/training/before/after/before_nll/after_nll/checkpoint_manifest/integrity/cmee_result/comparison/README/result.jpgが実行・採否・回収を所有。続くF/reception_check/diagnostic.py/plan.jsonは結果への受け取り説明一節を変え、同保存a8baf0…で非学習2FITだけを確認する。意味/本文owner・出力schema/readerは不変、STRUCTURE_MAP_DELTA_NONE。進行と現在結果はweekly§31へ戻る。
+
+
+reception_checkの実原本はtrials/2026-10-24-qwen4b-cmee-diagnostic/reception_instruction_20261025/。raw/inference_report/actual_plan/diagnostic/preflight/execution_plan/reception_attempt/reception_file_manifest/dataset_manifest/integrity/cmee_result/comparison/README/result.jpgに加え、restored_prompt_replay.jsonは旧実rawの新生成なし互換確認、next_local_difference.jsonはCPU文字列比較を所有する。候補promptは退行で不採用、model_candidate_sourceは学習時a3e82 exact bytesへ復元（API7a4dc32、全tree同一）。商品構造/採用条件差分なし。現在の残件と次の局所診断はweekly§31が所有する。

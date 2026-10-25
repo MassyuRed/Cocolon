@@ -6,7 +6,7 @@ source `4ad759792b8cfd820f44d72b233eb853a354ecb7`、API `a3e82f0e2156f9142ca3787
 
 全18根拠（初回6/訂正12）のsource/field/整数座標/bounds/quote一致を確認。初回packetは教師と解析後全一致、訂正もsurface以外の意味/根拠/参照/3更新は教師と一致。旧solo/旧喜び理由/unknownを正しく更新し、未変更のrepair/result/joyを保持した。採用条件・reader・原raw・教師本文は変更していない。
 
-訂正の唯一の差分：teacher第2文「またその椅子に座れるようになって、よかったですね。」に対し、実生成は「またその椅子に座れるようになったのですね。」。結果に対するEmlisの反応が結果の再確認へ変わり、独立readerでmodel_surface_sentence_not_read、実outcomeはmodel_surface_not_validatedとなる。意味の成功だけで本文成功にしない。次はこの受け取りの役割を説明する一節だけを追加し、同保存a8baf0…で非学習FIT2を一回確認。追加32更新/readerの採用緩和はしない。
+訂正の唯一の差分：teacher第2文「またその椅子に座れるようになって、よかったですね。」に対し、実生成は「またその椅子に座れるようになったのですね。」。結果に対するEmlisの反応が結果の再確認へ変わり、独立readerでmodel_surface_sentence_not_read、実outcomeはmodel_surface_not_validatedとなる。意味の成功だけで本文成功にしない。続く受け取り説明一節の追加候補は非学習確認で意味1/2・本文0/2へ退行し不採用となった。API7a4dc32で本学習時のexact入力へ戻し、以前の本raw2のCPU再消費で2/2・1/2と全result一致を確認した（新生成ではない）。[候補の失敗と復元](../reception_instruction_20261025/README.md)。追加32更新/readerの採用緩和はしていない。
 
 新adapter `a8baf0d310283fd0500e86887e64723e4734693ac48b7f2ddfad7cc07e6a3ea6`。archive `439547199bccdb625c41a961639dbfa1d774711b26893cf7fccee7497607133c`、全24memberのsize/hash、32 F32 tensor有限性、元ce644と新adapterの3file前後hashをPod外照合した。追加重みarchiveは永続保管済み（libfile_92793ab0520c81918d3cab3790583684）。元4B全重み/optimizer/RNGは含まない。
 

@@ -2076,3 +2076,14 @@ archive 8e776b7f0169af1b9b24467419b336299e30bc1519f73472e630a0e8bb8cb215、全13
 API2fbc0a2ae7e9b72dc8be2e676c2f4a2c3c81380eでOUTPUT_SPEC.proseへ、receptionが修理結果にも触れる時は結果へのEmlisの反応を表し、単なる結果再確認にしない説明一節だけを追加。最初の本人の喜び対象を受け取る「うれしかったのですね」は維持。system/material/全字map/native/prior/teacher/CMEE/reader不変。CPU69/pack13成功、合成target2/2・旧messages2/2拒否。新prompt2055/5078token、最大5078+2048=7126<=8192、切捨て0。
 
 同a8baf0…保存重みを非学習reload、同FIT2だけ各1回。新reception_check/diagnostic.py/plan.jsonを固定し、旧計画を再開しない。900秒/表示$0.26/h按分上限$0.065、請求hard capではない。学習/optimizer/update0、原重み3hash不変、raw無補修、追加生成/自動retry0。保持中同A4500のみ、新Pod/charge/STOP/再起動/削除/新依存/DB/Render/Supabase/通常有効化/merge/deploy0。公開済み架空2入力のみ、観測会は今回不要。formal0/3/54.50％・商品credit0を保持。結果で現在地/本節/観測入口/pack/mapを同期する。
+
+
+**§31 受け取り指示候補の実結果と不採用：** source a4280eeb4d9d7afad989ab4a7a831a65a2dd895c／API 2fbc0a2ae7e9b72dc8be2e676c2f4a2c3c81380e、159.210806096904秒、2新生成/0更新、初回2055→1088・訂正5078→1864token、JSON/stop2/2。実CMEE意味1/2・本文0/2で、直前の学習済み版2/2・1/2より悪化。[全raw/採否/原因/復元replay](../observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/reception_instruction_20261025/README.md)。初回は意味/根拠6/6正常だが、喜びの受領とEmlisの反応を一文へ合成し、言及のないusable_again bindingが残る。訂正は根拠10がstart39>end38＋原文不存在、11も語順を変えた結合quoteでINVALID_EVIDENCE。本文検査まで進んだとは扱わない。独立2agent/rootの実読と整合。
+
+候補archive216d146edb5a6d811c5b8a7ce86e9008ac8ce86f251054dc7d606c4b560d424b、全13member/size/hashとsource bytes/旧新weight不変を照合。回収側hashをPod原本とprogram比較してTrueを画面確認。学習/optimizer0、新重み0、追加retry0。planはCOMPLETED_NOT_REPLAYABLE_REJECTED_PROMPTへ閉じ、実計画/rawは保持。
+
+採用しない説明60tokenを除き、API7a4dc32c07f8c8a30609e8345207c6a9c831de23でa3e82のexact file bytesへ復元。API全treeもa3e82と同一、packの実model messages/teacher/native/prior/map/eval bytesは32更新時4ad7597と同一。manifestのAPI pin/履歴だけ現版へ揃えた。CPU69/pack13成功・restored tokenizer1995/5018・最大生成7066<=8192・切捨て0。以前の学習後raw2をCPU再消費して原consumerの全resultと完全一致（意味2/2・本文1/2）を確認。これは新生成0の互換性再確認で、今回失敗requestのraw置換や成功への数え替えではない。
+
+本作業での新学習は新入力への32update一回だけ、新生成は最初の非学習FIT2＋学習後FIT2＋指示候補FIT2の計6。意味/原文/引用/本文の採用条件・reader/教師本文は変更0。学習後の意味/根拠/訂正3更新は成立したが、訂正reception第2文の既存有限reader不通過、60tokenの変更で引用も崩れる脆さが残る。次は学習時promptと保存a8baf0…を固定し、同一訂正例の局所分岐を診断する。next_local_difference.jsonの先頭差の0始まりindex45はCPUの本文比較で、model token選択確率/rankを未測定のまま推測しない。prompt反復/追加32update/reader条件緩和/未知評価への昇格を自動で行わない。
+
+追加重みarchiveは全24member/32tensor照合・保管済み（libfile_92793ab0520c81918d3cab3790583684）。元4B/optimizer/RNGは含まない。今回の公開済み架空2入力以外の本人DB/Private diary/credential取得送信0。全体現在地/観測目的/pack/current map/file mapを同期し、STRUCTURE_MAP_DELTA_NONE、商品credit0/正式0/3/54.50％据置。通常アプリ/未知入力/動的実model一往復/本人保存再読/三中核品質は残件。観測会は現在の形式/接続問題には不要。GPU停止/再起動/削除/新Pod/charge/新依存/Render/Supabase/merge/deploy0、Mashの指示まで稼働保持する。

@@ -7,15 +7,15 @@
   "files": {
     "examples": {
       "path": "sft_examples.jsonl",
-      "sha256": "cbbf67ab938d8c343c56ccb06489a960a4fa05cceb4f80fc5c917f76fbf5abf0"
+      "sha256": "198847f535eed7a3cac8d6f9cd59f8bfe3e53bc9165eb6d3fb32ed6b17ee54d0"
     },
     "train_messages": {
       "path": "train_messages.jsonl",
-      "sha256": "5b0ca5bdb3c8e56427dc98da0ba759b52423f7643c31223832c6076ce22b0433"
+      "sha256": "32cd574649525c1352d870c8f276ed440a2362722e5026fe472254ce3cedea0e"
     },
     "eval_inputs": {
       "path": "eval_inputs.jsonl",
-      "sha256": "be74d96231e3f7e43939ae9686511cf4aa50389f3b1ca886911d15ffd92a8208"
+      "sha256": "3a5ddb79ac3a6ae3a3a042728986d498dd6a55efec7b7212d1fb198ac96537c4"
     },
     "eval_review": {
       "path": "eval_review.jsonl",
@@ -58,8 +58,8 @@
     }
   ],
   "evaluation_policy": "旧EFREE6は学習外6family・既読の開発評価。新shape指示へ投影するがassistant正解/学習targetを作らない。",
-  "cmee_api_commit": "2fbc0a2ae7e9b72dc8be2e676c2f4a2c3c81380e",
-  "source_cocolon_predecessor": "4ad759792b8cfd820f44d72b233eb853a354ecb7",
+  "cmee_api_commit": "7a4dc32c07f8c8a30609e8345207c6a9c831de23",
+  "source_cocolon_predecessor": "a4280eeb4d9d7afad989ab4a7a831a65a2dd895c",
   "supported_targets": [
     "FT-CHAIR-INITIAL",
     "FT-CHAIR-AFTER-CORRECTION"
@@ -72,5 +72,5 @@
     "eval_inputs.jsonl": "300f353c9322c66cdfb2a0ad06e955aeb8176f1aa15fa6185fc3ef99b3559a0b",
     "eval_review.jsonl": "3bd7ddcc6c6bbd8a778ba3ff849be96437e823df60bd652f83b85d9c1cd56282"
   },
-  "prompt_repair": "20261025_reception_result_response_instruction; Unicode spans/original/text/control/prior/target preserved"
+  "prompt_repair": "20261025_restored_trained_a3e82_prompt_after_failed_reception_instruction; native/map/prior/system/teacher unchanged"
 }

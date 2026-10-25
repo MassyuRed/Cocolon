@@ -1822,3 +1822,10 @@ STRUCTURE_MAP_DELTA_PRESENT。通常API／DB／RN／公開schema／モデル接�
 ## 2026-10-24 — 承認済み4B候補のprivate offline接続
 
 [shared01 actual](../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-4b-model-proposal-implemented)／schema05／全file01Aへ同期。API02c0b943の新profileがsource-bound意味、自然本文案の独立読取、実問い→本人訂正、意味先行保存・同proposal再開・完成非生成を所有する。新thin sourceは固定4B/adapter identityとraw/finish/usageをP1へ渡す注入境界だけで、実endpoint/モデル呼出しはない。旧v1/v2・通常application/DTO/DB/RNは維持する。STRUCTURE_MAP_DELTA_PRESENT（private offline owner）。対象backend220 PASSとpack8は限定検証で、商品受入れ0/3・実GPU/重み/学習/通常有効化未実施。chairの構文family以外と一般自由文、他coreの実4Bは未対応。新学習packの実tokenizer/16moduleはCPU確認済み、16/24GB適合は未実証。
+
+
+## 2026-10-25 — 実4Bの意味採用と残る本文境界
+
+最新weekly§31と全機能00を現在地とする。model-visible sourceはnative証明を除く原文/metadata/controlを保持し、全文字のfield_unicode_spansを機械表示。新入力へ既存2target/32updateを行い、保存/非学習reload後の実FITで意味2/2・本文1/2を確認。初回本文/実問いと、訂正後の全根拠/参照/3更新は成立、訂正受け取り第2文は既存有限readerの対象外。説明60token追加の候補は意味1/2・本文0/2で不採用にして、API7a4dc32で学習時a3e82全treeへ戻した。以前の実rawのCPU互換確認2/1は新生成とは数えない。
+
+全source/試験所在は01A末尾、原raw/採否/回収はunicode_fit32_20261025とreception_instruction_20261025。新重みはPod外照合/永続保管、全計画終了済み、GPUは停止しない。通常API/DB/RN/三core責務/意味schema/採用readerは不変。STRUCTURE_MAP_DELTA_NONE、正式0/3・全体54.50％、一般入力/動的実model一往復/通常保存再読/商品品質は未成立。
