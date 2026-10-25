@@ -155,3 +155,8 @@ CPU実結果：最大prompt5045、completion+EOS2339、全文7378。全9無切�
 **今回の実行経過：** 最初のターミナルmultiline入力不備はshell段階でCPU/GPU/model/file effect前、診断未実行。別terminalでone-line入力へ変更。Podにrgがなく既存grepで参照先を確認。最初のCPU --validate-onlyは古いhelper指定をhash gateが拒否し、tokenizer/model/更新0で終了。既存helperのhashを照合し上記正規参照へ変更後、CPU一回完了。原本Download待機はtimeout/接続binding resetとなり、再downloadせずEditor全選択/clipboardで同一bytesを回収した。学習試行のretryではない。
 
 今回必要な新観測会なし。既存完全JSON教師があり、学習対象外だった境界を修正するため。独立言語2話・一般化未確認・Piece/Analysis完成教師0は残る。管理console/GPU一覧/Runpod管理API/Stop/再起動/削除/新Pod/charge/依存追加/本番/Supabase/Render/本人DB/RN/merge/deploy0。Jupyter直結だけを使用。A4500の稼働保持/使用1MiBを直接確認したが、保持課金の停止を意味しない。Codex Work/GPT-6、root華恋が単一実行・反映owner。STRUCTURE_MAP_DELTA_NONE（製品source/責務/型/公開契約不変）、商品0/正式0/3/全体54.50％据置。
+
+
+### 10/26 JST — 新boundary12一回と条件付き2保存再読をMashが明示承認
+
+Mashは「12更新→保存・再読込→9件検査→全件成功時のみ2件の保存再読、最大45分・処理按分$0.195（保持等別）→進めていいよ。」と承認。前節の固定実装・CPU原本・教師・初期重み・順・LR・全9条件・停止・予算を保持し、原proposedを保存して新planをAUTHORIZED_ONCEへ更新。開始前の新学習/モデル/SQL0。Jupyter直接でrootが一回実行する。承認済み全9成功後の条件付き2へ小分け再承認は不要。閉鎖済み旧balanced12は再利用しない。

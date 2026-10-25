@@ -2,7 +2,7 @@
 
 **GPUの最新確認：** 今回は承認scopeの学習/検証をJupyterへ直接接続して実施。管理console/GPU一覧/Runpod API操作0、Stop/再起動/削除/新Pod/charge0。§43の旧停止指示とHTTP429で停止未確認だった履歴は保持し、今回の新承認scopeではPod lifecycleを変更していない。処理は完了したが、GPU料金停止を意味しない。
 
-**現在の直接作業（区切り1token追加の新12案、CPU完了・GPU未承認）：** 前回balanced12は意味/本文8/9・daily01 JSON区切り不正・後段0・新2009b43c未採用で閉鎖。新案は初期138b/旧9教師/12順/LRを保持し、daily受け取り11tokenへ直前区切りID2129の1tokenだけを加える。Jupyter直接/実tokenizer全9/無切捨て・daily各12lossを確認、新学習/モデル/SQL0、gpu_run_authorized=false。最大45分/処理按分$0.195（保持等別）、全9成功時だけ2保存再読を含む新一回試行の承認前。[具体案とCPU原本](training/2026-10-25-emlis-quote-address/README.md#quote-boundary-fit12-proposal)、最新weekly§47。新観測会は今回不要、商品0/正式0/3/54.50％。
+**現在の直接作業（boundary12一回＋条件付き2保存再読を承認、実行前）：** Mashが10/26 JSTに区切り1token追加の新12更新→保存reload→FIT9→全9成功時だけ2実service保存再読を承認。前回のCPU全9・教師/初期138b/12順/LR/reader/上限を保持し、新planをAUTHORIZED_ONCEへ更新。現時点の新学習/モデル/SQL0、Jupyter直接で一回実行する。最大45分/処理按分$0.195（保持等別）。[具体案・承認記録](training/2026-10-25-emlis-quote-address/README.md#quote-boundary-fit12-proposal)、最新weekly§47。旧balanced12再起動禁止、商品0/正式0/3/54.50％。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 
@@ -83,7 +83,7 @@ Freeの当回体験、Plusの適格履歴を踏まえた理解、Premiumの本�
 
 ## 現在地（2026-10-25・三中核の開発基準選定、本番は未成立）
 
-**現在の直接作業（区切り1token追加の新12案、CPU完了・GPU未承認）：** 前回balanced12は意味/本文8/9・daily01 JSON区切り不正・後段0・新2009b43c未採用で閉鎖。新案は初期138b/旧9教師/12順/LRを保持し、daily受け取り11tokenへ直前区切りID2129の1tokenだけを加える。Jupyter直接/実tokenizer全9/無切捨て・daily各12lossを確認、新学習/モデル/SQL0、gpu_run_authorized=false。最大45分/処理按分$0.195（保持等別）、全9成功時だけ2保存再読を含む新一回試行の承認前。[具体案とCPU原本](training/2026-10-25-emlis-quote-address/README.md#quote-boundary-fit12-proposal)、最新weekly§47。新観測会は今回不要、商品0/正式0/3/54.50％。
+**現在の直接作業（boundary12一回＋条件付き2保存再読を承認、実行前）：** Mashが10/26 JSTに区切り1token追加の新12更新→保存reload→FIT9→全9成功時だけ2実service保存再読を承認。前回のCPU全9・教師/初期138b/12順/LR/reader/上限を保持し、新planをAUTHORIZED_ONCEへ更新。現時点の新学習/モデル/SQL0、Jupyter直接で一回実行する。最大45分/処理按分$0.195（保持等別）。[具体案・承認記録](training/2026-10-25-emlis-quote-address/README.md#quote-boundary-fit12-proposal)、最新weekly§47。旧balanced12再起動禁止、商品0/正式0/3/54.50％。
 
 [凍結6教師と実行source](training/2026-10-25-emlis-service-binding/README.md)／[全実結果](trials/2026-10-25-service-binding/README.md)。
 

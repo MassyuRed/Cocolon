@@ -1,5 +1,5 @@
 {
-  "status": "CPU_PREPARED_AWAITING_NEW_GPU_APPROVAL",
+  "status": "AUTHORIZED_NOT_STARTED",
   "date": "2026-10-26 JST",
   "source_commit": "df80b4270af0446aa5b840584664beaee4c4f126",
   "api_commit": "4002b4577838d1ed6671278a19585b61e7ccd10e",
@@ -14,7 +14,7 @@
   "training_updates": 0,
   "model_calls": 0,
   "sql_calls": 0,
-  "gpu_run_authorized": false,
+  "gpu_run_authorized": true,
   "old_balanced12_closed": true,
   "old_plan_relaunched": false,
   "output_directory": "/workspace/cocolon_4b_quote_boundary_fit12_20261026",
@@ -23,5 +23,7 @@
   "initial_adapter": "/workspace/cocolon_4b_quote_address_fit18_20261025/adapter",
   "new_observation_session_required": false,
   "management_console_and_runpod_api_calls": 0,
-  "gpu_lifecycle_operations": 0
+  "gpu_lifecycle_operations": 0,
+  "approval_date": "2026-10-26 JST",
+  "plan_sha256": "d461dafa4db54ac7238d76a86a4f45065736b757dc5964d3904825793667aaf2"
 }

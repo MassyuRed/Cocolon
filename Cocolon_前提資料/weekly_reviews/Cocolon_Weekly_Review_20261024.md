@@ -2475,3 +2475,8 @@ Mashの4B学習＋CMEE接続続行/Jupyter直接指示で、全機能00全文・
 新一回案は12更新→保存reload→FIT9、意味/本文/EOS/ASK/訂正3更新/dailyFINALが全9成功時だけ実service2件の隔離SQL保存・意味保存後中断/明示再開・非生成再読。最大45分/処理按分$0.195、保持/準備/回収/保存/税等別。閉鎖試行の承認を流用せず、Rule18 §11.3 LEVEL3の新有料試行全体を一括承認前でgpu_run_authorized=false。実eval plan未作成。承認後CPU後/全9成功後の小分け再承認は不要。
 
 管理console/GPU一覧/Runpod管理API/lifecycle0、Jupyter直接のみ。A4500 20470MiB/使用1MiBを実確認し保持。追加学習・新推論・依存追加・Supabase/Render/本人DB/RN/merge/deploy0。STRUCTURE_MAP_DELTA_NONE、今回BLOCKER_NARROWED/CPU準備だけ、商品0/正式0/3/54.50％据置。全体00/観測入口/pack/01A所在を差分更新する。
+
+
+### §47 10/26 JST — boundary12一回＋条件付き2保存再読をMashが承認
+
+上記新12→保存reload→FIT9→全9成功時だけ実service2件保存再読を、最大45分/$0.195処理按分（保持等別）で承認。前回CPUとsource/teacher/初期138b/順/LR/reader/停止を保持し、proposed原本を保存・実行planをtrueへ更新。開始前の新更新/モデル/SQL0、Jupyter直接/単一root ownerで一回実行。全9成功後の追加小分け承認は不要。旧balanced12閉鎖/未採用/後段0は保持。
