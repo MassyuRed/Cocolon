@@ -1705,3 +1705,29 @@ Poland例のGPU部分は$42.24/月、保存30GBは$8/月で、合計$50.24。通
 ```
 
 今回変更は全機能00と本weeklyの2文書だけ。STRUCTURE_MAP_DELTA_NONE（商品source/型/接続/runtime/学習code不変）。追加GPU/課金/学習/推論/DB/Render/RN/merge/deploy0、product_credit=0、正式0/3・PRODUCT_NOT_CLEAR・candidate_ready=false・automatic_progression=false・全体54.50％を維持。
+
+
+<a id="20261025-a5000-community-diagnostic"></a>
+## 20. 10/25 — 月額上限・モデル上限と、Runpod A5000の一回診断指示／空き未確保
+
+### 最新指示と範囲
+
+Mashは追加費用を月1万円まで許容し、4Bの可能性を確認しつつ、これより大きいモデルの調査を不要とした。追加月額の上限はGPUだけでなく保存・通信・税・為替決済費を含めて扱う。§19の8B級への比較余地は当時の調査履歴で、今後の対象から除外する。次に「いや、いいわ。とりあえず、Runpod・A5000／Community On-demandでいい。こっちで4Bが動くのかなら、今空きがあれば確認できるんだろ？やれ」と明示指示した。Vastの追加選定は打ち切り、Runpod指定GPUでの一回診断へ戻る。4Bの商品品質採用・常時本番契約・月額上限の撤回を意味しない。
+
+最新指示をA5000対象の実行根拠とし、旧修正版案の限定量・回収削除条件を保持する。新規試験Pod1台、RTX A5000 24GB／Community On-demand、修正版診断1回、GPU単価上限$0.30/h、起動から停止まで最大2時間・計画予算$1、準備30分超なら学習開始せず終了、回収/照合/停止に15分を残す。固定ab987f2cf4c085e9f907969c30c924e0b0d4ef6e＋API1dabc4f196ae283264bf5e364e117a5d571af6a7、2教師×1epoch/2update・前後16生成・追加生成0、archive/全member/adapter確認後にこのPodのみ停止/削除。成功/OOM/期限で追加run・再借用せず回収へ進む。通常有効化・追加epoch・DB/Render/配布/merge/deployは含まない。
+
+### 実際のRunpod画面確認
+
+既存Pod一覧を読み、既存8Podを操作せずDeployへ進んだ。公式PyTorch2.8.0 template（runpod/pytorch:1.4.1-cu1281-torch280-ubuntu2404）の画面でCommunityを明示選択し、A5000を検索。初期の回線400Mbps下限を0へ解除、CUDA Any、地域Any、最小CPU1/RAM0/VRAM0、1GPUで確認した。RTX A5000は24GB・GPU $0.16/h・Out of capacity。カードを選択してOn-Demand $0.16/hと1x RTX A5000を確認した最終checkoutも **Instance not available**、Deploy Pod disabled。container50GB込み表示は$0.17/hだが、実契約quote・課金額ではない。保存構成/実mount/空き/実Torch/CUDAはまだ確定していない。
+
+**新Pod0、GPU確保0、学習試行0、新推論0、重み取得0、今回の課金effect0、チャージ0、予約0。** 作成したPodも未回収データもなく、今回停止/削除する新Podはない。既存Pod/volumeは不変。残高差を今回の費用に帰属させない。UI読取1callがdispatch前に中断されたが、fresh状態から再開できた。自動レビューの拒否理由は表示されておらず、推測しない。
+
+現在は **APPROVED_PENDING_A5000_COMMUNITY_CAPACITY**。同じ単価/時間/量/回収削除範囲なら再承認を求めずfresh在庫から再開するが、自動在庫監視・後日実行・予約を設定したわけではない。他GPUへ置換せず、上限外へ広げない。
+
+### 本番費用と診断準備の境界
+
+Vastの国別支払いは[公式Terms](https://vast.ai/terms)でUSDと確認したが、その後のMash指示で追加選定を終了した。§19の30日/157円仮定ではPoland約7,888円、Korea約9,985円（各30GB込み、通信/税/換算費別）。31日なら約8,151円/10,318円。09:00:26JSTの同Poland出品54498042はrentable=false/rented=falseへ変わり、直ちに借りられる候補ではない。原因を第三者の借用と断定しない。Koreaは08:59:44時点rentable=trueだったが31日だけで月1万円を超える。今回Vastのログイン/契約/入金/instance作成は0。この比較をRunpodの常時料金へ流用しない。
+
+ローカル保持のAPI/packは元worktree metadataの旧scratch参照が切れ、git rev-parse HEADがexit128となることを独立確認した。消失したGit参照をclean固定checkoutと装わず、GPU有料開始前に固定ab987f2/API1dabc4fのclean materialを再取得し、対象bytes/pinを確認する。今回source修正/consumer実行/pytestは0。この環境差をモデル・CMEE失敗へ転用しない。
+
+全機能00・本pack README・本weeklyの3文書へ最新指示/未実行状態を反映。STRUCTURE_MAP_DELTA_NONE（商品source/型/接続/runtime/教材不変）、product_credit=0、正式Product Read0/3、PRODUCT_NOT_CLEAR、candidate_ready=false、automatic_progression=false、全体54.50％据置。次の一作業は固定clean material確認と、同A5000条件のfresh在庫確認から一回診断へ進むこと。

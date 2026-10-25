@@ -1,6 +1,6 @@
 # Emlis 4B学習・保存再loadの限定pack
 
-> **最新決定（2026-10-25）：Mashが4B確定を明示撤回したため、このpackの実行を停止します。** 未消費の修正版診断は `SUSPENDED_BY_MODEL_SELECTION_WITHDRAWAL`。空きが戻っても旧承認を根拠に4Bの新Pod/学習を開始しません。現在は学習済みAIそのものの価格優先再選定です。[最新議事録§18](../../../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-price-first-model-reselection)を参照。以下の4B診断・CPU修復・承認は当時の履歴として保持し、新モデルの採用/実行許可へ転用しません。前版の実診断は回収/Pod削除まで完了、修正版の新Pod/学習/課金は0のままです。
+> **最新決定（2026-10-25）：MashがRunpod RTX A5000 24GB／Community On-demandで4Bの実動作確認を明示指示しました。** 修正版診断1回だけを、最大2時間・計画$1・結果/重み回収照合後の当該Pod停止/削除までの範囲で再開します。旧確定撤回後の新しい対象限定指示であり、4Bの商品採用・常時本番契約ではありません。現在の最終checkoutはInstance not availableのため **APPROVED_PENDING_A5000_COMMUNITY_CAPACITY**、新Pod/課金/推論/学習0。同条件での再開は再承認不要、自動監視/予約・他GPUへの置換・追加runは行いません。[最新議事録§20](../../../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-a5000-community-diagnostic)を参照。有料開始前に固定ab987f2/API1dabc4fのclean materialを再取得し、旧local worktreeの失効Git参照を流用しません。以下の16GB優先/停止記述は当時の履歴で、最新GPU指定と状態は本注記を優先します。
 
 対象は`Qwen/Qwen3.5-4B`、固定revision `851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a`、private profile `emlis_model_proposal.v1`です。旧9B pack・教師9件・旧eval・受領重みは変更しません。
 
@@ -29,7 +29,7 @@
 変更APIは既存`model_candidate_source.py`と`test_cmee_model_candidate_source.py`だけ。本packはsft/train_messages/eval_inputs・manifest・tokenization/raw_consumer結果・plan・本READMEの8file、Cocolonの他差分は全機能00/最新weeklyだけです。既存owner内の指示修復で、STRUCTURE_MAP_DELTA_NONE。限定TECHNICAL_CREDIT、商品0・正式0/3・54.50％据置、candidate_ready=false/automatic_progression=false。全体設計・全file地図・current mapsは確認し、新owner/構造/型変更がないため再追記しません。
 
 <a id="revised-gpu-diagnostic-proposal"></a>
-### 修正版の実4B診断1回（10/24承認の履歴・10/25モデル選定撤回により停止）
+### 修正版の実4B診断1回（10/24案の履歴、最新は10/25のA5000指定・容量待ち）
 
 CPUで正しいtargetが通ることだけではモデルが新指示に従うか分からないため、次はこの修復版を含む公開済み固定Cocolon commit＋API`1dabc4f…`で、既存`runpod.sh fetch/validate/prepare/run/verify/export`を使う新規一回案です。旧run/旧adapterへの追加epoch・旧directoryの再試行ではありません。新しい学習前生成で指示変更後のbaseを観測し、同じ2教師×1epochの新LoRA後と比較します。採用0や同じ根拠/意味不正が残れば、その原rawを回収して終了し、自動増量しません。
 
@@ -42,7 +42,7 @@ CPUで正しいtargetが通ることだけではモデルが新指示に従う�
 | 支出の前提 | 既存料金仮定でGPU上限2h=$0.60、90GB稼働2h約$0.025、停止後40GB最大24h約$0.2667、合計約$0.8917。実見積りが$1内に収まらなければ開始しない。追加チャージ0 |
 | 禁止 | 旧承認の再利用、追加epoch/周回探索、raw手修正、採用条件緩和、モデル再選定、通常有効化/DB/Render/merge/deploy |
 
-Mashは固定ab987f2の本案に「進めていいよ」と明示承認しました。実行sourceはab987f2、APIは1dabc4fへ固定します。現在は空き未確保で、actual mount/期限も未成立のため配布planの有料flags=false/単価nullを維持します。このfalseをMash承認不足と混同しません。10/24時点では容量確認から再開する予定でしたが、10/25の4B確定撤回により現在は停止します。当時の案では、空き待ちの自動起動予約や上限超過GPUは使いません。前回archive/adapter/実結果はその旧message・旧API版に固定して保持します。この案は通常接続・実端末・商品受入れの完成保証ではありません。
+Mashは固定ab987f2の本案に「進めていいよ」と明示承認しました。実行sourceはab987f2、APIは1dabc4fへ固定します。現在は空き未確保で、actual mount/期限も未成立のため配布planの有料flags=false/単価nullを維持します。このfalseをMash承認不足と混同しません。10/24時点では容量確認から再開する予定でしたが、10/25の4B確定撤回で一度停止しました。その後のMash明示指示でA5000／Community On-demandの対象だけ再開し、現在は同GPUの容量待ちです。当時の案では、空き待ちの自動起動予約や上限超過GPUは使いません。前回archive/adapter/実結果はその旧message・旧API版に固定して保持します。この案は通常接続・実端末・商品受入れの完成保証ではありません。
 
 ## 教材の受口
 
