@@ -2632,3 +2632,21 @@ rootと別文脈read-only読解は、局所改善が内容忠実性の悪化を�
 一回閉鎖、BLOCKER_NARROWED、商品0/正式0/3/54.50％、STRUCTURE_MAP_DELTA_NONE。新指示を採用せず、現45779／製品設定は不変。次は既存generic教師の元prompt/targetとactual native学習入力の差へ戻り、本人向け受け取りとsource保持を同時に教える最小案をCPUで具体化する。既存targetは華恋編集／未商品承認を保持、E05/E01/E03/A03・失敗raw・撤回読書会を教師にしない。新観測会は今の基本欠陥には不要。新学習／追加指示試行／有料処理へ自動進行しない。
 
 CMEE意味/本文採用・実service/SQL・新teacher・reader緩和・製品source/公開API/DTO/DB/RN/通常application/依存追加/Render/Supabase/本人DB/merge/deploy0。終了時GPU A4500/20,470MiB/使用1MiB、稼働保持。管理console/一覧/Runpod管理API/Stop/再起動/削除/新Pod/charge0。全体00/観測入口/当pack/01Aを結果と次作業へ同期。
+
+
+<a id="20261026-generic-native-bridge13-cpu"></a>
+## 52. 10/26 — generic/nativeのinterface差を照合、既存1行を追加する13更新案のJupyter CPU準備完了
+
+開始Cocolon6ed2f7b6／API4002b457。Mashの続行・Jupyter直接・必要資料差分更新指示に基づき、全機能00全文、恒久incident、作業rule、全体設計01／全file地図01Aと三分冊の導線、三core入口／CMEE map、観測目的・最新§49〜51と実教師／helper／rawを照合した。System Contextは既知索引timeoutのためfresh原本fallback、新index実行0。root華恋／Codex Work／GPT-6が単一統合・実行・反映owner、別文脈2agentはread-only reviewで正式Pro／Ultra／human受入れではない。
+
+generic FT-UDONとnative daily3はmemo／memo_action／カテゴリ／感情・強さ、お手本の観測・受け取りが同一。一方、system／user envelope／ID日時／出力wireが異なる。前pair4旧版messagesは原generic教師のsystem/userと完全一致し、native9の学習にgeneric形式は含まれない。この差を原因候補として扱い、唯一の原因・4Bの一般限界とは結論しない。前改善指示は不採用・閉鎖のまま、再試行しない。
+
+[具体案・全source・CPU原本](../observation_learning/training/2026-10-26-generic-native-bridge13/README.md#bridge13-proposal)。旧generic UDON1行のmessages/targetを無変更で追加、native9も無変更で保持。native9各1＋generic4＝13更新、既存32LoRA／新AdamW5e-5／固定順。chair/generic全文assistantEOS、daily旧0.5全文＋0.5surface25を維持する。保存非学習reload後、native9＋genericUDON/E05の最大11生成。nativeのみ既存consumerで意味／本文／問い／訂正を確認、genericは全本文の内容診断だけでCMEEへ採用しない。before生成0（45779/同promptの旧rawを再利用）。13/4の配分最適性は未実証、探索しない。
+
+配置source c0b14d70から既存Jupyterへ直結、固定8sourceを取得し、CUDA無効／offline実tokenizerで10教師・11評価入力を一回確認。CPU child exit0/stderr空、maxprompt5045／assistantEOS2339／full7378、切捨て0、generic428/67/495。全教師promptloss除外／assistantEOS保持、daily連続25tokenを維持。model重み読込／forward／学習／生成／SQL0、旧45779全3file／helper2種／依存4pin一致。GPU A4500/20,470MiB/使用1MiB、稼働保持。update数・call数・LR・初期重み・期限の変更と未承認executeの6拒否条件もCPUで確認した。
+
+CPU原本SHA2774f535aa6106716bd2c0d5ddf9940235dd5a2f6b1c3b010a5d618091326c99。archive72,210bytes/SHA8c7f4e7cd0ffb6b291e912787c47785a073b5eb87437136bc94ce94a754ae564、10payload＋manifestの全11member、source8fileの配置commit全bytesをPod外照合。archiveREADMEは追補前原本、current追補とは分ける。CPU一回／download一回、新model0。read-onlyレビューで旧新hash不一致の完了status残留を修正してからrunner固定、実CPUを行った。
+
+新GPUは未承認・未実行。**最大30分／処理按分$0.13（保持・回収・保存・税等別）**の一回判断が次。1800秒はモデル処理上限で、finally最終hash/archiveの厳密なOS終了時刻保証ではない。EOS/期限/OOM/非有限/identity不一致で停止し追加更新・再call・旧承認再使用・raw補修・reader緩和・次候補へ自動進行0。旧新4call不採用／native9成功・保存再読2/2／45779保存候補という別々の原本を保持する。
+
+今回新観測会不要。UDONのFIT改善・native言語2題の保持と、未知一般化・商品受入れを区別する。E05/E01/E03/A03・失敗raw・撤回読書会は教師にしない。Piece／Analysis完成教師0、独立評価不足・本人端末は残る。全体00／観測入口を置換更新、01Aへ所在追記、STRUCTURE_MAP_DELTA_NONE（製品責務／型／契約／採用条件／保存・API/DB/RN不変）。商品0／正式0/3／54.50％据置。管理console/GPU一覧/Runpod管理API/lifecycle/依存追加/Render/Supabase/本人DB/通常application/merge/deploy0。

@@ -1,6 +1,6 @@
 # 4B：既存generic1行とnative9行の形式差を埋める一候補
 
-2026-10-26 JST。CPU準備中、新GPU実行は未承認・未実行。旧共通指示4callは閉鎖済み、不採用を維持する。
+2026-10-26 JST。Jupyter実CPU準備・原本回収照合まで完了。新GPU実行は未承認・未実行。旧共通指示4callは閉鎖済み、不採用を維持する。
 
 ## 確認した原因候補
 
@@ -31,6 +31,26 @@ generic FT-UDONとnative daily3では、memo／memo_action／カテゴリ／感�
 7. 期限・OOM・非有限・source／重み不一致・非EOSで停止。raw補修・再call・追加更新・LR探索・reader緩和・次候補への自動進行をしない。結果と重みを回収・保全して一回を閉じる。
 
 **最大30分・処理按分$0.13**（記録$0.26/h）。準備・回収・継続保持・保存・税等は別で、請求総額の上限ではない。context8192／最大出力2560／1生成180秒。既存GPUを稼働保持し、管理console／GPU一覧／Runpod管理API／Stop／再起動／削除／新Pod／chargeは操作しない。
+
+1800秒はtokenizer再照合・モデル読込・更新・保存再読込・生成の処理上限で、finallyの最終hash／archive・回収を含むOS process全体の厳密な強制終了保証ではない。既存evaluateがgeneric rawへ付けるsemantic_profileはhelperの固定metadataであり、genericの意味採用資格を与えない。
+
+## Jupyter CPU実結果と回収
+
+配置source `c0b14d700237d01b0b955ec66c1c46cc5604cf26`。既存PodのJupyterへ直接接続し、固定8sourceを取得、CUDA_VISIBLE_DEVICES空／offline cacheの実tokenizerで10教師／11評価入力を一回確認した。CPU child exit0、stderr空。追加依存・モデル重み読込・forward・更新・生成・SQL0。
+
+| 項目 | 実結果 |
+|---|---|
+| native9最大 | prompt5045／assistant＋EOS2339／全文7378、context8192内、切捨て0 |
+| generic UDON | prompt428／assistant＋EOS67／全文495。前pair4旧版prompt428と同じ |
+| 全教師 | promptはloss対象外、assistant全文＋EOS保持。native daily3は既存連続surface各25tokenも保持 |
+| 評価 | native9＋generic2の11入力。system/userのみ、教師混入なし、最大出力2560の枠を全件確保 |
+| 出所・固定 | 旧generic target・native9messages無変更、現45779全3file identity確認、依存4pinと旧helper／joint helper hash一致 |
+| 有限CPU拒否確認 | update数・call数・LR・初期重み・期限の変更、および未承認executeを6条件で拒否。モデル処理0 |
+| GPUの読取 | A4500／20,470MiB／使用1MiB、稼働保持。管理API／一覧／console／lifecycle操作0 |
+
+[CPU原本](bridge13_cpu_preflight.json) SHA256 `2774f535aa6106716bd2c0d5ddf9940235dd5a2f6b1c3b010a5d618091326c99`、[起動記録](cpu_launch.json)、[回収manifest](cpu_recovery_manifest.json)、[Pod外照合](cpu_recovery_verification.json)。archive72,210bytes／SHA256 `8c7f4e7cd0ffb6b291e912787c47785a073b5eb87437136bc94ce94a754ae564`、10payload＋manifestの全11memberを照合し、source8fileは配置commitの全bytesと一致した。archive内READMEはCPU前の配置原本であり、現在の追補後READMEと同一hashとは扱わない。download一回、CPU実行一回、再学習／旧plan再起動0。
+
+読取reviewで旧新adapterの不変確認がstatusへ反映されない点を修正してからrunnerを固定し、実CPUを行った。旧新hash不一致・確認不能はSTOPへ変える。13更新の効きは未測定で、CPU成功をモデル品質へ加算しない。次は上記新しい一回案へのMash判断だけ。
 
 ## 作業開始・終了条件
 

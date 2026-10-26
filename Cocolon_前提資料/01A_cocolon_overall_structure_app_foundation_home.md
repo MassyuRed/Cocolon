@@ -4925,3 +4925,8 @@ observation_learning/training/2026-10-26-common-instruction-pair4/のREADME/comm
 
 
 10/26旧新4call実行後：同packのrun/はactual入力token／旧新case1〜4 raw／loaded32tensor／run／file manifestを、instruction_pair4_launch.json／instruction_pair4_launch.log／recovery_manifest.jsonは単一起動・原本復元を所有する。content_diagnosis.jsonは本人向け口調／E05意向保持の局所改善とUDONの食べ物取り違え・身体状態補完を区別し、新指示不採用・閉鎖を記録。4call/全EOS/33.76秒/非学習/45779不変、CMEE採用0。原教材・旧教師・API/reader/型/保存/公開契約の構造差分なし。STRUCTURE_MAP_DELTA_NONE、商品0。
+
+
+### 2026-10-26：generic/nativeのinterface差を埋める一候補・CPU準備完了
+
+observation_learning/training/2026-10-26-generic-native-bridge13/のREADME／source_comparison.json／source_manifest.json／generic_teacher_provenance.jsonは、既存同一原入力・同一観測/受け取りtargetのinterface差と出所を保持する。bridge_train_messages.jsonlはnative9無変更＋generic1、bridge_eval_inputs.jsonlはnative9＋genericUDON/E05（E05非学習）。run_bridge13.py／bridge13.plan.jsonはgeneric4＋native9の13更新・保存非学習reload・最大11生成/1800秒/$0.13（保持等別）の新候補、planはPROPOSED/false。bridge13_cpu_preflight.json／cpu_launch.json／cpu_recovery_manifest.json／cpu_recovery_verification.jsonはJupyter実tokenizer10/11・max5045/2339/7378・無切捨て・daily旧25token・モデル0・11member回収照合・6拒否を所有。旧教材／重み45779／API／reader／製品型・保存・公開契約不変、STRUCTURE_MAP_DELTA_NONE、商品0。currentは全体00／最新weekly§52／当READMEへ戻る。新GPUは別判断前・未実行。
