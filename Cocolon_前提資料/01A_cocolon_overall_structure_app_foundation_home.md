@@ -5033,9 +5033,20 @@ training.jsonl/adapter/partial_adapter/reloaded_tensors/after raw/cold-file結�
 
 引継ぎ時の在庫差分：その後の引継ぎ準備でA4500 20GBの空きが戻ったため、同じ公式image/50GB container/追加volumeなし・表示$0.26/hへ選択を戻した。引継ぎ画面名はcocolon-4b-native15-a4500-20261027。レンタルは確定しておらず、在庫/料金は本人確定時に再確認する。
 
-### 2026-10-27 — A5000後継一回の実行中checkpoint
+### 2026-10-27 — A5000後継一回の最終結果とfile地図
 
-実行source9a6c56ed、GPU名/Pod/費用を本人レンタルA5000へ束縛。実tokenizer15件/最大7935の確認後、PID3851でbefore0→15更新→保存reload→after15の一回を起動。checkpointは更新3/15・生成0、最終未確認。後段用 `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/native15_preparation/consume_native15_afteronly.py` と `consumer_cpu_binding_validation.json` を追加。local35確認は原input/prior/metadata束縛だけで実採否0。全実状態・二重起動しない再開先は同README#native15-afteronly-a5000-running/weekly§59。STRUCTURE_MAP_DELTA_NONE、製品構造/通常app/DB/Render/Supabase/merge/deploy不変。
+`Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/afteronly_result/` が今回の結果owner。新before0/15更新/after15を一回完了、意味/本文3/15（daily同family3identity）・cold-file3/3、新6は0/6、旧chair6も不成立。新adapter278fdc26は不採用、重みはarchive version1へ保全。製品責務・型・接続・通常有効化は不変、STRUCTURE_MAP_DELTA_NONE。API/DB/RN/Render/Supabase/merge/deploy0、商品0/正式0/3/54.50％。
 
+| 相対file/group | 所有する内容 |
+|---|---|
+| README.md / result_summary.json | 最終RUN_CLOSED_REJECTED_CANDIDATE、全15採否表、品質残件と次の直接課題 |
+| run.json / training.jsonl / reloaded_tensors.json | 15更新・保存非学習reload・after15、1190.52秒、identity/32finite tensor原本 |
+| after_*.jsonl（15file） | 実finish_reason/usage/token/raw/parse状態を持つ無補修の全出力 |
+| diagnosis/diagnosis.json | 固定APIによる全15receipt/意味/本文採否・実body/cold照合 |
+| diagnosis/*_saved.json / *_saved_completed.json / *_cold.json（各3file） | 採用daily3件のsnapshot・完成file・別process RESUME_ADOPTED一致。SQL/service成功ではない |
+| evidence/*（8file） | launch/実環境/API固定/tokenizer15/input15/CPUとGPU/consumer log原本 |
+| reading_reviews/*（3file） | 旧9/BOOK2/残り新4の入力・教師・実raw根拠付き読解。正式Pro/Ultra/human受入れではない |
+| recovery_manifest.json / final_recovery.json | 最終archive全50payload hash/bytes・32F32有限・Library version1保全。base4B全重みは非同梱 |
+| early_run.json / early_recovery.json | 204.712517秒/15更新/生成0の早期保存履歴。最終原本へ補修しない |
 
-早期保存checkpoint（10/27）：15更新を完了し、204.712517秒時点の別adapter保存原本を回収した。archive3465517bytes/SHA83f47229c35bddbe23aaad150a2d5562e2da89ed74a71ec2d3575c2f0789541e、全14payload+manifestのbytes/hashと32F32 tensor有限性をPod外照合。新adapter SHA278fdc26e56c2cd84b39bec19d484374d4504c656fbd5d1f8112d006e8c6457dを libfile_4756727c2f4c81918fb24227734d4269 version0へ保全した。後続同processの読取ではreload後のafter生成9完了/10件目開始、最終採否未確認。早期archive内runはsaved_before_reload/生成0の保存時点を維持し、後続進捗で書き換えない。
+runner/plan/実tokenizerCPU候補とconsumer sourceは同native15_preparationの既存owner。最終archive内runには凍結教材/plan/sourceも同梱して照合し、GitHub上で同じ教材を増殖させない。再開はREADME#native15-afteronly-a5000-result/weekly§59の最終判断から行い、旧outputの--execute二重起動は禁止。GPU稼働保持は継続料金を伴う。

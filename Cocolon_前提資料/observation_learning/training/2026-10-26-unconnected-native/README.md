@@ -1,21 +1,18 @@
 # 10/26 — 未接続の既存6教材とCMEE受理範囲／一括接続案
 
-状態：**10/27：本人レンタルのA5000へ直接接続、固定環境/旧重み復元・実tokenizer15確認後に学習先行の後継一回を起動。checkpointは学習3/15・生成0、最終結果未確認。**
+状態：**10/27：A5000で15更新/after15完了。CMEE意味/本文3/15・採用3件cold-file3/3。新adapterは不採用、重み/原本回収済み。**
 
 <a id="native15-afteronly-a5000-running"></a>
-## 2026-10-27 — Mash本人レンタルA5000へ接続し、後継一回を起動（実行中checkpoint）
+<a id="native15-afteronly-a5000-result"></a>
+## 2026-10-27 — A5000で15更新/after15を完了、新adapterは不採用
 
-**最新GPU確認（2026-10-27 JST）：** MashがA5000を本人レンタルし、Pod bkj4qvnhwtdqc2（physical_yellow_anglerfish、表示$0.28/h）のReadyなJupyterへ直接接続した。NVIDIA RTX A5000、VRAM25,285,623,808bytes/空き25,062,342,656bytes、Python3.12.3/Torch2.8.0+cu128/CUDA/BF16を実確認。公式固定base revisionの取得、旧45779adapter/不変helper/API6blob/15教材の23file復元と固定依存の一致、実tokenizer15件/EOS/切捨て0/max7935/8192を確認済み。GPU管理画面は新Pod接続の取得だけで終了し、以後Jupyter直接。Stop/再起動/削除/別Pod/追加chargeは0。前のレンタル自動審査拒否は履歴であり、現在の接続blockerではない。
+**現在の直接作業（10/27：A5000で後継一回を完了、新adapterは不採用）：** 固定source9a6c56ed/API6b043880から、新before0→同15更新→別adapter保存/非学習reload→after15を一回完了。処理1190.521865秒、EOS14/15・JSON12/15、CMEE意味/本文3/15（旧9はdaily同言語familyの3identityだけ3/9、新6は0/6）。採用3件の別processによるsnapshot再開/完成file再読3/3、失敗0。ただし実service/SQL保存再読0、after回答priorは凍結教師由来、未知一般化/動的thread/商品受入れではない。BOOK回答は3712tokenで未閉鎖、SHOP回答とKNITはJSON不正、他も引用/参照/意味軸の束縛不成立。旧chair6件の維持にも失敗したため新278fdc26は保存のみで通常有効化しない。重み32F32有限・全50payload/hashをPod外照合し最終archiveをversion1へ保全。処理按分$0.092596（準備/保持等別）、最大reserved23.164GiB。追加学習/再生成/自動再試行0、GPU稼働保持。次は原文束縛と長い構造の崩れを学習条件から切り分ける。商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=false。原本は学習ownerのafteronly_result/READMEとweekly§59。
 
-**現在の直接作業（10/27：A5000で学習先行の後継一回を起動）：** 実行source9a6c56ed、runner a62d3ed7、固定API6b043880。前回の閉鎖native15/失敗before2/旧45779は不変。新before0→同15更新→別adapter保存/非学習reload→after15を、PID3851/started_unix1793053285.442164で一回起動した。最初の読取ではstage=training/更新3/15/生成0、完了・新重み保存・再読・after採否はまだ未確認。2700秒/1生成180秒/最大15call/表示$0.28h按分$0.21上限（準備/保持等別）、再試行なし。終了後は無補修rawを固定CMEEへ通し、採用snapshotだけcold-file再読、全本文確認と原本・重み回収を同単位で行う。local候補55確認/実tokenizer15確認/実学習の件数を混同しない。商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=false。詳細は学習owner/weekly§59。
+実行はPID3851/started_unix1793053285.442164の一回で終了。run.jsonのRAW_COMPLETE_PENDING_CMEE_AND_CONTENT_REVIEWは生成終了時の原本として不変保持し、最終判定はafteronly_result/result_summary.jsonのRUN_CLOSED_REJECTED_CANDIDATEが所有する。consumerは追加推論0で15rawを無補修・実finish_reasonのまま固定APIへ通し、34.738670秒で完了。after回答のpriorは凍結教師由来。local候補55確認/実tokenizer15確認/local consumer35確認/実採否3件を区別する。
 
-実tokenizerのCPU原本はPod `/workspace/cocolon_native15_afteronly_pack_20261026/gpu_afteronly_runner_cpu_check.json`、起動原本は `/workspace/cocolon_afteronly_launch_20261027.json`、進行原本は `/workspace/cocolon_native15_afteronly_run_20261026/run.json`。同PID/同outputへ戻り、--executeを二重起動しない。初期archiveは3678533bytes/SHA25516b0918621bad67ae3b0363a06c5a555eb626df708c36e909e334438c67dcのversion1から安全なmember/hashでadapter3fileを復元し、各SHAは旧planと一致。モデル取得は9.08759秒、単独baseは公式Qwen/Qwen3.5-4B@851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0aを保持。
+実tokenizer15行はEOS込み・切捨てなし、最大7935/8192。A5000のpeak allocated19.655GiB/reserved23.164GiBでOOMなし。以前の20GB優先見積りを今回15行へ実証済みとして転用しない。1生成180秒/全体2700秒/最大15callを守り、BOOK回答は146.420秒のtoken上限であって180秒timeoutではない。EOS falseだけではrunner全体を止めず、CMEEがTOKEN_LIMITとして拒否した。旧45779/教材/helper/固定APIは不変。
 
-学習後のCPU確認用に `native15_preparation/consume_native15_afteronly.py` と `consumer_cpu_binding_validation.json` を追加。local35確認は固定15source/回答/control/priorと旧raw2のmetadata/改変拒否だけ。実CMEE採否/cold-fileは未実行。after回答のpriorは凍結教師由来で、動的threadや本人実service/SQLの成功へ数えない。候補は無補修raw、実EOS/finish/usage/adapterを保持し、採用snapshotだけ別processで再開する。未採用と未測定を成功化しない。
-
-EOF未到達のrawも実finish_reason=lengthのまま採否へ渡す。runner本体は1生成/全体の時間切れ・OOM/非有限/identityで終了し、EOS未到達だけを時間切れと同じ全体停止へ補修しない。前節の「非EOSを停止」と読める表現は、採否不成立の意味に限定し、実runnerの動作を本節で明確化する。学習/保存/reload/評価本体は旧sourceを維持している。
-
-今回は新たな学習15回/after15を含む一回を進行中で、まだ新モデルや一般観測品質の成功ではない。API/DTO/DB/RN/Render/Supabase/本人DB/merge/deploy差分0、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。次回もこの同processを読む。停止後の追加更新/再生成/自動再試行なし。
+全raw/採否/本文/保存再読/回収照合は [afteronly_result/README.md](afteronly_result/README.md)。早期保存version0は生成0の保存時点として保持し、最終version1と混同しない。追加更新/再生成/同output再起動なし。通常application/公開API・DTO・DB・RN・Render・Supabase・merge/deploy差分0、STRUCTURE_MAP_DELTA_NONE。GPUはMashの保持指示どおり稼働保持で料金が続く。
 
 <a id="native15-afteronly-prepared"></a>
 ## 2026-10-27 — 学習を先にする後継候補を準備、レンタル確定は本人引継ぎ待ち
@@ -340,4 +337,5 @@ Mashは本案5ba8c370の「15更新→保存/再読込→15件確認、前比較
 PACK=/workspace/cocolon_native15_pack_20261026、OUTPUT=/workspace/cocolon_native15_run_20261026。rootのみが--executeを一回起動し、既存outputがあれば実行前拒否する。2700秒内に前6/15更新/保存reload/後15、1call180秒、OOM/例外/非有限/identity/期限は全体終了。actual finish_reasonをCMEEへ保ち、raw補修/欠けたcallの再生成なし。生成後に固定source/priorでCMEE・coldfile再読、全本文確認、重み/原本回収・GitHub読み戻しまで同単位で完了する。今回管理画面/API/lifecycle・Render/Supabase/本人DB・依存追加0。
 
 
-早期保存checkpoint（10/27）：15更新を完了し、204.712517秒時点の別adapter保存原本を回収した。archive3465517bytes/SHA83f47229c35bddbe23aaad150a2d5562e2da89ed74a71ec2d3575c2f0789541e、全14payload+manifestのbytes/hashと32F32 tensor有限性をPod外照合。新adapter SHA278fdc26e56c2cd84b39bec19d484374d4504c656fbd5d1f8112d006e8c6457dを libfile_4756727c2f4c81918fb24227734d4269 version0へ保全した。後続同processの読取ではreload後のafter生成9完了/10件目開始、最終採否未確認。早期archive内runはsaved_before_reload/生成0の保存時点を維持し、後続進捗で書き換えない。
+早期保存履歴（10/27）：204.712517秒/更新15/生成0の原本はearly_run.json・early_recovery.jsonおよび重みarchive version0に不変保持。最終結果は冒頭とafteronly_result/README.mdを参照。
+
