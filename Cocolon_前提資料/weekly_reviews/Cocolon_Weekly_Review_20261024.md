@@ -2824,7 +2824,7 @@ Mashの「A5000借りたけど、やれる？」を受け、本人レンタルPo
 <a id="20261027-native15-interleaved30-proposal"></a>
 ## 60. 10/27 — 旧成功との形式差を切分け、混在30更新一回案のコード/CPU確認（新学習前）
 
-**現在の直接作業（10/27：承認済み混在30更新を一回起動・実行中）：** Mashが084b79b1案へ「いいよ、進めて。」と明示承認。実行source e107b09535bfcf656cb97100a7434c66ca2c3740、runner fee03d41/consumer4b8e2531/API6b043880、旧45779から新before0→凍結quote15混在30更新→別保存/非学習reload→after15を、同A5000のPID21603/started_unix1793056749.65717で一回起動した。最初の実読取はstage=training/更新2/30/生成0、完了・新重み・reload・採否は未確認。2700秒/1生成180秒/最大15call/$0.21処理按分（準備/回収/保持等別）/再試行なし。終了後は無補修rawのCMEE採否・全本文・採用snapshotのみcold-file再読・重み/原本回収を同単位で行う。同PID/同outputへ戻り、--executeを再起動しない。旧numeric成功と現quoteは別条件、未知一般化/動的thread/商品成功ではない。商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=false、GPU稼働保持。
+**現在の直接作業（10/27：混在30更新/別保存reload完了、after15進行中）：** 実行source e107b095/PID21603の同一processで30更新を完了。399.591608秒/更新30/生成0の早期保存原本を回収し、全15payload+manifestのbytes/hash・実30行log/固定order・32F32有限性をPod外照合、新adapter1d218763をlibfile_5ecbab80168481919b1e4965fd7660fe version0へ保全した。後続の同processは別保存の非学習reloadを通過しafter生成へ進んでいる。全15のEOS/JSON/意味/本文/自然さ/cold-file採否は未確定。2700秒/1call180秒/15生成/$0.21按分（準備/回収/保持等別）/再試行なし、同processへ戻り--executeを再起動しない。原本はinterleaved30_result/READMEとweekly§60。商品0/正式0/3/54.50％、未知一般化/動的thread/実service/SQL成功へ数えない。GPU稼働保持。
 
 旧joint12の回収archive実train157443bytes/SHA1da50c66…と成功raw/sourcefe3f0f9a/45779を照合した。chair6はnumericで現quoteへの入力/target投影が変わり、daily3だけ全文同一。「旧chair6の維持失敗」は現quote6件不成立という範囲に限定し、同入力の忘却・純粋な学習率原因とは扱わない。旧278fdc26生成15/意味本文3/回収原本は不変。新6の教師に主客逆転/否定・不明欠落は見当たらず、今回の基本不成立に新観測会は不要。
 
@@ -2837,6 +2837,6 @@ Mashの「A5000借りたけど、やれる？」を受け、本人レンタルPo
 
 §60 承認後の実行中checkpoint：
 
-**現在の直接作業（10/27：承認済み混在30更新を一回起動・実行中）：** Mashが084b79b1案へ「いいよ、進めて。」と明示承認。実行source e107b09535bfcf656cb97100a7434c66ca2c3740、runner fee03d41/consumer4b8e2531/API6b043880、旧45779から新before0→凍結quote15混在30更新→別保存/非学習reload→after15を、同A5000のPID21603/started_unix1793056749.65717で一回起動した。最初の実読取はstage=training/更新2/30/生成0、完了・新重み・reload・採否は未確認。2700秒/1生成180秒/最大15call/$0.21処理按分（準備/回収/保持等別）/再試行なし。終了後は無補修rawのCMEE採否・全本文・採用snapshotのみcold-file再読・重み/原本回収を同単位で行う。同PID/同outputへ戻り、--executeを再起動しない。旧numeric成功と現quoteは別条件、未知一般化/動的thread/商品成功ではない。商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=false、GPU稼働保持。
+**現在の直接作業（10/27：混在30更新/別保存reload完了、after15進行中）：** 実行source e107b095/PID21603の同一processで30更新を完了。399.591608秒/更新30/生成0の早期保存原本を回収し、全15payload+manifestのbytes/hash・実30行log/固定order・32F32有限性をPod外照合、新adapter1d218763をlibfile_5ecbab80168481919b1e4965fd7660fe version0へ保全した。後続の同processは別保存の非学習reloadを通過しafter生成へ進んでいる。全15のEOS/JSON/意味/本文/自然さ/cold-file採否は未確定。2700秒/1call180秒/15生成/$0.21按分（準備/回収/保持等別）/再試行なし、同processへ戻り--executeを再起動しない。原本はinterleaved30_result/READMEとweekly§60。商品0/正式0/3/54.50％、未知一般化/動的thread/実service/SQL成功へ数えない。GPU稼働保持。
 
 全原本と最終状態は[同一試行owner](../observation_learning/training/2026-10-26-unconnected-native/interleaved30_result/README.md)。旧一回・凍結教材・採用readerは不変。--execute二重起動/追加学習/再生成/自動再試行なし。

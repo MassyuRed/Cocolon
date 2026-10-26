@@ -1,6 +1,6 @@
 # 10/26 — 未接続の既存6教材とCMEE受理範囲／一括接続案
 
-状態：**10/27：Mash承認の混在30更新一回を起動。最初の読取は学習2/30・生成0、最終未確認。同PID/同outputへ戻り再起動しない。**
+状態：**10/27：混在30更新・別保存reload完了。新重みの早期回収/照合/保全済み、after15と最終採否は進行中。同processを再起動しない。**
 
 <a id="native15-interleaved30-proposal"></a>
 ### 30更新一回のMash承認・実行前checkpoint（下の実行中記録を優先）（10/27 JST）
@@ -10,11 +10,11 @@ Mashが084b79b1の具体案へ「いいよ、進めて。」と明示承認。pl
 
 ## 2026-10-27 — 形式差の切分けと、旧重みからの混在30更新一回案（未実行）
 
-**現在の直接作業（10/27：承認済み混在30更新を一回起動・実行中）：** Mashが084b79b1案へ「いいよ、進めて。」と明示承認。実行source e107b09535bfcf656cb97100a7434c66ca2c3740、runner fee03d41/consumer4b8e2531/API6b043880、旧45779から新before0→凍結quote15混在30更新→別保存/非学習reload→after15を、同A5000のPID21603/started_unix1793056749.65717で一回起動した。最初の実読取はstage=training/更新2/30/生成0、完了・新重み・reload・採否は未確認。2700秒/1生成180秒/最大15call/$0.21処理按分（準備/回収/保持等別）/再試行なし。終了後は無補修rawのCMEE採否・全本文・採用snapshotのみcold-file再読・重み/原本回収を同単位で行う。同PID/同outputへ戻り、--executeを再起動しない。旧numeric成功と現quoteは別条件、未知一般化/動的thread/商品成功ではない。商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=false、GPU稼働保持。
+**現在の直接作業（10/27：混在30更新/別保存reload完了、after15進行中）：** 実行source e107b095/PID21603の同一processで30更新を完了。399.591608秒/更新30/生成0の早期保存原本を回収し、全15payload+manifestのbytes/hash・実30行log/固定order・32F32有限性をPod外照合、新adapter1d218763をlibfile_5ecbab80168481919b1e4965fd7660fe version0へ保全した。後続の同processは別保存の非学習reloadを通過しafter生成へ進んでいる。全15のEOS/JSON/意味/本文/自然さ/cold-file採否は未確定。2700秒/1call180秒/15生成/$0.21按分（準備/回収/保持等別）/再試行なし、同processへ戻り--executeを再起動しない。原本はinterleaved30_result/READMEとweekly§60。商品0/正式0/3/54.50％、未知一般化/動的thread/実service/SQL成功へ数えない。GPU稼働保持。
 
 ### 実行中checkpoint — 同じprocessへ戻る
 
-**現在の直接作業（10/27：承認済み混在30更新を一回起動・実行中）：** Mashが084b79b1案へ「いいよ、進めて。」と明示承認。実行source e107b09535bfcf656cb97100a7434c66ca2c3740、runner fee03d41/consumer4b8e2531/API6b043880、旧45779から新before0→凍結quote15混在30更新→別保存/非学習reload→after15を、同A5000のPID21603/started_unix1793056749.65717で一回起動した。最初の実読取はstage=training/更新2/30/生成0、完了・新重み・reload・採否は未確認。2700秒/1生成180秒/最大15call/$0.21処理按分（準備/回収/保持等別）/再試行なし。終了後は無補修rawのCMEE採否・全本文・採用snapshotのみcold-file再読・重み/原本回収を同単位で行う。同PID/同outputへ戻り、--executeを再起動しない。旧numeric成功と現quoteは別条件、未知一般化/動的thread/商品成功ではない。商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=false、GPU稼働保持。
+**現在の直接作業（10/27：混在30更新/別保存reload完了、after15進行中）：** 実行source e107b095/PID21603の同一processで30更新を完了。399.591608秒/更新30/生成0の早期保存原本を回収し、全15payload+manifestのbytes/hash・実30行log/固定order・32F32有限性をPod外照合、新adapter1d218763をlibfile_5ecbab80168481919b1e4965fd7660fe version0へ保全した。後続の同processは別保存の非学習reloadを通過しafter生成へ進んでいる。全15のEOS/JSON/意味/本文/自然さ/cold-file採否は未確定。2700秒/1call180秒/15生成/$0.21按分（準備/回収/保持等別）/再試行なし、同processへ戻り--executeを再起動しない。原本はinterleaved30_result/READMEとweekly§60。商品0/正式0/3/54.50％、未知一般化/動的thread/実service/SQL成功へ数えない。GPU稼働保持。
 
 進行原本 `/workspace/cocolon_native15_interleaved30_run_20261027/run.json`、実行log `/workspace/cocolon_interleaved30_gpu_20261027.log`、起動JSON `/workspace/cocolon_interleaved30_launch_20261027.json`。同outputは既存なら起動前拒否する。GPU管理画面/一覧/管理API/lifecycle操作0、Jupyter直接。最終結果ownerは[interleaved30_result/README.md](interleaved30_result/README.md)。以下の未承認説明は準備時点の履歴、今回承認の取消しには使わない。
 
