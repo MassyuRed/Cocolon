@@ -5050,3 +5050,21 @@ training.jsonl/adapter/partial_adapter/reloaded_tensors/after raw/cold-file結�
 | early_run.json / early_recovery.json | 204.712517秒/15更新/生成0の早期保存履歴。最終原本へ補修しない |
 
 runner/plan/実tokenizerCPU候補とconsumer sourceは同native15_preparationの既存owner。最終archive内runには凍結教材/plan/sourceも同梱して照合し、GitHub上で同じ教材を増殖させない。再開はREADME#native15-afteronly-a5000-result/weekly§59の最終判断から行い、旧outputの--execute二重起動は禁止。GPU稼働保持は継続料金を伴う。
+
+
+### 2026-10-27 — native15混在30更新候補の追加file地図（GPU未実行）
+
+`observation_learning/training/2026-10-26-unconnected-native/interleaved30_preparation/` が次の限定候補owner。旧frozen15payloadはnative15_preparationの既存原本をbytes不変で参照し、重複保存しない。製品責務・型・採用条件・API/DB/RN/Render/Supabaseは不変、STRUCTURE_MAP_DELTA_NONE。旧numeric-chair成功を現quote-chairの実測beforeへ換算しない。新30更新は個別判断前、今回model処理0。
+
+| file | 責任 |
+|---|---|
+| run_native15_interleaved30.py | 旧45779から同15行を混在2pass/30更新、別保存reload/after15。pending executeはmkdir前拒否 |
+| gpu30_interleaved.plan.json | 固定30index・before0/after15・2700秒/180秒/$0.21按分、承認pending |
+| consume_interleaved30.py | 実30logとscope照合、無補修after15のCMEE採否・採用snapshotのみcold-file再読。SQL/serviceでない |
+| source_bindings.json | 既存payload/helper前提と新consumerのhash。元データは既存ownerへ戻る |
+| training_diagnosis.json / teacher_audit.json | 旧成功実archiveと現在quote15の形式/学習条件差、教師15静的構造・新6の原文/意味/実入力照合 |
+| verify_interleaved30_cpu.py / cpu_scope_validation.json | scope/拒否/30順序/log対応・旧生成/保存reload不変・入力/priorのlocal75確認。モデル処理0 |
+| actual_cpu_check.json | 固定Jupyter実tokenizer15/EOS/max7935・consumer入力15一致。GPU/モデル/採否0 |
+| independent_review.json | 初回source指摘と最終修正確認を区別したread-only2agent補助。正式Pro/Ultra/human受入れでない |
+
+current00/観測入口/同training README#native15-interleaved30-proposal/weekly§60へ同期。source/code準備を商品進捗へ加算しない。前回afteronly_resultのraw/採否/重みは不変、同outputを再起動しない。

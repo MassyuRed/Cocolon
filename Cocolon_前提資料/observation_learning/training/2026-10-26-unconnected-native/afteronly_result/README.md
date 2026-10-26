@@ -4,6 +4,10 @@
 
 既存の設計/全file地図/最新weeklyと作業ルールを確認し、Mash本人レンタルのA5000へ直接Jupyterで接続して一回を実施した。旧native15の前比較timeout（更新0）の再起動ではない。今回の実行sourceは`9a6c56ed5657e50e31cef50bab0015fc5e6484f9`、APIは`6b043880504912481a6b10d93c9128ec4995b70b`、runnerは`a62d3ed74e76a26c01fe66b9eba32d42631acac170cfd9c8dcb2c7cdf5076552`。
 
+## 比較条件の訂正（10/27継続調査）
+
+旧成功joint12原本を再確認し、chair6は旧numeric candidate/evidenceから今回quote candidate/evidence_quotesへmessages/targetが変わっていた。daily3だけ全文同一。本報告の「旧9の維持にも失敗」は現quote15のうち旧題材9で3/9という結果を指し、同じ入力で9/9→3/9へ低下した証明ではない。忘却・学習率が原因とは未確定。全raw/実採否/重みのbytesと新候補不採用は不変。次の具体案・根拠は[学習owner](../README.md#native15-interleaved30-proposal)と[実条件診断](../interleaved30_preparation/training_diagnosis.json)。
+
 ## 実結果
 
 | 確認 | 実測 |

@@ -2819,3 +2819,17 @@ Mashの「A5000借りたけど、やれる？」を受け、本人レンタルPo
 最終archive3,654,453bytes/SHA945a26744afaa618bb09fc53a6e0b07bbdfdfbd49d57937849f4d2772e3efe4b、全50payload+manifestのbytes/hashと32F32 tensor有限性をPod外で照合。新adapter278fdc26は早期保存時と一致。[重み/全原本archive version1](https://chatgpt.com/library?file_id=libfile_4756727c2f4c81918fb24227734d4269&account_id=personal)。元4B全重み/optimizer/RNGは非同梱、旧adapter45779は別保持。
 
 実件数表・全raw・diagnosis・根拠付き本文読解・回収照合：[最終owner](../observation_learning/training/2026-10-26-unconnected-native/afteronly_result/README.md)。CPU実装394/SQL6や旧runの9/9を今回の成功へ流用しない。本一回は完了し再起動しない。次は構造/原文束縛の学習条件を切り分け、採用条件の緩和・名詞ごとの特例・token上限拡大だけで通さない。現在の一回から学習回数/LR/長文構造の主因を確定したとは言わない。新候補を既定化せず、両Draft/商品0/正式0/3/54.50％を維持。
+
+
+<a id="20261027-native15-interleaved30-proposal"></a>
+## 60. 10/27 — 旧成功との形式差を切分け、混在30更新一回案のコード/CPU確認（新学習前）
+
+**現在の直接作業（10/27：形式差を切分け、混在30更新候補はCPU準備完了・実学習前）：** 前回のquote15は意味/本文3/15・cold-file3/3、新278fdc26は不採用のまま。旧joint12成功原本fe3f0f9aの実train/成功rawを照合し、chair6は旧numericから今回quoteへprompt/targetが変化、daily3だけ全文一致と確認した。「旧chair6の同入力回帰/忘却」とは未確定で、現在quote-chair6不成立という事実と区別する。教師15の静的構造と実入力一致、新6の主客/否定/不明保持に不備は見当たらない。次案は旧45779から凍結quote15を旧新交互の2pass/30更新→保存非学習reload→同after15、新before0。LR5e-5/全文assistant+EOS損失/32LoRA/生成cap/CMEE採否は維持。候補CPU75確認・固定環境実tokenizer15/max7935/8192・consumer入力15一致、モデル読込/forward/学習/生成/採否/SQLは今回0。PREPARED_AWAITING_MASH_APPROVALでexecuteはmkdir前拒否。前回15更新一回は閉鎖済みのため、新30更新の一回（2700秒/180秒/表示$0.28h按分上限$0.21、準備/回収/保持等別）は個別判断前。原本は同学習owner#native15-interleaved30-proposal/weekly§60。商品0/正式0/3/54.50％、通常有効化0、GPU稼働保持。
+
+旧joint12の回収archive実train157443bytes/SHA1da50c66…と成功raw/sourcefe3f0f9a/45779を照合した。chair6はnumericで現quoteへの入力/target投影が変わり、daily3だけ全文同一。「旧chair6の維持失敗」は現quote6件不成立という範囲に限定し、同入力の忘却・純粋な学習率原因とは扱わない。旧278fdc26生成15/意味本文3/回収原本は不変。新6の教師に主客逆転/否定・不明欠落は見当たらず、今回の基本不成立に新観測会は不要。
+
+推奨は旧45779から、同quote15を旧新交互で各2回、30更新→保存/非学習reload→after15。新before0/追加教師0、LR5e-5・全文assistant+EOS・32LoRA・after15順序・cap・採用readerは不変。より小さい順序のみ15案も検討したが、形式移行と新6のfitを一回で狙うため30を選んだ。因果一要素の特定や改善保証ではない。同A5000/2700秒/1call180秒/最大15生成/表示$0.28h按分上限$0.21、準備/回収/保持等別。OOM/時間/非有限/identityで終了、再試行/追加更新/自動縮小なし。
+
+候補source/plan/consumer・CPU75確認・独立source reviewを保存。実JupyterのCPUはtokenizer15/EOS/切捨て0/max7935、API6b043880による入力/prior15一致、model読込/forward/学習/生成/採否/SQL0。実CPU原本7489bytes/SHA6da100db…をEditor全文コピーで回収しPod hash一致、download待機timeoutをCPU失敗や再実行へ変換していない。実30logのstep/id/index/passはconsumer側で固定orderへ照合する。
+
+詳細・全固定順序・コード・CPU原本：[具体案](../observation_learning/training/2026-10-26-unconnected-native/README.md#native15-interleaved30-proposal)。前回15更新一回は閉鎖済みで新30更新の個別判断前。gpu_run_authorized=false、executeはmkdir前拒否。今回primary=BLOCKER_NARROWED（形式差交絡の確認）、商品0/正式0/3/54.50％、STRUCTURE_MAP_DELTA_NONE。GPU管理console/一覧/管理API/lifecycle/依存追加/Render/Supabase/本人DB/通常app/merge/deploy0。Jupyter直接、GPU稼働保持と保持料金は継続。

@@ -1,6 +1,49 @@
 # 10/26 — 未接続の既存6教材とCMEE受理範囲／一括接続案
 
-状態：**10/27：A5000で15更新/after15完了。CMEE意味/本文3/15・採用3件cold-file3/3。新adapterは不採用、重み/原本回収済み。**
+状態：**10/27：形式差の交絡を確認。混在30更新候補コード/CPU確認済み、追加GPU一回は個別判断前。前回新278fdc26は不採用のまま。**
+
+<a id="native15-interleaved30-proposal"></a>
+## 2026-10-27 — 形式差の切分けと、旧重みからの混在30更新一回案（未実行）
+
+**現在の直接作業（10/27：形式差を切分け、混在30更新候補はCPU準備完了・実学習前）：** 前回のquote15は意味/本文3/15・cold-file3/3、新278fdc26は不採用のまま。旧joint12成功原本fe3f0f9aの実train/成功rawを照合し、chair6は旧numericから今回quoteへprompt/targetが変化、daily3だけ全文一致と確認した。「旧chair6の同入力回帰/忘却」とは未確定で、現在quote-chair6不成立という事実と区別する。教師15の静的構造と実入力一致、新6の主客/否定/不明保持に不備は見当たらない。次案は旧45779から凍結quote15を旧新交互の2pass/30更新→保存非学習reload→同after15、新before0。LR5e-5/全文assistant+EOS損失/32LoRA/生成cap/CMEE採否は維持。候補CPU75確認・固定環境実tokenizer15/max7935/8192・consumer入力15一致、モデル読込/forward/学習/生成/採否/SQLは今回0。PREPARED_AWAITING_MASH_APPROVALでexecuteはmkdir前拒否。前回15更新一回は閉鎖済みのため、新30更新の一回（2700秒/180秒/表示$0.28h按分上限$0.21、準備/回収/保持等別）は個別判断前。原本は同学習owner#native15-interleaved30-proposal/weekly§60。商品0/正式0/3/54.50％、通常有効化0、GPU稼働保持。
+
+### 原本から訂正した比較の解釈
+
+前回報告の「旧chair6の維持にも失敗」は、現quote-chair6の6件不成立を指す。旧成功9/9と同じ入力で9→3へ低下したという意味ではない。旧joint12 source fe3f0f9a01968bd283b73d22d91d77f516c661ae/adapter45779の回収archive内の実train_messagesは157443bytes/SHA1da50c6655d132954e89511796a27f71b0cca4fc827125f54c11dd1c5088022fで、chair6はnumeric candidate/evidence、daily3だけquote形式。旧成功rawも同じ形式だった。今回はchair6をquote candidate/evidence_quotesへ投影したmessages/targetなので、形式移行・新6の追加・順序/損失配分が交絡する。旧45779を現在のquote-chair6へ通したbeforeは欠測であり、忘却や学習率が原因とは確定しない。
+
+新6の教師は原文の主客、否定、反実的振り返り、二感情間の明示不明を保持する。REPOTの反転は教師にはなく実rawにある。新観測会や教師修正を先に増やさず、現在の教師/入力のまま学習条件一候補を試す。根拠：[学習条件診断](interleaved30_preparation/training_diagnosis.json)／[教師監査](interleaved30_preparation/teacher_audit.json)。原raw/採否/重みのbytesと前回不採用判断は不変。
+
+### 具体案と判断範囲
+
+| 項目 | 新一回の固定範囲 |
+|---|---|
+| 初期重み | 元Qwen/Qwen3.5-4B@851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a＋旧45779。前回不採用278fdc26から継ぎ足さない |
+| 教材/評価 | 同じ凍結quote15の全bytes・原文/回答・教師prior・after15順序・2560/3712capを維持。未知評価0、動的thread0 |
+| 学習の差分 | 旧9→新6の連続15更新から、旧新を交互に混ぜた2pass/30更新へ。各pass全15行を1回、計各2回。固定30indexはplanに列挙 |
+| 維持 | seed20261024、AdamW/LR5e-5、weight_decay0、clip1、全文assistant+EOS損失、prompt損失除外、既存32F32 LoRA/r8/alpha16。損失mask/新依存/採用条件の追加0 |
+| 順序 | 新before0→30更新→別adapter保存→非学習reload→after15。beforeの失敗を学習開始条件にせず、前回quote15は候補間比較として使う |
+| 環境/上限 | 同A5000/Pod bkj4qvnhwtdqc2。最大2700秒、1生成180秒、最大15生成、表示$0.28/h按分最大$0.21。準備/保全回収/保持/保存/通信/税等別 |
+| 成立確認 | 全15の無補修rawをAPI6b043880へ実finish_reasonのまま通す。意味/本文採否、全本文の忠実性/自然さ、旧新内訳を確認。採用snapshotだけ別processで完成fileと同outcome再読 |
+| 打切り | 全体/1生成時間切れ、OOM、非有限、identity不一致で終了。token上限非EOSはlengthのままCMEEへ、同call再生成/追加更新/自動縮小/検査緩和なし。部分/欠測を成功化しない |
+| 回収 | 成否にかかわらず重み/原raw/実30行log/CMEE/本文/照合を回収・保全、GitHub原本を読み戻す。GPUはStopせず保持 |
+
+全15×180秒だけで45分なので、学習込みで全15が収まる保証はない。前回実測は処理1190.52秒、生成982.40秒、残り約208.13秒。30更新は同45分枠内を狙う余地があるが、時間/VRAM/品質の保証には使わない。peak reserved23.164GiBのため同A5000を使用し、20GBの成功へ換算しない。
+
+より小さい順序だけ15更新案も検討した。今回は形式移行と新6のfitを一度の限定試行で獲得するため、各行2回の30更新を推奨する。損失への新しい重み付け、教師短縮、token上限拡大、別モデルへは広げない。順序と回数を同時に変える候補なので、改善しても原因一要素の特定とは言わない。全15採用でも既知FITの技術成立であり、商品完成・未知一般化・三中核完了ではない。
+
+### 作成済みコードと実確認
+
+[runner](interleaved30_preparation/run_native15_interleaved30.py)、[未承認plan](interleaved30_preparation/gpu30_interleaved.plan.json)、[実raw consumer](interleaved30_preparation/consume_interleaved30.py) を別owner内の候補として作成した。新outputだけを使い、旧一回のrunner/plan/resultは変更しない。実30行logのstep/id/row_index/passを固定orderへ照合する。consumerの差分は新30更新metadata/filename/outputへの束縛と実log照合だけで、採用reader/本文作者/cold-file条件は不変。
+
+local [CPU75確認](interleaved30_preparation/cpu_scope_validation.json) はpending executeのmkdir前拒否・全15各2回/各pass1回・境界変異拒否・旧生成/保存reload bytes維持・入力/prior束縛を確認。Jupyter固定環境の [実CPU原本](interleaved30_preparation/actual_cpu_check.json) は実tokenizer15/EOS/切捨て0/max7935/8192、consumer入力15一致、model読込/forward/学習/生成/採否/SQL0。Download待機timeout後は同fileをEditorで全文コピーし、7489bytes/SHA6da100db9ef92c28a995b31a31690cb80e1d0ca28dd768df91d1f548f7024aebがPod印字と一致した。再生成0、CPU処理再実行0。
+
+[独立source review](interleaved30_preparation/independent_review.json) は初回metadata2件を指摘し、samePod表示と実30log照合を修正して最終hashを再確認。rootが統合し、正式Pro/Ultra/human商品受入れへ換算しない。実行ownerはroot華恋/Codex Work/GPT-6の単一writer。2agentはread-only補助。
+
+### 追加GPU一回を始める前の判断点
+
+前回15更新一回は完了・閉鎖済み。今回の30更新は旧一回のreuse/retryではなく、新しい実行量を持つ候補である。Rule18 §11.3 LEVEL_3の「allowed effect / path、non-reuse、retryまたはSTOP境界をcurrent approved envelope外へ変更する」「作業量、期間、費用…が明確に増える」に照らし、30更新/45分/$0.21按分の一回への明示判断前にモデル処理を開始しない。status=PREPARED_AWAITING_MASH_APPROVAL、gpu_run_authorized=false、approval_basis=null。CPUのみ先に完了させ、曖昧な候補の承認を求めない。
+
+今回の新学習・推論・paid model処理0。固定環境CPUと原本診断/候補source/関連文書だけで、通常API/DTO/DB/RN/CMEE採否/Render/Supabase/本人DB/merge/deploy不変、STRUCTURE_MAP_DELTA_NONE。primary=BLOCKER_NARROWED（形式差という交絡を確認）、商品0/正式0/3/54.50％据置。承認時はfresh head/実code・plan・旧45779・同Podを照合し、planの状態/approval_basisだけを承認指示へ束縛して新output一回を起動する。実装内部だけの再承認を追加しない。
 
 <a id="native15-afteronly-a5000-running"></a>
 <a id="native15-afteronly-a5000-result"></a>

@@ -1,0 +1,369 @@
+{
+  "schema": "cocolon.interleaved30_independent_local_review.v1",
+  "reviewed_at_utc": "2026-10-26T23:03:02.321893+00:00",
+  "scope": "Local read-only source/plan/payload review, plus pending-execute negative validation. This is not formal Pro/Ultra review or authorization for a new paid GPU trial.",
+  "verdict": "NO_BLOCKING_NEW_IMPLEMENTATION_BUG_FOUND_TWO_NONBLOCKING_OBSERVATIONS",
+  "execution": {
+    "model_calls": 0,
+    "training_updates": 0,
+    "gpu_operations": 0,
+    "paid_runs": 0,
+    "external_write_operations": 0,
+    "local_report_only_write": "/workspace/scratch/8b32a91611bc/continuation27/interleaved30_preparation/independent_review.json"
+  },
+  "source_sha256": {
+    "/workspace/scratch/8b32a91611bc/continuation27/interleaved30_preparation/run_native15_interleaved30.py": "fee03d4192f928fa9194f4ca737044364a4f0df4772007b96ad9737a62999f66",
+    "/workspace/scratch/8b32a91611bc/continuation27/interleaved30_preparation/gpu30_interleaved.plan.json": "68110acdc52c3d387a87dfc906afe9dfd6ee3d703f65e80f3f2cbf3616422e07",
+    "/workspace/scratch/8b32a91611bc/continuation27/interleaved30_preparation/consume_interleaved30.py": "4b8e25312509500aa54e5c02d36416058c888ef956cf90ee6075eb523f0184a7",
+    "/workspace/scratch/8b32a91611bc/native15_successor_candidate/run_native15_afteronly.py": "a62d3ed74e76a26c01fe66b9eba32d42631acac170cfd9c8dcb2c7cdf5076552",
+    "/workspace/scratch/8b32a91611bc/native15_successor_candidate/consume_native15_afteronly.py": "6c07e54b4a8cf2b3de7c720a4408f656fb178aa01435a4d286bfd9a6b32f5a41"
+  },
+  "checks": [
+    {
+      "topic": "Diff boundary",
+      "result": "PASS",
+      "evidence": [
+        "run_native15_interleaved30.py:23-66",
+        "run_native15_interleaved30.py:75-76",
+        "run_native15_interleaved30.py:151-165",
+        "consume_interleaved30.py:130-132"
+      ],
+      "detail": "New runtime behavior is fixed twice-through update order/30 updates, new output naming, same-Pod pending authorization, and old closed runner hash preservation. LR5e-5, full teacher_loss, clipping, seed, adapter32-F32 scope, payloads, caps, saved-adapter reload and after15 remain unchanged. Consumer diff is30-step requirement, runner name and default paths."
+    },
+    {
+      "topic": "Frozen source/payload identity",
+      "result": "PASS",
+      "evidence": [
+        "source_bindings.json",
+        "run_native15_interleaved30.py:43-56",
+        "run_native15_interleaved30.py:77-99",
+        "run_native15_interleaved30.py:184-187"
+      ],
+      "detail": "All nine source_bindings frozen_files bytes and hashes match. Closed afteronly runner still a62d3ed74e76a26c01fe66b9eba32d42631acac170cfd9c8dcb2c7cdf5076552. Initial adapter remains fixed45779 identity; rejected278fdc26 is not loaded. Old output path is not written by new runner or consumer."
+    },
+    {
+      "topic": "Pending execution rejection",
+      "result": "PASS_OBSERVED_CPU_ONLY",
+      "evidence": [
+        "run_native15_interleaved30.py:57-66",
+        "run_native15_interleaved30.py:101-104"
+      ],
+      "detail": "With CUDA_VISIBLE_DEVICES empty, validate-plan-only exited0 (authorized:false, updates30, after15). Invoking --execute with valid-format dummy source commit exited1 with ValueError: execute_refused_mash_approval_pending. New output directory was absent both before and after; refusal occurs before mkdir, prepare, Torch/model imports or weights."
+    },
+    {
+      "topic": "30 update selection and logging",
+      "result": "PASS_STATIC_ONLY",
+      "evidence": [
+        "gpu30_interleaved.plan.json:12-43",
+        "run_native15_interleaved30.py:64-65",
+        "run_native15_interleaved30.py:86-87",
+        "run_native15_interleaved30.py:151-165"
+      ],
+      "detail": "15 training IDs are unique, each occurs twice in30 order; each15-item pass is an exact permutation of all frozen15 IDs. Mapping cid->row_index->encoded[index] selects corresponding tokens. Each successful optimizer.step is logged with1-based step,1/2 pass,0-based original row_index,id,loss and gradient_norm. No actual30-row training log exists yet; actual count/order/finite values must be reconciled after authorized execution."
+    },
+    {
+      "topic": "15 evaluation cases and no teacher leakage",
+      "result": "PASS",
+      "evidence": [
+        "run_native15_interleaved30.py:86-99",
+        "run_native15_interleaved30.py:131-146",
+        "run_native15_interleaved30.py:172",
+        "consume_interleaved30.py:33-61",
+        "consume_interleaved30.py:126-137"
+      ],
+      "detail": "Frozen train/eval remain15 unique corresponding IDs in original order, each eval messages is training messages minus assistant. after_ids equals all15 IDs. Generation starts are capped15 and no baseline call is scheduled."
+    },
+    {
+      "topic": "Raw/CMEE/cold-file boundaries",
+      "result": "PASS_SOURCE_UNCHANGED",
+      "evidence": [
+        "consume_interleaved30.py:62-77",
+        "consume_interleaved30.py:92-98",
+        "consume_interleaved30.py:100-122",
+        "consume_interleaved30.py:145-172"
+      ],
+      "detail": "Raw bytes and raw_text hash/metadata are verified; exact raw_text enters receive_candidate without repair or teacher substitution. Reconstructed quote prompt equality is required before CMEE. Only adopted snapshots enter separate-process cold-file equality; no fresh candidate in cold worker. Frozen teacher prior stays frozen, dynamic_prior:false; no service/SQL/Auth/HTTP/provider/model invocation added."
+    },
+    {
+      "topic": "Once/save/reload/deadline/cost boundary",
+      "result": "PASS_WITH_STATED_LIMITS",
+      "evidence": [
+        "run_native15_interleaved30.py:61-66",
+        "run_native15_interleaved30.py:103-110",
+        "run_native15_interleaved30.py:122-124",
+        "run_native15_interleaved30.py:129-146",
+        "run_native15_interleaved30.py:156-192",
+        "gpu30_interleaved.plan.json:44-63"
+      ],
+      "detail": "Separate new output is created exist_ok=False; fixed A5000 name/Pod ID, price0.28USD/h and2700sec process budget0.21USD are required. Global2700s alarm/monotonic checks and per-generation180s stopping criteria persist, no retry or automatic progression. Saves complete adapter and reloads separately for after15; failure may save explicitly partial_adapter. Final hash/partial save/archive may run after timer cancellation, as plan explicitly states; no absolute Pod-billing or OS-hard-stop guarantee."
+    }
+  ],
+  "observations": [
+    {
+      "severity": "LOW",
+      "file": "/workspace/scratch/8b32a91611bc/continuation27/interleaved30_preparation/run_native15_interleaved30.py",
+      "line": 76,
+      "code": "NEW_POD_METADATA_STALE",
+      "detail": "prepare() sets new_pod=True despite fixed same existing Pod bkj4qvnhwtdqc2. This is stale metadata, not a GPU lifecycle operation or wrong adapter load. Prefer false for accurate report."
+    },
+    {
+      "severity": "REVIEW_BOUNDARY",
+      "file": "/workspace/scratch/8b32a91611bc/continuation27/interleaved30_preparation/consume_interleaved30.py",
+      "line": 130,
+      "code": "ACTUAL_TRAINING_LOG_NOT_INDEPENDENTLY_CONSUMED",
+      "detail": "Consumer confirms optimizer_steps_completed==30, hashed runner and frozen15 inputs but does not read training.jsonl or compare update_order/per-pass multiplicities. Same omission existed in15 consumer. Fixed runner deterministically selects/logs30 correctly, so no immediate wrong-index defect found; after run recovery independently reconcile actual30 log against plan before claiming30-index verification."
+    }
+  ],
+  "planned_index_trace": [
+    {
+      "step": 1,
+      "training_pass": 1,
+      "row_index": 0,
+      "id": "TRAIN-SERVICE-CHAIR-01-INITIAL"
+    },
+    {
+      "step": 2,
+      "training_pass": 1,
+      "row_index": 9,
+      "id": "FT-BOOK-INITIAL"
+    },
+    {
+      "step": 3,
+      "training_pass": 1,
+      "row_index": 6,
+      "id": "TRAIN-DAILY-CALM-01-INITIAL"
+    },
+    {
+      "step": 4,
+      "training_pass": 1,
+      "row_index": 1,
+      "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION"
+    },
+    {
+      "step": 5,
+      "training_pass": 1,
+      "row_index": 10,
+      "id": "FT-BOOK-AFTER-ANSWER"
+    },
+    {
+      "step": 6,
+      "training_pass": 1,
+      "row_index": 2,
+      "id": "TRAIN-SERVICE-CHAIR-02-INITIAL"
+    },
+    {
+      "step": 7,
+      "training_pass": 1,
+      "row_index": 11,
+      "id": "FT-SHOP-INITIAL"
+    },
+    {
+      "step": 8,
+      "training_pass": 1,
+      "row_index": 7,
+      "id": "TRAIN-DAILY-CALM-02-INITIAL"
+    },
+    {
+      "step": 9,
+      "training_pass": 1,
+      "row_index": 3,
+      "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION"
+    },
+    {
+      "step": 10,
+      "training_pass": 1,
+      "row_index": 12,
+      "id": "FT-SHOP-AFTER-ANSWER"
+    },
+    {
+      "step": 11,
+      "training_pass": 1,
+      "row_index": 4,
+      "id": "TRAIN-SERVICE-CHAIR-03-INITIAL"
+    },
+    {
+      "step": 12,
+      "training_pass": 1,
+      "row_index": 13,
+      "id": "FT-REPOT-INITIAL"
+    },
+    {
+      "step": 13,
+      "training_pass": 1,
+      "row_index": 8,
+      "id": "TRAIN-DAILY-CALM-03-INITIAL"
+    },
+    {
+      "step": 14,
+      "training_pass": 1,
+      "row_index": 5,
+      "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION"
+    },
+    {
+      "step": 15,
+      "training_pass": 1,
+      "row_index": 14,
+      "id": "FT-KNIT-INITIAL"
+    },
+    {
+      "step": 16,
+      "training_pass": 2,
+      "row_index": 11,
+      "id": "FT-SHOP-INITIAL"
+    },
+    {
+      "step": 17,
+      "training_pass": 2,
+      "row_index": 4,
+      "id": "TRAIN-SERVICE-CHAIR-03-INITIAL"
+    },
+    {
+      "step": 18,
+      "training_pass": 2,
+      "row_index": 7,
+      "id": "TRAIN-DAILY-CALM-02-INITIAL"
+    },
+    {
+      "step": 19,
+      "training_pass": 2,
+      "row_index": 12,
+      "id": "FT-SHOP-AFTER-ANSWER"
+    },
+    {
+      "step": 20,
+      "training_pass": 2,
+      "row_index": 5,
+      "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION"
+    },
+    {
+      "step": 21,
+      "training_pass": 2,
+      "row_index": 9,
+      "id": "FT-BOOK-INITIAL"
+    },
+    {
+      "step": 22,
+      "training_pass": 2,
+      "row_index": 0,
+      "id": "TRAIN-SERVICE-CHAIR-01-INITIAL"
+    },
+    {
+      "step": 23,
+      "training_pass": 2,
+      "row_index": 8,
+      "id": "TRAIN-DAILY-CALM-03-INITIAL"
+    },
+    {
+      "step": 24,
+      "training_pass": 2,
+      "row_index": 10,
+      "id": "FT-BOOK-AFTER-ANSWER"
+    },
+    {
+      "step": 25,
+      "training_pass": 2,
+      "row_index": 1,
+      "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION"
+    },
+    {
+      "step": 26,
+      "training_pass": 2,
+      "row_index": 13,
+      "id": "FT-REPOT-INITIAL"
+    },
+    {
+      "step": 27,
+      "training_pass": 2,
+      "row_index": 2,
+      "id": "TRAIN-SERVICE-CHAIR-02-INITIAL"
+    },
+    {
+      "step": 28,
+      "training_pass": 2,
+      "row_index": 6,
+      "id": "TRAIN-DAILY-CALM-01-INITIAL"
+    },
+    {
+      "step": 29,
+      "training_pass": 2,
+      "row_index": 14,
+      "id": "FT-KNIT-INITIAL"
+    },
+    {
+      "step": 30,
+      "training_pass": 2,
+      "row_index": 3,
+      "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION"
+    }
+  ],
+  "approval_and_scope": "Candidate currently PREPARED_AWAITING_MASH_APPROVAL/gpu_run_authorized:false. Review does not authorize changing that or launching GPU. Model fit or improved CMEE acceptance is unproven.",
+  "review_update": {
+    "reviewed_at_utc": "2026-10-26T23:04:19.260139+00:00",
+    "scope": "Only root fixes to the two previous observations and CPU check output filename were re-reviewed. Original checks and observation text remain historical findings, not claims that those fixes were present in the first reviewed source.",
+    "original_report_sha256_when_first_saved": "91365cb3cf41eafe4f417e6969ff177c0f0885522fe0c4155f8a93597f782043",
+    "original_review_runner_sha256": "00f90a809323d56e9ca21286c41446b5662c42c4597c9e5aa7b68132942ea4c4",
+    "original_review_consumer_sha256": "0903a9a801fda384741636620fb7e56d91d027ec9edf38ca048c1c455d5dafb2",
+    "current_source_sha256": {
+      "run_native15_interleaved30.py": "fee03d4192f928fa9194f4ca737044364a4f0df4772007b96ad9737a62999f66",
+      "consume_interleaved30.py": "4b8e25312509500aa54e5c02d36416058c888ef956cf90ee6075eb523f0184a7",
+      "gpu30_interleaved.plan.json": "68110acdc52c3d387a87dfc906afe9dfd6ee3d703f65e80f3f2cbf3616422e07"
+    },
+    "current_verdict": "NO_BLOCKING_IMPLEMENTATION_BUG_FOUND_PREVIOUS_OBSERVATIONS_RESOLVED",
+    "resolutions": [
+      {
+        "original_code": "NEW_POD_METADATA_STALE",
+        "result": "RESOLVED_SOURCE_VERIFIED",
+        "file": "run_native15_interleaved30.py",
+        "line": 76,
+        "detail": "new_pod=False now matches use of same existing Pod. No GPU lifecycle operation was added."
+      },
+      {
+        "original_code": "ACTUAL_TRAINING_LOG_NOT_INDEPENDENTLY_CONSUMED",
+        "result": "RESOLVED_SOURCE_VERIFIED_ACTUAL_LOG_NOT_YET_CREATED",
+        "file": "consume_interleaved30.py",
+        "line": 133,
+        "detail": "Consumer now reads training.jsonl and requires exactly30 entries/order, and each entry step/id/0-based row_index/training_pass equals plan update_order and frozen15 case IDs. The original plan itself remains fixed by hashed runner. This validates future actual log; no real training log has been generated in this review."
+      },
+      {
+        "result": "CPU_OUTPUT_FILENAME_CORRECTED",
+        "file": "run_native15_interleaved30.py",
+        "line": 201,
+        "detail": "Default CPU preparation output now gpu_interleaved30_runner_cpu_check.json instead of afteronly filename. Full preparation mode was not run here because local absolute runtime/model resources were not needed for this diff review."
+      }
+    ],
+    "verification": {
+      "ast_parse_both_sources": "PASS",
+      "actual_consumer_assertion_in_memory": {
+        "valid_synthetic30": true,
+        "missing_row_rejected": true,
+        "wrong_step_rejected": true,
+        "wrong_id_rejected": true,
+        "wrong_row_index_rejected": true,
+        "wrong_training_pass_rejected": true,
+        "note": "Evaluated exact assertion AST in CPU memory; no fake run artifact was created. Initial harness attempt used separate eval globals/locals and failed NameError; corrected harness shares scope and succeeded. This was harness scoping, not a source defect."
+      },
+      "final_source_plan_only": {
+        "exit_code": 0,
+        "status": "SUCCESSOR_PLAN_VALID_NO_MODEL_LOAD",
+        "updates": 30,
+        "after_calls": 15,
+        "gpu_run_authorized": false
+      },
+      "final_source_pending_execute": {
+        "exit_code": 1,
+        "error": "ValueError: execute_refused_mash_approval_pending",
+        "output_directory_exists_after": false,
+        "model_import_or_load": false
+      }
+    },
+    "execution": {
+      "model_calls": 0,
+      "training_updates": 0,
+      "gpu_operations": 0,
+      "paid_runs": 0,
+      "external_writes": 0
+    },
+    "remaining_boundary": "No claim is made about actual30 update log, learned adapter quality, after15 completion or CMEE results until a separately authorized trial and recovery. Approval remains pending."
+  },
+  "source_sha256_basis": "Latest source hashes after the follow-up review; first-review runner/consumer hashes are preserved in review_update. Historical initial findings remain under checks/observations."
+}
