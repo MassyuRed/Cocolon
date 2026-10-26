@@ -89,11 +89,11 @@ Freeの当回体験、Plusの適格履歴を踏まえた理解、Premiumの本�
 
 joint12の意味／本文9/9・同family日常2保存再読2/2と、前回raw2の品質未達はそれぞれの原本として維持。今回も未知一般化・商品品質・他coreの完成へ加算しない。
 
-## 10/26：generic/native形式差の最小候補、一回承認受領・実行前
+## 10/26：generic/native橋渡し13更新一回完了、新候補不採用・閉鎖
 
-前回旧新4callは閉鎖済みで改善指示不採用を維持。generic FT-UDONとnative daily3は本人source／観測・受け取りtargetが同一だが、system・user envelope・出力形式が異なる。native既知9教師の成功をgeneric入力の成功と同一視できないため、[新bridge13案](training/2026-10-26-generic-native-bridge13/README.md#bridge13-proposal)を具体化した。旧generic1行を原targetのまま4回、native9を各1回の13更新案。言語題材は2題、華恋編集／未商品承認のまま。E05ほか既読評価・失敗rawは学習しない。
+[bridge13実結果](training/2026-10-26-generic-native-bridge13/README.md#bridge13-final-result)。既存generic1行を原targetのまま4回＋native9各1回＝13更新、保存非学習reload後のnative9／genericUDON・E05の全11生成・EOSを999.271秒、処理按分約$0.07217（保持等別）で完了した。nativeのcandidate objectは全9教師一致だが、CHAIR03訂正の根拠表12→9行・終点2誤り・配列外参照でINVALID_EVIDENCEとなり意味／本文8/9。残8packetは教師全文一致。通常形式はUDON短文化・E05参加意向保持に局所改善があるが、説明調の受け取りと申込→参加の意味差・取消の迷い対象欠落が残り新候補不採用。
 
-Jupyter直接の実CPUは10教師／11評価入力、max5045prompt／2339assistantEOS／7378全文、無切捨て、daily旧surface各25token、未承認execute等6拒否を確認。CPU原本とsource8の回収11memberを照合、モデル重み読込／forward／更新／生成／SQL0・45779不変。Mashが最大30分／処理按分$0.13（保持等別）の新一回案を明示承認し、実行前checkpoint。自動起動・旧承認再使用0、新観測会はこの基本欠陥には不要。Piece／Analysis完成教師・独立未知評価不足は残る。最新weekly§52。
+新c39bbc27は32F32有限・生成前後不変で保全、旧45779を保持。全37payload＋manifest／38memberと11raw・CPU原本を回収照合。新学習／再call／raw補修／reader緩和／service／SQL／製品変更0で一回閉鎖。形式差が唯一の原因ともmixed学習全般が不可能とも断定しない。次は新有料試行を足さず、既存の出所付き完成受け取り・教示と両interfaceの対応、言語2題という範囲をCPUで再検討する。E05/E01/E03/A03・失敗raw・撤回読書会を教師にしない。今回の基本欠陥に新観測会不要、Piece／Analysis完成教師・独立未知評価・本人端末は残る。最新weekly§52最終、商品0／正式0/3／54.50％据置。
 
 ## 10/24の実診断と当時の決定（履歴、現在の構成は上段）
 

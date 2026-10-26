@@ -1,0 +1,32 @@
+{
+  "archive_bytes": 3631419,
+  "archive_sha256": "654e2737ee90bd9a4f1bdf3d6514ef06705a353aca3f96142d76ee46e0eea320",
+  "archive_members": 38,
+  "payloads_verified": 37,
+  "all_payloads_hash_verified": true,
+  "steps": 13,
+  "calls": 11,
+  "eos": 11,
+  "seconds": 999.2710109157488,
+  "process_allocation_usd": 0.07216957301058186,
+  "peak_allocated_gib": 16.171696186065674,
+  "peak_reserved_gib": 19.0859375,
+  "adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "9a70592b2ebfc03653fdcfdeb5054016f617e9c74c6499821881f4cca6672042",
+    "adapter_model.safetensors": "c39bbc27936d98ad45b0b42b43c476cad0c34f19e9f960f1a74f51eb05a564e5"
+  },
+  "saved_weights_match_durable_early_archive": true,
+  "durable_weight_library_id": "libfile_df4bdce010dc81919f34e21766a1828f",
+  "native_meaning": 8,
+  "native_body": 8,
+  "generic_parse_errors": [
+    "Expecting value: line 1 column 1 (char 0)",
+    "Expecting value: line 1 column 1 (char 0)"
+  ],
+  "source_flags": {
+    "initial_adapter_unchanged": true,
+    "saved_adapter_unchanged_after_generation": true,
+    "fixed_sources_unchanged": true
+  }
+}

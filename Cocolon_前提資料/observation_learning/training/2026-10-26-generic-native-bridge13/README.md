@@ -1,6 +1,6 @@
 # 4B：既存generic1行とnative9行の形式差を埋める一候補
 
-2026-10-26 JST。Jupyter実CPU準備・原本回収照合まで完了。新GPU実行は未承認・未実行。旧共通指示4callは閉鎖済み、不採用を維持する。
+2026-10-26 JST。承認済み一回を13更新・保存非学習reload・11生成・全原本回収まで完了。native意味／本文8/9、genericの受け取り品質未達により新候補は不採用・閉鎖。旧45779を保持する。
 
 ## 確認した原因候補
 
@@ -18,9 +18,9 @@ generic FT-UDONとnative daily3では、memo／memo_action／カテゴリ／感�
 今回の基本欠陥への対処には新観測会不要。自然な受け取り・修正実演・Piece／Analysis完成教師・独立した未知評価の不足は残る。
 
 <a id="bridge13-proposal"></a>
-## 新しい一回案：13更新→保存・再読込→最大11生成
+## 承認・実行済み一回案：13更新→保存・再読込→最大11生成
 
-[plan](bridge13.plan.json)／[runner](run_bridge13.py)。GPU実行flagはfalse。
+[plan](bridge13.plan.json)／[runner](run_bridge13.py)。原falseは[proposed](bridge13.proposed.json)へ保全し、承認済みplanで一回実行を完了した。現在は[runtime checkpoint](runtime_checkpoint.json)のCLOSEDで、同planを再起動しない。
 
 1. 現保存45779と固定Qwen3.5-4B revision851bf6e8から新optimizerで開始。途中optimizer再開とはしない。既存32LoRAだけ、LR5e-5／seed20261024／clip1／batch1。
 2. native9各1回＋generic1行4回＝13更新。順序はgeneric→chair3→generic→chair3→generic→daily3→genericで固定。generic／chairは全文assistant＋EOS、native dailyは既存jointの0.5全文＋0.5観測・受け取り25tokenを維持。4回やこの配分が最適とは未実証。探索しない。
@@ -67,3 +67,42 @@ Mashは0e105dd3の具体案「13更新→保存・再読込→11件確認、最�
 ## 実行中checkpoint：13更新・保存再読込完了、11生成は進行中
 
 承認source f9d248eeからPID677527を一回起動。456.221秒の実読取時点で13更新完了、非学習reload済み、native3生成完了／4開始。全11採否は未判定。新c39bbc27追加重みの先行archive3,401,608bytes／SHA50dbc67cfd2ccc7f33c83969715194e8b83c02c0fb87f4748a37013808b1f75cは全6member／5payloadと32F32有限をPod外照合し保全済み。先行原本は生成0で、最終結果とは分ける。[重み照合](early_weights_verification.json)／[同process再開先](runtime_checkpoint.json)。旧45779／原教材／helper／API／reader不変。次は同PIDの残りを読み、全11原本を回収してnative9 CPU採否・全本文診断を完了する。再起動・追加試行・段階ごとの再承認なし。
+
+
+<a id="bridge13-final-result"></a>
+## 最終結果：一回完了、新候補不採用・閉鎖
+
+承認source f9d248ee／PID677527を一回起動。13更新・保存・非学習reload・native9＋generic2の全11生成を999.271011秒（16分39秒）で完了。全11EOS、追加生成／再試行0。旧45779全3file、新保存adapter全3file、runner／payload／helperの前後不変を確認した。新重みc39bbc27は保存候補として保全し、採用しない。
+
+| 項目 | 実結果 |
+|---|---|
+| 処理按分 | 記録$0.26/hで約$0.07216957（約$0.07217）。準備／回収／継続保持／保存／税等別。1800秒／$0.13内、請求総額ではない |
+| メモリ | peak allocated16.171696／reserved19.085938GiB。終了後A4500／20,470MiB／使用1MiB、稼働保持 |
+| native形式 | 全9strict JSON／EOS正常、candidate objectは全9教師一致。packet全文は8/9一致、既存CMEE意味／本文8/9。chair初回3件はASK、訂正2件は各3更新＋問いなし、日常3件は問いなし。残る訂正1件は根拠段階で拒否 |
+| generic形式 | UDON／E05各1生成、原指示／原sourceのまま。両方欄付き文章。原指示はstrict JSON必須ではないので解析失敗は内容失敗へ加算しない |
+| CPU採否 | 固定API4002b clean／既存consumer4ce53119／既存Python3.12＋pydantic2.11.7で10.497444秒（child10.650576秒）。新model／DB／SQL0、raw不変 |
+
+### nativeの退行：本文案だけでは採用できない
+
+TRAIN-SERVICE-CHAIR-03-CORRECTION（case6）は、claims／relations／本文案／訂正3更新が教師と一致する一方、根拠表が12→9行に減った。訂正宣言・「一人でできたからではなく」・理由全文の3行が欠落し、友人の手順quoteは25:74（正25:38）、共同修理quoteは39:88（正39:47）となった。残存candidateの9／10／11参照は9行配列外で、静的には8箇所。既存receiptはINVALID_EVIDENCEで拒否し、意味採用・本文生成へ未到達。これを微小な表示差や本文reader失敗とは呼ばない。残8packetは凍結教師と全文一致。前45779のnative9/9から今回8/9へ退行した。
+
+### genericの前後本文
+
+| 入力 | 旧45779の実baselineから変わった点 | 未達・判断 |
+|---|---|---|
+| UDON | 本人が述べたという説明と余計な「その後に」を除き、短くなった | 新Receptionは「帰ってから自分でうどんを作り、食べたことによる平穏と微かな喜びの体験。」という説明のまま。自然な本人向け受け取りに未到達。温かいもの／うどんの同一化や因果への寄せも残る。おにぎり／身体状態創作は今回はないが、比較元旧baselineにもなく、bridgeによる解消とは数えない |
+| E05 | 現在の「出たい気持ち」を保持した局所改善 | 「申し込めてうれしかった」を「大会への参加を喜び」へ変え、取消を迷う対象も落ちた。Reception「本人の心情と、今日改めて日程を確認したという事実のみが可視。」は処理報告。「昨日の大会」の修飾は曖昧だが、昨日開催／参加済みと確定断言した、とまでは記録しない |
+
+両genericの問いなしは妥当。前値は前pair4の旧版case1／case2原本を再利用し、新before生成0。新指示版との比較を混ぜない。全11本文はroot華恋が読解し、別文脈read-only reviewerも原本で独立確認した。正式Pro／Ultra／human Product Readではない。
+
+### 原本・保存・終了
+
+[実run](run/run.json)／[13更新](run/training.jsonl)／run/case1_raw.jsonl〜case11_raw.jsonl／[native9原raw](run/after_native_fit.jsonl)／[loaded32tensor](run/reloaded_tensors.json)／[run manifest](run/file_manifest.json)／[起動記録](runtime/bridge13_launch.json)・原log／[CPU起動](runtime/consumer_launch.json)。[consumer index](run/consumer.index.json)と24partsは原1,500,491bytesを区切りなし順連結で完全復元する。generic2件はconsumerへ渡していない。[全本文・差分・判断](content_diagnosis.json)にraw全文を保つ。
+
+完了archive3,631,419bytes／SHA256 654e2737ee90bd9a4f1bdf3d6514ef06705a353aca3f96142d76ee46e0eea320。37payload＋manifestの全38memberをPod外でbytes/hash照合し、全11rawの本文hash／token数／EOS、native結合raw、CPU consumer原本、全source、保存旧新3fileを検証。新重みは生成前の早期保全archiveと全3file一致、32F32有限も維持。[回収manifest](recovery_manifest.json)／[回収照合](recovery_verification.json)／[早期重み照合](early_weights_verification.json)。manifestのrun/*は同名runへ、source/*は当時Pod上sourceへ対応する。現READMEは追補済みで当時source/READMEとは別、旧CPU manifestが指すfalse planはbridge13.proposed.jsonへ対応する。重みsafetensorsは早期保全先に保持し、GitHubのrun manifestから同hashへ戻る。
+
+起動・学習・11生成・consumerは各一回、早期／完了archive downloadも各一回。事前の非必須FastAPI照会は未導入だったが、実consumerに不要であり、実モジュールimportとconsumerは既存runtimeで成功。依存追加0。読取用ファイル名照会／local文書組立ての構文不備はモデル効果なしで補正し、新学習や生成の再実行へ転用していない。
+
+**新候補不採用で、この一回を閉鎖する。** 旧45779と既存CMEE採用条件を保持する。形式差が唯一の原因だったとも、すべてのmixed学習が不可能とも結論しない。generic1行4回＋native9保持というこの配分では、自然な受け取りの学習とnative根拠保持を両立できなかった。次は有料試行を追加せず、既存の出所付き完成受け取り／教示と両interfaceの対応、言語2題だけという範囲をCPUで再検討する。局所mask／LR／更新数探索、同要求再call、raw補修、reader緩和へ自動進行しない。
+
+今回の基本欠陥に新観測会は不要。自然な完成応答・修正実演、Piece／Analysis完成教師、独立した未知評価と本人端末の不足は残る。primary BLOCKER_NARROWED、商品0／正式0/3／54.50％、STRUCTURE_MAP_DELTA_NONE。新service／SQL／通常application／公開API／DTO／DB／RN／Render／Supabase／本人DB／merge／deploy変更0。GPU稼働保持、管理console／GPU一覧／管理API／Stop／再起動／削除／新Pod／charge0。

@@ -2656,3 +2656,19 @@ CPU原本SHA2774f535aa6106716bd2c0d5ddf9940235dd5a2f6b1c3b010a5d618091326c99。a
 
 
 §52 実行中checkpoint：承認source f9d248ee／PID677527を一回起動、456.221秒の実読取で13更新・保存非学習reload完了、native3生成完了／4開始。全11採否は未判定。追加重みc39bbc27の早期archive3,401,608bytes／全6member・32F32有限をPod外照合し保全済み。先行archiveは生成0の原本。runtime_checkpoint.jsonから同processへ戻り、再起動しない。旧45779／教師／helper／API／readerを維持。管理API/lifecycle0、GPU稼働保持、商品0／正式0/3／54.50％。
+
+
+<a id="20261026-bridge13-final-result"></a>
+### §52 最終結果 — 13更新・11生成完了、新候補不採用で一回閉鎖
+
+[全原本／前後本文／失敗箇所／回収照合](../observation_learning/training/2026-10-26-generic-native-bridge13/README.md#bridge13-final-result)。承認source f9d248ee／PID677527を一回起動し、13更新→保存→非学習reload→native9＋generic2の全11生成／全EOSを999.271011秒（16分39秒）で完了。処理按分約$0.07216957（$0.26/h、準備／回収／保持／保存／税等別）で1800秒／$0.13内。peak allocated16.171696／reserved19.085938GiB。終了後A4500/20,470MiB/使用1MiB、稼働保持。
+
+固定API4002b clean／旧consumer4ce53119を既存Python3.12＋pydantic2.11.7で一回使用。CPU10.497444秒（child10.650576秒）、model/DB/SQL0、raw不変。native strict JSON9/9、candidate object9/9教師一致、packet全文8/9一致、意味／本文8/9。chair初回3ASK、訂正2件は各3更新・問いなし、日常3件は問いなし。CHAIR03-CORRECTIONだけ根拠12→9行へ縮退し、訂正宣言／独力理由否定／理由全文の3行欠落、友人手順25:74（正25:38）・共同修理39:88（正39:47）の終点誤り、9/10/11の配列外参照8箇所が残った。receipt INVALID_EVIDENCEで意味・本文へ未到達。本文案が教師一致でも成功にせず、旧45779のnative9/9からの退行と記録する。
+
+generic UDONは短くなり余計な「その後に」を除いたが、Reception「…平穏と微かな喜びの体験。」という説明が残る。新E05は出たい意向を保つ局所改善がある一方、申込への喜びを「大会への参加を喜び」へ変え、取消を迷う対象も落とす。Reception「…事実のみが可視」は処理報告。「昨日の大会」の曖昧さを、昨日開催／参加済みと確定断言したという評価へ広げない。両問いなしは妥当、strict JSONは原指示必須でないため解析失敗だけを内容失敗へ加算しない。おにぎり／身体状態創作は今回はないが、実比較元旧baselineにもなく解消creditにしない。rootは全11本文・問い・更新を読み、別文脈read-only reviewerも原本で独立照合、正式Pro/Ultra/human受入れではない。
+
+新c39bbc27は旧45779からの保存候補として保全、未昇格・不採用。元旧adapter全3file・新adapter全3fileの生成前後不変、source/helper/payload不変を確認。早期archive3,401,608bytes/6member/32F32有限と、完了archive3,631,419bytes/SHA654e2737ee90bd9a4f1bdf3d6514ef06705a353aca3f96142d76ee46e0eea320の37payload＋manifest全38memberをPod外照合。完了重みは早期保全先の全3fileと一致。consumer全1,500,491bytesはindex＋24partsで原bytes/hashを復元する。CPU旧false manifestのplanは保全proposedへ対応し、追補後READMEを当時sourceと同じhashとは扱わない。起動／学習／11生成／consumer各一回、早期／完了download各一回、追加依存0。
+
+**新候補不採用で一回閉鎖。** 旧45779／現製品／意味admission／readerを保持し、追加更新・LR/mask探索・同要求再call・raw補修・次候補へ自動進行0。interface差が唯一の原因とも混合学習一般が不可能とも断定しない。次は新有料試行を追加せず、既存の出所付き完成受け取り／教示と両interfaceの対応、言語2題の範囲をCPUで再検討する。新観測会はこの基本欠陥へ不要。自然な完成応答・修正実演／Piece・Analysis完成教師／独立未知評価・本人端末は残る。
+
+全体00／観測入口／当pack／runtimeを閉鎖結果へ置換、01Aに原本所在を追記。primary BLOCKER_NARROWED、STRUCTURE_MAP_DELTA_NONE（製品責務/型/契約/保存/公開API/DB/RN不変）、商品0／正式0/3／54.50％据置。管理console/GPU一覧/Runpod管理API/Stop/再起動/削除/新Pod/charge/Render/Supabase/本人DB/通常application/merge/deploy0。処理完了は継続保持料金の停止を意味しない。
