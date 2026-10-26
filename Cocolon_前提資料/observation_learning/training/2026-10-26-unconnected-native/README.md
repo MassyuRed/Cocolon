@@ -1,8 +1,13 @@
 # 10/26 — 未接続の既存6教材とCMEE受理範囲／一括接続案
 
-状態：**10/27：形式差の交絡を確認。混在30更新候補コード/CPU確認済み、追加GPU一回は個別判断前。前回新278fdc26は不採用のまま。**
+状態：**10/27：Mashが混在30更新→保存reload→after15、最大2700秒/処理按分$0.21の一回を明示承認。実行前checkpoint、GPU起動はまだ0。**
 
 <a id="native15-interleaved30-proposal"></a>
+### 30更新一回のMash承認・実行前checkpoint（10/27 JST）
+
+Mashが084b79b1の具体案へ「いいよ、進めて。」と明示承認。planのstatus/gpu_run_authorized/approval_basisだけをAUTHORIZED_ONCE_BOUNDへ束縛した。旧45779から凍結quote15各2回の混在30更新→別保存/非学習reload→after15、新before0、最大2700秒/1call180秒/15生成/表示$0.28h按分$0.21（準備/回収/保持等別）、再試行なし。runner fee03d41/consumer4b8e2531/教材/API6b043880不変。今回の承認で再承認は不要。rootだけが同A5000/新outputの--executeを一回起動し、原本・重み回収とCMEE/全本文/cold-file判定まで同一単位で終える。以下の承認前表記は準備履歴として残す。
+
+
 ## 2026-10-27 — 形式差の切分けと、旧重みからの混在30更新一回案（未実行）
 
 **現在の直接作業（10/27：形式差を切分け、混在30更新候補はCPU準備完了・実学習前）：** 前回のquote15は意味/本文3/15・cold-file3/3、新278fdc26は不採用のまま。旧joint12成功原本fe3f0f9aの実train/成功rawを照合し、chair6は旧numericから今回quoteへprompt/targetが変化、daily3だけ全文一致と確認した。「旧chair6の同入力回帰/忘却」とは未確定で、現在quote-chair6不成立という事実と区別する。教師15の静的構造と実入力一致、新6の主客/否定/不明保持に不備は見当たらない。次案は旧45779から凍結quote15を旧新交互の2pass/30更新→保存非学習reload→同after15、新before0。LR5e-5/全文assistant+EOS損失/32LoRA/生成cap/CMEE採否は維持。候補CPU75確認・固定環境実tokenizer15/max7935/8192・consumer入力15一致、モデル読込/forward/学習/生成/採否/SQLは今回0。PREPARED_AWAITING_MASH_APPROVALでexecuteはmkdir前拒否。前回15更新一回は閉鎖済みのため、新30更新の一回（2700秒/180秒/表示$0.28h按分上限$0.21、準備/回収/保持等別）は個別判断前。原本は同学習owner#native15-interleaved30-proposal/weekly§60。商品0/正式0/3/54.50％、通常有効化0、GPU稼働保持。
