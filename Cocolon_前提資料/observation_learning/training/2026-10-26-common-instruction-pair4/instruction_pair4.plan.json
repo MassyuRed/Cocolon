@@ -1,7 +1,7 @@
 {
   "schema": "cocolon.instruction_pair4.plan.v1",
-  "status": "PROPOSED",
-  "gpu_run_authorized": false,
+  "status": "AUTHORIZED_ONCE",
+  "gpu_run_authorized": true,
   "source_cocolon_commit": "92283c1f37e5211f08e241b79fbb4dfa80b3fb2c",
   "api_commit_unchanged": "4002b4577838d1ed6671278a19585b61e7ccd10e",
   "selected_adapter_sha256": "45779ad97111dd2d91c1f7f1a4b0ca697ef0586c5190cd56b1b7675fe540dab6",

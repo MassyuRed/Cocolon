@@ -1,6 +1,6 @@
 # 4B：本人向けの受け取りと意味保持を共通指示だけで比較する一回案
 
-2026-10-26 JST。**PROPOSED／GPU未承認・未実行。** Jupyter実tokenizerのCPU確認は完了。商品品質改善の実証ではない。
+2026-10-26 JST。**AUTHORIZED_ONCE／Mash承認受領・一回実行前。** Jupyter実tokenizerのCPU確認は完了。商品品質改善の実証ではない。
 
 ## 目的と選んだ一手
 
@@ -74,3 +74,8 @@
 read-only別文脈レビューで原messages／単一差分／教師・guide非混入／4call上限／停止／非採用を確認し、root華恋がactualと照合した。正式Pro／Ultra／human Product Readではない。ブラウザfilechooserの一回timeoutで配置効果0となったため、固定GitHub sourceの通常取得へ切替。コマンド構築の構文エラー1回はUI実行前で、Pod/file/child/model効果0。CPU処理と回収は各一回、再実行・再download0。
 
 今回のprimaryは限定TECHNICAL_CREDIT（既存2入力の単一指示差分とCPU実行可能性だけ）。商品0／正式0/3／54.50％、STRUCTURE_MAP_DELTA_NONE。次は上記一回案へのMash判断だけで、追加学習や試行の連鎖へ進まない。結果の前後本文で効果がなければ、それも記録し、同じ指示の反復調整・再試行を自動追加しない。承認された場合、原proposed planを保全してstatus／gpu_run_authorizedだけ変更し、root一人が一回実行・全4本文診断・原本回収・GitHub読み戻しまで担う。
+
+
+## 10/26：一回実行のMash承認・実行前checkpoint
+
+Mashは7b90e5e2の具体案「追加学習なし・既知2入力×旧新の最大4生成・最大600秒／処理按分約$0.0434（保持等別）」に「進めていいよ。」と明示承認。原proposedを無変更で保全し、planのstatus／gpu_run_authorizedだけを変更した。runner546c5f9e・cases937eb213・共通指示・重み45779・旧helper2f659・上限／停止は不変。root華恋がJupyter直接で一回実行し、全4本文比較・原本回収・GitHub反映・読み戻しまで担う。各段階の再承認は不要。新teacher／学習／CMEE採用／reader緩和／製品変更／旧試行の承認再利用0。実行前の新model load／forward／生成／SQL0。

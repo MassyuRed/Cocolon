@@ -2612,3 +2612,8 @@ source591dab59の4fileをGitHub全文読み戻し後Jupyterで取得し全SHA照
 準備だけ完了、新モデルload/forward/生成/更新/SQL/CMEE採用0、plan PROPOSED/false。新一回は最大600秒／処理按分$0.043334（約$0.0434、記録$0.26/h、準備/回収/保持/保存/税等別）。Rule18§11.3の新費用境界で、前回承認を流用しない。承認後は非学習4call→全本文の旧新比較→生原本回収→GitHub反映まで一人で行い、各段の再承認は不要。非EOS/期限/OOM/例外で終了し、追加学習・指示反復・再試行・次案を自動追加しない。一般CMEE意味採用／reader緩和／実service／製品source変更は本案に含めない。
 
 限定TECHNICAL_CREDIT（共通指示比較のCPU成立だけ）、STRUCTURE_MAP_DELTA_NONE、商品0／正式0/3／54.50％。全体00／観測入口／01Aへ現在地を同期し、pilot-prep READMEに残った旧「E01/E03/A03未使用」区分も最新splitへ訂正する。新観測会は今回不要、他core完成教師0・一般接続・実機等は残る。GPU保持、管理console/一覧/Runpod管理API/Stop/再起動/削除/新Pod/charge/依存追加/Render/Supabase/本人DB/通常application/公開API/DTO/RN/merge/deploy0。
+
+
+### §51 10/26 JST — 共通指示のみの非学習4call一回をMashが明示承認
+
+Mashは7b90e5e2の具体案（追加学習なし・最大4生成／600秒／処理按分約$0.0434、保持等別）へ「進めていいよ。」と明示承認。原planをproposedへ保全し、status／gpu_run_authorizedだけ更新。runner546c5f9e／cases937eb213／共通指示／原2source／45779／旧helper／上限・停止・再試行0を保持する。root一人がJupyter直接で一回実行し、内容比較・原本回収・GitHub反映・読み戻しまで段階ごとの再承認は不要。新teacher／学習／CMEE採用・reader緩和・製品変更・旧一回の再起動は含めない。実行前model／forward／生成／SQL0、GPU保持・管理API／lifecycle0。

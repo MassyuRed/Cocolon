@@ -2,7 +2,7 @@
 
 **GPUの最新確認：** Jupyter直接で承認済み非学習raw2を完了・回収。2生成／各EOS、追加学習0・保存45779不変、約19.5秒／処理按分約$0.00140845（保持等別）。GPU保持、管理console／GPU一覧／管理API／lifecycle0。
 
-**現在の直接作業（共通指示の旧新4生成比較案、CPU準備完了・新GPU未実行）：** [前回raw2](trials/2026-10-26-generalization-probe2/README.md#generalization-eval2-final-result)は閉鎖。解説調の受け取りと未記載の心理説明を受け、重み45779を固定し、task_instructionだけを変える[非学習比較一回案](training/2026-10-26-common-instruction-pair4/README.md#instruction-pair4-proposal)を準備した。既知FT-UDON-INITIALと既読開発用EFREE-E05の各旧新＝最大4call。原system／本人source／出力欄／問いbudget・生成条件は同じで、教師・guideを送らない。共通指示は本人へ直接返す受け取り、意味／時点／迷いの保持、未記載説明抑制、短文に深読み・問いを強制しないことを既存教示から具体化。Jupyter CPU5.447829秒、実tokens旧428/444・新668/684、切捨て0、配置source／原本を全回収照合済み。新モデルload／forward／生成／追加学習／SQL／CMEE採用0。新一回の上限600秒／処理按分$0.043334（保持等別）はRule18§11.3の別承認前で、旧承認を再利用しない。E01／E03／A03は再提示も学習も0、旧教師・評価は不変。今回新観測会不要、一般CMEE採用と他core教師／品質は残る。商品0／正式0/3／54.50％。
+**現在の直接作業（共通指示の旧新4生成比較案、CPU準備完了・Mash承認受領）：** [前回raw2](trials/2026-10-26-generalization-probe2/README.md#generalization-eval2-final-result)は閉鎖。解説調の受け取りと未記載の心理説明を受け、重み45779を固定し、task_instructionだけを変える[非学習比較一回案](training/2026-10-26-common-instruction-pair4/README.md#instruction-pair4-proposal)を準備した。既知FT-UDON-INITIALと既読開発用EFREE-E05の各旧新＝最大4call。原system／本人source／出力欄／問いbudget・生成条件は同じで、教師・guideを送らない。共通指示は本人へ直接返す受け取り、意味／時点／迷いの保持、未記載説明抑制、短文に深読み・問いを強制しないことを既存教示から具体化。Jupyter CPU5.447829秒、実tokens旧428/444・新668/684、切捨て0、配置source／原本を全回収照合済み。新モデルload／forward／生成／追加学習／SQL／CMEE採用0。新一回の上限600秒／処理按分$0.043334（保持等別）を今回Mashが明示承認。原案不変でrootが一回実行し、旧承認を再利用しない。E01／E03／A03は再提示も学習も0、旧教師・評価は不変。今回新観測会不要、一般CMEE採用と他core教師／品質は残る。商品0／正式0/3／54.50％。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 
@@ -83,7 +83,7 @@ Freeの当回体験、Plusの適格履歴を踏まえた理解、Premiumの本�
 
 ## 現在地（2026-10-26・共通指示の比較案をCPU確認、GPU未実行）
 
-前回raw2は閉鎖し品質未達。最新は上段および[非学習旧新4call案](training/2026-10-26-common-instruction-pair4/README.md#instruction-pair4-proposal)。既知の短い夕食と既読の昨日／今日の迷いで、重み45779を変えず共通task_instructionだけの差を見る。実CPU5.447829秒、旧428/444・新668/684tokens。教師・guide非送信、元source／質問予算／出力条件は不変、追加学習／新生成／CMEE採用0。新一回は最大600秒／処理按分$0.043334（保持等別）の個別判断前。
+前回raw2は閉鎖し品質未達。最新は上段および[非学習旧新4call案](training/2026-10-26-common-instruction-pair4/README.md#instruction-pair4-proposal)。既知の短い夕食と既読の昨日／今日の迷いで、重み45779を変えず共通task_instructionだけの差を見る。実CPU5.447829秒、旧428/444・新668/684tokens。教師・guide非送信、元source／質問予算／出力条件は不変、追加学習／新生成／CMEE採用0。新一回は最大600秒／処理按分$0.043334（保持等別）の一回をMash承認受領、実行前checkpoint。
 
 joint12の意味／本文9/9・同family日常2保存再読2/2を保持。E01／E03は評価使用済み、A03は同family既見で、今回は再提示も教師転用も0。旧9教師とnative quote9教師を混同せず変更しない。新しいteacher goldは作成していない。新観測会は今回不要、三core全体の完成教師・一般接続・商品品質は未完。
 
