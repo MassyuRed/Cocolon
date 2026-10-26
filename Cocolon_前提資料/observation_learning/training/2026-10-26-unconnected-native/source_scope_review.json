@@ -1,0 +1,497 @@
+{
+  "status": "ORIGINAL_SOURCE_SCOPE_6_ROWS_4_FAMILIES_UNSUPPORTED",
+  "api_commit": "4002b4577838d1ed6671278a19585b61e7ccd10e",
+  "source_commit": "8eeb8e4c5577cc00fab53b3de413a894172ac5e1",
+  "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-24-emlis-free-pilot/sft_examples.jsonl",
+  "source_sha256": "b3115af6a79bb39467517d49f92c94ee7a1019c168f3cf74e078c9960e18bd82",
+  "cases": [
+    {
+      "id": "FT-UDON-INITIAL",
+      "family": "udon",
+      "old_stage": "INITIAL",
+      "source_refs": [
+        {
+          "path": "Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261022-002/01_dialogue.md",
+          "commit": "d57fe2205cfa74d018b2a33a1e4e74ca6837310d",
+          "blob_sha": "7c432eb03550569abe434d4f41560345098a7024",
+          "dialogue_id": "D04",
+          "start_scalar": 2357,
+          "end_scalar_exclusive": 2506,
+          "quote": "| 項目 | 入力内容 |\n| --- | --- |\n| 感情選択 | 平穏（中）・喜び（弱） |\n| 思考内容（考えていること） | あったかいもの食べたら、ちょっと落ち着いた。 |\n| 行動内容（実際に起こった出来事） | 帰ってから、うどんを作って食べた。 |\n| カテゴリー | 生活 |"
+        }
+      ],
+      "original_source": {
+        "id": "FT-UDON-O",
+        "memo": "あったかいもの食べたら、ちょっと落ち着いた。",
+        "memo_action": "帰ってから、うどんを作って食べた。",
+        "category": [
+          "生活"
+        ],
+        "emotions": [
+          "平穏",
+          "喜び"
+        ],
+        "emotion_details": [
+          {
+            "type": "平穏",
+            "strength": "medium"
+          },
+          {
+            "type": "喜び",
+            "strength": "weak"
+          }
+        ]
+      },
+      "original_only_probe": true,
+      "answer_update_executed": false,
+      "meaning_candidate_received": false,
+      "original_fields_preserved": true,
+      "synthetic_metadata_fields": [
+        "created_at"
+      ],
+      "original_source_in_scope": true,
+      "roles": [
+        "cook",
+        "eat",
+        "return",
+        "slight_calm",
+        "warm_food_eat"
+      ],
+      "marker_roles": [
+        "cook_and_eat",
+        "return_scope",
+        "written_eat_calm"
+      ]
+    },
+    {
+      "id": "FT-BOOK-INITIAL",
+      "family": "book",
+      "old_stage": "INITIAL",
+      "source_refs": [
+        {
+          "path": "Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261022-003/01_dialogue.md",
+          "commit": "d57fe2205cfa74d018b2a33a1e4e74ca6837310d",
+          "blob_sha": "8b7c1cea2dd2b1db6d6c9f6eacc6491f17ac569d",
+          "dialogue_id": "D00",
+          "start_scalar": 805,
+          "end_scalar_exclusive": 958,
+          "quote": "| 項目 | 入力内容 |\n| --- | --- |\n| 感情選択 | 不安（弱） |\n| 思考内容（考えていること） | 大丈夫って言ってくれたけど、まだちょっと気になる。 |\n| 行動内容（実際に起こった出来事） | 借りていた本を返すのが遅れて、友人に謝った。 |\n| カテゴリー | 人間関係 |"
+        }
+      ],
+      "original_source": {
+        "id": "FT-BOOK-O",
+        "memo": "大丈夫って言ってくれたけど、まだちょっと気になる。",
+        "memo_action": "借りていた本を返すのが遅れて、友人に謝った。",
+        "category": [
+          "人間関係"
+        ],
+        "emotions": [
+          "不安"
+        ],
+        "emotion_details": [
+          {
+            "type": "不安",
+            "strength": "weak"
+          }
+        ]
+      },
+      "original_only_probe": true,
+      "answer_update_executed": false,
+      "meaning_candidate_received": false,
+      "original_fields_preserved": true,
+      "synthetic_metadata_fields": [
+        "created_at"
+      ],
+      "original_source_in_scope": false,
+      "decision": "UNSUPPORTED",
+      "reason_code": "model_repair_reuse_source_out_of_scope"
+    },
+    {
+      "id": "FT-BOOK-AFTER-ANSWER",
+      "family": "book",
+      "old_stage": "AFTER_ONE_ANSWER",
+      "source_refs": [
+        {
+          "path": "Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261022-003/01_dialogue.md",
+          "commit": "d57fe2205cfa74d018b2a33a1e4e74ca6837310d",
+          "blob_sha": "8b7c1cea2dd2b1db6d6c9f6eacc6491f17ac569d",
+          "dialogue_id": "D00",
+          "start_scalar": 805,
+          "end_scalar_exclusive": 958,
+          "quote": "| 項目 | 入力内容 |\n| --- | --- |\n| 感情選択 | 不安（弱） |\n| 思考内容（考えていること） | 大丈夫って言ってくれたけど、まだちょっと気になる。 |\n| 行動内容（実際に起こった出来事） | 借りていた本を返すのが遅れて、友人に謝った。 |\n| カテゴリー | 人間関係 |"
+        },
+        {
+          "path": "Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261022-003/01_dialogue.md",
+          "commit": "d57fe2205cfa74d018b2a33a1e4e74ca6837310d",
+          "blob_sha": "8b7c1cea2dd2b1db6d6c9f6eacc6491f17ac569d",
+          "dialogue_id": "D01",
+          "start_scalar": 994,
+          "end_scalar_exclusive": 1009,
+          "quote": "質問。\n・何が気になりますか？"
+        },
+        {
+          "path": "Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261022-003/01_dialogue.md",
+          "commit": "d57fe2205cfa74d018b2a33a1e4e74ca6837310d",
+          "blob_sha": "8b7c1cea2dd2b1db6d6c9f6eacc6491f17ac569d",
+          "dialogue_id": "D02",
+          "start_scalar": 1052,
+          "end_scalar_exclusive": 1144,
+          "quote": "自分から「週末に返すね」と言っていたのに、遅くなると分かった時点で連絡しなかったことです。\n\n本は返したのですが、「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています。"
+        }
+      ],
+      "original_source": {
+        "id": "FT-BOOK-O",
+        "memo": "大丈夫って言ってくれたけど、まだちょっと気になる。",
+        "memo_action": "借りていた本を返すのが遅れて、友人に謝った。",
+        "category": [
+          "人間関係"
+        ],
+        "emotions": [
+          "不安"
+        ],
+        "emotion_details": [
+          {
+            "type": "不安",
+            "strength": "weak"
+          }
+        ]
+      },
+      "original_only_probe": true,
+      "answer_update_executed": false,
+      "meaning_candidate_received": false,
+      "original_fields_preserved": true,
+      "synthetic_metadata_fields": [
+        "created_at"
+      ],
+      "original_source_in_scope": false,
+      "decision": "UNSUPPORTED",
+      "reason_code": "model_repair_reuse_source_out_of_scope"
+    },
+    {
+      "id": "FT-CHAIR-INITIAL",
+      "family": "chair",
+      "old_stage": "INITIAL",
+      "source_refs": [
+        {
+          "path": "Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261024-001/01_dialogue.md",
+          "commit": "d57fe2205cfa74d018b2a33a1e4e74ca6837310d",
+          "blob_sha": "3a26aa06ff2ee9bd81f89829acca578b28e55a69",
+          "dialogue_id": "D00",
+          "start_scalar": 610,
+          "end_scalar_exclusive": 733,
+          "quote": "| 項目 | 入力内容 |\n|---|---|\n| 感情 | 喜び（中） |\n| 思考内容 | 全部一人で直せたことが、うれしかった。 |\n| 行動内容 | ぐらついていた椅子を修理して、また座れるようになった。 |\n| カテゴリー | 生活 |"
+        }
+      ],
+      "original_source": {
+        "id": "FT-CHAIR-O",
+        "memo": "全部一人で直せたことが、うれしかった。",
+        "memo_action": "ぐらついていた椅子を修理して、また座れるようになった。",
+        "category": [
+          "生活"
+        ],
+        "emotions": [
+          "喜び"
+        ],
+        "emotion_details": [
+          {
+            "type": "喜び",
+            "strength": "medium"
+          }
+        ]
+      },
+      "original_only_probe": true,
+      "answer_update_executed": false,
+      "meaning_candidate_received": false,
+      "original_fields_preserved": true,
+      "synthetic_metadata_fields": [
+        "created_at"
+      ],
+      "original_source_in_scope": true,
+      "roles": [
+        "joy",
+        "repair",
+        "solo_appraisal_object",
+        "usable_again"
+      ],
+      "marker_roles": [
+        "joy_ground",
+        "repair_and_result"
+      ]
+    },
+    {
+      "id": "FT-CHAIR-AFTER-CORRECTION",
+      "family": "chair",
+      "old_stage": "AFTER_ONE_ANSWER",
+      "source_refs": [
+        {
+          "path": "Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261024-001/01_dialogue.md",
+          "commit": "d57fe2205cfa74d018b2a33a1e4e74ca6837310d",
+          "blob_sha": "3a26aa06ff2ee9bd81f89829acca578b28e55a69",
+          "dialogue_id": "D00",
+          "start_scalar": 610,
+          "end_scalar_exclusive": 733,
+          "quote": "| 項目 | 入力内容 |\n|---|---|\n| 感情 | 喜び（中） |\n| 思考内容 | 全部一人で直せたことが、うれしかった。 |\n| 行動内容 | ぐらついていた椅子を修理して、また座れるようになった。 |\n| カテゴリー | 生活 |"
+        },
+        {
+          "path": "Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261024-001/01_dialogue.md",
+          "commit": "d57fe2205cfa74d018b2a33a1e4e74ca6837310d",
+          "blob_sha": "3a26aa06ff2ee9bd81f89829acca578b28e55a69",
+          "dialogue_id": "D01",
+          "start_scalar": 768,
+          "end_scalar_exclusive": 798,
+          "quote": "問い。\n・「全部一人で直せたこと」がなぜ嬉しかったのですか？"
+        },
+        {
+          "path": "Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261024-001/01_dialogue.md",
+          "commit": "d57fe2205cfa74d018b2a33a1e4e74ca6837310d",
+          "blob_sha": "3a26aa06ff2ee9bd81f89829acca578b28e55a69",
+          "dialogue_id": "D02",
+          "start_scalar": 845,
+          "end_scalar_exclusive": 937,
+          "quote": "さっき「全部一人で」と書いたのは訂正します。途中で友人に手順を教えてもらって、一緒に直しました。\n\nうれしかったのも、一人でできたからではなく、捨てずにまた使えるようになったからです。"
+        }
+      ],
+      "original_source": {
+        "id": "FT-CHAIR-O",
+        "memo": "全部一人で直せたことが、うれしかった。",
+        "memo_action": "ぐらついていた椅子を修理して、また座れるようになった。",
+        "category": [
+          "生活"
+        ],
+        "emotions": [
+          "喜び"
+        ],
+        "emotion_details": [
+          {
+            "type": "喜び",
+            "strength": "medium"
+          }
+        ]
+      },
+      "original_only_probe": true,
+      "answer_update_executed": false,
+      "meaning_candidate_received": false,
+      "original_fields_preserved": true,
+      "synthetic_metadata_fields": [
+        "created_at"
+      ],
+      "original_source_in_scope": true,
+      "roles": [
+        "joy",
+        "repair",
+        "solo_appraisal_object",
+        "usable_again"
+      ],
+      "marker_roles": [
+        "joy_ground",
+        "repair_and_result"
+      ]
+    },
+    {
+      "id": "FT-SHOP-INITIAL",
+      "family": "shop",
+      "old_stage": "INITIAL",
+      "source_refs": [
+        {
+          "path": "Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261023-001/01_dialogue.md",
+          "commit": "d57fe2205cfa74d018b2a33a1e4e74ca6837310d",
+          "blob_sha": "1db0f3170e28902b3c14c9505b6c930380694444",
+          "dialogue_id": "D00",
+          "start_scalar": 665,
+          "end_scalar_exclusive": 832,
+          "quote": "| 項目 | 入力内容 |\n| --- | --- |\n| 感情選択 | 喜び（中）・悲しみ（弱） |\n| 思考内容（考えていること） | うれしかったけど、少し置いていかれた気がした。 |\n| 行動内容（実際に起こった出来事） | 昔からの友人が店を開いたと知って、お祝いのメッセージを送った。 |\n| カテゴリー | 人間関係 |"
+        }
+      ],
+      "original_source": {
+        "id": "FT-SHOP-O",
+        "memo": "うれしかったけど、少し置いていかれた気がした。",
+        "memo_action": "昔からの友人が店を開いたと知って、お祝いのメッセージを送った。",
+        "category": [
+          "人間関係"
+        ],
+        "emotions": [
+          "喜び",
+          "悲しみ"
+        ],
+        "emotion_details": [
+          {
+            "type": "喜び",
+            "strength": "medium"
+          },
+          {
+            "type": "悲しみ",
+            "strength": "weak"
+          }
+        ]
+      },
+      "original_only_probe": true,
+      "answer_update_executed": false,
+      "meaning_candidate_received": false,
+      "original_fields_preserved": true,
+      "synthetic_metadata_fields": [
+        "created_at"
+      ],
+      "original_source_in_scope": false,
+      "decision": "UNSUPPORTED",
+      "reason_code": "model_repair_reuse_source_out_of_scope"
+    },
+    {
+      "id": "FT-SHOP-AFTER-ANSWER",
+      "family": "shop",
+      "old_stage": "AFTER_ONE_ANSWER",
+      "source_refs": [
+        {
+          "path": "Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261023-001/01_dialogue.md",
+          "commit": "d57fe2205cfa74d018b2a33a1e4e74ca6837310d",
+          "blob_sha": "1db0f3170e28902b3c14c9505b6c930380694444",
+          "dialogue_id": "D00",
+          "start_scalar": 665,
+          "end_scalar_exclusive": 832,
+          "quote": "| 項目 | 入力内容 |\n| --- | --- |\n| 感情選択 | 喜び（中）・悲しみ（弱） |\n| 思考内容（考えていること） | うれしかったけど、少し置いていかれた気がした。 |\n| 行動内容（実際に起こった出来事） | 昔からの友人が店を開いたと知って、お祝いのメッセージを送った。 |\n| カテゴリー | 人間関係 |"
+        },
+        {
+          "path": "Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261023-001/01_dialogue.md",
+          "commit": "d57fe2205cfa74d018b2a33a1e4e74ca6837310d",
+          "blob_sha": "1db0f3170e28902b3c14c9505b6c930380694444",
+          "dialogue_id": "D01",
+          "start_scalar": 867,
+          "end_scalar_exclusive": 895,
+          "quote": "問い。\n・「少し置いていかれた気がした」のはなぜですか？"
+        },
+        {
+          "path": "Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261023-001/01_dialogue.md",
+          "commit": "d57fe2205cfa74d018b2a33a1e4e74ca6837310d",
+          "blob_sha": "1db0f3170e28902b3c14c9505b6c930380694444",
+          "dialogue_id": "D02",
+          "start_scalar": 937,
+          "end_scalar_exclusive": 1106,
+          "quote": "以前、その友人と「いつか店をやれたらいいね」と話していたことがあるんです。具体的に一緒に準備をしていたわけでも、約束していたわけでもありません。\n\nでも、開店したと聞いたとき、二人で話していた未来が、友人の方ではもう現実になっていたんだな、と感じました。うれしいのに、あの話を一緒にしていた頃から少し離れてしまったようで、寂しかったです。"
+        }
+      ],
+      "original_source": {
+        "id": "FT-SHOP-O",
+        "memo": "うれしかったけど、少し置いていかれた気がした。",
+        "memo_action": "昔からの友人が店を開いたと知って、お祝いのメッセージを送った。",
+        "category": [
+          "人間関係"
+        ],
+        "emotions": [
+          "喜び",
+          "悲しみ"
+        ],
+        "emotion_details": [
+          {
+            "type": "喜び",
+            "strength": "medium"
+          },
+          {
+            "type": "悲しみ",
+            "strength": "weak"
+          }
+        ]
+      },
+      "original_only_probe": true,
+      "answer_update_executed": false,
+      "meaning_candidate_received": false,
+      "original_fields_preserved": true,
+      "synthetic_metadata_fields": [
+        "created_at"
+      ],
+      "original_source_in_scope": false,
+      "decision": "UNSUPPORTED",
+      "reason_code": "model_repair_reuse_source_out_of_scope"
+    },
+    {
+      "id": "FT-REPOT-INITIAL",
+      "family": "repot",
+      "old_stage": "INITIAL",
+      "source_refs": [],
+      "original_source": {
+        "id": "FT-REPOT-O",
+        "memo": "やり方が分かって安心した。",
+        "memo_action": "植え替えの手順を叔父に説明してもらい、最後まで聞いた。",
+        "category": [
+          "生活"
+        ],
+        "emotions": [
+          "平穏"
+        ],
+        "emotion_details": [
+          {
+            "type": "平穏",
+            "strength": "medium"
+          }
+        ]
+      },
+      "original_only_probe": true,
+      "answer_update_executed": false,
+      "meaning_candidate_received": false,
+      "original_fields_preserved": true,
+      "synthetic_metadata_fields": [
+        "created_at"
+      ],
+      "original_source_in_scope": false,
+      "decision": "UNSUPPORTED",
+      "reason_code": "model_repair_reuse_source_out_of_scope"
+    },
+    {
+      "id": "FT-KNIT-INITIAL",
+      "family": "knit",
+      "old_stage": "INITIAL",
+      "source_refs": [],
+      "original_source": {
+        "id": "FT-KNIT-O",
+        "memo": "ほどくのは面倒だった。さみしさも少しあった。二つがどうつながるかは、自分でも分からない。",
+        "memo_action": "今日は編みかけの見本をほどいた。",
+        "category": [
+          "生活"
+        ],
+        "emotions": [
+          "悲しみ"
+        ],
+        "emotion_details": [
+          {
+            "type": "悲しみ",
+            "strength": "weak"
+          }
+        ]
+      },
+      "original_only_probe": true,
+      "answer_update_executed": false,
+      "meaning_candidate_received": false,
+      "original_fields_preserved": true,
+      "synthetic_metadata_fields": [
+        "created_at"
+      ],
+      "original_source_in_scope": false,
+      "decision": "UNSUPPORTED",
+      "reason_code": "model_repair_reuse_source_out_of_scope"
+    }
+  ],
+  "row_count": 9,
+  "distinct_originals": 6,
+  "in_scope_original_rows": 3,
+  "unsupported_rows": 6,
+  "scope": "Original-source gate only. AFTER rows reuse the exact original; no synthetic pending/prior/answer or full semantic/body success.",
+  "source_and_old_weights_unchanged": true,
+  "watched_files": {
+    "/workspace/cocolon_quote_reception_fixed_api_20261025/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py": "cf7c4c92f2591a0a624b9fbb6044c5a71926aab1e7ca87efb4560aeb0ec1ba2a",
+    "/workspace/cocolon_quote_reception_fixed_api_20261025/ai/services/ai_inference/cocolon_meaning_experience_engine/model_candidate_source.py": "ea63db1f10a51b30ca42e441d6b52824d2ae8eb2845e2ae6bfbe8c7642d7cc5c",
+    "/workspace/cocolon_quote_reception_fixed_api_20261025/ai/services/ai_inference/emlis_ai_grounded_observation_gate.py": "2a2e1a5632777a692d333db0ad0ec2984205417f987b59b7b9069afe19cb871d",
+    "/workspace/cocolon_quote_reception_fixed_api_20261025/ai/services/ai_inference/cocolon_meaning_experience_engine/preparation.py": "3b8b25cd5fd3a90af71b0a077db594b06c87948e372fdc12746236f8e6dd9708",
+    "/workspace/cocolon_4b_quote_joint_fit12_20261026/adapter/README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "/workspace/cocolon_4b_quote_joint_fit12_20261026/adapter/adapter_model.safetensors": "45779ad97111dd2d91c1f7f1a4b0ca697ef0586c5190cd56b1b7675fe540dab6",
+    "/workspace/cocolon_4b_quote_joint_fit12_20261026/adapter/adapter_config.json": "26095c64075c5e88934f200eed8a6a3b5e389ad708d394f8567a1180e4aeb89c",
+    "/workspace/cocolon_4b_quote_joint_pack_20261026/sft_examples.jsonl": "fd73ddfeb5ed08a4451ed520ab01af54076c3b5e824e4bfeff326cf5cd69b0b5"
+  },
+  "model_weights_loaded": false,
+  "model_forward_calls": 0,
+  "training_updates": 0,
+  "new_generations": 0,
+  "sql_calls": 0,
+  "production_changed": false,
+  "product_accepted": false,
+  "automatic_progression": false,
+  "runner_sha256": "2ba5e43504e4d76f2f3e45200f36d9683b59442ffeee0990e9d13f9c1e559100",
+  "seconds": 2.195328427478671
+}

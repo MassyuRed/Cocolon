@@ -2690,3 +2690,19 @@ chair訂正の不正3例も拒否。根拠6/10/11欠落と配列外999参照はr
 次は実CMEEへ渡すnativeの入力・意味候補・自然な本文を学習の基準とし、未接続の既存教材とnative受理範囲を対照して対象を定める。genericは比較用task cardで通常CMEE入口ではない。同じ2題の反復やgeneric2行追加を改善保証へせず、mask／LR／更新回数探索を追加しない。新候補の実モデル適合は未実行、新有料plan／承認は作成しない。新観測会はこの基本欠陥へ不要。自然な完成応答の広さ・独立未知評価・Piece／Analysis教師・本人端末は残る。
 
 全体00／観測入口の古い現在地／01Aを同時同期。限定TECHNICAL_CREDITは教師9の形式互換性のみ、bridge13モデル8/9を上書きしない。STRUCTURE_MAP_DELTA_NONE、商品0／正式0/3／54.50％据置。旧教師／runner／consumer／製品source／admission／reader／契約／API／DB／RN不変。管理console／GPU一覧／管理API／Stop／再起動／削除／新Pod／charge／Render／Supabase／本人DB／通常application／merge／deploy0。GPU保持料金は継続する。
+
+
+<a id="20261026-unconnected-native-scope-and-proposal"></a>
+## 54. 10/26 — 未接続6教材のsource範囲不足をJupyter CPUで確定、4題材一括接続案を具体化
+
+開始Cocolon8eeb8e4c／API4002b457。添付引継ぎ、全機能00全文、恒久incident・作業rule・Karen-Diary、全体01と01A/B/Cの導線、三core入口/CMEE map、観測学習の目的/用途/Windows・Mac未選定、最新§49〜53と実Free9/実APIを確認。System Context索引timeoutは保持しfresh原本fallback、新index0。root華恋/Codex Work/GPT-6が単一実行writer、2agentはread-only原本/実code reviewで正式Pro/Ultra/human受入れではない。
+
+[実CPU原本・6教材の別本文候補・具体案](../observation_learning/training/2026-10-26-unconnected-native/README.md)。旧Free9（原入力6題）の原fieldを既存P1へ保持して実source recognizerへ一回ずつ渡し、原入力scope内3行（udon1/chair2）、範囲外6行（BOOK2/SHOP2/REPOT/KNIT）を確認した。全6はUNSUPPORTED/model_repair_reuse_source_out_of_scope。AFTER3行も原入力だけのprobeであり、架空pending/prior/回答/意味candidateを作らず、意味/本文成功3/9ともモデル失敗6件とも数えない。
+
+実CPU2.1953284275秒/exit0。初launcherは誤ったpython/bin/python3パスによりchild起動前失敗、実配置を確認して既存system Python3.12＋private依存directoryで一回実行。runner2ba5e435/Free9原本b3115af6/結果25a06819をPod外回収bytesで照合。Download event待機timeoutは実file到着で解消、再download0。API/既存native9/旧adapter3file前後hash不変。モデル読込/forward/学習/生成/SQL/追加依存0。終了時A4500/20,470MiB/使用1MiB、稼働保持。
+
+実sourceは修理/食事の2系統限定で、独立本文readerも有限文法。引用形式の統一だけで未接続6行を採用できず、同2題の更新数/LR/mask探索は足さない。旧Freeの完成文はMash完成goldではなく、BOOK/SHOPは華恋編集、REPOT/KNITは華恋架空補充。旧REPOTのfield跨ぎ『聞いた後』、旧KNITの未知を能力不足へ寄せる言換え、SHOPの本人知覚を事実化する候補表現を原sourceに戻して別候補へ補正。元教材/対話は不変。
+
+次の具体案は新6行/4題材を一単位で意味・実問い・説明追加・自然本文・保存再読まで接続するCPU実装。API既存private4owner内、新題材のsource-derived admission/adapter3を分離し、旧chair1/daily2と全snapshot/prompt/本文/訂正3更新を保持する。BOOK/SHOPは未記載対象への一問から説明追加へ進み元意味を失効させず、現在/過去・否定・本人知覚を保持。REPOTは説明する叔父/聞く本人、KNITは二つの受け止めの関係の本人明示不明。本文candidate6件を別JSONに固定した。学習/有料生成/通常application/本番変更を含まない。新しいprivate採用範囲の追加はRule18 §11.3 LEVEL_3の判断前、実装0。新観測会はこの基本不足へ不要。
+
+現製品型/責務/採用/接続不変、STRUCTURE_MAP_DELTA_NONE。primary BLOCKER_NARROWED、商品0/正式0/3/54.50％据置。全体00/観測入口のcurrentを置換、01Aへ全4新file所在を同期。管理console/GPU一覧/管理API/Stop/再起動/削除/新Pod/charge/Render/Supabase/本人DB/通常application/公開API/DTO/RN/merge/deploy0。GPU保持料金は継続し、CPU/model処理0と区別する。

@@ -1,8 +1,8 @@
 # Mashの観測技術を継承するための記録
 
-**GPUの最新確認：** Jupyter CPU確認後A4500／20,470MiB／使用1MiB、稼働保持。今回モデル処理0、管理API／lifecycle0。保持料金は継続する。
+**GPUの最新確認：** Jupyter CPU後、read-only nvidia-smiでRTX A4500／20,470MiB／使用1MiB。旧45779と稼働保持。今回モデル処理0、管理API／lifecycle0。保持料金は継続する。
 
-**現在の直接作業（Jupyter CPUのinterface再検討を完了）：** bridge13不採用後、既存native9を既存引用形式へ揃えた別の教材候補を作成。全78根拠の座標復元と、旧／quote教師9/9の意味・本文・問い・訂正3更新の一致、不正3例の拒否を確認した。15.6139秒、4B重み読込／forward／学習／モデル生成／SQL0、旧45779保持。これは教師互換性の確認で、モデル品質改善ではない。generic UDON＋chair初回／訂正後の3段階を照合し、chairの受け取り／更新文は同一targetでないと確定。genericは比較用task card、実接続nativeを学習の基準とする。次は既存未接続教材とnative受理範囲を対照し、自然な本文の対象を定める。同じ2題への反復・新有料試行を自動開始しない。新観測会は基本欠陥へ不要、広い完成教師／独立未知評価／他core／本人端末は残る。[全原本・候補・対応表](training/2026-10-26-interface-review/README.md)、最新weekly§53。商品0／正式0/3／54.50％。
+**現在の直接作業（既存6教材の接続不足を確定、4題材一括案は判断前）：** Jupyter直接のCPUで旧Free9（原入力6題）の全原fieldを保持して受理範囲を照合。BOOK初回/回答後、SHOP初回/回答後、REPOT、KNITの6行・4題材は全てsource段階でUNSUPPORTED。2.195328秒、モデル読込/forward/学習/生成/SQL0、旧45779不変。AFTER行も原入力のみのprobeで、意味/本文/回答成功へ数えない。現nativeの意味採用と独立本文readerは修理/食事の2系統限定のため、引用形式統一や同2題への追加学習だけでは6行を接続できない。4題材を一つの限定単位で、意味/実問い/説明追加/自然本文/保存再読まで接続するCPU実装案と別本文候補を具体化した。新source-derived版3は提案・未承認・未実装、旧1/2を保持。次は[具体案](training/2026-10-26-unconnected-native/README.md#six-row-native-proposal)の判断。基本欠陥へ新観測会不要、モデル有料試行なし。商品0/正式0/3/54.50％据置。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 

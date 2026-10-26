@@ -4938,3 +4938,8 @@ observation_learning/training/2026-10-26-generic-native-bridge13/のREADME／sou
 ### 2026-10-26：既存教師interfaceのCPU再検討（製品構造差分なし）
 
 `observation_learning/training/2026-10-26-interface-review/`：READMEは出所・範囲・次の直接作業、audit_interfaces.pyは既存quote compiler／admission／Engineへ旧／quote教師9を渡すCPU probe、native_quote_messages.jsonlはcandidateと根拠順を不変にした別教材候補。daily3は旧messages完全同一。three_stage_alignment.jsonはgeneric UDON／chair初回／訂正後の対応とFree9出所を保持。cpu_review.jsonは意味本文9/9・全78根拠復元・不正3拒否、cpu_launch.logはPID688267一回の終了値、helper_postcheck.jsonは旧補助source、recovery_manifest.json／recovery_verification.jsonは27,224bytes／6memberの回収照合を所有する。モデル生成・追加学習・SQL・製品source変更0、旧45779保持。STRUCTURE_MAP_DELTA_NONE。教師9/9をモデル実績や商品品質へ換算しない。currentは全体00／最新weekly§53／当READMEへ戻る。
+
+
+### 2026-10-26：旧Free未接続6行のsource scope照合と4題材一括案（未実装）
+
+`observation_learning/training/2026-10-26-unconnected-native/`のREADME／audit_unconnected.py／source_scope_review.json／proposed_surface_targets.jsonが今回の全原本。Jupyter直接CPU2.195328秒で旧Free9の原入力fieldを保持してscope照合し、BOOK2/SHOP2/REPOT/KNITの6行が現2系統のsource範囲外と確定。AFTERも原入力だけの確認で、実pending/回答/意味/本文成功へ数えない。提案は既存API private4ownerのsource-derived版3、4題材の意味・問い・説明追加・自然本文・保存再読を一括対応するもの。未承認・未実装、API4002b/旧45779/旧1・2/通常API/DB/RN不変。旧教師は変えず、別本文候補ではSHOP本人知覚・REPOT時系列非補完・KNITの関係不明を保持する。現構造差分なし、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。最新進行ownerは全体00とweekly§54。
