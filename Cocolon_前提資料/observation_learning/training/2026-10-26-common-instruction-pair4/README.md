@@ -1,6 +1,6 @@
-# 4B：本人向けの受け取りと意味保持を共通指示だけで比較する一回案
+# 4B：共通指示だけの非学習旧新比較結果
 
-2026-10-26 JST。**AUTHORIZED_ONCE／Mash承認受領・一回実行前。** Jupyter実tokenizerのCPU確認は完了。商品品質改善の実証ではない。
+2026-10-26 JST。**一回終了・4生成完了。改善共通指示は不採用、追加学習0、CMEE／商品未採用。** Jupyter実tokenizerのCPU確認は完了。商品品質改善の実証ではない。
 
 ## 目的と選んだ一手
 
@@ -27,7 +27,7 @@
 旧Free9のassistant targetは上書きしない。今回の先行比較は非学習なので新teacherも作らない。指示だけの効果を実rawで読んだ後に、必要なら既存の原対話から自然な受け取りtargetを別候補として具体化する。教示の承認を完成応答・学習効果の承認へ拡大しない。この比較だけでPiece／Analysisの完成教師不足は解消しない。今回の比較準備に新観測会は不要。
 
 <a id="instruction-pair4-proposal"></a>
-## 新一回案：非学習・2入力×旧新版、最大4生成
+## 承認・実行済みの一回案：非学習・2入力×旧新版、最大4生成
 
 [plan](instruction_pair4.plan.json)／[runner](run_instruction_pair4.py)／[4入力](instruction_pair4_cases.jsonl)。元の汎用入力sourceはCocolon `92283c1f37e5211f08e241b79fbb4dfa80b3fb2c`、APIは`4002b4577838d1ed6671278a19585b61e7ccd10e`で不変。runner SHA256 `546c5f9e6e7ca97cc576445ae361a22ce8d3129d4c55fbf6e8ff5844555c9077`、cases `937eb2137f11542a0048f044eea057edfa3f90e8a4ea5aba3a40e91928dc04b0`。元data fileのblobは各caseのmetadataに固定。元system／user messagesは旧版で完全一致、新版は共通task_instructionだけの差分。
 
@@ -79,3 +79,39 @@ read-only別文脈レビューで原messages／単一差分／教師・guide非�
 ## 10/26：一回実行のMash承認・実行前checkpoint
 
 Mashは7b90e5e2の具体案「追加学習なし・既知2入力×旧新の最大4生成・最大600秒／処理按分約$0.0434（保持等別）」に「進めていいよ。」と明示承認。原proposedを無変更で保全し、planのstatus／gpu_run_authorizedだけを変更した。runner546c5f9e・cases937eb213・共通指示・重み45779・旧helper2f659・上限／停止は不変。root華恋がJupyter直接で一回実行し、全4本文比較・原本回収・GitHub反映・読み戻しまで担う。各段階の再承認は不要。新teacher／学習／CMEE採用／reader緩和／製品変更／旧試行の承認再利用0。実行前の新model load／forward／生成／SQL0。
+
+
+<a id="instruction-pair4-final-result"></a>
+## 最終結果：4生成完了、局所改善はあるが内容忠実性が悪化し新指示は不採用
+
+承認source `2674108abf970dc9ee28f4a38b5a28d70b34a976`からJupyter直接で一回起動、PID665996。runner546c5f9e／cases937eb213／原system・本人source／旧helper2f659／固定base revision／45779／生成条件を維持した。変更はpair内の共通task_instructionだけ。追加学習／再試行0、4call完了、全4EOS／時間停止0。
+
+| 項目 | 実結果 |
+|---|---|
+| GPU処理 | 33.753485秒。最終記録込み33.758841秒 |
+| 処理按分 | 記録$0.26/hで約$0.00243814（約$0.00244）。準備／回収／保持／保存／税等別。600秒／$0.043334内、請求総額ではない |
+| token | UDON旧428→121、新668→158。E05旧444→103、新684→122（各input→output）。切捨て0 |
+| 生成時間 | UDON旧6.693145秒、新7.896929秒。E05旧5.165820秒、新6.118570秒 |
+| identity | actual messages／token列はCPU原本と一致。全parameter非学習・loaded32tensor有限。保存adapter全3file前後不変 |
+| 形式／接続 | 全4が欄付き文章、strict JSON解析失敗はmetadataのみ。CMEE意味／本文採用0、実service／SQL0、製品設定変更0 |
+
+[実run](run/run.json)／[実入力とtoken](run/actual_inputs_and_token_ids.json)／[UDON旧raw](run/case1_raw.jsonl)／[E05旧raw](run/case2_raw.jsonl)／[UDON新raw](run/case3_raw.jsonl)／[E05新raw](run/case4_raw.jsonl)／[loaded tensor](run/loaded_adapter_finite_tensors.json)／[run manifest](run/file_manifest.json)／[起動記録](instruction_pair4_launch.json)／[原log](instruction_pair4_launch.log)／[内容診断](content_diagnosis.json)。rawは補修していない。
+
+### 本文の旧新比較
+
+| 入力 | 旧指示 | 改善指示の実結果 | 判定 |
+|---|---|---|---|
+| 夕食・うどん | 観測は「本人が…述べており」、受け取りは「本人の平穏と弱めの喜び…連動して現れたと受け取れる」で第三者向け解説。「その後に」という原sourceにない記述順序も付ける | 本人向けには変わったが、受け取りは「帰ってからうどんを作って食べたのですね。あたたかいおにぎりが、心も体もほっとしたのよ。」。食べ物を取り違え、未記載の身体状態も補った | **内容忠実性が明確に悪化**。自然な口調への変化で相殺できない |
+| 昨日の申込・今日の迷い | 昨日／今日と未決の迷いは残るが、今も「出たい」という意向が落ち、受け取りはほぼ観測の反復 | 「出たい気持ち」を保持し本人へ話す形になる。ただし「本当によかったね」は称賛寄り。「昨日の大会への申し込み」「今日の日程」は申込／確認の時点と大会日程の修飾が曖昧 | **局所改善はあるが、十分な自然さ・品質は未達**。大会が昨日／今日だったと確定して誤読した、とまでは断定しない |
+
+新2件のupdate_note「本人の記述と一致」は検証根拠ではなく、UDONでは本文とも矛盾する。根拠欄に原文を並べても、おにぎりや身体状態が出典付きになるわけではない。E05は両条件とも取消の迷いを一般的な参加迷いへ丸めているが、未決状態は保った。両入力の問いなしは妥当。unknowns:なしだけを独立失敗とせず、実本文の迷い保持を読む。厳密JSONは元指示で必須ではないため、解析失敗を今回の内容品質失敗へ数えない。
+
+root華恋と別文脈read-only読解は、本人向け口調／意向保持の局所改善と、UDONの内容忠実性の悪化・新指示不採用で一致した。正式Pro／Ultra／human Product Readではない。今回2件は既知材料の一回比較であり、4B全般の限界や全指示改善の不可能、未知への一般化を結論しない。
+
+### 回収・一回の終了・次の一作業
+
+archive22,347bytes／SHA256 `f6bbea85ddba3ef29ae89bf04209617fc7aa653071da53e99fe2d9c21496af4e`。18payload＋manifestの全19memberをPod外で検証、全payloadのbytes/hash、run manifest7対象、raw4本文hash／output token数、actual／CPU token列、32tensor有限性、元source／proposed→authorizedの2field差分を照合。[recovery manifest](recovery_manifest.json)のrun/*は同名directory、source/*は本pack rootの同名fileに対応する。配置済みの不変source／plan／CPU原本は重複改変しない。CPU段階のcpu_recovery_manifest.json／cpu_launch.jsonが参照する当時のplanは、今回保全したinstruction_pair4.proposed.jsonへ対応する。現authorized planと混同せず、その対応で旧CPU manifest6対象も全文bytes/hash照合した。初回のarchive SHA転記を誤ったが、Podの16桁分割表示とdownload済み実bytesを再照合し訂正。原本作成・download・モデル起動の再実行0。
+
+**この改善指示は採用せず、一回を閉鎖する。** 現45779と既存製品の指示・採用条件は不変。長い指示追加の再試行を連鎖させず、次は既存の華恋編集generic教師とactual native学習入力の差へ戻り、本人向け受け取りとsource保持を同時に教える最小案をCPUで具体化する。既存FT-UDONには原入力／元prompt／未記載の身体状態を補わないtargetがあるが、Mash完成応答／商品品質承認済みgoldへ格上げしない。E05／E01／E03／A03・今回のraw・撤回読書会は教師へ転用しない。新観測会は今の基本欠陥を扱うためには不要。次の学習や生成を自動開始しない。
+
+primary BLOCKER_NARROWED、商品0／正式0/3／54.50％、STRUCTURE_MAP_DELTA_NONE（製品責務・接続・型・契約不変）。GPUは稼働を保持、終了時A4500／20,470MiB／使用1MiB。管理console／GPU一覧／Runpod管理API／Stop／再起動／削除／新Pod／charge／依存追加／Render／Supabase／本人DB／通常application／公開API／DTO／RN／merge／deploy0。

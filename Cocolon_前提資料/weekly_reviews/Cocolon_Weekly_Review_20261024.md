@@ -2617,3 +2617,18 @@ source591dab59の4fileをGitHub全文読み戻し後Jupyterで取得し全SHA照
 ### §51 10/26 JST — 共通指示のみの非学習4call一回をMashが明示承認
 
 Mashは7b90e5e2の具体案（追加学習なし・最大4生成／600秒／処理按分約$0.0434、保持等別）へ「進めていいよ。」と明示承認。原planをproposedへ保全し、status／gpu_run_authorizedだけ更新。runner546c5f9e／cases937eb213／共通指示／原2source／45779／旧helper／上限・停止・再試行0を保持する。root一人がJupyter直接で一回実行し、内容比較・原本回収・GitHub反映・読み戻しまで段階ごとの再承認は不要。新teacher／学習／CMEE採用・reader緩和・製品変更・旧一回の再起動は含めない。実行前model／forward／生成／SQL0、GPU保持・管理API／lifecycle0。
+
+
+### §51 最終結果（10/26 JST）— 非学習旧新4call完了、内容忠実性が悪化し新共通指示不採用
+
+[生原本・旧新比較・全結果](../observation_learning/training/2026-10-26-common-instruction-pair4/README.md#instruction-pair4-final-result)。承認source2674108aからJupyter直接で一回起動、PID665996。原2source／system／問いbudget／旧helper／runner546c5f9e／cases937eb213／固定base・45779と生成条件を保持し、共通task_instructionだけを比較した。4call開始／完了4、全4EOS／時間停止0、追加学習／retry0。旧input428/444・output121/103、新input668/684・output158/122。32tensor有限・全parameter非学習・保存adapter全3file不変、実messages/token列はCPU原本と一致。
+
+GPU処理33.753485秒／最終記録込み33.758841秒、記録$0.26/hの処理按分$0.00243814（約$0.00244、準備／回収／保持／保存／税等別）。600秒/$0.043334内。archive22,347bytes／SHAf6bbea85ddba3ef29ae89bf04209617fc7aa653071da53e99fe2d9c21496af4e、18payload＋manifest全19member、run manifest7対象・raw4の本文hash/output token・元source・plan差分exact2をPod外で照合。SHAの初回転記誤記はPodの16桁分割表示とdownload済み実bytesで訂正。モデル／archive／downloadの再実行0。
+
+旧UDONは第三者向け解説と原sourceにない「その後に」の記述順序。新は本人向けの語り口へ変わったが、受け取りで原入力の「うどん」を「あたたかいおにぎり」に取り違え、「心も体もほっとした」を補った。内容忠実性が明確に悪化。E05新は旧が落とした「出たい気持ち」を保ち、未決の迷いも残る局所改善があるが、「本当によかったね」は称賛寄りで薄く、申込／確認時点と大会日程の修飾も曖昧。ただし大会が昨日/今日だったと確定誤読した、とまでは断定しない。新2件の「本人の記述と一致」という自己報告は根拠ではなく、UDONでは本文にも反する。
+
+rootと別文脈read-only読解は、局所改善が内容忠実性の悪化を相殺せず新指示不採用で一致。正式Pro/Ultra/human Product Readではない。全4問いなしは妥当、JSONは厳密要求されていないためparse_errorを内容失敗へ数えない。unknownsなしだけでも独立失敗にしない。既知2入力の一回で4B全般の限界／未知一般化／全指示改善の不可能を結論しない。
+
+一回閉鎖、BLOCKER_NARROWED、商品0/正式0/3/54.50％、STRUCTURE_MAP_DELTA_NONE。新指示を採用せず、現45779／製品設定は不変。次は既存generic教師の元prompt/targetとactual native学習入力の差へ戻り、本人向け受け取りとsource保持を同時に教える最小案をCPUで具体化する。既存targetは華恋編集／未商品承認を保持、E05/E01/E03/A03・失敗raw・撤回読書会を教師にしない。新観測会は今の基本欠陥には不要。新学習／追加指示試行／有料処理へ自動進行しない。
+
+CMEE意味/本文採用・実service/SQL・新teacher・reader緩和・製品source/公開API/DTO/DB/RN/通常application/依存追加/Render/Supabase/本人DB/merge/deploy0。終了時GPU A4500/20,470MiB/使用1MiB、稼働保持。管理console/一覧/Runpod管理API/Stop/再起動/削除/新Pod/charge0。全体00/観測入口/当pack/01Aを結果と次作業へ同期。

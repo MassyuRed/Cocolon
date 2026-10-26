@@ -4922,3 +4922,6 @@ observation_learning/trials/2026-10-25-quote-reception-fit6/ のREADME/closure�
 ### 2026-10-26：共通指示だけの非学習旧新4call比較準備
 
 observation_learning/training/2026-10-26-common-instruction-pair4/のREADME/common_instruction.txtは旧新比較の判断・既存教示との対応と共通指示、run_instruction_pair4.py／instruction_pair4_cases.jsonl／instruction_pair4.plan.jsonは45779非学習・既知2入力×旧新・最大4call/600秒/$0.043334（保持等別）の一回候補を所有する。instruction_pair4_cpu_preflight.json／cpu_launch.json／cpu_recovery_manifest.jsonはJupyter実tokens428/444/668/684・切捨て0・model0・原本復元を保持する。旧教材・評価・API/admission/reader/question/service/DB/RNは不変、新teacher・新意味profileなし。STRUCTURE_MAP_DELTA_NONE、商品0。currentは全体00／最新weekly§51／当READMEへ戻る。
+
+
+10/26旧新4call実行後：同packのrun/はactual入力token／旧新case1〜4 raw／loaded32tensor／run／file manifestを、instruction_pair4_launch.json／instruction_pair4_launch.log／recovery_manifest.jsonは単一起動・原本復元を所有する。content_diagnosis.jsonは本人向け口調／E05意向保持の局所改善とUDONの食べ物取り違え・身体状態補完を区別し、新指示不採用・閉鎖を記録。4call/全EOS/33.76秒/非学習/45779不変、CMEE採用0。原教材・旧教師・API/reader/型/保存/公開契約の構造差分なし。STRUCTURE_MAP_DELTA_NONE、商品0。
