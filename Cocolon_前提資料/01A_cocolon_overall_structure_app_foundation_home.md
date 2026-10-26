@@ -4980,3 +4980,20 @@ observation_learning/training/2026-10-26-generic-native-bridge13/のREADME／sou
 | Cocolon `Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261024.md` | 現在地/設計/地図/進行差分 |
 
 旧native9・旧Free9・失敗raw・独立未知評価・撤回読書会は不変。01B/01C/三core共通入口/Piece/Analysisは対象責務差分0。394は新112＋既存282で重複合算なし、HTTP2対象外。新4B処理0、商品0。
+
+
+## 2026-10-26 — 15教材CPU配分と次の新GPU一回案
+
+STRUCTURE_MAP_DELTA_NONE。製品owner/型/契約/公開API/DB/RNの変更0。旧quote9＋新native6を原bytes不変で束ねる一回限りの教材準備で、別の常設subsystemを作らない。原本は既存unconnected-native owner。
+
+| path（Cocolon_前提資料/ 以下） | 責任 |
+|---|---|
+| `observation_learning/training/2026-10-26-unconnected-native/native15_preparation/prepare_native15.py` | 実CPU入力/結果/実行source。failed_v1は不採用履歴 |
+| `observation_learning/training/2026-10-26-unconnected-native/native15_preparation/failed_prepare_native15_v1.py` | 実CPU入力/結果/実行source。failed_v1は不採用履歴 |
+| `observation_learning/training/2026-10-26-unconnected-native/native15_preparation/api_blobs.json` | 実CPU入力/結果/実行source。failed_v1は不採用履歴 |
+| `observation_learning/training/2026-10-26-unconnected-native/native15_preparation/train_messages.jsonl` | 実CPU入力/結果/実行source。failed_v1は不採用履歴 |
+| `observation_learning/training/2026-10-26-unconnected-native/native15_preparation/eval_inputs.jsonl` | 実CPU入力/結果/実行source。failed_v1は不採用履歴 |
+| `observation_learning/training/2026-10-26-unconnected-native/native15_preparation/cpu_preparation.json` | 実CPU入力/結果/実行source。failed_v1は不採用履歴 |
+| `observation_learning/training/2026-10-26-unconnected-native/native15_preparation/gpu15.proposed.json` | 新GPU実装/実行前の未承認案 |
+
+既存training README/全体00/観測入口/weekly§57を同期。実CPU15.142914秒/teacher15はmodel15成功ではない。新4B処理0、商品0/正式0/3/54.50％。01/01B/01C/current mapsは製品構造差分がないため更新不要。

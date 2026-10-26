@@ -1,6 +1,51 @@
 # 10/26 — 未接続の既存6教材とCMEE受理範囲／一括接続案
 
-状態：**Mash承認済み4題材/6教材の限定CPU実装・検証を完了。394成功/HTTP2対象外、実model処理0。** 最新実結果は直下。旧scope結果・接続timeout・提案は日付付き履歴として保持。
+状態：**承認済み接続実装394成功を保持。旧quote9＋新native6の15教材CPU確認を完了し、新GPU一回の実装・実行案を具体化。新GPU処理0・未承認。** 最新案と実測は直下。旧scope結果・接続timeout・承認・実装結果は履歴として保持。
+
+
+<a id="native15-gpu-proposal"></a>
+## 2026-10-26 — 15教材の実CPU確認と、新しい一回GPU案（実装・実行前）
+
+開始Cocolon PR30 `74ca014a1062f22014b5d174443f0cc084c54a62`／API PR3 `6b043880504912481a6b10d93c9128ec4995b70b`。引継ぎ、全機能00全文、作業姿勢/規則18・恒久incident/Karen-Diary、全体01のflowと全file地図01A/B/Cの役割・関連差分、CMEE current map、観測学習の目的/用途、最新weekly§49〜56、実教材・実helper・6製品/test blobを確認した。System Context索引timeoutは継承しfresh原本を直接参照、新index0。全blob意味監査や全suiteとはしない。root華恋/Codex Work/GPT-6が単一writer、別文脈1agentはread-only reviewで、正式Pro/Ultra/human受入れではない。
+
+### 今回増えた事実
+
+直接Jupyterの既存Pod `y0eb0w0qn6nks0` に接続し、添付と同じterminal hostname／既存作業directoryを確認。新GPU管理画面・管理APIを開いていない。既存Python3.12/private依存と、固定Qwen3.5-4B revision `851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a` の実tokenizerだけをCPU使用した。
+
+旧interface-reviewのquote9原本148,257bytesと新native6原本200,917bytesを行・provenance・messages・完成targetごと無変更で連結した。15行は6言語familyの既知教材で、15未知例ではない。現APIの実messagesへ15/15一致し、quote受領→意味採用→Engine本文/実問いまたはENDを15/15確認。BOOK/SHOPのAFTERは教師の採用priorへ束縛した固定FITであり、実モデル初回から動的に作られたpriorではない。
+
+| 確認 | 実結果 |
+|---|---|
+| CPU時間 | 15.142913525924087秒、成功attempt03一回 |
+| 最長学習列 | SHOP回答後7,935/8,192、EOSを教師範囲に保持、prompt教師化0・切捨て0 |
+| 個別生成枠 | 旧9＝2,560、新6＝3,712。最大SHOP 4,374＋3,712＝8,086/8,192 |
+| 教材上の問い | chair初回3＋BOOK初回＋SHOP初回はASK、残10はEND。回答/訂正後に問いを再発行しない |
+| 元source/旧重み | old quote9 `dba590a5…`、native6 `101a8942…`、helper `2f659078…`、旧45779の全3file前後不変 |
+| 実model/SQL | 重み読込/forward/学習/生成/SQL＝0。前回SQL6状態や394件を今回の成功へ加算しない |
+
+実CPU原本は [native15_preparation/cpu_preparation.json](native15_preparation/cpu_preparation.json)。16,296bytes／SHA256 `64a7d905c4cfe3dbea227064e8aee053b23bff15baf51261f4a41c6478306f9d`。実行source SHA256 `602033ae0d84b7d6a4dff88b4c25d571bf1acc47af7876d46373e715da5abecb`。train349,174bytes／SHA29f37e38…、eval169,628bytes／SHAc67fa409…はJupyter実出力hashとPod外再構成bytesを一致確認した。Download eventは20秒timeoutだったが同期先へ到着した同一JSONを一回回収、再download/CPU再実行0。
+
+### 次の一回だけの具体案
+
+機械読取条件は [gpu15.proposed.json](native15_preparation/gpu15.proposed.json)。**新案のGPU runner実装・実行は未承認・未実行**。前のCPU実装承認や閉鎖bridge13の承認を再使用しない。
+
+1. 既存A4500上、旧45779をread-only起点とする。元4B、LoRA r8/alpha16/32tensor、既存BF16/F32と既存helper/依存を維持する。最初に新6の同一入力を各一回生成しbeforeを記録する。
+2. 凍結15行を記載順に各一回＝15optimizer更新、batch1、AdamW/LR5e-5/weight_decay0/clip1、seed20261024。assistant全文＋EOSのみを教師化しpromptは除外。別mask/generic課題/LR/epoch探索を追加しない。baseline評価後はtrain/use_cache=False/checkpointingを復帰してseedを固定する。
+3. 別directoryへadapter保存・早期回収、非学習reload後に全15入力を各一回生成する。前6＋後15＝最大21call。旧9は2560、新6は3712、context8192、温度0相当の決定的生成。全rawを補修せずquote→意味→実本文で採否判定する。
+4. 採用された新6は同じ固定source/prior/snapshotのcold file保存・再読を、追加model callなしで確認する。実service/SQL/RPCは今回0。教師priorを実初回生成へ差し替えて動的一往復成功とは呼ばない。旧quote統一9のモデルbeforeは未測定で、旧numeric-chairでの9/9をquote9/9として比較しない。
+5. **全体最大45分／処理按分$0.195（$0.26/h、準備/回収/継続保持/保存/通信/税等別）**。読込・前6・15更新・保存/reload・後15を同じ2700秒で打切り、21件完了保証はしない。最後のhash/archive/回収は追加時間を要し得るため厳密OS終了時刻の保証ではない。1call最大180秒、global期限を優先する。
+6. baselineのJSON不正/不採用/出力枠nonEOSは失敗原本として保持し、決めた一周だけへ進む。180秒到達・OOM・例外・非有限・identity不一致・全体期限では全体終了。afterのnonEOS/不採用も失敗のまま記録し、追加call/更新/修復をしない。新最長7935の実学習VRAMは未実証なので、OOM時にdtype/batch/mask/GPU/依存を自動変更しない。
+7. 全15のEOS・意味/本文と新6の主客/否定/時点/知覚/二対象不明/実問い/説明ADDを確認し、全本文を華恋が読む。32tensor有限性・新旧重みの保存/reload/生成後hashを照合してPod外へ回収する。失敗・途中重みも保全し、厳密optimizer/RNG途中再開可能とはしない。成功でも未知一般化・三中核商品受入れ・通常有効化へ昇格しない。
+
+教材の追加文0、旧source/教師/評価/失敗raw/撤回読書会は不変。今回の基本課題へ新観測会は不要。自然な完成応答の幅、独立未知評価、Piece/Analysis完成教師、本人端末は別の残件として保持する。
+
+### 実行途中の不備と確認範囲
+
+最初のuploadは自動承認reviewに「未確認の外部Runpodへ機微な実装情報を共有」と拒否された。両GitHub repoがpublicであること、渡す2fileが公開source由来のCPU論理/公開blob値だけで秘密/本人recordを含まないこと、今回指定されたJupyterの同Podであることを確認して同操作を再提示し受理された。転送制限の迂回はしていない。次のfilechooser待機はtimeoutでREPL reset、同じUIの実upload controlから配置を確認した。
+
+v1は一回目exit1。遅延したterminal入力の処理を確認せず同一commandを送ったため二回目起動が発生し、同じlogをFileExistsErrorで上書きした。最初のtracebackは未保全で原因を確定しない。このログ保持不備を成功へ隠さない。v1sourceはfailed_prepare_native15_v1.pyへ保存する。製品source/原教材/重み/model処理の変更はない。v2のEOS検査は既存encode契約の教師範囲内存在検査へ合わせ、request_idの誤引数はread-only reviewで実material.request_idへ実行前補正。別attempt03だけの15件を採用し、失敗中の部分件数を加算しない。
+
+今回の完了は15教材CPU配分/実接続の限定TECHNICAL_CREDIT。STRUCTURE_MAP_DELTA_NONE（製品責務/型/採用条件/保存/API/DB/RN不変）、商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=false。新GPU案はRule18 §11.3の新しい費用/実行envelopeへの判断対象。GPU管理console/一覧/API/Stop/再起動/削除/新Pod/charge・Render/Supabase/本人DB/通常app/merge/deploy0、保持指示/継続保持料金は維持する。新GPU健康検査を今回実施したとも報告しない。
 
 
 <a id="sixrow-cpu-implementation"></a>

@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-更新日：2026-10-26 JST（最新差分：承認済み4題材6教材の限定CMEE接続・CPU検証を完了、追加学習/生成0）。全Cocolon作業の必読原本。
+更新日：2026-10-26 JST（最新差分：旧quote9＋新native6の一束をCPU確認、出力配分と新GPU一回案を具体化、モデル処理0）。全Cocolon作業の必読原本。
 
 > **最新報告会：[第8回・2026-10-24](weekly_reviews/Cocolon_Weekly_Review_20261024.md)。** 今週実績・前週目標の達否と10/24〜10/31の管理案を記録。**Mashの指示により報告会終了。** 華恋の意見全文は[§10](weekly_reviews/Cocolon_Weekly_Review_20261024.md#karen-closing-opinion)、終了時の区分と再開先は[§11](weekly_reviews/Cocolon_Weekly_Review_20261024.md#meeting-closed-and-next-session)。10/24の4B確定・GPU16GB優先/24GB許容は当時の決定で、4B確定は10/25に撤回済み。最新の開発基準選定は[§23](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-three-core-model-and-serving-decision)。華恋が今回の判断責任として選んだもので、旧4B確定・常時24GB契約の自動復活ではない。起動済み3070の実確認は[§22](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-3070-running-cuda-uvm-io-error)。A5000未確保は§20の履歴。Vast実見積りは§19の履歴。次週の推奨順位は[§4](weekly_reviews/Cocolon_Weekly_Review_20261024.md#next-week-priorities)、対象path・具体手順・失敗/回復検査・終了条件は[§8](weekly_reviews/Cocolon_Weekly_Review_20261024.md#detailed-work-breakdown)を参照。全体管理評価・公開見通しは[§9](weekly_reviews/Cocolon_Weekly_Review_20261024.md#overall-status-and-release-outlook)：54.50％、正式商品受入れ0/3、12/18達成の裏付け不足。会議途中の「進行中」は当時の記録。次週案全体への明示採否・個別実行の未決は§11に区別して保持する。モデル選定の決定と、以下の品質・配置・端末・費用の未完了を区別する。
 
@@ -8,7 +8,7 @@
 
 **GPUと旧重みの確認境界：** Jupyterへの直接接続を復旧。旧adapter_modelのSHA256 `45779ad97111dd2d91c1f7f1a4b0ca697ef0586c5190cd56b1b7675fe540dab6`、旧API4owner・既存native9の前後不変を確認。今回GPU処理0、管理console/一覧/API/Stop/再起動/削除/新Pod/charge0、稼働保持指示を継続。read-only nvidia-smiの最終記録は前回A4500/20,470MiB/使用1MiBで、今回は新GPU健康確認の実績へ加算しない。保持料金は継続する。
 
-**現在の直接作業（承認済み限定CPU実装を完了）：** 4題材/6教材を既存4製品owner内のsource-derived admission/adapter版3へ接続。BOOK/SHOPは実初回の問いと採用済priorから説明ADD・gapのみ解消・一回答後END、REPOT/KNITは初回END。Jupyter直接で対象394成功/失敗0/skip0（新112、うち隔離SQL6状態）。HTTP/FastAPIの既存2件は依存不足で対象外、全suite/HTTP/Auth/実機成功ではない。旧chair2＋daily16構成の意味・snapshot・本文・問い・両形式messagesは1,851,616bytes全一致。新native6は実tokenizer/EOS/切捨てなしでmax7,935/8,192。BOOK/SHOP回答後の完成target3,178/3,561tokenは旧生成上限2,560を超えるため、将来のGPU条件を別途具体化する。今回model読込/forward/学習/生成0、既存生成上限変更0。新観測会はこの既存教材接続には不要。商品0/正式0/3/54.50％、通常app/本番未接続。 [実本文・検証・失敗原本](observation_learning/training/2026-10-26-unconnected-native/README.md#sixrow-cpu-implementation)、weekly§56。
+**現在の直接作業（15教材CPU確認済み・新GPU一回案は未承認）：** 旧quote9＋承認済み新native6の元行を変更せず一束にし、現API6b043880の6blobをJupyter実体へ照合。15件すべてで元messages・EOS教師範囲・意味採用・本文・問い/ENDを確認（15.142914秒、モデル読込/forward/学習/生成/SQL0）。旧9の生成枠2560、新6は3712なら最長学習7935/8192、最大prompt＋生成枠8086/8192で切捨て不要。次の具体案は旧45779から15行各1更新→別adapter保存/非学習reload→15件FIT、前比較新6を含め最大21生成、全体45分/処理按分$0.195（保持等別）。GPU runner実装と実行はこの新案へのMash判断後。凍結教師適合であり未知評価/実service一往復/本番/商品受入れではない。[実CPU原本・具体案](observation_learning/training/2026-10-26-unconnected-native/README.md#native15-gpu-proposal)、weekly§57。先の394成功/SQL6は別の接続実装証拠として保持。新観測会は今回不要、正式0/3/54.50％据置。
 
 **4B関連作業の開始前：** 全体現在地を全文読んだ後、[観測学習の目的・用途・前提](observation_learning/README.md#observation-learning-intent-and-assumptions)を毎回読み、最新weeklyの決定/実結果と今回の作業を結び付ける。学習・教材作成・評価・CMEE接続・環境移行で共通。ローカル＝Macと決め付けず、学習の成功と観測品質の成立を分ける。
 
@@ -148,7 +148,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 | 作業領域 | 次に解消すべき具体的未完了 |
 |---|---|
-| 学習済みAI・CMEE接続 | 承認済み4題材/6教材の限定CPU実装を完了。既存native9は不変、新native6は全件意味/本文/実問いまたはEND、SQL中断/同snapshot再開/非生成再読、context8192内を確認。実4B追加学習・生成0。2回答targetは旧2560生成上限超過のため次のGPU条件で配分を具体化。一般言語/未知評価/本人端末/正式受入れは未成立。原本は学習directoryとweekly§56 |
+| 学習済みAI・CMEE接続 | 旧quote9＋新native6の15教師を現APIでCPU確認。最長学習7935、旧9生成枠2560/新6は3712で最大8086/8192。次は15更新・別保存/reload・前6/後15生成の新一回案（45分/$0.195、保持等別）への判断後、runner実装とGPU一回実行。実モデル処理0、未知評価/実service/端末/正式受入れは未成立。原本は学習directoryとweekly§57 |
 | 10/24までの費用・4B選定履歴（当時の構成） | Flex24GBの旧月78,980生成・未測定の速度/起動仮定による運用費95,094円・赤字67,833円の試算は当時の構成の記録で、最新構成の原価ではない。[全仮定・再計算](observation_learning/model_selection/2026-10-24-production-economics/README.md)。旧4B実診断では24GBでLoRA保存・reload・16生成・回収を確認したが、FITは前後0/2。CPU指示修復API1dabc4fは54対象/pack11・合成2/2で、修正版は後続10/25にA4500 20GBで完走・回収済み、最新結果は§24。旧学習peak allocated14.954GiBを本番推論の必要VRAMへ流用しない。4bit/M4を第一候補とした§23は当時の華恋案で、現在の移行先はWindows／Mac未選定。公開API単価を独自育成版の原価へ流用しない。 |
 | Emlis | 一般入力と回答後の意味・自然な本文・有料差、本人実機の保存再読まで。u353〜355のコードと配置差を保持 |
 | Analysis | 最新内容修正版の配置差、通常本文生成・同一保存再読・monthly履歴/比較の本人確認、複数ANSWER採用、一般理解、有料差、IF／Savedの未実装。6501時点の不足案内表示は本人確認済みとして保持 |

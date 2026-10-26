@@ -2740,3 +2740,19 @@ API4002bの原本22fileをblob一致で取得し、既存4owner内のsource-deri
 
 
 API反映：[6b043880](https://github.com/MassyuRed/mashos-api/commit/6b043880504912481a6b10d93c9128ec4995b70b)（4製品owner＋test/fixture＋既存handoff、7file）。Cocolonの本revisionで関連20fileを同単位同期。両Draftを維持し、merge/deploy0。
+
+
+<a id="20261026-native15-cpu-and-gpu-proposal"></a>
+## 57. 10/26 — Jupyter直接で15教材CPU確認、長い回答の生成配分と新GPU一回案を具体化
+
+開始/再開後ともPR30 74ca014a/API PR3 6b043880を確認。前提00全文・作業規則・恒久incident/Karen-Diary・全体01/01A/B/Cの導線・CMEE map・学習目的・最新§56と実教材/helper/APIを参照。root単一writer/read-only1agent、正式Pro/Ultra/human受入れではない。
+
+旧quote9＋新native6を原行/出所/messages/targetごと不変で連結し、Jupyter上の現API6blobをGit blob照合、全15の実messages/quote受領/意味/本文/問いを確認した。CPU15.142913525924087秒、最長学習7935/EOSあり・prompt教師化/切捨て0。旧9出力2560、新6は3712で最大prompt＋出力枠8086/8192。実model読込/forward/学習/生成/SQL0。before/AFTERのpriorは凍結教師由来、15行は6言語familyで未知15例ではない。前の394/SQL6を今回へ重複計上しない。
+
+新案は旧45779から新6before→15行各一回/15更新→別adapter保存/非学習reload→全15after、最大21生成・全体45分/$0.195処理按分（保持/回収等別）。追加callなしで採用新6の同snapshot cold file保存再読まで。実service/SQL0で動的一往復成功にしない。旧9quote統一モデルbaselineは未測定。元helperを維持し、lossをassistant全文/EOSのみへ固定、LR/mask/epoch探索なし。最長7935のA4500学習VRAM未実証、OOM/期限/非有限/identity不一致/例外で停止・自動fallback0。失敗原本と途中/保存重みを回収し、次候補へ進まない。
+
+**GPU runner実装/実行は未承認・未実行**。前回CPU実装承認/閉鎖planを再使用せず、本案への判断後の同一単位で実装・一回実行する。全条件・実15本文・token表・filehash・失敗履歴は[既存学習owner](../observation_learning/training/2026-10-26-unconnected-native/README.md#native15-gpu-proposal)と[native15実原本/案](../observation_learning/training/2026-10-26-unconnected-native/native15_preparation/gpu15.proposed.json)。新観測会は今回不要、自然さ/未知/他core教師/端末は残件。
+
+最初の転送は自動review拒否後、公開sourceのみ/秘密なし/同Podの根拠確認で同操作が受理された。filechooser一回timeout。CPU v1一回目exit1のtracebackは誤重複起動による同log上書きで未保全、二回目はFileExistsError。v2はEOS教師範囲検査とmaterial受領IDを補正し、別attempt03一回の15件を採用。旧source/helper/45779前後不変、Download待機timeoutでも到着した16,296bytesの同JSONを一回回収しSHA64a7d905…/script602033ae…/payload全bytesを照合した。重複起動の部分件数を成果へ加算しない。
+
+限定TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％据置。GPU管理console/一覧/管理API/lifecycle/依存追加/Render/Supabase/本人DB/通常app/merge/deploy0、GPU保持指示と保持料金は継続する。全体00/観測入口を現在地へ置換、01Aへ全追加pathを同期。
