@@ -1,6 +1,6 @@
 # 10/26 — 未接続の既存6教材とCMEE受理範囲／一括接続案
 
-状態：**承認済み接続実装394成功を保持。旧quote9＋新native6の15教材CPU確認を完了し、新GPU一回の実装・実行案を具体化。新GPU処理0・未承認。** 最新案と実測は直下。旧scope結果・接続timeout・承認・実装結果は履歴として保持。
+状態：**承認済み接続実装394成功を保持。旧quote9＋新native6の15教材CPU確認を完了し、新GPU一回の実装・実行案を具体化。新案へのMash承認受領、runner実装/CPU起動確認済み、GPU実行前。** 最新案と実測は直下。旧scope結果・接続timeout・承認・実装結果は履歴として保持。
 
 
 <a id="native15-gpu-proposal"></a>
@@ -255,3 +255,12 @@ root華恋／Codex Work／GPT-6が単一実行・writer。別文脈2agentはread
 
 
 API反映：[6b043880](https://github.com/MassyuRed/mashos-api/commit/6b043880504912481a6b10d93c9128ec4995b70b)（4製品owner＋test/fixture＋既存handoff、7file）。Cocolonの本revisionで関連20fileを同単位同期。両Draftを維持し、merge/deploy0。
+
+
+### 15教材一回の承認・実行前checkpoint（2026-10-26 JST）
+
+Mashは本案5ba8c370の「15更新→保存/再読込→15件確認、前比較込み最大21生成、最大45分/$0.195処理按分・保持等別」に「進めていいよ。」と明示承認。gpu15.proposed.jsonは当時の未承認原本として不変保持、gpu15.plan.jsonのstatus/authorization/approval_basisと実装identityだけを承認状態に固定した。再承認は不要。
+
+既存immutable helper2f659078/joint archive c5dd1679を変更せず、run_native15.pyを実装。全15のtoken/EOS/prompt除外/入力・個別cap/API6blob/旧45779/依存pinをJupyterの既定CPUモードで再確認しCPU_RUNNER_READY_MODEL_NOT_LOADED。GPU経路は未起動でmodel読込/forward/更新/生成0。独立read-onlyレビューでscope/損失/再読/期限を確認、正式Pro/Ultra/human受入れではない。
+
+PACK=/workspace/cocolon_native15_pack_20261026、OUTPUT=/workspace/cocolon_native15_run_20261026。rootのみが--executeを一回起動し、既存outputがあれば実行前拒否する。2700秒内に前6/15更新/保存reload/後15、1call180秒、OOM/例外/非有限/identity/期限は全体終了。actual finish_reasonをCMEEへ保ち、raw補修/欠けたcallの再生成なし。生成後に固定source/priorでCMEE・coldfile再読、全本文確認、重み/原本回収・GitHub読み戻しまで同単位で完了する。今回管理画面/API/lifecycle・Render/Supabase/本人DB・依存追加0。

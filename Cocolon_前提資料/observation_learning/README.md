@@ -2,7 +2,7 @@
 
 **GPUと旧重みの確認境界：** Jupyterへの直接接続を復旧。旧adapter_modelのSHA256 `45779ad97111dd2d91c1f7f1a4b0ca697ef0586c5190cd56b1b7675fe540dab6`、旧API4owner・既存native9の前後不変を確認。今回GPU処理0、管理console/一覧/API/Stop/再起動/削除/新Pod/charge0、稼働保持指示を継続。read-only nvidia-smiの最終記録は前回A4500/20,470MiB/使用1MiBで、今回は新GPU健康確認の実績へ加算しない。保持料金は継続する。
 
-**現在の直接作業（15教材CPU確認済み・新GPU一回案は未承認）：** 旧quote9＋承認済み新native6の元行を変更せず一束にし、現API6b043880の6blobをJupyter実体へ照合。15件すべてで元messages・EOS教師範囲・意味採用・本文・問い/ENDを確認（15.142914秒、モデル読込/forward/学習/生成/SQL0）。旧9の生成枠2560、新6は3712なら最長学習7935/8192、最大prompt＋生成枠8086/8192で切捨て不要。次の具体案は旧45779から15行各1更新→別adapter保存/非学習reload→15件FIT、前比較新6を含め最大21生成、全体45分/処理按分$0.195（保持等別）。GPU runner実装と実行はこの新案へのMash判断後。凍結教師適合であり未知評価/実service一往復/本番/商品受入れではない。[実CPU原本・具体案](training/2026-10-26-unconnected-native/README.md#native15-gpu-proposal)、weekly§57。先の394成功/SQL6は別の接続実装証拠として保持。新観測会は今回不要、正式0/3/54.50％据置。
+**現在の直接作業（15教材の新GPU一回をMash承認・実行前）：** 旧quote9＋承認済み新native6の元行を変更せず一束にし、現API6b043880の6blobをJupyter実体へ照合。15件すべてで元messages・EOS教師範囲・意味採用・本文・問い/ENDを確認（15.142914秒、モデル読込/forward/学習/生成/SQL0）。旧9の生成枠2560、新6は3712なら最長学習7935/8192、最大prompt＋生成枠8086/8192で切捨て不要。次の具体案は旧45779から15行各1更新→別adapter保存/非学習reload→15件FIT、前比較新6を含め最大21生成、全体45分/処理按分$0.195（保持等別）。Mashは5ba8c370の本案へ「進めていいよ。」と承認。rootが同scopeのrunnerを実装し、JupyterのCPU起動確認を通過。新GPU一回を実行前として保持する。凍結教師適合であり未知評価/実service一往復/本番/商品受入れではない。[実CPU原本・具体案](training/2026-10-26-unconnected-native/README.md#native15-gpu-proposal)、weekly§57。先の394成功/SQL6は別の接続実装証拠として保持。新観測会は今回不要、正式0/3/54.50％据置。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 

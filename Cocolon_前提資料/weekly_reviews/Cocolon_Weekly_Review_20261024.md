@@ -2756,3 +2756,12 @@ API反映：[6b043880](https://github.com/MassyuRed/mashos-api/commit/6b04388050
 最初の転送は自動review拒否後、公開sourceのみ/秘密なし/同Podの根拠確認で同操作が受理された。filechooser一回timeout。CPU v1一回目exit1のtracebackは誤重複起動による同log上書きで未保全、二回目はFileExistsError。v2はEOS教師範囲検査とmaterial受領IDを補正し、別attempt03一回の15件を採用。旧source/helper/45779前後不変、Download待機timeoutでも到着した16,296bytesの同JSONを一回回収しSHA64a7d905…/script602033ae…/payload全bytesを照合した。重複起動の部分件数を成果へ加算しない。
 
 限定TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％据置。GPU管理console/一覧/管理API/lifecycle/依存追加/Render/Supabase/本人DB/通常app/merge/deploy0、GPU保持指示と保持料金は継続する。全体00/観測入口を現在地へ置換、01Aへ全追加pathを同期。
+
+
+### §57 15教材一回の承認・実行前checkpoint（2026-10-26 JST）
+
+Mashは本案5ba8c370の「15更新→保存/再読込→15件確認、前比較込み最大21生成、最大45分/$0.195処理按分・保持等別」に「進めていいよ。」と明示承認。gpu15.proposed.jsonは当時の未承認原本として不変保持、gpu15.plan.jsonのstatus/authorization/approval_basisと実装identityだけを承認状態に固定した。再承認は不要。
+
+既存immutable helper2f659078/joint archive c5dd1679を変更せず、run_native15.pyを実装。全15のtoken/EOS/prompt除外/入力・個別cap/API6blob/旧45779/依存pinをJupyterの既定CPUモードで再確認しCPU_RUNNER_READY_MODEL_NOT_LOADED。GPU経路は未起動でmodel読込/forward/更新/生成0。独立read-onlyレビューでscope/損失/再読/期限を確認、正式Pro/Ultra/human受入れではない。
+
+PACK=/workspace/cocolon_native15_pack_20261026、OUTPUT=/workspace/cocolon_native15_run_20261026。rootのみが--executeを一回起動し、既存outputがあれば実行前拒否する。2700秒内に前6/15更新/保存reload/後15、1call180秒、OOM/例外/非有限/identity/期限は全体終了。actual finish_reasonをCMEEへ保ち、raw補修/欠けたcallの再生成なし。生成後に固定source/priorでCMEE・coldfile再読、全本文確認、重み/原本回収・GitHub読み戻しまで同単位で完了する。今回管理画面/API/lifecycle・Render/Supabase/本人DB・依存追加0。

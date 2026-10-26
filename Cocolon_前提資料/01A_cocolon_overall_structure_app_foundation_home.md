@@ -4997,3 +4997,8 @@ STRUCTURE_MAP_DELTA_NONE。製品owner/型/契約/公開API/DB/RNの変更0。�
 | `observation_learning/training/2026-10-26-unconnected-native/native15_preparation/gpu15.proposed.json` | 新GPU実装/実行前の未承認案 |
 
 既存training README/全体00/観測入口/weekly§57を同期。実CPU15.142914秒/teacher15はmodel15成功ではない。新4B処理0、商品0/正式0/3/54.50％。01/01B/01C/current mapsは製品構造差分がないため更新不要。
+
+
+### 2026-10-26 native15承認済み実行コード所在
+
+既存native15_preparation/配下へrun_native15.py（単一実行owner、2700秒/最大21生成の一回runner）とgpu15.plan.json（5ba8c370本案へのMash承認状態）を追加。gpu15.proposed.jsonと既存payloadは不変。製品接続/型/意味/reader/API/DB/RN差分0、STRUCTURE_MAP_DELTA_NONE。CPU起動確認済み、GPU実行前。
