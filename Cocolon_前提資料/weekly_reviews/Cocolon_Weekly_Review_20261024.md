@@ -2743,7 +2743,7 @@ API反映：[6b043880](https://github.com/MassyuRed/mashos-api/commit/6b04388050
 
 
 <a id="20261026-native15-cpu-and-gpu-proposal"></a>
-## 57. 10/26 — Jupyter直接で15教材CPU確認、長い回答の生成配分と新GPU一回案を具体化
+## 57. 10/26 — 15教材CPU確認と承認済みGPU一回実行、事前比較で停止し学習未達
 
 開始/再開後ともPR30 74ca014a/API PR3 6b043880を確認。前提00全文・作業規則・恒久incident/Karen-Diary・全体01/01A/B/Cの導線・CMEE map・学習目的・最新§56と実教材/helper/APIを参照。root単一writer/read-only1agent、正式Pro/Ultra/human受入れではない。
 
@@ -2751,17 +2751,28 @@ API反映：[6b043880](https://github.com/MassyuRed/mashos-api/commit/6b04388050
 
 新案は旧45779から新6before→15行各一回/15更新→別adapter保存/非学習reload→全15after、最大21生成・全体45分/$0.195処理按分（保持/回収等別）。追加callなしで採用新6の同snapshot cold file保存再読まで。実service/SQL0で動的一往復成功にしない。旧9quote統一モデルbaselineは未測定。元helperを維持し、lossをassistant全文/EOSのみへ固定、LR/mask/epoch探索なし。最長7935のA4500学習VRAM未実証、OOM/期限/非有限/identity不一致/例外で停止・自動fallback0。失敗原本と途中/保存重みを回収し、次候補へ進まない。
 
-**GPU runner実装/実行は未承認・未実行**。前回CPU実装承認/閉鎖planを再使用せず、本案への判断後の同一単位で実装・一回実行する。全条件・実15本文・token表・filehash・失敗履歴は[既存学習owner](../observation_learning/training/2026-10-26-unconnected-native/README.md#native15-gpu-proposal)と[native15実原本/案](../observation_learning/training/2026-10-26-unconnected-native/native15_preparation/gpu15.proposed.json)。新観測会は今回不要、自然さ/未知/他core教師/端末は残件。
+**起案時はGPU runner実装/実行が未承認・未実行だった（承認後の最終実結果は本節末尾）**。前回CPU実装承認/閉鎖planを再使用せず、本案への判断後の同一単位で実装・一回実行する。全条件・実15本文・token表・filehash・失敗履歴は[既存学習owner](../observation_learning/training/2026-10-26-unconnected-native/README.md#native15-gpu-proposal)と[native15実原本/案](../observation_learning/training/2026-10-26-unconnected-native/native15_preparation/gpu15.proposed.json)。新観測会は今回不要、自然さ/未知/他core教師/端末は残件。
 
 最初の転送は自動review拒否後、公開sourceのみ/秘密なし/同Podの根拠確認で同操作が受理された。filechooser一回timeout。CPU v1一回目exit1のtracebackは誤重複起動による同log上書きで未保全、二回目はFileExistsError。v2はEOS教師範囲検査とmaterial受領IDを補正し、別attempt03一回の15件を採用。旧source/helper/45779前後不変、Download待機timeoutでも到着した16,296bytesの同JSONを一回回収しSHA64a7d905…/script602033ae…/payload全bytesを照合した。重複起動の部分件数を成果へ加算しない。
 
 限定TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％据置。GPU管理console/一覧/管理API/lifecycle/依存追加/Render/Supabase/本人DB/通常app/merge/deploy0、GPU保持指示と保持料金は継続する。全体00/観測入口を現在地へ置換、01Aへ全追加pathを同期。
 
 
-### §57 15教材一回の承認・実行前checkpoint（2026-10-26 JST）
+### §57 15教材一回の承認・実行前checkpoint（履歴、2026-10-26 JST）
 
 Mashは本案5ba8c370の「15更新→保存/再読込→15件確認、前比較込み最大21生成、最大45分/$0.195処理按分・保持等別」に「進めていいよ。」と明示承認。gpu15.proposed.jsonは当時の未承認原本として不変保持、gpu15.plan.jsonのstatus/authorization/approval_basisと実装identityだけを承認状態に固定した。再承認は不要。
 
 既存immutable helper2f659078/joint archive c5dd1679を変更せず、run_native15.pyを実装。全15のtoken/EOS/prompt除外/入力・個別cap/API6blob/旧45779/依存pinをJupyterの既定CPUモードで再確認しCPU_RUNNER_READY_MODEL_NOT_LOADED。GPU経路は未起動でmodel読込/forward/更新/生成0。独立read-onlyレビューでscope/損失/再読/期限を確認、正式Pro/Ultra/human受入れではない。
 
 PACK=/workspace/cocolon_native15_pack_20261026、OUTPUT=/workspace/cocolon_native15_run_20261026。rootのみが--executeを一回起動し、既存outputがあれば実行前拒否する。2700秒内に前6/15更新/保存reload/後15、1call180秒、OOM/例外/非有限/identity/期限は全体終了。actual finish_reasonをCMEEへ保ち、raw補修/欠けたcallの再生成なし。生成後に固定source/priorでCMEE・coldfile再読、全本文確認、重み/原本回収・GitHub読み戻しまで同単位で完了する。今回管理画面/API/lifecycle・Render/Supabase/本人DB・依存追加0。
+
+
+### §57 最終実結果 — 事前比較2件で時間切れ終了、学習0/15
+
+実行source179acbd2/API6b043880を固定し、直接Jupyterの同Podで17:44:58 JSTに--execute一回だけ起動（PID693855）。最終STOPPED_NO_RETRY/stage before。BOOK初回1261token/63.865898秒/EOS/JSON完了だが、存在しない「その場は済んだけど」等の引用/shape/本文主語不備がある。BOOK回答後は3625token/180.020644秒でtimeout_triggered=true、実finish_reason=length/EOSなし/JSON未完了・update_refs反復。規定の1call180秒条件で全体終了し、45分期限/3712token枠/OOMの到達ではない。
+
+処理252.04623138252646秒/$0.018203338933182465按分（$0.26/h、準備/診断/回収/保持等別）。読込1/生成2/更新0/新重み保存0/非学習reload0/after0。既存source/helper/payload/API6blobと旧45779全3file不変。CPU9.210402秒で保存rawの実finish_reason/metadataを現quote受領→CMEEへ通し、INVALID_EVIDENCE/TOKEN_LIMIT、両REJECT/semantic_receipt_not_validated、意味/本文0/2。追加model/SQL0。採用snapshot0のためcold-file復元/完成結果非生成読出し0件・該当なし。未実行before4件/after全15は欠測のまま、教師補完/動的prior化0。
+
+原本のGPU archive全10member hash/bytesと、診断を含む最終archive全6member/内包archive全bytes/consumer全bytesをPod外照合・永続保全。GPU archive70698bytes/SHA33a5750890…、最終76922bytes/SHAe1418d4f48…。training.jsonl/新adapter/partial_adapter/reloaded_tensors/after rawは未作成。実run/raw2/log/launch/consumer/diagnosis/manifest/recoveryは[学習ownerの実結果](../observation_learning/training/2026-10-26-unconnected-native/README.md#native15-gpu-result)とそのnative15_result/へ保存。全原本読解・read-only2agent確認、GitHub反映後の全文読み戻しで閉じる。正式Pro/Ultra/human受入れではない。
+
+今回primary=BLOCKER_NARROWED（商品品質credit 0）。目的の15更新→保存/reload→15件確認は未達。学習前モデルの比較生成の時間切れで学習まで打ち切る順序/停止条件が直接blockerであり、華恋の設計結果をMashの承認や教材不足の責任へ転嫁しない。新観測会はこの原因には不要。次はその最小見直しを具体化し、新費用/追加GPU一回を無断開始しない。最長7935の実学習VRAM/未知評価/実service/端末は未実証。新依存/製品変更/自動再試行0。STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=false。両Draft/open/unmerged、merge/deploy/Render/Supabase/本人DB0、GPU lifecycle操作0。実行process終了を確認したがPodは停止せず、保持指示/保持料金は継続する。

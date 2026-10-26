@@ -1,10 +1,43 @@
 # 10/26 — 未接続の既存6教材とCMEE受理範囲／一括接続案
 
-状態：**承認済み接続実装394成功を保持。旧quote9＋新native6の15教材CPU確認を完了し、新GPU一回の実装・実行案を具体化。新案へのMash承認受領、runner実装/CPU起動確認済み、GPU実行前。** 最新案と実測は直下。旧scope結果・接続timeout・承認・実装結果は履歴として保持。
+状態：**承認済みnative15を直接Jupyterで一回実行したが、BOOK回答後の事前比較が180秒に達して全体終了。生成2・学習0/15・新重み保存/再読込0・after0/15、実CMEE意味/本文0/2。追加実行なし。** 旧接続実装394成功/SQL6・CPU教師15成功は別の先行証拠として保持。
 
+
+<a id="native15-gpu-result"></a>
+## 2026-10-26 — 承認済みnative15の一回実行：事前比較で停止、学習未達
+
+Mashの「進めていいよ。」により、承認対象5ba8c370の15更新→別重み保存/再読込→15件確認（事前6を含め最大21生成、最大2700秒/$0.195処理按分、保持等別）を実装した。実行sourceはCocolon `179acbd2b3c3d13de3a3adc1fa8bbc1d9799d384`、APIは `6b043880504912481a6b10d93c9128ec4995b70b`。同じ既存Jupyter/Pod上で2026-10-26 17:44:58 JSTに一回だけ起動し、PID693855の終了まで確認した。再起動/二回目の--execute/追加生成/更新は0。
+
+| 項目 | 実結果 |
+|---|---|
+| 最終状態 | STOPPED_NO_RETRY、stage=before、reason=per_call_or_global_deadline_no_retry |
+| 実モデル処理 | base読込1、事前比較2/6、optimizer更新0/15、保存/非学習reload0、after0/15 |
+| 時間・按分 | 252.04623138252646秒、$0.018203338933182465（$0.26/h）。準備/CPU診断/回収/継続保持/保存/通信/税等別 |
+| BOOK初回 | 2159入力/1261出力token、63.865898秒、EOS/JSON完了、実receipt=INVALID_EVIDENCE |
+| BOOK回答後 | 4212入力/3625出力token、180.020644秒、timeout_triggered=true、EOSなし/JSON未完了、実finish_reason=length、receipt=TOKEN_LIMIT |
+| CMEEの実採否 | 保存raw2件/同一messages/実metadataを現APIへCPU投入し、意味0/2・本文0/2。両REJECT/semantic_receipt_not_validated |
+| 未実行 | SHOP初回/回答後・REPOT・KNITのbefore4件、全after15件、学習・新重み・reload・cold-file再開 |
+
+1件目の意味不採用自体は計画どおり次へ進み、2件目の180秒到達で全体停止した。45分全体期限や3712token上限への到達ではなく、1callの時間上限が停止の直接原因。OOM/非有限/重み破損は今回の停止理由ではない。実finish_reasonをtimeoutやstopへ補修せず、rawのlengthとrunner側timeoutフラグを併記した。GPU logには既存環境のcausal_conv1d/flash-linear-attention未導入によるreference実装fallback警告があるが、それだけを生成反復の原因とは断定せず、依存変更0。
+
+初回は原文にない「その場は済んだけど」をevidence_quotes/本文に足し、memo_actionへ存在しない結合引用を作った。claim_id欠落、時点/参照shapeの不整合もあり、Reception案は「気がかりのことはまだ私の方で持ち続けています」と本人からAI側へ主語を移していた。回答後はsurface bindings内のupdate_refsを反復し、未閉鎖JSONのまま止まった。華恋が全rawを読解したが、これらは未採用のモデル提案であり本人向け成立本文ではない。教師で穴埋め/修復/後処理成功化しない。
+
+CPU診断は9.210401946678758秒、追加model call/学習/SQL0。before回答後のpriorは凍結教師由来を維持し、実初回の失敗rawから作り直していない。意味採用snapshotが0のため、別processのsnapshot復元・完成結果NoGeneration読出しも0件/該当なし。実service/SQL一往復・動的thread・保存再表示の成功は今回0。旧quote9のbeforeも未測定で、旧numeric9成功との回帰比較はしない。
+
+### 原本・保存と未作成物
+
+[native15_result/run.json](native15_result/run.json) が実run、[diagnosis.json](native15_result/diagnosis.json) が実CMEE受理/採否、[recovery.json](native15_result/recovery.json) が回収照合。raw2件・実行log・launch記録・CPU consumer/log・元GPU archive manifestを同directoryへ保存した。元GPU archive70,698bytes/SHA256 `33a5750890d2aed8bc7246abc5a8fd4af479da37321539c9260f639a0397d20e` の全10memberをhash/bytes照合。診断を含む最終archive76,922bytes/SHA256 `e1418d4f481800fe0581942481213afa30479c4ecdbf0bf7184ccd5e97e4b451` の全6member、内包GPU archiveとの全byte、実consumer sourceとの全byteを確認してPod外へ回収・永続保全した。
+
+学習前に停止したため `training.jsonl`、`adapter/`、`partial_adapter/`、`reloaded_tensors.json`、`after_*.jsonl` は作られていない。新重みを回収したとは報告しない。旧45779の全3file・固定runner/helper/payload/API6blobの前後identityは維持。既存15教材/教師/評価入力/旧rawの変更0。
+
+### 到達点と次の直接課題
+
+今回のprimary outcomeはBLOCKER_NARROWED（商品品質credit 0）。承認済み一回の実装・起動・失敗回収/採否記録は完了したが、目的の15更新→保存/reload→15件確認は未達。未学習の事前比較の180秒到達を全体停止へ結びつけた実行順/停止条件が学習開始を阻んだ。これは華恋が設計した停止条件の結果で、Mashの承認や教材不足へ責任を移さない。既存15教材は揃っているため、この原因の解消に新観測会は不要。次は事前比較の停止扱い/学習順の最小見直しを具体化する。今runの条件を書き換えて再開、追加GPU一回、LR/mask/epoch/依存探索は開始しない。最長7935の実学習VRAMも依然未実証。
+
+root華恋/Codex Work/GPT-6が単一writer/実行者、read-only2agentがscopeと実raw/APIを補助確認。正式Pro/Ultra/human受入れではない。STRUCTURE_MAP_DELTA_NONE（製品責務/型/採用条件/保存/API/DB/RN不変）。商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=false据置。全体00・観測入口・weekly§57・全file地図01Aへ同期し、01/01B/01C/CMEE current mapsは製品構造差分0のため更新不要。GPU管理console/一覧/管理API/Stop/再起動/削除/新Pod/charge・Render/Supabase/本人DB/通常app/merge/deploy0。Pod保持指示と継続保持料金は維持する。
 
 <a id="native15-gpu-proposal"></a>
-## 2026-10-26 — 15教材の実CPU確認と、新しい一回GPU案（実装・実行前）
+## 2026-10-26 — 15教材の実CPU確認と、一回GPU案（起案時の履歴）
 
 開始Cocolon PR30 `74ca014a1062f22014b5d174443f0cc084c54a62`／API PR3 `6b043880504912481a6b10d93c9128ec4995b70b`。引継ぎ、全機能00全文、作業姿勢/規則18・恒久incident/Karen-Diary、全体01のflowと全file地図01A/B/Cの役割・関連差分、CMEE current map、観測学習の目的/用途、最新weekly§49〜56、実教材・実helper・6製品/test blobを確認した。System Context索引timeoutは継承しfresh原本を直接参照、新index0。全blob意味監査や全suiteとはしない。root華恋/Codex Work/GPT-6が単一writer、別文脈1agentはread-only reviewで、正式Pro/Ultra/human受入れではない。
 
@@ -27,7 +60,7 @@
 
 ### 次の一回だけの具体案
 
-機械読取条件は [gpu15.proposed.json](native15_preparation/gpu15.proposed.json)。**新案のGPU runner実装・実行は未承認・未実行**。前のCPU実装承認や閉鎖bridge13の承認を再使用しない。
+機械読取条件は [gpu15.proposed.json](native15_preparation/gpu15.proposed.json)。**起案時はGPU runner実装・実行が未承認・未実行だった（後に承認受領・一回実行終了、上記実結果を優先）**。前のCPU実装承認や閉鎖bridge13の承認を再使用しない。
 
 1. 既存A4500上、旧45779をread-only起点とする。元4B、LoRA r8/alpha16/32tensor、既存BF16/F32と既存helper/依存を維持する。最初に新6の同一入力を各一回生成しbeforeを記録する。
 2. 凍結15行を記載順に各一回＝15optimizer更新、batch1、AdamW/LR5e-5/weight_decay0/clip1、seed20261024。assistant全文＋EOSのみを教師化しpromptは除外。別mask/generic課題/LR/epoch探索を追加しない。baseline評価後はtrain/use_cache=False/checkpointingを復帰してseedを固定する。

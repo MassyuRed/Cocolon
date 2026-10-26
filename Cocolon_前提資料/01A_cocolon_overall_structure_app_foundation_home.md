@@ -5002,3 +5002,23 @@ STRUCTURE_MAP_DELTA_NONE。製品owner/型/契約/公開API/DB/RNの変更0。�
 ### 2026-10-26 native15承認済み実行コード所在
 
 既存native15_preparation/配下へrun_native15.py（単一実行owner、2700秒/最大21生成の一回runner）とgpu15.plan.json（5ba8c370本案へのMash承認状態）を追加。gpu15.proposed.jsonと既存payloadは不変。製品接続/型/意味/reader/API/DB/RN差分0、STRUCTURE_MAP_DELTA_NONE。CPU起動確認済み、GPU実行前。
+
+
+### 2026-10-26 native15一回実行の失敗原本・全追加file地図
+
+承認済み179acbd2を直接Jupyterで一回実行したが、beforeのBOOK回答後180秒で全体停止。生成2/更新0/新重み0/after0、意味/本文0。実行前checkpointは履歴。製品責務/型/配置/採用条件/API/DB/RN不変でSTRUCTURE_MAP_DELTA_NONE。以下は既存training ownerの実行結果だけで、製品owner追加ではない。
+
+| 追加path（`observation_learning/training/2026-10-26-unconnected-native/native15_result/` 配下） | 役割 |
+|---|---|
+| `run.json` | source179acbd2・2700秒/180秒条件・実2call/0更新・停止理由/旧重み不変/処理額 |
+| `before_FT-BOOK-INITIAL.jsonl` | 実生成raw/1261token/EOS/metadata。引用不正による不採用原本 |
+| `before_FT-BOOK-AFTER-ANSWER.jsonl` | 実生成raw/3625token/length/180秒打切り/非EOS/反復未完成JSON |
+| `gpu_file_manifest.json` | 元GPU archiveの全10member SHA/bytes。参照payloadは隣接native15_preparation/原本と同一 |
+| `launch.json` | 一回起動PID693855・source/開始時刻・retry=false |
+| `gpu.log` | 実load/既存reference kernel fallback警告/終了summary。依存変更0 |
+| `consume_native15.py` | 保存rawの実finish_reason・同source/prior/入力を使う一回限りCPU診断。追加model/SQL0 |
+| `diagnosis.json` | 実receipt INVALID_EVIDENCE/TOKEN_LIMIT、意味/本文0/2、before欠測4/after欠測15 |
+| `diagnosis.log` | CPU9.210402秒・実採否出力 |
+| `recovery.json` | 元archive全10member/最終全6member・内包bytes/consumer照合・永続保全と未作成物 |
+
+training.jsonl/adapter/partial_adapter/reloaded_tensors/after raw/cold-file結果は今回未作成で、fileを発明しない。実結果と次の直接課題は既存README#native15-gpu-result、全体00/観測入口/weekly§57へ同期。01/01B/01C/CMEE current mapsは製品構造差分がないため更新不要。商品0/正式0/3/54.50％、追加GPU run/merge/deploy0、保持指示継続。
