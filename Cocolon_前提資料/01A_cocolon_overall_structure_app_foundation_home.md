@@ -5032,3 +5032,7 @@ training.jsonl/adapter/partial_adapter/reloaded_tensors/after raw/cold-file結�
 - 関連owner：同README#native15-afteronly-prepared、全体00/観測入口、weekly§58。Runpod比較後A5000 24GB/表示$0.28hを選択したがDeployを自動承認審査が拒否、本人引継ぎ待ち。新Pod/新重み/after rawは未作成。STRUCTURE_MAP_DELTA_NONE、製品code/API/DB/RN/Render/Supabase/本人DB/merge/deploy0、商品0/正式0/3/54.50％据置。
 
 引継ぎ時の在庫差分：その後の引継ぎ準備でA4500 20GBの空きが戻ったため、同じ公式image/50GB container/追加volumeなし・表示$0.26/hへ選択を戻した。引継ぎ画面名はcocolon-4b-native15-a4500-20261027。レンタルは確定しておらず、在庫/料金は本人確定時に再確認する。
+
+### 2026-10-27 — A5000後継一回の実行中checkpoint
+
+実行source9a6c56ed、GPU名/Pod/費用を本人レンタルA5000へ束縛。実tokenizer15件/最大7935の確認後、PID3851でbefore0→15更新→保存reload→after15の一回を起動。checkpointは更新3/15・生成0、最終未確認。後段用 `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/native15_preparation/consume_native15_afteronly.py` と `consumer_cpu_binding_validation.json` を追加。local35確認は原input/prior/metadata束縛だけで実採否0。全実状態・二重起動しない再開先は同README#native15-afteronly-a5000-running/weekly§59。STRUCTURE_MAP_DELTA_NONE、製品構造/通常app/DB/Render/Supabase/merge/deploy不変。
