@@ -1,0 +1,18 @@
+{
+  "status": "RUNNING_DO_NOT_RELAUNCH",
+  "source_commit": "e107b09535bfcf656cb97100a7434c66ca2c3740",
+  "pid": 21603,
+  "started_unix": 1793056749.65717,
+  "observation_origin": "Jupyter terminal UI initial progress summary; not the raw run.json bytes",
+  "observed_stage": "training",
+  "observed_optimizer_steps": 2,
+  "observed_model_calls_completed": 0,
+  "target_updates": 30,
+  "max_model_calls": 15,
+  "max_seconds": 2700,
+  "max_process_usd": 0.21,
+  "output_directory": "/workspace/cocolon_native15_interleaved30_run_20261027",
+  "retry": false,
+  "automatic_progression": false,
+  "product_accepted": false
+}

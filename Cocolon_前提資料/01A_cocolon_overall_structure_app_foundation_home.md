@@ -5068,3 +5068,8 @@ runner/plan/実tokenizerCPU候補とconsumer sourceは同native15_preparationの
 | independent_review.json | 初回source指摘と最終修正確認を区別したread-only2agent補助。正式Pro/Ultra/human受入れでない |
 
 current00/観測入口/同training README#native15-interleaved30-proposal/weekly§60へ同期。source/code準備を商品進捗へ加算しない。前回afteronly_resultのraw/採否/重みは不変、同outputを再起動しない。
+
+
+### 2026-10-27 — interleaved30一回の実行中原本
+
+既存学習owner内 `interleaved30_result/README.md` と `runtime_checkpoint.json` を追加。source e107b095/PID21603、最初の読取は更新2/30・生成0で最終未確認、再起動禁止。plan承認束縛以外のrunner/consumer/API/教師不変、STRUCTURE_MAP_DELTA_NONE。最終回収後にrun/全raw/training/diagnosis/重み照合へ置換同期する。商品0/正式0/3/54.50％。
