@@ -2822,9 +2822,9 @@ Mashの「A5000借りたけど、やれる？」を受け、本人レンタルPo
 
 
 <a id="20261027-native15-interleaved30-proposal"></a>
-## 60. 10/27 — 旧成功との形式差を切分け、混在30更新一回案のコード/CPU確認（新学習前）
+## 60. 10/27 — 形式差と混在30候補の準備履歴（実行完了は§61）
 
-**現在の直接作業（10/27：混在30更新/別保存reload完了、after15進行中）：** 実行source e107b095/PID21603の同一processで30更新を完了。399.591608秒/更新30/生成0の早期保存原本を回収し、全15payload+manifestのbytes/hash・実30行log/固定order・32F32有限性をPod外照合、新adapter1d218763をlibfile_5ecbab80168481919b1e4965fd7660fe version0へ保全した。後続の同processは別保存の非学習reloadを通過しafter生成へ進んでいる。全15のEOS/JSON/意味/本文/自然さ/cold-file採否は未確定。2700秒/1call180秒/15生成/$0.21按分（準備/回収/保持等別）/再試行なし、同processへ戻り--executeを再起動しない。原本はinterleaved30_result/READMEとweekly§60。商品0/正式0/3/54.50％、未知一般化/動的thread/実service/SQL成功へ数えない。GPU稼働保持。
+**現在の直接作業（10/27：混在30更新/after15完了、意味11・本文9、新候補不採用）：** Mash承認のsource e107b095/PID21603を一回完了。全15EOS/JSON完了、CMEE意味11/15・本文9/15（前回同quote15は各3/15）。旧9は意味/本文9/9、新6は意味2/6・本文0/6。採用snapshotの別process再開/完成file再読11/11・失敗0だが、うちSHOP初回/REPOTの2件は本文なしで、本文11件完成とは数えない。新1d218763は旧9の引用/参照/意味欠落を修復した一方、BOOK/SHOP回答後の役割・更新・根拠不整合、REPOT本文の主客反転、KNITへのsystem指示文露出が残り通常有効化しない。処理1412.657366秒/$0.109873按分（準備/回収/保持等別）、全74payload+manifest/32F32有限・実30log・早期最終重み一致をPod外照合し最終archive version1へ保全。同一閉鎖runの再起動/追加学習/再生成なし。次は新6の原文役割/全更新と本人向け受け取りを同時に保つ学習条件を見直す。既知教師FITで未知一般化/動的thread/実service/SQL/商品受入れではない。原本interleaved30_result/README・weekly§61、商品0/正式0/3/54.50％、GPU稼働保持。
 
 旧joint12の回収archive実train157443bytes/SHA1da50c66…と成功raw/sourcefe3f0f9a/45779を照合した。chair6はnumericで現quoteへの入力/target投影が変わり、daily3だけ全文同一。「旧chair6の維持失敗」は現quote6件不成立という範囲に限定し、同入力の忘却・純粋な学習率原因とは扱わない。旧278fdc26生成15/意味本文3/回収原本は不変。新6の教師に主客逆転/否定・不明欠落は見当たらず、今回の基本不成立に新観測会は不要。
 
@@ -2835,8 +2835,22 @@ Mashの「A5000借りたけど、やれる？」を受け、本人レンタルPo
 詳細・全固定順序・コード・CPU原本：[具体案](../observation_learning/training/2026-10-26-unconnected-native/README.md#native15-interleaved30-proposal)。前回15更新一回は閉鎖済みで新30更新の個別判断前。gpu_run_authorized=false、executeはmkdir前拒否。今回primary=BLOCKER_NARROWED（形式差交絡の確認）、商品0/正式0/3/54.50％、STRUCTURE_MAP_DELTA_NONE。GPU管理console/一覧/管理API/lifecycle/依存追加/Render/Supabase/本人DB/通常app/merge/deploy0。Jupyter直接、GPU稼働保持と保持料金は継続。
 
 
-§60 承認後の実行中checkpoint：
+§60 承認後checkpoint（完了は§61）：
 
-**現在の直接作業（10/27：混在30更新/別保存reload完了、after15進行中）：** 実行source e107b095/PID21603の同一processで30更新を完了。399.591608秒/更新30/生成0の早期保存原本を回収し、全15payload+manifestのbytes/hash・実30行log/固定order・32F32有限性をPod外照合、新adapter1d218763をlibfile_5ecbab80168481919b1e4965fd7660fe version0へ保全した。後続の同processは別保存の非学習reloadを通過しafter生成へ進んでいる。全15のEOS/JSON/意味/本文/自然さ/cold-file採否は未確定。2700秒/1call180秒/15生成/$0.21按分（準備/回収/保持等別）/再試行なし、同processへ戻り--executeを再起動しない。原本はinterleaved30_result/READMEとweekly§60。商品0/正式0/3/54.50％、未知一般化/動的thread/実service/SQL成功へ数えない。GPU稼働保持。
+**現在の直接作業（10/27：混在30更新/after15完了、意味11・本文9、新候補不採用）：** Mash承認のsource e107b095/PID21603を一回完了。全15EOS/JSON完了、CMEE意味11/15・本文9/15（前回同quote15は各3/15）。旧9は意味/本文9/9、新6は意味2/6・本文0/6。採用snapshotの別process再開/完成file再読11/11・失敗0だが、うちSHOP初回/REPOTの2件は本文なしで、本文11件完成とは数えない。新1d218763は旧9の引用/参照/意味欠落を修復した一方、BOOK/SHOP回答後の役割・更新・根拠不整合、REPOT本文の主客反転、KNITへのsystem指示文露出が残り通常有効化しない。処理1412.657366秒/$0.109873按分（準備/回収/保持等別）、全74payload+manifest/32F32有限・実30log・早期最終重み一致をPod外照合し最終archive version1へ保全。同一閉鎖runの再起動/追加学習/再生成なし。次は新6の原文役割/全更新と本人向け受け取りを同時に保つ学習条件を見直す。既知教師FITで未知一般化/動的thread/実service/SQL/商品受入れではない。原本interleaved30_result/README・weekly§61、商品0/正式0/3/54.50％、GPU稼働保持。
 
 全原本と最終状態は[同一試行owner](../observation_learning/training/2026-10-26-unconnected-native/interleaved30_result/README.md)。旧一回・凍結教材・採用readerは不変。--execute二重起動/追加学習/再生成/自動再試行なし。
+
+
+<a id="20261027-interleaved30-final-result"></a>
+## 61. 10/27 — 混在30更新/after15完了、意味11・本文9、新6本文0で新候補不採用
+
+**現在の直接作業（10/27：混在30更新/after15完了、意味11・本文9、新候補不採用）：** Mash承認のsource e107b095/PID21603を一回完了。全15EOS/JSON完了、CMEE意味11/15・本文9/15（前回同quote15は各3/15）。旧9は意味/本文9/9、新6は意味2/6・本文0/6。採用snapshotの別process再開/完成file再読11/11・失敗0だが、うちSHOP初回/REPOTの2件は本文なしで、本文11件完成とは数えない。新1d218763は旧9の引用/参照/意味欠落を修復した一方、BOOK/SHOP回答後の役割・更新・根拠不整合、REPOT本文の主客反転、KNITへのsystem指示文露出が残り通常有効化しない。処理1412.657366秒/$0.109873按分（準備/回収/保持等別）、全74payload+manifest/32F32有限・実30log・早期最終重み一致をPod外照合し最終archive version1へ保全。同一閉鎖runの再起動/追加学習/再生成なし。次は新6の原文役割/全更新と本人向け受け取りを同時に保つ学習条件を見直す。既知教師FITで未知一般化/動的thread/実service/SQL/商品受入れではない。原本interleaved30_result/README・weekly§61、商品0/正式0/3/54.50％、GPU稼働保持。
+
+承認対象084b79b1へMashが「いいよ、進めて。」と明示承認。状態/authorization/basisのみ束縛したe107b095を同A5000で一回起動し、旧45779から各15行2回/混在30更新→別保存/非学習reload→after15を1412.657366秒/処理按分$0.109873で完了。上限2700秒/180秒/15call/$0.21（準備/回収/保持等別）、timeout/OOM/再試行0。EOS/JSON15/15、旧9parsedはquote教師9/9一致、CMEEで旧9意味/本文9/9。新6は意味SHOP初回/REPOTの2/6のみ、両方本文検査で不成立、残4は意味不採用。cold11/11は本文9＋本文なし2のsnapshot/outcome一致で、本文完成11ではない。
+
+BOOK/SHOPの初回は意味/引用が局所改善、BOOK/SHOP回答後とKNITもJSONを閉じた。ただしBOOKの事実/反実的発言と更新参照の混線、SHOPの約束否定/知覚/距離、REPOTの説明する/される二重反転、KNITのsystem指示140文字露出が残る。原文にない安心の断定や喜び脱落もあり、通常候補へ有効化しない。旧9の文体の反復/硬さも軽微残件として記録。新旧比較は同quote15であり、古いnumeric9/9をbeforeに流用しない。順序と更新数を同時に変えたため因果一要素は未確定。
+
+最終archive3,920,475bytes/SHA57b39307cea805ef502c28a84d285e55c2dfbdcf45a13f97c778123fc0c992cb、全74payload+manifest/75member、32F32有限・実30log/早期最終重み一致・全raw受領hash/重み/順序をPod外照合。[新重み/全原本version1](https://chatgpt.com/library?file_id=libfile_5ecbab80168481919b1e4965fd7660fe&account_id=personal)。元4B全重み/optimizer/RNG非同梱。旧45779/278fdc26と各旧保存を維持。
+
+[最終owner・全15採否・本文・回収](../observation_learning/training/2026-10-26-unconnected-native/interleaved30_result/README.md)。生成終了run原本はpending表示のまま不変、最終判定RUN_CLOSED_REJECTED_CANDIDATE。plan.epochs=1は旧継承metadataで、training_passes2/実30行/各行2回を優先。rootの単一実行/writerとread-only2agent読解を、正式Pro/Ultra/human商品受入れへ換算しない。限定TECHNICAL_CREDIT、商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false。新6の原文役割/全更新と本人向け受け取りの学習条件を見直すのが次の直接課題で、新有料試行は今回から自動開始しない。通常API/DB/RN/Render/Supabase/本人DB/merge/deploy0、GPU管理/lifecycle0、Jupyter直接・稼働保持。

@@ -1,0 +1,1230 @@
+{
+  "schema": "cocolon.interleaved30_old9_raw_reading_review.v1",
+  "reviewed_at_utc": "2026-10-26T23:39:35.050084+00:00",
+  "scope": "Fixed known9 quote teacher FIT and actual raw comparison only. No CMEE adoption/body rendering/cold-file or formal product-quality decision is performed in this reading review.",
+  "source_run": {
+    "snapshot_file": "/workspace/scratch/8b32a91611bc/interleaved30_preview2/run_snapshot.json",
+    "snapshot_sha256": "d2c749a38b1ad10e898481de13340cbf6b96dc2ee8124afe88c00d008b2bd988",
+    "status_at_snapshot": "STARTED_ONCE",
+    "source_commit": "e107b09535bfcf656cb97100a7434c66ca2c3740",
+    "optimizer_steps_completed": 30,
+    "model_calls_completed": 9,
+    "seconds_at_snapshot": 1022.9962109770859,
+    "adapter_sha256": "1d218763964ce0e1f0e587c754731c5476d70cdd16548020abf330912c518c1b",
+    "note": "Snapshot while remaining new6 generation was still in progress, not the final completed run."
+  },
+  "comparison_run": {
+    "file": "/workspace/scratch/8b32a91611bc/afteronly_final/run/run.json",
+    "source_commit": "9a6c56ed5657e50e31cef50bab0015fc5e6484f9",
+    "adapter_sha256": "278fdc26e56c2cd84b39bec19d484374d4504c656fbd5d1f8112d006e8c6457d",
+    "note": "Previous15-update same quote-input actual raw; not the old45779 numeric-contract9/9 run or a newly measured quote-before baseline."
+  },
+  "input_file": {
+    "path": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/eval_inputs.jsonl",
+    "sha256": "c67fa4098bafa10508bf57bf1975fcdfd6f2359f851e34c0f26148310eb8b75e"
+  },
+  "teacher_file": {
+    "path": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/train_messages.jsonl",
+    "sha256": "29f37e38f4a615220c739176a6eaa2e0e01aae36c7bb6f87db8be248aecd1772",
+    "teacher_path": "Each line $.messages[2].content; decoded quote_candidate object. Original numeric sft_examples is not substituted as this comparison target."
+  },
+  "reviewed_case_count": 9,
+  "independent_language_families": [
+    "chair_repair (3 identities x initial/correction = 6 rows)",
+    "daily_calm (3 identities x same written family = 3 rows)"
+  ],
+  "model_calls_in_review": 0,
+  "training_updates_in_review": 0,
+  "gpu_operations_in_review": 0,
+  "external_write_operations_in_review": 0,
+  "cmee_adoption_evaluated": false,
+  "cmee_adoption": null,
+  "cmee_rendered_body_result": null,
+  "cold_file_result": null,
+  "formal_product_quality_pass": null,
+  "product_accepted": false,
+  "automatic_progression": false,
+  "cases": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "family": "chair_repair",
+      "row_line": 1,
+      "source_refs": {
+        "new_raw": {
+          "file": "/workspace/scratch/8b32a91611bc/interleaved30_preview2/after_TRAIN-SERVICE-CHAIR-01-INITIAL.jsonl",
+          "line": 1,
+          "sha256": "88e20cf7d38d8b0d710befc368480a0d8266b89ce98f17087d4ec9804d810b07",
+          "jsonpath": "$.raw_text (JSON-decoded) / $.parsed"
+        },
+        "previous_actual_raw": {
+          "file": "/workspace/scratch/8b32a91611bc/afteronly_final/run/after_TRAIN-SERVICE-CHAIR-01-INITIAL.jsonl",
+          "line": 1,
+          "sha256": "59e17146b26bfefc4e5133cbe65a1b744aedc1846162eb9fdd085c8aa1734e05",
+          "jsonpath": "$.raw_text (JSON-decoded) / $.parsed"
+        },
+        "teacher": {
+          "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/train_messages.jsonl",
+          "line": 1,
+          "jsonpath": "$.messages[2].content (JSON-decoded quote schema)"
+        },
+        "eval_input": {
+          "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/eval_inputs.jsonl",
+          "line": 1,
+          "jsonpath": "$.messages[1].content.material.sources / prior_adopted_interpretation"
+        }
+      },
+      "observations": {
+        "eos_reached": true,
+        "finish_reason": "stop",
+        "parse_error": null,
+        "raw_decoded_equals_stored_parsed": true,
+        "new_parsed_object_equals_quote_teacher": true,
+        "previous_parsed_object_equals_same_quote_teacher": false,
+        "new_equals_previous_parsed_object": false,
+        "eval_is_corresponding_train_without_assistant": true,
+        "new_adapter_sha256": "1d218763964ce0e1f0e587c754731c5476d70cdd16548020abf330912c518c1b",
+        "previous_adapter_sha256": "278fdc26e56c2cd84b39bec19d484374d4504c656fbd5d1f8112d006e8c6457d"
+      },
+      "source_text_fields": [
+        {
+          "source_id": "428004b4-147f-4c78-ac0f-4f1707c1dd41",
+          "role": "ORIGINAL_INPUT",
+          "text_fields": {
+            "memo": "全部一人で直せたことが、うれしかった。",
+            "memo_action": "ぐらついていた椅子を修理して、また座れるようになった。"
+          }
+        }
+      ],
+      "visible_static_comparison": {
+        "previous": {
+          "quote_count": 6,
+          "evidence_indexes_out_of_range": [],
+          "update_refs_out_of_range": [],
+          "quote_indices_not_unique_in_bound_source_field": []
+        },
+        "new": {
+          "quote_count": 6,
+          "evidence_indexes_out_of_range": [],
+          "update_refs_out_of_range": [],
+          "quote_indices_not_unique_in_bound_source_field": []
+        }
+      },
+      "proposed_surface_text": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "repair",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "repair_and_result"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "solo_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      },
+      "changed_paths_vs_previous": [
+        "$.candidate.surface_proposal.bindings[1].claim_refs[2]",
+        "$.candidate.surface_proposal.reception"
+      ],
+      "cmee_adopted": null,
+      "cmee_body_available": null,
+      "cold_file_equal": null,
+      "formal_product_quality_pass": null,
+      "meaning_reading": "修理、また座れる結果、喜び、「全部一人で直せたこと」という本人の喜び対象を分離。詳しい本人の意味づけは未記載として保ち、初回の質問もそこに限っています。主語省略/過去時点未解決を原文以上に確定していません。",
+      "improvement_or_maintenance": "改善。意味claim/関係/引用6件/質問自体は旧rawから保持し、reception bindingのclaim_refsに誤混入したrelation ID joy_groundをusable_againへ修正。旧「その喜びの根拠も聞けてよかったです」から、座れるようになった体験を受け取る「私もうれしいです」へ戻っています。",
+      "evidence_paths": [
+        "$.candidate.surface_proposal.bindings[1].claim_refs",
+        "$.candidate.surface_proposal.reception",
+        "$.candidate.unknowns[0]",
+        "$.candidate.question_proposal",
+        "$.evidence_quotes[0..5]"
+      ],
+      "remaining_prose_observations": [
+        {
+          "severity": "STYLE_ONLY_TEACHER_SHARED",
+          "jsonpath": "$.candidate.surface_proposal.reception",
+          "detail": "「うれしかったのですね」「私もうれしいです」と喜び語と座れる結果が重なり、定型感は少し残ります。AI自身の受け取りと明示され、本人の未記載感情の補完ではありません。根拠を質問済みと誤認する旧表現は解消しました。"
+        }
+      ],
+      "visible_semantic_omission_or_invention_found": false,
+      "visible_subject_or_time_reversal_found": false
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "family": "chair_repair",
+      "row_line": 2,
+      "source_refs": {
+        "new_raw": {
+          "file": "/workspace/scratch/8b32a91611bc/interleaved30_preview2/after_TRAIN-SERVICE-CHAIR-01-CORRECTION.jsonl",
+          "line": 1,
+          "sha256": "db0dc1dc8b283e660739ed3002cee0eb1b06c5dd745eacea182a73c060fd2d1c",
+          "jsonpath": "$.raw_text (JSON-decoded) / $.parsed"
+        },
+        "previous_actual_raw": {
+          "file": "/workspace/scratch/8b32a91611bc/afteronly_final/run/after_TRAIN-SERVICE-CHAIR-01-CORRECTION.jsonl",
+          "line": 1,
+          "sha256": "60629e5ef9bad13db57946da6d5b7e4e2ce3d7dcefbeff2ed0ed0903cf641793",
+          "jsonpath": "$.raw_text (JSON-decoded) / $.parsed"
+        },
+        "teacher": {
+          "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/train_messages.jsonl",
+          "line": 2,
+          "jsonpath": "$.messages[2].content (JSON-decoded quote schema)"
+        },
+        "eval_input": {
+          "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/eval_inputs.jsonl",
+          "line": 2,
+          "jsonpath": "$.messages[1].content.material.sources / prior_adopted_interpretation"
+        }
+      },
+      "observations": {
+        "eos_reached": true,
+        "finish_reason": "stop",
+        "parse_error": null,
+        "raw_decoded_equals_stored_parsed": true,
+        "new_parsed_object_equals_quote_teacher": true,
+        "previous_parsed_object_equals_same_quote_teacher": false,
+        "new_equals_previous_parsed_object": false,
+        "eval_is_corresponding_train_without_assistant": true,
+        "new_adapter_sha256": "1d218763964ce0e1f0e587c754731c5476d70cdd16548020abf330912c518c1b",
+        "previous_adapter_sha256": "278fdc26e56c2cd84b39bec19d484374d4504c656fbd5d1f8112d006e8c6457d"
+      },
+      "source_text_fields": [
+        {
+          "source_id": "428004b4-147f-4c78-ac0f-4f1707c1dd41",
+          "role": "ORIGINAL_INPUT",
+          "text_fields": {
+            "memo": "全部一人で直せたことが、うれしかった。",
+            "memo_action": "ぐらついていた椅子を修理して、また座れるようになった。"
+          }
+        },
+        {
+          "source_id": "d0efb98c-aa02-4c1b-9ad9-aac942e2dc3f",
+          "role": "SUPPLEMENTAL_ANSWER",
+          "text_fields": {
+            "answer_text_private": "さっき「全部一人で」と書いたのは訂正します。途中で友人に手順を教えてもらって、一緒に直しました。\n\nうれしかったのも、一人でできたからではなく、捨てずにまた使えるようになったからです。"
+          }
+        }
+      ],
+      "visible_static_comparison": {
+        "previous": {
+          "quote_count": 9,
+          "evidence_indexes_out_of_range": [
+            9,
+            10,
+            11
+          ],
+          "update_refs_out_of_range": [],
+          "quote_indices_not_unique_in_bound_source_field": []
+        },
+        "new": {
+          "quote_count": 12,
+          "evidence_indexes_out_of_range": [],
+          "update_refs_out_of_range": [],
+          "quote_indices_not_unique_in_bound_source_field": []
+        }
+      },
+      "proposed_surface_text": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair"
+            ],
+            "relation_refs": [],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "reuse_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "reception"
+          },
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair",
+              "reuse_appraisal_object"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "update_note",
+            "update_refs": [
+              0,
+              1,
+              2
+            ]
+          }
+        ],
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "changed_paths_vs_previous": [
+        "$.evidence_quotes.length"
+      ],
+      "cmee_adopted": null,
+      "cmee_body_available": null,
+      "cold_file_equal": null,
+      "formal_product_quality_pass": null,
+      "meaning_reading": "補足「全部一人ではない」を受け、友人から教わったことと一緒に直したことを分離。喜びは一人でできたからではなく捨てず再利用できたことへ訂正。元の修理/座れる結果/喜びを保持し、solo claimと旧喜び根拠relationの訂正、未記載gapの無効化を別更新として保持。回答済みなので質問はnullです。",
+      "previous_visible_problem": "旧candidateの意味/更新/本文はすでに教師一致でしたが、evidence_quotesが9件へ縮み、参照9/10/11が範囲外、前半の元memo等と回答引用のindexがずれていました。",
+      "improvement_or_maintenance": "引用配列を12件へ戻し、元原文0..5と補足回答6..11を正しいsource/field/順序へ復元しました。意味/本文は維持です。",
+      "evidence_paths": [
+        "$.candidate.claims[2..5]",
+        "$.candidate.relations[1]",
+        "$.candidate.updates[0..2]",
+        "$.candidate.surface_proposal.bindings[0..2]",
+        "$.candidate.surface_proposal.observation",
+        "$.candidate.surface_proposal.reception",
+        "$.candidate.surface_proposal.update_note",
+        "$.evidence_quotes[0..11]"
+      ],
+      "remaining_prose_observations": [
+        {
+          "severity": "STYLE_ONLY_TEACHER_SHARED",
+          "jsonpath": "$.candidate.surface_proposal.update_note",
+          "detail": "「共同修理と、また使えることへの喜びへ訂正しました。」は意味は合うものの「共同修理」「喜びへ訂正」がやや硬く、処理報告らしい表現です。observation/receptionは訂正内容を自然に受け取っています。"
+        }
+      ],
+      "visible_semantic_omission_or_invention_found": false,
+      "visible_subject_or_time_reversal_found": false
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "family": "chair_repair",
+      "row_line": 3,
+      "source_refs": {
+        "new_raw": {
+          "file": "/workspace/scratch/8b32a91611bc/interleaved30_preview2/after_TRAIN-SERVICE-CHAIR-02-INITIAL.jsonl",
+          "line": 1,
+          "sha256": "2d0357711b5a95b6a50665ad37ebeaf6d03ce7857ee63c8493a5bc34e0f66b3b",
+          "jsonpath": "$.raw_text (JSON-decoded) / $.parsed"
+        },
+        "previous_actual_raw": {
+          "file": "/workspace/scratch/8b32a91611bc/afteronly_final/run/after_TRAIN-SERVICE-CHAIR-02-INITIAL.jsonl",
+          "line": 1,
+          "sha256": "7930f6cb26c37f9bfcf0208bcc94249dc328fb50c3f8345bd8e0fc4566be5816",
+          "jsonpath": "$.raw_text (JSON-decoded) / $.parsed"
+        },
+        "teacher": {
+          "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/train_messages.jsonl",
+          "line": 3,
+          "jsonpath": "$.messages[2].content (JSON-decoded quote schema)"
+        },
+        "eval_input": {
+          "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/eval_inputs.jsonl",
+          "line": 3,
+          "jsonpath": "$.messages[1].content.material.sources / prior_adopted_interpretation"
+        }
+      },
+      "observations": {
+        "eos_reached": true,
+        "finish_reason": "stop",
+        "parse_error": null,
+        "raw_decoded_equals_stored_parsed": true,
+        "new_parsed_object_equals_quote_teacher": true,
+        "previous_parsed_object_equals_same_quote_teacher": false,
+        "new_equals_previous_parsed_object": false,
+        "eval_is_corresponding_train_without_assistant": true,
+        "new_adapter_sha256": "1d218763964ce0e1f0e587c754731c5476d70cdd16548020abf330912c518c1b",
+        "previous_adapter_sha256": "278fdc26e56c2cd84b39bec19d484374d4504c656fbd5d1f8112d006e8c6457d"
+      },
+      "source_text_fields": [
+        {
+          "source_id": "8ad110fa-57b2-4e7e-8035-95ac72518e2f",
+          "role": "ORIGINAL_INPUT",
+          "text_fields": {
+            "memo": "全部一人で直せたことが、うれしかった。",
+            "memo_action": "ぐらついていた椅子を修理して、また座れるようになった。"
+          }
+        }
+      ],
+      "visible_static_comparison": {
+        "previous": {
+          "quote_count": 6,
+          "evidence_indexes_out_of_range": [],
+          "update_refs_out_of_range": [],
+          "quote_indices_not_unique_in_bound_source_field": []
+        },
+        "new": {
+          "quote_count": 6,
+          "evidence_indexes_out_of_range": [],
+          "update_refs_out_of_range": [],
+          "quote_indices_not_unique_in_bound_source_field": []
+        }
+      },
+      "proposed_surface_text": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "repair",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "repair_and_result"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "solo_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      },
+      "changed_paths_vs_previous": [
+        "$.candidate.surface_proposal.bindings[1].claim_refs[2]",
+        "$.candidate.surface_proposal.reception"
+      ],
+      "cmee_adopted": null,
+      "cmee_body_available": null,
+      "cold_file_equal": null,
+      "formal_product_quality_pass": null,
+      "meaning_reading": "修理、また座れる結果、喜び、「全部一人で直せたこと」という本人の喜び対象を分離。詳しい本人の意味づけは未記載として保ち、初回の質問もそこに限っています。主語省略/過去時点未解決を原文以上に確定していません。",
+      "improvement_or_maintenance": "改善。意味claim/関係/引用6件/質問自体は旧rawから保持し、reception bindingのclaim_refsに誤混入したrelation ID joy_groundをusable_againへ修正。旧「その喜びの根拠も聞けてよかったです」から、座れるようになった体験を受け取る「私もうれしいです」へ戻っています。",
+      "evidence_paths": [
+        "$.candidate.surface_proposal.bindings[1].claim_refs",
+        "$.candidate.surface_proposal.reception",
+        "$.candidate.unknowns[0]",
+        "$.candidate.question_proposal",
+        "$.evidence_quotes[0..5]"
+      ],
+      "remaining_prose_observations": [
+        {
+          "severity": "STYLE_ONLY_TEACHER_SHARED",
+          "jsonpath": "$.candidate.surface_proposal.reception",
+          "detail": "「うれしかったのですね」「私もうれしいです」と喜び語と座れる結果が重なり、定型感は少し残ります。AI自身の受け取りと明示され、本人の未記載感情の補完ではありません。根拠を質問済みと誤認する旧表現は解消しました。"
+        }
+      ],
+      "visible_semantic_omission_or_invention_found": false,
+      "visible_subject_or_time_reversal_found": false
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "family": "chair_repair",
+      "row_line": 4,
+      "source_refs": {
+        "new_raw": {
+          "file": "/workspace/scratch/8b32a91611bc/interleaved30_preview2/after_TRAIN-SERVICE-CHAIR-02-CORRECTION.jsonl",
+          "line": 1,
+          "sha256": "199dcd44e547e1a61d597d009e1eb56392c74d0b100dd4b6be340835a192bc41",
+          "jsonpath": "$.raw_text (JSON-decoded) / $.parsed"
+        },
+        "previous_actual_raw": {
+          "file": "/workspace/scratch/8b32a91611bc/afteronly_final/run/after_TRAIN-SERVICE-CHAIR-02-CORRECTION.jsonl",
+          "line": 1,
+          "sha256": "0dcfc0af74ffba1f347b11d0adedfe29efe2251ecd484b30c8857505511430fc",
+          "jsonpath": "$.raw_text (JSON-decoded) / $.parsed"
+        },
+        "teacher": {
+          "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/train_messages.jsonl",
+          "line": 4,
+          "jsonpath": "$.messages[2].content (JSON-decoded quote schema)"
+        },
+        "eval_input": {
+          "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/eval_inputs.jsonl",
+          "line": 4,
+          "jsonpath": "$.messages[1].content.material.sources / prior_adopted_interpretation"
+        }
+      },
+      "observations": {
+        "eos_reached": true,
+        "finish_reason": "stop",
+        "parse_error": null,
+        "raw_decoded_equals_stored_parsed": true,
+        "new_parsed_object_equals_quote_teacher": true,
+        "previous_parsed_object_equals_same_quote_teacher": false,
+        "new_equals_previous_parsed_object": false,
+        "eval_is_corresponding_train_without_assistant": true,
+        "new_adapter_sha256": "1d218763964ce0e1f0e587c754731c5476d70cdd16548020abf330912c518c1b",
+        "previous_adapter_sha256": "278fdc26e56c2cd84b39bec19d484374d4504c656fbd5d1f8112d006e8c6457d"
+      },
+      "source_text_fields": [
+        {
+          "source_id": "8ad110fa-57b2-4e7e-8035-95ac72518e2f",
+          "role": "ORIGINAL_INPUT",
+          "text_fields": {
+            "memo": "全部一人で直せたことが、うれしかった。",
+            "memo_action": "ぐらついていた椅子を修理して、また座れるようになった。"
+          }
+        },
+        {
+          "source_id": "fd5ea30d-162e-4ffc-9dea-5f4884866756",
+          "role": "SUPPLEMENTAL_ANSWER",
+          "text_fields": {
+            "answer_text_private": "さっき「全部一人で」と書いたのは訂正します。途中で友人に手順を教えてもらって、一緒に直しました。\n\nうれしかったのも、一人でできたからではなく、捨てずにまた使えるようになったからです。"
+          }
+        }
+      ],
+      "visible_static_comparison": {
+        "previous": {
+          "quote_count": 6,
+          "evidence_indexes_out_of_range": [],
+          "update_refs_out_of_range": [
+            2,
+            5
+          ],
+          "quote_indices_not_unique_in_bound_source_field": [
+            0,
+            1,
+            4,
+            5
+          ]
+        },
+        "new": {
+          "quote_count": 12,
+          "evidence_indexes_out_of_range": [],
+          "update_refs_out_of_range": [],
+          "quote_indices_not_unique_in_bound_source_field": []
+        }
+      },
+      "proposed_surface_text": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair"
+            ],
+            "relation_refs": [],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "reuse_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "reception"
+          },
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair",
+              "reuse_appraisal_object"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "update_note",
+            "update_refs": [
+              0,
+              1,
+              2
+            ]
+          }
+        ],
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "changed_paths_vs_previous": [
+        "$.candidate.claims.length",
+        "$.candidate.relations[1].evidence_indexes[0]",
+        "$.candidate.relations[1].relation_id",
+        "$.candidate.relations[1].scope_refs[0]",
+        "$.candidate.surface_proposal.bindings.length",
+        "$.candidate.surface_proposal.observation",
+        "$.candidate.surface_proposal.reception",
+        "$.candidate.surface_proposal.update_note",
+        "$.candidate.updates.length",
+        "$.evidence_quotes.length"
+      ],
+      "cmee_adopted": null,
+      "cmee_body_available": null,
+      "cold_file_equal": null,
+      "formal_product_quality_pass": null,
+      "meaning_reading": "補足「全部一人ではない」を受け、友人から教わったことと一緒に直したことを分離。喜びは一人でできたからではなく捨てず再利用できたことへ訂正。元の修理/座れる結果/喜びを保持し、solo claimと旧喜び根拠relationの訂正、未記載gapの無効化を別更新として保持。回答済みなので質問はnullです。",
+      "previous_visible_problem": "友人に教わる/共同修理claimが欠け、原文actionを回答fieldに誤束縛し、非原文の合成quoteがありました。gap無効化がなく、update_refs[2,5]は2更新の範囲外。本文は回答済みの喜び理由を再質問し、noteへ内部claim名reuse_appraisal_object/joyを露出していました。",
+      "improvement_or_maintenance": "教わるfriend_guidanceとjoint_repairを別claimに復元し、joyは元memoへ維持。元action/回答それぞれへの引用束縛、REVISE2件+INVALIDATE_GAP1件、update_refs0..2を復元。質問はnullとなり、本文は共同修理と再利用の喜びを受け取り、内部名露出/未回答扱いを解消しました。",
+      "evidence_paths": [
+        "$.candidate.claims[2..5]",
+        "$.candidate.relations[1]",
+        "$.candidate.updates[0..2]",
+        "$.candidate.surface_proposal.bindings[0..2]",
+        "$.candidate.surface_proposal.observation",
+        "$.candidate.surface_proposal.reception",
+        "$.candidate.surface_proposal.update_note",
+        "$.evidence_quotes[0..11]"
+      ],
+      "remaining_prose_observations": [
+        {
+          "severity": "STYLE_ONLY_TEACHER_SHARED",
+          "jsonpath": "$.candidate.surface_proposal.update_note",
+          "detail": "「共同修理と、また使えることへの喜びへ訂正しました。」は意味は合うものの「共同修理」「喜びへ訂正」がやや硬く、処理報告らしい表現です。observation/receptionは訂正内容を自然に受け取っています。"
+        }
+      ],
+      "visible_semantic_omission_or_invention_found": false,
+      "visible_subject_or_time_reversal_found": false
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "family": "chair_repair",
+      "row_line": 5,
+      "source_refs": {
+        "new_raw": {
+          "file": "/workspace/scratch/8b32a91611bc/interleaved30_preview2/after_TRAIN-SERVICE-CHAIR-03-INITIAL.jsonl",
+          "line": 1,
+          "sha256": "ded7a598724dfad7596860f194729760e5fc03dd813a3063be26265ea788b4e7",
+          "jsonpath": "$.raw_text (JSON-decoded) / $.parsed"
+        },
+        "previous_actual_raw": {
+          "file": "/workspace/scratch/8b32a91611bc/afteronly_final/run/after_TRAIN-SERVICE-CHAIR-03-INITIAL.jsonl",
+          "line": 1,
+          "sha256": "d3f0fb58172fc669a199fe7bdf60d5abb07493c827d4de42661e6c23e9fe0a20",
+          "jsonpath": "$.raw_text (JSON-decoded) / $.parsed"
+        },
+        "teacher": {
+          "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/train_messages.jsonl",
+          "line": 5,
+          "jsonpath": "$.messages[2].content (JSON-decoded quote schema)"
+        },
+        "eval_input": {
+          "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/eval_inputs.jsonl",
+          "line": 5,
+          "jsonpath": "$.messages[1].content.material.sources / prior_adopted_interpretation"
+        }
+      },
+      "observations": {
+        "eos_reached": true,
+        "finish_reason": "stop",
+        "parse_error": null,
+        "raw_decoded_equals_stored_parsed": true,
+        "new_parsed_object_equals_quote_teacher": true,
+        "previous_parsed_object_equals_same_quote_teacher": false,
+        "new_equals_previous_parsed_object": false,
+        "eval_is_corresponding_train_without_assistant": true,
+        "new_adapter_sha256": "1d218763964ce0e1f0e587c754731c5476d70cdd16548020abf330912c518c1b",
+        "previous_adapter_sha256": "278fdc26e56c2cd84b39bec19d484374d4504c656fbd5d1f8112d006e8c6457d"
+      },
+      "source_text_fields": [
+        {
+          "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5",
+          "role": "ORIGINAL_INPUT",
+          "text_fields": {
+            "memo": "全部一人で直せたことが、うれしかった。",
+            "memo_action": "ぐらついていた椅子を修理して、また座れるようになった。"
+          }
+        }
+      ],
+      "visible_static_comparison": {
+        "previous": {
+          "quote_count": 6,
+          "evidence_indexes_out_of_range": [],
+          "update_refs_out_of_range": [],
+          "quote_indices_not_unique_in_bound_source_field": []
+        },
+        "new": {
+          "quote_count": 6,
+          "evidence_indexes_out_of_range": [],
+          "update_refs_out_of_range": [],
+          "quote_indices_not_unique_in_bound_source_field": []
+        }
+      },
+      "proposed_surface_text": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "repair",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "repair_and_result"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "solo_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      },
+      "changed_paths_vs_previous": [
+        "$.candidate.surface_proposal.bindings[1].claim_refs[2]",
+        "$.candidate.surface_proposal.reception"
+      ],
+      "cmee_adopted": null,
+      "cmee_body_available": null,
+      "cold_file_equal": null,
+      "formal_product_quality_pass": null,
+      "meaning_reading": "修理、また座れる結果、喜び、「全部一人で直せたこと」という本人の喜び対象を分離。詳しい本人の意味づけは未記載として保ち、初回の質問もそこに限っています。主語省略/過去時点未解決を原文以上に確定していません。",
+      "improvement_or_maintenance": "改善。意味claim/関係/引用6件/質問自体は旧rawから保持し、reception bindingのclaim_refsに誤混入したrelation ID joy_groundをusable_againへ修正。旧「その喜びの根拠も聞けてよかったです」から、座れるようになった体験を受け取る「私もうれしいです」へ戻っています。",
+      "evidence_paths": [
+        "$.candidate.surface_proposal.bindings[1].claim_refs",
+        "$.candidate.surface_proposal.reception",
+        "$.candidate.unknowns[0]",
+        "$.candidate.question_proposal",
+        "$.evidence_quotes[0..5]"
+      ],
+      "remaining_prose_observations": [
+        {
+          "severity": "STYLE_ONLY_TEACHER_SHARED",
+          "jsonpath": "$.candidate.surface_proposal.reception",
+          "detail": "「うれしかったのですね」「私もうれしいです」と喜び語と座れる結果が重なり、定型感は少し残ります。AI自身の受け取りと明示され、本人の未記載感情の補完ではありません。根拠を質問済みと誤認する旧表現は解消しました。"
+        }
+      ],
+      "visible_semantic_omission_or_invention_found": false,
+      "visible_subject_or_time_reversal_found": false
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "family": "chair_repair",
+      "row_line": 6,
+      "source_refs": {
+        "new_raw": {
+          "file": "/workspace/scratch/8b32a91611bc/interleaved30_preview2/after_TRAIN-SERVICE-CHAIR-03-CORRECTION.jsonl",
+          "line": 1,
+          "sha256": "263e298baf349d3e1b7e01283b1f941b462ab5b8d559554ae617b032fc1248f4",
+          "jsonpath": "$.raw_text (JSON-decoded) / $.parsed"
+        },
+        "previous_actual_raw": {
+          "file": "/workspace/scratch/8b32a91611bc/afteronly_final/run/after_TRAIN-SERVICE-CHAIR-03-CORRECTION.jsonl",
+          "line": 1,
+          "sha256": "1caaf3ca5fb5376aac652298451ea6d040e8eae85cf55ffa9d96d7c7cf6eea38",
+          "jsonpath": "$.raw_text (JSON-decoded) / $.parsed"
+        },
+        "teacher": {
+          "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/train_messages.jsonl",
+          "line": 6,
+          "jsonpath": "$.messages[2].content (JSON-decoded quote schema)"
+        },
+        "eval_input": {
+          "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/eval_inputs.jsonl",
+          "line": 6,
+          "jsonpath": "$.messages[1].content.material.sources / prior_adopted_interpretation"
+        }
+      },
+      "observations": {
+        "eos_reached": true,
+        "finish_reason": "stop",
+        "parse_error": null,
+        "raw_decoded_equals_stored_parsed": true,
+        "new_parsed_object_equals_quote_teacher": true,
+        "previous_parsed_object_equals_same_quote_teacher": false,
+        "new_equals_previous_parsed_object": false,
+        "eval_is_corresponding_train_without_assistant": true,
+        "new_adapter_sha256": "1d218763964ce0e1f0e587c754731c5476d70cdd16548020abf330912c518c1b",
+        "previous_adapter_sha256": "278fdc26e56c2cd84b39bec19d484374d4504c656fbd5d1f8112d006e8c6457d"
+      },
+      "source_text_fields": [
+        {
+          "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5",
+          "role": "ORIGINAL_INPUT",
+          "text_fields": {
+            "memo": "全部一人で直せたことが、うれしかった。",
+            "memo_action": "ぐらついていた椅子を修理して、また座れるようになった。"
+          }
+        },
+        {
+          "source_id": "ea0fa6a8-5411-4a8a-a6bf-e2f9f144454d",
+          "role": "SUPPLEMENTAL_ANSWER",
+          "text_fields": {
+            "answer_text_private": "さっき「全部一人で」と書いたのは訂正します。途中で友人に手順を教えてもらって、一緒に直しました。\n\nうれしかったのも、一人でできたからではなく、捨てずにまた使えるようになったからです。"
+          }
+        }
+      ],
+      "visible_static_comparison": {
+        "previous": {
+          "quote_count": 6,
+          "evidence_indexes_out_of_range": [
+            6,
+            7,
+            8,
+            9
+          ],
+          "update_refs_out_of_range": [],
+          "quote_indices_not_unique_in_bound_source_field": [
+            5
+          ]
+        },
+        "new": {
+          "quote_count": 12,
+          "evidence_indexes_out_of_range": [],
+          "update_refs_out_of_range": [],
+          "quote_indices_not_unique_in_bound_source_field": []
+        }
+      },
+      "proposed_surface_text": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair"
+            ],
+            "relation_refs": [],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "reuse_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "reception"
+          },
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair",
+              "reuse_appraisal_object"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "update_note",
+            "update_refs": [
+              0,
+              1,
+              2
+            ]
+          }
+        ],
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "changed_paths_vs_previous": [
+        "$.candidate.claims.length",
+        "$.candidate.relations[1].evidence_indexes[0]",
+        "$.candidate.surface_proposal.bindings[0].claim_refs[0]",
+        "$.candidate.surface_proposal.bindings[0].claim_refs[1]",
+        "$.candidate.surface_proposal.bindings[0].relation_refs.length",
+        "$.candidate.surface_proposal.bindings[2].claim_refs.length",
+        "$.candidate.surface_proposal.bindings[2].relation_refs",
+        "$.candidate.surface_proposal.bindings[2].update_refs.length",
+        "$.candidate.surface_proposal.observation",
+        "$.candidate.surface_proposal.reception",
+        "$.candidate.updates.length",
+        "$.evidence_quotes.length"
+      ],
+      "cmee_adopted": null,
+      "cmee_body_available": null,
+      "cold_file_equal": null,
+      "formal_product_quality_pass": null,
+      "meaning_reading": "補足「全部一人ではない」を受け、友人から教わったことと一緒に直したことを分離。喜びは一人でできたからではなく捨てず再利用できたことへ訂正。元の修理/座れる結果/喜びを保持し、solo claimと旧喜び根拠relationの訂正、未記載gapの無効化を別更新として保持。回答済みなので質問はnullです。",
+      "previous_visible_problem": "joy claim欠落、教わる/共同修理のmerge、存在しないfield_path「joy_ground RELATION」、範囲外引用6..9、合成target_kind CLAIM_RELATION_UNKNOWNによる一括更新がありました。受け取りには原文未記載の「一緒に直せたこと自体も、嬉しかった」が追加されていました。",
+      "improvement_or_maintenance": "joy/教わる/共同修理を独立claimへ復元し、原文/補足の正しい12引用へ復元。CLAIM訂正/RELATION訂正/UNKNOWN無効化を3件に分離。「共同で直せたこと自体への喜び」を補完せず、捨てず再利用できた喜びへ限定しました。",
+      "evidence_paths": [
+        "$.candidate.claims[2..5]",
+        "$.candidate.relations[1]",
+        "$.candidate.updates[0..2]",
+        "$.candidate.surface_proposal.bindings[0..2]",
+        "$.candidate.surface_proposal.observation",
+        "$.candidate.surface_proposal.reception",
+        "$.candidate.surface_proposal.update_note",
+        "$.evidence_quotes[0..11]"
+      ],
+      "remaining_prose_observations": [
+        {
+          "severity": "STYLE_ONLY_TEACHER_SHARED",
+          "jsonpath": "$.candidate.surface_proposal.update_note",
+          "detail": "「共同修理と、また使えることへの喜びへ訂正しました。」は意味は合うものの「共同修理」「喜びへ訂正」がやや硬く、処理報告らしい表現です。observation/receptionは訂正内容を自然に受け取っています。"
+        }
+      ],
+      "visible_semantic_omission_or_invention_found": false,
+      "visible_subject_or_time_reversal_found": false
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "family": "daily_calm",
+      "row_line": 7,
+      "source_refs": {
+        "new_raw": {
+          "file": "/workspace/scratch/8b32a91611bc/interleaved30_preview2/after_TRAIN-DAILY-CALM-01-INITIAL.jsonl",
+          "line": 1,
+          "sha256": "73144e540ead0f68a4362b69cc3d25c6bfb836bfdf199b1cf17efa19d38b4afd",
+          "jsonpath": "$.raw_text (JSON-decoded) / $.parsed"
+        },
+        "previous_actual_raw": {
+          "file": "/workspace/scratch/8b32a91611bc/afteronly_final/run/after_TRAIN-DAILY-CALM-01-INITIAL.jsonl",
+          "line": 1,
+          "sha256": "1779d3d059ae393ff77496dabe4cf51b2e45f7af247377350fc28e3ef9b1aa5c",
+          "jsonpath": "$.raw_text (JSON-decoded) / $.parsed"
+        },
+        "teacher": {
+          "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/train_messages.jsonl",
+          "line": 7,
+          "jsonpath": "$.messages[2].content (JSON-decoded quote schema)"
+        },
+        "eval_input": {
+          "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/eval_inputs.jsonl",
+          "line": 7,
+          "jsonpath": "$.messages[1].content.material.sources / prior_adopted_interpretation"
+        }
+      },
+      "observations": {
+        "eos_reached": true,
+        "finish_reason": "stop",
+        "parse_error": null,
+        "raw_decoded_equals_stored_parsed": true,
+        "new_parsed_object_equals_quote_teacher": true,
+        "previous_parsed_object_equals_same_quote_teacher": true,
+        "new_equals_previous_parsed_object": true,
+        "eval_is_corresponding_train_without_assistant": true,
+        "new_adapter_sha256": "1d218763964ce0e1f0e587c754731c5476d70cdd16548020abf330912c518c1b",
+        "previous_adapter_sha256": "278fdc26e56c2cd84b39bec19d484374d4504c656fbd5d1f8112d006e8c6457d"
+      },
+      "source_text_fields": [
+        {
+          "source_id": "cd562f5f-3f35-4ac3-8d56-731c8f6fcb97",
+          "role": "ORIGINAL_INPUT",
+          "text_fields": {
+            "memo": "あったかいもの食べたら、ちょっと落ち着いた。",
+            "memo_action": "帰ってから、うどんを作って食べた。"
+          }
+        }
+      ],
+      "visible_static_comparison": {
+        "previous": {
+          "quote_count": 8,
+          "evidence_indexes_out_of_range": [],
+          "update_refs_out_of_range": [],
+          "quote_indices_not_unique_in_bound_source_field": []
+        },
+        "new": {
+          "quote_count": 8,
+          "evidence_indexes_out_of_range": [],
+          "update_refs_out_of_range": [],
+          "quote_indices_not_unique_in_bound_source_field": []
+        }
+      },
+      "proposed_surface_text": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "return",
+              "cook",
+              "eat"
+            ],
+            "relation_refs": [
+              "return_before_cook",
+              "return_before_eat",
+              "cook_and_eat"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "warm_food_eat",
+              "slight_calm"
+            ],
+            "relation_refs": [
+              "written_eat_calm"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      },
+      "changed_paths_vs_previous": [],
+      "cmee_adopted": null,
+      "cmee_body_available": null,
+      "cold_file_equal": null,
+      "formal_product_quality_pass": null,
+      "meaning_reading": "帰ってから作る/食べる、温かいものを食べたら少し落ち着いた、を五claimと原文のから/て/たらの四relationで保持。別fieldのうどんと温かい食事を勝手に同一claimへ融合せず、一般的な治療効果・原因断定・未来の保証も追加していません。主語省略と日付未解決は原文のままです。",
+      "improvement_or_maintenance": "維持。旧278fdc26も新1d218763も対応quote教師にobject全文一致、意味・引用8件・観察/受け取り・質問なしを維持しています。",
+      "evidence_paths": [
+        "$.candidate.claims[0..4]",
+        "$.candidate.relations[0..3]",
+        "$.evidence_quotes[0..7]",
+        "$.candidate.surface_proposal",
+        "$.candidate.question_proposal"
+      ],
+      "remaining_prose_observations": [],
+      "visible_semantic_omission_or_invention_found": false,
+      "visible_subject_or_time_reversal_found": false
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "family": "daily_calm",
+      "row_line": 8,
+      "source_refs": {
+        "new_raw": {
+          "file": "/workspace/scratch/8b32a91611bc/interleaved30_preview2/after_TRAIN-DAILY-CALM-02-INITIAL.jsonl",
+          "line": 1,
+          "sha256": "2795063b951698423b824826b1b66b6cf6417ecd3be566535384bb5d953db42e",
+          "jsonpath": "$.raw_text (JSON-decoded) / $.parsed"
+        },
+        "previous_actual_raw": {
+          "file": "/workspace/scratch/8b32a91611bc/afteronly_final/run/after_TRAIN-DAILY-CALM-02-INITIAL.jsonl",
+          "line": 1,
+          "sha256": "4cb511f2997b400ea60f31fd6861dc065fdbd8339de4e3e2ec8f0fcddb9d193b",
+          "jsonpath": "$.raw_text (JSON-decoded) / $.parsed"
+        },
+        "teacher": {
+          "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/train_messages.jsonl",
+          "line": 8,
+          "jsonpath": "$.messages[2].content (JSON-decoded quote schema)"
+        },
+        "eval_input": {
+          "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/eval_inputs.jsonl",
+          "line": 8,
+          "jsonpath": "$.messages[1].content.material.sources / prior_adopted_interpretation"
+        }
+      },
+      "observations": {
+        "eos_reached": true,
+        "finish_reason": "stop",
+        "parse_error": null,
+        "raw_decoded_equals_stored_parsed": true,
+        "new_parsed_object_equals_quote_teacher": true,
+        "previous_parsed_object_equals_same_quote_teacher": true,
+        "new_equals_previous_parsed_object": true,
+        "eval_is_corresponding_train_without_assistant": true,
+        "new_adapter_sha256": "1d218763964ce0e1f0e587c754731c5476d70cdd16548020abf330912c518c1b",
+        "previous_adapter_sha256": "278fdc26e56c2cd84b39bec19d484374d4504c656fbd5d1f8112d006e8c6457d"
+      },
+      "source_text_fields": [
+        {
+          "source_id": "b3108b7b-7bb2-4a0e-9cf1-b4bf45bd588e",
+          "role": "ORIGINAL_INPUT",
+          "text_fields": {
+            "memo": "あったかいもの食べたら、ちょっと落ち着いた。",
+            "memo_action": "帰ってから、うどんを作って食べた。"
+          }
+        }
+      ],
+      "visible_static_comparison": {
+        "previous": {
+          "quote_count": 8,
+          "evidence_indexes_out_of_range": [],
+          "update_refs_out_of_range": [],
+          "quote_indices_not_unique_in_bound_source_field": []
+        },
+        "new": {
+          "quote_count": 8,
+          "evidence_indexes_out_of_range": [],
+          "update_refs_out_of_range": [],
+          "quote_indices_not_unique_in_bound_source_field": []
+        }
+      },
+      "proposed_surface_text": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "return",
+              "cook",
+              "eat"
+            ],
+            "relation_refs": [
+              "return_before_cook",
+              "return_before_eat",
+              "cook_and_eat"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "warm_food_eat",
+              "slight_calm"
+            ],
+            "relation_refs": [
+              "written_eat_calm"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      },
+      "changed_paths_vs_previous": [],
+      "cmee_adopted": null,
+      "cmee_body_available": null,
+      "cold_file_equal": null,
+      "formal_product_quality_pass": null,
+      "meaning_reading": "帰ってから作る/食べる、温かいものを食べたら少し落ち着いた、を五claimと原文のから/て/たらの四relationで保持。別fieldのうどんと温かい食事を勝手に同一claimへ融合せず、一般的な治療効果・原因断定・未来の保証も追加していません。主語省略と日付未解決は原文のままです。",
+      "improvement_or_maintenance": "維持。旧278fdc26も新1d218763も対応quote教師にobject全文一致、意味・引用8件・観察/受け取り・質問なしを維持しています。",
+      "evidence_paths": [
+        "$.candidate.claims[0..4]",
+        "$.candidate.relations[0..3]",
+        "$.evidence_quotes[0..7]",
+        "$.candidate.surface_proposal",
+        "$.candidate.question_proposal"
+      ],
+      "remaining_prose_observations": [],
+      "visible_semantic_omission_or_invention_found": false,
+      "visible_subject_or_time_reversal_found": false
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "family": "daily_calm",
+      "row_line": 9,
+      "source_refs": {
+        "new_raw": {
+          "file": "/workspace/scratch/8b32a91611bc/interleaved30_preview2/after_TRAIN-DAILY-CALM-03-INITIAL.jsonl",
+          "line": 1,
+          "sha256": "7244289042850bceee2a780196ec0435d928d898ae8b4cd660a2beff647aaeb4",
+          "jsonpath": "$.raw_text (JSON-decoded) / $.parsed"
+        },
+        "previous_actual_raw": {
+          "file": "/workspace/scratch/8b32a91611bc/afteronly_final/run/after_TRAIN-DAILY-CALM-03-INITIAL.jsonl",
+          "line": 1,
+          "sha256": "52c4a06e630b06e26bcee0052e248f5ef855e00bf440dcea9c7512352bd87980",
+          "jsonpath": "$.raw_text (JSON-decoded) / $.parsed"
+        },
+        "teacher": {
+          "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/train_messages.jsonl",
+          "line": 9,
+          "jsonpath": "$.messages[2].content (JSON-decoded quote schema)"
+        },
+        "eval_input": {
+          "file": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/eval_inputs.jsonl",
+          "line": 9,
+          "jsonpath": "$.messages[1].content.material.sources / prior_adopted_interpretation"
+        }
+      },
+      "observations": {
+        "eos_reached": true,
+        "finish_reason": "stop",
+        "parse_error": null,
+        "raw_decoded_equals_stored_parsed": true,
+        "new_parsed_object_equals_quote_teacher": true,
+        "previous_parsed_object_equals_same_quote_teacher": true,
+        "new_equals_previous_parsed_object": true,
+        "eval_is_corresponding_train_without_assistant": true,
+        "new_adapter_sha256": "1d218763964ce0e1f0e587c754731c5476d70cdd16548020abf330912c518c1b",
+        "previous_adapter_sha256": "278fdc26e56c2cd84b39bec19d484374d4504c656fbd5d1f8112d006e8c6457d"
+      },
+      "source_text_fields": [
+        {
+          "source_id": "63502062-1016-471c-8549-1c4dd98b76ab",
+          "role": "ORIGINAL_INPUT",
+          "text_fields": {
+            "memo": "あったかいもの食べたら、ちょっと落ち着いた。",
+            "memo_action": "帰ってから、うどんを作って食べた。"
+          }
+        }
+      ],
+      "visible_static_comparison": {
+        "previous": {
+          "quote_count": 8,
+          "evidence_indexes_out_of_range": [],
+          "update_refs_out_of_range": [],
+          "quote_indices_not_unique_in_bound_source_field": []
+        },
+        "new": {
+          "quote_count": 8,
+          "evidence_indexes_out_of_range": [],
+          "update_refs_out_of_range": [],
+          "quote_indices_not_unique_in_bound_source_field": []
+        }
+      },
+      "proposed_surface_text": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "return",
+              "cook",
+              "eat"
+            ],
+            "relation_refs": [
+              "return_before_cook",
+              "return_before_eat",
+              "cook_and_eat"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "warm_food_eat",
+              "slight_calm"
+            ],
+            "relation_refs": [
+              "written_eat_calm"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      },
+      "changed_paths_vs_previous": [],
+      "cmee_adopted": null,
+      "cmee_body_available": null,
+      "cold_file_equal": null,
+      "formal_product_quality_pass": null,
+      "meaning_reading": "帰ってから作る/食べる、温かいものを食べたら少し落ち着いた、を五claimと原文のから/て/たらの四relationで保持。別fieldのうどんと温かい食事を勝手に同一claimへ融合せず、一般的な治療効果・原因断定・未来の保証も追加していません。主語省略と日付未解決は原文のままです。",
+      "improvement_or_maintenance": "維持。旧278fdc26も新1d218763も対応quote教師にobject全文一致、意味・引用8件・観察/受け取り・質問なしを維持しています。",
+      "evidence_paths": [
+        "$.candidate.claims[0..4]",
+        "$.candidate.relations[0..3]",
+        "$.evidence_quotes[0..7]",
+        "$.candidate.surface_proposal",
+        "$.candidate.question_proposal"
+      ],
+      "remaining_prose_observations": [],
+      "visible_semantic_omission_or_invention_found": false,
+      "visible_subject_or_time_reversal_found": false
+    }
+  ],
+  "summary": {
+    "eos_stop_count": 9,
+    "new_parsed_object_quote_teacher_equal_count": 9,
+    "previous_parsed_object_same_quote_teacher_equal_count": 3,
+    "chair_rows_with_visible_improvement": 6,
+    "daily_rows_maintained_identically": 3,
+    "new_evidence_index_out_of_range_cases": 0,
+    "new_update_ref_out_of_range_cases": 0,
+    "new_nonmatching_or_nonunique_bound_quote_cases": 0,
+    "visible_new_meaning_omission_invention_or_subject_time_reversal_cases": 0,
+    "technical_reading_conclusion": "Six chair rows visibly recover quote/reference coherence; chair02/03 correction additionally recover omitted meaning and remove invented joy/re-question/internal labels. Three daily rows retain the prior exact known teacher fit. All9 actual parsed outputs equal frozen quote teachers; no remaining visible semantic/evidence defect found within these fixed9 rows.",
+    "remaining_prose_conclusion": "Teacher-shared mild repetition in initial reception and stiff processing-style correction note remain. This is a prose observation, not a new runtime guard or a formal rejection rule.",
+    "limits": [
+      "CMEE adoption is not yet executed here; all adoption/body/cold-file fields remain null.",
+      "Read text is candidate.surface_proposal, not an independently generated final CMEE-rendered artifact.",
+      "Known teacher fit on2 recurring language families is not9 independent subject domains or evidence of unseen-input generalization.",
+      "Correction requests use frozen teacher-adopted prior, not dynamic prior from the new initial raw.",
+      "This review neither approves product release nor changes old closed evidence; no model call, GPU action or external write occurred."
+    ]
+  }
+}

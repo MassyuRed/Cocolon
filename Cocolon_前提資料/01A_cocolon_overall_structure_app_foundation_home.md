@@ -5070,6 +5070,20 @@ runner/plan/実tokenizerCPU候補とconsumer sourceは同native15_preparationの
 current00/観測入口/同training README#native15-interleaved30-proposal/weekly§60へ同期。source/code準備を商品進捗へ加算しない。前回afteronly_resultのraw/採否/重みは不変、同outputを再起動しない。
 
 
-### 2026-10-27 — interleaved30一回の実行中原本
+### 2026-10-27 — interleaved30一回の最終結果とfile地図
 
-既存学習owner内 `interleaved30_result/README.md` と `runtime_checkpoint.json` を追加。source e107b095/PID21603、最初の読取は更新2/30・生成0で最終未確認、再起動禁止。plan承認束縛以外のrunner/consumer/API/教師不変、STRUCTURE_MAP_DELTA_NONE。最終回収後にrun/全raw/training/diagnosis/重み照合へ置換同期する。商品0/正式0/3/54.50％。
+既存 `observation_learning/training/2026-10-26-unconnected-native/interleaved30_result/` が結果owner。30更新/after15・EOS/JSON15、意味11/本文9・cold snapshot11/11、新6本文0のため新1d218763は通常不採用。製品責務/型/採用条件/API/DB/RN/Render/Supabase不変、STRUCTURE_MAP_DELTA_NONE。商品0/正式0/3/54.50％。
+
+| file/group | 責任 |
+|---|---|
+| README.md / result_summary.json / runtime_checkpoint.json | 最終RUN_CLOSED_REJECTED_CANDIDATE、件数/本文残件/次の直接課題。再起動禁止 |
+| run.json / training.jsonl / reloaded_tensors.json | 実30更新/固定30index/各行2回、別保存非学習reload、15call/identity/処理額。epochs=1は旧metadata残り |
+| after_*.jsonl（15file） | 実raw/metadata/usage/token/EOSを持つ無補修の全出力 |
+| diagnosis/diagnosis.json | 全15receipt/意味/本文採否、実body/問い、採用snapshot cold-file |
+| diagnosis/*_saved.json / *_saved_completed.json / *_cold.json（各11file） | 採用11 snapshotの別process一致。うち2は本文なしoutcome、SQL/service成功でない |
+| evidence/*（7file） | 実launch/GPU/consumer log、固定環境/CPU/API原本。consumer sourceは既存interleaved30_preparation |
+| reading_reviews/old9.json / new6.json | 原文/教師/前回同quote raw/今回rawの根拠付き読解、正式human受入れでない |
+| recovery_manifest.json / final_recovery.json | 最終archive全74payload/hash/bytes、32F32有限、早期最終一致とLibrary version1保全 |
+| early_run.json / early_recovery.json | 399.591608秒/30更新/生成0の保存履歴として不変保持 |
+
+凍結train/eval/準備payloadと承認済みrunner/plan/consumerは既存native15_preparation/interleaved30_preparationへ戻る。最終archiveには実行時コピーも同梱し照合、GitHub上で同じ教材を複製しない。元4B全重み/optimizer/RNG非同梱。全体00/観測入口/同README#native15-interleaved30-result/weekly§61へ同期。GPU保持は継続料金を伴う。

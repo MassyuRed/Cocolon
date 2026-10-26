@@ -1,0 +1,608 @@
+{
+  "schema": "cocolon.interleaved30.new6.reading_review.v1",
+  "review_date_jst": "2026-10-27",
+  "scope": "同一凍結quote15のうちBOOK2/SHOP2/REPOT/KNITを前回278fdc raw・原文・教師と比較したread-only読解。CMEEはrootの実測原本を別欄へ引用し、本文品質の解釈と分離。",
+  "sources": [
+    {
+      "path": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/train_messages.jsonl",
+      "sha256": "29f37e38f4a615220c739176a6eaa2e0e01aae36c7bb6f87db8be248aecd1772",
+      "bytes": 349174
+    },
+    {
+      "path": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/eval_inputs.jsonl",
+      "sha256": "c67fa4098bafa10508bf57bf1975fcdfd6f2359f851e34c0f26148310eb8b75e",
+      "bytes": 169628
+    },
+    {
+      "path": "/workspace/scratch/8b32a91611bc/continuation27_teacher_audit.json",
+      "sha256": "aed4ee733d3850354b171871f3d488850c0f1735dff19d3b0d5f68a5119bbd1e",
+      "bytes": 31656
+    },
+    {
+      "path": "/workspace/scratch/8b32a91611bc/interleaved30_raw_complete/run.json",
+      "sha256": "d8e100cb5b22554bdc6f09a6a08c7344b04f3a3d759cac43662ecffca5114274",
+      "bytes": 21425
+    },
+    {
+      "path": "/workspace/scratch/8b32a91611bc/interleaved30_raw_complete/raw_manifest.json",
+      "sha256": "09008ce9be0f8141e3cdc19f409066764268dee1e5138ca8e7bdec6016f12102",
+      "bytes": 2386
+    }
+  ],
+  "run_source_commit": "e107b09535bfcf656cb97100a7434c66ca2c3740",
+  "previous_candidate_adapter": "278fdc26e56c2cd84b39bec19d484374d4504c656fbd5d1f8112d006e8c6457d",
+  "frozen_input_identity": {
+    "train_sha256": "29f37e38f4a615220c739176a6eaa2e0e01aae36c7bb6f87db8be248aecd1772",
+    "eval_sha256": "c67fa4098bafa10508bf57bf1975fcdfd6f2359f851e34c0f26148310eb8b75e",
+    "teacher_and_acceptance_conditions_changed": false,
+    "new6_teacher_is_mash_formal_gold": false
+  },
+  "global_raw_result": {
+    "eos": 15,
+    "valid_json": 15,
+    "teacher_payload_equal": 9,
+    "run_sha256": "d8e100cb5b22554bdc6f09a6a08c7344b04f3a3d759cac43662ecffca5114274",
+    "parsed_target_equal_case_ids": [
+      "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "TRAIN-DAILY-CALM-01-INITIAL",
+      "TRAIN-DAILY-CALM-02-INITIAL",
+      "TRAIN-DAILY-CALM-03-INITIAL"
+    ]
+  },
+  "cases": [
+    {
+      "case_id": "FT-BOOK-INITIAL",
+      "current_raw_file": "/workspace/scratch/8b32a91611bc/interleaved30_raw_complete/after_FT-BOOK-INITIAL.jsonl",
+      "current_raw_file_sha256": "13ffcf6ca4fe7ee514074a71fc8c066b1535327d62645c51318ad758279ac6b8",
+      "current_raw_utf8_sha256": "c41412d87acbaf15d17b8285315a220c97aedc3f522e194e8dd41229da6ddb83",
+      "previous_raw_file": "/workspace/scratch/8b32a91611bc/afteronly_final/run/after_FT-BOOK-INITIAL.jsonl",
+      "previous_raw_file_sha256": "7e639f8ce1f1c8ad390afe6a5353459380a02a542b8a21fb33287b913fadca6a",
+      "current": {
+        "output_tokens": 1046,
+        "seconds": 42.04740869405214,
+        "eos": true,
+        "finish_reason": "stop",
+        "parse_error": null
+      },
+      "previous": {
+        "output_tokens": 1053,
+        "seconds": 41.71425641095266,
+        "eos": true,
+        "finish_reason": "stop",
+        "parse_error": null
+      },
+      "counts": {
+        "claims": 4,
+        "relations": 2,
+        "updates": 0,
+        "quote_rows": 6
+      },
+      "teacher_counts": {
+        "claims": 4,
+        "relations": 2,
+        "updates": 0,
+        "quote_rows": 6
+      },
+      "exact_teacher_subset_matches": {
+        "claims": true,
+        "relations": true,
+        "evidence_quotes": true,
+        "surface_bindings": true
+      },
+      "nonliteral_quote_indexes": [],
+      "out_of_bounds_references": [],
+      "final_cmee_result": {
+        "status": "SEMANTIC_NOT_ADOPTED",
+        "decision": "HOLD",
+        "reason_code": "model_v3_unknown_not_source_bound",
+        "meaning_adopted": false,
+        "body_available": false,
+        "receipt_status": "CANDIDATE_UNREVIEWED"
+      },
+      "reading_review": {
+        "improvements": [
+          "前回のtime.kind=PRESENT/expression=2026-10-26という補完が消え、WRITTEN_PRESENT/nullへ戻った。reassurance_receivedの根拠に付いた「けど」も解消。",
+          "4claim・2relation・6引用・表面bindingは教師と完全一致。"
+        ],
+        "unresolved_or_worse": [
+          "意味packetには無い「安心感を受け取り」「安心されたのですね」を本文へ追加。友人が大丈夫と言った事実から、本人が安心した状態へ置き換えている。",
+          "ObservationとReceptionも問いになり、専用question_proposalの問いと役割が重複。既に少し気になると書いた本人へ「気になっていることはありますか？」と有無を聞き直す。",
+          "Observationの「その後」は原文の対置「けど」を時間順へ寄せる。受け取りは前回の内部説明調から変わったが、自然な共感へ改善したとは言えない。"
+        ],
+        "evidence_paths": [
+          "candidate.claims[3].about_time",
+          "candidate.surface_proposal.observation",
+          "candidate.surface_proposal.reception",
+          "candidate.question_proposal",
+          "candidate.unknowns[0]"
+        ],
+        "conclusion": "構造subsetのfitは改善したが、unknownの実CMEE束縛はHOLDで、本文も未記載状態と問いを加える。"
+      },
+      "teacher_reference": "native15_successor_candidate/train_messages.jsonl line 10"
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "current_raw_file": "/workspace/scratch/8b32a91611bc/interleaved30_raw_complete/after_FT-BOOK-AFTER-ANSWER.jsonl",
+      "current_raw_file_sha256": "2ee5defd6eae0ed46e9d0d36a610245ba6368c6a8ea1f686bf9bdd06988065f3",
+      "current_raw_utf8_sha256": "3c52900bfe4ddbb6078f797701dac22a3cdcb3bdf704d2651cf87e124524f68b",
+      "previous_raw_file": "/workspace/scratch/8b32a91611bc/afteronly_final/run/after_FT-BOOK-AFTER-ANSWER.jsonl",
+      "previous_raw_file_sha256": "724903e55d284e1e6845a7adf745c03517a9c4ef7d2178acd93c5a3f58f0e6e6",
+      "current": {
+        "output_tokens": 2876,
+        "seconds": 114.78633520693984,
+        "eos": true,
+        "finish_reason": "stop",
+        "parse_error": null
+      },
+      "previous": {
+        "output_tokens": 3712,
+        "seconds": 146.4204135609325,
+        "eos": false,
+        "finish_reason": "length",
+        "parse_error": "Expecting value: line 1 column 14666 (char 14665)"
+      },
+      "counts": {
+        "claims": 10,
+        "relations": 7,
+        "updates": 1,
+        "quote_rows": 17
+      },
+      "teacher_counts": {
+        "claims": 10,
+        "relations": 7,
+        "updates": 7,
+        "quote_rows": 17
+      },
+      "exact_teacher_subset_matches": {
+        "claims": false,
+        "relations": false,
+        "evidence_quotes": false,
+        "surface_bindings": false
+      },
+      "nonliteral_quote_indexes": [
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "out_of_bounds_references": [
+        {
+          "path": "candidate.surface_proposal.bindings[2].update_refs",
+          "index": 1,
+          "array_size": 1
+        },
+        {
+          "path": "candidate.surface_proposal.bindings[2].update_refs",
+          "index": 2,
+          "array_size": 1
+        },
+        {
+          "path": "candidate.surface_proposal.bindings[2].update_refs",
+          "index": 3,
+          "array_size": 1
+        },
+        {
+          "path": "candidate.updates[0].evidence_indexes",
+          "index": 17,
+          "array_size": 17
+        }
+      ],
+      "final_cmee_result": {
+        "status": "SEMANTIC_NOT_ADOPTED",
+        "decision": "REJECT",
+        "reason_code": "semantic_receipt_not_validated",
+        "meaning_adopted": false,
+        "body_available": false,
+        "receipt_status": "INVALID_EVIDENCE"
+      },
+      "reading_review": {
+        "improvements": [
+          "前回3712token打切り・JSON未閉鎖から2876token/EOS/JSON完了へ進み、binding96個反復は3sectionへ縮んだ。",
+          "元remaining_concernを保持し、returned IDの重複を解消。新claimのanchorを回答source sixrow-answer-bookへ戻した。",
+          "counterfactualのtextは前回の無連絡事実から、反実的振返りの語句へ近付いた。question_proposal=nullは維持。"
+        ],
+        "unresolved_or_worse": [
+          "no_contactのtext/predicateへ「一言、遅くなるって伝えておけばよかったな」と現在の気がかりの全文を置きNEGATED扱い。無連絡の事実と振返りをなお区別できていない。late_awarenessも無連絡まで含む全文を抱える。",
+          "self_statementに接続詞「のに」まで含め、continuing_concern/counterfactualの時点は教師ANSWER_TIMEからWRITTEN_PRESENTへ変わる。",
+          "更新は教師ADD6+INVALIDATE_GAP1の7件でなくADD1件だけ。update_refs[0,1,2,3]の1〜3と、ADD.evidence_indexes=[17]が範囲外。",
+          "quote17件中index12〜16は5件とも、原回答の行を結合し末尾の反実的語句を再度足した同じ生成文で、元fieldに存在しない。",
+          "Observationは遅延/謝罪/大丈夫/返却済みを復唱し、解明された無連絡と現在の気がかりを観測として返していない。Observation bindingのreturned/continuing_concern/counterfactualとも実本文がずれる。",
+          "Receptionとupdate_noteが完全同一の本人回答再掲+末尾反復。説明更新を短く受け取る文へなっていない。"
+        ],
+        "evidence_paths": [
+          "candidate.claims[5].text",
+          "candidate.claims[7].text",
+          "candidate.claims[8].about_time",
+          "candidate.claims[9].about_time",
+          "candidate.updates",
+          "candidate.surface_proposal.bindings[2].update_refs",
+          "evidence_quotes[12:17]",
+          "candidate.surface_proposal"
+        ],
+        "conclusion": "JSON/EOSと一部の元経験保持は改善。引用非実在・更新不整合・意味取り違え・原文再掲が残り、receipt INVALID_EVIDENCE。"
+      },
+      "teacher_reference": "native15_successor_candidate/train_messages.jsonl line 11"
+    },
+    {
+      "case_id": "FT-SHOP-INITIAL",
+      "current_raw_file": "/workspace/scratch/8b32a91611bc/interleaved30_raw_complete/after_FT-SHOP-INITIAL.jsonl",
+      "current_raw_file_sha256": "bd326b476f7a93533f0f8803918271f864b40df9a044c0d7dca8a087f6132ecd",
+      "current_raw_utf8_sha256": "aba34b756f4fb20799ecc396c4e22aa2228159262f44d2c2f8a360518e34f06f",
+      "previous_raw_file": "/workspace/scratch/8b32a91611bc/afteronly_final/run/after_FT-SHOP-INITIAL.jsonl",
+      "previous_raw_file_sha256": "fb3d2426b41a2781b6801e7230773c30c735daf424dfabb6ff7c07ba1d825359",
+      "current": {
+        "output_tokens": 1061,
+        "seconds": 42.805097837001085,
+        "eos": true,
+        "finish_reason": "stop",
+        "parse_error": null
+      },
+      "previous": {
+        "output_tokens": 1100,
+        "seconds": 43.41737112496048,
+        "eos": true,
+        "finish_reason": "stop",
+        "parse_error": null
+      },
+      "counts": {
+        "claims": 4,
+        "relations": 2,
+        "updates": 0,
+        "quote_rows": 6
+      },
+      "teacher_counts": {
+        "claims": 4,
+        "relations": 2,
+        "updates": 0,
+        "quote_rows": 6
+      },
+      "exact_teacher_subset_matches": {
+        "claims": true,
+        "relations": true,
+        "evidence_quotes": true,
+        "surface_bindings": false
+      },
+      "nonliteral_quote_indexes": [],
+      "out_of_bounds_references": [],
+      "final_cmee_result": {
+        "status": "MEANING_ADOPTED_BODY_UNAVAILABLE",
+        "decision": null,
+        "reason_code": null,
+        "meaning_adopted": true,
+        "body_available": false,
+        "receipt_status": "CANDIDATE_UNREVIEWED"
+      },
+      "reading_review": {
+        "improvements": [
+          "4claim・2relation・6引用は教師と完全一致し、前回joy根拠が「うれしかったけど」へ広がった問題が解消。PERSON_PERCEPTIONとNOT_STATEDの区別、問いの文言も維持。",
+          "前回の『理由は未記載ですが』という内部説明文は本文から消えた。最終CMEEでは意味採用へ進んだ。"
+        ],
+        "unresolved_or_worse": [
+          "意味packetとObservation bindingにjoyはあるが、可視本文はお祝い送信と置いていかれた感覚だけ。本人が明示した喜びを返していない。",
+          "Reception bindingはfelt_left_behindだけに縮み、教師のjoyとの共同保持を失う。関係memo_linkを参照しても本文には片側しか無い。",
+          "Observationの「开店」は簡体字混入。受け取りは「少し置いていかれた気がしたのですね。」だけで、前回より短いが本人の二面を受け取る内容としては減少。"
+        ],
+        "evidence_paths": [
+          "candidate.claims[2]",
+          "candidate.surface_proposal.bindings",
+          "candidate.surface_proposal.observation",
+          "candidate.surface_proposal.reception"
+        ],
+        "conclusion": "意味は採用されたが本文はmodel_surface_not_validated。構造成功を本人向け品質成立に換算しない。"
+      },
+      "teacher_reference": "native15_successor_candidate/train_messages.jsonl line 12"
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "current_raw_file": "/workspace/scratch/8b32a91611bc/interleaved30_raw_complete/after_FT-SHOP-AFTER-ANSWER.jsonl",
+      "current_raw_file_sha256": "c0443e7eb5fa55f4e5f21a40a495816e05ed4c7f20c43611fd819f5183367c30",
+      "current_raw_utf8_sha256": "ee02ff2ce45e13936415bf6538317e6c34ffa91c47dde0f01d4db4ebb9009e7e",
+      "previous_raw_file": "/workspace/scratch/8b32a91611bc/afteronly_final/run/after_FT-SHOP-AFTER-ANSWER.jsonl",
+      "previous_raw_file_sha256": "5f4450aca98d06dc857bc34829e79d8f054076eeed26895fa951d816e8e106ad",
+      "current": {
+        "output_tokens": 2772,
+        "seconds": 111.06007251690608,
+        "eos": true,
+        "finish_reason": "stop",
+        "parse_error": null
+      },
+      "previous": {
+        "output_tokens": 2669,
+        "seconds": 105.28876294603106,
+        "eos": true,
+        "finish_reason": "stop",
+        "parse_error": "Expecting ',' delimiter: line 1 column 3394 (char 3393)"
+      },
+      "counts": {
+        "claims": 11,
+        "relations": 5,
+        "updates": 1,
+        "quote_rows": 14
+      },
+      "teacher_counts": {
+        "claims": 11,
+        "relations": 6,
+        "updates": 8,
+        "quote_rows": 18
+      },
+      "exact_teacher_subset_matches": {
+        "claims": false,
+        "relations": false,
+        "evidence_quotes": false,
+        "surface_bindings": false
+      },
+      "nonliteral_quote_indexes": [],
+      "out_of_bounds_references": [
+        {
+          "path": "candidate.relations[3].evidence_indexes",
+          "index": 14,
+          "array_size": 14
+        },
+        {
+          "path": "candidate.relations[4].evidence_indexes",
+          "index": 15,
+          "array_size": 14
+        },
+        {
+          "path": "candidate.surface_proposal.bindings[2].update_refs",
+          "index": 1,
+          "array_size": 1
+        },
+        {
+          "path": "candidate.surface_proposal.bindings[2].update_refs",
+          "index": 2,
+          "array_size": 1
+        },
+        {
+          "path": "candidate.surface_proposal.bindings[2].update_refs",
+          "index": 3,
+          "array_size": 1
+        },
+        {
+          "path": "candidate.surface_proposal.bindings[2].update_refs",
+          "index": 4,
+          "array_size": 1
+        },
+        {
+          "path": "candidate.surface_proposal.bindings[2].update_refs",
+          "index": 5,
+          "array_size": 1
+        },
+        {
+          "path": "candidate.surface_proposal.bindings[2].update_refs",
+          "index": 6,
+          "array_size": 1
+        },
+        {
+          "path": "candidate.surface_proposal.bindings[2].update_refs",
+          "index": 7,
+          "array_size": 1
+        }
+      ],
+      "final_cmee_result": {
+        "status": "SEMANTIC_NOT_ADOPTED",
+        "decision": "REJECT",
+        "reason_code": "model_evidence_collection_invalid",
+        "meaning_adopted": false,
+        "body_available": false,
+        "receipt_status": "CANDIDATE_UNREVIEWED"
+      },
+      "reading_review": {
+        "improvements": [
+          "前回EOSでもJSON不正だったが、今回は2772tokenでJSONを閉じた。元4claimを保持し、新7roleを含む11claimをobjectとして出力。",
+          "shared_talkは前回の会話の短い引用だけから『以前、その友人と…話していたことがある』という原文範囲へ戻った。",
+          "全ての回答quoteをanswer_text_privateへ戻し、前回のmemo_action/架空field混入を解消。現14引用は全て元field内に実在。",
+          "answer_concessionは復旧。自然文には共同準備/約束の否定、友人側の現実化という本人知覚、過去からの距離と喜び/寂しさが残る。"
+        ],
+        "unresolved_or_worse": [
+          "no_promiseのtextは友人側で未来が現実化した記述なのにNEGATED。perceived_realizationは距離の記述でfelt_distanceと重複。役割の取り違えは前回から残る。否定文の語句は別claim/本文に残るが、正しく分離していない。",
+          "共同準備と約束の否定を一つのno_joint_preparation全文へ束ね、no_promise独立roleを適切に保持しない。answer_joy等の過去場面時点/WRITTEN_PRESENT_IN_PAST_CONTEXTも落ちる。",
+          "past_referenceがなくrelation5件/教師6件。answer_explains_targetは元felt_left_behindでなくanswer_joyをfromにする。relationの根拠index14/15はquote14件の範囲外。",
+          "更新はADD1件/教師8件、INVALIDATE_GAPが無い。update_noteのupdate_refs0..7は1〜7が範囲外。",
+          "Receptionは本人回答の一人称を長く再掲し、距離/寂しさを二度繰り返す。update_noteも列挙と反復で、本人への自然な受け取りにならない。",
+          "update_noteの『友人の方ではもう現実になっていたこと』『少し離れてしまったこと』は、元の本人知覚『と感じました』『ようで』の留保を落としている。"
+        ],
+        "evidence_paths": [
+          "candidate.claims[6]",
+          "candidate.claims[7]",
+          "candidate.claims[8].about_time",
+          "candidate.relations",
+          "candidate.updates",
+          "candidate.surface_proposal.bindings[2]",
+          "candidate.surface_proposal.reception",
+          "candidate.surface_proposal.update_note"
+        ],
+        "conclusion": "JSONと引用field束縛は改善したが、役割/更新/根拠参照が成立せずmodel_evidence_collection_invalid。"
+      },
+      "teacher_reference": "native15_successor_candidate/train_messages.jsonl line 13"
+    },
+    {
+      "case_id": "FT-REPOT-INITIAL",
+      "current_raw_file": "/workspace/scratch/8b32a91611bc/interleaved30_raw_complete/after_FT-REPOT-INITIAL.jsonl",
+      "current_raw_file_sha256": "c99124c059a33ee42d70e10f0f8579a7888f77ffef2d55336471bcdc2b386e86",
+      "current_raw_utf8_sha256": "a495fd8a1c05a3f756ece4e1b421b0d9bf955a03c5488b6219a907c60d3611fe",
+      "previous_raw_file": "/workspace/scratch/8b32a91611bc/afteronly_final/run/after_FT-REPOT-INITIAL.jsonl",
+      "previous_raw_file_sha256": "67e66dcd2e4ea8abe971f8d1c728b39036e186c701a88b0569e76a91564127ac",
+      "current": {
+        "output_tokens": 967,
+        "seconds": 38.72974532097578,
+        "eos": true,
+        "finish_reason": "stop",
+        "parse_error": null
+      },
+      "previous": {
+        "output_tokens": 978,
+        "seconds": 38.59047474397812,
+        "eos": true,
+        "finish_reason": "stop",
+        "parse_error": null
+      },
+      "counts": {
+        "claims": 4,
+        "relations": 2,
+        "updates": 0,
+        "quote_rows": 6
+      },
+      "teacher_counts": {
+        "claims": 4,
+        "relations": 2,
+        "updates": 0,
+        "quote_rows": 6
+      },
+      "exact_teacher_subset_matches": {
+        "claims": true,
+        "relations": true,
+        "evidence_quotes": true,
+        "surface_bindings": true
+      },
+      "nonliteral_quote_indexes": [],
+      "out_of_bounds_references": [],
+      "final_cmee_result": {
+        "status": "MEANING_ADOPTED_BODY_UNAVAILABLE",
+        "decision": null,
+        "reason_code": null,
+        "meaning_adopted": true,
+        "body_available": false,
+        "receipt_status": "CANDIDATE_UNREVIEWED"
+      },
+      "reading_review": {
+        "improvements": [
+          "前回kind=role名という誤りからEVENT/EVENT/STATE/STATEへ戻った。relation.scope_refsも自身のrelation IDへ修復。",
+          "4claim・2relation・6引用・表面bindingは教師と完全一致し、最終CMEEで意味採用へ進んだ。",
+          "Receptionは前回の『その出来事と結果を保持します』を除き、『やり方が分かって、安心したと聞けて、よかったです』という本人へ向けた短い受け取りへ改善。"
+        ],
+        "unresolved_or_worse": [
+          "Observationは『叔父に植え替えの手順を説明し、最後まで聞かせたのですね』。叔父が説明し本人が最後まで聞いた原文を、本人が説明して聞かせた側へ二重に反転する。",
+          "前回の『叔父に説明し、最後まで聞けて』にも反転があったが、今回は『聞かせた』で受領者と説明者の逆転がさらに明確。packetと表面bindingが正しくても本文が逆向き。"
+        ],
+        "evidence_paths": [
+          "candidate.claims",
+          "candidate.relations",
+          "candidate.surface_proposal.observation",
+          "candidate.surface_proposal.reception"
+        ],
+        "conclusion": "意味採用と受け取りの一部改善はあるが、主客反転が重大。本文はmodel_surface_not_validatedで不成立。"
+      },
+      "teacher_reference": "native15_successor_candidate/train_messages.jsonl line 14"
+    },
+    {
+      "case_id": "FT-KNIT-INITIAL",
+      "current_raw_file": "/workspace/scratch/8b32a91611bc/interleaved30_raw_complete/after_FT-KNIT-INITIAL.jsonl",
+      "current_raw_file_sha256": "7d3536507472691485f0278b48aa6f85dcc0826ce5a8c04aaba9f6f43fc36336",
+      "current_raw_utf8_sha256": "d9c332fd22ec7bbab57fa6d9f38dce7e80f164758f053f16b25985bca4cbae31",
+      "previous_raw_file": "/workspace/scratch/8b32a91611bc/afteronly_final/run/after_FT-KNIT-INITIAL.jsonl",
+      "previous_raw_file_sha256": "62c988fb1e50536245d8b92289277837e35000c0aabd1eff7c9813121f0098a9",
+      "current": {
+        "output_tokens": 1002,
+        "seconds": 40.16046673501842,
+        "eos": true,
+        "finish_reason": "stop",
+        "parse_error": null
+      },
+      "previous": {
+        "output_tokens": 1592,
+        "seconds": 62.90672790398821,
+        "eos": true,
+        "finish_reason": "stop",
+        "parse_error": "Expecting ',' delimiter: line 1 column 775 (char 774)"
+      },
+      "counts": {
+        "claims": 4,
+        "relations": 0,
+        "updates": 0,
+        "quote_rows": 4
+      },
+      "teacher_counts": {
+        "claims": 4,
+        "relations": 0,
+        "updates": 0,
+        "quote_rows": 4
+      },
+      "exact_teacher_subset_matches": {
+        "claims": false,
+        "relations": true,
+        "evidence_quotes": false,
+        "surface_bindings": false
+      },
+      "nonliteral_quote_indexes": [],
+      "out_of_bounds_references": [],
+      "instruction_copy_check": {
+        "reception_equals_contiguous_system_substring": true,
+        "system_character_offset": 300,
+        "reception_characters": 140,
+        "teacher_reception_equal": false
+      },
+      "final_cmee_result": {
+        "status": "SEMANTIC_NOT_ADOPTED",
+        "decision": "UNSUPPORTED",
+        "reason_code": "model_evidence_out_of_scope",
+        "meaning_adopted": false,
+        "body_available": false,
+        "receipt_status": "CANDIDATE_UNREVIEWED"
+      },
+      "reading_review": {
+        "improvements": [
+          "前回の不正JSONから1002token/EOS/JSON完了へ進んだ。4claimのkind/time/文字列scope_refsを整えた。",
+          "不要なwritten_link3件を消しrelations=[]へ戻した。unknownはPERSON_STATED、burden/sadness二対象、evidence_indexes[3,1,2]へ修復し、前回の[3,0,2]を解消。",
+          "原語の行動・面倒さ・少しの寂しさ・本人明示不明を保ち、前回本文の『編み物とそれら』という対象拡大は消えた。問いなしも維持。"
+        ],
+        "unresolved_or_worse": [
+          "4claimと引用に句点まで含め、教師の有限role範囲とは一致しない。全引用が元fieldにあることは確認したが、適格な意味根拠範囲の合格とは別。",
+          "Reception140文字は入力system messageのcharacter offset300からの連続部分と完全一致。『本人の原入力・本人回答・生成済み解釈を区別します…』というモデル向け共通指示が、本人への返答へ混入している。教師のReceptionではない。",
+          "Observationも全内容の列挙に『聞けて安心です』を足しており、観測の節とAI側の受け取りが混ざる。本人が安心したと断定する文ではないが、不明と寂しさを聞いた応答として不自然。"
+        ],
+        "evidence_paths": [
+          "candidate.claims[*].text",
+          "candidate.unknowns[0]",
+          "candidate.relations",
+          "candidate.surface_proposal.observation",
+          "candidate.surface_proposal.reception",
+          "frozen train line15 messages[0].content character[300:440]"
+        ],
+        "conclusion": "外側形式と不明の対象/参照は改善したが、受け取りが指示文に置換された重大な文章不良。意味はmodel_evidence_out_of_scopeで未採用。"
+      },
+      "teacher_reference": "native15_successor_candidate/train_messages.jsonl line 15"
+    }
+  ],
+  "final_cmee_result": {
+    "path": "/workspace/scratch/8b32a91611bc/interleaved30_final/diagnosis/diagnosis.json",
+    "sha256": "242a92f6001e80e11cc1fa5b83e68fcfb339fe0dcc87e73f9eaccb78872ffa83",
+    "api_commit": "6b043880504912481a6b10d93c9128ec4995b70b",
+    "source_run_sha256": "d8e100cb5b22554bdc6f09a6a08c7344b04f3a3d759cac43662ecffca5114274",
+    "meaning": 11,
+    "body": 9,
+    "total": 15,
+    "cold_file_checked_count": 11,
+    "new6_meaning_adopted": 2,
+    "new6_body_available": 0,
+    "cold_file_equal_count": 11
+  },
+  "final_result_interpretation": {
+    "old_quote9": "全9のparsed target payload一致、意味/本文9。前回のchair quote失敗はこの候補で回復した。",
+    "new6": "意味2/6（SHOP初回、REPOT）、本文0/6。11/15という意味採用数を、11件の本人向け応答成功へ変換しない。",
+    "cold_file": "11件のcold-file一致はroot診断の技術証拠。本文未提供2件も同じ未提供状態へ再開したという意味であり、本文成功2件ではない。",
+    "adoption_decision": "rootから通常不採用、追加学習なしとの判断を受領。これは新しい有料試行や検査緩和を開始する指示ではない。"
+  },
+  "summary": [
+    "全15でEOS/JSON完了、旧9の固定quote fitは成立へ進展。新6でもBOOK/SHOP初回・REPOTのclaims/relations/引用のsubset一致、回答後のJSON閉鎖等に局所改善がある。",
+    "一方、意味/根拠参照と自然本文が別方向へ崩れる。BOOK初回の未記載の安心、REPOTの主客逆転、KNITの指示文混入、回答後の原文再掲/不正更新が残り、新6の本文は0。",
+    "教師は正しい原文/役割/本人向け本文を保持しており、今回の不良を教師不足と断定しない。混在順序と30更新を同時変更した一回なので、どちらが効果を出したかの単独因果も確定しない。"
+  ],
+  "effects": {
+    "new_model_calls": 0,
+    "cmee_reexecution_by_this_review": 0,
+    "raw_repair": 0,
+    "teacher_changes": 0,
+    "evaluation_changes": 0,
+    "gpu_operations": 0,
+    "external_writes": 0,
+    "github_writes": 0
+  },
+  "adoption_at_initial_raw_reading": "PENDING_ROOT_CONSUMER; final measurements integrated separately in final_cmee_result and each case."
+}
