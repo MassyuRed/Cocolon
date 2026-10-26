@@ -20,11 +20,11 @@
   "product_accepted": false,
   "gpu_lifecycle_operations": 0,
   "runner_sha256": "a62d3ed74e76a26c01fe66b9eba32d42631acac170cfd9c8dcb2c7cdf5076552",
-  "status": "PREPARED_ENVIRONMENT_UNBOUND",
-  "gpu_run_authorized": false,
-  "approval_basis": null,
-  "expected_gpu_name": null,
-  "pod_id": null,
-  "gpu_hourly_usd": null,
-  "max_process_usd": null
+  "status": "AUTHORIZED_ONCE_BOUND",
+  "gpu_run_authorized": true,
+  "approval_basis": "2026-10-27 Mash explicitly requested the cheapest usable Runpod rental and continuation of 4B training + CMEE integration, then reported: A5000借りたけど、やれる？ Current session continuation; new successor run only.",
+  "expected_gpu_name": "NVIDIA RTX A5000",
+  "pod_id": "bkj4qvnhwtdqc2",
+  "gpu_hourly_usd": 0.28,
+  "max_process_usd": 0.21
 }
