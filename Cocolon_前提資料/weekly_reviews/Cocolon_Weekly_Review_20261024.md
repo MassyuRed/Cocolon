@@ -2787,11 +2787,11 @@ Mashの「4Bを動かすための最安レンタルGPUをrunpodでレンタル�
 
 ### 後継候補の範囲と実確認
 
-- [run_native15_afteronly.py](native15_preparation/run_native15_afteronly.py) と [gpu15_afteronly.plan.json](native15_preparation/gpu15_afteronly.plan.json) を別に追加。新before生成0、同じ15行/順序/seed/LR5e-5/全文assistant+EOS損失/32tensorで15更新し、別adapter保存→非学習reload→同after15を実施する候補。学習/保存/reload/after本体は旧sourceと同一。
+- [run_native15_afteronly.py](../observation_learning/training/2026-10-26-unconnected-native/native15_preparation/run_native15_afteronly.py) と [gpu15_afteronly.plan.json](../observation_learning/training/2026-10-26-unconnected-native/native15_preparation/gpu15_afteronly.plan.json) を別に追加。新before生成0、同じ15行/順序/seed/LR5e-5/全文assistant+EOS損失/32tensorで15更新し、別adapter保存→非学習reload→同after15を実施する候補。学習/保存/reload/after本体は旧sourceと同一。
 - 最大2700秒、1生成180秒、最大15call、再試行なし。非EOS/時間切れ/OOM/非有限/identity不一致を従来どおり停止とし、無補修rawを現在のCMEEへ通す。15×180秒だけで全体2700秒となるため、学習・読込込みで全15件が収まる保証はしない。終了後のhash/退避/回収は別途時間を要し、OS強制停止保証ではない。
 - 前回のBOOK初回/回答後2件だけを失敗baseline原本として参照。未測定のbefore4件を補完せず、同条件6件の前後比較完成とは報告しない。
 - 未束縛planのstatusはPREPARED_ENVIRONMENT_UNBOUND。実GPU名/Pod ID/正確な費用が未確認なので --execute はoutput作成・重み読込より前に拒否する。今回のMash指示の受領と、実行環境が揃っていない状態を分ける。追加の承認段階を新設しない。
-- [CPU確認結果](native15_preparation/cpu_candidate_validation.json) は55/55成功。未束縛実行拒否/出力0、旧payload変異拒否、before/期限/call/予算/identity変異拒否、全15学習評価の対応、学習〜保存reloadの旧bytes維持、未束縛authorizationが旧Trueを継承しないことを確認。別文脈read-only確認で見つかったmerged authorization表示を修正し再確認した。
+- [CPU確認結果](../observation_learning/training/2026-10-26-unconnected-native/native15_preparation/cpu_candidate_validation.json) は55/55成功。未束縛実行拒否/出力0、旧payload変異拒否、before/期限/call/予算/identity変異拒否、全15学習評価の対応、学習〜保存reloadの旧bytes維持、未束縛authorizationが旧Trueを継承しないことを確認。別文脈read-only確認で見つかったmerged authorization表示を修正し再確認した。
 - localに固定Torch/Transformers/PEFT環境がないため、実tokenizerの新規再実行・モデル読込・forward・学習・生成・CMEE採否・SQL・本人端末は今回0。55確認をGPU成功や観測品質へ換算しない。正式Pro/Ultra/human受入れではない。
 
 ### GPU確保後の直接再開
