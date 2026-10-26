@@ -5030,3 +5030,5 @@ training.jsonl/adapter/partial_adapter/reloaded_tensors/after raw/cold-file結�
 - `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/native15_preparation/gpu15_afteronly.plan.json`：PREPARED_ENVIRONMENT_UNBOUND、GPU名/Pod/費用未確認。Mashの続行指示受領と、環境未確保を分離。
 - `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/native15_preparation/cpu_candidate_validation.json`：local CPU55成功、実tokenizer再実行/モデル処理/GPU0。正式商品受入れではない。
 - 関連owner：同README#native15-afteronly-prepared、全体00/観測入口、weekly§58。Runpod比較後A5000 24GB/表示$0.28hを選択したがDeployを自動承認審査が拒否、本人引継ぎ待ち。新Pod/新重み/after rawは未作成。STRUCTURE_MAP_DELTA_NONE、製品code/API/DB/RN/Render/Supabase/本人DB/merge/deploy0、商品0/正式0/3/54.50％据置。
+
+引継ぎ時の在庫差分：その後の引継ぎ準備でA4500 20GBの空きが戻ったため、同じ公式image/50GB container/追加volumeなし・表示$0.26/hへ選択を戻した。引継ぎ画面名はcocolon-4b-native15-a4500-20261027。レンタルは確定しておらず、在庫/料金は本人確定時に再確認する。
