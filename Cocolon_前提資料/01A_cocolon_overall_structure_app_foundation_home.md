@@ -4933,3 +4933,8 @@ observation_learning/training/2026-10-26-generic-native-bridge13/のREADME／sou
 
 
 10/26 bridge13完了file：同packのrun/run.json・training.jsonl・case1〜11_raw.jsonl・after_native_fit.jsonl・reloaded_tensors.json・file_manifest.jsonは13更新／11生成／全EOS・意味本文8/9・旧新重み不変を所有する。run/consumer.index.json＋consumer_parts24fileは既存consumer一回の全1,500,491bytesを無損失復元。runtime/launch・log・consumer_launch・guardは単一起動を、content_diagnosis.jsonは全11本文・前後比較・CHAIR03訂正の根拠3行欠落/終点2誤り/配列外8を、early_weights_verification/recovery_manifest/recovery_verificationは32F32有限と完了38memberの照合・保全先を所有する。runtime_checkpointはCLOSED_NATIVE_RETENTION_AND_GENERIC_QUALITY_NOT_MET_DO_NOT_RELAUNCH。新c39bbc27保全・不採用、旧45779維持。STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。currentは全体00／最新weekly§52最終／当READMEへ戻る。
+
+
+### 2026-10-26：既存教師interfaceのCPU再検討（製品構造差分なし）
+
+`observation_learning/training/2026-10-26-interface-review/`：READMEは出所・範囲・次の直接作業、audit_interfaces.pyは既存quote compiler／admission／Engineへ旧／quote教師9を渡すCPU probe、native_quote_messages.jsonlはcandidateと根拠順を不変にした別教材候補。daily3は旧messages完全同一。three_stage_alignment.jsonはgeneric UDON／chair初回／訂正後の対応とFree9出所を保持。cpu_review.jsonは意味本文9/9・全78根拠復元・不正3拒否、cpu_launch.logはPID688267一回の終了値、helper_postcheck.jsonは旧補助source、recovery_manifest.json／recovery_verification.jsonは27,224bytes／6memberの回収照合を所有する。モデル生成・追加学習・SQL・製品source変更0、旧45779保持。STRUCTURE_MAP_DELTA_NONE。教師9/9をモデル実績や商品品質へ換算しない。currentは全体00／最新weekly§53／当READMEへ戻る。

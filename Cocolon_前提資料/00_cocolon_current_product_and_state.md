@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-更新日：2026-10-26 JST（最新差分：bridge13一回完了。native8/9・generic受け取り品質未達により新候補不採用、旧45779保持）。全Cocolon作業の必読原本。
+更新日：2026-10-26 JST（最新差分：Jupyter CPUで既存native教師9件の引用形式互換性とgeneric3段階の対応を確認。モデル試行0・旧45779保持）。全Cocolon作業の必読原本。
 
 > **最新報告会：[第8回・2026-10-24](weekly_reviews/Cocolon_Weekly_Review_20261024.md)。** 今週実績・前週目標の達否と10/24〜10/31の管理案を記録。**Mashの指示により報告会終了。** 華恋の意見全文は[§10](weekly_reviews/Cocolon_Weekly_Review_20261024.md#karen-closing-opinion)、終了時の区分と再開先は[§11](weekly_reviews/Cocolon_Weekly_Review_20261024.md#meeting-closed-and-next-session)。10/24の4B確定・GPU16GB優先/24GB許容は当時の決定で、4B確定は10/25に撤回済み。最新の開発基準選定は[§23](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-three-core-model-and-serving-decision)。華恋が今回の判断責任として選んだもので、旧4B確定・常時24GB契約の自動復活ではない。起動済み3070の実確認は[§22](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-3070-running-cuda-uvm-io-error)。A5000未確保は§20の履歴。Vast実見積りは§19の履歴。次週の推奨順位は[§4](weekly_reviews/Cocolon_Weekly_Review_20261024.md#next-week-priorities)、対象path・具体手順・失敗/回復検査・終了条件は[§8](weekly_reviews/Cocolon_Weekly_Review_20261024.md#detailed-work-breakdown)を参照。全体管理評価・公開見通しは[§9](weekly_reviews/Cocolon_Weekly_Review_20261024.md#overall-status-and-release-outlook)：54.50％、正式商品受入れ0/3、12/18達成の裏付け不足。会議途中の「進行中」は当時の記録。次週案全体への明示採否・個別実行の未決は§11に区別して保持する。モデル選定の決定と、以下の品質・配置・端末・費用の未完了を区別する。
 
@@ -8,7 +8,7 @@
 
 **GPUの最新確認：** Jupyter直接で承認済みbridge13一回を13更新・保存非学習reload・全11生成／EOSまで完了。記録999.271秒／処理按分約$0.07217（保持等別）。終了後A4500／20,470MiB／使用1MiB、GPUは稼働保持。管理console／GPU一覧／管理API／Stop／再起動／削除／新Pod／charge0。
 
-**現在の直接作業（bridge13を完了・閉鎖、新候補不採用）：** 既存generic1行4回＋native9各1回の13更新・保存非学習reload・全11生成を一回完了。native候補内容は全9教師一致だが、CHAIR03訂正の根拠表12→9行／引用終点2誤り／配列外参照により意味／本文8/9。通常形式2件はUDON短文化とE05「出たい気持ち」保持の局所改善があるが、受け取りが説明調のまま、E05は申込への喜びを参加へ変えて取消の迷いの対象も落とす。新c39bbc27は保全・未昇格、旧45779と採用条件を保持する。[全実結果](observation_learning/training/2026-10-26-generic-native-bridge13/README.md#bridge13-final-result)／最新weekly§52最終。37payload＋manifest・全11本文・保存旧新重みを回収照合済み。新model再試行／追加学習／新service／SQL／製品変更0、商品0／正式0/3／54.50％。次は既存の出所付き受け取り教材と両interfaceの対応・言語2題の範囲をCPUで見直す。局所mask/LR/更新数探索や新有料試行を自動開始しない。今回新観測会不要、他core完成教師／独立未知評価／本人端末は未完。
+**現在の直接作業（Jupyter CPUのinterface再検討を完了）：** bridge13不採用後、既存native9を既存引用形式へ揃えた別の教材候補を作成。全78根拠の座標復元と、旧／quote教師9/9の意味・本文・問い・訂正3更新の一致、不正3例の拒否を確認した。15.6139秒、4B重み読込／forward／学習／モデル生成／SQL0、旧45779保持。これは教師互換性の確認で、モデル品質改善ではない。generic UDON＋chair初回／訂正後の3段階を照合し、chairの受け取り／更新文は同一targetでないと確定。genericは比較用task card、実接続nativeを学習の基準とする。次は既存未接続教材とnative受理範囲を対照し、自然な本文の対象を定める。同じ2題への反復・新有料試行を自動開始しない。新観測会は基本欠陥へ不要、広い完成教師／独立未知評価／他core／本人端末は残る。[全原本・候補・対応表](observation_learning/training/2026-10-26-interface-review/README.md)、最新weekly§53。商品0／正式0/3／54.50％。
 
 **4B関連作業の開始前：** 全体現在地を全文読んだ後、[観測学習の目的・用途・前提](observation_learning/README.md#observation-learning-intent-and-assumptions)を毎回読み、最新weeklyの決定/実結果と今回の作業を結び付ける。学習・教材作成・評価・CMEE接続・環境移行で共通。ローカル＝Macと決め付けず、学習の成功と観測品質の成立を分ける。
 
@@ -148,7 +148,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 | 作業領域 | 次に解消すべき具体的未完了 |
 |---|---|
-| 学習済みAI・現在の作業 | bridge13を13更新・保存再読込・11生成／全EOSで完了・閉鎖。native意味／本文8/9（CHAIR03訂正の根拠3行欠落・終点2誤り）、generic2件は局所改善と説明調／意味差が残り新候補不採用。999.271秒／処理按分約$0.07217（保持等別）、新c39bbc27保全・未昇格／旧45779保持。次は既存受け取り教材と両interfaceの対応をCPU再検討、新有料処理へ自動進行しない。最新weekly§52最終／[結果](observation_learning/training/2026-10-26-generic-native-bridge13/README.md#bridge13-final-result)。 |
+| 学習済みAI・現在の作業 | bridge13不採用後、既存native9を既存引用形式へ揃えた別の教材候補を作成。全78根拠の座標復元と、旧／quote教師9/9の意味・本文・問い・訂正3更新の一致、不正3例の拒否を確認した。15.6139秒、4B重み読込／forward／学習／モデル生成／SQL0、旧45779保持。これは教師互換性の確認で、モデル品質改善ではない。generic UDON＋chair初回／訂正後の3段階を照合し、chairの受け取り／更新文は同一targetでないと確定。genericは比較用task card、実接続nativeを学習の基準とする。次は既存未接続教材とnative受理範囲を対照し、自然な本文の対象を定める。同じ2題への反復・新有料試行を自動開始しない。新観測会は基本欠陥へ不要、広い完成教師／独立未知評価／他core／本人端末は残る。[全原本・候補・対応表](observation_learning/training/2026-10-26-interface-review/README.md)、最新weekly§53。商品0／正式0/3／54.50％。 |
 | 10/24までの費用・4B選定履歴（当時の構成） | Flex24GBの旧月78,980生成・未測定の速度/起動仮定による運用費95,094円・赤字67,833円の試算は当時の構成の記録で、最新構成の原価ではない。[全仮定・再計算](observation_learning/model_selection/2026-10-24-production-economics/README.md)。旧4B実診断では24GBでLoRA保存・reload・16生成・回収を確認したが、FITは前後0/2。CPU指示修復API1dabc4fは54対象/pack11・合成2/2で、修正版は後続10/25にA4500 20GBで完走・回収済み、最新結果は§24。旧学習peak allocated14.954GiBを本番推論の必要VRAMへ流用しない。4bit/M4を第一候補とした§23は当時の華恋案で、現在の移行先はWindows／Mac未選定。公開API単価を独自育成版の原価へ流用しない。 |
 | Emlis | 一般入力と回答後の意味・自然な本文・有料差、本人実機の保存再読まで。u353〜355のコードと配置差を保持 |
 | Analysis | 最新内容修正版の配置差、通常本文生成・同一保存再読・monthly履歴/比較の本人確認、複数ANSWER採用、一般理解、有料差、IF／Savedの未実装。6501時点の不足案内表示は本人確認済みとして保持 |

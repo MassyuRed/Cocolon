@@ -2672,3 +2672,21 @@ generic UDONは短くなり余計な「その後に」を除いたが、Receptio
 **新候補不採用で一回閉鎖。** 旧45779／現製品／意味admission／readerを保持し、追加更新・LR/mask探索・同要求再call・raw補修・次候補へ自動進行0。interface差が唯一の原因とも混合学習一般が不可能とも断定しない。次は新有料試行を追加せず、既存の出所付き完成受け取り／教示と両interfaceの対応、言語2題の範囲をCPUで再検討する。新観測会はこの基本欠陥へ不要。自然な完成応答・修正実演／Piece・Analysis完成教師／独立未知評価・本人端末は残る。
 
 全体00／観測入口／当pack／runtimeを閉鎖結果へ置換、01Aに原本所在を追記。primary BLOCKER_NARROWED、STRUCTURE_MAP_DELTA_NONE（製品責務/型/契約/保存/公開API/DB/RN不変）、商品0／正式0/3／54.50％据置。管理console/GPU一覧/Runpod管理API/Stop/再起動/削除/新Pod/charge/Render/Supabase/本人DB/通常application/merge/deploy0。処理完了は継続保持料金の停止を意味しない。
+
+
+<a id="20261026-cpu-interface-review"></a>
+## 53. 10/26 — 既存教材の3形式を再検討、native教師9の引用形式互換性をJupyter CPU確認
+
+開始Cocolon0c821ceb／実行source d28fc004／API4002b457不変。全機能00全文、恒久incident、作業rule、全体設計01／全file地図01Aと分冊導線、CMEE map、観測目的、最新weekly§49〜52とactual教師／rawを確認。System Context索引timeoutは保持しfresh原本fallback。root華恋／Codex Work／GPT-6が単一実行writer、別文脈2agentはread-only原本・code reviewで、正式Pro／Ultra／human受入れではない。
+
+[全source・CPU原本・候補・出所対応](../observation_learning/training/2026-10-26-interface-review/README.md)。bridge13の10教師はchair6のnumeric／daily3のquote／generic1の6欄という3課題を混在していた。旧generic UDON＋chair初回／訂正後の3段階を照合。本人sourceは一致するが、chairの受け取りと訂正後更新文はnativeと同じtargetではない。generic訂正にはnative採用priorもない。既存9教師は華恋編集7／華恋架空補充2で、Mash完成goldではない。chairのMash逐語は実問いと訂正後の観測一文で、完成応答全体ではない。
+
+既存APIのquote形式はchairにも適用可能だったため、旧教師のcandidate全体／根拠行順を保持し、start/endだけを除いた別のnative9教材候補を作成。daily3は旧messages完全同一。既存compiler→receive_candidate→意味採用→Engine本文再開へ旧／quote各9教師を渡し、全78根拠を元candidate/evidenceへ完全復元、meaning_packet／本文3欄／問い本文と判定／answer_update全体・更新数は9/9一致。初回chair3ASK／訂正各3更新・問いなし／daily3問いなし。旧consumerはchair numeric固定のため変更せず、独立した一回CPU probeから既存ownerを直接呼んだ。
+
+chair訂正の不正3例も拒否。根拠6/10/11欠落と配列外999参照はreceipt CANDIDATE_UNREVIEWEDでも意味HOLD/model_claim_axes_not_source_bound、存在しない引用はINVALID_EVIDENCE。検査を緩めていない。実tokenizer最大prompt3854／assistantEOS2237／全文6085、8192context・2560生成枠・無切捨て・EOS保持。CPU15.6139088068秒、4B重み読込／forward／学習／モデル生成／SQL0。API/source/SFT／旧45779は前後不変、legacy helperは別postcheckで固定値を照合。probeに内部時間上限はなく、今回実所要と将来GPU期限の検証を混同しない。
+
+実CPU child PID688267一回。短い複数行入力の転送不備と、長い未完了入力はPython構文エラーで効果前終了。固定GitHub取得へ縮小し起動した。archive27,224bytes／6member（5payload＋manifest）・SHA3b1bfd25a3bd4d17c90a2048e4722ddf0ef16c33bdea9f341a7ec758c6ecef7cを一回download、全payload照合。SHA画面転記一回の誤りは実bytesから訂正、再download／CPU再実行0。終了時A4500／20,470MiB／使用1MiB、GPU稼働保持。
+
+次は実CMEEへ渡すnativeの入力・意味候補・自然な本文を学習の基準とし、未接続の既存教材とnative受理範囲を対照して対象を定める。genericは比較用task cardで通常CMEE入口ではない。同じ2題の反復やgeneric2行追加を改善保証へせず、mask／LR／更新回数探索を追加しない。新候補の実モデル適合は未実行、新有料plan／承認は作成しない。新観測会はこの基本欠陥へ不要。自然な完成応答の広さ・独立未知評価・Piece／Analysis教師・本人端末は残る。
+
+全体00／観測入口の古い現在地／01Aを同時同期。限定TECHNICAL_CREDITは教師9の形式互換性のみ、bridge13モデル8/9を上書きしない。STRUCTURE_MAP_DELTA_NONE、商品0／正式0/3／54.50％据置。旧教師／runner／consumer／製品source／admission／reader／契約／API／DB／RN不変。管理console／GPU一覧／管理API／Stop／再起動／削除／新Pod／charge／Render／Supabase／本人DB／通常application／merge／deploy0。GPU保持料金は継続する。

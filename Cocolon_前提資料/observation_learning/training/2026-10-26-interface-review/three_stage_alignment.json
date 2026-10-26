@@ -1,0 +1,447 @@
+{
+  "scope": "EXISTING_SOURCE_ALIGNMENT_ONLY",
+  "independent_language_stories": 2,
+  "pairs": [
+    {
+      "generic_id": "FT-UDON-INITIAL",
+      "native_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "source_fields_equal": {
+        "memo": true,
+        "memo_action": true,
+        "category": true,
+        "emotions": true,
+        "emotion_details": true
+      },
+      "origin": "KAREN_EDIT_OF_EXISTING_RECORD",
+      "mash_completed_response": false,
+      "source_refs": [
+        {
+          "path": "Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261022-002/01_dialogue.md",
+          "commit": "d57fe2205cfa74d018b2a33a1e4e74ca6837310d",
+          "blob_sha": "7c432eb03550569abe434d4f41560345098a7024",
+          "dialogue_id": "D04",
+          "start_scalar": 2357,
+          "end_scalar_exclusive": 2506,
+          "quote": "| 項目 | 入力内容 |\n| --- | --- |\n| 感情選択 | 平穏（中）・喜び（弱） |\n| 思考内容（考えていること） | あったかいもの食べたら、ちょっと落ち着いた。 |\n| 行動内容（実際に起こった出来事） | 帰ってから、うどんを作って食べた。 |\n| カテゴリー | 生活 |"
+        }
+      ],
+      "generic_target": {
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "question": null,
+        "update_note": null,
+        "grounded_points": [
+          {
+            "source_id": "FT-UDON-O",
+            "fields": [
+              "memo",
+              "memo_action",
+              "emotion_details"
+            ]
+          }
+        ],
+        "unknowns": []
+      },
+      "native_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "return",
+              "cook",
+              "eat"
+            ],
+            "relation_refs": [
+              "return_before_cook",
+              "return_before_eat",
+              "cook_and_eat"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "warm_food_eat",
+              "slight_calm"
+            ],
+            "relation_refs": [
+              "written_eat_calm"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      },
+      "native_question": null,
+      "native_updates": [],
+      "surface_equal": {
+        "observation": true,
+        "reception": true,
+        "update_note": true
+      },
+      "generic_question_budget_remaining": 1,
+      "native_question_budget_remaining": 1,
+      "native_prior_present": false
+    },
+    {
+      "generic_id": "FT-CHAIR-INITIAL",
+      "native_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "source_fields_equal": {
+        "memo": true,
+        "memo_action": true,
+        "category": true,
+        "emotions": true,
+        "emotion_details": true
+      },
+      "origin": "KAREN_EDIT_OF_EXISTING_RECORD",
+      "mash_completed_response": false,
+      "source_refs": [
+        {
+          "path": "Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261024-001/01_dialogue.md",
+          "commit": "d57fe2205cfa74d018b2a33a1e4e74ca6837310d",
+          "blob_sha": "3a26aa06ff2ee9bd81f89829acca578b28e55a69",
+          "dialogue_id": "D00",
+          "start_scalar": 610,
+          "end_scalar_exclusive": 733,
+          "quote": "| 項目 | 入力内容 |\n|---|---|\n| 感情 | 喜び（中） |\n| 思考内容 | 全部一人で直せたことが、うれしかった。 |\n| 行動内容 | ぐらついていた椅子を修理して、また座れるようになった。 |\n| カテゴリー | 生活 |"
+        }
+      ],
+      "generic_target": {
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "一人で直せたことが、うれしかったのですね。やり終えたことを喜ぶ気持ちが伝わりました。",
+        "question": "「全部一人で直せたこと」がなぜ嬉しかったのですか？",
+        "update_note": null,
+        "grounded_points": [
+          {
+            "source_id": "FT-CHAIR-O",
+            "fields": [
+              "memo",
+              "memo_action",
+              "emotion_details"
+            ]
+          }
+        ],
+        "unknowns": [
+          "一人で直せたことに本人がどのような意味を感じたかは、まだ詳しく語られていない。"
+        ]
+      },
+      "native_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "repair",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "repair_and_result"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "solo_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      },
+      "native_question": {
+        "claim_refs": [
+          "solo_appraisal_object",
+          "joy"
+        ],
+        "focus": "PERSONAL_JOY_SIGNIFICANCE",
+        "target_unknown_ref": "personal_significance",
+        "text": "「全部一人で直せたこと」がなぜ嬉しかったのですか？"
+      },
+      "native_updates": [],
+      "surface_equal": {
+        "observation": true,
+        "reception": false,
+        "update_note": true
+      },
+      "generic_question_budget_remaining": 1,
+      "native_question_budget_remaining": 1,
+      "native_prior_present": false
+    },
+    {
+      "generic_id": "FT-CHAIR-AFTER-CORRECTION",
+      "native_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "source_fields_equal": {
+        "memo": true,
+        "memo_action": true,
+        "category": true,
+        "emotions": true,
+        "emotion_details": true
+      },
+      "origin": "KAREN_EDIT_OF_EXISTING_RECORD",
+      "mash_completed_response": false,
+      "source_refs": [
+        {
+          "path": "Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261024-001/01_dialogue.md",
+          "commit": "d57fe2205cfa74d018b2a33a1e4e74ca6837310d",
+          "blob_sha": "3a26aa06ff2ee9bd81f89829acca578b28e55a69",
+          "dialogue_id": "D00",
+          "start_scalar": 610,
+          "end_scalar_exclusive": 733,
+          "quote": "| 項目 | 入力内容 |\n|---|---|\n| 感情 | 喜び（中） |\n| 思考内容 | 全部一人で直せたことが、うれしかった。 |\n| 行動内容 | ぐらついていた椅子を修理して、また座れるようになった。 |\n| カテゴリー | 生活 |"
+        },
+        {
+          "path": "Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261024-001/01_dialogue.md",
+          "commit": "d57fe2205cfa74d018b2a33a1e4e74ca6837310d",
+          "blob_sha": "3a26aa06ff2ee9bd81f89829acca578b28e55a69",
+          "dialogue_id": "D01",
+          "start_scalar": 768,
+          "end_scalar_exclusive": 798,
+          "quote": "問い。\n・「全部一人で直せたこと」がなぜ嬉しかったのですか？"
+        },
+        {
+          "path": "Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261024-001/01_dialogue.md",
+          "commit": "d57fe2205cfa74d018b2a33a1e4e74ca6837310d",
+          "blob_sha": "3a26aa06ff2ee9bd81f89829acca578b28e55a69",
+          "dialogue_id": "D02",
+          "start_scalar": 845,
+          "end_scalar_exclusive": 937,
+          "quote": "さっき「全部一人で」と書いたのは訂正します。途中で友人に手順を教えてもらって、一緒に直しました。\n\nうれしかったのも、一人でできたからではなく、捨てずにまた使えるようになったからです。"
+        }
+      ],
+      "generic_target": {
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "うれしかったのは、捨てずにまた使えるようになったことだったのですね。またその椅子に座れるようになって、よかったですね。",
+        "question": null,
+        "update_note": "本人が「全部一人で」を共同修理へ、喜びの理由を独力から再使用へ訂正しました。修理したこと・再使用できる結果・喜びの選択は残ります。",
+        "grounded_points": [
+          {
+            "source_id": "FT-CHAIR-O",
+            "fields": [
+              "memo_action",
+              "emotion_details"
+            ]
+          },
+          {
+            "source_id": "FT-CHAIR-O-A1",
+            "fields": [
+              "text"
+            ]
+          }
+        ],
+        "unknowns": []
+      },
+      "native_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair"
+            ],
+            "relation_refs": [],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "reuse_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "reception"
+          },
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair",
+              "reuse_appraisal_object"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "update_note",
+            "update_refs": [
+              0,
+              1,
+              2
+            ]
+          }
+        ],
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "native_question": null,
+      "native_updates": [
+        {
+          "evidence_indexes": [
+            6,
+            7,
+            8
+          ],
+          "operation": "REVISE",
+          "prior_snapshot_ref": "semantic-6d2fb89dc1ced46eaf12d05c13e025191a4dacfbb9438b6d48417696d4235b30",
+          "replacement_refs": [
+            "friend_guidance",
+            "joint_repair"
+          ],
+          "target_kind": "CLAIM",
+          "target_ref": "solo_appraisal_object"
+        },
+        {
+          "evidence_indexes": [
+            10,
+            11
+          ],
+          "operation": "REVISE",
+          "prior_snapshot_ref": "semantic-6d2fb89dc1ced46eaf12d05c13e025191a4dacfbb9438b6d48417696d4235b30",
+          "replacement_refs": [
+            "joy_ground_revised"
+          ],
+          "target_kind": "RELATION",
+          "target_ref": "joy_ground"
+        },
+        {
+          "evidence_indexes": [
+            6,
+            11
+          ],
+          "operation": "INVALIDATE_GAP",
+          "prior_snapshot_ref": "semantic-6d2fb89dc1ced46eaf12d05c13e025191a4dacfbb9438b6d48417696d4235b30",
+          "replacement_refs": [],
+          "target_kind": "UNKNOWN",
+          "target_ref": "personal_significance"
+        }
+      ],
+      "surface_equal": {
+        "observation": true,
+        "reception": false,
+        "update_note": false
+      },
+      "generic_question_budget_remaining": 0,
+      "native_question_budget_remaining": 0,
+      "native_prior_present": true,
+      "answer_text_exact_equal": true
+    }
+  ],
+  "free_nine": [
+    {
+      "id": "FT-UDON-INITIAL",
+      "family": "udon",
+      "origin": "KAREN_EDIT_OF_EXISTING_RECORD",
+      "stage": "INITIAL",
+      "limitations": [
+        "観測・受け取り・構造化出力は今回の華恋編集。Mashの完成応答・品質承認ではない。",
+        "既存の比較試験用task cardへの投影。実CMEEの意味採用・実thread保存・実UIの成功を証明しない。",
+        "初回に見えた情報だけを使用。将来の回答・訂正を先回りしない。"
+      ]
+    },
+    {
+      "id": "FT-BOOK-INITIAL",
+      "family": "book",
+      "origin": "KAREN_EDIT_OF_EXISTING_RECORD",
+      "stage": "INITIAL",
+      "limitations": [
+        "観測・受け取り・構造化出力は今回の華恋編集。Mashの完成応答・品質承認ではない。",
+        "既存の比較試験用task cardへの投影。実CMEEの意味採用・実thread保存・実UIの成功を証明しない。",
+        "初回に見えた情報だけを使用。将来の回答・訂正を先回りしない。"
+      ]
+    },
+    {
+      "id": "FT-BOOK-AFTER-ANSWER",
+      "family": "book",
+      "origin": "KAREN_EDIT_OF_EXISTING_RECORD",
+      "stage": "AFTER_ONE_ANSWER",
+      "limitations": [
+        "観測・受け取り・構造化出力は今回の華恋編集。Mashの完成応答・品質承認ではない。",
+        "既存の比較試験用task cardへの投影。実CMEEの意味採用・実thread保存・実UIの成功を証明しない。",
+        "既存の実問D01・本人役回答D02だけを使用。二問目以降・未来回答・隠れた設定は含めない。"
+      ]
+    },
+    {
+      "id": "FT-CHAIR-INITIAL",
+      "family": "chair",
+      "origin": "KAREN_EDIT_OF_EXISTING_RECORD",
+      "stage": "INITIAL",
+      "limitations": [
+        "観測・受け取り・構造化出力は今回の華恋編集。Mashの完成応答・品質承認ではない。",
+        "既存の比較試験用task cardへの投影。実CMEEの意味採用・実thread保存・実UIの成功を証明しない。",
+        "初回に見えた情報だけを使用。将来の回答・訂正を先回りしない。"
+      ]
+    },
+    {
+      "id": "FT-CHAIR-AFTER-CORRECTION",
+      "family": "chair",
+      "origin": "KAREN_EDIT_OF_EXISTING_RECORD",
+      "stage": "AFTER_ONE_ANSWER",
+      "limitations": [
+        "観測・受け取り・構造化出力は今回の華恋編集。Mashの完成応答・品質承認ではない。",
+        "既存の比較試験用task cardへの投影。実CMEEの意味採用・実thread保存・実UIの成功を証明しない。",
+        "既存の実問D01・本人役回答D02だけを使用。二問目以降・未来回答・隠れた設定は含めない。"
+      ]
+    },
+    {
+      "id": "FT-SHOP-INITIAL",
+      "family": "shop",
+      "origin": "KAREN_EDIT_OF_EXISTING_RECORD",
+      "stage": "INITIAL",
+      "limitations": [
+        "観測・受け取り・構造化出力は今回の華恋編集。Mashの完成応答・品質承認ではない。",
+        "既存の比較試験用task cardへの投影。実CMEEの意味採用・実thread保存・実UIの成功を証明しない。",
+        "初回に見えた情報だけを使用。将来の回答・訂正を先回りしない。"
+      ]
+    },
+    {
+      "id": "FT-SHOP-AFTER-ANSWER",
+      "family": "shop",
+      "origin": "KAREN_EDIT_OF_EXISTING_RECORD",
+      "stage": "AFTER_ONE_ANSWER",
+      "limitations": [
+        "観測・受け取り・構造化出力は今回の華恋編集。Mashの完成応答・品質承認ではない。",
+        "既存の比較試験用task cardへの投影。実CMEEの意味採用・実thread保存・実UIの成功を証明しない。",
+        "既存の実問D01・本人役回答D02だけを使用。二問目以降・未来回答・隠れた設定は含めない。"
+      ]
+    },
+    {
+      "id": "FT-REPOT-INITIAL",
+      "family": "repot",
+      "origin": "KAREN_NEW_FICTITIOUS_SUPPLEMENT",
+      "stage": "INITIAL",
+      "limitations": [
+        "既存の華恋作成補充をもとに、アプリの4入力fieldを備えた別の架空教材として今回構成した。感情選択・カテゴリは今回の作成者設定で、過去のMash実演や実ユーザー選択へ遡及しない。",
+        "完成応答は今回の華恋案。実モデル・実CMEEの採用や商品品質の合格ではない。"
+      ]
+    },
+    {
+      "id": "FT-KNIT-INITIAL",
+      "family": "knit",
+      "origin": "KAREN_NEW_FICTITIOUS_SUPPLEMENT",
+      "stage": "INITIAL",
+      "limitations": [
+        "既存の華恋作成補充をもとに、アプリの4入力fieldを備えた別の架空教材として今回構成した。感情選択・カテゴリは今回の作成者設定で、過去のMash実演や実ユーザー選択へ遡及しない。",
+        "完成応答は今回の華恋案。実モデル・実CMEEの採用や商品品質の合格ではない。"
+      ]
+    }
+  ],
+  "source_files": {
+    "2026-10-24-emlis-free-pilot/sft_examples.jsonl": "b3115af6a79bb39467517d49f92c94ee7a1019c168f3cf74e078c9960e18bd82",
+    "2026-10-24-emlis-free-pilot/train_messages.jsonl": "533d4d32156a5cbf52512b63aa00d49e58963e725aa4b508b9c532c79700df71",
+    "2026-10-26-generic-native-bridge13/bridge_train_messages.jsonl": "60efe0a0ef95fa79687e015083733cea4bfa8154d4f0952e655164acb48d4567"
+  },
+  "new_teacher_text": false,
+  "new_training": false,
+  "product_accepted": false,
+  "observed_gaps": [
+    "Generic bridge13 trained UDON only, not generic chair two stages.",
+    "Native chair numeric six and daily quote three are different wire tasks.",
+    "All native current examples are two independent language stories.",
+    "Generic targets are Karen edits/supplements, not Mash completed gold.",
+    "Surface-only task is absent from current ModelCandidateSource."
+  ]
+}
