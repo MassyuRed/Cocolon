@@ -1,8 +1,8 @@
 # Mashの観測技術を継承するための記録
 
-**GPUの最終確認記録（今回は未再確認）：** 前回Jupyter CPU後、read-only nvidia-smiでRTX A4500／20,470MiB／使用1MiB。旧45779と稼働保持。今回モデル処理0、管理API／lifecycle0。保持料金は継続する。
+**GPUと旧重みの確認境界：** Jupyterへの直接接続を復旧。旧adapter_modelのSHA256 `45779ad97111dd2d91c1f7f1a4b0ca697ef0586c5190cd56b1b7675fe540dab6`、旧API4owner・既存native9の前後不変を確認。今回GPU処理0、管理console/一覧/API/Stop/再起動/削除/新Pod/charge0、稼働保持指示を継続。read-only nvidia-smiの最終記録は前回A4500/20,470MiB/使用1MiBで、今回は新GPU健康確認の実績へ加算しない。保持料金は継続する。
 
-**現在の直接作業（承認済み、Jupyter接続復旧待ち）：** 4題材/6教材を意味・実問い・説明追加・自然本文・保存再読まで接続する[具体案](training/2026-10-26-unconnected-native/README.md#six-row-native-proposal)は、Mashがc97d6794を明示承認済み。Jupyter操作の接続機能が状態取得・初期化とも約300秒でtimeoutし、実装/CPU検証には未着手。4製品ownerと既存test/SQL harnessの原本確認のみ、製品code/pytest/SQL/model処理0。前回のsource scope確認2.195328秒やnative9互換成功を今回実績に再加算しない。GPU停止等の操作0、今回live状態/hashの再確認は不可。承認・再開手順は同READMEとweekly§55へ保存し、接続復旧後は同じ承認範囲で直接実装を再開する。同案の再承認不要、新学習/生成/本番操作は含まない。商品0/正式0/3/54.50％据置。
+**現在の直接作業（承認済み限定CPU実装を完了）：** 4題材/6教材を既存4製品owner内のsource-derived admission/adapter版3へ接続。BOOK/SHOPは実初回の問いと採用済priorから説明ADD・gapのみ解消・一回答後END、REPOT/KNITは初回END。Jupyter直接で対象394成功/失敗0/skip0（新112、うち隔離SQL6状態）。HTTP/FastAPIの既存2件は依存不足で対象外、全suite/HTTP/Auth/実機成功ではない。旧chair2＋daily16構成の意味・snapshot・本文・問い・両形式messagesは1,851,616bytes全一致。新native6は実tokenizer/EOS/切捨てなしでmax7,935/8,192。BOOK/SHOP回答後の完成target3,178/3,561tokenは旧生成上限2,560を超えるため、将来のGPU条件を別途具体化する。今回model読込/forward/学習/生成0、既存生成上限変更0。新観測会はこの既存教材接続には不要。商品0/正式0/3/54.50％、通常app/本番未接続。 [実原本](training/2026-10-26-unconnected-native/README.md#sixrow-cpu-implementation)、weekly§56。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 
@@ -62,7 +62,7 @@ Freeの当回体験、Plusの適格履歴を踏まえた理解、Premiumの本�
 
 原対話、お手本、本人役の回答、訂正の前後を保持する。Mashの原文、華恋の編集/補充、架空の例を区別し、生成に失敗したモデル本文をそのまま正解へ昇格しない。未提示の設定を当てる教材にせず、必要な問いと回答から実際に理解が変わる過程を扱う。既存の凍結した教材や評価を黙って書き換えない。本人DBから新たな学習材料を勝手に取得・送信しない。
 
-既存9教師はEmlis向け。元の4B native教師はchair1題の2段階で、今回それを正規service identity3組へ束縛した6行を使い12＋6更新した。独立した言語事例は1題のままであり、6題へ増えたとは数えない。Piece/Analysisの完成教師は0。未教示の用途が同じ教材の反復だけで完成するとは見込まない。一方、教材作りを際限なく増やしたり、Mashへ毎回同じ説明や新しい観測会を求めたりせず、既存の確認済み材料を先に使う。
+**§36時点の履歴：** 既存9教師はEmlis向け。元の4B native教師はchair1題の2段階で、今回それを正規service identity3組へ束縛した6行を使い12＋6更新した。独立した言語事例は1題のままであり、6題へ増えたとは数えない。Piece/Analysisの完成教師は0。未教示の用途が同じ教材の反復だけで完成するとは見込まない。一方、教材作りを際限なく増やしたり、Mashへ毎回同じ説明や新しい観測会を求めたりせず、既存の確認済み材料を先に使う。 現在の教材候補は旧native9（2family）を不変保持し、新native6（4題材）を別追加。新4題材はCPU教師接続のみで、実モデル学習済みや未知評価には数えない。
 
 32更新時点の履歴である[新入力32更新実結果](trials/2026-10-24-qwen4b-cmee-diagnostic/unicode_fit32_20261025/README.md)では、A4500 20GBで保存adapterから同2targetへ32update、保存・非学習再読込・after2生成が完走し、追加重みはPod外回収/照合/永続保管済み。**意味0/2→2/2、本文0/2→1/2**。全根拠/参照/訂正3更新が整合し初回本文/問いは成立、訂正後の受け取り第2文が未成立。学習lossの低下、生成数、GPU成功を観測品質や三中核の完成へ置き換えない。既読のproxy6を未使用入力の品質評価へ数えない。
 

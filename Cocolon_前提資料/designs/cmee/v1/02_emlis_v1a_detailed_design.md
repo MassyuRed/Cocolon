@@ -3521,3 +3521,10 @@ Rule18 §11.3の判断対象は、この意味／作者入力契約とchairの�
 [共有01のactual](01_shared_kernel_and_runtime_contracts.md#cmee-4b-model-proposal-implemented)／[型05](05_json_schema_and_versioning.md#cmee-4b-model-actual-types)を参照。実装はAPI02c0b943の新private profile。sourceに束縛した意味とモデルsurface案を分離し、現唯一の最終本文owner内で独立逆読取後に最終化する。自然文案の原文を保持し、旧finite作者の復唱へfallbackしない。実ASKからの本人訂正で共同修理・再使用の喜びを保持し、旧独力理由を除く。未解釈の自由文やscope外sourceは未採用に閉じる。
 
 旧v1/v2と完成済みDTOは維持。意味確定後の作者失敗はsnapshotを消さず、同proposalから明示再開。隔離SQLで初回／訂正／意味後中断／完成非生成を確認したが、実model・本人DB・通常API/RN・本人端末・商品受入れは未実施。新teacher2行と実本文は4Bpack cpu_connection_results.json。旧説明例は過去の非学習資料で、現在の学習targetは別fileに保持する。
+
+
+## 2026-10-26 — 4題材6教材のprivate版3接続（CPU完了）
+
+Mash承認c97d6794に基づき、既存4ownerのsource-derived admission/adapter3でBOOK/SHOPの初回実問い→説明ADD・元意味保持・gapのみ解消・一回答END、REPOT/KNIT初回ENDを接続した。本文は独立source readerで主客・時点・否定・程度・本人知覚・二対象の明示不明を照合。外側wire/schema/dataclass・通常API/DTO/DB/RN/依存・通常30秒/明示offline180秒は不変。対象394成功/HTTP2対象外、新SQL6状態の同snapshot再開と完成非生成再読、旧18構成の1,851,616bytes全一致、native6/EOS/context8192 max7935を確認。新4B学習/生成0、旧2560出力枠では2回答targetが長すぎるため次のGPU条件は未決。STRUCTURE_MAP_DELTA_PRESENT、型追加0、商品0/正式0/3/54.50％。実原本・全本文・失敗履歴・全pathは `observation_learning/training/2026-10-26-unconnected-native/README.md#sixrow-cpu-implementation` と最新weekly§56。
+
+新焦点はBOOK `PERSONAL_CONCERN_TARGET`／SHOP `PERSONAL_FEELING_REASON`。元の「何が気になりますか？」／「「少し置いていかれた気がした」のはなぜですか？」を実pendingとして発行し、同priorへの回答全文で説明を追加する。未記載NOT_STATEDを本人の不明へ置換せず、KNITだけPERSON_STATEDが面倒さ/寂しさを二対象にする。BOOKの過去発言は達成した約束ではなくREPORTED_STATEMENT、反実的振返りを実施した連絡に変えない。SHOPの知覚を事実化せず、共同準備と約束の否定は同じ完全否定文で束縛する。

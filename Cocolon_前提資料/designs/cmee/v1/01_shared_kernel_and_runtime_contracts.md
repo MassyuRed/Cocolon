@@ -1247,3 +1247,8 @@ CPU/実tokenizer条件が成立した場合だけ、未採用candidate affea8a70
 Mash明示承認に基づきAPI4002b457のpreparation.py/model_candidate_source.py＋新test1へ実装。新wire cocolon.cmee.quote_candidate.v1はEmlisの明示offline形式選択だけ。旧デフォルト/旧receipt bytes/意味/reader/保存schemaは保持。新quote配列を順序不変で一意位置へcompileし、実rawは保存、candidate_jsonだけnative化。既存_receiptが実rawから同一結果を再導出する。重複/overlap/空/不一致/混在形式/別coreを拒否し、旧誤座標を救済しない。新sourceは要求形式違いをraw保持のPROVIDER_ERRORとして拒否、再callなし。
 
 限定対象は重複除外197成功、初回DTOと回答更新のtest期待修正履歴をcpu_validation.jsonへ保存。新SQL4variantで通常/意味保存後中断と明示再開/非生成GET-start、保存意味IDとevent数不変を確認。合成9教師はnative/意味/実本文9/9、旧chair6行bytes不変。実tokenizer/新18学習/FIT9/2保存再読はまだ未実行。詳細/実行用filesはquote-address pack、最新weekly§42。STRUCTURE_MAP_DELTA_PRESENT、限定CPU TECHNICAL_CREDIT、商品0/正式0/3/54.50％を保持。
+
+
+## 2026-10-26 — 4題材6教材のprivate版3接続（CPU完了）
+
+Mash承認c97d6794に基づき、既存4ownerのsource-derived admission/adapter3でBOOK/SHOPの初回実問い→説明ADD・元意味保持・gapのみ解消・一回答END、REPOT/KNIT初回ENDを接続した。本文は独立source readerで主客・時点・否定・程度・本人知覚・二対象の明示不明を照合。外側wire/schema/dataclass・通常API/DTO/DB/RN/依存・通常30秒/明示offline180秒は不変。対象394成功/HTTP2対象外、新SQL6状態の同snapshot再開と完成非生成再読、旧18構成の1,851,616bytes全一致、native6/EOS/context8192 max7935を確認。新4B学習/生成0、旧2560出力枠では2回答targetが長すぎるため次のGPU条件は未決。STRUCTURE_MAP_DELTA_PRESENT、型追加0、商品0/正式0/3/54.50％。実原本・全本文・失敗履歴・全pathは `observation_learning/training/2026-10-26-unconnected-native/README.md#sixrow-cpu-implementation` と最新weekly§56。

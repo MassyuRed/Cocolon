@@ -1,0 +1,22 @@
+{
+  "status": "LEGACY_18_FULL_BYTE_EQUAL",
+  "equal": true,
+  "records": 18,
+  "chair": 2,
+  "daily_variants": 16,
+  "components": [
+    "semantic_snapshot",
+    "meaning_json",
+    "native_bindings_json",
+    "surface_proposal_json",
+    "question_proposal_json",
+    "outcome",
+    "legacy_messages",
+    "quote_messages"
+  ],
+  "before_sha256": "eab937b04fc88a07308f451526549595a2ccef95dfa1495720af0b705c498af8",
+  "after_sha256": "eab937b04fc88a07308f451526549595a2ccef95dfa1495720af0b705c498af8",
+  "bytes": 1851616,
+  "seconds": 21.085219223983586,
+  "model_calls": 0
+}

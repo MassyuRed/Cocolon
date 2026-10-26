@@ -1,0 +1,25 @@
+{
+  "api_base": "4002b4577838d1ed6671278a19585b61e7ccd10e",
+  "preimages": {
+    "ai/services/ai_inference/emlis_ai_grounded_observation_gate.py": "2a2e1a5632777a692d333db0ad0ec2984205417f987b59b7b9069afe19cb871d",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/model_candidate_source.py": "ea63db1f10a51b30ca42e441d6b52824d2ae8eb2845e2ae6bfbe8c7642d7cc5c",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py": "cf7c4c92f2591a0a624b9fbb6044c5a71926aab1e7ca87efb4560aeb0ec1ba2a",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py": "3d3c53f3263cb6069a69a93e17e6429f5c75937339cd7eba84c31b216c048d5d"
+  },
+  "final_files": {
+    "ai/tests/test_cmee_emlis_sixrow.py": "b06a8bff6ab2ec815a942f397c8284e81c43407929ac2aa64092d347527794a2",
+    "ai/services/ai_inference/emlis_ai_grounded_observation_gate.py": "5736f9d83272d6a50cd26651f37db928e7a2aefb78f8723fbf554af03fb3630d",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/model_candidate_source.py": "f5fe7ff85841a509ea9cc600ecd8c9a9a9a3760803ee78683b8b3ae60ab26f82",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py": "7defcd9e01d6f38a8515d732765ae39e0eb659a64b21a423514f1141a99cc55b",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py": "c15d4a0d037a2b3c748fa8ad6ce54466ee9a77c90e5ea43fdfb3d9fc969d4b35",
+    "ai/tests/fixtures/cmee_emlis_sixrow_v3.json": "1099f61a1991c23263010626b7068bfaf880efb4f61f2de58c57f98cc6c3be0d"
+  },
+  "old_api_unchanged": true,
+  "old_native9_unchanged": true,
+  "old_adapter_model_sha256": "45779ad97111dd2d91c1f7f1a4b0ca697ef0586c5190cd56b1b7675fe540dab6",
+  "old_adapter_files": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_model.safetensors": "45779ad97111dd2d91c1f7f1a4b0ca697ef0586c5190cd56b1b7675fe540dab6",
+    "adapter_config.json": "26095c64075c5e88934f200eed8a6a3b5e389ad708d394f8567a1180e4aeb89c"
+  }
+}

@@ -2720,3 +2720,23 @@ fresh Cocolon c97d6794/API4002bを確認し、全体00全文・必読incident・
 API4002bの原本22fileをblob一致で取得し、既存4owner内のsource-derived版3追加と、旧byte比較/実問い/説明ADD・時点別保持/SQL中断再開の接続箇所をread-onlyで確認した。実行環境や製品変更を成立させたものではない。ローカルPythonは3.12.14でpytest/httpx未配置、完全API source/必要依存も未配置。指定Jupyterの代替として未承認の環境構築や依存追加を行っていない。
 
 **製品code変更0、candidate patch0、Jupyter child0、pytest0、SQL0、モデル処理0。今回の実装・CPU検証は未完了。** 前回2.195328秒/旧native9互換/bridge13等は別実績のまま、新成功へ加算しない。primary ADMINISTRATIVE_ONLY、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。承認と次の直接実装箇所・既存test/harnessは[同READMEの承認後checkpoint](../observation_learning/training/2026-10-26-unconnected-native/README.md)へ保存し、全体00/観測入口を承認済・接続待ちへ置換更新。API4002bは不変、Render/Supabase/本人DB/通常application/公開API/DTO/RN/merge/deploy0。
+
+
+<a id="20261026-sixrow-native-cpu-implementation"></a>
+## 56. 10/26 — Jupyter直接接続復旧、承認済み4題材6教材のCMEE限定CPU実装を完了
+
+**現在の直接作業（承認済み限定CPU実装を完了）：** 4題材/6教材を既存4製品owner内のsource-derived admission/adapter版3へ接続。BOOK/SHOPは実初回の問いと採用済priorから説明ADD・gapのみ解消・一回答後END、REPOT/KNITは初回END。Jupyter直接で対象394成功/失敗0/skip0（新112、うち隔離SQL6状態）。HTTP/FastAPIの既存2件は依存不足で対象外、全suite/HTTP/Auth/実機成功ではない。旧chair2＋daily16構成の意味・snapshot・本文・問い・両形式messagesは1,851,616bytes全一致。新native6は実tokenizer/EOS/切捨てなしでmax7,935/8,192。BOOK/SHOP回答後の完成target3,178/3,561tokenは旧生成上限2,560を超えるため、将来のGPU条件を別途具体化する。今回model読込/forward/学習/生成0、既存生成上限変更0。新観測会はこの既存教材接続には不要。商品0/正式0/3/54.50％、通常app/本番未接続。
+
+承認c97d6794に基づき、既存4ownerのsource-derived admission/adapter3でBOOK/SHOPの初回実問い→説明ADD・元意味保持・gapのみ解消・一回答END、REPOT/KNIT初回ENDを接続した。本文は独立source readerで主客・時点・否定・程度・本人知覚・二対象の明示不明を照合。外側wire/schema/dataclass・通常API/DTO/DB/RN/依存・通常30秒/明示offline180秒は不変。対象394成功/HTTP2対象外、新SQL6状態の同snapshot再開と完成非生成再読、旧18構成の1,851,616bytes全一致、native6/EOS/context8192 max7935を確認。新4B学習/生成0、旧2560出力枠では2回答targetが長すぎるため次のGPU条件は未決。STRUCTURE_MAP_DELTA_PRESENT、型追加0、商品0/正式0/3/54.50％。実原本・全本文・失敗履歴・全pathは `observation_learning/training/2026-10-26-unconnected-native/README.md#sixrow-cpu-implementation` と最新weekly§56。
+
+
+開始Cocolon22bf09b6/API4002b457、既存Podの独立API copyへ4製品owner＋独立test/fixtureを実装。旧修理/食事2familyへ新4題材を加えた6言語familyの限定教師接続で、新6行を6未知familyへ数えない。BOOKの弱程度、SHOPの知覚/否定、REPOTの主客、KNITの二対象の関係不明を全6actual本文から確認し、元source/provenance/実問い由来を保持。root単一writer、2agent read-only補助、正式Pro/Ultra/human受入れではない。
+
+途中失敗はattempt01 setup（対象外FB172 pluginのFastAPI不足）、attempt02 69pass/6fail（fixture旧根拠index/元envelopeの不備）、attempt03 392pass/4fail（偽pending負例parent2と未変更HTTP依存2）。製品sourceは初回転送以降不変、test起動/fixtureコードを補正し、attempt04の394pass/0fail/skip0/HTTP2対象外を採用。旧byte比較18構成は実21.085219秒、新native6tokenizerは14.694500秒。最終pytest142.38秒/runner142.969088秒。失敗・重複passや旧scope2.195秒を新合格へ再加算しない。
+
+原本は[当directoryのactual節](../observation_learning/training/2026-10-26-unconnected-native/README.md#sixrow-cpu-implementation)、全変更fileは01A。archive742,780bytes/SHA19ba66d16b688f03337e95ef23753a6c7fc794bb494312c6a5c962ab06c0e09bを一回回収し6API source bytesと照合。旧45779/旧API4owner/既存native9前後不変。read-only nvidia-smiの前回記録は今回の新GPU健康確認へ加算しない。
+
+限定TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_PRESENT、商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=false。新学習・モデル読込/forward/生成0、旧生成cap変更0、追加依存/通常app/Render/Supabase/本人DB/merge/deploy0。管理console/一覧/API/Stop/再起動/削除/新Pod/charge0、GPU保持指示と保持料金は継続。新観測会は今回不要。次は3,178/3,561tokenの回答targetも収まる具体的GPU学習/生成条件と費用を別途定める。
+
+
+API反映：[6b043880](https://github.com/MassyuRed/mashos-api/commit/6b043880504912481a6b10d93c9128ec4995b70b)（4製品owner＋test/fixture＋既存handoff、7file）。Cocolonの本revisionで関連20fileを同単位同期。両Draftを維持し、merge/deploy0。

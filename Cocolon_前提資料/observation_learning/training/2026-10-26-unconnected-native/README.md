@@ -1,8 +1,108 @@
 # 10/26 — 未接続の既存6教材とCMEE受理範囲／一括接続案
 
-状態：**Mash承認済み。接続実装・CPU検証は未着手、Jupyter操作の接続機能timeoutにより実行待ち。** 追加学習・モデル生成0。GPU停止操作0。下記2.195328秒のCPU結果は承認前の前回結果であり、今回の新規検証ではない。
+状態：**Mash承認済み4題材/6教材の限定CPU実装・検証を完了。394成功/HTTP2対象外、実model処理0。** 最新実結果は直下。旧scope結果・接続timeout・提案は日付付き履歴として保持。
 
-## 2026-10-26 — 承認後の実行待ちcheckpoint
+
+<a id="sixrow-cpu-implementation"></a>
+## 2026-10-26 — 承認済み6教材の限定接続・CPU実装結果
+
+Mashの「もう一度試して。」で直接Jupyter接続が復旧し、c97d6794で承認された同じ範囲を実行した。同案の再承認は要求していない。開始Cocolon22bf09b6/API4002b457、既存Pod内の独立API copyへ変更。全機能00全文・規則/恒久incident/Karen-Diary・全体01/全file地図01A/B/Cの導線・三core入口/CMEE map・学習目的・最新weekly§49〜55と実4owner/既存harnessを前提にした。System Contextの索引timeoutを保持してfresh原本を直接確認し、新index0。
+
+**限定CPU実装・検証完了。実4B学習済み/モデル生成成功/一般日本語受入れではない。** 新しいPython dataclass0、外側wire/schema/公開API/DTO/DB/RN/通常application/依存0。STRUCTURE_MAP_DELTA_PRESENT（既存4ownerの採用family・問い焦点・説明追加の契約差分）。01B/01C・三core共通入口・Piece/Analysisは対象責務差分がなく更新不要。
+
+### 実装と実検証
+
+- source全文から4題材を選ぶadmission/adapter3。旧chair1/daily2は旧経路を保持。候補がfamily/版を自己申告して読解を選ばない。引用compile→receiptとraw保存→意味採用→別source読解による本文逆検査を分離する。
+- BOOK初回4claim→元4保持＋回答6、SHOP4→元4保持＋回答7。実初回が発行した問い・同priorに全回答を束縛。追加各claimのADDは旧claim/relationをsupersededへ入れず、末尾INVALIDATE_GAPだけが旧NOT_STATEDを失効。BOOK現在の気がかり/反実的振返り、SHOP否定の完全作用域・本人知覚・過去場面の喜びを保持する。
+- REPOTは叔父に/手順をの原格と受領・聞く行動、理解/安心を保持しfield跨ぎの順序を足さない。KNITのPERSON_STATEDは面倒さ/少しの寂しさの二対象を保持し、因果/能力不足/解消へ言換えない。初回の実問いはBOOK/SHOPだけ、REPOT/KNITはEND、一回答後はEND。
+- 対象9fileの最終選択は**394 passed/0 failed/0 skipped/2 deselected**、うち新112・新SQL6状態。既存282を新件へ重複計上しない。6状態とも実service＋既存隔離PGlite/RPCで意味保存後CancelledError→明示retry_response→同meaning event/snapshot再開、完成GET/startのNoGeneration再読、イベント非増加を確認。通常30秒/明示offline180秒・期限/CASは変更しない。HTTP/Auth/native/稼働DBを代替して検査したとは言わない。
+- 旧API4002bから独立processでchair初回/訂正2＋daily16構成の全snapshot/meaning/native/surface/question/outcome/旧numericとquoteのmessagesを採取。1,851,616bytesが前後全一致、SHA256 `eab937b04fc88a07308f451526549595a2ccef95dfa1495720af0b705c498af8`。18構成は独立未知18familyではない。
+- 新native6は旧Free9のsource_bundle/出典/由来/実問い由来/架空補充情報を維持し、API側の独立手製fixtureから実採用結果を作った。製品parserの返値を期待値の作者にせず、Cocolon作業directoryへのAPI test依存0。BOOK/SHOPは華恋編集、REPOT/KNITは華恋架空、Mash完成goldではない。旧教師/native9/評価/失敗model raw/撤回教材の書換え・教師化0。原文と逆検査の意味軸・主客/肯否/時点/本人知覚/不明対象/関係方向/実pendingの不正拒否を検査した。
+
+### token長と次の境界
+
+Qwen/Qwen3.5-4B revision851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0aの既存実tokenizerだけをCPU/local_files_onlyで使用。旧encode_trainingの実装を再利用し、全6行EOSあり・切捨てなし・context8192内。実14.694500秒。モデル重み読込/forward/学習/生成0。
+
+| 教材 | prompt | assistant＋EOS | 合計 |
+|---|---:|---:|---:|
+| FT-BOOK-INITIAL | 2159 | 1038 | 3197 |
+| FT-BOOK-AFTER-ANSWER | 4212 | 3178 | 7390 |
+| FT-SHOP-INITIAL | 2194 | 1082 | 3276 |
+| FT-SHOP-AFTER-ANSWER | 4374 | 3561 | 7935 |
+| FT-REPOT-INITIAL | 2045 | 961 | 3006 |
+| FT-KNIT-INITIAL | 2087 | 896 | 2983 |
+
+**BOOK/SHOP回答後の3,178/3,561は旧生成上限2,560を超える。** 今回のcontext検査は通過したが、旧ModelCallLimitsや生成budgetを変更していない。この6行を直ちに旧2560枠でモデル生成できるとは扱わず、次の有料学習/生成では入力と出力の配分・時間・費用を具体化する。追加学習や再生成を自動開始しない。元情報の削減・target切捨て0。新観測会はこの接続不足には不要で、自然な応答の広さ・独立未知評価・Piece/Analysis教師・本人端末は別の残件。
+
+### 途中失敗を含む実行履歴
+
+attempt01は無関係なFB172移行pluginがFastAPI不足でsetup停止、製品test実行前。固定旧172nodeと対象既存8fileの一致0を原本で確認し、`-p no:helpers.emlis_ai_fb172_migration`だけで対象test/assertion/fixtureとconftestのpath設定を維持した。恒久plugin変更や依存追加0。
+
+attempt02は69pass/6failで停止。手製fixtureの新quoteを旧link前に挿して旧evidence indexを動かした比較2件と、source変更時のstale envelopeを用いた負例4件を補正。attempt03は392pass/4fail。不正pendingを与える負例2件は回答parentも同時に偽装し、先のparent拒否でなく実canonical pending照合への到達を検査する形へ補正。残る2件は未変更HTTP/FastAPI importが既存環境に無いため失敗し、次の限定実行では名前を明示して除外。HTTP検証を成功に換算しない。attempt04の最終394/0/skip0/対象外2を採用し、前の失敗や重複passを合算しない。最終pytest出力142.38秒/runner経過142.969088秒。製品4ownerは最初の転送以降不変で、補正はテスト起動設定/fixtureを含むテストコードのみ。
+
+旧互換captureは21.085219秒/18全byte一致。旧adapter_model45779・旧API4owner・旧native9は前後不変を照合。結果archive742,780bytes/SHA256 `19ba66d16b688f03337e95ef23753a6c7fc794bb494312c6a5c962ab06c0e09b`をJupyterから一回回収し全6 API source bytesと照合、再download/モデル再実行0。
+
+### 実際に成立した本人向け本文（教師候補）
+
+### FT-BOOK-INITIAL
+
+**観測：** 本を返すのが遅れて友人に謝り、「大丈夫」と言われても、まだ少し気がかりが残っているのですね。
+
+**受け取り：** 「大丈夫」と言ってもらえたことも、まだ気になることも、聞いていたいです。
+
+**実問い：** 何が気になりますか？
+
+### FT-BOOK-AFTER-ANSWER
+
+**観測：** 遅くなると分かった時に連絡しなかったことが、今も気になっているのですね。
+
+**受け取り：** 本を返しても、あの時に一言伝えておけば、という思いは残っているのですね。何が気になっているのか、話してくださってありがとうございます。
+
+**更新注記：** 気がかりの対象が、遅れると分かった時に連絡しなかったことだと説明されました。
+
+**問い：** END。
+
+### FT-SHOP-INITIAL
+
+**観測：** 友人の開店を知ってお祝いのメッセージを送り、うれしさと、少し置いていかれたような感覚があったのですね。
+
+**受け取り：** 開店を喜ぶ気持ちと、少し置いていかれたような感覚を、どちらも聞いていたいです。
+
+**実問い：** 「少し置いていかれた気がした」のはなぜですか？
+
+### FT-SHOP-AFTER-ANSWER
+
+**観測：** 二人で話していた未来が、友人の方ではもう現実になっていたんだな、と感じたのですね。その一方で、あの話を一緒にしていた頃から少し離れてしまったようで、寂しかったのですね。
+
+**受け取り：** 一緒に準備したり約束したりしていたわけではなくても、二人で話した時間はあったのですね。開店のうれしさも、その頃から離れたような寂しさも、受け取りました。
+
+**更新注記：** 本人の説明で、二人で話していた未来と、あの頃からの距離が気持ちに関わっていたことが分かりました。共同準備や約束があったことにはしません。
+
+**問い：** END。
+
+### FT-REPOT-INITIAL
+
+**観測：** 叔父に植え替えの手順を説明してもらい、最後まで聞いたのですね。
+
+**受け取り：** やり方が分かって、安心できてよかったです。
+
+**問い：** END。
+
+### FT-KNIT-INITIAL
+
+**観測：** 編みかけの見本をほどいたのですね。面倒だったことと、少しさみしかったことが、どちらもあったのですね。
+
+**受け取り：** 二つがどうつながるのかは、まだ分からないのですね。分からないところも含めて、今の言葉として聞いていたいです。
+
+**問い：** END。
+
+### 原本と責任範囲
+
+`native6.jsonl`（全messages・source/provenance・実prior/pending再構成情報）、`cpu_native_review.json`（実意味/本文/更新/token長）、`cpu_verification.json`（全4試行・除外理由・最終件数・境界）、`pytest_final.log`、`legacy_compatibility.json`、`source_manifest.json`（旧preimageと検証済6API file hash）が実原本。`review_native6.py`/`capture_sixrow_legacy.py`/`compare_sixrow_legacy.py`は実CPU runner。完全な途中log/XML/旧前後captureは回収archiveとPodの閉鎖attempt directoryに保持し、失敗を上書きしていない。
+
+root華恋/Codex Work/GPT-6が単一writer/実行者。2agentはread-onlyで原文/実code/件数監査を補助し、正式Pro/Ultra/human受入れと呼ばない。全6本文をrootが元sourceと読解し、BOOK弱程度を主観測へ保持、specのunknown/question shapeと明示role/link順序を実契約へ揃えた。限定TECHNICAL_CREDIT、商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false。Render/Supabase/本人DB/通常app/merge/deploy/外部配信0。GPU管理console/一覧/API/Stop/再起動/削除/新Pod/charge0、稼働保持指示と保持料金は継続。新GPU健康確認の実績へ前回nvidia-smiを加算しない。
+
+## 前回の履歴 — 承認後Jupyter接続停止checkpoint
 
 Mashは本案への「この案の実装とCPU検証へ進めてよろしいでしょうか。」に「進めていいよ。」と明示回答。承認identityはCocolon `c97d6794656101c693131beaf48fb8b7cb09b847` の本file `#six-row-native-proposal`。意味・実問い・説明追加・自然本文・保存再読の6行4題材、API既存4製品owner、CPU検証が対象。新GPU学習・モデル読込・forward・生成・通常有効化・本番/本人DB変更は対象外。再開に同じ案の再承認を要求しない。
 
@@ -107,3 +207,6 @@ BOOK／SHOPは、元材料を誤りとして取り替える修理訂正とは違
 root華恋／Codex Work／GPT-6が単一実行・writer。別文脈2agentはread-only原本／code review補助で、正式Pro／Ultra／human受入れではない。今回のprimaryは`BLOCKER_NARROWED`、商品0／正式0/3／全体54.50％据置。`STRUCTURE_MAP_DELTA_NONE`（現製品責務・型・接続・採用条件不変、提案のみ）。
 
 実行したのは上記原入力scopeのCPU照合と別本文候補・具体案・関連現在地の記録だけ。4B重み読込／forward／学習／生成／SQL／新依存／Render／Supabase／本人DB／通常application／公開API・DTO・RN／merge／deploy0。管理console／GPU一覧／管理API／Stop／再起動／削除／新Pod／チャージ0。終了時Jupyterのread-only nvidia-smiでRTX A4500／20,470MiB／使用1MiBを確認。GPU稼働は維持し、継続保持料金をモデル処理0と混同しない。
+
+
+API反映：[6b043880](https://github.com/MassyuRed/mashos-api/commit/6b043880504912481a6b10d93c9128ec4995b70b)（4製品owner＋test/fixture＋既存handoff、7file）。Cocolonの本revisionで関連20fileを同単位同期。両Draftを維持し、merge/deploy0。

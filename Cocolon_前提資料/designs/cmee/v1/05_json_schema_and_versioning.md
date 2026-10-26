@@ -3233,3 +3233,10 @@ APIbd356566/source e06d6b4c、実tokenizer max5045/2339、18更新・生成9・�
 ## 2026-10-25 — 明示offline quote wire / native位置compile
 
 API4002b457の既存preparation.py/model_candidate_source.pyが、private cocolon.cmee.quote_candidate.v1（schema_version/candidate/evidence_quotes）を明示format指定だけで扱う。旧numericが既定、新rawのsource/field/完全引用を一意なscalar座標付きnative candidate/evidenceへcompileし、rawはそのままCandidateReceiptへ保持。既存receipt再導出/意味snapshot/独立本文reader/公開API/DTO/DB/RNは不変。新Python dataclass追加0、意味admission/adapter版不変、privateモデルwire版だけを追加。旧不正offsetのfallback/原raw補修/他core適用0。限定CPU197（重複除外）と合成9教師9/9、実GPU試行は未開始。承認済み18更新/FIT9/成功時2保存再読はquote-address pack/共有設計01/最新weekly§42。STRUCTURE_MAP_DELTA_PRESENT（モデル境界の責務変更）、商品0/正式0/3/54.50％据置。
+
+
+## 2026-10-26 — 4題材6教材のprivate版3接続（CPU完了）
+
+Mash承認c97d6794に基づき、既存4ownerのsource-derived admission/adapter3でBOOK/SHOPの初回実問い→説明ADD・元意味保持・gapのみ解消・一回答END、REPOT/KNIT初回ENDを接続した。本文は独立source readerで主客・時点・否定・程度・本人知覚・二対象の明示不明を照合。外側wire/schema/dataclass・通常API/DTO/DB/RN/依存・通常30秒/明示offline180秒は不変。対象394成功/HTTP2対象外、新SQL6状態の同snapshot再開と完成非生成再読、旧18構成の1,851,616bytes全一致、native6/EOS/context8192 max7935を確認。新4B学習/生成0、旧2560出力枠では2回答targetが長すぎるため次のGPU条件は未決。STRUCTURE_MAP_DELTA_PRESENT、型追加0、商品0/正式0/3/54.50％。実原本・全本文・失敗履歴・全pathは `observation_learning/training/2026-10-26-unconnected-native/README.md#sixrow-cpu-implementation` と最新weekly§56。
+
+外側 `emlis_model_proposal.v1`／`cocolon.cmee.semantic_and_surface_proposal.v1`／quote_candidate.v1／semantic_snapshot.v3／emlis_answer_meaning.v4は不変。新familyはBOOK_CONCERN_V3/SHOP_DISTANCE_V3/REPOT_RECEPTION_V3/KNIT_UNKNOWN_V3、stageはINITIAL/AFTER_EXPLANATION、admission_version=adapter_version="3"を完全sourceから再導出する。旧chair1/daily2は全bytes保持。追加のprivate意味値はREPORTED_STATEMENT/EXPLICIT_UNKNOWN、PERSON_PERCEPTION/COUNTERFACTUAL_APPRAISAL、WRITTEN_PRESENT/ANSWER_TIME/WRITTEN_PRESENT_IN_PAST_CONTEXT、PERSON_STATED二対象と上記2焦点。native.update_temporalは各updateの[about_time,anchor_source_id,time_evidence_indexes]配列。各ADDのsuperseded_claim_refsは空、最後のINVALIDATE_GAPのみ旧gapをsuperseded/inactiveへ入れる。元claim/relation IDsと意味を保持し、回答時点の語を一律ORIGINAL_OCCASIONへ丸めない。role_order/written_link_orderは配列で明示し、JSON key sortでADD順が変わらない。新dataclass0、logical型数の増加なし。

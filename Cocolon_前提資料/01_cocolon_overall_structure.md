@@ -7387,3 +7387,8 @@ API 666b28517ef04aba170ebffe3c86980fea4c11bdの6file、実型6／例外2。旧�
 ## 2026-10-24 — 4B意味・自然本文候補のprivate接続構造
 
 STRUCTURE_MAP_DELTA_PRESENT。承認済み新offline Free profileを既存CMEE Engine→意味admission→現最終作者/独立reader→実問い/更新→既存serviceの段階保存へ接続。新model_candidate_sourceはasync generator注入とraw/metadata受領だけを所有し、別Engine/renderer/endpoint/cacheを作らない。actual仕様はshared01#cmee-4b-model-proposal-implemented、全pathは01A、型05、現在地00/current maps。API02c0b943の限定backend220 PASS、4Bpackは2診断教師/6学習外proxy・実tokenizer/indexまで。実モデル/重み/学習/16・24GB適合、通常API/DB/RN/Render・商品受入れは未成立。既存三coreと他owner境界は維持。
+
+
+## 2026-10-26 — 4題材6教材のprivate版3接続（CPU完了）
+
+Mash承認c97d6794に基づき、既存4ownerのsource-derived admission/adapter3でBOOK/SHOPの初回実問い→説明ADD・元意味保持・gapのみ解消・一回答END、REPOT/KNIT初回ENDを接続した。本文は独立source readerで主客・時点・否定・程度・本人知覚・二対象の明示不明を照合。外側wire/schema/dataclass・通常API/DTO/DB/RN/依存・通常30秒/明示offline180秒は不変。対象394成功/HTTP2対象外、新SQL6状態の同snapshot再開と完成非生成再読、旧18構成の1,851,616bytes全一致、native6/EOS/context8192 max7935を確認。新4B学習/生成0、旧2560出力枠では2回答targetが長すぎるため次のGPU条件は未決。STRUCTURE_MAP_DELTA_PRESENT、型追加0、商品0/正式0/3/54.50％。実原本・全本文・失敗履歴・全pathは `observation_learning/training/2026-10-26-unconnected-native/README.md#sixrow-cpu-implementation` と最新weekly§56。

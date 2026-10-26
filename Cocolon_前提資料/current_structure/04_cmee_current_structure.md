@@ -1,3 +1,5 @@
+> 10/26最新差分：4題材6教材のprivate版3・CPU完了。末尾の同日節と全機能00/weekly§56を参照。旧学習実績と今回の合成教師検証を区別する。
+
 > 2026-10-19最新差分：u355。安堵・寂しさと併記された元の経験に未明示の「同時」を足す表現を、原文の接続詞を保つ既存経験文へ修復。意味・選択・Reception不変。対象技術検証321件、保存DTO18件再表示。PRODUCT_NOT_CLEAR／正式Product Read0/3は維持。詳細は[u355監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u355_MixedReceivedTimeNeutral_20261019.md)。
 
 > 2026-10-19最新差分：u354。本人の不明を「今は／現在は嬉しくない」へ訂正した後の本文停止を、既存意味・全plan・selectedを変えずに修復。対象技術検証188件・保存DTO16件再表示。PRODUCT_NOT_CLEAR／正式Product Read0/3は維持。詳細は[u354監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u354_NegativeRevisionSurface_20261019.md)。
@@ -1871,3 +1873,8 @@ APIbd356566/source e06d6b4c、実tokenizer max5045/2339、18更新・生成9・�
 ## 2026-10-25 — 明示offline quote wire / native位置compile
 
 API4002b457の既存preparation.py/model_candidate_source.pyが、private cocolon.cmee.quote_candidate.v1（schema_version/candidate/evidence_quotes）を明示format指定だけで扱う。旧numericが既定、新rawのsource/field/完全引用を一意なscalar座標付きnative candidate/evidenceへcompileし、rawはそのままCandidateReceiptへ保持。既存receipt再導出/意味snapshot/独立本文reader/公開API/DTO/DB/RNは不変。新Python dataclass追加0、意味admission/adapter版不変、privateモデルwire版だけを追加。旧不正offsetのfallback/原raw補修/他core適用0。限定CPU197（重複除外）と合成9教師9/9、実GPU試行は未開始。承認済み18更新/FIT9/成功時2保存再読はquote-address pack/共有設計01/最新weekly§42。STRUCTURE_MAP_DELTA_PRESENT（モデル境界の責務変更）、商品0/正式0/3/54.50％据置。
+
+
+## 2026-10-26 — 4題材6教材のprivate版3接続（CPU完了）
+
+Mash承認c97d6794に基づき、既存4ownerのsource-derived admission/adapter3でBOOK/SHOPの初回実問い→説明ADD・元意味保持・gapのみ解消・一回答END、REPOT/KNIT初回ENDを接続した。本文は独立source readerで主客・時点・否定・程度・本人知覚・二対象の明示不明を照合。外側wire/schema/dataclass・通常API/DTO/DB/RN/依存・通常30秒/明示offline180秒は不変。対象394成功/HTTP2対象外、新SQL6状態の同snapshot再開と完成非生成再読、旧18構成の1,851,616bytes全一致、native6/EOS/context8192 max7935を確認。新4B学習/生成0、旧2560出力枠では2回答targetが長すぎるため次のGPU条件は未決。STRUCTURE_MAP_DELTA_PRESENT、型追加0、商品0/正式0/3/54.50％。実原本・全本文・失敗履歴・全pathは `observation_learning/training/2026-10-26-unconnected-native/README.md#sixrow-cpu-implementation` と最新weekly§56。

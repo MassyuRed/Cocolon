@@ -4943,3 +4943,40 @@ observation_learning/training/2026-10-26-generic-native-bridge13/のREADME／sou
 ### 2026-10-26：旧Free未接続6行のsource scope照合と4題材一括案（未実装）
 
 `observation_learning/training/2026-10-26-unconnected-native/`のREADME／audit_unconnected.py／source_scope_review.json／proposed_surface_targets.jsonが今回の全原本。Jupyter直接CPU2.195328秒で旧Free9の原入力fieldを保持してscope照合し、BOOK2/SHOP2/REPOT/KNITの6行が現2系統のsource範囲外と確定。AFTERも原入力だけの確認で、実pending/回答/意味/本文成功へ数えない。提案は既存API private4ownerのsource-derived版3、4題材の意味・問い・説明追加・自然本文・保存再読を一括対応するもの。未承認・未実装、API4002b/旧45779/旧1・2/通常API/DB/RN不変。旧教師は変えず、別本文候補ではSHOP本人知覚・REPOT時系列非補完・KNITの関係不明を保持する。現構造差分なし、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。最新進行ownerは全体00とweekly§54。
+
+
+## 2026-10-26 — 承認済み6教材版3の全変更file地図
+
+既存production4owner内の採用範囲・問い焦点・説明ADDを拡張、STRUCTURE_MAP_DELTA_PRESENT。新production owner/dataclass/通常API/DTO/DB/RN/依存0。以下は今回の全変更path。原本・実本文・検証/失敗/除外境界は当training READMEのactual節。
+
+| repository/path | 今回の責任 |
+|---|---|
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py` | 実pending/2焦点 |
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py` | 意味/source/説明更新/版3 |
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/model_candidate_source.py` | 段階別OUTPUT_SPEC/role順 |
+| mashos-api `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | 独立source本文逆検査 |
+| mashos-api `ai/tests/fixtures/cmee_emlis_sixrow_v3.json` | 独立手製fixture/CPU/SQL検証 |
+| mashos-api `ai/tests/test_cmee_emlis_sixrow.py` | 独立手製fixture/CPU/SQL検証 |
+| mashos-api `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 同一実装単位の引継ぎ差分 |
+| Cocolon `Cocolon_前提資料/00_cocolon_current_product_and_state.md` | 現在地/設計/地図/進行差分 |
+| Cocolon `Cocolon_前提資料/01A_cocolon_overall_structure_app_foundation_home.md` | 現在地/設計/地図/進行差分 |
+| Cocolon `Cocolon_前提資料/01_cocolon_overall_structure.md` | 現在地/設計/地図/進行差分 |
+| Cocolon `Cocolon_前提資料/current_structure/01_emlis_ai_current_structure.md` | 現在地/設計/地図/進行差分 |
+| Cocolon `Cocolon_前提資料/current_structure/04_cmee_current_structure.md` | 現在地/設計/地図/進行差分 |
+| Cocolon `Cocolon_前提資料/designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md` | 現在地/設計/地図/進行差分 |
+| Cocolon `Cocolon_前提資料/designs/cmee/v1/02_emlis_v1a_detailed_design.md` | 現在地/設計/地図/進行差分 |
+| Cocolon `Cocolon_前提資料/designs/cmee/v1/05_json_schema_and_versioning.md` | 現在地/設計/地図/進行差分 |
+| Cocolon `Cocolon_前提資料/observation_learning/README.md` | 現在地/設計/地図/進行差分 |
+| Cocolon `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/README.md` | 現在地/設計/地図/進行差分 |
+| Cocolon `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/capture_sixrow_legacy.py` | 検証済native/実測原本/runner |
+| Cocolon `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/compare_sixrow_legacy.py` | 検証済native/実測原本/runner |
+| Cocolon `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/cpu_native_review.json` | 検証済native/実測原本/runner |
+| Cocolon `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/cpu_verification.json` | 検証済native/実測原本/runner |
+| Cocolon `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/legacy_compatibility.json` | 検証済native/実測原本/runner |
+| Cocolon `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/native6.jsonl` | 検証済native/実測原本/runner |
+| Cocolon `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/pytest_final.log` | 検証済native/実測原本/runner |
+| Cocolon `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/review_native6.py` | 検証済native/実測原本/runner |
+| Cocolon `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/source_manifest.json` | 検証済native/実測原本/runner |
+| Cocolon `Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261024.md` | 現在地/設計/地図/進行差分 |
+
+旧native9・旧Free9・失敗raw・独立未知評価・撤回読書会は不変。01B/01C/三core共通入口/Piece/Analysisは対象責務差分0。394は新112＋既存282で重複合算なし、HTTP2対象外。新4B処理0、商品0。
