@@ -1,6 +1,26 @@
 # 10/26 — 未接続の既存6教材とCMEE受理範囲／一括接続案
 
-状態：**CPU原入力範囲照合完了。4題材の接続契約拡張はPROPOSED・未実装・未承認。** 追加学習・モデル生成0。旧45779とGPU稼働を保持する。
+状態：**Mash承認済み。接続実装・CPU検証は未着手、Jupyter操作の接続機能timeoutにより実行待ち。** 追加学習・モデル生成0。GPU停止操作0。下記2.195328秒のCPU結果は承認前の前回結果であり、今回の新規検証ではない。
+
+## 2026-10-26 — 承認後の実行待ちcheckpoint
+
+Mashは本案への「この案の実装とCPU検証へ進めてよろしいでしょうか。」に「進めていいよ。」と明示回答。承認identityはCocolon `c97d6794656101c693131beaf48fb8b7cb09b847` の本file `#six-row-native-proposal`。意味・実問い・説明追加・自然本文・保存再読の6行4題材、API既存4製品owner、CPU検証が対象。新GPU学習・モデル読込・forward・生成・通常有効化・本番/本人DB変更は対象外。再開に同じ案の再承認を要求しない。
+
+開始headはCocolon c97d6794／API4002b457で不変。rootの既存Jupyter画面への状態取得は接続機能の応答待ち305.4275秒でtimeout、復旧のためのREPL初期化も300.0021秒でtimeout。Jupyter page/terminalへの到達を確認できず、Podの故障・Runpod管理API制限・認証失敗とは断定しない。同じ接続試行を繰り返さず停止し、Runpod管理console・GPU一覧・管理APIへ迂回していない。現在のGPU稼働状態・adapter hashは今回再確認できていない。停止・再起動・削除・新Pod・charge操作0、保持指示は継続する。
+
+原本のread-only確認は継続した。API4002bの22file（4製品owner、同family test、旧全byte fixture、service/store、PGlite bridge、Q2/Q3 migration原文）をGit blob一致で取得し、承認済み4owner内で版3を追加する方針と既存service harnessを確認した。コピーの取得は実装・テストではない。製品code変更0、candidate patch0、Jupyter child0、pytest0、SQL0、モデル処理0。今回primaryはADMINISTRATIVE_ONLY、商品0／正式0/3／54.50％据置、STRUCTURE_MAP_DELTA_NONE。root華恋/Codex Work/GPT-6が単一writer、2agentはread-only補助、正式Pro/Ultra/human受入れではない。
+
+### 接続復旧後の直接再開先（同じ承認範囲）
+
+1. 最新API head/承認前preimageを確認し、既存PodのJupyterに直接接続。既存Python3.12＋private依存とPGlite0.5.8を再利用する。新依存や別課金環境を自動導入しない。旧API/旧adapterを保つ独立作業copyへ実装する。
+2. `emlis_semantic_admission.py`の旧source roles/packetの6tupleを維持し、新4題材だけ同file内のsource-derived contract/packet分岐へ接続。BOOK初回4claim→元4保持＋回答6claim、SHOP初回4→元4保持＋回答7、REPOT4、KNIT4＋PERSON_STATED二対象の関係不明を基準にする。元source全体の照合とaxes/関係方向を別々に検査し、任意の引用一致だけで採用しない。
+3. `_model_updates`/`_model_checkpoint`は新題材だけ説明ADDとgap解消へ分離。ADDのtargetをinactive/supersededへ入れない。BOOK現在反応と過去説明を一itemのORIGINAL_OCCASIONへ丸めず、時点別のitemへ分ける。旧chairの3更新/旧1/2は不変。
+4. `model_candidate_source.py`は新版specを旧chair/daily分岐より先に選び、旧messagesの全bytesを保持。`emlis_question.py`はBOOK/SHOPの実問を正本の「」まで維持し、同関数で実pending/prior/回答を再束縛。独立gateは本文の本人知覚・否定・時点・不明を別に照合する。
+5. fixtureは製品parserの返り値から生成せず、原教材から手製の意味と本文を作りAPI `ai/tests/fixtures/`へ配置。native学習候補はCocolon本directoryへ別に配置する。既存`test_cmee_emlis_model_meaning.py`/`...model_proposal.py`/`...model_daily_calm.py`/`test_cmee_model_candidate_source.py`/`test_cmee_quote_candidate.py`/`test_cmee_preparation.py`とQ2/Q3 applicationの適切な対象を用いる。
+6. 実serviceは`test_emlis_q2_application.py`のDatabase/db/case/run/answer＋既存PGlite bridgeを使用。Q2_PGLITE_MODULE未設定によるskipを成功にしない。BOOK/SHOPは実初回の問いから一回答、REPOT/KNITはEND。意味保存後のCancelledErrorからretry_responseで同snapshot再開、NoGenerationでGET/start非生成再読を確認する。6状態と旧互換・実tokenizerが成立するまで、実装完了や次の有料学習を宣言しない。
+
+以下の提案本文・承認前CPU実績・旧『未承認』の記述は起案時の履歴。現approvalは本checkpointで明示したMash回答を優先し、実装済みへ読み替えない。
+
 
 ## 今回確定したこと
 
