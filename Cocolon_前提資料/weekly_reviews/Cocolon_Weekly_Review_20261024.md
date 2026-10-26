@@ -2776,3 +2776,31 @@ PACK=/workspace/cocolon_native15_pack_20261026、OUTPUT=/workspace/cocolon_nativ
 原本のGPU archive全10member hash/bytesと、診断を含む最終archive全6member/内包archive全bytes/consumer全bytesをPod外照合・永続保全。GPU archive70698bytes/SHA33a5750890…、最終76922bytes/SHAe1418d4f48…。training.jsonl/新adapter/partial_adapter/reloaded_tensors/after rawは未作成。実run/raw2/log/launch/consumer/diagnosis/manifest/recoveryは[学習ownerの実結果](../observation_learning/training/2026-10-26-unconnected-native/README.md#native15-gpu-result)とそのnative15_result/へ保存。全原本読解・read-only2agent確認、GitHub反映後の全文読み戻しで閉じる。正式Pro/Ultra/human受入れではない。
 
 今回primary=BLOCKER_NARROWED（商品品質credit 0）。目的の15更新→保存/reload→15件確認は未達。学習前モデルの比較生成の時間切れで学習まで打ち切る順序/停止条件が直接blockerであり、華恋の設計結果をMashの承認や教材不足の責任へ転嫁しない。新観測会はこの原因には不要。次はその最小見直しを具体化し、新費用/追加GPU一回を無断開始しない。最長7935の実学習VRAM/未知評価/実service/端末は未実証。新依存/製品変更/自動再試行0。STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=false。両Draft/open/unmerged、merge/deploy/Render/Supabase/本人DB0、GPU lifecycle操作0。実行process終了を確認したがPodは停止せず、保持指示/保持料金は継続する。
+
+
+<a id="20261027-afteronly-prepared-rental-handoff"></a>
+## 58. 10/27 — 最安GPU比較、学習先行候補55確認、レンタル確定は本人引継ぎ
+
+Mashの「4Bを動かすための最安レンタルGPUをrunpodでレンタルし、4B学習＋CMEE接続の作業を進めて」という今回の明示指示で、前回の事前比較timeoutを学習開始へ持ち込まない最小差分を準備した。旧一回のrun/plan/raw/重み45779は不変。これは旧閉鎖planの再起動ではない。
+
+**最新GPU確認（2026-10-27 JST）：** Runpodのログイン済み構成画面でSecure/Communityを比較。今回方式の既実測reserved約19.059GiBを踏まえ20GB以上を対象とした。Communityは通信速度の下限も外して確認。確保前に在庫が変動し、最終選択時はA4500 20GB（GPU $0.25/h）が在庫切れ、A5000 24GB（GPU $0.27/h）が利用可能で、公式PyTorch 2.8.0/CUDA12.8.1・50GB container・volume追加なしの合計表示は$0.28/h。これは確認時点の構成で、将来の在庫・料金の保証ではない。Deploy確定操作は自動承認審査が金融取引として拒否し、本人への引継ぎが必須とされたため、今回の新Pod確保/起動/課金/モデル処理は0。既存PodのStop/再起動/削除、別経路による同確定操作の再試行も0。既存45779追加重みはPod外の正本から復元準備済み。
+
+### 後継候補の範囲と実確認
+
+- [run_native15_afteronly.py](native15_preparation/run_native15_afteronly.py) と [gpu15_afteronly.plan.json](native15_preparation/gpu15_afteronly.plan.json) を別に追加。新before生成0、同じ15行/順序/seed/LR5e-5/全文assistant+EOS損失/32tensorで15更新し、別adapter保存→非学習reload→同after15を実施する候補。学習/保存/reload/after本体は旧sourceと同一。
+- 最大2700秒、1生成180秒、最大15call、再試行なし。非EOS/時間切れ/OOM/非有限/identity不一致を従来どおり停止とし、無補修rawを現在のCMEEへ通す。15×180秒だけで全体2700秒となるため、学習・読込込みで全15件が収まる保証はしない。終了後のhash/退避/回収は別途時間を要し、OS強制停止保証ではない。
+- 前回のBOOK初回/回答後2件だけを失敗baseline原本として参照。未測定のbefore4件を補完せず、同条件6件の前後比較完成とは報告しない。
+- 未束縛planのstatusはPREPARED_ENVIRONMENT_UNBOUND。実GPU名/Pod ID/正確な費用が未確認なので --execute はoutput作成・重み読込より前に拒否する。今回のMash指示の受領と、実行環境が揃っていない状態を分ける。追加の承認段階を新設しない。
+- [CPU確認結果](native15_preparation/cpu_candidate_validation.json) は55/55成功。未束縛実行拒否/出力0、旧payload変異拒否、before/期限/call/予算/identity変異拒否、全15学習評価の対応、学習〜保存reloadの旧bytes維持、未束縛authorizationが旧Trueを継承しないことを確認。別文脈read-only確認で見つかったmerged authorization表示を修正し再確認した。
+- localに固定Torch/Transformers/PEFT環境がないため、実tokenizerの新規再実行・モデル読込・forward・学習・生成・CMEE採否・SQL・本人端末は今回0。55確認をGPU成功や観測品質へ換算しない。正式Pro/Ultra/human受入れではない。
+
+### GPU確保後の直接再開
+
+1. レンタル確定は、今回の自動承認審査が要求した本人操作へ引き継ぐ。同じ拒否をCLI/API/別browserで迂回しない。在庫/料金が変わった場合は再確認し、画面の将来価格を固定事実にしない。
+2. 公式image runpod/pytorch:1.4.1-cu1281-torch280-ubuntu2404、固定依存 transformers5.19.0 / peft0.21.2 / accelerate1.15.0 / safetensors0.8.0 を復元。元 Qwen/Qwen3.5-4B @851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a は公開公式sourceから取得する。旧archiveにbase全重みがあるとは扱わない。
+3. 初期adapterはjoint12最終recoveryの libfile_8485cd7181e481918b470bfb44735bf5 version1 を正本にし、45779ad97111dd2d91c1f7f1a4b0ca697ef0586c5190cd56b1b7675fe540dab6 を照合。固定helper2f659078/c5dd1679、API6b043880の6blob、旧15payloadのhashを保持する。旧/workspaceはcontainer diskで、停止後残存を仮定しない。
+4. 新planへ今回のMash指示をapproval_basisに記録し、実GPU名/Pod ID/実単価/最大処理額だけを束縛する。画面表示$0.28/hの構成なら2700秒按分$0.21（保持/準備/保存/通信/税等別）が目安。旧$0.195を別単価へ黙って流用しない。
+5. 固定環境のdefault CPUモードで全15の実tokenizer/EOS/切捨て0/出典/旧重み/依存を確認し、rootが新outputで一回だけ実行。保存された実rawの全件読解と現在CMEEへのCPU採否、成立分だけ同snapshotのcold-file再読、重み・原本回収・GitHub読戻しまで同単位で行う。新依存/教材/guard変更・追加学習・再生成・自動再試行へ進まない。
+
+今回の保存対象は後継runner/未束縛plan/CPU結果と既存ownerの関連差分のみ。製品code/API/DTO/DB/RN/CMEE判定/価格設定/通常app/Render/Supabase/本人DB/merge/deploy変更0。STRUCTURE_MAP_DELTA_NONE（学習runnerの実行順だけ、製品構造変更なし）。限定TECHNICAL_CREDITは後継runnerとlocal CPU確認のみ、商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=false。GPUレンタル未成立・今回学習0を維持する。
+

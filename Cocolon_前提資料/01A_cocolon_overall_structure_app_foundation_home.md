@@ -5022,3 +5022,11 @@ STRUCTURE_MAP_DELTA_NONE。製品owner/型/契約/公開API/DB/RNの変更0。�
 | `recovery.json` | 元archive全10member/最終全6member・内包bytes/consumer照合・永続保全と未作成物 |
 
 training.jsonl/adapter/partial_adapter/reloaded_tensors/after raw/cold-file結果は今回未作成で、fileを発明しない。実結果と次の直接課題は既存README#native15-gpu-result、全体00/観測入口/weekly§57へ同期。01/01B/01C/CMEE current mapsは製品構造差分がないため更新不要。商品0/正式0/3/54.50％、追加GPU run/merge/deploy0、保持指示継続。
+
+
+### 2026-10-27 — native15学習先行の後継候補とGPUレンタル引継ぎ
+
+- `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/native15_preparation/run_native15_afteronly.py`：before0→同15更新/別保存reload/after15、2700秒/180秒。旧runner/plan/教師/CMEE判定は不変。実GPU/Pod/費用の束縛前は実行拒否。
+- `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/native15_preparation/gpu15_afteronly.plan.json`：PREPARED_ENVIRONMENT_UNBOUND、GPU名/Pod/費用未確認。Mashの続行指示受領と、環境未確保を分離。
+- `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/native15_preparation/cpu_candidate_validation.json`：local CPU55成功、実tokenizer再実行/モデル処理/GPU0。正式商品受入れではない。
+- 関連owner：同README#native15-afteronly-prepared、全体00/観測入口、weekly§58。Runpod比較後A5000 24GB/表示$0.28hを選択したがDeployを自動承認審査が拒否、本人引継ぎ待ち。新Pod/新重み/after rawは未作成。STRUCTURE_MAP_DELTA_NONE、製品code/API/DB/RN/Render/Supabase/本人DB/merge/deploy0、商品0/正式0/3/54.50％据置。
