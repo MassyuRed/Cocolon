@@ -1,0 +1,14 @@
+{
+  "source_commit": "591dab592719dabfaa2e9964333363d9234b1aad",
+  "returncode": 0,
+  "cpu_seconds": 5.447828950360417,
+  "gpu_run_authorized": false,
+  "source_sha256": {
+    "run_instruction_pair4.py": "546c5f9e6e7ca97cc576445ae361a22ce8d3129d4c55fbf6e8ff5844555c9077",
+    "instruction_pair4_cases.jsonl": "937eb2137f11542a0048f044eea057edfa3f90e8a4ea5aba3a40e91928dc04b0",
+    "instruction_pair4.plan.json": "4f0e93744d0fe32f161318f70ad3fa36c7297d9e024360ec3c1a5e72cff253ba",
+    "common_instruction.txt": "bf1fd0583f2d557264958bdd452c27ad1beb0bf21bafb0f8a308230bdd3c72bc"
+  },
+  "stdout": "CPU_READY: baseline/revised common instruction only, tokens [('FT-UDON-INITIAL-BASELINE', 428), ('EFREE-E05-BASELINE', 444), ('FT-UDON-INITIAL-REVISED', 668), ('EFREE-E05-REVISED', 684)]\nGPU/model forward/generation/training/SQL/CMEE adoption: 0; new paid run requires approval\n",
+  "stderr": ""
+}

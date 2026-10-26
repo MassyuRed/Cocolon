@@ -1,6 +1,6 @@
 # 4B：本人向けの受け取りと意味保持を共通指示だけで比較する一回案
 
-2026-10-26 JST。**PROPOSED／GPU未承認・未実行。** CPU実tokenizer確認はこのsource配置後にJupyter直接で行う。商品品質改善の実証ではない。
+2026-10-26 JST。**PROPOSED／GPU未承認・未実行。** Jupyter実tokenizerのCPU確認は完了。商品品質改善の実証ではない。
 
 ## 目的と選んだ一手
 
@@ -59,3 +59,18 @@
 | current_docs_and_heads | 全体00全文・恒久incident・規則・最新weekly§50、全体01／地図01A/B/Cの差分、current00/01/04。開始92283c1f／API4002b。System Context索引timeoutは再実行せずfresh原本を直接読む |
 | affected_current_structure_maps | Emlis01／CMEE04。STRUCTURE_MAP_DELTA_NONE：製品責務・接続・型・契約・採用条件は不変 |
 
+
+## Jupyter実CPU結果・回収
+
+配置source `591dab592719dabfaa2e9964333363d9234b1aad`の4fileをGitHubから取得し、事前SHA256に完全一致させた。CPUでは`CUDA_VISIBLE_DEVICES=''`／offlineを固定。単一起動5.447829秒、exit0、stderr空。既存Python /usr/local/bin/python、transformers5.19.0／peft0.21.2／accelerate1.15.0／safetensors0.8.0で追加依存0。
+
+| 入力 | 旧指示tokens | 新指示tokens | 生成枠を含む最大 |
+|---|---:|---:|---:|
+| FT-UDON-INITIAL | 428 | 668 | 3228 / 8192 |
+| EFREE-E05 | 444 | 684 | 3244 / 8192 |
+
+切捨て0、元system／source／質問予算はpair内同一、task_instructionだけ共通240token増。旧版messagesはGitHub原行のsystem/userと完全一致。実token列とmessages hashを[CPU原本](instruction_pair4_cpu_preflight.json)へ保存。[CPU起動記録](cpu_launch.json)／[回収manifest](cpu_recovery_manifest.json)。source4＋CPU原本＋起動記録の6payload／manifest込み7memberを、回収archive11,271bytes／SHA256 `3602ea5717534f0873e2f36ea58db2ccd41c8dbfa7307e43703dea93a4af7944`からPod外で全bytes/hash照合し、配置4fileも完全一致。新モデルload／forward／生成／追加学習／SQL／CMEE採用0、plan PROPOSED/falseのまま。
+
+read-only別文脈レビューで原messages／単一差分／教師・guide非混入／4call上限／停止／非採用を確認し、root華恋がactualと照合した。正式Pro／Ultra／human Product Readではない。ブラウザfilechooserの一回timeoutで配置効果0となったため、固定GitHub sourceの通常取得へ切替。コマンド構築の構文エラー1回はUI実行前で、Pod/file/child/model効果0。CPU処理と回収は各一回、再実行・再download0。
+
+今回のprimaryは限定TECHNICAL_CREDIT（既存2入力の単一指示差分とCPU実行可能性だけ）。商品0／正式0/3／54.50％、STRUCTURE_MAP_DELTA_NONE。次は上記一回案へのMash判断だけで、追加学習や試行の連鎖へ進まない。結果の前後本文で効果がなければ、それも記録し、同じ指示の反復調整・再試行を自動追加しない。承認された場合、原proposed planを保全してstatus／gpu_run_authorizedだけ変更し、root一人が一回実行・全4本文診断・原本回収・GitHub読み戻しまで担う。

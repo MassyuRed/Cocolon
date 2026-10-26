@@ -10,7 +10,7 @@ Mashの「既存の観測会の記録を学習用に整え、不足する例だ�
 |---|---|
 | [sft_candidates.jsonl](sft_candidates.jsonl) | 18行。各行にsystem/user/assistantの`messages`と由来・出典・制限。学習する場合の候補であり、自動投入の指示ではない |
 | [teaching_reference.jsonl](teaching_reference.jsonl) | Mashの教示5件の逐語抜粋。一般原則・自己点検・仮定の読み分けを区別。SFT本文へ混ぜていない |
-| [split_manifest.json](split_manifest.json) | 学習候補の題材、既知派生、開発確認、未使用評価候補の区分。元の評価fixtureは変更しない |
+| [split_manifest.json](split_manifest.json) | 学習候補の題材、既知派生、開発確認、評価使用済みの区分。元の評価fixtureは変更しない |
 
 `origin`は**末尾assistant targetの由来**。system/userの課題文・役割ラベル・抜粋の選択は華恋の編集である。`MASH_VERBATIM_EXCERPT`は逐語抜粋10件（問い9＋訂正後の観測1）、`KAREN_EDIT_OF_EXISTING_RECORD`は既存sourceによる華恋編集4件、`KAREN_NEW_FICTITIOUS_SUPPLEMENT`は華恋作成の架空補充4件。華恋編集・補充についてMashの個別品質承認が成立したとは扱わない。
 
@@ -67,7 +67,7 @@ Mashの「既存の観測会の記録を学習用に整え、不足する例だ�
 
 展示会・旅行・夕食・本返却・友人開店・椅子修理と派生は既知教材。第7回の読書会二記録は課題設定の不備により取り下げ、学習対象から外した。未実演でtargetは作っておらず、18候補にも含めていない。経過を読んだ題材を独立未知評価へ転用しない。A01の4場面とA04は既知派生／境界。M1を既に読んで改善を設計しているE02/P01/A02の3familyは、今後も**開発確認**として扱い、完全に盲検の最終評価と呼ばない。
 
-未使用評価候補として残すのはE01-0／A03-SPARSE（同一desk-space family）とE03-0（yesterday-today-request family）の2family・3場面。モデルの事前学習への未出を保証する意味ではない。E01とA03を独立2事例へ数えない。追加学習でいずれかを使ったら、そのfamily全体を評価から外す。現在の2familyだけではPieceや期間Analysisまで含む独立評価に不足する。
+10/26現在、E01-0／E03-0は非学習raw2で評価使用済み。A03-SPARSE自体の新推論は0だがE01と同じdesk-space familyのため、独立した未使用familyには数えない。3場面とも学習へ転用していない。最新の区分は[split_manifest.json](split_manifest.json)、実結果は[raw2原本](../../trials/2026-10-26-generalization-probe2/README.md#generalization-eval2-final-result)。以前の2family・3場面は未使用候補だった準備時点の履歴で、現在の独立未知評価数ではない。モデルの事前学習への未出も保証しない。Piece・期間Analysisを含む独立評価の不足は残る。
 
 ## 5. 残る不足と、次の具体作業
 
@@ -81,7 +81,7 @@ Mashの「既存の観測会の記録を学習用に整え、不足する例だ�
 | 本人回答で実際に読みを修正して返す実演 | 第1回は反対回答未実演、旅行は本人語の具体化が未実施。本返却は具体化後の集約。第6回には本人訂正後のMash応答があるが、訂正前の完成観測はない。華恋補充をMashの実更新へ昇格しない |
 | 問いなし／終了、履歴・plan差 | 一件の夕食例だけで分布や有料差を代表しない。問い9件の偏りを学習前に扱う |
 | Piece・Analysis・比較・IF/Savedの完成教材 | この4回には直接のMash完成実演なし。共有の意味保持例があることと、各coreの目的・声・図・保存まで学べたことを分ける |
-| 独立した三中核評価 | 未使用の2family以外に、学習例と同じ話の名詞置換ではないPiece・期間Analysis等が必要 |
+| 独立した三中核評価 | 旧未使用E01/E03は評価使用済み、A03は同family既見。学習例と同じ話の名詞置換ではないPiece・期間Analysis等が引き続き必要 |
 | 実際の小規模学習 | 対象行・方法・量・上限時間／費用・比較条件・打切りを具体化してから実行する。今回の承認をGPU再起動・課金・本統合の承認へ広げない |
 
 10/23 Mashの指摘を受け、16件の整形完了を学習準備全体の完了としないことを確認した。10/24、[第5回](../../sessions/2026/OBS-20261023-001/02_learning_notes.md)の華恋編集による受け取り1件と、[第6回](../../sessions/2026/OBS-20261024-001/01_dialogue.md#d03)のMashの訂正後の観測1件を、由来・可視source・制限を保持して加えた。合計18件。学習対象行の最終選定・訓練・品質合格は未成立。

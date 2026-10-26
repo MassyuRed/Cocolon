@@ -4917,3 +4917,8 @@ observation_learning/trials/2026-10-25-quote-reception-fit6/ のREADME/closure�
 既存`observation_learning/trials/`に`2026-10-26-generalization-probe2/`を追加。READMEはactual診断／判断／新2生成案と開始記録、diagnose_general_boundary_cpu.py／general_boundary_cpu_result.jsonはAPI4002bの既存9対応・別2題拒否／誤ったchair指示のCPU原本を所有する。run_generalization_eval2.py／generalization_eval2_cases.jsonl／generalization_eval2.plan.jsonは保存45779の非学習・原汎用messages無変更・max2call／600秒／$0.043334（保持等別）一回案、generalization_eval2_cpu_preflight.jsonは実tokenizer487／505・切捨て0・モデル0の確認原本。原proposedはfalseを保全、承認済み一回は実行・閉鎖。製品source／意味admission／reader／公開契約／DB／RN不変。新profileや題材別regexは実装しない。STRUCTURE_MAP_DELTA_NONE、商品0。currentは全体00／最新weekly§50／上記READMEへ戻る。
 
 10/26実行後：同trialのrun/は実入力token／case1・case2 raw／loaded tensor／run／file manifestを、generalization_eval2_launch.json／generalization_eval2_launch.logとrecovery_manifest.jsonは単一起動・原本復元を、content_diagnosis.jsonは入力保持・説明調の受け取り・E03の未記載心理説明を記録する。model2call・各EOS・19.5秒・非学習／重み不変、CMEE採用0／品質未達で閉鎖。既存split_manifest.jsonでE01/E03を評価使用済み、A03同familyを独立未使用から外す。新しい製品責務／型／接続は追加していない。
+
+
+### 2026-10-26：共通指示だけの非学習旧新4call比較準備
+
+observation_learning/training/2026-10-26-common-instruction-pair4/のREADME/common_instruction.txtは旧新比較の判断・既存教示との対応と共通指示、run_instruction_pair4.py／instruction_pair4_cases.jsonl／instruction_pair4.plan.jsonは45779非学習・既知2入力×旧新・最大4call/600秒/$0.043334（保持等別）の一回候補を所有する。instruction_pair4_cpu_preflight.json／cpu_launch.json／cpu_recovery_manifest.jsonはJupyter実tokens428/444/668/684・切捨て0・model0・原本復元を保持する。旧教材・評価・API/admission/reader/question/service/DB/RNは不変、新teacher・新意味profileなし。STRUCTURE_MAP_DELTA_NONE、商品0。currentは全体00／最新weekly§51／当READMEへ戻る。

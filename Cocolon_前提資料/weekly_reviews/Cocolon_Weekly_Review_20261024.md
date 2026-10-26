@@ -2596,3 +2596,19 @@ E01は郵便整理・不要紙処分と机の端の範囲を保持するが、�
 rootと別文脈read-only照合の内容所見は一致。正式Pro／Ultra／human Product Readではなく、商品事前screenは2件とも未達。4B全般の上限や一般化成功、追加学習の因果効果を2件から確定しない。archive15,402bytes／SHAbe06bf6b…、13payload＋manifestの全14memberをPod外でbytes/hash照合し、全raw／実入力・token／tensor／run／launch原本をGitHubへ保全。E01／E03を評価使用済み・学習転用なしへ、A03同familyも独立未使用から外す。rawを正解へ昇格しない。
 
 一回閉鎖、BLOCKER_NARROWED、STRUCTURE_MAP_DELTA_NONE、商品0／正式0/3／54.50％据置。CMEE採用／実service／SQL／新profile／reader緩和／依存追加／Render／Supabase／本人DB／通常application／公開API／DTO／RN／merge／deploy0。GPU保持、管理console／GPU一覧／Runpod管理API／Stop／再起動／削除／新Pod／charge0。次は既存の別教材と汎用指示から、本人へ直接返す受け取り・意味保持・未記載説明抑制を一体で改善する共通指示／学習target案を具体化する。新有料実行は自動開始しない。新観測会は今回の診断には不要、他core・一般採用・実機等は残る。
+
+
+<a id="20261026-common-instruction-pair4-cpu"></a>
+## 51. 10/26 — 重みを変えず、本人向けの受け取り・意味保持を共通指示だけで比較する一回案をCPU確認
+
+Mashの続行指示で、全体00全文・規則／恒久incident・全体設計／全file地図の差分・current00/01/04・観測目的・最新§50・原教材と実rawを確認。開始Cocolon92283c1f/API4002b457。前回raw2とjoint12は閉鎖のまま再利用しない。rootが単一writer／実行owner、別agentはread-only補助、正式Pro／Ultra／human受入れではない。System Context索引timeoutは保持し、fresh原本を直接読む。
+
+直ちに追加学習を重ねる案より、task_instruction一箇所の共通改善だけで現45779の文章が変わるかを先に分離する。原教示D05/D07の短文への事実観測・受け取り、T-OWN-CRITERIAの本人基準を勝手に決めないことと既存品質条件へ接続する。華恋の新指示は、本人向け受け取り・主体/時点/肯否/迷い保持・未記載原因や回復等の抑制・深読み/問いの非強制で、名詞別regex・固定称賛・新JSON要件・新teacherはない。
+
+[全source・共通指示・一回案](../observation_learning/training/2026-10-26-common-instruction-pair4/README.md#instruction-pair4-proposal)。既知FT-UDON-INITIALと既読開発用EFREE-E05各旧新、最大4call・非学習。原system/source_bundle/cmee_task_context/出力欄/問いbudgetと重み・生成条件を固定し、元assistant・採点guide・期待語を送らない。未知への一般化を測る試験ではない。E01/E03/A03・撤回読書会・失敗rawの学習転用／再提示0。
+
+source591dab59の4fileをGitHub全文読み戻し後Jupyterで取得し全SHA照合、CUDA_VISIBLE_DEVICES空／offlineのCPUを一回実行。5.447829秒・exit0・stderr空。実tokensはUDON旧428/新668、E05旧444/新684、最大＋生成2560＝3244/8192で切捨て0。helper2f659／固定依存4／45779全3file identityを照合。archive11,271bytes／SHA3602ea57…の6payload＋manifest全7memberをPod外でbytes/hash確認し、配置4sourceとも一致。filechooser1timeoutは配置0で、固定GitHub取得へ切替。ブラウザコマンド構文1失敗もUI/Pod/file/child効果前。CPU1実行・回収1・再download0。
+
+準備だけ完了、新モデルload/forward/生成/更新/SQL/CMEE採用0、plan PROPOSED/false。新一回は最大600秒／処理按分$0.043334（約$0.0434、記録$0.26/h、準備/回収/保持/保存/税等別）。Rule18§11.3の新費用境界で、前回承認を流用しない。承認後は非学習4call→全本文の旧新比較→生原本回収→GitHub反映まで一人で行い、各段の再承認は不要。非EOS/期限/OOM/例外で終了し、追加学習・指示反復・再試行・次案を自動追加しない。一般CMEE意味採用／reader緩和／実service／製品source変更は本案に含めない。
+
+限定TECHNICAL_CREDIT（共通指示比較のCPU成立だけ）、STRUCTURE_MAP_DELTA_NONE、商品0／正式0/3／54.50％。全体00／観測入口／01Aへ現在地を同期し、pilot-prep READMEに残った旧「E01/E03/A03未使用」区分も最新splitへ訂正する。新観測会は今回不要、他core完成教師0・一般接続・実機等は残る。GPU保持、管理console/一覧/Runpod管理API/Stop/再起動/削除/新Pod/charge/依存追加/Render/Supabase/本人DB/通常application/公開API/DTO/RN/merge/deploy0。
