@@ -8,7 +8,7 @@
 
 **最新GPU確認（2026-10-27 JST）：** MashがA5000を本人レンタルし、Pod bkj4qvnhwtdqc2（physical_yellow_anglerfish、表示$0.28/h）のReadyなJupyterへ直接接続した。NVIDIA RTX A5000、VRAM25,285,623,808bytes/空き25,062,342,656bytes、Python3.12.3/Torch2.8.0+cu128/CUDA/BF16を実確認。公式固定base revisionの取得、旧45779adapter/不変helper/API6blob/15教材の23file復元と固定依存の一致、実tokenizer15件/EOS/切捨て0/max7935/8192を確認済み。GPU管理画面は新Pod接続の取得だけで終了し、以後Jupyter直接。Stop/再起動/削除/別Pod/追加chargeは0。前のレンタル自動審査拒否は履歴であり、現在の接続blockerではない。
 
-**現在の直接作業（10/27：A5000で学習先行の後継一回を起動）：** 実行source9a6c56ed、runner a62d3ed7、固定API6b043880。前回の閉鎖native15/失敗before2/旧45779は不変。新before0→同15更新→別adapter保存/非学習reload→after15を、PID3851/started_unix1793053285.442164で一回起動した。読取checkpoint97.004秒でstage=training/更新3/15/生成0、完了・新重み保存・再読・after採否はまだ未確認。2700秒/1生成180秒/最大15call/表示$0.28h按分$0.21上限（準備/保持等別）、再試行なし。終了後は無補修rawを固定CMEEへ通し、採用snapshotだけcold-file再読、全本文確認と原本・重み回収を同単位で行う。local候補55確認/実tokenizer15確認/実学習の件数を混同しない。商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=false。詳細は学習owner/weekly§59。
+**現在の直接作業（10/27：A5000で学習先行の後継一回を起動）：** 実行source9a6c56ed、runner a62d3ed7、固定API6b043880。前回の閉鎖native15/失敗before2/旧45779は不変。新before0→同15更新→別adapter保存/非学習reload→after15を、PID3851/started_unix1793053285.442164で一回起動した。最初の読取ではstage=training/更新3/15/生成0、完了・新重み保存・再読・after採否はまだ未確認。2700秒/1生成180秒/最大15call/表示$0.28h按分$0.21上限（準備/保持等別）、再試行なし。終了後は無補修rawを固定CMEEへ通し、採用snapshotだけcold-file再読、全本文確認と原本・重み回収を同単位で行う。local候補55確認/実tokenizer15確認/実学習の件数を混同しない。商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=false。詳細は学習owner/weekly§59。 早期保存checkpoint（10/27）：15更新を完了し、204.712517秒時点の別adapter保存原本を回収した。archive3465517bytes/SHA83f47229c35bddbe23aaad150a2d5562e2da89ed74a71ec2d3575c2f0789541e、全14payload+manifestのbytes/hashと32F32 tensor有限性をPod外照合。新adapter SHA278fdc26e56c2cd84b39bec19d484374d4504c656fbd5d1f8112d006e8c6457dを libfile_4756727c2f4c81918fb24227734d4269 version0へ保全した。後続同processの読取ではreload後のafter生成9完了/10件目開始、最終採否未確認。早期archive内runはsaved_before_reload/生成0の保存時点を維持し、後続進捗で書き換えない。
 
 **4B関連作業の開始前：** 全体現在地を全文読んだ後、[観測学習の目的・用途・前提](observation_learning/README.md#observation-learning-intent-and-assumptions)を毎回読み、最新weeklyの決定/実結果と今回の作業を結び付ける。学習・教材作成・評価・CMEE接続・環境移行で共通。ローカル＝Macと決め付けず、学習の成功と観測品質の成立を分ける。
 
@@ -148,7 +148,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 | 作業領域 | 次に解消すべき具体的未完了 |
 |---|---|
-| 学習済みAI・CMEE接続 | 本人レンタルA5000の直接Jupyterで実tokenizer15確認後、後継一回をPID3851で起動。checkpoint97秒は学習3/15・生成0、最終結果未確認。before0→同15更新→保存reload→after15、2700秒/180秒/$0.21按分を維持。終了後にCMEE採否/採用snapshotのcold再読/回収を行う。実結果・再開は学習owner/weekly§59 |
+| 学習済みAI・CMEE接続 | 本人レンタルA5000の直接Jupyterで実tokenizer15確認後、後継一回をPID3851で起動。最初のcheckpointは学習3/15・生成0、最終結果未確認。before0→同15更新→保存reload→after15、2700秒/180秒/$0.21按分を維持。終了後にCMEE採否/採用snapshotのcold再読/回収を行う。実結果・再開は学習owner/weekly§59 |
 | 10/24までの費用・4B選定履歴（当時の構成） | Flex24GBの旧月78,980生成・未測定の速度/起動仮定による運用費95,094円・赤字67,833円の試算は当時の構成の記録で、最新構成の原価ではない。[全仮定・再計算](observation_learning/model_selection/2026-10-24-production-economics/README.md)。旧4B実診断では24GBでLoRA保存・reload・16生成・回収を確認したが、FITは前後0/2。CPU指示修復API1dabc4fは54対象/pack11・合成2/2で、修正版は後続10/25にA4500 20GBで完走・回収済み、最新結果は§24。旧学習peak allocated14.954GiBを本番推論の必要VRAMへ流用しない。4bit/M4を第一候補とした§23は当時の華恋案で、現在の移行先はWindows／Mac未選定。公開API単価を独自育成版の原価へ流用しない。 |
 | Emlis | 一般入力と回答後の意味・自然な本文・有料差、本人実機の保存再読まで。u353〜355のコードと配置差を保持 |
 | Analysis | 最新内容修正版の配置差、通常本文生成・同一保存再読・monthly履歴/比較の本人確認、複数ANSWER採用、一般理解、有料差、IF／Savedの未実装。6501時点の不足案内表示は本人確認済みとして保持 |

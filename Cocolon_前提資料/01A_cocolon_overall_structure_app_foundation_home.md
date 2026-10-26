@@ -5036,3 +5036,6 @@ training.jsonl/adapter/partial_adapter/reloaded_tensors/after raw/cold-file結�
 ### 2026-10-27 — A5000後継一回の実行中checkpoint
 
 実行source9a6c56ed、GPU名/Pod/費用を本人レンタルA5000へ束縛。実tokenizer15件/最大7935の確認後、PID3851でbefore0→15更新→保存reload→after15の一回を起動。checkpointは更新3/15・生成0、最終未確認。後段用 `Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/native15_preparation/consume_native15_afteronly.py` と `consumer_cpu_binding_validation.json` を追加。local35確認は原input/prior/metadata束縛だけで実採否0。全実状態・二重起動しない再開先は同README#native15-afteronly-a5000-running/weekly§59。STRUCTURE_MAP_DELTA_NONE、製品構造/通常app/DB/Render/Supabase/merge/deploy不変。
+
+
+早期保存checkpoint（10/27）：15更新を完了し、204.712517秒時点の別adapter保存原本を回収した。archive3465517bytes/SHA83f47229c35bddbe23aaad150a2d5562e2da89ed74a71ec2d3575c2f0789541e、全14payload+manifestのbytes/hashと32F32 tensor有限性をPod外照合。新adapter SHA278fdc26e56c2cd84b39bec19d484374d4504c656fbd5d1f8112d006e8c6457dを libfile_4756727c2f4c81918fb24227734d4269 version0へ保全した。後続同processの読取ではreload後のafter生成9完了/10件目開始、最終採否未確認。早期archive内runはsaved_before_reload/生成0の保存時点を維持し、後続進捗で書き換えない。

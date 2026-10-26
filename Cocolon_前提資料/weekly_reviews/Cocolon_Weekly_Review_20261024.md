@@ -2811,7 +2811,7 @@ Mashの「4Bを動かすための最安レンタルGPUをrunpodでレンタル�
 
 **最新GPU確認（2026-10-27 JST）：** MashがA5000を本人レンタルし、Pod bkj4qvnhwtdqc2（physical_yellow_anglerfish、表示$0.28/h）のReadyなJupyterへ直接接続した。NVIDIA RTX A5000、VRAM25,285,623,808bytes/空き25,062,342,656bytes、Python3.12.3/Torch2.8.0+cu128/CUDA/BF16を実確認。公式固定base revisionの取得、旧45779adapter/不変helper/API6blob/15教材の23file復元と固定依存の一致、実tokenizer15件/EOS/切捨て0/max7935/8192を確認済み。GPU管理画面は新Pod接続の取得だけで終了し、以後Jupyter直接。Stop/再起動/削除/別Pod/追加chargeは0。前のレンタル自動審査拒否は履歴であり、現在の接続blockerではない。
 
-**現在の直接作業（10/27：A5000で学習先行の後継一回を起動）：** 実行source9a6c56ed、runner a62d3ed7、固定API6b043880。前回の閉鎖native15/失敗before2/旧45779は不変。新before0→同15更新→別adapter保存/非学習reload→after15を、PID3851/started_unix1793053285.442164で一回起動した。読取checkpoint97.004秒でstage=training/更新3/15/生成0、完了・新重み保存・再読・after採否はまだ未確認。2700秒/1生成180秒/最大15call/表示$0.28h按分$0.21上限（準備/保持等別）、再試行なし。終了後は無補修rawを固定CMEEへ通し、採用snapshotだけcold-file再読、全本文確認と原本・重み回収を同単位で行う。local候補55確認/実tokenizer15確認/実学習の件数を混同しない。商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=false。詳細は学習owner/weekly§59。
+**現在の直接作業（10/27：A5000で学習先行の後継一回を起動）：** 実行source9a6c56ed、runner a62d3ed7、固定API6b043880。前回の閉鎖native15/失敗before2/旧45779は不変。新before0→同15更新→別adapter保存/非学習reload→after15を、PID3851/started_unix1793053285.442164で一回起動した。最初の読取ではstage=training/更新3/15/生成0、完了・新重み保存・再読・after採否はまだ未確認。2700秒/1生成180秒/最大15call/表示$0.28h按分$0.21上限（準備/保持等別）、再試行なし。終了後は無補修rawを固定CMEEへ通し、採用snapshotだけcold-file再読、全本文確認と原本・重み回収を同単位で行う。local候補55確認/実tokenizer15確認/実学習の件数を混同しない。商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=false。詳細は学習owner/weekly§59。
 
 実tokenizerのCPU原本はPod `/workspace/cocolon_native15_afteronly_pack_20261026/gpu_afteronly_runner_cpu_check.json`、起動原本は `/workspace/cocolon_afteronly_launch_20261027.json`、進行原本は `/workspace/cocolon_native15_afteronly_run_20261026/run.json`。同PID/同outputへ戻り、--executeを二重起動しない。初期archiveは3678533bytes/SHA25516b0918621bad67ae3b0363a06c5a555eb626df708c36e909e334438c67dcのversion1から安全なmember/hashでadapter3fileを復元し、各SHAは旧planと一致。モデル取得は9.08759秒、単独baseは公式Qwen/Qwen3.5-4B@851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0aを保持。
 
@@ -2821,3 +2821,6 @@ EOF未到達のrawも実finish_reason=lengthのまま採否へ渡す。runner本
 
 今回は新たな学習15回/after15を含む一回を進行中で、まだ新モデルや一般観測品質の成功ではない。API/DTO/DB/RN/Render/Supabase/本人DB/merge/deploy差分0、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。次回もこの同processを読む。停止後の追加更新/再生成/自動再試行なし。
 
+
+
+早期保存checkpoint（10/27）：15更新を完了し、204.712517秒時点の別adapter保存原本を回収した。archive3465517bytes/SHA83f47229c35bddbe23aaad150a2d5562e2da89ed74a71ec2d3575c2f0789541e、全14payload+manifestのbytes/hashと32F32 tensor有限性をPod外照合。新adapter SHA278fdc26e56c2cd84b39bec19d484374d4504c656fbd5d1f8112d006e8c6457dを libfile_4756727c2f4c81918fb24227734d4269 version0へ保全した。後続同processの読取ではreload後のafter生成9完了/10件目開始、最終採否未確認。早期archive内runはsaved_before_reload/生成0の保存時点を維持し、後続進捗で書き換えない。
