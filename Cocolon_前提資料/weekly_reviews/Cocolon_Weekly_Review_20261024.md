@@ -2585,3 +2585,14 @@ BLOCKER_NARROWED、STRUCTURE_MAP_DELTA_NONE（製品責務／型／接続／契�
 ### §50 10/26 JST — 非学習・原汎用2題の一回をMashが承認
 
 Mashは702c1d9bの具体案（最大2生成／600秒／処理按分約$0.0434、保持等別）に「進めていいよ。」と明示承認。原proposedを保存して新planをAUTHORIZED_ONCEへ変更。runner93f26cd5／原E01・E03／固定base・45779／旧helper／2call・600秒／再試行なし／raw-only非採用を維持する。Jupyter直接・root一人で実行し、内容確認・原本保全・読み戻しまで段階の再承認は不要。新profile実装／意味採用／reader緩和／訓練は承認範囲に含めない。実行前モデル／forward／生成／SQL0、GPU保持・管理API／lifecycle0。
+
+
+### §50 最終結果（10/26 JST）— raw2完了、説明調の受け取り・未記載心理説明で品質未達
+
+[全実結果・生原本・内容診断](../observation_learning/trials/2026-10-26-generalization-probe2/README.md#generalization-eval2-final-result)。source4f62ca36からJupyter直接で一回起動、PID653527。原E01／E03、固定base／45779、runner93f26cd5、旧helper2f659を保持。model2call／各EOS／時間停止0、追加学習／再試行0。input487/505・output102/117、各生成5.738737/5.903074秒。実messages／token列はCPU原本と一致、32adapter tensor有限・全parameter非学習、保存adapter全3file不変。GPU処理19.496808秒、最終記録込み19.501644秒／処理按分約$0.00140845（記録$0.26/h、準備／回収／保持／保存／税等別）。600秒／$0.043334内。
+
+E01は郵便整理・不要紙処分と机の端の範囲を保持するが、「本人のメモ…の記録」「…と捉える」という記録報告／解説に留まる。短文へ深読み必須という指摘ではない。E03は昨日引受／今日拒否・安堵を保持する一方、断れなさ・同じ依頼の具体性を落とし、未記載の「心理的負担が軽減され平穏を回復」を加える。心理負担はあり得るが未確認の解釈、回復は未記録の先行状態を補う。留保文言だけで根拠は成立しない。問いなしは両件妥当。両方のJSON parse_errorは、元promptが厳密JSONを要求していないため品質失敗としない。
+
+rootと別文脈read-only照合の内容所見は一致。正式Pro／Ultra／human Product Readではなく、商品事前screenは2件とも未達。4B全般の上限や一般化成功、追加学習の因果効果を2件から確定しない。archive15,402bytes／SHAbe06bf6b…、13payload＋manifestの全14memberをPod外でbytes/hash照合し、全raw／実入力・token／tensor／run／launch原本をGitHubへ保全。E01／E03を評価使用済み・学習転用なしへ、A03同familyも独立未使用から外す。rawを正解へ昇格しない。
+
+一回閉鎖、BLOCKER_NARROWED、STRUCTURE_MAP_DELTA_NONE、商品0／正式0/3／54.50％据置。CMEE採用／実service／SQL／新profile／reader緩和／依存追加／Render／Supabase／本人DB／通常application／公開API／DTO／RN／merge／deploy0。GPU保持、管理console／GPU一覧／Runpod管理API／Stop／再起動／削除／新Pod／charge0。次は既存の別教材と汎用指示から、本人へ直接返す受け取り・意味保持・未記載説明抑制を一体で改善する共通指示／学習target案を具体化する。新有料実行は自動開始しない。新観測会は今回の診断には不要、他core・一般採用・実機等は残る。

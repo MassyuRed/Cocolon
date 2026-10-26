@@ -1,6 +1,6 @@
-# 4B：有限成功後の接続制約診断と、一般入力2題の非学習評価案
+# 4B：接続制約診断と、一般入力2題の非学習評価結果
 
-日付：2026-10-26 JST。状態：**Mash承認済み・一回の実行前。CPU準備完了、モデル生成0。**
+日付：2026-10-26 JST。状態：**一回終了・2生成完了。追加学習0、観測品質は未達、CMEE／商品未採用。**
 
 基準：Cocolon PR30 `bc39981585e2b12a364b2fadf64ac2f86a7bfad7`／API PR3 `4002b4577838d1ed6671278a19585b61e7ccd10e`。両Draft/open。前回joint12は意味・本文9/9、同family日常の実保存再読2/2で一回閉鎖済み。選択重みは`45779ad97111dd2d91c1f7f1a4b0ca697ef0586c5190cd56b1b7675fe540dab6`で、商品／本番へ採用していない。
 
@@ -30,9 +30,9 @@ Jupyterへ直接接続した。管理console／GPU一覧／Runpod管理APIは開
 別文脈agentのread-only意見も、汎用private版の実装より原prompt2件を先に確認する方が小さく、次の未知を直接測れるという判断だった。root華恋が実sourceを再確認して採用した。正式Pro／Ultra／human Product Readを実施したという意味ではない。
 
 <a id="generalization-eval2-proposal"></a>
-## 新しい一回案：原汎用prompt2題、追加学習なし、最大10分
+## 承認・実行済みの一回案：原汎用prompt2題、追加学習なし、最大10分
 
-状態：`AUTHORIZED_ONCE`、`gpu_run_authorized=true`。原案は[proposed plan](generalization_eval2.proposed.json)へ保全。[固定plan](generalization_eval2.plan.json)／[実行source](run_generalization_eval2.py)／[入力2件](generalization_eval2_cases.jsonl)／[CPU実tokenizer原本](generalization_eval2_cpu_preflight.json)。
+履歴のplan状態：`AUTHORIZED_ONCE`、`gpu_run_authorized=true`。一回は終了済みで再起動しない。最終状態は[実run](run/run.json)に記録。原案は[proposed plan](generalization_eval2.proposed.json)へ保全。[固定plan](generalization_eval2.plan.json)／[実行source](run_generalization_eval2.py)／[入力2件](generalization_eval2_cases.jsonl)／[CPU実tokenizer原本](generalization_eval2_cpu_preflight.json)。
 
 1. `model_selection/2026-10-22-three-core/task_inputs.jsonl`の**E01-0／E03-0の元system＋user messagesを無変更で使用**する。chair native指示・JSON-only追加文・教師・採点guide・未来の回答は送らない。独立2familyは学習対象へ移さない。
 2. 既存Qwen3.5-4B固定revision `851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a`へ45779を非学習load。`is_trainable=false`、全parameterのrequires_grad=false、32adapter tensorの有限性を既存helperで確認する。新重み・optimizer・訓練stepは作らない。
@@ -47,7 +47,7 @@ Jupyterへ直接接続した。管理console／GPU一覧／Runpod管理APIは開
 
 承認後は、planのstatusとgpu_run_authorizedだけを同じ案へ更新して実行し、元のproposed planを保全する。実行source／case／重み／上限を変更した案へ承認を継承しない。`source_cocolon_commit`は原材料を照合したpreimageで、新runnerが当該旧commitに存在したという意味ではない。実行時の配置commitも実行記録へ固定する。
 
-## 開始・終了記録
+## 開始時の記録（承認前のcheckpoint）
 
 | 開始項目 | 今回の固定値 |
 |---|---|
@@ -71,4 +71,38 @@ GPUモデルload／forward／生成／更新0、SQL0、通常application変更0�
 
 ## 10/26：Mash承認の受領、実行前checkpoint
 
-Mashは上の一回（追加学習なし・現重み45779・別題材2件・最大600秒／処理按分約$0.0434、保持等別）に「進めていいよ。」と明示承認した。原proposed bytesを保全し、planのstatusとgpu_run_authorizedだけを変更。runner／原2messages／旧helper／adapter／上限／停止は不変。現時点でモデルload／forward／生成／追加学習／SQL0、実行はroot華恋がJupyter直接で一回のみ。段階ごとの再承認を求めず、原本回収・内容診断・GitHub反映まで進める。GPU lifecycle操作は0。閉鎖joint12等の承認は流用していない。
+Mashは上の一回（追加学習なし・現重み45779・別題材2件・最大600秒／処理按分約$0.0434、保持等別）に「進めていいよ。」と明示承認した。原proposed bytesを保全し、planのstatusとgpu_run_authorizedだけを変更。runner／原2messages／旧helper／adapter／上限／停止は不変。この実行前記録の時点ではモデルload／forward／生成／追加学習／SQL0、実行はroot華恋がJupyter直接で一回のみ。段階ごとの再承認を求めず、原本回収・内容診断・GitHub反映まで進める。GPU lifecycle操作は0。閉鎖joint12等の承認は流用していない。
+
+
+<a id="generalization-eval2-final-result"></a>
+## 最終結果：一回終了、2生成完了・観測品質は未達
+
+承認済みsource `4f62ca363062ce95b881aa2e6a09a82549d1dc3a`からJupyter直接で一回だけ起動（PID653527）。原E01／E03のsystem＋user、token列、runner93f26cd5、旧helper2f659、base revision／45779を変更せず使用。追加学習0、非学習load後の全parameter非学習と32adapter tensor有限を確認した。
+
+| 項目 | 実結果 |
+|---|---|
+| 処理 | model call開始2／完了2。各EOS、時間停止0、追加生成・retry0 |
+| token | E01 input487／output102、E03 input505／output117。原messages／token IDsはCPU原本と完全一致 |
+| 時間・費用 | GPU処理19.496808秒、最終記録込み19.501644秒。記録$0.26/hの処理按分約$0.00140845。準備／回収／保持／保存／税等別。600秒／$0.043334内であり請求総額ではない |
+| 形式 | 両方とも指定欄付きの通常文章。helperのstrict JSON解析は2件とも失敗したが、原promptは厳密JSONを要求していないため形式失敗・能力失敗へ換算しない |
+| 重み／接続 | 保存adapter全3fileは前後不変。CMEE意味／本文採用0、実service／SQL0、通常application／本番変更0 |
+
+[実run](run/run.json)／[E01 raw全文](run/case1_raw.jsonl)／[E03 raw全文](run/case2_raw.jsonl)／[actual入力とtoken列](run/actual_inputs_and_token_ids.json)／[loaded tensor](run/loaded_adapter_finite_tensors.json)／[run manifest](run/file_manifest.json)／[起動記録](generalization_eval2_launch.json)／[原log](generalization_eval2_launch.log)／[内容診断](content_diagnosis.json)。rawは変更・補修していない。
+
+### 本文を読んだ判断
+
+- **E01・机の整理：** 郵便物の整理／不要な紙の処分と「机の端」が使える範囲は保った。机や部屋全体への拡大、心理原因の創作はない。同一記録の整理と使用可能の結び付きは妥当な読みとして扱う。一方、観測は「本人のメモ…の記録。」、受け取りは「利用可能になったと捉える。」で、本人に返す自然な応答より記録の報告・第三者の解説に近い。短い日常入力へ深読みや発見を必須にする指摘ではない。
+- **E03・昨日と今日の依頼：** 昨日は引受け、今日は断り、安堵した差は残ったが、「断れず」「同じ頼まれごと」の具体性が落ちた。受け取りの「心理的負担が軽減され平穏を回復」は未記載の説明を加えている。負担軽減はあり得る解釈でも根拠は未確認であり、特に「回復」は以前の平穏・その喪失という未記録の状態を補う。「解釈できる」という留保だけで出典が成立するわけではない。
+- 両件の問いなしは妥当。単に理由が書かれていないことを質問必須や「本人にも不明」へ変えない。
+
+root華恋と別文脈のread-only照合で、基本出来事の一部保持、薄い／説明調の受け取り、E03の未記載説明という所見が一致した。これは正式Pro／Ultra／human Product Readではない。**2件とも商品品質の事前screenは未達**であり、本人へ合否判断を戻さない。2件から4B全般の限界・一般化成功を確定しない。
+
+### 保全・評価区分・次の一作業
+
+回収archive15,402bytes、SHA256 `be06bf6b6d4b807930c9beb873fdc4c923380ebb968e01f997d247d1a1c36592`。13payload＋recovery_manifestの全14memberをPod外で検証し、全payloadのbytes／SHA・source／planの差分exact2・raw本文hash・token数・32tensor有限性・前後重みを照合した。[recovery manifest](recovery_manifest.json)の`run/*`は同名directory、`source/*`は本trial rootの同名fileに対応する。既存のsource／case／authorized plan／proposed／CPU原本は重複改変しない。
+
+E01／E03は**評価使用済み・学習転用なし**として既存split manifestを更新する。A03-SPARSEもE01と同familyのため、独立した未使用familyとは数えない。rawの説明を正解教師にしない。
+
+今回の一回は閉鎖。再起動・追加更新・別prompt／別adapter試行は0。次の最小作業は、E01／E03を除く既存の確認済み教材と現在の汎用指示を照合し、**本人へ直接返す受け取り、時点／断れなさ等の意味保持、未記載の原因・心理的回復を補わないことを一緒に改善する共通指示／学習target案**を具体化すること。新しい有料実行の自動承認ではない。題材別regexや、引用一致だけを根拠とした一般意味の採用は行わない。
+
+新観測会は今回の診断には不要。一般入力のCMEE採用、動的chair訂正、Piece／Analysis完成教師・品質、Windows／Mac・量子化・本人端末・本番・正式受入れは残る。今回はBLOCKER_NARROWED、商品0／正式0/3／54.50％、STRUCTURE_MAP_DELTA_NONE。GPUは稼働を保持し、管理console／GPU一覧／Runpod管理API／Stop／再起動／削除／新Pod／charge／依存追加／Render／Supabase／本人DB／公開API／DTO／RN／merge／deploy変更0。

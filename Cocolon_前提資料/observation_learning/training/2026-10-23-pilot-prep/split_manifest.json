@@ -62,8 +62,14 @@
       "case_id": "E01-0",
       "family": "desk-space",
       "original_split": "heldout_candidate",
-      "current_role": "UNUSED_EVALUATION_CANDIDATE",
-      "model_input_used_for_training_in_this_prep": false
+      "current_role": "USED_GENERALIZATION_DIAGNOSTIC_NOT_TRAINING",
+      "model_input_used_for_training_in_this_prep": false,
+      "evaluation_use": {
+        "date_jst": "2026-10-26",
+        "trial": "2026-10-26-generalization-probe2",
+        "model_input_used_for_training": false,
+        "cmee_adopted": false
+      }
     },
     {
       "case_id": "E02-0",
@@ -104,8 +110,14 @@
       "case_id": "E03-0",
       "family": "yesterday-today-request",
       "original_split": "heldout_candidate",
-      "current_role": "UNUSED_EVALUATION_CANDIDATE",
-      "model_input_used_for_training_in_this_prep": false
+      "current_role": "USED_GENERALIZATION_DIAGNOSTIC_NOT_TRAINING",
+      "model_input_used_for_training_in_this_prep": false,
+      "evaluation_use": {
+        "date_jst": "2026-10-26",
+        "trial": "2026-10-26-generalization-probe2",
+        "model_input_used_for_training": false,
+        "cmee_adopted": false
+      }
     },
     {
       "case_id": "E02-PLUS",
@@ -188,8 +200,9 @@
       "case_id": "A03-SPARSE",
       "family": "desk-space",
       "original_split": "heldout_candidate",
-      "current_role": "UNUSED_EVALUATION_CANDIDATE",
-      "model_input_used_for_training_in_this_prep": false
+      "current_role": "EVALUATION_FAMILY_EXPOSED_VIA_E01_NOT_INDEPENDENTLY_UNUSED",
+      "model_input_used_for_training_in_this_prep": false,
+      "note": "A03自体の新推論は0。10/26に同familyのE01をraw2評価で提示済み。独立した未知familyへ数えない。"
     },
     {
       "case_id": "A04-TWO-ANSWERS",
@@ -202,7 +215,7 @@
   "limits": [
     "全familyとも実際の学習未実施。学習候補の用途を記録したもの。",
     "M1出力の欠陥を踏まえて教材を選んだ3familyは開発確認。盲検の最終評価ではない。",
-    "未使用候補は2family/3場面で、Piece・期間Analysis等の独立評価が不足。",
+    "10/26に元の未使用2familyのE01/E03をraw-only評価で使用。A03はE01と同familyのため独立未使用とは数えない。Piece・期間Analysis等の独立評価は不足。",
     "今後手本/学習へ使う場合、そのfamilyの全枝を未知評価から外す。",
     "事前学習データへの未出は保証しない。同じ話の名詞置換で独立例を増やさない。"
   ],
@@ -229,5 +242,13 @@
       "note": "利用場面の後付けを指摘され、D04で観測依頼を取り下げ。既存18行に未含有。原入力・事前設定・経過は保存し、次の観測会・学習対象・独立未知評価へ数えない。",
       "status": "WITHDRAWN_NOT_FOR_TRAINING"
     }
-  ]
+  ],
+  "latest_evaluation_use": {
+    "date_jst": "2026-10-26",
+    "trial_path": "Cocolon_前提資料/observation_learning/trials/2026-10-26-generalization-probe2/README.md#generalization-eval2-final-result",
+    "actual_new_model_calls": 2,
+    "training_updates": 0,
+    "cmee_adoption": false,
+    "automatic_progression": false
+  }
 }

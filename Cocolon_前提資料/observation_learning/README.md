@@ -1,8 +1,8 @@
 # Mashの観測技術を継承するための記録
 
-**GPUの最新確認：** Jupyter直接で前回終了・保存45779を確認し、CPUのsource制約診断／原汎用prompt2件のtokenizer確認を行った。新モデルload／forward／生成／学習／SQL0、GPUは保持。管理console／GPU一覧／Runpod管理API／Stop／再起動／削除／新Pod／charge0。保持課金と処理按分を分ける。
+**GPUの最新確認：** Jupyter直接で承認済み非学習raw2を完了・回収。2生成／各EOS、追加学習0・保存45779不変、約19.5秒／処理按分約$0.00140845（保持等別）。GPU保持、管理console／GPU一覧／管理API／lifecycle0。
 
-**現在の直接作業（有限成功後の接続制約を確認、一般入力2題の非学習評価案を準備）：** joint12の固定9意味／本文9/9、同family日常2実保存再読2/2は成功・閉鎖済みで維持する。JupyterのCPU診断で現model profileは修理／再使用と日常食事の構文に限定され、E01（机の整理）／E03（昨日と今日の依頼）へchair専用指示を出し、両方をUNSUPPORTEDで拒否することを確認した。モデルを呼ばないため、4Bの能力失敗2件とは数えない。題材別regexやreader緩和を追加せず、まず45779を原汎用prompt2件で非学習評価する最小案を選んだ。実tokenizer487／505、切捨て0、false plan／runner準備済み。最大2生成・600秒／処理按分$0.043334（保持等別）の新一回は未承認・未実行。[実測・判断・具体案](trials/2026-10-26-generalization-probe2/README.md#generalization-eval2-proposal)、最新weekly§50。新観測会は今回不要、一般観測品質／動的chair訂正／他core／端末／本番／正式受入れは未完了。商品0／正式0/3／54.50％、STRUCTURE_MAP_DELTA_NONE。
+**現在の直接作業（非学習raw2を完了・閉鎖、観測品質は未達）：** 原汎用promptE01（机の整理）／E03（昨日と今日の依頼）で45779を追加学習なしに2生成し、各EOS・再試行0・原messages／token列不変を確認した。E01は机の端の範囲を保ったが受け取りが第三者の解説に近い。E03は昨日引受／今日拒否・安堵を保つ一方「断れず」「同じ」の具体性が落ち、未記載の「心理的負担の軽減」「平穏の回復」を補った。strict JSONは原promptが要求しておらずparse_errorを品質失敗へ数えない。CMEE採用／SQL0で、前回joint12の意味／本文9/9・日常2保存再読2/2とは別の結果。原本を回収照合・保全し、2familyを評価使用済み／学習転用なしへ更新。[全実結果](trials/2026-10-26-generalization-probe2/README.md#generalization-eval2-final-result)、最新weekly§50最終。次は既存教材で、本人向け受け取り・意味保持・未記載説明抑制を一緒に直す共通指示／学習target案を具体化する。新有料試行やreader緩和へ自動進行しない。新観測会は今回不要、商品0／正式0/3／54.50％。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 
@@ -81,11 +81,11 @@ Freeの当回体験、Plusの適格履歴を踏まえた理解、Premiumの本�
 既存資料にある情報をMashへ聞き直さず、華恋が原本から解決する。既存の承認範囲内で進められる作業を、新しい承認待ちへ戻さない。別の管理票・新しい検査systemを作ることを、この確認の目的にしない。最新の決定/状態が変わった場合は、本節・全体現在地・最新weeklyの関係箇所を同じ変更単位で更新する。
 
 
-## 現在地（2026-10-26・有限成功後の一般入力確認）
+## 現在地（2026-10-26・非学習raw2は完了、観測品質は未達）
 
-上段と[新しい実測・評価案](trials/2026-10-26-generalization-probe2/README.md)をcurrentとする。joint12の意味／本文9/9・日常2保存再読2/2は成立した。source制約のCPU9+2確認と、原汎用2題の実tokenizer487／505を得たが、新しいモデル推論・追加学習は0。次は保存済み45779を原prompt2件で一回だけ確認する案で、新GPUは未承認。現CMEEの意味採用・独立本文reader・通常接続を緩めない。
+[最新実結果](trials/2026-10-26-generalization-probe2/README.md#generalization-eval2-final-result)と上段をcurrentとする。原汎用2題を現45779で非学習生成、各EOS・19.5秒。E01は机の端を保つが解説調、E03は昨日／今日を区別しつつ未記載の心理説明を追加した。受け取りと未明示補完の抑制は未達で、CMEE意味／本文／SQL成功へ加算しない。strict JSONを要求していない原promptのparse_errorは診断metadataとして保持する。
 
-旧surface12の意味／本文8/9・後段0は[当時の結果](trials/2026-10-26-quote-surface-fit12/README.md)、後続joint12成功は[最終結果](trials/2026-10-26-quote-joint-fit12/README.md)へ戻る。閉鎖済みの旧planを再開しない。一般入力／三core品質／動的chair訂正／Windows-Mac／量子化／実機／本番は別残件。
+joint12の意味／本文9/9・同family日常2保存再読2/2は[既存成功原本](trials/2026-10-26-quote-joint-fit12/README.md)として維持し、今回を学習改善の前後比較としない。E01／E03は評価使用済み・教師へ転用せず、A03も同family未使用とは数えない。次は既存の別教材に基づく共通指示／学習targetの具体化。新GPU実行は自動開始しない。
 
 ## 10/24の実診断と当時の決定（履歴、現在の構成は上段）
 
