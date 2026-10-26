@@ -62,3 +62,8 @@ current未完了は、native既知2題の採用成立後もgeneric入力が第�
 ## 10/26：Mash承認・実行前checkpoint
 
 Mashは0e105dd3の具体案「13更新→保存・再読込→11件確認、最大30分／処理按分$0.13（保持等別）」へ「進めていいよ。」と明示承認した。原planをbridge13.proposed.jsonへ無変更で保存し、現planはstatus／gpu_run_authorized／approval_basisの3fieldだけ承認状態へ更新。runner f54645b2、45779、原10教師／11入力、旧helper2種、更新順／LR／loss／上限／停止は不変。root華恋一人がJupyter直接で一回起動し、原本回収・native9の既存CPU consumer・全11本文診断・重み保全・GitHub反映と読戻しまで完了する。段階ごとの再承認は不要。新model／学習／生成／SQLはこのcheckpoint時点0、旧試行承認再使用0。上段の未承認は準備時点の履歴で、現authorityは本節と現plan。
+
+
+## 実行中checkpoint：13更新・保存再読込完了、11生成は進行中
+
+承認source f9d248eeからPID677527を一回起動。456.221秒の実読取時点で13更新完了、非学習reload済み、native3生成完了／4開始。全11採否は未判定。新c39bbc27追加重みの先行archive3,401,608bytes／SHA50dbc67cfd2ccc7f33c83969715194e8b83c02c0fb87f4748a37013808b1f75cは全6member／5payloadと32F32有限をPod外照合し保全済み。先行原本は生成0で、最終結果とは分ける。[重み照合](early_weights_verification.json)／[同process再開先](runtime_checkpoint.json)。旧45779／原教材／helper／API／reader不変。次は同PIDの残りを読み、全11原本を回収してnative9 CPU採否・全本文診断を完了する。再起動・追加試行・段階ごとの再承認なし。

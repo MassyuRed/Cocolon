@@ -1,0 +1,26 @@
+{
+  "status": "RUNNING_TRAINING_COMPLETE_FIT_PENDING",
+  "source_commit": "f9d248ee6c387e6de804cb2354d91312417b39bd",
+  "execution_owner": "root Karen",
+  "pid": 677527,
+  "output_directory": "/workspace/cocolon_4b_generic_native_bridge13_result_20261026",
+  "pack_directory": "/workspace/cocolon_4b_generic_native_bridge13_pack_20261026",
+  "single_use_guard": "execution_guard.json",
+  "observed_process_seconds": 456.22113414946944,
+  "optimizer_steps_completed": 13,
+  "model_calls_started": 4,
+  "model_calls_completed": 3,
+  "model_calls_max": 11,
+  "max_model_seconds": 1800,
+  "initial_adapter_sha256": "45779ad97111dd2d91c1f7f1a4b0ca697ef0586c5190cd56b1b7675fe540dab6",
+  "saved_adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "9a70592b2ebfc03653fdcfdeb5054016f617e9c74c6499821881f4cca6672042",
+    "adapter_model.safetensors": "c39bbc27936d98ad45b0b42b43c476cad0c34f19e9f960f1a74f51eb05a564e5"
+  },
+  "early_archive_verification": "early_weights_verification.json",
+  "next_action": "Resume this existing process. Do not relaunch. On completion recover all originals; run existing CPU consumer on native9 only; root reads all11 texts; close once.",
+  "new_model_retry": false,
+  "gpu_lifecycle_operations": 0,
+  "product_accepted": false
+}

@@ -2653,3 +2653,6 @@ CPU原本SHA2774f535aa6106716bd2c0d5ddf9940235dd5a2f6b1c3b010a5d618091326c99。a
 
 
 §52 実行前checkpoint（10/26 JST）：Mashは0e105dd3の13更新→保存・再読込→11件確認／最大30分・処理按分$0.13（保持等別）の一回へ「進めていいよ。」と承認。原planをproposedへ保全し、status／gpu_run_authorized／approval_basisだけ承認状態に更新。runner f54645b2／原10教師・11入力／45779／旧helper／上限・停止不変、root単一ownerがJupyter直接で実行・回収・native9 CPU採否・全11内容診断・重み保全・GitHub読戻しまで担う。途中の再承認は不要。実行前model／forward／更新／生成／SQL0、GPU稼働保持・管理API／lifecycle0。上段の未承認は準備時点、現authorityはこの一回承認。
+
+
+§52 実行中checkpoint：承認source f9d248ee／PID677527を一回起動、456.221秒の実読取で13更新・保存非学習reload完了、native3生成完了／4開始。全11採否は未判定。追加重みc39bbc27の早期archive3,401,608bytes／全6member・32F32有限をPod外照合し保全済み。先行archiveは生成0の原本。runtime_checkpoint.jsonから同processへ戻り、再起動しない。旧45779／教師／helper／API／readerを維持。管理API/lifecycle0、GPU稼働保持、商品0／正式0/3／54.50％。
