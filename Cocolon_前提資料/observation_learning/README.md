@@ -89,11 +89,11 @@ Freeの当回体験、Plusの適格履歴を踏まえた理解、Premiumの本�
 
 joint12の意味／本文9/9・同family日常2保存再読2/2と、前回raw2の品質未達はそれぞれの原本として維持。今回も未知一般化・商品品質・他coreの完成へ加算しない。
 
-## 10/26：generic/native形式差の最小候補、Jupyter CPU準備済み・新GPU未承認
+## 10/26：generic/native形式差の最小候補、一回承認受領・実行前
 
 前回旧新4callは閉鎖済みで改善指示不採用を維持。generic FT-UDONとnative daily3は本人source／観測・受け取りtargetが同一だが、system・user envelope・出力形式が異なる。native既知9教師の成功をgeneric入力の成功と同一視できないため、[新bridge13案](training/2026-10-26-generic-native-bridge13/README.md#bridge13-proposal)を具体化した。旧generic1行を原targetのまま4回、native9を各1回の13更新案。言語題材は2題、華恋編集／未商品承認のまま。E05ほか既読評価・失敗rawは学習しない。
 
-Jupyter直接の実CPUは10教師／11評価入力、max5045prompt／2339assistantEOS／7378全文、無切捨て、daily旧surface各25token、未承認execute等6拒否を確認。CPU原本とsource8の回収11memberを照合、モデル重み読込／forward／更新／生成／SQL0・45779不変。次は最大30分／処理按分$0.13（保持等別）の新一回案への判断。自動起動・旧承認再使用0、新観測会はこの基本欠陥には不要。Piece／Analysis完成教師・独立未知評価不足は残る。最新weekly§52。
+Jupyter直接の実CPUは10教師／11評価入力、max5045prompt／2339assistantEOS／7378全文、無切捨て、daily旧surface各25token、未承認execute等6拒否を確認。CPU原本とsource8の回収11memberを照合、モデル重み読込／forward／更新／生成／SQL0・45779不変。Mashが最大30分／処理按分$0.13（保持等別）の新一回案を明示承認し、実行前checkpoint。自動起動・旧承認再使用0、新観測会はこの基本欠陥には不要。Piece／Analysis完成教師・独立未知評価不足は残る。最新weekly§52。
 
 ## 10/24の実診断と当時の決定（履歴、現在の構成は上段）
 

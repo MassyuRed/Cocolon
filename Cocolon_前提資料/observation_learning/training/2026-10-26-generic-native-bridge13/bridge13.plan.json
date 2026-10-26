@@ -1,7 +1,7 @@
 {
   "schema": "cocolon.generic_native_bridge13.plan.v1",
-  "status": "PROPOSED",
-  "gpu_run_authorized": false,
+  "status": "AUTHORIZED_ONCE",
+  "gpu_run_authorized": true,
   "initial_adapter_sha256": "45779ad97111dd2d91c1f7f1a4b0ca697ef0586c5190cd56b1b7675fe540dab6",
   "training_rows": 10,
   "generic_rows": 1,
@@ -71,5 +71,5 @@
   "provenance": "Existing KAREN_EDIT teacher; not Mash completed response or product gold.",
   "success": "Native9 meaning/body9/9 with original chair ASK/correction3update/dailyEND; root reads all11 raw. UDON grounded direct reception without wrong food/body/intent invention; E05 intent/time/uncertainty retained. Failures close trial, never loosen reader. No generalization/product claim.",
   "execution_owner": "root Karen / Codex Work / GPT-6; separate-context read-only review is not independent Pro/Ultra/human acceptance",
-  "approval_basis": "Reversible preparation and Github reflection per current continuation; this new paid run awaits Mash decision."
+  "approval_basis": "Mash explicit approval on2026-10-26 JST: 0e105dd36597472c7f4ddd1898656fd7b32ad723 bridge13 proposal; 13updates -> save/reload ->11checks once; model process maximum30min USD0.13 allocation excluding holding/recovery/storage/tax. Includes recovery, native CPU consumption, content review, durable weight/result preservation and GitHub readback. No repeated approval between these approved stages."
 }

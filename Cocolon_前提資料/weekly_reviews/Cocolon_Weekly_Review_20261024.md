@@ -2650,3 +2650,6 @@ CPU原本SHA2774f535aa6106716bd2c0d5ddf9940235dd5a2f6b1c3b010a5d618091326c99。a
 新GPUは未承認・未実行。**最大30分／処理按分$0.13（保持・回収・保存・税等別）**の一回判断が次。1800秒はモデル処理上限で、finally最終hash/archiveの厳密なOS終了時刻保証ではない。EOS/期限/OOM/非有限/identity不一致で停止し追加更新・再call・旧承認再使用・raw補修・reader緩和・次候補へ自動進行0。旧新4call不採用／native9成功・保存再読2/2／45779保存候補という別々の原本を保持する。
 
 今回新観測会不要。UDONのFIT改善・native言語2題の保持と、未知一般化・商品受入れを区別する。E05/E01/E03/A03・失敗raw・撤回読書会は教師にしない。Piece／Analysis完成教師0、独立評価不足・本人端末は残る。全体00／観測入口を置換更新、01Aへ所在追記、STRUCTURE_MAP_DELTA_NONE（製品責務／型／契約／採用条件／保存・API/DB/RN不変）。商品0／正式0/3／54.50％据置。管理console/GPU一覧/Runpod管理API/lifecycle/依存追加/Render/Supabase/本人DB/通常application/merge/deploy0。
+
+
+§52 実行前checkpoint（10/26 JST）：Mashは0e105dd3の13更新→保存・再読込→11件確認／最大30分・処理按分$0.13（保持等別）の一回へ「進めていいよ。」と承認。原planをproposedへ保全し、status／gpu_run_authorized／approval_basisだけ承認状態に更新。runner f54645b2／原10教師・11入力／45779／旧helper／上限・停止不変、root単一ownerがJupyter直接で実行・回収・native9 CPU採否・全11内容診断・重み保全・GitHub読戻しまで担う。途中の再承認は不要。実行前model／forward／更新／生成／SQL0、GPU稼働保持・管理API／lifecycle0。上段の未承認は準備時点、現authorityはこの一回承認。

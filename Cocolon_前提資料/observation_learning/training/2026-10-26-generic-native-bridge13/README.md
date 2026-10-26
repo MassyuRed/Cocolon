@@ -57,3 +57,8 @@ generic FT-UDONとnative daily3では、memo／memo_action／カテゴリ／感�
 current未完了は、native既知2題の採用成立後もgeneric入力が第三者向け解説・補完へ崩れる点。既存sourceとtargetのinterface差を最小修正する準備であり、新管理systemや品質Gateを増やさない。可逆な新pack・CPU準備・GitHub保存はMashの続行指示とRule18§11.3の既存delegation内。新GPU13更新／11生成は個別判断前で、旧4call承認を再利用しない。
 
 準備完了条件は、原source／target無変更・評価混入0・実tokenizerで切捨て0・元重み不変を確認し、CPU原本とsourceをGitHub読み戻しすること。新GPU実行判断が次の一点。商品Product Readには到達しない。STRUCTURE_MAP_DELTA_NONE：製品責務・型・契約・source採用・作者・reader・API／DB／RN接続不変。商品0／正式受入れ0/3／全体管理54.50％を維持する。Render／Supabase／本人DB・通常application・merge／deploy変更0。
+
+
+## 10/26：Mash承認・実行前checkpoint
+
+Mashは0e105dd3の具体案「13更新→保存・再読込→11件確認、最大30分／処理按分$0.13（保持等別）」へ「進めていいよ。」と明示承認した。原planをbridge13.proposed.jsonへ無変更で保存し、現planはstatus／gpu_run_authorized／approval_basisの3fieldだけ承認状態へ更新。runner f54645b2、45779、原10教師／11入力、旧helper2種、更新順／LR／loss／上限／停止は不変。root華恋一人がJupyter直接で一回起動し、原本回収・native9の既存CPU consumer・全11本文診断・重み保全・GitHub反映と読戻しまで完了する。段階ごとの再承認は不要。新model／学習／生成／SQLはこのcheckpoint時点0、旧試行承認再使用0。上段の未承認は準備時点の履歴で、現authorityは本節と現plan。
