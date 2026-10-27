@@ -60,9 +60,9 @@
   ],
   "runner_sha256": "1d0ba127e78109e5ab85f663941bb82f6a583901c948ed6bd2f56d99c4e25805",
   "cpu_check_sha256": "3ae1a94a9828e68f0c192f5015b9e025118701ce3f0b8c522a12dca3be326a4d",
-  "status": "PREPARED_AWAITING_MASH_APPROVAL",
-  "gpu_run_authorized": false,
-  "approval_basis": null,
+  "status": "AUTHORIZED_ONCE_BOUND",
+  "gpu_run_authorized": true,
+  "approval_basis": "Mash explicit approval in this conversation on 2026-10-27 JST: 進めていいよ。 Pinned proposal47e2075ca87c036f316ff63051b1894730937588: same15 / saved109c / old9 original CE + new6 per-forward detached adaptive1..16 weights / 30 updates -> save -> exact112 no-grad reload -> max15 free generations, unchanged CMEE/full-body/all-updates/cold review. Max2700sec/USD0.21 processing prorated; preparation,CPU,recovery,holding and other costs separate. One actual run only; no retry or GPU lifecycle operation; automatic progression false.",
   "adaptive_gamma": 2.0,
   "old9_original_ce": true
 }
