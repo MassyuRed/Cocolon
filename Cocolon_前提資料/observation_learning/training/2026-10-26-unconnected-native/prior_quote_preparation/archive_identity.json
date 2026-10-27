@@ -1,0 +1,10 @@
+{
+  "name": "cocolon_prior_quote_cpu_originals_20261027.zip",
+  "bytes": 60852,
+  "sha256": "0ecb5023e9df49ce4aa682ff38cf236c8d5562ca3067b90ef4a255d2664af399",
+  "payloads": 25,
+  "members": 26,
+  "all_crc_bytes_hash_verified": true,
+  "weights_included": false,
+  "api_candidate_commit": "64c6cb1a41620fd2d7690e0b6f1af30ae0e624a4"
+}

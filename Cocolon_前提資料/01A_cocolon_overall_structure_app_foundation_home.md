@@ -5279,3 +5279,21 @@ CPU4.995651秒/consumer27.004796秒、17payload＋manifestの全hash照合済み
 | `proof/jupyter_completed.jpg・identity.json` | 結果commit80130fafe7ddの92path読戻し後にJupyterで表示した完了画面。表示bytes同一、後続画面証跡としてZIP外へ保存 |
 
 学習source5・教師/入力・起案時CPU原本は固定承認5c2fe64eのpreparation ownerと保存ZIPへ戻る。同じ教師を新教材として加算しない。重み入りZIPは14,841,180bytes、SHA256 `39ac2ff058fe65a961b70f8477c2561306ca2daa1029a1bf3bb33f620c0df342`。新adapterは `d431a07ce227c05e81eca5afb9461d91cf8101d50af0d27ec1a81844ce8ac684`。意味11/本文9/新6本文0は前回同値・不採用、cold11/11一致。全体00/観測入口/training/CMEE地図/weekly§78を同単位同期。商品0/正式0/3/54.50％、GPU保持。
+
+
+### 2026-10-27 — quote prior入力修復・2件非学習診断準備のfile地図
+
+API64c6cb1aは既存model_candidate_source.pyのquote branchだけでpriorコピーのstart/endを除去。既存test_cmee_quote_candidate.pyへ保存prior/意味/旧numeric/初回不変の回帰確認1件を追加（pytest未導入で実行未実施）。責務追加・新型・新wire・reader変更なし、STRUCTURE_MAP_DELTA_NONE。
+
+Cocolonのfamilyは`observation_learning/training/2026-10-26-unconnected-native/prior_quote_preparation/`。
+
+| path/family | 責任 |
+|---|---|
+| `README.md・actual_cpu_check.json・check_cpu.py` | 最小修復と実15件直接assert、教師token/保存prior/意味/引用と入力差60項目の確認。モデル効果は未測定 |
+| `model_candidate_source.py・test_cmee_quote_candidate.py` | API64c6cb1aの2fileと同一bytesの固定copy。reader/元API copyを変更しない |
+| `eval_inputs.json・probe2.plan.json・run_probe2.py・pending_execution_check.json` | 改修後15入力とそのうちBOOK/SHOP回答後のみ2件の未承認一回案。学習0/保存d431/3712cap/最大10分/$0.047処理按分、未承認executeはoutput/model前拒否 |
+| `consume_probe2.py` | 実rawが得られた後だけ、未変更CMEE・既存cold workerで2件採否/本文/全更新を読む手順。現時点実行0 |
+| `cpu_launch*.json・execution*.log・check_cpu_failed_v1.py・check_cpu_failed_v2.py・check_cpu_pytest_unavailable_v3.py・check_cpu_v4_history.py・actual_cpu_check_v4_history.json・pytest.log` | 最初のhelper参照誤り2回・pytest未導入停止・修正過程と最終直接CPU成功の原本。GPU retryではない |
+| `runtime_archive_manifest.json・archive_identity.json` | 全25payload＋manifest/26member・60852bytesのCRC/bytes/hash照合。新重みは含まない |
+
+初回10quote入力/旧numeric15/教師全target不変。回答後5入力だけ座標を除去。次の2件実モデルは未承認・未実行で、旧9の新prompt退行なし/新初回4件の改善/全15合格を証明しない。商品0/正式0/3/54.50％、GPU保持、weekly§79。

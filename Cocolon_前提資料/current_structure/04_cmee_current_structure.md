@@ -1891,3 +1891,8 @@ APIa4b91b4がquote出力仕様へ既存unknown_id ASCII1..64/非衝突/正確な
 既存学習rootの`adaptive30_result/README.md`・weekly§78が実行結果owner。Mashが固定47e2075案を明示承認し、source5c2fe64eから30更新・新保存・112F32非学習一致reload・自由生成15を一回完了。固定APIa4b91b4の無補修raw採用は意味11/15・本文9/15、旧9は9/9・新6は2/0、前回から件数改善なし。採用snapshotの別process全outcome再読11/11一致（本文なし2件を含む）、追加model/SQL0。新d431a07cは通常不採用。処理1511.033445秒/$0.117525按分・consumer CPU102.679954秒、準備/CPU/回収/保持等別。重み入り原本76payload＋manifestを保全。CPU準備の候補計算を実モデル改善とせず、原本runのpending表示は凍結保存し最終summaryで閉鎖する。
 
 STRUCTURE_MAP_DELTA_NONE（意味型/wire/reader/商品責務/通常経路不変）。固定教師priorの診断であり、通常service保存再読・動的thread・本人端末・他core/商品受入れは未成立。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false。GPU稼働保持、再試行/Stop/restart/delete0。次は既知教師の根拠・全更新・本文役割のCPU原因分析で、新観測会は今は不要。
+
+
+### 2026-10-27 — quoteモデル入力のprior座標混在を除去
+
+API64c6cb1aのmodel_candidate_source.pyはquote branchのモデル向けpriorコピーからnative start/endだけを落とす。保存済み意味packet/証拠・legacy numeric・元source・readerは不変。回答後5件/30引用/60座標、Jupyter CPU6.912891秒で実15件の入力差・全target token保持・30一意引用から元座標復元を直接assert。pytest suiteは未導入で未実施、依存追加0。新モデル処理0、11/9・新6本文0は前回実結果。次の保存d431/学習0/回答後2件のみの最大600秒/$0.047処理按分診断は個別判断前。新初回4件/旧9の新prompt品質はその2件では未検証。既存入力projectionの修復でSTRUCTURE_MAP_DELTA_NONE（意味型/wire/reader/通常経路不変）。原本prior_quote_preparation/README・weekly§79、商品0/正式0/3/54.50％、GPU保持/新観測会不要。

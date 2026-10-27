@@ -1,13 +1,13 @@
 # 10/26 — 未接続の既存6教材とCMEE受理範囲／一括接続案
 
-状態：**承認済みadaptive30一回完了・新d431a07c不採用。** 意味11/15・本文9/15、新6本文0/6で前回localized30同値。全実行原本と保存重みを保全済み。
+状態：**quote prior座標混在を最小修復、実15件CPU確認済み。次の2件非学習GPU診断は明示判断前。** 前回adaptive30の意味11/15・本文9/15、新6本文0/6とd431不採用を維持。
 
 <a id="native15-adaptive30-proposal"></a>
-## 2026-10-27 — 動的重点配分30更新・一回実行の最終結果
+## 2026-10-27 — quote priorの座標混在修復と2件非学習診断案
 
-**現在の直接作業（10/27：承認済みadaptive30一回を終了・新重み不採用）：** 同109cから30更新→新保存→112F32/3,833,856parameterの非学習再読込→15件自由生成を完了。EOS15・strict JSON14、同CMEEの意味11/15・本文9/15（旧9は9/9、新6は2/0）で前回localized30から本文成立は増えなかった。採用snapshotの別process全outcome再読11/11一致・失敗0、本文なし2件を含む。処理1511.033445秒・$0.117525按分（準備/CPU/回収/保持/保存/通信/税等別）、consumer CPU102.679954秒。新d431a07cは不採用、再試行/追加モデル/SQL0。重みと全76payload＋manifestをPod外で照合・保全。BOOKのID衝突/回答後の根拠・更新不足、SHOP回答後duplicate key、REPOT主客反転、KNIT scope/本文反復が残る。次は既知教師と実rawで根拠参照・全更新・本文役割の原因をCPUで切り分ける。新観測会は今は不要、有料反復へ自動進行しない。原本adaptive30_result/README・最新weekly§78。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false、GPU稼働保持/Stop・restart・delete0。
+**現在の直接作業（10/27：quote入力のprior座標混在を最小修復、CPU確認済み）：** API64c6cb1aでquote形式のモデル向けpriorコピーからstart/endだけを除去。回答後5件/30引用/60座標、初回10入力・旧numeric15・全教師target IDs/EOS・元情報/保存済み解釈/意味/引用順/OUTPUT_SPECは不変。Jupyter CPU6.912891秒の実15件直接assertで確認、pytestは未導入のためsuite未実施・追加install0。実モデル読込/forward/学習/生成0。前回adaptive30は意味11/本文9・新6本文0、d431不採用のまま。次の一回案は保存d431の非学習load→BOOK/SHOP回答後のみ各1生成、学習0・最大10分/$0.047処理按分（準備/CPU/回収/保持等別）、明示判断前。全15回帰や新初回4件の改善とはしない。新観測会は今は不要。prior_quote_preparation/README・weekly§79。商品0/正式0/3/54.50％、GPU稼働保持/Stop・restart・delete0、automatic_progression=false。
 
-[最終結果・全15採否/本文レビュー・保存重み/実行原本](adaptive30_result/README.md)。[起案時の具体案・source・CPU原本](adaptive30_preparation/README.md)は履歴として保持。旧9は既存CE、新6は全targetの正解確率からdetached重み1〜16を毎forward再計算したが、意味/本文成立の件数改善は得られなかった。固定教師priorの既知FITで、動的一往復/未知一般化/通常service保存/商品品質の成功ではない。
+[今回の小修復・実CPU原本・次の2件案](prior_quote_preparation/README.md)。[前回adaptive30の閉鎖結果/全原本](adaptive30_result/README.md)。旧順序変更案ordered30は既試行で退行したため再提案せず、今回の入力差へ混ぜない。追加学習で補う前に、保存済み重みで今回の入力修正だけの影響を測る。
 
 <a id="native15-token-diagnostic-proposal"></a>
 <a id="native15-localized30-result"></a>

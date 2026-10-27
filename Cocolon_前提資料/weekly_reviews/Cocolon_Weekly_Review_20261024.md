@@ -3127,3 +3127,21 @@ consumer CPU102.679954秒、固定APIa4b91b4へrawを無補修で接続。cold-f
 処理1511.033445464秒/$0.117524824按分、上限2700秒/$0.21以内。準備/CPU/回収/保持/保存/通信/税等は別で総請求ではない。全76payload＋manifest/77member、14,841,180bytesの重み入りZIPをPod外でCRC/全bytes/hash照合・保全。新adapter112F32/3,833,856parameter全有限、各15行2回/30勾配有限、全15rawhashと全11cold結果を外部でも照合した。終了時のrun内部allocated17,039,360bytesと、worker終了後nvidia-smi1MiBを区別。GPU/consumer PID222461/231168はEXITED、GPU稼働保持。Stop/restart/delete/管理API操作0。
 
 [最終結果と全原本](../observation_learning/training/2026-10-26-unconnected-native/adaptive30_result/README.md)。同じ回数/LRだけの有料反復を次の標準作業へ戻さず、既存教師の長い根拠参照/全更新/本文役割のCPU原因切分けが次。現時点で新観測会は不要。商品0/正式0/3/54.50％、PRODUCT_NOT_CLEAR、candidate_ready=false、automatic_progression=false。通常API/DB/RN/Render/Supabase/本人DB/merge/deploy0。STRUCTURE_MAP_DELTA_NONE（商品責務/型/wire/reader/通常接続不変、file地図へ実結果ownerのみ追加）。
+
+
+<a id="20261027-prior-quote-input-fix"></a>
+## 79. 10/27 — quote入力のpriorに残った旧座標を修復、学習0の2件診断は判断前
+
+**現在の直接作業（10/27：quote入力のprior座標混在を最小修復、CPU確認済み）：** API64c6cb1aでquote形式のモデル向けpriorコピーからstart/endだけを除去。回答後5件/30引用/60座標、初回10入力・旧numeric15・全教師target IDs/EOS・元情報/保存済み解釈/意味/引用順/OUTPUT_SPECは不変。Jupyter CPU6.912891秒の実15件直接assertで確認、pytestは未導入のためsuite未実施・追加install0。実モデル読込/forward/学習/生成0。前回adaptive30は意味11/本文9・新6本文0、d431不採用のまま。次の一回案は保存d431の非学習load→BOOK/SHOP回答後のみ各1生成、学習0・最大10分/$0.047処理按分（準備/CPU/回収/保持等別）、明示判断前。全15回帰や新初回4件の改善とはしない。新観測会は今は不要。prior_quote_preparation/README・weekly§79。商品0/正式0/3/54.50％、GPU稼働保持/Stop・restart・delete0、automatic_progression=false。
+
+前回11/9の停滞を受け、rootとread-only補助が実15教師/出力/入力/loaderを比較。学習/evalのprefix・chat template・causal shiftは整合。BOOK/SHOP回答後は初回4claim/snapshot_refを保持しながら、根拠index・namespace・必要7/8更新の組立てが破綻した。依存順serializationは旧ordered30で既試行・実3/15退行だったため、同じ案を新規扱いして有料反復しない。
+
+具体的取り落としは、source側では隠したnative proof座標がprior.meaning_packet.evidenceへ残ること。quote branchだけでモデル向けcopyからstart/endを落とし、意味/ID/引用/順序/保存済みprior/reader/legacy numericは保持。API64c6cb1aのsource1＋回帰test1をGitHub bytes読戻し済み。元API a4b91b4のcopyと凍結資料は不変。
+
+Jupyter直接CPU6.912890955秒で15件直接assert。回答後5×6引用の60座標だけ除去、全30引用から原座標を一意再導出。初回10quote・旧numeric15・全assistant target IDs/EOS/改行・元source/OUTPUT_SPEC/保存priorは不変。BOOK4257→4201、SHOP4419→4365入力token、従来3712cap込み7913/8077。実モデル読込/forward/学習/生成0、production SQL/GPU lifecycle0。
+
+CPU scriptは私のhelper戻り値参照誤りで2回停止。次はpytest未導入で停止し、installせず直接assertへ戻した。直接15成功後、不要だったtrust_remote_code=Trueを既存Falseへ戻して最終再確認。各code/launch/log/中間結果を保存し、pytest suite未実施をPASSへ換算しない。API追加testも未実行。
+
+[原本と次の一回案](../observation_learning/training/2026-10-26-unconnected-native/prior_quote_preparation/README.md)。次案は保存d431を112F32非学習load、BOOK/SHOP回答後各1自由生成、学習0・最大2call・600秒/$0.047処理按分、準備/CPU/回収/保持/保存/通信/税等別。未承認planはmodel/output前拒否をCPU確認。2件の変化だけを見る案で、旧9回帰・全15成立・priorなし新初回4件の修復を意味しない。新有料実行は判断前、前回消費済みplanを再利用しない。
+
+CPU原本25payload＋manifest/26member、60852bytes、SHA256 0ecb5023e9df49ce4aa682ff38cf236c8d5562ca3067b90ef4a255d2664af399をPod外でCRC/全size/hash照合してmember保存。重みは既存adaptive30保全先へ戻る。新観測会は現時点不要。STRUCTURE_MAP_DELTA_NONE（既存input projection修復、責務/型/wire/reader/通常接続不変）、限定TECHNICAL_CREDITのみ。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false。GPU保持、管理console/API/Stop/restart/delete0。
