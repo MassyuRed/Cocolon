@@ -3186,3 +3186,21 @@ Mashが「基本相談式で、短い実入力式でも全てを華恋が担当�
 Mash添付の今回Pod94a06hhxu51uy4と前回bkj4qvnhwtdqc2を区別した。今回Jupyterの認証フォームに到達し、安全な認証入力送信後Invalid credentialsを実確認。credential値は取得・記録0、Lab/terminal未到達。専用plugin検索は該当なし。管理console/GPU一覧/管理APIへ迂回0、Jupyter child0、GPUの実在/稼働/単価/base/cache/adapter不変は今回未確認。保持指示は継続し、Stop/restart/delete/新Pod/charge0。
 
 認証復旧後に同Jupyterでfile/保存d431/依存を確認し、必要なら既存保全元から同一bytesを復元。実CPUで15入力差/全target/tokenizer8192内を確認してから、新しい学習0/2生成の条件と費用を具体化する。今は新GPU plan/個別費用承認を作らず、前回の消費済みplanを再利用しない。API PR3製品source/教師/重み/reader/Render/Supabase/通常API/DTO/DB/RN/merge/deploy変更0。root Codex Work/GPT-6単一writer、補助はread-onlyで正式Pro/Ultra/human受入れではない。STRUCTURE_MAP_DELTA_NONE、準備候補/認証待ちは商品成果に数えず、商品0/正式0/3/54.50％を保持。
+
+
+<a id="20261028-update-obligations-cpu-prepared"></a>
+## 83. 10/28 — Jupyter認証復旧、更新義務指示候補の実CPU確認完了・新GPU一回は承認前
+
+**現在の直接作業（10/28）：** 同Pod94a06hhxu51uy4のJupyterLab/terminalへ直接接続でき、§82の認証待ちを解消した。開始時workspaceは空で、前Podのfile/cache/重みが残ると仮定せず、既存source/固定依存/tokenizer/保存d431を復元した。RTX A5000/24564MiB・使用1MiB、Python3.12.3/Torch2.8.0+cu128を実確認。今回の処理按分単価は$0.28/h。管理consoleは認証と当該PodのJupyter接続に使用し、以後Jupyter内で作業した。管理API/Stop/restart/delete操作0。認証値は取得・保存せず、§82のInvalid credentialsと実行前停止は当時の履歴として変更しない。
+
+[実CPU原本・新一回の具体案](../observation_learning/training/2026-10-26-unconnected-native/update_obligations_preparation/README.md)。`actual_cpu_check.json`はAPI64c6cb1a/商品ce8c336cの原本と候補別copyを使う。実build_model_messagesと固定tokenizerをCPU6.4502273589605466秒で照合し、全15のうちBOOK/SHOP回答後2件のupdates指示だけを変更、残13件/旧numeric15/元source/保存prior/全assistant target IDs/EOS/終端改行を保持。BOOKは入力4201→4235token（＋34）、SHOP4365→4401（＋36）、従来3712出力cap込み7947/8113でcontext8192内。全教師を切り捨てず、指示の文字増分をtoken増分へ流用していない。学習済model読込/forward/学習/生成/pytest/SQL0、CUDA未初期化。
+
+保存済みd431を既存保全元の同一bytesから復元し、`adapter_cpu_check.json`の別CPU5.672745146090165秒で112F32/3,833,856parameter・全有限・56module対応と元hashを確認した。小さいmeta構造の構築1であり、元4Bの学習済全重みを読み込んだり推論したりしたものではない。d431 SHA256は`d431a07ce227c05e81eca5afb9461d91cf8101d50af0d27ec1a81844ce8ac684`のまま、既存loader3fileのhashも照合。固定revisionのbase7fileも取得成功・exit0、FIXED_BASE_FILES_READY_NO_MODEL_LOADを確認した。新しい学習済重み保存0・optimizer作成0。CPUの成功を非学習GPU loadの成功や通常採用へ換算しない。
+
+新runnerの未承認`--execute`は、output作成・実model処理より前に拒否された。既存の未変更CMEEへ前回BOOK/SHOPの旧raw2件を無補修でCPU1.7106095609487966秒で再生し、意味/本文0/2と元拒否を再現した。これは新promptのモデル評価2件でも新しい生成2件でもない。今回の候補効果、根拠/全更新/本人向け本文の改善は未測定。API PR3製品source、教師、reader、採用条件と前回結果は変えない。
+
+次の新一回案は、保存d431/112F32を非学習load1し、BOOK・SHOP回答後を空assistantから各1回だけ生成する。追加学習0、新重み保存/optimizer0、最大2call、3712cap/context8192、各生成180秒、全体600秒（外側590秒＋kill10秒）・処理按分$0.047上限。単価$0.28/h、準備/CPU/回収/保持/保存/通信/税等は別で総請求額ではない。固定base7fileの取得は約6秒で終了済みだが、モデルcacheの前準備と実行前照合はGPU試行の処理600秒とは別費用区分に属する。`probe2.plan.json`はPREPARED_AWAITING_MASH_APPROVAL/gpu_run_authorized=false/approval_basis=nullで、新しい有料一回への許可は未受領。前回のconsumed plan/承認/残時間/予算を流用せず、retry0/automatic_progression=falseを保つ。
+
+得られた新rawは同じreaderへ無補修で渡し、意味採否/原sourceと根拠対応/全7・8更新/本文・問い・留保を全件読む。採用snapshotがある場合だけ既存cold-file確認へ渡す。成功しても既知回答後2件だけで、旧9の新prompt回帰/新初回4件/全15新評価/実初回からの動的thread/通常service・SQL/本人端末/Piece・Analysis/未知一般化/正式商品受入れへ拡張しない。新観測会は現不具合の解消には不要。
+
+実source/checker/CPU/復元log/未承認plan/runner/consumerの原本と回収照合結果は同family READMEへ保存する。最終CPU原本ZIPは14,287bytes/9payload＋manifestの10member、SHA256 `84d522047bbe22f491de8dfda4a02a5e7ece3261e50d8ff77652ddb6df4b3114`。先行CPU/adapter原本のarchiveと区別し、ZIP/memberの照合詳細は各manifestへ戻る。今回の直接作業は実行可能な入力候補・CPU準備の確認で、モデル品質成功ではない。商品0/正式0/3/54.50％、前回意味/本文0/2・d431通常不採用、candidate_ready=false、automatic_progression=falseを維持。通常API/DB/RN/Render/Supabase/本人DB/配置/merge/deploy変更0、STRUCTURE_MAP_DELTA_NONE。全体00/観測入口/学習owner/01A file地図を同単位更新する。

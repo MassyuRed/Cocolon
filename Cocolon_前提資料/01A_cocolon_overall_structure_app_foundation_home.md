@@ -5318,15 +5318,20 @@ Cocolonのfamilyは`observation_learning/training/2026-10-26-unconnected-native/
 重みSHA d431a07cは不変で元保存先はadaptive30_result。今回selected2のみで全15/旧9/新初回4の新評価にしない。商品0/正式0/3/54.50％、GPU稼働保持。全体00/観測入口/training/CMEE地図/weekly§80を同期。
 
 
-### 2026-10-28 — 回答後更新指示の未適用候補と認証待ち
+### 2026-10-28 — 回答後更新指示候補の実CPU準備と未承認の新2件案
 
-family：`observation_learning/training/2026-10-26-unconnected-native/update_obligations_preparation/`。
+family：`observation_learning/training/2026-10-26-unconnected-native/update_obligations_preparation/`。状態は`CPU_READY_GPU_AWAITING_MASH_APPROVAL`。§82の認証前停止は履歴で、現在は同Pod94a06hhxu51uy4のJupyterLab/terminalへ直接接続済み。
 
-| path | 責任 |
+| path/family | 責任 |
 |---|---|
-| `README.md` | 前回更新不足の因果仮説、未適用/未実行の区分、Jupyter認証エラー、実CPU/token確認からの再開先 |
-| `model_candidate_source.py` | API64c6cb1aの別copy。quote V3回答後だけrole別ADD＋GAP解消を明示する未適用候補。製品source自体は不変 |
-| `input_preview.json` | 保存済みrole_order/written_link_orderから作ったBOOK/SHOP指示前後。正解quote/ID/index/bodyは追加しない |
-| `static_check.json` | spec関数のみの構文/差分比較。実messages/tokenizer/教師target照合/モデル効果は未実施 |
+| `README.md` | 前回の更新不足と今回の修正仮説、実CPU結果、新しい学習0/2生成案、費用/未承認/保護範囲。モデル品質の成功ではない |
+| `model_candidate_source.py・input_preview.json・static_check.json` | API64c6cb1aの別copy。quote V3回答後だけrole別ADD＋末尾GAP解消を明示。正解quote/ID/index/bodyは追加せず、製品sourceは不変。static結果は起案時の履歴 |
+| `check_cpu.py・actual_cpu_check.json・eval_inputs.json` | 実build_model_messages/固定tokenizerで全15比較。回答後2指示だけ差分、残13/旧numeric15/保存prior/教師target IDs不変、3712cap込みBOOK7947/SHOP8113で8192内。実CPU6.450227秒、model処理0 |
+| `check_adapter_cpu.py・adapter_cpu_check.json・adapter_recovery.json` | 保存d431/112F32/3,833,856parameter/56module・全有限と元hashをCPU照合。5.672745秒、meta構築1、pretrained model読込/forward0。保存済み重みの通常採用ではない |
+| `probe2.plan.json・run_update_probe2.py` | 未承認の新一回。保存d431非学習load1・BOOK/SHOP回答後各1生成、学習0/max2call・3712cap/context8192・最大600秒/$0.047処理按分。pending executeをoutput/model前拒否。前回消費済みplanを呼び直さない |
+| `consume_update_probe2.py・consumer_cpu_smoke/diagnosis.json・pending_execution_check.json` | 既存reader/API64c6cb1aへraw無補修で渡す。CPU1.710610秒で旧2rawを再生して意味/本文0/2を再現、未承認executeのoutput/model前拒否を記録済み。新raw採否/全本文/全7・8更新と、採用snapshotがある場合だけcold-file確認を行う。新GPU評価は未実施 |
+| `restore_payload.json・cpu_runtime_originals.zip・cpu_runtime_archive_manifest.json・adapter_cpu_runtime_originals.zip・adapter_cpu_archive_manifest.json・final_cpu_runtime_originals.zip・final_cpu_archive_manifest.json・logs/*` | 固定source/依存/tokenizer/保存重みの復元とCPU実行原本。最終回収/外部照合の詳細は同family READMEの確定記録へ戻る |
 
-今回PodのJupyterはInvalid credentials、Lab未到達。追加モデル処理/SQL0。全体00/観測入口/学習owner/weekly§82へ同期。STRUCTURE_MAP_DELTA_NONE（商品責務/型/wire/reader/通常経路不変）、商品0/正式0/3/54.50％。候補保存を製品実装や品質向上としない。
+開始時workspaceは空。今回A5000/24564MiB・使用1MiB、Python3.12.3/Torch2.8.0+cu128、固定4依存を確認し、既存source/公開tokenizer/保存d431を復元した。固定revisionのbase7file取得成功・exit0、pretrained model読込/forward/学習/生成0、pytest/SQL0。新一回の単価$0.28/h、準備/CPU/回収/保持/保存/通信/税等は処理600秒/$0.047と別。実行許可は未受領、旧run/planは消費済みのまま。
+
+前回意味/本文0/2・d431通常不採用と商品0/正式0/3/54.50％を保持。新観測会は現不具合の解消には不要。Stop/restart/delete/管理console/API0、通常API/DB/RN/Render/Supabase/配置不変。全体00/観測入口/学習owner/weekly§83へ同期。STRUCTURE_MAP_DELTA_NONE（商品責務/型/wire/reader/通常経路不変）、candidate_ready=false/automatic_progression=false。
