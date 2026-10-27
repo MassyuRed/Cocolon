@@ -21,6 +21,8 @@ def prepare(pack):
     old=module('adaptive_readonly_predecessor',OLDPACK/'run_localized30.py')
     parts=old.prepare(OLDPACK)
     _, oldcpu, _, _, helper, _, tok, rows, cases, encoded, _, _=parts
+    for name in ('train_messages.jsonl','eval_inputs.jsonl'):
+        destination=pack/name; require(not destination.exists(),'teacher_copy_preexists');destination.write_bytes((OLDPACK/name).read_bytes())
     require(len(rows)==len(cases)==len(encoded)==15,'teacher_count')
     loss=module('adaptive_loss_cpu',pack/'adaptive_loss.py')
     stats=[]
@@ -71,8 +73,8 @@ def prepare(pack):
     tg=torch.autograd.grad(answer,tiny.logits)[0];require((tg[:,:2]==0).all().item() and (tg[:,6:]==0).all().item() and (tg[:,5]!=0).any().item(),'prompt_or_eos_gradient')
     require(loss.teacher_loss(None,TinyHelper,input_ids=None,attention_mask=None,labels=None,encoded=None,adaptive=False)=='OLD9_OWNER_CALLED','old9_owner_changed')
     require(not torch.cuda.is_initialized(),'cuda_initialized_after_cpu')
-    payload={n:sha(pack/n) for n in ('adaptive_loss.py','prepare_adaptive30.py','run_adaptive30.py')}
-    result=dict(status='CPU_ADAPTIVE30_PREPARED_GPU_NOT_AUTHORIZED',seconds=time.monotonic()-started,cases=stats,total_target_tokens=sum(x['target_tokens'] for x in stats),adaptive_target_tokens=sum(x['target_tokens'] for x in stats if x['adaptive']),teacher_messages_sha256=sha(OLDPACK/'train_messages.jsonl'),eval_inputs_sha256=sha(OLDPACK/'eval_inputs.jsonl'),old_cpu_check_sha256=sha(OLDPACK/'actual_cpu_check.json'),old_runner_sha256=sha(OLDPACK/'run_localized30.py'),payload_sha256=payload,diagnostic_sha256=diagnostics,reference_logits_adapter='109c_with_pre_localized_prompt; allocation_simulation_only',checks=dict(causal_shift=True,prompt_excluded=True,eos_retained=True,finite_detached_weights_and_gradients=True,extreme_confidence=True,old9_original_owner=True,single_forward=True),model_loads=0,model_forwards=0,training_updates=0,generations=0,sql_operations=0,cuda_initialized=False,product_credit=0,automatic_progression=False)
+    payload={n:sha(pack/n) for n in ('adaptive_loss.py','prepare_adaptive30.py','run_adaptive30.py','consume_adaptive30.py','train_messages.jsonl','eval_inputs.jsonl')}
+    result=dict(status='CPU_ADAPTIVE30_PREPARED_GPU_NOT_AUTHORIZED',seconds=time.monotonic()-started,api_commit=oldcpu['api_commit'],api_inventory=oldcpu['api_inventory'],cases=stats,total_target_tokens=sum(x['target_tokens'] for x in stats),adaptive_target_tokens=sum(x['target_tokens'] for x in stats if x['adaptive']),teacher_messages_sha256=sha(OLDPACK/'train_messages.jsonl'),eval_inputs_sha256=sha(OLDPACK/'eval_inputs.jsonl'),old_cpu_check_sha256=sha(OLDPACK/'actual_cpu_check.json'),old_runner_sha256=sha(OLDPACK/'run_localized30.py'),payload_sha256=payload,diagnostic_sha256=diagnostics,reference_logits_adapter='109c_with_pre_localized_prompt; allocation_simulation_only',checks=dict(causal_shift=True,prompt_excluded=True,eos_retained=True,finite_detached_weights_and_gradients=True,extreme_confidence=True,old9_original_owner=True,single_forward=True),model_loads=0,model_forwards=0,training_updates=0,generations=0,sql_operations=0,cuda_initialized=False,product_credit=0,automatic_progression=False)
     dump(pack/'actual_cpu_check.json',result)
     plan=json.loads((pack/'adaptive30.plan.json').read_text());require(plan['status']=='PREPARED_AWAITING_MASH_APPROVAL' and plan['gpu_run_authorized'] is False and plan['approval_basis'] is None and plan['cpu_check_sha256'] is None,'plan_must_be_pending')
     plan['cpu_check_sha256']=sha(pack/'actual_cpu_check.json');dump(pack/'adaptive30.plan.json',plan)
