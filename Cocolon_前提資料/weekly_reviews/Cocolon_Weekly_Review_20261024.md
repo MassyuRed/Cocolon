@@ -3161,3 +3161,15 @@ BOOK2724token・SHOP2637token、両EOS/strict JSON。SHOPのduplicate schema key
 処理235.326689023秒/$0.018303186924按分、上限600秒/$0.047以内。consumer CPU1.993279065秒、追加model/学習/production SQL0。採用snapshot0でcold-file保存再読は対象なし。準備/CPU/回収/保持/保存/通信/税等は別、総請求ではない。全15payload＋manifest/16member、56444bytes、SHA147d2b426019c43026326cdb648f2612d1da333bebb9598112632daa4f8cd812をPod外でCRC/全bytes/hash照合しZIP/memberとも保全。112F32全有限、読込metadataは前回保存後再読込と一致。d431 SHAは前後不変、元base全重み/adapterは新ZIPへ重複同梱せず既存保全先を保持。GPU PID246433/consumer246735はEXITED、A5000/1MiB、稼働保持/Stop・restart・delete0。
 
 [最終owner・全比較/原本](../observation_learning/training/2026-10-26-unconnected-native/prior_quote_probe2_result/README.md)。最終RUN_CLOSED_NO_MEANING_OR_BODY_GAINとし、原本runのpending表示/承認済みplanを後から書換えず消費済み証拠として凍結。今回2件で旧9回帰・priorなし新初回4・全15新評価・動的一往復・通常service保存・本人端末/他coreを検証したことにしない。前回全15の11/9は履歴のまま合算0。新観測会は今は不要。同じ有料反復へ自動進行せず、残る根拠対応/全更新/本人向け本文を既存教師と実出力から見直す。STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false。通常API/DB/RN/Render/Supabase/依存/価格/merge/deploy変更0。
+
+## 81. 10/27 — 観測会の分担方針をMashが決定、相談式の新しい一組を開始
+
+Mashが「基本相談式で、短い実入力式でも全てを華恋が担当するのではなく、判断に迷いそうなものはMashに観測させる」「分析向けもたまに混ぜる」と明示し、GitHubの観測会資料への記録と観測会開始を指示した。まずEmlisAIの応答を優先する。方針は[観測学習README](../observation_learning/README.md#observation-session-policy-20261027)へ反映した。
+
+相談式は着目・問い・回答に基づく理解更新・自然な受け取りの実際の流れをMashから採録する。短い実入力式の基本案は華恋が作り、判断に迷う観測境界・重要な例はMashへお願いする。短いことを簡単さと同一視せず、華恋の編集・架空補充をMash完成実演や品質承認へ昇格しない。形式別の4B学習効果は同条件で直接比較しておらず、相談式優位を実証した結論ではない。
+
+分析向けも時々交え、複数記録の共通点・変化・不一致・不明を扱う材料を今後得る方針とした。単一の相談例をそのまま期間Analysisの完成教師へ換算しない。後の本人回答・非提示設定を初回応答へ混ぜず、実演・華恋編集・架空例の由来と情報の可視時点を保持する。
+
+新しい[OBS-20261027-001 D00](../observation_learning/sessions/2026/OBS-20261027-001/01_dialogue.md#d00)は、社内勉強会の一回分を同僚に引き継いだ後に残る気掛かりという華恋作成の架空相談。D00提示用原文と質問前の本人役設定を保存し、Mashの観測待ち。特定の心理原因・問い・修正を正解として仕込まない。次はMashの観測／問いをD01以降に実発言のまま採録する。
+
+新しい収集資料は学習用／評価用未割当。既存の凍結15教材／評価／重み、閉鎖済み試行の判断は不変で、追加学習・推論・GPU lifecycle・製品code／API／DB／RN／配置へのeffect0。方針記録は観測学習README、session原文とノート、全体00、本weeklyの5fileに限定する。STRUCTURE_MAP_DELTA_NONE、収集・記録の開始であり商品品質やモデル改善の合格ではない。商品0／正式0/3／54.50％、candidate_ready=false、automatic_progression=falseを維持する。
