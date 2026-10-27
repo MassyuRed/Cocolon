@@ -1,6 +1,6 @@
 # 引用・意味・更新を本文より先に生成する30更新候補
 
-状態：**Mashの新一回承認を受領／実行前**。旧continuation30は閉鎖済みで、旧承認・出力・残枠を再利用しません。
+状態：**承認済みの一回を実行中**。旧continuation30は閉鎖済みで、旧承認・出力・残枠を再利用しません。
 
 目的は、4Bが本人の言葉・主体・時点・否定・不明・回答後の変更を保ち、自然な観測と受け取りを作り、既存CMEEが採用・保存再読できるようにすることです。現在の不足は、既知15件のうち新6件の本文が0/6である点です。三中核全体の用途・Runpod育成・Windows/Mac未選定は[学習目的](../../../README.md#observation-learning-intent-and-assumptions)を保持します。
 
@@ -73,3 +73,7 @@ packは /workspace/cocolon_native15_ordered30_pack_20261027、新GPU outputは /
 ## 2026-10-27 新一回の承認
 
 Mashは固定案e94971f9b7552989fdd1fe3710a683b9e68662daの30更新→保存/非学習reload→15件確認、最大2700秒/$0.21処理按分（準備/回収/保持等別）へ「進めていいよ。」と明示承認しました。planのstatus/gpu_run_authorized/approval_basisだけを新一回へ束縛し、runner/consumer/元教材/派生serialize/初期/LR/loss/順序/cap/readerは不変です。新outputでrootが一回だけ起動し、旧閉鎖runの承認や残枠を再利用しません。以下のpending説明は準備時の履歴で、この新承認を取り消すものではありません。
+ 
+## 一回実行中のcheckpoint
+
+source5b115939e2f05e47b0c3d8fef8ce54e9cf11068c/PID96980を一回起動。最新事実・再開先は[ordered30_result/README.md](../ordered30_result/README.md)。同output/同planを再起動しません。保存重みreloadは同OS process内の新model object、cold-file再読は別processです。先の会話の別process reload表現を訂正し、実装・承認範囲は変更していません。

@@ -6,7 +6,7 @@
 <a id="native15-balanced30-result"></a>
 ## 2026-10-27 — 引用・意味・更新を本文より先に生成する別候補
 
-**現在の直接作業（10/27：引用・意味・更新を本文より先に生成するordered30候補、実CPU15件確認済み・新GPU一回は判断前）：** 前回continuation30の新6本文0/6を受け、教師JSONの値/配列順・system/user・eval/priorを変えず、生成順だけを引用→意味/不明/更新→本文へ変更する別候補を実装。Jupyter直接の実CPU13.005557秒でparsed値15一致・実tokenizer切捨て0/max7935/8192・固定CMEEの意味/本文/問い15組一致を確認。receipt.raw_outputのserialize順だけを正規化し、ID/receipt全体を除外していない。初期1dの3file/32F32有限・凍結payload不変、pending executeのoutput前拒否を確認。最初のCPU API参照誤りは既存完全copyへ訂正、製品source変更0。モデル読込/forward/学習/生成/SQL0で品質改善は未検証。同初期1d/全文CE/LR1e-5/同30順序→保存/非学習reload→同15確認、最大2700秒/180秒/15call/$0.21処理按分（準備/回収/保持等別）の新一回は未起動。前回dd1188e8不採用/閉鎖を保持し、新観測会は今は不要。原本ordered30_preparation/README・weekly§67、商品0/正式0/3/54.50％、GPU稼働保持。
+**現在の直接作業（10/27：承認済みordered30を一回実行中）：** Mashが固定案e94971f9へ「進めていいよ。」と承認し、承認source5b115939/PID96980をJupyter直接で一回起動。初期1d218763・同15/同30順序・全文assistant/EOS CE・LR1e-5を保持し、生成順だけを引用/意味/更新→本文へ変更。実読取50.264秒時点は学習4/30・生成0/15で、完了/品質は未判定。最大2700秒/各生成180秒/15call/$0.21処理按分（準備/回収/保持等別）内で継続し、追加起動/更新/再生成/自動retryはしない。保存後は同OSプロセス内の別model objectで非学習reloadし、後続cold-fileだけ別process。原本ordered30_result/README・weekly§68、商品0/正式0/3/54.50％、GPU稼働保持。
 
 [全15採否・比較・本文読解・重み保全](balanced30_result/README.md)。本一回はRUN_CLOSED_REJECTED_CANDIDATE。以下のbalanced30準備・旧interleaved30節は履歴として維持し、閉鎖済みplanを再起動しない。
 

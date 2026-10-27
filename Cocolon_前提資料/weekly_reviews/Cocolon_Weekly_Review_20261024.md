@@ -2943,3 +2943,12 @@ CPU consumer101.201544秒、無補修raw15を既存CMEEへ通し意味11/本文9
 新一回は初期1d/同15・同30順序/全文CE/LR1e-5/元cap/32LoRA→別保存/非学習reload→after15。最大2700秒/各180秒/15call/$0.21処理按分（表示$0.28/h、準備/回収/保持/税等別）で個別判断前。新before0、基準は初期1dと直前dd1188e8の保存済み同15。無補修採否/成立snapshotだけcold-file/全本文読解/全重み原本回収まで同じ一回、OOM/期限/非有限/identity/例外で停止し追加更新・再生成・自動retryなし。動的prior/実service/SQL/Auth/RN/未知評価/正式受入れは対象外。
 
 rootが単一統合/writer/実行owner、read-only3agentはscope/地図/原因/sourceを分担し正式Pro/Ultra/human受入れへ換算しない。可逆的候補/実CPU確認のprimary=TECHNICAL_CREDIT、商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=false。API/DTO/DB/RN/Render/Supabase/本人DB/価格/通常app/新依存/merge/deploy/GPU管理・lifecycle変更0、STRUCTURE_MAP_DELTA_NONE。新観測会は今は不要、GPU稼働保持。
+
+<a id="20261027-ordered30-execution"></a>
+## 68. 10/27 — ordered30の承認受領・一回実行中
+
+**現在の直接作業（10/27：承認済みordered30を一回実行中）：** Mashが固定案e94971f9へ「進めていいよ。」と承認し、承認source5b115939/PID96980をJupyter直接で一回起動。初期1d218763・同15/同30順序・全文assistant/EOS CE・LR1e-5を保持し、生成順だけを引用/意味/更新→本文へ変更。実読取50.264秒時点は学習4/30・生成0/15で、完了/品質は未判定。最大2700秒/各生成180秒/15call/$0.21処理按分（準備/回収/保持等別）内で継続し、追加起動/更新/再生成/自動retryはしない。保存後は同OSプロセス内の別model objectで非学習reloadし、後続cold-fileだけ別process。原本ordered30_result/README・weekly§68、商品0/正式0/3/54.50％、GPU稼働保持。
+
+承認案e94971f9b7552989fdd1fe3710a683b9e68662da、承認固定source5b115939e2f05e47b0c3d8fef8ce54e9cf11068c。planのstatus/flag/basisだけを束縛し、全2path読戻し/変更集合確認済み。Pod内でも旧新JSON差分exact3・承認plan SHA4b767d9e・他source/不変payload・output不存在を確認してからPID96980を起動。旧run/承認残枠を再利用しない。先のChat説明にあった「重みを別processでreload」は不正確で訂正した。実装どおり同OS processで新model objectへ非学習reloadし、cold-file再読だけが別processである。承認scope/codeの変更ではない。
+
+原本run.json=/workspace/cocolon_native15_ordered30_run_20261027/run.json、起動JSON=/workspace/cocolon_ordered30_launch_20261027.json、log=/workspace/cocolon_ordered30_gpu_20261027.log。再起動せず同processへ戻り、最初のadapter保存archiveを早期回収し、最終はraw/無補修CMEE採否/成立snapshot cold-file/全本文読解/重み全原本保全まで継続する。未完了/未回収を完了扱いしない。通常API/DB/DTO/RN/Render/Supabase/本人DB/merge/deploy/GPU管理・lifecycle変更0、STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
