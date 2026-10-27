@@ -1,6 +1,6 @@
 # 引用・意味・更新を本文より先に生成する30更新候補
 
-状態：**CPU15件確認済み／新しいGPU一回の判断前・未起動**。旧continuation30は閉鎖済みで、旧承認・出力・残枠を再利用しません。
+状態：**Mashの新一回承認を受領／実行前**。旧continuation30は閉鎖済みで、旧承認・出力・残枠を再利用しません。
 
 目的は、4Bが本人の言葉・主体・時点・否定・不明・回答後の変更を保ち、自然な観測と受け取りを作り、既存CMEEが採用・保存再読できるようにすることです。現在の不足は、既知15件のうち新6件の本文が0/6である点です。三中核全体の用途・Runpod育成・Windows/Mac未選定は[学習目的](../../../README.md#observation-learning-intent-and-assumptions)を保持します。
 
@@ -69,3 +69,7 @@ packは /workspace/cocolon_native15_ordered30_pack_20261027、新GPU outputは /
 今回の許可範囲はMashの続行指示とRule18 §11.3内の可逆的候補実装/CPU確認/GitHub反映。rootが単一writer/実行owner、補助3agentはscope/原因/地図/sourceのread-only確認です。実model名をPro/Ultraと偽らず、Codex Work/GPT-6系で確認できる環境事実を記録します。CPU候補・実確認のprimaryはTECHNICAL_CREDIT、**商品0／正式0/3／54.50％／candidate_ready=false／automatic_progression=false**。
 
 製品の責務/型/wire/採用reader/API/DTO/DB/RN/Render/Supabase/本人DB/通常app/価格/merge/deploy/新依存変更0。STRUCTURE_MAP_DELTA_NONE（学習serialize候補だけで商品構造・接続責務差分なし）。GPUは稼働保持しています。
+
+## 2026-10-27 新一回の承認
+
+Mashは固定案e94971f9b7552989fdd1fe3710a683b9e68662daの30更新→保存/非学習reload→15件確認、最大2700秒/$0.21処理按分（準備/回収/保持等別）へ「進めていいよ。」と明示承認しました。planのstatus/gpu_run_authorized/approval_basisだけを新一回へ束縛し、runner/consumer/元教材/派生serialize/初期/LR/loss/順序/cap/readerは不変です。新outputでrootが一回だけ起動し、旧閉鎖runの承認や残枠を再利用しません。以下のpending説明は準備時の履歴で、この新承認を取り消すものではありません。
