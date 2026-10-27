@@ -6,7 +6,7 @@
 <a id="native15-balanced30-result"></a>
 ## 2026-10-27 — 損失配分30更新一回の最終結果
 
-**現在の直接作業（10/27：損失配分balanced30の一回を完了、不採用）：** 承認source7e3f6bca/PID44914で同15教材・固定30更新→別保存/非学習reload→15生成を1545.998172秒/$0.120244処理按分で完了。EOS13/15・JSON11/15、CMEE意味7/15・本文6/15で、前回同quote15の意味11/本文9から低下。旧9は意味/本文6/9、新6は意味1/6・本文0/6。椅子訂正3の引用/形式退行、BOOK2の反復打切り、SHOP回答後の更新/根拠不整合とsystem露出、REPOT主客反転、KNIT形式破損が残り新228edccfは通常不採用。採用snapshot cold-file7/7・失敗0には本文なしREPOT1件を含み、本文7件完成ではない。32F32有限/初期と固定source不変/早期最終重み一致、最終archive65payload+manifestをPod外照合・version1保全済み。再起動/追加更新/追加生成/自動retryなし。次は長い訂正packet・引用/参照・自然本文を同時に保持する学習方法を既存原本から見直す。新観測会は今は不要、新有料試行へ自動進行しない。原本balanced30_result/README・weekly§63、商品0/正式0/3/54.50％、GPU稼働保持。
+**現在の直接作業（10/27：成立済み重み1d218763からの低LR継続30候補、実CPU確認済み・新GPU判断前）：** balanced30の意味7/本文6・新6本文0を踏まえ、同quote15/同30順序を、全15JSON・旧9本文が成立した1d218763から全文assistant/EOS CE・LR1e-5で継続する別候補を実装。Jupyter直接のCPU6.027493秒で実tokenizer15/切捨て0/max7935・入力/prior15一致、初期3file/32F32有限/凍結payload不変、新authorization falseとoutput作成前拒否を確認。最初の配置補助file不足は元payload全件コピーで解消、モデル処理0。新4B読込/forward/更新/生成/採否/SQL0で改善未検証。別の一回は同30更新→保存/非学習reload→15確認、2700秒/180秒/15call/$0.21処理按分上限（準備/回収/保持等別）。初期/損失/LRを組合せて変えるため因果一要素実験ではない。旧一回/承認/228edccfは継承せず、新有料試行は個別判断前。新観測会は今は不要、原本continuation30_preparation/README・weekly§64。商品0/正式0/3/54.50％、GPU稼働保持。
 
 [全15採否・比較・本文読解・重み保全](balanced30_result/README.md)。本一回はRUN_CLOSED_REJECTED_CANDIDATE。以下のbalanced30準備・旧interleaved30節は履歴として維持し、閉鎖済みplanを再起動しない。
 
@@ -413,8 +413,20 @@ PACK=/workspace/cocolon_native15_pack_20261026、OUTPUT=/workspace/cocolon_nativ
 
 
 <a id="native15-balanced30-proposal"></a>
-## 2026-10-27 — 同15教材・同30順序で本文/意味/更新の損失配分だけを変える一回案
+
+> 以下は実行前の履歴です。balanced30は完了・不採用で閉鎖済み。最新の再開先は下のcontinuation30候補です。
+## 2026-10-27 — 損失配分balanced30の実行前記録（閉鎖済み）
 
 **現在の直接作業（10/27：損失配分修正版balanced30を実装、実CPU15件確認、GPU実行判断前）：** 同じquote15・初期45779・混在30順序を保持し、全文CEの半分＋意味/根拠・自然本文・非空更新の群平均を半分とするsingle-forward候補を別に実装。Jupyter直接/固定tokenizer15・16区間検査・FP32/BF16合成logitsの値/勾配照合・pending executeのeffect前拒否を確認（4.350443秒、実4B重み読込/forward/学習/生成/CMEE採否/SQL0）。新6の自然本文の係数配分は旧2.17〜5.92％に対し新17.75〜27.96％となるが、品質改善は未検証。教材/評価/reader/API6b043880不変、新観測会は今は不要。別の一回は30更新→保存/非学習reload→同15確認、最大2700秒/1call180秒/$0.21処理按分（準備/回収/保持等別）の明示判断待ちで、未起動。前回interleaved30の意味11/本文9・新6本文0と新1d218763通常不採用は履歴として維持する。原本balanced30_preparation/README・weekly§62。商品0/正式0/3/54.50％、STRUCTURE_MAP_DELTA_NONE、GPU稼働保持。
 
 **実行判断対象は [balanced30_preparation/README.md](balanced30_preparation/README.md) の一回。** 旧一回の再起動ではなく新outputの候補で、planはPREPARED_AWAITING_MASH_APPROVAL / gpu_run_authorized=false。承認前はmkdir・重み読込より前に拒否する。前回の承認/完了/不採用は変更しない。
+
+
+<a id="native15-continuation30-proposal"></a>
+## 2026-10-27 — 成立済み1d218763から同15教材を低LRで30更新する候補
+
+**現在の直接作業（10/27：成立済み重み1d218763からの低LR継続30候補、実CPU確認済み・新GPU判断前）：** balanced30の意味7/本文6・新6本文0を踏まえ、同quote15/同30順序を、全15JSON・旧9本文が成立した1d218763から全文assistant/EOS CE・LR1e-5で継続する別候補を実装。Jupyter直接のCPU6.027493秒で実tokenizer15/切捨て0/max7935・入力/prior15一致、初期3file/32F32有限/凍結payload不変、新authorization falseとoutput作成前拒否を確認。最初の配置補助file不足は元payload全件コピーで解消、モデル処理0。新4B読込/forward/更新/生成/採否/SQL0で改善未検証。別の一回は同30更新→保存/非学習reload→15確認、2700秒/180秒/15call/$0.21処理按分上限（準備/回収/保持等別）。初期/損失/LRを組合せて変えるため因果一要素実験ではない。旧一回/承認/228edccfは継承せず、新有料試行は個別判断前。新観測会は今は不要、原本continuation30_preparation/README・weekly§64。商品0/正式0/3/54.50％、GPU稼働保持。
+
+実行判断対象は [continuation30_preparation/README.md](continuation30_preparation/README.md)。同じ凍結15と30順序・API6b043880・採用reader/capを保ち、初期1d/全文CE/LR1e-5の保存継続を提案。旧45779からの構造再学習を避け、重点配分で半減した外側key/EOSの係数を元へ戻し、継続時の変更量を抑える目的です。効果は未検証で、単一主因の確定や一般化の保証はしません。fresh optimizerであり厳密な途中resumeではありません。
+
+新runner/plan/consumerと実CPU原本を保存。実CPUは初期hash・32F32・教材/入力/prior15・token/EOS/切捨て0・新output前のpending拒否まで。新GPU model load/forward/学習/生成、実CMEE採否、SQL、通常有効化は0。別の一回承認後だけ2700秒/180秒/15call/$0.21按分上限で実行し、全15原本読解/固定CMEE/cold-file/重み回収/GitHub読戻しまで同単位で行います。旧一回や残時間/予算は再使用せず、再試行/追加更新/再生成なし。STRUCTURE_MAP_DELTA_NONE、限定TECHNICAL_CREDITは候補/CPUのみ、商品0/正式0/3/54.50％据置。

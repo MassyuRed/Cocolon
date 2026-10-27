@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-更新日：2026-10-27 JST（最新差分：balanced30一回完了・意味7/本文6へ低下、新6本文0で不採用。全原本/重み保全済み）。全Cocolon作業の必読原本。
+更新日：2026-10-27 JST（最新差分：成立済み1d218763からの低LR継続30候補を実装・CPU確認、新GPU一回は判断前）。全Cocolon作業の必読原本。
 
 > **最新報告会：[第8回・2026-10-24](weekly_reviews/Cocolon_Weekly_Review_20261024.md)。** 今週実績・前週目標の達否と10/24〜10/31の管理案を記録。**Mashの指示により報告会終了。** 華恋の意見全文は[§10](weekly_reviews/Cocolon_Weekly_Review_20261024.md#karen-closing-opinion)、終了時の区分と再開先は[§11](weekly_reviews/Cocolon_Weekly_Review_20261024.md#meeting-closed-and-next-session)。10/24の4B確定・GPU16GB優先/24GB許容は当時の決定で、4B確定は10/25に撤回済み。最新の開発基準選定は[§23](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-three-core-model-and-serving-decision)。華恋が今回の判断責任として選んだもので、旧4B確定・常時24GB契約の自動復活ではない。起動済み3070の実確認は[§22](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-3070-running-cuda-uvm-io-error)。A5000未確保は§20の履歴。Vast実見積りは§19の履歴。次週の推奨順位は[§4](weekly_reviews/Cocolon_Weekly_Review_20261024.md#next-week-priorities)、対象path・具体手順・失敗/回復検査・終了条件は[§8](weekly_reviews/Cocolon_Weekly_Review_20261024.md#detailed-work-breakdown)を参照。全体管理評価・公開見通しは[§9](weekly_reviews/Cocolon_Weekly_Review_20261024.md#overall-status-and-release-outlook)：54.50％、正式商品受入れ0/3、12/18達成の裏付け不足。会議途中の「進行中」は当時の記録。次週案全体への明示採否・個別実行の未決は§11に区別して保持する。モデル選定の決定と、以下の品質・配置・端末・費用の未完了を区別する。
 
@@ -8,7 +8,7 @@
 
 **最新GPU確認（2026-10-27 JST）：** MashがA5000を本人レンタルし、Pod bkj4qvnhwtdqc2（physical_yellow_anglerfish、表示$0.28/h）のReadyなJupyterへ直接接続した。NVIDIA RTX A5000、VRAM25,285,623,808bytes/空き25,062,342,656bytes、Python3.12.3/Torch2.8.0+cu128/CUDA/BF16を実確認。公式固定base revisionの取得、旧45779adapter/不変helper/API6blob/15教材の23file復元と固定依存の一致、実tokenizer15件/EOS/切捨て0/max7935/8192を確認済み。GPU管理画面は新Pod接続の取得だけで終了し、以後Jupyter直接。Stop/再起動/削除/別Pod/追加chargeは0。前のレンタル自動審査拒否は履歴であり、現在の接続blockerではない。
 
-**現在の直接作業（10/27：損失配分balanced30の一回を完了、不採用）：** 承認source7e3f6bca/PID44914で同15教材・固定30更新→別保存/非学習reload→15生成を1545.998172秒/$0.120244処理按分で完了。EOS13/15・JSON11/15、CMEE意味7/15・本文6/15で、前回同quote15の意味11/本文9から低下。旧9は意味/本文6/9、新6は意味1/6・本文0/6。椅子訂正3の引用/形式退行、BOOK2の反復打切り、SHOP回答後の更新/根拠不整合とsystem露出、REPOT主客反転、KNIT形式破損が残り新228edccfは通常不採用。採用snapshot cold-file7/7・失敗0には本文なしREPOT1件を含み、本文7件完成ではない。32F32有限/初期と固定source不変/早期最終重み一致、最終archive65payload+manifestをPod外照合・version1保全済み。再起動/追加更新/追加生成/自動retryなし。次は長い訂正packet・引用/参照・自然本文を同時に保持する学習方法を既存原本から見直す。新観測会は今は不要、新有料試行へ自動進行しない。原本balanced30_result/README・weekly§63、商品0/正式0/3/54.50％、GPU稼働保持。
+**現在の直接作業（10/27：成立済み重み1d218763からの低LR継続30候補、実CPU確認済み・新GPU判断前）：** balanced30の意味7/本文6・新6本文0を踏まえ、同quote15/同30順序を、全15JSON・旧9本文が成立した1d218763から全文assistant/EOS CE・LR1e-5で継続する別候補を実装。Jupyter直接のCPU6.027493秒で実tokenizer15/切捨て0/max7935・入力/prior15一致、初期3file/32F32有限/凍結payload不変、新authorization falseとoutput作成前拒否を確認。最初の配置補助file不足は元payload全件コピーで解消、モデル処理0。新4B読込/forward/更新/生成/採否/SQL0で改善未検証。別の一回は同30更新→保存/非学習reload→15確認、2700秒/180秒/15call/$0.21処理按分上限（準備/回収/保持等別）。初期/損失/LRを組合せて変えるため因果一要素実験ではない。旧一回/承認/228edccfは継承せず、新有料試行は個別判断前。新観測会は今は不要、原本continuation30_preparation/README・weekly§64。商品0/正式0/3/54.50％、GPU稼働保持。
 
 **4B関連作業の開始前：** 全体現在地を全文読んだ後、[観測学習の目的・用途・前提](observation_learning/README.md#observation-learning-intent-and-assumptions)を毎回読み、最新weeklyの決定/実結果と今回の作業を結び付ける。学習・教材作成・評価・CMEE接続・環境移行で共通。ローカル＝Macと決め付けず、学習の成功と観測品質の成立を分ける。
 
@@ -148,7 +148,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 | 作業領域 | 次に解消すべき具体的未完了 |
 |---|---|
-| 学習済みAI・CMEE接続 | balanced30一回完了。意味7/15・本文6/15（前回11/9）、旧9は6/9、新6本文0/6。cold7/7のうちREPOT1は本文なし。新228edccfは通常不採用、65payload+manifest/32F32/早期最終一致を回収保全。次は長い訂正packet・原文根拠と自然本文を保持する学習方法の見直し、新有料試行へ自動進行なし。原本balanced30_result/weekly§63 |
+| 学習済みAI・CMEE接続 | balanced30は意味7/本文6・新6本文0で不採用。全原本/重み保全済み。次候補は成立済み1d218763から同15/同30順序・全文CE/LR1e-5で継続。実CPU15入力/prior/tokenと初期32F32確認、実4B処理0、新一回2700秒/$0.21按分は判断前。原本continuation30_preparation/weekly§64 |
 | 10/24までの費用・4B選定履歴（当時の構成） | Flex24GBの旧月78,980生成・未測定の速度/起動仮定による運用費95,094円・赤字67,833円の試算は当時の構成の記録で、最新構成の原価ではない。[全仮定・再計算](observation_learning/model_selection/2026-10-24-production-economics/README.md)。旧4B実診断では24GBでLoRA保存・reload・16生成・回収を確認したが、FITは前後0/2。CPU指示修復API1dabc4fは54対象/pack11・合成2/2で、修正版は後続10/25にA4500 20GBで完走・回収済み、最新結果は§24。旧学習peak allocated14.954GiBを本番推論の必要VRAMへ流用しない。4bit/M4を第一候補とした§23は当時の華恋案で、現在の移行先はWindows／Mac未選定。公開API単価を独自育成版の原価へ流用しない。 |
 | Emlis | 一般入力と回答後の意味・自然な本文・有料差、本人実機の保存再読まで。u353〜355のコードと配置差を保持 |
 | Analysis | 最新内容修正版の配置差、通常本文生成・同一保存再読・monthly履歴/比較の本人確認、複数ANSWER採用、一般理解、有料差、IF／Savedの未実装。6501時点の不足案内表示は本人確認済みとして保持 |

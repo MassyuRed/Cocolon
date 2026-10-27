@@ -2884,3 +2884,21 @@ Mashが1cb47cffの一回へ「進めていいよ。」と明示承認し、plan�
 原本・全採否・読解は [balanced30_result/README.md](../observation_learning/training/2026-10-26-unconnected-native/balanced30_result/README.md)。新6ではBOOK2の構造/引用/受け取り反復、SHOP回答後の8更新→ADD1/根拠範囲外/system280文字露出、REPOTの説明主客反転、KNITのJSON破損が残る。SHOP喜び語/REPOTの聞く向きの局所差を全体改善へ加算しない。係数配分だけではこの固定学習条件の同時保持を達成できなかったという限定結果で、全ての加重学習方式の否定や4B能力の上限確定ではない。
 
 今回rootが単一統合/実行/writer、補助2agentは旧9/新6の原文・教師・無補修raw読解を分担。正式Pro/Ultra/human受入れへ換算しない。primary=BLOCKER_NARROWED、商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false。新更新/再生成/旧plan再起動/検査緩和/新有料試行/観測会へ自動進行なし。新観測会は今回の基本崩れを直す前提ではない。次は長い訂正packet/根拠・参照と自然本文を同時に教える方式を既存原本で見直す。通常API/DTO/DB/RN/Render/Supabase/本人DB/merge/deploy/GPU管理/lifecycle変更0、STRUCTURE_MAP_DELTA_NONE、GPU稼働保持。
+
+
+<a id="20261027-native15-continuation30-proposal"></a>
+## 64. 10/27 — 1d218763から全文CE・低LRで継続する候補、実CPU確認済み・新GPU一回は判断前
+
+**現在の直接作業（10/27：成立済み重み1d218763からの低LR継続30候補、実CPU確認済み・新GPU判断前）：** balanced30の意味7/本文6・新6本文0を踏まえ、同quote15/同30順序を、全15JSON・旧9本文が成立した1d218763から全文assistant/EOS CE・LR1e-5で継続する別候補を実装。Jupyter直接のCPU6.027493秒で実tokenizer15/切捨て0/max7935・入力/prior15一致、初期3file/32F32有限/凍結payload不変、新authorization falseとoutput作成前拒否を確認。最初の配置補助file不足は元payload全件コピーで解消、モデル処理0。新4B読込/forward/更新/生成/採否/SQL0で改善未検証。別の一回は同30更新→保存/非学習reload→15確認、2700秒/180秒/15call/$0.21処理按分上限（準備/回収/保持等別）。初期/損失/LRを組合せて変えるため因果一要素実験ではない。旧一回/承認/228edccfは継承せず、新有料試行は個別判断前。新観測会は今は不要、原本continuation30_preparation/README・weekly§64。商品0/正式0/3/54.50％、GPU稼働保持。
+
+Mashの「4B学習＋CMEE接続を続けて」を受領。最新全機能00を全文、全体設計/全file地図01/01Aとfresh tree3268entry（truncated=false）、作業規則、三中核/CMEE map、学習目的・現物source/teacher/raw/§63を確認。全blobの意味読了や、未確認のlive/本人端末検証とは扱いません。System Contextは現行入口どおりfresh原本へ直接戻り、staleな8月cacheや索引再生成の再試行を今回の前提にしません。Cocolon開始head ad50e0b9/API PR3 6b043880、APIは変更なし。
+
+balancedの群外係数半減と椅子訂正3の外側/引用/閉鎖退行、新6の12/12更新のclip前norm1.8591〜9.2156を照合。ただし係数/LRが単独原因だとは断定しません。全15JSON・旧9本文が成立した1d218763を起点にし、既存不変teacher_loss/全文CEとLR1e-5で同15×2passを継続する案を選定。初期だけ1d＋balanced継続のread-only補助案も検討したうえで、rootは外側構造の学習係数を戻し、変更量を抑える案を採りました。複数要素変更を単一因子の診断結果へ換算しません。
+
+[具体案・固定hash/条件・全code](../observation_learning/training/2026-10-26-unconnected-native/continuation30_preparation/README.md)。新helper/二段生成/teacher変更/reader緩和/名詞特例は0。旧45779/278fdc26/1d218763/228edccfと各閉鎖原本を保持し、新output/新authorizationで別一回に限定。初期1dは学習用checkpointで、商品採用ではありません。optimizer/RNGは保存されていないためfresh optimizerと明記。
+
+実Jupyter CPU6.027493秒、原本11002bytes/SHA1361c362bdbcc85f0d072984ffc4ee0921053eb27f2d223cb787b98410adf78aを回収・candidate3file hashと照合。tokenizer15/EOS/切捨て0/max7935・固定API入力/prior15、初期3file/hash/32F32有限、effective epochs2/LR1e-5/全文損失/authorization false、pending executeのoutput作成前拒否を確認。最初の配置でprepare_native15.py等の補助payloadコピー不足を検出したが、元plan全payloadをbytes不変で補い解消。コード/教材修正・4B model処理は0。CPU確認の成功を商品品質へ数えません。
+
+新GPUの一回は30更新→別保存/非学習reload→15生成、max2700秒/1call180秒/15call/$0.21処理按分（表示$0.28/h、準備/回収/保持等別）で個別判断前。前回の承認残枠は持越しません。初期1dの同quote15原本と前回228edccfの同15を結果工程で対応比較し、全rawを既存CMEEで無補修採否/成立snapshotのみcold-file・全本文読解/回収へ通します。全15完走保証・未知一般化・動的prior・実service/SQL/本人端末・商品受入れのclaimはしません。
+
+rootが単一統合/実行/writer、補助agentはread-only原因/技術source確認で、正式Pro/Ultra/human受入れではありません。今回primary=TECHNICAL_CREDITは新候補と実CPU確認のみ、商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=false。新観測会は今は不要。API/DTO/DB/RN/Render/Supabase/本人DB/通常app/新依存/merge/deploy/GPU管理・lifecycle変更0、STRUCTURE_MAP_DELTA_NONE。GPU稼働保持と保持料金は継続。

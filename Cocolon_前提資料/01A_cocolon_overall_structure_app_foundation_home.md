@@ -5123,3 +5123,18 @@ current00/観測入口/同training README#native15-interleaved30-proposal/weekly
 | recovery_manifest.json / final_recovery.json | 全65payload/hash・32F32有限・早期最終一致・Library version1保全 |
 
 凍結教材・承認runner/module/consumerは既存preparation owner、実行source7e3f6bca/API6b043880。全体00/観測入口/同training README/weekly§63を同単位同期。base4B全重み/optimizer/RNGはarchive非同梱。GPU稼働保持は継続料金を伴う。
+
+
+### 2026-10-27 — 成立済み重みからの低LR継続30候補、実CPU確認のfile地図
+
+`observation_learning/training/2026-10-26-unconnected-native/continuation30_preparation/` が次の候補owner。同15/同30順序の1d218763継続・全文CE/LR1e-5へ限定。製品責務/型/wire/採用reader/API/DB/RN/通常接続は不変、STRUCTURE_MAP_DELTA_NONE。新GPU一回は判断前、今回の実4B処理0、商品0/正式0/3/54.50％。
+
+| file | 責任 |
+|---|---|
+| README.md | 原本に基づく選定理由/代替案・固定一回・予算・未承認境界・CPU結果 |
+| run_native15_continuation30.py | 新初期1d/hash/LR1e-5を実使用し、不変全文teacher_loss/保存reload/15call/期限を保持 |
+| gpu30_continuation.plan.json | 新一回の同30order/初期3hash/2700秒/180秒/$0.21上限、authorization false |
+| consume_continuation30.py | 新初期/LR/loss/runner/実30log束縛、既存無補修CMEEとcold-file |
+| actual_cpu_check.json | 実tokenizer15/入力prior15/32F32/不変/承認前拒否・配置コピー不足の解消履歴 |
+
+旧frozen教材/実行payload/helperは既存native15_preparationと固定正本へ戻り、重複保存しない。旧閉鎖plan/承認/重み/結果は不変。初期1dの同quote15と最新228edccfの同15との比較は、次の実結果整理で全件読解する。今回source/CPU準備を品質改善へ換算しない。最新00/観測入口/training README/weekly§64へ同単位同期、Jupyter直接・GPU稼働保持。
