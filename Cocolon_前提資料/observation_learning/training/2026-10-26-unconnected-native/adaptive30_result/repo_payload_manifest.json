@@ -7,9 +7,9 @@
   },
   {
     "path": "Cocolon_前提資料/01A_cocolon_overall_structure_app_foundation_home.md",
-    "bytes": 503154,
-    "sha256": "9f1cda96016d122f148b27696ff7280beb4765e7d34f1c50b318c8af4aef7541",
-    "git_blob": "e818cbc40803420eb1798ea8ddda0f1a488846f7"
+    "bytes": 503354,
+    "sha256": "f23771278b4cca91da501ab4fed23a809c232e3f7d7d5375d0094124bc1af078",
+    "git_blob": "7307ab6f7616e199b7d668be0cc12c5983c10aa8"
   },
   {
     "path": "Cocolon_前提資料/current_structure/04_cmee_current_structure.md",
@@ -484,6 +484,18 @@
     "bytes": 26063,
     "sha256": "3f5863643dd95564357b092561302e7379742633a6406b9aea393d28be0aada0",
     "git_blob": "2e6408a171df60656867b80fa1939b0ddeecdfa9"
+  },
+  {
+    "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/adaptive30_result/proof/identity.json",
+    "bytes": 428,
+    "sha256": "08ff91c491f8f02db5a35718f92f2d824169f01ed9ad6afa30519492073145d4",
+    "git_blob": "010c3a87f03eb62b777da10edfbb00a61e702523"
+  },
+  {
+    "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/adaptive30_result/proof/jupyter_completed.jpg",
+    "bytes": 73171,
+    "sha256": "aeb62cb2e5c3c97d5379d123c1a52ba4c4384ffb933e784cc4ad23e16b47c43a",
+    "git_blob": "d3aec488b6474c9852871ff0a35dc2d971fb37f9"
   },
   {
     "path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/adaptive30_result/reading_reviews/book_shop.json",

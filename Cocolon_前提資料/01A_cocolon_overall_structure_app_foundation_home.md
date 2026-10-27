@@ -5276,5 +5276,6 @@ CPU4.995651秒/consumer27.004796秒、17payload＋manifestの全hash照合済み
 | `execution/*（4）` | 実GPU/consumer各一回のlaunch/log原本 |
 | `reading_reviews/root.json・book_shop.json・repot_knit.json` | root全15・read-only補助の実本文/問い/全更新/teacher比較。正式人手/Pro/Ultra商品受入れではない |
 | `repo_payload_manifest.json` | 今回の変更pathとbytes/SHA256/Git blobの反映予定集合（自身を除く） |
+| `proof/jupyter_completed.jpg・identity.json` | 結果commit80130fafe7ddの92path読戻し後にJupyterで表示した完了画面。表示bytes同一、後続画面証跡としてZIP外へ保存 |
 
 学習source5・教師/入力・起案時CPU原本は固定承認5c2fe64eのpreparation ownerと保存ZIPへ戻る。同じ教師を新教材として加算しない。重み入りZIPは14,841,180bytes、SHA256 `39ac2ff058fe65a961b70f8477c2561306ca2daa1029a1bf3bb33f620c0df342`。新adapterは `d431a07ce227c05e81eca5afb9461d91cf8101d50af0d27ec1a81844ce8ac684`。意味11/本文9/新6本文0は前回同値・不採用、cold11/11一致。全体00/観測入口/training/CMEE地図/weekly§78を同単位同期。商品0/正式0/3/54.50％、GPU保持。
