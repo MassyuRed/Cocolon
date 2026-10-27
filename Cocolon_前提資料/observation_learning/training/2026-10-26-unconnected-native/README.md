@@ -1,6 +1,6 @@
 # 10/26 — 未接続の既存6教材とCMEE受理範囲／一括接続案
 
-状態：**10/27：混在30更新/after15完了。意味11/本文9・採用snapshot cold-file11/11。新6本文0のため新候補は通常不採用、重み/全原本回収済み。**
+状態：**10/27：balanced30候補実装・Jupyter実CPU15確認済み、新しい有料一回は判断前。前回の新候補通常不採用は維持。**
 
 <a id="native15-interleaved30-result"></a>
 ## 2026-10-27 — 混在30更新一回の最終結果
@@ -402,3 +402,11 @@ PACK=/workspace/cocolon_native15_pack_20261026、OUTPUT=/workspace/cocolon_nativ
 
 早期保存履歴（10/27）：204.712517秒/更新15/生成0の原本はearly_run.json・early_recovery.jsonおよび重みarchive version0に不変保持。最終結果は冒頭とafteronly_result/README.mdを参照。
 
+
+
+<a id="native15-balanced30-proposal"></a>
+## 2026-10-27 — 同15教材・同30順序で本文/意味/更新の損失配分だけを変える一回案
+
+**現在の直接作業（10/27：損失配分修正版balanced30を実装、実CPU15件確認、GPU実行判断前）：** 同じquote15・初期45779・混在30順序を保持し、全文CEの半分＋意味/根拠・自然本文・非空更新の群平均を半分とするsingle-forward候補を別に実装。Jupyter直接/固定tokenizer15・16区間検査・FP32/BF16合成logitsの値/勾配照合・pending executeのeffect前拒否を確認（4.350443秒、実4B重み読込/forward/学習/生成/CMEE採否/SQL0）。新6の自然本文の係数配分は旧2.17〜5.92％に対し新17.75〜27.96％となるが、品質改善は未検証。教材/評価/reader/API6b043880不変、新観測会は今は不要。別の一回は30更新→保存/非学習reload→同15確認、最大2700秒/1call180秒/$0.21処理按分（準備/回収/保持等別）の明示判断待ちで、未起動。前回interleaved30の意味11/本文9・新6本文0と新1d218763通常不採用は履歴として維持する。原本balanced30_preparation/README・weekly§62。商品0/正式0/3/54.50％、STRUCTURE_MAP_DELTA_NONE、GPU稼働保持。
+
+**実行判断対象は [balanced30_preparation/README.md](balanced30_preparation/README.md) の一回。** 旧一回の再起動ではなく新outputの候補で、planはPREPARED_AWAITING_MASH_APPROVAL / gpu_run_authorized=false。承認前はmkdir・重み読込より前に拒否する。前回の承認/完了/不採用は変更しない。

@@ -2854,3 +2854,17 @@ BOOK/SHOPの初回は意味/引用が局所改善、BOOK/SHOP回答後とKNITも
 最終archive3,920,475bytes/SHA57b39307cea805ef502c28a84d285e55c2dfbdcf45a13f97c778123fc0c992cb、全74payload+manifest/75member、32F32有限・実30log/早期最終重み一致・全raw受領hash/重み/順序をPod外照合。[新重み/全原本version1](https://chatgpt.com/library?file_id=libfile_5ecbab80168481919b1e4965fd7660fe&account_id=personal)。元4B全重み/optimizer/RNG非同梱。旧45779/278fdc26と各旧保存を維持。
 
 [最終owner・全15採否・本文・回収](../observation_learning/training/2026-10-26-unconnected-native/interleaved30_result/README.md)。生成終了run原本はpending表示のまま不変、最終判定RUN_CLOSED_REJECTED_CANDIDATE。plan.epochs=1は旧継承metadataで、training_passes2/実30行/各行2回を優先。rootの単一実行/writerとread-only2agent読解を、正式Pro/Ultra/human商品受入れへ換算しない。限定TECHNICAL_CREDIT、商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false。新6の原文役割/全更新と本人向け受け取りの学習条件を見直すのが次の直接課題で、新有料試行は今回から自動開始しない。通常API/DB/RN/Render/Supabase/本人DB/merge/deploy0、GPU管理/lifecycle0、Jupyter直接・稼働保持。
+
+
+<a id="20261027-native15-balanced30-proposal"></a>
+## 62. 10/27 — 本文・意味・更新の損失配分修正版、実CPU確認済み・新GPU一回は判断前
+
+**現在の直接作業（10/27：損失配分修正版balanced30を実装、実CPU15件確認、GPU実行判断前）：** 同じquote15・初期45779・混在30順序を保持し、全文CEの半分＋意味/根拠・自然本文・非空更新の群平均を半分とするsingle-forward候補を別に実装。Jupyter直接/固定tokenizer15・16区間検査・FP32/BF16合成logitsの値/勾配照合・pending executeのeffect前拒否を確認（4.350443秒、実4B重み読込/forward/学習/生成/CMEE採否/SQL0）。新6の自然本文の係数配分は旧2.17〜5.92％に対し新17.75〜27.96％となるが、品質改善は未検証。教材/評価/reader/API6b043880不変、新観測会は今は不要。別の一回は30更新→保存/非学習reload→同15確認、最大2700秒/1call180秒/$0.21処理按分（準備/回収/保持等別）の明示判断待ちで、未起動。前回interleaved30の意味11/本文9・新6本文0と新1d218763通常不採用は履歴として維持する。原本balanced30_preparation/README・weekly§62。商品0/正式0/3/54.50％、STRUCTURE_MAP_DELTA_NONE、GPU稼働保持。
+
+新6教師とrawを直接照合し、正解教材にある主客/否定/7〜8更新を実出力が崩していると確認。追加観測会や教材の書換えを先に要求せず、同15/同30順序/旧45779/seed/LR5e-5/32LoRA/生成条件/CMEE readerを保持し、既存full+重点CE方式で配分だけ変える案へ絞った。自然本文の係数はBOOK回答69/3178=2.171％→17.752％、SHOP回答110/3561=3.089％→18.211％。これは損失係数の設計で、実勾配量・観測品質・一般化の改善率ではない。係数の最適性は未証明。
+
+実JupyterでGPUを隠したCPU process一回がexit0/4.350443秒。固定依存/tokenizer15・EOS/切捨て0/max7935、16区間test、固定HF lossのfloat/causal shift、FP32/BF16小logitsの旧一様loss/gradientと独立群平均の一致を確認。差最大2.3841858e-7。実4B重み/forward/学習/生成/新採否/SQL0。CPU原本35768B/SHA33ce6313b7762ebce8ccafdb44751e1f6221a5ef5b942bc707459f010596b713をJupyter raw表示から回収。診断metricのfloat変換warning1は小logitsだけで、検査失敗ではない。転送初回filechooser待機timeoutはCPU実行前のUI失敗、既存upload controlで転送成功後にCPU一回、モデル処理の再試行はない。
+
+新runner d989bcf5/focus f0adc2b0/consumer・pending plan・全CPU原本・独立review・file地図は[候補owner](../observation_learning/training/2026-10-26-unconnected-native/balanced30_preparation/README.md)。root華恋/Codex Workが統合・Jupyter実行・GitHub writerを単独担当。補助agentの原因/コード読解と候補module草案をrootが原典・全ソースから確認した。正式Pro/Ultra/human受入れへ換算しない。System Contextは既知の索引停止を再実行せずfresh原本直接読取を使用。
+
+次はこの別の一回のMash明示判断。30更新→別保存/reload→15raw→現CMEE/全本文/cold-file/回収、最大2700秒・180秒/call・15call・表示$0.28h按分$0.21（準備/回収/保持/税等別）、失敗時追加生成/更新/自動retryなし。旧閉鎖planの再利用なし、承認前output/model0。CPU準備/候補を観測品質成功へ加点しない。primary=BLOCKER_NARROWED、商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false。製品API/DTO/DB/RN/Render/Supabase/本人DB/merge/deploy/GPU管理/lifecycle変更0、STRUCTURE_MAP_DELTA_NONE。GPUは稼働保持。

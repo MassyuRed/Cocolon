@@ -5087,3 +5087,20 @@ current00/観測入口/同training README#native15-interleaved30-proposal/weekly
 | early_run.json / early_recovery.json | 399.591608秒/30更新/生成0の保存履歴として不変保持 |
 
 凍結train/eval/準備payloadと承認済みrunner/plan/consumerは既存native15_preparation/interleaved30_preparationへ戻る。最終archiveには実行時コピーも同梱し照合、GitHub上で同じ教材を複製しない。元4B全重み/optimizer/RNG非同梱。全体00/観測入口/同README#native15-interleaved30-result/weekly§61へ同期。GPU保持は継続料金を伴う。
+
+
+### 2026-10-27 — balanced30の損失配分候補と実CPU地図
+
+新候補ownerは `observation_learning/training/2026-10-26-unconnected-native/balanced30_preparation/`。同15教材/初期45779/混在30順序/API6b043880/採用reader不変で、学習lossだけをfull .5 + S/F/U群平均 .5へ変更。実tokenizer15/区間16/FP32・BF16合成CEと勾配照合完了、新学習/生成0、個別判断前。STRUCTURE_MAP_DELTA_NONE（製品責務・型・通常接続に差分なし）。
+
+| file | 責任 |
+|---|---|
+| README.md / gpu30_balanced.plan.json | 一回の範囲・予算・承認pending、旧閉鎖承認非継承 |
+| run_native15_balanced30.py | 旧30順序/保存別reload/after15/期限を保持、single-forward加重CE |
+| candidate_focus_loss.py | 不変assistant JSONのS/F/U区間をtokenへ照合、prompt除外/EOS full-only |
+| test_candidate_focus_loss.py / verify_balanced30_cpu.py | 16区間検査・実tokenizer15・小logits値/勾配・effect前拒否 |
+| actual_cpu_check.json | Jupyter実CPU原本、15件係数配分・max7935、実4B処理0 |
+| consume_balanced30.py | 新runner/loss/module照合、既存無補修CMEE/cold-file。採用条件不変 |
+| independent_review.json / source_bindings.json | 原典/候補/hash照合と独立読解。正式Pro/Ultra/human合格でない |
+
+旧frozen payloadは既存native15_preparation、初期重み/helperは既存正本へ戻る。旧interleaved30原本は不変。新一回は未起動、全体00/観測入口/最新weekly§62と同単位同期、商品0/正式0/3/54.50％据置。
