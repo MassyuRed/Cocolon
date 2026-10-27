@@ -13,9 +13,9 @@
   "per_generation_seconds": 180,
   "gpu_hourly_usd": 0.28,
   "max_process_usd": 0.21,
-  "learning_rate": 1e-05,
+  "learning_rate": 0.00001,
   "seed": 20261024,
-  "gradient_clip": 1.0,
+  "gradient_clip": 1,
   "loss_extra_weight": 15,
   "local_tokens": 198,
   "context_tokens": 8192,
@@ -61,7 +61,7 @@
   ],
   "runner_sha256": "1f6f709de911c18e665fea27d39c311028a1e571c2b5508ff8cd762a027a7992",
   "cpu_check_sha256": "66642e828981054835ae8f791bb7a0555ab9d50208c534af450422fdbdb61031",
-  "status": "PREPARED_AWAITING_MASH_APPROVAL",
-  "gpu_run_authorized": false,
-  "approval_basis": null
+  "status": "AUTHORIZED_ONCE_BOUND",
+  "gpu_run_authorized": true,
+  "approval_basis": "Mash explicit approval on 2026-10-27 JST of proposal 1cfc0f838186574c6cbc870e7b94f6706dab39aa: 進めていいよ。 One run only: same15 / saved109c / fixed198 local-token16x / 30 updates -> save -> exact112 no-grad reload -> max15 free generations and unchanged CMEE/cold review. Max2700sec/USD0.21 processing prorated; preparation, CPU, recovery, holding and other costs separate. No retry, no automatic next training or GPU lifecycle operation."
 }
