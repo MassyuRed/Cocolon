@@ -24,6 +24,8 @@ def cpu_prepare(pack):
     start=time.monotonic()
     require(os.environ.get('CUDA_VISIBLE_DEVICES')=='' and os.environ.get('HF_HUB_OFFLINE')==os.environ.get('TRANSFORMERS_OFFLINE')=='1','cpu_offline_required')
     require(not (pack/'actual_cpu_check.json').exists(),'cpu_preparation_already_recorded')
+    external=json.loads((pack/'dependency_bindings.json').read_text())
+    require(all(sha(p)==h for p,h in external.items()),'external_dependency_changed')
     import torch
     require(not torch.cuda.is_initialized(),'cuda_must_remain_uninitialized')
     rcv=module('localized_recovery',RECOVERY/'run_expanded15_recovery.py');rcv.validate_origin()
@@ -46,6 +48,7 @@ def cpu_prepare(pack):
     loss=module('localized_loss_cpu',pack/'local_token_loss.py')
     mask=json.loads((pack/'fixed_token_mask.json').read_text());require(mask['selected_tokens']==198 and mask['extra_weight']==15,'fixed_mask_scope')
     allrows=[];cases=[];stats=[];requests={}
+    old_cpu={x['id']:x for x in json.loads((ORIGIN/'cpu_preparation.json').read_text())['cases']}
     for i,(row,case,oe) in enumerate(zip(oldrows,oldcases,oldencoded,strict=True)):
         cid=row['id'];req,prior=reconstruct_request({'native_case':native[cid]});requests[cid]=(req,prior)
         old=oldmodule.build_model_messages(req,prior,candidate_format=QUOTE_CANDIDATE_SCHEMA)
@@ -62,6 +65,11 @@ def cpu_prepare(pack):
         target=enc['input_ids'][prefix:]
         require(target==oe['input_ids'][oldprefix:],'assistant_target_changed')
         selected=loss.validate_case(mask['cases'][cid],row['messages'][-1]['content'],target)
+        diagnostic=Path('/workspace/cocolon_109c_token_diagnostic_run_20261027')/(cid+'.json')
+        require(sha(diagnostic)==mask['cases'][cid]['diagnostic_report_sha256'],'diagnostic_report_changed')
+        diagnosis=json.loads(diagnostic.read_text())
+        expected_mask=[j for j in diagnosis['wrong_target_indices'] if diagnosis['tokens'][j]['field'] not in {'candidate.question_proposal','candidate.unknowns'}]
+        require(selected==expected_mask and target==[t['gold_id'] for t in diagnosis['tokens']],'diagnostic_mask_not_reproduced')
         require((i>=9) or not selected,'old9_must_keep_original_full_ce')
         cap=case['max_new_tokens'];require(prefix+cap<=8192 and len(target)<=cap,'new_prompt_context_overflow')
         require(enc['labels'][:prefix]==[-100]*prefix and enc['labels'][prefix:]==target and tok.eos_token_id in target,'loss_mask_or_eos_changed')
@@ -71,8 +79,11 @@ def cpu_prepare(pack):
         resumed=replace(req,emlis_thread=replace(req.emlis_thread,prepared_meaning_checkpoint_ref=cp.checkpoint_id))
         result=engine.generate(resumed,semantic_input=SemanticInput('RESUME_ADOPTED',snapshot_json=cp.semantic_snapshot,semantic_profile=MODEL_PROFILE))
         require(result.artifact is not None,'unchanged_teacher_body_not_available')
+        reference=old_cpu[cid]
+        require({k:getattr(result.artifact,k) for k in ('observation','reception','update_note')}==reference['surface'],'frozen_teacher_surface_changed')
+        require((result.question.prompt_private if result.question else None)==reference['question'] and result.question_decision.disposition==reference['question_disposition'],'frozen_teacher_question_changed')
         allrows.append(nr);cases.append({**case,'messages':new})
-        stats.append(dict(id=cid,prompt_tokens=prefix,prompt_token_delta=prefix-oldprefix,assistant_eos_tokens=len(target),full_tokens=len(enc['input_ids']),generation_cap=cap,prompt_plus_cap=prefix+cap,selected_tokens=len(selected),uniform_ce_component=len(target)/(len(target)+15*len(selected)),teacher_bytes_unchanged=True,target_ids_unchanged=True,legacy_prompt_bytes_unchanged=True,only_prompt_spec_item_added=True,meaning_body_teacher_available=True))
+        stats.append(dict(id=cid,prompt_tokens=prefix,prompt_token_delta=prefix-oldprefix,assistant_eos_tokens=len(target),full_tokens=len(enc['input_ids']),generation_cap=cap,prompt_plus_cap=prefix+cap,selected_tokens=len(selected),uniform_ce_component=len(target)/(len(target)+15*len(selected)),teacher_bytes_unchanged=True,target_ids_unchanged=True,legacy_prompt_bytes_unchanged=True,only_prompt_spec_item_added=True,meaning_body_teacher_available=True,surface_question_and_disposition_equal=True))
     require(len(allrows)==15 and sum(x['selected_tokens'] for x in stats)==198,'prepared_case_count')
     alias_checks=[]
     for cid in ('FT-BOOK-INITIAL','FT-SHOP-INITIAL','FT-KNIT-INITIAL'):
@@ -122,8 +133,9 @@ def cpu_prepare(pack):
     for path,identity in expected.items():
         raw=(API/path).read_bytes();require(hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()==identity,'new_api_blob_changed')
     require(not torch.cuda.is_initialized(),'cuda_initialized_during_cpu')
-    report=dict(status='CPU_LOCALIZED30_PREPARED_GPU_NOT_AUTHORIZED',seconds=time.monotonic()-start,api_commit=API_COMMIT,api_changes=expected,api_inventory=api_inventory,cases=stats,alias_contract_checks=alias_checks,selected_tokens=198,old9_original_ce=True,empty_mask_ce_and_gradient_exact=True,weighted_ce_and_gradient=True,mutation_refusals=4,model_loads=0,model_forwards=0,training_updates=0,generations=0,sql_operations=0,cuda_initialized=False,teacher_fit_only=True,product_accepted=False,automatic_progression=False)
-    report['payload_sha256']={n:sha(pack/n) for n in ('train_messages.jsonl','eval_inputs.jsonl','fixed_token_mask.json','local_token_loss.py','prepare_localized30.py','run_localized30.py','api_changes.json')}
+    report=dict(status='CPU_LOCALIZED30_PREPARED_GPU_NOT_AUTHORIZED',seconds=time.monotonic()-start,api_commit=API_COMMIT,api_changes=expected,api_inventory=api_inventory,cases=stats,alias_contract_checks=alias_checks,selected_tokens=198,old9_original_ce=True,empty_mask_ce_and_gradient_exact=True,weighted_ce_and_gradient=True,single_tiny_forward_and_causal_shift_gradient=True,mutation_refusals=4,model_loads=0,model_forwards=0,training_updates=0,generations=0,sql_operations=0,cuda_initialized=False,teacher_fit_only=True,product_accepted=False,automatic_progression=False)
+    report['external_dependency_sha256']=external
+    report['payload_sha256']={n:sha(pack/n) for n in ('train_messages.jsonl','eval_inputs.jsonl','fixed_token_mask.json','local_token_loss.py','prepare_localized30.py','run_localized30.py','consume_localized30.py','dependency_bindings.json','api_changes.json')}
     dump(pack/'actual_cpu_check.json',report)
     plan=json.loads((pack/'localized30.plan.json').read_text())
     require(plan['status']=='PREPARED_AWAITING_MASH_APPROVAL' and plan['gpu_run_authorized'] is False and plan['approval_basis'] is None and plan['cpu_check_sha256'] is None,'preparation_plan_must_be_pending_unbound')

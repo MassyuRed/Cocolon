@@ -59,7 +59,7 @@
     "FT-KNIT-INITIAL",
     "TRAIN-SERVICE-CHAIR-02-CORRECTION"
   ],
-  "runner_sha256": "dbce466f59e9b333bbb60a8aceb395b339a25883a7ea935a038c7a1009018bda",
+  "runner_sha256": "1f6f709de911c18e665fea27d39c311028a1e571c2b5508ff8cd762a027a7992",
   "cpu_check_sha256": null,
   "status": "PREPARED_AWAITING_MASH_APPROVAL",
   "gpu_run_authorized": false,

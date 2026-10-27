@@ -21,6 +21,7 @@ def loss_from_logits(logits, gold, chosen):
     import torch.nn.functional as F
     require(logits.ndim==2 and gold.ndim==1 and logits.shape[0]==gold.shape[0] and len(gold)>0,'local_logits_shape')
     require(chosen==sorted(set(chosen)) and all(type(i) is int and 0<=i<len(gold) for i in chosen),'local_mask_invalid')
+    if not chosen:return F.cross_entropy(logits.float(),gold,reduction='mean')
     ce=F.cross_entropy(logits.float(),gold,reduction='none')
     require(torch.isfinite(ce).all().item(),'local_ce_nonfinite')
     # No selected point gets exclusive loss: every target and EOS remains positive.
