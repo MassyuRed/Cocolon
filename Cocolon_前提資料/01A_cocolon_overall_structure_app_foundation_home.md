@@ -5313,5 +5313,6 @@ Cocolonのfamilyは`observation_learning/training/2026-10-26-unconnected-native/
 | `execution/*（4）` | GPU/CPU各一回の起動と全log原本 |
 | `runtime_originals.zip・runtime_archive_manifest.json・archive_identity.json・external_verification.json` | 15payload＋manifest/16member、56444bytesをCRC/全hash照合。ZIPとmemberを同一bytes保存、重みなし |
 | `reading_reviews/root.json・book.json・shop.json` | root/補助の全本文・問い・全7/8更新・原情報/教師/同重み前回比較。実拒否理由と静的所見を分離 |
+| `proof/jupyter_completed.jpg・identity.json` | 結果commit71a300acの31path読戻し後のJupyter完了画面。表示bytes同一、実行ZIP外の後続証跡 |
 
 重みSHA d431a07cは不変で元保存先はadaptive30_result。今回selected2のみで全15/旧9/新初回4の新評価にしない。商品0/正式0/3/54.50％、GPU稼働保持。全体00/観測入口/training/CMEE地図/weekly§80を同期。
