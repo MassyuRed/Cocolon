@@ -1,13 +1,13 @@
 # 10/26 — 未接続の既存6教材とCMEE受理範囲／一括接続案
 
-状態：**quote prior座標混在を最小修復、実15件CPU確認済み。次の2件非学習GPU診断は明示判断前。** 前回adaptive30の意味11/15・本文9/15、新6本文0/6とd431不採用を維持。
+状態：**承認済みprior座標除去の非学習2件診断終了。** SHOP形式は改善しましたが、同CMEEの意味・本文0/2、保存d431は不変/通常不採用です。全15の再評価はしていません。
 
 <a id="native15-adaptive30-proposal"></a>
-## 2026-10-27 — quote priorの座標混在修復と2件非学習診断案
+## 2026-10-27 — prior座標除去の非学習2件診断・最終結果
 
-**現在の直接作業（10/27：quote入力のprior座標混在を最小修復、CPU確認済み）：** API64c6cb1aでquote形式のモデル向けpriorコピーからstart/endだけを除去。回答後5件/30引用/60座標、初回10入力・旧numeric15・全教師target IDs/EOS・元情報/保存済み解釈/意味/引用順/OUTPUT_SPECは不変。Jupyter CPU6.912891秒の実15件直接assertで確認、pytestは未導入のためsuite未実施・追加install0。実モデル読込/forward/学習/生成0。前回adaptive30は意味11/本文9・新6本文0、d431不採用のまま。次の一回案は保存d431の非学習load→BOOK/SHOP回答後のみ各1生成、学習0・最大10分/$0.047処理按分（準備/CPU/回収/保持等別）、明示判断前。全15回帰や新初回4件の改善とはしない。新観測会は今は不要。prior_quote_preparation/README・weekly§79。商品0/正式0/3/54.50％、GPU稼働保持/Stop・restart・delete0、automatic_progression=false。
+**現在の直接作業（10/27：承認済みprior座標除去の非学習2件診断を終了）：** 保存d431/112F32を非学習load、追加学習0・BOOK/SHOP回答後各1生成、EOS2・strict JSON2。処理235.326689秒/$0.018303按分（準備/CPU/回収/保持/保存/通信/税等別）、同CMEEの意味/本文0/2で前回同2件から成立件数は増えなかった。SHOPの重複キー・数値座標・改変引用は消えたが、BOOKの原欄にない引用3件/根拠役割のずれと1対7更新、SHOPの索引/scope不足と1対8更新、本文の留保欠落/再掲が残った。採用snapshot0のためcold再読は対象なし。保存重み不変・新保存0・retry0、d431通常不採用。全15新評価/旧9回帰/新初回4件/商品品質の成功へ広げない。全15原本payload＋manifestをPod外照合・GitHub保全。prior_quote_probe2_result/README・weekly§80。新観測会は今は不要、追加有料試行へ自動進行せず根拠対応/全更新/本人向け本文を既存教師から見直す。商品0/正式0/3/54.50％、GPU保持/Stop・restart・delete0、automatic_progression=false。
 
-[今回の小修復・実CPU原本・次の2件案](prior_quote_preparation/README.md)。[前回adaptive30の閉鎖結果/全原本](adaptive30_result/README.md)。旧順序変更案ordered30は既試行で退行したため再提案せず、今回の入力差へ混ぜない。追加学習で補う前に、保存済み重みで今回の入力修正だけの影響を測る。
+[今回の最終結果・2件全文/全更新比較・実行原本](prior_quote_probe2_result/README.md)。[起案時の小修復・CPU・2件案](prior_quote_preparation/README.md)と[前回全15結果](adaptive30_result/README.md)は凍結履歴です。保存d431のまま入力座標除去だけを比較し、形式改善と意味/本文未成立を分けて記録しました。
 
 <a id="native15-token-diagnostic-proposal"></a>
 <a id="native15-localized30-result"></a>

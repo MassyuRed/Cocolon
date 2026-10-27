@@ -5298,3 +5298,20 @@ Cocolonのfamilyは`observation_learning/training/2026-10-26-unconnected-native/
 | `proof/jupyter_cpu_completed.jpg・identity.json` | f8fa5224の34path読戻し後のJupyter表示と未承認2件案の画面証跡。ZIP外の後続記録、表示bytes同一 |
 
 初回10quote入力/旧numeric15/教師全target不変。回答後5入力だけ座標を除去。次の2件実モデルは未承認・未実行で、旧9の新prompt退行なし/新初回4件の改善/全15合格を証明しない。商品0/正式0/3/54.50％、GPU保持、weekly§79。
+
+
+### 2026-10-27 — prior座標除去probe2の実結果file地図
+
+対象familyは`observation_learning/training/2026-10-26-unconnected-native/prior_quote_probe2_result/`。商品責務/型/wire/reader差分なし、STRUCTURE_MAP_DELTA_NONE。
+
+| path/family | 責任 |
+|---|---|
+| `README.md・summary.json` | 一回閉鎖・形式改善/意味本文0/2・費用・非昇格・未評価範囲 |
+| `run/run.json・run/loaded_tensors.json・run/after_*.jsonl（2）` | 保存d431の非学習112F32読込と実2raw/EOS/usage原本。学習/新重み保存0 |
+| `source/probe2.plan.json・run_probe2.py・consume_probe2.py・model_candidate_source.py・actual_cpu_check.json・eval_inputs.json` | 承認2ab02db3と実行source/input。入力64c6cb1a・reader a4b91b4を分離。承認planは消費済みで凍結 |
+| `diagnosis/diagnosis.json` | 実quote receiptとCMEE採否。両未採用のためcold snapshot0、本文readerへ未到達 |
+| `execution/*（4）` | GPU/CPU各一回の起動と全log原本 |
+| `runtime_originals.zip・runtime_archive_manifest.json・archive_identity.json・external_verification.json` | 15payload＋manifest/16member、56444bytesをCRC/全hash照合。ZIPとmemberを同一bytes保存、重みなし |
+| `reading_reviews/root.json・book.json・shop.json` | root/補助の全本文・問い・全7/8更新・原情報/教師/同重み前回比較。実拒否理由と静的所見を分離 |
+
+重みSHA d431a07cは不変で元保存先はadaptive30_result。今回selected2のみで全15/旧9/新初回4の新評価にしない。商品0/正式0/3/54.50％、GPU稼働保持。全体00/観測入口/training/CMEE地図/weekly§80を同期。

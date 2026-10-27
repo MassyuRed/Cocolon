@@ -3145,3 +3145,19 @@ CPU scriptは私のhelper戻り値参照誤りで2回停止。次はpytest未導
 [原本と次の一回案](../observation_learning/training/2026-10-26-unconnected-native/prior_quote_preparation/README.md)。次案は保存d431を112F32非学習load、BOOK/SHOP回答後各1自由生成、学習0・最大2call・600秒/$0.047処理按分、準備/CPU/回収/保持/保存/通信/税等別。未承認planはmodel/output前拒否をCPU確認。2件の変化だけを見る案で、旧9回帰・全15成立・priorなし新初回4件の修復を意味しない。新有料実行は判断前、前回消費済みplanを再利用しない。
 
 CPU原本25payload＋manifest/26member、60852bytes、SHA256 0ecb5023e9df49ce4aa682ff38cf236c8d5562ca3067b90ef4a255d2664af399をPod外でCRC/全size/hash照合してmember保存。重みは既存adaptive30保全先へ戻る。新観測会は現時点不要。STRUCTURE_MAP_DELTA_NONE（既存input projection修復、責務/型/wire/reader/通常接続不変）、限定TECHNICAL_CREDITのみ。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false。GPU保持、管理console/API/Stop/restart/delete0。
+
+
+<a id="20261027-prior-quote-probe2-result"></a>
+## 80. 10/27 — 承認済み非学習2件診断終了、形式改善・意味/本文0/2
+
+**現在の直接作業（10/27：承認済みprior座標除去の非学習2件診断を終了）：** 保存d431/112F32を非学習load、追加学習0・BOOK/SHOP回答後各1生成、EOS2・strict JSON2。処理235.326689秒/$0.018303按分（準備/CPU/回収/保持/保存/通信/税等別）、同CMEEの意味/本文0/2で前回同2件から成立件数は増えなかった。SHOPの重複キー・数値座標・改変引用は消えたが、BOOKの原欄にない引用3件/根拠役割のずれと1対7更新、SHOPの索引/scope不足と1対8更新、本文の留保欠落/再掲が残った。採用snapshot0のためcold再読は対象なし。保存重み不変・新保存0・retry0、d431通常不採用。全15新評価/旧9回帰/新初回4件/商品品質の成功へ広げない。全15原本payload＋manifestをPod外照合・GitHub保全。prior_quote_probe2_result/README・weekly§80。新観測会は今は不要、追加有料試行へ自動進行せず根拠対応/全更新/本人向け本文を既存教師から見直す。商品0/正式0/3/54.50％、GPU保持/Stop・restart・delete0、automatic_progression=false。
+
+Mashはf8fa5224の「追加学習0→保存重み非学習読込→BOOK/SHOP回答後2件、最大10分/$0.047処理按分（準備/回収/保持等別）」を明示承認。planのstatus/gpu_run_authorized/approval_basisだけを2ab02db3へ結び、残る条件とsourceの不変をGitHub/Jupyterで照合して一回起動した。旧30更新executeは再開せず、保存d431を112F32/3,833,856parameterで非学習load1。学習0/新保存0/生成2/timeout0/retry0。
+
+BOOK2724token・SHOP2637token、両EOS/strict JSON。SHOPのduplicate schema key/数値座標/改変引用は消え、14引用すべて原欄に一意、quote receiptはINVALID_FORMATからCANDIDATE_UNREVIEWEDへ進んだ。しかし根拠索引/共通二否定・時点scope/必要8更新は未達で、実意味判定はUNSUPPORTED/model_evidence_out_of_scope。BOOKは15引用中12..14が原欄に存在せず生成surfaceと一致、receipt INVALID_EVIDENCE/REJECT semantic_receipt_not_validated。両意味/本文0で前回同2件から成立件数は増えない。両本文readerへ未到達、本文/更新の静的所見を実拒否理由にしない。
+
+根拠のずれはBOOKの5回答後claimと範囲外15/16/17、SHOPのrealization→旧action4・distance→旧memo5・joy→realization9・sadness→joy10/範囲外14。BOOKは1対7更新、SHOPはtarget_kind/refを回復してもADD1対必要8、どちらもgap解消なし。本文はBOOKの一人称再掲/反復、SHOPの知覚留保欠落/未記載の想起可能性が残る。全2件の原文/教師/前回/実rawをrootとread-only補助で読み、正式Pro/Ultra/人手商品受入れとはしない。
+
+処理235.326689023秒/$0.018303186924按分、上限600秒/$0.047以内。consumer CPU1.993279065秒、追加model/学習/production SQL0。採用snapshot0でcold-file保存再読は対象なし。準備/CPU/回収/保持/保存/通信/税等は別、総請求ではない。全15payload＋manifest/16member、56444bytes、SHA147d2b426019c43026326cdb648f2612d1da333bebb9598112632daa4f8cd812をPod外でCRC/全bytes/hash照合しZIP/memberとも保全。112F32全有限、読込metadataは前回保存後再読込と一致。d431 SHAは前後不変、元base全重み/adapterは新ZIPへ重複同梱せず既存保全先を保持。GPU PID246433/consumer246735はEXITED、A5000/1MiB、稼働保持/Stop・restart・delete0。
+
+[最終owner・全比較/原本](../observation_learning/training/2026-10-26-unconnected-native/prior_quote_probe2_result/README.md)。最終RUN_CLOSED_NO_MEANING_OR_BODY_GAINとし、原本runのpending表示/承認済みplanを後から書換えず消費済み証拠として凍結。今回2件で旧9回帰・priorなし新初回4・全15新評価・動的一往復・通常service保存・本人端末/他coreを検証したことにしない。前回全15の11/9は履歴のまま合算0。新観測会は今は不要。同じ有料反復へ自動進行せず、残る根拠対応/全更新/本人向け本文を既存教師と実出力から見直す。STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false。通常API/DB/RN/Render/Supabase/依存/価格/merge/deploy変更0。

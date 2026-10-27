@@ -1,6 +1,6 @@
-# 引用形式の入力へ残ったprior座標を除去 — CPU完了・2件診断は未承認
+# 引用形式のprior座標修復・承認済み2件診断の起案記録（実行済み）
 
-状態：**CPU_PRIOR_QUOTE_INPUT_FIXED_MODEL_EFFECT_UNMEASURED**。新しい学習・生成は0です。API [64c6cb1a](https://github.com/MassyuRed/mashos-api/commit/64c6cb1a41620fd2d7690e0b6f1af30ae0e624a4)でモデル向け入力の取り落としを修正しました。前回adaptive30は意味11/15・本文9/15、新6本文0/6で閉鎖・新d431不採用のままです。CPU確認を品質改善へ換算しません。
+状態：**承認済み非学習2件診断は実行済み・閉鎖**。[最終結果](../prior_quote_probe2_result/README.md)が現在の結果ownerです。学習0/生成2/EOS2/strict2、意味・本文0/2。以下は起案時CPUと承認案の履歴です。API [64c6cb1a](https://github.com/MassyuRed/mashos-api/commit/64c6cb1a41620fd2d7690e0b6f1af30ae0e624a4)でモデル向け入力の取り落としを修正しました。前回adaptive30は意味11/15・本文9/15、新6本文0/6で閉鎖・新d431不採用のままです。CPU確認を品質改善へ換算しません。
 
 ## 見つかったことと修正
 
@@ -28,9 +28,9 @@ prefix不一致、causal shift、教師/evalのchat template差は見つかり�
 
 BOOK/SHOP回答後は元4claimとsnapshot_refを保ちつつ、根拠番号・複数namespace・必要7/8更新の組立てで破綻しています。priorなし初回4件の本文失敗は今回の修正対象外です。全不良の共通原因や4B能力上限、教材不足とは断定しません。新観測会は今は不要です。
 
-## 次の一回案 — 追加学習なし・回答後2件だけ
+## 起案時の一回案 — 追加学習なし・回答後2件だけ（実行済み）
 
-実行前の[probe2.plan.json](probe2.plan.json)はpendingです。未承認executeは**output作成・モデル処理より前に拒否**され、[pending_execution_check.json](pending_execution_check.json)へ記録しました。前回の消費済み30更新planは再起動しません。
+[probe2.plan.json](probe2.plan.json)はMashの今回承認を2ab02db3で結び、一回実行済みの原本としてAUTHORIZED_ONCE_BOUNDを凍結保存しています。再利用用ではありません。未承認executeは**output作成・モデル処理より前に拒否**され、[pending_execution_check.json](pending_execution_check.json)へ記録しました。前回の消費済み30更新planは再起動しません。
 
 | 項目 | 固定範囲 |
 |---|---|
@@ -43,7 +43,7 @@ BOOK/SHOP回答後は元4claimとsnapshot_refを保ちつつ、根拠番号・�
 
 [run_probe2.py](run_probe2.py)は既存loader/評価だけをread-only再利用し、旧executeは呼びません。[consume_probe2.py](consume_probe2.py)は従来の未変更reader/APIa4b91b4を使い、モデル向け入力版64c6cb1aと区別して記録します。2件成功でも旧9退行なし・全15成功・新初回4件の改善・動的一往復・通常service保存・商品採用は証明しません。比較の目的は、この入力の取り落としの除去が**既知回答後2件**に与える影響だけです。
 
-承認後の一回だけ、固定sourceとplanの承認3項目以外の不変を照合して次を実行します。
+承認後、固定sourceとplanの承認3項目以外の不変を照合し、下記を2ab02db3で一回実行済みです。再実行用の指示ではありません。
 
 ```bash
 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 timeout --signal=TERM --kill-after=10s 590s python -B /workspace/cocolon_prior_quote_pack_20261027/run_probe2.py --pack /workspace/cocolon_prior_quote_pack_20261027 --execute --source-commit <承認記録を含む固定commit>
@@ -53,4 +53,4 @@ HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 timeout --signal=TERM --kill-after=10s 5
 
 CPU原本は25payload＋manifest/26member、60,852bytes、SHA256 `0ecb5023e9df49ce4aa682ff38cf236c8d5562ca3067b90ef4a255d2664af399`。Pod外でCRC/全bytes/hashを照合し、[manifest](runtime_archive_manifest.json)の各memberをbytes不変で保存しました。新しい重みは含みません。診断用d431重みと前回全原本は[adaptive30結果](../adaptive30_result/README.md)に保全済みです。
 
-全体00・観測入口・学習owner・01A/CMEE地図・weekly§79へ差分反映します。STRUCTURE_MAP_DELTA_NONE（既存モデル入力projectionの取り落とし修復、責務/意味型/wire/reader/通常接続不変）。rootが単一writer/実行owner、補助はread-onlyの所見で、正式Pro/Ultra/人手商品受入れではありません。商品0/正式0/3/54.50％、candidate_ready=false、automatic_progression=false。新しいGPU診断の明示承認前は未実行です。
+全体00・観測入口・学習owner・01A/CMEE地図・weekly§79へ差分反映します。STRUCTURE_MAP_DELTA_NONE（既存モデル入力projectionの取り落とし修復、責務/意味型/wire/reader/通常接続不変）。rootが単一writer/実行owner、補助はread-onlyの所見で、正式Pro/Ultra/人手商品受入れではありません。商品0/正式0/3/54.50％、candidate_ready=false、automatic_progression=false。このGPU診断は実行・閉鎖済みで、追加試行は自動開始しません。
