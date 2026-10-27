@@ -1,0 +1,6 @@
+{
+  "ai/services/ai_inference/cocolon_meaning_experience_engine/model_candidate_source.py": "6c610a48603d356428554e27a5d77c718d353eef",
+  "ai/tests/test_cmee_quote_candidate.py": "f0aa61b2216570b2367c84cb09192bb8f1894416",
+  "ai/tests/test_cmee_emlis_sixrow.py": "639a3a7c98ed39a224a8c3b033ebbe15257a0858"
+}
+
