@@ -1,9 +1,21 @@
 # 10/26 — 未接続の既存6教材とCMEE受理範囲／一括接続案
 
-状態：**10/27：expanded30候補の実CPU確認済み。実4B処理0・新GPU一回は未承認。旧ordered30不採用/閉鎖を保持。**
+状態：**10/27：expanded30は30更新/保存後に照合停止、生成0・品質未測定。一回閉鎖。保存109cを追加学習0で評価する再開候補は実CPU確認済み・新GPU承認前。**
 
+
+<a id="native15-expanded30-result"></a>
+<a id="native15-expanded15-recovery-proposal"></a>
+## 2026-10-27 — expanded30は保存後停止、追加学習0の評価再開をCPU確認
+
+**現在の直接作業（10/27：expanded30は30更新/保存後に照合停止、保存済み重みの評価再開を実CPU確認・新GPU判断前）：** 承認source bd5d169a/PID127012の一回は30更新と109c重み保存まで406.636986秒/$0.031627処理按分で完了し、PEFTの56名→28suffix短縮をraw名集合の検査が拒否して非学習reload前に停止。実base読込1・生成0、EOS/意味/本文は未測定で0/15失敗へ換算しない。元run/config/重み不変、112F32/全shape/有限/30順序・旧32初期一致をPod外照合。全55payload＋manifestを保全し一回閉鎖/再試行0。別候補は追加更新0・保存109cの非学習reload→同15確認だけ。実CPU6.428339秒で旧失敗再現、meta実構造の28→56解決、小PEFT保存/reload112一致、誤変更5例拒否、入力prior15とpending output前拒否を確認。実4B再読込/生成は未実施、新一回は最大2700秒/各180秒/15call/$0.21処理按分（準備/回収/保持等別）の別承認前。新観測会は今は不要、原本expanded30_result/README・expanded15_recovery_preparation/README・weekly§71。商品0/正式0/3/54.50％、GPU稼働保持。
+
+[停止原本と全結果](expanded30_result/README.md)。私のraw target名集合の検査がPEFTの正常な56→28suffix最小化と不整合で、実非学習reload前に停止しました。30更新は完了、保存109cの112tensorは有限ですが、15生成/CMEE採否/本文は未測定です。旧STOP/承認/残枠を再利用しません。
+
+[新しい具体案：保存109cの非学習reload→同15確認、追加更新0](expanded15_recovery_preparation/README.md)。meta実構造と小CPU PEFTで修正を確認、実4B読込/forward/生成は追加0。新一回は2700秒/15call/$0.21処理按分（準備/回収/保持等別）の個別承認前。旧30更新を繰り返さず、原本は不変、通常有効化なしです。
 
 <a id="native15-expanded30-proposal"></a>
+
+> 以下はexpanded30準備時の履歴です。30更新/保存後の停止結果と新しい評価候補は上記を参照し、旧承認を再利用しません。
 ## 2026-10-27 — 学習対象を同8層の注意・MLPへ広げる候補
 
 **現在の直接作業（10/27：学習対象を同8層の注意・MLPへ広げるexpanded30候補、実CPU確認済み・新GPU一回は判断前）：** ordered30の意味3/本文3への退行を受け、初期1dの旧32tensorを完全保持し、同8層のk/oとMLP gate/up/downへ40moduleを追加する56module/112F32/3,833,856parameter候補を実装。新40Bをzeroにした初期化をJupyter CPU6.591629秒で作成し、旧32一致・実tokenizer15/切捨て0/max7935・固定API入力/prior15一致・pending executeのoutput前拒否を確認。小CPU層の勾配有限確認だけ3.424515秒で追補。全13payload＋manifestと112F32有限/新40BzeroをPod外照合・保全。元sorted教師/全文CE/LR1e-5/同30順序/評価/readerは維持し、実4B読込/forward/更新/生成0。新一回は30更新→保存/同process非学習reload→同15確認、最大2700秒/各180秒/15call/$0.21処理按分（準備/回収/保持等別）の個別判断前。旧runは閉鎖・新観測会は今は不要、原本expanded30_preparation/README・weekly§70。商品0/正式0/3/54.50％、GPU稼働保持。

@@ -1,8 +1,10 @@
 # 同じ8層の注意・MLPへ学習対象を広げる30更新候補
 
-状態：**実CPU確認済み／Mashが2026-10-27（JST）に本具体案2bbの新GPU一回を明示承認、起動前**。旧ordered30は閉鎖・新483d74b7不採用のまま保持し、旧承認/出力/残枠は再利用しません。
+状態：**RUN_CLOSED_STOPPED_BEFORE_INFERENCE_RELOAD — 30更新/保存後に照合停止、生成0・品質未測定。** 当時の一回承認は消費済みで再利用しません。最終結果は[expanded30_result](../expanded30_result/README.md)、追加学習0の新しい評価候補は[expanded15_recovery_preparation](../expanded15_recovery_preparation/README.md)。
 
-**現在の直接作業（10/27：学習対象を同8層の注意・MLPへ広げるexpanded30候補、実CPU確認済み・新GPU一回は判断前）：** ordered30の意味3/本文3への退行を受け、初期1dの旧32tensorを完全保持し、同8層のk/oとMLP gate/up/downへ40moduleを追加する56module/112F32/3,833,856parameter候補を実装。新40Bをzeroにした初期化をJupyter CPU6.591629秒で作成し、旧32一致・実tokenizer15/切捨て0/max7935・固定API入力/prior15一致・pending executeのoutput前拒否を確認。小CPU層の勾配有限確認だけ3.424515秒で追補。全13payload＋manifestと112F32有限/新40BzeroをPod外照合・保全。元sorted教師/全文CE/LR1e-5/同30順序/評価/readerは維持し、実4B読込/forward/更新/生成0。新一回は30更新→保存/同process非学習reload→同15確認、最大2700秒/各180秒/15call/$0.21処理按分（準備/回収/保持等別）の個別判断前。旧runは閉鎖・新観測会は今は不要、原本expanded30_preparation/README・weekly§70。商品0/正式0/3/54.50％、GPU稼働保持。
+**現在の直接作業（10/27：expanded30は30更新/保存後に照合停止、保存済み重みの評価再開を実CPU確認・新GPU判断前）：** 承認source bd5d169a/PID127012の一回は30更新と109c重み保存まで406.636986秒/$0.031627処理按分で完了し、PEFTの56名→28suffix短縮をraw名集合の検査が拒否して非学習reload前に停止。実base読込1・生成0、EOS/意味/本文は未測定で0/15失敗へ換算しない。元run/config/重み不変、112F32/全shape/有限/30順序・旧32初期一致をPod外照合。全55payload＋manifestを保全し一回閉鎖/再試行0。別候補は追加更新0・保存109cの非学習reload→同15確認だけ。実CPU6.428339秒で旧失敗再現、meta実構造の28→56解決、小PEFT保存/reload112一致、誤変更5例拒否、入力prior15とpending output前拒否を確認。実4B再読込/生成は未実施、新一回は最大2700秒/各180秒/15call/$0.21処理按分（準備/回収/保持等別）の別承認前。新観測会は今は不要、原本expanded30_result/README・expanded15_recovery_preparation/README・weekly§71。商品0/正式0/3/54.50％、GPU稼働保持。
+
+> 以下は2bb準備時／bd5d一回承認時の履歴です。「実4B0」「output不存在」「承認後」は当時の状態であり、現在は上記の停止原本へ戻ります。実runner/承認plan/config/重みは書換えず、一回を再起動しません。
 
 ## 改善する不足と選んだ変更
 

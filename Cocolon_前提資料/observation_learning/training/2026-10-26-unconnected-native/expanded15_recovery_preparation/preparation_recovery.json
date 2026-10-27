@@ -1,0 +1,18 @@
+{
+  "status": "CPU_ARCHIVE_EXTERNALLY_VERIFIED_SEPARATE_GPU_APPROVAL_PENDING",
+  "cpu_archive_bytes": 35596,
+  "cpu_archive_sha256": "7a87f2b471cf9d0e84d0a17a99dcf0f8e34190e51e287ae231f9a9ca29b6a2c6",
+  "cpu_payload_count": 16,
+  "cpu_members": 17,
+  "all_members_verified": true,
+  "source_files_exact_between_local_and_jupyter": true,
+  "training_stop_archive_sha256": "7648c31cca15bb7082d50baf70d554136ea1828e1c969e5911f8ba4ad423c369",
+  "combined_archive_bytes": 26078179,
+  "combined_archive_sha256": "6bb5da2dabdfea49173a0697a5d17460d1419e55ff6c7d1d53d1f5dcdef6c5fc",
+  "combined_payload_count": 55,
+  "combined_members": 56,
+  "library_file_id": "libfile_d93ea0ff6e7c819185b62a0e25725850",
+  "library_version": 0,
+  "real_4b_reload_tested": false,
+  "gpu_authorized": false
+}

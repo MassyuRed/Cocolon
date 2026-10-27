@@ -1,0 +1,35 @@
+{
+  "schema": "cocolon.expanded15_saved_recovery_once.plan.v1",
+  "training_origin": "/workspace/cocolon_native15_expanded30_run_20261027",
+  "training_source_commit": "bd5d169ad457fc440bf01d1876cb40d697ce6847",
+  "training_origin_sha256": {
+    "run.json": "ccc8afccdb322c109515aa535e936d43e857b680c4727dcd63f18bc3789c7ea1",
+    "training.jsonl": "f1232cb906eb89cb1eb74a0cb10832ccb5e272d9ed40fabd17ce77ffb26a2868",
+    "run_native15_expanded30.py": "ca03471329b5f622284cf3abd446cdd2f7831de3f7617da49a558ff7b5259e9d",
+    "gpu30_expanded.plan.json": "5904a6c7157b6a8523f3d3f988990fa194c670685cfd568e64bf35b3204e6874"
+  },
+  "adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "fb43a10298bdf9965a8ab4c541cb517372928afd7dd97d0b210bf0c5b4f45b2e",
+    "adapter_model.safetensors": "109c3dda16b19d2f110d6f8e2ded07f47e981b9690970ca95b9046780bffb85a"
+  },
+  "api_commit": "6b043880504912481a6b10d93c9128ec4995b70b",
+  "output_directory": "/workspace/cocolon_native15_expanded15_recovery_run_20261027",
+  "optimizer_steps": 0,
+  "before_calls": 0,
+  "max_model_calls": 15,
+  "max_seconds": 2700,
+  "per_generation_seconds": 180,
+  "gpu_hourly_usd": 0.28,
+  "max_process_usd": 0.21,
+  "pod_id": "bkj4qvnhwtdqc2",
+  "expected_gpu_name": "NVIDIA RTX A5000",
+  "retry": false,
+  "automatic_progression": false,
+  "product_accepted": false,
+  "gpu_lifecycle_operations": 0,
+  "runner_sha256": "e4be86a2b6fb0581961fc3c619853ba7f419e3239464e969214772b8bc3bfb54",
+  "status": "PREPARED_AWAITING_MASH_APPROVAL",
+  "gpu_run_authorized": false,
+  "approval_basis": null
+}
