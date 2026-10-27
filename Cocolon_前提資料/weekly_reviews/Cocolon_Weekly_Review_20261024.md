@@ -3060,3 +3060,21 @@ Mashが具体案d5a3d644b1cddc06f246ed7beff49d5be2de8ea7の「追加学習0・�
 [実結果と全原本](../observation_learning/training/2026-10-26-unconnected-native/token_diagnostic_result/README.md)。全15完全token report/実run/reload/source5/準備CPU/凍結入力4/既存raw15/実launch/logを1032831bytes/SHA256 d2b94c69157c0976e6835f3e571d3b271979649ad66cec7519c500ddc29b7faeのZIPへ保存。44payload＋manifest45memberのCRC/bytes/hashをPod外照合。重みは不変の既保存109cを参照し、今回archive非同梱。worker終了・A5000/1MiB/24564MiB、GPU稼働保持/Stop/restart/delete0。実行環境Codex Work/GPT-6系、root単一writer/実行owner、補助2名は読取レビューで正式Pro/Ultra/human受入れではない。
 
 全体00/観測入口/training入口/01A file地図/準備READMEと同単位更新。primary=BLOCKER_NARROWED、診断のみ限定TECHNICAL_CREDIT、通常意味11/15・本文9/15・新6本文0/6と109c不採用、商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=falseは不変。製品責務/意味型/wire/API/DB/RN/Render/Supabase/通常app/依存/価格/merge/deploy0、STRUCTURE_MAP_DELTA_NONE。
+
+
+<a id="20261027-native15-localized30-prepared"></a>
+## 75. 10/27 — ID条件の出力明示と固定198token重点化30更新案、実CPU確認・新GPUは判断前
+
+**現在の直接作業（10/27：ID条件明示と固定198token重点化30更新案を実CPU確認、新GPUは判断前）：** APIa4b91b4でquote出力仕様へ既存unknown_id ASCII64/参照条件1項目だけ追補、reader/教師/legacy不変。Jupyter CPU14.888497秒で全15の新旧差1項目・45token増/全長7980/生成枠込み8131、教師全文/target IDs/EOS・旧本文/問い維持、ID21条件、固定mask198・CE/勾配/causal shift・改変4拒否を確認。consumer CPU34.190337秒で15input/合成教師cold3一致、実モデル成功ではない。実4B読込/forward/学習/生成/SQL0、pending executeはoutput前拒否。次の一回案は保存109c/112F32から全文CE＋既知198位置だけ相対16倍、同15各2回/30更新→保存・非学習reload→15自由生成、最大2700秒/$0.21処理按分（準備/回収/保持等別）。旧9は既存CE、新指示とlossの効果は個別帰属せず、実GPUは個別判断前。新観測会は今は不要。全29payload＋manifest/30memberを照合・保全。原本localized30_preparation/README・weekly§75。通常11/9・新6本文0の不採用、商品0/正式0/3/54.50％は不変。GPU稼働保持。
+
+Mashの続行指示を受け、全機能原本全文・必読incident全文・作業規則・全体設計/01A file地図・CMEE map/共有設計・最新§74・実sourceを照合。入力内容/根拠が教師一致でもBOOKの日本語IDだけで拒否される不足へ、APIa4b91b4788b2fb29483a4c77869c91b36402ae9fの既存model_candidate_source.py quote分岐にspec1項目を追加した。残2pathは既存quote/sixrow testの追補。reader/教師/意味型/共通system/既定legacy・通常appは不変。個別の正解IDを教示せず、合法別名を保つ。
+
+次の[一回具体案](../observation_learning/training/2026-10-26-unconnected-native/localized30_preparation/README.md)は、同109cから同15/30更新→別保存・非学習reload→15自由生成。診断不一致203からID別名question4/unknown1を外した198だけ相対16倍、全文/EOSへ正のCEを残す。旧9は既存helperそのまま、LR1e-5/order/seed20261024/clip/56module112F32は維持、fresh optimizerでstrict resumeではない。群平均balanced30の同じ反復ではなく、既に正しい大半へ余分な係数を足さない。旧promptで測ったmaskと新ID条件を併用するため効果を単独帰属せず、16倍/30更新の最適性は未確認。新教師・新観測会・model再選定・reader緩和・cap延長へ戻さない。
+
+Jupyter CPU修正版source0b0f99d9d2473082826d5b005ced65e169b84fc9、14.888497235951945秒。全15の新旧差はspec1項目・45token増、実tokenizer full最大7980/8192・prompt＋従来cap8131/8192、教師全文/target IDs/EOS/学習評価prefix不変。旧CPUと3本文/問い/disposition一致、全教師は同じreader採用。合法/不正ID21条件、診断15hash/198mask再導出、空mask CE/勾配一致、16倍正規化と有限勾配・tiny模擬単forward/shift・4改変拒否を確認。pending executeはoutput前拒否、新GPUoutput不存在。最初のsource477224bdは空mask sum/Nとnative meanのfloat丸め差でCPU停止し、既存helper直呼びを保持したまま検証関数をnative meanへ揃えて再確認、初回source/logを保全した。実4B処理/GPU再試行ではない。
+
+consumer CPU34.190337334992364秒、全15input再構成とBOOK回答/SHOP回答/REPOTの合成教師snapshot3の別process完全再読を確認。新モデルrawや実service/SQLを評価したものではない。Podにはpytestがなく、今回の直接CPU条件確認をpytest実行成功と報告しない。補助read-onlyレビューの指摘により、生成bound method/例外残留tensorの解放、学習途中attempted/completed分離とpartial保存、外部helper/source前後hash、終了時deadline STOPを実装した。
+
+実GPUは新一回の個別判断前。最大2700秒/$0.21処理按分、外側2690秒＋kill10秒/内側2700秒、生成各180秒/最大15、全15完了保証なし。原本回収/CPU採否/cold/保持/保存/通信/税等は別。旧承認/残時間/予算は再利用しない。全29payload＋manifest30member、325368bytes/SHA757770c7331e02d2cc6a8c346aac80c8e06b29ed73a1cf97084afd799f64869eのZIPをPod外でCRC/size/hash照合。重みは不変の既保存109c参照で今回ZIP非同梱。
+
+全体00/観測入口/training入口/01A/CMEE map/共有設計を同単位同期。可逆source/CPU/GitHub反映は続行指示＋Rule18§11.3、別の有料実4B処理は個別判断前。実行環境Codex Work/GPT-6系/root単一writer・実行owner、補助2名はread-onlyで正式Pro/Ultra/human受入れではない。primary=TECHNICAL_CREDIT（prompt伝達・学習準備/CPUのみ）、商品0/正式0/3/54.50％、通常意味11/本文9・新6本文0/109c不採用、candidate_ready=false、automatic_progression=false、STRUCTURE_MAP_DELTA_NONE。API内部prompt/test3path以外の通常API/DB/RN/Render/Supabase/依存/価格/merge/deploy、GPU Stop/restart/delete0。

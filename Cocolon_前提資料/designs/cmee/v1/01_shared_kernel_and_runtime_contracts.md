@@ -1252,3 +1252,8 @@ Mash明示承認に基づきAPI4002b457のpreparation.py/model_candidate_source.
 ## 2026-10-26 — 4題材6教材のprivate版3接続（CPU完了）
 
 Mash承認c97d6794に基づき、既存4ownerのsource-derived admission/adapter3でBOOK/SHOPの初回実問い→説明ADD・元意味保持・gapのみ解消・一回答END、REPOT/KNIT初回ENDを接続した。本文は独立source readerで主客・時点・否定・程度・本人知覚・二対象の明示不明を照合。外側wire/schema/dataclass・通常API/DTO/DB/RN/依存・通常30秒/明示offline180秒は不変。対象394成功/HTTP2対象外、新SQL6状態の同snapshot再開と完成非生成再読、旧18構成の1,851,616bytes全一致、native6/EOS/context8192 max7935を確認。新4B学習/生成0、旧2560出力枠では2回答targetが長すぎるため次のGPU条件は未決。STRUCTURE_MAP_DELTA_PRESENT、型追加0、商品0/正式0/3/54.50％。実原本・全本文・失敗履歴・全pathは `observation_learning/training/2026-10-26-unconnected-native/README.md#sixrow-cpu-implementation` と最新weekly§56。
+
+
+### 2026-10-27 — quoteモデル教示へ既存ID制約を明示
+
+APIa4b91b4のbuild_model_messagesはQUOTE_CANDIDATE_SCHEMA分岐でoutput_spec.unknown_id_constraintsを1項目追補。既存readerのunknown_id `[A-Za-z0-9_.-]{1,64}`、claim/relationとの非衝突、正確なcurrent/prior参照とdescription分離を伝える。新意味・新採用条件・reader緩和ではなく、特定の教師IDを必須名にしない。共通OUTPUT_SPEC/systemと既定legacy_numericは不変。実CPUで全15の旧新差がこのspecだけ、45token増・prompt＋従来cap最大8131/8192、教師/target IDsと旧本文/問い維持、ID21条件を確認。実4B処理0。固定198位置の追加学習案は同15/30更新→保存非学習reload→15自由生成、最大2700秒/$0.21処理按分の別一回判断前。原本observation_learning/training/2026-10-26-unconnected-native/localized30_preparation/README、最新weekly§75。意味型/wire/API/DB/RNの境界は不変、STRUCTURE_MAP_DELTA_NONE。

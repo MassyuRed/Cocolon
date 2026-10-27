@@ -1,14 +1,14 @@
 # 10/26 — 未接続の既存6教材とCMEE受理範囲／一括接続案
 
-状態：**10/27：同109c/同15の語単位診断15forwardを28.469614秒/$0.002214処理按分で一回完了。追加学習0/新規生成0。ID条件明示と本文/全更新の局所不足を分離、通常意味11/本文9・新6本文0の不採用は不変。**
+状態：**10/27：ID条件明示と固定198token重点化30更新案を実CPU確認。実4B処理0、新GPU一回は判断前。通常意味11/本文9・新6本文0の不採用は不変。**
 
 
 <a id="native15-token-diagnostic-proposal"></a>
 ## 2026-10-27 — 同109cの語単位診断、実CPU確認済み
 
-**現在の直接作業（10/27：保存109c・同15の語単位診断一回完了）：** Mash承認source53984cdf/PID171619、非学習112F32完全一致/no-grad load→15/15forwardを28.469614秒/$0.002214処理按分で完了（準備/回収/保持等別）。追加学習/新規生成/採否/SQL0、再試行0。旧9の15,421token全top1一致、新6は203/10,716不一致、本文3欄は115/380へ集中。REPOTは主客の1tokenが弱く、全体平均では品質を表せない。正解prefix下の外枠386/EOS6は一致し、上限延長だけの根拠なし。BOOK初回は不明内容/根拠が教師一致・日本語IDだけ既存ASCII64制約違反、SHOP初回の別名は合法。次はreader不変で出力ID条件明示を優先し、本文/参照/全更新の局所学習設計を分けて見直す。追試/追加学習へ自動進行しない。新観測会は今は不要。全44payload＋manifest/45memberをhash照合・原本ZIP保全、一回閉鎖。通常意味11/本文9・新6本文0の不採用、商品0/正式0/3/54.50％は不変。原本token_diagnostic_result/README・weekly§74、GPU稼働保持。
+**現在の直接作業（10/27：ID条件明示と固定198token重点化30更新案を実CPU確認、新GPUは判断前）：** APIa4b91b4でquote出力仕様へ既存unknown_id ASCII64/参照条件1項目だけ追補、reader/教師/legacy不変。Jupyter CPU14.888497秒で全15の新旧差1項目・45token増/全長7980/生成枠込み8131、教師全文/target IDs/EOS・旧本文/問い維持、ID21条件、固定mask198・CE/勾配/causal shift・改変4拒否を確認。consumer CPU34.190337秒で15input/合成教師cold3一致、実モデル成功ではない。実4B読込/forward/学習/生成/SQL0、pending executeはoutput前拒否。次の一回案は保存109c/112F32から全文CE＋既知198位置だけ相対16倍、同15各2回/30更新→保存・非学習reload→15自由生成、最大2700秒/$0.21処理按分（準備/回収/保持等別）。旧9は既存CE、新指示とlossの効果は個別帰属せず、実GPUは個別判断前。新観測会は今は不要。全29payload＋manifest/30memberを照合・保全。原本localized30_preparation/README・weekly§75。通常11/9・新6本文0の不採用、商品0/正式0/3/54.50％は不変。GPU稼働保持。
 
-[最新実結果・全原本](token_diagnostic_result/README.md)、[具体案・source・実CPU履歴](token_diagnostic_preparation/README.md)。一回は完了・閉鎖しました。正解prefix付き診断値を通常生成・CMEE採用・商品品質へ加算しません。以下は§72以前の履歴です。
+[次の具体案・source・実CPU原本](localized30_preparation/README.md)、[前回診断実結果](token_diagnostic_result/README.md)。新有料一回は判断前です。閉鎖した前回診断の承認枠は再利用せず、正解prefix付き診断を通常生成成功へ換算しません。以下は§72以前の履歴です。
 
 <a id="native15-expanded15-recovery-result"></a>
 ## 2026-10-27 — 保存済み重みの非学習再読込と15確認完了、品質は改善せず

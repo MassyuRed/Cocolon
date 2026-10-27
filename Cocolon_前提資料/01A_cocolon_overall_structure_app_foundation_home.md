@@ -5205,3 +5205,20 @@ current00/観測入口/同training README#native15-interleaved30-proposal/weekly
 | token_diagnostic_result/diagnostic_evidence_20261027.zip・manifest・external_verification | 全15完全token report/source5/CPU/凍結入力4/既存raw15/実runとreload/launch/log、44payload＋manifest45member。1032831bytes/SHAd2b94c69、全member外側照合。重みは既保存109c参照 |
 
 今回の実測は正解prefix付き既知教材診断で通常生成成功/採用/商品品質へ加算しない。通常11/9・新6本文0、商品0/正式0/3/54.50％は不変。次は既存unknown_id制約の出力明示を優先、readerは変えず、局所学習の追加実行へ自動進行しない。STRUCTURE_MAP_DELTA_NONE。
+
+
+### 2026-10-27 — ID条件の出力明示とlocalized30準備
+
+APIa4b91b4は既存model_candidate_source.pyのquote分岐にunknown_id ASCII64/非衝突/参照を示すspec1項目だけ追加、既存test_cmee_quote_candidate.pyとtest_cmee_emlis_sixrow.pyに回帰確認を追補。責務・wire・意味型・reader・既定legacy prompt・通常app接続は不変、STRUCTURE_MAP_DELTA_NONE。
+
+| 同training rootのlocalized30_preparation/ | 責任・状態 |
+|---|---|
+| README・localized30.plan.json・run_localized30.py | 同109c/112F32→同15/30更新→保存非学習reload→15自由生成の具体案。全文CE＋静的198位置16倍、最大2700秒/$0.21、新GPU未承認/pending output前拒否 |
+| local_token_loss.py・fixed_token_mask.json | 旧109c診断の既知198位置だけを重点化し、ID別名5を外す。新prefixで相対位置を保持、旧9は既存CE。未知一般化・効果保証なし |
+| prepare_localized30.py・api_changes.json・dependency_bindings.json | 既存ID条件明示だけの新prompt/固定教師/実tokenizer/診断mask/外部依存のCPU束縛。旧原本は上書きしない |
+| actual_cpu_check・pending_execution_check・consumer_cpu_check | CPU14.888497秒/15教師保持/7980/8131・ID21条件・mask/勾配/shift、pending拒否。consumer34.190337秒/入力15/合成教師cold3、実4B処理0 |
+| consume_localized30.py | 新入力identityを束縛し、既存CMEE readerへ無補修rawを渡す。既存cold workerを使用。通常service/SQL/動的priorではない |
+| train_messages.jsonl・eval_inputs.jsonl | 凍結15の教師全文不変、モデル入力だけID条件1項目追加の別版。評価にassistant教師を渡さない |
+| preparation_evidence ZIP・manifest・recovery_verification | 全29payload＋manifest30member/325368bytes/SHA757770c7…64869e、初回CPU丸め差停止と修正後原本を区別して保全。重みは既存109c参照 |
+
+最新現在地は全体00/観測入口/training/weekly§75。新有料GPUは別一回の個別判断前、通常11/9・新6本文0の不採用、商品0/正式0/3/54.50％、GPU稼働保持。

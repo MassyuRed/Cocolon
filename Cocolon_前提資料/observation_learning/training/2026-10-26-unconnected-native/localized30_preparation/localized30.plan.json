@@ -60,7 +60,7 @@
     "TRAIN-SERVICE-CHAIR-02-CORRECTION"
   ],
   "runner_sha256": "1f6f709de911c18e665fea27d39c311028a1e571c2b5508ff8cd762a027a7992",
-  "cpu_check_sha256": null,
+  "cpu_check_sha256": "66642e828981054835ae8f791bb7a0555ab9d50208c534af450422fdbdb61031",
   "status": "PREPARED_AWAITING_MASH_APPROVAL",
   "gpu_run_authorized": false,
   "approval_basis": null

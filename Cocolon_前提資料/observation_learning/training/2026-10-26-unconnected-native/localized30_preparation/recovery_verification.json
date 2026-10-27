@@ -1,0 +1,76 @@
+{
+  "bytes": 325368,
+  "sha256": "757770c7331e02d2cc6a8c346aac80c8e06b29ed73a1cf97084afd799f64869e",
+  "payloads": 29,
+  "members": 30,
+  "cpu_seconds": 14.888497235951945,
+  "consumer_cpu_seconds": 34.190337334992364,
+  "max_full": 7980,
+  "max_prompt_plus_cap": 8131,
+  "new_prompt_delta": [
+    45
+  ],
+  "cpu_sha256": "66642e828981054835ae8f791bb7a0555ab9d50208c534af450422fdbdb61031",
+  "mask_counts": [
+    [
+      "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      0
+    ],
+    [
+      "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      0
+    ],
+    [
+      "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      0
+    ],
+    [
+      "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      0
+    ],
+    [
+      "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      0
+    ],
+    [
+      "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      0
+    ],
+    [
+      "TRAIN-DAILY-CALM-01-INITIAL",
+      0
+    ],
+    [
+      "TRAIN-DAILY-CALM-02-INITIAL",
+      0
+    ],
+    [
+      "TRAIN-DAILY-CALM-03-INITIAL",
+      0
+    ],
+    [
+      "FT-BOOK-INITIAL",
+      13
+    ],
+    [
+      "FT-BOOK-AFTER-ANSWER",
+      62
+    ],
+    [
+      "FT-SHOP-INITIAL",
+      13
+    ],
+    [
+      "FT-SHOP-AFTER-ANSWER",
+      87
+    ],
+    [
+      "FT-REPOT-INITIAL",
+      2
+    ],
+    [
+      "FT-KNIT-INITIAL",
+      21
+    ]
+  ]
+}

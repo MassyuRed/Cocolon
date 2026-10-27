@@ -1878,3 +1878,8 @@ API4002b457の既存preparation.py/model_candidate_source.pyが、private cocolo
 ## 2026-10-26 — 4題材6教材のprivate版3接続（CPU完了）
 
 Mash承認c97d6794に基づき、既存4ownerのsource-derived admission/adapter3でBOOK/SHOPの初回実問い→説明ADD・元意味保持・gapのみ解消・一回答END、REPOT/KNIT初回ENDを接続した。本文は独立source readerで主客・時点・否定・程度・本人知覚・二対象の明示不明を照合。外側wire/schema/dataclass・通常API/DTO/DB/RN/依存・通常30秒/明示offline180秒は不変。対象394成功/HTTP2対象外、新SQL6状態の同snapshot再開と完成非生成再読、旧18構成の1,851,616bytes全一致、native6/EOS/context8192 max7935を確認。新4B学習/生成0、旧2560出力枠では2回答targetが長すぎるため次のGPU条件は未決。STRUCTURE_MAP_DELTA_PRESENT、型追加0、商品0/正式0/3/54.50％。実原本・全本文・失敗履歴・全pathは `observation_learning/training/2026-10-26-unconnected-native/README.md#sixrow-cpu-implementation` と最新weekly§56。
+
+
+## 2026-10-27 — 既存unknown ID条件のモデル向け明示
+
+APIa4b91b4の既存model_candidate_source.pyはquote形式の出力仕様だけに、現readerが既に要求するunknown_id ASCII1..64・claim/relation IDとの非衝突・current/prior参照・description分離を明示した。意味内容・合法ID別名を狭めず、既定legacy_numeric・reader・wire/型・通常app/SQLは変更しない。Jupyter CPU全15のmessages差はspec1項目、教師本文/target IDs不変・旧本文/問い維持、ID21条件を確認。新しい4B学習は未実行で、localized30_preparationに固定198位置の学習案と実CPU原本を置く。consumerの合成教師cold3は実モデル成功ではない。STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。最新weekly§75/全体00を現在地とする。
