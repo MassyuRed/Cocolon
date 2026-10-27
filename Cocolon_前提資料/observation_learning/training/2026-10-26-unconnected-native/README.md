@@ -1,15 +1,19 @@
 # 10/26 — 未接続の既存6教材とCMEE受理範囲／一括接続案
 
-状態：**10/27：承認済みlocalized30一回は終了・回収保全済み。意味11/15・本文9/15、新6本文0/6。新937233a0は通常不採用。意味11/本文9・新6本文0で前回から本文成立は増えていない。**
+状態：**動的重点配分30更新案は実CPU確認済み・新GPUは個別判断前。** 前回localized30の意味11/15・本文9/15、新6本文0/6と新937233a0通常不採用は不変。
 
+<a id="native15-adaptive30-proposal"></a>
+## 2026-10-27 — 重点位置を毎forward見直す候補
+
+**現在の直接作業（10/27：動的重点配分30更新案をJupyterでCPU確認、実GPUは未実行）：** 同109c・同15教師/同prompt/同30順序/LR1e-5/112F32を保ち、旧9は既存CE、新6の全10,716targetへ毎forward1〜16の重点を再計算する候補を実装。CPU4.995651秒で全26,137target/EOS/終端改行/causal shift/有限勾配を確認、consumer CPU27.004796秒で15prompt一致と前回保存済み3snapshotの別process再読一致を確認。実4B読込/forward/学習/新規生成/SQL0、新GPUoutput前のpending拒否を確認。旧診断値の配分再計算であり、新方式の効果は未測定。前回の意味11/本文9・新6本文0と937233a0通常不採用、商品0/正式0/3/54.50％は不変。次の別一回案は30更新→保存・非学習112一致reload→15自由生成と同CMEE/全本文確認、最大2700秒/$0.21処理按分（準備/CPU/回収/保持等別）の明示判断前。新観測会は今は不要。原本adaptive30_preparation/README・weekly§77、GPU稼働保持/Stop・restart・delete0、automatic_progression=false。
+
+[具体案・source・実CPU原本](adaptive30_preparation/README.md)。固定198位置を反復する代わりに新6の全targetを対象とし、正解確率から重み1〜16を毎forward再計算する。旧9/教師/入力/readerは不変。旧診断値での配分は旧203誤位置の合計が固定方式より下がるcaseもあり、改善保証はない。既知FITの自由生成・意味・全7/8更新・本文を一緒に確認する。
 
 <a id="native15-token-diagnostic-proposal"></a>
 <a id="native15-localized30-result"></a>
-## 2026-10-27 — localized30実行結果・一回閉鎖
+## 前回localized30 — 一回終了・新候補不採用
 
-**現在の直接作業（10/27：承認済みlocalized30一回を終了・原本保全）：** 30更新・新保存・112F32/3,833,856parameterの非学習再読込を完了。自由生成15/15、EOS15・strict JSON14、同CMEEの意味11/15・本文9/15（旧9意味/本文9/9、新6意味/本文2/0）。採用snapshotの別process cold-fileは11/11完全一致、失敗0。処理1524.400948秒・$0.118565按分（準備/CPU/回収/保持/保存/通信/税等別）。旧9は全raw_text/教師packet/本文を維持。新6はEOS6/strict5まで完結性が改善したが、BOOKのID・重複キー、回答後の根拠/更新不足、REPOT主客反転、KNIT意味scope/本文反復が残った。新937233a0は通常不採用。意味11/本文9・新6本文0で前回から本文成立は増えていない。 最初のwrapper事前拒否は実4B処理0で、修正後の実モデル実行は一回だけ。原本localized30_result/README・最新weekly§76。既存教師で長い意味・全更新・根拠・自然本文を同時に保持する学習設計をCPU準備から見直す。新観測会は今は不要。同じ回数/LRだけの有料反復や閉鎖run再起動へ自動進行しない。 商品0/正式0/3/54.50％、GPU稼働保持。
-
-[今回の実結果・全出力・保存重みのidentity](localized30_result/README.md)、[承認時の具体案・source・実CPU原本](localized30_preparation/README.md)、[前回診断実結果](token_diagnostic_result/README.md)。今回と前回の一回はともに閉鎖済み。以下は§72以前の履歴です。
+[前回の全実結果](localized30_result/README.md)。30更新/非学習112一致reload/15生成、EOS15・strict14・意味11・本文9、新6本文0。採用11snapshot cold一致には本文なし2件を含む。新937233a0は通常不採用、実行/承認枠は閉鎖済み。前回と今回のGPU効果を混同せず、以下は過去の履歴として保持する。
 
 <a id="native15-expanded15-recovery-result"></a>
 ## 2026-10-27 — 保存済み重みの非学習再読込と15確認完了、品質は改善せず

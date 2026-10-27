@@ -2,7 +2,7 @@
 
 **最新GPU確認（2026-10-27 JST）：** MashがA5000を本人レンタルし、Pod bkj4qvnhwtdqc2（physical_yellow_anglerfish、表示$0.28/h）のReadyなJupyterへ直接接続した。NVIDIA RTX A5000、VRAM25,285,623,808bytes/空き25,062,342,656bytes、Python3.12.3/Torch2.8.0+cu128/CUDA/BF16を実確認。公式固定base revisionの取得、旧45779adapter/不変helper/API6blob/15教材の23file復元と固定依存の一致、実tokenizer15件/EOS/切捨て0/max7935/8192を確認済み。GPU管理画面は新Pod接続の取得だけで終了し、以後Jupyter直接。Stop/再起動/削除/別Pod/追加chargeは0。前のレンタル自動審査拒否は履歴であり、現在の接続blockerではない。
 
-**現在の直接作業（10/27：承認済みlocalized30一回を終了・原本保全）：** 30更新・新保存・112F32/3,833,856parameterの非学習再読込を完了。自由生成15/15、EOS15・strict JSON14、同CMEEの意味11/15・本文9/15（旧9意味/本文9/9、新6意味/本文2/0）。採用snapshotの別process cold-fileは11/11完全一致、失敗0。処理1524.400948秒・$0.118565按分（準備/CPU/回収/保持/保存/通信/税等別）。旧9は全raw_text/教師packet/本文を維持。新6はEOS6/strict5まで完結性が改善したが、BOOKのID・重複キー、回答後の根拠/更新不足、REPOT主客反転、KNIT意味scope/本文反復が残った。新937233a0は通常不採用。意味11/本文9・新6本文0で前回から本文成立は増えていない。 最初のwrapper事前拒否は実4B処理0で、修正後の実モデル実行は一回だけ。原本localized30_result/README・最新weekly§76。既存教師で長い意味・全更新・根拠・自然本文を同時に保持する学習設計をCPU準備から見直す。新観測会は今は不要。同じ回数/LRだけの有料反復や閉鎖run再起動へ自動進行しない。 商品0/正式0/3/54.50％、GPU稼働保持。
+**現在の直接作業（10/27：動的重点配分30更新案をJupyterでCPU確認、実GPUは未実行）：** 同109c・同15教師/同prompt/同30順序/LR1e-5/112F32を保ち、旧9は既存CE、新6の全10,716targetへ毎forward1〜16の重点を再計算する候補を実装。CPU4.995651秒で全26,137target/EOS/終端改行/causal shift/有限勾配を確認、consumer CPU27.004796秒で15prompt一致と前回保存済み3snapshotの別process再読一致を確認。実4B読込/forward/学習/新規生成/SQL0、新GPUoutput前のpending拒否を確認。旧診断値の配分再計算であり、新方式の効果は未測定。前回の意味11/本文9・新6本文0と937233a0通常不採用、商品0/正式0/3/54.50％は不変。次の別一回案は30更新→保存・非学習112一致reload→15自由生成と同CMEE/全本文確認、最大2700秒/$0.21処理按分（準備/CPU/回収/保持等別）の明示判断前。新観測会は今は不要。原本adaptive30_preparation/README・weekly§77、GPU稼働保持/Stop・restart・delete0、automatic_progression=false。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 
@@ -229,6 +229,3 @@ D05でMashは「事実を事実として捉えるのも観測」と教示し、�
 次に観測会を行う場合は、華恋が新しい観測会フォルダを作り、対話と教示を保存し、この一覧を更新します。Mashには普段の形で実演していただき、整理・参照の整備は華恋が担います。今回、定期実行の日時や頻度は設定していません。
 
 保存先を増やすための新システムやDBは作らず、既存のGitHub上で継続します。製品の構造・契約・CMEE実装を変更する場合は、その作業で対象の設計と接続を扱います。
-
-
-

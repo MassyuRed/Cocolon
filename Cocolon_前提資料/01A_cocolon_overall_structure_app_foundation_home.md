@@ -5242,3 +5242,20 @@ APIa4b91b4は既存model_candidate_source.pyのquote分岐にunknown_id ASCII64/
 | `repo_payload_manifest.json` | 今回GitHubへ反映する全pathとbytes/Git blob/SHA256の固定予定集合（manifest自身を除く） |
 
 凍結教師/評価/実行sourceは既存preparation ownerへ戻る。新result側は実測と原本回収を所有し、同じ教材を新教師として数えない。重み入り原本は全82payload＋manifest/83member、15171902bytes、SHA256 `d77f865ef019c6cd69988733ac4dcb13b808292157660057497590b1c7ad6a20`をPod外でCRC/size/hash照合し保存。新adapter SHA256 `937233a0d2f89425bf42abf971f4e37662bb2db8c6fddaf3fe5884349e1d95bd`。全体00/観測入口/training/weekly§76を同単位同期。商品0/正式0/3/54.50％、GPU稼働保持。
+
+
+
+### 2026-10-27 — 動的重点配分30更新案・CPU確認のfile地図
+
+対象familyは`observation_learning/training/2026-10-26-unconnected-native/adaptive30_preparation/`。
+
+| path/family | 責任 |
+|---|---|
+| `adaptive_loss.py` | 新6の全文target/EOSへ現在forwardの誤差に応じたdetached重み1〜16。旧9は既存helper直呼び。生成補修・readerではない |
+| `prepare_adaptive30.py`・`actual_cpu_check.json` | 既存source/教師/全target/旧診断からの配分とcausal shift/勾配のCPU確認。実4B処理0 |
+| `run_adaptive30.py`・`adaptive30.plan.json`・`pending_execution_check.json` | 別一回の30更新・保存/非学習112一致reload・最大15生成候補。未承認はoutput前拒否、実GPUは未実行 |
+| `consume_adaptive30.py`・`consumer_cpu_check.json`・`*_consumer_smoke.json` | 同CMEE/既存cold worker、15prompt一致/前回保存済み3snapshot別process再読。新モデル成功ではない |
+| `train_messages.jsonl`・`eval_inputs.jsonl` | localized30の同15をbytes不変で複写。新教材・正解変更なし |
+| `cpu_launch.json`・`consumer_cpu_launch.json`・`execution/`・`runtime_archive_manifest.json`・`archive_identity.json`・`README.md` | 固定source0107e020のCPU原本/一回案/回収照合。GPU承認とは別 |
+
+CPU4.995651秒/consumer27.004796秒、17payload＋manifestの全hash照合済み。前回11/9・新6本文0は不変。STRUCTURE_MAP_DELTA_NONE（app/API/DB/RN/readerの責任変更なし）、商品0/正式0/3/54.50％、GPU保持、最新weekly§77。

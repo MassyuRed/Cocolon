@@ -3096,3 +3096,18 @@ Mashがproposal `1cfc0f838186574c6cbc870e7b94f6706dab39aa`の同15教材30更新
 既存教師で長い意味・全更新・根拠・自然本文を同時に保持する学習設計をCPU準備から見直す。新観測会は今は不要。同じ回数/LRだけの有料反復や閉鎖run再起動へ自動進行しない。
 
 同15教師/全文/target IDsと元109c、reader/採用条件/APIa4b91b4は不変。新指示と重点lossの効果は個別帰属しない。既知FITの測定であり、未知一般化・実初回からの動的prior・通常service/SQL・本人端末・Piece/Analysis品質・正式商品受入れは未成立。商品0/正式0/3/54.50％、PRODUCT_NOT_CLEAR、candidate_ready=false、automatic_progression=false。製品責務/型/wire/通常接続は不変でSTRUCTURE_MAP_DELTA_NONE。GPUは稼働保持し、Stop/restart/delete・追加有料run・merge/deploy0。限定TECHNICAL_CREDITで、正式Pro/Ultra/human商品受入れではない。通常API/DB/RN/Render/Supabase/価格/依存の変更0。全体00/観測入口/training/prep/01A/CMEE map/共有設計を同単位同期した。
+
+
+
+<a id="20261027-native15-adaptive30-prepared"></a>
+## 77. 10/27 — 重点位置を毎forward再計算する30更新案、CPU確認・新GPU判断前
+
+**現在の直接作業（10/27：動的重点配分30更新案をJupyterでCPU確認、実GPUは未実行）：** 同109c・同15教師/同prompt/同30順序/LR1e-5/112F32を保ち、旧9は既存CE、新6の全10,716targetへ毎forward1〜16の重点を再計算する候補を実装。CPU4.995651秒で全26,137target/EOS/終端改行/causal shift/有限勾配を確認、consumer CPU27.004796秒で15prompt一致と前回保存済み3snapshotの別process再読一致を確認。実4B読込/forward/学習/新規生成/SQL0、新GPUoutput前のpending拒否を確認。旧診断値の配分再計算であり、新方式の効果は未測定。前回の意味11/本文9・新6本文0と937233a0通常不採用、商品0/正式0/3/54.50％は不変。次の別一回案は30更新→保存・非学習112一致reload→15自由生成と同CMEE/全本文確認、最大2700秒/$0.21処理按分（準備/CPU/回収/保持等別）の明示判断前。新観測会は今は不要。原本adaptive30_preparation/README・weekly§77、GPU稼働保持/Stop・restart・delete0、automatic_progression=false。
+
+前回§76の固定198位置重点化で本文成立が増えなかった結果を受け、同じ初期109c/同15教師・入力・LR・順序・112tensorを保ち、新6の全targetで現在forwardの正解確率からdetached重み1〜16を再計算する候補を用意した。旧9は既存helperの全文CEをそのまま使用。標準focal lossとは呼ばない。旧診断26,137tokenのCPU再計算では既知203誤位置への係数合計が固定198方式より全6caseで下がり、効果・最適性・誤prefix回復は未測定。新規学習の成功を期待で確定しない。
+
+[具体案と全CPU原本](../observation_learning/training/2026-10-26-unconnected-native/adaptive30_preparation/README.md)。source0107e020c259e2947b8cadc34e217355a55e9721をJupyter直接/root単一writerで読戻し、CPU4.995651372秒。全15prompt/教師/26,137target、EOSと終端改行、context/cap/causal shift/有限重みと勾配/旧9ownerを確認。consumer CPU27.004795804秒で15prompt再構成と、前回保存済み椅子訂正/SHOP初回/REPOT3snapshotの別process全outcome一致。実モデル・新生成・SQLは0。new output前の未承認execute拒否、新GPUoutput不存在。初期ターミナル/起動コードの形式不備は解析/compile時に拒否され効果0、訂正後CPU一回でモデル再試行ではない。
+
+別のGPU一回は最大2700秒/$0.21処理按分、30更新→保存/全112F32非学習reload→同15自由生成→無補修CMEE/全本文/問い/全更新/cold確認の個別判断前。準備/CPU/回収/保持/保存/通信/税等は別。全15完了保証なし、異常は保全して一回閉鎖。新観測会不要、旧承認/残枠再利用0。source/CPU/GitHub反映のみ今回続行＋Rule18§11.3の範囲で、新有料処理には前回承認を流用しない。
+
+CPU原本355720bytes/SHA19a355b1697d4defb848b7e90e23363153ee501d8661a73c9d3fe62bbbfaf0a3、17payload＋manifest/18memberをPod外CRC/size/hash照合してmemberを値不変保存。APIa4b91b4/採用reader/教師/本人DB/RN/Render/Supabase/価格/依存/merge/deploy変更0。A5000/1MiB/24564MiB、稼働保持/Stop・restart・delete0、管理console/API0。補助はread-onlyレビューで正式Pro/Ultra/human商品受入れではない。primary=TECHNICAL_CREDITは学習準備/CPU接続確認のみ。商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=false、STRUCTURE_MAP_DELTA_NONE。全体現在地/観測入口/training入口/01A/CMEE地図を差分同期。

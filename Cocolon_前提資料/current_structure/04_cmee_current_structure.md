@@ -1883,3 +1883,9 @@ Mash承認c97d6794に基づき、既存4ownerのsource-derived admission/adapter
 ## 2026-10-27 — 既存unknown ID条件のモデル向け明示
 
 APIa4b91b4がquote出力仕様へ既存unknown_id ASCII1..64/非衝突/正確なcurrent-prior参照/description分離を明示した事実は不変。その固定入力による承認済みlocalized30は一回終了。30更新・新保存・112F32/3,833,856parameterの非学習再読込を完了。自由生成15/15、EOS15・strict JSON14、同CMEEの意味11/15・本文9/15（旧9意味/本文9/9、新6意味/本文2/0）。採用snapshotの別process cold-fileは11/11完全一致、失敗0。処理1524.400948秒・$0.118565按分（準備/CPU/回収/保持/保存/通信/税等別）。旧9は全raw_text/教師packet/本文を維持。新6はEOS6/strict5まで完結性が改善したが、BOOKのID・重複キー、回答後の根拠/更新不足、REPOT主客反転、KNIT意味scope/本文反復が残った。新937233a0は通常不採用。意味11/本文9・新6本文0で前回から本文成立は増えていない。原本 `observation_learning/training/2026-10-26-unconnected-native/localized30_result/README.md`・最新weekly§76。reader/意味型/wire/通常app/SQLの構造差分はなくSTRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。
+
+
+
+### 2026-10-27 — 動的重点配分のCPU候補
+
+既存学習rootの`adaptive30_preparation/README.md`・weekly§77を次の候補ownerとする。同109c/15教師/入力/readerのまま、旧9CEを維持し新6の全targetへ現在forwardの誤差で重み1〜16を再計算する。CPU4.995651秒/consumer27.004796秒、15prompt一致/前回保存済み3再読一致。実4B読込・forward・学習・新規生成は0。30更新→保存・非学習112一致reload→15確認、最大2700秒/$0.21処理按分は別の個別判断前。前回11/9・新6本文0と通常不採用を保持し、配分計算を品質改善に数えない。STRUCTURE_MAP_DELTA_NONE（意味型/wire/reader/商品責務/通常経路不変）。
