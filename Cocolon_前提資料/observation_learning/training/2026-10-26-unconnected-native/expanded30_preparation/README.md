@@ -1,6 +1,6 @@
 # 同じ8層の注意・MLPへ学習対象を広げる30更新候補
 
-状態：**実CPU確認済み／新GPU一回は未承認・未起動**。旧ordered30は閉鎖・新483d74b7不採用のまま保持し、旧承認/出力/残枠は再利用しません。
+状態：**実CPU確認済み／Mashが2026-10-27（JST）に本具体案2bbの新GPU一回を明示承認、起動前**。旧ordered30は閉鎖・新483d74b7不採用のまま保持し、旧承認/出力/残枠は再利用しません。
 
 **現在の直接作業（10/27：学習対象を同8層の注意・MLPへ広げるexpanded30候補、実CPU確認済み・新GPU一回は判断前）：** ordered30の意味3/本文3への退行を受け、初期1dの旧32tensorを完全保持し、同8層のk/oとMLP gate/up/downへ40moduleを追加する56module/112F32/3,833,856parameter候補を実装。新40Bをzeroにした初期化をJupyter CPU6.591629秒で作成し、旧32一致・実tokenizer15/切捨て0/max7935・固定API入力/prior15一致・pending executeのoutput前拒否を確認。小CPU層の勾配有限確認だけ3.424515秒で追補。全13payload＋manifestと112F32有限/新40BzeroをPod外照合・保全。元sorted教師/全文CE/LR1e-5/同30順序/評価/readerは維持し、実4B読込/forward/更新/生成0。新一回は30更新→保存/同process非学習reload→同15確認、最大2700秒/各180秒/15call/$0.21処理按分（準備/回収/保持等別）の個別判断前。旧runは閉鎖・新観測会は今は不要、原本expanded30_preparation/README・weekly§70。商品0/正式0/3/54.50％、GPU稼働保持。
 
@@ -46,7 +46,9 @@
 
 CPU成功は、実4Bの読込成立・学習効果・15件生成・CMEE採用・商品品質の証拠ではありません。model_reload_4b_tested=falseです。
 
-## 提案する新GPU一回
+## 承認済みの新GPU一回
+
+Mashが本案commit 2bb10230f2bb961422513b31d6c6418ecbc3b262の「30更新→保存・再読込→15件確認／最大45分・処理按分$0.21（準備・回収・保持等別）」へ「進めていいよ。」と承認。planはstatus/gpu_run_authorized/approval_basisの3fieldだけを変更し、承認反映commitを--source-commitへ束縛して一回起動します。旧runの承認は再利用しません。
 
 | 項目 | 固定範囲 |
 |---|---|
@@ -71,7 +73,7 @@ CPU成功は、実4Bの読込成立・学習効果・15件生成・CMEE採用・
 | file | 責任 |
 |---|---|
 | run_native15_expanded30.py | CPU初期値の作成/検証、全112tensorの完全読込・trainable限定、同30更新/保存/非学習reload/15call |
-| gpu30_expanded.plan.json | 条件・初期3hash・予算。PREPARED_AWAITING_MASH_APPROVAL / gpu_run_authorized=false |
+| gpu30_expanded.plan.json | 条件・初期3hash・予算。AUTHORIZED_ONCE_BOUND / gpu_run_authorized=true（本一回限り） |
 | consume_expanded30.py | 拡張初期値/実30log/sourceを束縛し、従来の無補修採否・cold-file。API/reader変更0 |
 | verify_expanded30_cpu.py | 実tokenizer/入力・小CPU層・pending拒否の確認。実4B処理0 |
 | actual_cpu_check*.json / warmstart_report.json | 実結果、初回と有限性追補のlineage、非学習初期値のidentity |
