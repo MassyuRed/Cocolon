@@ -1,0 +1,104 @@
+{
+  "schema": "cocolon.native15_continuation30.old9_content_review.v1",
+  "source_commit": "e1ed975034ffaf6eb1c1b8a662d8cf8e16c4d3aa",
+  "adapter_revision": "dd1188e8d715cf2d7bb1479c5c2158a0ecc98a9355d80f3d94510736bddc317b",
+  "review": "root integration of original files plus balanced30_scope_review read-only agent; not formal Pro/Ultra/human acceptance",
+  "raw_read_count": 9,
+  "eos_count": 9,
+  "json_parsed_count": 9,
+  "parsed_entire_packet_equals_teacher": 9,
+  "parsed_entire_packet_equals_initial_1d": 9,
+  "parsed_entire_packet_equals_previous_228": 6,
+  "cases": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "teacher_packet_equal": true,
+      "initial_1d_packet_equal": true,
+      "previous_228_packet_equal": true,
+      "evidence_quote_count": 6,
+      "update_count": 0
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "teacher_packet_equal": true,
+      "initial_1d_packet_equal": true,
+      "previous_228_packet_equal": false,
+      "evidence_quote_count": 12,
+      "update_count": 3
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "teacher_packet_equal": true,
+      "initial_1d_packet_equal": true,
+      "previous_228_packet_equal": true,
+      "evidence_quote_count": 6,
+      "update_count": 0
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "teacher_packet_equal": true,
+      "initial_1d_packet_equal": true,
+      "previous_228_packet_equal": false,
+      "evidence_quote_count": 12,
+      "update_count": 3
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "teacher_packet_equal": true,
+      "initial_1d_packet_equal": true,
+      "previous_228_packet_equal": true,
+      "evidence_quote_count": 6,
+      "update_count": 0
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "teacher_packet_equal": true,
+      "initial_1d_packet_equal": true,
+      "previous_228_packet_equal": false,
+      "evidence_quote_count": 12,
+      "update_count": 3
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "teacher_packet_equal": true,
+      "initial_1d_packet_equal": true,
+      "previous_228_packet_equal": true,
+      "evidence_quote_count": 8,
+      "update_count": 0
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "teacher_packet_equal": true,
+      "initial_1d_packet_equal": true,
+      "previous_228_packet_equal": true,
+      "evidence_quote_count": 8,
+      "update_count": 0
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "teacher_packet_equal": true,
+      "initial_1d_packet_equal": true,
+      "previous_228_packet_equal": true,
+      "evidence_quote_count": 8,
+      "update_count": 0
+    }
+  ],
+  "substantive_reading": {
+    "initial_chair": "修理・また座れる結果・全部一人で直せた対象と喜び、実問い候補を保持。新しい原因/主体/時点を補っていない。",
+    "corrected_chair": "元の修理/結果/喜びを残し、友人の教示・共同修理・捨てずに再使用できた喜びへ訂正。3更新/全12引用/正しい根拠範囲を復旧し、一人でできた喜びを復活させない。",
+    "daily": "帰宅→作る/食べる・TE・温かいもの/少し落ち着いたTARAを保持。程度は少しで、身体状態や理由を補わない。",
+    "naturalness": "全9の観測/受け取り/訂正文は初期1dおよび教師と同じ。前回228から構造は復旧したが、新たな文体改善ではない。喜び語の反復と硬い訂正記録文は教師由来で残る。",
+    "counting": "旧9は2言語familyのidentity反復であり、未知9場面ではない。"
+  },
+  "cmee_meaning_adopted": null,
+  "cmee_body_available": null,
+  "cmee_cold_file": null,
+  "consumer_status": "NOT_YET_RUN_AT_REVIEW; proposed surfaces are not adopted CMEE bodies",
+  "raw_repair": false,
+  "new_model_calls": 0,
+  "agent_tests": 0,
+  "agent_writes": 0,
+  "product_credit": 0,
+  "candidate_ready": false,
+  "automatic_progression": false
+}
