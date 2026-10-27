@@ -29,7 +29,7 @@
   "product_accepted": false,
   "gpu_lifecycle_operations": 0,
   "runner_sha256": "e4be86a2b6fb0581961fc3c619853ba7f419e3239464e969214772b8bc3bfb54",
-  "status": "PREPARED_AWAITING_MASH_APPROVAL",
-  "gpu_run_authorized": false,
-  "approval_basis": null
+  "status": "AUTHORIZED_ONCE_BOUND",
+  "gpu_run_authorized": true,
+  "approval_basis": "Mash explicit approval on 2026-10-27 JST of saved-weight evaluation recovery proposal d02655837be135f02022e16346fc95488de52bd4: 進めていいよ。 One run only: zero training updates -> saved109c inference-only reload -> same15; max2700sec/max15calls/USD0.21 processing prorated; preparation/recovery/holding etc separate. No retry and no reuse of closed expanded30 authority."
 }
