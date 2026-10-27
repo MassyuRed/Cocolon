@@ -3204,3 +3204,23 @@ Mash添付の今回Pod94a06hhxu51uy4と前回bkj4qvnhwtdqc2を区別した。今
 得られた新rawは同じreaderへ無補修で渡し、意味採否/原sourceと根拠対応/全7・8更新/本文・問い・留保を全件読む。採用snapshotがある場合だけ既存cold-file確認へ渡す。成功しても既知回答後2件だけで、旧9の新prompt回帰/新初回4件/全15新評価/実初回からの動的thread/通常service・SQL/本人端末/Piece・Analysis/未知一般化/正式商品受入れへ拡張しない。新観測会は現不具合の解消には不要。
 
 実source/checker/CPU/復元log/未承認plan/runner/consumerの原本と回収照合結果は同family READMEへ保存する。最終CPU原本ZIPは14,287bytes/9payload＋manifestの10member、SHA256 `84d522047bbe22f491de8dfda4a02a5e7ece3261e50d8ff77652ddb6df4b3114`。先行CPU/adapter原本のarchiveと区別し、ZIP/memberの照合詳細は各manifestへ戻る。今回の直接作業は実行可能な入力候補・CPU準備の確認で、モデル品質成功ではない。商品0/正式0/3/54.50％、前回意味/本文0/2・d431通常不採用、candidate_ready=false、automatic_progression=falseを維持。通常API/DB/RN/Render/Supabase/本人DB/配置/merge/deploy変更0、STRUCTURE_MAP_DELTA_NONE。全体00/観測入口/学習owner/01A file地図を同単位更新する。
+
+
+<a id="20261028-update-obligations-probe2-result"></a>
+## 84. 10/28 — 承認済み更新義務指示probe2一回終了、BOOKの引用位置と7更新列挙は改善・意味/本文0/2で案不採用
+
+**現在の直接作業（10/28）：** Mashが今回の「学習0・保存d431非学習load1・BOOK/SHOP回答後各1生成・最大600秒/$0.047処理按分（準備/回収/保持等別）」へ「進めていいよ。」と明示承認した。一回を同Pod94a06hhxu51uy4のJupyterへ直接接続して実行し、追加学習0/load1/2自由生成/EOS2/strict JSON1/2/timeout0/retry0で終了。処理291.55770153400954秒（4分52秒）/$0.022676710119311858按分、単価$0.28/h。前回の消費済みplanを呼び直さず、§83の新案へ承認を結んだ。今回の承認枠も消費済みで、追加学習・再生成・次の有料試行へ自動進行しない。
+
+[最終結果・原本](../observation_learning/training/2026-10-26-unconnected-native/update_obligations_probe2_result/README.md)。実行は準備固定source8065009526cd6a1ddd42155ab050dbe0666d43ca、保存d431の112F32/3,833,856parameterを非学習load1。optimizer作成/学習/新重み保存0、全112tensorを照合し、終了後の保存d431 hashも不変だった。学習済み重みを改良した一回ではなく、同じ保存重みのモデル向けupdates指示だけを比較した。QUOTE V3回答後2件の指示以外、元source/凍結prior/教師/3712cap/context8192/既存readerは変えない。全15の実入力/教師target確認は§83のCPU結果で、今回新しい自由生成は2件だけ。
+
+未変更API64c6cb1aのCMEEへrawを補修せず渡し、CPU1.8747465109918267秒で意味/本文0/2を確定した。BOOKはstrict JSONを満たし、13引用の位置受領が成立してquote receiptはCANDIDATE_UNREVIEWEDへ進んだ。更新も前回ADD1から6ADD＋GAP解消の7件列挙へ増えたが、関係のevidence[13..16]が13引用の範囲外で、各ADDのreplacementはclaimだけ/必要relation添付を欠き、末尾GAP解消のreplacement_refsも空ではない。実意味判定はUNSUPPORTED/model_evidence_out_of_scope。引用位置と件数の前進を、意味の正しさ・有効更新・本文成功に換算しない。
+
+SHOPはEOS3345tokenでもstrict parseでduplicate_json_keyとなり、receipt INVALID_FORMAT/REJECT semantic_receipt_not_validatedで停止した。rootの静的読解では、外側objectの未閉鎖とquotesの誤階層も残る。文字列上8更新を列挙するが、最初の4件はaction_link/past_reference/answer_concession/distance_linkで、新7claimを各ADDして最後にGAP解消する義務とは一致せず、最後のreplacement_refsも空ではない。件数が8というだけで全更新成立としない。モデル生成秒はBOOK136.253705/SHOP146.346867、両EOS到達/出力cap停止0であり、上限延長だけを次の改善策にしない。
+
+rootが原文と実rawを全件読み、BOOKの「遅いこと自体に気づかなかった」は本人の「遅くなると分かった時点」と逆で、receptionの列挙/「全部受け取っています」等も本人向け本文として不成立と確認した。SHOPにも本人の「と感じた」を「と理解し」へ変える留保の変質が残る。これはraw本文の静的所見であり、実際に本文readerが拒否した理由へ置換しない。両方採用snapshot0でcold-file保存再読は対象なし。採用基準や独立readerを緩めず、今回案は通常不採用とする。
+
+実行原本ZIPは58,899bytes、18payload＋manifest/19member、SHA256 `c7c0d1578599c7ae693258eddb979b26787abbb01657aeb895b016dcac0a015d`。Pod外でCRC/全memberのbytes・hashと実source一致を照合し、ZIPと展開memberを同一bytesで保全した。run/112load/2raw/CMEE診断、実行時plan/runner/consumer/CPU確認/入力/source manifest、GPU/CPU起動log/exitと終了後adapter hashを含む。base全重みやadapter本体は今回ZIPへ重複同梱せず、既存保全先と保存d431を保持する。`run.json`のRAW_COMPLETE_PENDING_UNCHANGED_CMEE_AND_BODY_REVIEWと、AUTHORIZED_ONCE_BOUNDの実行planは原本のまま凍結し、最終採否はRESULT READMEへ分ける。
+
+準備/CPU/回収/保持/保存/通信/税等は上記処理按分と別で、総請求額とはしない。GPUは稼働保持、Stop/restart/delete/管理API0。通常API/DTO/DB/RN/Render/Supabase/本人DB/配置/merge/deploy変更0、STRUCTURE_MAP_DELTA_NONE。rootが実行/反映を担当し、補助の読取・資料同期を正式Pro/Ultra/人手商品受入れとしない。
+
+今回評価したのは既知BOOK/SHOP回答後の2件だけ。旧9の新prompt回帰、新初回4件、全15の新評価、実初回出力からの動的thread、通常service/SQL保存、本人端末、Piece/Analysis、未知一般化の成功へ広げず、前回全15の意味11/本文9へ合算しない。新観測会は現不具合の解消には不要で、既存教師と無補修rawの根拠・関係参照・更新と本文を読み、残った不成立を先に見直す。同じ有料反復は追加しない。商品0/正式0/3/54.50％、d431通常不採用、candidate_ready=false/automatic_progression=falseを維持し、全体00/観測入口/学習owner/01A file地図を同期する。

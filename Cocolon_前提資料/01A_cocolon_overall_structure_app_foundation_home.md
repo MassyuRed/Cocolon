@@ -5318,9 +5318,9 @@ Cocolonのfamilyは`observation_learning/training/2026-10-26-unconnected-native/
 重みSHA d431a07cは不変で元保存先はadaptive30_result。今回selected2のみで全15/旧9/新初回4の新評価にしない。商品0/正式0/3/54.50％、GPU稼働保持。全体00/観測入口/training/CMEE地図/weekly§80を同期。
 
 
-### 2026-10-28 — 回答後更新指示候補の実CPU準備と未承認の新2件案
+### 2026-10-28 — 回答後更新指示候補の実CPU準備（承認前履歴）
 
-family：`observation_learning/training/2026-10-26-unconnected-native/update_obligations_preparation/`。状態は`CPU_READY_GPU_AWAITING_MASH_APPROVAL`。§82の認証前停止は履歴で、現在は同Pod94a06hhxu51uy4のJupyterLab/terminalへ直接接続済み。
+family：`observation_learning/training/2026-10-26-unconnected-native/update_obligations_preparation/`。以下は承認前の`CPU_READY_GPU_AWAITING_MASH_APPROVAL`時点の準備履歴。承認後の一回は終了しており、現在の結果ownerは後段の`update_obligations_probe2_result/`。§82の認証前停止も履歴として保持する。
 
 | path/family | 責任 |
 |---|---|
@@ -5335,3 +5335,20 @@ family：`observation_learning/training/2026-10-26-unconnected-native/update_obl
 開始時workspaceは空。今回A5000/24564MiB・使用1MiB、Python3.12.3/Torch2.8.0+cu128、固定4依存を確認し、既存source/公開tokenizer/保存d431を復元した。固定revisionのbase7file取得成功・exit0、pretrained model読込/forward/学習/生成0、pytest/SQL0。新一回の単価$0.28/h、準備/CPU/回収/保持/保存/通信/税等は処理600秒/$0.047と別。実行許可は未受領、旧run/planは消費済みのまま。
 
 前回意味/本文0/2・d431通常不採用と商品0/正式0/3/54.50％を保持。新観測会は現不具合の解消には不要。Stop/restart/delete/管理console/API0、通常API/DB/RN/Render/Supabase/配置不変。全体00/観測入口/学習owner/weekly§83へ同期。STRUCTURE_MAP_DELTA_NONE（商品責務/型/wire/reader/通常経路不変）、candidate_ready=false/automatic_progression=false。
+
+
+### 2026-10-28 — 更新義務指示probe2の実結果file地図
+
+対象familyは`observation_learning/training/2026-10-26-unconnected-native/update_obligations_probe2_result/`。承認済み非学習一回は終了・案不採用、準備owner/§83は履歴。商品責務/型/wire/reader/通常経路は不変でSTRUCTURE_MAP_DELTA_NONE。
+
+| path/family | 責任 |
+|---|---|
+| `README.md` | 一回の最終結果、意味/本文0/2、本文・根拠・全更新の読解と不採用理由、未評価範囲 |
+| `receipt.json` | 一回のCONSUMED_COMPLETE_NOT_ADOPTED / BLOCKER_NARROWED終了記録。実費用・0/2・変更0の境界・次の限定課題をbody-freeで保持 |
+| `approval.json・probe2.plan.json` | Mashの今回の明示承認「進めていいよ。」と学習0/load1/BOOK・SHOP回答後各1・最大600秒/$0.047処理按分の実行範囲。AUTHORIZED_ONCE_BOUNDは消費済み証拠で、再実行用ではない |
+| `run/run.json・run/loaded_tensors.json・run/after_*.jsonl（2）` | 固定source8065009、保存d431の非学習112F32読込1/2自由生成/EOS2/実usage原本。学習/新重み保存0、原本のpending表示は凍結保存 |
+| `run/cmee/diagnosis.json` | 未変更API64c6cb1aのquote受領・実意味採否と本文不成立。BOOKはCANDIDATE_UNREVIEWEDからUNSUPPORTED/model_evidence_out_of_scope、SHOPはINVALID_FORMATからREJECT/semantic_receipt_not_validated。採用snapshot0/cold対象なし |
+| `runtime/*・logs/*・adapter_hashes_after.json` | 実行時の承認済みplan/runner/consumer/CPU確認/入力/固定source manifest、GPU/CPU各一回のlog/exit、保存d431不変の実測。原本は無補修 |
+| `runtime_originals.zip・archive_manifest.json` | 実行原本18payload＋manifest/19member、58,899bytes。Pod外CRC/全bytes/hash/source一致を照合。SHA256 c7c0d1578599c7ae693258eddb979b26787abbb01657aeb895b016dcac0a015d。base/追加重み本体は新ZIPへ重複同梱しない |
+
+処理291.557701534秒/$0.022676710按分、同CMEEのCPU1.874746511秒、準備/CPU/回収/保持/保存/通信/税等は別。BOOKは13引用位置の受領と6ADD＋GAPの7件列挙が成立しても、根拠範囲外で意味不採用、別途relation添付欠落/GAPの非空replacementも残る。SHOPは重複JSON keyでINVALID_FORMAT、文字列上の8件も必要7claimのADD＋GAPではない。件数増加を有効更新/本文成功へ換算しない。新観測会は現不具合に不要。前回0/2・d431通常不採用を保持し、同じ有料反復を自動追加しない。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false。GPU稼働保持、Stop/restart/delete/管理API0。全体00/観測入口/学習owner/weekly§84へ同期。

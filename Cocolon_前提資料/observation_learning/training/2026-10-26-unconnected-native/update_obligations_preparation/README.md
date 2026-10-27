@@ -1,6 +1,6 @@
 # 回答後の更新義務の具体化 — Jupyter CPU準備完了・GPU一回の確認待ち
 
-2026-10-28 JST。状態：**CPU_READY_GPU_AWAITING_MASH_APPROVAL**。
+2026-10-28 JST。**このfileは実行前の準備履歴。** 後続のMash承認で一回実行を終了した。[最新実結果](../update_obligations_probe2_result/README.md)は学習0/load1/2生成、291.557702秒/$0.0226767101処理按分、意味/本文0/2・通常不採用。以下の未承認planとCPU確認は当時のbytes/状態を保持し、再実行の許可として使用しない。
 
 Mashの「4B学習＋CMEE接続」「Jupyterへ直接接続」を継続し、実Jupyterで入力・tokenizer・保存重み・CMEE再生を確認した。新しいpretrained model読込・forward・学習・生成は0。候補入力によるモデル改善は未測定。[前回2件原本](../prior_quote_probe2_result/README.md)は意味採用0/2・本人向け本文0/2のまま。商品0、正式0/3、管理54.50％、candidate_ready=false、automatic_progression=false。
 
