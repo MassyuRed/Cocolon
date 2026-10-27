@@ -25,7 +25,7 @@
   "product_accepted": false,
   "runner_sha256": "106fb53ed794faceaffe186b6efa4036d026d437a82124c9a03bac9f380a52b5",
   "verifier_sha256": "3b9b43c5f98df728123abf0c43588852f8dc040e5eea8f33e4a3322e129d85b9",
-  "status": "PREPARED_AWAITING_MASH_APPROVAL",
-  "gpu_run_authorized": false,
-  "approval_basis": null
+  "status": "AUTHORIZED_ONCE_BOUND",
+  "gpu_run_authorized": true,
+  "approval_basis": "Mash explicit approval on 2026-10-27 JST of proposal d5a3d644b1cddc06f246ed7beff49d5be2de8ea7: 進めていいよ。 One run only: saved109c no-grad load -> same15 teacher-forced diagnostic forwards; zero optimizer updates, zero new generation, max900sec/USD0.07 processing prorated; preparation/recovery/holding and other costs separate. No retry, no automatic training progression, no GPU lifecycle operations."
 }
