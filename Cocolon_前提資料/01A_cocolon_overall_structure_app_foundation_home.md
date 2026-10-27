@@ -5157,3 +5157,21 @@ current00/観測入口/同training README#native15-interleaved30-proposal/weekly
 | recovery_manifest.json / final_recovery.json | 最終全84payload/hash・32F32有限・早期最終一致・version1保全 |
 
 凍結教材/実行payloadは既存native15_preparation、runner/plan/consumerはcontinuation30_preparation、不変helper/APIは固定正本へ戻る。GitHub上で教材/codeを重複保存しない。最終archiveは元4B全重み/optimizer/RNG非同梱。全体00/観測入口/training README/weekly§66へ同単位同期。GPU稼働保持は継続料金を伴う。
+
+
+### 2026-10-27 — ordered30閉鎖とexpanded30候補のfile地図
+
+同training rootは `observation_learning/training/2026-10-26-unconnected-native/`。全体00/最新weekly§69/70/各READMEを現在地とし、旧閉鎖runを再起動しない。製品責務/意味型/wire/採用reader/API/DB/RNは不変、STRUCTURE_MAP_DELTA_NONE。
+
+| path group | 責任・状態 |
+|---|---|
+| ordered30_preparation/README・runner・consumer・plan・verify・actual_cpu_check | 値を変えずJSON生成順だけ変更した一回の準備/承認履歴。実行は終了・再利用不可 |
+| ordered30_result/README・result_summary・run/training/reloaded_tensors・after_*.jsonl15 | 30更新/15生成、EOS13/strictJSON8/意味3/本文3へ退行し483d74b7不採用、§69 |
+| ordered30_result/diagnosis/summary・cases15・saved/completed/cold各3 | 元完全diagnosisの値不変分割、無補修採否/本文3と別process再読3一致。完全原本はarchiveに保持 |
+| ordered30_result/reading_reviews・execution・early_run/early_recovery・final_manifest/final_recovery | 全15読解、実launch/log、早期/最終の区別、全61payload＋manifest/32F32/Library version2保全 |
+| expanded30_preparation/run_native15_expanded30.py・gpu30_expanded.plan.json | 同8層LoRA16→56module/112F32。旧1d32保持＋新40Bzero初期化/完全state読込・30更新/保存非学習reload/15callの候補。新GPUは未承認/未起動 |
+| expanded30_preparation/consume_expanded30.py | 拡張初期値/実log/sourceを束縛する同CMEE無補修採否/cold-file。通常service/SQLの成功とは分ける |
+| expanded30_preparation/verify_expanded30_cpu.py・actual_cpu_check*.json・warmstart_report.json | Jupyter CPU6.591629秒＋小勾配finite追補3.424515秒。実tokenizer15/入力prior15/切捨て0・旧32一致/112F32/新40Bzero・未承認execute拒否、実4B処理0 |
+| expanded30_preparation/README・preparation_recovery.json | 具体案/固定条件/旧案との差/未承認境界、非学習初期値・全13payload＋manifestのPod外照合と保全 |
+
+元15教師/評価/priorと不変helperは既存ownerを使用し、学習対象だけを変える。expanded30の実4Bload/forward/更新/生成/採否は全0で、CPUを商品品質へ加算しない。商品0/正式0/3/54.50％。全体00/観測入口/同training README/weekly§70へ同単位同期、GPU稼働保持。

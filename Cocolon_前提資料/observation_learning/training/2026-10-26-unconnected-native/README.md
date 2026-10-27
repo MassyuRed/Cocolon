@@ -1,7 +1,14 @@
 # 10/26 — 未接続の既存6教材とCMEE受理範囲／一括接続案
 
-状態：**10/27：ordered30一回完了。意味3/本文3・新6各0で退行、不採用。全原本/重みversion2保全済み。**
+状態：**10/27：expanded30候補の実CPU確認済み。実4B処理0・新GPU一回は未承認。旧ordered30不採用/閉鎖を保持。**
 
+
+<a id="native15-expanded30-proposal"></a>
+## 2026-10-27 — 学習対象を同8層の注意・MLPへ広げる候補
+
+**現在の直接作業（10/27：学習対象を同8層の注意・MLPへ広げるexpanded30候補、実CPU確認済み・新GPU一回は判断前）：** ordered30の意味3/本文3への退行を受け、初期1dの旧32tensorを完全保持し、同8層のk/oとMLP gate/up/downへ40moduleを追加する56module/112F32/3,833,856parameter候補を実装。新40Bをzeroにした初期化をJupyter CPU6.591629秒で作成し、旧32一致・実tokenizer15/切捨て0/max7935・固定API入力/prior15一致・pending executeのoutput前拒否を確認。小CPU層の勾配有限確認だけ3.424515秒で追補。全13payload＋manifestと112F32有限/新40BzeroをPod外照合・保全。元sorted教師/全文CE/LR1e-5/同30順序/評価/readerは維持し、実4B読込/forward/更新/生成0。新一回は30更新→保存/同process非学習reload→同15確認、最大2700秒/各180秒/15call/$0.21処理按分（準備/回収/保持等別）の個別判断前。旧runは閉鎖・新観測会は今は不要、原本expanded30_preparation/README・weekly§70。商品0/正式0/3/54.50％、GPU稼働保持。
+
+[具体案・全source・実CPU原本](expanded30_preparation/README.md)。旧1d q/v32tensorを保持した非学習初期値を別保存し、新k/o・MLPの40Bはzero。112tensorを全key/値照合して読込む専用bounded loaderを使用し、旧16module専用helperは変更しない。旧sorted教師・全文CE/LR1e-5・同30順序/全15評価/凍結priorは不変。CPU成功を学習効果やCMEE採用へ数えず、追加GPUは別の一回承認前で未起動。
 
 <a id="native15-ordered30-result"></a>
 ## 2026-10-27 — ordered30一回完了、意味/本文3で新候補不採用

@@ -2974,3 +2974,23 @@ EOS13/通常JSON構文12/strict JSON8、意味3/本文3。旧9はEOS8/JSON6/意�
 新483d74b7は32F32全要素有限、初期/固定source/生成前後不変、早期最終重み一致。最終archive3692028bytes/SHA256 12fd8b4482f259dea969fe94351fd92a3e00a760cc12d643dee8ca1f4abce167、全61payload＋manifest/62memberをPod外照合し[重み・全原本version2](https://chatgpt.com/library?file_id=libfile_00da515f0f7c8191a0886e28af4f923e&account_id=personal)へ保全。早期version0/399.800995906秒/30更新/生成0とearly_run/early_recoveryは当時原本を保持。base4B全重み/optimizer/RNGは非同梱でstrict resumeではない。GitHubでは大きなdiagnosisをmetadata＋15caseへ値不変で分割し、完全原本bytes/hashはarchiveに保持する。
 
 この一回は閉鎖、通常候補不採用。serialize順だけで長い意味/更新packetと自然本文を同時保持する目標は未達。順序だけが唯一の原因、全方式の否定や4B能力上限とは断定しない。次は既存教師/原本から学習設計を見直し、同じ回数/LRだけの有料試行を自動追加しない。新観測会は今は不要。primary=BLOCKER_NARROWED、商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=false。API/DTO/DB/RN/Render/Supabase/本人DB/通常有効化/merge/deploy/新依存/新接続契約/GPU管理・lifecycle変更0、STRUCTURE_MAP_DELTA_NONE。実行workerはいずれも終了、A5000/1MiB/24564MiBでGPU稼働保持。
+
+
+<a id="20261027-native15-expanded30-proposal"></a>
+## 70. 10/27 — 同8層の注意・MLPへ学習対象を広げる候補、実CPU確認済み・新GPU判断前
+
+**現在の直接作業（10/27：学習対象を同8層の注意・MLPへ広げるexpanded30候補、実CPU確認済み・新GPU一回は判断前）：** ordered30の意味3/本文3への退行を受け、初期1dの旧32tensorを完全保持し、同8層のk/oとMLP gate/up/downへ40moduleを追加する56module/112F32/3,833,856parameter候補を実装。新40Bをzeroにした初期化をJupyter CPU6.591629秒で作成し、旧32一致・実tokenizer15/切捨て0/max7935・固定API入力/prior15一致・pending executeのoutput前拒否を確認。小CPU層の勾配有限確認だけ3.424515秒で追補。全13payload＋manifestと112F32有限/新40BzeroをPod外照合・保全。元sorted教師/全文CE/LR1e-5/同30順序/評価/readerは維持し、実4B読込/forward/更新/生成0。新一回は30更新→保存/同process非学習reload→同15確認、最大2700秒/各180秒/15call/$0.21処理按分（準備/回収/保持等別）の個別判断前。旧runは閉鎖・新観測会は今は不要、原本expanded30_preparation/README・weekly§70。商品0/正式0/3/54.50％、GPU稼働保持。
+
+Mashの「4B学習＋CMEE接続を続けて」を受領。最新全機能00を全文、恒久incident/規則/Karen-Diary、全体設計01/全file地図01A/01B/01C・三core/CMEE map、fresh両tree（Cocolon3429/API2525、両truncated=false）、学習目的・§69・実教師/runnerと全15失敗へ戻った。開始Cocolon8b356c017bc9b45978eb9ef77eb357c9c1abbfc4/API6b043880。全blob意味読了やlive再検証ではない。System Contextのtimeout履歴は保持しfresh原本直接読取、索引再試行0。01Aに不足したordered30群と本候補のfile地図だけ同期する。
+
+旧LoRAはfull-attention8層（3,7,…31）のq/v16module/32tensor/917504parameterだけで、MLPは直接学習していなかった。同8層のk/o＋MLP gate/up/downを追加し56module/112tensor/3833856parameterへ広げる内部候補を選定。旧1dの32tensor完全保持、新40moduleのAをseed20261027のKaiming/Bzeroで別保存。有限値のLoRA式では追加差分0だが、実4B forwardで初期同一性を測ってはいない。元sorted教師/全文assistant+EOS平均CE/LR1e-5/同30順序/全15system/user/eval/prior/元cap/API6b043880/readerを保持する。ordered serializeは継がず、continuation30に対し対象module拡張だけを比較する。容量不足が原因と確定したものでも改善保証でもない。
+
+text-only all-linearは248module/16232448parameterで新たに触る層が多く今回の第一案にしない。prefix分割は通常teacher forcingも同じ正解prefixを見るため、同重みならCE再分割であり新しい条件付けの根拠にならない。推論へgold prefixを追加したり部分JSONを補完したりする案も採らない。固定Qwen cached config/weight headerとTransformers5.19.0/PEFT0.21.2実sourceを確認。追加parameter/gradient/AdamWの理論44.5MiBはactivation等を含む実peakの保証でなく、有料実4B112tensor load/train/reloadは未測定。
+
+[具体案・全source・実CPU原本](../observation_learning/training/2026-10-26-unconnected-native/expanded30_preparation/README.md)。Jupyter直接の一式CPU6.591629405040294秒で固定base header56・旧3hash/32一致・新40Bzero/112F32有限・実tokenizer15/切捨て0/max7935/8192・CMEE native入力/prior15一致・pending executeの新GPU output前拒否を確認。read-only補助の指摘した勾配自体のfinite assert不足だけを補い、小CPU線形層の確認3.424515425111167秒を追補。warmstart再生成/tokenizer/CMEE再実行0、初回原本と補正lineageを保持。依存追加/実4B読込/forward/更新/生成/新raw採否/SQL0。CPU成功をモデル品質へ加算しない。
+
+非学習拡張初期値349034fc96acf191c3d919ed6a69ac4de14526c8c129b5f536eaa2baa1c6fc7a、archive8369444bytes/SHA93d102c267f7ddea5ec84eda1e587f21131480d32ac112f6ae73159d163bbf6a。全13payload＋manifest/14memberをPod外照合し[初期値/候補/CPU原本version0](https://chatgpt.com/library?file_id=libfile_11851e44ef708191bc8d65ff1ef04302&account_id=personal)へ保全。Pod外でも112F32全要素有限/新40Bzeroを確認。旧1dとの32完全一致はJupyter CPUで元3hashへ束縛して確認した範囲。base4B/optimizer/RNGは非同梱、strict resumeではない。
+
+新GPU一回は30更新→別adapter保存/学習参照解放/同OS processの新model objectへ非学習reload→同15生成、2700秒/各180秒/15call/$0.21処理按分（前回確認表示$0.28/h、準備/CPU/回収/保持等別）で個別判断前。before0、初期1d/直前dd/orderedの保存済み同15原本と比較。OOM/期限/非有限/identity/例外で停止し追加更新/再生成/自動retry/自動縮小/別Pod/GPU lifecycle変更0。GPU outputは不存在。旧plan/承認/残枠を再利用しない。固定evalだけの全packet一回生成と無補修CMEE/cold-file/全読解/回収を維持。既知FIT/凍結教師priorであり、未知一般化/動的thread/実service/SQL/本人端末/商品受入れではない。
+
+可逆候補/CPU/GitHub反映はMash続行指示とRule18§11.3 LEVEL2内、実4Bの新有料一回は別承認前。root単一writer/実行owner、補助はread-onlyで正式Pro/Ultra/human受入れへ数えず、確認できるCodex Work/GPT-6系の環境事実だけ記録。primary=TECHNICAL_CREDITは候補source/実CPUのみ、商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=false。通常API/意味型/wire/reader/DTO/DB/RN/Render/Supabase/本人DB/価格/依存/merge/deploy/モデル選定変更0、STRUCTURE_MAP_DELTA_NONE。新観測会は今は不要。GPUは稼働保持。
