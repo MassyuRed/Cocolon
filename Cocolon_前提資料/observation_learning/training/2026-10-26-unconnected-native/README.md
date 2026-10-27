@@ -6,7 +6,7 @@
 <a id="native15-balanced30-result"></a>
 ## 2026-10-27 — 損失配分30更新一回の最終結果
 
-**現在の直接作業（10/27：成立済み重み1d218763からの低LR継続30候補、実CPU確認済み・新GPU判断前）：** balanced30の意味7/本文6・新6本文0を踏まえ、同quote15/同30順序を、全15JSON・旧9本文が成立した1d218763から全文assistant/EOS CE・LR1e-5で継続する別候補を実装。Jupyter直接のCPU6.027493秒で実tokenizer15/切捨て0/max7935・入力/prior15一致、初期3file/32F32有限/凍結payload不変、新authorization falseとoutput作成前拒否を確認。最初の配置補助file不足は元payload全件コピーで解消、モデル処理0。新4B読込/forward/更新/生成/採否/SQL0で改善未検証。別の一回は同30更新→保存/非学習reload→15確認、2700秒/180秒/15call/$0.21処理按分上限（準備/回収/保持等別）。初期/損失/LRを組合せて変えるため因果一要素実験ではない。旧一回/承認/228edccfは継承せず、新有料試行は個別判断前。新観測会は今は不要、原本continuation30_preparation/README・weekly§64。商品0/正式0/3/54.50％、GPU稼働保持。
+**現在の直接作業（10/27：承認済みcontinuation30を一回実行中、30更新/保存/別reload完了・生成確認中）：** Mashがb6ab7edcへ「進めていいよ。」と承認、source e1ed9750/PID67437を一回起動。初期1d218763・全文assistant/EOS CE・LR1e-5・同15/同30順序で30更新と別adapter保存/非学習reloadが完了し、上限2700秒/180秒/15call/$0.21按分（準備/回収/保持等別）内で生成確認中。399.670965秒/生成0の早期重みdd1188e8は全15payload+manifest/32F32有限をPod外照合しversion0へ保全済み。最終15件のCMEE採否・本文・初期1d/前回228比較は未確定で品質credit0。追加更新/生成/再起動/自動retryなし。原本continuation30_result/README・weekly§65、通常API/DB/RN/Render/Supabase/本人DB/merge/deploy/GPU管理/lifecycle変更0、商品0/正式0/3/54.50％、GPU稼働保持。
 
 [全15採否・比較・本文読解・重み保全](balanced30_result/README.md)。本一回はRUN_CLOSED_REJECTED_CANDIDATE。以下のbalanced30準備・旧interleaved30節は履歴として維持し、閉鎖済みplanを再起動しない。
 
