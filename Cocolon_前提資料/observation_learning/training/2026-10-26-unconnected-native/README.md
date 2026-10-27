@@ -1,13 +1,13 @@
 # 10/26 — 未接続の既存6教材とCMEE受理範囲／一括接続案
 
-状態：**動的重点配分30更新案は実CPU確認済み・新GPUは個別判断前。** 前回localized30の意味11/15・本文9/15、新6本文0/6と新937233a0通常不採用は不変。
+状態：**承認済みadaptive30一回完了・新d431a07c不採用。** 意味11/15・本文9/15、新6本文0/6で前回localized30同値。全実行原本と保存重みを保全済み。
 
 <a id="native15-adaptive30-proposal"></a>
-## 2026-10-27 — 重点位置を毎forward見直す候補
+## 2026-10-27 — 動的重点配分30更新・一回実行の最終結果
 
-**現在の直接作業（10/27：動的重点配分30更新案をJupyterでCPU確認、実GPUは未実行）：** 同109c・同15教師/同prompt/同30順序/LR1e-5/112F32を保ち、旧9は既存CE、新6の全10,716targetへ毎forward1〜16の重点を再計算する候補を実装。CPU4.995651秒で全26,137target/EOS/終端改行/causal shift/有限勾配を確認、consumer CPU27.004796秒で15prompt一致と前回保存済み3snapshotの別process再読一致を確認。実4B読込/forward/学習/新規生成/SQL0、新GPUoutput前のpending拒否を確認。旧診断値の配分再計算であり、新方式の効果は未測定。前回の意味11/本文9・新6本文0と937233a0通常不採用、商品0/正式0/3/54.50％は不変。次の別一回案は30更新→保存・非学習112一致reload→15自由生成と同CMEE/全本文確認、最大2700秒/$0.21処理按分（準備/CPU/回収/保持等別）の明示判断前。新観測会は今は不要。原本adaptive30_preparation/README・weekly§77、GPU稼働保持/Stop・restart・delete0、automatic_progression=false。
+**現在の直接作業（10/27：承認済みadaptive30一回を終了・新重み不採用）：** 同109cから30更新→新保存→112F32/3,833,856parameterの非学習再読込→15件自由生成を完了。EOS15・strict JSON14、同CMEEの意味11/15・本文9/15（旧9は9/9、新6は2/0）で前回localized30から本文成立は増えなかった。採用snapshotの別process全outcome再読11/11一致・失敗0、本文なし2件を含む。処理1511.033445秒・$0.117525按分（準備/CPU/回収/保持/保存/通信/税等別）、consumer CPU102.679954秒。新d431a07cは不採用、再試行/追加モデル/SQL0。重みと全76payload＋manifestをPod外で照合・保全。BOOKのID衝突/回答後の根拠・更新不足、SHOP回答後duplicate key、REPOT主客反転、KNIT scope/本文反復が残る。次は既知教師と実rawで根拠参照・全更新・本文役割の原因をCPUで切り分ける。新観測会は今は不要、有料反復へ自動進行しない。原本adaptive30_result/README・最新weekly§78。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false、GPU稼働保持/Stop・restart・delete0。
 
-[具体案・source・実CPU原本](adaptive30_preparation/README.md)。固定198位置を反復する代わりに新6の全targetを対象とし、正解確率から重み1〜16を毎forward再計算する。旧9/教師/入力/readerは不変。旧診断値での配分は旧203誤位置の合計が固定方式より下がるcaseもあり、改善保証はない。既知FITの自由生成・意味・全7/8更新・本文を一緒に確認する。
+[最終結果・全15採否/本文レビュー・保存重み/実行原本](adaptive30_result/README.md)。[起案時の具体案・source・CPU原本](adaptive30_preparation/README.md)は履歴として保持。旧9は既存CE、新6は全targetの正解確率からdetached重み1〜16を毎forward再計算したが、意味/本文成立の件数改善は得られなかった。固定教師priorの既知FITで、動的一往復/未知一般化/通常service保存/商品品質の成功ではない。
 
 <a id="native15-token-diagnostic-proposal"></a>
 <a id="native15-localized30-result"></a>

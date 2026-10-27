@@ -5253,9 +5253,28 @@ APIa4b91b4は既存model_candidate_source.pyのquote分岐にunknown_id ASCII64/
 |---|---|
 | `adaptive_loss.py` | 新6の全文target/EOSへ現在forwardの誤差に応じたdetached重み1〜16。旧9は既存helper直呼び。生成補修・readerではない |
 | `prepare_adaptive30.py`・`actual_cpu_check.json` | 既存source/教師/全target/旧診断からの配分とcausal shift/勾配のCPU確認。実4B処理0 |
-| `run_adaptive30.py`・`adaptive30.plan.json`・`pending_execution_check.json` | 別一回の30更新・保存/非学習112一致reload・最大15生成候補。未承認はoutput前拒否、実GPUは未実行 |
+| `run_adaptive30.py`・`adaptive30.plan.json`・`pending_execution_check.json` | 承認source5c2fe64eから一回実行済み。30更新/保存/非学習112一致reload/15生成。pending拒否は起案時CPU履歴。実結果は下のresult owner |
 | `consume_adaptive30.py`・`consumer_cpu_check.json`・`*_consumer_smoke.json` | 同CMEE/既存cold worker、15prompt一致/前回保存済み3snapshot別process再読。新モデル成功ではない |
 | `train_messages.jsonl`・`eval_inputs.jsonl` | localized30の同15をbytes不変で複写。新教材・正解変更なし |
-| `cpu_launch.json`・`consumer_cpu_launch.json`・`execution/`・`runtime_archive_manifest.json`・`archive_identity.json`・`README.md` | 固定source0107e020のCPU原本/一回案/回収照合。GPU承認とは別 |
+| `cpu_launch.json`・`consumer_cpu_launch.json`・`execution/`・`runtime_archive_manifest.json`・`archive_identity.json`・`README.md` | 固定source0107e020のCPU原本/起案時の一回案/回収照合。承認済み実行後の結果はresultへ |
 
 CPU4.995651秒/consumer27.004796秒、17payload＋manifestの全hash照合済み。前回11/9・新6本文0は不変。STRUCTURE_MAP_DELTA_NONE（app/API/DB/RN/readerの責任変更なし）、商品0/正式0/3/54.50％、GPU保持、最新weekly§77。
+
+
+### 2026-10-27 — adaptive30一回実行結果のfile地図
+
+対象familyは`observation_learning/training/2026-10-26-unconnected-native/adaptive30_result/`。商品sourceの新責務はなくSTRUCTURE_MAP_DELTA_NONE、実行結果/原本保全のownerを追加する。
+
+| path/family | 責任 |
+|---|---|
+| `README.md・summary.json` | 一回の閉鎖・新d431a07c不採用・全15採否/費用/残件。原本runのpending表示と最終結果を区別 |
+| `run.json・adaptive30.plan.json・training.jsonl・initial_loaded_tensors.json・reloaded_tensors.json` | 承認5c2fe64e、実30更新/同15各2回・保存と112F32/3,833,856parameter非学習reloadの原本 |
+| `after_*.jsonl（15）` | 各一回の自由生成原本。EOS15・strict14。repair/retryなし |
+| `diagnosis/summary.json・diagnosis/cases/*.json（15）` | 固定CMEEの全診断をmetadata+caseへ値不変で分割、再組立て一致 |
+| `diagnosis/*_saved.json・*_saved_completed.json・*_cold.json（各11）` | 採用snapshotと別process全outcome再読原本。本文なし2件を含む |
+| `adapter/README.md・adapter_config.json・archive_identity.json・runtime_archive_manifest.json・external_verification.json・verify_archive.py` | 新重み/全実行原本76payload＋manifestの保存先、CRC/全hash/112有限・cold全値検証。safetensors本体は保存ZIPへ |
+| `execution/*（4）` | 実GPU/consumer各一回のlaunch/log原本 |
+| `reading_reviews/root.json・book_shop.json・repot_knit.json` | root全15・read-only補助の実本文/問い/全更新/teacher比較。正式人手/Pro/Ultra商品受入れではない |
+| `repo_payload_manifest.json` | 今回の変更pathとbytes/SHA256/Git blobの反映予定集合（自身を除く） |
+
+学習source5・教師/入力・起案時CPU原本は固定承認5c2fe64eのpreparation ownerと保存ZIPへ戻る。同じ教師を新教材として加算しない。重み入りZIPは14,841,180bytes、SHA256 `39ac2ff058fe65a961b70f8477c2561306ca2daa1029a1bf3bb33f620c0df342`。新adapterは `d431a07ce227c05e81eca5afb9461d91cf8101d50af0d27ec1a81844ce8ac684`。意味11/本文9/新6本文0は前回同値・不採用、cold11/11一致。全体00/観測入口/training/CMEE地図/weekly§78を同単位同期。商品0/正式0/3/54.50％、GPU保持。

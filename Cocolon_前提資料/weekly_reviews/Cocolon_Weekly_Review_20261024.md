@@ -3111,3 +3111,19 @@ Mashがproposal `1cfc0f838186574c6cbc870e7b94f6706dab39aa`の同15教材30更新
 別のGPU一回は最大2700秒/$0.21処理按分、30更新→保存/全112F32非学習reload→同15自由生成→無補修CMEE/全本文/問い/全更新/cold確認の個別判断前。準備/CPU/回収/保持/保存/通信/税等は別。全15完了保証なし、異常は保全して一回閉鎖。新観測会不要、旧承認/残枠再利用0。source/CPU/GitHub反映のみ今回続行＋Rule18§11.3の範囲で、新有料処理には前回承認を流用しない。
 
 CPU原本355720bytes/SHA19a355b1697d4defb848b7e90e23363153ee501d8661a73c9d3fe62bbbfaf0a3、17payload＋manifest/18memberをPod外CRC/size/hash照合してmemberを値不変保存。APIa4b91b4/採用reader/教師/本人DB/RN/Render/Supabase/価格/依存/merge/deploy変更0。A5000/1MiB/24564MiB、稼働保持/Stop・restart・delete0、管理console/API0。補助はread-onlyレビューで正式Pro/Ultra/human商品受入れではない。primary=TECHNICAL_CREDITは学習準備/CPU接続確認のみ。商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=false、STRUCTURE_MAP_DELTA_NONE。全体現在地/観測入口/training入口/01A/CMEE地図を差分同期。
+
+
+<a id="20261027-native15-adaptive30-result"></a>
+## 78. 10/27 — adaptive30一回完了・前回同値のため新重み不採用
+
+**現在の直接作業（10/27：承認済みadaptive30一回を終了・新重み不採用）：** 同109cから30更新→新保存→112F32/3,833,856parameterの非学習再読込→15件自由生成を完了。EOS15・strict JSON14、同CMEEの意味11/15・本文9/15（旧9は9/9、新6は2/0）で前回localized30から本文成立は増えなかった。採用snapshotの別process全outcome再読11/11一致・失敗0、本文なし2件を含む。処理1511.033445秒・$0.117525按分（準備/CPU/回収/保持/保存/通信/税等別）、consumer CPU102.679954秒。新d431a07cは不採用、再試行/追加モデル/SQL0。重みと全76payload＋manifestをPod外で照合・保全。BOOKのID衝突/回答後の根拠・更新不足、SHOP回答後duplicate key、REPOT主客反転、KNIT scope/本文反復が残る。次は既知教師と実rawで根拠参照・全更新・本文役割の原因をCPUで切り分ける。新観測会は今は不要、有料反復へ自動進行しない。原本adaptive30_result/README・最新weekly§78。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false、GPU稼働保持/Stop・restart・delete0。
+
+Mashは固定47e2075の具体案「30更新→保存・非学習再読込→15件確認、最大45分・処理按分$0.21（準備・回収・保持等別）」へ「進めていいよ。」と明示承認。source5c2fe64eでplanのstatus/gpu_run_authorized/approval_basisの3項目だけを結び、残りの上限・教師・prompt・順序・LR・112F32を不変のままJupyter直接で一回実行した。同109cからfresh optimizer、旧9既存CE、新6は全targetへdetached重み1〜16。30更新/保存/非学習reload112一致/15自由生成、追加モデル・retry0。実model load2は学習用と保存後の新objectで、二回試行ではない。
+
+EOS15・strict14、旧9は前回raw_textと全一致かつpacket全値が教師一致。新6は文面が変化したが意味2/本文0、全体11/9で前回同値。BOOK初回は日本語unknown IDからASCIIになったがclaim IDと衝突してHOLD。BOOK回答後は重複キーが解消しても引用/参照不足と1対7更新、SHOP回答後はduplicate schema_version/target未指定と4対8更新、REPOTは意味採用後も主客反転、KNITは実UNSUPPORTED/model_evidence_out_of_scope・同文反復。SHOP初回の合法unknown別名を意味誤りに数えず、KNITの句点込み引用は原欄に存在することとscope未採用を区別。全15本文/問い/更新をrootとread-only2補助で読解したが、正式Pro/Ultra/人手商品受入れではない。
+
+consumer CPU102.679954秒、固定APIa4b91b4へrawを無補修で接続。cold-file全outcome11/11一致・失敗0、うちSHOP初回/REPOTはUNAVAILABLE（本文なし）。本番SQL/通常service保存/動的初回→回答thread/端末成功ではない。新d431a07c不採用、RUN_CLOSED_REJECTED_CANDIDATE。原本runのRAW_COMPLETE_PENDING_CMEE_AND_CONTENT_REVIEWは凍結不変で、最終summaryをclosureとする。
+
+処理1511.033445464秒/$0.117524824按分、上限2700秒/$0.21以内。準備/CPU/回収/保持/保存/通信/税等は別で総請求ではない。全76payload＋manifest/77member、14,841,180bytesの重み入りZIPをPod外でCRC/全bytes/hash照合・保全。新adapter112F32/3,833,856parameter全有限、各15行2回/30勾配有限、全15rawhashと全11cold結果を外部でも照合した。終了時のrun内部allocated17,039,360bytesと、worker終了後nvidia-smi1MiBを区別。GPU/consumer PID222461/231168はEXITED、GPU稼働保持。Stop/restart/delete/管理API操作0。
+
+[最終結果と全原本](../observation_learning/training/2026-10-26-unconnected-native/adaptive30_result/README.md)。同じ回数/LRだけの有料反復を次の標準作業へ戻さず、既存教師の長い根拠参照/全更新/本文役割のCPU原因切分けが次。現時点で新観測会は不要。商品0/正式0/3/54.50％、PRODUCT_NOT_CLEAR、candidate_ready=false、automatic_progression=false。通常API/DB/RN/Render/Supabase/本人DB/merge/deploy0。STRUCTURE_MAP_DELTA_NONE（商品責務/型/wire/reader/通常接続不変、file地図へ実結果ownerのみ追加）。

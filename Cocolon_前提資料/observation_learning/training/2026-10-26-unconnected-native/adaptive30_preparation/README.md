@@ -1,6 +1,6 @@
 # 同15教材・重点位置を毎更新で再計算する30更新案
 
-状態：**CPU_PREPARED_AWAITING_MASH_APPROVAL**。学習・新規生成は未実施。前回localized30の一回と承認枠は閉鎖したままです。新しい有料実行を自動開始しません。
+状態：**承認済み一回を実行して閉鎖、新重み不採用**。[最終結果](../adaptive30_result/README.md)が現在の結果ownerです。Mashの「進めていいよ。」をsource5c2fe64eのplan3項目へ結び、30更新・保存・非学習再読込・15確認を一回実施しました。意味11/15・本文9/15・新6本文0/6で前回同値、新d431a07cは不採用です。以下の案・CPU確認・上限は**起案時の履歴**として残します。今回の承認済みplanは消費済みの証拠で、再利用できません。
 
 ## 今回変える一点と目的
 
@@ -32,7 +32,7 @@ loss = sum(w * c) / sum(w)
 
 最初のターミナル入力とCPU起動コマンドに形式不備がありましたが、前者はshell解析、後者はPython全体compileで拒否され、モデル/学習効果0。CPU sourceの変更や実モデル再試行はありません。訂正後のCPU実行は一回です。静的レビューではEOSを最終targetとする誤仮定とconsumer接続不足を実行前に修正し、元の改行と採用readerを保持しました。
 
-## 承認をお願いする一回の範囲
+## 起案時に承認をお願いした一回の範囲（実行済み）
 
 | 項目 | 固定条件 |
 |---|---|
@@ -49,13 +49,13 @@ GPUの保持料金は既存稼働のまま継続しています。今回Stop/res
 
 今回の変更は学習準備・CPU検証のみの限定TECHNICAL_CREDIT。商品0/正式0/3/54.50％、PRODUCT_NOT_CLEAR、candidate_ready=false、automatic_progression=false。新観測会は現時点では不要です。STRUCTURE_MAP_DELTA_NONE（商品責務・型・wire・reader・通常接続不変）。
 
-## 再開先と保全
+## 起案時の実行条件と保全（現在は閉鎖）
 
-次の有料処理は、[adaptive30.plan.json](adaptive30.plan.json)のpending3項目をMashの今回の明示判断へ結ぶまで禁止です。Rule18 §11.3のstanding delegationは新しい費用・期間の効果を含まないため、前回の個別承認を使い回しません。可逆source/CPU/GitHub反映は今回の続行指示の範囲です。
+起案時のpending3項目は、Mashの今回の明示承認を受けて[adaptive30.plan.json](adaptive30.plan.json)のAUTHORIZED_ONCE_BOUNDへ記録済みです。このplanは実行時の原本として凍結し、結果は別summaryで閉鎖します。今回と前回の個別承認を追加の有料処理へ使い回しません。
 
 準備源は既存`/workspace/cocolon_localized30_pack_20261027`、元109cは既存expanded30 run、APIは同localized30 APIです。いずれもread-only参照で、旧実行authorityを再使用しません。新packは`/workspace/cocolon_adaptive30_pack_20261027`、新outputは`/workspace/cocolon_adaptive30_run_20261027`です。
 
-承認後だけ、固定sourceを読戻し、pending3項目以外の条件不変を確認して次を一回起動します。
+承認後、固定sourceと3項目以外の不変を照合し、下記commandをsource5c2fe64eで一回起動済みです。再実行用の指示ではありません。
 
 ```bash
 HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 timeout --signal=TERM --kill-after=10s 2690s python -B /workspace/cocolon_adaptive30_pack_20261027/run_adaptive30.py --pack /workspace/cocolon_adaptive30_pack_20261027 --execute --source-commit <今回の承認を記録した固定commit>
