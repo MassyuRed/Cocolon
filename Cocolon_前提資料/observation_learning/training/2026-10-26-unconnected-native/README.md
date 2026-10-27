@@ -4,9 +4,9 @@
 
 
 <a id="native15-balanced30-result"></a>
-## 2026-10-27 — 損失配分30更新一回の最終結果
+## 2026-10-27 — 引用・意味・更新を本文より先に生成する別候補
 
-**現在の直接作業（10/27：continuation30一回完了、意味11/本文9・新6本文0で不採用）：** 承認source e1ed9750/PID67437で初期1d218763・全文CE/LR1e-5・同15/同30順序→別保存/非学習reload→15生成を1578.951346秒/$0.122807処理按分で完了。EOS/JSON12/15、意味11/本文9、旧9は意味/本文9/9で教師packet全文一致、新6は意味2/6・本文0/6。直前228の7/6から旧9を復旧したが、初期1dの11/9から進まず、新6EOS/JSONは6→3へ退行。BOOK/SHOP回答とKNITが3712token反復打切り、BOOK初回unknown束縛/安心補完、SHOP本文の問い混入、REPOT二重主客反転が残り新dd1188e8は通常不採用。cold11/11には本文なしSHOP/REPOT2を含み、本文11完成ではない。全84payload+manifest/32F32有限/早期最終重み一致をPod外照合しversion1保全済み。追加更新/再生成/再起動/retryなし。同じ回数・LR調整の連続試行を自動追加せず、長い更新packetと自然本文の学習設計を既存原本から見直す。新観測会は今は不要。原本continuation30_result/README・weekly§66、商品0/正式0/3/54.50％、GPU稼働保持。
+**現在の直接作業（10/27：引用・意味・更新を本文より先に生成するordered30候補、実CPU15件確認済み・新GPU一回は判断前）：** 前回continuation30の新6本文0/6を受け、教師JSONの値/配列順・system/user・eval/priorを変えず、生成順だけを引用→意味/不明/更新→本文へ変更する別候補を実装。Jupyter直接の実CPU13.005557秒でparsed値15一致・実tokenizer切捨て0/max7935/8192・固定CMEEの意味/本文/問い15組一致を確認。receipt.raw_outputのserialize順だけを正規化し、ID/receipt全体を除外していない。初期1dの3file/32F32有限・凍結payload不変、pending executeのoutput前拒否を確認。最初のCPU API参照誤りは既存完全copyへ訂正、製品source変更0。モデル読込/forward/学習/生成/SQL0で品質改善は未検証。同初期1d/全文CE/LR1e-5/同30順序→保存/非学習reload→同15確認、最大2700秒/180秒/15call/$0.21処理按分（準備/回収/保持等別）の新一回は未起動。前回dd1188e8不採用/閉鎖を保持し、新観測会は今は不要。原本ordered30_preparation/README・weekly§67、商品0/正式0/3/54.50％、GPU稼働保持。
 
 [全15採否・比較・本文読解・重み保全](balanced30_result/README.md)。本一回はRUN_CLOSED_REJECTED_CANDIDATE。以下のbalanced30準備・旧interleaved30節は履歴として維持し、閉鎖済みplanを再起動しない。
 

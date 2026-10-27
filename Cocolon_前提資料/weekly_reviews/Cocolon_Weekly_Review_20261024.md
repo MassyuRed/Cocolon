@@ -2926,3 +2926,20 @@ CPU consumer101.201544秒、無補修raw15を既存CMEEへ通し意味11/本文9
 新dd1188e8は32F32有限、初期/固定source/生成前後不変、早期最終重み一致。最終archive3955270bytes/SHA75fa00ca490e07bf963cc849db02506fb3e8f9e80a274f537c138b944249c78c、全84payload＋manifest/85memberをPod外照合し、[全重み/原本version1](https://chatgpt.com/library?file_id=libfile_ce620ca836208191a9a9649daca3a90f&account_id=personal)へ保全。早期version0/399.670965秒/30更新/生成0とearly原本は不変。base4B全重み/optimizer/RNGは非同梱、strict resumeではない。
 
 この一回は閉鎖、通常候補不採用。primary=BLOCKER_NARROWED、商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=false。次は同じ回数/LRだけを変える連続有料試行を自動追加せず、長い更新packet/原文役割と自然本文の学習設計を既存原本から見直す。今回の基本不成立の修正前に新観測会を要求しない。新有料試行/新接続契約変更/通常有効化への進行0。API/DTO/DB/RN/Render/Supabase/本人DB/merge/deploy/GPU管理/lifecycle変更0、STRUCTURE_MAP_DELTA_NONE、GPU稼働保持。
+
+<a id="20261027-native15-ordered30-proposal"></a>
+## 67. 10/27 — 教師JSONの生成順を見直す候補、実CPU15組一致・新GPU一回は判断前
+
+**現在の直接作業（10/27：引用・意味・更新を本文より先に生成するordered30候補、実CPU15件確認済み・新GPU一回は判断前）：** 前回continuation30の新6本文0/6を受け、教師JSONの値/配列順・system/user・eval/priorを変えず、生成順だけを引用→意味/不明/更新→本文へ変更する別候補を実装。Jupyter直接の実CPU13.005557秒でparsed値15一致・実tokenizer切捨て0/max7935/8192・固定CMEEの意味/本文/問い15組一致を確認。receipt.raw_outputのserialize順だけを正規化し、ID/receipt全体を除外していない。初期1dの3file/32F32有限・凍結payload不変、pending executeのoutput前拒否を確認。最初のCPU API参照誤りは既存完全copyへ訂正、製品source変更0。モデル読込/forward/学習/生成/SQL0で品質改善は未検証。同初期1d/全文CE/LR1e-5/同30順序→保存/非学習reload→同15確認、最大2700秒/180秒/15call/$0.21処理按分（準備/回収/保持等別）の新一回は未起動。前回dd1188e8不採用/閉鎖を保持し、新観測会は今は不要。原本ordered30_preparation/README・weekly§67、商品0/正式0/3/54.50％、GPU稼働保持。
+
+全機能原本全文・規則/恒久incident/Karen-Diary・全体設計/全file地図01/01A/01B/01C、fresh Cocolon3346/API2525entry（両truncated=false）、三中核/CMEE map・学習目的・weekly§66、元15教師/runner/consumer・new6全所見を照合。開始Cocolon19e51d794bd6f371e44ce4d66ec79ead6c49896b／API PR3 6b043880504912481a6b10d93c9128ec4995b70b。全blob意味読了/live/本人端末確認とは区別し、System Contextの索引timeoutを再試行せずfresh原本へ戻った。
+
+元教師は辞書順JSONのため本文がunknowns/updates/引用表より先にあり、前回BOOK/SHOP回答後とKNITは本文で反復し後続部へ未到達だった。本文loss配分は既にbalanced30で試して新6本文0/6。今回の推奨は値を変えず、schema_version→evidence_quotes→candidate、candidate内は意味/不明/更新/問い案→surface_proposalとするserialize順だけの変更。意味変換/省略/teacher補充/二段生成/reader緩和/名詞特例は0。順序が唯一の原因、短縮策、4B品質の改善と断定しない。旧9の退行リスクも保持する。
+
+[具体案・全候補source・実CPU原本](../observation_learning/training/2026-10-26-unconnected-native/ordered30_preparation/README.md)。実CPU13.005556795978919秒、20951bytes/SHAbeee99df0594b00109ce482a6880797b5b6d44210bbbe647fb851687e1a8d1d7。全15 parsed値/配列順/system/user token/prior一致、切捨て0/max7935、元/並替の合成教師各15を同CMEEで採用/本文化し、receipt.raw_outputだけを正規化した意味/checkpoint/全outcome15一致。初期1d3file/32F32有限・payload/API6blob不変。pending executeは新output作成前拒否。4Bモデル読込/forward/学習/生成/SQL0、教師CPU成功をモデル実績へ加算しない。
+
+最初のCPUは差分だけのAPI folderへ向けた私の参照誤りでimport停止、CMEE採用0。既存完全copyへ検証コードの参照だけを訂正し別logで上記成功、製品source/依存/reader変更0。filechooser待機timeoutは実Upload UIからの配置で解消、ダウンロード待機timeout後は同原本の到着を確認し再要求0。初回未実行heredocは新terminalの一行commandへ訂正した。GPU再学習/再起動へ変換しない。
+
+新一回は初期1d/同15・同30順序/全文CE/LR1e-5/元cap/32LoRA→別保存/非学習reload→after15。最大2700秒/各180秒/15call/$0.21処理按分（表示$0.28/h、準備/回収/保持/税等別）で個別判断前。新before0、基準は初期1dと直前dd1188e8の保存済み同15。無補修採否/成立snapshotだけcold-file/全本文読解/全重み原本回収まで同じ一回、OOM/期限/非有限/identity/例外で停止し追加更新・再生成・自動retryなし。動的prior/実service/SQL/Auth/RN/未知評価/正式受入れは対象外。
+
+rootが単一統合/writer/実行owner、read-only3agentはscope/地図/原因/sourceを分担し正式Pro/Ultra/human受入れへ換算しない。可逆的候補/実CPU確認のprimary=TECHNICAL_CREDIT、商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=false。API/DTO/DB/RN/Render/Supabase/本人DB/価格/通常app/新依存/merge/deploy/GPU管理・lifecycle変更0、STRUCTURE_MAP_DELTA_NONE。新観測会は今は不要、GPU稼働保持。
