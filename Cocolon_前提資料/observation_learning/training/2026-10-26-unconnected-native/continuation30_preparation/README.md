@@ -1,6 +1,6 @@
 # 同15教材・成立済み重みからの低学習率30更新候補
 
-状態：**CPU確認完了・新しいGPU一回はMash判断前**。前のinterleaved30/balanced30は閉鎖済みで、承認・未消費の時間/金額・outputを再利用しません。
+状態：**Mashが本案b6ab7edcの一回を明示承認済み・実行前**。前のinterleaved30/balanced30は閉鎖済みで、承認・未消費の時間/金額・outputを再利用しません。
 
 目的は、4Bが本人の主体・時点・否定・不明・回答による変更を保った自然な観測と受け取りを作り、既存CMEEが採用・保存再読できるようにすることです。今回の未完了は、既知quote15のうち新4題材6段階で本文が成立しない点です。三中核全体の用途・Windows/Mac未選定・4B育成方針は[観測学習入口](../../../README.md#observation-learning-intent-and-assumptions)を保持します。
 
@@ -63,3 +63,8 @@ packは `/workspace/cocolon_native15_continuation30_pack_20261027`、新output�
 今回の作業はMashの続行指示とRule18 §11.3内の可逆的候補実装/CPU確認まで。**新GPUのmodel load/forward/学習/生成は別の一回承認が必要**で、前回の承認残枠を持ち越しません。新しい観測会はこの基本不成立を直す前提ではありません。
 
 製品責務/型/wire/採用reader/API/DTO/DB/RN/Render/Supabase/本人DB/通常app/価格/merge/deploy/GPU管理・lifecycle変更0。STRUCTURE_MAP_DELTA_NONE。primary=TECHNICAL_CREDITは新候補sourceとCPU確認に限定し、商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=falseを維持します。
+
+
+## 2026-10-27 一回承認の記録
+
+Mashは固定案b6ab7edcc9498d0ba2b5973f0e5efcd33a651516の30更新→保存/非学習reload→15件確認、最大2700秒/$0.21処理按分（準備/回収/保持等別）へ「進めていいよ。」と明示承認しました。今回のplanはstatus/authorization/approval_basisだけを束縛し、runner/consumer/教材/初期/LR/loss/順序/cap/readerは変更しません。旧一回の承認を継承せず、新outputでrootが一回だけ実行します。
