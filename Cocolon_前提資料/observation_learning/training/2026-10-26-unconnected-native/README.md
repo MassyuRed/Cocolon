@@ -1,8 +1,8 @@
 # 10/26 — 未接続の既存6教材とCMEE受理範囲／一括接続案
 
-状態：**承認済み更新義務指示の非学習2件確認は一回終了・案不採用。** [最終結果・全原本](update_obligations_probe2_result/README.md)。学習0/load1/生成2/EOS2/strict JSON1、意味・本文0/2。保存d431は不変・通常不採用。[準備案と実CPU](update_obligations_preparation/README.md)は履歴として保持し、消費済み承認枠を再利用しない。
+状態：**現入力一致＋保存d431からの13更新一回は終了、新候補c7baは不採用。** [全実結果・原本・重み参照](aligned13_result/README.md)。意味/本文0/2。元d431は不変。前回の非学習probeは履歴として保持する。
 
-**現在の直接作業（10/28：更新義務指示の非学習2件確認を一回終了、案は不採用）：** Mashの明示承認後、Pod94a06hhxu51uy4のJupyterへ直接接続して保存d431/112F32を非学習load1、BOOK/SHOP回答後を各1生成した。追加学習0・新重み保存0、EOS2・strict JSON1/2・timeout/retry0。処理291.557702秒（4分52秒）/$0.022677按分、単価$0.28/h、準備/CPU/回収/保持/保存/通信/税等別。同じ未変更CMEEのCPU1.874747秒で意味/本文0/2。BOOKは13引用の位置受領と6ADD＋GAPの7件列挙へ改善したが、実意味判定はUNSUPPORTED/model_evidence_out_of_scope。別途必要relation添付/GAP参照も不成立。SHOPは重複JSON keyでINVALID_FORMAT/REJECT semantic_receipt_not_validated。文字列上の8更新を必要7claimのADD＋GAP成立とは扱わない。採用snapshot0でcold-file対象なし。保存d431不変・通常不採用、今回の承認枠は消費済みで追加有料処理へ自動進行しない。実原本18payload＋manifest/19member・58,899bytesをPod外CRC/全hash照合。結果ownerはupdate_obligations_probe2_result/README・weekly§84、PREP/§83は承認前の履歴。現不具合に新観測会は不要。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false。GPUは稼働保持、Stop/restart/delete/管理API0、通常API/DB/RN/Render/Supabase/配置変更0、STRUCTURE_MAP_DELTA_NONE。
+**現在の直接作業（10/28：現API入力に揃えた保存d431からの13更新一回を終了、意味/本文0/2で新候補不採用）：** 固定source ba9d910f/planの既存一回をJupyterで回収確認。旧9各1＋BOOK/SHOP回答後各2の計13更新、別保存c7ba419c/112F32の非学習reload、同2自由生成を540.301152秒（9分00秒）/$0.042023処理按分で完了。元d431は不変。BOOKは3712token反復打切り/TOKEN_LIMITからREJECT、SHOPは2693token/EOS・strict JSON成立後も根拠範囲外でUNSUPPORTED、意味/本文0/2・採用snapshot0/cold対象なし。両rawの更新は必要7/8に対し各1でGAP解消なし。原本34payload＋manifest/35member・116,134bytesと追加重み込み14,312,508bytesをPod外CRC/全hash/112F32有限性照合、重みと原本を保全。結果ownerはaligned13_result/README・weekly§85。回収確認に伴う既存run再起動/追加学習/追加生成0、同一条件や上限延長だけの追加試行は行わない。現不具合に新観測会は不要。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false、通常API/DB/RN/Render/Supabase/配置変更0、STRUCTURE_MAP_DELTA_NONE。GPU稼働保持/Stop等0。
 
 <a id="native15-adaptive30-proposal"></a>
 ## 2026-10-27 — prior座標除去の非学習2件診断・最終結果

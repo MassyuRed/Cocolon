@@ -1,3 +1,5 @@
+> **一回終了・再実行不可：** 13更新/保存再読込/BOOK・SHOP回答後2生成は完了し、意味/本文0/2で新候補c7baは不採用。[最終結果・保全原本](../aligned13_result/README.md)とweekly§85を参照。以下は実行前準備の履歴です。
+
 # 現入力一致＋保存d431からの13更新 — 新しい限定継続学習
 
 2026-10-28 JST。Mashの今回の「4B学習＋CMEE接続を続けて」に基づく新しい一回。前回の消費済み非学習probeは再利用しない。現在のquote形式・意味/本文reader・凍結教師・loss/LRを維持し、学習入力を実際のAPI64へ揃える。実行前のCPU/入力/source原本をここで固定し、実結果は別のaligned13_resultへ保存する。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false。

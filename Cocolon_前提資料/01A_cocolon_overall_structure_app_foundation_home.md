@@ -5352,3 +5352,18 @@ family：`observation_learning/training/2026-10-26-unconnected-native/update_obl
 | `runtime_originals.zip・archive_manifest.json` | 実行原本18payload＋manifest/19member、58,899bytes。Pod外CRC/全bytes/hash/source一致を照合。SHA256 c7c0d1578599c7ae693258eddb979b26787abbb01657aeb895b016dcac0a015d。base/追加重み本体は新ZIPへ重複同梱しない |
 
 処理291.557701534秒/$0.022676710按分、同CMEEのCPU1.874746511秒、準備/CPU/回収/保持/保存/通信/税等は別。BOOKは13引用位置の受領と6ADD＋GAPの7件列挙が成立しても、根拠範囲外で意味不採用、別途relation添付欠落/GAPの非空replacementも残る。SHOPは重複JSON keyでINVALID_FORMAT、文字列上の8件も必要7claimのADD＋GAPではない。件数増加を有効更新/本文成功へ換算しない。新観測会は現不具合に不要。前回0/2・d431通常不採用を保持し、同じ有料反復を自動追加しない。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false。GPU稼働保持、Stop/restart/delete/管理API0。全体00/観測入口/学習owner/weekly§84へ同期。
+
+
+## 2026-10-28 差分 — aligned13一回結果と原本地図
+
+製品の責務・型・wire・reader・公開API/DB/RN接続は変更なし（STRUCTURE_MAP_DELTA_NONE）。最新の結果ownerを以下へ同期する。既存current_structureの過去§80は当時の記録で、今回状態は全機能00/weekly§85/本結果ownerを読む。
+
+| path（observation_learning/training/2026-10-26-unconnected-native/ 以下） | 責務 |
+|---|---|
+| aligned13_preparation/* | 固定source ba9d910fの入力一致/d431継続13更新、実行plan/CPU/source。既存一回は終了、再利用不可 |
+| aligned13_result/README.md・result_summary.json | 一回終了/新c7ba不採用、13更新/save/no-grad reload/2生成、意味・本文0/2、次の一手 |
+| aligned13_result/run/*・logs/* | 無補修run/112loadとreload/13行学習log/2raw/未変更CMEE・0採用/adapter設定と実行log/exit |
+| aligned13_result/reading_review.md | 原source/教師と実raw/本文の全件読解。静的所見を実CMEE拒否と分離 |
+| aligned13_result/runtime_originals.zip・external_verification.json | 全34payload＋manifest/35member、116,134bytes。元bytes/CRC/hashと重み込み一式112F32有限性をPod外照合。追加重み一式はlibfile_398ae281441c81918138d6bf43d3ae36 version0へ保全 |
+
+**現在の直接作業（10/28：現API入力に揃えた保存d431からの13更新一回を終了、意味/本文0/2で新候補不採用）：** 固定source ba9d910f/planの既存一回をJupyterで回収確認。旧9各1＋BOOK/SHOP回答後各2の計13更新、別保存c7ba419c/112F32の非学習reload、同2自由生成を540.301152秒（9分00秒）/$0.042023処理按分で完了。元d431は不変。BOOKは3712token反復打切り/TOKEN_LIMITからREJECT、SHOPは2693token/EOS・strict JSON成立後も根拠範囲外でUNSUPPORTED、意味/本文0/2・採用snapshot0/cold対象なし。両rawの更新は必要7/8に対し各1でGAP解消なし。原本34payload＋manifest/35member・116,134bytesと追加重み込み14,312,508bytesをPod外CRC/全hash/112F32有限性照合、重みと原本を保全。結果ownerはaligned13_result/README・weekly§85。回収確認に伴う既存run再起動/追加学習/追加生成0、同一条件や上限延長だけの追加試行は行わない。現不具合に新観測会は不要。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false、通常API/DB/RN/Render/Supabase/配置変更0、STRUCTURE_MAP_DELTA_NONE。GPU稼働保持/Stop等0。

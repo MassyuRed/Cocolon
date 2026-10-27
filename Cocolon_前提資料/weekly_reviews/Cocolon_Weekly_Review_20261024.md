@@ -3224,3 +3224,17 @@ rootが原文と実rawを全件読み、BOOKの「遅いこと自体に気づか
 準備/CPU/回収/保持/保存/通信/税等は上記処理按分と別で、総請求額とはしない。GPUは稼働保持、Stop/restart/delete/管理API0。通常API/DTO/DB/RN/Render/Supabase/本人DB/配置/merge/deploy変更0、STRUCTURE_MAP_DELTA_NONE。rootが実行/反映を担当し、補助の読取・資料同期を正式Pro/Ultra/人手商品受入れとしない。
 
 今回評価したのは既知BOOK/SHOP回答後の2件だけ。旧9の新prompt回帰、新初回4件、全15の新評価、実初回出力からの動的thread、通常service/SQL保存、本人端末、Piece/Analysis、未知一般化の成功へ広げず、前回全15の意味11/本文9へ合算しない。新観測会は現不具合の解消には不要で、既存教師と無補修rawの根拠・関係参照・更新と本文を読み、残った不成立を先に見直す。同じ有料反復は追加しない。商品0/正式0/3/54.50％、d431通常不採用、candidate_ready=false/automatic_progression=falseを維持し、全体00/観測入口/学習owner/01A file地図を同期する。
+
+
+<a id="20261028-aligned13-result"></a>
+## 85. 10/28 — 現入力一致＋保存d431から13更新、意味/本文0/2で新候補不採用
+
+**現在の直接作業（10/28：現API入力に揃えた保存d431からの13更新一回を終了、意味/本文0/2で新候補不採用）：** 固定source ba9d910f/planの既存一回をJupyterで回収確認。旧9各1＋BOOK/SHOP回答後各2の計13更新、別保存c7ba419c/112F32の非学習reload、同2自由生成を540.301152秒（9分00秒）/$0.042023処理按分で完了。元d431は不変。BOOKは3712token反復打切り/TOKEN_LIMITからREJECT、SHOPは2693token/EOS・strict JSON成立後も根拠範囲外でUNSUPPORTED、意味/本文0/2・採用snapshot0/cold対象なし。両rawの更新は必要7/8に対し各1でGAP解消なし。原本34payload＋manifest/35member・116,134bytesと追加重み込み14,312,508bytesをPod外CRC/全hash/112F32有限性照合、重みと原本を保全。結果ownerはaligned13_result/README・weekly§85。回収確認に伴う既存run再起動/追加学習/追加生成0、同一条件や上限延長だけの追加試行は行わない。現不具合に新観測会は不要。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false、通常API/DB/RN/Render/Supabase/配置変更0、STRUCTURE_MAP_DELTA_NONE。GPU稼働保持/Stop等0。
+
+[全実結果・原本・重み参照](../observation_learning/training/2026-10-26-unconnected-native/aligned13_result/README.md)。新しい短縮schemaや参照形式は導入せず、準備source ba9d910fの同じ一回をJupyterで回収した。既存outputのGPU/CMEE exit0を確認し、再起動・追加model call/学習・consumer再実行0。13更新の実run/planは当時の原本として保持し、最終採否と消費済み境界を別保存する。
+
+現API64へ揃えた教材とd431からの累積継続を同時に変えたため単独効果は確定しない。同じAPI64＋元d431のprior_quote_probe2は0/2、今回も0/2。BOOKは66個の完結引用objectを含む反復で打切り、SHOPはstrict JSON/引用位置受領だけが成立した。両件とも必要な全ADD/GAPを再現せず、通常採用へ進まない。SHOPの本人知覚の事実化・反復/不自然文、BOOK update_noteの未記載残存は静的読解で、実CMEE拒否理由とは区別する。
+
+処理按分$0.042023は準備/CPU/回収/保持/保存/通信/税等別。未変更CMEEの1.783156秒で採用snapshot0、cold-fileは対象なし。新c7ba419c/112F32は有限・元d431不変をPod外照合。追加重み保全先libfile_398ae281441c81918138d6bf43d3ae36 version0、14,312,508bytes。GitHub原本ZIP116,134bytesと両ZIP全CRC/34payload bytes/hashを照合、実生成本文2件をroot/読取agentで確認した。正式Product Readや一般化の成功とは扱わない。
+
+次は長いpacket内の引用・意味・更新対応を自由生成で再現できない原因から学習方法/出力分担を見直す。同じ13更新や上限延長の再試行、raw補修、reader緩和なし。新観測会は現不具合に不要。商品0/正式0/3/54.50％、候補不採用、通常配置不変。
