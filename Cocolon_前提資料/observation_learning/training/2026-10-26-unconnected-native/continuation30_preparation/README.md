@@ -1,6 +1,6 @@
 # 同15教材・成立済み重みからの低学習率30更新候補
 
-状態：**Mashが本案b6ab7edcの一回を明示承認済み・実行前**。前のinterleaved30/balanced30は閉鎖済みで、承認・未消費の時間/金額・outputを再利用しません。
+状態：**承認済みの一回を完了・新候補不採用・閉鎖**。最終原本は [continuation30_result/README.md](../continuation30_result/README.md)。旧一回/承認/未消費枠/outputは再利用しません。
 
 目的は、4Bが本人の主体・時点・否定・不明・回答による変更を保った自然な観測と受け取りを作り、既存CMEEが採用・保存再読できるようにすることです。今回の未完了は、既知quote15のうち新4題材6段階で本文が成立しない点です。三中核全体の用途・Windows/Mac未選定・4B育成方針は[観測学習入口](../../../README.md#observation-learning-intent-and-assumptions)を保持します。
 
@@ -12,7 +12,7 @@
 - 初期を旧45779へ戻してLRだけ下げる案は、まだ成立していないquote-chairと新題材を同時に弱く学ぶことになります。初期だけ1dへ変えbalanced配分を維持する案も検討しましたが、今回退行した外側を弱める配分を残さず、構造保持を優先して元の全文方式を使います。更新回数/token capだけを増やす案や、モデル処理を伴う別の事前診断は足しません。
 - 初期重み・損失方式・LRを組合せて変えるため、**単一因子の原因実験ではありません**。改善は未検証で、低LRで新6を十分学べない可能性も残ります。成功を予告せず、この一回の実本文で判断します。
 
-## 固定する一回
+## 実行した一回の固定条件（以下は準備時の記録）
 
 | 項目 | 候補 |
 |---|---|
@@ -68,3 +68,10 @@ packは `/workspace/cocolon_native15_continuation30_pack_20261027`、新output�
 ## 2026-10-27 一回承認の記録
 
 Mashは固定案b6ab7edcc9498d0ba2b5973f0e5efcd33a651516の30更新→保存/非学習reload→15件確認、最大2700秒/$0.21処理按分（準備/回収/保持等別）へ「進めていいよ。」と明示承認しました。今回のplanはstatus/authorization/approval_basisだけを束縛し、runner/consumer/教材/初期/LR/loss/順序/cap/readerは変更しません。旧一回の承認を継承せず、新outputでrootが一回だけ実行します。
+
+
+## 2026-10-27 一回の最終状態
+
+**現在の直接作業（10/27：continuation30一回完了、意味11/本文9・新6本文0で不採用）：** 承認source e1ed9750/PID67437で初期1d218763・全文CE/LR1e-5・同15/同30順序→別保存/非学習reload→15生成を1578.951346秒/$0.122807処理按分で完了。EOS/JSON12/15、意味11/本文9、旧9は意味/本文9/9で教師packet全文一致、新6は意味2/6・本文0/6。直前228の7/6から旧9を復旧したが、初期1dの11/9から進まず、新6EOS/JSONは6→3へ退行。BOOK/SHOP回答とKNITが3712token反復打切り、BOOK初回unknown束縛/安心補完、SHOP本文の問い混入、REPOT二重主客反転が残り新dd1188e8は通常不採用。cold11/11には本文なしSHOP/REPOT2を含み、本文11完成ではない。全84payload+manifest/32F32有限/早期最終重み一致をPod外照合しversion1保全済み。追加更新/再生成/再起動/retryなし。同じ回数・LR調整の連続試行を自動追加せず、長い更新packetと自然本文の学習設計を既存原本から見直す。新観測会は今は不要。原本continuation30_result/README・weekly§66、商品0/正式0/3/54.50％、GPU稼働保持。
+
+最終原本は[continuation30_result/README.md](../continuation30_result/README.md)。本planのAUTHORIZED_ONCE_BOUNDはこの閉鎖runを開始した当時の記録で、次の実行許可ではありません。新outputの既存存在と閉鎖状態を保ち、--executeを再起動しません。

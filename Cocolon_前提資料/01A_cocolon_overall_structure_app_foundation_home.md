@@ -5138,3 +5138,22 @@ current00/観測入口/同training README#native15-interleaved30-proposal/weekly
 | actual_cpu_check.json | 実tokenizer15/入力prior15/32F32/不変/承認前拒否・配置コピー不足の解消履歴 |
 
 旧frozen教材/実行payload/helperは既存native15_preparationと固定正本へ戻り、重複保存しない。旧閉鎖plan/承認/重み/結果は不変。初期1dの同quote15と最新228edccfの同15との比較は、次の実結果整理で全件読解する。今回source/CPU準備を品質改善へ換算しない。最新00/観測入口/training README/weekly§64へ同単位同期、Jupyter直接・GPU稼働保持。
+
+
+### 2026-10-27 — continuation30一回完了の最終結果file地図
+
+`observation_learning/training/2026-10-26-unconnected-native/continuation30_result/` が最終owner。30更新/保存別reload/15call、意味11/本文9・新6本文0で新dd1188e8通常不採用。初期1dの11/9から進まず、前228の7/6から旧9復旧のみ。STRUCTURE_MAP_DELTA_NONE（製品責務/型/wire/採用条件/API/DB/RN不変）、商品0/正式0/3/54.50％。
+
+| file/group | 責任 |
+|---|---|
+| README.md / result_summary.json / runtime_checkpoint.json | RUN_CLOSED_REJECTED_CANDIDATE、比較/件数/品質残件/非再起動 |
+| run.json / training.jsonl / reloaded_tensors.json | 実30順序/2pass/有限log・保存reload・15call/identity/1578.951秒/$0.122807 |
+| after_*.jsonl（15file） | EOS/JSON12と3lengthを含む全無補修raw・token/usage/重み束縛 |
+| diagnosis/diagnosis.json | 固定CMEEの全15採否/実本文/問い・意味11/本文9 |
+| diagnosis/*_saved.json / *_saved_completed.json / *_cold.json（各11file） | 採用11snapshotの別process一致。本文なしSHOP/REPOT2も含む |
+| evidence/*（7file） | 一回GPU/consumer launch・実log・既存CPU確認・早期/全15回収identity |
+| reading_reviews/old9.json / new6.json | 全原文/教師/初期1d/前228/今回rawと最終consumerを分離した読解。正式human受入れでない |
+| early_run.json / early_recovery.json | 399.670965秒/30更新/生成0・version0の不変早期保存履歴 |
+| recovery_manifest.json / final_recovery.json | 最終全84payload/hash・32F32有限・早期最終一致・version1保全 |
+
+凍結教材/実行payloadは既存native15_preparation、runner/plan/consumerはcontinuation30_preparation、不変helper/APIは固定正本へ戻る。GitHub上で教材/codeを重複保存しない。最終archiveは元4B全重み/optimizer/RNG非同梱。全体00/観測入口/training README/weekly§66へ同単位同期。GPU稼働保持は継続料金を伴う。

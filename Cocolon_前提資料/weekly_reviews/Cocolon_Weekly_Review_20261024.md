@@ -2905,8 +2905,24 @@ rootが単一統合/実行/writer、補助agentはread-only原因/技術source�
 
 
 <a id="20261027-continuation30-execution"></a>
-## 65. 10/27 — continuation30の一回承認・実行checkpoint（最終採否は未確定）
+## 65. 10/27 — continuation30の実行途中checkpoint履歴（最終は§66）
 
 **現在の直接作業（10/27：承認済みcontinuation30を一回実行中、30更新/保存/別reload完了・生成確認中）：** Mashがb6ab7edcへ「進めていいよ。」と承認、source e1ed9750/PID67437を一回起動。初期1d218763・全文assistant/EOS CE・LR1e-5・同15/同30順序で30更新と別adapter保存/非学習reloadが完了し、上限2700秒/180秒/15call/$0.21按分（準備/回収/保持等別）内で生成確認中。399.670965秒/生成0の早期重みdd1188e8は全15payload+manifest/32F32有限をPod外照合しversion0へ保全済み。最終15件のCMEE採否・本文・初期1d/前回228比較は未確定で品質credit0。追加更新/生成/再起動/自動retryなし。原本continuation30_result/README・weekly§65、通常API/DB/RN/Render/Supabase/本人DB/merge/deploy/GPU管理/lifecycle変更0、商品0/正式0/3/54.50％、GPU稼働保持。
 
 承認対象b6ab7edcc9498d0ba2b5973f0e5efcd33a651516のplan status/authorization/basisだけをe1ed975034ffaf6eb1c1b8a662d8cf8e16c4d3aaへ束縛し、全2pathを読戻し。Jupyter直接でPID67437を一回起動、同じoutputの再起動なし。旧閉鎖runの承認/残枠は持越さない。早期archive3468567bytes/SHA402900a7d314c862306435ba8ecd433587e14cbc302c72dd93585837aa905c93、全15payload＋manifestをPod外照合、32F32有限。[重み/原本version0](https://chatgpt.com/library?file_id=libfile_ce620ca836208191a9a9649daca3a90f&account_id=personal)へ保全。399.670965秒/30更新/生成0の早期原本は最終runへ書き換えない。base4B全重み/optimizer/RNGは非同梱、strict resumeではない。最終生成・全件採否/本文・cold-file・回収まで同じ承認単位で継続する。
+
+
+<a id="20261027-continuation30-final-result"></a>
+## 66. 10/27 — continuation30一回完了、意味11/本文9で初期から進まず・新候補不採用
+
+**現在の直接作業（10/27：continuation30一回完了、意味11/本文9・新6本文0で不採用）：** 承認source e1ed9750/PID67437で初期1d218763・全文CE/LR1e-5・同15/同30順序→別保存/非学習reload→15生成を1578.951346秒/$0.122807処理按分で完了。EOS/JSON12/15、意味11/本文9、旧9は意味/本文9/9で教師packet全文一致、新6は意味2/6・本文0/6。直前228の7/6から旧9を復旧したが、初期1dの11/9から進まず、新6EOS/JSONは6→3へ退行。BOOK/SHOP回答とKNITが3712token反復打切り、BOOK初回unknown束縛/安心補完、SHOP本文の問い混入、REPOT二重主客反転が残り新dd1188e8は通常不採用。cold11/11には本文なしSHOP/REPOT2を含み、本文11完成ではない。全84payload+manifest/32F32有限/早期最終重み一致をPod外照合しversion1保全済み。追加更新/再生成/再起動/retryなし。同じ回数・LR調整の連続試行を自動追加せず、長い更新packetと自然本文の学習設計を既存原本から見直す。新観測会は今は不要。原本continuation30_result/README・weekly§66、商品0/正式0/3/54.50％、GPU稼働保持。
+
+承認対象b6ab7edc、承認固定e1ed9750/PID67437をJupyter直接で一回実行。初期1d/同15/同30順序・全文assistant/EOS CE・LR1e-5・32LoRA・元cap/API6b043880/readerを保持し、30更新→別保存/非学習reload→15callを1578.951346秒（26分18.951秒）/$0.1228073269処理按分で完了。2700秒/$0.21内、準備/回収/保持等別。EOS/JSON12/15、BOOK回答/SHOP回答/KNITの3712token反復打切り3。per-call timeout/OOM/追加更新/再生成/自動retry0。
+
+初期1dはEOS/JSON15・意味11/本文9、前228はEOS13/JSON11・意味7/本文6、今回EOS/JSON12・意味11/本文9。旧9は全packet教師/初期1d一致で訂正3件の外側/12引用/参照/3更新を復旧したが、初期と同じ本文9で新たな成立を増やせなかった。新6意味2/本文0。BOOK初回はunknownのsource束縛不成立と安心補完、BOOK回答は非連絡/反実振返りの混同と237反復、SHOP初回は本文の問い/復唱/表記、SHOP回答は不正JSON/97反復で全更新未到達、REPOTは初期と同じ二重主客反転、KNITは未記載の距離/過去離脱・話者混線/734反復が残る。長い指示露出が今回見られないことを途中未到達を無視して解消成功へしない。複数要素変更なので単一原因確定も4B能力上限の確定もしない。
+
+CPU consumer101.201544秒、無補修raw15を既存CMEEへ通し意味11/本文9、採用snapshot別process cold11/11・失敗0。SHOP初回/REPOT2は本文なしoutcomeとして一致し、本文11完成ではない。実モデル追加call/SQL0、after回答priorは凍結教師で動的thread/実service/本人端末/未知一般化/商品受入れではない。rootとread-only2agentで全原文/教師/raw/実本文を読解、正式Pro/Ultra/human受入れと区別。原本は[continuation30_result/README.md](../observation_learning/training/2026-10-26-unconnected-native/continuation30_result/README.md)。
+
+新dd1188e8は32F32有限、初期/固定source/生成前後不変、早期最終重み一致。最終archive3955270bytes/SHA75fa00ca490e07bf963cc849db02506fb3e8f9e80a274f537c138b944249c78c、全84payload＋manifest/85memberをPod外照合し、[全重み/原本version1](https://chatgpt.com/library?file_id=libfile_ce620ca836208191a9a9649daca3a90f&account_id=personal)へ保全。早期version0/399.670965秒/30更新/生成0とearly原本は不変。base4B全重み/optimizer/RNGは非同梱、strict resumeではない。
+
+この一回は閉鎖、通常候補不採用。primary=BLOCKER_NARROWED、商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=false。次は同じ回数/LRだけを変える連続有料試行を自動追加せず、長い更新packet/原文役割と自然本文の学習設計を既存原本から見直す。今回の基本不成立の修正前に新観測会を要求しない。新有料試行/新接続契約変更/通常有効化への進行0。API/DTO/DB/RN/Render/Supabase/本人DB/merge/deploy/GPU管理/lifecycle変更0、STRUCTURE_MAP_DELTA_NONE、GPU稼働保持。

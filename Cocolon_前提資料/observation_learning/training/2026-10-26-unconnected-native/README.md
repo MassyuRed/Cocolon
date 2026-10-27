@@ -6,7 +6,7 @@
 <a id="native15-balanced30-result"></a>
 ## 2026-10-27 — 損失配分30更新一回の最終結果
 
-**現在の直接作業（10/27：承認済みcontinuation30を一回実行中、30更新/保存/別reload完了・生成確認中）：** Mashがb6ab7edcへ「進めていいよ。」と承認、source e1ed9750/PID67437を一回起動。初期1d218763・全文assistant/EOS CE・LR1e-5・同15/同30順序で30更新と別adapter保存/非学習reloadが完了し、上限2700秒/180秒/15call/$0.21按分（準備/回収/保持等別）内で生成確認中。399.670965秒/生成0の早期重みdd1188e8は全15payload+manifest/32F32有限をPod外照合しversion0へ保全済み。最終15件のCMEE採否・本文・初期1d/前回228比較は未確定で品質credit0。追加更新/生成/再起動/自動retryなし。原本continuation30_result/README・weekly§65、通常API/DB/RN/Render/Supabase/本人DB/merge/deploy/GPU管理/lifecycle変更0、商品0/正式0/3/54.50％、GPU稼働保持。
+**現在の直接作業（10/27：continuation30一回完了、意味11/本文9・新6本文0で不採用）：** 承認source e1ed9750/PID67437で初期1d218763・全文CE/LR1e-5・同15/同30順序→別保存/非学習reload→15生成を1578.951346秒/$0.122807処理按分で完了。EOS/JSON12/15、意味11/本文9、旧9は意味/本文9/9で教師packet全文一致、新6は意味2/6・本文0/6。直前228の7/6から旧9を復旧したが、初期1dの11/9から進まず、新6EOS/JSONは6→3へ退行。BOOK/SHOP回答とKNITが3712token反復打切り、BOOK初回unknown束縛/安心補完、SHOP本文の問い混入、REPOT二重主客反転が残り新dd1188e8は通常不採用。cold11/11には本文なしSHOP/REPOT2を含み、本文11完成ではない。全84payload+manifest/32F32有限/早期最終重み一致をPod外照合しversion1保全済み。追加更新/再生成/再起動/retryなし。同じ回数・LR調整の連続試行を自動追加せず、長い更新packetと自然本文の学習設計を既存原本から見直す。新観測会は今は不要。原本continuation30_result/README・weekly§66、商品0/正式0/3/54.50％、GPU稼働保持。
 
 [全15採否・比較・本文読解・重み保全](balanced30_result/README.md)。本一回はRUN_CLOSED_REJECTED_CANDIDATE。以下のbalanced30準備・旧interleaved30節は履歴として維持し、閉鎖済みplanを再起動しない。
 
@@ -423,10 +423,18 @@ PACK=/workspace/cocolon_native15_pack_20261026、OUTPUT=/workspace/cocolon_nativ
 
 
 <a id="native15-continuation30-proposal"></a>
-## 2026-10-27 — 成立済み1d218763から同15教材を低LRで30更新する候補
+## 2026-10-27 — 低LR継続30の準備履歴（実行完了・不採用）
 
 **現在の直接作業（10/27：成立済み重み1d218763からの低LR継続30候補、実CPU確認済み・新GPU判断前）：** balanced30の意味7/本文6・新6本文0を踏まえ、同quote15/同30順序を、全15JSON・旧9本文が成立した1d218763から全文assistant/EOS CE・LR1e-5で継続する別候補を実装。Jupyter直接のCPU6.027493秒で実tokenizer15/切捨て0/max7935・入力/prior15一致、初期3file/32F32有限/凍結payload不変、新authorization falseとoutput作成前拒否を確認。最初の配置補助file不足は元payload全件コピーで解消、モデル処理0。新4B読込/forward/更新/生成/採否/SQL0で改善未検証。別の一回は同30更新→保存/非学習reload→15確認、2700秒/180秒/15call/$0.21処理按分上限（準備/回収/保持等別）。初期/損失/LRを組合せて変えるため因果一要素実験ではない。旧一回/承認/228edccfは継承せず、新有料試行は個別判断前。新観測会は今は不要、原本continuation30_preparation/README・weekly§64。商品0/正式0/3/54.50％、GPU稼働保持。
 
 実行判断対象は [continuation30_preparation/README.md](continuation30_preparation/README.md)。同じ凍結15と30順序・API6b043880・採用reader/capを保ち、初期1d/全文CE/LR1e-5の保存継続を提案。旧45779からの構造再学習を避け、重点配分で半減した外側key/EOSの係数を元へ戻し、継続時の変更量を抑える目的です。効果は未検証で、単一主因の確定や一般化の保証はしません。fresh optimizerであり厳密な途中resumeではありません。
 
 新runner/plan/consumerと実CPU原本を保存。実CPUは初期hash・32F32・教材/入力/prior15・token/EOS/切捨て0・新output前のpending拒否まで。新GPU model load/forward/学習/生成、実CMEE採否、SQL、通常有効化は0。別の一回承認後だけ2700秒/180秒/15call/$0.21按分上限で実行し、全15原本読解/固定CMEE/cold-file/重み回収/GitHub読戻しまで同単位で行います。旧一回や残時間/予算は再使用せず、再試行/追加更新/再生成なし。STRUCTURE_MAP_DELTA_NONE、限定TECHNICAL_CREDITは候補/CPUのみ、商品0/正式0/3/54.50％据置。
+
+
+<a id="native15-continuation30-final-result"></a>
+## 2026-10-27 — continuation30一回完了、新6本文0で新候補不採用
+
+**現在の直接作業（10/27：continuation30一回完了、意味11/本文9・新6本文0で不採用）：** 承認source e1ed9750/PID67437で初期1d218763・全文CE/LR1e-5・同15/同30順序→別保存/非学習reload→15生成を1578.951346秒/$0.122807処理按分で完了。EOS/JSON12/15、意味11/本文9、旧9は意味/本文9/9で教師packet全文一致、新6は意味2/6・本文0/6。直前228の7/6から旧9を復旧したが、初期1dの11/9から進まず、新6EOS/JSONは6→3へ退行。BOOK/SHOP回答とKNITが3712token反復打切り、BOOK初回unknown束縛/安心補完、SHOP本文の問い混入、REPOT二重主客反転が残り新dd1188e8は通常不採用。cold11/11には本文なしSHOP/REPOT2を含み、本文11完成ではない。全84payload+manifest/32F32有限/早期最終重み一致をPod外照合しversion1保全済み。追加更新/再生成/再起動/retryなし。同じ回数・LR調整の連続試行を自動追加せず、長い更新packetと自然本文の学習設計を既存原本から見直す。新観測会は今は不要。原本continuation30_result/README・weekly§66、商品0/正式0/3/54.50％、GPU稼働保持。
+
+最終原本は [continuation30_result/README.md](continuation30_result/README.md)。初期1dからの30更新でも意味11/本文9を越えず、新6のEOS/JSONは6→3へ退行しました。旧9のpacket/実本文は保持し、前228の訂正3件を復旧。CPU101.201544秒/cold snapshot11/11には本文なしSHOP/REPOT2を含みます。処理1578.951346秒/$0.122807按分、最大2700秒/$0.21内、timeout/OOM/追加更新/再生成/retry0。最終全84payload＋manifest/32F32有限/早期最終一致をversion1へ保全。下記/上記のGPU判断前記載は準備時の履歴で、閉鎖runを再起動しません。商品0/正式0/3/54.50％、STRUCTURE_MAP_DELTA_NONE、GPU稼働保持。

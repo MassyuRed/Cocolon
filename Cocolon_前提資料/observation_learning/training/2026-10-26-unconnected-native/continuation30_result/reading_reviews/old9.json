@@ -16,7 +16,12 @@
       "initial_1d_packet_equal": true,
       "previous_228_packet_equal": true,
       "evidence_quote_count": 6,
-      "update_count": 0
+      "update_count": 0,
+      "consumer_overlay": {
+        "meaning_adopted": true,
+        "body_available": true,
+        "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL"
+      }
     },
     {
       "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
@@ -24,7 +29,12 @@
       "initial_1d_packet_equal": true,
       "previous_228_packet_equal": false,
       "evidence_quote_count": 12,
-      "update_count": 3
+      "update_count": 3,
+      "consumer_overlay": {
+        "meaning_adopted": true,
+        "body_available": true,
+        "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL"
+      }
     },
     {
       "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
@@ -32,7 +42,12 @@
       "initial_1d_packet_equal": true,
       "previous_228_packet_equal": true,
       "evidence_quote_count": 6,
-      "update_count": 0
+      "update_count": 0,
+      "consumer_overlay": {
+        "meaning_adopted": true,
+        "body_available": true,
+        "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL"
+      }
     },
     {
       "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
@@ -40,7 +55,12 @@
       "initial_1d_packet_equal": true,
       "previous_228_packet_equal": false,
       "evidence_quote_count": 12,
-      "update_count": 3
+      "update_count": 3,
+      "consumer_overlay": {
+        "meaning_adopted": true,
+        "body_available": true,
+        "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL"
+      }
     },
     {
       "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
@@ -48,7 +68,12 @@
       "initial_1d_packet_equal": true,
       "previous_228_packet_equal": true,
       "evidence_quote_count": 6,
-      "update_count": 0
+      "update_count": 0,
+      "consumer_overlay": {
+        "meaning_adopted": true,
+        "body_available": true,
+        "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL"
+      }
     },
     {
       "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
@@ -56,7 +81,12 @@
       "initial_1d_packet_equal": true,
       "previous_228_packet_equal": false,
       "evidence_quote_count": 12,
-      "update_count": 3
+      "update_count": 3,
+      "consumer_overlay": {
+        "meaning_adopted": true,
+        "body_available": true,
+        "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL"
+      }
     },
     {
       "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
@@ -64,7 +94,12 @@
       "initial_1d_packet_equal": true,
       "previous_228_packet_equal": true,
       "evidence_quote_count": 8,
-      "update_count": 0
+      "update_count": 0,
+      "consumer_overlay": {
+        "meaning_adopted": true,
+        "body_available": true,
+        "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL"
+      }
     },
     {
       "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
@@ -72,7 +107,12 @@
       "initial_1d_packet_equal": true,
       "previous_228_packet_equal": true,
       "evidence_quote_count": 8,
-      "update_count": 0
+      "update_count": 0,
+      "consumer_overlay": {
+        "meaning_adopted": true,
+        "body_available": true,
+        "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL"
+      }
     },
     {
       "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
@@ -80,7 +120,12 @@
       "initial_1d_packet_equal": true,
       "previous_228_packet_equal": true,
       "evidence_quote_count": 8,
-      "update_count": 0
+      "update_count": 0,
+      "consumer_overlay": {
+        "meaning_adopted": true,
+        "body_available": true,
+        "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL"
+      }
     }
   ],
   "substantive_reading": {
@@ -90,10 +135,10 @@
     "naturalness": "全9の観測/受け取り/訂正文は初期1dおよび教師と同じ。前回228から構造は復旧したが、新たな文体改善ではない。喜び語の反復と硬い訂正記録文は教師由来で残る。",
     "counting": "旧9は2言語familyのidentity反復であり、未知9場面ではない。"
   },
-  "cmee_meaning_adopted": null,
-  "cmee_body_available": null,
-  "cmee_cold_file": null,
-  "consumer_status": "NOT_YET_RUN_AT_REVIEW; proposed surfaces are not adopted CMEE bodies",
+  "cmee_meaning_adopted": 9,
+  "cmee_body_available": 9,
+  "cmee_cold_file": 9,
+  "consumer_status": "CPU_AFTER15_DIAGNOSED_NOT_SERVICE_OR_PRODUCT_ACCEPTED",
   "raw_repair": false,
   "new_model_calls": 0,
   "agent_tests": 0,
