@@ -1,0 +1,16 @@
+{
+  "status": "STARTED_ONCE",
+  "source_commit": "e1ed975034ffaf6eb1c1b8a662d8cf8e16c4d3aa",
+  "stage": "training",
+  "optimizer_steps_completed": 17,
+  "model_calls_started": 0,
+  "model_calls_completed": 0,
+  "seconds": 218.08217934996355,
+  "product_accepted": false,
+  "automatic_progression": false,
+  "retry": false,
+  "pid": 67437,
+  "classification": "EXECUTION_IN_PROGRESS_NO_QUALITY_CLAIM",
+  "snapshot_only": true,
+  "next_action": "finish approved same run, preserve weights/raw, run pinned CPU consumer and all15 content review; do not relaunch"
+}
