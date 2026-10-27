@@ -3078,3 +3078,21 @@ consumer CPU34.190337334992364秒、全15input再構成とBOOK回答/SHOP回答/
 実GPUは新一回の個別判断前。最大2700秒/$0.21処理按分、外側2690秒＋kill10秒/内側2700秒、生成各180秒/最大15、全15完了保証なし。原本回収/CPU採否/cold/保持/保存/通信/税等は別。旧承認/残時間/予算は再利用しない。全29payload＋manifest30member、325368bytes/SHA757770c7331e02d2cc6a8c346aac80c8e06b29ed73a1cf97084afd799f64869eのZIPをPod外でCRC/size/hash照合。重みは不変の既保存109c参照で今回ZIP非同梱。
 
 全体00/観測入口/training入口/01A/CMEE map/共有設計を同単位同期。可逆source/CPU/GitHub反映は続行指示＋Rule18§11.3、別の有料実4B処理は個別判断前。実行環境Codex Work/GPT-6系/root単一writer・実行owner、補助2名はread-onlyで正式Pro/Ultra/human受入れではない。primary=TECHNICAL_CREDIT（prompt伝達・学習準備/CPUのみ）、商品0/正式0/3/54.50％、通常意味11/本文9・新6本文0/109c不採用、candidate_ready=false、automatic_progression=false、STRUCTURE_MAP_DELTA_NONE。API内部prompt/test3path以外の通常API/DB/RN/Render/Supabase/依存/価格/merge/deploy、GPU Stop/restart/delete0。
+
+## 76. 10/27 — localized30一回完了・保存再読込・15件CMEE確認
+
+**現在の直接作業（10/27：承認済みlocalized30一回を終了・原本保全）：** 30更新・新保存・112F32/3,833,856parameterの非学習再読込を完了。自由生成15/15、EOS15・strict JSON14、同CMEEの意味11/15・本文9/15（旧9意味/本文9/9、新6意味/本文2/0）。採用snapshotの別process cold-fileは11/11完全一致、失敗0。処理1524.400948秒・$0.118565按分（準備/CPU/回収/保持/保存/通信/税等別）。旧9は全raw_text/教師packet/本文を維持。新6はEOS6/strict5まで完結性が改善したが、BOOKのID・重複キー、回答後の根拠/更新不足、REPOT主客反転、KNIT意味scope/本文反復が残った。新937233a0は通常不採用。意味11/本文9・新6本文0で前回から本文成立は増えていない。 最初のwrapper事前拒否は実4B処理0で、修正後の実モデル実行は一回だけ。原本localized30_result/README・最新weekly§76。既存教師で長い意味・全更新・根拠・自然本文を同時に保持する学習設計をCPU準備から見直す。新観測会は今は不要。同じ回数/LRだけの有料反復や閉鎖run再起動へ自動進行しない。 商品0/正式0/3/54.50％、GPU稼働保持。
+
+Mashがproposal `1cfc0f838186574c6cbc870e7b94f6706dab39aa`の同15教材30更新→保存・非学習再読込→15件確認、最大45分/$0.21処理按分の一回を明示承認。必読全機能原本/incident・全体設計/file地図・最新§75と承認原本を確認して作業した。
+
+承認記録のJSON再直列化でgradient_clipの1.0を1へ崩した最初のwrapperは、output作成・実4B読込/更新/生成前に型検査で拒否された。原案の形式を保ち承認3項目だけを変更して修正。wrapper起動2・事前拒否1、実モデルrun1・モデル再試行0で、最初の失敗logも保全した。実モデル実行source `d54ea1db19ab8fb3c3a57fc07b5a20566f245591`、APIa4b91b4固定。同109c/56module112F32を全値照合して開始し、同15各2回・固定30順序、全文CE＋198位置相対16倍、LR1e-5/seed20261024/clip1/AdamW weight_decay0を維持。fresh optimizerで厳密途中再開ではない。
+
+30更新・新保存・112F32/3,833,856parameterの非学習再読込を完了。自由生成15/15、EOS15・strict JSON14、同CMEEの意味11/15・本文9/15（旧9意味/本文9/9、新6意味/本文2/0）。採用snapshotの別process cold-fileは11/11完全一致、失敗0。処理1524.400948秒・$0.118565按分（準備/CPU/回収/保持/保存/通信/税等別）。新保存を同OS process内の新model objectへno-gradで読み、全112tensorのkey/shape/値を照合した。rawを補修せず既存CMEEへ渡し、採用snapshotだけ別processでcold-file再読。後段の新model call/更新/SQLは0。
+
+旧9は全raw_text/教師packet/本文を維持。新6はEOS6/strict5まで完結性が改善したが、BOOKのID・重複キー、回答後の根拠/更新不足、REPOT主客反転、KNIT意味scope/本文反復が残った。新937233a0は通常不採用。意味11/本文9・新6本文0で前回から本文成立は増えていない。 初期109cの意味11/本文9・新6本文0は前回の測定値として保持し、今回の新重みと混同しない。prompt教示とlossを同時に変えているため効果を片方へ帰属せず、正解prefix付き前回診断を自由生成成功へ加算しない。
+
+重み入り原本は全82payload＋manifest/83member、15171902bytes、SHA256 `d77f865ef019c6cd69988733ac4dcb13b808292157660057497590b1c7ad6a20`をPod外でCRC/size/hash照合し保存。新adapter SHA256 `937233a0d2f89425bf42abf971f4e37662bb2db8c6fddaf3fe5884349e1d95bd`。 [重み入り原本](https://chatgpt.com/library?file_id=libfile_93e16ba81d5c8191986438057de80a9a&account_id=personal)。全15のraw/本文/問い/更新と照合記録を今回結果ownerへ保存。元109c/旧run/sourceは不変。
+
+既存教師で長い意味・全更新・根拠・自然本文を同時に保持する学習設計をCPU準備から見直す。新観測会は今は不要。同じ回数/LRだけの有料反復や閉鎖run再起動へ自動進行しない。
+
+同15教師/全文/target IDsと元109c、reader/採用条件/APIa4b91b4は不変。新指示と重点lossの効果は個別帰属しない。既知FITの測定であり、未知一般化・実初回からの動的prior・通常service/SQL・本人端末・Piece/Analysis品質・正式商品受入れは未成立。商品0/正式0/3/54.50％、PRODUCT_NOT_CLEAR、candidate_ready=false、automatic_progression=false。製品責務/型/wire/通常接続は不変でSTRUCTURE_MAP_DELTA_NONE。GPUは稼働保持し、Stop/restart/delete・追加有料run・merge/deploy0。限定TECHNICAL_CREDITで、正式Pro/Ultra/human商品受入れではない。通常API/DB/RN/Render/Supabase/価格/依存の変更0。全体00/観測入口/training/prep/01A/CMEE map/共有設計を同単位同期した。

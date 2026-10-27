@@ -5213,7 +5213,7 @@ APIa4b91b4は既存model_candidate_source.pyのquote分岐にunknown_id ASCII64/
 
 | 同training rootのlocalized30_preparation/ | 責任・状態 |
 |---|---|
-| README・localized30.plan.json・run_localized30.py | 同109c/112F32→同15/30更新→保存非学習reload→15自由生成の具体案。全文CE＋静的198位置16倍、最大2700秒/$0.21、新GPU未承認/pending output前拒否 |
+| README・localized30.plan.json・run_localized30.py | 同109c/112F32→同15/30更新→保存非学習reload→15自由生成の承認・実行原本。最大2700秒/$0.21の一回は終了・再利用不可。plan/sourceは凍結保持、最終結果はlocalized30_result/ |
 | local_token_loss.py・fixed_token_mask.json | 旧109c診断の既知198位置だけを重点化し、ID別名5を外す。新prefixで相対位置を保持、旧9は既存CE。未知一般化・効果保証なし |
 | prepare_localized30.py・api_changes.json・dependency_bindings.json | 既存ID条件明示だけの新prompt/固定教師/実tokenizer/診断mask/外部依存のCPU束縛。旧原本は上書きしない |
 | actual_cpu_check・pending_execution_check・consumer_cpu_check | CPU14.888497秒/15教師保持/7980/8131・ID21条件・mask/勾配/shift、pending拒否。consumer34.190337秒/入力15/合成教師cold3、実4B処理0 |
@@ -5221,4 +5221,24 @@ APIa4b91b4は既存model_candidate_source.pyのquote分岐にunknown_id ASCII64/
 | train_messages.jsonl・eval_inputs.jsonl | 凍結15の教師全文不変、モデル入力だけID条件1項目追加の別版。評価にassistant教師を渡さない |
 | preparation_evidence ZIP・manifest・recovery_verification | 全29payload＋manifest30member/325368bytes/SHA757770c7…64869e、初回CPU丸め差停止と修正後原本を区別して保全。重みは既存109c参照 |
 
-最新現在地は全体00/観測入口/training/weekly§75。新有料GPUは別一回の個別判断前、通常11/9・新6本文0の不採用、商品0/正式0/3/54.50％、GPU稼働保持。
+この準備節は実行前の履歴。最新現在地は全体00/観測入口/training/localized30_result/README・weekly§76。商品0/正式0/3/54.50％、GPU稼働保持。
+
+### 2026-10-27 — localized30実行結果の全file地図
+
+`observation_learning/training/2026-10-26-unconnected-native/localized30_result/`が今回の結果owner。30更新・新保存・112F32/3,833,856parameterの非学習再読込を完了。自由生成15/15、EOS15・strict JSON14、同CMEEの意味11/15・本文9/15（旧9意味/本文9/9、新6意味/本文2/0）。採用snapshotの別process cold-fileは11/11完全一致、失敗0。処理1524.400948秒・$0.118565按分（準備/CPU/回収/保持/保存/通信/税等別）。新937233a0は通常不採用。意味11/本文9・新6本文0で前回から本文成立は増えていない。製品責務/意味型/wire/採用reader/通常接続は不変、STRUCTURE_MAP_DELTA_NONE。
+
+| file群 | 責務 |
+|---|---|
+| `README.md・result_summary.json` | 一回閉鎖・実測・採否・本文所見と次の作業境界 |
+| `run.json・training.jsonl・localized30.plan.json・initial_loaded_tensors.json・reloaded_tensors.json` | 実30更新/2読込/112F32照合・当時の承認計画。RAW_COMPLETE statusは原本不変 |
+| `after_*.jsonl（15file）・case_comparison.json` | 無補修全raw/usage/adapter identityと旧109c/凍結教師比較 |
+| `run_localized30.py・consume_localized30.py・prepare_localized30.py・local_token_loss.py・fixed_token_mask.json・train_messages.jsonl・eval_inputs.jsonl` | 実行時凍結source/重点198位置/同15入力・教師。追加実行指示ではない |
+| `actual_cpu_check.json・api_changes.json・consumer_cpu_check.json・cpu_launch*.json・dependency_bindings.json・pending_execution_check.json・preparation_manifest.json` | 前段CPU/source/input同一性。準備ZIPは既存preparation owner |
+| `diagnosis/summary.json・diagnosis/cases/*.json（15）` | 固定CMEEの完全診断をmetadata+caseへ値不変で分割。全値再組立て一致 |
+| `diagnosis/*_saved.json・*_saved_completed.json・*_cold.json（各11）` | 採用snapshotの保存・完成と別process全outcome再読。本文なし2件を含む |
+| `adapter/README.md・adapter_config.json・archive_identity.json・runtime_archive_manifest.json・external_verification.json・verify_recovery_external.py` | 新9372重みと原本ZIPの保存先/CRC・hash/112有限照合。safetensors本体は重み入り原本へ |
+| `execution/*（7）` | 最初の事前型拒否と修正後実GPU一回、CPU consumerの全起動/log原本 |
+| `reading_reviews/root.json・body_review.json・identity_review.json` | 全15本文/問い/全更新とidentityのroot・read-only補助所見。正式商品受入れではない |
+| `repo_payload_manifest.json` | 今回GitHubへ反映する全pathとbytes/Git blob/SHA256の固定予定集合（manifest自身を除く） |
+
+凍結教師/評価/実行sourceは既存preparation ownerへ戻る。新result側は実測と原本回収を所有し、同じ教材を新教師として数えない。重み入り原本は全82payload＋manifest/83member、15171902bytes、SHA256 `d77f865ef019c6cd69988733ac4dcb13b808292157660057497590b1c7ad6a20`をPod外でCRC/size/hash照合し保存。新adapter SHA256 `937233a0d2f89425bf42abf971f4e37662bb2db8c6fddaf3fe5884349e1d95bd`。全体00/観測入口/training/weekly§76を同単位同期。商品0/正式0/3/54.50％、GPU稼働保持。

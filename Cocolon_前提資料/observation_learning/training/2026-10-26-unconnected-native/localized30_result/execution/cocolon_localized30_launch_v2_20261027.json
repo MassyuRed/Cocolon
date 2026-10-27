@@ -1,0 +1,26 @@
+{
+  "status": "LOCALIZED30_MODEL_RUN_LAUNCHED_ONCE",
+  "source_commit": "d54ea1db19ab8fb3c3a57fc07b5a20566f245591",
+  "plan_sha256": "5d6215972c09a09def4f74576acbe38e4452d24c6f15c5cff890991c96930bb4",
+  "cmd": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "2690s",
+    "python",
+    "-B",
+    "/workspace/cocolon_localized30_pack_20261027/run_localized30.py",
+    "--pack",
+    "/workspace/cocolon_localized30_pack_20261027",
+    "--execute",
+    "--source-commit",
+    "d54ea1db19ab8fb3c3a57fc07b5a20566f245591"
+  ],
+  "log": "/workspace/cocolon_localized30_gpu_v2_20261027.log",
+  "started_unix": 1793089222.8418128,
+  "max_seconds": 2700,
+  "max_process_usd": 0.21,
+  "retry": false,
+  "gpu_lifecycle_operations": 0,
+  "pid": 194923
+}

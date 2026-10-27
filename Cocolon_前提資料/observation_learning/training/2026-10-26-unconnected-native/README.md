@@ -1,14 +1,15 @@
 # 10/26 — 未接続の既存6教材とCMEE受理範囲／一括接続案
 
-状態：**10/27：ID条件明示と固定198token重点化30更新案を実CPU確認。実4B処理0、新GPU一回は判断前。通常意味11/本文9・新6本文0の不採用は不変。**
+状態：**10/27：承認済みlocalized30一回は終了・回収保全済み。意味11/15・本文9/15、新6本文0/6。新937233a0は通常不採用。意味11/本文9・新6本文0で前回から本文成立は増えていない。**
 
 
 <a id="native15-token-diagnostic-proposal"></a>
-## 2026-10-27 — 同109cの語単位診断、実CPU確認済み
+<a id="native15-localized30-result"></a>
+## 2026-10-27 — localized30実行結果・一回閉鎖
 
-**現在の直接作業（10/27：ID条件明示と固定198token重点化30更新案を実CPU確認、新GPUは判断前）：** APIa4b91b4でquote出力仕様へ既存unknown_id ASCII64/参照条件1項目だけ追補、reader/教師/legacy不変。Jupyter CPU14.888497秒で全15の新旧差1項目・45token増/全長7980/生成枠込み8131、教師全文/target IDs/EOS・旧本文/問い維持、ID21条件、固定mask198・CE/勾配/causal shift・改変4拒否を確認。consumer CPU34.190337秒で15input/合成教師cold3一致、実モデル成功ではない。実4B読込/forward/学習/生成/SQL0、pending executeはoutput前拒否。次の一回案は保存109c/112F32から全文CE＋既知198位置だけ相対16倍、同15各2回/30更新→保存・非学習reload→15自由生成、最大2700秒/$0.21処理按分（準備/回収/保持等別）。旧9は既存CE、新指示とlossの効果は個別帰属せず、実GPUは個別判断前。新観測会は今は不要。全29payload＋manifest/30memberを照合・保全。原本localized30_preparation/README・weekly§75。通常11/9・新6本文0の不採用、商品0/正式0/3/54.50％は不変。GPU稼働保持。
+**現在の直接作業（10/27：承認済みlocalized30一回を終了・原本保全）：** 30更新・新保存・112F32/3,833,856parameterの非学習再読込を完了。自由生成15/15、EOS15・strict JSON14、同CMEEの意味11/15・本文9/15（旧9意味/本文9/9、新6意味/本文2/0）。採用snapshotの別process cold-fileは11/11完全一致、失敗0。処理1524.400948秒・$0.118565按分（準備/CPU/回収/保持/保存/通信/税等別）。旧9は全raw_text/教師packet/本文を維持。新6はEOS6/strict5まで完結性が改善したが、BOOKのID・重複キー、回答後の根拠/更新不足、REPOT主客反転、KNIT意味scope/本文反復が残った。新937233a0は通常不採用。意味11/本文9・新6本文0で前回から本文成立は増えていない。 最初のwrapper事前拒否は実4B処理0で、修正後の実モデル実行は一回だけ。原本localized30_result/README・最新weekly§76。既存教師で長い意味・全更新・根拠・自然本文を同時に保持する学習設計をCPU準備から見直す。新観測会は今は不要。同じ回数/LRだけの有料反復や閉鎖run再起動へ自動進行しない。 商品0/正式0/3/54.50％、GPU稼働保持。
 
-[次の具体案・source・実CPU原本](localized30_preparation/README.md)、[前回診断実結果](token_diagnostic_result/README.md)。新有料一回は判断前です。閉鎖した前回診断の承認枠は再利用せず、正解prefix付き診断を通常生成成功へ換算しません。以下は§72以前の履歴です。
+[今回の実結果・全出力・保存重みのidentity](localized30_result/README.md)、[承認時の具体案・source・実CPU原本](localized30_preparation/README.md)、[前回診断実結果](token_diagnostic_result/README.md)。今回と前回の一回はともに閉鎖済み。以下は§72以前の履歴です。
 
 <a id="native15-expanded15-recovery-result"></a>
 ## 2026-10-27 — 保存済み重みの非学習再読込と15確認完了、品質は改善せず

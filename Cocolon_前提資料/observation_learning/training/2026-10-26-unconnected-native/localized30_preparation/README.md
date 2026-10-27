@@ -1,6 +1,6 @@
 # ID出力条件の明示＋固定198token重点化 — 同15教材30更新の一回案
 
-状態：**CPU_READY / PREPARED_AWAITING_MASH_APPROVAL / GPU_NOT_AUTHORIZED**。Mashの「4B学習＋CMEE接続を続けて」に基づき、原因が分かった箇所のsource修正と実CPU確認まで完了しました。新しい実4B読込・学習・生成は0です。前回の語単位診断一回は閉鎖済みで、承認・残時間・予算を再利用しません。
+状態：**EXECUTED_ONCE / CLOSED / DO_NOT_RELAUNCH**。Mashがproposal1cfc0f83の同15/30更新→保存・非学習再読込→15件確認、最大45分/$0.21処理按分の一回を明示承認。[実結果と原本](../localized30_result/README.md)に採否・本文読解・保存先を記録。以下は承認時の具体案とCPU準備の履歴で、追加実行を指示しません。
 
 ## 今回変えたことと理由
 
@@ -43,18 +43,18 @@ API `a4b91b4788b2fb29483a4c77869c91b36402ae9f` は `model_candidate_source.py::b
 
 推奨はこの一回で、回数・LRだけの反復や層追加、cap延長、reader緩和へ戻しません。全15の意味/本文成立と、BOOK7/SHOP8の必要更新・主客/根拠保持、旧9維持を確認できなければ通常候補として採用しません。成功しても既知FITだけです。未知一般化、実初回出力からの動的prior、本人端末、Piece/Analysis品質、正式商品受入れの成功へ加算しません。
 
-実行sourceは[run_localized30.py](run_localized30.py)、[固定plan](localized30.plan.json)、[損失](local_token_loss.py)、[固定mask](fixed_token_mask.json)、[CPU準備](prepare_localized30.py)、[consumer](consume_localized30.py)です。実行時は新承認をplanのstatus/gpu_run_authorized/approval_basisだけへ束縛し、fresh GitHub readback後に起動します。
+実行sourceは `d54ea1db19ab8fb3c3a57fc07b5a20566f245591`。承認済みplan/runner/損失/maskと教師は実行identityとして保持し、閉鎖のために書き換えません。次のcommandは当該一回の履歴で、再実行しません。
 
 ```bash
-timeout --signal=TERM --kill-after=10s 2690s python /workspace/cocolon_localized30_pack_20261027/run_localized30.py --pack /workspace/cocolon_localized30_pack_20261027 --execute --source-commit <new-authorized-commit>
+timeout --signal=TERM --kill-after=10s 2690s python /workspace/cocolon_localized30_pack_20261027/run_localized30.py --pack /workspace/cocolon_localized30_pack_20261027 --execute --source-commit d54ea1db19ab8fb3c3a57fc07b5a20566f245591
 ```
 
 ## 承認と保護範囲・原本
 
 今回の可逆source/CPU/GitHub反映は、Mashの続行指示と既存Rule18 §11.3の範囲で進めました。実行環境はCodex Work/GPT-6系、root単一writer/実行owner、補助2名はread-onlyレビューです。正式Pro/Ultra/human受入れと偽りません。
 
-新しい有料load/30更新/15生成はまだ実行していません。[作業規則18 §11.3](../../../../work_attitude_rules_for_karen/18_chat_work_environment_selection_rule_2026_08_06.txt)のstanding delegation外「明確な費用・期間・運用負担またはProduct Readまでの必須作業数の増加」と、前回一回の閉鎖境界により、この具体案の新一回だけをMashへ確認します。これはGPUの再起動・通常有効化・別試行の承認ではありません。
+この具体案へのMash明示承認後、Jupyterへ直接接続して一回を実行しました。承認記録のJSON再直列化でgradient_clipの1.0を1へ崩した最初のwrapperは、output作成・実4B読込/更新/生成前に型検査で拒否された。原案の形式を保ち承認3項目だけを変更して修正。wrapper起動2・事前拒否1、実モデルrun1・モデル再試行0で、最初の失敗logも保全した。承認範囲と最大45分/$0.21は拡張せず終了。旧承認の流用・失敗要求再call・GPU再起動はありません。
 
 [準備全原本ZIP](preparation_evidence_20261027.zip) は325368bytes、SHA256 `757770c7331e02d2cc6a8c346aac80c8e06b29ed73a1cf97084afd799f64869e`。29payload＋manifest/30memberのCRC・size・hashをPod外照合しました。[manifest](preparation_manifest.json)と[外側照合](recovery_verification.json)にidentityを保存しています。新旧CPU log/launch、固定source/plan/mask、新入力/評価、実CPU、pending拒否、consumer合成cold3の全原本、API変更3sourceを含みます。重みは不変の既保存109cを参照し、今回ZIPには同梱しません。
 
-新観測会は今は不要です。公開API/reader/意味型/wire/DB/RN/Render/Supabase/依存/本番/価格/モデル選定/merge/deploy・GPU Stop/restart/deleteは変更0（API内部promptと回帰test3fileのみ）。今回のprimaryは限定TECHNICAL_CREDIT、商品0/正式0/3/54.50％、109c通常不採用・通常意味11/本文9/新6本文0は不変。STRUCTURE_MAP_DELTA_NONE、candidate_ready=false、automatic_progression=false。
+30更新・新保存・112F32/3,833,856parameterの非学習再読込を完了。自由生成15/15、EOS15・strict JSON14、同CMEEの意味11/15・本文9/15（旧9意味/本文9/9、新6意味/本文2/0）。採用snapshotの別process cold-fileは11/11完全一致、失敗0。処理1524.400948秒・$0.118565按分（準備/CPU/回収/保持/保存/通信/税等別）。新937233a0は通常不採用。意味11/本文9・新6本文0で前回から本文成立は増えていない。 既存教師で長い意味・全更新・根拠・自然本文を同時に保持する学習設計をCPU準備から見直す。新観測会は今は不要。同じ回数/LRだけの有料反復や閉鎖run再起動へ自動進行しない。 同15教師/全文/target IDsと元109c、reader/採用条件/APIa4b91b4は不変。新指示と重点lossの効果は個別帰属しない。既知FITの測定であり、未知一般化・実初回からの動的prior・通常service/SQL・本人端末・Piece/Analysis品質・正式商品受入れは未成立。商品0/正式0/3/54.50％、PRODUCT_NOT_CLEAR、candidate_ready=false、automatic_progression=false。製品責務/型/wire/通常接続は不変でSTRUCTURE_MAP_DELTA_NONE。GPUは稼働保持し、Stop/restart/delete・追加有料run・merge/deploy0。

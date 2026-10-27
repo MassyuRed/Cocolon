@@ -1,0 +1,1888 @@
+[
+  {
+    "id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+    "eos": true,
+    "output_tokens": 1332,
+    "seconds": 58.302908962010406,
+    "strict_parsed": true,
+    "parse_error": null,
+    "raw_text_equals_previous109c": true,
+    "parsed_equals_teacher": true,
+    "raw_sha256": "7f07b078b4b8ee3cd515d18e9c0e6024bdb6ffbd3322e8a19ce9ec85ec46a5a1",
+    "claims_count": 4,
+    "relations_count": 2,
+    "unknowns_count": 1,
+    "updates_count": 0,
+    "surface": {
+      "bindings": [
+        {
+          "claim_refs": [
+            "repair",
+            "usable_again"
+          ],
+          "relation_refs": [
+            "repair_and_result"
+          ],
+          "section": "observation"
+        },
+        {
+          "claim_refs": [
+            "solo_appraisal_object",
+            "joy",
+            "usable_again"
+          ],
+          "relation_refs": [
+            "joy_ground"
+          ],
+          "section": "reception"
+        }
+      ],
+      "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+      "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+      "update_note": null
+    },
+    "question": {
+      "claim_refs": [
+        "solo_appraisal_object",
+        "joy"
+      ],
+      "focus": "PERSONAL_JOY_SIGNIFICANCE",
+      "target_unknown_ref": "personal_significance",
+      "text": "「全部一人で直せたこと」がなぜ嬉しかったのですか？"
+    },
+    "updates": [],
+    "evidence_quotes": [
+      {
+        "field_path": "memo_action",
+        "quote": "ぐらついていた椅子を修理して",
+        "source_id": "428004b4-147f-4c78-ac0f-4f1707c1dd41"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "また座れるようになった",
+        "source_id": "428004b4-147f-4c78-ac0f-4f1707c1dd41"
+      },
+      {
+        "field_path": "memo",
+        "quote": "うれしかった",
+        "source_id": "428004b4-147f-4c78-ac0f-4f1707c1dd41"
+      },
+      {
+        "field_path": "memo",
+        "quote": "全部一人で直せたこと",
+        "source_id": "428004b4-147f-4c78-ac0f-4f1707c1dd41"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "して、",
+        "source_id": "428004b4-147f-4c78-ac0f-4f1707c1dd41"
+      },
+      {
+        "field_path": "memo",
+        "quote": "全部一人で直せたことが、うれしかった",
+        "source_id": "428004b4-147f-4c78-ac0f-4f1707c1dd41"
+      }
+    ],
+    "old_surface": {
+      "bindings": [
+        {
+          "claim_refs": [
+            "repair",
+            "usable_again"
+          ],
+          "relation_refs": [
+            "repair_and_result"
+          ],
+          "section": "observation"
+        },
+        {
+          "claim_refs": [
+            "solo_appraisal_object",
+            "joy",
+            "usable_again"
+          ],
+          "relation_refs": [
+            "joy_ground"
+          ],
+          "section": "reception"
+        }
+      ],
+      "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+      "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+      "update_note": null
+    }
+  },
+  {
+    "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+    "eos": true,
+    "output_tokens": 2229,
+    "seconds": 96.88242991501465,
+    "strict_parsed": true,
+    "parse_error": null,
+    "raw_text_equals_previous109c": true,
+    "parsed_equals_teacher": true,
+    "raw_sha256": "486f27e3e828de62078cf8a037dfd577badc5544a14dfb708966c6b588b41add",
+    "claims_count": 6,
+    "relations_count": 2,
+    "unknowns_count": 0,
+    "updates_count": 3,
+    "surface": {
+      "bindings": [
+        {
+          "claim_refs": [
+            "friend_guidance",
+            "joint_repair"
+          ],
+          "relation_refs": [],
+          "section": "observation"
+        },
+        {
+          "claim_refs": [
+            "reuse_appraisal_object",
+            "joy",
+            "usable_again"
+          ],
+          "relation_refs": [
+            "joy_ground_revised"
+          ],
+          "section": "reception"
+        },
+        {
+          "claim_refs": [
+            "friend_guidance",
+            "joint_repair",
+            "reuse_appraisal_object"
+          ],
+          "relation_refs": [
+            "joy_ground_revised"
+          ],
+          "section": "update_note",
+          "update_refs": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+      "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+      "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+    },
+    "question": null,
+    "updates": [
+      {
+        "evidence_indexes": [
+          6,
+          7,
+          8
+        ],
+        "operation": "REVISE",
+        "prior_snapshot_ref": "semantic-6d2fb89dc1ced46eaf12d05c13e025191a4dacfbb9438b6d48417696d4235b30",
+        "replacement_refs": [
+          "friend_guidance",
+          "joint_repair"
+        ],
+        "target_kind": "CLAIM",
+        "target_ref": "solo_appraisal_object"
+      },
+      {
+        "evidence_indexes": [
+          10,
+          11
+        ],
+        "operation": "REVISE",
+        "prior_snapshot_ref": "semantic-6d2fb89dc1ced46eaf12d05c13e025191a4dacfbb9438b6d48417696d4235b30",
+        "replacement_refs": [
+          "joy_ground_revised"
+        ],
+        "target_kind": "RELATION",
+        "target_ref": "joy_ground"
+      },
+      {
+        "evidence_indexes": [
+          6,
+          11
+        ],
+        "operation": "INVALIDATE_GAP",
+        "prior_snapshot_ref": "semantic-6d2fb89dc1ced46eaf12d05c13e025191a4dacfbb9438b6d48417696d4235b30",
+        "replacement_refs": [],
+        "target_kind": "UNKNOWN",
+        "target_ref": "personal_significance"
+      }
+    ],
+    "evidence_quotes": [
+      {
+        "field_path": "memo_action",
+        "quote": "ぐらついていた椅子を修理して",
+        "source_id": "428004b4-147f-4c78-ac0f-4f1707c1dd41"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "また座れるようになった",
+        "source_id": "428004b4-147f-4c78-ac0f-4f1707c1dd41"
+      },
+      {
+        "field_path": "memo",
+        "quote": "うれしかった",
+        "source_id": "428004b4-147f-4c78-ac0f-4f1707c1dd41"
+      },
+      {
+        "field_path": "memo",
+        "quote": "全部一人で直せたこと",
+        "source_id": "428004b4-147f-4c78-ac0f-4f1707c1dd41"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "して、",
+        "source_id": "428004b4-147f-4c78-ac0f-4f1707c1dd41"
+      },
+      {
+        "field_path": "memo",
+        "quote": "全部一人で直せたことが、うれしかった",
+        "source_id": "428004b4-147f-4c78-ac0f-4f1707c1dd41"
+      },
+      {
+        "field_path": "answer_text_private",
+        "quote": "さっき「全部一人で」と書いたのは訂正します",
+        "source_id": "d0efb98c-aa02-4c1b-9ad9-aac942e2dc3f"
+      },
+      {
+        "field_path": "answer_text_private",
+        "quote": "友人に手順を教えてもらって",
+        "source_id": "d0efb98c-aa02-4c1b-9ad9-aac942e2dc3f"
+      },
+      {
+        "field_path": "answer_text_private",
+        "quote": "一緒に直しました",
+        "source_id": "d0efb98c-aa02-4c1b-9ad9-aac942e2dc3f"
+      },
+      {
+        "field_path": "answer_text_private",
+        "quote": "捨てずにまた使えるようになったからです",
+        "source_id": "d0efb98c-aa02-4c1b-9ad9-aac942e2dc3f"
+      },
+      {
+        "field_path": "answer_text_private",
+        "quote": "一人でできたからではなく",
+        "source_id": "d0efb98c-aa02-4c1b-9ad9-aac942e2dc3f"
+      },
+      {
+        "field_path": "answer_text_private",
+        "quote": "うれしかったのも、一人でできたからではなく、捨てずにまた使えるようになったからです",
+        "source_id": "d0efb98c-aa02-4c1b-9ad9-aac942e2dc3f"
+      }
+    ],
+    "old_surface": {
+      "bindings": [
+        {
+          "claim_refs": [
+            "friend_guidance",
+            "joint_repair"
+          ],
+          "relation_refs": [],
+          "section": "observation"
+        },
+        {
+          "claim_refs": [
+            "reuse_appraisal_object",
+            "joy",
+            "usable_again"
+          ],
+          "relation_refs": [
+            "joy_ground_revised"
+          ],
+          "section": "reception"
+        },
+        {
+          "claim_refs": [
+            "friend_guidance",
+            "joint_repair",
+            "reuse_appraisal_object"
+          ],
+          "relation_refs": [
+            "joy_ground_revised"
+          ],
+          "section": "update_note",
+          "update_refs": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+      "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+      "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+    }
+  },
+  {
+    "id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+    "eos": true,
+    "output_tokens": 1332,
+    "seconds": 58.07948441593908,
+    "strict_parsed": true,
+    "parse_error": null,
+    "raw_text_equals_previous109c": true,
+    "parsed_equals_teacher": true,
+    "raw_sha256": "f6817dc608b915c9894adaef47ccff47e3a6c96aaa9ab300811c3b74cb18aa96",
+    "claims_count": 4,
+    "relations_count": 2,
+    "unknowns_count": 1,
+    "updates_count": 0,
+    "surface": {
+      "bindings": [
+        {
+          "claim_refs": [
+            "repair",
+            "usable_again"
+          ],
+          "relation_refs": [
+            "repair_and_result"
+          ],
+          "section": "observation"
+        },
+        {
+          "claim_refs": [
+            "solo_appraisal_object",
+            "joy",
+            "usable_again"
+          ],
+          "relation_refs": [
+            "joy_ground"
+          ],
+          "section": "reception"
+        }
+      ],
+      "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+      "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+      "update_note": null
+    },
+    "question": {
+      "claim_refs": [
+        "solo_appraisal_object",
+        "joy"
+      ],
+      "focus": "PERSONAL_JOY_SIGNIFICANCE",
+      "target_unknown_ref": "personal_significance",
+      "text": "「全部一人で直せたこと」がなぜ嬉しかったのですか？"
+    },
+    "updates": [],
+    "evidence_quotes": [
+      {
+        "field_path": "memo_action",
+        "quote": "ぐらついていた椅子を修理して",
+        "source_id": "8ad110fa-57b2-4e7e-8035-95ac72518e2f"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "また座れるようになった",
+        "source_id": "8ad110fa-57b2-4e7e-8035-95ac72518e2f"
+      },
+      {
+        "field_path": "memo",
+        "quote": "うれしかった",
+        "source_id": "8ad110fa-57b2-4e7e-8035-95ac72518e2f"
+      },
+      {
+        "field_path": "memo",
+        "quote": "全部一人で直せたこと",
+        "source_id": "8ad110fa-57b2-4e7e-8035-95ac72518e2f"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "して、",
+        "source_id": "8ad110fa-57b2-4e7e-8035-95ac72518e2f"
+      },
+      {
+        "field_path": "memo",
+        "quote": "全部一人で直せたことが、うれしかった",
+        "source_id": "8ad110fa-57b2-4e7e-8035-95ac72518e2f"
+      }
+    ],
+    "old_surface": {
+      "bindings": [
+        {
+          "claim_refs": [
+            "repair",
+            "usable_again"
+          ],
+          "relation_refs": [
+            "repair_and_result"
+          ],
+          "section": "observation"
+        },
+        {
+          "claim_refs": [
+            "solo_appraisal_object",
+            "joy",
+            "usable_again"
+          ],
+          "relation_refs": [
+            "joy_ground"
+          ],
+          "section": "reception"
+        }
+      ],
+      "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+      "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+      "update_note": null
+    }
+  },
+  {
+    "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+    "eos": true,
+    "output_tokens": 2232,
+    "seconds": 97.08285560505465,
+    "strict_parsed": true,
+    "parse_error": null,
+    "raw_text_equals_previous109c": true,
+    "parsed_equals_teacher": true,
+    "raw_sha256": "d9cbc4e34b34c0ea0cfb1d48b6adeee92af980b3e1ff6c58cecbf172c3d3e005",
+    "claims_count": 6,
+    "relations_count": 2,
+    "unknowns_count": 0,
+    "updates_count": 3,
+    "surface": {
+      "bindings": [
+        {
+          "claim_refs": [
+            "friend_guidance",
+            "joint_repair"
+          ],
+          "relation_refs": [],
+          "section": "observation"
+        },
+        {
+          "claim_refs": [
+            "reuse_appraisal_object",
+            "joy",
+            "usable_again"
+          ],
+          "relation_refs": [
+            "joy_ground_revised"
+          ],
+          "section": "reception"
+        },
+        {
+          "claim_refs": [
+            "friend_guidance",
+            "joint_repair",
+            "reuse_appraisal_object"
+          ],
+          "relation_refs": [
+            "joy_ground_revised"
+          ],
+          "section": "update_note",
+          "update_refs": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+      "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+      "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+    },
+    "question": null,
+    "updates": [
+      {
+        "evidence_indexes": [
+          6,
+          7,
+          8
+        ],
+        "operation": "REVISE",
+        "prior_snapshot_ref": "semantic-953d22eba916b63075bee3c744d5a36c36c270b36efc5d334e79e5a3daf11628",
+        "replacement_refs": [
+          "friend_guidance",
+          "joint_repair"
+        ],
+        "target_kind": "CLAIM",
+        "target_ref": "solo_appraisal_object"
+      },
+      {
+        "evidence_indexes": [
+          10,
+          11
+        ],
+        "operation": "REVISE",
+        "prior_snapshot_ref": "semantic-953d22eba916b63075bee3c744d5a36c36c270b36efc5d334e79e5a3daf11628",
+        "replacement_refs": [
+          "joy_ground_revised"
+        ],
+        "target_kind": "RELATION",
+        "target_ref": "joy_ground"
+      },
+      {
+        "evidence_indexes": [
+          6,
+          11
+        ],
+        "operation": "INVALIDATE_GAP",
+        "prior_snapshot_ref": "semantic-953d22eba916b63075bee3c744d5a36c36c270b36efc5d334e79e5a3daf11628",
+        "replacement_refs": [],
+        "target_kind": "UNKNOWN",
+        "target_ref": "personal_significance"
+      }
+    ],
+    "evidence_quotes": [
+      {
+        "field_path": "memo_action",
+        "quote": "ぐらついていた椅子を修理して",
+        "source_id": "8ad110fa-57b2-4e7e-8035-95ac72518e2f"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "また座れるようになった",
+        "source_id": "8ad110fa-57b2-4e7e-8035-95ac72518e2f"
+      },
+      {
+        "field_path": "memo",
+        "quote": "うれしかった",
+        "source_id": "8ad110fa-57b2-4e7e-8035-95ac72518e2f"
+      },
+      {
+        "field_path": "memo",
+        "quote": "全部一人で直せたこと",
+        "source_id": "8ad110fa-57b2-4e7e-8035-95ac72518e2f"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "して、",
+        "source_id": "8ad110fa-57b2-4e7e-8035-95ac72518e2f"
+      },
+      {
+        "field_path": "memo",
+        "quote": "全部一人で直せたことが、うれしかった",
+        "source_id": "8ad110fa-57b2-4e7e-8035-95ac72518e2f"
+      },
+      {
+        "field_path": "answer_text_private",
+        "quote": "さっき「全部一人で」と書いたのは訂正します",
+        "source_id": "fd5ea30d-162e-4ffc-9dea-5f4884866756"
+      },
+      {
+        "field_path": "answer_text_private",
+        "quote": "友人に手順を教えてもらって",
+        "source_id": "fd5ea30d-162e-4ffc-9dea-5f4884866756"
+      },
+      {
+        "field_path": "answer_text_private",
+        "quote": "一緒に直しました",
+        "source_id": "fd5ea30d-162e-4ffc-9dea-5f4884866756"
+      },
+      {
+        "field_path": "answer_text_private",
+        "quote": "捨てずにまた使えるようになったからです",
+        "source_id": "fd5ea30d-162e-4ffc-9dea-5f4884866756"
+      },
+      {
+        "field_path": "answer_text_private",
+        "quote": "一人でできたからではなく",
+        "source_id": "fd5ea30d-162e-4ffc-9dea-5f4884866756"
+      },
+      {
+        "field_path": "answer_text_private",
+        "quote": "うれしかったのも、一人でできたからではなく、捨てずにまた使えるようになったからです",
+        "source_id": "fd5ea30d-162e-4ffc-9dea-5f4884866756"
+      }
+    ],
+    "old_surface": {
+      "bindings": [
+        {
+          "claim_refs": [
+            "friend_guidance",
+            "joint_repair"
+          ],
+          "relation_refs": [],
+          "section": "observation"
+        },
+        {
+          "claim_refs": [
+            "reuse_appraisal_object",
+            "joy",
+            "usable_again"
+          ],
+          "relation_refs": [
+            "joy_ground_revised"
+          ],
+          "section": "reception"
+        },
+        {
+          "claim_refs": [
+            "friend_guidance",
+            "joint_repair",
+            "reuse_appraisal_object"
+          ],
+          "relation_refs": [
+            "joy_ground_revised"
+          ],
+          "section": "update_note",
+          "update_refs": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+      "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+      "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+    }
+  },
+  {
+    "id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+    "eos": true,
+    "output_tokens": 1322,
+    "seconds": 56.92104833491612,
+    "strict_parsed": true,
+    "parse_error": null,
+    "raw_text_equals_previous109c": true,
+    "parsed_equals_teacher": true,
+    "raw_sha256": "acf95815b41a921c49351fff43be65d51da180297a45183b46edf35d609908a9",
+    "claims_count": 4,
+    "relations_count": 2,
+    "unknowns_count": 1,
+    "updates_count": 0,
+    "surface": {
+      "bindings": [
+        {
+          "claim_refs": [
+            "repair",
+            "usable_again"
+          ],
+          "relation_refs": [
+            "repair_and_result"
+          ],
+          "section": "observation"
+        },
+        {
+          "claim_refs": [
+            "solo_appraisal_object",
+            "joy",
+            "usable_again"
+          ],
+          "relation_refs": [
+            "joy_ground"
+          ],
+          "section": "reception"
+        }
+      ],
+      "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+      "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+      "update_note": null
+    },
+    "question": {
+      "claim_refs": [
+        "solo_appraisal_object",
+        "joy"
+      ],
+      "focus": "PERSONAL_JOY_SIGNIFICANCE",
+      "target_unknown_ref": "personal_significance",
+      "text": "「全部一人で直せたこと」がなぜ嬉しかったのですか？"
+    },
+    "updates": [],
+    "evidence_quotes": [
+      {
+        "field_path": "memo_action",
+        "quote": "ぐらついていた椅子を修理して",
+        "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "また座れるようになった",
+        "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5"
+      },
+      {
+        "field_path": "memo",
+        "quote": "うれしかった",
+        "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5"
+      },
+      {
+        "field_path": "memo",
+        "quote": "全部一人で直せたこと",
+        "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "して、",
+        "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5"
+      },
+      {
+        "field_path": "memo",
+        "quote": "全部一人で直せたことが、うれしかった",
+        "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5"
+      }
+    ],
+    "old_surface": {
+      "bindings": [
+        {
+          "claim_refs": [
+            "repair",
+            "usable_again"
+          ],
+          "relation_refs": [
+            "repair_and_result"
+          ],
+          "section": "observation"
+        },
+        {
+          "claim_refs": [
+            "solo_appraisal_object",
+            "joy",
+            "usable_again"
+          ],
+          "relation_refs": [
+            "joy_ground"
+          ],
+          "section": "reception"
+        }
+      ],
+      "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+      "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+      "update_note": null
+    }
+  },
+  {
+    "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+    "eos": true,
+    "output_tokens": 2238,
+    "seconds": 96.63000048301183,
+    "strict_parsed": true,
+    "parse_error": null,
+    "raw_text_equals_previous109c": true,
+    "parsed_equals_teacher": true,
+    "raw_sha256": "3897705044921c683529cdec1c1104172ba5dff0c8ab60664f4cec2520898672",
+    "claims_count": 6,
+    "relations_count": 2,
+    "unknowns_count": 0,
+    "updates_count": 3,
+    "surface": {
+      "bindings": [
+        {
+          "claim_refs": [
+            "friend_guidance",
+            "joint_repair"
+          ],
+          "relation_refs": [],
+          "section": "observation"
+        },
+        {
+          "claim_refs": [
+            "reuse_appraisal_object",
+            "joy",
+            "usable_again"
+          ],
+          "relation_refs": [
+            "joy_ground_revised"
+          ],
+          "section": "reception"
+        },
+        {
+          "claim_refs": [
+            "friend_guidance",
+            "joint_repair",
+            "reuse_appraisal_object"
+          ],
+          "relation_refs": [
+            "joy_ground_revised"
+          ],
+          "section": "update_note",
+          "update_refs": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+      "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+      "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+    },
+    "question": null,
+    "updates": [
+      {
+        "evidence_indexes": [
+          6,
+          7,
+          8
+        ],
+        "operation": "REVISE",
+        "prior_snapshot_ref": "semantic-322c10bb6e50aca32c6f5e3d428a995fa754b17e9f90528a71204e189475ee8d",
+        "replacement_refs": [
+          "friend_guidance",
+          "joint_repair"
+        ],
+        "target_kind": "CLAIM",
+        "target_ref": "solo_appraisal_object"
+      },
+      {
+        "evidence_indexes": [
+          10,
+          11
+        ],
+        "operation": "REVISE",
+        "prior_snapshot_ref": "semantic-322c10bb6e50aca32c6f5e3d428a995fa754b17e9f90528a71204e189475ee8d",
+        "replacement_refs": [
+          "joy_ground_revised"
+        ],
+        "target_kind": "RELATION",
+        "target_ref": "joy_ground"
+      },
+      {
+        "evidence_indexes": [
+          6,
+          11
+        ],
+        "operation": "INVALIDATE_GAP",
+        "prior_snapshot_ref": "semantic-322c10bb6e50aca32c6f5e3d428a995fa754b17e9f90528a71204e189475ee8d",
+        "replacement_refs": [],
+        "target_kind": "UNKNOWN",
+        "target_ref": "personal_significance"
+      }
+    ],
+    "evidence_quotes": [
+      {
+        "field_path": "memo_action",
+        "quote": "ぐらついていた椅子を修理して",
+        "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "また座れるようになった",
+        "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5"
+      },
+      {
+        "field_path": "memo",
+        "quote": "うれしかった",
+        "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5"
+      },
+      {
+        "field_path": "memo",
+        "quote": "全部一人で直せたこと",
+        "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "して、",
+        "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5"
+      },
+      {
+        "field_path": "memo",
+        "quote": "全部一人で直せたことが、うれしかった",
+        "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5"
+      },
+      {
+        "field_path": "answer_text_private",
+        "quote": "さっき「全部一人で」と書いたのは訂正します",
+        "source_id": "ea0fa6a8-5411-4a8a-a6bf-e2f9f144454d"
+      },
+      {
+        "field_path": "answer_text_private",
+        "quote": "友人に手順を教えてもらって",
+        "source_id": "ea0fa6a8-5411-4a8a-a6bf-e2f9f144454d"
+      },
+      {
+        "field_path": "answer_text_private",
+        "quote": "一緒に直しました",
+        "source_id": "ea0fa6a8-5411-4a8a-a6bf-e2f9f144454d"
+      },
+      {
+        "field_path": "answer_text_private",
+        "quote": "捨てずにまた使えるようになったからです",
+        "source_id": "ea0fa6a8-5411-4a8a-a6bf-e2f9f144454d"
+      },
+      {
+        "field_path": "answer_text_private",
+        "quote": "一人でできたからではなく",
+        "source_id": "ea0fa6a8-5411-4a8a-a6bf-e2f9f144454d"
+      },
+      {
+        "field_path": "answer_text_private",
+        "quote": "うれしかったのも、一人でできたからではなく、捨てずにまた使えるようになったからです",
+        "source_id": "ea0fa6a8-5411-4a8a-a6bf-e2f9f144454d"
+      }
+    ],
+    "old_surface": {
+      "bindings": [
+        {
+          "claim_refs": [
+            "friend_guidance",
+            "joint_repair"
+          ],
+          "relation_refs": [],
+          "section": "observation"
+        },
+        {
+          "claim_refs": [
+            "reuse_appraisal_object",
+            "joy",
+            "usable_again"
+          ],
+          "relation_refs": [
+            "joy_ground_revised"
+          ],
+          "section": "reception"
+        },
+        {
+          "claim_refs": [
+            "friend_guidance",
+            "joint_repair",
+            "reuse_appraisal_object"
+          ],
+          "relation_refs": [
+            "joy_ground_revised"
+          ],
+          "section": "update_note",
+          "update_refs": [
+            0,
+            1,
+            2
+          ]
+        }
+      ],
+      "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+      "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+      "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+    }
+  },
+  {
+    "id": "TRAIN-DAILY-CALM-01-INITIAL",
+    "eos": true,
+    "output_tokens": 1586,
+    "seconds": 68.84164498990867,
+    "strict_parsed": true,
+    "parse_error": null,
+    "raw_text_equals_previous109c": true,
+    "parsed_equals_teacher": true,
+    "raw_sha256": "ee71a4b217e86969b0eb378699510bd601522482360ac59ff656b7938967be7c",
+    "claims_count": 5,
+    "relations_count": 4,
+    "unknowns_count": 0,
+    "updates_count": 0,
+    "surface": {
+      "bindings": [
+        {
+          "claim_refs": [
+            "return",
+            "cook",
+            "eat"
+          ],
+          "relation_refs": [
+            "return_before_cook",
+            "return_before_eat",
+            "cook_and_eat"
+          ],
+          "section": "observation"
+        },
+        {
+          "claim_refs": [
+            "warm_food_eat",
+            "slight_calm"
+          ],
+          "relation_refs": [
+            "written_eat_calm"
+          ],
+          "section": "reception"
+        }
+      ],
+      "observation": "帰ってから、うどんを作って食べたのですね。",
+      "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+      "update_note": null
+    },
+    "question": null,
+    "updates": [],
+    "evidence_quotes": [
+      {
+        "field_path": "memo_action",
+        "quote": "帰って",
+        "source_id": "cd562f5f-3f35-4ac3-8d56-731c8f6fcb97"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "うどんを作って",
+        "source_id": "cd562f5f-3f35-4ac3-8d56-731c8f6fcb97"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "食べた",
+        "source_id": "cd562f5f-3f35-4ac3-8d56-731c8f6fcb97"
+      },
+      {
+        "field_path": "memo",
+        "quote": "あったかいもの食べた",
+        "source_id": "cd562f5f-3f35-4ac3-8d56-731c8f6fcb97"
+      },
+      {
+        "field_path": "memo",
+        "quote": "ちょっと落ち着いた",
+        "source_id": "cd562f5f-3f35-4ac3-8d56-731c8f6fcb97"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "帰ってから、うどんを作って食べた",
+        "source_id": "cd562f5f-3f35-4ac3-8d56-731c8f6fcb97"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "作って食べた",
+        "source_id": "cd562f5f-3f35-4ac3-8d56-731c8f6fcb97"
+      },
+      {
+        "field_path": "memo",
+        "quote": "あったかいもの食べたら、ちょっと落ち着いた",
+        "source_id": "cd562f5f-3f35-4ac3-8d56-731c8f6fcb97"
+      }
+    ],
+    "old_surface": {
+      "bindings": [
+        {
+          "claim_refs": [
+            "return",
+            "cook",
+            "eat"
+          ],
+          "relation_refs": [
+            "return_before_cook",
+            "return_before_eat",
+            "cook_and_eat"
+          ],
+          "section": "observation"
+        },
+        {
+          "claim_refs": [
+            "warm_food_eat",
+            "slight_calm"
+          ],
+          "relation_refs": [
+            "written_eat_calm"
+          ],
+          "section": "reception"
+        }
+      ],
+      "observation": "帰ってから、うどんを作って食べたのですね。",
+      "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+      "update_note": null
+    }
+  },
+  {
+    "id": "TRAIN-DAILY-CALM-02-INITIAL",
+    "eos": true,
+    "output_tokens": 1560,
+    "seconds": 68.3160306479549,
+    "strict_parsed": true,
+    "parse_error": null,
+    "raw_text_equals_previous109c": true,
+    "parsed_equals_teacher": true,
+    "raw_sha256": "4bed18e979c718174dd5abe2b2a59c514926a5ba396cd8c12a562138f86a4d9e",
+    "claims_count": 5,
+    "relations_count": 4,
+    "unknowns_count": 0,
+    "updates_count": 0,
+    "surface": {
+      "bindings": [
+        {
+          "claim_refs": [
+            "return",
+            "cook",
+            "eat"
+          ],
+          "relation_refs": [
+            "return_before_cook",
+            "return_before_eat",
+            "cook_and_eat"
+          ],
+          "section": "observation"
+        },
+        {
+          "claim_refs": [
+            "warm_food_eat",
+            "slight_calm"
+          ],
+          "relation_refs": [
+            "written_eat_calm"
+          ],
+          "section": "reception"
+        }
+      ],
+      "observation": "帰ってから、うどんを作って食べたのですね。",
+      "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+      "update_note": null
+    },
+    "question": null,
+    "updates": [],
+    "evidence_quotes": [
+      {
+        "field_path": "memo_action",
+        "quote": "帰って",
+        "source_id": "b3108b7b-7bb2-4a0e-9cf1-b4bf45bd588e"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "うどんを作って",
+        "source_id": "b3108b7b-7bb2-4a0e-9cf1-b4bf45bd588e"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "食べた",
+        "source_id": "b3108b7b-7bb2-4a0e-9cf1-b4bf45bd588e"
+      },
+      {
+        "field_path": "memo",
+        "quote": "あったかいもの食べた",
+        "source_id": "b3108b7b-7bb2-4a0e-9cf1-b4bf45bd588e"
+      },
+      {
+        "field_path": "memo",
+        "quote": "ちょっと落ち着いた",
+        "source_id": "b3108b7b-7bb2-4a0e-9cf1-b4bf45bd588e"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "帰ってから、うどんを作って食べた",
+        "source_id": "b3108b7b-7bb2-4a0e-9cf1-b4bf45bd588e"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "作って食べた",
+        "source_id": "b3108b7b-7bb2-4a0e-9cf1-b4bf45bd588e"
+      },
+      {
+        "field_path": "memo",
+        "quote": "あったかいもの食べたら、ちょっと落ち着いた",
+        "source_id": "b3108b7b-7bb2-4a0e-9cf1-b4bf45bd588e"
+      }
+    ],
+    "old_surface": {
+      "bindings": [
+        {
+          "claim_refs": [
+            "return",
+            "cook",
+            "eat"
+          ],
+          "relation_refs": [
+            "return_before_cook",
+            "return_before_eat",
+            "cook_and_eat"
+          ],
+          "section": "observation"
+        },
+        {
+          "claim_refs": [
+            "warm_food_eat",
+            "slight_calm"
+          ],
+          "relation_refs": [
+            "written_eat_calm"
+          ],
+          "section": "reception"
+        }
+      ],
+      "observation": "帰ってから、うどんを作って食べたのですね。",
+      "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+      "update_note": null
+    }
+  },
+  {
+    "id": "TRAIN-DAILY-CALM-03-INITIAL",
+    "eos": true,
+    "output_tokens": 1599,
+    "seconds": 69.70814050990157,
+    "strict_parsed": true,
+    "parse_error": null,
+    "raw_text_equals_previous109c": true,
+    "parsed_equals_teacher": true,
+    "raw_sha256": "2c6e9fc3df742de98283796e99f3a7b8f33b2ab5519ac907b6551235afc98609",
+    "claims_count": 5,
+    "relations_count": 4,
+    "unknowns_count": 0,
+    "updates_count": 0,
+    "surface": {
+      "bindings": [
+        {
+          "claim_refs": [
+            "return",
+            "cook",
+            "eat"
+          ],
+          "relation_refs": [
+            "return_before_cook",
+            "return_before_eat",
+            "cook_and_eat"
+          ],
+          "section": "observation"
+        },
+        {
+          "claim_refs": [
+            "warm_food_eat",
+            "slight_calm"
+          ],
+          "relation_refs": [
+            "written_eat_calm"
+          ],
+          "section": "reception"
+        }
+      ],
+      "observation": "帰ってから、うどんを作って食べたのですね。",
+      "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+      "update_note": null
+    },
+    "question": null,
+    "updates": [],
+    "evidence_quotes": [
+      {
+        "field_path": "memo_action",
+        "quote": "帰って",
+        "source_id": "63502062-1016-471c-8549-1c4dd98b76ab"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "うどんを作って",
+        "source_id": "63502062-1016-471c-8549-1c4dd98b76ab"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "食べた",
+        "source_id": "63502062-1016-471c-8549-1c4dd98b76ab"
+      },
+      {
+        "field_path": "memo",
+        "quote": "あったかいもの食べた",
+        "source_id": "63502062-1016-471c-8549-1c4dd98b76ab"
+      },
+      {
+        "field_path": "memo",
+        "quote": "ちょっと落ち着いた",
+        "source_id": "63502062-1016-471c-8549-1c4dd98b76ab"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "帰ってから、うどんを作って食べた",
+        "source_id": "63502062-1016-471c-8549-1c4dd98b76ab"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "作って食べた",
+        "source_id": "63502062-1016-471c-8549-1c4dd98b76ab"
+      },
+      {
+        "field_path": "memo",
+        "quote": "あったかいもの食べたら、ちょっと落ち着いた",
+        "source_id": "63502062-1016-471c-8549-1c4dd98b76ab"
+      }
+    ],
+    "old_surface": {
+      "bindings": [
+        {
+          "claim_refs": [
+            "return",
+            "cook",
+            "eat"
+          ],
+          "relation_refs": [
+            "return_before_cook",
+            "return_before_eat",
+            "cook_and_eat"
+          ],
+          "section": "observation"
+        },
+        {
+          "claim_refs": [
+            "warm_food_eat",
+            "slight_calm"
+          ],
+          "relation_refs": [
+            "written_eat_calm"
+          ],
+          "section": "reception"
+        }
+      ],
+      "observation": "帰ってから、うどんを作って食べたのですね。",
+      "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+      "update_note": null
+    }
+  },
+  {
+    "id": "FT-BOOK-INITIAL",
+    "eos": true,
+    "output_tokens": 1055,
+    "seconds": 46.263186531024985,
+    "strict_parsed": true,
+    "parse_error": null,
+    "raw_text_equals_previous109c": false,
+    "parsed_equals_teacher": false,
+    "raw_sha256": "ad61d9ac2ec64294244b6a0ebfb1a2d96893085dd1c7246cabdfc48c46705023",
+    "claims_count": 4,
+    "relations_count": 2,
+    "unknowns_count": 1,
+    "updates_count": 0,
+    "surface": {
+      "bindings": [
+        {
+          "claim_refs": [
+            "late_return",
+            "apologize",
+            "reassurance_received",
+            "remaining_concern"
+          ],
+          "relation_refs": [
+            "action_link",
+            "memo_link"
+          ],
+          "section": "observation"
+        },
+        {
+          "claim_refs": [
+            "reassurance_received",
+            "remaining_concern"
+          ],
+          "relation_refs": [
+            "memo_link"
+          ],
+          "section": "reception"
+        }
+      ],
+      "observation": "本を返すのが遅れて友人に謝り、大丈夫と言ってくれたのですね。でも、まだ少し気になっているのですね。",
+      "reception": "「大丈夫」って言って、その本を返したのですね。その後のこと、まだ聞けていないのですね。",
+      "update_note": null
+    },
+    "question": {
+      "claim_refs": [
+        "remaining_concern"
+      ],
+      "focus": "PERSONAL_CONCERN_TARGET",
+      "target_unknown_ref": "気がかりの対象は未記載",
+      "text": "何が気になりますか？"
+    },
+    "updates": [],
+    "evidence_quotes": [
+      {
+        "field_path": "memo_action",
+        "quote": "借りていた本を返すのが遅れて",
+        "source_id": "FT-BOOK-O"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "友人に謝った",
+        "source_id": "FT-BOOK-O"
+      },
+      {
+        "field_path": "memo",
+        "quote": "大丈夫って言ってくれた",
+        "source_id": "FT-BOOK-O"
+      },
+      {
+        "field_path": "memo",
+        "quote": "まだちょっと気になる",
+        "source_id": "FT-BOOK-O"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "借りていた本を返すのが遅れて、友人に謝った",
+        "source_id": "FT-BOOK-O"
+      },
+      {
+        "field_path": "memo",
+        "quote": "大丈夫って言ってくれたけど、まだちょっと気になる",
+        "source_id": "FT-BOOK-O"
+      }
+    ],
+    "old_surface": {
+      "bindings": [
+        {
+          "claim_refs": [
+            "late_return",
+            "apologize",
+            "reassurance_received",
+            "remaining_concern"
+          ],
+          "relation_refs": [
+            "action_link",
+            "memo_link"
+          ],
+          "section": "observation"
+        },
+        {
+          "claim_refs": [
+            "reassurance_received",
+            "remaining_concern"
+          ],
+          "relation_refs": [
+            "memo_link"
+          ],
+          "section": "reception"
+        }
+      ],
+      "observation": "遅れた本の返却と謝罪、そして「大丈夫」という安心感を受け取り、その後に残る気持ちは何ですか？",
+      "reception": "「大丈夫」と言われたことと、まだ少し気になるという状態を聞きました。",
+      "update_note": null
+    }
+  },
+  {
+    "id": "FT-BOOK-AFTER-ANSWER",
+    "eos": true,
+    "output_tokens": 2638,
+    "seconds": 122.26506455696654,
+    "strict_parsed": false,
+    "parse_error": "duplicate_json_key",
+    "raw_text_equals_previous109c": false,
+    "parsed_equals_teacher": false,
+    "raw_sha256": "ca8f2cd70af1251f4582e5fda588e4fe4f6ba7e9348ea1212cc703cb76b09fba"
+  },
+  {
+    "id": "FT-SHOP-INITIAL",
+    "eos": true,
+    "output_tokens": 1095,
+    "seconds": 51.181647463934496,
+    "strict_parsed": true,
+    "parse_error": null,
+    "raw_text_equals_previous109c": false,
+    "parsed_equals_teacher": false,
+    "raw_sha256": "456b498a809a45dea46db37ee7f40baf7ca5dd090fda3cfd027a23e200a83447",
+    "claims_count": 4,
+    "relations_count": 2,
+    "unknowns_count": 1,
+    "updates_count": 0,
+    "surface": {
+      "bindings": [
+        {
+          "claim_refs": [
+            "opening_known",
+            "celebration_sent",
+            "joy",
+            "felt_left_behind"
+          ],
+          "relation_refs": [
+            "action_link",
+            "memo_link"
+          ],
+          "section": "observation"
+        },
+        {
+          "claim_refs": [
+            "joy",
+            "felt_left_behind"
+          ],
+          "relation_refs": [
+            "memo_link"
+          ],
+          "section": "reception"
+        }
+      ],
+      "observation": "友人の开店を知り、お祝いのメッセージを送ったのですね。その時、うれしかった一方で、少し置いていかれた気がしたのですか。",
+      "reception": "お祝いのメッセージを送り、うれしかったのですね。そして、少し置いていかれた気がしたのですね。",
+      "update_note": null
+    },
+    "question": {
+      "claim_refs": [
+        "felt_left_behind"
+      ],
+      "focus": "PERSONAL_FEELING_REASON",
+      "target_unknown_ref": "felt_left_behind_reason",
+      "text": "「少し置いていかれた気がした」のはなぜですか？"
+    },
+    "updates": [],
+    "evidence_quotes": [
+      {
+        "field_path": "memo_action",
+        "quote": "昔からの友人が店を開いたと知って",
+        "source_id": "FT-SHOP-O"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "お祝いのメッセージを送った",
+        "source_id": "FT-SHOP-O"
+      },
+      {
+        "field_path": "memo",
+        "quote": "うれしかった",
+        "source_id": "FT-SHOP-O"
+      },
+      {
+        "field_path": "memo",
+        "quote": "少し置いていかれた気がした",
+        "source_id": "FT-SHOP-O"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "昔からの友人が店を開いたと知って、お祝いのメッセージを送った",
+        "source_id": "FT-SHOP-O"
+      },
+      {
+        "field_path": "memo",
+        "quote": "うれしかったけど、少し置いていかれた気がした",
+        "source_id": "FT-SHOP-O"
+      }
+    ],
+    "old_surface": {
+      "bindings": [
+        {
+          "claim_refs": [
+            "opening_known",
+            "celebration_sent",
+            "joy",
+            "felt_left_behind"
+          ],
+          "relation_refs": [
+            "action_link",
+            "memo_link"
+          ],
+          "section": "observation"
+        },
+        {
+          "claim_refs": [
+            "joy",
+            "felt_left_behind"
+          ],
+          "relation_refs": [
+            "memo_link"
+          ],
+          "section": "reception"
+        }
+      ],
+      "observation": "友人の开店を知り、お祝いのメッセージを送ったのですね。その時、うれしかった一方で少し置いていかれた気がしたのですか。",
+      "reception": "お祝いのメッセージを送り、うれしかったのですね。そして、少し置いていかれた気がしたのですね。",
+      "update_note": null
+    }
+  },
+  {
+    "id": "FT-SHOP-AFTER-ANSWER",
+    "eos": true,
+    "output_tokens": 2717,
+    "seconds": 125.35022303997539,
+    "strict_parsed": true,
+    "parse_error": null,
+    "raw_text_equals_previous109c": false,
+    "parsed_equals_teacher": false,
+    "raw_sha256": "8249ad21605f05bab7ba439cdf78abde4e6b95a17adce6595ce8f4da14d78679",
+    "claims_count": 11,
+    "relations_count": 6,
+    "unknowns_count": 0,
+    "updates_count": 1,
+    "surface": {
+      "bindings": [
+        {
+          "claim_refs": [
+            "opening_known",
+            "celebration_sent",
+            "joy",
+            "felt_left_behind"
+          ],
+          "relation_refs": [
+            "action_link",
+            "memo_link"
+          ],
+          "section": "observation"
+        },
+        {
+          "claim_refs": [
+            "shared_talk",
+            "perceived_realization",
+            "answer_joy",
+            "felt_distance",
+            "answer_sadness"
+          ],
+          "relation_refs": [
+            "past_reference",
+            "answer_concession",
+            "answer_explains_target",
+            "distance_link"
+          ],
+          "section": "reception"
+        },
+        {
+          "claim_refs": [
+            "no_joint_preparation",
+            "no_promise"
+          ],
+          "relation_refs": [],
+          "section": "update_note",
+          "update_refs": [
+            0,
+            1
+          ]
+        }
+      ],
+      "observation": "昔からの友人が店を開いたと知り、お祝いのメッセージを送ったのですね。うれしかったと聞けて、少し置いていかれた気がしたのですね。",
+      "reception": "「いつか店をやれたらいいね」と話していたこと、その未来が友人の方ではもう現実になっていたのですね。あの話を一緒にしていた頃から少し離れてしまったようで、寂しかったのですね。",
+      "update_note": "一緒に準備をしていたわけでも、約束していたわけでもありません。"
+    },
+    "question": null,
+    "updates": [
+      {
+        "evidence_indexes": [
+          17,
+          18
+        ],
+        "operation": "ADD",
+        "prior_snapshot_ref": "semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6",
+        "replacement_refs": [
+          "no_joint_preparation",
+          "no_promise"
+        ],
+        "target_kind": "UNKNOWN",
+        "target_ref": "missing_explanation"
+      }
+    ],
+    "evidence_quotes": [
+      {
+        "field_path": "memo_action",
+        "quote": "昔からの友人が店を開いたと知って",
+        "source_id": "FT-SHOP-O"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "お祝いのメッセージを送った",
+        "source_id": "FT-SHOP-O"
+      },
+      {
+        "field_path": "memo",
+        "quote": "うれしかった",
+        "source_id": "FT-SHOP-O"
+      },
+      {
+        "field_path": "memo",
+        "quote": "少し置いていかれた気がした",
+        "source_id": "FT-SHOP-O"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "昔からの友人が店を開いたと知って、お祝いのメッセージを送った",
+        "source_id": "FT-SHOP-O"
+      },
+      {
+        "field_path": "memo",
+        "quote": "うれしかったけど、少し置いていかれた気がした",
+        "source_id": "FT-SHOP-O"
+      },
+      {
+        "field_path": "answer_text_private",
+        "quote": "いつか店をやれたらいいね",
+        "source_id": "sixrow-answer-shop"
+      },
+      {
+        "field_path": "answer_text_private",
+        "quote": "一緒に準備をしていたわけでも",
+        "source_id": "sixrow-answer-shop"
+      },
+      {
+        "field_path": "answer_text_private",
+        "quote": "約束していたわけでもありません",
+        "source_id": "sixrow-answer-shop"
+      },
+      {
+        "field_path": "answer_text_private",
+        "quote": "二人で話していた未来が、友人の方ではもう現実になっていたんだな、と感じました",
+        "source_id": "sixrow-answer-shop"
+      },
+      {
+        "field_path": "answer_text_private",
+        "quote": "うれしいのに",
+        "source_id": "sixrow-answer-shop"
+      },
+      {
+        "field_path": "answer_text_private",
+        "quote": "あの話を一緒にしていた頃から少し離れてしまったようで",
+        "source_id": "sixrow-answer-shop"
+      },
+      {
+        "field_path": "answer_text_private",
+        "quote": "寂しかったです",
+        "source_id": "sixrow-answer-shop"
+      },
+      {
+        "field_path": "answer_text_private",
+        "quote": "昔からの友人が店を開いたと知って、お祝いのメッセージを送った",
+        "source_id": "sixrow-answer-shop"
+      },
+      {
+        "field_path": "answer_text_private",
+        "quote": "joyful yet felt left behind",
+        "source_id": "sixrow-answer-shop"
+      },
+      {
+        "field_path": "answer_text_private",
+        "quote": "that we had talked about",
+        "source_id": "sixrow-answer-shop"
+      },
+      {
+        "field_path": "answer_text_private",
+        "quote": "from when we talked about it",
+        "source_id": "sixrow-answer-shop"
+      }
+    ],
+    "old_surface": null
+  },
+  {
+    "id": "FT-REPOT-INITIAL",
+    "eos": true,
+    "output_tokens": 962,
+    "seconds": 44.53820158401504,
+    "strict_parsed": true,
+    "parse_error": null,
+    "raw_text_equals_previous109c": false,
+    "parsed_equals_teacher": false,
+    "raw_sha256": "2fb6b4094975469c46e55edd6381b9fad6f196d50cd08b42b895c71983efc983",
+    "claims_count": 4,
+    "relations_count": 2,
+    "unknowns_count": 0,
+    "updates_count": 0,
+    "surface": {
+      "bindings": [
+        {
+          "claim_refs": [
+            "guidance_received",
+            "listened_to_end"
+          ],
+          "relation_refs": [
+            "action_link"
+          ],
+          "section": "observation"
+        },
+        {
+          "claim_refs": [
+            "understood_method",
+            "relief"
+          ],
+          "relation_refs": [
+            "memo_link"
+          ],
+          "section": "reception"
+        }
+      ],
+      "observation": "叔父に植え替えの手順を説明し、最後まで聞けてよかったです。",
+      "reception": "やり方が分かって、安心できよかったです。",
+      "update_note": null
+    },
+    "question": null,
+    "updates": [],
+    "evidence_quotes": [
+      {
+        "field_path": "memo_action",
+        "quote": "植え替えの手順を叔父に説明してもらい",
+        "source_id": "FT-REPOT-O"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "最後まで聞いた",
+        "source_id": "FT-REPOT-O"
+      },
+      {
+        "field_path": "memo",
+        "quote": "やり方が分かって",
+        "source_id": "FT-REPOT-O"
+      },
+      {
+        "field_path": "memo",
+        "quote": "安心した",
+        "source_id": "FT-REPOT-O"
+      },
+      {
+        "field_path": "memo_action",
+        "quote": "植え替えの手順を叔父に説明してもらい、最後まで聞いた",
+        "source_id": "FT-REPOT-O"
+      },
+      {
+        "field_path": "memo",
+        "quote": "やり方が分かって安心した",
+        "source_id": "FT-REPOT-O"
+      }
+    ],
+    "old_surface": {
+      "bindings": [
+        {
+          "claim_refs": [
+            "guidance_received",
+            "listened_to_end"
+          ],
+          "relation_refs": [
+            "action_link"
+          ],
+          "section": "observation"
+        },
+        {
+          "claim_refs": [
+            "understood_method",
+            "relief"
+          ],
+          "relation_refs": [
+            "memo_link"
+          ],
+          "section": "reception"
+        }
+      ],
+      "observation": "叔父に植え替えの手順を説明し、最後まで聞かせたのですね。",
+      "reception": "やり方が分かって、安心したと聞けて、よかったです。",
+      "update_note": null
+    }
+  },
+  {
+    "id": "FT-KNIT-INITIAL",
+    "eos": true,
+    "output_tokens": 991,
+    "seconds": 45.37321878608782,
+    "strict_parsed": true,
+    "parse_error": null,
+    "raw_text_equals_previous109c": false,
+    "parsed_equals_teacher": false,
+    "raw_sha256": "f054fa9a06179b1406fc7970ebd35fa84ba1bf1d13ef539dcfc99a55c8ed6a63",
+    "claims_count": 4,
+    "relations_count": 0,
+    "unknowns_count": 1,
+    "updates_count": 0,
+    "surface": {
+      "bindings": [
+        {
+          "claim_refs": [
+            "unravelled",
+            "burden",
+            "sadness",
+            "stated_unknown"
+          ],
+          "relation_refs": [],
+          "section": "observation"
+        },
+        {
+          "claim_refs": [
+            "unravelled",
+            "burden",
+            "sadness",
+            "stated_unknown"
+          ],
+          "relation_refs": [],
+          "section": "reception"
+        }
+      ],
+      "observation": "今日、編みかけの見本をほどいたのですね。ほどくのが面倒だったと聞けて、少し安心しました。さみしさも少しあったと、その気持ちも受け取ります。二つがどうつながるかは、自分でも分からないと、その不明さを保持します。",
+      "reception": "今日、編みかけの見本をほどいたのですね。ほどくのが面倒だったと聞けて、少し安心しました。さみしさも少しあったと、その気持ちも受け取ります。二つがどうつながるかは、自分でも分からないと、その不明さを保持します。",
+      "update_note": null
+    },
+    "question": null,
+    "updates": [],
+    "evidence_quotes": [
+      {
+        "field_path": "memo_action",
+        "quote": "今日は編みかけの見本をほどいた。",
+        "source_id": "FT-KNIT-O"
+      },
+      {
+        "field_path": "memo",
+        "quote": "ほどくのは面倒だった。",
+        "source_id": "FT-KNIT-O"
+      },
+      {
+        "field_path": "memo",
+        "quote": "さみしさも少しあった。",
+        "source_id": "FT-KNIT-O"
+      },
+      {
+        "field_path": "memo",
+        "quote": "二つがどうつながるかは、自分でも分からない。",
+        "source_id": "FT-KNIT-O"
+      }
+    ],
+    "old_surface": null
+  }
+]
