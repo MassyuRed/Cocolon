@@ -5187,13 +5187,21 @@ current00/観測入口/同training README#native15-interleaved30-proposal/weekly
 
 ### 2026-10-27 — 保存109cの語単位診断候補のfile地図
 
-同training rootの `token_diagnostic_preparation/`。現在地は全機能00/観測入口/最新weekly§73、前回の不採用/閉鎖§72を維持。
+同training rootの `token_diagnostic_preparation/` と `token_diagnostic_result/`。現在地は全機能00/観測入口/最新weekly§74、前回の不採用/閉鎖§72を維持。
 
 | path | 責任・状態 |
 |---|---|
-| run_token_diagnostic.py・token_diagnostic.plan.json | 同109c/同15各1teacher-forced forward・更新0/生成0・no-grad・900秒/$0.07上限の新一回候補。pending executeはoutput前拒否、実GPUは判断前 |
+| run_token_diagnostic.py・token_diagnostic.plan.json | 同109c/同15各1teacher-forced forward・更新0/生成0・no-grad・900秒/$0.07上限の承認実行原本。source53984cdfで15完了、一回閉鎖/再利用不可 |
 | source_bindings.json・candidate_focus_loss.py | 既存recovery/15raw/教材の固定identityと、既存JSON span parserのbytes不変copy。reader/教師/意味の変更なし |
 | verify_token_diagnostic_cpu.py・actual_cpu_check.json | Jupyter CPU4.935141秒、実tokenizer15/offsetと全chat一致、shift/CE/順位/同点/EOS、不正4拒否、未承認拒否。4B読込/forward/更新/生成0 |
 | README.md | 原因仮説・既存6rawの最初の内容分岐・具体予算/停止条件・承認境界。正解prefix付き診断を通常評価へ換算しない |
 
 製品owner/三core責務/意味型/wire/API/採用reader/DB/RN/通常appは不変、STRUCTURE_MAP_DELTA_NONE。旧9は内容一致/終端差、新6は問い2/claim3/本文1から分岐。新観測会不要、GPU稼働保持、正式商品0/3/54.50％。
+
+| result path group（同training root） | 責任・状態 |
+|---|---|
+| token_diagnostic_result/README・result_summary | 15forward/28.469614秒/$0.002214、旧9全一致/新6不一致203、本文3欄115/380。ID contractと本文/全更新不足の分離、次案と測定限界 |
+| token_diagnostic_result/run・reloaded_tensors・execution/launch・gpu.log | source53984cdf/PID171619、112F32完全一致/no-grad/学習0/生成0・実launch/log。再実行不可 |
+| token_diagnostic_result/diagnostic_evidence_20261027.zip・manifest・external_verification | 全15完全token report/source5/CPU/凍結入力4/既存raw15/実runとreload/launch/log、44payload＋manifest45member。1032831bytes/SHAd2b94c69、全member外側照合。重みは既保存109c参照 |
+
+今回の実測は正解prefix付き既知教材診断で通常生成成功/採用/商品品質へ加算しない。通常11/9・新6本文0、商品0/正式0/3/54.50％は不変。次は既存unknown_id制約の出力明示を優先、readerは変えず、局所学習の追加実行へ自動進行しない。STRUCTURE_MAP_DELTA_NONE。

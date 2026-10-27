@@ -1,6 +1,6 @@
-# 保存109c・同15教材の語単位診断 — 追加学習0・新規生成0の一回候補
+# 保存109c・同15教材の語単位診断 — 一回完了・準備履歴
 
-状態：**CPU_READY / PREPARED_AWAITING_MASH_APPROVAL / GPU_NOT_AUTHORIZED**。既存の30更新と15生成は閉鎖済みです。この候補は別outputで、旧承認・残時間・予算を再利用しません。
+状態：**DIAGNOSTIC_COMPLETE_NO_GENERATION_NO_ADOPTION / ONE_RUN_CLOSED**。Mashが具体案d5a3d644へ承認し、source53984cdfで同15各1forwardを28.469614秒/$0.002214処理按分で完了。追加学習0/新規生成0。[実結果・全原本](../token_diagnostic_result/README.md)、weekly§74を現在地とします。以下は実行済み具体案/CPU準備時の履歴で、旧承認・残時間・予算は再利用しません。
 
 ## 今回解消する不足
 
@@ -43,7 +43,7 @@
 | REPOT | 761 | 2915 | observation（主客反転） |
 | KNIT | 118 | 419 | claims |
 
-このCPU確認は4Bの確率測定ではありません。確率・順位・局所NLLは新一回の承認後だけ実測します。GPU起動には外側の `timeout --signal=TERM --kill-after=10s 890s` を必ず付け、内側900秒と合わせてworker全体を900秒以内に制限します。停止対象は今回のworkerだけで、Podは稼働保持します。完走/停止を問わず原本を回収し、新学習へ自動進行しません。
+このCPU確認は4Bの確率測定ではありません。確率・順位・局所NLLはMash承認後の一回で実測済みです（上記結果）。GPU起動には外側の `timeout --signal=TERM --kill-after=10s 890s` を必ず付け、内側900秒と合わせてworker全体を900秒以内に制限します。停止対象は今回のworkerだけで、Podは稼働保持します。完走/停止を問わず原本を回収し、新学習へ自動進行しません。
 
 配置の最初の複数行入力は改行が落ちたためshell構文エラーで未実行となり、正しいpasteで配置しました。新model処理・既存原本変更は0。browser download待機はtimeout表示でしたが、実downloadされたreport57,149bytes/SHA256 `0281ce6b29f0cb7794bd230fdaed1f0fb7d734b825882fac95cd952f3c4c19be` を確認して回収しています。
 
@@ -51,6 +51,6 @@
 
 今は新観測会を必要条件にしません。既存教師への適合自体が未成立で、教材不足・モデルの能力上限は確定していないためです。Piece/Analysisの完成教師・独立未知評価・本人端末は別の未完了として保持します。
 
-今回の可逆source/CPU/GitHub反映は、Mashの続行指示とRule18 §11.3の既存範囲です。実行環境は確認できるCodex Work/GPT-6系として記録し、正式Pro/Ultra/human reviewと偽りません。root華恋が最終判断・単一writer/実行owner、補助は調査と候補作成です。新しい実4B load/forwardは費用を伴う別一回の明示承認後だけです。
+今回の可逆source/CPU/GitHub反映は、Mashの続行指示とRule18 §11.3の既存範囲です。実行環境は確認できるCodex Work/GPT-6系として記録し、正式Pro/Ultra/human reviewと偽りません。root華恋が最終判断・単一writer/実行owner、補助は調査と候補作成です。今回の実4B load/forwardはMash明示承認の一回内で完了しました。承認planは実行時の束縛原本として残し、閉鎖後の再実行には使いません。
 
 製品責務・意味型・wire・採用reader・API6b043880・DTO・DB・RN・Render・Supabase・本人DB・通常app・価格・依存・モデル選定・merge/deployは変更0。**STRUCTURE_MAP_DELTA_NONE**。source/CPUの限定TECHNICAL_CREDITだけで、商品0・正式0/3・54.50％・candidate_ready=false・automatic_progression=falseを維持します。

@@ -3044,3 +3044,19 @@ worker142245/149533は終了、GPU A5000/1MiB/24564MiBで稼働保持。一回�
 Jupyter CPUの実原本は同dir/actual_cpu_check.json。実tokenizer15/全chatとoffset一致/切捨て0、合成logitsのshift/CE/順位/同点/EOS、誤変更4例拒否、新output前の未承認execute拒否を4.935141秒で確認。source ae9ac364の5fileを回収report内hashと外側照合。旧9は内容一致・token終端差のみ、BOOK/SHOP初回はquestion_proposal、両回答後/KNITはclaims、REPOTはobservationで最初に外れる。正解prefixを含む診断を通常評価成功へ数えない。新GPUはload1/no-grad112一致/15forwardだけ、900秒/$0.07処理按分（準備/CPU/回収/保持等別）。外側timeout890秒＋10秒kill、内側900秒、異常は部分原本を保持しretry0。
 
 可逆source/CPU/GitHub反映は続行指示＋Rule18§11.3の範囲。新有料load/forwardは個別判断前。rootが単一writer/実行owner、補助の候補/調査を正式Pro/Ultra/human受入れへ換算しない。新観測会不要。STRUCTURE_MAP_DELTA_NONE（API/reader/意味型/通常app/三core責務は不変）、限定TECHNICAL_CREDITは診断候補/CPUのみ、商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=false。GPU Stop/restart/delete0。
+
+
+<a id="20261027-native15-token-diagnostic-complete"></a>
+## 74. 10/27 — 同109c・同15の語単位診断一回完了、ID条件と局所学習不足を分離
+
+**現在の直接作業（10/27：保存109c・同15の語単位診断一回完了）：** Mash承認source53984cdf/PID171619、非学習112F32完全一致/no-grad load→15/15forwardを28.469614秒/$0.002214処理按分で完了（準備/回収/保持等別）。追加学習/新規生成/採否/SQL0、再試行0。旧9の15,421token全top1一致、新6は203/10,716不一致、本文3欄は115/380へ集中。REPOTは主客の1tokenが弱く、全体平均では品質を表せない。正解prefix下の外枠386/EOS6は一致し、上限延長だけの根拠なし。BOOK初回は不明内容/根拠が教師一致・日本語IDだけ既存ASCII64制約違反、SHOP初回の別名は合法。次はreader不変で出力ID条件明示を優先し、本文/参照/全更新の局所学習設計を分けて見直す。追試/追加学習へ自動進行しない。新観測会は今は不要。全44payload＋manifest/45memberをhash照合・原本ZIP保全、一回閉鎖。通常意味11/本文9・新6本文0の不採用、商品0/正式0/3/54.50％は不変。原本token_diagnostic_result/README・weekly§74、GPU稼働保持。
+
+Mashが具体案d5a3d644b1cddc06f246ed7beff49d5be2de8ea7の「追加学習0・新規生成0、15教材の誤予測箇所を測る診断／最大15分・処理按分$0.07（準備・回収・保持等別）」へ「進めていいよ。」と承認。planのstatus/gpu_run_authorized/approval_basisだけ変更し、source53984cdf58f745b1f891b1da2b9bc36145623884へ反映・読戻し、Jupyterへ直接接続したrootがPID171619を一回起動した。timeout890秒＋10秒kill、内部900秒。15/15forward完了、28.46961408201605秒/$0.002214303099946119処理按分。学習/新規生成/採否/SQL/再試行0。112F32/3833856parameter完全一致reload/no-grad、全source/base metadata/adapter payload hash不変。全base shard再hashは今回未実施。
+
+旧9は15421target全top1一致、新6は10716中203不一致。BOOK初15/1038、BOOK後62/3178、SHOP初15/1082、SHOP後87/3561、REPOT2/961、KNIT22/896。本文3欄は115/380（null4token含む）で30.26％、全体1.89％不一致より集中し新6件のNLL総和の59.65％を占める。REPOT位置761の「してもら」rank3/logit16.625より「し」19.0を選び、ほぼ全token一致でも主客は壊れる。新6の外枠386/EOS6は全top1一致、3未完結教師も3712cap内で、上限延長やEOSだけの追加学習を先に選ぶ根拠なし。全6最初の誤位置は旧自由生成の逐語分岐位置と一致、選択tokenは5/6一致。BOOK初は今回remaining/旧raw「気が」で異なる。正解prefix下の診断であり、誤prefixからの復帰や反復原因の確定、未知一般化は未測定。
+
+固定API6b043880のemlis_semantic_admission.py L1275–1290と回収原本を独立照合。BOOK初回はunknownのkind/target_claim_refs/description/evidence_indexesが教師一致、問い参照も一致・ID衝突なし、日本語IDだけ既存ASCII `[A-Za-z0-9_.-]{1,64}` 制約違反だった。SHOP初回missing_reasonは合法別名で、第一逐語差だけを意味誤りとしない。既存messagesにはそのID制約明示なし。次の最小修正はreader不変の出力条件明示を優先する。本文/根拠参照/binding/全更新は別に局所rank不足が残り、全文CEで旧9/全packetを保持しつつ特定弱tokenへ損失配分する設計を検討するが、旧S/F/U群平均の同じ再試行へ戻さず、係数/更新数/改善効果は未測定。今回入力/教師/reader変更0、追加model処理へ自動進行しない。新観測会は今は不要。
+
+[実結果と全原本](../observation_learning/training/2026-10-26-unconnected-native/token_diagnostic_result/README.md)。全15完全token report/実run/reload/source5/準備CPU/凍結入力4/既存raw15/実launch/logを1032831bytes/SHA256 d2b94c69157c0976e6835f3e571d3b271979649ad66cec7519c500ddc29b7faeのZIPへ保存。44payload＋manifest45memberのCRC/bytes/hashをPod外照合。重みは不変の既保存109cを参照し、今回archive非同梱。worker終了・A5000/1MiB/24564MiB、GPU稼働保持/Stop/restart/delete0。実行環境Codex Work/GPT-6系、root単一writer/実行owner、補助2名は読取レビューで正式Pro/Ultra/human受入れではない。
+
+全体00/観測入口/training入口/01A file地図/準備READMEと同単位更新。primary=BLOCKER_NARROWED、診断のみ限定TECHNICAL_CREDIT、通常意味11/15・本文9/15・新6本文0/6と109c不採用、商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=falseは不変。製品責務/意味型/wire/API/DB/RN/Render/Supabase/通常app/依存/価格/merge/deploy0、STRUCTURE_MAP_DELTA_NONE。
