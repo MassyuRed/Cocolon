@@ -1,6 +1,8 @@
 # 10/27 — 同15教材・同30順序の損失配分修正版
 
-**PREPARED_AWAITING_MASH_APPROVAL。実CPU確認済み、新しい有料一回は未実行。**
+**AUTHORIZED_ONCE_BOUND（2026-10-27 JST）。Mashが1cb47cffの同15教材・30更新→保存/再読込→15件確認、最大45分/$0.21処理按分（準備/回収/保持等別）へ「進めていいよ。」と明示承認。実CPU確認済み、承認範囲の一回を実行する。**
+
+今回planの変更はstatus/gpu_run_authorized/approval_basisのみ。runner d989bcf5・focus f0adc2b0・consumer692d3251・教材/reader/API/旧45779は不変。source_bindings.jsonとactual_cpu_check.jsonは承認前候補の不変記録であり、そこにあるpending plan hash/statusを今回の実承認へ遡及書換えしない。承認反映commitを実行sourceとして保持する。再承認は不要。
 
 前回の混在30更新は意味11/15・本文9/15まで改善したが、新6件の本文は0/6だった。新候補1d218763は通常不採用のまま保全する。この候補は閉鎖済みrunの再起動ではなく、新outputを使う別の一回である。
 
