@@ -5316,3 +5316,17 @@ Cocolonのfamilyは`observation_learning/training/2026-10-26-unconnected-native/
 | `proof/jupyter_completed.jpg・identity.json` | 結果commit71a300acの31path読戻し後のJupyter完了画面。表示bytes同一、実行ZIP外の後続証跡 |
 
 重みSHA d431a07cは不変で元保存先はadaptive30_result。今回selected2のみで全15/旧9/新初回4の新評価にしない。商品0/正式0/3/54.50％、GPU稼働保持。全体00/観測入口/training/CMEE地図/weekly§80を同期。
+
+
+### 2026-10-28 — 回答後更新指示の未適用候補と認証待ち
+
+family：`observation_learning/training/2026-10-26-unconnected-native/update_obligations_preparation/`。
+
+| path | 責任 |
+|---|---|
+| `README.md` | 前回更新不足の因果仮説、未適用/未実行の区分、Jupyter認証エラー、実CPU/token確認からの再開先 |
+| `model_candidate_source.py` | API64c6cb1aの別copy。quote V3回答後だけrole別ADD＋GAP解消を明示する未適用候補。製品source自体は不変 |
+| `input_preview.json` | 保存済みrole_order/written_link_orderから作ったBOOK/SHOP指示前後。正解quote/ID/index/bodyは追加しない |
+| `static_check.json` | spec関数のみの構文/差分比較。実messages/tokenizer/教師target照合/モデル効果は未実施 |
+
+今回PodのJupyterはInvalid credentials、Lab未到達。追加モデル処理/SQL0。全体00/観測入口/学習owner/weekly§82へ同期。STRUCTURE_MAP_DELTA_NONE（商品責務/型/wire/reader/通常経路不変）、商品0/正式0/3/54.50％。候補保存を製品実装や品質向上としない。

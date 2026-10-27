@@ -3173,3 +3173,16 @@ Mashが「基本相談式で、短い実入力式でも全てを華恋が担当�
 新しい[OBS-20261027-001 D00](../observation_learning/sessions/2026/OBS-20261027-001/01_dialogue.md#d00)は、社内勉強会の一回分を同僚に引き継いだ後に残る気掛かりという華恋作成の架空相談。D00提示用原文と質問前の本人役設定を保存し、Mashの観測待ち。特定の心理原因・問い・修正を正解として仕込まない。次はMashの観測／問いをD01以降に実発言のまま採録する。
 
 新しい収集資料は学習用／評価用未割当。既存の凍結15教材／評価／重み、閉鎖済み試行の判断は不変で、追加学習・推論・GPU lifecycle・製品code／API／DB／RN／配置へのeffect0。方針記録は観測学習README、session原文とノート、全体00、本weeklyの5fileに限定する。STRUCTURE_MAP_DELTA_NONE、収集・記録の開始であり商品品質やモデル改善の合格ではない。商品0／正式0/3／54.50％、candidate_ready=false、automatic_progression=falseを維持する。
+
+
+## 82. 10/28 — 更新義務を明示する候補保存、今回Jupyterは認証前で停止
+
+**現在の直接作業（10/28：回答後の更新義務を明示する未適用候補を保存、Jupyter認証待ち）：** 前回実rawの1対7/8更新不足を、既存contractの追加role/新relation順から具体化する入力指示候補へ絞った。API64c6cb1a製品sourceは変更0。固定15入力の保存metadataによるspec関数の静的比較で、quote V3回答後2件のupdates文だけ変更、V3初回4件/旧numeric V3不変。実build_model_messages/実tokenizer/context8192/教師全target照合は未実施。今回Pod94a06hhxu51uy4のJupyterへ直接到達したが、安全な認証送信後Invalid credentials、Lab/terminal未到達。前回Podのfile/cache/重みが今回存在するか、GPU稼働/単価/adapter hashは未確認。Jupyter子process/モデル読込/forward/学習/生成/pytest/SQL0、Stop/restart/delete/管理console/API0。候補はupdate_obligations_preparation/README・weekly§82。認証復旧後にCPUで実入力とtokenを確認してから新一回の実条件/費用を具体化し、消費済みplanを再使用しない。新観測会は現不具合解消には不要。前回意味/本文0/2・商品0/正式0/3/54.50％を維持、STRUCTURE_MAP_DELTA_NONE、candidate_ready=false/automatic_progression=false。
+
+前回prior_quote_probe2の全raw/教師とAPI64c6cb1aの更新採用処理を照合。教師はBOOK6ADD＋gap解消/SHOP7ADD＋gap解消を持つが、実rawはADD1/解消なし。BOOKは生成surfaceを本人引用へ混入、SHOPはquote配列と意味refがずれる。新観測会や同じ30更新反復の前に、既存contractから追加roleと各roleへ入る新relationを明示する最小prompt候補へ絞った。原因解消や本文改善を確認した意味ではない。
+
+[候補・静的実結果・正確な再開先](../observation_learning/training/2026-10-26-unconnected-native/update_obligations_preparation/README.md)。quote V3回答後だけ明示し、numericは既定falseで維持。spec関数のstdlib比較/構文compileを行い、役割順/関係順/全7・8更新を既存readerとread-only補助が照合した。正解quote/ID/index/bodyを入力へ追加しない。保存済み入力metadataの比較であり、全15の実build_model_messagesやtokenizer/CMEE採否/モデル評価の成功ではない。BOOK/SHOP指示は＋124/＋127文字だが、token数と8192内は未確認。旧9は変更対象分岐外で、新prompt回帰成功へ加算しない。previewのJSON辞書sort順は公開前に明示role_order/written_link_orderへ修正、candidate source/Podへの効果なし。
+
+Mash添付の今回Pod94a06hhxu51uy4と前回bkj4qvnhwtdqc2を区別した。今回Jupyterの認証フォームに到達し、安全な認証入力送信後Invalid credentialsを実確認。credential値は取得・記録0、Lab/terminal未到達。専用plugin検索は該当なし。管理console/GPU一覧/管理APIへ迂回0、Jupyter child0、GPUの実在/稼働/単価/base/cache/adapter不変は今回未確認。保持指示は継続し、Stop/restart/delete/新Pod/charge0。
+
+認証復旧後に同Jupyterでfile/保存d431/依存を確認し、必要なら既存保全元から同一bytesを復元。実CPUで15入力差/全target/tokenizer8192内を確認してから、新しい学習0/2生成の条件と費用を具体化する。今は新GPU plan/個別費用承認を作らず、前回の消費済みplanを再利用しない。API PR3製品source/教師/重み/reader/Render/Supabase/通常API/DTO/DB/RN/merge/deploy変更0。root Codex Work/GPT-6単一writer、補助はread-onlyで正式Pro/Ultra/human受入れではない。STRUCTURE_MAP_DELTA_NONE、準備候補/認証待ちは商品成果に数えず、商品0/正式0/3/54.50％を保持。

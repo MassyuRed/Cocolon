@@ -1,11 +1,13 @@
 # 10/26 — 未接続の既存6教材とCMEE受理範囲／一括接続案
 
-状態：**承認済みprior座標除去の非学習2件診断終了。** SHOP形式は改善しましたが、同CMEEの意味・本文0/2、保存d431は不変/通常不採用です。全15の再評価はしていません。
+状態：**回答後の更新義務を明示する未適用候補を保存、Jupyter認証待ち。** [今回の候補・再開先](update_obligations_preparation/README.md)。静的比較のみで、製品source適用/実messages/tokenizer/モデル処理は0。前回の意味・本文0/2とd431不採用を保持。
+
+**現在の直接作業（10/28：回答後の更新義務を明示する未適用候補を保存、Jupyter認証待ち）：** 前回実rawの1対7/8更新不足を、既存contractの追加role/新relation順から具体化する入力指示候補へ絞った。API64c6cb1a製品sourceは変更0。固定15入力の保存metadataによるspec関数の静的比較で、quote V3回答後2件のupdates文だけ変更、V3初回4件/旧numeric V3不変。実build_model_messages/実tokenizer/context8192/教師全target照合は未実施。今回Pod94a06hhxu51uy4のJupyterへ直接到達したが、安全な認証送信後Invalid credentials、Lab/terminal未到達。前回Podのfile/cache/重みが今回存在するか、GPU稼働/単価/adapter hashは未確認。Jupyter子process/モデル読込/forward/学習/生成/pytest/SQL0、Stop/restart/delete/管理console/API0。候補はupdate_obligations_preparation/README・weekly§82。認証復旧後にCPUで実入力とtokenを確認してから新一回の実条件/費用を具体化し、消費済みplanを再使用しない。新観測会は現不具合解消には不要。前回意味/本文0/2・商品0/正式0/3/54.50％を維持、STRUCTURE_MAP_DELTA_NONE、candidate_ready=false/automatic_progression=false。
 
 <a id="native15-adaptive30-proposal"></a>
 ## 2026-10-27 — prior座標除去の非学習2件診断・最終結果
 
-**現在の直接作業（10/27：承認済みprior座標除去の非学習2件診断を終了）：** 保存d431/112F32を非学習load、追加学習0・BOOK/SHOP回答後各1生成、EOS2・strict JSON2。処理235.326689秒/$0.018303按分（準備/CPU/回収/保持/保存/通信/税等別）、同CMEEの意味/本文0/2で前回同2件から成立件数は増えなかった。SHOPの重複キー・数値座標・改変引用は消えたが、BOOKの原欄にない引用3件/根拠役割のずれと1対7更新、SHOPの索引/scope不足と1対8更新、本文の留保欠落/再掲が残った。採用snapshot0のためcold再読は対象なし。保存重み不変・新保存0・retry0、d431通常不採用。全15新評価/旧9回帰/新初回4件/商品品質の成功へ広げない。全15原本payload＋manifestをPod外照合・GitHub保全。prior_quote_probe2_result/README・weekly§80。新観測会は今は不要、追加有料試行へ自動進行せず根拠対応/全更新/本人向け本文を既存教師から見直す。商品0/正式0/3/54.50％、GPU保持/Stop・restart・delete0、automatic_progression=false。
+**前回実行の閉鎖結果（10/27）：** 保存d431/112F32を非学習load、追加学習0・BOOK/SHOP回答後各1生成、EOS2・strict JSON2。処理235.326689秒/$0.018303按分（準備/CPU/回収/保持/保存/通信/税等別）、同CMEEの意味/本文0/2で前回同2件から成立件数は増えなかった。SHOPの重複キー・数値座標・改変引用は消えたが、BOOKの原欄にない引用3件/根拠役割のずれと1対7更新、SHOPの索引/scope不足と1対8更新、本文の留保欠落/再掲が残った。採用snapshot0のためcold再読は対象なし。保存重み不変・新保存0・retry0、d431通常不採用。全15新評価/旧9回帰/新初回4件/商品品質の成功へ広げない。全15原本payload＋manifestをPod外照合・GitHub保全。prior_quote_probe2_result/README・weekly§80。新観測会は今は不要、追加有料試行へ自動進行せず根拠対応/全更新/本人向け本文を既存教師から見直す。商品0/正式0/3/54.50％、GPU保持/Stop・restart・delete0、automatic_progression=false。
 
 [今回の最終結果・2件全文/全更新比較・実行原本](prior_quote_probe2_result/README.md)。[起案時の小修復・CPU・2件案](prior_quote_preparation/README.md)と[前回全15結果](adaptive30_result/README.md)は凍結履歴です。保存d431のまま入力座標除去だけを比較し、形式改善と意味/本文未成立を分けて記録しました。
 
