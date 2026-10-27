@@ -1,6 +1,6 @@
 # 保存109c・同15教材の語単位診断 — 追加学習0・新規生成0の一回候補
 
-状態：**CPU_PREPARATION_IN_PROGRESS / GPU_NOT_AUTHORIZED**。既存の30更新と15生成は閉鎖済みです。この候補は別outputで、旧承認・残時間・予算を再利用しません。
+状態：**CPU_READY / PREPARED_AWAITING_MASH_APPROVAL / GPU_NOT_AUTHORIZED**。既存の30更新と15生成は閉鎖済みです。この候補は別outputで、旧承認・残時間・予算を再利用しません。
 
 ## 今回解消する不足
 
@@ -30,7 +30,22 @@
 
 `run_token_diagnostic.py`と`token_diagnostic.plan.json`が実行範囲を所有し、未承認の`--execute`は新output作成・実4B読込より前に拒否します。`source_bindings.json`は同109c/教材/過去15rawを束縛します。`candidate_focus_loss.py`は既存JSON span parserのbytes不変copyで、損失再配分のためには使用しません。
 
-`verify_token_diagnostic_cpu.py`で実tokenizer15件・切捨て0・入力一致・全fieldのtoken区間・causal shift/正解順位・承認前拒否を確認します。fieldを跨ぐtokenは境界として明示し、単一fieldの誤差へ誤計上しません。実CPU結果を`actual_cpu_check.json`へ保存後、未実施事項を区別して本節を更新します。
+`verify_token_diagnostic_cpu.py`で実tokenizer15件・切捨て0・入力一致・全fieldのtoken区間・causal shift/正解順位・承認前拒否を確認します。fieldを跨ぐtokenは境界として明示し、単一fieldの誤差へ誤計上しません。実CPU原本は[actual_cpu_check.json](actual_cpu_check.json)。source ae9ac364のJupyter直接実行は**4.935140502988361秒**で成功、15件/max7935、causal shift/CE/正解順位・同点・EOS top5、不正4例（長さ/NaN/教師token/重複JSON key）拒否、pending executeのoutput前拒否、CUDA未初期化を確認。source5fileとPodから回収したreportのhashを外側でも照合しました。4Bの実重み読込/forward/生成/追加更新/採否/SQLは全て0です。
+
+旧9のJSON内容は教師と一致し、厳密token列には終端差があるため、内容分岐として数えません。新6の既存自由生成の分岐位置は次のとおりです。token番号は0始まり、charは一致した先頭文字数で、追加生成の結果ではありません。
+
+| 教材 | 最初の分岐token | 一致先頭文字 | 教師側の項目 |
+|---|---:|---:|---|
+| BOOK初回 | 577 | 2206 | question_proposal |
+| BOOK回答後 | 656 | 2491 | claims |
+| SHOP初回 | 596 | 2224 | question_proposal |
+| SHOP回答後 | 744 | 2730 | claims |
+| REPOT | 761 | 2915 | observation（主客反転） |
+| KNIT | 118 | 419 | claims |
+
+このCPU確認は4Bの確率測定ではありません。確率・順位・局所NLLは新一回の承認後だけ実測します。GPU起動には外側の `timeout --signal=TERM --kill-after=10s 890s` を必ず付け、内側900秒と合わせてworker全体を900秒以内に制限します。停止対象は今回のworkerだけで、Podは稼働保持します。完走/停止を問わず原本を回収し、新学習へ自動進行しません。
+
+配置の最初の複数行入力は改行が落ちたためshell構文エラーで未実行となり、正しいpasteで配置しました。新model処理・既存原本変更は0。browser download待機はtimeout表示でしたが、実downloadされたreport57,149bytes/SHA256 `0281ce6b29f0cb7794bd230fdaed1f0fb7d734b825882fac95cd952f3c4c19be` を確認して回収しています。
 
 ## 判断・保護範囲
 

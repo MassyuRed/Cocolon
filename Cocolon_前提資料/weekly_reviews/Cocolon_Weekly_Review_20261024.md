@@ -3032,3 +3032,15 @@ CPU consumer PID149533、固定API6b043880/完全copyで101.05638900503982秒。
 全診断原本2929933bytes/SHAe8a915474c979eddbec43aabf066494e959b7d269c711c107f03a955a5f4daf9はarchiveにbytes不変保持。GitHubではmetadata＋case15へ値不変分割し再組立て一致、saved/completed/cold各11原本を保存。全112F32有限と元保存109c完全一致、全15raw/全memberのbytes/hashをPod外照合。最終archive14759092bytes/SHAb040a720ce676f4ffec74ef332e43dc48371092e2a38035a10c615ffd423730e、全86payload＋manifest/87memberを[保存重み・全原本version0](https://chatgpt.com/library?file_id=libfile_cff4b34dfaa4819193affe63157e47cf&account_id=personal)へ保全。転送archive79payload/bf27a915…2307と最終archiveを区別する。base全重み/optimizer/RNG非同梱、strict resumeでない。
 
 worker142245/149533は終了、GPU A5000/1MiB/24564MiBで稼働保持。一回閉鎖/旧承認再利用/追加有料試行への自動進行なし。次は既存教師で長い意味・全更新・自然本文を同時に保持する学習設計の見直しで、同回数/LRだけの連続試行・reader緩和・gold prefix・教師置換/JSON補完を成功へ数えない。新観測会は今は不要、既知教材の未成立を教材不足の原因確定へしない。全体00/観測入口/training/01Aと準備/停止結果の現在地を同単位同期。STRUCTURE_MAP_DELTA_NONE、primary=BLOCKER_NARROWEDと限定reload/cold TECHNICAL_CREDIT、商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=false。
+
+
+<a id="20261027-native15-token-diagnostic-prepared"></a>
+## 73. 10/27 — 同109c・同15の語単位診断、実CPU確認・新GPU一回は判断前
+
+**現在の直接作業（10/27：保存109c・同15の語単位診断を実CPU確認、新GPU一回は判断前）：** 前回の追加更新0/15生成は意味11・本文9・新6本文0で閉鎖/通常不採用のまま。今回Jupyter直接のCPU4.935141秒で実tokenizer15/切捨て0/max7935、原JSON spanと全chat token位置一致、causal shift/CE/順位/同点/EOS、小不正4例拒否、pending executeのoutput前拒否を確認。旧9はJSON内容一致・終端差だけ、新6の最初の内容分岐は問い2/claim3/本文主客1へ特定。実4B読込/forward/更新/生成/採否/SQL0。次は同109c/同15各1forwardで語別誤差と正解順位を測る別一回、追加学習0/生成0・最大900秒/$0.07処理按分（準備/回収/保持等別）の明示判断前。新観測会は今は不要、原本token_diagnostic_preparation/README・weekly§73。商品0/正式0/3/54.50％、GPU稼働保持。
+
+全機能原本・設計/全file地図・最新§72/全raw・学習/評価messages・既存loader/encode/evaluateを照合。入力不整合や未適用は認めず、短いREPOT/KNITも失敗するため長さ上限だけを原因としない。平均誤差の低下を自由生成成功へ換算せず、語単位の正解順位/誤差/field別集計と既存rawの分岐を照合する[別一回の具体案](../observation_learning/training/2026-10-26-unconnected-native/token_diagnostic_preparation/README.md)を実装した。損失再配分・低LR・出力順・MLP拡張の同様な有料反復は追加しない。
+
+Jupyter CPUの実原本は同dir/actual_cpu_check.json。実tokenizer15/全chatとoffset一致/切捨て0、合成logitsのshift/CE/順位/同点/EOS、誤変更4例拒否、新output前の未承認execute拒否を4.935141秒で確認。source ae9ac364の5fileを回収report内hashと外側照合。旧9は内容一致・token終端差のみ、BOOK/SHOP初回はquestion_proposal、両回答後/KNITはclaims、REPOTはobservationで最初に外れる。正解prefixを含む診断を通常評価成功へ数えない。新GPUはload1/no-grad112一致/15forwardだけ、900秒/$0.07処理按分（準備/CPU/回収/保持等別）。外側timeout890秒＋10秒kill、内側900秒、異常は部分原本を保持しretry0。
+
+可逆source/CPU/GitHub反映は続行指示＋Rule18§11.3の範囲。新有料load/forwardは個別判断前。rootが単一writer/実行owner、補助の候補/調査を正式Pro/Ultra/human受入れへ換算しない。新観測会不要。STRUCTURE_MAP_DELTA_NONE（API/reader/意味型/通常app/三core責務は不変）、限定TECHNICAL_CREDITは診断候補/CPUのみ、商品0/正式0/3/54.50％/candidate_ready=false/automatic_progression=false。GPU Stop/restart/delete0。

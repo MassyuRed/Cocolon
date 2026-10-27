@@ -5183,3 +5183,17 @@ current00/観測入口/同training README#native15-interleaved30-proposal/weekly
 | expanded15_recovery_result/execution・early/preview*_run・external_verification・transfer_manifest・final_manifest/final_recovery | GPU/consumer実launch/log、早期metadataと最終の区別、全86payload＋manifest/112F32・元109c一致/Library version0保全 |
 
 元15教師/評価/priorと不変helperは既存ownerを使用し、学習対象だけを変える。expanded30は実学習用load1/30更新/保存後停止・生成/採否0で品質未測定。評価再開は別承認後に実4B非学習reload/15生成/固定CMEE採否/coldまで完了、追加更新0・初期1dから品質改善なしで閉鎖。CPU準備だけを実4B成功へ換算したのではない。商品0/正式0/3/54.50％。全体00/観測入口/同training README/weekly§72へ同単位同期、GPU稼働保持。
+
+
+### 2026-10-27 — 保存109cの語単位診断候補のfile地図
+
+同training rootの `token_diagnostic_preparation/`。現在地は全機能00/観測入口/最新weekly§73、前回の不採用/閉鎖§72を維持。
+
+| path | 責任・状態 |
+|---|---|
+| run_token_diagnostic.py・token_diagnostic.plan.json | 同109c/同15各1teacher-forced forward・更新0/生成0・no-grad・900秒/$0.07上限の新一回候補。pending executeはoutput前拒否、実GPUは判断前 |
+| source_bindings.json・candidate_focus_loss.py | 既存recovery/15raw/教材の固定identityと、既存JSON span parserのbytes不変copy。reader/教師/意味の変更なし |
+| verify_token_diagnostic_cpu.py・actual_cpu_check.json | Jupyter CPU4.935141秒、実tokenizer15/offsetと全chat一致、shift/CE/順位/同点/EOS、不正4拒否、未承認拒否。4B読込/forward/更新/生成0 |
+| README.md | 原因仮説・既存6rawの最初の内容分岐・具体予算/停止条件・承認境界。正解prefix付き診断を通常評価へ換算しない |
+
+製品owner/三core責務/意味型/wire/API/採用reader/DB/RN/通常appは不変、STRUCTURE_MAP_DELTA_NONE。旧9は内容一致/終端差、新6は問い2/claim3/本文1から分岐。新観測会不要、GPU稼働保持、正式商品0/3/54.50％。
