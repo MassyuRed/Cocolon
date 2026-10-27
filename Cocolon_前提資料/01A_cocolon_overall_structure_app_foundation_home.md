@@ -5295,5 +5295,6 @@ Cocolonのfamilyは`observation_learning/training/2026-10-26-unconnected-native/
 | `consume_probe2.py` | 実rawが得られた後だけ、未変更CMEE・既存cold workerで2件採否/本文/全更新を読む手順。現時点実行0 |
 | `cpu_launch*.json・execution*.log・check_cpu_failed_v1.py・check_cpu_failed_v2.py・check_cpu_pytest_unavailable_v3.py・check_cpu_v4_history.py・actual_cpu_check_v4_history.json・pytest.log` | 最初のhelper参照誤り2回・pytest未導入停止・修正過程と最終直接CPU成功の原本。GPU retryではない |
 | `runtime_archive_manifest.json・archive_identity.json` | 全25payload＋manifest/26member・60852bytesのCRC/bytes/hash照合。新重みは含まない |
+| `proof/jupyter_cpu_completed.jpg・identity.json` | f8fa5224の34path読戻し後のJupyter表示と未承認2件案の画面証跡。ZIP外の後続記録、表示bytes同一 |
 
 初回10quote入力/旧numeric15/教師全target不変。回答後5入力だけ座標を除去。次の2件実モデルは未承認・未実行で、旧9の新prompt退行なし/新初回4件の改善/全15合格を証明しない。商品0/正式0/3/54.50％、GPU保持、weekly§79。
