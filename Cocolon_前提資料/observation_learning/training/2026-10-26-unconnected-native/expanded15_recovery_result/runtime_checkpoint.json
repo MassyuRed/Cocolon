@@ -1,0 +1,13 @@
+{
+  "status": "RUN_CLOSED_NO_REUSE",
+  "source_commit": "d014e45c9a94f1ebc1e193ea7d6d1513280e8dc2",
+  "gpu_pid": 142245,
+  "cpu_pid": 149533,
+  "gpu_workers_ended": true,
+  "gpu_kept_running": true,
+  "gpu_lifecycle_operations": 0,
+  "source_run_status_preserved": "RAW_COMPLETE_PENDING_CMEE_AND_CONTENT_REVIEW",
+  "no_retry_or_missing_regeneration": true,
+  "next_automatic_run": false,
+  "latest_owner": "expanded15_recovery_result/README.md"
+}

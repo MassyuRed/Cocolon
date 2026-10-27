@@ -1,7 +1,16 @@
 # 10/26 — 未接続の既存6教材とCMEE受理範囲／一括接続案
 
-状態：**10/27：expanded30は30更新/保存後に照合停止、生成0・品質未測定。一回閉鎖。保存109cを追加学習0で評価する再開候補は実CPU確認済み・新GPU承認前。**
+状態：**10/27：保存109cの非学習reload/15確認は完了。追加更新0・意味11/本文9・新6本文0で通常不採用、一回閉鎖。元30更新/保存後STOPは不変。**
 
+
+<a id="native15-expanded15-recovery-result"></a>
+## 2026-10-27 — 保存済み重みの非学習再読込と15確認完了、品質は改善せず
+
+**現在の直接作業（10/27：保存109cの非学習再読込と15件確認を完了、意味11/本文9・新6本文0で通常不採用）：** 承認source d014e45c/PID142245で追加更新0・保存済み112F32の完全一致/no-grad reload→同15生成を1285.897752秒/$0.100014処理按分で完了。元bd5dの30更新/保存後STOPは不変。EOS/strictJSON12、旧9は意味/本文9、新6は意味2/本文0で初期1dの11/9から改善せず、109cは通常不採用。BOOK/SHOP回答とKNITが3712token未完結、更新不足/主客反転/本文内質問、KNIT指示露出/数字反復が残る。固定CMEE無補修採否と別process cold11/11、うち本文なしSHOP/REPOT2を含み本文11完成ではない。CPU101.056389秒/追加model・更新・SQL0。全86payload＋manifest/112F32有限/元保存109c一致をPod外照合しversion0保全、一回閉鎖/再試行0。同じ回数/LRだけの連続有料試行へ自動進行せず、既存教師で長い意味・全更新・自然本文を同時保持する学習設計を見直す。新観測会は今は不要、原本expanded15_recovery_result/README・weekly§72。商品0/正式0/3/54.50％、GPU稼働保持。
+
+最終原本は[expanded15_recovery_result/README.md](expanded15_recovery_result/README.md)。元の30更新は繰返さず、別OS processで保存109c/112tensorを完全一致・no-gradで読みました。全15を無補修で固定CMEEへ渡し、意味11/本文9・cold11一致（本文なし2を含む）まで確認。初期1d/continuation30の11/9を越えず、通常採用へ進みません。原本/重み/読解を保全し、追加有料試行へ自動進行しません。
+
+> 以下のexpanded30停止と再開準備は当時の履歴です。今回の評価結果は上記へ戻り、閉鎖した各一回の承認/残枠/outputを再利用しません。
 
 <a id="native15-expanded30-result"></a>
 <a id="native15-expanded15-recovery-proposal"></a>

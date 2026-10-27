@@ -5159,9 +5159,9 @@ current00/観測入口/同training README#native15-interleaved30-proposal/weekly
 凍結教材/実行payloadは既存native15_preparation、runner/plan/consumerはcontinuation30_preparation、不変helper/APIは固定正本へ戻る。GitHub上で教材/codeを重複保存しない。最終archiveは元4B全重み/optimizer/RNG非同梱。全体00/観測入口/training README/weekly§66へ同単位同期。GPU稼働保持は継続料金を伴う。
 
 
-### 2026-10-27 — ordered30閉鎖・expanded30停止と評価再開準備のfile地図
+### 2026-10-27 — ordered30閉鎖・expanded30停止と評価再開結果のfile地図
 
-同training rootは `observation_learning/training/2026-10-26-unconnected-native/`。全体00/最新weekly§69〜71/各READMEを現在地とし、旧閉鎖runを再起動しない。製品責務/意味型/wire/採用reader/API/DB/RNは不変、STRUCTURE_MAP_DELTA_NONE。
+同training rootは `observation_learning/training/2026-10-26-unconnected-native/`。全体00/最新weekly§69〜72/各READMEを現在地とし、旧閉鎖runを再起動しない。製品責務/意味型/wire/採用reader/API/DB/RNは不変、STRUCTURE_MAP_DELTA_NONE。
 
 | path group | 責任・状態 |
 |---|---|
@@ -5175,7 +5175,11 @@ current00/観測入口/同training README#native15-interleaved30-proposal/weekly
 | expanded30_preparation/README・preparation_recovery.json | 準備時の具体案/固定条件/旧案との差、非学習初期値・全13payload＋manifest保全。最終停止結果へ案内、再利用不可 |
 | expanded30_result/README・result_summary・run/training・adapter/initial_expanded_adapter config・external_verification | source bd5d/PID127012の30更新/保存後停止、406.636986秒/$0.031627、生成0で品質未測定。全112F32/30順序を照合 |
 | expanded30_result/execution・final_manifest/final_recovery | 実launch/log/trace、全55payload＋manifest/保存109c＋双方初期値＋CPU再開原本のversion0保全。after/cold原本は不存在 |
-| expanded15_recovery_preparation/run_expanded15_recovery.py・gpu15_recovery.plan.json・consume_expanded15_recovery.py | 元30更新と新0更新評価の分離束縛。保存109cの非学習reload→同15だけの新候補、45分/$0.21按分上限・別承認前 |
-| expanded15_recovery_preparation/verify_recovery_cpu.py・actual_cpu_check.json・README・preparation_recovery.json | meta実構造で28suffix→56、tiny実PEFT保存/reload112一致、誤変更5拒否/入力prior15/pending output前拒否。CPU6.428339秒、実4B再読込未検証。初回失敗/tiny/launch/log原本は回収metadataと最終manifest/archiveへ |
+| expanded15_recovery_preparation/run_expanded15_recovery.py・gpu15_recovery.plan.json・consume_expanded15_recovery.py | 元30更新と新0更新評価の分離束縛。保存109cの非学習reload→同15だけの準備/承認原本。一回完了・再利用不可 |
+| expanded15_recovery_preparation/verify_recovery_cpu.py・actual_cpu_check.json・README・preparation_recovery.json | meta実構造で28suffix→56、tiny実PEFT保存/reload112一致、誤変更5拒否/入力prior15/pending output前拒否。準備CPU6.428339秒、当時は実4B未検証。実非学習reload/15件の最終結果は下段へ。初回失敗/tiny/launch/log原本は準備回収metadataとarchiveへ |
+| expanded15_recovery_result/README・result_summary・runtime_checkpoint・run/reloaded_tensors・training_origin | source d014/PID142245の追加更新0/実112tensor一致reload/15生成、意味11/本文9/新6本文0で109c通常不採用。元bd5d/30更新STOPを分離保持 |
+| expanded15_recovery_result/after_*.jsonl15・case_comparison・reading_reviews | 全無補修raw/EOS・strict12、基準1d/dd/orderedとの全15比較、原入力/教師/全本文・全更新の読解。正式受入れではない |
+| expanded15_recovery_result/diagnosis/summary・cases15・original_identity・saved/completed/cold各11 | 元完全診断の値不変分割と無補修CMEE採否、別process11再読一致。本文なしSHOP/REPOT2を含む |
+| expanded15_recovery_result/execution・early/preview*_run・external_verification・transfer_manifest・final_manifest/final_recovery | GPU/consumer実launch/log、早期metadataと最終の区別、全86payload＋manifest/112F32・元109c一致/Library version0保全 |
 
-元15教師/評価/priorと不変helperは既存ownerを使用し、学習対象だけを変える。expanded30は実学習用load1/30更新/保存後停止・生成/採否0で品質未測定。新評価再開のCPUはmeta構造と小モデルだけ、実4B再読込/forward/更新/生成0で別承認前。CPUを商品品質へ加算しない。商品0/正式0/3/54.50％。全体00/観測入口/同training README/weekly§71へ同単位同期、GPU稼働保持。
+元15教師/評価/priorと不変helperは既存ownerを使用し、学習対象だけを変える。expanded30は実学習用load1/30更新/保存後停止・生成/採否0で品質未測定。評価再開は別承認後に実4B非学習reload/15生成/固定CMEE採否/coldまで完了、追加更新0・初期1dから品質改善なしで閉鎖。CPU準備だけを実4B成功へ換算したのではない。商品0/正式0/3/54.50％。全体00/観測入口/同training README/weekly§72へ同単位同期、GPU稼働保持。

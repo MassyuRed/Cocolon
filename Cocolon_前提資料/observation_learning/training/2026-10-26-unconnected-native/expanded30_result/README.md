@@ -29,7 +29,9 @@ PEFT v0.21.2はtarget名が20件以上の場合、同じmoduleを選択する短
 
 最終archive **26,078,179bytes / SHA256 6bb5da2dabdfea49173a0697a5d17460d1419e55ff6c7d1d53d1f5dcdef6c5fc**、全55payload＋manifest/56memberを照合し、[保存重み・停止原本・CPU再開準備version0](https://chatgpt.com/library?file_id=libfile_d93ea0ff6e7c819185b62a0e25725850&account_id=personal)へ保全済み。[final_recovery.json](final_recovery.json)/[全manifest](final_manifest.json)に転送archiveとCPU archiveの別identityも保持します。base4B全重み・optimizer/RNGは非同梱でstrict optimizer resumeではありません。
 
-## 次の最小作業
+## 次の最小作業の記録
+
+保存済み重みの非学習評価は、その後に別承認を受け追加更新0で実行・閉鎖しました。最終は[expanded15_recovery_result](../expanded15_recovery_result/README.md)の意味11/本文9・新6本文0で通常不採用です。以下の準備・判断前は当時の履歴で、元30更新/保存後STOPは変更しません。
 
 [追加学習0・保存済み109c重みの非学習reload→同15件確認](../expanded15_recovery_preparation/README.md)だけを準備しました。実CPU6.428339秒で旧guard失敗を再現し、実構造への28suffix→56解決、小CPU PEFT保存/reload112一致、誤った対象/r/αの拒否、入力/prior15、pending時output前拒否を確認。元config/weights/STOPは変更していません。実4B再読込は未検証で、新しい有料一回は別承認前です。30更新を繰り返す案ではありません。
 

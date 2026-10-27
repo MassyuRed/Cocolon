@@ -1,6 +1,8 @@
 # 保存済みexpanded30重みの評価再開 — 追加学習0
 
-状態：**実CPU確認済み／Mashが2026-10-27（JST）に本具体案d026の新GPU一回を明示承認、起動前**。元expanded30は30更新/保存後に停止した原本として閉鎖し、旧承認・残時間・outputを再利用しません。
+状態：**RUN_CLOSED_REJECTED_CANDIDATE — 保存109cの非学習reload/15確認は完了、意味11/本文9・新6本文0で通常不採用。** 当時の一回承認は消費済みで再利用しません。最終結果は[expanded15_recovery_result](../expanded15_recovery_result/README.md)。
+
+> 以下はd026準備時／d014一回承認時の履歴です。「実4B未検証」「output不存在」「未承認」は当時の状態であり、現在は上記の実評価結果へ戻ります。実runner/承認plan/保存config/重み/元STOPは書換えず、一回を再起動しません。
 
 ## 今回の一回承認
 

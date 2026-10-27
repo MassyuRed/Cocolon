@@ -2,7 +2,7 @@
 
 状態：**RUN_CLOSED_STOPPED_BEFORE_INFERENCE_RELOAD — 30更新/保存後に照合停止、生成0・品質未測定。** 当時の一回承認は消費済みで再利用しません。最終結果は[expanded30_result](../expanded30_result/README.md)、追加学習0の新しい評価候補は[expanded15_recovery_preparation](../expanded15_recovery_preparation/README.md)。
 
-**現在の直接作業（10/27：expanded30は30更新/保存後に照合停止、保存済み重みの評価再開を実CPU確認・新GPU判断前）：** 承認source bd5d169a/PID127012の一回は30更新と109c重み保存まで406.636986秒/$0.031627処理按分で完了し、PEFTの56名→28suffix短縮をraw名集合の検査が拒否して非学習reload前に停止。実base読込1・生成0、EOS/意味/本文は未測定で0/15失敗へ換算しない。元run/config/重み不変、112F32/全shape/有限/30順序・旧32初期一致をPod外照合。全55payload＋manifestを保全し一回閉鎖/再試行0。別候補は追加更新0・保存109cの非学習reload→同15確認だけ。実CPU6.428339秒で旧失敗再現、meta実構造の28→56解決、小PEFT保存/reload112一致、誤変更5例拒否、入力prior15とpending output前拒否を確認。実4B再読込/生成は未実施、新一回は最大2700秒/各180秒/15call/$0.21処理按分（準備/回収/保持等別）の別承認前。新観測会は今は不要、原本expanded30_result/README・expanded15_recovery_preparation/README・weekly§71。商品0/正式0/3/54.50％、GPU稼働保持。
+**現在の直接作業（10/27：保存109cの非学習再読込と15件確認を完了、意味11/本文9・新6本文0で通常不採用）：** 承認source d014e45c/PID142245で追加更新0・保存済み112F32の完全一致/no-grad reload→同15生成を1285.897752秒/$0.100014処理按分で完了。元bd5dの30更新/保存後STOPは不変。EOS/strictJSON12、旧9は意味/本文9、新6は意味2/本文0で初期1dの11/9から改善せず、109cは通常不採用。BOOK/SHOP回答とKNITが3712token未完結、更新不足/主客反転/本文内質問、KNIT指示露出/数字反復が残る。固定CMEE無補修採否と別process cold11/11、うち本文なしSHOP/REPOT2を含み本文11完成ではない。CPU101.056389秒/追加model・更新・SQL0。全86payload＋manifest/112F32有限/元保存109c一致をPod外照合しversion0保全、一回閉鎖/再試行0。同じ回数/LRだけの連続有料試行へ自動進行せず、既存教師で長い意味・全更新・自然本文を同時保持する学習設計を見直す。新観測会は今は不要、原本expanded15_recovery_result/README・weekly§72。商品0/正式0/3/54.50％、GPU稼働保持。
 
 > 以下は2bb準備時／bd5d一回承認時の履歴です。「実4B0」「output不存在」「承認後」は当時の状態であり、現在は上記の停止原本へ戻ります。実runner/承認plan/config/重みは書換えず、一回を再起動しません。
 
