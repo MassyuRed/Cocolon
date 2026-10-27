@@ -1,0 +1,1049 @@
+{
+  "schema": "cocolon.native15_balanced30.old9_content_reading.v1",
+  "review_date_jst": "2026-10-27",
+  "reviewer": "balanced30_scope_review independent agent",
+  "formal_pro_ultra_or_human_acceptance": false,
+  "preview_file_sha256": "42209050e881436b7a46cc8feef10c727601e9911b97d6ad2cb33bdc16036e21",
+  "train_messages_sha256": "29f37e38f4a615220c739176a6eaa2e0e01aae36c7bb6f87db8be248aecd1772",
+  "source_commit": "7e3f6bca5ae9027077862ef10ea17bde25f3a8ef",
+  "all9_raw_text_read": true,
+  "raw_repair_performed": false,
+  "new_model_calls": 0,
+  "test_runs": 0,
+  "counting_limits": {
+    "records": 9,
+    "language_families": 2,
+    "known_teacher_fit": true,
+    "unknown_generalization": false,
+    "dynamic_after_answer_prior": false,
+    "cmee_adoptions_by_reviewer": 0
+  },
+  "comparison_to_previous_interleaved30": {
+    "previous_old9_packet_teacher_equality": "9/9 as recorded prior result; current review directly compares current raw to unchanged teacher, not a new prior model run",
+    "current_old9_packet_teacher_equality": 6,
+    "current_parsed_packets": 8,
+    "current_candidate_subobjects_equal_teacher": 8,
+    "current_failed_parse": 1,
+    "regression": "All three correction records lose whole-packet validity/source completeness compared with prior full packet equality. No old9 proposed prose improvement observed."
+  },
+  "naturalness_and_product_limits": [
+    "Three initial chair records are the same language input with different identities; three corrections likewise, and daily three likewise. They do not establish nine independent language scenarios.",
+    "Initial chair reception repeats joy terms and restates the appraisal object; update_note remains hard explanatory wording inherited from teacher. Full teacher equality alone is not product quality PASS.",
+    "Daily brief reception fits the slight calm and does not require deeper inference; no novel natural-language improvement over the previous teacher-matching output is observed.",
+    "Final CMEE adoption/body/cold-file status is intentionally left unset for root consumer. Proposed surface string is not an adopted CMEE body."
+  ],
+  "cases": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "eos_reached": true,
+      "finish_reason": "stop",
+      "parse_error": null,
+      "raw_utf8_sha256": "29994933c6116b8c88d1a00357f021c87ccd0362a8055b370f3434f92930e1f9",
+      "sources": [
+        {
+          "role": "ORIGINAL_INPUT",
+          "source_id": "428004b4-147f-4c78-ac0f-4f1707c1dd41",
+          "text_fields": {
+            "memo": "全部一人で直せたことが、うれしかった。",
+            "memo_action": "ぐらついていた椅子を修理して、また座れるようになった。"
+          }
+        }
+      ],
+      "teacher_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "repair",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "repair_and_result"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "solo_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      },
+      "packet_equal_frozen_teacher": true,
+      "candidate_equal_frozen_teacher": true,
+      "proposed_surface_equal_frozen_teacher": true,
+      "actual_proposed_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "repair",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "repair_and_result"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "solo_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      },
+      "differences": [],
+      "cmee_adoption_not_evaluated_by_this_reviewer": true,
+      "cmee_meaning_adopted": null,
+      "cmee_body_available": null,
+      "cmee_body": null,
+      "findings": [],
+      "content_reading": "Whole parsed packet equals the frozen teacher. Initial chair retains repair/result/joy/solo-object and optional separate question; daily retains returning/cooking/eating and slight calm without additional causes. This is known-teacher fit, not new language coverage or product-quality approval."
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "eos_reached": true,
+      "finish_reason": "stop",
+      "parse_error": null,
+      "raw_utf8_sha256": "dd25f25449c0c87016f3da02610015df438b0ea353ae79c63c210afed69123d6",
+      "sources": [
+        {
+          "role": "ORIGINAL_INPUT",
+          "source_id": "428004b4-147f-4c78-ac0f-4f1707c1dd41",
+          "text_fields": {
+            "memo": "全部一人で直せたことが、うれしかった。",
+            "memo_action": "ぐらついていた椅子を修理して、また座れるようになった。"
+          }
+        },
+        {
+          "role": "SUPPLEMENTAL_ANSWER",
+          "source_id": "d0efb98c-aa02-4c1b-9ad9-aac942e2dc3f",
+          "text_fields": {
+            "answer_text_private": "さっき「全部一人で」と書いたのは訂正します。途中で友人に手順を教えてもらって、一緒に直しました。\n\nうれしかったのも、一人でできたからではなく、捨てずにまた使えるようになったからです。"
+          }
+        }
+      ],
+      "teacher_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair"
+            ],
+            "relation_refs": [],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "reuse_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "reception"
+          },
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair",
+              "reuse_appraisal_object"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "update_note",
+            "update_refs": [
+              0,
+              1,
+              2
+            ]
+          }
+        ],
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "packet_equal_frozen_teacher": false,
+      "candidate_equal_frozen_teacher": true,
+      "proposed_surface_equal_frozen_teacher": true,
+      "actual_proposed_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair"
+            ],
+            "relation_refs": [],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "reuse_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "reception"
+          },
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair",
+              "reuse_appraisal_object"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "update_note",
+            "update_refs": [
+              0,
+              1,
+              2
+            ]
+          }
+        ],
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "differences": [
+        {
+          "path": "$.evidence_quotes[6].quote",
+          "teacher": "さっき「全部一人で」と書いたのは訂正します",
+          "actual": "途中で友人に手順を教えてもらって"
+        },
+        {
+          "path": "$.evidence_quotes[7].quote",
+          "teacher": "友人に手順を教えてもらって",
+          "actual": "一緒に直しました"
+        },
+        {
+          "path": "$.evidence_quotes[8].quote",
+          "teacher": "一緒に直しました",
+          "actual": "捨てずにまた使えるようになったからです"
+        },
+        {
+          "path": "$.evidence_quotes[9].quote",
+          "teacher": "捨てずにまた使えるようになったからです",
+          "actual": "一人でできたからではなく"
+        },
+        {
+          "path": "$.evidence_quotes[10]",
+          "teacher": {
+            "field_path": "answer_text_private",
+            "quote": "一人でできたからではなく",
+            "source_id": "d0efb98c-aa02-4c1b-9ad9-aac942e2dc3f"
+          },
+          "actual": "MISSING"
+        },
+        {
+          "path": "$.evidence_quotes[11]",
+          "teacher": {
+            "field_path": "answer_text_private",
+            "quote": "うれしかったのも、一人でできたからではなく、捨てずにまた使えるようになったからです",
+            "source_id": "d0efb98c-aa02-4c1b-9ad9-aac942e2dc3f"
+          },
+          "actual": "MISSING"
+        },
+        {
+          "path": "$.schema_version",
+          "teacher": "cocolon.cmee.quote_candidate.v1",
+          "actual": "MISSING"
+        }
+      ],
+      "cmee_adoption_not_evaluated_by_this_reviewer": true,
+      "cmee_meaning_adopted": null,
+      "cmee_body_available": null,
+      "cmee_body": null,
+      "actual_evidence_count": 10,
+      "teacher_evidence_count": 12,
+      "findings": [
+        {
+          "path": "$.candidate.relations[1].evidence_indexes",
+          "actual": [
+            11
+          ],
+          "problem": "11 is outside final evidence_quotes array"
+        },
+        {
+          "path": "$.candidate.updates[1].evidence_indexes",
+          "actual": [
+            10,
+            11
+          ],
+          "problem": "both references outside final evidence_quotes array"
+        },
+        {
+          "path": "$.candidate.updates[2].evidence_indexes",
+          "actual": [
+            6,
+            11
+          ],
+          "problem": "11 is outside final evidence_quotes array"
+        },
+        {
+          "path": "$.candidate.claims[3:6].evidence_indexes",
+          "actual": [
+            [
+              7
+            ],
+            [
+              8
+            ],
+            [
+              9
+            ]
+          ],
+          "problem": "refs retained from full teacher while final evidence table was shortened/reordered; guidance/joint/reuse no longer point to their own quotes"
+        }
+      ],
+      "content_reading": "Proposed observation, reception and update_note exactly retain the teacher joint-repair and reuse-joy correction without inventing a new emotion or restoring solo achievement. However the surrounding packet fails to preserve complete source binding, so text correctness is not usable acceptance."
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "eos_reached": true,
+      "finish_reason": "stop",
+      "parse_error": null,
+      "raw_utf8_sha256": "33d24cf7740145e4ce8951e3c04e57d9723a24dfdf1973c832ad629d4a1ce4ca",
+      "sources": [
+        {
+          "role": "ORIGINAL_INPUT",
+          "source_id": "8ad110fa-57b2-4e7e-8035-95ac72518e2f",
+          "text_fields": {
+            "memo": "全部一人で直せたことが、うれしかった。",
+            "memo_action": "ぐらついていた椅子を修理して、また座れるようになった。"
+          }
+        }
+      ],
+      "teacher_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "repair",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "repair_and_result"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "solo_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      },
+      "packet_equal_frozen_teacher": true,
+      "candidate_equal_frozen_teacher": true,
+      "proposed_surface_equal_frozen_teacher": true,
+      "actual_proposed_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "repair",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "repair_and_result"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "solo_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      },
+      "differences": [],
+      "cmee_adoption_not_evaluated_by_this_reviewer": true,
+      "cmee_meaning_adopted": null,
+      "cmee_body_available": null,
+      "cmee_body": null,
+      "findings": [],
+      "content_reading": "Whole parsed packet equals the frozen teacher. Initial chair retains repair/result/joy/solo-object and optional separate question; daily retains returning/cooking/eating and slight calm without additional causes. This is known-teacher fit, not new language coverage or product-quality approval."
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "eos_reached": true,
+      "finish_reason": "stop",
+      "parse_error": "Extra data: line 1 column 6250 (char 6249)",
+      "raw_utf8_sha256": "bd55ec5d275148da36daccc2d3a603b23eb05223ce23a65c7be4ec041419e1b7",
+      "sources": [
+        {
+          "role": "ORIGINAL_INPUT",
+          "source_id": "8ad110fa-57b2-4e7e-8035-95ac72518e2f",
+          "text_fields": {
+            "memo": "全部一人で直せたことが、うれしかった。",
+            "memo_action": "ぐらついていた椅子を修理して、また座れるようになった。"
+          }
+        },
+        {
+          "role": "SUPPLEMENTAL_ANSWER",
+          "source_id": "fd5ea30d-162e-4ffc-9dea-5f4884866756",
+          "text_fields": {
+            "answer_text_private": "さっき「全部一人で」と書いたのは訂正します。途中で友人に手順を教えてもらって、一緒に直しました。\n\nうれしかったのも、一人でできたからではなく、捨てずにまた使えるようになったからです。"
+          }
+        }
+      ],
+      "teacher_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair"
+            ],
+            "relation_refs": [],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "reuse_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "reception"
+          },
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair",
+              "reuse_appraisal_object"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "update_note",
+            "update_refs": [
+              0,
+              1,
+              2
+            ]
+          }
+        ],
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "packet_equal_frozen_teacher": false,
+      "candidate_equal_frozen_teacher": null,
+      "proposed_surface_equal_frozen_teacher": null,
+      "actual_proposed_surface": null,
+      "differences": null,
+      "cmee_adoption_not_evaluated_by_this_reviewer": true,
+      "cmee_meaning_adopted": null,
+      "cmee_body_available": null,
+      "cmee_body": null,
+      "raw_surface_excerpt_not_parsed_or_repaired": {
+        "start_char": 3863,
+        "end_char": 4426,
+        "text": "\"surface_proposal\":{\"bindings\":[{\"claim_refs\":[\"friend_guidance\",\"joint_repair\"],\"relation_refs\":[],\"section\":\"observation\"},{\"claim_refs\":[\"reuse_appraisal_object\",\"joy\",\"usable_again\"],\"relation_refs\":[\"joy_ground_revised\"],\"section\":\"reception\"},{\"claim_refs\":[\"friend_guidance\",\"joint_repair\",\"reuse_appraisal_object\"],\"relation_refs\":[\"joy_ground_revised\"],\"section\":\"update_note\",\"update_refs\":[0,1,2]}],\"observation\":\"友人に手順を教わり、一緒に椅子を直したのですね。\",\"reception\":\"捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。\",\"update_note\":\"共同修理と、また使えることへの喜びへ訂正しました。\"}"
+      },
+      "raw_suffix_excerpt_not_repaired": {
+        "start_char": 5652,
+        "text": "d\":\"8ad110fa-57b2-4e7e-8035-95ac72518e2f\"},{\"field_path\":\"memo\",\"quote\":\"全部一人で直せたことが、うれしかった\",\"source_id\":\"8ad110fa-57b2-4e7e-8035-95ac72518e2f\"},{\"field_path\":\"answer_text_private\",\"quote\":\"途中で友人に手順を教えてもらって\",\"source_id\":\"fd5ea30d-162e-4ffc-9dea-5f4884866756\"},{\"field_path\":\"answer_text_private\",\"quote\":\"一緒に直しました\",\"source_id\":\"fd5ea30d-162e-4ffc-9dea-5f4884866756\"},{\"field_path\":\"answer_text_private\",\"quote\":\"捨てずにまた使えるようになったからです\",\"source_id\":\"fd5ea30d-162e-4ffc-9dea-5f4884866756\"},{\"field_path\":\"answer_text_private\",\"quote\":\"一人でできたからではなく\",\"source_id\":\"fd5ea30d-162e-4ffc-9dea-5f4884866756\"}]},\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}\n"
+      },
+      "findings": [
+        {
+          "path": "$.raw_text",
+          "problem": "Original parser rejects Extra data at char6249; parsed remains null. Do not repair or promote a prefix."
+        },
+        {
+          "path": "$.raw_text (surface and updates excerpts)",
+          "problem": "Visible prose and three updates resemble the teacher correction, but whole JSON invalidity prevents parsed comparison or adoption."
+        }
+      ]
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "eos_reached": true,
+      "finish_reason": "stop",
+      "parse_error": null,
+      "raw_utf8_sha256": "827d1b3ab8f35ffcc7e0127565f0c5f39827eb5c64b5d6796b721a0682ba57a8",
+      "sources": [
+        {
+          "role": "ORIGINAL_INPUT",
+          "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5",
+          "text_fields": {
+            "memo": "全部一人で直せたことが、うれしかった。",
+            "memo_action": "ぐらついていた椅子を修理して、また座れるようになった。"
+          }
+        }
+      ],
+      "teacher_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "repair",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "repair_and_result"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "solo_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      },
+      "packet_equal_frozen_teacher": true,
+      "candidate_equal_frozen_teacher": true,
+      "proposed_surface_equal_frozen_teacher": true,
+      "actual_proposed_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "repair",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "repair_and_result"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "solo_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      },
+      "differences": [],
+      "cmee_adoption_not_evaluated_by_this_reviewer": true,
+      "cmee_meaning_adopted": null,
+      "cmee_body_available": null,
+      "cmee_body": null,
+      "findings": [],
+      "content_reading": "Whole parsed packet equals the frozen teacher. Initial chair retains repair/result/joy/solo-object and optional separate question; daily retains returning/cooking/eating and slight calm without additional causes. This is known-teacher fit, not new language coverage or product-quality approval."
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "eos_reached": true,
+      "finish_reason": "stop",
+      "parse_error": null,
+      "raw_utf8_sha256": "46749aa6ed9f35900fe7c4a05604bb7418cc56bc313abc8fa15fcc991bfbab7a",
+      "sources": [
+        {
+          "role": "ORIGINAL_INPUT",
+          "source_id": "cd090518-d662-42c5-8f9d-d1e65ba610e5",
+          "text_fields": {
+            "memo": "全部一人で直せたことが、うれしかった。",
+            "memo_action": "ぐらついていた椅子を修理して、また座れるようになった。"
+          }
+        },
+        {
+          "role": "SUPPLEMENTAL_ANSWER",
+          "source_id": "ea0fa6a8-5411-4a8a-a6bf-e2f9f144454d",
+          "text_fields": {
+            "answer_text_private": "さっき「全部一人で」と書いたのは訂正します。途中で友人に手順を教えてもらって、一緒に直しました。\n\nうれしかったのも、一人でできたからではなく、捨てずにまた使えるようになったからです。"
+          }
+        }
+      ],
+      "teacher_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair"
+            ],
+            "relation_refs": [],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "reuse_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "reception"
+          },
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair",
+              "reuse_appraisal_object"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "update_note",
+            "update_refs": [
+              0,
+              1,
+              2
+            ]
+          }
+        ],
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "packet_equal_frozen_teacher": false,
+      "candidate_equal_frozen_teacher": true,
+      "proposed_surface_equal_frozen_teacher": true,
+      "actual_proposed_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair"
+            ],
+            "relation_refs": [],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "reuse_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "reception"
+          },
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair",
+              "reuse_appraisal_object"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "update_note",
+            "update_refs": [
+              0,
+              1,
+              2
+            ]
+          }
+        ],
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "differences": [
+        {
+          "path": "$.evidence_quotes[6].quote",
+          "teacher": "さっき「全部一人で」と書いたのは訂正します",
+          "actual": "途中で友人に手順を教えてもらって"
+        },
+        {
+          "path": "$.evidence_quotes[7].quote",
+          "teacher": "友人に手順を教えてもらって",
+          "actual": "一緒に直しました"
+        },
+        {
+          "path": "$.evidence_quotes[8].quote",
+          "teacher": "一緒に直しました",
+          "actual": "捨てずにまた使えるようになったからです"
+        },
+        {
+          "path": "$.evidence_quotes[9]",
+          "teacher": {
+            "field_path": "answer_text_private",
+            "quote": "捨てずにまた使えるようになったからです",
+            "source_id": "ea0fa6a8-5411-4a8a-a6bf-e2f9f144454d"
+          },
+          "actual": "MISSING"
+        },
+        {
+          "path": "$.evidence_quotes[10]",
+          "teacher": {
+            "field_path": "answer_text_private",
+            "quote": "一人でできたからではなく",
+            "source_id": "ea0fa6a8-5411-4a8a-a6bf-e2f9f144454d"
+          },
+          "actual": "MISSING"
+        },
+        {
+          "path": "$.evidence_quotes[11]",
+          "teacher": {
+            "field_path": "answer_text_private",
+            "quote": "うれしかったのも、一人でできたからではなく、捨てずにまた使えるようになったからです",
+            "source_id": "ea0fa6a8-5411-4a8a-a6bf-e2f9f144454d"
+          },
+          "actual": "MISSING"
+        }
+      ],
+      "cmee_adoption_not_evaluated_by_this_reviewer": true,
+      "cmee_meaning_adopted": null,
+      "cmee_body_available": null,
+      "cmee_body": null,
+      "actual_evidence_count": 9,
+      "teacher_evidence_count": 12,
+      "findings": [
+        {
+          "path": "$.candidate.relations[1].evidence_indexes",
+          "actual": [
+            11
+          ],
+          "problem": "11 is outside final evidence_quotes array"
+        },
+        {
+          "path": "$.candidate.updates[1].evidence_indexes",
+          "actual": [
+            10,
+            11
+          ],
+          "problem": "both references outside final evidence_quotes array"
+        },
+        {
+          "path": "$.candidate.updates[2].evidence_indexes",
+          "actual": [
+            6,
+            11
+          ],
+          "problem": "11 is outside final evidence_quotes array"
+        },
+        {
+          "path": "$.candidate.claims[3:6].evidence_indexes",
+          "actual": [
+            [
+              7
+            ],
+            [
+              8
+            ],
+            [
+              9
+            ]
+          ],
+          "problem": "refs retained from full teacher while final evidence table was shortened/reordered; guidance/joint/reuse no longer point to their own quotes"
+        }
+      ],
+      "content_reading": "Proposed observation, reception and update_note exactly retain the teacher joint-repair and reuse-joy correction without inventing a new emotion or restoring solo achievement. However the surrounding packet fails to preserve complete source binding, so text correctness is not usable acceptance."
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "eos_reached": true,
+      "finish_reason": "stop",
+      "parse_error": null,
+      "raw_utf8_sha256": "af6a9574ff45e693a66974cc273f41db1060d1bf0b8ed0d21c9f56ace7072e6e",
+      "sources": [
+        {
+          "role": "ORIGINAL_INPUT",
+          "source_id": "cd562f5f-3f35-4ac3-8d56-731c8f6fcb97",
+          "text_fields": {
+            "memo": "あったかいもの食べたら、ちょっと落ち着いた。",
+            "memo_action": "帰ってから、うどんを作って食べた。"
+          }
+        }
+      ],
+      "teacher_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "return",
+              "cook",
+              "eat"
+            ],
+            "relation_refs": [
+              "return_before_cook",
+              "return_before_eat",
+              "cook_and_eat"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "warm_food_eat",
+              "slight_calm"
+            ],
+            "relation_refs": [
+              "written_eat_calm"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      },
+      "packet_equal_frozen_teacher": true,
+      "candidate_equal_frozen_teacher": true,
+      "proposed_surface_equal_frozen_teacher": true,
+      "actual_proposed_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "return",
+              "cook",
+              "eat"
+            ],
+            "relation_refs": [
+              "return_before_cook",
+              "return_before_eat",
+              "cook_and_eat"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "warm_food_eat",
+              "slight_calm"
+            ],
+            "relation_refs": [
+              "written_eat_calm"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      },
+      "differences": [],
+      "cmee_adoption_not_evaluated_by_this_reviewer": true,
+      "cmee_meaning_adopted": null,
+      "cmee_body_available": null,
+      "cmee_body": null,
+      "findings": [],
+      "content_reading": "Whole parsed packet equals the frozen teacher. Initial chair retains repair/result/joy/solo-object and optional separate question; daily retains returning/cooking/eating and slight calm without additional causes. This is known-teacher fit, not new language coverage or product-quality approval."
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "eos_reached": true,
+      "finish_reason": "stop",
+      "parse_error": null,
+      "raw_utf8_sha256": "b2a913ab9e46ba91f828a83551e08034d1d85bbabe054a709018f0842ab67cd6",
+      "sources": [
+        {
+          "role": "ORIGINAL_INPUT",
+          "source_id": "b3108b7b-7bb2-4a0e-9cf1-b4bf45bd588e",
+          "text_fields": {
+            "memo": "あったかいもの食べたら、ちょっと落ち着いた。",
+            "memo_action": "帰ってから、うどんを作って食べた。"
+          }
+        }
+      ],
+      "teacher_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "return",
+              "cook",
+              "eat"
+            ],
+            "relation_refs": [
+              "return_before_cook",
+              "return_before_eat",
+              "cook_and_eat"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "warm_food_eat",
+              "slight_calm"
+            ],
+            "relation_refs": [
+              "written_eat_calm"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      },
+      "packet_equal_frozen_teacher": true,
+      "candidate_equal_frozen_teacher": true,
+      "proposed_surface_equal_frozen_teacher": true,
+      "actual_proposed_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "return",
+              "cook",
+              "eat"
+            ],
+            "relation_refs": [
+              "return_before_cook",
+              "return_before_eat",
+              "cook_and_eat"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "warm_food_eat",
+              "slight_calm"
+            ],
+            "relation_refs": [
+              "written_eat_calm"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      },
+      "differences": [],
+      "cmee_adoption_not_evaluated_by_this_reviewer": true,
+      "cmee_meaning_adopted": null,
+      "cmee_body_available": null,
+      "cmee_body": null,
+      "findings": [],
+      "content_reading": "Whole parsed packet equals the frozen teacher. Initial chair retains repair/result/joy/solo-object and optional separate question; daily retains returning/cooking/eating and slight calm without additional causes. This is known-teacher fit, not new language coverage or product-quality approval."
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "eos_reached": true,
+      "finish_reason": "stop",
+      "parse_error": null,
+      "raw_utf8_sha256": "768f25f00e01634d08854b109329a7e453e74964774b059813bf65d9cee547b1",
+      "sources": [
+        {
+          "role": "ORIGINAL_INPUT",
+          "source_id": "63502062-1016-471c-8549-1c4dd98b76ab",
+          "text_fields": {
+            "memo": "あったかいもの食べたら、ちょっと落ち着いた。",
+            "memo_action": "帰ってから、うどんを作って食べた。"
+          }
+        }
+      ],
+      "teacher_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "return",
+              "cook",
+              "eat"
+            ],
+            "relation_refs": [
+              "return_before_cook",
+              "return_before_eat",
+              "cook_and_eat"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "warm_food_eat",
+              "slight_calm"
+            ],
+            "relation_refs": [
+              "written_eat_calm"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      },
+      "packet_equal_frozen_teacher": true,
+      "candidate_equal_frozen_teacher": true,
+      "proposed_surface_equal_frozen_teacher": true,
+      "actual_proposed_surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "return",
+              "cook",
+              "eat"
+            ],
+            "relation_refs": [
+              "return_before_cook",
+              "return_before_eat",
+              "cook_and_eat"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "warm_food_eat",
+              "slight_calm"
+            ],
+            "relation_refs": [
+              "written_eat_calm"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      },
+      "differences": [],
+      "cmee_adoption_not_evaluated_by_this_reviewer": true,
+      "cmee_meaning_adopted": null,
+      "cmee_body_available": null,
+      "cmee_body": null,
+      "findings": [],
+      "content_reading": "Whole parsed packet equals the frozen teacher. Initial chair retains repair/result/joy/solo-object and optional separate question; daily retains returning/cooking/eating and slight calm without additional causes. This is known-teacher fit, not new language coverage or product-quality approval."
+    }
+  ],
+  "product_credit": 0,
+  "candidate_ready": false,
+  "automatic_progression": false
+}
