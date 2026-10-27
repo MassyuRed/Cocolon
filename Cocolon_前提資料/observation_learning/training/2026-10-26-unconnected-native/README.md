@@ -1,6 +1,14 @@
 # 10/26 — 未接続の既存6教材とCMEE受理範囲／一括接続案
 
-状態：**10/27：balanced30候補実装・Jupyter実CPU15確認済み、新しい有料一回は判断前。前回の新候補通常不採用は維持。**
+状態：**10/27：balanced30一回完了。意味7/本文6・新6本文0で不採用。全原本/重み保全済み。**
+
+
+<a id="native15-balanced30-result"></a>
+## 2026-10-27 — 損失配分30更新一回の最終結果
+
+**現在の直接作業（10/27：損失配分balanced30の一回を完了、不採用）：** 承認source7e3f6bca/PID44914で同15教材・固定30更新→別保存/非学習reload→15生成を1545.998172秒/$0.120244処理按分で完了。EOS13/15・JSON11/15、CMEE意味7/15・本文6/15で、前回同quote15の意味11/本文9から低下。旧9は意味/本文6/9、新6は意味1/6・本文0/6。椅子訂正3の引用/形式退行、BOOK2の反復打切り、SHOP回答後の更新/根拠不整合とsystem露出、REPOT主客反転、KNIT形式破損が残り新228edccfは通常不採用。採用snapshot cold-file7/7・失敗0には本文なしREPOT1件を含み、本文7件完成ではない。32F32有限/初期と固定source不変/早期最終重み一致、最終archive65payload+manifestをPod外照合・version1保全済み。再起動/追加更新/追加生成/自動retryなし。次は長い訂正packet・引用/参照・自然本文を同時に保持する学習方法を既存原本から見直す。新観測会は今は不要、新有料試行へ自動進行しない。原本balanced30_result/README・weekly§63、商品0/正式0/3/54.50％、GPU稼働保持。
+
+[全15採否・比較・本文読解・重み保全](balanced30_result/README.md)。本一回はRUN_CLOSED_REJECTED_CANDIDATE。以下のbalanced30準備・旧interleaved30節は履歴として維持し、閉鎖済みplanを再起動しない。
 
 <a id="native15-interleaved30-result"></a>
 ## 2026-10-27 — 混在30更新一回の最終結果

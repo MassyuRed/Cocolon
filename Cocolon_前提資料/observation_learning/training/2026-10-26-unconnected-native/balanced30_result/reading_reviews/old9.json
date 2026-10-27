@@ -1045,5 +1045,209 @@
   ],
   "product_credit": 0,
   "candidate_ready": false,
-  "automatic_progression": false
+  "automatic_progression": false,
+  "consumer_overlay": {
+    "stage": "FINAL_ROOT_CONSUMER_RESULT_OVERLAY",
+    "supersedes_preview_unset_cmee_flags": true,
+    "preview_review_preserved": "The per-case fields above retain the earlier raw-only review. This overlay contains definitive consumer adoption/body/cold-file results from diagnosis, without rerunning any computation.",
+    "diagnosis_path": "diagnosis/diagnosis.json",
+    "diagnosis_sha256": "90cd459c4348b33c45863bedd135fa55c3bca2aba5e12046ee6b52c20487f72d",
+    "source_run_sha256": "8c329a54b23c51bc28d34bbd0b76ba2ed430856462367d57a9f58c7915cf5f61",
+    "run_json_sha256": "8c329a54b23c51bc28d34bbd0b76ba2ed430856462367d57a9f58c7915cf5f61",
+    "old9_meaning_adopted": 6,
+    "old9_body_available": 6,
+    "old9_cold_file_equal": 6,
+    "old9_cold_file_failures": 0,
+    "all15_context": {
+      "meaning_adopted": 7,
+      "body_available": 6,
+      "cold_file_equal": 7,
+      "cold_file_failures": 0
+    },
+    "cases": [
+      {
+        "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+        "evidence_jsonpath": "$.cases[0]",
+        "receipt_status": "CANDIDATE_UNREVIEWED",
+        "status": "MEANING_AND_BODY_AVAILABLE",
+        "decision": null,
+        "reason_code": null,
+        "meaning_adopted": true,
+        "body_available": true,
+        "actual_cmee_surface": {
+          "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+          "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+          "update_note": null
+        },
+        "actual_cmee_surface_equals_frozen_teacher": true,
+        "question_private": "「全部一人で直せたこと」がなぜ嬉しかったのですか？",
+        "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL",
+        "raw_identity_matches_preview": true
+      },
+      {
+        "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+        "evidence_jsonpath": "$.cases[1]",
+        "receipt_status": "INVALID_FORMAT",
+        "status": "SEMANTIC_NOT_ADOPTED",
+        "decision": "REJECT",
+        "reason_code": "semantic_receipt_not_validated",
+        "meaning_adopted": false,
+        "body_available": false,
+        "actual_cmee_surface": null,
+        "actual_cmee_surface_equals_frozen_teacher": null,
+        "question_private": null,
+        "cold_file_status": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT",
+        "raw_identity_matches_preview": true
+      },
+      {
+        "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+        "evidence_jsonpath": "$.cases[2]",
+        "receipt_status": "CANDIDATE_UNREVIEWED",
+        "status": "MEANING_AND_BODY_AVAILABLE",
+        "decision": null,
+        "reason_code": null,
+        "meaning_adopted": true,
+        "body_available": true,
+        "actual_cmee_surface": {
+          "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+          "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+          "update_note": null
+        },
+        "actual_cmee_surface_equals_frozen_teacher": true,
+        "question_private": "「全部一人で直せたこと」がなぜ嬉しかったのですか？",
+        "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL",
+        "raw_identity_matches_preview": true
+      },
+      {
+        "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+        "evidence_jsonpath": "$.cases[3]",
+        "receipt_status": "INVALID_FORMAT",
+        "status": "SEMANTIC_NOT_ADOPTED",
+        "decision": "REJECT",
+        "reason_code": "semantic_receipt_not_validated",
+        "meaning_adopted": false,
+        "body_available": false,
+        "actual_cmee_surface": null,
+        "actual_cmee_surface_equals_frozen_teacher": null,
+        "question_private": null,
+        "cold_file_status": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT",
+        "raw_identity_matches_preview": true
+      },
+      {
+        "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+        "evidence_jsonpath": "$.cases[4]",
+        "receipt_status": "CANDIDATE_UNREVIEWED",
+        "status": "MEANING_AND_BODY_AVAILABLE",
+        "decision": null,
+        "reason_code": null,
+        "meaning_adopted": true,
+        "body_available": true,
+        "actual_cmee_surface": {
+          "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+          "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+          "update_note": null
+        },
+        "actual_cmee_surface_equals_frozen_teacher": true,
+        "question_private": "「全部一人で直せたこと」がなぜ嬉しかったのですか？",
+        "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL",
+        "raw_identity_matches_preview": true
+      },
+      {
+        "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+        "evidence_jsonpath": "$.cases[5]",
+        "receipt_status": "CANDIDATE_UNREVIEWED",
+        "status": "SEMANTIC_NOT_ADOPTED",
+        "decision": "UNSUPPORTED",
+        "reason_code": "model_evidence_out_of_scope",
+        "meaning_adopted": false,
+        "body_available": false,
+        "actual_cmee_surface": null,
+        "actual_cmee_surface_equals_frozen_teacher": null,
+        "question_private": null,
+        "cold_file_status": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT",
+        "raw_identity_matches_preview": true
+      },
+      {
+        "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+        "evidence_jsonpath": "$.cases[6]",
+        "receipt_status": "CANDIDATE_UNREVIEWED",
+        "status": "MEANING_AND_BODY_AVAILABLE",
+        "decision": null,
+        "reason_code": null,
+        "meaning_adopted": true,
+        "body_available": true,
+        "actual_cmee_surface": {
+          "observation": "帰ってから、うどんを作って食べたのですね。",
+          "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+          "update_note": null
+        },
+        "actual_cmee_surface_equals_frozen_teacher": true,
+        "question_private": null,
+        "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL",
+        "raw_identity_matches_preview": true
+      },
+      {
+        "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+        "evidence_jsonpath": "$.cases[7]",
+        "receipt_status": "CANDIDATE_UNREVIEWED",
+        "status": "MEANING_AND_BODY_AVAILABLE",
+        "decision": null,
+        "reason_code": null,
+        "meaning_adopted": true,
+        "body_available": true,
+        "actual_cmee_surface": {
+          "observation": "帰ってから、うどんを作って食べたのですね。",
+          "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+          "update_note": null
+        },
+        "actual_cmee_surface_equals_frozen_teacher": true,
+        "question_private": null,
+        "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL",
+        "raw_identity_matches_preview": true
+      },
+      {
+        "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+        "evidence_jsonpath": "$.cases[8]",
+        "receipt_status": "CANDIDATE_UNREVIEWED",
+        "status": "MEANING_AND_BODY_AVAILABLE",
+        "decision": null,
+        "reason_code": null,
+        "meaning_adopted": true,
+        "body_available": true,
+        "actual_cmee_surface": {
+          "observation": "帰ってから、うどんを作って食べたのですね。",
+          "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+          "update_note": null
+        },
+        "actual_cmee_surface_equals_frozen_teacher": true,
+        "question_private": null,
+        "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL",
+        "raw_identity_matches_preview": true
+      }
+    ],
+    "final_old9_content_conclusion": "Six adopted initial-chair/daily bodies equal the unchanged teacher surface and do not improve natural prose over the previous run. All three correction records are definitively not adopted (two invalid format, one out-of-scope evidence), so old9 meaning/body regresses from9/9 to6/9.",
+    "run_scope_observed": {
+      "source_commit": "7e3f6bca5ae9027077862ef10ea17bde25f3a8ef",
+      "optimizer_steps_completed": 30,
+      "model_calls_started": 15,
+      "model_calls_completed": 15,
+      "base_model_loads_started": 2,
+      "processing_seconds": 1545.998172073043,
+      "process_cost_usd": 0.12024430227234781,
+      "initial_adapter_unchanged": true,
+      "saved_adapter_unchanged_after_generation": true,
+      "fixed_sources_unchanged": true,
+      "retry": false,
+      "service_sql_calls": 0,
+      "automatic_progression": false
+    },
+    "run_within_approved_processing_bounds": true,
+    "consumer_new_model_calls": 0,
+    "consumer_training_updates": 0,
+    "consumer_sql_operations": 0,
+    "service_saved_roundtrip": false,
+    "dynamic_prior": false,
+    "product_accepted": false,
+    "reviewer_reruns": 0
+  }
 }

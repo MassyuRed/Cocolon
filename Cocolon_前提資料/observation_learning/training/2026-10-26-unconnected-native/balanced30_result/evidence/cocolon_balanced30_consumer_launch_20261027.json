@@ -1,0 +1,23 @@
+{
+  "status": "CPU_CONSUMER_LAUNCHED_ONCE",
+  "pid": 53635,
+  "started_unix": 1793062957.471718,
+  "command": [
+    "/usr/local/bin/python",
+    "-u",
+    "/workspace/cocolon_native15_balanced30_pack_20261027/consume_balanced30.py",
+    "--run",
+    "/workspace/cocolon_native15_balanced30_run_20261027",
+    "--out",
+    "/workspace/cocolon_native15_balanced30_diagnosis_20261027",
+    "--api",
+    "/workspace/cocolon_afteronly_api_20261027",
+    "--runtime-python",
+    "/usr/local/lib/python3.12/site-packages",
+    "--expected-source-commit",
+    "7e3f6bca5ae9027077862ef10ea17bde25f3a8ef"
+  ],
+  "new_model_calls": 0,
+  "sql_operations": 0,
+  "retry": false
+}

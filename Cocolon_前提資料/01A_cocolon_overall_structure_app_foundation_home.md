@@ -5104,3 +5104,22 @@ current00/観測入口/同training README#native15-interleaved30-proposal/weekly
 | independent_review.json / source_bindings.json | 原典/候補/hash照合と独立読解。正式Pro/Ultra/human合格でない |
 
 旧frozen payloadは既存native15_preparation、初期重み/helperは既存正本へ戻る。旧interleaved30原本は不変。新一回は未起動、全体00/観測入口/最新weekly§62と同単位同期、商品0/正式0/3/54.50％据置。
+
+
+### 2026-10-27 — balanced30一回完了の結果file地図
+
+`observation_learning/training/2026-10-26-unconnected-native/balanced30_result/`が最終owner。30更新/保存別reload/15call、意味7/本文6・新6本文0で新228edccfは通常不採用。前回11/9から低下。STRUCTURE_MAP_DELTA_NONE（製品責務・型・API/DB/RN/reader不変）、商品0/正式0/3/54.50％。
+
+| file/group | 責任 |
+|---|---|
+| README.md / result_summary.json / runtime_checkpoint.json | 最終RUN_CLOSED_REJECTED_CANDIDATE・比較/残件/非再起動 |
+| run.json / training.jsonl / reloaded_tensors.json | 一回の30順序/有限log・保存/別reload・全15call/上限内と不変確認 |
+| after_*.jsonl（15file） | EOS13/JSON11を含む全無補修raw・token/usage/重み束縛 |
+| diagnosis/diagnosis.json | 固定CMEEの全採否/実本文/問い・意味7/本文6 |
+| diagnosis/*_saved.json / *_saved_completed.json / *_cold.json（各7file） | 採用7snapshotの別process一致。REPOT1は本文なし |
+| evidence/*（6file） | 実launch/モデルlog/consumer launch・log/入力照合/既存実CPU原本 |
+| reading_reviews/old9.json / new6.json | 全原文/教師/rawの読解と最終consumer overlay。正式human受入れでない |
+| early_run.json / early_recovery.json | 399.491650秒/30更新/生成0の不変早期保存履歴 |
+| recovery_manifest.json / final_recovery.json | 全65payload/hash・32F32有限・早期最終一致・Library version1保全 |
+
+凍結教材・承認runner/module/consumerは既存preparation owner、実行source7e3f6bca/API6b043880。全体00/観測入口/同training README/weekly§63を同単位同期。base4B全重み/optimizer/RNGはarchive非同梱。GPU稼働保持は継続料金を伴う。

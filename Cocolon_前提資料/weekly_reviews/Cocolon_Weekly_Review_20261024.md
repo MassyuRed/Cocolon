@@ -2868,3 +2868,19 @@ BOOK/SHOPの初回は意味/引用が局所改善、BOOK/SHOP回答後とKNITも
 新runner d989bcf5/focus f0adc2b0/consumer・pending plan・全CPU原本・独立review・file地図は[候補owner](../observation_learning/training/2026-10-26-unconnected-native/balanced30_preparation/README.md)。root華恋/Codex Workが統合・Jupyter実行・GitHub writerを単独担当。補助agentの原因/コード読解と候補module草案をrootが原典・全ソースから確認した。正式Pro/Ultra/human受入れへ換算しない。System Contextは既知の索引停止を再実行せずfresh原本直接読取を使用。
 
 次はこの別の一回のMash明示判断。30更新→別保存/reload→15raw→現CMEE/全本文/cold-file/回収、最大2700秒・180秒/call・15call・表示$0.28h按分$0.21（準備/回収/保持/税等別）、失敗時追加生成/更新/自動retryなし。旧閉鎖planの再利用なし、承認前output/model0。CPU準備/候補を観測品質成功へ加点しない。primary=BLOCKER_NARROWED、商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false。製品API/DTO/DB/RN/Render/Supabase/本人DB/merge/deploy/GPU管理/lifecycle変更0、STRUCTURE_MAP_DELTA_NONE。GPUは稼働保持。
+
+
+<a id="20261027-balanced30-final-result"></a>
+## 63. 10/27 — 損失配分30更新一回完了、意味7/本文6へ低下・新候補不採用
+
+**現在の直接作業（10/27：損失配分balanced30の一回を完了、不採用）：** 承認source7e3f6bca/PID44914で同15教材・固定30更新→別保存/非学習reload→15生成を1545.998172秒/$0.120244処理按分で完了。EOS13/15・JSON11/15、CMEE意味7/15・本文6/15で、前回同quote15の意味11/本文9から低下。旧9は意味/本文6/9、新6は意味1/6・本文0/6。椅子訂正3の引用/形式退行、BOOK2の反復打切り、SHOP回答後の更新/根拠不整合とsystem露出、REPOT主客反転、KNIT形式破損が残り新228edccfは通常不採用。採用snapshot cold-file7/7・失敗0には本文なしREPOT1件を含み、本文7件完成ではない。32F32有限/初期と固定source不変/早期最終重み一致、最終archive65payload+manifestをPod外照合・version1保全済み。再起動/追加更新/追加生成/自動retryなし。次は長い訂正packet・引用/参照・自然本文を同時に保持する学習方法を既存原本から見直す。新観測会は今は不要、新有料試行へ自動進行しない。原本balanced30_result/README・weekly§63、商品0/正式0/3/54.50％、GPU稼働保持。
+
+Mashが1cb47cffの一回へ「進めていいよ。」と明示承認し、planのstatus/authorization/basisだけを7e3f6bcaへ固定。Jupyter直接、rootがPID44914を一回起動、旧45779・同15/同30順序/seed/LR5e-5/32LoRA/生成枠/readerを保ち、full .5＋S/F/U群平均 .5のsingle-forwardを実行した。30更新・保存別reload・15call、1545.998172秒（25分45.998秒）/$0.120244処理按分で2700秒/$0.21内。準備/回収/保持/保存/通信/税等は別。上限打切り2件はBOOKの3712tokenで、per-call timeout/OOM/再試行0。EOS13・JSON11、旧9の訂正3件が引用/形式退行。新6はREPOT意味のみ採用、本文0。
+
+全15の無補修rawを固定API6b043880の既存consumerへ通し、意味7/本文6・採用snapshot7の別process cold-file一致/失敗0（CPU69.327936秒、新model/SQL0）。本文なしREPOTもcold7に含み、本文完成7へ数えない。初回ASK3/dailyEND3の成功6件はparsed packetが教師全体と一致するが、二language family/既知FITで未知一般化や自然な商品品質の合格ではない。after回答priorは凍結教師で、動的thread/実service/SQL/RN本人端末も0。
+
+新228edccfは32F32有限・生成前後不変、初期45779と固定source不変、早期最終重み一致をPod外確認。最終archive3,785,637bytes/SHA10132741509c831ead6ea5a22ee747d4164895078322b9f11f87f0dcd1baf03f、全65payload＋manifest/66memberを照合し、[重み・全原本version1](https://chatgpt.com/library?file_id=libfile_ce78cfb0a1648191a4dbbccd160f0590&account_id=personal)へ保全。早期version0は399.491650秒/30更新/生成0で、別のearly_run/early_recoveryを保持。base4B全重み・optimizer/RNG非同梱で、厳密な途中resumeではない。
+
+原本・全採否・読解は [balanced30_result/README.md](../observation_learning/training/2026-10-26-unconnected-native/balanced30_result/README.md)。新6ではBOOK2の構造/引用/受け取り反復、SHOP回答後の8更新→ADD1/根拠範囲外/system280文字露出、REPOTの説明主客反転、KNITのJSON破損が残る。SHOP喜び語/REPOTの聞く向きの局所差を全体改善へ加算しない。係数配分だけではこの固定学習条件の同時保持を達成できなかったという限定結果で、全ての加重学習方式の否定や4B能力の上限確定ではない。
+
+今回rootが単一統合/実行/writer、補助2agentは旧9/新6の原文・教師・無補修raw読解を分担。正式Pro/Ultra/human受入れへ換算しない。primary=BLOCKER_NARROWED、商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false。新更新/再生成/旧plan再起動/検査緩和/新有料試行/観測会へ自動進行なし。新観測会は今回の基本崩れを直す前提ではない。次は長い訂正packet/根拠・参照と自然本文を同時に教える方式を既存原本で見直す。通常API/DTO/DB/RN/Render/Supabase/本人DB/merge/deploy/GPU管理/lifecycle変更0、STRUCTURE_MAP_DELTA_NONE、GPU稼働保持。
