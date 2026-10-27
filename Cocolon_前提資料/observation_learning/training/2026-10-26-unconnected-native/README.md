@@ -1,14 +1,14 @@
 # 10/26 — 未接続の既存6教材とCMEE受理範囲／一括接続案
 
-状態：**10/27：balanced30一回完了。意味7/本文6・新6本文0で不採用。全原本/重み保全済み。**
+状態：**10/27：ordered30一回完了。意味3/本文3・新6各0で退行、不採用。全原本/重みversion2保全済み。**
 
 
-<a id="native15-balanced30-result"></a>
-## 2026-10-27 — 引用・意味・更新を本文より先に生成する別候補
+<a id="native15-ordered30-result"></a>
+## 2026-10-27 — ordered30一回完了、意味/本文3で新候補不採用
 
-**現在の直接作業（10/27：ordered30の30更新/保存/reload完了、生成確認中・早期重み保全済み）：** 承認source5b115939/PID96980をJupyter直接で一回実行中。初期1d・同30順序/全文CE/LR1e-5・生成順だけの変更で30更新と別adapter保存/同process内の非学習reloadまで完了。399.800996秒/生成0の早期archive3,481,783bytes/SHA6b3ff9beは全16payload＋manifest/32F32有限をPod外照合しversion0へ保全済み。新483d74b7の最終15件採否/本文/比較は未確定。最大2700秒/各180秒/15call/$0.21処理按分（準備/回収/保持等別）、追加起動/更新/再生成/自動retryなし。原本ordered30_result/README・weekly§68、商品0/正式0/3/54.50％、GPU稼働保持。
+**現在の直接作業（10/27：ordered30一回完了、意味3/本文3へ退行・新候補不採用）：** 承認source5b115939/PID96980で初期1d・同30順序/全文CE/LR1e-5・教師JSONの生成順だけを変更し、30更新→保存/同process内の非学習reload→15生成を1482.907733秒/$0.115337処理按分で完了。EOS13/strict JSON8、意味/本文3/15（旧9各3・新6各0）で初期11/9から退行。固定CMEE無補修採否と別process cold3/3、CPU33.761113秒/追加モデル・SQL0。全61payload＋manifest/32F32有限/早期最終重み一致をPod外照合しversion2保全。新483d74b7は通常不採用、一回閉鎖/再起動不可。追加学習/再生成/新有料試行なし。新観測会は今は不要、原本ordered30_result/README・weekly§69、商品0/正式0/3/54.50％、GPU稼働保持。
 
-[全15採否・比較・本文読解・重み保全](balanced30_result/README.md)。本一回はRUN_CLOSED_REJECTED_CANDIDATE。以下のbalanced30準備・旧interleaved30節は履歴として維持し、閉鎖済みplanを再起動しない。
+[ordered30全15採否・比較・本文読解・重み保全](ordered30_result/README.md)。一回はRUN_CLOSED_REJECTED_CANDIDATE。旧balanced30の結果は[balanced30_result](balanced30_result/README.md)。以下の準備・旧run節は履歴として維持し、閉鎖済みplanを再起動しない。
 
 <a id="native15-interleaved30-result"></a>
 ## 2026-10-27 — 混在30更新一回の最終結果

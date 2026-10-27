@@ -1,0 +1,103 @@
+{
+  "status": "CPU_AFTER15_DIAGNOSED_NOT_SERVICE_OR_PRODUCT_ACCEPTED",
+  "api_commit": "6b043880504912481a6b10d93c9128ec4995b70b",
+  "source_run_sha256": "771c61a0f66c779b8cf3231f7015e395354c6eac8ad2e3b257b0dad9aaef64e9",
+  "consumer_sha256": "f01c021920537eb834e5ff7f503dd104cd3279d035ee0fc11fc264a392a03c14",
+  "missing_after_ids": [],
+  "cold_file_checked_count": 3,
+  "cold_file_failures": 0,
+  "new_model_calls": 0,
+  "training_updates": 0,
+  "sql_operations": 0,
+  "service_saved_roundtrip": false,
+  "dynamic_prior": false,
+  "product_accepted": false,
+  "automatic_progression": false,
+  "meaning_adopted_count": 3,
+  "body_available_count": 3,
+  "seconds": 33.761113197077066,
+  "orphan_after_files_not_evaluated": [],
+  "original_complete_file": {
+    "archive_path": "diagnosis/diagnosis.json",
+    "bytes": 1316408,
+    "sha256": "8081f0f8b1e936b860818fc43d93563e1cbd90d826fec974adeaaafe8d12589c",
+    "github_representation": "Complete case objects split without semantic changes; full original bytes in verified recovery archive."
+  },
+  "case_files": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "path": "cases/TRAIN-SERVICE-CHAIR-01-INITIAL.json",
+      "sha256": "b314fb94e80931c850b10ebc7005d67251e7ed286fc49d619e9753c175e88bd9"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "path": "cases/TRAIN-SERVICE-CHAIR-01-CORRECTION.json",
+      "sha256": "7e88a3b1b01a17b119df44d779a178aa6c25c50a6c28c63504dab3ee78f88c55"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "path": "cases/TRAIN-SERVICE-CHAIR-02-INITIAL.json",
+      "sha256": "b4d05e6d8b3796cd77d386694c99346b085724bd86d605515b1739febf588cfa"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "path": "cases/TRAIN-SERVICE-CHAIR-02-CORRECTION.json",
+      "sha256": "a34f4d6861b5673d14371cc3dc98d5e6a065bfbb1a7971ffd4afa81ff26dd32d"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "path": "cases/TRAIN-SERVICE-CHAIR-03-INITIAL.json",
+      "sha256": "2659c765d2325db859d255839d030b1628b8ec07a6098aabb4c6fbecacbd5e31"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "path": "cases/TRAIN-SERVICE-CHAIR-03-CORRECTION.json",
+      "sha256": "6b0b1228ddd68feb40b8907aa83b9b4803101aa4380228728c83e0f67bc139bd"
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "path": "cases/TRAIN-DAILY-CALM-01-INITIAL.json",
+      "sha256": "1e98e98d752089eef812475f67699b0cfa1429144901c0913990608502a5086e"
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "path": "cases/TRAIN-DAILY-CALM-02-INITIAL.json",
+      "sha256": "951d4163a13ba4dc38f7b30243278731c13dd008cbceed26258cfc2dcd2ecc05"
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "path": "cases/TRAIN-DAILY-CALM-03-INITIAL.json",
+      "sha256": "f3b9d34a806971dfb56117c24d47f14cc16efdb49845b2013e452c3a4af76efb"
+    },
+    {
+      "case_id": "FT-BOOK-INITIAL",
+      "path": "cases/FT-BOOK-INITIAL.json",
+      "sha256": "ade3ab487c19f79639c32b5536c08722fcb138bd10202f59fd944ea44a70d94c"
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "path": "cases/FT-BOOK-AFTER-ANSWER.json",
+      "sha256": "4e3b5d5b7e724919d47329e4ec16de07beec8669e7831540da6a40a9228c0578"
+    },
+    {
+      "case_id": "FT-SHOP-INITIAL",
+      "path": "cases/FT-SHOP-INITIAL.json",
+      "sha256": "4b2f8d678c0bd5fdd8aebdbf32051b28900461e0ba5573876ba2744423cb60ea"
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "path": "cases/FT-SHOP-AFTER-ANSWER.json",
+      "sha256": "73c16c6e45bc7231b535630d301041158f4c983241e80b9397a031a5322f4798"
+    },
+    {
+      "case_id": "FT-REPOT-INITIAL",
+      "path": "cases/FT-REPOT-INITIAL.json",
+      "sha256": "0d2c2b6df695088685450bf2c9e25d540e497b45b342df4e2668b3635ccedf48"
+    },
+    {
+      "case_id": "FT-KNIT-INITIAL",
+      "path": "cases/FT-KNIT-INITIAL.json",
+      "sha256": "af3de1137de3ca5f7f535fa8e8205f594f96fdc1190656bec2c23708b91aed93"
+    }
+  ]
+}

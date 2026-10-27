@@ -1,6 +1,6 @@
 # 引用・意味・更新を本文より先に生成する30更新候補
 
-状態：**承認済みの一回を実行中**。旧continuation30は閉鎖済みで、旧承認・出力・残枠を再利用しません。
+状態：**承認済みの一回は完了・閉鎖、新候補は不採用**。最終の全15採否/比較/読解/回収は[ordered30_result](../ordered30_result/README.md)。このplan/承認/outputの再起動は不可です。以下は提案・準備・実行途中の履歴です。旧continuation30は閉鎖済みで、旧承認・出力・残枠を再利用しません。
 
 目的は、4Bが本人の言葉・主体・時点・否定・不明・回答後の変更を保ち、自然な観測と受け取りを作り、既存CMEEが採用・保存再読できるようにすることです。現在の不足は、既知15件のうち新6件の本文が0/6である点です。三中核全体の用途・Runpod育成・Windows/Mac未選定は[学習目的](../../../README.md#observation-learning-intent-and-assumptions)を保持します。
 
@@ -77,3 +77,10 @@ Mashは固定案e94971f9b7552989fdd1fe3710a683b9e68662daの30更新→保存/非
 ## 一回実行中のcheckpoint
 
 source5b115939e2f05e47b0c3d8fef8ce54e9cf11068c/PID96980を一回起動。最新事実・再開先は[ordered30_result/README.md](../ordered30_result/README.md)。同output/同planを再起動しません。保存重みreloadは同OS process内の新model object、cold-file再読は別processです。先の会話の別process reload表現を訂正し、実装・承認範囲は変更していません。
+
+
+## 2026-10-27 一回の閉鎖
+
+**現在の直接作業（10/27：ordered30一回完了、意味3/本文3へ退行・新候補不採用）：** 承認source5b115939/PID96980で初期1d・同30順序/全文CE/LR1e-5・教師JSONの生成順だけを変更し、30更新→保存/同process内の非学習reload→15生成を1482.907733秒/$0.115337処理按分で完了。EOS13/strict JSON8、意味/本文3/15（旧9各3・新6各0）で初期11/9から退行。固定CMEE無補修採否と別process cold3/3、CPU33.761113秒/追加モデル・SQL0。全61payload＋manifest/32F32有限/早期最終重み一致をPod外照合しversion2保全。新483d74b7は通常不採用、一回閉鎖/再起動不可。追加学習/再生成/新有料試行なし。新観測会は今は不要、原本ordered30_result/README・weekly§69、商品0/正式0/3/54.50％、GPU稼働保持。
+
+planのAUTHORIZED_ONCE_BOUND/trueは当時の一回承認原本として保持します。追加更新/生成/旧plan再起動/欠測再生成・自動retryはしません。処理1482.9077327260748秒/$0.11533726810091693（準備/回収/保持等別）、全15完了、固定CMEE意味3/本文3・cold3/3、旧9退行のため483d74b7を通常採用しません。早期原本とversion0は保存し、全原本/最終重みをversion2へ保全。新観測会は今は不要です。

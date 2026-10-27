@@ -1,0 +1,21 @@
+{
+  "pid": 96980,
+  "source_commit": "5b115939e2f05e47b0c3d8fef8ce54e9cf11068c",
+  "started_unix": 1793071169.6400921,
+  "argv": [
+    "/usr/local/bin/python",
+    "-B",
+    "/workspace/cocolon_native15_ordered30_pack_20261027/run_native15_ordered30.py",
+    "--pack",
+    "/workspace/cocolon_native15_ordered30_pack_20261027",
+    "--execute",
+    "--source-commit",
+    "5b115939e2f05e47b0c3d8fef8ce54e9cf11068c"
+  ],
+  "output_directory": "/workspace/cocolon_native15_ordered30_run_20261027",
+  "max_seconds": 2700,
+  "max_model_calls": 15,
+  "max_process_usd": 0.21,
+  "retry": false,
+  "automatic_progression": false
+}

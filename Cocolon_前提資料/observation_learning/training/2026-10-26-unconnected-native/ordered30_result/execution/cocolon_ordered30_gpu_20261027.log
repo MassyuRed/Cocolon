@@ -1,0 +1,49 @@
+
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]
+Loading weights:   2%|▏         | 14/723 [00:00<00:05, 125.21it/s]
+Loading weights:   6%|▌         | 45/723 [00:00<00:03, 205.64it/s]
+Loading weights:  11%|█         | 78/723 [00:00<00:02, 252.88it/s]
+Loading weights:  14%|█▍        | 104/723 [00:00<00:02, 228.24it/s]
+Loading weights:  18%|█▊        | 132/723 [00:00<00:02, 240.84it/s]
+Loading weights:  22%|██▏       | 159/723 [00:00<00:02, 242.87it/s]
+Loading weights:  26%|██▌       | 187/723 [00:00<00:02, 249.41it/s]
+Loading weights:  29%|██▉       | 213/723 [00:00<00:02, 244.22it/s]
+Loading weights:  33%|███▎      | 239/723 [00:01<00:01, 244.65it/s]
+Loading weights:  37%|███▋      | 265/723 [00:01<00:01, 245.07it/s]
+Loading weights:  40%|████      | 292/723 [00:01<00:01, 250.07it/s]
+Loading weights:  44%|████▍     | 318/723 [00:01<00:01, 245.81it/s]
+Loading weights:  48%|████▊     | 346/723 [00:01<00:01, 253.17it/s]
+Loading weights:  51%|█████▏    | 372/723 [00:01<00:01, 245.16it/s]
+Loading weights:  55%|█████▌    | 398/723 [00:01<00:01, 245.31it/s]
+Loading weights:  59%|█████▊    | 423/723 [00:01<00:01, 236.01it/s]
+Loading weights:  77%|███████▋  | 554/723 [00:01<00:00, 533.75it/s]
+Loading weights:  97%|█████████▋| 702/723 [00:01<00:00, 801.03it/s]
+Loading weights: 100%|██████████| 723/723 [00:01<00:00, 362.96it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+/usr/local/lib/python3.12/dist-packages/peft/utils/save_and_load.py:313: UserWarning: Could not find a config file in Qwen/Qwen3.5-4B - will assume that the vocabulary was not modified.
+  warnings.warn(
+
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]
+Loading weights:   0%|          | 1/723 [00:00<02:02,  5.91it/s]
+Loading weights:   5%|▍         | 35/723 [00:00<00:04, 153.02it/s]
+Loading weights:   8%|▊         | 61/723 [00:00<00:03, 187.83it/s]
+Loading weights:  12%|█▏        | 88/723 [00:00<00:03, 210.51it/s]
+Loading weights:  16%|█▌        | 114/723 [00:00<00:02, 220.41it/s]
+Loading weights:  19%|█▉        | 138/723 [00:00<00:02, 224.50it/s]
+Loading weights:  22%|██▏       | 162/723 [00:00<00:02, 222.48it/s]
+Loading weights:  26%|██▌       | 186/723 [00:00<00:02, 226.29it/s]
+Loading weights:  29%|██▉       | 209/723 [00:01<00:02, 223.78it/s]
+Loading weights:  33%|███▎      | 237/723 [00:01<00:02, 233.89it/s]
+Loading weights:  36%|███▌      | 261/723 [00:01<00:02, 225.49it/s]
+Loading weights:  42%|████▏     | 302/723 [00:01<00:01, 272.39it/s]
+Loading weights:  46%|████▌     | 330/723 [00:01<00:01, 257.39it/s]
+Loading weights:  50%|████▉     | 358/723 [00:01<00:01, 260.06it/s]
+Loading weights:  53%|█████▎    | 385/723 [00:01<00:01, 237.20it/s]
+Loading weights:  57%|█████▋    | 411/723 [00:01<00:01, 238.75it/s]
+Loading weights:  65%|██████▌   | 470/723 [00:01<00:00, 332.55it/s]
+Loading weights:  85%|████████▌ | 618/723 [00:02<00:00, 651.80it/s]
+Loading weights: 100%|██████████| 723/723 [00:02<00:00, 342.08it/s]
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `fused_recurrent_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+{"status": "RAW_COMPLETE_PENDING_CMEE_AND_CONTENT_REVIEW", "optimizer_steps_completed": 30, "model_calls_started": 15, "model_calls_completed": 15, "processing_seconds": 1482.9077327260748, "process_cost_usd": 0.11533726810091693}
