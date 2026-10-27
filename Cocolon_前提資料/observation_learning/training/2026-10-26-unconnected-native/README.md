@@ -6,7 +6,7 @@
 <a id="native15-balanced30-result"></a>
 ## 2026-10-27 — 引用・意味・更新を本文より先に生成する別候補
 
-**現在の直接作業（10/27：承認済みordered30を一回実行中）：** Mashが固定案e94971f9へ「進めていいよ。」と承認し、承認source5b115939/PID96980をJupyter直接で一回起動。初期1d218763・同15/同30順序・全文assistant/EOS CE・LR1e-5を保持し、生成順だけを引用/意味/更新→本文へ変更。実読取50.264秒時点は学習4/30・生成0/15で、完了/品質は未判定。最大2700秒/各生成180秒/15call/$0.21処理按分（準備/回収/保持等別）内で継続し、追加起動/更新/再生成/自動retryはしない。保存後は同OSプロセス内の別model objectで非学習reloadし、後続cold-fileだけ別process。原本ordered30_result/README・weekly§68、商品0/正式0/3/54.50％、GPU稼働保持。
+**現在の直接作業（10/27：ordered30の30更新/保存/reload完了、生成確認中・早期重み保全済み）：** 承認source5b115939/PID96980をJupyter直接で一回実行中。初期1d・同30順序/全文CE/LR1e-5・生成順だけの変更で30更新と別adapter保存/同process内の非学習reloadまで完了。399.800996秒/生成0の早期archive3,481,783bytes/SHA6b3ff9beは全16payload＋manifest/32F32有限をPod外照合しversion0へ保全済み。新483d74b7の最終15件採否/本文/比較は未確定。最大2700秒/各180秒/15call/$0.21処理按分（準備/回収/保持等別）、追加起動/更新/再生成/自動retryなし。原本ordered30_result/README・weekly§68、商品0/正式0/3/54.50％、GPU稼働保持。
 
 [全15採否・比較・本文読解・重み保全](balanced30_result/README.md)。本一回はRUN_CLOSED_REJECTED_CANDIDATE。以下のbalanced30準備・旧interleaved30節は履歴として維持し、閉鎖済みplanを再起動しない。
 

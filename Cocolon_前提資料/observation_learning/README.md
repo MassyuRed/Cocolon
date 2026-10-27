@@ -2,7 +2,7 @@
 
 **最新GPU確認（2026-10-27 JST）：** MashがA5000を本人レンタルし、Pod bkj4qvnhwtdqc2（physical_yellow_anglerfish、表示$0.28/h）のReadyなJupyterへ直接接続した。NVIDIA RTX A5000、VRAM25,285,623,808bytes/空き25,062,342,656bytes、Python3.12.3/Torch2.8.0+cu128/CUDA/BF16を実確認。公式固定base revisionの取得、旧45779adapter/不変helper/API6blob/15教材の23file復元と固定依存の一致、実tokenizer15件/EOS/切捨て0/max7935/8192を確認済み。GPU管理画面は新Pod接続の取得だけで終了し、以後Jupyter直接。Stop/再起動/削除/別Pod/追加chargeは0。前のレンタル自動審査拒否は履歴であり、現在の接続blockerではない。
 
-**現在の直接作業（10/27：承認済みordered30を一回実行中）：** Mashが固定案e94971f9へ「進めていいよ。」と承認し、承認source5b115939/PID96980をJupyter直接で一回起動。初期1d218763・同15/同30順序・全文assistant/EOS CE・LR1e-5を保持し、生成順だけを引用/意味/更新→本文へ変更。実読取50.264秒時点は学習4/30・生成0/15で、完了/品質は未判定。最大2700秒/各生成180秒/15call/$0.21処理按分（準備/回収/保持等別）内で継続し、追加起動/更新/再生成/自動retryはしない。保存後は同OSプロセス内の別model objectで非学習reloadし、後続cold-fileだけ別process。原本ordered30_result/README・weekly§68、商品0/正式0/3/54.50％、GPU稼働保持。
+**現在の直接作業（10/27：ordered30の30更新/保存/reload完了、生成確認中・早期重み保全済み）：** 承認source5b115939/PID96980をJupyter直接で一回実行中。初期1d・同30順序/全文CE/LR1e-5・生成順だけの変更で30更新と別adapter保存/同process内の非学習reloadまで完了。399.800996秒/生成0の早期archive3,481,783bytes/SHA6b3ff9beは全16payload＋manifest/32F32有限をPod外照合しversion0へ保全済み。新483d74b7の最終15件採否/本文/比較は未確定。最大2700秒/各180秒/15call/$0.21処理按分（準備/回収/保持等別）、追加起動/更新/再生成/自動retryなし。原本ordered30_result/README・weekly§68、商品0/正式0/3/54.50％、GPU稼働保持。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 

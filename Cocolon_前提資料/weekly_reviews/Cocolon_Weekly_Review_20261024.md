@@ -2952,3 +2952,9 @@ rootが単一統合/writer/実行owner、read-only3agentはscope/地図/原因/s
 承認案e94971f9b7552989fdd1fe3710a683b9e68662da、承認固定source5b115939e2f05e47b0c3d8fef8ce54e9cf11068c。planのstatus/flag/basisだけを束縛し、全2path読戻し/変更集合確認済み。Pod内でも旧新JSON差分exact3・承認plan SHA4b767d9e・他source/不変payload・output不存在を確認してからPID96980を起動。旧run/承認残枠を再利用しない。先のChat説明にあった「重みを別processでreload」は不正確で訂正した。実装どおり同OS processで新model objectへ非学習reloadし、cold-file再読だけが別processである。承認scope/codeの変更ではない。
 
 原本run.json=/workspace/cocolon_native15_ordered30_run_20261027/run.json、起動JSON=/workspace/cocolon_ordered30_launch_20261027.json、log=/workspace/cocolon_ordered30_gpu_20261027.log。再起動せず同processへ戻り、最初のadapter保存archiveを早期回収し、最終はraw/無補修CMEE採否/成立snapshot cold-file/全本文読解/重み全原本保全まで継続する。未完了/未回収を完了扱いしない。通常API/DB/DTO/RN/Render/Supabase/本人DB/merge/deploy/GPU管理・lifecycle変更0、STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
+
+### 同じ一回の早期保全
+
+**現在の直接作業（10/27：ordered30の30更新/保存/reload完了、生成確認中・早期重み保全済み）：** 承認source5b115939/PID96980をJupyter直接で一回実行中。初期1d・同30順序/全文CE/LR1e-5・生成順だけの変更で30更新と別adapter保存/同process内の非学習reloadまで完了。399.800996秒/生成0の早期archive3,481,783bytes/SHA6b3ff9beは全16payload＋manifest/32F32有限をPod外照合しversion0へ保全済み。新483d74b7の最終15件採否/本文/比較は未確定。最大2700秒/各180秒/15call/$0.21処理按分（準備/回収/保持等別）、追加起動/更新/再生成/自動retryなし。原本ordered30_result/README・weekly§68、商品0/正式0/3/54.50％、GPU稼働保持。
+
+早期archive3481783bytes/SHA256 6b3ff9bebf268bdde437b49aa8e48bd0d81bbd713fd3b96957ee36d738e83f3d、saved_before_reload/399.800995906秒/更新30/生成0の原本。全16payload＋manifest/17member、32F32有限をPod外照合し、[重み・原本version0](https://chatgpt.com/library?file_id=libfile_00da515f0f7c8191a0886e28af4f923e&account_id=personal)へ保全。新adapter483d74b7d6796398b06f80b486228bec86658e8bcdc3d03c71cb5006d3b75de9。初期1dとは別保持。base4B/optimizer/RNG非同梱でstrict resumeではない。最終生成・採否・本文・cold-file・回収まで同じ承認単位を継続し、早期runを最終runへ上書きしない。
