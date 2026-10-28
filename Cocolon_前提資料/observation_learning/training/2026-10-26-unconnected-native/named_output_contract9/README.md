@@ -1,6 +1,6 @@
 # 2026-10-28 — named出力の型・参照namespace提示修復
 
-状態：CPU_VERIFIED_ONCE_RUN_NOT_YET_STARTED。この新unitはMashの「4B学習＋CMEE接続を続けて」に結び付く。旧named13/named9/named_prior_projection9は閉鎖・消費済みのまま。今回もsingle execution ownerはroot華恋、read-only補助2文脈は独立Pro/Ultra/human受入れを代替しない。実環境はCodex Work/GPT-6とJupyter/A5000。
+状態：RUNNING_ONCE_NEW_UNIT。この新unitはMashの「4B学習＋CMEE接続を続けて」に結び付く。旧named13/named9/named_prior_projection9は閉鎖・消費済みのまま。今回もsingle execution ownerはroot華恋、read-only補助2文脈は独立Pro/Ultra/human受入れを代替しない。実環境はCodex Work/GPT-6とJupyter/A5000。
 
 ## 目的・範囲・完了
 
@@ -31,4 +31,4 @@ CPU原本202368bytes、SHA256 38a8bb49a103457788e78a0a5f0e75c3681e47a3fb96f703e3
 
 別保存→112F32・3,833,856parameter完全一致/no-grad reload→既知各1生成。before0、after最大2、温度0、context8192、cap3712/3584、各180秒。新root/pack/run/resultはcocolon_namedoutput9_*_20261028だけ。最大600秒（外590+kill10）、既存A5000$0.28/h、処理按分上限$0.047、準備/CPU/回収/保持/保存/通信/税別。GPU保持、Stop/restart/delete/管理API0。失敗時も新または途中重みとraw/logを回収。通常app/API/DTO/DB/RN/Render/Supabase/merge/deploy/価格quota変更0。
 
-STRUCTURE_MAP_DELTA_NONE：モデル向けcopyの提示だけでowner責務/型/wire/receiver/通常接続は不変。正式商品0/3/54.50％、candidate_ready=false/automatic_progression=false、新観測会は現在の形式/更新不備には不要。今回の実GPU結果・採用結果はまだ未実行であり、CPU成功を実モデル成功へ換算しない。
+STRUCTURE_MAP_DELTA_NONE：モデル向けcopyの提示だけでowner責務/型/wire/receiver/通常接続は不変。正式商品0/3/54.50％、candidate_ready=false/automatic_progression=false、新観測会は現在の形式/更新不備には不要。一回のlauncher起動をJupyter画面で確認（PID128196）。run完了/採用結果は未確定、追加起動不可。CPU成功を実モデル成功へ換算しない。
