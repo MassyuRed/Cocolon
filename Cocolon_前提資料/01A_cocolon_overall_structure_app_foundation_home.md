@@ -5503,3 +5503,24 @@ STRUCTURE_MAP_DELTA_PRESENT。APIa8be7a9bのprivate4source＋新test1：preparat
 | actual_cpu_check.json・prepared_plan.json・runtime_authorized_plan.json・api_source_manifest.json・cpu_external_verification.json | 同15bytes/token列/同9順/LoRA設定同意味/112key-shape-F32、CPU6.749秒/model0。353同API証拠再利用、SQL12対象外。失敗前source/logを含むCPU原本81036bytes/15payload+manifestは追加重みarchive内 |
 | run/*・cmee/diagnosis.json・launch.json・launch_failed_before_model.py・launch_failed_before_model.log | 実9学習行/112load-reload/raw2、BOOK INVALID_FORMAT/SHOP TOKEN_LIMIT→両REJECT、snapshot0でcold対象なし。GPU前launcher構文失敗と実試行一回を区別 |
 | weight_verification.json・external_verification.json・source_verification.json | Pod外全CRC/hash/size/source5/API/112F32有限・同形状/earlyBOOK一致。原本・追加重み16,114,991bytes/149payload+manifestはLibrary libfile_b74941080fec8191b174c5583e26683f v0、旧d431/284fを保持 |
+
+
+## 2026-10-28 q/u参照名短縮対照のfile地図差分 — weekly§95
+
+既存CMEE/named wire/APIの責務・構造変更はない（STRUCTURE_MAP_DELTA_NONE）。新実験folder `observation_learning/training/2026-10-26-unconnected-native/compact_reference9/` は、元15教材を置換せず2教師のq/u名だけを無損失短縮する一回の対照原本。学習9/保存/no-grad reload/生成2は完了、意味/本文0/2・新3a43不採用、商品状態は据置。
+
+| file | 実責務 |
+|---|---|
+| compact_teacher.py | q.id/ev・update$id/urだけの可逆短縮。native ID/意味/本文は不変 |
+| prepare_compact9.py | 15入力/他13教材不変、派生2教師の実CMEE・別PID cold照合 |
+| run_compact9.py | 原284f開始・同全文assistant＋EOS CE9・保存/reload・自由生成2 |
+| consume_named9.py | 実raw無補修のreceiver/意味採否/本人本文/条件付きcold |
+| launch_once.py | tracked sourceと一回lock/parent timeout |
+| export_compact9.py | CPUによる重み・API・実行原本回収 |
+| actual_cpu_check.json / prepared_plan.json / runtime_authorized_plan.json | CPU実測と準備・実行時条件 |
+| run.json / training.jsonl / after_*.jsonl / cmee_diagnosis.json | 実学習・全raw・実採否 |
+| cpu_equivalence_summary.json / static_raw_diagnosis.json | 教師同値と静的所見。実model成功を自己発行しない |
+| external_verification.json / cpu_external_verification.json | Pod外原本・112F32照合 |
+| README.md / result_summary.json / reading_review.md | 最終状態、全raw/教師/本人文読解、次のCPU候補 |
+
+全原本/adapterはLibrary libfile_8c15de9185888191a1356804725b85ba v0に保全。GPU保持、SQL/本番/Render/Supabase/merge/deploy変更0。全体現在地・観測目的・Windows/Mac未選定・正式0/3/54.50％を維持する。

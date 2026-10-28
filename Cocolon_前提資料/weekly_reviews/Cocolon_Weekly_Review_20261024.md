@@ -3386,3 +3386,17 @@ source964558b6/API7b9ee073、全15入力/教師bytes・元helper全文assistant�
 [全文読解](../observation_learning/training/2026-10-26-unconnected-native/reset_full_ce9/reading_review.md)：BOOKは10引用/元4claimを保持してもlate_awareness/returned、no_contact/continuing_concernの引用が重複し、役割・時点・説明辺が誤対応。6ADD+GAPの7件でもreturned ADDがなく旧remaining_concernをADD、本人向け本文は一人称回答の復唱。SHOPは20引用/15claimの名前は一意になった一方、18/20引用だけが指定欄に存在し、知覚を断片・距離の重複へ増殖する。二つ目のrelation evが4参照名を45周/180項目反復し、updates/proseへ未到達。いずれも静的所見を実意味admissionへ読み替えず、raw補修0。前回2/2だった全体JSON完結は0/2、採用は同0/2で、開始値だけの変更では成立しない。旧named13だけが原因という仮説は支持できず、4B一般の限界や追加観測の必要性は断定しない。
 
 全原本/追加重みSHA256 4467162042edf848fc34415c4f01d1c63c48dab33b3e96f4055891fbe807d111、150member。新1aef046e98210e248f34a2c1b993fb3f18334acf160bacb30a7dcae926f2bd9dは通常不採用。原runのRAW_COMPLETE_PENDING/実行planは凍結しresult_summaryを最終閉鎖ownerとする。primary=BLOCKER_NARROWED、全機能の既決/未完了・Windows/Mac未選定を保持。今回の固定2件には完成教師があり追加観測会は不要。次の段階的教材表現案はCPU候補だけで、未準備・未実行、追加GPUへ自動進行しない。
+
+
+<a id="20261028-compact-reference9-closed"></a>
+## 95. 2026-10-28 — 引用名・更新名の無損失短縮を対照、実意味/本文は0/2
+
+Mashの新継続指示に基づく[compact_reference9](../observation_learning/training/2026-10-26-unconnected-native/compact_reference9/README.md)の一回。実Codex Work/GPT-6、root単独writer/executor。read-only helperは正式Pro/Ultra/human受入れではない。同じ長文にloss maskだけを変える段階案は実contextを短縮せず既存全文labelsとも異なるため選ばず、既存named wire内のq/u名だけを短くした派生教師を使った。cid/rid/native role名はpass-throughで短縮しない。
+
+source664ce894/API7b9ee073、原284f開始のFullCE9（weekly§93）を基準に、BOOK/SHOP教師の引用名q.id/evと更新名$id/urだけをq0…/u0…へ無損失短縮した一回を終了。全15prompt・他13教材行bytes・意味/native ID/原文/全更新/本人文・元helper全文assistant＋EOS CE・9順/LR5e-5/seed/fresh optimizer/生成枠は維持、原15教材は不変。実CPU51.926155秒、教師token2913→2724/3238→3013、元/短縮4件の意味/本文・各別PID cold4/4一致（rawに結び付くreceiptだけ差、実model成功ではない）。同API353成功は照合再利用。実9更新/112変更/別保存/112F32 no-grad reload/2生成518.695367秒/$0.040342973処理按分（準備/CPU/回収/保持等別）。BOOK2731token/EOS/JSON完結、named decode成立でも根拠3名の同一時点句重複で実CMEE REJECT/model_evidence_collection_invalid、本文は内部処理説明。SHOP3584token/EOSなし、役割名をfieldにして位置一致0/14、Observation途中でTOKEN_LIMIT→REJECT/semantic_receipt_not_validated。意味/本人本文0/2・snapshot0/cold対象なし。基準のJSON完結2/2→今回1/2、実生成は短縮q/u名0で、短縮だけの改善は確認できず新3a43df7f通常不採用。全原本16,641,896bytes/161payload+manifestをPod外全CRC/hash/size/source6/API/112F32有限・同形状照合しLibrary libfile_8c15de9185888191a1356804725b85ba v0へ保全。次は原欄→引用→役割→附属更新→本人文を小さい単位で教えて元全文packetへ戻す学習手順のCPU候補具体化（未準備・未実行）。追加GPU/同条件反復/別係数/reader緩和/上限延長/次run自動開始0、現2件の欠陥に新観測会不要。原d431/284f/全旧候補保持、商品0/正式0/3/54.50％・candidate_ready=false/automatic_progression=false、primary=BLOCKER_NARROWED。GPU保持/Stop等0、通常app/公開API/DTO/DB/RN/Render/Supabase/merge/deploy変更0、STRUCTURE_MAP_DELTA_NONE。
+
+[全raw読解](../observation_learning/training/2026-10-26-unconnected-native/compact_reference9/reading_review.md)：BOOKは11引用名/全位置一致でもno_contact/late_awareness/answer_explains_targetの3名が同じ時点句。未変更named decoderを通った後、actual v3意味検査が同一evidence行重複を拒否した。no_contactの否定対象は時点のまま、旧relation根拠・附属更新・本人文の処理説明が残る。SHOPは14引用のfを役割名へ変え全位置不一致、14claim/一意12、11time.exprが文字列"null"、8更新でも附属relation不足。Observationは知覚を二度繰返し「と共有し」列挙途中で停止、Reception/update_note本文は未生成。静的所見は未到達の意味検査の実拒否理由へ読み替えず、raw補修0。
+
+原284f/FullCE9の全体JSON2/2に対し今回1/2で、処理時間も518.477→518.695秒と改善しない。元d431対照0/2との比較だけで成功にしない。教師の短縮は実証したが、両実生成のq/u短縮名採用は0。今回の固定9更新の結果を4B一般の能力限界・教材全般不足の証明へ拡張しない。CPUとlauncher/GPUは一回で完了。JSON表示locator待機のno_matches1件は最新AXへ戻して確認しrun/raw影響0。
+
+全原本SHA256 43b53b96cda2516c6fbedf7cd7c9ef73fdb655830a3e234b3d2d6b6870e66919、162member。新3a43df7fd09cbf61bb5e329467f82e393e0e6fd325d7b6a457308e41a20a0228は通常不採用。原run/実行planは凍結、result_summaryが最終閉鎖owner。次のCPU学習手順候補は未準備・未実行で追加GPUへ自動進行しない。
