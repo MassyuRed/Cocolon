@@ -3400,3 +3400,17 @@ source664ce894/API7b9ee073、原284f開始のFullCE9（weekly§93）を基準に
 原284f/FullCE9の全体JSON2/2に対し今回1/2で、処理時間も518.477→518.695秒と改善しない。元d431対照0/2との比較だけで成功にしない。教師の短縮は実証したが、両実生成のq/u短縮名採用は0。今回の固定9更新の結果を4B一般の能力限界・教材全般不足の証明へ拡張しない。CPUとlauncher/GPUは一回で完了。JSON表示locator待機のno_matches1件は最新AXへ戻して確認しrun/raw影響0。
 
 全原本SHA256 43b53b96cda2516c6fbedf7cd7c9ef73fdb655830a3e234b3d2d6b6870e66919、162member。新3a43df7fd09cbf61bb5e329467f82e393e0e6fd325d7b6a457308e41a20a0228は通常不採用。原run/実行planは凍結、result_summaryが最終閉鎖owner。次のCPU学習手順候補は未準備・未実行で追加GPUへ自動進行しない。
+
+
+<a id="20261028-staged-pair9-closed"></a>
+## 96. 2026-10-28 — 補助A/B→元全文を一回終了、SHOP原欄回復も意味/本文0/2
+
+Mashの新継続指示に基づく[staged_pair9](../observation_learning/training/2026-10-26-unconnected-native/staged_pair9/README.md)。実Codex Work/GPT-6、root単独writer/executor、read-only helperは正式Pro/Ultra/human受入れではない。Aはv/a/qと意味全6部分木、Bはquestion/updates/prose全3部分木を保持する。元material/priorは全て残し、system/出力format/specだけ部分課題化。Bはgold Aを先行意味として使い、final updates/proseは入力にしない。各最終evalは元の全文promptで補助/gold Aなし。全体系列とtargetを短くし、B入力自体は元より長いことを隠さない。4短段階を両例で教える13forward案より、小さい2形式/9forwardを選んだ。全文露出が各3回→1回へ減る差があり、q/u名だけの一因子対照とは呼ばない。
+
+source76d264df/API7b9ee073、原284f開始で補助A（引用/意味/関係）とB（前段Aから全更新/本人本文）をBOOK/SHOP各一回、最後に元全文各一回という9更新/9forwardを終了。原15行・eval全bytes・material/prior・意味/native ID/原文/全更新/本文は不変、補助4行を別追加。CPU6.918286秒/model0、2再結合bytes exact、補助系列5945/5814/6312/6250token（元7300/7777）、9順合計57730→51897。Bはgold Aを条件に学ぶが最終evalには渡さない。同API353/元教師の意味/本文/cold2はhash照合再利用で今回新admission/cold0。実9更新/112変更/別保存/112F32 no-grad reload/元入力2生成509.436694秒/$0.039622854処理按分（準備/CPU/回収/保持等別）。BOOK3322token/EOS/JSON完結でも3組の同一根拠とclaim/relation混同が残りCANDIDATE_UNREVIEWED→REJECT/model_evidence_collection_invalid、本人文は一人称回答再掲。SHOP3584token/EOSなし、原欄一致は0/14→18/18へ改善するが意味役割誤配/重複claim/旧意味再ADDで10完成ADD+11番目途中、prose未到達、TOKEN_LIMIT→REJECT/semantic_receipt_not_validated。意味/本人本文0/2・snapshot0/cold対象なし。新2dfd7dbdは通常不採用。全原本16,150,601bytes/152payload+manifestをPod外全CRC/hash/size/source5/API/CPU/112F32有限・同形状/9順照合しLibrary libfile_cf473b4d4d708191821345dd2db43674 v0へ保全。次候補は追加学習前に保存2dfdで固定済み補助A/B4入力を非学習診断し、短課題未習得と全文転移不足を切り分けること（入力/教師保存済み、追加model call未実行）。追加GPU/同条件反復/reader緩和/上限延長/次run自動開始0、現2件の正解不足を補う新観測会不要。原284f/d431/全旧候補保持、primary=BLOCKER_NARROWED、商品0/正式0/3/54.50％・candidate_ready=false/automatic_progression=false。GPU保持/Stop等0、通常app/公開API/DTO/DB/RN/Render/Supabase/merge/deploy変更0、STRUCTURE_MAP_DELTA_NONE。
+
+[全raw読解](../observation_learning/training/2026-10-26-unconnected-native/staged_pair9/reading_review.md)：BOOKは原欄13/13一致でも同一引用3組、relation名3つをclaim化し13claim/9relationへ増殖。6ADD+GAPでも全ADDがclaim単独で附属relationなし、rrへupdate IDを混入、本人本文は原回答の反復。SHOPは引用位置18/18・文字列null0へ回復する一方、shared_talkを開店認知/祝い行為へ誤配、16claim/一意12・引用18/一意13。旧action_linkを落としde_linkを重ね、完成ADD10+未完11番目となりGAP/proseへ未到達。実拒否はTOKEN_LIMITを優先し、静的欠陥を未到達の意味検査理由へ置換しない。
+
+実CMEE CPU1.911616329秒/model0/SQL0。実run/原本は無補修。比較は§93 JSON2/2→今回1/2、§95と同1/2、意味/本人本文は同0/2。原欄回復だけで商品改善へ昇格しない。実行前reviewで旧compact_teacher.pyがlauncher AST対象に残っている点を修正してから公開/CPU/実行し、失敗launcher試行0。最初のBOOK先行回収はcompleted0のため読まず、完成後だけ回収した。学習/生成/consumer/exportは一回、期限/OOM/非有限/再試行0。
+
+全原本SHA256 25251908388caf414868f30867862c5288ff2c2606fdfbe0c2ee959f3c35b7bf、153member。新2dfd7dbd2613aca8682601a140c1bbcc82e0b22de052dece60c6a60ad1a1cea4は通常不採用。原RAW_COMPLETE_PENDING/実行planは凍結しresult_summaryを最終閉鎖ownerとする。次の非学習補助4入力は今回固定保存済みだが追加実生成は未実行で、これを未使用一般化評価とはしない。今回2件の完成教師はあり新観測会を正解不足の解決へ要求しない。Windows/Mac未選定・全三中核/IF残件・正式0/3/54.50％は保持する。

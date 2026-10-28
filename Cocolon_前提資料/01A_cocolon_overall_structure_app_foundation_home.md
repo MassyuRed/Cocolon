@@ -5524,3 +5524,22 @@ STRUCTURE_MAP_DELTA_PRESENT。APIa8be7a9bのprivate4source＋新test1：preparat
 | README.md / result_summary.json / reading_review.md | 最終状態、全raw/教師/本人文読解、次のCPU候補 |
 
 全原本/adapterはLibrary libfile_8c15de9185888191a1356804725b85ba v0に保全。GPU保持、SQL/本番/Render/Supabase/merge/deploy変更0。全体現在地・観測目的・Windows/Mac未選定・正式0/3/54.50％を維持する。
+
+
+## 2026-10-28 二段階補助A/B→元全文のfile地図差分 — weekly§96
+
+新folder `observation_learning/training/2026-10-26-unconnected-native/staged_pair9/`。原15教師/evalとCMEE/wire/API責務は不変（STRUCTURE_MAP_DELTA_NONE）。補助4行の実系列を約19〜20％短くし、原284fから9更新/保存/no-grad reload/2自由生成を終了。SHOP原欄18/18へ回復も意味/本人本文0/2、新2dfd不採用、商品状態据置。Bの入力だけは長く、gold Aから全文への転移成功とはしない。
+
+| file | 実責務 |
+|---|---|
+| prepare_staged_pair9.py | A/B4行の射影・全原本不変・2再結合exact・実token/全labels/既存CMEE証拠再利用 |
+| run_staged_pair9.py | 元3anchor/4補助/元全文2の9通常CE更新・保存・no-grad reload・元入力2生成 |
+| consume_named9.py | 無補修の実receiver/意味/本人本文・条件付きcold |
+| launch_once.py / export_staged_pair9.py | 確定source5のAST/一回lock/parent timeout、CPU重み/原本回収 |
+| auxiliary_train_messages.jsonl | 実際の補助4教材。原15行は不変で別保持 |
+| actual_cpu_check.json / projection_proof.json / cpu_external_verification.json | CPU6.918秒・19行/全target/EOS・再構成/入力保持・Pod外照合 |
+| prepared_plan.json / runtime_authorized_plan.json / run.json / training.jsonl | 準備/実行条件、実9更新/112変更/再読込/2生成・一回閉鎖 |
+| after_*.jsonl / cmee_diagnosis.json / static_raw_diagnosis.json | 全raw・実意味/本文0/2・静的欠陥（実拒否と分離） |
+| external_verification.json / result_summary.json / reading_review.md / README.md | 全原本/112F32照合、最終閉鎖、両件全文読解、次の非学習診断候補 |
+
+原本16,150,601bytes/152payload+manifest、Library libfile_cf473b4d4d708191821345dd2db43674 v0。追加model call/次run自動開始なし、GPU保持、SQL/本番/Render/Supabase/merge/deploy変更0。
