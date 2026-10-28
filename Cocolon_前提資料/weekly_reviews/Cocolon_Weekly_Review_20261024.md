@@ -3465,3 +3465,10 @@ source a6198b6dbf34a810264fd42e42d69626e75709f7の新3source/準備plan/静的CP
 原本18,305,028bytes/323payload＋manifest、SHA256 4b9b1f8017f2f5661411399aa480344f2ab6f07ff4e6a2d5705041ac0cfabef7をPod外全CRC/hash/size/112F32形状・有限性/全112変化/6rawhashとtoken、途中回収4raw不変で照合。Library libfile_4df0fff22010819189901162df474e4f v0へ重み・130原本・入力・実行条件・CMEE結果を保存。GitHubではauxiliary_fit8/result_20261029が原raw6/run/training/tensor records/CMEE診断/実log/全member目録/検証/読解/終了owner、重みは外部保存。
 
 この一回は閉鎖・消費済み、新afaa通常不採用。旧2dfd/284f/d431/全候補と元15/eval/補助4教師/指示/API/reader不変、旧9回帰は今回未検証。追加周回/上限延長/reader緩和/raw補修/次run自動開始0。次候補は既存補助A/Bと元全文の責務対応を結ぶ学習設計の見直し、旧anchor保持/旧9回帰も含めた評価。新量・順序は未固定で、同じ補助だけの周回を自動継続しない。現2件の新観測会は不要。GPU稼働保持/Stop・再起動・削除0、本番/DB/Render/Supabase/RN/merge/deploy変更0。全体現在地/観測入口/01Afile地図を差分同期、STRUCTURE_MAP_DELTA_NONE。商品0/正式0/3/54.50％・candidate_ready=false/automatic_progression=false。
+
+
+## 99. 2026-10-29 — 補助/元全文/旧anchorをつなぐ11更新の新一回
+
+Mashの新継続指示。PR30 34035ab6/API7b9ee073、全機能原本/作業rule/全体設計と全file地図/current maps/観測学習意図/最新§98を照合。新[同一教師の接続学習](../observation_learning/training/2026-10-26-unconnected-native/joint_transfer11/README.md)は、保存afaaの局所改善を元全文へつなぐため、補助A/B→同case全文、旧初回/訂正/日常anchor3、最後に元全文2をもう一回の計11更新。元19/評価/prompt/reader/API/採用基準不変。別保存/112F32非学習reload後、全文2＋旧9を11生成する。旧9はquote、元全文2はnamedのまま実CMEE/本文/採用済のみcoldへ。補助再生成とbefore9を増やさず、afaa旧9before欠測を明記し維持/改善率へ換算しない。
+
+新単位の上限2700秒/$0.21処理按分（A5000表示$0.28/h、準備/CPU/回収/保持/保存/通信/税等別）。parent2690+10・各180秒/context8192・旧9 cap2560/全文3712,3584。実CPUでは全labels/EOS/11順/原11prompt/正解教師11件を対照し、その後一回開始する。再試行/追加生成/上限延長/次run自動開始0。GPU保持/Stop等0、本番/API/DB/RN/Render/Supabase/merge/deploy変更0。root GPT-6 Codex Work単一実行owner、補助はread-onlyで正式Pro/Ultra/human受入れではない。商品0/正式0/3/54.50％・candidate_ready=false/automatic_progression=false、STRUCTURE_MAP_DELTA_NONE。現2件の追加観測会不要。閉鎖済§98のrun/lock/枠を再利用しない。

@@ -5576,3 +5576,8 @@ auxiliary_fit8の実CPU原本cpu_check.json/cpu_preparation.log/.exitとruntime_
 | `reading_review.md・result_summary.json` | 全6rawの意味/時点/役割/全更新/本人本文を照合し閉鎖を所有。新重み不採用、旧9回帰未検証、次候補と新観測会不要の判断 |
 
 元15/eval/補助教師/指示/reader/旧重み不変。新しい商品責務・公開型・DB/RN/Render/Supabase変更なし、STRUCTURE_MAP_DELTA_NONE。次は補助と元全文の学習接続設計を見直す候補で、追加周回/上限延長/次run自動開始0。全体00/観測入口/weekly§98へ戻る。
+
+
+## 2026-10-29 weekly§99 — joint_transfer11
+
+新folder observation_learning/training/2026-10-26-unconnected-native/joint_transfer11 は、run_transfer11.py（afaa開始の補助/全文/旧anchor11更新・別保存/非学習reload/全文2＋旧9の11生成）、prepare_transfer11.py（全labels/EOS/原11promptと正解11のCPU対照）、consume_transfer11.py（全文named/旧9quoteの原形式を選び無補修受領・既存Engine・採用済だけ別process cold）、transfer11.plan.json（無効準備原本）、static_cpu_check.json（入力/実行無効の静的検査）、README.md（今回scope/費用/開始重み/旧9before欠測）を所有する。新商品責務/route/wire/reader/DB/RN変更なし、STRUCTURE_MAP_DELTA_NONE。全体00/観測入口/weekly§99へ戻る。

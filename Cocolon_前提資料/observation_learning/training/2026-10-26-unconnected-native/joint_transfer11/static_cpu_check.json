@@ -1,0 +1,27 @@
+{
+  "status": "CPU_STATIC_TRANSFER11_NO_MODEL",
+  "optimizer_steps": 11,
+  "training_order": [
+    "TRAIN-SERVICE-CHAIR-01-INITIAL",
+    "AUX-A-FT-BOOK-AFTER-ANSWER",
+    "AUX-B-FT-BOOK-AFTER-ANSWER",
+    "FT-BOOK-AFTER-ANSWER",
+    "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+    "AUX-A-FT-SHOP-AFTER-ANSWER",
+    "AUX-B-FT-SHOP-AFTER-ANSWER",
+    "FT-SHOP-AFTER-ANSWER",
+    "TRAIN-DAILY-CALM-01-INITIAL",
+    "FT-BOOK-AFTER-ANSWER",
+    "FT-SHOP-AFTER-ANSWER"
+  ],
+  "original19_and_eval_unchanged": true,
+  "initial_adapter_sha256": "afaa2c2e2f7263792d5cf9930bb2fac0bf44bdccd04ff2ffa8049a2cfd2f12d2",
+  "model_calls_planned": 11,
+  "pretrained_model_loads": 0,
+  "model_forwards": 0,
+  "generations": 0,
+  "sql_operations": 0,
+  "seconds": 0.10651737899934233,
+  "execute_disabled_before_model": true,
+  "rejected_reason": "transfer11_execute_disabled"
+}

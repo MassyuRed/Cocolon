@@ -2,7 +2,7 @@
 
 **GPU実確認の最終記録（2026-10-29）：** 新Pod vgkm402msgroiu/short_gold_bonobo、Jupyter直接接続、NVIDIA RTX A5000/$0.28/h・torch2.8.0+cu128、固定依存/base復元済み、GPU保持/Stop等0。
 
-**現在の直接作業（weekly§98）：** 補助4教師×2周の8更新/別保存afaa2c2e/112F32非学習reload/補助4＋元全文2の6生成を755.144773秒/$0.058733482処理按分で完了（準備/CPU/回収/保持等別）。補助EOS2→4/4・strict1→3/4・literal0/4、全文BOOK TOKEN_LIMIT/SHOP INVALID_FORMATで現CMEE意味/本文0/2・snapshot0/cold対象なし。役割・source欄/時点・附属relation/update・本人知覚と本文の誤りが残り、新afaa不採用。原本323payload＋manifest/18,305,028bytesを全hash/112F32照合しLibrary libfile_4df0fff22010819189901162df474e4f v0へ保存。今回一回は閉鎖、追加周回/上限延長/再試行/次run自動開始なし。旧重み/元15/eval/補助教師/指示/reader不変、旧9回帰未検証。次候補は既存補助と元全文の責務対応を結ぶ学習設計と旧anchor/旧9回帰の確認。現2件の追加観測会不要。全体現在地と[auxiliary_fit8結果](training/2026-10-26-unconnected-native/auxiliary_fit8/README.md)へ戻る。Windows/Mac未選定・商品0/正式0/3/54.50％を維持。
+**現在の直接作業（weekly§99）：** §98の補助8更新はEOS4/4・strict3/4へ進んだが元全文の意味/本文0/2、新afaa不採用で閉鎖。新継続指示を受け、保存afaaから補助A/B→元全文と旧初回/訂正/日常anchor3を結ぶ11更新、別保存/no-grad reload後に全文2＋旧9の11生成を準備。元19/評価/prompt/reader/API7b9不変、旧9quoteと全文namedを維持。CPU実対照後に一回実行、最大2700秒/$0.21処理按分（準備/保持等別）・retry0。afaaの旧9before欠測、afterのみで維持/改善率を算出しない。現2件の追加観測会不要。[joint_transfer11](training/2026-10-26-unconnected-native/joint_transfer11/README.md)。商品0/正式0/3/54.50％・Windows/Mac未選定。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 
