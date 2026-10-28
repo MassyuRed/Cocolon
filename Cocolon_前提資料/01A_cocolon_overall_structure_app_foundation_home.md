@@ -5477,3 +5477,16 @@ STRUCTURE_MAP_DELTA_PRESENT。APIa8be7a9bのprivate4source＋新test1：preparat
 | run_jointfocus9.py・consume_named9.py・launch.json | 原284f固定9更新/112F32別保存no-grad reload/after2、無補修実rawを同厳格receiver/CMEEへ接続。採用snapshot時だけcold経路、今回は対象なし |
 | run/run.json・run/training.jsonl・run/initial_loaded_tensors.json・run/reloaded_tensors.json・run/after_FT-BOOK-AFTER-ANSWER.jsonl・run/after_FT-SHOP-AFTER-ANSWER.jsonl・cmee/diagnosis.json・reading_review.md | 実9学習/112load-reload/raw2、両EOSでもroot未閉鎖の実拒否、全source/prior/教師/意味/本人本文の静的読解 |
 | export_jointfocus9.py・weight_verification.json・external_verification.json・source_verification.json | 実source11path固定、Pod外全CRC/hash/size/112F32有限性と同形状照合。全原本/追加重み16,145,834bytes/146payload+manifest、Library libfile_739efcbd074c81919e9d0ca8befb34c5 v0 |
+
+
+## 2026-10-28 — 元の全文CE対照一回の全ファイル地図
+
+既存学習owner配下 `observation_learning/training/2026-10-26-unconnected-native/full_ce9/`。API7b9ee073/全15prompt・teacher bytes/284f/9順を保持、新2のlossだけ元helperへ戻す。app/API/DB/RN/reader責務・型・経路変更なし、STRUCTURE_MAP_DELTA_NONE。新一回は閉鎖、最新は全機能00/weekly§93。
+
+| path（prefix下） | 責務 |
+|---|---|
+| README.md・fullce9.plan.json・runtime_authorized_plan.json・result_summary.json | 準備時/実行時原条件と最終閉鎖、新0ec6不採用。raw pending/承認済みplanを書換えずresult_summaryで閉鎖 |
+| prepare_fullce9.py・actual_cpu_check.json・api_source_manifest.json・cpu_external_verification.json | 元helper全文assistant/EOS通常CE、同15bytes/label窓/1call委譲/EOS/9順。新CPU7.427914秒/model0、既存353証拠再利用。CPU原本87397bytes/14payload+manifestは全原本ZIP内 |
+| run_fullce9.py・consume_named9.py・launch.json | 原284fから9更新/112F32別保存no-grad reload/after2、無補修rawを既存receiver/CMEEへ接続。採用時だけcold経路、今回は対象なし |
+| run/run.json・run/training.jsonl・run/initial_loaded_tensors.json・run/reloaded_tensors.json・run/after_FT-BOOK-AFTER-ANSWER.jsonl・run/after_FT-SHOP-AFTER-ANSWER.jsonl・cmee/diagnosis.json・decoder_diagnostic.json・reading_review.md | 実9学習/112load-reload/raw2・両JSON完結でもnamed未定義/重複参照で実拒否。別strict decoder先頭エラーと全source/prior/teacher/本人本文の静的読解を実採否と分離 |
+| export_fullce9.py・weight_verification.json・external_verification.json・source_verification.json | source9path固定、Pod外全CRC/hash/size/112F32有限/同形状/CPU同一。全原本・追加重み16,124,090bytes/144payload+manifest、Library libfile_3d862dab25388191b86861366902a9ec v0 |

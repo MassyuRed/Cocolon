@@ -1,6 +1,6 @@
 # Full CE9 — same-condition original-loss contrast, 2026-10-28 JST
 
-Status: CPU verified; no GPU execution yet. This is one new bounded unit under Mash’s latest 「4B学習＋CMEE接続」を続けて and subsequent resume instruction. It does not retry or reactivate joint_focus9 or any previous closed unit.
+Status: CLOSED_NOT_ADOPTED_NO_RETRY. The new once-run completed9 updates/save/exact112-F32 inference-only reload/2 generations, followed by actual CMEE rejection2/2; meaning/body adoption0/2. Raw pending/authorized plan are immutable execution records; result_summary.json owns final closure. This is one new bounded unit under Mash’s latest 「4B学習＋CMEE接続」を続けて and subsequent resume instruction. It does not retry or reactivate joint_focus9 or any previous closed unit.
 
 The concrete unfinished condition is a coherent grounded BOOK/SHOP answer-update candidate with natural person-facing prose that the unchanged CMEE can adopt. joint_focus9 reached EOS/three prose fields but left both root JSON objects unclosed; role/source/update/body errors remained. Its custom target allocation did not jointly establish the required behavior.
 
@@ -25,3 +25,11 @@ Existing completed teachers contain the required source distinctions, attached r
 Prepared plan and runtime authorized plan remain immutable lifecycle records. A final result_summary will own closure after actual execution and raw/body reading.
 
 CPU actual7.427914225962013s, actual4B loads/forwards/updates/generations0, SQL0/CUDA uninitialized. All15 prompt/teacher bytes and full assistant/EOS labels exact; original helper one-call/loss passthrough/label-window CPU sentinel verified. Prior353 same-API test evidence verified and reused, not rerun;12 actual-SQL tests remain excluded. CPU archive87397bytes/14payloads+manifest, SHA256 b6f240ce66ed4e485b8d114183e68da17e6c355cca00f74647dcc96cc8a3cda0; allCRC/hash/size and source4 checked outside Pod.
+
+## Actual result and preservation
+
+Processing518.4774369189981s/$0.040326022871477636 allocation, exit0/no timeout/OOM/nonfinite.112 tensors changed. BOOK2710tokens/122.82842515397351s, SHOP3489/156.48039048002101s; both EOS and complete ordinary JSON. Unlike joint_focus9, root closure is restored. Both actual receipts are INVALID_FORMAT, engine REJECT/semantic_receipt_not_validated, meaning/body0/2, snapshots0/cold N/A. CMEE CPU1.9522868969943374s, model0/SQL0. Unchanged strict named decoder diagnostic: BOOK undefined_named_reference; SHOP duplicate_or_invalid_quote_name. This diagnostic does not repair outputs or rerun meaning admission.
+
+BOOK still mixes roles/quote fields and omits attached update relations; SHOP duplicates quote/claim/relation IDs and repeats five identical ADD bodies under different IDs. Both prose outputs mostly repeat the person’s own answer. Closing JSON alone does not establish grounded meaning or natural reception. Loss-only contrast under these fixed9/284f conditions did not solve adoption; no generalization or4B-capacity conclusion. See reading_review.md for full raw/body comparison. The next considered factor is initialization-only from original d431, keeping current full CE/teacher/API/schedule, but no further GPU run is started here.
+
+New0ec64563c04c3ea17ba847bed94250125175356006a6ba80f2ac91a7e233b8d1 is NOT ADOPTED. Full weights/originals16,124,090bytes/144payload+manifest/145members, SHA25620858e1d3d9e61afbd8aeb9222fec1d262ebc97f17a3c05d630ab820bf56b0e0. Outside Pod all CRC/size/hash, CPU originals, allAPI source bytes,112F32 finite3,833,856 parameters, initial/reload shapes and early/finalBOOK exactness verified. Library libfile_3d862dab25388191b86861366902a9ec version0 preserves the archive. Original284f/d431 and earlier candidates remain untouched. GPU held/lifecycle0, no retry/extra model call/automatic progression. Whole-state/observation entry/all-file map/weekly§93 carry the final result.

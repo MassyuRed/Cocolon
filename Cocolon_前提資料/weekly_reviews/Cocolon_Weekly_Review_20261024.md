@@ -3357,3 +3357,21 @@ Mashの新継続指示に結び付けた新unit [joint_focus9](../observation_le
 処理483.382372741秒/$0.0375964068は600秒/$0.047内。準備/CPU/回収/保持/保存/通信/税等別。全原本・追加重み16,145,834bytes/SHA256 bf1df033106739c92d693ed46a9a6c45fdb13756b6cee00391c7e3cb76f1905e、146payload+manifest/147member。全CRC/hash/size・CPU同一・API全source/112F32有限・initial/reload同形状/earlyBOOK一致をPod外照合。新2952ec5839a63789f1416aa6ebd19323b73a1610e6e0135da582c0dff7f92e73は通常不採用、Library libfile_739efcbd074c81919e9d0ca8befb34c5 v0へ別保全。原284f/d431/旧候補を置換しない。
 
 primary=BLOCKER_NARROWED、商品0/正式0/3/54.50％据置。今回新一回は閉鎖・消費済み、raw pending/承認済みplanは原本保持、result_summaryが最終状態owner。追加学習/生成/同条件反復/reader緩和/raw補修/上限延長/次run自動開始0。次の設計候補は既存教師による全体JSON閉鎖とgrounded role/関係/更新・自然な本人本文の同時成立。閉じbrace補修だけでは意味/本文不備を解決できず、追加係数やopaque ID改名の効果を未検証で断定しない。新観測会が必要な教材不足や4B能力限界を証明した結果ではない。GPU保持、Stop/restart/delete/管理API0、通常app/公開API/DTO/DB/RN/Render/Supabase/merge/deploy変更0。STRUCTURE_MAP_DELTA_NONE。
+
+
+<a id="20261028-full-ce9-closed"></a>
+## 93. 2026-10-28 — 元の全文CE対照を一回完了、両JSON閉鎖回復も採用0/2
+
+Mashの新継続・処理落ちからの再開指示に結び付けた [full_ce9](../observation_learning/training/2026-10-26-unconnected-native/full_ce9/README.md) の新unit。§92や旧planを再開せず、同15prompt/teacher全bytes・API7b9ee073・原284f・9順/LR5e-5/1forwardを保ち、新2も元run_pilot.teacher_lossの全文assistant＋EOS通常CEへ戻す損失exact1対照。新係数/初期値/回数変更を同時に行わない。source3e612f2bc105ace5efae57efe7446a3f22ed91d0の9path全文/readback/親/変更集合を照合後Jupyter直接実行。root単独writer/executor、実Codex Work/GPT-6、read-only helperは正式Pro/Ultra/human受入れではない。第二helperのcapacityエラーは新raw reviewに数えず、rootと完遂helper1が両件全文を読む。
+
+過去joint_fit12の旧9意味/本文9/9は学習済138bからのchair全文CE/daily full-surface混合による残差修復。quote interleaved30/continuation/expandedの通常CEも新6本文0で、現named系の成功保証ではない。現在条件で未確認だった通常CE対照を最小変更として選び、回数増加・d431 warm-startは同時変更しなかった。
+
+新CPU7.427914226秒/model load/forward/update/generation0/SQL0/CUDA未初期化。元helper hash固定・1call/loss委譲/正確なlabel窓をCPU mock1で確認し、actual4Bforwardへ数えない。全15prompt/target bytes・prompt mask・全assistant/EOS labels・9順/57730token/長二乗和398780542不変。既存同API353成功は検証再利用で再実行ではなくSQL12対象外。CPU原本87397bytes/14payload+manifest/SHA256 b6f240ce66ed4e485b8d114183e68da17e6c355cca00f74647dcc96cc8a3cda0、全CRC/hash/size/実source4をPod外一致照合。
+
+実9更新/112変更/別保存/112F32・3,833,856parameter同形状no-grad reload/after2、exit0/期限・OOM・非有限なし。BOOK2710token122.828425秒、SHOP3489token156.480390秒、両EOS・parse_errorなし・JSON全体/3本文完結へ回復。実receiverは共にINVALID_FORMAT→実CMEE REJECT/semantic_receipt_not_validated、意味/本文0/2・snapshot0/cold対象なし。CMEE CPU1.952286897秒/model・SQL0。未変更strict named decoderだけの別read-only診断はBOOK undefined_named_reference（GAP.evへ未定義quote名）、SHOP duplicate_or_invalid_quote_name。raw補修/意味採否の再実行0。
+
+[全文読解](../observation_learning/training/2026-10-26-unconnected-native/full_ce9/reading_review.md)：BOOK q10/一致9、同根拠重複/不存在field・role誤対応、ADD6+GAP7でも附属relation欠落。説明relationの自己辺/NEGATEDは回復するが本人向け本文は回答復唱。SHOP q15/位置一致15でも3種ID重複、claim15/一意12、relation6/一意5・旧action_link欠落。8更新中5ADDが$id以外同内容反復で必要7roleの追加にならない。本文は悲しさが戻る一方で一人称回答の逐語再掲。以上は実INVALID_FORMATと分離した静的所見。通常JSON完結/更新件数を意味/本人本文成功へ換算しない。進行報告の中間更新7→実5、BOOK2869→実2710という画面誤読2点は原本から訂正済みで、実run/全rawは不変。
+
+処理518.477436919秒/$0.0403260229は600秒/$0.047内、準備/CPU/回収/保持/保存/通信/税等別。全原本・追加重み16,124,090bytes/SHA256 20858e1d3d9e61afbd8aeb9222fec1d262ebc97f17a3c05d630ab820bf56b0e0、144payload+manifest/145member。Pod外全CRC/hash/size・CPU同一・API全source・112F32有限/初期-reload同形状/earlyBOOK一致を照合。新0ec64563c04c3ea17ba847bed94250125175356006a6ba80f2ac91a7e233b8d1は通常不採用、Library libfile_3d862dab25388191b86861366902a9ec v0へ保全、原284f/d431/旧候補を置換しない。
+
+primary=BLOCKER_NARROWED、全文CE変更だけでは固定9/原284f下の意味/本文が成立しないという対照結果。商品0/正式0/3/54.50％・candidate_ready=false据置。raw pending/承認済みplanは原本不変、result_summaryが最終閉鎖owner。次候補は現教師/API/全文CE/9順のまま開始値だけ元d431へ戻し、旧named13学習から持ち越すrole誤対応の仮説を切り分ける。d431自体も新6本文0なので改善予測ではなく、今回未準備・未実行。別係数/LR/回数や追加観測の必要性、4B限界/未知一般化を断定しない。今回一回は閉鎖・消費済み、retry/追加生成/reader緩和/上限延長/次run自動開始0。GPU保持/Stop等0、通常app/公開API/DTO/DB/RN/Render/Supabase/merge/deploy変更0、STRUCTURE_MAP_DELTA_NONE。
