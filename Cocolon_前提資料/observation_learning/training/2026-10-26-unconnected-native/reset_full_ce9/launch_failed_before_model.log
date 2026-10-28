@@ -1,0 +1,4 @@
+  File "/workspace/cocolon_reset9_pack_20261028/launch_once.py", line 5
+    with lock.open('x') as f:f.write('new_initialization_only_unit_source6eb760ab
+                                     ^
+SyntaxError: unterminated string literal (detected at line 5)

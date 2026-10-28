@@ -1,13 +1,15 @@
-# d431開始値だけの全文CE9対照 — 2026-10-28
+# d431開始値だけの全文CE9対照 — 一回終了・新候補不採用
 
-status: SOURCE_PREPARED_CPU_PENDING
+最終状態：CLOSED_NOT_ADOPTED。原本run.jsonのRAW_COMPLETE_PENDINGは凍結記録、[result_summary.json](result_summary.json)が最終閉鎖ownerです。
 
-Mashの2026-10-28新継続指示に基づく新unit。旧full_ce9や消費済みplanの再開・再試行ではない。実行担当はroot単独、実環境Codex Work/GPT-6。read-only agentの意見は正式Pro/Ultra・human受入れを代替しない。
+Mashの2026-10-28新継続指示に基づく新unit。旧Full CE9の再開・再試行ではありません。全15入力/教師、API7b9、元helper全文assistant＋EOS CE、同9順/LR5e-5を保ち、開始値だけ元d431へ戻しました。
 
-目的はBOOK/SHOP回答後の根拠・全更新・本人向け本文が同時成立しない状態の直接比較。前回full_ce9のJSON完結2/2・意味/本文0/2を比較対象として保存する。開始値だけ原284fから元d431へ戻し、全15入力/教師bytes、API7b9ee073、元helper全文assistant＋EOS CE、LR5e-5、seed20261024、既存9順・fresh optimizer、BOOK3712/SHOP3584tokenを固定する。d431自体も新6本文0であり改善保証ではない。
+9更新→別保存→112F32 no-grad reload→BOOK/SHOP各1生成を523.411685秒、処理按分$0.0407098で完了（準備/CPU/回収/保持等別）。BOOK2801token/EOSありでもroot閉じ漏れ、SHOP3584token/EOSなしの参照反復打切り。実receiver INVALID_FORMAT/TOKEN_LIMIT、実CMEEは両REJECT/semantic_receipt_not_validated、意味/本人本文0/2、snapshot0、cold対象なし。新1aef046eは通常不採用です。
 
-新source4path、Jupyter新PACK/OUTPUT、元ROOTのread-only利用。CPUで112F32・同key/shape/有限性、LoRA configの同意味（target_modules順のみ差を許容）、同15token/bytes・同9順/57730token/長二乗和398780542、既存同API353成功証拠を照合する。CPU合格後だけ新planをcurrent request/Rule18§11.3の既存可逆学習方式内へ束縛し、1回の9更新→別保存→no-grad reload→各1生成→実CMEE受領/本文読解/原本回収へ進む。上限600秒/$0.047処理按分、各生成180秒、timeout590s＋kill10s。準備/CPU/回収/保持等は別。GPU停止/再起動/削除0、SQL0、通常app/公開API/DTO/RN/Render/Supabase/merge/deploy変更0。
+[全raw・教師・本文の読解と比較](reading_review.md)。前回284fの全体JSON完結2/2に対し今回は0/2で、開始値変更だけでは根拠・役割・全更新・本人向け本文を成立させられません。旧named13だけが原因とは確認できません。4B一般の限界・未知品質も断定しません。
 
-再試行・追加生成・reader緩和・上限延長・次run自動開始なし。元d431/284fと全旧候補を保持。未知評価/一般化/商品受入れへ加算しない。今回の固定教材不足を示す証拠はなく追加観測会不要。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false。STRUCTURE_MAP_DELTA_NONE（学習の開始値以外に商品責務・型・経路変更なし）。
+新CPU6.749000秒/model0、同15token/bytes・9順・LoRA設定同意味・112F32同key/shape/有限性を確認。同API353成功証拠を再利用、再実行0。manifest転記誤り1回、launcher構文誤り1回はいずれもmodel前停止、失敗source/logを保全。修正後のGPU試行は一回です。途中表示の誤読と空ファイル回収準備の失敗も読解記録に区別しました。
 
-run_reset9.pyは新unit runner、prepare_reset9.pyはCPU条件照合、consume_named9.pyは未変更意味readerへのactual raw接続、export_reset9.pyは原本/追加重みの回収。実行原本/最終結果は後続同unitのresult_summaryを参照。source checkpoint時点で新CPU/GPU/model処理は未実行。
+全原本/追加重み16,114,991bytes、149payload+manifest、SHA256 4467162042edf848fc34415c4f01d1c63c48dab33b3e96f4055891fbe807d111。Pod外全CRC/hash/size/source5/API/112F32有限・同形状を照合。Library libfile_b74941080fec8191b174c5583e26683f version0へ保全。元4B全重みを含まない追加adapter/archiveです。原d431/284f/全旧候補を保持します。
+
+primary=BLOCKER_NARROWED。次は既存教師の意味・全更新・本人文を保つ段階的教材表現案のCPU具体化（未準備・未実行）。追加GPU/再試行/reader緩和/上限延長/次run自動開始なし。今回の基本欠陥に追加観測会不要。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false、STRUCTURE_MAP_DELTA_NONE。GPU保持/Stop等0、通常app/公開API/DTO/DB/RN/Render/Supabase/merge/deploy変更0。

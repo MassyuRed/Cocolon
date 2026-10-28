@@ -5490,3 +5490,16 @@ STRUCTURE_MAP_DELTA_PRESENT。APIa8be7a9bのprivate4source＋新test1：preparat
 | run_fullce9.py・consume_named9.py・launch.json | 原284fから9更新/112F32別保存no-grad reload/after2、無補修rawを既存receiver/CMEEへ接続。採用時だけcold経路、今回は対象なし |
 | run/run.json・run/training.jsonl・run/initial_loaded_tensors.json・run/reloaded_tensors.json・run/after_FT-BOOK-AFTER-ANSWER.jsonl・run/after_FT-SHOP-AFTER-ANSWER.jsonl・cmee/diagnosis.json・decoder_diagnostic.json・reading_review.md | 実9学習/112load-reload/raw2・両JSON完結でもnamed未定義/重複参照で実拒否。別strict decoder先頭エラーと全source/prior/teacher/本人本文の静的読解を実採否と分離 |
 | export_fullce9.py・weight_verification.json・external_verification.json・source_verification.json | source9path固定、Pod外全CRC/hash/size/112F32有限/同形状/CPU同一。全原本・追加重み16,124,090bytes/144payload+manifest、Library libfile_3d862dab25388191b86861366902a9ec v0 |
+
+
+## 2026-10-28 — 元d431開始値の全文CE9対照・全ファイル地図
+
+既存学習owner配下 `observation_learning/training/2026-10-26-unconnected-native/reset_full_ce9/`。全15入力/教師・API7b9・元全文assistant/EOS CE・9順を固定し、開始値だけ元d431へ戻した一回は終了。STRUCTURE_MAP_DELTA_NONE（商品責務・意味型・wire・reader・通常接続不変）。最新は全機能00/weekly§94。
+
+| path（prefix下） | 責務 |
+|---|---|
+| README.md・result_summary.json・reading_review.md | 一回閉鎖/新1aef不採用、実採否と全raw/教師/本人文の静的読解、次のCPU候補未準備 |
+| run_reset9.py・prepare_reset9.py・consume_named9.py・export_reset9.py・launch_once.py | 元d431固定9更新/別保存112F32 no-grad reload/after2、同厳格receiver/CMEE受領、原本回収。実source5の全文/byte読戻し済み |
+| actual_cpu_check.json・prepared_plan.json・runtime_authorized_plan.json・api_source_manifest.json・cpu_external_verification.json | 同15bytes/token列/同9順/LoRA設定同意味/112key-shape-F32、CPU6.749秒/model0。353同API証拠再利用、SQL12対象外。失敗前source/logを含むCPU原本81036bytes/15payload+manifestは追加重みarchive内 |
+| run/*・cmee/diagnosis.json・launch.json・launch_failed_before_model.py・launch_failed_before_model.log | 実9学習行/112load-reload/raw2、BOOK INVALID_FORMAT/SHOP TOKEN_LIMIT→両REJECT、snapshot0でcold対象なし。GPU前launcher構文失敗と実試行一回を区別 |
+| weight_verification.json・external_verification.json・source_verification.json | Pod外全CRC/hash/size/source5/API/112F32有限・同形状/earlyBOOK一致。原本・追加重み16,114,991bytes/149payload+manifestはLibrary libfile_b74941080fec8191b174c5583e26683f v0、旧d431/284fを保持 |
