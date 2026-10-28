@@ -5366,4 +5366,17 @@ family：`observation_learning/training/2026-10-26-unconnected-native/update_obl
 | aligned13_result/reading_review.md | 原source/教師と実raw/本文の全件読解。静的所見を実CMEE拒否と分離 |
 | aligned13_result/runtime_originals.zip・external_verification.json | 全34payload＋manifest/35member、116,134bytes。元bytes/CRC/hashと重み込み一式112F32有限性をPod外照合。追加重み一式はlibfile_398ae281441c81918138d6bf43d3ae36 version0へ保全 |
 
-**現在の直接作業（10/28：現API入力に揃えた保存d431からの13更新一回を終了、意味/本文0/2で新候補不採用）：** 固定source ba9d910f/planの既存一回をJupyterで回収確認。旧9各1＋BOOK/SHOP回答後各2の計13更新、別保存c7ba419c/112F32の非学習reload、同2自由生成を540.301152秒（9分00秒）/$0.042023処理按分で完了。元d431は不変。BOOKは3712token反復打切り/TOKEN_LIMITからREJECT、SHOPは2693token/EOS・strict JSON成立後も根拠範囲外でUNSUPPORTED、意味/本文0/2・採用snapshot0/cold対象なし。両rawの更新は必要7/8に対し各1でGAP解消なし。原本34payload＋manifest/35member・116,134bytesと追加重み込み14,312,508bytesをPod外CRC/全hash/112F32有限性照合、重みと原本を保全。結果ownerはaligned13_result/README・weekly§85。回収確認に伴う既存run再起動/追加学習/追加生成0、同一条件や上限延長だけの追加試行は行わない。現不具合に新観測会は不要。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false、通常API/DB/RN/Render/Supabase/配置変更0、STRUCTURE_MAP_DELTA_NONE。GPU稼働保持/Stop等0。
+**現在の直接作業（10/28：名前付き参照の未接続CPU候補を作成、接続契約の変更案はMash判断待ち）：** Jupyterへ直接接続し、固定Cocolon ec845455/API64の15教材を投影・復元、元teacher raw完全一致15/15と未変更CMEE結果一致15/15をCPU15.120061秒で確認。新形式実rawの正式受領/保存再開や4Bの改善ではない。14不正形式を拒否、欠けたGAPは補完せずHOLD。BOOK/SHOP回答後のtargetは265/323token減だがprompt各220増、総系列減45/103のみ。SHOPは3712枠ではcontext超過し、次案は明示3584（最終実tokenizerで再確認）。新wireの明示受信・同actualraw再導出と、CPU成功時だけd431から13更新/別保存・no-grad reload/同2各1生成、最大600秒/$0.047処理按分（準備/CPU/回収/保持等別）を一つの未承認案へ具体化した。実装/追加model load・forward・学習・生成・SQL0、凍結教師/重み不変、GPU保持/Stop等0。最終/失敗CPU原本を全CRC/hash照合保全。案ownerはnamed_reference_preparation/README・weekly§86、gpu_run_authorized=false。前回aligned13の意味/本文0/2・新c7ba不採用は不変、商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false、製品source/通常API/DB/RN/Render/Supabase/配置変更0、STRUCTURE_MAP_DELTA_NONE。現不具合に新観測会は不要。
+
+
+## 2026-10-28 — 未承認の名前付き参照候補packの地図
+
+製品source/wire責務は未変更、STRUCTURE_MAP_DELTA_NONE。新private wireの採用ではなく、CPU候補と具体判断資料だけを追加。latestは全機能00/weekly§86へ戻る。
+
+| path（observation_learning/training/2026-10-26-unconnected-native/ 以下） | 責務 |
+|---|---|
+| named_reference_preparation/README.md・named13.plan.json | 新形式の差分/変更path/検証/条件付き一回13更新・2生成の未承認scope。実行許可false |
+| named_reference_preparation/named_reference_candidate.py・check_named_reference_candidate.py | 未接続strict可逆投影とCPU検査の実code。production receiverではない |
+| named_reference_preparation/wire_spec.json・candidate_targets.json | key/名前/identity表の形式案、全15投影確認と回答後2候補messages。canonical教師は不変 |
+| named_reference_preparation/cpu_result.json・source_hashes.json | CPU15/15可逆・従来結果一致/14不正拒否/欠GAP不補完/実token数・不変source |
+| named_reference_preparation/cpu_runtime_originals.zip・external_verification.json | 失敗v1/v2/最終v3・log/exit/GPU状態を含む入れ子原本。全member CRC/hash/sizeとcode bytesをPod外照合 |

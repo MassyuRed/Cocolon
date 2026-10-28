@@ -1257,3 +1257,13 @@ Mash承認c97d6794に基づき、既存4ownerのsource-derived admission/adapter
 ### 2026-10-27 — quoteモデル教示へ既存ID制約を明示
 
 APIa4b91b4のQUOTE_CANDIDATE_SCHEMAにおけるunknown_id_constraintsの1項目追補は、既存reader制約の教示であり新意味/新採用条件ではない。共通system/legacy_numeric/教師targetは不変。固定198位置の重点lossと併用した承認済みlocalized30一回は終了。30更新・新保存・112F32/3,833,856parameterの非学習再読込を完了。自由生成15/15、EOS15・strict JSON14、同CMEEの意味11/15・本文9/15（旧9意味/本文9/9、新6意味/本文2/0）。採用snapshotの別process cold-fileは11/11完全一致、失敗0。処理1524.400948秒・$0.118565按分（準備/CPU/回収/保持/保存/通信/税等別）。新937233a0は通常不採用。意味11/本文9・新6本文0で前回から本文成立は増えていない。指示とlossの効果は単独帰属しない。原本 `observation_learning/training/2026-10-26-unconnected-native/localized30_result/README.md`・最新weekly§76。意味型/wire/API/DB/RNの境界は不変、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。
+
+
+<a id="cmee-named-reference-unapproved-proposal-20261028"></a>
+## 2026-10-28 — 名前付き参照形式の未承認差分案（未接続CPUのみ）
+
+状態PREPARED_AWAITING_MASH_CONTRACT_APPROVAL。既存quote契約は変更せず、[名前付き参照の具体案](../../../observation_learning/training/2026-10-26-unconnected-native/named_reference_preparation/README.md)を別案として置く。新root v/a/q/c、key略記、モデルが明示するidentity表、q.idへのev/更新$idへのurからnative数値参照を導出する案は、既存「candidate本体/evidence_indexes/更新を変えない」のwire表現範囲を変更する。Rule18§11.3 LEVEL_3のMash判断前にAPIへ実装/新GPU試験しない。
+
+採用する場合の保持条件：actual named raw保存、明示candidate_formatのみ/自動検出・fallbackなし、新metadataは同じrawからreceipt再導出、旧receipt bytes不変、既存一意quote位置/意味/本人本文/問い/全ADD-GAPの採否不変。source-derived V3のBOOK/SHOP説明回答だけをsemantic ownerでguardしraw自己申告へ委ねない。preparationからsemantic ownerをimportしない。外部情報による意味補完なし。旧新snapshotはraw/metadataが異なるためnative意味/binding/本文/問い/更新で比較し、各同raw再読では完全一致を要求。
+
+今回CPUの15/15は投影を元teacher rawへ復元して旧receiverへ渡した同値で、新wire実受領/metadata再読/保存再開/4B品質は未確認。targetはBOOK/SHOP265/323token減、prompt各220増。SHOP3712枠はcontext超過し、案の3584も最終実tokenizer確認後だけ。一回の実装→CPU→成功時d431/13更新→save/reload→各1生成、600秒/$0.047処理按分（保持等別）を同scopeとして提案。新形式未採用・追加model/学習/生成/SQL0、商品0/正式0/3/54.50％、STRUCTURE_MAP_DELTA_NONE。

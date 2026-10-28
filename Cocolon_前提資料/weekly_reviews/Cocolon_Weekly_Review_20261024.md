@@ -3238,3 +3238,19 @@ rootが原文と実rawを全件読み、BOOKの「遅いこと自体に気づか
 処理按分$0.042023は準備/CPU/回収/保持/保存/通信/税等別。未変更CMEEの1.783156秒で採用snapshot0、cold-fileは対象なし。新c7ba419c/112F32は有限・元d431不変をPod外照合。追加重み保全先libfile_398ae281441c81918138d6bf43d3ae36 version0、14,312,508bytes。GitHub原本ZIP116,134bytesと両ZIP全CRC/34payload bytes/hashを照合、実生成本文2件をroot/読取agentで確認した。正式Product Readや一般化の成功とは扱わない。
 
 次は長いpacket内の引用・意味・更新対応を自由生成で再現できない原因から学習方法/出力分担を見直す。同じ13更新や上限延長の再試行、raw補修、reader緩和なし。新観測会は現不具合に不要。商品0/正式0/3/54.50％、候補不採用、通常配置不変。
+
+
+<a id="20261028-named-reference-cpu-and-proposal"></a>
+## 86. 10/28 — 名前付き参照の未接続CPU候補と契約変更・一回試験の未承認案
+
+**現在の直接作業（10/28：名前付き参照の未接続CPU候補を作成、接続契約の変更案はMash判断待ち）：** Jupyterへ直接接続し、固定Cocolon ec845455/API64の15教材を投影・復元、元teacher raw完全一致15/15と未変更CMEE結果一致15/15をCPU15.120061秒で確認。新形式実rawの正式受領/保存再開や4Bの改善ではない。14不正形式を拒否、欠けたGAPは補完せずHOLD。BOOK/SHOP回答後のtargetは265/323token減だがprompt各220増、総系列減45/103のみ。SHOPは3712枠ではcontext超過し、次案は明示3584（最終実tokenizerで再確認）。新wireの明示受信・同actualraw再導出と、CPU成功時だけd431から13更新/別保存・no-grad reload/同2各1生成、最大600秒/$0.047処理按分（準備/CPU/回収/保持等別）を一つの未承認案へ具体化した。実装/追加model load・forward・学習・生成・SQL0、凍結教師/重み不変、GPU保持/Stop等0。最終/失敗CPU原本を全CRC/hash照合保全。案ownerはnamed_reference_preparation/README・weekly§86、gpu_run_authorized=false。前回aligned13の意味/本文0/2・新c7ba不採用は不変、商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false、製品source/通常API/DB/RN/Render/Supabase/配置変更0、STRUCTURE_MAP_DELTA_NONE。現不具合に新観測会は不要。
+
+[全具体案・CPU原本・提案plan](../observation_learning/training/2026-10-26-unconnected-native/named_reference_preparation/README.md)。Cocolon ec845455/API64固定、既存raw/教師/学習codeの静的照合ではmask/EOS/shift/入力不一致の明白なbugなし。長いpacketでの参照と全更新生成を見直し、new wireはv/a/q/c、全identityを実出力内で明示し、quote/updateのモデル出力名からnative索引へ戻す可逆案とした。意味/問い/本文/操作/全更新は推定補完しない。新formatの明示receiver/receipt接続は未実装。
+
+CPU v1は検査側の余分なLFによるreceipt比較失敗、v2は冗長教示によるcontext超過。失敗原本を保持しv3で元raw厳密復元/identity表/重複教示削減へ修正。最終CPU15.120060921秒、15教師raw完全一致/未変更結果一致15、14不正クラス拒否。GAP削除はHOLD/model_v3_explanation_updates_not_bound。BOOK prompt4421/target2913、SHOP4585/3238、全系列7334/7823。旧target3178/3561より約8〜9％減だがprompt各220増で総減45/103tokenだけ。速度/実モデル改善/600秒完走の根拠にしない。SHOP出力3584は4585+3584=8169、最終実装messagesを実tokenizer再確認し、超過は切捨てずGPU前STOP。
+
+提案はprivate受信契約を変えるためRule18§11.3 LEVEL_3。既存quote契約/前回消費済み一回の承認を流用せず、実装4owner＋新codec/限定test・fixture/準備runner3/結果dir、実装後CPUと成功時だけ原d431からold9×1+named after2×2の13更新/別保存/112F32 no-grad reload/BOOK-SHOP各1生成を一つの判断scopeへ束ねた。max600秒/各180秒/BOOK3712-SHOP3584/$0.047処理按分（準備/CPU/回収/保持/保存/通信/税別）、retry/reader緩和/意味補完/上限延長/次run自動進行なし。CPU・実tokenizer成功後の範囲内実装詳細/hash固定だけで再承認往復は増やさない。未承認planはgpu_run_authorized=false/approval_basis=null。
+
+Pod外原本は外ZIP111,139bytes/SHA76b33aa960c9f485a498daee48edb928286d6f3125495aaf03713d1f78096f46、4payload+manifest/5member。内ZIP115,489bytes/SHAf5afdbad83539b30abbb98dbe9788f6d5ed1fa38c2417eb9adc3d71ba64921ac、13payload+manifest/14member。全CRC/hash/size、最終2codeのPod/host bytes、exit0を確認。GPU A5000/1MiB、Stop/restart/delete/管理API0。ルートroot単独書込、別文脈agentはread-onlyで新wire境界/CPU限界/上限を照合し、独立Pro/Ultraや正式商品受入れとは呼ばない。
+
+新4B改善は未成立で、前回意味/本文0/2/c7ba不採用、元d431不変・保全先も維持。凍結15/旧helper/loss/旧runner、通常app/API/DTO/DB/RN/Render/Supabase/公開/merge/deploy変更0。旧9学習を旧9回帰成功、新既知2成功を全15/新初回4/動的thread/実service-SQL/本人端末/一般化/他coreへ広げない。新観測会は現不具合には不要。全体00/観測入口/学習owner/01A map/共有設計に今回差分を同期、商品0/正式0/3/54.50％据置。
