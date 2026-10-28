@@ -53,3 +53,10 @@ Mashの新しい続行指示と新Podを対象とし、weekly§96の既存次候
 追加学習0、保存2dfdを非学習1読込、固定済みA-BOOK/B-BOOK/A-SHOP/B-SHOPの4call。A出力上限2816/B1024、context8192・greedy・各180秒/全処理600秒/$0.047、準備は別900秒。900+600秒のGPU表示単価按分は最大約$0.11667であり、保持/保存/回収/通信/税等を含む総請求上限ではない。Bはgold A条件付きFIT、部分投影なのでCMEE採用数には加算しない。raw/token IDs/EOS/時間/教師とのJSON差と全文読解で切り分ける。期限/OOM/非有限/identity不一致では停止、再試行/追加生成/学習/次run自動開始なし。現2件の完成教師はあり追加観測会不要。
 
 新規sourceはrun_auxiliary_diagnostic.py（非学習4call）、setup_auxiliary_diagnostic.py（既存4依存と固定baseの新Pod復元）、prepared_auxiliary_diagnostic.json（無効の準備原本）、auxiliary_diagnostic_cpu_check.json（静的CPU実結果）、runtime_authorized_auxiliary_diagnostic.json（今回指示に限定した新実行条件）。固定helper3は元pathから同一bytesを利用。preparedの拒否確認・CPU静的13file照合・no training AST/import成功、実tokenizer/モデル診断は準備後に行う。実行担当はCodex Work/GPT-6 root一人、補助agentは正式Pro/Ultra/human受入れではない。通常app/reader/wire/API/DB/RN/Render/Supabase差分0、STRUCTURE_MAP_DELTA_NONE、旧意味/本文0/2・商品0・正式0/3・54.50％を保持。
+
+
+### 補助4入力の実結果・閉鎖
+
+[全結果/全raw読解](auxiliary4_result_20261029/reading_review.md)。source718c029e、新Podで準備18.432730秒・実CPUtokenizer成功後、保存2dfdを1回非学習loadし4生成/更新0を完了。処理319.729259535秒/$0.0248678313按分、準備按分$0.00143365634、その他保持等別。EOS2/4・strict JSON1/4・literal教師一致0/4。BOOK A2272/EOSでも別内容/端点/時点誤対応。BOOK B1024上限で11ADD+GAP/時点quoteや関係を独立ADD/参照反復/本文未到達。SHOP A2816上限で喜びと時点/未来断片を誤対応・claim/rid増殖。SHOP B747/EOSでも余剰braceでstrict失敗、12ADD+GAP/関係や時点/否定quoteをclaim化/本人の喜びと寂しさを本文で落とす。Bはgold A条件付きでも不成立。補助出力はCMEE採用対象外、旧全文0/2を維持。
+
+保存2dfdの短課題自体の未習得へblockerを狭めた。転移だけに帰属せず、4B能力上限や未知一般化を確定しない。全20payload+manifest・70,969bytes/SHAa4faaf35c3dce1969bac0f29d6f5cfe7841c6a6d4f4e3f67e332bd5e74657783をPod外CRC/hash/size/現source/固定教材/非学習1load4call/原本不変まで照合し、[全実行原本](https://chatgpt.com/library?file_id=libfile_aea840e0b0f081918da545233ddc2fbe&account_id=personal) v0へ保全。重みは不変で旧保全先を維持。新run.jsonは実行時のまま凍結しresult_summaryがCLOSEDを所有。追加学習/生成/再試行0、GPU稼働保持/Stop等0、SQL/本番/reader/通常app変更0。primary=BLOCKER_NARROWED、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。次は同じ4教師の役割対応を学ぶ最小配分のCPU具体化、追加GPU未実行。現2件の追加観測会不要。

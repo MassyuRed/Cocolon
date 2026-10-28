@@ -3425,3 +3425,14 @@ Mashの新しい続行指示を受領。全機能原本、前提資料/作業rul
 今回は保存2dfdの固定補助A/B4行を非学習1load/4call・更新0で診断する。A2816/B1024・context8192・greedy、各180秒/全処理600秒/$0.047、別準備900秒。合計GPU単価按分最大約$0.11667、保持/保存/回収/通信/税等別。旧runの再利用ではなく今回指示に基づく新単位/新出力先。Bはgold A条件付き、補助出力は通常CMEE採用へ提出/加算しない。固定教師JSONとの全差・raw全文を読み、短課題未習得/全文転移を分ける。期限/OOM/identity不一致ではSTOP・再試行0。追加観測会不要。
 
 source/準備CPU/今回実行条件は既存staged_pair9へ保存。固定helper3と教材は同一bytes、元15/eval/旧run/旧plan不変。静的13file照合・実行無効拒否・no training AST/import成功。新Podの実tokenizer/モデルは準備後、現時点model0。Supabase metadata ACTIVE_HEALTHYをread-only確認、本人row/SQLなし。Renderのlive再照会は行わず既存記録を保持。実Codex Work/GPT-6/root単独実行、read-only補助は正式Pro/Ultra/humanではない。通常app/reader/wire/API/DTO/DB/RN/Render/Supabase/merge/deploy/lifecycle変更0、STRUCTURE_MAP_DELTA_NONE。旧意味/本人本文0/2・商品0/正式0/3/54.50％・candidate_ready=false/automatic_progression=falseを維持。
+
+
+### §97 実行結果・最終閉鎖
+
+source718c029e。新Podの固定依存/base準備18.432730221秒（按分$0.00143365634）、実CPUtokenizerで4prompt3633/5207/3785/5533・caps2816/1024/2816/1024・context8192・13boundfileを確認。保存2dfdを1回非学習load/112F32一致し、更新0・4生成を319.729259535秒/$0.0248678313処理按分で完了。CPU/回収/保持/保存/通信/税等は別、総請求ではない。OOM/時間停止/再試行0、raw/run/planは無補修。全入力/adapter不変。peak allocated10,687,232,512/reserved12,679,380,992bytes、解放後8,519,680bytes（process終了前の値）。
+
+EOS2/4・strict JSON1/4・literal教師一致0/4。A BOOK2272/EOS/JSONだがlate_awarenessに本返却後の回答段落、concern_contentのfromをreassuranceへ誤配、counterfactualのmode/時点も誤る。B BOOK1024/noEOSは教師6ADD+GAPに対して11ADD+GAP、時点quote/関係を独立ADDし、update_note.rr反復で本文未到達。A SHOP2816/noEOSは喜びに未来断片、知覚内容に時点語、関係をclaim化し同名ridを再生成。B SHOP747/EOSでも余剰braceでstrict Extra data、教師7ADD+GAPに対し12ADD+GAP、関係とextra時点/否定quoteを独立ADD・GAP根拠誤り・bind型混同、喜び/寂しさの受け取りが本文から落ちる。Bは正しいAを条件にしたFITでも失敗。ID綴り/順序のliteral差113を意味誤り数へ換算しない。補助投影を通常CMEEへ提出しておらず採用数は対象外、旧全文の意味/本文0/2は維持。
+
+全4raw/教師/user/prior/proseの全文読解は[auxiliary4_result_20261029/reading_review.md](../observation_learning/training/2026-10-26-unconnected-native/staged_pair9/auxiliary4_result_20261029/reading_review.md)。短課題自体の未習得が実測され、全文転移だけの説明を退ける。転移不足の併存/4B能力上限/未知一般化は未判定。次候補は同じ出所付き4教師でquote/claim/relation/time証拠/update対応の学習配分をCPUで具体化すること。追加学習・追加生成・枠延長/reader緩和・新観測会は行わない。現2件に教材不足の観測会不要。
+
+全実行原本70,969bytes/SHAa4faaf35c3dce1969bac0f29d6f5cfe7841c6a6d4f4e3f67e332bd5e74657783/20payload+manifestをPod外全CRC/hash/size、source/固定4行/plan/非学習counter/全入力不変で照合。Library libfile_aea840e0b0f081918da545233ddc2fbe v0へ保全。旧重みLibrary cf473…はそのまま。run.jsonのpendingを凍結しresult_summaryでCLOSED_DIAGNOSTIC_NOT_ADOPTED。primary=BLOCKER_NARROWED、商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false、STRUCTURE_MAP_DELTA_NONE。GPU保持/Stop/restart/delete/管理API0、通常app/API/DTO/DB/RN/reader/Render/Supabase/merge/deploy変更0。

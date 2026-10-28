@@ -5548,3 +5548,8 @@ STRUCTURE_MAP_DELTA_PRESENT。APIa8be7a9bのprivate4source＋新test1：preparat
 ## 2026-10-29 保存2dfdの補助4入力非学習診断 — weekly§97
 
 既存staged_pair9内の追加5file: run_auxiliary_diagnostic.py（保存重み1load/固定4call、学習0・raw/教師差）、setup_auxiliary_diagnostic.py（新Podに既存固定依存/baseだけ復元、model0）、prepared_auxiliary_diagnostic.json（無効準備原本）、auxiliary_diagnostic_cpu_check.json（13file/拒否/AST実CPU）、runtime_authorized_auxiliary_diagnostic.json（今回続行指示の新単位・新Pod・上限）。旧実験21file/原15/eval/CMEE責務は不変、STRUCTURE_MAP_DELTA_NONE。新Pod vgkm402msgroiu/A5000、別準備900秒/処理600秒・学習0/生成4上限。旧2dfd不採用・意味/本文0/2を維持し、部分課題の成功を採用へ加算しない。
+
+
+### 10/29 補助診断の実結果file地図
+
+同staged_pair9/auxiliary4_result_20261029へ、run.json、reloaded_tensors.json、AUX-A/B-FT-BOOK/SHOP-AFTER-ANSWER.jsonl（全raw4）、setup_report/runtime_cpu_check/runtime_cpu.log、diagnostic_launch/diagnostic.log、archive_manifest、external_verification、result_summary、reading_reviewを追加。元run/plan/教材は不変。非学習1load/4call・319.729秒/$0.0248678・EOS2/strict1/教師literal0、短課題自体の役割/更新混同を実測。Bはgold A条件付き、CMEE採用へ加算しない。全20payload原本Library libfile_aea840e0b0f081918da545233ddc2fbe v0。STRUCTURE_MAP_DELTA_NONE、GPU保持/追加model0、旧全文意味/本文0/2を維持。
