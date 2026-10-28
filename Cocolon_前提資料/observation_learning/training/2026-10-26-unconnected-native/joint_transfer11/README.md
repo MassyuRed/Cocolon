@@ -14,3 +14,6 @@ run_transfer11.pyは学習/別保存/非学習reload/固定11生成、prepare_tr
 
 
 §99 CPU初回は旧9の受領引数誤りpreparation_candidate_format_invalidで終了（約13.94秒、model/forward/生成/学習0）。既存receiverはquote形式でNone/defaultだけを受け、QUOTE_CANDIDATE_SCHEMAはmessage builder用だった。旧9受領1箇所だけNoneへ修正し、full2 named/message builder/reader/教師は不変。旧source ab181b3d・plan・実CPU logを保全し、新v2packでCPUを一度再確認する。二回目の不成立では追加修正/モデル開始を行わない。
+
+
+§99実CPU v2は14.661742234秒・model/forward/生成/SQL0。11順66,974token、全target/EOS/mask、評価11promptの元経路同一、現API7b9の正解教師意味/本文11/11を確認。1835003bytesのcpu_check.json原本はcpu_check.index.json＋15partを順連結して元SHAを復元する（今回runtime pack/保存archiveには元fileも保持）。runtime_authorized_plan.jsonが今回実行条件、無効準備planは不変。source815692fcから同Podで11更新/別保存/no-grad reload/11生成を一回開始。初回CPU引数失敗log/exitはfailed_cpu_v1.log/.exitへ保全し、モデル再試行ではない。

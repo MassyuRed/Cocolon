@@ -5581,3 +5581,6 @@ auxiliary_fit8の実CPU原本cpu_check.json/cpu_preparation.log/.exitとruntime_
 ## 2026-10-29 weekly§99 — joint_transfer11
 
 新folder observation_learning/training/2026-10-26-unconnected-native/joint_transfer11 は、run_transfer11.py（afaa開始の補助/全文/旧anchor11更新・別保存/非学習reload/全文2＋旧9の11生成）、prepare_transfer11.py（全labels/EOS/原11promptと正解11のCPU対照）、consume_transfer11.py（全文named/旧9quoteの原形式を選び無補修受領・既存Engine・採用済だけ別process cold）、transfer11.plan.json（無効準備原本）、static_cpu_check.json（入力/実行無効の静的検査）、README.md（今回scope/費用/開始重み/旧9before欠測）を所有する。新商品責務/route/wire/reader/DB/RN変更なし、STRUCTURE_MAP_DELTA_NONE。全体00/観測入口/weekly§99へ戻る。
+
+
+§99実CPU記録：joint_transfer11/cpu_check_summary.jsonがCPU14.661742秒/66,974token/教師意味・本文11/11/11prompt同一の索引。完全原本1,835,003bytesはcpu_check.index.json＋15partを順連結してSHA検証。runtime_authorized_plan.json、cpu_preparation.log/.exit、failed_cpu_v1.log/.exitは成功CPU/初回引数失敗/今回条件の別原本。source815692fcから11更新/11生成一回を開始、旧planは無効のまま。STRUCTURE_MAP_DELTA_NONE。
