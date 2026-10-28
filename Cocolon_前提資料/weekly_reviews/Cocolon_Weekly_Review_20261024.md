@@ -3447,3 +3447,8 @@ A5000/$0.28/h、新Pod vgkm402msgroiuを保持。最大1500秒/$0.117処理按�
 学習前に実CPUで全labels/EOS/8順/不変入力、現行API実読込、元全文prompt同一、正解教師2件の意味/本文と保存raw2件を対照する。保存原本に現行5fileがないという進行説明は訂正済み。実bytesは現7b9と一致し、古かったのは復元目録のAPI版/容量情報であった。130原本のSHAは不変、17容量/欠落metadataと版だけを新復元目録へ補正。省略legacy/frozen等12は同じGitblobから復元し、旧原本は変更しない。
 
 sourceは既存学習rootの新auxiliary_fit8内に限定。通常app/型/wire/reader/API/DTO/DB/RN/Render/Supabase/merge/deploy/lifecycle変更0、STRUCTURE_MAP_DELTA_NONE。実Codex Work/GPT-6/root単独実行、補助agentは正式Pro/Ultra/humanではない。商品0/正式0/3/54.50％据置。現2件の新観測会不要。
+
+
+### §98 実CPU準備・一回の開始
+
+source a6198b6dbf34a810264fd42e42d69626e75709f7の新3source/準備plan/静的CPU/130復元目録/案内を含む11fileをGitHubから全件読み戻し照合後に開始。実Pod CPU12.855981432秒・model/forward/生成/SQL0。4補助の全target/EOS/labels/prompt mask、8順48,642token、全文2prompt同一、現行API5hashと実module位置を確認。正解教師の意味/本文2/2、保存2dfdの元全文raw再判定は0/2（BOOK model_evidence_collection_invalid、SHOP semantic_receipt_not_validated）。これは新モデル生成ではない。実CPU原本と今回runtime条件は新folderへ保存し、準備plan原本は無効のまま保持。今回user指示に基づき保存2dfdから8更新/別保存/no-grad reload/固定6生成を一回開始。

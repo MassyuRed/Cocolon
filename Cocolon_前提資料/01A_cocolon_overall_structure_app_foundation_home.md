@@ -5558,3 +5558,6 @@ STRUCTURE_MAP_DELTA_PRESENT。APIa8be7a9bのprivate4source＋新test1：preparat
 ## 2026-10-29 補助4教師×2周の8更新 — weekly§98
 
 新observation_learning/training/2026-10-26-unconnected-native/auxiliary_fit8/: run_fit8.py（8更新/別保存/no-grad reload/6生成）、prepare_fit8.py（実token/labelsと現CMEE教師2/保存raw2対照）、consume_fit8.py（真の6callcounterから全文2だけ未変更CMEEへ）、fit8.plan.json（無効準備原本）、static_cpu_check.json、cmee_restore_payload.json（130原本のSHA不変/復元metadata17補正）、README。既存教材/評価/CMEE責務不変、STRUCTURE_MAP_DELTA_NONE。原2dfd保持、旧9回帰未検証、通常有効化なし。
+
+
+auxiliary_fit8の実CPU原本cpu_check.json/cpu_preparation.log/.exitとruntime_authorized_plan.jsonを追加。CPU12.855981秒/model0・8順48,642token・正解教師意味/本文2/2・保存raw同API再判定0/2。source a6198b6から今回8更新/6生成の一回を開始、旧planは不変。STRUCTURE_MAP_DELTA_NONE。

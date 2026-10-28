@@ -18,3 +18,8 @@ Mashの新しい「4B学習＋CMEE接続を続けて」に基づく新単位。�
 元archiveのAPI実ファイル5件は既に現7b9と同一だった。古かったのは目録のsource_api_refと容量情報であり、readerの古さ・過去出力の不正を意味しない。省略されていたlegacy/frozen等12原本は同じGit blob/SHAから復元。新Podで130原本＋最新API5hash/module実位置を照合してから、CPU教師2件と保存2dfd原出力2件を確認する。原目録・旧runは変更しない。
 
 実行担当はCodex Work/GPT-6 root一人。独立補助は正式Pro/Ultra/human受入れではない。STRUCTURE_MAP_DELTA_NONE（実験順/保存物だけで商品責任・wire・reader不変）。商品0/正式0/3/54.50％・candidate_ready=false/automatic_progression=false。
+
+
+## 実CPU確認と開始
+
+新Podの実CPU確認は12.855981432秒/model0/forward0/生成0/SQL0。8順48,642token、4行の全target/EOS/prompt mask、全文2prompt同一を確認。現行API7b9実module位置/5hash/130原本を照合し、正解教師2件は意味/本文2/2。保存2dfdの元全文raw2を同APIへ再読して意味/本文0/2（BOOK model_evidence_collection_invalid、SHOP semantic_receipt_not_validated）を確認。教師対照とモデル結果を混ぜない。実CPU原本はcpu_check.json、cpu_preparation.log/.exit、今回条件はruntime_authorized_plan.json。fit8.plan.jsonは無効の準備原本のまま。source a6198b6dbf34a810264fd42e42d69626e75709f7から一回の8更新/保存/再読込/6生成を開始。

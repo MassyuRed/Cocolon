@@ -2,7 +2,7 @@
 
 **GPU実確認の最終記録（2026-10-29）：** 新Pod vgkm402msgroiu/short_gold_bonobo、Jupyter直接接続、NVIDIA RTX A5000/$0.28/h・torch2.8.0+cu128、固定依存/base復元済み、GPU保持/Stop等0。
 
-**現在の直接作業（weekly§98）：** §97の非学習4課題はEOS2/strict1/literal0で短課題内role/update混同を実測し閉鎖、旧全文意味/本文0/2。新しい続行指示に基づき、同じ4教師×2周8更新・保存2dfd開始/別保存/no-grad reload/補助4+元全文2の6生成を準備。元15/eval/教師4/指示/reader不変、最大1500秒/$0.117処理按分・再試行0。全文2だけ既存CMEEへ、旧9回帰未検証。現2件の追加観測会不要。全体現在地と[auxiliary_fit8](training/2026-10-26-unconnected-native/auxiliary_fit8/README.md)へ戻る。Windows/Mac未選定・商品0/正式0/3/54.50％を維持。
+**現在の直接作業（weekly§98）：** §97の非学習4課題はEOS2/strict1/literal0で短課題内role/update混同を実測し閉鎖、旧全文意味/本文0/2。新しい続行指示に基づき、同じ4教師×2周8更新・保存2dfd開始/別保存/no-grad reload/補助4+元全文2の6生成を実行中。実CPU12.855981秒で正解教師2/2・保存raw0/2と入力不変を確認、source a6198b6から開始。元15/eval/教師4/指示/reader不変、最大1500秒/$0.117処理按分・再試行0。全文2だけ既存CMEEへ、旧9回帰未検証。現2件の追加観測会不要。全体現在地と[auxiliary_fit8](training/2026-10-26-unconnected-native/auxiliary_fit8/README.md)へ戻る。Windows/Mac未選定・商品0/正式0/3/54.50％を維持。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 
