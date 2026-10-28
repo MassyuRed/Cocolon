@@ -1,0 +1,13 @@
+{
+  "archive_bytes": 459970,
+  "archive_sha256": "616ae24c961742b09219642fcf80977852867730dc98b98e44fd8a76e65406c2",
+  "payloads": 32,
+  "members": 33,
+  "crc_and_all_hashes_verified": true,
+  "api5_pod_host_github_bytes_equal": true,
+  "api_commit": "a8be7a9bceed35a9f3cb843f22de05bbd5bc6e18",
+  "pytest_final_passed": 347,
+  "pytest_failures": 0,
+  "pytest_skipped": 0,
+  "sql_tests_deselected": 12
+}

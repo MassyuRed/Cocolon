@@ -3254,3 +3254,17 @@ CPU v1は検査側の余分なLFによるreceipt比較失敗、v2は冗長教示
 Pod外原本は外ZIP111,139bytes/SHA76b33aa960c9f485a498daee48edb928286d6f3125495aaf03713d1f78096f46、4payload+manifest/5member。内ZIP115,489bytes/SHAf5afdbad83539b30abbb98dbe9788f6d5ed1fa38c2417eb9adc3d71ba64921ac、13payload+manifest/14member。全CRC/hash/size、最終2codeのPod/host bytes、exit0を確認。GPU A5000/1MiB、Stop/restart/delete/管理API0。ルートroot単独書込、別文脈agentはread-onlyで新wire境界/CPU限界/上限を照合し、独立Pro/Ultraや正式商品受入れとは呼ばない。
 
 新4B改善は未成立で、前回意味/本文0/2/c7ba不採用、元d431不変・保全先も維持。凍結15/旧helper/loss/旧runner、通常app/API/DTO/DB/RN/Render/Supabase/公開/merge/deploy変更0。旧9学習を旧9回帰成功、新既知2成功を全15/新初回4/動的thread/実service-SQL/本人端末/一般化/他coreへ広げない。新観測会は現不具合には不要。全体00/観測入口/学習owner/01A map/共有設計に今回差分を同期、商品0/正式0/3/54.50％据置。
+
+
+<a id="20261028-named-reference-implementation-and-once"></a>
+## 87. 10/28 — named接続・CPU成功、Mash承認の一回13更新/保存再読込/2生成
+
+**現在の直接作業（10/28：Mash承認後の名前付き参照接続とCPU確認が完了、承認済み一回GPUの実行前）：** APIa8be7a9bのprivate4source＋新test1へ明示named形式を接続。実raw保持、同raw/formatからreceipt再導出、source由来V3のBOOK/SHOP説明回答限定、意味/本文readerと旧形式は保持。最終CPU347成功/失敗0/skip0（SQL12対象外）、旧API64の15receipt/保存snapshot/full outcome完全一致、新named回答後2件のnative意味/本文/全7・8更新同値と別process cold2一致。最終tokenはBOOK prompt4422/target2913/cap3712=8134、SHOP4586/3238/cap3584=8170（context8192、切捨て0）。CPU準備43.875633秒、model load/forward/学習/生成/SQL0、凍結15/重み不変。CPU原本32payload＋manifest/33member/459,970bytesを全CRC/hash/source5同一照合保全。具体案67910d91へMashの「進めていいよ」を受領し、新planは一回だけd431から13更新/別保存・112F32 no-grad reload/各1生成、最大600秒/$0.047処理按分（準備/CPU/回収/保持等別）へ固定した。結果ownerはnamed_reference_preparation/execution/README・weekly§87。現在GPU試行前で追加学習/生成0、前回aligned13の意味/本文0/2・c7ba不採用は不変。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false、通常API/DB/RN/Render/Supabase/配置変更0、STRUCTURE_MAP_DELTA_PRESENT。GPU保持/Stop等0、新観測会は現不具合に不要。
+
+Mashは具体案67910d91に対し「新形式の接続実装・CPU検証と、成功時の13更新→保存再読込→BOOK／SHOP各1生成…→進めていいよ。」と明示承認した。追加の承認往復は増やさず、scope内の最小実装をAPIa8be7a9bへ反映し5file全文/blob/変更集合を照合。新private codec＋preparation/model source/semantic ownerの4sourceと新test1のみ。旧肯定/否定test/fixture不変、旧quote位置・意味・本人本文reader不変。source由来BOOK/SHOP説明回答のみ/format明示/同actualraw保持・再導出/非補完を実装した。
+
+CPU初回346成功/12対象外後、empty quoteの構文拒否を明記する1条件と新検査1を加え、最終347成功/FAIL0/SKIP0、pytest20.122433秒。旧byte比較を新実装の自己比較へ依存せず、旧API64別processから15baselineを作り、新APIの旧default receipt/snapshot/fulloutcome15を完全比較した。新named2はactualrawから受領、candidate_json/native意味/binding/本人本文/問い/全7・8更新を元と同値確認し別process cold2完全一致。準備CPU43.875633秒、model load/forward/学習/生成/SQL0、CUDA未初期化。最終promptは候補から各+1のBOOK4422/SHOP4586、target2913/3238、cap3712/3584で8134/8170、切捨て0。ほか13prompt/target不変、canonical15/旧helper/loss不変。
+
+CPU ZIP459970bytes/SHA616ae24c961742b09219642fcf80977852867730dc98b98e44fd8a76e65406c2、32payload＋manifest/33member。全CRC/hash/sizeとAPI5fileのPod/host/GitHub bytesを照合。実行packは [execution/README](../observation_learning/training/2026-10-26-unconnected-native/named_reference_preparation/execution/README.md)。旧未承認proposalと失敗前CPUcode/logを凍結保持し、新planにだけ今回の承認・API・source/hashを束縛した。root単独書込/実行、別文脈agentはread-only照合であり、独立Pro/Ultra・human Product Readとは呼ばない。
+
+GPUはまだ実行前。次の一回は原d431/112F32、old9各1＋named after2各2の13、新AdamW/LR1e-5/decay0/clip1/seed20261024、旧9CE/新2既存adaptive15/gamma2、全assistant/EOS・prompt除外。別save→112/no-grad reload→BOOK/SHOP各1のみ、before0、600秒（外590+kill10）/各180秒/処理按分$0.047上限（準備/CPU/回収/保持/保存/通信/税別）。retry/reader緩和/意味補完/上限延長/新run自動進行なし。GPU保持、通常app/DB/RN/Render/Supabase/公開/merge/deploy変更0。旧9学習を旧9回帰、新既知2を全15/新初回4/動的thread/実service-SQL/本人端末/一般化/他coreへ拡大しない。前回aligned13の0/2とc7ba不採用は維持、商品0/正式0/3/54.50％。

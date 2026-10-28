@@ -1901,3 +1901,13 @@ API64c6cb1aのmodel_candidate_source.pyはquote branchのモデル向けpriorコ
 ### 2026-10-27 — prior座標除去の非学習2件診断・閉鎖結果
 
 入力API64c6cb1a/reader APIa4b91b4で保存d431の112F32を1回非学習load、学習0・BOOK/SHOP回答後各1生成。EOS2/strict2、SHOPの重複キー・数値座標・改変引用は消えたが意味/本文0/2。BOOKはINVALID_EVIDENCE/REJECT、SHOPはCANDIDATE_UNREVIEWED後UNSUPPORTED/model_evidence_out_of_scope。採用snapshot0でcold-file対象なし。根拠/必要7・8更新/本人向け本文は未達で、旧9回帰/新初回4/全15新評価ではない。処理235.326689秒/$0.018303按分、他費用別。全15payload＋manifestの原本を保全し、d431不変/通常不採用で閉鎖。原本prior_quote_probe2_result/README・weekly§80。STRUCTURE_MAP_DELTA_NONE（責務/意味型/wire/reader/通常経路不変）、商品0/正式0/3/54.50％、GPU保持、追加試行へ自動進行0。
+
+
+<a id="cmee-named-reference-implemented-20261028"></a>
+## 2026-10-28 — Mash承認後named形式のprivate接続・CPU完了（GPU前）
+
+[具体scopeとactual pack](../observation_learning/training/2026-10-26-unconnected-native/named_reference_preparation/execution/README.md)。起案67910d91に対するMashの明示承認後、APIa8be7a9bのprivate4owner＋新test1へ実装。cocolon.cmee.named_reference_candidate.v1は明示candidate_formatだけ、actualrawを保持、出力内のq.id/update$idと明示identity表をnative索引へ解決する。推測/欠落意味補完なし。既存quote契約のwire表現差分は今回の承認範囲に限定され、旧default/旧receipt bytes・native意味/本文/問い/全更新の採否は維持する。
+
+preparationはstrict形式/一意quote位置まで、semantic ownerは既存source由来native.family/stageでBOOK_CONCERN_V3/SHOP_DISTANCE_V3のAFTER_EXPLANATIONだけを認め、raw自己申告へ資格を委ねない。preparation→semanticの循環なし。_receiptは新metadataのformatを同actualrawへ渡し同一receiptを再導出。別profile/core・空/重複/不明参照・不正JSONを拒否し、timeout/length優先・自動fallbackなし。新型/保存schema/公開API/DTO/DB/RN変更0。
+
+最終CPU347成功/失敗・skip0、SQL12対象外。旧API64の15receipt/snapshot/fulloutcome完全一致、新2はnamed実raw→同native意味/本文/7・8更新→別process保存再読一致。新旧wire間のreceipt-linked identity差を隠さず各同rawの完全再読を確認。BOOK4422+3712=8134、SHOP4586+3584=8170/8192。実4B改善はまだ未確認、GPU一回は実行前、商品0/正式0/3/54.50％、STRUCTURE_MAP_DELTA_PRESENT。

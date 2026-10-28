@@ -1267,3 +1267,13 @@ APIa4b91b4のQUOTE_CANDIDATE_SCHEMAにおけるunknown_id_constraintsの1項目�
 採用する場合の保持条件：actual named raw保存、明示candidate_formatのみ/自動検出・fallbackなし、新metadataは同じrawからreceipt再導出、旧receipt bytes不変、既存一意quote位置/意味/本人本文/問い/全ADD-GAPの採否不変。source-derived V3のBOOK/SHOP説明回答だけをsemantic ownerでguardしraw自己申告へ委ねない。preparationからsemantic ownerをimportしない。外部情報による意味補完なし。旧新snapshotはraw/metadataが異なるためnative意味/binding/本文/問い/更新で比較し、各同raw再読では完全一致を要求。
 
 今回CPUの15/15は投影を元teacher rawへ復元して旧receiverへ渡した同値で、新wire実受領/metadata再読/保存再開/4B品質は未確認。targetはBOOK/SHOP265/323token減、prompt各220増。SHOP3712枠はcontext超過し、案の3584も最終実tokenizer確認後だけ。一回の実装→CPU→成功時d431/13更新→save/reload→各1生成、600秒/$0.047処理按分（保持等別）を同scopeとして提案。新形式未採用・追加model/学習/生成/SQL0、商品0/正式0/3/54.50％、STRUCTURE_MAP_DELTA_NONE。
+
+
+<a id="cmee-named-reference-implemented-20261028"></a>
+## 2026-10-28 — Mash承認後named形式のprivate接続・CPU完了（GPU前）
+
+[具体scopeとactual pack](../../../observation_learning/training/2026-10-26-unconnected-native/named_reference_preparation/execution/README.md)。起案67910d91に対するMashの明示承認後、APIa8be7a9bのprivate4owner＋新test1へ実装。cocolon.cmee.named_reference_candidate.v1は明示candidate_formatだけ、actualrawを保持、出力内のq.id/update$idと明示identity表をnative索引へ解決する。推測/欠落意味補完なし。既存quote契約のwire表現差分は今回の承認範囲に限定され、旧default/旧receipt bytes・native意味/本文/問い/全更新の採否は維持する。
+
+preparationはstrict形式/一意quote位置まで、semantic ownerは既存source由来native.family/stageでBOOK_CONCERN_V3/SHOP_DISTANCE_V3のAFTER_EXPLANATIONだけを認め、raw自己申告へ資格を委ねない。preparation→semanticの循環なし。_receiptは新metadataのformatを同actualrawへ渡し同一receiptを再導出。別profile/core・空/重複/不明参照・不正JSONを拒否し、timeout/length優先・自動fallbackなし。新型/保存schema/公開API/DTO/DB/RN変更0。
+
+最終CPU347成功/失敗・skip0、SQL12対象外。旧API64の15receipt/snapshot/fulloutcome完全一致、新2はnamed実raw→同native意味/本文/7・8更新→別process保存再読一致。新旧wire間のreceipt-linked identity差を隠さず各同rawの完全再読を確認。BOOK4422+3712=8134、SHOP4586+3584=8170/8192。実4B改善はまだ未確認、GPU一回は実行前、商品0/正式0/3/54.50％、STRUCTURE_MAP_DELTA_PRESENT。

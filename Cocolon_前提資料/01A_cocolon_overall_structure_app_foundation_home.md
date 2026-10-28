@@ -5366,7 +5366,7 @@ family：`observation_learning/training/2026-10-26-unconnected-native/update_obl
 | aligned13_result/reading_review.md | 原source/教師と実raw/本文の全件読解。静的所見を実CMEE拒否と分離 |
 | aligned13_result/runtime_originals.zip・external_verification.json | 全34payload＋manifest/35member、116,134bytes。元bytes/CRC/hashと重み込み一式112F32有限性をPod外照合。追加重み一式はlibfile_398ae281441c81918138d6bf43d3ae36 version0へ保全 |
 
-**現在の直接作業（10/28：名前付き参照の未接続CPU候補を作成、接続契約の変更案はMash判断待ち）：** Jupyterへ直接接続し、固定Cocolon ec845455/API64の15教材を投影・復元、元teacher raw完全一致15/15と未変更CMEE結果一致15/15をCPU15.120061秒で確認。新形式実rawの正式受領/保存再開や4Bの改善ではない。14不正形式を拒否、欠けたGAPは補完せずHOLD。BOOK/SHOP回答後のtargetは265/323token減だがprompt各220増、総系列減45/103のみ。SHOPは3712枠ではcontext超過し、次案は明示3584（最終実tokenizerで再確認）。新wireの明示受信・同actualraw再導出と、CPU成功時だけd431から13更新/別保存・no-grad reload/同2各1生成、最大600秒/$0.047処理按分（準備/CPU/回収/保持等別）を一つの未承認案へ具体化した。実装/追加model load・forward・学習・生成・SQL0、凍結教師/重み不変、GPU保持/Stop等0。最終/失敗CPU原本を全CRC/hash照合保全。案ownerはnamed_reference_preparation/README・weekly§86、gpu_run_authorized=false。前回aligned13の意味/本文0/2・新c7ba不採用は不変、商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false、製品source/通常API/DB/RN/Render/Supabase/配置変更0、STRUCTURE_MAP_DELTA_NONE。現不具合に新観測会は不要。
+**現在の直接作業（10/28：Mash承認後の名前付き参照接続とCPU確認が完了、承認済み一回GPUの実行前）：** APIa8be7a9bのprivate4source＋新test1へ明示named形式を接続。実raw保持、同raw/formatからreceipt再導出、source由来V3のBOOK/SHOP説明回答限定、意味/本文readerと旧形式は保持。最終CPU347成功/失敗0/skip0（SQL12対象外）、旧API64の15receipt/保存snapshot/full outcome完全一致、新named回答後2件のnative意味/本文/全7・8更新同値と別process cold2一致。最終tokenはBOOK prompt4422/target2913/cap3712=8134、SHOP4586/3238/cap3584=8170（context8192、切捨て0）。CPU準備43.875633秒、model load/forward/学習/生成/SQL0、凍結15/重み不変。CPU原本32payload＋manifest/33member/459,970bytesを全CRC/hash/source5同一照合保全。具体案67910d91へMashの「進めていいよ」を受領し、新planは一回だけd431から13更新/別保存・112F32 no-grad reload/各1生成、最大600秒/$0.047処理按分（準備/CPU/回収/保持等別）へ固定した。結果ownerはnamed_reference_preparation/execution/README・weekly§87。現在GPU試行前で追加学習/生成0、前回aligned13の意味/本文0/2・c7ba不採用は不変。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false、通常API/DB/RN/Render/Supabase/配置変更0、STRUCTURE_MAP_DELTA_PRESENT。GPU保持/Stop等0、新観測会は現不具合に不要。
 
 
 ## 2026-10-28 — 未承認の名前付き参照候補packの地図
@@ -5380,3 +5380,16 @@ family：`observation_learning/training/2026-10-26-unconnected-native/update_obl
 | named_reference_preparation/wire_spec.json・candidate_targets.json | key/名前/identity表の形式案、全15投影確認と回答後2候補messages。canonical教師は不変 |
 | named_reference_preparation/cpu_result.json・source_hashes.json | CPU15/15可逆・従来結果一致/14不正拒否/欠GAP不補完/実token数・不変source |
 | named_reference_preparation/cpu_runtime_originals.zip・external_verification.json | 失敗v1/v2/最終v3・log/exit/GPU状態を含む入れ子原本。全member CRC/hash/sizeとcode bytesをPod外照合 |
+
+
+## 2026-10-28 — 承認後named形式接続と実行packの地図
+
+STRUCTURE_MAP_DELTA_PRESENT。APIa8be7a9bのprivate4source＋新test1：preparationの明示format受領/実raw保持、model_candidate_sourceの明示offline教示、emlis_semantic_admissionのsource由来BOOK/SHOP回答後guard、named_reference_wire.pyのstrict名前参照→既存native。型追加0、旧意味/本文/quote一意位置reader・通常API/DB/RN接続は不変。
+
+| path（observation_learning/training/2026-10-26-unconnected-native/named_reference_preparation/ 以下） | 責務 |
+|---|---|
+| execution/README.md・named13.plan.json・api_source_manifest.json | Mash具体承認、CPU成功後の一回13更新/after2とAPI commit/source・時間/費用/STOPの固定 |
+| execution/run_named13.py・prepare_named13.py・consume_named13.py | 有限学習/save/no-grad reload、旧15完全比較/new2実受領とcold、実raw無修正の新receiver採否 |
+| execution/adaptive_loss.py・teacher_projection.py・run_cpu_tests.py | 既存loss/未採用教師投影・SQLを除いた限定CPU検証。canonical教師不変 |
+| execution/actual_cpu_check.json・pytest_summary.json・pytest_results.xml | 最終347成功/SQL12対象外、旧15完全一致/新2全意味・本文・更新/cold・実token数 |
+| execution/cpu_originals.zip・external_verification.json | 全32payload＋manifest/33member、459970bytes、旧版baseline/new train/eval/全CPU実原本と失敗前code/logを保全、全CRC/hash/source5一致 |
