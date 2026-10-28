@@ -5366,7 +5366,7 @@ family：`observation_learning/training/2026-10-26-unconnected-native/update_obl
 | aligned13_result/reading_review.md | 原source/教師と実raw/本文の全件読解。静的所見を実CMEE拒否と分離 |
 | aligned13_result/runtime_originals.zip・external_verification.json | 全34payload＋manifest/35member、116,134bytes。元bytes/CRC/hashと重み込み一式112F32有限性をPod外照合。追加重み一式はlibfile_398ae281441c81918138d6bf43d3ae36 version0へ保全 |
 
-**現在の直接作業（10/28：新継続指示に基づくnamed9、CPU成功・一回GPU実行前）：** 前回named13は13更新/保存/112F32 no-grad reload/生成2を完了したが両TOKEN_LIMIT→REJECT、意味/本文0/2・284f通常不採用で閉鎖済み。今回の新しい「4B学習＋CMEE接続を続けて」に基づき、その保存284fの別コピーから新AdamW/LR5e-5・BOOK/SHOP各3と旧chair初回/訂正・daily代表各1の9更新、別保存/112再読込/BOOK・SHOP各1だけの新一回へ進む。同APIa8be7a9b・今回prompt/target変更0、全15の学習/評価bytes・実messages/token/EOS/mask/context一致。CPU6.691308秒/model load・forward・学習・生成・SQL0、112F32有限・元284f/d431/source不変。CPU347/旧15完全一致/合成named2 coldは前回証拠のhash照合再利用で再実施ではない。新planは実source/CPUへ束縛し、前回承認・残枠を再使用しない。600秒（外590+kill10）/各180秒/BOOK3712・SHOP3584/$0.047処理按分上限、準備/CPU/回収/保持/保存/通信/税別。系列長二乗和は前回とほぼ同じで時間短縮/完走を保証しない。新API/契約/teacher/reader変更・上限延長・retry・次run自動開始なし。原本named_reference9_preparation/README・weekly§88。商品0/正式0/3/54.50％・candidate_ready=false/automatic_progression=false。STRUCTURE_MAP_DELTA_NONE、GPU稼働保持/Stop等0、新観測会は現不具合に不要。
+**現在の直接作業（10/28：新継続指示のnamed9一回を終了、意味/本文0/2・新重み不採用）：** sourcebc8d3c47/APIa8be7a9b、保存284f別コピーからLR5e-5/named2各3＋旧3各1の9更新、別保存9ba8dccb/112F32・3,833,856parameter完全一致no-grad reload、BOOK/SHOP各1生成を537.575494秒/$0.041811処理按分で完了（準備/CPU/回収/保持/保存/通信/税等別）。BOOKは3712token/EOSなしでTOKEN_LIMIT、SHOPは3014token/EOSあり/通常JSON閉鎖だがINVALID_FORMAT、両REJECT/semantic_receipt_not_validated、意味/本人本文0/2・採用snapshot0/cold対象なし。SHOPの11claim/6relation/3本文欄と反復解消は限定された完結性の前進だが、v入れ子・旧新表記/数値参照/引用帰属不正、全8更新中1だけ、本人知覚を事実化する本文が残る。BOOKは元意味消失/role誤割当/update_note反復/全7更新と本文未到達。全raw/source/prior/教師/本文を全文照合、補修0。元284f/d431/source不変、新9ba8通常不採用。実原本108328bytes/24payload＋manifest、重み込み14374039bytes/28payload＋manifestを全CRC/hash/shape/112F32有限性照合し、Library libfile_52309bdfc88881918095f167afe8f12d version0へ保全。今回CPU6.691308秒/model0、347/旧15完全一致/合成cold2は前回証拠再利用で再実施ではない。原本named_reference9_result/README・weekly§88。この新一回も消費済み、retry/上限延長/reader緩和/次run自動開始なし。商品0/正式0/3/54.50％・candidate_ready=false/automatic_progression=false、STRUCTURE_MAP_DELTA_NONE。通常app/API/DB/RN/Render/Supabase/配置変更0、GPU稼働保持/Stop等0、新観測会は現不具合に不要。
 
 
 ## 2026-10-28 — 未承認の名前付き参照候補packの地図
@@ -5417,4 +5417,10 @@ STRUCTURE_MAP_DELTA_PRESENT。APIa8be7a9bのprivate4source＋新test1：preparat
 | named_reference9_preparation/run_named9.py・prepare_named9.py・consume_named9.py・adaptive_loss.py | 既存同API/教師/reader、CPU全15不変照合、固定9・112F32再読込と実raw採否。元284f/d431保存 |
 | named_reference9_preparation/actual_cpu_check.json・api_source_manifest.json・cpu_originals.zip・external_verification.json | CPU6.691308秒/model0、前回347/coldは再利用、10payload原本の全hash照合 |
 
-GPU実行前。前回named_reference_resultは閉鎖・通常不採用の履歴を維持し旧承認を再利用しない。最新weekly§88を参照。
+この新一回は実行・回収まで終了。前回named_reference_resultと今回named_reference9_preparationの固定点は履歴を維持し承認枠を再利用しない。最新weekly§88を参照。
+
+| 追加された結果path（同じ学習root内） | 責任 |
+|---|---|
+| named_reference9_result/README.md・result_summary.json・reading_review.md | 9更新/save/112 no-grad reload/2生成の閉鎖、SHOP完結と不採用を区別、全raw/本文読解 |
+| named_reference9_result/run/*・cmee/diagnosis.json | 実9学習行・112load/reload・原raw2・TOKEN_LIMIT/INVALID_FORMAT→REJECT、採用snapshot0 |
+| named_reference9_result/runtime_originals.zip・external_verification.json・weight_verification.json・export_named9.py・verify_archives.py | 108328bytes/24payload原本、Pod外全hash/112F32同形状/有限性、追加重み14374039bytesはLibrary libfile_52309bdfc88881918095f167afe8f12d v0 |
