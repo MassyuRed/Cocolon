@@ -1,6 +1,17 @@
 # 2026-10-28 — 更新定義を本文参照より先にする一回
 
-状態：CPU_READY_GPU_NOT_STARTED。今回のMashの「4B学習＋CMEE接続を進めて」「Jupyterへ直接接続」に結び付く新unit。旧named_output_contract9等は閉鎖・消費済みのまま。実環境はCodex Work/GPT-6、root華恋が単独writer/executor、別文脈read-only補助は正式Pro/Ultra/human受入れを代替しない。
+状態：CLOSED_NOT_ADOPTED_NO_RETRY。今回のMashの「4B学習＋CMEE接続を進めて」「Jupyterへ直接接続」に結び付く新unit。旧named_output_contract9等は閉鎖・消費済みのまま。実環境はCodex Work/GPT-6、root華恋が単独writer/executor、別文脈read-only補助は正式Pro/Ultra/human受入れを代替しない。
+
+
+## 最終結果・今回一回の閉鎖
+
+source d5fb789d164c8788b8c941a37178a0d10126d8e2/API7b9ee073で新一回を実施。GPUexit0、9更新/112変更、新3e72b65b別保存/112F32・3,833,856parameter完全一致no-grad reload/2生成を519.508747402秒/$0.0404062359処理按分で完了した。600秒/$0.047以内、準備/CPU/回収/保持/保存/通信/税等別。原284f/d431/旧候補とsource不変、新重みは通常不採用。原runのpending表示とplanのAUTHORIZED表示は実行時原本のまま凍結し、[result_summary.json](result_summary.json)が最終閉鎖を所有する。
+
+BOOK2698token/118.991914秒/EOSありで完結JSON、実7更新と本文3欄へ到達。実receiver CANDIDATE_UNREVIEWEDからREJECT/model_evidence_collection_invalid（同位置の根拠3ID重複でdecoded11行/一意9行）。無連絡/時点・更新順/附属関係・本人向け本文の列挙も残る。SHOP3584token/161.899000秒/EOSなし、実8更新へ到達するがobservationの「そのように」249回で打切り。TOKEN_LIMIT→REJECT/semantic_receipt_not_validated、別の引用source誤帰属・prior名前流用・参照種別誤用も静的に確認。意味/本文0/2、採用snapshot0/cold対象なし。CMEE CPU1.881638秒/model・学習・生成・SQL0。[全raw/本人本文読解](reading_review.md)で原source/prior/教師/実raw全文を照合、補修0。
+
+全原本・追加重み16,175,646bytes/SHA256 e662dcab7cff7b67b4eb29f17a648c5466f5f2da1dd83c57195f9134e8e99cff、149payload+manifest/150member。Pod外全CRC/hash/size・CPU原本同一・source/test2のremote7b9ee073 bytes・112F32全有限/3,833,856parameter・初期/reload全形状を照合。追加重みSHA256 3e72b65b7c742794d9b666acbc624c652e6494290091cb5ac705e233cbdb9bad、Library libfile_f0ac589476288191b7a8ca3e001392a5 version0へ別保全。元4B全base重みはarchiveに含まず、固定base851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0aも移行に必要。
+
+primary=BLOCKER_NARROWED。更新定義先行で実更新数とBOOK完結性は前進したが、意味・全更新・自然本文の同時成立は未達で、順序変更だけの因果確定ではない。追加学習/生成/retry/reader緩和/raw補修/上限延長/次run自動開始なし。次の候補は既存教師の根拠共有・role対応・附属関係を含む更新・参照namespaceと、本人本文の復唱/反復の学習設計へ戻ること。現不具合に追加観測会は不要。GPU保持/Stop等0、通常app/API/DTO/DB/RN/Render/Supabase/merge/deploy変更0、商品0/正式0/3/54.50％据置。以下の固定条件・実行前記述はこの一回の履歴であり、再起動の指示ではない。
 
 ## 目的と最小変更
 

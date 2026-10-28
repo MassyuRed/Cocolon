@@ -5450,3 +5450,17 @@ STRUCTURE_MAP_DELTA_PRESENT。APIa8be7a9bのprivate4source＋新test1：preparat
 | run_namedoutput9.py・launch_once.py・adaptive_loss.py・consume_named9.py・collect_once.py | 固定9更新/別保存112F32非学習reload/after2/厳格raw受領と既存保存cold経路、今回採用0でcold対象なし。全て閉鎖実行原本、再起動しない |
 | run/run.json・run/training.jsonl・run/initial_loaded_tensors.json・run/reloaded_tensors.json・run/after_FT-BOOK-AFTER-ANSWER.jsonl・run/after_FT-SHOP-AFTER-ANSWER.jsonl・cmee/diagnosis.json・reading_review.md | 全raw/実9学習行/112load-reload/長さ優先拒否と全source・prior・教師・本人本文の読解 |
 | weight_verification.json・external_verification.json・export_namedoutput9.py・verify_export_once.py | 全hash/CRC/112F32形状/有限性と最終原本16,221,481bytes/150payload+manifest。追加重みはLibrary libfile_5ac1f51ca9c48191ab8056be66debf7f v0 |
+
+
+
+## 2026-10-28 — 更新先行一回の全ファイル地図
+
+既存学習owner配下の `observation_learning/training/2026-10-26-unconnected-native/updates_first9/`。API7b9ee073の既存model_candidate_source.pyと同family test2pathだけ、owner責務/型/wire/reader/通常経路不変。STRUCTURE_MAP_DELTA_NONE。CPU353成功と実raw意味/本文0/2を分離し、最新は全機能00/weekly§91。
+
+| path（prefix下） | 責務 |
+|---|---|
+| README.md・updatesfirst9.plan.json・result_summary.json | 今回新継続指示の600秒/$0.047一回/最終閉鎖/新3e72不採用、次run自動開始なし |
+| prepare_updatesfirst9.py・run_cpu_tests.py・actual_cpu_check.json・pytest_summary.json・api_source_manifest.json | 既存named shapeと派生2教師のc.prose後続/同意味・他13/原15不変、CPU353・SQL12対象外。初版EOS仮定の失敗code/logを含むCPU原本129934bytes/24payload+manifestは下記全原本ZIP内 |
+| run_updatesfirst9.py・adaptive_loss.py・consume_named9.py・launch_once.json | 固定9更新/別保存112F32 no-grad reload/after2、実rawの厳格受領と採用時cold経路。今回採用0でcold対象なし。全て閉鎖実行原本で再開しない |
+| run/run.json・run/training.jsonl・run/initial_loaded_tensors.json・run/reloaded_tensors.json・run/after_FT-BOOK-AFTER-ANSWER.jsonl・run/after_FT-SHOP-AFTER-ANSWER.jsonl・cmee/diagnosis.json・reading_review.md | 実9学習/112load-reload/無補修raw2、BOOK根拠重複拒否・SHOP長さ優先拒否、全source/prior/教師/本文の読解 |
+| export_updatesfirst9.py・weight_verification.json・external_verification.json | Pod外全CRC/hash/size/112F32有限性・同形状照合。全原本/追加重み16,175,646bytes/149payload+manifest、Library libfile_f0ac589476288191b7a8ca3e001392a5 v0 |

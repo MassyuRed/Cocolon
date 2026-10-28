@@ -1,0 +1,13 @@
+{
+  "bytes": 16175646,
+  "sha256": "e662dcab7cff7b67b4eb29f17a648c5466f5f2da1dd83c57195f9134e8e99cff",
+  "payloads": 149,
+  "all_crc_hash_size_match": true,
+  "weight_count": 112,
+  "weight_parameters": 3833856,
+  "weight_all_f32_finite": true,
+  "adapter_sha256": "3e72b65b7c742794d9b666acbc624c652e6494290091cb5ac705e233cbdb9bad",
+  "initial_and_reload_112_shapes_identical": true,
+  "source2_bytes_match_verified_api_7b9ee073": true,
+  "early_book_matches_final": true
+}

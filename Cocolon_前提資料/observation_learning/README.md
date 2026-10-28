@@ -1,8 +1,8 @@
 # Mashの観測技術を継承するための記録
 
-**GPU実確認の最終記録（2026-10-28 JST・現Pod）：** Pod94a06hhxu51uy4/daily_blue_dragonflyのJupyterへ直接接続、A5000/$0.28/h。named出力提示修復/9更新/新41c9保存/112F32再読込/2生成/回収を完了。新重み通常不採用、GPU稼働保持、Stop/再起動/削除/別Pod/追加charge0。
+**GPU実確認の最終記録（2026-10-28 JST・現Pod）：** Pod94a06hhxu51uy4/daily_blue_dragonflyのJupyterへ直接接続、A5000/$0.28/h。更新先行の同意味直列化・CPU353成功、新9更新/新3e72保存/112F32再読込/2生成/回収を519.508747秒/$0.0404062処理按分で完了。BOOK完結/実更新7・8へ進むも意味/本文0/2・新重み通常不採用、原本保全。最新weekly§91とtraining/2026-10-26-unconnected-native/updates_first9/README.md。GPU稼働保持、Stop/再起動/削除/別Pod/追加charge0。
 
-**現在の直接作業（10/28：named出力型・参照提示修復の一回終了、意味/本文0/2・新41c9不採用）：** API1739a6bfのnamedモデル向け提示だけを修復し、CPU351成功/SQL12対象外、prior往復・任意IDでの更新数・他13入力/全15教師/EOS不変を確認。原284fから9更新→別保存41c9d82c/112F32・3,833,856parameter完全一致no-grad reload→BOOK/SHOP各1生成を558.484318秒/$0.0434377処理按分で完了（準備/CPU/回収/保持/保存/通信/税別）。両rootは正しいv文字列/a/q/c、s0/s1/p0と全引用のsource/field帰属へ進むが、role引用誤対応・参照反復で3712/3584token打切り、実TOKEN_LIMIT→REJECT/semantic_receipt_not_validated、意味/本人本文0/2・採用snapshot0/cold対象なし。BOOKはurへprompt metadata463文字列反復、SHOPはq/cid重複・binds反復で本文/全更新未到達。新41c9通常不採用、元284f/d431/旧候補不変。原本16,221,481bytes/150payload+manifestをPod外全CRC/hash/112F32形状・有限性照合、Library libfile_5ac1f51ca9c48191ab8056be66debf7f version0へ保全。原本named_output_contract9/README・reading_review・weekly§90。この新一回も閉鎖・消費済み、追加学習/生成/retry/上限延長/reader緩和/次run自動開始なし。次はupdatesを参照付きproseより先にする可逆な同意味直列化を既存教師でCPU検討する候補（未実行）。新観測会は現不具合に不要。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false、STRUCTURE_MAP_DELTA_NONE。GPU稼働保持/Stop等0、通常経路/公開API/DTO/DB/RN/Render/Supabase/merge/deploy変更0。
+**現在の直接作業（10/28：更新定義先行の一回終了、意味/本文0/2・新3e72不採用）：** API7b9ee073のprivate named shapeと派生2教師でc.updatesをproseより先へ移す同意味直列化を実装。CPU353成功/SQL12対象外、他13入力/教師・原15・prior不変、対象2はparsed JSON完全一致。原284fから9更新/別保存/112F32再読込/2生成を519.508747秒/$0.0404062処理按分で完了（準備/CPU/回収/保持等別）。BOOKは2698token/EOSあり、7更新/3本文欄へ到達するが根拠行重複で実REJECT/model_evidence_collection_invalid。SHOPは8更新へ進むも本文の「そのように」249回反復で3584token打切り、実TOKEN_LIMIT→REJECT。意味/本文0/2・採用snapshot0/cold対象なし、新3e72通常不採用。全raw/教師を全文照合し補修0、原本16,175,646bytes/149payload+manifestをPod外全CRC/hash/112F32形状・有限性照合しLibrary libfile_f0ac589476288191b7a8ca3e001392a5 v0へ保全。原本updates_first9/README・reading_review、weekly§91。今回一回は閉鎖・消費済み、retry/reader緩和/raw補修/上限延長/次run自動開始なし。次候補は既存教師の根拠共有・role/参照対応・関係を含む全更新・本人本文の復唱/反復を扱う学習設計の見直し。追加観測会は現不具合に不要。原284f/d431/旧候補保持、商品0/正式0/3/54.50％、STRUCTURE_MAP_DELTA_NONE。GPU保持/Stop等0、通常経路/公開API/DTO/DB/RN/Render/Supabase/merge/deploy変更0。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 
@@ -244,3 +244,4 @@ D05でMashは「事実を事実として捉えるのも観測」と教示し、�
 次に観測会を行う場合は、華恋が新しい観測会フォルダを作り、対話と教示を保存し、この一覧を更新します。Mashには普段の形で実演していただき、整理・参照の整備は華恋が担います。今回、定期実行の日時や頻度は設定していません。
 
 保存先を増やすための新システムやDBは作らず、既存のGitHub上で継続します。製品の構造・契約・CMEE実装を変更する場合は、その作業で対象の設計と接続を扱います。
+
