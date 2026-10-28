@@ -5584,3 +5584,19 @@ auxiliary_fit8の実CPU原本cpu_check.json/cpu_preparation.log/.exitとruntime_
 
 
 §99実CPU記録：joint_transfer11/cpu_check_summary.jsonがCPU14.661742秒/66,974token/教師意味・本文11/11/11prompt同一の索引。完全原本1,835,003bytesはcpu_check.index.json＋15partを順連結してSHA検証。runtime_authorized_plan.json、cpu_preparation.log/.exit、failed_cpu_v1.log/.exitは成功CPU/初回引数失敗/今回条件の別原本。source815692fcから11更新/11生成一回を開始、旧planは無効のまま。STRUCTURE_MAP_DELTA_NONE。
+
+
+### §99 終了原本 — joint_transfer11/result_20261029
+
+| ファイル | 所有する結果 |
+|---|---|
+| `run.json・training.jsonl` | 11更新/2load/11生成、新4ee58bf9、1288.511954秒/$0.100217596按分、初期afaa/全入力不変。run pending statusは原記録として凍結 |
+| `initial_loaded_tensors.json・reloaded_tensors.json` | 112F32/3,833,856parameterの学習開始・非学習reload記録 |
+| `after_FT-*.jsonl` 2件 | BOOK3712/noEOS/TOKEN_LIMIT、SHOP3129/EOS/受領後意味拒否、意味/本文0/2 |
+| `after_TRAIN-*.jsonl` 9件 | 旧9after-only、意味/本文8/9、8件parsed教師/本文同値。CHAIR01訂正は更新根拠1配列差でHOLD、before比は欠測 |
+| `cmee_summary.json` | 全11の実受領/採否・本文・cold8集計、完全原本archive内cmee/diagnosis.jsonのbytes/SHA/保存ID。full診断とsaved/cold8は重み込みarchiveへ保持 |
+| `gpu_launch.json・gpu.log・cmee.log・cmee.exit` | 一回起動条件、GPU/CPU log、再試行0 |
+| `external_manifest.json・external_verification.json` | 全346payloadのbytes/hash、112F32有限性・形状・全112変化/11raw/caps/先行全文raw不変/cold8完全同値、18,638,125bytesの原本保全 |
+| `reading_review.md・result_summary.json` | root/補助の意味/全更新/本人本文と教師比較、閉鎖/新重み不採用/次候補。Library libfile_271c5c6110c881919c7901938e853995 v0 |
+
+CPU失敗と実成功/無効準備plan/今回runtime条件は同folder直下の既存ownerへ保持。通常route/型/wire/reader/DB/RN/Render/Supabaseの構造変更なし、STRUCTURE_MAP_DELTA_NONE。全体00/観測入口/weekly§99へ戻る。

@@ -1,5 +1,14 @@
 # 補助から元全文へ結ぶ11更新 — 2026-10-29
 
+**終了結果：** 11更新/別保存4ee58bf9/112F32非学習reload/固定11生成を1288.511954秒、処理按分$0.100217596で完了（準備/CPU/回収/保持/保存/通信/税等別）。全文BOOK/SHOPの意味・本文0/2、旧9の意味・本文8/9、採用済cold8/8のfull outcome一致。新重みは通常不採用、この一回は閉鎖・retry/次run自動開始0。旧9beforeは欠測で、維持/改善率は算出しない。
+
+[result_summary.json](result_20261029/result_summary.json)、[全件読解](result_20261029/reading_review.md)、[Pod外検証](result_20261029/external_verification.json)が終了owner。[重み・原本一式](https://chatgpt.com/library?file_id=libfile_271c5c6110c881919c7901938e853995&account_id=personal) v0は18,638,125bytes/346payload＋manifest、全CRC/hash/size/112F32有限性・形状・全112変化と11raw/cold8を照合済み。CMEE完全原本cmee/diagnosis.jsonとsaved/cold8も同archiveに保持し、GitHubのcmee_summary.jsonは集計と原本hashを所有する。
+
+引用欄は回復したが、BOOKの関係ADD/GAP反復と、SHOPのrole→引用/全更新/本人本文が未達。旧CHAIR01訂正はrelation更新の根拠が[10,11]→[6,10,11]になりHOLD、他8件はparsed教師/実本文同値。次候補はこれらの対応と一回のGAP終了を重点化する学習設計で、量・順序は未固定。現2件の新観測会不要。商品0/正式0/3/54.50％、GPU保持。
+
+以下はこの一回の条件・準備・開始履歴。
+
+
 Mashの新しい継続指示に基づく新しい一回。開始PR30 34035ab6/API7b9ee073。前回§98/auxiliary_fit8は閉鎖済みで再利用しない。実行環境はGPT-6 Codex Work、root華恋が単一実行・write owner、補助agentはread-only助言で正式Pro/Ultra/human受入れではない。
 
 現残件は補助課題の形式改善が元全文の意味・全更新・本人本文へつながらないこと。保存afaa2c2eから既存4補助と元全文BOOK/SHOP、初回/訂正/日常anchor3をつなぐ。新教材/指示/reader/wire/採用基準の変更はしない。正解Aを与える補助Bと独立全文を混同しない。

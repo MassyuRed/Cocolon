@@ -3478,3 +3478,16 @@ Mashの新継続指示。PR30 34035ab6/API7b9ee073、全機能原本/作業rule/
 
 
 §99実CPU v2は14.661742234秒・model/forward/生成/SQL0。11順66,974token、全target/EOS/mask、評価11promptの元経路同一、現API7b9の正解教師意味/本文11/11を確認。1835003bytesのcpu_check.json原本はcpu_check.index.json＋15partを順連結して元SHAを復元する（今回runtime pack/保存archiveには元fileも保持）。runtime_authorized_plan.jsonが今回実行条件、無効準備planは不変。source815692fcから同Podで11更新/別保存/no-grad reload/11生成を一回開始。初回CPU引数失敗log/exitはfailed_cpu_v1.log/.exitへ保全し、モデル再試行ではない。
+
+
+### §99 終了結果 — 全文0/2、旧9は8/9、cold8一致
+
+source815692fc/API7b9、実11更新/保存4ee58bf9e7e16a1fc3e0104781fb800573b0db56e43bf715f51b610097b6abaf/112F32・3,833,856parameterの非学習reload/11生成を1288.511954141秒、表示$0.28/h按分$0.100217596で完了。準備/CPU/回収/継続保持/保存/通信/税等は別。全112tensor変化、元afaa/19教師/評価/prompt/reader不変、model load2・forward11・call11、再試行0。旧run/枠の再利用ではない。
+
+元全文BOOK3712/noEOS/TOKEN_LIMIT→REJECT semantic_receipt_not_validated、SHOP3129/EOS/CANDIDATE_UNREVIEWED→REJECT model_evidence_collection_invalid、意味/本人本文0/2・全文snapshot0。旧9は意味/本文8/9、採用8の別PID cold full outcome8/8同一、現CMEE CPU78.524836881秒。CHAIR01訂正はHOLD/model_update_not_prior_or_source_bound、喜びの根拠relation更新のevidence_indexesが教師[10,11]→実[6,10,11]の1差だけ。他8はparsed教師全文同値、実本文も教師同値。before afaa旧9未測定で維持/回復/改善率を出さない。椅子/日常の2familyの既知FITで未知9題ではない。
+
+[全件読解](../observation_learning/training/2026-10-26-unconnected-native/joint_transfer11/result_20261029/reading_review.md)：BOOKは10claim/原欄引用17/17へ戻るが1組重複、11ADDの後にGAPを21個目まで反復して本文未到達。SHOPも17/17欄回復・契約外time key消失だが引用3組重複、時点を知覚・未来を喜び・知覚を距離へ誤配し、8ADD＋GAP/関係欠落/typed bind不正。本人向け本文は喜び/寂しさ/共同準備と約束の否定を落とし、架空の時点関係と知覚の事実化が残る。部分形式回復を全体品質向上へ昇格しない。画面の両EOS未到達という中間誤読は原本でBOOK noEOS/SHOP EOSへ即訂正、raw/run不変。teacher_loss/prompt mask/EOS/causal shift/no-grad再読込のread-only再確認に明白な不整合はなく、実装バグが原因とは断定しない。
+
+原本18,638,125bytes/346payload＋manifest、SHAdfcf63ffadc9054d188b92c0d1d3e844cf7ff5f74d9853196ddd72b16e67e518を全CRC/hash/size/112F32形状・有限性・全112変化/11rawhashとcap/途中全文2raw不変/cold8でPod外照合。Library libfile_271c5c6110c881919c7901938e853995 v0へ重み/全入力/現CMEE130source/全11raw/完全診断/saved・cold8/CPU v1失敗とv2成功を保全。GitHubのresult_20261029には全11raw/run/training/読込tensor/log/全member目録/外部検証/読解/終了集計とcmee_summaryを保存。完全診断は外部archive cmee/diagnosis.jsonをSHA/bytesで指し、rawrunのpendingを凍結したままresult_summaryで閉鎖する。
+
+この新一回は消費済み、primary=BLOCKER_NARROWED、新4ee通常不採用/全旧重み保持。次候補は今回のrole→引用、claim附属relation更新、GAP一回での終了、旧訂正の更新別根拠を重点化する学習設計。量/順序は未固定で、同じ11混合や上限延長を自動開始しない。現2件の完成教師はあり新観測会不要。GPU保持/Stop・再起動・削除0、通常app/API/DTO/DB/RN/Render/Supabase/merge/deploy変更0。全体00の冒頭だけでなく§8既存行も同期、観測入口/01Afile地図を差分更新、STRUCTURE_MAP_DELTA_NONE。商品0/正式0/3/54.50％・candidate_ready=false/automatic_progression=false。
