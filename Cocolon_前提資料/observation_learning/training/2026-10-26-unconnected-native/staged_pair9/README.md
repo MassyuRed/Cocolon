@@ -44,3 +44,12 @@ primary=BLOCKER_NARROWED。次候補は追加学習の前に、保存2dfdで今�
 | run.json / training.jsonl / after_*.jsonl / cmee_diagnosis.json | 実学習/全raw/未変更CMEE採否 |
 | static_raw_diagnosis.json / external_verification.json | 静的所見と全原本/112F32照合 |
 | result_summary.json / reading_review.md | 最終閉鎖・全件本文読解・次候補 |
+
+
+## 2026-10-29 — 保存2dfdの補助4入力診断を準備
+
+Mashの新しい続行指示と新Podを対象とし、weekly§96の既存次候補だけを実行単位にした。旧run/plan/lock/残予算を再利用しない。新Pod vgkm402msgroiu / short_gold_bonobo / NVIDIA RTX A5000 24564MiB、表示$0.28/h、torch2.8.0+cu128。Runpodは既存ログイン状態で開き、再ログイン操作0。Jupyter直接接続・nvidia-smiと空workspace/元baseなし/必要4依存なしを確認。保存archiveの全153member CRC、152payload hash/sizeと保存2dfdをPod外で照合した。
+
+追加学習0、保存2dfdを非学習1読込、固定済みA-BOOK/B-BOOK/A-SHOP/B-SHOPの4call。A出力上限2816/B1024、context8192・greedy・各180秒/全処理600秒/$0.047、準備は別900秒。900+600秒のGPU表示単価按分は最大約$0.11667であり、保持/保存/回収/通信/税等を含む総請求上限ではない。Bはgold A条件付きFIT、部分投影なのでCMEE採用数には加算しない。raw/token IDs/EOS/時間/教師とのJSON差と全文読解で切り分ける。期限/OOM/非有限/identity不一致では停止、再試行/追加生成/学習/次run自動開始なし。現2件の完成教師はあり追加観測会不要。
+
+新規sourceはrun_auxiliary_diagnostic.py（非学習4call）、setup_auxiliary_diagnostic.py（既存4依存と固定baseの新Pod復元）、prepared_auxiliary_diagnostic.json（無効の準備原本）、auxiliary_diagnostic_cpu_check.json（静的CPU実結果）、runtime_authorized_auxiliary_diagnostic.json（今回指示に限定した新実行条件）。固定helper3は元pathから同一bytesを利用。preparedの拒否確認・CPU静的13file照合・no training AST/import成功、実tokenizer/モデル診断は準備後に行う。実行担当はCodex Work/GPT-6 root一人、補助agentは正式Pro/Ultra/human受入れではない。通常app/reader/wire/API/DB/RN/Render/Supabase差分0、STRUCTURE_MAP_DELTA_NONE、旧意味/本文0/2・商品0・正式0/3・54.50％を保持。

@@ -5543,3 +5543,8 @@ STRUCTURE_MAP_DELTA_PRESENT。APIa8be7a9bのprivate4source＋新test1：preparat
 | external_verification.json / result_summary.json / reading_review.md / README.md | 全原本/112F32照合、最終閉鎖、両件全文読解、次の非学習診断候補 |
 
 原本16,150,601bytes/152payload+manifest、Library libfile_cf473b4d4d708191821345dd2db43674 v0。追加model call/次run自動開始なし、GPU保持、SQL/本番/Render/Supabase/merge/deploy変更0。
+
+
+## 2026-10-29 保存2dfdの補助4入力非学習診断 — weekly§97
+
+既存staged_pair9内の追加5file: run_auxiliary_diagnostic.py（保存重み1load/固定4call、学習0・raw/教師差）、setup_auxiliary_diagnostic.py（新Podに既存固定依存/baseだけ復元、model0）、prepared_auxiliary_diagnostic.json（無効準備原本）、auxiliary_diagnostic_cpu_check.json（13file/拒否/AST実CPU）、runtime_authorized_auxiliary_diagnostic.json（今回続行指示の新単位・新Pod・上限）。旧実験21file/原15/eval/CMEE責務は不変、STRUCTURE_MAP_DELTA_NONE。新Pod vgkm402msgroiu/A5000、別準備900秒/処理600秒・学習0/生成4上限。旧2dfd不採用・意味/本文0/2を維持し、部分課題の成功を採用へ加算しない。

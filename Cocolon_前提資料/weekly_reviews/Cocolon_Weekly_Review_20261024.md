@@ -3414,3 +3414,14 @@ source76d264df/API7b9ee073、原284f開始で補助A（引用/意味/関係）�
 実CMEE CPU1.911616329秒/model0/SQL0。実run/原本は無補修。比較は§93 JSON2/2→今回1/2、§95と同1/2、意味/本人本文は同0/2。原欄回復だけで商品改善へ昇格しない。実行前reviewで旧compact_teacher.pyがlauncher AST対象に残っている点を修正してから公開/CPU/実行し、失敗launcher試行0。最初のBOOK先行回収はcompleted0のため読まず、完成後だけ回収した。学習/生成/consumer/exportは一回、期限/OOM/非有限/再試行0。
 
 全原本SHA256 25251908388caf414868f30867862c5288ff2c2606fdfbe0c2ee959f3c35b7bf、153member。新2dfd7dbd2613aca8682601a140c1bbcc82e0b22de052dece60c6a60ad1a1cea4は通常不採用。原RAW_COMPLETE_PENDING/実行planは凍結しresult_summaryを最終閉鎖ownerとする。次の非学習補助4入力は今回固定保存済みだが追加実生成は未実行で、これを未使用一般化評価とはしない。今回2件の完成教師はあり新観測会を正解不足の解決へ要求しない。Windows/Mac未選定・全三中核/IF残件・正式0/3/54.50％は保持する。
+
+
+## 97. 2026-10-29 — 新Podへ保存原本を復元し、補助4入力を非学習診断する単位
+
+Mashの新しい続行指示を受領。全機能原本、前提資料/作業rule、全体設計01/02と分冊・全file地図/current00〜04、最新§96/実原本を確認。System Contextは最新cache未生成・同じ延長反復停止のためfresh原本を直接読む。PR30開始d28f3d6/API7b9ee073。
+
+新Pod short_gold_bonobo/vgkm402msgroiu、A5000 24564MiB・使用1MiB、表示$0.28/h。Runpod既存ログイン/Jupyterへ直接接続。workspace空、baseなし、torch2.8.0+cu128のみで必要4依存なし。前回archive16,150,601bytes/SHA25251908388caf414868f30867862c5288ff2c2606fdfbe0c2ee959f3c35b7bf、全153member CRC/152payload hash/size/保存2dfdを再確認した。
+
+今回は保存2dfdの固定補助A/B4行を非学習1load/4call・更新0で診断する。A2816/B1024・context8192・greedy、各180秒/全処理600秒/$0.047、別準備900秒。合計GPU単価按分最大約$0.11667、保持/保存/回収/通信/税等別。旧runの再利用ではなく今回指示に基づく新単位/新出力先。Bはgold A条件付き、補助出力は通常CMEE採用へ提出/加算しない。固定教師JSONとの全差・raw全文を読み、短課題未習得/全文転移を分ける。期限/OOM/identity不一致ではSTOP・再試行0。追加観測会不要。
+
+source/準備CPU/今回実行条件は既存staged_pair9へ保存。固定helper3と教材は同一bytes、元15/eval/旧run/旧plan不変。静的13file照合・実行無効拒否・no training AST/import成功。新Podの実tokenizer/モデルは準備後、現時点model0。Supabase metadata ACTIVE_HEALTHYをread-only確認、本人row/SQLなし。Renderのlive再照会は行わず既存記録を保持。実Codex Work/GPT-6/root単独実行、read-only補助は正式Pro/Ultra/humanではない。通常app/reader/wire/API/DTO/DB/RN/Render/Supabase/merge/deploy/lifecycle変更0、STRUCTURE_MAP_DELTA_NONE。旧意味/本人本文0/2・商品0/正式0/3/54.50％・candidate_ready=false/automatic_progression=falseを維持。

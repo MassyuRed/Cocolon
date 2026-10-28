@@ -1,0 +1,57 @@
+{
+  "schema": "cocolon.auxiliary4_inference_once.v1",
+  "pod_id": "vgkm402msgroiu",
+  "expected_gpu_name": "NVIDIA RTX A5000",
+  "gpu_hourly_usd": 0.28,
+  "max_processing_seconds": 600,
+  "max_process_usd": 0.047,
+  "max_preparation_seconds": 900,
+  "preparation_scope": "separate base download/pinned dependency setup; no model calls",
+  "per_generation_seconds": 180,
+  "context_tokens": 8192,
+  "max_new_tokens_by_case": {
+    "AUX-A-FT-BOOK-AFTER-ANSWER": 2816,
+    "AUX-B-FT-BOOK-AFTER-ANSWER": 1024,
+    "AUX-A-FT-SHOP-AFTER-ANSWER": 2816,
+    "AUX-B-FT-SHOP-AFTER-ANSWER": 1024
+  },
+  "case_ids": [
+    "AUX-A-FT-BOOK-AFTER-ANSWER",
+    "AUX-B-FT-BOOK-AFTER-ANSWER",
+    "AUX-A-FT-SHOP-AFTER-ANSWER",
+    "AUX-B-FT-SHOP-AFTER-ANSWER"
+  ],
+  "output_directory": "/workspace/cocolon_auxiliary4_run_20261029",
+  "model_loads": 1,
+  "model_calls": 4,
+  "optimizer_steps": 0,
+  "adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "aecf02fe306faa05e11269a1e32a7e344aa80665e7367890989f0b97bcb12b33",
+    "adapter_model.safetensors": "2dfd7dbd2613aca8682601a140c1bbcc82e0b22de052dece60c6a60ad1a1cea4"
+  },
+  "support_sha256": {
+    "run_pilot.py": "2f659078c05bee6d7b32f50aae8b9eebc03c767d4a3be084bc17e9e3ccc4c10d",
+    "run_native15_expanded30.py": "ca03471329b5f622284cf3abd446cdd2f7831de3f7617da49a558ff7b5259e9d",
+    "run_expanded15_recovery.py": "e4be86a2b6fb0581961fc3c619853ba7f419e3239464e969214772b8bc3bfb54"
+  },
+  "frozen_predecessor_sha256": {
+    "run/run.json": "e6b532ecf36526897185d91e36de4d4bc9ea7668e7d6be8722585140f9f42334",
+    "runtime/train_messages.jsonl": "10ec23b65f253fac6c49dc730725fbcf9c7849867515a2bca96098db036ac2ed",
+    "runtime/eval_inputs.json": "0cce7b0601ad579e480f81ccafe211c3596b3b841ff97e45b851dde6bc2b2028",
+    "runtime/actual_cpu_check.json": "2d605102cb30fb54c8e36ce7feb4179846e16db45618e7ffc5f61d6ac9045618"
+  },
+  "auxiliary_sha256": "3c80fa6c1c9b47df8efc84aa9f899af4ffb6ef436c0403fdb1bb0646f88f1654",
+  "model": "Qwen/Qwen3.5-4B",
+  "model_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "api_commit": "7b9ee073de03940ba71587297d8600b2b6094dd1",
+  "retry": false,
+  "automatic_progression": false,
+  "product_credit": 0,
+  "cmee_adoptions": 0,
+  "sql_operations": 0,
+  "gpu_lifecycle_operations": 0,
+  "runner_sha256": "19f870c07115dbb8e7a11118a3060f76e618304a44f2d2660e745ad514e08dd3",
+  "gpu_run_authorized": true,
+  "approval_basis": "2026-10-29 JST current Mash request: continue 4B learning + CMEE, new rental GPU and Runpod access. Root selected latest weekly96 existing next diagnostic only: saved2dfd fixed auxiliary4, training0, one load, four calls, fresh Pod/output; preparation<=900s and processing<=600s/$0.047. This is a new bounded task under the current instruction, not reuse of the closed pair9 run/lock/budget. No extra trial or production effect."
+}
