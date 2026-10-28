@@ -5437,3 +5437,16 @@ STRUCTURE_MAP_DELTA_PRESENT。APIa8be7a9bのprivate4source＋新test1：preparat
 | actual_cpu_check.json・api_source_manifest.json・pytest_*・cpu_originals.zip | 実CPU349成功/SQL12対象外、prior往復2/2、他13/全教師不変、元112有限。初回収集error等も原本ZIP内へ保全 |
 | run/*・cmee/diagnosis.json・reading_review.md | 実9学習行/112load-reload/無補修raw2、実TOKEN_LIMIT/INVALID_FORMATと全本文/意味の静的読解 |
 | weight_verification.json・external_verification.json・export_namedprior9.py | Pod外全hash/CRC/112F32同形状/有限性、重み込み16,176,277bytes/150payload+manifestはLibrary libfile_51752dcc98948191bc630d38f7002589 v0 |
+
+
+## 2026-10-28 — named出力型・参照提示修復の全ファイル地図
+
+既存学習owner配下の新 `named_output_contract9/`。API1739a6bfの既存model_candidate_source.pyと同family testだけ、owner責務/型/wire/receiver/通常経路は不変。STRUCTURE_MAP_DELTA_NONE。CPU351成功と実raw意味/本文0/2を分離し、最新は全機能00/weekly§90。
+
+| path（prefix下） | 責務 |
+|---|---|
+| README.md・namedoutput9.plan.json・result_summary.json | 新継続指示の一回/600秒・$0.047/最終閉鎖/新41c9不採用/次run自動開始なし |
+| prepare_namedoutput9.py・run_cpu_tests.py・actual_cpu_check.json・pytest_summary.json・pytest_results.xml・pytest.log・api_source_manifest.json・cpu_originals.zip | 実CPU351成功/SQL12対象外、prior往復/任意ID/全15教師・他13入力不変。失敗前code/logを含む原本202368bytes/34payload+manifest |
+| run_namedoutput9.py・launch_once.py・adaptive_loss.py・consume_named9.py・collect_once.py | 固定9更新/別保存112F32非学習reload/after2/厳格raw受領と既存保存cold経路、今回採用0でcold対象なし。全て閉鎖実行原本、再起動しない |
+| run/run.json・run/training.jsonl・run/initial_loaded_tensors.json・run/reloaded_tensors.json・run/after_FT-BOOK-AFTER-ANSWER.jsonl・run/after_FT-SHOP-AFTER-ANSWER.jsonl・cmee/diagnosis.json・reading_review.md | 全raw/実9学習行/112load-reload/長さ優先拒否と全source・prior・教師・本人本文の読解 |
+| weight_verification.json・external_verification.json・export_namedoutput9.py・verify_export_once.py | 全hash/CRC/112F32形状/有限性と最終原本16,221,481bytes/150payload+manifest。追加重みはLibrary libfile_5ac1f51ca9c48191ab8056be66debf7f v0 |

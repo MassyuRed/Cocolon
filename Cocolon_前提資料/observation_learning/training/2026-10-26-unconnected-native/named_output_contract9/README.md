@@ -1,6 +1,20 @@
 # 2026-10-28 — named出力の型・参照namespace提示修復
 
-状態：RUNNING_ONCE_NEW_UNIT。この新unitはMashの「4B学習＋CMEE接続を続けて」に結び付く。旧named13/named9/named_prior_projection9は閉鎖・消費済みのまま。今回もsingle execution ownerはroot華恋、read-only補助2文脈は独立Pro/Ultra/human受入れを代替しない。実環境はCodex Work/GPT-6とJupyter/A5000。
+状態：CLOSED_NOT_ADOPTED_NO_RETRY。この新unitはMashの「4B学習＋CMEE接続を続けて」に結び付く。旧named13/named9/named_prior_projection9は閉鎖・消費済みのまま。今回もsingle execution ownerはroot華恋、read-only補助2文脈は独立Pro/Ultra/human受入れを代替しない。実環境はCodex Work/GPT-6とJupyter/A5000。
+
+## 最終結果と保全
+
+状態：CLOSED_NOT_ADOPTED_NO_RETRY。launcher起動PID128196を確認し、9更新/2load/2生成を558.484317519秒、処理按分$0.0434376691で完了。GPUexit0、期限/OOM/非有限なし。実行時run.jsonのpending表示とplanのAUTHORIZED表示は原本のまま凍結し、最終result_summary.jsonが閉鎖を所有する。
+
+新adapter SHA256 41c9d82c58c977ccf7563abfd2b37b2693bfa579be4de1977cc6b51461b2bd8a、112F32/3,833,856parameter、112tensor変更。別保存・完全一致no-grad reloadを確認。初期284f/d431/sourceは不変、新重みは通常不採用。
+
+BOOK4379→3712token/164.097153447秒、SHOP4531→3584/156.905780144秒、両EOSなし・length。実receiver TOKEN_LIMIT→REJECT/semantic_receipt_not_validated、意味/本人本文0/2、採用snapshot0/cold対象なし。CMEE CPU1.718455415秒・model/SQL0。実意味readerでUNSUPPORTEDになった結果とはしない。
+
+両rootは平坦v:string/a/q/c、原入力/回答/priorの3identityと全引用のsource/field帰属へ改善したが、BOOKの追加role誤対応とur metadata463反復、SHOPのq/cid重複・後半roleずれ・binding14反復/構文崩れが残る。実updates配列と本人3本文欄は両0。[全raw読解](reading_review.md)で原source/prior/教師と全出力を照合し補修0。loss低下BOOK1.351029→.841863/SHOP1.524647→1.031559を採用/品質成功にしない。
+
+全150payload+manifest/151member、16,221,481bytes、SHA256 9a1876e1118c737b342baedf07c68da0a67294ad78696b1d3d994d765a684c13。Pod外で全CRC/hash/size・CPU ZIP同一・source/testとremote1739a6bf bytes一致・112F32全有限/初期/reload全形状一致を確認。Library libfile_5ac1f51ca9c48191ab8056be66debf7f version0へ別保全。元4B全base重みはarchiveに含まず、固定base851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0aも移行に必要。
+
+primary=BLOCKER_NARROWED、商品0/正式0/3/54.50％。次は既存教師を不変保持したまま、updates先行/prose後続の可逆な同意味直列化をCPUで検討する候補。因果確定・採用・追加GPU承認ではない。今回の閉鎖後に同条件反復・追加call・上限延長・raw補修・reader緩和をしない。新観測会はこの既教示の形式/意味対応不備には不要。今回Render/Supabaseは未照会・変更0、RunpodのJupyterへ直接接続して実行した。GPU保持/Stop等0。
 
 ## 目的・範囲・完了
 
@@ -31,4 +45,4 @@ CPU原本202368bytes、SHA256 38a8bb49a103457788e78a0a5f0e75c3681e47a3fb96f703e3
 
 別保存→112F32・3,833,856parameter完全一致/no-grad reload→既知各1生成。before0、after最大2、温度0、context8192、cap3712/3584、各180秒。新root/pack/run/resultはcocolon_namedoutput9_*_20261028だけ。最大600秒（外590+kill10）、既存A5000$0.28/h、処理按分上限$0.047、準備/CPU/回収/保持/保存/通信/税別。GPU保持、Stop/restart/delete/管理API0。失敗時も新または途中重みとraw/logを回収。通常app/API/DTO/DB/RN/Render/Supabase/merge/deploy/価格quota変更0。
 
-STRUCTURE_MAP_DELTA_NONE：モデル向けcopyの提示だけでowner責務/型/wire/receiver/通常接続は不変。正式商品0/3/54.50％、candidate_ready=false/automatic_progression=false、新観測会は現在の形式/更新不備には不要。一回のlauncher起動をJupyter画面で確認（PID128196）。run完了/採用結果は未確定、追加起動不可。CPU成功を実モデル成功へ換算しない。
+STRUCTURE_MAP_DELTA_NONE：モデル向けcopyの提示だけでowner責務/型/wire/receiver/通常接続は不変。正式商品0/3/54.50％、candidate_ready=false/automatic_progression=false、新観測会は現在の形式/更新不備には不要。今回一回は上記実結果で閉鎖した。CPU成功と実モデル失敗を区別し、新runを自動開始しない。
