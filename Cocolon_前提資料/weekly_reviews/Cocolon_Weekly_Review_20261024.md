@@ -3280,3 +3280,13 @@ CPU初回346成功/12対象外後、empty quoteの構文拒否を明記する1�
 CPU ZIP459970bytes/SHA616ae24c961742b09219642fcf80977852867730dc98b98e44fd8a76e65406c2、32payload＋manifest/33member。全CRC/hash/sizeとAPI5fileのPod/host/GitHub bytesを照合。実行packは [execution/README](../observation_learning/training/2026-10-26-unconnected-native/named_reference_preparation/execution/README.md)。旧未承認proposalと失敗前CPUcode/logを凍結保持し、新planにだけ今回の承認・API・source/hashを束縛した。root単独書込/実行、別文脈agentはread-only照合であり、独立Pro/Ultra・human Product Readとは呼ばない。
 
 GPUはまだ実行前。次の一回は原d431/112F32、old9各1＋named after2各2の13、新AdamW/LR1e-5/decay0/clip1/seed20261024、旧9CE/新2既存adaptive15/gamma2、全assistant/EOS・prompt除外。別save→112/no-grad reload→BOOK/SHOP各1のみ、before0、600秒（外590+kill10）/各180秒/処理按分$0.047上限（準備/CPU/回収/保持/保存/通信/税別）。retry/reader緩和/意味補完/上限延長/新run自動進行なし。GPU保持、通常app/DB/RN/Render/Supabase/公開/merge/deploy変更0。旧9学習を旧9回帰、新既知2を全15/新初回4/動的thread/実service-SQL/本人端末/一般化/他coreへ拡大しない。前回aligned13の0/2とc7ba不採用は維持、商品0/正式0/3/54.50％。
+
+
+<a id="named9-new-continuation-20261028"></a>
+## 88. 2026-10-28 — 新継続指示による保存284fからの9更新・CPU成功（GPU前）
+
+**現在の直接作業（10/28：新継続指示に基づくnamed9、CPU成功・一回GPU実行前）：** 前回named13は13更新/保存/112F32 no-grad reload/生成2を完了したが両TOKEN_LIMIT→REJECT、意味/本文0/2・284f通常不採用で閉鎖済み。今回の新しい「4B学習＋CMEE接続を続けて」に基づき、その保存284fの別コピーから新AdamW/LR5e-5・BOOK/SHOP各3と旧chair初回/訂正・daily代表各1の9更新、別保存/112再読込/BOOK・SHOP各1だけの新一回へ進む。同APIa8be7a9b・今回prompt/target変更0、全15の学習/評価bytes・実messages/token/EOS/mask/context一致。CPU6.691308秒/model load・forward・学習・生成・SQL0、112F32有限・元284f/d431/source不変。CPU347/旧15完全一致/合成named2 coldは前回証拠のhash照合再利用で再実施ではない。新planは実source/CPUへ束縛し、前回承認・残枠を再使用しない。600秒（外590+kill10）/各180秒/BOOK3712・SHOP3584/$0.047処理按分上限、準備/CPU/回収/保持/保存/通信/税別。系列長二乗和は前回とほぼ同じで時間短縮/完走を保証しない。新API/契約/teacher/reader変更・上限延長・retry・次run自動開始なし。原本named_reference9_preparation/README・weekly§88。商品0/正式0/3/54.50％・candidate_ready=false/automatic_progression=false。STRUCTURE_MAP_DELTA_NONE、GPU稼働保持/Stop等0、新観測会は現不具合に不要。
+
+[具体条件・source・CPU原本・新plan](../observation_learning/training/2026-10-26-unconnected-native/named_reference9_preparation/README.md)。前回対象loss BOOK1.557/SHOP1.616と冒頭構造不正から、既存完成教師の反復配分とLRを見直す。学習率/配分/開始重みを同時に変えるため単一因果実験ではない。Rule18§11.3の既存method family内の技術判断で、旧13の一回枠は消費済みのまま、新しいcurrent指示へ結び付けた別unit・別plan・別output。root単独writer/executor、別文脈agent2枠read-only照合、独立Pro/Ultra/human受入れと呼ばない。
+
+CPU原本72057bytes/SHA1a5be34bd4230416ae34635587237e834a51ed03d607cde44f6f5f76a3842c32、10payload＋manifest/11member、Pod外全CRC/hash/size・実source4一致。changed_promptsの2idは従来named形式の対象を指し、今回named13→9でprompt/target変更0。新一回で旧3を学習しても旧9生成回帰合格には数えない。context8134/8170、系列token57976/長二乗和402516958で前回の402477804と同等、600秒内完走は未保証。停止/不採用時もraw/log/追加または途中重みを回収する。既知2件の有限適合だけ、全15/新初回4/未知一般化/動的thread/実service-SQL/本人端末/他core/正式商品受入れへ拡大しない。

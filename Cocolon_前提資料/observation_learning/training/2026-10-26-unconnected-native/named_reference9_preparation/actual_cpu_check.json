@@ -1,0 +1,177 @@
+{
+  "status": "CPU_NAMED9_READY_NO_MODEL_EXECUTION",
+  "seconds": 6.691307849949226,
+  "source_cocolon": "58d53fad39c12ebdb8d16046431351c76b373dbe",
+  "source_api": "a8be7a9bceed35a9f3cb843f22de05bbd5bc6e18",
+  "changed_prompts": [
+    "FT-BOOK-AFTER-ANSWER",
+    "FT-SHOP-AFTER-ANSWER"
+  ],
+  "optimizer_steps": 9,
+  "unchanged_train_eval_bytes": true,
+  "reused_prior_cpu347": true,
+  "reused_prior_cpu_report_sha256": "f3aafc99b13a6c2b755da3104c81d0a19187283a23c22d977ba084c32961c9d8",
+  "inherited_112_f32_finite": true,
+  "initial_adapter_sha256": "284f1df77c828982bdb7c2480f3f269b71dc9d69a29ea36b48dc6d25ab807d23",
+  "inherited_run_sha256": "a88d1abbad541cee1e6b958a4cb263c859fd5ab69df8b562dcbd8b33d076e999",
+  "schedule_counts_verified": true,
+  "update_order": [
+    "TRAIN-SERVICE-CHAIR-01-INITIAL",
+    "FT-BOOK-AFTER-ANSWER",
+    "FT-SHOP-AFTER-ANSWER",
+    "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+    "FT-BOOK-AFTER-ANSWER",
+    "FT-SHOP-AFTER-ANSWER",
+    "TRAIN-DAILY-CALM-01-INITIAL",
+    "FT-BOOK-AFTER-ANSWER",
+    "FT-SHOP-AFTER-ANSWER"
+  ],
+  "counts": {
+    "TRAIN-SERVICE-CHAIR-01-INITIAL": 1,
+    "FT-BOOK-AFTER-ANSWER": 3,
+    "FT-SHOP-AFTER-ANSWER": 3,
+    "TRAIN-SERVICE-CHAIR-01-CORRECTION": 1,
+    "TRAIN-DAILY-CALM-01-INITIAL": 1
+  },
+  "cases": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "prompt_tokens": 1750,
+      "target_tokens": 1331,
+      "full_tokens": 3081,
+      "max_new_tokens": 2560,
+      "prompt_plus_cap": 4310
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "prompt_tokens": 3827,
+      "target_tokens": 2228,
+      "full_tokens": 6055,
+      "max_new_tokens": 2560,
+      "prompt_plus_cap": 6387
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "prompt_tokens": 1746,
+      "target_tokens": 1331,
+      "full_tokens": 3077,
+      "max_new_tokens": 2560,
+      "prompt_plus_cap": 4306
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "prompt_tokens": 3842,
+      "target_tokens": 2231,
+      "full_tokens": 6073,
+      "max_new_tokens": 2560,
+      "prompt_plus_cap": 6402
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "prompt_tokens": 1743,
+      "target_tokens": 1321,
+      "full_tokens": 3064,
+      "max_new_tokens": 2560,
+      "prompt_plus_cap": 4303
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "prompt_tokens": 3825,
+      "target_tokens": 2237,
+      "full_tokens": 6062,
+      "max_new_tokens": 2560,
+      "prompt_plus_cap": 6385
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "prompt_tokens": 1778,
+      "target_tokens": 1585,
+      "full_tokens": 3363,
+      "max_new_tokens": 2560,
+      "prompt_plus_cap": 4338
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "prompt_tokens": 1773,
+      "target_tokens": 1559,
+      "full_tokens": 3332,
+      "max_new_tokens": 2560,
+      "prompt_plus_cap": 4333
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "prompt_tokens": 1777,
+      "target_tokens": 1598,
+      "full_tokens": 3375,
+      "max_new_tokens": 2560,
+      "prompt_plus_cap": 4337
+    },
+    {
+      "case_id": "FT-BOOK-INITIAL",
+      "prompt_tokens": 2204,
+      "target_tokens": 1038,
+      "full_tokens": 3242,
+      "max_new_tokens": 3712,
+      "prompt_plus_cap": 5916
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "prompt_tokens": 4422,
+      "target_tokens": 2913,
+      "full_tokens": 7335,
+      "max_new_tokens": 3712,
+      "prompt_plus_cap": 8134
+    },
+    {
+      "case_id": "FT-SHOP-INITIAL",
+      "prompt_tokens": 2239,
+      "target_tokens": 1082,
+      "full_tokens": 3321,
+      "max_new_tokens": 3712,
+      "prompt_plus_cap": 5951
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "prompt_tokens": 4586,
+      "target_tokens": 3238,
+      "full_tokens": 7824,
+      "max_new_tokens": 3584,
+      "prompt_plus_cap": 8170
+    },
+    {
+      "case_id": "FT-REPOT-INITIAL",
+      "prompt_tokens": 2090,
+      "target_tokens": 961,
+      "full_tokens": 3051,
+      "max_new_tokens": 3712,
+      "prompt_plus_cap": 5802
+    },
+    {
+      "case_id": "FT-KNIT-INITIAL",
+      "prompt_tokens": 2132,
+      "target_tokens": 896,
+      "full_tokens": 3028,
+      "max_new_tokens": 3712,
+      "prompt_plus_cap": 5844
+    }
+  ],
+  "series_tokens": 57976,
+  "series_length_squared_sum": 402516958,
+  "source_manifest_sha256": "885673b4919e2ef7812725ecded0e34c2a7141622b96a5b3a4b5989eaef8c5b7",
+  "payload_sha256": {
+    "train_messages.jsonl": "de65607d6a2cce4ed3a24e17ac13064de5e7f1479ea6e2bb18ec12dd58a29b2e",
+    "eval_inputs.json": "be9f4f6709a0b46bc717f7d1e435bd8efab31011f2463cc2dc3b5b0d6bc34826",
+    "adaptive_loss.py": "5852c69d2b8dc592762eed100214707648be24fa59f331959b622ef599dde141",
+    "run_named9.py": "a7c2f2be2489d278be2a271176167405873b4c6ac2a5fef28f0679eaf3d2b04d",
+    "consume_named9.py": "d87d645a499fc402ddeca887ce07699bae9f7360b61c13484125ce9ff6ea424b",
+    "prepare_named9.py": "05e86a582287999ce77303cf625d74d7755130c53c7f8d30d891b3d887f5eccb"
+  },
+  "model_loads": 0,
+  "model_forwards": 0,
+  "training_updates": 0,
+  "generations": 0,
+  "sql_operations": 0,
+  "cuda_initialized": false,
+  "product_credit": 0,
+  "automatic_progression": false
+}

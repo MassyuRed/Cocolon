@@ -1,0 +1,9 @@
+{
+  "archive_bytes": 72057,
+  "archive_sha256": "1a5be34bd4230416ae34635587237e834a51ed03d607cde44f6f5f76a3842c32",
+  "crc_pass": true,
+  "all_manifest_hash_sizes_pass": true,
+  "payloads": 10,
+  "script4_equal_host": true,
+  "model_execution": 0
+}
