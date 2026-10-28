@@ -1277,3 +1277,8 @@ APIa4b91b4のQUOTE_CANDIDATE_SCHEMAにおけるunknown_id_constraintsの1項目�
 preparationはstrict形式/一意quote位置まで、semantic ownerは既存source由来native.family/stageでBOOK_CONCERN_V3/SHOP_DISTANCE_V3のAFTER_EXPLANATIONだけを認め、raw自己申告へ資格を委ねない。preparation→semanticの循環なし。_receiptは新metadataのformatを同actualrawへ渡し同一receiptを再導出。別profile/core・空/重複/不明参照・不正JSONを拒否し、timeout/length優先・自動fallbackなし。新型/保存schema/公開API/DTO/DB/RN変更0。
 
 最終CPU347成功/失敗・skip0、SQL12対象外。旧API64の15receipt/snapshot/fulloutcome完全一致、新2はnamed実raw→同native意味/本文/7・8更新→別process保存再読一致。新旧wire間のreceipt-linked identity差を隠さず各同rawの完全再読を確認。BOOK4422+3712=8134、SHOP4586+3584=8170/8192。実4B改善はまだ未確認、GPU一回は実行前、商品0/正式0/3/54.50％、STRUCTURE_MAP_DELTA_PRESENT。
+
+
+### 2026-10-28 named13 — 承認済み一回の閉鎖結果
+
+source3786df21/APIa8be7a9bでd431から13更新/save/112F32 no-grad reload/BOOK-SHOP各1生成を556.846752秒/$0.043310処理按分で終了（準備/CPU/回収/保持等別）。両EOSなし・cap3712/3584で未完結、実receiver TOKEN_LIMIT→REJECT/semantic_receipt_not_validated、意味/本文0/2・採用snapshot0/cold対象なし。静的なv構造不正/旧新表記混在/参照反復/全更新・本人本文不足は、実意味検査でのUNSUPPORTED判定ではない。新284f1df7不採用・元d431/source不変、原本と追加重み全hash/112F32有限性照合保全済み。GPU保持/Stop等0、追加試行/意味補完/reader緩和/上限延長なし。CPU347/旧15完全一致/合成named2冷再読と実4B失敗を区別し、商品0/正式0/3/54.50％。結果は `observation_learning/training/2026-10-26-unconnected-native/named_reference_result/README.md` とweekly§87。実行/回収のSTRUCTURE_MAP_DELTA_NONE。

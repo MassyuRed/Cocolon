@@ -3257,7 +3257,19 @@ Pod外原本は外ZIP111,139bytes/SHA76b33aa960c9f485a498daee48edb928286d6f31254
 
 
 <a id="20261028-named-reference-implementation-and-once"></a>
-## 87. 10/28 — named接続・CPU成功、Mash承認の一回13更新/保存再読込/2生成
+## 87. 10/28 — named接続・CPU成功後、一回13更新/2生成は0/2で新重み不採用
+
+**現在の直接作業（10/28：named接続/CPU成功後の13更新一回を終了、実生成は意味/本文0/2で新重み不採用）：** APIa8be7a9bの明示named受信はCPU347成功/SQL12対象外、旧15receipt/snapshot/fulloutcome完全一致、新2教師のnative意味/本文/全7・8更新/cold一致。承認source3786df21から原d431で13更新、別保存284f1df7/112F32の完全一致・no-grad reload、BOOK/SHOP各1生成を556.846752秒/$0.043310処理按分で完了（準備/CPU/回収/保持/保存/通信/税別）。両EOSなし・3712/3584token打切り/未完結、実receiver TOKEN_LIMIT→REJECT/semantic_receipt_not_validated、意味/本文0/2・採用snapshot0/cold対象なし。静的にはvのobject化/旧新表記混在/参照反復・全更新/本人本文不足。原d431とsource不変、新284f1df7は通常不採用・原本と追加重み保全。実行原本32payload＋manifest/33member/133322bytes、重み込み14781111bytesを全CRC/hash/112F32有限性照合、Library libfile_14be2da0d6588191b85c397de5baad0a v0へ保全。結果ownerはnamed_reference_result/README・weekly§87。本一回は消費済み、追加学習/生成/retry/上限延長/reader緩和なし。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false、通常API/DB/RN/Render/Supabase/配置変更0。実行/回収はSTRUCTURE_MAP_DELTA_NONE、直前の承認接続差分は保持。GPU稼働保持/Stop等0、現不具合に新観測会は不要。
+
+[最終結果・原raw・重み保全](../observation_learning/training/2026-10-26-unconnected-native/named_reference_result/README.md)。13更新/112tensor別保存・完全一致no-grad reload/自由生成2を一回完了、GPU exit0/timeout0。BOOK4422prompt→3712output/161.626378秒、SHOP4586→3584/146.500764秒、両EOSなし/JSON未完結。実receiverの長さ優先TOKEN_LIMIT→既存意味owner REJECT/semantic_receipt_not_validatedであり、意味内容の審査でUNSUPPORTEDになったという結果ではない。
+
+原source/prior/教師と全rawをroot/read-only agent2枠で照合。BOOKはvのobject化、long key/数値参照と略記の混在、初回claim4だけ、update_note binding117完結objectの反復、更新操作/q/本人向け完成本文に未到達。SHOPはvのobject化、claim1/関係1/update1（教師11/6/8）、proseが初回actionの一文、q84完結objectの反復/欄text・source直書き/alias・prior・引用帰属不一致。これは静的読解で、raw補修や新意味採用には使っていない。対象学習lossはBOOK1.688519→1.557239、SHOP1.732363→1.615953だが、旧wireのlossや品質と単純比較せず、旧9の新自由生成回帰とも扱わない。
+
+処理556.846751533秒/$0.0433103029は600秒/$0.047内、準備/CPU/回収/保持/保存/通信/税等別。CMEE CPU1.793620497秒/model・学習・生成・SQL0。新284f1df77c828982bdb7c2480f3f269b71dc9d69a29ea36b48dc6d25ab807d23は112F32/3833856parameter有限、112変更、元d431/source不変。実run原本133322bytes/SHA26640cd4d6329d43956f800454fff4c1d8146b30a31f2db77ba5f8b86089bdf0（32payload+manifest/33）。重み込み14781111bytes/SHA0dfbbf4a21fd0031feecffea426be5e3d4f94e7cdb1dbdf545dfa1159177c2f4（36payload+manifest/37）、全CRC/hash/size/innerCPU原本一致・112F32をPod外確認、Library libfile_14be2da0d6588191b85c397de5baad0a version0へ保全。前回d431/c7ba保全を置換しない。
+
+今回の承認枠は消費済み、追加model forward/学習/生成/同条件反復/上限延長/reader緩和/新run自動進行なし。冒頭構造不正と新旧形式混在・全更新/本人本文完結が残り、新観測会を必要とする教材不足や4B能力限界を証明した結果ではない。次は既存原本の比較へ戻る。GPU稼働保持、Stop/restart/delete/管理API0、通常app/API/DTO/DB/RN/Render/Supabase/公開/merge/deploy変更0。商品0/正式0/3/54.50％据置。実行/回収自体はSTRUCTURE_MAP_DELTA_NONE、直前の承認接続差分は保持。
+
+### 承認後CPU完了・GPU実行前の固定点（当時の履歴）
 
 **現在の直接作業（10/28：Mash承認後の名前付き参照接続とCPU確認が完了、承認済み一回GPUの実行前）：** APIa8be7a9bのprivate4source＋新test1へ明示named形式を接続。実raw保持、同raw/formatからreceipt再導出、source由来V3のBOOK/SHOP説明回答限定、意味/本文readerと旧形式は保持。最終CPU347成功/失敗0/skip0（SQL12対象外）、旧API64の15receipt/保存snapshot/full outcome完全一致、新named回答後2件のnative意味/本文/全7・8更新同値と別process cold2一致。最終tokenはBOOK prompt4422/target2913/cap3712=8134、SHOP4586/3238/cap3584=8170（context8192、切捨て0）。CPU準備43.875633秒、model load/forward/学習/生成/SQL0、凍結15/重み不変。CPU原本32payload＋manifest/33member/459,970bytesを全CRC/hash/source5同一照合保全。具体案67910d91へMashの「進めていいよ」を受領し、新planは一回だけd431から13更新/別保存・112F32 no-grad reload/各1生成、最大600秒/$0.047処理按分（準備/CPU/回収/保持等別）へ固定した。結果ownerはnamed_reference_preparation/execution/README・weekly§87。現在GPU試行前で追加学習/生成0、前回aligned13の意味/本文0/2・c7ba不採用は不変。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false、通常API/DB/RN/Render/Supabase/配置変更0、STRUCTURE_MAP_DELTA_PRESENT。GPU保持/Stop等0、新観測会は現不具合に不要。
 

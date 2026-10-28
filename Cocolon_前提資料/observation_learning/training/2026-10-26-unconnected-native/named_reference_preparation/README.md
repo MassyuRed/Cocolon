@@ -1,6 +1,6 @@
 # 10/28 — 名前付き参照形式の未接続CPU確認と、一回の接続・学習案
 
-状態：**MASH_APPROVED_IMPLEMENTED_CPU_CHECKED_GPU_PENDING**。最新actualは [execution/README.md](execution/README.md)。以下の未承認記述とnamed13.plan.jsonは起案時の凍結記録で、新planはexecution/へ分離した。
+状態：**MASH_APPROVED_ONCE_COMPLETED_NOT_ADOPTED**。最新actualは [最終結果](../named_reference_result/README.md)。[execution/README.md](execution/README.md) はGPU実行前の固定点の履歴。以下の未承認記述とnamed13.plan.jsonは起案時の凍結記録で、新planはexecution/へ分離した。
 
 起案時状態：**PREPARED_AWAITING_MASH_CONTRACT_APPROVAL**。新形式は未採用、API未変更、GPU追加学習・生成0。今回の継続依頼で、既存資料・全体設計/全file地図・最新weekly§85・現物raw/教師/学習codeを確認し、Jupyterへ直接接続して可逆な候補とCPU確認を作成した。実装・CPU・条件付き一回のGPUを一つの判断範囲として提案する。承認後に範囲内の実装詳細やhash固定だけで再承認を求めない。
 

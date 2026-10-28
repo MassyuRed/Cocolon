@@ -1,6 +1,8 @@
 # 10/28 — Mash承認後named形式接続・CPU確認と、一回の13更新試験
 
-状態：**CPU_COMPLETE_GPU_PENDING_AUTHORIZED_ONCE**。本checkpointは一回GPUを開始する直前の固定点。後続の実結果は同作業の `../../named_reference_result/README.md` へ戻る。閉鎖後にこの実行前状態・planを再利用しない。
+状態：**ONCE_COMPLETED_NOT_ADOPTED**。一回は消費済み、[最終結果](../../named_reference_result/README.md) を優先する。以下は承認済み実行直前の固定点の履歴。
+
+当時の状態：**CPU_COMPLETE_GPU_PENDING_AUTHORIZED_ONCE**。本checkpointは一回GPUを開始する直前の固定点。後続の実結果は同作業の `../../named_reference_result/README.md` へ戻る。閉鎖後にこの実行前状態・planを再利用しない。
 
 Mashは起案67910d91の「接続実装・CPU検証と、成功時13更新→保存再読込→BOOK／SHOP各1生成」の一回を2026-10-28 JSTに「進めていいよ」と明示承認した。600秒/$0.047のGPU処理按分上限（準備/CPU/回収/保持/保存/通信/税等別）を維持する。元の未承認案/planは親dirへ凍結保持、新しい実行planは本dirの `named13.plan.json` だけ。
 

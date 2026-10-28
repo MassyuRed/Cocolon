@@ -1,0 +1,32 @@
+{
+  "archives": [
+    {
+      "path": "runtime_originals.zip",
+      "bytes": 133322,
+      "sha256": "26640cd4d6329d43956f800454fff4c1d8146b30a31f2db77ba5f8b86089bdf0",
+      "members": 33,
+      "payloads": 32
+    },
+    {
+      "path": "weights_and_originals.zip",
+      "bytes": 14781111,
+      "sha256": "0dfbbf4a21fd0031feecffea426be5e3d4f94e7cdb1dbdf545dfa1159177c2f4",
+      "members": 37,
+      "payloads": 36
+    },
+    {
+      "weight_sha256": "284f1df77c828982bdb7c2480f3f269b71dc9d69a29ea36b48dc6d25ab807d23",
+      "tensor_count": 112,
+      "parameters": 3833856,
+      "all_f32_finite": true
+    }
+  ],
+  "all_crc_sizes_and_hashes_verified": true,
+  "cpu_archive_inner_bytes_equal": true,
+  "library": {
+    "library_file_id": "libfile_14be2da0d6588191b85c397de5baad0a",
+    "version": 0,
+    "filename": "weights_and_originals.zip",
+    "bytes": 14781111
+  }
+}
