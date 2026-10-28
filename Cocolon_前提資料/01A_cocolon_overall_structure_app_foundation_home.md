@@ -5553,3 +5553,8 @@ STRUCTURE_MAP_DELTA_PRESENT。APIa8be7a9bのprivate4source＋新test1：preparat
 ### 10/29 補助診断の実結果file地図
 
 同staged_pair9/auxiliary4_result_20261029へ、run.json、reloaded_tensors.json、AUX-A/B-FT-BOOK/SHOP-AFTER-ANSWER.jsonl（全raw4）、setup_report/runtime_cpu_check/runtime_cpu.log、diagnostic_launch/diagnostic.log、archive_manifest、external_verification、result_summary、reading_reviewを追加。元run/plan/教材は不変。非学習1load/4call・319.729秒/$0.0248678・EOS2/strict1/教師literal0、短課題自体の役割/更新混同を実測。Bはgold A条件付き、CMEE採用へ加算しない。全20payload原本Library libfile_aea840e0b0f081918da545233ddc2fbe v0。STRUCTURE_MAP_DELTA_NONE、GPU保持/追加model0、旧全文意味/本文0/2を維持。
+
+
+## 2026-10-29 補助4教師×2周の8更新 — weekly§98
+
+新observation_learning/training/2026-10-26-unconnected-native/auxiliary_fit8/: run_fit8.py（8更新/別保存/no-grad reload/6生成）、prepare_fit8.py（実token/labelsと現CMEE教師2/保存raw2対照）、consume_fit8.py（真の6callcounterから全文2だけ未変更CMEEへ）、fit8.plan.json（無効準備原本）、static_cpu_check.json、cmee_restore_payload.json（130原本のSHA不変/復元metadata17補正）、README。既存教材/評価/CMEE責務不変、STRUCTURE_MAP_DELTA_NONE。原2dfd保持、旧9回帰未検証、通常有効化なし。

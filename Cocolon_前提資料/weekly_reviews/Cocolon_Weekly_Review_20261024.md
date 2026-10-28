@@ -3436,3 +3436,14 @@ EOS2/4・strict JSON1/4・literal教師一致0/4。A BOOK2272/EOS/JSONだがlate
 全4raw/教師/user/prior/proseの全文読解は[auxiliary4_result_20261029/reading_review.md](../observation_learning/training/2026-10-26-unconnected-native/staged_pair9/auxiliary4_result_20261029/reading_review.md)。短課題自体の未習得が実測され、全文転移だけの説明を退ける。転移不足の併存/4B能力上限/未知一般化は未判定。次候補は同じ出所付き4教師でquote/claim/relation/time証拠/update対応の学習配分をCPUで具体化すること。追加学習・追加生成・枠延長/reader緩和・新観測会は行わない。現2件に教材不足の観測会不要。
 
 全実行原本70,969bytes/SHAa4faaf35c3dce1969bac0f29d6f5cfe7841c6a6d4f4e3f67e332bd5e74657783/20payload+manifestをPod外全CRC/hash/size、source/固定4行/plan/非学習counter/全入力不変で照合。Library libfile_aea840e0b0f081918da545233ddc2fbe v0へ保全。旧重みLibrary cf473…はそのまま。run.jsonのpendingを凍結しresult_summaryでCLOSED_DIAGNOSTIC_NOT_ADOPTED。primary=BLOCKER_NARROWED、商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false、STRUCTURE_MAP_DELTA_NONE。GPU保持/Stop/restart/delete/管理API0、通常app/API/DTO/DB/RN/reader/Render/Supabase/merge/deploy変更0。
+
+
+## 98. 2026-10-29 — 補助4教師を2周し、元全文2件のCMEE採否まで確認する一回
+
+Mashの新継続指示に基づく[auxiliary_fit8](../observation_learning/training/2026-10-26-unconnected-native/auxiliary_fit8/README.md)。開始PR30=5184f7a/API7b9ee073、全機能原本・既確認全体設計/全file地図/current maps・最新§97と全rawを照合。前回診断の短課題内role混同に直接対応し、同一補助4行×2周8更新、保存2dfd開始、同CE/EOS/LR5e-5/clip1/seed/fresh AdamW/112対象。元15/eval/既存補助4教師/指示/API/readerは不変。アンカーや元全文教師を追加せず、旧9回帰は未検証とする。別保存/no-grad再読込→補助4+元全文2の6生成、literal一致を新しい全文Gateにせず、全文2だけ実CMEE/本文/条件付きcoldへ渡す。
+
+A5000/$0.28/h、新Pod vgkm402msgroiuを保持。最大1500秒/$0.117処理按分、parent1490+10、各180秒・context8192・補助2816/1024・全文3712/3584。準備/CPU/回収/保持/保存/通信/税等別、実測から約807秒/$0.0628が目安で完了保証ではない。期限/OOM/非有限/identity不一致でSTOP、再試行/追加生成/次run自動開始0。今回指示の新単位で、§97/§96のrun/lock/予算は再利用しない。
+
+学習前に実CPUで全labels/EOS/8順/不変入力、現行API実読込、元全文prompt同一、正解教師2件の意味/本文と保存raw2件を対照する。保存原本に現行5fileがないという進行説明は訂正済み。実bytesは現7b9と一致し、古かったのは復元目録のAPI版/容量情報であった。130原本のSHAは不変、17容量/欠落metadataと版だけを新復元目録へ補正。省略legacy/frozen等12は同じGitblobから復元し、旧原本は変更しない。
+
+sourceは既存学習rootの新auxiliary_fit8内に限定。通常app/型/wire/reader/API/DTO/DB/RN/Render/Supabase/merge/deploy/lifecycle変更0、STRUCTURE_MAP_DELTA_NONE。実Codex Work/GPT-6/root単独実行、補助agentは正式Pro/Ultra/humanではない。商品0/正式0/3/54.50％据置。現2件の新観測会不要。
