@@ -16,7 +16,7 @@ def main():
  started=time.monotonic()
  assert os.environ['CUDA_VISIBLE_DEVICES']=='' and os.environ['HF_HUB_OFFLINE']==os.environ['TRANSFORMERS_OFFLINE']=='1'
  assert not PACK.exists() and not Path('/workspace/cocolon_reset9_run_20261028').exists()
- assert sha(ROOT/'restore_payload.json')=='157392e2e41f7cb427146804092ca13fcba68289c34b21237a73ecb1f6ef3439f4'
+ assert sha(ROOT/'restore_payload.json')=='1573e92124f26971468404092ca13fcba68289c34b21237a73ecb1f6ef3439f4'
  manifest=json.loads((ROOT/'restore_payload.json').read_text())
  for f in manifest['files']:assert sha(ROOT/f['path'])==f['sha256'],f['path']
  cpu=json.loads((OLD/'actual_cpu_check.json').read_text())
