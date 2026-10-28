@@ -1,0 +1,51 @@
+
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]
+Loading weights:   0%|          | 1/723 [00:00<01:12,  9.99it/s]
+Loading weights:   4%|▎         | 27/723 [00:00<00:04, 155.76it/s]
+Loading weights:   7%|▋         | 51/723 [00:00<00:03, 193.86it/s]
+Loading weights:  11%|█         | 79/723 [00:00<00:02, 223.01it/s]
+Loading weights:  14%|█▍        | 102/723 [00:00<00:02, 212.68it/s]
+Loading weights:  18%|█▊        | 132/723 [00:00<00:02, 233.15it/s]
+Loading weights:  22%|██▏       | 156/723 [00:00<00:02, 222.96it/s]
+Loading weights:  26%|██▌       | 185/723 [00:00<00:02, 229.56it/s]
+Loading weights:  30%|███       | 220/723 [00:00<00:01, 263.46it/s]
+Loading weights:  34%|███▍      | 248/723 [00:01<00:01, 264.96it/s]
+Loading weights:  38%|███▊      | 275/723 [00:01<00:01, 251.76it/s]
+Loading weights:  42%|████▏     | 301/723 [00:01<00:01, 243.55it/s]
+Loading weights:  45%|████▌     | 326/723 [00:01<00:01, 237.22it/s]
+Loading weights:  48%|████▊     | 350/723 [00:01<00:01, 233.91it/s]
+Loading weights:  52%|█████▏    | 374/723 [00:01<00:01, 228.49it/s]
+Loading weights:  55%|█████▌    | 398/723 [00:01<00:01, 228.54it/s]
+Loading weights:  58%|█████▊    | 421/723 [00:01<00:01, 225.00it/s]
+Loading weights:  73%|███████▎  | 529/723 [00:01<00:00, 467.88it/s]
+Loading weights:  93%|█████████▎| 672/723 [00:02<00:00, 743.12it/s]
+Loading weights: 100%|██████████| 723/723 [00:02<00:00, 344.60it/s]
+/usr/local/lib/python3.12/dist-packages/peft/utils/save_and_load.py:313: UserWarning: Could not find a config file in Qwen/Qwen3.5-4B - will assume that the vocabulary was not modified.
+  warnings.warn(
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]
+Loading weights:   2%|▏         | 13/723 [00:00<00:06, 117.51it/s]
+Loading weights:   6%|▌         | 40/723 [00:00<00:03, 198.73it/s]
+Loading weights:   9%|▉         | 64/723 [00:00<00:03, 216.85it/s]
+Loading weights:  12%|█▏        | 89/723 [00:00<00:02, 223.06it/s]
+Loading weights:  15%|█▌        | 112/723 [00:00<00:02, 216.43it/s]
+Loading weights:  19%|█▊        | 134/723 [00:00<00:02, 216.32it/s]
+Loading weights:  22%|██▏       | 161/723 [00:00<00:02, 232.99it/s]
+Loading weights:  27%|██▋       | 198/723 [00:00<00:01, 273.21it/s]
+Loading weights:  31%|███▏      | 226/723 [00:00<00:01, 274.66it/s]
+Loading weights:  35%|███▌      | 254/723 [00:01<00:01, 260.20it/s]
+Loading weights:  39%|███▉      | 281/723 [00:01<00:01, 249.72it/s]
+Loading weights:  42%|████▏     | 307/723 [00:01<00:01, 242.92it/s]
+Loading weights:  46%|████▌     | 332/723 [00:01<00:01, 236.71it/s]
+Loading weights:  50%|████▉     | 359/723 [00:01<00:01, 244.50it/s]
+Loading weights:  53%|█████▎    | 384/723 [00:01<00:01, 240.49it/s]
+Loading weights:  57%|█████▋    | 411/723 [00:01<00:01, 237.83it/s]
+Loading weights:  63%|██████▎   | 459/723 [00:01<00:00, 305.29it/s]
+Loading weights:  80%|███████▉  | 576/723 [00:01<00:00, 551.61it/s]
+Loading weights:  93%|█████████▎| 675/723 [00:02<00:00, 678.14it/s]
+Loading weights: 100%|██████████| 723/723 [00:02<00:00, 347.28it/s]
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `fused_recurrent_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+{"status": "RAW_COMPLETE_PENDING_CMEE_AND_CONTENT_REVIEW", "optimizer_steps_completed": 8, "model_calls_completed": 6, "processing_seconds": 755.1447730890941, "process_cost_usd": 0.058733482351373996}

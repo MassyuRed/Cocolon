@@ -5561,3 +5561,18 @@ STRUCTURE_MAP_DELTA_PRESENT。APIa8be7a9bのprivate4source＋新test1：preparat
 
 
 auxiliary_fit8の実CPU原本cpu_check.json/cpu_preparation.log/.exitとruntime_authorized_plan.jsonを追加。CPU12.855981秒/model0・8順48,642token・正解教師意味/本文2/2・保存raw同API再判定0/2。source a6198b6から今回8更新/6生成の一回を開始、旧planは不変。STRUCTURE_MAP_DELTA_NONE。
+
+
+### §98 終了保存物 — auxiliary_fit8/result_20261029
+
+| ファイル | 所有する実結果 |
+|---|---|
+| `run.json・training.jsonl` | 8更新/2load/6生成、入力不変、新afaa2c2e、755.144773秒/$0.058733482処理按分。runはraw完了pendingの原記録として凍結 |
+| `initial_loaded_tensors.json・reloaded_tensors.json` | 112F32/3,833,856parameterの学習時・非学習再読込記録 |
+| `after_AUX-*.jsonl` 4件 | EOS4/strict3/literal0、正解A条件付きBと部分課題であり採用判定外 |
+| `after_FT-*.jsonl` 2件・`cmee/diagnosis.json` | BOOK3712/noEOS/TOKEN_LIMIT、SHOP3367/EOS/INVALID_FORMAT、現API7b9の意味/本人本文0/2・snapshot0/cold対象なし |
+| `gpu_launch.json・gpu.log・cmee.log・cmee.exit` | 実起動条件・GPU/CPU実行log、追加生成/再試行0 |
+| `external_manifest.json・external_verification.json` | 重み込み原本18,305,028bytes/323payload＋manifestの全CRC/hash/size、112F32有限/形状/全112変化・6rawhash/token・途中raw不変。Library libfile_4df0fff22010819189901162df474e4f v0 |
+| `reading_review.md・result_summary.json` | 全6rawの意味/時点/役割/全更新/本人本文を照合し閉鎖を所有。新重み不採用、旧9回帰未検証、次候補と新観測会不要の判断 |
+
+元15/eval/補助教師/指示/reader/旧重み不変。新しい商品責務・公開型・DB/RN/Render/Supabase変更なし、STRUCTURE_MAP_DELTA_NONE。次は補助と元全文の学習接続設計を見直す候補で、追加周回/上限延長/次run自動開始0。全体00/観測入口/weekly§98へ戻る。

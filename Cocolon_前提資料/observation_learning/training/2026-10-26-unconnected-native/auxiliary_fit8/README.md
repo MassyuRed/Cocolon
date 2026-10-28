@@ -1,4 +1,11 @@
-# 既存補助4教材を2周する8更新 — 2026-10-29
+# 既存補助4教材×2周の8更新完了 — 2026-10-29
+**終了結果：** 8更新・別保存afaa2c2e・112F32非学習reload・固定6生成を755.144773秒/$0.058733482処理按分で完了。補助EOS4/4・strict3/4・literal0/4、元全文はBOOK TOKEN_LIMIT/SHOP INVALID_FORMAT、現CMEE意味/本人本文0/2・snapshot0/cold対象なし。新重みは不採用。この単位は閉鎖、retry/追加生成/次run自動開始0。元15/eval/補助教師/指示/reader/旧重みは保持。
+
+[result_summary.json](result_20261029/result_summary.json)、[全raw読解](result_20261029/reading_review.md)、[Pod外検証](result_20261029/external_verification.json)が終了owner。重み込み原本18,305,028bytes/323payload＋manifestを全CRC/hash/size/112F32形状・有限性/全112変化で照合し、[原本一式](https://chatgpt.com/library?file_id=libfile_4df0fff22010819189901162df474e4f&account_id=personal) v0へ保全。処理按分に準備/CPU/回収/保持/保存/通信/税等は含めない。
+
+補助短課題の閉鎖は改善したが、全文ではroleとsource欄/時点/更新/本人本文への接続が未成立。次候補は既存補助A/Bと元全文の責務対応を結ぶ学習設計へ見直し、旧anchor保持/旧9回帰も評価すること。新量・順序は未固定、現2件の新観測会不要。STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。
+
+以下はこの一回の実行条件と準備履歴。
 
 Mashの新しい「4B学習＋CMEE接続を続けて」に基づく新単位。開始PR30=5184f7a/API=7b9ee073。前回の補助診断は閉鎖済みで、旧run/lock/残枠は再利用しない。目的は保存2dfdに残るquote/claim/relation/時点証拠/update単位の混同を、既存の出所付き4教師で改善し、元全文2件の実CMEE採否まで確認すること。新観測会は現2件に不要。
 
@@ -15,7 +22,7 @@ Mashの新しい「4B学習＋CMEE接続を続けて」に基づく新単位。�
 - static_cpu_check.json：静的確認/実行拒否。model/forward/生成0。
 - cmee_restore_payload.json：130原本の実SHAは不変。復元目録の古いAPI版/17容量欠落・不整合を実bytesで補正した、新しい復元用目録。
 
-元archiveのAPI実ファイル5件は既に現7b9と同一だった。古かったのは目録のsource_api_refと容量情報であり、readerの古さ・過去出力の不正を意味しない。省略されていたlegacy/frozen等12原本は同じGit blob/SHAから復元。新Podで130原本＋最新API5hash/module実位置を照合してから、CPU教師2件と保存2dfd原出力2件を確認する。原目録・旧runは変更しない。
+元archiveのAPI実ファイル5件は既に現7b9と同一だった。古かったのは目録のsource_api_refと容量情報であり、readerの古さ・過去出力の不正を意味しない。省略されていたlegacy/frozen等12原本は同じGit blob/SHAから復元。新Podで130原本＋最新API5hash/module実位置を照合し、CPU教師2件と保存2dfd原出力2件を確認した。原目録・旧runは変更しない。
 
 実行担当はCodex Work/GPT-6 root一人。独立補助は正式Pro/Ultra/human受入れではない。STRUCTURE_MAP_DELTA_NONE（実験順/保存物だけで商品責任・wire・reader不変）。商品0/正式0/3/54.50％・candidate_ready=false/automatic_progression=false。
 

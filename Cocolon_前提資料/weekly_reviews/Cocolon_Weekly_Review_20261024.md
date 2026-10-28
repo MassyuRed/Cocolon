@@ -3452,3 +3452,16 @@ sourceは既存学習rootの新auxiliary_fit8内に限定。通常app/型/wire/r
 ### §98 実CPU準備・一回の開始
 
 source a6198b6dbf34a810264fd42e42d69626e75709f7の新3source/準備plan/静的CPU/130復元目録/案内を含む11fileをGitHubから全件読み戻し照合後に開始。実Pod CPU12.855981432秒・model/forward/生成/SQL0。4補助の全target/EOS/labels/prompt mask、8順48,642token、全文2prompt同一、現行API5hashと実module位置を確認。正解教師の意味/本文2/2、保存2dfdの元全文raw再判定は0/2（BOOK model_evidence_collection_invalid、SHOP semantic_receipt_not_validated）。これは新モデル生成ではない。実CPU原本と今回runtime条件は新folderへ保存し、準備plan原本は無効のまま保持。今回user指示に基づき保存2dfdから8更新/別保存/no-grad reload/固定6生成を一回開始。
+
+
+### §98 終了結果 — 補助の閉鎖改善、元全文の意味/本人本文は0/2
+
+実8更新/別保存/非学習reload/固定6生成を755.144773089秒、A5000表示$0.28/h按分$0.058733482で完了。準備/CPU/回収/継続保持/保存/通信/税等は別。112F32・3,833,856parameterを保存afaa2c2e2f7263792d5cf9930bb2fac0bf44bdccd04ff2ffa8049a2cfd2f12d2へ保存し全112tensor変化、元2dfd/凍結入力不変。model load2・training forward8・生成6、retry0。
+
+補助A-BOOK2181/B-BOOK625/A-SHOP2349/B-SHOP800token、EOS4/4（前2/4）・strict3/4（前1/4）・literal0/4。Bは正解A条件付き、部分射影4件はCMEEへ採用提出しない。BOOKの誤ったrole/関係根拠、SHOP Aのtime内claim/duplicate key、Bの附属relation/更新/本文の取り違えが残る。元全文BOOK3712token/EOSなしでTOKEN_LIMIT、SHOP3367token/EOSあり/strictJSONでもINVALID_FORMAT、両REJECT/semantic_receipt_not_validated。現API7b9の未変更CMEEで意味/本人本文0/2、採用snapshot0/cold対象なし。実CMEE CPU1.862757501秒・追加model/学習/SQL0。rawrunのpending statusは凍結したまま、result_summary.jsonで閉鎖を所有する。
+
+[全6raw読解](../observation_learning/training/2026-10-26-unconnected-native/auxiliary_fit8/result_20261029/reading_review.md)：BOOKは15quote/位置一致14（returnedを原入力欄へ誤配置）、remaining_concern欠落と関係roleのclaim化、uid反復ADD/本文未到達。SHOPは15quoteの全fがrole名で位置0/15、time契約外keyとev文字列、11claim/6relation端点は戻っても附属relationと全更新参照は欠ける。本人の「気がした/ようで/と感じた」を事実へ強め、Reception反復/update_note同文・本文bind不一致が残る。未変更named decoderの静的先頭エラーsource_role_timeと実INVALID_FORMATを分離し、未到達の意味検査理由へ換算しない。EOS・通常JSON・件数・学習loss低下を本人本文成功へ扱わない。
+
+原本18,305,028bytes/323payload＋manifest、SHA256 4b9b1f8017f2f5661411399aa480344f2ab6f07ff4e6a2d5705041ac0cfabef7をPod外全CRC/hash/size/112F32形状・有限性/全112変化/6rawhashとtoken、途中回収4raw不変で照合。Library libfile_4df0fff22010819189901162df474e4f v0へ重み・130原本・入力・実行条件・CMEE結果を保存。GitHubではauxiliary_fit8/result_20261029が原raw6/run/training/tensor records/CMEE診断/実log/全member目録/検証/読解/終了owner、重みは外部保存。
+
+この一回は閉鎖・消費済み、新afaa通常不採用。旧2dfd/284f/d431/全候補と元15/eval/補助4教師/指示/API/reader不変、旧9回帰は今回未検証。追加周回/上限延長/reader緩和/raw補修/次run自動開始0。次候補は既存補助A/Bと元全文の責務対応を結ぶ学習設計の見直し、旧anchor保持/旧9回帰も含めた評価。新量・順序は未固定で、同じ補助だけの周回を自動継続しない。現2件の新観測会は不要。GPU稼働保持/Stop・再起動・削除0、本番/DB/Render/Supabase/RN/merge/deploy変更0。全体現在地/観測入口/01Afile地図を差分同期、STRUCTURE_MAP_DELTA_NONE。商品0/正式0/3/54.50％・candidate_ready=false/automatic_progression=false。
