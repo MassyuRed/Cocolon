@@ -11,3 +11,6 @@ Mashの新しい継続指示に基づく新しい一回。開始PR30 34035ab6/AP
 run_transfer11.pyは学習/別保存/非学習reload/固定11生成、prepare_transfer11.pyは9種類の学習target全labels/EOSと11評価prompt/現CMEE正解教師11件のCPU対照、consume_transfer11.pyは元形式を選んで無補修rawを既存receiver/Engineへ渡す。CPU前のtransfer11.plan.jsonは実行無効の原本、実CPU確認後の今回runtime条件を別保存する。static_cpu_check.jsonは固定入力検査と実行無効拒否、model/forward/生成0。
 
 通常app/API/DTO/DB/RN/Render/Supabase/merge/deploy/公開・GPU lifecycle変更0。STRUCTURE_MAP_DELTA_NONE（offline学習順と保存物だけ）。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false。現BOOK/SHOPの完成教師はあり追加観測会不要。Windows/Macは未選定。
+
+
+§99 CPU初回は旧9の受領引数誤りpreparation_candidate_format_invalidで終了（約13.94秒、model/forward/生成/学習0）。既存receiverはquote形式でNone/defaultだけを受け、QUOTE_CANDIDATE_SCHEMAはmessage builder用だった。旧9受領1箇所だけNoneへ修正し、full2 named/message builder/reader/教師は不変。旧source ab181b3d・plan・実CPU logを保全し、新v2packでCPUを一度再確認する。二回目の不成立では追加修正/モデル開始を行わない。

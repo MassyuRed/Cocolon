@@ -69,7 +69,7 @@
   "gpu_lifecycle_operations": 0,
   "runner_sha256": "5a94e2d04fcf59922c0cc1d28a2c491dfeca55521fb55e030573629dc19feccd",
   "preparer_sha256": "589f39b6a0eba281215a746cace9a493d3b5225be0d0dc7ffd0e97fbfb0a93ac",
-  "consumer_sha256": "32d3394de504d23ea4c5547e3b7ff9b3d61a633d1b9210838cca428356bb35d7",
+  "consumer_sha256": "07015f1530f232f4152841c45355d43faad68013a5740bdd22539a232ba8ecb1",
   "cpu_check_sha256": null,
   "gpu_run_authorized": false,
   "approval_basis": null

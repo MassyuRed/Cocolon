@@ -3472,3 +3472,6 @@ source a6198b6dbf34a810264fd42e42d69626e75709f7の新3source/準備plan/静的CP
 Mashの新継続指示。PR30 34035ab6/API7b9ee073、全機能原本/作業rule/全体設計と全file地図/current maps/観測学習意図/最新§98を照合。新[同一教師の接続学習](../observation_learning/training/2026-10-26-unconnected-native/joint_transfer11/README.md)は、保存afaaの局所改善を元全文へつなぐため、補助A/B→同case全文、旧初回/訂正/日常anchor3、最後に元全文2をもう一回の計11更新。元19/評価/prompt/reader/API/採用基準不変。別保存/112F32非学習reload後、全文2＋旧9を11生成する。旧9はquote、元全文2はnamedのまま実CMEE/本文/採用済のみcoldへ。補助再生成とbefore9を増やさず、afaa旧9before欠測を明記し維持/改善率へ換算しない。
 
 新単位の上限2700秒/$0.21処理按分（A5000表示$0.28/h、準備/CPU/回収/保持/保存/通信/税等別）。parent2690+10・各180秒/context8192・旧9 cap2560/全文3712,3584。実CPUでは全labels/EOS/11順/原11prompt/正解教師11件を対照し、その後一回開始する。再試行/追加生成/上限延長/次run自動開始0。GPU保持/Stop等0、本番/API/DB/RN/Render/Supabase/merge/deploy変更0。root GPT-6 Codex Work単一実行owner、補助はread-onlyで正式Pro/Ultra/human受入れではない。商品0/正式0/3/54.50％・candidate_ready=false/automatic_progression=false、STRUCTURE_MAP_DELTA_NONE。現2件の追加観測会不要。閉鎖済§98のrun/lock/枠を再利用しない。
+
+
+§99 CPU初回は旧9の受領引数誤りpreparation_candidate_format_invalidで終了（約13.94秒、model/forward/生成/学習0）。既存receiverはquote形式でNone/defaultだけを受け、QUOTE_CANDIDATE_SCHEMAはmessage builder用だった。旧9受領1箇所だけNoneへ修正し、full2 named/message builder/reader/教師は不変。旧source ab181b3d・plan・実CPU logを保全し、新v2packでCPUを一度再確認する。二回目の不成立では追加修正/モデル開始を行わない。

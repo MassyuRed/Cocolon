@@ -60,7 +60,7 @@ def read_raw(v, native, Engine, semantic, prep, cid, raw):
     receipt = prep.receive_candidate(material, request_id=material.request_id,
         raw_output=raw['raw_text'], finish_reason=raw['finish_reason'], provider=raw['provider'],
         model=raw['model'], revision=raw['revision'], adapter_revision=raw['adapter_revision'],
-        usage=raw['usage'], elapsed_seconds=raw['seconds'], candidate_format=SCHEMA if cid in IDS else prep.QUOTE_CANDIDATE_SCHEMA)
+        usage=raw['usage'], elapsed_seconds=raw['seconds'], candidate_format=SCHEMA if cid in IDS else None)
     item = dict(case_id=cid, receipt=v.json_value(receipt), meaning_adopted=False, body_available=False)
     saved = None
     try:
