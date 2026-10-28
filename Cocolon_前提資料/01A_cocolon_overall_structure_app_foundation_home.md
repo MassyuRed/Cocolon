@@ -5424,3 +5424,16 @@ STRUCTURE_MAP_DELTA_PRESENT。APIa8be7a9bのprivate4source＋新test1：preparat
 | named_reference9_result/README.md・result_summary.json・reading_review.md | 9更新/save/112 no-grad reload/2生成の閉鎖、SHOP完結と不採用を区別、全raw/本文読解 |
 | named_reference9_result/run/*・cmee/diagnosis.json | 実9学習行・112load/reload・原raw2・TOKEN_LIMIT/INVALID_FORMAT→REJECT、採用snapshot0 |
 | named_reference9_result/runtime_originals.zip・external_verification.json・weight_verification.json・export_named9.py・verify_archives.py | 108328bytes/24payload原本、Pod外全hash/112F32同形状/有限性、追加重み14374039bytesはLibrary libfile_52309bdfc88881918095f167afe8f12d v0 |
+
+
+## 2026-10-28 — named prior表記修復と一回実学習の全ファイル地図
+
+既存 `observation_learning/training/2026-10-26-unconnected-native/named_prior_projection9/`。STRUCTURE_MAP_DELTA_NONE（既存モデル向けcopyの内部表記だけ、責務/型/wire/receiver/通常接続不変）。APIc4e1ccb2はmodel_candidate_source.pyの可逆prior投影/role metadataと同family test2条件だけを変更。CPU349成功と実raw0/2を分ける。最新は全機能00/weekly§89。
+
+| path | 責務 |
+|---|---|
+| README.md・namedprior9.plan.json・result_summary.json | 既存600秒/$0.047の新一回と最終閉鎖/新b8bc不採用/次run自動開始なし |
+| run_namedprior9.py・launch_once.py・prepare_namedprior9.py・run_cpu_tests.py・adaptive_loss.py・consume_named9.py | 固定9/保存112F32非学習reload/after2、全15の入力/教師不変範囲、既存DB遮断CPU・厳格raw受領。prepareの実行原本は凍結し再開しない |
+| actual_cpu_check.json・api_source_manifest.json・pytest_*・cpu_originals.zip | 実CPU349成功/SQL12対象外、prior往復2/2、他13/全教師不変、元112有限。初回収集error等も原本ZIP内へ保全 |
+| run/*・cmee/diagnosis.json・reading_review.md | 実9学習行/112load-reload/無補修raw2、実TOKEN_LIMIT/INVALID_FORMATと全本文/意味の静的読解 |
+| weight_verification.json・external_verification.json・export_namedprior9.py | Pod外全hash/CRC/112F32同形状/有限性、重み込み16,176,277bytes/150payload+manifestはLibrary libfile_51752dcc98948191bc630d38f7002589 v0 |
