@@ -5464,3 +5464,16 @@ STRUCTURE_MAP_DELTA_PRESENT。APIa8be7a9bのprivate4source＋新test1：preparat
 | run_updatesfirst9.py・adaptive_loss.py・consume_named9.py・launch_once.json | 固定9更新/別保存112F32 no-grad reload/after2、実rawの厳格受領と採用時cold経路。今回採用0でcold対象なし。全て閉鎖実行原本で再開しない |
 | run/run.json・run/training.jsonl・run/initial_loaded_tensors.json・run/reloaded_tensors.json・run/after_FT-BOOK-AFTER-ANSWER.jsonl・run/after_FT-SHOP-AFTER-ANSWER.jsonl・cmee/diagnosis.json・reading_review.md | 実9学習/112load-reload/無補修raw2、BOOK根拠重複拒否・SHOP長さ優先拒否、全source/prior/教師/本文の読解 |
 | export_updatesfirst9.py・weight_verification.json・external_verification.json | Pod外全CRC/hash/size/112F32有限性・同形状照合。全原本/追加重み16,175,646bytes/149payload+manifest、Library libfile_f0ac589476288191b7a8ca3e001392a5 v0 |
+
+
+## 2026-10-28 — 共同loss一回の全ファイル地図
+
+既存学習owner配下 `observation_learning/training/2026-10-26-unconnected-native/joint_focus9/`。API7b9ee073/全15prompt・教師bytes不変、学習lossのみ変更。app/API/DB/RN/reader責務・型・経路の変更なし、STRUCTURE_MAP_DELTA_NONE。新一回は閉鎖・消費済み、最新は全機能00/weekly§92。
+
+| path（prefix下） | 責務 |
+|---|---|
+| README.md・jointfocus9.plan.json・runtime_authorized_plan.json・result_summary.json | 準備時/実行時の原条件と最終閉鎖、新2952通常不採用。raw pending/承認済みplanを最終状態へ書換えずresult_summaryで閉鎖 |
+| adaptive_loss.py・prepare_jointfocus9.py・actual_cpu_check.json・target_groups.json・api_source_manifest.json・cpu_external_verification.json | 全文adaptive50％/引用参照25％/本人本文終端25％、実token対応とFP32勾配/不正値拒否。新CPU6.672460秒/model0、既存353証拠再利用。CPU原本100818bytes/16payload+manifestは下記全原本ZIP内 |
+| run_jointfocus9.py・consume_named9.py・launch.json | 原284f固定9更新/112F32別保存no-grad reload/after2、無補修実rawを同厳格receiver/CMEEへ接続。採用snapshot時だけcold経路、今回は対象なし |
+| run/run.json・run/training.jsonl・run/initial_loaded_tensors.json・run/reloaded_tensors.json・run/after_FT-BOOK-AFTER-ANSWER.jsonl・run/after_FT-SHOP-AFTER-ANSWER.jsonl・cmee/diagnosis.json・reading_review.md | 実9学習/112load-reload/raw2、両EOSでもroot未閉鎖の実拒否、全source/prior/教師/意味/本人本文の静的読解 |
+| export_jointfocus9.py・weight_verification.json・external_verification.json・source_verification.json | 実source11path固定、Pod外全CRC/hash/size/112F32有限性と同形状照合。全原本/追加重み16,145,834bytes/146payload+manifest、Library libfile_739efcbd074c81919e9d0ca8befb34c5 v0 |

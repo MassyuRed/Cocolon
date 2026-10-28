@@ -1,6 +1,6 @@
 # Joint focus9 — fresh bounded continuation, 2026-10-28 JST
 
-Current status: CPU verified; GPU not yet executed. This is a new unit under Mash’s latest 「4B学習＋CMEE接続」を続けて request, rule18 §11.3. The closed updates_first9 run is preserved and is not retried.
+Current status: CLOSED_NOT_ADOPTED_NO_RETRY. The fresh once-run completed9 updates/save/exact112-F32 inference-only reload/2 generations, followed by actual CMEE rejection2/2; meaning/body adoption0/2. The raw pending report and authorized runtime plan are immutable execution records; result_summary.json owns final closure. This is a new unit under Mash’s latest 「4B学習＋CMEE接続」を続けて request, rule18 §11.3. The closed updates_first9 run is preserved and is not retried.
 
 ## Concrete blocker and single change
 
@@ -26,3 +26,11 @@ Original adapter `284f1df77c828982bdb7c2480f3f269b71dc9d69a29ea36b48dc6d25ab807d
 Stop on first limit/failure with no retry or automatic next run. Preserve all raw outputs and new weights even if rejected; use actual receiver/CMEE and same-snapshot cold read only if accepted. Root is sole executor/writer. Helper read-only reviews are not formal Pro/Ultra/human acceptance. Codex Work/GPT-6 actual environment; formal3-core acceptance remains0/3, management54.50%, product credit0, candidate_ready=false, automatic_progression=false. GPU remains held; lifecycle operations0, production/DB/Render/merge/deploy0.
 
 `jointfocus9.plan.json` is the pre-execution prepared record. The runtime authorized plan and raw run will be preserved without rewriting; final result_summary owns closure.
+
+## Actual result and preserved weights
+
+Processing483.3823727410054 seconds / $0.037596406768744865 allocation; preparation/CPU/recovery/holding/storage/network/tax extra. Exit0, no timeout/OOM/nonfinite, changed112/112 tensors. BOOK2746 tokens/EOS true/117.04861651698593s; SHOP3017/EOS true/129.16070323099848s. Both reach all three prose fields, but each omits the final root closing brace. Actual receiver INVALID_FORMAT and engine REJECT/semantic_receipt_not_validated for both. Meaning/body0/2, adopted snapshots0, cold reads N/A. Actual CMEE CPU1.8309825280448422s/model0/SQL0.
+
+SHOP avoids the preceding249-fold observation loop and token limit, while BOOK loses preceding JSON completion. Existing semantic-role, source/field, relation/update and natural-body defects remain. EOS or more written update entries are not quality success; see reading_review.md. This small fixed run does not prove general improvement or4B capacity limits. No raw repair, reader relaxation or further model execution.
+
+New adapter2952ec5839a63789f1416aa6ebd19323b73a1610e6e0135da582c0dff7f92e73 is NOT ADOPTED. Full archive16,145,834bytes /146payloads+manifest, SHA256 bf1df033106739c92d693ed46a9a6c45fdb13756b6cee00391c7e3cb76f1905e. Outside Pod every CRC/size/hash, exact CPU archive/API source, raw identity,112F32 finite3,833,856 parameters and initial/reload shapes were verified. Early BOOK matches final bytes. Weights/originals preserved at Library libfile_739efcbd074c81919e9d0ca8befb34c5 version0. Original284f/d431 and previous candidates are untouched. GPU held, no lifecycle operation. Source11 paths were read back exactly before execution; final premise owners and weekly§92 reflect this closed result.

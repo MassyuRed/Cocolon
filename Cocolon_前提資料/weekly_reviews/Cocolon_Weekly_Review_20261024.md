@@ -3341,3 +3341,19 @@ Jupyter CPU26.858871秒、pytest20.425810秒、353成功/FAIL0/ERROR0/SKIP0、SQ
 
 primary=BLOCKER_NARROWED、商品0/正式0/3/54.50％据置。この一回は閉鎖・消費済み、追加学習/生成/同条件反復/reader緩和/raw補修/上限延長/次run自動開始0。次候補は既存教師の原根拠共有/role対応、附属関係を含む全更新/namespace、本人本文の復唱/反復を扱う学習設計。追加観測会が必要な教材不足や4B能力限界を証明した結果ではない。GPU保持、Stop/restart/delete/管理API0、通常app/公開API/DTO/DB/RN/Render/Supabase/merge/deploy変更0。STRUCTURE_MAP_DELTA_NONE。
 
+
+
+<a id="20261028-joint-focus9-closed"></a>
+## 92. 2026-10-28 — 全文・根拠・本人本文の共同loss一回終了、EOS改善と実不採用を分離
+
+Mashの新継続指示に結び付けた新unit [joint_focus9](../observation_learning/training/2026-10-26-unconnected-native/joint_focus9/README.md)。前§91の閉鎖runは再開せず、rule18§11.3の同方式/同予算内の技術変更として、API7b9ee073・全15prompt/teacher bytes・厳格receiver/CMEE・原284f・9更新/LR5e-5を保持。新2のlossだけ全文adaptive0.50＋ground/reference0.25＋prose/closing/EOS0.25。旧3は元CE、1forward/backwardのまま。source998f24b881167d2b47dce8fd6e4c66d7caca07e7の11path全文/readback/親/変更集合を照合してからJupyter直接実行。root単独writer/executor、Codex Work/GPT-6、補助read-onlyは正式Pro/Ultra/human受入れではない。
+
+新CPU6.672460324秒/model load/forward/update/generation0/CUDA未初期化/SQL0。実tokenizer offsetと元helper inputIDs完全一致、prompt選択0、EOS各1、全文の全target正係数、正規化/参照勾配/解析勾配をFP32で照合、不正group5/非有限拒否。BOOK target2913/ground2149/prose終端78（本文20/34/21）、SHOP3238/2398/119（42/39/35）、補助群相互overlap0（全文とは意図した重複）。同APIの既存353成功は検証再利用、今回の再実行ではなくSQL12も対象外。CPU原本100818bytes/SHA256 5a78ee9d2a8376d48ed3677438805c699ebd6a7ae19fa3fa318e0fffff24ab2b、16payload+manifestをPod外CRC/hash/size/実source5完全一致照合。15教材不変・9系列57730token/長二乗和398780542。
+
+実9更新/112変更/別保存/112F32・3,833,856parameter完全同形状no-grad reload/after2、GPUexit0・期限/OOM/非有限なし。BOOK2746token117.048617秒、SHOP3017token129.160703秒、両EOS/stop・3本文欄まで到達。しかし双方先頭rootの閉じbrace1個が欠け、実receiver INVALID_FORMAT→実CMEE REJECT/semantic_receipt_not_validated。意味/本文0/2、snapshot0/cold対象なし。CMEE CPU1.830982528秒/model・SQL0。補修や仮の意味判定なし。
+
+[全文読解](../observation_learning/training/2026-10-26-unconnected-native/joint_focus9/reading_review.md)：BOOK q10の位置一致9/10、同根拠行重複と不存在field、追加role対応/関係・ADD附属relation欠落/復唱が残る。期待ADD順とur7対応は改善するが前回のJSON完結を失う。SHOP q12/位置12/12/一意12、prior_q消失、前回249反復とtokenlimitは解消。ただし必要8更新に対し9=8ADD+GAP、replace取り違え・空ADD・旧gap根拠、時点/否定scope/関係根拠とtyped cr不正。本文は本人知覚の事実化寄り・距離と置いていかれた感覚の混同、寂しさを3本文とも落とし受け取りにならない。以上は実INVALID_FORMATと分離した静的所見。EOSや書かれた件数を有効更新/本人本文成功へ換算しない。
+
+処理483.382372741秒/$0.0375964068は600秒/$0.047内。準備/CPU/回収/保持/保存/通信/税等別。全原本・追加重み16,145,834bytes/SHA256 bf1df033106739c92d693ed46a9a6c45fdb13756b6cee00391c7e3cb76f1905e、146payload+manifest/147member。全CRC/hash/size・CPU同一・API全source/112F32有限・initial/reload同形状/earlyBOOK一致をPod外照合。新2952ec5839a63789f1416aa6ebd19323b73a1610e6e0135da582c0dff7f92e73は通常不採用、Library libfile_739efcbd074c81919e9d0ca8befb34c5 v0へ別保全。原284f/d431/旧候補を置換しない。
+
+primary=BLOCKER_NARROWED、商品0/正式0/3/54.50％据置。今回新一回は閉鎖・消費済み、raw pending/承認済みplanは原本保持、result_summaryが最終状態owner。追加学習/生成/同条件反復/reader緩和/raw補修/上限延長/次run自動開始0。次の設計候補は既存教師による全体JSON閉鎖とgrounded role/関係/更新・自然な本人本文の同時成立。閉じbrace補修だけでは意味/本文不備を解決できず、追加係数やopaque ID改名の効果を未検証で断定しない。新観測会が必要な教材不足や4B能力限界を証明した結果ではない。GPU保持、Stop/restart/delete/管理API0、通常app/公開API/DTO/DB/RN/Render/Supabase/merge/deploy変更0。STRUCTURE_MAP_DELTA_NONE。
