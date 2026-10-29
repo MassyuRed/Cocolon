@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/workspace/cocolon_suffix2_pack_20261029/run_suffix2.py", line 301, in <module>
+    prepare(args.bundle_root.resolve(),args.initial_adapter.resolve(),args.cmee_root.resolve())
+  File "/workspace/cocolon_suffix2_pack_20261029/run_suffix2.py", line 119, in prepare
+    report=dict(status='CPU_SUFFIX2_READY_NO_MODEL',source_sha256=sha(__file__),plan=plan,encoded=encoded,baseline=baseline,current_cmee_manifest_sha256=sha(cmee_root/'restore_payload.json'),frozen={str(p):h for p,h in bound.items()},seconds=time.monotonic()-started,model_loads=0,model_forwards=0,generations=0,training_updates=0)
+                                                                                                                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/cocolon_suffix2_pack_20261029/run_suffix2.py", line 34, in sha
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+                          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1021, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 1015, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/workspace/cocolon_role18_cmee_20261029/restore_payload.json'

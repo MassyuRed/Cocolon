@@ -2,7 +2,7 @@
 
 **GPU実確認の最終記録（2026-10-29）：** 同Pod vgkm402msgroiu/short_gold_bonobo、Jupyter直接接続、NVIDIA RTX A5000 24564MiB・torch2.8.0+cu128、固定依存/base復元済み。今回の処理費用は前回同Pod表示$0.28/hを按分に使用し、今回live単価は再照会していない。GPU保持/Stop等0。
 
-**現在の直接作業（10/29・境界診断4回完了）：** 保存f493を非学習1load/0updateで正解意味まで・全更新までのprefixから4suffix生成し、条件付き意味/本人本文0/4、EOS2/4・strict JSON1/4。BOOK意味条件はHOLD/更新未束縛、他3は不正形式でREJECT。正しい意味を与えても更新割当が欠け、正しい全更新を与えてもbind反復/参照種類混同・本文/閉じに不備が残ると切分けた。処理120.668072秒/$0.009385294476按分、CMEE CPU1.845805秒（準備/回収/保持等別）。全原本回収・CRC/hash/112F32照合、新重み0/f493不採用。次候補は元全文2本のupdates境界以降〜EOSだけを重点化する2更新で、CPU/起点/評価/費用は未固定・未実行。前回全文0/2・旧after-only7/9/cold7は保持し、条件付き成功を全文成功へ数えない。現2題の新観測会不要、GPU保持。 [全実結果・次の直接候補](training/2026-10-26-unconnected-native/role_binding_preparation/boundary_probe4/README.md)、weekly§102。
+**現在の直接作業（10/29・suffix2 CPU準備完了）：** 前回f493の全文意味/本人本文0/2、旧9は7/9、gold条件付き0/4を保持。元全文BOOK/SHOPのprompt・teacher tokenを保ち、updates境界〜EOSへだけCEを置く2更新を選択した。実CPU3.869429秒、全文7300/7777token、mask6699/7066、監督601/711token、causal window6698/602・7065/712、元11prompt/context・起点112F32・before原本を照合。CPU完全原本433850bytes/SHA922b04a180ec1649654aa073a3f998f12efa75c5ca8e8f0456dc5a07c87554bbを回収済み。保存f493から2更新→別保存/非学習reload→無補助全文2＋旧9の11自由生成→既存CMEE/成立snapshotの別process冷再読を一回実施する。最大1800秒/$0.14処理按分、各生成180秒・旧cap3712/3584/2560、完走保証なし。按分は前回同Pod表示$0.28/hで今回live再照会なし、準備/CPU/回収/保持等別。現2題新観測会不要、GPU保持。 [具体条件](training/2026-10-26-unconnected-native/role_binding_preparation/suffix2/README.md)。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 
@@ -244,4 +244,5 @@ D05でMashは「事実を事実として捉えるのも観測」と教示し、�
 次に観測会を行う場合は、華恋が新しい観測会フォルダを作り、対話と教示を保存し、この一覧を更新します。Mashには普段の形で実演していただき、整理・参照の整備は華恋が担います。今回、定期実行の日時や頻度は設定していません。
 
 保存先を増やすための新システムやDBは作らず、既存のGitHub上で継続します。製品の構造・契約・CMEE実装を変更する場合は、その作業で対象の設計と接続を扱います。
+
 

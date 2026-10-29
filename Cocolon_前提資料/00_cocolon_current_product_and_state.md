@@ -8,7 +8,7 @@
 
 **最新GPU確認（2026-10-29 JST）：** Pod short_gold_bonobo/vgkm402msgroiu、Jupyter直接接続、NVIDIA RTX A5000 24564MiB・torch2.8.0+cu128。今回§102は保存f493の非学習1load/0update/4suffix生成を120.668072秒/$0.009385294476処理按分で完了。CMEE CPU1.845805秒は別。按分は前回同Pod表示$0.28/hを使用し、今回live単価再照会なし。準備/CPU/回収/保持/保存/通信/税等別。前回§101 role18の18更新/1240.614916秒/cold7はその実行履歴。GPU保持、Stop/restart/delete/管理API0。
 
-**現在の直接作業（10/29・境界診断4回完了）：** 保存f493を非学習1load/0updateで正解意味まで・全更新までのprefixから4suffix生成し、条件付き意味/本人本文0/4、EOS2/4・strict JSON1/4。BOOK意味条件はHOLD/更新未束縛、他3は不正形式でREJECT。正しい意味を与えても更新割当が欠け、正しい全更新を与えてもbind反復/参照種類混同・本文/閉じに不備が残ると切分けた。処理120.668072秒/$0.009385294476按分、CMEE CPU1.845805秒（準備/回収/保持等別）。全原本回収・CRC/hash/112F32照合、新重み0/f493不採用。次候補は元全文2本のupdates境界以降〜EOSだけを重点化する2更新で、CPU/起点/評価/費用は未固定・未実行。前回全文0/2・旧after-only7/9/cold7は保持し、条件付き成功を全文成功へ数えない。現2題の新観測会不要、GPU保持。 [全実結果・次の直接候補](observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/boundary_probe4/README.md)、weekly§102。
+**現在の直接作業（10/29・suffix2 CPU準備完了）：** 前回f493の全文意味/本人本文0/2、旧9は7/9、gold条件付き0/4を保持。元全文BOOK/SHOPのprompt・teacher tokenを保ち、updates境界〜EOSへだけCEを置く2更新を選択した。実CPU3.869429秒、全文7300/7777token、mask6699/7066、監督601/711token、causal window6698/602・7065/712、元11prompt/context・起点112F32・before原本を照合。CPU完全原本433850bytes/SHA922b04a180ec1649654aa073a3f998f12efa75c5ca8e8f0456dc5a07c87554bbを回収済み。保存f493から2更新→別保存/非学習reload→無補助全文2＋旧9の11自由生成→既存CMEE/成立snapshotの別process冷再読を一回実施する。最大1800秒/$0.14処理按分、各生成180秒・旧cap3712/3584/2560、完走保証なし。按分は前回同Pod表示$0.28/hで今回live再照会なし、準備/CPU/回収/保持等別。現2題新観測会不要、GPU保持。 [具体条件](observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/suffix2/README.md)。
 
 **現在の観測会（10/27）：** Mashが、基本相談式／短い実入力式は華恋が基本案・判断に迷う例はMash／分析向けも時々交える、まずEmlisAIを優先する方針を明示決定した。[観測会方針](observation_learning/README.md#observation-session-policy-20261027)と[OBS-20261027-001](observation_learning/sessions/2026/OBS-20261027-001/01_dialogue.md#d00)へ記録。社内勉強会の引き継ぎを題材に、質問前の本人役設定を保持し、D11まで採録。D05のMash観測文とD06の相談者役の確認を保持し、D10で本人の「分かりやすかった」という感想の撤回か、保持したままの気掛かりかを見極める問いだったと教示を受けた。D11は華恋の理解で、具体的な次の問いの分岐は未説明。観測会終了は未指示。形式別の4B学習効果は未比較。材料収集と学習投入を分け、凍結15教材・評価・重みへの変更／追加GPU処理0。直近の意味・本文0/2という学習実結果と商品0／正式0/3／54.50％は変えない。
 
@@ -196,4 +196,5 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 
 10/25 全体選定差分：Mashの全体判断指示を受け、全機能原本・全体設計/全file地図の既確認導線・最新weekly・実4B raw/教師・関連会話検索と公式MLX/量子化資料を照合。会話検索を全セッション全文読了とは扱わない。選定責任は華恋、旧4BのMash確定を復活させたという記録にはしない。文書4fileのみ、商品source/API/DB/Render/Supabase/教材/重み不変、STRUCTURE_MAP_DELTA_NONE、ADMINISTRATIVE_ONLY、product_credit=0。正式0/3・54.50％据置。
+
 

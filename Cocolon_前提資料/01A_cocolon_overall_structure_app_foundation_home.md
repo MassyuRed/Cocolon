@@ -5634,3 +5634,9 @@ probe4.pyが既存role18/helperの非学習読込とCMEE read_rawを継承し、
 
 
 終了原本は同boundary_probe4/result_20261029へ保存。run.json/loaded_tensors.json/FT-*.json4件が実1load/4suffix/EOS2・JSON1、conditional_cmee.jsonが条件付き採否0/4、execution_summary.json/gpu_launch.json/gpu.log/cmee.log・exit/once・execute_once.lockが実行条件と120.668072秒/$0.009385294476按分を所有。reading_review.md/result_summary.jsonが全更新・本文・typed bindの読取、閉鎖と次2更新候補（未実行）を所有。external_manifest.jsonはZIP18payload/86686bytesの元bytes目録、archive_payload_locations.jsonは親の既存4file＋result配下への保存対応、external_verification.jsonは全CRC/hash/112F32/4raw/prefix照合を所有。新重み0、条件付き結果は全文成功へ換算しない。STRUCTURE_MAP_DELTA_NONE。
+
+
+
+## 2026-10-29 weekly§103 — role_binding_preparation/suffix2
+
+run_suffix2.pyは元全文2本のtoken列を保持しupdates境界〜EOSだけCEを置く2更新、f493起点/別保存112F32/非学習reload/無補助全文2＋旧9を担当。consume_suffix2.pyは既存CMEE read_raw/型/検査と成立snapshotの別process冷再読を継承。cpu_check.jsonは実token/mask/causal window/元11prompt・before・起点・CMEEの照合原本。cpu.log/exitは引数誤り履歴、cpu_recovered.logは成功。README.mdは実装順と一回条件1800秒/$0.14。GPU未実行、通常商品構造差分なし、STRUCTURE_MAP_DELTA_NONE。

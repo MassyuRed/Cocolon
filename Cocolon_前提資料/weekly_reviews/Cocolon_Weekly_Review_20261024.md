@@ -3571,3 +3571,11 @@ sourcef6f1bb485dc73c11e6669062301893440502d248/PID95992で一回実施。BOOK意
 全4prefix境界差は],の2文字、元教師全文を完全復元。原本ZIP86686bytes/18payload＋manifest、SHA60738af20a88356d73325f42504ed2c0bab0a0c668341443c5be6160960fde76を全CRC/hash/size・112F32有限・実suffix/raw/prefix/adapter revisionでPod外照合。全bytesを親のCPU/source4fileとresult_20261029へ保存し、archive_payload_locations.jsonで対応。使用重み/元bundleは既存Library libfile_e089337060248191a52ee06aad6fc75a v0を保持。新重み/重複重みarchive/追加学習/通常有効化/SQL/retry0。費用は前回同Pod表示$0.28/h按分で今回live再照会なし、準備/CPU/回収/保持等別。primary=BLOCKER_NARROWED、商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false。通常app/API/DTO/DB/RN/Render/Supabase/merge/deploy/lifecycle変更0、STRUCTURE_MAP_DELTA_NONE。
 
 [全4suffix・全更新・本人本文の読取と次候補](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/boundary_probe4/result_20261029/reading_review.md)。
+
+
+
+## 103. 2026-10-29 — 元全文のupdates以降を重点化するsuffix2
+
+**現在の直接作業（10/29・suffix2 CPU準備完了）：** 前回f493の全文意味/本人本文0/2、旧9は7/9、gold条件付き0/4を保持。元全文BOOK/SHOPのprompt・teacher tokenを保ち、updates境界〜EOSへだけCEを置く2更新を選択した。実CPU3.869429秒、全文7300/7777token、mask6699/7066、監督601/711token、causal window6698/602・7065/712、元11prompt/context・起点112F32・before原本を照合。CPU完全原本433850bytes/SHA922b04a180ec1649654aa073a3f998f12efa75c5ca8e8f0456dc5a07c87554bbを回収済み。保存f493から2更新→別保存/非学習reload→無補助全文2＋旧9の11自由生成→既存CMEE/成立snapshotの別process冷再読を一回実施する。最大1800秒/$0.14処理按分、各生成180秒・旧cap3712/3584/2560、完走保証なし。按分は前回同Pod表示$0.28/hで今回live再照会なし、準備/CPU/回収/保持等別。現2題新観測会不要、GPU保持。 [具体条件](observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/suffix2/README.md)。
+
+初回CPUはCMEE source rootへ結果folderを誤指定しFileNotFoundErrorで終了（load/forward/update/gen0）。既存exportから実rootを解決し引数だけを修正したCPU一回で完了、旧log/exit保持。36787bytes ZIPの全CRC/size/hash/source一致をPod外確認。download API失敗と実file到着を区別し重複download0。root GPT-6 Codex Work単一writer/executor、独立補助read-only、正式Pro/Ultra/human受入れとは称しない。GPU未実行。通常app/API/DTO/DB/RN/Render/Supabase/merge/deploy/lifecycle0、STRUCTURE_MAP_DELTA_NONE。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false。
