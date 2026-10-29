@@ -1,0 +1,21 @@
+{
+  "api_commit": "c920f81a2540b23a36d4bd83f9149e29d00ac407",
+  "files": [
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/preparation.py",
+      "sha256": "7390686ce77915808ab376286e0174d586c5a86384798de5e808dcafe82260ab"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py",
+      "sha256": "c7a3adc4446b7958fb68e7cb7571403f9e702a8b47bee2c1672b409949a421a1"
+    },
+    {
+      "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/fixed_rows_reference_wire.py",
+      "sha256": "36ef0e86d146ebfce5af2f90efe15f779f3e1340ccfdcfdb2df5f7afd84ee1b4"
+    },
+    {
+      "path": "ai/tests/test_cmee_fixed_rows_reference_wire.py",
+      "sha256": "054211b4e2d79e829d084767ca2ca1896429438c214da4e6331af0bf4e1fd6e5"
+    }
+  ]
+}
