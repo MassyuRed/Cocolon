@@ -3546,3 +3546,15 @@ GPU処理1240.614915870945秒（20分40.615秒）、前回同Pod表示$0.28/hに
 GPU保持/Stop・restart・delete0。通常app/API/DTO/DB/RN/Render/Supabase/merge/deploy変更0、商品構造差分なし（STRUCTURE_MAP_DELTA_NONE）。01Aは実結果file ownerのみ同期。限定TECHNICAL_CREDITは学習・原保存再読・実CMEE接続の実行記録まで、モデル品質credit0/商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false。正式Pro/Ultra/human受入れ未実施。
 
 [全実行条件と原本一覧](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/README.md)／[原raw・意味・本文の読取](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/runtime18/result_20261029/reading_review.md)。
+
+
+## 102. 2026-10-29 — 正解prefix条件付きの境界診断4回・実CPU照合
+
+**現在の直接作業（10/29・境界診断4回の準備完了）：** 前回role18の全文意味/本人本文0/2・旧9after-only7/9/cold7・新f493不採用は保持。局所13行の誤投影は見つからず、両rawはproseをbinds直後で早く閉じる。同じ再学習をせず、保存f493へ正規全文教師の正しい意味まで/全更新までを与えるBOOK/SHOP各2の4suffix診断を選んだ。実CPU4.611861秒、全4prefixは正規token列の先頭片で次要素の意味内容混入0、context8192内・prompt不変。完全CPU459860bytesを回収/hash照合。source保存/readback後に非学習1load/0update/4call、最大900秒/$0.07処理按分（準備/CPU/保持等別）で一回だけ実施する。これはgold条件付き原因確認で全文採用/商品品質へ換算しない。GPU保持、現2題新観測会不要。
+
+
+
+実CPU4.611860721954秒、モデルload/forward/生成0、source/初期afaa/保存f493/元入力/元role18 ownerのhash一致。完全prepared_cpu.jsonは459860bytes/SHA b03a26bd2ae402b89cad6426595fb8b118e45df97c0b2a9cbf9b6acc27900c94。実token列・prefix・期待suffix・全入力hash・capが入る。全prefix＋期待suffixで元教師を復元し、input+capは全8192以内。CPU log/exitとsourceを56206bytes ZIPで回収、全CRC/size/hash・source一致をPod外確認した。ブラウザdownload APIは失敗を返したが実fileは到着し、無変更bytesを照合した。追加download/CPU再実行0。
+
+
+[最小診断source・CPU・実行条件](../Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/boundary_probe4/README.md)。root GPT-6 Codex Work単一writer/executor・独立read-only補助、正式Pro/Ultra/human受入れとは分ける。通常app/API/DTO/DB/RN/Render/Supabase/merge/deploy/lifecycle0、STRUCTURE_MAP_DELTA_NONE。商品0/正式0/3/54.50％・candidate_ready=false/automatic_progression=false。

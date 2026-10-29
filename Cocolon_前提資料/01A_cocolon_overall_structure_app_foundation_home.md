@@ -5626,3 +5626,8 @@ role_binding_preparation/runtime18/run_role18.pyは13局所＋3anchor＋全文2�
 | `reading_review.md・result_summary.json` | 全raw意味/引用/更新/本人本文と教師・実artifact比較、閉鎖/新f493不採用/次の整理。Library libfile_e089337060248191a52ee06aad6fc75a v0 |
 
 完全weights/initial/source/CPU/CMEE saved/coldは上記最終archiveへ保全。base/tokenizer本体とoptimizer/RNG厳密resume stateなし。早期保全jsonは生成1件時点の履歴。通常route/型/wire/reader/DB/RN/Render/Supabaseの構造変更なし、STRUCTURE_MAP_DELTA_NONE。全体00/観測入口/weekly§101を同時同期。
+
+
+## 2026-10-29 weekly§102 — role_binding_preparation/boundary_probe4
+
+probe4.pyが既存role18/helperの非学習読込とCMEE read_rawを継承し、元全文teacherの実token prefix2境界×2題でsuffix4回だけ診断する。prepared_cpu.jsonが全4入力token列/与えたprefix/期待suffix・原hash/capを、cpu.log/cpu.exitが実CPU4.611861秒を所有。README.mdが条件付き診断の目的・上限900秒/$0.07・採用禁止・完了条件を所有。通常商品source/wire/reader/API/DB/RN/Render/Supabaseの構造変更なし、STRUCTURE_MAP_DELTA_NONE。前回role18原本は不変。
