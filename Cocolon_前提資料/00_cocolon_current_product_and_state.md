@@ -8,7 +8,7 @@
 
 **最新GPU確認（2026-10-29 JST）：** Pod short_gold_bonobo/vgkm402msgroiu、Jupyter直接接続、NVIDIA RTX A5000 24564MiB/表示$0.28/h・torch2.8.0+cu128。今回§99は保存afaaから11更新/別保存/非学習reload/11生成を1288.511954秒/$0.100217596処理按分で完了（準備/CPU/回収/保持/保存/通信/税等別）。現CMEE CPU78.524837秒はcold8を含む別処理。GPU保持、Stop/restart/delete/管理API0。
 
-**現在の直接作業（10/29・role18実CPU成立、新一回条件を固定）：** 同Jupyter/Podと初期afaaを実確認。13局所＋3anchor＋元全文2の18順を、CPU14.057451742秒/80137token/最大7777・全labels/EOS/mask/112F32・元11prompt/教師意味本文11/11で確認。完全CPUは1837871bytes/hash一致で回収・11part保存。新一回は18更新→別保存/非学習reload→元全文2＋旧9の固定11自由生成、最大2700秒/$0.21処理按分（準備/CPU/回収/保持等別）。source保存・readback後に開始。現時点モデル処理0、新採否未判定、旧9before欠測。[今回source/実CPU/条件](observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/README.md)、weekly§101。前回§99全文0/2・旧8/9・新4ee不採用/閉鎖は維持。新観測会不要、通常app/API/DB/RN/Render/Supabase/merge/deploy/lifecycle0、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。
+**現在の直接作業（10/29・role18実CPU成立、新一回条件を固定）：** 同Jupyter/Podと初期afaaを実確認。13局所＋3anchor＋元全文2の18順を、CPU14.057451742秒/80137token/最大7777・全labels/EOS/mask/112F32・元11prompt/教師意味本文11/11で確認。完全CPUは1837871bytes/hash一致で回収・11part保存。新一回は18更新→別保存/非学習reload→元全文2＋旧9の固定11自由生成、最大2700秒/$0.21処理按分（準備/CPU/回収/保持等別）。source6c1cb777/PID76711で一回開始し18更新・保存f4932d3a/非学習reload完了。早期14,575,989bytesの全CRC/hash/112F32有限を照合・保全、全11生成/採否確認中。新採否未判定、旧9before欠測。[今回source/実CPU/条件](observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/README.md)、weekly§101。前回§99全文0/2・旧8/9・新4ee不採用/閉鎖は維持。新観測会不要、通常app/API/DB/RN/Render/Supabase/merge/deploy/lifecycle0、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。
 
 **現在の観測会（10/27）：** Mashが、基本相談式／短い実入力式は華恋が基本案・判断に迷う例はMash／分析向けも時々交える、まずEmlisAIを優先する方針を明示決定した。[観測会方針](observation_learning/README.md#observation-session-policy-20261027)と[OBS-20261027-001](observation_learning/sessions/2026/OBS-20261027-001/01_dialogue.md#d00)へ記録。社内勉強会の引き継ぎを題材に、質問前の本人役設定を保持し、D11まで採録。D05のMash観測文とD06の相談者役の確認を保持し、D10で本人の「分かりやすかった」という感想の撤回か、保持したままの気掛かりかを見極める問いだったと教示を受けた。D11は華恋の理解で、具体的な次の問いの分岐は未説明。観測会終了は未指示。形式別の4B学習効果は未比較。材料収集と学習投入を分け、凍結15教材・評価・重みへの変更／追加GPU処理0。直近の意味・本文0/2という学習実結果と商品0／正式0/3／54.50％は変えない。
 
@@ -150,7 +150,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 | 作業領域 | 次に解消すべき具体的未完了 |
 |---|---|
-| 学習済みAI・CMEE接続 | §101 role18実CPU14.057秒/18系列80137token/最大7777/元11教師意味本文11/11。初期afaa/18更新/別保存・非学習reload/固定11自由生成の一回を2700秒/$0.21内でsource保存後開始。新採否未判定、旧9before欠測。前回§99全文0/2・旧8/9・新4ee不採用/閉鎖は保持。新観測会不要 |
+| 学習済みAI・CMEE接続 | §101 source6c1cb777/PID76711の新一回は18更新・保存f4932d3a/112F32非学習reload完了。早期14,575,989bytes/全hash・112F32有限をPod外照合・保全。元11生成/実CMEE採否確認中。CPU教師11/11はモデル品質ではなく、旧9beforeは欠測。新観測会不要 |
 | 10/24までの費用・4B選定履歴（当時の構成） | Flex24GBの旧月78,980生成・未測定の速度/起動仮定による運用費95,094円・赤字67,833円の試算は当時の構成の記録で、最新構成の原価ではない。[全仮定・再計算](observation_learning/model_selection/2026-10-24-production-economics/README.md)。旧4B実診断では24GBでLoRA保存・reload・16生成・回収を確認したが、FITは前後0/2。CPU指示修復API1dabc4fは54対象/pack11・合成2/2で、修正版は後続10/25にA4500 20GBで完走・回収済み、最新結果は§24。旧学習peak allocated14.954GiBを本番推論の必要VRAMへ流用しない。4bit/M4を第一候補とした§23は当時の華恋案で、現在の移行先はWindows／Mac未選定。公開API単価を独自育成版の原価へ流用しない。 |
 | Emlis | 一般入力と回答後の意味・自然な本文・有料差、本人実機の保存再読まで。u353〜355のコードと配置差を保持 |
 | Analysis | 最新内容修正版の配置差、通常本文生成・同一保存再読・monthly履歴/比較の本人確認、複数ANSWER採用、一般理解、有料差、IF／Savedの未実装。6501時点の不足案内表示は本人確認済みとして保持 |

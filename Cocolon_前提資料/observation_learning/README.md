@@ -2,7 +2,7 @@
 
 **GPU実確認の最終記録（2026-10-29）：** 新Pod vgkm402msgroiu/short_gold_bonobo、Jupyter直接接続、NVIDIA RTX A5000/$0.28/h・torch2.8.0+cu128、固定依存/base復元済み、GPU保持/Stop等0。
 
-**現在の直接作業（10/29・role18実CPU成立、新一回条件を固定）：** 同Jupyter/Podと初期afaaを実確認。13局所＋3anchor＋元全文2の18順を、CPU14.057451742秒/80137token/最大7777・全labels/EOS/mask/112F32・元11prompt/教師意味本文11/11で確認。完全CPUは1837871bytes/hash一致で回収・11part保存。新一回は18更新→別保存/非学習reload→元全文2＋旧9の固定11自由生成、最大2700秒/$0.21処理按分（準備/CPU/回収/保持等別）。source保存・readback後に開始。現時点モデル処理0、新採否未判定、旧9before欠測。[今回source/実CPU/条件](training/2026-10-26-unconnected-native/role_binding_preparation/README.md)、weekly§101。前回§99全文0/2・旧8/9・新4ee不採用/閉鎖は維持。新観測会不要、通常app/API/DB/RN/Render/Supabase/merge/deploy/lifecycle0、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。
+**現在の直接作業（10/29・role18実CPU成立、新一回条件を固定）：** 同Jupyter/Podと初期afaaを実確認。13局所＋3anchor＋元全文2の18順を、CPU14.057451742秒/80137token/最大7777・全labels/EOS/mask/112F32・元11prompt/教師意味本文11/11で確認。完全CPUは1837871bytes/hash一致で回収・11part保存。新一回は18更新→別保存/非学習reload→元全文2＋旧9の固定11自由生成、最大2700秒/$0.21処理按分（準備/CPU/回収/保持等別）。source6c1cb777/PID76711で一回開始し18更新・保存f4932d3a/非学習reload完了。早期14,575,989bytesの全CRC/hash/112F32有限を照合・保全、全11生成/採否確認中。新採否未判定、旧9before欠測。[今回source/実CPU/条件](training/2026-10-26-unconnected-native/role_binding_preparation/README.md)、weekly§101。前回§99全文0/2・旧8/9・新4ee不採用/閉鎖は維持。新観測会不要、通常app/API/DB/RN/Render/Supabase/merge/deploy/lifecycle0、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 

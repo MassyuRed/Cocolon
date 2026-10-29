@@ -1,6 +1,6 @@
 # role・引用・附属更新・終了の13補助課題 — 2026-10-29
 
-**現在：承認後にJupyterへ直接接続し、role18の実CPU確認まで完了。新しい一回の条件を固定し、source保存後に開始する。モデル処理・新採否はこの記録時点で未実施。**
+**現在：18更新・別保存/非学習reload完了、元11件の生成・採否確認中。早期重み原本はPod外照合・保全済み。**
 
 前回[joint_transfer11](../joint_transfer11/README.md)は閉鎖済み・新4ee不採用。全文BOOK/SHOPの意味・本人本文0/2、旧9 after-only 8/9/cold8はそのまま保持する。今回も追加観測会は不要で、既存完成教師の対応を教える。13行を新しい観測事例13件・学習13回とは数えない。
 
@@ -63,3 +63,10 @@ runtime18の新source3/planを転送・hash照合し、実CPUを一回実施。1
 新一回は初期afaa/元helper/全文assistant＋EOS CE/LR5e-5/seedを保ち、13局所各1＋CHAIR01初回/訂正＋DAILY01＋元BOOK/SHOP＝18一意更新。旧19行は不変、新13をメモリ上で追加し32行。別adapter保存/112F32非学習reload後、元全文2＋旧9の固定11自由生成を原形式rawのまま既存CMEEへ通し、成立snapshotだけ別process cold全outcome比較。旧9各2560/BOOK3712/SHOP3584/context8192/各180秒/最大2700秒/$0.21処理按分、親2690秒＋kill10秒。準備/CPU/回収/保持/保存/通信/税等別、期限/OOM/非有限/identity不一致で終了。無効role18.plan.jsonと今回runtime_authorized_plan.jsonを分離し、source保存・readback後に一回開始する。旧run/枠再利用、retry/上限延長/次run自動開始0。旧9before欠測から維持/改善率を出さない。
 
 独立read-only reviewでsource3とplan全hash/18順/32行/評価11/caps/初期afaa/前後bounds/consumer18counterを確認、blockingなし。root GPT-6 Codex Work単一writer/executorで正式Pro/Ultra/human受入れではない。新採否は実行後に原rawから判定。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false、現2題の新観測会不要。通常app/API/DTO/DB/RN/Render/Supabase/merge/deploy/lifecycle変更0、STRUCTURE_MAP_DELTA_NONE。
+
+
+### §101 早期重み保全・生成中
+
+source6c1cb777/PID76711の一回で18更新・112F32別保存/非学習reloadまで完了。保存f4932d3a/全112変化。387.717559747秒時点の早期原本は生成1/11で、SHOP空fileを完了数へ数えない。14,575,989bytes/27payload＋manifest、SHAb94818b8ec222eb10fae7b55543d5def55dedfe317fabe04642edadb9a0e3b41の全CRC/size/hash/112F32有限性をPod外照合し、Library libfile_e865770fd01c81918ddd3f8b34b5772c v0へ保全。早期保存は最終結果ではない。BOOK2770/EOSだがJSON不正、GAP反復消失と意味/更新/本文不成立を区別する。全11生成と実CMEE採否は進行中。
+
+[早期保存の実記録](runtime18/early_weight_preservation.json)。
