@@ -3,7 +3,7 @@
   "source_commit": "385114bde2ea0d8904d6a73f9c80bb5af56a654c",
   "proposal_commit": "4b3cdc8cd096ae7c13e3c28401d49c1e6ee580af",
   "pod": "vgkm402msgroiu",
-  "launcher_pid": 227145,
+  "launcher_pid": 210857,
   "started_unix": 1793263849.2515597,
   "first_observation": {
     "status": "STARTED_ONCE",
@@ -21,5 +21,6 @@
   "retry": false,
   "automatic_progression": false,
   "product_credit": 0,
-  "gpu_held": true
+  "gpu_held": true,
+  "correction": "Initial transcribed launcher_pid 227145 was incorrect; actual gpu_launch.json and Jupyter screenshot show 210857. No duplicate launch occurred."
 }
