@@ -3504,3 +3504,16 @@ source815692fc/API7b9、実11更新/保存4ee58bf9e7e16a1fc3e0104781fb800573b0db
 次は接続先の明示/承認→固定tokenizerで新13＋実順序の8192/EOS/mask確認→既存afaa/全文CE/LR5e-5・13局所＋3anchor＋元全文2の18更新候補を具体化する。新量/順序/runner/実行planは未固定・未実装、GPU新費用消費0。検討処理上限2700秒/$0.21は前回同Pod表示$0.28/h按分の候補で、準備/CPU/回収/保持等別・完了保証なし。最終自由生成は全文2＋旧9の固定11を元prompt/無補助raw→既存CMEE/成立時cold。before旧9を測らなければafter-onlyと明示し維持/改善率は出さない。CHAIR01訂正の更新別根拠混入は別確認。閉鎖済run/lock/承認枠の再利用と自動開始0。
 
 primary=TECHNICAL_CREDITは投影sourceと構造検証に限定、モデル品質/商品0/正式0/3/54.50％・candidate_ready=false/automatic_progression=false。現2件の新観測会不要。全体00/観測入口/01A地図を関連差分同期、通常app/API/DTO/DB/RN/Render/Supabase/merge/deploy変更0、STRUCTURE_MAP_DELTA_NONE。実環境GPT-6 Codex Work/root単一writer、補助reviewは正式Pro/Ultra/human受入れではない。
+
+
+## 101. 2026-10-29 — 承認後Jupyter直接接続、role18実CPU成立・新一回条件固定
+
+Mashの「承認するから進めろ。」の後、Jupyterへ直接接続。Pod vgkm402msgroiu/RTX A5000・24564MiB/使用1MiB/Python3.12.3と初期afaa3file hash一致を確認した。管理画面/管理API/credential/GPU lifecycle操作0。前回同Pod表示$0.28/hを按分に使い、今回live単価を再照会したという主張はしない。
+
+runtime18の新source3/planを転送・hash照合し、実CPUを一回実施。14.057451742秒、18系列80137token/最大7777、prompt mask/全target＋EOS/既存causal window/112F32有限性、元11prompt一致/正解教師意味本文11/11が成立。完全CPU1837871bytes/SHA118faa4004e779d83c9c7eedf954c2bb31b1db293fbb4ecbe15f9ef025aef35aはZIP download一回失敗後、Jupyter Editor全文コピーで無変更回収・hash一致。cpu_check.index.json＋11partで完全再構成でき、cpu_summary.jsonが要約を所有する。実モデルload/forward/更新/生成/SQL0、CPU再実行0。
+
+新一回は初期afaa/元helper/全文assistant＋EOS CE/LR5e-5/seedを保ち、13局所各1＋CHAIR01初回/訂正＋DAILY01＋元BOOK/SHOP＝18一意更新。旧19行は不変、新13をメモリ上で追加し32行。別adapter保存/112F32非学習reload後、元全文2＋旧9の固定11自由生成を原形式rawのまま既存CMEEへ通し、成立snapshotだけ別process cold全outcome比較。旧9各2560/BOOK3712/SHOP3584/context8192/各180秒/最大2700秒/$0.21処理按分、親2690秒＋kill10秒。準備/CPU/回収/保持/保存/通信/税等別、期限/OOM/非有限/identity不一致で終了。無効role18.plan.jsonと今回runtime_authorized_plan.jsonを分離し、source保存・readback後に一回開始する。旧run/枠再利用、retry/上限延長/次run自動開始0。旧9before欠測から維持/改善率を出さない。
+
+独立read-only reviewでsource3とplan全hash/18順/32行/評価11/caps/初期afaa/前後bounds/consumer18counterを確認、blockingなし。root GPT-6 Codex Work単一writer/executorで正式Pro/Ultra/human受入れではない。新採否は実行後に原rawから判定。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false、現2題の新観測会不要。通常app/API/DTO/DB/RN/Render/Supabase/merge/deploy/lifecycle変更0、STRUCTURE_MAP_DELTA_NONE。
+
+[実CPU原本・source・今回条件](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/README.md)。

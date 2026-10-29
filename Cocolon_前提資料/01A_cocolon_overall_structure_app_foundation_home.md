@@ -5605,3 +5605,8 @@ CPU失敗と実成功/無効準備plan/今回runtime条件は同folder直下の�
 ## 2026-10-29 weekly§100 — role_binding_preparation
 
 既存training/2026-10-26-unconnected-native/role_binding_preparation内のprepare_role_bindings.pyは、staged_pair9原4行をhash固定で読み、role/引用6・附属ADD5・終端GAP/本文2の13補助targetを機械投影するstdlib-only owner。generated/auxiliary_train_messages.jsonlは220748bytes/13行、generated/structural_check.jsonはtarget/source/prior/nested ev/終端再構成の構造照合を所有し、tokenizer/context/mask/EOS・GPU・新CMEE採否を未実施とする。README.mdが前回不採用との区別、限定18更新候補の未固定状態、接続後の実token確認順、Jupyter origin自動承認拒否と再開条件を所有する。v1 spec衝突はreviewで修正し最終13行だけ保存。通常商品route/型/API/wire/reader/DB/RN/Render/Supabase構造差分なし、STRUCTURE_MAP_DELTA_NONE。全機能00/観測入口/最新weekly§100を同時同期。
+
+
+## 2026-10-29 weekly§101 — role18限定実行owner
+
+role_binding_preparation/runtime18/run_role18.pyは13局所＋3anchor＋全文2の18更新/別保存112F32/非学習reload/固定11生成。prepare_role18.pyは32行/18系列と元11prompt/教師のCPU対照、consume_role18.pyは18更新11call・原形式raw・既存Engine/成立時coldを所有する。role18.plan.jsonは無効準備原本、runtime_authorized_plan.jsonは今回CPU原本hashと2700秒/$0.21の条件。cpu_summary.jsonとcpu_check.index.json＋11partが実CPU14.057秒/80137token/最大7777/教師11/11の完全結果を所有。商品source/wire/reader/型/API/DB/RN/Render/Supabase構造差分なし、STRUCTURE_MAP_DELTA_NONE。新source保存後に一回だけ起動し旧runは再開しない。

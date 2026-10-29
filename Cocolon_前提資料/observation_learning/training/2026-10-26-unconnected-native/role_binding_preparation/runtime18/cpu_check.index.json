@@ -1,0 +1,62 @@
+{
+  "source": "cpu_check.json",
+  "bytes": 1837871,
+  "sha256": "118faa4004e779d83c9c7eedf954c2bb31b1db293fbb4ecbe15f9ef025aef35a",
+  "parts": [
+    {
+      "path": "cpu_check.part-000.txt",
+      "bytes": 180000,
+      "sha256": "caec54114da0b77e49f3af3316de38db4a2c606e3190aeac2e89d18fba2cb2f0"
+    },
+    {
+      "path": "cpu_check.part-001.txt",
+      "bytes": 180000,
+      "sha256": "4550b40104624e345e531aeb4528024fab9f9013a54183f0359bc19060124199"
+    },
+    {
+      "path": "cpu_check.part-002.txt",
+      "bytes": 180000,
+      "sha256": "2c1ab30efadd6c43a56eb6087d76f5d6f846afc481da7d4f125833726629cd1d"
+    },
+    {
+      "path": "cpu_check.part-003.txt",
+      "bytes": 180000,
+      "sha256": "e866ad468adceeb02f99344266b8748a7bc7549d1dc14d60497025de70c50b24"
+    },
+    {
+      "path": "cpu_check.part-004.txt",
+      "bytes": 180000,
+      "sha256": "47afa0bb72ff1f589425a8bfa9b1ba57401c7bf5903c4e62d4a76d5f818932ef"
+    },
+    {
+      "path": "cpu_check.part-005.txt",
+      "bytes": 180000,
+      "sha256": "91405ef8f671d3f8b3c701674955a7f754bf55353fb5b4f3c8ea4e1c4ef43893"
+    },
+    {
+      "path": "cpu_check.part-006.txt",
+      "bytes": 180000,
+      "sha256": "cad56882139c227b5b1fe861ad57d227909390cba1378797dda24b49409d5e4d"
+    },
+    {
+      "path": "cpu_check.part-007.txt",
+      "bytes": 180000,
+      "sha256": "c382ddb46d1f2a135beb027398856d9cd54f67236f73cf9494516fa7b1104944"
+    },
+    {
+      "path": "cpu_check.part-008.txt",
+      "bytes": 180000,
+      "sha256": "0903ab212bd101639df02d637bb0b91c816d70820e4057f0b2efa03b76be2853"
+    },
+    {
+      "path": "cpu_check.part-009.txt",
+      "bytes": 180000,
+      "sha256": "3fee5f3f5bf325cb24148854ba76a2a6992d4a89a56553ff90159d6591c62690"
+    },
+    {
+      "path": "cpu_check.part-010.txt",
+      "bytes": 37871,
+      "sha256": "a9d3c7200f6d24294353a1bb6d5ccec7dabc97b0da9a87c66583f5baca13b2c8"
+    }
+  ]
+}

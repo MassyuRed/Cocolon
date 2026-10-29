@@ -1,6 +1,6 @@
 # role・引用・附属更新・終了の13補助課題 — 2026-10-29
 
-**現在：接続不要の教材投影まで完了。Jupyter接続先の承認待ち。実tokenizer・GPU学習・生成・CMEE新採否は未実施。**
+**現在：承認後にJupyterへ直接接続し、role18の実CPU確認まで完了。新しい一回の条件を固定し、source保存後に開始する。モデル処理・新採否はこの記録時点で未実施。**
 
 前回[joint_transfer11](../joint_transfer11/README.md)は閉鎖済み・新4ee不採用。全文BOOK/SHOPの意味・本人本文0/2、旧9 after-only 8/9/cold8はそのまま保持する。今回も追加観測会は不要で、既存完成教師の対応を教える。13行を新しい観測事例13件・学習13回とは数えない。
 
@@ -50,3 +50,16 @@ python -B prepare_role_bindings.py \\
 今回ブラウザはblankのみで、接続済みJupyterタブはなかった。引継ぎ・現GitHub・過去文脈にexact URLはなく、記録されたPod IDに基づく直接Jupyter接続は、当該originへの許可を確立できないとして自動承認レビューが拒否した。alternate origin/管理画面/HTTP/別経路からの回避0。credential取得/入力0、Jupyter terminal/子process/モデル処理0。次は接続先の明示又は当該Jupyter originへの承認が必要。
 
 今回は投影sourceと再現できる13行を保存した準備結果に限る。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false、新観測会不要。GPUのStop/restart/delete0。通常app/API/DTO/DB/RN/Render/Supabase/merge/deploy変更0、STRUCTURE_MAP_DELTA_NONE。primary=TECHNICAL_CREDITは教材投影sourceと構造照合に限定し、モデル品質creditは0。
+
+
+## 2026-10-29 role18 — 実CPUと新一回条件
+
+上の未接続/未固定記述は準備段階の履歴。現在は本節を優先する。
+
+Mashの「承認するから進めろ。」の後、Jupyterへ直接接続。Pod vgkm402msgroiu/RTX A5000・24564MiB/使用1MiB/Python3.12.3と初期afaa3file hash一致を確認した。管理画面/管理API/credential/GPU lifecycle操作0。前回同Pod表示$0.28/hを按分に使い、今回live単価を再照会したという主張はしない。
+
+runtime18の新source3/planを転送・hash照合し、実CPUを一回実施。14.057451742秒、18系列80137token/最大7777、prompt mask/全target＋EOS/既存causal window/112F32有限性、元11prompt一致/正解教師意味本文11/11が成立。完全CPU1837871bytes/SHA118faa4004e779d83c9c7eedf954c2bb31b1db293fbb4ecbe15f9ef025aef35aはZIP download一回失敗後、Jupyter Editor全文コピーで無変更回収・hash一致。cpu_check.index.json＋11partで完全再構成でき、cpu_summary.jsonが要約を所有する。実モデルload/forward/更新/生成/SQL0、CPU再実行0。
+
+新一回は初期afaa/元helper/全文assistant＋EOS CE/LR5e-5/seedを保ち、13局所各1＋CHAIR01初回/訂正＋DAILY01＋元BOOK/SHOP＝18一意更新。旧19行は不変、新13をメモリ上で追加し32行。別adapter保存/112F32非学習reload後、元全文2＋旧9の固定11自由生成を原形式rawのまま既存CMEEへ通し、成立snapshotだけ別process cold全outcome比較。旧9各2560/BOOK3712/SHOP3584/context8192/各180秒/最大2700秒/$0.21処理按分、親2690秒＋kill10秒。準備/CPU/回収/保持/保存/通信/税等別、期限/OOM/非有限/identity不一致で終了。無効role18.plan.jsonと今回runtime_authorized_plan.jsonを分離し、source保存・readback後に一回開始する。旧run/枠再利用、retry/上限延長/次run自動開始0。旧9before欠測から維持/改善率を出さない。
+
+独立read-only reviewでsource3とplan全hash/18順/32行/評価11/caps/初期afaa/前後bounds/consumer18counterを確認、blockingなし。root GPT-6 Codex Work単一writer/executorで正式Pro/Ultra/human受入れではない。新採否は実行後に原rawから判定。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false、現2題の新観測会不要。通常app/API/DTO/DB/RN/Render/Supabase/merge/deploy/lifecycle変更0、STRUCTURE_MAP_DELTA_NONE。
