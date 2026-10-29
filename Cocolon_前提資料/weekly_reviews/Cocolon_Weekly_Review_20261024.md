@@ -3597,3 +3597,16 @@ BOOKはREJECT/semantic_receipt_not_validated、SHOPはREJECT/model_evidence_coll
 中間の全文CE＋suffix重点化推奨はlocalized30/adaptive30/jointfocus9/fullce9の実施済み比較と重なるため撤回。純suffix追加反復も停止。compact9短名化やgold A条件付きBを、自律2call成立へ昇格しない。汎用carrier CPU13.304903秒で2教師の全値/順序byte完全復元・既存CMEE教師outcome一致/recordの値数不一致1例の拒否を確認（列定義改変や意味的欠落全般の検証ではない）したが削減2.85/2.94％に留まり不採用。source/完全原本を同suffix2/carrier_comparison_cpuへ保存、通常decoder/reader/入力spec/契約変更0。
 
 primary=BLOCKER_NARROWED、商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false。通常app/API/DTO/DB/RN/Render/Supabase/merge/deploy/lifecycle0、STRUCTURE_MAP_DELTA_NONE。root単一writer/executor、補助read-only、正式Pro/Ultra/human受入れ未実施。
+
+
+## 104. 2026-10-29 — 固定列配列CPU比較完了・新受領形式は具体提案
+
+**現在の直接作業（10/29・固定列配列のCPU比較完了／新受領・GPUは提案）：** 前回suffix2は全文0/2・旧9 7→4/9、新45a1不採用/閉鎖のまま。反復JSON項目名だけを固定列へ移し、全意味値・明示名・更新・bind・本人本文を省略しない表記をJupyterでCPU比較した。最終13.009848秒、BOOK output＋EOS2913→2148（26.26％減）/入力込み7300→6440、SHOP3238→2424（25.14％減）/7777→6868。全2正解教師のnamed bytes/order・既存CMEE全outcome同値、旧9 messages/teacher/token/mask不変。教師対照であり実4B成功ではない。初回のprior説明欠落をmodel effect前に修正し、最終v2 prompt4292/4444・旧cap込み8004/8028≤8192を確認。完全CPU原本を回収/照合/保存した。次の具体案は新形式を明示選択するprivate/Free/BOOK・SHOP回答後の受領だけに限定し、CPU受領/replay検証後、f493で同新promptのbefore2を測り、未達時だけ新全文2＋既存anchor3の5更新→別保存/非学習reload→全文2＋旧9の11生成。最大合計13生成/2400秒/$0.19按分（準備/親process外CPU/回収/保持等別）、既存ModelCandidateSource/通常経路は含まない。新受領契約の具体案であり、未承認・未実装・GPU未実行。現2題の追加観測会不要、GPU保持。 
+
+[完全な比較内容・実装対象と次の一回条件](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/README.md)／[未承認plan](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/fixed_rows5.plan.json)。初回12.683821秒はprior a/q局所性・snapshot alias説明が一部落ちるためsuperseded、説明とassertを戻したv2は13.009848秒。生成0のまま補正し両原本を保持。単独outputでなく実chat/EOS・旧capで比較、全11train/eval prefix一致と旧9token/mask同一を確認。変異5種/題を拒否、文字列nullや欠落claimを修復しない。全意味・全不正入力の包括検証や自由生成品質合格ではない。
+
+292,780bytes/20payload＋manifest、SHA8c41d07c821437ebc37320cd95b4d23c2e5d0215abb66a9da0116615f0f059a5を全CRC/size/hash/source照合しLibrary libfile_380690ad8eec8191ad327c7d2669e35aへ保存。1MiB超の完全cpu_checkはZIPに凍結、GitHub summaryが同member/bytes/SHAを参照する。今回の新model load/forward/update/生成・新API receiver・SQL・DB・RN・Render・Supabase・merge/deploy/lifecycleは0、GPU保持。
+
+提案の新受領はrows raw/formatをそのままreceiptへ保持し再検査/coldでも使い、復元named textを実rawへ置換しない。ModelCandidateSourceは未対応のまま、専用offline harnessだけ。既存7成功をcase IDごとに維持する条件を固定し、総数7/9のみで退行なしとしない。before2が実採用/本人本文/coldまで2/2なら0更新で閉鎖。未達時だけ5更新・最大計13生成で、新格式の有効化・追加学習はこの記録から自動開始しない。Rule18のnew method/contractに当たり、具体案へのMash確認が必要。受領実装・追加GPUの承認を得たとは記録しない。
+
+primary=TECHNICAL_CREDIT（可逆表記と計数だけ）、商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false、STRUCTURE_MAP_DELTA_NONE。root単一writer/executor、補助read-only、正式Pro/Ultra/human受入れ未実施。

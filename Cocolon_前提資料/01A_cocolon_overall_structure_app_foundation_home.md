@@ -5656,3 +5656,19 @@ suffix2/result_20261029のrun/training/loaded/reloaded/after11は2更新/2load/1
 | `carrier_comparison_cpu/FT-BOOK-AFTER-ANSWER.roundtrip.json・FT-SHOP-AFTER-ANSWER.roundtrip.json・README.md` | byte完全復元した元2教師・比較の不採用と次仕様未固定 |
 
 external_manifestの`run/・cmee/・support/・source/`等は最終ZIP内の元pathを示す。GitHubのresult folderへの再配置と同名とは限らない。新旧adapter等のbinaryは同ZIP/保存IDがownerであり、GitHub text原本と合わせて読む。
+
+
+## 2026-10-29 weekly§104 — role_binding_preparation/fixed_rows
+
+| ファイル | owner |
+|---|---|
+| `README.md・fixed_rows5.plan.json` | CPU実比較の範囲、原19中11subset、旧9不変、元全値/教師結果同値、次の新形式受領＋条件付き最大5更新/13生成の未承認提案 |
+| `final_v2/prepare_fixed_rows_v2.py` | 固定列encode/decodeとsyntax説明置換、prior/a/q/ur条件保持、実chat/EOS/元cap/context8192、既存CMEE教師対照、5変異/題のCPU比較source。model/receiver実行なし |
+| `final_v2/train_messages.jsonl・eval_inputs.json` | 全文2だけ新rowsへ派生し旧9は同一の比較用11件。元19/evalは不変 |
+| `final_v2/FT-BOOK-AFTER-ANSWER.rows.json・FT-SHOP-AFTER-ANSWER.rows.json` | 全意味値/ID/引用/更新/bind/本文を明示する2教師の比較専用配列 |
+| `final_v2/FT-BOOK-AFTER-ANSWER.roundtrip.json・FT-SHOP-AFTER-ANSWER.roundtrip.json` | 元named形式へbyte/order完全復元した2教師 |
+| `final_v2/cpu.log・cpu.exit・cpu_check_summary.json` | 実13.009848秒、26.26/25.14％output短縮、入力込み約12％、教師2/2同値・旧9不変。完全reportのZIP/member/bytes/SHA索引 |
+| `superseded_v1/*` | 上記と同じ役割の初回10file。ただしsource名prepare_fixed_rows.py。prior説明欠落でsuperseded、初回計数を最新promptへ使わない |
+| `manifest.json・external_verification.json` | 20payload/292780bytes ZIPの元member目録と全CRC/size/hash/sourceのPod外照合、Library保存ID |
+
+完全cpu_check.jsonのencoded/token/mask/全教師outcomeは上記ZIPで保持し、GitHub summaryと合わせて読む。新受領format/API実装は提案段階、現在の通常route/型/reader/DB/RN/Render/Supabase構造差分なし、STRUCTURE_MAP_DELTA_NONE。既存ModelCandidateSourceは新rows未対応。全体00/観測入口/weekly§104へ戻る。
