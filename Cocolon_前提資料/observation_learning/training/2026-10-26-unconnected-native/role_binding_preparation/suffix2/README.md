@@ -1,6 +1,6 @@
 # 元全文updates境界〜EOSのsuffix2 — 2026-10-29 JST
 
-現在：CPU確認済み、GPU一回の実行前。前回boundary_probe4は閉鎖済み。
+現在：CPU確認・GitHub d79b0737でsource/CPU全11file readback済み。一回のGPUをPID123107で開始、結果未確定。前回boundary_probe4は閉鎖済み。
 
 目的：正しい意味を与えても更新割当・bind・本文・終端が崩れる実測欠陥に直接対応する。元全文BOOK/SHOPのprompt/assistant全文/token列を保ち、labelsのupdates境界以前だけを-100にする。新しい部分JSON課題やgold user欄を増やさず、一般化・他core完成を主張しない。観測学習の目的・用途・Windows/Mac未選定は既存READMEどおり。
 
