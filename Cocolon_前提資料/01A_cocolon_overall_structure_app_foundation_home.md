@@ -5690,3 +5690,8 @@ external_manifestの`run/・cmee/・support/・source/`等は最終ZIP内の元p
 ### weekly§106 — 固定列prompt表記の限定修正と非学習2生成案
 
 `fixed_rows/prompt_shape2/prepare_shape2.py`はroot/subjectの指示表示2点だけを派生copyで揃え、元material/prior/教師・旧9不変、実token/context/全assistant+EOS/CMEE教師coldをCPU照合する。`train_messages2.jsonl・eval_inputs2.json・cpu_summary.json・external_verification.json`はその2件と完全CPU ZIPの索引。`run_shape2.py・plan.json・README.md`の元f493非学習1load/0更新/2生成・最大600秒/$0.047案はMash承認後に一回終了。result_20261029のrun/raw2/loaded/cmee_diagnosis/launch/source/log/summary/external_verification/export sourceが327.665962秒/$0.025485130397・両TOKEN_LIMIT/意味本文0/2・全原本205member回収を所有。current planはCLOSED_NOT_ADOPTED_NO_RETRY、元重み不変/新重み0。新受領module/型/公開API/DB/RN/通常routeの追加なし、STRUCTURE_MAP_DELTA_NONE。前回§105の不採用と旧7→6を保持。
+
+
+### weekly§108 — 修正済shape2と旧9全件の13更新候補
+
+`fixed_rows/rehearsal13/prepare_rehearsal13.py`は既存shape2の全文2各2回＋凍結旧9各1回の13順序と全11token/mask/EOS/contextをCPUで確認する。`train_messages11.jsonl・eval_inputs11.json・prepared_cpu.json.gz・cpu_summary.json`は同一bytesの11教材、全encoded/labels/176frozen、29.907477秒/モデル0の原本。`teacher_cmee/`は既存receiverの2saved/2coldで前回全result一致。`archive_manifest.json・external_verification.json・rehearsal13-cpu.log/exit`は全12member回収の照合。`run_rehearsal13.py・plan.json・README.md`は元f493から13更新→別保存/no-grad reload→11自由生成→既存CMEE/全成立snapshot cold、旧7個別維持・最大45分/$0.21按分（準備等別）の未承認一回案。前回0/2を成功へ戻さず、新model処理0。通常receiver/型/三core/API/DB/RNの構造差分なし、STRUCTURE_MAP_DELTA_NONE。
