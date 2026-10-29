@@ -1,4 +1,8 @@
-# 保存済みrawの構造照合 — CPU完了、新生成方式は提案
+# 保存raw構造照合・構文制約方式の現在地
+
+**2026-10-30最新：** Mash承認後にsyntax2.py/run_syntax2.pyを実装したが、実tokenizerの非special追加token12個のbyte対応不足でCPU一回がexit1。後段CPU/GPU/CMEEは未実行、model load/forward/更新/生成0で閉鎖。華恋の実装不足で、新しい4B意味成績ではない。[停止結果・原本・全file責務](cpu_stop_20261030/README.md)を現在の実結果とする。[追加token対応の次案](added_tokens_proposal.md)は新しい一回の未承認提案。旧失敗source不変、再CPU/修正/GPUは行っていない。
+
+## 以下は先行§112の保存raw比較記録
 
 2026-10-30 JST。同Jupyterへ直接接続し、compare_saved.pyをGitHub64c1111eから取得・SHA照合後、既存4原本をCPUで読取比較した。0.011652405秒、exit0。モデルload/forward/追加学習/生成/CMEE実行/重み変更は0。前回の意味・本人本文0/2と不採用閉鎖は不変。
 
@@ -21,7 +25,7 @@
 - [result.json](result.json)：Jupyterの未修復CPU結果4240bytes。SHA256 6d070d501e19544d03c323b3f1aded994b81d61db27cdcd6894787ff9205b418。
 - [verification.json](verification.json)：GitHub原本と全4input hash・全case結果が一致、回収同一性。ローカルCPUの秒数/installed package差は比較対象外。
 - [jupyter_proof.jpg](jupyter_proof.jpg)：実CPU結果、追加生成0、A5000保持の画面。
-- [syntax2_proposal.md](syntax2_proposal.md)：既存構文・型だけの生成時制約方式。CPU実装と成功時の0更新2生成を具体化した未承認提案。新method未実装・新GPU未実行。
+- [syntax2_proposal.md](syntax2_proposal.md)：§112時点の未承認提案本文を保持。Mash承認後のCPU停止は§113/上段の結果を参照。
 
 Download APIはtimeoutを返したが、実fileの到着を確認した。再download/CPU再実行0。回収原本の4hashと全case値を、GitHubから取得した無変更原本に対するrootローカル読取結果と一致照合した。
 

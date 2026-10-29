@@ -5715,3 +5715,9 @@ external_manifestの`run/・cmee/・support/・source/`等は最終ZIP内の元p
 ### weekly§112 — 保存rawのCPU構造照合と新方式の未承認提案
 
 fixed_rows/structural_cpuのcompare_saved.pyは保存raw4原本の一回限りCPU読取比較で、receiver/repair/grammar実装ではない。result.jsonは実0.011652405秒・早期c階層不正/未宣言参照/反復/spec由来句の計数、verification.jsonはGitHub全4hash/全case値一致と一回回収、jupyter_proof.jpgはCPU完了とGPU保持、README.mdは責務/結果/判断限界を所有する。syntax2_proposal.mdは既存型・列数だけの生成時制約の具体案で、syntax2.py/run_syntax2.pyは未承認・未作成、モデル0。前回0/2不採用閉鎖は不変。通常source/受領/型/三core/API/DB/RNの構造差分0、STRUCTURE_MAP_DELTA_NONE。
+
+### weekly§113 — 構文制約CPU実装・追加token対応不足で停止、GPU未実行
+
+fixed_rows/structural_cpuのsyntax2.pyは既存型/列だけのbyte parser・token mask・CPU一式、run_syntax2.pyはCPU成功report/hashを前提にした非学習1load/0更新/2生成runner。e22f1101で実装したが、実CPUはTokenMask内の非special追加token12個のbyte未対応でexit1。後段CPUとGPU/CMEEは未実行。両sourceは失敗時のまま保存し、plan.jsonがCLOSED_CPU_FAILED_GPU_NOT_STARTED_NO_RETRYを所有する。syntax2_proposal.mdはMashが承認した元提案の履歴、added_tokens_proposal.mdは追加token対応だけの新しい一回の未承認案で、syntax2b実装は存在しない。
+
+cpu_stop_20261030/README.mdは実結果・全file責務・限界、failure.jsonは停止metadata/12ID/source・入力・adapter hash/副作用0、cpu.log/exitは未修復trace、runtime_plan.jsonは実行時承認原本、archive_manifest.json/originals.zipは7member/6payload完全原本、verification.jsonは全CRC/bytes/SHA/source2/入力2/adapter3の照合範囲、proof.jpgはJupyter停止/GPU保持を所有する。新raw/receipt/snapshot/coldは0件で、新しい4Bの0/2へ換算しない。通常ModelCandidateSource/receiver/意味型/三core/API/DTO/DB/RN/Render/Supabase/依存/merge/deploy構造差分0、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。

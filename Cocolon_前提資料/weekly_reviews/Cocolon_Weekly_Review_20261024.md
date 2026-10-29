@@ -3688,3 +3688,19 @@ BOOKは履歴rehearsal13のEOS2371/INVALID_FORMATから今回3712cap/TOKEN_LIMIT
 診断source64c1111eをJupyterへ一回配置しSHA74dc5602照合、exit0。結果JSON4240bytes/SHA6d070d50を一回回収、Download API timeoutでも実file到着を確認し再download0。全4input hashと全case値はGitHubから得た無変更原本へのrootローカル読取結果と一致。BOOKの3cell time断片とSHOP同断片は期待される10cell claim行listではなく、rootのsnapshot aliasも欠落。SHOPには15memberの早期root閉鎖と後続余剰dataもある。これらは静的所見で、実CMEE拒否TOKEN_LIMITを別reasonへ改変しない。原4file不変、比較source以外の実行owner変更0、新重み0。GPU処理按分0だが保持/回収等別。
 
 primary=BLOCKER_NARROWED。商品0/正式0/3/54.50％。root単一writer/executor/judge、補助read-only、実環境GPT-6 Codex Work、正式Pro/Ultra/human受入れ未実施。通常ModelCandidateSource/receiver/native意味型/三core/API/DTO/DB/RN/Render/Supabase/新依存/merge/deploy/lifecycle0、STRUCTURE_MAP_DELTA_NONE。新methodの実装・実行はRule18 §11.3の別承認対象で、現行承認を流用しない。
+
+## 113. 2026-10-30 — 承認済み構文制約方式のCPUが追加token対応不足で停止、GPU未実行
+
+**現在の直接作業（10/30・承認済み構文制約方式はCPU停止／GPU未実行）：** Mashがd3ece5f2の具体案を承認し、e22f1101の構文/型だけのtoken maskと非学習runnerを実装。同JupyterでCPUを一回実行したが、TokenMask構築中にBPE本体外の非special追加token12個のbyte対応不足でexit1。華恋の実装不足で、材料不足や4B意味品質の新しい失敗ではない。教師prefix/Unicode・EOS/実LogitsProcessor/CMEE正負対照/速度条件はNOT_REACHED、成功reportなし。model load/forward/更新/生成/CMEE0、CPU不成立時終了の条件どおりGPUを起動せず閉鎖。全7member/6payload原本のCRC/bytes/SHA・source2本・入力2hash・adapter3hashの承認plan一致を確認。新重み0、旧9再生成0、前回§111の意味/本人本文0/2と履歴FIT9/9は不変。CPU一式の実経過秒は未記録で、前回比較0.011652405秒を流用しない。次は12tokenのbyte対応だけを補う新しい一回の未承認提案。今回は修正/再実行0、GPU保持、追加観測会不要、商品0/正式0/3/54.50％・candidate_ready=false・automatic_progression=false。
+
+[実結果・原本・全file地図](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/structural_cpu/cpu_stop_20261030/README.md)／[次の限定修正案](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/structural_cpu/added_tokens_proposal.md)。
+
+承認対象はd3ece5f2のsyntax2_proposal.md。実行source e22f1101のsyntax2.py SHA cf33a3add37ba380c1a6e8c813404002045f740c8dc283933e0b8ae9bb515803、runner SHA fb2bd88a0fce681309ce121649a898cc5e54ed91e810f71b5028473ba7649bd9、実行時plan SHA 08533369bbb06484bf8cfa6ad1ff5e53dd39aec55be607765417afe2b6b001e4。Jupyterで3hash確認後、CUDA_VISIBLE_DEVICES=''・HF/Transformers offline、timeout290秒＋kill10秒のCPUを一回起動。syntax2.py:208のnon_model_added_token_requires_explicit_byte_proofでexit1。構築60秒/全CPU300秒/平均mask換算20秒の条件も合格とはしない。tokenizer metadata単独の0.882143秒と全CPU所要時間を混同しない。
+
+未対応はID248058〜248069のtool_call/tool_response/think/FIM/repo/file markerの12個で、全てspecial=false/normalized=false/lstrip=false/rstrip=false/single_word=false。単純にspecial除外やreplacement文字推測で回避していない。修正後の再CPU/実4B改善/全教師prefix/意味負対照の成功は未実測。事前ローカルの仮vocab/parser一致は補助所見に留める。
+
+原本ZIPは15818bytes、7member/6payload、SHA5505d0749f18c5d01613c6077d5a66e463e378c95f263cf46cdf0e94bbb74c63。一回回収し全member/CRC/bytes/SHA/source2本を照合。入力eval/trainの2hashはGitHub原本一致、Podで読取ったadapter全3hashは承認plan一致。全176frozen/全112F32を新たに再検査したとはしない。既存完全重みarchiveを保持し新重み0。current planはCLOSED_CPU_FAILED_GPU_NOT_STARTED_NO_RETRY、成功CPUreportなし、GPU run directoryなし。GPU処理按分0、準備/回収/保持等別、管理console/API・Stop/restart/delete0。
+
+次案は12tokenのbyte対応と同じCPU全条件だけの修正で、fresh source/root/lockを使う新しい一回。旧失敗sourceと原本を変更せず残す。元案のCPU不成立時終了とRule18§11.3のclosed single-use reuse/retry/repair禁止を維持し、未承認・未実装・未実行。現2題の追加観測会が必要という根拠はない。
+
+primary=BLOCKER_NARROWED、TECHNICAL_CREDIT=0、PRODUCT_CREDIT=0、正式0/3、54.50％。root単一writer/executor/judge、補助read-only、実環境GPT-6 Codex Work、正式Pro/Ultra/human受入れ未実施。通常ModelCandidateSource/receiver/意味型/三core/API/DTO/DB/RN/Render/Supabase/新依存/merge/deploy/lifecycle操作0、STRUCTURE_MAP_DELTA_NONE。
