@@ -1,5 +1,5 @@
 {
-  "status": "PROPOSED_NOT_APPROVED_NOT_EXECUTED",
+  "status": "MASH_EXPLICITLY_APPROVED_ONCE",
   "schema": "cocolon.shape2_rehearsal13.v1",
   "executor": "root Karen only; read-only support; Codex Work; formal Pro/Ultra/human acceptance not claimed",
   "predecessor_commit": "51dd393606faaba855daf005f197a541b00da621",
@@ -67,9 +67,9 @@
   "max_process_usd": 0.21,
   "preparation_cmee_cpu_recovery_holding_storage_network_tax_extra": true,
   "loss": "ordinary complete assistant CE through EOS; no suffix or token weight sweep",
-  "learning_rate": 5e-05,
-  "weight_decay": 0.0,
-  "gradient_clip": 1.0,
+  "learning_rate": 0.00005,
+  "weight_decay": 0,
+  "gradient_clip": 1,
   "seed": 20261024,
   "training_changes": "schedule only: existing shape2 full2 each twice and all frozen old9 each once; system/material/prior/spec/teacher bytes unchanged",
   "before_generation": "No new before generation. Retain shape2 original f493 actual 0/2 and role18 original old9 7/9 as historical baselines, not new measurements.",
@@ -93,5 +93,12 @@
   "receiver_semantics_public_api_db_rn_render_supabase_merge_deploy": false,
   "product_credit": 0,
   "candidate_ready": false,
-  "automatic_progression": false
+  "automatic_progression": false,
+  "approval": {
+    "owner": "Mash",
+    "proposal_commit": "4b3cdc8cd096ae7c13e3c28401d49c1e6ee580af",
+    "received_date_jst": "2026-10-29",
+    "user_response": "進めていいよ。",
+    "scope": "13 updates -> separate save/nontraining reload -> 11 evaluations, once, maximum2700s/$0.21 processing; preparation/recovery/holding etc extra; existing plan otherwise unchanged"
+  }
 }
