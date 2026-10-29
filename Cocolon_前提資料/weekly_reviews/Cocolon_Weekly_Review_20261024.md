@@ -3722,3 +3722,16 @@ rootはBOOK11186字/SHOP8757字の全rawを読了。BOOKはc[0]をclaim1件で�
 current plan=CLOSED_NOT_ADOPTED_NO_RETRY。今回の方式は不採用。同じprompt/cap/training/grammarの有料反復や新helper・次GPU案を自動追加しない。現2題の観測会は不要、材料一般十分性や4B能力限界は未断定。GPUは終了後1MiB/0％で稼働保持、管理console/API・Stop/restart/delete0。準備/CPU/回収/保持等は別で、按分額を総支払額とはしない。
 
 primary=BLOCKER_NARROWED、product_credit=0、正式0/3、54.50％、candidate_ready=false、automatic_progression=false。root単一writer/executor/judge、補助read-only、実環境GPT-6 Codex Work、正式Pro/Ultra/human受入れ未実施。通常ModelCandidateSource/receiver/意味型/三core/API/DTO/DB/RN/Render/Supabase/依存/merge/deploy構造差分0、STRUCTURE_MAP_DELTA_NONE。
+
+
+## 115. 2026-10-30 — 実学習と派生推論の入力・保存encodingをCPU照合、因果的修正は未確定
+
+**現在の直接作業（10/30・学習時入力／派生推論入力／保存encodingのCPU照合完了）：** 同Jupyterで一回、CPU内0.081736963秒／外0.128684958秒・exit0。保存11446641が実際に学習したrehearsal13と後続prior_rows2を区別し、BOOK/SHOPのsystem・正解教師は同一、旧9全rowも同一と確認。両者の差は既に意図したprior表記とoutput_typesの5つのowner path群。保存encoding上で全教師token＋EOSが学習対象に含まれる（2148/2424token、予定更新は各2回）。今回の照合範囲に新しい決定的不整合は見つからず、5群の差や旧9との形式混在を失敗原因とも無害とも確定しない。前回rawのfield取り違え・未完了は未解決、修正箇所未確定。この結果だけでは次の有料試行を選ぶ因果的根拠は得られなかった。model load/forward/追加学習/生成/新CMEE0、前回の意味/本人本文0/2・不採用閉鎖、旧9の履歴FIT9/9は不変。新重み0、入力5hashとadapter不変。現2題の追加観測会を要する根拠なし、GPU1MiB/0％の読取確認・稼働保持。ADMINISTRATIVE_ONLY、商品0/正式0/3/54.50％、candidate_ready=false、automatic_progression=false。
+
+[実結果・全原本・全file責務](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/structural_cpu/alignment_cpu/README.md)。保存adapter11446641の実学習元はrehearsal13であり、後続prior_rows2のtrain_messagesというファイル名だけから派生copyを学習済みと扱わない。実学習train SHA1401ee1144b820bbedbbcf1740133ca7d4330231f0d04732692820723bccff3b、派生train SHAef2d70877eb55c9191a2600581e74bd3d51f316473655efc154b7c389cf5485e。BOOK/SHOPのprompt長は実学習4295/4447、派生推論4152/4304、各143token差。差はprior meaning_packetのa/q/c.claims/c.relationsとoutput_spec.output_typesの5 owner path群で、個々の変更node数とは別。可逆表記変更の履歴を新serializer不具合に読み替えない。
+
+正解はclaims10/11、updates7/8、p0宣言・role順・全列幅・root完結。保存encodingではprompt labels=-100、教師側はinput_idsと同一labelsでEOS1個を含み、対象2148/2424token。予定順序は新2各2回＋旧9各1回の13更新で、今回の学習実行回数は0。tokenizer/model再実行や勾配反映・習得の確認ではない。既存syntax2b rawはBOOKのclaim list1件、SHOP12件、最後の未完了c fieldはrelations/conflicts。完全memberだけを読み、closer・gold値・意味・本文の補修0。§114の静的読解/実receiptを上書きしない。
+
+source27557501c1a544d669e15d7f069facc6a4e3420cのread_alignment.py SHA1de54c5ccd15f622590ab1d242f376e711d7e5fdcc769b5a908f63b9437dc2ceを同Jupyterへ取得・照合し、CUDA非表示/HF・Transformers offline、timeout60秒/kill5秒で一回。結果alignment.jsonは8776bytes/SHA4d1d9ea7e91f8d64f0e6801cc9e165454f4cd464a24283650ea65f62415f890c。実CPU0.08173696300946176秒、外0.12868495809379965秒、exit0/retry=false。原4payloadをJSON wrapperで一回回収し全bytes/SHA一致。Download API timeoutと実file到着を区別し再download0。GPU処理按分0、保持/準備/回収等は別。全重みtensor/frozenの新規全再検査は称さない。
+
+過去token_diagnosticも正解文脈では構造/EOS top1が正しく自由生成は失敗した。今回を新しい原因特定やモデル改善に数えず、同種の有料forward診断/追加学習/新grammar/生成helperを足さない。材料一般十分性や4B能力限界は未確定。root単一writer/executor/judge、補助read-only、実環境Codex Work、正式Pro/Ultra/human受入れ未実施。通常ModelCandidateSource/receiver/意味型/三core/API/DTO/DB/RN/Render/Supabase/依存/merge/deploy/lifecycle操作0。STRUCTURE_MAP_DELTA_NONE、primary=ADMINISTRATIVE_ONLY、TECHNICAL_CREDIT=0、PRODUCT_CREDIT=0。

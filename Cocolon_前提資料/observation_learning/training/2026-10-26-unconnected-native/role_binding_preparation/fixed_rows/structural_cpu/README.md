@@ -1,6 +1,6 @@
 # 保存raw構造照合・構文制約方式の現在地
 
-**2026-10-30最新：** Mashの継続指示に基づくsyntax2bの一回が終了。12token対応CPUは全条件通過したが、非学習1load/0更新/2生成は両cap・EOSなし、CMEE意味/本人本文0/2で不採用閉鎖。処理332.789460秒/$0.025883624683按分、準備/回収/保持等別。[全結果・原本・全file責務](syntax2b_result_20261030/README.md)。同じ有料再試行・新helper・次GPU案なし。旧syntax2の[CPU停止](cpu_stop_20261030/README.md)は履歴として不変。
+**2026-10-30最新：** [実学習と派生推論の入力・保存encodingのCPU照合](alignment_cpu/README.md)を同Jupyterで一回完了（0.081736963秒/exit0、model処理0）。教師token＋EOSは保存encoding上で対象に含まれ、旧9全row同一、意図した5 owner path群の差を確認。今回範囲で新しい決定的不整合は見つからず、自由生成の失敗を直す箇所は未確定。追加有料試行を選ぶ因果的根拠なし。§114の[構文支援2生成](syntax2b_result_20261030/README.md)は両TOKEN_LIMIT・意味/本人本文0/2・不採用閉鎖を保持。新学習/生成/CMEE0、GPU保持、商品credit0。旧syntax2の[CPU停止](cpu_stop_20261030/README.md)は履歴として不変。
 
 ## 以下は先行§112の保存raw比較記録
 

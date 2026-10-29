@@ -5727,3 +5727,10 @@ cpu_stop_20261030/README.mdは実結果・全file責務・限界、failure.json�
 structural_cpu/syntax2b.pyは旧syntax2を変更せず非special追加token12個のByteLevel byte対応と6144前後連結・JSON境界検査だけを追加。run_syntax2b.pyは旧runnerの新root/plan/source参照を同期、plan2b.jsonはCPU成功report hashとMash継続指示、現在CLOSED_NOT_ADOPTED_NO_RETRYを所有する。CPU24.631755秒で全条件通過後、8842ef2bを同Jupyterで非学習1load/0更新/2生成、332.789460秒/$0.025883624683按分。両TOKEN_LIMIT/意味本文0/2、snapshot0。
 
 syntax2b_result_20261030/README.mdが全file責務、summary.json/content_review.mdが全2raw読了と閉鎖、run/raw2/loaded_tensors/cmee_diagnosisが未修復実結果、runtime_cpu_plan/runtime_authorized_planとcpu/gpu/cmee launch・elapsed・log・exitが実承認/単一起動/上限/原時間を所有。raw_reading.jsonは完全memberだけの列/field/反復計数、post_identity.json/verification.jsonは入力2/adapter3と回収同一性、cpu_originals_manifest/cpu_originals.zipとarchive_manifest/originals.zipはCPU9memberと全20memberの完全原本、proof.jpgは実Jupyter結果を所有する。途中Jupyter checkpointは最終runの根拠にしない。通常ModelCandidateSource/receiver/意味型/三core/API/DTO/DB/RN/Render/Supabase/依存/merge/deploy構造差分0、STRUCTURE_MAP_DELTA_NONE。商品0/正式0/3/54.50％、同じ有料反復・新helper・次GPU案なし。
+
+
+### weekly§115 — 実学習と派生推論の保存入力・encodingのCPU照合
+
+structural_cpu/alignment_cpu/read_alignment.pyはrehearsal13の実学習教材・保存encodingとprior_rows2の派生入力、syntax2bの既存rawだけを読む一回限りのCPU診断。source27557501をJupyterで一回実行、内0.081736963秒/外0.128684958秒/exit0、model load/forward/更新/生成/新CMEE0。alignment.jsonは全5input前後hash/5 owner path群/全11の予定順序/新2の教師・保存labels+EOS/旧9全row同一/未修復rawの完結member計数を所有。execution.jsonとcpu.log/exitは実行identity/時間/再試行なしの原本、evidence.jsonは原4payloadのexact UTF-8保全、verification.jsonは全payload/source/画面bytesとSHAの回収照合、proof.jpgは実Jupyter表示、README.mdは結果・全file責務・判断限界を所有する。
+
+教師や予定更新の欠落は今回範囲で見つからないが、因果的修正箇所は未確定。5群の意図した表記差や形式混在を原因/無害と断定せず、次の有料試行を選ぶ根拠へ転用しない。前回0/2と不採用閉鎖/旧9履歴FIT9/9は不変。通常ModelCandidateSource/receiver/意味型/三core/API/DTO/DB/RN/Render/Supabase/依存/merge/deploy構造差分0、STRUCTURE_MAP_DELTA_NONE。ADMINISTRATIVE_ONLY、商品0/正式0/3/54.50％。
