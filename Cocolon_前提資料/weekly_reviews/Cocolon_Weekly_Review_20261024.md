@@ -3664,3 +3664,16 @@ prior rows比較source9b91ef7fを同Jupyterへ配置しSHA2f9e0e2e照合、4.674
 CPU完全原本102525bytes/8member、SHA4f4013abcb55e983667f300dbcada844e0d9fb16249fbdfdbbc4095419dda683を全CRC/member/bytes/SHA/source照合し、全payloadをGitHub対象へ保存。Download API失敗/runtime resetと実file到着を区別、再download0。次のrunnerは未承認statusをmodel import/OUT作成前に拒否することをrootが確認し、read-only補助で指摘された自己source hash guardをモデル処理前に追加。保存11446641の1load/0更新/2call・590+kill10秒・各180秒・元cap・phase before consumer参照を固定した。未承認のままで実モデル効果未確認・新しいモデル処理按分0（保持等別）。前回閉鎖runの再起動/承認流用をしない。
 
 これは『prior形式が主因』や4B能力改善の実証ではなく、比較可能な最小入力差を全値不変で具体化した段階。新方式/受領形式/意味型/検査緩和/通常ModelCandidateSource/三core/API/DB/RN/Render/Supabase/新依存/merge/deploy/lifecycle変更0、STRUCTURE_MAP_DELTA_NONE。root単一writer/executor、補助read-only、実環境GPT-6 Codex Work、正式Pro/Ultra/human受入れ未実施。primary=BLOCKER_NARROWED、商品0/正式0/3/54.50％。
+
+
+## 111. 2026-10-29 — 承認済みprior表示整合の2生成終了、両cap未完で不採用閉鎖
+
+**現在の直接作業（10/29・承認済みprior表示整合2生成終了／0/2・不採用閉鎖）：** Mashが5c21326c案を明示承認し、943ee425でplanの承認だけ同期。同Jupyterで保存11446641の非学習1load/0更新/BOOK・SHOP各1生成を一回実行、326.241692937秒/$0.025374353895処理按分で10分/$0.047上限内（準備/親外CMEE CPU1.625254576秒/回収/保持等別）。両3712/3584cap・EOSなし、実receiptは両TOKEN_LIMIT→REJECT/semantic_receipt_not_validated、意味/本人本文0/2。元receipt replay2一致、採用snapshot0/cold対象0をcold成功へ換算しない。rootは両raw全文を読了。配列表記へ変化したが階層/参照の崩れ・反復とspec説明混入が残り、prior表記整合だけでは成立しなかった。静的所見と実拒否理由を区別し、全原因/4B限界は未断定。旧176frozen/112F32保存重み不変・新重み0、旧9再生成0で履歴FIT9/9を新実測へ加算しない。全202member/201payloadを回収し全CRC/bytes/SHA/source/旧重み参照まで照合・保存成功。plan=CLOSED_NOT_ADOPTED_NO_RETRY、retry/追加学習/次runなし。現2題の追加観測会不要、GPU保持、商品0/正式0/3/54.50％・candidate_ready=false・automatic_progression=false。 [全結果・原本・読了記録](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/prior_rows2/result_20261029/README.md)。
+
+提案5c21326cから承認source943ee425はplan status/approvalだけの差分、runner0dc460a4不変。Jupyter起動文の改行指定に一度SyntaxErrorがあったがparseで停止し、download/lock/モデル副作用0。改行だけ訂正し、実GPU起動はPID232075/Unix1793267623.5736284の一回。checkpoint204e5629と元gpu_launchは一致。各160.811921秒/154.154256秒で180秒内、全処理326.241693秒で600秒内、timeout0・GPU/CMEE exit0。未修復run statusは当時のRAW_COMPLETE_PENDING_CMEE_AND_CONTENT_REVIEWを不変保存し、summary/current planが回収後の閉鎖を所有する。
+
+BOOKは履歴rehearsal13のEOS2371/INVALID_FORMATから今回3712cap/TOKEN_LIMITへ退行。SHOPは前後3584cap/TOKEN_LIMIT。named object表記は消えたが行の階層/列順/参照の崩れが残る。BOOKはp0欠落・no_contact引用誤対応・旧意味再ADD・未宣言参照・本文反復、SHOPは引用重複・知覚の断定化・更新混成・bind反復とBOOK用spec説明句混入を静的確認。実CMEEはfinish優先で両TOKEN_LIMIT→REJECT/semantic_receipt_not_validatedであり、この所見を後段意味検査の実際の拒否理由へ転記しない。receipt replay2一致、採用snapshot0のためcold対象0。保存再読成功2と称さない。旧9の履歴FIT9/9は新実測に加算しない。
+
+全202member/201payloadのZIP2829165bytes、SHAb69f7cb0b9c6e47a120491d4068aeebb0c6bf58ebd52f5bc1049884cd9d34015を全CRC/member/bytes/SHAで照合し、libfile_bcb2caa7fdb481918c4a590df598d5e5へ保存成功・identity適用済み。173非重みfrozenは前回原本と全一致、旧3重みを合わせ全176不変、使用11446641含む4完全重みは既存libfile_9623b67a65588191926a1bb0a0ea5797の60053438bytes/248member archiveに同一bytes/SHAで保全済み。全112F32/name/shape/normは前回保存再読込と同一。base/optimizer/RNGの厳密途中再開は称さない。Download API失敗と実file到着を区別し再download0。
+
+一回はCLOSED_NOT_ADOPTED_NO_RETRYで終了。現2題の材料と正しい教師はあり追加観測会不要、次のCPU検討は階層/引用/更新/本人本文の教示対応へ戻る。有料再実行・追加更新・上限引上げ・受領緩和は自動で進めない。通常ModelCandidateSource/receiver/native意味型/三core/公開API/DB/RN/Render/Supabase・新依存・merge/deploy/lifecycle操作0、GPU保持。STRUCTURE_MAP_DELTA_NONE、primary=BLOCKER_NARROWED、商品0/正式0/3/54.50％。root単一writer/executor/judge、補助read-only、実環境GPT-6 Codex Work、正式Pro/Ultra/human受入れ未実施。
