@@ -5630,4 +5630,7 @@ role_binding_preparation/runtime18/run_role18.pyは13局所＋3anchor＋全文2�
 
 ## 2026-10-29 weekly§102 — role_binding_preparation/boundary_probe4
 
-probe4.pyが既存role18/helperの非学習読込とCMEE read_rawを継承し、元全文teacherの実token prefix2境界×2題でsuffix4回だけ診断する。prepared_cpu.jsonが全4入力token列/与えたprefix/期待suffix・原hash/capを、cpu.log/cpu.exitが実CPU4.611861秒を所有。README.mdが条件付き診断の目的・上限900秒/$0.07・採用禁止・完了条件を所有。通常商品source/wire/reader/API/DB/RN/Render/Supabaseの構造変更なし、STRUCTURE_MAP_DELTA_NONE。前回role18原本は不変。
+probe4.pyが既存role18/helperの非学習読込とCMEE read_rawを継承し、元全文teacherの実token prefix2境界×2題でsuffix4回だけ診断する。prepared_cpu.jsonが全4入力token列/与えたprefix/期待suffix・原hash/capを、cpu.log/cpu.exitが実CPU4.611861秒を所有。README.mdが条件付き診断の目的・上限900秒/$0.07・採用禁止・終了を所有。sourcef6f1bb48の一回は0update/1load/4call・条件付き意味/本文0/4で完了。通常商品source/wire/reader/API/DB/RN/Render/Supabaseの構造変更なし、STRUCTURE_MAP_DELTA_NONE。前回role18原本は不変。
+
+
+終了原本は同boundary_probe4/result_20261029へ保存。run.json/loaded_tensors.json/FT-*.json4件が実1load/4suffix/EOS2・JSON1、conditional_cmee.jsonが条件付き採否0/4、execution_summary.json/gpu_launch.json/gpu.log/cmee.log・exit/once・execute_once.lockが実行条件と120.668072秒/$0.009385294476按分を所有。reading_review.md/result_summary.jsonが全更新・本文・typed bindの読取、閉鎖と次2更新候補（未実行）を所有。external_manifest.jsonはZIP18payload/86686bytesの元bytes目録、archive_payload_locations.jsonは親の既存4file＋result配下への保存対応、external_verification.jsonは全CRC/hash/112F32/4raw/prefix照合を所有。新重み0、条件付き結果は全文成功へ換算しない。STRUCTURE_MAP_DELTA_NONE。

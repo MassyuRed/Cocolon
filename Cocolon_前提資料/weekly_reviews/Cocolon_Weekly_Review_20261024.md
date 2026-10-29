@@ -3548,7 +3548,9 @@ GPU保持/Stop・restart・delete0。通常app/API/DTO/DB/RN/Render/Supabase/mer
 [全実行条件と原本一覧](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/README.md)／[原raw・意味・本文の読取](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/runtime18/result_20261029/reading_review.md)。
 
 
-## 102. 2026-10-29 — 正解prefix条件付きの境界診断4回・実CPU照合
+## 102. 2026-10-29 — 境界診断4回完了・条件付き意味/本文0/4
+
+**最終：0update/1load/4call、条件付き意味/本文0/4、EOS2/JSON1。以下の準備条件は経過で、末尾の終了結果を現在値とする。**
 
 **現在の直接作業（10/29・境界診断4回の準備完了）：** 前回role18の全文意味/本人本文0/2・旧9after-only7/9/cold7・新f493不採用は保持。局所13行の誤投影は見つからず、両rawはproseをbinds直後で早く閉じる。同じ再学習をせず、保存f493へ正規全文教師の正しい意味まで/全更新までを与えるBOOK/SHOP各2の4suffix診断を選んだ。実CPU4.611861秒、全4prefixは正規token列の先頭片で次要素の意味内容混入0、context8192内・prompt不変。完全CPU459860bytesを回収/hash照合。source保存/readback後に非学習1load/0update/4call、最大900秒/$0.07処理按分（準備/CPU/保持等別）で一回だけ実施する。これはgold条件付き原因確認で全文採用/商品品質へ換算しない。GPU保持、現2題新観測会不要。
 
@@ -3557,4 +3559,15 @@ GPU保持/Stop・restart・delete0。通常app/API/DTO/DB/RN/Render/Supabase/mer
 実CPU4.611860721954秒、モデルload/forward/生成0、source/初期afaa/保存f493/元入力/元role18 ownerのhash一致。完全prepared_cpu.jsonは459860bytes/SHA b03a26bd2ae402b89cad6426595fb8b118e45df97c0b2a9cbf9b6acc27900c94。実token列・prefix・期待suffix・全入力hash・capが入る。全prefix＋期待suffixで元教師を復元し、input+capは全8192以内。CPU log/exitとsourceを56206bytes ZIPで回収、全CRC/size/hash・source一致をPod外確認した。ブラウザdownload APIは失敗を返したが実fileは到着し、無変更bytesを照合した。追加download/CPU再実行0。
 
 
-[最小診断source・CPU・実行条件](../Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/boundary_probe4/README.md)。root GPT-6 Codex Work単一writer/executor・独立read-only補助、正式Pro/Ultra/human受入れとは分ける。通常app/API/DTO/DB/RN/Render/Supabase/merge/deploy/lifecycle0、STRUCTURE_MAP_DELTA_NONE。商品0/正式0/3/54.50％・candidate_ready=false/automatic_progression=false。
+[最小診断source・CPU・実行条件](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/boundary_probe4/README.md)。root GPT-6 Codex Work単一writer/executor・独立read-only補助、正式Pro/Ultra/human受入れとは分ける。通常app/API/DTO/DB/RN/Render/Supabase/merge/deploy/lifecycle0、STRUCTURE_MAP_DELTA_NONE。商品0/正式0/3/54.50％・candidate_ready=false/automatic_progression=false。
+
+
+### §102 終了結果 — 更新割当とbind/本文/終端へ残件を切分け
+
+**現在の直接作業（10/29・境界診断4回完了）：** 保存f493を非学習1load/0updateで正解意味まで・全更新までのprefixから4suffix生成し、条件付き意味/本人本文0/4、EOS2/4・strict JSON1/4。BOOK意味条件はHOLD/更新未束縛、他3は不正形式でREJECT。正しい意味を与えても更新割当が欠け、正しい全更新を与えてもbind反復/参照種類混同・本文/閉じに不備が残ると切分けた。処理120.668072秒/$0.009385294476按分、CMEE CPU1.845805秒（準備/回収/保持等別）。全原本回収・CRC/hash/112F32照合、新重み0/f493不採用。次候補は元全文2本のupdates境界以降〜EOSだけを重点化する2更新で、CPU/起点/評価/費用は未固定・未実行。前回全文0/2・旧after-only7/9/cold7は保持し、条件付き成功を全文成功へ数えない。現2題の新観測会不要、GPU保持。
+
+sourcef6f1bb485dc73c11e6669062301893440502d248/PID95992で一回実施。BOOK意味634/EOS/JSON成立はHOLD model_v3_explanation_updates_not_bound。BOOK全更新448/TOKEN_LIMIT/noEOSはupdate_note bind反復、SHOP意味960/TOKEN_LIMIT/noEOSはADD不足と否定反転/本文反復、SHOP全更新326/EOSは正しいprose階層だが最外閉じ不足/typed bind混同。後3件はREJECT semantic_receipt_not_validatedで、深部所見は静的読取として実拒否理由と分ける。正解prefixを与えても成立せず、上流誤りだけが原因との仮説を退けたが、一般4B能力不足/全学習法の不成立/教材不足は断定しない。中間のBOOK両条件JSON成立というroot誤読は片方だけへ訂正、実raw/採否不変。
+
+全4prefix境界差は],の2文字、元教師全文を完全復元。原本ZIP86686bytes/18payload＋manifest、SHA60738af20a88356d73325f42504ed2c0bab0a0c668341443c5be6160960fde76を全CRC/hash/size・112F32有限・実suffix/raw/prefix/adapter revisionでPod外照合。全bytesを親のCPU/source4fileとresult_20261029へ保存し、archive_payload_locations.jsonで対応。使用重み/元bundleは既存Library libfile_e089337060248191a52ee06aad6fc75a v0を保持。新重み/重複重みarchive/追加学習/通常有効化/SQL/retry0。費用は前回同Pod表示$0.28/h按分で今回live再照会なし、準備/CPU/回収/保持等別。primary=BLOCKER_NARROWED、商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false。通常app/API/DTO/DB/RN/Render/Supabase/merge/deploy/lifecycle変更0、STRUCTURE_MAP_DELTA_NONE。
+
+[全4suffix・全更新・本人本文の読取と次候補](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/boundary_probe4/result_20261029/reading_review.md)。

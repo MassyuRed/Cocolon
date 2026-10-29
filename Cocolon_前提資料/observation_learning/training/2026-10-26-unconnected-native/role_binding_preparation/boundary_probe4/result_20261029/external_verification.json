@@ -1,0 +1,13 @@
+{
+  "archive_bytes": 86686,
+  "archive_sha256": "60738af20a88356d73325f42504ed2c0bab0a0c668341443c5be6160960fde76",
+  "payloads": 18,
+  "all_crc_hash_size_verified": true,
+  "cpu_source_identical": true,
+  "all4_prefix_continuation_unchanged": true,
+  "all4_raw_token_cap_hash_adapter_verified": true,
+  "adapter_unchanged": true,
+  "loaded_tensors": 112,
+  "loaded_parameter_count": 3833856,
+  "loaded_all_f32_finite": true
+}

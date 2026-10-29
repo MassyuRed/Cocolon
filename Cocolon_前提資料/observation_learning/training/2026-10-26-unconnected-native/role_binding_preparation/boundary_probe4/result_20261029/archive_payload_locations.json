@@ -1,0 +1,112 @@
+{
+  "files": [
+    {
+      "path": "pack/cmee.exit",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "github_location_relative_to_probe4": "result_20261029/cmee.exit"
+    },
+    {
+      "path": "pack/cmee.log",
+      "bytes": 825,
+      "sha256": "2b9ca78e64f43e2609ee5bb74f2d578b1f84ce3740dd8922ff5b3243d686ddee",
+      "github_location_relative_to_probe4": "result_20261029/cmee.log"
+    },
+    {
+      "path": "pack/cmee.once",
+      "bytes": 32,
+      "sha256": "3bf02f3279c47853d5174563dc8e2dc7438e03cbab1c066b1f08b599c56110ea",
+      "github_location_relative_to_probe4": "result_20261029/cmee.once"
+    },
+    {
+      "path": "pack/cpu.exit",
+      "bytes": 1,
+      "sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "github_location_relative_to_probe4": "cpu.exit"
+    },
+    {
+      "path": "pack/cpu.log",
+      "bytes": 829,
+      "sha256": "2834089ea567cf32e3440e8e82daa053e1a50fc409c12f535338aefeeec9bcff",
+      "github_location_relative_to_probe4": "cpu.log"
+    },
+    {
+      "path": "pack/execute_once.lock",
+      "bytes": 41,
+      "sha256": "7dca536298bb61534d3a82ca13cb2cd7b49373fac9258a0bdb42da8936c3c0db",
+      "github_location_relative_to_probe4": "result_20261029/execute_once.lock"
+    },
+    {
+      "path": "pack/gpu.log",
+      "bytes": 3752,
+      "sha256": "d7fff56f08bae0a64a2aabaaf0f194188f3587751f1af844c3ac2a94a9bd3a3e",
+      "github_location_relative_to_probe4": "result_20261029/gpu.log"
+    },
+    {
+      "path": "pack/gpu_launch.json",
+      "bytes": 246,
+      "sha256": "adf928f89b5f6d62a1077bd167faf8e6fb8c7c5d90ddd99e26370c02b0a79ab6",
+      "github_location_relative_to_probe4": "result_20261029/gpu_launch.json"
+    },
+    {
+      "path": "pack/prepared_cpu.json",
+      "bytes": 459860,
+      "sha256": "b03a26bd2ae402b89cad6426595fb8b118e45df97c0b2a9cbf9b6acc27900c94",
+      "github_location_relative_to_probe4": "prepared_cpu.json"
+    },
+    {
+      "path": "pack/probe4.py",
+      "bytes": 17198,
+      "sha256": "1d29016ab5b4dbebbc12cfa20159f2f85ee8dad695d51a46709959d6b0b4aade",
+      "github_location_relative_to_probe4": "probe4.py"
+    },
+    {
+      "path": "run/FT-BOOK-AFTER-ANSWER--GOLD_MEANING.json",
+      "bytes": 44174,
+      "sha256": "0770fe1b155584a164f84b57dfcc4b3c7d7ae5d806c3a560a6f218236e6af4b4",
+      "github_location_relative_to_probe4": "result_20261029/FT-BOOK-AFTER-ANSWER--GOLD_MEANING.json"
+    },
+    {
+      "path": "run/FT-BOOK-AFTER-ANSWER--GOLD_MEANING_AND_UPDATES.json",
+      "bytes": 21468,
+      "sha256": "6e4e21b1ed0eb8623d220a71c014b00fd396682169ffb3a053ea7b2a664bcd82",
+      "github_location_relative_to_probe4": "result_20261029/FT-BOOK-AFTER-ANSWER--GOLD_MEANING_AND_UPDATES.json"
+    },
+    {
+      "path": "run/FT-SHOP-AFTER-ANSWER--GOLD_MEANING.json",
+      "bytes": 31412,
+      "sha256": "425ea29be66192d973257e9b1599ee3cbc3e3cf3bb74afa0a9a3c60da675075c",
+      "github_location_relative_to_probe4": "result_20261029/FT-SHOP-AFTER-ANSWER--GOLD_MEANING.json"
+    },
+    {
+      "path": "run/FT-SHOP-AFTER-ANSWER--GOLD_MEANING_AND_UPDATES.json",
+      "bytes": 20758,
+      "sha256": "4c59dd9da6e48de33d9c175c31b70d824f7d79dd969250a4893754e692fa419d",
+      "github_location_relative_to_probe4": "result_20261029/FT-SHOP-AFTER-ANSWER--GOLD_MEANING_AND_UPDATES.json"
+    },
+    {
+      "path": "run/conditional_cmee.json",
+      "bytes": 75710,
+      "sha256": "59bba5b92f4423f0a7ee4365a13f27181231d611165c2560c2e8ee8b4dd8c8fa",
+      "github_location_relative_to_probe4": "result_20261029/conditional_cmee.json"
+    },
+    {
+      "path": "run/execution_summary.json",
+      "bytes": 1709,
+      "sha256": "118a0036d78ddcaa70796c70c8e79a234dfda01435e40507d97bce9a0ab2b867",
+      "github_location_relative_to_probe4": "result_20261029/execution_summary.json"
+    },
+    {
+      "path": "run/loaded_tensors.json",
+      "bytes": 26025,
+      "sha256": "344fb1d91a03a875d1587bcc05438d578858c5a7cf99c8458d54e9281f84e823",
+      "github_location_relative_to_probe4": "result_20261029/loaded_tensors.json"
+    },
+    {
+      "path": "run/run.json",
+      "bytes": 3347,
+      "sha256": "bf69ac2ad10988ccc933210fe057669dff028d82f553ed587aef1eec915c235b",
+      "github_location_relative_to_probe4": "result_20261029/run.json"
+    }
+  ]
+}

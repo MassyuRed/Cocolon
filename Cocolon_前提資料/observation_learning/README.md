@@ -2,7 +2,7 @@
 
 **GPU実確認の最終記録（2026-10-29）：** 同Pod vgkm402msgroiu/short_gold_bonobo、Jupyter直接接続、NVIDIA RTX A5000 24564MiB・torch2.8.0+cu128、固定依存/base復元済み。今回の処理費用は前回同Pod表示$0.28/hを按分に使用し、今回live単価は再照会していない。GPU保持/Stop等0。
 
-**現在の直接作業（10/29・境界診断4回の準備完了）：** 前回role18の全文意味/本人本文0/2・旧9after-only7/9/cold7・新f493不採用は保持。局所13行の誤投影は見つからず、両rawはproseをbinds直後で早く閉じる。同じ再学習をせず、保存f493へ正規全文教師の正しい意味まで/全更新までを与えるBOOK/SHOP各2の4suffix診断を選んだ。実CPU4.611861秒、全4prefixは正規token列の先頭片で次要素の意味内容混入0、context8192内・prompt不変。完全CPU459860bytesを回収/hash照合。source保存/readback後に非学習1load/0update/4call、最大900秒/$0.07処理按分（準備/CPU/保持等別）で一回だけ実施する。これはgold条件付き原因確認で全文採用/商品品質へ換算しない。GPU保持、現2題新観測会不要。 [条件・CPU原本](training/2026-10-26-unconnected-native/role_binding_preparation/boundary_probe4/README.md)、weekly§102。
+**現在の直接作業（10/29・境界診断4回完了）：** 保存f493を非学習1load/0updateで正解意味まで・全更新までのprefixから4suffix生成し、条件付き意味/本人本文0/4、EOS2/4・strict JSON1/4。BOOK意味条件はHOLD/更新未束縛、他3は不正形式でREJECT。正しい意味を与えても更新割当が欠け、正しい全更新を与えてもbind反復/参照種類混同・本文/閉じに不備が残ると切分けた。処理120.668072秒/$0.009385294476按分、CMEE CPU1.845805秒（準備/回収/保持等別）。全原本回収・CRC/hash/112F32照合、新重み0/f493不採用。次候補は元全文2本のupdates境界以降〜EOSだけを重点化する2更新で、CPU/起点/評価/費用は未固定・未実行。前回全文0/2・旧after-only7/9/cold7は保持し、条件付き成功を全文成功へ数えない。現2題の新観測会不要、GPU保持。 [全実結果・次の直接候補](training/2026-10-26-unconnected-native/role_binding_preparation/boundary_probe4/README.md)、weekly§102。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 
