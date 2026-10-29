@@ -1919,3 +1919,8 @@ source3786df21/APIa8be7a9bでd431から13更新/save/112F32 no-grad reload/BOOK-
 
 
 同named契約内の最新学習：API1739a6bfで説明key/出力型とroot順、source/prior/update namespace提示を修復（CPU351成功、任意claim IDとprior往復、全15教師/他13入力不変）。既存privateモデル向けcopyだけ、保存prior/意味/本文/receiver/wire/通常経路不変、STRUCTURE_MAP_DELTA_NONE。新一回の9更新/112F32 no-grad reload/2生成は558.484318秒/$0.0434377で終了。両root v:string/a/q/cと回答source帰属は改善したが、BOOK ur metadata反復・SHOP cid/q重複/binds反復、両TOKEN_LIMITで意味/本文0/2・新41c9不採用。旧284f/d431/source不変、全原本/重みをPod外全照合・保全。最新ownerは[named出力提示結果](../observation_learning/training/2026-10-26-unconnected-native/named_output_contract9/README.md)・[全raw読解](../observation_learning/training/2026-10-26-unconnected-native/named_output_contract9/reading_review.md)・weekly§90。旧prior表記修復は§89の閉鎖履歴へ保持。追加試行自動開始なし、次は既存教師のupdates/prose順序を同意味可逆に整えるCPU候補（未実行）。商品0/正式0/3/54.50％、GPU保持/Stop等0。
+
+
+## 2026-10-29 — 承認済み固定列形式のprivate受領
+
+API c920f81aの`fixed_rows_reference_wire.py`が固定列/厳密型から元named keyだけを復元し、既存named→quote→source/意味/本文検査へ渡す。`preparation.receive_candidate`の明示新formatだけが入口で、private preparation/free/ANSWER・source原文BOOK/SHOP/二sourceを確認。意味採用入口は既存のactual offline/free/ANSWER・source由来BOOK_CONCERN_V3/SHOP_DISTANCE_V3 AFTER_EXPLANATIONを再確認。欠落値/ID/quote/更新/bind/本文の補完と形式fallbackなし。receipt/snapshotは元rows rawとformat/metadataを保存し同rawで再受領。旧format省略時のbytesは保持、通常ModelCandidateSource未対応/未有効化。CPU教師2/cold/replayと旧9全outcome/receipt一致を確認し、一回GPUは進行中。native意味型/公開API/DTO/DB/RN/他coreは不変、STRUCTURE_MAP_DELTA_PRESENT。実結果はfixed_rows README/weekly§105。

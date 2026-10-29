@@ -1,4 +1,4 @@
-# 固定列配列による全文候補 — CPU比較済み／新受領形式とGPUは提案のみ
+# 固定列配列による全文候補 — 承認後の限定受領実装・一回試行中
 
 2026-10-29 JST。root華恋が唯一のwriter/executor、独立補助はread-only。実環境はGPT-6 Codex Workであり、正式Pro/Ultra又はhuman受入れとは称しない。
 
@@ -6,7 +6,7 @@
 
 EmlisAIのBOOK/SHOP回答後全文はsuffix2でも意味・本人本文0/2、旧9は7→4/9へ退行した。新45a1は不採用、旧runは閉鎖したまま。同じloss重み調整を反復せず、モデルが同じ意味・更新・本人本文を最後まで明示できるよう、反復する固定JSON項目名だけを配列の列順へ移す一回限りの表記比較を行った。前回の汎用column-record約3％短縮案は不採用のまま。
 
-**今回完了したのはCPU比較だけ。4Bのload/forward/update/生成、新CMEE受領形式の実装・有効化は0。** 新formatを実際のmodel rawとして受け取れることも、言語能力改善も未証明。primary=TECHNICAL_CREDIT（可逆表記・token比較のみ）、product_credit=0、正式0/3、54.50％、candidate_ready=false、automatic_progression=false。
+**§104の比較時点で完了したのはCPU比較だけ。4Bのload/forward/update/生成、新CMEE受領形式の実装・有効化は0。** 新formatを実際のmodel rawとして受け取れることも、言語能力改善も未証明。primary=TECHNICAL_CREDIT（可逆表記・token比較のみ）、product_credit=0、正式0/3、54.50％、candidate_ready=false、automatic_progression=false。
 
 ## 比較した形式と不変の意味責任
 
@@ -41,9 +41,9 @@ final_v2のsource SHA256は `df650fd82663ac1c72954cc640ace9c53de71a3e9fd46155279
 
 最終ZIP `cocolon-fixedrows-cpu-20261029.zip`、292,780bytes／20payload＋manifest、SHA256 `8c41d07c821437ebc37320cd95b4d23c2e5d0215abb66a9da0116615f0f059a5`。全CRC/size/hash/source一致をPod外照合し、Library `libfile_380690ad8eec8191ad327c7d2669e35a`へ保存。base/tokenizer本体や追加重みは今回新規作成していない。既存新旧重みの保存ownerはsuffix2最終ZIPのまま。
 
-## 次の一回の具体案 — 未承認・未実装・未実行
+## 提案時の履歴 — §104時点では未承認・未実装・未実行
 
-詳細条件は[fixed_rows5.plan.json](fixed_rows5.plan.json)。今回の「続けて」は既に固定されたCPU比較を進める指示として使用し、新しい受領形式・GPU試行まで承認済みとは記録しない。
+詳細条件は[fixed_rows5.plan.json](fixed_rows5.plan.json)。以下は提案当時の記録で、承認後currentは末尾execution節を優先する。当時の「続けて」は既に固定されたCPU比較を進める指示として使用し、新しい受領形式・GPU試行まで承認済みとは記録しない。
 
 ### 新形式の受領範囲
 
@@ -62,3 +62,11 @@ GPU前に実新形式の受領・receipt replay・教師2件・cold全outcome、
 同Pod A5000を保持し、GPU親processはCPU子process待機も含め最大2400秒（timeout2390＋kill10）／処理按分$0.19上限、各生成180秒、context8192、元capのまま、greedy、retryなし。前回同Pod表示$0.28/hを根拠とし、live単価再照会なし。準備/回収/親process外CPU/保持/保存/通信/税等は別。上限内完走保証なし、runtime/identity/timeout/OOM不成立なら停止・原本回収、次run自動開始なし。実装時の同scope内の機械的補正は記録するが、意味要件・費用上限・対象・停止境界を広げない。
 
 今回追加GPUなし。現在の2題には正しい教師があるため、この修正用の新観測会は不要。未知独立評価・Piece/Analysisの完成教師は別の未完了。通常app/API公開契約/DTO/DB/RN/Render/Supabase/merge/deploy/lifecycle effect0、GPU保持。STRUCTURE_MAP_DELTA_NONE（今回はoffline比較source/教材派生・記録だけ）。
+
+
+<a id="fixedrows5-execution-20261029"></a>
+## 2026-10-29 承認後の実装・CPU・一回GPU実行
+
+**現在の直接作業（10/29・固定列形式の承認後実装／一回試行中）：** Mashがbadea42eの具体案へ「進めていいよ」と明示承認。API c920f81aの新fixed_rows_reference_wire.py＋既存preparation/emlis_semantic_admission、新standard unittestを実装・全4file remote読戻し一致。明示private/Free/BOOK・SHOP回答後のみ、元rows raw/format/finish/モデルmetadataをreceiptと再読で保持、named→quote→既存意味/本文検査へ接続。通常ModelCandidateSourceは未対応・未有効化。Jupyter CPUの教師2件は意味/本文・別process cold全outcome/replay一致、旧9のreceipt/fulloutcomeは変更前rootと完全一致。standard unittest5成功、変異subtestは件数に加算しない。初回CPU比較のoutcome.body.artifact参照名誤りをmodel effect0で修正し、初回原本を別保持した。最終入力/全assistant+EOS mask/context/旧9/112F32をCPU再照合後、source c6ef6555から同Pod A5000で承認済み一回を起動。before2→未達時のみ5更新/別保存/非学習reload/after11、最大2400秒/$0.19処理按分（準備/回収/保持等別）、retry/自動次runなし。現在はGPU結果未確定で、成功・新重み採用・商品進捗とは扱わない。現2題の追加観測会不要、GPU保持。 [実装・実行記録](execution/runtime_authorized_plan.json)。
+
+実行範囲・上限は [承認後plan](execution/runtime_authorized_plan.json)、sourceは [runner](execution/run_fixed_rows5.py)／[consumer](execution/consume_fixed_rows5.py)、APIの全4file identityは [manifest](execution/current_api_source_manifest.json)。起案planと初回CPU比較結果は履歴として改変しない。今回の技術owner構造差分は新受領moduleと明示分岐のみ、native意味型/公開API/DTO/DB/RN/Render/Supabase/通常有効化/merge/deployは変更0。STRUCTURE_MAP_DELTA_PRESENT、商品0/正式0/3/54.50％・candidate_ready=false・automatic_progression=false。

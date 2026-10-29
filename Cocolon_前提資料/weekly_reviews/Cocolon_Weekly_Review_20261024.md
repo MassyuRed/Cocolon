@@ -3610,3 +3610,10 @@ primary=BLOCKER_NARROWED、商品0/正式0/3/54.50％、candidate_ready=false/au
 提案の新受領はrows raw/formatをそのままreceiptへ保持し再検査/coldでも使い、復元named textを実rawへ置換しない。ModelCandidateSourceは未対応のまま、専用offline harnessだけ。既存7成功をcase IDごとに維持する条件を固定し、総数7/9のみで退行なしとしない。before2が実採用/本人本文/coldまで2/2なら0更新で閉鎖。未達時だけ5更新・最大計13生成で、新格式の有効化・追加学習はこの記録から自動開始しない。Rule18のnew method/contractに当たり、具体案へのMash確認が必要。受領実装・追加GPUの承認を得たとは記録しない。
 
 primary=TECHNICAL_CREDIT（可逆表記と計数だけ）、商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false、STRUCTURE_MAP_DELTA_NONE。root単一writer/executor、補助read-only、正式Pro/Ultra/human受入れ未実施。
+
+
+## 105. 2026-10-29 — 固定列形式の承認後受領実装・CPU一致・一回GPU進行中
+
+**現在の直接作業（10/29・固定列形式の承認後実装／一回試行中）：** Mashがbadea42eの具体案へ「進めていいよ」と明示承認。API c920f81aの新fixed_rows_reference_wire.py＋既存preparation/emlis_semantic_admission、新standard unittestを実装・全4file remote読戻し一致。明示private/Free/BOOK・SHOP回答後のみ、元rows raw/format/finish/モデルmetadataをreceiptと再読で保持、named→quote→既存意味/本文検査へ接続。通常ModelCandidateSourceは未対応・未有効化。Jupyter CPUの教師2件は意味/本文・別process cold全outcome/replay一致、旧9のreceipt/fulloutcomeは変更前rootと完全一致。standard unittest5成功、変異subtestは件数に加算しない。初回CPU比較のoutcome.body.artifact参照名誤りをmodel effect0で修正し、初回原本を別保持した。最終入力/全assistant+EOS mask/context/旧9/112F32をCPU再照合後、source c6ef6555から同Pod A5000で承認済み一回を起動。before2→未達時のみ5更新/別保存/非学習reload/after11、最大2400秒/$0.19処理按分（準備/回収/保持等別）、retry/自動次runなし。現在はGPU結果未確定で、成功・新重み採用・商品進捗とは扱わない。現2題の追加観測会不要、GPU保持。 [実装・実行記録](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/README.md#fixedrows5-execution-20261029)。
+
+当回のCPU準備はモデルload/forward/update/生成0で実施。API c920f81aは4file、実行source c6ef6555は4fileのpostimage/changed pathsを確認し、双方Draft作業branchのまま。CODEX Workを正式Pro/Ultra/human評価と称しない。GPUの終了結果、全raw/本人本文、成立snapshotのcold、旧7成功case個別維持、保存重みと原本の回収は未確定。単なる起動/CPU一致を4B品質改善へ換算しない。

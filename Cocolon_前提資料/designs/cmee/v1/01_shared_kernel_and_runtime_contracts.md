@@ -1282,3 +1282,8 @@ preparationはstrict形式/一意quote位置まで、semantic ownerは既存sour
 ### 2026-10-28 named13 — 承認済み一回の閉鎖結果
 
 source3786df21/APIa8be7a9bでd431から13更新/save/112F32 no-grad reload/BOOK-SHOP各1生成を556.846752秒/$0.043310処理按分で終了（準備/CPU/回収/保持等別）。両EOSなし・cap3712/3584で未完結、実receiver TOKEN_LIMIT→REJECT/semantic_receipt_not_validated、意味/本文0/2・採用snapshot0/cold対象なし。静的なv構造不正/旧新表記混在/参照反復/全更新・本人本文不足は、実意味検査でのUNSUPPORTED判定ではない。新284f1df7不採用・元d431/source不変、原本と追加重み全hash/112F32有限性照合保全済み。GPU保持/Stop等0、追加試行/意味補完/reader緩和/上限延長なし。CPU347/旧15完全一致/合成named2冷再読と実4B失敗を区別し、商品0/正式0/3/54.50％。結果は `observation_learning/training/2026-10-26-unconnected-native/named_reference_result/README.md` とweekly§87。実行/回収のSTRUCTURE_MAP_DELTA_NONE。
+
+
+## 2026-10-29 承認済みprivate fixed-row受領契約
+
+Mashがbadea42e fixed_rows案の一回を最大40分/処理按分$0.19（他費用別）で明示承認。API c920f81aは`cocolon.cmee.fixed_rows_comparison.v1`を明示offlineのFree BOOK/SHOP回答後に追加した。root `[format,v,a,q,c]`と固定列（bindだけ3/4列）から名前と階層だけを復元し、既存named/quote/native意味判定へ渡す。v/schema・alias名と実ID・quote・時点/否定/主体・全更新/target/order・bind・本文3項目はモデル出力のまま。欠落/型不正/未定義や重複宣言/不正JSONを補完せず、finish失敗を成功より優先する。新format未指定時の自動検出、旧形式fallback、通常ModelCandidateSource対応は含まない。実rows raw/format/model/base/adapter/usage/finishをreceiptへ保持、同rawでreplay/coldを行い復元namedをモデルrawに置き換えない。意味採用側もactual offline/free/source由来BOOK/SHOP AFTER_EXPLANATIONを独立確認する。native meaning/snapshot/公開DTOのschema・型は追加0。CPU教師2/旧9全結果一致、実モデルは一回試行中で未確定。原plan/成功/STOP/上限はfixed_rows execution、実結果はweekly§105。

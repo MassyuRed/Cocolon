@@ -5672,3 +5672,16 @@ external_manifestの`run/・cmee/・support/・source/`等は最終ZIP内の元p
 | `manifest.json・external_verification.json` | 20payload/292780bytes ZIPの元member目録と全CRC/size/hash/sourceのPod外照合、Library保存ID |
 
 完全cpu_check.jsonのencoded/token/mask/全教師outcomeは上記ZIPで保持し、GitHub summaryと合わせて読む。新受領format/API実装は提案段階、現在の通常route/型/reader/DB/RN/Render/Supabase構造差分なし、STRUCTURE_MAP_DELTA_NONE。既存ModelCandidateSourceは新rows未対応。全体00/観測入口/weekly§104へ戻る。
+
+
+## 2026-10-29 weekly§105 — 明示fixed rows受領のowner差分
+
+| file / family | 責任 |
+|---|---|
+| API `.../cocolon_meaning_experience_engine/fixed_rows_reference_wire.py`（新） | 固定列/型からnamed keyだけを復元、元の値・明示名・null・引用・更新・bind・本人本文を補わず既存named decoderへ渡す。private materialのBOOK/SHOP回答後だけを選ぶ |
+| API 同`preparation.py`（変更） | 明示newformatのみ受領、元rows raw/format/finish/identity/usageを保持。旧receipt省略時bytes・既存fallbackなしを維持 |
+| API 同`emlis_semantic_admission.py`（変更） | actual offline/free/回答・source由来family/stageを再確認し、同raw receipt再導出と既存意味/本文/保存再読を使う |
+| API `ai/tests/test_cmee_fixed_rows_reference_wire.py`（新） | standard unittest5（形/型/名前/strict JSON/非補完/限定/finish/receipt）、subtestを加算しない |
+| fixed_rows `execution/run_fixed_rows5.py・consume_fixed_rows5.py・runtime_authorized_plan.json・current_api_source_manifest.json` | 承認済みbefore2→未達時だけ5更新/save/no-grad reload/after11、CPU/actualraw/meaning/body/cold/replay/旧7個別維持の限定実行・identity。通常アプリ入口を有効化しない |
+
+新formatの受領構造だけの差分。API c920f81a・source c6ef6555、CPU教師2/旧9全outcome一致、実GPU結果は未確定。01B/C・国家event/保存・公開API/DB/RN/Render/Supabaseの責務差分0。STRUCTURE_MAP_DELTA_PRESENT、商品0/正式0/3/54.50％。
