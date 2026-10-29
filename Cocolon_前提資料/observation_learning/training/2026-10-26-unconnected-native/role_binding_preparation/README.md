@@ -1,6 +1,6 @@
 # role・引用・附属更新・終了の13補助課題 — 2026-10-29
 
-**現在：18更新・別保存/非学習reload完了、元11件の生成・採否確認中。早期重み原本はPod外照合・保全済み。**
+**現在：role18は閉鎖。18更新・2load・11生成・CMEE判定完了。全文意味/本文0/2、旧9 after-only7/9/cold7。新f493不採用、最終原本保全済み。**
 
 前回[joint_transfer11](../joint_transfer11/README.md)は閉鎖済み・新4ee不採用。全文BOOK/SHOPの意味・本人本文0/2、旧9 after-only 8/9/cold8はそのまま保持する。今回も追加観測会は不要で、既存完成教師の対応を教える。13行を新しい観測事例13件・学習13回とは数えない。
 
@@ -54,7 +54,7 @@ python -B prepare_role_bindings.py \\
 
 ## 2026-10-29 role18 — 実CPUと新一回条件
 
-上の未接続/未固定記述は準備段階の履歴。現在は本節を優先する。
+上の未接続/未固定記述と本節の条件固定は実行前の履歴。現在は末尾の§101最終結果を優先する。
 
 Mashの「承認するから進めろ。」の後、Jupyterへ直接接続。Pod vgkm402msgroiu/RTX A5000・24564MiB/使用1MiB/Python3.12.3と初期afaa3file hash一致を確認した。管理画面/管理API/credential/GPU lifecycle操作0。前回同Pod表示$0.28/hを按分に使い、今回live単価を再照会したという主張はしない。
 
@@ -65,8 +65,30 @@ runtime18の新source3/planを転送・hash照合し、実CPUを一回実施。1
 独立read-only reviewでsource3とplan全hash/18順/32行/評価11/caps/初期afaa/前後bounds/consumer18counterを確認、blockingなし。root GPT-6 Codex Work単一writer/executorで正式Pro/Ultra/human受入れではない。新採否は実行後に原rawから判定。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false、現2題の新観測会不要。通常app/API/DTO/DB/RN/Render/Supabase/merge/deploy/lifecycle変更0、STRUCTURE_MAP_DELTA_NONE。
 
 
-### §101 早期重み保全・生成中
+### §101 早期重み保全・生成中だった時点の記録
 
 source6c1cb777/PID76711の一回で18更新・112F32別保存/非学習reloadまで完了。保存f4932d3a/全112変化。387.717559747秒時点の早期原本は生成1/11で、SHOP空fileを完了数へ数えない。14,575,989bytes/27payload＋manifest、SHAb94818b8ec222eb10fae7b55543d5def55dedfe317fabe04642edadb9a0e3b41の全CRC/size/hash/112F32有限性をPod外照合し、Library libfile_e865770fd01c81918ddd3f8b34b5772c v0へ保全。早期保存は最終結果ではない。BOOK2770/EOSだがJSON不正、GAP反復消失と意味/更新/本文不成立を区別する。全11生成と実CMEE採否は進行中。
 
 [早期保存の実記録](runtime18/early_weight_preservation.json)。
+
+
+## 2026-10-29 §101 最終結果 — role18閉鎖・新f493不採用
+
+source `6c1cb777df34f3cc0ec8791d565fcb00b3e8756a` / PID76711の一回は18更新、112F32/3,833,856parameterの別保存・非学習reload、固定11自由生成、API `7b9ee073de03940ba71587297d8600b2b6094dd1` の既存CMEE判定まで完了。全112tensor変化、初期afaa/凍結入力不変、2load/11call、全11 EOS、timeout/OOM/retry0。原run.jsonのpending statusは書き換えず、result_summary.jsonが閉鎖を所有する。
+
+| 対象 | 意味/本人本文 | 実採否・内容 |
+|---|---|---|
+| 全文BOOK | 0/1 | 2770token/EOS、JSON不正でREJECT/semantic_receipt_not_validated。GAP反復は停止したが、no_contact/時点/引用範囲、附属更新重複、本文階層・bindの不備が残る |
+| 全文SHOP | 0/1 | 3391token/EOS、JSON不正で同REJECT。felt_distanceとsadness混在、同じreplace9回・3claimのADD欠落、未定義引用・本文外配置が残る |
+| 旧9 after-only | 7/9 | CHAIR初回3/訂正01、DAILY3が成立。訂正02はHOLD/model_update_coverage_invalid、訂正03はUNSUPPORTED/model_evidence_out_of_scope |
+| 成立7の保存再読 | 7/7完全同値 | 7つの別processで全outcome同一。CHAIR初回3のみparsed教師全同値、DAILY3はrelation ID/scope/bindの同値な改名、訂正01はReceptionの「その椅子」省略がある。7件全てを教師JSON同一とはしない |
+
+rootと独立read-only補助が原raw・意味・全更新・候補本文・実artifactを照合。GAP終端到達を意味/本文の成立へ数えず、raw修復なし。初期afaaの旧9beforeは欠測で、維持率/改善率/学習効果を算出しない。新 `f4932d3a2bac1d8e78d0bf86579868e29546914512234d31556840eb28a85c19` は不採用、今回run/枠は消費済み・閉鎖。旧afaa/4ee/2dfd/284f/d431を保持し通常有効化0。
+
+GPU処理1240.614915870945秒（20分40.615秒）、前回同Pod表示$0.28/hによる按分$0.09649227123440685。今回live単価再照会なし。準備CPU14.057451742秒、CMEE CPU68.379315448秒、準備/回収/保持/保存/通信/税等は別。最終原本47,007,311bytes/SHA36910e8a361e93961f63a1b4da229a216a57d796dd18c4f6ff40cab4ead0bed1、346payload＋manifest347memberを全CRC/bytes/hash・112F32有限/形状・初期afaa/新f493・cold7までPod外照合し、Library `libfile_e089337060248191a52ee06aad6fc75a` v0へ保全。完全CMEE849023bytes/SHA82803a588d4b8314ae7a66c80690c6031ccdb965e03d46cf1127f1196f19741bはarchive内cmee/diagnosis.jsonに保持。base/tokenizer本体とoptimizer/RNG厳密resume stateは含まない。早期archiveは生成1件時点の履歴。
+
+次の直接作業は、既存完成教師を使い、claimの軸引用・各ADD/REVISEの対象・GAPから本文3fieldへの階層とbind対応を今回不成立例から整理する。既存13補助を単に増やす/同条件で再学習する作業を自動開始しない。現2題の新観測会は不要。一般化/Analysis等に十分な教材があるとの判断ではない。
+
+GPU保持/Stop・restart・delete0。通常app/API/DTO/DB/RN/Render/Supabase/merge/deploy変更0、商品構造差分なし（STRUCTURE_MAP_DELTA_NONE）。01Aは実結果file ownerのみ同期。限定TECHNICAL_CREDITは学習・原保存再読・実CMEE接続の実行記録まで、モデル品質credit0/商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false。正式Pro/Ultra/human受入れ未実施。
+
+[閉鎖・集計](runtime18/result_20261029/result_summary.json)／[全11件CMEE集計](runtime18/result_20261029/cmee_summary.json)／[原raw・意味・本文の読取](runtime18/result_20261029/reading_review.md)／[原本照合](runtime18/result_20261029/external_verification.json)。

@@ -5609,4 +5609,20 @@ CPU失敗と実成功/無効準備plan/今回runtime条件は同folder直下の�
 
 ## 2026-10-29 weekly§101 — role18限定実行owner
 
-role_binding_preparation/runtime18/run_role18.pyは13局所＋3anchor＋全文2の18更新/別保存112F32/非学習reload/固定11生成。prepare_role18.pyは32行/18系列と元11prompt/教師のCPU対照、consume_role18.pyは18更新11call・原形式raw・既存Engine/成立時coldを所有する。role18.plan.jsonは無効準備原本、runtime_authorized_plan.jsonは今回CPU原本hashと2700秒/$0.21の条件。cpu_summary.jsonとcpu_check.index.json＋11partが実CPU14.057秒/80137token/最大7777/教師11/11の完全結果を所有。商品source/wire/reader/型/API/DB/RN/Render/Supabase構造差分なし、STRUCTURE_MAP_DELTA_NONE。新source保存後に一回だけ起動し旧runは再開しない。
+role_binding_preparation/runtime18/run_role18.pyは13局所＋3anchor＋全文2の18更新/別保存112F32/非学習reload/固定11生成。prepare_role18.pyは32行/18系列と元11prompt/教師のCPU対照、consume_role18.pyは18更新11call・原形式raw・既存Engine/成立時coldを所有する。role18.plan.jsonは無効準備原本、runtime_authorized_plan.jsonは今回CPU原本hashと2700秒/$0.21の条件。cpu_summary.jsonとcpu_check.index.json＋11partが実CPU14.057秒/80137token/最大7777/教師11/11の完全結果を所有。商品source/wire/reader/型/API/DB/RN/Render/Supabase構造差分なし、STRUCTURE_MAP_DELTA_NONE。source6c1cb777を保存・readback後に一回だけ起動し、18更新/2load/11生成/実CMEEまで完了・閉鎖。旧run再開0。最終ownerは次表。
+
+
+### weekly§101 終了原本 — role_binding_preparation/runtime18/result_20261029
+
+| ファイル | 所有する結果 |
+|---|---|
+| `run.json・training.jsonl・execution_summary.json` | 18更新/2load/11生成、保存f493/112F32全変化、処理1240.614916秒/$0.096492271按分。runのpending statusは実行時原記録として凍結 |
+| `initial_loaded_tensors.json・reloaded_tensors.json` | 112F32/3,833,856parameterの初期afaa・非学習reload照合 |
+| `after_FT-*.jsonl` 2件 | BOOK2770/EOS・SHOP3391/EOS、両方JSON不正、意味/本人本文0/2。原rawの修復なし |
+| `after_TRAIN-*.jsonl` 9件 | after-only意味/本文7/9。CHAIR02訂正HOLD/更新coverage、CHAIR03訂正UNSUPPORTED/引用scope。before欠測 |
+| `cmee_summary.json` | 原形式固定11の既存CMEE採否・全outcome cold7同一。完全diagnosis849023bytes/SHA/保存ID、archive内saved/cold7参照 |
+| `gpu_launch.json・gpu.log・cmee.log・cmee.exit・export_role18_final.py` | 単一起動条件・実log・完了・原本出力source。次retryなし |
+| `external_manifest.json・external_verification.json` | 全346payloadのbytes/hash、347member、112F32有限/形状/全112変化、初期afaa不変/全11raw/cold7、47,007,311bytes最終ZIPのPod外照合 |
+| `reading_review.md・result_summary.json` | 全raw意味/引用/更新/本人本文と教師・実artifact比較、閉鎖/新f493不採用/次の整理。Library libfile_e089337060248191a52ee06aad6fc75a v0 |
+
+完全weights/initial/source/CPU/CMEE saved/coldは上記最終archiveへ保全。base/tokenizer本体とoptimizer/RNG厳密resume stateなし。早期保全jsonは生成1件時点の履歴。通常route/型/wire/reader/DB/RN/Render/Supabaseの構造変更なし、STRUCTURE_MAP_DELTA_NONE。全体00/観測入口/weekly§101を同時同期。
