@@ -1,0 +1,12 @@
+{
+  "status": "LAUNCHED_ONCE",
+  "source_commit": "385114bde2ea0d8904d6a73f9c80bb5af56a654c",
+  "max_updates": 13,
+  "max_model_loads": 2,
+  "max_generations": 11,
+  "max_seconds": 2700,
+  "max_processing_usd": 0.21,
+  "started_unix": 1793263849.2515597,
+  "launcher_pid": 210857,
+  "retry": false
+}

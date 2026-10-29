@@ -1,0 +1,141 @@
+{
+  "status": "RECOVERED_ORIGINALS_VERIFIED_NO_MODEL",
+  "archive_bytes": 60053438,
+  "archive_sha256": "71741059ee92e627ea4183186b554d04ffc245ae857c6fd1bf1654217b6498d9",
+  "payloads": 247,
+  "members": 248,
+  "frozen_files_verified": 176,
+  "tensor_count": 112,
+  "tensor_dtype": "F32",
+  "tensor_parameters": 3833856,
+  "all_tensors_finite": true,
+  "changed_tensors": 112,
+  "loaded_reloaded_tables_verified": true,
+  "incomplete_save_temporary_file": {
+    "name": ".adapter_model.safetensors.6M5U9L",
+    "bytes": 11272192,
+    "sha256": "f48616c65638b3cc1391b2a4c82a49f714ab6ff784510039065aab63ad7a3d09",
+    "final_prefix_identical": true,
+    "used_for_reload": false
+  },
+  "processing_seconds": 1144.037065561046,
+  "processing_proration_usd": 0.08898066065474801,
+  "cmee_cpu_seconds": 90.54061189689673,
+  "baseline7": [
+    "TRAIN-SERVICE-CHAIR-01-INITIAL",
+    "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+    "TRAIN-SERVICE-CHAIR-02-INITIAL",
+    "TRAIN-SERVICE-CHAIR-03-INITIAL",
+    "TRAIN-DAILY-CALM-01-INITIAL",
+    "TRAIN-DAILY-CALM-02-INITIAL",
+    "TRAIN-DAILY-CALM-03-INITIAL"
+  ],
+  "baseline7_preserved": true,
+  "old_raw_text_unchanged_ids": [
+    "TRAIN-SERVICE-CHAIR-01-INITIAL",
+    "TRAIN-SERVICE-CHAIR-02-INITIAL",
+    "TRAIN-SERVICE-CHAIR-03-INITIAL"
+  ],
+  "cases": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "receipt_status": "INVALID_FORMAT",
+      "meaning": false,
+      "body": false,
+      "cold": "NO_ADOPTED_SNAPSHOT",
+      "eos": true,
+      "tokens": 2371
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "receipt_status": "TOKEN_LIMIT",
+      "meaning": false,
+      "body": false,
+      "cold": "NO_ADOPTED_SNAPSHOT",
+      "eos": false,
+      "tokens": 3584
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "meaning": true,
+      "body": true,
+      "cold": "COLD_FULL_OUTCOME_IDENTICAL",
+      "eos": true,
+      "tokens": 1332
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "meaning": true,
+      "body": true,
+      "cold": "COLD_FULL_OUTCOME_IDENTICAL",
+      "eos": true,
+      "tokens": 2229
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "meaning": true,
+      "body": true,
+      "cold": "COLD_FULL_OUTCOME_IDENTICAL",
+      "eos": true,
+      "tokens": 1332
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "meaning": true,
+      "body": true,
+      "cold": "COLD_FULL_OUTCOME_IDENTICAL",
+      "eos": true,
+      "tokens": 2232
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "meaning": true,
+      "body": true,
+      "cold": "COLD_FULL_OUTCOME_IDENTICAL",
+      "eos": true,
+      "tokens": 1322
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "meaning": true,
+      "body": true,
+      "cold": "COLD_FULL_OUTCOME_IDENTICAL",
+      "eos": true,
+      "tokens": 2238
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "meaning": true,
+      "body": true,
+      "cold": "COLD_FULL_OUTCOME_IDENTICAL",
+      "eos": true,
+      "tokens": 1586
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "meaning": true,
+      "body": true,
+      "cold": "COLD_FULL_OUTCOME_IDENTICAL",
+      "eos": true,
+      "tokens": 1560
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "meaning": true,
+      "body": true,
+      "cold": "COLD_FULL_OUTCOME_IDENTICAL",
+      "eos": true,
+      "tokens": 1599
+    }
+  ],
+  "model_executions": 0
+}

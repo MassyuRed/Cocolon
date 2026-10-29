@@ -1,0 +1,172 @@
+{
+  "status": "CMEE_FIXED_ROWS_PHASE",
+  "phase": "after",
+  "new_model_calls": 0,
+  "training_updates": 0,
+  "sql_operations": 0,
+  "product_credit": 0,
+  "full2": {
+    "meaning": 0,
+    "body": 0
+  },
+  "seconds": 90.54061189689673,
+  "old9": {
+    "meaning": 9,
+    "body": 9
+  },
+  "baseline7_preserved": true,
+  "lost_baseline_successes": [],
+  "both_full_success": false,
+  "cases": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "receipt_replay_identical": true,
+      "meaning_adopted": false,
+      "body_available": false,
+      "cold_file_status": "NO_ADOPTED_SNAPSHOT",
+      "decision": "REJECT",
+      "reason_code": "semantic_receipt_not_validated",
+      "receipt_status": "INVALID_FORMAT",
+      "receipt_sha256": "fa9e947226ba4f81f5468c47980459286509a11ca85aa062a12ad0c06562e011",
+      "actual_prose": null
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "receipt_replay_identical": true,
+      "meaning_adopted": false,
+      "body_available": false,
+      "cold_file_status": "NO_ADOPTED_SNAPSHOT",
+      "decision": "REJECT",
+      "reason_code": "semantic_receipt_not_validated",
+      "receipt_status": "TOKEN_LIMIT",
+      "receipt_sha256": "dc80dff8d61d9442c57c5d3bb0e7e2a6cc697618c3f0841e6198a08d832d177c",
+      "actual_prose": null
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "receipt_replay_identical": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "cold_file_status": "COLD_FULL_OUTCOME_IDENTICAL",
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "receipt_sha256": "29994933c6116b8c88d1a00357f021c87ccd0362a8055b370f3434f92930e1f9",
+      "actual_prose": {
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      }
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "receipt_replay_identical": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "cold_file_status": "COLD_FULL_OUTCOME_IDENTICAL",
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "receipt_sha256": "49b3296306aafdc78accd7b966205998f245e88673f6d7a42203266b53db2e12",
+      "actual_prose": {
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      }
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "receipt_replay_identical": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "cold_file_status": "COLD_FULL_OUTCOME_IDENTICAL",
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "receipt_sha256": "33d24cf7740145e4ce8951e3c04e57d9723a24dfdf1973c832ad629d4a1ce4ca",
+      "actual_prose": {
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      }
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "receipt_replay_identical": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "cold_file_status": "COLD_FULL_OUTCOME_IDENTICAL",
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "receipt_sha256": "08854f1d8dd227693522887245955c36830becaa34cf6ccaa53973c237ade923",
+      "actual_prose": {
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      }
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "receipt_replay_identical": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "cold_file_status": "COLD_FULL_OUTCOME_IDENTICAL",
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "receipt_sha256": "827d1b3ab8f35ffcc7e0127565f0c5f39827eb5c64b5d6796b721a0682ba57a8",
+      "actual_prose": {
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      }
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "receipt_replay_identical": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "cold_file_status": "COLD_FULL_OUTCOME_IDENTICAL",
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "receipt_sha256": "ec4663c0b114ba5b051e203cbaecc5363ec5246cfeb0a2695d21576bf68d630b",
+      "actual_prose": {
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      }
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "receipt_replay_identical": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "cold_file_status": "COLD_FULL_OUTCOME_IDENTICAL",
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "receipt_sha256": "af6a9574ff45e693a66974cc273f41db1060d1bf0b8ed0d21c9f56ace7072e6e",
+      "actual_prose": {
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      }
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "receipt_replay_identical": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "cold_file_status": "COLD_FULL_OUTCOME_IDENTICAL",
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "receipt_sha256": "b2a913ab9e46ba91f828a83551e08034d1d85bbabe054a709018f0842ab67cd6",
+      "actual_prose": {
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      }
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "receipt_replay_identical": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "cold_file_status": "COLD_FULL_OUTCOME_IDENTICAL",
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "receipt_sha256": "768f25f00e01634d08854b109329a7e453e74964774b059813bf65d9cee547b1",
+      "actual_prose": {
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      }
+    }
+  ]
+}

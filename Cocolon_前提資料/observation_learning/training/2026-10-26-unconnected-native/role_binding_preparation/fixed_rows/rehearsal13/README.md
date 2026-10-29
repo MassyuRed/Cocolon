@@ -1,4 +1,6 @@
-# 修正済み固定列2教師＋旧9教材の13更新案 — CPU完了、GPU未承認・未実行
+# 修正済み固定列2教師＋旧9教材の13更新 — 一回終了・新候補不採用
+
+**最新結果：** Mashの具体承認後、13更新→保存/非学習reload→11生成を完走。新2意味/本人本文0/2・旧9=9/9、旧成功7全維持、cold9/replay11一致。19分4.04秒/$0.088980660655処理按分、原本/重み保全済み。新11446641不採用・再試行なし。[実結果と全ファイル地図](result_20261029/README.md)。以下の具体条件・CPU準備は承認前提の履歴として保持する。
 
 前回[shape2の一回](../prompt_shape2/result_20261029/README.md)は元f493から0更新・2生成で、両cap未完・意味/本人本文0/2、不採用で閉鎖した。今回、そのrunや不採用f811を再起動しない。**修正済みshape2を実際に学習することと、旧成功の全教材を同時に保持すること**を一つの有限試行として具体化した。root華恋のみが編集・実行・判断、補助はread-only。実際の環境はGPT-6 Codex Workで、正式Pro/Ultra/human受入れを称しない。
 
@@ -8,7 +10,7 @@
 |---|---|---|
 | fixedrows5（終了・不採用） | 修正前指示を各1更新 | 椅子01訂正・02初回・03初回の3件だけ |
 | shape2（終了・不採用） | 指示2点修正後、追加学習0 | 追加学習0／旧9再生成0 |
-| 今回提案 | **同じshape2教師を各2更新** | **凍結旧9を各1更新** |
+| 今回実行 | **同じshape2教師を各2更新** | **凍結旧9を各1更新** |
 
 合計13更新、独立教材は11行である。同じ題材の繰返しを新しい独立事例へ数えない。system/material/prior/output_spec/教師意味/全更新/bind/本人本文/EOSはshape2または旧9の元bytesのまま。新しい表記修正、loss重み・suffix調整、receiver/decoder拡張はしない。既存比較の再命名ではなく、修正済shape2の初回学習と全旧9のrehearsalを合わせた新配分である。
 
@@ -27,9 +29,9 @@
 
 回収用ZIPは235752bytes、SHA256 `178917a6f0d8013de961e8944e6d4c507afb428ed0f7b16a6608fde1c9abd9b5`、11payload＋manifest＝12member。全CRC/size/SHA、manifest集合、source同一性をPod外で照合し、全payloadを本directoryへ保存した。[archive_manifest.json](archive_manifest.json)／[external_verification.json](external_verification.json)。Download APIは失敗を返したが実fileは到着し、追加download0で照合した。base/adapterをこのCPU回収物へ重複収録していない。元重みは既存の回収済みrole18原本を保持する。
 
-## 次の一回 — 未承認・未実行
+## 承認された一回の条件（提案時の履歴）
 
-[plan.json](plan.json)と[run_rehearsal13.py](run_rehearsal13.py)へ具体条件を固定した。planは`PROPOSED_NOT_APPROVED_NOT_EXECUTED`であり、runnerはモデル処理前に拒否する。Work補助のAST構文検査と、この未承認拒否を確認済み。read-only reviewで見つけたcall内adapter identity欠落は実行前に補い、既存consumerの`--phase after`との参照を揃えた。これらをGPU検証成功とは扱わない。
+[plan.json](plan.json)と[run_rehearsal13.py](run_rehearsal13.py)へ具体条件を固定した。4b3cdc8c提案時のplanは`PROPOSED_NOT_APPROVED_NOT_EXECUTED`で、未承認時はrunnerがモデル処理前に拒否した。385114bdで明示承認statusだけを反映し一回を実行済み。現在のplanは`CLOSED_NOT_ADOPTED_NO_RETRY`、実行時planはresultへ別保持した。Work補助のAST構文検査と、この未承認拒否を確認済み。read-only reviewで見つけたcall内adapter identity欠落は実行前に補い、既存consumerの`--phase after`との参照を揃えた。これらをGPU検証成功とは扱わない。
 
 1. 同Pod vgkm402msgroiu/RTX A5000、Qwen3.5-4B revision851bf6e、**元f493**をtrainableで1load。拒否済みf811/45a1は使わない。既存112parameter tensorのみ、全assistant＋EOSの通常CE、LR5e-5/weight decay0/clip1/seed20261024。順序はplanのexact13。
 2. 13更新後は別directoryへ保存、GPUを解放し、同じ新重みを非学習で再load。BOOK→SHOP→旧9の**11自由生成だけ**を行う。context8192、cap3712/3584/旧9各2560、各180秒、既存greedy/非thinking。意味prefix・文法拘束・raw補完0。前回のf493 before2=0/2・旧9=7/9は歴史原本を比較に用い、同じbeforeを再生成しない。
@@ -42,4 +44,4 @@
 
 ## 今回の位置付け
 
-新しい観測会は現2題の欠陥解消には今は不要。既存の教師がCMEEで成立するため、まず学習済み表記と新表記の同時保持を検証する。三coreの商品目的は維持し、今回はEmlis回答後のprivate offline候補だけ。通常ModelCandidateSource/共有意味型/公開API/DTO/DB/RN/Render/Supabase・依存・merge/deployの変更0。`STRUCTURE_MAP_DELTA_NONE`。primary outcomeはBLOCKER_NARROWED、商品0/正式0/3/54.50％、candidate_ready=false、automatic_progression=false。
+新しい観測会は現2題の欠陥解消には今は不要。既存の教師がCMEEで成立するため、今回、旧教材の同時保持は9/9に達したが新表記2は0/2で、新候補不採用として閉鎖した。三coreの商品目的は維持し、今回はEmlis回答後のprivate offline候補だけ。通常ModelCandidateSource/共有意味型/公開API/DTO/DB/RN/Render/Supabase・依存・merge/deployの変更0。`STRUCTURE_MAP_DELTA_NONE`。primary outcomeはBLOCKER_NARROWED、商品0/正式0/3/54.50％、candidate_ready=false、automatic_progression=false。

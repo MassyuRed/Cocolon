@@ -1,5 +1,5 @@
 {
-  "status": "MASH_EXPLICITLY_APPROVED_ONCE",
+  "status": "CLOSED_NOT_ADOPTED_NO_RETRY",
   "schema": "cocolon.shape2_rehearsal13.v1",
   "executor": "root Karen only; read-only support; Codex Work; formal Pro/Ultra/human acceptance not claimed",
   "predecessor_commit": "51dd393606faaba855daf005f197a541b00da621",
@@ -67,7 +67,7 @@
   "max_process_usd": 0.21,
   "preparation_cmee_cpu_recovery_holding_storage_network_tax_extra": true,
   "loss": "ordinary complete assistant CE through EOS; no suffix or token weight sweep",
-  "learning_rate": 0.00005,
+  "learning_rate": 5e-05,
   "weight_decay": 0,
   "gradient_clip": 1,
   "seed": 20261024,
@@ -100,5 +100,11 @@
     "received_date_jst": "2026-10-29",
     "user_response": "進めていいよ。",
     "scope": "13 updates -> separate save/nontraining reload -> 11 evaluations, once, maximum2700s/$0.21 processing; preparation/recovery/holding etc extra; existing plan otherwise unchanged"
+  },
+  "closure": {
+    "result": "result_20261029/summary.json",
+    "reason": "New two meaning/body success condition 2/2 not met: BOOK INVALID_FORMAT; SHOP TOKEN_LIMIT",
+    "retry": false,
+    "next_gpu_run_authorized": false
   }
 }
