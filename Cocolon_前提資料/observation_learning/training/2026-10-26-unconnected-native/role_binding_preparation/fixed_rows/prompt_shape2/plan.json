@@ -1,0 +1,60 @@
+{
+  "status": "PROPOSED_NOT_APPROVED_NOT_EXECUTED",
+  "purpose": "Two existing output-shape descriptions made consistent; isolate prompt effect with no training.",
+  "execution_owner": "Karen root only; helper read-only; actual Codex Work, formal Pro/Ultra not asserted",
+  "cpu_report_path": "/workspace/cocolon_shape2_cpu_20261029/cpu_check.json",
+  "cpu_report_sha256": "3cc1ff07d6aba5f1013fedc2f284efe1317ba9b0144fb02a671c6c9417848b1f",
+  "eval_inputs_sha256": "c302b2617e8d9a6895fe7fa5ff12e8da31778404f91dd316facda2d7869008a8",
+  "model": "Qwen/Qwen3.5-4B",
+  "base_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "adapter_sha256": "f4932d3a2bac1d8e78d0bf86579868e29546914512234d31556840eb28a85c19",
+  "adapter_path": "/workspace/cocolon_joint_role18_run_20261029/adapter",
+  "prior_f811_adapter_adopted": false,
+  "model_output_format": "cocolon.cmee.fixed_rows_comparison.v1",
+  "api_runtime_commit": "c920f81a2540b23a36d4bd83f9149e29d00ac407",
+  "current_api_head_fixture_only": "7acff07421c0cfa458ec6cf75616187379311854",
+  "base_runtime_commit": "c6ef6555d7f8d39c5fbd05fa21209243678e6d43",
+  "changed_prompt_fields": [
+    "output_spec.shape.root: prepend format",
+    "output_spec.axes_requirements: subject example uses [OMITTED,[],null] row"
+  ],
+  "teacher_material_prior_other_semantic_requirements_unchanged": true,
+  "case_order": [
+    "FT-BOOK-AFTER-ANSWER",
+    "FT-SHOP-AFTER-ANSWER"
+  ],
+  "prompt_tokens": [
+    4295,
+    4447
+  ],
+  "max_new_tokens": [
+    3712,
+    3584
+  ],
+  "context_tokens": 8192,
+  "generation_settings": "existing helper, greedy, nonthinking, no semantic prefix or constrained decoder",
+  "max_model_loads": 1,
+  "max_updates": 0,
+  "max_generations": 2,
+  "per_generation_seconds": 180,
+  "max_process_seconds": 600,
+  "parent_timeout_seconds": 590,
+  "parent_kill_after_seconds": 10,
+  "max_processing_usd": 0.047,
+  "prior_hourly_usd": 0.28,
+  "current_rate_requeried": false,
+  "preparation_recovery_holding_cpu_cmee_storage_network_tax_extra": true,
+  "cmee_cpu_outside_gpu_parent_seconds": 150,
+  "cold_per_snapshot_seconds": 60,
+  "old9_generation": "not repeated: same f493 weights and byte-identical prompts; CPU retokenized all9. No claim of new old9 inference.",
+  "success": "Both actual fixed-row raw receipts yield meaning/body2/2, each adopted snapshot cold full outcome and raw receipt replay identical, root reads every actual raw and formed person body. No product/human acceptance.",
+  "failure": "Malformed/truncated/timeouts/meaning or body failure closes this run without retry, training, repair, fallback, loss adjustment or next run.",
+  "gpu_stop_restart_delete": false,
+  "new_gpu_rental": false,
+  "new_dependencies": false,
+  "production_db_render_supabase_rn_public_api_merge_deploy": false,
+  "retry": false,
+  "automatic_progression": false,
+  "candidate_ready": false,
+  "product_credit": 0
+}

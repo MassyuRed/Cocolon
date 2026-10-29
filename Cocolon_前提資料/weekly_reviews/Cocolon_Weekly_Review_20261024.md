@@ -3619,3 +3619,10 @@ primary=TECHNICAL_CREDIT（可逆表記と計数だけ）、商品0/正式0/3/54
 承認時の最大5更新/2load/13生成/2400秒/$0.19を満たして終了。CPU初回は比較コードのoutcome.body.artifact参照誤りをモデル処理0で修正し、初回原本を別保持。GPUはretry0。実行API c920f81aとfixtureだけの後続7acff074を区別する。c920の初回既存CIは主要1634成功・現identity fixture1失敗、7acff074でfixtureを正しく同期した既存CI run40826863964/job123291792544は1634成功/12020subtest成功と別1成功・194deselected。判定閾値や歴史fixtureを変更して通過させていない。
 
 BOOKはroot10要素のflatten/named混成、SHOPは内部JSON文字列化と末尾の不正制御文字でstrict JSON不成立。BOOK rawには原文にない「返す約束を破ったこと」への訂正文もあるが、形式で拒否済みの未採用rawである。椅子01訂正は2更新だけで必須のgap無効化が欠落し、bindが存在しないupdate index2を参照する。成立6件の本人本文もrootが読了したが、人間の商品受入れを意味しない。次は既存2教師の形式指示/実raw混成と旧7保持をCPUで検討する。追加GPU・別学習条件・再試行は今回の承認へ混ぜない。native意味型/公開API/DTO/DB/RN/Render/Supabase/通常有効化/merge/deployは変更0。CODEX Workを正式Pro/Ultra評価と称さない。
+
+
+## 106. 2026-10-29 — 固定列root/subjectの表示不整合2点を限定修正、CPU完了・非学習2生成案
+
+**現在の直接作業（10/29・固定列指示の表記2点を修正／CPU完了・実モデル未実行）：** 前回§105はBOOK/SHOP意味・本文0/2・旧9=6/9、椅子01訂正を失い新f811不採用で閉鎖済み。実promptを照合するとroot5要素の説明にshape.root4要素、subject配列指定にobject例が残っていた。before両rawは4項目名自体を写しており、矛盾の確認事実と失敗原因の未実証を区別する。派生copyでshape.rootにformatを追加し、subject例を["OMITTED",[],null]へ揃えた。他の意味要件・material・prior・全教師・通常receiverは不変。Jupyter CPU31.878331秒で教師2の意味/本文/cold全outcome/replay2/2、旧9の全入力/教材/実token再計数不変、全assistant+EOS同一を確認。入力は4292→4295/4444→4447、旧cap込み8007/8031≤8192。完全CPU原本10memberを回収・CRC/全manifest長さ/SHAとmanifest外sourceのfrozen SHAを照合・保管済み。次の具体案は元f493の非学習1load/0更新/BOOK・SHOP各1生成だけ、最大600秒/$0.047按分（準備/CMEE CPU/回収/保持等別）。実モデル未実行・別承認待ち、retry/自動追加学習なし。前回の不採用・商品0/正式0/3/54.50％、通常ModelCandidateSource未有効化、GPU保持、現2題の追加観測会不要。 [具体案とCPU原本](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/prompt_shape2/README.md)。
+
+同じloss/更新回数の有料再調整を行わず、最初に見つかった指示の表示不整合へ戻った。実観測: output_types root=[format,v,a,q,c]に対しshape.root=[v,a,q,c]、主体をrowとする指示に対しaxesにsubject={bind:OMITTED,entity:null,ev:[]}が残る。これだけが原因だとは断定しない。priorのnamed表記、bind任意4列目、意味要件、教師、更新割当、raw/receiptの復元・採否は変更しない。CPUによる機械的表記補正は既存contract内、次の有料処理は前回の一回承認へ混ぜず別提案。通常API/DB/RN/三core/受領形式の構造差分なし、STRUCTURE_MAP_DELTA_NONE。rootが全CPU教師本文を再読、read-only補助は指示差分とrunnerを照合しただけで、Pro/Ultra/human受入れを称さない。actual実行はCPUのみ、追加4B load/forward/update/生成0。

@@ -5685,3 +5685,8 @@ external_manifestの`run/・cmee/・support/・source/`等は最終ZIP内の元p
 | fixed_rows `execution/run_fixed_rows5.py・consume_fixed_rows5.py・runtime_authorized_plan.json・current_api_source_manifest.json` | 承認済みbefore2→未達時だけ5更新/save/no-grad reload/after11、CPU/actualraw/meaning/body/cold/replay/旧7個別維持の限定実行・identity。通常アプリ入口を有効化しない |
 
 新formatの受領構造だけの差分。API c920f81a・source c6ef6555、CPU教師2/旧9全outcome一致、実GPUはBOOK/SHOP0/2・旧9=6/9、椅子01訂正を失い新重み不採用で終了、全13rawと成立6本文/cold/replay確認・原本回収済み。後続API7acff074は現identity fixture同期だけ。01B/C・国家event/保存・公開API/DB/RN/Render/Supabaseの責務差分0。STRUCTURE_MAP_DELTA_PRESENT、商品0/正式0/3/54.50％。
+
+
+### weekly§106 — 固定列prompt表記の限定修正と非学習2生成案
+
+`fixed_rows/prompt_shape2/prepare_shape2.py`はroot/subjectの指示表示2点だけを派生copyで揃え、元material/prior/教師・旧9不変、実token/context/全assistant+EOS/CMEE教師coldをCPU照合する。`train_messages2.jsonl・eval_inputs2.json・cpu_summary.json・external_verification.json`はその2件と完全CPU ZIPの索引。`run_shape2.py・plan.json・README.md`は別承認時だけ元f493非学習1load/0更新/2生成・最大600秒/$0.047を実施する具体案（未実行）。新受領module/型/公開API/DB/RN/通常routeの追加なし、STRUCTURE_MAP_DELTA_NONE。前回§105の不採用と旧7→6を保持。
