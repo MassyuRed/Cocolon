@@ -3653,3 +3653,14 @@ BOOKは固定列とnamed object混在・alias宣言/claim/更新/bind不正、SH
 完全ZIP60053438bytes/248member、SHA71741059ee92e627ea4183186b554d04ffc245ae857c6fd1bf1654217b6498d9を全CRC/member/bytes/SHA、176frozen、全112F32のname/shape/dtype/norm・初期/最終重みと照合し、libfile_9623b67a65588191926a1bb0a0ea5797へ保管成功。保存一時fileの不完全部分コピーも原本へ保持し、完全最終fileのprefixと一致・reload未使用を区別。新重み114466411f36f0eef7a2dceaec7f5190544ac8545eb6b2f6a3d0446b70f90b66は不採用だが保全済み。base/optimizer/RNGは未収録、厳密途中再開を称さない。最初のPod外照合のplan field参照・archive SHA転記は読取だけで訂正、GPU/CMEE再実行0。
 
 通常ModelCandidateSource/意味型/三core/公開API/DB/RN/Render/Supabase・新依存・merge/deploy/lifecycle操作0。STRUCTURE_MAP_DELTA_NONE。primary=BLOCKER_NARROWED、商品0/正式0/3/54.50％。root単一writer/executor、補助read-only、実環境GPT-6 Codex Work、正式Pro/Ultra/human評価未実施。
+
+
+## 110. 2026-10-29 — prior表示の形式混在をCPU可逆比較、非学習2生成の具体案
+
+**現在の直接作業（10/29・prior表示整合CPU完了、追加学習なし2生成案）：** 前回§109は13更新/11生成、新2意味本文0/2・旧9=9/9、新11446641不採用で閉鎖済み。固定列出力を要求する一方、入力priorの4claim/各軸/2relationがnamed objectだったことを確認。実rawのclaim境界からのobject混在と対応するが、内容/長さも異なるため主因とは断定しない。モデル向けpriorコピーの既存a/q/claims/各軸/relationsだけを既存列順へ移し、元の全値/名前/順序/型/bytesへ復元。存在しないquestion/proseは追加せず、外側/unknowns等は原形。矛盾するprior形式説明1文だけ同期し、全教師/旧9/意味検査は不変。Jupyter CPU4.674841582秒/モデル0で全11token/mask/EOS・旧9同一、BOOK4295→4152/SHOP4447→4304token、元cap込み7864/7888≤8192を確認。完全8member回収/CRC/bytes/SHA/source照合済み。次の具体案は保存11446641の非学習1load/0更新/新prompt2生成→既存CMEE/cold、最大600秒/$0.047処理按分（準備/親外CPU/回収/保持等別）。未承認・実モデル未実行、旧9は再生成せず履歴9/9を新実測へ加算しない。現2題の追加観測会不要、GPU保持。商品0/正式0/3/54.50％・candidate_ready=false・automatic_progression=false。 [実結果・具体条件・全file地図](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/prior_rows2/README.md)。
+
+prior rows比較source9b91ef7fを同Jupyterへ配置しSHA2f9e0e2e照合、4.674841582秒/exit0、モデルload/forward/更新/生成/新CMEE0。旧176frozen・新11446641の全3fileを前後照合。prior bytes3246→2326/3341→2421、入力は各143token減。元priorのv/snapshot_ref・引用・全意味値・順序・型を保持し、既存claim/軸/q/alias/relationのkeyだけを列順へ移した。存在しないquestion/proseをnull補完せず、c外側/unknowns/conflicts/updates等はそのまま。output_typesの元named表記維持という説明1文だけを実表示へ同期。逆投影と説明を戻して元user JSON全bytes一致、全11教師/EOS・旧9の全messages/token/labels不変。既存教師2の意味本文/cold/replay全outcomeは同一保持で、新consumerを実行したとはしない。
+
+CPU完全原本102525bytes/8member、SHA4f4013abcb55e983667f300dbcada844e0d9fb16249fbdfdbbc4095419dda683を全CRC/member/bytes/SHA/source照合し、全payloadをGitHub対象へ保存。Download API失敗/runtime resetと実file到着を区別、再download0。次のrunnerは未承認statusをmodel import/OUT作成前に拒否することをrootが確認し、read-only補助で指摘された自己source hash guardをモデル処理前に追加。保存11446641の1load/0更新/2call・590+kill10秒・各180秒・元cap・phase before consumer参照を固定した。未承認のままで実モデル効果未確認・新しいモデル処理按分0（保持等別）。前回閉鎖runの再起動/承認流用をしない。
+
+これは『prior形式が主因』や4B能力改善の実証ではなく、比較可能な最小入力差を全値不変で具体化した段階。新方式/受領形式/意味型/検査緩和/通常ModelCandidateSource/三core/API/DB/RN/Render/Supabase/新依存/merge/deploy/lifecycle変更0、STRUCTURE_MAP_DELTA_NONE。root単一writer/executor、補助read-only、実環境GPT-6 Codex Work、正式Pro/Ultra/human受入れ未実施。primary=BLOCKER_NARROWED、商品0/正式0/3/54.50％。

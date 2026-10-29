@@ -5700,3 +5700,8 @@ external_manifestの`run/・cmee/・support/・source/`等は最終ZIP内の元p
 ### weekly§109 — rehearsal13の実結果・全原本保全
 
 `rehearsal13/result_20261029/file_manifest.json`が全path/bytes/SHAの完全索引、同`README.md`が責務地図。`summary.json・content_review.md`は不採用閉鎖/費用/全11raw・成立9本人本文の読了、`runtime_authorized_plan.json・runtime_run_rehearsal13.py・gpu_launch.json・launch_command.txt・execute_once.lock・launch_checkpoint.json`は実行時承認/単一起動/PID訂正を所有。`run.json・training.jsonl・after_*.jsonl（11）・initial_loaded_tensors.json・reloaded_tensors.json・adapter_config.json・adapter_README.md`は未修復生成/13更新/2load/新adapter identityと112F32の表。`cmee_originals.zip・cmee_originals_manifest.json・cmee_summary.json`は完全diagnosis/9saved/9cold原本19memberと実分類/本人本文索引。`rehearsal13-gpu.log/exit・rehearsal13-cmee.log/exit`は元ログ。`export_rehearsal13.py・archive_manifest.json・verify_recovered.py・external_verification.json・preservation_receipt.json`は248member全原本/新旧重み回収・照合・保管receipt。重みは完全保管ZIP、公開GitHubへ追加しない。通常構造/受領契約/意味型/三core/API/DB/RN差分なし、STRUCTURE_MAP_DELTA_NONE。
+
+
+### weekly§110 — prior_rows2のCPU表示比較と非学習2生成案
+
+`fixed_rows/prior_rows2/prepare_prior_rows2.py`はモデル向けpriorコピーの既存a/q/claim/軸/relationだけを既存列順へ可逆投影し、欠落field補完0・元user全bytes復元・全11教師/旧9token/labels/contextを確認する。`train_messages11.jsonl・eval_inputs11.json・cpu_summary.json・cpu_full.json.gz`は派生入力と実4.674842秒/モデル0・既存教師2全outcome同一保持の原本。`cpu.log・cpu.exit・archive_manifest.json・external_verification.json`は8member回収照合。`run_prior_rows2.py・plan.json・guard_verification.json・README.md`は未承認の保存11446641非学習1load/0更新/2生成・最大10分/$0.047案、未承認拒否と全file責務地図。旧9=9/9は履歴、今回実モデル0。通常receiver/意味型/三core/API/DB/RNの構造差分なし、STRUCTURE_MAP_DELTA_NONE。
