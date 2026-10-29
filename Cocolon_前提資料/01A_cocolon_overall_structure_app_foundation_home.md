@@ -5600,3 +5600,8 @@ auxiliary_fit8の実CPU原本cpu_check.json/cpu_preparation.log/.exitとruntime_
 | `reading_review.md・result_summary.json` | root/補助の意味/全更新/本人本文と教師比較、閉鎖/新重み不採用/次候補。Library libfile_271c5c6110c881919c7901938e853995 v0 |
 
 CPU失敗と実成功/無効準備plan/今回runtime条件は同folder直下の既存ownerへ保持。通常route/型/wire/reader/DB/RN/Render/Supabaseの構造変更なし、STRUCTURE_MAP_DELTA_NONE。全体00/観測入口/weekly§99へ戻る。
+
+
+## 2026-10-29 weekly§100 — role_binding_preparation
+
+既存training/2026-10-26-unconnected-native/role_binding_preparation内のprepare_role_bindings.pyは、staged_pair9原4行をhash固定で読み、role/引用6・附属ADD5・終端GAP/本文2の13補助targetを機械投影するstdlib-only owner。generated/auxiliary_train_messages.jsonlは220748bytes/13行、generated/structural_check.jsonはtarget/source/prior/nested ev/終端再構成の構造照合を所有し、tokenizer/context/mask/EOS・GPU・新CMEE採否を未実施とする。README.mdが前回不採用との区別、限定18更新候補の未固定状態、接続後の実token確認順、Jupyter origin自動承認拒否と再開条件を所有する。v1 spec衝突はreviewで修正し最終13行だけ保存。通常商品route/型/API/wire/reader/DB/RN/Render/Supabase構造差分なし、STRUCTURE_MAP_DELTA_NONE。全機能00/観測入口/最新weekly§100を同時同期。

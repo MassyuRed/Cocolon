@@ -3491,3 +3491,16 @@ source815692fc/API7b9、実11更新/保存4ee58bf9e7e16a1fc3e0104781fb800573b0db
 原本18,638,125bytes/346payload＋manifest、SHAdfcf63ffadc9054d188b92c0d1d3e844cf7ff5f74d9853196ddd72b16e67e518を全CRC/hash/size/112F32形状・有限性・全112変化/11rawhashとcap/途中全文2raw不変/cold8でPod外照合。Library libfile_271c5c6110c881919c7901938e853995 v0へ重み/全入力/現CMEE130source/全11raw/完全診断/saved・cold8/CPU v1失敗とv2成功を保全。GitHubのresult_20261029には全11raw/run/training/読込tensor/log/全member目録/外部検証/読解/終了集計とcmee_summaryを保存。完全診断は外部archive cmee/diagnosis.jsonをSHA/bytesで指し、rawrunのpendingを凍結したままresult_summaryで閉鎖する。
 
 この新一回は消費済み、primary=BLOCKER_NARROWED、新4ee通常不採用/全旧重み保持。次候補は今回のrole→引用、claim附属relation更新、GAP一回での終了、旧訂正の更新別根拠を重点化する学習設計。量/順序は未固定で、同じ11混合や上限延長を自動開始しない。現2件の完成教師はあり新観測会不要。GPU保持/Stop・再起動・削除0、通常app/API/DTO/DB/RN/Render/Supabase/merge/deploy変更0。全体00の冒頭だけでなく§8既存行も同期、観測入口/01Afile地図を差分更新、STRUCTURE_MAP_DELTA_NONE。商品0/正式0/3/54.50％・candidate_ready=false/automatic_progression=false。
+
+
+## 100. 2026-10-29 — role/引用・附属更新・終了の13補助課題を準備／Jupyter接続先承認待ち
+
+開始PR30 c2dafc54/API7b9、全機能原本・work rules・全体設計01と全file地図01A/B/C・current maps・観測学習意図・§99原出力/run/prepare/consumeを確認。前回全文意味/本人本文0/2・旧9 after-only8/9/cold8・新4ee不採用は変えず、既存A/B教師の実失敗箇所を13局所targetへ機械投影した。role6（BOOKのno_contact/二譲歩とSHOPの知覚/喜び/距離）、附属relation保持ADD5、全ADD後のGAP1個＋question/3本文2。新観測事例/新意味/引用/本文追加0、元15/eval/全文prompt/API/wire/reader/重み不変。補助gold条件の成功を元全文成功に扱わない。
+
+[準備source・13行・再開条件](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/README.md)。原4行104198bytes/blob cb4bc5ab/SHA3c80fa6cから13行220748bytes/SHA4aec0be06138ec94b52534148219372cfc608de93b2ba0b13cbabf24e814707fを生成。全target部分木/source/prior/request/profile/nested ev・元ADD+GAP/本文復元、ASTとnested ev/GAP二重化の拒否2条件を構造確認。独立read-only reviewが元specの全件生成要請と局所指示の衝突を検出、課題別specへ限定修正して最終13行/元source等52項目を再照合。初版のGPU投入0、最終v2だけ保存。実tokenizer/token数/context/mask/EOS/モデル読込/学習/生成/新CMEE採否/SQL0。
+
+接続確認はblank browserのみ、接続済Jupyterタブなし。引継ぎ/現GitHub/過去文脈にexact URLがなく、前回Pod IDに基づくJupyter direct originは、自動承認レビューが今回の当該接続先への許可未確立として拒否。private session contentを扱う接続先をMashが明示又は承認する必要がある。alternate origin/HTTP/管理console/管理APIなどでの回避0、credential取得/入力0、Jupyter terminal/子process0。GPU Stop/restart/delete0。前回の稼働/単価記録を今回live確認済みへ昇格しない。
+
+次は接続先の明示/承認→固定tokenizerで新13＋実順序の8192/EOS/mask確認→既存afaa/全文CE/LR5e-5・13局所＋3anchor＋元全文2の18更新候補を具体化する。新量/順序/runner/実行planは未固定・未実装、GPU新費用消費0。検討処理上限2700秒/$0.21は前回同Pod表示$0.28/h按分の候補で、準備/CPU/回収/保持等別・完了保証なし。最終自由生成は全文2＋旧9の固定11を元prompt/無補助raw→既存CMEE/成立時cold。before旧9を測らなければafter-onlyと明示し維持/改善率は出さない。CHAIR01訂正の更新別根拠混入は別確認。閉鎖済run/lock/承認枠の再利用と自動開始0。
+
+primary=TECHNICAL_CREDITは投影sourceと構造検証に限定、モデル品質/商品0/正式0/3/54.50％・candidate_ready=false/automatic_progression=false。現2件の新観測会不要。全体00/観測入口/01A地図を関連差分同期、通常app/API/DTO/DB/RN/Render/Supabase/merge/deploy変更0、STRUCTURE_MAP_DELTA_NONE。実環境GPT-6 Codex Work/root単一writer、補助reviewは正式Pro/Ultra/human受入れではない。
