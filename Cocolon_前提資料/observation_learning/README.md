@@ -2,7 +2,7 @@
 
 **GPU実確認の最終記録（2026-10-29）：** 同Pod vgkm402msgroiu/short_gold_bonobo、Jupyter直接接続、NVIDIA RTX A5000 24564MiB・torch2.8.0+cu128、固定依存/base復元済み。今回の処理費用は前回同Pod表示$0.28/hを按分に使用し、今回live単価は再照会していない。GPU保持/Stop等0。
 
-**現在の直接作業（10/29・suffix2一回実行中）：** 前回f493の全文意味/本人本文0/2、旧9は7/9、gold条件付き0/4を保持。元全文BOOK/SHOPのprompt・teacher tokenを保ち、updates境界〜EOSへだけCEを置く2更新を選択した。実CPU3.869429秒、全文7300/7777token、mask6699/7066、監督601/711token、causal window6698/602・7065/712、元11prompt/context・起点112F32・before原本を照合。CPU完全原本433850bytes/SHA922b04a180ec1649654aa073a3f998f12efa75c5ca8e8f0456dc5a07c87554bbを回収済み。保存f493から2更新→別保存/非学習reload→無補助全文2＋旧9の11自由生成→既存CMEE/成立snapshotの別process冷再読をsource d79b0737保存/readback後、PID123107で一回を開始した。結果未確定。最大1800秒/$0.14処理按分、各生成180秒・旧cap3712/3584/2560、完走保証なし。按分は前回同Pod表示$0.28/hで今回live再照会なし、準備/CPU/回収/保持等別。現2題新観測会不要、GPU保持。 [具体条件](training/2026-10-26-unconnected-native/role_binding_preparation/suffix2/README.md)。
+**現在の直接作業（10/29・suffix2閉鎖／新45a1不採用）：** 元全文2本のupdates境界〜EOSだけを2更新し、別保存/112F32非学習reload/無補助全文2＋旧9を全11EOSまで実行。全文意味/本人本文0/2、旧9は7→4/9へ退行し成立4のcold全outcome同値。SHOPのJSON階層/語りかけは局所改善したが更新割当は不変、BOOKは元意味欠落へ後退。処理991.976650秒/$0.077153739458按分、CMEE CPU42.680260秒（準備/CPU/回収/保持等別）。全原本/新重みは回収照合・保存済み。同種の有料loss調整追加は停止。追加GPUなしの可逆carrier CPU比較は全値復元/教師結果2/2同値だが出力token削減2.85/2.94％だけのため不採用。次は全意味値の明示責任を保った固定型行表現等の仕様候補をCPUで比較し、入力を含む実token削減と旧形式の全値復元を確認する。具体仕様/新GPU条件は未固定・未実行、通常契約不変。現2題新観測会不要、GPU保持。 [全実結果](training/2026-10-26-unconnected-native/role_binding_preparation/suffix2/README.md)。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 

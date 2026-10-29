@@ -5639,4 +5639,20 @@ probe4.pyが既存role18/helperの非学習読込とCMEE read_rawを継承し、
 
 ## 2026-10-29 weekly§103 — role_binding_preparation/suffix2
 
-run_suffix2.pyは元全文2本のtoken列を保持しupdates境界〜EOSだけCEを置く2更新、f493起点/別保存112F32/非学習reload/無補助全文2＋旧9を担当。consume_suffix2.pyは既存CMEE read_raw/型/検査と成立snapshotの別process冷再読を継承。cpu_check.jsonは実token/mask/causal window/元11prompt・before・起点・CMEEの照合原本。cpu.log/exitは引数誤り履歴、cpu_recovered.logは成功。README.mdは実装順と一回条件1800秒/$0.14。GPU未実行、通常商品構造差分なし、STRUCTURE_MAP_DELTA_NONE。
+run_suffix2.pyは元全文2本のtoken列を保持しupdates境界〜EOSだけCEを置く2更新、f493起点/別保存112F32/非学習reload/無補助全文2＋旧9を担当。consume_suffix2.pyは既存CMEE read_raw/型/検査と成立snapshotの別process冷再読を継承。cpu_check.jsonは実token/mask/causal window/元11prompt・before・起点・CMEEの照合原本。cpu.log/exitは引数誤り履歴、cpu_recovered.logは成功。README.mdは実装順と一回条件1800秒/$0.14を所有。準備時点ではGPU未実行、実行後の記録は下段の終了ownerへ。通常商品構造差分なし、STRUCTURE_MAP_DELTA_NONE。
+
+
+### weekly§103 終了owner
+
+suffix2/result_20261029のrun/training/loaded/reloaded/after11は2更新/2load/11EOSを、cmee_diagnosisとsaved/cold4は全文0/2・旧9 4/9・全outcome同値を所有。execution_summaryは処理991.976650秒/$0.077153739458、external_manifest/verificationは348payload/112F32/11beforeを所有。reading_review/result_summaryは新45a1不採用/閉鎖と同種調整停止、Library保存IDを所有。carrier_comparison_cpuは追加GPUなしの完全可逆形式比較・全値復元/教師2同値/2.85・2.94％削減だけで不採用を所有。通常商品route/API/型/reader/DB/RN/Render/Supabase構造差分なし、STRUCTURE_MAP_DELTA_NONE。
+
+| 追加ファイル | 担当・配置 |
+|---|---|
+| `suffix2/export_suffix2.py` | 全原本/新・起点adapter/凍結入力/CMEE sourceを別ZIPへ回収するsource |
+| `result_20261029/gpu_launch.json・gpu.log・execute_once.lock` | 単一起動条件・実GPU log・一回lock原本 |
+| `result_20261029/cmee.log・cmee.exit・cmee.once` | 既存CMEE全11受領と冷再読の一回実行履歴 |
+| `carrier_comparison_cpu/compare_carrier_cpu.py・comparison.json・cpu.log` | 可逆encoder/decoder比較source・全値/教師結果/token・CPU実行log |
+| `carrier_comparison_cpu/FT-BOOK-AFTER-ANSWER.carrier.json・FT-SHOP-AFTER-ANSWER.carrier.json` | 全2教師の比較専用carrier |
+| `carrier_comparison_cpu/FT-BOOK-AFTER-ANSWER.roundtrip.json・FT-SHOP-AFTER-ANSWER.roundtrip.json・README.md` | byte完全復元した元2教師・比較の不採用と次仕様未固定 |
+
+external_manifestの`run/・cmee/・support/・source/`等は最終ZIP内の元pathを示す。GitHubのresult folderへの再配置と同名とは限らない。新旧adapter等のbinaryは同ZIP/保存IDがownerであり、GitHub text原本と合わせて読む。

@@ -1,6 +1,6 @@
 # 元全文updates境界〜EOSのsuffix2 — 2026-10-29 JST
 
-現在：CPU確認・GitHub d79b0737でsource/CPU全11file readback済み。一回のGPUをPID123107で開始、結果未確定。前回boundary_probe4は閉鎖済み。
+現在：一回完了・閉鎖。2更新/2load/11EOS、全文0/2・旧9 7→4/9。新45a101ec不採用。前回boundary_probe4は閉鎖済み。
 
 目的：正しい意味を与えても更新割当・bind・本文・終端が崩れる実測欠陥に直接対応する。元全文BOOK/SHOPのprompt/assistant全文/token列を保ち、labelsのupdates境界以前だけを-100にする。新しい部分JSON課題やgold user欄を増やさず、一般化・他core完成を主張しない。観測学習の目的・用途・Windows/Mac未選定は既存READMEどおり。
 
@@ -19,3 +19,10 @@
 cpu_check.json=433850bytes/SHA922b04a180ec1649654aa073a3f998f12efa75c5ca8e8f0456dc5a07c87554bb。source SHA7ff93955dceef2809e270cb62b6e15442a0aeb481ac2eaa6e3fe59edfcaba99f。初回CPUはCMEE結果folderをsource rootと誤指定しmodel0でFileNotFoundError。実rootを既存exportから解決し引数のみ修正、失敗log/exit保持。36787bytes CPU ZIPの全CRC/hash/source一致をPod外確認、download API失敗と実file到着を区別。
 
 既存起点/元bundleはlibfile_e089337060248191a52ee06aad6fc75a v0に保持。新結果は別保存、base全重み/厳密resume stateはarchiveへ含めない。root GPT-6 Codex Workが唯一writer/executor、独立補助read-onlyでsource/mask/EOS/consumer確認、正式Pro/Ultra/human受入れではない。今回Mash「4B学習＋CMEE接続を進めて」の中の限定一回。通常app/API/DTO/DB/RN/Render/Supabase/merge/deploy/lifecycle0、STRUCTURE_MAP_DELTA_NONE。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false。現2題の追加観測会不要。
+
+
+## 最終結果
+
+**現在の直接作業（10/29・suffix2閉鎖／新45a1不採用）：** 元全文2本のupdates境界〜EOSだけを2更新し、別保存/112F32非学習reload/無補助全文2＋旧9を全11EOSまで実行。全文意味/本人本文0/2、旧9は7→4/9へ退行し成立4のcold全outcome同値。SHOPのJSON階層/語りかけは局所改善したが更新割当は不変、BOOKは元意味欠落へ後退。処理991.976650秒/$0.077153739458按分、CMEE CPU42.680260秒（準備/CPU/回収/保持等別）。全原本/新重みは回収照合・保存済み。同種の有料loss調整追加は停止。追加GPUなしの可逆carrier CPU比較は全値復元/教師結果2/2同値だが出力token削減2.85/2.94％だけのため不採用。次は全意味値の明示責任を保った固定型行表現等の仕様候補をCPUで比較し、入力を含む実token削減と旧形式の全値復元を確認する。具体仕様/新GPU条件は未固定・未実行、通常契約不変。現2題新観測会不要、GPU保持。
+
+[全原文・全更新・本人本文・過去案照合](result_20261029/reading_review.md)／[閉鎖集計](result_20261029/result_summary.json)／[追加GPUなしの可逆形式比較](carrier_comparison_cpu/README.md)。今回source/CPU/実行条件は上記に履歴として保持。新45a1と旧f493とも商品採用ではない。

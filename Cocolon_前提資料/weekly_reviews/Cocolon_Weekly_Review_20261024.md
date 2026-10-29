@@ -3574,13 +3574,26 @@ sourcef6f1bb485dc73c11e6669062301893440502d248/PID95992で一回実施。BOOK意
 
 
 
-## 103. 2026-10-29 — 元全文のupdates以降を重点化するsuffix2
+## 103. 2026-10-29 — suffix2完了・全文0/2／旧9 4/9へ後退
 
-**現在の直接作業（10/29・suffix2 CPU準備完了）：** 前回f493の全文意味/本人本文0/2、旧9は7/9、gold条件付き0/4を保持。元全文BOOK/SHOPのprompt・teacher tokenを保ち、updates境界〜EOSへだけCEを置く2更新を選択した。実CPU3.869429秒、全文7300/7777token、mask6699/7066、監督601/711token、causal window6698/602・7065/712、元11prompt/context・起点112F32・before原本を照合。CPU完全原本433850bytes/SHA922b04a180ec1649654aa073a3f998f12efa75c5ca8e8f0456dc5a07c87554bbを回収済み。保存f493から2更新→別保存/非学習reload→無補助全文2＋旧9の11自由生成→既存CMEE/成立snapshotの別process冷再読を一回実施する。最大1800秒/$0.14処理按分、各生成180秒・旧cap3712/3584/2560、完走保証なし。按分は前回同Pod表示$0.28/hで今回live再照会なし、準備/CPU/回収/保持等別。現2題新観測会不要、GPU保持。 [具体条件](observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/suffix2/README.md)。
+**準備時点の履歴（10/29・suffix2 CPU準備完了）：** 前回f493の全文意味/本人本文0/2、旧9は7/9、gold条件付き0/4を保持。元全文BOOK/SHOPのprompt・teacher tokenを保ち、updates境界〜EOSへだけCEを置く2更新を選択した。実CPU3.869429秒、全文7300/7777token、mask6699/7066、監督601/711token、causal window6698/602・7065/712、元11prompt/context・起点112F32・before原本を照合。CPU完全原本433850bytes/SHA922b04a180ec1649654aa073a3f998f12efa75c5ca8e8f0456dc5a07c87554bbを回収済み。保存f493から2更新→別保存/非学習reload→無補助全文2＋旧9の11自由生成→既存CMEE/成立snapshotの別process冷再読を一回実施する。最大1800秒/$0.14処理按分、各生成180秒・旧cap3712/3584/2560、完走保証なし。按分は前回同Pod表示$0.28/hで今回live再照会なし、準備/CPU/回収/保持等別。現2題新観測会不要、GPU保持。 [具体条件](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/suffix2/README.md)。
 
-初回CPUはCMEE source rootへ結果folderを誤指定しFileNotFoundErrorで終了（load/forward/update/gen0）。既存exportから実rootを解決し引数だけを修正したCPU一回で完了、旧log/exit保持。36787bytes ZIPの全CRC/size/hash/source一致をPod外確認。download API失敗と実file到着を区別し重複download0。root GPT-6 Codex Work単一writer/executor、独立補助read-only、正式Pro/Ultra/human受入れとは称しない。GPU未実行。通常app/API/DTO/DB/RN/Render/Supabase/merge/deploy/lifecycle0、STRUCTURE_MAP_DELTA_NONE。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false。
+初回CPUはCMEE source rootへ結果folderを誤指定しFileNotFoundErrorで終了（load/forward/update/gen0）。既存exportから実rootを解決し引数だけを修正したCPU一回で完了、旧log/exit保持。36787bytes ZIPの全CRC/size/hash/source一致をPod外確認。download API失敗と実file到着を区別し重複download0。root GPT-6 Codex Work単一writer/executor、独立補助read-only、正式Pro/Ultra/human受入れとは称しない。この準備時点ではGPU未実行。現在は下記終了結果のとおり完了・閉鎖。通常app/API/DTO/DB/RN/Render/Supabase/merge/deploy/lifecycle0、STRUCTURE_MAP_DELTA_NONE。商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false。
 
 
 ### §103 実行開始checkpoint
 
 source d79b0737c1177cf3e616470e1931ff9ac7f5ec93、CPU/source全11file remote content/changed pathsを確認後、同PodでPID123107の一回を開始。開始Unix1793247723.7352333、最大1800秒/$0.14、既存GPU保持。開始後5.318688秒のcheckpointは更新0/load未完/call0、base読込進行を確認。結果未確定、同run再起動禁止。終端と原本はsuffix2 resultへ回収する。
+
+
+### §103 終了結果 — 純suffix-only不採用・同種調整の追加停止
+
+**現在の直接作業（10/29・suffix2閉鎖／新45a1不採用）：** 元全文2本のupdates境界〜EOSだけを2更新し、別保存/112F32非学習reload/無補助全文2＋旧9を全11EOSまで実行。全文意味/本人本文0/2、旧9は7→4/9へ退行し成立4のcold全outcome同値。SHOPのJSON階層/語りかけは局所改善したが更新割当は不変、BOOKは元意味欠落へ後退。処理991.976650秒/$0.077153739458按分、CMEE CPU42.680260秒（準備/CPU/回収/保持等別）。全原本/新重みは回収照合・保存済み。同種の有料loss調整追加は停止。追加GPUなしの可逆carrier CPU比較は全値復元/教師結果2/2同値だが出力token削減2.85/2.94％だけのため不採用。次は全意味値の明示責任を保った固定型行表現等の仕様候補をCPUで比較し、入力を含む実token削減と旧形式の全値復元を確認する。具体仕様/新GPU条件は未固定・未実行、通常契約不変。現2題新観測会不要、GPU保持。
+
+BOOKはREJECT/semantic_receipt_not_validated、SHOPはREJECT/model_evidence_collection_invalid。旧9退行はCHAIR01訂正（schema欠落）、02初回（引用「して、」→「して」）、03初回（source IDをliteral式へ置換）の3。保持4はCHAIR01初回＋DAILY3件でraw_text前回完全同一、cold4も同値。新品質増分とはしない。元から不成立のCHAIR02/03訂正も継続不成立。初期f493/全入力不変、全112F32変化、新45a1不採用。
+
+46,811,766bytes/348payload＋manifest、SHA3e49b3c8125a65d4d6bbb9108b0aa48f81557d43421574da28feee5a4c546101を全CRC/hash/size/112F32/11before/cold4照合、Library libfile_1a5c146f11a481918792a37429a2f5acへ保存。実処理991.976650秒/$0.077153739458は前回同Pod表示$0.28/h按分、live再照会なし、準備/CPU/回収/保持等別。原run statusは保持し別summaryが閉鎖を所有。
+
+中間の全文CE＋suffix重点化推奨はlocalized30/adaptive30/jointfocus9/fullce9の実施済み比較と重なるため撤回。純suffix追加反復も停止。compact9短名化やgold A条件付きBを、自律2call成立へ昇格しない。汎用carrier CPU13.304903秒で2教師の全値/順序byte完全復元・既存CMEE教師outcome一致/recordの値数不一致1例の拒否を確認（列定義改変や意味的欠落全般の検証ではない）したが削減2.85/2.94％に留まり不採用。source/完全原本を同suffix2/carrier_comparison_cpuへ保存、通常decoder/reader/入力spec/契約変更0。
+
+primary=BLOCKER_NARROWED、商品0/正式0/3/54.50％、candidate_ready=false/automatic_progression=false。通常app/API/DTO/DB/RN/Render/Supabase/merge/deploy/lifecycle0、STRUCTURE_MAP_DELTA_NONE。root単一writer/executor、補助read-only、正式Pro/Ultra/human受入れ未実施。
