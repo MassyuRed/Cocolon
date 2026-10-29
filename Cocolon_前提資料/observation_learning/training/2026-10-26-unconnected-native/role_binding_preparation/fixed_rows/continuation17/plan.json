@@ -1,5 +1,5 @@
 {
-  "status": "PROPOSED_NOT_APPROVED",
+  "status": "MASH_EXPLICITLY_APPROVED_ONCE",
   "schema": "cocolon.continuation17.v1",
   "executor": "root Karen only; read-only support; Codex Work; formal Pro/Ultra/human acceptance not claimed",
   "predecessor_commit": "4b756ff69280913cf0c4e5a6202da2bcb3390b58",
@@ -70,7 +70,7 @@
   "max_process_usd": 0.21,
   "preparation_cmee_cpu_recovery_holding_storage_network_tax_extra": true,
   "loss": "ordinary complete assistant CE through EOS; no suffix or token weight sweep",
-  "learning_rate": 5e-05,
+  "learning_rate": 0.00005,
   "weight_decay": 0,
   "gradient_clip": 1,
   "seed": 20261024,
@@ -99,7 +99,13 @@
   "product_credit": 0,
   "candidate_ready": false,
   "automatic_progression": false,
-  "approval": null,
+  "approval": {
+    "owner": "Mash",
+    "proposal_commit": "d2b94c365103c0bdfacd0a7de8daeae67ae727b2",
+    "received_date_jst": "2026-10-30",
+    "user_response": "進めていいよ。",
+    "scope": "One continuation17: BOOK/SHOP each4 +old9 each1=17 updates; save/nontraining reload; pair generation/CMEE/cold then old9 only if pair success; max2700s/$0.21 processing; preparation/recovery/holding etc extra. Existing runner bytes and all other approved boundaries unchanged."
+  },
   "closure": null,
   "hypothesis": "Remaining unequal fit may improve with more complete-target exposures. Pre-update training CE is not final saved-weight NLL or causal proof; four exposures is a finite budget choice, not an established optimum.",
   "cmee_cpu_included_in_process_deadline_and_cost": true,
