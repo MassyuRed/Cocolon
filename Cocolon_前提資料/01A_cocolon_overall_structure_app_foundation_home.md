@@ -5734,3 +5734,8 @@ syntax2b_result_20261030/README.mdが全file責務、summary.json/content_review
 structural_cpu/alignment_cpu/read_alignment.pyはrehearsal13の実学習教材・保存encodingとprior_rows2の派生入力、syntax2bの既存rawだけを読む一回限りのCPU診断。source27557501をJupyterで一回実行、内0.081736963秒/外0.128684958秒/exit0、model load/forward/更新/生成/新CMEE0。alignment.jsonは全5input前後hash/5 owner path群/全11の予定順序/新2の教師・保存labels+EOS/旧9全row同一/未修復rawの完結member計数を所有。execution.jsonとcpu.log/exitは実行identity/時間/再試行なしの原本、evidence.jsonは原4payloadのexact UTF-8保全、verification.jsonは全payload/source/画面bytesとSHAの回収照合、proof.jpgは実Jupyter表示、README.mdは結果・全file責務・判断限界を所有する。
 
 教師や予定更新の欠落は今回範囲で見つからないが、因果的修正箇所は未確定。5群の意図した表記差や形式混在を原因/無害と断定せず、次の有料試行を選ぶ根拠へ転用しない。前回0/2と不採用閉鎖/旧9履歴FIT9/9は不変。通常ModelCandidateSource/receiver/意味型/三core/API/DTO/DB/RN/Render/Supabase/依存/merge/deploy構造差分0、STRUCTURE_MAP_DELTA_NONE。ADMINISTRATIVE_ONLY、商品0/正式0/3/54.50％。
+
+
+### weekly§116 — CPU数値比較と17更新案、GPU未実行
+
+fixed_rows/continuation17/README.mdが新2の相対適合不足仮説・未承認17更新の範囲と全file責務を所有。run_continuation17.pyはrehearsal13の限定派生で、保存11446641から17更新→保存/非学習reload→新2の意味/本文/cold成功時だけ旧9の最大11生成を行う未承認runner。既存consume_fixed_rows5.read_raw/save_coldをそのまま使い、旧9全9/9を保護。prepare_cpu.pyは元11messages/encoding/17順序/112CPU tensor/sourceだけを照合、同JupyterのCPU一回は内1.698078459秒/外2.110028306秒/exit0。plan.jsonはCPU成功hashを結んだPROPOSED_NOT_APPROVED、GPU未実行。cpu_summary.json・cpu_execution.json・cpu.log/exitが一回CPU原本、kernel_cpu.jsonはCPU fallback合成6条件のみの比較結果、manifest.json/originals.zip/verification.jsonは全12member/11payloadの回収照合、proof.jpgは実画面。旧run/承認/0/2は不変、実モデル改善・cache正常性は未確認。通常source/receiver/意味型/三core/API/DB/RN責務変更0、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。

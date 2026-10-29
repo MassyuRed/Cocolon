@@ -9,7 +9,7 @@
   "initial_adapter_path": "/workspace/cocolon_rehearsal13_run_20261029/adapter",
   "runner_sha256": "08c7bd3ef4e71f289f6aa81bd420877732d0b4fd9608961c092d17a3f2d8d14e",
   "prepare_source_sha256": "f03e7f4945bb5bb77d11e59f9668ec6d52b2525153671944eed4ac51aca95979",
-  "prepared_cpu_sha256": null,
+  "prepared_cpu_sha256": "d3b3d5e3a0b41407388d0d6ee38c2d9995a079911c7d39a4cdbd42fa19ff19e1",
   "train_messages_sha256": "1401ee1144b820bbedbbcf1740133ca7d4330231f0d04732692820723bccff3b",
   "eval_inputs_sha256": "6eaa2acd66f359da1d0e77bdb48c1eb483138dbcc50cb30ce7673b6da499b4ea",
   "update_order": [
@@ -102,5 +102,14 @@
   "approval": null,
   "closure": null,
   "hypothesis": "Remaining unequal fit may improve with more complete-target exposures. Pre-update training CE is not final saved-weight NLL or causal proof; four exposures is a finite budget choice, not an established optimum.",
-  "cmee_cpu_included_in_process_deadline_and_cost": true
+  "cmee_cpu_included_in_process_deadline_and_cost": true,
+  "cpu_preparation": {
+    "status": "CPU_CONTINUATION17_READY_NO_MODEL",
+    "source_commit": "29130e554d24754641dca830992a3589ad8258d3",
+    "source_sha256": "f03e7f4945bb5bb77d11e59f9668ec6d52b2525153671944eed4ac51aca95979",
+    "seconds": 1.6980784590123221,
+    "exit_code": 0,
+    "runtime_execution": "NOT_STARTED",
+    "approval": "PROPOSED_NOT_APPROVED"
+  }
 }

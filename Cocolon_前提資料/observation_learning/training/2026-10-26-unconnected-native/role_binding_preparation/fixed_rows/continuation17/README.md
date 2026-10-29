@@ -26,7 +26,22 @@ BOOK／SHOPの本人回答後、4Bが意味・更新・本人向け本文を自�
 
 `prepare_cpu.py`は既存保存encodingと全11messages一致、17順序、既存frozen、保存11446641・112有限CPU tensor、runner構文を照合し、別CPU作業directoryへ同一messagesとencodingを保存します。教師のCMEE成功は既存CPU証拠を再利用するだけで、今回モデル成果へ数えません。
 
-CPU実行結果はまだ未記録です。plan.statusはPROPOSED_NOT_APPROVEDで、実行guardによりGPUを開始できません。CPU成功後、準備結果のhashと未実行状態をこの案へ反映します。
+**Jupyter CPU一回は成功済み。** source29130e554d24754641dca830992a3589ad8258d3、内1.698078459秒／外2.110028306秒・exit0。元11messages／evalはbyte不変、全encoded labelsを確認、保存11446641の112F32 tensorは全有限、CUDA初期化なし。追加学習／pretrained model load／forward／生成／新CMEEは全0です。prepared SHAはd3b3d5e3a0b41407388d0d6ee38c2d9995a079911c7d39a4cdbd42fa19ff19e1。plan.statusはPROPOSED_NOT_APPROVEDを維持し、有料実行guardは未解除です。
+
+原本originals.zipは152969bytes、SHA8eed392015d9aad7b774f751061d1002ac07d6f07e98dd741cb72c11130fc2ce、12member／11payload。全CRC／member／bytes／SHA、source2本とGitHub29130／root bytesを回収照合しました。ZIP内planはCPU実行時の未承認原本で、現在のplanはCPU成功hashだけを追記した未承認版です。
+
+| file | 責務 |
+|---|---|
+| run_continuation17.py | 未承認17更新／save/reload／新2成功時のみ旧9生成・既存CMEE/coldの限定runner |
+| prepare_cpu.py | モデル処理なしの原11messages・encoding・112CPU tensor・順序照合 |
+| plan.json | 提案範囲／費用／停止／CPU成功hash。PROPOSED_NOT_APPROVED |
+| cpu_summary.json、cpu_execution.json、cpu.log、cpu.exit | 同Jupyterの一回CPU実結果と原時間／exit |
+| kernel_cpu.json | installed5.19.0の既存torch_chunk_gated_delta_rule／torch_recurrent_gated_delta_ruleを、seed20261030+n、H2/K128/V128、n31/64/129＋逐次3、FP32/BF16で比較した原結果。3.481980063秒、4Bモデル処理0 |
+| manifest.json、originals.zip、verification.json | 全11payloadの原本／照合範囲、source・画面hash |
+| proof.jpg | CPU成功／承認待ち／GPU保持の実画面 |
+| README.md | 起案根拠、限界、全file責務、再開範囲 |
+
+Jupyter入力時に改行が潰れた未実行heredocは終了delimiterで閉じ、bash構文エラーだけで終了しました。モデル処理・ファイル変更は0。CPU比較とprepare本体はそれぞれ一回のみで、retryではありません。
 
 ## 判断と保護
 

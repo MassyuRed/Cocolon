@@ -3735,3 +3735,20 @@ primary=BLOCKER_NARROWED、product_credit=0、正式0/3、54.50％、candidate_r
 source27557501c1a544d669e15d7f069facc6a4e3420cのread_alignment.py SHA1de54c5ccd15f622590ab1d242f376e711d7e5fdcc769b5a908f63b9437dc2ceを同Jupyterへ取得・照合し、CUDA非表示/HF・Transformers offline、timeout60秒/kill5秒で一回。結果alignment.jsonは8776bytes/SHA4d1d9ea7e91f8d64f0e6801cc9e165454f4cd464a24283650ea65f62415f890c。実CPU0.08173696300946176秒、外0.12868495809379965秒、exit0/retry=false。原4payloadをJSON wrapperで一回回収し全bytes/SHA一致。Download API timeoutと実file到着を区別し再download0。GPU処理按分0、保持/準備/回収等は別。全重みtensor/frozenの新規全再検査は称さない。
 
 過去token_diagnosticも正解文脈では構造/EOS top1が正しく自由生成は失敗した。今回を新しい原因特定やモデル改善に数えず、同種の有料forward診断/追加学習/新grammar/生成helperを足さない。材料一般十分性や4B能力限界は未確定。root単一writer/executor/judge、補助read-only、実環境Codex Work、正式Pro/Ultra/human受入れ未実施。通常ModelCandidateSource/receiver/意味型/三core/API/DTO/DB/RN/Render/Supabase/依存/merge/deploy/lifecycle操作0。STRUCTURE_MAP_DELTA_NONE、primary=ADMINISTRATIVE_ONLY、TECHNICAL_CREDIT=0、PRODUCT_CREDIT=0。
+
+
+## 116. 2026-10-30 — CPU数値分岐比較と適合不足仮説、17更新案のCPU確認完了・GPU未実行
+
+**現在の直接作業（10/30・17更新案を具体化、CPU確認成功／有料実行は未承認）：** 同Jupyterで学習／生成runnerとinstalled実装を確認。教師lossの単純なtokenずれは見つからず、cache有無で分岐するCPU fallbackを合成6条件で比較したところ、出力差はFP32最大2.235e-8／BF16 0、全有限（3.481980063秒）。実4B全体のcache正常性・失敗原因の証明にはしない。原rehearsal13の更新直前CEは新BOOK0.267805→0.172214／SHOP0.266574→0.197356、旧9約0.001〜0.006。最終保存重みのNLLではないが、新2の相対的な適合不足を仮説とする。保存11446641・原11messages不変で新2各4＋旧9各1＝17更新→保存／非学習reload→新2生成、意味／本人本文／cold2/2の時だけ旧9生成し全9/9を維持する有限案を実装。CPU内1.698078459秒／外2.110028306秒・exit0、元messages/encoding、112F32有限・CUDA未初期化を確認。GPU新処理／追加学習／生成／新CMEE0、前回意味／本人本文0/2と閉鎖は不変。planはPROPOSED_NOT_APPROVED、最大45分／処理按分$0.21（準備・回収・保持等別）の個別判断前。追加観測会は現2題には不要。原本回収照合済み、GPU1MiB/0％で保持、商品0／正式0/3／54.50％、candidate_ready=false、automatic_progression=false。
+
+[具体案・全CPU原本・全file責務](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/continuation17/README.md)。前回§115の保存入力照合で決定的不具合は見つからないという事実は撤回しない。今回も実装不具合を特定したとはしない。新しく直接読んだ実training.jsonlの更新直前CEと新2各2回／旧9各1回を、有限の学習配分案を比較する根拠にした。平均CEをfield局所誤り、final NLL、必要更新量の証明にはしない。各4回は予算内の有限量であり、最適値ではない。新prompt／prior表記／教師／grammar／loss重み／capは変えない。
+
+installed transformers5.19.0のmodeling_qwen3_5.py SHAaac2a1bcca88829afc6dbdf83f97155ebf64d800ee9d703af3802a9aebcfcd18を読取確認。既存chunk/recurrent fallbackをCPU合成6条件で一回比較、3.481980063秒、pretrained model load/forward/学習/生成0、CUDA未初期化。差FP32最大2.235174179e-8、BF16出力0、state最大1.788139343e-7。実4B全体・GPU・convolution/cache objectを検証しておらず、追加学習を正当化する証拠へ加算しない。root単一writer、補助のread-only source/candidate reviewは候補意見で、正式Pro/Ultra/human reviewではない。
+
+source29130e55のprepare_cpu.py f03e7f49／runner08c7bd3e／未承認planを取得・照合し、CPU非表示/offline/timeout120秒+kill5秒で一回。exit0、内1.6980784590123221秒／外2.1100283060222864秒。prepared SHA d3b3d5e3a0b41407388d0d6ee38c2d9995a079911c7d39a4cdbd42fa19ff19e1。全11messages/evalは原rehearsal13とbytes一致、新2教師+EOS2148/2424token、保存11446641の112F32全有限。既存frozenと新sourceを確認、4B load/forward/更新/生成/新CMEEは全0。CPU教師CMEE/coldは既存証拠を再利用するだけで新成功へ数えない。
+
+新案は17更新・最大2load/11生成、親2690秒+kill10秒の45分、GPU処理按分最大$0.21。**同process内のCMEE/coldはこの時間と按分に含む**。準備/回収/保持等は別。新2の意味/本文/cold2/2を満たさなければ旧9の生成をskipし一回終了。全9の回帰成功を条件にし、旧7を最低限へ戻さない。run sourceは成功exit述語、各生成SIGALRM、consumer importによる親CUDA環境変更の復元をrootが修正・読取reviewした。実GPU動作は未検証、承認待ちguardを解除せず、閉鎖旧runのretry/承認流用0。
+
+原本ZIP152969bytes、12member/11payload、SHA8eed392015d9aad7b774f751061d1002ac07d6f07e98dd741cb72c11130fc2ce。Jupyterから一回回収し全CRC/member/bytes/SHA/source2をPod外照合。元完全重みarchiveは保持し新重み0。GPUは読取1MiB/0％、稼働保持、管理console/API/Stop/restart/delete0。Renderはworkspace未選択の応答まで、選択・稼働照会・変更0。Supabaseはproject一覧のread-onlyでcocolon-project ACTIVE_HEALTHY、DB row照会/変更0。新観測会依頼0。
+
+全体00・観測学習README・file地図01Aを同じ差分へ同期。通常ModelCandidateSource/receiver/意味型/三core/API/DTO/DB/RN/Render/Supabase/依存/merge/deployの構造差分0、STRUCTURE_MAP_DELTA_NONE。primary=ADMINISTRATIVE_ONLY、TECHNICAL_CREDIT=0、PRODUCT_CREDIT=0、正式0/3、54.50％、candidate_ready=false、automatic_progression=false。追加有料一回はRule18§11.3の新しい費用・配分判断としてMash個別確認前。GPU実行は未開始。
