@@ -1,5 +1,5 @@
 {
-  "status": "MASH_EXPLICITLY_APPROVED_ONCE",
+  "status": "CLOSED_NOT_ADOPTED_NO_RETRY",
   "schema": "cocolon.continuation17.v1",
   "executor": "root Karen only; read-only support; Codex Work; formal Pro/Ultra/human acceptance not claimed",
   "predecessor_commit": "4b756ff69280913cf0c4e5a6202da2bcb3390b58",
@@ -106,7 +106,24 @@
     "user_response": "進めていいよ。",
     "scope": "One continuation17: BOOK/SHOP each4 +old9 each1=17 updates; save/nontraining reload; pair generation/CMEE/cold then old9 only if pair success; max2700s/$0.21 processing; preparation/recovery/holding etc extra. Existing runner bytes and all other approved boundaries unchanged."
   },
-  "closure": null,
+  "closure": {
+    "date_jst": "2026-10-30",
+    "source_commit": "3928b9571bc5465998c0c528d207177e212aca03",
+    "result_path": "result_20261030/README.md",
+    "updates": 17,
+    "model_loads": 2,
+    "generations": 2,
+    "new_pair_meaning": "0/2",
+    "new_pair_body": "0/2",
+    "snapshot_cold_files": 0,
+    "old9": "NOT_RUN",
+    "reason": "new_pair_failed_skip_old9_no_retry",
+    "processing_seconds": 667.2977502919966,
+    "process_cost_usd": 0.05190093613382196,
+    "new_adapter_sha256": "7fcca3ce034dfdb9162ae31c3a1bec59c8918762d3da07d58b64f8bdf1220981",
+    "library_file_id": "libfile_9514b319e18881918ed8a8b963a4fa51",
+    "retry": false
+  },
   "hypothesis": "Remaining unequal fit may improve with more complete-target exposures. Pre-update training CE is not final saved-weight NLL or causal proof; four exposures is a finite budget choice, not an established optimum.",
   "cmee_cpu_included_in_process_deadline_and_cost": true,
   "cpu_preparation": {

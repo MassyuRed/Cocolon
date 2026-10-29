@@ -5739,3 +5739,10 @@ structural_cpu/alignment_cpu/read_alignment.pyはrehearsal13の実学習教材�
 ### weekly§116 — CPU数値比較と17更新案、GPU未実行
 
 fixed_rows/continuation17/README.mdが新2の相対適合不足仮説・未承認17更新の範囲と全file責務を所有。run_continuation17.pyはrehearsal13の限定派生で、保存11446641から17更新→保存/非学習reload→新2の意味/本文/cold成功時だけ旧9の最大11生成を行う未承認runner。既存consume_fixed_rows5.read_raw/save_coldをそのまま使い、旧9全9/9を保護。prepare_cpu.pyは元11messages/encoding/17順序/112CPU tensor/sourceだけを照合、同JupyterのCPU一回は内1.698078459秒/外2.110028306秒/exit0。plan.jsonはCPU成功hashを結んだPROPOSED_NOT_APPROVED、GPU未実行。cpu_summary.json・cpu_execution.json・cpu.log/exitが一回CPU原本、kernel_cpu.jsonはCPU fallback合成6条件のみの比較結果、manifest.json/originals.zip/verification.jsonは全12member/11payloadの回収照合、proof.jpgは実画面。旧run/承認/0/2は不変、実モデル改善・cache正常性は未確認。通常source/receiver/意味型/三core/API/DB/RN責務変更0、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。
+
+
+### weekly§117 — continuation17承認済み17更新の実結果・原本保全
+
+fixed_rows/continuation17/result_20261030/README.mdが今回の全file責務、file_manifest.jsonがGitHub全path/bytes/SHA/owner、archive_manifest.jsonが完全ZIP全207payloadの元path/bytes/SHAを所有する。summary.json/content_review.mdは17更新/保存/非学習reload/新2生成の成立、両TOKEN_LIMIT・意味本文0/2・旧9NOT_RUN・一回不採用閉鎖と全raw読了の判断を所有。run/run.json・training.jsonl・after_FT-*.jsonl（2）・initial_loaded_tensors.json・reloaded_tensors.json・adapter/README.md・adapter_config.jsonは未修復出力/tokenIDs/17順序/2load/112F32/新7fcca3ceを所有。run/cmee/diagnosis.jsonは実receipt/replay/拒否判定、saved/cold/本人本文fileは0である。
+
+runtime/plan.json/runtime_cpu_plan.jsonは実承認原本/準備時未承認原本を区別、runtime/run_continuation17.py/prepare_cpu.pyは実行source、gpu_launch.json/execute_once.lockは単一起動、runtime/gpu.log・runtime/gpu.exit・runtime/gpu_elapsed.json・runtime/launcher.logは原log・exit1・外時間を所有。runtime/cpu.log・runtime/cpu.exit・runtime/cpu_execution.jsonは準備履歴、export_result.pyは終了後回収、verify_recovery.py/verification.json/post_identity.json/preservation_receipt.json/proof.jpgは208member回収/CRC・bytes・SHA/112F32/初期不変/保存ID/実画面を所有。重み本体は完全ZIP libfile_9514b319e18881918ed8a8b963a4fa51、初期11446641は既存完全ZIP保持。処理667.297750292秒/$0.051900936134按分（準備等別）、GPU稼働保持。通常source/receiver/意味型/三core/API/DTO/DB/RN/Render/Supabaseの構造差分0、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。

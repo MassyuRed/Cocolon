@@ -1,4 +1,12 @@
-# continuation17 — 未承認の一回案
+# continuation17 — 承認済み一回終了・不採用閉鎖
+
+2026-10-30 JST。Mashの「進めていいよ。」を受けて承認source3928b957を同Jupyterで一回実行しました。**17更新→保存→非学習再読込→新2生成まで完了、両TOKEN_LIMIT・意味／本人本文0/2。旧9はNOT_RUN。** 処理667.297750292秒／按分$0.051900936134（準備・回収・保持等別）、上限45分／$0.21内。current plan=CLOSED_NOT_ADOPTED_NO_RETRY、次GPU起動0。
+
+新7fcca3ceの112F32有限・全112変更、原本208member／207payload回収・照合・保存済み。GPUは稼働保持、Stop/restart/delete0。現2題の追加観測会は不要です。商品0／正式0/3／54.50％は不変。
+
+[実結果・全原本・全file責務](result_20261030/README.md)、[全raw読取と限界](result_20261030/content_review.md)、[取得・保存receipt](result_20261030/preservation_receipt.json)。実行時承認planはresult_20261030/runtime/plan.json、以下は**承認前時点の履歴**です。下段の未承認/GPU未実行は現在状態へ読み替えません。現在のrunnerは当初sourceのまま、planだけを一回閉鎖しています。
+
+## 承認前の具体案とCPU準備の記録（d2b94c365103c0bdfacd0a7de8daeae67ae727b2）
 
 2026-10-30 JST。**PROPOSED_NOT_APPROVED。GPU未実行**。閉鎖済みrehearsal13／prior_rows2／syntax2bの再開ではありません。
 

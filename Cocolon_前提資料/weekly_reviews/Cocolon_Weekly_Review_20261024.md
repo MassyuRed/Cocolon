@@ -3752,3 +3752,22 @@ source29130e55のprepare_cpu.py f03e7f49／runner08c7bd3e／未承認planを取�
 原本ZIP152969bytes、12member/11payload、SHA8eed392015d9aad7b774f751061d1002ac07d6f07e98dd741cb72c11130fc2ce。Jupyterから一回回収し全CRC/member/bytes/SHA/source2をPod外照合。元完全重みarchiveは保持し新重み0。GPUは読取1MiB/0％、稼働保持、管理console/API/Stop/restart/delete0。Renderはworkspace未選択の応答まで、選択・稼働照会・変更0。Supabaseはproject一覧のread-onlyでcocolon-project ACTIVE_HEALTHY、DB row照会/変更0。新観測会依頼0。
 
 全体00・観測学習README・file地図01Aを同じ差分へ同期。通常ModelCandidateSource/receiver/意味型/三core/API/DTO/DB/RN/Render/Supabase/依存/merge/deployの構造差分0、STRUCTURE_MAP_DELTA_NONE。primary=ADMINISTRATIVE_ONLY、TECHNICAL_CREDIT=0、PRODUCT_CREDIT=0、正式0/3、54.50％、candidate_ready=false、automatic_progression=false。追加有料一回はRule18§11.3の新しい費用・配分判断としてMash個別確認前。GPU実行は未開始。
+
+
+<a id="20261030-continuation17-result"></a>
+
+## 117. 2026-10-30 — Mash承認の17更新を一回実行、新2は両cap・不採用閉鎖、旧9未実行
+
+**現在の直接作業（10/30・承認済み17更新の一回終了、意味／本人本文0/2で不採用閉鎖）：** Mashの「進めていいよ。」を受け、承認source3928b957を同Jupyterで一回実行。保存11446641・原11messages不変、BOOK／SHOP各4＋旧9各1の17更新→保存→別の非学習reload→新2生成を完了。2load／17forward・17update／2generation、667.297750292秒（11分7.30秒）／処理按分$0.051900936134、外668.865371947秒・exit1。新7fcca3ceの112F32は全有限・全112変更。両TOKEN_LIMIT（3712／3584token、EOSなし）→既存CMEEでREJECT、意味／本人本文0/2、snapshot／cold file0、receipt replay2一致。新2条件未達で旧9はNOT_RUN、履歴FIT9/9を今回成功へ加算しない。rootは全raw8279／11124字を読了し、列・入れ子崩れ／参照連番化／裸参照・反復を確認。教師文脈CE低下を自由生成の成功や原因確定と扱わない。全原本208member／207payload・17009656bytesと新重みを一回回収、全CRC／bytes／SHA／source／plan／raw／112tensorをPod外照合し保存・metadata読戻し済み。planはCLOSED_NOT_ADOPTED_NO_RETRY、追加更新／retry／次GPU起動0。初期11446641・全frozen不変、現2題の追加観測会は不要。一般教材十分性・4B上限・cache原因は未確定。GPU1MiB／0％で稼働保持、Stop/restart/delete0。準備・回収・保持等別、商品0／正式0/3／54.50％、candidate_ready=false、automatic_progression=false。
+
+[実結果・全file地図](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/continuation17/result_20261030/README.md)、[全raw読取と判断限界](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/continuation17/result_20261030/content_review.md)。提案d2b94c365103c0bdfacd0a7de8daeae67ae727b2に対するMashの明示承認を3928b9571bc5465998c0c528d207177e212aca03へ記録して実行。承認済みplan SHAfb2e992773cdbd691e225eb8070937b204db229c2b6d28c30d7f2f3c4d511068、runner08c7bd3e、prepared d3b3d5e3、初期11446641と全182frozenを確認。一回lockを作りPID381733で親timeout2690秒＋kill10秒の上限を保った。旧閉鎖runのretryや承認流用ではない。
+
+新2の全assistant＋EOS更新直前CEはBOOK0.120671749→0.075086042→0.050904904→0.031711400、SHOP0.151684955→0.111298032→0.078695066→0.054826263。全17行のloss/勾配は有限。保存・非学習再読込は112tensorを確認、peak allocated16.361994／reserved22.785156GiB。これらは教師文脈への適合と実行成立の証拠で、最終独立NLL・自由生成成功・原因証明ではない。
+
+新rawはBOOK8279字／SHOP11124字、生成172.516962985／170.277429813秒で各180秒内、timeout0。BOOKは4列timeへclaim IDを混ぜる5列、claimの平坦化/異常入れ子、[]の文字列化、引用ずれ、後段@u2〜@u372連番中で打切り。SHOPはchar1299の裸@s0でJSON不正、引用表へrole/関係様配列が混成し、同shared_talk行14回の反復途中で打切り。これは静的所見であり、実CMEEの後段意味拒否理由へ置き換えない。実receiptは両TOKEN_LIMIT/candidate_json=null→REJECT/semantic_receipt_not_validated、meaning/body=false、replay=true、NO_ADOPTED_SNAPSHOT。cmee実在fileはdiagnosis.jsonのみ、成立本文・saved/cold0。対象0をcold成功へ数えない。旧9は0callでNOT_RUN、履歴9/9と今回の保持不明を区別する。
+
+完全ZIP SHA7cd7f4de5317f1151013413995a6132832a6aa35903037d1610b2ab39cb9baf1、保存ID libfile_9514b319e18881918ed8a8b963a4fa51。新weight SHA7fcca3ce034dfdb9162ae31c3a1bec59c8918762d3da07d58b64f8bdf1220981を含む。全run/runtime/cpuと非重みfrozen source/inputを保全し、過去frozen safetensors/base modelの除外はpost_identityに明記。初期11446641は既存完全ZIP libfile_9623b67a65588191926a1bb0a0ea5797を保持。GitHubへ小原本と全member/配置/owner索引を同期、署名付きURL0。回収による新model/forward/更新/生成/CMEE0。
+
+同process CMEEを含むGPU処理按分$0.051900936134は承認上限$0.21内、全処理667.297750292秒は45分内。外668.865371947秒。準備/回収/保持/保存/通信/税等は別で総支払額ではない。GPUは稼働保持、管理console/API/Stop/restart/delete0。今回の配分では未達として閉じ、同種有料反復・新helper・次GPU案を自動追加しない。現2題の追加観測会は依頼せず、一般教材不足や4B能力限界/cache原因は未確定。
+
+全体00・観測学習README・file地図01Aを同じ差分へ同期。通常ModelCandidateSource/receiver/意味型/三core/API/DTO/DB/RN/Render/Supabase/依存/merge/deploy構造差分0、STRUCTURE_MAP_DELTA_NONE。primary=BLOCKER_NARROWED、TECHNICAL_CREDIT=0、PRODUCT_CREDIT=0、正式0/3、54.50％、candidate_ready=false、automatic_progression=false。root単一writer/executor/judge、補助read-only、実環境Codex Work、正式Pro/Ultra/human受入れ未実施。

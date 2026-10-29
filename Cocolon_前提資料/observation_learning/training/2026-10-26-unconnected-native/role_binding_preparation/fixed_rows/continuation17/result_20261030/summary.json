@@ -1,0 +1,123 @@
+{
+  "status": "CLOSED_NOT_ADOPTED_NO_RETRY",
+  "machine_status": "STOPPED_NO_RETRY",
+  "reason": "new_pair_failed_skip_old9_no_retry",
+  "source_commit": "3928b9571bc5465998c0c528d207177e212aca03",
+  "approval_proposal_commit": "d2b94c365103c0bdfacd0a7de8daeae67ae727b2",
+  "approval_response": "進めていいよ。",
+  "model_loads": 2,
+  "training_forwards": 17,
+  "updates": 17,
+  "generations": 2,
+  "initial_adapter_sha256": "114466411f36f0eef7a2dceaec7f5190544ac8545eb6b2f6a3d0446b70f90b66",
+  "new_adapter_sha256": "7fcca3ce034dfdb9162ae31c3a1bec59c8918762d3da07d58b64f8bdf1220981",
+  "changed_tensors": 112,
+  "new_pair_meaning": "0/2",
+  "new_pair_body": "0/2",
+  "new_pair_cold": "NO_ADOPTED_SNAPSHOT; 0 eligible snapshots; not a success",
+  "old9": "NOT_RUN; historical FIT9/9 is not a current measurement",
+  "snapshots": 0,
+  "person_bodies": 0,
+  "cold_files": 0,
+  "receipt_replay_identical": "2/2; not cold snapshot recovery",
+  "cases": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "receipt_status": "TOKEN_LIMIT",
+      "decision": "REJECT",
+      "reason_code": "semantic_receipt_not_validated",
+      "meaning_adopted": false,
+      "body_available": false,
+      "cold_file_status": "NO_ADOPTED_SNAPSHOT"
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "receipt_status": "TOKEN_LIMIT",
+      "decision": "REJECT",
+      "reason_code": "semantic_receipt_not_validated",
+      "meaning_adopted": false,
+      "body_available": false,
+      "cold_file_status": "NO_ADOPTED_SNAPSHOT"
+    }
+  ],
+  "calls": [
+    {
+      "phase": "after",
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "path": "after_FT-BOOK-AFTER-ANSWER.jsonl",
+      "raw_sha256": "8af685dae4973c0522f120706f1bcaa0ae717e24ebe264b4dcf19fa2cd596ba2",
+      "adapter_sha256": "7fcca3ce034dfdb9162ae31c3a1bec59c8918762d3da07d58b64f8bdf1220981",
+      "eos_reached": false,
+      "output_tokens": 3712,
+      "seconds": 172.51696298504248,
+      "timeout_triggered": false
+    },
+    {
+      "phase": "after",
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "path": "after_FT-SHOP-AFTER-ANSWER.jsonl",
+      "raw_sha256": "3695b4baa2a92055c152e0375e5d47aab28b88641971dcc857ccdd33050105c5",
+      "adapter_sha256": "7fcca3ce034dfdb9162ae31c3a1bec59c8918762d3da07d58b64f8bdf1220981",
+      "eos_reached": false,
+      "output_tokens": 3584,
+      "seconds": 170.27742981293704,
+      "timeout_triggered": false
+    }
+  ],
+  "processing_seconds": 667.2977502919966,
+  "process_cost_usd": 0.05190093613382196,
+  "outer_seconds": 668.8653719469439,
+  "max_process_seconds": 2700,
+  "max_process_usd": 0.21,
+  "cost_basis": "historical USD0.28/h; no live rate requery; same-process CMEE included; preparation/recovery/holding/storage/network/tax extra",
+  "peak_allocated_gib": 16.36199378967285,
+  "peak_reserved_gib": 22.78515625,
+  "archive": {
+    "archive": "cocolon-cont17-weights-originals-20261030.zip",
+    "bytes": 17009656,
+    "sha256": "7cd7f4de5317f1151013413995a6132832a6aa35903037d1610b2ab39cb9baf1",
+    "members": 208,
+    "payloads": 207,
+    "all_crc_bytes_sha256_identical": true,
+    "source_plan_prepared_identical": true,
+    "completed_updates": 17,
+    "raw_calls": 2,
+    "tensors": [
+      {
+        "path": "run/adapter/adapter_model.safetensors",
+        "count": 112,
+        "dtype": "F32",
+        "all_finite": true,
+        "sha256": "7fcca3ce034dfdb9162ae31c3a1bec59c8918762d3da07d58b64f8bdf1220981"
+      }
+    ],
+    "cuda_used": false,
+    "model_loads": 0,
+    "forwards": 0,
+    "updates": 0,
+    "generations": 0,
+    "cmee_calls": 0
+  },
+  "proof_sha256": "f79ebb26667ada14f02265757cf40b9750f7c31a6db3b0dca59d24ffdda212e7",
+  "gpu_post_exit": "NVIDIA RTX A5000; 1 MiB; 0 percent; kept running",
+  "stop_restart_delete": 0,
+  "retry": false,
+  "new_gpu_run_after_closure": false,
+  "additional_observation_session_needed_for_this_pair": false,
+  "materials_general_sufficiency": "NOT_ESTABLISHED",
+  "root_raw_full_read": {
+    "BOOK_chars": 8279,
+    "SHOP_chars": 11124,
+    "formed_person_bodies_to_read": 0
+  },
+  "independent_read_only_support": true,
+  "formal_pro_ultra_human_acceptance": false,
+  "primary": "BLOCKER_NARROWED",
+  "technical_credit": 0,
+  "product_credit": 0,
+  "formal_product_acceptance": "0/3",
+  "management_percent": 54.5,
+  "candidate_ready": false,
+  "automatic_progression": false,
+  "structure_map_delta": "NONE"
+}
