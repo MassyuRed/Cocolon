@@ -1,5 +1,5 @@
 {
-  "status": "MASH_EXPLICITLY_APPROVED_ONCE_20261030",
+  "status": "CLOSED_NOT_ADOPTED_NO_RETRY",
   "purpose": "Syntax-only constrained inference comparison; no learned semantic fields supplied by grammar",
   "cpu_report_sha256": "3d21f05a0a53369bc688d6b0145c39a3b709872874039cb002ab40f7289dd563",
   "eval_inputs_sha256": "8f32141212419628092c69e43dcf3a267651c8b95b20f1ad7e98e064cb41a820",
@@ -65,5 +65,25 @@
     "pack": "/workspace/cocolon_syntax2b_pack_20261030",
     "cpu": "/workspace/cocolon_syntax2b_cpu_20261030",
     "gpu": "/workspace/cocolon_syntax2b_run_20261030"
+  },
+  "closure": {
+    "cpu_passed": true,
+    "model_loads": 1,
+    "training_updates": 0,
+    "generations": 2,
+    "full2": {
+      "meaning": 0,
+      "body": 0
+    },
+    "receipt_statuses": [
+      "TOKEN_LIMIT",
+      "TOKEN_LIMIT"
+    ],
+    "processing_seconds": 332.7894602069864,
+    "process_proration_usd": 0.025883624682765612,
+    "retry": false,
+    "next_run_authorized": false,
+    "result": "syntax2b_result_20261030/README.md",
+    "gpu_kept_running": true
   }
 }

@@ -1,0 +1,59 @@
+{
+  "status": "VERIFIED_ONCE_NOT_ADOPTED",
+  "archive": {
+    "bytes": 57520,
+    "sha256": "189ef7485c92f83d974210b6b9742dad3e5025301ff26bea78c2b555386f2043",
+    "members": 20,
+    "payloads": 19,
+    "all_crc_member_bytes_sha_match": true,
+    "download_count": 1,
+    "redownload_count": 0
+  },
+  "nested_cpu_archive": {
+    "bytes": 18725,
+    "sha256": "a9c66b88cc8bea7471df4c152a2333c6e968a7ec0b87f3a0135a9e555ee5660a",
+    "members": 9,
+    "payloads": 8,
+    "matches_separately_recovered_archive": true,
+    "all_crc_member_bytes_sha_match": true,
+    "download_count": 1,
+    "redownload_count": 0
+  },
+  "source2_sha256": {
+    "syntax2b.py": "28e78eb120f07aef0806ddb1159e8257fb83e4972515eed63ec48b33cf205dc5",
+    "run_syntax2b.py": "8dd2286850cb978d8fe2c5df59a39d1d1420db61391fafe054d56ccc6e31fb9d"
+  },
+  "sources_match_published_and_root": true,
+  "runtime_cpu_plan_sha256": "b85826de08860703629a01e8943400163d577686e66ca9c157f8cbde492c9f5e",
+  "runtime_gpu_plan_sha256": "fbe65ea0e7895e3b04e5f3a810b83772b3f173bb88b58ead22edfc5e176f7630",
+  "cpu_report_sha256": "3d21f05a0a53369bc688d6b0145c39a3b709872874039cb002ab40f7289dd563",
+  "runtime_plan_and_cpu_report_match_published": true,
+  "raw2_file_and_utf8_hash_match_run_and_receipts": true,
+  "receipt_replay_identical": 2,
+  "loaded_tensor_metadata_count": 112,
+  "input_sha256": {
+    "eval_inputs11.json": "8f32141212419628092c69e43dcf3a267651c8b95b20f1ad7e98e064cb41a820",
+    "train_messages11.jsonl": "ef2d70877eb55c9191a2600581e74bd3d51f316473655efc154b7c389cf5485e"
+  },
+  "adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "db3ed15f287924089bdcdc4b057f93f3173df8026bcf3aaaaf65557916bef519",
+    "adapter_model.safetensors": "114466411f36f0eef7a2dceaec7f5190544ac8545eb6b2f6a3d0446b70f90b66"
+  },
+  "inputs_match_before_and_github_originals": true,
+  "adapter3hash_match_before_and_approved_plan": true,
+  "frozen_pre_post_pass_reported_by_original_runner": true,
+  "canonical_run": "run/run.json",
+  "incidental_jupyter_checkpoint": "preserved historical mid-run snapshot, not a second run or final counters",
+  "cpu_executions": 1,
+  "model_loads": 1,
+  "training_updates": 0,
+  "generations": 2,
+  "cmee_phase_executions": 1,
+  "cold_targets": 0,
+  "new_weights": 0,
+  "retry": false,
+  "gpu_kept_running": true,
+  "product_credit": 0,
+  "automatic_progression": false
+}

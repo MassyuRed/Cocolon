@@ -5721,3 +5721,9 @@ fixed_rows/structural_cpuのcompare_saved.pyは保存raw4原本の一回限りCP
 fixed_rows/structural_cpuのsyntax2.pyは既存型/列だけのbyte parser・token mask・CPU一式、run_syntax2.pyはCPU成功report/hashを前提にした非学習1load/0更新/2生成runner。e22f1101で実装したが、実CPUはTokenMask内の非special追加token12個のbyte未対応でexit1。後段CPUとGPU/CMEEは未実行。両sourceは失敗時のまま保存し、plan.jsonがCLOSED_CPU_FAILED_GPU_NOT_STARTED_NO_RETRYを所有する。syntax2_proposal.mdはMashが承認した元提案の履歴、added_tokens_proposal.mdは追加token対応だけの新しい一回の未承認案で、syntax2b実装は存在しない。
 
 cpu_stop_20261030/README.mdは実結果・全file責務・限界、failure.jsonは停止metadata/12ID/source・入力・adapter hash/副作用0、cpu.log/exitは未修復trace、runtime_plan.jsonは実行時承認原本、archive_manifest.json/originals.zipは7member/6payload完全原本、verification.jsonは全CRC/bytes/SHA/source2/入力2/adapter3の照合範囲、proof.jpgはJupyter停止/GPU保持を所有する。新raw/receipt/snapshot/coldは0件で、新しい4Bの0/2へ換算しない。通常ModelCandidateSource/receiver/意味型/三core/API/DTO/DB/RN/Render/Supabase/依存/merge/deploy構造差分0、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。
+
+### weekly§114 — 追加token対応CPU全通過・構文支援2生成は両capで不採用閉鎖
+
+structural_cpu/syntax2b.pyは旧syntax2を変更せず非special追加token12個のByteLevel byte対応と6144前後連結・JSON境界検査だけを追加。run_syntax2b.pyは旧runnerの新root/plan/source参照を同期、plan2b.jsonはCPU成功report hashとMash継続指示、現在CLOSED_NOT_ADOPTED_NO_RETRYを所有する。CPU24.631755秒で全条件通過後、8842ef2bを同Jupyterで非学習1load/0更新/2生成、332.789460秒/$0.025883624683按分。両TOKEN_LIMIT/意味本文0/2、snapshot0。
+
+syntax2b_result_20261030/README.mdが全file責務、summary.json/content_review.mdが全2raw読了と閉鎖、run/raw2/loaded_tensors/cmee_diagnosisが未修復実結果、runtime_cpu_plan/runtime_authorized_planとcpu/gpu/cmee launch・elapsed・log・exitが実承認/単一起動/上限/原時間を所有。raw_reading.jsonは完全memberだけの列/field/反復計数、post_identity.json/verification.jsonは入力2/adapter3と回収同一性、cpu_originals_manifest/cpu_originals.zipとarchive_manifest/originals.zipはCPU9memberと全20memberの完全原本、proof.jpgは実Jupyter結果を所有する。途中Jupyter checkpointは最終runの根拠にしない。通常ModelCandidateSource/receiver/意味型/三core/API/DTO/DB/RN/Render/Supabase/依存/merge/deploy構造差分0、STRUCTURE_MAP_DELTA_NONE。商品0/正式0/3/54.50％、同じ有料反復・新helper・次GPU案なし。

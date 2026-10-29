@@ -3704,3 +3704,21 @@ primary=BLOCKER_NARROWED。商品0/正式0/3/54.50％。root単一writer/executo
 次案は12tokenのbyte対応と同じCPU全条件だけの修正で、fresh source/root/lockを使う新しい一回。旧失敗sourceと原本を変更せず残す。元案のCPU不成立時終了とRule18§11.3のclosed single-use reuse/retry/repair禁止を維持し、未承認・未実装・未実行。現2題の追加観測会が必要という根拠はない。
 
 primary=BLOCKER_NARROWED、TECHNICAL_CREDIT=0、PRODUCT_CREDIT=0、正式0/3、54.50％。root単一writer/executor/judge、補助read-only、実環境GPT-6 Codex Work、正式Pro/Ultra/human受入れ未実施。通常ModelCandidateSource/receiver/意味型/三core/API/DTO/DB/RN/Render/Supabase/新依存/merge/deploy/lifecycle操作0、STRUCTURE_MAP_DELTA_NONE。
+
+## 114. 2026-10-30 — 追加token対応CPU全通過後の構文支援2生成終了、両TOKEN_LIMITで不採用閉鎖
+
+**現在の直接作業（10/30・追加token対応CPU全通過／構文支援2生成は0/2・不採用閉鎖）：** Mashの直前案への継続指示に基づき、12非special追加tokenだけを新syntax2bへ対応。単独/256byte前後6144組、全教師prefix、Unicode/EOS、実LogitsProcessor、CMEE正負対照、速度をCPU全通過（構築4.123秒／内23.594秒／外24.632秒）。成功reportを結び、保存11446641を非学習1load/0更新/BOOK・SHOP各1生成の一回。処理332.789460秒/$0.025883624683按分、外334.034124秒で600秒/$0.047以内（準備/親外CMEE/回収/保持等別）。両cap3712/3584、EOSなし・完全rootなし、実receipt両TOKEN_LIMIT→REJECT、意味/本人本文0/2、replay2一致、snapshot0/cold対象0。rootは全2rawを読了。BOOKはclaim1件で閉じ後段を別fieldへ置き、SHOPは任意JSON欄conflicts内で文章41回反復。型適合prefixと全文JSON/意味/本文成功を区別する。全20member/19payloadとCPU9memberを回収照合、入力/旧frozen/重み不変、新重み0、旧9再生成0。今回は不採用で一回閉鎖し、同じ有料反復・新helper・次GPU案を追加しない。追加観測会不要、GPU保持、商品0/正式0/3/54.50％・candidate_ready=false・automatic_progression=false。
+
+[実結果・全原本・責務地図](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/structural_cpu/syntax2b_result_20261030/README.md)。Mashの「『4B学習＋CMEE接続』を続けて。」を、直前の92a83d97 added_tokens_proposal.md・GPU600秒/$0.047上限に対する継続指示として受領。新source2本/planをd87fd8ecに保存・読戻し、旧syntax2の失敗source/閉鎖planは不変。実GPU承認版8842ef2bは成功CPUreport SHA3d21f05a0a53369bc688d6b0145c39a3b709872874039cb002ab40f7289dd563に結合。helper/contract/teacher値の追加0、既存grammarの任意JSON欄も狭めていない。
+
+CPUは24.631754788秒（内23.594040824、構築4.123060749）。12非special追加tokenのID/content/flagsを確認し、既存ByteLevel逆変換のexact bytesをdecoderとbackendへ単独・全256byte前後6144組で照合。文字列内許可/外拒否、元教師2146/2422token全prefix、元raw初回拒否244/407、教師外型適合、Unicode/escape/部分UTF8/EOS、実LogitsProcessor、同metadataの教師正対照2/誤引用負対照2、平均mask換算6.1642/5.9516秒を全通過。新model処理0。CPU原本9member/8payloadを一回回収し全CRC/bytes/SHA/source2/plan/reportを一致照合した。
+
+実GPUはPID380706の一回。1load/0更新/2call、各163.017517140/156.697405153秒、mask累計6.972995108/6.673568621秒、全処理332.789460207秒/$0.025883624683按分（保存外側334.034123767秒）。各180/全600秒内、timeout0、GPU exit0。両cap3712/3584、EOS/完全rootともfalse。実CMEEは既存consumerで親外CPU1.687247491秒（保存外側1.775813142秒）、両TOKEN_LIMIT→REJECT/semantic_receipt_not_validated、意味/本人本文0/2、元receipt replay2一致、採用snapshot0/cold対象0。対象0をcold成功へ換算しない。
+
+rootはBOOK11186字/SHOP8757字の全rawを読了。BOOKはc[0]をclaim1件で閉じ（教師10）、次のclaimがconflictsへ入り、core=@s0/question=引用名list、relationsの完結22行中同一行18回。SHOPはclaim12件（教師11）後、c[1]conflictsの任意JSON中へ後段の関係/更新/文章を入れ、同じ文41回、未宣言@p0参照9回。見かけの文章はc[8]proseではなく、成立本人本文0。知覚/時点/引用の取り違えや「私/あなた」も静的所見で、実CMEE拒否理由へ転記しない。現SHOP specにもBOOK用説明句があり、混入を学習記憶だけが原因とはしない。型適合prefixが保たれたことと、完了・意味配置・自然さは別。
+
+全原本20member/19payload、57520bytes、SHA189ef7485c92f83d974210b6b9742dad3e5025301ff26bea78c2b555386f2043を一回回収、全CRC/member/bytes/SHA/source/plan/report/rawとreceiptを照合。ZIP内のJupyter途中checkpointは同一開始identityの12.458秒時点の古い写しで最終状態や別runの根拠にしない。load時112tensor metadata、前後入力2/adapter3hash一致、runnerの旧frozen前後照合成功、新重み0。完全重みarchive libfile_9623b67a65588191926a1bb0a0ea5797を保持、旧9は再生成せず履歴FIT9/9。旧失敗/旧raw/旧planを再利用していない。
+
+current plan=CLOSED_NOT_ADOPTED_NO_RETRY。今回の方式は不採用。同じprompt/cap/training/grammarの有料反復や新helper・次GPU案を自動追加しない。現2題の観測会は不要、材料一般十分性や4B能力限界は未断定。GPUは終了後1MiB/0％で稼働保持、管理console/API・Stop/restart/delete0。準備/CPU/回収/保持等は別で、按分額を総支払額とはしない。
+
+primary=BLOCKER_NARROWED、product_credit=0、正式0/3、54.50％、candidate_ready=false、automatic_progression=false。root単一writer/executor/judge、補助read-only、実環境GPT-6 Codex Work、正式Pro/Ultra/human受入れ未実施。通常ModelCandidateSource/receiver/意味型/三core/API/DTO/DB/RN/Render/Supabase/依存/merge/deploy構造差分0、STRUCTURE_MAP_DELTA_NONE。

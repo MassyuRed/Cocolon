@@ -1,0 +1,24 @@
+{
+  "command": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "150s",
+    "python3.12",
+    "-B",
+    "/workspace/cocolon_fixedrows5_pack_20261029/consume_fixed_rows5.py",
+    "--root",
+    "/workspace/cocolon_fixedrows5_cmee_20261029",
+    "--run",
+    "/workspace/cocolon_syntax2b_run_20261030",
+    "--phase",
+    "before",
+    "--out",
+    "/workspace/cocolon_syntax2b_run_20261030/cmee"
+  ],
+  "exit_code": 0,
+  "outer_seconds": 1.7758131419541314,
+  "new_model_calls": 0,
+  "training_updates": 0,
+  "retry": false
+}

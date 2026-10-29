@@ -1,6 +1,6 @@
 # 保存raw構造照合・構文制約方式の現在地
 
-**2026-10-30最新：** Mash承認後にsyntax2.py/run_syntax2.pyを実装したが、実tokenizerの非special追加token12個のbyte対応不足でCPU一回がexit1。後段CPU/GPU/CMEEは未実行、model load/forward/更新/生成0で閉鎖。華恋の実装不足で、新しい4B意味成績ではない。[停止結果・原本・全file責務](cpu_stop_20261030/README.md)を現在の実結果とする。[追加token対応の次案](added_tokens_proposal.md)は新しい一回の未承認提案。旧失敗source不変、再CPU/修正/GPUは行っていない。
+**2026-10-30最新：** Mashの継続指示に基づくsyntax2bの一回が終了。12token対応CPUは全条件通過したが、非学習1load/0更新/2生成は両cap・EOSなし、CMEE意味/本人本文0/2で不採用閉鎖。処理332.789460秒/$0.025883624683按分、準備/回収/保持等別。[全結果・原本・全file責務](syntax2b_result_20261030/README.md)。同じ有料再試行・新helper・次GPU案なし。旧syntax2の[CPU停止](cpu_stop_20261030/README.md)は履歴として不変。
 
 ## 以下は先行§112の保存raw比較記録
 
