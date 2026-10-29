@@ -1,5 +1,5 @@
 {
-  "status": "PROPOSED_NOT_APPROVED_NOT_EXECUTED",
+  "status": "MASH_EXPLICITLY_APPROVED_ONCE",
   "purpose": "Two existing output-shape descriptions made consistent; isolate prompt effect with no training.",
   "execution_owner": "Karen root only; helper read-only; actual Codex Work, formal Pro/Ultra not asserted",
   "cpu_report_path": "/workspace/cocolon_shape2_cpu_20261029/cpu_check.json",
@@ -56,5 +56,10 @@
   "retry": false,
   "automatic_progression": false,
   "candidate_ready": false,
-  "product_credit": 0
+  "product_credit": 0,
+  "approval": {
+    "mash": "進めていいよ。",
+    "proposal_commit": "fcdfd21134d1654392281c2744a8345f922c69b7",
+    "scope": "追加学習なし・元f493の非学習1load・BOOK/SHOP各1生成→CMEE確認、最大600秒/処理按分$0.047、準備/回収/保持等別、一回のみ"
+  }
 }
