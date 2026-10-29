@@ -1,5 +1,5 @@
 {
-  "status": "PROPOSED_NOT_APPROVED_NOT_EXECUTED",
+  "status": "MASH_EXPLICITLY_APPROVED_ONCE",
   "purpose": "Test only model-facing prior syntax alignment on the saved rehearsal13 weights; no training",
   "cpu_report_sha256": "13e6c81ba43616d47922c82e5f897842a933714ec7a17a7993f44841296c81ad",
   "eval_inputs_sha256": "8f32141212419628092c69e43dcf3a267651c8b95b20f1ad7e98e064cb41a820",
@@ -50,5 +50,12 @@
   "old9": "Inputs and weights unchanged; old9 is not regenerated and historical FIT9/9 is not counted as a new result.",
   "product_credit": 0,
   "candidate_ready": false,
-  "automatic_progression": false
+  "automatic_progression": false,
+  "approval": {
+    "by": "Mash",
+    "statement": "進めていいよ。",
+    "proposal_commit": "5c21326cf80be2c04c9ece3b9474bb0105a7532f",
+    "scope": "追加学習なし・保存済み11446641でBOOK/SHOP各1生成→既存CMEE・成立snapshot保存再読、最大600秒・処理按分$0.047、準備/親外CPU/回収/保持等別、retry/次runなし",
+    "date_jst": "2026-10-29"
+  }
 }
