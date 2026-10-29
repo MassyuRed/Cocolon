@@ -1,7 +1,7 @@
 {
-  "status": "CPU_IMPLEMENTATION_APPROVED_GPU_CONDITIONAL",
+  "status": "MASH_EXPLICITLY_APPROVED_ONCE_20261030",
   "purpose": "Syntax-only constrained inference comparison; no learned semantic fields supplied by grammar",
-  "cpu_report_sha256": null,
+  "cpu_report_sha256": "3d21f05a0a53369bc688d6b0145c39a3b709872874039cb002ab40f7289dd563",
   "eval_inputs_sha256": "8f32141212419628092c69e43dcf3a267651c8b95b20f1ad7e98e064cb41a820",
   "runner_sha256": "8dd2286850cb978d8fe2c5df59a39d1d1420db61391fafe054d56ccc6e31fb9d",
   "model": "Qwen/Qwen3.5-4B",
