@@ -5684,4 +5684,4 @@ external_manifestの`run/・cmee/・support/・source/`等は最終ZIP内の元p
 | API `ai/tests/test_cmee_fixed_rows_reference_wire.py`（新） | standard unittest5（形/型/名前/strict JSON/非補完/限定/finish/receipt）、subtestを加算しない |
 | fixed_rows `execution/run_fixed_rows5.py・consume_fixed_rows5.py・runtime_authorized_plan.json・current_api_source_manifest.json` | 承認済みbefore2→未達時だけ5更新/save/no-grad reload/after11、CPU/actualraw/meaning/body/cold/replay/旧7個別維持の限定実行・identity。通常アプリ入口を有効化しない |
 
-新formatの受領構造だけの差分。API c920f81a・source c6ef6555、CPU教師2/旧9全outcome一致、実GPU結果は未確定。01B/C・国家event/保存・公開API/DB/RN/Render/Supabaseの責務差分0。STRUCTURE_MAP_DELTA_PRESENT、商品0/正式0/3/54.50％。
+新formatの受領構造だけの差分。API c920f81a・source c6ef6555、CPU教師2/旧9全outcome一致、実GPUはBOOK/SHOP0/2・旧9=6/9、椅子01訂正を失い新重み不採用で終了、全13rawと成立6本文/cold/replay確認・原本回収済み。後続API7acff074は現identity fixture同期だけ。01B/C・国家event/保存・公開API/DB/RN/Render/Supabaseの責務差分0。STRUCTURE_MAP_DELTA_PRESENT、商品0/正式0/3/54.50％。
