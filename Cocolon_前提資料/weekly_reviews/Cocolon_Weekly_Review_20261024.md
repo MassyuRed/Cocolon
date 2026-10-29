@@ -3677,3 +3677,14 @@ BOOKは履歴rehearsal13のEOS2371/INVALID_FORMATから今回3712cap/TOKEN_LIMIT
 全202member/201payloadのZIP2829165bytes、SHAb69f7cb0b9c6e47a120491d4068aeebb0c6bf58ebd52f5bc1049884cd9d34015を全CRC/member/bytes/SHAで照合し、libfile_bcb2caa7fdb481918c4a590df598d5e5へ保存成功・identity適用済み。173非重みfrozenは前回原本と全一致、旧3重みを合わせ全176不変、使用11446641含む4完全重みは既存libfile_9623b67a65588191926a1bb0a0ea5797の60053438bytes/248member archiveに同一bytes/SHAで保全済み。全112F32/name/shape/normは前回保存再読込と同一。base/optimizer/RNGの厳密途中再開は称さない。Download API失敗と実file到着を区別し再download0。
 
 一回はCLOSED_NOT_ADOPTED_NO_RETRYで終了。現2題の材料と正しい教師はあり追加観測会不要、次のCPU検討は階層/引用/更新/本人本文の教示対応へ戻る。有料再実行・追加更新・上限引上げ・受領緩和は自動で進めない。通常ModelCandidateSource/receiver/native意味型/三core/公開API/DB/RN/Render/Supabase・新依存・merge/deploy/lifecycle操作0、GPU保持。STRUCTURE_MAP_DELTA_NONE、primary=BLOCKER_NARROWED、商品0/正式0/3/54.50％。root単一writer/executor/judge、補助read-only、実環境GPT-6 Codex Work、正式Pro/Ultra/human受入れ未実施。
+
+
+## 112. 2026-10-30 — 保存rawの早期階層不正・反復・spec由来コピーをCPU照合、新方式は提案
+
+**現在の直接作業（10/30・保存rawのCPU構造照合完了／構文制約方式は未承認提案）：** 同Jupyterへ直接接続、A5000 24564MiB/使用1MiB/0％と保存原本を確認。CPU0.011652405秒・モデルload/forward/更新/生成/新CMEE0で、BOOK805字/SHOP1086字までにc先頭の階層不正を確認。未宣言prior参照、BOOK同文26回/SHOP説明句129回の反復、SHOP自身のspecにBOOK用混入句があることを照合した。正解全文は現cap内であり、上限不足だけとはしない。全4input hash/全case結果をPod外でGitHub原本と一致照合・保存。前回の意味/本人本文0/2と不採用閉鎖、旧9の履歴FIT9/9は不変。次の単一案は既存JSON構文/型/列数だけの生成時token制約で、意味値・引用・ID・更新数・本文はモデルが生成する。CPU実装/成功時の非学習2生成・最大600秒/$0.047按分（準備/回収/保持等別）はnew method familyとして未承認・未実装・未実行。構文成功を意味/本文成功へ換算しない。現2題の追加観測会不要、GPU保持、商品0/正式0/3/54.50％・candidate_ready=false・automatic_progression=false。
+
+[実結果・全file責務](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/structural_cpu/README.md)／[生成時構文制約の具体提案](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/structural_cpu/syntax2_proposal.md)。同じ指示文小修正やcap増加の有料反復は行わない。別callへ分解・gold prefix・局所loss重点化の実施済み系列とも区別する。新方式は既存receiver型/列だけからtoken maskを作り、teacher/material/role_order/正解値/件数を生成時制約へ入れない。CPUで実tokenizerのbyte/Unicode/escape/複数記号/EOS/全教師prefix/教師外type-valid変異/最初の破損token/速度を確認し、不成立ならGPU0で終了する。旧SHOP154秒と180秒上限の余裕約26秒を維持し、遅延を無視して起動しない。現時点は提案だけでgrammar成功やモデル改善の実測ではない。
+
+診断source64c1111eをJupyterへ一回配置しSHA74dc5602照合、exit0。結果JSON4240bytes/SHA6d070d50を一回回収、Download API timeoutでも実file到着を確認し再download0。全4input hashと全case値はGitHubから得た無変更原本へのrootローカル読取結果と一致。BOOKの3cell time断片とSHOP同断片は期待される10cell claim行listではなく、rootのsnapshot aliasも欠落。SHOPには15memberの早期root閉鎖と後続余剰dataもある。これらは静的所見で、実CMEE拒否TOKEN_LIMITを別reasonへ改変しない。原4file不変、比較source以外の実行owner変更0、新重み0。GPU処理按分0だが保持/回収等別。
+
+primary=BLOCKER_NARROWED。商品0/正式0/3/54.50％。root単一writer/executor/judge、補助read-only、実環境GPT-6 Codex Work、正式Pro/Ultra/human受入れ未実施。通常ModelCandidateSource/receiver/native意味型/三core/API/DTO/DB/RN/Render/Supabase/新依存/merge/deploy/lifecycle0、STRUCTURE_MAP_DELTA_NONE。新methodの実装・実行はRule18 §11.3の別承認対象で、現行承認を流用しない。

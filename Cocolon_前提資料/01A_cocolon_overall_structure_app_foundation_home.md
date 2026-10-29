@@ -5710,3 +5710,8 @@ external_manifestの`run/・cmee/・support/・source/`等は最終ZIP内の元p
 ### weekly§111 — prior_rows2承認済み2生成の実結果・原本保全
 
 `prior_rows2/result_20261029/file_manifest.json`が全path/bytes/SHAの完全索引、同`README.md`が責務地図。`summary.json・content_review.md`は326.241693秒/$0.025374353895按分・意味/本文0/2・両raw全文読了と不採用閉鎖を所有。`run.json・before_FT-*.jsonl（2）・loaded_tensors.json・cmee_diagnosis.json`は未修復raw/token IDs/finish/identity/112F32・両TOKEN_LIMIT実receipt/replay2一致/snapshot0の原本。`runtime_authorized_plan.json・runtime_run_prior_rows2.py・gpu_launch.json・launch_command.txt・execute_once.lock・launch_checkpoint.json`は承認実行source943ee425/単一起動PID232075・開始前構文エラー0副作用の区別。`prior-rows2-gpu.log/exit・prior-rows2-cmee.log/exit・prior-rows2-launch.log`は原ログ。`export_prior_rows2.py・archive_manifest.json・verify_recovered.py・external_verification.json・preservation_receipt.json`は202member全原本の回収/照合/保存identityと旧完全重みarchiveへの参照。新重み0、旧9再生成0、通常receiver/意味型/三core/API/DB/RN/Render/Supabase構造差分0、STRUCTURE_MAP_DELTA_NONE。
+
+
+### weekly§112 — 保存rawのCPU構造照合と新方式の未承認提案
+
+fixed_rows/structural_cpuのcompare_saved.pyは保存raw4原本の一回限りCPU読取比較で、receiver/repair/grammar実装ではない。result.jsonは実0.011652405秒・早期c階層不正/未宣言参照/反復/spec由来句の計数、verification.jsonはGitHub全4hash/全case値一致と一回回収、jupyter_proof.jpgはCPU完了とGPU保持、README.mdは責務/結果/判断限界を所有する。syntax2_proposal.mdは既存型・列数だけの生成時制約の具体案で、syntax2.py/run_syntax2.pyは未承認・未作成、モデル0。前回0/2不採用閉鎖は不変。通常source/受領/型/三core/API/DB/RNの構造差分0、STRUCTURE_MAP_DELTA_NONE。
