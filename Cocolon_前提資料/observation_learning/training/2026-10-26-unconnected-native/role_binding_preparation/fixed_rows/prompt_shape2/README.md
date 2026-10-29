@@ -1,4 +1,6 @@
-# 指示表記2点の修正 — CPU完了、追加学習なし2生成の具体案
+# 指示表記2点の修正 — 承認済み非学習2生成終了、0/2
+
+**実結果（weekly§107）：** Mash承認後に元f493非学習1load/0更新/2生成を一回実施。両TOKEN_LIMITで意味/本人本文0/2・snapshot0、処理327.665962秒/$0.025485130397按分。元重み不変・新重み0、全原本回収済み。不採用で閉鎖し、current plan.statusはCLOSED_NOT_ADOPTED_NO_RETRY。[全実結果](result_20261029/README.md)。以下CPUと承認前案を履歴として保持する。
 
 前回のfixed_rows5は閉鎖済み。新f811は不採用、BOOK/SHOP意味・本人本文0/2、旧9は7→6/9。今回そのrunを再起動せず、元f493へ与える指示だけを調べた。華恋/rootが実行・編集・判断を担当し、補助agentはread-only。実際の環境はCodex Workであり、正式Pro/Ultra/human評価を称さない。
 
@@ -26,9 +28,9 @@ CPU31.87833088694606秒、モデルload/forward/更新/生成0。[cpu_summary.js
 
 完全CPU ZIPは201969bytes、SHA256 8888c0c696159385f67e5323be0635521fda9559421573d8f83d3a781113c411、10memberを回収・保管済み。CRCとmanifest8payloadの全長さ/SHA、manifest外のprepare sourceをcpu_check.frozenとlocal source bytesで照合した。cpu_checkには全encoded/mask/frozen・全outcome、teacher_cmeeには2saved/2coldを保持する。重みやbase modelはこのCPU ZIPに含めない。通常受領/意味型/三core/API/DB/RNの構造差分なし、STRUCTURE_MAP_DELTA_NONE。商品0/正式0/3/54.50％・candidate_ready=false。
 
-## 次の一回の具体案 — 未承認・未実行
+## 承認前の具体案 — 当時未承認・未実行
 
-この非学習2生成は前回の一回承認に含めず、別の費用確認対象とする。[plan.json](plan.json)はPROPOSED_NOT_APPROVED_NOT_EXECUTED、[runner](run_shape2.py)もこの状態では実行を拒否する。新しいGPUの契約や管理画面操作はしない。
+提案当時、この非学習2生成は前回の一回承認に含めず、別の費用確認対象とした。fcdfd211のplanはPROPOSED_NOT_APPROVED_NOT_EXECUTEDで、runnerはその状態を実行前に拒否した。その後Mashが承認し、bd2ad852でstatus/承認だけを同期した原本を使用。現在の[plan.json](plan.json)は閉鎖済みで再実行不可。新しいGPU契約や管理画面操作は行っていない。
 
 1. 同Pod vgkm402msgroiu/RTX A5000、固定Qwen3.5-4B revision851bf6e、元f493を非学習で1回だけ読む。f811は使わない。全重みrequires_grad=false・112tensor/hashを既存loaderで確認する。
 2. 修正済み入力からBOOK→SHOPを各1回、計2生成。追加学習・optimizer・新重み保存は0。greedy/非thinking、context8192、cap3712/3584、意味prefixや文法拘束・補完なし。元raw/token IDs/finish/model/base/adapter metadataを保持する。
@@ -38,6 +40,6 @@ CPU31.87833088694606秒、モデルload/forward/更新/生成0。[cpu_summary.js
 
 旧9は元f493・同一promptのため今回GPUでは再生成しない。CPUの全9不変確認と、前回f493の実7/9を区別し、新しい旧9推論の成功を主張しない。新2件は既知教師FITであり未知一般化ではない。GPUはMashの指示まで保持する。
 
-実行時はこの具体案へのMashの承認を受けてstatusを承認済みへ同期し、source commitとCPU report/eval hash、全frozen/固定依存を再確認する。OUT=/workspace/cocolon_shape2_run_20261029の排他作成が一回lockで、既存OUTを削除/再利用しない。CMEE呼出は既存consumerを使い、receiver/APIの変更は不要。
+当回はMashの承認後にstatusを同期し、source commitとCPU report/eval hash、全frozen/固定依存を再確認した。OUT=/workspace/cocolon_shape2_run_20261029の排他作成が一回lockで、既存OUTを削除/再利用しない。CMEE呼出は既存consumerを使い、receiver/APIの変更は不要。
 
-現2題の正解教師は既存材料で成立しており、追加観測会は今は不要。新材料を増やす前に、この入力不整合の影響を低費用で切り分けることを推奨する。primary outcomeはBLOCKER_NARROWED、実モデル改善・product creditは未確認。
+現2題の正解教師は既存材料で成立しており、追加観測会は今は不要。提案当時は、新材料を増やす前に入力不整合の影響を低費用で切り分けることを推奨した。その一回は0/2で終了しており、次は形式切替の教え方と旧成功保持の学習範囲をCPUで検討する。primary outcomeはBLOCKER_NARROWED。今回の実4Bは0/2であり、形式習得・商品品質の改善creditはない。

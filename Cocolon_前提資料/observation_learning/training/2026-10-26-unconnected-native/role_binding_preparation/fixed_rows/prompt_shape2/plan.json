@@ -1,5 +1,5 @@
 {
-  "status": "MASH_EXPLICITLY_APPROVED_ONCE",
+  "status": "CLOSED_NOT_ADOPTED_NO_RETRY",
   "purpose": "Two existing output-shape descriptions made consistent; isolate prompt effect with no training.",
   "execution_owner": "Karen root only; helper read-only; actual Codex Work, formal Pro/Ultra not asserted",
   "cpu_report_path": "/workspace/cocolon_shape2_cpu_20261029/cpu_check.json",
@@ -61,5 +61,17 @@
     "mash": "進めていいよ。",
     "proposal_commit": "fcdfd21134d1654392281c2744a8345f922c69b7",
     "scope": "追加学習なし・元f493の非学習1load・BOOK/SHOP各1生成→CMEE確認、最大600秒/処理按分$0.047、準備/回収/保持等別、一回のみ"
+  },
+  "closure": {
+    "execution_count": 1,
+    "source_commit": "bd2ad8529e8e415e388bfc47f897b790f13f7ebe",
+    "summary": "result_20261029/summary.json",
+    "model_loads": 1,
+    "updates": 0,
+    "generations": 2,
+    "meaning": 0,
+    "body": 0,
+    "retry": false,
+    "automatic_progression": false
   }
 }

@@ -1,6 +1,6 @@
-# 固定列配列による全文候補 — 前回不採用・指示表記修正のCPU完了
+# 固定列配列による全文候補 — 指示修正後も0/2、一回終了
 
-**現在（weekly§106）：** 前回の一回は新重み不採用で閉鎖。root/subjectの指示表記2点だけを揃えた派生入力のCPU検査を完了した。実4Bの効果は未確認。[f493・追加学習なし2生成の具体案](prompt_shape2/README.md)は最大600秒/$0.047、未承認・未実行。以下§104/105は各時点の履歴。
+**現在（weekly§107）：** 指示のroot/subject表示2点を揃えたCPU確認後、Mash承認のf493非学習1load/0更新/2生成を一回完了。両cap未完・TOKEN_LIMITで意味/本人本文0/2、327.665962秒/$0.025485130397按分。元重み不変・新重み0、全205member原本を回収/照合/保管し不採用で閉鎖。[実結果](prompt_shape2/result_20261029/README.md)。retry/追加有料試行なし、GPU保持。以下§104〜106は各時点の履歴。
 
 2026-10-29 JST。root華恋が唯一のwriter/executor、独立補助はread-only。実環境はGPT-6 Codex Workであり、正式Pro/Ultra又はhuman受入れとは称しない。
 
@@ -45,7 +45,7 @@ final_v2のsource SHA256は `df650fd82663ac1c72954cc640ace9c53de71a3e9fd46155279
 
 ## 提案時の履歴 — §104時点では未承認・未実装・未実行
 
-詳細条件は[fixed_rows5.plan.json](fixed_rows5.plan.json)。以下は提案当時の記録で、承認後currentは末尾execution節を優先する。当時の「続けて」は既に固定されたCPU比較を進める指示として使用し、新しい受領形式・GPU試行まで承認済みとは記録しない。
+詳細条件は[fixed_rows5.plan.json](fixed_rows5.plan.json)。以下は提案当時の記録で、当時の承認後履歴は末尾execution節、最新の結果は冒頭weekly§107を優先する。当時の「続けて」は既に固定されたCPU比較を進める指示として使用し、新しい受領形式・GPU試行まで承認済みとは記録しない。
 
 ### 新形式の受領範囲
 
