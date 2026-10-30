@@ -3982,3 +3982,30 @@ rootが同19再利用CPU/38runner/launcher/exporter/未承認proposalを実装�
 原本ZIP198735bytes/15member（14payload＋manifest）SHAf5dd08d65af99a24a437af3b77a315ec815fd725b2b799b378b585eb81df4c32をJupyterから直接回収。全CRC/bytes/SHA/実source/旧19とのencoding・全messages・38順をPod外照合、補助のread-only読取とも不一致なし。全15memberをGitHubへ原bytes展開、実command3/verificationを追加。CPU原本resultはmodel改善/新CMEE証拠ではない。A5000 1MiB/0％で保持、Runpod管理console/API/Stop/restart/delete0。
 
 [具体案・CPU全原本・全file地図](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/fit38/README.md)。fit38のproposal/prepare/runner/現prompt/launcher/exportとresult全20fileの責務は入口に記載。全体00/観測入口/01Aを同単位更新。前回§129の新2意味/本人本文0/2・saved/cold0・旧9NOT_RUN/不採用閉鎖と新b5e完全保全は維持し、閉鎖承認を再利用しない。現2題の基本不成立に追加観測会不要。通常source/受信/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy責務差分0、STRUCTURE_MAP_DELTA_NONE。実環境Codex Workで正式Pro/Ultra/human authorityを申告しない。primary=BLOCKER_NARROWED（静的loss窓対応/最終fit未測定の切分）、technical/product credit0、正式0/3・54.50％・candidate_ready/automatic_progression=false。新paid envelopeはrule18§11.3の個別Mash承認対象として、今回の準備結果と具体案を提示する。
+
+<a id="20261030-fit38-once-result"></a>
+## 131. Mash承認のfit38一回を完了 — 38更新・3測定・保存再読、実生成は新2件不成立
+
+保存b5eの実験用初期値、38更新・適合測定・保存再読→新2生成→CMEE/保存再読→全成功時のみ旧9、最大45分/前回単価の処理按分$0.21（準備/回収/保持等別）・再試行なしに、Mashが「進めていいよ」と明示承認。source5a333d68ed136483ae910a040a7fce4308ff3f13/proposal SHA51573dba/実承認SHA5ea2d942へ結び、同Jupyterへ直接接続して一回実行した。全体全文・恒久incident・用途・全app設計/全file地図・§130を先に確認。root単一writer/executor/judge、補助read-only、実環境Codex Workで正式Pro/Ultra/human authorityを申告しない。
+
+同19行/encoded/教師/比率/順/現prompt/完全assistant+EOS CE/112LoRA/AdamW5e-5/clip1/seed20261024を維持し2周38更新。training forward/optimizer started=completed=38、全38有限loss/gradient・指定順。開始/19更新後/38保存非学習reload後の同19行NLLを各1回、teacher forward started=completed=57、model load2。測定中非学習/初期中間後train mode復元/最終frozen evalの既存code条件を通り、全57row/count/hash/label tokenを原本照合。新ad8b89e8974df9bfe7e804b8f67bbaac59e6cbb37042c3254fb58ffb64230d0aは112有限F32/3,833,856params、全112tensorがb5eから変化し、保存再読/生成後不変。
+
+| token加重NLL | 開始前 | 19更新後 | 38更新・保存再読後 |
+| --- | ---: | ---: | ---: |
+| 新10区間 | 0.0968247931 | 0.0860945479 | 0.0560160420 |
+| 旧9件 | 0.0010858869 | 0.0008432690 | 0.0011822046 |
+| 全19行 | 0.0230753714 | 0.0204239364 | 0.0137765392 |
+
+S5はBOOK0.576638→0.508039→0.338296、SHOP0.757854→0.692507→0.482219。ただしBOOK S3は0.003879→0.001145→0.011822で最終悪化。旧9にも悪化があり、平均fit改善を全行改善や自由生成/意味/本人本文/商品品質の成功にしない。旧9の実生成維持は未確認。
+
+実生成はBOOK3/SHOP5の8call、7EOS・SHOP S5のみ512token length/EOSなし。rootが全8rawを全文読んで補助の独立静的照合と一致。両S1は教師JSON値完全一致、引用17/18を全保持し全35literal/source/field一致。BOOK S2とSHOP S3も教師JSON値一致。BOOK S3は第8関係/returned_concession ID重複を余分に生成し、schema前のroot閉じでstrict Extra data（line1 column1128）。SHOP S2はsubject型は直ったが、否定2行の完全否定scopeと後半4claimの開店時点expr/answer_joy時制を落とす。S4は更新4/6/7のrelation replacement/対応根拠を欠き、S5は自然な日本語proseでなくADD/update行を反復・未escape文字列化、先頭付近から既に構文不正。cap延長だけで解決する根拠はない。
+
+全8records/raw/messagesと自分の実前段chainを照合。BOOK S1/S2/S3・SHOP S1/S2の実messagesは学習時gold prefixと完全一致。従ってBOOK S3とSHOP S2の初破綻は、悪い実前段だけでは説明できない。SHOP後段にはgold前段との差がある。この境界を保ち、失敗rawを補修/教師化せず、受信/意味型/合否を緩めない。
+
+両件stage条件前で停止し、13path結合/新CMEE receipt・採用・保存/cold呼出し0。実受信が却下したとはしない。意味/本人本文0/2・saved/cold0、旧9は新2全成功条件不成立によるNOT_RUN。最終STOPPED_NOT_ADOPTED_NO_RETRY、reason=new_pair_failed_skip_old9_no_retry、exit1。再試行/延長/追加epoch/再生成/consumer再呼出し/次run0。
+
+処理928.9340299230535秒/$0.07225042454957083按分、親外930.2798354179831秒。45分/$0.21内、前回$0.28/hを使用し現在単価再照会なし、準備/回収/保持/保存/通信/税等別。2026-10-30 15:41:54.808〜15:57:23.743 JST。終了後266frozenと元b5e/config不変、A5000 1MiB/0％で稼働保持。Runpod管理console/API/Stop/restart/delete0。
+
+Jupyterから全原本56member/55payload/14631408bytes/SHA3916e2e72b1ea8e1bd4261932362ffd4f37838a292c3a42aebf224297589302aを直接回収しCRC/全bytes/SHA/実source/承認/38順/3測定/全8chainをPod外照合。[追加重みZIP](https://chatgpt.com/library?file_id=libfile_e2b0cd55d6c08191ba3a9ab1d6da4386&account_id=personal)4member/14201522bytes/SHA06c25a9918ade9a14bb06bb03b4b5e37dbd32a119ebd49bbba8b0d8c5ccb2535へ新adapter完全bytesを保持（元4B全重み/optimizer-RNG状態は含まない）。他の元55memberをGitHubへ原bytes展開し、summary/content_review/chain/verification/重み参照/実command写しを追加。[全実結果・全64file地図](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/fit38/execution_20261030/README.md)。runtime承認原本はSHA5ea2d942のまま、上位approved_planだけ消費済み/不採用閉鎖として再利用を禁止。
+
+全体00/観測入口/01Aを同単位更新。両S1完全引用/BOOK S2の局所改善は確認、後段構造・否定/時間scope・更新根拠・本人本文は未成立。現2題の正しい教師は既存で、今回の基本不成立を補う追加観測会不要。新ad8bを製品/次初期値へ自動採用せず、新しい有料案へ自動進行しない。通常source/receiver/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy責務差分0、STRUCTURE_MAP_DELTA_NONE。primary=BLOCKER_NARROWED（両S1/BOOK S2一致、同gold prefixでも後段崩れ）、technical/product credit0・正式0/3・54.50％・candidate_ready/automatic_progression=false。

@@ -1,0 +1,283 @@
+{
+  "archive_bytes": 14631408,
+  "archive_sha256": "3916e2e72b1ea8e1bd4261932362ffd4f37838a292c3a42aebf224297589302a",
+  "members": 56,
+  "verified_payloads": 55,
+  "status": "STOPPED_NOT_ADOPTED_NO_RETRY",
+  "reason": "new_pair_failed_skip_old9_no_retry",
+  "updates": 38,
+  "loads": 2,
+  "generations": 8,
+  "teacher_forwards": 57,
+  "nll": [
+    {
+      "phase": "before_updates",
+      "updates": 0,
+      "rows": 19,
+      "weighted_all": 0.023075371382822476,
+      "weighted_new10": 0.09682479306221779,
+      "weighted_old9": 0.0010858868564065723,
+      "new_rows": [
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage1",
+          "loss_tokens": 492,
+          "nll": 0.022342879325151443
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage1",
+          "loss_tokens": 523,
+          "nll": 0.023360617458820343
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage2",
+          "loss_tokens": 899,
+          "nll": 0.012640080414712429
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage2",
+          "loss_tokens": 1094,
+          "nll": 0.021489497274160385
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage3",
+          "loss_tokens": 283,
+          "nll": 0.0038787927478551865
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage3",
+          "loss_tokens": 236,
+          "nll": 0.009513058699667454
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage4",
+          "loss_tokens": 267,
+          "nll": 0.0643913745880127
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage4",
+          "loss_tokens": 291,
+          "nll": 0.06072299927473068
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage5",
+          "loss_tokens": 220,
+          "nll": 0.5766382217407227
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage5",
+          "loss_tokens": 293,
+          "nll": 0.7578535079956055
+        }
+      ]
+    },
+    {
+      "phase": "after19_updates",
+      "updates": 19,
+      "rows": 19,
+      "weighted_all": 0.020423936415274808,
+      "weighted_new10": 0.08609454790516115,
+      "weighted_old9": 0.0008432690376405824,
+      "new_rows": [
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage1",
+          "loss_tokens": 492,
+          "nll": 0.03513539582490921
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage1",
+          "loss_tokens": 523,
+          "nll": 0.013523264788091183
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage2",
+          "loss_tokens": 899,
+          "nll": 0.007926972582936287
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage2",
+          "loss_tokens": 1094,
+          "nll": 0.01738789491355419
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage3",
+          "loss_tokens": 283,
+          "nll": 0.0011452015023678541
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage3",
+          "loss_tokens": 236,
+          "nll": 0.031879205256700516
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage4",
+          "loss_tokens": 267,
+          "nll": 0.03757905960083008
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage4",
+          "loss_tokens": 291,
+          "nll": 0.04398727789521217
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage5",
+          "loss_tokens": 220,
+          "nll": 0.508039116859436
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage5",
+          "loss_tokens": 293,
+          "nll": 0.6925073266029358
+        }
+      ]
+    },
+    {
+      "phase": "after38_saved_reload",
+      "updates": 38,
+      "rows": 19,
+      "weighted_all": 0.01377653917164203,
+      "weighted_new10": 0.05601604195714131,
+      "weighted_old9": 0.0011822045754598294,
+      "new_rows": [
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage1",
+          "loss_tokens": 492,
+          "nll": 0.011979983188211918
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage1",
+          "loss_tokens": 523,
+          "nll": 0.009299810975790024
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage2",
+          "loss_tokens": 899,
+          "nll": 0.0029623324517160654
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage2",
+          "loss_tokens": 1094,
+          "nll": 0.009248998947441578
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage3",
+          "loss_tokens": 283,
+          "nll": 0.011821628548204899
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage3",
+          "loss_tokens": 236,
+          "nll": 0.006177783943712711
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage4",
+          "loss_tokens": 267,
+          "nll": 0.024618100374937057
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage4",
+          "loss_tokens": 291,
+          "nll": 0.023816373199224472
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage5",
+          "loss_tokens": 220,
+          "nll": 0.3382960259914398
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage5",
+          "loss_tokens": 293,
+          "nll": 0.4822186529636383
+        }
+      ]
+    }
+  ],
+  "raws": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER/stage1",
+      "input_tokens": 4668,
+      "output_tokens": 493,
+      "eos_reached": true,
+      "finish_reason": "stop",
+      "seconds": 22.69108951301314
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER/stage2",
+      "input_tokens": 4844,
+      "output_tokens": 900,
+      "eos_reached": true,
+      "finish_reason": "stop",
+      "seconds": 40.580393103999086
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER/stage3",
+      "input_tokens": 5686,
+      "output_tokens": 326,
+      "eos_reached": true,
+      "finish_reason": "stop",
+      "seconds": 15.774687369936146
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage1",
+      "input_tokens": 4825,
+      "output_tokens": 524,
+      "eos_reached": true,
+      "finish_reason": "stop",
+      "seconds": 23.73563208198175
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage2",
+      "input_tokens": 5027,
+      "output_tokens": 1079,
+      "eos_reached": true,
+      "finish_reason": "stop",
+      "seconds": 47.904029197990894
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage3",
+      "input_tokens": 6048,
+      "output_tokens": 237,
+      "eos_reached": true,
+      "finish_reason": "stop",
+      "seconds": 11.57049064594321
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage4",
+      "input_tokens": 6266,
+      "output_tokens": 263,
+      "eos_reached": true,
+      "finish_reason": "stop",
+      "seconds": 12.724580348003656
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage5",
+      "input_tokens": 6560,
+      "output_tokens": 512,
+      "eos_reached": false,
+      "finish_reason": "length",
+      "seconds": 23.45707672892604
+    }
+  ],
+  "tensors": {
+    "count": 112,
+    "parameters": 3833856,
+    "dtype": "F32",
+    "all_finite": true,
+    "changed": 112,
+    "initial_sha256": "b5e7936d5a716dd4aba5f953722c2fb96b09ce9a20f50df6a36b983b5e8bb3ab",
+    "final_sha256": "ad8b89e8974df9bfe7e804b8f67bbaac59e6cbb37042c3254fb58ffb64230d0a"
+  },
+  "post_identity": {
+    "frozen_files": 266,
+    "all_frozen_bytes_unchanged": true,
+    "changed_paths": [],
+    "initial_adapter_sha256": "b5e7936d5a716dd4aba5f953722c2fb96b09ce9a20f50df6a36b983b5e8bb3ab",
+    "initial_config_sha256": "8fb59378b4c6c3d6abf59227a6679804fd354b9a0aa10b9ec9e01788753dc40c",
+    "gpu_read_only": "NVIDIA RTX A5000, 1 MiB, 0 %",
+    "model_rerun": false,
+    "retry": false
+  },
+  "processing_seconds": 928.9340299230535,
+  "process_cost_usd": 0.07225042454957083,
+  "product_credit": 0,
+  "automatic_progression": false
+}

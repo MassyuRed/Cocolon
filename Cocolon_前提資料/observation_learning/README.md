@@ -1,14 +1,16 @@
 # Mashの観測技術を継承するための記録
 
-**最新GPU読取確認（2026-10-30 JST）：** 同Jupyter/Pod vgkm402msgroiu/RTX A5000、CPU準備後1MiB/0％で稼働保持。266frozenと保存b5e不変。今回model/forward/学習/生成/新CMEE0。直前有料一回は491.35681426001247秒/$0.03821664110911208按分（準備等別）で不採用閉鎖済み。Stop/restart/delete/Runpod管理画面/API0。
+**最新GPU読取確認（2026-10-30 JST）：** 同Jupyter/Pod vgkm402msgroiu/RTX A5000、fit38終了・原本回収後1MiB/0％で稼働保持。266frozenと実験初期b5e/config不変。Stop/restart/delete/Runpod管理画面/API0。
 
-**現在の直接作業（10/30・同19行×2周のCPU準備済み／有料実行未承認）：** 最新weekly§129と全7raw/教師/学習sourceを照合し、指示と教師のrow矛盾、EOS/mask/先行logitを含むloss窓の静的不具合、未学習tensor/旧重み誤再読は見つからない。Jupyterの実installed transformers5.19.0をstdlibだけで読み、model SHAaac2a1bc/loss SHA83db16b2が旧回収版と一致。数値的full/tailやbackward同値は今回未試験。
+**現在の直接作業（10/30・fit38一回完了／不採用閉鎖）：** Mashの明示承認をsource5a333d68/proposal51573dba/実承認SHA5ea2d942へ結び、保存b5eを隔離実験初期値として同19行×2＝38更新、0/19/38保存非学習再読後の各19行NLL＝57forward、2load、新2の実生成8callを一回実行。38有限loss/gradient、112有限F32/全112変更、新ad8b89e8の保存再読/生成後不変を確認。
 
-各stepの記録lossは更新前・異なる途中重みの値で、最終重みの全19行適合は未測定。次の未承認案は、不採用b5eを隔離実験初期値にのみ使い、同19行・順・比率・教師/指示/完全CE/optimizerを保った2周＝38更新とし、開始・19更新後・保存非学習再読後に同19行のNLLを測る（最大57非学習forward）。教師条件NLLを新しい合否基準にせず、最後の新2実前段生成→既存CMEE/cold→全成功時だけ旧9を維持する。最大45分・前回$0.28/hで処理按分$0.21、準備/回収/保持等別・一回限り/再試行なし。初期値用途を含む新承認なしではmodel load前に止まる。
+新10区間token加重NLLは0.0968247931→0.0860945479→0.0560160420へ下がり、両S1の17/18引用とBOOK S2は教師JSON値に完全一致した。一方BOOK S3はExtra dataのJSON不正、SHOP S5は更新行反復/日本語本人本文なし・512token length/EOSなしで不成立。SHOP S2の否定/時点とS4の更新根拠も残る。新意味/本人本文0/2、保存/cold0、13path結合/新CMEE呼出し0、旧9は条件不成立でNOT_RUN。実CMEEの却下や旧9維持成功とはしない。
 
-source fbab342bのstdlib CPU一回は0.371018065023236秒・親0.46587808802723885秒・exit0。元encoded19/labels/全messages/教師/EOS/mask/counts/evalを不変継承し、各ID2回/38順と19loss窓・266不変を確認。torch未import、model/forward/学習/生成/新CMEE0。全15member/198735bytes/SHAf5dd08d65af99a24a437af3b77a315ec815fd725b2b799b378b585eb81df4c32を回収しCRC/全bytes/SHA/source/encodingを照合。新prepared60c17f32、proposal51573dba。失敗した実前段へ欠けたquoteを参照する元教師をそのまま付ける方法や、S5だけの反復・追加promptは採らない。2周で成功する根拠は未確認。
+全8rawをrootが全文読み、独立静的照合と一致。実chainは全8件で自分の実前段と一致。BOOK S3とSHOP S2はgold前段を含む学習時promptと完全一致しており、初破綻を悪い実前段だけでは説明できない。最終S5 NLLはBOOK0.338296/SHOP0.482219。BOOK S3と旧9加重NLL（0.001086→0.000843→0.001182）には悪化もあり、平均fit改善を自由生成/商品品質へ換算しない。
 
-[38更新案・実CPU原本・全file地図](training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/fit38/README.md)。前回aligned19の新2意味/本人本文0/2・saved/cold0・旧9NOT_RUN/不採用閉鎖は保持し、閉鎖承認を再利用しない。今回の基本不成立に追加観測会不要。通常source/受信/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy責務差分0、STRUCTURE_MAP_DELTA_NONE。商品0・正式0/3・54.50％・candidate_ready/automatic_progression=false。最新weekly§130。
+処理928.9340299230535秒/$0.07225042454957083按分、親外930.2798354179831秒/exit1。45分/$0.21内、前回$0.28/hを使用・現在単価未照会、準備/回収/保持/保存/通信/税等別。全56member/14631408bytes/SHA3916e2e7を直接回収してCRC/全bytes/SHAをPod外照合。新ad8b追加重みは完全保存、元4B全重みは含まない。
+
+[38更新・3測定・全8rawの実結果と全file地図](training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/fit38/execution_20261030/README.md)。今回承認は消費済み/不採用閉鎖、再試行/補修/上限延長/追加周回/次run/新初期値採用へ自動進行0。現2題の正しい教師は既存で、基本不成立を補う追加観測会は不要。通常source/受信/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy責務差分0、STRUCTURE_MAP_DELTA_NONE。商品0・正式0/3・54.50％・candidate_ready/automatic_progression=false。最新weekly§131。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 

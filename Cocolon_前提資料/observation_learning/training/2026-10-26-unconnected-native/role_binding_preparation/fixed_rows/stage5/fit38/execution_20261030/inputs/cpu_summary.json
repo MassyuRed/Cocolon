@@ -1,0 +1,191 @@
+{
+  "status": "CPU_FIT38_READY_NO_MODEL",
+  "seconds": 0.371018065023236,
+  "source_sha256": {
+    "prepare_fit38.py": "765bf6ee0c5ff430d85ba9d93d3e8d7d0272b8f9ab50167f01f3ca0b424f409f",
+    "run_fit38_once.py": "8a5ce9f51c5497f091abaf7874af9d9fb15e374137c4baa19767d2db1dad75b6",
+    "prompt_source_index.py": "66f28a40ca03611b02412d8c1208325dca5534760bf81fbcd2740a069e0aad96",
+    "launch_fit38_once.py": "c5fbc32be6417ffd65d4439a5c59fa995763cc47c9057f5cfa2bc52db145b6e9",
+    "export_fit38.py": "425c91a27e3f79d1c1b2da1bb20615baa96b125ade6773f2cd7b3a0a8e748596"
+  },
+  "proposal_sha256": "51573dba7e31054f7b97258295293d120e34b7e57719284187b31b6fc61e4d4d",
+  "prepared_sha256": "60c17f3260cbe1c3a04cb2622d42eb03b68046b5f640dedf32d007d729f24548",
+  "train19_sha256": "57292ff2e058dc0d6cc024e63fe5d146c89069b8a4ea26c8627ba75170fca6d7",
+  "rows": 19,
+  "epochs": 2,
+  "scheduled_updates": 38,
+  "max_teacher_evaluation_forwards": 57,
+  "encoded19_unchanged": true,
+  "messages_targets_eos_masks_unchanged": true,
+  "old9_rows_encoded_and_frequency_ratio_unchanged": true,
+  "windows": [
+    {
+      "id": "FT-BOOK-AFTER-ANSWER/stage1",
+      "first_target_index": 4668,
+      "loss_start": 4667,
+      "logit_positions": 493,
+      "supervised_tokens": 492,
+      "complete_original_target_and_eos_retained": true
+    },
+    {
+      "id": "FT-SHOP-AFTER-ANSWER/stage1",
+      "first_target_index": 4825,
+      "loss_start": 4824,
+      "logit_positions": 524,
+      "supervised_tokens": 523,
+      "complete_original_target_and_eos_retained": true
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "first_target_index": 1750,
+      "loss_start": 1749,
+      "logit_positions": 1332,
+      "supervised_tokens": 1331,
+      "complete_original_target_and_eos_retained": true
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "first_target_index": 3827,
+      "loss_start": 3826,
+      "logit_positions": 2229,
+      "supervised_tokens": 2228,
+      "complete_original_target_and_eos_retained": true
+    },
+    {
+      "id": "FT-BOOK-AFTER-ANSWER/stage2",
+      "first_target_index": 4844,
+      "loss_start": 4843,
+      "logit_positions": 900,
+      "supervised_tokens": 899,
+      "complete_original_target_and_eos_retained": true
+    },
+    {
+      "id": "FT-SHOP-AFTER-ANSWER/stage2",
+      "first_target_index": 5027,
+      "loss_start": 5026,
+      "logit_positions": 1095,
+      "supervised_tokens": 1094,
+      "complete_original_target_and_eos_retained": true
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "first_target_index": 1746,
+      "loss_start": 1745,
+      "logit_positions": 1332,
+      "supervised_tokens": 1331,
+      "complete_original_target_and_eos_retained": true
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "first_target_index": 3842,
+      "loss_start": 3841,
+      "logit_positions": 2232,
+      "supervised_tokens": 2231,
+      "complete_original_target_and_eos_retained": true
+    },
+    {
+      "id": "FT-BOOK-AFTER-ANSWER/stage3",
+      "first_target_index": 5686,
+      "loss_start": 5685,
+      "logit_positions": 284,
+      "supervised_tokens": 283,
+      "complete_original_target_and_eos_retained": true
+    },
+    {
+      "id": "FT-SHOP-AFTER-ANSWER/stage3",
+      "first_target_index": 6064,
+      "loss_start": 6063,
+      "logit_positions": 237,
+      "supervised_tokens": 236,
+      "complete_original_target_and_eos_retained": true
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "first_target_index": 1743,
+      "loss_start": 1742,
+      "logit_positions": 1322,
+      "supervised_tokens": 1321,
+      "complete_original_target_and_eos_retained": true
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "first_target_index": 3825,
+      "loss_start": 3824,
+      "logit_positions": 2238,
+      "supervised_tokens": 2237,
+      "complete_original_target_and_eos_retained": true
+    },
+    {
+      "id": "FT-BOOK-AFTER-ANSWER/stage4",
+      "first_target_index": 5951,
+      "loss_start": 5950,
+      "logit_positions": 268,
+      "supervised_tokens": 267,
+      "complete_original_target_and_eos_retained": true
+    },
+    {
+      "id": "FT-SHOP-AFTER-ANSWER/stage4",
+      "first_target_index": 6282,
+      "loss_start": 6281,
+      "logit_positions": 292,
+      "supervised_tokens": 291,
+      "complete_original_target_and_eos_retained": true
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "first_target_index": 1778,
+      "loss_start": 1777,
+      "logit_positions": 1586,
+      "supervised_tokens": 1585,
+      "complete_original_target_and_eos_retained": true
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "first_target_index": 1773,
+      "loss_start": 1772,
+      "logit_positions": 1560,
+      "supervised_tokens": 1559,
+      "complete_original_target_and_eos_retained": true
+    },
+    {
+      "id": "FT-BOOK-AFTER-ANSWER/stage5",
+      "first_target_index": 6250,
+      "loss_start": 6249,
+      "logit_positions": 221,
+      "supervised_tokens": 220,
+      "complete_original_target_and_eos_retained": true
+    },
+    {
+      "id": "FT-SHOP-AFTER-ANSWER/stage5",
+      "first_target_index": 6605,
+      "loss_start": 6604,
+      "logit_positions": 294,
+      "supervised_tokens": 293,
+      "complete_original_target_and_eos_retained": true
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "first_target_index": 1777,
+      "loss_start": 1776,
+      "logit_positions": 1599,
+      "supervised_tokens": 1598,
+      "complete_original_target_and_eos_retained": true
+    }
+  ],
+  "installed_loss_source_sha256": {
+    "transformers/models/qwen3_5/modeling_qwen3_5.py": "aac2a1bcca88829afc6dbdf83f97155ebf64d800ee9d703af3802a9aebcfcd18",
+    "transformers/loss/loss_utils.py": "83db16b24ce5c3a0642097624aa9a0ae7eb72445c41d8b4d5059a129862fdbbe"
+  },
+  "saved_adapter_bytes_unchanged": true,
+  "saved_finite112_proof_retained": true,
+  "frozen_files": 266,
+  "model_loads": 0,
+  "model_forwards": 0,
+  "updates": 0,
+  "generations": 0,
+  "new_cmee_calls": 0,
+  "torch_imported": false,
+  "candidate_ready": false,
+  "automatic_progression": false,
+  "product_credit": 0
+}

@@ -1,0 +1,834 @@
+{
+  "status": "STOPPED_NOT_ADOPTED_NO_RETRY",
+  "source_commit": "5a333d68ed136483ae910a040a7fce4308ff3f13",
+  "plan": {
+    "model": "Qwen/Qwen3.5-4B",
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "initial_adapter_sha256": "b5e7936d5a716dd4aba5f953722c2fb96b09ce9a20f50df6a36b983b5e8bb3ab",
+    "initial_adapter_path": "/workspace/cocolon_aligned19_run_20261030/adapter",
+    "evaluation_order": [
+      "FT-BOOK-AFTER-ANSWER",
+      "FT-SHOP-AFTER-ANSWER",
+      "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "TRAIN-DAILY-CALM-01-INITIAL",
+      "TRAIN-DAILY-CALM-02-INITIAL",
+      "TRAIN-DAILY-CALM-03-INITIAL"
+    ],
+    "baseline_success_case_ids": [
+      "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "TRAIN-DAILY-CALM-01-INITIAL",
+      "TRAIN-DAILY-CALM-02-INITIAL",
+      "TRAIN-DAILY-CALM-03-INITIAL"
+    ],
+    "context_tokens": 8192,
+    "per_generation_seconds": 180,
+    "parent_timeout_seconds": 2690,
+    "parent_kill_after_seconds": 10,
+    "prior_hourly_usd": 0.28,
+    "current_rate_requeried": false,
+    "preparation_cmee_cpu_recovery_holding_storage_network_tax_extra": true,
+    "learning_rate": 5e-05,
+    "weight_decay": 0,
+    "gradient_clip": 1,
+    "seed": 20261024,
+    "recovery": "Preserve partial/final adapter, training log, raw/token IDs/metadata, all inputs/source, loaded/reloaded tensor tables and CMEE saved/cold evidence; export, CRC/bytes/hash verify outside Pod.",
+    "retry": false,
+    "new_gpu_rental": false,
+    "gpu_stop_restart_delete": false,
+    "new_dependencies": false,
+    "receiver_semantics_public_api_db_rn_render_supabase_merge_deploy": false,
+    "product_credit": 0,
+    "candidate_ready": false,
+    "automatic_progression": false,
+    "schema": "cocolon.stage5.fit38.v1",
+    "status": "PROPOSED_NEEDS_NEW_MASH_APPROVAL",
+    "predecessor_commit": "2e10a3fbd5ea559cbd95a3236c7d0c955e2c6309",
+    "original_train_sha256": "1401ee1144b820bbedbbcf1740133ca7d4330231f0d04732692820723bccff3b",
+    "original_eval_sha256": "6eaa2acd66f359da1d0e77bdb48c1eb483138dbcc50cb30ce7673b6da499b4ea",
+    "max_updates": 38,
+    "max_model_loads": 2,
+    "max_generations": 19,
+    "max_gpu_process_seconds": 2700,
+    "max_process_usd": 0.21,
+    "stage_caps": {
+      "FT-BOOK-AFTER-ANSWER": [
+        640,
+        1152,
+        512,
+        512,
+        384
+      ],
+      "FT-SHOP-AFTER-ANSWER": [
+        768,
+        1280,
+        384,
+        512,
+        512
+      ]
+    },
+    "update_order": [
+      "FT-BOOK-AFTER-ANSWER/stage1",
+      "FT-SHOP-AFTER-ANSWER/stage1",
+      "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "FT-BOOK-AFTER-ANSWER/stage2",
+      "FT-SHOP-AFTER-ANSWER/stage2",
+      "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "FT-BOOK-AFTER-ANSWER/stage3",
+      "FT-SHOP-AFTER-ANSWER/stage3",
+      "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "FT-BOOK-AFTER-ANSWER/stage4",
+      "FT-SHOP-AFTER-ANSWER/stage4",
+      "TRAIN-DAILY-CALM-01-INITIAL",
+      "TRAIN-DAILY-CALM-02-INITIAL",
+      "FT-BOOK-AFTER-ANSWER/stage5",
+      "FT-SHOP-AFTER-ANSWER/stage5",
+      "TRAIN-DAILY-CALM-03-INITIAL",
+      "FT-BOOK-AFTER-ANSWER/stage1",
+      "FT-SHOP-AFTER-ANSWER/stage1",
+      "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "FT-BOOK-AFTER-ANSWER/stage2",
+      "FT-SHOP-AFTER-ANSWER/stage2",
+      "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "FT-BOOK-AFTER-ANSWER/stage3",
+      "FT-SHOP-AFTER-ANSWER/stage3",
+      "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "FT-BOOK-AFTER-ANSWER/stage4",
+      "FT-SHOP-AFTER-ANSWER/stage4",
+      "TRAIN-DAILY-CALM-01-INITIAL",
+      "TRAIN-DAILY-CALM-02-INITIAL",
+      "FT-BOOK-AFTER-ANSWER/stage5",
+      "FT-SHOP-AFTER-ANSWER/stage5",
+      "TRAIN-DAILY-CALM-03-INITIAL"
+    ],
+    "loss": "Complete assistant+EOS CE unchanged. Same19 rows each twice=38 updates; no token/example reweighting. Three same19-row NLL assessments, total57 inference-only forwards, diagnostics not acceptance.",
+    "cmee": "Existing receipt/receiver/semantic snapshot/cold; raw and metadata exact plus external five-stage chain verification. No public API/schema change.",
+    "success": "Pair meaning/body/cold2/2, then actual old9 meaning/body/cold9/9; root full content review; no formal product credit.",
+    "stop": "Single GPU run; max2700seconds including57 teacher evaluations,38updates,save/reload and staged evaluation. No extra epoch, retry or raw repair. Invalid stage stops that case; old9 only after both new cases meaning/body/cold pass.",
+    "scope": "Offline fixed two-pass experiment only. Exact existing messages/targets/gold previous/19-row ratio/optimizer/loss/caps/receiver/acceptance unchanged. No failed-raw-as-gold, prompt edits, structural repair, new teachers, quality threshold from NLL, retries, merge/deploy or automatic progression.",
+    "hypothesis": "One pass did not establish final fit. Change only exposure to two passes over the exact same19 rows and record same-checkpoint teacher-forced NLL before, after19, after38 saved/nontraining reload. Final actual generation/CMEE/cold is unchanged; gold previous vs generated previous exposure remains.",
+    "cmee_cpu_included_in_process_deadline_and_cost": true,
+    "initial_adapter_status": "Failed and non-adopted b5e checkpoint. Proposed experimental initial only under a new exact approval, not product or automatic initial adoption.",
+    "current_train10_sha256": "06665f4c4139e7dbf6832ddf596986540997f014cdf2cb0018674d6ea4f93a69",
+    "new_cases": [
+      "FT-BOOK-AFTER-ANSWER",
+      "FT-SHOP-AFTER-ANSWER"
+    ],
+    "cpu_preparation": "Stdlib reuse/check of exact prior encoded19/labels/messages/target/EOS/order, frozen identity and actual installed loss source. No tokenizer/model/forward/update/generation/CMEE.",
+    "source_sha256": {
+      "prepare_fit38.py": "765bf6ee0c5ff430d85ba9d93d3e8d7d0272b8f9ab50167f01f3ca0b424f409f",
+      "run_fit38_once.py": "8a5ce9f51c5497f091abaf7874af9d9fb15e374137c4baa19767d2db1dad75b6",
+      "prompt_source_index.py": "66f28a40ca03611b02412d8c1208325dca5534760bf81fbcd2740a069e0aad96",
+      "launch_fit38_once.py": "c5fbc32be6417ffd65d4439a5c59fa995763cc47c9057f5cfa2bc52db145b6e9",
+      "export_fit38.py": "425c91a27e3f79d1c1b2da1bb20615baa96b125ade6773f2cd7b3a0a8e748596"
+    },
+    "initial_config_sha256": "8fb59378b4c6c3d6abf59227a6679804fd354b9a0aa10b9ec9e01788753dc40c",
+    "epochs": 2,
+    "max_teacher_evaluation_forwards": 57,
+    "measurement_phases": [
+      "before_updates",
+      "after19_updates",
+      "after38_saved_reload"
+    ],
+    "pass_order": [
+      "FT-BOOK-AFTER-ANSWER/stage1",
+      "FT-SHOP-AFTER-ANSWER/stage1",
+      "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "FT-BOOK-AFTER-ANSWER/stage2",
+      "FT-SHOP-AFTER-ANSWER/stage2",
+      "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "FT-BOOK-AFTER-ANSWER/stage3",
+      "FT-SHOP-AFTER-ANSWER/stage3",
+      "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "FT-BOOK-AFTER-ANSWER/stage4",
+      "FT-SHOP-AFTER-ANSWER/stage4",
+      "TRAIN-DAILY-CALM-01-INITIAL",
+      "TRAIN-DAILY-CALM-02-INITIAL",
+      "FT-BOOK-AFTER-ANSWER/stage5",
+      "FT-SHOP-AFTER-ANSWER/stage5",
+      "TRAIN-DAILY-CALM-03-INITIAL"
+    ],
+    "prior_prepared_sha256": "84d2d641ab1bccb3ad3b6140304b0026fecc1e1dcbb9129814c1d7d327c7de62",
+    "train19_sha256": "57292ff2e058dc0d6cc024e63fe5d146c89069b8a4ea26c8627ba75170fca6d7",
+    "installed_loss_source_sha256": {
+      "transformers/models/qwen3_5/modeling_qwen3_5.py": "aac2a1bcca88829afc6dbdf83f97155ebf64d800ee9d703af3802a9aebcfcd18",
+      "transformers/loss/loss_utils.py": "83db16b24ce5c3a0642097624aa9a0ae7eb72445c41d8b4d5059a129862fdbbe"
+    }
+  },
+  "started_unix": 1793342514.8085186,
+  "approval": {
+    "status": "MASH_EXPLICITLY_APPROVED_ONCE",
+    "proposal_sha256": "51573dba7e31054f7b97258295293d120e34b7e57719284187b31b6fc61e4d4d",
+    "proposal": {
+      "model": "Qwen/Qwen3.5-4B",
+      "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "initial_adapter_sha256": "b5e7936d5a716dd4aba5f953722c2fb96b09ce9a20f50df6a36b983b5e8bb3ab",
+      "initial_adapter_path": "/workspace/cocolon_aligned19_run_20261030/adapter",
+      "evaluation_order": [
+        "FT-BOOK-AFTER-ANSWER",
+        "FT-SHOP-AFTER-ANSWER",
+        "TRAIN-SERVICE-CHAIR-01-INITIAL",
+        "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+        "TRAIN-SERVICE-CHAIR-02-INITIAL",
+        "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+        "TRAIN-SERVICE-CHAIR-03-INITIAL",
+        "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+        "TRAIN-DAILY-CALM-01-INITIAL",
+        "TRAIN-DAILY-CALM-02-INITIAL",
+        "TRAIN-DAILY-CALM-03-INITIAL"
+      ],
+      "baseline_success_case_ids": [
+        "TRAIN-SERVICE-CHAIR-01-INITIAL",
+        "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+        "TRAIN-SERVICE-CHAIR-02-INITIAL",
+        "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+        "TRAIN-SERVICE-CHAIR-03-INITIAL",
+        "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+        "TRAIN-DAILY-CALM-01-INITIAL",
+        "TRAIN-DAILY-CALM-02-INITIAL",
+        "TRAIN-DAILY-CALM-03-INITIAL"
+      ],
+      "context_tokens": 8192,
+      "per_generation_seconds": 180,
+      "parent_timeout_seconds": 2690,
+      "parent_kill_after_seconds": 10,
+      "prior_hourly_usd": 0.28,
+      "current_rate_requeried": false,
+      "preparation_cmee_cpu_recovery_holding_storage_network_tax_extra": true,
+      "learning_rate": 5e-05,
+      "weight_decay": 0,
+      "gradient_clip": 1,
+      "seed": 20261024,
+      "recovery": "Preserve partial/final adapter, training log, raw/token IDs/metadata, all inputs/source, loaded/reloaded tensor tables and CMEE saved/cold evidence; export, CRC/bytes/hash verify outside Pod.",
+      "retry": false,
+      "new_gpu_rental": false,
+      "gpu_stop_restart_delete": false,
+      "new_dependencies": false,
+      "receiver_semantics_public_api_db_rn_render_supabase_merge_deploy": false,
+      "product_credit": 0,
+      "candidate_ready": false,
+      "automatic_progression": false,
+      "schema": "cocolon.stage5.fit38.v1",
+      "status": "PROPOSED_NEEDS_NEW_MASH_APPROVAL",
+      "predecessor_commit": "2e10a3fbd5ea559cbd95a3236c7d0c955e2c6309",
+      "original_train_sha256": "1401ee1144b820bbedbbcf1740133ca7d4330231f0d04732692820723bccff3b",
+      "original_eval_sha256": "6eaa2acd66f359da1d0e77bdb48c1eb483138dbcc50cb30ce7673b6da499b4ea",
+      "max_updates": 38,
+      "max_model_loads": 2,
+      "max_generations": 19,
+      "max_gpu_process_seconds": 2700,
+      "max_process_usd": 0.21,
+      "stage_caps": {
+        "FT-BOOK-AFTER-ANSWER": [
+          640,
+          1152,
+          512,
+          512,
+          384
+        ],
+        "FT-SHOP-AFTER-ANSWER": [
+          768,
+          1280,
+          384,
+          512,
+          512
+        ]
+      },
+      "update_order": [
+        "FT-BOOK-AFTER-ANSWER/stage1",
+        "FT-SHOP-AFTER-ANSWER/stage1",
+        "TRAIN-SERVICE-CHAIR-01-INITIAL",
+        "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+        "FT-BOOK-AFTER-ANSWER/stage2",
+        "FT-SHOP-AFTER-ANSWER/stage2",
+        "TRAIN-SERVICE-CHAIR-02-INITIAL",
+        "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+        "FT-BOOK-AFTER-ANSWER/stage3",
+        "FT-SHOP-AFTER-ANSWER/stage3",
+        "TRAIN-SERVICE-CHAIR-03-INITIAL",
+        "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+        "FT-BOOK-AFTER-ANSWER/stage4",
+        "FT-SHOP-AFTER-ANSWER/stage4",
+        "TRAIN-DAILY-CALM-01-INITIAL",
+        "TRAIN-DAILY-CALM-02-INITIAL",
+        "FT-BOOK-AFTER-ANSWER/stage5",
+        "FT-SHOP-AFTER-ANSWER/stage5",
+        "TRAIN-DAILY-CALM-03-INITIAL",
+        "FT-BOOK-AFTER-ANSWER/stage1",
+        "FT-SHOP-AFTER-ANSWER/stage1",
+        "TRAIN-SERVICE-CHAIR-01-INITIAL",
+        "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+        "FT-BOOK-AFTER-ANSWER/stage2",
+        "FT-SHOP-AFTER-ANSWER/stage2",
+        "TRAIN-SERVICE-CHAIR-02-INITIAL",
+        "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+        "FT-BOOK-AFTER-ANSWER/stage3",
+        "FT-SHOP-AFTER-ANSWER/stage3",
+        "TRAIN-SERVICE-CHAIR-03-INITIAL",
+        "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+        "FT-BOOK-AFTER-ANSWER/stage4",
+        "FT-SHOP-AFTER-ANSWER/stage4",
+        "TRAIN-DAILY-CALM-01-INITIAL",
+        "TRAIN-DAILY-CALM-02-INITIAL",
+        "FT-BOOK-AFTER-ANSWER/stage5",
+        "FT-SHOP-AFTER-ANSWER/stage5",
+        "TRAIN-DAILY-CALM-03-INITIAL"
+      ],
+      "loss": "Complete assistant+EOS CE unchanged. Same19 rows each twice=38 updates; no token/example reweighting. Three same19-row NLL assessments, total57 inference-only forwards, diagnostics not acceptance.",
+      "cmee": "Existing receipt/receiver/semantic snapshot/cold; raw and metadata exact plus external five-stage chain verification. No public API/schema change.",
+      "success": "Pair meaning/body/cold2/2, then actual old9 meaning/body/cold9/9; root full content review; no formal product credit.",
+      "stop": "Single GPU run; max2700seconds including57 teacher evaluations,38updates,save/reload and staged evaluation. No extra epoch, retry or raw repair. Invalid stage stops that case; old9 only after both new cases meaning/body/cold pass.",
+      "scope": "Offline fixed two-pass experiment only. Exact existing messages/targets/gold previous/19-row ratio/optimizer/loss/caps/receiver/acceptance unchanged. No failed-raw-as-gold, prompt edits, structural repair, new teachers, quality threshold from NLL, retries, merge/deploy or automatic progression.",
+      "hypothesis": "One pass did not establish final fit. Change only exposure to two passes over the exact same19 rows and record same-checkpoint teacher-forced NLL before, after19, after38 saved/nontraining reload. Final actual generation/CMEE/cold is unchanged; gold previous vs generated previous exposure remains.",
+      "cmee_cpu_included_in_process_deadline_and_cost": true,
+      "initial_adapter_status": "Failed and non-adopted b5e checkpoint. Proposed experimental initial only under a new exact approval, not product or automatic initial adoption.",
+      "current_train10_sha256": "06665f4c4139e7dbf6832ddf596986540997f014cdf2cb0018674d6ea4f93a69",
+      "new_cases": [
+        "FT-BOOK-AFTER-ANSWER",
+        "FT-SHOP-AFTER-ANSWER"
+      ],
+      "cpu_preparation": "Stdlib reuse/check of exact prior encoded19/labels/messages/target/EOS/order, frozen identity and actual installed loss source. No tokenizer/model/forward/update/generation/CMEE.",
+      "source_sha256": {
+        "prepare_fit38.py": "765bf6ee0c5ff430d85ba9d93d3e8d7d0272b8f9ab50167f01f3ca0b424f409f",
+        "run_fit38_once.py": "8a5ce9f51c5497f091abaf7874af9d9fb15e374137c4baa19767d2db1dad75b6",
+        "prompt_source_index.py": "66f28a40ca03611b02412d8c1208325dca5534760bf81fbcd2740a069e0aad96",
+        "launch_fit38_once.py": "c5fbc32be6417ffd65d4439a5c59fa995763cc47c9057f5cfa2bc52db145b6e9",
+        "export_fit38.py": "425c91a27e3f79d1c1b2da1bb20615baa96b125ade6773f2cd7b3a0a8e748596"
+      },
+      "initial_config_sha256": "8fb59378b4c6c3d6abf59227a6679804fd354b9a0aa10b9ec9e01788753dc40c",
+      "epochs": 2,
+      "max_teacher_evaluation_forwards": 57,
+      "measurement_phases": [
+        "before_updates",
+        "after19_updates",
+        "after38_saved_reload"
+      ],
+      "pass_order": [
+        "FT-BOOK-AFTER-ANSWER/stage1",
+        "FT-SHOP-AFTER-ANSWER/stage1",
+        "TRAIN-SERVICE-CHAIR-01-INITIAL",
+        "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+        "FT-BOOK-AFTER-ANSWER/stage2",
+        "FT-SHOP-AFTER-ANSWER/stage2",
+        "TRAIN-SERVICE-CHAIR-02-INITIAL",
+        "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+        "FT-BOOK-AFTER-ANSWER/stage3",
+        "FT-SHOP-AFTER-ANSWER/stage3",
+        "TRAIN-SERVICE-CHAIR-03-INITIAL",
+        "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+        "FT-BOOK-AFTER-ANSWER/stage4",
+        "FT-SHOP-AFTER-ANSWER/stage4",
+        "TRAIN-DAILY-CALM-01-INITIAL",
+        "TRAIN-DAILY-CALM-02-INITIAL",
+        "FT-BOOK-AFTER-ANSWER/stage5",
+        "FT-SHOP-AFTER-ANSWER/stage5",
+        "TRAIN-DAILY-CALM-03-INITIAL"
+      ],
+      "prior_prepared_sha256": "84d2d641ab1bccb3ad3b6140304b0026fecc1e1dcbb9129814c1d7d327c7de62",
+      "train19_sha256": "57292ff2e058dc0d6cc024e63fe5d146c89069b8a4ea26c8627ba75170fca6d7",
+      "installed_loss_source_sha256": {
+        "transformers/models/qwen3_5/modeling_qwen3_5.py": "aac2a1bcca88829afc6dbdf83f97155ebf64d800ee9d703af3802a9aebcfcd18",
+        "transformers/loss/loss_utils.py": "83db16b24ce5c3a0642097624aa9a0ae7eb72445c41d8b4d5059a129862fdbbe"
+      }
+    },
+    "approval": {
+      "owner": "Mash",
+      "received_date_jst": "2026-10-30",
+      "user_response": "進めていいよ。",
+      "approved_request": "保存b5eを実験用初期値に、38更新・適合測定・保存再読→新2件生成→CMEE・保存再読→全成功時だけ旧9件確認。最大45分・前回単価で処理按分$0.21（準備・回収・保持等別）、再試行なし。一回実行。",
+      "proposal_commit": "fbab342b9a902d1e412571a501aaf76d1d0be3e3",
+      "reviewed_evidence_commit": "ff4dea3e7207eec98ac77d92dd5414041e8dcbf2",
+      "scope": "One isolated b5e-initial fit38 trial only: same19 rows twice, 38 updates, same19-row teacher NLL at before/19/final saved nontraining reload (57 evaluation forwards), 2 model loads, at most19 free generations; new2 CMEE/save/cold then old9 only if both fully pass; total2700seconds maximum, prior0.28USD/hour process maximum0.21USD, preparation/recovery/holding/storage/network/tax extra; no retry, extension, raw repair, prompt/teacher/receiver/cap changes or automatic progression."
+    },
+    "launcher_sha256": "c5fbc32be6417ffd65d4439a5c59fa995763cc47c9057f5cfa2bc52db145b6e9",
+    "execution_owner": "root Karen sole writer/executor/judge; assistants read-only; actual Codex Work, no formal Pro/Ultra/human authority claim",
+    "automatic_progression": false,
+    "candidate_ready": false,
+    "product_credit": 0
+  },
+  "approval_sha256": "5ea2d94273417b12d6eb02f6fef02e86a7d02976c16ececbf50346208188883f",
+  "experimental_initial_not_adopted": true,
+  "model_loads_started": 2,
+  "model_loads_completed": 2,
+  "training_forwards_started": 38,
+  "training_forwards_completed": 38,
+  "optimizer_steps_started": 38,
+  "optimizer_steps_completed": 38,
+  "teacher_evaluation_forwards_started": 57,
+  "teacher_evaluation_forwards_completed": 57,
+  "nll_measurements": [
+    {
+      "phase": "before_updates",
+      "optimizer_steps": 0,
+      "path": "nll_before_updates.jsonl",
+      "sha256": "de1f6615f8dfca0444f920242a18fa516cfd7442c266fd361af0eb3edf0b841a",
+      "rows": [
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage1",
+          "loss_tokens": 492,
+          "nll": 0.022342879325151443
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage1",
+          "loss_tokens": 523,
+          "nll": 0.023360617458820343
+        },
+        {
+          "id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+          "loss_tokens": 1331,
+          "nll": 0.0008378117345273495
+        },
+        {
+          "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+          "loss_tokens": 2228,
+          "nll": 0.0012385027948766947
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage2",
+          "loss_tokens": 899,
+          "nll": 0.012640080414712429
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage2",
+          "loss_tokens": 1094,
+          "nll": 0.021489497274160385
+        },
+        {
+          "id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+          "loss_tokens": 1331,
+          "nll": 0.0008391119772568345
+        },
+        {
+          "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+          "loss_tokens": 2231,
+          "nll": 0.0010747916530817747
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage3",
+          "loss_tokens": 283,
+          "nll": 0.0038787927478551865
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage3",
+          "loss_tokens": 236,
+          "nll": 0.009513058699667454
+        },
+        {
+          "id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+          "loss_tokens": 1321,
+          "nll": 0.000908099755179137
+        },
+        {
+          "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+          "loss_tokens": 2237,
+          "nll": 0.0011505328584462404
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage4",
+          "loss_tokens": 267,
+          "nll": 0.0643913745880127
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage4",
+          "loss_tokens": 291,
+          "nll": 0.06072299927473068
+        },
+        {
+          "id": "TRAIN-DAILY-CALM-01-INITIAL",
+          "loss_tokens": 1585,
+          "nll": 0.0011976693058386445
+        },
+        {
+          "id": "TRAIN-DAILY-CALM-02-INITIAL",
+          "loss_tokens": 1559,
+          "nll": 0.0011591874063014984
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage5",
+          "loss_tokens": 220,
+          "nll": 0.5766382217407227
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage5",
+          "loss_tokens": 293,
+          "nll": 0.7578535079956055
+        },
+        {
+          "id": "TRAIN-DAILY-CALM-03-INITIAL",
+          "loss_tokens": 1598,
+          "nll": 0.0011748501565307379
+        }
+      ],
+      "teacher_forced_known_fit_not_product_acceptance": true
+    },
+    {
+      "phase": "after19_updates",
+      "optimizer_steps": 19,
+      "path": "nll_after19_updates.jsonl",
+      "sha256": "f2ba7fc0ad9a361b1e12a1554c9f80537ad35346348d2479a08215fde708409b",
+      "rows": [
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage1",
+          "loss_tokens": 492,
+          "nll": 0.03513539582490921
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage1",
+          "loss_tokens": 523,
+          "nll": 0.013523264788091183
+        },
+        {
+          "id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+          "loss_tokens": 1331,
+          "nll": 0.0005471254698932171
+        },
+        {
+          "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+          "loss_tokens": 2228,
+          "nll": 0.0010974705219268799
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage2",
+          "loss_tokens": 899,
+          "nll": 0.007926972582936287
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage2",
+          "loss_tokens": 1094,
+          "nll": 0.01738789491355419
+        },
+        {
+          "id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+          "loss_tokens": 1331,
+          "nll": 0.0005985695752315223
+        },
+        {
+          "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+          "loss_tokens": 2231,
+          "nll": 0.0010782124008983374
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage3",
+          "loss_tokens": 283,
+          "nll": 0.0011452015023678541
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage3",
+          "loss_tokens": 236,
+          "nll": 0.031879205256700516
+        },
+        {
+          "id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+          "loss_tokens": 1321,
+          "nll": 0.0006556945154443383
+        },
+        {
+          "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+          "loss_tokens": 2237,
+          "nll": 0.0007161885150708258
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage4",
+          "loss_tokens": 267,
+          "nll": 0.03757905960083008
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage4",
+          "loss_tokens": 291,
+          "nll": 0.04398727789521217
+        },
+        {
+          "id": "TRAIN-DAILY-CALM-01-INITIAL",
+          "loss_tokens": 1585,
+          "nll": 0.0008749424014240503
+        },
+        {
+          "id": "TRAIN-DAILY-CALM-02-INITIAL",
+          "loss_tokens": 1559,
+          "nll": 0.0008755719754844904
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage5",
+          "loss_tokens": 220,
+          "nll": 0.508039116859436
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage5",
+          "loss_tokens": 293,
+          "nll": 0.6925073266029358
+        },
+        {
+          "id": "TRAIN-DAILY-CALM-03-INITIAL",
+          "loss_tokens": 1598,
+          "nll": 0.0008813447784632444
+        }
+      ],
+      "teacher_forced_known_fit_not_product_acceptance": true
+    },
+    {
+      "phase": "after38_saved_reload",
+      "optimizer_steps": 38,
+      "path": "nll_after38_saved_reload.jsonl",
+      "sha256": "61dda6362b2bc2bf6e847f249fa2ce05a34271b7199845272fb8d96becb85be1",
+      "rows": [
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage1",
+          "loss_tokens": 492,
+          "nll": 0.011979983188211918
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage1",
+          "loss_tokens": 523,
+          "nll": 0.009299810975790024
+        },
+        {
+          "id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+          "loss_tokens": 1331,
+          "nll": 0.0005519707920029759
+        },
+        {
+          "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+          "loss_tokens": 2228,
+          "nll": 0.0018870881758630276
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage2",
+          "loss_tokens": 899,
+          "nll": 0.0029623324517160654
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage2",
+          "loss_tokens": 1094,
+          "nll": 0.009248998947441578
+        },
+        {
+          "id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+          "loss_tokens": 1331,
+          "nll": 0.0006162984063848853
+        },
+        {
+          "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+          "loss_tokens": 2231,
+          "nll": 0.0012041708687320352
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage3",
+          "loss_tokens": 283,
+          "nll": 0.011821628548204899
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage3",
+          "loss_tokens": 236,
+          "nll": 0.006177783943712711
+        },
+        {
+          "id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+          "loss_tokens": 1321,
+          "nll": 0.0006678999634459615
+        },
+        {
+          "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+          "loss_tokens": 2237,
+          "nll": 0.0021883028093725443
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage4",
+          "loss_tokens": 267,
+          "nll": 0.024618100374937057
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage4",
+          "loss_tokens": 291,
+          "nll": 0.023816373199224472
+        },
+        {
+          "id": "TRAIN-DAILY-CALM-01-INITIAL",
+          "loss_tokens": 1585,
+          "nll": 0.0008022359688766301
+        },
+        {
+          "id": "TRAIN-DAILY-CALM-02-INITIAL",
+          "loss_tokens": 1559,
+          "nll": 0.0009140949114225805
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER/stage5",
+          "loss_tokens": 220,
+          "nll": 0.3382960259914398
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER/stage5",
+          "loss_tokens": 293,
+          "nll": 0.4822186529636383
+        },
+        {
+          "id": "TRAIN-DAILY-CALM-03-INITIAL",
+          "loss_tokens": 1598,
+          "nll": 0.0008202287717722356
+        }
+      ],
+      "teacher_forced_known_fit_not_product_acceptance": true
+    }
+  ],
+  "model_calls_started": 8,
+  "model_calls_completed": 8,
+  "calls": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER/stage1",
+      "path": "stage1_FT-BOOK-AFTER-ANSWER.jsonl",
+      "raw_sha256": "e550062d7de267692576364bc1d839acd4abe35ea59403ebde45d8d6342991ad",
+      "messages_sha256": "1166a156733f7af73b32d0ad74af4560a6cba83f53237f33cc4c8303f207be2e",
+      "adapter_sha256": "ad8b89e8974df9bfe7e804b8f67bbaac59e6cbb37042c3254fb58ffb64230d0a",
+      "output_tokens": 493,
+      "eos_reached": true,
+      "seconds": 22.69108951301314,
+      "timeout_triggered": false
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER/stage2",
+      "path": "stage2_FT-BOOK-AFTER-ANSWER.jsonl",
+      "raw_sha256": "37374fdfc939fcf03018d7ffbe70e22f6963fe683a0536cbd8849dd062235707",
+      "messages_sha256": "4c07eda50dc2afe1ec7833b22f9bffa013526736a6615e37641e9db439534bdb",
+      "adapter_sha256": "ad8b89e8974df9bfe7e804b8f67bbaac59e6cbb37042c3254fb58ffb64230d0a",
+      "output_tokens": 900,
+      "eos_reached": true,
+      "seconds": 40.580393103999086,
+      "timeout_triggered": false
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER/stage3",
+      "path": "stage3_FT-BOOK-AFTER-ANSWER.jsonl",
+      "raw_sha256": "691e38f9afe1f6943e470dfad90a684f3bfcd0c8df0350a3f68b4254ef5f3ea1",
+      "messages_sha256": "e11d0a33825870688caef1eac9c0e83055f81f32d6a9448720314ee62a9561d2",
+      "adapter_sha256": "ad8b89e8974df9bfe7e804b8f67bbaac59e6cbb37042c3254fb58ffb64230d0a",
+      "output_tokens": 326,
+      "eos_reached": true,
+      "seconds": 15.774687369936146,
+      "timeout_triggered": false
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage1",
+      "path": "stage1_FT-SHOP-AFTER-ANSWER.jsonl",
+      "raw_sha256": "9716aea5da867253e71b9cba7dd31717c2eb171b569ac5f11733b51e90734920",
+      "messages_sha256": "156bf39ff96a5cde61eb1695d73a8f12d4b74da64675c81e8a9ff9a17dae25e1",
+      "adapter_sha256": "ad8b89e8974df9bfe7e804b8f67bbaac59e6cbb37042c3254fb58ffb64230d0a",
+      "output_tokens": 524,
+      "eos_reached": true,
+      "seconds": 23.73563208198175,
+      "timeout_triggered": false
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage2",
+      "path": "stage2_FT-SHOP-AFTER-ANSWER.jsonl",
+      "raw_sha256": "7c1d7dbcc0bf8cccd0e214d7bc83008d4e582b593f39843065064139058b04c4",
+      "messages_sha256": "475dabc439f44e5d1aaa275c461234568f58ce345aa213bfe1dbc37ae2a5e6b6",
+      "adapter_sha256": "ad8b89e8974df9bfe7e804b8f67bbaac59e6cbb37042c3254fb58ffb64230d0a",
+      "output_tokens": 1079,
+      "eos_reached": true,
+      "seconds": 47.904029197990894,
+      "timeout_triggered": false
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage3",
+      "path": "stage3_FT-SHOP-AFTER-ANSWER.jsonl",
+      "raw_sha256": "677d77be97d773c6e73680b5603b354202935b16964b60dee46c101afa787e78",
+      "messages_sha256": "956e6cb6390ec4ceab7027ee4cf0a7634d37f9aae19c0a8641f336f39b35f318",
+      "adapter_sha256": "ad8b89e8974df9bfe7e804b8f67bbaac59e6cbb37042c3254fb58ffb64230d0a",
+      "output_tokens": 237,
+      "eos_reached": true,
+      "seconds": 11.57049064594321,
+      "timeout_triggered": false
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage4",
+      "path": "stage4_FT-SHOP-AFTER-ANSWER.jsonl",
+      "raw_sha256": "7c450cb06fd4298563f4fcaa1fe75062832d94c4ed694de51d6eb60fd821847c",
+      "messages_sha256": "a7a55b915b77d5e940f2cc4b81bfcef2fc3217d810ac7e286a627a557566ac2d",
+      "adapter_sha256": "ad8b89e8974df9bfe7e804b8f67bbaac59e6cbb37042c3254fb58ffb64230d0a",
+      "output_tokens": 263,
+      "eos_reached": true,
+      "seconds": 12.724580348003656,
+      "timeout_triggered": false
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage5",
+      "path": "stage5_FT-SHOP-AFTER-ANSWER.jsonl",
+      "raw_sha256": "f3a06a90578af67f8c467a4d179df2a19939647123584152366d98a2ab43da7b",
+      "messages_sha256": "00f22b7e0840c51cab5e4d4ca61660c4de538e7520d39b5ae9a9263ce18ea4bb",
+      "adapter_sha256": "ad8b89e8974df9bfe7e804b8f67bbaac59e6cbb37042c3254fb58ffb64230d0a",
+      "output_tokens": 512,
+      "eos_reached": false,
+      "seconds": 23.45707672892604,
+      "timeout_triggered": false
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "stages_completed": 3,
+      "stage_failure": {
+        "stage": 3,
+        "reason": "Extra data: line 1 column 1128 (char 1127)",
+        "finish_reason": "stop"
+      },
+      "meaning_adopted": false,
+      "body_available": false
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "stages_completed": 5,
+      "stage_failure": {
+        "stage": 5,
+        "reason": "stage_not_finished",
+        "finish_reason": "length"
+      },
+      "meaning_adopted": false,
+      "body_available": false
+    }
+  ],
+  "retry": false,
+  "automatic_progression": false,
+  "product_credit": 0,
+  "elapsed_seconds": 928.9340330460109,
+  "gpu": {
+    "name": "NVIDIA RTX A5000",
+    "free_bytes": 25062342656,
+    "total_bytes": 25285623808,
+    "torch": "2.8.0+cu128",
+    "cuda_build": "12.8",
+    "bf16_supported": true
+  },
+  "changed_tensors": 112,
+  "adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "ef4b1aef621fb4e234ce6a05601efb62a987c3cf5d40f3995ca1b72200bab145",
+    "adapter_model.safetensors": "ad8b89e8974df9bfe7e804b8f67bbaac59e6cbb37042c3254fb58ffb64230d0a"
+  },
+  "error_type": "ValueError",
+  "reason": "new_pair_failed_skip_old9_no_retry",
+  "traceback": "Traceback (most recent call last):\n  File \"/workspace/cocolon_fit38_pack_20261030/run_fit38_once.py\", line 280, in execute\n    stage.need(len(diagnosis['cases']) == 2 and all(c['meaning_adopted'] and c['body_available'] and\n  File \"/workspace/cocolon_stage5_pack_20261030/consume_stage5.py\", line 24, in need\n    raise ValueError(reason)\nValueError: new_pair_failed_skip_old9_no_retry\n",
+  "peak_allocated_bytes": 16867556864,
+  "peak_reserved_bytes": 23739760640,
+  "post_release_allocated_bytes": 17039360,
+  "frozen_inputs_and_initial_weights_unchanged": true,
+  "processing_seconds": 928.9340299230535,
+  "process_cost_usd": 0.07225042454957083
+}

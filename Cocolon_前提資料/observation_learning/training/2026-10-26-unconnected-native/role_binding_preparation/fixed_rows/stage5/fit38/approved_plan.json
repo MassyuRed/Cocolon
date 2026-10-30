@@ -1,5 +1,5 @@
 {
-  "status": "MASH_EXPLICITLY_APPROVED_ONCE",
+  "status": "CLOSED_FAILED_NOT_ADOPTED_NO_RETRY",
   "proposal_sha256": "51573dba7e31054f7b97258295293d120e34b7e57719284187b31b6fc61e4d4d",
   "proposal": {
     "model": "Qwen/Qwen3.5-4B",
@@ -186,5 +186,33 @@
   "execution_owner": "root Karen sole writer/executor/judge; assistants read-only; actual Codex Work, no formal Pro/Ultra/human authority claim",
   "automatic_progression": false,
   "candidate_ready": false,
-  "product_credit": 0
+  "product_credit": 0,
+  "closure": {
+    "source_commit": "5a333d68ed136483ae910a040a7fce4308ff3f13",
+    "consumed_once": true,
+    "execution_status": "STOPPED_NOT_ADOPTED_NO_RETRY",
+    "reason": "new_pair_failed_skip_old9_no_retry",
+    "exit_code": 1,
+    "finished_jst": "2026-10-30T15:57:23.743+09:00",
+    "optimizer_steps_completed": 38,
+    "teacher_evaluation_forwards_completed": 57,
+    "model_loads_completed": 2,
+    "model_calls_completed": 8,
+    "new_cmee_calls": 0,
+    "meaning": 0,
+    "body": 0,
+    "cold": 0,
+    "old9": "NOT_RUN_NEW_PAIR_FAILED",
+    "processing_seconds": 928.9340299230535,
+    "process_cost_usd": 0.07225042454957083,
+    "adapter_sha256": "ad8b89e8974df9bfe7e804b8f67bbaac59e6cbb37042c3254fb58ffb64230d0a",
+    "weights_library_file_id": "libfile_e2b0cd55d6c08191ba3a9ab1d6da4386",
+    "retry": false,
+    "reusable": false,
+    "candidate_ready": false,
+    "automatic_progression": false,
+    "product_credit": 0,
+    "result": "execution_20261030/README.md",
+    "runtime_approval_sha256": "5ea2d94273417b12d6eb02f6fef02e86a7d02976c16ececbf50346208188883f"
+  }
 }
