@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-更新日：2026-10-30 JST（最新差分：source一覧付き非学習一回の実結果・不採用閉鎖、weekly§127）。全Cocolon作業の必読原本。
+更新日：2026-10-30 JST（最新差分：現行10入力の未学習差を確認・19更新CPU準備／有料案未承認、weekly§128）。全Cocolon作業の必読原本。
 
 > **最新報告会：[第8回・2026-10-24](weekly_reviews/Cocolon_Weekly_Review_20261024.md)。** 今週実績・前週目標の達否と10/24〜10/31の管理案を記録。**Mashの指示により報告会終了。** 華恋の意見全文は[§10](weekly_reviews/Cocolon_Weekly_Review_20261024.md#karen-closing-opinion)、終了時の区分と再開先は[§11](weekly_reviews/Cocolon_Weekly_Review_20261024.md#meeting-closed-and-next-session)。10/24の4B確定・GPU16GB優先/24GB許容は当時の決定で、4B確定は10/25に撤回済み。最新の開発基準選定は[§23](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-three-core-model-and-serving-decision)。華恋が今回の判断責任として選んだもので、旧4B確定・常時24GB契約の自動復活ではない。起動済み3070の実確認は[§22](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-3070-running-cuda-uvm-io-error)。A5000未確保は§20の履歴。Vast実見積りは§19の履歴。次週の推奨順位は[§4](weekly_reviews/Cocolon_Weekly_Review_20261024.md#next-week-priorities)、対象path・具体手順・失敗/回復検査・終了条件は[§8](weekly_reviews/Cocolon_Weekly_Review_20261024.md#detailed-work-breakdown)を参照。全体管理評価・公開見通しは[§9](weekly_reviews/Cocolon_Weekly_Review_20261024.md#overall-status-and-release-outlook)：54.50％、正式商品受入れ0/3、12/18達成の裏付け不足。会議途中の「進行中」は当時の記録。次週案全体への明示採否・個別実行の未決は§11に区別して保持する。モデル選定の決定と、以下の品質・配置・端末・費用の未完了を区別する。
 
@@ -8,13 +8,13 @@
 
 **最新GPU読取確認（2026-10-30 JST）：** 同Jupyter/Pod vgkm402msgroiu/RTX A5000、今回終了後1MiB/0％で稼働保持。処理47.405705535秒/$0.0036871104305按分、親外48.852184686秒、準備/回収/保持等別。Stop/restart/delete/Runpod管理画面/API0、207fileと保存9b重み不変。
 
-**現在の直接作業（10/30・source一覧付き非学習一回を不採用閉鎖）：** Mashが6b9b0d42の具体案へ「進めていいよ。」と承認し、source2e3a6071で同9b保存重みを非学習1load/112F32有限・学習0/実2call。両S1はsource ID/原欄とalias/quote分離が揃ったが、BOOK311/SHOP427token・EOSでも最外root未完結で拒否。引用10/14と教師17/18の差も残り、括弧だけの残件としない。新2意味/本人本文0/2、全5段/派生packet/新CMEE/saved/cold0、旧9NOT_RUN。不採用閉鎖・再試行0。
+**現在の直接作業（10/30・現行入力19更新のCPU準備済み／新有料実行は未承認）：** Mashの「4B学習＋CMEE接続を続けて」を受け、実19更新の学習入力・現在10入力・全教師/EOS/mask・直前全2 rawを照合。全10区間で旧学習時と現在の入力指示が異なり、現在指示の学習は未実行。一方、教師本文・末尾/EOS/新行は全10で同一かつ完全に学習対象。mask欠落は見つからない。入力差は原因候補で、唯一の原因や成功保証としない。
 
-入力由来一覧による実2出力の局所変化を、意味採用・商品改善へ数えない。全20member/19payload・70276bytes/SHA8c62c3535dcef7d685d38ee6f0220500592c797c158007ed967d6c46ed86cf42を回収し、CRC/全bytes/SHA/source/実messages/全2rawをroot/補助で独立照合。全memberをGitHubへ展開保存する。新weight0、原weightの既存完全保存を保持。追加観測会は現2題に不要、商品0/正式0/3/54.50％・candidate_ready/automatic_progression=false。
+Jupyter直結でsource f0ec04e2のCPU準備を一回実行、6.149962861905806秒・親6.956690767081454秒・exit0。現在10入力と実S1入力/同builderの一致、教師とEOS・旧9の行/token列不変、2教師13path lossless再結合、初期112有限F32、215file不変を確認。最大prompt+cap7117/8192。model load/forward/学習/生成/新CMEE0、重み9b不変、A5000 1MiB/0％で稼働保持。CPU準備は自由生成・CMEE成功の証拠ではない。
 
-次は同paid再試行やraw補修をせず、既存教師/学習targetと実出力に残る末尾構文・引用被覆を照合して具体方針を判断する。新prompt探索/追加学習/新有料案を自動開始しない。
+[19更新案・実CPU原本・全file地図](observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/aligned19/README.md)：失敗・不採用の保存9bを隔離実験の初期値にのみ使い、現在10入力＋不変教師と旧9を各1回の19更新→保存/非学習再読→新2実生成/既存CMEE/cold→全成功時だけ旧9を提案。最大45分・前回$0.28/hで処理按分$0.21、準備/回収/保持等別。一回限り・失敗raw補修/再試行/自動延長なし。新承認を正確なproposal hashへ結ぶ別approved_planなしではmodel load前に止まる。追加学習・有料実行はまだ行わない。
 
-[全実結果・全file地図](observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/source_index_cpu/result_20261030/README.md)。通常source/receiver/意味型/API/DB/RN/Render/Supabase構造差分0、STRUCTURE_MAP_DELTA_NONE。最新の実結果・閉鎖はweekly§127。
+直前の同重み非学習一回（weekly§127）は両S1 JSON未完結/引用被覆不足で新2意味/本人本文0/2、派生packet/新CMEE/cold0、旧9NOT_RUN、不採用閉鎖のまま。既承認一回を再利用しない。現2題には元教師があり追加観測会不要。通常source/receiver/意味型/API/DB/RN/Render/Supabase構造差分0、STRUCTURE_MAP_DELTA_NONE。商品0・正式0/3・54.50％、candidate_ready/automatic_progression=false。最新判断と準備はweekly§128。
 
 **現在の観測会（10/27）：** Mashが、基本相談式／短い実入力式は華恋が基本案・判断に迷う例はMash／分析向けも時々交える、まずEmlisAIを優先する方針を明示決定した。[観測会方針](observation_learning/README.md#observation-session-policy-20261027)と[OBS-20261027-001](observation_learning/sessions/2026/OBS-20261027-001/01_dialogue.md#d00)へ記録。社内勉強会の引き継ぎを題材に、質問前の本人役設定を保持し、D11まで採録。D05のMash観測文とD06の相談者役の確認を保持し、D10で本人の「分かりやすかった」という感想の撤回か、保持したままの気掛かりかを見極める問いだったと教示を受けた。D11は華恋の理解で、具体的な次の問いの分岐は未説明。観測会終了は未指示。形式別の4B学習効果は未比較。材料収集と学習投入を分け、凍結15教材・評価・重みへの変更／追加GPU処理0。直近の意味・本文0/2という学習実結果と商品0／正式0/3／54.50％は変えない。
 

@@ -1,6 +1,6 @@
 # 現在の入力と学習入力を揃える19更新案 — 2026-10-30 JST
 
-状態：準備中・新しい有料実行は未承認。直前の同重み非学習一回は不採用で閉鎖済み。その承認を再利用しない。
+状態：Jupyter CPU準備済み（実6.149962861905806秒・exit0）・新しい有料実行は未承認。直前の同重み非学習一回は不採用で閉鎖済み。その承認を再利用しない。
 
 ## 原因の照合と判断
 
@@ -28,5 +28,7 @@
 | `prepare_aligned19.py` | Jupyter CPUで19件をencode。全10旧入力との差、教師/EOS/mask同一性、実S1入力一致、旧9同一、13path再結合、112有限F32とfrozen identityを確認。model/forward/generation/CMEEなし |
 | `run_aligned19_once.py` | 新承認を別`approved_plan.json`で正確なproposal hashへ結び付けない限りモデルをloadしない。承認後の19更新・保存非学習再読・新2→CMEE/cold→条件付き旧9を有限実行 |
 | `result_20261030/` | CPU実行後の原本・hash・回収照合を保存する場所。学習/自由生成成功の証拠ではない |
+
+[CPU実原本・回収照合](result_20261030/README.md)。全10入力の差、教師/EOS/mask・旧9不変、215frozenを実確認。CPU合格は自由生成改善や新CMEE成功ではない。
 
 Podには元の教師・入力・実結果・重み・依存を保持する。GPU停止/再起動/削除やRunpod管理画面/API操作は行わない。root華恋が単一writer/executor/judge、補助はread-only照合。実環境はCodex Workで、正式Pro/Ultra/human authorityを申告しない。

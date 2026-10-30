@@ -3930,3 +3930,19 @@ root/補助は全2rawを全文読了。今回は両件で正しい3identityを�
 archive_manifestの全19payloadと自身の20memberを一回回収し、原本source2/承認plan/全raw-token/実messages/hash/loaded112metadata/費用を独立照合。実起動・回収のターミナル文は別原文写しとして保持。旧runtime planは承認時の不変原本、execution planだけclosure付き閉鎖。source_index_cpu入口の「未承認」案は承認前の履歴と明示して現在結果へ置換する。
 
 [全実結果・全raw所見・原本地図](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/source_index_cpu/result_20261030/README.md)。全体00/観測入口/01A地図を同単位更新。通常source/receiver/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy責務差分0、STRUCTURE_MAP_DELTA_NONE。root華恋単一writer/executor/judge、補助read-only、実環境Codex Workで正式Pro/Ultra/human authorityを申告しない。primary=BLOCKER_NARROWED（source対応の限定変化を実出力確認、構造未成立）、technical/product credit0、正式0/3・54.50％、candidate_ready/automatic_progression=false。次は同paid再試行やraw補修をせず、既存教師/学習targetと実出力に残る末尾構文・引用被覆を照合して具体方針を判断する。新prompt探索/追加学習/新有料案を自動開始しない。
+
+
+<a id="20261030-current-prompt-aligned19-cpu-ready"></a>
+## 128. 現在10入力が未学習だった差を特定し、同教師の19更新案をCPU準備（新有料実行未承認）
+
+Mashの継続指示を受け、全体原本・全app設計/全file地図の既確認導線・最新weekly§127・実19更新の入力とlossコード・全教師target・直前全2rawを照合した。全10区間で実学習時の入力指示と現在の指示が異なり、現在の指示の学習は0回。一方、教師本文は同一で、完全assistant末尾/root閉じ/EOS/新行をlabelsへ含めていた。maskの欠落という説明は支持されない。BOOK/SHOPの必要引用群も不足しており、括弧だけを修復する案を採らない。入力差は次に確かめる仮説であり、唯一の原因/学習の十分性/成功保証を確定しない。
+
+rootが現builderをそのまま使うprepare/GPU runner/未承認proposalを最小実装し、read-only補助が静的照合。source [f0ec04e2](https://github.com/MassyuRed/Cocolon/commit/f0ec04e22df16e348f8da6621289c71b201d627e)へ保存して全5fileを読み戻し、Jupyterterminalからpin取得/hash照合後、CPU準備を一回実行した。入力10と元教師/EOS/maskを再encode、実直前S1 messagesとの一致、teacher previousで同builder一致、旧9の行・encoding不変、全2教師13path lossless再結合、初期112有限F32と215frozen不変を確認。実6.149962861905806秒・親6.956690767081454秒・exit0、最大prompt+cap7117/8192、model load/forward/update/generation/新CMEE0、CUDA未初期化。起動wrapperの引用ミス一回と回収wrapperの引用ミス一回は各Python構文解析で停止し、準備/回収のbodyは未開始。修正後のCPU準備開始は一回、GPU再試行0。
+
+prepared gzip SHA84d2d641ab1bccb3ad3b6140304b0026fecc1e1dcbb9129814c1d7d327c7de62、train19 SHA57292ff2e058dc0d6cc024e63fe5d146c89069b8a4ea26c8627ba75170fca6d7、proposal SHAbcb4459e805aaef00fdcdc068b19f1bc83b49d175792aa8e4c885a2f73d41724。原本ZIP190335bytes/12member（11payload＋manifest）SHA34d1e31b7222f360a1d33dbddbf2c92b0d92adaa3bebf74af2a353d7a6af6d99をJupyterから直接回収し、全CRC/bytes/SHAと実source/encoded payload/全19行を照合して展開保存。GPUはA5000 1MiB/0％で保持、9b重み/config不変。Runpod管理console/API/stop/restart/delete0。
+
+推奨する次の**未承認**一回は、失敗・不採用の9bを隔離実験の初期値としてのみ使い、現在10入力＋不変元教師と旧9を各1回の19更新。同完全assistant+EOS CE/AdamW5e-5/clip1/seed20261024/112LoRAを保持し、追加の教師・重み付け・cap/receiver/acceptance変更なし。保存後の非学習reload、新2のactual前段だけによる5段自由生成→既存CMEE/保存/cold全成功時だけ旧9実生成を実施する案。最大2load/19update/19generation、45分・前回$0.28/hで処理按分$0.21、準備/回収/保持/保存/通信/税等別。親2690秒＋kill10秒、一回限り・再試行/修復/自動延長なし。初期値使用自体を新承認の範囲へ明記し、製品採用や閉鎖承認継承としない。実行しない場合は現在指示未学習の9b/CMEE未達で止まる。
+
+Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/aligned19/README.mdが判断/全file責務、proposal.jsonがexact案、prompt_source_index.pyが現在builder原本、prepare_aligned19.pyがCPUだけの19encoding、run_aligned19_once.pyが新approved_plan（exactproposal SHA一致）なしのmodel loadを禁止し有限実行を所有。result_20261030には全12member、実source copy、未承認runtime plan、CPUlog/exit/time、current19全messages/encoded19、postidentityと回収verificationを保存する。
+
+現2題の正しい教師は既存なので、追加観測会は不要。教師前段と実生成前段の差は残り、CPU合格をモデル改善へ数えない。前§127の0/2/旧9NOT_RUNと不採用閉鎖を保持し、有料再実行/追加学習/新CMEE0。通常source/receiver/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy責務差分0、STRUCTURE_MAP_DELTA_NONE。root華恋単一writer/executor/judge、補助read-only、実環境Codex Workで正式Pro/Ultra/human authorityを申告しない。primary=BLOCKER_NARROWED（未学習入力差）、technical/product credit0、正式0/3・54.50％、candidate_ready/automatic_progression=false。新paid envelopeはrule18§11.3の個別Mash approval対象で、今回は準備結果を提示して採否を求める。

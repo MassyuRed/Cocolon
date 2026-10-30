@@ -1,0 +1,11 @@
+{
+  "archive_bytes": 190335,
+  "archive_sha256": "34d1e31b7222f360a1d33dbddbf2c92b0d92adaa3bebf74af2a353d7a6af6d99",
+  "archive_members": 12,
+  "payloads": 11,
+  "all_crc_bytes_sha_pass": true,
+  "runtime_source_matches_commit": true,
+  "prepared_and_train19_hashes_match": true,
+  "model_executed": false,
+  "authority": "PROPOSED_NEEDS_NEW_MASH_APPROVAL"
+}

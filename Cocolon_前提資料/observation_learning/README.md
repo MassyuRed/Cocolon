@@ -2,13 +2,13 @@
 
 **最新GPU読取確認（2026-10-30 JST）：** 同Jupyter/Pod vgkm402msgroiu/RTX A5000、今回終了後1MiB/0％で稼働保持。処理47.405705535秒/$0.0036871104305按分、親外48.852184686秒、準備/回収/保持等別。Stop/restart/delete/Runpod管理画面/API0、207fileと保存9b重み不変。
 
-**現在の直接作業（10/30・source一覧付き非学習一回を不採用閉鎖）：** Mashが6b9b0d42の具体案へ「進めていいよ。」と承認し、source2e3a6071で同9b保存重みを非学習1load/112F32有限・学習0/実2call。両S1はsource ID/原欄とalias/quote分離が揃ったが、BOOK311/SHOP427token・EOSでも最外root未完結で拒否。引用10/14と教師17/18の差も残り、括弧だけの残件としない。新2意味/本人本文0/2、全5段/派生packet/新CMEE/saved/cold0、旧9NOT_RUN。不採用閉鎖・再試行0。
+**現在の直接作業（10/30・現行入力19更新のCPU準備済み／新有料実行は未承認）：** Mashの「4B学習＋CMEE接続を続けて」を受け、実19更新の学習入力・現在10入力・全教師/EOS/mask・直前全2 rawを照合。全10区間で旧学習時と現在の入力指示が異なり、現在指示の学習は未実行。一方、教師本文・末尾/EOS/新行は全10で同一かつ完全に学習対象。mask欠落は見つからない。入力差は原因候補で、唯一の原因や成功保証としない。
 
-入力由来一覧による実2出力の局所変化を、意味採用・商品改善へ数えない。全20member/19payload・70276bytes/SHA8c62c3535dcef7d685d38ee6f0220500592c797c158007ed967d6c46ed86cf42を回収し、CRC/全bytes/SHA/source/実messages/全2rawをroot/補助で独立照合。全memberをGitHubへ展開保存する。新weight0、原weightの既存完全保存を保持。追加観測会は現2題に不要、商品0/正式0/3/54.50％・candidate_ready/automatic_progression=false。
+Jupyter直結でsource f0ec04e2のCPU準備を一回実行、6.149962861905806秒・親6.956690767081454秒・exit0。現在10入力と実S1入力/同builderの一致、教師とEOS・旧9の行/token列不変、2教師13path lossless再結合、初期112有限F32、215file不変を確認。最大prompt+cap7117/8192。model load/forward/学習/生成/新CMEE0、重み9b不変、A5000 1MiB/0％で稼働保持。CPU準備は自由生成・CMEE成功の証拠ではない。
 
-次は同paid再試行やraw補修をせず、既存教師/学習targetと実出力に残る末尾構文・引用被覆を照合して具体方針を判断する。新prompt探索/追加学習/新有料案を自動開始しない。
+[19更新案・実CPU原本・全file地図](training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/aligned19/README.md)：失敗・不採用の保存9bを隔離実験の初期値にのみ使い、現在10入力＋不変教師と旧9を各1回の19更新→保存/非学習再読→新2実生成/既存CMEE/cold→全成功時だけ旧9を提案。最大45分・前回$0.28/hで処理按分$0.21、準備/回収/保持等別。一回限り・失敗raw補修/再試行/自動延長なし。新承認を正確なproposal hashへ結ぶ別approved_planなしではmodel load前に止まる。追加学習・有料実行はまだ行わない。
 
-[全実結果・全file地図](training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/source_index_cpu/result_20261030/README.md)。通常source/receiver/API/DB/RN構造差分0、STRUCTURE_MAP_DELTA_NONE。最新weekly§127。
+直前の同重み非学習一回（weekly§127）は両S1 JSON未完結/引用被覆不足で新2意味/本人本文0/2、派生packet/新CMEE/cold0、旧9NOT_RUN、不採用閉鎖のまま。既承認一回を再利用しない。現2題には元教師があり追加観測会不要。通常source/receiver/意味型/API/DB/RN/Render/Supabase構造差分0、STRUCTURE_MAP_DELTA_NONE。商品0・正式0/3・54.50％、candidate_ready/automatic_progression=false。最新判断と準備はweekly§128。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 

@@ -5793,3 +5793,8 @@ fixed_rows/structural_cpu/forward_prefix_cpu/result_20261030/README.mdが実結�
 ### weekly§127 — source一覧付き同重み非学習一回の全file地図
 
 `stage5/source_index_cpu/result_20261030/README.md`が全file責務、`summary.json/content_review.md`が一回実2call/両S1最外JSON未完結/0/2/旧9NOT_RUNと全raw所見、`run`のrun/raw2/messages2/stage records2/loaded112/extra_frozen/cmee diagnosisは未修復原本。`runtime`の実source2/承認plan/lock/launch/log/exit/elapsed/post_identityは非学習1load/学習0/親1790+kill10/47.4057秒$0.00368711按分/207不変/GPU保持、launch_command/export_commandは実ターミナル原文写し。`archive_manifest/recovery/verification`は20member/70276bytes原本/全19payloadCRC・bytes・SHA/source/実chainを所有。全memberをGitHubへ展開保存、重みは今回不変で既存完全保全を参照。`execution_20261030/plan.json`はclosure付き閉鎖、runtime planは承認時不変、proposalは承認前履歴。source_index_cpu入口を現在結果へ同期。通常受口/型/API/DB/RN/Render/Supabase責務差分0、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％、追加観測会は現2題不要、automatic_progression=false。
+
+
+### weekly§128 — 現行入力19更新案・CPU原本の全file地図
+
+`stage5/aligned19/README.md`が現10入力未学習差の判断/限界と全file責務、`proposal.json`が9b非採用初期値限定/19更新/45分$0.21按分（準備等別）の新未承認案、`prompt_source_index.py`が直前と同じ現builder、`prepare_aligned19.py`が全10教師/EOS/mask不変・旧9行/token不変・実S1一致・2教師13path再結合・112有限F32/215不変のCPUencoding、`run_aligned19_once.py`がexactproposal SHAを結ぶ新approved_planなしのmodel loadを禁止し、承認後の19更新/保存非学習再読/新2actual chain→既存CMEE-cold→全成功時旧9を所有。`result_20261030/cpu`のprepared_cpu.json.gz/train19.jsonl/cpu_summary.json/post_identity.json、`runtime`のsource3/proposal/README/CPUlog/execution、archive_manifest/verificationが全12member原本・6.14996秒/親6.95669秒/exit0・全hash/bytesと回収を所有。proposalとruntime copyは変更せず未承認のまま。新学習/生成/新CMEE0、重み9b不変、GPU保持。閉鎖承認再利用0、観測会は現2題不要。通常受口/型/API/DB/RN/Render/Supabase責務差分0、STRUCTURE_MAP_DELTA_NONE。商品0/正式0/3/54.50％、candidate_ready/automatic_progression=false。
