@@ -1,20 +1,20 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-更新日：2026-10-30 JST（最新差分：現行10入力の未学習差を確認・19更新CPU準備／有料案未承認、weekly§128）。全Cocolon作業の必読原本。
+更新日：2026-10-30 JST（最新差分：現行入力19更新一回の実結果・不採用閉鎖、weekly§129）。全Cocolon作業の必読原本。
 
 > **最新報告会：[第8回・2026-10-24](weekly_reviews/Cocolon_Weekly_Review_20261024.md)。** 今週実績・前週目標の達否と10/24〜10/31の管理案を記録。**Mashの指示により報告会終了。** 華恋の意見全文は[§10](weekly_reviews/Cocolon_Weekly_Review_20261024.md#karen-closing-opinion)、終了時の区分と再開先は[§11](weekly_reviews/Cocolon_Weekly_Review_20261024.md#meeting-closed-and-next-session)。10/24の4B確定・GPU16GB優先/24GB許容は当時の決定で、4B確定は10/25に撤回済み。最新の開発基準選定は[§23](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-three-core-model-and-serving-decision)。華恋が今回の判断責任として選んだもので、旧4B確定・常時24GB契約の自動復活ではない。起動済み3070の実確認は[§22](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-3070-running-cuda-uvm-io-error)。A5000未確保は§20の履歴。Vast実見積りは§19の履歴。次週の推奨順位は[§4](weekly_reviews/Cocolon_Weekly_Review_20261024.md#next-week-priorities)、対象path・具体手順・失敗/回復検査・終了条件は[§8](weekly_reviews/Cocolon_Weekly_Review_20261024.md#detailed-work-breakdown)を参照。全体管理評価・公開見通しは[§9](weekly_reviews/Cocolon_Weekly_Review_20261024.md#overall-status-and-release-outlook)：54.50％、正式商品受入れ0/3、12/18達成の裏付け不足。会議途中の「進行中」は当時の記録。次週案全体への明示採否・個別実行の未決は§11に区別して保持する。モデル選定の決定と、以下の品質・配置・端末・費用の未完了を区別する。
 
 **最初のA4500学習実績（§24・履歴）：** [A4500で修正版4B追加学習を完走、重み回収、CMEE採用は未達（§24）](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-a4500-training-and-portable-weights)。[全実結果](observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/repaired_a4500_20261025/README.md)。Mashは4B採用とリリースまでRunpodでの追加学習を明示し、将来は手持ちPCへ移す可能性が高い。RTX A4500 20GB／Secure・EU-RO-1・Pod y0eb0w0qn6nks0を今回の最安の容量候補として確保。GPU$0.25/h・50GB container込み表示$0.26/h。CUDA/BF16正常、修正版2教師/1epoch/2update・adapter保存/非学習reload・前後16生成が20分23.76秒で完走し、20GBで現方式が動くことを確認した。peak allocated14.970/reserved17.588GiB。最終archive全24memberのhashと32tensor有限性/前後重み不変をPod外照合し永続保管済み。NLL0.251117→0.245189、raw6/8変化だが、CMEE意味/本文は前後0/2。初回の根拠座標は通るようになったが必須shape/自然文surface不正、訂正後rawは不変、proxy2件が2048tokenで打切りとなり品質未達。その時点の残件は必須shapeと自然文surfaceで、後続の現在作業は下段へ更新する。この§24のrunはGPUを停止せず終了した。旧3070は今回開始時既に停止表示、華恋のStop操作0。
 
-**最新GPU読取確認（2026-10-30 JST）：** 同Jupyter/Pod vgkm402msgroiu/RTX A5000、今回終了後1MiB/0％で稼働保持。処理47.405705535秒/$0.0036871104305按分、親外48.852184686秒、準備/回収/保持等別。Stop/restart/delete/Runpod管理画面/API0、207fileと保存9b重み不変。
+**最新GPU読取確認（2026-10-30 JST）：** 同Jupyter/Pod vgkm402msgroiu/RTX A5000、今回終了後1MiB/0％で稼働保持。処理491.35681426001247秒/$0.03821664110911208按分、親外492.6916159699904秒、準備/回収/保持等別。Stop/restart/delete/Runpod管理画面/API0、215frozenと元9b重み/config不変、新b5eは不採用実験重みとして完全保全。
 
-**現在の直接作業（10/30・現行入力19更新のCPU準備済み／新有料実行は未承認）：** Mashの「4B学習＋CMEE接続を続けて」を受け、実19更新の学習入力・現在10入力・全教師/EOS/mask・直前全2 rawを照合。全10区間で旧学習時と現在の入力指示が異なり、現在指示の学習は未実行。一方、教師本文・末尾/EOS/新行は全10で同一かつ完全に学習対象。mask欠落は見つからない。入力差は原因候補で、唯一の原因や成功保証としない。
+**現在の直接作業（10/30・現行入力19更新一回完了／不採用閉鎖）：** Mashが最大45分・前回単価処理按分$0.21（準備/回収/保持等別）・再試行なしへ「進めていいよ。」と承認し、source105c08d2をJupyterで一回実行。現10入力＋不変旧9を各1回の19forward/19optimizer、112tensor変更、保存1・非学習reload1（計2load）・実7生成を完了した。入力/教師/EOS/mask/cap/受信はCPU合格時から不変。
 
-Jupyter直結でsource f0ec04e2のCPU準備を一回実行、6.149962861905806秒・親6.956690767081454秒・exit0。現在10入力と実S1入力/同builderの一致、教師とEOS・旧9の行/token列不変、2教師13path lossless再結合、初期112有限F32、215file不変を確認。最大prompt+cap7117/8192。model load/forward/学習/生成/新CMEE0、重み9b不変、A5000 1MiB/0％で稼働保持。CPU準備は自由生成・CMEE成功の証拠ではない。
+BOOKはS1通過後、S2の全10claimが11セル（要求10）で実claim_outer_type停止。SHOPは5段shape/13path結合1候補まで進んだが、実receipt INVALID_FORMAT/candidate_json=null、semantic_receipt_not_validated。静的には全11subject.bindが文字列でなく配列であり、後段bind/更新根拠/日本語本文にも独立した不成立がある。新2意味/本人本文0/2、saved/cold0、旧9NOT_RUN。両S1のJSON閉じ/alias3一致/引用16ずつへの局所変化を意味・商品改善へ数えない。教師17/18の完全scopeは揃っていない。
 
-[19更新案・実CPU原本・全file地図](observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/aligned19/README.md)：失敗・不採用の保存9bを隔離実験の初期値にのみ使い、現在10入力＋不変教師と旧9を各1回の19更新→保存/非学習再読→新2実生成/既存CMEE/cold→全成功時だけ旧9を提案。最大45分・前回$0.28/hで処理按分$0.21、準備/回収/保持等別。一回限り・失敗raw補修/再試行/自動延長なし。新承認を正確なproposal hashへ結ぶ別approved_planなしではmodel load前に止まる。追加学習・有料実行はまだ行わない。
+全7EOS/timeout0、全実messages/raw/token metadata/actual前段chain/SHOP結合をroot/補助で照合。全51member（14603727bytes/SHA1fc5ca54a129485173d6f3a0d7b191aaaf85075c21e21339e011b03d27633712）のCRC/bytes/SHAを回収確認。新b5e7936dは全112F32有限で完全保存、元9b/215frozenは不変。実承認原本はruntimeへ不変保持し、上位approved_planは消費済み閉鎖。再試行/補修/条件外旧9/受信緩和/追加学習/次run0。
 
-直前の同重み非学習一回（weekly§127）は両S1 JSON未完結/引用被覆不足で新2意味/本人本文0/2、派生packet/新CMEE/cold0、旧9NOT_RUN、不採用閉鎖のまま。既承認一回を再利用しない。現2題には元教師があり追加観測会不要。通常source/receiver/意味型/API/DB/RN/Render/Supabase構造差分0、STRUCTURE_MAP_DELTA_NONE。商品0・正式0/3・54.50％、candidate_ready/automatic_progression=false。最新判断と準備はweekly§128。
+[全実結果・全raw所見・重み保存先・全file地図](observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/aligned19/execution_20261030/README.md)。今回の基本不成立に追加観測会不要。新重みを製品/次の初期値へ自動採用せず、形式だけの補修でも成功としない。通常source/receiver/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy責務差分0、STRUCTURE_MAP_DELTA_NONE。商品0・正式0/3・54.50％・candidate_ready/automatic_progression=false。最新weekly§129。
 
 **現在の観測会（10/27）：** Mashが、基本相談式／短い実入力式は華恋が基本案・判断に迷う例はMash／分析向けも時々交える、まずEmlisAIを優先する方針を明示決定した。[観測会方針](observation_learning/README.md#observation-session-policy-20261027)と[OBS-20261027-001](observation_learning/sessions/2026/OBS-20261027-001/01_dialogue.md#d00)へ記録。社内勉強会の引き継ぎを題材に、質問前の本人役設定を保持し、D11まで採録。D05のMash観測文とD06の相談者役の確認を保持し、D10で本人の「分かりやすかった」という感想の撤回か、保持したままの気掛かりかを見極める問いだったと教示を受けた。D11は華恋の理解で、具体的な次の問いの分岐は未説明。観測会終了は未指示。形式別の4B学習効果は未比較。材料収集と学習投入を分け、凍結15教材・評価・重みへの変更／追加GPU処理0。直近の意味・本文0/2という学習実結果と商品0／正式0/3／54.50％は変えない。
 
@@ -156,7 +156,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 | 作業領域 | 次に解消すべき具体的未完了 |
 |---|---|
-| 学習済みAI・CMEE接続 | §127：承認済み同9b非学習1load/学習0/実2callを47.406秒/$0.0036871104305按分（準備等別）で実行。両S1はsource対応/配列分離が揃ったがEOS時JSON未完結、引用被覆も未成立。新2意味/本文0/2、新CMEE/saved/cold0、旧9NOT_RUNで不採用閉鎖。207不変/全20member保全。[原本・判断](observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/source_index_cpu/result_20261030/README.md)。再試行/追加学習/次有料案は自動開始しない。 |
+| 学習済みAI・CMEE接続 | §129：現10＋旧9各1の19更新、保存/非学習再読（計2load）と実7生成を491.356814秒/$0.0382166411按分（準備等別）で一回実行。BOOK S2 claim_outer_type、SHOP5段後INVALID_FORMATで意味/本文0/2・saved/cold0・旧9NOT_RUN、不採用閉鎖。全51member/新112F32重み保全、元9b/215不変・GPU保持。[実原本/全所見](observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/aligned19/execution_20261030/README.md)。新学習/補修/次run/初期値採用へ自動進行しない。 |
 | 10/24までの費用・4B選定履歴（当時の構成） | Flex24GBの旧月78,980生成・未測定の速度/起動仮定による運用費95,094円・赤字67,833円の試算は当時の構成の記録で、最新構成の原価ではない。[全仮定・再計算](observation_learning/model_selection/2026-10-24-production-economics/README.md)。旧4B実診断では24GBでLoRA保存・reload・16生成・回収を確認したが、FITは前後0/2。CPU指示修復API1dabc4fは54対象/pack11・合成2/2で、修正版は後続10/25にA4500 20GBで完走・回収済み、最新結果は§24。旧学習peak allocated14.954GiBを本番推論の必要VRAMへ流用しない。4bit/M4を第一候補とした§23は当時の華恋案で、現在の移行先はWindows／Mac未選定。公開API単価を独自育成版の原価へ流用しない。 |
 | Emlis | 一般入力と回答後の意味・自然な本文・有料差、本人実機の保存再読まで。u353〜355のコードと配置差を保持 |
 | Analysis | 最新内容修正版の配置差、通常本文生成・同一保存再読・monthly履歴/比較の本人確認、複数ANSWER採用、一般理解、有料差、IF／Savedの未実装。6501時点の不足案内表示は本人確認済みとして保持 |

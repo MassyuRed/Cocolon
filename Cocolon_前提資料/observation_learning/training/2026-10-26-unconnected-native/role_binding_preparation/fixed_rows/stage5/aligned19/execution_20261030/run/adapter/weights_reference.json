@@ -1,0 +1,20 @@
+{
+  "library_file_id": "libfile_7bc6a0675d708191a4d84f276b3870f3",
+  "url": "https://chatgpt.com/library?file_id=libfile_7bc6a0675d708191a4d84f276b3870f3&account_id=personal",
+  "filename": "cocolon-aligned19-weights-20261030.zip",
+  "bytes": 14200265,
+  "sha256": "bf80ac066c57e64b1d4abd358479cb3c7402d6b2b518bc8d71ed4ca1864aa450",
+  "adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "8fb59378b4c6c3d6abf59227a6679804fd354b9a0aa10b9ec9e01788753dc40c",
+    "adapter_model.safetensors": "b5e7936d5a716dd4aba5f953722c2fb96b09ce9a20f50df6a36b983b5e8bb3ab"
+  },
+  "adapter_tensors_F32_finite": 112,
+  "changed_tensors": 112,
+  "full_base_weights_included": false,
+  "base_model": "Qwen/Qwen3.5-4B",
+  "base_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "status": "STOPPED_NOT_ADOPTED_NO_RETRY",
+  "product_credit": 0,
+  "automatic_progression": false
+}

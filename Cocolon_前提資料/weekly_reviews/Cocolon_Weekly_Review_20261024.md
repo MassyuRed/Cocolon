@@ -3946,3 +3946,21 @@ prepared gzip SHA84d2d641ab1bccb3ad3b6140304b0026fecc1e1dcbb9129814c1d7d327c7de6
 Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/aligned19/README.mdが判断/全file責務、proposal.jsonがexact案、prompt_source_index.pyが現在builder原本、prepare_aligned19.pyがCPUだけの19encoding、run_aligned19_once.pyが新approved_plan（exactproposal SHA一致）なしのmodel loadを禁止し有限実行を所有。result_20261030には全12member、実source copy、未承認runtime plan、CPUlog/exit/time、current19全messages/encoded19、postidentityと回収verificationを保存する。
 
 現2題の正しい教師は既存なので、追加観測会は不要。教師前段と実生成前段の差は残り、CPU合格をモデル改善へ数えない。前§127の0/2/旧9NOT_RUNと不採用閉鎖を保持し、有料再実行/追加学習/新CMEE0。通常source/receiver/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy責務差分0、STRUCTURE_MAP_DELTA_NONE。root華恋単一writer/executor/judge、補助read-only、実環境Codex Workで正式Pro/Ultra/human authorityを申告しない。primary=BLOCKER_NARROWED（未学習入力差）、technical/product credit0、正式0/3・54.50％、candidate_ready/automatic_progression=false。新paid envelopeはrule18§11.3の個別Mash approval対象で、今回は準備結果を提示して採否を求める。
+
+
+<a id="20261030-aligned19-final-not-adopted"></a>
+## 129. 現行入力19更新一回完了、BOOK S2・SHOP受信形式不成立で不採用閉鎖
+
+Mashは具体案「最大45分・前回単価で処理按分$0.21（準備・回収・保持等別）、再試行なし」へ「進めていいよ。」と明示承認。proposal bcb4459e全文/hashと、保存9bを隔離実験初期値にだけ使うscopeをapproved_planへ結び、[105c08d2](https://github.com/MassyuRed/Cocolon/commit/105c08d231c3fb993f565197b200a5db8ff6c05e)へ固定・読み戻した。現行全体/最新§128/学習用途/全app設計/全file地図・実sourceとCPU原本を確認。実環境Codex Workで、正式Pro/Ultra/human authorityを申告せず、root華恋単一writer/executor/judge、補助read-onlyで進めた。
+
+同Jupyterから新承認/launcherをpin取得/hash照合し、fresh OUT・exclusive lock・直接の親timeout --signal=TERM --kill-after=10s 2690sを実確認して一回起動。旧CPU合格のrunner acaf2021/prompt66f28a40/proposal bcb4459e/encoded84d2d641/全19messages57292ff2は不変。初期9b1901abのtrainable112F32をloadし、固定19順を各1回、完全assistant+EOS CE/AdamW5e-5/clip1/seed20261024で19forward/19optimizer。新112tensor全変更、adapter保存1→非学習reload1（計2load）。追加の教師/weighting/cap/受信/acceptance変更0。
+
+実7生成は全EOS/timeout0、BOOK2call・SHOP5call。全7messagesは自分の実前段から同builderで構成され、teacher注入0、raw/hash/tokenIDs/usage/model/revision/newadapter metadataを照合。BOOKはS1構文通過後、S2全10claimが11cell（要求10）の実claim_outer_typeで停止、受信未到達。SHOPは全5stage shape通過、13path結合が保存派生候補と完全一致、既存CMEEへ渡した1候補の実receipt INVALID_FORMAT/candidate_json=null、意味側semantic_receipt_not_validatedで拒否。新2意味/本人本文0/2、saved/cold0、旧9NOT_RUN。条件外旧9・再試行・raw補修・consumer再呼出し・延長・学習追加・次run0。
+
+rootは全7rawを全文読み、補助の独立静的照合と一致。両S1のroot閉じ/教師と同じ3alias/@p0を実確認し、引用は前回10/14から各16へ増えたが、教師17/18のscope不足が残る。全32引用のsource/field/literal位置は一致。BOOKは完全な非連絡節/時点引用と語尾の差、S2のmode/polarity/pred/time.evの型崩れも残る。SHOPは全文否定q_extra_8と開店時点q_extra_11を欠き、11subject.bind全てが配列。凍結decoderのsubject_cell_typeと合わないという静的所見であり、その個別例外名は実receiptに記録されていないことを区別する。S3 JSON値は教師一致だが、S4更新ev/replacement、S5 bindのrr/ur/section/cr・日本語update_note/本人への受け取りも未成立。S5本文がupdate ID列になる等があり、subjectだけ直せば成功とはしない。stage shape完走を受信・意味・本人本文成功へ数えず、局所変化を商品改善へ換算しない。
+
+処理491.35681426001247秒/$0.03821664110911208按分、親外492.6916159699904秒/exit1。最大45分/$0.21内、単価は前回確認$0.28/h、現在単価の再照会でなく、準備/回収/保持/保存/通信/税等別。終了後215frozenと元9b/config不変、A5000 1MiB/0％で保持。Runpod管理console/API/Stop/restart/delete0。旧9の学習実行と、今回未実行の維持評価を区別する。
+
+回収codeだけにbest-effort GPU情報取得のtimeout10秒/例外記録とpartial ZIP保持を加え、b281aaeeのsourceをpin取得した。学習/生成/受信には触れない。全原本51member/50payload/14603727bytes/SHA1fc5ca54a129485173d6f3a0d7b191aaaf85075c21e21339e011b03d27633712をJupyterから直接回収し、全CRC/bytes/SHA/source/承認/全19学習/全7実chainを照合。新b5e7936d5a716dd4aba5f953722c2fb96b09ce9a20f50df6a36b983b5e8bb3abは全112F32有限、元9bから112tensor変更もPod外で実確認。[追加重みarchive](https://chatgpt.com/library?file_id=libfile_7bc6a0675d708191a4d84f276b3870f3&account_id=personal)14200265bytes/SHAbf80ac066c57e64b1d4abd358479cb3c7402d6b2b518bc8d71ed4ca1864aa450に新adapter完全bytesを保持（元4B全重みは含まない）。その他元50memberはGitHubへ原bytes展開、実command2/verification/weight table/summary/本文所見/weights参照を追加。runtime承認planは原7bb865b9のまま、上位approved_planだけ消費済み・不採用閉鎖として再利用を禁止する。
+
+[全実結果・全raw所見・全file地図](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/aligned19/execution_20261030/README.md)。全体00/観測入口/01Aを同単位更新。現2題には元の正しい教師があるので、この基本不成立を補う観測会は不要。新b5eを製品/次の初期値へ自動採用せず、同一runの再起動・次paid案へ進まない。通常source/receiver/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy責務差分0、STRUCTURE_MAP_DELTA_NONE。primary=BLOCKER_NARROWED（実S1通過と後段の具体的不成立）、technical/product credit0、正式0/3・54.50％、candidate_ready/automatic_progression=false。

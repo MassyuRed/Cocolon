@@ -1,0 +1,6 @@
+{
+  "exit_code": 1,
+  "outer_seconds": 492.6916159699904,
+  "hard_limit_seconds": 2700,
+  "retry": false
+}

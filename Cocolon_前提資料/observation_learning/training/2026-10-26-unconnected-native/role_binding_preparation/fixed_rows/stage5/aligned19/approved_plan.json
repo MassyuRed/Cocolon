@@ -1,5 +1,5 @@
 {
-  "status": "MASH_EXPLICITLY_APPROVED_ONCE",
+  "status": "CLOSED_NOT_ADOPTED_NO_RETRY",
   "proposal_sha256": "bcb4459e805aaef00fdcdc068b19f1bc83b49d175792aa8e4c885a2f73d41724",
   "proposal": {
     "model": "Qwen/Qwen3.5-4B",
@@ -37,7 +37,7 @@
     "prior_hourly_usd": 0.28,
     "current_rate_requeried": false,
     "preparation_cmee_cpu_recovery_holding_storage_network_tax_extra": true,
-    "learning_rate": 5e-05,
+    "learning_rate": 0.00005,
     "weight_decay": 0,
     "gradient_clip": 1,
     "seed": 20261024,
@@ -130,5 +130,28 @@
   "execution_owner": "root Karen only; read-only assistant review; actual environment Codex Work; no formal Pro/Ultra/human authority claim",
   "automatic_progression": false,
   "candidate_ready": false,
-  "product_credit": 0
+  "product_credit": 0,
+  "closure": {
+    "consumed": true,
+    "closed_date_jst": "2026-10-30",
+    "reason": "new_pair_failed_skip_old9_no_retry",
+    "result_status": "STOPPED_NOT_ADOPTED_NO_RETRY",
+    "source_commit": "105c08d231c3fb993f565197b200a5db8ff6c05e",
+    "runtime_approval_original": "execution_20261030/runtime/approved_plan.json",
+    "runtime_approval_sha256": "7bb865b90f024a0f8a6ad8082646471e8a56c9ebadc92f5b74c33d9bae5263bc",
+    "updates": 19,
+    "model_loads": 2,
+    "model_generations": 7,
+    "new_meaning": 0,
+    "new_body": 0,
+    "new_cases": 2,
+    "saved_cold": 0,
+    "old9": "NOT_RUN",
+    "processing_seconds": 491.35681426001247,
+    "process_cost_usd": 0.03821664110911208,
+    "reuse": false,
+    "retry": false,
+    "automatic_progression": false,
+    "new_initial_adapter_adoption": false
+  }
 }

@@ -1,0 +1,263 @@
+{
+  "status": "CPU_ALIGNED19_READY_NO_MODEL",
+  "seconds": 6.149962861905806,
+  "source_sha256": {
+    "prepare_aligned19.py": "1c190be1a01d2fd1eb9a58e72c303e5810f4dd46ab9c1702ccfd19d9882bff21",
+    "run_aligned19_once.py": "acaf2021ec84b193d4e50903ba2b5bc86bf79b33c05f1fce9b344135fa08ec1b",
+    "prompt_source_index.py": "66f28a40ca03611b02412d8c1208325dca5534760bf81fbcd2740a069e0aad96"
+  },
+  "proposal_sha256": "bcb4459e805aaef00fdcdc068b19f1bc83b49d175792aa8e4c885a2f73d41724",
+  "prepared_sha256": "84d2d641ab1bccb3ad3b6140304b0026fecc1e1dcbb9129814c1d7d327c7de62",
+  "train19_sha256": "57292ff2e058dc0d6cc024e63fe5d146c89069b8a4ea26c8627ba75170fca6d7",
+  "counts": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER/stage1",
+      "prompt_tokens": 4668,
+      "target_tokens": 492,
+      "total_tokens": 5160,
+      "cap": 640,
+      "prompt_plus_cap": 5308
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER/stage2",
+      "prompt_tokens": 4844,
+      "target_tokens": 899,
+      "total_tokens": 5743,
+      "cap": 1152,
+      "prompt_plus_cap": 5996
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER/stage3",
+      "prompt_tokens": 5686,
+      "target_tokens": 283,
+      "total_tokens": 5969,
+      "cap": 512,
+      "prompt_plus_cap": 6198
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER/stage4",
+      "prompt_tokens": 5951,
+      "target_tokens": 267,
+      "total_tokens": 6218,
+      "cap": 512,
+      "prompt_plus_cap": 6463
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER/stage5",
+      "prompt_tokens": 6250,
+      "target_tokens": 220,
+      "total_tokens": 6470,
+      "cap": 384,
+      "prompt_plus_cap": 6634
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage1",
+      "prompt_tokens": 4825,
+      "target_tokens": 523,
+      "total_tokens": 5348,
+      "cap": 768,
+      "prompt_plus_cap": 5593
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage2",
+      "prompt_tokens": 5027,
+      "target_tokens": 1094,
+      "total_tokens": 6121,
+      "cap": 1280,
+      "prompt_plus_cap": 6307
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage3",
+      "prompt_tokens": 6064,
+      "target_tokens": 236,
+      "total_tokens": 6300,
+      "cap": 384,
+      "prompt_plus_cap": 6448
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage4",
+      "prompt_tokens": 6282,
+      "target_tokens": 291,
+      "total_tokens": 6573,
+      "cap": 512,
+      "prompt_plus_cap": 6794
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage5",
+      "prompt_tokens": 6605,
+      "target_tokens": 293,
+      "total_tokens": 6898,
+      "cap": 512,
+      "prompt_plus_cap": 7117
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "prompt_tokens": 1750,
+      "target_tokens": 1331,
+      "total_tokens": 3081,
+      "cap": 2560,
+      "prompt_plus_cap": 4310
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "prompt_tokens": 3827,
+      "target_tokens": 2228,
+      "total_tokens": 6055,
+      "cap": 2560,
+      "prompt_plus_cap": 6387
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "prompt_tokens": 1746,
+      "target_tokens": 1331,
+      "total_tokens": 3077,
+      "cap": 2560,
+      "prompt_plus_cap": 4306
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "prompt_tokens": 3842,
+      "target_tokens": 2231,
+      "total_tokens": 6073,
+      "cap": 2560,
+      "prompt_plus_cap": 6402
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "prompt_tokens": 1743,
+      "target_tokens": 1321,
+      "total_tokens": 3064,
+      "cap": 2560,
+      "prompt_plus_cap": 4303
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "prompt_tokens": 3825,
+      "target_tokens": 2237,
+      "total_tokens": 6062,
+      "cap": 2560,
+      "prompt_plus_cap": 6385
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "prompt_tokens": 1778,
+      "target_tokens": 1585,
+      "total_tokens": 3363,
+      "cap": 2560,
+      "prompt_plus_cap": 4338
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "prompt_tokens": 1773,
+      "target_tokens": 1559,
+      "total_tokens": 3332,
+      "cap": 2560,
+      "prompt_plus_cap": 4333
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "prompt_tokens": 1777,
+      "target_tokens": 1598,
+      "total_tokens": 3375,
+      "cap": 2560,
+      "prompt_plus_cap": 4337
+    }
+  ],
+  "alignment": [
+    {
+      "id": "FT-BOOK-AFTER-ANSWER/stage1",
+      "trained_prompt_sha256": "3e9f83d98e94603b1b156b1cf68725603a4efc485a0c3d01c23a79cd09016dd3",
+      "current_prompt_sha256": "1166a156733f7af73b32d0ad74af4560a6cba83f53237f33cc4c8303f207be2e",
+      "teacher_sha256": "9a4df747ba87b901629a2769a9c2ea96f18f275c35886c8b466025d152bd13c5",
+      "target_and_eos_identical": true
+    },
+    {
+      "id": "FT-BOOK-AFTER-ANSWER/stage2",
+      "trained_prompt_sha256": "71ebdc27797aace8943a9f1d2382732b0062166fc9bbdc63a26048a34125edc5",
+      "current_prompt_sha256": "4c07eda50dc2afe1ec7833b22f9bffa013526736a6615e37641e9db439534bdb",
+      "teacher_sha256": "c565e055636e9df72a5a32221824e0ad3ff510d31f2df4101855fca6f8594295",
+      "target_and_eos_identical": true
+    },
+    {
+      "id": "FT-BOOK-AFTER-ANSWER/stage3",
+      "trained_prompt_sha256": "b921e008bb7227a0e6fee77700f744cbbfb59098505b216ea9483d280be1857f",
+      "current_prompt_sha256": "e11d0a33825870688caef1eac9c0e83055f81f32d6a9448720314ee62a9561d2",
+      "teacher_sha256": "550a62d6f9363d307bb83b73d8a6cb4f45b8ecd6d391bb359916e669deaa44ee",
+      "target_and_eos_identical": true
+    },
+    {
+      "id": "FT-BOOK-AFTER-ANSWER/stage4",
+      "trained_prompt_sha256": "c24c0222efa1e2c6add6dc5a117f917a2a319507acf8fd4c5145b3f67851abee",
+      "current_prompt_sha256": "e2ab06970a1330b6040ba39221648126c393c6bec5f7c91af67c7cb620e7166e",
+      "teacher_sha256": "49f121f66dbd0f0d79e89563dbcb14ff8d9faa0377d5ff4c2abad719b1cf3255",
+      "target_and_eos_identical": true
+    },
+    {
+      "id": "FT-BOOK-AFTER-ANSWER/stage5",
+      "trained_prompt_sha256": "b7fc30f6b6dc361fa838a7d979c63f03be3a37cb8012bc4eafeebf6f3678f10f",
+      "current_prompt_sha256": "9dfe7792542df781f1e72792fec1583bc2b6adecff28d1b08299272c510c86c8",
+      "teacher_sha256": "e6e92183a8e5e1756bd18de580bda64f0a703bd1bcab4f570d0069a47156a397",
+      "target_and_eos_identical": true
+    },
+    {
+      "id": "FT-SHOP-AFTER-ANSWER/stage1",
+      "trained_prompt_sha256": "76d2389c2d033517e77bbcffc3c1e7969142b389d497bcfd86aab61714973db3",
+      "current_prompt_sha256": "156bf39ff96a5cde61eb1695d73a8f12d4b74da64675c81e8a9ff9a17dae25e1",
+      "teacher_sha256": "fc53b6d63043db610c7718cf14c77ffa9ef737fbeaaa653ba05267343542b8cf",
+      "target_and_eos_identical": true
+    },
+    {
+      "id": "FT-SHOP-AFTER-ANSWER/stage2",
+      "trained_prompt_sha256": "e08b59fd7cef4754096abde66a5edc6e13d35c402da4180f0fc4d14e31329923",
+      "current_prompt_sha256": "475dabc439f44e5d1aaa275c461234568f58ce345aa213bfe1dbc37ae2a5e6b6",
+      "teacher_sha256": "748c78cb374ddbe2abe53832bad0b9aa30b2234f5270537b1f7648e8a4dd16f7",
+      "target_and_eos_identical": true
+    },
+    {
+      "id": "FT-SHOP-AFTER-ANSWER/stage3",
+      "trained_prompt_sha256": "561ccd3e413456a829d82589ab830f2c36dcafe251b1e87511351a53fdf47920",
+      "current_prompt_sha256": "630841127bf482325f39e41d1f9ada6a39342d8dae53d8d20e5b21376dd5f325",
+      "teacher_sha256": "6e34f43454b1eb5573f008937fd38cfbb1e9288b77a3431dca716dfd13b63bd4",
+      "target_and_eos_identical": true
+    },
+    {
+      "id": "FT-SHOP-AFTER-ANSWER/stage4",
+      "trained_prompt_sha256": "6e4c2bce6531afe8b81bb7ebd28711adf40c5dc461740a6b75a4644b1e3c6d51",
+      "current_prompt_sha256": "bd1724eb1fcb9807b568faabd4b67677ef04acb0bb77534985674a0c63656951",
+      "teacher_sha256": "ca14c5f5530723ad4b12d426b467056b047d9c1c3e26175fe828724b8bd24201",
+      "target_and_eos_identical": true
+    },
+    {
+      "id": "FT-SHOP-AFTER-ANSWER/stage5",
+      "trained_prompt_sha256": "259156c6e906d9e2a0496be61d862dae740f578bf09b7c537776c7b5dbfac943",
+      "current_prompt_sha256": "2d9e7ad682c6d8ccee6cf2db7bb164f109d23dc3589df2051a105b439930ca0e",
+      "teacher_sha256": "e7746d5c78cb71d8c7a7bb6e5731ff80370cc4c0aa93d5c3f0fb809ccc4b0248",
+      "target_and_eos_identical": true
+    }
+  ],
+  "teacher_checks": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "lossless_thirteen_paths": true,
+      "original_teacher_sha256": "8ed156667ec5390adf0a9da758c9a7d5336ad7c2278128887769fe4d064b5241"
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "lossless_thirteen_paths": true,
+      "original_teacher_sha256": "bb28d66c7b43b7805ef2633c922315ff58a5817774ae25e3ac9329a873e6b3ef"
+    }
+  ],
+  "old9_rows_and_encoding_unchanged": true,
+  "initial_tensors": 112,
+  "initial_dtype": "F32",
+  "frozen_files": 215,
+  "model_loads": 0,
+  "model_forwards": 0,
+  "updates": 0,
+  "generations": 0,
+  "new_cmee_calls": 0,
+  "cuda_initialized": false,
+  "candidate_ready": false,
+  "automatic_progression": false,
+  "product_credit": 0
+}
