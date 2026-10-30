@@ -1,5 +1,7 @@
 # Source identity / quote field guidance — finite CPU check
 
+**最新（10/30）：Mash承認の同重み非学習一回は実行済み・不採用閉鎖。** 1load/学習0/2call、両S1はEOSでもJSON未完結、新2意味/本文0/2・新CMEE/saved/cold0・旧9NOT_RUN。実source/field対応とalias/quote分離は揃ったが必要引用群も未成立。47.405705535秒/$0.0036871104305按分（準備等別）、207frozen/9b重み不変、GPU保持。[全実結果・全raw所見・原本地図](result_20261030/README.md)。実行planは閉鎖、次の有料run/追加学習/新prompt探索を自動開始しない。以下のCPU結果と承認前案は履歴として保持する。
+
 2026-10-30 JST. Source: Cocolon ae03e5bdd192479da1c57c29648b14dacb30df37; API PR3 7acff07421c0cfa458ec6cf75616187379311854.
 
 ## Purpose and boundary
@@ -32,7 +34,9 @@ STRUCTURE_MAP_DELTA_NONE: no product/source admission/API/DB/RN/Render/Supabase 
 
 `result/report.json`は実CPU結果、`source_guides.json`は原入力だけから得た一覧、`candidate_train10.jsonl`はCPUで確認した全messagesと不変target、`frozen_sha256.json`は200不変入力、`execution.json/cpu.log/cpu.exit`は一回起動・時間・exit、`recovery_manifest.json`はPodで計算した原9fileのbytes/SHA、`verification.json`は回収後の全9file一致とrootの全10messages/target独立照合を所有する。Jupyter実画面を今回の報告へ添付する。原重みは今回不変、別保存済み完全stage5原本を保持する。
 
-## 次の具体案（未承認・未実行）
+## 承認前の具体案（履歴・今回実行済み）
+
+以下は承認前の記録。現在の実結果と閉鎖は上段およびresult_20261030を優先する。
 
 `proposal.json`と`run_source_index_once.py`を準備した。追加学習0・保存9b1901abの非学習1load、新2件を各最大5call、実前段rawだけで連鎖し、全5段が成立した場合だけ既存CMEEと保存再読へ進む。両件の意味・本人本文・coldが全成功した場合だけ旧9を各1回確認する。最大19call、各180秒、全1800秒、親1790秒TERM+kill10秒。前回確認単価$0.28/hによる処理按分$0.14上限（準備・回収・保持・保存・通信・税等別）。現在単価の再照会0。
 

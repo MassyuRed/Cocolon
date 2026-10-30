@@ -1,6 +1,6 @@
 {
   "schema": "cocolon.stage5.source_index_probe.execution.v1",
-  "status": "MASH_EXPLICITLY_APPROVED_ONCE",
+  "status": "CLOSED_NOT_ADOPTED_NO_RETRY",
   "executor": "root Karen only; support read-only; Codex Work, no formal Pro/Ultra/human acceptance claim",
   "purpose": "Test a minimal Stage1 input-derived source identity/field roster and namespace guidance with the same saved weights and unchanged full five-stage CMEE/cold route.",
   "not_claimed": "Teacher source/field mapping already correct; prior SHOP S1 already bound identities correctly. CPU guidance consistency is not free generation or product improvement.",
@@ -58,7 +58,7 @@
   "success": "New2 meaning/body/cold2/2 plus old9 meaning/body/cold9/9; root reads all raw and formed bodies. No formal Product Read or product credit.",
   "stop": "One run only. Global/call timeout, live context/identity failure, invalid or unfinished stage, unavailable meaning/body/cold or old9 regression closes not adopted. No retry, extra training, cap extension, fallback, new prompt search or next GPU run.",
   "preservation": "Save all actual raw/token IDs/input messages/usage/timings/chain/derived packets/CMEE saved-cold/read-only loaded tensor table/weights identity; export and verify outside Pod. Existing saved weights and frozen inputs unchanged.",
-  "implementation_state": "Finite nontraining runner reviewed/fixed and CPU checked. This exact new one-shot was explicitly approved by Mash; execution not yet started.",
+  "implementation_state": "Approved once completed and closed not adopted. No retry or new execution. Runtime plan in result preserves the original approval bytes.",
   "retry": false,
   "gpu_stop_restart_delete": false,
   "new_gpu_rental": false,
@@ -93,5 +93,20 @@
     "received_date_jst": "2026-10-30",
     "user_response": "進めていいよ。",
     "scope": "One no-training/same saved9b generation of new2, unchanged CMEE/saved-cold, old9 only after both new2 fully pass; max30min/$0.14 processing at previous rate, prep/recovery/holding etc extra; no retry."
+  },
+  "closure": {
+    "received_date_jst": "2026-10-30",
+    "source_commit": "2e3a607199b79d8cf0bde92bece8abf3a3630e99",
+    "result": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/source_index_cpu/result_20261030/README.md",
+    "model_loads": 1,
+    "updates": 0,
+    "calls": 2,
+    "new_meaning_body": "0/2",
+    "new_cmee_saved_cold": 0,
+    "old9": "NOT_RUN",
+    "processing_seconds": 47.40570553496946,
+    "process_cost_usd": 0.0036871104304976245,
+    "weights_unchanged": true,
+    "retry": false
   }
 }

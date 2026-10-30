@@ -3906,3 +3906,27 @@ Jupyter file Download/表示原本から実結果を回収。Podの9file bytes/S
 有限runnerは静的確認済みで、今回CPU report/messages/sourceと200frozenを実行前後に照合する。現proposalは未承認のまま保全し、承認後に別fresh packのplan.jsonへ今回承認だけを固定する。実runner pack/lock/モデルload/生成は未作成・未実行。旧approval/planは閉鎖保持。call/全体timeout、live context、identity、形式、意味/本文/cold不成立で閉じ、修復/再生成/cap延長/学習追加/次prompt探索/次runなし。前回単価の按分で、保持等を含む実総額の確定ではない。
 
 [実CPU・実装順・全原本・具体案](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/source_index_cpu/README.md)。全体00/観測入口/01A全file地図を同単位更新。通常source/receiver/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy責務差分0、STRUCTURE_MAP_DELTA_NONE。前回§125は保存9b1901abの非学習2callで両S1不成立・新2意味/本人本文0/2、旧9NOT_RUNのまま不採用閉鎖。今回のCPU成功を新CMEE採用・商品改善へ数えない。追加観測会は現2題に不要、商品0/正式0/3/54.50％・candidate_ready/automatic_progression=false。 primary=BLOCKER_NARROWED（教師source対応不備を除外した限定観測）、technical/product credit0。新しい有料一回だけRule18§11.3の別Mash承認対象。
+
+
+<a id="20261030-source-identity-probe-result"></a>
+
+## 127. 2026-10-30 — source一覧付き非学習一回、両S1未完結・不採用閉鎖
+
+**最新GPU読取確認（2026-10-30 JST）：** 同Jupyter/Pod vgkm402msgroiu/RTX A5000、今回終了後1MiB/0％で稼働保持。処理47.405705535秒/$0.0036871104305按分、親外48.852184686秒、準備/回収/保持等別。Stop/restart/delete/Runpod管理画面/API0、207fileと保存9b重み不変。
+
+**現在の直接作業（10/30・source一覧付き非学習一回を不採用閉鎖）：** Mashが6b9b0d42の具体案へ「進めていいよ。」と承認し、source2e3a6071で同9b保存重みを非学習1load/112F32有限・学習0/実2call。両S1はsource ID/原欄とalias/quote分離が揃ったが、BOOK311/SHOP427token・EOSでも最外root未完結で拒否。引用10/14と教師17/18の差も残り、括弧だけの残件としない。新2意味/本人本文0/2、全5段/派生packet/新CMEE/saved/cold0、旧9NOT_RUN。不採用閉鎖・再試行0。
+
+Mashは具体案「追加学習なし・同じ重みで新2件生成→CMEE・保存再読→全成功時だけ旧9件確認、最大30分・前回単価で処理按分$0.14（準備等別）」へ「進めていいよ。」と明示承認。proposal6b9b0d42を不変保持し、今回承認だけをexecution_20261030へ固定・読戻し、source2e3a607199b79d8cf0bde92bece8abf3a3630e99を同Jupyterへ配置した。runnerba5862ae/prompt66f28a40はCPU確認済みhash不変。fresh pack/run/exclusive lock、親1790秒TERM+kill10/全1800秒/各180秒/最大19callを維持し一回起動した。
+
+非学習1load/loaded112F32有限・全parameter非学習、学習forward/optimizer/重み保存0、実2call。BOOK S1は入力4668/出力311/EOS/14.952032419秒、SHOP S1は4825/427/EOS/19.636228588秒。両messagesはCPU候補とhash一致、前段空・教師注入0。実拒否はJSONDecodeError char834/1128で、両原文の最外root閉じがない。runのstages_completed=1は保存record数でvalid stage成功数は0。S2以降/5段完成/派生packet/新CMEE/saved/cold0、新2意味・本人本文0/2。条件不成立で旧9生成NOT_RUN。語句・括弧補修、consumer呼直し、cap延長、追加学習、再試行、次run0。
+
+root/補助は全2rawを全文読了。今回は両件で正しい3identityを出し、aliases/quotesが別配列になり、出たquoteのsource/fieldは全10/14で一意一致した。直前§125のrole→identity/補足field誤配/配列混在からの限定変化である。ただし教師17/18の必要引用群との差と最外JSON未完結が残る。SHOP snapshot alias=s2と指示@p0の差もあり、後段の意味効果は未試験。『括弧だけが残件』『4Bでは不可能』『新観測会で解決』とは判断せず、意味・商品改善creditへ換算しない。
+
+処理47.40570553496946秒/$0.0036871104304976245按分、親外48.85218468599487秒/exit1。30分/$0.14上限内、単価は前回確認$0.28/h、準備/回収/保持/保存/通信/税等別。終了後207frozenと9b重み/config不変、A5000 1MiB/0％で保持。Runpod管理console/API/Stop/restart/delete0。旧9の履歴成功を今回の維持確認へ加算しない。
+
+入力由来一覧による実2出力の局所変化を、意味採用・商品改善へ数えない。全20member/19payload・70276bytes/SHA8c62c3535dcef7d685d38ee6f0220500592c797c158007ed967d6c46ed86cf42を回収し、CRC/全bytes/SHA/source/実messages/全2rawをroot/補助で独立照合。全memberをGitHubへ展開保存する。新weight0、原weightの既存完全保存を保持。追加観測会は現2題に不要、商品0/正式0/3/54.50％・candidate_ready/automatic_progression=false。
+
+
+archive_manifestの全19payloadと自身の20memberを一回回収し、原本source2/承認plan/全raw-token/実messages/hash/loaded112metadata/費用を独立照合。実起動・回収のターミナル文は別原文写しとして保持。旧runtime planは承認時の不変原本、execution planだけclosure付き閉鎖。source_index_cpu入口の「未承認」案は承認前の履歴と明示して現在結果へ置換する。
+
+[全実結果・全raw所見・原本地図](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/source_index_cpu/result_20261030/README.md)。全体00/観測入口/01A地図を同単位更新。通常source/receiver/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy責務差分0、STRUCTURE_MAP_DELTA_NONE。root華恋単一writer/executor/judge、補助read-only、実環境Codex Workで正式Pro/Ultra/human authorityを申告しない。primary=BLOCKER_NARROWED（source対応の限定変化を実出力確認、構造未成立）、technical/product credit0、正式0/3・54.50％、candidate_ready/automatic_progression=false。次は同paid再試行やraw補修をせず、既存教師/学習targetと実出力に残る末尾構文・引用被覆を照合して具体方針を判断する。新prompt探索/追加学習/新有料案を自動開始しない。
