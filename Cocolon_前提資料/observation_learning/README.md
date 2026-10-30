@@ -1,3 +1,8 @@
+
+
+### 2026-10-30 — 5区間一回案の明示承認・実装固定（CPU/GPU開始前）
+
+Mashが§120の最大45分/$0.21按分案へ「進めていいよ。」と明示承認。限定offline5区間source3fileとplanを固定した。CPU先行で来歴/完全復元/既存CMEE-cold/旧9保存rawを確認し、通過後19更新・保存非学習reload・実段階生成を一回実行する。初期11446641、段階10＋旧9、BOOK/SHOP各最大5call、両題成功時のみ旧9。現在は実行前で、実学習・新生成・新意味採用0。再承認待ちへ戻さず承認内の実行を継続する。新2の既存0/2・旧9NOT_RUN・商品0/正式0/3/54.50％、追加観測会不要、GPU保持を維持。通常source/受口/意味型/API/DB/RN/接続差分0、STRUCTURE_MAP_DELTA_NONE。
 # Mashの観測技術を継承するための記録
 
 **最新GPU読取確認（2026-10-30 JST）：** 同Pod vgkm402msgroiu/RTX A5000、§120のCPU作業後1MiB/0％で稼働保持。今回model load/forward/学習/自由生成/新CMEE0。直前§119の1load/476forward・34.980309516秒/$0.002720690740按分は完了履歴。Stop/restart/delete/管理console/API0、準備・回収・保持等別。新2意味本文0/2・旧9NOT_RUNは不変。

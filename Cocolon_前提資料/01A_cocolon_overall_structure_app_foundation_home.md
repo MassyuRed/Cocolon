@@ -5760,3 +5760,8 @@ fixed_rows/structural_cpu/forward_prefix_cpu/result_20261030/README.mdが実結�
 ### weekly§120 — 5区間CPU実現性と未承認の一回案
 
 `fixed_rows/stage5/study.py`は元2完成教師の13位置を5区間へ分け、全bytes再結合/10学習例/保存tokenizer長を確認する一回限りCPU source。新model runnerではない。`report.json・stage_train10.jsonl・original_teachers2.json`がCPU4.656秒/最大context7285/元値/前段を保持、`stage5-cpu.log・stage5-cpu.exit・execution.json`は実行/準備失敗の区別、`manifest.json・originals.zip・verification.json・proof.jpg`は8member/43170bytesの原本/独立照合/実画面を所有する。`README.md`は入力総量約6.5倍の限界と、新offline5区間方式の実装/CPU→19更新→保存reload→実段階生成→既存CMEE/cold/条件付き旧9、最大45分/$0.21按分の未承認一回案を所有。新raw/provenance受口/実GPUは未実装・未実行。通常責務/受口/型/API/DB/RNの構造差分なし、STRUCTURE_MAP_DELTA_NONE。新2意味本文0/2/旧9NOT_RUN/商品0/正式0/3/54.50％は不変。
+
+
+### weekly§121 — 5区間承認済み実装の全file地図
+
+`fixed_rows/stage5/implementation_20261030/README.md`が承認と全file責務、`plan.json`が19順序/予算/identity、`consume_stage5.py`が5段13位置/来歴、`prepare_stage5.py`がCPU gate、`run_stage5_once.py`が一回学習・保存reload・実段階生成・既存CMEE/cold/条件付き旧9を所有。実行前source固定で効果未確認。通常受口/API/DB/RN責務不変、STRUCTURE_MAP_DELTA_NONE。
