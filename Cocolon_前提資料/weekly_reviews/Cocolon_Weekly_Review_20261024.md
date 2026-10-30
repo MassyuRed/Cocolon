@@ -4023,3 +4023,18 @@ stdlib一回CPUで既存266＋新9＝275原本hashを固定、保存ad8b不変�
 [具体案・全原本・全7file地図](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/branch4/README.md)を準備。保存ad8b診断専用/非学習1load、BOOK S3/SHOP S2の教師全文（実helperと同じlabels/logits窓）と分岐直前prefixを各1回、計4forward。eval/inference/use_cache=false、学習/生成/新CMEE0。gold/過去誤tokenの順位/logprob/logit/top10/margin/全文NLL/経路差を保持。cache付き生成の再現や原因断定ではない。最大10分/前回$0.28/h按分約$0.047（準備/回収/保持/保存/通信/税等別、現在単価未照会）、親590秒＋kill10秒、再試行なし。runner/launcherは構文確認済みで実GPU未実行。新有料処理はRule18§11.3の個別Mash判断前で停止する。閉鎖38更新承認を再利用しない。
 
 今回model load/forward/更新/生成/新CMEE0。root華恋単一writer/executor/judge、補助read-only、実環境Codex Workで正式Pro/Ultra/human authorityを申告しない。fit38の新意味/本人本文0/2・saved/cold0・旧9NOT_RUN/不採用閉鎖は維持、追加観測会不要。通常source/受口/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy責務差分0、STRUCTURE_MAP_DELTA_NONE。primary=BLOCKER_NARROWED（初分岐と比較条件固定）、technical/product credit0・正式0/3・54.50％・candidate_ready/automatic_progression=false。
+
+<a id="20261030-branch4-once-result"></a>
+## 133. Mash承認の非学習branch4一回完了 — 両経路で初分岐の誤tokenが単独1位
+
+Mashがa283af4dの「追加学習なし・保存重みで2箇所×2条件＝計4回の計算比較、最大10分・前回単価按分約$0.047（準備/回収/保持等別）・再試行なし」へ「進めていいよ。」と明示承認。元plan SHAe055e37a/runner7473ab63へ結び、承認原本SHAcd4712b5を69ee5ab4で保存・読戻し後、同Jupyterから一回起動した。最新head・全体現在地全文・恒久incident・学習目的/用途・§132/全app設計/全file地図と対象実sourceを先に確認。root華恋が単一writer/executor/judge、補助read-only、実環境Codex Workで正式Pro/Ultra/human authorityを申告しない。
+
+保存ad8bを非学習1load、eval/nontrainable/use_cache=falseでBOOK S3とSHOP S2の教師全文/共通prefixを各1回、全4forward/全有限で完了。更新/生成/新CMEE0。両BOOKは誤7664が単独1位・正1293が2位、margin0.75、誤確率67.8391％/正32.0449％。両SHOPも誤6333が単独1位・正30812が2位、margin2.875、誤約94.59％/正約5.34％。全文NLLはBOOK0.011821628548204899/SHOP0.009248998947441578で前回fit38保存値と2行とも完全一致。BOOK競合logitの全文−prefixは両0、SHOPは両−0.125で選択逆転なし。全語彙最大絶対差は0.0625/0.21875、全logit同一とはしない。
+
+rootが全4測定/top10/argmax/同率数/全文NLL/経路差/実log/終了原本を読んで、独立read-only照合と一致。低い平均に隠れた初分岐の局所教師不適合として特定した。今回の教師全文/prefix条件差は誤選択を解消しないが、cache付き逐次生成経路を再現した、全cacheに不具合なし、学習回数だけが原因、S5解消、4B能力上限、一般品質/CMEE/商品合格までは主張しない。
+
+runner14.90352953702677秒/$0.0011591634084354156按分（約$0.0012）、親16.025832931976765秒/exit0。承認の10分/$0.047内、前回$0.28/h使用・現在単価未照会、準備/回収/保持/保存/通信/税等別。275原本と保存ad8b/旧b5e/config不変、終了後A5000 1MiB/0％で稼働保持。Runpod管理console/API/Stop/restart/delete0。
+
+全14原本をJupyterからUTF-8 text containerで直接回収。初収集のread_textによる進捗logのCR変換を検出したため、read_bytes().decode('utf-8')で回収のみ補正。最終74055bytes/SHA5d660c49f64e1d3524b2e14bf56300df20ed8b7c450c9f591742b13a00c727acと全14memberの元bytes/SHAをPod外照合。[全実結果・全20file地図](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/branch4/execution_20261030/README.md)。model/forwardの再試行0。runtime承認原本は不変、上位approved_planは消費済み閉鎖版へ分ける。
+
+全体00/観測入口/01Aを同単位更新。前回fit38の新意味/本人本文0/2・saved/cold0は今回再評価しておらず不変、旧9未実行。新重み作成/採用/追加学習/再生成/次run0。現2題の既存教師はあり、追加観測会不要。通常source/受口/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy責務差分0、STRUCTURE_MAP_DELTA_NONE。primary=BLOCKER_NARROWED（両経路で初分岐の局所不適合を確認）、technical/product credit0・正式0/3・54.50％・candidate_ready/automatic_progression=false。

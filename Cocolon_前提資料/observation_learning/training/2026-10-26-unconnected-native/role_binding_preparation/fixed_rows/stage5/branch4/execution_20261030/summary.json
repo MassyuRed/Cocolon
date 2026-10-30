@@ -1,0 +1,83 @@
+{
+  "status": "COMPLETED_CLOSED_NO_RETRY_DIAGNOSIS_ONLY",
+  "approved_source_commit": "a283af4d85e3940cbd56f6ecaf52231e8852f720",
+  "approval_commit": "69ee5ab440ce35ab395f16700be404832c82d0f3",
+  "runtime_approval_sha256": "cd4712b572beb683378e07d9e706a51cf082653fadcd7c9d937b5dc91950d249",
+  "measurements": [
+    {
+      "id": "FT-BOOK-AFTER-ANSWER/stage3",
+      "mode": "teacher_full",
+      "argmax_token_id": 7664,
+      "gold_rank": 2,
+      "historical_probability": 0.6783906214331952,
+      "gold_probability": 0.32044905835848486,
+      "margin": 0.75
+    },
+    {
+      "id": "FT-BOOK-AFTER-ANSWER/stage3",
+      "mode": "common_prefix",
+      "argmax_token_id": 7664,
+      "gold_rank": 2,
+      "historical_probability": 0.6783906214331952,
+      "gold_probability": 0.32044905835848486,
+      "margin": 0.75
+    },
+    {
+      "id": "FT-SHOP-AFTER-ANSWER/stage2",
+      "mode": "teacher_full",
+      "argmax_token_id": 6333,
+      "gold_rank": 2,
+      "historical_probability": 0.9458751259666098,
+      "gold_probability": 0.05336262146935516,
+      "margin": 2.875
+    },
+    {
+      "id": "FT-SHOP-AFTER-ANSWER/stage2",
+      "mode": "common_prefix",
+      "argmax_token_id": 6333,
+      "gold_rank": 2,
+      "historical_probability": 0.9459109622618624,
+      "gold_probability": 0.053364644407519916,
+      "margin": 2.875
+    }
+  ],
+  "comparisons": [
+    {
+      "id": "FT-BOOK-AFTER-ANSWER/stage3",
+      "gold_logit_delta_full_minus_prefix": 0.0,
+      "historical_logit_delta_full_minus_prefix": 0.0,
+      "max_abs_logit_delta": 0.0625
+    },
+    {
+      "id": "FT-SHOP-AFTER-ANSWER/stage2",
+      "gold_logit_delta_full_minus_prefix": -0.125,
+      "historical_logit_delta_full_minus_prefix": -0.125,
+      "max_abs_logit_delta": 0.21875
+    }
+  ],
+  "post": {
+    "collected_unix": 1793347900.8638635,
+    "frozen_files_unchanged": 275,
+    "gpu": "NVIDIA RTX A5000, 1 MiB, 0 %",
+    "adapter_sha256": "ad8b89e8974df9bfe7e804b8f67bbaac59e6cbb37042c3254fb58ffb64230d0a",
+    "runner_seconds": 14.90352953702677,
+    "runner_prorated_usd_at_prior_rate": 0.0011591634084354156,
+    "parent_seconds": 16.025832931976765,
+    "extra_preparation_collection_holding": true,
+    "gpu_lifecycle_operations": 0,
+    "retry": false
+  },
+  "originals_count": 14,
+  "all_original_bytes_and_sha_match": true,
+  "teacher_full_nll_exact_previous_fit38": true,
+  "model_loads": 1,
+  "forwards": 4,
+  "updates": 0,
+  "generations": 0,
+  "new_cmee_calls": 0,
+  "new_meaning_body": "NOT_EVALUATED_PREVIOUS_0_OF_2_UNCHANGED",
+  "old9": "NOT_RUN",
+  "retry": false,
+  "automatic_progression": false,
+  "product_credit": 0
+}

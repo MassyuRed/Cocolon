@@ -1,5 +1,5 @@
 {
-  "status": "MASH_EXPLICITLY_APPROVED_ONCE",
+  "status": "EXECUTED_CONSUMED_CLOSED_NO_RETRY",
   "approved_source_commit": "a283af4d85e3940cbd56f6ecaf52231e8852f720",
   "plan_sha256": "e055e37a382b19ac5b3723f5b60587fb4a2e7fb2852ec45650e5facf9f1687b9",
   "runner_sha256": "7473ab634fbbbb8d3f1adb1b32df2368a32c61945ae80ace74321fa1d126f1ec",
@@ -16,5 +16,8 @@
   },
   "adapter_sha256": "ad8b89e8974df9bfe7e804b8f67bbaac59e6cbb37042c3254fb58ffb64230d0a",
   "retry": false,
-  "automatic_progression": false
+  "automatic_progression": false,
+  "runtime_approval_sha256": "cd4712b572beb683378e07d9e706a51cf082653fadcd7c9d937b5dc91950d249",
+  "result": "DIAGNOSIS_COMPLETE_NOT_PRODUCT_ACCEPTANCE",
+  "execution": "execution_20261030/README.md"
 }

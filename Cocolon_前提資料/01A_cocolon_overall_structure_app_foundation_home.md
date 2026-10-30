@@ -5825,3 +5825,7 @@ fixed_rows/structural_cpu/forward_prefix_cpu/result_20261030/README.mdが実結�
 ## 2026-10-30 fit38初分岐CPU照合と非学習branch4案のfile地図
 
 fit38の全実rawと教師/encodedをCPU照合し、BOOK S3 token264、SHOP S2 token555の初分岐を確定。実GPUは新規未実行、前回不採用閉鎖を維持する。[branch4全7file](observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/branch4/README.md)はCPU原本・実helper窓・未承認の4forward案/runner/上限付きlauncher。全fileの責務は同READMEへ記載。通常app/CMEE受信/型/API/DB/RN接続の構造差分はなくSTRUCTURE_MAP_DELTA_NONE。最新状態は全体00/観測入口/weekly§132。新有料一回は個別判断前、商品credit0。
+
+## 2026-10-30 branch4非学習4forward完了・全実原本の地図
+
+Mash承認のbranch4を保存ad8b/非学習1load/計4forwardで一回完了し、両題・両経路で過去誤tokenが単独1位と確認。更新/生成/新CMEE0、275原本/重み不変。実原本14＋所見/summary/verification/manifest/receipt/入口の[全20file地図](observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/branch4/execution_20261030/README.md)を追加。上位承認は消費済み閉鎖、runtime実承認/sourceは不変。通常受口/型/三core/API/DB/RNの構造変更なし、STRUCTURE_MAP_DELTA_NONE。全体00/観測入口/weekly§133と一致、商品credit0。
