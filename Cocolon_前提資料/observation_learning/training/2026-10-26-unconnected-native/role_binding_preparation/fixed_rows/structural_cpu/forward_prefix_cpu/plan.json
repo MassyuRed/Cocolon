@@ -1,5 +1,5 @@
 {
-  "status": "PROPOSED_NOT_APPROVED",
+  "status": "MASH_EXPLICITLY_APPROVED_ONCE",
   "schema": "cocolon.same_prefix_shop_once.v1",
   "date_jst": "2026-10-30",
   "owner": "root Karen only; read-only support; Codex Work; no formal Pro/Ultra/human claim",
@@ -61,7 +61,13 @@
   "gpu_stop_restart_delete": false,
   "new_dependency": false,
   "production_api_db_rn_render_supabase_change": false,
-  "approval": null,
+  "approval": {
+    "user_text": "「4B学習＋CMEE接続」を続けて。",
+    "received_date_utc": "2026-10-30",
+    "proposal_commit": "f5120ba03522b4f01e8f8ddde418bb126367d080",
+    "scope": "Immediately following the concrete one-SHOP same-prefix comparison proposal; one execution, max180 seconds, GPU processing prorated max USD0.014; preparation/recovery/holding etc extra. No training/free generation/new CMEE/retry.",
+    "interpretation_owner": "root Karen"
+  },
   "control_token": "none; returned474 tokens must equal savedraw[0:474]; normal max_new_tokens termination",
   "source_review": "independent read-only static review; no formal Pro/Ultra/human or runtime admission claim",
   "deferred_stop_cap_check": "actual __init__ stores max_length; __call__ sets stopping when length>=max_length; source captured and reviewed"
