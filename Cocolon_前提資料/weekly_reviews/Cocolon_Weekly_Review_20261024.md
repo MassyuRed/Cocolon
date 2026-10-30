@@ -3805,3 +3805,17 @@ source29130e55のprepare_cpu.py f03e7f49／runner08c7bd3e／未承認planを取�
 完全ZIP18member/17payload・1884361bytes・SHA2f3afb00579d5674f241740011f085e12c380e9e2cec3e1efd4b06ccc61a5d89、保存ID libfile_01631bb06ca88191aab25f201113af5a。原本run.stageのPENDINGは残存文字列で、status COMPLETE/比較2/476完了を実終端とする。修復0。回収時のroot手転記のbytes/SHA/member数誤りでCodex照合assertが抽出前停止したが、実回収bytes/hash/manifestへ訂正し全件CRC/bytes/SHAと両独立再計算が一致。新GPU処理・再download・再実行0。実数値/原source/承認plan/ログ/timeout/lock/post identityは完全ZIPで保全、小原本と全索引はGitHubへ同期。前回7fcca重みの完全保存と初期11446641保存も保持。
 
 最新全体00全文/必須incident全文/作業入口/学習目的とweekly§118、全体設計/全file地図/current mapsのf512差分を確認。f512は親85dafから文書・限定source exact15path、通常構造差分0。API current7acff074不変。System Contextは最新cache未生成の既存状態でfresh原本直接読取。root単一writer/executor/judge、補助read-only、実環境Codex Work、正式Pro/Ultra/humanではない。全体00/観測入口（古い§114 GPU記録も置換）/01Aを同差分へ同期。STRUCTURE_MAP_DELTA_NONE、primary=BLOCKER_NARROWED、TECHNICAL_CREDIT=0、PRODUCT_CREDIT=0、正式0/3、54.50％、candidate_ready=false、automatic_progression=false。新しい承認依頼/有料案/次GPU自動起動なし。
+
+<a id="20261030-stage5-cpu-proposal"></a>
+
+## 120. 2026-10-30 — 5区間のCPU無損失分割を確認、方式変更・有料一回案は未承認
+
+**現在の直接作業（10/30・5区間方式のCPU実現性確認、実装/GPUは未承認）：** §119の同prefix二経路一致を踏まえ、既存BOOK/SHOP教師を引用／claim／relation／更新／問い・本文の5区間へ無損失分割した。同Jupyter CPU4.656087084秒、全2教師JSON bytes完全再結合、元material/prior/request/spec保持、教師前段で最大context7,285/8,192、最大区間target1,094token。新model/forward/学習/自由生成/新CMEE0。入力合計は一括promptの約6.5倍、生成総量はほぼ同じで、速度/原価/品質改善は未実証。全原本8member/43,170bytesを回収しCRC/bytes/SHA・独立再結合照合済み。次の案は新offline方式の限定実装/CPU検証→区間10＋旧9の19更新→保存非学習reload→実model前段だけの新2各最大5call→派生packetを区別して既存CMEE/cold→全成功時だけ旧9確認、最大45分/$0.21按分（準備等別）。生成来歴と方式・費用を変えるためRule18§11.3 LEVEL3、PROPOSED_NOT_APPROVED。通常受口/API/DB/RN変更0、新2意味/本人本文0/2・旧9NOT_RUN・商品0/正式0/3/54.50％不変。追加観測会は現2題で不要。GPU1MiB/0％で保持、Stop等0、automatic_progression=false。
+
+[実CPU原本・具体案・全file地図](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/README.md)。開始PR30 c8e3d059/API7acff074。mainは旧版であり作業currentにしない。現2題は元教師があり追加観測会を依頼せず、同重み一括再生成/新grammar/cap延長の反復を選ばない。過去staged_pair9の補助A/B生成失敗も保持し、5分割で解けると断定しない。
+
+教師側tokenはBOOK492/899/283/267/220、SHOP523/1094/236/291/293（EOS込み）。全原材料/priorを各段へ残すため総入力27,845/29,244token、元promptの約6.48/6.58倍。最大context7285はgold前段でのCPU値であり、実modelの長さは各call直前検査/超過停止が必要。中間を意味採用せず、全段の実rawと派生packetを分離する。single-call native receiptへ偽装しない来歴保持のCPU確認が不成立ならGPU開始0で閉鎖する案。モデル学習/生成・段階来歴の実装はまだ存在しない。
+
+完全原本43,170bytes/8member/SHA61d6108bb30edfb8aecdd6cb82e81d0686edf956954f738834f6fe159db95126、全CRC/member/bytes/SHA・実source・全10例の前段/原材料保持・2件独立再結合一致。実CPU一回exit0/4.656087084秒、元教材/初期11446641/新7fcca不変。準備のread型誤り2、文字列誤列挙1、upload chooser timeout、実source末尾LF1差による最初のPod外assert停止を原本/verificationへ分離した。新model/GPU/CMEE再試行0。root単一writer/executor、補助read-onlyで正式Pro/Ultra/human受入れではない。
+
+全機能00/観測入口/file地図01Aを同単位に同期。通常source/受口/意味型/三core/API/DB/RN/依存変更0、STRUCTURE_MAP_DELTA_NONE。Renderはworkspace未選択応答のみ、Supabase project一覧ACTIVE_HEALTHYのみ、本人row/SQL0。GPU保持/Stop等0。primary=ADMINISTRATIVE_ONLY、technical/product credit0、正式0/3・54.50％・candidate_ready=false・automatic_progression=false。
