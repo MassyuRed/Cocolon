@@ -1,0 +1,34 @@
+{
+  "root_independent_prompt_targets": 10,
+  "old_messages_match_except_stage1_guidance": true,
+  "files": {
+    "source_guides.json": {
+      "bytes": 3643,
+      "sha256": "70aa95392a73aef72159bb97720606c561ac220090db5730020faa99e0f4e926"
+    },
+    "report.json": {
+      "bytes": 5410,
+      "sha256": "0dfb393b41e0f766dcf108099e5caacbef8725602f64cc503287b22f4f6de452"
+    },
+    "execution.json": {
+      "bytes": 352,
+      "sha256": "0a6cf5a1408eed90d605bf3288088918550d43eefa9e6635bf2c6b9bad9634b4"
+    },
+    "candidate_train10.jsonl": {
+      "bytes": 262442,
+      "sha256": "06665f4c4139e7dbf6832ddf596986540997f014cdf2cb0018674d6ea4f93a69"
+    },
+    "frozen_sha256.json": {
+      "bytes": 34230,
+      "sha256": "b33eb1a4c2c49347c34f7ba79e678d0ed8d5470016af3744394a35ccdb440b14"
+    }
+  },
+  "all9_remote_bytes_hashes_exact": true,
+  "remote_original_file_count": 9,
+  "free_generations": 0,
+  "new_cmee_calls": 0,
+  "source_commit": "5dbb5ce9dcd339f5ea11754021933c890467fdd9",
+  "root_review": "All10 messages and targets compared against preserved CPU baseline. Only S1 input-derived guide and alias field names differ; other8 rows exact.",
+  "read_only_support_review": "No material inconsistency found; no code execution by support.",
+  "proof_sha256": "b8fc69305fcd6d44449403bf3b0df8842272051ed857448de87b0a223dade85c"
+}

@@ -3884,3 +3884,25 @@ rootが実装・compile/AST確認、補助は全文read-only reviewでblocking d
 指示の全文/区間構文併置を除いても、当該保存重みのalias/quote分離・actual source/原欄への束縛は未成立。EOS S1は1/2→2/2、構造通過は1/2→0/2。短縮/EOSを品質改善へ換算しない。新2意味/本人本文0/2、完成derived packet/実新CMEE/saved/cold0、旧9新生成NOT_RUNで旧9維持も未確認。本人向け成立本文0でProduct Read候補は出さない。追加観測会は現2題の正解不足を補う目的には不要。一般4B能力上限/教材不足/全原因は未確定。次は既存教師/学習入力のsource ID・原欄・alias/quote/role対応のCPU読取へ戻り、同paid再試行/枠延長/再学習/次prompt探索/新GPU案を自動追加しない。
 
 全体00/観測入口/filemapを同単位でin-place同期、execution planはclosure付き閉鎖、承認時runtime planは不変原本。通常source/receiver/意味型/三core/API/DTO/DB/RN/Render/Supabase/依存/merge/deploy構造差分0、STRUCTURE_MAP_DELTA_NONE。root単一writer/executor/judge、補助read-only、実環境Codex Workで正式Pro/Ultra/humanではない。primary=BLOCKER_NARROWED（指示整理だけで不成立の限定観測）、technical/product credit0、正式0/3、54.50％、candidate_ready/automatic_progression=false。
+
+
+<a id="20261030-source-identity-cpu"></a>
+
+## 126. 2026-10-30 — source ID・原欄対応のCPU確認／S1最小補正、次の一回案は未承認
+
+**最新GPU読取確認（2026-10-30 JST）：** 同Jupyter/Pod vgkm402msgroiu/RTX A5000、今回CPU後1MiB/0％で稼働保持。新model load/forward/学習/自由生成/新CMEE0、CUDA未初期化、200file前後不変。Stop/restart/delete/Runpod管理画面/API0、準備/回収/保持等別。
+
+**現在の直接作業（10/30・source対応のCPU確認完了／次の非学習一回案は未承認）：** 元教師BOOK alias3/quote17・SHOP alias3/quote18は全て正しいsource/fieldへ一意に対応し、教材不備は見つからなかった。最新rawの意味role→identity混同、alias/quote混在、補足field誤配に対し、S1だけへ元material由来source ID/欄名/snapshot一覧とnamespace説明を追加した候補を同JupyterでCPU一回確認。4.787097356秒/exit0、全10target/EOS・元material/prior/意味条件/2packet再結合/旧9encoding不変、旧prompt代入2拒否/不正metadata6拒否、最大7117/8192。旧SHOP S1は正しい対応で構造通過していたため、重み能力限界や全原因は未断定。
+
+開始currentはCocolon PR30 ae03e5bdd192479da1c57c29648b14dacb30df37、API PR3 7acff07421c0cfa458ec6cf75616187379311854。必読原本/全体設計/全file地図/三中核map/最新§125を確認。System Context最新cache未生成は維持し、fresh原本を直接読取した。root華恋単一writer/executor/judge、補助はread-only。実環境Codex Workで正式Pro/Ultra/human authorityを申告しない。
+
+観測会ではなく、元2教師・最新2raw・前3rawと実指示/検査を照合した。BOOK latestはalias10へ意味roleをactual_identityとして入れ、その同配列へquote10を混在し、補足をmemo/memo_actionへ誤配する。SHOP latestはroot3、第3配列へ一組＋18文字列の擬似row、未宣言s6等を置く。元教師はsource2＋prior snapshot1のalias3と、正しいfieldのquote17/18である。旧SHOP S1は3identity/補足fieldを正しく出しており、この最新2失敗だけを「source対応を学べていない証明」や全4B能力上限へ昇格しない。
+
+source5dbb5ce9のinput-derived source/field/snapshot guideをS1だけへ追加。guideの関数には元requestだけを渡し、教師/選択済み引用/正解alias/意味claim/文章を渡さない。元system/全material/prior/request/意味条件/5段型/採否/decoder/capは不変。CPU 4.787097355932929秒、親計測5.317406781949103秒、exit0。BOOK S1 4316→4668token、SHOP4468→4825、S2〜5は同前段時の全messages bytes不変。全10target/token/label/EOS不変、元2packet bytes再結合、旧9encoding不変、旧prompt代入2拒否/不正metadata6拒否、最大prompt+cap7117/8192。モデルload/forward/更新/自由生成/新CMEE0、CUDA未初期化、200frozen前後不変。
+
+Jupyter file Download/表示原本から実結果を回収。Podの9file bytes/SHA manifestと全9原本を照合し、rootは別途全10messages/targetを旧CPU原本と比較して、差分がS1 guideとalias row欄名だけであることを確認した。report SHA0dfb393b41e0f766dcf108099e5caacbef8725602f64cc503287b22f4f6de452、candidate_train10 SHA06665f4c4139e7dbf6832ddf596986540997f014cdf2cb0018674d6ea4f93a69。静的コード/実結果の補助read-only reviewで重要不整合なし。CPUで新CMEEを通した事実にはしない。本人向け新成立本文0、Product Read候補0。
+
+次の具体案は同9b保存重みを非学習1load/追加学習0、新2各最大5call→既存CMEE/保存再読→新2全成功時だけ旧9各1、最大19call/30分・前回単価$0.28/hで処理按分$0.14（準備等別）。実行コードとPROPOSED_NOT_APPROVED案を準備済み、新GPU実行は未承認・未実行。消費済みの前回承認を再利用しない。
+有限runnerは静的確認済みで、今回CPU report/messages/sourceと200frozenを実行前後に照合する。現proposalは未承認のまま保全し、承認後に別fresh packのplan.jsonへ今回承認だけを固定する。実runner pack/lock/モデルload/生成は未作成・未実行。旧approval/planは閉鎖保持。call/全体timeout、live context、identity、形式、意味/本文/cold不成立で閉じ、修復/再生成/cap延長/学習追加/次prompt探索/次runなし。前回単価の按分で、保持等を含む実総額の確定ではない。
+
+[実CPU・実装順・全原本・具体案](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/source_index_cpu/README.md)。全体00/観測入口/01A全file地図を同単位更新。通常source/receiver/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy責務差分0、STRUCTURE_MAP_DELTA_NONE。前回§125は保存9b1901abの非学習2callで両S1不成立・新2意味/本人本文0/2、旧9NOT_RUNのまま不採用閉鎖。今回のCPU成功を新CMEE採用・商品改善へ数えない。追加観測会は現2題に不要、商品0/正式0/3/54.50％・candidate_ready/automatic_progression=false。 primary=BLOCKER_NARROWED（教師source対応不備を除外した限定観測）、technical/product credit0。新しい有料一回だけRule18§11.3の別Mash承認対象。

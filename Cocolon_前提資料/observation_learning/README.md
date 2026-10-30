@@ -1,14 +1,14 @@
 # Mashの観測技術を継承するための記録
 
-**最新GPU読取確認（2026-10-30 JST）：** 同Pod vgkm402msgroiu/RTX A5000、今回の非学習1load/学習0/2生成終了後1MiB/0％で稼働保持。処理40.392448843秒/$0.003141634910按分、外41.708045803秒、準備/回収/保持等別。Stop/restart/delete/管理console/API0、196入力/source/保存重み不変を確認。
+**最新GPU読取確認（2026-10-30 JST）：** 同Jupyter/Pod vgkm402msgroiu/RTX A5000、今回CPU後1MiB/0％で稼働保持。新model load/forward/学習/自由生成/新CMEE0、CUDA未初期化、200file前後不変。Stop/restart/delete/Runpod管理画面/API0、準備/回収/保持等別。
 
-**現在の直接作業（10/30・指示整合の非学習一回を不採用閉鎖）：** Mash承認8a9ba7d4案をsource928513c4で一回実装・実行。保存9b1901ab非学習1load/112F32・全parameter非学習、学習0、実2call。BOOK S1は339token/EOSでもJSON未完結/aliasとquote混在/actual source・原欄誤配、SHOP S1は303token/EOS/JSON成立だがroot3≠4で停止。全5段完成/derived packet/実新CMEE/saved/cold0、新2意味/本人本文0/2、旧9NOT_RUN。指示整理だけでは成立せず、不採用閉鎖/再試行0。次の有料案/追加学習/再生成は自動開始しない。
+**現在の直接作業（10/30・source対応のCPU確認完了／次の非学習一回案は未承認）：** 元教師BOOK alias3/quote17・SHOP alias3/quote18は全て正しいsource/fieldへ一意に対応し、教材不備は見つからなかった。最新rawの意味role→identity混同、alias/quote混在、補足field誤配に対し、S1だけへ元material由来source ID/欄名/snapshot一覧とnamespace説明を追加した候補を同JupyterでCPU一回確認。4.787097356秒/exit0、全10target/EOS・元material/prior/意味条件/2packet再結合/旧9encoding不変、旧prompt代入2拒否/不正metadata6拒否、最大7117/8192。旧SHOP S1は正しい対応で構造通過していたため、重み能力限界や全原因は未断定。
 
-[今回の全実結果・全file地図](training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/instruction_cpu/result_20261030/README.md)。原本212member/2833615bytes/SHAab25036f8044c30bed879c83b36f0fdbd8004402dffbe69a4e4da56a7b37f357を保全し、root/補助が全CRC/bytes/SHA/全2raw/before3raw不変を独立照合。196凍結中191fileを同梱検算、重み5fileは別既存保存とhashで保持。EOSはS1 before1/2→今回2/2だが構造通過は1/2→0/2で、商品改善には数えない。追加観測会は現2題に不要、商品0/正式0/3/54.50％、candidate_ready/automatic_progression=false。
+前回§125は保存9b1901abの非学習2callで両S1不成立・新2意味/本人本文0/2、旧9NOT_RUNのまま不採用閉鎖。今回のCPU成功を新CMEE採用・商品改善へ数えない。追加観測会は現2題に不要、商品0/正式0/3/54.50％・candidate_ready/automatic_progression=false。
 
-**直前GPUの実結果（§122・閉鎖履歴）：** 19更新/保存/112F32非学習reload/実3callを453.667464138秒/$0.035285247211按分で完了したが、BOOK第1区間未完了、SHOP第2区間root1≠3で停止。全5段完成/派生packet/実新CMEE/saved/cold0、新2意味/本人本文0/2、旧9新生成NOT_RUN。新9b1901abは不採用で、今回の非学習比較は本番/次回学習初期への昇格ではない。追加観測会は現2題に不要、商品0/正式0/3/54.50％・candidate_ready/automatic_progression=falseを維持する。
+次の具体案は同9b保存重みを非学習1load/追加学習0、新2各最大5call→既存CMEE/保存再読→新2全成功時だけ旧9各1、最大19call/30分・前回単価$0.28/hで処理按分$0.14（準備等別）。実行コードとPROPOSED_NOT_APPROVED案を準備済み、新GPU実行は未承認・未実行。消費済みの前回承認を再利用しない。
 
-[実CPU・限定案・全file地図](training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/instruction_cpu/README.md)。通常source/receiver/意味型/API/DB/RN/Render/Supabaseの構造差分0、STRUCTURE_MAP_DELTA_NONE。最新の実結果・閉鎖境界はweekly§125を参照する。
+[実CPU・具体案・全file地図](training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/source_index_cpu/README.md)。通常source/receiver/API/DB/RN構造差分0、STRUCTURE_MAP_DELTA_NONE。最新weekly§126。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 
