@@ -1,0 +1,108 @@
+{
+  "schema": "cocolon.shop_prefix_complete_archive.v1",
+  "source_commit": "a79f2525149cf12ea25fc05241da7e2eb19c269f",
+  "members": [
+    {
+      "path": "run/cached_logits.safetensors",
+      "source_path": "/workspace/cocolon_cache_prefix_shop_run_20261030/cached_logits.safetensors",
+      "bytes": 1986776,
+      "sha256": "2caefe2b65286e8903c16942eba007e630b11d6c7476117745919ffa00daa21f"
+    },
+    {
+      "path": "run/loaded_tensors.json",
+      "source_path": "/workspace/cocolon_cache_prefix_shop_run_20261030/loaded_tensors.json",
+      "bytes": 26030,
+      "sha256": "5dbf40402b2bc213931e2dceba994ded4d54b932190410d339a3d972c971f6fa"
+    },
+    {
+      "path": "run/points.json",
+      "source_path": "/workspace/cocolon_cache_prefix_shop_run_20261030/points.json",
+      "bytes": 1184,
+      "sha256": "90be012c8e22996d827ac341d35af4ab969220fb980d0c36f40c81fe8a4b3ad9"
+    },
+    {
+      "path": "run/run.json",
+      "source_path": "/workspace/cocolon_cache_prefix_shop_run_20261030/run.json",
+      "bytes": 9953,
+      "sha256": "0c929d6cb70cb659d5ba6e12ab3f1818fc0f0ce6f856ca154c57ecc4a203b959"
+    },
+    {
+      "path": "run/uncached_logits.safetensors",
+      "source_path": "/workspace/cocolon_cache_prefix_shop_run_20261030/uncached_logits.safetensors",
+      "bytes": 1986776,
+      "sha256": "5fba2c3255d41e80bf5b51f5b48213d0e989c41f9bb408e4b9f079026ae7a8d1"
+    },
+    {
+      "path": "runtime/execute_once.lock",
+      "source_path": "/workspace/cocolon_cache_prefix_shop_pack_20261030/execute_once.lock",
+      "bytes": 38,
+      "sha256": "2d23617bdd0cf33c24ab2e4dc9317c7a0720a594047f23ab9bbcb779954f4f41"
+    },
+    {
+      "path": "runtime/gpu.exit",
+      "source_path": "/workspace/cocolon_cache_prefix_shop_pack_20261030/gpu.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "runtime/gpu.log",
+      "source_path": "/workspace/cocolon_cache_prefix_shop_pack_20261030/gpu.log",
+      "bytes": 2939,
+      "sha256": "3377c3184103f6ad4f7830199999d8af62a97d6dff30ec755612e01c431aab7e"
+    },
+    {
+      "path": "runtime/gpu_elapsed.json",
+      "source_path": "/workspace/cocolon_cache_prefix_shop_pack_20261030/gpu_elapsed.json",
+      "bytes": 430,
+      "sha256": "3c338f482c6226995f8033d5560ac2ad7606dfc5014208b43abc144ec88a96c7"
+    },
+    {
+      "path": "runtime/gpu_launch.json",
+      "source_path": "/workspace/cocolon_cache_prefix_shop_pack_20261030/gpu_launch.json",
+      "bytes": 628,
+      "sha256": "ac19549d359ef818522f31c8932512e36b5252f0e9d6d53f4e51e77e03dfd8ef"
+    },
+    {
+      "path": "runtime/launch.log",
+      "source_path": "/workspace/cocolon_cache_prefix_shop_pack_20261030/launch.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/launch_wrapper.py",
+      "source_path": "/workspace/cocolon_cache_prefix_shop_pack_20261030/launch_wrapper.py",
+      "bytes": 762,
+      "sha256": "a999a07144af67379313017ba08eaf582834205a994f90d56e52ecd0c552b801"
+    },
+    {
+      "path": "runtime/plan.json",
+      "source_path": "/workspace/cocolon_cache_prefix_shop_pack_20261030/plan.json",
+      "bytes": 4614,
+      "sha256": "32c1e85cf3c5eb0b18c499b3a5d072d1e8a16a84556b6063ce77ce4c789a392c"
+    },
+    {
+      "path": "runtime/post_identity.json",
+      "source_path": "/workspace/cocolon_cache_prefix_shop_pack_20261030/post_identity.json",
+      "bytes": 681,
+      "sha256": "17941b7f7494b411aac1ff2bff7087d4e28a4bfe8272953c002b4362d5c991cf"
+    },
+    {
+      "path": "runtime/prefix_points.json",
+      "source_path": "/workspace/cocolon_cache_prefix_shop_pack_20261030/prefix_points.json",
+      "bytes": 3475,
+      "sha256": "9b1cd288cbbc9662c5495aad1f3b86d5b068ea610f13292a42632efa1469b77f"
+    },
+    {
+      "path": "runtime/prepared.json",
+      "source_path": "/workspace/cocolon_cache_prefix_shop_pack_20261030/prepared.json",
+      "bytes": 870,
+      "sha256": "4033ced8469b91c57f0c48ee545976b1e4ab6ee22a79534c1ea61f1419ad8260"
+    },
+    {
+      "path": "runtime/run_cache_prefix_shop.py",
+      "source_path": "/workspace/cocolon_cache_prefix_shop_pack_20261030/run_cache_prefix_shop.py",
+      "bytes": 16981,
+      "sha256": "a2fbfa8ee94e4f8fb86f110e368ec966cddf92450ca63df7abb87eb36ac31c06"
+    }
+  ]
+}

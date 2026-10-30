@@ -1,0 +1,12 @@
+{
+  "source_commit": "a79f2525149cf12ea25fc05241da7e2eb19c269f",
+  "gpu_read_only": "NVIDIA RTX A5000, 1 MiB, 0 %",
+  "gpu_stop_restart_delete": 0,
+  "scope": "all run and pack files; previous source/raw/model weights retained at prior owners; no model execution on recovery",
+  "prior_raw_sha256": "3695b4baa2a92055c152e0375e5d47aab28b88641971dcc857ccdd33050105c5",
+  "adapter_files_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "b9ebe894a3ed52feffa50c57adc44f7bce9d0711358e3e0dfefe1bd4f128da37",
+    "adapter_model.safetensors": "7fcca3ce034dfdb9162ae31c3a1bec59c8918762d3da07d58b64f8bdf1220981"
+  }
+}

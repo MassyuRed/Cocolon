@@ -1,6 +1,6 @@
 # 実forward／lossと新raw分岐点のCPU確認
 
-2026-10-30 JST。**CPU確認完了、実4Bの新しい読込・forward・学習・自由生成・CMEEは0。** 前回continuation17の意味／本人本文0/2、不採用閉鎖、旧9 NOT_RUNは不変です。末尾のSHOPだけの計算経路比較は **PROPOSED_NOT_APPROVED／GPU未実行** です。
+2026-10-30 JST。CPU確認後のSHOP二経路比較は承認受領し、一回完了・閉鎖しました。**現在の実結果・全数値原本・file地図は[result_20261030/README.md](result_20261030/README.md)。** 以下のCPU原本と当初案は§118時点の経緯を保持します。前回新2の意味/本文0/2、旧9 NOT_RUNは不変です。
 
 ## 確認した現物と結果
 
@@ -29,7 +29,7 @@ rootはPod外で保存encodedのprompt／教師token列と実rawから全4prefix
 
 read-only補助は、有料一回の必要性への根拠はなお弱いという慎重な意見です。rootも実装bugがあるとは判断していません。その留保を保持した上で、次の学習／生成を選ぶ前に、**現重みの同じ失敗直前prefixで、計算経路の違いが選択を変えるかだけを一題で区別する**下記の小さい案を選びました。未実測であることを、GPU実行の自動許可へ変換しません。
 
-## 未承認の一回案：SHOPの同一prefixだけを比較
+## §118時点の一回案（§119で承認後実行・閉鎖）：SHOPの同一prefixだけを比較
 
 目的は、保存7fcca3ce・SHOPの同じ全入力に対する一括計算と実generateの逐次cache計算を、292／473の二地点だけで比較することです。新たな回答や意味候補を作る試行ではありません。
 
@@ -41,7 +41,7 @@ read-only補助は、有料一回の必要性への根拠はなお弱いとい�
 - BF16の小差や僅差argmax反転だけでbug判定しません。両経路が同じ不適合tokenを選べば、その地点の失敗をcache原因とはできません。一題・二地点の一致を全4B／全生成の正常性へ一般化しません。
 - 成功またはtimeout／identity・非有限値・件数・callback不一致等で一回閉じ、全logit／途中reportを回収します。追加学習・自由生成・修復・retry・次の有料試行へ自動進行しません。
 
-`run_cache_prefix_shop.py`はこの一回だけの既存生成経路の計測runnerです。構文compileと未承認拒否をCodex hostで確認しました。実4Bを読む前にexit1で止まり、出力directoryは作りません。read-onlyの最終source reviewで具体的なblocking flawは見つかりませんでした。そこで残った上限停止の実装依存は、実DeferredStopCheckのinitがmax_lengthを保持し、callがlength>=max_lengthで即座にstoppingを返す原本をrootが追加確認し、source/identityを2148bytesのZIPへ回収・CRC/SHA照合しました。これは実GPU成立を保証するものではありません。`plan.json`はPROPOSED_NOT_APPROVEDです。新しい費用判断はRule18§11.3の個別Mash承認前です。
+`run_cache_prefix_shop.py`はこの一回だけの既存生成経路の計測runnerです。構文compileと未承認拒否をCodex hostで確認しました。実4Bを読む前にexit1で止まり、出力directoryは作りません。read-onlyの最終source reviewで具体的なblocking flawは見つかりませんでした。そこで残った上限停止の実装依存は、実DeferredStopCheckのinitがmax_lengthを保持し、callがlength>=max_lengthで即座にstoppingを返す原本をrootが追加確認し、source/identityを2148bytesのZIPへ回収・CRC/SHA照合しました。これは実GPU成立を保証するものではありません。当初planはPROPOSED_NOT_APPROVEDでした。a79f2525の個別承認原本から一回実行済みで、親`plan.json`は閉鎖状態です。実行時planはresult/runtimeへ保存しています。
 
 ## 全fileの地図・失敗履歴
 
@@ -55,7 +55,7 @@ read-only補助は、有料一回の必要性への根拠はなお弱いとい�
 | deferred_stop_originals.zip | 実DeferredStopCheck classとgeneration/utils.pyのidentity。通常max length停止のsource確認、2member／2148bytes |
 | verification.json | 全ZIP CRC/bytes/hash、Pod外保存encodingからの全4prefix照合、compile／未承認拒否の実範囲 |
 | run_cache_prefix_shop.py | 提案する非学習1load／同prefix2地点・最大476forwardだけの計測。GPU未実行 |
-| plan.json | 新しい個別承認前の上限／固定identity／停止／回収条件。旧閉鎖planを再利用しない |
+| plan.json | 個別承認と一回完了を保持した閉鎖plan。再実行不可 |
 | approval_guard.log | Codex hostの未承認exit1原log。実GPU失敗ではない |
 | proof.jpg | 実JupyterのCPU結果とGPU保持画面 |
 

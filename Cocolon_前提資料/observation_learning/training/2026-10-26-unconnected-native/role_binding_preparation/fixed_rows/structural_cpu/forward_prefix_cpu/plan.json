@@ -1,5 +1,5 @@
 {
-  "status": "MASH_EXPLICITLY_APPROVED_ONCE",
+  "status": "CLOSED_DIAGNOSTIC_COMPLETE_NO_ADOPTION_NO_RETRY",
   "schema": "cocolon.same_prefix_shop_once.v1",
   "date_jst": "2026-10-30",
   "owner": "root Karen only; read-only support; Codex Work; no formal Pro/Ultra/human claim",
@@ -50,7 +50,7 @@
   "max_process_usd": 0.014,
   "cost_exclusions": "preparation/recovery/holding/storage/network/tax etc extra; no live rate requery; not total billing",
   "output_directory": "/workspace/cocolon_cache_prefix_shop_run_20261030",
-  "cpu_source_and_prefix_check": "completed; no pretrained model load/forward; actual new4B replay unexecuted",
+  "cpu_source_and_prefix_check": "completed; one approved actual4B same-prefix diagnostic completed; no additional execution permitted",
   "success": "2 identical-input logit comparisons, margins/ranks/deltas, exact observed forward counts, unchanged source/input/weights. Not semantic adoption or product success.",
   "interpretation": "Name-token divergence alone is not semantic failure. BF16 logit difference or near-tied argmax alone is not a bug. Same invalid choice in both paths excludes cache as cause only at that prefix. Do not infer whole-model correctness, material sufficiency or required learning amount.",
   "stop": "One run only. Timeout, identity mismatch, missing comparison, nonfinite score, unexpected callback/count or other failure: preserve partial report and close. No retry/repair/fallback, added updates, new free generation, CMEE call or next paid run.",
@@ -70,5 +70,18 @@
   },
   "control_token": "none; returned474 tokens must equal savedraw[0:474]; normal max_new_tokens termination",
   "source_review": "independent read-only static review; no formal Pro/Ultra/human or runtime admission claim",
-  "deferred_stop_cap_check": "actual __init__ stores max_length; __call__ sets stopping when length>=max_length; source captured and reviewed"
+  "deferred_stop_cap_check": "actual __init__ stores max_length; __call__ sets stopping when length>=max_length; source captured and reviewed",
+  "execution": {
+    "source_commit": "a79f2525149cf12ea25fc05241da7e2eb19c269f",
+    "report": "result_20261030/run/run.json",
+    "verification": "result_20261030/verification.json",
+    "processing_seconds": 34.98030951595865,
+    "process_cost_usd": 0.002720690740130118,
+    "model_loads": 1,
+    "core_forwards": 476,
+    "free_generation": 0,
+    "updates": 0,
+    "new_cmee": 0,
+    "archive_library_file_id": "libfile_01631bb06ca88191aab25f201113af5a"
+  }
 }
