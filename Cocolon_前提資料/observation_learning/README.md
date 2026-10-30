@@ -1,12 +1,14 @@
 # Mashの観測技術を継承するための記録
 
-**最新GPU読取確認（2026-10-30 JST）：** 同Jupyter/Pod vgkm402msgroiu/RTX A5000、focus29 CPU準備後1MiB/0％で稼働保持。298frozenと保存ad8b/config不変。Stop/restart/delete/Runpod管理画面/API0。
+**最新GPU読取確認（2026-10-30 JST）：** 同Jupyter/Pod vgkm402msgroiu/RTX A5000、focus29終了・回収時1MiB/0％で稼働保持。298frozenと保存ad8b/config不変。Stop/restart/delete/Runpod管理画面/API0。
 
-**現在の直接作業（10/30・focus29一回起動済み／最終状態・回収未確認）：** Mashが最大45分・前回単価按分$0.21（準備/回収/保持等別）・再試行なしを明示承認。承認原本を `923518fd1c08a0a46faf1c4ee8fc9a866d96edf8` で保存・読戻し後、同Jupyterで298原本/保存ad8b不変を確認して一回起動した。現10行各2回＋旧9各1回＝29更新→保存非学習再読/19NLL→新2実前段生成/既存CMEE・保存再読→全成功時だけ旧9の承認内容を保持する。
+**現在の直接作業（10/30・focus29一回完了／不採用閉鎖）：** Mash承認の保存ad8b隔離初期値・現10行各2回＋旧9各1回＝29更新を同Jupyterで一回実行し、29 training forward/optimizer・保存非学習再読・同19行NLL・新2件×5段の10生成/全EOSまで完了。全19教師/messages/encoded/元終端/mask/完全CE/指示/受信/合否は不変。新ed298856は112有限F32/3,833,856params、実runは全112変更を記録した。
 
-最後の成功読取はstatus STARTED_ONCE、elapsed161.465701秒、model load1・29中9更新・教師評価forward0・生成0。これは最終状態ではない。次のread-only進捗reloadが自動承認レビューの「Selected model is at capacity」で実行前拒否され、現在の完了/exit/重み/原本回収/最終費用は未確認。危険判定ではなくレビュー実行不能。迂回/新起動/再試行0、既存親2690秒＋kill10秒を維持、GPU Stop/restart/delete0。[実行入口と全file地図](training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/focus29/README.md)、[最後に確認できた事実](training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/focus29/interrupted_execution_20261030.json)。次は同じrunの状態・終了確認と原本/部分・完成重み回収のみで、29更新を起動し直さない。 その後のMash続行指示を受けた同Jupyter既存tabへの再接続も、自動承認レビューが『前回拒否されたJupyter確認経路の再開であり、禁止されたcomputer-bypass attempt』としてページ観測前に拒否した。再接続/状態読取/回収は未実行、最終状態は未確認のまま。別経路・間接実行・再起動・新学習による迂回0。次は同じJupyterへの状態読取/終了確認/終了済み原本回収だけについて明示アクセス許可を確認する段階。
+両件S5はprose rowが必要4cellに対しBOOK2/SHOP1cellでprose_typeとなり、結合・新CMEE受信前で停止。意味/本人本文0/2・saved/cold0、新CMEE0、旧9は条件不成立によるNOT_RUN。BOOK S2〜4は教師JSON値一致だがS1引用scopeが誤り、SHOPは未宣言引用/更新割当も残る。S5にはBOOKの謝罪主体逆転・問い化/反復、SHOPの本人一人称再掲がある。平均NLL改善を品質成功へ換算しない。[全実結果・全66file地図](training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/focus29/execution_20261030/README.md)。
 
-全19教師/指示/完全CE/受信/合否不変。前回fit38の新意味/本人本文0/2・saved/cold0・旧9未実行は履歴として保持し、今回の最終結果へ転用しない。既存教師あり追加観測会不要。通常source/受口/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy差分0、STRUCTURE_MAP_DELTA_NONE。商品0・正式0/3・54.50％・candidate_ready/automatic_progression=false。最新weekly§135。
+処理786.372730217秒/前回$0.28/h按分$0.06116232346（約$0.0612）、親787.706529139秒/exit1。45分/$0.21内、準備/回収/保持/保存/通信/税等別・現在単価未再照会。途中のブラウザ確認拒否は同じrunの実行を再試行せず、Mashの明示的な同Jupyter再接続・状態確認・終了後回収の許可で解消。全原本55member/14665160bytes/SHA117dab42のCRC/全元bytes/SHA/実承認・source/29順/19NLL/全10chainをPod外照合。追加重み4member/14208416bytes/SHA159ee107を完全保管、他54元memberをGitHubへ原bytes保存。298frozen/ad8b/config不変、A5000 1MiB/0％で稼働保持。
+
+今回承認は消費済み・不採用閉鎖。再試行/再生成/次run/新ed298856の製品・初期値自動採用0。既存の正しい教師があり追加観測会不要。通常source/受口/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy差分0、STRUCTURE_MAP_DELTA_NONE。商品0・正式0/3・54.50％・candidate_ready/automatic_progression=false。最新weekly§136。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 

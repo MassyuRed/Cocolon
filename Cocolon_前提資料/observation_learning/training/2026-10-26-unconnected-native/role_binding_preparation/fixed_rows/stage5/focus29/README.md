@@ -1,16 +1,16 @@
-# focus29 — 承認された一回を起動済み・最終状態と回収は未確認
+# focus29 — 29更新完了、新2件本文不成立・不採用閉鎖
 
 2026-10-30 JST。直前branch4で、BOOK S3/SHOP S2は教師全文と共通prefixの両方で過去の誤tokenが単独1位だった。新10行の残存CEの83.7528％は最終本文段S5に集中する。一方、旧9行のtoken加重NLLは0.0011822、新10行は0.0560160。ただし旧9の自由生成維持はad8bで未評価であり、この低NLLを維持成功の証拠にしない。学習方式や教師を変えず、現在課題の学習配分を上げる最小の一回案を準備する。2:1の配分は実験選択で、成功・最適性の保証ではない。
 
-Mashが最大45分/$0.21按分（準備/回収/保持等別）・再試行なしの一回を明示承認。承認原本をcommit `923518fd1c08a0a46faf1c4ee8fc9a866d96edf8` で保存・読戻し後、同Jupyterで既存298原本/ad8b不変と承認SHAを確認し、一回起動済み。最後の成功読取はelapsed161.465701秒・model load1・29中9更新・教師評価forward0・生成0、status STARTED_ONCE。この値は最終状態ではない。
+Mash承認の一回は、29更新・2load・保存非学習再読・19NLL・新2×5段10生成/全EOSを完了。両S5はprose rowの型不正（BOOK2cell/SHOP1cell、必要4cell）で停止し、意味/本人本文0/2・新CMEE/保存/cold0・旧9NOT_RUN。不採用閉鎖、再試行/次run/新ed298856の自動採用0。[全実結果・本文判断・全66file地図](execution_20261030/README.md)。
 
-次のread-only進捗reloadが自動承認レビューの「Selected model is at capacity」により実行前拒否となり、現在の完了/exit/最終重み/原本回収/最終費用は未確認。危険判定ではなくレビュー実行不能。迂回/新起動/再試行0、既存親2690秒＋kill10秒を維持し、GPU Stop/restart/delete0。[中断時の確認事実と次の一作業](interrupted_execution_20261030.json)。上位approved_planは起動済み消費済み表示、実行時原本は923518fdとPodで不変。再開先は**同じrunの状態・終了確認と原本/部分・完成重み回収のみ**。新学習は起動しない。
+処理786.372730217秒、前回$0.28/h按分$0.06116232346（約$0.0612）、親787.706529139秒/exit1。45分/$0.21内、準備/回収/保持等別。全55元member/14665160bytes/SHA117dab42のCRC/全bytes/SHAを照合。追加重みは112有限F32・全112変更を実runで記録し、完全保管済み。298frozen/ad8b/config不変、A5000 1MiB/0％で稼働保持。
 
-その後のMash続行指示を受けた同Jupyter既存tabへの再接続も、自動承認レビューが『前回拒否されたJupyter確認経路の再開であり、禁止されたcomputer-bypass attempt』としてページ観測前に拒否した。再接続/状態読取/回収は未実行、最終状態は未確認のまま。別経路・間接実行・再起動・新学習による迂回0。次は同じJupyterへの状態読取/終了確認/終了済み原本回収だけについて明示アクセス許可を確認する段階。
+ブラウザ確認の拒否による[途中の未確認記録](interrupted_execution_20261030.json)は、Mashの明示的な同Jupyter再接続・終了確認・原本回収のみの許可で解消した。同じrunを確認・回収し、学習を起動し直していない。実行承認原本はcommit923518fd/SHA7b502e9bのまま、上位approved_planは消費済み閉鎖表示。
 
-事前CPU準備は0.413831007秒/親0.516381192秒/exit0。19行/messages/教師/元終端列/encoded/mask不変、予定29順/19窓・298原本/ad8b不変を確認した。[CPU全17原本・回収照合・全file地図](result_20261030/README.md)。このCPU時のGPU全0記録と、後続の起動済み9更新観測を混同しない。今回最終の意味/本人本文/旧9/CMEE結果は未確認。
+[事前CPU全17file](result_20261030/README.md)は当時のモデル/学習全0記録であり、後続の実29更新と区別する。
 
-## 予定する一回の順序
+## 承認された一回の順序（完了・不採用閉鎖）
 
 1. 保存ad8bを隔離した実験初期値として読む。商品採用やoptimizer/RNGを含む厳密途中再開ではない。
 2. 現10行（BOOK/SHOP S1〜S5）各2回＋旧9行各1回、計29更新。新行の相対順を保持し、旧9を前半4/後半5に分けて挟む。全19教師/messages/encoded/元の終端列/mask、完全CE、112F32 LoRA、AdamW5e-5/clip1/seed20261024を保持する。
@@ -34,7 +34,7 @@ Mashが最大45分/$0.21按分（準備/回収/保持等別）・再試行なし
 | launch_focus29_once.py | exclusive lock・直接親timeout・一回起動 |
 | export_focus29.py | 終了後の部分/完成重みと全原本回収。再実行をしない |
 | approved_plan.json | 起動済み消費済み表示。実行承認原本は923518fdの同path、Podでは不変 |
-| interrupted_execution_20261030.json | 最終成功読取9更新・レビュー容量拒否・回収のみの再開先 |
-| result_20261030/ | CPU実結果・実source/proposal/不変19行/encodedと回収照合。全17fileは同入口へ |
+| interrupted_execution_20261030.json | 9更新時の確認中断と、同じrunの最終確認・回収による解消記録 |
+| execution_20261030/ | 全実結果/全10raw/重み参照/回収照合・全66file地図 |\n| result_20261030/ | CPU実結果・実source/proposal/不変19行/encodedと回収照合。全17fileは同入口へ |
 
-root華恋が単一writer/executor/judge、補助read-only。実環境Codex Workで正式Pro/Ultra/human authorityを申告しない。前回新意味/本人本文0/2・saved/cold0/旧9未実行を維持。商品0・正式0/3・54.50％・candidate_ready/automatic_progression=false。
+root華恋が単一writer/executor/judge、補助read-only。実環境Codex Workで正式Pro/Ultra/human authorityを申告しない。今回新意味/本人本文0/2・saved/cold0・旧9NOT_RUNで不採用閉鎖。商品0・正式0/3・54.50％・candidate_ready/automatic_progression=false。

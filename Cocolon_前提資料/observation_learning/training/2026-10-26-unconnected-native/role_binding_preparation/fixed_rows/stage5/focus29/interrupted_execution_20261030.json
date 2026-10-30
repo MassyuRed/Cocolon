@@ -1,16 +1,7 @@
 {
-  "status": "SINGLE_APPROVED_RUN_STARTED_FINAL_STATUS_UNVERIFIED",
+  "status": "INTERRUPTION_RESOLVED_SAME_RUN_RECOVERED_CLOSED_NO_RETRY",
   "source_commit": "923518fd1c08a0a46faf1c4ee8fc9a866d96edf8",
   "runtime_approval_sha256": "7b502e9b867004d915264b49ab53c2c633941f46a028281b0db5cf244e48260c",
-  "last_successful_jupyter_observation": {
-    "status": "STARTED_ONCE",
-    "elapsed_seconds": 161.46570089401212,
-    "model_loads_completed": 1,
-    "optimizer_steps_completed": 9,
-    "teacher_evaluation_forwards_completed": 0,
-    "model_calls_completed": 0,
-    "cases": []
-  },
   "last_observation_is_not_current_final_state": true,
   "blocked_action": "Read-only reload of Jupyter run.json progress page",
   "automatic_approval_review_rejected": true,
@@ -20,9 +11,9 @@
   "new_launch_after_block": false,
   "existing_parent_timeout_seconds": 2690,
   "existing_kill_after_seconds": 10,
-  "process_completion_and_cost": "UNVERIFIED",
-  "weights_recovery": "PENDING_UNVERIFIED",
-  "next_action": "Resume read-only status/exit verification and recover originals/partial or complete weights from this same run; never relaunch training.",
+  "process_completion_and_cost": "VERIFIED_IN_EXECUTION_20261030",
+  "weights_recovery": "COMPLETE_LIBRARY_AND_GITHUB_REFERENCE",
+  "next_action": "No active run. This approval is consumed and closed; no retry or automatic next GPU execution.",
   "gpu_stop_restart_delete_operations": 0,
   "product_credit": 0,
   "candidate_ready": false,
@@ -38,5 +29,29 @@
     "new_model_launches": 0,
     "gpu_stop_restart_delete_operations": 0,
     "next": "Request explicit authorization for same Jupyter status/exit reading and completed-run original/weight recovery only; no training restart."
+  },
+  "historical_last_successful_observation_before_block": {
+    "status": "STARTED_ONCE",
+    "elapsed_seconds": 161.46570089401212,
+    "model_loads_completed": 1,
+    "optimizer_steps_completed": 9,
+    "teacher_evaluation_forwards_completed": 0,
+    "model_calls_completed": 0,
+    "cases": []
+  },
+  "resolution": {
+    "explicit_user_permission": "同じJupyterへの再接続と、起動済み実行の状態確認・終了後の原本回収だけを、改めて明示許可していただけますか。→いいよ。",
+    "same_run_source_commit": "923518fd1c08a0a46faf1c4ee8fc9a866d96edf8",
+    "status": "STOPPED_NOT_ADOPTED_NO_RETRY",
+    "updates": 29,
+    "generations": 10,
+    "teacher_forwards": 19,
+    "model_loads": 2,
+    "new_cmee_calls": 0,
+    "archive_members": 55,
+    "archive_sha256": "117dab424a63e67d4cadeb4900cbe64b911220e5d34188acbcc7a27dd8d1b13b",
+    "no_new_launch": true,
+    "no_gpu_management_operation": true,
+    "entry": "execution_20261030/README.md"
   }
 }

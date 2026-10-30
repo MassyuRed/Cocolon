@@ -4066,3 +4066,30 @@ Mashが「最大45分・前回単価で処理按分$0.21（準備・回収・保
 [最後に確認できた事実と再開先](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/focus29/interrupted_execution_20261030.json)を保存。上位approved_planは起動済み消費済み表示へ変更し、実行時原本は923518fd/Podのまま保持。次の一作業は、レビュー可能な環境で同じrunの状態/exit確認と既存exporterによる全原本・部分/完成重み回収、結果本文の全読取。新学習を起動しない。9更新観測を29完了/CMEE成功/品質改善へ昇格しない。前回新意味/本文0/2・旧9未実行は前回履歴であり今回結果は未確定。全体00/観測入口/01Aを同単位更新。通常app/受信/意味型/API/DB/RN/Render/Supabase/依存/merge/deploy変更0、STRUCTURE_MAP_DELTA_NONE。GPU Stop/restart/delete0、商品0・正式0/3・54.50％・candidate_ready/automatic_progression=false。primary=ADMINISTRATIVE_ONLY（実行開始の部分事実保存、最終評価未到達）。
 
 その後のMash続行指示を受けた同Jupyter既存tabへの再接続も、自動承認レビューが『前回拒否されたJupyter確認経路の再開であり、禁止されたcomputer-bypass attempt』としてページ観測前に拒否した。再接続/状態読取/回収は未実行、最終状態は未確認のまま。別経路・間接実行・再起動・新学習による迂回0。次は同じJupyterへの状態読取/終了確認/終了済み原本回収だけについて明示アクセス許可を確認する段階。新しいrun/authority/weekly節は作らず、本§135の未確認状態へ追記。商品/technical credit0、STRUCTURE_MAP_DELTA_NONE。
+
+<a id="20261030-focus29-once-result"></a>
+## 136. focus29一回の29更新・保存再読・10生成を完了、全EOSでも新2件本文不成立で閉鎖
+
+Mash承認の保存ad8b隔離初期値・現10各2＋旧9各1＝29更新、最大45分/前回単価按分$0.21（準備/回収/保持等別）・再試行なしの同じ一回が完了した。実source/承認commit923518fd1c08a0a46faf1c4ee8fc9a866d96edf8、承認SHA7b502e9b867004d915264b49ab53c2c633941f46a028281b0db5cf244e48260c。§135の進捗読取拒否中もバックグラウンドrunは継続し、2026-10-30 17:54:29.383〜18:07:35.756 JSTに終了。Mashが「同じJupyterへの再接続と、起動済み実行の状態確認・終了後の原本回収だけ」へ改めて「いいよ。」と明示許可した後、同Jupyterの最終状態/exit1を確認し、既存exporter SHA308dd6ddで一回回収した。新起動/学習再試行/迂回0、root単一writer/executor/judge・補助read-only、実環境Codex Workで正式Pro/Ultra/human authorityの申告なし。全体現在地/恒久incident/ルール/観測用途・全app設計と全file地図/§135と対象実sourceを先に確認した。
+
+全19行/messages/教師/encoded/元終端/mask/完全CE/指示/受信/合否を保持。training forward/optimizer started=completed=29、全29loss/gradient有限・指定順を原本照合。保存非学習再読のmodel load2、同19行NLL started=completed=19。新ed298856feff61b36dcc23f57996c8821a8e7da5d745ca7b92344cd89f5d77f0は112有限F32/3,833,856params。実runnerは全112tensor変更を記録し、保存再読/生成後不変を確認。Pod外binary検査は保存重みの112有限F32/各shape/SHAを独立確認した。
+
+| token加重NLL | 同ad8b開始値（既存fit38記録） | 29更新・保存再読後 |
+| --- | ---: | ---: |
+| 新10区間 | 0.0560160420 | 0.0343684359 |
+| 旧9件 | 0.0011822046 | 0.0006581820 |
+| 全19行 | 0.0137765392 | 0.0084008139 |
+
+BOOK S3は0.0118216285→0.0002821228、S5はBOOK0.3382960→0.1880588/SHOP0.4822187→0.3226773。一方SHOP S1は0.00929981→0.01125808、S3は0.00617778→0.03258258と悪化。低い平均NLLを全行改善、自由生成維持、意味/本人本文/商品品質へ換算しない。旧9の実自由生成は今回も未実行で、維持成功にも回帰失敗にも数えない。
+
+実生成はBOOK/SHOP各S1〜S5、全10call/全JSON完結/全EOS。両S5は必要な4cellのprose rowに対しBOOK2cell/SHOP1cellでprose_typeとなり、packet結合/新CMEE採用・保存/coldの前で停止。意味/本人本文0/2・saved/cold0、新CMEE0、旧9は新2全成功条件不成立のNOT_RUN。実受信却下とはしない。status STOPPED_NOT_ADOPTED_NO_RETRY、reason new_pair_failed_skip_old9_no_retry、exit1。cap/時間打切りの解消が品質成立ではないことを示す。
+
+rootが全10raw/messagesを全文で読み、独立read-only照合と一致。実前段chainは全10一致、S1以外の実messagesは教師prefixと異なる。BOOK S1の17引用はliteralとして元sourceにあるが、q_awareness_timeが返却後の譲歩文、q_returned_concessionが自己発言/無連絡文へ誤割当。S2〜4は教師JSON値一致でも誤引用を参照し、意味保持成功ではない。S3の余計な第8関係は今回出ず、7関係で閉じる局所差を認める。S5は203token/EOS、謝罪主体を「友人に謝ってもらえて」へ逆転し、不要な問い化・反復もある。
+
+SHOP S1は16引用でq_answer_joy/q_answer_sadness/q_past_referenceがなく、後段に未宣言参照がS2/S3/S4=2/1/2個。否定の完全scopeと開店時点の局所差はあるが、answer_sadnessの時制、説明根拠が時点だけ、更新role/根拠/追加対象の対応不整合を残す。S5は221token/EOS、本人の一人称再掲が中心で、本人へ向けた3本文とur bindsにならない。全33引用の文字列は元sourceの部分文字列だが、引用先/関係/意味/自然本文の成功とは分ける。raw修復/教師化/受信合否緩和/追加生成0。
+
+処理786.3727302169427秒/$0.06116232346131777按分（約$0.0612）、親787.706529138959秒。承認45分/$0.21内、前回$0.28/hを使用・現在単価未再照会、準備/回収/保持/保存/通信/税等別。回収時298frozenと元ad8b/config不変、A5000 1MiB/0％で稼働保持。Runpod管理console/API/Stop/restart/delete0。
+
+全原本55member/54payload/14665160bytes/SHA117dab424a63e67d4cadeb4900cbe64b911220e5d34188acbcc7a27dd8d1b13bをJupyterから直接回収、CRC/全bytes/SHA/実source・承認/29順/19NLL/全10chainをPod外照合。[追加重みZIP](https://chatgpt.com/library?file_id=libfile_9f058918928c81919765b7b5e9248a20&account_id=personal)4member/14208416bytes/SHA159ee10709c209f09c5b70d783474a9bf2ed08f84b679db89d719199cf374f25へ新adapter完全bytesを保持（元4B全重み/optimizer-RNGは含まない）。他54元memberはGitHubへ原bytes展開、gpu.logのCRも保持。[全実結果・全66file地図](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/focus29/execution_20261030/README.md)。runtime実承認は不変、上位approved_planは消費済み/不採用閉鎖、途中未確認recordは同じrunの回収完了へ解消する。
+
+全体00/観測入口/01Aを同単位更新。現2題の正しい教師は既存で、追加観測会不要。新ed298856を製品/次初期値へ自動採用しない。今回承認は消費済み、不採用閉鎖・再試行/延長/追加周回/次run0。通常source/受信/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy責務差分0、STRUCTURE_MAP_DELTA_NONE。primary=BLOCKER_NARROWED（全EOSでもS5型/内容不成立、引用scope/未宣言参照の具体化）、technical/product credit0・正式0/3・54.50％・candidate_ready/automatic_progression=false。

@@ -5839,3 +5839,11 @@ Mash承認のbranch4を保存ad8b/非学習1load/計4forwardで一回完了し�
 ## 2026-10-30 focus29承認・一回起動と確認中断
 
 `stage5/focus29/approved_plan.json` はMash明示承認の起動済み消費済み表示。実行時原本は923518fdの同path/SHA7b502e9bに保持。`interrupted_execution_20261030.json` は最後のSTARTED_ONCE/9更新観測とブラウザ自動承認レビュー容量拒否、最終状態/回収未確認、同じrunの状態確認・回収だけの再開先を保持。既存runner/launcher/exporter/source5/proposal/CPU結果は不変。README/全体00/観測入口/weekly§135と一致。通常app/CMEE受信/意味型/API/DB/RN/Render/Supabase責務差分0、STRUCTURE_MAP_DELTA_NONE。新起動/再試行/Stop/restart/delete0。9更新を完了や商品creditに換算しない。
+
+## 2026-10-30 focus29一回完了・全原本/追加重みの地図
+
+[focus29実結果の全66file地図](observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/focus29/execution_20261030/README.md)。上位approved_planは消費済み不採用閉鎖、実行時原本は923518fd/SHA7b502e9bをruntimeへ原bytes保持。interrupted_execution_20261030.jsonは途中読取拒否の履歴と、Mash明示再接続/終了確認/回収許可による同run解消を保持する。既存source5/proposal/CPU結果は不変。
+
+execution_20261030の元55memberはbinary追加重み1をLibraryの4member完全archiveへ、他54をGitHubへ原bytes展開。runは29step、保存再読19NLL、全10raw/token/messages・2stage records、実run/counter、新CMEE0のdiagnosis、初期/再読112tensor表、adapter config/model card/完全保存先。runtimeは実source5/proposal/承認/CPU原log、一回lock/launch/exit/elapsed/GPU log・postidentity。inputsは実prepared gzip/train19/CPUsummary/installed model-loss source。sourceは元11教師/11評価/frozen consumer。追加summary/content_review/nll_comparison/chain_and_teacher_read/literal_source_checks/adapter_weights_verification/verification/recovery_receipt・actions/verification実source/入口がroot全件読取・独立補助一致・CRC/全bytes/SHA/112有限F32と保存を保持する。
+
+29更新/2load/19NLL/10生成・全EOS完了、処理786.372730217秒/$0.06116232346按分（準備等別）。両S5 prose_type、意味/本人本文0/2・saved/cold0・新CMEE0、旧9NOT_RUN。不採用・再試行/自動次run/新ed298856自動採用0。298frozen/ad8b不変・GPU保持。全体00/観測入口/weekly§136と一致、通常受口/型/三core/API/DB/RN/Render/Supabase責務差分0、STRUCTURE_MAP_DELTA_NONE。商品0・正式0/3・54.50％・candidate_ready/automatic_progression=false。

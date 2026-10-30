@@ -1,0 +1,10 @@
+{
+  "initial_launch": "nohup /usr/bin/python3.12 /workspace/cocolon_focus29_pack_20261030/launch_focus29_once.py --source-commit 923518fd1c08a0a46faf1c4ee8fc9a866d96edf8 > /workspace/cocolon_focus29_pack_20261030/launch_parent.log 2>&1 < /dev/null &",
+  "recovery_only": "After checking gpu.exit==1, final status and exporter SHA308dd6dd: /usr/bin/python3.12 /workspace/cocolon_focus29_pack_20261030/export_focus29.py",
+  "user_reconnect_permission": "同じJupyterへの再接続と、起動済み実行の状態確認・終了後の原本回収だけを、改めて明示許可していただけますか。\n→いいよ。",
+  "model_rerun": false,
+  "first_export_only": true,
+  "gpu_management_calls": 0,
+  "direct_original_archive_sha256": "117dab424a63e67d4cadeb4900cbe64b911220e5d34188acbcc7a27dd8d1b13b",
+  "direct_original_archive_members": 55
+}

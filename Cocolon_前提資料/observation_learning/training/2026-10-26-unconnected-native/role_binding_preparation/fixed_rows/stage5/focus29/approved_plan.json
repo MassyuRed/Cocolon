@@ -1,5 +1,5 @@
 {
-  "status": "MASH_APPROVAL_CONSUMED_EXECUTION_STARTED_FINAL_STATUS_UNVERIFIED",
+  "status": "MASH_APPROVAL_CONSUMED_CLOSED_NOT_ADOPTED_NO_RETRY",
   "approval_received": "current_user_turn_2026-10-30",
   "user_message": "**最大45分・前回単価で処理按分$0.21（準備・回収・保持等別）、再試行なし**で、一回実行してよろしいでしょうか。\n→進めていいよ。",
   "proposal_source_commit": "91b489486370491eb86e40cbc33ac0bb5b09777c",
@@ -42,7 +42,7 @@
     "prior_hourly_usd": 0.28,
     "current_rate_requeried": false,
     "preparation_cmee_cpu_recovery_holding_storage_network_tax_extra": true,
-    "learning_rate": 5e-05,
+    "learning_rate": 0.00005,
     "weight_decay": 0,
     "gradient_clip": 1,
     "seed": 20261024,
@@ -191,5 +191,19 @@
   "prohibited": "No retries/extensions/new teacher/prompt-loss-contract change/production API-DB-RN-Render-Supabase/merge/deploy.",
   "runtime_approval_original_commit": "923518fd1c08a0a46faf1c4ee8fc9a866d96edf8",
   "runtime_approval_original_sha256": "7b502e9b867004d915264b49ab53c2c633941f46a028281b0db5cf244e48260c",
-  "closure_note": "One launch already invoked. Existing runtime approval remains original bytes. No restart/retry/new run; final state and recovery pending browser review availability."
+  "closure_note": "Single run finished with29updates/19NLL/10generations; both S5prose_type, new pair0/2, old9NOT_RUN. Same-run recovery completed, no model retry or next run.",
+  "result": {
+    "status": "STOPPED_NOT_ADOPTED_NO_RETRY",
+    "updates": 29,
+    "teacher_forwards": 19,
+    "model_loads": 2,
+    "generations": 10,
+    "new_cmee_calls": 0,
+    "meaning_body": "0/2",
+    "old9": "NOT_RUN",
+    "processing_seconds": 786.3727302169427,
+    "process_usd_at_prior_rate": 0.06116232346131777,
+    "archive_sha256": "117dab424a63e67d4cadeb4900cbe64b911220e5d34188acbcc7a27dd8d1b13b",
+    "entry": "execution_20261030/README.md"
+  }
 }
