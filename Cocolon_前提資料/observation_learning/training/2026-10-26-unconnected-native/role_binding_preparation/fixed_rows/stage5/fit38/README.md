@@ -1,6 +1,6 @@
 # 同じ19行を2周する適合確認案 — 2026-10-30 JST
 
-状態：新しい有料実行は未承認。直前のaligned19は19更新・保存再読・7生成、意味/本人本文0/2・saved/cold0・旧9NOT_RUNで不採用閉鎖。承認を再利用しない。
+状態：Jupyter CPU準備済み（実0.371018065秒・exit0）、新しい有料実行は未承認。直前のaligned19は19更新・保存再読・7生成、意味/本人本文0/2・saved/cold0・旧9NOT_RUNで不採用閉鎖。承認を再利用しない。
 
 ## 確認したことと判断
 
@@ -36,3 +36,6 @@ S5だけの反復はS1の欠落引用やBOOK S2を残す。指示追加は既存
 | result_20261030/ | CPU準備後の実log/exit/同一性/実installed loss sourceと原本を保持する場所。新学習/自由生成成功の証拠ではない |
 
 root華恋が単一writer/executor/judge、補助はread-only静的照合。実環境Codex Workで正式Pro/Ultra/human authorityを申告しない。STRUCTURE_MAP_DELTA_NONE（通常構造/受信責務不変）。
+
+
+[実CPU原本・回収照合・全file地図](result_20261030/README.md)。全19encoded/教師/EOS/mask不変・各2回38順・実installed loss source一致・266frozen不変を確認。model/forward/学習/生成/新CMEE0。CPU成功を適合改善やCMEE採用へ数えない。

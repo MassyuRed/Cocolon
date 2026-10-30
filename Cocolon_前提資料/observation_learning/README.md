@@ -1,14 +1,14 @@
 # Mashの観測技術を継承するための記録
 
-**最新GPU読取確認（2026-10-30 JST）：** 同Jupyter/Pod vgkm402msgroiu/RTX A5000、今回終了後1MiB/0％で稼働保持。処理491.35681426001247秒/$0.03821664110911208按分、親外492.6916159699904秒、準備/回収/保持等別。Stop/restart/delete/Runpod管理画面/API0、215frozenと元9b重み/config不変、新b5eは不採用実験重みとして完全保全。
+**最新GPU読取確認（2026-10-30 JST）：** 同Jupyter/Pod vgkm402msgroiu/RTX A5000、CPU準備後1MiB/0％で稼働保持。266frozenと保存b5e不変。今回model/forward/学習/生成/新CMEE0。直前有料一回は491.35681426001247秒/$0.03821664110911208按分（準備等別）で不採用閉鎖済み。Stop/restart/delete/Runpod管理画面/API0。
 
-**現在の直接作業（10/30・現行入力19更新一回完了／不採用閉鎖）：** Mashが最大45分・前回単価処理按分$0.21（準備/回収/保持等別）・再試行なしへ「進めていいよ。」と承認し、source105c08d2をJupyterで一回実行。現10入力＋不変旧9を各1回の19forward/19optimizer、112tensor変更、保存1・非学習reload1（計2load）・実7生成を完了した。入力/教師/EOS/mask/cap/受信はCPU合格時から不変。
+**現在の直接作業（10/30・同19行×2周のCPU準備済み／有料実行未承認）：** 最新weekly§129と全7raw/教師/学習sourceを照合し、指示と教師のrow矛盾、EOS/mask/先行logitを含むloss窓の静的不具合、未学習tensor/旧重み誤再読は見つからない。Jupyterの実installed transformers5.19.0をstdlibだけで読み、model SHAaac2a1bc/loss SHA83db16b2が旧回収版と一致。数値的full/tailやbackward同値は今回未試験。
 
-BOOKはS1通過後、S2の全10claimが11セル（要求10）で実claim_outer_type停止。SHOPは5段shape/13path結合1候補まで進んだが、実receipt INVALID_FORMAT/candidate_json=null、semantic_receipt_not_validated。静的には全11subject.bindが文字列でなく配列であり、後段bind/更新根拠/日本語本文にも独立した不成立がある。新2意味/本人本文0/2、saved/cold0、旧9NOT_RUN。両S1のJSON閉じ/alias3一致/引用16ずつへの局所変化を意味・商品改善へ数えない。教師17/18の完全scopeは揃っていない。
+各stepの記録lossは更新前・異なる途中重みの値で、最終重みの全19行適合は未測定。次の未承認案は、不採用b5eを隔離実験初期値にのみ使い、同19行・順・比率・教師/指示/完全CE/optimizerを保った2周＝38更新とし、開始・19更新後・保存非学習再読後に同19行のNLLを測る（最大57非学習forward）。教師条件NLLを新しい合否基準にせず、最後の新2実前段生成→既存CMEE/cold→全成功時だけ旧9を維持する。最大45分・前回$0.28/hで処理按分$0.21、準備/回収/保持等別・一回限り/再試行なし。初期値用途を含む新承認なしではmodel load前に止まる。
 
-全7EOS/timeout0、全実messages/raw/token metadata/actual前段chain/SHOP結合をroot/補助で照合。全51member（14603727bytes/SHA1fc5ca54a129485173d6f3a0d7b191aaaf85075c21e21339e011b03d27633712）のCRC/bytes/SHAを回収確認。新b5e7936dは全112F32有限で完全保存、元9b/215frozenは不変。実承認原本はruntimeへ不変保持し、上位approved_planは消費済み閉鎖。再試行/補修/条件外旧9/受信緩和/追加学習/次run0。
+source fbab342bのstdlib CPU一回は0.371018065023236秒・親0.46587808802723885秒・exit0。元encoded19/labels/全messages/教師/EOS/mask/counts/evalを不変継承し、各ID2回/38順と19loss窓・266不変を確認。torch未import、model/forward/学習/生成/新CMEE0。全15member/198735bytes/SHAf5dd08d65af99a24a437af3b77a315ec815fd725b2b799b378b585eb81df4c32を回収しCRC/全bytes/SHA/source/encodingを照合。新prepared60c17f32、proposal51573dba。失敗した実前段へ欠けたquoteを参照する元教師をそのまま付ける方法や、S5だけの反復・追加promptは採らない。2周で成功する根拠は未確認。
 
-[全実結果・全raw所見・重み保存先・全file地図](training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/aligned19/execution_20261030/README.md)。今回の基本不成立に追加観測会不要。新重みを製品/次の初期値へ自動採用せず、形式だけの補修でも成功としない。通常source/receiver/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy責務差分0、STRUCTURE_MAP_DELTA_NONE。商品0・正式0/3・54.50％・candidate_ready/automatic_progression=false。最新weekly§129。
+[38更新案・実CPU原本・全file地図](training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/fit38/README.md)。前回aligned19の新2意味/本人本文0/2・saved/cold0・旧9NOT_RUN/不採用閉鎖は保持し、閉鎖承認を再利用しない。今回の基本不成立に追加観測会不要。通常source/受信/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy責務差分0、STRUCTURE_MAP_DELTA_NONE。商品0・正式0/3・54.50％・candidate_ready/automatic_progression=false。最新weekly§130。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 
