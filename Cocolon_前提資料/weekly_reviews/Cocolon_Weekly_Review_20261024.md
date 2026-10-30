@@ -4009,3 +4009,17 @@ S5はBOOK0.576638→0.508039→0.338296、SHOP0.757854→0.692507→0.482219。�
 Jupyterから全原本56member/55payload/14631408bytes/SHA3916e2e72b1ea8e1bd4261932362ffd4f37838a292c3a42aebf224297589302aを直接回収しCRC/全bytes/SHA/実source/承認/38順/3測定/全8chainをPod外照合。[追加重みZIP](https://chatgpt.com/library?file_id=libfile_e2b0cd55d6c08191ba3a9ab1d6da4386&account_id=personal)4member/14201522bytes/SHA06c25a9918ade9a14bb06bb03b4b5e37dbd32a119ebd49bbba8b0d8c5ccb2535へ新adapter完全bytesを保持（元4B全重み/optimizer-RNG状態は含まない）。他の元55memberをGitHubへ原bytes展開し、summary/content_review/chain/verification/重み参照/実command写しを追加。[全実結果・全64file地図](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/fit38/execution_20261030/README.md)。runtime承認原本はSHA5ea2d942のまま、上位approved_planだけ消費済み/不採用閉鎖として再利用を禁止。
 
 全体00/観測入口/01Aを同単位更新。両S1完全引用/BOOK S2の局所改善は確認、後段構造・否定/時間scope・更新根拠・本人本文は未成立。現2題の正しい教師は既存で、今回の基本不成立を補う追加観測会不要。新ad8bを製品/次初期値へ自動採用せず、新しい有料案へ自動進行しない。通常source/receiver/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy責務差分0、STRUCTURE_MAP_DELTA_NONE。primary=BLOCKER_NARROWED（両S1/BOOK S2一致、同gold prefixでも後段崩れ）、technical/product credit0・正式0/3・54.50％・candidate_ready/automatic_progression=false。
+
+
+<a id="20261030-fit38-first-branch-cpu"></a>
+## 132. fit38の最初の分岐をJupyterでCPU照合、非学習4forward案を準備
+
+Mashの開始/再開指示に従い前回§131から再開。全体現在地・恒久incident・作業ルール・学習目的/用途・全app設計/01A/B/C全file地図・最新weekly・実runner/helper/教師/全8rawを確認。System Contextはstale生成cacheを使わずfresh原本を直接読んだ。Jupyterへ直接接続、A5000 1MiB/0％と前回exit1を確認、Runpod管理console/API/Stop/restart/delete0。Supabaseは対象projectの読取識別のみ、本人row取得/変更0。Renderのselected workspace未設定を確認し、今回不要なworkspace選択/サービス照会/変更は行わなかった。
+
+BOOK S3の最初の差は出力token264/文字978、gold1293→actual7664、7番目の関係終端から8番目を追加。SHOP S2はtoken555/文字1550、gold30812→actual6333、否定scope根拠q_extra_8を別引用へ置換。両実messagesは教師と完全一致し、prompt5686/5027token。対応予測logitは5949/5581、prefix5950/5582、全文5969/6121。SHOP後段は実前段も教師と異なる。新10行4598label/合計CE257.5617609のうちS5二行215.7151910＝83.7528％。少数の決定的誤りと低い平均NLLは矛盾せず、この集計を学習重み付け不具合へ変換しない。
+
+stdlib一回CPUで既存266＋新9＝275原本hashを固定、保存ad8b不変。cpu_report58434bytes/SHA3bee403589c03ae3591aab26bb08fe27879c6cb8c62f7bd55c4bfd4d4fbcdcdaをJupyterから回収、Pod側hash/sizeと一致。実installed helperのassistant_loss_window/teacher_loss/evaluateを照合。教師lossはfirst_label-1からの窓＋内部shift、生成はcache=trueであり、明白なshift不具合は特定していない。初回terminal入力がheredoc待ちとなったため新診断terminalからsingle-line方式へ切替え、未実行入力からmodel/GPU処理は発生していない。
+
+[具体案・全原本・全7file地図](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/branch4/README.md)を準備。保存ad8b診断専用/非学習1load、BOOK S3/SHOP S2の教師全文（実helperと同じlabels/logits窓）と分岐直前prefixを各1回、計4forward。eval/inference/use_cache=false、学習/生成/新CMEE0。gold/過去誤tokenの順位/logprob/logit/top10/margin/全文NLL/経路差を保持。cache付き生成の再現や原因断定ではない。最大10分/前回$0.28/h按分約$0.047（準備/回収/保持/保存/通信/税等別、現在単価未照会）、親590秒＋kill10秒、再試行なし。runner/launcherは構文確認済みで実GPU未実行。新有料処理はRule18§11.3の個別Mash判断前で停止する。閉鎖38更新承認を再利用しない。
+
+今回model load/forward/更新/生成/新CMEE0。root華恋単一writer/executor/judge、補助read-only、実環境Codex Workで正式Pro/Ultra/human authorityを申告しない。fit38の新意味/本人本文0/2・saved/cold0・旧9NOT_RUN/不採用閉鎖は維持、追加観測会不要。通常source/受口/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy責務差分0、STRUCTURE_MAP_DELTA_NONE。primary=BLOCKER_NARROWED（初分岐と比較条件固定）、technical/product credit0・正式0/3・54.50％・candidate_ready/automatic_progression=false。

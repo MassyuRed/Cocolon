@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-更新日：2026-10-30 JST（最新差分：fit38一回実行・3適合測定/全8raw回収・不採用閉鎖、weekly§131）。全Cocolon作業の必読原本。
+更新日：2026-10-30 JST（最新差分：fit38初分岐CPU照合完了・非学習4forward案は未承認、weekly§132）。全Cocolon作業の必読原本。
 
 > **最新報告会：[第8回・2026-10-24](weekly_reviews/Cocolon_Weekly_Review_20261024.md)。** 今週実績・前週目標の達否と10/24〜10/31の管理案を記録。**Mashの指示により報告会終了。** 華恋の意見全文は[§10](weekly_reviews/Cocolon_Weekly_Review_20261024.md#karen-closing-opinion)、終了時の区分と再開先は[§11](weekly_reviews/Cocolon_Weekly_Review_20261024.md#meeting-closed-and-next-session)。10/24の4B確定・GPU16GB優先/24GB許容は当時の決定で、4B確定は10/25に撤回済み。最新の開発基準選定は[§23](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-three-core-model-and-serving-decision)。華恋が今回の判断責任として選んだもので、旧4B確定・常時24GB契約の自動復活ではない。起動済み3070の実確認は[§22](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-3070-running-cuda-uvm-io-error)。A5000未確保は§20の履歴。Vast実見積りは§19の履歴。次週の推奨順位は[§4](weekly_reviews/Cocolon_Weekly_Review_20261024.md#next-week-priorities)、対象path・具体手順・失敗/回復検査・終了条件は[§8](weekly_reviews/Cocolon_Weekly_Review_20261024.md#detailed-work-breakdown)を参照。全体管理評価・公開見通しは[§9](weekly_reviews/Cocolon_Weekly_Review_20261024.md#overall-status-and-release-outlook)：54.50％、正式商品受入れ0/3、12/18達成の裏付け不足。会議途中の「進行中」は当時の記録。次週案全体への明示採否・個別実行の未決は§11に区別して保持する。モデル選定の決定と、以下の品質・配置・端末・費用の未完了を区別する。
 
@@ -8,15 +8,9 @@
 
 **最新GPU読取確認（2026-10-30 JST）：** 同Jupyter/Pod vgkm402msgroiu/RTX A5000、fit38終了・原本回収後1MiB/0％で稼働保持。266frozenと実験初期b5e/config不変。Stop/restart/delete/Runpod管理画面/API0。
 
-**現在の直接作業（10/30・fit38一回完了／不採用閉鎖）：** Mashの明示承認をsource5a333d68/proposal51573dba/実承認SHA5ea2d942へ結び、保存b5eを隔離実験初期値として同19行×2＝38更新、0/19/38保存非学習再読後の各19行NLL＝57forward、2load、新2の実生成8callを一回実行。38有限loss/gradient、112有限F32/全112変更、新ad8b89e8の保存再読/生成後不変を確認。
+**現在の直接作業（10/30・最初の分岐CPU照合完了／非学習4forward案）：** fit38の不採用閉鎖を維持し、Jupyterへ直接接続して全8stageの保存token・教師messagesをCPU照合。BOOK S3 token264（1293→7664・7関係の終了から余分な関係へ）、SHOP S2 token555（30812→6333・否定根拠の置換）が最初の分岐で、両入力は教師と完全一致。新10行の残存CEの83.7528％はS5二行に集中するが、SHOP S5は実前段も教師と異なり原因を混同しない。既存266＋今回9＝275原本を固定、保存ad8bと旧b5e不変、実モデルload/forward/学習/生成/新CMEE0。CPU回収原本58434bytes/SHA3bee4035をJupyter側と照合済み。
 
-新10区間token加重NLLは0.0968247931→0.0860945479→0.0560160420へ下がり、両S1の17/18引用とBOOK S2は教師JSON値に完全一致した。一方BOOK S3はExtra dataのJSON不正、SHOP S5は更新行反復/日本語本人本文なし・512token length/EOSなしで不成立。SHOP S2の否定/時点とS4の更新根拠も残る。新意味/本人本文0/2、保存/cold0、13path結合/新CMEE呼出し0、旧9は条件不成立でNOT_RUN。実CMEEの却下や旧9維持成功とはしない。
-
-全8rawをrootが全文読み、独立静的照合と一致。実chainは全8件で自分の実前段と一致。BOOK S3とSHOP S2はgold前段を含む学習時promptと完全一致しており、初破綻を悪い実前段だけでは説明できない。最終S5 NLLはBOOK0.338296/SHOP0.482219。BOOK S3と旧9加重NLL（0.001086→0.000843→0.001182）には悪化もあり、平均fit改善を自由生成/商品品質へ換算しない。
-
-処理928.9340299230535秒/$0.07225042454957083按分、親外930.2798354179831秒/exit1。45分/$0.21内、前回$0.28/hを使用・現在単価未照会、準備/回収/保持/保存/通信/税等別。全56member/14631408bytes/SHA3916e2e7を直接回収してCRC/全bytes/SHAをPod外照合。新ad8b追加重みは完全保存、元4B全重みは含まない。
-
-[38更新・3測定・全8rawの実結果と全file地図](observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/fit38/execution_20261030/README.md)。今回承認は消費済み/不採用閉鎖、再試行/補修/上限延長/追加周回/次run/新初期値採用へ自動進行0。現2題の正しい教師は既存で、基本不成立を補う追加観測会は不要。通常source/受信/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy責務差分0、STRUCTURE_MAP_DELTA_NONE。商品0・正式0/3・54.50％・candidate_ready/automatic_progression=false。最新weekly§131。
+次は保存ad8bを診断専用に非学習1load、BOOK S3/SHOP S2の教師全文と分岐直前prefixを各1回、計4forwardの[具体案と全file地図](observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/branch4/README.md)。最大10分・前回$0.28/h按分約$0.047（準備/回収/保持等別）・再試行なし、新GPUは未承認/未実行。教師全文は元helperのloss窓/labels/logits_to_keepを保持し、cache付き生成の再現とはしない。平均NLL改善を自由生成成功へ換算せず、学習追加前に分岐tokenの順位/確率と計算条件差を調べる。fit38の新意味/本人本文0/2・saved/cold0・新CMEE0・旧9NOT_RUNは不変。既存教師あり、今回の基本不成立に追加観測会不要。通常受信/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy変更0、STRUCTURE_MAP_DELTA_NONE。商品0・正式0/3・54.50％・candidate_ready/automatic_progression=false。最新weekly§132。
 
 **現在の観測会（10/27）：** Mashが、基本相談式／短い実入力式は華恋が基本案・判断に迷う例はMash／分析向けも時々交える、まずEmlisAIを優先する方針を明示決定した。[観測会方針](observation_learning/README.md#observation-session-policy-20261027)と[OBS-20261027-001](observation_learning/sessions/2026/OBS-20261027-001/01_dialogue.md#d00)へ記録。社内勉強会の引き継ぎを題材に、質問前の本人役設定を保持し、D11まで採録。D05のMash観測文とD06の相談者役の確認を保持し、D10で本人の「分かりやすかった」という感想の撤回か、保持したままの気掛かりかを見極める問いだったと教示を受けた。D11は華恋の理解で、具体的な次の問いの分岐は未説明。観測会終了は未指示。形式別の4B学習効果は未比較。材料収集と学習投入を分け、凍結15教材・評価・重みへの変更／追加GPU処理0。直近の意味・本文0/2という学習実結果と商品0／正式0/3／54.50％は変えない。
 
@@ -204,5 +198,6 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 
 10/25 全体選定差分：Mashの全体判断指示を受け、全機能原本・全体設計/全file地図の既確認導線・最新weekly・実4B raw/教師・関連会話検索と公式MLX/量子化資料を照合。会話検索を全セッション全文読了とは扱わない。選定責任は華恋、旧4BのMash確定を復活させたという記録にはしない。文書4fileのみ、商品source/API/DB/Render/Supabase/教材/重み不変、STRUCTURE_MAP_DELTA_NONE、ADMINISTRATIVE_ONLY、product_credit=0。正式0/3・54.50％据置。
+
 
 

@@ -5820,3 +5820,8 @@ fixed_rows/structural_cpu/forward_prefix_cpu/result_20261030/README.mdが実結�
 元56memberのbinary1は追加重みZIPへ完全保存し、他55memberはGitHubへ原bytes展開。`run`はBOOK3/SHOP5の8raw-tokenと8messages/2stage records、38step log、0/19/38のNLL各19行、initial/reloaded112tensor表、実run/counter、CMEE0call diagnosis、新adapter metadata/weights参照。`runtime`は元source5/実承認/proposal/旧CPU説明・log/一回launch/lock/exit/elapsed/postidentity。`inputs`は不変prepared60c17f32/train19 57292ff2/CPUsummary/installedsource/事前identity。`source`は元11教師/11評価/frozen consumer。追加summary/content_review/chain_and_teacher_read/verification/weights_archive_verification/実command写しがroot全文読取・静的chain/教師比較・CRC/bytes/SHA・112有限F32照合を保持する。
 
 同19×2=38更新/57教師評価forward/2load/8生成完了、処理928.934029923秒/$0.07225042455按分（準備等別）/exit1。両S1の17/18引用/BOOK S2は教師一致するが、BOOK S3 JSON Extra dataとSHOP S5 length512/本文なしで意味/本人本文0/2・saved/cold0、新CMEE0、旧9NOT_RUN。全56member/14631408bytes/SHA3916e2e7、追加重み4member/14201522bytes/SHA06c25a99（libfile_e2b0cd55d6c08191ba3a9ab1d6da4386）保全。新ad8bは112有限F32/全112変更、266frozen/b5e不変・GPU保持。通常受口/型/API/DB/RN/Render/Supabase責務差分0、STRUCTURE_MAP_DELTA_NONE。商品0/正式0/3/54.50％・candidate_ready/automatic_progression=false、再試行/自動次run/初期値採用0。
+
+
+## 2026-10-30 fit38初分岐CPU照合と非学習branch4案のfile地図
+
+fit38の全実rawと教師/encodedをCPU照合し、BOOK S3 token264、SHOP S2 token555の初分岐を確定。実GPUは新規未実行、前回不採用閉鎖を維持する。[branch4全7file](observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/branch4/README.md)はCPU原本・実helper窓・未承認の4forward案/runner/上限付きlauncher。全fileの責務は同READMEへ記載。通常app/CMEE受信/型/API/DB/RN接続の構造差分はなくSTRUCTURE_MAP_DELTA_NONE。最新状態は全体00/観測入口/weekly§132。新有料一回は個別判断前、商品credit0。

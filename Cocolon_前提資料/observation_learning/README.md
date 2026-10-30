@@ -2,15 +2,9 @@
 
 **最新GPU読取確認（2026-10-30 JST）：** 同Jupyter/Pod vgkm402msgroiu/RTX A5000、fit38終了・原本回収後1MiB/0％で稼働保持。266frozenと実験初期b5e/config不変。Stop/restart/delete/Runpod管理画面/API0。
 
-**現在の直接作業（10/30・fit38一回完了／不採用閉鎖）：** Mashの明示承認をsource5a333d68/proposal51573dba/実承認SHA5ea2d942へ結び、保存b5eを隔離実験初期値として同19行×2＝38更新、0/19/38保存非学習再読後の各19行NLL＝57forward、2load、新2の実生成8callを一回実行。38有限loss/gradient、112有限F32/全112変更、新ad8b89e8の保存再読/生成後不変を確認。
+**現在の直接作業（10/30・最初の分岐CPU照合完了／非学習4forward案）：** fit38の不採用閉鎖を維持し、Jupyterへ直接接続して全8stageの保存token・教師messagesをCPU照合。BOOK S3 token264（1293→7664・7関係の終了から余分な関係へ）、SHOP S2 token555（30812→6333・否定根拠の置換）が最初の分岐で、両入力は教師と完全一致。新10行の残存CEの83.7528％はS5二行に集中するが、SHOP S5は実前段も教師と異なり原因を混同しない。既存266＋今回9＝275原本を固定、保存ad8bと旧b5e不変、実モデルload/forward/学習/生成/新CMEE0。CPU回収原本58434bytes/SHA3bee4035をJupyter側と照合済み。
 
-新10区間token加重NLLは0.0968247931→0.0860945479→0.0560160420へ下がり、両S1の17/18引用とBOOK S2は教師JSON値に完全一致した。一方BOOK S3はExtra dataのJSON不正、SHOP S5は更新行反復/日本語本人本文なし・512token length/EOSなしで不成立。SHOP S2の否定/時点とS4の更新根拠も残る。新意味/本人本文0/2、保存/cold0、13path結合/新CMEE呼出し0、旧9は条件不成立でNOT_RUN。実CMEEの却下や旧9維持成功とはしない。
-
-全8rawをrootが全文読み、独立静的照合と一致。実chainは全8件で自分の実前段と一致。BOOK S3とSHOP S2はgold前段を含む学習時promptと完全一致しており、初破綻を悪い実前段だけでは説明できない。最終S5 NLLはBOOK0.338296/SHOP0.482219。BOOK S3と旧9加重NLL（0.001086→0.000843→0.001182）には悪化もあり、平均fit改善を自由生成/商品品質へ換算しない。
-
-処理928.9340299230535秒/$0.07225042454957083按分、親外930.2798354179831秒/exit1。45分/$0.21内、前回$0.28/hを使用・現在単価未照会、準備/回収/保持/保存/通信/税等別。全56member/14631408bytes/SHA3916e2e7を直接回収してCRC/全bytes/SHAをPod外照合。新ad8b追加重みは完全保存、元4B全重みは含まない。
-
-[38更新・3測定・全8rawの実結果と全file地図](training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/fit38/execution_20261030/README.md)。今回承認は消費済み/不採用閉鎖、再試行/補修/上限延長/追加周回/次run/新初期値採用へ自動進行0。現2題の正しい教師は既存で、基本不成立を補う追加観測会は不要。通常source/受信/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy責務差分0、STRUCTURE_MAP_DELTA_NONE。商品0・正式0/3・54.50％・candidate_ready/automatic_progression=false。最新weekly§131。
+次は保存ad8bを診断専用に非学習1load、BOOK S3/SHOP S2の教師全文と分岐直前prefixを各1回、計4forwardの[具体案と全file地図](training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/branch4/README.md)。最大10分・前回$0.28/h按分約$0.047（準備/回収/保持等別）・再試行なし、新GPUは未承認/未実行。教師全文は元helperのloss窓/labels/logits_to_keepを保持し、cache付き生成の再現とはしない。平均NLL改善を自由生成成功へ換算せず、学習追加前に分岐tokenの順位/確率と計算条件差を調べる。fit38の新意味/本人本文0/2・saved/cold0・新CMEE0・旧9NOT_RUNは不変。既存教師あり、今回の基本不成立に追加観測会不要。通常受信/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy変更0、STRUCTURE_MAP_DELTA_NONE。商品0・正式0/3・54.50％・candidate_ready/automatic_progression=false。最新weekly§132。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 
@@ -252,5 +246,6 @@ D05でMashは「事実を事実として捉えるのも観測」と教示し、�
 次に観測会を行う場合は、華恋が新しい観測会フォルダを作り、対話と教示を保存し、この一覧を更新します。Mashには普段の形で実演していただき、整理・参照の整備は華恋が担います。今回、定期実行の日時や頻度は設定していません。
 
 保存先を増やすための新システムやDBは作らず、既存のGitHub上で継続します。製品の構造・契約・CMEE実装を変更する場合は、その作業で対象の設計と接続を扱います。
+
 
 
