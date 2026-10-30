@@ -5835,3 +5835,7 @@ Mash承認のbranch4を保存ad8b/非学習1load/計4forwardで一回完了し�
 `stage5/focus29/README.md` が局所教師不適合・未承認配分29更新・費用/停止・全7sourceの入口。[具体案・全地図](observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/focus29/README.md)。`proposal.json` は保存ad8b隔離初期値/新10×2旧9×1/2load/19NLL/19生成/45分$0.21按分（準備等別）/再試行なしのexact案。`prepare_focus29.py` はstdlibで既存encoded19/messages/教師/元終端/mask・予定29順/19窓/298固定/ad8b不変を確認。`run_focus29_once.py` は個別承認後だけ29更新→保存非学習再読/19NLL→実前段新2/既存CMEE・保存再読→全成功時だけ旧9を所有。`prompt_source_index.py` は既存と同一bytes。`launch_focus29_once.py` はexclusive一回lock・親2690+kill10、`export_focus29.py` は部分/完成重みと全原本回収。
 
 `result_20261030/README.md` はCPU全17file地図。元ZIP14memberを原bytes展開し、cpuのprepared gzip/train19/installedsource/summary、runtimeの実source5/proposal/CPU log・親execution/postidentity、archive_manifestに加え、recovery_receipt/verification/入口を保持。CPU0.413831秒、torch未import、モデル/forward/更新/生成/新CMEE全0、19行不変・298固定・CRC/全bytes/SHAを確認。新GPUは未承認/未実行、approved_planなし。前回不採用閉鎖/意味本文0/2/旧9未実行・商品0を維持。全体00/観測入口/weekly§134と一致、通常受口/型/三core/API/DB/RN/Render/Supabase責務差分0、STRUCTURE_MAP_DELTA_NONE。
+
+## 2026-10-30 focus29承認・一回起動と確認中断
+
+`stage5/focus29/approved_plan.json` はMash明示承認の起動済み消費済み表示。実行時原本は923518fdの同path/SHA7b502e9bに保持。`interrupted_execution_20261030.json` は最後のSTARTED_ONCE/9更新観測とブラウザ自動承認レビュー容量拒否、最終状態/回収未確認、同じrunの状態確認・回収だけの再開先を保持。既存runner/launcher/exporter/source5/proposal/CPU結果は不変。README/全体00/観測入口/weekly§135と一致。通常app/CMEE受信/意味型/API/DB/RN/Render/Supabase責務差分0、STRUCTURE_MAP_DELTA_NONE。新起動/再試行/Stop/restart/delete0。9更新を完了や商品creditに換算しない。

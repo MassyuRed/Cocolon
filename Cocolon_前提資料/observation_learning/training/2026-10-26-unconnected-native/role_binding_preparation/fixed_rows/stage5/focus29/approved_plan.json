@@ -1,5 +1,5 @@
 {
-  "status": "MASH_EXPLICITLY_APPROVED_ONCE",
+  "status": "MASH_APPROVAL_CONSUMED_EXECUTION_STARTED_FINAL_STATUS_UNVERIFIED",
   "approval_received": "current_user_turn_2026-10-30",
   "user_message": "**最大45分・前回単価で処理按分$0.21（準備・回収・保持等別）、再試行なし**で、一回実行してよろしいでしょうか。\n→進めていいよ。",
   "proposal_source_commit": "91b489486370491eb86e40cbc33ac0bb5b09777c",
@@ -42,7 +42,7 @@
     "prior_hourly_usd": 0.28,
     "current_rate_requeried": false,
     "preparation_cmee_cpu_recovery_holding_storage_network_tax_extra": true,
-    "learning_rate": 0.00005,
+    "learning_rate": 5e-05,
     "weight_decay": 0,
     "gradient_clip": 1,
     "seed": 20261024,
@@ -188,5 +188,8 @@
   "automatic_progression": false,
   "product_credit": 0,
   "gpu_management_stop_restart_delete": false,
-  "prohibited": "No retries/extensions/new teacher/prompt-loss-contract change/production API-DB-RN-Render-Supabase/merge/deploy."
+  "prohibited": "No retries/extensions/new teacher/prompt-loss-contract change/production API-DB-RN-Render-Supabase/merge/deploy.",
+  "runtime_approval_original_commit": "923518fd1c08a0a46faf1c4ee8fc9a866d96edf8",
+  "runtime_approval_original_sha256": "7b502e9b867004d915264b49ab53c2c633941f46a028281b0db5cf244e48260c",
+  "closure_note": "One launch already invoked. Existing runtime approval remains original bytes. No restart/retry/new run; final state and recovery pending browser review availability."
 }

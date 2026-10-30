@@ -4055,3 +4055,12 @@ rootがprepare/runner/現prompt/launcher/export/未承認proposal/説明の7file
 JupyterからZIP197471bytes/14member（13payload＋manifest）SHA08b4b1025103e9123ae861f023da37016aba492569a0f154ff15c6241db45606を直接回収。全CRC/bytes/SHA/実source・proposal/元train19・installed loss source・19token/mask/counts/29順をPod外照合し、binary gzipを含む全14元memberを原bytes保存、receipt/verification/入口を追加。[具体案・全7sourceとCPU全17file地図](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/focus29/README.md)。A5000 1MiB/0％で稼働保持、Runpod管理console/API/Stop/restart/delete0。
 
 全体00/観測入口/01Aを同単位更新。前回fit38新意味/本人本文0/2・saved/cold0・旧9NOT_RUN/不採用閉鎖を保持。現2題の既存教師はあり、追加観測会不要。通常source/受信/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy責務差分0、STRUCTURE_MAP_DELTA_NONE。primary=BLOCKER_NARROWED（局所不適合に対する既存教材の最小配分案固定）、technical/product credit0・正式0/3・54.50％・candidate_ready/automatic_progression=false。新paid実行/隔離初期値使用はRule18§11.3の「個別Mash approvalまたはSTOP」に従い、具体案とCPU結果を提示する段階で停止。approved_plan未作成・GPU起動なし。
+
+<a id="20261030-focus29-started-review-capacity-block"></a>
+## 135. Mash承認のfocus29一回を起動、9更新まで確認後にブラウザ承認レビュー容量不足で進捗確認中断
+
+Mashが「最大45分・前回単価で処理按分$0.21（準備・回収・保持等別）、再試行なし」の一回へ「進めていいよ。」と明示承認。proposal SHAda02cbba/source5不変へ結び、承認原本SHA7b502e9b867004d915264b49ab53c2c633941f46a028281b0db5cf244e48260cをcommit923518fd1c08a0a46faf1c4ee8fc9a866d96edf8で保存・読戻し。同Jupyterへ直接接続し、298frozenと保存ad8b不変、承認原本SHA、run/lock不存在を確認して、既存launcherを一回だけ起動した。source-commitは923518fd。root単一writer/executor/judge、補助read-only、正式Pro/Ultra/human authorityの申告なし。
+
+最後に成功したJupyter読取はSTARTED_ONCE、elapsed161.46570089401212秒・model load1・optimizer9/29・教師評価forward0・生成0・cases=[]。後続のread-only run.json reloadは、ブラウザ自動承認レビューが「Selected model is at capacity. Please try a different model.」により処理できず実行前拒否。unsafe判定やMash拒否ではない。迂回アクセス、代替browser/raw CDP、GPU再起動、run再実行をしていない。現在の完了/exit/最終重み/最終費用/原本回収は未確認。既存の親timeout2690秒＋kill10秒は設定済みだが、実停止を確認済みとはしない。
+
+[最後に確認できた事実と再開先](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/focus29/interrupted_execution_20261030.json)を保存。上位approved_planは起動済み消費済み表示へ変更し、実行時原本は923518fd/Podのまま保持。次の一作業は、レビュー可能な環境で同じrunの状態/exit確認と既存exporterによる全原本・部分/完成重み回収、結果本文の全読取。新学習を起動しない。9更新観測を29完了/CMEE成功/品質改善へ昇格しない。前回新意味/本文0/2・旧9未実行は前回履歴であり今回結果は未確定。全体00/観測入口/01Aを同単位更新。通常app/受信/意味型/API/DB/RN/Render/Supabase/依存/merge/deploy変更0、STRUCTURE_MAP_DELTA_NONE。GPU Stop/restart/delete0、商品0・正式0/3・54.50％・candidate_ready/automatic_progression=false。primary=ADMINISTRATIVE_ONLY（実行開始の部分事実保存、最終評価未到達）。

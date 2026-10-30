@@ -1,0 +1,30 @@
+{
+  "status": "SINGLE_APPROVED_RUN_STARTED_FINAL_STATUS_UNVERIFIED",
+  "source_commit": "923518fd1c08a0a46faf1c4ee8fc9a866d96edf8",
+  "runtime_approval_sha256": "7b502e9b867004d915264b49ab53c2c633941f46a028281b0db5cf244e48260c",
+  "last_successful_jupyter_observation": {
+    "status": "STARTED_ONCE",
+    "elapsed_seconds": 161.46570089401212,
+    "model_loads_completed": 1,
+    "optimizer_steps_completed": 9,
+    "teacher_evaluation_forwards_completed": 0,
+    "model_calls_completed": 0,
+    "cases": []
+  },
+  "last_observation_is_not_current_final_state": true,
+  "blocked_action": "Read-only reload of Jupyter run.json progress page",
+  "automatic_approval_review_rejected": true,
+  "review_reason": "Automatic approval review failed: Selected model is at capacity. Please try a different model. Review could not be completed; not a determination that the action is unsafe.",
+  "blocked_action_executed": false,
+  "model_run_retry": false,
+  "new_launch_after_block": false,
+  "existing_parent_timeout_seconds": 2690,
+  "existing_kill_after_seconds": 10,
+  "process_completion_and_cost": "UNVERIFIED",
+  "weights_recovery": "PENDING_UNVERIFIED",
+  "next_action": "Resume read-only status/exit verification and recover originals/partial or complete weights from this same run; never relaunch training.",
+  "gpu_stop_restart_delete_operations": 0,
+  "product_credit": 0,
+  "candidate_ready": false,
+  "automatic_progression": false
+}
