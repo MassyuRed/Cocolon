@@ -3843,3 +3843,20 @@ Mashが§120の最大45分/$0.21按分案へ「進めていいよ。」と明示
 BOOKのalias表へq連番混入、SHOP S2の区間混入/列平坦化が実rawの具体的障害。SHOP S1の引用16件は全て元source内で、教師18件との差だけで意味不合格とは扱わない。モデル実CMEE拒否ではなく、その前のstage条件で停止した。旧9の新重みでの保持/一般化は未確認。現2題には教師があり追加観測会不要。次は保存rawと教材/段階境界のCPU照合へ戻り、追加GPU/方式変更/同条件再生成は自動開始しない。
 
 [全実結果・判断・全file地図](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/README.md)。通常source/receiver/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy変更0、STRUCTURE_MAP_DELTA_NONE。root単一writer/executor/judge、補助read-only、実環境Codex Workで正式Pro/Ultra/humanではない。primary=BLOCKER_NARROWED、technical/product credit0、正式0/3・54.50％、candidate_ready=false、automatic_progression=false。
+
+
+<a id="20261030-stage5-instruction-cpu"></a>
+
+## 123. 2026-10-30 — 区間/全文の構文指示併置をCPU是正候補へ、次の非学習一回案は未承認
+
+**現在の直接作業（10/30・5区間の指示整合CPU確認、非学習の次案は未承認）：** 前回§122のBOOK S1 length/SHOP S2 root1に対し、systemの全文形式指定とspecのroot5/c9生成命令が区間root4/3と併置されていた不整合を特定した。区間ごとにactive構文を一意化する候補を実装し、元material/prior/ref/profile・全非syntax意味条件・新10target/EOS列・13位置再結合2/2・旧9encoding不変、新実messages連鎖/旧prompt代入拒否2/2をJupyter CPUで確認。初版4.692029303秒/最終4.965198732秒ともexit0、gold最大context7117/8192。新model/forward/学習/自由生成/新CMEE0。S1は元々学習/実prompt一致であり、不整合が全原因・改善済みとは断定しない。次案は追加学習0・保存9b1901abを非学習1load、修正指示の新2各最大5call→既存CMEE/cold→2/2時だけ旧9各1、最大19call/30分/$0.14按分（準備・回収・保持等別）、PROPOSED_NOT_APPROVED。前回19更新run/承認は閉鎖のまま流用しない。
+
+**直前GPUの実結果（§122・閉鎖履歴）：** 19更新/保存/112F32非学習reload/実3callを453.667464138秒/$0.035285247211按分で完了したが、BOOK第1区間未完了、SHOP第2区間root1≠3で停止。全5段完成/派生packet/実新CMEE/saved/cold0、新2意味/本人本文0/2、旧9新生成NOT_RUN。新9b1901abは不採用で、今回の非学習比較は本番/次回学習初期への昇格ではない。追加観測会は現2題に不要、商品0/正式0/3/54.50％・candidate_ready/automatic_progression=falseを維持する。
+
+**最新GPU読取確認（2026-10-30 JST）：** 同Jupyter/Pod vgkm402msgroiu/RTX A5000、今回の指示CPU確認後1MiB/0％で稼働保持。今回新model load/forward/学習/自由生成/新CMEE0、CUDA未初期化。前回19更新/3callは§122の完了履歴。Stop/restart/delete/管理console/API0、準備・回収・保持等別。
+
+[実CPU・具体案・全file地図](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/instruction_cpu/README.md)。29member/28payload・342660bytes・SHAd0cda929777eceb11cef994a9d2414414bb6fb25a18b8adb738a8ba562e2cd8eを回収し、root/補助がCRC/全bytes/SHAと全10prompt/元意味条件/target/13位置再結合を独立確認。初版は成功後のreviewでminified/binds型明示を補い、最終版を別fresh CPU rootで検査。2CPU実施と両source/log/reportを区別し、GPU再実行0。新projectは新builderのactual messagesを照合し、同じ実recordsをhash化する。旧messagesへの代入なし。旧raw/model/adapter/finish/EOS/usage/cap/構造検査・既存CMEE/decoder/意味採否/本文/cold条件を緩めない。
+
+BOOK/SHOP S1は学習prompt==実prompt（4467/4619token）で、前段のgold/actual差だけに失敗を帰属しない。SHOP S2だけprevious候補差で5147→5121token、新10各1更新・target計4598/旧9計15421は記述的事実でgradient比・最終saved NLLではない。旧staged_pair9/A-B診断の未習得も照合し、今回の構文修正が全てを直す/4B能力上限とは言わない。追加学習を直ちに増やさず、同9b1901ab/更新0で指示差だけを比較する最小案を選ぶ。新2の各段失敗時同題停止、全新2意味/本文/cold2/2時だけ旧9、全1800秒/親1790+kill10/各180秒・cap不変・19call上限、一回のみretry/repair/枠延長/次prompt探索/追加学習0。30分/$0.14は停止上限で改善保証/必要所要ではない。個別承認前は新GPU処理0、有限非学習runnerは承認後同scopeで実装・source固定する。Rule18§11.3の新費用/閉鎖済単一use境界により前回承認/残枠は流用しない。
+
+最新00/観測入口の古い§120未承認表示と履歴前置きをin-place整理し、本結果/未承認案へ置換。全体設計01/02/全file地図01A/current CMEE mapの既存routingと対象sourceを確認し、通常構造/意味型/API/DTO/DB/RN/Render/Supabase/依存/merge/deployの差分なし、STRUCTURE_MAP_DELTA_NONE。root単一writer/executor、補助read-only、実環境Codex Workで正式Pro/Ultra/humanではない。primary=BLOCKER_NARROWED（指示不整合の特定のみ）、technical/product credit0、正式0/3、54.50％、candidate_ready=false、automatic_progression=false。

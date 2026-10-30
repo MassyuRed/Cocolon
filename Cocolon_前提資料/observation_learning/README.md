@@ -1,24 +1,12 @@
-
-
-### 2026-10-30 — 5区間の承認済み一回実行を不採用閉鎖（最新）
-
-**現在の直接作業：** §120案へMashが「進めていいよ。」と明示承認後、source fa2bdfa7を固定し同JupyterでCPU→GPU一回を実行した。CPU31.464283688秒/モデル0、元2教師の13位置bytes復元・派生provider/current receipt保持・既存CMEE/cold2/2、旧9保存raw比較9/9、来歴不正8拒否、gold最大context7286。GPU19 full-target CE更新・保存/112F32非学習reload・2load・実3call。BOOK S1は640token/EOSなしで未完了、SHOP S1は498/EOS、S2は1276/EOSだがroot1≠期待3で拒否。実5段完成/派生packet/実新CMEE/saved/cold0、新2意味・本人本文0/2、旧9新生成NOT_RUN。不採用閉鎖、retry=false、次回初期への重み昇格なし。
-
-処理453.667464138秒/$0.035285247211按分（準備/回収/保持等別）、外455.094564623秒。初期11446641/182凍結file不変、新9b1901abの112F32/3,833,856parameter/全112tensor変更を保持。完全ZIP229member/31,667,246bytes/SHA4b40bcb4e8afd0e85b27e49e218f5350a2736aa151908efb4e0cc91d57942714、保存ID libfile_cc6b41f4f62c81919cbaec65e51ef379。rootが全CRC/bytes/SHA/112F32、補助が全228payload/19順序/3rawを独立照合。歴史3adapterの重複収録は省き既存保存を参照、Pod外は収録179凍結fileのbytesを照合。GPU1MiB/0％で稼働保持、Stop/restart/delete0。
-
-BOOKのalias表へq連番混入、SHOP S2の区間混入/列平坦化が実rawの具体的障害。SHOP S1の引用16件は全て元source内で、教師18件との差だけで意味不合格とは扱わない。モデル実CMEE拒否ではなく、その前のstage条件で停止した。旧9の新重みでの保持/一般化は未確認。現2題には教師があり追加観測会不要。次は保存rawと教材/段階境界のCPU照合へ戻り、追加GPU/方式変更/同条件再生成は自動開始しない。
-
-[全実結果・判断・全file地図](training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/result_20261030/README.md)。通常source/receiver/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy変更0、STRUCTURE_MAP_DELTA_NONE。root単一writer/executor/judge、補助read-only、実環境Codex Workで正式Pro/Ultra/humanではない。primary=BLOCKER_NARROWED、technical/product credit0、正式0/3・54.50％、candidate_ready=false、automatic_progression=false。
-
-
-### 2026-10-30 — 5区間一回案の明示承認・実装固定（CPU/GPU開始前）
-
-Mashが§120の最大45分/$0.21按分案へ「進めていいよ。」と明示承認。限定offline5区間source3fileとplanを固定した。CPU先行で来歴/完全復元/既存CMEE-cold/旧9保存rawを確認し、通過後19更新・保存非学習reload・実段階生成を一回実行する。初期11446641、段階10＋旧9、BOOK/SHOP各最大5call、両題成功時のみ旧9。現在は実行前で、実学習・新生成・新意味採用0。再承認待ちへ戻さず承認内の実行を継続する。新2の既存0/2・旧9NOT_RUN・商品0/正式0/3/54.50％、追加観測会不要、GPU保持を維持。通常source/受口/意味型/API/DB/RN/接続差分0、STRUCTURE_MAP_DELTA_NONE。
 # Mashの観測技術を継承するための記録
 
-**最新GPU読取確認（2026-10-30 JST）：** 同Pod vgkm402msgroiu/RTX A5000、§120のCPU作業後1MiB/0％で稼働保持。今回model load/forward/学習/自由生成/新CMEE0。直前§119の1load/476forward・34.980309516秒/$0.002720690740按分は完了履歴。Stop/restart/delete/管理console/API0、準備・回収・保持等別。新2意味本文0/2・旧9NOT_RUNは不変。
+**最新GPU読取確認（2026-10-30 JST）：** 同Jupyter/Pod vgkm402msgroiu/RTX A5000、今回の指示CPU確認後1MiB/0％で稼働保持。今回新model load/forward/学習/自由生成/新CMEE0、CUDA未初期化。前回19更新/3callは§122の完了履歴。Stop/restart/delete/管理console/API0、準備・回収・保持等別。
 
-**現在の直接作業（10/30・5区間方式のCPU実現性確認、実装/GPUは未承認）：** §119の同prefix二経路一致を踏まえ、既存BOOK/SHOP教師を引用／claim／relation／更新／問い・本文の5区間へ無損失分割した。同Jupyter CPU4.656087084秒、全2教師JSON bytes完全再結合、元material/prior/request/spec保持、教師前段で最大context7,285/8,192、最大区間target1,094token。新model/forward/学習/自由生成/新CMEE0。入力合計は一括promptの約6.5倍、生成総量はほぼ同じで、速度/原価/品質改善は未実証。全原本8member/43,170bytesを回収しCRC/bytes/SHA・独立再結合照合済み。次の案は新offline方式の限定実装/CPU検証→区間10＋旧9の19更新→保存非学習reload→実model前段だけの新2各最大5call→派生packetを区別して既存CMEE/cold→全成功時だけ旧9確認、最大45分/$0.21按分（準備等別）。生成来歴と方式・費用を変えるためRule18§11.3 LEVEL3、PROPOSED_NOT_APPROVED。通常受口/API/DB/RN変更0、新2意味/本人本文0/2・旧9NOT_RUN・商品0/正式0/3/54.50％不変。追加観測会は現2題で不要。GPU1MiB/0％で保持、Stop等0、automatic_progression=false。 [実CPU・一回案・全file地図](training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/README.md)。
+**現在の直接作業（10/30・5区間の指示整合CPU確認、非学習の次案は未承認）：** 前回§122のBOOK S1 length/SHOP S2 root1に対し、systemの全文形式指定とspecのroot5/c9生成命令が区間root4/3と併置されていた不整合を特定した。区間ごとにactive構文を一意化する候補を実装し、元material/prior/ref/profile・全非syntax意味条件・新10target/EOS列・13位置再結合2/2・旧9encoding不変、新実messages連鎖/旧prompt代入拒否2/2をJupyter CPUで確認。初版4.692029303秒/最終4.965198732秒ともexit0、gold最大context7117/8192。新model/forward/学習/自由生成/新CMEE0。S1は元々学習/実prompt一致であり、不整合が全原因・改善済みとは断定しない。次案は追加学習0・保存9b1901abを非学習1load、修正指示の新2各最大5call→既存CMEE/cold→2/2時だけ旧9各1、最大19call/30分/$0.14按分（準備・回収・保持等別）、PROPOSED_NOT_APPROVED。前回19更新run/承認は閉鎖のまま流用しない。
+
+**直前GPUの実結果（§122・閉鎖履歴）：** 19更新/保存/112F32非学習reload/実3callを453.667464138秒/$0.035285247211按分で完了したが、BOOK第1区間未完了、SHOP第2区間root1≠3で停止。全5段完成/派生packet/実新CMEE/saved/cold0、新2意味/本人本文0/2、旧9新生成NOT_RUN。新9b1901abは不採用で、今回の非学習比較は本番/次回学習初期への昇格ではない。追加観測会は現2題に不要、商品0/正式0/3/54.50％・candidate_ready/automatic_progression=falseを維持する。
+
+[実CPU・限定案・全file地図](training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/instruction_cpu/README.md)。通常source/receiver/意味型/API/DB/RN/Render/Supabaseの構造差分0、STRUCTURE_MAP_DELTA_NONE。詳細・実行境界はweekly§123を参照する。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 

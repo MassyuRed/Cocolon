@@ -1,0 +1,209 @@
+{
+  "status": "CPU_INSTRUCTION_CONSISTENCY_CONFIRMED_NOT_MODEL_IMPROVEMENT",
+  "seconds": 4.965198732097633,
+  "source_sha256": {
+    "prompt_stage_only.py": "5796284d6eea6888592bfa28a8be2807819f223b18179faf0ec93f46779297a6",
+    "check_once.py": "622e86a33745e08ccbd02aa571c701181e1d3caef3908e0f3c1276af113a50e2"
+  },
+  "previous_run_unchanged": true,
+  "previous_saved_weight_sha256": "9b1901abdb3776b301c3e77b5787e4aa851f6a007ccac29764507de5f72f3818",
+  "checks": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER/stage1",
+      "old_prompt_tokens": 4467,
+      "new_prompt_tokens": 4316,
+      "target_tokens": 492,
+      "cap": 640,
+      "target_plus_eos_ids_identical": true,
+      "material_prior_request_identical": true,
+      "all_non_syntax_requirements_identical": true,
+      "unique_active_root": true,
+      "old_messages_sha256": "3e9f83d98e94603b1b156b1cf68725603a4efc485a0c3d01c23a79cd09016dd3",
+      "new_messages_sha256": "c89d47537a64d44afbb76d16e55bc0f6aafae9923148c857ff18b80d08a5e44f"
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER/stage2",
+      "old_prompt_tokens": 4964,
+      "new_prompt_tokens": 4844,
+      "target_tokens": 899,
+      "cap": 1152,
+      "target_plus_eos_ids_identical": true,
+      "material_prior_request_identical": true,
+      "all_non_syntax_requirements_identical": true,
+      "unique_active_root": true,
+      "old_messages_sha256": "71ebdc27797aace8943a9f1d2382732b0062166fc9bbdc63a26048a34125edc5",
+      "new_messages_sha256": "4c07eda50dc2afe1ec7833b22f9bffa013526736a6615e37641e9db439534bdb"
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER/stage3",
+      "old_prompt_tokens": 5866,
+      "new_prompt_tokens": 5686,
+      "target_tokens": 283,
+      "cap": 512,
+      "target_plus_eos_ids_identical": true,
+      "material_prior_request_identical": true,
+      "all_non_syntax_requirements_identical": true,
+      "unique_active_root": true,
+      "old_messages_sha256": "b921e008bb7227a0e6fee77700f744cbbfb59098505b216ea9483d280be1857f",
+      "new_messages_sha256": "e11d0a33825870688caef1eac9c0e83055f81f32d6a9448720314ee62a9561d2"
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER/stage4",
+      "old_prompt_tokens": 6140,
+      "new_prompt_tokens": 5951,
+      "target_tokens": 267,
+      "cap": 512,
+      "target_plus_eos_ids_identical": true,
+      "material_prior_request_identical": true,
+      "all_non_syntax_requirements_identical": true,
+      "unique_active_root": true,
+      "old_messages_sha256": "c24c0222efa1e2c6add6dc5a117f917a2a319507acf8fd4c5145b3f67851abee",
+      "new_messages_sha256": "e2ab06970a1330b6040ba39221648126c393c6bec5f7c91af67c7cb620e7166e"
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER/stage5",
+      "old_prompt_tokens": 6419,
+      "new_prompt_tokens": 6250,
+      "target_tokens": 220,
+      "cap": 384,
+      "target_plus_eos_ids_identical": true,
+      "material_prior_request_identical": true,
+      "all_non_syntax_requirements_identical": true,
+      "unique_active_root": true,
+      "old_messages_sha256": "b7fc30f6b6dc361fa838a7d979c63f03be3a37cb8012bc4eafeebf6f3678f10f",
+      "new_messages_sha256": "9dfe7792542df781f1e72792fec1583bc2b6adecff28d1b08299272c510c86c8"
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage1",
+      "old_prompt_tokens": 4619,
+      "new_prompt_tokens": 4468,
+      "target_tokens": 523,
+      "cap": 768,
+      "target_plus_eos_ids_identical": true,
+      "material_prior_request_identical": true,
+      "all_non_syntax_requirements_identical": true,
+      "unique_active_root": true,
+      "old_messages_sha256": "76d2389c2d033517e77bbcffc3c1e7969142b389d497bcfd86aab61714973db3",
+      "new_messages_sha256": "80aafcdd58066e200bf628295946f4f3006db6553eaa9ddb2b94f082883ecac8"
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage2",
+      "old_prompt_tokens": 5147,
+      "new_prompt_tokens": 5027,
+      "target_tokens": 1094,
+      "cap": 1280,
+      "target_plus_eos_ids_identical": true,
+      "material_prior_request_identical": true,
+      "all_non_syntax_requirements_identical": true,
+      "unique_active_root": true,
+      "old_messages_sha256": "e08b59fd7cef4754096abde66a5edc6e13d35c402da4180f0fc4d14e31329923",
+      "new_messages_sha256": "475dabc439f44e5d1aaa275c461234568f58ce345aa213bfe1dbc37ae2a5e6b6"
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage3",
+      "old_prompt_tokens": 6244,
+      "new_prompt_tokens": 6064,
+      "target_tokens": 236,
+      "cap": 384,
+      "target_plus_eos_ids_identical": true,
+      "material_prior_request_identical": true,
+      "all_non_syntax_requirements_identical": true,
+      "unique_active_root": true,
+      "old_messages_sha256": "561ccd3e413456a829d82589ab830f2c36dcafe251b1e87511351a53fdf47920",
+      "new_messages_sha256": "630841127bf482325f39e41d1f9ada6a39342d8dae53d8d20e5b21376dd5f325"
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage4",
+      "old_prompt_tokens": 6471,
+      "new_prompt_tokens": 6282,
+      "target_tokens": 291,
+      "cap": 512,
+      "target_plus_eos_ids_identical": true,
+      "material_prior_request_identical": true,
+      "all_non_syntax_requirements_identical": true,
+      "unique_active_root": true,
+      "old_messages_sha256": "6e4c2bce6531afe8b81bb7ebd28711adf40c5dc461740a6b75a4644b1e3c6d51",
+      "new_messages_sha256": "bd1724eb1fcb9807b568faabd4b67677ef04acb0bb77534985674a0c63656951"
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage5",
+      "old_prompt_tokens": 6774,
+      "new_prompt_tokens": 6605,
+      "target_tokens": 293,
+      "cap": 512,
+      "target_plus_eos_ids_identical": true,
+      "material_prior_request_identical": true,
+      "all_non_syntax_requirements_identical": true,
+      "unique_active_root": true,
+      "old_messages_sha256": "259156c6e906d9e2a0496be61d862dae740f578bf09b7c537776c7b5dbfac943",
+      "new_messages_sha256": "2d9e7ad682c6d8ccee6cf2db7bb164f109d23dc3589df2051a105b439930ca0e"
+    }
+  ],
+  "old9_encoding_unchanged": [
+    "TRAIN-SERVICE-CHAIR-01-INITIAL",
+    "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+    "TRAIN-SERVICE-CHAIR-02-INITIAL",
+    "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+    "TRAIN-SERVICE-CHAIR-03-INITIAL",
+    "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+    "TRAIN-DAILY-CALM-01-INITIAL",
+    "TRAIN-DAILY-CALM-02-INITIAL",
+    "TRAIN-DAILY-CALM-03-INITIAL"
+  ],
+  "actual_vs_training": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER/stage1",
+      "training_prompt_equals_actual": true,
+      "differing_user_keys": [],
+      "input_tokens": 4467,
+      "prior_stage_difference_cannot_explain_stage1": true
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage1",
+      "training_prompt_equals_actual": true,
+      "differing_user_keys": [],
+      "input_tokens": 4619,
+      "prior_stage_difference_cannot_explain_stage1": true
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage2",
+      "training_prompt_equals_actual": false,
+      "differing_user_keys": [
+        "previous_candidate_stages"
+      ],
+      "input_tokens": 5121,
+      "prior_stage_difference_cannot_explain_stage1": false
+    }
+  ],
+  "projection_checks": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "exact_current_chain": true,
+      "teacher_packet_bytes_identical": true,
+      "bundle_sha256_actual_records": true,
+      "old_prompt_substitution_rejected": true
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "exact_current_chain": true,
+      "teacher_packet_bytes_identical": true,
+      "bundle_sha256_actual_records": true,
+      "old_prompt_substitution_rejected": true
+    }
+  ],
+  "max_new_prompt_plus_cap": 7117,
+  "complete_teacher_bytes_identical": "2/2",
+  "model_loads": 0,
+  "model_forwards": 0,
+  "updates": 0,
+  "generations": 0,
+  "new_cmee_calls": 0,
+  "cuda_initialized": false,
+  "product_credit": 0,
+  "limits": [
+    "Instruction inconsistency is real; causal effect on generation remains untested.",
+    "S1 training and evaluation prompts were already equal; teacher-forced to free-generation failure remains.",
+    "Same stage5 split/join, original material/prior and all non-syntax requirements/teacher values retained.",
+    "No new model result, new acceptance or old9 regression claim."
+  ]
+}
