@@ -23,12 +23,15 @@ def main():
     assert not ARCHIVE.exists(), 'recovery_is_single_export'
     cpu = json.loads(gzip.decompress((CPU / 'prepared_cpu.json.gz').read_bytes()))
     changed = [p for p, h in cpu['frozen'].items() if not Path(p).is_file() or sha(Path(p)) != h]
+    try:
+        gpu = dict(gpu_read_only=subprocess.check_output(['nvidia-smi', '--query-gpu=name,memory.used,utilization.gpu',
+                                                          '--format=csv,noheader'], text=True, timeout=10).strip())
+    except (OSError, subprocess.SubprocessError) as exc:
+        gpu = dict(gpu_read_only=None, gpu_read_error=type(exc).__name__ + ': ' + str(exc))
     post = dict(frozen_files=len(cpu['frozen']), all_frozen_bytes_unchanged=not changed, changed_paths=changed,
                 initial_adapter_sha256=sha(W / 'cocolon_stage5_run_20261030/adapter/adapter_model.safetensors'),
                 initial_config_sha256=sha(W / 'cocolon_stage5_run_20261030/adapter/adapter_config.json'),
-                gpu_read_only=subprocess.check_output(['nvidia-smi', '--query-gpu=name,memory.used,utilization.gpu',
-                                                       '--format=csv,noheader'], text=True).strip(),
-                model_rerun=False, retry=False)
+                **gpu, model_rerun=False, retry=False)
     (PACK / 'post_identity.json').write_bytes(encoded(post))
     files = {}
     for prefix, directory in [('run', RUN), ('runtime', PACK), ('inputs', CPU)]:
@@ -45,10 +48,12 @@ def main():
                     base_model=dict(model='Qwen/Qwen3.5-4B', revision='851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a',
                                     full_base_weights_included=False),
                     product_credit=0, automatic_progression=False)
-    with zipfile.ZipFile(ARCHIVE, 'x', zipfile.ZIP_DEFLATED) as archive:
+    temporary = ARCHIVE.with_suffix('.zip.partial')
+    with zipfile.ZipFile(temporary, 'x', zipfile.ZIP_DEFLATED) as archive:
         for name, path in files.items():
             archive.write(path, name)
         archive.writestr('archive_manifest.json', encoded(manifest))
+    temporary.rename(ARCHIVE)
     run = json.loads((RUN / 'run.json').read_text()) if (RUN / 'run.json').exists() else {}
     receipt = dict(archive=ARCHIVE.name, bytes=ARCHIVE.stat().st_size, sha256=sha(ARCHIVE), members=len(files) + 1,
                    status=run.get('status', 'RUN_REPORT_MISSING_RECOVERED_WITHOUT_RETRY'),
