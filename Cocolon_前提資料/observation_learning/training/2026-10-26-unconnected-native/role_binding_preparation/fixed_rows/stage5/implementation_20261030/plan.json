@@ -34,7 +34,7 @@
   "prior_hourly_usd": 0.28,
   "current_rate_requeried": false,
   "preparation_cmee_cpu_recovery_holding_storage_network_tax_extra": true,
-  "learning_rate": 5e-05,
+  "learning_rate": 0.00005,
   "weight_decay": 0,
   "gradient_clip": 1,
   "seed": 20261024,
@@ -48,7 +48,7 @@
   "candidate_ready": false,
   "automatic_progression": false,
   "schema": "cocolon.stage5.v1",
-  "status": "MASH_EXPLICITLY_APPROVED_ONCE",
+  "status": "CLOSED_NOT_ADOPTED_NO_RETRY",
   "predecessor_commit": "249a92952457e88c960a028a3e0b44fe2bb5858d",
   "original_train_sha256": "1401ee1144b820bbedbbcf1740133ca7d4330231f0d04732692820723bccff3b",
   "original_eval_sha256": "6eaa2acd66f359da1d0e77bdb48c1eb483138dbcc50cb30ce7673b6da499b4ea",
@@ -112,5 +112,21 @@
   "stop": "One GPU run, no retry or raw repair. Invalid/unfinished stage stops that case; other independent case can proceed. Old9 skipped unless pair complete. Context/deadline/identity failure stops run.",
   "scope": "Offline experiment only; minimal ordered field names match existing thirteen paths. No source/truth edits, admission relaxation, fallback, merge or deployment.",
   "hypothesis": "Five smaller model outputs may remove full-packet completion failure; not established improvement or cost reduction.",
-  "cmee_cpu_included_in_process_deadline_and_cost": true
+  "cmee_cpu_included_in_process_deadline_and_cost": true,
+  "closure": {
+    "source_commit": "fa2bdfa76c357e4931bca3bfa30510a5d7c993e4",
+    "result_path": "../result_20261030/README.md",
+    "updates": 19,
+    "model_loads": 2,
+    "generations": 3,
+    "new_pair_meaning": "0/2",
+    "new_pair_body": "0/2",
+    "actual_new_cmee_calls": 0,
+    "old9": "NOT_RUN",
+    "processing_seconds": 453.66746413800865,
+    "process_cost_usd": 0.035285247210734005,
+    "new_adapter_sha256": "9b1901abdb3776b301c3e77b5787e4aa851f6a007ccac29764507de5f72f3818",
+    "library_file_id": "libfile_cc6b41f4f62c81919cbaec65e51ef379",
+    "retry": false
+  }
 }
