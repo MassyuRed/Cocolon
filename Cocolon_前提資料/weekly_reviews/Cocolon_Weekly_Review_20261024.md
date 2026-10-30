@@ -3771,3 +3771,24 @@ source29130e55のprepare_cpu.py f03e7f49／runner08c7bd3e／未承認planを取�
 同process CMEEを含むGPU処理按分$0.051900936134は承認上限$0.21内、全処理667.297750292秒は45分内。外668.865371947秒。準備/回収/保持/保存/通信/税等は別で総支払額ではない。GPUは稼働保持、管理console/API/Stop/restart/delete0。今回の配分では未達として閉じ、同種有料反復・新helper・次GPU案を自動追加しない。現2題の追加観測会は依頼せず、一般教材不足や4B能力限界/cache原因は未確定。
 
 全体00・観測学習README・file地図01Aを同じ差分へ同期。通常ModelCandidateSource/receiver/意味型/三core/API/DTO/DB/RN/Render/Supabase/依存/merge/deploy構造差分0、STRUCTURE_MAP_DELTA_NONE。primary=BLOCKER_NARROWED、TECHNICAL_CREDIT=0、PRODUCT_CREDIT=0、正式0/3、54.50％、candidate_ready=false、automatic_progression=false。root単一writer/executor/judge、補助read-only、実環境Codex Work、正式Pro/Ultra/human受入れ未実施。
+
+
+<a id="20261030-forward-prefix-cpu"></a>
+
+## 118. 2026-10-30 — 実loss／forwardと新rawの分岐点をCPU照合、SHOP同一prefix比較は未承認
+
+**現在の直接作業（10/30・実loss/sourceと新raw分岐点のCPU確認、次の有料計測は未承認）：** 同Jupyterからinstalled transformers5.19.0のmodel／loss／generation実装を回収。tailはlm_head前・causal shiftは一回で、現helperの有効な教師対はfull lossと同じ。今回範囲で決定的な添字ずれや保存重みの誤読込は見つからない。新7fcca3ceの原rawでは、0始まりの最初の逐語差BOOK283／SHOP292は引用ID名の一部で、これ自体を意味誤りとしない。最初の型・列構造違反はBOOK520（timeの余分なcell）／SHOP473（q行のstring位置へ[[）。成功CPU7.903162448秒・CUDA未初期化、原本8member／31713bytesを回収し全CRC／bytes／SHAと全4prefixをPod外照合。原本照合値の最終LF差・tokenizer戻り値指定のCPU準備2失敗も分離保存した。旧109c token診断は別重み・旧quote形式・cacheなしであり、この同一prefixの二経路比較は未測定。ただしcache不具合を疑う直接証拠はまだなく、一般原因は未確定。次はSHOP一題の保存raw先頭474tokenだけを固定再生し、292／473の同入力を逐次cache／一括非cacheで比べる新しい一回案。1load／最大476forward、学習0／自由生成0／新CMEE0、最大3分／処理按分$0.014（準備・回収・保持等別）、plan=PROPOSED_NOT_APPROVED。新GPU処理0、前回§117の17更新・新2意味／本文0/2・不採用閉鎖・旧9 NOT_RUNは不変。現2題の追加観測会は不要、GPU1MiB／0％で稼働保持、商品0／正式0/3／54.50％、candidate_ready=false、automatic_progression=false。
+
+[全CPU原本・全file地図・未承認一回案](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/structural_cpu/forward_prefix_cpu/README.md)。current85daf93b、全体原本全文・必須incident全文・作業ルール、全体設計／全file分冊のrouting、current mapsと実sourceを確認。巨大な歴史全体の再読や新System Context索引完成とはしない。root単一writer/executor/judge、補助read-only、実環境Codex Work、正式Pro/Ultra/human受入れではない。
+
+実helper run_pilot.py:176–199、installed modeling_qwen3_5.py:1724–1729/1869–1876、loss_utils.py:61–64の添字を照合。全入力を残し最初の教師tokenの直前からtailを出し、一回shiftするため、full/tailの有効対はlogit[p−1:n−1]→label[p:n]で一致。load_expanded_adapterは保存全key/全値と112F32/学習可否を検査。今回範囲に新しい決定的欠陥はない。合成loss比較を重ねず、実4B数値/cacheの正常性を証明したとも扱わない。
+
+新rawの逐語分岐283/292は引用ID名の途中。構造違反520/473とは区別し、逐語差だけを意味不一致へ加算しない。BOOKのtoken2129（bytes222c22）はtime行の余分なcellへ進み、SHOPのtoken15050（5b5b）はq行先頭のstring位置に入れ子配列を置く。SHOPの一般JSON parserが裸@s0で拒否する位置より前の、型・列の違反である。全4prefixは原保存encodingとrawから長さ/全token列SHA/token境界をPod外で再導出一致。元raw/教師/意味補完0。
+
+成功CPU7.903162448秒、pretrained model load/forward/学習/自由生成/新CMEE0、CUDA未初期化。原syntax2b source SHA28e78eb1を変更せず使用。最初はlocal materializationの余分な最終LFを含むpinでimport前assert停止、次はtokenizerのdefault BatchEncodingをlistへ加算して結果保存前停止。原本hash・return_dict=Falseへ訂正後の成功と分離して記録し、成功時間を全準備時間にしない。JSON download event timeoutはZIPの実到着と区別。完全ZIP31713bytes／8member／7payload／SHA118a44284fefdc6d2a31612984ab391c45d78fb559c08957a072db250f4619d3を一回回収、全CRC/member/bytes/SHA一致。model/loss2原本と実GenerationMixin.prepare_inputs_for_generation/_sample、prefix、実CPUcommand、失敗履歴を保全。
+
+旧token_diagnosticは109c3dda／旧quote形式／15回のuse_cache=False教師文脈forward。BOOK/SHOP回答後3178/3561target、最初のtop1不一致656/744で、自由生成の最初の誤tokenは新6中5件一致した。この履歴を無視してcache原因を主張しない。新7fcca／固定列2146/2422本文token／同一inputのcachedとuncached直接比較はその旧診断に含まれない。補助意見は有料必要性になお慎重であり、rootもcache不具合を確認したとは扱わない。rootは追加学習や旧mask付け直しより範囲を縮め、未実測の計算経路差が現SHOPの二地点で選択を変えるかだけを区別する次案を選択した。新paid許可は生成していない。
+
+新run_cache_prefix_shop.py/planはPROPOSED_NOT_APPROVED。SHOPだけ非学習1load、実generateで保存raw先頭474tokenを固定再生し292/473のcached vectorを採取、通常max_new_tokens=474で終了してから同一prefixのuncached2を行う。callback内へreferenceをネストせず、decode最適化/PEFT準備contextの混入を避ける。474 cached+2 uncached＝最大476core forward、generate API1call、自由生成0、学習0、新CMEE0。全vector/rank/top5/margin/差とhook実件数を保存し、BF16の小差・僅差argmaxをbugと断定しない。最大180秒／$0.014按分、親170+kill10秒、準備/回収/保持等別。原本回収・一回終了、retry/修復/次GPU自動進行0。source静的review/compile/未承認拒否を確認。通常終了のexact上限は実DeferredStopCheckがlength>=max_lengthでstoppingを返すsourceをrootが追加読取、2member/2148bytesの原本ZIPを回収照合して補った。実4B成立は未検証。新しい費用はRule18§11.3のMash個別確認前。
+
+全体00・観測入口・01Aを同差分へ同期。通常ModelCandidateSource/receiver/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deployの構造差分0、STRUCTURE_MAP_DELTA_NONE。primary=BLOCKER_NARROWEDは不適合位置の局所化だけ、TECHNICAL_CREDIT=0、PRODUCT_CREDIT=0、正式0/3、54.50％、candidate_ready=false、automatic_progression=false。今回品質改善は未測定、§117の0/2/不採用と旧9 NOT_RUNは不変、現2題の追加観測会を求めない。
