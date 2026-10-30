@@ -3867,3 +3867,20 @@ BOOK/SHOP S1は学習prompt==実prompt（4467/4619token）で、前段のgold/ac
 Mashが8a9ba7d4の具体案「追加学習なし・同じ保存重みで新2生成→CMEE・保存再読→成功時だけ旧9、最大30分/$0.14按分（準備等別）」へ「進めていいよ。」と明示承認。`stage5/instruction_cpu/execution_20261030`へ有限nontraining runner/CPU確認済みprompt同一bytes/今回承認planを固定。nontraining load1、全requires_grad=false、学習/optimizer/重み保存0、最大19call/各180秒/全1800秒/親1790TERM+kill10、新2の全意味/本文/cold2/2時だけ元旧9各1。実際の新messages連鎖を検査し、旧messagesへ代入しない。元cap/8192/receiver/意味型/採否/本文/cold条件不変、全source/入力/前3raw/9b重みconfigをpre/post照合。途中不成立は同題停止、retry/修復/追加学習/次run0。
 
 rootが実装・compile/AST確認、補助は全文read-only reviewでblocking defectなし。新GPUは実装固定時点未開始、同承認内で実行を継続し再承認を求めない。前回19更新の閉鎖/新2意味本文0/2/旧9NOT_RUNは不変。全体00/観測入口/filemapを同単位更新。通常source/receiver/型/API/DB/RN/Render/Supabase/依存/merge/deploy差分0、STRUCTURE_MAP_DELTA_NONE。root単一writer/executor、補助read-only、Codex Workで正式Pro/Ultra/humanではない。商品0/正式0/3/54.50％、candidate_ready/automatic_progression=false。追加観測会は現2題で不要。GPU稼働保持/Stop等0。
+
+
+<a id="20261030-instruction-probe-result"></a>
+
+## 125. 2026-10-30 — 指示整合の非学習一回、両S1不成立・不採用閉鎖
+
+**現在の直接作業（10/30・指示整合の非学習一回を不採用閉鎖）：** Mash承認8a9ba7d4案をsource928513c4で一回実装・実行。保存9b1901ab非学習1load/112F32・全parameter非学習、学習0、実2call。BOOK S1は339token/EOSでもJSON未完結/aliasとquote混在/actual source・原欄誤配、SHOP S1は303token/EOS/JSON成立だがroot3≠4で停止。全5段完成/derived packet/実新CMEE/saved/cold0、新2意味/本人本文0/2、旧9NOT_RUN。指示整理だけでは成立せず、不採用閉鎖/再試行0。次の有料案/追加学習/再生成は自動開始しない。
+
+**最新GPU読取確認（2026-10-30 JST）：** 同Pod vgkm402msgroiu/RTX A5000、今回の非学習1load/学習0/2生成終了後1MiB/0％で稼働保持。処理40.392448843秒/$0.003141634910按分、外41.708045803秒、準備/回収/保持等別。Stop/restart/delete/管理console/API0、196入力/source/保存重み不変を確認。
+
+[全実結果・全raw読了・全file地図](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/instruction_cpu/result_20261030/README.md)。source928513c4/runner1ecc440e/prompt5796284d/一回lock、PID386505、親1790TERM+kill10/全1800秒/各180秒/19call上限で承認範囲を保持した。BOOK339/EOS/1155字は最上位閉じ不足に加え、alias10とquote様10を第3配列へ混在し、actual_identityへrole名・補足fieldへmemo/memo_actionを誤配する。SHOP303/EOS/JSON成立/782字はroot3≠期待4、第3配列19要素が一組＋18文字列でquotes欄なし。両実S1はCPU最終messagesとhash一致、前段空、教師注入0。before3rawも不変。SHOP S2は今回NOT_RUN。単にBOOK括弧を足して解消する問題ではなく、修復しない。
+
+原本212member/211payload・2833615bytes・SHAab25036f8044c30bed879c83b36f0fdbd8004402dffbe69a4e4da56a7b37f357、保存ID libfile_047c1d24bbc08191b2715926ae682455。root/補助が全CRC/bytes/SHA・全2raw/messages/record・同9b・before3rawを独立確認。196凍結中191同梱fileのbytesを照合、非同梱5weightはhashmetadata/別既存保全と区別。現在9b重みは前回完全ZIP libfile_cc6b41f4f62c81919cbaec65e51ef379保持、今回不変で重複保存しない。base全重み入りの単独モデルではない。loaded112F32有限/全parameter非学習、学習forward/optimizer/重み保存0、処理40.392448843秒/$0.003141634910按分、外41.708045803秒/exit1。原runのstages_completed=1は保存record数で、valid stage成功は両0。
+
+指示の全文/区間構文併置を除いても、当該保存重みのalias/quote分離・actual source/原欄への束縛は未成立。EOS S1は1/2→2/2、構造通過は1/2→0/2。短縮/EOSを品質改善へ換算しない。新2意味/本人本文0/2、完成derived packet/実新CMEE/saved/cold0、旧9新生成NOT_RUNで旧9維持も未確認。本人向け成立本文0でProduct Read候補は出さない。追加観測会は現2題の正解不足を補う目的には不要。一般4B能力上限/教材不足/全原因は未確定。次は既存教師/学習入力のsource ID・原欄・alias/quote/role対応のCPU読取へ戻り、同paid再試行/枠延長/再学習/次prompt探索/新GPU案を自動追加しない。
+
+全体00/観測入口/filemapを同単位でin-place同期、execution planはclosure付き閉鎖、承認時runtime planは不変原本。通常source/receiver/意味型/三core/API/DTO/DB/RN/Render/Supabase/依存/merge/deploy構造差分0、STRUCTURE_MAP_DELTA_NONE。root単一writer/executor/judge、補助read-only、実環境Codex Workで正式Pro/Ultra/humanではない。primary=BLOCKER_NARROWED（指示整理だけで不成立の限定観測）、technical/product credit0、正式0/3、54.50％、candidate_ready/automatic_progression=false。

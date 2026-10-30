@@ -5780,3 +5780,8 @@ fixed_rows/structural_cpu/forward_prefix_cpu/result_20261030/README.mdが実結�
 ### weekly§124 — 承認済み非学習一回runnerの全file地図
 
 `stage5/instruction_cpu/execution_20261030/run_inference_once.py`が保存9b1901ab非学習1load/学習0/新2actual段階生成→既存CMEE-cold→条件付き旧9/各180秒/全1800秒/最大19call/pre-post不変を所有。`prompt_stage_only.py`はCPU確認済み5796284d同一bytesの区間指示と新実messages連鎖、`plan.json`は今回のMash明示承認・source2SHA・固定重み/元11順序・最大30分$0.14（準備等別）、`README.md`は実装状態と責務を所有する。実装固定時点GPU未開始、実行を継続する。通常責務/受口/意味型/API/DB/RN差分0、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。
+
+
+### weekly§125 — 指示整合の非学習一回結果・原本地図
+
+`stage5/instruction_cpu/result_20261030/README.md`が全file責務、`summary.json/content_review.md`が同9b非学習1load/学習0/2call/両S1不成立/0/2/旧9NOT_RUN・全raw読解/before比較/不採用閉鎖を所有。`run/run.json・loaded_tensors.json・extra_frozen.json・stage1_*.jsonl・*.messages.json・*_stages.json・cmee/diagnosis.json`は実record/全token/入力/112F32/拒否前停止を保持。`runtime`の実source2/承認plan/launch_once/lock/launch/log/exit/elapsed/post_identity/exportは単一起動/親1790+kill10/40.392秒$0.003141634910按分/196不変/GPU保持を所有。`archive_manifest.json/verification.json/preservation_receipt.json/file_manifest.json/proof.jpg`は212member/2833615bytes原本の地図/Pod外全CRC・bytes・SHA/全pathと保存ID libfile_047c1d24bbc08191b2715926ae682455/実画面を所有。191fileはbytes同梱、5weightは別既存保存参照/current9b不変。`execution_20261030/plan.json`はclosure付き閉鎖、runtime planは承認時原本。通常受口/型/API/DB/RN/接続責務不変、STRUCTURE_MAP_DELTA_NONE。商品0/正式0/3/54.50％、candidate_ready/automatic_progression=false。

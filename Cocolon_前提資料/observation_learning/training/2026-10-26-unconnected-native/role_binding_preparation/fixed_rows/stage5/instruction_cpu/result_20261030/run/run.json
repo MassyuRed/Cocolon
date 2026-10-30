@@ -1,0 +1,183 @@
+{
+  "status": "STOPPED_NOT_ADOPTED_NO_RETRY",
+  "source_commit": "928513c4bf2b150ad64d2b8624bb06be2a4dd65f",
+  "plan": {
+    "schema": "cocolon.stage5.instruction_probe.execution.v1",
+    "status": "MASH_EXPLICITLY_APPROVED_ONCE",
+    "executor": "root Karen only; support read-only; Codex Work, no formal Pro/Ultra/human acceptance claim",
+    "purpose": "Test whether removing competing whole-packet syntax instructions changes actual staged generation and allows unchanged CMEE/cold admission.",
+    "not_claimed": "CPU consistency does not show model improvement; remaining underlearning is possible.",
+    "source_commit_before_proposal": "8a47e910641ff00b8810aec43aa775a8f9765ca7",
+    "model": "Qwen/Qwen3.5-4B",
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "saved_adapter_path": "/workspace/cocolon_stage5_run_20261030/adapter",
+    "saved_adapter_sha256": "9b1901abdb3776b301c3e77b5787e4aa851f6a007ccac29764507de5f72f3818",
+    "saved_adapter_status": "Prior stage5 remains not adopted; read-only inference comparison is not promotion to a training initial value or production.",
+    "input_change": "Same five-stage split/join and output values. One active stage root/row syntax, full syntax references archived separately. Original material/prior/request/profile and all non-syntax meaning requirements stay exact. Use actual previous raw stages only.",
+    "cpu_final_status": "CPU_INSTRUCTION_CONSISTENCY_CONFIRMED_NOT_MODEL_IMPROVEMENT",
+    "cpu_final_seconds": 4.965198732097633,
+    "cpu_initial_seconds": 4.692029303056188,
+    "cpu_max_gold_prompt_plus_cap": 7117,
+    "cpu_model_loads": 0,
+    "prompt_source_sha256": "5796284d6eea6888592bfa28a8be2807819f223b18179faf0ec93f46779297a6",
+    "cpu_check_source_sha256": "622e86a33745e08ccbd02aa571c701181e1d3caef3908e0f3c1276af113a50e2",
+    "max_updates": 0,
+    "max_model_loads": 1,
+    "max_stage_calls_per_case": 5,
+    "max_total_model_calls": 19,
+    "new_cases": [
+      "FT-BOOK-AFTER-ANSWER",
+      "FT-SHOP-AFTER-ANSWER"
+    ],
+    "stage_caps": {
+      "FT-BOOK-AFTER-ANSWER": [
+        640,
+        1152,
+        512,
+        512,
+        384
+      ],
+      "FT-SHOP-AFTER-ANSWER": [
+        768,
+        1280,
+        384,
+        512,
+        512
+      ]
+    },
+    "context_tokens": 8192,
+    "per_call_seconds": 180,
+    "max_gpu_process_seconds": 1800,
+    "parent_timeout_seconds": 1790,
+    "parent_kill_after_seconds": 10,
+    "prior_hourly_usd": 0.28,
+    "max_process_usd": 0.14,
+    "preparation_recovery_holding_storage_network_tax_extra": true,
+    "current_rate_requeried": false,
+    "before_generation": "Reuse all three saved9b1901ab prior actual raw outputs as the before condition. No duplicate before generation or NLL forward.",
+    "new_pair_execution": "Nontraining load one saved adapter. BOOK then SHOP, each stage once. Each call uses original source/prior plus only its actual previous stages. Check live prefix+cap<=8192; no truncation. On malformed/unfinished stage stop that case; other independent case may run. Never repair, retry or fill a value.",
+    "projection": "Use reviewed prompt_stage_only.project against actual revised messages and unchanged frozen stage shape/identity/usage/finish checks. Mechanical13-path join only after all5 stages; raw and derived packet stay separate, provider LOCAL_STAGED_MODEL_PROJECTION with full external actual chain preserved.",
+    "cmee": "Existing read_raw, semantic admission, native decode, body author and save_cold unchanged. Verify exact raw/metadata/full current snapshot receipt and cold full outcome. No new receiver/API/schema/acceptance.",
+    "old9_condition": "Only if both new cases have meaning, body and full identical cold reread; then original old9 each once using unchanged original prompt/cap2560 and existing fixed=False consumer.",
+    "success": "New2 meaning/body/cold2/2 plus old9 meaning/body/cold9/9; root reads all raw and formed bodies. No formal Product Read or product credit.",
+    "stop": "One run only. Global/call timeout, live context/identity failure, invalid or unfinished stage, unavailable meaning/body/cold or old9 regression closes not adopted. No retry, extra training, cap extension, fallback, new prompt search or next GPU run.",
+    "preservation": "Save all actual raw/token IDs/input messages/usage/timings/chain/derived packets/CMEE saved-cold/read-only loaded tensor table/weights identity; export and verify outside Pod. Existing saved weights and frozen inputs unchanged.",
+    "implementation_state": "Finite nontraining runner implemented; source reviewed/fixed before GPU execution. No model execution yet.",
+    "retry": false,
+    "gpu_stop_restart_delete": false,
+    "new_gpu_rental": false,
+    "new_dependencies": false,
+    "production_api_db_rn_render_supabase_merge_deploy_changes": false,
+    "candidate_ready": false,
+    "automatic_progression": false,
+    "product_credit": 0,
+    "approval_basis": "Mash explicit approval of exact preceding30min/$0.14 one-shot proposal; prior19update approval remains closed.",
+    "approval": {
+      "owner": "Mash",
+      "proposal_commit": "8a9ba7d4bfd356ba228e7cdff788469a170d3256",
+      "received_date_jst": "2026-10-30",
+      "user_response": "進めていいよ。",
+      "scope": "One implementation and execution of same9b1901ab nontraining revised stage-pair generation, existing CMEE/cold, old9 only if new2 all pass, max1800seconds/$0.14 processing; preparation/recovery/holding etc extra; no retry."
+    },
+    "evaluation_order": [
+      "FT-BOOK-AFTER-ANSWER",
+      "FT-SHOP-AFTER-ANSWER",
+      "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "TRAIN-DAILY-CALM-01-INITIAL",
+      "TRAIN-DAILY-CALM-02-INITIAL",
+      "TRAIN-DAILY-CALM-03-INITIAL"
+    ],
+    "source_sha256": {
+      "run_inference_once.py": "1ecc440ed2c8baedbf8a1ec4934fbc694bbf7f6264781ff01ebd63ed5cca63ec",
+      "prompt_stage_only.py": "5796284d6eea6888592bfa28a8be2807819f223b18179faf0ec93f46779297a6"
+    }
+  },
+  "started_unix": 1793327804.2890558,
+  "model_loads_started": 1,
+  "model_loads_completed": 1,
+  "training_forwards_started": 0,
+  "training_forwards_completed": 0,
+  "optimizer_steps_started": 0,
+  "optimizer_steps_completed": 0,
+  "model_calls_started": 2,
+  "model_calls_completed": 2,
+  "calls": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER/stage1",
+      "path": "stage1_FT-BOOK-AFTER-ANSWER.jsonl",
+      "raw_sha256": "c86aac7ed4daaa8e136f58312516c3819d6309617195c83f1e99b9a84d85c112",
+      "messages_sha256": "c89d47537a64d44afbb76d16e55bc0f6aafae9923148c857ff18b80d08a5e44f",
+      "adapter_sha256": "9b1901abdb3776b301c3e77b5787e4aa851f6a007ccac29764507de5f72f3818",
+      "output_tokens": 339,
+      "eos_reached": true,
+      "seconds": 15.82372513297014,
+      "timeout_triggered": false
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage1",
+      "path": "stage1_FT-SHOP-AFTER-ANSWER.jsonl",
+      "raw_sha256": "4dc9ec045d14b59c71612f46dc323384d0a5c4536eed996ee0acdfc1965b743a",
+      "messages_sha256": "80aafcdd58066e200bf628295946f4f3006db6553eaa9ddb2b94f082883ecac8",
+      "adapter_sha256": "9b1901abdb3776b301c3e77b5787e4aa851f6a007ccac29764507de5f72f3818",
+      "output_tokens": 303,
+      "eos_reached": true,
+      "seconds": 13.898653366952203,
+      "timeout_triggered": false
+    }
+  ],
+  "cases": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "stages_completed": 1,
+      "stage_failure": {
+        "stage": 1,
+        "reason": "Expecting ',' delimiter: line 2 column 1 (char 1155)",
+        "finish_reason": "stop"
+      },
+      "meaning_adopted": false,
+      "body_available": false
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "stages_completed": 1,
+      "stage_failure": {
+        "stage": 1,
+        "reason": "stage_arity",
+        "finish_reason": "stop"
+      },
+      "meaning_adopted": false,
+      "body_available": false
+    }
+  ],
+  "retry": false,
+  "automatic_progression": false,
+  "product_credit": 0,
+  "elapsed_seconds": 40.39245139295235,
+  "gpu": {
+    "name": "NVIDIA RTX A5000",
+    "free_bytes": 25062342656,
+    "total_bytes": 25285623808,
+    "torch": "2.8.0+cu128",
+    "cuda_build": "12.8",
+    "bf16_supported": true
+  },
+  "adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "0404605c3736fd54d6f75d2dacf3254a10e6982f005a2765642ab230dceac1c9",
+    "adapter_model.safetensors": "9b1901abdb3776b301c3e77b5787e4aa851f6a007ccac29764507de5f72f3818"
+  },
+  "error_type": "ValueError",
+  "reason": "new_pair_failed_skip_old9_no_retry",
+  "traceback": "Traceback (most recent call last):\n  File \"/workspace/cocolon_instruction_probe_pack_20261030/run_inference_once.py\", line 202, in execute\n    stage.need(len(diagnosis['cases']) == 2 and all(c['meaning_adopted'] and c['body_available'] and\n  File \"/workspace/cocolon_stage5_pack_20261030/consume_stage5.py\", line 24, in need\n    raise ValueError(reason)\nValueError: new_pair_failed_skip_old9_no_retry\n",
+  "peak_allocated_bytes": 10389422080,
+  "peak_reserved_bytes": 11555307520,
+  "post_release_allocated_bytes": 8519680,
+  "frozen_inputs_and_saved_weights_unchanged": true,
+  "processing_seconds": 40.39244884299114,
+  "process_cost_usd": 0.0031416349100104224
+}

@@ -1,6 +1,6 @@
 {
   "schema": "cocolon.stage5.instruction_probe.execution.v1",
-  "status": "MASH_EXPLICITLY_APPROVED_ONCE",
+  "status": "CLOSED_NOT_ADOPTED_NO_RETRY",
   "executor": "root Karen only; support read-only; Codex Work, no formal Pro/Ultra/human acceptance claim",
   "purpose": "Test whether removing competing whole-packet syntax instructions changes actual staged generation and allows unchanged CMEE/cold admission.",
   "not_claimed": "CPU consistency does not show model improvement; remaining underlearning is possible.",
@@ -59,7 +59,7 @@
   "success": "New2 meaning/body/cold2/2 plus old9 meaning/body/cold9/9; root reads all raw and formed bodies. No formal Product Read or product credit.",
   "stop": "One run only. Global/call timeout, live context/identity failure, invalid or unfinished stage, unavailable meaning/body/cold or old9 regression closes not adopted. No retry, extra training, cap extension, fallback, new prompt search or next GPU run.",
   "preservation": "Save all actual raw/token IDs/input messages/usage/timings/chain/derived packets/CMEE saved-cold/read-only loaded tensor table/weights identity; export and verify outside Pod. Existing saved weights and frozen inputs unchanged.",
-  "implementation_state": "Finite nontraining runner implemented; source reviewed/fixed before GPU execution. No model execution yet.",
+  "implementation_state": "Finite nontraining runner executed exactly once and closed not adopted. Runtime plan preserves execution-time approval and source identity.",
   "retry": false,
   "gpu_stop_restart_delete": false,
   "new_gpu_rental": false,
@@ -92,5 +92,21 @@
   "source_sha256": {
     "run_inference_once.py": "1ecc440ed2c8baedbf8a1ec4934fbc694bbf7f6264781ff01ebd63ed5cca63ec",
     "prompt_stage_only.py": "5796284d6eea6888592bfa28a8be2807819f223b18179faf0ec93f46779297a6"
+  },
+  "closure": {
+    "source_commit": "928513c4bf2b150ad64d2b8624bb06be2a4dd65f",
+    "result_path": "../result_20261030/README.md",
+    "model_loads": 1,
+    "updates": 0,
+    "generations": 2,
+    "meaning": "0/2",
+    "body": "0/2",
+    "new_model_cmee_calls": 0,
+    "old9": "NOT_RUN",
+    "processing_seconds": 40.39244884299114,
+    "process_cost_usd": 0.0031416349100104224,
+    "saved_weights_unchanged": true,
+    "library_file_id": "libfile_047c1d24bbc08191b2715926ae682455",
+    "retry": false
   }
 }

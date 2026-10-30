@@ -1,0 +1,81 @@
+{
+  "status": "STOPPED_NOT_ADOPTED_NO_RETRY",
+  "members": 212,
+  "payloads": 211,
+  "archive_bytes": 2833615,
+  "archive_sha256": "ab25036f8044c30bed879c83b36f0fdbd8004402dffbe69a4e4da56a7b37f357",
+  "all_crc_bytes_sha_verified": true,
+  "source2_exact": true,
+  "model_loads": 1,
+  "training_forwards": 0,
+  "updates": 0,
+  "generations": 2,
+  "both_actual_prompts_match_approved_builder": true,
+  "loaded_112F32_finite": true,
+  "saved_weight_sha256": "9b1901abdb3776b301c3e77b5787e4aa851f6a007ccac29764507de5f72f3818",
+  "included_frozen_bytes_verified": 191,
+  "weights_not_duplicated": 5,
+  "post_identity_all196_unchanged": true,
+  "new_pair_meaning": "0/2",
+  "new_pair_body": "0/2",
+  "new_derived_packets": 0,
+  "new_model_cmee_calls": 0,
+  "new_saved_cold": 0,
+  "old9": "NOT_RUN",
+  "processing_seconds": 40.39244884299114,
+  "process_cost_usd": 0.0031416349100104224,
+  "retry": false,
+  "model_loads_for_this_verifier": 0,
+  "schema": "cocolon.instruction_probe.result.v1",
+  "source_commit": "928513c4bf2b150ad64d2b8624bb06be2a4dd65f",
+  "outer_seconds": 41.708045803010464,
+  "exit_code": 1,
+  "actual_cases": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "stages_completed": 1,
+      "stage_failure": {
+        "stage": 1,
+        "reason": "Expecting ',' delimiter: line 2 column 1 (char 1155)",
+        "finish_reason": "stop"
+      },
+      "meaning_adopted": false,
+      "body_available": false
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "stages_completed": 1,
+      "stage_failure": {
+        "stage": 1,
+        "reason": "stage_arity",
+        "finish_reason": "stop"
+      },
+      "meaning_adopted": false,
+      "body_available": false
+    }
+  ],
+  "valid_stages_completed": {
+    "BOOK": 0,
+    "SHOP": 0
+  },
+  "before_stage1_eos": "1/2",
+  "after_stage1_eos": "2/2",
+  "before_stage1_structural_pass": "1/2",
+  "after_stage1_structural_pass": "0/2",
+  "formed_person_bodies": 0,
+  "old9_new_weight_regression": "UNTESTED_NOT_RUN",
+  "library_file_id": "libfile_047c1d24bbc08191b2715926ae682455",
+  "saved_weights_archive": "libfile_cc6b41f4f62c81919cbaec65e51ef379",
+  "preparation_recovery_holding_storage_network_tax_extra": true,
+  "gpu_kept_running": true,
+  "gpu_stop_restart_delete": false,
+  "primary": "BLOCKER_NARROWED",
+  "technical_credit": 0,
+  "product_credit": 0,
+  "formal_product_read": "0/3",
+  "overall_percent": 54.5,
+  "candidate_ready": false,
+  "automatic_progression": false,
+  "further_paid_run_started": false,
+  "closure_status": "CLOSED_NOT_ADOPTED_NO_RETRY"
+}
