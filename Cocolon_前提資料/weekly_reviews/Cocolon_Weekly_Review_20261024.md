@@ -4038,3 +4038,20 @@ runner14.90352953702677秒/$0.0011591634084354156按分（約$0.0012）、親16.
 全14原本をJupyterからUTF-8 text containerで直接回収。初収集のread_textによる進捗logのCR変換を検出したため、read_bytes().decode('utf-8')で回収のみ補正。最終74055bytes/SHA5d660c49f64e1d3524b2e14bf56300df20ed8b7c450c9f591742b13a00c727acと全14memberの元bytes/SHAをPod外照合。[全実結果・全20file地図](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/branch4/execution_20261030/README.md)。model/forwardの再試行0。runtime承認原本は不変、上位approved_planは消費済み閉鎖版へ分ける。
 
 全体00/観測入口/01Aを同単位更新。前回fit38の新意味/本人本文0/2・saved/cold0は今回再評価しておらず不変、旧9未実行。新重み作成/採用/追加学習/再生成/次run0。現2題の既存教師はあり、追加観測会不要。通常source/受口/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy責務差分0、STRUCTURE_MAP_DELTA_NONE。primary=BLOCKER_NARROWED（両経路で初分岐の局所不適合を確認）、technical/product credit0・正式0/3・54.50％・candidate_ready/automatic_progression=false。
+
+<a id="20261030-focus29-cpu-prepared"></a>
+## 134. branch4の局所教師不適合を受け、現10×2＋旧9×1のfocus29をCPU準備（新GPU未承認）
+
+Mashの「4B学習＋CMEE接続を続けて」を受け、全体現在地全文/恒久incident/作業ルール/観測学習目的・用途/全app設計と01A/B/C全file地図/最新§133と実教師・全8raw・runner/helper/branch4全4測定を確認した。root華恋が単一writer/executor/judge、補助はread-only。実環境Codex Workで正式Pro/Ultra/human authorityを申告しない。前回承認は消費済み、追加学習をその承認へ含めない。
+
+BOOK S3/SHOP S2は正しい教師prefixでも誤tokenが単独1位で、同じ学習課題に局所不適合がある。新10行の残存CEの83.7528％はS5二行。旧9token加重NLL0.0011822に対し新10は0.0560160だが、旧9のad8b自由生成維持は未評価であり、低NLLを維持成功の根拠にしない。学習不足だけが原因、cache全体正常、最適配分の証明には拡張しない。
+
+新未承認の一回案は、保存ad8bを隔離実験初期値として使い、現10教師を各2回＋旧9anchorを各1回＝29更新。新10のstage順を保ち、旧9を前半4/後半5に挟む。教師19/messages/元終端列/encoded/mask/完全CE/112F32 LoRA/AdamW5e-5/clip1/seed20261024、全指示/caps/受信/合否を不変保持。新teacher/失敗raw教師化/指示改変/新loss/構文補修を加えない。2:1はboundedな実験選択で成功や十分性の保証ではない。ad8bは製品採用やoptimizer/RNGを含む厳密再開ではない。
+
+29更新→保存・非学習reload→同19NLL一回（開始値は同ad8bの不変fit38記録を再利用）→新2件を自分の実前段で各最大5段→通過題だけ既存CMEE/意味/本人本文/保存再読。新2が全成功した場合だけ旧9を各一回確認。途中不成立はその題停止、gold前段を実生成へ渡さない。NLLを新合否thresholdにせず、rootが全rawを読む。最大2load/29更新/19教師評価forward/19生成、全処理45分/前回$0.28/h按分$0.21（準備/回収/保持/保存/通信/税等別、現在単価未照会）、親2690秒＋kill10秒/一生成180秒。打切り上限で完走予測ではない。部分/完成重みと全原本回収・停止、再試行/延長/追加周回/次run0。
+
+rootがprepare/runner/現prompt/launcher/export/未承認proposal/説明の7fileを準備し、read-only独立照合でblocking不具合なし。source `dc21b2d4fe6f33566c0cf1176fc3452b814f0ca5` をpin取得し同Jupyterでstdlib CPU一回、実0.41383100708480924秒/親0.5163811920210719秒/exit0。元fit38 prepared60c17f32/train19 57292ff2から全19行/encoding/messages/教師/EOS/mask不変、指定29順/19窓、branch4と保存ad8b/config・298frozen不変を確認。既存112有限F32証拠を保持し、新tensor/model測定とはしない。torch未import、model load/forward/update/generation/新CMEE全0。新prepared SHAb5b44e26344e010734720290dd370df38cf1821a3593df3e39d3224be2b084e1、proposal SHAda02cbba。
+
+JupyterからZIP197471bytes/14member（13payload＋manifest）SHA08b4b1025103e9123ae861f023da37016aba492569a0f154ff15c6241db45606を直接回収。全CRC/bytes/SHA/実source・proposal/元train19・installed loss source・19token/mask/counts/29順をPod外照合し、binary gzipを含む全14元memberを原bytes保存、receipt/verification/入口を追加。[具体案・全7sourceとCPU全17file地図](../observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/focus29/README.md)。A5000 1MiB/0％で稼働保持、Runpod管理console/API/Stop/restart/delete0。
+
+全体00/観測入口/01Aを同単位更新。前回fit38新意味/本人本文0/2・saved/cold0・旧9NOT_RUN/不採用閉鎖を保持。現2題の既存教師はあり、追加観測会不要。通常source/受信/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy責務差分0、STRUCTURE_MAP_DELTA_NONE。primary=BLOCKER_NARROWED（局所不適合に対する既存教材の最小配分案固定）、technical/product credit0・正式0/3・54.50％・candidate_ready/automatic_progression=false。新paid実行/隔離初期値使用はRule18§11.3の「個別Mash approvalまたはSTOP」に従い、具体案とCPU結果を提示する段階で停止。approved_plan未作成・GPU起動なし。

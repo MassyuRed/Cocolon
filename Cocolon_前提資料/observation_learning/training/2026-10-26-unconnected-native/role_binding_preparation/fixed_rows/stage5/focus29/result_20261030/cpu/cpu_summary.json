@@ -1,0 +1,213 @@
+{
+  "status": "CPU_FOCUS29_READY_NO_MODEL",
+  "seconds": 0.41383100708480924,
+  "source_sha256": {
+    "prepare_focus29.py": "ce3ba5fb511ac59bdb160ed39af87bda06280a84777e49ad2858b31d03beedc4",
+    "export_focus29.py": "308dd6ddd895d2eeb267a28335d28cf89a7a88abf564cb0588de0ae5eda6ad66",
+    "run_focus29_once.py": "aec2ab08c3b470a5bd355ce8eaa9b1f5a82e75ed2c8d9262223dbe8ff9c1bc55",
+    "prompt_source_index.py": "66f28a40ca03611b02412d8c1208325dca5534760bf81fbcd2740a069e0aad96",
+    "launch_focus29_once.py": "c3e68e172d44275cd134611e70919df53d3db2ff7ca2b1756d1f1a005b362872"
+  },
+  "proposal_sha256": "da02cbbaa0054be415c0da4db5f2f4f7e60977946df05575ff2ab8d11249e6ea",
+  "prepared_sha256": "b5b44e26344e010734720290dd370df38cf1821a3593df3e39d3224be2b084e1",
+  "train19_sha256": "57292ff2e058dc0d6cc024e63fe5d146c89069b8a4ea26c8627ba75170fca6d7",
+  "rows": 19,
+  "allocation": {
+    "new": 2,
+    "old": 1
+  },
+  "scheduled_updates": 29,
+  "max_teacher_evaluation_forwards": 19,
+  "encoded19_unchanged": true,
+  "messages_targets_terminal_tokens_masks_unchanged": true,
+  "old9_frequency_changed_from_2_to_1": true,
+  "windows": [
+    {
+      "id": "FT-BOOK-AFTER-ANSWER/stage1",
+      "first_target_index": 4668,
+      "loss_start": 4667,
+      "logit_positions": 493,
+      "supervised_tokens": 492,
+      "original_complete_target_and_terminal_tokens_unchanged": true,
+      "scheduled_updates": 2
+    },
+    {
+      "id": "FT-SHOP-AFTER-ANSWER/stage1",
+      "first_target_index": 4825,
+      "loss_start": 4824,
+      "logit_positions": 524,
+      "supervised_tokens": 523,
+      "original_complete_target_and_terminal_tokens_unchanged": true,
+      "scheduled_updates": 2
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "first_target_index": 1750,
+      "loss_start": 1749,
+      "logit_positions": 1332,
+      "supervised_tokens": 1331,
+      "original_complete_target_and_terminal_tokens_unchanged": true,
+      "scheduled_updates": 1
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "first_target_index": 3827,
+      "loss_start": 3826,
+      "logit_positions": 2229,
+      "supervised_tokens": 2228,
+      "original_complete_target_and_terminal_tokens_unchanged": true,
+      "scheduled_updates": 1
+    },
+    {
+      "id": "FT-BOOK-AFTER-ANSWER/stage2",
+      "first_target_index": 4844,
+      "loss_start": 4843,
+      "logit_positions": 900,
+      "supervised_tokens": 899,
+      "original_complete_target_and_terminal_tokens_unchanged": true,
+      "scheduled_updates": 2
+    },
+    {
+      "id": "FT-SHOP-AFTER-ANSWER/stage2",
+      "first_target_index": 5027,
+      "loss_start": 5026,
+      "logit_positions": 1095,
+      "supervised_tokens": 1094,
+      "original_complete_target_and_terminal_tokens_unchanged": true,
+      "scheduled_updates": 2
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "first_target_index": 1746,
+      "loss_start": 1745,
+      "logit_positions": 1332,
+      "supervised_tokens": 1331,
+      "original_complete_target_and_terminal_tokens_unchanged": true,
+      "scheduled_updates": 1
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "first_target_index": 3842,
+      "loss_start": 3841,
+      "logit_positions": 2232,
+      "supervised_tokens": 2231,
+      "original_complete_target_and_terminal_tokens_unchanged": true,
+      "scheduled_updates": 1
+    },
+    {
+      "id": "FT-BOOK-AFTER-ANSWER/stage3",
+      "first_target_index": 5686,
+      "loss_start": 5685,
+      "logit_positions": 284,
+      "supervised_tokens": 283,
+      "original_complete_target_and_terminal_tokens_unchanged": true,
+      "scheduled_updates": 2
+    },
+    {
+      "id": "FT-SHOP-AFTER-ANSWER/stage3",
+      "first_target_index": 6064,
+      "loss_start": 6063,
+      "logit_positions": 237,
+      "supervised_tokens": 236,
+      "original_complete_target_and_terminal_tokens_unchanged": true,
+      "scheduled_updates": 2
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "first_target_index": 1743,
+      "loss_start": 1742,
+      "logit_positions": 1322,
+      "supervised_tokens": 1321,
+      "original_complete_target_and_terminal_tokens_unchanged": true,
+      "scheduled_updates": 1
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "first_target_index": 3825,
+      "loss_start": 3824,
+      "logit_positions": 2238,
+      "supervised_tokens": 2237,
+      "original_complete_target_and_terminal_tokens_unchanged": true,
+      "scheduled_updates": 1
+    },
+    {
+      "id": "FT-BOOK-AFTER-ANSWER/stage4",
+      "first_target_index": 5951,
+      "loss_start": 5950,
+      "logit_positions": 268,
+      "supervised_tokens": 267,
+      "original_complete_target_and_terminal_tokens_unchanged": true,
+      "scheduled_updates": 2
+    },
+    {
+      "id": "FT-SHOP-AFTER-ANSWER/stage4",
+      "first_target_index": 6282,
+      "loss_start": 6281,
+      "logit_positions": 292,
+      "supervised_tokens": 291,
+      "original_complete_target_and_terminal_tokens_unchanged": true,
+      "scheduled_updates": 2
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "first_target_index": 1778,
+      "loss_start": 1777,
+      "logit_positions": 1586,
+      "supervised_tokens": 1585,
+      "original_complete_target_and_terminal_tokens_unchanged": true,
+      "scheduled_updates": 1
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "first_target_index": 1773,
+      "loss_start": 1772,
+      "logit_positions": 1560,
+      "supervised_tokens": 1559,
+      "original_complete_target_and_terminal_tokens_unchanged": true,
+      "scheduled_updates": 1
+    },
+    {
+      "id": "FT-BOOK-AFTER-ANSWER/stage5",
+      "first_target_index": 6250,
+      "loss_start": 6249,
+      "logit_positions": 221,
+      "supervised_tokens": 220,
+      "original_complete_target_and_terminal_tokens_unchanged": true,
+      "scheduled_updates": 2
+    },
+    {
+      "id": "FT-SHOP-AFTER-ANSWER/stage5",
+      "first_target_index": 6605,
+      "loss_start": 6604,
+      "logit_positions": 294,
+      "supervised_tokens": 293,
+      "original_complete_target_and_terminal_tokens_unchanged": true,
+      "scheduled_updates": 2
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "first_target_index": 1777,
+      "loss_start": 1776,
+      "logit_positions": 1599,
+      "supervised_tokens": 1598,
+      "original_complete_target_and_terminal_tokens_unchanged": true,
+      "scheduled_updates": 1
+    }
+  ],
+  "installed_loss_source_sha256": {
+    "transformers/models/qwen3_5/modeling_qwen3_5.py": "aac2a1bcca88829afc6dbdf83f97155ebf64d800ee9d703af3802a9aebcfcd18",
+    "transformers/loss/loss_utils.py": "83db16b24ce5c3a0642097624aa9a0ae7eb72445c41d8b4d5059a129862fdbbe"
+  },
+  "saved_adapter_bytes_unchanged": true,
+  "saved_finite112_proof_retained": true,
+  "frozen_files": 298,
+  "model_loads": 0,
+  "model_forwards": 0,
+  "updates": 0,
+  "generations": 0,
+  "new_cmee_calls": 0,
+  "torch_imported": false,
+  "candidate_ready": false,
+  "automatic_progression": false,
+  "product_credit": 0
+}
