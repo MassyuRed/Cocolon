@@ -5775,3 +5775,8 @@ fixed_rows/structural_cpu/forward_prefix_cpu/result_20261030/README.mdが実結�
 ### weekly§123 — 5区間指示整合のCPU原本と未承認の非学習案
 
 `fixed_rows/stage5/instruction_cpu/README.md`が全file責務/判断限界と次の一回案、`prompt_stage_only.py`が区間唯一のactive構文/元意味条件と新actual chainの結合、`check_once.py`がCPU10target/EOS/13位置/長さ/旧9encoding/旧prompt代入拒否を所有する。`report.json/initial_report.json`と`cpu_final.log/exit・cpu_initial.log/exit`は2CPU成功4.965198732/4.692029303秒を区別。`originals.zip/archive_manifest.json`は初版/最終source/全prompt/元教師/元構文/保存raw/比較元encodingの29member/342660bytes、`verification.json`はPod外のCRC/bytes/SHAと元値独立照合、`proposal.json`は保存9b1901ab非学習1load/更新0/新2最大10call→既存CMEE-cold→2/2時旧9/最大19call/30分$0.14按分の未承認scope、`file_manifest.json/proof.jpg`は今回全path/owner/hashとJupyter画面を所有する。有限GPUrunnerは未実装・新GPU未実行。旧19更新/0/2/旧9NOT_RUNは閉鎖保持。通常受口/型/三core/API/DB/RN/接続責務変更なし、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。
+
+
+### weekly§124 — 承認済み非学習一回runnerの全file地図
+
+`stage5/instruction_cpu/execution_20261030/run_inference_once.py`が保存9b1901ab非学習1load/学習0/新2actual段階生成→既存CMEE-cold→条件付き旧9/各180秒/全1800秒/最大19call/pre-post不変を所有。`prompt_stage_only.py`はCPU確認済み5796284d同一bytesの区間指示と新実messages連鎖、`plan.json`は今回のMash明示承認・source2SHA・固定重み/元11順序・最大30分$0.14（準備等別）、`README.md`は実装状態と責務を所有する。実装固定時点GPU未開始、実行を継続する。通常責務/受口/意味型/API/DB/RN差分0、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。

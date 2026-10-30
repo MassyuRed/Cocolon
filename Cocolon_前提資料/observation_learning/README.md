@@ -2,7 +2,7 @@
 
 **最新GPU読取確認（2026-10-30 JST）：** 同Jupyter/Pod vgkm402msgroiu/RTX A5000、今回の指示CPU確認後1MiB/0％で稼働保持。今回新model load/forward/学習/自由生成/新CMEE0、CUDA未初期化。前回19更新/3callは§122の完了履歴。Stop/restart/delete/管理console/API0、準備・回収・保持等別。
 
-**現在の直接作業（10/30・5区間の指示整合CPU確認、非学習の次案は未承認）：** 前回§122のBOOK S1 length/SHOP S2 root1に対し、systemの全文形式指定とspecのroot5/c9生成命令が区間root4/3と併置されていた不整合を特定した。区間ごとにactive構文を一意化する候補を実装し、元material/prior/ref/profile・全非syntax意味条件・新10target/EOS列・13位置再結合2/2・旧9encoding不変、新実messages連鎖/旧prompt代入拒否2/2をJupyter CPUで確認。初版4.692029303秒/最終4.965198732秒ともexit0、gold最大context7117/8192。新model/forward/学習/自由生成/新CMEE0。S1は元々学習/実prompt一致であり、不整合が全原因・改善済みとは断定しない。次案は追加学習0・保存9b1901abを非学習1load、修正指示の新2各最大5call→既存CMEE/cold→2/2時だけ旧9各1、最大19call/30分/$0.14按分（準備・回収・保持等別）、PROPOSED_NOT_APPROVED。前回19更新run/承認は閉鎖のまま流用しない。
+**現在の直接作業（10/30・指示整合の非学習一回案をMash承認、実装固定/GPU開始前）：** Mashが8a9ba7d4の具体案へ「進めていいよ。」と明示承認。保存9b1901abを非学習1load/追加学習0、CPU確認済みの修正指示で新2を各最大5call→既存CMEE/cold→意味/本人本文/cold2/2時だけ旧9各1、最大19call/30分/$0.14按分（準備等別）。有限runnerを実装し、学習/optimizer/重み保存経路なし・新actual messages連鎖・親1790+kill10/全1800秒を確認してsourceを固定した。GPUはまだ未開始、承認内で一回実行を継続する。前回19更新run/承認/0/2/旧9NOT_RUNは閉鎖保持。
 
 **直前GPUの実結果（§122・閉鎖履歴）：** 19更新/保存/112F32非学習reload/実3callを453.667464138秒/$0.035285247211按分で完了したが、BOOK第1区間未完了、SHOP第2区間root1≠3で停止。全5段完成/派生packet/実新CMEE/saved/cold0、新2意味/本人本文0/2、旧9新生成NOT_RUN。新9b1901abは不採用で、今回の非学習比較は本番/次回学習初期への昇格ではない。追加観測会は現2題に不要、商品0/正式0/3/54.50％・candidate_ready/automatic_progression=falseを維持する。
 

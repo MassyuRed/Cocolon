@@ -1,3 +1,5 @@
+> **最新（2026-10-30）：Mashが下記一回案を明示承認。** [承認済み実装](execution_20261030/README.md)のsourceを固定し、GPU開始前確認後に同一承認内で実行する。追加学習0/同9b1901ab/新2→既存CMEE-cold→成功時旧9/最大30分$0.14（準備等別）。前回19更新の閉鎖と0/2を保持する。以下の未承認記述は提案時点の履歴で、現在の承認はexecution planを参照する。
+
 # 5区間の指示整合CPU確認・新しい非学習一回案
 
 2026-10-30。開始PR30 `8a47e910641ff00b8810aec43aa775a8f9765ca7`、API PR3 `7acff07421c0cfa458ec6cf75616187379311854`。全体00全文・作業入口/CURRENT_RULES/Rule18・必須incident全文・全体設計01/02と全file地図01Aのrouting/対象map・観測学習意図・最新weekly§122を確認。System Contextは最新cache未生成の既存状態で、fresh原本を直接読む。root単一writer/executor、補助read-only、実環境Codex Workで正式Pro/Ultra/human受入れではない。

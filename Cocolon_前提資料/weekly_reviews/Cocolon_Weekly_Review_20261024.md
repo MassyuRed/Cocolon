@@ -3860,3 +3860,10 @@ BOOKのalias表へq連番混入、SHOP S2の区間混入/列平坦化が実raw�
 BOOK/SHOP S1は学習prompt==実prompt（4467/4619token）で、前段のgold/actual差だけに失敗を帰属しない。SHOP S2だけprevious候補差で5147→5121token、新10各1更新・target計4598/旧9計15421は記述的事実でgradient比・最終saved NLLではない。旧staged_pair9/A-B診断の未習得も照合し、今回の構文修正が全てを直す/4B能力上限とは言わない。追加学習を直ちに増やさず、同9b1901ab/更新0で指示差だけを比較する最小案を選ぶ。新2の各段失敗時同題停止、全新2意味/本文/cold2/2時だけ旧9、全1800秒/親1790+kill10/各180秒・cap不変・19call上限、一回のみretry/repair/枠延長/次prompt探索/追加学習0。30分/$0.14は停止上限で改善保証/必要所要ではない。個別承認前は新GPU処理0、有限非学習runnerは承認後同scopeで実装・source固定する。Rule18§11.3の新費用/閉鎖済単一use境界により前回承認/残枠は流用しない。
 
 最新00/観測入口の古い§120未承認表示と履歴前置きをin-place整理し、本結果/未承認案へ置換。全体設計01/02/全file地図01A/current CMEE mapの既存routingと対象sourceを確認し、通常構造/意味型/API/DTO/DB/RN/Render/Supabase/依存/merge/deployの差分なし、STRUCTURE_MAP_DELTA_NONE。root単一writer/executor、補助read-only、実環境Codex Workで正式Pro/Ultra/humanではない。primary=BLOCKER_NARROWED（指示不整合の特定のみ）、technical/product credit0、正式0/3、54.50％、candidate_ready=false、automatic_progression=false。
+
+
+## 124. 2026-10-30 — 指示整合の非学習一回案をMash承認、実装固定
+
+Mashが8a9ba7d4の具体案「追加学習なし・同じ保存重みで新2生成→CMEE・保存再読→成功時だけ旧9、最大30分/$0.14按分（準備等別）」へ「進めていいよ。」と明示承認。`stage5/instruction_cpu/execution_20261030`へ有限nontraining runner/CPU確認済みprompt同一bytes/今回承認planを固定。nontraining load1、全requires_grad=false、学習/optimizer/重み保存0、最大19call/各180秒/全1800秒/親1790TERM+kill10、新2の全意味/本文/cold2/2時だけ元旧9各1。実際の新messages連鎖を検査し、旧messagesへ代入しない。元cap/8192/receiver/意味型/採否/本文/cold条件不変、全source/入力/前3raw/9b重みconfigをpre/post照合。途中不成立は同題停止、retry/修復/追加学習/次run0。
+
+rootが実装・compile/AST確認、補助は全文read-only reviewでblocking defectなし。新GPUは実装固定時点未開始、同承認内で実行を継続し再承認を求めない。前回19更新の閉鎖/新2意味本文0/2/旧9NOT_RUNは不変。全体00/観測入口/filemapを同単位更新。通常source/receiver/型/API/DB/RN/Render/Supabase/依存/merge/deploy差分0、STRUCTURE_MAP_DELTA_NONE。root単一writer/executor、補助read-only、Codex Workで正式Pro/Ultra/humanではない。商品0/正式0/3/54.50％、candidate_ready/automatic_progression=false。追加観測会は現2題で不要。GPU稼働保持/Stop等0。
