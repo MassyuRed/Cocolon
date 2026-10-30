@@ -1,6 +1,6 @@
 # 同じ19行を2周する適合確認案 — 2026-10-30 JST
 
-状態：Jupyter CPU準備済み（実0.371018065秒・exit0）、新しい有料実行は未承認。直前のaligned19は19更新・保存再読・7生成、意味/本人本文0/2・saved/cold0・旧9NOT_RUNで不採用閉鎖。承認を再利用しない。
+状態：Mashが保存b5eの実験用初期値・38更新・3時点適合測定・保存再読→新2件→既存CMEE/保存再読→全成功時のみ旧9、最大45分/処理按分$0.21・再試行なしの一回を明示承認。Jupyter CPU準備済み（実0.371018065秒・exit0）。直前のaligned19は19更新・保存再読・7生成、意味/本人本文0/2・saved/cold0・旧9NOT_RUNで不採用閉鎖。承認を再利用しない。
 
 ## 確認したことと判断
 
@@ -12,7 +12,7 @@
 
 S5だけの反復はS1の欠落引用やBOOK S2を残す。指示追加は既存contractとの矛盾がないため採らない。失敗した実前段へ元の後段正解をそのまま付けると、欠けたq_extra_8/q_extra_11等を参照する教師となり不整合を作るため行わない。教師前段は元の完全なgoldに限り、評価では自分の実前段だけを使う。必要な正しい教師は既存なので、この不成立を補う観測会は不要。
 
-## 提案する一回
+## 明示承認された一回
 
 - 失敗・不採用の保存b5e重みを、この隔離実験の初期値としてのみ使用する用途を含め、新承認を求める。製品採用/自動初期値採用/閉鎖承認の継承ではない。
 - 同19行を同じinterleaved順序で2周＝38更新。全行の回数比率、完全assistant+EOS CE、112F32 LoRA、AdamW5e-5/clip1/seed20261024を保持。新教師、token/example weighting、prompt/target改変なし。
@@ -21,12 +21,13 @@ S5だけの反復はS1の欠落引用やBOOK S2を残す。指示追加は既存
 - 全処理最大45分、前回単価$0.28/hで処理按分最大$0.21。教師評価57forward・学習・保存再読・生成・CMEE CPUも同じdeadline内。親2690秒＋kill猶予10秒。一回のみ、追加周回/修復/再試行/自動延長なし。準備/回収/保持/保存/通信/税等別、現在単価は未照会。
 - どの終了理由でも部分/完成重み・全NLL/学習log・全raw/tokenIDs/messages/承認/source/CMEE保存証拠を回収する。成功時もrootが全実本文を読み、機械結果をhuman Product Readへ換算しない。
 
-新承認をexact proposal SHAへ結ぶapproved_plan.jsonがなければmodel load前に停止する。実行しない場合は現在の不採用b5eと最終適合未測定の状態で止まる。通常source/receiver/意味型/API/DB/RN/Render/Supabase/依存/merge/deployは変更しない。GPU停止/再起動/削除・Runpod管理画面/API操作なし。商品0・正式0/3・54.50％・candidate_ready/automatic_progression=false。
+[approved_plan.json](approved_plan.json)で今回の明示承認をexact proposal SHA51573dba・launcher SHAへ結ぶ。別承認の再利用はしない。model load前に一致とfresh OUT/一回lockを確認する。実行しない場合は現在の不採用b5eと最終適合未測定の状態で止まる。通常source/receiver/意味型/API/DB/RN/Render/Supabase/依存/merge/deployは変更しない。GPU停止/再起動/削除・Runpod管理画面/API操作なし。商品0・正式0/3・54.50％・candidate_ready/automatic_progression=false。
 
 ## 全fileの責務
 
 | file | 責務 |
 |---|---|
+| approved_plan.json | Mashの今回の一回承認とexact proposal/launcher SHA。終了後は閉鎖し再利用しない |
 | proposal.json | 初期b5e限定用途・同19×2の38順・3測定57forward・固定cap/上限・source SHAの未承認案 |
 | prepare_fit38.py | stdlibで既準備encoded19/labels/messages/教師/EOSを不変再利用し、38順/全行2回/実installed source/初期重みと凍結原本を確認。tokenizer/model/forwardなし |
 | prompt_source_index.py | 直前と同じ現5段builder・actual前段chain原本 |
