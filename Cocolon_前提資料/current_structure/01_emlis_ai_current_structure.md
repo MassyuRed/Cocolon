@@ -1934,9 +1934,14 @@ Mash承認c97d6794に基づき、既存4ownerのsource-derived admission/adapter
 | API `ai/tools/serve_emlis_natural_reply.py` | 固定local 4B/baseとfit38の本人限定・非学習probe。後続でloader/直接生成を確認、実GPU HTTPは未確認 |
 | RN `InputScreen` / `useEmlisThread` / `EmlisThreadModal` / `AnalysisHistoryScreen` | pending明示時だけ未作成待機、foreground/同ownerのGET限定確認、保存本文無加工表示、返事の案内 |
 
-新profileの任意問い/補足・分析材料生成・Plus全蓄積関連検索は未接続。既存履歴3/6原文の受渡し・Free除外・過去Safety除外、pause後非再取得は合成provider/実SQLで確認しただけで、有料体験の完成ではない。APIの主86件とlocal HTTP/読込hard期限の2件成功、RN関連8件成功/full34中29成功・既存同5失敗。詳細・制限・提供口条件は[API実装・検証記録](https://github.com/MassyuRed/mashos-api/blob/2d4c740f97ad234f57fdde48472d78954e2a2ea7/ai/docs/EMLIS_NATURAL_REPLY_DEVELOPMENT.md)、最新weekly§16。STRUCTURE_MAP_DELTA_PRESENT。
+新profileの任意問い/補足・分析材料生成・Plus全蓄積関連検索は未接続。既存履歴3/6原文の受渡し・Free除外・過去Safety除外、pause後非再取得は合成provider/実SQLで確認しただけで、有料体験の完成ではない。APIの主86件とlocal HTTP/読込hard期限の2件成功、RN関連8件成功/full34中29成功・既存同5失敗。詳細・制限・提供口条件は[API実装・検証記録](https://github.com/MassyuRed/mashos-api/blob/39f31503797d9aa66f86dfc2d86236f835963edf/ai/docs/EMLIS_NATURAL_REPLY_DEVELOPMENT.md)、最新weekly§16。STRUCTURE_MAP_DELTA_PRESENT。
 
 
 ### 2026-10-31 後続実測（第9回§17）
 
 新Podの固定4B/baseとfit38で元16・指示修正2＝18生成、全EOS。両候補とも主体/感情所有・一人称の最低線に未達で、実験promptは不採用、製品source差分なし。元の妥当な実本文2件を材料一致後に手動artifact注入し、隔離Q3 SQL保存2件・同process別service instance GET4回/既存start2回の同一本文/eventを確認。実GPU HTTP/API/DB process再起動・通常RN・本人端末の成立とは別。追加学習・公開port拡張・配置・本番DB書込0。商品責務/構造差分なし、STRUCTURE_MAP_DELTA_NONE。原16/修正2/全sourceと失敗は非公開原本へ保持し、今後の通常接続と品質修復を分けて進める。
+
+
+### 2026-10-31 後続2（第9回§18）
+
+§17の旧18を保持し、新たに学習前baseの指示8/対話2/元指示と公式sampling値の比較8を実行。全EOSだが主体・感情所有・未成立の約束・目撃者/表情創作・全文コピーの最低線未達。実験sourceは製品採用しない。実GPU HTTP保存2件はNOT_RUNで、loopback TLS/実HTTP/Q3案はCPU準備のみ。次は元指示/base/原材料/sampling/seed42を固定した本人発話提示の全値保持案（CPU8件、GPU未実行）。製品owner/DTO/DB/RN/期限/公開scopeの変更なし、STRUCTURE_MAP_DELTA_NONE。全実行原本と失敗は非公開束、最新状態はweekly§18とAPI開発資料へ戻る。
