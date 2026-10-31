@@ -9,6 +9,91 @@ const babel = require('@babel/core');
 const { act } = Renderer;
 const ROOT = path.resolve(__dirname, '..');
 
+// Natural replies keep the existing saved DTO and read-only hook boundary.
+async function mountPollingReader(t, api, initialUser = 'owner') {
+  const native = Object.fromEntries(['ActivityIndicator','KeyboardAvoidingView','Modal','ScrollView','Text','TextInput','View'].map(x => [x,x]));
+  const listeners = new Set();
+  Object.assign(native, { Platform: { OS: 'ios' }, StyleSheet: { create: x => x },
+    AppState: { currentState: 'active', addEventListener(_name, fn) { listeners.add(fn); return { remove: () => listeners.delete(fn) }; } } });
+  const Modal = load('screens/input/EmlisThreadModal.js', { 'react-native': native,
+    '../../components/CocolonButton': props => React.createElement('Button', props, props.children) }).default;
+  const { useEmlisThread } = load('screens/input/useEmlisThread.js', {
+    '../../lib/api/emlisThreadApi': { emlisThreadApi: api },
+    '../../AppRuntimeContext': { useAppRuntime: () => ({ isFeatureEnabled: () => false }) } });
+  let value, root;
+  function Harness({ userId }) { value = useEmlisThread({ userId, api, enabled: true }); return React.createElement(Modal, { thread: value, colors: {} }); }
+  await act(async () => { root = Renderer.create(React.createElement(Harness, { userId: initialUser })); });
+  t.after(async () => { await act(async () => root.unmount()); });
+  return { root, get value() { return value; },
+    async appState(next) { await act(async () => { native.AppState.currentState = next; for (const fn of listeners) fn(next); }); },
+    async user(userId) { await act(async () => root.update(React.createElement(Harness, { userId }))); } };
+}
+
+test('natural reply waits with GET only, preserves paragraphs and reopens saved text', async t => {
+  t.mock.timers.enable({ apis: ['setTimeout', 'Date'], now: 1000 });
+  const body = '今日は少し安心できたのですね。\n\n今日の記録を受け取りました。';
+  const source = { id: 'input', memo: '合成入力' };
+  const notCreated = { schema_version: 'cocolon.emlis_thread.application.v1', state: 'NOT_CREATED', original: source, timeline: [], can_write: true };
+  const running = { ...notCreated, state: 'INITIALIZING', attempt_id: 'attempt' };
+  const saved = { ...running, state: 'COMPLETED', body_state: 'FINAL', current_observation: { event_id: 'reply', text: body } };
+  const gets = [];
+  const api = { get: async (...args) => { gets.push(args); return gets.length === 1 ? notCreated : gets.length === 2 ? running : saved; },
+    answer: () => assert.fail('reader must not POST'), action: () => assert.fail('reader must not regenerate') };
+  const h = await mountPollingReader(t, api);
+  await act(async () => h.value.open('input', { showNotCreated: true, waitForInitial: true }));
+  await act(async () => t.mock.timers.tick(1000));
+  assert.equal(gets.length, 2);
+  await act(async () => t.mock.timers.tick(1000));
+  assert.equal(gets.length, 3);
+  assert.equal(h.value.dto.current_observation.text, body);
+  assert.ok(h.root.root.findAllByType('Text').some(x => x.props.children === body));
+  await act(async () => t.mock.timers.tick(10000));
+  assert.equal(gets.length, 3);
+  await act(async () => h.value.close());
+  await act(async () => h.value.open('input'));
+  assert.equal(gets.length, 4);
+  assert.equal(h.value.dto.current_observation.text, body);
+});
+
+test('pending reader stops new GETs on background, close and owner change without extending budget', async t => {
+  t.mock.timers.enable({ apis: ['setTimeout', 'Date'], now: 1000 });
+  let gets = 0;
+  const dto = { state: 'INITIALIZING', original: { id: 'input' }, attempt_id: 'attempt', can_write: true, timeline: [] };
+  const h = await mountPollingReader(t, { get: async () => { gets++; return dto; } });
+  await act(async () => h.value.open('input'));
+  await h.appState('background');
+  await act(async () => t.mock.timers.tick(34000));
+  assert.equal(gets, 1);
+  await h.appState('active');
+  await act(async () => t.mock.timers.tick(1000));
+  assert.equal(gets, 1, 'the foreground change does not renew the initial budget');
+  await act(async () => h.value.close());
+  await act(async () => t.mock.timers.tick(1000));
+  assert.equal(gets, 1);
+  await act(async () => h.value.open('input'));
+  const oldRefresh = h.value.refresh;
+  await h.user('different-owner');
+  await act(async () => oldRefresh());
+  await act(async () => t.mock.timers.tick(5000));
+  assert.equal(gets, 2);
+});
+
+test('pending reader stops automatic GET after an error and retains manual saved-state recovery', async t => {
+  t.mock.timers.enable({ apis: ['setTimeout', 'Date'], now: 1000 });
+  let gets = 0;
+  const dto = { state: 'INITIALIZING', original: { id: 'input' }, attempt_id: 'attempt', timeline: [], can_write: true };
+  const h = await mountPollingReader(t, { get: async () => { gets++; if (gets === 2) throw Error('offline'); return dto; } });
+  await act(async () => h.value.open('input'));
+  await act(async () => t.mock.timers.tick(1000));
+  assert.equal(gets, 2);
+  await act(async () => t.mock.timers.tick(10000));
+  assert.equal(gets, 2);
+  await act(async () => h.value.refresh());
+  assert.equal(gets, 3);
+  await act(async () => t.mock.timers.tick(1000));
+  assert.equal(gets, 3);
+});
+
 function load(relative, mocks = {}, dev = true) {
   const filename = path.resolve(ROOT, relative);
   const transformed = babel.transformSync(fs.readFileSync(filename, 'utf8'), {
@@ -189,7 +274,7 @@ test('refinement failure shows old observation as historical and retry only when
   let root;
   await act(async () => { root = Renderer.create(React.createElement(Modal, { thread, colors: {} })); });
   const output = JSON.stringify(root.toJSON());
-  assert.match(output, /以前の観測/); assert.doesNotMatch(output, /現在の観測/);
+  assert.match(output, /以前の返事/); assert.doesNotMatch(output, /現在の返事/);
   assert.match(output, /意味の訂正は保存/); assert.equal(root.root.findAllByType('TextInput').length, 0);
   const retry = root.root.findAllByType('Button').find(b => b.props.children === '本文を再試行する');
   await act(async () => retry.props.onPress()); assert.deepEqual(actions, ['retry_response']);
@@ -344,9 +429,9 @@ test('unknown ACK labels the cached body as last confirmed, never current', asyn
   const {default:Modal}=load('screens/input/EmlisThreadModal.js',{'react-native':native,'../../components/CocolonButton':p=>React.createElement('Button',p,p.children)});
   let root;const thread={visible:true,dto:completed,draft:'',uncertain:true};
   await act(async()=>{root=Renderer.create(React.createElement(Modal,{thread,colors:{}}));});
-  let out=JSON.stringify(root.toJSON());assert.match(out,/前回確認した観測/);assert.doesNotMatch(out,/現在の観測/);
-  await act(async()=>root.update(React.createElement(Modal,{thread:{...thread,uncertain:false},colors:{}})));out=JSON.stringify(root.toJSON());assert.match(out,/現在の観測/);
-  await act(async()=>root.update(React.createElement(Modal,{thread:{...thread,uncertain:false,busy:true},colors:{}})));out=JSON.stringify(root.toJSON());assert.match(out,/前回確認した観測/);assert.doesNotMatch(out,/現在の観測/);
+  let out=JSON.stringify(root.toJSON());assert.match(out,/前回確認した返事/);assert.doesNotMatch(out,/現在の返事/);
+  await act(async()=>root.update(React.createElement(Modal,{thread:{...thread,uncertain:false},colors:{}})));out=JSON.stringify(root.toJSON());assert.match(out,/現在の返事/);
+  await act(async()=>root.update(React.createElement(Modal,{thread:{...thread,uncertain:false,busy:true},colors:{}})));out=JSON.stringify(root.toJSON());assert.match(out,/前回確認した返事/);assert.doesNotMatch(out,/現在の返事/);
   await act(async()=>root.unmount());
 });
 
@@ -407,16 +492,16 @@ for (const configuredBase of [null, 'https://emlis-development.invalid///']) {
     let root;
     t.after(async () => { if (root) await act(async () => root.unmount()); });
     await act(async () => { root = Renderer.create(React.createElement(Screen)); });
-    const open = () => root.root.findByProps({ accessibilityLabel: 'この記録のEmlisの観測を開く' }).props.onPress();
+    const open = () => root.root.findByProps({ accessibilityLabel: 'この記録のEmlisの返事を開く' }).props.onPress();
     await act(async () => open());
     assert.match(JSON.stringify(root.toJSON()), /その時、どう感じましたか/);
     await act(async () => root.root.findByProps({ accessibilityLabel: 'Emlisへの回答' }).props.onChangeText('今は嬉しい。'));
     await act(async () => root.root.findAllByType('Button').find(b => b.props.children === '回答を送る').props.onPress());
     assert.match(JSON.stringify(root.toJSON()), /更新した観測/);
-    await act(async () => root.root.findByProps({ accessibilityLabel: 'Emlisの観測を閉じる' }).props.onPress());
+    await act(async () => root.root.findByProps({ accessibilityLabel: 'Emlisの返事を閉じる' }).props.onPress());
     await act(async () => open());
     assert.match(JSON.stringify(root.toJSON()), /更新した観測/);
-    await act(async () => root.root.findByProps({ accessibilityLabel: 'Emlisの観測を閉じる' }).props.onPress());
+    await act(async () => root.root.findByProps({ accessibilityLabel: 'Emlisの返事を閉じる' }).props.onPress());
     savedDto = {
       schema_version: initial.schema_version, state: 'NOT_CREATED',
       thread_id: null, body_state: null, can_write: false,
@@ -427,7 +512,7 @@ for (const configuredBase of [null, 'https://emlis-development.invalid///']) {
     const beforeMissingRead = calls.length;
     await act(async () => open());
     assert.equal(root.root.findByType('Modal').props.visible, true);
-    assert.match(JSON.stringify(root.toJSON()), /この記録の観測はまだありません/);
+    assert.match(JSON.stringify(root.toJSON()), /この記録への返事はまだ用意されていません/);
     assert.doesNotMatch(JSON.stringify(root.toJSON()), /保存済みの本文と回答は確認できます/);
     assert.equal(root.root.findAllByProps({ accessibilityLabel: 'Emlisへの回答' }).length, 0);
     await act(async () => root.root.findAllByType('Button').find(b => b.props.children === '保存状況を確認').props.onPress());
@@ -440,7 +525,7 @@ for (const configuredBase of [null, 'https://emlis-development.invalid///']) {
     await act(async () => root.root.findAllByType('TouchableOpacity').find(b =>
       b.findAllByType('Icon').some(i => i.props.name === 'trash-outline')).props.onPress());
     await act(async () => confirmDelete());
-    assert.equal(root.root.findAllByProps({ accessibilityLabel: 'この記録のEmlisの観測を開く' }).length, 0);
+    assert.equal(root.root.findAllByProps({ accessibilityLabel: 'この記録のEmlisの返事を開く' }).length, 0);
     assert.deepEqual(calls.map(({ url, options }) => [options.method, url]), [
       ['POST', `${expectedBase}/emotion/history/search`], ['GET', `${expectedBase}/emlis/threads/by-input/input`],
       ['POST', `${expectedBase}/emlis/threads/thread/answers`], ['GET', `${expectedBase}/emlis/threads/by-input/input`],

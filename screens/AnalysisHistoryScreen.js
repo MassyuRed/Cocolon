@@ -950,8 +950,8 @@ export default function AnalysisHistoryScreen({ onBack }) {
           renderItem={({ item }) => (
             <View style={[styles.row, themed.row]}>
               {emlisThread.enabled && <TouchableOpacity onPress={() => emlisThread.open(item.id, { showNotCreated: true })}
-                accessibilityRole="button" accessibilityLabel="この記録のEmlisの観測を開く" style={{ paddingVertical: 12 }}>
-                <Text style={{ color: colors.TITLE_GOLD }}>Emlisの観測を開く</Text>
+                accessibilityRole="button" accessibilityLabel="この記録のEmlisの返事を開く" style={{ paddingVertical: 12 }}>
+                <Text style={{ color: colors.TITLE_GOLD }}>Emlisの返事を開く</Text>
               </TouchableOpacity>}
               <View style={styles.rowTop}>
                 <Text style={[styles.date, themed.date]}>{item.date}</Text>

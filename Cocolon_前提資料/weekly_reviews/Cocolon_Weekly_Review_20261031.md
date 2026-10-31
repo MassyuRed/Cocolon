@@ -855,3 +855,38 @@ Mashは「サブスク料金をPlus680円、Premium1480円として実装され�
 APIの変更は[c272b965](https://github.com/MassyuRed/mashos-api/commit/c272b96535585605ae373acba896d8ffdfe0df41)、既存PR3の作業branchへ反映。RNの3fileと本議事録・全体現在地は既存PR30の作業branchへまとめて反映し、対象全文・変更集合・branch headを読み戻す。mainへのmerge／Render deploy／新ビルド配布は今回行っていない。
 
 価格を決定したことと、680円／1,480円での原価成立は別。権利・生成枠・無料体験・販売可否・SKU／Android base plan IDは変更していない。会議は開催中。週間基準計画は§11を維持し、通常接続の入口は§11.8。ストア請求額と公開API／端末確認を料金の残件として保持する。構造map変更なし、三大coreの品質合格や正式受入れの増加として数えない。
+<a id="natural-reply-connection-20261031"></a>
+
+## 16. 本人宛の通常応答・保存再読 — source実装と限定検証
+
+2026-10-31 JST。Mashは「通常入力→自然な返答→保存→開き直して同じ返答を読む」への着手を明示承認。§11の10/31〜11/1枠として実装した。以下はsourceと隔離検証の結果であり、実4B・本人端末の完成報告ではない。
+
+### 16.1 実装した接続
+
+既存Q3の本人/source/SQL CAS/DTOを維持し、新private `natural_reply.v1`で本人宛初回本文だけを返す構成を追加。5段packet・3本文・意味checkpointを返答の必須条件にせず、分析材料をNOT_GENERATEDとして分けた。旧意味/旧保存本文/旧問い回答は旧profileで維持する。
+
+実コード照合で、通常submitの外側待ちは既定3秒/上限10秒と判明したため、入力保存後の初回admissionから同一の強参照taskへ置き、返事の生成待ちを分けた。新threadは30秒attempt/全処理期限、HTTP最大25秒。STARTEDをHTTP前に保存し、受信本文をRECEIVED→OBSERVATIONへ保存。同じsourceを自動再生成せず、受信保存ACK不明はfreshな同一結果だけを回収する。
+
+RNは通常submitのpending明示時だけ未作成待機を許し、同owner/attempt・表示中・foregroundの処理中だけGETで確認。35秒以降は新しい自動GETを開始しない。POSTや共有controllerをpollで中断せず、旧保存本文は無加工再表示する。旧構成/更新停止で未作成を待たせる初回実装の回帰はレビューで修復した。
+
+新profileの任意問い・補足・frame訂正の反映、分析材料生成、Plus全蓄積からの関連履歴検索は未完成。現行3/6件の本人原文受渡しを、有料の記憶体験の完成にしない。非緊急自己否定の明示文末形の既存判定漏れを同じSafety ownerで限定修復し、専用応答未接続を通常返信成功と表示しない。
+
+### 16.2 確認結果
+
+| 範囲 | 結果と限界 |
+|---|---|
+| API/保存 | 新23＋既存Q2/Q3 54＋Safety9＝86成功。81件の実行、追加4件、未接続frame1件で重複加算なし。実Q3 SQL/RPCは隔離PGlite、model/Authは合成を含む |
+| 提供口 | 認証・不正model・生成1回・上限拒否の実local HTTP 1件成功。GPU/実4Bは0 |
+| RN | full34件29成功/5失敗。変更前31件も26成功/同じ5失敗。今回の新3＋関連5は8/8成功 |
+| RN既存5失敗 | 旧Piece呼出し文字列期待1、AppRuntimeのreact-native mock欠落3、metro実行依存未用意1。未成功を全suite成功へ変換しない |
+| レビュー | 独立した読取監査で重複HTTP・ACK消失・期限・owner・旧profile・未作成表示を確認し修復。本文品質/商品合格の判定ではない |
+
+初回APIの2失敗は自己否定判定漏れとfactoryの旧DI互換漏れで、修復後に対象19成功と上記の広い検証を行った。原本materializationの巨大file空本文・plugin/fixture不足は取得を補い、商品進捗へ数えない。
+
+### 16.3 GPU側のsource準備と次の未完了
+
+固定local Qwen3.5-4B/baseと回収済fit38/ad8b一つを扱う、本人限定の認証・回数・時間上限付きHTTP提供口sourceを追加。追加学習/downloadなし、context8192/max_new2048、nonthinking、生成側にも23秒の単調時計期限、未完本文は不採用。保存重みのidentity・112tensor・非学習を起動時に検査するが、今回GPUでのloader成立は未確認。詳細な固定情報と構成は[API実装・検証記録](https://github.com/MassyuRed/mashos-api/blob/2245b14bc8cc74cbc9065051a618772c7b9fde2f/ai/docs/EMLIS_NATURAL_REPLY_DEVELOPMENT.md)。
+
+次は有効なGPU/Jupyter接続・現在の費用/時間条件を確かめ、8入力×base/保存候補一つの最大16生成、選択候補の通常接続/保存再読を最大2生成で確認する案。8入力の原文は実行前に固定する。旧run承認は消費済みで再利用しない。実GPU結果を得た後にAPI適用・新RN配布・本人端末一巡へ進む。現在は接続先/実行条件待ちで、GPUを動かして成功したとは扱わない。
+
+今回Renderは既存workspace/serviceの読取許可を原典で再確認し、autoDeploy OFF/main・Piece private factoryのstartCommand維持をfresh確認。Supabaseは既存thread/eventの列情報だけをread-only確認。GPU/有料推論/追加学習/DB書込/設定変更/配置/build/配布/main mergeは0。商品0・正式0/3・54.50％は再採点しない。構造変更はEmlis/CMEE map・01A・設計01/02へ同期、STRUCTURE_MAP_DELTA_PRESENT。

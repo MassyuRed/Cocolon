@@ -1924,3 +1924,10 @@ source3786df21/APIa8be7a9bでd431から13更新/save/112F32 no-grad reload/BOOK-
 ## 2026-10-29 — 承認済み固定列形式のprivate受領
 
 API c920f81aの`fixed_rows_reference_wire.py`が固定列/厳密型から元named keyだけを復元し、既存named→quote→source/意味/本文検査へ渡す。`preparation.receive_candidate`の明示新formatだけが入口で、private preparation/free/ANSWER・source原文BOOK/SHOP/二sourceを確認。意味採用入口は既存のactual offline/free/ANSWER・source由来BOOK_CONCERN_V3/SHOP_DISTANCE_V3 AFTER_EXPLANATIONを再確認。欠落値/ID/quote/更新/bind/本文の補完と形式fallbackなし。receipt/snapshotは元rows rawとformat/metadataを保存し同rawで再受領。旧format省略時のbytesは保持、通常ModelCandidateSource未対応/未有効化。CPU教師2/cold/replayと旧9全outcome/receipt一致を確認し、一回GPUは終了しBOOK/SHOP0/2・旧9=6/9、旧成功の椅子01訂正を失い新重み不採用。成立6件cold/replay一致・全13raw/本人本文読了、原本回収済み。native意味型/公開API/DTO/DB/RN/他coreは不変、STRUCTURE_MAP_DELTA_PRESENT。実結果はfixed_rows README/weekly§105。
+
+
+## 2026-10-31 — 本人宛本文と分析材料の成否を分離した通常接続候補
+
+新ownerは `cocolon_meaning_experience_engine/natural_reply.py`。既存source admissionとSafety ownerから、本人宛初回本文だけを生成する。5段semantic packet・意味checkpoint・3本文を通常応答の必須条件にせず、private `natural_reply.v1`と既存Q3保存/DTOへ接続した。本文は本人sourceやAnalysis graphへ逆流させず、分析材料はNOT_GENERATED。旧offline MODEL_PROFILEと既存意味/本文契約を緩めない。
+
+service/factory/通常reply/API、RNのpending→GET→同一保存本文を接続。GPU側提供口は固定local 4B/fit38・非学習・認証/回数/期限付きのsourceを準備。実モデル・稼働・実機・商品合格は未実施。新問い/補足・分析材料採用・Plus全蓄積検索は未完成。構成pathと検証範囲はEmlis mapの同日節、仕様は詳細02の同日節、実行結果はweekly§16/API開発資料。STRUCTURE_MAP_DELTA_PRESENT、正式0/3/54.50％据置。

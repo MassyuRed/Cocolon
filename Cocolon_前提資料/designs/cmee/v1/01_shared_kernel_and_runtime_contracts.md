@@ -1287,3 +1287,12 @@ source3786df21/APIa8be7a9bでd431から13更新/save/112F32 no-grad reload/BOOK-
 ## 2026-10-29 承認済みprivate fixed-row受領契約
 
 Mashがbadea42e fixed_rows案の一回を最大40分/処理按分$0.19（他費用別）で明示承認。API c920f81aは`cocolon.cmee.fixed_rows_comparison.v1`を明示offlineのFree BOOK/SHOP回答後に追加した。root `[format,v,a,q,c]`と固定列（bindだけ3/4列）から名前と階層だけを復元し、既存named/quote/native意味判定へ渡す。v/schema・alias名と実ID・quote・時点/否定/主体・全更新/target/order・bind・本文3項目はモデル出力のまま。欠落/型不正/未定義や重複宣言/不正JSONを補完せず、finish失敗を成功より優先する。新format未指定時の自動検出、旧形式fallback、通常ModelCandidateSource対応は含まない。実rows raw/format/model/base/adapter/usage/finishをreceiptへ保持、同rawでreplay/coldを行い復元namedをモデルrawに置き換えない。意味採用側もactual offline/free/source由来BOOK/SHOP AFTER_EXPLANATIONを独立確認する。native meaning/snapshot/公開DTOのschema・型は追加0。CPU教師2/旧9全結果一致、実モデルの一回は終了しBOOK/SHOP0/2（両INVALID_FORMAT）・旧9=6/9・椅子01訂正の旧成功喪失で新重み不採用。5更新/2load/13生成、成立6件cold/replay一致・原本回収済み。後続7acff074は現identity fixture同期のみ。原plan/成功/STOP/上限はfixed_rows execution、実結果はweekly§105。
+
+
+## 2026-10-31 — 本人宛初回本文の通常profile
+
+Mashの実行指示と第9回§11に従い、本人宛の文章と分析材料を別の成否へ分ける。`natural_reply.v1`は既存source admission/本人境界/Safetyの後に一回の明示self-host生成を行い、既存Q3のOBSERVATION.textへ保存する。新しい意味graphやMEANING_UPDATEの架空生成を要求しない。分析材料はNOT_GENERATEDで、本文を本人sourceへ転用しない。旧MODEL_PROFILE、旧snapshot/reader/問い/回答契約はその版で保持する。
+
+通常submitの外側3秒から、初回admission〜生成を強参照付きtaskで分離。serviceの30秒attempt/全処理期限、SQL版/owner/context/期限を保持。STARTED先行、RECEIVED保存、ACK不明fresh回収、GET非生成を接続。通常API/DTO/DB schema・依存は不変。構成はEmlis map、実装順/未完成は詳細02の同日節。providerは設定欠落中でも保存済読取を維持し、新profile書込は不可。
+
+GPU提供口sourceは準備したが、実4B品質・GPU loader成立・常時host方式・原価・配置・端末・商品受入れは未確認。新profileの任意問い/補足・分析材料生成・Plus全蓄積の関連検索は未接続。本人限定検証の成立を公開提供の成立へ拡大しない。

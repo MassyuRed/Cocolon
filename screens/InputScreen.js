@@ -1093,7 +1093,9 @@ const safeInsets = useSafeAreaInsets();
       await markAnalysisHomeSummaryDirty();
       if (!ownsResponse()) return;
 
-      const openedThread = await emlisThread.open(submitResult?.id);
+      const replyPending = Array.isArray(inputFeedbackAI?.rejection_reasons)
+        && inputFeedbackAI.rejection_reasons.includes("thread_reply_pending");
+      const openedThread = await emlisThread.open(submitResult?.id, { showNotCreated: replyPending, waitForInitial: replyPending });
       if (!ownsResponse()) return;
       // Opening a reader is not terminal eligibility. The Piece host performs
       // the existing authoritative source-ref GET only on a separate action.

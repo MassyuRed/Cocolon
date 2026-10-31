@@ -57,7 +57,7 @@ export function useEmlisThread({ userId, enabled: explicitEnabled, api = emlisTh
       if (error?.name === "AccountChangedError" || error?.status === 401 || error?.status === 404 || (method === "get" && error?.status === 409)) {
         c.pending = null;
         setState(s => ({ ...s, dto: null, draft: "", uncertain: false, busy: false,
-          error: "この観測は現在参照できません。" }));
+          error: "この返事は現在参照できません。" }));
       } else if (method !== "get" && [409, 422].includes(error?.status)) {
         // A definite rejection admits no operation. After GET, the user may
         // submit with the current revision and a new key. Unknown ACKs retain
@@ -74,11 +74,11 @@ export function useEmlisThread({ userId, enabled: explicitEnabled, api = emlisTh
     } finally { if (active()) c.busy = false; }
   }
 
-  async function open(inputId, { showNotCreated = false } = {}) {
+  async function open(inputId, { showNotCreated = false, waitForInitial = false } = {}) {
     if (!enabled || !userId || !inputId || owner.current !== userId) return false;
     reset();
     context.current.inputId = String(inputId);
-    setState({ ...empty(), visible: true });
+    setState({ ...empty(), visible: true, waitForInitial });
     const result = await perform("get");
     if (context.current.inputId !== String(inputId) || owner.current !== userId) return false;
     if (result?.state === "NOT_CREATED" && !showNotCreated) {

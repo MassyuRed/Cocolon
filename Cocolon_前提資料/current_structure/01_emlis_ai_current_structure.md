@@ -1918,3 +1918,20 @@ API4002b457の既存preparation.py/model_candidate_source.pyが、private cocolo
 ## 2026-10-26 — 4題材6教材のprivate版3接続（CPU完了）
 
 Mash承認c97d6794に基づき、既存4ownerのsource-derived admission/adapter3でBOOK/SHOPの初回実問い→説明ADD・元意味保持・gapのみ解消・一回答END、REPOT/KNIT初回ENDを接続した。本文は独立source readerで主客・時点・否定・程度・本人知覚・二対象の明示不明を照合。外側wire/schema/dataclass・通常API/DTO/DB/RN/依存・通常30秒/明示offline180秒は不変。対象394成功/HTTP2対象外、新SQL6状態の同snapshot再開と完成非生成再読、旧18構成の1,851,616bytes全一致、native6/EOS/context8192 max7935を確認。新4B学習/生成0、旧2560出力枠では2回答targetが長すぎるため次のGPU条件は未決。STRUCTURE_MAP_DELTA_PRESENT、型追加0、商品0/正式0/3/54.50％。実原本・全本文・失敗履歴・全pathは `observation_learning/training/2026-10-26-unconnected-native/README.md#sixrow-cpu-implementation` と最新weekly§56。
+
+
+## 2026-10-31 — 本人宛初回応答の通常接続source候補
+
+第9回§11とMashの実行指示により、通常入力保存後→本人宛初回本文→既存SQL保存→DTO/RN再読を実装。新private `natural_reply.v1`、既存Q3保存profile/公開DTO/SQL維持。旧semantic・旧保存本文・旧問い回答は別版のまま。分析材料はNOT_GENERATED。実4B・配置・配布・本人端末は未実施で、商品0/正式0/3は保持する。
+
+| owner | 責務 |
+|---|---|
+| API `cocolon_meaning_experience_engine/natural_reply.py` | 既存source admission/Safety、本人原文材料、明示self-host HTTP一回、返信artifact。意味graphを必須にしない |
+| API `emlis_thread_factory.py` | 通常reply/APIの共有service、開始から保持する非同期task。submit外側3秒と本文待ちを分ける |
+| API `emlis_thread_service.py` | STARTED/RECEIVED/OBSERVATIONのCAS、ACK不明fresh回収、旧保存GET非生成、30秒attempt/全処理期限 |
+| API `api_emlis_thread.py` / `emlis_ai_reply_service.py` | 共有factoryへの接続。通常API/DTOの追加なし |
+| API `emlis_ai_safety_triage.py` | 実測した自己否定文末形の判定漏れを既存matcherで限定修復 |
+| API `ai/tools/serve_emlis_natural_reply.py` | 固定local 4B/baseとfit38の本人限定・非学習probe。GPU起動成立は未確認 |
+| RN `InputScreen` / `useEmlisThread` / `EmlisThreadModal` / `AnalysisHistoryScreen` | pending明示時だけ未作成待機、foreground/同ownerのGET限定確認、保存本文無加工表示、返事の案内 |
+
+新profileの任意問い/補足・分析材料生成・Plus全蓄積関連検索は未接続。既存履歴3/6原文の受渡しとFree除外、pause後非再取得は合成provider/実SQLで確認しただけで、有料体験の完成ではない。APIの主86件とlocal HTTP/読込hard期限の2件成功、RN関連8件成功/full34中29成功・既存同5失敗。詳細・制限・提供口条件は[API実装・検証記録](https://github.com/MassyuRed/mashos-api/blob/2245b14bc8cc74cbc9065051a618772c7b9fde2f/ai/docs/EMLIS_NATURAL_REPLY_DEVELOPMENT.md)、最新weekly§16。STRUCTURE_MAP_DELTA_PRESENT。
