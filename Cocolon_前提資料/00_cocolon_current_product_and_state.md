@@ -4,6 +4,8 @@
 
 > **最新報告会：[第9回・2026-10-31、10/31〜11/7](weekly_reviews/Cocolon_Weekly_Review_20261031.md)。開催中。** [§3のMashの方針・既決仕様](weekly_reviews/Cocolon_Weekly_Review_20261031.md#confirmed-directions)、[§4の華恋の商品案](weekly_reviews/Cocolon_Weekly_Review_20261031.md#release-product-proposal)、[§5の次週案](weekly_reviews/Cocolon_Weekly_Review_20261031.md#next-week-plan)、[§7の未決・会議進行](weekly_reviews/Cocolon_Weekly_Review_20261031.md#meeting-agenda-and-open-items)を区別する。Emlisは人間的応答のみの表示へ変更し、意図的短文化・1〜2文固定はしない。観測ラインは分析へ活かす。Free当回入力のみ／Plus過去本人入力も照合は既決仕様の再確認で、通常4Bでの意味ある履歴応答は未完成。わたしマップは全蓄積の構造・ルートと月ごとの当時snapshot、現在との見比べが構想。28日・最新100だけ・最新1枚は華恋の判断・撤回案で、Mashの構想ではない。下表の期間実装と新目標を混同しない。
 
+**初版Emlisの最低線のすり合わせ：** [第9回§10](weekly_reviews/Cocolon_Weekly_Review_20261031.md#minimum-response-calibration)。Mashは、入力へ正常に返答し、不確定を断定せず、ない情報を事実にせず、応答が破綻しなければ、高度な観測品質は今後へ回せるのではないかと意見を示した。華恋は自然な基本応答を初版の最低線とする案へ賛成し、日常・本・開店・相手の不確定・理由不明・Plus履歴の説明用サンプルを提示。4B実出力・教師・凍結テストではなく、具体例へのMashの確認前で合意未成立。文数固定やテンプレ採用はしない。Plusの履歴差とAnalysisの累積／月次構想は保持する。
+
 **商品案の採否：** Pieceを初期の有料価値の中心にする方向を記録。価格680円・12配色・生成枠・iOS先行・SNS後置・Premium等の延期は華恋案で、採用済みではない。Pieceへの4B利用は質問と回答の段階。描画には不要、意味再構成では候補という見解を仕様変更の合意にしない。既決の12/18両ストア公開目標は変更していない。54.50％は前回管理評価を継承し、今回再採点なし、正式商品受入れ0/3。通常AI・累積マップ・Piece本人実機一巡の未達から、期限内完成は保証できない。
 
 前回の[第8回・10/24](weekly_reviews/Cocolon_Weekly_Review_20261024.md)は終了版と、その後の学習・接続実行履歴§12〜136として保持する。各承認の消費・候補の不採用を新会議でリセットしない。最新focus29は下段の実行結果を参照する。
