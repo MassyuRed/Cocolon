@@ -470,8 +470,8 @@ export default function SubscriptionSelectScreen({ navigation }) {
   }, []);
 
   const currentLabel = SUB_TIER_LABEL[tier] || "Freeプラン";
-  const plusPriceLabel = asStringOrNull(plusPlan?.price_label) || "月額300円";
-  const premiumPriceLabel = asStringOrNull(premiumPlan?.price_label) || "月額980円";
+  const plusPriceLabel = asStringOrNull(plusPlan?.price_label) || "月額680円";
+  const premiumPriceLabel = asStringOrNull(premiumPlan?.price_label) || "月額1480円";
   const expiresAtLabel = formatExpiresAtLabel(expiresAt);
 
   const plusPurchaseSku = getPurchaseSku("plus", Platform.OS);
