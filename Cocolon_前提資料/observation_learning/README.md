@@ -1,8 +1,10 @@
 # Mashの観測技術を継承するための記録
 
-**最新GPU読取確認（2026-10-30 JST）：** 同Jupyter/Pod vgkm402msgroiu/RTX A5000、focus29終了・回収時1MiB/0％で稼働保持。298frozenと保存ad8b/config不変。Stop/restart/delete/Runpod管理画面/API0。
+**最新の直接作業（10/31）：** [第9回§28](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#d691-preference28-actual-20261031)／[自然返答の実行記録](training/2026-10-31-natural-reply-preference/README.md)。d691を製品不採用のまま隔離初期値/固定参照に明示選択し、28更新・保存freshreload・全30EOSを完了。本人宛化維持と話者混在改善を確認したが、留保/不明/自然さが残り527d不採用。旧4重み/config不変・結果保全済み。次は別題材の留保/既知不明を扱う最小修正案をCPUで固定し、同方式追加周回はしない。新23/24は使用済み、評価原文の教師転用0。実emotion submit/本番Auth/本人端末/新HTTP-SQLは未確認。商品0・正式0/3・54.50％、STRUCTURE_MAP_DELTA_NONE。以下の10/30段落は旧CMEE方式の履歴。
 
-**現在の直接作業（10/30・focus29一回完了／不採用閉鎖）：** Mash承認の保存ad8b隔離初期値・現10行各2回＋旧9各1回＝29更新を同Jupyterで一回実行し、29 training forward/optimizer・保存非学習再読・同19行NLL・新2件×5段の10生成/全EOSまで完了。全19教師/messages/encoded/元終端/mask/完全CE/指示/受信/合否は不変。新ed298856は112有限F32/3,833,856params、実runは全112変更を記録した。
+**旧CMEE試行のGPU読取確認（2026-10-30 JST・履歴）：** 同Jupyter/Pod vgkm402msgroiu/RTX A5000、focus29終了・回収時1MiB/0％で稼働保持。298frozenと保存ad8b/config不変。Stop/restart/delete/Runpod管理画面/API0。
+
+**旧CMEE試行（10/30・focus29一回完了／不採用閉鎖の履歴）：** Mash承認の保存ad8b隔離初期値・現10行各2回＋旧9各1回＝29更新を同Jupyterで一回実行し、29 training forward/optimizer・保存非学習再読・同19行NLL・新2件×5段の10生成/全EOSまで完了。全19教師/messages/encoded/元終端/mask/完全CE/指示/受信/合否は不変。新ed298856は112有限F32/3,833,856params、実runは全112変更を記録した。
 
 両件S5はprose rowが必要4cellに対しBOOK2/SHOP1cellでprose_typeとなり、結合・新CMEE受信前で停止。意味/本人本文0/2・saved/cold0、新CMEE0、旧9は条件不成立によるNOT_RUN。BOOK S2〜4は教師JSON値一致だがS1引用scopeが誤り、SHOPは未宣言引用/更新割当も残る。S5にはBOOKの謝罪主体逆転・問い化/反復、SHOPの本人一人称再掲がある。平均NLL改善を品質成功へ換算しない。[全実結果・全66file地図](training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/focus29/execution_20261030/README.md)。
 
@@ -250,6 +252,7 @@ D05でMashは「事実を事実として捉えるのも観測」と教示し、�
 次に観測会を行う場合は、華恋が新しい観測会フォルダを作り、対話と教示を保存し、この一覧を更新します。Mashには普段の形で実演していただき、整理・参照の整備は華恋が担います。今回、定期実行の日時や頻度は設定していません。
 
 保存先を増やすための新システムやDBは作らず、既存のGitHub上で継続します。製品の構造・契約・CMEE実装を変更する場合は、その作業で対象の設計と接続を扱います。
+
 
 
 
