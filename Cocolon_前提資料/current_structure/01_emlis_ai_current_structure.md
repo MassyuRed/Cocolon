@@ -1922,7 +1922,7 @@ Mash承認c97d6794に基づき、既存4ownerのsource-derived admission/adapter
 
 ## 2026-10-31 — 本人宛初回応答の通常接続source候補
 
-第9回§11とMashの実行指示により、通常入力保存後→本人宛初回本文→既存SQL保存→DTO/RN再読を実装。新private `natural_reply.v1`、既存Q3保存profile/公開DTO/SQL維持。旧semantic・旧保存本文・旧問い回答は別版のまま。分析材料はNOT_GENERATED。実4B・配置・配布・本人端末は未実施で、商品0/正式0/3は保持する。
+第9回§11とMashの実行指示により、通常入力保存後→本人宛初回本文→既存SQL保存→DTO/RN再読を実装。新private `natural_reply.v1`、既存Q3保存profile/公開DTO/SQL維持。旧semantic・旧保存本文・旧問い回答は別版のまま。分析材料はNOT_GENERATED。source準備時は実4B未実施だったが、後続§17で18生成と実本文2件の隔離保存再読を確認。実GPU HTTP・配置・配布・本人端末は未実施で、商品0/正式0/3は保持する。
 
 | owner | 責務 |
 |---|---|
@@ -1931,7 +1931,12 @@ Mash承認c97d6794に基づき、既存4ownerのsource-derived admission/adapter
 | API `emlis_thread_service.py` | STARTED/RECEIVED/OBSERVATIONのCAS、ACK不明fresh回収、旧保存GET非生成、30秒attempt/全処理期限 |
 | API `api_emlis_thread.py` / `emlis_ai_reply_service.py` | 共有factoryへの接続。通常API/DTOの追加なし |
 | API `emlis_ai_safety_triage.py` | 実測した自己否定文末形の判定漏れを既存matcherで限定修復 |
-| API `ai/tools/serve_emlis_natural_reply.py` | 固定local 4B/baseとfit38の本人限定・非学習probe。GPU起動成立は未確認 |
+| API `ai/tools/serve_emlis_natural_reply.py` | 固定local 4B/baseとfit38の本人限定・非学習probe。後続でloader/直接生成を確認、実GPU HTTPは未確認 |
 | RN `InputScreen` / `useEmlisThread` / `EmlisThreadModal` / `AnalysisHistoryScreen` | pending明示時だけ未作成待機、foreground/同ownerのGET限定確認、保存本文無加工表示、返事の案内 |
 
-新profileの任意問い/補足・分析材料生成・Plus全蓄積関連検索は未接続。既存履歴3/6原文の受渡し・Free除外・過去Safety除外、pause後非再取得は合成provider/実SQLで確認しただけで、有料体験の完成ではない。APIの主86件とlocal HTTP/読込hard期限の2件成功、RN関連8件成功/full34中29成功・既存同5失敗。詳細・制限・提供口条件は[API実装・検証記録](https://github.com/MassyuRed/mashos-api/blob/bea4ed1f471f1220dc480b9ffda8fa4675aaab03/ai/docs/EMLIS_NATURAL_REPLY_DEVELOPMENT.md)、最新weekly§16。STRUCTURE_MAP_DELTA_PRESENT。
+新profileの任意問い/補足・分析材料生成・Plus全蓄積関連検索は未接続。既存履歴3/6原文の受渡し・Free除外・過去Safety除外、pause後非再取得は合成provider/実SQLで確認しただけで、有料体験の完成ではない。APIの主86件とlocal HTTP/読込hard期限の2件成功、RN関連8件成功/full34中29成功・既存同5失敗。詳細・制限・提供口条件は[API実装・検証記録](https://github.com/MassyuRed/mashos-api/blob/2d4c740f97ad234f57fdde48472d78954e2a2ea7/ai/docs/EMLIS_NATURAL_REPLY_DEVELOPMENT.md)、最新weekly§16。STRUCTURE_MAP_DELTA_PRESENT。
+
+
+### 2026-10-31 後続実測（第9回§17）
+
+新Podの固定4B/baseとfit38で元16・指示修正2＝18生成、全EOS。両候補とも主体/感情所有・一人称の最低線に未達で、実験promptは不採用、製品source差分なし。元の妥当な実本文2件を材料一致後に手動artifact注入し、隔離Q3 SQL保存2件・同process別service instance GET4回/既存start2回の同一本文/eventを確認。実GPU HTTP/API/DB process再起動・通常RN・本人端末の成立とは別。追加学習・公開port拡張・配置・本番DB書込0。商品責務/構造差分なし、STRUCTURE_MAP_DELTA_NONE。原16/修正2/全sourceと失敗は非公開原本へ保持し、今後の通常接続と品質修復を分けて進める。

@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-更新日：2026-10-31 JST（最新差分：本人宛初回応答の通常API/既存SQL保存/RN再読source候補を実装・限定検証。実4B・新配置/配布・本人端末は未実施。Plus680円/Premium1,480円の先行反映を保持）。全Cocolon作業の必読原本。
+更新日：2026-10-31 JST（最新差分：実4B18生成と実本文2件の隔離SQL保存再読を確認。主体/一人称の品質未達で製品採用せず、新配置/配布・本人端末は未実施。Plus680円/Premium1,480円の先行反映を保持）。全Cocolon作業の必読原本。
 
 > **最新報告会：[第9回・2026-10-31、10/31〜11/7](weekly_reviews/Cocolon_Weekly_Review_20261031.md)。開催中。** [§3のMashの方針・既決仕様](weekly_reviews/Cocolon_Weekly_Review_20261031.md#confirmed-directions)、[§4の華恋の商品案](weekly_reviews/Cocolon_Weekly_Review_20261031.md#release-product-proposal)、[§11の合意最低線と週間基準計画](weekly_reviews/Cocolon_Weekly_Review_20261031.md#weekly-tasks-20261031)、[§7の未決・会議進行](weekly_reviews/Cocolon_Weekly_Review_20261031.md#meeting-agenda-and-open-items)を区別する。Emlisは人間的応答のみの表示へ変更し、意図的短文化・1〜2文固定はしない。観測ラインは分析へ活かす。Free当回入力のみ／Plus過去本人入力も照合は既決仕様の再確認で、通常4Bでの意味ある履歴応答は未完成。わたしマップは全蓄積の構造・ルートと月ごとの当時snapshot、現在との見比べが構想。28日・最新100だけ・最新1枚は華恋の判断・撤回案で、Mashの構想ではない。下表の期間実装と新目標を混同しない。
 
@@ -10,13 +10,13 @@
 
 **最新の公開見通し：** [第9回§13](weekly_reviews/Cocolon_Weekly_Review_20261031.md#release-outlook-20261031)。12/18両ストア公開目標は維持するが、通常接続・累積マップ・課金・両OS・原価の未成立から達成の裏付け不足・高リスク。10/31→11/27の提出基準まで27日、その後12/18まで21日を審査・差戻し枠とする管理計画で、所要保証ではない。11/3通常一巡、11/7実績・Android差分・販売範囲と原価材料、11/15結合、11/22候補、11/27両ストア提出の確認点を置く。高度観測を初版へ戻さず、Plus履歴・累積／月次マップ・Piece保存出力・課金権限は残す。iOS先行やSNS後置等の未採用案を工程削減済みにしない。[§14](weekly_reviews/Cocolon_Weekly_Review_20261031.md#karen-opinion-20261031)は華恋の進め方・商品価値への意見。今回の報告で新しい製品実装・稼働成功は生じていない。
 
-**現在の直接作業（10/31）：** Mashの実行指示で、本人宛初回本文→通常API→既存Q3 SQL保存→RNの非生成再読をsource接続した。[第9回§16](weekly_reviews/Cocolon_Weekly_Review_20261031.md#natural-reply-connection-20261031)。新private natural_reply.v1、STARTED/RECEIVED/OBSERVATIONのCAS、submit外側3秒から分離した強参照task、通常30秒attempt/全処理期限、pending時だけのRN GET確認。分析材料はNOT_GENERATEDで、旧意味/問い/保存profileを維持。API86件＋local HTTP/読込hard期限の2件成功、RN関連8件成功/full34件29成功・変更前から同じ5失敗。実4B・GPU loader・稼働採用・配布・本人実機は未実施。新profileの問い/補足・分析材料生成・Plus全蓄積関連検索は未完成。次は有効なGPU/Jupyter接続と現在の費用条件を確認し、base/回収済fit38一つの最大16比較生成＋通常接続最大2生成を具体化する。旧run承認を再利用しない。GPU/DB書込/設定/配置/配布/main mergeは0、正式0/3/54.50％据置。
+**現在の直接作業（10/31）：** 本人宛初回本文→通常API→既存Q3 SQL保存→RN非生成再読のsource候補（[第9回§16](weekly_reviews/Cocolon_Weekly_Review_20261031.md#natural-reply-connection-20261031)）を保持。後続の新Pod/Jupyter実測（[§17](weekly_reviews/Cocolon_Weekly_Review_20261031.md#natural-reply-actual-20261031)）でbase/fit38の8入力×2と指示修正2＝18生成、全EOS・約0.825〜3.427秒を確認したが、主体/感情の所有・一人称の誤りが残り両候補とも全体最低線未達。修正指示は製品不採用・source復帰。元の妥当な実本文2件を材料一致後に隔離Q3 SQLへ手動受渡しし、別service instance GET4回/既存start2回で同一本文/eventを確認。実GPU HTTP・API/DB process再起動・新配置/配布・本人端末の証拠ではない。追加学習0・本番変更0、正式0/3/54.50％据置。次は学習前4Bへの最小修正案を具体化し、閉鎖した18回を再利用しない。分析NOT_GENERATED、新profileの問い/補足・Plus全蓄積関連検索の未完成と既存API/RN検証・同5失敗も保持する。
 
 前回の[第8回・10/24](weekly_reviews/Cocolon_Weekly_Review_20261024.md)は終了版と、その後の学習・接続実行履歴§12〜136として保持する。各承認の消費・候補の不採用を新会議でリセットしない。最新focus29は下段の実行結果を参照する。
 
 **最初のA4500学習実績（§24・履歴）：** [A4500で修正版4B追加学習を完走、重み回収、CMEE採用は未達（§24）](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-a4500-training-and-portable-weights)。[全実結果](observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/repaired_a4500_20261025/README.md)。Mashは4B採用とリリースまでRunpodでの追加学習を明示し、将来は手持ちPCへ移す可能性が高い。RTX A4500 20GB／Secure・EU-RO-1・Pod y0eb0w0qn6nks0を今回の最安の容量候補として確保。GPU$0.25/h・50GB container込み表示$0.26/h。CUDA/BF16正常、修正版2教師/1epoch/2update・adapter保存/非学習reload・前後16生成が20分23.76秒で完走し、20GBで現方式が動くことを確認した。peak allocated14.970/reserved17.588GiB。最終archive全24memberのhashと32tensor有限性/前後重み不変をPod外照合し永続保管済み。NLL0.251117→0.245189、raw6/8変化だが、CMEE意味/本文は前後0/2。初回の根拠座標は通るようになったが必須shape/自然文surface不正、訂正後rawは不変、proxy2件が2048tokenで打切りとなり品質未達。その時点の残件は必須shapeと自然文surfaceで、後続の現在作業は下段へ更新する。この§24のrunはGPUを停止せず終了した。旧3070は今回開始時既に停止表示、華恋のStop操作0。
 
-**GPUの現在状態（10/31会話）：** Mashは現在GPUを動かしていないと報告。今回、管理画面/APIの独立照会・起動・停止は行っていない。最終の直接読取は10/30のfocus29終了・回収時で、同Jupyter/Pod vgkm402msgroiu/RTX A5000が1MiB/0％、298frozenと保存ad8b/config不変、Stop/restart/delete/管理画面/API0だった記録。10/30の稼働保持を現在の稼働断定に使わない。
+**GPUの現在状態（10/31後続実測）：** Mashが新Podを用意し、Googleログインからの作業継続を指示。対象10o4zhfktg9nc1/RTX PRO4000 Blackwell24GB・表示$0.58/hへ直接Jupyter接続し、固定4B/fit38を復元して追加学習なし18生成を完了。終了確認でprobe processなし、GPU2MiB/0％、ad8b/config不変。Stop/restart/deleteは0で稼働保持。setup前から終了確認まで1142.077秒/当該窓按分約$0.1840で、レンタル全体/認証/終了後保持等の総費用は未測定。前段のGPU停止というMash報告と10/30旧Pod記録は履歴として区別する。
 
 **直近の学習実行（10/30・focus29一回完了／不採用閉鎖）：** Mash承認の保存ad8b隔離初期値・現10行各2回＋旧9各1回＝29更新を同Jupyterで一回実行し、29 training forward/optimizer・保存非学習再読・同19行NLL・新2件×5段の10生成/全EOSまで完了。全19教師/messages/encoded/元終端/mask/完全CE/指示/受信/合否は不変。新ed298856は112有限F32/3,833,856params、実runは全112変更を記録した。
 
@@ -176,7 +176,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 | 作業領域 | 次に解消すべき具体的未完了 |
 |---|---|
-| 本人宛応答の通常接続 | 10/31 source実装/隔離保存検証済み候補。GPU/Jupyter接続と実行条件→実4B本文/時間→API適用/RN配布→本人端末保存再読が未実施。新profileの問い/補足、分析材料、Plus全蓄積検索も未接続。第9回§16/API自然応答開発資料へ戻る |
+| 本人宛応答の通常接続 | source実装/実4B18生成/実本文2件の隔離Q3 SQL保存・別service instance再読まで。主体/感情所有・一人称の品質は未達、指示修正2件も不採用。実GPU HTTP/API適用/RN配布/本人端末保存再読は未実施。新profileの問い/補足・分析材料・Plus全蓄積検索も未接続。第9回§17/API自然応答開発資料へ戻る |
 | 学習済みAI・CMEE接続 | §136：focus29の29更新/2load/19NLL/新2×5段10生成を完了。全EOSでも両S5の本文型不正・意味/本人本文0/2、新CMEE/保存/cold0、旧9NOT_RUN。BOOKの引用scope/謝罪主体逆転、SHOPの未宣言引用/更新割当/本人一人称再掲が残る。処理786.373秒/約$0.0612按分（準備等別）。全55原本/112有限F32追加重みを回収照合・保管、298frozen/ad8b不変。不採用閉鎖・再試行/自動次run0。[全実結果](observation_learning/training/2026-10-26-unconnected-native/role_binding_preparation/fixed_rows/stage5/focus29/execution_20261030/README.md)。追加観測会不要。 |
 | 10/24までの費用・4B選定履歴（当時の構成） | Flex24GBの旧月78,980生成・未測定の速度/起動仮定による運用費95,094円・赤字67,833円の試算は当時の構成の記録で、最新構成の原価ではない。[全仮定・再計算](observation_learning/model_selection/2026-10-24-production-economics/README.md)。旧4B実診断では24GBでLoRA保存・reload・16生成・回収を確認したが、FITは前後0/2。CPU指示修復API1dabc4fは54対象/pack11・合成2/2で、修正版は後続10/25にA4500 20GBで完走・回収済み、最新結果は§24。旧学習peak allocated14.954GiBを本番推論の必要VRAMへ流用しない。4bit/M4を第一候補とした§23は当時の華恋案で、現在の移行先はWindows／Mac未選定。公開API単価を独自育成版の原価へ流用しない。 |
 | Emlis | 一般入力と回答後の意味・自然な本文・有料差、本人実機の保存再読まで。u353〜355のコードと配置差を保持 |

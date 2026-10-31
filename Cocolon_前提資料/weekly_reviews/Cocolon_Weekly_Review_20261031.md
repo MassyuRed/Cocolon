@@ -892,3 +892,43 @@ RNは通常submitのpending明示時だけ未作成待機を許し、同owner/at
 今回Renderは既存workspace/serviceの読取許可を原典で再確認し、autoDeploy OFF/main・Piece private factoryのstartCommand維持をfresh確認。Supabaseは既存thread/eventの列情報だけをread-only確認。GPU/有料推論/追加学習/DB書込/設定変更/配置/build/配布/main mergeは0。商品0・正式0/3・54.50％は再採点しない。構造変更はEmlis/CMEE map・01A・設計01/02へ同期、STRUCTURE_MAP_DELTA_PRESENT。
 
 最終source確認で、過去の自己否定/別Safety記録を通常返信材料へ渡さない既存境界も維持した。Free/Plus/Premiumの既存3tier検査をこの条件付きで再確認し3成功（上記86件の内数、重複加算なし）。新しいowner/公開契約/DB変更はなく、この限定修復のSTRUCTURE_MAP_DELTA_NONE。
+
+
+<a id="natural-reply-actual-20261031"></a>
+## 17. 実4Bの本人宛18生成・隔離保存再読（10/31後続、品質未達）
+
+§16の接続先待ちから前進。Mashが新Podを提示し、Googleログインからの作業継続を明示指示した。Runpod認証後の対象PodリンクからJupyterへ直接接続した。Google/RunpodとJupyterの認証は別であり、Mashの再承認を繰返し求めたことによる遅延も残す。認証APIの入力形式・ターミナル入力・初回setup shell quotingの不備はGPU開始前に直し、成功や生成の件数へ加算しない。
+
+### 17.1 環境と実行条件
+
+- 新Pod10o4zhfktg9nc1、RTX PRO4000 Blackwell24GB、表示$0.58/h。workspaceは空で、以前のモデル/fit38/依存は残っていなかった。
+- 既存固定4依存、Qwen3.5-4B固定revision851bf6e、回収済fit38/ad8bを復元。Torch2.8.0+cu128/SM120/BF16、既存loaderの56対象/112 tensor/3,833,856params一致・非学習を確認。新モデル探索/重み更新/追加学習0。
+- 正解文の固定なしで8入力の原文/messagesを先に固定。元5型＋未使用3型、base8/fit38 8。残2枠は内容確認後に最小指示修正の2題へ振替え、元NR09/10はNOT_RUNとした。
+- 準備前から共通1500秒枠。終了確認1142.077秒/当該窓の表示単価按分約$0.1840。認証待ち等も含むレンタル全体の総請求額・終了後保持分は未測定で、この額を総額にしない。14MBの重み転送は約472.7秒を要した。
+
+### 17.2 全18本文の結果
+
+元16生成は全EOS、約0.825〜3.427秒/生成。読込/通信/SQL込みの通常30秒達成ではない。rootと独立read-only監査が全文を読んだ。
+
+| 範囲 | 確認した事実 |
+|---|---|
+| base | 否定した約束/準備を「まだできていない」へ変える本文、本人原文の全文貼返しが残った |
+| fit38 | 日常・理由不明・現在の一人時間への短い受取りには妥当な候補がある一方、相手の発言から相手の感情を追加、本人の「私」へのなり替わりが残った |
+| 不確かな相手 | 怒りは原入力にもある。怒りの創作とは扱わず、不明より可能性を補強したこと/別原因の追加を、断定違反と区別して記録 |
+| 指示修正の残2生成 | NR02は友人の感情追加が残る。NR07は本人の主語を「あなた」へ直せたが、Emlisが「私」と語る表示規則違反と不自然な自己感情報告が残った |
+
+両候補とも全体の最低線未達。短い受取り・一度の言換えを深さ不足だけで落としていない。指示修正2件を合格にせず、実験promptは製品不採用・source復帰。元16の失敗・旧指示・修正指示・全rawを保持する。修正後8件合格・通常採用・商品合格へ換算しない。
+
+### 17.3 保存・再読で成立した限定範囲
+
+元16の妥当なfit38 NR01/08実本文を使用。原材料JSON全文一致後に、新しいSQL側source prefixへ束縛するmanual bridgeで既存service/Q3実SQLへ渡した。新規生成0、保存2件、同Python processの別service instanceでGET4回/既存start2回の同一本文/eventを確認。source各1回、OBSERVATION各1、分析NOT_GENERATEDを保持した。API既存関連23件も成功（3.54秒/既存warning1）。
+
+これは本番HTTP・API/DB processのcold restart・実Auth・本人Supabase row・RN・本人端末一巡ではない。GPU側のsource prefixとSQL側prefixは異なり、材料一致の手動artifact受渡しを通常モデル呼出し成功にしない。保存挙動の限定TECHNICAL_CREDITで、商品0/正式0/3/54.50％は据置。
+
+### 17.4 保存・終了状態と次の一手
+
+非公開全原本`cocolon-natural-reply-actual-20261031.zip`（Library libfile_0831a417bae0819196da4401cef8fd70、60member、SHA256121d0145b3ad46a09a709469a3e9dc3abde465386e8badeb2005b152c9d49fa7）へ元/修正messages・全18本文・実source・予算・runtime・SQL再読・失敗・終了確認を保存した。個別本文を公開GitHubへ載せない。
+
+18回の実行は閉鎖、追加生成なし。終了確認でprobe processなし/GPU2MiB・0％/保存ad8bとconfig不変。GPU Stop/restart/delete0、稼働保持。Render/本番Supabase/RN/main/配置/配布/料金/quota差分0。今回の製品sourceは変更前と同一、STRUCTURE_MAP_DELTA_NONE。§16のGPU0は前段source準備時の記録で、本§が後続実測である。
+
+次は追加学習へ戻らず、**学習前4Bへ主体/感情の所有・Emlis一人称を保つ最小案**を具体化する。通常HTTP/配布/本人端末は未実施として残す。指示文の強調だけではfit38の問題が消えなかったことを前提にし、閉鎖済18回の自動再開・無断の生成枠増加・商品採用を行わない。
