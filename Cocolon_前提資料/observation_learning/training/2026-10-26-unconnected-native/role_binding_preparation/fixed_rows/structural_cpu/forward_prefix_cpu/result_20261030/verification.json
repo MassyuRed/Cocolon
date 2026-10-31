@@ -1,0 +1,66 @@
+{
+  "schema": "cocolon.shop_prefix_external_verification.v1",
+  "status": "PASS_LIMITED_DIAGNOSTIC_ONLY",
+  "source_commit": "a79f2525149cf12ea25fc05241da7e2eb19c269f",
+  "archive": {
+    "bytes": 1884361,
+    "sha256": "2f3afb00579d5674f241740011f085e12c380e9e2cec3e1efd4b06ccc61a5d89",
+    "members": 18,
+    "payloads": 17,
+    "crc_bytes_sha_all_match": true,
+    "library_file_id": "libfile_01631bb06ca88191aab25f201113af5a"
+  },
+  "counts": {
+    "model_loads": 1,
+    "core_forwards_started": 476,
+    "core_forwards_completed": 476,
+    "cached": 474,
+    "uncached": 2,
+    "forced_replays": 1,
+    "forced_tokens": 474,
+    "generate_api_calls": 1,
+    "free_generation": 0,
+    "updates": 0,
+    "new_cmee": 0
+  },
+  "vectors": {
+    "files": 2,
+    "keys_per_file": [
+      "292",
+      "473"
+    ],
+    "dtype": "F32",
+    "shape": [
+      248320
+    ],
+    "finite": true,
+    "root_numpy_recomputation": true,
+    "independent_read_only_recomputation": true,
+    "all_reported_argmax_rank_logit_top5_margin_delta_match": true,
+    "mean_float32_reduction_tolerance": 1e-8,
+    "mean_float64_by_prefix": {
+      "292": 0.034228259202611355,
+      "473": 0.07754450651466578
+    }
+  },
+  "input_source_weights_unchanged": true,
+  "approved_plan_bytes_exact": true,
+  "outer_seconds": 36.12886605900712,
+  "processing_seconds": 34.98030951595865,
+  "process_cost_usd": 0.002720690740130118,
+  "cost_excludes": "preparation/recovery/holding/storage/network/tax etc",
+  "stale_stage_note": "Original run.stage still says CACHED_REPLAY_COMPLETE_UNCACHED_REFERENCES_PENDING. Original status is COMPLETE; both comparisons and all476 completed. Original left unmodified.",
+  "recovery_check_failures": [
+    {
+      "scope": "Codex host; before extraction; no new GPU work",
+      "reason": "Initial hand-transcription of screenshot archive bytes/SHA and member count was wrong. Assertions stopped. Corrected to actual recovered bytes/hash and manifest18members/17payload; all original member CRC/bytes/SHA then matched."
+    }
+  ],
+  "primary_outcome": "BLOCKER_NARROWED",
+  "technical_credit": 0,
+  "product_credit": 0,
+  "meaning_body_new_pair": "unchanged 0/2",
+  "old9": "NOT_RUN",
+  "candidate_ready": false,
+  "automatic_progression": false
+}

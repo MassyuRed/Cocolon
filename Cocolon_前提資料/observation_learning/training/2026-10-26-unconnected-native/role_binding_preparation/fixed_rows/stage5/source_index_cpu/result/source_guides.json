@@ -1,0 +1,74 @@
+[
+  {
+    "case_id": "FT-BOOK-AFTER-ANSWER",
+    "guide": {
+      "version": "cocolon.stage5.source_identity_guide.v1",
+      "source_rows": [
+        {
+          "source_id": "FT-BOOK-O",
+          "text_field_names": [
+            "memo",
+            "memo_action"
+          ]
+        },
+        {
+          "source_id": "sixrow-answer-book",
+          "text_field_names": [
+            "answer_text_private"
+          ]
+        }
+      ],
+      "prior_snapshot_ref": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15",
+      "derived_only_from": "original_request.material.sources[].source_id/text_fields keys and prior_adopted_interpretation.snapshot_ref",
+      "rules": [
+        "aliases and quotes are two separate sibling arrays, in root positions 3 and 4 (one-based).",
+        "Each aliases row is exactly [alias_name, actual_identity]; actual_identity is an exact source_id above or prior_snapshot_ref.",
+        "clause_roles keys and role_order entries name meanings, not source identities. Field names and the word aliases are not identities.",
+        "Each quotes row is exactly [id,s,f,t]; id is a model-chosen quote name; s is @ plus a declared source alias.",
+        "For that source_id, f must be one of its exact text_field_names. t must be the model-selected literal quote from that same source field.",
+        "A prior snapshot alias is for updates.prior, never a source of quotes. Prior quote IDs are not current aliases.",
+        "Names and counts of aliases/quotes and all selected quote text remain model outputs. This guide supplies no output rows.",
+        "Do not put quote rows inside aliases, serialize rows as strings, or add explanatory labels to either array."
+      ]
+    },
+    "aliases": 3,
+    "quotes": 17,
+    "teacher_source_fields_exact": true
+  },
+  {
+    "case_id": "FT-SHOP-AFTER-ANSWER",
+    "guide": {
+      "version": "cocolon.stage5.source_identity_guide.v1",
+      "source_rows": [
+        {
+          "source_id": "FT-SHOP-O",
+          "text_field_names": [
+            "memo",
+            "memo_action"
+          ]
+        },
+        {
+          "source_id": "sixrow-answer-shop",
+          "text_field_names": [
+            "answer_text_private"
+          ]
+        }
+      ],
+      "prior_snapshot_ref": "semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6",
+      "derived_only_from": "original_request.material.sources[].source_id/text_fields keys and prior_adopted_interpretation.snapshot_ref",
+      "rules": [
+        "aliases and quotes are two separate sibling arrays, in root positions 3 and 4 (one-based).",
+        "Each aliases row is exactly [alias_name, actual_identity]; actual_identity is an exact source_id above or prior_snapshot_ref.",
+        "clause_roles keys and role_order entries name meanings, not source identities. Field names and the word aliases are not identities.",
+        "Each quotes row is exactly [id,s,f,t]; id is a model-chosen quote name; s is @ plus a declared source alias.",
+        "For that source_id, f must be one of its exact text_field_names. t must be the model-selected literal quote from that same source field.",
+        "A prior snapshot alias is for updates.prior, never a source of quotes. Prior quote IDs are not current aliases.",
+        "Names and counts of aliases/quotes and all selected quote text remain model outputs. This guide supplies no output rows.",
+        "Do not put quote rows inside aliases, serialize rows as strings, or add explanatory labels to either array."
+      ]
+    },
+    "aliases": 3,
+    "quotes": 18,
+    "teacher_source_fields_exact": true
+  }
+]

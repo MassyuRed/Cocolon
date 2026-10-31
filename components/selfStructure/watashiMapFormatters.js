@@ -1,3 +1,4 @@
+import { classifyWatashiMapVersion } from './watashiMapV2Contract';
 import {
   canViewWatashiMapDetailReport,
   formatWatashiMapReportModeLabel,
@@ -433,6 +434,9 @@ function adaptLegacyDeepVisual(visual, options = {}) {
 }
 
 export function normalizeWatashiMapPayload(contentJson, options = {}) {
+  if (classifyWatashiMapVersion(contentJson) !== 'LEGACY') {
+    throw new Error('watashi_map_version_requires_dedicated_renderer');
+  }
   const cj = asObject(contentJson) || {};
   const existing = asObject(cj.watashiMap);
   const reportMode = normalizeReportMode(options.reportMode || existing?.report_mode || cj.report_mode || cj.reportMode);
@@ -537,6 +541,7 @@ export function normalizeWatashiMapPayload(contentJson, options = {}) {
 }
 
 export function hasWatashiMapSource(contentJson) {
+  if (classifyWatashiMapVersion(contentJson) !== 'LEGACY') return false;
   const cj = asObject(contentJson) || {};
   return !!(asObject(cj.watashiMap) || asObject(cj.selfStructureDeepVisual));
 }

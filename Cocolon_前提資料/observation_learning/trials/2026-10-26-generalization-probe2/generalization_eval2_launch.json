@@ -1,0 +1,15 @@
+{
+  "status": "STARTED_ONCE",
+  "pid": 653527,
+  "started_unix": 1792972377.8636584,
+  "source_commit": "4f62ca363062ce95b881aa2e6a09a82549d1dc3a",
+  "runner_sha256": "93f26cd5b9191168c21cee6b08f7cd7e171e4db653a62252815837a7805fff95",
+  "proposed_plan_sha256": "3216136fa1446d43ca76ed264aec6fea4d91ca47303ac5a640c1214b9f2864af",
+  "authorized_plan_sha256": "9237b81be21debd8c4674a84faabbdcd9eafe78f2cec5d8db4f3529fb0469494",
+  "max_model_calls": 2,
+  "max_seconds": 600,
+  "max_process_usd": 0.043334,
+  "training_updates": 0,
+  "retry": false,
+  "gpu_lifecycle_operations": 0
+}

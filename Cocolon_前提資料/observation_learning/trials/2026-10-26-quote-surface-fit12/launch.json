@@ -1,0 +1,17 @@
+{
+  "source_commit": "c86ef0cae18b2c2905a4e043c0d5e4010e7638af",
+  "started_unix": 1792963995.2611406,
+  "plan_sha256": "47e5217fabfbd2da431825f49839fd7acded157068615c484f4841094f5483fc",
+  "args": [
+    "/usr/local/bin/python",
+    "-u",
+    "/workspace/cocolon_4b_quote_surface_pack_20261026/run_quote_surface_fit.py",
+    "--legacy-pack",
+    "/workspace/cocolon_4b_service_binding_legacy_reference_20261025",
+    "--initial-adapter",
+    "/workspace/cocolon_4b_quote_address_fit18_20261025/adapter",
+    "--source-commit",
+    "c86ef0cae18b2c2905a4e043c0d5e4010e7638af"
+  ],
+  "pid": 643003
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "cocolon.emlis_4b_execution_plan.v1",
+  "status": "COMPLETED_ONE_TYPED_FIT_TRAINING_RUN_NOT_REPLAYABLE",
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "semantic_profile": "emlis_model_proposal.v1",
+  "epochs": 1,
+  "batch_size": 1,
+  "gradient_accumulation": 1,
+  "context_tokens": 8192,
+  "max_new_tokens": 2048,
+  "max_seconds": 1800,
+  "gpu_hourly_usd": 0.26,
+  "max_total_usd": 1.0,
+  "minimum_free_gib": 14.0,
+  "gpu_preference_gb": [
+    20
+  ],
+  "gpu_run_authorized": false,
+  "additional_diagnostic_authorized": false,
+  "pod_billing_scope_confirmed": true,
+  "storage_mount_verified": true,
+  "storage_mount_description": "Existing Pod y0eb0w0qn6nks0; container50GB, /workspace on ephemeral overlay (df: 52428800 KiB total/43091688 KiB available); no persistent volume. GPU NVIDIA RTX A4500 20470MiB, free20444MiB before run.",
+  "pod_external_receipt_destination": "Download complete checkpoint archive/checksum through existing Jupyter UI; verify every archive member and all adapter hashes outside Pod; retain repo results and adapter artifact before ending work.",
+  "automatic_pod_stop": false,
+  "evaluation_case_ids": [
+    "FIT-FT-CHAIR-INITIAL",
+    "FIT-FT-CHAIR-AFTER-CORRECTION"
+  ],
+  "authorization_basis": "Mash confirmed 4B, additional training on Runpod until release, current 4B学習＋CMEE接続を進めて, and do not STOP rental GPU until instructed. This plan is one fixed-base new LoRA diagnostic, not reuse of a closed approval or modification of the saved adapter.",
+  "limits": "One new directory/run, two existing targets, one epoch/two updates, before/after selected FIT2 only (4 calls). No proxy generation, no automatic retry, no further epochs, no new Pod/charge/restart/stop/delete. 1800s process display-rate allocation <=$0.13; setup/recovery/continued GPU holding/tax excluded, not a Pod billing hard cap.",
+  "cmee_api_commit": "a6838fc17cc657f9f80da28bb93b422d0f94a2dd",
+  "existing_adapter_preserved_sha256": "0bdac5e90c79f20129de9a765ac7ee7c59714f3102bc68a2f4aff363c7dd3b78",
+  "completed_run_id": "20261025-025406-cc300de8",
+  "executed_source_commit": "cd3fbf4505ccf0cfe9fbbade41bafd95472ef073",
+  "executed_plan_sha256": "69814337cbfec05e753008c87aee2bf2c241bf4e24176b91642a12eecc345cc4",
+  "completion_note": "One planned run completed and archive verified off Pod. Current false flag closes this run only; Mash continuing-training authorization persists. Define a new concrete scope/plan for later work. GPU remains running until Mash instructs STOP."
+}

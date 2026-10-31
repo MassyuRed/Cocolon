@@ -1,3 +1,27 @@
+> **2026-10-20 最新方針：学習済み言語能力＋Mashの観測技術の学習へ。応答と問いを一体に、CMEE資産を継承する。具体モデル・費用・配置・学習は未決／未着手。[会話と決定](weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261020-observation-learning)を参照。**
+
+> 2026-10-19最新差分：u353（10/18明示承認）。初回の元経験・本人説明・独立不明を、実回答／訂正・撤回／旧再開／保存再表示と一体で修復。新private3型・logical90。限定単位の技術検証まで完了、PRODUCT_NOT_CLEAR・正式Product Read0/3・candidate_ready=false・automatic_progression=falseは維持。詳細は[u353実装監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u353_InitialPersonalMeaning_20261018.md)。
+
+> 2026-10-18最新診断：u352。初回に既述の「期待されているように感じて、重かった」が返答から欠落することを、初回7件と実pending回答4件で比較。初回説明を元経験とともに保持する一体案を具体化し、Rule18 §11.3 LEVEL3の意味・選択差分は判断待ち・未実装。否定訂正は具体的対象の照応化と独立readerの不整合まで切り分け、修復候補を記録。今回production／test／fixture変更0、文書6fileのみ。詳細は[u352診断・判断案](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u352_InitialPersonalMeaning_Decision_20261018.md)。
+
+> 2026-10-18最新：u351。本人の不明を「今は／現在は」の有限感情へ訂正する既存回答で、当時へ誤帰属する時点を修復。肯定本文は「回答した時点で嬉しいという気持ちを受け止めています。」へ改善し、旧保存版を保持。最終対象77成功＋同じ8保存DTO再表示確認。否定本文・初回の受け取り方の保持・深い理解は未完。詳細は[u351監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u351_UnknownRevisionTime_20261018.md)。
+
+> 2026-10-18最新：u350。Mash個別承認済みの「安堵・寂しさ＋別経験」を、不明0/1の両方で初回・既受理一回答・訂正／両側撤回・旧互換・保存再表示まで一体実装。撤回後は残る事実／反応だけを受け取る。private logical87、商品全体の状態はPRODUCT_NOT_CLEAR。実本文・検証境界・全file地図は[u350監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u350_ReliefReceivedRetention_20261018.md)。
+
+> 2026-10-18最新診断：u349。別received経験の初回Reception欠落を確認し、初回・既受理一更新・訂正／撤回・旧互換・保存再表示の一体案を具体化。u348実装は維持、意味契約変更は未承認・未実装。詳細は[u349判断案](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u349_ReceivedExperienceRetention_Decision_20261018.md)。
+
+> 2026-10-18最新：u348。Mash承認済みの「安堵・寂しさ＋別経験＋現在の不明」を初回・既受理1更新・旧互換・保存再表示まで実装。初回3対象／2責務、更新後4対象／3責務。private V2二型追加、STRUCTURE_MAP_DELTA_PRESENT。実測・残件は末尾と[u348監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u348_MixedUnknownRetention_20261018.md)を参照。
+
+> 2026-10-18最新：u347。混在初回の原文反復を既承認内で修復。独立不明へのReceptionは初回〜1更新・保存を一体とする限定案まで具体化し、意味保持契約の判断待ち・未実装。末尾と[u347監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u347_InitialReliefLayout_and_UnknownDecision_20261018.md)を参照。
+
+> 2026-10-18最新：u336。承認済みの実Observation共同保持による返答短縮。末尾u336を参照。
+
+> 2026-10-18最新：u335。安堵＋独立不明のsource誤認識修復、旧checkpoint保持、短文化の未実装限定案。末尾u335を参照。
+
+> 2026-10-18最新：u334。承認済み二反応と独立不明の限定併存を実装。本文・旧checkpoint・保存再表示の結果と限界は末尾u334。
+
+> 2026-10-18最新：u333。「私は」付き安堵・寂しさの停止を修復。独立不明の保持は契約差分案まで確定。最新実績・限界は末尾u333。
+
 ---
 doc_id: cocolon_current_snapshot_diff
 title: "Cocolon 最新スナップショット差分"
@@ -1335,6 +1359,8 @@ coverage:
   grounded_human_reception_full_01_02_regeneration: false
 ---
 # 1. 今回の基準面
+
+> 最新EmlisAI残件：末尾u327（2026-10-18）の不明対象と別欄の独立行動の二責務修復を参照。u326までの記録は各時点の履歴として保持する。PRODUCT_NOT_CLEAR・初回一体単位未完了・未配置。
 
 この版は、次のzipを最新基準にします。
 
@@ -40418,3 +40444,1314 @@ CURRENT_AUTHORITY_STOP
 
 Body-full evidence and key remain private; public GitHub receives only body-free
 counts, axes, reason codes, hashes, and the terminal Receipt.
+
+# 2026-09-09 milestone — CMEE candidate67 current-feeling selection repair
+
+CMEEの最新ownerはdesigns/cmee/v1/02と06、およびmashos-apiのCurrentStateAndNextWorkHandoffのcandidate67末尾。Cycle001のcurrent navigation ownerは08のままで、本節はCMEEのmilestoneのみを記録する。
+
+既存OPで原field全域に証明された動詞背景節と本人の現在感情を、元の必要行動とともに選択する限定修正を検証した。同じ100件の1件で感情欠落を解消、他99件の全record／実plan、全観察・可否理由は不変。direct100、73 GENERATED／27 UNAVAILABLE、旧125必要責務全保持で各層126。華恋の全100件全文確認はNOT_CLEAR。必須344件341 PASS／継承3 FAIL、前回340全成否一致、新規4全成功。
+
+STRUCTURE_MAP_DELTA_NONE。国家／API／DB／RN／Piece／Analysis接続は不変更。全PR Draft/open/unmerged、disabled、automatic_progression=false。最終refのSystem Context再生成結果はPR37 current本文と同head Actionsに記録する。private本文・個別case・digest・locator公開0。過去のmilestone・失敗・receiptは当時の記録として保持する。
+
+# 2026-09-09 milestone — CMEE candidate68 継続中の言葉への参照修復
+
+本追記はCMEEのmilestone。CMEEの現行詳細と次作業はcanonical02・06およびAPI handoff末尾のcandidate68を参照する。Cycle001の現行ナビゲーションは08を維持する。
+
+### 2026-09-09 current — candidate68 継続中の言葉への参照修復
+
+既に選ばれている継続中の負担が、フォローで一般的な「置かれた言葉」の参照へ戻る箇所を、既存OPの参照方針で修正した。元の背景・継続・述語を含む原文全体を、既存HRの「という言葉」で受け取る。新しい意味選択・感情の本人認定・source status変更・HR文法追加はない。人物への帰属が原文にあれば全文のまま保持する。既存actor判定の限界は未解決。
+
+- 同じcanonical100を固定sourceで実行。direct100、73 GENERATED／27 UNAVAILABLE、必要Move／expression／binding各126を維持。
+- 1件の参照を修復。他99件の全record／実planは同一。全nuclei・観察・可否理由は不変。変更対象のselected inputはplan由来のinput_ref／grounding_refだけ再導出し、意味内容と責務は不変。
+- 華恋が全100件の全入力field・観察・受取・可否理由を全文確認。商品NOT_CLEAR。原文再掲・定型締め、他の中心感情や複数主題／共有関係の欠落は残件。
+- 必須348件345 PASS／継承3 FAIL、ERROR／skip0。前回344件の全成否同一、新規4件全成功。36ケース・post-hash96検査・集合後続診断も同一。歴史fixtureを変更せず、V2別17検査／42件213候補は今回未実行。
+- 固定Python3.12.13、46依存／wheel、2268実ファイルを照合。runtime変更は既存OPのみ。既存generic testとrunner current13定数を同期し、bridge126とrunner非current ASTを維持。
+- 検証source: local `5ab897fa980b43d3657f3a72924ddf5e7a364f48` / remote `ce109009dbdf9cb697e70c7f2e0b1a65d79c76a2`、whole tree `2d3080ea22d6573e65afa4e633f04f89b261c704` 同一。後続は結果資料だけ。
+
+開始時System Contextはdoctor→prepareでlocal toolchain不一致を記録し、同じ開始refのCI生成cacheを61入力・37出力・19partsまで再照合して原典と併用した。最終商品refsへPR37の既存profileと対応testを同期し、Git管理外cacheを再生成する。最終refの結果はPR37 current本文と同head Actionsに記録する。開始時証拠を変更後へ流用せず、Operator actual proofのREMOTE_PROOF_PENDINGを保持する。
+
+全体設計と全tracked file地図、最新weekly20260905、影響する本文と旧経路を確認。STRUCTURE_MAP_DELTA_NONE。国家システム・公開I5・API／DB／RN・Piece／Analysisの経路変更なし。Draft/open/unmerged、disabled、automatic_progression=false。human PASS／ready／採用／merge／本番／問い／Layer3は未成立。private本文・個別case・digest・locatorの公開0。
+
+既存の2026-09-05 selected subjective reception承認を継承する同じ未完unit。後続の品質分類によるplan再構築でも、元の短状態の語彙維持指定に基づく参照方針を保持する。原文の背景・否定・継続・他者への帰属を維持し、従来の否定形・連体形の具体参照も保持する。同じimmutable selected inputによるforward／回復／独立replay／厳格なGate・inverseを維持し、seal後の意味補充や新しい自己証明を追加しない。最大3 Moveと既存126責務を保持する。
+
+最終System Context再生成は本記録時点では未完。開始時の鮮度確認を変更後の証拠へ流用しない。最終商品refsに対応するPR37 current本文と同head Actionsを最終結果の参照先とする。candidate_ready=falseを維持し、過去candidate67までの実行結果と当時の未完記録は履歴として残す。
+
+## 2026-09-11 milestone — Q1確認後のQ2開発候補
+
+Q1 pure一往復53件を再確認し、Q2の専用永続化/認証API/RN入力・履歴/明示再試行を既存Draft PR3/30に実装。実SQL一往復と障害時の意味保持、hook/panel動作を検証。全体/Home/国家/三core地図とv1正本02/05/06、API registry/DB migration資料を同期。稼働DB適用と端末の開発アプリ確認が残り、Q2完了・商品PASS・公開としない。次作業の正本はAPI既存handoff末尾Q2節。
+
+## 2026-10-06 checkpoint — Emlis実機無応答
+
+現行詳細はdesigns/cmee/v1/06末尾「Emlis実機無応答の原因切分けと履歴の未作成表示」、接続地図はcurrent_structure/01の同日節。原入力保存／thread未作成／replyの3秒timeoutを確認。最新コードの隔離SQL再現で3秒中断・10秒生成保存を切り分け、履歴NOT_CREATEDを黙って閉じるRNを修正した。関連30検査PASS、Metro1件・native・実機復旧は未確認。稼働API1a42b9eb、調査時開発API468663c8、現mode未取得。次は実設定の読取りと指定版／生成設定を揃えた本人実機確認。DB/env/deploy変更0、private本文公開0、Draft/open/unmerged、商品NOT_CLEARを維持。
+
+## 2026-10-14 checkpoint — u257 評価訂正の回答時点
+
+本作業候補の現在地はAPI PR3 `11720b60765471b7fc15ec2ba29280a71e8fc204`、資料はPR30の本節を含むrevision。稼働版/mainのauthorityとは区別する。API変更9pathの内容をfresh fetchし、検証した成果物との全byte一致を確認。詳細ownerはdesigns/cmee/v1/06末尾u257とAPI既存handoff u257、構造ownerは全体01/01A・current01/04、最新weeklyは20261010 §5.6.7。明示「今は」の評価を回答時点へ結び、旧u256 PARTIAL再開と保存後RN再表示を確認した。新API CIは反映直後に実行中。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存5production ownerの時点・旧意味再開責務だけを更新し、新production file・公開API/DB/RN/依存は不変。商品NOT_CLEAR・初回単位未完了。次の主課題は§9.2/9.4の経験としての受け取り内容形成。既存共有17失敗・2 received＋2評価の初回capability gap・same100・本人実機・正式Product Readは残る。Draft/open/unmerged・未配置・automatic_progression=false。
+
+## 2026-10-14 checkpoint — u259 受け取り内容の意味確認
+
+最新の作業詳細はAPI既存handoff u259、06末尾u259、weekly20261010 §5.6.9。製品sourceは先行u258 API211eb09bで、今回の製品コード変更はない。同時に入ったAPI211eb09b／資料4f8fd5eを保持し、その上へ本記録を統合した。7合成入力の実生成で、評価を保持する意味型とEmlisの受け取り内容を導く処理の不足を分離した。開始11720b60と統合後211eb09bで診断record・6全文・1停止の全byte一致を確認。満足/納得の構造的な区別について華恋の未採用仮説をMashへ確認する。取得した資料/実結果の調査は済み、承認を取り直す段階ではない。情報が明示された入力にも実装不足があるため、入力情報不足だけへ原因を戻さない。
+
+今回本文改善0・BLOCKER_NARROWED・PRODUCT_NOT_CLEAR、初回単位未完了。production/test/fixture/API/DB/RN/依存変更0、STRUCTURE_MAP_DELTA_NONE。前回CI成功と今回の診断を分ける。回答後は同じ承認内で既存内容導出→作者→独立readerを修正する。Draft/open/unmerged・未配置・automatic_progression=false。
+
+
+## 2026-10-14 checkpoint — u260 確認済みの満足／納得を反映
+
+API作業候補は [44269290](https://github.com/MassyuRed/mashos-api/commit/44269290ff919c21364fd145429de09dea2e9fd6)、資料は本節を含むPR30 revision。稼働版/mainとは区別する。Mashが満足／納得の区別を確認し、思想資料§12.10へ保存。同じ限定承認内で既存内容型・唯一の作者・独立節readerへNORMALの充足／本人内の理解を反映した。程度付き納得の原述語と否定の対象限定を保持する。whole inverseのplan-only replayは不変。
+
+評価166／application54／identity1検査PASS、合成7保存本文のNoAuthor GET/startとRN履歴・再openを確認（native実機ではない）。診断7例ではNORMAL4本文が変わり、LIMITED2本文と停止1件は不変。詳細は06／API handoff u260、weekly20261010 §5.6.10、構造は全体01/01A・current01/04。STRUCTURE_MAP_DELTA_PRESENT、新production file・公開API/DB/RN/依存変更0。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。** 定義展開／関係反復を越える受け取り内容の形成は未達。目的・未完了等を活かせない例と焦点移動、2 received＋2評価の初回gap、既存共有17失敗・same100・本人実機・正式Product Readは残る。0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmerged。新CIの結果は同headのPR current本文へ記録し、過去成功を流用しない。
+
+## u261 — 評価とつながる未成立事実の限定変更案（2026-10-14 JST）
+
+製品sourceはAPI44269290のu260のまま。今回の製品コード/本文改善0、BLOCKER_NARROWED / PRODUCT_NOT_CLEAR。三命題のsource認識不足と、現component許可・relation qualifierの不足を分離した。元sourceに結び付く仮Planでも既存条件では候補0/LIMITEDだった。実測はAPI既存handoff u261、限定提案は8/28設計末尾u261、進行は06 u261、最新weekly20261010 §5.6.11。
+
+明示対比で評価につながる未成立事実exact1を追加する案はPROPOSED_NOT_APPROVED。既存u253承認は継続し、今回の範囲追加だけをRule18 §11.3に従って判断対象にする。満足/納得の定義を再確認しない。前回API CI run38575084729は同head44269290でsuccess。STRUCTURE_MAP_DELTA_NONE・新production file/API/DB/RN/依存変更0、初回単位未完了・0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+## u262 — 未成立factを含む限定変更の承認と実装（2026-10-15 JST）
+
+2026-10-15 06:17 JST、Mashがu261提案に「うん、進めて」と承認。`EMLIS_APPRAISAL_CONNECTED_UNFINISHED_CONTEXT_20261014 = APPROVED_FOR_BOUNDED_IMPLEMENTATION`。同一文の未成立fact・対象・肯定無程度満足を三点で保持し、ABOUT_TARGET＋CONTRASTから通常appraisal exact3/protected0へ渡す。exact2評価型・公開契約は不変。未成立の現在と満足の過去／現在を区別し、入力外の同時性・成功・進歩を足さない。
+
+構造差分は全体01/01A・current01/04、承認は8/28設計末尾u262、進行と実測は06／API handoff u262、最新weekly20261010 §5.6.12。STRUCTURE_MAP_DELTA_PRESENT。最終評価187 PASS・application54 PASS・identity1 PASS、合成4保存本文のNoAuthor restart GET/startとRN履歴/再open、旧checkpoint2件の旧意味保持を確認した。途中application20 FAILはu261 baselineとの比較で今回回帰と確定し、新composition entryを明示評価へ限定して修正した。実装反映版はAPI `da6ee56beba26bbf0d89c734230f363ba794a9b8`（PR3）。対応する設計・地図・weekly差分は本commit（PR30）に収録する。両PRはDraft、未配置。今回CI成功は未確認で、local検査と区別する。System ContextのPUBLICATION_RECOVERY_AMBIGUOUSを原典直接確認で補い、刷新成功とは扱わない。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了・0/3・candidate_ready=false・automatic_progression=false・未配置**。第三命題が充足の範囲を限定する一方、説明的な語義展開は残る。新schema/registry/engine/checker・公開API/DB/RN・製品依存・他中核の変更はなく、既存品質残件と10/17・10/31・12/18、Piece/Analysis主枠を維持する。
+
+
+## u264 — 本人の明示理由を満足の対象へ結ぶ限定実装（2026-10-15 JST）
+
+Mashがu263のRule18 §11.3確認へ「進めていいよ」と承認した。`EMLIS_APPRAISAL_EXPLICIT_REASON_20261015 = APPROVED_FOR_BOUNDED_IMPLEMENTATION`。同一文に本人が肯定factとして明示した理由exact1、実行済み対象、肯定・無程度の満足（過去又は現在）を結ぶ限定追加を実装した。u253/u262承認も継続する。
+
+API PR3のu264実装commit `ba6a7ad51397a3bfe5714e4c61db240ef2b1876d`、資料PR30の本節を含むrevisionが今回候補。稼働版/mainとは区別する。反映後に両headと差分をfresh確認し、同headのCI状況はPR本文へ記録する。
+
+STRUCTURE_MAP_DELTA_PRESENT。新production file・engine・checker・registry・serviceは追加しない。公開API/DTO/DB/SQL/RN・製品依存・Piece/Analysisは変更0。内部の理由relation契約には上記versioned分岐を追加したため「内部schema変更なし」とは記録しない。検査配置は既存 `ai/tests/test_cmee_emlis_result_appraisal.py` と現行 `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json`。歴史IM03 proofは不変。
+
+最終の既存評価file **236 PASS（既存187＋新49）** とQ2/Q3 application **54 PASS**、計 **290 PASS・109.87秒・既存依存warning2**。現行shared-owner identity **1 PASS・22.98秒**。language `5226a02541b35153ffb5be8c70a8611545d483381f27a19898938be3310541b2`、runtime `9360829fb81c0b5615152b9b1b6f9274209545eba4ee0e8a12de396d65b352b5`。理由削除／差替え・独立行動非混入・対象外21例・三役割／時点／binding／focalの改変拒否・旧完全checkpoint6件を確認。実sourceのSOURCE_STATED_CAUSE候補と通常direct endpoint supportから既存final relation validatorもPASS。合成4本文を実service＋隔離PGliteへ保存し、event payload一致・NoAuthor restart GET/startのDTO完全一致、実RN hook/modalで履歴展開とclose/reopenの本文/event一致を各4件確認した。git diff --check成功。runtimeは既存Python3.12.14/PGlite0.5.8/React18.3.1を使用。外部AI呼出・新有料service・製品依存追加0。これらは本人実機／正式Product Readではない。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。** 正式商品受入れ0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。今回の理由欠落改善を§9.2/9.4全体の完成へ換算しない。
+
+詳細は8/28設計・06／API handoff u264、構造は全体01/01A・current01/04、最新weekly20261010 §5.6.14。
+
+Observationに「満足した」が二度現れる説明的反復、現在形の「入力した時点での」という重い表現は残る。有限語形以外の理由や今回除外した意味契約は未実装。2 received＋2評価の初回gap、既存共有17失敗、same100、本人実機、正式Product Readも残る。新しい意味契約へ黙って広げず、次は今回の限定改善を10/17確認点へ反映し、既存の初回一体単位・受け取り内容の残件へ戻る。10/31・12/18とPiece/Analysis主枠は維持する。
+
+
+### u265 — 同一欄の本人received文に続く評価の読み落としを修正（2026-10-15 JST）
+
+u253の既存評価の承認範囲で、同一欄の先頭にある本人のreceived event＋reaction一文に続く、理由／未成立contextを伴わない明示評価の欠落を修正した。u264の理由契約を広げる変更ではない。全体01・全file地図01A/B/C・current01/04・8/28設計§9.2/9.4・最新weekly20261010・Rule18 §11.3・8/16商品軽視incidentを確認した。前回API ba6a7adのCI38646841959は同headでcompleted/successだった。
+
+最終評価suite **275 PASS（既存236＋新39）**、Q2/Q3 application **54 PASS**、計 **329 PASS・115.04秒・既存依存deprecation warning2**。現行shared-owner identity **1 PASS・22.82秒**、総計330 PASS。language `4dd2c8bd0bbe34b65f30f672934b6a334a6fa6adedc0644216ae55f8d9d4d09b`／runtime `d4d3f48b5f61802f49d18151023d841f59344c3a1f3d47c78e0e12c228764f7a`。新39件は同一欄の実本文8・境界拒否12・SELF giver拒否5・実質問からの回答/訂正/撤回5・本文の対象/肯否/時点/欠落改変拒否1・旧完全checkpoint6・既発行質問2。合成4本文（memo初回/action初回/現在評価へ訂正/全評価文撤回）を実service＋隔離PGliteへ保存し、event payload一致・NoAuthor restart GET/startを確認した。回答2件は同じidempotency keyの再試行で保存本文とevent数も一致。実RN hook/modalの履歴展開・close/reopenでcurrent本文/event一致を4件確認。native実機／正式Product Readではない。git diff --check成功。既存Python3.12.14/PGlite0.5.8/React18.3.1を使用し、外部AI呼出・新有料service・製品依存追加0。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production 4fileの責務変更のみ。新file/engine/author/checker/registry/service、内部意味schema・公開API/DTO/DB/SQL/RN、製品依存、Piece/Analysisの変更0。検査は既存test_cmee_emlis_result_appraisal.pyと現行shared-owner identity fixtureへ追加／更新し、歴史fixture/IM03 proofは変更しない。
+
+API反映commitは `30366a7247ce424017eefdef8235d7ee0018ce06`（PR3）。資料PR30の本差分は設計図・01/01A・current01/04・weekly§5.6.15を同期する。PR3/30はDraft、未配置。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 今回は評価脱落の回復であり、LIMITED本文の関係反復・固定的な受け取りを§9.2/9.4の完成に換算しない。独立行動もReceptionに残るため「独立行動非混入」とはしない。理由＋receivedを別欄に置いた初回は両配置ともMEANING_REALIZATION_CAUSAL_TRACE_GAPで本文停止、2 received＋2評価もLIMITED_RECEPTION_CAPABILITY_GAP_STOPを今回実測した。次の第一候補は前者をsource→選択内容→作者/独立readerの単位で直すこと。新しい意味契約が必要と判明すれば、その具体差分にだけRule18 §11.3を適用する。旧received文法全般のgiver誤帰属、複数先行文への評価継続も今回の修正範囲には含めない。既存共有17失敗・same100・本人実機・正式Product Readは未解消／未実施。正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmerged、10/17確認点・10/31/12/18とPiece/Analysis主枠を維持する。
+
+
+### u266 — 理由付き満足とreceived経験のLIMITED本文停止を修正（2026-10-15 JST）
+
+API反映commitは `26d8ccc7a277664f1cec8e67a749d32fd90bb74a`（PR3）。資料PR30は本節を含むrevisionが対応候補。今回のsourceは既存2file/3関数の選択内容検証・作者・独立readerに限定し、理由/対象/満足の時点とreceived経験を両欄配置で本文へ保持する。意味/checkpoint生成・契約・公開API/DB/RNは不変。STRUCTURE_MAP_DELTA_PRESENT。
+
+評価294＋application54＋現行identity1、計349 PASS。保存4本文のNoAuthor GET/startとRN履歴/再open、回答2件のidempotency再試行を確認。旧30366a7との12例で完全checkpoint/意味一致。設計・全体01/01A・current01/04・06・weekly20261010 §5.6.16・API handoff u266へ実本文/検証/残件を同期した。反映後の対象blobとchanged-path setをfresh確認し、今回headのCIはPR本文へ記録する。
+
+BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/未配置。理由付き全文撤回の未解決と有限対象撤回後の不自然な本文は旧版と一致する既存残件。2 received＋2評価の初回gap・共有17失敗・same100・本人実機・正式Product Readも残る。10/17/10/31/12/18とPiece/Analysis主枠を維持する。
+
+
+### u267 — 理由付き満足の原文全文撤回を既存訂正契約へ接続（2026-10-15 JST）
+
+API反映commitは `66613bc5a6020507c796469aafa403d39827e02e`（PR3）。資料PR30は本節を含むrevisionが対応候補。既存emlis_answer_update.pyの3関数で、source所有が証明された理由/対象/評価の三ownerを唯一の原文全文撤回へ接続した。新しい回答は新checkpoint、旧checkpoint明示時は旧未解決/PARTIAL全体を厳密再導出する。source認識・schema・公開API/DB/RN・本文作者は不変。STRUCTURE_MAP_DELTA_PRESENT。
+
+評価318＋application54＋現行identity1、計373 PASS。旧完全checkpoint4件の意味/state/reason、実保存4本文のNoAuthor GET/start・idempotency再試行・RN履歴/再openを確認。全体01/01A・current01/04・8/28設計・06・weekly20261010 §5.6.17・API handoff u267へ実本文/途中失敗/残件を同期。反映後の対象blobとchanged-path setをfresh確認し、今回headのCIはPR本文へ記録する。
+
+BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/未配置。同一理由文の重複は先頭のみ3owner、次はgenericとなる既存認識残件を確認し、一括撤回へ拡張しない。部分引用と有限対象撤回後のReception、2 received＋2評価の初回gap・共有17失敗・same100・本人実機・正式Product Readも残る。次は重複理由文の所有/訂正の曖昧さを確認。10/17/10/31/12/18とPiece/Analysis主枠を維持する。
+
+
+### u271 — 重複理由文の各出現と別のreceived経験を初回Receptionへ保持（2026-10-15 JST）
+
+API反映commitは `a5179102209ec3a957b2cf58dc6d15297adbedae`（Draft PR3）。資料PR30は本節を含むrevision。開始後に追加されたu269とu270を取り込み、その初回復帰の上で受け取り選択の欠落を改善。
+
+u269では重複二文の初回本文は復帰したが、Receptionは選択済みの一組に限られていた。今回、同じ欄全体が隣接する完全一致の理由付き満足二文である場合にだけsourceへ同一性の証明属性を付け、二つの閉じた理由・対象・評価の三owner群を別々のrequired dutyとして保持する。独立したreceived経験が一組ある合計三Moveでは、等価な二つの理由付き受け取りを既存の二Move一文へ結び付け、received経験も別文に残す。六核・四関係・二つのMove／expression・出現別の根拠は統合しない。重複から二度の経験や強さを推測しない。
+
+既存のLIMITED exact3検証とsource照合を各Moveで行い、独立readerが実本文から双方の理由・対象・評価・時点を読めた場合だけ一文を共有する。任意の文字列重複除去ではない。既存pair readerの分岐とObservationの二文全体照合を追加し、反復検査・coverage・gateは緩和しない。u269のObservation作者と選択済みsupport修復はそのまま保持する。
+
+検証は評価438件＋Q2/Q3 application54件＋現行shared-owner identity1件、異なる検査合計 **493 PASS**。上流u270との統合後に本体suite492 PASSを再実行し、identity1件も別途成功。skip／xfailなし、既存依存deprecation warningのみ。新しい検査35件は旧checkpoint12・初回両欄／理由／時点12・範囲外7・作者非依存の共有reader／改変拒否2・保存失敗再試行2。
+
+実service＋隔離PGliteのmigration/RPCで両欄×回答種別4件の初回／回答後を保存し、NoAuthor restart GET/start、同一回答再送の本文／event無増加、503後の意味checkpoint再利用を確認。実保存DTO8件を既存RN hook/modalへ渡し、本文完全一致・履歴展開・close/reopenを確認した。native部品はstub、端末実機・正式Product Readではない。RN全suite未再実行、u268の既知26 PASS/5 FAILを解消したとはしない。
+
+STRUCTURE_MAP_DELTA_PRESENT。全体01／01A・current01/04・8/28設計・06・weekly§5.6.21・API handoffへ同期。01B/Cの隣接責務は不変。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+次の第一候補は、独立訂正併記後に必要Observation contributionがstage1_required_observation_unrealizableで止まる箇所を、選択内容から実本文まで通すこと。現在もPARTIALの意味は保存するがMEANING_UPDATED_BODY_UNAVAILABLE、単独曖昧撤回はUNRESOLVED／ANSWER_UNREFLECTEDで新本文なし。古い初回本文を現在本文へ戻さない。関係の説明反復と固定的な受け取り、Q1の2 received＋2評価におけるObservation上限、有限対象撤回後の不自然さ、旧receivedのgiver帰属、共有17失敗・same100・本人実機・正式Product Readも残る。10/17確認点・10/31残件線・12/18目標とPiece/Analysis主枠を維持する。
+
+
+### u272 — 訂正後のQ3本文停止を既存の意味・上限を保って修復（2026-10-15 JST）
+
+API基準a517910／資料基準035e061のu271上で修復。今回API反映commitは `5c7f24f7b1d5a7674ea411f2481919979fdb498c`（Draft PR3）、資料PR30は本節を含むrevision。反映後のexact path／blob、最終head・同head CIの確認結果は両PRに記録する。
+
+同一欄の理由付き満足二文＋別欄のreceived経験について、曖昧な全文撤回に独立した反応訂正を併記したQ3_FREE回答後は、両欄配置でMEANING_UPDATED_BODY_UNAVAILABLEからPARTIALLY_REFINEDへ回復。曖昧撤回は未反映と明示し、受理済み訂正と両出現の受け取りを保持する。2 received＋2 plain評価の訂正も両配置でREFINEDの新本文を返す。単独の曖昧撤回はUNRESOLVED／ANSWER_UNREFLECTEDを維持する。
+
+u269〜271に記録した対象Q3の上限診断を訂正する。今回の再現では必要Observation contributionは6、既存capは8で、投影・生成・独立逆読解を通過していた。停止原因は、独立したsource groupを同じgeneric grammar role由来のsemantic arcと扱う最終検査での誤認、訂正後の重複理由二組に同じ受容predicate familyを割り当てる不整合、欄を入れ替えた訂正評価でinventoryとselectorのretained group順が異なる不整合の三点。過去の停止事実は保持するが、そのQ3原因記述を現在の判断に再利用しない。Q1の既存上限残件は別である。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production2fileの3関数でarc identity・役割／順序を整合し、source認識・意味schema・上限・gateは維持。評価460＋application54＋identity1＝515 PASS、実保存DTO8件のRN表示・履歴・再open成功（native stub）。全体01/01A・current01/04・8/28設計・06・weekly§5.6.22・API handoffへ同期。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+次は回復した実本文を使い、§9.2/9.4の内容形成として関係説明の反復と評価の言い換えだけに寄ったReceptionを改善する。今回解消したQ3停止を再び第一候補へ戻さず、上限引上げを自動的な次工程にしない。10/17確認点・10/31残件線・12/18公開目標とPiece/Analysis主枠を維持する。
+
+
+### u273 — 理由・対象・評価を一文で保持し、同じ評価の説明反復を減らす（2026-10-15 JST）
+
+既存作者で二度述べていた一つの評価を、理由・対象・評価の三役割と各関係を保った一文へ変更。完全一致二出現は出現別根拠を保持し、旧保存planとReceptionは維持。独立readerは全体構文をsourceと照合する。
+
+検証は全体521 PASS＋限定再実行6 PASS（異なる527条件）。保存DTO12件のRN本文／履歴／再openを確認。単独理由文＋別経験の反応訂正では、u272からの本文停止を6条件で再確認し、未解消として保存した。実機・正式Product Readとは区別する。
+
+詳細はAPI handoff／06 u273、全file地図01A、current01/04、8/28設計追記、weekly§5.6.23。反映commit・remote内容照合は既存PR3／30本文に記す。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+
+### u274 — 単独理由付き評価と別経験の訂正後本文を保存・再表示へ戻す（2026-10-15 JST）
+
+u273で残した「単独理由付きの満足＋別経験の反応訂正」の本文停止を修正した。理由・対象・評価の一文と、訂正されたreceivedの一文に、元のsourceの連結成分に対応する別々のarc identityを与える。必要5核／3関係を保持したまま、対象Q3_FREE系列の回答後はMEANING_UPDATED_BODY_UNAVAILABLEからREFINEDへ進み、訂正後本文を保存・再表示できる。
+
+最終単一run535 PASS、保存DTO12件のRN本文／履歴／再openを確認。旧checkpointの完全再導出と不当分割拒否を維持。実機・正式Product Readとは区別する。
+
+詳細はAPI handoff／06 u274、全file地図01A、current01/04、8/28設計追記、weekly§5.6.24。反映commit・remote内容照合・同head CIは既存PR3／30本文に記す。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+
+## u275 — 理由付き満足のLIMITED受け取りへ、選択済みの注意対象を明示（2026-10-15 JST）
+
+理由付き満足のLIMITED Receptionが「その理由で満足したのですね」という評価の再表現で終わっていたため、既に選択済みのATTENTION / ATTEND_TOを本文に接続した。本人の明示理由・実行済み対象・肯定無程度の満足と時点を保ち、理由に注意を向ける主観述語で返す。NORMALの読み、source認識、意味schema、checkpoint、各上限は変更しない。
+
+最終sourceで評価512＋Q2/Q3 application54＋現行identity1＝**567 PASS**（単一run、195.39秒、skip/xfailなし）。対象3語尾×両欄×過去現在、理由の差替え／削除、作者を禁止した独立reader、15種の意味・主観改変拒否、重複と旧checkpointの回帰を確認。実service＋隔離PGliteの既存migration/RPCで初回6＋訂正後6を保存し、NoAuthor GET/start・回答再送event無増加を検証。実保存DTO12件を既存RN hook/modalへ渡し、本文・履歴・close/reopen完全一致。native部品はstubで、本人実機・正式Product Readではない。既存Pydantic／Starletteの非推奨警告2件を保持する。
+
+**TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。これは選択済み注意の可視化であり、§9.2/9.4全体の経験としての受け取り完成ではない。説明的な硬さ・反復、Q1の4経験上限、近似文／別欄二組、有限対象撤回後の不自然さ、旧receivedのgiver帰属、共有17失敗・same100・本人実機・正式Product Readは残る。
+
+実本文・差分はAPI handoff／06 u275。再開はweekly§5.6.25と現行原典へ戻る。
+
+実装commit：[u275 f23a971](https://github.com/MassyuRed/mashos-api/commit/f23a971a5d237ade4609b521fe42dec020fc975f)。
+
+
+## u276 — 満足の対象だけを撤回した後の理由・評価を有限文へ戻す（2026-10-15 JST）
+
+満足の対象だけを本人が撤回した後、残存する理由→満足を「によって気持ちが生じることをどちらの側も残したまま、感じています」と返す不自然なReceptionを修正した。撤回した対象を復活させず、本人の理由・肯定無程度の満足・評価時点・選択済みATTENTIONを文章化する。初回三役割、source認識、意味選択、checkpoint、NORMAL資格、各上限は変更しない。
+
+最終単一runは評価530＋Q2/Q3 application54＋現行identity1＝**585 PASS**（204.24秒、skip/xfailなし、既存deprecation warning2件）。修正前後12組で初回本文、完全checkpoint、plan、選択内容、Observation、status/reason_codesが一致し、撤回後Receptionだけが変化。実service＋隔離PGliteで初回12＋撤回後12を保存し、NoAuthor GET/start・同一回答再送event無増加を確認。実保存DTO24件を既存RN hook/modalへ渡し、本文・履歴・close/reopen一致。rootが24本文を全文確認した。native部品はstubで、実機・正式Product Readではない。
+
+**TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。今回の有限文修正を経験理解・§9.2/9.4全体の完成へ換算しない。固定的で説明的な表現、撤回後に別received経験がReceptionへ選ばれない状態、Q1の4経験上限、近似文／別欄二組、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。
+
+全体01・01A・current01/04・8/28設計・06・weekly§5.6.26・API既存handoffを同期。実装commit：[u276 89207ef](https://github.com/MassyuRed/mashos-api/commit/89207ef3c2d535e2d79ac423e1d083d9540e4482)。
+
+
+## u277 — 満足対象の撤回後も別received経験をReceptionへ残す（2026-10-15 JST）
+
+満足の対象だけを撤回した後、理由→満足と別received経験が意味・Observationに残るのに、別経験だけがReceptionから落ちる不具合を修正した。理由関係が残るため既存の孤立撤回判定へ入らず、lived_changeの優先でcurrent_burdenが候補除外されていた。source所有が確認できる理由／満足と一つのoriginal received組を、既存2 Moveへ分けて保持する。撤回対象の復活、二経験間の因果や本人が述べていない価値判断は加えない。
+
+最終単一run 599 PASS（評価544・Q2/Q3 application54・現行identity1、193.09秒）。三理由×評価時点2×欄2の12組で、初回全文・初回plan/選択・完全checkpoint・撤回後Observation・status/reason_codesは前後一致。撤回後だけplan/選択が二経験へ変わり、実Receptionに別received句が残る。実service＋隔離PGliteへ初回12＋撤回後12を保存し、NoAuthor GET/start・同一回答再送のevent無増加を確認。実保存DTO24件を既存RN hook/modalへ渡し、本文・履歴・close/reopen一致。root華恋が24本文を全文確認した。native部品はstubで、実機・正式Product Readではない。
+
+**TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。今回の欠落回復を§9.2/9.4の経験理解・受け取り全体の完成へ換算しない。固定的な説明／言い換え、対象撤回後の複数receivedや追加actionを含む範囲、Q1の4経験上限、近似文／別欄二組、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。
+
+全体01・01A・current01/04・8/28設計・06・weekly§5.6.27・API既存handoffを同期。実装commit：[b7106f8](https://github.com/MassyuRed/mashos-api/commit/b7106f8dbaf5a41c84b5a94d37dc80bb81289e2d)。
+
+
+## u278 — 評価の訂正・撤回後も残存理由の状態と元の時点を保つ（2026-10-15 JST）
+
+満足の評価を否定へ訂正、または評価だけを撤回した後、独立して残る理由の状態を「今は…感覚が前に出ています」と誤って実現する不具合を修正した。意味側は本人が述べた肯定のfact/stateと過去／現在を既に保持しており、本文作者が孤立理由を汎用の現在感覚へ流していた。元が過去なら「当時の状態として」、現在なら「入力した時点の状態として」と実現し、理由を訂正後の否定評価へ結び直さない。
+
+最終回帰631 passed（result appraisal576＋Q2/Q3 application54＋active shared owner identity1、210.46秒）。三理由×評価時点2×欄2×訂正／撤回の24組をu277と比較し、初回全体・更新後完全checkpoint・plan・選択・Reception・status/reason_codesは一致。更新後Observationの孤立理由行だけが変わった。作者呼出しを禁止した独立readerで、本人明示の理由時点2×欄2×操作2の8条件ごとに、現在感覚化・feeling化・event化・回答時点化・過去現在入替・別経験借用・他者化・否定評価への新因果・否定fact化の9改変を拒否した。
+
+実service＋隔離PGliteで、理由時点2×評価時点2×欄2×訂正／撤回の16組を初回／更新後まで実行し、保存DTO32件の本文と生成実本文を一致確認した。NoAuthor GET/start、同一回答再送のcurrent_observation／timeline一致とevent無増加を確認。実保存DTO32件を現行RN hook/modalへ渡し、本文・全Observation履歴・close/reopen一致を確認した。root華恋が32保存本文を全文確認した。native部品はstubで、本人実機・正式Product Readではない。
+
+**TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。固定的な注意／説明文の内容形成、§9.2/9.4、対象撤回後の複数receivedや追加action、Q1の4経験上限、近似文／別欄二組、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。631件PASSを既存共有17失敗の解消とはしない。
+
+全体01・01A・current01/04・8/28設計・06・weekly§5.6.28・API既存handoffを同期。実装commit：[d983445daf1901d129ce347739ff5821a15cfb30](https://github.com/MassyuRed/mashos-api/commit/d983445daf1901d129ce347739ff5821a15cfb30)。
+
+
+## u279 — 否定訂正後も別received経験を受け取りに残す（2026-10-15 JST）
+
+理由付き満足を否定へ訂正した後、別のreceived経験がObservationには残るのにReceptionから落ちる欠陥を修復した。訂正評価と別経験が同じcurrent_burden候補になり、既存の代表選択で一方が落ちていた。既存plan ownerの_thread_retained_reaction_groupsで、証明済みの二経験を別々の既存2 Moveへ保持し、既存作者・独立readerから本文へ戻す。
+
+最終単一runは647 PASS（評価592＋Q2/Q3 application54＋現行identity1、194 deselected、既存警告2件、209.40秒）。追加16検査で実本文12条件、作者呼出し禁止の独立reader両欄、source所有の不正差替え両欄を確認。欠落、旧肯定復活、別経験借用、否定反転、新因果を拒否する。未変更u278との24組比較で初回全体・更新後完全checkpoint・Observation・status/reason_codesが一致。評価撤回12組はplan/選択/Receptionも完全一致、否定訂正12組だけが二経験へ回復した。同環境read-only reviewで初回12・訂正12・撤回12と、追加action／2 received／理由なし／明示今／別回答の両欄10条件を旧関数と独立比較し、対象外は不変。
+
+実service＋隔離PGliteで理由時点2×評価時点2×両欄×訂正／評価撤回の16組を初回／更新後まで保存。保存DTO32件の生成本文一致、NoAuthor GET/start、同一回答再送のtimeline/current本文一致・event無増加を確認。現行RN hook/modalで全32件の本文・履歴・close/reopen一致。rootが32全文を確認した。native部品stubであり、本人実機・正式Product Readではない。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持。今回の欠落回復を§9.2/9.4の受け取り内容形成全体の完成へ換算しない。固定的な説明／反復、対象外の複数経験や回答時点変更、Q1上限、近似文／別欄二組、giver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。
+
+実装commit：[14a3c78](https://github.com/MassyuRed/mashos-api/commit/14a3c786b69e6c57c741244dc2edfdff46525c65)。全体01/01A・current01/04・8/28設計・06・weekly§5.6.29同期。
+
+
+# CURRENT 2026-10-15 u280 — Emlisの経験単位の意味／受け取り対応案（未承認）
+
+基準API14a3c786b69e6c57c741244dc2edfdff46525c65／資料19ddca5a4b40842ae8255975274d67bec2197227。最後の製品修正はu279。今回のsource/test/fixture効果0、STRUCTURE_MAP_DELTA_NONE。
+
+理由付き評価＋receivedは初回／否定訂正後ともcandidate0・COMPETING_MATERIAL_SCOPES・LIMITED。本人実行行動の対照はNORMAL。u253の組外条件がreceived反応を含まないことと、同actの二経験が一つのclaimへ寄ることを原因として特定した。注意語尾付加やNORMAL文の借用は行わない。
+
+追加案は「明示評価exact1＋本人received対比exact1、既承認理由0/1、既存の否定訂正」に限定し、既存組比較とwhole exact1、経験/Moveごとのversioned private対応を接続する。否定訂正で孤立した理由はObservationのみ。旧carrier/canonical・保存本文非再生成・意味checkpoint完全照合・単一作者/独立reader・公開境界は維持する。詳細正本は8/28設計末尾u280、検証事実と再開条件は06 u280、Mash判断事項はweekly§5.6.30。
+
+BLOCKER_NARROWED / PROPOSED_NOT_APPROVED / PRODUCT_NOT_CLEAR。追加範囲の実装前にRule18 §11.3のMash判断が必要。商品credit／新technical completion0、正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。既承認u279を再承認待ちへ戻さない。10/17・10/31・12/18とPiece/Analysis主枠は不変。
+
+## u281 — 二経験の組別選択と受け取り接続（2026-10-15）
+
+本人の明示評価（満足／納得）exact1組と本人received対比exact1組を、既存source認識と全required所有の範囲で別成分として比較し、whole候補／ReadingConsequence各exact1へ結ぶ。理由は既存の0/1。u279の当時の満足を否定へ訂正する範囲では、孤立理由をObservationだけに残し、対象／否定評価とreceivedの既存2 Moveへ別々の主観内容を結ぶ。追加action・複数received・曖昧／重複owner・明示回答時点変更等へ広げない。
+
+versioned private opportunityにより同actでも別claimを持つ。STRUCTURE_MAP_DELTA_PRESENT、exact path地図は01A u281、検査と実本文は06／API handoff u281。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。
+
+初回は「理由への注意」から理由関係focalを持つ「満足の拠り所」へ、否定訂正後は評価の復唱から「出来事と満たされた感覚がないことの両方」の受け取りへ変わった。一方、receivedは「嬉しさにはつながらなかったのですね」という言換えのままで、初回の理由側も関係説明に寄っている。NORMAL分類・carrier追加・検査成功を§9.2/9.4の商品完成に換算しない。次は、選択済みRELATIONAL_NONCOLLAPSE／PRESERVE_BOTH_ENDPOINTSとreceived本文の接続を、作者・作者非依存reader・実保存本文の同一単位で改善する。新しい価値観・原因・目標・相手意図を補完せず、意味契約の追加が必要なら不足を具体化する。Mashへ未合格本文のProduct Readを求めない。既存共有17失敗、same100、Q1上限、giver帰属、本人実機・正式受入は今回解消していない。10/17確認点・10/31残件線・12/18公開目標とPiece/Analysis主枠を維持する。
+
+実装commit：[09f30e4](https://github.com/MassyuRed/mashos-api/commit/09f30e438b0155beeddbd7b56dc65dfdcf2e3e60)。API変更8pathのremote全文・blob SHA・changed-path集合を照合済み。
+
+## u282 — received対比の本人経験としての受け取り（2026-10-15）
+
+u281で選択済みの、本人の明示評価exact1組＋本人received対比exact1組のうち、NORMAL / ATTENTION / ATTEND_TO / RELATIONAL_NONCOLLAPSE / PRESERVE_BOTH_ENDPOINTSを持つreceived成分だけを扱う。selected contribution exact1、basis exact2（RELATION_LEFT／RELATION_RIGHT）、source-owned単一contrast、追加回答なし、裸の過去形感情形容詞、full finite文を条件にする。理由0/1と当時の満足を否定へ訂正する既存範囲を維持する。
+
+STRUCTURE_MAP_DELTA_PRESENT、全変更fileは01A u282。関連681 PASS＋別run現行identity1 PASS、実service保存34 DTOと現行RNの本文／履歴／再表示を確認。旧本文2件もu281保存sampleとの一致を確認。実本文と再現限界は06／API handoff u282。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false。既存Draft/open/unmerged・未配置を維持する。
+
+選択内容が共通の「のですね」へ落ちる問題は当該成分で修正した。一方、二経験を並べた本文は「経験として受け取りました」「両方を受け取りました」が反復し、初回理由側も関係説明に寄っている。今回の正の受け取り対象と対比の明示を、§9.2／9.4・自然さ・入力固有の内容形成の完成に換算しない。次は、初回の理由側とreceived側を合わせた受け取りに、その入力固有の一つの意味が形成されているかを扱う。既存selected contentと実本文の不足を分離し、根拠のない原因等や同義語追加で埋めない。評価撤回後のLIMITED一般態度、既存共有17失敗、same100、Q1上限、giver帰属、本人実機・正式受入は未解消。Mashへ未合格本文のProduct Readは求めない。10/17確認点・10/31残件線・12/18公開目標、Piece/Analysis主枠を維持する。
+
+## u284 — 明示同一対象と二段対比の本文接続（2026-10-16）
+
+u283の後続実装指示により、同じ行為への満足と、その行為を褒められたのに嬉しくなかった／悲しかった経験を、原文証拠・新private意味型・既存2 Move・作者非依存readerで接続。旧保存8件の再導出、関連754 PASS＋現行identity別run1 PASS、実保存16 DTOの再読／再送／RN全文表示を確認。native stubで本人実機ではない。
+
+STRUCTURE_MAP_DELTA_PRESENT、API16pathの責務は01A、設計8/28、schema05、検証06/API handoff、最新順序はweekly §5.6.34。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。初回の説明／受容述語の反復と訂正後の既存受け取りは残件。10/17・10/31・12/18、Piece/Analysis主枠は不変。
+
+実装commit：[81f52ef](https://github.com/MassyuRed/mashos-api/commit/81f52ef02cc74cd889904ff80d0185bd0a7d3fee)。API16pathのremote全文・blob SHA・変更集合・親commitを照合済み。
+
+
+## u285 — 訂正後に残るreceived対比へ同時性を加えない（2026-10-16 JST）
+
+u284の同一行為・二段対比の初回から満足を否定訂正／撤回した後、残るreceived対比が「異なる向きのまま同時にあります」となっていた。原文は同時性を述べていないため、未改変の原文二端点を「の一方で…とあります」という既存の時間中立な対比文法へ接続した。
+
+原文の共同読みをresolver付きで再検証でき、更新後はその共同読みが失効し、received関係が完全一致で残り、両端nodeが既存失効属性の除去以外に変わっていない場合だけ適用する。原文の対比・肯否・各端点の時制を引用から保持する。新しい共同読みを更新後へ存続させず、意味選択・checkpoint・Reception・source認識・schema・上限・公開API/DTO/DB/RN・製品依存を変えない。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。
+
+検証・実本文は正本06／API handoff u285、再開位置はweekly§5.6.35。初回の説明・受容述語反復、理由なし否定訂正後のReceptionからreceivedが落ちる問題、更新後の一般的な受け取りは残る。一般receivedの旧「同時に」は対象外であり今回全面解消していない。訂正後の共同読みを一般化せず、次は残る二経験をそれぞれ選ぶ既存経路と、既承認意味の範囲を照合してReception欠落を扱う。新しい意味契約が必要なら不足と最小案を具体化する。既存共有17失敗・same100・Q1上限・giver帰属・本人実機・正式Product Readも未解消。Mashへ未合格本文の確認を求めない。10/17確認点・10/31残件線・12/18公開目標とPiece/Analysis主枠、管理評価53.25％を維持する。
+
+
+## u286 — 理由なし否定訂正でも残った経験を受け取りへ保持（2026-10-16 JST）
+
+u284の理由なし共有対象入力から満足だけを否定訂正した後、未撤回のreceived経験がReceptionから落ちる欠陥を修正した。同じcurrent_burden分類の代表選択で一方を捨てず、訂正評価とreceived対比を既存2 Moveへ別々に保持する。
+
+emlis_answer_update._active_planで成立する一時的な選択証明を、既存response→human_reception_plan→opportunitiesとdepthへ引数で渡す。source認識・核／関係・checkpoint・schema・NORMAL資格・Projection・作者／reader文法・公開API/DTO/DB/RN・依存・各上限は不変。原初共同groupと外側対比は失効したまま、更新後はLIMITEDを保持する。一般の理由なし訂正を一括で拡張しない。
+
+詳細・実検証は正本06／API handoff u286、全変更file責務は01A u286、再開順序はweekly§5.6.36。LIMITED Receptionの既存本文inverseは作者replayを含む。今回その経路を変更せず、Reception全体の作者非依存検証が新しく成立したとは報告しない。初回の説明・受容述語の反復、訂正後の一般的な受け取り、理由の有無による受け取り方の差は未解消。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。
+
+
+## u287 — 直前文を検証した共有対象評価参照で二重説明を削減（2026-10-16 JST）
+
+u284初回の第2文で行為・評価時点・満足をもう一度全文説明していた箇所を、検証済みの直前文への「その満足」という参照に変更した。理由0/1の既存共有対象だけを扱い、2 Move／2文と内外の対比を保持する。改善は冗長性・読みやすさの限定差分であり、受け取り内容形成全体の完成ではない。
+
+既存human_reception作者へ参照可否を渡し、observation_gateの既存preceding_contextを共有対象readerまで接続した。source認識、核／関係、checkpoint、意味schema、NORMAL資格、Projection、2 Moveの選択、公開API/DTO/DB/RN、依存と各上限は変更しない。訂正で初回共同読みが失効する条件とu285/u286の残存経験保持も維持する。
+
+詳細と検証は正本06／API handoff u287、変更file責務は01A u287、再開順序はweekly§5.6.37。独立性は今回の有限文readerと前文のsource-owned読みの範囲。既存の全文inverseには作者replayがあり、Reception全体が作者非依存になったとはしない。「受け取りました」の反復、初回の説明性と肯定的な受け取り内容、訂正後の一般的な受け取り、理由有無による差は残る。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。
+
+
+## u288 — 理由付き満足の内容型の非対称を特定し、限定修正を提案（2026-10-16 JST・未承認／未実装）
+
+初回の定型感を追い、理由がない満足では本人の充足を伴う経験が選ばれる一方、同じ入力に明示理由を一つ加えると汎用の材料受容へ戻る非対称を確認した。理由・対象・肯定満足は認識済みであり、sourceを広く読み直せない問題とは区別する。理由と満足の関係説明だけでなく、明示理由に根差す対象限定の本人の充足を内容型として渡す限定案を提案する。
+
+原因・提案・承認境界は8/28設計／06／API handoff末尾u288、進行はweekly§5.6.38。新private内容契約の追加は未承認・未実装。STRUCTURE_MAP_DELTA_NONE、現行ownerと構造はu287から不変。
+
+BLOCKER_NARROWED / PROPOSED_NOT_APPROVED / PRODUCT_NOT_CLEAR。今回の製品source・test・fixture変更0、本文改善0。初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。
+
+
+## u289 — 承認済みの理由・対象・本人の充足を一つの内容型から本文へ接続（2026-10-16 JST）
+
+Mashは2026-10-16 09:21:56 JST、u288の「明示された理由・対象・本人の充足を、一つの受け取り内容として保持する限定案」とRule18 §11.3の個別承認対象である旨を引用し、「うん、進めていいよ。」と明示承認した。新private内容契約の限定追加をこの承認で実装した。満足の意味／明示理由認識の既承認は取り直していない。u288の未承認表記は提案時の履歴であり、現行状態は本節を優先する。
+
+理由付き初回のNORMALで、理由・行為・本人の充足を同じ受け取り内容として保持するEmlisReasonedExperienceAppraisalContent（cocolon.cmee.emlis.reasoned_experience_appraisal.v1）を追加した。理由を独立した「満足の拠り所」の説明で終わらせず、実行した対象について、明示理由に根差した本人内の充足の経験として本文へ実現する。理由なしの既存内容型は維持した。
+
+新armは理由／対象／評価の3 binding、理由→評価と対象→評価の2 relation、満足のkind/polarity、理由時点と評価時点を保持する。旧EmlisAppraisalContent／evaluated-experience-v1のfieldとexact validatorは不変。型分岐・immutable tuple・canonical binding・既存論理契約manifestに追加（73→74）し、既存投影とphase_Aの期待再構成へadmitted_sourceを直接渡す。期待再構成は共通の純粋導出関数を使う検査であり、作者非依存の有限本文readerとは別である。
+
+source認識・意味候補の採用資格・質問／Move／文数上限、公開API/DTO/DB/RN契約、依存は変更なし。新production file／engine／checker／serviceなし。稼働DB操作・deploy・mergeは0。
+
+限定内容の接続は確認したが、「受け取りました」の反復、第一文の長さ／説明性、第二Moveの受け取り内容、訂正後の一般性は残る。全体の文章品質や§9.2/9.4の完成ではない。既存全文inverseには作者replayがあり、Reception全体を作者非依存とはしない。
+
+詳細・実本文・検証は正本06／API handoff u289。全file地図の責務差分は01A u289、再開順はweekly§5.6.39。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。
+
+
+## u290 — 理由付きの受け取りで対象を先に示し、同じ結びの連続を解消（2026-10-16 JST）
+
+u289で承認・接続済みの理由付き本人充足を、同じ内容のまま話題・焦点構文へ実現した。対象を「ことについて受け取ったのは」と先に示し、その後に明示理由と本人の内的経験を置く。理由付き初回と別／共有receivedが並ぶ本文で、二文続く「受け取りました」の結びを一回に減らした。語義を「充足」「実感」等へ置換せず、既存の「ご自身の中に満たされた感覚」と理由・評価の別時点を保持する。文字数短縮や§9.2/9.4全体の完成とは扱わない。
+
+STRUCTURE_MAP_DELTA_NONE：既存作者・本文reader・字句witness内の文法修正であり、owner責務、引数接続、意味契約、利用導線、公開境界は不変。全体設計01・全file地図01A/B/C・current00/01/04を確認済み。地図への重複追記は行わない。
+
+検証・実本文比較は正本06／API handoff u290、再開順はweekly§5.6.40。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。第一文の説明性・長さ、第二Moveの内容、理由なし本文の受容反復、訂正後の一般性は残る。今回の構文整理を意味理解の拡張や商品品質合格へ換算しない。
+
+次は、今ある選択内容と実本文を照合し、第二Moveが単なる関係説明になっている残件、訂正後に一般的な受け取りへ戻る残件の共通原因を扱う。同じ末尾置換だけを次の主課題にしない。既承認の意味を本文が落としている場合は同じowner内で修正し、新しい意味・原因・価値・帰属や内部契約が必要なら、その不足と最小差分を先に具体化する。共有17失敗・same100・Q1上限・giver帰属・本人実機・正式Product Readは未解消／未実施。10/17確認点・10/31管理線・12/18公開目標、Piece/Analysis主枠と管理評価53.25％は維持する。
+
+
+## u291 — 別欄の理由なし否定訂正で、未撤回の経験を受け取りへ残す（2026-10-16 JST）
+
+別欄にある理由なしの満足とreceived対比について、満足だけを否定訂正すると、未撤回のreceivedがObservationには残る一方でReceptionから落ちる欠陥を修復した。同じcurrent_burden分類の代表選択で一方を捨てず、既存LIMITEDの2 Moveへ両方を保持する。新しい経験解釈やNORMAL資格を加える変更ではない。
+
+STRUCTURE_MAP_DELTA_NONE。既存answer_update所有内のsource再証明条件追加のみで、owner・call chain・引数接続・contract・lifecycleに構造差分なし。current_structure/00 §6に従い01A/current01/04への重複追記は行わない。
+
+詳細・実本文比較は正本06／API handoff u291、再開順序はweekly§5.6.41。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。未撤回経験の欠落はこの限定条件で修復したが、訂正後の一般的な受け取りと旧received観測文の「同時に」、第一文の説明性、初回第二Moveの内容形成は残る。保存成功や回帰成功を商品合格に換算しない。
+
+次は本来残るべき内容の保持を崩さず、初回／訂正後／撤回後で選択される受け取り内容の違いを扱う。語尾や型名の追加だけを内容形成改善とせず、sourceから導ける既承認意味と不足を区別する。新しい読み・資格・内部契約が必要な箇所は具体化してからMash判断へ戻し、未合格本文のProduct ReadをMashへ要求しない。共有17失敗・same100・Q1上限・giver帰属・本人実機・正式Product Readは未解消／未実施。10/17確認点・10/31管理線・12/18公開目標、Piece/Analysis主枠と管理評価53.25％は維持。
+
+
+## 2026-10-16 u292 — 単一received対比の未明示同時性を除去
+
+基準API659f9a2／資料a26d089。現行threadの原文contrast exact1、既存本人・過去received対比、未改変関係／両端に限り既存中立文法へ接続。legacy／PARTIALは対象外。54合成応答で25 Observation修正・29全文不変、全意味／Reception不変。実service/PGlite保存・NoAuthor再読・RN再表示16 DTO一致（native stub）。関連842のうち旧PARTIAL互換2失敗を対象除外で修正し該当17再検査PASS、identity1PASS。周辺4既存失敗は基準版でも再現、未解消。詳細・検証経過は06/API handoff u292、最新再開順はweekly§5.6.42。STRUCTURE_MAP_DELTA_NONE、TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、正式0/3、candidate_ready=false、automatic_progression=false、未配置・未マージ。
+
+
+## 2026-10-16 u293 — 別欄・更新後received経験の限定案を具体化（未承認）
+
+基準API0cdfdac4／資料75f22dac、u292 CI38837204963 completed/success。理由なし否定訂正と評価のみ撤回で、未変更receivedがLIMITEDの一般的な保持へ変わる原因を選択内容とsourceから特定。対象12／対照42（既存54合成応答）を確認した。全体LIMITED・既存aggregateを保持し、別欄の未変更received一組だけにprivate局所経験内容を選択・封印する限定案を06/API handoffと8/28意味設計へ記録。Rule18 §11.3の資格・内部契約追加としてMASH_APPROVAL_PENDING。製品code/test/fixture変更0、新案の実生成・PASSなし。STRUCTURE_MAP_DELTA_NONE、PRODUCT_NOT_CLEAR、正式0/3、candidate_ready=false、automatic_progression=false、未配置・未マージ。最新再開位置はweekly§5.6.43。
+
+
+## 2026-10-16 u295 — 丁寧な過去形でも選択済みreceived経験を本文へ保持
+
+u294の承認済み実装（06／API handoff u294・weekly§5.6.44）を基準とし、未確定だったAPI CI38843592713のcompleted/successを確認。選択済みreceived経験が原文末尾「です」で一般的な受け取りへ落ちる作者／readerの接続漏れを修復した。意味・資格・selected全体・Observation・公開契約は不変。STRUCTURE_MAP_DELTA_NONE、地図責務の変更なし。
+
+最終sourceのappraisal847＋application54は一括901 PASS、現owner identity1は別runでPASS。合成60応答で対象24 Receptionのみ変更・対照36全文不変。実service/PGliteと現行RN hook/modalの24 DTO保存再表示を確認し、rootが24本文を読解（native stub、本人実機ではない）。詳細・実本文・限界は06／API handoff u295、再開順はweekly§5.6.45、意味境界は8/28設計末尾u295。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。第一文の説明性・受容反復、共有対象と対象外更新、既存失敗、same100、Q1上限、giver帰属、本人実機・正式Product Readは残る。
+
+
+## 2026-10-16 u296 — 更新後の受け取りで本人の一人称を各対象へ保持
+
+u295 CIはAPI・資料とも成功。更新後LIMITEDの検証済み局所receivedで、本人の「私は／私も」がEmlisの非引用発言へ残る名詞化を修復した。本人を従属する名詞節の中に置き、「違い／両方」・助詞・程度・肯否・時点と既存一般受容を保持。source認識・意味・資格・selected・Observationは不変、SELF主題を経験句へ広げない。STRUCTURE_MAP_DELTA_NONE。
+
+対象40 PASS、主回帰887＋54件は06／API handoff u296へ記録。合成60応答で対象4 Receptionだけ変更・対照56全文不変。保存/RN24 DTO一致とroot本文読解を確認（native stub）。詳細・限界・再開位置は06／API handoff u296、weekly§5.6.46。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式0/3、candidate_ready=false、automatic_progression=false、未配置・未マージ。一般受容の定型性、初回説明性・反復、対象外更新と既存失敗等は残る。
+
+
+## 2026-10-16 u299 — 同欄でreceivedが先行する初回停止を修復
+
+u298で残した逆順同欄過去3例の停止を、source本人継続証明の接続漏れとして修復した。入力時点3例の一般化も三点の保持へ戻した。比較36中他30は全record一致。fresh対象の意味plan・checkpoint・selectedは変わるため、旧版は完全再導出して区別する。訂正後の単独ATTENTION文を既存markerへ接続し本文停止も修復した。新しい意味型／資格／契約は追加せず既存LIMITEDを維持。STRUCTURE_MAP_DELTA_PRESENT、地図01A／current01/04へ反映。
+
+最終sourceのappraisal全958件は現行173 test関数を重複なしの4群に分け、278＋253＋224＋203 PASS（全体133.56秒）、失敗0／skip0。Q2/Q3 application54件は別runで54 PASS／既存非推奨warning2／91.28秒。現owner identity1件は別runでPASS／31.56秒。主回帰計1,012件とidentity1件であり、一括runや対象22件との重複加算とはしない。 保存・現行RN再表示の初回6＋訂正後6の計12 DTO一致・同回答再送確認（native stub、本人実機ではない）。途中結果・旧Q1互換・実本文と詳細は06／API handoff u299、再開weekly§5.6.49。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・未配置／未マージ。初回説明性・受容反復と他の残件は継続する。
+
+
+## 2026-10-17 u300 — 初回二経験の選択資格不足と最小追加案
+
+**PROPOSED_NOT_APPROVED / PRODUCT_NOT_CLEAR、製品変更・本文改善0。** u299 API CI成功を確認。現行18合成本文を診断し、未成立事項付き満足＋別receivedの12例は、三点を認識後もLIMITEDの注意内容に留まる。対照6はNORMAL。作者の取り落としではなく、二成分資格と独立所有closureの未成立除外だった。
+
+初回・回答なし・legacyなしの三点＋二点だけを、既存whole／ComponentReceptionOpportunityV1／通常三点内容へ接続する資格追加案を具体化した。新schema・内容型・上限は予定しない。Rule18 §11.3により追加資格のみ承認待ち。意味設計u300／05、詳細と実本文は06／API handoff u300、再開はweekly§5.6.50。STRUCTURE_MAP_DELTA_NONE、全体・地図・current_structureの実装責務は不変。
+
+初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・未配置／未マージ。対比説明のままの本文を商品完成とせず、承認後は意味選択から実本文・保存表示まで同じ単位で確認する。訂正後等の別残件、10/31・12/18、Piece/Analysis主枠と53.25％は維持。
+
+
+## 2026-10-17 u301 — 初回二経験の個別選択を承認範囲で実装
+
+2026-10-17 08:16:47 JST、Mashがu300の初回限定案に「うん、進めていいよ。」と明示承認した。Rule18 §11.3の追加資格承認は成立済み。u300の未承認表記は提案時の履歴であり、現在は本節を優先する。同じ承認を再要求しない。
+
+source資格／独立所有closure／既存意味scopeの3 production ownerを修正。未成立三点と別received二点へ別の内容を選び、対象12のReceptionを改善した。18比較のplan・checkpoint ref・Observationと対照6は不変。実旧保存非再生成・旧質問回答・旧checkpoint retry、29実保存DTOのRN再表示を確認。検査と失敗・限界の詳細は06／API handoff u301。
+
+STRUCTURE_MAP_DELTA_PRESENT。全体01・01A・current01/04へ責務、意味設計／05へ契約境界、weekly§5.6.51へ次を同期。新schema・型・上限・公開API/DB/RN・依存変更0。説明調・関係の説明は残り、充足の語義を述べただけで§9.2/9.4全体を満たしたとは判定しない。今回の旧質問への肯定訂正でも、Observationは更新される一方、Receptionは既存の対比への注意に留まった。次はこの初回の内容形成と訂正後の二重説明／ATTENTION、共有対象／対象外更新を既存承認範囲で進める。既存周辺4失敗（過去共有17との集合一致未確認）、same100、Q1上限、giver帰属、本人実機・正式Product Readは未解消。10/31管理線・12/18公開目標、Piece/Analysis主枠、管理評価53.25％を維持する。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。NORMALや回帰成功を商品合格へ換算しない。
+
+
+## 2026-10-17 u302 — received訂正後も未成立三点を一節化
+
+別receivedの反応を明示訂正した後、未変更の未成立事項・対象・満足を二辺ごとに説明していた欠陥を既存3 ownerで修復した。意味／選択／checkpoint／Receptionは不変。36比較で対象12のObservationとartifact IDのみ変化、対照24全record一致。最終主回帰1,067件：1,067 passed, 1 warning in 409.97s (0:06:49)、失敗0／skip0。identity1、実service／隔離SQL14 case／28 DTOと旧保存／旧checkpoint retry、現行RN28再表示を確認。実機ではない。詳しい範囲・途中失敗・実本文は06／API handoff u302、再開点はweekly§5.6.52。
+
+STRUCTURE_MAP_DELTA_NONE、既存責務内の実現修復。初回限定の選択資格を回答後へ拡張せず、新schema・公開API／DB／RN・依存変更0。訂正後Receptionは単独ATTENTIONのままでreceived経験を受け取れておらず、初回の内容／説明性／反復などの残件も残る。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・未配置／未マージ。10/31・12/18、Piece/Analysis主枠、管理評価53.25％は維持。
+
+
+## 2026-10-17 u303 — 肯定訂正後のreceived経験をReceptionへ保持
+
+u302で残った同family代表選択による欠落をanswer_update一つのownerで修復。未成立三点→元時点の肯定回答を既存LIMITEDの2 dutiesとして保持し、初回NORMAL資格は拡張しない。checkpoint／核／関係／Observation不変、response_plan／selectedとReception／trace／IDは変化。対象12・対照24の36比較と周辺6対照を確認。主回帰1,082件：1,082 passed, 1 warning in 411.08s (0:06:51)、失敗0／skip0。identity1、実service／隔離SQL14 case／28 DTO、旧保存／旧checkpoint retryとRN再表示28件を確認。native stubで実機ではない。途中テスト前提誤り3件・修正と全文は06／API handoff u303、再開点はweekly §5.6.53。
+
+STRUCTURE_MAP_DELTA_NONE、新file／schema／公開API／DB／RN／依存変更0。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・未配置／未マージ。説明性／内容形成・初回反復は残る。次は未成立なし／理由付き満足の肯定訂正を実全文から照合。10/31・12/18、Piece/Analysis主枠、管理評価53.25％は維持。
+
+
+## 2026-10-17 u304 — 通常／理由付き満足の肯定訂正後本文停止・受け取り欠落を修復（2026-10-17 JST）
+
+u303末尾に従い、通常満足＋received肯定訂正後の本文停止と、通常／理由付き満足で訂正receivedがReceptionから落ちる欠落を修復。別経験に同じ文法arcを与えていた箇所を既存source_componentへ接続し、同lived_change代表選択で失われる義務を既存LIMITED二Moveへ保持した。意味核・辺・checkpoint不変、新意味／NORMAL資格・初回限定資格の回答後拡張なし。Rule18既存契約内修復、STRUCTURE_MAP_DELTA_NONE。
+
+主回帰appraisal1,110＋application54：**1,164 passed、1 warning、443.16 秒**。警告は既存 Pydantic `root_validator` の非推奨警告であり、今回の回帰失敗ではない。identity1 pass。72旧新比較は通常訂正12の本文復旧、理由付き訂正8の受け取り復元、対象外52全record不変。実service／隔離SQL23 case／46 DTOと旧完成本文非再生成・旧checkpoint retry2種類、現行RN本文／全履歴／再表示46件を確認。rootは17種類の保存全文と全46対応を読解。native部品stubで本人実機ではない。途中のテスト前提／plan未指定／identity実行中source変更の失敗と再検証は06／API handoff u304に記録。同Work補助を別モデル正式検証とはしない。
+
+全体設計・全file地図・作業rule・恒久incident・意味設計を確認し、System Contextはworkspace binding不存在から許可済み原典直接参照を使用。次は理由付き同欄received先行の認識差を既存本人継続・三点所有から照合する。初回の「受け取りました」や訂正後「のですね」の反復、理由への注意に留まる本文内容は未完成。現在回答・安心した分類・共有対象／対象外更新、周辺既存4失敗・same100・Q1上限・giver帰属・本人実機／正式Product Readも残る。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。10/31・12/18、Piece/Analysis主枠、管理評価53.25％は維持。
+
+詳細・再開位置：正本06／API handoff u304、weekly §5.6.54。
+
+
+## 2026-10-17 u305 — 同欄received先行の理由付き満足を既存SELF証明へ接続（2026-10-17 JST）
+
+u304次作業を実施。source parserが `reason is None` で前文SELF継続を遮断し、理由三点を一般的な変化／行動へ落としていた。既存の単一received・本人所有証明を既承認の理由三点へ接続し、初回と肯定訂正後の実本文に理由・対象・満足と別経験を保持した。新意味資格／NORMAL資格／作者文法・schema／公開API／DB／RN・依存変更なし。Rule18既存契約内修復。source認識・互換責務と新合成fixtureを全体01／01A／current01/04へ同期、STRUCTURE_MAP_DELTA_PRESENT。
+
+主回帰：**1,209 passed、1 warning、465.77 秒**（appraisal1,155＋application54）。警告は既存Pydantic非推奨警告。identity1 pass。同じ72旧新比較で対象12 record（本文変化8＋不明4の意味変化）のみ変わり、対照60全record一致。未変更u304の旧結果13件を核辺hash・完全checkpoint・全文・questionまで復元。質問未発行で回答を作れない旧試行1は別記し成功へ数えない。実service14 case／28 DTOとRN本文／全履歴／close/reopen28件を確認、rootは8種の全文と全28対応を読解（native stub・本人実機ではない）。途中8失敗の原因と修復／前提訂正は06／API handoff u305へ記録。
+
+保存済み本文は非再生成、旧回答checkpoint retryは旧意味を厳密再導出。一方、旧質問と現行質問が全体一致し回答checkpoint未保存なら旧版識別情報がないため、現行sourceを再検証して新checkpointを作る既存動作となる。両者を混同しない。直接builderと旧Q1の従来経路は保持。
+
+全体設計・全file地図・作業rule・恒久incident・最新weekly確認、System Contextはbinding不存在につき許可済み原典直接参照。次は肯定訂正後に未変更の理由付き満足が「理由への注意」へ弱まる内容欠落を、既存LIMITED・選択済み意味から照合する。初回／訂正後の説明性・受容反復、現在回答・安心した分類・共有対象／対象外更新、既存周辺4失敗・same100・Q1上限・giver帰属・本人実機／正式Product Readは残る。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。同Work補助を別モデル正式二重検証としない。10/31・12/18、Piece/Analysis主枠、管理評価53.25％は維持。
+
+詳細・再開位置：正本06／API handoff u305、weekly§5.6.55。
+
+
+## u306 — 更新後の未変更理由付き満足：限定案まで具体化（2026-10-17 JST）
+
+基準API85bece8／資料8389dc6。u305次作業の修正前32応答を実生成し、満足の経験内容が更新後に注意へ戻る原因を初回限定資格と特定した。新しい更新後局所資格／private内容対応を8/28設計、06、weekly§5.6.56、API handoffへ提案として記録。Rule18 §11.3の追加承認前で製品code/test/fixture変更0、本文改善0。STRUCTURE_MAP_DELTA_NONE。既存承認済みの意味は再確認せず、限定適用の増分だけを判断対象とする。
+
+BLOCKER_NARROWED / DESIGN_PROPOSAL_ONLY / MASH_APPROVAL_PENDING / PRODUCT_NOT_CLEAR。正式0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。前回回帰／保存結果は履歴として保持し、今回の診断件数へ加算しない。
+
+
+## 2026-10-17 u307 — 承認済み限定変更の実装・保存再表示
+
+u306限定案は2026-10-17 11:25:59 JSTのMash明示承認により実装済み。別received反応だけを当時の肯定へ一度完全訂正した後、未変更の理由・対象・満足を一つの経験として保持する。private Eligibility／Content／selected carrierを既存6 ownerへ追加し、既存aggregate projectorを再導出してsource/update/Move/checkpointとの一致を検証。u289初回型とu294received専用型の範囲は維持、source認識・公開API／DB／RN・依存変更なし。
+
+同入力32比較は対象13の満足文だけ改善、非対象19の取得全recordと全32の核辺／checkpoint／aggregate／Observationは不変。主回帰 1,229 passed／1 failed／1 warning（546.37秒）。失敗は現行manifest件数の旧期待値74で、76と新二型登録の検査へ更新後、当該1項目は1 passed（8.40秒）。同一製品sourceで異なる1,230項目を確認（appraisal1,176＋application54）。全件一括再実行はせず、期待値修正箇所だけ再検査。identity1 pass。実service20 case／40 DTO・RN本文／全履歴／close-reopen40件、旧完成非再生成・未完成current checkpointから意味と回答を増やさず新本文へ再開を確認。互換6case再確認は重複加算しない。rootは保存11種全文と全40対応を読解。native stubで本人実機ではなく、同Work補助を別モデル正式検証としない。
+
+STRUCTURE_MAP_DELTA_PRESENT、全体01／01A／current01/04・schema05・8/28設計・06／API handoff同期。u306の承認待ちは履歴となる。次は理由三点と別経験を保つ初回／訂正後本文の説明性・反復の共通原因。現在回答・安心した分類・共有対象／対象外更新、既存周辺4失敗・same100・Q1上限・giver帰属・本人実機／正式Product Readは残る。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。10/31・12/18、Piece/Analysis主枠、管理評価53.25％は維持。
+
+
+## 2026-10-17 u308 — 理由付き満足の直接的な受容
+
+u307からの残件として、理由・対象・本人内の充足を保持する文が「受け取ったのは……経験です」という長い説明構文になる箇所を修復。既存作者と有限readerの2 ownerだけで、対象に結びついた本人内の感覚を主節へ直接置いた。初回の単独／別received／共有対象と、u307限定資格の肯定訂正後で共用する。意味資格・private契約・全体LIMITED／aggregate・二Move・核辺・checkpoint・Observationは不変。理由→満足を行動→客観的結果の因果へ変えない。旧完全2文法の独立読解も維持した。Rule18の既存契約内修復、STRUCTURE_MAP_DELTA_NONE。
+
+同じ32入力は対象25（初回12＋肯定訂正12＋程度付き1）の満足文だけ変化、対象外7は取得全record不変。全32の核辺／checkpoint／Move／aggregate／Observation／statusは一致。主回帰は **1 failed, 1229 passed, 1 warning in 558.44s (0:09:18)**。残った1失敗は旧表面句「満たされた感覚があった経験」の期待値で、対象・理由・時点・感覚を保つ新主節への期待へ直し、当該1項目は **1 passed, 1175 deselected, 1 warning in 11.77s**。製品sourceは全run開始後に変えていない。異なる1,230項目を確認（appraisal1,176＋application54）、全件一括の再実行はしていない。先行target20 passは主回帰との重複、identity1 passは別。既存Pydantic非推奨警告1を保持。
+
+実service／隔離SQL20 case・40 DTO、現行RNの本文／全履歴／close-reopen40件を確認。完成済み旧本文は非再生成。旧質問への回答では元の保存本文を残して現行本文を生成し、未完成checkpoint retryでは意味・ANSWER／MEANING_UPDATE・operation・旧OBSERVATIONを保って再開する。rootは保存13種類の全文と全40対応を読解した。native部品stubで本人実機・正式Product Readではなく、同Work補助を正式Pro／Ultra二重検証としない。
+
+説明構文は除いたが、本人内の充足の説明自体や、肯定訂正後の二文で「のですね」が続く反復は残る。文型の交換を§9.2/9.4全体の完成や商品合格へ換算しない。次は、既に実測済みの「今は嬉しい」という現在回答がObservationには残りReceptionから消える欠落を、現在時点と元received反応の独立性を保つ既存意味・選択から照合する。単なる語尾の再交換を次作業にしない。安心した分類・共有対象／対象外更新、周辺既存4失敗（過去共有17との集合一致未確認）・same100・Q1上限・giver帰属・本人実機／正式Product Readも残る。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。10/31・12/18、Piece/Analysis主枠、管理評価53.25％は維持。全体設計01・全file地図01A/B/C・current01/04・最新weekly・Rule18／CURRENT_RULES・恒久incident全文と8/28意味設計§9.2/9.4／u289／u307を照合。System Contextの新freshnessは認定せず、許可済み原典直接参照を継続。
+
+実本文・検査内訳は正本06／API handoff u308、再開はweekly§5.6.58。
+
+
+## 2026-10-17 u309 — 現在回答のReception欠落を修復
+
+理由付き満足と別received経験に「今は嬉しい」と答えた際、意味・Observationに残る現在回答がReceptionから消える不整合を、既存Planのretention選択36行で修復。理由三点・元received・現在回答を既存3 Moveで保持する。現在回答を元反応の訂正や未明示の変化へ変えない。source stateの閉包が条件で、mixed PARTIALも受理済み現在回答を保持しPARTIALのまま。u307の当時REVISE専用資格、基本LIMITED、核辺／checkpoint／Observationは不変。Move／aggregateは保持義務の復旧に伴い変化する。
+
+同入力31比較は対象16でReceptionを復旧、対照15の取得全record一致。主回帰 1,246 passed／1 warning（533.21秒）。最終版の全件一括実行：appraisal1,192＋application54。既存retention25・identity1は別にpass、新規16は主回帰内の重複。新reader試験配線の先行失敗2回と中断runは正本u309へ記録し、最終版の全対象再実行と混同しない。実service／隔離SQL23 case・46 DTOと現行RN全文／履歴／再open46件を確認。旧完成本文は非再生成、旧pending／中断checkpointは意味と既存回答・履歴を保持して現行本文へ進む。rootは15種全文と46対応を読解。native stubで実機ではなく、同Work読み取り補助は正式別モデル検証ではない。
+
+STRUCTURE_MAP_DELTA_NONE、既存06／API handoff／07へ同期。理由なし評価＋received＋現在回答は実対照でも欠落が残り、次はこの既存選択を照合する。未成立context・独立行動追加・当時ADD・「安心した」の分類、共有対象／対象外更新、本文説明性・語尾反復、周辺既存4失敗（過去17との対応未確認）・same100・Q1上限・giver帰属・本人実機／正式Product Readも残る。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。10/31・12/18、Piece/Analysis主枠、管理評価53.25％を維持。
+
+実本文・閉包・検査内訳は正本06／API handoff u309、再開はweekly§5.6.59。
+
+
+## 2026-10-17 u310 — 理由なし評価と現在回答の欠落を修復
+
+u309で残した理由なし評価＋別received＋現在positive回答の欠落を修復。肯定評価では元receivedと現在回答、否定評価では元receivedが落ちる共通原因を、既存Planの選択一箇所（15行追加・7行削除）で修正した。閉じた対象／評価2核1辺と残る3核2辺を証明し、満足／納得・正負・時点・程度・継続を保つ。reasoned／unfinished markerを持つ三点をplain二点へ縮めない。既存LIMITED・基本内容型・核辺／checkpoint／Observationは維持、Move／aggregateは保持義務の復旧に伴い変化する。PARTIALは未解釈部分を残して同状態を維持。
+
+主回帰 1,271 passed／1 warning（527.94秒）。最終版の全件一括実行：appraisal1,217＋application54。別途retention25・identity1 pass、新規25は主回帰と重複。旧新39例は22変更17同一、checkpoint取得37例の意味・状態・Observationは不変。共有対象例は質問なし、二評価例は旧新ともcapacity例外であり成功へ数えない。実service29 case／58 DTOと現行RN全文・全履歴・再open58件を確認。旧完成非再生成、旧pending／中断checkpointは旧本文・意味・回答・operation・既存履歴を保って現行本文へ進む。rootは27種全文と58対応を読解。native stubで実機ではなく、同Work読み取り補助は正式別モデル検証ではない。
+
+STRUCTURE_MAP_DELTA_NONE、06／API handoff／07へ同期。今回のplain欠落は修復済みだが、更新後の評価復唱・語尾反復、初回説明性は残る。次は未成立context＋満足＋別received＋現在回答の三点を保持する既存選択を照合する。独立行動追加・当時ADD・安心した分類・共有対象／複数評価容量・その他対象外更新、既存周辺4失敗（過去17との対応未確認）・same100・Q1上限・giver帰属・実機／正式Product Readも残る。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。10/31・12/18、Piece/Analysis主枠、管理評価53.25％を維持。
+
+実本文・境界・検証内訳は正本06／API handoff u310、再開はweekly§5.6.60。
+
+
+## 2026-10-17 u311 — 未成立文脈と現在回答の三点保持を修復
+
+u310で残した未成立文脈付き満足＋別received＋現在positive回答の欠落を、既存Plan一箇所（6行追加・2行削除）で修復。既存の厳密三点証明を使い、未成立を理由へ変えず、対象・満足と一つの保持義務にする。残る元反応と現在回答を既存3 Moveへ残す。核辺・checkpoint・Observation・LIMITEDと基本内容型は維持し、選択Move／aggregateだけ復旧に伴い変化する。初回u301・訂正後u307の資格、作者／reader、schema・上限・公開API／DB／RN・依存は不変。
+
+主回帰 1,288 passed／1 warning（547.37秒）。最終sourceの全件一括実行：appraisal1,234＋application54。追加17は主回帰と重複、現行identity1 pass。周辺Q3 retained28件は12 pass／16 failで、変更前も同じ12 pass／16 fail。path・process addressを除く失敗assertion／trace全文が一致し、旧文面等の未解消として保持する。先行25成功集合とは異なるため合算しない。32旧新比較は15変更・17全record同一、checkpoint29件の意味・状態・Observationは不変。独立行動／二評価は初回本文unavailable、共有対象は質問なしで成功へ数えない。
+
+実service22case／44DTOと現行RN全文・元入力・全履歴・再open44件を確認。旧完成本文は非再生成、旧pending／中断checkpointは元入力・旧本文・意味・回答・operation・既存履歴を保持。rootは13種全文と44対応を読解。native stubで本人実機ではない。同Work補助reviewを正式別モデル検証へ数えない。全文inverseと作者禁止の有限unfinished readerの検証範囲を分けた。
+
+STRUCTURE_MAP_DELTA_NONE、06／API handoff／07へ同期。次は比較で欠落した現在negative「今は嬉しくない」の原反応保持を、plain／reasoned／unfinishedと既存negative保持義務から照合する。長い説明・満足重複・語尾反復、独立行動追加・当時ADD・安心した分類・共有対象／複数評価容量、既存周辺4／過去17と今回Q3既存16失敗の対応、same100・Q1上限・giver帰属・実機／正式Product Readは残件。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。10/31・12/18、Piece/Analysis主枠、管理評価53.25％を維持。
+
+実本文・境界・検証内訳は正本06／API handoff u311、再開はweekly§5.6.61。
+
+
+## 2026-10-17 u312 — 現在negative回答と評価併存の原反応を保持
+
+u311で残した現在negative回答と評価併存による原反応欠落を修復。理由なし正負／理由付き／未成立付き評価の閉じた義務を保ち、残るreceived対象・元反応・現在negativeを既存1義務へ接続した。既存Plan一箇所（15行追加・3行削除）、合計2 Move。positiveの既存3 Moveは維持。reaction／feeling／feeling／negative・非unknown・present／answer_time、残余3核2辺、再帰exact1 target1／support2／末尾回答と全被覆を要求する。意味資格、作者／reader、型／schema／上限、公開API／DB／RN・依存は不変。
+
+主回帰 1,327 passed／1 warning（559.65秒）。最終sourceの全件一括実行：appraisal1,273＋application54。追加39は主回帰と重複、現行identity1 pass。周辺Q3 retainedは12 pass／16 fail（23.05秒）で、u311と失敗assertion／trace全文がprocess addressを除いて一致。49比較は31対象の本文復旧・18取得全record一致、checkpoint46例の意味・Observation・branch・状態・reason_codes・内容型は不変。独立行動／二評価は初回本文unavailable、共有対象は質問なしで成功へ数えない。
+
+実service44case／88DTO、現行RN全文・元入力・全履歴・再open88件を確認。旧完成非再生成、旧pending／中断checkpointは元入力・旧本文・意味・回答・operation・既存履歴を保持。rootは保存31種全文と88対応を読解。native stubで今回の実機検証ではなく、同Work補助を正式別モデル検証へ数えない。有限received readerの作者禁止と全文inverseの検証範囲を分けた。検査開始時の誤path未収集／歴史identity skipは成功に数えず、現行owner検査の1 passを確定した。
+
+STRUCTURE_MAP_DELTA_NONE、06／API handoff／07へ同期。次は当時ADD「その時は嬉しかった」で元反応と回答がReceptionから消える欠落を、現在／訂正と区別した既存保持義務から照合する。長い説明・満足重複・語尾反復・初回内容形成、独立行動追加・安心した分類・共有対象／複数評価容量、既存周辺4／過去17とQ3既存16失敗の対応、same100・Q1上限・giver帰属・本人実機／正式Product Readは残件。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。10/31・12/18、Piece/Analysis主枠、管理評価53.25％を維持。
+
+実本文・境界・検証内訳は正本06／API handoff u312、再開はweekly§5.6.62。
+
+
+## 2026-10-17 u313 — 当時positive ADDと評価併存の原反応・追加回答を保持
+
+u312の次作業として、評価併存時に当時positive ADD「その時は嬉しかった」で落ちる元反応・追加回答を修復。既存Plan一箇所（10行追加・4行削除）で現在条件を同値保持し、positive・past・exact original_occasionだけを既存received／ABOUT保持へ接続。評価閉包と残余3核2辺・再帰exact2・全被覆を保ち、評価／元反応／追加回答を既存3 Moveへ残す。ADDをREVISEや現在変化に変えず、当時negativeは対象外。意味・核辺・checkpoint・Observation・LIMITEDと基本内容型、作者／reader・schema・上限・公開API／DB／RN・依存は不変。
+
+主回帰 1,366 passed／1 warning（577.91秒）。最終sourceの全件一括実行：appraisal 1,312＋application 54。追加39検査は主回帰と重複、現行identity1 pass。Q3 retainedは12 pass／16 failで、u312と失敗assertion／trace全文がpath・process addressを除いて一致。57比較は対象31で欠落復旧、対照26は取得全record一致、checkpoint54件不変。content型は基本型を維持しdecision数は増える。共有対象の質問なし、独立行動／二評価の初回unavailableを成功へ数えない。
+
+実service44case／88DTOと現行RN全文・元入力・全履歴・再open88件を確認。旧完成は欠落も含め非再生成、旧pending／中断checkpointは意味・回答・operation・既存履歴を保持。rootは保存31種類の全文と88対応を読解。native stubで本人実機ではなく、同Work読取り補助は正式別model検証ではない。有限answer readerの作者禁止と全文inverseの検証範囲を分ける。保存timeline追加照合の誤キーidはevent_idへ直して同44caseの一致を確認。
+
+STRUCTURE_MAP_DELTA_NONE。正本06／API handoff／07へ同期。次は実対照で欠落した当時negative ADD「その時は悲しかった」の原反応保持を、既存の同対象・同時点保持義務から照合する。説明性・満足重複・語尾反復・初回内容形成、対象外更新、既存周辺失敗、same100・Q1上限・giver帰属・本人実機／正式Product Readは残件。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false、Draft/open/unmerged・未配置。10/31・12/18、Piece/Analysis主枠、管理評価53.25％を維持。
+
+実本文・検証内訳は正本06／API handoff u313、再開はweekly§5.6.63。
+
+
+## u314 — 当時negative ADDの原反応保持と次の限定案（2026-10-17 JST）
+
+基準API665efc37／Cocolon8c0346a8から、評価併存＋「その時は悲しかった」で消える元反応を既存Plan4行追加・4行削除で復旧。評価閉包・残余3核2辺・既存negative保持を使い2 Moveへ残す。現在±・当時positive、意味・checkpoint・Observation・内容型、作者／reader・資格・schema・公開API／DB／RNは不変。STRUCTURE_MAP_DELTA_NONE。
+
+主回帰 1,405 passed／1 warning（587.22秒）。最終sourceの全件一括実行：appraisal 1,351＋application 54。追加39は重複、identity1 pass。Q3 retained12 pass／既存16 fail、u313と失敗trace全文がprocess addressを除き一致。57比較31変更／26取得全record一致、checkpoint54不変。実service44case／RN88DTO、旧完成非再生成・旧pending／中断checkpointの履歴保持を確認。rootは対象15種／保存31種全文と88対応を読解。native stubで本人実機ではなく、同Work補助は正式別model検証ではない。
+
+保持修復は実装済み。次は追加回答後の未変更理由付き満足が「理由への注意」に戻る課題。既存u307はREVISE限定のため、現在／当時×肯定／否定の一回答ADDへ局所経験資格を追加する未承認案を06／API handoff u314・weekly§5.6.64へ記録。原5核3辺・round1完全RESOLVED・原claim失効0とsource再導出を要求し、全体LIMITED／意味／Observation・元反応／回答・u307は維持。新資格は未実装、次の一作業はRule18§11.3の限定追加承認の確認。
+
+TECHNICAL_CREDIT／PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false、Draft/open/unmerged・未配置。10/31・12/18、Piece/Analysis主枠・管理評価53.25％を維持。本文自然さ・反復と既存周辺失敗等は残る。
+
+## u315 — 追加回答後も理由付き満足を経験として保持（2026-10-17 JST）
+
+Mashが2026-10-17 16:46:17 JSTにu314限定案を承認した。別received経験への一度の追加回答（現在／当時×肯定／否定）後も、未変更の理由・対象・満足を満足Moveの局所経験内容として保持する。全体LIMITED・aggregate・意味核辺・checkpoint・Observation・元反応／回答本文は不変。旧u307の当時肯定REVISE資格を維持する。
+
+原required5核3辺・一意な原source2出現、独立した理由三点／received二点、round1・各回答1・RESOLVED・ADD exact1、原失効0・原核辺不変、追加回答核1／ABOUT1辺を出典から検証する。accepted／changed／evidence・subject・時点bindingと全required被覆、肯定3／否定2 Movesのtarget／support／evidenceを照合。現在のanchorも原本envelopeとし、時点証拠を回答へ結ぶ。PARTIAL・unknown・history/frame／legacy・複数／後続回答・共有対象・余剰材料・plain／unfinished・他更新は新資格外。
+
+`STRUCTURE_MAP_DELTA_PRESENT`。既存private V1三型を再利用し、field／schema／manifest／validatorは変更しない。`emlis_answer_update.py`のREVISE証明、作者／有限reader、公開API／DTO／DB／RN、各上限、新file／依存、01B/C・Piece/Analysisの責務は不変。完成済み保存本文は非再生成、未完成current checkpointは同じ受理意味・operation・既存履歴を保って現行本文へ再開する。
+
+主回帰 1,497 passed／1 warning（855.50秒）。最終sourceの全件一括実行：appraisal 1,443＋application 54。追加92検査を含み、個別検査の成功数は重複加算しない。
+
+101比較は対象60（必須48＋語／時点変種8＋程度4）だけの局所内容／selected型／Reception／text変更、非対象41は取得全record一致。checkpoint95例の意味・核辺・Move・Observation等は全一致。実service73ケース／RN146 DTO、保存38種全文をrootが読解した。主回帰と境界拒否の詳細は06／API handoff u315を参照。native stubによる合成RNで本人実機の追加確認ではない。
+
+Q3 retainedは12 pass／既存16 failでu314と失敗trace全文がprocess address以外一致。identity1 pass。旧完成4の非再生成、旧pending4／中断checkpoint4の意味・履歴保持を確認。rootは対象28種／保存38種全文と146対応を読解した。同Work補助は正式別model検証へ換算しない。
+
+最新結果は06／API handoff u315、再開順はweekly §5.6.65。今回の追加承認を待ち直さない。説明の長さ・対象／語尾の反復など本文品質は残件。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。
+
+TECHNICAL_CREDIT。10/31管理線・12/18公開目標、Piece/Analysis主枠・管理評価53.25％は維持。
+
+
+## u316 — 選択済みreceived経験を本人の経験として直接述べる（2026-10-17 JST）
+
+既存NORMAL component／承認済みretained LIMITED local pairのreceived文を、作者の受容説明から本人の過去経験を直接述べる文へ修復。「褒められたことだけでは言い表せない、嬉しさが伴わなかったあなたの経験として受け取りました。」を「褒められたことは、あなたにとって嬉しさを伴わない経験だったのですね。」へ変更した。10〜11字短くし、受容説明を一つ減らす。作者と有限readerの2owner内だけの変更で、新旧完全文法を同じ元sourceへ逆読取する。SELF・past・対比、資格／意味選択・Plan／Move／aggregate／checkpoint・Observation、u315 ADD保持、型／schema／API／DB／RN・上限・依存は不変。
+
+主対象1,497固有test node（appraisal1,443＋application54）の成功を最終製品source上で確認。一括全件passのrunではなく、3分割初回1,371 pass／35 fail／91 skip後、旧文面期待値と作者禁止配置等の検査修正36件、環境設定済みapplication54件・appraisal保存38件を再実行して全pass。collectionとの被覆を照合し重複は加算しない。詳細は正本06／API handoff u316。Q3 retainedは12 pass／既存16 fail、u315と失敗trace全文がprocess address以外一致。現行identity1 pass。
+
+旧新68例は初回30＋保持後16の46例でReception／textだけ変更、22例は取得全record一致。checkpoint66例の意味・選択・状態等は不変。polite received先頭・同一欄の6例は既存の一般化／欠落／停止が残り、unfinished2例は本文なしのSTOPで成功に数えない。実service／ローカルPGlite59case・現行RN86DTO、旧完成非再生成と旧pending／中断checkpointの意味・operation・履歴保持を確認。rootは旧新28種／保存37種全文と全対応を読解。native stubで本人実機ではなく、同Work補助は正式別model検証ではない。
+
+STRUCTURE_MAP_DELTA_NONE。既存owner内の文面変更で全体図・全file地図／current_structureの責務差分なし。全体設計・01A/B/C・current・最新weeklyを確認済み、System Context prepareは設定先repo不在のため原資料直接確認へ切替えた。06／API handoff／07・weekly§5.6.66へ同期。
+
+次は同一欄で「誘われたのに、悲しかったです。」が先頭になる6例について、後続plain／reasoned／unfinished評価のsource所有と既存選択を照合し、内容欠落の原因を優先する。bare形・別欄・逆順と比較し、既存契約の修復範囲を確定する。新意味資格は無断拡張しない。満足側の長さ・「経験」／「のですね」反復、Observation重複、当時肯定ADDの対象反復、対象外更新・既存周辺失敗・same100・Q1上限・giver帰属・本人実機／正式Product Readは未解消。
+
+TECHNICAL_CREDIT／PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false、Draft/open/unmerged・未配置。10/31管理線・12/18公開目標、Piece/Analysis主枠・管理評価53.25％を維持。
+
+## u317 — 丁寧形received先行の同一欄で後続評価を保持（2026-10-17 JST）
+
+単一の本人received経験「…のに、悲しかったです／嬉しくなかったです」が同じ欄の先頭にあると、report-prefixの誤拒否で後続plain／reasoned／unfinished評価が一般化・欠落・停止していた。既存本人受け手証明の後で、negative反応かつ実source過去末尾「かったです」の場合だけ誤拒否を閉じる。現在形／名詞形／肯定反応、他者・giver SELF・引用／伝聞等は対象を広げず旧挙動を維持。shared report helper／作者／reader・意味資格・型／API／DB／RN・上限は不変。
+
+新private sourceモードを既存3ownerへ通し、保存済みcheckpointはu316の完全な元source解釈を再導出して完全照合する。旧IDへ新意味を付け替えない。currentは核辺・checkpoint・Observation／選択を含め認識が修復される。STRUCTURE_MAP_DELTA_PRESENT、全体01／01A／current01/04を同期した。
+
+主回帰1,584 pass（appraisal1,530＋application54、追加87込み、重複なし528×3 shard）。104旧新比較は36変更／68全record同一、本文65→83。旧checkpoint14、現行identity1 pass。Q3 retained12 pass／既存16 failでu316と失敗trace全文がprocess address以外一致。実service52case／RN78 DTOの全文・元入力・全履歴・再openを確認し、rootは旧新27種／保存29種全文と対応を読解。旧完成は非再生成、旧pendingはcurrent回答へ、旧checkpoint中断は旧意味／本文を再現する。native stubで本人実機ではなく、同Work補助は正式別model検証へ換算しない。
+
+新設testの途中10失敗は、既存bareでも同じ受容欠落を確認したため今回の保証をsource／operation／Observationへ合わせ、未解消として明記した。plain／unfinishedのnegative評価訂正4例でreceived経験、満足撤回6例で対象出来事が受容から落ちる。次はこの10例を別欄／bare／既存保持証明と比較して、修復範囲と必要資格を具体化する。新意味資格を無断拡張しない。現在形／名詞形／肯定反応、満足側の長さ・語尾／対象反復、giver丁寧動詞の連体化、その他の既存残件も維持。実装・本文・検証の詳細は06／API handoff u317。
+
+TECHNICAL_CREDIT／PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false、Draft/open/unmerged・未配置。10/31管理線・12/18公開目標、Piece/Analysis主枠・管理評価53.25％を維持。
+
+## u318 — 10/17監査に基づくsource作用域とLIMITED参照修復（2026-10-17）
+
+最新weekly20261017のE01〜E04を起点に、既存契約内のbug修復を実施した。LIMITEDのReception basisを選択済みLayer1集合内へ限定し、3final callerの再導出を一致させた。推量「かもしれない」の末尾を制約「ないと」と誤認しない。完全なwh-object＋明示SELFの現在否定認知を既存uncertaintyへ補正し、報告・前文の他者topic・時点／源範囲の拒否を維持した。短い節で落ちるcontrast markerは、既存両端間の一意な実接続語だけをsource照合で回復する。meaning/unknown契約・surface/inverse/gate・公開API/DB/RN・質問上限・依存は不変。
+
+元10例は初回本文8→9、固定100は70→71（0090だけ変更、99結果record同一）。別の短い対比4例も復旧。原03の「休めたことにほっとした／かもしれないと思うと寂しい」は内外述語の作用域・unknown witnessが未解決で未提供を継続する。受容の汎用性は改善完了ではない。
+
+最終sourceで対象回帰 **2,278 passed、skip/failed 0**（appraisal1,530＋Q2/Q3 application54＋既存contrast135＋今回41＋Analysis484＋Piece34）。固有nodeを760/759/759へ分割して全件成功、既存Pydantic非推奨warning2件。現行owner identity検査は別途1 passed／194 deselected。重複する最終対象230件と途中版の結果を合算していない。language identity `e2d1b249e25bdbfff7d90368c542d26dcfce84049ecfbdc2196dc02290622930`、runtime identity `513a79550ca33f39c904c8a0d4b49edc637411e08bc451d6cc2e1ea9a74bb92d`。
+
+同一最終sourceの実migration/RPC＋PGlite＋service20ケース／24 DTO、RN hook/modal24 DTOの本文・質問・原入力・全履歴・close/reopenを確認した。旧完成07の非再生成と旧pending07の回答は保持。旧04通常失敗はretry不可、旧04中断checkpointの再開も未提供であり、復旧成功には数えない。rootは元10／固定100／保存16種全文と24対応を読解。本人実機・本番DB・deploy・main merge・正式別model検証は今回0。
+
+`STRUCTURE_MAP_DELTA_NONE`（製品owner/file/経路・契約の追加なし、既存source/binding内部修復）。新回帰testだけ01Aへ追跡を追加。今回の正本詳細・全未加工本文・最終source SHA・再開課題は [u318実装監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u318_SourceScope_and_LimitedBinding_20261017.md) を参照。
+
+次は原03を、原文範囲と有限述語の証明を持つ共通source ownerで、安堵・将来の可能性・現在の寂しさへ読み分ける。既知動詞の列挙や任意文字列受理に縮めず、条件関係を因果へ読み替えない。必要なら最小契約差分を具体化してから扱う。E04汎用受容、E05質問、u317同欄REVISE4/WITHDRAW6、旧失敗checkpoint、本人実機を残件として維持する。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。10/20方式判断、10/31管理線・12/18公開目標、Piece/Analysis主枠・管理評価53.25%は不変。
+
+## u319 — 原03の感情作用域・対比本文と旧checkpoint（2026-10-17）
+
+原03の「休めたことにほっとした」と「かもしれないと思うと寂しい」を、過去の安堵/内側可能性/現在の感情として原文全体から証明した。実markerによるcontrast、異なる時点に「同時」を加えないObservation、両感情を保持する既存Receptionの独立全文検査まで修復。NORMALと独立unknownを残すLIMITEDの両方を確認。意味型・unknown契約・Move/aggregate・公開API/DB/RN・問い上限は不変。
+
+元10例初回9→10、固定100例71のまま全結果record一致。途中0062/0066の受容脱落は本文比較で発見・修正、最終で保持を確認。最終scope/本文/legacy回帰145 passed、現行identity1 passed。共有広域回帰は下記監査の実行版別記録を参照し、重複合算しない。実migration/RPC＋PGlite/service20ケース24 DTO、RN24 DTOの全文/履歴/close/reopenを確認。旧完成07の作者禁止readと旧pending07更新を保持。旧03通常失敗はretry不可、旧03中断は旧checkpoint完全一致で再開しても旧意味のため未提供を維持する。
+
+原03の本文提供復旧はE04受容品質・E05問い・E06訂正撤回の完了ではない。次は原03のsourceを保持した入力固有の受容、別の主体/時点/願い誤認と同欄REVISE4/WITHDRAW6を一体単位で進める。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmerged。本人実機/本番DB/deploy/mergeは0。10/20判断・10/31管理線・12/18目標・Piece/Analysis主枠・53.25%は不変。
+
+`STRUCTURE_MAP_DELTA_NONE`。実装詳細・最終source・未加工全文・検証の版区分は [u319監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u319_CognitiveFeelingScope_and_ContrastBody_20261017.md) を正とする。
+
+## u320 — 認知内の時間主題で止まる本文を修復（2026-10-17）
+
+最新weekly20261017のE04を追う中で、原03の自然変種「今後は誘ってもらえないかもしれないと考えると寂しい」が本文未提供になることを実測し、既存source契約内で修復した。新規自然変種3件（今後は・そのLIMITED・これからは）は未提供から本文ありへ復帰し、原03は不変。時間主題を内側の可能性の原文範囲へ残し、現在の感情の時点へ漏らさない。「今後も」の「今」だけを外側時点が消費する誤りと、「誘って」の動詞活用を人のtopic「って」とみなす誤りも同じsource ownerで修正した。後者は既存received動詞の受身語彙との活用対応で限定し、任意の漢字名詞を許可しない。
+
+意味型・受容内容契約・作者／reader・Move／aggregate・公開API／DB／RN・質問上限は不変。旧u319 checkpointは今回修復だけを無効にした元意味を完全再導出し、旧IDへの新意味付替えを拒否する。製品変更はsource plan・questionのoriginal plan入口・answer updateの旧意味復元の既存3file。新しい意味型、外部AI、依存、補助systemは追加しない。
+
+最終sourceの一括284件は **264 passed／20 failed／1 warning**（97.07秒）。内訳はscope／本文／旧checkpoint180、Q2/Q3 application54、周辺2file30 pass／20 fail。変更前d780c315で同じ周辺2fileを実行して30 pass／20 fail、20 failed node・102行の例外内容・retained assertion内訳が一致した（checkout path／process addressのみ正規化、trace表示はlong／short差あり）。この20件を成功へ換算せず、従来4／17／16との集合合算もしない。現行identityは別途1 passed／194 deselected。元10初回＋07回答後、固定100の全取得recordはelapsedを除きu319最終と一致し、元10本文10・固定100本文71／未提供29は不変。途中runは最終件数へ足していない。
+
+実EmlisThreadService＋隔離PGliteで7ケース／8 DTO、現行RN hook／Modalのnative stubで8 DTOの全文・元入力・全履歴・close/reopenを確認。新規4件と旧完成原03のGET/startは作者禁止で同一、元入力DB行も不変。旧natural通常失敗はretryを409で拒否し、旧checkpoint中断retryは完全な旧意味・既存events・operationを保った上で旧意味による未提供を維持する。既存失敗の再実行許可へ変えていない。本人実機／本番DB／deploy／mergeは0。
+
+E04の受容は依然として原文両節＋汎用の対比保持であり、今回を受容品質完成としない。scope情報がprivate内容投影で両端保持まで縮まる原因は確認したが、新しい内容armを足すだけで§9.2／§9.4の主観的な受容差分が成立するとは確認できなかった。新armは未実装・未推奨であり、承認待ちの次工程にはしない。同欄更新12件の再現ではREVISE4はreceived経験を落とし、WITHDRAW6は未撤回の行為／理由／未成立contextを受容から落とす。理由付きREVISE2は両経験を保持した。既存18検査の成功はObservation中心で、この10欠落の解消を証明しない。
+
+`STRUCTURE_MAP_DELTA_NONE`（既存owner内の作用域と旧意味再導出。製品経路・意味契約の追加なし）。新しい旧u319 fixtureのみ01Aのfile追跡へ記録した。詳細・実測全文・途中版との区別は [u320監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u320_CognitiveTemporalTopic_20261017.md) を参照。
+
+次は入力固有の受容を、語尾変更やsource分類の表示だけで済ませず、自然変種・訂正／撤回・保存表示まで一体で成立させる。E01の他の主体／時点／願い誤認、E05の問い、E06の上記10欠落、E07 history、E08本人実機、E09既存失敗は未解消。新意味契約が必要な場合は可視内容の差まで具体化して扱い、型追加そのものを次作業にしない。10/20方式判断、10/31管理線・12/18公開目標、Piece／Analysis主枠・管理評価53.25％は不変。
+
+本文提供の修復はtechnical resultであり、PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。同Work補助を正式な別model評価へ換算しない。
+
+
+## u321 — 同欄の評価訂正後も未変更received経験を残す（2026-10-17）
+
+latest weekly §3.7／u320の同欄欠落10件のうち、理由なしREVISE2件を修復。既存answer_updateのsource証明に同一欄の完全2文・非重複範囲・欄全体の閉包・全span順序・既存projection再導出を追加し、既存LIMITEDの2 dutyへ渡す。初回本文・元と現在の核辺・完全checkpointは不変。別欄限定private内容資格・意味型・作者／reader・公開API／DB／RN・問い上限は変更しない。
+
+最終関連回帰302 passed／1,254 deselected（297.18秒）、Q2/Q3 application54 passed／既存warning1（76.05秒）。別file集合で計356 passed、failed/skip 0。新規27件を含み、旧同欄拒否1件は同一入力の保持検査へ移動。途中14件を合算しない。実service＋隔離PGlite8ケース／18 DTO、現行RN hook／Modalのnative stub18 DTOで本文・元入力・全履歴・close/reopenを確認した。旧完成2件は作者禁止のGET/start／同回答再送で元の本文を維持。旧pending2件と旧中断更新2件は同じ保存意味から現本文を生成し、中断再開ではprepareを禁止してcheckpoint・意味/回答event・旧履歴・operationを保持した。
+
+元10＋07回答／固定100はelapsed以外の全record不変。3形×2欄の6件のbaseline比較でも初回public結果・訂正後完全checkpoint／意味が一致し、未変更経験がReceptionへ戻った。u291の同欄拒否1ケースは当時の実装範囲と確認し、同じ入力を両順序の保持検査へ移した。他の拒否条件・歴史記録は維持する。現行identityを再導出して変更なし。STRUCTURE_MAP_DELTA_NONE。
+
+未成立事項付きREVISE2／WITHDRAW6、E04の汎用受容、E01の別の誤認、E05の問い、E07〜E09は残る。旧保存本文の再生成や商品品質完成とはしない。本人実機／本番DB／deploy／mergeは0、PRODUCT_NOT_CLEAR・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。管理日付・配分・53.25%は不変。詳細・未加工実本文は [u321監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u321_SameFieldRevisionRetention_20261017.md) を参照。
+
+
+## u322 — 訂正後も未成立事項と別の経験を保持する（2026-10-17）
+
+最新weekly20261017 §3.7／u321で残った8欠落のうち、未成立事項付きREVISE2件を修復した。既存answer_updateで元の未成立context・評価対象・評価・別のreceived経験を原文から再証明し、更新後の未変更核と2関係を照合して、既存LIMITEDの3 dutyへ渡す。訂正された評価で失効した旧対比は復活させず、未成立事項は独立に受け止める。意味型・private内容資格・作者／reader・公開API／DB／RN・問い上限は変更しない。
+
+最終関連回帰328 passed／1,242 deselected（134.89秒）、Q2/Q3 application54 passed（74.28秒）。別file集合で計382 passed、failed/skip 0、既存Pydantic warningは各run1件。新規14件は328件に含む。既存期待値の変更・削除は0。途中14件を再加算しない。baseline 3形×2欄の6件で初回public結果・訂正後完全checkpoint・元と現在の核辺が一致し、訂正後public差分はbody／Receptionだけだった。旧checkpointからも現行freshと同じ本文になる。固定100／元10は今回再実行しておらず、u321の結果を今回の検証へ換算しない。
+
+実EmlisThreadService＋隔離PGlite8ケース／18 DTO、現行RN hook／Modalのnative stub18 DTOで本文・元入力・全履歴・close/reopenを確認。旧完成2件は作者禁止GET/start／同回答再送で欠落のある旧本文もそのまま保持する。旧pending2件・旧中断更新2件は保存意味から現本文を生成し、中断再開はprepare禁止でcheckpoint・意味／回答event・旧履歴・operationを保持した。
+
+STRUCTURE_MAP_DELTA_NONE（既存owner内の保持選択修復、新製品file／経路／契約なし）。残るE06は理由なし／理由付き／未成立事項付き×2欄のWITHDRAW6件。次は撤回済み評価や旧因果／対比を復活させず、残存する行為・理由・文脈を受容へ残す証明と有限節接続を確認する。E04の汎用受容、「悲しかったですということ」などの不自然さ、Observationの「同時」「感覚」、E01の別誤認、E05の問い、E07〜E09は未解消。既存4／17／16／20失敗は今回は再実行も集合合算もしていない。
+
+PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持。本Work補助は正式別model評価ではない。本人実機／本番DB／deploy／mergeは0。10/20方式判断、10/31管理線、12/18公開目標、Piece／Analysis主枠・53.25%は不変。詳細・未加工本文は [u322監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u322_UnfinishedRevisionRetention_20261017.md) を参照。
+
+
+## u323 — 評価撤回後も同欄の行為・理由・未成立事項を保持する（2026-10-17）
+
+最新weekly20261017 §3.7／u322の同欄WITHDRAW6欠落（理由なし／理由付き／未成立事項付き×memo／memo_action）を修復した。元の評価だけを明示撤回したこと、元sourceと残存する全核・received関係の一致を確認し、既存LIMITEDの2／3責務へ残存行為・独立の理由／未成立事項・別の経験を渡す。撤回した満足や旧因果／対比は復活させない。別欄WITHDRAW・private内容資格は適用を拡張していない。意味型・公開API／DB／RN・質問上限は不変。
+
+既存source文法で証明した行為だけをte／de／taから有限形へ接続し、その行為の全文readerは作者を呼ばず原文へ復元・照合する。選択された内容・参照・属性とSELFの「あなた」への対応も検査する。他のLIMITED責務には既存作者replayが残り、本文全体の独立reader完成とはしない。文間の連続空白でoffsetがずれる途中不具合も、元envelopeの欄bytesから既存入力正規化を再利用して修復した。
+
+最終関連回帰は **606 passed, 1004 deselected, 1 warning in 308.96s (0:05:08)**、Q2/Q3 applicationは **54 passed, 1 warning in 78.07s (0:01:18)**。別file集合で計660 passed、failed／skip 0。新規40件は606件に含む。現行owner identity検査は別途 **1 passed, 194 deselected, 1 warning in 25.01s**。途中585 passed／13 skippedはPGlite設定不足の保存系13件であり、最終runで設定を補って全件実行した。途中結果を再加算しない。既存期待値の変更・削除は0、現行identity fixtureのみ実sourceから更新し、凍結歴史fixtureは不変。
+
+元6件と自然変種6件のbaseline比較では、初回public結果・撤回後完全checkpoint・元と現在の核辺が一致し、撤回後public差分はbody／Receptionだけ。旧checkpointから現行freshと同じ本文になる。実service＋隔離PGlite24ケース／54 DTO、現行RN hook／Modalのnative stub54 DTOで本文・元入力・全履歴・close/reopenを確認した。旧完成6件は欠落のある旧本文も作者禁止でそのまま保持し、旧pending6件と旧中断更新6件は保存意味から現本文を生成。中断再開はprepare禁止でcheckpoint・意味／回答event・旧履歴・operationを保持した。本人実機／本番DB／deploy／mergeは0。
+
+STRUCTURE_MAP_DELTA_NONE。u320の同欄10欠落はu321のREVISE2・u322のREVISE2・今回WITHDRAW6で対象内を修復したが、E06全体の完了ではない。次は入力固有の受け取りを、原文の列挙や汎用語尾だけで済ませず自然変種・更新・保存表示まで一体で改善する。別欄WITHDRAWは今回未変更、E04汎用受容、E01の別誤認、E05の問い、E07〜E09は未解消。固定100／元10・既存4／17／16／20失敗は今回再実行も集合合算もしていない。
+
+PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持。同Work補助は正式別model評価ではない。10/20方式判断、10/31管理線、12/18公開目標、Piece／Analysis主枠・53.25%は不変。詳細・最終source・未加工本文は [u323監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u323_SameFieldWithdrawalRetention_20261017.md) を参照。
+
+## u324 — 現在の感情と本人の理由不明を保持する（2026-10-18 JST）
+
+「なんだかしんどい。その理由はまだ分からない」「少し怖い。その理由は自分でもまだ分からない」の本文未提供と、「なぜそう感じるのか、私にもよく分からない」の対象を落とした汎用Receptionを修復した。原文の完全な二節・唯一の先行感情・現在SELFを証明した既存の組だけを扱い、「あなた／ご自身」への対応を独立readerで逆照合する。短い状態への誤分類も新しく証明した組だけ修復し、既存認識済み対照は不変。原04の不明対象を理由へ読み替えない。既存6owner内、STRUCTURE_MAP_DELTA_NONE。
+
+最終関連集合は284 passed／既存3 failed（baseline226 passed／同じ3 failed）。追加58件は全成功。Q2/Q3 applicationは別集合54 passed、現行owner identityは別1 passed。既存3失敗は旧名詞句を期待するassertionで、変更・削除していない。新しい旧u323 fixture4件は完全checkpoint・核辺hash・公開結果を保持する。
+
+実service／隔離PGlite6ケースと実DTOを使う現行API client／hook／Modal native stub6件を確認。現行3プランの保存本文、旧完成本文の作者禁止再表示、旧checkpoint前／後のDB rollbackからの再開を区別した。旧checkpoint後は同一保存意味から旧本文を生成し、新しい意味へのID付け替えはしない。実機／本番DB／deploy／mergeは未実施。
+
+本文7件を主担当が読み、対象と不明を残す修復を確認した。入力固有の深い受容・問いの完成ではない。E04／E05と範囲外のE06等は残る。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持。同Work補助は正式別model評価ではない。10/20・10/31・12/18の既存線、Piece／Analysis主枠・53.25%は不変。次は原04の不明対象を保つ受け取りを自然変種・更新・保存表示まで改善する。
+
+全文・source・検証条件：[u324監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u324_FeelingReasonSelfScope_20261018.md)。
+
+## u325 — 選択済みの不明対象を受け取り本文へ戻す（2026-10-18 JST）
+
+原04「なんだかしんどい。何が嫌なのか、自分でもよくわからない。」は、意味選択に両方の核が残る一方、Receptionで「今ここに置かれた言葉」へ縮約されていた。既存選択のATTENTION／RECEIVE_AS_MATERIALを維持し、本人・対象・程度を有限文へ戻した。理由不明へ読み替えず、原因・助言・問いを追加しない。完全な原文fieldを既存normalizerでledger座標へ揃え、作者と独立readerが再照合し、既存5製品file内で修復。STRUCTURE_MAP_DELTA_NONE。
+
+本文10件、旧u324の完全checkpoint・核・辺・選択内容の同一性を確認。参照方式由来のgrounding_ref／selected input_refは更新し、選択意味の同一性と区別した。source_scopeは292 passed（追加60）、Q3理由不明対照は48 passed／既存3 failed、application別集合54 passed、現行identity別1 passed。既存の3期待を変更・削除・skipしていない。実service／PGlite6ケース、実DTOによるAPI client／hook／Modal native stub6件を確認。旧完成本文は作者禁止で不変、旧中断は同一保存意味から新本文へ再開。実機・本番DB・deploy・mergeは未実施。
+
+主担当が未加工10全文を読んだ。対象欠落は修復したが、引用中心のObservationと原文に近いReceptionは残り、E04の深い受容・E05の問いの完成ではない。原04はENDのため架空の質問を使って回答更新成功とは扱わない。単独不明の汎用化、別行動併記時の受け取り対象選択などが次の具体的残件。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持。既存の期限・配分・53.25%は再評価しない。
+
+全文・source・検証条件：[u325監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u325_UnknownObjectReception_20261018.md)。
+
+## u326 — 単独の不明対象を本人・程度ごと受け取りへ保持（2026-10-18 JST）
+
+単独memo「何が嫌なのか、自分でもよくわからない。」が「まだ分からないこと」へ縮約される不具合を、既存Plan／HR／Gateの3owner内で修復した。全文sourceで現在SELF・negative・uncertainの単独節を証明し、本人・対象・程度・否定を有限文へ残す。原文にない「まだ」は追加しない。選択済みのUNFINISHED_OPENNESS／LEAVE_UNFINISHEDを維持し、意味・核辺・完全checkpoint・selected内容は不変。参照方式由来のgrounding_ref／input_refだけの更新は区別する。STRUCTURE_MAP_DELTA_NONE。
+
+source_scope最終341 passed（既存292＋追加49）。旧u325の完全checkpoint10件で意味同一性、作者禁止readerで対象・本人・程度・否定・時点の保持を確認した。途中340 passed／新規1 failedは合算しない。新規の同義語尾が既存marker契約外であることを受け、readerを現行の「受け止めています」へ限定して拒否検査へ修正した。既存検査を緩和・削除していない。Q3理由不明対照は48 passed／既知3 failed／905 deselected・skip 0、Q2／Q3 applicationは54 passed、現行owner identityは1 passed／194 deselected。別集合の計444 passed／既知3 failedであり、全件成功ではない。各runに既存warning1件。既知3失敗は未修正。
+
+実service／隔離PGliteのSQL・RPC6ケースと、同じ実DTOを渡す現行API client／hook／Modal native stub6件で保存本文・close/reopenの完全一致を確認。現行3プラン、旧完成、旧checkpoint前／後中断を区別する。本人実機・本番DB・deploy・mergeは未実施。対象はENDであり、架空の問いによる更新成功を作らない。
+
+独立行動を併記すると不明対象の受け取りが落ちる選択問題は別残件。対象欠落の限定修復をE04の深い受容・E05の問い完成としない。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持。同Work補助は正式別model評価ではない。期限・主枠配分・53.25％は再評価しない。
+
+全文・source・検証条件：[u326監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u326_SingleUnknownObjectReception_20261018.md)。
+
+## u327 — 対象を持つ不明と独立した行動を両方受け取る（2026-10-18 JST）
+
+別欄memoの完全な本人・現在のwh不明節と、memo_action全体の独立実行済み行動を、既存の二責務へ保持した。source証明が成立する場合だけ既存3属性へ接続し、optional bounded cross-fieldのwish／attempt誤関係だけを除く。既存selectorのMATERIAL_WEIGHT／RECEIVE_AS_MATERIALを使い、単独u326のUNFINISHED受容は強制しない。本人・対象・程度・否定を保ち、原文にない「まだ」を加えない。既存6owner内、STRUCTURE_MAP_DELTA_NONE。
+
+Q1公開経路でも準備済みplanを捨てず、Q3と同じ意味から本文へ接続する。直接builderはlegacy既定を維持し、他coreへ広げない。今回のsource属性・関係・選択変更は新しいmeaning identityへ反映する。旧u326 checkpointは全意味の再導出と完全一致で復元し、旧完成と旧checkpoint後retryは旧action-only本文を保持。checkpoint前retryは現行の二責務本文となる。公開API／DB／RN／schema／問い上限は不変。
+
+source_scopeは435 passed（追加94：20入力×Q1／Q3、旧checkpoint20、本文改変18、対象外16）。Q3理由不明／既存scalar＋別行動対照は54 passed／既知3 failed／899 deselectedで、旧名詞化文のexact期待を変更していない。Q2／Q3 applicationは54 passed、現行identityは1 passed／194 deselected。別file集合の合計544 passed／既知3 failed、skip 0であり、全件成功ではない。実SQL／RPC service6ケースと、同じ実DTOによるAPI client／hook／Modal native stub6件で全文・close/reopen一致を確認。実機／本番DB／deploy／mergeは未実施。途中runや内包するケースを重複合算しない。
+
+主担当が20全文を読んだ。二内容の保持は修復したが、Observationの引用／感覚分類、Receptionの近い反復と行動への定型は残る。同欄行動の誤分類、scalar不明＋別欄行動のaction-onlyも別残件。E04／E05の完成とはせず、PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。同Work補助は正式別model評価ではない。期限・主枠配分・53.25％は再評価しない。
+
+全文・実装境界・保存互換：[u327監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u327_IndependentUnknownActionReception_20261018.md)。
+
+
+## u328 — 同欄の本人不明と証明済み行動で止まる本文を修復（2026-10-18 JST）
+
+最新weekly20261017 E01〜E04とu327残件を起点に、同じmemoの「何が嫌なのか、自分でもよくわからない。メモを書いた。」と逆順で本文が止まる原因を修復した。行動自体は既にaction/fact/pastとして読めていたが、本人不明のsource証明・選択・本文接続が別欄限定で、Q3ではLIMITED_RECEPTION_CAPABILITY_GAP_STOPになっていた。
+
+既存4製品owner内で、完全な二文・SELFの現在wh不明・既に証明済みの本人実行行動を照合し、既存3属性とMATERIAL_WEIGHT／RECEIVE_AS_MATERIALの二責務へ接続した。両方の対象を本文へ明示し、source-orderを背景や因果へ変えない。Q1も準備済みplanを本文へ渡す。行動の再分類・required関係削除・意味型追加は行っていない。別欄のu327 helperと既存拒否検査は保持した。
+
+- 元の16例：対象8例は本文なし→本文あり。残る机の8例はcheckpoint／核辺／selected／本文・問いの取得recordが不変（4本文あり、4未提供）。机を願いとする誤認は未修復である。
+- source_scope **496 passed**（既存435＋新規61）。Q3対照 **54 passed／既知3 failed**、Q2/Q3 application **54 passed**、現行共有owner identity **1 passed**。別集合の合計 **605 passed／既知3 failed、skip 0**。全体suite合格ではない。
+- 実service＋隔離PGlite SQL/RPC **7ケース**、同じ保存DTOを使う現行API client／hook／Modal native stub **7ケース**で保存・GET・元入力・履歴・close/reopen一致。本人実機・本番通信ではない。
+- 旧完成本文と旧確定の未提供状態は再生成しない。旧checkpoint前の保存中断は現行二責務へ進む。旧checkpoint後の中断は旧意味を完全再導出し、旧未提供状態を保持する。旧IDへ新意味を付け替えない。
+- 途中33失敗はQ1の未接続8、追加検査の語尾期待8、JSON配列/tuple比較16、変異対象文字列1。Q1製品接続と新規検査の表現・serializationを修正し、既存assertionの変更・削除なしで最終496成功。保存試験は旧本文未提供のためOBSERVATION eventが出ないことを踏まえ、中断注入を実際の終端結果保存へ修正した。途中runを合算しない。
+
+STRUCTURE_MAP_DELTA_NONE（既存owner内のsource証明・選択・本文接続修復）。新fixtureは修正前APIの合成16例を凍結。System Context prepareはrepository metadata不在で失敗したため成功扱いせず、GitHub treeと全現行blobの照合済み実ファイルを直接読んだ。前提資料・作業規則・必読incident・全体設計図／全file地図・最新weeklyと対象sourceを照合。同Work補助は正式別model評価ではない。
+
+受容の近い反復、Observationの感覚分類・引用、行動への定型は残る。机のvalue／願い誤認とrequired関係、資料整理のevent残留、昨日行動が先行する場合の不明誤分類、scalar不明＋別欄行動の片側欠落は未修復。E04の深い受容／E05問い・範囲外E06・E07〜E09を閉じない。対象はENDであり、架空の質問による回答成功を作らない。
+
+次は同欄の机／資料整理の実source分類と、その分類から生じる誤関係を既存ownerで確認し、正しい意味と受け取りを一体で修復する。一般にrequired関係を削除してはならない。10/20には、局所的な保持・停止修復が深い受容と問いへどこまで届いたかで方式継続を判断する。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式0/3／candidate_ready=false／automatic_progression=false／Draft/open/unmerged・未配置。10/31管理線・12/18目標・Piece/Analysis主枠・53.25％は再評価しない。
+
+詳細・未加工16例・実装境界：[Cocolon_EmlisAI_u328_SameFieldUnknownActionReception_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u328_SameFieldUnknownActionReception_20261018.md)。
+
+### u328 GitHub反映後のcurrent authorityとexact path
+
+実装write commit／確認済みHEAD：`MassyuRed/mashos-api:agent/cmee-v1a-i1sx-source-explicit-20260815@f58e6ba96fded4befcec2df5cfd2f284e88705ea`。資料の初回write commit／確認済みHEAD：`MassyuRed/Cocolon:agent/three-core-cmee-current-structure-20260815@97f3d4a04fe9cd74a96450931d756dab9d1c348c`。本小差分はその読戻し後の記録であり、資料authority commitは本節を含むGitHub revisionから解決する。最終HEADはPR30と作業報告で確認する。両PRはDraft/open/unmerged。
+
+反映後、下記8＋5の各blob全文とSHA、baselineからのchanged-path集合一致を確認した。製品・fixtureの修正後bytesはテスト時と同一。newは各repo1件、それ以外はmodify。削除なし。
+
+| Repository | 種別 | Exact path |
+|---|---|---|
+| mashos-api | modify | `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` |
+| mashos-api | modify | `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_engine.py` |
+| mashos-api | modify | `ai/services/ai_inference/emlis_ai_grounded_human_reception.py` |
+| mashos-api | modify | `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` |
+| mashos-api | modify | `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` |
+| mashos-api | modify | `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` |
+| mashos-api | new | `ai/tests/fixtures/cmee_emlis_u327_same_field_unknown_action_checkpoint_v1.json` |
+| mashos-api | modify | `ai/tests/test_cmee_emlis_source_scope_regressions.py` |
+| Cocolon | modify | `Cocolon_前提資料/01A_cocolon_overall_structure_app_foundation_home.md` |
+| Cocolon | modify | `Cocolon_前提資料/07_latest_snapshot_diff.md` |
+| Cocolon | new | `Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u328_SameFieldUnknownActionReception_20261018.md` |
+| Cocolon | modify | `Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md` |
+| Cocolon | modify | `Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md` |
+
+
+## u329 — 同欄の実行済み行動を願い・一般eventへ誤分類する原因を修復（2026-10-18 JST）
+
+最新weekly20261017 E01〜E04とu328の次作業に従い、同じmemoの本人wh不明＋「机を片付けた／資料を整理した／机を片づけた」の両順序を修復した。ledgerのvalue/event既定と、近接したvalueとself-awarenessを結ぶconflict observerの派生関係が、実行済み行動を願い・制約・背景へ変えていた。
+
+既存observation_plan一つのowner内で、完全二文、本人の現在不明、単一の名詞目的語＋既存登録済み過去述語を原文・位置から証明する。既存action status解析でaction/fact/pastへ戻し、両端・全span・provenanceが一致するconflict.eN／whole_input_source_orderだけの誤派生関係をoptional uncertain_connectionへ戻す。edge ID・端点・根拠は保持する。本人が明示した因果・対比や別根拠のrequired関係を削除・無視しない。既存二責務・Q1/Q3本文へ接続し、新意味型・関係型・writer・公開contractを追加しない。
+
+- 合成24例は全て、行動と現在の不明を別の内容として本文へ保持。修正前は12本文あり／12未提供、修正後は24本文あり。既存12本文の誤った願い／背景表現も変化した。主担当が修正前後の全本文を確認した。
+- source_scope **608 passed**（既存496＋追加112＝Q1/Q3成立48、旧意味24、非対象25、関係根拠改変4、本文意味改変11）。u328の旧拒否2例は明示legacy planへの検査として残し、他17拒否は現行経路で維持。既存検査変更0とは主張しない。
+- Q3対照 **54 passed／既知3 failed**、Q2/Q3 application **54 passed**、現行共有owner identity **1 passed**。別集合の合計 **717 passed／既知3 failed、skip 0**。全体suite合格ではない。既知3件はu328と同じtest名で、既存assertionを緩めず残した。
+- 実service＋隔離PGlite SQL/RPC **7ケース**、同じ保存DTOを使う現行API client／hook／Modal native stub **7ケース**で保存・GET・元入力・履歴・close/reopen一致。本人実機・本番通信ではない。
+- 既存legacy_unknown_object_action_scopeで旧u328の24checkpointを完全再導出し、核辺・selected・本文・問いが凍結recordと一致。旧完成の誤った願い本文も、旧確定の本文未提供もGETで再生成しない。checkpoint前の中断だけ現行本文へ進み、checkpoint後の中断は旧意味・旧未提供状態を保持する。新分類・新関係の意味identityを旧IDへ付け替えない。
+
+STRUCTURE_MAP_DELTA_NONE（既存owner内のsource分類・関係authority修復）。新fixtureは修正前API f58e6ba…の合成24例。全体設計図・全file地図・前提資料・作業規則・必読incident全文・最新weeklyを確認。開始時GitHub HEADとlocal全blobが一致（API2378／資料1716）。System Context prepareはrepository metadata不在で失敗し、成功扱いせず原典直接確認へ進んだ。同Work補助は正式別model評価ではない。既存bug修復委任内、主担当のみ製品編集・GitHub write、追加費用・新依存・外部AI・本番変更なし。
+
+対象24例はEND。架空の問い・回答を作って一往復成功へ換算しない。Observationの引用・感覚分類、Receptionの近い反復と行動への定型は残り、E04の深い受容／E05の問いを完成扱いしない。昨日行動先行時の不明の時点誤分類、scalar不明＋別欄行動の片側欠落、丁寧形・複合句など今回の有限source証明外は残る。次は残るscalar不明＋別行動の意味・受け取り欠落を既存source/selection ownerで確認し、初回本文と旧保存保持まで一体で修復する。10/20には局所修復が受容・問いへ届いた実結果から方式継続を判断する。
+
+primary outcome=TECHNICAL_CREDIT。商品状態はPRODUCT_NOT_CLEAR／初回一体単位未完了／正式0/3／candidate_ready=false／automatic_progression=false。Draft/open/unmerged・未配置、実機・本番DB・deploy・merge未実施。10/31管理線・12/18目標・Piece/Analysis主枠・53.25％は再評価しない。
+
+詳細・未加工24例・検証境界：[Cocolon_EmlisAI_u329_SameFieldFiniteActionRecognition_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u329_SameFieldFiniteActionRecognition_20261018.md)。
+
+### u329 GitHub current authority / exact path
+
+API write commit／確認済みHEAD：`MassyuRed/mashos-api:agent/cmee-v1a-i1sx-source-explicit-20260815@6af573362ba2ff6f969e24018de80b359804080a`。変更5fileのremote全文・blob SHA・changed-path集合一致を確認。資料current authorityは`MassyuRed/Cocolon:agent/three-core-cmee-current-structure-20260815`の本節を含むGitHub revisionから解決する。資料write直前HEADは`bf67b353338eb998c2e80082d7c0f379183c324b`。最終HEADと資料反映後照合は両PRのu329記録へ結び付ける。
+
+今回のexact pathは以下のAPI5＋資料5。new各1、modify各4、削除なし。製品codeは既存observation_planのみ。
+
+| Repository | 種別 | Exact path |
+|---|---|---|
+| mashos-api | modify | `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` |
+| mashos-api | modify | `ai/tests/test_cmee_emlis_source_scope_regressions.py` |
+| mashos-api | new | `ai/tests/fixtures/cmee_emlis_u328_same_field_action_checkpoint_v1.json` |
+| mashos-api | modify | `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` |
+| mashos-api | modify | `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` |
+| Cocolon | modify | `Cocolon_前提資料/01A_cocolon_overall_structure_app_foundation_home.md` |
+| Cocolon | modify | `Cocolon_前提資料/07_latest_snapshot_diff.md` |
+| Cocolon | modify | `Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md` |
+| Cocolon | modify | `Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md` |
+| Cocolon | new | `Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u329_SameFieldFiniteActionRecognition_20261018.md` |
+
+
+## u330 — 対象を明示しない不明と別欄行動の受け取り欠落を修復（2026-10-18 JST）
+
+u329の次作業「scalar不明＋別行動」を実施した。「今はまだよく分からない。」＋別欄「机を片付けた。」で、不明の意味自体は保持されていたが、原文にないoptional attempt_and_blockが独立二責務の選択を妨げ、Receptionが行動だけになっていた。sourceの分類や新しい意味内容型を増やさず、既存の二責務へ接続した。
+
+既存observation_plan／thread_engineの2製品ownerを修正。既存の本人・現在・否定・程度を含む完全scalar不明と、単一名詞目的語＋登録過去述語の独立行動を証明する。端点・全span・conflict.eN・arc空が一致するoptional誤派生関係だけを既存処理で除外し、required／明示因果・対比・別provenanceを除かない。Q1も準備済み意味から本文へ渡す。wh対象付き不明の作者・readerは既定の狭い範囲を保持し、未記載の対象・理由を補わない。
+
+- 合成20例：机／部屋を片付けた8例のReceptionへ不明を回復。メモを書いた／資料を整理した／机を片づけた12例は完全record一致。全20例で核は変更前と同一、修正前後とも本文20あり。本文提供数の増加ではない。
+- source_scope **698 passed**（既存608＋新規90）、Q3対照 **54 passed／既知3 failed**、application別集合 **54 passed**、現行owner identity別 **1 passed**。合計 **807 passed／既知3 failed、最終skip 0**。全体suite合格・商品合格ではない。
+- 旧u329合成20checkpointを再導出し、完全checkpoint・核辺・selected・本文・問いを一致確認。変更8例は既存legacy分岐で旧誤関係ごと戻し、旧IDへ新意味を付け替えない。
+- 実service／隔離PGlite SQL/RPC6ケースと、同じDTOの現行API client／hook／Modal native stub6ケースで保存・GET・元入力・全履歴・close/reopenを確認。Free／Plus／Premium、旧完成の非再生成、旧checkpoint前／後中断を区別。checkpoint後retryは旧意味・旧本文を保持する。
+- 初回の新規90検査は88成功／2失敗。目的「分かるために」と対比「しかし」を独立行動へ通す過大適用を製品で制限し、最終698成功。既存assertion・歴史fixtureの弱化／削除は0。Q3初回の9skipはPGlite指定不足で、最終runは全実行。identity初回はtest所在誤指定で75 deselected・実行0、正しい既存testで1成功。途中runを合算しない。
+
+STRUCTURE_MAP_DELTA_NONE（既存owner内のsource証明・関係authority・Q1接続修復）。前提資料・作業規則・恒久incident全文・全体設計図／全file地図・最新weekly・正本06・handoffを確認。GitHub現行API2379／Cocolon1717 blobと実ファイルを照合した。System Contextは9/5の既存判断どおり任意補助として再生成せず原典を直接確認。Work内read-only補助2担当を使い、主担当だけが製品編集・GitHub writeを担う。別modelによる正式評価とは扱わない。新依存・外部AI・追加費用・公開API／DB／RN変更は0。
+
+主担当が未加工20全文を読んだ。対象・理由の捏造と片側欠落は今回の有限範囲で防いだが、Observationの引用・Receptionの近い反復・「小さくせず」「大切に思っています」の定型は残り、深い受容は未完成。対象20例はENDで、架空の問い／回答による成功を作らない。昨日行動先行時の時点誤認、丁寧形・複合行動など証明外、E05の問い、範囲外E06・E07〜E09と既知3失敗は残す。
+
+次はE04の「保持した意味から何を受け取り、どう考え、何を伝えるか」が汎用処理説明へ縮む共通原因を既存の選択・内容形成・本文ownerで確認し、自然な受け取りまで届く修復単位を扱う。単なる文末差替を成果にしない。10/20の方式継続判断では、保持修復件数でなく受容・問いへ届いた実結果を示す。今回を判断延期の理由にしない。
+
+primary outcome=TECHNICAL_CREDIT。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式0/3／candidate_ready=false／automatic_progression=false。Draft/open/unmerged・未配置。実機・本番DB・deploy・merge未実施。10/31管理線・12/18目標・Piece/Analysis主枠・53.25％は再評価しない。
+
+詳細・未加工本文・検証境界：[Cocolon_EmlisAI_u330_ScalarUnknownActionRetention_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u330_ScalarUnknownActionRetention_20261018.md)。
+
+
+## u331 — 対比の具体的な対象を返答へ戻し、独立検証・保存まで継続（2026-10-18 JST）
+
+Mash様が承認した「保存・commit単位は小さく、作業終了単位は一つの目的と関連修復・実本文・更新・保存確認まで」を最新weeklyへ先に記録した。方法記録commitは `6d11f3013731e3d81f020ac7e36c6957b6a27297`。15〜25分等の時間を終了条件にせず、今回は同じ目的の参照欠落と関係検証漏れを続けて修復した。
+
+「友達と話せて嬉しかった。でも、疲れた。」の2対象が解析・選択には残るのに、Receptionで「今ここに置かれた言葉／もう一方の向き」へ消える不具合を修復。既存referenceの明示化前に原文field全文・2span・順序・接続・本人の有限節・required contrast根拠を照合し、両対象を名詞節へ実現する。Q1も同じ準備済みplanへ接続。疑問／引用／別主体／報告／丁寧形等を無理に具体化しない。初期試作の主体・疑問・丁寧形への過大適用は未公開のまま修正した。
+
+- 合成20例：Reception6例を修復、14例の本文・未提供状態は不変。生成13／未提供7は前後同じ。全20のcheckpoint・核・辺が完全一致、selectedの主観内容も不変（対象の参照方式に由来するinput_ref／grounding_refは変化）。意味型・主観選択の追加ではない。
+- 新規41検査の初回40成功／1失敗で、両端を残して関係だけ「因果関係」に変えた本文が作者禁止の逆検証を通る実欠陥を発見。Gateで選択済みNONCOLLAPSEのfocal関係・両端・名詞節の並列・違いの付加句・肯定受容を独立に読み、因果化や無根拠挿入を拒否した。語句の禁止リストではなく、対象の外側の関係文法を検査する。
+- 最終：source_scope698＋新規41＝739 passed、Q3対照64 passed／既知3 failed、application54 passed、現行identity1 passed。別集合 **858 passed／既知3 failed／skip0**。途中run・同Work補助probeは加算しない。全project suite／商品合格ではない。
+- 既知3失敗は、9/20のMash指示で保持した旧名詞化本文の期待との不一致。1件の7 failed assertionsは旧語句replaceによる無変化、2件は旧全文exact不一致。現在の有限文に対する既存26検査は通過。今回、既存assertion／歴史fixtureを弱化・削除していない。
+- 実service＋隔離PGlite SQL/RPC9ケース、同じDTOの現行API client／hook／Modal native stub9ケースで、3tier・旧完成非再生成・checkpoint前後中断・実際の回答／訂正／撤回・保存GET／元入力／全履歴／close-reopenを確認。今回のcheckpoint内容は不変なので、checkpoint後中断も同じ意味eventから修復本文へ進む。保存済み旧本文は非再生成で不変。対象6例自体はENDであり、架空の問いを作らない。
+
+全体設計図・全file地図・前提資料・作業規則・恒久incident・最新weekly・正本06・既存handoffを確認。製品は既存OP／HR／Gate／thread_engineの4owner。新test／変更前fixtureを地図へ追記し、STRUCTURE_MAP_DELTA_NONE。新依存・外部AI・新schema・公開API／DB／RN変更なし。同Workのread-only補助は正式な別model評価ではない。
+
+主担当が未加工20例、rich対照6例と更新本文を読んだ。具体対象は戻ったが、「両方を小さくせずに受け止めています」の定型は残る。原03の実際の過去の安堵／認知内の不確かな予想／現在の寂しさから、Emlisが何を感じどう応じるかを選ぶ部分は未完成。新型を増やせば改善すると結論しない。次の設計判断は下記監査の未採用案で、可視本文・各主張の根拠・変更範囲・検証と停止条件を具体化した。Rule18 §11.3の新しい主観選択／内容契約の境界なので、実装へ自動進行しない。
+
+E01の他の主体／時点、Observationの時点差に対する「同時」表現、今回非対象の丁寧形・同span・逆順等、原03＋独立不明の受容欠落、E04深さ、E05問い、残るE06〜E09は未解消。本文修復件数で10/20方式継続判断を延期しない。10/31管理線・12/18目標・Piece/Analysis主枠・53.25％は不変。
+
+primary outcome=TECHNICAL_CREDIT。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式0/3／candidate_ready=false／automatic_progression=false。Draft/open/unmerged・未配置。実機・本番DB・deploy・merge未実施。
+
+詳細・全20例・次の未採用案：[Cocolon_EmlisAI_u331_ConcreteContrastReception_and_NextDecision_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u331_ConcreteContrastReception_and_NextDecision_20261018.md)。
+
+
+## u332 — 入力に根拠を持つEmlisの反応・傾聴を実装（2026-10-18）
+
+Mashの「うん、進めていいよ」により、u331の具体案に対するRule18 §11.3個別承認が成立。承認記録をweeklyへ先行反映し、commit `3449f723735f974ccb1577656344301b4e90df56` を読戻し確認した。初回・自然変種・実在する問いでの訂正／撤回・保存再表示を一体で扱った。
+
+本人の過去の安堵と、不確かな考えから生じる現在の寂しさをsource全体・span・明示対比で証明し、Emlisの限定的安心と今その寂しさを聴く姿勢を新しい内部内容契約へ選択する。作者での語尾付加ではない。NORMALおよび既存LIMITEDの該当二対象に限定し、一般AFFECT／STANCE解禁や本人の願望・他人意図・行動評価を行わない。
+
+合成20例中10例で新しい反応を実現。残10例は本文／projection停止が不変（生成15・projection停止5）。旧u331初回15checkpointは完全意味・plan・selected・本文・問いを一致確認し、u319原03も復元確認。旧完成は非再生成、checkpoint後のretryへ新意味を付け替えない。実際の問いを持つ原03＋別経験で、安堵否定・予想から実際の出来事への現在／過去の訂正・左右撤回の5例を確認し、両端の共同反応を失効させ、残る意味を保持した。
+
+検証は別集合934 passed／10 failed／skip0。10件は既知の旧本文3件、今回変更した語句への旧replaceが無変化になる6件、原03の新規checkpointも旧IDと同じという旧期待1件。既存assertion／歴史fixtureは保持し、新本文への実変異検証と旧checkpoint復元を別途通した。現行manifest件数のみ承認された新型に合わせ76→77へ更新。全体suite合格を意味しない。
+
+実service＋隔離PGlite SQL/RPC12ケース、同じDTOの現行API client／hook／Modal native stub12ケースで、3tier・旧完成・checkpoint前後中断・5更新・旧回答checkpoint・GET／start非再生成／元入力／全履歴／close-reopenを確認。本人実機・本番DB・deploy・mergeは未実施。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存製品8owner、内部content型1追加、新production file0。設計／全file地図／current01・04／正本06／差分07／handoffを更新。公開API・DB・RN・依存・外部AI・費用は変更なし。同Work補助はread-onlyで、正式な別model評価ではない。
+
+原文の反復と一文の長さ、一般入力への適用範囲、主体・時点の未解決、E04深さ、E05問い、E06〜E09は残る。深い受容全体の完成とはしない。次は承認済み二反応を保った短い自然な表現と、未対応sourceの意味保持を実本文で比較する。10/20方式判断を延期しない。10/31管理線・12/18目標・Piece/Analysis主枠53.25％は不変。
+
+primary outcome=DIRECT_PRODUCT_OR_ACCEPTANCE_WORK。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式0/3／candidate_ready=false／automatic_progression=false。Draft/open/unmerged・未配置。
+
+
+| mashos-api exact path | u332の責務差分 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 二source役割・全field帰属・joint資格／origin・限定訂正grammar |
+| `ai/services/ai_inference/emlis_ai_grounded_human_reception.py` | 選択済み二facetと訂正内容の有限本文 |
+| `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | source役割と二facetの独立読解、旧generic救済の禁止 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py` | 内部新content、閉じた検証、source qualifier搬送、LIMITED導出 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py` | NORMAL導出、manifest77・current identity |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py` | current意味と旧source modeの版分離 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | 旧checkpoint全体復元、訂正／撤回と残存責務 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_engine.py` | Q1のcurrent／legacy準備済み意味経路 |
+| `ai/tests/test_cmee_emlis_relief_cognition.py` | 新規82検査：source、本文、作者禁止変異、更新、旧意味互換 |
+| `ai/tests/fixtures/cmee_emlis_u331_relief_cognition_v1.json` | 新規：変更前u331合成20入力の記録 |
+| `ai/tests/test_cmee_emlis_result_appraisal.py` | 現行manifest件数76→77のみ |
+| `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 現行18payload／9ownerを再導出 |
+| `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 最新契約・実装・検証・残件引継ぎ |
+
+資料変更：01／01A全体・全file地図、current01／04、8/28設計、正本06、差分07、最新weekly、u331監査への後続案内、新規u332監査。
+詳細・未加工本文・検証境界：[Cocolon_EmlisAI_u332_SourceBoundRelief_and_Listening_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u332_SourceBoundRelief_and_Listening_20261018.md)。
+
+## u333 — 明示した本人主語の継続を修復／独立不明の保持境界を確定（2026-10-18）
+
+原03の冒頭に「私は」を付けるだけで後節の主体証明が落ち、本文が停止していた。先行する名詞化された過去の安堵を実nucleus・完全source節で再証明し、実対比を経た現在の不確かな認知・寂しさに限って本人主語を継続する。わたし／僕／俺／自分、は／が、程度、過去の可能性、独立不明／別経験の併記を含む11例が本文生成へ改善。喜び等の一般肯定感情、先行する別人の文、私有物、引用・他人帰属へ適用しない。過去丁寧形の帰属もmemo／memo_actionで拒否。
+
+新規意味は旧checkpointと区別する。u332の26例（11改善・15対照）のcheckpoint全体・核辺に対応するplan・selectedまたは同じ停止・本文・問いを完全復元。旧modeを全歴史source modeへ伝播。新規95検査、既存選択集合、current owner identityを重複除外して963 passed／8 failed／skip0。8件は旧replace無変化6・新規原03へ旧IDを要求1・今回直したexplicit_selfの停止を要求1。既存assertion／歴史fixtureは変更せず、現行成功・作者禁止の実変異拒否・旧意味復元を別に確認。前回Q3旧本文期待3件はこの集合に含めず、解消したと扱わない。
+
+実service＋隔離PGlite SQL/RPC11ケースと同じ11DTOのAPI client／hook／Modal確認を実施。Free／Plus／Premium、5訂正・撤回、旧完成非再生成、checkpoint前／後の中断、GET／start、元入力・履歴・close/reopenを確認。checkpoint前は現行生成、旧checkpoint後は旧意味を保持するためUNAVAILABLE/body_not_validatedのままであり、復旧成功へ水増ししない。native/HTTP/Auth stubで、実機・本番ではない。
+
+STRUCTURE_MAP_DELTA_NONE。既存production 3owner、test1・fixture1を追加しcurrent owner identityを更新。意味型・contract数77・公開API・DB・RN・依存・外部AI・費用・配置は変更なし。
+
+独立した「何が不安なのか、私にもまだわからない」はObservationに残るがReceptionで落ちる。2moveの試作ではLIMITEDの一claimが3対象全体のMATERIAL_WEIGHTになり、承認済み二反応が消えることを実出力で確認した。試作は撤回済み。全体LIMITED／一claimを保持したまま、安堵・寂しさのlocal内容を独立不明と併存させる限定保持契約を次の個別承認案とする。既存retained型は更新後／過去経験等の資格が異なるため無断転用しない。作業規則18 §11.3の内部内容契約変更に当たるため、具体案を監査に記載。
+
+原文の反復・長文、独立不明のReception保持、一般入力・主体／時点の未対応、E04深さ／E05問い／E06〜E09は残る。「私も」の初回、および新しい訂正文自体に「私は」を含める安堵否定等は今回拡張していない。検証した安堵否定は旧全文を正確に指定し、新節では主語を省略した既承認grammarである。
+
+primary outcome=DIRECT_PRODUCT_OR_ACCEPTANCE_WORK。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式0/3／candidate_ready=false／automatic_progression=false。Draft/open/unmerged・未配置。10/20方式判断、10/31管理線、12/18目標、Piece/Analysis主枠53.25％を維持。
+
+詳細・未加工本文・承認案：[Cocolon_EmlisAI_u333_SelfContinuation_and_IndependentUnknown_Boundary_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u333_SelfContinuation_and_IndependentUnknown_Boundary_20261018.md)。
+
+API反映commit：`92cc0832998e488ac352b6c9504beaacb9be79cd`。既存PR #3へnon-forceで反映し、7fileのblob SHA／内容と検証済みlocal tree一致を確認。資料は既存PR #30へ保存。merge・deployは未実施。
+
+## u334 — 二反応と独立した本人の不明を併存（2026-10-18）
+
+Mashはu333監査の限定案に「→進めていいよ。」と明示承認。作業規則18 §11.3の内部契約・保持資格拡張として、過去の安堵／現在の可能性に伴う寂しさと、独立した本人・現在のwh不明を併存させた。全体LIMITED／三対象／一claim／MATERIAL_WEIGHTを保ち、二反応moveへだけ既存 `EmlisReliefCognitionAppraisalContent` を保持する新eligibility／contentとdecision版を追加。unknownは既存material reception。不明を原因や背景へ変換しない。作者・独立readerが同じ原文・役割・basis・checkpoint・sealから資格を再証明する。
+
+合成18例のうち5例でReceptionの独立不明を回復。残13例はcheckpoint／plan／selectedまたは同じ停止／本文／問いの完全recordが不変。本文提供数は9→9であり、生成件数増ではない。主担当が全18の未加工本文・未提供を読んだ。原形、私は／僕は、少し寂しい、認知内過去の可能性で二反応と不明を確認。Q1/Q3は同じ本文・ENDで、検証用の問いを追加していない。
+
+保持資格 `source_relief_unknown_retention:v1` によって新checkpointを区別。旧u333の18checkpointは完全な旧plan／selected／本文／問いへ戻し、旧IDへ新保持を付け替えない。全歴史source modeにlegacyを伝播し、u331/u332の既存凍結例と5訂正／撤回も確認。新規86検査（本文／source／作者禁止変異／carrier改変／旧復元82＋manifest1＋保存3）、重複を除いた最終集合1050 passed／既知8 failed／skip0。8件は旧replace無変化6・新規原03への旧ID要求1・u333で修復したexplicit_selfの停止期待1。全suite・商品合格とは扱わない。
+
+実service＋隔離PGlite SQL/RPC11ケース、同じ11DTOを現行API client／hook／Modalへ通すclose/reopen確認を完了。Free／Plus／Premium、旧完成の非再生成、checkpoint前／後中断、5訂正・撤回、元入力・全timeline・GET／startを確認。checkpoint前は新保持へ進み、旧checkpoint後は旧一move本文を正確に復元する。native／HTTP／Auth stubであり実機・本番ではない。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production9owner、新production file0。私有eligibility／content2型とdecision版、manifest77→79、test1・変更前fixture1を追加。既存test helperは同じ二facetを新sidecarからも読むよう対応、現行manifest件数とcurrent identityのみ更新し、歴史fixture・既存期待assertionを弱化しない。公開API／DB／RN／依存／外部AI／費用／配置は不変。
+
+原文の反復・長い一文、一般入力・主体／時点の未対応、E04の深さ／E05の問い／E06〜E09は残る。「安心した」、不明節の「自分でも」「どうしたいのか…分からない」など今回の上流資格外は未修復。否定安堵・対比欠落・不明先行等で不明がReceptionから落ちる既存結果も残す。短文化は別の保持条件判断であり、今回を自然さ全体の完成に数えない。次の判断材料は、既承認ANAPHORIC設計に照らしてObservationとReceptionの共同保持が何を保証すべきかという具体的差分と、未対応sourceの実認識である。10/20方式判断を延期しない。
+
+primary outcome=DIRECT_PRODUCT_OR_ACCEPTANCE_WORK。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式0/3／candidate_ready=false／automatic_progression=false。Draft/open/unmerged・未配置。10/31管理線・12/18目標・Piece/Analysis主枠53.25％を維持。
+
+詳細・未加工本文・検証境界：[Cocolon_EmlisAI_u334_ReliefCognition_and_IndependentUnknown_Retention_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u334_ReliefCognition_and_IndependentUnknown_Retention_20261018.md)。
+
+## u335 — 安堵＋独立不明のsource誤認識修復（2026-10-18）
+
+Mashの継続指示により、u334で残した「安心した」と独立wh不明の組、および「何が嫌なのか、自分でもよくわからない」を修復。前者は安堵核そのものを既に認識していたが、conflict observerのrequired attempt_and_blockが独立不明へ誤接続。後者は先行する不確かな認知内の「も」でreflexive prior-owner guardが止まり、既存SELF cognitionをself_evaluationとして残していた。同じ原因の「どこが不安なのか、自分にもまだ分からない」はreaction/feelingとして残るため、併せて修復した。既存二反応の資格と完全三対象・全field/spanの証明を用い、当該source解釈だけ補正する。汎用owner guard、wh grammar、主観内容契約、作者・独立readerは変更しない。
+
+比較40例で9例が本文なしから二反応＋独立不明の本文へ改善し、残31例のcheckpoint／plan／selectedまたは停止／本文／問いは完全不変。旧u334全40checkpointを完全な旧意味・旧結果へ復元する。旧IDに新解釈を付けない。最終sourceの重複除外集合は1119 passed／既知8 failed／skip0（新124・旧u33486・関連908成功・identity1）。失敗理由と境界は監査の表を参照。新三対象の問いはENDであり、都合のよい問いを追加しない。
+
+実service＋隔離PGlite SQL/RPC26ケースと同じ26DTOの現行API client／hook／Modal再表示を確認。4入力×3tier、u334完成非再生成、4入力×checkpoint前／後の実中断、既存5訂正／撤回。checkpoint前は新解釈でFINAL、保存済みu334 checkpoint後は旧停止UNAVAILABLEを保つ。後者を本文復旧成功とは数えない。native／HTTP／Auth stub、本人実機・本番ではない。
+
+STRUCTURE_MAP_DELTA_NONE。既存production3ownerの認識・旧modeのみ、新production file0、論理contract数79。test1・凍結u334 fixture1を追加し、既存u334対照2例を旧checkpoint指定で同じ全assertionへ通した。歴史fixtureは変更せず、新しい現行成功は別testで確認。current owner identityを最終sourceから再導出。公開API／DB／RN／依存／外部AI／費用／配置は不変。
+
+原文反復・長い一文は残る。既承認ANAPHORICの項目を使えても、二反応だけはReception単体で両原文節を要求するため、Observationとの共同保持へ変えるには作業規則18 §11.3の保持条件判断が必要。既存u332 pair（任意にu334独立不明）へ限定した具体案を監査末尾に提示し、未実装とする。「どうしたいのか」、対比欠落・否定安堵・不明先行、過去不明の自己評価誤読なども残る。10/20方式判断を延期しない。
+
+primary outcome=DIRECT_PRODUCT_OR_ACCEPTANCE_WORK。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式0/3／candidate_ready=false／automatic_progression=false。Draft/open/unmerged・未配置。10/31管理線・12/18目標・Piece/Analysis主枠53.25％を維持。
+
+詳細・未加工本文・次の限定案：[Cocolon_EmlisAI_u335_ReliefUnknown_SourceRepair_and_Anaphoric_Proposal_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u335_ReliefUnknown_SourceRepair_and_Anaphoric_Proposal_20261018.md)。
+
+## u336 — 実Observationに基づく二反応Receptionの短文化（2026-10-18）
+
+Mashが本会話でu335の具体案を「進めていいよ」と明示承認したため、作業規則18 §11.3の保持条件変更を実装。既存u332安堵／不確かな認知に伴う寂しさpairについて、完全な両原文節を実Observationに保ち、同じselected target／basis／source roleへの一意な参照を証明できる場合だけReceptionを短くする。独立wh不明がある場合も、その既存の受け取りは必須のまま。基本例のReceptionは115→68文字。
+
+既存SentenceSurfaceの行ownerでObservationを先に生成し、その実文字列を既存HumanReception author/replayへ渡す。独立readerは最終body bytesからObservationを読み直し、全Observation検査が通った時だけ照応を許す。完全二節・順序・主体・肯否・時点・程度・可能性・条件・実対比をexact照合。前Reception用のpreceding_contextは代用しない。別の安堵／寂しさ、同一行の別経験などで一意条件が成立しなければ全文へ戻す。不正Observationは本文全体を拒否する。
+
+既存ANAPHORIC／antecedent_refs／PRIOR_LAYER1_EXACT_SEMANTIC_COVERを使用し、新meaning型・主観反応・carrier family・Move・文数予算は追加しない。source資格版により新checkpointを分離し、旧u335全40recordは完全な旧意味・旧本文・旧停止へ復元。5訂正／撤回ではlive pair資格と照応資格を失効させる。
+
+40入力は前後とも本文あり21／なし19。17例の返答を短縮し、Observationは全21本文で不変。13停止例は資格版によるcheckpoint等の変化のみで停止を維持、10例は完全record不変。過去不明の既存自己評価誤読や独立不明の欠落など、停止しない既知品質問題も未解決のまま記録する。出力可能性の改善を今回の成果として数えない。
+
+実service＋隔離PGlite SQL/RPC27ケースと同じ27DTOの現行API client／hook／Modal再表示を確認。4入力×3tier、旧完成本文1、4入力×checkpoint前後の実中断8、曖昧な不明の全文fallback1、実在する問いからの5訂正／撤回。checkpoint前は現行短文、保存済みu335 checkpoint後は旧全文でFINAL。saved GET/startは作者禁止、UIはclose/reopen各2回。native／HTTP／Authはstub、本人実機・本番の検査ではない。
+
+STRUCTURE_MAP_DELTA_NONE。既存production8file、新production file0、論理contract79・公開API／DB／RN／依存／外部AI／費用／配置は不変。保持期待の変更は今回承認のpairに限定し、完全原文をObservation＋短参照の独立検証へ移す。歴史fixtureは保持し、u335完全record fixtureと新cross-section testを追加。最終検査数は監査を参照。
+
+primary outcome=DIRECT_PRODUCT_OR_ACCEPTANCE_WORK。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式0/3／candidate_ready=false／automatic_progression=false。Draft/open/unmerged・未配置。E04の深さ／E05問い／E06〜E09、一般入力・本人実機・正式受入れは未完。10/20方式判断、10/31管理線、12/18目標、Piece/Analysis主枠53.25％を維持。
+
+実本文・検査・未解決：[Cocolon_EmlisAI_u336_ActualObservation_Anaphoric_Reception_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u336_ActualObservation_Anaphoric_Reception_20261018.md)。
+
+
+## u344差分 — 2026-10-18
+
+既承認二反応の表記／別経験1更新後の保持を修復。STRUCTURE_MAP_DELTA_PRESENT（私有保持2型、logical81）、新production file0、既存6file。683 passed／1 failed／skip 0、隔離SQL／画面16例。PRODUCT_NOT_CLEARを維持。原承認u332の更新責務を回復し、u334独立不明の初回資格は不変。全file地図01Aと[u344監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u344_ReliefContinuity_20261018.md)を参照。
+
+
+## u345 — 別経験への1回答後も、完全な観測と短い二反応を両立（2026-10-18）
+
+u344に残った原文反復を、既承認のu336共同保持とu331/u332更新責務の範囲で修復した。未変更の安堵・寂しさpairと独立した別経験を既存行構成ownerで別行へ分け、pairの完全な原文をObservationへ残す。実Observationの完全一行・一意照応を要求するreaderは変更しない。意味checkpoint・全plan・selected・問い・decisionは不変で、新しい内容選択や反応は追加しない。
+
+開始原本21入力の比較で、10入力×Q1/Q3の1回答後Receptionを短縮。初回42結果は不変。別の寂しさもある曖昧例は全文参照を保持。「かもしれなかった」はQ3で実問いを出せず、改善成功に数えない。対象集合の最終結果は重複除外323 passed／0 failed／skip 0（新規108、既存関連215）。全suite成功を意味しない。保存23DTOの現行API client→hook→Modalでclose/reopen各2回も確認。HTTP／Auth／nativeはstubで、実機・本番DBではない。
+
+旧u343 checkpointは旧意味・全出力／停止を保持。u344と同じ意味checkpointから未完成本文を生成する場合は今回の行構成を使うが、既に完成・保存した本文は再生成せずそのまま返す。STRUCTURE_MAP_DELTA_NONE、既存production1file・新production0、logical81不変。公開wire／DB／RN／Safety／依存の変更なし。
+
+必要性=DIRECT_PRODUCT_OR_ACCEPTANCE_WORK、primary outcome=TECHNICAL_CREDIT。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式Product Read0/3／candidate_ready=false／automatic_progression=falseを維持。初回の長い混在Reception、extra_unknownの回答後のpair欠落、否定訂正、一般入力・任意多段、E04深さ／E05問い／E06〜E09・本人実機は残る。次は未変更の不明と二反応が追加回答後に同居するextra_unknownの責務脱落を原文・実問い・選択から診断し、既承認保持の修復と新しい内容判断を区別する。10/20方式判断、10/31管理線、12/18目標、Piece/Analysis主枠53.25％は維持。既存Draft PR3／PR30で継続、merge／配置なし。
+
+全13file、未加工本文、検証・互換境界は[u345監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u345_ReliefObservationLayout_20261018.md)。
+
+
+## u346 — 独立不明が同居しても、別経験の1更新後に既存二反応を保持（2026-10-18）
+
+u345残件extra_unknownを修復した。初回から選ばれている安堵・寂しさpairを、別経験への受理済み1回答／訂正／event撤回後も維持する。末尾の独立current SELF wh-unknown1核は、原文・核・関係・Observationで不変のまま残し、既存2 moves／3選択対象を保つ。不明への第三Receptionは追加していない。
+
+開始原本18入力×Q1/Q3の初回36結果は完全不変。9入力×2経路の現行更新でpairを回復し、残りの実更新は旧結果を保持。旧u345の全保存checkpointは全意味・選択・本文／停止へ復元する。別event撤回には後段のexact3構成guardも修復。旧本文未提供だったQ3の3入力は、本文成功後の既存停止理由へ到達するためdecision_reasonのみfree_round_completeからno_bound_personal_meaning_targetへ変わる。質問本体は追加しない。
+
+対象集合の最終結果は重複除外187 passed／0 failed／skip 0（新規101、関連86）。保存8DTOを現行API client→hook→Modalでclose/reopen各2回確認した。HTTP／Auth／nativeはstub。全suite／実機／本番DBの成功を意味しない。
+
+STRUCTURE_MAP_DELTA_NONE、既存production2file・新production0、logical81不変。新契約型／新unknown grammar／新AFFECTやSTANCEは追加せず、u334の初回exact3資格は不変。元の承認u331/u332の更新時保持を修復するRule18 LEVEL_2。公開wire／DB／RN／Safety／外部AI／依存／費用は変更しない。
+
+必要性=DIRECT_PRODUCT_OR_ACCEPTANCE_WORK、primary outcome=TECHNICAL_CREDIT。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式Product Read0/3／candidate_ready=false／automatic_progression=falseを維持。次は、初回から残るextra_unknownの独立不明へのReception欠落を、更新後の不明を応答対象へ加える場合の4対象／3 movesの責務と既承認u334 exact3境界に照らして整理する。今回の保持修復と混同せず、原文・実問い・未加工本文を起点とする。初回の長い混在Reception、pair否定訂正、一般入力・任意多段、E04〜E09、本人実機は未完。10/20方式判断、10/31管理線、12/18目標、Piece/Analysis主枠53.25％は不変。既存Draft PR3／PR30で継続、merge／配置なし。
+
+全16file・未加工本文・失敗修正と互換境界は[u346監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u346_UnknownAlongsidePairRetention_20261018.md)。
+
+## u347 — 混在初回の原文反復修復と、独立不明への受容の具体案（2026-10-18）
+
+u336の既承認共同保持に基づき、回答前の安堵・寂しさpairと独立した別経験を既存行構成ownerで別行にする。完全な原文をObservationに保ち、既存readerの一意条件を満たす場合のみReceptionを短縮。意味checkpoint・全plan・全selected・問い／decisionは不変。初回7入力×Q1/Q3で改善し、基本例は90→43文字。別の寂しさがある曖昧例では全文Receptionを維持する。
+
+最終対象65 passed／0 failed／skip0（新core53＋既存identity1＋SQL11、重複除外）。初回15入力×2と更新3入力×2を凍結u346原本と比較し、意味と質問を保持。11変異の独立本文検査、同一経験分割拒否、旧完成保存、実在する問いからの1更新、意味保存前後の中断再開を確認した。同じ11DTOの現行API client→hook→Modalで各2回の再表示を確認。HTTP／Auth／nativeはstubで、全suite・本人実機・本番DBの成功ではない。初回検査中の新test期待の訂正と失敗履歴は監査へ記録した。
+
+同一意味checkpointからの未完成初回本文には現行の行構成を使うが、完成済みu346本文は再生成せず維持する。STRUCTURE_MAP_DELTA_NONE、既存production1・新production0、logical81不変。新test2・凍結fixture1・監査1を追加。全13fileの地図を監査に記載。公開API・DB・RN・Safety・依存・外部AI・費用は変更しない。
+
+独立不明は引き続きObservationだけで、混在初回と1回答後のReceptionに欠ける。次の具体案は「既存pair→独立received一経験→末尾current SELF wh不明一つ」の初回選択から、既受理ADD／REVISE／event WITHDRAW一更新、本文、旧互換、保存再表示までを一体とする。初回3応答対象／2 moves、更新後4応答対象／3 movesであり、u334の追加素材なしexact3／u346の2 movesを越える。この内容選択／保持変更はRule18 §11.3の個別判断を要するため未実装。新しい問い・任意多段・過去／原因／複数／第三者不明への拡張を含めない。初回の受領経験Reception自体と過去不明混在の既存時点誤読も未解決である。
+
+必要性=DIRECT_PRODUCT_OR_ACCEPTANCE_WORK、primary outcome=TECHNICAL_CREDIT。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式Product Read0/3／candidate_ready=false／automatic_progression=false。10/20方式判断、10/31管理線、12/18目標、Piece/Analysis主枠53.25％を維持。既存Draft PR3／PR30継続、merge／配置なし。
+
+実本文・全file・検証境界・承認対象：[u347監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u347_InitialReliefLayout_and_UnknownDecision_20261018.md)。
+
+
+## u348 — 承認済みの混在現在不明を初回・一更新・保存再表示へ保持（2026-10-18）
+
+Mashがu347の限定案を本会話で「進めていいよ」と承認したため、作業規則18 §11.3の意味保持契約変更として実装した。対象は既存本人の安堵・不確かな予想と現在の寂しさのpair、独立した既存received一経験、末尾の独立current SELF wh不明一つ、の完全原文と順序を証明できる場合。初回はpair＋不明の3応答対象／2責務とし、別received経験自体の初回Receptionは追加しない。既存の問いへのADD／反応REVISE／event WITHDRAW一更新後はpair＋回答／残存反応＋不明の4対象／3責務を保持する。
+
+新原source witnessと更新版で意味checkpointを区別する。初回は既存V1局所内容、更新後は既存保持familyのEligibilityV2／ContentV2（schema2.0）を使い、旧V1のexact3を緩めない。全体LIMITED・一claim、pair局所2 basis／2 qualifier、独立不明の固有寄与を全source・受理更新・全plan・全selectedの再導出で検査する。原pair／不明の訂正・撤回、未解釈、意味変更なし、複数回答は新資格外で、旧材料を復活させない。作者と独立readerは既存unknown grammarを使い、原因・解決・他人意図を補わない。
+
+最終対象集合は **313 passed／0 failed／skip 0**（新core214＋source28＋reflexive16＋SQL18＋既存u343旧checkpoint34＋現行manifest／owner identity3、重複除外）。全suite成功ではない。初回28入力×Q1/Q3では9入力×2で不明へのReceptionを保持し、残り19入力×2は全record不変。別経験への対象6更新×2で4対象／3責務を保持し、訂正・撤回等の対照は新資格を失効する。意味非更新のQ1は既存保存再使用へ接続する。旧u347の84 recordと追加のreflexive初回2 record、計86旧結果を元の意味・選択・本文／停止で復元した。
+
+比較原本u347の旧checkpoint全意味・全plan・全selected・本文／停止を保持する。完成済みu346/u347本文は保存DTOのまま非再生成。u346とu347の未完成本文世代を同じ意味checkpointで区別できるとはしない。意味保存前／後の確定中断・再試行を分けた。実service＋隔離PGlite18ケースと同じ18DTOの現行API client→hook→Modalを確認し、各2回のclose/reopenで本文・履歴・元記録・質問を保持した。HTTP／Auth／nativeはstub、本人実機・本番DB・配置の検査ではない。
+
+「自分でも」の既存SELF wh表現が感情／自己評価へ誤分類される場合は、u335と同じkind／predicate二fieldだけの補正を混在sourceへ接続した。新mixedの完全原文資格が成立した場合だけ採用し、属性・主体・時点・関係・原文を補正して資格を作らない。新legacy flagで補正も停止し、旧版の本文未提供を保持する。NO_MATERIAL_UPDATEでは更新用V2を付けず、保存済み初回本文を既存UNCHANGED経路で再使用する。旧Q1の新mixedだけに同じreuse outcomeを接続し、意味を変えない回答で例外や不明欠落を起こさない。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production10file、新production0、private logical81→83。公開API／DTO／DB／RN／Safety／依存／外部AI／費用は変更しない。05の版・field正本、8/28意味設計、01／01AとEmlis／CMEE現在地を同期した。01B/C・Piece/Analysisに責務差分はない。歴史fixtureは保持し、現行owner identityとmanifest件数だけを同期する。
+
+必要性=DIRECT_PRODUCT_OR_ACCEPTANCE_WORK、primary outcome=TECHNICAL_CREDIT。今回の限定欠落修復と、初回一体単位全体の完成を区別する。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式Product Read0/3／candidate_ready=false／automatic_progression=false。次に残るのは別received経験の初回Reception自体、定型性・深い理解、一般入力・任意多段、過去不明混在の既存時点誤読、E04〜E09・本人実機。10/20方式判断、10/31管理線、12/18目標、Piece/Analysis主枠53.25％を維持し、今回再評価したとは扱わない。Draft PR3／PR30継続、merge／配置なし。
+
+全変更file・実本文・失敗履歴・検証境界は[u348監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u348_MixedUnknownRetention_20261018.md)。
+
+
+## u349 — 別経験の初回・一更新の保持を一体案へ具体化（2026-10-18）
+
+最新の残件継続指示を受け、u348先端（API321dff8／資料fc00a81）、前提・作業規則・全体設計と全file地図・最新weeklyを確認した。既存received単独では「褒められたことは、嬉しさにはつながらなかったのですね。」と返るが、安堵・寂しさpairが混ざると別経験のReceptionは選ばれない。不明なしは2対象／1責務、不明ありはpair＋不明の3対象／2責務。Observationと既存の意味質問には残る。
+
+初回だけ選択を足すと、ADD後は元の「嬉しくなかった」が再びReceptionから落ちる。反応だけの撤回では、現行の混在不明もReceptionから落ちる。このため、不明0/1を同じ有限source二形として、初回4/5対象・2/3責務、既受理ADDの元経験＋回答、反応REVISE、出来事／反応WITHDRAWの残存、無変更・未解釈、旧checkpoint・完成DTO非再生成、保存・中断再開・再表示を一体にした案を作成した。
+
+肯定ADDは現行では別moveに分かれるため、同一経験の3端点として証明する限定source／IR／作者／reader接続も案に含める。反応撤回後の出来事単独も旧2端点文法では扱えず、感情・評価を作らず残存事実だけを受け取る限定内容と逆検査を同じ承認対象へ含める。一般move上限3を緩めず、最大6対象はこの新資格内の有限操作に限る。新しい問い・回答構文、任意多段、追加経験、過去／第三者不明へは拡張しない。
+
+u347承認案とu348は初回receivedを明示的に対象外としていた。Rule18 §11.3 LEVEL_3の新しい内容選択・更新保持の判断が必要であり、今回のsource変更は0。記録のGitHub反映までを行い、実装済みとは扱わない。旧型を緩めず、新しい限定private版とcheckpointを分ける案とし、u348以前の既存復元も維持する。
+
+STRUCTURE_MAP_DELTA_NONE（記録5fileのみ、実装owner・logical83・全体図／地図の現行構造は不変）。新test／fixture0、pytest／SQL／UIの追加実行0。実生成診断と既存u348実本文の照合であり、過去313成功を今回の成功数へ転用しない。必要性=DIRECT_PRODUCT_OR_ACCEPTANCE_WORK、primary outcome=BLOCKER_NARROWED。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式Product Read0/3／candidate_ready=false／automatic_progression=false。10/20方式判断・10/31管理線・12/18目標、Piece/Analysis主枠53.25％は未再評価。Draft PR3／PR30継続、merge／deployなし。
+
+実出力・対象数・owner差分・未実装の本文比較案・成功と停止条件は[u349判断案](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u349_ReceivedExperienceRetention_Decision_20261018.md)。Mash判断は、この限定同時保持を初回から既存一更新・旧互換・再表示までまとめて実装することへの承認一つ。追加費用・環境操作は0の計画、工数未計測、固定時間の完成保証なし。
+
+
+## u350 — 承認済みの別経験保持を初回・一更新・撤回・保存再表示へ接続（2026-10-18）
+
+Mashが本会話でu349の一体案に「進めていいよ」と承認した。既存本人の安堵・不確かな予想と現在の寂しさpair、その後の独立received一経験、任意末尾のcurrent SELF wh不明を完全原文で証明する場合だけ、別経験の初回Receptionと更新後の全有効素材を保持する。初回4/5対象、ADD5/6、反応REVISE4/5、event／reaction WITHDRAW3/4。全て2/3責務、最大3文を維持する。
+
+初回では別経験を「褒められたことは、あなたにとって嬉しさを伴わない経験だったのですね。」として受け取り、既存短いpairと任意不明も残る。ADDは元の「嬉しくなかった」と回答の固有時点を同じ一経験内に保つ。反応撤回後は「褒められたことはあったのですね。」と残る事実だけを受け取り、撤回した感情・評価を補わない。pair／unknown自体の変更で新資格は失効し、NO_MATERIAL_UPDATEは保存本文の再使用、未解釈は既存停止を守る。
+
+新資格／局所content4型を既存owner内に追加し、private logical83→87。全aggregateとpair／received／unknownの寄与を完全source・一受理更新・全plan・全selectedで再導出する。ADDの3端点を旧2端点内容に偽装せず、REVISEは既存更新ownerが作ったABOUTだけを使う。旧V1/V2の意味条件を緩めない。新source witnessとu348専用再構築modeで旧checkpointを新選択へ付け替えず、旧完成DTOは非再生成で返す。
+
+最終対象集合は **443 passed／0 failed／skip 0**（新core268＋source51＋実service/SQL36＋u347旧checkpoint84＋現行manifest／owner identity4、重複除外）。全suite成功ではない。初回30入力×Q1/Q3では16入力×2で両経験と任意不明を保持し、資格外14入力×2は旧全recordを維持。既存一回答28構成×Q1/Q3のうち対象16構成×2は有効素材と各時点を保持し、対照は新資格失効・非更新・既存停止を確認した。旧u349の116 recordとu347の84 record、計200旧結果を意味・選択・本文／停止まで完全比較した。現行unknown自身変更では本文等は旧一致、新checkpointに由来する4つのidentity/trace fieldだけを区別した。
+
+実service＋隔離PGliteの36ケースと同じ36保存DTOを現行API client→hook→Modalへ通し、各2回のclose/reopenで本文・問い・状態・元記録・履歴・閉じた後の消去を確認した。HTTP／Auth／nativeはstub、本人実機・public server・本番DB・配置の検証ではない。並行run中の保存競合3件とtest期待不備は監査の失敗履歴へ記録し、低負荷の最終再検査で対象成功を揃えた。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production10file・新production0。05の全field/版、8/28意味設計、全体01／地図01A、Emlis／CMEE current mapを同期した。01B/C・Piece/Analysisに責務差分はない。公開API／DTO／DB／RN／Safety／依存／外部AI／費用・配置は変更しない。旧比較原本は独立u349 treeから116 recordを採取し、旧fixtureを新期待値へ置換しない。現行manifest件数とcurrent owner identityのみ同期する。
+
+必要性=DIRECT_PRODUCT_OR_ACCEPTANCE_WORK、primary outcome=TECHNICAL_CREDIT。今回の限定保持と商品全体完成を区別し、PRODUCT_NOT_CLEAR／初回一体単位未完了／正式Product Read0/3／candidate_ready=false／automatic_progression=falseを維持する。次は最新weeklyのE04〜E09に戻り、実本文で残る定型性・深い理解・問いの不足を診断する。一般入力・任意多段・過去不明混在とunknown自身REVISEの既存時点誤読・pair否定訂正・本人実機は未完。新資格を失効するunknown自身の変更後は既存本文へ戻り、その既存の不自然さまで今回解決済みとは扱わない。10/20方式判断・10/31管理線・12/18目標、Piece/Analysis主枠53.25％は今回再評価していない。Draft PR3／PR30継続、merge／deployなし。
+
+全変更path、原文と未加工本文、失敗修復、検証・互換境界：[u350監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u350_ReliefReceivedRetention_20261018.md)。
+
+
+## u351 — 本人の不明から現在感情への訂正時点を修復（2026-10-18）
+
+u350の残件「その時に今は嬉しい」を、既存SELF uncertainty／current_inputから既受理有限感情への明示引用訂正に限定して修復した。「今は／現在は」は回答envelopeへ束縛し、引用内感情のsource範囲を保持する。「も」や他target・他時点・未受理置換、u350の同時保持条件は変えない。肯定はObservation／Receptionまで現在時点を明示。否定4例は意味の時点・極性を保持するが本文UNAVAILABLEを維持し、本文成功へ数えない。
+
+新pendingは現行解釈、旧checkpointは同じsource-versionの旧時点解釈を完全再導出して厳密一致を要求する。旧IDを新意味へ付け替えず、旧完成DTOは非再生成で返す。最終対象77 passed／0 failed／skip0（engine65＋既存u349/current8＋実SQL4、分割再実行の重複除外）。旧u350の28と旧u349の4、計32recordを意味・選択・本文／停止まで比較。実SQLはfree／premium×新旧本文の4ケースを直列確認し、同じ8保存DTOの現行API client→hook→Modalで各2回のclose/reopenを確認した。全suite・任意多段・SQL中断再開・本人実機・本番の成功ではない。test不備と修正履歴、runtime境界、SQL実測は監査へ記録。
+
+初回の混在入力へ「期待されているように感じて、重かった」を加えると、既述情報への質問はENDになる一方、Receptionは安堵pairだけとなり、受領経験・期待と重さ・独立不明を受け取れていないことを実生成で再確認した。次は既述の受け取り方を聞き直さず本文へ残す単位を、初回・必要な既存一更新・訂正／撤回・旧互換・保存再表示まで具体化する。追加素材はu350有限資格外なので、内容・選択契約の要否を明示する。
+
+STRUCTURE_MAP_DELTA_NONE。既存production owner1、公開API／DTO／DB／RN／型・logical87／経路は不変。新test2・新fixture1と既存test1の責務を01Aへ登録し、全11変更pathを[u351監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u351_UnknownRevisionTime_20261018.md)に記録した。必要性=DIRECT_PRODUCT_OR_ACCEPTANCE_WORK、primary outcome=TECHNICAL_CREDIT。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式Product Read0/3／candidate_ready=false／automatic_progression=false。E04〜E09・深い理解・一般入力・否定本文・本人実機は残件。10/20方式判断・10/31管理線・12/18公開目標、Piece/Analysis主枠53.25％は未再評価。Draft PR3／PR30継続、merge／deployなし。
+
+
+## 2026-10-18 u352 — 初回に既述の本人説明を保持する一体案（未実装）
+
+最新の残件継続指示に基づき、全体設計・全file地図・最新weekly・u349〜u351と既存sourceを照合し、初回7構成と実発行質問への一回答4構成を診断した。本人の説明「期待されているように感じて、重かった」が初回からあると、問いはENDとなるがReceptionにその説明が残らない。安堵・寂しさのpairが混ざると別受領経験と独立不明も落ちる。Observationには説明と不明を原文順だけで一つの流れへ結ぶ問題も残る。同じ説明を実pendingへ答える単独receivedでは本文成功、pair混在3例は意味RESOLVED ADDでも本文UNAVAILABLEであった。診断requestのcheckpoint参照不足を直して最終比較を採取した履歴も監査に残す。
+
+次の推奨単位は、単一received＋元反応＋直後の本人知覚／過去感情の説明一つを、pair0/1・独立current SELF wh不明0/1とともに初回から保持すること。初回sourceを回答へ偽装せず、他者意図の事実化・過去の現在化・不明の原因化を防ぐ。実pendingの同じ説明との整合、実際に到達可能な完全引用訂正／撤回、旧checkpointの全解釈再現、旧完成DTO非再生成、実保存・再表示を一つの単位で確認する。初回END後や一回答END後へ架空の質問・第2回答を作らず、任意多段・複数説明へ広げない。
+
+u350のINITIALは4/5対象・received二roleの明示資格であり、新しい初回説明roleと選択はその外にある。Rule18 §11.3 LEVEL3の個別判断を求める具体案として記録し、実装済み設計や承認済みへ置き換えない。既存回答文法と一回答保持自体を未承認へ戻さない。可視本文案、成功／失敗条件、STOP、作業増加、旧互換と保存の区別は[u352監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u352_InitialPersonalMeaning_Decision_20261018.md)を正本とする。
+
+否定訂正「現在は嬉しくない」の本文停止は、作者が作ったrm2の照応文を独立readerが完全object欠落として拒否するところまで実測した。最終参照だけを一時processで明示化すると、既存generic作者から両方の完全な対象が出て余分な重なりの接続も消えるが、generic MATERIAL_WEIGHT非対応のreaderは引き続き拒否する。選択contributionのsource・両basis・qualifier・contrastと完全可視対象を検証する既存契約内の整合修復が候補。資格の復活やreader緩和は行っておらず、production修復・旧互換／保存検証は未実施。この修復候補まで新初回契約の承認待ちへ変更する意味ではない。
+
+今回production／test／fixture変更0、文書6file、STRUCTURE_MAP_DELTA_NONE。pytest／実SQL／UI／本人実機の新検証は0で、初回7＋実pending4と否定1例の診断を合格数へ転用しない。u351の77成功＋8保存DTOは前回実績のまま。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式Product Read0/3／candidate_ready=false／automatic_progression=false。E04〜E09・深い理解・一般入力・否定本文・本人実機は残件。Piece/Analysis主枠53.25％、10/20方式判断・10/31管理線・12/18公開目標は再評価しない。Draft PR3／PR30継続、merge／deployなし。
+
+
+## 2026-10-19 u353 — 承認済み初回本人説明を保存再表示まで保持
+
+Mashの「進めていいよ」により、u352固定案（Cocolon `80dc32c48d9fcfa821f6da0fae822b2ce4d0cb55`）を実装。新規初回のR＋Mに、前置P0/1・末尾独立U0/1を認め、元出来事・元反応・本人知覚＋有限過去感情を元memoの三roleとして保持する。初回を回答核・回答ABOUTへ変換せず、received→任意P→任意Uの最大3責務とする。完全な原文・主体・時点・肯否・全span順序を確認した場合だけ選択し、初回END・既述説明の非再質問を維持する。
+
+Observationも修復し、本人説明と不明を原文順だけで「一つの流れ」にせず、過去の説明を「今は」の状態へ移さない。元received contrastから同時性を加えない。Receptionは原文の知覚を残し、他者の意図を事実化しない。新局所内容は既存LIMITED一aggregateを置き換えず、全3+2P+U対象とdisjointな2+P+U contributionを保持する。独立readerは作者を呼ばず、実本文の三role・原文・主体・時点・知覚・独立不明を照合する。
+
+実pending一回答の明示時点語がない過去Mは、回答envelope・全scalar範囲・既存PERCEIVED文法・受理核の再導出が一致する場合に限り混在保持する。新しい回答文法は追加しない。混在3moveでcheckpoint生成と本文の資格入口がずれていた箇所も揃え、新Mを既存retention版へ結び付けた。旧u352 IDは旧source／plan／selected／本文または停止の全体を復元し、新意味を旧IDへ貼り替えない。完全引用訂正・撤回と実Q3の次質問での後続訂正を確認し、END後の架空回答は作っていない。
+
+技術検証：分割実行・重複除外で対象140件通過（旧全比較50を含むcore90、source31、SQL15、既存manifest3、現行owner identity1）。独立した未変更u352原本50件と、checkpoint・original plan・accepted核・更新plan・関係・selected・本文・質問・停止が一致。保存済み完成DTOは再生成せず、未完成は保存checkpointの再利用／意味前再開を分けて検証した。同一の保存DTO 15件を実apiClient→API→hook→Modalで閉じて再表示2回まで確認。HTTP/Auth/nativeはstub、本人実機ではない。pytestは専用`--noconftest`の対象検証で、全suite成功とは呼ばない。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production10owner内の変更、新private logical3型で87→90。公開API／DTO／DB migration／RN製品code／Safety仕様／依存は変更していない。Work補助担当は読取レビュー、編集・実行・統合・GitHub反映は主担当。別modelの正式二重評価やProduct Read成功へ転用しない。PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=falseを維持。初回一体単位の限定技術修復を閉じるが、E04〜E09・深い理解・一般入力・否定unknown訂正の別generic整合・本人実機は残件。Piece/Analysis主枠53.25％、10/20方式判断・10/31管理線・12/18公開目標は再評価していない。Draft PR3／PR30継続、merge／deployなし。詳細・実本文・全変更地図は[u353監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u353_InitialPersonalMeaning_20261018.md)。
+
+
+## 2026-10-19 u354 — 現在の否定感情への訂正後の本文停止を修復
+
+最新weekly E05/E06/E08とu352実測に基づくLEVEL_2の既存整合修復。実pendingへの「不明ではなく、今は／現在は嬉しくない」という明示引用訂正後、古い短縮参照が残り、generic MATERIAL_WEIGHTの二経験を独立readerが読めずに本文UNAVAILABLEとなっていた。既存effective-reference ownerで、現在否定回答とは別の元pairを完全sourceの明示参照として実現し、readerは同一aggregateの全3対象・2contributionと二basis／qualifier／元contrastを照合する。意味選択・受理核・全plan・reference_mode・selectedを変えず、失効した専用pair資格を復活させない。
+
+最終対象188 passed（意味・本文・u350互換125、独立u352旧全比較50、実SQL12、現行owner identity1）、fail/skip0。未変更u353から採った28 recordは全意味identityが一致し、うち現在否定4 recordだけ本文を復旧、残り24は本文／停止も一致。Q3の2 recordはUNAVAILABLE時の代替END理由から通常ENDの`no_bound_personal_meaning_target`へ変わる。問いなし・自動進行なしは不変。旧u350全28 recordと旧u352全50 recordは本文／停止まで一致。旧保存完成DTO・確定旧停止DTOは非再生成、意味保存後の中断では保存済みMEANING_UPDATEを追加・置換せず、原文の再導出・checkpoint照合を経て現行本文へ再開する。意味保存前の中断では、保存済み回答から意味の作成を再開する。同一の16保存DTOを現行apiClient→API→hook→Modalで各2回close/reopen確認。HTTP/Auth/nativeはstub、本人実機・本番・全suiteの成功ではない。
+
+STRUCTURE_MAP_DELTA_NONE。既存production3owner内、公開API／DTO／DB／RN／Safety／依存／新private型・意味版は変更0、logical90を維持。全変更pathと未加工本文は[u354監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u354_NegativeRevisionSurface_20261019.md)。主担当が編集・実行・GitHub反映、補助担当はR9.7に従う読取レビューのみ。正式別model二重審査やProduct Readへ換算しない。限定TECHNICAL_CREDITであり、PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=falseを維持。本文の長い反復、元receivedを同時性として示す表現、深い理解・一般入力・任意多段・本人実機は残件。次はE05/E06/E08の実本文品質と方式判断へ戻る。Piece/Analysis主枠53.25％、10/20方式判断・10/31管理線・12/18目標は今回再評価しない。Draft PR3／PR30継続、merge／deployなし。
+
+
+## 2026-10-19 u355 — 混在入力のreceivedに同時性を補わない
+
+u354実本文の残件をLEVEL_2で修復。安堵・寂しさのpair＋received一組（任意の不明）の完全原sourceを既存ownerで証明し、原relation・両核が現行にも同一で残る場合だけ対象にする。初回と別対象への訂正後に、Rを「異なる向きのまま同時にあります」から、元の「のに／けど」等を保つ既存の経験文へ変更。独立readerは完全な主体・程度・肯否・時点・接続詞と一文の範囲を照合する。意味・checkpoint・全plan・selected・Reception・問い／ENDは変えず、撤回したRは復活させない。anti-template検査は維持。
+
+対象321件の最終結果passed、未解消fail／skip0。未変更u354の60recordで全意味・選択・Reception・本文のその他fieldが一致し、Observation一文と本文由来IDだけ24recordで変わる。残り36は本文／停止も同一。旧u350未完成checkpointは旧時点解釈を保持して現行表面へ進むため、この一文だけ変わり得る。完成済み旧DTO・確定旧失敗は非再生成。実SQL14件で初回・実pendingへのADD／現在否定REVISE・旧保存・意味前後中断再開を通し、同じ18DTOを現行apiClient→API→hook→Modalで各2回close/reopenした。HTTP/Auth/nativeはstub、実端末・本番・全suiteの成功ではない。
+
+STRUCTURE_MAP_DELTA_NONE。既存production3file内、新production／型／意味版／依存／API／DTO／DB／RN／Safety変更0、logical90を維持。正式別model評価ではなく主担当実行と補助読取レビュー。限定TECHNICAL_CREDIT。PRODUCT_NOT_CLEAR／正式0/3／candidate_ready=false／automatic_progression=false。長い原文反復、深い受容、一般入力、PARTIAL、説明Mを含む別sourceの更新、任意多段・本人実機は残る。範囲外の元reaction訂正では「その時は今は嬉しい」等の時点衝突が比較本文に残り、次の具体的な診断対象とする。次はE05/E06/E08の実本文品質と既存方式判断へ戻る。10/20方式判断・10/31管理線・12/18公開目標、Piece/Analysis主枠53.25％は再評価しない。Draft PR3／30、merge・deployなし。詳細・全変更file・本文は[u355監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u355_MixedReceivedTimeNeutral_20261019.md)。
+
+
+## 2026-10-20 方針milestone 観測技術の継承と学習型EmlisAI
+
+Mashの今回の対話に基づき、学習済みの言語能力を土台に、Mashの観測の進め方（着目、暫定構造、問い、整合確認、修正・棄却・更新）を教材から育てる方針を記録した。言葉の模倣が目的ではなく、応答と問いを一体で扱い、既存CMEEの資産を継承する。決定・対話の要旨・従来の費用／観測に関する懸念・旧Route A方針との関係・未決・次作業の参照先は[最新週次10/20追補](weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261020-observation-learning)。
+
+具体model、配置、費用上限、学習方式、教示会日時、採用条件と公開工程は未決。次は最初の観測会一組と小さな比較案の具体化。今回は記録3文書のみでADMINISTRATIVE_ONLY、actual構造・runtime・DB・依存・学習・model取得・実データ・費用・配置・build・公開・自動化effect0。STRUCTURE_MAP_DELTA_NONE。旧Route A限定の履歴を消さず、今回の設計検討方針の更新と未選定の稼働方式を区別する。12/18目標の変更・完成保証・商品合格は設定しない。
+
+
+## 2026-10-20 観測学習記録 第1回と継続保存先
+
+Mashの依頼により、[観測技術の蓄積先](observation_learning/README.md)と継続用ひな形を作り、写真展示会の架空事例を用いた第1回を保存した。対話原文、Mashの明示教示、華恋の整理、未確認の仮説を区別する。経験は探る場所と観測者自身の価値観の持ち込みに気づくために使い、人物タイプの統計分類を学ぶことを目的にしない。詳細は[週次追補](weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261020-observation-session-001)。素材・教示の保存までで、モデル学習・能力評価・製品構造の変更は未実施。STRUCTURE_MAP_DELTA_NONE／ADMINISTRATIVE_ONLY。
+
+## 2026-10-20 Piece残件：モデル制限解除とv9 fixture修復の新source
+
+Mashの明示決定をRule18 §0Aと既存入口/Gate/索引へ反映。Piece残件はPro以外でも実施し、品質・承認・実検証は維持します。v9 test-only Windowを§83.4の3箇所に限定して修復し、新sourceの既存push CIを一度確認する段階です。currentはPiece入口§84/current map§65.32/weekly§5.6.12/manifest v96。native175成功、実layer厳密包含、正式renderer採用、通常保存の完成は未確認。製品/API/DB/依存/deploy/main変更0、STRUCTURE_MAP_DELTA_NONE。
+
+### 2026-10-20 Piece途中checkpoint：native175 unique PASS、実RN継続中
+
+source9de5a87の13path全文・changed setをfresh確認。run39430845624で旧129＋v9追加46の175個別PASS／FAIL0と3summaryが揃い、Window例外を解消。native step successとjob cancelledを区別し、取消理由は未確定。実RNは同run継続中。currentは入口§84.2/map§65.32.1/weekly§5.6.12.1/manifest v97。元ログ5jobとmetadataを同manifestにlossless保存し、正式採用・通常保存は未完了のまま。追加source変更・再実行0。
+
+### 2026-10-20 Piece結果：Window例外解消・native175完走・実RN11条件
+
+source9de5a87を一度確認したrun39430845624の最終結果を保存。native175 unique PASS/FAIL0と検査step success、JS915、実RN11条件/11PNGを確認しました。native job/CI全体cancelled（理由未確定）は成功へ変換しません。元6jobログ・raw report・metadataは同manifest内のinterim/final bundleと旧PNG11のbyte一致参照で可逆保存。currentは入口§84.2〜84.4/map§65.32.2/weekly§5.6.12.2/manifest v98。次はopacity0のplaced callbackで実Text layerを直接観測する一作業。v9正式採用・通常保存は未完了、追加source/再実行/DB/deploy/main0。
+
+## 2026-10-21 Piece残件：配置後の自然なText layer状態の観測
+
+前回native175/RN11結果を継承し、既存Arabic placed成功callbackで、geometry reader/resolve前の自然なmodel-layer metadataを読む99行だけをharnessへ追加。pixel_observation=NOT_PERFORMEDでnil/opaqueを包含成功に変換しません。6既存path、製品/API/DB/workflow/依存/deploy/main変更0、STRUCTURE_MAP_DELTA_NONE。入口§85/map§65.33/weekly§5.6.13/manifest v99。新sourceの一度の既存CIは未実行、実layer包含・正式admission・通常保存は未完了です。
+
+### 2026-10-21 Piece結果：全6job成功、自然contentsはnonnull
+
+source623662bの一度のrun39502473690は全6job/CI success。JS915/native175 unique PASS・FAIL0/実RN11条件・PNG11を確認。配置直後Arabic72ptでは透明canvasのまま同一性・前後state・期限が成立し、公開contentsはnonnull/class __NSCFType。型・画素は未確認です。原report/全6jobログ/xcresult等と旧PNG11の一致参照をmanifest v100へ保存。入口§85.2〜85.3/map§65.33.1/weekly§5.6.13.1。次は同callbackのlayer合成を外部contextへ写す未実施案、別bitmap表示v10は保留。BLOCKER_NARROWED、v9正式採用・実画素包含・通常保存未完了、結果5資料のみ、追加source/再CI/DB/deploy/main0、STRUCTURE_MAP_DELTA_NONEです。
+
+
+## 2026-10-21 Piece残件：配置直後layerの外部RGBA合成診断
+
+前回入口§85.3を継続。Arabic72ptの同placed callbackで同Text layerを固定1536×512 RGBAへ一回合成し、raw原物・alpha境界・前後state/identity/期限を採るharness差分。元wire/oracle/assertions/175分母/8秒/native90秒を保持し、強制更新・別renderer・fallback・再試行0。入口§86/map§65.34/weekly§5.6.14/manifest v101。root単一writer/PIECE_WORK_ALLOWED、6既存path、製品/API/DB/workflow/依存/deploy/main0、STRUCTURE_MAP_DELTA_NONE。新sourceの一度の既存CIは未実行、実画素包含・v9正式採用・通常保存は未完了です。
+
+
+### 2026-10-21 Piece途中保存：source1f168d19、native175成功
+
+全6pathのremote全文一致。同run39509902845 attempt1でnative175 unique PASS/FAIL0/3summary/launch0・main約58.300秒、JS915成功。5job元ログ＋metadataをmanifest v102へlossless保存。入口§86.1/map§65.34.1/weekly§5.6.14.1。実RN/配置直後画素・CI全体は進行中のため未確認。追加source・再実行・DB/deploy/main0、正式採用・通常保存は未完了です。
+
+
+### 2026-10-21 Piece結果：配置直後layer/完成PNGの一致とdirect測定の1px過小を確認
+
+source1f168d19の一度のrun39509902845は全6job/CI success、JS915/native175 unique PASS/FAIL0/RN11条件/元PNG11byte一致。Arabic72ptの同placed callbackでrawRGBAを保存・独立走査し、layer/完成後layer/元PNGは同境界、directだけtop/right各1px狭いことを確認。前後state/identity/期限は成立。入口§86.2〜86.3/map§65.34.2/weekly§5.6.14.2/manifest v103へ原物復元・全6jobログ・解析を保存。BLOCKER_NARROWED、包含修復/正式採用/通常保存は未完了。次は非clip意図描画と実layerを扱う最小修復の設計確定。単純union v3案は残差と契約差を持つ未採用案で、採用せず、既済のmetadata/raw診断を繰り返しません。結果5資料のみ、追加source/再CI/DB/deploy/main0、STRUCTURE_MAP_DELTA_NONE。
+
+
+### 2026-10-21 — Piece実layer包含修復の具体仕様（実装判断待ち）
+
+入口§87/map§65.35/weekly§5.6.15/manifest v104。旧v2を保持する別preview containment.prototype.v1＋selected_line.v3で、direct1・忠実性を実行時照合するnative-scale非clip参照・自然layerのunionを既存Card配置/本文・branding高/余白/次fontへ渡す最小案を具体化。nativegrid0→stage位相、filter範囲、opacity0.8、同時memory/元8秒・90秒、19pathと一度のCI・旧915/native175＋新20/RN11＋追加2条件・未達STOPを固定。新ink/wire/profileのみRule18§11.3の判断待ち。今回は資料5file、製品/test/workflow/CI/DB/API/deploy/main0。正式採用/通常保存/本人再表示未完了、STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。前回JS915/native175/RN11の成立を新修復の実績へ加算しない。
+
+
+### 2026-10-21 — Piece承認済み包含修復の実装source
+
+入口§88/map§65.36/weekly§5.6.16/manifest v105。Mash明示承認の別preview＋v3 closed20field/direct-native-layer unionを既存19pathへ実装、旧v2/v9・saved/export境界と元8秒/90秒を保持。native runtime clipped-reference/native-layer全alpha occupancy比較、fractional boundsでのclip前paint、provider所有/atomic32MiB、自然状態/local-placed currentを接続。standaloneの既存OS QuartzCore linkと195unique検査を整合。local JS933全成功、native195/RN13/画像差・時間は未確認で一度CIへ。新tracked file/依存/DB/API/runtime/flag/env/deploy/main0。STRUCTURE_MAP_DELTA_PRESENTは限定preview測定責務、正式採用/通常保存は未完了。
+
+
+## 2026-10-21 — Piece包含候補の一度CI途中結果
+
+入口§88.4/map§65.36.1/weekly§5.6.16.1/manifest v106。source9b0abded/treeb83d10e5の19path全文一致。CI39523761970 attempt1でJS933・native195unique（旧129＋v9 46＋新20）/FAIL0、main→summary41.425065秒・元90秒内。Android sourceと両export compileを含む5/6job成功、実RN13/PNG/元8秒は継続中・未確認。原ログ5jobを可逆保存、source/test/workflow追加編集と再CI0。正式採用・通常保存・本人履歴は未完了、automatic_progression=false。STRUCTURE_MAP_DELTA_NONE（結果資料5pathのみ）。
+
+
+## 2026-10-21 — Piece包含候補の有限検証終了、RN test macro修復点を特定
+
+入口§88.5/map§65.36.2/weekly§5.6.16.2/manifest v107。source9b0abded、一度CI39523761970 attempt1はfailure。JS933・native195unique/FAIL0・旧90秒内41.425065秒と他3compile job成功。実RN test902行のXCTAssertEqualObjects内inline配列commaがmacro引数を分割しbuild exit65、13条件は全未検証、report/PNG0。元8秒/画素/fit成立は今回未確認。第2引数を丸括弧で囲む同一1行の最小修復案を入口へ記録したが未適用。source凍結/再実行0、未採用STOP、primary BLOCKER_NARROWED。全6job原ログ/唯一のRN xcodebuild.log/ZIP/metadataを可逆保存。正式renderer/採用saved/InputScreen正式供給/通常保存→本人履歴は未完了、automatic_progression=false。最終資料5pathのみ、STRUCTURE_MAP_DELTA_NONE。
+
+
+## 2026-10-21 — Piece実RN test macro修復の新限定単位
+
+入口§89／map§65.37／weekly§5.6.17／manifest v108。前回test902の第2引数全体を括弧で囲む1行だけ修復。今回のMash明示続行指示＋current next workを根拠とする新しい限定単位で、旧失敗/閉鎖は不変。cppの修正前3引数エラー→修正後2引数展開と独立read-only reviewを確認。新source一度CIはsource時点で未実行。JS933/native195/実RN13/全画像・元8秒/90秒の実結果を確認し、未達なら未採用STOP。正式採用/通常保存・本人再表示は未完了。STRUCTURE_MAP_DELTA_NONE、製品/fixture/workflow/API/DB/runtime/依存/deploy/main変更0、automatic_progression=false。
+
+
+## 2026-10-21 — Piece test syntax修復の一度CI途中結果
+
+入口§89.3/map§65.37.1/weekly§5.6.17.1/manifest v109。source fbf9c233eef738329456780b9fd1b79b89a78134/tree ea8517feの全6pathをGitHub全文照合。一度CI39544012216 attempt1でJS933 PASS/FAIL0/SKIP0/15,862.724ms、native195個別/195unique/重複0/FAIL0・4summary一致・launch0。main04:32:01.205044Z→最終summary04:32:32.348149Z＝31.143105秒で元90秒内。Android source成功、export2jobはscope skipによるsuccessで依存compileを今回実行したとは扱わない。実RNは継続中、13条件/PNG/8秒は未確認。5job原ログ・run/job metadata・独立集計をmanifestへ可逆保存。source/test/workflow追加変更・再CI0、STRUCTURE_MAP_DELTA_NONE、正式採用/通常保存・本人履歴は未完了、automatic_progression=false。
+
+
+## 2026-10-21 — Piece実RN test構文修復の一度CIを終了、local拒否へ絞る
+
+入口§89.4/map§65.37.2/weekly§5.6.17.2/manifest v110。source fbf9c233、一度CI39544012216 attempt1はfailure（19分49秒）。test macro build停止は解消し全13reportへ到達。JS933/native195unique・FAIL0/31.143秒成功。旧saved1/raw3/controlled fault1は成立、PNG5。既存4PNGはbyte/全画素一致。新preview8はv3 local inspector/decoder拒否でplaced前に停止、具体guardは未確定。全13report<8秒でも420完成/採用の合格にはしない。全6jobログ/元13report/PNG5/解析をmanifest、55MBの元artifact全体も永続保存済み。次は同一失敗local操作のnative/decoder拒否を分ける最小診断（未実施）。primary BLOCKER_NARROWED、新候補未採用STOP、正式admission/saved reader/InputScreen正式供給/通常保存→本人履歴・実機は未完了。source/test/workflow追加変更・同source再実行0、結果5資料のみ、STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
+
+
+## 2026-10-21 — Pieceのlocal拒否原因を新しいtest-only単位で観測
+
+入口§90／map§65.38／weekly§5.6.18／manifest v111。新依頼のLEVEL2 test-only原因診断。既存test3＋資料5の8path、製品source変更0。元native一回とdecoder一回のraw/reject/adapter結果を分離、CI隔離copyへ元59guardのTLS first-stageを注入しcallback同threadで照合。failed reportにも保存。全13fixture/assertion、元8秒/90秒、条件式/return/wire/draw/row/fontを維持。新source CI一回のみ、同source再実行0。現時点未実行、原因未確定、既存failure保持・新候補未採用。通常保存等は未完了、STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
+
+
+## 2026-10-21 — Pieceの元native拒否診断を一度CIの実物で終了
+
+入口§90.2／map§65.38.1／weekly§5.6.18.1／manifest v112。source ae77b721、一度CI39548735598 attempt1はfailure。JS933/native195成功、実RN13条件到達。旧saved1/raw3/controlled fault1は成立しPNG5は前回原物とbyte/全RGBA画素一致。新preview8はnative拒否を再現し、7条件は原line488のalpha occupancy不一致（stage38）、quoteは原line260のPieceRasterPlan複合制約（stage15、具体operand未確定）へ分離。native65uniqueの対応は全件一致、37resolve/28reject。JS/adapterは30resolve/16reject/19pending、native成功後のadapter拒否0。元本文/13fixture/assertion/8秒/90秒と製品処理は不変。診断単位は未採用STOP、プレビュー修復・正式採用・通常保存は未完了。 次の未実施：自然layerと参照が同じ描画gridを使う根拠を整えて7条件の画素不一致を修復し、quoteは同一操作でPieceRasterPlanへ渡った寸法/scaleと拒否operandを確定する。元guard/8秒/90秒/4096辺/4Mpixel/32MiBを緩めず、新source一度CIで全13条件を検証する。今回この修復・追加観測・追加CIは未実施。 結果5資料のみ、source固定・再CI0、未採用STOP、通常保存未完了、STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
+
+
+## 2026-10-21 — Piece自然drawRectの実grid再現修復を新sourceへ
+
+入口§91／manifest v113。自然drawRectの実bitmap/CTM6値/clip/source snapshotへ既存v3参照を束縛。自然格子位相と元bitmap→bounds写像を再現、clipped実寸と元全alpha一致guardを維持。旧grid0仮定の内部修復。quoteは同呼出しの拒否operandをtest-onlyで記録。既存製品2/検査4/資料5の11path、全13fixture/XCTest判定/195分母/元8秒/90秒/4096/4M/32MiBは不変。JS933成功、実iOSは新source一度CIで未確認。root単一writer、3独立read-only review。正式renderer/通常保存/本人履歴・実機未完了、STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
+
+
+## 2026-10-21 — Piece自然grid修復の途中結果を保存
+
+入口§91.3／map§65.39.1／weekly§5.6.19.1／manifest v114。source dfd656c7、11path読戻し一致。一度CI39555207737 attempt1、JS933/旧native175/iOS・Android source/両export compile成功。新v3は10PASS/10FAIL、成功local共通経路が未成立で原因未確定。拒否10成功を個別fault到達へ換算しない。native main→summary29.414833秒/launch0。実RN13/PNG/8秒/quote operandは継続中・未確認、元5job原ログを可逆保存。source追加変更/同source再実行0、新候補未採用、正式admission/通常保存未完了、automatic_progression=false。
+
+
+## 2026-10-21 — Piece自然grid候補の最終失敗原物を保存
+
+入口§91.4／map§65.39.2／weekly§5.6.19.2／manifest v115。一度CI39555207737 attempt1はfailure（source dfd656c7）。JS933/旧native175/実compile成功、新v3 10PASS/10FAIL、native計185unique PASS/10FAIL。実RN保存JSON8件＝保存済み1 native_checked＋新preview7 unavailable。56境界は全新stage20でraster未到達。自然context照会0/0からnil snapshot→stage20の因果をrawspaces tag827で確認し、CGBitmap前提不成立を確定（自然backing0pxとはしない）。全56件の自然contextは未保存。quote旧stage15/旧7alpha不一致は未解決。9件目rawspacesはlog/PNGのみ、非有限frameとJSON欠落は観測、JSONエラー/90秒timeoutの直接因果は未記録。後続4条件未到達、13完遂とはしない。PNG2件は前回byte/全RGBA一致。全6job原ログ/2PNG/元JSON/xcresult等13memberをmanifestへ可逆保存、GitHub ZIP原物971memberもSHA256照合・保全。候補は未採用STOP、PRIMARY_OUTCOME=BLOCKER_NARROWED、正式admission/通常保存未完了。source追加編集/同source再実行0、STRUCTURE_MAP_DELTA_NONE。次はbitmap前提を除く実grid候補成立確認と既存harnessの非有限値記録修復（未実施、元guard/分母/期限/資源維持）。
+
+
+CURRENT_RULES R10.2の「同じblocker familyで2回連続STOP」に従い、DETOUR_RISK_STOPとして追加開発・再試行を停止します。本来の完了条件は元13条件の本文画像を成立させることです。今回増えた証拠はbitmap前提不成立と記録欠落の範囲だけで、商品品質creditは増えていません。次の推奨経路exact1は、元の全画素guardを維持した製品grid直接修復と既存harnessの欠落修復を一体の最小作業へ戻すこと（未実施）。追加helper/診断family/恒久checkerを挟まず、同じ失敗sourceを再実行しません。
+
+
+## 2026-10-21 — Piece本文画像の最小直接修復を実装
+
+入口§92／map§65.40／weekly§5.6.20／manifest v116。今回のMash継続指示＋Rule18 LEVEL2で、§91.4の製品grid直接修復と既存harness記録修復を同一単位で実装。自然contextのbitmap仮定を除き、CTM/clip/source保持＋同じclean contentsのCFtype確認後CGImage実寸を使用、grid/contents/寸法を同一性へ束縛。未知type拒否、元全alpha比較/wire20/13条件/native195/8秒90秒/資源不変。非有限frameは既存PieceFiniteでnull/invalid、JSON/atomic保存失敗・例外記録とcallback完了を維持し二重reportを防ぐ。元assertion111行順序不変＋保存確認1件。5source＋5docs、新file/依存/workflow/API/DB/deploy/main0。JS933成功11,918.940381ms、最初のcompiler参照不足は既存5.2.2のNODE_PATH設定へ修復。patch/observer65字句復元/独立review2成功は実RN成功ではない。新source一度CIは未実行、旧7alpha不一致/quote制約・正式admission/通常保存は未解決。失敗sourceの再実行0、追加helper/診断family0、STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
+
+
+## 2026-10-21 — Piece公開contents寸法修復の途中結果
+
+入口§92.1／map§65.40.1／weekly§5.6.20.1／manifest v117。source14a1286e6265a1194ad83873693afd9cf6680e24/tree9edc6fc27e56e1a5e06f04064263ad98153de0ec、全10path remote全文一致。一度CI39565918631 attempt1でJS933と旧native175成功、新v3 20は10PASS/10FAIL、計185unique PASS/10FAIL。成功想定8＋成功localを前提とする2が未成立。拒否想定10成功を各fault到達証明へ換算しない。iOSsource/RNpatch/Androidsource/Androidexport実compile成功。standaloneは具体拒否位置/contents型未記録で、非CGImageが原因とはまだ確定しない。実RN13/元PNG/画素比較/quote旧制約は同run継続中・未確認。完了4jobのdecoded原ログ/metadata/集計をmanifestへ可逆保存。今回も候補未採用、source/test/workflow追加変更・同source再実行0、正式admission/通常保存/実機は未完了、STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
+
+
+## 2026-10-21 — Piece contents寸法修復の最終失敗結果と記録改善
+
+入口§92.2／map§65.40.2／weekly§5.6.20.2／manifest v118。source14a1286e、一度CI39565918631 attempt1はfailure（21分31秒）。JS933/旧native175/実compile成功、新v3 10PASS/10FAIL、native計185unique PASS/10FAIL・43.604826秒。診断は元13names同順/重複0/strict JSON保存へ修復、null4値＋invalidを記録、保存エラー/90秒expectation timeout失敗なし。新preview8 unavailable、保存済み1のみnative_checked、raw3＋trap measurement_unavailableで製品未合格。62native拒否＝snapshot複合guard6件(stage20、項目未識別)＋非CGImage contents56件(stage23、実型未記録)。寸法/raster/alphaへ未到達、quote4件もstage23、旧alpha7/quote制約は未解決。5PNGは前回byte/全RGBA一致。保存済みは本文5行＋branding1Text＝6Text（旧91.4本文6行の誤記訂正）。全6job原ログ/元JSON/xcresult/5PNG等17memberと元ZIP1010memberを保全。候補未採用DETOUR_RISK_STOP、次はCGImage前提を除く実grid/忠実性比較の直接設計（未実施、元guard/資源/分母/期限維持）。source追加変更/同source再実行0、正式admission/通常保存未完了、STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
+
+
+## 2026-10-22 — Piece 2026-10-22 — backing実寸依存を除く別候補の比較契約案（未実装）
+
+入口§93／map§65.41／weekly§5.6.21／manifest v119。§92.2の次作業である直接修復設計を進め、opaque自然contentsの実寸取得を前提にしない別preview containment.prototype.v2／selected_line.v4案を具体化した。自然RN Textは維持し、Bを観測CTM由来の独立S倍意図描画＋公開filter参照、Cを自然layer実合成と分離。A/B/C厳密unionを維持する一方、忠実性比較をnativeSから出力logical1の全alpha占有一致へ変える。自然backingの非clip写像同値性・nativeSと同じ検出感度は保証しない。旧v3/containment.v1は保持し、新しい品質／comparator差分としてRule18§11.3 LEVEL3の判断前に実装しない。
+
+新候補profileは旧175＋別V4 20＝195。旧V3 20本体/期待値/10FAIL原物を保存し、このprofileでは旧V3 20未実行と明記する。分母不変・旧失敗修復済みとは呼ばず、workflow/test選択変更も承認差分。元13条件、8秒/90秒、4096/4Mpixel/同時保有32MiB、source/token、本文/段落/font順は維持。snapshot6は原因未確定のまま同じ自然draw前後の対応を確認し、不一致は拒否。新source一度CI/未達STOP、追加診断CI/同source再実行0。既存20path（製品6/検査8/workflow1/資料5）、新tracked file0、通常保存/正式admissionへの自動進行0。詳細な式・境界・未保証・検証計画は入口§93。
+
+今回実施は資料5fileのみ、製品/test/workflow変更・新CI・DB書込み0。Supabase project一覧readでACTIVE_HEALTHY。旧run39565918631のfailure/旧v3 10FAIL/未採用DETOUR_RISK_STOPを維持。候補未承認、STRUCTURE_MAP_DELTA_NONE、formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。通常保存→本人履歴/詳細は未完了。
+
+
+## 2026-10-22 — Piece 2026-10-22 — 承認済みlogical1比較v4を実装（CI前）
+
+入口§94／map§65.42／weekly§5.6.22／manifest v120。Mash「進めていいよ。」により§93の比較grid/B意味/新profile195/20pathと一度CIを実装。新preview containment.prototype.v2→JS V4閉schema/原8秒wall+performance→native inspectSelectedLineV4→観測CTM q格子の独立B/自然layer C/所有A→logical1全alpha占有比較→厳密union→同token最終fitという別候補の責務を既存owner内に追加した。旧v2/v9/saved/V3 helpers/decoder/bridge/20期待は保持。bitmap表示への置換なし。snapshotは別before/after観測と12bit stable mask、V4全live providerは共有32MiBへ予約する。Aの所有context化は旧Aとのlocal/placed全positive同値をCIで確認する。
+
+新profileは旧175＋新V4 20、旧V3 20は明示未実行。元13入力/names/旧savedを保持。local JS949（旧933+新16）全成功、RN patch exact dry-run/bash/YAML/Python構文・104markerの全文復元成功。UIKit compile/画像/13条件/8秒実成立は未確認。一度CIのsourceを反映して全20fileを読戻した後、その一回の結果だけを記録する。未達は候補未採用STOP、結果後source追加修正/同source再実行なし。
+
+STRUCTURE_MAP_DELTA_PRESENT（既存owner内の別候補/独立比較座標/source観測/期限責務を反映）。API/DB/依存/本番/署名/配布/deploy/main0。formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。P-W1通常保存→本人詳細/履歴、P-W2画像保存/共有、P-W3実機受入れは未完了。
+
+
+## 2026-10-22 — Piece source20file照合と一度CI開始 source照合と一度CI開始（2026-10-22）
+
+入口§94.4／manifest v121。source87335f4f/tree8846d921の全20path全文一致を確認、一度CI39683393855 attempt1実行中。source/test/workflow固定・追加変更/同source再実行0。JS949はlocalのみ、native新195/実RN13/画像/期限の結果は未確定。候補未採用、通常保存/正式admissionは未完了、automatic_progression=false。STRUCTURE_MAP_DELTA_NONE（今回checkpointは結果資料5fileだけ）。
+
+
+## 2026-10-22 — Piece新V4 native失敗、実RN結果を回収中 途中：新V4 1PASS/19FAIL、実RN継続
+
+入口§94.5／manifest v122。同source87335f4f、一度CI39683393855 attempt1でJS949/Android source/Android export実compile成功。iOS syntax/patch成功、旧native175成功、新V4 1PASS/19FAIL（正常controlを含む）、計176unique PASS/19FAIL・重複0・旧V3 20未実行。main→summary42.039325秒/元90秒内。standalone拒否stageは未記録で原因を推定しない。実RN13/PNGとiOS exportは継続中、完了4job原ログを保存。新候補未採用、source/test/workflow固定/追加変更/同source再実行0、通常保存/正式admission未完了、automatic_progression=false。今回結果5資料のみ、STRUCTURE_MAP_DELTA_NONE。
+
+
+## 2026-10-22 — Piece出力logical1候補の一度CI終了、未採用 最終：実装＋一度CI完了、logical1新候補未採用STOP
+
+入口§94.6／manifest v123。同source87335f4fの唯一のCI39683393855 attempt1は全6job終了/failure。JS949・旧native175・Android source・export Android4library/Pods4library実compile成功。新V4は1PASS/19FAIL、計195unique＝176PASS/19FAIL、旧V3 20明示未実行。native main→summary42.039325秒/元90秒内。実RN13元names/順序/入力を保存したが、新preview8はunavailable/完成PNG0/fit0、旧saved1だけnative_checked、raw4はmeasurement_unavailable。Card9すべて保存/export/fitfalse。raw4のbody_preserved=falseは既存catchflagで、native Text元本文一致を別確認済み。
+
+native原境界62local拒否の61件はstage83の全logical1占有不一致、quote80ptの1件は3481×1285＝4,473,085画素/元4M超過（stage15/mask256、辺4096/32MiB超過ではない）。全62snapshot記録は一致。比較の差座標/alpha/geometry operand未記録で根因は未確定、standalone19FAILへ同原因を一括流用しない。早い拒否を8秒/420/最終fit成功へ換算しない。原PNG5は前回とbytes/全RGBA一致しroot目視済み、旧saved/raw表示を新候補成功に加算しない。全6元ログ・元13report/PNG5・stage map・xcresult root・独立レビュー・全archive member台帳をmanifestへ可逆保存、完全xcresultを含む原ZIP59,523,256byte/1020member/SHA256一致も保存済み。
+
+承認された実装/一度CIの単位は完了、validation_success=false/unadopted=true/DETOUR_RISK_STOPを維持。source/test/workflow固定、追加修正/同source再実行/追加CI0。次の未完exact1は既存logical1参照合成と自然layerの対応を直接修復する具体案の設計（案未成立、未実装・未実行）。正式admission/通常保存→同owner再表示/写真保存共有/実機受入れと10/22保存目標は未完了。今回結果5資料のみSTRUCTURE_MAP_DELTA_NONE、商品品質credit0、automatic_progression=false。
+
+
+## 2026-10-22 — 観測会：短い日常入力についての認識を共有し、第4回の材料を準備
+
+Mashが「その認識でいい。記録として残せ」と承認。[第3回D06〜D07](observation_learning/sessions/2026/OBS-20261022-002/01_dialogue.md#d06)と[ノート§8](observation_learning/sessions/2026/OBS-20261022-002/02_learning_notes.md)へ保存した。長い相談を前提にせず、普通の短い言葉に表れる本人の基準を拾うことを重視し、事実を受け取って終える入力も保持する。毎回の深読み・問い・新発見を価値の前提にしない。チュートリアル案・「人を選ぶから今のままでよい」という旧判断への承認、入力分布や商品価値の実証へ広げない。
+
+続く依頼へ、華恋は[第4回 OBS-20261022-003](observation_learning/sessions/2026/OBS-20261022-003/01_dialogue.md)を実際の入力形式に近い短い架空記録から始める形で準備。不安（弱）と、本を返すのが遅れ友人へ謝った後の「大丈夫って言ってくれたけど、まだちょっと気になる」を初期材料とする。本人役の事前設定は初期sourceに含めず、実際の問い・回答・読みの更新だけを追記する。問いなしの終了も不足扱いしない。既存の相談教材を保持する。
+
+今回の対象は観測学習README、前回原文・ノート、新回原文・ノート、本milestoneの6fileのみ。モデル推論・GPU起動・追加学習・CMEE接続・製品コード・API・DB・配置0。27B候補保持・製品採用未確定を維持。STRUCTURE_MAP_DELTA_NONE、ADMINISTRATIVE_ONLY（合意と教材材料の保存）。
+
+
+## 2026-10-22 — 第4回観測会：二問と観測文、復唱と利用需要の問いを保存
+
+[OBS-20261022-003のD01〜D05](observation_learning/sessions/2026/OBS-20261022-003/01_dialogue.md#d01)と[学習ノート§6](observation_learning/sessions/2026/OBS-20261022-003/02_learning_notes.md)を採録。Mashは「何が気になるか」「何が不安か」を問い、本人役の回答後、返却の遅れ・本人が伝えた週末・遅れる連絡の不在・友人への影響の懸念を観測文へ整理した。その文が復唱になることと、このような応答へのアプリ需要を問題提起した。新情報は回答後のsourceとして扱い、初期入力だけから分かった教材にしない。架空本人役の説明から実ユーザーの気づき・需要の肯定／否定を認定しない。
+
+次はMashの需要についての問いへの華恋の意見と続きの対話。観測会終了・最終教示・商品PASS・モデル採用は未確定。今回の対象は原文・ノート・観測学習README・本milestoneの既存4fileのみ。モデル推論・GPU・学習・CMEE・製品コード・API・DB・配置0。STRUCTURE_MAP_DELTA_NONE、ADMINISTRATIVE_ONLY。
+
+
+## 2026-10-22 — 全製品の必読現在地を一本化し、毎作業の差分置換へ接続
+
+Mashの明示指示により[00_cocolon_current_product_and_state.md](00_cocolon_current_product_and_state.md)を全機能・全状態の必読原本として作成。決定済み学習済AI＋CMEE接続、三中核、もしも／Saved、周辺機能、設計／コード／配置／本人端末／商品受入れと残件を区別した。root AGENTS・観測学習README・既存必読入口、CURRENT_RULES R2、09／99、両manifest、System Contextの原本直読と既存task seedへ接続。毎作業、関連差分だけを同じ変更単位で置換更新し、差分なしは既存作業記録へ理由を一行。08はCycle001専用、07は履歴で、全体currentをEOFへ積み上げない。詳細構造ownerと実物は維持。資料・読順設定のみ、runtime／API／DB／配置／学習0。ADMINISTRATIVE_ONLY、商品品質credit0。source照合点と未確認範囲は新正本§1・9。GitHub反映・後読確認はこの記録を含むrevisionから解決する。

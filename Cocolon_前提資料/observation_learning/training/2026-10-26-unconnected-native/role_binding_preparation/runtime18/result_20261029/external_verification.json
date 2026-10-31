@@ -1,0 +1,51 @@
+{
+  "archive_bytes": 47007311,
+  "archive_sha256": "36910e8a361e93961f63a1b4da229a216a57d796dd18c4f6ff40cab4ead0bed1",
+  "payloads": 346,
+  "all_member_crc_hash_bytes_verified": true,
+  "tensor_count": 112,
+  "f32_finite_shapes_match": true,
+  "parameters": 3833856,
+  "changed_tensors": 112,
+  "initial_afaa_unchanged": true,
+  "cold_exact_distinct_pids": 7,
+  "old9_teacher_comparisons": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "parsed_teacher_equal": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "parsed_teacher_equal": false
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "parsed_teacher_equal": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "parsed_teacher_equal": false
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "parsed_teacher_equal": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "parsed_teacher_equal": false
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "parsed_teacher_equal": false
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "parsed_teacher_equal": false
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "parsed_teacher_equal": false
+    }
+  ],
+  "full2_raw_equals_early_snapshot": true
+}

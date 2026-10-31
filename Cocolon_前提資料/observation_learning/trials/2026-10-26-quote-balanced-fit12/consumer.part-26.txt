@@ -1,0 +1,18 @@
+version\":\"cocolon.cmee.emlis_semantic_snapshot.v3\",\"semantic_profile\":\"emlis_model_proposal.v1\",\"snapshot_ref\":\"semantic-9a125aa15b3844622c3cea40e378b95141de84b4872e05e36ac13fa542cca892\",\"source_bindings\":[{\"envelope_id\":\"src-a1b0c051df1279910edced1c\",\"role\":\"ORIGINAL_INPUT\",\"source_commitment\":\"0224ce27f5f2f42f86bf3f3cefc2372d1e87e088d5c3c588b926a999abf10423\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"source_version\":\"emlis.current_input_bundle.v1\"}],\"source_prefix_ref\":\"emlis-source-prefix-31137b58eab33f0fc2fcf7aa80404e3f12c2a190374b12910854458412b58aaa\"}",
+          "snapshot_ref": "semantic-9a125aa15b3844622c3cea40e378b95141de84b4872e05e36ac13fa542cca892"
+        },
+        "body_sufficiency": "SUFFICIENT",
+        "body_state": "FINAL",
+        "reason_codes": [
+          "model_question_not_proposed"
+        ],
+        "schema_version": "cocolon.cmee.emlis_thread.v1",
+        "automatic_progression": false
+      }
+    }
+  ],
+  "meaning_count": 8,
+  "body_count": 8,
+  "source_raw_unchanged": true,
+  "seconds": 13.250057007004216
+}

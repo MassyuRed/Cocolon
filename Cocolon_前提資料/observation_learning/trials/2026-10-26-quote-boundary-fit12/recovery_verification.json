@@ -1,0 +1,13 @@
+{
+  "training_archive_sha256": "7ac747657eea12ab7dcbee59e9b2b788a1c58b5ccb3909cb445e449fc62de627",
+  "recovery_bundle_sha256": "28cb273fea7bf3dabcb6f40409fba42b814a9c669c72805a3222253a123ccf1c",
+  "training_members_verified": 21,
+  "recovery_members_verified": 4,
+  "adapter_sha256": "041f4161fe7bac82b437ecff2711b769ca4c8cfe093ddd04b30b4d728e42d217",
+  "tensor_count": 32,
+  "all_finite": true,
+  "source_raw_sha256": "bbc7e04ce9148b0a75f2a07d70dd0c7615edab55d90507bf37f54ec84e4e687a",
+  "consumer_sha256": "1de5b14af2c3fef0e5ee474c5936f7331ee8d03421622576412275777720a1ec",
+  "library_file_id": "libfile_02e5720e6eb08191a2efa3dfc3e6d8d4",
+  "library_version": 1
+}

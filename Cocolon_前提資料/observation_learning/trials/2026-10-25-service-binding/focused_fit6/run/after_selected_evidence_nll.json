@@ -1,0 +1,32 @@
+[
+  {
+    "id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+    "selected_evidence_loss_tokens": 428,
+    "nll": 0.0001101771995308809
+  },
+  {
+    "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+    "selected_evidence_loss_tokens": 840,
+    "nll": 0.00026845233514904976
+  },
+  {
+    "id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+    "selected_evidence_loss_tokens": 428,
+    "nll": 0.00010766784544102848
+  },
+  {
+    "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+    "selected_evidence_loss_tokens": 840,
+    "nll": 0.00025172371533699334
+  },
+  {
+    "id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+    "selected_evidence_loss_tokens": 422,
+    "nll": 0.00011839521903311834
+  },
+  {
+    "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+    "selected_evidence_loss_tokens": 840,
+    "nll": 0.00023094084463082254
+  }
+]

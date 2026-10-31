@@ -1,0 +1,27 @@
+{
+  "archive_bytes": 15171902,
+  "archive_sha256": "d77f865ef019c6cd69988733ac4dcb13b808292157660057497590b1c7ad6a20",
+  "payloads": 82,
+  "members": 83,
+  "all_payload_size_hash_and_crc_match": true,
+  "ordered_updates": 30,
+  "local_token_exposures": 396,
+  "finite_saved_f32_tensors": 112,
+  "parameters": 3833856,
+  "two_loads_complete": true,
+  "raw_count": 15,
+  "eos_count": 15,
+  "strict_json_count": 14,
+  "meaning_count": 11,
+  "body_count": 9,
+  "cold_equal": 11,
+  "cold_failures": 0,
+  "processing_seconds": 1524.4009482470574,
+  "process_cost_usd": 0.11856451819699337,
+  "adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "ee244dd7a444a2617b40f74f80e843f4fcfd651c38e599ab02d2ddede8e7fa02",
+    "adapter_model.safetensors": "937233a0d2f89425bf42abf971f4e37662bb2db8c6fddaf3fe5884349e1d95bd"
+  },
+  "model_reexecution_for_external_verification": false
+}

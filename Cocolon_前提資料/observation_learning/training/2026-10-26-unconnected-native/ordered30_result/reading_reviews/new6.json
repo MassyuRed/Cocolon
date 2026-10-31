@@ -1,0 +1,247 @@
+{
+  "status": "READ_ONLY_CONTENT_REVIEW_NOT_FORMAL_PRODUCT_ACCEPTANCE",
+  "cases": [
+    {
+      "case_id": "FT-BOOK-INITIAL",
+      "group": "new6",
+      "eos_reached": true,
+      "syntax_json_valid": true,
+      "strict_json_valid": true,
+      "strict_json_error": null,
+      "output_tokens": 1046,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "meaning_adopted": false,
+      "body_available": false,
+      "reason_code": "model_v3_unknown_not_source_bound",
+      "cold_file_status": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT",
+      "teacher_parsed_equal": false,
+      "root_and_read_only_agent_read": true,
+      "formal_product_acceptance": false,
+      "reading": "raw全文が初期1dと同一。unknown ID/targetが説明文に変形しsource束縛不成立。原文にない本人の安心を補い、観測と受け取りへ質問を混入。前回で消えた本文内の問いが復帰。",
+      "baselines": {
+        "initial_1d": {
+          "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/interleaved30_result/after_FT-BOOK-INITIAL.jsonl",
+          "blob_sha": "cf71496559ddc8ceb322e9675b33065f52bf93e7",
+          "eos_reached": true,
+          "strict_json_valid": true,
+          "strict_json_error": null,
+          "raw_utf8_sha256": "c41412d87acbaf15d17b8285315a220c97aedc3f522e194e8dd41229da6ddb83",
+          "raw_text_equal": true,
+          "parsed_packet_equal": true
+        },
+        "prior_dd": {
+          "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/continuation30_result/after_FT-BOOK-INITIAL.jsonl",
+          "blob_sha": "ac7d56ed0105b3cf6a12f3c016ab34f265bf3cff",
+          "eos_reached": true,
+          "strict_json_valid": true,
+          "strict_json_error": null,
+          "raw_utf8_sha256": "cbbcd02eab29f8ce020b05e1f43f2c2bbc33fddbd89d890bf1f682ef713de77f",
+          "raw_text_equal": false,
+          "parsed_packet_equal": false
+        }
+      }
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "group": "new6",
+      "eos_reached": true,
+      "syntax_json_valid": true,
+      "strict_json_valid": false,
+      "strict_json_error": "duplicate_json_key:schema_version",
+      "output_tokens": 2634,
+      "receipt_status": "INVALID_FORMAT",
+      "meaning_adopted": false,
+      "body_available": false,
+      "reason_code": "semantic_receipt_not_validated",
+      "cold_file_status": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT",
+      "teacher_parsed_equal": false,
+      "root_and_read_only_agent_read": true,
+      "formal_product_acceptance": false,
+      "reading": "2634token/EOSへ変化したが最上位schema重複。非連絡と反実振返りの役割混同、現在/回答時点の扱いも崩れる。教師7更新に対しADD1、gap失効なし。原文にない「 remaining_concern と no_contact の間」を引用へ5回生成。受け取りは本人の一人称復唱、更新文「気がかりの対象は未記載です」は明示回答と矛盾。",
+      "baselines": {
+        "initial_1d": {
+          "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/interleaved30_result/after_FT-BOOK-AFTER-ANSWER.jsonl",
+          "blob_sha": "38d727c79c80a3006e171d587a8db8fdb42e0c63",
+          "eos_reached": true,
+          "strict_json_valid": true,
+          "strict_json_error": null,
+          "raw_utf8_sha256": "3c52900bfe4ddbb6078f797701dac22a3cdcb3bdf704d2651cf87e124524f68b",
+          "raw_text_equal": false,
+          "parsed_packet_equal": false
+        },
+        "prior_dd": {
+          "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/continuation30_result/after_FT-BOOK-AFTER-ANSWER.jsonl",
+          "blob_sha": "fbb0ca6a3d01e0a8e87acfba730f034a49eeac6c",
+          "eos_reached": false,
+          "strict_json_valid": false,
+          "strict_json_error": "Unterminated string starting at: line 1 column 7848 (char 7847)",
+          "raw_utf8_sha256": "f1fe60dc01172cca3b53d5205cbb94d4ea99d274713ac070ab251a8f446c5c62",
+          "raw_text_equal": false,
+          "parsed_packet_equal": false
+        }
+      }
+    },
+    {
+      "case_id": "FT-SHOP-INITIAL",
+      "group": "new6",
+      "eos_reached": false,
+      "syntax_json_valid": false,
+      "strict_json_valid": false,
+      "strict_json_error": "Unterminated string starting at: line 1 column 3129 (char 3128)",
+      "output_tokens": 3712,
+      "receipt_status": "TOKEN_LIMIT",
+      "meaning_adopted": false,
+      "body_available": false,
+      "reason_code": "semantic_receipt_not_validated",
+      "cold_file_status": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT",
+      "teacher_parsed_equal": false,
+      "root_and_read_only_agent_read": true,
+      "formal_product_acceptance": false,
+      "reading": "3712token非EOS、受け取りで「そしてその後のこと」571回反復。引用/不明/末尾へ未到達。観測「友人の店を開いたこと」は主体を曖昧化。両baselineのEOSから退行。",
+      "baselines": {
+        "initial_1d": {
+          "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/interleaved30_result/after_FT-SHOP-INITIAL.jsonl",
+          "blob_sha": "951ceadf87385e0a73d94e5bc060735a133b27b2",
+          "eos_reached": true,
+          "strict_json_valid": true,
+          "strict_json_error": null,
+          "raw_utf8_sha256": "aba34b756f4fb20799ecc396c4e22aa2228159262f44d2c2f8a360518e34f06f",
+          "raw_text_equal": false,
+          "parsed_packet_equal": false
+        },
+        "prior_dd": {
+          "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/continuation30_result/after_FT-SHOP-INITIAL.jsonl",
+          "blob_sha": "ef7ef785ec135914f649f2e0de6662d29558993f",
+          "eos_reached": true,
+          "strict_json_valid": true,
+          "strict_json_error": null,
+          "raw_utf8_sha256": "bcb6b8789c78942aa6891697b6cc24bd4185bb221e69575a5f739c4b6caabea1",
+          "raw_text_equal": false,
+          "parsed_packet_equal": false
+        }
+      }
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "group": "new6",
+      "eos_reached": true,
+      "syntax_json_valid": false,
+      "strict_json_valid": false,
+      "strict_json_error": "duplicate_json_key:schema_version",
+      "output_tokens": 2747,
+      "receipt_status": "INVALID_FORMAT",
+      "meaning_adopted": false,
+      "body_available": false,
+      "reason_code": "semantic_receipt_not_validated",
+      "cold_file_status": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT",
+      "teacher_parsed_equal": false,
+      "root_and_read_only_agent_read": true,
+      "formal_product_acceptance": false,
+      "reading": "2747token/EOSでも全文構文が未閉鎖、candidate schema重複/引用表の誤nested。教師6relation→5、8更新→ADD1、gap失効なし。否定引用と参照index不一致。友人側実現/過去からの距離は文字上出るが本人一人称の復唱が中心、自然な受容は未成立。",
+      "baselines": {
+        "initial_1d": {
+          "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/interleaved30_result/after_FT-SHOP-AFTER-ANSWER.jsonl",
+          "blob_sha": "becd20ca3ed42418409f5980ed9d81e15568ff4e",
+          "eos_reached": true,
+          "strict_json_valid": true,
+          "strict_json_error": null,
+          "raw_utf8_sha256": "ee02ff2ce45e13936415bf6538317e6c34ffa91c47dde0f01d4db4ebb9009e7e",
+          "raw_text_equal": false,
+          "parsed_packet_equal": false
+        },
+        "prior_dd": {
+          "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/continuation30_result/after_FT-SHOP-AFTER-ANSWER.jsonl",
+          "blob_sha": "a396cb144e6dc1cebad3bc21f92dd4cb36a742e7",
+          "eos_reached": false,
+          "strict_json_valid": false,
+          "strict_json_error": "Expecting ',' delimiter: line 1 column 3845 (char 3844)",
+          "raw_utf8_sha256": "47320351dbfc1e230a8676685a14dbada4149e2fb29b3c688ec031553b14f171",
+          "raw_text_equal": false,
+          "parsed_packet_equal": false
+        }
+      }
+    },
+    {
+      "case_id": "FT-REPOT-INITIAL",
+      "group": "new6",
+      "eos_reached": true,
+      "syntax_json_valid": true,
+      "strict_json_valid": true,
+      "strict_json_error": null,
+      "output_tokens": 873,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "meaning_adopted": false,
+      "body_available": false,
+      "reason_code": "model_evidence_out_of_scope",
+      "cold_file_status": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT",
+      "teacher_parsed_equal": false,
+      "root_and_read_only_agent_read": true,
+      "formal_product_acceptance": false,
+      "reading": "strict JSON通過でも引用6→2、reliefのindex2が範囲外、聞いた行為の根拠にもmemo引用を使用。観測「叔父に植え替えの手順を説明し」で説明主客反転が残る。「聞かせた」から「聞けて」は局所差。受け取り「安心できました」は本人一人称化。両baselineの意味採用から退行。",
+      "baselines": {
+        "initial_1d": {
+          "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/interleaved30_result/after_FT-REPOT-INITIAL.jsonl",
+          "blob_sha": "b906424da6836ed6271fc2541b1c825dc05472b7",
+          "eos_reached": true,
+          "strict_json_valid": true,
+          "strict_json_error": null,
+          "raw_utf8_sha256": "a495fd8a1c05a3f756ece4e1b421b0d9bf955a03c5488b6219a907c60d3611fe",
+          "raw_text_equal": false,
+          "parsed_packet_equal": false
+        },
+        "prior_dd": {
+          "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/continuation30_result/after_FT-REPOT-INITIAL.jsonl",
+          "blob_sha": "e2132be9f1b5edddbbe0f98d28a4ae56c79eb45e",
+          "eos_reached": true,
+          "strict_json_valid": true,
+          "strict_json_error": null,
+          "raw_utf8_sha256": "a495fd8a1c05a3f756ece4e1b421b0d9bf955a03c5488b6219a907c60d3611fe",
+          "raw_text_equal": false,
+          "parsed_packet_equal": false
+        }
+      }
+    },
+    {
+      "case_id": "FT-KNIT-INITIAL",
+      "group": "new6",
+      "eos_reached": true,
+      "syntax_json_valid": true,
+      "strict_json_valid": false,
+      "strict_json_error": "duplicate_json_key:schema_version",
+      "output_tokens": 931,
+      "receipt_status": "INVALID_FORMAT",
+      "meaning_adopted": false,
+      "body_available": false,
+      "reason_code": "semantic_receipt_not_validated",
+      "cold_file_status": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT",
+      "teacher_parsed_equal": false,
+      "root_and_read_only_agent_read": true,
+      "formal_product_acceptance": false,
+      "reading": "931token/EOSだが最上位schema重複。relations0/明示不明と対象2つは文字上保持。今回は長いsystem指示露出/反復は見られないが、両本文が原文復唱/本人一人称で現在不明を「分かりませんでした」と過去化し「認めて」を補う。EOSだけを完成へ数えない。",
+      "baselines": {
+        "initial_1d": {
+          "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/interleaved30_result/after_FT-KNIT-INITIAL.jsonl",
+          "blob_sha": "e2461ca046187f3deb764f5d9e6ca6e097e2d03e",
+          "eos_reached": true,
+          "strict_json_valid": true,
+          "strict_json_error": null,
+          "raw_utf8_sha256": "d9c332fd22ec7bbab57fa6d9f38dce7e80f164758f053f16b25985bca4cbae31",
+          "raw_text_equal": false,
+          "parsed_packet_equal": false
+        },
+        "prior_dd": {
+          "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/continuation30_result/after_FT-KNIT-INITIAL.jsonl",
+          "blob_sha": "2d6f4df4feef5cc25063d12ea60bc800e20b09e4",
+          "eos_reached": false,
+          "strict_json_valid": false,
+          "strict_json_error": "Unterminated string starting at: line 1 column 2563 (char 2562)",
+          "raw_utf8_sha256": "41157550133f8de343a675e9617194917b443466a2977058538bba5d82018f32",
+          "raw_text_equal": false,
+          "parsed_packet_equal": false
+        }
+      }
+    }
+  ],
+  "system_long_instruction_exposure_observed": false,
+  "exposure_elimination_proven": false
+}

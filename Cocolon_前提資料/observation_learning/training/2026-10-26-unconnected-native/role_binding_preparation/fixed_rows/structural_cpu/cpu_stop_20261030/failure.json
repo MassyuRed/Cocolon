@@ -1,0 +1,140 @@
+{
+  "status": "CPU_STOPPED_NON_MODEL_ADDED_TOKEN_BYTE_PROOF_REQUIRED_NO_RETRY",
+  "exit_code": 1,
+  "non_model_non_special_added_tokens": [
+    {
+      "id": 248058,
+      "content": "<tool_call>",
+      "single_word": false,
+      "lstrip": false,
+      "rstrip": false,
+      "normalized": false,
+      "special": false
+    },
+    {
+      "id": 248059,
+      "content": "</tool_call>",
+      "single_word": false,
+      "lstrip": false,
+      "rstrip": false,
+      "normalized": false,
+      "special": false
+    },
+    {
+      "id": 248060,
+      "content": "<|fim_prefix|>",
+      "single_word": false,
+      "lstrip": false,
+      "rstrip": false,
+      "normalized": false,
+      "special": false
+    },
+    {
+      "id": 248061,
+      "content": "<|fim_middle|>",
+      "single_word": false,
+      "lstrip": false,
+      "rstrip": false,
+      "normalized": false,
+      "special": false
+    },
+    {
+      "id": 248062,
+      "content": "<|fim_suffix|>",
+      "single_word": false,
+      "lstrip": false,
+      "rstrip": false,
+      "normalized": false,
+      "special": false
+    },
+    {
+      "id": 248063,
+      "content": "<|fim_pad|>",
+      "single_word": false,
+      "lstrip": false,
+      "rstrip": false,
+      "normalized": false,
+      "special": false
+    },
+    {
+      "id": 248064,
+      "content": "<|repo_name|>",
+      "single_word": false,
+      "lstrip": false,
+      "rstrip": false,
+      "normalized": false,
+      "special": false
+    },
+    {
+      "id": 248065,
+      "content": "<|file_sep|>",
+      "single_word": false,
+      "lstrip": false,
+      "rstrip": false,
+      "normalized": false,
+      "special": false
+    },
+    {
+      "id": 248066,
+      "content": "<tool_response>",
+      "single_word": false,
+      "lstrip": false,
+      "rstrip": false,
+      "normalized": false,
+      "special": false
+    },
+    {
+      "id": 248067,
+      "content": "</tool_response>",
+      "single_word": false,
+      "lstrip": false,
+      "rstrip": false,
+      "normalized": false,
+      "special": false
+    },
+    {
+      "id": 248068,
+      "content": "<think>",
+      "single_word": false,
+      "lstrip": false,
+      "rstrip": false,
+      "normalized": false,
+      "special": false
+    },
+    {
+      "id": 248069,
+      "content": "</think>",
+      "single_word": false,
+      "lstrip": false,
+      "rstrip": false,
+      "normalized": false,
+      "special": false
+    }
+  ],
+  "input_and_adapter_sha256": {
+    "eval_inputs11.json": "8f32141212419628092c69e43dcf3a267651c8b95b20f1ad7e98e064cb41a820",
+    "train_messages11.jsonl": "ef2d70877eb55c9191a2600581e74bd3d51f316473655efc154b7c389cf5485e",
+    "adapter/README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter/adapter_config.json": "db3ed15f287924089bdcdc4b057f93f3173df8026bcf3aaaaf65557916bef519",
+    "adapter/adapter_model.safetensors": "114466411f36f0eef7a2dceaec7f5190544ac8545eb6b2f6a3d0446b70f90b66"
+  },
+  "gpu_run_directory_absent": true,
+  "cpu_success_report_absent": true,
+  "effects": {
+    "model_loads": 0,
+    "model_forwards": 0,
+    "training_updates": 0,
+    "generations": 0,
+    "cmee_calls": 0
+  },
+  "gpu_read_only": "NVIDIA RTX A5000, 24564 MiB, 1 MiB, 0 %",
+  "retry": false,
+  "gpu_kept_running": true,
+  "closure": "CPU_NOT_PASSED_GPU_NOT_EXECUTED",
+  "source_commit": "e22f1101c730465f2362f734fe8cdfcc38f7f9f8",
+  "source_sha256": {
+    "syntax2.py": "cf33a3add37ba380c1a6e8c813404002045f740c8dc283933e0b8ae9bb515803",
+    "run_syntax2.py": "fb2bd88a0fce681309ce121649a898cc5e54ed91e810f71b5028473ba7649bd9",
+    "plan.json": "08533369bbb06484bf8cfa6ad1ff5e53dd39aec55be607765417afe2b6b001e4"
+  }
+}

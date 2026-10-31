@@ -1,0 +1,23 @@
+{
+  "status": "CPU_PREPARATION_ARCHIVE_EXTERNALLY_VERIFIED",
+  "archive_bytes": 8369444,
+  "archive_sha256": "93d102c267f7ddea5ec84eda1e587f21131480d32ac112f6ae73159d163bbf6a",
+  "payload_count": 13,
+  "members": 14,
+  "all_manifest_members_verified": true,
+  "expanded_initial_weights_sha256": "349034fc96acf191c3d919ed6a69ac4de14526c8c129b5f536eaa2baa1c6fc7a",
+  "external_f32_finite_tensors": 112,
+  "external_new_B_zero_matrices": 40,
+  "old32_exact_verification": "Jupyter CPU; original initial1d three hashes bound; not independently remeasured against original1d outside Pod",
+  "real_4b_model_loads": 0,
+  "real_4b_forwards": 0,
+  "training_updates": 0,
+  "generation_calls": 0,
+  "library_file_id": "libfile_11851e44ef708191bc8d65ff1ef04302",
+  "library_version": 0,
+  "library_preservation": "COMPLETE_VERSION_0",
+  "base_weights_included": false,
+  "optimizer_rng_included": false,
+  "strict_optimizer_resume": false,
+  "automatic_progression": false
+}

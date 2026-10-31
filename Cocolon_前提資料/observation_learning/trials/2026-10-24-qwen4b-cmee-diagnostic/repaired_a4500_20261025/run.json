@@ -1,0 +1,852 @@
+{
+  "status": "DIAGNOSTIC_COMPLETE_NOT_QUALITY_ACCEPTED",
+  "run_id": "20261025-011309-9f0c8622",
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "semantic_profile": "emlis_model_proposal.v1",
+  "preflight": {
+    "status": "CPU_TOKENIZED_GPU_NOT_TESTED",
+    "model": "Qwen/Qwen3.5-4B",
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "semantic_profile": "emlis_model_proposal.v1",
+    "runner_sha256": "00ece0ffac86e17f18544ee8e5fef44d315dd8cd2b641670cd8e6222ca60e40f",
+    "dataset_manifest_sha256": "75346d4f2d8bd4caa6abf1b6c896c28c400307996d402853144326691cb1511c",
+    "execution_plan_sha256": "ae37f9e3bc5ce62b01fd7d860f172611f466a1bad9cab7918d97816e14eb1cae",
+    "data_sha256": {
+      "sft_examples.jsonl": "b055df79b4ffc6ccf2d81a0b294e5357ac1ea67012e605738f71682d4fe8961c",
+      "train_messages.jsonl": "eea6f3fe593c7ff08a398861a3169e36cb62d8a72b2d8f32b717ee24336febc7",
+      "eval_inputs.jsonl": "7da1fa972be5ba467df91c9e727227b8cb080d24cd96c28c0a2d1c8a607001bf",
+      "eval_review.jsonl": "64fb1a6350dc24359b60316d6eb380a715582581b03f49df70a9a230354b0f80"
+    },
+    "source_commit": "e703befa0d8a60777b4b8657bb846bf365db851c",
+    "dependencies": {
+      "transformers": "5.19.0",
+      "peft": "0.21.2",
+      "accelerate": "1.15.0",
+      "safetensors": "0.8.0"
+    },
+    "weight_index_sha256": "cf3f798ee02ba45f9622aa8892a47369ab667d0afbf154ee7c2212de42e6302d",
+    "weight_bytes": 9319737856,
+    "target_modules": [
+      "model.language_model.layers.11.self_attn.q_proj",
+      "model.language_model.layers.11.self_attn.v_proj",
+      "model.language_model.layers.15.self_attn.q_proj",
+      "model.language_model.layers.15.self_attn.v_proj",
+      "model.language_model.layers.19.self_attn.q_proj",
+      "model.language_model.layers.19.self_attn.v_proj",
+      "model.language_model.layers.23.self_attn.q_proj",
+      "model.language_model.layers.23.self_attn.v_proj",
+      "model.language_model.layers.27.self_attn.q_proj",
+      "model.language_model.layers.27.self_attn.v_proj",
+      "model.language_model.layers.3.self_attn.q_proj",
+      "model.language_model.layers.3.self_attn.v_proj",
+      "model.language_model.layers.31.self_attn.q_proj",
+      "model.language_model.layers.31.self_attn.v_proj",
+      "model.language_model.layers.7.self_attn.q_proj",
+      "model.language_model.layers.7.self_attn.v_proj"
+    ],
+    "training_rows": 2,
+    "optimizer_steps": 2,
+    "training_tokens": [
+      {
+        "id": "FT-CHAIR-INITIAL",
+        "prompt_tokens": 3085,
+        "completion_tokens": 1094,
+        "total_tokens": 4179,
+        "loss_labels_start": 3084,
+        "logits_positions": 1095,
+        "full_context_retained": true
+      },
+      {
+        "id": "FT-CHAIR-AFTER-CORRECTION",
+        "prompt_tokens": 6078,
+        "completion_tokens": 1877,
+        "total_tokens": 7955,
+        "loss_labels_start": 6077,
+        "logits_positions": 1878,
+        "full_context_retained": true
+      }
+    ],
+    "generation_inputs": [
+      {
+        "case_id": "FIT-FT-CHAIR-INITIAL",
+        "input_tokens": 3085
+      },
+      {
+        "case_id": "FIT-FT-CHAIR-AFTER-CORRECTION",
+        "input_tokens": 6078
+      },
+      {
+        "case_id": "EFREE-E01",
+        "input_tokens": 1108
+      },
+      {
+        "case_id": "EFREE-E02",
+        "input_tokens": 1119
+      },
+      {
+        "case_id": "EFREE-E03",
+        "input_tokens": 1114
+      },
+      {
+        "case_id": "EFREE-E04",
+        "input_tokens": 1218
+      },
+      {
+        "case_id": "EFREE-E05",
+        "input_tokens": 1122
+      },
+      {
+        "case_id": "EFREE-E06",
+        "input_tokens": 1099
+      }
+    ],
+    "generations_per_stage": 8,
+    "plan": {
+      "schema": "cocolon.emlis_4b_execution_plan.v1",
+      "status": "CURRENT_USER_TRAINING_REQUEST_CONFIRMED_20261025",
+      "model": "Qwen/Qwen3.5-4B",
+      "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "semantic_profile": "emlis_model_proposal.v1",
+      "epochs": 1,
+      "batch_size": 1,
+      "gradient_accumulation": 1,
+      "context_tokens": 8192,
+      "max_new_tokens": 2048,
+      "max_seconds": 5400,
+      "gpu_hourly_usd": 0.26,
+      "max_total_usd": 1.0,
+      "minimum_free_gib": 18.0,
+      "gpu_preference_gb": [
+        16,
+        24
+      ],
+      "gpu_run_authorized": true,
+      "additional_diagnostic_authorized": false,
+      "pod_billing_scope_confirmed": true,
+      "storage_mount_verified": true,
+      "storage_mount_description": "/workspace is on the 50GB ephemeral container filesystem, not a separate persistent mount; observed free 49.98GiB; off-Pod receipt required before Stop",
+      "pod_external_receipt_destination": "Jupyter download to session; private durable archive retained outside Runpod and provided to Mash",
+      "automatic_pod_stop": false,
+      "limits": "New Mash request: secure the cheapest currently available training GPU today and perform 4B learning. One repaired two-teacher diagnostic, no extra epochs or automatic retry; diagnostic process budget <=$1 and <=5400sec. GPU is held for today at $0.26/hour separately; no automatic Pod Stop or deletion. Original consumed run approval is not reused.",
+      "proposed_pod_scope": {
+        "approval_state": "CURRENT_MASH_REQUEST_20261025",
+        "pod_id": "y0eb0w0qn6nks0",
+        "gpu": "RTX A4500 20GB Secure On-demand x1",
+        "compute_hourly_usd": 0.25,
+        "display_total_hourly_usd": 0.26,
+        "container_disk_gb": 50,
+        "volume_disk_gb": 0,
+        "retention": "Hold today as requested; ongoing billing until stopped; no automatic deletion",
+        "diagnostic_process_seconds": 5400,
+        "diagnostic_plan_budget_usd": 1.0,
+        "holding_24h_display_estimate_usd": 6.24,
+        "hard_billing_cap_enforced": false,
+        "charges_started": true
+      },
+      "token_limit_basis": "本CPU指示修復版の実tokenizer/index測定はcpu_tokenization_results.json。context8192/max_new2048を維持し、全source/prior/final assistant/EOSを切り捨てない。旧message版の24GB完走と本版の実GPU適合/意味品質は別で、16GBは未検証。"
+    },
+    "model_weights_loaded": false,
+    "gpu_used": false,
+    "memory_limit": "Checkpoint bytes are not peak GPU memory; activations/optimizer/cache/runtime require an actual GPU."
+  },
+  "gpu": {
+    "name": "NVIDIA RTX A4500",
+    "free_bytes": 20818427904,
+    "total_bytes": 21018640384,
+    "torch": "2.8.0+cu128",
+    "cuda_build": "12.8",
+    "bf16_supported": true
+  },
+  "plan": {
+    "schema": "cocolon.emlis_4b_execution_plan.v1",
+    "status": "CURRENT_USER_TRAINING_REQUEST_CONFIRMED_20261025",
+    "model": "Qwen/Qwen3.5-4B",
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "semantic_profile": "emlis_model_proposal.v1",
+    "epochs": 1,
+    "batch_size": 1,
+    "gradient_accumulation": 1,
+    "context_tokens": 8192,
+    "max_new_tokens": 2048,
+    "max_seconds": 5400,
+    "gpu_hourly_usd": 0.26,
+    "max_total_usd": 1.0,
+    "minimum_free_gib": 18.0,
+    "gpu_preference_gb": [
+      16,
+      24
+    ],
+    "gpu_run_authorized": true,
+    "additional_diagnostic_authorized": false,
+    "pod_billing_scope_confirmed": true,
+    "storage_mount_verified": true,
+    "storage_mount_description": "/workspace is on the 50GB ephemeral container filesystem, not a separate persistent mount; observed free 49.98GiB; off-Pod receipt required before Stop",
+    "pod_external_receipt_destination": "Jupyter download to session; private durable archive retained outside Runpod and provided to Mash",
+    "automatic_pod_stop": false,
+    "limits": "New Mash request: secure the cheapest currently available training GPU today and perform 4B learning. One repaired two-teacher diagnostic, no extra epochs or automatic retry; diagnostic process budget <=$1 and <=5400sec. GPU is held for today at $0.26/hour separately; no automatic Pod Stop or deletion. Original consumed run approval is not reused.",
+    "proposed_pod_scope": {
+      "approval_state": "CURRENT_MASH_REQUEST_20261025",
+      "pod_id": "y0eb0w0qn6nks0",
+      "gpu": "RTX A4500 20GB Secure On-demand x1",
+      "compute_hourly_usd": 0.25,
+      "display_total_hourly_usd": 0.26,
+      "container_disk_gb": 50,
+      "volume_disk_gb": 0,
+      "retention": "Hold today as requested; ongoing billing until stopped; no automatic deletion",
+      "diagnostic_process_seconds": 5400,
+      "diagnostic_plan_budget_usd": 1.0,
+      "holding_24h_display_estimate_usd": 6.24,
+      "hard_billing_cap_enforced": false,
+      "charges_started": true
+    },
+    "token_limit_basis": "本CPU指示修復版の実tokenizer/index測定はcpu_tokenization_results.json。context8192/max_new2048を維持し、全source/prior/final assistant/EOSを切り捨てない。旧message版の24GB完走と本版の実GPU適合/意味品質は別で、16GBは未検証。"
+  },
+  "dataset_manifest_sha256": "75346d4f2d8bd4caa6abf1b6c896c28c400307996d402853144326691cb1511c",
+  "seed": 20261024,
+  "epochs": 1,
+  "optimizer_steps_planned": 2,
+  "started_unix": 1792890789.1410165,
+  "stage": "after_saved_adapter_reload",
+  "target_modules": [
+    "model.language_model.layers.11.self_attn.q_proj",
+    "model.language_model.layers.11.self_attn.v_proj",
+    "model.language_model.layers.15.self_attn.q_proj",
+    "model.language_model.layers.15.self_attn.v_proj",
+    "model.language_model.layers.19.self_attn.q_proj",
+    "model.language_model.layers.19.self_attn.v_proj",
+    "model.language_model.layers.23.self_attn.q_proj",
+    "model.language_model.layers.23.self_attn.v_proj",
+    "model.language_model.layers.27.self_attn.q_proj",
+    "model.language_model.layers.27.self_attn.v_proj",
+    "model.language_model.layers.3.self_attn.q_proj",
+    "model.language_model.layers.3.self_attn.v_proj",
+    "model.language_model.layers.31.self_attn.q_proj",
+    "model.language_model.layers.31.self_attn.v_proj",
+    "model.language_model.layers.7.self_attn.q_proj",
+    "model.language_model.layers.7.self_attn.v_proj"
+  ],
+  "trainable_parameters": [
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "count": 20480
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "count": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "count": 20480
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "count": 8192
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "count": 20480
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "count": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "count": 20480
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "count": 8192
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "count": 20480
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "count": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "count": 20480
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "count": 8192
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "count": 20480
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "count": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "count": 20480
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "count": 8192
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "count": 20480
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "count": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "count": 20480
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "count": 8192
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "count": 20480
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "count": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "count": 20480
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "count": 8192
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "count": 20480
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "count": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "count": 20480
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "count": 8192
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "count": 20480
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "count": 65536
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "count": 20480
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "count": 8192
+    }
+  ],
+  "adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "2f7408bbcd3a416162e54cc82486a773ac94bbd4434da200f7e783b9d7877cf4",
+    "adapter_model.safetensors": "0bdac5e90c79f20129de9a765ac7ee7c59714f3102bc68a2f4aff363c7dd3b78"
+  },
+  "optimizer_steps_completed": 2,
+  "reloaded_adapter_tensors": [
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.6292167901992798
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.039348054677248
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.6302441358566284
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.013819404877722263
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.6365571022033691
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.03898843005299568
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.6397148370742798
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.013888087123632431
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.6292616128921509
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.03851209580898285
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.6255073547363281
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.013706443831324577
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.6382207870483398
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.03853423148393631
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.6182830333709717
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.013686652295291424
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.6313235759735107
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.0384967066347599
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.6240943670272827
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.013896786607801914
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.6367285251617432
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.038375455886125565
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.6327825784683228
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.013571949675679207
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.6393344402313232
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.03833455219864845
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.63237726688385
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.013605820015072823
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.6338003873825073
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.0388469323515892
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.6322240829467773
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.013794018886983395
+    }
+  ],
+  "extra_training_performed": false,
+  "finished_unix": 1792892012.8981464,
+  "peak_allocated_gib": 14.97005033493042,
+  "peak_reserved_gib": 17.587890625,
+  "adapter_files_unchanged": true
+}

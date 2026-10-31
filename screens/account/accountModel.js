@@ -47,8 +47,8 @@ export function formatAllowedModes(modes) {
 }
 
 export function buildTierPrice(tier) {
-  if (tier === "plus") return "月額480円";
-  if (tier === "premium") return "月額980円";
+  if (tier === "plus") return "月額680円";
+  if (tier === "premium") return "月額1480円";
   return "無料";
 }
 

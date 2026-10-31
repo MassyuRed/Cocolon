@@ -1,0 +1,19 @@
+{
+  "status": "PRESERVED_AND_METADATA_READ_BACK",
+  "file_name": "cocolon-cont17-weights-originals-20261030.zip",
+  "library_file_id": "libfile_9514b319e18881918ed8a8b963a4fa51",
+  "file_id": "file_0000000037f882068d62ccccab6110d9",
+  "version": 0,
+  "bytes": 17009656,
+  "sha256": "7cd7f4de5317f1151013413995a6132832a6aa35903037d1610b2ab39cb9baf1",
+  "members": 208,
+  "payloads": 207,
+  "crc_bytes_sha_all_identical": true,
+  "new_adapter_path": "run/adapter/adapter_model.safetensors",
+  "new_adapter_sha256": "7fcca3ce034dfdb9162ae31c3a1bec59c8918762d3da07d58b64f8bdf1220981",
+  "initial_adapter_library_file_id": "libfile_9623b67a65588191926a1bb0a0ea5797",
+  "initial_adapter_sha256": "114466411f36f0eef7a2dceaec7f5190544ac8545eb6b2f6a3d0446b70f90b66",
+  "scope": "All run/runtime/cpu actual files, non-weight frozen sources and inputs, post identity and archive manifest. Historical frozen safetensors and base model are excluded and explicitly indexed in post_identity.json. New complete adapter included; no GPU or CMEE rerun during recovery.",
+  "local_archive": "cocolon-cont17-weights-originals-20261030.zip",
+  "signed_urls_stored": false
+}

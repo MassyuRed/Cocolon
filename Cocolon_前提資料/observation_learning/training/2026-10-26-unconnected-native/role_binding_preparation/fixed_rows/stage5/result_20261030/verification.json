@@ -1,0 +1,46 @@
+{
+  "status": "STOPPED_NOT_ADOPTED_NO_RETRY",
+  "archive_bytes": 31667246,
+  "archive_sha256": "4b40bcb4e8afd0e85b27e49e218f5350a2736aa151908efb4e0cc91d57942714",
+  "members": 229,
+  "all_crc_bytes_sha_verified": true,
+  "source_exact": true,
+  "updates": 19,
+  "model_loads": 2,
+  "actual_generations": 3,
+  "tensors": 112,
+  "parameters": 3833856,
+  "all_f32_finite": true,
+  "changed_tensors": 112,
+  "initial_sha256": "114466411f36f0eef7a2dceaec7f5190544ac8545eb6b2f6a3d0446b70f90b66",
+  "new_sha256": "9b1901abdb3776b301c3e77b5787e4aa851f6a007ccac29764507de5f72f3818",
+  "frozen_inputs_and_initial_unchanged": true,
+  "processing_seconds": 453.66746413800865,
+  "process_cost_usd": 0.035285247210734005,
+  "cases": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "stages_completed": 1,
+      "stage_failure": {
+        "stage": 1,
+        "reason": "stage_not_finished",
+        "finish_reason": "length"
+      },
+      "meaning_adopted": false,
+      "body_available": false
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "stages_completed": 2,
+      "stage_failure": {
+        "stage": 2,
+        "reason": "stage_arity",
+        "finish_reason": "stop"
+      },
+      "meaning_adopted": false,
+      "body_available": false
+    }
+  ],
+  "retry": false,
+  "model_loads_for_this_verifier": 0
+}

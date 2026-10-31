@@ -1,0 +1,22 @@
+{
+  "status": "LAUNCHED_ONCE",
+  "source_commit": "bd5d169ad457fc440bf01d1876cb40d697ce6847",
+  "proposal_commit": "2bb10230f2bb961422513b31d6c6418ecbc3b262",
+  "cmd": [
+    "/usr/local/bin/python",
+    "-u",
+    "/workspace/cocolon_native15_expanded30_pack_20261027/run_native15_expanded30.py",
+    "--pack",
+    "/workspace/cocolon_native15_expanded30_pack_20261027",
+    "--execute",
+    "--source-commit",
+    "bd5d169ad457fc440bf01d1876cb40d697ce6847"
+  ],
+  "log": "/workspace/cocolon_expanded30_gpu_20261027.log",
+  "started_unix": 1793076767.4110746,
+  "max_seconds": 2700,
+  "max_process_usd": 0.21,
+  "retry": false,
+  "gpu_lifecycle_operations": 0,
+  "pid": 127012
+}

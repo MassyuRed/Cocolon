@@ -1,0 +1,90 @@
+{
+  "schema": "qwen27_observation_ab_answers_v1",
+  "initial_result_name": "qwen27_ab_initial_20261021_123604_232569.json",
+  "initial_result_sha256": "e0caad1c43114fe30e6b0c3c6c55ca539e6eba88ea95d8f4be799398ac021844",
+  "answers": [
+    {
+      "case_id": "achievement_run",
+      "condition": "without_example",
+      "question": "職場での会話で、特にどの部分や反応が、ご自身の気持ちと最もずれて感じられましたか？",
+      "answer": "最初は短い距離でも歩いていて、少しずつ走れる区間が伸びてきた感覚があります。「得意なんだね」と言われると、その積み上げとは少し違う感じがします。お祝いしてくれたこと自体は嬉しいです。それと、「次はハーフだね」と話が進むと、やっと10キロを走れたことが、もう次への途中になったように感じました。",
+      "answer_kind": "answer_to_generated_question",
+      "provenance": {
+        "author": "華恋",
+        "kind": "fictional_person_answer_from_frozen_case_notes",
+        "frozen_source_commit": "b25f36aa6d481f1cc508bd32165c223f8d6b5fb8",
+        "frozen_source_path": "Cocolon_前提資料/observation_learning/trials/2026-10-21-qwen27-demo/README.md",
+        "fact_ids": [
+          "A2",
+          "A3",
+          "A4"
+        ],
+        "note": "職場のどの部分がずれたかという広い問いにはA4も回答。得意という発言に絞った問いにはA2・A3だけを回答。",
+        "mash_authored": false,
+        "new_fictional_facts_added": false
+      }
+    },
+    {
+      "case_id": "achievement_run",
+      "condition": "with_example",
+      "question": "職場の同僚が「運動が得意なんだね」と言ったとき、ご自身の心境や努力の経緯と比べて、どのような感覚がありましたか？",
+      "answer": "最初は短い距離でも歩いていて、少しずつ走れる区間が伸びてきた感覚があります。「得意なんだね」と言われると、その積み上げとは少し違う感じがします。お祝いしてくれたこと自体は嬉しいです。",
+      "answer_kind": "answer_to_generated_question",
+      "provenance": {
+        "author": "華恋",
+        "kind": "fictional_person_answer_from_frozen_case_notes",
+        "frozen_source_commit": "b25f36aa6d481f1cc508bd32165c223f8d6b5fb8",
+        "frozen_source_path": "Cocolon_前提資料/observation_learning/trials/2026-10-21-qwen27-demo/README.md",
+        "fact_ids": [
+          "A2",
+          "A3"
+        ],
+        "note": "職場のどの部分がずれたかという広い問いにはA4も回答。得意という発言に絞った問いにはA2・A3だけを回答。",
+        "mash_authored": false,
+        "new_fictional_facts_added": false
+      }
+    },
+    {
+      "case_id": "moving_mug",
+      "condition": "with_example",
+      "question": "翌日、処分箱から取り出して洗ったとき、具体的にどのような気持ちや感覚がありましたか？",
+      "answer": "このマグを見ると、一人暮らしを始めた頃の部屋や、毎朝これを使っていたことを思い出します。使いやすさは新しい方が上です。「役に立たないなら手放すべき」と思う一方、それだけで決めると何か抜ける感じがあります。",
+      "answer_kind": "partial_answer_to_generated_question",
+      "provenance": {
+        "author": "華恋",
+        "kind": "fictional_person_answer_from_frozen_case_notes",
+        "frozen_source_commit": "b25f36aa6d481f1cc508bd32165c223f8d6b5fb8",
+        "frozen_source_path": "Cocolon_前提資料/observation_learning/trials/2026-10-21-qwen27-demo/README.md",
+        "fact_ids": [
+          "B2",
+          "B4",
+          "B8"
+        ],
+        "note": "問いが指定する、取り出して洗った瞬間の具体的感情は凍結設定にないため回答していない。本人が説明できないという内省状態へは変換せず、B2・B4・B8にある関連情報だけを返す部分回答。両条件の問いが実質同じなので回答本文も同一。",
+        "mash_authored": false,
+        "new_fictional_facts_added": false
+      }
+    },
+    {
+      "case_id": "moving_mug",
+      "condition": "without_example",
+      "question": "翌日取り出して洗ったとき、具体的にどのような気持ちや感覚が湧いてきましたか？",
+      "answer": "このマグを見ると、一人暮らしを始めた頃の部屋や、毎朝これを使っていたことを思い出します。使いやすさは新しい方が上です。「役に立たないなら手放すべき」と思う一方、それだけで決めると何か抜ける感じがあります。",
+      "answer_kind": "partial_answer_to_generated_question",
+      "provenance": {
+        "author": "華恋",
+        "kind": "fictional_person_answer_from_frozen_case_notes",
+        "frozen_source_commit": "b25f36aa6d481f1cc508bd32165c223f8d6b5fb8",
+        "frozen_source_path": "Cocolon_前提資料/observation_learning/trials/2026-10-21-qwen27-demo/README.md",
+        "fact_ids": [
+          "B2",
+          "B4",
+          "B8"
+        ],
+        "note": "問いが指定する、取り出して洗った瞬間の具体的感情は凍結設定にないため回答していない。本人が説明できないという内省状態へは変換せず、B2・B4・B8にある関連情報だけを返す部分回答。両条件の問いが実質同じなので回答本文も同一。",
+        "mash_authored": false,
+        "new_fictional_facts_added": false
+      }
+    }
+  ]
+}

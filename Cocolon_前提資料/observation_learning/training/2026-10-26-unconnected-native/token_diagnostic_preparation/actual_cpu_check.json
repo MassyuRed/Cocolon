@@ -1,0 +1,1441 @@
+{
+  "status": "CPU_TOKEN_DIAGNOSTIC_READY_REAL_4B_NOT_EXECUTED",
+  "seconds": 4.935140502988361,
+  "pending_execute_refused_before_output": true,
+  "real_tokenizer_cases": 15,
+  "case_ids": [
+    "TRAIN-SERVICE-CHAIR-01-INITIAL",
+    "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+    "TRAIN-SERVICE-CHAIR-02-INITIAL",
+    "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+    "TRAIN-SERVICE-CHAIR-03-INITIAL",
+    "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+    "TRAIN-DAILY-CALM-01-INITIAL",
+    "TRAIN-DAILY-CALM-02-INITIAL",
+    "TRAIN-DAILY-CALM-03-INITIAL",
+    "FT-BOOK-INITIAL",
+    "FT-BOOK-AFTER-ANSWER",
+    "FT-SHOP-INITIAL",
+    "FT-SHOP-AFTER-ANSWER",
+    "FT-REPOT-INITIAL",
+    "FT-KNIT-INITIAL"
+  ],
+  "cases": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "prompt_tokens": 1705,
+      "full_tokens": 3036,
+      "target_tokens": 1331,
+      "field_token_counts": {
+        "JSON_STRUCTURE": 64,
+        "candidate.claims": 664,
+        "candidate.conflicts": 2,
+        "candidate.question_proposal": 47,
+        "candidate.relations": 110,
+        "candidate.surface_proposal.bindings": 46,
+        "candidate.surface_proposal.observation": 17,
+        "candidate.surface_proposal.reception": 27,
+        "candidate.surface_proposal.update_note": 1,
+        "candidate.unknowns": 46,
+        "candidate.updates": 1,
+        "evidence_quotes": 304,
+        "EOS": 1,
+        "TEMPLATE_TAIL": 1
+      },
+      "char_spans": {
+        "candidate.claims": [
+          23,
+          2182
+        ],
+        "candidate.relations": [
+          2408,
+          2837
+        ],
+        "candidate.unknowns": [
+          3294,
+          3463
+        ],
+        "candidate.conflicts": [
+          2195,
+          2197
+        ],
+        "candidate.question_proposal": [
+          2233,
+          2395
+        ],
+        "candidate.updates": [
+          3474,
+          3476
+        ],
+        "evidence_quotes": [
+          3496,
+          4084
+        ],
+        "candidate.surface_proposal.bindings": [
+          2934,
+          3153
+        ],
+        "candidate.surface_proposal.observation": [
+          3168,
+          3199
+        ],
+        "candidate.surface_proposal.reception": [
+          3212,
+          3262
+        ],
+        "candidate.surface_proposal.update_note": [
+          3277,
+          3281
+        ]
+      },
+      "existing_raw_comparison": {
+        "raw_utf8_sha256": "29994933c6116b8c88d1a00357f021c87ccd0362a8055b370f3434f92930e1f9",
+        "raw_tokens": 1332,
+        "raw_eos_reached": true,
+        "common_prefix_chars": 4136,
+        "common_prefix_tokens": 1330,
+        "token_sequences_equal": false,
+        "comparison_stops_at_teacher_eos": true,
+        "uncompared_template_tail_after_eos": 1,
+        "raw_json_text_equals_teacher_except_outer_whitespace": true,
+        "substantive_character_divergence": null,
+        "difference_kind": "JSON_CONTENT_IDENTICAL_TERMINATION_ONLY",
+        "first_different_target_index": 1330,
+        "teacher_token_at_divergence": null,
+        "generated_token_at_divergence": 198,
+        "teacher_field_at_divergence": "TEMPLATE_TAIL",
+        "teacher_excerpt": "1dd41\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}",
+        "raw_excerpt": "1dd41\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}\n",
+        "comparison_scope": "Existing free-running raw only; this diagnostic does not repair or regenerate it."
+      }
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "prompt_tokens": 3839,
+      "full_tokens": 6067,
+      "target_tokens": 2228,
+      "field_token_counts": {
+        "JSON_STRUCTURE": 63,
+        "candidate.claims": 987,
+        "candidate.conflicts": 2,
+        "candidate.question_proposal": 1,
+        "candidate.relations": 115,
+        "candidate.surface_proposal.bindings": 87,
+        "candidate.surface_proposal.observation": 17,
+        "candidate.surface_proposal.reception": 26,
+        "candidate.surface_proposal.update_note": 16,
+        "candidate.unknowns": 2,
+        "candidate.updates": 297,
+        "evidence_quotes": 613,
+        "EOS": 1,
+        "TEMPLATE_TAIL": 1
+      },
+      "char_spans": {
+        "candidate.claims": [
+          23,
+          3282
+        ],
+        "candidate.relations": [
+          3350,
+          3797
+        ],
+        "candidate.unknowns": [
+          4438,
+          4440
+        ],
+        "candidate.conflicts": [
+          3295,
+          3297
+        ],
+        "candidate.question_proposal": [
+          3333,
+          3337
+        ],
+        "candidate.updates": [
+          4451,
+          5189
+        ],
+        "evidence_quotes": [
+          5209,
+          6505
+        ],
+        "candidate.surface_proposal.bindings": [
+          3894,
+          4272
+        ],
+        "candidate.surface_proposal.observation": [
+          4287,
+          4313
+        ],
+        "candidate.surface_proposal.reception": [
+          4326,
+          4383
+        ],
+        "candidate.surface_proposal.update_note": [
+          4398,
+          4425
+        ]
+      },
+      "existing_raw_comparison": {
+        "raw_utf8_sha256": "49b3296306aafdc78accd7b966205998f245e88673f6d7a42203266b53db2e12",
+        "raw_tokens": 2229,
+        "raw_eos_reached": true,
+        "common_prefix_chars": 6557,
+        "common_prefix_tokens": 2227,
+        "token_sequences_equal": false,
+        "comparison_stops_at_teacher_eos": true,
+        "uncompared_template_tail_after_eos": 1,
+        "raw_json_text_equals_teacher_except_outer_whitespace": true,
+        "substantive_character_divergence": null,
+        "difference_kind": "JSON_CONTENT_IDENTICAL_TERMINATION_ONLY",
+        "first_different_target_index": 2227,
+        "teacher_token_at_divergence": null,
+        "generated_token_at_divergence": 198,
+        "teacher_field_at_divergence": "TEMPLATE_TAIL",
+        "teacher_excerpt": "2dc3f\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}",
+        "raw_excerpt": "2dc3f\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}\n",
+        "comparison_scope": "Existing free-running raw only; this diagnostic does not repair or regenerate it."
+      }
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "prompt_tokens": 1701,
+      "full_tokens": 3032,
+      "target_tokens": 1331,
+      "field_token_counts": {
+        "JSON_STRUCTURE": 64,
+        "candidate.claims": 664,
+        "candidate.conflicts": 2,
+        "candidate.question_proposal": 47,
+        "candidate.relations": 110,
+        "candidate.surface_proposal.bindings": 46,
+        "candidate.surface_proposal.observation": 17,
+        "candidate.surface_proposal.reception": 27,
+        "candidate.surface_proposal.update_note": 1,
+        "candidate.unknowns": 46,
+        "candidate.updates": 1,
+        "evidence_quotes": 304,
+        "EOS": 1,
+        "TEMPLATE_TAIL": 1
+      },
+      "char_spans": {
+        "candidate.claims": [
+          23,
+          2182
+        ],
+        "candidate.relations": [
+          2408,
+          2837
+        ],
+        "candidate.unknowns": [
+          3294,
+          3463
+        ],
+        "candidate.conflicts": [
+          2195,
+          2197
+        ],
+        "candidate.question_proposal": [
+          2233,
+          2395
+        ],
+        "candidate.updates": [
+          3474,
+          3476
+        ],
+        "evidence_quotes": [
+          3496,
+          4084
+        ],
+        "candidate.surface_proposal.bindings": [
+          2934,
+          3153
+        ],
+        "candidate.surface_proposal.observation": [
+          3168,
+          3199
+        ],
+        "candidate.surface_proposal.reception": [
+          3212,
+          3262
+        ],
+        "candidate.surface_proposal.update_note": [
+          3277,
+          3281
+        ]
+      },
+      "existing_raw_comparison": {
+        "raw_utf8_sha256": "33d24cf7740145e4ce8951e3c04e57d9723a24dfdf1973c832ad629d4a1ce4ca",
+        "raw_tokens": 1332,
+        "raw_eos_reached": true,
+        "common_prefix_chars": 4136,
+        "common_prefix_tokens": 1330,
+        "token_sequences_equal": false,
+        "comparison_stops_at_teacher_eos": true,
+        "uncompared_template_tail_after_eos": 1,
+        "raw_json_text_equals_teacher_except_outer_whitespace": true,
+        "substantive_character_divergence": null,
+        "difference_kind": "JSON_CONTENT_IDENTICAL_TERMINATION_ONLY",
+        "first_different_target_index": 1330,
+        "teacher_token_at_divergence": null,
+        "generated_token_at_divergence": 198,
+        "teacher_field_at_divergence": "TEMPLATE_TAIL",
+        "teacher_excerpt": "18e2f\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}",
+        "raw_excerpt": "18e2f\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}\n",
+        "comparison_scope": "Existing free-running raw only; this diagnostic does not repair or regenerate it."
+      }
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "prompt_tokens": 3854,
+      "full_tokens": 6085,
+      "target_tokens": 2231,
+      "field_token_counts": {
+        "JSON_STRUCTURE": 63,
+        "candidate.claims": 987,
+        "candidate.conflicts": 2,
+        "candidate.question_proposal": 1,
+        "candidate.relations": 115,
+        "candidate.surface_proposal.bindings": 87,
+        "candidate.surface_proposal.observation": 17,
+        "candidate.surface_proposal.reception": 26,
+        "candidate.surface_proposal.update_note": 16,
+        "candidate.unknowns": 2,
+        "candidate.updates": 300,
+        "evidence_quotes": 613,
+        "EOS": 1,
+        "TEMPLATE_TAIL": 1
+      },
+      "char_spans": {
+        "candidate.claims": [
+          23,
+          3282
+        ],
+        "candidate.relations": [
+          3350,
+          3797
+        ],
+        "candidate.unknowns": [
+          4438,
+          4440
+        ],
+        "candidate.conflicts": [
+          3295,
+          3297
+        ],
+        "candidate.question_proposal": [
+          3333,
+          3337
+        ],
+        "candidate.updates": [
+          4451,
+          5189
+        ],
+        "evidence_quotes": [
+          5209,
+          6505
+        ],
+        "candidate.surface_proposal.bindings": [
+          3894,
+          4272
+        ],
+        "candidate.surface_proposal.observation": [
+          4287,
+          4313
+        ],
+        "candidate.surface_proposal.reception": [
+          4326,
+          4383
+        ],
+        "candidate.surface_proposal.update_note": [
+          4398,
+          4425
+        ]
+      },
+      "existing_raw_comparison": {
+        "raw_utf8_sha256": "08854f1d8dd227693522887245955c36830becaa34cf6ccaa53973c237ade923",
+        "raw_tokens": 2232,
+        "raw_eos_reached": true,
+        "common_prefix_chars": 6557,
+        "common_prefix_tokens": 2230,
+        "token_sequences_equal": false,
+        "comparison_stops_at_teacher_eos": true,
+        "uncompared_template_tail_after_eos": 1,
+        "raw_json_text_equals_teacher_except_outer_whitespace": true,
+        "substantive_character_divergence": null,
+        "difference_kind": "JSON_CONTENT_IDENTICAL_TERMINATION_ONLY",
+        "first_different_target_index": 2230,
+        "teacher_token_at_divergence": null,
+        "generated_token_at_divergence": 198,
+        "teacher_field_at_divergence": "TEMPLATE_TAIL",
+        "teacher_excerpt": "66756\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}",
+        "raw_excerpt": "66756\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}\n",
+        "comparison_scope": "Existing free-running raw only; this diagnostic does not repair or regenerate it."
+      }
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "prompt_tokens": 1698,
+      "full_tokens": 3019,
+      "target_tokens": 1321,
+      "field_token_counts": {
+        "JSON_STRUCTURE": 64,
+        "candidate.claims": 660,
+        "candidate.conflicts": 2,
+        "candidate.question_proposal": 47,
+        "candidate.relations": 110,
+        "candidate.surface_proposal.bindings": 46,
+        "candidate.surface_proposal.observation": 17,
+        "candidate.surface_proposal.reception": 27,
+        "candidate.surface_proposal.update_note": 1,
+        "candidate.unknowns": 46,
+        "candidate.updates": 1,
+        "evidence_quotes": 298,
+        "EOS": 1,
+        "TEMPLATE_TAIL": 1
+      },
+      "char_spans": {
+        "candidate.claims": [
+          23,
+          2182
+        ],
+        "candidate.relations": [
+          2408,
+          2837
+        ],
+        "candidate.unknowns": [
+          3294,
+          3463
+        ],
+        "candidate.conflicts": [
+          2195,
+          2197
+        ],
+        "candidate.question_proposal": [
+          2233,
+          2395
+        ],
+        "candidate.updates": [
+          3474,
+          3476
+        ],
+        "evidence_quotes": [
+          3496,
+          4084
+        ],
+        "candidate.surface_proposal.bindings": [
+          2934,
+          3153
+        ],
+        "candidate.surface_proposal.observation": [
+          3168,
+          3199
+        ],
+        "candidate.surface_proposal.reception": [
+          3212,
+          3262
+        ],
+        "candidate.surface_proposal.update_note": [
+          3277,
+          3281
+        ]
+      },
+      "existing_raw_comparison": {
+        "raw_utf8_sha256": "827d1b3ab8f35ffcc7e0127565f0c5f39827eb5c64b5d6796b721a0682ba57a8",
+        "raw_tokens": 1322,
+        "raw_eos_reached": true,
+        "common_prefix_chars": 4136,
+        "common_prefix_tokens": 1320,
+        "token_sequences_equal": false,
+        "comparison_stops_at_teacher_eos": true,
+        "uncompared_template_tail_after_eos": 1,
+        "raw_json_text_equals_teacher_except_outer_whitespace": true,
+        "substantive_character_divergence": null,
+        "difference_kind": "JSON_CONTENT_IDENTICAL_TERMINATION_ONLY",
+        "first_different_target_index": 1320,
+        "teacher_token_at_divergence": null,
+        "generated_token_at_divergence": 198,
+        "teacher_field_at_divergence": "TEMPLATE_TAIL",
+        "teacher_excerpt": "610e5\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}",
+        "raw_excerpt": "610e5\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}\n",
+        "comparison_scope": "Existing free-running raw only; this diagnostic does not repair or regenerate it."
+      }
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "prompt_tokens": 3837,
+      "full_tokens": 6074,
+      "target_tokens": 2237,
+      "field_token_counts": {
+        "JSON_STRUCTURE": 63,
+        "candidate.claims": 987,
+        "candidate.conflicts": 2,
+        "candidate.question_proposal": 1,
+        "candidate.relations": 115,
+        "candidate.surface_proposal.bindings": 87,
+        "candidate.surface_proposal.observation": 17,
+        "candidate.surface_proposal.reception": 26,
+        "candidate.surface_proposal.update_note": 16,
+        "candidate.unknowns": 2,
+        "candidate.updates": 306,
+        "evidence_quotes": 613,
+        "EOS": 1,
+        "TEMPLATE_TAIL": 1
+      },
+      "char_spans": {
+        "candidate.claims": [
+          23,
+          3282
+        ],
+        "candidate.relations": [
+          3350,
+          3797
+        ],
+        "candidate.unknowns": [
+          4438,
+          4440
+        ],
+        "candidate.conflicts": [
+          3295,
+          3297
+        ],
+        "candidate.question_proposal": [
+          3333,
+          3337
+        ],
+        "candidate.updates": [
+          4451,
+          5189
+        ],
+        "evidence_quotes": [
+          5209,
+          6505
+        ],
+        "candidate.surface_proposal.bindings": [
+          3894,
+          4272
+        ],
+        "candidate.surface_proposal.observation": [
+          4287,
+          4313
+        ],
+        "candidate.surface_proposal.reception": [
+          4326,
+          4383
+        ],
+        "candidate.surface_proposal.update_note": [
+          4398,
+          4425
+        ]
+      },
+      "existing_raw_comparison": {
+        "raw_utf8_sha256": "ec4663c0b114ba5b051e203cbaecc5363ec5246cfeb0a2695d21576bf68d630b",
+        "raw_tokens": 2238,
+        "raw_eos_reached": true,
+        "common_prefix_chars": 6557,
+        "common_prefix_tokens": 2236,
+        "token_sequences_equal": false,
+        "comparison_stops_at_teacher_eos": true,
+        "uncompared_template_tail_after_eos": 1,
+        "raw_json_text_equals_teacher_except_outer_whitespace": true,
+        "substantive_character_divergence": null,
+        "difference_kind": "JSON_CONTENT_IDENTICAL_TERMINATION_ONLY",
+        "first_different_target_index": 2236,
+        "teacher_token_at_divergence": null,
+        "generated_token_at_divergence": 198,
+        "teacher_field_at_divergence": "TEMPLATE_TAIL",
+        "teacher_excerpt": "4454d\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}",
+        "raw_excerpt": "4454d\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}\n",
+        "comparison_scope": "Existing free-running raw only; this diagnostic does not repair or regenerate it."
+      }
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "prompt_tokens": 1733,
+      "full_tokens": 3318,
+      "target_tokens": 1585,
+      "field_token_counts": {
+        "JSON_STRUCTURE": 66,
+        "candidate.claims": 796,
+        "candidate.conflicts": 2,
+        "candidate.question_proposal": 1,
+        "candidate.relations": 235,
+        "candidate.surface_proposal.bindings": 60,
+        "candidate.surface_proposal.observation": 11,
+        "candidate.surface_proposal.reception": 13,
+        "candidate.surface_proposal.update_note": 1,
+        "candidate.unknowns": 2,
+        "candidate.updates": 1,
+        "evidence_quotes": 395,
+        "EOS": 1,
+        "TEMPLATE_TAIL": 1
+      },
+      "char_spans": {
+        "candidate.claims": [
+          23,
+          2622
+        ],
+        "candidate.relations": [
+          2690,
+          3555
+        ],
+        "candidate.unknowns": [
+          4007,
+          4009
+        ],
+        "candidate.conflicts": [
+          2635,
+          2637
+        ],
+        "candidate.question_proposal": [
+          2673,
+          2677
+        ],
+        "candidate.updates": [
+          4020,
+          4022
+        ],
+        "evidence_quotes": [
+          4042,
+          4825
+        ],
+        "candidate.surface_proposal.bindings": [
+          3652,
+          3896
+        ],
+        "candidate.surface_proposal.observation": [
+          3911,
+          3934
+        ],
+        "candidate.surface_proposal.reception": [
+          3947,
+          3975
+        ],
+        "candidate.surface_proposal.update_note": [
+          3990,
+          3994
+        ]
+      },
+      "existing_raw_comparison": {
+        "raw_utf8_sha256": "af6a9574ff45e693a66974cc273f41db1060d1bf0b8ed0d21c9f56ace7072e6e",
+        "raw_tokens": 1586,
+        "raw_eos_reached": true,
+        "common_prefix_chars": 4877,
+        "common_prefix_tokens": 1584,
+        "token_sequences_equal": false,
+        "comparison_stops_at_teacher_eos": true,
+        "uncompared_template_tail_after_eos": 1,
+        "raw_json_text_equals_teacher_except_outer_whitespace": true,
+        "substantive_character_divergence": null,
+        "difference_kind": "JSON_CONTENT_IDENTICAL_TERMINATION_ONLY",
+        "first_different_target_index": 1584,
+        "teacher_token_at_divergence": null,
+        "generated_token_at_divergence": 198,
+        "teacher_field_at_divergence": "TEMPLATE_TAIL",
+        "teacher_excerpt": "fcb97\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}",
+        "raw_excerpt": "fcb97\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}\n",
+        "comparison_scope": "Existing free-running raw only; this diagnostic does not repair or regenerate it."
+      }
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "prompt_tokens": 1728,
+      "full_tokens": 3287,
+      "target_tokens": 1559,
+      "field_token_counts": {
+        "JSON_STRUCTURE": 66,
+        "candidate.claims": 786,
+        "candidate.conflicts": 2,
+        "candidate.question_proposal": 1,
+        "candidate.relations": 235,
+        "candidate.surface_proposal.bindings": 60,
+        "candidate.surface_proposal.observation": 11,
+        "candidate.surface_proposal.reception": 13,
+        "candidate.surface_proposal.update_note": 1,
+        "candidate.unknowns": 2,
+        "candidate.updates": 1,
+        "evidence_quotes": 379,
+        "EOS": 1,
+        "TEMPLATE_TAIL": 1
+      },
+      "char_spans": {
+        "candidate.claims": [
+          23,
+          2622
+        ],
+        "candidate.relations": [
+          2690,
+          3555
+        ],
+        "candidate.unknowns": [
+          4007,
+          4009
+        ],
+        "candidate.conflicts": [
+          2635,
+          2637
+        ],
+        "candidate.question_proposal": [
+          2673,
+          2677
+        ],
+        "candidate.updates": [
+          4020,
+          4022
+        ],
+        "evidence_quotes": [
+          4042,
+          4825
+        ],
+        "candidate.surface_proposal.bindings": [
+          3652,
+          3896
+        ],
+        "candidate.surface_proposal.observation": [
+          3911,
+          3934
+        ],
+        "candidate.surface_proposal.reception": [
+          3947,
+          3975
+        ],
+        "candidate.surface_proposal.update_note": [
+          3990,
+          3994
+        ]
+      },
+      "existing_raw_comparison": {
+        "raw_utf8_sha256": "b2a913ab9e46ba91f828a83551e08034d1d85bbabe054a709018f0842ab67cd6",
+        "raw_tokens": 1560,
+        "raw_eos_reached": true,
+        "common_prefix_chars": 4877,
+        "common_prefix_tokens": 1558,
+        "token_sequences_equal": false,
+        "comparison_stops_at_teacher_eos": true,
+        "uncompared_template_tail_after_eos": 1,
+        "raw_json_text_equals_teacher_except_outer_whitespace": true,
+        "substantive_character_divergence": null,
+        "difference_kind": "JSON_CONTENT_IDENTICAL_TERMINATION_ONLY",
+        "first_different_target_index": 1558,
+        "teacher_token_at_divergence": null,
+        "generated_token_at_divergence": 198,
+        "teacher_field_at_divergence": "TEMPLATE_TAIL",
+        "teacher_excerpt": "d588e\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}",
+        "raw_excerpt": "d588e\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}\n",
+        "comparison_scope": "Existing free-running raw only; this diagnostic does not repair or regenerate it."
+      }
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "prompt_tokens": 1732,
+      "full_tokens": 3330,
+      "target_tokens": 1598,
+      "field_token_counts": {
+        "JSON_STRUCTURE": 66,
+        "candidate.claims": 801,
+        "candidate.conflicts": 2,
+        "candidate.question_proposal": 1,
+        "candidate.relations": 235,
+        "candidate.surface_proposal.bindings": 60,
+        "candidate.surface_proposal.observation": 11,
+        "candidate.surface_proposal.reception": 13,
+        "candidate.surface_proposal.update_note": 1,
+        "candidate.unknowns": 2,
+        "candidate.updates": 1,
+        "evidence_quotes": 403,
+        "EOS": 1,
+        "TEMPLATE_TAIL": 1
+      },
+      "char_spans": {
+        "candidate.claims": [
+          23,
+          2622
+        ],
+        "candidate.relations": [
+          2690,
+          3555
+        ],
+        "candidate.unknowns": [
+          4007,
+          4009
+        ],
+        "candidate.conflicts": [
+          2635,
+          2637
+        ],
+        "candidate.question_proposal": [
+          2673,
+          2677
+        ],
+        "candidate.updates": [
+          4020,
+          4022
+        ],
+        "evidence_quotes": [
+          4042,
+          4825
+        ],
+        "candidate.surface_proposal.bindings": [
+          3652,
+          3896
+        ],
+        "candidate.surface_proposal.observation": [
+          3911,
+          3934
+        ],
+        "candidate.surface_proposal.reception": [
+          3947,
+          3975
+        ],
+        "candidate.surface_proposal.update_note": [
+          3990,
+          3994
+        ]
+      },
+      "existing_raw_comparison": {
+        "raw_utf8_sha256": "768f25f00e01634d08854b109329a7e453e74964774b059813bf65d9cee547b1",
+        "raw_tokens": 1599,
+        "raw_eos_reached": true,
+        "common_prefix_chars": 4877,
+        "common_prefix_tokens": 1597,
+        "token_sequences_equal": false,
+        "comparison_stops_at_teacher_eos": true,
+        "uncompared_template_tail_after_eos": 1,
+        "raw_json_text_equals_teacher_except_outer_whitespace": true,
+        "substantive_character_divergence": null,
+        "difference_kind": "JSON_CONTENT_IDENTICAL_TERMINATION_ONLY",
+        "first_different_target_index": 1597,
+        "teacher_token_at_divergence": null,
+        "generated_token_at_divergence": 198,
+        "teacher_field_at_divergence": "TEMPLATE_TAIL",
+        "teacher_excerpt": "b76ab\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}",
+        "raw_excerpt": "b76ab\"}],\"schema_version\":\"cocolon.cmee.quote_candidate.v1\"}\n",
+        "comparison_scope": "Existing free-running raw only; this diagnostic does not repair or regenerate it."
+      }
+    },
+    {
+      "case_id": "FT-BOOK-INITIAL",
+      "prompt_tokens": 2159,
+      "full_tokens": 3197,
+      "target_tokens": 1038,
+      "field_token_counts": {
+        "JSON_STRUCTURE": 64,
+        "candidate.claims": 540,
+        "candidate.conflicts": 2,
+        "candidate.question_proposal": 33,
+        "candidate.relations": 110,
+        "candidate.surface_proposal.bindings": 55,
+        "candidate.surface_proposal.observation": 29,
+        "candidate.surface_proposal.reception": 18,
+        "candidate.surface_proposal.update_note": 1,
+        "candidate.unknowns": 39,
+        "candidate.updates": 1,
+        "evidence_quotes": 144,
+        "EOS": 1,
+        "TEMPLATE_TAIL": 1
+      },
+      "char_spans": {
+        "candidate.claims": [
+          23,
+          2063
+        ],
+        "candidate.relations": [
+          2260,
+          2693
+        ],
+        "candidate.unknowns": [
+          3203,
+          3355
+        ],
+        "candidate.conflicts": [
+          2076,
+          2078
+        ],
+        "candidate.question_proposal": [
+          2114,
+          2247
+        ],
+        "candidate.updates": [
+          3366,
+          3368
+        ],
+        "evidence_quotes": [
+          3388,
+          3838
+        ],
+        "candidate.surface_proposal.bindings": [
+          2790,
+          3057
+        ],
+        "candidate.surface_proposal.observation": [
+          3072,
+          3120
+        ],
+        "candidate.surface_proposal.reception": [
+          3133,
+          3171
+        ],
+        "candidate.surface_proposal.update_note": [
+          3186,
+          3190
+        ]
+      },
+      "existing_raw_comparison": {
+        "raw_utf8_sha256": "792339cca4b381cb014042c3570628a6eb1dbbe10b37ae58e2a84e948fc4b7df",
+        "raw_tokens": 1048,
+        "raw_eos_reached": true,
+        "common_prefix_chars": 2206,
+        "common_prefix_tokens": 577,
+        "token_sequences_equal": false,
+        "comparison_stops_at_teacher_eos": true,
+        "uncompared_template_tail_after_eos": 1,
+        "raw_json_text_equals_teacher_except_outer_whitespace": false,
+        "substantive_character_divergence": 2206,
+        "difference_kind": "JSON_CONTENT_DIVERGENCE",
+        "first_different_target_index": 577,
+        "teacher_token_at_divergence": 29617,
+        "generated_token_at_divergence": 155788,
+        "teacher_field_at_divergence": "candidate.question_proposal",
+        "teacher_excerpt": "n\"],\"focus\":\"PERSONAL_CONCERN_TARGET\",\"target_unknown_ref\":\"missing_explanation\",\"text\":\"何が気になりますか？\"},\"relations\":[{\"evidence_indexes\":[4],\"from_claim_id\":\"late_return\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\"",
+        "raw_excerpt": "n\"],\"focus\":\"PERSONAL_CONCERN_TARGET\",\"target_unknown_ref\":\"気がかりの対象は未記載\",\"text\":\"何が気になりますか？\"},\"relations\":[{\"evidence_indexes\":[4],\"from_claim_id\":\"late_return\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"action",
+        "comparison_scope": "Existing free-running raw only; this diagnostic does not repair or regenerate it."
+      }
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "prompt_tokens": 4212,
+      "full_tokens": 7390,
+      "target_tokens": 3178,
+      "field_token_counts": {
+        "JSON_STRUCTURE": 63,
+        "candidate.claims": 1373,
+        "candidate.conflicts": 2,
+        "candidate.question_proposal": 1,
+        "candidate.relations": 403,
+        "candidate.surface_proposal.bindings": 122,
+        "candidate.surface_proposal.observation": 20,
+        "candidate.surface_proposal.reception": 34,
+        "candidate.surface_proposal.update_note": 21,
+        "candidate.unknowns": 2,
+        "candidate.updates": 681,
+        "evidence_quotes": 454,
+        "EOS": 1,
+        "TEMPLATE_TAIL": 1
+      },
+      "char_spans": {
+        "candidate.claims": [
+          23,
+          5197
+        ],
+        "candidate.relations": [
+          5265,
+          6868
+        ],
+        "candidate.unknowns": [
+          7681,
+          7683
+        ],
+        "candidate.conflicts": [
+          5210,
+          5212
+        ],
+        "candidate.question_proposal": [
+          5248,
+          5252
+        ],
+        "candidate.updates": [
+          7694,
+          9464
+        ],
+        "evidence_quotes": [
+          9484,
+          11050
+        ],
+        "candidate.surface_proposal.bindings": [
+          6965,
+          7478
+        ],
+        "candidate.surface_proposal.observation": [
+          7493,
+          7531
+        ],
+        "candidate.surface_proposal.reception": [
+          7544,
+          7613
+        ],
+        "candidate.surface_proposal.update_note": [
+          7628,
+          7668
+        ]
+      },
+      "existing_raw_comparison": {
+        "raw_utf8_sha256": "ac0e360b703b0375ed5ed7af98b2f39806fa15802cec31ce3bcc9e657b413ba3",
+        "raw_tokens": 3712,
+        "raw_eos_reached": false,
+        "common_prefix_chars": 2491,
+        "common_prefix_tokens": 656,
+        "token_sequences_equal": false,
+        "comparison_stops_at_teacher_eos": true,
+        "uncompared_template_tail_after_eos": 1,
+        "raw_json_text_equals_teacher_except_outer_whitespace": false,
+        "substantive_character_divergence": 2491,
+        "difference_kind": "JSON_CONTENT_DIVERGENCE",
+        "first_different_target_index": 656,
+        "teacher_token_at_divergence": 56658,
+        "generated_token_at_divergence": 159432,
+        "teacher_field_at_divergence": "candidate.claims",
+        "teacher_excerpt": "\"},\"predicate\":{\"arguments\":[],\"surface\":\"自分から「週末に返すね」と言っていた\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"自分から「週末に返すね」と言っていた\"},{\"about_time\":{\"anchor_source_id\":\"si",
+        "raw_excerpt": "\"},\"predicate\":{\"arguments\":[],\"surface\":\"自分から「週末に返すね」と言っていたのに\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"自分から「週末に返すね」と言っていたのに\"},{\"about_time\":{\"anchor_source_id\"",
+        "comparison_scope": "Existing free-running raw only; this diagnostic does not repair or regenerate it."
+      }
+    },
+    {
+      "case_id": "FT-SHOP-INITIAL",
+      "prompt_tokens": 2194,
+      "full_tokens": 3276,
+      "target_tokens": 1082,
+      "field_token_counts": {
+        "JSON_STRUCTURE": 64,
+        "candidate.claims": 557,
+        "candidate.conflicts": 2,
+        "candidate.question_proposal": 41,
+        "candidate.relations": 110,
+        "candidate.surface_proposal.bindings": 54,
+        "candidate.surface_proposal.observation": 27,
+        "candidate.surface_proposal.reception": 23,
+        "candidate.surface_proposal.update_note": 1,
+        "candidate.unknowns": 42,
+        "candidate.updates": 1,
+        "evidence_quotes": 158,
+        "EOS": 1,
+        "TEMPLATE_TAIL": 1
+      },
+      "char_spans": {
+        "candidate.claims": [
+          23,
+          2074
+        ],
+        "candidate.relations": [
+          2283,
+          2707
+        ],
+        "candidate.unknowns": [
+          3198,
+          3357
+        ],
+        "candidate.conflicts": [
+          2087,
+          2089
+        ],
+        "candidate.question_proposal": [
+          2125,
+          2270
+        ],
+        "candidate.updates": [
+          3368,
+          3370
+        ],
+        "evidence_quotes": [
+          3390,
+          3854
+        ],
+        "candidate.surface_proposal.bindings": [
+          2804,
+          3044
+        ],
+        "candidate.surface_proposal.observation": [
+          3059,
+          3112
+        ],
+        "candidate.surface_proposal.reception": [
+          3125,
+          3166
+        ],
+        "candidate.surface_proposal.update_note": [
+          3181,
+          3185
+        ]
+      },
+      "existing_raw_comparison": {
+        "raw_utf8_sha256": "8c084b2922738eb8fdf77f1efdfdcd3b5ad3d6da7d62f209b0bc861870ba879a",
+        "raw_tokens": 1088,
+        "raw_eos_reached": true,
+        "common_prefix_chars": 2224,
+        "common_prefix_tokens": 596,
+        "token_sequences_equal": false,
+        "comparison_stops_at_teacher_eos": true,
+        "uncompared_template_tail_after_eos": 1,
+        "raw_json_text_equals_teacher_except_outer_whitespace": false,
+        "substantive_character_divergence": 2224,
+        "difference_kind": "JSON_CONTENT_DIVERGENCE",
+        "first_different_target_index": 596,
+        "teacher_token_at_divergence": 2615,
+        "generated_token_at_divergence": 36962,
+        "teacher_field_at_divergence": "candidate.question_proposal",
+        "teacher_excerpt": "us\":\"PERSONAL_FEELING_REASON\",\"target_unknown_ref\":\"missing_explanation\",\"text\":\"「少し置いていかれた気がした」のはなぜですか？\"},\"relations\":[{\"evidence_indexes\":[4],\"from_claim_id\":\"opening_known\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relat",
+        "raw_excerpt": "us\":\"PERSONAL_FEELING_REASON\",\"target_unknown_ref\":\"missing_reason\",\"text\":\"「少し置いていかれた気がした」のはなぜですか？\"},\"relations\":[{\"evidence_indexes\":[4],\"from_claim_id\":\"opening_known\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_i",
+        "comparison_scope": "Existing free-running raw only; this diagnostic does not repair or regenerate it."
+      }
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "prompt_tokens": 4374,
+      "full_tokens": 7935,
+      "target_tokens": 3561,
+      "field_token_counts": {
+        "JSON_STRUCTURE": 63,
+        "candidate.claims": 1599,
+        "candidate.conflicts": 2,
+        "candidate.question_proposal": 1,
+        "candidate.relations": 340,
+        "candidate.surface_proposal.bindings": 148,
+        "candidate.surface_proposal.observation": 42,
+        "candidate.surface_proposal.reception": 39,
+        "candidate.surface_proposal.update_note": 35,
+        "candidate.unknowns": 2,
+        "candidate.updates": 801,
+        "evidence_quotes": 487,
+        "EOS": 1,
+        "TEMPLATE_TAIL": 1
+      },
+      "char_spans": {
+        "candidate.claims": [
+          23,
+          5932
+        ],
+        "candidate.relations": [
+          6000,
+          7341
+        ],
+        "candidate.unknowns": [
+          8340,
+          8342
+        ],
+        "candidate.conflicts": [
+          5945,
+          5947
+        ],
+        "candidate.question_proposal": [
+          5983,
+          5987
+        ],
+        "candidate.updates": [
+          8353,
+          10338
+        ],
+        "evidence_quotes": [
+          10358,
+          12067
+        ],
+        "candidate.surface_proposal.bindings": [
+          7438,
+          8050
+        ],
+        "candidate.surface_proposal.observation": [
+          8065,
+          8151
+        ],
+        "candidate.surface_proposal.reception": [
+          8164,
+          8242
+        ],
+        "candidate.surface_proposal.update_note": [
+          8257,
+          8327
+        ]
+      },
+      "existing_raw_comparison": {
+        "raw_utf8_sha256": "4cd466a4be244b9310125aaf6b822a392bf5717e8d1973cad4ee6c04acc4dde5",
+        "raw_tokens": 3712,
+        "raw_eos_reached": false,
+        "common_prefix_chars": 2730,
+        "common_prefix_tokens": 744,
+        "token_sequences_equal": false,
+        "comparison_stops_at_teacher_eos": true,
+        "uncompared_template_tail_after_eos": 1,
+        "raw_json_text_equals_teacher_except_outer_whitespace": false,
+        "substantive_character_divergence": 2730,
+        "difference_kind": "JSON_CONTENT_DIVERGENCE",
+        "first_different_target_index": 744,
+        "teacher_token_at_divergence": 22,
+        "generated_token_at_divergence": 19,
+        "teacher_field_at_divergence": "candidate.claims",
+        "teacher_excerpt": "\"anchor_source_id\":\"sixrow-answer-shop\",\"evidence_indexes\":[7],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"no_joint_preparation\",\"evidence_indexes\":[7],\"kind\":\"EVENT\",\"modality\":{\"evidence_in",
+        "raw_excerpt": "\"anchor_source_id\":\"sixrow-answer-shop\",\"evidence_indexes\":[4],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"no_joint_preparation\",\"evidence_indexes\":[4],\"kind\":\"EVENT\",\"modality\":{\"evidence_in",
+        "comparison_scope": "Existing free-running raw only; this diagnostic does not repair or regenerate it."
+      }
+    },
+    {
+      "case_id": "FT-REPOT-INITIAL",
+      "prompt_tokens": 2045,
+      "full_tokens": 3006,
+      "target_tokens": 961,
+      "field_token_counts": {
+        "JSON_STRUCTURE": 66,
+        "candidate.claims": 552,
+        "candidate.conflicts": 2,
+        "candidate.question_proposal": 1,
+        "candidate.relations": 112,
+        "candidate.surface_proposal.bindings": 45,
+        "candidate.surface_proposal.observation": 19,
+        "candidate.surface_proposal.reception": 12,
+        "candidate.surface_proposal.update_note": 1,
+        "candidate.unknowns": 2,
+        "candidate.updates": 1,
+        "evidence_quotes": 146,
+        "EOS": 1,
+        "TEMPLATE_TAIL": 1
+      },
+      "char_spans": {
+        "candidate.claims": [
+          23,
+          2072
+        ],
+        "candidate.relations": [
+          2140,
+          2578
+        ],
+        "candidate.unknowns": [
+          3001,
+          3003
+        ],
+        "candidate.conflicts": [
+          2085,
+          2087
+        ],
+        "candidate.question_proposal": [
+          2123,
+          2127
+        ],
+        "candidate.updates": [
+          3014,
+          3016
+        ],
+        "evidence_quotes": [
+          3036,
+          3481
+        ],
+        "candidate.surface_proposal.bindings": [
+          2675,
+          2885
+        ],
+        "candidate.surface_proposal.observation": [
+          2900,
+          2933
+        ],
+        "candidate.surface_proposal.reception": [
+          2946,
+          2969
+        ],
+        "candidate.surface_proposal.update_note": [
+          2984,
+          2988
+        ]
+      },
+      "existing_raw_comparison": {
+        "raw_utf8_sha256": "a495fd8a1c05a3f756ece4e1b421b0d9bf955a03c5488b6219a907c60d3611fe",
+        "raw_tokens": 967,
+        "raw_eos_reached": true,
+        "common_prefix_chars": 2915,
+        "common_prefix_tokens": 761,
+        "token_sequences_equal": false,
+        "comparison_stops_at_teacher_eos": true,
+        "uncompared_template_tail_after_eos": 1,
+        "raw_json_text_equals_teacher_except_outer_whitespace": false,
+        "substantive_character_divergence": 2915,
+        "difference_kind": "JSON_CONTENT_DIVERGENCE",
+        "first_different_target_index": 761,
+        "teacher_token_at_divergence": 176927,
+        "generated_token_at_divergence": 14259,
+        "teacher_field_at_divergence": "candidate.surface_proposal.observation",
+        "teacher_excerpt": "link\"],\"section\":\"reception\"}],\"observation\":\"叔父に植え替えの手順を説明してもらい、最後まで聞いたのですね。\",\"reception\":\"やり方が分かって、安心できてよかったです。\",\"update_note\":null},\"unknowns\":[],\"updates\":[]},\"evidence_quotes\":[{\"field_path\":\"memo_action\",\"quote\":\"植",
+        "raw_excerpt": "link\"],\"section\":\"reception\"}],\"observation\":\"叔父に植え替えの手順を説明し、最後まで聞かせたのですね。\",\"reception\":\"やり方が分かって、安心したと聞けて、よかったです。\",\"update_note\":null},\"unknowns\":[],\"updates\":[]},\"evidence_quotes\":[{\"field_path\":\"memo_action\",\"quote\":\"",
+        "comparison_scope": "Existing free-running raw only; this diagnostic does not repair or regenerate it."
+      }
+    },
+    {
+      "case_id": "FT-KNIT-INITIAL",
+      "prompt_tokens": 2087,
+      "full_tokens": 2983,
+      "target_tokens": 896,
+      "field_token_counts": {
+        "JSON_STRUCTURE": 66,
+        "candidate.claims": 568,
+        "candidate.conflicts": 2,
+        "candidate.question_proposal": 1,
+        "candidate.relations": 2,
+        "candidate.surface_proposal.bindings": 46,
+        "candidate.surface_proposal.observation": 29,
+        "candidate.surface_proposal.reception": 28,
+        "candidate.surface_proposal.update_note": 1,
+        "candidate.unknowns": 48,
+        "candidate.updates": 1,
+        "evidence_quotes": 102,
+        "EOS": 1,
+        "TEMPLATE_TAIL": 1
+      },
+      "char_spans": {
+        "candidate.claims": [
+          23,
+          2064
+        ],
+        "candidate.relations": [
+          2132,
+          2134
+        ],
+        "candidate.unknowns": [
+          2586,
+          2752
+        ],
+        "candidate.conflicts": [
+          2077,
+          2079
+        ],
+        "candidate.question_proposal": [
+          2115,
+          2119
+        ],
+        "candidate.updates": [
+          2763,
+          2765
+        ],
+        "evidence_quotes": [
+          2785,
+          3077
+        ],
+        "candidate.surface_proposal.bindings": [
+          2231,
+          2418
+        ],
+        "candidate.surface_proposal.observation": [
+          2433,
+          2485
+        ],
+        "candidate.surface_proposal.reception": [
+          2498,
+          2554
+        ],
+        "candidate.surface_proposal.update_note": [
+          2569,
+          2573
+        ]
+      },
+      "existing_raw_comparison": {
+        "raw_utf8_sha256": "43ff4fcd95868255fb9680cdffd46e051b781d154e766e9d51bf027f7045d0dd",
+        "raw_tokens": 3712,
+        "raw_eos_reached": false,
+        "common_prefix_chars": 419,
+        "common_prefix_tokens": 118,
+        "token_sequences_equal": false,
+        "comparison_stops_at_teacher_eos": true,
+        "uncompared_template_tail_after_eos": 1,
+        "raw_json_text_equals_teacher_except_outer_whitespace": false,
+        "substantive_character_divergence": 419,
+        "difference_kind": "JSON_CONTENT_DIVERGENCE",
+        "first_different_target_index": 118,
+        "teacher_token_at_divergence": 56658,
+        "generated_token_at_divergence": 1710,
+        "teacher_field_at_divergence": "candidate.claims",
+        "teacher_excerpt": "MED\"},\"predicate\":{\"arguments\":[],\"surface\":\"今日は編みかけの見本をほどいた\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"今日は編みかけの見本をほどいた\"},{\"about_time\":{\"anchor_source_id\":\"FT-KN",
+        "raw_excerpt": "MED\"},\"predicate\":{\"arguments\":[],\"surface\":\"今日は編みかけの見本をほどいた。\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"今日は編みかけの見本をほどいた。\"},{\"about_time\":{\"anchor_source_id\":\"FT-",
+        "comparison_scope": "Existing free-running raw only; this diagnostic does not repair or regenerate it."
+      }
+    }
+  ],
+  "original_json_offset_and_full_chat_token_ids_exact": true,
+  "cross_field_tokens_preserved_as_boundary": true,
+  "synthetic_causal_window_and_ce_exact": true,
+  "synthetic_top1_rank_ties_and_eos_top5_verified": true,
+  "negative_cases_rejected": [
+    "wrong_length",
+    "nan",
+    "teacher_token_changed",
+    "duplicate_json_key"
+  ],
+  "source_sha256": {
+    "/workspace/cocolon_native15_expanded15_recovery_pack_20261027/run_expanded15_recovery.py": "e4be86a2b6fb0581961fc3c619853ba7f419e3239464e969214772b8bc3bfb54",
+    "/workspace/cocolon_109c_token_diagnostic_pack_20261027/candidate_focus_loss.py": "f0adc2b09410b93b9f1d91676f2a37e0bb4a599be5db9997e43a21dec5b74350",
+    "/workspace/cocolon_109c_token_diagnostic_pack_20261027/source_bindings.json": "2f46d5068c68cd22a08e33554feba627cb46245d4eb4aa40c3675d4c2f4e0908",
+    "/workspace/cocolon_109c_token_diagnostic_pack_20261027/token_diagnostic.plan.json": "88821fb14cec2e39328da12178f3caf8ab9f5afc60f0885d3cdd7ff669328e49",
+    "/workspace/cocolon_109c_token_diagnostic_pack_20261027/run_token_diagnostic.py": "106fb53ed794faceaffe186b6efa4036d026d437a82124c9a03bac9f380a52b5",
+    "/workspace/cocolon_109c_token_diagnostic_pack_20261027/verify_token_diagnostic_cpu.py": "3b9b43c5f98df728123abf0c43588852f8dc040e5eea8f33e4a3322e129d85b9",
+    "/workspace/cocolon_native15_expanded15_recovery_run_20261027/run.json": "c85d2066c50569cd0a988954419c9e177b6917acd2eab01594aa415e2abea122",
+    "/workspace/cocolon_native15_expanded15_recovery_run_20261027/after_TRAIN-SERVICE-CHAIR-01-INITIAL.jsonl": "afd2ea5b83b7dcae358fa4e2986670b9060a7d2e42f6dc44777ef4791ba26f10",
+    "/workspace/cocolon_native15_expanded15_recovery_run_20261027/after_TRAIN-SERVICE-CHAIR-01-CORRECTION.jsonl": "638d5458b292700a21d650758a4cd0048fc0686ecb359262679fa956bf13d816",
+    "/workspace/cocolon_native15_expanded15_recovery_run_20261027/after_TRAIN-SERVICE-CHAIR-02-INITIAL.jsonl": "eb7017102b358a32815f543a7ac8b376911c59c2078f2a2b43d26c7eb18c13d6",
+    "/workspace/cocolon_native15_expanded15_recovery_run_20261027/after_TRAIN-SERVICE-CHAIR-02-CORRECTION.jsonl": "6002f521c094740e5d8874290d6027754a94d3ba49d84c46c9b3e57738ee5b45",
+    "/workspace/cocolon_native15_expanded15_recovery_run_20261027/after_TRAIN-SERVICE-CHAIR-03-INITIAL.jsonl": "589df712a196092442fbecb3549e54cf7937932bc45f45a99820e872751038d3",
+    "/workspace/cocolon_native15_expanded15_recovery_run_20261027/after_TRAIN-SERVICE-CHAIR-03-CORRECTION.jsonl": "2489191261022690535763fd6078baa11b23065c45f0456128e4633913eee865",
+    "/workspace/cocolon_native15_expanded15_recovery_run_20261027/after_TRAIN-DAILY-CALM-01-INITIAL.jsonl": "4dc4ca6f2dc654a68273ed01e282daed8ca76a40c46651057641223ed13a9fe5",
+    "/workspace/cocolon_native15_expanded15_recovery_run_20261027/after_TRAIN-DAILY-CALM-02-INITIAL.jsonl": "a441d9da1b06bf7d7cb8acb526d85c9366d76886ced654a343580a43e72315f8",
+    "/workspace/cocolon_native15_expanded15_recovery_run_20261027/after_TRAIN-DAILY-CALM-03-INITIAL.jsonl": "46e301ca803c4fbd4a1f0da283fddd8738a5ac27891317c313aebc72e6b3dcf4",
+    "/workspace/cocolon_native15_expanded15_recovery_run_20261027/after_FT-BOOK-INITIAL.jsonl": "3de252b950fcd8002f3e41314b250e744a5b8d232dd41129463f91a5eebb8e9e",
+    "/workspace/cocolon_native15_expanded15_recovery_run_20261027/after_FT-BOOK-AFTER-ANSWER.jsonl": "b032f68c55daf4383f6ef9fdbfbcee382425272f3b16d4f9edada536bb19140f",
+    "/workspace/cocolon_native15_expanded15_recovery_run_20261027/after_FT-SHOP-INITIAL.jsonl": "0887bb3b9530304a292a7c22c53d94f6e69024d077f2e53f54841f1c8df6ec8a",
+    "/workspace/cocolon_native15_expanded15_recovery_run_20261027/after_FT-SHOP-AFTER-ANSWER.jsonl": "b3600b97482d00425a0e6d911f8ffae44ac39367eb8f77d70073d04807a925a9",
+    "/workspace/cocolon_native15_expanded15_recovery_run_20261027/after_FT-REPOT-INITIAL.jsonl": "43ba8e75e30679d86cedbc9d874df07754deec5297b887e6ad470dc87b483730",
+    "/workspace/cocolon_native15_expanded15_recovery_run_20261027/after_FT-KNIT-INITIAL.jsonl": "4127247551c2ae04f2229be2e945aac8a2af56e0621e5092a4de9b4b64c27131",
+    "/workspace/cocolon_native15_expanded30_run_20261027/train_messages.jsonl": "29f37e38f4a615220c739176a6eaa2e0e01aae36c7bb6f87db8be248aecd1772",
+    "/workspace/cocolon_native15_expanded30_pack_20261027/train_messages.jsonl": "29f37e38f4a615220c739176a6eaa2e0e01aae36c7bb6f87db8be248aecd1772",
+    "/workspace/cocolon_native15_expanded15_recovery_run_20261027/train_messages.jsonl": "29f37e38f4a615220c739176a6eaa2e0e01aae36c7bb6f87db8be248aecd1772",
+    "/workspace/cocolon_native15_expanded30_run_20261027/eval_inputs.jsonl": "c67fa4098bafa10508bf57bf1975fcdfd6f2359f851e34c0f26148310eb8b75e",
+    "/workspace/cocolon_native15_expanded30_pack_20261027/eval_inputs.jsonl": "c67fa4098bafa10508bf57bf1975fcdfd6f2359f851e34c0f26148310eb8b75e",
+    "/workspace/cocolon_native15_expanded15_recovery_run_20261027/eval_inputs.jsonl": "c67fa4098bafa10508bf57bf1975fcdfd6f2359f851e34c0f26148310eb8b75e",
+    "/workspace/cocolon_native15_expanded30_run_20261027/cpu_preparation.json": "64a7d905c4cfe3dbea227064e8aee053b23bff15baf51261f4a41c6478306f9d",
+    "/workspace/cocolon_native15_expanded30_pack_20261027/cpu_preparation.json": "64a7d905c4cfe3dbea227064e8aee053b23bff15baf51261f4a41c6478306f9d",
+    "/workspace/cocolon_native15_expanded15_recovery_run_20261027/cpu_preparation.json": "64a7d905c4cfe3dbea227064e8aee053b23bff15baf51261f4a41c6478306f9d",
+    "/workspace/cocolon_native15_expanded30_run_20261027/api_blobs.json": "69168896b25c6bf1e008592bdeff1e975a4a3b88ca3366487a094414d98b9e85",
+    "/workspace/cocolon_native15_expanded30_pack_20261027/api_blobs.json": "69168896b25c6bf1e008592bdeff1e975a4a3b88ca3366487a094414d98b9e85",
+    "/workspace/cocolon_native15_expanded15_recovery_run_20261027/api_blobs.json": "69168896b25c6bf1e008592bdeff1e975a4a3b88ca3366487a094414d98b9e85",
+    "/workspace/cocolon_native15_expanded30_run_20261027/run.json": "ccc8afccdb322c109515aa535e936d43e857b680c4727dcd63f18bc3789c7ea1",
+    "/workspace/cocolon_native15_expanded30_run_20261027/training.jsonl": "f1232cb906eb89cb1eb74a0cb10832ccb5e272d9ed40fabd17ce77ffb26a2868",
+    "/workspace/cocolon_native15_expanded30_run_20261027/run_native15_expanded30.py": "ca03471329b5f622284cf3abd446cdd2f7831de3f7617da49a558ff7b5259e9d",
+    "/workspace/cocolon_native15_expanded30_run_20261027/gpu30_expanded.plan.json": "5904a6c7157b6a8523f3d3f988990fa194c670685cfd568e64bf35b3204e6874",
+    "/workspace/cocolon_native15_expanded30_run_20261027/adapter/README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "/workspace/cocolon_native15_expanded30_run_20261027/adapter/adapter_config.json": "fb43a10298bdf9965a8ab4c541cb517372928afd7dd97d0b210bf0c5b4f45b2e",
+    "/workspace/cocolon_native15_expanded30_run_20261027/adapter/adapter_model.safetensors": "109c3dda16b19d2f110d6f8e2ded07f47e981b9690970ca95b9046780bffb85a",
+    "/workspace/cocolon_4b_service_binding_legacy_reference_20261025/run_pilot.py": "2f659078c05bee6d7b32f50aae8b9eebc03c767d4a3be084bc17e9e3ccc4c10d",
+    "/workspace/cocolon_4b_quote_joint_pack_20261026/run_quote_joint_fit.py": "c5dd1679c605e020e4dad56951c79d7c0661a1279a34a0ae0d47666d639d7128",
+    "/workspace/cocolon_native15_expanded30_pack_20261027/run_native15_expanded30.py": "ca03471329b5f622284cf3abd446cdd2f7831de3f7617da49a558ff7b5259e9d",
+    "/workspace/cocolon_native15_expanded30_pack_20261027/gpu15.plan.json": "6c48a26871102797291f7cf531929af58b2e2a2e65d6ca85d9e9ba8b4c08dfd7",
+    "/workspace/cocolon_native15_expanded30_pack_20261027/gpu15.proposed.json": "e11d92ec87365e0f7bb2c7b3c41b83cb3350a07af3021391c01e39a1285d03a9",
+    "/workspace/cocolon_native15_expanded30_pack_20261027/gpu30_expanded.plan.json": "5904a6c7157b6a8523f3d3f988990fa194c670685cfd568e64bf35b3204e6874",
+    "/workspace/cocolon_native15_expanded30_pack_20261027/run_native15.py": "02819f033dfae099971d6d474141d4855d40eba9f5ca8e28fa0dfbb12c5ca4eb",
+    "/workspace/cocolon_native15_expanded30_pack_20261027/run_native15_afteronly.py": "a62d3ed74e76a26c01fe66b9eba32d42631acac170cfd9c8dcb2c7cdf5076552",
+    "/workspace/cocolon_sixrow_api_20261026/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py": "7defcd9e01d6f38a8515d732765ae39e0eb659a64b21a423514f1141a99cc55b",
+    "/workspace/cocolon_sixrow_api_20261026/ai/services/ai_inference/cocolon_meaning_experience_engine/model_candidate_source.py": "f5fe7ff85841a509ea9cc600ecd8c9a9a9a3760803ee78683b8b3ae60ab26f82",
+    "/workspace/cocolon_sixrow_api_20261026/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py": "c15d4a0d037a2b3c748fa8ad6ce54466ee9a77c90e5ea43fdfb3d9fc969d4b35",
+    "/workspace/cocolon_sixrow_api_20261026/ai/services/ai_inference/emlis_ai_grounded_observation_gate.py": "5736f9d83272d6a50cd26651f37db928e7a2aefb78f8723fbf554af03fb3630d",
+    "/workspace/cocolon_sixrow_api_20261026/ai/tests/test_cmee_emlis_sixrow.py": "b06a8bff6ab2ec815a942f397c8284e81c43407929ac2aa64092d347527794a2",
+    "/workspace/cocolon_sixrow_api_20261026/ai/tests/fixtures/cmee_emlis_sixrow_v3.json": "1099f61a1991c23263010626b7068bfaf880efb4f61f2de58c57f98cc6c3be0d",
+    "/workspace/cocolon_native15_interleaved30_run_20261027/adapter/README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "/workspace/cocolon_native15_interleaved30_run_20261027/adapter/adapter_config.json": "7f64972a9ff0ac07cec00d6b53f66dc4390efef4a2e566444a357c7ccd254fad",
+    "/workspace/cocolon_native15_interleaved30_run_20261027/adapter/adapter_model.safetensors": "1d218763964ce0e1f0e587c754731c5476d70cdd16548020abf330912c518c1b",
+    "/workspace/cocolon_native15_expanded30_pack_20261027/expanded_initial_adapter/README.md": "23bddfdce6b290128ca1163700f0bdadd9d068c3cb874f82a9e8de8466f76797",
+    "/workspace/cocolon_native15_expanded30_pack_20261027/expanded_initial_adapter/adapter_config.json": "42f9fa9142252da36d2f3302d001a92331ff649715b4a8702c6a6b97b5c5e636",
+    "/workspace/cocolon_native15_expanded30_pack_20261027/expanded_initial_adapter/adapter_model.safetensors": "349034fc96acf191c3d919ed6a69ac4de14526c8c129b5f536eaa2baa1c6fc7a",
+    "/workspace/.cache/huggingface/hub/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a/chat_template.jinja": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+    "/workspace/.cache/huggingface/hub/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a/LICENSE": "bbedc3fda3305820b977265f01b8619d87570a6739de3a5582c3464840f1e57a",
+    "/workspace/.cache/huggingface/hub/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a/config.json": "ddc63e1c717afa86c865bb5e01313d89d72bb53b97ad4a8a03ba8510c0621670",
+    "/workspace/.cache/huggingface/hub/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a/model.safetensors.index.json": "cf3f798ee02ba45f9622aa8892a47369ab667d0afbf154ee7c2212de42e6302d",
+    "/workspace/.cache/huggingface/hub/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a/merges.txt": "a9d356d7bdf1ef4949e3e748e95b8e10ad9d4e2e838eddc38a0a7b6b94d1db8d",
+    "/workspace/.cache/huggingface/hub/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a/preprocessor_config.json": "27225450ac9c6529872ee1924fcb0962ff5634834f817040f444118116f4e516",
+    "/workspace/.cache/huggingface/hub/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a/tokenizer_config.json": "316230d6a809701f4db5ea8f8fc862bc3a6f3229c937c174e674ff3ca0a64ac8",
+    "/workspace/.cache/huggingface/hub/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a/video_preprocessor_config.json": "7768af27c1fafa9cc9011c1dc20067e03f8915e03b63504550e11d5066986d13",
+    "/workspace/.cache/huggingface/hub/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a/vocab.json": "ce99b4cb2983d118806ce0a8b777a35b093e2000a503ebde25853284c9dfa003",
+    "/workspace/.cache/huggingface/hub/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a/tokenizer.json": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42"
+  },
+  "cuda_initialized": false,
+  "real_4b_model_loads": 0,
+  "real_4b_forwards": 0,
+  "generations": 0,
+  "optimizer_steps": 0,
+  "cmee_adoptions": 0,
+  "sql_operations": 0,
+  "product_credit": 0,
+  "unknown_generalization_credit": 0,
+  "automatic_progression": false,
+  "base_whole_shards_rehashed": false,
+  "base_boundary": "Inherited fixed revision/index/config/loader; no whole-shard rehash",
+  "checkpoint_scope": "CPU token mapping and synthetic metrics only; no measured 4B token probabilities"
+}

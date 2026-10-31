@@ -1,0 +1,249 @@
+{
+  "status": "LIMITED_CPU_IMPLEMENTATION_VERIFIED_NO_MODEL_RUN",
+  "scope": "6 teacher states / 4 source families, synthetic quote->meaning->body->actual question/answer->isolated SQL interruption/retry/saved reads. Not model raw, unknown evaluation, HTTP/Auth/native/live DB, deployment or human product acceptance.",
+  "pytest": {
+    "passed": 394,
+    "failed": 0,
+    "skipped": 0,
+    "deselected": 2,
+    "new_tests": 112,
+    "new_sql_states": 6,
+    "seconds": 142.96908876951784,
+    "suites": 9
+  },
+  "attempts": [
+    {
+      "status": "CPU_TEST_FAILURE_PRESERVED",
+      "model_load": 0,
+      "forward": 0,
+      "training": 0,
+      "generation": 0,
+      "production_db": 0,
+      "model_weights_unchanged": true,
+      "pytest_exit": 1,
+      "pytest_summary": "orkspace/cocolon_4b_service_runtime_20261025/python/_pytest/warnings.py\", line 129, in pytest_load_initial_conftests\n    return (yield)\n            ^^^^^\n  File \"/workspace/cocolon_4b_service_runtime_20261025/python/pluggy/_execution.py\", line 167, in _multicall\n    teardown.throw(exception)\n  File \"/workspace/cocolon_4b_service_runtime_20261025/python/_pytest/capture.py\", line 173, in pytest_load_initial_conftests\n    yield\n  File \"/workspace/cocolon_4b_service_runtime_20261025/python/pluggy/_execution.py\", line 147, in _multicall\n    res = hook_impl.function(*args)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/cocolon_4b_service_runtime_20261025/python/_pytest/config/__init__.py\", line 1228, in pytest_load_initial_conftests\n    self.pluginmanager._set_initial_conftests(\n  File \"/workspace/cocolon_4b_service_runtime_20261025/python/_pytest/config/__init__.py\", line 583, in _set_initial_conftests\n    self._try_load_conftest(\n  File \"/workspace/cocolon_4b_service_runtime_20261025/python/_pytest/config/__init__.py\", line 621, in _try_load_conftest\n    self._loadconftestmodules(\n  File \"/workspace/cocolon_4b_service_runtime_20261025/python/_pytest/config/__init__.py\", line 661, in _loadconftestmodules\n    mod = self._importconftest(\n          ^^^^^^^^^^^^^^^^^^^^^\n  File \"/workspace/cocolon_4b_service_runtime_20261025/python/_pytest/config/__init__.py\", line 737, in _importconftest\n    self.consider_conftest(mod, registration_name=conftestpath_plugin_name)\n  File \"/workspace/cocolon_4b_service_runtime_20261025/python/_pytest/config/__init__.py\", line 818, in consider_conftest\n    self.register(conftestmodule, name=registration_name)\n  File \"/workspace/cocolon_4b_service_runtime_20261025/python/_pytest/config/__init__.py\", line 514, in register\n    self.consider_module(plugin)\n  File \"/workspace/cocolon_4b_service_runtime_20261025/python/_pytest/config/__init__.py\", line 826, in consider_module\n    self._import_plugin_specs(getattr(mod, \"pytest_plugins\", []))\n  File \"/workspace/cocolon_4b_service_runtime_20261025/python/_pytest/config/__init__.py\", line 833, in _import_plugin_specs\n    self.import_plugin(import_spec)\n  File \"/workspace/cocolon_4b_service_runtime_20261025/python/_pytest/config/__init__.py\", line 862, in import_plugin\n    raise ImportError(\n  File \"/workspace/cocolon_4b_service_runtime_20261025/python/_pytest/config/__init__.py\", line 860, in import_plugin\n    __import__(importspec)\n  File \"/workspace/cocolon_4b_service_runtime_20261025/python/_pytest/assertion/rewrite.py\", line 186, in exec_module\n    exec(co, module.__dict__)\n  File \"/workspace/cocolon_sixrow_api_20261026/ai/tests/helpers/emlis_ai_fb172_migration.py\", line 43, in <module>\n    import emotion_submit_service\n  File \"/workspace/cocolon_sixrow_api_20261026/ai/services/ai_inference/emotion_submit_service.py\", line 29, in <module>\n    from fastapi import HTTPException\nImportError: Error importing plugin \"helpers.emlis_ai_fb172_migration\": No module named 'fastapi'\n",
+      "api_base": "4002b4577838d1ed6671278a19585b61e7ccd10e",
+      "files": {
+        "ai/tests/test_cmee_emlis_sixrow.py": "c13eceb2e261ed8b11b68abae7334977d0560d799ced6ba1e39f471b37b6a4d5",
+        "ai/services/ai_inference/emlis_ai_grounded_observation_gate.py": "5736f9d83272d6a50cd26651f37db928e7a2aefb78f8723fbf554af03fb3630d",
+        "ai/services/ai_inference/cocolon_meaning_experience_engine/model_candidate_source.py": "f5fe7ff85841a509ea9cc600ecd8c9a9a9a3760803ee78683b8b3ae60ab26f82",
+        "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py": "7defcd9e01d6f38a8515d732765ae39e0eb659a64b21a423514f1141a99cc55b",
+        "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py": "c15d4a0d037a2b3c748fa8ad6ce54466ee9a77c90e5ea43fdfb3d9fc969d4b35",
+        "ai/tests/fixtures/cmee_emlis_sixrow_v3.json": "1099f61a1991c23263010626b7068bfaf880efb4f61f2de58c57f98cc6c3be0d"
+      },
+      "preimages": {
+        "ai/services/ai_inference/emlis_ai_grounded_observation_gate.py": "2a2e1a5632777a692d333db0ad0ec2984205417f987b59b7b9069afe19cb871d",
+        "ai/services/ai_inference/cocolon_meaning_experience_engine/model_candidate_source.py": "ea63db1f10a51b30ca42e441d6b52824d2ae8eb2845e2ae6bfbe8c7642d7cc5c",
+        "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py": "cf7c4c92f2591a0a624b9fbb6044c5a71926aab1e7ca87efb4560aeb0ec1ba2a",
+        "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py": "3d3c53f3263cb6069a69a93e17e6429f5c75937339cd7eba84c31b216c048d5d"
+      },
+      "old_sources_native9_unchanged": true,
+      "seconds": 2.830600173212588
+    },
+    {
+      "status": "CPU_TEST_FAILURE_PRESERVED",
+      "pytest_exit": 1,
+      "seconds": 16.94791139755398,
+      "command": [
+        "/usr/local/bin/python",
+        "-m",
+        "pytest",
+        "-p",
+        "no:helpers.emlis_ai_fb172_migration",
+        "-q",
+        "-ra",
+        "--tb=short",
+        "--maxfail=6",
+        "--junitxml=/workspace/cocolon_sixrow_cpu_20261026/attempt-02/pytest.xml",
+        "ai/tests/test_cmee_emlis_sixrow.py",
+        "ai/tests/test_cmee_emlis_model_meaning.py",
+        "ai/tests/test_cmee_emlis_model_proposal.py",
+        "ai/tests/test_cmee_emlis_model_daily_calm.py",
+        "ai/tests/test_cmee_model_candidate_source.py",
+        "ai/tests/test_cmee_quote_candidate.py",
+        "ai/tests/test_cmee_preparation.py",
+        "ai/tests/test_emlis_q2_application.py",
+        "ai/tests/test_emlis_q3_application.py"
+      ],
+      "plugin_scope": "FB172 historical node migration blocked; selected suites have no FB172 nodes; conftest path setup and all selected tests retained.",
+      "summary": "sertionError: assert [{'evidence_i...rs': [], ...}] == [{'evidence_i...rs': [], ...}]\nE     \nE     At index 0 diff: {'evidence_indexes': [13], 'from_claim_id': 'opening_known', 'polarity': 'AFFIRMED', 'qualifiers': [], 'relation_id': 'action_link', 'scope_refs': ['action_link'], 'to_claim_id': 'celebration_sent', 'type': 'SOURCE_WRITTEN_TE_LINK'} != {'evidence_indexes': [4], 'from_claim_id': 'opening_known', 'polarity': 'AFFIRMED', 'qualifiers': [], 'relation_id': 'action_link', 'scope_refs': ['action_link'], 'to_claim_id': 'celebration_sent', 'type': 'SOURCE_WRITTEN_TE_LINK'}\nE     Use -v to get more diff\n______________________________ test_full_source_extra_text_and_forged_version_cannot_select_a_parser[book-False] ______________________________\nai/tests/test_cmee_emlis_sixrow.py:223: in test_full_source_extra_text_and_forged_version_cannot_select_a_parser\n    with pytest.raises(SemanticNotAdopted): prepare_model_snapshot(changed,semantic(changed,fixture_packet(changed,topic,prior),prior))\n                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nai/tests/test_cmee_emlis_sixrow.py:48: in fixture_packet\n    sid=prepare_emlis(req).payload()['sources'][0]['source_id']\n        ^^^^^^^^^^^^^^^^^^\nai/services/ai_inference/cocolon_meaning_experience_engine/preparation.py:106: in prepare_emlis\n    thread = admit_emlis_thread(request)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_source.py:177: in admit_emlis_thread\n    raise SourceAdmissionError(\"emlis_thread_original_binding_invalid\")\nE   cocolon_meaning_experience_engine.source_kernel.SourceAdmissionError: emlis_thread_original_binding_invalid\n______________________________ test_full_source_extra_text_and_forged_version_cannot_select_a_parser[book-True] _______________________________\nai/tests/test_cmee_emlis_sixrow.py:223: in test_full_source_extra_text_and_forged_version_cannot_select_a_parser\n    with pytest.raises(SemanticNotAdopted): prepare_model_snapshot(changed,semantic(changed,fixture_packet(changed,topic,prior),prior))\n                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nai/tests/test_cmee_emlis_sixrow.py:48: in fixture_packet\n    sid=prepare_emlis(req).payload()['sources'][0]['source_id']\n        ^^^^^^^^^^^^^^^^^^\nai/services/ai_inference/cocolon_meaning_experience_engine/preparation.py:106: in prepare_emlis\n    thread = admit_emlis_thread(request)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_source.py:177: in admit_emlis_thread\n    raise SourceAdmissionError(\"emlis_thread_original_binding_invalid\")\nE   cocolon_meaning_experience_engine.source_kernel.SourceAdmissionError: emlis_thread_original_binding_invalid\n______________________________ test_full_source_extra_text_and_forged_version_cannot_select_a_parser[shop-False] ______________________________\nai/tests/test_cmee_emlis_sixrow.py:223: in test_full_source_extra_text_and_forged_version_cannot_select_a_parser\n    with pytest.raises(SemanticNotAdopted): prepare_model_snapshot(changed,semantic(changed,fixture_packet(changed,topic,prior),prior))\n                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nai/tests/test_cmee_emlis_sixrow.py:48: in fixture_packet\n    sid=prepare_emlis(req).payload()['sources'][0]['source_id']\n        ^^^^^^^^^^^^^^^^^^\nai/services/ai_inference/cocolon_meaning_experience_engine/preparation.py:106: in prepare_emlis\n    thread = admit_emlis_thread(request)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_source.py:177: in admit_emlis_thread\n    raise SourceAdmissionError(\"emlis_thread_original_binding_invalid\")\nE   cocolon_meaning_experience_engine.source_kernel.SourceAdmissionError: emlis_thread_original_binding_invalid\n______________________________ test_full_source_extra_text_and_forged_version_cannot_select_a_parser[shop-True] _______________________________\nai/tests/test_cmee_emlis_sixrow.py:223: in test_full_source_extra_text_and_forged_version_cannot_select_a_parser\n    with pytest.raises(SemanticNotAdopted): prepare_model_snapshot(changed,semantic(changed,fixture_packet(changed,topic,prior),prior))\n                                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nai/tests/test_cmee_emlis_sixrow.py:48: in fixture_packet\n    sid=prepare_emlis(req).payload()['sources'][0]['source_id']\n        ^^^^^^^^^^^^^^^^^^\nai/services/ai_inference/cocolon_meaning_experience_engine/preparation.py:106: in prepare_emlis\n    thread = admit_emlis_thread(request)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_source.py:177: in admit_emlis_thread\n    raise SourceAdmissionError(\"emlis_thread_original_binding_invalid\")\nE   cocolon_meaning_experience_engine.source_kernel.SourceAdmissionError: emlis_thread_original_binding_invalid\n------------------------------ generated xml file: /workspace/cocolon_sixrow_cpu_20261026/attempt-02/pytest.xml -------------------------------\n=========================================================== short test summary info ===========================================================\nFAILED ai/tests/test_cmee_emlis_sixrow.py::test_six_states_actual_quote_meaning_body_question_and_canonical_replay[book-True] - AssertionErr...\nFAILED ai/tests/test_cmee_emlis_sixrow.py::test_six_states_actual_quote_meaning_body_question_and_canonical_replay[shop-True] - AssertionErr...\nFAILED ai/tests/test_cmee_emlis_sixrow.py::test_full_source_extra_text_and_forged_version_cannot_select_a_parser[book-False] - cocolon_meani...\nFAILED ai/tests/test_cmee_emlis_sixrow.py::test_full_source_extra_text_and_forged_version_cannot_select_a_parser[book-True] - cocolon_meanin...\nFAILED ai/tests/test_cmee_emlis_sixrow.py::test_full_source_extra_text_and_forged_version_cannot_select_a_parser[shop-False] - cocolon_meani...\nFAILED ai/tests/test_cmee_emlis_sixrow.py::test_full_source_extra_text_and_forged_version_cannot_select_a_parser[shop-True] - cocolon_meanin...\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 6 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n6 failed, 69 passed in 16.40s\n"
+    },
+    {
+      "status": "CPU_TEST_FAILURE_PRESERVED",
+      "pytest_exit": 1,
+      "seconds": 143.5182238239795,
+      "command": [
+        "/usr/local/bin/python",
+        "-m",
+        "pytest",
+        "-p",
+        "no:helpers.emlis_ai_fb172_migration",
+        "-q",
+        "-ra",
+        "--tb=short",
+        "--maxfail=6",
+        "--junitxml=/workspace/cocolon_sixrow_cpu_20261026/attempt-03/pytest.xml",
+        "ai/tests/test_cmee_emlis_sixrow.py",
+        "ai/tests/test_cmee_emlis_model_meaning.py",
+        "ai/tests/test_cmee_emlis_model_proposal.py",
+        "ai/tests/test_cmee_emlis_model_daily_calm.py",
+        "ai/tests/test_cmee_model_candidate_source.py",
+        "ai/tests/test_cmee_quote_candidate.py",
+        "ai/tests/test_cmee_preparation.py",
+        "ai/tests/test_emlis_q2_application.py",
+        "ai/tests/test_emlis_q3_application.py"
+      ],
+      "test_sha256": "c1abc62ea24fa21bbe99396c74964ef308c447b00e9f7892d11f996feda3b73b",
+      "summary": "......................................................................................................FF............................... [ 34%]\n....................................................................................................................................... [ 68%]\n................................................................................................F......................F......          [100%]\n================================================================== FAILURES ===================================================================\n_____________________________ test_explanations_cannot_forge_correction_or_target_or_pending[wrong_pending-book] ______________________________\nai/tests/test_cmee_emlis_sixrow.py:273: in test_explanations_cannot_forge_correction_or_target_or_pending\n    with pytest.raises(SemanticNotAdopted): prepare_model_snapshot(req,semantic(req,packet,prior))\n                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^\nai/tests/test_cmee_emlis_sixrow.py:101: in semantic\n    material=prepare_emlis(req)\n             ^^^^^^^^^^^^^^^^^^\nai/services/ai_inference/cocolon_meaning_experience_engine/preparation.py:106: in prepare_emlis\n    thread = admit_emlis_thread(request)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_source.py:220: in admit_emlis_thread\n    raise SourceAdmissionError(\"emlis_answer_parent_binding_invalid\")\nE   cocolon_meaning_experience_engine.source_kernel.SourceAdmissionError: emlis_answer_parent_binding_invalid\n_____________________________ test_explanations_cannot_forge_correction_or_target_or_pending[wrong_pending-shop] ______________________________\nai/tests/test_cmee_emlis_sixrow.py:273: in test_explanations_cannot_forge_correction_or_target_or_pending\n    with pytest.raises(SemanticNotAdopted): prepare_model_snapshot(req,semantic(req,packet,prior))\n                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^\nai/tests/test_cmee_emlis_sixrow.py:101: in semantic\n    material=prepare_emlis(req)\n             ^^^^^^^^^^^^^^^^^^\nai/services/ai_inference/cocolon_meaning_experience_engine/preparation.py:106: in prepare_emlis\n    thread = admit_emlis_thread(request)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_source.py:220: in admit_emlis_thread\n    raise SourceAdmissionError(\"emlis_answer_parent_binding_invalid\")\nE   cocolon_meaning_experience_engine.source_kernel.SourceAdmissionError: emlis_answer_parent_binding_invalid\n______________________________________________ test_verified_api_contract_default_off_and_round _______________________________________________\nai/tests/test_emlis_q2_application.py:268: in test_verified_api_contract_default_off_and_round\n    from fastapi import FastAPI\nE   ModuleNotFoundError: No module named 'fastapi'\n_________________________________________________ test_frame_api_allowlist_and_foreign_owner __________________________________________________\nai/tests/test_emlis_q3_application.py:175: in test_frame_api_allowlist_and_foreign_owner\n    from api_emlis_thread import ThreadResponse,ThreadFrameFeedbackBody\nai/services/ai_inference/api_emlis_thread.py:8: in <module>\n    from fastapi import FastAPI, Header, HTTPException, Response\nE   ModuleNotFoundError: No module named 'fastapi'\n------------------------------ generated xml file: /workspace/cocolon_sixrow_cpu_20261026/attempt-03/pytest.xml -------------------------------\n=========================================================== short test summary info ===========================================================\nFAILED ai/tests/test_cmee_emlis_sixrow.py::test_explanations_cannot_forge_correction_or_target_or_pending[wrong_pending-book] - cocolon_mean...\nFAILED ai/tests/test_cmee_emlis_sixrow.py::test_explanations_cannot_forge_correction_or_target_or_pending[wrong_pending-shop] - cocolon_mean...\nFAILED ai/tests/test_emlis_q2_application.py::test_verified_api_contract_default_off_and_round - ModuleNotFoundError: No module named 'fastapi'\nFAILED ai/tests/test_emlis_q3_application.py::test_frame_api_allowlist_and_foreign_owner - ModuleNotFoundError: No module named 'fastapi'\n4 failed, 392 passed in 142.94s (0:02:22)\n"
+    },
+    {
+      "status": "CPU_TESTS_PASSED",
+      "pytest_exit": 0,
+      "seconds": 142.96908876951784,
+      "command": [
+        "/usr/local/bin/python",
+        "-m",
+        "pytest",
+        "-p",
+        "no:helpers.emlis_ai_fb172_migration",
+        "-q",
+        "-ra",
+        "--tb=short",
+        "-k",
+        "not test_verified_api_contract_default_off_and_round and not test_frame_api_allowlist_and_foreign_owner",
+        "--junitxml=/workspace/cocolon_sixrow_cpu_20261026/attempt-04/pytest.xml",
+        "ai/tests/test_cmee_emlis_sixrow.py",
+        "ai/tests/test_cmee_emlis_model_meaning.py",
+        "ai/tests/test_cmee_emlis_model_proposal.py",
+        "ai/tests/test_cmee_emlis_model_daily_calm.py",
+        "ai/tests/test_cmee_model_candidate_source.py",
+        "ai/tests/test_cmee_quote_candidate.py",
+        "ai/tests/test_cmee_preparation.py",
+        "ai/tests/test_emlis_q2_application.py",
+        "ai/tests/test_emlis_q3_application.py"
+      ],
+      "test_sha256": "b06a8bff6ab2ec815a942f397c8284e81c43407929ac2aa64092d347527794a2",
+      "exclusions": "Two unchanged HTTP/FastAPI tests failed due missing existing dependency in attempt03; no new dependency installed. All CMEE/service/SQL tests retained.",
+      "summary": "....................................................................................................................................... [ 34%]\n....................................................................................................................................... [ 68%]\n............................................................................................................................            [100%]\n------------------------------ generated xml file: /workspace/cocolon_sixrow_cpu_20261026/attempt-04/pytest.xml -------------------------------\n394 passed, 2 deselected in 142.38s (0:02:22)\n"
+    }
+  ],
+  "legacy": {
+    "status": "LEGACY_18_FULL_BYTE_EQUAL",
+    "equal": true,
+    "records": 18,
+    "chair": 2,
+    "daily_variants": 16,
+    "components": [
+      "semantic_snapshot",
+      "meaning_json",
+      "native_bindings_json",
+      "surface_proposal_json",
+      "question_proposal_json",
+      "outcome",
+      "legacy_messages",
+      "quote_messages"
+    ],
+    "before_sha256": "eab937b04fc88a07308f451526549595a2ccef95dfa1495720af0b705c498af8",
+    "after_sha256": "eab937b04fc88a07308f451526549595a2ccef95dfa1495720af0b705c498af8",
+    "bytes": 1851616,
+    "seconds": 21.085219223983586,
+    "model_calls": 0
+  },
+  "native_summary": [
+    {
+      "id": "FT-BOOK-INITIAL",
+      "prompt_tokens": 2159,
+      "assistant_eos_tokens": 1038,
+      "full_tokens": 3197,
+      "eos_present": true,
+      "within_context": true
+    },
+    {
+      "id": "FT-BOOK-AFTER-ANSWER",
+      "prompt_tokens": 4212,
+      "assistant_eos_tokens": 3178,
+      "full_tokens": 7390,
+      "eos_present": true,
+      "within_context": true
+    },
+    {
+      "id": "FT-SHOP-INITIAL",
+      "prompt_tokens": 2194,
+      "assistant_eos_tokens": 1082,
+      "full_tokens": 3276,
+      "eos_present": true,
+      "within_context": true
+    },
+    {
+      "id": "FT-SHOP-AFTER-ANSWER",
+      "prompt_tokens": 4374,
+      "assistant_eos_tokens": 3561,
+      "full_tokens": 7935,
+      "eos_present": true,
+      "within_context": true
+    },
+    {
+      "id": "FT-REPOT-INITIAL",
+      "prompt_tokens": 2045,
+      "assistant_eos_tokens": 961,
+      "full_tokens": 3006,
+      "eos_present": true,
+      "within_context": true
+    },
+    {
+      "id": "FT-KNIT-INITIAL",
+      "prompt_tokens": 2087,
+      "assistant_eos_tokens": 896,
+      "full_tokens": 2983,
+      "eos_present": true,
+      "within_context": true
+    }
+  ],
+  "source": {
+    "api_base": "4002b4577838d1ed6671278a19585b61e7ccd10e",
+    "preimages": {
+      "ai/services/ai_inference/emlis_ai_grounded_observation_gate.py": "2a2e1a5632777a692d333db0ad0ec2984205417f987b59b7b9069afe19cb871d",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/model_candidate_source.py": "ea63db1f10a51b30ca42e441d6b52824d2ae8eb2845e2ae6bfbe8c7642d7cc5c",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py": "cf7c4c92f2591a0a624b9fbb6044c5a71926aab1e7ca87efb4560aeb0ec1ba2a",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py": "3d3c53f3263cb6069a69a93e17e6429f5c75937339cd7eba84c31b216c048d5d"
+    },
+    "final_files": {
+      "ai/tests/test_cmee_emlis_sixrow.py": "b06a8bff6ab2ec815a942f397c8284e81c43407929ac2aa64092d347527794a2",
+      "ai/services/ai_inference/emlis_ai_grounded_observation_gate.py": "5736f9d83272d6a50cd26651f37db928e7a2aefb78f8723fbf554af03fb3630d",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/model_candidate_source.py": "f5fe7ff85841a509ea9cc600ecd8c9a9a9a3760803ee78683b8b3ae60ab26f82",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py": "7defcd9e01d6f38a8515d732765ae39e0eb659a64b21a423514f1141a99cc55b",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py": "c15d4a0d037a2b3c748fa8ad6ce54466ee9a77c90e5ea43fdfb3d9fc969d4b35",
+      "ai/tests/fixtures/cmee_emlis_sixrow_v3.json": "1099f61a1991c23263010626b7068bfaf880efb4f61f2de58c57f98cc6c3be0d"
+    },
+    "old_api_unchanged": true,
+    "old_native9_unchanged": true,
+    "old_adapter_model_sha256": "45779ad97111dd2d91c1f7f1a4b0ca697ef0586c5190cd56b1b7675fe540dab6",
+    "old_adapter_files": {
+      "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+      "adapter_model.safetensors": "45779ad97111dd2d91c1f7f1a4b0ca697ef0586c5190cd56b1b7675fe540dab6",
+      "adapter_config.json": "26095c64075c5e88934f200eed8a6a3b5e389ad708d394f8567a1180e4aeb89c"
+    }
+  },
+  "model_load": 0,
+  "forward": 0,
+  "training": 0,
+  "generation": 0,
+  "production_db": 0,
+  "additional_dependencies": 0,
+  "gpu_lifecycle_actions": 0,
+  "product_accepted": false,
+  "product_credit": 0,
+  "formal_product_reads": "0/3",
+  "overall_progress": "54.50%",
+  "automatic_progression": false,
+  "remaining": "BOOK/SHOP completions exceed old 2560 output cap (3178/3561); no model budget, call-limit or GPU plan changed. Any future generation needs its own concrete conditions.",
+  "runners": {
+    "run_sixrow_cpu.py": "11e868b072a1dbf7924b8cfbdb4f70ee308bf20ab2bf633729925f5bec991543",
+    "run_sixrow_cpu02.py": "ed45cdea8d06e877fc27682410e8d9d7a31a60d6845aed9bd35fa48e7ea3d710",
+    "run_sixrow_cpu03.py": "12439a6d916a8f2320fc537a0df3eac47b91e376d6073f4dfdb7cc7bfc44d595",
+    "run_sixrow_cpu04.py": "ed7c534da9fda60db926291168a3d7ed6a7b1f3c6fca770fbf31b3ce2460185f",
+    "review_native6.py": "a642533113dc02f0f614d83452bb53909a9ebee049e02ad639e095782964d938",
+    "capture_sixrow_legacy.py": "ece22740cb64e34671ffd69834b61b832b3ebaa629c44557ae701cbf49276071",
+    "compare_sixrow_legacy.py": "67adab2326a5942150a198fe5ea66117a7a0880d9ee969ab4df0fb0e8179c098"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "archive_bytes": 152969,
+  "archive_sha256": "8eed392015d9aad7b774f751061d1002ac07d6f07e98dd741cb72c11130fc2ce",
+  "members": 12,
+  "payloads": 11,
+  "crc": "ALL_OK",
+  "all_manifest_bytes_sha256": "MATCH",
+  "source2": "MATCH_GITHUB_29130_AND_LOCAL",
+  "prepared_sha256": "d3b3d5e3a0b41407388d0d6ee38c2d9995a079911c7d39a4cdbd42fa19ff19e1",
+  "gpu_executed": false,
+  "summary_hash": "614d100f653a704f82d0819cd9db524df6388ba33db41213a477ef51ee0a7abe",
+  "proof_sha256": "216359e02b545c88e6f1918c2f40e427a4cec25a57b705e66f12fc0c8e68b87d"
+}

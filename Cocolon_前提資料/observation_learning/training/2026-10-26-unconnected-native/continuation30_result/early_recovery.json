@@ -1,0 +1,24 @@
+{
+  "status": "EARLY_ARCHIVE_VERIFIED_OUTSIDE_POD",
+  "archive_bytes": 3468567,
+  "archive_sha256": "402900a7d314c862306435ba8ecd433587e14cbc302c72dd93585837aa905c93",
+  "payloads": 15,
+  "members": 16,
+  "all_member_hashes_equal": true,
+  "finite_f32_tensors": 32,
+  "source_commit": "e1ed975034ffaf6eb1c1b8a662d8cf8e16c4d3aa",
+  "adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "afac6be0e91b370268a0ea7f78193d0cba2a38e7b7aeeea7465e666f94d48552",
+    "adapter_model.safetensors": "dd1188e8d715cf2d7bb1479c5c2158a0ecc98a9355d80f3d94510736bddc317b"
+  },
+  "optimizer_steps_completed": 30,
+  "model_calls_completed": 0,
+  "early_seconds": 399.67096497595776,
+  "strict_optimizer_resume": false,
+  "base_weights_included": false,
+  "library_file_id": "libfile_ce620ca836208191a9a9649daca3a90f",
+  "library_version": 0,
+  "library_filename": "cocolon_continuation30_recovery_20261027.tar.gz",
+  "library_write_status": "succeeded"
+}

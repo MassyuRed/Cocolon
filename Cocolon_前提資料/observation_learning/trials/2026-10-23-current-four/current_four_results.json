@@ -1,0 +1,525 @@
+{
+  "api_sha": "3084c99e5a08d6e475d8a177e62ebf1548e8a0f9",
+  "cocolon_sha": "4450b15ff7d5cb21121b723b9d30d97c8e8cad7c",
+  "fixture_sha256": "9342de4a2f1823db05ab84e2d837aaa42a2ad6998ec93e0dc629c05ceaa88ac6",
+  "source_blobs": {
+    "cocolon_meaning_experience_engine/engine.py": "398a3a8b546d673646fe80805331dc22304a72b3",
+    "cocolon_meaning_experience_engine/contracts.py": "a6272fc99fcf74f901f72658239b03354cef693a",
+    "cocolon_meaning_experience_engine/source_kernel.py": "501ddd995ae491022d39b3c086161139938b6707",
+    "cocolon_meaning_experience_engine/emlis_thread_contracts.py": "89e8ac4cf47370c21eca952543ed95721f118b9c",
+    "cocolon_meaning_experience_engine/emlis_thread_source.py": "90beaa6003f2737cdf5dd621ac4da253f32a03f3",
+    "cocolon_meaning_experience_engine/emlis_thread_engine.py": "ee46b479c876307a75f43df9be43fb9389d017bd",
+    "cocolon_meaning_experience_engine/emlis_answer_update.py": "6cd44cf44850993a26bb964cb256a8a4843e4730",
+    "cocolon_meaning_experience_engine/emlis_question.py": "3137cdcd1d2a15ae47e8139fc6fc567528a4c88d",
+    "emlis_ai_current_input_bundle.py": "087798fcb8ebe7781d2769b43bad38fca8bc6128",
+    "cocolon_meaning_experience_engine/emlis_thread_history.py": "6dcbdf0fe1d7939f1c276f9d3daf19136d9e36dd",
+    "cocolon_meaning_experience_engine/emlis_thread_surface.py": "a29fc1db67f8457ad5b3b6c204d1f7d211e0fc18",
+    "cocolon_meaning_experience_engine/emlis_v1a.py": "9f5852e4f956c42db833ebecb928b4583ad36c26",
+    "emlis_ai_evidence_ledger_service.py": "f5a38e64a3c75d0c7699c073f4790ccb55f9e04d",
+    "emlis_ai_grounded_human_reception.py": "e8f2aead313f06b584dc5d2c03096fd0546fdcd0",
+    "emlis_ai_grounded_observation_plan.py": "48f679964ba78a4f209ed876d9217b5bffebc3d7",
+    "emlis_ai_safety_triage.py": "18b756a90d9f6c452566e88fc6d0d92541d1d318",
+    "emlis_ai_types.py": "22dd596a97d07bd53979d4d429a0b7d6f77b7e8a",
+    "cocolon_meaning_experience_engine/__init__.py": "3b88577d2d74a0cca3f97b566a2d63b0a5ebe881",
+    "cocolon_meaning_experience_engine/emlis_stage1_response.py": "eb6de19e9c257cece4cc577455fe648772884385",
+    "cocolon_meaning_experience_engine/emlis_thread_projection.py": "0826fdb6292cee60e58cdaa9a1051d59d20e1d0e",
+    "cocolon_text_generation_core/adapters/emlis_observation_composer.py": "d232876cc8fdb1cc38847c2080e2636a42d2282d",
+    "cocolon_text_generation_core/guards/base.py": "b20bb298ecbea7626e9ac1f61dc437e8fb1be416",
+    "emlis_ai_conversation_composer_service.py": "f6de95940b244a921cfd102d985feeec22826827",
+    "emlis_ai_grounded_observation_gate.py": "13aff825df4c42cdc94ffaff6824b546775c7d7f",
+    "emlis_ai_grounded_sentence_surface.py": "673dad2f9ce949500f5e6c9c5f802e81f8699672",
+    "emlis_ai_observation_integrator_service.py": "3a601f819a3cee14db9ce4208f27d7ea7541ccb6",
+    "emlis_ai_perspective_board.py": "a31875eadfeed66784c19c685ddd263a8f4fc451",
+    "emlis_ai_perspective_observers.py": "7d0589ce3a141d3e988ea57e83e0a138e4d7fe78",
+    "emlis_ai_response_contract.py": "45deb845a23510dc7c971aeb7ebf87e83c31da52",
+    "emlis_ai_user_label_connection_surface.py": "0da15239a1fc388cd485618d3deeb79588f3dfbe",
+    "cocolon_meaning_experience_engine/emlis_input_specific_meaning.py": "afebe316b18f0b79618a2a0f693a1a2cc7a78b42",
+    "cocolon_meaning_experience_engine/emlis_stage1_composition.py": "06241d4af21f3e6c7592c602725ca53b61e29f3c",
+    "cocolon_text_generation_core/adapters/emlis_evidence_adapter.py": "171e6108524f77d8eeee20314ea6c90572c8a7d1",
+    "cocolon_text_generation_core/composer.py": "e1382c58ecbe920f12c4f3435b3a748838cdb3b4",
+    "cocolon_text_generation_core/policies.py": "1daa333e8e719307fee8225acb6fc05b8bf242be",
+    "cocolon_text_generation_core/result.py": "8aed161249a8c9b24c3fd680b321443d4afe7d57",
+    "cocolon_text_generation_core/stabilization.py": "5c2c81fac669496839391822505ed55ddf36050c",
+    "cocolon_text_generation_core/types.py": "0d2f3bd6f8dd577cef1dd8de0dd29833009f7c4e",
+    "emlis_ai_environment_state_output_surface_contract_completion.py": "3f4d5d42e37d30784cf2ef4dcd87b6d60cf4c79e",
+    "emlis_ai_observation_structure_material_service.py": "f8feeb5a36b8f1b6870804bf67695d6612fe4636",
+    "emlis_ai_safety_boundary_service.py": "cb9c618c257411409503e4773aaadb12c142b737",
+    "emlis_ai_state_answer_composer_contract.py": "a6e4b52f7a1ad325f0ba223d586f40b8c4d1adbe",
+    "emlis_ai_user_address_service.py": "9ef53faedbe24a227b78cb90c894d46a2dc533fc",
+    "emlis_ai_user_label_connection_candidate.py": "9986955f655445d0233fee5833267d69a36035a9",
+    "emlis_ai_user_label_connection_gate.py": "59b07852b91d33eb7738d0427c1af25deddb29d3",
+    "cocolon_environment_state_output_frame.py": "3c8ac9dd07a25cb8dfa197cbfc2ba633ab120187",
+    "cocolon_text_generation_core/evidence.py": "5714f385fec15a01891dc581bfe04aa31d0aeee6",
+    "cocolon_text_generation_core/guards/__init__.py": "eacbec5e3e54d0ab775c2616ef6ff40306bc5701",
+    "emlis_ai_observation_structure_dictionary_loader.py": "b06a40376567ac7a97a7682cfc40db58bff44d7f",
+    "emlis_ai_state_answer_surface_contract.py": "173415137035c1ba6919beb524941acf50e122ee",
+    "emlis_ai_two_stage_section_surface_plan.py": "9873ed95d4b17845184879579e3c67132164f19c",
+    "emlis_ai_user_label_connection_material.py": "74ad092e8bfe39cf4a2bd97e5e9eb0d8d6c67fa9",
+    "emlis_ai_user_label_connection_types.py": "51cf533d849296c8866376d716905d1e62793dbf",
+    "cocolon_text_generation_core/guards/grounding.py": "5ea76fd36e1242615b948dc47dea935ad02add67",
+    "cocolon_text_generation_core/guards/japanese_coherence.py": "9171514ad21c9bb55dcb2848087a5ea08b7c33a9",
+    "cocolon_text_generation_core/guards/must_keep_coverage.py": "7be48d0dc51ea273a8c719fb3376c4cf874ecd95",
+    "cocolon_text_generation_core/guards/overclaim_diagnosis.py": "00af6e65cfed66ca77cdd63a432610e9b3d7234a",
+    "cocolon_text_generation_core/guards/template_echo.py": "7f701c9f1e6158348ffa4e333a953816750b8588",
+    "emlis_ai_human_follow_selector.py": "e504ffaa64395451d39d53f9786884c5f7b9f0f1",
+    "emlis_ai_reception_assistance_dictionary_loader.py": "09d58e4628e46b0ec1b71ced5a8ab3c03198fabf",
+    "emlis_ai_safe_daily_metaphor_material.py": "a88e1c954925cc4545369364ce4151c0ff5441a5",
+    "emlis_ai_state_answer_ratio_policy.py": "62de19335bcb05d92d8308a671950f9f2670d0ec",
+    "emlis_ai_state_answer_special_cases.py": "fc8b9f87f67e84cc67bdfd8c8ed50c2000b25e6d",
+    "emlis_ai_user_fact_grounding_boundary.py": "2712981ceeff814cca7a7db214954012b366b347",
+    "emlis_ai_observation_reply_contract.py": "65ebc8114ed53c823708c690a9c0a8e182bef3fa",
+    "emlis_ai_reception_mode_resolver.py": "741ab77314da2d27d2e5ccab07584b9c556b1fd1",
+    "emlis_ai_shared_reception_evidence.py": "1a01a69ae2438bb30201c3be065a92176641123b",
+    "config/emlis_observation_structure_dictionary.schema.json": "0c23704825d883c2f876dab18ef644fc69f1261f",
+    "config/emlis_observation_structure_dictionary.v1.json": "490d7c6de81d80e828e2fea71dcac6c308ef56e8",
+    "config/emlis_reception_assistance_dictionary.schema.json": "aeee3b50bf11608ddabc43e8167eb6f1628cf982",
+    "config/emlis_reception_assistance_dictionary.v1.json": "60ca5005630b88388e356e665624956b8cbd2997",
+    "emlis_ai_input_meaning_block_service.py": "36779eace1d53fe49efc33b3cae0c1a9f70ebabd",
+    "piece_v2_generation.py": "f557f406e28944d45c51d3d104b2dd6cd6164845",
+    "piece_v2_contract.py": "e4d20c9d0994b0a05f086ff6543de9d5cf2f31aa",
+    "piece_v2_content_policy.py": "ff03637c701e8253523667dc7c429fe0df6f2f66",
+    "piece_v2_expression.py": "79d5606223e49de8c52704c829395ba030aafa59",
+    "piece_text_formatter.py": "2573ea391dba9c84123a4762174bb7978b35ac8a",
+    "cocolon_meaning_experience_engine/piece_source.py": "9420b855858d36a53d7814b8ee51ba09bbe653e2",
+    "cocolon_meaning_experience_engine/piece_v1c.py": "c8223642822b613f29f16e92580bb5bdf2334f78",
+    "cocolon_meaning_experience_engine/cores/analysis/source_adapter.py": "9fb6a26a3f9eab0bc140a25a15e63d111a921cc1",
+    "cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py": "5081e2d6e803c2b4fed9ca71a2b739f7474a86f5",
+    "cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py": "673c5777d2954567cf4b6bc661903fec85bc3194",
+    "cocolon_meaning_experience_engine/cores/__init__.py": "c995d72459083ec20d1333d387d5c484991c0b2f",
+    "cocolon_meaning_experience_engine/cores/analysis/__init__.py": "7ae98fb29a476430a946c651167d72879a23c3b7"
+  },
+  "started_utc": "2026-10-23T01:24:52.899412+00:00",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "external_inference_requests": 0,
+  "db_or_public_api_calls": 0,
+  "records": [
+    {
+      "case_id": "E02-0",
+      "execution_status": "COMPLETED",
+      "output": {
+        "status": "GENERATED",
+        "body": {
+          "status": "GENERATED",
+          "artifact": {
+            "artifact_id": "emlis-artifact-c0110ff89edbb171084d32fcc855a9ed62c8c430b1949c13ea5d98e31570a001",
+            "observation": "今は、「うれしかったけど、どこがうれしかったかはまだ曖昧」という感覚や状態が前に出ています。\n今の入力には、「打合せで後輩に説明を任せて、最後まで聞いた」という行動があります。",
+            "reception": "うれしかったけど、どこがうれしかったかはまだ曖昧という気持ちを見過ごさず、受け止めています。打合せで後輩に説明を任せて、最後まで聞いたことを大切に思っています。",
+            "source_prefix_ref": "emlis-q3-source-prefix-46038f4ff56609cadf64aebc67175f8402d6975c966fdeb4f21f61eb28dd9261",
+            "meaning_checkpoint_ref": "emlis-checkpoint-099dee65aa957d3980b0d14ae5abb6933d773bee6514fee404f8dc6010f8c483",
+            "qualified_evidence_refs": [
+              {
+                "thread_span_id": "s1",
+                "local_source_span_id": "s1",
+                "evidence": {
+                  "evidence_id": "ev-867aada7ad7a937b15b3eb8f",
+                  "source_span_id": "s1",
+                  "source_envelope_id": "src-757bc16e2d3beddee1fb1b3d",
+                  "field_path": "memo",
+                  "element_index": -1,
+                  "field_utf8_start": 391,
+                  "field_utf8_end": 466,
+                  "scalar_start": 0,
+                  "scalar_end": 24,
+                  "utf8_start": 391,
+                  "utf8_end": 463,
+                  "field_sha256": "a21dc0c744e85f17e4a47a0efdef7fcd848ffb12451e10df53a0d54bd3115ae5",
+                  "literal_sha256": "5cca23233b650b9108ba100cea80e86907d8fcc43e90486ec801da5e7427f739"
+                }
+              },
+              {
+                "thread_span_id": "s2",
+                "local_source_span_id": "s2",
+                "evidence": {
+                  "evidence_id": "ev-0880f935e8200f8c8eaf15dc",
+                  "source_span_id": "s2",
+                  "source_envelope_id": "src-757bc16e2d3beddee1fb1b3d",
+                  "field_path": "memo_action",
+                  "element_index": -1,
+                  "field_utf8_start": 492,
+                  "field_utf8_end": 558,
+                  "scalar_start": 0,
+                  "scalar_end": 21,
+                  "utf8_start": 492,
+                  "utf8_end": 555,
+                  "field_sha256": "8e15740f9d1b465c0ad160825a07f2991903bc4e74a67093169468b094b02f3e",
+                  "literal_sha256": "b97c616499a7cd12842bb70ec3dc194de11cd6980fe328eb3855be0b40d27daf"
+                }
+              },
+              {
+                "thread_span_id": "s3",
+                "local_source_span_id": "s3",
+                "evidence": {
+                  "evidence_id": "ev-e7598cd01b919047e3fb0086",
+                  "source_span_id": "s3",
+                  "source_envelope_id": "src-757bc16e2d3beddee1fb1b3d",
+                  "field_path": "emotion_details.0.type",
+                  "element_index": 0,
+                  "field_utf8_start": 594,
+                  "field_utf8_end": 600,
+                  "scalar_start": 0,
+                  "scalar_end": 2,
+                  "utf8_start": 594,
+                  "utf8_end": 600,
+                  "field_sha256": "3ce61d4802bc001de7a7c1bd3ed8aafb4509648f1b68be0cc97fda5d292cc85c",
+                  "literal_sha256": "3ce61d4802bc001de7a7c1bd3ed8aafb4509648f1b68be0cc97fda5d292cc85c"
+                }
+              },
+              {
+                "thread_span_id": "s4",
+                "local_source_span_id": "s4",
+                "evidence": {
+                  "evidence_id": "ev-236aedf3c506d83ad6a31fb7",
+                  "source_span_id": "s4",
+                  "source_envelope_id": "src-757bc16e2d3beddee1fb1b3d",
+                  "field_path": "emotions.0",
+                  "element_index": 0,
+                  "field_utf8_start": 624,
+                  "field_utf8_end": 630,
+                  "scalar_start": 0,
+                  "scalar_end": 2,
+                  "utf8_start": 624,
+                  "utf8_end": 630,
+                  "field_sha256": "3ce61d4802bc001de7a7c1bd3ed8aafb4509648f1b68be0cc97fda5d292cc85c",
+                  "literal_sha256": "3ce61d4802bc001de7a7c1bd3ed8aafb4509648f1b68be0cc97fda5d292cc85c"
+                }
+              },
+              {
+                "thread_span_id": "s5",
+                "local_source_span_id": "s5",
+                "evidence": {
+                  "evidence_id": "ev-41a03c146ad1e4de7803ca7e",
+                  "source_span_id": "s5",
+                  "source_envelope_id": "src-757bc16e2d3beddee1fb1b3d",
+                  "field_path": "category.0",
+                  "element_index": 0,
+                  "field_utf8_start": 654,
+                  "field_utf8_end": 660,
+                  "scalar_start": 0,
+                  "scalar_end": 2,
+                  "utf8_start": 654,
+                  "utf8_end": 660,
+                  "field_sha256": "fb7db808eb037549d52b2149ab1384a352561105d0abfd2bf3f358b5c8acf8a3",
+                  "literal_sha256": "fb7db808eb037549d52b2149ab1384a352561105d0abfd2bf3f358b5c8acf8a3"
+                }
+              }
+            ],
+            "meaning_trace": [
+              {
+                "limited_outcome_ref": "limited-meaning-outcome:59a1ee8b40f15a1ebd0b7eece4e887c30a8ec154dd84e393e7e997fffdab4678@cocolon.cmee.emlis.limited_meaning_outcome.v1",
+                "source_object_ref": "node:mn-557865c38a5d610e12dbc4a9f50b0f48ccf2ff1279a3dea5d5517ec0d6641927@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+                "layer1_contribution_refs": [
+                  "contribution-02fad86678ee18b9202de50c655495a03a6b64137b47bf88d5fc9f672fd38ae9"
+                ]
+              },
+              {
+                "limited_outcome_ref": "limited-meaning-outcome:59a1ee8b40f15a1ebd0b7eece4e887c30a8ec154dd84e393e7e997fffdab4678@cocolon.cmee.emlis.limited_meaning_outcome.v1",
+                "source_object_ref": "node:mn-8c6b923e1a8c65fbdcd4862d4f0813b7a34e590df9d2c08bd00e5e0bf10ea6c3@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+                "layer1_contribution_refs": [
+                  "contribution-cb075d803016dd410ebe4ef0751abdec06380994bf7854896da8a9c8e354a2c0"
+                ]
+              }
+            ],
+            "reception_trace": [
+              {
+                "branch": "LIMITED",
+                "meaning_outcome_ref": "limited-meaning-outcome:59a1ee8b40f15a1ebd0b7eece4e887c30a8ec154dd84e393e7e997fffdab4678@cocolon.cmee.emlis.limited_meaning_outcome.v1",
+                "reading_consequence_ref": null,
+                "reception_record_ref": "bounded-limited-reception:ac99dc5731f0b6a22c46dedea19964068a88e649d266fecf2f159827b316cf47@cocolon.cmee.emlis.bounded_limited_reception.v1",
+                "projected_claim_ref": "subjective-claim-aca56fe1c87779e19ee3fbb4282de0f8b9253ecbda0d285c8b4ba627ffedd2de",
+                "layer1_contribution_refs": [
+                  "contribution-cb075d803016dd410ebe4ef0751abdec06380994bf7854896da8a9c8e354a2c0",
+                  "contribution-02fad86678ee18b9202de50c655495a03a6b64137b47bf88d5fc9f672fd38ae9"
+                ],
+                "response_object_refs": [
+                  "node:mn-557865c38a5d610e12dbc4a9f50b0f48ccf2ff1279a3dea5d5517ec0d6641927@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+                  "node:mn-8c6b923e1a8c65fbdcd4862d4f0813b7a34e590df9d2c08bd00e5e0bf10ea6c3@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+                ],
+                "projected_response_object_refs": [
+                  "node:mn-8c6b923e1a8c65fbdcd4862d4f0813b7a34e590df9d2c08bd00e5e0bf10ea6c3@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+                  "node:mn-557865c38a5d610e12dbc4a9f50b0f48ccf2ff1279a3dea5d5517ec0d6641927@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+                ],
+                "preserved_difference_refs": []
+              }
+            ],
+            "body_status": "GENERATED",
+            "schema_version": "cocolon.cmee.emlis_thread_artifact.v1",
+            "history_line": null,
+            "history_line_plan": null,
+            "interpretive_frames": []
+          },
+          "meaning_graph": {
+            "graph_id": "graph-5e5d84b2ee8717da23ff9e68f1d3b4558b37a375a267089330e39bdf6ea37fb9",
+            "source_envelope_id": "emlis-q3-source-prefix-46038f4ff56609cadf64aebc67175f8402d6975c966fdeb4f21f61eb28dd9261",
+            "nodes": [
+              {
+                "node_id": "mn-8c6b923e1a8c65fbdcd4862d4f0813b7a34e590df9d2c08bd00e5e0bf10ea6c3",
+                "owner_id": "owner-990e35a6e361f9fa87913b057e05fd965ebe5a643f5de0f4a7b578932028ebdb",
+                "node_kind": "reaction",
+                "grounding_kind": "explicit",
+                "value": "うれしかったけど、どこがうれしかったかはまだ曖昧",
+                "epistemic_state": "SOURCE_EXPLICIT",
+                "evidence_ids": [
+                  "ev-867aada7ad7a937b15b3eb8f"
+                ]
+              },
+              {
+                "node_id": "mn-557865c38a5d610e12dbc4a9f50b0f48ccf2ff1279a3dea5d5517ec0d6641927",
+                "owner_id": "owner-0d7754b5d06c93eb905930effd4a4f9489e015f0584c96d8ccf2c9423d766ad0",
+                "node_kind": "action",
+                "grounding_kind": "explicit",
+                "value": "打合せで後輩に説明を任せて、最後まで聞いた",
+                "epistemic_state": "SOURCE_EXPLICIT",
+                "evidence_ids": [
+                  "ev-0880f935e8200f8c8eaf15dc"
+                ]
+              },
+              {
+                "node_id": "mn-cfbde99fd9088554805fa06b6bd347e0baa6f3b5c91af4ee6c7f0d0900a089fc",
+                "owner_id": "owner-df237420572f116b404fbae48b5bbfe1132c3d4c2e809a45fb0d26fb4dc3be28",
+                "node_kind": "reaction",
+                "grounding_kind": "explicit",
+                "value": "喜び",
+                "epistemic_state": "SOURCE_EXPLICIT",
+                "evidence_ids": [
+                  "ev-e7598cd01b919047e3fb0086"
+                ]
+              },
+              {
+                "node_id": "mn-683abb066f36513f1cfd195d5858e47dd3ffdfdaf671b6413f81b15a412002ea",
+                "owner_id": "owner-bf9c55aa24c5ccd55101e91d87910db209fbb36b5817abd36045054a3a6ca079",
+                "node_kind": "reaction",
+                "grounding_kind": "explicit",
+                "value": "喜び",
+                "epistemic_state": "SOURCE_EXPLICIT",
+                "evidence_ids": [
+                  "ev-236aedf3c506d83ad6a31fb7"
+                ]
+              },
+              {
+                "node_id": "mn-e81a1bc8d415ad9cb8dce6e4583ba53d0dc3de611ae2a096614013d4c5196a79",
+                "owner_id": "owner-279e5d247b9c57284ba7dc1112e0f295541730952daa15ce0a88ada3a192390a",
+                "node_kind": "event",
+                "grounding_kind": "explicit",
+                "value": "仕事",
+                "epistemic_state": "SOURCE_EXPLICIT",
+                "evidence_ids": [
+                  "ev-41a03c146ad1e4de7803ca7e"
+                ]
+              }
+            ],
+            "edges": [
+              {
+                "edge_id": "me-945a9a586810468f4e59f654a336d9db4690fb89f2a75138a5d71a51bc365aca",
+                "owner_id": "owner-6bfaade2da2114437797b01d5d6f961dbc7b1d6f20e647ebfeb65f7cca3db845",
+                "relation": "action_supports_change",
+                "source_node_id": "mn-8c6b923e1a8c65fbdcd4862d4f0813b7a34e590df9d2c08bd00e5e0bf10ea6c3",
+                "target_node_id": "mn-557865c38a5d610e12dbc4a9f50b0f48ccf2ff1279a3dea5d5517ec0d6641927",
+                "grounding_kind": "bounded_structural_inference",
+                "epistemic_state": "SOURCE_EXPLICIT",
+                "evidence_ids": [
+                  "ev-867aada7ad7a937b15b3eb8f",
+                  "ev-0880f935e8200f8c8eaf15dc"
+                ]
+              }
+            ],
+            "owner_dispositions": [
+              {
+                "meaning_owner_id": "owner-990e35a6e361f9fa87913b057e05fd965ebe5a643f5de0f4a7b578932028ebdb",
+                "owner_class": "REQUIRED",
+                "resolver_resolution": "UNIQUE",
+                "attachment_admission": "PROVISIONAL_ONLY",
+                "visible_authority": "SOURCE_EXPLICIT",
+                "source_owner_disposition": "SOURCE_EXPLICIT_VISIBLE",
+                "visible_claim_refs": [
+                  "mn-8c6b923e1a8c65fbdcd4862d4f0813b7a34e590df9d2c08bd00e5e0bf10ea6c3"
+                ],
+                "evidence_refs": [
+                  "ev-867aada7ad7a937b15b3eb8f"
+                ],
+                "target_unknown_ref": null,
+                "reason_codes": [
+                  "versioned_source_bound"
+                ]
+              },
+              {
+                "meaning_owner_id": "owner-0d7754b5d06c93eb905930effd4a4f9489e015f0584c96d8ccf2c9423d766ad0",
+                "owner_class": "REQUIRED",
+                "resolver_resolution": "UNIQUE",
+                "attachment_admission": "PROVISIONAL_ONLY",
+                "visible_authority": "SOURCE_EXPLICIT",
+                "source_owner_disposition": "SOURCE_EXPLICIT_VISIBLE",
+                "visible_claim_refs": [
+                  "mn-557865c38a5d610e12dbc4a9f50b0f48ccf2ff1279a3dea5d5517ec0d6641927"
+                ],
+                "evidence_refs": [
+                  "ev-0880f935e8200f8c8eaf15dc"
+                ],
+                "target_unknown_ref": null,
+                "reason_codes": [
+                  "versioned_source_bound"
+                ]
+              },
+              {
+                "meaning_owner_id": "owner-df237420572f116b404fbae48b5bbfe1132c3d4c2e809a45fb0d26fb4dc3be28",
+                "owner_class": "ACTIVE_OPTIONAL",
+                "resolver_resolution": "UNIQUE",
+                "attachment_admission": "PROVISIONAL_ONLY",
+                "visible_authority": "SOURCE_EXPLICIT",
+                "source_owner_disposition": "SOURCE_EXPLICIT_VISIBLE",
+                "visible_claim_refs": [
+                  "mn-cfbde99fd9088554805fa06b6bd347e0baa6f3b5c91af4ee6c7f0d0900a089fc"
+                ],
+                "evidence_refs": [
+                  "ev-e7598cd01b919047e3fb0086"
+                ],
+                "target_unknown_ref": null,
+                "reason_codes": [
+                  "versioned_source_bound"
+                ]
+              },
+              {
+                "meaning_owner_id": "owner-bf9c55aa24c5ccd55101e91d87910db209fbb36b5817abd36045054a3a6ca079",
+                "owner_class": "ACTIVE_OPTIONAL",
+                "resolver_resolution": "UNIQUE",
+                "attachment_admission": "PROVISIONAL_ONLY",
+                "visible_authority": "SOURCE_EXPLICIT",
+                "source_owner_disposition": "SOURCE_EXPLICIT_VISIBLE",
+                "visible_claim_refs": [
+                  "mn-683abb066f36513f1cfd195d5858e47dd3ffdfdaf671b6413f81b15a412002ea"
+                ],
+                "evidence_refs": [
+                  "ev-236aedf3c506d83ad6a31fb7"
+                ],
+                "target_unknown_ref": null,
+                "reason_codes": [
+                  "versioned_source_bound"
+                ]
+              },
+              {
+                "meaning_owner_id": "owner-279e5d247b9c57284ba7dc1112e0f295541730952daa15ce0a88ada3a192390a",
+                "owner_class": "ACTIVE_OPTIONAL",
+                "resolver_resolution": "UNIQUE",
+                "attachment_admission": "PROVISIONAL_ONLY",
+                "visible_authority": "SOURCE_EXPLICIT",
+                "source_owner_disposition": "SOURCE_EXPLICIT_VISIBLE",
+                "visible_claim_refs": [
+                  "mn-e81a1bc8d415ad9cb8dce6e4583ba53d0dc3de611ae2a096614013d4c5196a79"
+                ],
+                "evidence_refs": [
+                  "ev-41a03c146ad1e4de7803ca7e"
+                ],
+                "target_unknown_ref": null,
+                "reason_codes": [
+                  "versioned_source_bound"
+                ]
+              },
+              {
+                "meaning_owner_id": "owner-6bfaade2da2114437797b01d5d6f961dbc7b1d6f20e647ebfeb65f7cca3db845",
+                "owner_class": "ACTIVE_OPTIONAL",
+                "resolver_resolution": "UNIQUE",
+                "attachment_admission": "PROVISIONAL_ONLY",
+                "visible_authority": "SOURCE_EXPLICIT",
+                "source_owner_disposition": "SOURCE_EXPLICIT_VISIBLE",
+                "visible_claim_refs": [
+                  "me-945a9a586810468f4e59f654a336d9db4690fb89f2a75138a5d71a51bc365aca"
+                ],
+                "evidence_refs": [
+                  "ev-867aada7ad7a937b15b3eb8f",
+                  "ev-0880f935e8200f8c8eaf15dc"
+                ],
+                "target_unknown_ref": null,
+                "reason_codes": [
+                  "versioned_source_bound"
+                ]
+              }
+            ],
+            "required_owner_refs": [
+              "owner-990e35a6e361f9fa87913b057e05fd965ebe5a643f5de0f4a7b578932028ebdb",
+              "owner-0d7754b5d06c93eb905930effd4a4f9489e015f0584c96d8ccf2c9423d766ad0"
+            ],
+            "active_optional_owner_refs": [
+              "owner-df237420572f116b404fbae48b5bbfe1132c3d4c2e809a45fb0d26fb4dc3be28",
+              "owner-bf9c55aa24c5ccd55101e91d87910db209fbb36b5817abd36045054a3a6ca079",
+              "owner-279e5d247b9c57284ba7dc1112e0f295541730952daa15ce0a88ada3a192390a",
+              "owner-6bfaade2da2114437797b01d5d6f961dbc7b1d6f20e647ebfeb65f7cca3db845"
+            ],
+            "source_version": "cocolon.cmee.emlis_thread.q3.v1",
+            "obligation_version": "cocolon.cmee.emlis_thread_obligations.v1",
+            "owner_universe_digest": "owner-universe-d30146ba7c9c749faf6400b075d7f7882c23ab318953af1aab1be0a83aeb1357"
+          },
+          "reason_codes": [
+            "emlis_thread_body_generated"
+          ]
+        },
+        "question_decision": {
+          "disposition": "END",
+          "target_ref": null,
+          "target_kind": null,
+          "supporting_evidence_refs": [],
+          "missing_dimension": null,
+          "affected_meaning_refs": [],
+          "affected_reception_refs": [],
+          "asked_target_refs": [],
+          "decision_reason": "no_bound_personal_meaning_target"
+        },
+        "question": null,
+        "meaning_checkpoint": {
+          "checkpoint_id": "emlis-checkpoint-099dee65aa957d3980b0d14ae5abb6933d773bee6514fee404f8dc6010f8c483",
+          "source_prefix_ref": "emlis-q3-source-prefix-46038f4ff56609cadf64aebc67175f8402d6975c966fdeb4f21f61eb28dd9261",
+          "base_meaning_ref": "emlis-base-meaning-4c6233a9f8a6a69b2310bb2ab6225a57f820a9c392f36ed09d6822a499d61c95",
+          "answer_update": null,
+          "assessment_status": "RESOLVED",
+          "accepted_update_refs": [],
+          "inactive_claim_refs": [],
+          "unresolved_parts": [],
+          "semantic_schema_version": "cocolon.cmee.emlis_answer_meaning.v1"
+        },
+        "body_sufficiency": "SUFFICIENT",
+        "body_state": "FINAL",
+        "reason_codes": [
+          "no_bound_personal_meaning_target"
+        ],
+        "schema_version": "cocolon.cmee.emlis_thread.v1",
+        "automatic_progression": false
+      },
+      "wall_seconds": 8.004209218000142
+    },
+    {
+      "case_id": "E02-B",
+      "execution_status": "N_A_NO_ACTUAL_PENDING_QUESTION",
+      "wall_seconds": 6.559000212291721e-06
+    },
+    {
+      "case_id": "P01-N",
+      "execution_status": "COMPLETED",
+      "output": {
+        "status": "UNAVAILABLE",
+        "contract_code": "PIECE_CONTENT_UNAVAILABLE",
+        "reason_detail": "saved_emotion_meaning_not_yet_supported",
+        "candidate": null
+      },
+      "wall_seconds": 0.006104996999965806
+    },
+    {
+      "case_id": "A02-P1",
+      "execution_status": "COMPLETED",
+      "output": {
+        "outcome": {
+          "core_id": "analysis",
+          "execution_mode": "OFFLINE_CANDIDATE",
+          "status": "UNAVAILABLE",
+          "reason_codes": [
+            "analysis_observed_route_not_established"
+          ],
+          "artifact_present": false,
+          "production_enabled": false,
+          "record_effect": 0,
+          "automatic_progression": false
+        },
+        "artifact": null
+      },
+      "wall_seconds": 0.029598630999771558
+    }
+  ],
+  "finished_utc": "2026-10-23T01:25:00.944460+00:00"
+}

@@ -1,0 +1,33 @@
+{
+  "schema": "cocolon.4b_unicode_fit32.v1",
+  "status": "COMPLETED_NOT_REPLAYABLE",
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "semantic_profile": "emlis_model_proposal.v1",
+  "initial_adapter_sha256": "ce644a5ba57dfcb9c8df047000cf45ba9ab32c1d09321d8a8da0f5a73fd6b0f4",
+  "distinct_targets": 2,
+  "passes": 16,
+  "max_optimizer_steps": 32,
+  "generation_case_ids": [
+    "FIT-FT-CHAIR-INITIAL",
+    "FIT-FT-CHAIR-AFTER-CORRECTION"
+  ],
+  "context_tokens": 8192,
+  "max_new_tokens": 2048,
+  "max_seconds": 1800,
+  "gpu_hourly_usd": 0.26,
+  "max_total_usd": 1,
+  "minimum_free_gib": 14.0,
+  "gpu_run_authorized": false,
+  "automatic_pod_stop": false,
+  "pod_id": "y0eb0w0qn6nks0",
+  "storage": "Existing 50GB container overlay; not durable",
+  "external_receipt": "Off-Pod archive member/adapter validation and durable storage; GPU remains running",
+  "dataset_manifest_sha256": "727fde1474c86c497e79ee3e6c8110dc8194b546f63fa8f238842701d848d69b",
+  "baseline_raw_sha256": "fea4599b5bf686104bdfdcc88df378399f9f8bab684c62ccc60341579806cae3",
+  "basis": "Mash current instruction to continue 4B learning and CMEE connection; test adaptation to the new input, no replay of closed run",
+  "hypothesis": "The saved ce644 adapter was trained on the old prompt, not the full-field Unicode map and clarified contract instructions. Fit the unchanged two targets to these exact new messages once; keep prompt/targets/acceptance fixed.",
+  "notes": "New optimizer from saved adapter, not exact optimizer/RNG resume. Before=current unicode check raw2 reused byte-for-byte, after2 only. No further prompt change, new teacher, Pod/service/DB/deployment, retry, or automatic update extension. Known FIT only, not general quality.",
+  "completed_run_id": "20261025-043032-a3fef235",
+  "completed_source_commit": "4ad759792b8cfd820f44d72b233eb853a354ecb7"
+}

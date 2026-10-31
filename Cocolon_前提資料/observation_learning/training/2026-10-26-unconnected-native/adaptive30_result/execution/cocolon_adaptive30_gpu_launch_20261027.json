@@ -1,0 +1,32 @@
+{
+  "pid": 222461,
+  "command": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "2690s",
+    "python",
+    "-B",
+    "/workspace/cocolon_adaptive30_pack_20261027/run_adaptive30.py",
+    "--pack",
+    "/workspace/cocolon_adaptive30_pack_20261027",
+    "--execute",
+    "--source-commit",
+    "5c2fe64e89e2d5f87c24a85692ee19c5af1dc567"
+  ],
+  "source_commit": "5c2fe64e89e2d5f87c24a85692ee19c5af1dc567",
+  "started_unix": 1793094201.2401311,
+  "pending_plan_sha256": "054b108999be89e280f75edc3d03fc9de0a0e9eaf37d00cada2ab38dbb98e78d",
+  "authorized_plan_sha256": "be9372d59e0c6ff3c5af8a2f2428fc8b7b746e6c7f496482ef389dbb57b7e523",
+  "approval_delta": [
+    "status",
+    "gpu_run_authorized",
+    "approval_basis"
+  ],
+  "max_seconds": 2700,
+  "max_process_usd": 0.21,
+  "actual_model_run_limit": 1,
+  "retry": false,
+  "gpu_lifecycle_operations": 0,
+  "automatic_progression": false
+}

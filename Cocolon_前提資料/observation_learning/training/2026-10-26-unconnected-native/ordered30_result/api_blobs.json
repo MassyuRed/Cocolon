@@ -1,0 +1,8 @@
+{
+  "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py": "aadfdf6411e7a8da115adf36cf3c1e8b46932f01",
+  "ai/services/ai_inference/cocolon_meaning_experience_engine/model_candidate_source.py": "14d0ac0b0cba41d391f757020ee18e609f4626b1",
+  "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py": "55e76cf43fe1f78df37d8978ff71ce517073e366",
+  "ai/services/ai_inference/emlis_ai_grounded_observation_gate.py": "4fb2d75d410b9c16d2f84b96154ed8ce9ab46438",
+  "ai/tests/test_cmee_emlis_sixrow.py": "5538e7ae269393937585615a2e00a3919bd33277",
+  "ai/tests/fixtures/cmee_emlis_sixrow_v3.json": "fb59debc39301b019807299ebc9c86198aa5e089"
+}

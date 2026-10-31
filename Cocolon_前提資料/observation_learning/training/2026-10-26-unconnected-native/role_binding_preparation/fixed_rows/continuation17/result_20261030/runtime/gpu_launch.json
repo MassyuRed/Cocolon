@@ -1,0 +1,10 @@
+{
+  "pid": 381733,
+  "started_unix": 1793316065.4003751,
+  "source_commit": "3928b9571bc5465998c0c528d207177e212aca03",
+  "runner_sha256": "08c7bd3ef4e71f289f6aa81bd420877732d0b4fd9608961c092d17a3f2d8d14e",
+  "plan_sha256": "fb2e992773cdbd691e225eb8070937b204db229c2b6d28c30d7f2f3c4d511068",
+  "max_seconds": 2700,
+  "max_usd": 0.21,
+  "retry": false
+}

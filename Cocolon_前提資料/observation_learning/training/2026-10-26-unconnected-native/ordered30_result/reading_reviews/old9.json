@@ -1,0 +1,383 @@
+{
+  "status": "READ_ONLY_CONTENT_REVIEW_NOT_FORMAL_PRODUCT_ACCEPTANCE",
+  "cases": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "group": "old9",
+      "eos_reached": false,
+      "syntax_json_valid": false,
+      "strict_json_valid": false,
+      "strict_json_error": "Unterminated string starting at: line 1 column 9068 (char 9067)",
+      "output_tokens": 2560,
+      "receipt_status": "TOKEN_LIMIT",
+      "meaning_adopted": false,
+      "body_available": false,
+      "reason_code": "semantic_receipt_not_validated",
+      "cold_file_status": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT",
+      "teacher_parsed_equal": false,
+      "root_and_read_only_agent_read": true,
+      "formal_product_acceptance": false,
+      "reading": "2560token非EOS。引用4件しかないのに範囲外indexの関係を反復し、本文/問いへ未到達。claim kindと時点kindの混線、predicate.arguments欠落。初期/前回の旧9成立から退行。",
+      "baselines": {
+        "initial_1d": {
+          "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/interleaved30_result/after_TRAIN-SERVICE-CHAIR-01-INITIAL.jsonl",
+          "blob_sha": "bb8bc0ef4042ef9c67ca30af48f58cffbc4c62e0",
+          "eos_reached": true,
+          "strict_json_valid": true,
+          "strict_json_error": null,
+          "raw_utf8_sha256": "29994933c6116b8c88d1a00357f021c87ccd0362a8055b370f3434f92930e1f9",
+          "raw_text_equal": false,
+          "parsed_packet_equal": false
+        },
+        "prior_dd": {
+          "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/continuation30_result/after_TRAIN-SERVICE-CHAIR-01-INITIAL.jsonl",
+          "blob_sha": "f3ef84cc5420227e359d500bfaabdc03eac4b991",
+          "eos_reached": true,
+          "strict_json_valid": true,
+          "strict_json_error": null,
+          "raw_utf8_sha256": "29994933c6116b8c88d1a00357f021c87ccd0362a8055b370f3434f92930e1f9",
+          "raw_text_equal": false,
+          "parsed_packet_equal": false
+        }
+      }
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "group": "old9",
+      "eos_reached": true,
+      "syntax_json_valid": true,
+      "strict_json_valid": true,
+      "strict_json_error": null,
+      "output_tokens": 1558,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "meaning_adopted": false,
+      "body_available": false,
+      "reason_code": "model_claim_coverage_invalid",
+      "cold_file_status": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT",
+      "teacher_parsed_equal": false,
+      "root_and_read_only_agent_read": true,
+      "formal_product_acceptance": false,
+      "reading": "JSON完結でもclaims6→4/引用12→8/更新3→2。友人の指導と共同修理の意味/観測が欠落。reuse claim根拠7は実際「一緒に直しました」、時点sourceは元原文のまま。update_noteへreuse語が露出。",
+      "baselines": {
+        "initial_1d": {
+          "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/interleaved30_result/after_TRAIN-SERVICE-CHAIR-01-CORRECTION.jsonl",
+          "blob_sha": "ffdccc9b720721db8469ab96cab1d5db0a05d436",
+          "eos_reached": true,
+          "strict_json_valid": true,
+          "strict_json_error": null,
+          "raw_utf8_sha256": "49b3296306aafdc78accd7b966205998f245e88673f6d7a42203266b53db2e12",
+          "raw_text_equal": false,
+          "parsed_packet_equal": false
+        },
+        "prior_dd": {
+          "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/continuation30_result/after_TRAIN-SERVICE-CHAIR-01-CORRECTION.jsonl",
+          "blob_sha": "275278a99739dfed9ed8f8485521dff5c941ab2e",
+          "eos_reached": true,
+          "strict_json_valid": true,
+          "strict_json_error": null,
+          "raw_utf8_sha256": "49b3296306aafdc78accd7b966205998f245e88673f6d7a42203266b53db2e12",
+          "raw_text_equal": false,
+          "parsed_packet_equal": false
+        }
+      }
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "group": "old9",
+      "eos_reached": true,
+      "syntax_json_valid": true,
+      "strict_json_valid": false,
+      "strict_json_error": "duplicate_json_key:schema_version",
+      "output_tokens": 1237,
+      "receipt_status": "INVALID_FORMAT",
+      "meaning_adopted": false,
+      "body_available": false,
+      "reason_code": "semantic_receipt_not_validated",
+      "cold_file_status": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT",
+      "teacher_parsed_equal": false,
+      "root_and_read_only_agent_read": true,
+      "formal_product_acceptance": false,
+      "reading": "EOSでも最上位schema_version重複。surface_proposalがcandidate外、引用4件に対しrelationがindex4/5、solo_appraisal_objectのIDも変形。文章が教師に近くても構造/引用/採用は成立しない。",
+      "baselines": {
+        "initial_1d": {
+          "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/interleaved30_result/after_TRAIN-SERVICE-CHAIR-02-INITIAL.jsonl",
+          "blob_sha": "2bb017cf9562b911fc922f4475ebff1d7667fb7b",
+          "eos_reached": true,
+          "strict_json_valid": true,
+          "strict_json_error": null,
+          "raw_utf8_sha256": "33d24cf7740145e4ce8951e3c04e57d9723a24dfdf1973c832ad629d4a1ce4ca",
+          "raw_text_equal": false,
+          "parsed_packet_equal": false
+        },
+        "prior_dd": {
+          "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/continuation30_result/after_TRAIN-SERVICE-CHAIR-02-INITIAL.jsonl",
+          "blob_sha": "d00f9e3d231a49a68014dec61aa8a8359080a703",
+          "eos_reached": true,
+          "strict_json_valid": true,
+          "strict_json_error": null,
+          "raw_utf8_sha256": "33d24cf7740145e4ce8951e3c04e57d9723a24dfdf1973c832ad629d4a1ce4ca",
+          "raw_text_equal": false,
+          "parsed_packet_equal": false
+        }
+      }
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "group": "old9",
+      "eos_reached": true,
+      "syntax_json_valid": true,
+      "strict_json_valid": true,
+      "strict_json_error": null,
+      "output_tokens": 1450,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "meaning_adopted": false,
+      "body_available": false,
+      "reason_code": "model_evidence_out_of_scope",
+      "cold_file_status": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT",
+      "teacher_parsed_equal": false,
+      "root_and_read_only_agent_read": true,
+      "formal_product_acceptance": false,
+      "reading": "claims6→4/引用12→8/更新3→1。共同修理/指導・旧solo対象の改訂・gap失効が欠落。喜び関係の根拠7は「一人でできたからではなく、」だけ。本文の一般観測へ後退。",
+      "baselines": {
+        "initial_1d": {
+          "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/interleaved30_result/after_TRAIN-SERVICE-CHAIR-02-CORRECTION.jsonl",
+          "blob_sha": "cff4ce8be105a1a7b6213746152d45b03768e34f",
+          "eos_reached": true,
+          "strict_json_valid": true,
+          "strict_json_error": null,
+          "raw_utf8_sha256": "08854f1d8dd227693522887245955c36830becaa34cf6ccaa53973c237ade923",
+          "raw_text_equal": false,
+          "parsed_packet_equal": false
+        },
+        "prior_dd": {
+          "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/continuation30_result/after_TRAIN-SERVICE-CHAIR-02-CORRECTION.jsonl",
+          "blob_sha": "2680735fe99f1d968f3b1da896794d1d3281becd",
+          "eos_reached": true,
+          "strict_json_valid": true,
+          "strict_json_error": null,
+          "raw_utf8_sha256": "08854f1d8dd227693522887245955c36830becaa34cf6ccaa53973c237ade923",
+          "raw_text_equal": false,
+          "parsed_packet_equal": false
+        }
+      }
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "group": "old9",
+      "eos_reached": true,
+      "syntax_json_valid": true,
+      "strict_json_valid": false,
+      "strict_json_error": "duplicate_json_key:schema_version",
+      "output_tokens": 1229,
+      "receipt_status": "INVALID_FORMAT",
+      "meaning_adopted": false,
+      "body_available": false,
+      "reason_code": "semantic_receipt_not_validated",
+      "cold_file_status": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT",
+      "teacher_parsed_equal": false,
+      "root_and_read_only_agent_read": true,
+      "formal_product_acceptance": false,
+      "reading": "CHAIR02と同じ最上位schema重複・surface外出し・引用不足/index範囲外。旧9保持から退行。",
+      "baselines": {
+        "initial_1d": {
+          "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/interleaved30_result/after_TRAIN-SERVICE-CHAIR-03-INITIAL.jsonl",
+          "blob_sha": "cfe215a0293ca744a27179218ec8de0db797c3d3",
+          "eos_reached": true,
+          "strict_json_valid": true,
+          "strict_json_error": null,
+          "raw_utf8_sha256": "827d1b3ab8f35ffcc7e0127565f0c5f39827eb5c64b5d6796b721a0682ba57a8",
+          "raw_text_equal": false,
+          "parsed_packet_equal": false
+        },
+        "prior_dd": {
+          "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/continuation30_result/after_TRAIN-SERVICE-CHAIR-03-INITIAL.jsonl",
+          "blob_sha": "a09f5f3e5ac11c4a78a80441aabccaddf31fcc82",
+          "eos_reached": true,
+          "strict_json_valid": true,
+          "strict_json_error": null,
+          "raw_utf8_sha256": "827d1b3ab8f35ffcc7e0127565f0c5f39827eb5c64b5d6796b721a0682ba57a8",
+          "raw_text_equal": false,
+          "parsed_packet_equal": false
+        }
+      }
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "group": "old9",
+      "eos_reached": true,
+      "syntax_json_valid": true,
+      "strict_json_valid": true,
+      "strict_json_error": null,
+      "output_tokens": 2259,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "meaning_adopted": false,
+      "body_available": false,
+      "reason_code": "model_evidence_out_of_scope",
+      "cold_file_status": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT",
+      "teacher_parsed_equal": false,
+      "root_and_read_only_agent_read": true,
+      "formal_product_acceptance": false,
+      "reading": "本人向け3本文は教師/初期と一致し共同修理/再利用の喜びは文章上保持。ただし引用12→11、更新3→4、solo対象REVISE二重化。全更新の根拠5は元の喜び文で、本人訂正文の引用が欠ける。本文一致を意味/更新整合へ数えない。",
+      "baselines": {
+        "initial_1d": {
+          "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/interleaved30_result/after_TRAIN-SERVICE-CHAIR-03-CORRECTION.jsonl",
+          "blob_sha": "3eb58dfa41e74f40d225cf4f67e4f0c6df2f1a82",
+          "eos_reached": true,
+          "strict_json_valid": true,
+          "strict_json_error": null,
+          "raw_utf8_sha256": "ec4663c0b114ba5b051e203cbaecc5363ec5246cfeb0a2695d21576bf68d630b",
+          "raw_text_equal": false,
+          "parsed_packet_equal": false
+        },
+        "prior_dd": {
+          "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/continuation30_result/after_TRAIN-SERVICE-CHAIR-03-CORRECTION.jsonl",
+          "blob_sha": "e3ce87ad4983ce5e2295bf0972db6c654a8584c6",
+          "eos_reached": true,
+          "strict_json_valid": true,
+          "strict_json_error": null,
+          "raw_utf8_sha256": "ec4663c0b114ba5b051e203cbaecc5363ec5246cfeb0a2695d21576bf68d630b",
+          "raw_text_equal": false,
+          "parsed_packet_equal": false
+        }
+      }
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "group": "old9",
+      "eos_reached": true,
+      "syntax_json_valid": true,
+      "strict_json_valid": true,
+      "strict_json_error": null,
+      "output_tokens": 1586,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "meaning_adopted": true,
+      "body_available": true,
+      "reason_code": null,
+      "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL",
+      "teacher_parsed_equal": true,
+      "root_and_read_only_agent_read": true,
+      "formal_product_acceptance": false,
+      "reading": "parsed packet全値が教師/初期/前回と一致。帰宅→うどんを作り食べた→温かいものを食べ少し落ち着いた内容を保持。実CMEE本文も一致、問い/更新なし。",
+      "baselines": {
+        "initial_1d": {
+          "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/interleaved30_result/after_TRAIN-DAILY-CALM-01-INITIAL.jsonl",
+          "blob_sha": "84a51e31cb917f15becf8e5905118b7183b7ae54",
+          "eos_reached": true,
+          "strict_json_valid": true,
+          "strict_json_error": null,
+          "raw_utf8_sha256": "af6a9574ff45e693a66974cc273f41db1060d1bf0b8ed0d21c9f56ace7072e6e",
+          "raw_text_equal": true,
+          "parsed_packet_equal": true
+        },
+        "prior_dd": {
+          "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/continuation30_result/after_TRAIN-DAILY-CALM-01-INITIAL.jsonl",
+          "blob_sha": "1fef45aa376f22653582c93a0c0ae1f458895af1",
+          "eos_reached": true,
+          "strict_json_valid": true,
+          "strict_json_error": null,
+          "raw_utf8_sha256": "af6a9574ff45e693a66974cc273f41db1060d1bf0b8ed0d21c9f56ace7072e6e",
+          "raw_text_equal": true,
+          "parsed_packet_equal": true
+        }
+      },
+      "actual_body": {
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      },
+      "actual_question": null
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "group": "old9",
+      "eos_reached": true,
+      "syntax_json_valid": true,
+      "strict_json_valid": true,
+      "strict_json_error": null,
+      "output_tokens": 1560,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "meaning_adopted": true,
+      "body_available": true,
+      "reason_code": null,
+      "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL",
+      "teacher_parsed_equal": true,
+      "root_and_read_only_agent_read": true,
+      "formal_product_acceptance": false,
+      "reading": "DAILY01と同じ言語内容の別ID。parsed packet全値と実本文が教師/両baseline一致。3件を別language familyの未知一般化へ数えない。",
+      "baselines": {
+        "initial_1d": {
+          "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/interleaved30_result/after_TRAIN-DAILY-CALM-02-INITIAL.jsonl",
+          "blob_sha": "5047d29999b3b9aa4c48c4f3605069a44c03176f",
+          "eos_reached": true,
+          "strict_json_valid": true,
+          "strict_json_error": null,
+          "raw_utf8_sha256": "b2a913ab9e46ba91f828a83551e08034d1d85bbabe054a709018f0842ab67cd6",
+          "raw_text_equal": true,
+          "parsed_packet_equal": true
+        },
+        "prior_dd": {
+          "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/continuation30_result/after_TRAIN-DAILY-CALM-02-INITIAL.jsonl",
+          "blob_sha": "0f0d8dc02650cde1b5ef778fcaf95e8a76855ba3",
+          "eos_reached": true,
+          "strict_json_valid": true,
+          "strict_json_error": null,
+          "raw_utf8_sha256": "b2a913ab9e46ba91f828a83551e08034d1d85bbabe054a709018f0842ab67cd6",
+          "raw_text_equal": true,
+          "parsed_packet_equal": true
+        }
+      },
+      "actual_body": {
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      },
+      "actual_question": null
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "group": "old9",
+      "eos_reached": true,
+      "syntax_json_valid": true,
+      "strict_json_valid": true,
+      "strict_json_error": null,
+      "output_tokens": 1599,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "meaning_adopted": true,
+      "body_available": true,
+      "reason_code": null,
+      "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL",
+      "teacher_parsed_equal": true,
+      "root_and_read_only_agent_read": true,
+      "formal_product_acceptance": false,
+      "reading": "DAILY01と同じ言語内容の別ID。parsed packet全値と実本文が教師/両baseline一致。",
+      "baselines": {
+        "initial_1d": {
+          "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/interleaved30_result/after_TRAIN-DAILY-CALM-03-INITIAL.jsonl",
+          "blob_sha": "8b838bbaa9af9e97cfd7c2e03fefcb37c074c736",
+          "eos_reached": true,
+          "strict_json_valid": true,
+          "strict_json_error": null,
+          "raw_utf8_sha256": "768f25f00e01634d08854b109329a7e453e74964774b059813bf65d9cee547b1",
+          "raw_text_equal": true,
+          "parsed_packet_equal": true
+        },
+        "prior_dd": {
+          "source_path": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/continuation30_result/after_TRAIN-DAILY-CALM-03-INITIAL.jsonl",
+          "blob_sha": "2d1ec0647e5dd5a13c7f0fc073f3a8749c0c77f6",
+          "eos_reached": true,
+          "strict_json_valid": true,
+          "strict_json_error": null,
+          "raw_utf8_sha256": "768f25f00e01634d08854b109329a7e453e74964774b059813bf65d9cee547b1",
+          "raw_text_equal": true,
+          "parsed_packet_equal": true
+        }
+      },
+      "actual_body": {
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      },
+      "actual_question": null
+    }
+  ]
+}

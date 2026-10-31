@@ -141,7 +141,7 @@ test('App root wires providers through Phase 9 navigation/runtime split modules'
     'syncPushTokenOnce({ userId })',
     'startPushTokenSync({ userId })',
     'tryOpenRouteIfPending();',
-    '<MainTabs key={`main-tabs-${tutorialResetToken || 0}`} />',
+    '<MainTabs key={`main-tabs-${session.user.id}-${tutorialResetToken || 0}`} />',
   ], 'RootNavigator.js');
 
   assertIncludes(mainTabs, [
@@ -213,9 +213,6 @@ test('InputScreen keeps the emotion input, Emlis reply, draft, today question, a
 
   assertIncludes(input, [
     'import { submitEmotionInput } from "../lib/api/home/emotionSubmitApi";',
-    'previewEmotionPiece',
-    'publishEmotionPiece',
-    'cancelEmotionPiece',
     'InputPiecePreviewController',
     'TodayQuestionCard',
     'InputStartupModals',
@@ -393,8 +390,9 @@ test('InputScreen keeps the emotion input, Emlis reply, draft, today question, a
   ], 'InputPiecePreviewController.js');
 
   assertRegex(input, /await\s+submitEmotionInput\(/, 'emotion submit call');
-  assertRegex(input, /await\s+previewEmotionPiece\(/, 'Piece preview call');
-  assertRegex(input, /await\s+publishEmotionPiece\(/, 'Piece publish call');
+  assertNotIncludes(input, ['previewEmotionPiece', 'publishEmotionPiece', 'cancelEmotionPiece',
+    '../lib/api/home/emotionPieceApi'], 'InputScreen must use the saved-input Piece v2 host, never raw legacy Piece HTTP');
+  assertIncludes(input, ['InputPieceActionArea', 'savedInput={savedPieceInput.savedInput}'], 'saved-input Piece route');
   assertIncludes(input, [
     'const openedObservation = openInputFeedbackModal',
     'if (!openedObservation)',
@@ -1970,7 +1968,6 @@ test('Phase 10 Emlis observation release gate keeps regression and release-ready
     'observationStatus: inputFeedbackAI?.observation_status',
     'if (!openedObservation)',
     'showToast(`記録しました',
-    'showToast("ピースを生成しました")',
     'completeTutorialAfterReply();',
   ], 'InputScreen.js non-passed observation fallback behavior');
 
@@ -4331,4 +4328,3 @@ test('P10 Gate Recovery public boundary RN contract keeps backend-owned passed p
   assert.equal(isPassedEmlisObservationReply(metaOnlyGateRecoveryPayload), false);
   assert.equal(buildPassedEmlisObservationModalPayload(metaOnlyGateRecoveryPayload), null);
 });
-

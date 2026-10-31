@@ -1,0 +1,195 @@
+{
+  "scope": "All result directory files except this self-referential manifest; Git blob/read-back covers this file",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 8669,
+      "sha256": "b0e47651db9a9a591d11491718c591ae7438b82ba1f27b4578b2602714be9db6"
+    },
+    {
+      "path": "adapter_README.md",
+      "bytes": 5184,
+      "sha256": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885"
+    },
+    {
+      "path": "adapter_config.json",
+      "bytes": 1674,
+      "sha256": "db3ed15f287924089bdcdc4b057f93f3173df8026bcf3aaaaf65557916bef519"
+    },
+    {
+      "path": "after_FT-BOOK-AFTER-ANSWER.jsonl",
+      "bytes": 26101,
+      "sha256": "ee1bbefcbcbf5742a05bd85c9235fcedd73d26bc9371e50a5b2dcd1bb96ee433"
+    },
+    {
+      "path": "after_FT-SHOP-AFTER-ANSWER.jsonl",
+      "bytes": 40169,
+      "sha256": "1de3a28ced5e7cef3b9aaa403c51da7d394f24dcfd80da96e3517b65176b1330"
+    },
+    {
+      "path": "after_TRAIN-DAILY-CALM-01-INITIAL.jsonl",
+      "bytes": 21210,
+      "sha256": "6fb512ab83dd68b809af0ee5652e985c78d5510dec5005b71e9acaa7784ccf0c"
+    },
+    {
+      "path": "after_TRAIN-DAILY-CALM-02-INITIAL.jsonl",
+      "bytes": 21184,
+      "sha256": "5085f6d8e5169947c2d1e7114078543fa3c168e4daec129fce61a3ce01ea7c87"
+    },
+    {
+      "path": "after_TRAIN-DAILY-CALM-03-INITIAL.jsonl",
+      "bytes": 21223,
+      "sha256": "ea86fa1052d3dcff5542eb29ca1440e153fef1ee44d04cbeda2db704171258a2"
+    },
+    {
+      "path": "after_TRAIN-SERVICE-CHAIR-01-CORRECTION.jsonl",
+      "bytes": 29328,
+      "sha256": "f5b0648beeb382da59fb64ec9d04ea36327341a9e0345bc391667a4693647879"
+    },
+    {
+      "path": "after_TRAIN-SERVICE-CHAIR-01-INITIAL.jsonl",
+      "bytes": 18583,
+      "sha256": "016df15a7c3d859fe9fa7123b1fdf620446eaaac1556f92545fd33a3c1fa1cb0"
+    },
+    {
+      "path": "after_TRAIN-SERVICE-CHAIR-02-CORRECTION.jsonl",
+      "bytes": 29345,
+      "sha256": "039e0ecd934f6f6170883a01cfadf0242c77b2191a0a061cd5f71804ce23fa94"
+    },
+    {
+      "path": "after_TRAIN-SERVICE-CHAIR-02-INITIAL.jsonl",
+      "bytes": 18584,
+      "sha256": "26d9d6babb46862b66a35b129fb43a77523e39e2c7213b252548eabcefab116a"
+    },
+    {
+      "path": "after_TRAIN-SERVICE-CHAIR-03-CORRECTION.jsonl",
+      "bytes": 29412,
+      "sha256": "02cec380cb0c247f1feaa2548fa235d3f4e669deef9f863912575a7e0da23858"
+    },
+    {
+      "path": "after_TRAIN-SERVICE-CHAIR-03-INITIAL.jsonl",
+      "bytes": 18584,
+      "sha256": "ba5eb0afd874b99c8aaa2d0f45dccdbbdc914aa471375173a546036f22305029"
+    },
+    {
+      "path": "archive_manifest.json",
+      "bytes": 56137,
+      "sha256": "9e5737f76cf190fed2bed29f120315ba24b7e616c0bfcb186a10f2828a806fe6"
+    },
+    {
+      "path": "cmee_originals.zip",
+      "bytes": 286375,
+      "sha256": "fa1c544f98d46542a872bf45d0d121eceb79795bbcb0f3b4001c07d81f65d3e5"
+    },
+    {
+      "path": "cmee_originals_manifest.json",
+      "bytes": 3148,
+      "sha256": "8b60ef07a29fb3e3c1b69f7b0c8c1d2ca6b3a32cc696409354835ec521d03653"
+    },
+    {
+      "path": "cmee_summary.json",
+      "bytes": 7606,
+      "sha256": "9ac1d97b3e894ad5130951a6eb57ef6c9368695c00df0ef5d1cc81dcdc310aa8"
+    },
+    {
+      "path": "content_review.md",
+      "bytes": 3287,
+      "sha256": "39a3cad9b6499a102a6f50a20fec95ee4cd279aeb847ca81ba71070ff51f63dc"
+    },
+    {
+      "path": "execute_once.lock",
+      "bytes": 41,
+      "sha256": "5caa3672240ff762c95c51c4dde520693c369f3a095600de7cde405978b5b715"
+    },
+    {
+      "path": "export_rehearsal13.py",
+      "bytes": 4455,
+      "sha256": "0001af96ff973a8676d7ab6da8aa8387d8cee59d6c66293fb90aca11b394fb99"
+    },
+    {
+      "path": "external_verification.json",
+      "bytes": 3918,
+      "sha256": "61681fee35f1ab6063d73e896b8747b9a47d883647e95bf9b8e32e31d1f2c70d"
+    },
+    {
+      "path": "gpu_launch.json",
+      "bytes": 300,
+      "sha256": "b442d238d27d523f25100ccaf4af1f7e8ba29f03136c6f0591506302c1aaadbb"
+    },
+    {
+      "path": "initial_loaded_tensors.json",
+      "bytes": 26025,
+      "sha256": "344fb1d91a03a875d1587bcc05438d578858c5a7cf99c8458d54e9281f84e823"
+    },
+    {
+      "path": "launch_checkpoint.json",
+      "bytes": 878,
+      "sha256": "c224f9c6a07f24db079f7099ae745ddcee09daca238f44993a5ac8f1bbe263a2"
+    },
+    {
+      "path": "launch_command.txt",
+      "bytes": 309,
+      "sha256": "4431c264aa6381f3bb3413380ead86e87468e294bf17a9f19614bd9342355b16"
+    },
+    {
+      "path": "preservation_receipt.json",
+      "bytes": 484,
+      "sha256": "6c98369af8fc08667fc15fc215eab33de4439a087a2a04ade8c3afc726b379be"
+    },
+    {
+      "path": "rehearsal13-cmee.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "rehearsal13-cmee.log",
+      "bytes": 330,
+      "sha256": "760e8181e83e828ad2c22618ae5f8759d6a99fd0c374988421e5e7525fdbee75"
+    },
+    {
+      "path": "rehearsal13-gpu.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+    },
+    {
+      "path": "rehearsal13-gpu.log",
+      "bytes": 4365,
+      "sha256": "bdd80b26cc5e70bc29521b4b0ad6bbec979fc5d95d4e95cd9f9392c85b77461a"
+    },
+    {
+      "path": "reloaded_tensors.json",
+      "bytes": 26030,
+      "sha256": "8022d25204cf994b831c41e2154033adccfbc6b409c021cde9854961ad9b2459"
+    },
+    {
+      "path": "run.json",
+      "bytes": 11537,
+      "sha256": "a353fa24cf6dd609fb538be824e7e712071de653525bc086c9273011100eebd5"
+    },
+    {
+      "path": "runtime_authorized_plan.json",
+      "bytes": 5089,
+      "sha256": "b5a4d05f65a5116d7fd2c33fa42e55ff87fc0a6b194692e3e2af9a3f724bf108"
+    },
+    {
+      "path": "runtime_run_rehearsal13.py",
+      "bytes": 13297,
+      "sha256": "11ade2f87c044c108c3a6d03c6d24e39fc5f9b4ce734ded1b9b24deb273c54e1"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 2068,
+      "sha256": "d24cac4e19cfcae6c52fc71d4dd72d7d9defdfbce169a7ec6b11a9d0ce404791"
+    },
+    {
+      "path": "training.jsonl",
+      "bytes": 2422,
+      "sha256": "d886ffd37b6bd4083510ddc6ebbfdd8e44d43607392c2c5d3a141e6b976ad564"
+    },
+    {
+      "path": "verify_recovered.py",
+      "bytes": 8673,
+      "sha256": "11a607d9b9beea59ecdf692d1554b523b06119e15b1175fab0ea84408b90931b"
+    }
+  ]
+}

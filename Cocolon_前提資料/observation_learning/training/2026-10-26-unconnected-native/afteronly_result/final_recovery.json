@@ -1,0 +1,19 @@
+{
+  "archive_bytes": 3654453,
+  "archive_sha256": "945a26744afaa618bb09fc53a6e0b07bbdfdfbd49d57937849f4d2772e3efe4b",
+  "members": 51,
+  "manifest_verified": 50,
+  "finite_tensors": 32,
+  "adapter_sha256": "278fdc26e56c2cd84b39bec19d484374d4504c656fbd5d1f8112d006e8c6457d",
+  "source_commit": "9a6c56ed5657e50e31cef50bab0015fc5e6484f9",
+  "run_status": "RAW_COMPLETE_PENDING_CMEE_AND_CONTENT_REVIEW",
+  "updates": 15,
+  "model_calls_completed": 15,
+  "seconds": 1190.5311623900197,
+  "meaning": 3,
+  "body": 3,
+  "cold": 3,
+  "cold_failures": 0,
+  "library_file_id": "libfile_4756727c2f4c81918fb24227734d4269",
+  "library_version": 1
+}

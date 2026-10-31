@@ -1,0 +1,259 @@
+{
+  "status": "CPU_STAGE5_READY_NO_MODEL",
+  "seconds": 31.464283687993884,
+  "counts": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER/stage1",
+      "prompt_tokens": 4467,
+      "target_tokens": 492,
+      "total_tokens": 4959,
+      "cap": 640
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER/stage2",
+      "prompt_tokens": 4964,
+      "target_tokens": 899,
+      "total_tokens": 5863,
+      "cap": 1152
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER/stage3",
+      "prompt_tokens": 5866,
+      "target_tokens": 283,
+      "total_tokens": 6149,
+      "cap": 512
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER/stage4",
+      "prompt_tokens": 6140,
+      "target_tokens": 267,
+      "total_tokens": 6407,
+      "cap": 512
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER/stage5",
+      "prompt_tokens": 6419,
+      "target_tokens": 220,
+      "total_tokens": 6639,
+      "cap": 384
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage1",
+      "prompt_tokens": 4619,
+      "target_tokens": 523,
+      "total_tokens": 5142,
+      "cap": 768
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage2",
+      "prompt_tokens": 5147,
+      "target_tokens": 1094,
+      "total_tokens": 6241,
+      "cap": 1280
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage3",
+      "prompt_tokens": 6244,
+      "target_tokens": 236,
+      "total_tokens": 6480,
+      "cap": 384
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage4",
+      "prompt_tokens": 6471,
+      "target_tokens": 291,
+      "total_tokens": 6762,
+      "cap": 512
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER/stage5",
+      "prompt_tokens": 6774,
+      "target_tokens": 293,
+      "total_tokens": 7067,
+      "cap": 512
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "prompt_tokens": 1750,
+      "target_tokens": 1331,
+      "total_tokens": 3081,
+      "cap": 2560
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "prompt_tokens": 3827,
+      "target_tokens": 2228,
+      "total_tokens": 6055,
+      "cap": 2560
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "prompt_tokens": 1746,
+      "target_tokens": 1331,
+      "total_tokens": 3077,
+      "cap": 2560
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "prompt_tokens": 3842,
+      "target_tokens": 2231,
+      "total_tokens": 6073,
+      "cap": 2560
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "prompt_tokens": 1743,
+      "target_tokens": 1321,
+      "total_tokens": 3064,
+      "cap": 2560
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "prompt_tokens": 3825,
+      "target_tokens": 2237,
+      "total_tokens": 6062,
+      "cap": 2560
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "prompt_tokens": 1778,
+      "target_tokens": 1585,
+      "total_tokens": 3363,
+      "cap": 2560
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "prompt_tokens": 1773,
+      "target_tokens": 1559,
+      "total_tokens": 3332,
+      "cap": 2560
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "prompt_tokens": 1777,
+      "target_tokens": 1598,
+      "total_tokens": 3375,
+      "cap": 2560
+    }
+  ],
+  "teacher_checks": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "provenance": {
+        "provider": "CPU_TEACHER_STAGED_PROJECTION_NOT_MODEL",
+        "exact_raw": true,
+        "exact_metadata": true,
+        "full_receipt_equal": true,
+        "stage_chain_in_external_archive": true,
+        "snapshot_itself_does_not_validate_stage_chain": true
+      },
+      "outcome": {
+        "case_id": "FT-BOOK-AFTER-ANSWER",
+        "meaning_adopted": true,
+        "body_available": true,
+        "cold_file_status": "COLD_FULL_OUTCOME_IDENTICAL"
+      }
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "provenance": {
+        "provider": "CPU_TEACHER_STAGED_PROJECTION_NOT_MODEL",
+        "exact_raw": true,
+        "exact_metadata": true,
+        "full_receipt_equal": true,
+        "stage_chain_in_external_archive": true,
+        "snapshot_itself_does_not_validate_stage_chain": true
+      },
+      "outcome": {
+        "case_id": "FT-SHOP-AFTER-ANSWER",
+        "meaning_adopted": true,
+        "body_available": true,
+        "cold_file_status": "COLD_FULL_OUTCOME_IDENTICAL"
+      }
+    }
+  ],
+  "old9_checks": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "receipt_checkpoint_full_outcome_identical": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "receipt_checkpoint_full_outcome_identical": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "receipt_checkpoint_full_outcome_identical": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "receipt_checkpoint_full_outcome_identical": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "receipt_checkpoint_full_outcome_identical": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "receipt_checkpoint_full_outcome_identical": true
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "receipt_checkpoint_full_outcome_identical": true
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "receipt_checkpoint_full_outcome_identical": true
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "receipt_checkpoint_full_outcome_identical": true
+    }
+  ],
+  "negatives": [
+    {
+      "kind": "missing",
+      "rejected": "incomplete_stage_records"
+    },
+    {
+      "kind": "duplicate",
+      "rejected": "incomplete_stage_records"
+    },
+    {
+      "kind": "swap_equal_arity",
+      "rejected": "stage_identity_or_order"
+    },
+    {
+      "kind": "wrong_adapter",
+      "rejected": "stage_model_identity"
+    },
+    {
+      "kind": "prompt_chain",
+      "rejected": "stage_prompt_chain"
+    },
+    {
+      "kind": "unfinished",
+      "rejected": "stage_not_finished"
+    },
+    {
+      "kind": "wrong_usage",
+      "rejected": "stage_usage"
+    },
+    {
+      "kind": "raw_hash",
+      "rejected": "stage_raw_hash"
+    }
+  ],
+  "prepared_sha256": "08670691b085d2b7d3ba6548661052f5bf04422a65134c3a49d89f03a86d0308",
+  "source_sha256": {
+    "consume_stage5.py": "92bf81c1ca52a72480753010efc911fc132c74f4208a533853feb70fc5650713",
+    "prepare_stage5.py": "d4dbf5af9bc5cc4cbcaa92691bab539dfb4fdf763a01a814ea1a0fdc3cdd43d7",
+    "run_stage5_once.py": "59311ef5f8caefa8aba26b1eee357fb69d32ca75ffd8aab63c4b1d857709eb83"
+  },
+  "model_loads": 0,
+  "model_forwards": 0,
+  "updates": 0,
+  "generations": 0,
+  "cuda_initialized": false,
+  "product_credit": 0
+}

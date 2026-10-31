@@ -1,0 +1,13 @@
+{"step": 1, "id": "FT-UDON-INITIAL", "gradient_norm": 8.996052742004395, "loss": 1.1311200857162476, "full_nll": 1.1311200857162476, "surface_nll": null}
+{"step": 2, "id": "TRAIN-SERVICE-CHAIR-01-INITIAL", "gradient_norm": 0.057355836033821106, "loss": 0.001196053228341043, "full_nll": 0.001196053228341043, "surface_nll": null}
+{"step": 3, "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION", "gradient_norm": 0.057001207023859024, "loss": 0.0008584787719883025, "full_nll": 0.0008584787719883025, "surface_nll": null}
+{"step": 4, "id": "TRAIN-SERVICE-CHAIR-02-INITIAL", "gradient_norm": 0.04029585421085358, "loss": 0.0011239926097914577, "full_nll": 0.0011239926097914577, "surface_nll": null}
+{"step": 5, "id": "FT-UDON-INITIAL", "gradient_norm": 6.879333019256592, "loss": 0.7458849549293518, "full_nll": 0.7458849549293518, "surface_nll": null}
+{"step": 6, "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION", "gradient_norm": 0.05769013240933418, "loss": 0.0007137481588870287, "full_nll": 0.0007137481588870287, "surface_nll": null}
+{"step": 7, "id": "TRAIN-SERVICE-CHAIR-03-INITIAL", "gradient_norm": 0.4844350814819336, "loss": 0.0013081597862765193, "full_nll": 0.0013081597862765193, "surface_nll": null}
+{"step": 8, "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION", "gradient_norm": 0.19710221886634827, "loss": 0.0009600946796126664, "full_nll": 0.0009600946796126664, "surface_nll": null}
+{"step": 9, "id": "FT-UDON-INITIAL", "gradient_norm": 4.8914642333984375, "loss": 0.5173478126525879, "full_nll": 0.5173478126525879, "surface_nll": null}
+{"step": 10, "id": "TRAIN-DAILY-CALM-01-INITIAL", "gradient_norm": 0.14180828630924225, "loss": 0.004239468718878925, "full_nll": 0.001495185075327754, "surface_nll": 0.006983752362430096}
+{"step": 11, "id": "TRAIN-DAILY-CALM-02-INITIAL", "gradient_norm": 0.5053267478942871, "loss": 0.004761864605825394, "full_nll": 0.0017471815226599574, "surface_nll": 0.007776547688990831}
+{"step": 12, "id": "TRAIN-DAILY-CALM-03-INITIAL", "gradient_norm": 0.13493914902210236, "loss": 0.0038947524153627455, "full_nll": 0.0015041950391605496, "surface_nll": 0.006285309791564941}
+{"step": 13, "id": "FT-UDON-INITIAL", "gradient_norm": 3.714613199234009, "loss": 0.36968061327934265, "full_nll": 0.36968061327934265, "surface_nll": null}

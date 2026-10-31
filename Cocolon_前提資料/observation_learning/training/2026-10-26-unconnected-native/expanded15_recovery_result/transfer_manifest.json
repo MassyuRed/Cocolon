@@ -1,0 +1,318 @@
+{
+  "run/adapter/README.md": {
+    "bytes": 5184,
+    "sha256": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885"
+  },
+  "run/adapter/adapter_config.json": {
+    "bytes": 1674,
+    "sha256": "fb43a10298bdf9965a8ab4c541cb517372928afd7dd97d0b210bf0c5b4f45b2e"
+  },
+  "run/adapter/adapter_model.safetensors": {
+    "bytes": 15351792,
+    "sha256": "109c3dda16b19d2f110d6f8e2ded07f47e981b9690970ca95b9046780bffb85a"
+  },
+  "run/after_FT-BOOK-AFTER-ANSWER.jsonl": {
+    "bytes": 43825,
+    "sha256": "b032f68c55daf4383f6ef9fdbfbcee382425272f3b16d4f9edada536bb19140f"
+  },
+  "run/after_FT-BOOK-INITIAL.jsonl": {
+    "bytes": 17108,
+    "sha256": "3de252b950fcd8002f3e41314b250e744a5b8d232dd41129463f91a5eebb8e9e"
+  },
+  "run/after_FT-KNIT-INITIAL.jsonl": {
+    "bytes": 24150,
+    "sha256": "4127247551c2ae04f2229be2e945aac8a2af56e0621e5092a4de9b4b64c27131"
+  },
+  "run/after_FT-REPOT-INITIAL.jsonl": {
+    "bytes": 15442,
+    "sha256": "43ba8e75e30679d86cedbc9d874df07754deec5297b887e6ad470dc87b483730"
+  },
+  "run/after_FT-SHOP-AFTER-ANSWER.jsonl": {
+    "bytes": 41955,
+    "sha256": "b3600b97482d00425a0e6d911f8ffae44ac39367eb8f77d70073d04807a925a9"
+  },
+  "run/after_FT-SHOP-INITIAL.jsonl": {
+    "bytes": 17665,
+    "sha256": "0887bb3b9530304a292a7c22c53d94f6e69024d077f2e53f54841f1c8df6ec8a"
+  },
+  "run/after_TRAIN-DAILY-CALM-01-INITIAL.jsonl": {
+    "bytes": 21210,
+    "sha256": "4dc4ca6f2dc654a68273ed01e282daed8ca76a40c46651057641223ed13a9fe5"
+  },
+  "run/after_TRAIN-DAILY-CALM-02-INITIAL.jsonl": {
+    "bytes": 21184,
+    "sha256": "a441d9da1b06bf7d7cb8acb526d85c9366d76886ced654a343580a43e72315f8"
+  },
+  "run/after_TRAIN-DAILY-CALM-03-INITIAL.jsonl": {
+    "bytes": 21223,
+    "sha256": "46e301ca803c4fbd4a1f0da283fddd8738a5ac27891317c313aebc72e6b3dcf4"
+  },
+  "run/after_TRAIN-SERVICE-CHAIR-01-CORRECTION.jsonl": {
+    "bytes": 29328,
+    "sha256": "638d5458b292700a21d650758a4cd0048fc0686ecb359262679fa956bf13d816"
+  },
+  "run/after_TRAIN-SERVICE-CHAIR-01-INITIAL.jsonl": {
+    "bytes": 18583,
+    "sha256": "afd2ea5b83b7dcae358fa4e2986670b9060a7d2e42f6dc44777ef4791ba26f10"
+  },
+  "run/after_TRAIN-SERVICE-CHAIR-02-CORRECTION.jsonl": {
+    "bytes": 29346,
+    "sha256": "6002f521c094740e5d8874290d6027754a94d3ba49d84c46c9b3e57738ee5b45"
+  },
+  "run/after_TRAIN-SERVICE-CHAIR-02-INITIAL.jsonl": {
+    "bytes": 18583,
+    "sha256": "eb7017102b358a32815f543a7ac8b376911c59c2078f2a2b43d26c7eb18c13d6"
+  },
+  "run/after_TRAIN-SERVICE-CHAIR-03-CORRECTION.jsonl": {
+    "bytes": 29412,
+    "sha256": "2489191261022690535763fd6078baa11b23065c45f0456128e4633913eee865"
+  },
+  "run/after_TRAIN-SERVICE-CHAIR-03-INITIAL.jsonl": {
+    "bytes": 18583,
+    "sha256": "589df712a196092442fbecb3549e54cf7937932bc45f45a99820e872751038d3"
+  },
+  "run/api_blobs.json": {
+    "bytes": 688,
+    "sha256": "69168896b25c6bf1e008592bdeff1e975a4a3b88ca3366487a094414d98b9e85"
+  },
+  "run/consume_expanded15_recovery.py": {
+    "bytes": 18797,
+    "sha256": "981134897057ae1f4acaeaf340307fdd59965fe8c5808858d48caf4fe55feccf"
+  },
+  "run/cpu_preparation.json": {
+    "bytes": 16296,
+    "sha256": "64a7d905c4cfe3dbea227064e8aee053b23bff15baf51261f4a41c6478306f9d"
+  },
+  "run/eval_inputs.jsonl": {
+    "bytes": 169628,
+    "sha256": "c67fa4098bafa10508bf57bf1975fcdfd6f2359f851e34c0f26148310eb8b75e"
+  },
+  "run/gpu15_recovery.plan.json": {
+    "bytes": 1999,
+    "sha256": "32f8bf263ecb682477042a0342cfe00feaad0c3644e6d19596724347b0974c9f"
+  },
+  "run/reloaded_tensors.json": {
+    "bytes": 26063,
+    "sha256": "3f5863643dd95564357b092561302e7379742633a6406b9aea393d28be0aada0"
+  },
+  "run/run.json": {
+    "bytes": 11385,
+    "sha256": "c85d2066c50569cd0a988954419c9e177b6917acd2eab01594aa415e2abea122"
+  },
+  "run/run_expanded15_recovery.py": {
+    "bytes": 14141,
+    "sha256": "e4be86a2b6fb0581961fc3c619853ba7f419e3239464e969214772b8bc3bfb54"
+  },
+  "run/train_messages.jsonl": {
+    "bytes": 349174,
+    "sha256": "29f37e38f4a615220c739176a6eaa2e0e01aae36c7bb6f87db8be248aecd1772"
+  },
+  "run/training_origin/gpu30_expanded.plan.json": {
+    "bytes": 7398,
+    "sha256": "5904a6c7157b6a8523f3d3f988990fa194c670685cfd568e64bf35b3204e6874"
+  },
+  "run/training_origin/run.json": {
+    "bytes": 28533,
+    "sha256": "ccc8afccdb322c109515aa535e936d43e857b680c4727dcd63f18bc3789c7ea1"
+  },
+  "run/training_origin/run_native15_expanded30.py": {
+    "bytes": 29965,
+    "sha256": "ca03471329b5f622284cf3abd446cdd2f7831de3f7617da49a558ff7b5259e9d"
+  },
+  "run/training_origin/training.jsonl": {
+    "bytes": 4533,
+    "sha256": "f1232cb906eb89cb1eb74a0cb10832ccb5e272d9ed40fabd17ce77ffb26a2868"
+  },
+  "diagnosis/FT-REPOT-INITIAL_cold.json": {
+    "bytes": 25915,
+    "sha256": "13a9a51f8bd62c17ec0e9a27817bcc8fa2c3edb7794cd94abef9670ac0b9f94c"
+  },
+  "diagnosis/FT-REPOT-INITIAL_saved.json": {
+    "bytes": 25457,
+    "sha256": "c4f868dc6e50e39e8a7a672b54c04cd9776e64362a2b35cb3d053e7e9832f25f"
+  },
+  "diagnosis/FT-REPOT-INITIAL_saved_completed.json": {
+    "bytes": 25392,
+    "sha256": "d6a7919d3d72565579044e355e18a9ac3f1d3448d51f2fc2b586310cb84a85e5"
+  },
+  "diagnosis/FT-SHOP-INITIAL_cold.json": {
+    "bytes": 28299,
+    "sha256": "db54263514e50dc8e14f7e7861a6a3c8daaaf9c3ebb9a7864d2954cc348223f8"
+  },
+  "diagnosis/FT-SHOP-INITIAL_saved.json": {
+    "bytes": 27988,
+    "sha256": "0d2ef50d9eac5a7645155c726384ae92e49a2919693080962f68dbe96721ad59"
+  },
+  "diagnosis/FT-SHOP-INITIAL_saved_completed.json": {
+    "bytes": 27777,
+    "sha256": "afbab65fed7b2457616dd3379d5e795f2f3b3ccf3054e19a61fee2e2a54e30b4"
+  },
+  "diagnosis/TRAIN-DAILY-CALM-01-INITIAL_cold.json": {
+    "bytes": 56030,
+    "sha256": "ace68213f9e10897653f09be0ab19432aea9e5afce1e7e53f31fca50af0bc374"
+  },
+  "diagnosis/TRAIN-DAILY-CALM-01-INITIAL_saved.json": {
+    "bytes": 33232,
+    "sha256": "cace38d7132f31eb80ac1107debada152405024c8fc0d3acc4cb67c82f0f8673"
+  },
+  "diagnosis/TRAIN-DAILY-CALM-01-INITIAL_saved_completed.json": {
+    "bytes": 54112,
+    "sha256": "325716281c15ad536f21b0744af3957bab1cfe174ec551d57985758758eed160"
+  },
+  "diagnosis/TRAIN-DAILY-CALM-02-INITIAL_cold.json": {
+    "bytes": 56030,
+    "sha256": "3d2504caa9c18a51f9d552ca2caf62075f063a4170c5689be8c374d1859ddb31"
+  },
+  "diagnosis/TRAIN-DAILY-CALM-02-INITIAL_saved.json": {
+    "bytes": 33232,
+    "sha256": "ff27f122ae18f217ba75415835723efc29e5745120071f8e6ff180a86b91e6da"
+  },
+  "diagnosis/TRAIN-DAILY-CALM-02-INITIAL_saved_completed.json": {
+    "bytes": 54112,
+    "sha256": "81719ec17d8a9f6c619b4f5e2728538568c2b77847395c34803b9739655bbecc"
+  },
+  "diagnosis/TRAIN-DAILY-CALM-03-INITIAL_cold.json": {
+    "bytes": 56030,
+    "sha256": "4ed0d0c7be139b2ba9a6599942dd2280137d259ef06c2735a3b528cae3c87c2a"
+  },
+  "diagnosis/TRAIN-DAILY-CALM-03-INITIAL_saved.json": {
+    "bytes": 33232,
+    "sha256": "2393fbc0b660315b15a2410d63592eaf7c7a16133fbb753ec8fb97230c7f0821"
+  },
+  "diagnosis/TRAIN-DAILY-CALM-03-INITIAL_saved_completed.json": {
+    "bytes": 54112,
+    "sha256": "349d02ee57882d5a6895e454763907c0d6cf6687abb0faa0fda7c8bbcd9ed82d"
+  },
+  "diagnosis/TRAIN-SERVICE-CHAIR-01-CORRECTION_cold.json": {
+    "bytes": 106918,
+    "sha256": "8d03a77029bb9e6f489acf72f281bfad1acde6631f802d8b2afefb6794598e21"
+  },
+  "diagnosis/TRAIN-SERVICE-CHAIR-01-CORRECTION_saved.json": {
+    "bytes": 102967,
+    "sha256": "54ca30e19c60e8547c58dff9378da36f76bc24714e78c2a8131009271416a690"
+  },
+  "diagnosis/TRAIN-SERVICE-CHAIR-01-CORRECTION_saved_completed.json": {
+    "bytes": 104446,
+    "sha256": "acfc96618aa635519a4662067887e5c3b980a88fe3afcac5c339d2b7477097ec"
+  },
+  "diagnosis/TRAIN-SERVICE-CHAIR-01-INITIAL_cold.json": {
+    "bytes": 48773,
+    "sha256": "482fdd1d87fb510bdc2c51df010161cdfef2eb431b85bb7c51868f50652094ff"
+  },
+  "diagnosis/TRAIN-SERVICE-CHAIR-01-INITIAL_saved.json": {
+    "bytes": 28520,
+    "sha256": "9058b71fdd6ce5f7c92db4f30be4b004247a8727723576ed179d6a5cc2965f89"
+  },
+  "diagnosis/TRAIN-SERVICE-CHAIR-01-INITIAL_saved_completed.json": {
+    "bytes": 47060,
+    "sha256": "d748e540029d4c7297794197e78818a7ebda3edf1bb7dabb0559efcadd9c43e4"
+  },
+  "diagnosis/TRAIN-SERVICE-CHAIR-02-CORRECTION_cold.json": {
+    "bytes": 106918,
+    "sha256": "fa3b89a660963200aeb660609a7791126f0f0c824023b3aaa0b24e7611377ae2"
+  },
+  "diagnosis/TRAIN-SERVICE-CHAIR-02-CORRECTION_saved.json": {
+    "bytes": 102967,
+    "sha256": "80ec26ace8fcf7db7af578e5126ed7bbb692e518bf044f2020cc0677badd0ebf"
+  },
+  "diagnosis/TRAIN-SERVICE-CHAIR-02-CORRECTION_saved_completed.json": {
+    "bytes": 104446,
+    "sha256": "3ee6d8e80d32eab4475d21001d668769d6a1e63b17be24434669f748771a0094"
+  },
+  "diagnosis/TRAIN-SERVICE-CHAIR-02-INITIAL_cold.json": {
+    "bytes": 48773,
+    "sha256": "d22cf68187a7ec6699a310109f4494d5f597684817650e14db173326d5449bbc"
+  },
+  "diagnosis/TRAIN-SERVICE-CHAIR-02-INITIAL_saved.json": {
+    "bytes": 28520,
+    "sha256": "e27a89869a8c1ab3717b5a7085731654d45e3974c8c0cbd80a9220d2e3b08559"
+  },
+  "diagnosis/TRAIN-SERVICE-CHAIR-02-INITIAL_saved_completed.json": {
+    "bytes": 47060,
+    "sha256": "43fbff30e21e73c417387376f720ac95e7f3d56bf9c36add6349c8ea22a53f71"
+  },
+  "diagnosis/TRAIN-SERVICE-CHAIR-03-CORRECTION_cold.json": {
+    "bytes": 106918,
+    "sha256": "9594a53521c2485f096319ee423ee22204b4ded7cc3c74be842d22c09c3dc99d"
+  },
+  "diagnosis/TRAIN-SERVICE-CHAIR-03-CORRECTION_saved.json": {
+    "bytes": 102967,
+    "sha256": "e3e3c4e88a167538379693e0bd0373be5d4c2db27724255982f5619bd71d2195"
+  },
+  "diagnosis/TRAIN-SERVICE-CHAIR-03-CORRECTION_saved_completed.json": {
+    "bytes": 104446,
+    "sha256": "44bf31da31bbfa02a82f67fa8548092f60b83f4dfda5dee7695e6a04fd538188"
+  },
+  "diagnosis/TRAIN-SERVICE-CHAIR-03-INITIAL_cold.json": {
+    "bytes": 48773,
+    "sha256": "3883bdbfecb51d866e0b89fd9fe936cc247405531a782c9324f104c81c3ca88f"
+  },
+  "diagnosis/TRAIN-SERVICE-CHAIR-03-INITIAL_saved.json": {
+    "bytes": 28520,
+    "sha256": "5227dbf2fee78313fa80f8e82b186ca11aa2696e345c53146dd8f386b19fe3c4"
+  },
+  "diagnosis/TRAIN-SERVICE-CHAIR-03-INITIAL_saved_completed.json": {
+    "bytes": 47060,
+    "sha256": "89fd32decef49c1b109416e6c4f3c45ce4d1c82e30aebf2a1fe298eb1f76a07d"
+  },
+  "diagnosis/diagnosis.json": {
+    "bytes": 2929933,
+    "sha256": "e8a915474c979eddbec43aabf066494e959b7d269c711c107f03a955a5f4daf9"
+  },
+  "preparation/actual_cpu_check.json": {
+    "bytes": 2736,
+    "sha256": "84dfa25b956c86599eb563e6bc7b6158900435025179eb3788309b8d16dd2c79"
+  },
+  "preparation/gpu15_recovery.pending.plan.json": {
+    "bytes": 1633,
+    "sha256": "52ed5d2b2325bdfcfbca986ebb6f3c9794a0a06bb9c8c063090c424ba44ad3d4"
+  },
+  "preparation/verify_recovery_cpu.py": {
+    "bytes": 5876,
+    "sha256": "a063a2a2c449aa940775e46a70349f3518059f70ac7d861dd37a294a3e48b54a"
+  },
+  "preparation/cpu_launch.json": {
+    "bytes": 405,
+    "sha256": "24cbcc84d83bc3d43db88f19b339d0d9fc532c73321e60ca8f9a9067d6fc0777"
+  },
+  "execution/cocolon_expanded15_recovery_launch_20261027.json": {
+    "bytes": 738,
+    "sha256": "064f72a70c3dd62c8c886040fc3d9685f7267ef842203e0334ebf8ba37ccb3b1"
+  },
+  "execution/cocolon_expanded15_recovery_gpu_20261027.log": {
+    "bytes": 2911,
+    "sha256": "85ff351dcf9d960d089b5c2bb2eefca4ee5697ef61a5e8925cd41555c5739c20"
+  },
+  "execution/cocolon_expanded15_recovery_consume_launch_20261027.json": {
+    "bytes": 704,
+    "sha256": "6f9fa4c7d02786ad0a77af139e3e7ef998f83f091129e1a59a7f279c62fab0c4"
+  },
+  "execution/cocolon_expanded15_recovery_consume_20261027.log": {
+    "bytes": 693,
+    "sha256": "02162b1981b832109e5194713c7b2d41cb41d3f9d1dd7252cd5bbecf5d587085"
+  },
+  "execution/cocolon_expanded15_recovery_cpu_v2_20261027.log": {
+    "bytes": 2801,
+    "sha256": "91d2faf546c11abf5c7eeb235b13ea052f7234e235f0afa7b2c8ebe6f5d5a38a"
+  },
+  "early/preview1_run.json": {
+    "bytes": 7718,
+    "sha256": "b4afba4a0b9c0e604db4091d9979433ac01773096104e9b188c687b5ecac700e"
+  },
+  "early/preview2_run.json": {
+    "bytes": 9488,
+    "sha256": "894d951afb5c681cb0ec219c27b961452de76dbb1177118a8c34bcc9ff3aecfc"
+  },
+  "execution/gpu_state.txt": {
+    "bytes": 35,
+    "sha256": "701048b2a472e40f760e1bb0e1c3181c363cf1465295a6946bc0ba72d40b398d"
+  },
+  "execution/worker_ps.txt": {
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "final_context.json": {
+    "bytes": 1349,
+    "sha256": "414e57082952dec5db4b0e6e8dee9481495997bd25e8bf600811ba45a7bfb8a5"
+  }
+}

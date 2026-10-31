@@ -1,0 +1,116 @@
+{
+  "coverage": "All9 input/teacher/raw and actual9 body/question reviewed by root and read-only supplement; not formal human/Pro/Ultra acceptance.",
+  "language_families": 2,
+  "stage_patterns": 3,
+  "independent_unknown_cases": false,
+  "cases": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "raw_text_equal_initial1d_and_dd": true,
+      "parsed_teacher_equal": true,
+      "actual_body": {
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      },
+      "actual_question": "「全部一人で直せたこと」がなぜ嬉しかったのですか？",
+      "review": "原入力に沿う観測と喜び/再利用の反復が中心で、初期1d/ddから本文の上積みはない。"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "raw_text_equal_initial1d_and_dd": true,
+      "parsed_teacher_equal": true,
+      "actual_body": {
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "actual_question": null,
+      "review": "指導/共同修理/再利用の喜びとREVISE2＋INVALIDATE_GAP1を保持するが、更新文は処理説明として硬い。"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "raw_text_equal_initial1d_and_dd": true,
+      "parsed_teacher_equal": true,
+      "actual_body": {
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      },
+      "actual_question": "「全部一人で直せたこと」がなぜ嬉しかったのですか？",
+      "review": "原入力に沿う観測と喜び/再利用の反復が中心で、初期1d/ddから本文の上積みはない。"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "raw_text_equal_initial1d_and_dd": true,
+      "parsed_teacher_equal": true,
+      "actual_body": {
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "actual_question": null,
+      "review": "指導/共同修理/再利用の喜びとREVISE2＋INVALIDATE_GAP1を保持するが、更新文は処理説明として硬い。"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "raw_text_equal_initial1d_and_dd": true,
+      "parsed_teacher_equal": true,
+      "actual_body": {
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      },
+      "actual_question": "「全部一人で直せたこと」がなぜ嬉しかったのですか？",
+      "review": "原入力に沿う観測と喜び/再利用の反復が中心で、初期1d/ddから本文の上積みはない。"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "raw_text_equal_initial1d_and_dd": true,
+      "parsed_teacher_equal": true,
+      "actual_body": {
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "actual_question": null,
+      "review": "指導/共同修理/再利用の喜びとREVISE2＋INVALIDATE_GAP1を保持するが、更新文は処理説明として硬い。"
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "raw_text_equal_initial1d_and_dd": true,
+      "parsed_teacher_equal": true,
+      "actual_body": {
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      },
+      "actual_question": null,
+      "review": "食事から少し落ち着く範囲の穏当な受取り。余分な背景補完はないが新しい深さの証明ではない。"
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "raw_text_equal_initial1d_and_dd": true,
+      "parsed_teacher_equal": true,
+      "actual_body": {
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      },
+      "actual_question": null,
+      "review": "食事から少し落ち着く範囲の穏当な受取り。余分な背景補完はないが新しい深さの証明ではない。"
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "raw_text_equal_initial1d_and_dd": true,
+      "parsed_teacher_equal": true,
+      "actual_body": {
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      },
+      "actual_question": null,
+      "review": "食事から少し落ち着く範囲の穏当な受取り。余分な背景補完はないが新しい深さの証明ではない。"
+    }
+  ]
+}

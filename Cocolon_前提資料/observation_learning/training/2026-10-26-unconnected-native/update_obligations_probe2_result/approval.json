@@ -1,0 +1,9 @@
+{
+  "date_jst": "2026-10-28",
+  "source_commit": "8065009526cd6a1ddd42155ab050dbe0666d43ca",
+  "user_reply": "進めていいよ。",
+  "approved_plan_sha256": "bd138e7b74fc27b6e11762afd5f7928980593ee5879b54db4acdba0664a74a8a",
+  "scope": "train0/load1/BOOK and SHOP after-answer each1/max600s/process_USD0.047/one-shot/no retry",
+  "automatic_progression": false,
+  "product_credit": 0
+}

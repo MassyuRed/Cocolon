@@ -1,0 +1,51 @@
+{
+  "schema": "cocolon.native15_balanced30.source_bindings.v1",
+  "docs_predecessor_commit": "f0cc6ed43c159ff5804dc86c2d0dc3d137265848",
+  "api_commit": "6b043880504912481a6b10d93c9128ec4995b70b",
+  "frozen_payload_owner": "native15_preparation/",
+  "previous_runner_owner": "interleaved30_preparation/",
+  "initial_adapter_sha256": "45779ad97111dd2d91c1f7f1a4b0ca697ef0586c5190cd56b1b7675fe540dab6",
+  "immutable_helper_sha256": "2f659078c05bee6d7b32f50aae8b9eebc03c767d4a3be084bc17e9e3ccc4c10d",
+  "immutable_joint_archive_owner_sha256": "c5dd1679c605e020e4dad56951c79d7c0661a1279a34a0ae0d47666d639d7128",
+  "candidate_files": {
+    "README.md": {
+      "bytes": 6206,
+      "sha256": "8c1bc73b7d93dd46cc1c92e1df557f20c5370b93bea029c0b13c7ffc06f43eda"
+    },
+    "actual_cpu_check.json": {
+      "bytes": 35768,
+      "sha256": "33ce6313b7762ebce8ccafdb44751e1f6221a5ef5b942bc707459f010596b713"
+    },
+    "candidate_focus_loss.py": {
+      "bytes": 11170,
+      "sha256": "f0adc2b09410b93b9f1d91676f2a37e0bb4a599be5db9997e43a21dec5b74350"
+    },
+    "consume_balanced30.py": {
+      "bytes": 18496,
+      "sha256": "692d325147dd1484d6ed61c93c0ab82467f49be63f3256ba9bb09a35923fc623"
+    },
+    "gpu30_balanced.plan.json": {
+      "bytes": 3103,
+      "sha256": "20fb5ccdee3c02fd8584110bef08e92eb0a9dfbfba3b2267cfddad380ff1cf9f"
+    },
+    "independent_review.json": {
+      "bytes": 5586,
+      "sha256": "1d3c42e55a05584aef7eca6e97ae6c383314294ffedc359fca2f6c3e326c8d9a"
+    },
+    "run_native15_balanced30.py": {
+      "bytes": 21420,
+      "sha256": "d989bcf5a7bc9e3bc8669ff455113c956bcb5ba813473693fc8f493ad3217268"
+    },
+    "test_candidate_focus_loss.py": {
+      "bytes": 11548,
+      "sha256": "f1130a7fd2490f329ad4a4bb0cef55e17132f16e3fab87b7f3ac7dc9b80e0893"
+    },
+    "verify_balanced30_cpu.py": {
+      "bytes": 6704,
+      "sha256": "c4f6f8c895d4c1e1fdbf3aa654dda2f8e44ce3fc9c5f50c4514449593cd29d6a"
+    }
+  },
+  "gpu_run_authorized": false,
+  "product_credit": 0,
+  "automatic_progression": false
+}

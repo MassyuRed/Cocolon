@@ -1,0 +1,8 @@
+{"step": 1, "id": "AUX-A-FT-BOOK-AFTER-ANSWER", "loss": 0.03890073299407959, "gradient_norm": 0.4429527819156647, "target_tokens": 2312, "loss_type": "full_assistant_ce_including_eos"}
+{"step": 2, "id": "AUX-B-FT-BOOK-AFTER-ANSWER", "loss": 0.3183859884738922, "gradient_norm": 1.777777075767517, "target_tokens": 607, "loss_type": "full_assistant_ce_including_eos"}
+{"step": 3, "id": "AUX-A-FT-SHOP-AFTER-ANSWER", "loss": 0.04393048956990242, "gradient_norm": 0.5268073678016663, "target_tokens": 2527, "loss_type": "full_assistant_ce_including_eos"}
+{"step": 4, "id": "AUX-B-FT-SHOP-AFTER-ANSWER", "loss": 0.388369083404541, "gradient_norm": 1.8957210779190063, "target_tokens": 717, "loss_type": "full_assistant_ce_including_eos"}
+{"step": 5, "id": "AUX-A-FT-BOOK-AFTER-ANSWER", "loss": 0.02344132401049137, "gradient_norm": 0.3378579914569855, "target_tokens": 2312, "loss_type": "full_assistant_ce_including_eos"}
+{"step": 6, "id": "AUX-B-FT-BOOK-AFTER-ANSWER", "loss": 0.23998430371284485, "gradient_norm": 1.3425931930541992, "target_tokens": 607, "loss_type": "full_assistant_ce_including_eos"}
+{"step": 7, "id": "AUX-A-FT-SHOP-AFTER-ANSWER", "loss": 0.03479902446269989, "gradient_norm": 0.30113685131073, "target_tokens": 2527, "loss_type": "full_assistant_ce_including_eos"}
+{"step": 8, "id": "AUX-B-FT-SHOP-AFTER-ANSWER", "loss": 0.32021743059158325, "gradient_norm": 1.5975096225738525, "target_tokens": 717, "loss_type": "full_assistant_ce_including_eos"}

@@ -1,0 +1,125 @@
+{
+  "status": "CPU_TRANSFER11_ACTUAL_FULL2_AND_OLD9",
+  "api_commit": "7b9ee073de03940ba71587297d8600b2b6094dd1",
+  "model_calls": 0,
+  "training_updates": 0,
+  "sql_operations": 0,
+  "product_credit": 0,
+  "automatic_progression": false,
+  "full2": {
+    "count": 2,
+    "meaning": 0,
+    "body": 0
+  },
+  "old9_after_only": {
+    "count": 9,
+    "meaning": 8,
+    "body": 8,
+    "initial_adapter_before_measured": false
+  },
+  "seconds": 78.52483688096981,
+  "meaning_adopted_count": 8,
+  "body_available_count": 8,
+  "full_original": {
+    "archive_path": "cmee/diagnosis.json",
+    "bytes": 1056694,
+    "sha256": "d18a639dfccd92293ff07fc3e34bf7ee817f166c26e4e890d6c594ba7047ba74",
+    "library_file_id": "libfile_271c5c6110c881919c7901938e853995"
+  },
+  "cases": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "meaning_adopted": false,
+      "body_available": false,
+      "decision": "REJECT",
+      "reason_code": "semantic_receipt_not_validated",
+      "raw_sha256": "f6f02373db621740ec0afb42931deae035c0f2c50db89586bc099053d54b28d4",
+      "cold_file_status": "NO_ADOPTED_SNAPSHOT",
+      "receipt_status": "TOKEN_LIMIT"
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "meaning_adopted": false,
+      "body_available": false,
+      "decision": "REJECT",
+      "reason_code": "model_evidence_collection_invalid",
+      "raw_sha256": "3b1ffcaa67c631ad76e165b7b2f603a8e7010c76a5cf8ed53327fab4686d370a",
+      "cold_file_status": "NO_ADOPTED_SNAPSHOT",
+      "receipt_status": "CANDIDATE_UNREVIEWED"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "meaning_adopted": true,
+      "body_available": true,
+      "raw_sha256": "17b21db6d872cbc6117e17a715751e96ccff1f7a2f980abb5328a1702f59aafb",
+      "cold_file_status": "COLD_FULL_OUTCOME_IDENTICAL",
+      "receipt_status": "CANDIDATE_UNREVIEWED"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "meaning_adopted": false,
+      "body_available": false,
+      "decision": "HOLD",
+      "reason_code": "model_update_not_prior_or_source_bound",
+      "raw_sha256": "da8abe62a4df6b779cde1e6bbbacf6e4ce8fea6951fa77e319a3244cf981dea6",
+      "cold_file_status": "NO_ADOPTED_SNAPSHOT",
+      "receipt_status": "CANDIDATE_UNREVIEWED"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "meaning_adopted": true,
+      "body_available": true,
+      "raw_sha256": "7cebbb145e1428f3037243faca913c0d258fd1dc458eb8ab349d045986c80c3f",
+      "cold_file_status": "COLD_FULL_OUTCOME_IDENTICAL",
+      "receipt_status": "CANDIDATE_UNREVIEWED"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "meaning_adopted": true,
+      "body_available": true,
+      "raw_sha256": "f2ace4ac6b8291370a2a99136e51f2351ae8696c1d7d0c05e1078331b0cd39c4",
+      "cold_file_status": "COLD_FULL_OUTCOME_IDENTICAL",
+      "receipt_status": "CANDIDATE_UNREVIEWED"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "meaning_adopted": true,
+      "body_available": true,
+      "raw_sha256": "30bd8210e8a414b44af9f1f4ce7be4af7a01c60d4efe8a8610666caa41f20240",
+      "cold_file_status": "COLD_FULL_OUTCOME_IDENTICAL",
+      "receipt_status": "CANDIDATE_UNREVIEWED"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "meaning_adopted": true,
+      "body_available": true,
+      "raw_sha256": "cd938ed6cd56430fc026f42c2708c6b8af528ceabb101f68c7001e972da544eb",
+      "cold_file_status": "COLD_FULL_OUTCOME_IDENTICAL",
+      "receipt_status": "CANDIDATE_UNREVIEWED"
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "meaning_adopted": true,
+      "body_available": true,
+      "raw_sha256": "6012255d003adea5039f18090afaa5cbb134a41e02f0733dfb10ee8eaf030e17",
+      "cold_file_status": "COLD_FULL_OUTCOME_IDENTICAL",
+      "receipt_status": "CANDIDATE_UNREVIEWED"
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "meaning_adopted": true,
+      "body_available": true,
+      "raw_sha256": "aa9cc26eb53fcc63d0699ddb4807272d6658aca3c6f0f65e6e47ac7963bab323",
+      "cold_file_status": "COLD_FULL_OUTCOME_IDENTICAL",
+      "receipt_status": "CANDIDATE_UNREVIEWED"
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "meaning_adopted": true,
+      "body_available": true,
+      "raw_sha256": "76a810ff60dd86bdb4012a25255f33f12196d9244a311303cc7e45efe9146876",
+      "cold_file_status": "COLD_FULL_OUTCOME_IDENTICAL",
+      "receipt_status": "CANDIDATE_UNREVIEWED"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "status": "POD_EXTERNAL_ARCHIVE_AND_SOURCE_BYTES_VERIFIED",
+  "archive_sha256": "a4faaf35c3dce1969bac0f29d6f5cfe7841c6a6d4f4e3f67e332bd5e74657783",
+  "archive_bytes": 70969,
+  "zip_members": 21,
+  "payloads_verified": 20,
+  "all_crc_hash_size": true,
+  "source_runner_matches": true,
+  "setup_matches": true,
+  "auxiliary_rows_unchanged": true,
+  "support_files_unchanged": true,
+  "authorized_runtime_plan_matches": true,
+  "run_raw_unmodified": true,
+  "predecessor_archive_sha256": "25251908388caf414868f30867862c5288ff2c2606fdfbe0c2ee959f3c35b7bf",
+  "predecessor_payloads_verified": 152,
+  "predecessor_adapter_unchanged": "2dfd7dbd2613aca8682601a140c1bbcc82e0b22de052dece60c6a60ad1a1cea4",
+  "no_base_weights_in_result_archive": true
+}

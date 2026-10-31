@@ -1,0 +1,11 @@
+{
+  "archive_bytes": 111139,
+  "archive_sha256": "76b33aa960c9f485a498daee48edb928286d6f3125495aaf03713d1f78096f46",
+  "members": 5,
+  "payloads": 4,
+  "crc_and_all_members_verified": true,
+  "prototype_source_bytes_equal": true,
+  "exit_code": 0,
+  "inner_archive_bytes": 115489,
+  "inner_archive_sha256": "f5afdbad83539b30abbb98dbe9788f6d5ed1fa38c2417eb9adc3d71ba64921ac"
+}

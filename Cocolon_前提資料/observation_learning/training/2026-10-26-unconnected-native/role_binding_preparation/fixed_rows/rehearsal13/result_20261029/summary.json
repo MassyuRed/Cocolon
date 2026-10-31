@@ -1,0 +1,61 @@
+{
+  "status": "CLOSED_NOT_ADOPTED_NO_RETRY",
+  "runtime_source_commit": "385114bde2ea0d8904d6a73f9c80bb5af56a654c",
+  "proposal_source_commit": "4b3cdc8cd096ae7c13e3c28401d49c1e6ee580af",
+  "optimizer_steps": 13,
+  "model_loads": 2,
+  "generations": 11,
+  "full2": {
+    "meaning": 0,
+    "body": 0
+  },
+  "old9": {
+    "meaning": 9,
+    "body": 9
+  },
+  "baseline7_preserved": true,
+  "newly_successful_fit_ids": [
+    "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+    "TRAIN-SERVICE-CHAIR-03-CORRECTION"
+  ],
+  "cold_identical_count": 9,
+  "receipt_replay_identical_count": 11,
+  "root_read_all_raw_count": 11,
+  "root_read_all_formed_prose_count": 9,
+  "processing_seconds": 1144.037065561046,
+  "processing_proration_usd": 0.08898066065474801,
+  "processing_rate_usd_per_hour": 0.28,
+  "rate_basis": "Previous same-Pod observed rate; no live rate requery",
+  "excluded_costs": [
+    "preparation",
+    "parent-external CMEE CPU",
+    "recovery",
+    "holding",
+    "storage",
+    "network",
+    "tax"
+  ],
+  "cmee_cpu_seconds": 90.54061189689673,
+  "final_adapter_sha256": "114466411f36f0eef7a2dceaec7f5190544ac8545eb6b2f6a3d0446b70f90b66",
+  "reason": "New two meaning/body success condition 2/2 not met: BOOK INVALID_FORMAT; SHOP TOKEN_LIMIT",
+  "retry": false,
+  "next_gpu_run_authorized": false,
+  "candidate_ready": false,
+  "automatic_progression": false,
+  "product_credit": 0,
+  "formal_product_acceptance": "0/3",
+  "management_percent": 54.5,
+  "gpu_lifecycle_actions": 0,
+  "additional_observation_session_needed_for_current_two": false,
+  "preservation": {
+    "status": "succeeded",
+    "local_path": "/workspace/scratch/045fd4defabe/cocolon-rehearsal13-weights-originals-20261029.zip",
+    "file_id": "file_0000000045a0822fbde559a86673a5ff",
+    "library_file_id": "libfile_9623b67a65588191926a1bb0a0ea5797",
+    "file_name": "cocolon-rehearsal13-weights-originals-20261029.zip",
+    "current_version_number": 0,
+    "local_metadata_applied": true,
+    "bytes": 60053438,
+    "sha256": "71741059ee92e627ea4183186b554d04ffc245ae857c6fd1bf1654217b6498d9"
+  }
+}

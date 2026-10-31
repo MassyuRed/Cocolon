@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "/workspace/cocolon_localized30_pack_20261027/run_localized30.py", line 136, in <module>
+    if a.execute:execute(a.pack.resolve(),a.source_commit)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/cocolon_localized30_pack_20261027/run_localized30.py", line 55, in execute
+    plan=validate_plan(pack,execution=True)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/cocolon_localized30_pack_20261027/run_localized30.py", line 22, in validate_plan
+    for k,v in FIXED.items():require(type(plan.get(k)) is type(v) and plan[k]==v,'local_plan_scope:'+k)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/cocolon_localized30_pack_20261027/run_localized30.py", line 13, in require
+    if not ok:raise ValueError(code)
+              ^^^^^^^^^^^^^^^^^^^^^^
+ValueError: local_plan_scope:gradient_clip

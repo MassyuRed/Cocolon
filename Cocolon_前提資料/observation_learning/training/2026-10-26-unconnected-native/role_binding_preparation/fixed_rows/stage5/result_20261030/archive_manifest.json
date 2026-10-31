@@ -1,0 +1,1142 @@
+[
+  {
+    "path": "cocolon_auxiliary4_20261029/archive/run/adapter/README.md",
+    "bytes": 5184,
+    "sha256": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885"
+  },
+  {
+    "path": "cocolon_auxiliary4_20261029/archive/run/adapter/adapter_config.json",
+    "bytes": 1674,
+    "sha256": "aecf02fe306faa05e11269a1e32a7e344aa80665e7367890989f0b97bcb12b33"
+  },
+  {
+    "path": "cocolon_auxiliary4_20261029/archive/run/run.json",
+    "bytes": 5147,
+    "sha256": "e6b532ecf36526897185d91e36de4d4bc9ea7668e7d6be8722585140f9f42334"
+  },
+  {
+    "path": "cocolon_auxiliary4_20261029/archive/runtime/actual_cpu_check.json",
+    "bytes": 8396,
+    "sha256": "2d605102cb30fb54c8e36ce7feb4179846e16db45618e7ffc5f61d6ac9045618"
+  },
+  {
+    "path": "cocolon_auxiliary4_20261029/archive/runtime/eval_inputs.json",
+    "bytes": 173609,
+    "sha256": "0cce7b0601ad579e480f81ccafe211c3596b3b841ff97e45b851dde6bc2b2028"
+  },
+  {
+    "path": "cocolon_auxiliary4_20261029/archive/runtime/train_messages.jsonl",
+    "bytes": 453483,
+    "sha256": "10ec23b65f253fac6c49dc730725fbcf9c7849867515a2bca96098db036ac2ed"
+  },
+  {
+    "path": "cocolon_auxiliary4_20261029/diagnostic/auxiliary_train_messages.jsonl",
+    "bytes": 104198,
+    "sha256": "3c80fa6c1c9b47df8efc84aa9f899af4ffb6ef436c0403fdb1bb0646f88f1654"
+  },
+  {
+    "path": "cocolon_auxiliary4_20261029/diagnostic/prepared_auxiliary_diagnostic.json",
+    "bytes": 2905,
+    "sha256": "8c5b0d0184b03d50b3ef57a92953351958803fedb2a0be15fcacb2fcce7014c9"
+  },
+  {
+    "path": "cocolon_auxiliary4_20261029/diagnostic/run_auxiliary_diagnostic.py",
+    "bytes": 15389,
+    "sha256": "19f870c07115dbb8e7a11118a3060f76e618304a44f2d2660e745ad514e08dd3"
+  },
+  {
+    "path": "cocolon_auxiliary4_20261029/support/run_expanded15_recovery.py",
+    "bytes": 14141,
+    "sha256": "e4be86a2b6fb0581961fc3c619853ba7f419e3239464e969214772b8bc3bfb54"
+  },
+  {
+    "path": "cocolon_auxiliary4_20261029/support/run_native15_expanded30.py",
+    "bytes": 29965,
+    "sha256": "ca03471329b5f622284cf3abd446cdd2f7831de3f7617da49a558ff7b5259e9d"
+  },
+  {
+    "path": "cocolon_auxiliary4_20261029/support/run_pilot.py",
+    "bytes": 28950,
+    "sha256": "2f659078c05bee6d7b32f50aae8b9eebc03c767d4a3be084bc17e9e3ccc4c10d"
+  },
+  {
+    "path": "cocolon_auxiliary_fit8_run_20261029/adapter/README.md",
+    "bytes": 5184,
+    "sha256": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885"
+  },
+  {
+    "path": "cocolon_auxiliary_fit8_run_20261029/adapter/adapter_config.json",
+    "bytes": 1674,
+    "sha256": "1b7074d4d5af35ca36911aa33e4e26173f469f475f1d6eb2cc68f3df9cadc244"
+  },
+  {
+    "path": "cocolon_boundary_probe4_pack_20261029/prepared_cpu.json",
+    "bytes": 459860,
+    "sha256": "b03a26bd2ae402b89cad6426595fb8b118e45df97c0b2a9cbf9b6acc27900c94"
+  },
+  {
+    "path": "cocolon_boundary_probe4_pack_20261029/probe4.py",
+    "bytes": 17198,
+    "sha256": "1d29016ab5b4dbebbc12cfa20159f2f85ee8dad695d51a46709959d6b0b4aade"
+  },
+  {
+    "path": "cocolon_fixed_rows_cpu_v2_20261029/cpu_check.json",
+    "bytes": 1055159,
+    "sha256": "92d5b80f72bdb861560591c38e4545cd931c1d07c64c7224d00fb909b8b73267"
+  },
+  {
+    "path": "cocolon_fixed_rows_cpu_v2_20261029/eval_inputs.json",
+    "bytes": 131263,
+    "sha256": "93dec013426950d1b79b96c595b7021348acca86a4891de8f9c244b1a8c083f3"
+  },
+  {
+    "path": "cocolon_fixed_rows_cpu_v2_20261029/train_messages.jsonl",
+    "bytes": 269825,
+    "sha256": "d6bf692885d542af10d6956a0c958c770cda97d06960384c31e0364f741c9948"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_environment_state_output_frame.py",
+    "bytes": 17598,
+    "sha256": "1a27d8f07ecf95cf9d852dd8084a38b68d8127bab17f49d620e8584fe118c1a4"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/__init__.py",
+    "bytes": 476,
+    "sha256": "46a6af9a0633cffec1cab545873d22d6d2c7fbab7cc2b90c8cd79e18cc20ce08"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py",
+    "bytes": 923310,
+    "sha256": "32b8ecd2dfe37b4e55cce9e78f6d441f6597994086c3b6555cea217e43495286"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/__init__.py",
+    "bytes": 36,
+    "sha256": "9bb6248dbf736ca74ffd50699e9818333c55dd0e9cf1b4e996512b60ec7eb7f0"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/__init__.py",
+    "bytes": 79,
+    "sha256": "50f5d7b93fac4c1da059cb77230f1ed106c4d8e0bc33202af9eb6d0b7ad9eebf"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py",
+    "bytes": 141969,
+    "sha256": "b36371ea28f72e62440486c8f0b4434071796fc7994b2cddff5d6c14d0d1bb89"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py",
+    "bytes": 43654,
+    "sha256": "714b08d345772fece72fb1cc088afafc957606b8d10a5cd8520576c2ec0e372c"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py",
+    "bytes": 28408,
+    "sha256": "7962f2c405284c94854b236448778c2ef996224f446f6ace1fa0b74fb75f244a"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/source_adapter.py",
+    "bytes": 13266,
+    "sha256": "741962f0d64026dfe07f542852732247227d15408df61ee04a8a43b8a4188f62"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py",
+    "bytes": 136485,
+    "sha256": "3bc11654d45c12edb756f536bdf54ba71e47b8bb0520406fb75ac3e6edf25125"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_input_specific_meaning.py",
+    "bytes": 228087,
+    "sha256": "e0cd30f5bc1bfb40baddf2d88a8005716a583993011cb2ca1b8617eafe1d1889"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py",
+    "bytes": 35068,
+    "sha256": "c15d4a0d037a2b3c748fa8ad6ce54466ee9a77c90e5ea43fdfb3d9fc969d4b35"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py",
+    "bytes": 115310,
+    "sha256": "c7a3adc4446b7958fb68e7cb7571403f9e702a8b47bee2c1672b409949a421a1"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py",
+    "bytes": 769786,
+    "sha256": "3af4c6ca2ab9d68ed22f4e7fee21aa30b7b9f3dc550bb3af90e28d0293780b05"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_response.py",
+    "bytes": 566378,
+    "sha256": "326d7ff7f2f1963ff6cac86f3ace6c61732ef0826a6436b097fba840a9b5a499"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_contracts.py",
+    "bytes": 6920,
+    "sha256": "884213e878d91499c80ea5953e6742141a38cb71db2d06a5f2ccfc3206ca2f77"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_engine.py",
+    "bytes": 10962,
+    "sha256": "ac55caa1ef8d8ad5b07a33ed7a6181cd7c5a165434d7db1900109a1c8fe8bbf1"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_history.py",
+    "bytes": 8486,
+    "sha256": "d962af2dc28c0b5d129f914a03949de18a58cc52a337cffe969c3d817f0b3198"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py",
+    "bytes": 100321,
+    "sha256": "72d8e866ddba068a4e1c57c929657b977d9775cca1cdf87e9785bb7c9e4a1fdd"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_source.py",
+    "bytes": 13882,
+    "sha256": "2b2c590d76fa72cac8ee559d5076254dd20fc29d12bbdb34ae65317e67400651"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_surface.py",
+    "bytes": 24030,
+    "sha256": "2b977dc27f1ae8cb6ba891e4cedec0dff3306b87b86a3ba6779cc132ccd7050f"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_v1a.py",
+    "bytes": 320326,
+    "sha256": "85809cd8462011d708debe14df0940e8f159c20ccc409cd714001288c74cda19"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py",
+    "bytes": 8099,
+    "sha256": "77f982df1d2776613432913f8e907bf4db68c4e072104f426adfd814cf928472"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/fixed_rows_reference_wire.py",
+    "bytes": 5802,
+    "sha256": "36ef0e86d146ebfce5af2f90efe15f779f3e1340ccfdcfdb2df5f7afd84ee1b4"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/model_candidate_source.py",
+    "bytes": 37203,
+    "sha256": "80ede9d87ec593f01a1623cfc4e204eaa914e8feebcc8b243e3cf48d3fc592fa"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/named_reference_wire.py",
+    "bytes": 6753,
+    "sha256": "c8109cd2fa3745ac32e7d2a72931f75a8e02e5acbc844933b376513464d9b6e3"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/piece_semantic_admission.py",
+    "bytes": 24429,
+    "sha256": "1b15207149c784dc932697dc1ce1b0c774fcf42e8585afc6316a784f4f2a0ee1"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py",
+    "bytes": 74226,
+    "sha256": "0dae0111b70c0ce9b134d86f9f2d658285f2a1862b82b17b375e6c7b84cb8747"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/piece_v1c.py",
+    "bytes": 56784,
+    "sha256": "ccdda259f10c157b462cf559d05fd97a323169565ab9abfe946a7bfdfbed3cf9"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/preparation.py",
+    "bytes": 15686,
+    "sha256": "7390686ce77915808ab376286e0174d586c5a86384798de5e808dcafe82260ab"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/preparation_sources.py",
+    "bytes": 7850,
+    "sha256": "f60d644d6b1a3ddb744b007c93838195acc4f34c0d7cf7471a09ccf1cfb34ab9"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_meaning_experience_engine/source_kernel.py",
+    "bytes": 42405,
+    "sha256": "124ff95f9162ce9cca4470a3f4e9d02d864ac3e6f6f0ae877f95d1c5f69f5397"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_text_generation_core/__init__.py",
+    "bytes": 13577,
+    "sha256": "ad19e38fdbf6ca78e4eadf82bb326b3af24fe9114df5d7b72102c513c82df6f2"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/__init__.py",
+    "bytes": 8499,
+    "sha256": "d01968dec068e68e019cfcfae512d480ab950685961c7e294f732d466d4a2f03"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_composer.py",
+    "bytes": 28059,
+    "sha256": "35e2b5c4e0a1b693b0a5278d33f10af5c1e0f40efd4eace8381e866d5d378125"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_composer_input_contract.py",
+    "bytes": 32686,
+    "sha256": "24b77238933dba5726fec707791467654d4847f640a923b78a3d300adc0b46aa"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_environment_state_output_surface.py",
+    "bytes": 18611,
+    "sha256": "5182f6d3fef28d0a9677cc72a4cd8483c182bf4bae7b15b8375ad9fd7f8cf677"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_evidence_adapter.py",
+    "bytes": 1242,
+    "sha256": "ff7c4fe5fa8fc535d0824f17a25d53285a74330b98a1c164ae8b5bc64b1f7a9a"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/emlis_evidence_adapter.py",
+    "bytes": 6057,
+    "sha256": "3161be710c19be2537a17edb450181b8411d9e42f1a8cfb310c66282fc03b1ec"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/emlis_observation_composer.py",
+    "bytes": 25495,
+    "sha256": "3ca31fbcf0ad9c93bdd4d267a3ef2000ce79b8d702bd7188f020eb11d5bd593c"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_composer.py",
+    "bytes": 24123,
+    "sha256": "09ea2b5812b882265848ae930e3d2725bfe0672802b7ea73b15029d831ec565f"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_composer_input_contract.py",
+    "bytes": 20720,
+    "sha256": "d3f14ea6a24dd2f2a86f3948579546f2a86696cbf909bd42d9174534960305fe"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_environment_state_output_guard.py",
+    "bytes": 9187,
+    "sha256": "d99e5ef09d23c43ad40bbd75f4a7dbe54a18bfb118eb4e02909ca177ae884351"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_evidence_adapter.py",
+    "bytes": 1206,
+    "sha256": "c3260a26065c6baf8ec62359a1268f3e877a98ac3408c85694e2e45af6cb3960"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_text_generation_core/composer.py",
+    "bytes": 8179,
+    "sha256": "e524111597d75599b0550b271a3df464df4d468aec28e608ab4586b7840da1f0"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_text_generation_core/evidence.py",
+    "bytes": 11810,
+    "sha256": "c70607e494558ed180adbd83d4d15cfef12d1a33ef69edb43d71681ee1a64c19"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_text_generation_core/guards/__init__.py",
+    "bytes": 2045,
+    "sha256": "6b9195bd1d154eb15ae9146b6bce450ca1d5e2d8c7a5568009a7900580cedcbc"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_text_generation_core/guards/base.py",
+    "bytes": 8324,
+    "sha256": "347d633411f0f838200b29385552777fc5acee48dc86a40d29d3b5ebabb5ca9d"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_text_generation_core/guards/grounding.py",
+    "bytes": 24690,
+    "sha256": "6530918f50120e3ca5ecde0f11af9b69e4481e78ee56331f9f4b1d360946ede9"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_text_generation_core/guards/japanese_coherence.py",
+    "bytes": 9728,
+    "sha256": "3f290b71566d99300a9b55c9bde3fe1df3518aa1aca6a033fcc1a487a882d682"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_text_generation_core/guards/must_keep_coverage.py",
+    "bytes": 9495,
+    "sha256": "25f7ef5d62c39a15f76671f19ab7720bdc5f10b0a9cec6906172947c560af4ff"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_text_generation_core/guards/overclaim_diagnosis.py",
+    "bytes": 7563,
+    "sha256": "8999ba422fa41f6ae528aa603ccc6b20cffecbc84ff597a36110799bba386969"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_text_generation_core/guards/template_echo.py",
+    "bytes": 12892,
+    "sha256": "bf8278975adfaf43adf8a913c3167a41d2957eb5f7a753fb5b29c4a212b6aa82"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_text_generation_core/phrase_units.py",
+    "bytes": 13096,
+    "sha256": "1734c73a210cf47fa2738b9cae79b506532d152cf7e1729cd48c0fa8b518a0fc"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_text_generation_core/policies.py",
+    "bytes": 2665,
+    "sha256": "4de732b2aa9d639fd2d4aaaf0cbd819109f5514f23781f50489ba5fcfd013390"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_text_generation_core/result.py",
+    "bytes": 8943,
+    "sha256": "998c3b3f12401bc5989bae1fe1cf1c78cddad642969ff531bcb3b165eab1d7ab"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_text_generation_core/sentence_plan.py",
+    "bytes": 9562,
+    "sha256": "6a74ecfb2ceb3935f09b5693e1bdb300652a734836c454c1926b6fc1ab7d9538"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_text_generation_core/stabilization.py",
+    "bytes": 13684,
+    "sha256": "d0bc23201d2a3ac0d87d71fcaa4c71fd70d54c6e238831012c51fb7720fa8cd3"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/cocolon_text_generation_core/types.py",
+    "bytes": 23229,
+    "sha256": "b8bd519b66e24cb64f50e73e0d71e96bb660c5d25489fb408a13e3e7ffe57080"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/config/emlis_observation_structure_dictionary.schema.json",
+    "bytes": 18147,
+    "sha256": "58ead6f8a9ed361526dae6753972edea76283dfdb9141f593347dd4e61d1899e"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/config/emlis_observation_structure_dictionary.v1.json",
+    "bytes": 55044,
+    "sha256": "5448d19bddb346d9fdc8cc4bc8403a4ee44b813b5063f842619c041c8a2d5c97"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/config/emlis_reception_assistance_dictionary.schema.json",
+    "bytes": 8653,
+    "sha256": "1ce2bf2f491210741ae00e75a2ef8ce4b55221a16ef05b7eafdbca0e05a59b0f"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/config/emlis_reception_assistance_dictionary.v1.json",
+    "bytes": 24689,
+    "sha256": "227326722e27d6fcd570ed25614205f8a9f9cb74cf78e93dcd22c4b56bf5b1b1"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_conversation_composer_service.py",
+    "bytes": 39159,
+    "sha256": "de3d49d223cb16f5abf53eeaf426d11cb429e35b3bdb8d04618810baad27396c"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_current_input_bundle.py",
+    "bytes": 17551,
+    "sha256": "63ddb6bf3db472bdaddfd8c3fbef68034aeb3cf51188508c0ad8b8cd920271f8"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_environment_state_output_surface_contract_completion.py",
+    "bytes": 21723,
+    "sha256": "c338364dee3e6d01914abf61e330430778366743a6befff1c36a4da0fb908c1d"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_evidence_ledger_service.py",
+    "bytes": 20401,
+    "sha256": "a4f593b0ce44bb6d7203389ad06b8739ebe747b8e63a8b7ff985c0beecb9f4c3"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_grounded_human_reception.py",
+    "bytes": 712909,
+    "sha256": "adadaa3702942a335dcfb8e0c8b9648c433cf6453c7bab6f65dea1d75357a662"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_grounded_observation_gate.py",
+    "bytes": 632335,
+    "sha256": "5736f9d83272d6a50cd26651f37db928e7a2aefb78f8723fbf554af03fb3630d"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_grounded_observation_plan.py",
+    "bytes": 1051001,
+    "sha256": "000e175609c10690ebf9d1227e2d906d9446ac5ec8c826bacf5f866081b302d9"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py",
+    "bytes": 283355,
+    "sha256": "422c32240149e1a48a1a510b6e0681d04642d3d566158eb920a71e1130ca8110"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_human_follow_selector.py",
+    "bytes": 66642,
+    "sha256": "bede5fb2b0b089a7af6aa2e2f8960ab4dcdd93d6a49683e49e117c9e99a4b7a6"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_input_meaning_block_service.py",
+    "bytes": 14299,
+    "sha256": "5b073f1653f4565b9a5e80c45786c33b111b002b83f12ac435824cceb8f16069"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_observation_integrator_service.py",
+    "bytes": 12170,
+    "sha256": "20aa4f793054844904084ee72c4bdc3b3198a7ad849c8a29fe526a655ce1bf21"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_observation_reply_contract.py",
+    "bytes": 20707,
+    "sha256": "84c58c6b0cf23ade91609aedd88b22c8497898dda24dcf2657d4bedb6cd537c0"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_observation_structure_dictionary_loader.py",
+    "bytes": 42176,
+    "sha256": "bbda7d45ede010c68f175bfb8f925efc6c70d8fa5c092f6c88d8de7bd54bb805"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_observation_structure_material_service.py",
+    "bytes": 63435,
+    "sha256": "2897deadf2409757b8fc4c181d34c9a306629a1094f467aabf20a28e94c3b9ef"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_perspective_board.py",
+    "bytes": 6552,
+    "sha256": "c4eabe4403c1cf98f4c645ca94cdf8164f69408d9027f7996f18965dc9c34e93"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_perspective_observers.py",
+    "bytes": 23757,
+    "sha256": "cca669364efa7359bd08fcfe8bf5335519be76a81f6700254ed5d0be713ecb61"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_reception_assistance_dictionary_loader.py",
+    "bytes": 32705,
+    "sha256": "82e5dc4c28132f1e295afd6dfb6a389cac579c0324e011ff046f986618e555c2"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_reception_mode_resolver.py",
+    "bytes": 47838,
+    "sha256": "ec56f2eb0c0146ebc1e9cc8804e4a05001af049e826e9f9f73cfb8ab918de3e2"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_response_contract.py",
+    "bytes": 29032,
+    "sha256": "e2c0e7af36700865cb471ef598fa99afa0b775507172571d5a44946b2d71a4c7"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_safe_daily_metaphor_material.py",
+    "bytes": 49816,
+    "sha256": "4d8b9bc3ca097733aee040eed5268ad434e890ec6b94087e772739f0c3501447"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_safety_boundary_service.py",
+    "bytes": 10572,
+    "sha256": "77c0317a5bcdf2a71e932f6bd9b53cec2beceb80ddf69f0f5bcb18a22a1c66b7"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_safety_triage.py",
+    "bytes": 21619,
+    "sha256": "b9f0d39a252ab00ab7f4c9c882d9c8c3a6799593870506b0184d20b774c9c4e6"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_shared_reception_evidence.py",
+    "bytes": 32286,
+    "sha256": "ed2996d1629a951c16b6a667252ffa4fa5ad84ff1693949050c065174a505737"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_state_answer_composer_contract.py",
+    "bytes": 36764,
+    "sha256": "3d2a85ed3663666822b9a3af97b9d386a43d4f6d5f426a5b1743ed654722a77b"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_state_answer_ratio_policy.py",
+    "bytes": 57660,
+    "sha256": "6d2452a06bbba70d9ea78d171c6622c30eddfc23dc019ddd305b1c6c1ec6b09c"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_state_answer_special_cases.py",
+    "bytes": 42655,
+    "sha256": "a09b9ddecd72642681e840885c6e2457e3ec5e30ff5a3c26146a99a8c77ad4e7"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_state_answer_surface_contract.py",
+    "bytes": 101300,
+    "sha256": "ed7ff52e76dc7dcb49de131558f54cba58f1b1465300f4ab3dfe093e4bec3577"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_two_stage_section_surface_plan.py",
+    "bytes": 40940,
+    "sha256": "5d059c3c1df52f75807a64500016489b5e9057ceeaa0453b5ecf0e4efcd166dc"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_types.py",
+    "bytes": 55000,
+    "sha256": "3a0cfc7ee9c49cb0dd2b014493357ccd84924f455b22cc483272bf1872d80b17"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_user_address_service.py",
+    "bytes": 2019,
+    "sha256": "eecc778d6fc58204801617a4531ffff268346e5f683d9bccfdb45ec382cd3913"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_user_fact_grounding_boundary.py",
+    "bytes": 30960,
+    "sha256": "6514f28b26ee6ddd604d2f0446734b5a25e17dc617cdb5cb106342c044215218"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_user_label_connection_candidate.py",
+    "bytes": 27910,
+    "sha256": "d4a20b32e6b4955930426587553fb33bce49291431352ded58e2bb4f6e3e830f"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_user_label_connection_gate.py",
+    "bytes": 51226,
+    "sha256": "e786889512a133c2d7bf5bf75bb09c76861ab054b55381fd43678047d85d609b"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_user_label_connection_material.py",
+    "bytes": 45334,
+    "sha256": "541d7e81e144f9cbb322a0feb827fc1e3431a6d7ccc80997d13aa68d017ef02a"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_user_label_connection_surface.py",
+    "bytes": 56469,
+    "sha256": "863525231938e8869f0b90e1420052232c598b34e9bda665bbf19568fb48eec4"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_ai_user_label_connection_types.py",
+    "bytes": 19070,
+    "sha256": "dfe48f23f38cc767ec79718ef87390210f35b891ccf1dd42e27fa30a72fb4891"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_thread_config.py",
+    "bytes": 1113,
+    "sha256": "94e0f44c0a4cd12bcbbffdb643dba0f183094b0476f29c055885dc1f0de2291b"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_thread_service.py",
+    "bytes": 45551,
+    "sha256": "3c5bdaf79885df0b3607dc5c925d738c5fb7ae717e1d4354ffc05d6f23022fb8"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/emlis_thread_store.py",
+    "bytes": 3046,
+    "sha256": "5c6f74894d66dd375daef4e3d44696e9795e67a4a3bd7ac7cbc5459e6f04c54f"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/piece_text_formatter.py",
+    "bytes": 14696,
+    "sha256": "74fc6fea0bb613a0fbec9cd59d602c8a02b1f40161f0000e5576f63e41ab85e9"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/piece_v2_content_policy.py",
+    "bytes": 19483,
+    "sha256": "59ebc8869140892d16ae99a031be0811ac212a5d31ca050e032b26f1c8e0d678"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/piece_v2_contract.py",
+    "bytes": 11682,
+    "sha256": "89700b8b1b1d776f39c61d6e8f8866596dcede7f4466892b3c9b643b9284cddf"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/piece_v2_expression.py",
+    "bytes": 4415,
+    "sha256": "158bb1fd6b26e5d27d3bf1c051d2f2a8013341d403e2e7f5afebd41856388361"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/piece_v2_generation.py",
+    "bytes": 9815,
+    "sha256": "b7e9b0fe23d679b89c226511904935f8da00beda69921c8bd71bd87afced8446"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/services/ai_inference/publish_governance.py",
+    "bytes": 10813,
+    "sha256": "02009a8aa1a82f7d30ddd88dd9c85b989efd24d21b54d4d3ca2a41d5d15b6e9a"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/tests/fixtures/cmee_emlis_model_daily_calm_v1.json",
+    "bytes": 311367,
+    "sha256": "6e63fc666bed8c7b44b29a90c4d5abc95c7c4e8c26dc617cfe718883d0b91f71"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/tests/fixtures/cmee_emlis_sixrow_v3.json",
+    "bytes": 59031,
+    "sha256": "1099f61a1991c23263010626b7068bfaf880efb4f61f2de58c57f98cc6c3be0d"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/tests/test_cmee_emlis_model_daily_calm.py",
+    "bytes": 14850,
+    "sha256": "9371a84eab8b2f70937dc06d9752b9169735aace4ad036832b433eee06e1088d"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/tests/test_cmee_emlis_model_meaning.py",
+    "bytes": 19449,
+    "sha256": "686d84fa75c67965b1e1048aad543eaf2275eeeb95f14f80b0d1428e37e1863e"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/tests/test_cmee_emlis_model_proposal.py",
+    "bytes": 26491,
+    "sha256": "4e939e5773cd0e376cd3d1c314e2bf4d8397ceb8291200d81972e44ec6dfe139"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/tests/test_cmee_emlis_sixrow.py",
+    "bytes": 24740,
+    "sha256": "e1525e6cec91c450c1094d843c46a106fde8b20c54cde96b21741ce793dfc1d3"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/tests/test_cmee_fixed_rows_reference_wire.py",
+    "bytes": 7588,
+    "sha256": "054211b4e2d79e829d084767ca2ca1896429438c214da4e6331af0bf4e1fd6e5"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/tests/test_cmee_model_candidate_source.py",
+    "bytes": 14397,
+    "sha256": "abbc715af76c20322ff3f3568ab660c4b44a0e6e66960de908853ec5bb9a1b90"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/tests/test_cmee_named_reference_candidate.py",
+    "bytes": 16510,
+    "sha256": "fa07a3be3aaeb45919728110cf3836d5a295c8d34ee77d65a2f8239be662cc2b"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/tests/test_cmee_preparation.py",
+    "bytes": 21387,
+    "sha256": "cdad610c707a5dc573fc462e1e2539488f1743a68fd94a0bf708bc57651fe24b"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/tests/test_cmee_quote_candidate.py",
+    "bytes": 13276,
+    "sha256": "e481e2fa9c35d36855a950853ab4b485d979bcf51676e23f9d5a5adf74def8f4"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/api/ai/tests/test_emlis_q2_application.py",
+    "bytes": 20443,
+    "sha256": "771bc98fe23eee41fdd10c86f91accb55863cb24fee77b2609686e7ba1a6d514"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/check_cpu.py",
+    "bytes": 6568,
+    "sha256": "4e44d62cd9b66851c84a3bc2b8123d85b4e45838299f3aa3d5661cd29ede44ac"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/frozen/api_blobs.json",
+    "bytes": 688,
+    "sha256": "69168896b25c6bf1e008592bdeff1e975a4a3b88ca3366487a094414d98b9e85"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/frozen/consume_expanded15_recovery.py",
+    "bytes": 18797,
+    "sha256": "981134897057ae1f4acaeaf340307fdd59965fe8c5808858d48caf4fe55feccf"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/frozen/cpu_preparation.json",
+    "bytes": 16296,
+    "sha256": "64a7d905c4cfe3dbea227064e8aee053b23bff15baf51261f4a41c6478306f9d"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/frozen/current_eval_inputs.json",
+    "bytes": 173280,
+    "sha256": "05d2e02f042b478dec28605d28f6dd9ae93c132aeb7a715f95a83bb4458d1774"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/frozen/current_train_messages.jsonl",
+    "bytes": 351979,
+    "sha256": "34e082ed14b5d074ddd18544cd1b8850cc35bea0eb583932fbadefcc1753f396"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/frozen/eval_inputs.jsonl",
+    "bytes": 169628,
+    "sha256": "c67fa4098bafa10508bf57bf1975fcdfd6f2359f851e34c0f26148310eb8b75e"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/frozen/sft_examples.jsonl",
+    "bytes": 307770,
+    "sha256": "fd73ddfeb5ed08a4451ed520ab01af54076c3b5e824e4bfeff326cf5cd69b0b5"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/frozen/train_messages.jsonl",
+    "bytes": 349174,
+    "sha256": "29f37e38f4a615220c739176a6eaa2e0e01aae36c7bb6f87db8be248aecd1772"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/legacy/run_pilot.py",
+    "bytes": 28950,
+    "sha256": "2f659078c05bee6d7b32f50aae8b9eebc03c767d4a3be084bc17e9e3ccc4c10d"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/legacy/verify_cmee.py",
+    "bytes": 13043,
+    "sha256": "6c042267eeaa9dace4a63abd2ae1ad42f2486c722947a08ed3d1daf571a7684b"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/model_candidate_source.py",
+    "bytes": 29558,
+    "sha256": "a3d32c33529e9165c18efa42b2c3f3f6dd33b42bb3f4ecaef9e9cd9ccce46218"
+  },
+  {
+    "path": "cocolon_fixedrows5_cmee_20261029/restore_payload.json",
+    "bytes": 37476,
+    "sha256": "5639c08b38227414bb2322eec1545e7a9beb41185e45b4ca2e0d1272d505e9d6"
+  },
+  {
+    "path": "cocolon_fixedrows5_cpu_20261029/cpu_check.json",
+    "bytes": 585522,
+    "sha256": "efeed9fbd09e41e776f1c29d517b800c1ad6ffdb14d0e330a51501d657068497"
+  },
+  {
+    "path": "cocolon_fixedrows5_pack_20261029/consume_fixed_rows5.py",
+    "bytes": 12265,
+    "sha256": "ac83ac8856a6fee7477c7e3a68313da22ed756c96d1bbbab048fbb2bde7162f6"
+  },
+  {
+    "path": "cocolon_fixedrows5_pack_20261029/current_api_source_manifest.json",
+    "bytes": 829,
+    "sha256": "c0f0b307b29b7997966f88a1adb6e57e782fcc778e49f25502df87962d1ed1f4"
+  },
+  {
+    "path": "cocolon_fixedrows5_pack_20261029/prepared_cpu.json",
+    "bytes": 750331,
+    "sha256": "0d95fc722ab24cb9608a84249f0ae010995adf270c35d6acd8d0afe37ab75093"
+  },
+  {
+    "path": "cocolon_fixedrows5_pack_20261029/run_fixed_rows5.py",
+    "bytes": 16025,
+    "sha256": "31118ba38889220de621efeaf8877c469215d211b7c481ab33020f1fb14a5f4a"
+  },
+  {
+    "path": "cocolon_fixedrows5_pack_20261029/runtime_authorized_plan.json",
+    "bytes": 5890,
+    "sha256": "e65e869d3daf44b5b7492170c45a3997e4b51cf6ef7859ac8fd3dddac8d03041"
+  },
+  {
+    "path": "cocolon_joint_role18_run_20261029/adapter/README.md",
+    "bytes": 5184,
+    "sha256": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885"
+  },
+  {
+    "path": "cocolon_joint_role18_run_20261029/adapter/adapter_config.json",
+    "bytes": 1674,
+    "sha256": "a08f36c4b7f29abc7d85564e876ff7b90ce7fe6aa641ffe1b25fb56c908809db"
+  },
+  {
+    "path": "cocolon_rehearsal13_cpu_20261029/eval_inputs11.json",
+    "bytes": 131321,
+    "sha256": "6eaa2acd66f359da1d0e77bdb48c1eb483138dbcc50cb30ce7673b6da499b4ea"
+  },
+  {
+    "path": "cocolon_rehearsal13_cpu_20261029/prepared_cpu.json.gz",
+    "bytes": 104552,
+    "sha256": "ddf81a26f67e98fff901cc78e405f06919ab9cbe4ad6cbc49908a6b8cf616165"
+  },
+  {
+    "path": "cocolon_rehearsal13_cpu_20261029/train_messages11.jsonl",
+    "bytes": 269883,
+    "sha256": "1401ee1144b820bbedbbcf1740133ca7d4330231f0d04732692820723bccff3b"
+  },
+  {
+    "path": "cocolon_rehearsal13_run_20261029/adapter/adapter_config.json",
+    "bytes": 1674,
+    "sha256": "db3ed15f287924089bdcdc4b057f93f3173df8026bcf3aaaaf65557916bef519"
+  },
+  {
+    "path": "cocolon_rehearsal13_run_20261029/adapter/adapter_model.safetensors",
+    "bytes": 15351792,
+    "sha256": "114466411f36f0eef7a2dceaec7f5190544ac8545eb6b2f6a3d0446b70f90b66"
+  },
+  {
+    "path": "cocolon_rehearsal13_run_20261029/after_TRAIN-DAILY-CALM-01-INITIAL.jsonl",
+    "bytes": 21210,
+    "sha256": "6fb512ab83dd68b809af0ee5652e985c78d5510dec5005b71e9acaa7784ccf0c"
+  },
+  {
+    "path": "cocolon_rehearsal13_run_20261029/after_TRAIN-DAILY-CALM-02-INITIAL.jsonl",
+    "bytes": 21184,
+    "sha256": "5085f6d8e5169947c2d1e7114078543fa3c168e4daec129fce61a3ce01ea7c87"
+  },
+  {
+    "path": "cocolon_rehearsal13_run_20261029/after_TRAIN-DAILY-CALM-03-INITIAL.jsonl",
+    "bytes": 21223,
+    "sha256": "ea86fa1052d3dcff5542eb29ca1440e153fef1ee44d04cbeda2db704171258a2"
+  },
+  {
+    "path": "cocolon_rehearsal13_run_20261029/after_TRAIN-SERVICE-CHAIR-01-CORRECTION.jsonl",
+    "bytes": 29328,
+    "sha256": "f5b0648beeb382da59fb64ec9d04ea36327341a9e0345bc391667a4693647879"
+  },
+  {
+    "path": "cocolon_rehearsal13_run_20261029/after_TRAIN-SERVICE-CHAIR-01-INITIAL.jsonl",
+    "bytes": 18583,
+    "sha256": "016df15a7c3d859fe9fa7123b1fdf620446eaaac1556f92545fd33a3c1fa1cb0"
+  },
+  {
+    "path": "cocolon_rehearsal13_run_20261029/after_TRAIN-SERVICE-CHAIR-02-CORRECTION.jsonl",
+    "bytes": 29345,
+    "sha256": "039e0ecd934f6f6170883a01cfadf0242c77b2191a0a061cd5f71804ce23fa94"
+  },
+  {
+    "path": "cocolon_rehearsal13_run_20261029/after_TRAIN-SERVICE-CHAIR-02-INITIAL.jsonl",
+    "bytes": 18584,
+    "sha256": "26d9d6babb46862b66a35b129fb43a77523e39e2c7213b252548eabcefab116a"
+  },
+  {
+    "path": "cocolon_rehearsal13_run_20261029/after_TRAIN-SERVICE-CHAIR-03-CORRECTION.jsonl",
+    "bytes": 29412,
+    "sha256": "02cec380cb0c247f1feaa2548fa235d3f4e669deef9f863912575a7e0da23858"
+  },
+  {
+    "path": "cocolon_rehearsal13_run_20261029/after_TRAIN-SERVICE-CHAIR-03-INITIAL.jsonl",
+    "bytes": 18584,
+    "sha256": "ba5eb0afd874b99c8aaa2d0f45dccdbbdc914aa471375173a546036f22305029"
+  },
+  {
+    "path": "cocolon_rehearsal13_run_20261029/cmee/diagnosis.json",
+    "bytes": 1225336,
+    "sha256": "ba9ad1f0435374ed6d72a9a724aa3af5d6036e5193b25cc68f29329cc362864a"
+  },
+  {
+    "path": "cocolon_role18_pack_20261029/auxiliary_train_messages.jsonl",
+    "bytes": 220748,
+    "sha256": "4aec0be06138ec94b52534148219372cfc608de93b2ba0b13cbabf24e814707f"
+  },
+  {
+    "path": "cocolon_role18_pack_20261029/consume_role18.py",
+    "bytes": 8287,
+    "sha256": "a7a15512f1966c247e2ff8131850d0a31bdd900cd049278c878b536c9cdb4c47"
+  },
+  {
+    "path": "cocolon_role18_pack_20261029/prepare_role18.py",
+    "bytes": 6235,
+    "sha256": "be89f929ee40beea0201bb06206b9cf496d7cb44a715fb7682c2bd8ee02b8ec5"
+  },
+  {
+    "path": "cocolon_role18_pack_20261029/role18.plan.json",
+    "bytes": 3784,
+    "sha256": "124a3d4aca2b484720119b7021857e7ca55ad33b59926b3cde6b59d280693be6"
+  },
+  {
+    "path": "cocolon_role18_pack_20261029/run_role18.py",
+    "bytes": 20818,
+    "sha256": "99a07cfe6b843224417d6c6ea63d000cdbd73593da5c867e049772685ed494e8"
+  },
+  {
+    "path": "cocolon_shape2_cpu_20261029/cpu_check.json",
+    "bytes": 1041279,
+    "sha256": "3cc1ff07d6aba5f1013fedc2f284efe1317ba9b0144fb02a671c6c9417848b1f"
+  },
+  {
+    "path": "cocolon_shape2_cpu_20261029/eval_inputs2.json",
+    "bytes": 38009,
+    "sha256": "c302b2617e8d9a6895fe7fa5ff12e8da31778404f91dd316facda2d7869008a8"
+  },
+  {
+    "path": "cocolon_shape2_cpu_20261029/train_messages2.jsonl",
+    "bytes": 120366,
+    "sha256": "c4d7825d2e5675d34e61902d3c892ca816c80ac35c954653a1c4c906c769fcd9"
+  },
+  {
+    "path": "cocolon_stage5_pack_20261030/consume_stage5.py",
+    "bytes": 9946,
+    "sha256": "92bf81c1ca52a72480753010efc911fc132c74f4208a533853feb70fc5650713"
+  },
+  {
+    "path": "cocolon_stage5_pack_20261030/cpu.exit",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "cocolon_stage5_pack_20261030/cpu.log",
+    "bytes": 1862,
+    "sha256": "7cc28238c9e70694c9a0bdb77cc0125070f87ef50e4ee98d83e82ec4dc246a71"
+  },
+  {
+    "path": "cocolon_stage5_pack_20261030/execute_once.lock",
+    "bytes": 45,
+    "sha256": "57266f1dbfaabf0f42cf4cdfc35e09ac283f9d5b0bfb35aedd07d4a305370ea9"
+  },
+  {
+    "path": "cocolon_stage5_pack_20261030/export_result.py",
+    "bytes": 2829,
+    "sha256": "bdcbae86978c78e3a455513e01760bf73b62520c6af78ba6adb7b85bf03b2c47"
+  },
+  {
+    "path": "cocolon_stage5_pack_20261030/gpu.exit",
+    "bytes": 2,
+    "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  },
+  {
+    "path": "cocolon_stage5_pack_20261030/gpu.log",
+    "bytes": 4470,
+    "sha256": "b16c7a00abcf443378a458c67e0bece2a0cd765a4c8a224a1af345b65eb5af84"
+  },
+  {
+    "path": "cocolon_stage5_pack_20261030/gpu_elapsed.json",
+    "bytes": 53,
+    "sha256": "e95b64df9c6f4f4b6d69f8b4ca97f7c7ee1afac54ba304d1665c4c26c67febb5"
+  },
+  {
+    "path": "cocolon_stage5_pack_20261030/gpu_launch.json",
+    "bytes": 395,
+    "sha256": "d70b466998172fb553f968aceb33280750d7d2ecae105c72a0273959bb0a4502"
+  },
+  {
+    "path": "cocolon_stage5_pack_20261030/launch_once.py",
+    "bytes": 859,
+    "sha256": "5b5e16eb550039278ce2015e6f712f28bb89985607ebf31375fe7908765aacb2"
+  },
+  {
+    "path": "cocolon_stage5_pack_20261030/launcher.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "cocolon_stage5_pack_20261030/plan.json",
+    "bytes": 5227,
+    "sha256": "f011403c424ae2e7f107d9ab7b57b538ff9951bd3ca2a31393bd83243d34f03d"
+  },
+  {
+    "path": "cocolon_stage5_pack_20261030/post_identity.json",
+    "bytes": 282,
+    "sha256": "a312dc47238673d25e0e398cc431657608cec1621adcdb7eb6b998ed26cf4f2b"
+  },
+  {
+    "path": "cocolon_stage5_pack_20261030/prepare_stage5.py",
+    "bytes": 9819,
+    "sha256": "d4dbf5af9bc5cc4cbcaa92691bab539dfb4fdf763a01a814ea1a0fdc3cdd43d7"
+  },
+  {
+    "path": "cocolon_stage5_pack_20261030/run_stage5_once.py",
+    "bytes": 17510,
+    "sha256": "59311ef5f8caefa8aba26b1eee357fb69d32ca75ffd8aab63c4b1d857709eb83"
+  },
+  {
+    "path": "cocolon_stage5_prepared_20261030/FT-BOOK-AFTER-ANSWER_cold.json",
+    "bytes": 143156,
+    "sha256": "cdb5169b2cb543b35c6809981efb9f3f385b5997c870fde782a1d2ec00e21156"
+  },
+  {
+    "path": "cocolon_stage5_prepared_20261030/FT-BOOK-AFTER-ANSWER_saved.json",
+    "bytes": 263181,
+    "sha256": "ee6acfa6d5a7c12bc15b8d183bb9cc22a5a3c953b441e4bc7e4d54ebbc8f0443"
+  },
+  {
+    "path": "cocolon_stage5_prepared_20261030/FT-BOOK-AFTER-ANSWER_teacher_projection.json",
+    "bytes": 9510,
+    "sha256": "5563ec3ac59dd33c293d05edd0b1a5a36e249da2b940f602380167e9a1907ec4"
+  },
+  {
+    "path": "cocolon_stage5_prepared_20261030/FT-BOOK-AFTER-ANSWER_teacher_stages.json",
+    "bytes": 162584,
+    "sha256": "af8417880a1d2a601f1efa57b848530b5269dbbed9a68823c815ac60475b1e1b"
+  },
+  {
+    "path": "cocolon_stage5_prepared_20261030/FT-SHOP-AFTER-ANSWER_cold.json",
+    "bytes": 161029,
+    "sha256": "5eb814ba996883aa7df43ce6493283881a238c8ebe1ba91444f1d21c141e1deb"
+  },
+  {
+    "path": "cocolon_stage5_prepared_20261030/FT-SHOP-AFTER-ANSWER_saved.json",
+    "bytes": 290656,
+    "sha256": "d4b466090f7fa6a3014219ab355d40d200c8732d2f611d3dfbbd756e207edc53"
+  },
+  {
+    "path": "cocolon_stage5_prepared_20261030/FT-SHOP-AFTER-ANSWER_teacher_projection.json",
+    "bytes": 10866,
+    "sha256": "28e2ca4621653dc8bbd0152330ed68a301c7c6f184005673d810d7bc092a8dc8"
+  },
+  {
+    "path": "cocolon_stage5_prepared_20261030/FT-SHOP-AFTER-ANSWER_teacher_stages.json",
+    "bytes": 174022,
+    "sha256": "122d2862711fe707aebfbefd4f7ac85ed80326486e388916cbfcfc0d3e455521"
+  },
+  {
+    "path": "cocolon_stage5_prepared_20261030/cpu_summary.json",
+    "bytes": 594844,
+    "sha256": "8a1332a32514a9d1ee52bcec8dda9a0c40efa66b0fe20aaef5716527ccbd134a"
+  },
+  {
+    "path": "cocolon_stage5_prepared_20261030/prepared_cpu.json.gz",
+    "bytes": 151910,
+    "sha256": "08670691b085d2b7d3ba6548661052f5bf04422a65134c3a49d89f03a86d0308"
+  },
+  {
+    "path": "cocolon_stage5_prepared_20261030/train19.jsonl",
+    "bytes": 413995,
+    "sha256": "1804a703609d6a1c6d7cef4786728409bc8d2b07aaf4ac475a087eddd23ee80d"
+  },
+  {
+    "path": "cocolon_stage5_run_20261030/FT-BOOK-AFTER-ANSWER_stages.json",
+    "bytes": 29808,
+    "sha256": "d99c50ed30fc95ac5f78a82eadb707f02a48342181b01e34e6eb45f194f509c2"
+  },
+  {
+    "path": "cocolon_stage5_run_20261030/FT-SHOP-AFTER-ANSWER_stages.json",
+    "bytes": 90365,
+    "sha256": "8a007875105fd41491bfcd015ee48e3ea6e66cd5aab1299d75bc5ed14f87392e"
+  },
+  {
+    "path": "cocolon_stage5_run_20261030/adapter/README.md",
+    "bytes": 5184,
+    "sha256": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885"
+  },
+  {
+    "path": "cocolon_stage5_run_20261030/adapter/adapter_config.json",
+    "bytes": 1674,
+    "sha256": "0404605c3736fd54d6f75d2dacf3254a10e6982f005a2765642ab230dceac1c9"
+  },
+  {
+    "path": "cocolon_stage5_run_20261030/adapter/adapter_model.safetensors",
+    "bytes": 15351792,
+    "sha256": "9b1901abdb3776b301c3e77b5787e4aa851f6a007ccac29764507de5f72f3818"
+  },
+  {
+    "path": "cocolon_stage5_run_20261030/cmee/diagnosis.json",
+    "bytes": 728,
+    "sha256": "cd7613dd7d36d1129781875ae5e33f3feeaa69f1b1850c64a7608a5302ef567f"
+  },
+  {
+    "path": "cocolon_stage5_run_20261030/initial_loaded_tensors.json",
+    "bytes": 26030,
+    "sha256": "8022d25204cf994b831c41e2154033adccfbc6b409c021cde9854961ad9b2459"
+  },
+  {
+    "path": "cocolon_stage5_run_20261030/reloaded_tensors.json",
+    "bytes": 26033,
+    "sha256": "0b78ca6242771c68a99f9309be2f3189e0941d06ac89ce2a44efc158b420c1de"
+  },
+  {
+    "path": "cocolon_stage5_run_20261030/run.json",
+    "bytes": 9373,
+    "sha256": "a75b68eb3d31eac003df869ba6b5e742b6d17390574811555b44e9101da888a4"
+  },
+  {
+    "path": "cocolon_stage5_run_20261030/stage1_FT-BOOK-AFTER-ANSWER.jsonl",
+    "bytes": 4938,
+    "sha256": "a5b7cc15356cc219489c79514d46899b529f2f20cebe264a1afba214a4b36c57"
+  },
+  {
+    "path": "cocolon_stage5_run_20261030/stage1_FT-BOOK-AFTER-ANSWER.jsonl.messages.json",
+    "bytes": 19382,
+    "sha256": "b6556c8efb725c9a9cc215ae18db5c36ba2302055fb48c045f08ed29ea6de3d1"
+  },
+  {
+    "path": "cocolon_stage5_run_20261030/stage1_FT-SHOP-AFTER-ANSWER.jsonl",
+    "bytes": 8058,
+    "sha256": "6f1060573003d34907c733669c3bc205b832c48197c719d5de9970ff0cf96899"
+  },
+  {
+    "path": "cocolon_stage5_run_20261030/stage1_FT-SHOP-AFTER-ANSWER.jsonl.messages.json",
+    "bytes": 19978,
+    "sha256": "4ad86796a06e3d29cb8cc831cd5cdacc45db16e3a21b81fe33e6159b304d7b7b"
+  },
+  {
+    "path": "cocolon_stage5_run_20261030/stage2_FT-SHOP-AFTER-ANSWER.jsonl",
+    "bytes": 18434,
+    "sha256": "0f7b8dc5770e2ee5f48e2322018a5637254f67edf0d163bb0fad99ac3ee3c6fe"
+  },
+  {
+    "path": "cocolon_stage5_run_20261030/stage2_FT-SHOP-AFTER-ANSWER.jsonl.messages.json",
+    "bytes": 22182,
+    "sha256": "ff3dbbffc7da26c9095dad224c62d101eac982c122aeaaa17db1fe709309df80"
+  },
+  {
+    "path": "cocolon_stage5_run_20261030/training.jsonl",
+    "bytes": 3546,
+    "sha256": "da411be4248b2e2b7528686902a7e5dcbfb5efe3701c0f8b0ba894bb27c167c0"
+  },
+  {
+    "path": "cocolon_suffix2_pack_20261029/run_suffix2.py",
+    "bytes": 20290,
+    "sha256": "7ff93955dceef2809e270cb62b6e15442a0aeb481ac2eaa6e3fe59edfcaba99f"
+  },
+  {
+    "path": "prepare_rehearsal13.py",
+    "bytes": 7174,
+    "sha256": "845fa39064245e5ad30787202f6e272e082d4e1f389172a972aabec74944703b"
+  },
+  {
+    "path": "prepare_shape2.py",
+    "bytes": 8157,
+    "sha256": "5d593c56aa20230f055b0bec2bdb9670f04be8cd098e65a4dfc177c710d41ec0"
+  }
+]

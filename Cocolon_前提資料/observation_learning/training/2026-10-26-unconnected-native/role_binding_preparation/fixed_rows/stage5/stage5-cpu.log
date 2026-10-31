@@ -1,0 +1,14 @@
+STAGE5 CPU FEASIBILITY ONLY / NO MODEL / METHOD UNAPPROVED
+FT-BOOK-AFTER-ANSWER exact True counts {'quotes': 17, 'claims': 10, 'relations': 7, 'updates': 7}
+stage 1 prompt 4461 target 492 cap 640 total 5101
+stage 2 prompt 4962 target 899 cap 1152 total 6114
+stage 3 prompt 5864 target 283 cap 512 total 6376
+stage 4 prompt 6140 target 267 cap 512 total 6652
+stage 5 prompt 6418 target 220 cap 384 total 6802
+FT-SHOP-AFTER-ANSWER exact True counts {'quotes': 18, 'claims': 11, 'relations': 6, 'updates': 8}
+stage 1 prompt 4613 target 523 cap 768 total 5381
+stage 2 prompt 5145 target 1094 cap 1280 total 6425
+stage 3 prompt 6242 target 236 cap 384 total 6626
+stage 4 prompt 6471 target 291 cap 512 total 6983
+stage 5 prompt 6773 target 293 cap 512 total 7285
+SECONDS 4.656087083974853 ALL_SOURCE_AND_WEIGHTS_UNCHANGED True MODEL 0 / GPU FORWARD 0 / CMEE 0

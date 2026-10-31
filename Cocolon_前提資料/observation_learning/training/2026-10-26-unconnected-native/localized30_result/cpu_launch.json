@@ -1,0 +1,19 @@
+{
+  "status": "CPU_PREPARATION_LAUNCHED",
+  "pid": 183453,
+  "source_commit": "477224bd0cb48604b299387dba4797351a76d9ca",
+  "api_commit": "a4b91b4788b2fb29483a4c77869c91b36402ae9f",
+  "cmd": [
+    "python",
+    "-B",
+    "/workspace/cocolon_localized30_pack_20261027/prepare_localized30.py",
+    "--pack",
+    "/workspace/cocolon_localized30_pack_20261027"
+  ],
+  "log": "/workspace/cocolon_localized30_cpu_20261027.log",
+  "started_unix": 1793087153.5002036,
+  "real_model_loads": 0,
+  "forwards": 0,
+  "updates": 0,
+  "generations": 0
+}

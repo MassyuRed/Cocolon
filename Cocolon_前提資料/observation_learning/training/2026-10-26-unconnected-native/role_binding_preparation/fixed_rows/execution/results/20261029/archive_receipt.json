@@ -1,0 +1,17 @@
+{
+  "archive": "cocolon-fixedrows5-weights-originals-20261029.zip",
+  "bytes": 33176759,
+  "sha256": "66c4d8b22ec18a339b439ae0b27371107b2a91291e4c5cc2d6b7aa47e2b720c8",
+  "member_count": 359,
+  "payload_count": 358,
+  "all_member_lengths_hashes_and_crc_verified": true,
+  "library_file_id": "libfile_493102b9343c8191934b5e01892f0456",
+  "initial_adapter_sha256": "f4932d3a2bac1d8e78d0bf86579868e29546914512234d31556840eb28a85c19",
+  "adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "d3e3ae8490defcd95854eebf241965c14a19bb3332f77dc11466b43b9df25962",
+    "adapter_model.safetensors": "f811314b0d93398b386e5fbd2f28ad24c01cc7b9c10dae275eaae920fbbb4b0b"
+  },
+  "base_weights_included": false,
+  "optimizer_rng_resume_included": false
+}

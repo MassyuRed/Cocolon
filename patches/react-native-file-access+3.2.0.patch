@@ -1,0 +1,24 @@
+diff --git a/node_modules/react-native-file-access/android/build.gradle b/node_modules/react-native-file-access/android/build.gradle
+index e7596b0..c5ebf4e 100644
+--- a/node_modules/react-native-file-access/android/build.gradle
++++ b/node_modules/react-native-file-access/android/build.gradle
+@@ -37,6 +37,8 @@ def getExtOrIntegerDefault(name) {
+ }
+ 
+ android {
++  namespace "com.alpha0010.fs"
++  buildFeatures { buildConfig = true }
+   compileSdkVersion getExtOrIntegerDefault("compileSdkVersion")
+ 
+   defaultConfig {
+diff --git a/node_modules/react-native-file-access/android/src/main/AndroidManifest.xml b/node_modules/react-native-file-access/android/src/main/AndroidManifest.xml
+index 729b117..8d81b71 100644
+--- a/node_modules/react-native-file-access/android/src/main/AndroidManifest.xml
++++ b/node_modules/react-native-file-access/android/src/main/AndroidManifest.xml
+@@ -1,5 +1,5 @@
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+-          package="com.alpha0010.fs">
++         >
+ 
+   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+ </manifest>

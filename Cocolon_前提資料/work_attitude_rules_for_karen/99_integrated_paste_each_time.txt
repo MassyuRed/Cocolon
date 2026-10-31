@@ -1,6 +1,6 @@
 # Cocolon出力前Gate
 
-revision_date: 2026-08-13
+revision_date: 2026-10-22
 normative_status: CURRENT_OUTPUT_GATE
 status: CURRENT_EFFECTIVE
 effective_when: NECESSITY_PRODUCT_DIRECTNESS_AND_MINIMUM_SAFETY_BOUNDARY_REMOTE_POSTVERIFIED
@@ -10,6 +10,8 @@ general_rule_owner: CURRENT_RULES.md
 このfileは全ruleの再掲ではありません。
 
 ## 1. Model
+
+Piece残件では、2026-10-20 Mash決定のRule18 §0Aを優先し、以下のPro限定・モデル不明停止・Pro再監査条件を適用しません。品質・承認・実検証条件は維持します。
 
 - [ ] このCocolon作業は`GPT-5.6 Pro`またはrule 18で成立したWork Ultraで行った。
 - [ ] non-Pro成果物を無監査で採用していない。
@@ -23,6 +25,12 @@ general_rule_owner: CURRENT_RULES.md
 - [ ] standing delegation外またはseparate-approval ownerのeffectを、既存方針内という理由だけで実行していない。
 - [ ] scope classification、environment、approval、authority lifecycleを混同していない。
 - [ ] post-work reportを事後approval、scope超過の治癒またはnext work permissionへ変換していない。
+
+## 全体現在地 — 出力前確認
+
+- [ ] `../00_cocolon_current_product_and_state.md`を今回全文読み、全機能と対象機能の接続を踏まえた。
+- [ ] 今回の機能・決定・状態・残件・根拠の差分を、同じ変更単位で置換更新した。差分なしは既存作業記録／PR説明へ理由を一行残した。
+- [ ] 学習済AI＋CMEE接続の既決、Piece、わたしマップともしもルートを落としていない。未実装と未決、codeとlive、本人端末と商品受入れを混同していない。
 
 ## 2. 事実と判断
 
@@ -39,7 +47,7 @@ general_rule_owner: CURRENT_RULES.md
 - [ ] approval / activation / admission / consumption / PASS / STOP / creditを混同していない。
 - [ ] automatic progressionはfalseのまま。
 - [ ] `user_action_effect`、`contract_mutation_effect`、`position_change_effect`を判定した。
-- [ ] current next actionはcurrent-only `08`とCurrent Closure Routeから取得し、old Plan / `07` / old Handoffから復活させていない。
+- [ ] 全体現在地と対象ownerからcurrent next actionを確認した。Cycle001の場合だけcurrent-only `08`とCurrent Closure Routeから取得し、old Plan / `07` / old Handoffから復活させていない。
 
 ## 4. Mash様への負担
 
@@ -74,7 +82,7 @@ general_rule_owner: CURRENT_RULES.md
 - [ ] secret / body-full private evidenceをpublicへ出していない。
 - [ ] authority terminalのbody-free Receipt exact1を保存対象とした。
 - [ ] ResultはReceiptだけで原因・判断・再開条件を復元できない場合だけ、Handoffはactor / environment / session変更時に`08` + Receiptだけでは再開不能な場合だけ、standalone comparisonはacceptance gateが独立証拠として要求する場合だけ作成した。
-- [ ] `08`をcurrent-only replace、`07`をmilestone-only appendとし、Planへdaily stateを追記していない。
+- [ ] 全体現在地を関連差分の置換、Cycle001の`08`をcurrent-only replace、`07`をmilestone-only appendとし、Planへdaily stateを追記していない。
 
 ## 7. completion
 
@@ -91,22 +99,6 @@ general_rule_owner: CURRENT_RULES.md
 
 一つでも必要項目が不成立なら、該当する完了・反映・判断を報告しません。
 
-CURRENT NECESSITY / CYCLE001 OUTPUT PRECEDENCE — 2026-08-13
+## Cycle001の過去結果と現在の再開先
 
-- [ ] prior G4-B is `DETOUR_RISK_STOP`; further checker / controller / FD development remains stopped.
-- [ ] G4-B through G10 completion is not used to claim Cycle001 acceptance or Cocolon completion.
-- [ ] G8 exact100 and G9 all100 are reported as product evidence: selected 45 / no-valid 2 / fail-close 53 and PASS 0 / MINOR 2 / MAJOR 40 / BLOCKER 58.
-- [ ] G10 is reported as `TTTFFFTFFTTTFF`, 7/14, `CYCLE001_NOT_ACCEPTED`.
-- [ ] the next route is shared structural correction and re-Product Read, not another safety mechanism.
-
-```text
-CURRENT_PRECEDENCE_EFFECTIVE_DATE = 2026-08-13
-CURRENT_NAVIGATION_OWNER = Cocolon_前提資料/08_cycle001_current_state.md
-PRIOR_G4_B = DETOUR_RISK_STOP
-SAFETY_DEVICE_FURTHER_DEVELOPMENT = STOPPED
-G4_B_TO_G10 = COMPLETED
-CYCLE001 = NOT_ACCEPTED
-CURRENT_ROUTE = RETURN_TO_SHARED_STRUCTURAL_CORRECTION
-CURRENT_AUTHORITY = STOP
-AUTOMATIC_PROGRESSION = FALSE
-```
+2026-08-13のG4-B〜G10判定は過去結果として保持し、現在の全作業へ固定のCURRENT_ROUTE／CURRENT_AUTHORITYを貼り付けない。実際のCycle001作業時だけfreshな`../08_cycle001_current_state.md`とCurrent Closure Routeへ戻る。checker／controller中心への迂回禁止、機械成功と商品受入れの分離はCURRENT_RULESを継続適用する。

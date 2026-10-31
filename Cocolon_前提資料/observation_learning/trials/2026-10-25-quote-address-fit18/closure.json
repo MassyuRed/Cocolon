@@ -1,0 +1,244 @@
+{
+  "schema": "cocolon.quote18_finite_trial_closure.v1",
+  "status": "CLOSED_MEANING9_BODY6_HOLDOUT_NOT_STARTED",
+  "permission_basis": "Mash explicitly approved connection implementation,18updates,then2saved rereads only on all9 meaning and body success.",
+  "source_commit": "1a34c9688228628adfaab8021db572dc2b0aceb0",
+  "api_commit": "4002b4577838d1ed6671278a19585b61e7ccd10e",
+  "runtime_environment": "Codex Work / GPT-6; root Karen sole executor and publisher; two separate-context read-only agent reviews, no independent human/Pro/Ultra acceptance.",
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "initial_adapter_sha256": "affea8a7094832dfbac27343af87a9ad1b302f61616c19ead33d1dcc7bf59cc3",
+  "candidate_adapter_sha256": "138b9ff7e5b7df59e6da80126a52b309edf9c22a9a860f2c165189a9e453c102",
+  "optimizer_steps_completed": 18,
+  "new_generations": 9,
+  "before_generations": 0,
+  "saved_non_trainable_reload_completed": true,
+  "finite_f32_tensors": 32,
+  "actual_model_fit": {
+    "scope": "TRAINING_FIT_FIXED_PRIOR_NOT_DYNAMIC",
+    "meaning_count": 9,
+    "body_count": 6,
+    "chair_meaning": 6,
+    "chair_body": 6,
+    "daily_meaning": 3,
+    "daily_body": 0,
+    "dynamic_roundtrip": false,
+    "service_saved_roundtrip": false
+  },
+  "conditional_holdout": {
+    "required_meaning": 9,
+    "required_body": 9,
+    "gate_satisfied": false,
+    "model_calls": 0,
+    "real_service_sql_operations": 0,
+    "eval_plan_created": false,
+    "status": "NOT_STARTED_CONDITION_FAILED"
+  },
+  "cases": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "status": "MEANING_AND_BODY_AVAILABLE",
+      "meaning_adopted": true,
+      "body_available": true,
+      "question_present": true,
+      "updates": 0,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "raw_unchanged": true,
+      "raw_sha256": "ff4d10fc44a43164e8052b8e6828f933f9b776ba06e9265b1bbd3c3494159dd4",
+      "reason_codes": [
+        "model_question_candidate_ready"
+      ],
+      "teacher_differences": []
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "status": "MEANING_AND_BODY_AVAILABLE",
+      "meaning_adopted": true,
+      "body_available": true,
+      "question_present": false,
+      "updates": 3,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "raw_unchanged": true,
+      "raw_sha256": "91d6820cd36a55ceb82f01a4b8023be3098f983a1c8c9e8299e8fc75d64de353",
+      "reason_codes": [
+        "free_round_complete"
+      ],
+      "teacher_differences": []
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "status": "MEANING_AND_BODY_AVAILABLE",
+      "meaning_adopted": true,
+      "body_available": true,
+      "question_present": true,
+      "updates": 0,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "raw_unchanged": true,
+      "raw_sha256": "b11b6bc3022e1fd5cd15e52562efc239e3194a1759624d6eec58be6f8edc2d55",
+      "reason_codes": [
+        "model_question_candidate_ready"
+      ],
+      "teacher_differences": []
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "status": "MEANING_AND_BODY_AVAILABLE",
+      "meaning_adopted": true,
+      "body_available": true,
+      "question_present": false,
+      "updates": 3,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "raw_unchanged": true,
+      "raw_sha256": "9a84c1a64269880dec1a19ce8aa538f8f9b5eaf1ea45e59f4ca252af874e565d",
+      "reason_codes": [
+        "free_round_complete"
+      ],
+      "teacher_differences": []
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "status": "MEANING_AND_BODY_AVAILABLE",
+      "meaning_adopted": true,
+      "body_available": true,
+      "question_present": true,
+      "updates": 0,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "raw_unchanged": true,
+      "raw_sha256": "425464bac8b58e5c00d90bb00a6b7868a258a9a196be61627d19128eda20e85b",
+      "reason_codes": [
+        "model_question_candidate_ready"
+      ],
+      "teacher_differences": []
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "status": "MEANING_AND_BODY_AVAILABLE",
+      "meaning_adopted": true,
+      "body_available": true,
+      "question_present": false,
+      "updates": 3,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "raw_unchanged": true,
+      "raw_sha256": "d0bd5cf8b6b07808815531c361f873e373166fd42994ed59ff92d5b6b7663750",
+      "reason_codes": [
+        "free_round_complete"
+      ],
+      "teacher_differences": []
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "status": "MEANING_ADOPTED_BODY_UNAVAILABLE",
+      "meaning_adopted": true,
+      "body_available": false,
+      "question_present": false,
+      "updates": 0,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "raw_unchanged": true,
+      "raw_sha256": "8b214333a562016666c8bd49cfe98c50a174f9b1425cbab4809821f60f74333b",
+      "reason_codes": [
+        "model_surface_not_validated"
+      ],
+      "teacher_differences": [
+        {
+          "path": "/candidate/surface_proposal/reception",
+          "actual": "あったかいものを食べて、少し落ち着いたのですね。",
+          "teacher": "あったかいものを食べて、少し落ち着けてよかったです。"
+        }
+      ]
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "status": "MEANING_ADOPTED_BODY_UNAVAILABLE",
+      "meaning_adopted": true,
+      "body_available": false,
+      "question_present": false,
+      "updates": 0,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "raw_unchanged": true,
+      "raw_sha256": "20ceb8385ab96caafc7d8f04fff0c1c19c2df00c9297726972e45b568aa1e33d",
+      "reason_codes": [
+        "model_surface_not_validated"
+      ],
+      "teacher_differences": [
+        {
+          "path": "/candidate/surface_proposal/reception",
+          "actual": "あったかいものを食べて、少し落ち着けたのですね。",
+          "teacher": "あったかいものを食べて、少し落ち着けてよかったです。"
+        }
+      ]
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "status": "MEANING_ADOPTED_BODY_UNAVAILABLE",
+      "meaning_adopted": true,
+      "body_available": false,
+      "question_present": false,
+      "updates": 0,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "raw_unchanged": true,
+      "raw_sha256": "ef1aa04ef7ef1d4b62fb420de9bad11c652426dda4911cbcfba4ad9668dd333b",
+      "reason_codes": [
+        "model_surface_not_validated"
+      ],
+      "teacher_differences": [
+        {
+          "path": "/candidate/surface_proposal/reception",
+          "actual": "あったかいものを食べて、少し落ち着けたのですね。",
+          "teacher": "あったかいものを食べて、少し落ち着けてよかったです。"
+        }
+      ]
+    }
+  ],
+  "nll": {
+    "chair": {
+      "scope": "FINAL_ASSISTANT_FULL_JSON_AND_EOS",
+      "loss_tokens": 11114,
+      "before": 0.0009372535083836857,
+      "after": 0.0008836065807408022,
+      "improved_cases": 4,
+      "total_cases": 6
+    },
+    "daily": {
+      "scope": "FINAL_ASSISTANT_FULL_JSON_AND_EOS",
+      "loss_tokens": 4742,
+      "before": 0.032743414346237114,
+      "after": 0.0031267277559973317,
+      "improved_cases": 3,
+      "total_cases": 3
+    }
+  },
+  "seconds": 1081.4924731357023,
+  "recorded_gpu_hourly_usd": 0.26,
+  "process_allocation_usd": 0.0781077897264674,
+  "cost_scope": "Process allocation at last recorded rate; not actual total bill. Preparation,recovery,continuing rental,storage,tax excluded.",
+  "peak_allocated_gib": 16.17147445678711,
+  "peak_reserved_gib": 18.779296875,
+  "raw_modified": false,
+  "extra_updates": 0,
+  "same_request_model_retries": 0,
+  "reader_relaxation": false,
+  "candidate_promoted": false,
+  "initial_adapter_unchanged": true,
+  "saved_adapter_unchanged_during_inference": true,
+  "legacy_helpers_unchanged": true,
+  "gpu_stop_restart_delete_operations": 0,
+  "new_pod_or_charge_operations": 0,
+  "production_supabase_render_rn_changes": 0,
+  "merge_deploy_operations": 0,
+  "new_observation_meeting_needed_for_this_finite_fit": false,
+  "inference_limits": "Only finite-teacher generation mismatch is established. Insufficient update count, insufficient teacher count, and model capability limits are not established causes. Nine rows cover two stories, not nine independent language cases. Generalization and Piece/Analysis completion teachers remain insufficient.",
+  "next": "Finite trial closed. Preserve candidate/raw/oldweights and inspect reception mismatch before proposing any new bounded diagnostic or training; do not rerun this plan or call conditional holdout.",
+  "primary_outcome": "BLOCKER_NARROWED",
+  "structure_map_delta_for_closure": "NONE",
+  "product_credit": 0,
+  "formal_product_acceptance": "0/3",
+  "management_percent": 54.5,
+  "product_accepted": false,
+  "automatic_progression": false,
+  "gpu_after_completion": {
+    "name": "NVIDIA RTX A4500",
+    "memory_total_mib": 20470,
+    "memory_used_mib": 1,
+    "rental_kept_running": true
+  }
+}

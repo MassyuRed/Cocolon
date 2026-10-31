@@ -1,0 +1,42 @@
+[
+  {
+    "case_id": "FT-BOOK-AFTER-ANSWER",
+    "full_raw_unchanged": true,
+    "strict_json_complete": true,
+    "receiver_and_semantic_not_rerun": true,
+    "unchanged_named_decoder": "PASS",
+    "quote_count": 11,
+    "unique_quote_names": 11,
+    "source_field_text_matches": 11,
+    "duplicate_quote_source_field_text_groups": [
+      [
+        "no_contact",
+        "late_awareness",
+        "answer_explains_target"
+      ]
+    ],
+    "claims": 10,
+    "unique_claim_ids": 10,
+    "relations": 7,
+    "updates": 7,
+    "compact_q_names_used": 0,
+    "compact_u_names_used": 0
+  },
+  {
+    "case_id": "FT-SHOP-AFTER-ANSWER",
+    "full_raw_unchanged": true,
+    "strict_json_complete": false,
+    "receiver_and_semantic_not_rerun": true,
+    "partial_array_inspection_only_no_packet_repair": true,
+    "quote_count": 14,
+    "unique_quote_names": 14,
+    "source_field_text_matches": 0,
+    "duplicate_quote_source_field_text_groups": [],
+    "claims": 14,
+    "unique_claim_ids": 12,
+    "relations": 6,
+    "updates": 8,
+    "compact_q_names_used": 0,
+    "compact_u_names_used": 0
+  }
+]

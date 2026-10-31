@@ -59,5 +59,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Pieceの画像を写真ライブラリに保存するために使用します。</string>
 </dict>
 </plist>

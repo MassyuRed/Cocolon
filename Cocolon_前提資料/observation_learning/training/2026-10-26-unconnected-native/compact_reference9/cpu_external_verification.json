@@ -1,0 +1,12 @@
+{
+  "status": "VERIFIED",
+  "members": 23,
+  "all_manifest_hashes_and_sizes": true,
+  "all_payload_hashes": true,
+  "source6_bytes_exact": true,
+  "zip_sha256": "541ece2252b23118eadde54d8bca122d7c3153e5749c376ead9965e65cd0a3a8",
+  "all15_prompts_exact": true,
+  "other13_original_line_bytes_exact": true,
+  "all2_product_body_and_question_exact": true,
+  "only_nested_snapshot_receipt_differs": true
+}

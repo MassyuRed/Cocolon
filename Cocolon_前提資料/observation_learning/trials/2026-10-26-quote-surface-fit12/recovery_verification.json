@@ -1,0 +1,15 @@
+{
+  "recovery_archive_sha256": "e1cbb51c5c2e6771965c276dfa0b06409d7ac0a0b44d3e003a399e2dce552b5d",
+  "recovery_archive_bytes": 3624744,
+  "outer_verified_files": 4,
+  "training_archive_sha256": "b91e02051c1d44288879db5c8c062b0ad9a477e8fa0ce52bf164cf6dfd90cf5a",
+  "training_verified_files": 21,
+  "adapter_sha256": "e1db3df30b57b36b87187d54a4f75083bca5080396e8d1f758e1d8c1a44dfac5",
+  "finite_tensors": 32,
+  "early_final_adapter_equal": true,
+  "source_raw_sha256": "c82740c7b1d4945b193558d7731cf724b1da4edf3a41ff7539c69ff6c8679b6c",
+  "consumer_sha256": "75afe7c3997247ead2e76ec7c05b7f4d8b63726c80fcf738f049ffec394a660b",
+  "source_commit": "c86ef0cae18b2c2905a4e043c0d5e4010e7638af",
+  "library_file_id": "libfile_f2750b499f00819193e481ee48ca0eb7",
+  "library_version": 1
+}

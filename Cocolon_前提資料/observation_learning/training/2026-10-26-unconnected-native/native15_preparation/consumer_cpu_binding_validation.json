@@ -1,0 +1,158 @@
+{
+  "status": "CPU_BINDING_REVIEW_PASSED_NOT_MODEL_OR_CMEE_ADOPTION",
+  "checks": [
+    {
+      "name": "frozen15_source_answer_control_and_prior_verified",
+      "passed": true
+    },
+    {
+      "name": "five_after_cases_use_frozen_prior_not_new_raw",
+      "passed": true
+    },
+    {
+      "name": "historical_two_raw_records_bound_without_conversion_to_after",
+      "passed": true
+    },
+    {
+      "name": "historical_eos_and_timeout_preserved",
+      "passed": true
+    },
+    {
+      "name": "before_raw_cannot_be_evaluated_as_new_after",
+      "passed": true
+    },
+    {
+      "name": "duplicate_case_rejected",
+      "passed": true
+    },
+    {
+      "name": "reversed_order_rejected",
+      "passed": true
+    },
+    {
+      "name": "raw_path_escape_rejected",
+      "passed": true
+    },
+    {
+      "name": "raw_file_hash_change_rejected",
+      "passed": true
+    },
+    {
+      "name": "model_adapter_identity_change_rejected",
+      "passed": true
+    },
+    {
+      "name": "raw_text_repair_rejected",
+      "passed": true
+    },
+    {
+      "name": "eos_finish_reason_rewrite_rejected",
+      "passed": true
+    },
+    {
+      "name": "token_usage_rewrite_rejected",
+      "passed": true
+    },
+    {
+      "name": "historical_raw_bytes_restored_after_review",
+      "passed": true
+    },
+    {
+      "name": "source_binding:TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "passed": true
+    },
+    {
+      "name": "source_binding:TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "passed": true
+    },
+    {
+      "name": "prior_binding:TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "passed": true
+    },
+    {
+      "name": "source_binding:TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "passed": true
+    },
+    {
+      "name": "source_binding:TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "passed": true
+    },
+    {
+      "name": "prior_binding:TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "passed": true
+    },
+    {
+      "name": "source_binding:TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "passed": true
+    },
+    {
+      "name": "source_binding:TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "passed": true
+    },
+    {
+      "name": "prior_binding:TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "passed": true
+    },
+    {
+      "name": "source_binding:TRAIN-DAILY-CALM-01-INITIAL",
+      "passed": true
+    },
+    {
+      "name": "source_binding:TRAIN-DAILY-CALM-02-INITIAL",
+      "passed": true
+    },
+    {
+      "name": "source_binding:TRAIN-DAILY-CALM-03-INITIAL",
+      "passed": true
+    },
+    {
+      "name": "source_binding:FT-BOOK-INITIAL",
+      "passed": true
+    },
+    {
+      "name": "source_binding:FT-BOOK-AFTER-ANSWER",
+      "passed": true
+    },
+    {
+      "name": "prior_binding:FT-BOOK-AFTER-ANSWER",
+      "passed": true
+    },
+    {
+      "name": "source_binding:FT-SHOP-INITIAL",
+      "passed": true
+    },
+    {
+      "name": "source_binding:FT-SHOP-AFTER-ANSWER",
+      "passed": true
+    },
+    {
+      "name": "prior_binding:FT-SHOP-AFTER-ANSWER",
+      "passed": true
+    },
+    {
+      "name": "source_binding:FT-REPOT-INITIAL",
+      "passed": true
+    },
+    {
+      "name": "source_binding:FT-KNIT-INITIAL",
+      "passed": true
+    },
+    {
+      "name": "no_torch_transformers_peft_loaded",
+      "passed": true
+    }
+  ],
+  "count": 35,
+  "consumer_sha256": "6c07e54b4a8cf2b3de7c720a4408f656fb178aa01435a4d286bfd9a6b32f5a41",
+  "known_historical_raws": 2,
+  "new_after_raws": 0,
+  "model_calls": 0,
+  "training_updates": 0,
+  "cmee_adoptions_executed": 0,
+  "cold_processes_executed": 0,
+  "sql_operations": 0,
+  "service_saved_roundtrip": false,
+  "dynamic_prior": false,
+  "product_accepted": false,
+  "note": "Pinned API is not locally importable yet. Root must execute consumer after the actual after15 run, on the restored pinned API/runtime. No historical before raw is retagged as after."
+}

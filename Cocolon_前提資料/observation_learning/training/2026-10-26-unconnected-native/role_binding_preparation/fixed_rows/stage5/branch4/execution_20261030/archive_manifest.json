@@ -1,0 +1,90 @@
+{
+  "status": "BRANCH4_ORIGINAL_TEXT_ARCHIVE",
+  "post": {
+    "collected_unix": 1793347900.8638635,
+    "frozen_files_unchanged": 275,
+    "gpu": "NVIDIA RTX A5000, 1 MiB, 0 %",
+    "adapter_sha256": "ad8b89e8974df9bfe7e804b8f67bbaac59e6cbb37042c3254fb58ffb64230d0a",
+    "runner_seconds": 14.90352953702677,
+    "runner_prorated_usd_at_prior_rate": 0.0011591634084354156,
+    "parent_seconds": 16.025832931976765,
+    "extra_preparation_collection_holding": true,
+    "gpu_lifecycle_operations": 0,
+    "retry": false
+  },
+  "export_note": "Exact UTF-8 byte decoding preserves CR in progress log; no model retry",
+  "archive_bytes": 74055,
+  "archive_sha256": "5d660c49f64e1d3524b2e14bf56300df20ed8b7c450c9f591742b13a00c727ac",
+  "members": [
+    {
+      "path": "runtime/approved_plan.json",
+      "bytes": 911,
+      "sha256": "cd4712b572beb683378e07d9e706a51cf082653fadcd7c9d937b5dc91950d249"
+    },
+    {
+      "path": "runtime/bootstrap.json",
+      "bytes": 635,
+      "sha256": "067386ee20c6acbee53c57f1462d91f4c6bf3d0f2b8b342970fed23a1c2b9356"
+    },
+    {
+      "path": "runtime/bootstrap.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "runtime/launch_branch4_once.py",
+      "bytes": 1289,
+      "sha256": "23fed4fe0e3ae7f6ed0c53d97f8282ad2d28085262cfa43fdcaedae9053249c5"
+    },
+    {
+      "path": "runtime/launch_once.lock",
+      "bytes": 27,
+      "sha256": "2c2bdb7992b9e6f165e9e5368cefc1b5ad34d06bb424c7662a6769a932ee808f"
+    },
+    {
+      "path": "runtime/post_identity.json",
+      "bytes": 444,
+      "sha256": "cb0abfcbe0266085656a83c92a29e27cb50a50d2752b83a9ff54d3dfc70a967f"
+    },
+    {
+      "path": "runtime/prepare_branch4.py",
+      "bytes": 5402,
+      "sha256": "00bd2fabc8ad187aaced9491b938de5033d9fbff30bb788396290facbf52d69b"
+    },
+    {
+      "path": "runtime/process.log",
+      "bytes": 2241,
+      "sha256": "8a49feb8ea7ccc436ffab00962db888ae035e7582877fdc83789fdfe9c9e4971"
+    },
+    {
+      "path": "runtime/process_exit.json",
+      "bytes": 106,
+      "sha256": "b1731e59197954667e5358db88fec60c5efc57cc75e127e9a6e51979db5ed727"
+    },
+    {
+      "path": "runtime/proposal.json",
+      "bytes": 4422,
+      "sha256": "e055e37a382b19ac5b3723f5b60587fb4a2e7fb2852ec45650e5facf9f1687b9"
+    },
+    {
+      "path": "runtime/run_branch4_once.py",
+      "bytes": 8521,
+      "sha256": "7473ab634fbbbb8d3f1adb1b32df2368a32c61945ae80ace74321fa1d126f1ec"
+    },
+    {
+      "path": "run/execute_once.lock",
+      "bytes": 65,
+      "sha256": "1a6bc6079157b5b9a5e7a0855b40fa2782c2d5af50227e91a32076ab48363fd5"
+    },
+    {
+      "path": "run/loaded_tensors.json",
+      "bytes": 26027,
+      "sha256": "e697d5f6fb765730e7c20fd910b2a2e79c0906ad0ae956bb0ead027ba6d0e52f"
+    },
+    {
+      "path": "run/run.json",
+      "bytes": 15559,
+      "sha256": "306b1996f3cb2bfd9d27bddd60e5c800481408e074c4c32964b82f9569558c13"
+    }
+  ]
+}

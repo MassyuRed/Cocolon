@@ -1,0 +1,236 @@
+{
+  "model_loads": 0,
+  "forward": 0,
+  "training_updates": 0,
+  "generations": 0,
+  "gpu_operations": 0,
+  "checks": [
+    {
+      "name": "unbound_plan_valid",
+      "passed": true
+    },
+    {
+      "name": "unbound_execute_refused_before_output_or_weight_load",
+      "passed": true
+    },
+    {
+      "name": "unbound_execute_created_no_output",
+      "passed": true
+    },
+    {
+      "name": "before_calls_change_refused",
+      "passed": true
+    },
+    {
+      "name": "generation_ceiling_change_refused",
+      "passed": true
+    },
+    {
+      "name": "global_deadline_change_refused",
+      "passed": true
+    },
+    {
+      "name": "call_deadline_change_refused",
+      "passed": true
+    },
+    {
+      "name": "retry_change_refused",
+      "passed": true
+    },
+    {
+      "name": "automatic_progression_change_refused",
+      "passed": true
+    },
+    {
+      "name": "runner_identity_change_refused",
+      "passed": true
+    },
+    {
+      "name": "bound_cost_exact_budget_validated_without_execution",
+      "passed": true
+    },
+    {
+      "name": "rate_027_cannot_use_0195_budget",
+      "passed": true
+    },
+    {
+      "name": "root_can_bind_exact_027_rate_and_02025_budget",
+      "passed": true
+    },
+    {
+      "name": "missing_approval_basis_refused",
+      "passed": true
+    },
+    {
+      "name": "missing_expected_gpu_name_refused",
+      "passed": true
+    },
+    {
+      "name": "missing_pod_id_refused",
+      "passed": true
+    },
+    {
+      "name": "predecessor_plan_mutation_refused",
+      "passed": true
+    },
+    {
+      "name": "teacher_byte_mutation_refused",
+      "passed": true
+    },
+    {
+      "name": "exact15_training_evaluation_order",
+      "passed": true
+    },
+    {
+      "name": "teacher_not_in_eval:TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "passed": true
+    },
+    {
+      "name": "fixed_cpu_tokens_and_caps:TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "passed": true
+    },
+    {
+      "name": "teacher_not_in_eval:TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "passed": true
+    },
+    {
+      "name": "fixed_cpu_tokens_and_caps:TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "passed": true
+    },
+    {
+      "name": "teacher_not_in_eval:TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "passed": true
+    },
+    {
+      "name": "fixed_cpu_tokens_and_caps:TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "passed": true
+    },
+    {
+      "name": "teacher_not_in_eval:TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "passed": true
+    },
+    {
+      "name": "fixed_cpu_tokens_and_caps:TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "passed": true
+    },
+    {
+      "name": "teacher_not_in_eval:TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "passed": true
+    },
+    {
+      "name": "fixed_cpu_tokens_and_caps:TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "passed": true
+    },
+    {
+      "name": "teacher_not_in_eval:TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "passed": true
+    },
+    {
+      "name": "fixed_cpu_tokens_and_caps:TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "passed": true
+    },
+    {
+      "name": "teacher_not_in_eval:TRAIN-DAILY-CALM-01-INITIAL",
+      "passed": true
+    },
+    {
+      "name": "fixed_cpu_tokens_and_caps:TRAIN-DAILY-CALM-01-INITIAL",
+      "passed": true
+    },
+    {
+      "name": "teacher_not_in_eval:TRAIN-DAILY-CALM-02-INITIAL",
+      "passed": true
+    },
+    {
+      "name": "fixed_cpu_tokens_and_caps:TRAIN-DAILY-CALM-02-INITIAL",
+      "passed": true
+    },
+    {
+      "name": "teacher_not_in_eval:TRAIN-DAILY-CALM-03-INITIAL",
+      "passed": true
+    },
+    {
+      "name": "fixed_cpu_tokens_and_caps:TRAIN-DAILY-CALM-03-INITIAL",
+      "passed": true
+    },
+    {
+      "name": "teacher_not_in_eval:FT-BOOK-INITIAL",
+      "passed": true
+    },
+    {
+      "name": "fixed_cpu_tokens_and_caps:FT-BOOK-INITIAL",
+      "passed": true
+    },
+    {
+      "name": "teacher_not_in_eval:FT-BOOK-AFTER-ANSWER",
+      "passed": true
+    },
+    {
+      "name": "fixed_cpu_tokens_and_caps:FT-BOOK-AFTER-ANSWER",
+      "passed": true
+    },
+    {
+      "name": "teacher_not_in_eval:FT-SHOP-INITIAL",
+      "passed": true
+    },
+    {
+      "name": "fixed_cpu_tokens_and_caps:FT-SHOP-INITIAL",
+      "passed": true
+    },
+    {
+      "name": "teacher_not_in_eval:FT-SHOP-AFTER-ANSWER",
+      "passed": true
+    },
+    {
+      "name": "fixed_cpu_tokens_and_caps:FT-SHOP-AFTER-ANSWER",
+      "passed": true
+    },
+    {
+      "name": "teacher_not_in_eval:FT-REPOT-INITIAL",
+      "passed": true
+    },
+    {
+      "name": "fixed_cpu_tokens_and_caps:FT-REPOT-INITIAL",
+      "passed": true
+    },
+    {
+      "name": "teacher_not_in_eval:FT-KNIT-INITIAL",
+      "passed": true
+    },
+    {
+      "name": "fixed_cpu_tokens_and_caps:FT-KNIT-INITIAL",
+      "passed": true
+    },
+    {
+      "name": "original_api6blob_binding_unchanged",
+      "passed": true
+    },
+    {
+      "name": "effective_unbound_authorization_overrides_predecessor_true",
+      "passed": true
+    },
+    {
+      "name": "entire_training_save_reload_and_after_loop_byte_identical",
+      "passed": true
+    },
+    {
+      "name": "evaluation_raw_eos_caps_timeout_unchanged_except_count_guard",
+      "passed": true
+    },
+    {
+      "name": "old_plan_proposal_runner_identity_preserved",
+      "passed": true
+    },
+    {
+      "name": "no_model_runtime_imported",
+      "passed": true
+    }
+  ],
+  "status": "CPU_CANDIDATE_REVIEW_PASSED",
+  "count": 55,
+  "runner_sha256": "a62d3ed74e76a26c01fe66b9eba32d42631acac170cfd9c8dcb2c7cdf5076552",
+  "plan_sha256": "88a0d27b4c99e0ac7ce8465318cb099ed81286a2f01498086d0417e561997082",
+  "environment_bound": false,
+  "actual_tokenizer_reexecution": false,
+  "note": "Existing hash-bound tokenizer results reviewed; run default CPU mode on the restored pinned environment before execute."
+}

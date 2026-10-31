@@ -1,0 +1,453 @@
+{
+  "source_commit": "a4280eeb4d9d7afad989ab4a7a831a65a2dd895c",
+  "api_commit": "2fbc0a2ae7e9b72dc8be2e676c2f4a2c3c81380e",
+  "adapter": "a8baf0d310283fd0500e86887e64723e4734693ac48b7f2ddfad7cc07e6a3ea6",
+  "model_calls": 2,
+  "training_updates": 0,
+  "previous_meaning_adopted": 2,
+  "previous_body_available": 1,
+  "meaning_adopted": 1,
+  "body_available": 0,
+  "cases": [
+    {
+      "case_id": "FIT-FT-CHAIR-INITIAL",
+      "status": "MEANING_ADOPTED_BODY_UNAVAILABLE",
+      "reason_code": null,
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "evidence": [
+        {
+          "index": 0,
+          "evidence": {
+            "end": 14,
+            "field_path": "memo_action",
+            "quote": "ぐらついていた椅子を修理して",
+            "source_id": "FT-CHAIR-O",
+            "start": 0
+          },
+          "valid": true,
+          "field_length": 27,
+          "exact_quote_occurrences": [
+            0
+          ]
+        },
+        {
+          "index": 1,
+          "evidence": {
+            "end": 26,
+            "field_path": "memo_action",
+            "quote": "また座れるようになった",
+            "source_id": "FT-CHAIR-O",
+            "start": 15
+          },
+          "valid": true,
+          "field_length": 27,
+          "exact_quote_occurrences": [
+            15
+          ]
+        },
+        {
+          "index": 2,
+          "evidence": {
+            "end": 18,
+            "field_path": "memo",
+            "quote": "うれしかった",
+            "source_id": "FT-CHAIR-O",
+            "start": 12
+          },
+          "valid": true,
+          "field_length": 19,
+          "exact_quote_occurrences": [
+            12
+          ]
+        },
+        {
+          "index": 3,
+          "evidence": {
+            "end": 10,
+            "field_path": "memo",
+            "quote": "全部一人で直せたこと",
+            "source_id": "FT-CHAIR-O",
+            "start": 0
+          },
+          "valid": true,
+          "field_length": 19,
+          "exact_quote_occurrences": [
+            0
+          ]
+        },
+        {
+          "index": 4,
+          "evidence": {
+            "end": 15,
+            "field_path": "memo_action",
+            "quote": "して、",
+            "source_id": "FT-CHAIR-O",
+            "start": 12
+          },
+          "valid": true,
+          "field_length": 27,
+          "exact_quote_occurrences": [
+            12
+          ]
+        },
+        {
+          "index": 5,
+          "evidence": {
+            "end": 18,
+            "field_path": "memo",
+            "quote": "全部一人で直せたことが、うれしかった",
+            "source_id": "FT-CHAIR-O",
+            "start": 0
+          },
+          "valid": true,
+          "field_length": 19,
+          "exact_quote_occurrences": [
+            0
+          ]
+        }
+      ],
+      "valid_evidence": 6,
+      "evidence_count": 6,
+      "surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "repair",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "repair_and_result"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "solo_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったと聞けて、私もうれしいです。",
+        "update_note": null
+      },
+      "kinds": [
+        {
+          "claim_id": "repair",
+          "kind": "EVENT",
+          "text": "ぐらついていた椅子を修理して",
+          "evidence_indexes": [
+            0
+          ]
+        },
+        {
+          "claim_id": "usable_again",
+          "kind": "ACTION_RESULT",
+          "text": "また座れるようになった",
+          "evidence_indexes": [
+            1
+          ]
+        },
+        {
+          "claim_id": "joy",
+          "kind": "STATE",
+          "text": "うれしかった",
+          "evidence_indexes": [
+            2
+          ]
+        },
+        {
+          "claim_id": "solo_appraisal_object",
+          "kind": "USER_APPRAISAL_OBJECT",
+          "text": "全部一人で直せたこと",
+          "evidence_indexes": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "case_id": "FIT-FT-CHAIR-AFTER-CORRECTION",
+      "status": "CANDIDATE_NOT_ELIGIBLE",
+      "reason_code": "INVALID_EVIDENCE",
+      "receipt_status": "INVALID_EVIDENCE",
+      "evidence": [
+        {
+          "index": 0,
+          "evidence": {
+            "end": 14,
+            "field_path": "memo_action",
+            "quote": "ぐらついていた椅子を修理して",
+            "source_id": "FT-CHAIR-O",
+            "start": 0
+          },
+          "valid": true,
+          "field_length": 27,
+          "exact_quote_occurrences": [
+            0
+          ]
+        },
+        {
+          "index": 1,
+          "evidence": {
+            "end": 26,
+            "field_path": "memo_action",
+            "quote": "また座れるようになった",
+            "source_id": "FT-CHAIR-O",
+            "start": 15
+          },
+          "valid": true,
+          "field_length": 27,
+          "exact_quote_occurrences": [
+            15
+          ]
+        },
+        {
+          "index": 2,
+          "evidence": {
+            "end": 18,
+            "field_path": "memo",
+            "quote": "うれしかった",
+            "source_id": "FT-CHAIR-O",
+            "start": 12
+          },
+          "valid": true,
+          "field_length": 19,
+          "exact_quote_occurrences": [
+            12
+          ]
+        },
+        {
+          "index": 3,
+          "evidence": {
+            "end": 10,
+            "field_path": "memo",
+            "quote": "全部一人で直せたこと",
+            "source_id": "FT-CHAIR-O",
+            "start": 0
+          },
+          "valid": true,
+          "field_length": 19,
+          "exact_quote_occurrences": [
+            0
+          ]
+        },
+        {
+          "index": 4,
+          "evidence": {
+            "end": 15,
+            "field_path": "memo_action",
+            "quote": "して、",
+            "source_id": "FT-CHAIR-O",
+            "start": 12
+          },
+          "valid": true,
+          "field_length": 27,
+          "exact_quote_occurrences": [
+            12
+          ]
+        },
+        {
+          "index": 5,
+          "evidence": {
+            "end": 18,
+            "field_path": "memo",
+            "quote": "全部一人で直せたことが、うれしかった",
+            "source_id": "FT-CHAIR-O",
+            "start": 0
+          },
+          "valid": true,
+          "field_length": 19,
+          "exact_quote_occurrences": [
+            0
+          ]
+        },
+        {
+          "index": 6,
+          "evidence": {
+            "end": 21,
+            "field_path": "answer_text_private",
+            "quote": "さっき「全部一人で」と書いたのは訂正します",
+            "source_id": "FT-CHAIR-O-A1",
+            "start": 0
+          },
+          "valid": true,
+          "field_length": 92,
+          "exact_quote_occurrences": [
+            0
+          ]
+        },
+        {
+          "index": 7,
+          "evidence": {
+            "end": 38,
+            "field_path": "answer_text_private",
+            "quote": "友人に手順を教えてもらって",
+            "source_id": "FT-CHAIR-O-A1",
+            "start": 25
+          },
+          "valid": true,
+          "field_length": 92,
+          "exact_quote_occurrences": [
+            25
+          ]
+        },
+        {
+          "index": 8,
+          "evidence": {
+            "end": 47,
+            "field_path": "answer_text_private",
+            "quote": "一緒に直しました",
+            "source_id": "FT-CHAIR-O-A1",
+            "start": 39
+          },
+          "valid": true,
+          "field_length": 92,
+          "exact_quote_occurrences": [
+            39
+          ]
+        },
+        {
+          "index": 9,
+          "evidence": {
+            "end": 91,
+            "field_path": "answer_text_private",
+            "quote": "捨てずにまた使えるようになったからです",
+            "source_id": "FT-CHAIR-O-A1",
+            "start": 72
+          },
+          "valid": true,
+          "field_length": 92,
+          "exact_quote_occurrences": [
+            72
+          ]
+        },
+        {
+          "index": 10,
+          "evidence": {
+            "end": 38,
+            "field_path": "answer_text_private",
+            "quote": "一緒に直しました、",
+            "source_id": "FT-CHAIR-O-A1",
+            "start": 39
+          },
+          "valid": false,
+          "field_length": 92,
+          "exact_quote_occurrences": []
+        },
+        {
+          "index": 11,
+          "evidence": {
+            "end": 91,
+            "field_path": "answer_text_private",
+            "quote": "捨てずにまた使えるようになったからです、うれしかったのも",
+            "source_id": "FT-CHAIR-O-A1",
+            "start": 72
+          },
+          "valid": false,
+          "field_length": 92,
+          "exact_quote_occurrences": []
+        }
+      ],
+      "valid_evidence": 10,
+      "evidence_count": 12,
+      "surface": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair"
+            ],
+            "relation_refs": [],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "reuse_appraisal_object",
+              "joy",
+              "usable_again"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "reception"
+          },
+          {
+            "claim_refs": [
+              "friend_guidance",
+              "joint_repair",
+              "reuse_appraisal_object"
+            ],
+            "relation_refs": [
+              "joy_ground_revised"
+            ],
+            "section": "update_note",
+            "update_refs": [
+              0,
+              1,
+              2
+            ]
+          }
+        ],
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったと聞けて、私もうれしいです。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "kinds": [
+        {
+          "claim_id": "repair",
+          "kind": "EVENT",
+          "text": "ぐらついていた椅子を修理して",
+          "evidence_indexes": [
+            0
+          ]
+        },
+        {
+          "claim_id": "usable_again",
+          "kind": "ACTION_RESULT",
+          "text": "また座れるようになった",
+          "evidence_indexes": [
+            1
+          ]
+        },
+        {
+          "claim_id": "joy",
+          "kind": "STATE",
+          "text": "うれしかった",
+          "evidence_indexes": [
+            2
+          ]
+        },
+        {
+          "claim_id": "friend_guidance",
+          "kind": "EVENT",
+          "text": "友人に手順を教えてもらって",
+          "evidence_indexes": [
+            7
+          ]
+        },
+        {
+          "claim_id": "joint_repair",
+          "kind": "EVENT",
+          "text": "一緒に直しました",
+          "evidence_indexes": [
+            8
+          ]
+        },
+        {
+          "claim_id": "reuse_appraisal_object",
+          "kind": "USER_APPRAISAL_OBJECT",
+          "text": "捨てずにまた使えるようになったからです",
+          "evidence_indexes": [
+            9
+          ]
+        }
+      ]
+    }
+  ]
+}

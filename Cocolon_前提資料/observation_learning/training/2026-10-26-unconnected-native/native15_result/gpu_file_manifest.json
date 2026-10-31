@@ -1,0 +1,42 @@
+{
+  "api_blobs.json": {
+    "sha256": "69168896b25c6bf1e008592bdeff1e975a4a3b88ca3366487a094414d98b9e85",
+    "bytes": 688
+  },
+  "before_FT-BOOK-AFTER-ANSWER.jsonl": {
+    "sha256": "8c8b4ec73d657e22d3ba94ec9d197f4007b5d85862864362cbe5e0ce15598731",
+    "bytes": 39953
+  },
+  "before_FT-BOOK-INITIAL.jsonl": {
+    "sha256": "66fe021ce1e3d874b30c54de6d6f26b09a2b1280d4759832ec3a7df9ebafd20c",
+    "bytes": 19924
+  },
+  "cpu_preparation.json": {
+    "sha256": "64a7d905c4cfe3dbea227064e8aee053b23bff15baf51261f4a41c6478306f9d",
+    "bytes": 16296
+  },
+  "eval_inputs.jsonl": {
+    "sha256": "c67fa4098bafa10508bf57bf1975fcdfd6f2359f851e34c0f26148310eb8b75e",
+    "bytes": 169628
+  },
+  "gpu15.plan.json": {
+    "sha256": "6c48a26871102797291f7cf531929af58b2e2a2e65d6ca85d9e9ba8b4c08dfd7",
+    "bytes": 7670
+  },
+  "gpu15.proposed.json": {
+    "sha256": "e11d92ec87365e0f7bb2c7b3c41b83cb3350a07af3021391c01e39a1285d03a9",
+    "bytes": 7434
+  },
+  "run.json": {
+    "sha256": "373e42c56692d3ab2463e099e5b5fd5997e5719e4d5d147cdf50f740e6a01176",
+    "bytes": 13587
+  },
+  "run_native15.py": {
+    "sha256": "02819f033dfae099971d6d474141d4855d40eba9f5ca8e28fa0dfbb12c5ca4eb",
+    "bytes": 12742
+  },
+  "train_messages.jsonl": {
+    "sha256": "29f37e38f4a615220c739176a6eaa2e0e01aae36c7bb6f87db8be248aecd1772",
+    "bytes": 349174
+  }
+}

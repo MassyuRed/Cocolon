@@ -1,0 +1,12 @@
+{
+  "status": "SETUP_COMPLETE_NO_MODEL_PENDING_TOKENIZER_CHECK",
+  "started_unix": 1793224805.2104635,
+  "max_seconds": 900,
+  "model_calls": 0,
+  "optimizer_steps": 0,
+  "retry": false,
+  "automatic_progression": false,
+  "seconds": 18.432730220956728,
+  "torch": "2.8.0+cu128",
+  "processing_allocation_usd": 0.0014336563408969799
+}

@@ -1,0 +1,230 @@
+{
+  "status": "CLOSED_NOT_ADOPTED_NO_RETRY",
+  "raw_run_status_unchanged": "RAW_COMPLETE_PENDING_AFTER_CMEE_AND_CONTENT_REVIEW",
+  "before_full2": {
+    "meaning": 0,
+    "body": 0
+  },
+  "after_full2": {
+    "meaning": 0,
+    "body": 0
+  },
+  "after_old9": {
+    "meaning": 6,
+    "body": 6
+  },
+  "baseline7_preserved": false,
+  "lost_baseline_successes": [
+    "TRAIN-SERVICE-CHAIR-01-CORRECTION"
+  ],
+  "adapter_adopted": false,
+  "initial_adapter_is_comparison_only": true,
+  "root_read_all_13_actual_raw": true,
+  "root_read_all_6_formed_person_bodies": true,
+  "processing_seconds": 1265.8722353549674,
+  "process_cost_usd": 0.09845672941649748,
+  "prior_hourly_usd": 0.28,
+  "current_rate_requeried": false,
+  "preparation_recovery_holding_storage_network_tax_extra": true,
+  "model_loads": 2,
+  "generations": 13,
+  "optimizer_updates": 5,
+  "new_dependencies": 0,
+  "retry": false,
+  "automatic_progression": false,
+  "product_credit": 0,
+  "formal_product_acceptance": "0/3",
+  "overall_management_percent": 54.5,
+  "candidate_ready": false,
+  "existing_gpu_held": true,
+  "gpu_stop_restart_delete": 0,
+  "sql_render_supabase_rn_public_api_merge_deploy": 0,
+  "cpu_integration_seconds": 35.844613251974806,
+  "cpu_preparation_seconds": 4.061125983018428,
+  "after_cpu_seconds": 62.10978671303019,
+  "runtime_api_commit": "c920f81a2540b23a36d4bd83f9149e29d00ac407",
+  "runtime_source_commit": "c6ef6555d7f8d39c5fbd05fa21209243678e6d43",
+  "fixture_only_api_commit": "7acff07421c0cfa458ec6cf75616187379311854",
+  "ci_run": 40826863964,
+  "ci_job": 123291792544,
+  "ci_status": "success",
+  "ci_results": [
+    "1634 passed, 12020 subtests passed",
+    "1 passed, 194 deselected"
+  ],
+  "cases": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "meaning_adopted": false,
+      "body_available": false,
+      "cold_file_status": "NO_ADOPTED_SNAPSHOT",
+      "receipt_replay_identical": true,
+      "phase": "before",
+      "receipt_status": "TOKEN_LIMIT",
+      "decision": "REJECT",
+      "reason_code": "semantic_receipt_not_validated"
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "meaning_adopted": false,
+      "body_available": false,
+      "cold_file_status": "NO_ADOPTED_SNAPSHOT",
+      "receipt_replay_identical": true,
+      "phase": "before",
+      "receipt_status": "TOKEN_LIMIT",
+      "decision": "REJECT",
+      "reason_code": "semantic_receipt_not_validated"
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "meaning_adopted": false,
+      "body_available": false,
+      "cold_file_status": "NO_ADOPTED_SNAPSHOT",
+      "receipt_replay_identical": true,
+      "phase": "after",
+      "receipt_status": "INVALID_FORMAT",
+      "decision": "REJECT",
+      "reason_code": "semantic_receipt_not_validated"
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "meaning_adopted": false,
+      "body_available": false,
+      "cold_file_status": "NO_ADOPTED_SNAPSHOT",
+      "receipt_replay_identical": true,
+      "phase": "after",
+      "receipt_status": "INVALID_FORMAT",
+      "decision": "REJECT",
+      "reason_code": "semantic_receipt_not_validated"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "meaning_adopted": true,
+      "body_available": true,
+      "cold_file_status": "COLD_FULL_OUTCOME_IDENTICAL",
+      "receipt_replay_identical": true,
+      "phase": "after",
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "decision": null,
+      "reason_code": null,
+      "person_body": {
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      }
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "meaning_adopted": false,
+      "body_available": false,
+      "cold_file_status": "NO_ADOPTED_SNAPSHOT",
+      "receipt_replay_identical": true,
+      "phase": "after",
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "decision": "HOLD",
+      "reason_code": "model_update_coverage_invalid"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "meaning_adopted": true,
+      "body_available": true,
+      "cold_file_status": "COLD_FULL_OUTCOME_IDENTICAL",
+      "receipt_replay_identical": true,
+      "phase": "after",
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "decision": null,
+      "reason_code": null,
+      "person_body": {
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      }
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "meaning_adopted": false,
+      "body_available": false,
+      "cold_file_status": "NO_ADOPTED_SNAPSHOT",
+      "receipt_replay_identical": true,
+      "phase": "after",
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "decision": "HOLD",
+      "reason_code": "model_update_not_prior_or_source_bound"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "meaning_adopted": true,
+      "body_available": true,
+      "cold_file_status": "COLD_FULL_OUTCOME_IDENTICAL",
+      "receipt_replay_identical": true,
+      "phase": "after",
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "decision": null,
+      "reason_code": null,
+      "person_body": {
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      }
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "meaning_adopted": false,
+      "body_available": false,
+      "cold_file_status": "NO_ADOPTED_SNAPSHOT",
+      "receipt_replay_identical": true,
+      "phase": "after",
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "decision": "HOLD",
+      "reason_code": "model_update_coverage_invalid"
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "meaning_adopted": true,
+      "body_available": true,
+      "cold_file_status": "COLD_FULL_OUTCOME_IDENTICAL",
+      "receipt_replay_identical": true,
+      "phase": "after",
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "decision": null,
+      "reason_code": null,
+      "person_body": {
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      }
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "meaning_adopted": true,
+      "body_available": true,
+      "cold_file_status": "COLD_FULL_OUTCOME_IDENTICAL",
+      "receipt_replay_identical": true,
+      "phase": "after",
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "decision": null,
+      "reason_code": null,
+      "person_body": {
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null
+      }
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "meaning_adopted": true,
+      "body_available": true,
+      "cold_file_status": "COLD_FULL_OUTCOME_IDENTICAL",
+      "receipt_replay_identical": true,
+      "phase": "after",
+      "receipt_status": "CANDIDATE_UNREVIEWED",
+      "decision": null,
+      "reason_code": null,
+      "person_body": {
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったですね。",
+        "update_note": null
+      }
+    }
+  ]
+}

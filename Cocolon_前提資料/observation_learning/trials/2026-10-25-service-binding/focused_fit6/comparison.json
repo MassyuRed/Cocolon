@@ -1,0 +1,249 @@
+{
+  "schema": "cocolon.emlis_evidence_binding_fit6_comparison.v1",
+  "scope": "TRAINING_FIT_FIXED_PRIOR_NOT_DYNAMIC_READ_ONLY_COMPARISON",
+  "input_hashes": {
+    "previous_raw": "a7e6ac9e7b696fcd253c2b6865b708a377ab7d70ca749fcbe4056008b10a7158",
+    "new_raw": "7534ce7c1dbd332777b86ca66ee05c067b695b9c828a1fef4e3f21f2fb4e280f",
+    "previous_consumer": "a759bbd8f48ef9552556421148a336eceee6ea0202c10f47becf4cca11093e44",
+    "new_consumer": "babcddf216f9d4697683a5c6db6cfce67cf998a3e94ef9d8653bb75e32132827",
+    "frozen_teacher_sft": "4a5ecf184e6a40315b44ae82cf6ec6f6f6168545bef45bbda8634938a894d6e7"
+  },
+  "previous_adapter_revision": "adae463befe9c465fa6d3a465b29bdc66dafcf41f75328277aa90e2149eddf3d",
+  "new_adapter_revision": "76309b86c6a76ed61cf3600f4beb1f45c658fac3bb3e3add4284ef54259276c5",
+  "previous_meaning_count": 5,
+  "new_meaning_count": 6,
+  "previous_body_count": 5,
+  "new_body_count": 6,
+  "case_count": 6,
+  "changed_raw_case_count": 1,
+  "changed_json_value_count": 5,
+  "only_changed_case": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+  "only_changed_json_fields": "evidence[7,8,9,10,11].end",
+  "new_json_matches_frozen_teacher_count": 6,
+  "all_six_surface_proposals_unchanged": true,
+  "all_five_previously_accepted_full_bodies_unchanged": true,
+  "newly_available_sixth_body_matches_teacher": true,
+  "cases": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "previous_raw_text_sha256": "ff4d10fc44a43164e8052b8e6828f933f9b776ba06e9265b1bbd3c3494159dd4",
+      "new_raw_text_sha256": "ff4d10fc44a43164e8052b8e6828f933f9b776ba06e9265b1bbd3c3494159dd4",
+      "raw_text_unchanged": true,
+      "json_difference_count": 0,
+      "json_differences": [],
+      "new_json_matches_frozen_teacher": true,
+      "surface_proposal_unchanged": true,
+      "proposed_visible_sections": {
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      },
+      "accepted_visible_sections": {
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      },
+      "previous_receipt_status": "CANDIDATE_UNREVIEWED",
+      "new_receipt_status": "CANDIDATE_UNREVIEWED",
+      "previous_meaning_adopted": true,
+      "new_meaning_adopted": true,
+      "previous_body_available": true,
+      "new_body_available": true,
+      "previously_accepted_full_body_unchanged": true,
+      "new_accepted_full_body_matches_teacher": true,
+      "new_output_tokens": 1375,
+      "new_finish_reason": "stop",
+      "new_eos_reached": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "previous_raw_text_sha256": "91d6820cd36a55ceb82f01a4b8023be3098f983a1c8c9e8299e8fc75d64de353",
+      "new_raw_text_sha256": "91d6820cd36a55ceb82f01a4b8023be3098f983a1c8c9e8299e8fc75d64de353",
+      "raw_text_unchanged": true,
+      "json_difference_count": 0,
+      "json_differences": [],
+      "new_json_matches_frozen_teacher": true,
+      "surface_proposal_unchanged": true,
+      "proposed_visible_sections": {
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "accepted_visible_sections": {
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "previous_receipt_status": "CANDIDATE_UNREVIEWED",
+      "new_receipt_status": "CANDIDATE_UNREVIEWED",
+      "previous_meaning_adopted": true,
+      "new_meaning_adopted": true,
+      "previous_body_available": true,
+      "new_body_available": true,
+      "previously_accepted_full_body_unchanged": true,
+      "new_accepted_full_body_matches_teacher": true,
+      "new_output_tokens": 2331,
+      "new_finish_reason": "stop",
+      "new_eos_reached": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "previous_raw_text_sha256": "b11b6bc3022e1fd5cd15e52562efc239e3194a1759624d6eec58be6f8edc2d55",
+      "new_raw_text_sha256": "b11b6bc3022e1fd5cd15e52562efc239e3194a1759624d6eec58be6f8edc2d55",
+      "raw_text_unchanged": true,
+      "json_difference_count": 0,
+      "json_differences": [],
+      "new_json_matches_frozen_teacher": true,
+      "surface_proposal_unchanged": true,
+      "proposed_visible_sections": {
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      },
+      "accepted_visible_sections": {
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      },
+      "previous_receipt_status": "CANDIDATE_UNREVIEWED",
+      "new_receipt_status": "CANDIDATE_UNREVIEWED",
+      "previous_meaning_adopted": true,
+      "new_meaning_adopted": true,
+      "previous_body_available": true,
+      "new_body_available": true,
+      "previously_accepted_full_body_unchanged": true,
+      "new_accepted_full_body_matches_teacher": true,
+      "new_output_tokens": 1375,
+      "new_finish_reason": "stop",
+      "new_eos_reached": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "previous_raw_text_sha256": "9a84c1a64269880dec1a19ce8aa538f8f9b5eaf1ea45e59f4ca252af874e565d",
+      "new_raw_text_sha256": "9a84c1a64269880dec1a19ce8aa538f8f9b5eaf1ea45e59f4ca252af874e565d",
+      "raw_text_unchanged": true,
+      "json_difference_count": 0,
+      "json_differences": [],
+      "new_json_matches_frozen_teacher": true,
+      "surface_proposal_unchanged": true,
+      "proposed_visible_sections": {
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "accepted_visible_sections": {
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "previous_receipt_status": "CANDIDATE_UNREVIEWED",
+      "new_receipt_status": "CANDIDATE_UNREVIEWED",
+      "previous_meaning_adopted": true,
+      "new_meaning_adopted": true,
+      "previous_body_available": true,
+      "new_body_available": true,
+      "previously_accepted_full_body_unchanged": true,
+      "new_accepted_full_body_matches_teacher": true,
+      "new_output_tokens": 2334,
+      "new_finish_reason": "stop",
+      "new_eos_reached": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "previous_raw_text_sha256": "425464bac8b58e5c00d90bb00a6b7868a258a9a196be61627d19128eda20e85b",
+      "new_raw_text_sha256": "425464bac8b58e5c00d90bb00a6b7868a258a9a196be61627d19128eda20e85b",
+      "raw_text_unchanged": true,
+      "json_difference_count": 0,
+      "json_differences": [],
+      "new_json_matches_frozen_teacher": true,
+      "surface_proposal_unchanged": true,
+      "proposed_visible_sections": {
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      },
+      "accepted_visible_sections": {
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null
+      },
+      "previous_receipt_status": "CANDIDATE_UNREVIEWED",
+      "new_receipt_status": "CANDIDATE_UNREVIEWED",
+      "previous_meaning_adopted": true,
+      "new_meaning_adopted": true,
+      "previous_body_available": true,
+      "new_body_available": true,
+      "previously_accepted_full_body_unchanged": true,
+      "new_accepted_full_body_matches_teacher": true,
+      "new_output_tokens": 1365,
+      "new_finish_reason": "stop",
+      "new_eos_reached": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "previous_raw_text_sha256": "6d3e532c0e47878fec3496bfbebe31ce23810025f619fb9fd78e7371d66b45d8",
+      "new_raw_text_sha256": "d0bd5cf8b6b07808815531c361f873e373166fd42994ed59ff92d5b6b7663750",
+      "raw_text_unchanged": false,
+      "json_difference_count": 5,
+      "json_differences": [
+        {
+          "path": "/evidence/7/end",
+          "previous": 77,
+          "new": 38
+        },
+        {
+          "path": "/evidence/8/end",
+          "previous": 76,
+          "new": 47
+        },
+        {
+          "path": "/evidence/9/end",
+          "previous": 92,
+          "new": 91
+        },
+        {
+          "path": "/evidence/10/end",
+          "previous": 86,
+          "new": 71
+        },
+        {
+          "path": "/evidence/11/end",
+          "previous": 92,
+          "new": 91
+        }
+      ],
+      "new_json_matches_frozen_teacher": true,
+      "surface_proposal_unchanged": true,
+      "proposed_visible_sections": {
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "accepted_visible_sections": {
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "previous_receipt_status": "INVALID_EVIDENCE",
+      "new_receipt_status": "CANDIDATE_UNREVIEWED",
+      "previous_meaning_adopted": false,
+      "new_meaning_adopted": true,
+      "previous_body_available": false,
+      "new_body_available": true,
+      "previously_accepted_full_body_unchanged": null,
+      "new_accepted_full_body_matches_teacher": true,
+      "new_output_tokens": 2340,
+      "new_finish_reason": "stop",
+      "new_eos_reached": true
+    }
+  ],
+  "conclusion": "Fixed FIT meaning/body 5/6 -> 6/6. Only five previously invalid end coordinates changed. All six proposed body wordings are identical; the sixth body is newly admitted, not rewritten.",
+  "limit": "One story, two stages and three trained identities. Not the fresh-identity dynamic service result or general language quality.",
+  "new_model_calls": 0,
+  "new_consumer_runs": 0,
+  "raw_repaired": false,
+  "frozen_pack_modified": false,
+  "inputs_unchanged": true,
+  "product_accepted": false,
+  "automatic_progression": false
+}

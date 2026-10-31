@@ -1,0 +1,2 @@
+{"status": "CPU_NATIVE15_INPUT_BINDING_VERIFIED_NO_ADOPTION", "cases": 15, "api_commit": "6b043880504912481a6b10d93c9128ec4995b70b", "model_calls": 0, "training_updates": 0, "cmee_adoptions": 0, "cold_processes": 0, "sql_operations": 0, "dynamic_prior": false}
+{"status": "CPU_EXPANDED30_READY_NO_REAL_4B_EXECUTION", "seconds": 6.591629405040294, "max_full_tokens": 7935, "eval_messages_and_native_priors_verified": 15, "real_4b_model_loads": 0, "real_4b_forwards": 0, "training_updates": 0, "generation_calls": 0, "gpu_output_exists": false}

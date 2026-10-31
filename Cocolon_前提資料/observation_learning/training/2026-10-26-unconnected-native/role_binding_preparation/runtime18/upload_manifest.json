@@ -1,0 +1,27 @@
+{
+  "files": {
+    "consume_role18.py": {
+      "sha256": "a7a15512f1966c247e2ff8131850d0a31bdd900cd049278c878b536c9cdb4c47",
+      "bytes": 8287
+    },
+    "role18.plan.json": {
+      "sha256": "1158093418364c8d5484ea1f25216bbd1449a5585e27229fd4317d3419c1d48a",
+      "bytes": 3501
+    },
+    "run_role18.py": {
+      "sha256": "99a07cfe6b843224417d6c6ea63d000cdbd73593da5c867e049772685ed494e8",
+      "bytes": 20818
+    },
+    "prepare_role18.py": {
+      "sha256": "be89f929ee40beea0201bb06206b9cf496d7cb44a715fb7682c2bd8ee02b8ec5",
+      "bytes": 6235
+    },
+    "auxiliary_train_messages.jsonl": {
+      "sha256": "4aec0be06138ec94b52534148219372cfc608de93b2ba0b13cbabf24e814707f",
+      "bytes": 220748
+    }
+  },
+  "source_head": "8ba4528c221193983066a7844a9d6879e175a776",
+  "api_head": "7b9ee073de03940ba71587297d8600b2b6094dd1",
+  "gpu_run_authorized": false
+}

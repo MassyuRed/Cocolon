@@ -1,0 +1,9 @@
+{
+  "status": "EXTERNAL_CPU_ARCHIVE_VERIFIED",
+  "bytes": 100818,
+  "sha256": "5a78ee9d2a8376d48ed3677438805c699ebd6a7ae19fa3fa318e0fffff24ab2b",
+  "crc_all": true,
+  "all_manifest_sizes_hashes": true,
+  "payload_count": 16,
+  "uploaded_source_exact": true
+}

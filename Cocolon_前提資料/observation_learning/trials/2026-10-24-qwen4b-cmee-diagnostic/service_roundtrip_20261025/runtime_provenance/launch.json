@@ -1,0 +1,10 @@
+{
+  "cocolon_commit": "031e1a9692500d75596f7f34742235bc4b4af220",
+  "script_sha256": "ea58009d635f44605177c37479cf2d1135620f21e5fa4d4acedfa04b36c44841",
+  "api_commit": "95d00b907f6d9c42944666269acc457c9af34f37",
+  "process_id": 299052,
+  "max_seconds": 900,
+  "max_calls": 2,
+  "training_updates": 0,
+  "gpu_lifecycle_operations": 0
+}

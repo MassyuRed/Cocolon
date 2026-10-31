@@ -1,0 +1,92 @@
+{
+  "status": "ALL_ORIGINAL_BYTES_AND_STATIC_CHAIN_VERIFIED_NOT_MODEL_SUCCESS",
+  "original_archive_members": 51,
+  "original_archive_bytes": 14603727,
+  "original_archive_sha256": "1fc5ca54a129485173d6f3a0d7b191aaaf85075c21e21339e011b03d27633712",
+  "original_payloads": 50,
+  "crc_all_bytes_sha": true,
+  "approved_source_commit": "105c08d231c3fb993f565197b200a5db8ff6c05e",
+  "proposal_approval_source_exact": true,
+  "training_updates": 19,
+  "actual_model_loads": 2,
+  "model_generations": 7,
+  "generation_checks": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "stage": 1,
+      "input_tokens": 4668,
+      "output_tokens": 468,
+      "eos": true,
+      "raw_messages_metadata_identity": true,
+      "shape_failure": null
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "stage": 2,
+      "input_tokens": 4819,
+      "output_tokens": 722,
+      "eos": true,
+      "raw_messages_metadata_identity": true,
+      "shape_failure": "claim_outer_type"
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "stage": 1,
+      "input_tokens": 4825,
+      "output_tokens": 477,
+      "eos": true,
+      "raw_messages_metadata_identity": true,
+      "shape_failure": null
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "stage": 2,
+      "input_tokens": 4980,
+      "output_tokens": 1085,
+      "eos": true,
+      "raw_messages_metadata_identity": true,
+      "shape_failure": null
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "stage": 3,
+      "input_tokens": 6007,
+      "output_tokens": 237,
+      "eos": true,
+      "raw_messages_metadata_identity": true,
+      "shape_failure": null
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "stage": 4,
+      "input_tokens": 6225,
+      "output_tokens": 286,
+      "eos": true,
+      "raw_messages_metadata_identity": true,
+      "shape_failure": null
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "stage": 5,
+      "input_tokens": 6542,
+      "output_tokens": 156,
+      "eos": true,
+      "raw_messages_metadata_identity": true,
+      "shape_failure": null
+    }
+  ],
+  "valid_stage_shapes": 6,
+  "shop_projection_exact": true,
+  "new_pair_meaning_body": [
+    0,
+    2
+  ],
+  "saved_and_cold": 0,
+  "old9": "NOT_RUN",
+  "verification_model_calls": 0,
+  "verification_cmee_calls": 0,
+  "raw_repairs": 0,
+  "retry": false,
+  "product_credit": 0,
+  "automatic_progression": false
+}

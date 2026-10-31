@@ -1,0 +1,13 @@
+{
+  "status": "CPU_STOPPED_BEFORE_MODEL",
+  "source_commit": "ab181b3d09d593f3413a653f2b339707c130ef2f",
+  "exit_code": 1,
+  "reason": "preparation_candidate_format_invalid",
+  "cause": "Legacy quote receive_candidate uses None/default; QUOTE_CANDIDATE_SCHEMA is only a build_model_messages selector, not an accepted receive_candidate selector.",
+  "correction": "Only old9 receive_candidate candidate_format changed from QUOTE_CANDIDATE_SCHEMA to None; full2 named and builder selectors unchanged.",
+  "model_loads": 0,
+  "model_forwards": 0,
+  "generations": 0,
+  "training_updates": 0,
+  "recovery": "One CPU recheck in fresh v2 runtime pack; second failure stops; original v1 source/plan/cpu.log retained."
+}

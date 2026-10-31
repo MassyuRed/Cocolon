@@ -1,0 +1,21 @@
+{
+  "operation": "create_library_file",
+  "status": "succeeded",
+  "path": "/cocolon-instruction-probe-originals-20261030.zip",
+  "file_id": "file_00000000a72c8206b50f87f55a04c410",
+  "library_file_id": "libfile_047c1d24bbc08191b2715926ae682455",
+  "file_name": "cocolon-instruction-probe-originals-20261030.zip",
+  "current_version_number": 0,
+  "restored_from_version_number": null,
+  "xattrs": [
+    {
+      "name": "user.library-file-version",
+      "value": "0"
+    }
+  ],
+  "directory_id": "libdir_b7b80590d8ac81918cd895018e6b474b",
+  "mime_type": "application/zip",
+  "library_artifact_type": "other",
+  "file_size_bytes": 2833615,
+  "external_connectors_accessed": false
+}

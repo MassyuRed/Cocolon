@@ -1,0 +1,2 @@
+{"step": 1, "id": "FT-BOOK-AFTER-ANSWER", "loss": 0.2183597981929779, "gradient_norm": 1.694403886795044, "target_tokens": 601, "loss_type": "updates_boundary_through_eos_suffix_ce"}
+{"step": 2, "id": "FT-SHOP-AFTER-ANSWER", "loss": 0.3202837407588959, "gradient_norm": 2.2866721153259277, "target_tokens": 711, "loss_type": "updates_boundary_through_eos_suffix_ce"}

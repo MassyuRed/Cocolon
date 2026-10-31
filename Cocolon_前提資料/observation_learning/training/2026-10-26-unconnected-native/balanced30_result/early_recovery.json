@@ -1,0 +1,22 @@
+{
+  "status": "EARLY_TRAINED_WEIGHTS_RECOVERED_VERIFIED",
+  "archive_bytes": 3477253,
+  "archive_sha256": "4d7949c784d1d60d661e6ec1ed994eb0aae8d37e37363e7c303dbe2bd3209f22",
+  "manifest_payload_count": 16,
+  "archive_member_count": 17,
+  "adapter_sha256": "228edccf7db10889b303124785f917f1124f94ce23ac0866d18f37697ed00502",
+  "tensor_count": 32,
+  "all_f32_finite": true,
+  "fixed30_order_and_finite_log_verified": true,
+  "snapshot_stage": "saved_before_reload",
+  "optimizer_steps_completed": 30,
+  "model_calls_started": 0,
+  "model_calls_completed": 0,
+  "recorded_seconds": 399.4916502709966,
+  "source_commit": "7e3f6bca5ae9027077862ef10ea17bde25f3a8ef",
+  "base_model_weights_included": false,
+  "optimizer_rng_state_included": false,
+  "final_result_pending": true,
+  "library_file_id": "libfile_ce78cfb0a1648191a4dbbccd160f0590",
+  "library_version": 0
+}

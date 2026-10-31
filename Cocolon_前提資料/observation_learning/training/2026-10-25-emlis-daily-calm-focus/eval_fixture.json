@@ -1,0 +1,38 @@
+[
+  {
+    "id": "HOLDOUT-DAILY-FOCUS12-01",
+    "user_id": "cea51118-490a-4962-8a79-87ae3db3c312",
+    "input_id": "12260b53-42ce-421e-bb5f-399b78f8d603",
+    "created_at": "2026-10-25T11:13:24.871248+00:00",
+    "memo": "あったかいもの食べたら、ちょっと落ち着いた。",
+    "memo_action": "帰ってから、うどんを作って食べた。",
+    "emotion_details": [
+      {
+        "strength": "medium",
+        "type": "平穏"
+      },
+      {
+        "strength": "weak",
+        "type": "喜び"
+      }
+    ]
+  },
+  {
+    "id": "HOLDOUT-DAILY-FOCUS12-02",
+    "user_id": "f9ce536f-45c0-4481-8492-60f99ad5ec40",
+    "input_id": "475866f3-134b-42c5-b28b-194e6999b2f1",
+    "created_at": "2026-10-25T11:13:24.871403+00:00",
+    "memo": "温かいものを食べたら、少し落ち着いた。",
+    "memo_action": "帰ってから、雑炊を作って食べた。",
+    "emotion_details": [
+      {
+        "strength": "medium",
+        "type": "平穏"
+      },
+      {
+        "strength": "weak",
+        "type": "喜び"
+      }
+    ]
+  }
+]

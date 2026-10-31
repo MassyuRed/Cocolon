@@ -1,0 +1,12 @@
+[
+  {
+    "id": "FT-CHAIR-INITIAL",
+    "reception_tokens": 25,
+    "nll": 0.016582781448960304
+  },
+  {
+    "id": "FT-CHAIR-AFTER-CORRECTION",
+    "reception_tokens": 24,
+    "nll": 0.0404110811650753
+  }
+]

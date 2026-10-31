@@ -1,0 +1,12 @@
+{
+  "archive_sha256": "6c2aaad96bf1090d1cc11d1637095365e69b4183bfdb3464090fef98574d7c25",
+  "archive_bytes": 3474577,
+  "manifest_files": 16,
+  "all_size_hashes_verified": true,
+  "finite_f32_tensors": 32,
+  "adapter_sha256": "f1e88e3e43fdd8c200969dfffbcf0551791b392e435826b26c0a247b7582c81a",
+  "run_status_in_early_archive": "STARTED",
+  "new_generations_in_early_archive": 0,
+  "optimizer_updates": 6,
+  "model_base_weights_included": false
+}

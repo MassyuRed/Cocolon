@@ -1,0 +1,74 @@
+{
+  "files": [
+    {
+      "path": "cpu/cpu_summary.json",
+      "bytes": 6173,
+      "sha256": "fb5ab67fc296e34e1e9e924870328fc99a79886c7b36a911f963eb6637d3a316"
+    },
+    {
+      "path": "cpu/installed_loss_source.json",
+      "bytes": 7941,
+      "sha256": "5553482b4f1652cda5fa30b28be0181d34310d68e2436711faf9848d4953fa34"
+    },
+    {
+      "path": "cpu/post_identity.json",
+      "bytes": 264,
+      "sha256": "524637fe1f04774ce9421102fc58f691f6182aff7acac71c6201571fcaf09cfa"
+    },
+    {
+      "path": "cpu/prepared_cpu.json.gz",
+      "bytes": 152508,
+      "sha256": "60c17f3260cbe1c3a04cb2622d42eb03b68046b5f640dedf32d007d729f24548"
+    },
+    {
+      "path": "cpu/train19.jsonl",
+      "bytes": 411959,
+      "sha256": "57292ff2e058dc0d6cc024e63fe5d146c89069b8a4ea26c8627ba75170fca6d7"
+    },
+    {
+      "path": "runtime/README.md",
+      "bytes": 5588,
+      "sha256": "1b95abb1cf479660ac1ab838afb4076ff827d2c0b149314c70f34b7cf423ea50"
+    },
+    {
+      "path": "runtime/cpu.log",
+      "bytes": 1050,
+      "sha256": "d3c2f15dcd3bc88d304da7d0536bcee2bdc86b2a2358cbc3ef659da8959e5181"
+    },
+    {
+      "path": "runtime/execution.json",
+      "bytes": 179,
+      "sha256": "bf076e8b92b754a9c7fb5d9fc7d691b46c07bbf03e8a8bd6800656b784e59eb2"
+    },
+    {
+      "path": "runtime/export_fit38.py",
+      "bytes": 3904,
+      "sha256": "425c91a27e3f79d1c1b2da1bb20615baa96b125ade6773f2cd7b3a0a8e748596"
+    },
+    {
+      "path": "runtime/launch_fit38_once.py",
+      "bytes": 3132,
+      "sha256": "c5fbc32be6417ffd65d4439a5c59fa995763cc47c9057f5cfa2bc52db145b6e9"
+    },
+    {
+      "path": "runtime/prepare_fit38.py",
+      "bytes": 6910,
+      "sha256": "765bf6ee0c5ff430d85ba9d93d3e8d7d0272b8f9ab50167f01f3ca0b424f409f"
+    },
+    {
+      "path": "runtime/prompt_source_index.py",
+      "bytes": 11806,
+      "sha256": "66f28a40ca03611b02412d8c1208325dca5534760bf81fbcd2740a069e0aad96"
+    },
+    {
+      "path": "runtime/proposal.json",
+      "bytes": 7899,
+      "sha256": "51573dba7e31054f7b97258295293d120e34b7e57719284187b31b6fc61e4d4d"
+    },
+    {
+      "path": "runtime/run_fit38_once.py",
+      "bytes": 22080,
+      "sha256": "8a5ce9f51c5497f091abaf7874af9d9fb15e374137c4baa19767d2db1dad75b6"
+    }
+  ]
+}

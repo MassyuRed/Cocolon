@@ -1,0 +1,163 @@
+{
+  "schema": "cocolon.native15_gpu_once.proposal.v1",
+  "status": "AUTHORIZED_ONCE",
+  "gpu_run_authorized": true,
+  "implementation_required": false,
+  "execution_owner": "root Karen; read-only agent review; not formal Pro/Ultra/human acceptance",
+  "purpose": "Train the six already-connected native teachers while replaying nine existing quote teachers; compare actual 4B meaning and body, not only training loss.",
+  "api_commit": "6b043880504912481a6b10d93c9128ec4995b70b",
+  "initial_adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "26095c64075c5e88934f200eed8a6a3b5e389ad708d394f8567a1180e4aeb89c",
+    "adapter_model.safetensors": "45779ad97111dd2d91c1f7f1a4b0ca697ef0586c5190cd56b1b7675fe540dab6"
+  },
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "existing_pod": "y0eb0w0qn6nks0",
+  "gpu": "RTX A4500 20GB",
+  "new_pod": false,
+  "stop_gpu": false,
+  "training_rows": 15,
+  "independent_language_families": 6,
+  "training_order": [
+    "TRAIN-SERVICE-CHAIR-01-INITIAL",
+    "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+    "TRAIN-SERVICE-CHAIR-02-INITIAL",
+    "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+    "TRAIN-SERVICE-CHAIR-03-INITIAL",
+    "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+    "TRAIN-DAILY-CALM-01-INITIAL",
+    "TRAIN-DAILY-CALM-02-INITIAL",
+    "TRAIN-DAILY-CALM-03-INITIAL",
+    "FT-BOOK-INITIAL",
+    "FT-BOOK-AFTER-ANSWER",
+    "FT-SHOP-INITIAL",
+    "FT-SHOP-AFTER-ANSWER",
+    "FT-REPOT-INITIAL",
+    "FT-KNIT-INITIAL"
+  ],
+  "epochs": 1,
+  "optimizer_steps": 15,
+  "batch_size": 1,
+  "optimizer": "AdamW",
+  "learning_rate": 5e-05,
+  "weight_decay": 0.0,
+  "gradient_clip_norm": 1.0,
+  "seed": 20261024,
+  "trainable_tensors": 32,
+  "lora_rank": 8,
+  "lora_alpha": 16,
+  "lora_dropout": 0,
+  "loss": "full assistant labels including EOS; prompt masked; no new surface/evidence mask",
+  "dtype": "existing BF16 base with existing F32 LoRA",
+  "gradient_checkpointing": "use_reentrant=False; restore train mode and use_cache=False after baseline",
+  "context_tokens": 8192,
+  "generation_caps": {
+    "TRAIN-SERVICE-CHAIR-01-INITIAL": 2560,
+    "TRAIN-SERVICE-CHAIR-01-CORRECTION": 2560,
+    "TRAIN-SERVICE-CHAIR-02-INITIAL": 2560,
+    "TRAIN-SERVICE-CHAIR-02-CORRECTION": 2560,
+    "TRAIN-SERVICE-CHAIR-03-INITIAL": 2560,
+    "TRAIN-SERVICE-CHAIR-03-CORRECTION": 2560,
+    "TRAIN-DAILY-CALM-01-INITIAL": 2560,
+    "TRAIN-DAILY-CALM-02-INITIAL": 2560,
+    "TRAIN-DAILY-CALM-03-INITIAL": 2560,
+    "FT-BOOK-INITIAL": 3712,
+    "FT-BOOK-AFTER-ANSWER": 3712,
+    "FT-SHOP-INITIAL": 3712,
+    "FT-SHOP-AFTER-ANSWER": 3712,
+    "FT-REPOT-INITIAL": 3712,
+    "FT-KNIT-INITIAL": 3712
+  },
+  "before_ids": [
+    "FT-BOOK-INITIAL",
+    "FT-BOOK-AFTER-ANSWER",
+    "FT-SHOP-INITIAL",
+    "FT-SHOP-AFTER-ANSWER",
+    "FT-REPOT-INITIAL",
+    "FT-KNIT-INITIAL"
+  ],
+  "after_ids": [
+    "TRAIN-SERVICE-CHAIR-01-INITIAL",
+    "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+    "TRAIN-SERVICE-CHAIR-02-INITIAL",
+    "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+    "TRAIN-SERVICE-CHAIR-03-INITIAL",
+    "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+    "TRAIN-DAILY-CALM-01-INITIAL",
+    "TRAIN-DAILY-CALM-02-INITIAL",
+    "TRAIN-DAILY-CALM-03-INITIAL",
+    "FT-BOOK-INITIAL",
+    "FT-BOOK-AFTER-ANSWER",
+    "FT-SHOP-INITIAL",
+    "FT-SHOP-AFTER-ANSWER",
+    "FT-REPOT-INITIAL",
+    "FT-KNIT-INITIAL"
+  ],
+  "max_model_calls": 21,
+  "do_sample": false,
+  "max_seconds": 2700,
+  "per_generation_seconds": 180,
+  "gpu_hourly_usd": 0.26,
+  "max_process_usd": 0.195,
+  "cost_scope": "Process-time apportionment only. Preparation, recovery, continuing pod retention/storage/transfer/tax are separate. Existing keep-running instruction continues.",
+  "deadline_scope": "Global wall-clock covers model loading, before6, train15, save/reload and after15. Final hash/archive/recovery can take additional time; not an OS hard-stop guarantee. All 21 calls are not guaranteed to complete.",
+  "tokenizer_precheck": {
+    "train_messages.jsonl": {
+      "sha256": "29f37e38f4a615220c739176a6eaa2e0e01aae36c7bb6f87db8be248aecd1772",
+      "bytes": 349174
+    },
+    "eval_inputs.jsonl": {
+      "sha256": "c67fa4098bafa10508bf57bf1975fcdfd6f2359f851e34c0f26148310eb8b75e",
+      "bytes": 169628
+    }
+  },
+  "max_training_tokens": 7935,
+  "max_prompt_plus_generation_cap": 8086,
+  "payloads": {
+    "train_messages.jsonl": {
+      "bytes": 349174,
+      "sha256": "29f37e38f4a615220c739176a6eaa2e0e01aae36c7bb6f87db8be248aecd1772"
+    },
+    "eval_inputs.jsonl": {
+      "bytes": 169628,
+      "sha256": "c67fa4098bafa10508bf57bf1975fcdfd6f2359f851e34c0f26148310eb8b75e"
+    },
+    "cpu_preparation.json": {
+      "bytes": 16296,
+      "sha256": "64a7d905c4cfe3dbea227064e8aee053b23bff15baf51261f4a41c6478306f9d"
+    },
+    "prepare_native15.py": {
+      "bytes": 6860,
+      "sha256": "602033ae0d84b7d6a4dff88b4c25d571bf1acc47af7876d46373e715da5abecb"
+    },
+    "api_blobs.json": {
+      "bytes": 688,
+      "sha256": "69168896b25c6bf1e008592bdeff1e975a4a3b88ca3366487a094414d98b9e85"
+    }
+  },
+  "baseline_policy": "Malformed JSON, non-adoption or token-cap non-EOS are preserved as failed baseline evidence; continue only the already-fixed one pass. A per-call timeout, OOM, exception, nonfinite tensor/gradient, identity mismatch, or global deadline ends the whole unit.",
+  "after_policy": "Preserve each raw and finish reason, do not repair or re-call. Non-EOS/non-adoption is failure, not fit success. No extra update or successor trial. Stop on runtime failures/deadlines.",
+  "save_policy": "Keep initial adapter read-only. Save a separate adapter immediately after training; archive before evaluation. Verify 32 finite tensors and hashes at save/reload/after, recover raw and completed/partial artifacts off Pod. No exact optimizer/RNG resume claim.",
+  "cmee_check": "Use unchanged generated raw with exact frozen source/prior through quote compilation, receipt, meaning adoption and body. For adopted new6, same snapshot cold-file save/reload/NoGeneration result read with no extra model call. Frozen teacher prior is explicitly synthetic; no actual service round-trip claim.",
+  "success": "All15 EOS and CMEE meaning/body; new6 per-source subject/time/polarity/perception/unknown/question-END/update semantics; all actual bodies read. A failed row remains failed. Fit success is not generalization or product acceptance.",
+  "service_sql_calls": 0,
+  "unknown_evaluation_count": 0,
+  "teacher_provenance": "Existing Karen edits/synthetic supplements; no Mash full-response gold. No new teacher text, failed raw, E05/E01/E03/A03 or withdrawn book-club material.",
+  "old_quote_baseline": "Previous native9/9 used numeric chair plus quote daily. Quote-unified chair accuracy of old45779 is not measured; after old9 failures cannot be called regression from quote9/9.",
+  "memory_boundary": "7935-token learning on A4500 is not yet proved; OOM ends the unit, no fallback dtype/batch/mask/dependency/GPU change.",
+  "prohibited": [
+    "new GPU/pod/charge/lifecycle actions",
+    "dependency install or external generative API",
+    "production source/reader/admission/API/DB/RN changes",
+    "user DB data or Render/Supabase effects",
+    "automatic retry, additional LR/mask/epoch search or raw rewriting"
+  ],
+  "retry": false,
+  "automatic_progression": false,
+  "product_accepted": false,
+  "product_credit": 0,
+  "approval_basis": "Mash explicit approval of 5ba8c370 native15-gpu-proposal: 進めていいよ。",
+  "runner_sha256": "02819f033dfae099971d6d474141d4855d40eba9f5ca8e28fa0dfbb12c5ca4eb",
+  "proposal_commit": "5ba8c3704b60b960e4d8c39793d707e4f8836277"
+}

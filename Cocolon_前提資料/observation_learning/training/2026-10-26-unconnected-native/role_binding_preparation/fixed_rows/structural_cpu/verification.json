@@ -1,0 +1,28 @@
+{
+  "status": "VERIFIED",
+  "jupyter_source_commit": "64c1111e47f2ed82837ef5f915b7d23ca734f2d2",
+  "source_sha256": "74dc5602d106e740a7d59f50183723c734c49d348c9a4b98347ec881bbc6cb34",
+  "result_bytes": 4240,
+  "result_sha256": "6d070d501e19544d03c323b3f1aded994b81d61db27cdcd6894787ff9205b418",
+  "all_four_input_hashes_match_github": true,
+  "all_case_results_match_root_reading": true,
+  "jupyter_cpu_seconds": 0.011652405024506152,
+  "model_effects": {
+    "model_loads": 0,
+    "model_forwards": 0,
+    "training_updates": 0,
+    "generations": 0,
+    "receiver_calls": 0,
+    "repairs": 0,
+    "source_writes": 0,
+    "gpu_lifecycle_operations": 0
+  },
+  "download_api": "TIMEOUT_BUT_ACTUAL_FILE_RECEIVED_AND_VERIFIED",
+  "download_retries": 0,
+  "raw_repaired": false,
+  "weights_adopted": false,
+  "primary_outcome": "BLOCKER_NARROWED",
+  "product_credit": 0,
+  "structure_map_delta": "NONE",
+  "new_method_status": "PROPOSED_NOT_APPROVED_NOT_IMPLEMENTED_NOT_RUN"
+}

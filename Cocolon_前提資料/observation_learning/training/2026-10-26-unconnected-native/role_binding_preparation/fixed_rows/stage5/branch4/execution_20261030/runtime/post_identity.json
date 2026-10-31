@@ -1,0 +1,12 @@
+{
+  "collected_unix": 1793347900.8638635,
+  "frozen_files_unchanged": 275,
+  "gpu": "NVIDIA RTX A5000, 1 MiB, 0 %",
+  "adapter_sha256": "ad8b89e8974df9bfe7e804b8f67bbaac59e6cbb37042c3254fb58ffb64230d0a",
+  "runner_seconds": 14.90352953702677,
+  "runner_prorated_usd_at_prior_rate": 0.0011591634084354156,
+  "parent_seconds": 16.025832931976765,
+  "extra_preparation_collection_holding": true,
+  "gpu_lifecycle_operations": 0,
+  "retry": false
+}

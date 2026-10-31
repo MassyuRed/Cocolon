@@ -1,0 +1,74 @@
+{
+  "status": "ORIGINALS_AND_ROOT_CONTENT_REVIEW_COMPLETE_NOT_ADOPTED",
+  "archive": {
+    "archive": "cocolon-focus29-originals-20261030.zip",
+    "bytes": 14665160,
+    "sha256": "117dab424a63e67d4cadeb4900cbe64b911220e5d34188acbcc7a27dd8d1b13b",
+    "members": 55,
+    "status": "STOPPED_NOT_ADOPTED_NO_RETRY",
+    "processing_seconds": 786.3727302169427,
+    "process_cost_usd": 0.06116232346131777,
+    "post_identity": {
+      "frozen_files": 298,
+      "all_frozen_bytes_unchanged": true,
+      "changed_paths": [],
+      "initial_adapter_sha256": "ad8b89e8974df9bfe7e804b8f67bbaac59e6cbb37042c3254fb58ffb64230d0a",
+      "initial_config_sha256": "ef4b1aef621fb4e234ce6a05601efb62a987c3cf5d40f3995ca1b72200bab145",
+      "gpu_read_only": "NVIDIA RTX A5000, 1 MiB, 0 %",
+      "model_rerun": false,
+      "retry": false
+    }
+  },
+  "crc_all_passed": true,
+  "all_payload_bytes_sha256_match": true,
+  "source_approval_plan_exact": true,
+  "original_initial_and_298_frozen_unchanged": true,
+  "training_rows_checked": 29,
+  "scheduled_update_order_exact": true,
+  "nll_rows_checked": 19,
+  "actual_stage_chains_checked": 10,
+  "weights": [
+    {
+      "directory": "adapter",
+      "sha256": "ed298856feff61b36dcc23f57996c8821a8e7da5d745ca7b92344cd89f5d77f0",
+      "bytes": 15351792,
+      "tensors": 112,
+      "params": 3833856,
+      "all_finite_f32": true,
+      "archive": {
+        "file": "/workspace/scratch/cocolon-focus29-weights-20261030.zip",
+        "bytes": 14208416,
+        "sha256": "159ee10709c209f09c5b70d783474a9bf2ed08f84b679db89d719199cf374f25"
+      }
+    }
+  ],
+  "retry": false,
+  "product_credit": 0,
+  "automatic_progression": false,
+  "root_all_10_raw_read": true,
+  "independent_read_only_review_agrees": true,
+  "literal_source_quotes_checked": 33,
+  "source_quote_match_does_not_prove_semantic_binding": true,
+  "weights_library": {
+    "library_file_id": "libfile_9f058918928c81919765b7b5e9248a20",
+    "file_id": "file_000000008d4c8206ac28f6337dd16fac",
+    "file_name": "cocolon-focus29-weights-20261030.zip",
+    "library_version": 0,
+    "library_url": "https://chatgpt.com/library?file_id=libfile_9f058918928c81919765b7b5e9248a20&account_id=personal",
+    "bytes": 14208416,
+    "sha256": "159ee10709c209f09c5b70d783474a9bf2ed08f84b679db89d719199cf374f25",
+    "members": [
+      "adapter/README.md",
+      "adapter/adapter_config.json",
+      "adapter/adapter_model.safetensors",
+      "weights_verification.json"
+    ],
+    "adapter_sha256": "ed298856feff61b36dcc23f57996c8821a8e7da5d745ca7b92344cd89f5d77f0",
+    "all_112_finite_f32": true,
+    "params": 3833856,
+    "full_base_weights_included": false,
+    "optimizer_rng_state_included": false,
+    "product_adopted": false,
+    "note": "Complete additional weights/config/model card plus independent binary verification; original base model required."
+  }
+}

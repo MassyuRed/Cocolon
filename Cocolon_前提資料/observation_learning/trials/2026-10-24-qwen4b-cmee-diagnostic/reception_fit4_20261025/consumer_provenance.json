@@ -1,0 +1,6 @@
+{
+  "api_commit": "7a4dc32c07f8c8a30609e8345207c6a9c831de23",
+  "inference_tracked_dirty": "",
+  "verifier_sha256": "6c042267eeaa9dace4a63abd2ae1ad42f2486c722947a08ed3d1daf571a7684b",
+  "scope": "Existing consume_raw, fixed source, no generation or DB; before raw reuse and new after raw"
+}

@@ -1,0 +1,1107 @@
+{
+  "schema_version": "cocolon.cmee.p4_offline_piece_evidence.v1",
+  "origin": "HAND_AUTHORED_P2_PACKET_AND_SYNTHETIC_SAVED_INPUT_NOT_MODEL_OUTPUT",
+  "api_commit": "4fd8db4f5ad24336368a63f09f9d88170ab41fa0",
+  "p1_receipt_adoption_state": "NOT_ADOPTED",
+  "p1_request_ref": "prep-5d2d66abadafe5865647749ec5aedd2a6a30b04224fb5c12bb883f5db830b8cb",
+  "original": {
+    "category": [
+      "仕事",
+      "人間関係"
+    ],
+    "created_at": "2026-10-20T20:40:00+09:00",
+    "emotion_details": [
+      {
+        "strength": "weak",
+        "type": "喜び"
+      },
+      {
+        "strength": "weak",
+        "type": "不安"
+      }
+    ],
+    "emotions": [
+      "喜び",
+      "不安"
+    ],
+    "id": "P01-O",
+    "memo": "助かったと言ってもらえてうれしかった。でも自分の仕事が残って、帰るのが遅くなった。手伝ったことを後悔しているわけではない。次も引き受けるかは、そのときの余裕で決めたい。",
+    "memo_action": "頼まれて同僚の発表資料を一緒に直した。"
+  },
+  "candidate_packet": {
+    "candidate": {
+      "claims": [
+        {
+          "about_time": {
+            "anchor_source_id": null,
+            "evidence_indexes": [
+              1
+            ],
+            "expression": null,
+            "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+          },
+          "claim_id": "p.joy",
+          "evidence_indexes": [
+            1
+          ],
+          "kind": "STATE",
+          "modality": {
+            "evidence_indexes": [
+              1
+            ],
+            "value": "ASSERTED_AS_WRITTEN"
+          },
+          "polarity": {
+            "evidence_indexes": [
+              1
+            ],
+            "scope_refs": [
+              "p.joy"
+            ],
+            "value": "AFFIRMED"
+          },
+          "predicate": {
+            "arguments": [],
+            "surface": "うれしかった"
+          },
+          "qualifiers": [
+            {
+              "evidence_indexes": [
+                0
+              ],
+              "kind": "REPORTED_SPEECH_SCOPE",
+              "scope_refs": [
+                "p.joy"
+              ],
+              "text": "助かったと言ってもらえて"
+            }
+          ],
+          "subject": {
+            "binding": "OMITTED",
+            "evidence_indexes": [],
+            "source_entity": null
+          },
+          "text": "助かったと言ってもらえてうれしかった。"
+        },
+        {
+          "about_time": {
+            "anchor_source_id": null,
+            "evidence_indexes": [
+              2
+            ],
+            "expression": null,
+            "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+          },
+          "claim_id": "p.work_left",
+          "evidence_indexes": [
+            2
+          ],
+          "kind": "RESULT_STATE",
+          "modality": {
+            "evidence_indexes": [
+              2
+            ],
+            "value": "ASSERTED_AS_WRITTEN"
+          },
+          "polarity": {
+            "evidence_indexes": [
+              2
+            ],
+            "scope_refs": [
+              "p.work_left"
+            ],
+            "value": "AFFIRMED"
+          },
+          "predicate": {
+            "arguments": [
+              {
+                "claim_ref": null,
+                "evidence_indexes": [
+                  10
+                ],
+                "role": "WRITTEN_が",
+                "text": "自分の仕事"
+              }
+            ],
+            "surface": "残って"
+          },
+          "qualifiers": [],
+          "subject": {
+            "binding": "EXPLICIT",
+            "evidence_indexes": [
+              11
+            ],
+            "source_entity": "自分の仕事"
+          },
+          "text": "自分の仕事が残って"
+        },
+        {
+          "about_time": {
+            "anchor_source_id": null,
+            "evidence_indexes": [
+              3
+            ],
+            "expression": null,
+            "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+          },
+          "claim_id": "p.late",
+          "evidence_indexes": [
+            3
+          ],
+          "kind": "RESULT_STATE",
+          "modality": {
+            "evidence_indexes": [
+              3
+            ],
+            "value": "ASSERTED_AS_WRITTEN"
+          },
+          "polarity": {
+            "evidence_indexes": [
+              3
+            ],
+            "scope_refs": [
+              "p.late"
+            ],
+            "value": "AFFIRMED"
+          },
+          "predicate": {
+            "arguments": [],
+            "surface": "遅くなった"
+          },
+          "qualifiers": [],
+          "subject": {
+            "binding": "OMITTED",
+            "evidence_indexes": [],
+            "source_entity": null
+          },
+          "text": "帰るのが遅くなった。"
+        },
+        {
+          "about_time": {
+            "anchor_source_id": null,
+            "evidence_indexes": [
+              5
+            ],
+            "expression": null,
+            "kind": "WRITTEN_CURRENT_EVALUATION"
+          },
+          "claim_id": "p.no_regret",
+          "evidence_indexes": [
+            5
+          ],
+          "kind": "SCOPED_EVALUATION",
+          "modality": {
+            "evidence_indexes": [
+              5
+            ],
+            "value": "ASSERTED_AS_WRITTEN"
+          },
+          "polarity": {
+            "evidence_indexes": [
+              5
+            ],
+            "scope_refs": [
+              "p.no_regret"
+            ],
+            "value": "SCOPED_NEGATION"
+          },
+          "predicate": {
+            "arguments": [
+              {
+                "claim_ref": null,
+                "evidence_indexes": [
+                  12
+                ],
+                "role": "WRITTEN_を",
+                "text": "手伝ったこと"
+              }
+            ],
+            "surface": "後悔しているわけではない"
+          },
+          "qualifiers": [
+            {
+              "evidence_indexes": [
+                4
+              ],
+              "kind": "NEGATION_SCOPE",
+              "scope_refs": [
+                "p.no_regret"
+              ],
+              "text": "わけではない"
+            }
+          ],
+          "subject": {
+            "binding": "OMITTED",
+            "evidence_indexes": [],
+            "source_entity": null
+          },
+          "text": "手伝ったことを後悔しているわけではない。"
+        },
+        {
+          "about_time": {
+            "anchor_source_id": "P01-O",
+            "evidence_indexes": [
+              14
+            ],
+            "expression": "次",
+            "kind": "WRITTEN_FUTURE_RELATIVE"
+          },
+          "claim_id": "p.next",
+          "evidence_indexes": [
+            6
+          ],
+          "kind": "CONDITIONAL_INTENTION",
+          "modality": {
+            "evidence_indexes": [
+              6
+            ],
+            "value": "WISH_OR_INTENTION_NOT_ACTION"
+          },
+          "polarity": {
+            "evidence_indexes": [
+              6
+            ],
+            "scope_refs": [
+              "p.next"
+            ],
+            "value": "AFFIRMED"
+          },
+          "predicate": {
+            "arguments": [
+              {
+                "claim_ref": null,
+                "evidence_indexes": [
+                  13
+                ],
+                "role": "WRITTEN_で",
+                "text": "そのときの余裕"
+              }
+            ],
+            "surface": "決めたい"
+          },
+          "qualifiers": [],
+          "subject": {
+            "binding": "OMITTED",
+            "evidence_indexes": [],
+            "source_entity": null
+          },
+          "text": "次も引き受けるかは、そのときの余裕で決めたい。"
+        },
+        {
+          "about_time": {
+            "anchor_source_id": null,
+            "evidence_indexes": [
+              7
+            ],
+            "expression": null,
+            "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+          },
+          "claim_id": "p.help",
+          "evidence_indexes": [
+            7
+          ],
+          "kind": "ACTION",
+          "modality": {
+            "evidence_indexes": [
+              7
+            ],
+            "value": "ASSERTED_AS_WRITTEN"
+          },
+          "polarity": {
+            "evidence_indexes": [
+              7
+            ],
+            "scope_refs": [
+              "p.help"
+            ],
+            "value": "AFFIRMED"
+          },
+          "predicate": {
+            "arguments": [],
+            "surface": "直した"
+          },
+          "qualifiers": [],
+          "subject": {
+            "binding": "OMITTED",
+            "evidence_indexes": [],
+            "source_entity": null
+          },
+          "text": "頼まれて同僚の発表資料を一緒に直した。"
+        }
+      ],
+      "conflicts": [],
+      "core": "piece",
+      "relations": [
+        {
+          "evidence_indexes": [
+            8
+          ],
+          "from_claim_id": "p.joy",
+          "polarity": "AFFIRMED",
+          "qualifiers": [],
+          "relation_id": "p.contrast",
+          "scope_refs": [
+            "p.contrast"
+          ],
+          "to_claim_id": "p.work_left",
+          "type": "SOURCE_WRITTEN_CONCESSION"
+        },
+        {
+          "evidence_indexes": [
+            9
+          ],
+          "from_claim_id": "p.work_left",
+          "polarity": "AFFIRMED",
+          "qualifiers": [],
+          "relation_id": "p.cooccur",
+          "scope_refs": [
+            "p.cooccur"
+          ],
+          "to_claim_id": "p.late",
+          "type": "WRITTEN_TE_LINK_CAUSALITY_UNRESOLVED"
+        }
+      ],
+      "schema_version": "cocolon.cmee.semantic_mapping_proposal.v1",
+      "unknowns": [],
+      "updates": []
+    },
+    "evidence": [
+      {
+        "end": 12,
+        "field_path": "memo",
+        "quote": "助かったと言ってもらえて",
+        "source_id": "P01-O",
+        "start": 0
+      },
+      {
+        "end": 19,
+        "field_path": "memo",
+        "quote": "助かったと言ってもらえてうれしかった。",
+        "source_id": "P01-O",
+        "start": 0
+      },
+      {
+        "end": 30,
+        "field_path": "memo",
+        "quote": "自分の仕事が残って",
+        "source_id": "P01-O",
+        "start": 21
+      },
+      {
+        "end": 41,
+        "field_path": "memo",
+        "quote": "帰るのが遅くなった。",
+        "source_id": "P01-O",
+        "start": 31
+      },
+      {
+        "end": 60,
+        "field_path": "memo",
+        "quote": "わけではない",
+        "source_id": "P01-O",
+        "start": 54
+      },
+      {
+        "end": 61,
+        "field_path": "memo",
+        "quote": "手伝ったことを後悔しているわけではない。",
+        "source_id": "P01-O",
+        "start": 41
+      },
+      {
+        "end": 84,
+        "field_path": "memo",
+        "quote": "次も引き受けるかは、そのときの余裕で決めたい。",
+        "source_id": "P01-O",
+        "start": 61
+      },
+      {
+        "end": 19,
+        "field_path": "memo_action",
+        "quote": "頼まれて同僚の発表資料を一緒に直した。",
+        "source_id": "P01-O",
+        "start": 0
+      },
+      {
+        "end": 41,
+        "field_path": "memo",
+        "quote": "でも自分の仕事が残って、帰るのが遅くなった。",
+        "source_id": "P01-O",
+        "start": 19
+      },
+      {
+        "end": 41,
+        "field_path": "memo",
+        "quote": "自分の仕事が残って、帰るのが遅くなった。",
+        "source_id": "P01-O",
+        "start": 21
+      },
+      {
+        "end": 27,
+        "field_path": "memo",
+        "quote": "自分の仕事が",
+        "source_id": "P01-O",
+        "start": 21
+      },
+      {
+        "end": 26,
+        "field_path": "memo",
+        "quote": "自分の仕事",
+        "source_id": "P01-O",
+        "start": 21
+      },
+      {
+        "end": 48,
+        "field_path": "memo",
+        "quote": "手伝ったことを",
+        "source_id": "P01-O",
+        "start": 41
+      },
+      {
+        "end": 79,
+        "field_path": "memo",
+        "quote": "そのときの余裕で",
+        "source_id": "P01-O",
+        "start": 71
+      },
+      {
+        "end": 62,
+        "field_path": "memo",
+        "quote": "次",
+        "source_id": "P01-O",
+        "start": 61
+      }
+    ]
+  },
+  "actual_artifact": {
+    "snapshot_ref": "piece-snapshot:e65914d5f5e224c588e76696abe54cd1b4f4bb85b1340a035c79b072ab9c8dda",
+    "plan_ref": "piece-plan:1c1d17529d31fa13be922cc433b0b0d3ef93f3d9a7936e569318aed3e6124e15",
+    "source_commitment": "sha256:02254297097aea46435f75ae62b0d1955e1036c4e2b13ebcd0f709b915f245f4",
+    "body_blocks": [
+      "助かったと言ってもらえてうれしかった。でも自分の仕事が残って、帰るのが遅くなった。手伝ったことを後悔しているわけではない。次も引き受けるかは、そのときの余裕で決めたい。",
+      "頼まれて同僚の発表資料を一緒に直した。"
+    ],
+    "piece_text": "助かったと言ってもらえてうれしかった。でも自分の仕事が残って、帰るのが遅くなった。手伝ったことを後悔しているわけではない。次も引き受けるかは、そのときの余裕で決めたい。\n\n頼まれて同僚の発表資料を一緒に直した。",
+    "piece_text_hash": "497587f07292b816d9c6eaba869dd87696e9c56c9400a7a8769f940a78b6cc78",
+    "format_type": "short_essay",
+    "eligible_formats": [
+      "short_essay"
+    ],
+    "claim_realizations": [
+      {
+        "claim_ref": "p.joy",
+        "duty_ref": "duty:p.joy",
+        "node_refs": [
+          "memo:0:19"
+        ],
+        "source_binding_refs": [
+          "piece-binding:afcb4995b99df763d674618f34ba8dea57d3677da388b584550192c61cefc949"
+        ],
+        "block_index": 0,
+        "visible_scalar_start": 0,
+        "visible_scalar_end": 19
+      },
+      {
+        "claim_ref": "p.work_left",
+        "duty_ref": "duty:p.work_left",
+        "node_refs": [
+          "memo:19:41"
+        ],
+        "source_binding_refs": [
+          "piece-binding:d645df7263a75447475a45956448fc59332d7e4c150242b600f2244efb8d708e"
+        ],
+        "block_index": 0,
+        "visible_scalar_start": 21,
+        "visible_scalar_end": 30
+      },
+      {
+        "claim_ref": "p.late",
+        "duty_ref": "duty:p.late",
+        "node_refs": [
+          "memo:19:41"
+        ],
+        "source_binding_refs": [
+          "piece-binding:00ee6629824b80c7032ba4a2639dd889bc5e1916f87c219b44008c953a12a9b1"
+        ],
+        "block_index": 0,
+        "visible_scalar_start": 31,
+        "visible_scalar_end": 41
+      },
+      {
+        "claim_ref": "p.no_regret",
+        "duty_ref": "duty:p.no_regret",
+        "node_refs": [
+          "memo:41:61"
+        ],
+        "source_binding_refs": [
+          "piece-binding:d8b3cd4f6fb56104ec43d592c9090f538cf14ed809023a6c4697a96f8b9a7e57"
+        ],
+        "block_index": 0,
+        "visible_scalar_start": 41,
+        "visible_scalar_end": 61
+      },
+      {
+        "claim_ref": "p.next",
+        "duty_ref": "duty:p.next",
+        "node_refs": [
+          "memo:61:84"
+        ],
+        "source_binding_refs": [
+          "piece-binding:739c8baabdb7ae18b12ee3654e2b2065e16158235ea1b97200430951c47cc8f6"
+        ],
+        "block_index": 0,
+        "visible_scalar_start": 61,
+        "visible_scalar_end": 84
+      },
+      {
+        "claim_ref": "p.help",
+        "duty_ref": "duty:p.help",
+        "node_refs": [
+          "memo_action:0:19"
+        ],
+        "source_binding_refs": [
+          "piece-binding:171aca2b8ea95bee2a2a2cf01552d395ecd6692aa15e70e7014c8c00af987cc4"
+        ],
+        "block_index": 1,
+        "visible_scalar_start": 0,
+        "visible_scalar_end": 19
+      }
+    ],
+    "retained_selection_refs": [
+      "selection:emotions:0|emotion_details:0",
+      "selection:emotions:1|emotion_details:1"
+    ],
+    "schema_version": "cocolon.cmee.piece_semantic_artifact.v1",
+    "semantic_profile": "piece_candidate_snapshot.v1",
+    "meaning_contract_version": "cocolon.cmee.piece_candidate_meaning.v1"
+  },
+  "private_serialized_state": {
+    "artifact": {
+      "body_blocks": [
+        "助かったと言ってもらえてうれしかった。でも自分の仕事が残って、帰るのが遅くなった。手伝ったことを後悔しているわけではない。次も引き受けるかは、そのときの余裕で決めたい。",
+        "頼まれて同僚の発表資料を一緒に直した。"
+      ],
+      "claim_realizations": [
+        {
+          "block_index": 0,
+          "claim_ref": "p.joy",
+          "duty_ref": "duty:p.joy",
+          "node_refs": [
+            "memo:0:19"
+          ],
+          "source_binding_refs": [
+            "piece-binding:afcb4995b99df763d674618f34ba8dea57d3677da388b584550192c61cefc949"
+          ],
+          "visible_scalar_end": 19,
+          "visible_scalar_start": 0
+        },
+        {
+          "block_index": 0,
+          "claim_ref": "p.work_left",
+          "duty_ref": "duty:p.work_left",
+          "node_refs": [
+            "memo:19:41"
+          ],
+          "source_binding_refs": [
+            "piece-binding:d645df7263a75447475a45956448fc59332d7e4c150242b600f2244efb8d708e"
+          ],
+          "visible_scalar_end": 30,
+          "visible_scalar_start": 21
+        },
+        {
+          "block_index": 0,
+          "claim_ref": "p.late",
+          "duty_ref": "duty:p.late",
+          "node_refs": [
+            "memo:19:41"
+          ],
+          "source_binding_refs": [
+            "piece-binding:00ee6629824b80c7032ba4a2639dd889bc5e1916f87c219b44008c953a12a9b1"
+          ],
+          "visible_scalar_end": 41,
+          "visible_scalar_start": 31
+        },
+        {
+          "block_index": 0,
+          "claim_ref": "p.no_regret",
+          "duty_ref": "duty:p.no_regret",
+          "node_refs": [
+            "memo:41:61"
+          ],
+          "source_binding_refs": [
+            "piece-binding:d8b3cd4f6fb56104ec43d592c9090f538cf14ed809023a6c4697a96f8b9a7e57"
+          ],
+          "visible_scalar_end": 61,
+          "visible_scalar_start": 41
+        },
+        {
+          "block_index": 0,
+          "claim_ref": "p.next",
+          "duty_ref": "duty:p.next",
+          "node_refs": [
+            "memo:61:84"
+          ],
+          "source_binding_refs": [
+            "piece-binding:739c8baabdb7ae18b12ee3654e2b2065e16158235ea1b97200430951c47cc8f6"
+          ],
+          "visible_scalar_end": 84,
+          "visible_scalar_start": 61
+        },
+        {
+          "block_index": 1,
+          "claim_ref": "p.help",
+          "duty_ref": "duty:p.help",
+          "node_refs": [
+            "memo_action:0:19"
+          ],
+          "source_binding_refs": [
+            "piece-binding:171aca2b8ea95bee2a2a2cf01552d395ecd6692aa15e70e7014c8c00af987cc4"
+          ],
+          "visible_scalar_end": 19,
+          "visible_scalar_start": 0
+        }
+      ],
+      "eligible_formats": [
+        "short_essay"
+      ],
+      "format_type": "short_essay",
+      "meaning_contract_version": "cocolon.cmee.piece_candidate_meaning.v1",
+      "piece_text": "助かったと言ってもらえてうれしかった。でも自分の仕事が残って、帰るのが遅くなった。手伝ったことを後悔しているわけではない。次も引き受けるかは、そのときの余裕で決めたい。\n\n頼まれて同僚の発表資料を一緒に直した。",
+      "piece_text_hash": "497587f07292b816d9c6eaba869dd87696e9c56c9400a7a8769f940a78b6cc78",
+      "plan_ref": "piece-plan:1c1d17529d31fa13be922cc433b0b0d3ef93f3d9a7936e569318aed3e6124e15",
+      "retained_selection_refs": [
+        "selection:emotions:0|emotion_details:0",
+        "selection:emotions:1|emotion_details:1"
+      ],
+      "schema_version": "cocolon.cmee.piece_semantic_artifact.v1",
+      "semantic_profile": "piece_candidate_snapshot.v1",
+      "snapshot_ref": "piece-snapshot:e65914d5f5e224c588e76696abe54cd1b4f4bb85b1340a035c79b072ab9c8dda",
+      "source_commitment": "sha256:02254297097aea46435f75ae62b0d1955e1036c4e2b13ebcd0f709b915f245f4"
+    },
+    "plan": {
+      "block_node_ids": [
+        [
+          "memo:0:19",
+          "memo:19:41",
+          "memo:41:61",
+          "memo:61:84"
+        ],
+        [
+          "memo_action:0:19"
+        ]
+      ],
+      "duties": [
+        {
+          "claim_refs": [
+            "p.joy"
+          ],
+          "duty_ref": "duty:p.joy",
+          "node_refs": [
+            "memo:0:19"
+          ],
+          "operation": "KEEP_COMPLETE_SOURCE_CONTEXT",
+          "required_scope_refs": [
+            "p.joy"
+          ],
+          "source_binding_refs": [
+            "piece-binding:afcb4995b99df763d674618f34ba8dea57d3677da388b584550192c61cefc949"
+          ]
+        },
+        {
+          "claim_refs": [
+            "p.work_left"
+          ],
+          "duty_ref": "duty:p.work_left",
+          "node_refs": [
+            "memo:19:41"
+          ],
+          "operation": "KEEP_COMPLETE_SOURCE_CONTEXT",
+          "required_scope_refs": [
+            "p.work_left"
+          ],
+          "source_binding_refs": [
+            "piece-binding:d645df7263a75447475a45956448fc59332d7e4c150242b600f2244efb8d708e"
+          ]
+        },
+        {
+          "claim_refs": [
+            "p.late"
+          ],
+          "duty_ref": "duty:p.late",
+          "node_refs": [
+            "memo:19:41"
+          ],
+          "operation": "KEEP_COMPLETE_SOURCE_CONTEXT",
+          "required_scope_refs": [
+            "p.late"
+          ],
+          "source_binding_refs": [
+            "piece-binding:00ee6629824b80c7032ba4a2639dd889bc5e1916f87c219b44008c953a12a9b1"
+          ]
+        },
+        {
+          "claim_refs": [
+            "p.no_regret"
+          ],
+          "duty_ref": "duty:p.no_regret",
+          "node_refs": [
+            "memo:41:61"
+          ],
+          "operation": "KEEP_COMPLETE_SOURCE_CONTEXT",
+          "required_scope_refs": [
+            "p.no_regret"
+          ],
+          "source_binding_refs": [
+            "piece-binding:d8b3cd4f6fb56104ec43d592c9090f538cf14ed809023a6c4697a96f8b9a7e57"
+          ]
+        },
+        {
+          "claim_refs": [
+            "p.next"
+          ],
+          "duty_ref": "duty:p.next",
+          "node_refs": [
+            "memo:61:84"
+          ],
+          "operation": "KEEP_COMPLETE_SOURCE_CONTEXT",
+          "required_scope_refs": [
+            "p.next"
+          ],
+          "source_binding_refs": [
+            "piece-binding:739c8baabdb7ae18b12ee3654e2b2065e16158235ea1b97200430951c47cc8f6"
+          ]
+        },
+        {
+          "claim_refs": [
+            "p.help"
+          ],
+          "duty_ref": "duty:p.help",
+          "node_refs": [
+            "memo_action:0:19"
+          ],
+          "operation": "KEEP_COMPLETE_SOURCE_CONTEXT",
+          "required_scope_refs": [
+            "p.help"
+          ],
+          "source_binding_refs": [
+            "piece-binding:171aca2b8ea95bee2a2a2cf01552d395ecd6692aa15e70e7014c8c00af987cc4"
+          ]
+        }
+      ],
+      "eligible_formats": [
+        "short_essay"
+      ],
+      "graph_id": "piece-graph:b726ac9c3ae7a0a2ad5f26c27eea54951de5a5e6db1cb32e46d86004ef2202e7",
+      "intent": "USER_OWNED_COCOLON_SHAPED",
+      "schema_version": "cocolon.cmee.piece_semantic_plan.v1",
+      "selection_duties": [
+        "selection:emotions:0|emotion_details:0",
+        "selection:emotions:1|emotion_details:1"
+      ],
+      "semantic_profile": "piece_candidate_snapshot.v1",
+      "snapshot_ref": "piece-snapshot:e65914d5f5e224c588e76696abe54cd1b4f4bb85b1340a035c79b072ab9c8dda",
+      "source_commitment": "sha256:02254297097aea46435f75ae62b0d1955e1036c4e2b13ebcd0f709b915f245f4"
+    },
+    "request_binding": {
+      "owner_id": "synthetic-piece-owner",
+      "request_id": "p4-synthetic",
+      "requested_format": null,
+      "saved_input_id": "P01-O",
+      "source_version": "emlis.current_input_bundle.v1",
+      "tier": "free"
+    },
+    "schema_version": "cocolon.cmee.piece_semantic_state.v1",
+    "snapshot": {
+      "adapter_version": 1,
+      "admission_version": 1,
+      "candidate_packet": "{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"p.joy\",\"evidence_indexes\":[1],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"p.joy\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"うれしかった\"},\"qualifiers\":[{\"evidence_indexes\":[0],\"kind\":\"REPORTED_SPEECH_SCOPE\",\"scope_refs\":[\"p.joy\"],\"text\":\"助かったと言ってもらえて\"}],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"助かったと言ってもらえてうれしかった。\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[2],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"p.work_left\",\"evidence_indexes\":[2],\"kind\":\"RESULT_STATE\",\"modality\":{\"evidence_indexes\":[2],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[2],\"scope_refs\":[\"p.work_left\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[{\"claim_ref\":null,\"evidence_indexes\":[10],\"role\":\"WRITTEN_が\",\"text\":\"自分の仕事\"}],\"surface\":\"残って\"},\"qualifiers\":[],\"subject\":{\"binding\":\"EXPLICIT\",\"evidence_indexes\":[11],\"source_entity\":\"自分の仕事\"},\"text\":\"自分の仕事が残って\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[3],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"p.late\",\"evidence_indexes\":[3],\"kind\":\"RESULT_STATE\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"p.late\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"遅くなった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"帰るのが遅くなった。\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[5],\"expression\":null,\"kind\":\"WRITTEN_CURRENT_EVALUATION\"},\"claim_id\":\"p.no_regret\",\"evidence_indexes\":[5],\"kind\":\"SCOPED_EVALUATION\",\"modality\":{\"evidence_indexes\":[5],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[5],\"scope_refs\":[\"p.no_regret\"],\"value\":\"SCOPED_NEGATION\"},\"predicate\":{\"arguments\":[{\"claim_ref\":null,\"evidence_indexes\":[12],\"role\":\"WRITTEN_を\",\"text\":\"手伝ったこと\"}],\"surface\":\"後悔しているわけではない\"},\"qualifiers\":[{\"evidence_indexes\":[4],\"kind\":\"NEGATION_SCOPE\",\"scope_refs\":[\"p.no_regret\"],\"text\":\"わけではない\"}],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"手伝ったことを後悔しているわけではない。\"},{\"about_time\":{\"anchor_source_id\":\"P01-O\",\"evidence_indexes\":[14],\"expression\":\"次\",\"kind\":\"WRITTEN_FUTURE_RELATIVE\"},\"claim_id\":\"p.next\",\"evidence_indexes\":[6],\"kind\":\"CONDITIONAL_INTENTION\",\"modality\":{\"evidence_indexes\":[6],\"value\":\"WISH_OR_INTENTION_NOT_ACTION\"},\"polarity\":{\"evidence_indexes\":[6],\"scope_refs\":[\"p.next\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[{\"claim_ref\":null,\"evidence_indexes\":[13],\"role\":\"WRITTEN_で\",\"text\":\"そのときの余裕\"}],\"surface\":\"決めたい\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"次も引き受けるかは、そのときの余裕で決めたい。\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[7],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"p.help\",\"evidence_indexes\":[7],\"kind\":\"ACTION\",\"modality\":{\"evidence_indexes\":[7],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[7],\"scope_refs\":[\"p.help\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"直した\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"頼まれて同僚の発表資料を一緒に直した。\"}],\"conflicts\":[],\"core\":\"piece\",\"relations\":[{\"evidence_indexes\":[8],\"from_claim_id\":\"p.joy\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"p.contrast\",\"scope_refs\":[\"p.contrast\"],\"to_claim_id\":\"p.work_left\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"},{\"evidence_indexes\":[9],\"from_claim_id\":\"p.work_left\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"p.cooccur\",\"scope_refs\":[\"p.cooccur\"],\"to_claim_id\":\"p.late\",\"type\":\"WRITTEN_TE_LINK_CAUSALITY_UNRESOLVED\"}],\"schema_version\":\"cocolon.cmee.semantic_mapping_proposal.v1\",\"unknowns\":[],\"updates\":[]},\"evidence\":[{\"end\":12,\"field_path\":\"memo\",\"quote\":\"助かったと言ってもらえて\",\"source_id\":\"P01-O\",\"start\":0},{\"end\":19,\"field_path\":\"memo\",\"quote\":\"助かったと言ってもらえてうれしかった。\",\"source_id\":\"P01-O\",\"start\":0},{\"end\":30,\"field_path\":\"memo\",\"quote\":\"自分の仕事が残って\",\"source_id\":\"P01-O\",\"start\":21},{\"end\":41,\"field_path\":\"memo\",\"quote\":\"帰るのが遅くなった。\",\"source_id\":\"P01-O\",\"start\":31},{\"end\":60,\"field_path\":\"memo\",\"quote\":\"わけではない\",\"source_id\":\"P01-O\",\"start\":54},{\"end\":61,\"field_path\":\"memo\",\"quote\":\"手伝ったことを後悔しているわけではない。\",\"source_id\":\"P01-O\",\"start\":41},{\"end\":84,\"field_path\":\"memo\",\"quote\":\"次も引き受けるかは、そのときの余裕で決めたい。\",\"source_id\":\"P01-O\",\"start\":61},{\"end\":19,\"field_path\":\"memo_action\",\"quote\":\"頼まれて同僚の発表資料を一緒に直した。\",\"source_id\":\"P01-O\",\"start\":0},{\"end\":41,\"field_path\":\"memo\",\"quote\":\"でも自分の仕事が残って、帰るのが遅くなった。\",\"source_id\":\"P01-O\",\"start\":19},{\"end\":41,\"field_path\":\"memo\",\"quote\":\"自分の仕事が残って、帰るのが遅くなった。\",\"source_id\":\"P01-O\",\"start\":21},{\"end\":27,\"field_path\":\"memo\",\"quote\":\"自分の仕事が\",\"source_id\":\"P01-O\",\"start\":21},{\"end\":26,\"field_path\":\"memo\",\"quote\":\"自分の仕事\",\"source_id\":\"P01-O\",\"start\":21},{\"end\":48,\"field_path\":\"memo\",\"quote\":\"手伝ったことを\",\"source_id\":\"P01-O\",\"start\":41},{\"end\":79,\"field_path\":\"memo\",\"quote\":\"そのときの余裕で\",\"source_id\":\"P01-O\",\"start\":71},{\"end\":62,\"field_path\":\"memo\",\"quote\":\"次\",\"source_id\":\"P01-O\",\"start\":61}]}",
+      "claim_bindings": [
+        {
+          "claim_json": "{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"p.joy\",\"evidence_indexes\":[1],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"p.joy\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"うれしかった\"},\"qualifiers\":[{\"evidence_indexes\":[0],\"kind\":\"REPORTED_SPEECH_SCOPE\",\"scope_refs\":[\"p.joy\"],\"text\":\"助かったと言ってもらえて\"}],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"助かったと言ってもらえてうれしかった。\"}",
+          "claim_ref": "p.joy",
+          "field_path": "memo",
+          "node_ref": "memo:0:19",
+          "scalar_end": 19,
+          "scalar_start": 0,
+          "source_binding_ref": "piece-binding:afcb4995b99df763d674618f34ba8dea57d3677da388b584550192c61cefc949",
+          "source_id": "P01-O",
+          "utf8_end": 57,
+          "utf8_start": 0
+        },
+        {
+          "claim_json": "{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[2],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"p.work_left\",\"evidence_indexes\":[2],\"kind\":\"RESULT_STATE\",\"modality\":{\"evidence_indexes\":[2],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[2],\"scope_refs\":[\"p.work_left\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[{\"claim_ref\":null,\"evidence_indexes\":[10],\"role\":\"WRITTEN_が\",\"text\":\"自分の仕事\"}],\"surface\":\"残って\"},\"qualifiers\":[],\"subject\":{\"binding\":\"EXPLICIT\",\"evidence_indexes\":[11],\"source_entity\":\"自分の仕事\"},\"text\":\"自分の仕事が残って\"}",
+          "claim_ref": "p.work_left",
+          "field_path": "memo",
+          "node_ref": "memo:19:41",
+          "scalar_end": 30,
+          "scalar_start": 21,
+          "source_binding_ref": "piece-binding:d645df7263a75447475a45956448fc59332d7e4c150242b600f2244efb8d708e",
+          "source_id": "P01-O",
+          "utf8_end": 90,
+          "utf8_start": 63
+        },
+        {
+          "claim_json": "{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[3],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"p.late\",\"evidence_indexes\":[3],\"kind\":\"RESULT_STATE\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"p.late\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"遅くなった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"帰るのが遅くなった。\"}",
+          "claim_ref": "p.late",
+          "field_path": "memo",
+          "node_ref": "memo:19:41",
+          "scalar_end": 41,
+          "scalar_start": 31,
+          "source_binding_ref": "piece-binding:00ee6629824b80c7032ba4a2639dd889bc5e1916f87c219b44008c953a12a9b1",
+          "source_id": "P01-O",
+          "utf8_end": 123,
+          "utf8_start": 93
+        },
+        {
+          "claim_json": "{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[5],\"expression\":null,\"kind\":\"WRITTEN_CURRENT_EVALUATION\"},\"claim_id\":\"p.no_regret\",\"evidence_indexes\":[5],\"kind\":\"SCOPED_EVALUATION\",\"modality\":{\"evidence_indexes\":[5],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[5],\"scope_refs\":[\"p.no_regret\"],\"value\":\"SCOPED_NEGATION\"},\"predicate\":{\"arguments\":[{\"claim_ref\":null,\"evidence_indexes\":[12],\"role\":\"WRITTEN_を\",\"text\":\"手伝ったこと\"}],\"surface\":\"後悔しているわけではない\"},\"qualifiers\":[{\"evidence_indexes\":[4],\"kind\":\"NEGATION_SCOPE\",\"scope_refs\":[\"p.no_regret\"],\"text\":\"わけではない\"}],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"手伝ったことを後悔しているわけではない。\"}",
+          "claim_ref": "p.no_regret",
+          "field_path": "memo",
+          "node_ref": "memo:41:61",
+          "scalar_end": 61,
+          "scalar_start": 41,
+          "source_binding_ref": "piece-binding:d8b3cd4f6fb56104ec43d592c9090f538cf14ed809023a6c4697a96f8b9a7e57",
+          "source_id": "P01-O",
+          "utf8_end": 183,
+          "utf8_start": 123
+        },
+        {
+          "claim_json": "{\"about_time\":{\"anchor_source_id\":\"P01-O\",\"evidence_indexes\":[14],\"expression\":\"次\",\"kind\":\"WRITTEN_FUTURE_RELATIVE\"},\"claim_id\":\"p.next\",\"evidence_indexes\":[6],\"kind\":\"CONDITIONAL_INTENTION\",\"modality\":{\"evidence_indexes\":[6],\"value\":\"WISH_OR_INTENTION_NOT_ACTION\"},\"polarity\":{\"evidence_indexes\":[6],\"scope_refs\":[\"p.next\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[{\"claim_ref\":null,\"evidence_indexes\":[13],\"role\":\"WRITTEN_で\",\"text\":\"そのときの余裕\"}],\"surface\":\"決めたい\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"次も引き受けるかは、そのときの余裕で決めたい。\"}",
+          "claim_ref": "p.next",
+          "field_path": "memo",
+          "node_ref": "memo:61:84",
+          "scalar_end": 84,
+          "scalar_start": 61,
+          "source_binding_ref": "piece-binding:739c8baabdb7ae18b12ee3654e2b2065e16158235ea1b97200430951c47cc8f6",
+          "source_id": "P01-O",
+          "utf8_end": 252,
+          "utf8_start": 183
+        },
+        {
+          "claim_json": "{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[7],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"p.help\",\"evidence_indexes\":[7],\"kind\":\"ACTION\",\"modality\":{\"evidence_indexes\":[7],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[7],\"scope_refs\":[\"p.help\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"直した\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"頼まれて同僚の発表資料を一緒に直した。\"}",
+          "claim_ref": "p.help",
+          "field_path": "memo_action",
+          "node_ref": "memo_action:0:19",
+          "scalar_end": 19,
+          "scalar_start": 0,
+          "source_binding_ref": "piece-binding:171aca2b8ea95bee2a2a2cf01552d395ecd6692aa15e70e7014c8c00af987cc4",
+          "source_id": "P01-O",
+          "utf8_end": 57,
+          "utf8_start": 0
+        }
+      ],
+      "relation_bindings": [
+        {
+          "endpoint_claim_refs": [
+            "p.joy",
+            "p.work_left"
+          ],
+          "evidence_json": "{\"end\":41,\"field_path\":\"memo\",\"quote\":\"でも自分の仕事が残って、帰るのが遅くなった。\",\"source_id\":\"P01-O\",\"start\":19}",
+          "relation_ref": "p.contrast",
+          "relation_type": "SOURCE_WRITTEN_CONCESSION"
+        },
+        {
+          "endpoint_claim_refs": [
+            "p.work_left",
+            "p.late"
+          ],
+          "evidence_json": "{\"end\":41,\"field_path\":\"memo\",\"quote\":\"自分の仕事が残って、帰るのが遅くなった。\",\"source_id\":\"P01-O\",\"start\":21}",
+          "relation_ref": "p.cooccur",
+          "relation_type": "WRITTEN_TE_LINK_CAUSALITY_UNRESOLVED"
+        }
+      ],
+      "request_ref": "prep-5d2d66abadafe5865647749ec5aedd2a6a30b04224fb5c12bb883f5db830b8cb",
+      "schema_version": "cocolon.cmee.piece_semantic_snapshot.v1",
+      "semantic_profile": "piece_candidate_snapshot.v1",
+      "snapshot_ref": "piece-snapshot:e65914d5f5e224c588e76696abe54cd1b4f4bb85b1340a035c79b072ab9c8dda",
+      "source_commitment": "sha256:02254297097aea46435f75ae62b0d1955e1036c4e2b13ebcd0f709b915f245f4",
+      "source_selections": [
+        {
+          "alias_refs": [
+            "emotions:0",
+            "emotion_details:0"
+          ],
+          "coverage_state": "SOURCE_SELECTION_RETAINED_NOT_TEXTUALIZED",
+          "label": "喜び",
+          "selection_field": "emotion_details",
+          "selection_index": 0,
+          "source_commitment": "sha256:02254297097aea46435f75ae62b0d1955e1036c4e2b13ebcd0f709b915f245f4",
+          "strength": "weak",
+          "text_binding_refs": []
+        },
+        {
+          "alias_refs": [
+            "emotions:1",
+            "emotion_details:1"
+          ],
+          "coverage_state": "SOURCE_SELECTION_RETAINED_NOT_TEXTUALIZED",
+          "label": "不安",
+          "selection_field": "emotion_details",
+          "selection_index": 1,
+          "source_commitment": "sha256:02254297097aea46435f75ae62b0d1955e1036c4e2b13ebcd0f709b915f245f4",
+          "strength": "weak",
+          "text_binding_refs": []
+        }
+      ],
+      "source_snapshot": {
+        "original_text": "助かったと言ってもらえてうれしかった。でも自分の仕事が残って、帰るのが遅くなった。手伝ったことを後悔しているわけではない。次も引き受けるかは、そのときの余裕で決めたい。\n\n頼まれて同僚の発表資料を一緒に直した。",
+        "owner_id": "synthetic-piece-owner",
+        "saved_input_id": "P01-O",
+        "saved_original_json": "{\"category\":[\"仕事\",\"人間関係\"],\"created_at\":\"2026-10-20T20:40:00+09:00\",\"emotion_details\":[{\"strength\":\"weak\",\"type\":\"喜び\"},{\"strength\":\"weak\",\"type\":\"不安\"}],\"emotions\":[\"喜び\",\"不安\"],\"id\":\"P01-O\",\"memo\":\"助かったと言ってもらえてうれしかった。でも自分の仕事が残って、帰るのが遅くなった。手伝ったことを後悔しているわけではない。次も引き受けるかは、そのときの余裕で決めたい。\",\"memo_action\":\"頼まれて同僚の発表資料を一緒に直した。\"}",
+        "source_role": "original",
+        "source_stage": "normal_observation",
+        "source_version": "emlis.current_input_bundle.v1"
+      }
+    }
+  },
+  "actual_replay_identical": true,
+  "native_dataclass_fields": {
+    "PieceSemanticInputV1": [
+      "prepared",
+      "receipt",
+      "semantic_profile"
+    ],
+    "PieceSemanticClaimBindingV1": [
+      "claim_ref",
+      "node_ref",
+      "source_binding_ref",
+      "source_id",
+      "field_path",
+      "scalar_start",
+      "scalar_end",
+      "utf8_start",
+      "utf8_end",
+      "claim_json"
+    ],
+    "PieceSemanticRelationBindingV1": [
+      "relation_ref",
+      "relation_type",
+      "endpoint_claim_refs",
+      "evidence_json"
+    ],
+    "PieceSourceSelectionV1": [
+      "selection_field",
+      "selection_index",
+      "label",
+      "strength",
+      "source_commitment",
+      "alias_refs",
+      "text_binding_refs",
+      "coverage_state"
+    ],
+    "PieceSemanticSnapshotV1": [
+      "request_ref",
+      "source_snapshot",
+      "source_commitment",
+      "candidate_packet",
+      "claim_bindings",
+      "relation_bindings",
+      "source_selections",
+      "snapshot_ref",
+      "schema_version",
+      "semantic_profile",
+      "admission_version",
+      "adapter_version"
+    ],
+    "PieceSemanticDutyBindingV1": [
+      "duty_ref",
+      "claim_refs",
+      "node_refs",
+      "source_binding_refs",
+      "required_scope_refs",
+      "operation"
+    ],
+    "PieceSemanticPlanV1": [
+      "snapshot_ref",
+      "source_commitment",
+      "graph_id",
+      "duties",
+      "block_node_ids",
+      "selection_duties",
+      "eligible_formats",
+      "intent",
+      "schema_version",
+      "semantic_profile"
+    ],
+    "PieceSemanticRealizationV1": [
+      "claim_ref",
+      "duty_ref",
+      "node_refs",
+      "source_binding_refs",
+      "block_index",
+      "visible_scalar_start",
+      "visible_scalar_end"
+    ],
+    "PieceSemanticArtifactV1": [
+      "snapshot_ref",
+      "plan_ref",
+      "source_commitment",
+      "body_blocks",
+      "piece_text",
+      "piece_text_hash",
+      "format_type",
+      "eligible_formats",
+      "claim_realizations",
+      "retained_selection_refs",
+      "schema_version",
+      "semantic_profile",
+      "meaning_contract_version"
+    ],
+    "PieceSemanticResultV1": [
+      "decision",
+      "reason_codes",
+      "request_ref",
+      "snapshot",
+      "plan",
+      "artifact"
+    ]
+  },
+  "source_blobs": {
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py": "dc2b9b364cc867764f50d41e162a72d807938411",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py": "ea02f3735c05561f010cf240f1b6a761b1ab60f6",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/piece_v1c.py": "39494009d563ab5e471a248787ba3b512fee1082",
+    "ai/services/ai_inference/piece_v2_content_policy.py": "5c4ea121f951d1628691dd7c5e08695e3f681012",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/piece_semantic_admission.py": "dd25a9e397269b5eacaec248a9561cfe01ac61ac",
+    "ai/tests/test_cmee_piece_semantic_snapshot.py": "49a6de6bcb6aff862aa2654d28ed95901b62adbf",
+    "ai/tests/fixtures/cmee_piece_semantic_snapshot_v1.json": "74f3a41dea172ef223acb63d9fab80874d6ee24b"
+  },
+  "verification": {
+    "selected_files": 7,
+    "passed": 339,
+    "failed": 0,
+    "skipped": 0,
+    "subtests": 34,
+    "existing_warnings": 1,
+    "seconds": 38.78,
+    "initial_new_tests_passed": 73,
+    "initial_selected_attempt": {
+      "passed": 323,
+      "failed": 1,
+      "skipped": 11,
+      "errors": 2,
+      "seconds": 19.35
+    },
+    "initial_failures": "new unsupported test reused mismatching evidence; Q2 module variable omitted. Fixed only test setup/runtime binding, not protected expectations.",
+    "review_fixes": [
+      "strict canonical snapshot types",
+      "adopted snapshot retained on body failure",
+      "valid request ref retained on nonadoption",
+      "overflow metadata rejected"
+    ]
+  },
+  "effects": {
+    "model_calls": 0,
+    "live_db": 0,
+    "render": 0,
+    "public_api_or_dto": 0,
+    "rn": 0,
+    "regular_b8_activation": 0,
+    "merge_or_deploy": 0
+  },
+  "limitations": [
+    "Closed P01 family; whole original paragraphs retained.",
+    "No general paraphrase or product-quality acceptance.",
+    "Private caller-managed serialized stage replay; no production durability/Auth claim.",
+    "Historical broad Emlis failures and old Q2 cap remain unresolved.",
+    "No additional GitHub CI run; source commit uses skip ci."
+  ]
+}

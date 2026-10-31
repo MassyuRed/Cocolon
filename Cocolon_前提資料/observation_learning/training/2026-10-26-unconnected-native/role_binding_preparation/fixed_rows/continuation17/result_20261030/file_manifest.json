@@ -1,0 +1,221 @@
+{
+  "schema": "cocolon.continuation17.github-placement.v1",
+  "index_self": {
+    "path": "file_manifest.json",
+    "owner": "This complete GitHub file index; self-hash excluded to avoid recursion"
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 5595,
+      "sha256": "1eadb8befbb5bbe6f5f337fd2051367ea232feb3f51e9bc38199f2ea80bfaa37",
+      "owner": "Result and all-file responsibility map"
+    },
+    {
+      "path": "archive_manifest.json",
+      "bytes": 45939,
+      "sha256": "601702d35cc669cdac2a3a8f27a3120e93a07dfa713e40b2c8168a59c06c1ad3",
+      "owner": "All 207 preserved ZIP payload paths, bytes and SHA256"
+    },
+    {
+      "path": "content_review.md",
+      "bytes": 3577,
+      "sha256": "cf6dcb04b54e6a6307a23daaef46a38c510e417663839a31c192c6cad67fda49",
+      "owner": "Root complete raw reading, judgement and limits"
+    },
+    {
+      "path": "post_identity.json",
+      "bytes": 1889,
+      "sha256": "a8a3bc06d8958ef9f3b27f94457376500bd3ef203812a0ba5d5dd2a709ef94a2",
+      "owner": "Post-run initial/frozen identity and explicit historical-weight exclusions"
+    },
+    {
+      "path": "preservation_receipt.json",
+      "bytes": 1153,
+      "sha256": "e22d601ddbcdffcf05ce781d6c3bcc179ad6c6adb70b7305e861a757b3e6172b",
+      "owner": "Persistent complete-archive retrieval IDs, bytes/hash and exclusion scope"
+    },
+    {
+      "path": "proof.jpg",
+      "bytes": 133883,
+      "sha256": "f79ebb26667ada14f02265757cf40b9750f7c31a6db3b0dca59d24ffdda212e7",
+      "owner": "Actual Jupyter final state, counters and GPU kept running"
+    },
+    {
+      "path": "run/adapter/README.md",
+      "bytes": 5184,
+      "sha256": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+      "owner": "Saved adapter metadata; weight binary in preserved complete ZIP"
+    },
+    {
+      "path": "run/adapter/adapter_config.json",
+      "bytes": 1674,
+      "sha256": "b9ebe894a3ed52feffa50c57adc44f7bce9d0711358e3e0dfefe1bd4f128da37",
+      "owner": "Saved adapter metadata; weight binary in preserved complete ZIP"
+    },
+    {
+      "path": "run/after_FT-BOOK-AFTER-ANSWER.jsonl",
+      "bytes": 30707,
+      "sha256": "8af685dae4973c0522f120706f1bcaa0ae717e24ebe264b4dcf19fa2cd596ba2",
+      "owner": "Actual unmodified model raw, token IDs, finish/usage and model identity"
+    },
+    {
+      "path": "run/after_FT-SHOP-AFTER-ANSWER.jsonl",
+      "bytes": 39059,
+      "sha256": "3695b4baa2a92055c152e0375e5d47aab28b88641971dcc857ccdd33050105c5",
+      "owner": "Actual unmodified model raw, token IDs, finish/usage and model identity"
+    },
+    {
+      "path": "run/cmee/diagnosis.json",
+      "bytes": 28480,
+      "sha256": "8a0a54a79eff398f221b8e8510b0815f63fe109d72f5c9eb6726aa668208b389",
+      "owner": "Existing consumer actual receipt/replay/adoption evidence; no snapshots/cold formed"
+    },
+    {
+      "path": "run/initial_loaded_tensors.json",
+      "bytes": 26030,
+      "sha256": "8022d25204cf994b831c41e2154033adccfbc6b409c021cde9854961ad9b2459",
+      "owner": "Actual initial or nontraining reloaded 112-tensor table"
+    },
+    {
+      "path": "run/reloaded_tensors.json",
+      "bytes": 26030,
+      "sha256": "5dbf40402b2bc213931e2dceba994ded4d54b932190410d339a3d972c971f6fa",
+      "owner": "Actual initial or nontraining reloaded 112-tensor table"
+    },
+    {
+      "path": "run/run.json",
+      "bytes": 8823,
+      "sha256": "39b0789390aec02a502ff3ef13d5b3fefcfeb3498836c71e88e4c9433d7a765d",
+      "owner": "Actual terminal machine state, counters, adapter identity, reason and process time"
+    },
+    {
+      "path": "run/training.jsonl",
+      "bytes": 3142,
+      "sha256": "01fe235ccd33f9818b71d46c81fec99542aabbdea737315d23d75cf0d2b2f85d",
+      "owner": "Actual 17-update schedule, pre-update CE, gradient norm and teacher token count"
+    },
+    {
+      "path": "runtime/cpu.exit",
+      "bytes": 2,
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "owner": "Exact launch, one-time lock, original process/CPU logs, exit and outer time"
+    },
+    {
+      "path": "runtime/cpu.log",
+      "bytes": 3312,
+      "sha256": "d821d8c6717c6abfde64ff95da923adb584922ab3b8860745d0db643b317d561",
+      "owner": "Exact launch, one-time lock, original process/CPU logs, exit and outer time"
+    },
+    {
+      "path": "runtime/cpu_execution.json",
+      "bytes": 526,
+      "sha256": "bae2caae112df7c16c0a73e9097cbd9a51d14c0caf05630b565fc2d5081bef74",
+      "owner": "Exact launch, one-time lock, original process/CPU logs, exit and outer time"
+    },
+    {
+      "path": "runtime/execute_once.lock",
+      "bytes": 41,
+      "sha256": "dc4d1cb4d40d31e3ad95b1572d7266e4c492038a1603fdd72343e7ae28d2ebe9",
+      "owner": "Exact launch, one-time lock, original process/CPU logs, exit and outer time"
+    },
+    {
+      "path": "runtime/export_result.py",
+      "bytes": 3142,
+      "sha256": "5931709d465516b2552cc46554422f068d9acc2ff081146e0284ae52075a7fb6",
+      "owner": "Exact execution/preparation/recovery source used on Pod"
+    },
+    {
+      "path": "runtime/gpu.exit",
+      "bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "owner": "Exact launch, one-time lock, original process/CPU logs, exit and outer time"
+    },
+    {
+      "path": "runtime/gpu.log",
+      "bytes": 4561,
+      "sha256": "e58b153681e8a1f0287667c18f1e1c53446269c79cf0918d4627cae79bae1c10",
+      "owner": "Exact launch, one-time lock, original process/CPU logs, exit and outer time"
+    },
+    {
+      "path": "runtime/gpu_elapsed.json",
+      "bytes": 77,
+      "sha256": "6eaf42eae8c0db9d45c5452e4507fbe01cbea60dbfdae4d6e151d521c7acda50",
+      "owner": "Exact launch, one-time lock, original process/CPU logs, exit and outer time"
+    },
+    {
+      "path": "runtime/gpu_launch.json",
+      "bytes": 353,
+      "sha256": "2306e4c2b1e83df1621bd60ff69e0d769d65627c887c2ebf4b4c30942585c352",
+      "owner": "Exact launch, one-time lock, original process/CPU logs, exit and outer time"
+    },
+    {
+      "path": "runtime/launcher.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "owner": "Exact launch, one-time lock, original process/CPU logs, exit and outer time"
+    },
+    {
+      "path": "runtime/plan.json",
+      "bytes": 5949,
+      "sha256": "fb2e992773cdbd691e225eb8070937b204db229c2b6d28c30d7f2f3c4d511068",
+      "owner": "Exact authorized or historical preparation plan; not current closed plan"
+    },
+    {
+      "path": "runtime/prepare_cpu.py",
+      "bytes": 4037,
+      "sha256": "f03e7f4945bb5bb77d11e59f9668ec6d52b2525153671944eed4ac51aca95979",
+      "owner": "Exact execution/preparation/recovery source used on Pod"
+    },
+    {
+      "path": "runtime/run_continuation17.py",
+      "bytes": 15158,
+      "sha256": "08c7bd3ef4e71f289f6aa81bd420877732d0b4fd9608961c092d17a3f2d8d14e",
+      "owner": "Exact execution/preparation/recovery source used on Pod"
+    },
+    {
+      "path": "runtime/runtime_cpu_plan.json",
+      "bytes": 5043,
+      "sha256": "c5d82db7ff20bced3556447a58852b044d1f30f0a06cd1b1839739ee597eeb6e",
+      "owner": "Exact authorized or historical preparation plan; not current closed plan"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 4387,
+      "sha256": "e9e5edb5ee4899d4f13bb41a3a4f9e842bfc25ceeac49f07fcbf98f017051d43",
+      "owner": "Actual scope/cost/closure summary; no product adoption"
+    },
+    {
+      "path": "verification.json",
+      "bytes": 1270,
+      "sha256": "c1535e85818471b1742a686832ace0dd87db50e2d191a2191f41c9ac393c440b",
+      "owner": "Independent recovery checks plus bounded root readback checks"
+    },
+    {
+      "path": "verify_recovery.py",
+      "bytes": 3463,
+      "sha256": "51e7025f618d8703e9e8a98ff326f6699e898b04bfa17db5d5c3f1934e20e8db",
+      "owner": "CPU-only independent recovery verification source"
+    }
+  ],
+  "archive": {
+    "status": "PRESERVED_AND_METADATA_READ_BACK",
+    "file_name": "cocolon-cont17-weights-originals-20261030.zip",
+    "library_file_id": "libfile_9514b319e18881918ed8a8b963a4fa51",
+    "file_id": "file_0000000037f882068d62ccccab6110d9",
+    "version": 0,
+    "bytes": 17009656,
+    "sha256": "7cd7f4de5317f1151013413995a6132832a6aa35903037d1610b2ab39cb9baf1",
+    "members": 208,
+    "payloads": 207,
+    "crc_bytes_sha_all_identical": true,
+    "new_adapter_path": "run/adapter/adapter_model.safetensors",
+    "new_adapter_sha256": "7fcca3ce034dfdb9162ae31c3a1bec59c8918762d3da07d58b64f8bdf1220981",
+    "initial_adapter_library_file_id": "libfile_9623b67a65588191926a1bb0a0ea5797",
+    "initial_adapter_sha256": "114466411f36f0eef7a2dceaec7f5190544ac8545eb6b2f6a3d0446b70f90b66",
+    "scope": "All run/runtime/cpu actual files, non-weight frozen sources and inputs, post identity and archive manifest. Historical frozen safetensors and base model are excluded and explicitly indexed in post_identity.json. New complete adapter included; no GPU or CMEE rerun during recovery.",
+    "local_archive": "cocolon-cont17-weights-originals-20261030.zip",
+    "signed_urls_stored": false
+  },
+  "zip_paths_are_original_paths": true
+}

@@ -1,0 +1,232 @@
+{
+  "status": "RAW_COMPLETE_PENDING_CMEE_AND_CONTENT_REVIEW",
+  "source_commit": "d014e45c9a94f1ebc1e193ea7d6d1513280e8dc2",
+  "training_origin_source_commit": "bd5d169ad457fc440bf01d1876cb40d697ce6847",
+  "training_origin_sha256": {
+    "run.json": "ccc8afccdb322c109515aa535e936d43e857b680c4727dcd63f18bc3789c7ea1",
+    "training.jsonl": "f1232cb906eb89cb1eb74a0cb10832ccb5e272d9ed40fabd17ce77ffb26a2868",
+    "run_native15_expanded30.py": "ca03471329b5f622284cf3abd446cdd2f7831de3f7617da49a558ff7b5259e9d",
+    "gpu30_expanded.plan.json": "5904a6c7157b6a8523f3d3f988990fa194c670685cfd568e64bf35b3204e6874"
+  },
+  "training_origin_updates": 30,
+  "optimizer_steps_completed": 0,
+  "stage": "raw_complete",
+  "started_unix": 1793079551.3482327,
+  "model_calls_started": 15,
+  "model_calls_completed": 15,
+  "base_model_loads_started": 1,
+  "base_model_loads_completed": 1,
+  "calls": [
+    {
+      "phase": "after",
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "path": "after_TRAIN-SERVICE-CHAIR-01-INITIAL.jsonl",
+      "eos_reached": true,
+      "timeout_triggered": false,
+      "raw_sha256": "afd2ea5b83b7dcae358fa4e2986670b9060a7d2e42f6dc44777ef4791ba26f10"
+    },
+    {
+      "phase": "after",
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "path": "after_TRAIN-SERVICE-CHAIR-01-CORRECTION.jsonl",
+      "eos_reached": true,
+      "timeout_triggered": false,
+      "raw_sha256": "638d5458b292700a21d650758a4cd0048fc0686ecb359262679fa956bf13d816"
+    },
+    {
+      "phase": "after",
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "path": "after_TRAIN-SERVICE-CHAIR-02-INITIAL.jsonl",
+      "eos_reached": true,
+      "timeout_triggered": false,
+      "raw_sha256": "eb7017102b358a32815f543a7ac8b376911c59c2078f2a2b43d26c7eb18c13d6"
+    },
+    {
+      "phase": "after",
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "path": "after_TRAIN-SERVICE-CHAIR-02-CORRECTION.jsonl",
+      "eos_reached": true,
+      "timeout_triggered": false,
+      "raw_sha256": "6002f521c094740e5d8874290d6027754a94d3ba49d84c46c9b3e57738ee5b45"
+    },
+    {
+      "phase": "after",
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "path": "after_TRAIN-SERVICE-CHAIR-03-INITIAL.jsonl",
+      "eos_reached": true,
+      "timeout_triggered": false,
+      "raw_sha256": "589df712a196092442fbecb3549e54cf7937932bc45f45a99820e872751038d3"
+    },
+    {
+      "phase": "after",
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "path": "after_TRAIN-SERVICE-CHAIR-03-CORRECTION.jsonl",
+      "eos_reached": true,
+      "timeout_triggered": false,
+      "raw_sha256": "2489191261022690535763fd6078baa11b23065c45f0456128e4633913eee865"
+    },
+    {
+      "phase": "after",
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "path": "after_TRAIN-DAILY-CALM-01-INITIAL.jsonl",
+      "eos_reached": true,
+      "timeout_triggered": false,
+      "raw_sha256": "4dc4ca6f2dc654a68273ed01e282daed8ca76a40c46651057641223ed13a9fe5"
+    },
+    {
+      "phase": "after",
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "path": "after_TRAIN-DAILY-CALM-02-INITIAL.jsonl",
+      "eos_reached": true,
+      "timeout_triggered": false,
+      "raw_sha256": "a441d9da1b06bf7d7cb8acb526d85c9366d76886ced654a343580a43e72315f8"
+    },
+    {
+      "phase": "after",
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "path": "after_TRAIN-DAILY-CALM-03-INITIAL.jsonl",
+      "eos_reached": true,
+      "timeout_triggered": false,
+      "raw_sha256": "46e301ca803c4fbd4a1f0da283fddd8738a5ac27891317c313aebc72e6b3dcf4"
+    },
+    {
+      "phase": "after",
+      "case_id": "FT-BOOK-INITIAL",
+      "path": "after_FT-BOOK-INITIAL.jsonl",
+      "eos_reached": true,
+      "timeout_triggered": false,
+      "raw_sha256": "3de252b950fcd8002f3e41314b250e744a5b8d232dd41129463f91a5eebb8e9e"
+    },
+    {
+      "phase": "after",
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "path": "after_FT-BOOK-AFTER-ANSWER.jsonl",
+      "eos_reached": false,
+      "timeout_triggered": false,
+      "raw_sha256": "b032f68c55daf4383f6ef9fdbfbcee382425272f3b16d4f9edada536bb19140f"
+    },
+    {
+      "phase": "after",
+      "case_id": "FT-SHOP-INITIAL",
+      "path": "after_FT-SHOP-INITIAL.jsonl",
+      "eos_reached": true,
+      "timeout_triggered": false,
+      "raw_sha256": "0887bb3b9530304a292a7c22c53d94f6e69024d077f2e53f54841f1c8df6ec8a"
+    },
+    {
+      "phase": "after",
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "path": "after_FT-SHOP-AFTER-ANSWER.jsonl",
+      "eos_reached": false,
+      "timeout_triggered": false,
+      "raw_sha256": "b3600b97482d00425a0e6d911f8ffae44ac39367eb8f77d70073d04807a925a9"
+    },
+    {
+      "phase": "after",
+      "case_id": "FT-REPOT-INITIAL",
+      "path": "after_FT-REPOT-INITIAL.jsonl",
+      "eos_reached": true,
+      "timeout_triggered": false,
+      "raw_sha256": "43ba8e75e30679d86cedbc9d874df07754deec5297b887e6ad470dc87b483730"
+    },
+    {
+      "phase": "after",
+      "case_id": "FT-KNIT-INITIAL",
+      "path": "after_FT-KNIT-INITIAL.jsonl",
+      "eos_reached": false,
+      "timeout_triggered": false,
+      "raw_sha256": "4127247551c2ae04f2229be2e945aac8a2af56e0621e5092a4de9b4b64c27131"
+    }
+  ],
+  "adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "fb43a10298bdf9965a8ab4c541cb517372928afd7dd97d0b210bf0c5b4f45b2e",
+    "adapter_model.safetensors": "109c3dda16b19d2f110d6f8e2ded07f47e981b9690970ca95b9046780bffb85a"
+  },
+  "product_accepted": false,
+  "automatic_progression": false,
+  "retry": false,
+  "service_sql_calls": 0,
+  "seconds": 1285.9347182899946,
+  "plan": {
+    "schema": "cocolon.expanded15_saved_recovery_once.plan.v1",
+    "training_origin": "/workspace/cocolon_native15_expanded30_run_20261027",
+    "training_source_commit": "bd5d169ad457fc440bf01d1876cb40d697ce6847",
+    "training_origin_sha256": {
+      "run.json": "ccc8afccdb322c109515aa535e936d43e857b680c4727dcd63f18bc3789c7ea1",
+      "training.jsonl": "f1232cb906eb89cb1eb74a0cb10832ccb5e272d9ed40fabd17ce77ffb26a2868",
+      "run_native15_expanded30.py": "ca03471329b5f622284cf3abd446cdd2f7831de3f7617da49a558ff7b5259e9d",
+      "gpu30_expanded.plan.json": "5904a6c7157b6a8523f3d3f988990fa194c670685cfd568e64bf35b3204e6874"
+    },
+    "adapter_sha256": {
+      "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+      "adapter_config.json": "fb43a10298bdf9965a8ab4c541cb517372928afd7dd97d0b210bf0c5b4f45b2e",
+      "adapter_model.safetensors": "109c3dda16b19d2f110d6f8e2ded07f47e981b9690970ca95b9046780bffb85a"
+    },
+    "api_commit": "6b043880504912481a6b10d93c9128ec4995b70b",
+    "output_directory": "/workspace/cocolon_native15_expanded15_recovery_run_20261027",
+    "optimizer_steps": 0,
+    "before_calls": 0,
+    "max_model_calls": 15,
+    "max_seconds": 2700,
+    "per_generation_seconds": 180,
+    "gpu_hourly_usd": 0.28,
+    "max_process_usd": 0.21,
+    "pod_id": "bkj4qvnhwtdqc2",
+    "expected_gpu_name": "NVIDIA RTX A5000",
+    "retry": false,
+    "automatic_progression": false,
+    "product_accepted": false,
+    "gpu_lifecycle_operations": 0,
+    "runner_sha256": "e4be86a2b6fb0581961fc3c619853ba7f419e3239464e969214772b8bc3bfb54",
+    "status": "AUTHORIZED_ONCE_BOUND",
+    "gpu_run_authorized": true,
+    "approval_basis": "Mash explicit approval on 2026-10-27 JST of saved-weight evaluation recovery proposal d02655837be135f02022e16346fc95488de52bd4: 進めていいよ。 One run only: zero training updates -> saved109c inference-only reload -> same15; max2700sec/max15calls/USD0.21 processing prorated; preparation/recovery/holding etc separate. No retry and no reuse of closed expanded30 authority."
+  },
+  "cpu_check": {
+    "status": "CPU_RECOVERY_PREPARED_NO_4B_EXECUTION",
+    "resolved_target_modules": 56,
+    "lora_tensors": 112,
+    "lora_parameters": 3833856,
+    "weight_module_count": 528,
+    "all_module_name_count": 763,
+    "origin_training_updates": 30,
+    "this_run_training_updates": 0,
+    "eval_cases": 15,
+    "real_4b_reload_tested": false
+  },
+  "execution_source_sha256": {
+    "/workspace/cocolon_4b_service_binding_legacy_reference_20261025/run_pilot.py": "2f659078c05bee6d7b32f50aae8b9eebc03c767d4a3be084bc17e9e3ccc4c10d",
+    "/workspace/cocolon_4b_quote_joint_pack_20261026/run_quote_joint_fit.py": "c5dd1679c605e020e4dad56951c79d7c0661a1279a34a0ae0d47666d639d7128",
+    "/workspace/cocolon_native15_expanded30_pack_20261027/run_native15_expanded30.py": "ca03471329b5f622284cf3abd446cdd2f7831de3f7617da49a558ff7b5259e9d",
+    "/workspace/cocolon_native15_expanded30_pack_20261027/gpu15.plan.json": "6c48a26871102797291f7cf531929af58b2e2a2e65d6ca85d9e9ba8b4c08dfd7",
+    "/workspace/cocolon_native15_expanded30_pack_20261027/gpu15.proposed.json": "e11d92ec87365e0f7bb2c7b3c41b83cb3350a07af3021391c01e39a1285d03a9",
+    "/workspace/cocolon_native15_expanded30_pack_20261027/gpu30_expanded.plan.json": "5904a6c7157b6a8523f3d3f988990fa194c670685cfd568e64bf35b3204e6874",
+    "/workspace/cocolon_native15_expanded30_pack_20261027/run_native15.py": "02819f033dfae099971d6d474141d4855d40eba9f5ca8e28fa0dfbb12c5ca4eb",
+    "/workspace/cocolon_native15_expanded30_pack_20261027/run_native15_afteronly.py": "a62d3ed74e76a26c01fe66b9eba32d42631acac170cfd9c8dcb2c7cdf5076552",
+    "/workspace/cocolon_native15_expanded30_pack_20261027/train_messages.jsonl": "29f37e38f4a615220c739176a6eaa2e0e01aae36c7bb6f87db8be248aecd1772",
+    "/workspace/cocolon_native15_expanded30_pack_20261027/eval_inputs.jsonl": "c67fa4098bafa10508bf57bf1975fcdfd6f2359f851e34c0f26148310eb8b75e",
+    "/workspace/cocolon_native15_expanded30_pack_20261027/cpu_preparation.json": "64a7d905c4cfe3dbea227064e8aee053b23bff15baf51261f4a41c6478306f9d",
+    "/workspace/cocolon_native15_expanded30_pack_20261027/api_blobs.json": "69168896b25c6bf1e008592bdeff1e975a4a3b88ca3366487a094414d98b9e85",
+    "/workspace/cocolon_sixrow_api_20261026/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py": "7defcd9e01d6f38a8515d732765ae39e0eb659a64b21a423514f1141a99cc55b",
+    "/workspace/cocolon_sixrow_api_20261026/ai/services/ai_inference/cocolon_meaning_experience_engine/model_candidate_source.py": "f5fe7ff85841a509ea9cc600ecd8c9a9a9a3760803ee78683b8b3ae60ab26f82",
+    "/workspace/cocolon_sixrow_api_20261026/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py": "c15d4a0d037a2b3c748fa8ad6ce54466ee9a77c90e5ea43fdfb3d9fc969d4b35",
+    "/workspace/cocolon_sixrow_api_20261026/ai/services/ai_inference/emlis_ai_grounded_observation_gate.py": "5736f9d83272d6a50cd26651f37db928e7a2aefb78f8723fbf554af03fb3630d",
+    "/workspace/cocolon_sixrow_api_20261026/ai/tests/test_cmee_emlis_sixrow.py": "b06a8bff6ab2ec815a942f397c8284e81c43407929ac2aa64092d347527794a2",
+    "/workspace/cocolon_sixrow_api_20261026/ai/tests/fixtures/cmee_emlis_sixrow_v3.json": "1099f61a1991c23263010626b7068bfaf880efb4f61f2de58c57f98cc6c3be0d"
+  },
+  "gpu": {
+    "name": "NVIDIA RTX A5000",
+    "free_bytes": 25062342656,
+    "total_bytes": 25285623808,
+    "torch": "2.8.0+cu128",
+    "cuda_build": "12.8",
+    "bf16_supported": true
+  },
+  "peak_allocated_bytes": 10373440512,
+  "peak_reserved_bytes": 12488540160,
+  "processing_seconds": 1285.8977515849983,
+  "process_cost_usd": 0.1000142695677221,
+  "training_origin_unchanged": true,
+  "fixed_sources_unchanged": true
+}

@@ -1,0 +1,1632 @@
+{
+  "status": "CPU_BALANCED30_VERIFIED_NO_MODEL_LOAD",
+  "span_unit_tests": 16,
+  "actual_tokenizer_rows": 15,
+  "runner_check": {
+    "status": "CPU_BALANCED30_READY_MODEL_NOT_LOADED",
+    "rows": [
+      {
+        "id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+        "prompt_tokens": 1705,
+        "assistant_eos_tokens": 1331,
+        "full_tokens": 3036,
+        "generation_cap": 2560
+      },
+      {
+        "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+        "prompt_tokens": 3839,
+        "assistant_eos_tokens": 2228,
+        "full_tokens": 6067,
+        "generation_cap": 2560
+      },
+      {
+        "id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+        "prompt_tokens": 1701,
+        "assistant_eos_tokens": 1331,
+        "full_tokens": 3032,
+        "generation_cap": 2560
+      },
+      {
+        "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+        "prompt_tokens": 3854,
+        "assistant_eos_tokens": 2231,
+        "full_tokens": 6085,
+        "generation_cap": 2560
+      },
+      {
+        "id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+        "prompt_tokens": 1698,
+        "assistant_eos_tokens": 1321,
+        "full_tokens": 3019,
+        "generation_cap": 2560
+      },
+      {
+        "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+        "prompt_tokens": 3837,
+        "assistant_eos_tokens": 2237,
+        "full_tokens": 6074,
+        "generation_cap": 2560
+      },
+      {
+        "id": "TRAIN-DAILY-CALM-01-INITIAL",
+        "prompt_tokens": 1733,
+        "assistant_eos_tokens": 1585,
+        "full_tokens": 3318,
+        "generation_cap": 2560
+      },
+      {
+        "id": "TRAIN-DAILY-CALM-02-INITIAL",
+        "prompt_tokens": 1728,
+        "assistant_eos_tokens": 1559,
+        "full_tokens": 3287,
+        "generation_cap": 2560
+      },
+      {
+        "id": "TRAIN-DAILY-CALM-03-INITIAL",
+        "prompt_tokens": 1732,
+        "assistant_eos_tokens": 1598,
+        "full_tokens": 3330,
+        "generation_cap": 2560
+      },
+      {
+        "id": "FT-BOOK-INITIAL",
+        "prompt_tokens": 2159,
+        "assistant_eos_tokens": 1038,
+        "full_tokens": 3197,
+        "generation_cap": 3712
+      },
+      {
+        "id": "FT-BOOK-AFTER-ANSWER",
+        "prompt_tokens": 4212,
+        "assistant_eos_tokens": 3178,
+        "full_tokens": 7390,
+        "generation_cap": 3712
+      },
+      {
+        "id": "FT-SHOP-INITIAL",
+        "prompt_tokens": 2194,
+        "assistant_eos_tokens": 1082,
+        "full_tokens": 3276,
+        "generation_cap": 3712
+      },
+      {
+        "id": "FT-SHOP-AFTER-ANSWER",
+        "prompt_tokens": 4374,
+        "assistant_eos_tokens": 3561,
+        "full_tokens": 7935,
+        "generation_cap": 3712
+      },
+      {
+        "id": "FT-REPOT-INITIAL",
+        "prompt_tokens": 2045,
+        "assistant_eos_tokens": 961,
+        "full_tokens": 3006,
+        "generation_cap": 3712
+      },
+      {
+        "id": "FT-KNIT-INITIAL",
+        "prompt_tokens": 2087,
+        "assistant_eos_tokens": 896,
+        "full_tokens": 2983,
+        "generation_cap": 3712
+      }
+    ],
+    "dependency_versions": {
+      "transformers": "5.19.0",
+      "peft": "0.21.2",
+      "accelerate": "1.15.0",
+      "safetensors": "0.8.0"
+    },
+    "runner_sha256": "d989bcf5a7bc9e3bc8669ff455113c956bcb5ba813473693fc8f493ad3217268",
+    "proposal_sha256": "e11d92ec87365e0f7bb2c7b3c41b83cb3350a07af3021391c01e39a1285d03a9",
+    "loss_spec": {
+      "full_mass": 0.5,
+      "focus_mass": 0.5,
+      "active_groups": [
+        "S",
+        "F",
+        "U"
+      ],
+      "group_weight": "equal_nonempty",
+      "eos": "full_only",
+      "forwards_per_update": 1
+    },
+    "focus_rows": [
+      {
+        "id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+        "char_spans": {
+          "S": [
+            [
+              23,
+              2182
+            ],
+            [
+              2195,
+              2197
+            ],
+            [
+              2233,
+              2395
+            ],
+            [
+              2408,
+              2837
+            ],
+            [
+              2934,
+              3153
+            ],
+            [
+              3294,
+              3463
+            ],
+            [
+              3496,
+              4084
+            ]
+          ],
+          "F": [
+            [
+              3169,
+              3198
+            ],
+            [
+              3213,
+              3261
+            ]
+          ],
+          "U": []
+        },
+        "group_token_counts": {
+          "S": 1219,
+          "F": 40,
+          "U": 0
+        },
+        "active_groups": [
+          "S",
+          "F"
+        ],
+        "full_target_tokens": 1331,
+        "assistant_json_tokens": 1329,
+        "template_tail_tokens": 2,
+        "template_tail_indices": [
+          3034,
+          3035
+        ],
+        "full_component_mass": 0.5,
+        "focus_component_mass": 0.5,
+        "focus_component_mass_by_group": {
+          "S": 0.25,
+          "F": 0.25,
+          "U": 0.0
+        },
+        "full_coefficient_per_token": 0.0003756574004507889,
+        "coefficient_sum": 1.0,
+        "prompt_tokens": 1705,
+        "prompt_labels_unchanged": true,
+        "completion_ids_exact": true,
+        "eos_full_only": true
+      },
+      {
+        "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+        "char_spans": {
+          "S": [
+            [
+              23,
+              3282
+            ],
+            [
+              3295,
+              3297
+            ],
+            [
+              3333,
+              3337
+            ],
+            [
+              3350,
+              3797
+            ],
+            [
+              3894,
+              4272
+            ],
+            [
+              4438,
+              4440
+            ],
+            [
+              5209,
+              6505
+            ]
+          ],
+          "F": [
+            [
+              4288,
+              4312
+            ],
+            [
+              4327,
+              4382
+            ],
+            [
+              4399,
+              4424
+            ]
+          ],
+          "U": [
+            [
+              4451,
+              5189
+            ]
+          ]
+        },
+        "group_token_counts": {
+          "S": 1807,
+          "F": 53,
+          "U": 297
+        },
+        "active_groups": [
+          "S",
+          "F",
+          "U"
+        ],
+        "full_target_tokens": 2228,
+        "assistant_json_tokens": 2226,
+        "template_tail_tokens": 2,
+        "template_tail_indices": [
+          6065,
+          6066
+        ],
+        "full_component_mass": 0.5,
+        "focus_component_mass": 0.5,
+        "focus_component_mass_by_group": {
+          "S": 0.16666666666666666,
+          "F": 0.16666666666666666,
+          "U": 0.16666666666666666
+        },
+        "full_coefficient_per_token": 0.0002244165170556553,
+        "coefficient_sum": 1.0,
+        "prompt_tokens": 3839,
+        "prompt_labels_unchanged": true,
+        "completion_ids_exact": true,
+        "eos_full_only": true
+      },
+      {
+        "id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+        "char_spans": {
+          "S": [
+            [
+              23,
+              2182
+            ],
+            [
+              2195,
+              2197
+            ],
+            [
+              2233,
+              2395
+            ],
+            [
+              2408,
+              2837
+            ],
+            [
+              2934,
+              3153
+            ],
+            [
+              3294,
+              3463
+            ],
+            [
+              3496,
+              4084
+            ]
+          ],
+          "F": [
+            [
+              3169,
+              3198
+            ],
+            [
+              3213,
+              3261
+            ]
+          ],
+          "U": []
+        },
+        "group_token_counts": {
+          "S": 1219,
+          "F": 40,
+          "U": 0
+        },
+        "active_groups": [
+          "S",
+          "F"
+        ],
+        "full_target_tokens": 1331,
+        "assistant_json_tokens": 1329,
+        "template_tail_tokens": 2,
+        "template_tail_indices": [
+          3030,
+          3031
+        ],
+        "full_component_mass": 0.5,
+        "focus_component_mass": 0.5,
+        "focus_component_mass_by_group": {
+          "S": 0.25,
+          "F": 0.25,
+          "U": 0.0
+        },
+        "full_coefficient_per_token": 0.0003756574004507889,
+        "coefficient_sum": 1.0,
+        "prompt_tokens": 1701,
+        "prompt_labels_unchanged": true,
+        "completion_ids_exact": true,
+        "eos_full_only": true
+      },
+      {
+        "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+        "char_spans": {
+          "S": [
+            [
+              23,
+              3282
+            ],
+            [
+              3295,
+              3297
+            ],
+            [
+              3333,
+              3337
+            ],
+            [
+              3350,
+              3797
+            ],
+            [
+              3894,
+              4272
+            ],
+            [
+              4438,
+              4440
+            ],
+            [
+              5209,
+              6505
+            ]
+          ],
+          "F": [
+            [
+              4288,
+              4312
+            ],
+            [
+              4327,
+              4382
+            ],
+            [
+              4399,
+              4424
+            ]
+          ],
+          "U": [
+            [
+              4451,
+              5189
+            ]
+          ]
+        },
+        "group_token_counts": {
+          "S": 1807,
+          "F": 53,
+          "U": 300
+        },
+        "active_groups": [
+          "S",
+          "F",
+          "U"
+        ],
+        "full_target_tokens": 2231,
+        "assistant_json_tokens": 2229,
+        "template_tail_tokens": 2,
+        "template_tail_indices": [
+          6083,
+          6084
+        ],
+        "full_component_mass": 0.5,
+        "focus_component_mass": 0.5,
+        "focus_component_mass_by_group": {
+          "S": 0.16666666666666666,
+          "F": 0.16666666666666666,
+          "U": 0.16666666666666666
+        },
+        "full_coefficient_per_token": 0.00022411474675033618,
+        "coefficient_sum": 1.0,
+        "prompt_tokens": 3854,
+        "prompt_labels_unchanged": true,
+        "completion_ids_exact": true,
+        "eos_full_only": true
+      },
+      {
+        "id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+        "char_spans": {
+          "S": [
+            [
+              23,
+              2182
+            ],
+            [
+              2195,
+              2197
+            ],
+            [
+              2233,
+              2395
+            ],
+            [
+              2408,
+              2837
+            ],
+            [
+              2934,
+              3153
+            ],
+            [
+              3294,
+              3463
+            ],
+            [
+              3496,
+              4084
+            ]
+          ],
+          "F": [
+            [
+              3169,
+              3198
+            ],
+            [
+              3213,
+              3261
+            ]
+          ],
+          "U": []
+        },
+        "group_token_counts": {
+          "S": 1209,
+          "F": 40,
+          "U": 0
+        },
+        "active_groups": [
+          "S",
+          "F"
+        ],
+        "full_target_tokens": 1321,
+        "assistant_json_tokens": 1319,
+        "template_tail_tokens": 2,
+        "template_tail_indices": [
+          3017,
+          3018
+        ],
+        "full_component_mass": 0.5,
+        "focus_component_mass": 0.5,
+        "focus_component_mass_by_group": {
+          "S": 0.25,
+          "F": 0.25,
+          "U": 0.0
+        },
+        "full_coefficient_per_token": 0.0003785011355034065,
+        "coefficient_sum": 1.0,
+        "prompt_tokens": 1698,
+        "prompt_labels_unchanged": true,
+        "completion_ids_exact": true,
+        "eos_full_only": true
+      },
+      {
+        "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+        "char_spans": {
+          "S": [
+            [
+              23,
+              3282
+            ],
+            [
+              3295,
+              3297
+            ],
+            [
+              3333,
+              3337
+            ],
+            [
+              3350,
+              3797
+            ],
+            [
+              3894,
+              4272
+            ],
+            [
+              4438,
+              4440
+            ],
+            [
+              5209,
+              6505
+            ]
+          ],
+          "F": [
+            [
+              4288,
+              4312
+            ],
+            [
+              4327,
+              4382
+            ],
+            [
+              4399,
+              4424
+            ]
+          ],
+          "U": [
+            [
+              4451,
+              5189
+            ]
+          ]
+        },
+        "group_token_counts": {
+          "S": 1807,
+          "F": 53,
+          "U": 306
+        },
+        "active_groups": [
+          "S",
+          "F",
+          "U"
+        ],
+        "full_target_tokens": 2237,
+        "assistant_json_tokens": 2235,
+        "template_tail_tokens": 2,
+        "template_tail_indices": [
+          6072,
+          6073
+        ],
+        "full_component_mass": 0.5,
+        "focus_component_mass": 0.4999999999999999,
+        "focus_component_mass_by_group": {
+          "S": 0.16666666666666666,
+          "F": 0.16666666666666666,
+          "U": 0.16666666666666666
+        },
+        "full_coefficient_per_token": 0.00022351363433169424,
+        "coefficient_sum": 0.9999999999999999,
+        "prompt_tokens": 3837,
+        "prompt_labels_unchanged": true,
+        "completion_ids_exact": true,
+        "eos_full_only": true
+      },
+      {
+        "id": "TRAIN-DAILY-CALM-01-INITIAL",
+        "char_spans": {
+          "S": [
+            [
+              23,
+              2622
+            ],
+            [
+              2635,
+              2637
+            ],
+            [
+              2673,
+              2677
+            ],
+            [
+              2690,
+              3555
+            ],
+            [
+              3652,
+              3896
+            ],
+            [
+              4007,
+              4009
+            ],
+            [
+              4042,
+              4825
+            ]
+          ],
+          "F": [
+            [
+              3912,
+              3933
+            ],
+            [
+              3948,
+              3974
+            ]
+          ],
+          "U": []
+        },
+        "group_token_counts": {
+          "S": 1491,
+          "F": 20,
+          "U": 0
+        },
+        "active_groups": [
+          "S",
+          "F"
+        ],
+        "full_target_tokens": 1585,
+        "assistant_json_tokens": 1583,
+        "template_tail_tokens": 2,
+        "template_tail_indices": [
+          3316,
+          3317
+        ],
+        "full_component_mass": 0.5,
+        "focus_component_mass": 0.5,
+        "focus_component_mass_by_group": {
+          "S": 0.25,
+          "F": 0.25,
+          "U": 0.0
+        },
+        "full_coefficient_per_token": 0.0003154574132492114,
+        "coefficient_sum": 1.0,
+        "prompt_tokens": 1733,
+        "prompt_labels_unchanged": true,
+        "completion_ids_exact": true,
+        "eos_full_only": true
+      },
+      {
+        "id": "TRAIN-DAILY-CALM-02-INITIAL",
+        "char_spans": {
+          "S": [
+            [
+              23,
+              2622
+            ],
+            [
+              2635,
+              2637
+            ],
+            [
+              2673,
+              2677
+            ],
+            [
+              2690,
+              3555
+            ],
+            [
+              3652,
+              3896
+            ],
+            [
+              4007,
+              4009
+            ],
+            [
+              4042,
+              4825
+            ]
+          ],
+          "F": [
+            [
+              3912,
+              3933
+            ],
+            [
+              3948,
+              3974
+            ]
+          ],
+          "U": []
+        },
+        "group_token_counts": {
+          "S": 1465,
+          "F": 20,
+          "U": 0
+        },
+        "active_groups": [
+          "S",
+          "F"
+        ],
+        "full_target_tokens": 1559,
+        "assistant_json_tokens": 1557,
+        "template_tail_tokens": 2,
+        "template_tail_indices": [
+          3285,
+          3286
+        ],
+        "full_component_mass": 0.49999999999999994,
+        "focus_component_mass": 0.5,
+        "focus_component_mass_by_group": {
+          "S": 0.25,
+          "F": 0.25,
+          "U": 0.0
+        },
+        "full_coefficient_per_token": 0.00032071840923669016,
+        "coefficient_sum": 1.0,
+        "prompt_tokens": 1728,
+        "prompt_labels_unchanged": true,
+        "completion_ids_exact": true,
+        "eos_full_only": true
+      },
+      {
+        "id": "TRAIN-DAILY-CALM-03-INITIAL",
+        "char_spans": {
+          "S": [
+            [
+              23,
+              2622
+            ],
+            [
+              2635,
+              2637
+            ],
+            [
+              2673,
+              2677
+            ],
+            [
+              2690,
+              3555
+            ],
+            [
+              3652,
+              3896
+            ],
+            [
+              4007,
+              4009
+            ],
+            [
+              4042,
+              4825
+            ]
+          ],
+          "F": [
+            [
+              3912,
+              3933
+            ],
+            [
+              3948,
+              3974
+            ]
+          ],
+          "U": []
+        },
+        "group_token_counts": {
+          "S": 1504,
+          "F": 20,
+          "U": 0
+        },
+        "active_groups": [
+          "S",
+          "F"
+        ],
+        "full_target_tokens": 1598,
+        "assistant_json_tokens": 1596,
+        "template_tail_tokens": 2,
+        "template_tail_indices": [
+          3328,
+          3329
+        ],
+        "full_component_mass": 0.5,
+        "focus_component_mass": 0.5,
+        "focus_component_mass_by_group": {
+          "S": 0.25,
+          "F": 0.25,
+          "U": 0.0
+        },
+        "full_coefficient_per_token": 0.00031289111389236547,
+        "coefficient_sum": 1.0,
+        "prompt_tokens": 1732,
+        "prompt_labels_unchanged": true,
+        "completion_ids_exact": true,
+        "eos_full_only": true
+      },
+      {
+        "id": "FT-BOOK-INITIAL",
+        "char_spans": {
+          "S": [
+            [
+              23,
+              2063
+            ],
+            [
+              2076,
+              2078
+            ],
+            [
+              2114,
+              2247
+            ],
+            [
+              2260,
+              2693
+            ],
+            [
+              2790,
+              3057
+            ],
+            [
+              3203,
+              3355
+            ],
+            [
+              3388,
+              3838
+            ]
+          ],
+          "F": [
+            [
+              3073,
+              3119
+            ],
+            [
+              3134,
+              3170
+            ]
+          ],
+          "U": []
+        },
+        "group_token_counts": {
+          "S": 923,
+          "F": 43,
+          "U": 0
+        },
+        "active_groups": [
+          "S",
+          "F"
+        ],
+        "full_target_tokens": 1038,
+        "assistant_json_tokens": 1036,
+        "template_tail_tokens": 2,
+        "template_tail_indices": [
+          3195,
+          3196
+        ],
+        "full_component_mass": 0.5,
+        "focus_component_mass": 0.5,
+        "focus_component_mass_by_group": {
+          "S": 0.25,
+          "F": 0.25,
+          "U": 0.0
+        },
+        "full_coefficient_per_token": 0.0004816955684007707,
+        "coefficient_sum": 1.0,
+        "prompt_tokens": 2159,
+        "prompt_labels_unchanged": true,
+        "completion_ids_exact": true,
+        "eos_full_only": true
+      },
+      {
+        "id": "FT-BOOK-AFTER-ANSWER",
+        "char_spans": {
+          "S": [
+            [
+              23,
+              5197
+            ],
+            [
+              5210,
+              5212
+            ],
+            [
+              5248,
+              5252
+            ],
+            [
+              5265,
+              6868
+            ],
+            [
+              6965,
+              7478
+            ],
+            [
+              7681,
+              7683
+            ],
+            [
+              9484,
+              11050
+            ]
+          ],
+          "F": [
+            [
+              7494,
+              7530
+            ],
+            [
+              7545,
+              7612
+            ],
+            [
+              7629,
+              7667
+            ]
+          ],
+          "U": [
+            [
+              7694,
+              9464
+            ]
+          ]
+        },
+        "group_token_counts": {
+          "S": 2357,
+          "F": 69,
+          "U": 681
+        },
+        "active_groups": [
+          "S",
+          "F",
+          "U"
+        ],
+        "full_target_tokens": 3178,
+        "assistant_json_tokens": 3176,
+        "template_tail_tokens": 2,
+        "template_tail_indices": [
+          7388,
+          7389
+        ],
+        "full_component_mass": 0.5,
+        "focus_component_mass": 0.5,
+        "focus_component_mass_by_group": {
+          "S": 0.16666666666666666,
+          "F": 0.16666666666666666,
+          "U": 0.16666666666666666
+        },
+        "full_coefficient_per_token": 0.00015733165512901197,
+        "coefficient_sum": 1.0,
+        "prompt_tokens": 4212,
+        "prompt_labels_unchanged": true,
+        "completion_ids_exact": true,
+        "eos_full_only": true
+      },
+      {
+        "id": "FT-SHOP-INITIAL",
+        "char_spans": {
+          "S": [
+            [
+              23,
+              2074
+            ],
+            [
+              2087,
+              2089
+            ],
+            [
+              2125,
+              2270
+            ],
+            [
+              2283,
+              2707
+            ],
+            [
+              2804,
+              3044
+            ],
+            [
+              3198,
+              3357
+            ],
+            [
+              3390,
+              3854
+            ]
+          ],
+          "F": [
+            [
+              3060,
+              3111
+            ],
+            [
+              3126,
+              3165
+            ]
+          ],
+          "U": []
+        },
+        "group_token_counts": {
+          "S": 964,
+          "F": 46,
+          "U": 0
+        },
+        "active_groups": [
+          "S",
+          "F"
+        ],
+        "full_target_tokens": 1082,
+        "assistant_json_tokens": 1080,
+        "template_tail_tokens": 2,
+        "template_tail_indices": [
+          3274,
+          3275
+        ],
+        "full_component_mass": 0.5,
+        "focus_component_mass": 0.4999999999999999,
+        "focus_component_mass_by_group": {
+          "S": 0.25,
+          "F": 0.25,
+          "U": 0.0
+        },
+        "full_coefficient_per_token": 0.0004621072088724584,
+        "coefficient_sum": 0.9999999999999999,
+        "prompt_tokens": 2194,
+        "prompt_labels_unchanged": true,
+        "completion_ids_exact": true,
+        "eos_full_only": true
+      },
+      {
+        "id": "FT-SHOP-AFTER-ANSWER",
+        "char_spans": {
+          "S": [
+            [
+              23,
+              5932
+            ],
+            [
+              5945,
+              5947
+            ],
+            [
+              5983,
+              5987
+            ],
+            [
+              6000,
+              7341
+            ],
+            [
+              7438,
+              8050
+            ],
+            [
+              8340,
+              8342
+            ],
+            [
+              10358,
+              12067
+            ]
+          ],
+          "F": [
+            [
+              8066,
+              8150
+            ],
+            [
+              8165,
+              8241
+            ],
+            [
+              8258,
+              8326
+            ]
+          ],
+          "U": [
+            [
+              8353,
+              10338
+            ]
+          ]
+        },
+        "group_token_counts": {
+          "S": 2579,
+          "F": 110,
+          "U": 801
+        },
+        "active_groups": [
+          "S",
+          "F",
+          "U"
+        ],
+        "full_target_tokens": 3561,
+        "assistant_json_tokens": 3559,
+        "template_tail_tokens": 2,
+        "template_tail_indices": [
+          7933,
+          7934
+        ],
+        "full_component_mass": 0.5,
+        "focus_component_mass": 0.5,
+        "focus_component_mass_by_group": {
+          "S": 0.16666666666666666,
+          "F": 0.16666666666666666,
+          "U": 0.16666666666666666
+        },
+        "full_coefficient_per_token": 0.00014040999719180006,
+        "coefficient_sum": 1.0,
+        "prompt_tokens": 4374,
+        "prompt_labels_unchanged": true,
+        "completion_ids_exact": true,
+        "eos_full_only": true
+      },
+      {
+        "id": "FT-REPOT-INITIAL",
+        "char_spans": {
+          "S": [
+            [
+              23,
+              2072
+            ],
+            [
+              2085,
+              2087
+            ],
+            [
+              2123,
+              2127
+            ],
+            [
+              2140,
+              2578
+            ],
+            [
+              2675,
+              2885
+            ],
+            [
+              3001,
+              3003
+            ],
+            [
+              3036,
+              3481
+            ]
+          ],
+          "F": [
+            [
+              2901,
+              2932
+            ],
+            [
+              2947,
+              2968
+            ]
+          ],
+          "U": []
+        },
+        "group_token_counts": {
+          "S": 860,
+          "F": 27,
+          "U": 0
+        },
+        "active_groups": [
+          "S",
+          "F"
+        ],
+        "full_target_tokens": 961,
+        "assistant_json_tokens": 959,
+        "template_tail_tokens": 2,
+        "template_tail_indices": [
+          3004,
+          3005
+        ],
+        "full_component_mass": 0.5,
+        "focus_component_mass": 0.5,
+        "focus_component_mass_by_group": {
+          "S": 0.25,
+          "F": 0.25,
+          "U": 0.0
+        },
+        "full_coefficient_per_token": 0.0005202913631633715,
+        "coefficient_sum": 1.0,
+        "prompt_tokens": 2045,
+        "prompt_labels_unchanged": true,
+        "completion_ids_exact": true,
+        "eos_full_only": true
+      },
+      {
+        "id": "FT-KNIT-INITIAL",
+        "char_spans": {
+          "S": [
+            [
+              23,
+              2064
+            ],
+            [
+              2077,
+              2079
+            ],
+            [
+              2115,
+              2119
+            ],
+            [
+              2132,
+              2134
+            ],
+            [
+              2231,
+              2418
+            ],
+            [
+              2586,
+              2752
+            ],
+            [
+              2785,
+              3077
+            ]
+          ],
+          "F": [
+            [
+              2434,
+              2484
+            ],
+            [
+              2499,
+              2553
+            ]
+          ],
+          "U": []
+        },
+        "group_token_counts": {
+          "S": 769,
+          "F": 53,
+          "U": 0
+        },
+        "active_groups": [
+          "S",
+          "F"
+        ],
+        "full_target_tokens": 896,
+        "assistant_json_tokens": 894,
+        "template_tail_tokens": 2,
+        "template_tail_indices": [
+          2981,
+          2982
+        ],
+        "full_component_mass": 0.5,
+        "focus_component_mass": 0.5,
+        "focus_component_mass_by_group": {
+          "S": 0.25,
+          "F": 0.25,
+          "U": 0.0
+        },
+        "full_coefficient_per_token": 0.0005580357142857143,
+        "coefficient_sum": 1.0,
+        "prompt_tokens": 2087,
+        "prompt_labels_unchanged": true,
+        "completion_ids_exact": true,
+        "eos_full_only": true
+      }
+    ]
+  },
+  "allocation": [
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "full_target_tokens": 1331,
+      "group_token_counts": {
+        "S": 1219,
+        "F": 40,
+        "U": 0
+      },
+      "old_full_mean_mass": {
+        "S": 0.9158527422990232,
+        "F": 0.03005259203606311,
+        "U": 0.0
+      },
+      "new_balanced_mass": {
+        "S": 0.7079263711495117,
+        "F": 0.26502629601803157,
+        "U": 0
+      }
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "full_target_tokens": 2228,
+      "group_token_counts": {
+        "S": 1807,
+        "F": 53,
+        "U": 297
+      },
+      "old_full_mean_mass": {
+        "S": 0.8110412926391383,
+        "F": 0.02378815080789946,
+        "U": 0.13330341113105926
+      },
+      "new_balanced_mass": {
+        "S": 0.5721873129862358,
+        "F": 0.1785607420706164,
+        "U": 0.23331837223219629
+      }
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "full_target_tokens": 1331,
+      "group_token_counts": {
+        "S": 1219,
+        "F": 40,
+        "U": 0
+      },
+      "old_full_mean_mass": {
+        "S": 0.9158527422990232,
+        "F": 0.03005259203606311,
+        "U": 0.0
+      },
+      "new_balanced_mass": {
+        "S": 0.7079263711495117,
+        "F": 0.26502629601803157,
+        "U": 0
+      }
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "full_target_tokens": 2231,
+      "group_token_counts": {
+        "S": 1807,
+        "F": 53,
+        "U": 300
+      },
+      "old_full_mean_mass": {
+        "S": 0.8099506947557149,
+        "F": 0.023756163155535633,
+        "U": 0.1344688480502017
+      },
+      "new_balanced_mass": {
+        "S": 0.5716420140445242,
+        "F": 0.17854474824443448,
+        "U": 0.23390109069176754
+      }
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "full_target_tokens": 1321,
+      "group_token_counts": {
+        "S": 1209,
+        "F": 40,
+        "U": 0
+      },
+      "old_full_mean_mass": {
+        "S": 0.915215745647237,
+        "F": 0.03028009084027252,
+        "U": 0.0
+      },
+      "new_balanced_mass": {
+        "S": 0.7076078728236185,
+        "F": 0.2651400454201363,
+        "U": 0
+      }
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "full_target_tokens": 2237,
+      "group_token_counts": {
+        "S": 1807,
+        "F": 53,
+        "U": 306
+      },
+      "old_full_mean_mass": {
+        "S": 0.8077782744747429,
+        "F": 0.023692445239159587,
+        "U": 0.13679034421099687
+      },
+      "new_balanced_mass": {
+        "S": 0.5705558039040382,
+        "F": 0.17851288928624645,
+        "U": 0.23506183877216508
+      }
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "full_target_tokens": 1585,
+      "group_token_counts": {
+        "S": 1491,
+        "F": 20,
+        "U": 0
+      },
+      "old_full_mean_mass": {
+        "S": 0.9406940063091482,
+        "F": 0.012618296529968454,
+        "U": 0.0
+      },
+      "new_balanced_mass": {
+        "S": 0.7203470031545741,
+        "F": 0.25630914826498424,
+        "U": 0
+      }
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "full_target_tokens": 1559,
+      "group_token_counts": {
+        "S": 1465,
+        "F": 20,
+        "U": 0
+      },
+      "old_full_mean_mass": {
+        "S": 0.9397049390635023,
+        "F": 0.012828736369467608,
+        "U": 0.0
+      },
+      "new_balanced_mass": {
+        "S": 0.7198524695317512,
+        "F": 0.25641436818473384,
+        "U": 0
+      }
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "full_target_tokens": 1598,
+      "group_token_counts": {
+        "S": 1504,
+        "F": 20,
+        "U": 0
+      },
+      "old_full_mean_mass": {
+        "S": 0.9411764705882353,
+        "F": 0.012515644555694618,
+        "U": 0.0
+      },
+      "new_balanced_mass": {
+        "S": 0.7205882352941176,
+        "F": 0.2562578222778473,
+        "U": 0
+      }
+    },
+    {
+      "id": "FT-BOOK-INITIAL",
+      "full_target_tokens": 1038,
+      "group_token_counts": {
+        "S": 923,
+        "F": 43,
+        "U": 0
+      },
+      "old_full_mean_mass": {
+        "S": 0.8892100192678227,
+        "F": 0.041425818882466284,
+        "U": 0.0
+      },
+      "new_balanced_mass": {
+        "S": 0.6946050096339114,
+        "F": 0.27071290944123316,
+        "U": 0
+      }
+    },
+    {
+      "id": "FT-BOOK-AFTER-ANSWER",
+      "full_target_tokens": 3178,
+      "group_token_counts": {
+        "S": 2357,
+        "F": 69,
+        "U": 681
+      },
+      "old_full_mean_mass": {
+        "S": 0.7416614222781623,
+        "F": 0.02171176840780365,
+        "U": 0.21428571428571427
+      },
+      "new_balanced_mass": {
+        "S": 0.5374973778057478,
+        "F": 0.17752255087056848,
+        "U": 0.27380952380952384
+      }
+    },
+    {
+      "id": "FT-SHOP-INITIAL",
+      "full_target_tokens": 1082,
+      "group_token_counts": {
+        "S": 964,
+        "F": 46,
+        "U": 0
+      },
+      "old_full_mean_mass": {
+        "S": 0.8909426987060998,
+        "F": 0.04251386321626617,
+        "U": 0.0
+      },
+      "new_balanced_mass": {
+        "S": 0.6954713493530499,
+        "F": 0.2712569316081331,
+        "U": 0
+      }
+    },
+    {
+      "id": "FT-SHOP-AFTER-ANSWER",
+      "full_target_tokens": 3561,
+      "group_token_counts": {
+        "S": 2579,
+        "F": 110,
+        "U": 801
+      },
+      "old_full_mean_mass": {
+        "S": 0.7242347655153046,
+        "F": 0.03089019938219601,
+        "U": 0.22493681550126368
+      },
+      "new_balanced_mass": {
+        "S": 0.528784049424319,
+        "F": 0.18211176635776466,
+        "U": 0.2791350744172985
+      }
+    },
+    {
+      "id": "FT-REPOT-INITIAL",
+      "full_target_tokens": 961,
+      "group_token_counts": {
+        "S": 860,
+        "F": 27,
+        "U": 0
+      },
+      "old_full_mean_mass": {
+        "S": 0.894901144640999,
+        "F": 0.02809573361082206,
+        "U": 0.0
+      },
+      "new_balanced_mass": {
+        "S": 0.6974505723204996,
+        "F": 0.26404786680541104,
+        "U": 0
+      }
+    },
+    {
+      "id": "FT-KNIT-INITIAL",
+      "full_target_tokens": 896,
+      "group_token_counts": {
+        "S": 769,
+        "F": 53,
+        "U": 0
+      },
+      "old_full_mean_mass": {
+        "S": 0.8582589285714286,
+        "F": 0.05915178571428571,
+        "U": 0.0
+      },
+      "new_balanced_mass": {
+        "S": 0.6791294642857143,
+        "F": 0.27957589285714285,
+        "U": 0
+      }
+    }
+  ],
+  "synthetic_ce": [
+    {
+      "dtype": "torch.float32",
+      "uniform_value_matches_old_hf": true,
+      "uniform_gradient_matches_old_hf": true,
+      "weighted_value_and_gradient_match_independent_group_means": true,
+      "one_forward": true,
+      "prompt_and_last_logit_gradient_zero": true,
+      "uniform_abs_error": 0.0,
+      "weighted_abs_error": 2.384185791015625e-07
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "uniform_value_matches_old_hf": true,
+      "uniform_gradient_matches_old_hf": true,
+      "weighted_value_and_gradient_match_independent_group_means": true,
+      "one_forward": true,
+      "prompt_and_last_logit_gradient_zero": true,
+      "uniform_abs_error": 2.384185791015625e-07,
+      "weighted_abs_error": 2.384185791015625e-07
+    }
+  ],
+  "hf_loss_source_sha256": "c7f950f4eb7eba01f9339bc4937c9e1cc2885cf1c1bc116d764990c694a90ff9",
+  "gpu_run_authorized": false,
+  "pending_execute_refused_before_effects": true,
+  "model_weights_loaded": 0,
+  "pretrained_model_forwards": 0,
+  "synthetic_cpu_model_calls": 6,
+  "training_updates": 0,
+  "generations": 0,
+  "cmee_adoptions": 0,
+  "sql_operations": 0,
+  "seconds": 4.350443211966194
+}

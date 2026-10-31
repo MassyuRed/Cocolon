@@ -1,0 +1,193 @@
+{
+  "schema": "cocolon_production_economics_inputs.v1",
+  "date_jst": "2026-10-24",
+  "status": "FIXED_PLANNING_SCENARIO_NOT_A_DEPLOYMENT_OR_MEASURED_BILL",
+  "prices_jpy": {
+    "Plus": 680,
+    "Premium": 1480
+  },
+  "finance": {
+    "jpy_per_usd_assumption": 160,
+    "paid_fraction": 0.05,
+    "plus_share_of_paid": 0.8,
+    "fee_main": 0.26,
+    "fee_sensitivity": 0.15,
+    "operating_room_fraction": 0.2,
+    "days_per_month": 30,
+    "common_fixed_jpy": {
+      "render_and_supabase_planned": 8000,
+      "network_volume_50gb_already_included": 560,
+      "other_shared_reserve": 2440
+    }
+  },
+  "usage_basis": "Reuse small_model_cost.py OPS at d680640147b1f689028ee863c4d668a708837e07. Counts/token volumes are scenarios, not product quotas or measured averages.",
+  "ops": {
+    "Free": {
+      "Emlis": [
+        60,
+        2000,
+        512
+      ],
+      "Piece": [
+        5,
+        4000,
+        1000
+      ],
+      "Analysis": [
+        1,
+        64000,
+        4000
+      ]
+    },
+    "Plus": {
+      "Emlis": [
+        200,
+        4000,
+        768
+      ],
+      "Piece": [
+        30,
+        4000,
+        1000
+      ],
+      "Analysis": [
+        8,
+        64000,
+        4000
+      ]
+    },
+    "Premium": {
+      "Emlis": [
+        600,
+        8000,
+        1024
+      ],
+      "Piece": [
+        60,
+        4000,
+        1000
+      ],
+      "Analysis": [
+        12,
+        64000,
+        4000
+      ],
+      "IF_future": [
+        4,
+        16000,
+        3000
+      ]
+    }
+  },
+  "selected_costing_arrangement": {
+    "model_candidate": "Qwen3.5-4B + one own LoRA, shared across three cores",
+    "serving_candidate": "Runpod vLLM Serverless Flex 24GB",
+    "min_workers": 0,
+    "max_workers": 4,
+    "max_sequences_per_worker_reference": 1,
+    "idle_timeout_seconds": 5,
+    "network_volume_gb": 50,
+    "model_context_candidate": 73728,
+    "memory_fit_verified": false,
+    "adapter_deployment_verified": false,
+    "prices_or_quotas_applied": false
+  },
+  "profiles": {
+    "reference_serial": {
+      "output_tps": 25,
+      "prefill_tps": 1000,
+      "cold_fraction": 0.1,
+      "cold_start_seconds": 30,
+      "idle_seconds": 5,
+      "rounding_allowance_seconds_per_episode": 1,
+      "concurrency_assumption": 1,
+      "verified": false,
+      "note": "25 output TPS anchored to short A40 serial results; prefill/episode rate/load time and transfer to24GB are unmeasured assumptions."
+    },
+    "optimistic_decode_only": {
+      "output_tps": 25,
+      "prefill_tps": null,
+      "cold_fraction": 0,
+      "cold_start_seconds": 0,
+      "idle_seconds": 0,
+      "rounding_allowance_seconds_per_episode": 0,
+      "concurrency_assumption": 1,
+      "verified": false,
+      "note": "Deliberately optimistic zero input processing/startup/idle cost; lower accounting scenario at fixed25TPS, not a universal physical lower bound."
+    },
+    "efficient_unmeasured": {
+      "output_tps": 100,
+      "prefill_tps": 4000,
+      "cold_fraction": 0.01,
+      "cold_start_seconds": 30,
+      "idle_seconds": 5,
+      "rounding_allowance_seconds_per_episode": 1,
+      "concurrency_assumption": 4,
+      "verified": false,
+      "note": "Hypothetical aggregate throughput; neither batching/long-context memory nor cold rate verified."
+    },
+    "target_unmeasured": {
+      "output_tps": 200,
+      "prefill_tps": 8000,
+      "cold_fraction": 0.01,
+      "cold_start_seconds": 30,
+      "idle_seconds": 5,
+      "rounding_allowance_seconds_per_episode": 1,
+      "concurrency_assumption": 8,
+      "verified": false,
+      "note": "Performance target only; long Analysis serialized, short requests could batch if fit. Not an implemented or measured arrangement."
+    }
+  },
+  "routes": {
+    "flex24": {
+      "kind": "flex",
+      "usd_per_hour": 0.69,
+      "gb": 24,
+      "role": "MAIN_COSTING_CANDIDATE_NOT_VERIFIED"
+    },
+    "flex48": {
+      "kind": "flex",
+      "usd_per_hour": 1.22,
+      "gb": 48,
+      "role": "A40_FAMILY_RATE_SENSITIVITY"
+    },
+    "flex16": {
+      "kind": "flex",
+      "usd_per_hour": 0.58,
+      "gb": 16,
+      "role": "4B_FIT_UNVERIFIED_SAVING_SENSITIVITY"
+    },
+    "pod_a5000": {
+      "kind": "always_on",
+      "usd_per_hour": 0.27,
+      "gb": 24,
+      "target_monthly_utilization": 0.6,
+      "role": "DEDICATED_ALTERNATIVE_FIT_SPEED_UNVERIFIED"
+    },
+    "pod_a40": {
+      "kind": "always_on",
+      "usd_per_hour": 0.59,
+      "gb": 48,
+      "target_monthly_utilization": 0.6,
+      "role": "DEDICATED_A40_REFERENCE"
+    }
+  },
+  "source_result": {
+    "path": "../../trials/2026-10-24-qwen4b-9b-comparison/selection_results.json",
+    "sha256": "4f8aba44aca3612c66494ec5a77e92be2018d10a181fe1809c8994730e4f1386"
+  },
+  "sources": [
+    "https://www.runpod.io/pricing",
+    "https://docs.runpod.io/serverless/pricing",
+    "https://docs.runpod.io/serverless/vllm/environment-variables",
+    "https://docs.vllm.ai/en/latest/models/supported_models/"
+  ],
+  "always_excluded_from_cost_proof": [
+    "Real user input was not queried",
+    "No paid GPU or serving deployment performed",
+    "No complete salary/advertising/refund/development accounting",
+    "No proof that fixed shared allowance remains sufficient at larger scales",
+    "No extra API token bill added to own GPU inference",
+    "No second charge for network volume already in11000JPY"
+  ]
+}

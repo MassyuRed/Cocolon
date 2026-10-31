@@ -1,0 +1,4 @@
+timeout --signal=TERM --kill-after=10s 590s /usr/bin/python3.12 -B /workspace/cocolon_prior_rows2_pack_20261029/run_prior_rows2.py --execute --source-commit 943ee425ef7796b92ed9ee56f71fbb241ea2e45f > /workspace/prior-rows2-gpu.log 2>&1
+rc=$?
+printf '%s\n' "$rc" > /workspace/prior-rows2-gpu.exit
+exit "$rc"

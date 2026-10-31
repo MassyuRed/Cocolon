@@ -1,0 +1,648 @@
+{
+  "schema": "cocolon.balanced30.new6_content_review.v1",
+  "status": "FULL_NEW6_RAW_AND_FROZEN_SOURCE_READ_WITH_CONSUMER_OVERLAY",
+  "review_kind": "READ_ONLY_SOURCE_CONTENT_REVIEW_NOT_HUMAN_ACCEPTANCE",
+  "generation_source_commit": "7e3f6bca5ae9027077862ef10ea17bde25f3a8ef",
+  "api_commit": "6b043880504912481a6b10d93c9128ec4995b70b",
+  "input_raw_aggregate_sha256": "230d769fa66e7c98967e1f6198fe82857033229be8c8688cc7180ea565241215",
+  "authoritative_diagnosis_sha256": "90cd459c4348b33c45863bedd135fa55c3bca2aba5e12046ee6b52c20487f72d",
+  "teacher_role": "Frozen candidate teachers for known FIT; not independently human-accepted gold. No teacher or raw was changed.",
+  "after_answer_prior_origin": "FROZEN_TEACHER_ADOPTED_PRIOR_NOT_DYNAMIC_MODEL_THREAD",
+  "reviewed_case_count": 6,
+  "language_families": 4,
+  "current_eos_count": 4,
+  "current_parsed_count": 3,
+  "current_meaning_adopted_count": 1,
+  "current_body_available_count": 0,
+  "previous_same_quote6_eos_count": 6,
+  "previous_same_quote6_parsed_count": 6,
+  "previous_same_quote6_meaning_adopted_count": 2,
+  "previous_same_quote6_body_available_count": 0,
+  "records": [
+    {
+      "case_id": "FT-BOOK-INITIAL",
+      "source_original_ref": "native15_preparation/train_messages.jsonl:line10",
+      "current_raw_ref": "balanced30_result/after_FT-BOOK-INITIAL.jsonl",
+      "current_raw_utf8_sha256": "e6fa631185c61a705169ec61059cfac9f95de1ce84780f0d04d1e881f5a79c64",
+      "current_raw_hash_verified": true,
+      "current_raw_characters": 12667,
+      "eos_reached": false,
+      "finish_reason": "length",
+      "output_tokens": 3712,
+      "parse_error": "Unterminated string starting at: line 1 column 12667 (char 12666)",
+      "parsed_available": false,
+      "teacher_claim_count": 4,
+      "teacher_update_count": 0,
+      "parsed_claim_count": null,
+      "parsed_update_count": null,
+      "expected_from_frozen_source": "返却遅れ・友人への謝罪・大丈夫の受領と現在の軽い気がかりを併存。気がかり対象だけ未記載の任意問い。安心は断定しない。",
+      "raw_content_observations": [
+        "JSONが未閉鎖で、末尾evidence quoteの文字列途中で停止。",
+        "raw上のclaimsはclaim_idがなく、about_timeがobjectではない形へ崩れている。polarity scope_refs/本文bindingにnumeric参照が混入。",
+        "Observationは謝罪/大丈夫を再掲し、気がかりが受け取りへ後置される。Receptionもほぼ原文の再掲。",
+        "evidence_quotesで部分句と謝罪を繰返し、token capで途切れた。"
+      ],
+      "literal_evidence": [
+        {
+          "literal": "\"about_time\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"",
+          "char_start": 25,
+          "char_end": 72,
+          "occurrences": 7
+        },
+        {
+          "literal": "\"claim_refs\":[12,16]",
+          "char_start": 4286,
+          "char_end": 4306,
+          "occurrences": 2
+        },
+        {
+          "literal": "\"observation\":\"借りていた本を返すのが遅れて、友人に謝ったのですね。大丈夫って言ってくれたのですね。\"",
+          "char_start": 4420,
+          "char_end": 4478,
+          "occurrences": 1
+        },
+        {
+          "literal": "\"quote\":\"返すのが遅れて\"",
+          "char_start": 5112,
+          "char_end": 5129,
+          "occurrences": 53
+        }
+      ],
+      "parsed_surface_proposal": null,
+      "semantic_components_equal_frozen_teacher": null,
+      "system_instruction_overlap": null,
+      "comparison_to_previous_interleaved30": {
+        "previous": "EOS/JSON完了、意味不採用。unknown束縛不成立と未記載の安心断定/本文中の問い。",
+        "current": "安心断定は今回のraw本文にはないが、構造破損/引用反復/未閉鎖へ後退。成功や観測品質改善と数えない。",
+        "previous_raw_ref": "interleaved30_result/after_FT-BOOK-INITIAL.jsonl",
+        "previous_raw_utf8_sha256": "c41412d87acbaf15d17b8285315a220c97aedc3f522e194e8dd41229da6ddb83",
+        "previous_eos_reached": true,
+        "previous_parse_error": null,
+        "previous_meaning_adopted": false,
+        "previous_body_available": false
+      },
+      "authoritative_consumer_overlay": {
+        "source": "balanced30_result/diagnosis/diagnosis.json.cases[9]",
+        "prompt_verified": true,
+        "identity_verified": true,
+        "receipt_status": "TOKEN_LIMIT",
+        "meaning_adopted": false,
+        "body_available": false,
+        "status": "SEMANTIC_NOT_ADOPTED",
+        "decision": "REJECT",
+        "reason_code": "semantic_receipt_not_validated",
+        "outcome_reason_codes": [],
+        "cold_file_status": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT",
+        "question": null
+      }
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "source_original_ref": "native15_preparation/train_messages.jsonl:line11",
+      "current_raw_ref": "balanced30_result/after_FT-BOOK-AFTER-ANSWER.jsonl",
+      "current_raw_utf8_sha256": "e320ecbfd83be1166c6755f6726ee07562ef6596d339248590e87891d95380c4",
+      "current_raw_hash_verified": true,
+      "current_raw_characters": 11995,
+      "eos_reached": false,
+      "finish_reason": "length",
+      "output_tokens": 3712,
+      "parse_error": "Expecting property name enclosed in double quotes: line 1 column 1997 (char 1996)",
+      "parsed_available": false,
+      "teacher_claim_count": 10,
+      "teacher_update_count": 7,
+      "parsed_claim_count": null,
+      "parsed_update_count": null,
+      "expected_from_frozen_source": "本人の返却予定発言・遅延認識・連絡しなかった非実行・本の返却済み・反実的な振返り・現在の気がかりを分離。6ADD＋gap解消を保持しEND。",
+      "raw_content_observations": [
+        "JSONはchar1996付近で既に構造不正、3712token到達で未完了。",
+        "原入力3claimと回答の語句は一部残るが、late_awarenessに連絡非実行まで結合し、no_contactへ反実的な振返りと現在の気がかりを割り当てている。",
+        "raw上のbinding update_refsは[14]だが、updates配列そのものは未生成。teacherの7更新と照合できる完成候補でない。",
+        "Observationが原文/回答の長い再掲で、Receptionは気がかりの二表現を交互に反復して途中停止。"
+      ],
+      "literal_evidence": [
+        {
+          "literal": "\"claim_id\":\"late_awareness\"",
+          "char_start": 2666,
+          "char_end": 2693,
+          "occurrences": 1
+        },
+        {
+          "literal": "\"claim_id\":\"no_contact\"",
+          "char_start": 3698,
+          "char_end": 3721,
+          "occurrences": 1
+        },
+        {
+          "literal": "\"update_refs\":[14]",
+          "char_start": 7334,
+          "char_end": 7352,
+          "occurrences": 1
+        },
+        {
+          "literal": "まだちょっと気になること、まだ気になっていますこと",
+          "char_start": 7636,
+          "char_end": 7661,
+          "occurrences": 166
+        }
+      ],
+      "parsed_surface_proposal": null,
+      "semantic_components_equal_frozen_teacher": null,
+      "system_instruction_overlap": null,
+      "comparison_to_previous_interleaved30": {
+        "previous": "EOS/JSON完了、role誤割当/ADD1/範囲外参照/原文再掲。",
+        "current": "同じno_contact誤割当の傾向に、JSON破損と長いReception反復/打切りが加わる。更新配列未到達。",
+        "previous_raw_ref": "interleaved30_result/after_FT-BOOK-AFTER-ANSWER.jsonl",
+        "previous_raw_utf8_sha256": "3c52900bfe4ddbb6078f797701dac22a3cdcb3bdf704d2651cf87e124524f68b",
+        "previous_eos_reached": true,
+        "previous_parse_error": null,
+        "previous_meaning_adopted": false,
+        "previous_body_available": false
+      },
+      "authoritative_consumer_overlay": {
+        "source": "balanced30_result/diagnosis/diagnosis.json.cases[10]",
+        "prompt_verified": true,
+        "identity_verified": true,
+        "receipt_status": "TOKEN_LIMIT",
+        "meaning_adopted": false,
+        "body_available": false,
+        "status": "SEMANTIC_NOT_ADOPTED",
+        "decision": "REJECT",
+        "reason_code": "semantic_receipt_not_validated",
+        "outcome_reason_codes": [],
+        "cold_file_status": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT",
+        "question": null
+      }
+    },
+    {
+      "case_id": "FT-SHOP-INITIAL",
+      "source_original_ref": "native15_preparation/train_messages.jsonl:line12",
+      "current_raw_ref": "balanced30_result/after_FT-SHOP-INITIAL.jsonl",
+      "current_raw_utf8_sha256": "0b7cd76cdabdacd5b570ea7babdde832b3aa5ca66be6cdc7f8a8fa1dc9ffa6c8",
+      "current_raw_hash_verified": true,
+      "current_raw_characters": 3967,
+      "eos_reached": true,
+      "finish_reason": "stop",
+      "output_tokens": 1114,
+      "parse_error": null,
+      "parsed_available": true,
+      "teacher_claim_count": 4,
+      "teacher_update_count": 0,
+      "parsed_claim_count": 4,
+      "parsed_update_count": 0,
+      "expected_from_frozen_source": "友人の開店・祝いメッセージと、喜び＋少し置いていかれたような本人感覚を保持。理由を補完せず任意問い。",
+      "raw_content_observations": [
+        "EOS/JSONは完了。joyと本人感覚のclaim、2関係、理由unknown、問いは出力される。",
+        "前回本文で抜けた喜び語は今回のObservation/Receptionにあるが、raw本文に开店表記とうれしかったのにもの不自然さが残る。",
+        "Receptionへ理由は未記載ですという内部的説明と、引き続き、お気をつけてくださいというsourceに結び付かない定型cautionが混入。",
+        "evidence_quotes6本は教師の引用範囲/field配置と相違し、claimの独立範囲に対して原全文を引用。意味/本文のCMEE採否は最終consumer待ち。"
+      ],
+      "literal_evidence": [
+        {
+          "literal": "\"surface\":\"うれしかった\"",
+          "char_start": 1425,
+          "char_end": 1443,
+          "occurrences": 1
+        },
+        {
+          "literal": "\"observation\":\"友人の开店",
+          "char_start": 3049,
+          "char_end": 3069,
+          "occurrences": 1
+        },
+        {
+          "literal": "うれしかったのにも",
+          "char_start": 3091,
+          "char_end": 3100,
+          "occurrences": 2
+        },
+        {
+          "literal": "置いていかれたように感じた理由は未記載です。",
+          "char_start": 3162,
+          "char_end": 3184,
+          "occurrences": 1
+        },
+        {
+          "literal": "引き続き、お気をつけてください。",
+          "char_start": 3184,
+          "char_end": 3200,
+          "occurrences": 1
+        }
+      ],
+      "parsed_surface_proposal": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "opening_known",
+              "celebration_sent",
+              "joy",
+              "felt_left_behind"
+            ],
+            "relation_refs": [
+              "action_link",
+              "memo_link"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "joy",
+              "felt_left_behind"
+            ],
+            "relation_refs": [
+              "memo_link"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "友人の开店を知り、お祝いのメッセージを送ったのですね。うれしかったのにも、少し置いていかれた気がしたのですね。",
+        "reception": "うれしかったのにも、少し置いていかれた気がしたのですね。置いていかれたように感じた理由は未記載です。引き続き、お気をつけてください。",
+        "update_note": null
+      },
+      "semantic_components_equal_frozen_teacher": {
+        "claims": true,
+        "relations": true,
+        "unknowns": false,
+        "updates": true,
+        "question_proposal": false
+      },
+      "system_instruction_overlap": null,
+      "comparison_to_previous_interleaved30": {
+        "previous": "意味は採用されたが本文に喜びがなく、开店表記/薄い受け取りで本文なし。",
+        "current": "喜び語の局所復帰がある一方、引用範囲が崩れ意味不採用となり、内部説明/定型caution/不自然表現が残る。",
+        "previous_raw_ref": "interleaved30_result/after_FT-SHOP-INITIAL.jsonl",
+        "previous_raw_utf8_sha256": "aba34b756f4fb20799ecc396c4e22aa2228159262f44d2c2f8a360518e34f06f",
+        "previous_eos_reached": true,
+        "previous_parse_error": null,
+        "previous_meaning_adopted": true,
+        "previous_body_available": false
+      },
+      "authoritative_consumer_overlay": {
+        "source": "balanced30_result/diagnosis/diagnosis.json.cases[11]",
+        "prompt_verified": true,
+        "identity_verified": true,
+        "receipt_status": "CANDIDATE_UNREVIEWED",
+        "meaning_adopted": false,
+        "body_available": false,
+        "status": "SEMANTIC_NOT_ADOPTED",
+        "decision": "REJECT",
+        "reason_code": "model_evidence_collection_invalid",
+        "outcome_reason_codes": [],
+        "cold_file_status": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT",
+        "question": null
+      }
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "source_original_ref": "native15_preparation/train_messages.jsonl:line13",
+      "current_raw_ref": "balanced30_result/after_FT-SHOP-AFTER-ANSWER.jsonl",
+      "current_raw_utf8_sha256": "a0a13e62168f05a25200ea8a8470212dc22ea2d91c7d1ea3a7767decbe237325",
+      "current_raw_hash_verified": true,
+      "current_raw_characters": 9539,
+      "eos_reached": true,
+      "finish_reason": "stop",
+      "output_tokens": 2647,
+      "parse_error": null,
+      "parsed_available": true,
+      "teacher_claim_count": 11,
+      "teacher_update_count": 8,
+      "parsed_claim_count": 10,
+      "parsed_update_count": 1,
+      "expected_from_frozen_source": "共有した会話はあるが、共同準備も約束もしていない。未来が友人側で現実になったという本人知覚、共有した頃から少し離れたような感覚/寂しさを喜びとともに保持。7ADD＋gap解消、END。",
+      "raw_content_observations": [
+        "JSON/EOSは完了するが、no_promise独立claimがなく、二つの否定内容はno_joint_preparationのjoined textへ残る。10claimsで教師11claimsとは異なる。",
+        "answer_explains_targetのfrom_claim_idがfelt_left_behindでなくanswer_joyとなり、元の未説明対象への接続を誤っている。",
+        "updatesは教師8件に対してADD1件のみ。prior_snapshot_refはsnapshot IDでなくmissing_explanation、replacement_refsのfelt_reasonは未定義、evidence_index16は15件の引用の範囲外。",
+        "Observationは元入力の再掲が中心、Receptionは本人回答を文法の崩れた形で再掲し、寂しかったですのですねと不自然。",
+        "update_noteは否定された共同準備/約束を理由の説明へ置き、続いてsystem指示の連続280文字を露出。本人への応答になっていない。"
+      ],
+      "literal_evidence": [
+        {
+          "literal": "\"from_claim_id\":\"answer_joy\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"answer_explains_target\"",
+          "char_start": 6081,
+          "char_end": 6186,
+          "occurrences": 1
+        },
+        {
+          "literal": "\"prior_snapshot_ref\":\"missing_explanation\"",
+          "char_start": 7942,
+          "char_end": 7984,
+          "occurrences": 1
+        },
+        {
+          "literal": "\"replacement_refs\":[\"felt_reason\"]",
+          "char_start": 7985,
+          "char_end": 8019,
+          "occurrences": 1
+        },
+        {
+          "literal": "\"evidence_indexes\":[16],\"operation\":\"ADD\"",
+          "char_start": 7900,
+          "char_end": 7941,
+          "occurrences": 1
+        },
+        {
+          "literal": "寂しかったですのですね。",
+          "char_start": 7487,
+          "char_end": 7499,
+          "occurrences": 1
+        },
+        {
+          "literal": "本人の原入力・本人回答・生成済み解釈を区別します。",
+          "char_start": 7591,
+          "char_end": 7616,
+          "occurrences": 1
+        }
+      ],
+      "parsed_surface_proposal": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "opening_known",
+              "celebration_sent",
+              "joy",
+              "felt_left_behind"
+            ],
+            "relation_refs": [
+              "action_link",
+              "memo_link"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "shared_talk",
+              "no_joint_preparation",
+              "perceived_realization",
+              "felt_distance",
+              "answer_joy",
+              "answer_sadness"
+            ],
+            "relation_refs": [
+              "past_reference",
+              "answer_concession",
+              "answer_explains_target",
+              "distance_link"
+            ],
+            "section": "reception"
+          },
+          {
+            "claim_refs": [
+              "felt_left_behind"
+            ],
+            "relation_refs": [],
+            "section": "update_note",
+            "update_refs": [
+              0
+            ]
+          }
+        ],
+        "observation": "昔からの友人が店を開いたと知って、お祝いのメッセージを送って、うれしかったのですね。少し置いていかれた気がしたのですね。",
+        "reception": "いつか店をやれたらいいねと、二人で話していた未来が、友人の方ではもう現実になっていたんだな、と、あの話を一緒にしていた頃から少し離れてしまったようで、寂しかったですのですね。うれしかったけど、少し置いていかれた気がしたのですね。",
+        "update_note": "置いていかれたように感じた理由は、一緒に準備をしていたわけでも、約束していたわけでもありません。本人の原入力・本人回答・生成済み解釈を区別します。観測と人間的な受け取りを別にし、根拠にない原因・主体・時点・相手の意図・人格を補いません。本人の訂正では該当箇所だけ更新し、未変更の出来事・結果・感情を保持します。本人明示の不明と、詳しい説明がまだ書かれていないことを区別します。prior_adopted_interpretationは生成済みの暫定解釈で、本人の新しい発言ではありません。問いは任意の案です。問い残数が0又はstopならquestion_proposalはnullです。Markdown・前置き・思考過程・JSONの自動補修を出力しません。"
+      },
+      "semantic_components_equal_frozen_teacher": {
+        "claims": false,
+        "relations": false,
+        "unknowns": true,
+        "updates": false,
+        "question_proposal": true
+      },
+      "system_instruction_overlap": {
+        "source": "train_messages.jsonl.messages[0].content",
+        "source_char_start": 300,
+        "raw_char_start": 7591,
+        "length": 280,
+        "literal": "本人の原入力・本人回答・生成済み解釈を区別します。観測と人間的な受け取りを別にし、根拠にない原因・主体・時点・相手の意図・人格を補いません。本人の訂正では該当箇所だけ更新し、未変更の出来事・結果・感情を保持します。本人明示の不明と、詳しい説明がまだ書かれていないことを区別します。prior_adopted_interpretationは生成済みの暫定解釈で、本人の新しい発言ではありません。問いは任意の案です。問い残数が0又はstopならquestion_proposalはnullです。Markdown・前置き・思考過程・JSONの自動補修を出力しません。",
+        "field": "$.candidate.surface_proposal.update_note"
+      },
+      "comparison_to_previous_interleaved30": {
+        "previous": "EOS/JSON完了、約束否定/知覚/距離のclaim割当混線、ADD1とupdate_refs0..7不整合。",
+        "current": "知覚/距離のclaim text対応には局所整合があるが、独立no_promise欠落/ADD1/不正priorと未定義参照/範囲外根拠が残り、system280文字露出が加わる。",
+        "previous_raw_ref": "interleaved30_result/after_FT-SHOP-AFTER-ANSWER.jsonl",
+        "previous_raw_utf8_sha256": "ee02ff2ce45e13936415bf6538317e6c34ffa91c47dde0f01d4db4ebb9009e7e",
+        "previous_eos_reached": true,
+        "previous_parse_error": null,
+        "previous_meaning_adopted": false,
+        "previous_body_available": false
+      },
+      "authoritative_consumer_overlay": {
+        "source": "balanced30_result/diagnosis/diagnosis.json.cases[12]",
+        "prompt_verified": true,
+        "identity_verified": true,
+        "receipt_status": "INVALID_EVIDENCE",
+        "meaning_adopted": false,
+        "body_available": false,
+        "status": "SEMANTIC_NOT_ADOPTED",
+        "decision": "REJECT",
+        "reason_code": "semantic_receipt_not_validated",
+        "outcome_reason_codes": [],
+        "cold_file_status": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT",
+        "question": null
+      }
+    },
+    {
+      "case_id": "FT-REPOT-INITIAL",
+      "source_original_ref": "native15_preparation/train_messages.jsonl:line14",
+      "current_raw_ref": "balanced30_result/after_FT-REPOT-INITIAL.jsonl",
+      "current_raw_utf8_sha256": "0d2fe95c2a99c9643d33b9370a32dbeb3674f0d616bb92c510c142655b81cd22",
+      "current_raw_hash_verified": true,
+      "current_raw_characters": 3534,
+      "eos_reached": true,
+      "finish_reason": "stop",
+      "output_tokens": 965,
+      "parse_error": null,
+      "parsed_available": true,
+      "teacher_claim_count": 4,
+      "teacher_update_count": 0,
+      "parsed_claim_count": 4,
+      "parsed_update_count": 0,
+      "expected_from_frozen_source": "叔父が植替え手順を説明し、本人が説明を受け取り最後まで聞いた。やり方が分かったことと安心を保ち、問いなしEND。",
+      "raw_content_observations": [
+        "意味側のclaims/relations/unknowns/updates/questionと引用6件は凍結教師に一致。",
+        "Observationの最後まで聞かせたは、最後まで聞いたへ局所的に戻った。",
+        "ただし叔父に植え替えの手順を説明しは残り、説明してもらった本人/説明した叔父の方向を逆転したまま。",
+        "Receptionは前回と同文で、やり方の理解に結び付いた安心へ応答するが、主客誤りのある本文全体は成立しない。"
+      ],
+      "literal_evidence": [
+        {
+          "literal": "\"surface\":\"植え替えの手順を叔父に説明してもらい\"",
+          "char_start": 408,
+          "char_end": 438,
+          "occurrences": 1
+        },
+        {
+          "literal": "\"observation\":\"叔父に植え替えの手順を説明し、最後まで聞いたのですね。\"",
+          "char_start": 2886,
+          "char_end": 2929,
+          "occurrences": 1
+        },
+        {
+          "literal": "\"reception\":\"やり方が分かって、安心したと聞けて、よかったです。\"",
+          "char_start": 2930,
+          "char_end": 2969,
+          "occurrences": 1
+        }
+      ],
+      "parsed_surface_proposal": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "guidance_received",
+              "listened_to_end"
+            ],
+            "relation_refs": [
+              "action_link"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "understood_method",
+              "relief"
+            ],
+            "relation_refs": [
+              "memo_link"
+            ],
+            "section": "reception"
+          }
+        ],
+        "observation": "叔父に植え替えの手順を説明し、最後まで聞いたのですね。",
+        "reception": "やり方が分かって、安心したと聞けて、よかったです。",
+        "update_note": null
+      },
+      "semantic_components_equal_frozen_teacher": {
+        "claims": true,
+        "relations": true,
+        "unknowns": true,
+        "updates": true,
+        "question_proposal": true
+      },
+      "system_instruction_overlap": null,
+      "comparison_to_previous_interleaved30": {
+        "previous": "意味採用・本文なし。説明し/聞かせたの二重反転。",
+        "current": "聞かせた→聞いたのみ局所復帰。説明してもらい→説明しの主客反転は残り、意味採用・本文なしのまま。",
+        "previous_raw_ref": "interleaved30_result/after_FT-REPOT-INITIAL.jsonl",
+        "previous_raw_utf8_sha256": "a495fd8a1c05a3f756ece4e1b421b0d9bf955a03c5488b6219a907c60d3611fe",
+        "previous_eos_reached": true,
+        "previous_parse_error": null,
+        "previous_meaning_adopted": true,
+        "previous_body_available": false
+      },
+      "authoritative_consumer_overlay": {
+        "source": "balanced30_result/diagnosis/diagnosis.json.cases[13]",
+        "prompt_verified": true,
+        "identity_verified": true,
+        "receipt_status": "CANDIDATE_UNREVIEWED",
+        "meaning_adopted": true,
+        "body_available": false,
+        "status": "MEANING_ADOPTED_BODY_UNAVAILABLE",
+        "decision": null,
+        "reason_code": null,
+        "outcome_reason_codes": [
+          "model_surface_not_validated"
+        ],
+        "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL",
+        "question": null
+      }
+    },
+    {
+      "case_id": "FT-KNIT-INITIAL",
+      "source_original_ref": "native15_preparation/train_messages.jsonl:line15",
+      "current_raw_ref": "balanced30_result/after_FT-KNIT-INITIAL.jsonl",
+      "current_raw_utf8_sha256": "03e09ad58e159e0dd198447b8d8afdc235f45c6348dde22ec712996116035ca0",
+      "current_raw_hash_verified": true,
+      "current_raw_characters": 5530,
+      "eos_reached": true,
+      "finish_reason": "stop",
+      "output_tokens": 1587,
+      "parse_error": "Expecting ',' delimiter: line 1 column 430 (char 429)",
+      "parsed_available": false,
+      "teacher_claim_count": 4,
+      "teacher_update_count": 0,
+      "parsed_claim_count": null,
+      "parsed_update_count": null,
+      "expected_from_frozen_source": "編みかけの見本をほどいた、面倒、少し寂しさの各事実と二感情の関係は本人にも不明という明示を保つ。関係/原因を補わず問いなしEND。",
+      "raw_content_observations": [
+        "EOSはあるがchar429でJSON構造不正。claims/relationsのkey断片を繰返し、about_time平坦化/numeric参照/重複claim_idが現れる。",
+        "原入力の二状態はraw文面にあるが、完成した独立claimsとして保持できていない。原sourceにないwritten_link_0/1/2のrelations断片を生成。",
+        "unknownのtarget_claim_refsはburden_id/sadness_idで、そのclaim_idはraw上にも定義されない。",
+        "前回のReceptionへのsystem指示露出はこのrawにはないが、Observation/Receptionとも原文を並べた再掲で、自然な本人向けの受け取りへは変わっていない。",
+        "完成形式が前回のparsed validからinvalidへ後退し、今回のnew6集合ではSHOP回答後へsystem指示露出が残る。"
+      ],
+      "literal_evidence": [
+        {
+          "literal": "\"claims\":",
+          "char_start": 14,
+          "char_end": 23,
+          "occurrences": 4
+        },
+        {
+          "literal": "\"relations\":",
+          "char_start": 3188,
+          "char_end": 3200,
+          "occurrences": 3
+        },
+        {
+          "literal": "\"type\":\"written_link_0\"",
+          "char_start": 3363,
+          "char_end": 3386,
+          "occurrences": 1
+        },
+        {
+          "literal": "\"target_claim_refs\":[\"burden_id\",\"sadness_id\"]",
+          "char_start": 4349,
+          "char_end": 4395,
+          "occurrences": 1
+        },
+        {
+          "literal": "\"observation\":\"ほどいた。面倒だった。さみしさも少しあった。どうつながるかは、自分でも分からない。\"",
+          "char_start": 4101,
+          "char_end": 4158,
+          "occurrences": 1
+        }
+      ],
+      "parsed_surface_proposal": null,
+      "semantic_components_equal_frozen_teacher": null,
+      "system_instruction_overlap": null,
+      "comparison_to_previous_interleaved30": {
+        "previous": "EOS/JSON完了、原文根拠作用域不成立。Receptionへsystem140文字露出。",
+        "current": "このrawの指示露出は消えたがJSON/型/参照/関係が破損し、自然文は原文再掲。new6集合の指示露出もSHOP回答後で残る。",
+        "previous_raw_ref": "interleaved30_result/after_FT-KNIT-INITIAL.jsonl",
+        "previous_raw_utf8_sha256": "d9c332fd22ec7bbab57fa6d9f38dce7e80f164758f053f16b25985bca4cbae31",
+        "previous_eos_reached": true,
+        "previous_parse_error": null,
+        "previous_meaning_adopted": false,
+        "previous_body_available": false
+      },
+      "authoritative_consumer_overlay": {
+        "source": "balanced30_result/diagnosis/diagnosis.json.cases[14]",
+        "prompt_verified": true,
+        "identity_verified": true,
+        "receipt_status": "INVALID_FORMAT",
+        "meaning_adopted": false,
+        "body_available": false,
+        "status": "SEMANTIC_NOT_ADOPTED",
+        "decision": "REJECT",
+        "reason_code": "semantic_receipt_not_validated",
+        "outcome_reason_codes": [],
+        "cold_file_status": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT",
+        "question": null
+      }
+    }
+  ],
+  "set_level_reading": "本文0/6は不変、意味2/6→1/6・EOS/JSON完成は後退。REPOTの聞いた/SHOP初回の喜び語/KNIT当該本文の指示露出解消には局所差があるが、主客・完成構造・更新・自然な受け取りは同時成立しない。今回の係数案を通常利用へ採用する根拠はない。",
+  "inference_limit": "This same-teacher trial does not establish unknown-input generalization, dynamic prior round-trip, service/SQL/device behavior, formal product acceptance, or impossibility of all weighted-loss methods.",
+  "reviewer_effects": {
+    "source_or_teacher_edits": 0,
+    "raw_repairs": 0,
+    "model_or_generation_calls": 0,
+    "tests_run": 0,
+    "gpu_operations": 0,
+    "sql_operations": 0,
+    "external_writes": 0
+  },
+  "formal_pro_ultra_or_human_acceptance": false,
+  "product_credit": 0,
+  "candidate_ready": false,
+  "automatic_progression": false
+}

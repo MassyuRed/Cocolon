@@ -1,0 +1,15 @@
+{
+  "source_commit": "964558b63e1f2a7e8a5fc9617b760ca275975055",
+  "runner_and_cpu_commit": "6eb760abfbab78a52d25719814aab32e73c901c8",
+  "previous_fullce9_commit": "fce4c7b24c7c7aef94c9e8c4e991720b9b95c0b9",
+  "api_commit": "7b9ee073de03940ba71587297d8600b2b6094dd1",
+  "source4_exact_readback": true,
+  "launcher_exact_readback": true,
+  "initial_cpu_preflight_failure_before_model": true,
+  "launcher_syntax_failure_before_model": true,
+  "gpu_retry": false,
+  "root_single_executor": true,
+  "formal_pro_ultra_human_review": false,
+  "intermediate_screen_misread_corrected": true,
+  "early_book_recovery_failed_empty_still_generating": true
+}

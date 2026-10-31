@@ -1,0 +1,147 @@
+{
+  "schema": "cocolon.saved_raw_structure_reading.v1",
+  "source_commit": "116617b2b40c145aa3f2a55b05a51052a700c10e",
+  "status": "CPU_READ_ONLY_COMPARISON_COMPLETE",
+  "input_sha256": {
+    "eval_inputs11.json": "8f32141212419628092c69e43dcf3a267651c8b95b20f1ad7e98e064cb41a820",
+    "train_messages11.jsonl": "ef2d70877eb55c9191a2600581e74bd3d51f316473655efc154b7c389cf5485e",
+    "before_FT-BOOK-AFTER-ANSWER.jsonl": "7a1a106680694c2d80d69cd6dac95c9b22c38b20d11e8d874747592d714e0a9a",
+    "before_FT-SHOP-AFTER-ANSWER.jsonl": "cbb8b1684244a743f94140013af4306473bf20be6eb3ff40cb8cf4d8e5c5da7e"
+  },
+  "inputs_unchanged": true,
+  "cases": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "actual_finish_reason": "length",
+      "output_tokens": 3712,
+      "cap": 3712,
+      "eos_reached": false,
+      "strict_json_error": {
+        "message": "Unterminated string starting at",
+        "char_offset": 9204
+      },
+      "completed_root_members_before_first_unfinished": 4,
+      "root_array_closed": false,
+      "output_aliases": [
+        "s0",
+        "s1"
+      ],
+      "target_aliases": [
+        "s0",
+        "s1",
+        "p0"
+      ],
+      "undeclared_alias_refs_in_raw_string_scan": [
+        "@p0",
+        "@p1"
+      ],
+      "c_start_char": 739,
+      "first_completed_c_member": [
+        [
+          "@s0",
+          "q_late_return"
+        ],
+        null,
+        "WRITTEN_PAST_UNRESOLVED_OCCASION"
+      ],
+      "first_completed_c_member_chars": [
+        740,
+        805
+      ],
+      "c_array_closed": false,
+      "expected_first_c_member_kind": "list of claim rows, each exactly 10 cells",
+      "target_first_c_member_claims": 10,
+      "target_claim_row_lengths": [
+        10
+      ],
+      "raw_first_c_member_length": 3,
+      "raw_first_c_member_all_claim_rows": false,
+      "prefix_char_end": 805,
+      "prose_spec_book_phrase_present": true,
+      "book_phrase_raw_occurrences": 0,
+      "book_repeat_raw_occurrences": 26,
+      "explanation_change_raw_occurrences": 0,
+      "teacher_full_output_preserved": true,
+      "train_eval_messages_identical": true
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "actual_finish_reason": "length",
+      "output_tokens": 3584,
+      "cap": 3584,
+      "eos_reached": false,
+      "strict_json_error": {
+        "message": "Extra data",
+        "char_offset": 1477
+      },
+      "completed_root_members_before_first_unfinished": 15,
+      "root_array_closed": true,
+      "output_aliases": [
+        "s0",
+        "s1"
+      ],
+      "target_aliases": [
+        "s0",
+        "s1",
+        "p0"
+      ],
+      "undeclared_alias_refs_in_raw_string_scan": [
+        "@p0"
+      ],
+      "c_start_char": 1029,
+      "first_completed_c_member": [
+        [
+          "@s0",
+          [
+            "q0"
+          ]
+        ],
+        null,
+        "WRITTEN_PAST_UNRESOLVED_OCCASION"
+      ],
+      "first_completed_c_member_chars": [
+        1030,
+        1086
+      ],
+      "c_array_closed": true,
+      "expected_first_c_member_kind": "list of claim rows, each exactly 10 cells",
+      "target_first_c_member_claims": 11,
+      "target_claim_row_lengths": [
+        10
+      ],
+      "raw_first_c_member_length": 3,
+      "raw_first_c_member_all_claim_rows": false,
+      "prefix_char_end": 1086,
+      "prose_spec_book_phrase_present": true,
+      "book_phrase_raw_occurrences": 1,
+      "book_repeat_raw_occurrences": 0,
+      "explanation_change_raw_occurrences": 129,
+      "teacher_full_output_preserved": true,
+      "train_eval_messages_identical": true
+    }
+  ],
+  "packages_metadata_only": {
+    "transformers": "5.19.0",
+    "tokenizers": "0.23.3",
+    "torch": "2.8.0+cu128",
+    "xgrammar": null,
+    "llguidance": null,
+    "outlines": null
+  },
+  "effects": {
+    "model_loads": 0,
+    "model_forwards": 0,
+    "training_updates": 0,
+    "generations": 0,
+    "receiver_calls": 0,
+    "repairs": 0,
+    "source_writes": 0,
+    "gpu_lifecycle_operations": 0
+  },
+  "limitations": [
+    "not a grammar implementation or grammar-success test",
+    "not a model capacity or training-data adequacy conclusion",
+    "actual rejection stays TOKEN_LIMIT, not inferred semantic rejection"
+  ],
+  "seconds": 0.011652405024506152
+}

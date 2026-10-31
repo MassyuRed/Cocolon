@@ -1,0 +1,24 @@
+{
+  "pid": 231168,
+  "command": [
+    "timeout",
+    "--signal=TERM",
+    "--kill-after=10s",
+    "610s",
+    "python",
+    "-B",
+    "/workspace/cocolon_adaptive30_run_20261027/consume_adaptive30.py",
+    "--run",
+    "/workspace/cocolon_adaptive30_run_20261027",
+    "--out",
+    "/workspace/cocolon_adaptive30_diagnosis_20261027",
+    "--expected-source-commit",
+    "5c2fe64e89e2d5f87c24a85692ee19c5af1dc567"
+  ],
+  "source_run_sha256": "70c876212a46a3b299e406dd4cebb949ef2554163d7c9e14179626f2f254d931",
+  "started_unix": 1793095768.9374378,
+  "new_model_calls": 0,
+  "training_updates": 0,
+  "sql_operations": 0,
+  "retry": false
+}

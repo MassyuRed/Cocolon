@@ -1,0 +1,1 @@
+timeout --signal=TERM --kill-after=10s 2690s /usr/bin/python3.12 -B /workspace/cocolon_rehearsal13_pack_20261029/run_rehearsal13.py --execute --source-commit 385114bde2ea0d8904d6a73f9c80bb5af56a654c > /workspace/rehearsal13-gpu.log 2>&1; rc=$?; printf "%s\n" "$rc" > /workspace/rehearsal13-gpu.exit; exit $rc

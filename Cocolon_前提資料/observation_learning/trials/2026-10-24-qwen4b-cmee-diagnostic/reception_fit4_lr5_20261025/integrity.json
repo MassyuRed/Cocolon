@@ -1,0 +1,9 @@
+{
+  "archive_sha256": "8aef1b0829ac75bc1bdb2f3fb755323f03dce343b274f332f1d89d7efca2c6ea",
+  "archive_bytes": 3522063,
+  "members": 27,
+  "all_hashes_valid": true,
+  "finite_f32_tensors": 32,
+  "library_saved": true,
+  "library_file_id": "libfile_0ce9c648e89c8191acf7aabfa5a56b01"
+}
