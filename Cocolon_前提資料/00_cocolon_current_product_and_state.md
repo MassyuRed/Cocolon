@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-更新日：2026-10-31 JST（最新差分：T04のコピー開始を1forward診断し既存正解で1更新、別保存reload/24EOSまで確認。書き出し変化後も本人語りが残り新候補不採用。別題材6教師草案をCPU準備・未学習。Plus680円/Premium1,480円を保持）。全Cocolon作業の必読原本。
+更新日：2026-10-31 JST（最新差分：旧12＋別題材6の36更新・別保存reload・全32EOSを確認。本人宛化は改善するが否定反転等で新d691不採用。次は別題材の対比ペアと最小学習修正案のCPU具体化、方式未導入。Plus680円/Premium1,480円を保持）。全Cocolon作業の必読原本。
 
 > **最新報告会：[第9回・2026-10-31、10/31〜11/7](weekly_reviews/Cocolon_Weekly_Review_20261031.md)。開催中。** [§3のMashの方針・既決仕様](weekly_reviews/Cocolon_Weekly_Review_20261031.md#confirmed-directions)、[§4の華恋の商品案](weekly_reviews/Cocolon_Weekly_Review_20261031.md#release-product-proposal)、[§11の合意最低線と週間基準計画](weekly_reviews/Cocolon_Weekly_Review_20261031.md#weekly-tasks-20261031)、[§7の未決・会議進行](weekly_reviews/Cocolon_Weekly_Review_20261031.md#meeting-agenda-and-open-items)を区別する。Emlisは人間的応答のみの表示へ変更し、意図的短文化・1〜2文固定はしない。観測ラインは分析へ活かす。Free当回入力のみ／Plus過去本人入力も照合は既決仕様の再確認で、通常4Bでの意味ある履歴応答は未完成。わたしマップは全蓄積の構造・ルートと月ごとの当時snapshot、現在との見比べが構想。28日・最新100だけ・最新1枚は華恋の判断・撤回案で、Mashの構想ではない。下表の期間実装と新目標を混同しない。
 
@@ -10,13 +10,13 @@
 
 **最新の公開見通し：** [第9回§13](weekly_reviews/Cocolon_Weekly_Review_20261031.md#release-outlook-20261031)。12/18両ストア公開目標は維持するが、通常接続・累積マップ・課金・両OS・原価の未成立から達成の裏付け不足・高リスク。10/31→11/27の提出基準まで27日、その後12/18まで21日を審査・差戻し枠とする管理計画で、所要保証ではない。11/3通常一巡、11/7実績・Android差分・販売範囲と原価材料、11/15結合、11/22候補、11/27両ストア提出の確認点を置く。高度観測を初版へ戻さず、Plus履歴・累積／月次マップ・Piece保存出力・課金権限は残す。iOS先行やSNS後置等の未採用案を工程削減済みにしない。[§14](weekly_reviews/Cocolon_Weekly_Review_20261031.md#karen-opinion-20261031)は華恋の進め方・商品価値への意見。今回の報告で新しい製品実装・稼働成功は生じていない。
 
-**現在の直接作業（10/31）：** 本人宛初回本文→通常API→Q3 SQL保存→RN非生成再読のsource候補を保持。最新は[§24](weekly_reviews/Cocolon_Weekly_Review_20261031.md#copy-start-repair1-20261031)。保存af44のT04開始語を1forwardで測り、教師開始2位/コピー開始1位/logit差0.3125を確認。既存T04のfull-assistant CEだけを1更新し、別候補6dacを保存→新base非学習reload112完全一致→既存教師12/診断10/新2の全24EOS・欠測0まで完了。書き出しが変わっても本人語りとNR03/04コピー等は残り、候補は製品不採用。途中の本人宛化成功という早計な説明は全文照合後に訂正。旧af44/config・原12教師は不変。次は別題材の話者/感情所有/否定を教える架空6草案を旧12と一つの有限full-assistant CE候補へまとめる。6草案はCPU準備/点検のみ・未学習、評価入力の教師転用0。単語単位の反復修正や6dac自動継承はしない。§21の実HTTPS→隔離Q3保存2件/GET4回/start2回、§22の記録ミス欠測、§23の既存12自由生成は各履歴を保持。実emotion submit/本番factory/Auth/API配置/RN配布/本人端末・API/DB process再起動は未確認。正式0/3/54.50％据置、新profile問い/補足・分析材料・Plus全蓄積検索も未完成。
+**現在の直接作業（10/31）：** 本人宛初回本文→通常API→Q3 SQL保存→RN非生成再読のsource候補を保持。最新は[§25](weekly_reviews/Cocolon_Weekly_Review_20261031.md#recipient18-training-20261031)。元af44から旧12＋Karen架空6教師のfull-assistant CEを各2回/実36更新、別候補d691の保存→fresh base非学習reload112完全一致→教師18/既使用診断12/新19・20の全32EOS・欠測0まで完了。T04本人宛化/T09時点/NR13内語は改善するが、NR03否定反転・NR07話者混在・R02事実補完等で製品不採用。旧af44/config・原12教師は不変。次は同方式の教材追加/周回増加だけのGPU反復を止め、別題材の事実保持/改変の対比ペアと最小学習修正案をCPU具体化する。対比/選好方式は未導入・効果未確認、評価入力の教師転用0、d691自動継承0。§21の実HTTPS/隔離Q3保存、§22欠測、§23既存12自由生成、§24一更新候補不採用は履歴保持。実emotion submit/本番factory/Auth/API配置/RN配布/本人端末・API/DB process再起動は未確認。正式0/3/54.50％据置、新profile問い/補足・分析材料・Plus全蓄積検索も未完成。
 
-前回の[第8回・10/24](weekly_reviews/Cocolon_Weekly_Review_20261024.md)は終了版と、その後の学習・接続実行履歴§12〜136として保持する。各承認の消費・候補の不採用を新会議でリセットしない。旧focus29は下段の10/30学習履歴を参照する。最新の通常返答学習は第9回§24のT04一更新（候補不採用）。§21の12教師24更新も保持する。
+前回の[第8回・10/24](weekly_reviews/Cocolon_Weekly_Review_20261024.md)は終了版と、その後の学習・接続実行履歴§12〜136として保持する。各承認の消費・候補の不採用を新会議でリセットしない。旧focus29は下段の10/30学習履歴を参照する。最新の通常返答学習は第9回§25の18教師36更新（候補d691不採用）。§21の12教師24更新・§24のT04一更新不採用も保持する。
 
 **最初のA4500学習実績（§24・履歴）：** [A4500で修正版4B追加学習を完走、重み回収、CMEE採用は未達（§24）](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-a4500-training-and-portable-weights)。[全実結果](observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/repaired_a4500_20261025/README.md)。Mashは4B採用とリリースまでRunpodでの追加学習を明示し、将来は手持ちPCへ移す可能性が高い。RTX A4500 20GB／Secure・EU-RO-1・Pod y0eb0w0qn6nks0を今回の最安の容量候補として確保。GPU$0.25/h・50GB container込み表示$0.26/h。CUDA/BF16正常、修正版2教師/1epoch/2update・adapter保存/非学習reload・前後16生成が20分23.76秒で完走し、20GBで現方式が動くことを確認した。peak allocated14.970/reserved17.588GiB。最終archive全24memberのhashと32tensor有限性/前後重み不変をPod外照合し永続保管済み。NLL0.251117→0.245189、raw6/8変化だが、CMEE意味/本文は前後0/2。初回の根拠座標は通るようになったが必須shape/自然文surface不正、訂正後rawは不変、proxy2件が2048tokenで打切りとなり品質未達。その時点の残件は必須shapeと自然文surfaceで、後続の現在作業は下段へ更新する。この§24のrunはGPUを停止せず終了した。旧3070は今回開始時既に停止表示、華恋のStop操作0。
 
-**GPUの現在状態（10/31最新終了確認）：** 同Pod10o4zhfktg9nc1/RTX PRO4000 Blackwell24GB、今回表示$0.58/h。§24は診断1forward窓9.141秒/300秒と、T04一更新/別保存reload/24生成窓54.835秒/600秒、両窓だけの按分約$0.01031。新6dac/configをPod外へ回収照合し製品不採用で保持、旧af44/config・教師不変。終了時対象processなし/GPU2MiB・0％、GPU Stop/restart/delete0で稼働保持。旧fit38の最新不変確認は§21時点で今回再照合とはしない。窓間・待機・準備・回収・記録・保持を含む総時間/請求額は不明。
+**GPUの現在状態（10/31最新終了確認）：** 同Pod10o4zhfktg9nc1/RTX PRO4000 Blackwell24GB、最後に確認した表示$0.58/h。§25は18教師36更新/別保存reload/32生成窓103.901秒/600秒、学習26.626秒/180秒。窓だけの按分約$0.01674。新d691/configをPod外へ回収照合し製品不採用で保持、旧af44/config・原12教師不変。終了時GPU processなし/2MiB・0％、GPU Stop/restart/delete0で稼働保持。旧fit38の最新不変確認は§21時点で今回再照合とはしない。準備・待機・回収・記録・保持を含む総時間/請求額は不明。
 
 **10/30の学習履歴（focus29一回完了／不採用閉鎖）：** Mash承認の保存ad8b隔離初期値・現10行各2回＋旧9各1回＝29更新を同Jupyterで一回実行し、29 training forward/optimizer・保存非学習再読・同19行NLL・新2件×5段の10生成/全EOSまで完了。全19教師/messages/encoded/元終端/mask/完全CE/指示/受信/合否は不変。新ed298856は112有限F32/3,833,856params、実runは全112変更を記録した。
 
@@ -85,7 +85,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | 通常感情入力 | 思考・解釈`memo`と、出来事・行動・結果`memo_action`を分けて保存。RNはどちらかの本文＋感情選択＋カテゴリ1件以上が送信条件。APIの旧空memo受理とは別 | 原入力保存成功とEmlis本文成功を分ける。保存・履歴・通知・集計への既存接続あり。通常経路の全端末・全失敗復旧は未確認 |
 | 感情・強さ | 喜び／悲しみ／怒り／不安／平穏と弱中強。自己理解は排他的な特別タグで、強さUIなし・wireはmedium | 自己理解を通常感情の分布・感情通知へ混ぜない。時刻・カテゴリ・所有者とともに扱う |
 | 入力draft・履歴 | 本人別local draftと期限、検索・秘匿・削除、保存済み入力への再入場のコードあり | 回答draft・全中断復帰まで一括保証しない。削除・所有者切替・期限切れ後の派生物利用を別条件として扱う |
-| Emlis初回 | 旧保存profileの二段を維持。新private natural_reply.v1は本人宛応答/通常入力/SQL保存/DTO/RNへsource接続。文数固定なし・分析NOT_GENERATED・旧意味/問い保持 | §21で通常返答24更新の別adapterを保存reloadし全10EOS、実4B HTTPS→隔離Q3保存2件・同一本文GET4回/start2回成立。全文貼返し/本人内語が残り一般品質未達、製品不採用。実emotion submit/本番Auth/API配置/新RN配布/本人端末は未確認。問い/補足・分析材料も未接続。PRODUCT_NOT_CLEAR/正式0/3/candidate_ready=false |
+| Emlis初回 | 旧保存profileの二段を維持。新private natural_reply.v1は本人宛応答/通常入力/SQL保存/DTO/RNへsource接続。文数固定なし・分析NOT_GENERATED・旧意味/問い保持 | §21の実4B HTTPS→隔離Q3保存2件・同一本文GET4回/start2回は保持。最新§25は旧12＋架空6の36更新/別保存reload/32EOS、本人宛化に改善はあるが否定反転等でd691製品不採用。実emotion submit/本番Auth/API配置/新RN配布/本人端末は未確認。問い/補足・分析材料も未接続。PRODUCT_NOT_CLEAR/正式0/3/candidate_ready=false |
 | Emlis任意問い・回答更新 | 問いは実装済み。Free／Plusはthread全体0..1、Premiumは本人続行により逐次0..3。skip・終了・訂正・撤回・再読あり。原入力と補足を別sourceとして束縛 | 問いを出さないENDだけで十分理解したとは判断しない。回答は新規感情入力件数や国家eventへ加算しない。一般入力・回答後本文・本人実機一往復の品質が残る |
 | Emlis有料拡張 | 既決：Freeは当回入力のみ、Plusは関連する過去本人入力も照合。旧Q3は365日内直近3件・同文一致中心、旧semantic 4B受口はFree相当/履歴あり拒否。新natural source候補は既存本人履歴3/6件の原文受渡し/Free除外/過去Safety除外を保持 | 新profileの3tier原文境界を合成provider/実SQLで確認したが、全蓄積からの関連選択、本人補足の混在、実4Bの意味ある履歴応答は未完成。過去の具体内容と今回との関係が実本文へ現れることが完成対象。Premium等の販売延期は未採用案 |
 | 配置と本人確認 | 共通APIは10/23にPiece限定overlay3577d7fdでLive、Emlis内容は土台10/10版5c8bd8eを継承。u353〜355は未配置 | Piece作業でservice identityのみ確認。Emlisの本人実機/品質は今回再検証なし。10/10の本人表示1件はMash評価で不合格。同じ保存本文の履歴再表示まで確認済みにしない |
@@ -176,8 +176,8 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 | 作業領域 | 次に解消すべき具体的未完了 |
 |---|---|
-| 本人宛応答の通常接続 | §21で通常返答12教師/24更新・保存reload・全10返答、実HTTPS→隔離Q3保存2件/同一本文GET4回・start2回を確認。全文貼返しと本人内語で全体品質未達。§23で既存教師にもコピーが残ると確認。§24は1forward診断→T04一更新→保存reload/24EOSまで完了したが本人語り等未解消・候補6dac不採用。次は架空6教師草案（CPU準備のみ）を旧12と一つの有限full-assistant CE候補へまとめる。同じrunの反復や更新数の自動追加はしない。実emotion submit/本番Auth/API適用/RN配布/本人端末、新profile問い/補足・分析材料・Plus全蓄積検索は未完。第9回§21/API自然応答開発資料へ |
-| 学習済みAI・CMEE接続 | 最新§24のT04一更新候補6dacは保存reload/24生成まで確認して不採用。§21では、固定baseの別LoRAへ通常返答12教師/24更新、全112tensor保存・新base非学習reload完全一致・Pod外回収照合。教師NLL全12低下でも一般品質未達/製品不採用。旧CMEE focus29は第8回§136の不採用閉鎖履歴で、意味/本人本文0/2を維持。旧19教材/凍結評価/fit38不変。新旧重みを保持し、追加観測会は依頼しない。 |
+| 本人宛応答の通常接続 | §21の実HTTPS→隔離Q3保存/再読を保持。最新§25は元af44から旧12＋架空6の36更新/保存reload/32EOS。T04本人宛化等は改善するが、NR03否定反転・話者混在・事実補完等でd691不採用。次は別題材の事実保持/改変の対比ペアと最小学習修正案をCPU具体化し、同方式の周回追加を自動実行しない。対比方式の効果未確認・未導入、評価転用0。実emotion submit/本番Auth/API適用/RN配布/本人端末、新profile問い/補足・分析材料・Plus全蓄積検索は未完。第9回§25/API自然応答開発資料へ |
+| 学習済みAI・CMEE接続 | 最新§25の18教師36更新候補d691は112tensor保存/fresh base非学習reload一致・Pod外有限値照合/全32生成を確認して不採用。旧af44/config・原12教師不変、6草案は架空実験用でMash実演へ昇格しない。§24一更新6dacも不採用保持。旧CMEE focus29は第8回§136の不採用閉鎖履歴で意味/本人本文0/2を維持。旧19教材/凍結評価/fit38の先行不変確認を保持し、新旧重みを保全。追加観測会は依頼しない。 |
 | 10/24までの費用・4B選定履歴（当時の構成） | Flex24GBの旧月78,980生成・未測定の速度/起動仮定による運用費95,094円・赤字67,833円の試算は当時の構成の記録で、最新構成の原価ではない。[全仮定・再計算](observation_learning/model_selection/2026-10-24-production-economics/README.md)。旧4B実診断では24GBでLoRA保存・reload・16生成・回収を確認したが、FITは前後0/2。CPU指示修復API1dabc4fは54対象/pack11・合成2/2で、修正版は後続10/25にA4500 20GBで完走・回収済み、最新結果は§24。旧学習peak allocated14.954GiBを本番推論の必要VRAMへ流用しない。4bit/M4を第一候補とした§23は当時の華恋案で、現在の移行先はWindows／Mac未選定。公開API単価を独自育成版の原価へ流用しない。 |
 | Emlis | 一般入力と回答後の意味・自然な本文・有料差、本人実機の保存再読まで。u353〜355のコードと配置差を保持 |
 | Analysis | 最新内容修正版の配置差、通常本文生成・同一保存再読・monthly履歴/比較の本人確認、複数ANSWER採用、一般理解、有料差、IF／Savedの未実装。6501時点の不足案内表示は本人確認済みとして保持 |
@@ -223,6 +223,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 
 10/25 全体選定差分：Mashの全体判断指示を受け、全機能原本・全体設計/全file地図の既確認導線・最新weekly・実4B raw/教師・関連会話検索と公式MLX/量子化資料を照合。会話検索を全セッション全文読了とは扱わない。選定責任は華恋、旧4BのMash確定を復活させたという記録にはしない。文書4fileのみ、商品source/API/DB/Render/Supabase/教材/重み不変、STRUCTURE_MAP_DELTA_NONE、ADMINISTRATIVE_ONLY、product_credit=0。正式0/3・54.50％据置。
+
 
 
 
