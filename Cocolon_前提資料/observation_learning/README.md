@@ -1,6 +1,6 @@
 # Mashの観測技術を継承するための記録
 
-**最新の直接作業（10/31）：** [第9回§28](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#d691-preference28-actual-20261031)／[自然返答の実行記録](training/2026-10-31-natural-reply-preference/README.md)。d691を製品不採用のまま隔離初期値/固定参照に明示選択し、28更新・保存freshreload・全30EOSを完了。本人宛化維持と話者混在改善を確認したが、留保/不明/自然さが残り527d不採用。旧4重み/config不変・結果保全済み。次は別題材の留保/既知不明を扱う最小修正案をCPUで固定し、同方式追加周回はしない。新23/24は使用済み、評価原文の教師転用0。実emotion submit/本番Auth/本人端末/新HTTP-SQLは未確認。商品0・正式0/3・54.50％、STRUCTURE_MAP_DELTA_NONE。以下の10/30段落は旧CMEE方式の履歴。
+**最新の直接作業（10/31）：** [第9回§29](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#hedge2-cpu-20261031)／[自然返答実行記録](training/2026-10-31-natural-reply-preference/README.md)。留保/既知不明の架空2pairを固定し、実tokenizer/mask/CPU勾配検証を4.809秒で完了。4B読込/学習/モデル生成0、旧5重み/config不変。旧30messages/prompt IDsを保持し、新NR25/26はモデル未使用。次は527dを製品不採用のまま隔離初期値/固定参照に明示選択する4更新/34本文の一回案。旧replay0・旧28更新の追加周回ではなく、GPU runner接続/実行は未実施。実emotion submit/Auth/端末/新HTTP-SQLは未確認。商品0・正式0/3・54.50％、STRUCTURE_MAP_DELTA_NONE。追加観測会不要。以下の10/30段落は旧CMEE方式の履歴。
 
 **旧CMEE試行のGPU読取確認（2026-10-30 JST・履歴）：** 同Jupyter/Pod vgkm402msgroiu/RTX A5000、focus29終了・回収時1MiB/0％で稼働保持。298frozenと保存ad8b/config不変。Stop/restart/delete/Runpod管理画面/API0。
 

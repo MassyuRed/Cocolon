@@ -1,4 +1,4 @@
-> **最新：§28のd691隔離初期値/固定参照・28更新/30EOSを完了。本人宛化を維持し話者混在を改善したが、留保/不明/自然さのずれが残り527d不採用。** [全実結果と次案](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#d691-preference28-actual-20261031)。次は別題材の留保と既知/不明を扱う最小修正案をCPUで固定し、同方式の追加周回は行わない。以下のaf44案/§27は履歴。消費済み試行を再開しない。
+> **最新：§29で留保/既知不明の2pairを作成し、実tokenizer/CPU勾配検証を完了。実4Bは未実行。** [CPU結果と4更新案](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#hedge2-cpu-20261031)。次は製品不採用527dを隔離初期値/参照とし、新2pair各2の4更新・旧30+pair2+新2の34本文を一回確認する案。旧28更新の追加周回ではない。GPU runner接続/実行は次unit。以下の§27/28は履歴として保持する。
 
 # 本人宛のまま事実を保つ対比修正候補
 
@@ -119,3 +119,36 @@ Mashの前回からの続行指示と今回の再開指示に従い、§27の次
 次は同じ28更新／同方式周回を増やさず、別題材で留保と既知／不明を保持する最小修正案をCPUで固定する。今回の評価原文や誤答を正解教師にせず、新loss family／補助基盤を増やさない。新しい実4B試行は別unitで判断し、今回の追加GPU0・追加観測会不要。初期値と固定参照を同時変更したため、今回を初期値だけの単独因果比較と呼ばない。
 
 primary BLOCKER_NARROWED。本人宛化の維持・話者混在改善を実本文で確認し、残件を留保・不明・自然さへ絞った。PRODUCT_NOT_CLEAR／正式0/3／54.50％維持。製品source／owner／通常loss／公開DTO／DB／RN／料金／quota／Render／Supabase／配置／main／他中核変更0、STRUCTURE_MAP_DELTA_NONE（隔離実験のみ）。実emotion submit／本番Auth／RN配布／本人端末／新HTTP-SQL保存は未実行。
+
+<a id="hedge2-cpu-20261031"></a>
+## 29. 留保・既知/不明の2組をCPUで検証 — 実4Bの4更新案を固定、未実行
+
+Mashの続行指示に従い§28の次作業を完了。開始PR30 `ff75a505`／API PR3 `eb5f0a2b`／PR37 `99f925ec`をfresh確認。全体現在地・最新weekly・観測学習の目的・原source/実結果と作業規則を照合し、前回監査から全体設計/01A〜C全file地図/current maps/作業規則等36pathの全blob同一を確認した。root単独で作成・CPU実行・保存・反映、agentはread-only監査。別モデルPro審査・human Product Readとは分ける。
+
+### 29.1 新2pairと未使用評価の固定
+
+H01は本人の主観的印象を相手の確定行為へ変えない対比、H02は説明未受領の未知を、聞いた説明が不鮮明だったことへ変えない対比。Karen作成の架空草案で、Mash実演/承認済み正解ではない。同じ本人宛の文体と共通文を使い、局所的な意味差を持たせた。旧評価原文やモデル誤答の正解教師転用0。H02は説明受領を明示的に補う誤答であり、T10の微妙な不明の弱化全般を覆ったとはしない。
+
+旧30messagesを保持し、新pair prompt2＋別題材のモデル未使用NR25/26を加えた34評価案を固定。NR23/24は既使用を明記。旧12完成教師＋8pair/凍結評価は変更しない。新2pair各2回の固定4step順、既存lossとsource/hashをCPU実行前に確定した。
+
+### 29.2 実tokenizer・CPU計算で成立した範囲
+
+同Jupyterで一回、実CPU4.808724秒／外側5.577660秒・exit0、120秒上限内。CUDA_VISIBLE_DEVICES空・前後CUDA未初期化、4B重み読込0／GPU更新0／モデル生成0。既存torch2.8.0+cu128／transformers5.19.0／固定tokenizer851bf6eを使用し、新依存0。重みはSHA確認だけでdeserializeしていない。
+
+新2pair両側はprompt367/372token、chosen24/24、rejected23/27token。prefix・全prompt mask・assistant正文＋既存単一im_end改行・終端・context8192/生成枠2048を実tokenizerで照合した。全34promptの長さと、旧30の全messages・prompt IDs完全一致も確認。近い長さを、長さバイアス解消の証明にしない。
+
+新pairの実token長を用いた17語の玩具CPU logitsで、既存DPO+chosenCEの直接勾配と分割係数の最大差0、固定参照grad未接続、余剰最終logit勾配0を確認した。assistant_sumのfloat32計算に対する絶対差1e-6は実行前固定。これは4B forward/学習/返答品質の証拠ではない。
+
+旧af44/6dac/d691/55e9/527dの5重みと各configは前後SHA一致、終了時GPU2MiB/0％。Stop/restart/delete0で稼働保持。GPU処理0でも保持課金は続き、準備/回収/記録を含む総額は不明。
+
+### 29.3 次の実4B一回案と保全
+
+製品不採用527dを、本人宛化・話者混在改善を保持した隔離初期値/固定参照として明示選択する案。新H01/H02各2回＝**4optimizer更新だけ、旧replay0**。旧28更新や旧8pair/12教師の周回追加ではない。少数更新・replayなしは忘却防止を保証しないため、旧30の意味/主体/否定/時点/話者も全文比較する。
+
+次unitの実装順は、固定base/pins/元SYSTEM/raw JSON/527d・config hash確認→新参照4forward→fresh trainable load112一致→固定4step/16training forward→後測定4forward→別adapter保存→元model/optimizer解放→fresh base非学習reload112一致→旧30＋pair2＋新2の34返答を各1回。既存beta.1/chosenCE.1/lr1e-5/clip1/weight_decay0/seed42、分割score abs1e-4/rtol0を保持。GPU有限runnerへの接続・実行は今回未実施。CPU成功や参照値改善で候補を製品採用しない。
+
+実行案は学習180秒/全体600秒/各生成23秒・context8192/max2048/非thinking/greedy/各call seed42、追加/再試行0。34×23秒の最悪時間は総枠を超えるため600秒を優先し、未完は不採用。前回の短い生成実測から完走を保証しない。最後の表示$0.58/hで600秒窓按分上限約$0.09667、準備/回収/保持等別。新2未使用評価はNR25/26だけで、一般品質の合格率へ換算しない。
+
+全2pair良否/34評価案/4順/proposal/実encoded/CPU source・log/全結果/旧5重み不変/判断/次案を[cocolon-hedge2-cpu-20261031.zip](https://chatgpt.com/library?file_id=libfile_708428edc5b48191a6bbf065a4ad5d42&account_id=personal) version0へ保存。4member/26,589bytes/SHA256 `7a9c5976392eff98f4634f485297e310fbefe720fa286bbf8bbb0d4a533690fb`。同梱未改変Pod原ZIPは14member/24,507bytes/SHA `0b364647d635654238b9982b8565dcc1b68696cee65ce87f1f4d2af83dced4d2`。Pod外でもCRC/全input bytes/hash/旧30messages・prompt IDsを再照合。private個別本文・資格情報を公開GitHubへ転載しない。
+
+primary TECHNICAL_CREDIT（2pair/実tokenizer/mask/CPU勾配検証のみ）。PRODUCT_NOT_CLEAR／正式0/3／54.50％、527d不採用を維持。実4B修正/自由生成/保存reloadは未実行。製品source/owner/通常loss/公開DTO/DB/RN/料金/quota/Render/Supabase/配置/main/他中核変更0、STRUCTURE_MAP_DELTA_NONE。実emotion submit/Auth/本人端末/新HTTP-SQLは未確認。追加観測会は現時点不要。
