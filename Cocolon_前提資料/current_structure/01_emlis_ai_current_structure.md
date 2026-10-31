@@ -1934,7 +1934,7 @@ Mash承認c97d6794に基づき、既存4ownerのsource-derived admission/adapter
 | API `ai/tools/serve_emlis_natural_reply.py` | 固定local 4B/baseとfit38の本人限定・非学習probe。後続でloader/直接生成を確認、実GPU HTTPは未確認 |
 | RN `InputScreen` / `useEmlisThread` / `EmlisThreadModal` / `AnalysisHistoryScreen` | pending明示時だけ未作成待機、foreground/同ownerのGET限定確認、保存本文無加工表示、返事の案内 |
 
-新profileの任意問い/補足・分析材料生成・Plus全蓄積関連検索は未接続。既存履歴3/6原文の受渡し・Free除外・過去Safety除外、pause後非再取得は合成provider/実SQLで確認しただけで、有料体験の完成ではない。APIの主86件とlocal HTTP/読込hard期限の2件成功、RN関連8件成功/full34中29成功・既存同5失敗。詳細・制限・提供口条件は[API実装・検証記録](https://github.com/MassyuRed/mashos-api/blob/94fcf58a8ecea295284f43cd35a7931268f2cf7b/ai/docs/EMLIS_NATURAL_REPLY_DEVELOPMENT.md)、最新weekly§16。STRUCTURE_MAP_DELTA_PRESENT。
+新profileの任意問い/補足・分析材料生成・Plus全蓄積関連検索は未接続。既存履歴3/6原文の受渡し・Free除外・過去Safety除外、pause後非再取得は合成provider/実SQLで確認しただけで、有料体験の完成ではない。APIの主86件とlocal HTTP/読込hard期限の2件成功、RN関連8件成功/full34中29成功・既存同5失敗。詳細・制限・提供口条件は[API実装・検証記録](https://github.com/MassyuRed/mashos-api/blob/804b9e1f93fa0763365f40eab804039327ad9aa0/ai/docs/EMLIS_NATURAL_REPLY_DEVELOPMENT.md)、最新weekly§16。STRUCTURE_MAP_DELTA_PRESENT。
 
 
 ### 2026-10-31 後続実測（第9回§17）
@@ -1955,3 +1955,8 @@ Mash承認c97d6794に基づき、既存4ownerのsource-derived admission/adapter
 ### 2026-10-31 後続4（第9回§20）
 
 会話例D10/thinkingE1/検討上限と限定parser修復F2の新13生成。未使用2件で実HTTPS/Q3保存と同一本文GET4回/start2回が成立したが、一般品質/推論の通常時間は未達、候補の製品採用0。F初回は元rawの終了記号だけ再解析し再生成0、元deadline/counter保持、次の未完了で停止。通常返答教材12候補/モデル未使用評価2をCPU準備しただけで学習0。製品source/owner/DTO/DB/RN/期限/公開scope差分なし、STRUCTURE_MAP_DELTA_NONE。端末・本番一巡は残件。最新状態はweekly§20/API開発資料へ戻る。
+
+
+### 2026-10-31 後続5（第9回§21）
+
+通常返答12教師を固定baseの別LoRAへ24更新。112tensor保存・新base非学習reload完全一致・Pod外有限性/SHA照合、全10EOS（約0.548〜2.074秒）を確認。教師NLL全12低下と部分改善はあるが、原文全文再掲/本人内語が残り全体品質未達、製品採用0。開始時未使用だったNR13/14を実HTTPS→既存reply入口→隔離Q3 SQL保存2件、同process別app/service GET4回/start2回で同一本文/event・追加生成なし。入力row/Auth/factoryはfixtureで本番・通常emotion submit・本人端末・process再起動は未確認。NR13/14は今回で使用済み。新adapterは別directory/非公開原本へ保存、旧fit38不変。商品責務/製品source/owner/DTO/DB/RN/期限/公開scope差分なし、STRUCTURE_MAP_DELTA_NONE。全文貼返し/本人宛語りの修復と通常提供・端末一巡は残件。最新状態は[weekly§21](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#recipient-fit24-20261031)/API開発資料へ戻る。
