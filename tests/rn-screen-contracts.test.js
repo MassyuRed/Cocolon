@@ -1682,7 +1682,7 @@ test('Tutorial screens keep the current guided flow count and generated fixture 
     'TUTORIAL_FOLLOWED_USER_PIECE',
     'TUTORIAL_WATASHI_MAP',
     'TUTORIAL_WATASHI_MAP_PREVIEW',
-    'Emlisの観測',
+    'Emlisからの返答',
     'こころ天気',
     'わたしマップ',
     'ピース',

@@ -1433,3 +1433,35 @@ Mashの「議事録の8タスクと配布・課金・運用・申請準備を進
 API実装：`6198ca2d8407eff606fc353891a708733c48abf2`。この記録時点でRenderのLiveは旧`3577d7fd`、TestFlight最新確認は旧6501。GitHub browserはsigned-outでworkflow dispatch未実行。connectorはsource更新には使えるがdispatch操作を持たない。配置と配布の認証操作を準備済候補に対してまとめる。
 
 本人限定4Bの過去成功通信はlocalhost TLSであり、Renderから到達するHTTPS提供口は未完成。Pod10o4zhfktg9nc1の実Connect入口を認証後に取得する必要がある。Jupyter tokenをprovider keyへ転用しない。追加月1万円内の本番提供方式も未成立。補足/訂正の材料化・Plus関連履歴の全権利内検索・Analysis累積/月次snapshotを未完として継続し、8項目全完了や公開可能状態を宣言しない。11/2〜11/6はサーバー側の品質枠、各候補のRNビルド/実機待ちは要求しない。
+
+<a id="release-source-db-20261101"></a>
+## 33. 11/1 — 関連資料・補足を実装、DB反映。配布・モデル接続は認証待ち
+
+§32の後続でAPI `7bbb4661416053198ec845d620d97987d62fe70c` を保存した。関連履歴の新RPC/migration、natural材料、Analysis複数回答、候補SHA指定のsourceを実装。新しいモデル学習・実4B生成0。
+
+| 議事録の8タスク | 実際に進めた範囲 | 残件 |
+|---|---|---|
+| 1 本人資料/返答/分析の分離 | 原入力・最大3本人回答・本人frame訂正を別欄で材料化。AIの問いは回答文脈、AI返答は本人事実に使わない。Analysis保存sourceへ全回答を受け渡す | 新しい観測材料生成そのものと通常端末での全導線 |
+| 2 通常実モデル接続/保存再読 | 既存通常API/storeの保存/非再生成GETを実SQL＋合成providerで検証。providerに任意の選択adapter weights/config SHA対を指定しロード前後検査する変更 | 実Runpod HTTPS提供口、Render更新、新RN配布、実Auth→4B→実DB→実機保存再読。既存受口は18要求/1800秒のprobeで常時提供ではない |
+| 3 Plus関連履歴 | 全閲覧権利内から文字n-gram関連選択→最大Plus3/Premium6。Free除外。保存後は同じguard IDを再読し、無関係記録追加で再検索しない。Supabaseへ適用成功 | 実モデルの関係理解/返答品質・実機。Plus365日権利を変更したとはしない |
+| 4 Piece一巡 | §32のprivate保存/owner履歴/出力許可とOS直前再確認を既存compositionへ接続 | 新配布・実本人保存/再読・実Photos/Share、Android renderer、backend receipt。iOS文字計測CIの19失敗も未解消 |
+| 5 Analysis累積保存 | 複数ANSWER全体拒否を除き最大3を保持。原入力・先行補足・置換文の矛盾照合、二重訂正/補足宛未解決訂正を拒否 | 全量累積構造/旧構造保持/当時月次snapshot/保存寿命/月選択/現在比較。既存100件上限や期間版を累積完成とは扱わない |
+| 6 account切替 | §32の購読owner世代修正を保存。natural本文も権利/source失効時にcurrentとtimeline双方で抑止。既存Q3保存版は新natural設定へ付け替えない | 新RNで実切替/遅延応答確認 |
+| 7 finish失敗 | §32の失敗伝播、同一購入の実結果共有、同期再入前登録を保存 | 実ストア完了/失敗/復元 |
+| 8 visibility取得失敗 | §32のHTTP失敗時502を保存 | 新API配置と共有入口での実確認 |
+
+### SQL適用と検証
+
+変更前の実 `emlis_thread_commit` が既存migration本文7580文字と完全一致すること、既存table/columnを確認後、`emlis_natural_related_context` migrationを実Supabaseへ適用（success）。新RPC存在、service_role実行可、anon/authenticated実行不可、natural保存guard存在を実metadata確認。ユーザーデータへprobe保存/生成はしていない。旧Q3 context/非naturalの年数・feedback guardは維持する。
+
+関連検索は原入力/本人回答/本人訂正だけを対象とし、AI生成本文を検索語にしない。編集で旧threadと原文が不一致の記録は除外する。過去の本人補足・訂正にも既存Safetyを適用し、対象外なら記録全体をモデル材料から除く。保存時には原文MD5/revision/tier/owner/時点/CAS/feedback versionを再確認。保存本文は権限変更・参照元変更/削除後、履歴timelineからも抑止する。
+
+局所検証：PGlite0.5.8の実SQL＋Python store/service＋合成providerでnatural/Q3/提供tool **63 PASS / FAIL0 / SKIP0**。関連検索の直近枠外・Premium4000日前・Plus権利、cohort固定、source/ANSWER revision/tier変更、旧Q3再読、複数回答・訂正・Safety・service専用権限・候補hash/HTTP上限を含む。Analysisの新複数回答＋既存保存/保存再読＋補足/訂正verticalは **177 PASS / FAIL0 / SKIP0**、無関係vertical425件は未実行。§32のRN151/API284へ混ぜて一般品質合格率を作らない。guide文言変更に合わせ既存tutorial契約のラベルも更新し、screen契約36 PASS。いずれも実4B/本人端末の代用ではない。
+
+### 稼働/配布の現在地とPC操作
+
+公開 `/healthz` 200/ok、`/subscription/bootstrap` 200でPlus月額680円/Premium月額1480円、`/app/bootstrap` 200を直接確認。最初のcold応答はtimeoutもあり、待ち時間の課題を消さない。稼働Piece export flagはfalse。実ストアの請求額/商品状態は未確認。
+
+GitHub RN5f91caceのPiece自動CIはJS契約・iOS canvas・Pods・Android source/exportの5jobが成功。一方iOS metrics job124689186427（run41252646226）はnewV4を含む19失敗があり未解消。内訳は既存129/129、V9 46/46、V4 1/20で、別のbitmap検査44/44は成功。現ios.v1 bitmapは失敗した旧containment V4 inspectorを通らない。原因断定/期待値変更は行わず、19失敗を保持する。native成功群を全体合格へ変換しない。API7bbb4661のAnalysis observed content CIはこの追記時点で実行中。
+
+TestFlightの新workflow起動は未実行。GitHub source更新connectorにはdispatch機能がなく、browserで安全な認証を開始。安全入力でGoogleが選択されsubmittedとなった後、accounts.google.comの観察が**自動承認審査**により拒否された。理由は「GitHub sign-in許可だけではGoogle origin利用を許可しない」という判定で、Mashの手動拒否ではない。回避・認証値のchat入力要求は行わず、GitHubのGoogle認証継続を明示許可してもらう必要がある。認証後は修正済候補のiOS build、Renderの同一API候補/設定、Runpodの実Connect HTTPSをまとめて進める。必要な端末確認は初回と最終、11/2〜11/6の品質反復へ毎回のRN build/実機待ちを追加しない。

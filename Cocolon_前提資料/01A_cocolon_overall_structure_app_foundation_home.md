@@ -1,3 +1,5 @@
+> 2026-11-01後続差分：関連資料・本人補足/訂正・Analysis複数補足・候補SHA指定と実DB適用。配置/配布/実機・累積月次は未完。末尾[差分](#related-material-20261101)とweekly§33。
+
 > 2026-11-01最新差分：共通3欠陥・Piece export許可/再照合・iOS URL復帰・Android AAB手順。source実装/局所検証まで、配置・実機は未確認。末尾の[差分](#release-structure-20261101)と第9回weekly§32を参照。
 
 > 2026-10-19最新差分：u355。安堵・寂しさと併記された元の経験に未明示の「同時」を足す表現を、原文の接続詞を保つ既存経験文へ修復。意味・選択・Reception不変。対象技術検証321件、保存DTO18件再表示。PRODUCT_NOT_CLEAR／正式Product Read0/3は維持。詳細は[u355監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u355_MixedReceivedTimeNeutral_20261019.md)。
@@ -5882,3 +5884,13 @@ execution_20261030の元55memberはbinary追加重み1をLibraryの4member完全
 | API `ai/docs/RELEASE_MECHANISMS_20261101.md`（新規） | source実装/検証/配置・実機の未完境界 |
 
 三coreの意味型・学習重み・料金/権利/課金schema変更なし。新API配置・新RNビルド・実Auth/DB/deviceは未実行。STRUCTURE_MAP_DELTA_PRESENT。
+
+
+<a id="related-material-20261101"></a>
+## 2026-11-01 後続 — 関連資料・補足/訂正・候補読込
+
+API7bbb4661の製品実装、744336c0の実DB適用記録。`emlis_thread_store.py`/`emlis_thread_service.py`/`natural_reply.py` は新private `emlis_thread_related_context` で全閲覧権利内の関連候補を選択し、保存後は同guard IDを再読。旧Q3保存profile/RPCを維持し、失効natural本文はtimelineでも抑止。新規migration `supabase/migrations/20261101010000_emlis_natural_related_context.sql` をSupabaseへ適用済み。service_role専用、anon/authenticated実行不可。
+
+`astor_material_snapshots.py` と `cores/analysis/source_adapter.py` は既存Q3最大3回答を保持、`cores/analysis/intent_compiler.py` は先行補足/置換文との矛盾、二重訂正を確認。新規 `ai/tests/test_analysis_multiple_answers.py` と拡張natural/Q3/tool検査。`ai/tools/serve_emlis_natural_reply.py` はweights/config SHA対指定で選択候補をロード前後確認、旧fit38既定と非学習/112tensor/時間・要求上限を維持。サーバー側更新にRN buildを要求しない。
+
+Emlis/Analysis current mapsとweekly§33を同期。実モデル/配置/配布/端末は未完、累積・月次当時snapshotは未完成。今回のRN製品sourceは5f91caceのまま、後続のtutorial契約ラベル同期と文書更新。STRUCTURE_MAP_DELTA_PRESENT。

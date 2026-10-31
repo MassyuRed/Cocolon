@@ -1,3 +1,5 @@
+> 2026-11-01最新：natural専用関連履歴・本人補足/訂正材料・失効本文のDTO全体抑止・adapter SHA対指定。API7bbb4661、実DB migration適用済み。モデル配置/新配布/本人端末は未完。末尾とweekly§33。
+
 > 10/26最新差分：4題材6教材のprivate版3・CPU完了。末尾の同日節と全機能00/weekly§56を参照。旧学習実績と今回の合成教師検証を区別する。
 
 > 2026-10-19最新差分：u355。安堵・寂しさと併記された元の経験に未明示の「同時」を足す表現を、原文の接続詞を保つ既存経験文へ修復。意味・選択・Reception不変。対象技術検証321件、保存DTO18件再表示。PRODUCT_NOT_CLEAR／正式Product Read0/3は維持。詳細は[u355監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u355_MixedReceivedTimeNeutral_20261019.md)。
@@ -1960,3 +1962,14 @@ Mash承認c97d6794に基づき、既存4ownerのsource-derived admission/adapter
 ### 2026-10-31 後続5（第9回§21）
 
 通常返答12教師を固定baseの別LoRAへ24更新。112tensor保存・新base非学習reload完全一致・Pod外有限性/SHA照合、全10EOS（約0.548〜2.074秒）を確認。教師NLL全12低下と部分改善はあるが、原文全文再掲/本人内語が残り全体品質未達、製品採用0。開始時未使用だったNR13/14を実HTTPS→既存reply入口→隔離Q3 SQL保存2件、同process別app/service GET4回/start2回で同一本文/event・追加生成なし。入力row/Auth/factoryはfixtureで本番・通常emotion submit・本人端末・process再起動は未確認。NR13/14は今回で使用済み。新adapterは別directory/非公開原本へ保存、旧fit38不変。商品責務/製品source/owner/DTO/DB/RN/期限/公開scope差分なし、STRUCTURE_MAP_DELTA_NONE。全文貼返し/本人宛語りの修復と通常提供・端末一巡は残件。最新状態は[weekly§21](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#recipient-fit24-20261031)/API開発資料へ戻る。
+
+
+## 2026-11-01 — 関連する本人資料と保存再読
+
+API `emlis_thread_store.py`/`emlis_thread_service.py` と新private RPC `emlis_thread_related_context` が、naturalだけで全閲覧権利内の先行原入力・本人回答・本人訂正を検索し、最大Plus3/Premium6件へ絞る。旧Q3 contextと保存profileは維持。Plus365日の既存閲覧権利は変えず、Premiumの探索3650日制限を外す。source編集で旧threadが失効した記録は古い回答を付けずに候補から外す。
+
+保存guardによる同じcohortの再読、保存時のowner/原文MD5/revision/tier/CAS、選択元feedback versionを照合。権利変更・source変更/削除後のnatural本文はcurrentとtimeline双方で抑止する。`natural_reply.py` は原入力/順番付き複数回答/本人frame訂正を別欄にし、AIの問いを回答文脈と明示。AI返答本文を本人事実へ使わない。本人補足/訂正もSafety確認し、過去が対象外なら記録全体を除く。
+
+新規 `supabase/migrations/20261101010000_emlis_natural_related_context.sql` は実DB適用成功、service_role専用/anon・authenticated実行不可をmetadata確認。新規 `ai/tests/test_analysis_multiple_answers.py` と拡張natural/Q3/提供tool検査を含め、natural系63件・Analysis関係177件が局所PASS。実providerは合成で実4B品質ではない。
+
+`ai/tools/serve_emlis_natural_reply.py` はadapterのweights/config SHA対を明示指定可能。ロード前後hash/112tensor/値一致/非学習/時間・要求上限は保持。サーバー側の候補/指示更新にRN再ビルドを要求しない。新候補採用、追加学習、実4B生成、Render更新、端末配布は今回未実行。実到達HTTPS/初回接続・同本文再読は未完。STRUCTURE_MAP_DELTA_PRESENT。

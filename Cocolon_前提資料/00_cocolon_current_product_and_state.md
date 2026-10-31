@@ -1,5 +1,7 @@
 # Cocolon 最新情報 — 全機能・全状態
 
+**11/1後続：[第9回§33](weekly_reviews/Cocolon_Weekly_Review_20261031.md#release-source-db-20261101)。** API7bbb4661で関連履歴検索・原入力/複数本人回答/訂正の別材料化・失効natural本文のtimeline抑止・Analysis最大3補足と矛盾照合・adapter SHA対指定を実装。Supabase migration適用/権限確認済み。natural系63件、Analysis関係177件、RN screen契約36件が局所PASS。公開APIの料金680/1480円も直接確認。新API配置/実モデルHTTPS/新TestFlight/実機は未完。iOS metrics CI19失敗、累積/月次当時snapshot、Android実配布、実ストア料金、本番原価・申請Consoleも未完。GitHubのGoogle認証継続が自動承認審査で拒否されており、配布操作には明示許可が必要。実装/DB反映をリリース完了へ換算しない。
+
 **11/1・リリース機構の実装着手：[第9回§32](weekly_reviews/Cocolon_Weekly_Review_20261031.md#release-implementation-20261101)。** account切替の旧購読応答遮断、購入finish二重失敗の伝播/同一購入の実結果共有、visibility取得HTTP失敗時の公開抑止を修正。Piece画像出力の独立サーバー許可確認とRNの準備時/OS直前の保存artifact照合、iOS cocolon URL復帰、Android署名AAB生成手順・versionCode指定、ガイド説明同期を追加。RN151件／API284件の局所検証はPASS。API実装は `6198ca2d8407eff606fc353891a708733c48abf2`。新API配置・新RNビルド・実機初回接続/保存再読・実ストア料金・本番原価・累積マップ/Plus全検索は未完で、公開可能状態や8タスク全完了とは数えない。以下の旧未達記述はsource修正と稼働/端末確認を区別して読む。
 
 更新日：2026-11-01 JST（最新差分：Mashの説明に基づき工程を訂正。11/1はリリース機構・配布・運用・初回接続、11/2〜11/6は華恋がGPU/サーバー側で品質改善。実機は初回と最終確認に絞り、品質試行ごとのRNビルドは行わない。品質以外を先に整え、公開日まで育てた品質を反映できる状態を目指す）。全Cocolon作業の必読原本。

@@ -1,3 +1,5 @@
+> 2026-11-01最新：保存済みQ3の最大3本人回答を資料化し、先行補足/訂正間の矛盾を照合。累積更新・月次当時snapshotの完成ではない。末尾とweekly§33。
+
 ---
 doc_id: cocolon_analysis_current_structure
 title: "分析構造 — Current Structure"
@@ -897,3 +899,12 @@ Mashがbe37f40dの具体案を承認し、API 666b28517ef04aba170ebffe3c86980fea
 文章は原文3record section＋範囲を明記したunknown1section。図は同一graphから作る新private structured payloadで、完成五段階ルート／RN描画の合格ではない。意味／graph／完成のcaller-managed file再読、実作者例外後の同snapshot再開、完成済みの再取得・再採用・compiler・作者禁止再読を確認。対象9file905成功、12058 subtestsは加算しない。全suiteや本人実機の成功へ換算しない。
 
 STRUCTURE_MAP_DELTA_PRESENT、新private型6／例外2、実fileは01A、actual仕様はdesign04#cmee-p5-implemented、型05#cmee-p5-actual-types、実結果trial§13／analysis_semantic_snapshot_results.json。通常保存・一般日本語・複数回答・比較・IF／Saved・モデルは別残件。
+
+
+## 2026-11-01 — 複数の本人補足を落とさず扱う
+
+既存 `astor_material_snapshots.py` の複数ANSWER一律拒否を除き、`cores/analysis/source_adapter.py` はQ3の最大3補足を既存owner/parent/version/ID/round検査のまま受け取る。`intent_compiler.py` は同記録の先行する有効な原入力・補足・置換文を全て照合。普通補足→訂正、訂正→普通補足、別spanの二つの置換でも矛盾を成功へ変えず、同じ旧spanへの二重訂正は未解決として拒否。補足自体を訂正する未対応の参照先も黙って元入力へ付け替えない。
+
+新規 `ai/tests/test_analysis_multiple_answers.py`、既存saved period/storage、verticalの補足/訂正関連で177 PASS / FAIL0 / SKIP0。無関係vertical425件は今回未実行。実Q3の3回答から保存Analysis memberへ全回答を取り込む検査もnatural系63件内で確認。新しい学習/観測モデル生成は0。
+
+通常Analysisの既存原入力→Engine→保存/再読は品質学習待ちにしない。一方、現sourceには100件上限、monthlyが月初をendとする期間版、後日ANSWERの混入、追加/訂正でも当時版を削除するtrigger、現在guard必須の再読、期間比較が重複record/不等長を拒否する制限がある。累積版/当時月次snapshot/自動保存時点/全量処理/現在との比較は未完。最新100切捨て・期間版を累積版と呼ぶ変更はしていない。旧snapshotを保持しつつ削除時purgeする保存寿命の拡張が残る。STRUCTURE_MAP_DELTA_PRESENT。
