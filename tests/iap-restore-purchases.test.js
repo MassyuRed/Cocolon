@@ -6,6 +6,68 @@ const test = require('node:test');
 const ROOT = path.resolve(__dirname, '..');
 const SKU = Object.freeze({ plus: 'test.cocolon.plus', premium: 'test.cocolon.premium' });
 
+const paidSession = { user: { id: 'synthetic-owner' }, access_token: 'synthetic-token' };
+const purchaseRecord = { productId: SKU.plus, transactionId: 'synthetic-transaction', transactionReceipt: 'synthetic-receipt' };
+
+test('successful modern transaction finish completes once and later calls skip', async () => {
+  const s = createService({ session: paidSession });
+  assert.equal((await s.syncPurchaseToSubscriptionTier(purchaseRecord, { tier: 'plus' })).ok, true);
+  assert.equal((await s.syncPurchaseToSubscriptionTier(purchaseRecord)).skipped, true);
+  assert.equal(s.calls.sync, 1); assert.equal(s.calls.finish, 1);
+});
+
+test('legacy finish success is used only after modern rejection', async () => {
+  let attempt = 0;
+  const s = createService({ session: paidSession, finish: async () => { if (attempt++ === 0) throw new Error('modern rejected'); } });
+  assert.equal((await s.syncPurchaseToSubscriptionTier(purchaseRecord, { tier: 'plus' })).ok, true);
+  assert.equal(s.calls.finish, 2);
+});
+
+test('both finish failures reject and allow the same transaction to recover', async () => {
+  const error = new Error('native finish failed'); let fail = true;
+  const s = createService({ session: paidSession, finish: async () => { if (fail) throw error; } });
+  await assert.rejects(s.syncPurchaseToSubscriptionTier(purchaseRecord, { tier: 'plus' }), actual => actual === error);
+  fail = false;
+  assert.equal((await s.syncPurchaseToSubscriptionTier(purchaseRecord, { tier: 'plus' })).ok, true);
+  assert.equal(s.calls.sync, 2); assert.equal(s.calls.finish, 3);
+});
+
+for (const fails of [false, true]) {
+  test('concurrent copies share actual ' + (fails ? 'failure' : 'success'), async () => {
+    let release;
+    const wait = new Promise(resolve => { release = resolve; });
+    const error = new Error('finish rejected');
+    const s = createService({ session: paidSession, sync: async () => { await wait; return {}; }, finish: async () => { if (fails) throw error; } });
+    const a = s.syncPurchaseToSubscriptionTier(purchaseRecord, { tier: 'plus' });
+    const b = s.syncPurchaseToSubscriptionTier(purchaseRecord, { tier: 'plus' });
+    release();
+    const results = await Promise.allSettled([a, b]);
+    assert.equal(s.calls.sync, 1); assert.equal(s.calls.finish, fails ? 2 : 1);
+    assert.deepEqual(results.map(x => x.status), [fails ? 'rejected' : 'fulfilled', fails ? 'rejected' : 'fulfilled']);
+    if (fails) for (const r of results) assert.equal(r.reason, error);
+    else for (const r of results) assert.equal(r.value.ok, true);
+  });
+}
+
+test('server receipt rejection never finishes or marks the native transaction done', async () => {
+  const error = new Error('server rejected receipt');
+  const s = createService({ session: paidSession, sync: async () => { throw error; } });
+  await assert.rejects(s.syncPurchaseToSubscriptionTier(purchaseRecord, { tier: 'plus' }), actual => actual === error);
+  await assert.rejects(s.syncPurchaseToSubscriptionTier(purchaseRecord, { tier: 'plus' }), actual => actual === error);
+  assert.equal(s.calls.sync, 2); assert.equal(s.calls.finish, 0);
+});
+
+test('synchronous native connection reentry shares the pending purchase result', async () => {
+  let nested;
+  const s = createService({ session: paidSession, connect: () => {
+    nested = s.syncPurchaseToSubscriptionTier(purchaseRecord, { tier: 'plus' });
+    return true;
+  } });
+  const result = await s.syncPurchaseToSubscriptionTier(purchaseRecord, { tier: 'plus' });
+  assert.equal(await nested, result);
+  assert.equal(s.calls.connect, 1); assert.equal(s.calls.sync, 1); assert.equal(s.calls.finish, 1);
+});
+
 // Execute the checked-in module, not a second implementation of restore.
 // Only ES module declarations are adapted, following the existing Node-only
 // contract tests. React Native, the store and the server are explicit doubles.
@@ -25,6 +87,9 @@ function createService({
   purchases = async () => [],
   connect = async () => true,
   recognizedSkus = () => Object.values(SKU),
+  session = null,
+  finish = async () => {},
+  sync = async () => ({}),
 } = {}) {
   const calls = { connect: 0, query: 0, sync: 0, finish: 0 };
   const service = loadModule('lib/iap/iapService.js', {
@@ -32,7 +97,7 @@ function createService({
     RNIap: {
       async initConnection() { calls.connect += 1; return connect(); },
       getAvailablePurchases() { calls.query += 1; return purchases(); },
-      async finishTransaction() { calls.finish += 1; },
+      async finishTransaction(...args) { calls.finish += 1; return finish(...args); },
     },
     getAllSkus: () => Object.values(SKU),
     getPlanSku: (plan) => SKU[plan],
@@ -44,9 +109,9 @@ function createService({
     getRecognizedBasePlanIdsForPlan: () => [],
     getRecognizedSkus: recognizedSkus,
     getRecognizedSkusForPlan: (plan) => [SKU[plan]],
-    supabase: { auth: { getSession: async () => ({ data: { session: null } }) } },
-    postSubscriptionUpdate: async () => { calls.sync += 1; return {}; },
-  }, ['restoreAvailablePurchases']);
+    supabase: { auth: { getSession: async () => ({ data: { session } }) } },
+    postSubscriptionUpdate: async (...args) => { calls.sync += 1; return sync(...args); },
+  }, ['restoreAvailablePurchases', 'syncPurchaseToSubscriptionTier']);
   return { ...service, calls };
 }
 

@@ -61,7 +61,12 @@ function harness({os='ios', version=35, record=fixture()} = {}) {
     const source=fs.readFileSync(path.join(ROOT,file),'utf8').replace(/^import .*;$/gm,'').replace(/^export /gm,'');
     vm.runInContext(`{${source}\n${names.map(n=>`globalThis.${n}=${n};`).join('\n')}}`,context);
   }
-  context.requestPieceOwner=async(action,body,options)=>{calls.push(['detail',action,clone(body),clone(options)]);return record;};
+  context.requestPieceOwner=async(action,body,options)=>{
+    calls.push(['detail',action,clone(body),clone(options)]);
+    if(state.exportError) throw state.exportError;
+    if(state.exportWait) await state.exportWait.promise;
+    return state.latestRecord || record;
+  };
   const source=fs.readFileSync(path.join(ROOT,'features/piece/pieceExport.js'),'utf8').replace(/^import .*;$/gm,'').replace(/^export /gm,'');
   vm.runInContext(`{${source}\nglobalThis.prepare=preparePieceExportPrototype;}`,context);
   const target=()=>({...context.preparePieceNativeSavedDisplay(record),node:{},isCurrent:()=>state.canvas});
@@ -84,7 +89,7 @@ async function image(h) {return (await h.prepare()).capture(h.target());}
 
 test('fresh owner detail, verified saved canvas, exact PNG and body-free identity precede iOS add-only save', async()=>{
   const h=harness(), job=await h.prepare(), asset=await job.capture(h.target());
-  assert.equal(h.calls[0][1],'detail'); assert.equal(h.calls[0][3].expectedUserId,'owner');
+  assert.equal(h.calls[0][1],'export'); assert.equal(h.calls[0][3].expectedUserId,'owner');
   const capture=h.calls.find(c=>c[0]==='capture')[1]; assert.equal(capture.cocolonPieceCache,true);
   assert.deepEqual([capture.width,capture.height],[1080,1350]);
   assert.equal(asset.candidate.piece_id,h.record.public_id); assert.equal(asset.candidate.asset_sha256,'a'.repeat(64));
@@ -97,6 +102,32 @@ test('fresh owner detail, verified saved canvas, exact PNG and body-free identit
   assert.equal(count(h,'permission'),0); assert.equal(count(h,'release'),1);
   assert.ok(h.calls.some(c=>c[0]==='unlink'&&/^\/cache\/piece-export\//.test(c[1])));
   await failure(asset.saveToPhotos()); await failure(job.capture(h.target()));
+});
+
+for (const action of ['saveToPhotos','openShare']) {
+  test(`server export stop or lost ownership before ${action} prevents OS handoff`,async()=>{
+    for (const code of ['PIECE_FEATURE_DISABLED','PIECE_AUTH_REQUIRED','PIECE_NOT_FOUND']) {
+      const h=harness(), asset=await image(h);
+      h.state.exportError=Object.assign(new Error(code),{code});
+      await failure(asset[action]());
+      assert.equal(count(h,'photo'),0);assert.equal(count(h,'share'),0);
+    }
+  });
+  test(`changed saved artifact before ${action} prevents OS handoff`,async()=>{
+    const h=harness(), asset=await image(h);
+    h.state.latestRecord={...h.record,row_version:h.record.row_version+1};
+    await failure(asset[action]());
+    assert.equal(count(h,'photo'),0);assert.equal(count(h,'share'),0);
+  });
+}
+
+test('server export stop during Android permission dialog prevents saving',async()=>{
+  const h=harness({os:'android',version:28}),asset=await image(h);
+  h.state.permissionWait=deferred();
+  const saving=asset.saveToPhotos();
+  await new Promise(r=>setImmediate(r));
+  h.state.exportError=new Error('stopped');h.state.permissionWait.resolve();
+  await failure(saving);assert.equal(count(h,'photo'),0);
 });
 test('first-use raw cleanup owns only its exact filenames and dispose is idempotent',async()=>{
   const h=harness(), asset=await image(h); await asset.dispose(); await asset.dispose();
@@ -281,3 +312,4 @@ test('iOS missing or non-boolean save acknowledgement never becomes photo succes
     await failure(asset.saveToPhotos());assert.equal(count(h,'photo'),1);
   }
 });
+

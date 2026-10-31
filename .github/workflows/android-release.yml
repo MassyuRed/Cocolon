@@ -1,0 +1,49 @@
+name: Android Release AAB
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_code:
+        description: 'Unused Play Console version code (check the current maximum first)'
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      RELEASE_VERSION_CODE: ${{ inputs.version_code }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Validate release version
+        run: |
+          node -e 'const v=process.env.RELEASE_VERSION_CODE; if(!/^[1-9][0-9]*$/.test(v)||BigInt(v)>2100000000n) process.exit(1)'
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24.19.0'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Install locked packages and native patches
+        run: npm ci --no-audit --no-fund
+      - name: Install pinned Android SDK components
+        run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0' 'ndk;27.1.12297006'
+      - name: Build with existing release signing configuration
+        working-directory: android
+        run: |
+          test -f key.properties
+          bash ./gradlew --no-daemon --console=plain :app:bundleRelease -PreleaseVersionCode="$RELEASE_VERSION_CODE"
+      - name: Save signed AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: cocolon-android-${{ inputs.version_code }}-${{ github.sha }}
+          path: android/app/build/outputs/bundle/release/app-release.aab
+          if-no-files-found: error
+          retention-days: 7

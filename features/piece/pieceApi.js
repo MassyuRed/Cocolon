@@ -496,8 +496,9 @@ export async function requestPieceOwner(action, value = {}, options = {}) {
     } else {
       if (!pieceUuid(input.piece_id)) reject('PIECE_REQUEST_INVALID');
       endpoint = '/emotion/piece/' + input.piece_id;
-      if (action === 'detail') {
+      if (action === 'detail' || action === 'export') {
         if (!exact(input, ['piece_id'])) reject('PIECE_REQUEST_INVALID');
+        if (action === 'export') endpoint += '/export';
       } else if (action === 'visibility') {
         if (!exact(input, ['piece_id', 'expected_row_version', 'visibility_scope']) ||
             !positive(input.expected_row_version) || !['private', 'public'].includes(input.visibility_scope)) reject('PIECE_REQUEST_INVALID');
@@ -532,7 +533,7 @@ export async function requestPieceOwner(action, value = {}, options = {}) {
       if (new Set(items.map(item => item.piece_id)).size !== items.length) reject('PIECE_TEMPORARILY_UNAVAILABLE');
       return freeze({ items, next_cursor: result.next_cursor });
     }
-    if (action === 'detail') {
+    if (action === 'detail' || action === 'export') {
       const record = readPieceOwnerSnapshot(result);
       if (record.piece_id !== input.piece_id) reject('PIECE_TEMPORARILY_UNAVAILABLE');
       return record;

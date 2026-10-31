@@ -1,3 +1,5 @@
+> 2026-11-01最新差分：共通3欠陥・Piece export許可/再照合・iOS URL復帰・Android AAB手順。source実装/局所検証まで、配置・実機は未確認。末尾の[差分](#release-structure-20261101)と第9回weekly§32を参照。
+
 > 2026-10-19最新差分：u355。安堵・寂しさと併記された元の経験に未明示の「同時」を足す表現を、原文の接続詞を保つ既存経験文へ修復。意味・選択・Reception不変。対象技術検証321件、保存DTO18件再表示。PRODUCT_NOT_CLEAR／正式Product Read0/3は維持。詳細は[u355監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u355_MixedReceivedTimeNeutral_20261019.md)。
 
 > 2026-10-19最新差分：u354。本人の不明を「今は／現在は嬉しくない」へ訂正した後の本文停止を、既存意味・全plan・selectedを変えずに修復。対象技術検証188件・保存DTO16件再表示。PRODUCT_NOT_CLEAR／正式Product Read0/3は維持。詳細は[u354監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u354_NegativeRevisionSurface_20261019.md)。
@@ -5854,3 +5856,29 @@ execution_20261030の元55memberはbinary追加重み1をLibraryの4member完全
 追加：API `ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply.py`、`emlis_thread_factory.py`、`ai/tools/serve_emlis_natural_reply.py`、`ai/tests/test_emlis_natural_reply_application.py`、`test_emlis_natural_reply_probe_http.py`、`ai/docs/EMLIS_NATURAL_REPLY_DEVELOPMENT.md`。既存変更：API `emlis_thread_service.py`/`emlis_ai_reply_service.py`/`api_emlis_thread.py`/`emlis_ai_safety_triage.py`、RN `screens/InputScreen.js`/`screens/input/useEmlisThread.js`/`EmlisThreadModal.js`/`screens/AnalysisHistoryScreen.js`と既存RN test。
 
 通常submitは入力保存後の初回taskを保持、返事本文は既存OBSERVATION/DTO、再表示はGETのみ。新private profileと未生成の分析材料を区別。SQL/公開DTO/依存/料金変更なし。構造と制限はEmlis/CMEE map同日節、詳細02同日節とweekly§16。実4B・配置・配布・実機は未確認で、既存Piece private factoryを維持。STRUCTURE_MAP_DELTA_PRESENT。
+
+
+<a id="release-structure-20261101"></a>
+## 2026-11-01 リリース機構差分
+
+既存ownerを維持し、共通3欠陥とPiece画像持出し・配布を修正。全体現在地と第9回weekly§32を現在の完了/未完のownerとする。
+
+| path | 責務/差分 |
+|---|---|
+| `SubscriptionContext.js` | owner世代でcache/pending/有料判定/全購読表示値を分離。auth callback後にrefresh |
+| `lib/iap/iapService.js` | finish両失敗の伝播、同一購入のpending実結果共有と同期再入の抑止 |
+| `features/piece/pieceApi.js` | 既存owner transportにexport専用GETを追加 |
+| `features/piece/pieceExport.js` | 準備/OS直前のexport許可と保存artifact identity再確認 |
+| `screens/PieceOwnerHistoryScreen.js` | 持出し画像を回収できないことの案内 |
+| `ios/tempCocolon/AppDelegate.mm`, `Info.plist` | RCTLinkingManager転送とcocolon scheme |
+| `android/app/build.gradle` | releaseVersionCode明示指定。既存署名維持 |
+| `.github/workflows/android-release.yml`（新規） | 選択refから既存release署名AABを生成しartifact保存。手動起動のみ |
+| `tests/subscription-owner-race.test.js`（新規） | 初回owner発見/切替/旧成功失敗/logout/有料判定の実provider検査 |
+| `tests/iap-restore-purchases.test.js`, `tests/piece-v2-export.test.js`, `tests/piece-v2-owner-history.test.js` | 既存実moduleのIAP/native/transport合成検査を拡張 |
+| `guide/guidesJa.js`, `guide/termsJa.js`, `tutorial/tutorialScenarioData.js`, `SUBSCRIPTION_RELEASE_PHASE4.md` | 本人宛返答/非公開Piece保存/外部出力、trial非必須の現契約へ説明同期 |
+| API `api_public_profile.py` | visibility HTTP失敗で502 |
+| API `api_piece_v2.py`, `piece_v2_runtime_control.py`, `api_contract_registry.py` | 独立export strict pair＋owner-read依存のsaved artifact GET。共有composition維持 |
+| API `ai/tests/test_public_profile_visibility.py`（新規） | ASGIで失敗時公開抑止と正常既定/非公開方針を検査 |
+| API `ai/docs/RELEASE_MECHANISMS_20261101.md`（新規） | source実装/検証/配置・実機の未完境界 |
+
+三coreの意味型・学習重み・料金/権利/課金schema変更なし。新API配置・新RNビルド・実Auth/DB/deviceは未実行。STRUCTURE_MAP_DELTA_PRESENT。

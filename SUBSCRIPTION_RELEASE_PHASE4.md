@@ -15,13 +15,13 @@ It performs two live checks:
   - walks subscription groups
   - collects subscriptions under those groups
   - checks whether expected Plus / Premium product IDs exist
-  - checks whether expected Plus subscriptions have at least one introductory offer
+  - checks product availability; an introductory offer is not required by the current contract
 
 - **Google / Play Console**
   - reads each expected subscription by product ID
   - checks whether expected Plus / Premium product IDs exist
   - checks whether expected Plus subscriptions have an ACTIVE base plan
-  - checks whether expected Plus subscriptions have an ACTIVE free-trial offer
+  - checks active products and base plans; a free-trial offer is not required by the current contract
   - checks whether the expected Android offer tag is present on at least one ACTIVE Plus offer
 
 ## What this endpoint returns

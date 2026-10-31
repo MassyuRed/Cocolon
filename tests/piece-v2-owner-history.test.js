@@ -87,6 +87,15 @@ test('owner history and detail use dedicated no-store routes with both session c
   assert.equal(h.controller.getView().record.piece_text, record().piece_text);
 });
 
+test('export preparation uses its independent authenticated no-store endpoint',async()=>{
+  const h=harness({send:ownerSend});
+  const saved=await h.requestPieceOwner('export',detailInput,options);
+  assert.equal(saved.piece_id,PID);
+  assert.equal(h.calls[0][0],'/emotion/piece/'+PID+'/export');
+  assert.equal(h.calls[0][1].headers['Cache-Control'],'no-store');
+  assert.equal(h.sessions.length,2);
+});
+
 for (const mutation of [r => { r.owner_user_id = OWNER; }, r => { r.public_id = 'piece:' + RID; },
   r => { r.lifecycle_status = 'preview_draft'; }, r => { r.visibility_scope = null; },
   r => { r.row_version = 0; }, r => { r.export_contract_version = 'unknown'; },
@@ -631,3 +640,4 @@ for(const boundary of ['history','owner','target','flag'])test(`terminal export 
   assert.equal(texts(u.host.render()).includes('写真に保存しました。'),false);
   u.host.componentDidUpdate();assert.equal(u.host.exportMessage,null);u.host.componentWillUnmount();
 });
+

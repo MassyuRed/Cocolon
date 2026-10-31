@@ -1411,3 +1411,25 @@ Mashの意図は、品質以外のリリース必須機構を先に揃えて公�
 11/1は通常API/GPU接続と同一配布候補を整え、初回の本人認証→実モデル→保存→同じ本文の再読を通す。共通3欠陥・Piece・Analysis・Plus・料金・両OS・本番提供の残件を上表から落とさず、PCが必要な操作をまとめる。品質の微調整は11/2〜11/6の華恋の作業枠へ置き、接続確認のたびに止めない。公開に使える機構と候補を先に用意し、公開時点まで育てた品質を最終反映する。
 
 今回の確認は最新PR30/PR3、前提/作業規則・全体設計とfile地図、週間タスクと後続実績、モデル/API/RN/署名buildの境界である。変更は本議事録と全体現在地の2fileのみ。製品コード・GPU/学習・配置・build/配布・本人端末は今回未実行で、リリース準備の完成や品質合格を加算しない。STRUCTURE_MAP_DELTA_NONE、過去の正式0/3・54.50％据置。日付表は作業配分であり、自動実行予約や実行済み報告ではない。
+
+
+<a id="release-implementation-20261101"></a>
+## 32. 11/1 — リリース機構の実装着手
+
+Mashの「議事録の8タスクと配布・課金・運用・申請準備を進め、PC操作をまとめて初回実機接続・保存再読を確認する」という指示で実装を開始。全体設計/全file地図・現在地・最新weekly・作業規則を確認し、rootが書込、補助agentはread-only監査。品質の追加学習は行っていない。
+
+| 対象 | 実際のsource変更 | まだ成立していないこと |
+|---|---|---|
+| account切替 | owner/世代ごとに購読cache・pending・全表示値を分離。旧結果/旧finally、A→B→A、logout、初回owner発見、有料判定await間を処理 | 新配布での本人切替確認 |
+| 購入finish | modern/legacy両失敗を呼出し元へ伝播。同一購入はpending promiseを共有し、native同期再入前に登録。失敗後の本人再試行は可能 | 実ストア購入と680/1480円の請求設定 |
+| 公開visibility | 設定取得のHTTP失敗で502。正常な設定未作成の既定方針は維持 | 稼働APIへの配置 |
+| Piece画像持出し | 既存compositionへexport strict pairと本人saved artifact GET。RNは準備時/OS直前にID/row/hash/rendererを照合。外部画像は回収不能と案内 | 新API/RNを揃えたPhotos/Share実OS・本人保存再読。Androidのios.v1 renderer対応 |
+| iOS URL復帰 | cocolon schemeとRCTLinkingManagerのURL/userActivity転送 | 新build、認証復帰/共有入口の実機確認。HTTPS universal linkのdomain entitlementは未追加 |
+| Android配布 | 既存release署名を使う手動AAB workflow、GradleのreleaseVersionCode指定。debug署名置換や自動Play公開なし | workflow起動、AAB生成、Console最大versionCode・提出/実機 |
+| ガイド/申請準備 | Emlis本人宛返答、Piece非公開保存/履歴/持出しの説明へ同期。旧trial必須説明を現実装へ同期 | ConsoleのApp Privacy/Data safety、画像、審査アカウント、legal到達、実商品状態 |
+
+検証：RNの実module＋合成native/React/Auth/HTTPで151 PASS / FAIL0 / SKIP0。account race、IAP、Piece export/owner historyの4file。APIは実ASGI composition＋合成Auth/HTTP/DBで284 PASS / FAIL0 / SKIP0。visibility、新export拒否/通常成功/読取中停止と既存Piece/共有APIを確認。Python3.12.14 / FastAPI0.162.0 / httpx0.28.1 / pytest8.4.1の隔離runtimeを使用し、旧正式runtime readinessや実DB/実機成功へ換算しない。Info.plist解析とガイド3module構文確認も完了。
+
+API実装：`6198ca2d8407eff606fc353891a708733c48abf2`。この記録時点でRenderのLiveは旧`3577d7fd`、TestFlight最新確認は旧6501。GitHub browserはsigned-outでworkflow dispatch未実行。connectorはsource更新には使えるがdispatch操作を持たない。配置と配布の認証操作を準備済候補に対してまとめる。
+
+本人限定4Bの過去成功通信はlocalhost TLSであり、Renderから到達するHTTPS提供口は未完成。Pod10o4zhfktg9nc1の実Connect入口を認証後に取得する必要がある。Jupyter tokenをprovider keyへ転用しない。追加月1万円内の本番提供方式も未成立。補足/訂正の材料化・Plus関連履歴の全権利内検索・Analysis累積/月次snapshotを未完として継続し、8項目全完了や公開可能状態を宣言しない。11/2〜11/6はサーバー側の品質枠、各候補のRNビルド/実機待ちは要求しない。

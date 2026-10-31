@@ -341,7 +341,7 @@ export const TUTORIAL_INTRO_FLOWCHART = Object.freeze({
   nodes: Object.freeze([
     Object.freeze({
       label: "その場で受け取る",
-      title: "Emlisの観測",
+      title: "Emlisからの返答",
     }),
     Object.freeze({
       label: "あとで振り返る",
@@ -360,10 +360,10 @@ export const TUTORIAL_INTRO_FLOWCHART = Object.freeze({
 
 export const TUTORIAL_CONNECTION_ROWS = Object.freeze([
   Object.freeze({
-    title: "Emlisの観測",
+    title: "Emlisからの返答",
     description:
-      "入力した気持ちを、その場でEmlisが観測して言葉にします。",
-    example: "今の言葉を、ひとつの観測として受け取れます。",
+      "保存した入力を受け取り、その内容にEmlisが返答します。",
+    example: "返答は、あとから同じ内容を読み返せます。",
   }),
   Object.freeze({
     title: "こころ天気",

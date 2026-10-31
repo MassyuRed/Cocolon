@@ -194,6 +194,9 @@ export class PieceOwnerHistoryHost extends React.Component {
           ...(available ? view.items.map(item => h(PieceOwnerCard, { key: item.piece_id, record: item, onOpen: () => this.act('openDetail', item.piece_id) })) : []),
           record ? h(PieceVisualCard, { savedRecord: record }) : null,
           record ? h(PieceOwnerCard, { record }) : null,
+          record && this.props.flags?.piece_v2_export_enabled === true ? h(Text,
+            { style: { color: '#494949', fontSize: 14, lineHeight: 22, marginBottom: 8 } },
+            '保存・共有した画像は、Cocolonで削除・非公開にしても回収できません。') : null,
           record && this.props.flags?.piece_v2_export_enabled === true ? h(Button, {
             title: attempt ? '画像を準備し直す' : '画像の保存・共有を準備', disabled: exporting,
             onPress: () => this.prepareExport(record) }) : null,

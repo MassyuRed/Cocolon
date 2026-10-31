@@ -41,7 +41,7 @@ export const guidesJa = Object.freeze({
   home: {
     title: "ホーム",
     summary:
-      "思考・行動・感情を記録し、Emlisの観測やピース生成につなげる入り口です。",
+      "思考・行動・感情を記録し、Emlisからの返答やピース生成につなげる入り口です。",
     relatedTerms: [
       "emotion_input",
       "thought_content",
@@ -79,8 +79,8 @@ export const guidesJa = Object.freeze({
       {
         type: "ul",
         items: [
-          "「この内容でOK」を押すと入力が保存され、[[term:emlis_reply|Emlisの観測]] を確認できます。",
-          "「ピースを生成する」を押すと、入力内容から公開用の [[term:piece|ピース]] を作る流れに進みます。",
+          "「この内容でOK」を押すと入力が保存され、[[term:emlis_reply|Emlisからの返答]] を確認できます。",
+          "「ピースを生成する」を押すと、保存した入力から [[term:piece|ピース]] を作れます。デザインを確認して非公開で保存し、自分の履歴から見返せます。対応端末では画像の保存・共有もできます。",
           "「[[term:emotion_notifications|感情通知を送らない]]」をオンにすると、その入力はフォロー中ユーザーへ通知されません。",
           "[[term:today_question|今日の問い]] と入力履歴も、Home から確認できます。",
         ],

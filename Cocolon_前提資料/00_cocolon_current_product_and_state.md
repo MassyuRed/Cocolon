@@ -1,5 +1,7 @@
 # Cocolon 最新情報 — 全機能・全状態
 
+**11/1・リリース機構の実装着手：[第9回§32](weekly_reviews/Cocolon_Weekly_Review_20261031.md#release-implementation-20261101)。** account切替の旧購読応答遮断、購入finish二重失敗の伝播/同一購入の実結果共有、visibility取得HTTP失敗時の公開抑止を修正。Piece画像出力の独立サーバー許可確認とRNの準備時/OS直前の保存artifact照合、iOS cocolon URL復帰、Android署名AAB生成手順・versionCode指定、ガイド説明同期を追加。RN151件／API284件の局所検証はPASS。API実装は `6198ca2d8407eff606fc353891a708733c48abf2`。新API配置・新RNビルド・実機初回接続/保存再読・実ストア料金・本番原価・累積マップ/Plus全検索は未完で、公開可能状態や8タスク全完了とは数えない。以下の旧未達記述はsource修正と稼働/端末確認を区別して読む。
+
 更新日：2026-11-01 JST（最新差分：Mashの説明に基づき工程を訂正。11/1はリリース機構・配布・運用・初回接続、11/2〜11/6は華恋がGPU/サーバー側で品質改善。実機は初回と最終確認に絞り、品質試行ごとのRNビルドは行わない。品質以外を先に整え、公開日まで育てた品質を反映できる状態を目指す）。全Cocolon作業の必読原本。
 
 > **最新報告会：[第9回・2026-10-31、10/31〜11/7](weekly_reviews/Cocolon_Weekly_Review_20261031.md)。開催中。** [§3のMashの方針・既決仕様](weekly_reviews/Cocolon_Weekly_Review_20261031.md#confirmed-directions)、[§4の華恋の商品案](weekly_reviews/Cocolon_Weekly_Review_20261031.md#release-product-proposal)、[§11の合意最低線と週間基準計画](weekly_reviews/Cocolon_Weekly_Review_20261031.md#weekly-tasks-20261031)、[§7の未決・会議進行](weekly_reviews/Cocolon_Weekly_Review_20261031.md#meeting-agenda-and-open-items)を区別する。Emlisは人間的応答のみの表示へ変更し、意図的短文化・1〜2文固定はしない。観測ラインは分析へ活かす。Free当回入力のみ／Plus過去本人入力も照合は既決仕様の再確認で、通常4Bでの意味ある履歴応答は未完成。わたしマップは全蓄積の構造・ルートと月ごとの当時snapshot、現在との見比べが構想。28日・最新100だけ・最新1枚は華恋の判断・撤回案で、Mashの構想ではない。下表の期間実装と新目標を混同しない。
@@ -125,7 +127,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | preview・保存 | 本文・画像設定・取消・保存・回復のsource接続あり。iOS renderer供給とsame-mount/token current fitを接続。owner／runtime／quotaを別に確認 | 実Authの通常入力→preview→明示private保存は未確認。preview＝保存record＝card＝renderer入力＝export本文を保つ。保存後の本文・format・recipe変更は新record |
 | V2有効化・旧経路 | 既存APIの明示factory構成は10/23に3577d7fdでLive、private4true/public4false。default app:appはsource上legacy/OFFを維持。RN通常入力のV2 sourceあり、tutorial/Nexus旧経路は残る | 稼働設定成立と本人端末の通常保存は別。M5の全公開経路廃止は未完 |
 | 本人履歴・詳細・公開範囲 | owner一覧・詳細・公開切替・削除、通常導線・保存後再取得を接続。privateはownerのみ、publicも既存access policy内 | 同一ownerの実Auth保存→履歴／詳細往復は未完。アプリ内公開と外部画像共有を分ける |
-| export | 本人詳細→fresh GET→表示recordのID・row version・3hash・renderer一致→全canvas→明示Photos／Shareをsource接続 | 実OS写真保存・Share、Android新版export、backend receipt、本人端末商品受入れは未完。外部へ出た画像コピーは内部非公開／削除で回収できない |
+| export | 本人詳細→独立export許可GET→表示recordのID・row version・3hash・renderer一致→全canvas→Photos／Share直前再確認をsource接続（11/1） | 新API/RN配布と実OS写真保存・Share、Android新版export、backend receipt、本人端末商品受入れは未完。外部へ出た画像コピーは内部非公開／削除で回収できない |
 | 新renderer | iOS `piece.rn_bitmap_renderer.ios.v1`。検査した同一bitmapを表示/書出し。preview fit・構築の元8秒、完成saved画像は8秒後も保持 | API供給はTTL600秒/同rendererでLive。本人通常描画・保存・再読と商品採用は未確認。最新送信6501は新版を含まず、87151固定候補のTestFlight送信は未実行。Android新版成立へ拡張しない |
 | 最新限定検証 | 新export正常8PNG＋native拒否6。JS979・新native44成功。旧195は176PASS／19FAILを保持 | CI39780623108 attempt1 completed／failure、head`d2e1244…`、10/22 JST21:42:54〜22:07:18。CI全体合格ではない。限定TECHNICAL_CREDITの記録あり、product_credit=0 |
 | live・次の未完 | 10/23 Live3577d7fd/dep-dbd8hjoae00c73firbt0・承認command/autoOffは監視readで不変。privacy2pathはPR3@3084c99eへ同一blobで同期済み、唯一CI39864098163は1805 PASS/FAIL0/SKIP0 | 現在ownerは入口§119/map65.62/weekly5.6.42/manifest v159。本人保存にはRN新版が必要。候補branchを87151へ固定、既存署名build/TestFlight送信1回の一回をMash承認受領、実行前checkpoint。本人保存/再読・実OS/端末/商品受入れ未完 |
@@ -145,10 +147,10 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | 感情通知・感情ログ | feed／unread／既読、個人別受信設定、送信選択。Nexusの投稿／感情通知／おすすめ／共鳴履歴の一部 | 感情・強さ・時刻であり、メモ本文の公開ではない。実配送・通知許諾・全起動先は未確認 |
 | フォロー・申請・推薦 | 作成／解除／フォロワー削除／承認／拒否／取消／おすすめを接続 | 非公開account・推薦除外・公開範囲を保持。見つけることと閲覧許可は別 |
 | アカウント・ID検索 | 自他profile・活動情報・表示名・共有コード、非公開設定、推薦／ランキング可視性 | 共有ID公開、推薦、ランキング、非公開を別設定とする。公開profile APIと認証本人APIを分ける |
-| 共有URL・native／Web入口 | 共有profile URL→公開API→Accountの接続codeあり | iOSのnative入口とWeb補助は残件。APIはvisibility取得HTTP失敗時に公開defaultを保持する未解決経路あり。実漏出を観測したという意味ではない |
+| 共有URL・native／Web入口 | 共有profile URL→公開API→Accountに加え、11/1にiOS cocolon scheme/URL転送とvisibility HTTP失敗時502を実装 | 新API/RN配置、本人認証復帰、HTTPS universal linkのdomain entitlement/Web補助は残件。実漏出を観測したという意味ではない |
 | ランキング・感情集計 | 連続ログイン／入力件数／文字数／共鳴数、感情集計の別route、可視性設定 | 活動量であり記録の価値・人の評価ではない。全体感情TOP3はアプリ内集計で、社会全体の代表値ではない |
 | 通知・未読 | push token同期、未読状態、問い・report・感情更新から対応画面へ戻るrouting | token登録と配送成功を分ける。ログアウト／account切替時の本人境界、全cold／warm動作は別確認 |
-| アプリ設定・購読 | theme、全体／個別通知、プラン購入・復元・管理、entitlementのコードあり | finish両方式失敗後もdone／ok:trueへ進む経路、進行中取得のaccount切替後の旧応答適用防止がsource上未解決。実storeのfinish／失効／account切替／復元・release判定も残る。料金表示だけで有料品質成立としない |
+| アプリ設定・購読 | theme、全体／個別通知、プラン購入・復元・管理、entitlement。11/1にfinish両失敗の伝播/同一購入の結果共有とowner世代ごとの旧応答遮断を修正 | 新RN配布、実storeのfinish／失効／account切替／復元・release判定は残る。料金表示だけで有料品質成立としない |
 | ガイド・tutorial・お知らせ | ガイド、再体験、tutorial flow、notice current／history／read | mock体験は通常実経路の成功証拠ではない。tutorialを全体価値・入力の悩みの唯一の解決としない |
 | ログアウト・退会 | feature flag・二段確認・`/account/delete`後local cleanup／signOutのコードあり | 実データ全削除完了は未確認。元情報と派生物、内部保存と外部画像の境界を分ける |
 | ProfileCreate旧資産 | `ProfileCreateScreen.js`・`api_profile_create.py`は現存 | fresh Root＋5 Stackに通常route／importを確認できず。通常入口接続済みへ昇格しない |
@@ -223,6 +225,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 
 10/25 全体選定差分：Mashの全体判断指示を受け、全機能原本・全体設計/全file地図の既確認導線・最新weekly・実4B raw/教師・関連会話検索と公式MLX/量子化資料を照合。会話検索を全セッション全文読了とは扱わない。選定責任は華恋、旧4BのMash確定を復活させたという記録にはしない。文書4fileのみ、商品source/API/DB/Render/Supabase/教材/重み不変、STRUCTURE_MAP_DELTA_NONE、ADMINISTRATIVE_ONLY、product_credit=0。正式0/3・54.50％据置。
+
 
 
 

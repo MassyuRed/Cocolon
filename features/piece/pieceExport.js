@@ -83,7 +83,9 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
     if (signal?.aborted || typeof isCurrent !== 'function' || isCurrent() !== true) throw failed();
   };
   current();
-  const record = readPieceOwnerDisplay(await requestPieceOwner('detail', { piece_id: pieceId }, { expectedUserId, signal }));
+  const readExportRecord = async () => readPieceOwnerDisplay(await requestPieceOwner('export',
+    { piece_id: pieceId }, { expectedUserId, signal }));
+  const record = await readExportRecord();
   current();
   const input = preparePieceNativeSavedDisplay(record);
   if (!input || ![PIECE_NATIVE_PREVIEW_VERSION, PIECE_BITMAP_RENDERER_VERSION].includes(record.renderer_version)) throw failed();
@@ -133,6 +135,10 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
       };
       const verify = async () => {
         current();
+        const latest = await readExportRecord();
+        current();
+        if (!['piece_id', 'row_version', 'piece_text_hash', 'content_payload_hash',
+          'visual_recipe_hash', 'renderer_version'].every(key => latest[key] === record[key])) throw failed();
         if (await pngIdentity(path, input.width, input.height) !== assetHash) throw failed();
         current(); if (disposed) throw failed();
       };
@@ -145,12 +151,12 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
           begin();
           let saved = false, cleanupFailed = false;
           try {
-            await verify();
             if (Platform.OS === 'android' && Number(Platform.Version) < 29) {
               const status = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE);
               current();
               if (status !== PermissionsAndroid.RESULTS.GRANTED) throw failed();
             }
+            await verify();
             current(); if (disposed) throw failed();
             // No album/read permission: CameraRoll requests iOS add-only itself.
             if (Platform.OS === 'ios') {
