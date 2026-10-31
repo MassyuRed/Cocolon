@@ -1,6 +1,6 @@
 # Mashの観測技術を継承するための記録
 
-**最新の直接作業（10/31）：** [第9回§29](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#hedge2-cpu-20261031)／[自然返答実行記録](training/2026-10-31-natural-reply-preference/README.md)。留保/既知不明の架空2pairを固定し、実tokenizer/mask/CPU勾配検証を4.809秒で完了。4B読込/学習/モデル生成0、旧5重み/config不変。旧30messages/prompt IDsを保持し、新NR25/26はモデル未使用。次は527dを製品不採用のまま隔離初期値/固定参照に明示選択する4更新/34本文の一回案。旧replay0・旧28更新の追加周回ではなく、GPU runner接続/実行は未実施。実emotion submit/Auth/端末/新HTTP-SQLは未確認。商品0・正式0/3・54.50％、STRUCTURE_MAP_DELTA_NONE。追加観測会不要。以下の10/30段落は旧CMEE方式の履歴。
+**最新の直接作業（10/31）：** [第9回§30](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#hedge4-actual-20261031)／[自然返答実行記録](training/2026-10-31-natural-reply-preference/README.md)。新2pairだけ4更新・保存freshreload112一致・全34EOSを完了。本人宛化等を維持したが、NR03の明示否定反転が再発し、H02因果補完/T10文法不成立等で6e1c不採用。旧5重み/config不変、新NR25/26は使用済み。次は追加学習を止め、否定の同義書換え2種×2保存候補の新4生成を行う診断案（未実行）。原文2出力は原本再利用。独立新規品質評価/教師ではない。実emotion submit/Auth/端末/新HTTP-SQL未確認。商品0・正式0/3・54.50％、STRUCTURE_MAP_DELTA_NONE。追加観測会不要。以下の10/30段落は旧CMEE方式の履歴。
 
 **旧CMEE試行のGPU読取確認（2026-10-30 JST・履歴）：** 同Jupyter/Pod vgkm402msgroiu/RTX A5000、focus29終了・回収時1MiB/0％で稼働保持。298frozenと保存ad8b/config不変。Stop/restart/delete/Runpod管理画面/API0。
 
