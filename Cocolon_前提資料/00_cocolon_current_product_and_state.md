@@ -1,12 +1,16 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-更新日：2026-10-30 JST（最新差分：focus29一回の29更新/保存再読/10生成完了、新2本文不成立・原本回収済み閉鎖、weekly§136）。全Cocolon作業の必読原本。
+更新日：2026-10-31 JST（最新差分：第9回報告会開始、人間的応答表示・Free／Plus既決差・累積わたしマップと月次履歴の構想訂正、初版商品案の区分）。全Cocolon作業の必読原本。
 
-> **最新報告会：[第8回・2026-10-24](weekly_reviews/Cocolon_Weekly_Review_20261024.md)。** 今週実績・前週目標の達否と10/24〜10/31の管理案を記録。**Mashの指示により報告会終了。** 華恋の意見全文は[§10](weekly_reviews/Cocolon_Weekly_Review_20261024.md#karen-closing-opinion)、終了時の区分と再開先は[§11](weekly_reviews/Cocolon_Weekly_Review_20261024.md#meeting-closed-and-next-session)。10/24の4B確定・GPU16GB優先/24GB許容は当時の決定で、4B確定は10/25に撤回済み。最新の開発基準選定は[§23](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-three-core-model-and-serving-decision)。華恋が今回の判断責任として選んだもので、旧4B確定・常時24GB契約の自動復活ではない。起動済み3070の実確認は[§22](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-3070-running-cuda-uvm-io-error)。A5000未確保は§20の履歴。Vast実見積りは§19の履歴。次週の推奨順位は[§4](weekly_reviews/Cocolon_Weekly_Review_20261024.md#next-week-priorities)、対象path・具体手順・失敗/回復検査・終了条件は[§8](weekly_reviews/Cocolon_Weekly_Review_20261024.md#detailed-work-breakdown)を参照。全体管理評価・公開見通しは[§9](weekly_reviews/Cocolon_Weekly_Review_20261024.md#overall-status-and-release-outlook)：54.50％、正式商品受入れ0/3、12/18達成の裏付け不足。会議途中の「進行中」は当時の記録。次週案全体への明示採否・個別実行の未決は§11に区別して保持する。モデル選定の決定と、以下の品質・配置・端末・費用の未完了を区別する。
+> **最新報告会：[第9回・2026-10-31、10/31〜11/7](weekly_reviews/Cocolon_Weekly_Review_20261031.md)。開催中。** [§3のMashの方針・既決仕様](weekly_reviews/Cocolon_Weekly_Review_20261031.md#confirmed-directions)、[§4の華恋の商品案](weekly_reviews/Cocolon_Weekly_Review_20261031.md#release-product-proposal)、[§5の次週案](weekly_reviews/Cocolon_Weekly_Review_20261031.md#next-week-plan)、[§7の未決・会議進行](weekly_reviews/Cocolon_Weekly_Review_20261031.md#meeting-agenda-and-open-items)を区別する。Emlisは人間的応答のみの表示へ変更し、意図的短文化・1〜2文固定はしない。観測ラインは分析へ活かす。Free当回入力のみ／Plus過去本人入力も照合は既決仕様の再確認で、通常4Bでの意味ある履歴応答は未完成。わたしマップは全蓄積の構造・ルートと月ごとの当時snapshot、現在との見比べが構想。28日・最新100だけ・最新1枚は華恋の判断・撤回案で、Mashの構想ではない。下表の期間実装と新目標を混同しない。
+
+**商品案の採否：** Pieceを初期の有料価値の中心にする方向を記録。価格680円・12配色・生成枠・iOS先行・SNS後置・Premium等の延期は華恋案で、採用済みではない。Pieceへの4B利用は質問と回答の段階。描画には不要、意味再構成では候補という見解を仕様変更の合意にしない。既決の12/18両ストア公開目標は変更していない。54.50％は前回管理評価を継承し、今回再採点なし、正式商品受入れ0/3。通常AI・累積マップ・Piece本人実機一巡の未達から、期限内完成は保証できない。
+
+前回の[第8回・10/24](weekly_reviews/Cocolon_Weekly_Review_20261024.md)は終了版と、その後の学習・接続実行履歴§12〜136として保持する。各承認の消費・候補の不採用を新会議でリセットしない。最新focus29は下段の実行結果を参照する。
 
 **最初のA4500学習実績（§24・履歴）：** [A4500で修正版4B追加学習を完走、重み回収、CMEE採用は未達（§24）](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-a4500-training-and-portable-weights)。[全実結果](observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/repaired_a4500_20261025/README.md)。Mashは4B採用とリリースまでRunpodでの追加学習を明示し、将来は手持ちPCへ移す可能性が高い。RTX A4500 20GB／Secure・EU-RO-1・Pod y0eb0w0qn6nks0を今回の最安の容量候補として確保。GPU$0.25/h・50GB container込み表示$0.26/h。CUDA/BF16正常、修正版2教師/1epoch/2update・adapter保存/非学習reload・前後16生成が20分23.76秒で完走し、20GBで現方式が動くことを確認した。peak allocated14.970/reserved17.588GiB。最終archive全24memberのhashと32tensor有限性/前後重み不変をPod外照合し永続保管済み。NLL0.251117→0.245189、raw6/8変化だが、CMEE意味/本文は前後0/2。初回の根拠座標は通るようになったが必須shape/自然文surface不正、訂正後rawは不変、proxy2件が2048tokenで打切りとなり品質未達。その時点の残件は必須shapeと自然文surfaceで、後続の現在作業は下段へ更新する。この§24のrunはGPUを停止せず終了した。旧3070は今回開始時既に停止表示、華恋のStop操作0。
 
-**最新GPU読取確認（2026-10-30 JST）：** 同Jupyter/Pod vgkm402msgroiu/RTX A5000、focus29終了・回収時1MiB/0％で稼働保持。298frozenと保存ad8b/config不変。Stop/restart/delete/Runpod管理画面/API0。
+**GPUの現在状態（10/31会話）：** Mashは現在GPUを動かしていないと報告。今回、管理画面/APIの独立照会・起動・停止は行っていない。最終の直接読取は10/30のfocus29終了・回収時で、同Jupyter/Pod vgkm402msgroiu/RTX A5000が1MiB/0％、298frozenと保存ad8b/config不変、Stop/restart/delete/管理画面/API0だった記録。10/30の稼働保持を現在の稼働断定に使わない。
 
 **現在の直接作業（10/30・focus29一回完了／不採用閉鎖）：** Mash承認の保存ad8b隔離初期値・現10行各2回＋旧9各1回＝29更新を同Jupyterで一回実行し、29 training forward/optimizer・保存非学習再読・同19行NLL・新2件×5段の10生成/全EOSまで完了。全19教師/messages/encoded/元終端/mask/完全CE/指示/受信/合否は不変。新ed298856は112有限F32/3,833,856params、実runは全112変更を記録した。
 
@@ -38,15 +42,17 @@ Cocolonは、本人と他者の人間情報を観測できる形として外側�
 
 | 中核 | 本人に返すもの | 他機能との接続 |
 |---|---|---|
-| EmlisAI | 今回の入力を読んだ観測、人間的な受け取り、必要な一点への任意問い、本人回答に基づく読みの更新 | 原入力と補足を保存・再読する。生成した応答本文そのものを他coreの本人sourceにしない |
+| EmlisAI | 人間的応答のみを表示する方針へ変更（意図的短文化・文数固定なし）。必要な一点への任意問いと本人回答による更新。観測ラインは分析へ活かす。Freeは当回入力のみ、Plusは過去本人入力も照合 | 原入力と補足を保存・再読する。生成した応答本文そのものを他coreの本人sourceにしない |
 | Piece | 本人の考え・価値観の核が、他者へ単独で伝わる文章と画像 | 許可された本人source→preview→明示保存→本人履歴・公開投稿・画像共有。Q&Aは旧仕様 |
-| Analysis | 蓄積記録から感情状態、場面・役割・選択・行動の構造、期間による記録上の違いを文章と図で返す | こころ天気、観測されたわたしマップ、期間比較、別枠のもしもルート／保存した意向 |
+| Analysis | こころ天気の集計と、これまでの入力からの累積構造・ルートを区別。わたしマップは当時の分析を月ごとにsnapshot保存し、過去の月と現在を見比べる構想 | こころ天気、観測されたわたしマップ、期間比較、別枠のもしもルート／保存した意向 |
 
 CMEEは三中核を支える共有生成中枢。独立した第四の商品中核ではない。共通の意味理解・日本語生成を使っても、coreごとのsource採用、何を言うか、声、保存・公開・受入れ責任を分ける。Pieceの本文やAnalysisの推定を本人の発言・事実へ逆流させない。
 
 **学習済AIをCMEEへ接続し、既存資産を生かす方針は決定済み。** Mashは今回4B採用を確認し、リリースまでRunpodで追加学習することを明示した。Qwen3.5-4Bを共通基盤にcore別教示で育て、LoRA→学習済重みの統合/4bit変換→既存CMEEへ接続する。比較4Bまで・追加月額上限1万円・安定してアプリから使えることを保持。最終的な手持ちPC運用は可能性が高い方針だが、Windows／Macとも候補でOS・機種・購入は未確定。M4 16GBは候補情報の一つ。採用するPC/実行方式での量子化品質・速度・同時数・常時運用は未確認。移行には固定base全重み/config/tokenizer/chat template＋LoRAと設定を保持する。厳密な途中再開にはoptimizer/RNG等も必要で、現診断runnerはそれらを保存しない。学習済adapterを別環境で読む/次の学習を始めることと、同じ途中状態への再開を区別する。[今回の確保・学習・保持条件](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-a4500-training-and-portable-weights)。
 
 **10/23 Mash承認：CMEE側の接続仕様・offline準備を先行する。** Mashの追加範囲への「進めていいよ」を受領し、本人明示のJOY_ASPECT不明と二行動を、新規・明示offlineの`emlis_candidate_snapshot.v2`へ限定実装した。原E02-0は四claim／unknown statement→joy対象／過去の喜びと記述present／原格4つ／OMITTED主体／te連結とconcessionを、既存作者の実本文・private保存再開まで保持する。E02-0自身は問いなしENDで、架空pendingを作らない。 最終対象146 passed／FAIL0／SKIP0、106.30秒、既存警告2。内訳はsnapshot同family70（旧35＋新35）、P1旧22、Q2/Q3 application旧54。34 subtests・反復実行・本文採取を件数へ加算しない。旧adapter1/2の全outcome fixtureは変更0。旧広範囲Q1/Q3の未分類失敗は未解消で、全suite成功とはしない。 実モデル/通常有効化は未実施。最新は[weekly L](weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-cmee-targeted-unknown-action-v2)と[trial §9](observation_learning/trials/2026-10-23-current-four/README.md#targeted-unknown-action-v2)。旧v1のE02未対応はその版の履歴。 前回CIは共有owner identity fixtureの同期漏れで失敗。fixture1pathをAPI302d122で同期し、既存失敗検査1件は成功（広範囲CIの再実行0）。Mash承認により、[Piece P4](designs/cmee/v1/03_piece_v1c_detailed_design.md#cmee-p4-implemented)を限定実装した。原7field・6claim／5文・2関係・全選択を保持し、本文にない感情／原因／強度を補わない。既存plan／唯一作者／author-free検査とprivate serialized保存再読まで到達。対象7file339 passed／失敗・skip0（34 subtestsは上乗せしない）。出力は原文段落保持で、一般文章整形・商品品質の合格ではない。通常B8／実DB／画像／モデルは未接続。[Analysis P5](designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#cmee-p5-implemented)も具体承認後に限定実装。原3記録の意味snapshot→同一private graphの文章・図→3段階保存再読まで到達。対象9file905成功。通常Analysis／DB／RN／実モデルは未接続で、一般文章品質の合格ではない。
+
+**10/31構想の訂正：** わたしマップの直近28日は華恋の実装・判断で、Mashの構想ではない。全蓄積・ルート・月次当時履歴・現在との見比べを初版の完成案に戻す。100件は現コードの固定判定で性能限界の実証ではなく、Mashの許容はスペック上妥当であることが条件。100件分割・日次更新・月末保存・プラン別マップ履歴期間は未決。保存されていない過去月を現在再分析して「当時の分析」としない。詳細は第9回§3.3。
 
 わたしマップは性格分類ではない。場面→役割→注意・思考→行動・非行動→結果・その後を、成立する範囲で示す。守る意向、負荷、不明、不一致を添え、人格を固定しない。もしもルート／IFとSavedRouteIntentは既存の設計・残件であり、省略・廃止された構想ではない。
 
@@ -73,9 +79,9 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | 通常感情入力 | 思考・解釈`memo`と、出来事・行動・結果`memo_action`を分けて保存。RNはどちらかの本文＋感情選択＋カテゴリ1件以上が送信条件。APIの旧空memo受理とは別 | 原入力保存成功とEmlis本文成功を分ける。保存・履歴・通知・集計への既存接続あり。通常経路の全端末・全失敗復旧は未確認 |
 | 感情・強さ | 喜び／悲しみ／怒り／不安／平穏と弱中強。自己理解は排他的な特別タグで、強さUIなし・wireはmedium | 自己理解を通常感情の分布・感情通知へ混ぜない。時刻・カテゴリ・所有者とともに扱う |
 | 入力draft・履歴 | 本人別local draftと期限、検索・秘匿・削除、保存済み入力への再入場のコードあり | 回答draft・全中断復帰まで一括保証しない。削除・所有者切替・期限切れ後の派生物利用を別条件として扱う |
-| Emlis初回 | 観測と「Emlisから」の受け取り。Layer1は根拠を外さず、Layer2が人間的な受け取りを担う。比率1:9〜4:6は内容に応じた方針で、文字数割当ではない | 生成・保存・API・RN接続あり。有限表現、主体・時点の誤認、原文反復、薄い／定型的受け取りが残る。商品`PRODUCT_NOT_CLEAR`、正式Product Read未成立、`candidate_ready=false` |
+| Emlis初回 | 現コードは観測＋「Emlisから」の二段。10/31の表示方針は人間的応答のみ・意図的短文化なしへ変更。観測処理は原入力に根拠を持つ意味・関係・状態として分析へ活用する具体化案。表示変更・通常モデル接続は未実装 | 生成・保存・API・RN接続あり。有限表現、主体・時点の誤認、原文反復、薄い／定型的受け取りが残る。商品`PRODUCT_NOT_CLEAR`、正式Product Read未成立、`candidate_ready=false` |
 | Emlis任意問い・回答更新 | 問いは実装済み。Free／Plusはthread全体0..1、Premiumは本人続行により逐次0..3。skip・終了・訂正・撤回・再読あり。原入力と補足を別sourceとして束縛 | 問いを出さないENDだけで十分理解したとは判断しない。回答は新規感情入力件数や国家eventへ加算しない。一般入力・回答後本文・本人実機一往復の品質が残る |
-| Emlis有料拡張 | Plusの適格本人履歴、Premiumの逐次問い・本人が修正／否定できる根拠付きframe、条件付きLayer3を実装 | 履歴が使えるコードと、本人固有の深さ・有料差の体感を分ける。有料商品品質は未受入れ |
+| Emlis有料拡張 | 既決：Freeは今回入力のみ、Plusは過去本人入力も照合。現Q3は365日内直近3件・同文一致中心の固定文で、実4B受口はFree相当のみ／履歴ありを拒否する。Premium逐次問い・frame等は既存コード | Plusの完成対象は具体的な過去内容と今回のつながりが実応答に現れること。関連履歴選択→生成→保存の通常接続が必要で未完成。現在の訂正を優先し、毎回履歴言及を強制しない。Premium等の初版販売範囲は華恋案・未決 |
 | 配置と本人確認 | 共通APIは10/23にPiece限定overlay3577d7fdでLive、Emlis内容は土台10/10版5c8bd8eを継承。u353〜355は未配置 | Piece作業でservice identityのみ確認。Emlisの本人実機/品質は今回再検証なし。10/10の本人表示1件はMash評価で不合格。同じ保存本文の履歴再表示まで確認済みにしない |
 | 27B旧試験（選定除外） | 10/23 Mash決定で27Bを候補から除外。`Qwen3.8-27B-Q4_K_M.gguf`の試験は履歴として保持。10/21、架空相談2題×実演あり／なし×初回／回答後＝8出力の推論試験 | 追加情報の取込みは見られたが、未確認な意味の補完、近い問いの再提示、更新記録の欠落が残る。実演ありの一貫した優位未確認。重みの追加学習0、27BのCMEE統合0、他core適性未検証、製品採用未確定。Pod停止はMash報告受領済み |
 | 観測教材 | 6回の対話から[候補18件・教示5参照](observation_learning/training/2026-10-23-pilot-prep/README.md)を整形。Mash逐語10（問い9＋訂正後観測1）／華恋編集4／架空補充4を区別。第7回は利用場面後付けの不備を認め取り下げ、学習・再開先から除外。自然な完成受け取り・通した修正実演・Piece／Analysis教師と独立評価は不足。10/27に基本相談式・短い実入力式の難しい例はMash・分析向けも時々という収集分担を決定し、[OBS-20261027-001のD00](observation_learning/sessions/2026/OBS-20261027-001/01_dialogue.md#d00)と質問前設定を保持し、D11まで採録。Mash観測文と、本人の感想の撤回／保持の見極めについての教示を保存。観測会終了は未指示。学習／評価への投入は未実施 | [Free9教師・比較6入力](observation_learning/training/2026-10-24-emlis-free-pilot/README.md)でMashのA40にて初回9step完了。初回adapterは未回収だが、同設定の別runと保存adapter再load／9教師適合診断は完了し、重み入りarchive全33fileとchecksumを照合。加重NLL1.81506→1.65714、全9件低下・生成8/9変化。ただし教えた事例にも未返信・約束・訂正後の喜びの理由の補完が残り観測品質は未合格。初回重みの復元とは扱わない。[受領結果](observation_learning/trials/2026-10-24-qwen9b-free-lora/recreated-run/README.md)。JSON-onlyのない旧promptと解析失敗は試験側の不整合も区別。最新結果は[4B・9B受領比較](observation_learning/trials/2026-10-24-qwen4b-9b-comparison/README.md)。MashのA40で4B／9B各6回答、計12回答が完走し受領原本と固定sourceを照合済み。JSON全件成功・打切りなしだが意味品質は両方未合格。9Bの品質優位は見られず、比較時点では4B候補保持を華恋が推奨。その後、本報告会でMashが4Bに確定した。4Bは不明保持・補足／椅子訂正で相対的に忠実だが、開店の距離方向を反転し、Piece根拠・Analysis結果を創作する。9Bにも感情理由補完・別記録への誤edgeが残る。PyTorch peak allocatedは4B8.737／9B17.814GiB、単独速度は出力量依存。本番提供原価・680／1,480円での採算は未測定。既存9教師は全件Emlisで、開店方向と自然な受け取りを既に教える一方、Piece／Analysis完成例は0。[固定提供案の原価試算](observation_learning/model_selection/2026-10-24-production-economics/README.md)は完了。基準案95,094円/月は予算外で不採用推奨、最適化構成や本番原価の実証は未成立。10/24の4B確定は10/25に撤回済み。[CM-01/T1 actual](designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-4b-model-proposal-implemented)はMash承認後にAPI02c0b943へ実装。新private意味／自然本文／実問い／保存再開とasync注入境界はCPU検証済み。新4Bpackは実native2診断教師・旧7件未対応、学習外EFREE6 proxy、runner／診断／退避／raw consumerを実装。初版の実tokenizer最大7856 tokens、CPU指示修復版は最大7955/生成枠8126、context8192/max_new2048を維持。旧完成JSONの単純wrapは採用不可で、旧9教材は不変。実4Bの一回診断は承認後に完了。2教師/1周/2update・保存adapter非学習reload・前後16生成・24GB完走を確認し、最終重みを回収照合して試験Podを削除した。16GBは未試験。実rawのCMEE採用/本文は前後とも0/2で、NLL低下を品質成功へ換算しない。旧9Bの1／4／16周は再開せず、追加試行・商品価格／quota変更0。 10/25の最新新入力32更新では意味2/2・本文1/2へ進展。指示追加候補は意味1/2・本文0/2で退け、学習時入力へ戻した。局所診断後のLR1e-5候補は不採用だが、LRだけ5e-5へ変えた4更新で既知FIT意味/本文2/2へ到達し、実モデル2callのoffline一往復も成立。現在の詳細は冒頭とweekly§36を優先し、§33は履歴。新しい観測会をMashへ依頼せず、全文比較と記録は華恋が担う。原18候補・教示5参照・9教師・旧評価・受領重みを増量／改変しない |
@@ -83,6 +89,8 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 詳細owner：[Emlis map](current_structure/01_emlis_ai_current_structure.md)、[CMEE map](current_structure/04_cmee_current_structure.md)、[Emlis詳細設計](designs/cmee/v1/02_emlis_v1a_detailed_design.md)、[観測教材](observation_learning/README.md)。古いmap本文の「問い未実装」は後続Q3／Q4・実sourceと矛盾する旧状態であり、現在へ戻さない。
 
 ## 5. Analysis — 蓄積を本人の情報へ返す
+
+**目標と実装の差：** 第9回§3.3の累積マップ・月次当時snapshotがMashの構想。下表のV2期間方式、既定28日、100件超拒否、隣接期間比較を、その完成と同一視しない。現在の隣接期間比較は今の方式で二期間を作るもので、当時の保存結果を選ぶ履歴比較とは別。通常生成は有限文法が中心、4B未接続。累積更新・月次保存・月選択・現在との比較・元記録tapが残件。
 
 | 機能・構想 | 現在の実装・境界 | 稼働・本人確認・残件 |
 |---|---|---|
@@ -100,6 +108,8 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 詳細owner：[Analysis map](current_structure/03_analysis_current_structure.md)、[Analysis詳細設計](designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md) §7〜11・15〜16、schema §7・9.6。10/10の不足案内API `5c8bd8e5…`と6501送信、本人の不足文言表示確認はAPI運用記録§39/40にある。最後の共通API配置記録は10/23 Piece overlay `3577d7fd…`（5c8bd8e土台）で、今回Live再照会ではない。後続内容修正版の未配置と本文生成・保存再読・比較の未確認を分ける。詳細手順は[第8回§8.5](weekly_reviews/Cocolon_Weekly_Review_20261024.md#details-analysis)。
 
 ## 6. Piece — 本人の意味を他者へ伝える
+
+**10/31の質問と見解：** 通常Pieceは4Bを呼ばず、sourceに結び付いた有限編集。背景・文字色・配置・改行計測・画像出力に4Bは不要。核の選択・否定や留保の保持・単独文章への再構成は言語理解が必要で、4Bは候補だが必須の特定モデルではない。観測意味を共有できればPiece専用の追加推論が常に必要とは限らない。専用4B接続を一律の発売条件にしないという華恋の推奨で、Mashの質問を仕様変更の合意にしない。初期の有料価値を背景・文字色等へ置く方向と、12配色等の未採用案は分ける。
 
 | 機能 | 現在の実装・境界 | 確認・残件 |
 |---|---|---|
@@ -142,6 +152,8 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 ## 8. プランと、次作業を選ぶときの現在地
 
+**以下の表は既存表示・権利・コードの状態で、10/31の構想を上書きする確定新プランではない。** Free当回のみ／Plus過去本人入力も照合は維持。旧表のFreeマップ履歴不可・Plus1年等を、新しい累積／月次構想へ無検討で適用しない。マップ履歴のプラン期間は未決。Free／Plus販売2区分、680円、AI月30／100、Piece新規生成5／30、配色12等は華恋案で未採用・未変更。入力保存・既存成果物再読をAI枠へ従属させず、累積構造を枠で切り捨てない。
+
 | プラン | 仕様・表示上の体験 | 成立状況の限界 |
 |---|---|---|
 | Free | 当回Emlisと任意1問、軽いmap概要、Piece月5、入力等の履歴は当月＋前月。わたしマップは最新概要のみで履歴不可 | code・表示と、自然な本人理解の品質は別 |
@@ -152,7 +164,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 **10/23 Mash決定：Plus980円／Premium1,980円が価格の上限（これでも高い）、27Bは候補外。10/24は680円／1,480円を価格候補として検討する。980／1,980は9Bの損益分岐価格ではなく、独自LoRA版の本番原価は未測定。** 旧1,980/3,980円の推奨と27B再試験案を撤回。[小型AI再選定・全core原価](observation_learning/model_selection/2026-10-22-three-core/2026-10-23-small-model-reselection.md)では、Mashの残高利用希望により、Qwen3.5-9BのM1をMashがRunpod A40で実行し、4件の受領原本と全本文を照合済み。画面上のGPU単価は$0.59/h、起動前残高$5.15。受領原本のvLLM0.32.0／BF16／非thinking／context8192／温度0で、要求90.607秒・4805token。インストール・読込・待機を含むGPU総時間・総消費は未確認。Stop完了はMash報告を受領済みで、管理画面の独立確認はしていない。DeepInfra既製APIは比較資料へ残し、Qwen3.5-4Bは当時の別候補から、10/24のMash決定で一度確定した後、10/25に撤回された。10/23の旧比較では980/1,980円を基準とし、Free30/Plus100/Premium150セッション等の利用量でも、以前のDeepInfra既製APIを仮定した月原価は約5.57/37.07/147.28円で、Runpod自己hostの原価ではない。無料者・固定基盤・税相当留保・ストア費を含めて計算した。これらは利用量感度で、商品quota変更・採用・品質合格ではない。独自追加学習版の配備に公開API単価を流用せず、育成費・学習後のhost費用は別確認。旧費用資料は履歴として参照する。
 
-次週の旧推奨順位は第8回§4の履歴。4B/Runpod育成・Windows/Mac未選定を保持。quote18、受け取り6、balanced12、boundary12、surface12は各終了原本の履歴で、閉鎖planを起動し直さない。最新joint12は固定9の意味/本文9/9、その成功後だけ同family日常2件の実service保存再読2/2まで完了・閉鎖（§49最終）。新重みは限定検証の保存候補で、一般観測品質や本番/商品採用とは分ける。
+次週10/31〜11/7の案は第9回§5。11/3に通常Free／Plus応答・観測材料・小ルート、11/7に累積保持／snapshot保存再読・Piece実端末一巡・費用・共通3欠陥を判断する華恋案であり、未実行・非保証。次週の旧推奨順位は第8回§4の履歴。4B/Runpod育成・Windows/Mac未選定を保持。quote18、受け取り6、balanced12、boundary12、surface12は各終了原本の履歴で、閉鎖planを起動し直さない。最新joint12は固定9の意味/本文9/9、その成功後だけ同family日常2件の実service保存再読2/2まで完了・閉鎖（§49最終）。新重みは限定検証の保存候補で、一般観測品質や本番/商品採用とは分ける。
 
 | 作業領域 | 次に解消すべき具体的未完了 |
 |---|---|
@@ -172,7 +184,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | 範囲 | 詳細原本・現物 |
 |---|---|
 | 全体構想・設計 | `cocolon_thought_material_for_karen.md`、`01_cocolon_overall_structure.md`と分冊01A／01B／01C、`02_cocolon_national_system.md`、`current_structure/00_three_core_and_cmee_read_first.md`と01〜04 |
-| 最新判断・配置記録 | [第8回・10/24〜10/31](weekly_reviews/Cocolon_Weekly_Review_20261024.md)。方針・承認・配置の原記録は`weekly_reviews/Cocolon_Weekly_Review_20261017.md`（10/20観測学習、最新AL等）とAPI `ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md`へ戻る。会議記録は仕様・実装事実の代用ではない |
+| 最新判断・配置記録 | [第9回・10/31〜11/7](weekly_reviews/Cocolon_Weekly_Review_20261031.md)が最新の方針整理・開催中の報告会。[第8回・10/24〜10/31](weekly_reviews/Cocolon_Weekly_Review_20261024.md)は終了記録・実行履歴。方針・承認・配置の原記録は`weekly_reviews/Cocolon_Weekly_Review_20261017.md`（10/20観測学習、最新AL等）とAPI `ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md`へ戻る。会議記録は仕様・実装事実の代用ではない |
 | Emlis・CMEE実物 | API `cocolon_meaning_experience_engine/engine.py`、`emlis_thread_service.py`とthread source／question／answer_update／surface、RN `InputScreen`・`useEmlisThread`・`EmlisThreadModal`。API path prefixは`ai/services/ai_inference/` |
 | AI試験 | `observation_learning/trials/2026-10-21-qwen27-demo/README.md`と8出力JSON。`fine_tuning_performed=false`、`cmee_integration_performed=false` |
 | Analysis実物 | API `astor_material_snapshots.py`、`analysis_observed_service.py`、`watashi_map_service.py`、`kokoro_weather_service.py`、RN `WatashiMapV2Renderer`・access policy。設計04 §10 IF／§11 Saved、schema05 §7・9.6 |
