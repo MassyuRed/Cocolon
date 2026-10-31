@@ -885,8 +885,10 @@ RNは通常submitのpending明示時だけ未作成待機を許し、同owner/at
 
 ### 16.3 GPU側のsource準備と次の未完了
 
-固定local Qwen3.5-4B/baseと回収済fit38/ad8b一つを扱う、本人限定の認証・回数・時間上限付きHTTP提供口sourceを追加。追加学習/downloadなし、context8192/max_new2048、nonthinking、生成側にも23秒の単調時計期限、未完本文は不採用。保存重みのidentity・112tensor・非学習を起動時に検査するが、今回GPUでのloader成立は未確認。詳細な固定情報と構成は[API実装・検証記録](https://github.com/MassyuRed/mashos-api/blob/2245b14bc8cc74cbc9065051a618772c7b9fde2f/ai/docs/EMLIS_NATURAL_REPLY_DEVELOPMENT.md)。
+固定local Qwen3.5-4B/baseと回収済fit38/ad8b一つを扱う、本人限定の認証・回数・時間上限付きHTTP提供口sourceを追加。追加学習/downloadなし、context8192/max_new2048、nonthinking、生成側にも23秒の単調時計期限、未完本文は不採用。保存重みのidentity・112tensor・非学習を起動時に検査するが、今回GPUでのloader成立は未確認。詳細な固定情報と構成は[API実装・検証記録](https://github.com/MassyuRed/mashos-api/blob/bea4ed1f471f1220dc480b9ffda8fa4675aaab03/ai/docs/EMLIS_NATURAL_REPLY_DEVELOPMENT.md)。
 
 次は有効なGPU/Jupyter接続・現在の費用/時間条件を確かめ、8入力×base/保存候補一つの最大16生成、選択候補の通常接続/保存再読を最大2生成で確認する案。8入力の原文は実行前に固定する。旧run承認は消費済みで再利用しない。実GPU結果を得た後にAPI適用・新RN配布・本人端末一巡へ進む。現在は接続先/実行条件待ちで、GPUを動かして成功したとは扱わない。
 
 今回Renderは既存workspace/serviceの読取許可を原典で再確認し、autoDeploy OFF/main・Piece private factoryのstartCommand維持をfresh確認。Supabaseは既存thread/eventの列情報だけをread-only確認。GPU/有料推論/追加学習/DB書込/設定変更/配置/build/配布/main mergeは0。商品0・正式0/3・54.50％は再採点しない。構造変更はEmlis/CMEE map・01A・設計01/02へ同期、STRUCTURE_MAP_DELTA_PRESENT。
+
+最終source確認で、過去の自己否定/別Safety記録を通常返信材料へ渡さない既存境界も維持した。Free/Plus/Premiumの既存3tier検査をこの条件付きで再確認し3成功（上記86件の内数、重複加算なし）。新しいowner/公開契約/DB変更はなく、この限定修復のSTRUCTURE_MAP_DELTA_NONE。
