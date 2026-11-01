@@ -134,6 +134,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | 本人履歴・詳細・公開範囲 | owner一覧・詳細・公開切替・削除の既存経路。privateはownerのみ | 7001の生成済み画像と一覧は本人確認済み。同一record/hashの独立DB照合・Share送信・公開切替・削除の本人確認へ拡張しない |
 | export | 本人詳細→独立export許可GET→表示artifact照合→全canvas→Photos/Share直前再確認 | 7001の実Photos保存を本人確認済み。Share送信/Android新版export/backend receipt/一般品質は未確認。端末へ出た画像は内部削除で回収できない |
 | 新renderer | iOS piece.rn_bitmap_renderer.ios.v1。同一bitmap表示/書出し、構築/初回採用8秒。新sourceでは完成previewも同画像をsource期限内で保持し、読んでから保存できる。saved保持は維持 | APIはTTL600秒/同rendererでLive。6601のApple90683をAdd/Usage両keyとArchive実物検査で修正。6701はArchive/Apple処理/内部配布/本人起動済み。Pieceの本人描画・保存・再読は未完。Android成立へ拡張しない |
+| 画像内ブランド | 現7001はCocolon固定。Mashの最新希望はEmlis | サーバー差替え経路がなく新規buildが必要。今回はbuildしない指示を守り、次回build用の未実装修正として§42へ記録。現7001には未反映 |
 | 最新限定検証 | 新export正常8PNG＋native拒否6。JS979・新native44成功。旧195は176PASS／19FAILを保持 | CI39780623108 attempt1 completed／failure、head`d2e1244…`、10/22 JST21:42:54〜22:07:18。CI全体合格ではない。限定TECHNICAL_CREDITの記録あり、product_credit=0 |
 | live・次の未完 | APIba0de502は14:16:37 JST Live/health・bootstrap200。7001で画像生成・一覧・Photos保存を本人確認。ユーザー本文限定修正はAPIのみ、新規buildなし。§41へ | 既知V4 19失敗と今回legacy canvas13reportの失敗/原因未確定を保持。Share/Android/一般日本語品質・正式商品受入れは未完 |
 

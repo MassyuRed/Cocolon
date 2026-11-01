@@ -3572,3 +3572,11 @@ Mashは7001で画像生成・一覧表示・スマホ写真フォルダへの保
 API piece_source.pyの選択JSON根拠はprivate selection_contextsへ分離し、可視graph/owner/planの命題にはしない。原recordへの束縛と変更検知を維持する。piece_v1c.pyの唯一作者は元memo/actionだけを整形し、metadataからの追加節を廃止。piece_v2_content_policy.pyの独立検査は余分な節/段落を拒否する。短い完成文もpaddingなしで扱うためshort_essay下限は非空（1..420正規化字/最大6文、1..3段落）。非表示選択だけで名詞断片を完成文へ昇格しない。quote/declarationの制約、既存安全/owner/source/枠/receiptは保持する。
 
 既存保存済みrecord/本文/hash/端末画像を移行・書換しない。RN製品source/公開wire/DB schema/依存変更0、7001を継続し署名build追加0。STRUCTURE_MAP_DELTA_PRESENT（private選択contextと可視本文の分離）。最新の検証・API配置結果はweekly第9回§41へ記録する。Share送信/Android/一般日本語品質/全機能受入れを本人の今回確認へ含めない。
+
+
+<a id="piece-brand-emlis-build-required-20261101"></a>
+## 2026-11-01 — 画像下部のEmlis表記への変更要求
+
+最新weekly第9回§42。Mashの希望はCocolon→Emlis、新規buildなし。現7001ではCard/line検査/native renderBitmapCanvasがCocolonを固定し、サーバー設定による文字列差替えはないため即時反映不可。次回buildにまとめる未実装項目として保持し、今回製品source/稼働/DB/buildは変更しない。
+
+owner：components/piece/PieceVisualCard.js、features/piece/pieceLayout.js、features/piece/pieceApi.js、ios/tempCocolon/PieceTextMetrics.mm。ブランドidentityを変える際はAPI piece_v2_visual.py/保存recipe/DB piece_records_recipe_shapeの旧版互換も整合させる。既存7001はCocolonのまま、希望表記Emlisは未反映。STRUCTURE_MAP_DELTA_NONE（read-only診断・変更要求の記録）。

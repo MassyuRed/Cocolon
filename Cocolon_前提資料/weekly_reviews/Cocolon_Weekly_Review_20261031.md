@@ -1678,3 +1678,13 @@ Mashから7001で画像生成・一覧での確認・スマホ写真フォルダ
 API ba0de5028e46e2e0d7c27a35802aca0384072291/dep-dbjckv5g1s2s73fc6uegは11/1 14:16:37 JST（05:16:37 UTC）Live。反映後healthz/app bootstrap200、Piece private5ON/public3OFF、取得範囲のapp error0。設定/DB変更/GPU/実provider/新規署名build0、7001を継続する。
 
 同sourceのnative PostgreSQL CI41275948956/job124758034597は全step success。生成/safety/実SQL保存/既存保存reader/shared API/既定契約を含む。Analysis CI41275948966はこの記録時点では実行中で、全CI完了/成功とは扱わない。前回RNの既知V4失敗/legacy canvas失敗は今回未修復、再build/再試行なし。今回の変更は次に新規作成するPieceへ適用し、保存済み本文/画像へ遡及しない。Mashへ追加の端末確認を今回の修正条件として要求しない。STRUCTURE_MAP_DELTA_NONE（検証・配置結果の記録のみ）。
+
+
+<a id="piece-brand-emlis-build-required-20261101"></a>
+## 42. 11/1 — 画像下部のブランドをEmlisへ変更する依頼（現7001へ未反映）
+
+Mashは画像下部のCocolonをEmlisへ変更し、新規ビルドを行わないよう指定した。現7001のactual bitmap経路を確認したところ、表示文字・測定文字・JS照合とnative照合が全てCocolon固定で、serverから任意brand文字列を渡す経路がない。native renderBitmapCanvasもCocolon以外のbranding rowを拒否する。したがって現7001へのビルドなしの差替えは不可で、今回ロゴ変更済みとは扱わない。新規build・稼働変更はせず、次回ビルドへまとめる修正項目として保持する。
+
+対象ownerはRN components/piece/PieceVisualCard.js（表示/測定）、features/piece/pieceLayout.js（文字/長さ照合）、features/piece/pieceApi.js（recipe受理）、ios/tempCocolon/PieceTextMetrics.mm（actual bitmap照合）。保存recipeはAPI piece_v2_visual.pyとDB piece_records_recipe_shape CHECKのcocolon_text_mark/version1にも結び付くため、旧保存版と新Emlis版のidentityを整合させて実装する。ID/版を変える場合のDB対応は新migrationとし、既存migrationを改変しない。今回の調査から新契約・DB変更の承認済みへは拡張しない。
+
+確認はcurrent sourceのread-only照合と補助監査。製品code/DB/API設定/deploy/署名build/生成/保存/GPU変更0。STRUCTURE_MAP_DELTA_NONE（変更要求と実装制約の記録のみ）。画像本文の感情説明廃止は別件で、APIba0de502のLiveと7001継続を保持する。
