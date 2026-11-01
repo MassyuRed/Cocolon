@@ -1,4 +1,4 @@
-> 2026-11-01最新：Mash採用の累積/当時月次/プラン差を実装、API36713940/新migration反映済み。RNb187b790のiOS #72は配布作成中。感情原入力の全期間＋適格本人補足を対象に現在map共通、月次閲覧Free2回/Plus12回/Premium全期間。保存artifactと月参照を分離し、プラン変更では保持、source削除/退会ではpurge。新実装/検証/配置はweekly§44と詳細04#analysis-cumulative-monthly-v1を参照。以下のu250等は旧期間版の内容修正履歴で、新累積方式の現在地ではない。
+> 2026-11-01最新：Mash採用の累積/当時月次/プラン差を実装、API36713940/新migration反映済み。RNb187b790のiOS #72/7201は内部配布済み。感情原入力の全期間＋適格本人補足を対象に現在map共通、月次閲覧Free2回/Plus12回/Premium全期間。保存artifactと月参照を分離し、プラン変更では保持、source削除/退会ではpurge。新実装/検証/配置はweekly§44と詳細04#analysis-cumulative-monthly-v1を参照。以下のu250等は旧期間版の内容修正履歴で、新累積方式の現在地ではない。
 
 ---
 doc_id: cocolon_analysis_current_structure
@@ -928,4 +928,4 @@ STRUCTURE_MAP_DELTA_PRESENT、新private型6／例外2、実fileは01A、actual�
 TodayQuestion/Echoes/Discoveriesの旧material集約は保持するが、新累積V2のsource採用済みとはしない。意味sourceの現契約は感情原入力と別本人補足。一般言語品質・IF/Saved・実機/正式商品受入れは別。STRUCTURE_MAP_DELTA_PRESENT。
 
 
-配置/検証更新：新累積ownerはAPI36713940/dep-dbjg0l8ae00c73e4cr20で09:04:51 UTC Live、migration適用済み。local API624成功、RN全JS1287と最終対象64成功。遠隔Analysis/Piece PostgreSQL CI成功。RNb187b790のiOS #72を一回起動、Archive中。本人の新Analysis実機確認と正式商品受入れは未実施。全結果・各件数の範囲と制限はweekly§44。旧履歴中の「累積未完」は当時の状態で、この新ownerの未実装を示さない。
+配置/検証更新：新累積ownerはAPI36713940/dep-dbjg0l8ae00c73e4cr20で09:04:51 UTC Live、migration適用済み。local API624成功、RN全JS1287と最終対象64成功。遠隔Analysis/Piece PostgreSQL CI成功。RNb187b790のiOS #72は一回で全工程success、Apple処理/暗号化情報保存後、7201が既存内部グループでテスト中。本人の新Analysis実機確認と正式商品受入れは未実施。全結果・各件数の範囲と制限はweekly§44。旧履歴中の「累積未完」は当時の状態で、この新ownerの未実装を示さない。

@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-**11/1・累積Analysis（[第9回§44](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-cumulative-plans-20261101)）：** 全保存期間の感情原入力＋適格本人補足、現在map共通、月次当時保存と現在比較、Free2回/Plus12回/Premium全期間、根拠参照と削除寿命を実装。RNb187b790/API36713940をGitHub反映、新DB migration適用、APIはdep-dbjg0l8ae00c73e4cr20で09:04:51 UTC Live。health/bootstrap200、認証なしlatest/history401、private5ON/public3OFF。local API624/RN1287と対象64、遠隔Analysis/Piece SQL CI成功。iOS #72/run41291615693はArchive中、本人の新Analysis端末確認は未実施。月次は各JST月の初回成功取得を固定し、過去未保存月のbackfillなし。GPU再起動0。
+**11/1・累積Analysis（[第9回§44](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-cumulative-plans-20261101)）：** 全保存期間の感情原入力＋適格本人補足、現在map共通、月次当時保存と現在比較、Free2回/Plus12回/Premium全期間、根拠参照と削除寿命を実装。RNb187b790/API36713940をGitHub反映、新DB migration適用、APIはdep-dbjg0l8ae00c73e4cr20で09:04:51 UTC Live。health/bootstrap200、認証なしlatest/history401、private5ON/public3OFF。local API624/RN1287と対象64、遠隔Analysis/Piece SQL CI成功。iOS #72/run41291615693は全工程success、Apple処理/暗号化情報保存後、1.0（7201）が既存内部グループでテスト中。本人の新Analysis端末確認は未実施。月次は各JST月の初回成功取得を固定し、過去未保存月のbackfillなし。GPU再起動0。
 
 **11/1・7101本人確認済み（第9回§43）：** RN7464f858のiOS #71/run41283646380/job124780456306は署名Archive・写真目的文検査・IPA・TestFlight Uploadの全工程success。Mashが7101を反映し、今回依頼した修正の完了を確認した。起動待ち、Home全体行動削除、Ranking撤去、設定以外のガイド同期、新PieceのEmlisロゴを含む。こころ天気は今/日週月/履歴/未読/通知/tutorialを従来どおり維持。API3407402/dep-dbjebcflk1mc7390mnr0は07:11:03 UTC Live、health/bootstrap200・private5ON/public3OFF。API製品同一blobのd43cabcd native PostgreSQL CI41283815884は全step成功。RNの旧V4 metrics19失敗とlegacy canvas13reportは残る。依頼UIの本人確認を、全製品の品質/正式商品受入れへ広げない。GPU再起動0。
 
@@ -108,7 +108,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 ## 5. Analysis — 蓄積を本人の情報へ返す
 
-**11/1採用・API反映済み／RN配布作成中（第9回§44）：** 対象は感情原入力の全保存期間と適格な本人補足。現在mapは全plan共通、月次はFree2回/Plus12回/Premium全期間を閲覧。旧28日/100件拒否/期間版を新累積と呼ばない。新source/immutable artifact/月参照/現在guard照合、選択月と現在の並列表示、根拠原入力・補足参照を実装し、local/遠隔CIを通過。月次は当月最初の成功取得を固定、過去未保存月の再分析backfillなし。一般日本語の理解は未完成、4B接続は行わない。API配置済み、iOS #72を作成中。最終配布・本人確認は§44へ記録する。
+**11/1採用・API/DB反映／7201内部配布済み（第9回§44）：** 対象は感情原入力の全保存期間と適格な本人補足。現在mapは全plan共通、月次はFree2回/Plus12回/Premium全期間を閲覧。旧28日/100件拒否/期間版を新累積と呼ばない。新source/immutable artifact/月参照/現在guard照合、選択月と現在の並列表示、根拠原入力・補足参照を実装し、local/遠隔CIを通過。月次は当月最初の成功取得を固定、過去未保存月の再分析backfillなし。一般日本語の理解は未完成、4B接続は行わない。API配置済み、iOS #72/7201はApple処理を通過し既存内部グループでテスト中。本人の新Analysis端末確認は未実施。§44へ。
 
 | 機能・構想 | 現在の実装・境界 | 稼働・本人確認・残件 |
 |---|---|---|
@@ -192,7 +192,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | 学習済みAI・CMEE接続 | §30は4更新/保存reload/34生成後も6e1c不採用、旧重み保全を保持。11/1は機構準備、11/2〜11/6は華恋がGPU/サーバー側で品質比較・必要な学習・自由生成・候補保存を行う。前版の無期限保留は撤回し、§30末尾の新4生成は未実行の診断案として保持、閉鎖runを再開しない。提供toolは未指定時fit38固定、明示adapter SHA対指定に対応。最大18要求1800秒probeで、選んだ候補のサーバー側反映と本番提供は準備対象。API/保存/表示契約を保つ更新はRN再ビルド不要。最終候補だけ通常提供へ反映し最後に接続確認する |
 | 10/24までの費用・4B選定履歴（当時の構成） | Flex24GBの旧月78,980生成・未測定の速度/起動仮定による運用費95,094円・赤字67,833円の試算は当時の構成の記録で、最新構成の原価ではない。[全仮定・再計算](observation_learning/model_selection/2026-10-24-production-economics/README.md)。旧4B実診断では24GBでLoRA保存・reload・16生成・回収を確認したが、FITは前後0/2。CPU指示修復API1dabc4fは54対象/pack11・合成2/2で、修正版は後続10/25にA4500 20GBで完走・回収済み、最新結果は§24。旧学習peak allocated14.954GiBを本番推論の必要VRAMへ流用しない。4bit/M4を第一候補とした§23は当時の華恋案で、現在の移行先はWindows／Mac未選定。公開API単価を独自育成版の原価へ流用しない。 |
 | Emlis | 一般入力と回答後の意味・自然な本文・有料差、本人実機の保存再読まで。API744336c0配置と通常本人確認を分ける |
-| Analysis | API744336c0に内容修正/最大3ANSWER対応を配置。§44で全期間累積・月次当時保存・寿命・月選択/現在比較・2/12/全閲覧を実装、API36713940/DB反映・CI成功。RNb187b790のiOS #72を作成中。一般理解、本人実機確認、IF/Savedは別残件。旧6501の不足案内表示は本人確認済みとして保持 |
+| Analysis | API744336c0に内容修正/最大3ANSWER対応を配置。§44で全期間累積・月次当時保存・寿命・月選択/現在比較・2/12/全閲覧を実装、API36713940/DB反映・CI成功。RNb187b790のiOS #72/7201を内部配布済み。一般理解、本人実機確認、IF/Savedは別残件。旧6501の不足案内表示は本人確認済みとして保持 |
 | Piece | API private5ON/public3OFFはLive。6601のApple90683は6701で解消、内部配布/本人起動済み。Pieceの本人保存→同owner履歴/詳細→Photos/Share、Android/backend receipt、商品受入れは未確認。§37へ |
 | 全体・release | 自他所有／公開／削除、認証復帰、finish失敗の成功扱い・account切替後旧応答・公開visibility取得失敗時default、共有URL入口、通知配送等の通常実機経路と未受入れ品質 |
 

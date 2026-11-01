@@ -1747,3 +1747,13 @@ Render dep-dbjg0l8ae00c73e4cr20はAPI36713940で09:04:51 UTC Live。healthz/app 
 同APIのAnalysis CI41291153964/job124802530601は全step success：既存1634tests/12020subtests、owner1（194 deselected）、新cumulative/Q3/jobs22tests/2subtests、SQL201原本/15月indexも成功。Piece native CI41291153963/job124802530584も全step success、23実行のpassed合計1861（重複を除いた個数ではない）、shared API172/native保存46を含む。異なる検査/再実行の件数は加算しない。
 
 RNの署名iOS #72/run41291615693/job124803858306を一回起動し、b187b790をArchive中。ビルド番号・Apple処理・内部配布の最終結果は後続へ記録する。既存7101の本人確認を、新累積Analysisの端末成功へ流用しない。
+
+
+RNb187b790の自動CIは実行5本全てsuccess（phase6 guards push/PR各119、exact Draft head226、terminal Step7の構文/12 unittest/226 pytest、policy2/41 deselected）。このheadではPiece metrics/canvasを実行していないため、旧V4 19/legacy canvas13は未再判定。JS全体1287成功はlocalの別検証。API/DB配置とiOS進行の記録3fileはRN a0dececcへ反映、実製品buildは引き続きb187b790の#72で一回のみ。
+
+
+### §44 最終配布結果
+
+iOS #72/run41291615693/job124803858306（RN製品b187b790）は署名Archive、写真目的文検査、IPA、TestFlight Uploadを含む全19step success（build15分13秒）。Appleで1.0（7201）/build3820c27a-222a-4baf-8e2a-141b149d349fの処理完了、暗号化区分を従来と同じ「上記のアルゴリズムのどれでもない」で保存。既存内部グループ「Emlis テスト版配布」のビルド一覧で7201が「テスト中」となったことを確認した。新規グループ/テスター追加、外部配布/App Store公開は行っていない。
+
+実装・GitHub・DB・API稼働・7201内部配布まで完了。現在mapの全期間化、適格本人補足、月次当時保存/現在併記、2/12/全閲覧、元記録根拠、tier変更時保持/source削除時purgeを含む。source構文の一般理解、本人の新Analysis端末確認、IF/Savedは今回完了に含めない。過去未保存月はbackfillしない。GPU再起動/新モデル呼出し0。設定/料金/こころ天気の既決権利を変更しない。STRUCTURE_MAP_DELTA_PRESENT（前述ownerの新配布結果）。
