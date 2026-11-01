@@ -140,7 +140,7 @@ function buildSavedPieceInput(savedInputId, expectedUserId) {
  * Home（InputScreen）
  * - 背景・パネル・ボタンなどを ThemeContext から取得
  */
-export default function InputScreen({ navigation, route }) {
+export default function InputScreen({ navigation, route, onInitialInputSettled, appStartupReady = true }) {
   const { colors, themeName } = useTheme();
   const { setUnread } = useUnread();
   const { session } = useAuth();
@@ -359,7 +359,8 @@ const homeState = useHomeState({
     activeStartupPopup,
     advanceStartupPopupQueue,
     closeStartupPopupWindow,
-    globalEmotionUsers,
+    initialHomeReadComplete,
+    homeReadError,
     isNoticeStartupPopupVisible,
     isTodayQuestionStartupPopupVisible,
     isTutorialStartupPopupVisible,
@@ -520,8 +521,6 @@ const safeInsets = useSafeAreaInsets();
     tutorialStep >= INPUT_TUTORIAL_STEP_START &&
     tutorialStep <= INPUT_TUTORIAL_STEP_END;
   const shouldHideTodayQuestionForTutorial = isTutorialMode;
-  const shouldHideHomeSummaryForTutorial =
-    isInputTutorialStep && tutorialStep === INPUT_TUTORIAL_STEP_START;
   const shouldHideInputHistoryForTutorial =
     isInputTutorialStep && tutorialStep === INPUT_TUTORIAL_STEP_START;
   const shouldShowHomeQuickActionsRow =
@@ -600,6 +599,7 @@ const safeInsets = useSafeAreaInsets();
     restorePendingInputDraft,
     discardPendingInputDraft,
     draftRestoreSavedAtLabel,
+    draftBootstrapComplete,
   } = useInputDraftPersistence({
     currentUserId,
     isTutorialMode,
@@ -613,6 +613,12 @@ const safeInsets = useSafeAreaInsets();
     applyInputDraft,
     showToast,
   });
+
+  useEffect(() => {
+    if (initialHomeReadComplete && draftBootstrapComplete && !startupQueuePreparing) {
+      onInitialInputSettled?.(currentUserId);
+    }
+  }, [initialHomeReadComplete, draftBootstrapComplete, startupQueuePreparing, currentUserId, onInitialInputSettled]);
 
   useEffect(() => {
     if (!tutorialResetToken) return;
@@ -1329,27 +1335,12 @@ ${String(error?.message || error)}`
               </View>
 
               <View style={styles.homeOverviewBlock}>
-                {!shouldHideHomeSummaryForTutorial ? (
-                  <View style={styles.globalSummaryBlock}>
-                  <View style={styles.globalSummaryInner}>
-                    <View style={styles.globalSummaryHeaderRow}>
-                      <Ionicons
-                        name="radio-outline"
-                        size={14}
-                        color={colors.TITLE_GOLD}
-                        style={styles.globalSummaryIcon}
-                      />
-                      <Text style={styles.globalSummaryLabel}>今日の全体行動</Text>
-                    </View>
-                    <Text style={styles.globalSummaryText}>
-                      {`今日、全体で ${
-                        typeof globalEmotionUsers === "number" ? globalEmotionUsers : "—"
-                      } 人が感情入力しました`}
-                    </Text>
-                  </View>
+                {homeReadError ? (
+                  <View accessibilityLiveRegion="polite" style={{ marginBottom: 12 }}>
+                    <Text style={{ color: colors.TEXT_ON_LIGHT }}>ホームの情報を読み込めませんでした。</Text>
+                    <CocolonPressable accessibilityRole="button" accessibilityLabel="ホームをもう一度読み込む" style={{ minHeight: 44, justifyContent: "center" }} onPress={() => loadHomeState({ force: true, includeStartupCandidate: false })} disabled={noticeLoading}><Text style={{ color: colors.TITLE_GOLD }}>もう一度読み込む</Text></CocolonPressable>
                   </View>
                 ) : null}
-
                 {shouldShowHomeQuickActionsRow ? (
                   <View style={styles.homeQuickActionsRow}>
                   {!shouldHideTodayQuestionForTutorial && hasTodayQuestionSlot ? (
@@ -1531,7 +1522,7 @@ ${String(error?.message || error)}`
   colors={colors}
   isTutorialMode={isTutorialMode}
   noticeFeatureEnabled={noticeFeatureEnabled}
-  isNoticeStartupPopupVisible={isNoticeStartupPopupVisible}
+  isNoticeStartupPopupVisible={appStartupReady && isNoticeStartupPopupVisible}
   noticePopup={noticePopup}
   noticeLoading={noticeLoading}
   handleDismissNoticeModal={handleDismissNoticeModal}
@@ -1540,14 +1531,14 @@ ${String(error?.message || error)}`
   isWelcomeNoticeStartupPopup={isWelcomeNoticeStartupPopup}
   handlePrimaryNoticeModalAction={handlePrimaryNoticeModalAction}
   shouldHideTodayQuestionForTutorial={shouldHideTodayQuestionForTutorial}
-  isTodayQuestionStartupPopupVisible={isTodayQuestionStartupPopupVisible}
+  isTodayQuestionStartupPopupVisible={appStartupReady && isTodayQuestionStartupPopupVisible}
   todayQuestionBundle={todayQuestionBundle}
   todayQuestionLoading={todayQuestionLoading}
   todayQuestionSubmitting={todayQuestionSubmitting}
   handleDismissTodayQuestionModal={handleDismissTodayQuestionModal}
   handleSubmitTodayQuestion={handleSubmitTodayQuestion}
   handleOpenTodayQuestionHistory={handleOpenTodayQuestionHistory}
-  draftRestoreModalVisible={draftRestoreModalVisible}
+  draftRestoreModalVisible={appStartupReady && draftRestoreModalVisible}
   draftRestoreSavedAtLabel={draftRestoreSavedAtLabel}
   restorePendingInputDraft={restorePendingInputDraft}
   discardPendingInputDraft={discardPendingInputDraft}
@@ -1737,41 +1728,7 @@ function createStyles(COLORS, ui) {
       fontWeight: "800",
       color: "#FFFFFF",
     },
-    globalSummaryBlock: {
-      width: "100%",
-      alignSelf: "stretch",
-      marginBottom: 8,
-    },
-    globalSummaryInner: {
-      width: "100%",
-      alignSelf: "stretch",
-      borderTopWidth: 1,
-      borderBottomWidth: 1,
-      borderTopColor: COLORS.CARD_BORDER,
-      borderBottomColor: COLORS.CARD_BORDER,
-      paddingVertical: 8,
-    },
-    globalSummaryHeaderRow: {
-      flexDirection: "row",
-      alignItems: "center",
-      marginBottom: 4,
-    },
-    globalSummaryIcon: {
-      marginRight: 6,
-    },
-    globalSummaryLabel: {
-      fontSize: 11,
-      fontWeight: "800",
-      letterSpacing: 0.3,
-      color: COLORS.TEXT_ON_LIGHT,
-    },
-    globalSummaryText: {
-      fontSize: 12,
-      lineHeight: 18,
-      color: COLORS.TEXT_ON_LIGHT,
-      fontWeight: "400",
-      marginBottom: 2,
-    },
+
     accountIconButton: {
       width: 42,
       height: 38,

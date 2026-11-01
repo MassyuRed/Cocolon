@@ -10,7 +10,7 @@ import { CameraRoll } from '@react-native-camera-roll/camera-roll';
 import { Dirs, FileSystem } from 'react-native-file-access';
 import { requestPieceOwner, PieceApiError } from './pieceApi';
 import { readPieceOwnerDisplay } from './pieceOwnerModel';
-import { preparePieceNativeSavedDisplay, PIECE_NATIVE_PREVIEW_VERSION, PIECE_BITMAP_RENDERER_VERSION } from './pieceLayout';
+import { preparePieceNativeSavedDisplay, PIECE_NATIVE_PREVIEW_VERSION, PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION } from './pieceLayout';
 
 const failed = () => new PieceApiError('PIECE_TEMPORARILY_UNAVAILABLE');
 const hashPattern = /^[0-9a-f]{64}$/;
@@ -88,7 +88,7 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
   const record = await readExportRecord();
   current();
   const input = preparePieceNativeSavedDisplay(record);
-  if (!input || ![PIECE_NATIVE_PREVIEW_VERSION, PIECE_BITMAP_RENDERER_VERSION].includes(record.renderer_version)) throw failed();
+  if (!input || ![PIECE_NATIVE_PREVIEW_VERSION, PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION].includes(record.renderer_version)) throw failed();
   const dirs = roots();
   try { await prepareRawCache(dirs.raw); } catch { throw failed(); }
   current();
@@ -98,7 +98,7 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
     if (busy || captured || target?.key !== input.key || target.width !== input.width ||
         target.height !== input.height || typeof target.isCurrent !== 'function' || !target.node) throw failed();
     const check = () => { current(); if (target.isCurrent() !== true) throw failed(); };
-    if (record.renderer_version === PIECE_BITMAP_RENDERER_VERSION &&
+    if ([PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION].includes(record.renderer_version) &&
         (typeof target.bitmapToken !== 'string' || !target.bitmapToken ||
          typeof target.bitmapBinding !== 'string' || !target.bitmapBinding)) throw failed();
     check(); busy = true;
@@ -112,7 +112,7 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
     try {
       raw = await captureRef(target.node, { format: 'png', result: 'tmpfile', quality: 1,
         width: input.width, height: input.height, snapshotContentContainer: false, cocolonPieceCache: true,
-        ...(record.renderer_version === PIECE_BITMAP_RENDERER_VERSION ? {
+        ...([PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION].includes(record.renderer_version) ? {
           useRenderInContext: true, cocolonPieceBitmapToken: target.bitmapToken, cocolonPieceBitmapBinding: target.bitmapBinding } : {}) });
       const source = rawPath(raw, dirs.raw);
       check();

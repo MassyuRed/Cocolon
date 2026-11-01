@@ -65,13 +65,17 @@ export function AuthProvider({ children }) {
     let mounted = true;
 
     (async () => {
-      const { data, error } = await supabase.auth.getSession();
-      if (!mounted) return;
-      if (error) {
-        console.warn("getSession error:", error);
+      try {
+        const { data, error } = await supabase.auth.getSession();
+        if (!mounted) return;
+        if (error) throw error;
+        setSession(data?.session ?? null);
+      } catch (error) {
+        if (!mounted) return;
+        setAuthError("ログイン情報を取得できませんでした。もう一度ログインしてください。");
+      } finally {
+        if (mounted) setInitializing(false);
       }
-      setSession(data?.session ?? null);
-      setInitializing(false);
     })();
 
     const {

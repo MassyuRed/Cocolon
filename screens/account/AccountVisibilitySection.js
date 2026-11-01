@@ -128,7 +128,7 @@ export default function AccountVisibilitySection({
           <View style={{ marginTop: 10 }}>
             <VisibilitySettingRow
               styles={styles}
-              title="ピースの公開設定"
+              title="アカウントの公開設定"
               description="非公開にすると、フォロー時に承認が必要になります。おすすめにも表示されなくなります"
               isPublic={!accountVisibility.is_private_account}
               onPressPublic={() =>
@@ -145,18 +145,7 @@ export default function AccountVisibilitySection({
               }
               disabled={visibilitySaving}
             />
-            <VisibilitySettingRow
-              styles={styles}
-              title="ランキング表示設定"
-              isPublic={!!accountVisibility.is_ranking_visible}
-              onPressPublic={() =>
-                patchAccountVisibilityMe({ is_ranking_visible: true })
-              }
-              onPressPrivate={() =>
-                patchAccountVisibilityMe({ is_ranking_visible: false })
-              }
-              disabled={visibilitySaving}
-            />
+
 
             <VisibilitySettingRow
               styles={styles}

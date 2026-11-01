@@ -2321,9 +2321,9 @@ RN巨大画面分割により、App root と Home(Input) は entry shell + submo
 | `Cocolon/navigation/InputStackNavigator.js` | Input stack route定義。route名は変更しない |
 | `Cocolon/navigation/AnalysisStackNavigator.js` | Analysis stack route定義。AnalysisからPiece deep dive導線を維持する |
 | `Cocolon/navigation/PieceStackNavigator.js` | Piece stack route定義。PieceLibrary / EmotionLog / TutorialFlow route名を維持する |
-| `Cocolon/navigation/RankingStackNavigator.js` | Ranking stack route定義 |
+| `Cocolon/navigation/RankingStackNavigator.js` | historicalな非接続source。§43候補でMainTabsからimport/routeを撤去 |
 | `Cocolon/navigation/SettingsStackNavigator.js` | Settings stack route定義 |
-| `Cocolon/navigation/MainTabs.js` | tab bar / unread badge / startup warmup / self-structure bannerを扱う |
+| `Cocolon/navigation/MainTabs.js` | 4 tab / unread badge / startup warmup / self-structure banner。§43候補はprovider/Home/draft初期準備まで子をmountしたまま全面loading、初回完了後はrefreshで戻さない |
 | `Cocolon/navigation/RootNavigator.js` | auth gate、IAP observer、push token sync、root runtimeを扱う |
 | `Cocolon/runtime/AppRuntimeBootstrapGate.js` | `/app/bootstrap` refreshとbootstrap失敗監視を扱う |
 | `Cocolon/runtime/AppRuntimeBlockingScreen.js` | minimum version block / maintenance表示境界 |
@@ -5945,3 +5945,18 @@ Mashは7001で画像生成・一覧表示・スマホ写真フォルダへの保
 API piece_source.pyの選択JSON根拠はprivate selection_contextsへ分離し、可視graph/owner/planの命題にはしない。原recordへの束縛と変更検知を維持する。piece_v1c.pyの唯一作者は元memo/actionだけを整形し、metadataからの追加節を廃止。piece_v2_content_policy.pyの独立検査は余分な節/段落を拒否する。短い完成文もpaddingなしで扱うためshort_essay下限は非空（1..420正規化字/最大6文、1..3段落）。非表示選択だけで名詞断片を完成文へ昇格しない。quote/declarationの制約、既存安全/owner/source/枠/receiptは保持する。
 
 既存保存済みrecord/本文/hash/端末画像を移行・書換しない。RN製品source/公開wire/DB schema/依存変更0、7001を継続し署名build追加0。STRUCTURE_MAP_DELTA_PRESENT（private選択contextと可視本文の分離）。最新の検証・API配置結果はweekly第9回§41へ記録する。Share送信/Android/一般日本語品質/全機能受入れを本人の今回確認へ含めない。
+
+
+## 2026-11-01 §43 — 起動待ち・画面整理・Emlisブランド（配布前候補）
+
+| owner | 今回の変更 |
+|---|---|
+| runtime/AppStartupLoadingView.js（新規）, AppRuntimeBootstrapGate.js, RootNavigator.js | 共通の起動loading表示。認証・runtimeの初回待ちを同じ見た目で継続 |
+| MainTabs.js, InputStackNavigator.js, InputScreen.js, useHomeState.js | provider初回通信/Home初回settled/draft準備を待ち、Modalはreadyまで表示だけ抑制。失敗はHome再読込、owner/request世代を分離。Home全体行動撤去 |
+| AuthContext.js, SubscriptionContext.js | 初回session取得のrejectでも読込が終了し既存ログイン/権限なしfallbackへ進む |
+| navigationConstants.js, MainTabs.js, TutorialFlowScreen.js, PieceLibraryScreen.js, account/AccountVisibilitySection.js | Rankingの通常tab/導線/表示設定/説明を撤去。元DB/APIやPiece全体感情集計は維持 |
+| guidesJa.js, termsJa.js, tutorialScenarioData.js | 設定以外の案内を現UI/本人Piece一覧/画像準備/Photosへ同期。日週月こころ天気の案内は維持 |
+| pieceLayout.js, pieceRenderer.js, PieceVisualCard.js, pieceExport.js, pieceApi.js, PiecePreviewModal.js, PieceTextMetrics.mm | 旧ios.v1=Cocolon、新ios.v2=Emlis。compiled native capability header、保存版を保持。完成bitmap8秒後保持とprivate native token/export経路は二版共通 |
+| tests/app-startup.test.js（新規）と既存Piece/subscription/screen tests | 遅い初期通信、owner切替、失敗とretry、mount/draft保持、v1/v2の測定/保持/保存/出力互換 |
+
+分析の画面・履歴・未読・通知・tutorialと課金表示catalogは、Mashの削除取消を受けfresh sourceへ戻した。構造差分は起動/Ranking/brandのみ。署名build/配布は後続。STRUCTURE_MAP_DELTA_PRESENT。

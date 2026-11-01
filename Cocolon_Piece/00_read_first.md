@@ -8,7 +8,7 @@ document_status: "CURRENT_PIECE_WORKSTREAM_ENTRY"
 automatic_progression: false
 ---
 
-> 11/1最新はweekly第9回§39。6801の応答UIをMashが確認。Piece preview422と時計への重なりを受領し、既存modalの安全領域/案内文を修復。候補/配布/本人確認を区別する。
+> 11/1最新は第9回§43。7001の生成/一覧/Photos成功を本人確認済み。本文はユーザー本文のみ、APIba0de502 Live。次候補はios.v2=Emlis、旧v1=Cocolonを保存版どおり保持。compiled capability/保存/描画/保持/exportの二版互換を実装、recipe/DB不変。新配置/署名build/内部配布は後続。詳細はcurrent Piece map §43差分と全体最新情報。
 
 
 

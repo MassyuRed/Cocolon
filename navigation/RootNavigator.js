@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { ActivityIndicator, View } from "react-native";
+import { View } from "react-native";
 
 import { useAuth } from "../AuthContext";
 import AuthScreen from "../AuthScreen";
@@ -9,6 +9,7 @@ import { startIapPurchaseObserver, stopIapPurchaseObserver } from "../lib/iap/ia
 import { startPushTokenSync, syncPushTokenOnce } from "../lib/pushToken";
 import { captureClientError } from "../lib/monitoring";
 import { tryOpenRouteIfPending } from "./navigationRef";
+import AppStartupLoadingView from "../runtime/AppStartupLoadingView";
 import MainTabs from "./MainTabs";
 
 export default function RootNavigator() {
@@ -61,11 +62,7 @@ export default function RootNavigator() {
   }, [!!session, recoveryMode]);
 
   if (initializing) {
-    return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <ActivityIndicator />
-      </View>
-    );
+    return <AppStartupLoadingView />;
   }
 
   if (recoveryMode) return <AuthScreen />;

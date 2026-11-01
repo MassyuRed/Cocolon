@@ -20,6 +20,7 @@ export const PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION = 'piece.rn_native_prev
 export const PIECE_BITMAP_PREVIEW_VERSION = 'piece.rn_bitmap_preview.prototype.v1';
 // External saved identity is distinct from the immutable measurement profile.
 export const PIECE_BITMAP_RENDERER_VERSION = 'piece.rn_bitmap_renderer.ios.v1';
+export const PIECE_BITMAP_RENDERER_V2_VERSION = 'piece.rn_bitmap_renderer.ios.v2';
 const nativeThemes = {
   soft_paper: { canvas: '#F6F1E8', surface: '#FFFDF8', text: '#111827', secondary: '#4B5563',
     accent: '#800020', border: '#D7D2C9', branding: '#800020', vector_end: '#FFFFFF' },
@@ -43,7 +44,7 @@ export function preparePieceNativePreview(display, nowMs = Date.now()) {
   const checked = readPiecePreviewDisplay(display, nowMs);
   if (!checked.hashVerified || !checked.preview) return null;
   const p = checked.preview;
-  const candidateProfile = [PIECE_BITMAP_PREVIEW_VERSION, PIECE_BITMAP_RENDERER_VERSION].includes(p.renderer_version) ? PIECE_BITMAP_PREVIEW_VERSION
+  const candidateProfile = [PIECE_BITMAP_PREVIEW_VERSION, PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION].includes(p.renderer_version) ? PIECE_BITMAP_PREVIEW_VERSION
     : p.renderer_version === PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION ? PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION
     : p.renderer_version === PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION ? PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION
     : p.renderer_version === PIECE_NATIVE_PREVIEW_V9_VERSION ? PIECE_NATIVE_PREVIEW_V9_VERSION
@@ -65,9 +66,9 @@ export function preparePieceNativePreview(display, nowMs = Date.now()) {
 export function preparePieceNativeSavedDisplay(raw) {
   try {
     const p = readPieceOwnerDisplay(raw);
-    if (![PIECE_NATIVE_PREVIEW_VERSION, PIECE_BITMAP_RENDERER_VERSION].includes(p.renderer_version) ||
-        p.renderer_version === PIECE_BITMAP_RENDERER_VERSION && Platform.OS !== 'ios') return null;
-    const profile = p.renderer_version === PIECE_BITMAP_RENDERER_VERSION ? PIECE_BITMAP_PREVIEW_VERSION : PIECE_NATIVE_PREVIEW_VERSION;
+    if (![PIECE_NATIVE_PREVIEW_VERSION, PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION].includes(p.renderer_version) ||
+        [PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION].includes(p.renderer_version) && Platform.OS !== 'ios') return null;
+    const profile = [PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION].includes(p.renderer_version) ? PIECE_BITMAP_PREVIEW_VERSION : PIECE_NATIVE_PREVIEW_VERSION;
     const key = JSON.stringify([profile, 'saved', p.piece_id, p.public_id,
       p.row_version, p.saved_at, p.piece_text_hash, p.content_payload_hash, p.visual_recipe_hash, p.renderer_version]);
     return preparePieceNativeArtifact(p, key, profile);
@@ -94,6 +95,7 @@ function preparePieceNativeArtifact(p, key, candidateProfile = PIECE_NATIVE_PREV
     contentWidth: 1080 - 2 * margin, contentHeight: (tall ? 1920 : 1350) - 2 * margin - brandingZone,
     blocks: [...p.content_payload.body_blocks], sizes: [...nativeScales[p.format_type][ratio]],
     lineRatio: nativeLineRatios[p.format_type], paragraphRatio: p.format_type === 'short_essay' ? 0.65 : 0,
+    brandingText: p.renderer_version === PIECE_BITMAP_RENDERER_V2_VERSION ? 'Emlis' : 'Cocolon',
     alignment: p.format_type === 'quote' ? 'center' : 'left',
     colors: { ...nativeThemes[recipe.theme.theme_id] }, brandingMode: recipe.branding.branding_mode });
 }
@@ -136,7 +138,7 @@ export function recordPieceNativeMeasurement(input, state, ticket, blockIndex, k
         !['x', 'y', 'width', 'height'].every(k => nativeFinite(line[k])) || line.width < 0 || line.height <= 0)) {
       return nativeReject(state, 'invalid_measurement');
     }
-    if (value.map(line => line.text).join('') !== (branding ? 'Cocolon' : input.blocks[blockIndex])) {
+    if (value.map(line => line.text).join('') !== (branding ? input.brandingText : input.blocks[blockIndex])) {
       return nativeReject(state, 'text_mismatch');
     }
     if (input.plannedRows && !branding && value.length !== 1) return nativeReject(state, 'native_rewrap');
@@ -158,7 +160,7 @@ export function recordPieceNativeMeasurement(input, state, ticket, blockIndex, k
     for (let index = 0; index < count; index++) {
       const { box, lines } = blocks[index], brand = index === input.blocks.length;
       if (Math.abs(box.width - (brand ? input.contentWidth : input.width)) > 0.5 || lines.length !== 1 ||
-          lines[0].width > input.contentWidth || lines[0].end !== (brand ? 'Cocolon' : input.blocks[index]).length) {
+          lines[0].width > input.contentWidth || lines[0].end !== (brand ? input.brandingText : input.blocks[index]).length) {
         return nativeReject(next, 'invalid_bitmap_source');
       }
     }

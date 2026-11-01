@@ -8,9 +8,9 @@ const flush = async () => { for (let i = 0; i < 12; i += 1) await Promise.resolv
 
 // Run the real provider with deterministic hook/store/network doubles. No
 // second implementation of the owner or asynchronous request logic is used.
-function provider(initialOwner = null) {
+function provider(initialOwner = null, initialReader = null) {
   const slots = [], effects = [], timers = [], requests = [];
-  let cursor = 0, session = initialOwner ? { user: { id: initialOwner }, access_token: 'synthetic-' + initialOwner } : null, auth, sessionRead = null;
+  let cursor = 0, session = initialOwner ? { user: { id: initialOwner }, access_token: 'synthetic-' + initialOwner } : null, auth, sessionRead = initialReader;
   const slot = initial => { const i = cursor++; if (!(i in slots)) slots[i] = initial(); return i; };
   const bindings = {
     createContext: () => ({}), useContext: () => null,
@@ -102,4 +102,12 @@ test('auth switch during getSession cannot start an old request', async () => {
 test('cached ensurePaid result is invalidated by an intervening logout', async () => {
   const p = provider(); await flush(); p.switchTo('A'); await p.drain(); p.requests[0].resolve(paid); await flush();
   const old = p.render().ensurePaid(); p.switchTo(null); assert.equal(await old, false);
+});
+
+test('initial auth lookup failure settles unknown subscription state for startup fallback', async () => {
+  const p = provider('A', () => Promise.reject(Error('offline')));
+  await flush();
+  assert.equal(p.render().tier, 'free');
+  assert.equal(p.render().isPaid, false);
+  assert.equal(p.requests.length, 0);
 });

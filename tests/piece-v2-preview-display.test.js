@@ -391,7 +391,7 @@ test('visual controls send current values, replace only recipe/revisions, and an
   uiButton(u, '画像比率：9:16').props.onPress(); await pieceTick();
   assert.deepEqual(JSON.parse(u.calls[2][1].body), { expected_preview_revision: 2,
     visual_selection: { theme_id: 'quiet_night', aspect_ratio: '9:16', branding_mode: 'required_subtle' } });
-  uiButton(u, 'Cocolonの表記：表示なし').props.onPress(); await pieceTick();
+  uiButton(u, 'ブランド表記：表示なし').props.onPress(); await pieceTick();
   assert.equal(u.read(u.host.controller.getView(), NOW).preview.visual_recipe.branding.branding_mode, 'off');
   u.host.componentWillUnmount();
 });

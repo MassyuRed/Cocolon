@@ -21,7 +21,7 @@ import { navigationRef, buildAnalysisRootNavigationParams } from "./navigationRe
 import InputStackNavigator from "./InputStackNavigator";
 import AnalysisStackNavigator from "./AnalysisStackNavigator";
 import PieceStackNavigator from "./PieceStackNavigator";
-import RankingStackNavigator from "./RankingStackNavigator";
+import AppStartupLoadingView from "../runtime/AppStartupLoadingView";
 import SettingsStackNavigator from "./SettingsStackNavigator";
 import {
   ANALYSIS_REPORT_READ_STATUS_CHUNK_SIZE,
@@ -64,9 +64,7 @@ function CocolonTabBar(props) {
   const currentRoute = state.routes[state.index];
   const currentRouteName = currentRoute?.name;
   const effectiveRouteName =
-    typeof currentRouteName === "string" && currentRouteName.startsWith("Ranking")
-      ? "RankingTop"
-      : PIECE_SUB_ROUTES.has(currentRouteName)
+    PIECE_SUB_ROUTES.has(currentRouteName)
       ? "Piece"
       : currentRouteName;
 
@@ -107,7 +105,7 @@ export default function MainTabs() {
     applyStartupSnapshot,
   } = useUnread();
 
-  const { isPaid, loading: subscriptionLoading } = useSubscription();
+  const { isPaid, loading: subscriptionLoading, tier, subscriptionBootstrapLoaded, subscriptionBootstrapLoading } = useSubscription();
   const { session, recoveryMode } = useAuth();
   const {
     isTutorialMode,
@@ -136,6 +134,19 @@ export default function MainTabs() {
   const analysisSubscriptionRefreshPendingRef = useRef(false);
 
   const [activeRouteName, setActiveRouteName] = useState("Input");
+  const [activeLeafName, setActiveLeafName] = useState("Input");
+  const [initialInputOwner, setInitialInputOwner] = useState(null);
+  const [startupComplete, setStartupComplete] = useState(false);
+  const currentOwner = session?.user?.id || null;
+  const onInitialInputSettled = React.useCallback((owner) => {
+    if (owner && owner === currentOwner) setInitialInputOwner(owner);
+  }, [currentOwner]);
+  const commonStartupReady = subscriptionBootstrapLoaded && !subscriptionBootstrapLoading && !subscriptionLoading && tier !== "unknown" && tutorialFlagsLoaded;
+  const homeStartupRequired = !isTutorialMode && activeRouteName === "Input" && activeLeafName === "Input";
+  const appStartupReady = startupComplete || (commonStartupReady && (!homeStartupRequired || initialInputOwner === currentOwner));
+  useEffect(() => {
+    if (appStartupReady) setStartupComplete(true);
+  }, [appStartupReady]);
   const frameEnabled = !HIDDEN_SCREENS.has(activeRouteName);
   const [pieceLinkPayload, setPieceLinkPayload] = useState(null);
 
@@ -176,9 +187,7 @@ export default function MainTabs() {
   const getTabBarActiveName = React.useCallback((name) => {
     const n = typeof name === "string" ? name : "";
     const effective =
-      n.startsWith("Ranking")
-        ? "RankingTop"
-        : PIECE_SUB_ROUTES.has(n)
+      PIECE_SUB_ROUTES.has(n)
         ? "Piece"
         : n;
     return MAIN_TAB_ROUTES.has(effective) ? effective : "Input";
@@ -1042,6 +1051,8 @@ export default function MainTabs() {
   ) : null;
 
   return (
+    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1 }} accessibilityElementsHidden={!appStartupReady} importantForAccessibility={appStartupReady ? "auto" : "no-hide-descendants"}>
     <GlobalFrameLayout frameEnabled={frameEnabled} headerBottomSlot={selfStructureBannerHud}>
       <Tab.Navigator
         backBehavior="history"
@@ -1053,6 +1064,9 @@ export default function MainTabs() {
             const name = st?.routes?.[st?.index]?.name;
             if (!name) return;
             setActiveRouteName((prev) => (prev === name ? prev : name));
+            let leaf = st?.routes?.[st?.index];
+            while (leaf?.state?.routes?.length) leaf = leaf.state.routes[leaf.state.index || 0];
+            setActiveLeafName(leaf?.name || name);
           },
         }}
         screenOptions={({ route }) => ({
@@ -1070,7 +1084,6 @@ export default function MainTabs() {
               case "Input": iconName = "create-outline"; break;
               case "Analysis": iconName = "globe-outline"; break;
               case "Piece": iconName = "cube-outline"; break;
-              case "RankingTop": iconName = "trophy-outline"; break;
               case "Settings": iconName = "settings-outline"; break;
               default: iconName = "ellipse-outline";
             }
@@ -1104,7 +1117,6 @@ export default function MainTabs() {
               case "Input": label = "ホーム"; break;
               case "Analysis": label = "分析"; break;
               case "Piece": label = "ピース"; break;
-              case "RankingTop": label = "ランキング"; break;
               case "Settings": label = "設定"; break;
               default: label = route.name;
             }
@@ -1116,9 +1128,10 @@ export default function MainTabs() {
       >
         <Tab.Screen
           name="Input"
-          component={InputStackNavigator}
           listeners={({ navigation, route }) => ({ tabPress: (e) => handleMainTabPress(route.name, navigation, route, e) })}
-        />
+        >
+          {(props) => <InputStackNavigator {...props} onInitialInputSettled={onInitialInputSettled} appStartupReady={appStartupReady} />}
+        </Tab.Screen>
         <Tab.Screen
           name="Analysis"
           listeners={({ navigation, route }) => ({ tabPress: (e) => handleMainTabPress(route.name, navigation, route, e) })}
@@ -1148,17 +1161,15 @@ export default function MainTabs() {
           )}
         </Tab.Screen>
         <Tab.Screen
-          name="RankingTop"
-          component={RankingStackNavigator}
-          listeners={({ navigation, route }) => ({ tabPress: (e) => handleMainTabPress(route.name, navigation, route, e) })}
-        />
-        <Tab.Screen
           name="Settings"
           component={SettingsStackNavigator}
           listeners={({ navigation, route }) => ({ tabPress: (e) => handleMainTabPress(route.name, navigation, route, e) })}
         />
       </Tab.Navigator>
     </GlobalFrameLayout>
+    </View>
+    {!appStartupReady ? <AppStartupLoadingView overlay /> : null}
+    </View>
   );
 }
 

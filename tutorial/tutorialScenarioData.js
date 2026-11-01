@@ -400,5 +400,5 @@ export const TUTORIAL_SELF_ANALYSIS_GUIDE = Object.freeze({
 export const TUTORIAL_OTHER_ELEMENTS_GUIDE = Object.freeze({
   title: "その他の機能",
   body:
-    "Emlisには、感情通知やランキングなど、他にも楽しめる機能があります。\nチュートリアルが終わったら、アプリ内で確認してみてください。",
+    "Emlisには、感情通知や共鳴履歴など、他にも楽しめる機能があります。\nチュートリアルが終わったら、アプリ内で確認してみてください。",
 });

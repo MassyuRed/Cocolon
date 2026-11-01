@@ -73,7 +73,7 @@ export default function PiecePreviewModal({ visible = false, display, onClose, o
           element(Text, { style: { color: '#494949', fontSize: 14, lineHeight: 22 } },
             `画像比率：${preview.plan_capabilities.aspect_ratios.join(' / ')}`),
           element(Text, { style: { color: '#494949', fontSize: 14, lineHeight: 22 } },
-            `Cocolonの表記：${preview.plan_capabilities.branding_modes.map(mode => branding[mode]).join(' / ')}`),
+            `ブランド表記：${preview.plan_capabilities.branding_modes.map(mode => branding[mode]).join(' / ')}`),
           element(Text, { testID: 'piece-save-quota', style: { color: '#202020', fontSize: 16, marginTop: 8 } },
             `${preview.quota.month_key}（日本時間）の保存枠：${preview.quota.remaining_count === null
               ? '回数制限なし' : `残り${preview.quota.remaining_count}回 / ${preview.quota.save_limit}回`}`),
@@ -81,7 +81,7 @@ export default function PiecePreviewModal({ visible = false, display, onClose, o
             '取得時点の情報です。保存時に残り回数を確認します。文章の形式変更はまだ利用できません。'),
           choices('テーマ', 'theme_id', preview.plan_capabilities.theme_ids, themes),
           choices('画像比率', 'aspect_ratio', preview.plan_capabilities.aspect_ratios),
-          choices('Cocolonの表記', 'branding_mode', preview.plan_capabilities.branding_modes, branding),
+          choices('ブランド表記', 'branding_mode', preview.plan_capabilities.branding_modes, branding),
         ) : null,
         preview?.content_status === 'adjusted' ? element(Text, { style: { color: '#202020', fontSize: 16, marginBottom: 16 } },
           '伝えたい内容を保ちながら、共有に向けた調整がされています。') : null,

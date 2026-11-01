@@ -163,7 +163,7 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
     ['features/piece/pieceApi.js', ['PieceApiError', 'readPiecePreviewSnapshot', 'readPieceOwnerSnapshot']],
     ['features/piece/piecePreviewModel.js', ['readPiecePreviewDisplay', 'verifyPieceArtifactHashes']],
     ['features/piece/pieceOwnerModel.js', ['readPieceOwnerDisplay']],
-    ['features/piece/pieceLayout.js', ['PIECE_BITMAP_RENDERER_VERSION', 'PIECE_BITMAP_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_V4_VERSION', 'PIECE_NATIVE_PREVIEW_V5_VERSION', 'PIECE_NATIVE_PREVIEW_V6_VERSION', 'PIECE_NATIVE_PREVIEW_V7_VERSION', 'PIECE_NATIVE_PREVIEW_V8_VERSION', 'PIECE_NATIVE_PREVIEW_V9_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION', 'preparePieceNativeSavedDisplay', 'preparePieceNativeCard', 'preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
+    ['features/piece/pieceLayout.js', ['PIECE_BITMAP_RENDERER_VERSION', 'PIECE_BITMAP_RENDERER_V2_VERSION', 'PIECE_BITMAP_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_V4_VERSION', 'PIECE_NATIVE_PREVIEW_V5_VERSION', 'PIECE_NATIVE_PREVIEW_V6_VERSION', 'PIECE_NATIVE_PREVIEW_V7_VERSION', 'PIECE_NATIVE_PREVIEW_V8_VERSION', 'PIECE_NATIVE_PREVIEW_V9_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION', 'preparePieceNativeSavedDisplay', 'preparePieceNativeCard', 'preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
     ['features/piece/pieceRenderer.js', ['isPieceBitmapSaveAdmitted', 'pieceBitmapNativeView', 'pieceBitmapDeadlineCurrent', 'renderPieceBitmapCanvas', 'releasePieceBitmapCanvas', 'readPieceBitmapCanvas', 'inspectPieceText', 'readPieceTextInspection', 'inspectPieceSelectedLine', 'readPieceSelectedLineInspection', 'readPieceSelectedLineV2Inspection', 'inspectPieceSelectedLineV2', 'readPieceSelectedLineV3Inspection', 'inspectPieceSelectedLineV3', 'readPieceSelectedLineV4Inspection', 'inspectPieceSelectedLineV4', 'pieceContainmentV2DeadlineCurrent', 'measurePieceCandidates']],
     ['features/piece/pieceMeasuredWrap.js', ['planPieceMeasuredRows']],
     ['components/piece/PieceVisualCard.js', ['PieceVisualCard']],
@@ -2589,7 +2589,7 @@ async function finishBitmap(h) {
     const brand = i === h.drawing().blocks.length;
     sendBlock(h, i, { width: brand ? h.input().contentWidth : h.input().width,
       height: (brand ? 40 : h.card.state.measurement.plan.lineHeight) + 1 / 3,
-      lines: [{ text: brand ? 'Cocolon' : h.drawing().blocks[i], x: 0, y: 0, width: 500, height: brand ? 40 : h.card.state.measurement.plan.lineHeight }] });
+      lines: [{ text: brand ? h.input().brandingText : h.drawing().blocks[i], x: 0, y: 0, width: 500, height: brand ? 40 : h.card.state.measurement.plan.lineHeight }] });
   }
   h.render(); h.flushFrame(); h.flushFrame(); await tickV9();
 }
@@ -2945,4 +2945,23 @@ test('saved bitmap export target binds full canvas and native artifact and survi
     if(boundary==='unmount')h.card.componentWillUnmount();
     assert.equal(target.isCurrent(),boundary==='none');if(boundary!=='unmount')h.card.componentWillUnmount();
   }
+});
+
+// Public renderer v2 keeps the same measured/retained bitmap path while its
+// native source, layout checks and visible brand all use the saved version.
+test('Emlis bitmap brand is measured and retained after eight seconds without rewriting old saved brands', async () => {
+  const version = 'piece.rn_bitmap_renderer.ios.v2';
+  const p = { ...sample(), renderer_version: version, expires_at: new Date(NOW + 600000).toISOString() };
+  const h = bitmapHarness(v => v, { packet: p, version });
+  assert.equal(h.input().brandingText, 'Emlis');
+  const old = h.preparePieceNativeSavedDisplay({ ...savedSample(p), renderer_version: 'piece.rn_bitmap_renderer.ios.v1' });
+  assert.equal(old.brandingText, 'Cocolon');
+  await finishBitmap(h);
+  assert.equal(h.card.state.measurement.phase, 'native_checked');
+  assert.equal(h.bitmapCalls[0].rows.at(-1).text, 'Emlis');
+  const fit = h.fit(), artifact = h.card.bitmapArtifact;
+  h.now(NOW + 9000); h.monotonic(9000); h.card.componentDidUpdate();
+  assert.equal(h.card.bitmapArtifact, artifact);
+  assert.equal(fit.isCurrent(p, h.token), true);
+  h.card.componentWillUnmount();
 });

@@ -5,7 +5,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { PIECE_NATIVE_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION, PIECE_BITMAP_PREVIEW_VERSION, preparePieceNativeCard, createPieceNativeMeasurement, pieceNativeTypography, recordPieceNativeMeasurement } from '../../features/piece/pieceLayout';
 import { inspectPieceText, inspectPieceSelectedLine, inspectPieceSelectedLineV2, inspectPieceSelectedLineV3, inspectPieceSelectedLineV4, pieceContainmentV2DeadlineCurrent, measurePieceCandidates, pieceBitmapNativeView, pieceBitmapDeadlineCurrent, renderPieceBitmapCanvas, releasePieceBitmapCanvas } from '../../features/piece/pieceRenderer';
-import { PIECE_BITMAP_RENDERER_VERSION } from '../../features/piece/pieceLayout';
+import { PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION } from '../../features/piece/pieceLayout';
 import { planPieceMeasuredRows } from '../../features/piece/pieceMeasuredWrap';
 
 let pieceBitmapBindingSerial = 0;
@@ -141,7 +141,7 @@ export default class PieceVisualCard extends React.Component {
     if (this.saveFit || typeof listener !== 'function' || this.props.exportCanvas === true || this.props.savedRecord) return;
     const snapshot = this.state.measurement, binding = this.state.binding, operation = this.inspection, artifact = this.bitmapArtifact;
     const input = preparePieceNativeCard(this.props), token = display?.visualToken;
-    const deadline = this.deadline, retained = input?.rendererVersion === PIECE_BITMAP_RENDERER_VERSION;
+    const deadline = this.deadline, retained = [PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION].includes(input?.rendererVersion);
     let completed = artifact?.completedPreview;
     const completedCurrent = () => retained && !!completed && artifact.completedPreview === completed &&
       completed.deadline === deadline && completed.snapshot === snapshot && completed.operation === operation &&
@@ -398,7 +398,7 @@ export default class PieceVisualCard extends React.Component {
       const rows = Array.from({ length: count }, (_, index) => {
         const source = this.textNodes.get(index), brand = index === input.blocks.length;
         if (!source || source.generation !== snapshot.generation) throw new Error('PIECE_NATIVE_MEASUREMENT_UNAVAILABLE');
-        return { node: source.value, text: brand ? 'Cocolon' : input.blocks[index],
+        return { node: source.value, text: brand ? input.brandingText : input.blocks[index],
           fontSize: brand ? 28 : input.sizes[snapshot.sizeIndex], box: snapshot.blocks[index].box,
           lineEnds: snapshot.blocks[index].lines.map(line => line.end), lineWidth: snapshot.blocks[index].lines[0].width,
           gapAfter: brand ? 0 : input.rowGaps[index], kind: brand ? 'branding' : 'body' };
@@ -447,7 +447,7 @@ export default class PieceVisualCard extends React.Component {
         const node = this.textNodes.get(index);
         if (node?.generation !== snapshot.generation) throw new Error('PIECE_NATIVE_MEASUREMENT_UNAVAILABLE');
         return { node: node.value, expected: {
-          text: index < input.blocks.length ? input.blocks[index] : 'Cocolon',
+          text: index < input.blocks.length ? input.blocks[index] : input.brandingText,
           fontSize: index < input.blocks.length ? input.sizes[snapshot.sizeIndex] : 28,
           box: snapshot.blocks[index].box, lineEnds: snapshot.blocks[index].lines.map(line => line.end),
           ...(pixels ? { stage, canvasNode: operation.canvas, expiresAt: this.deadline?.expiresAt,
@@ -709,7 +709,7 @@ export default class PieceVisualCard extends React.Component {
           top: input.height - input.margin - input.brandingZone,
           fontSize: 28, lineHeight: 40, includeFontPadding: false, textAlign: 'center',
           color: input.colors.branding, opacity: bitmap ? 0 : input.brandingMode === 'required_subtle' ? 0.8 : 1,
-        } }, 'Cocolon')) : null),
+        } }, input.brandingText)) : null),
       element(Text, { testID: 'piece-visual-status', accessibilityLiveRegion: 'polite',
         style: { fontSize: 14, lineHeight: 22, color: '#494949', marginTop: 8 } },
         measurement.phase === 'unavailable' ? '画像レイアウトを確認できませんでした。本文は下で確認できます。' :

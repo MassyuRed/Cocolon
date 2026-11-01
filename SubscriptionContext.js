@@ -192,6 +192,11 @@ export function SubscriptionProvider({ children }) {
         const { data } = await supabase.auth.getSession();
         session = data?.session;
       } catch {
+        if (mountedRef.current && ownerEpochRef.current === startingEpoch && tierRef.current === "unknown") {
+          setTier(DEFAULT_TIER);
+          setAllowedSelfStructureModes([]);
+          resetSubscriptionState();
+        }
         return { tier: DEFAULT_TIER, epoch: -1 };
       }
       const userId = session?.user?.id || null;

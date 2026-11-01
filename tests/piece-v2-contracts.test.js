@@ -74,12 +74,13 @@ function preview(format = 'short_essay') {
   };
 }
 
-function load({ send, session } = {}) {
+function load({ send, session, native = {} } = {}) {
   const source = fs.readFileSync(sourcePath, 'utf8');
   const dependency = 'import { apiFetch, getAccessToken } from "../../lib/apiClient";';
   assert.equal(source.split(dependency).length, 2, 'one established shared transport import');
   const calls = [], sessions = [];
   const context = vm.createContext({
+    ...native,
     apiFetch: async (...args) => {
       calls.push(args);
       return send ? send(...args) : { status: 200, json: async () => preview() };
@@ -91,7 +92,7 @@ function load({ send, session } = {}) {
   });
   // Evaluate the actual application module. Only ESM linkage is replaced;
   // the request/response/error/session implementation is not reimplemented.
-  vm.runInContext(source.replace(dependency, '').replace(/^export /gm, '') +
+  vm.runInContext(source.replace(dependency, '').replace(/^import .*;$/gm, '').replace(/^export /gm, '') +
     '\n globalThis.testApi = { requestPiecePreview, requestPiecePreviewVisualChange, requestPiecePreviewCancellation, requestPieceSave, PieceApiError };', context, { filename: sourcePath });
   return { ...context.testApi, calls, sessions };
 }
@@ -694,4 +695,10 @@ test('quota exhaustion is a save error and never a preview rejection or save adm
     return isCode('PIECE_QUOTA_EXHAUSTED')(error);
   });
   await assert.rejects(api.requestPiecePreview(request(), options()), isCode('PIECE_TEMPORARILY_UNAVAILABLE'));
+});
+
+for (const supported of [false,true]) test(`compiled bitmap bridge advertises Emlis capability only when supported (${supported})`, async () => {
+  const h = load({native:{Platform:{OS:'ios'},NativeModules:{PieceTextMetrics:{bitmapRendererVersion:supported?'piece.rn_bitmap_renderer.ios.v2':undefined}}}});
+  await h.requestPiecePreview(request(), options());
+  assert.equal(h.calls[0][1].headers['X-Piece-Renderer'], supported ? 'piece.rn_bitmap_renderer.ios.v2' : undefined);
 });

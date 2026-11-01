@@ -409,7 +409,7 @@ test('account changes remount private tab state; old hook callbacks cannot mutat
   function Tabs(){const [privateDraft]=React.useState(()=>`private-${session.user.id}-${++mounts}`);return React.createElement('Tabs',{privateDraft});}
   const {default:Root}=load('navigation/RootNavigator.js',{
     'react-native':{ActivityIndicator:'Spinner',View:'View'},'../AuthContext':{useAuth:()=>({session})},
-    '../AuthScreen':()=>null,'../SubscriptionContext':{useSubscription:()=>({subscriptionBootstrapLoaded:false})},
+    '../AuthScreen':()=>null,'../runtime/AppStartupLoadingView':()=>null,'../SubscriptionContext':{useSubscription:()=>({subscriptionBootstrapLoaded:false})},
     '../TutorialContext':{useTutorial:()=>({tutorialResetToken:0})},'./MainTabs':Tabs,
     '../lib/iap/iapService':{startIapPurchaseObserver:async()=>{},stopIapPurchaseObserver:()=>{}},
     '../lib/pushToken':{syncPushTokenOnce:async()=>{},startPushTokenSync:()=>()=>{}},
@@ -828,6 +828,7 @@ for (const readerEnabled of [true, false]) {
     }, false);
     const { default: Gate } = load('runtime/AppRuntimeBootstrapGate.js', {
       'react-native': native, '../AppRuntimeContext': runtime,
+      './AppStartupLoadingView': () => React.createElement('Spinner'),
       './AppRuntimeBlockingScreen': props => React.createElement('Blocked', props),
       '../lib/monitoring': { captureClientError() {} },
       '../theme/ThemeContext': { useTheme: () => ({ colors: {} }) },

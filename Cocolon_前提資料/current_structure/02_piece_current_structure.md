@@ -12,7 +12,7 @@ activation_effect: 1
 automatic_progression: false
 ---
 
-> 11/1最新はweekly第9回§39。6801の応答UIをMashが確認。Piece preview422と時計への重なりを受領し、既存modalの安全領域/案内文を修復。候補/配布/本人確認を区別する。
+> **11/1最新・第9回§43の配布前候補：7001で画像生成/一覧/Photosを本人確認済み。選択感情説明を画像本文へ追加しないAPIba0de502はLive。今回、旧ios.v1=Cocolonと新ios.v2=Emlisを保存rendererで区別し、新compiled iOSのみX-Piece-Rendererで二版対応を要求する。旧/欠落headerは既定v1、再読/visual/save/exportは保存版を保持。recipe内部IDとDB CHECKは不変。新配置/配布/端末確認は未完。**
 
 
 
@@ -3580,3 +3580,12 @@ API piece_source.pyの選択JSON根拠はprivate selection_contextsへ分離し�
 最新weekly第9回§42。Mashの希望はCocolon→Emlis、新規buildなし。現7001ではCard/line検査/native renderBitmapCanvasがCocolonを固定し、サーバー設定による文字列差替えはないため即時反映不可。次回buildにまとめる未実装項目として保持し、今回製品source/稼働/DB/buildは変更しない。
 
 owner：components/piece/PieceVisualCard.js、features/piece/pieceLayout.js、features/piece/pieceApi.js、ios/tempCocolon/PieceTextMetrics.mm。ブランドidentityを変える際はAPI piece_v2_visual.py/保存recipe/DB piece_records_recipe_shapeの旧版互換も整合させる。既存7001はCocolonのまま、希望表記Emlisは未反映。STRUCTURE_MAP_DELTA_NONE（read-only診断・変更要求の記録）。
+
+
+## 2026-11-01 §43 — 画像ブランドの版互換
+
+public renderer `piece.rn_bitmap_renderer.ios.v1`はCocolon、`.ios.v2`はEmlis。どちらも内部測定profile `piece.rn_bitmap_preview.prototype.v1`を使い、保存payload/recipe/hashとは独立にrenderer版を保存する。既存 `cocolon_text_mark`/version1は内部recipe識別子として維持し、DB migrationなし。
+
+RN pieceApiはPieceTextMetricsのcompiled `bitmapRendererVersion`がios.v2の場合のみheaderを付ける。API api_piece_v2の既存runtime v1を既定とし、exact headerの場合だけpreferred v2/allowed(v1,v2)。missing/unknownは既定版。初回発行・保存済みpreview再読・visual・saveのserviceが版を検査し、same-key replayや並行発行結果をv2へ書き換えない。旧7001はv1を継続し、未知v2保存recordの画像は拒否する既存境界を維持する。
+
+RN layoutのbrandingTextが表示・計測・文字数照合を統一し、native brand rowはCocolon/Emlisの二値のみ。Card完成保持/save admission/export native token/binding/useRenderInContextは二版共通。構築/初回採用8秒・source期限/owner/recipe/bitmap同一性を緩めない。対象API255成功（native SQL11はこのローカル実行では除外）、新JS保持/出力試験と起動試験を実施。実native画素/新iPhone結果は別確認。STRUCTURE_MAP_DELTA_PRESENT。

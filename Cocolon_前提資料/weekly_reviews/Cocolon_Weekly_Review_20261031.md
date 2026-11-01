@@ -1688,3 +1688,18 @@ Mashは画像下部のCocolonをEmlisへ変更し、新規ビルドを行わな�
 対象ownerはRN components/piece/PieceVisualCard.js（表示/測定）、features/piece/pieceLayout.js（文字/長さ照合）、features/piece/pieceApi.js（recipe受理）、ios/tempCocolon/PieceTextMetrics.mm（actual bitmap照合）。保存recipeはAPI piece_v2_visual.pyとDB piece_records_recipe_shape CHECKのcocolon_text_mark/version1にも結び付くため、旧保存版と新Emlis版のidentityを整合させて実装する。ID/版を変える場合のDB対応は新migrationとし、既存migrationを改変しない。今回の調査から新契約・DB変更の承認済みへは拡張しない。
 
 確認はcurrent sourceのread-only照合と補助監査。製品code/DB/API設定/deploy/署名build/生成/保存/GPU変更0。STRUCTURE_MAP_DELTA_NONE（変更要求と実装制約の記録のみ）。画像本文の感情説明廃止は別件で、APIba0de502のLiveと7001継続を保持する。
+
+## 43. 11/1 — 起動待ち・画面整理・ガイド照合とEmlisブランドをまとめて配布する（進行中）
+
+Mashは§42のロゴ変更を含め、起動時の読込表示を初期準備完了まで継続、ホームの「今日の全体行動」削除、ランキング画面/ランキング導線削除、設定以外のガイドとactual実装の照合修正後、新規ビルドを行うよう指示した。§42の「今回はbuildしない」はこの新指示で置換する。
+
+実装順は初期準備の完了条件と失敗/再試行→ホーム/分析/ランキングの画面と導線→ガイド/用語/既存チュートリアル整合→Pieceブランド互換→対象検証→同一候補の署名build/Apple処理/既存内部配布。初期準備中もInputをmountし、provider・本人home初回取得・下書き復元まで全画面の読込表示を保つ。無関係な別タブprefetchや定期未読取得を待ち条件へ混ぜず、失敗は再試行可能な表示へ移す。本人切替の旧要求が新本人の完了にならないよう区別する。
+
+後続のMash指示で、こころ天気の削除は取り消した。今のこころ天気/日週月タグ/履歴/未読/通知/分析チュートリアルは従来どおり保持し、変更しかけた関連sourceをfresh原本から復元した。ランキングはbottom tab/stack入口と専用表示設定/ガイドを外す。元データや保存済みreportは削除しない。Piece/Nexusの「今日の全体感情」は別表示として維持する。
+
+ブランドは保存renderer版で区別し、旧ios.v1はCocolon、新ios.v2はEmlisとする。新iOSのみ明示capability headerでv2を要求し、旧/欠落headerはv1。再読・visual変更・save・exportは保存版を引き継ぎ、旧recordのブランドを書き換えない。既存recipe内部ID/DB CHECKは維持。完成bitmapの保持、owner/source/hash/recipe/枠/明示private保存と写真保存の独立境界を保持する。
+
+当初確認したcurrentはRN dcc53a4e（製品source3a8660ba/7001）、API dea2d494（稼働製品ba0de502）。全機能原本全文、全体設計/全file地図の対象owner、最新weekly§11/§40〜42、現物sourceを照合。7001の画像生成/一覧/Photos保存と6901の余白修正は本人確認済みの履歴。今回の新候補の端末確認や全体品質合格へ移さない。GPU停止を維持する。
+
+
+§43 source検証：RNの全JS testは1279 PASS/FAIL0（Metro bundle再構築test1件はローカルにMetro依存がないため--test-skip-patternで対象外。署名buildの実bundleは後続）。API対象4fileは255 PASS/native SQL11 deselected/既存warning1。遅い購読初回通信、Home失敗と再試行、本人切替、mount/下書き保持、新v2のEmlis測定/8秒後同bitmap保持、v1/v2 export private token/binding、HTTP交渉/保存版保持を含む。設定以外のガイド本文リンク/relatedTermsの未定義参照0。独立read-only監査の指摘（購読bootstrap仮loaded、v2試験期限、用語読み、map不足説明）を修正済み。署名build/配置/本人端末はまだ未実行。

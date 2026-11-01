@@ -915,6 +915,9 @@ static NSDictionary *PieceContainmentV4Pixels(RCTTextView *view, UIView *canvas,
 
 @implementation PieceTextMetrics
 RCT_EXPORT_MODULE();
+- (NSDictionary *)constantsToExport {
+  return @{ @"bitmapRendererVersion": @"piece.rn_bitmap_renderer.ios.v2" };
+}
 @synthesize bridge = _bridge;
 + (BOOL)requiresMainQueueSetup { return NO; }
 - (dispatch_queue_t)methodQueue { return RCTGetUIManagerQueue(); }
@@ -1748,7 +1751,7 @@ RCT_EXPORT_METHOD(renderBitmapCanvas:(NSDictionary *)request resolver:(RCTPromis
         if(!PieceBitmapNumber(row[key]) || [row[key] doubleValue]<0){fail();return;}
       if([row[@"font_size"] doubleValue]<1 || [row[@"font_size"] doubleValue]>100 || [row[@"width"] doubleValue]<=0 || [row[@"height"] doubleValue]<=0 ||
          [row[@"line_width"] doubleValue]>cw || [row[@"gap_after"] doubleValue]>ch ||
-         (brand && (![row[@"text"] isEqual:@"Cocolon"] || [row[@"font_size"] doubleValue]!=28 || [row[@"gap_after"] doubleValue]!=0)) ||
+         (brand && ((![row[@"text"] isEqual:@"Cocolon"] && ![row[@"text"] isEqual:@"Emlis"]) || [row[@"font_size"] doubleValue]!=28 || [row[@"gap_after"] doubleValue]!=0)) ||
          (!brand && i+1==bodyCount && [row[@"gap_after"] doubleValue]!=0)) {fail();return;}
       if(!brand) summed+=[row[@"gap_after"] doubleValue];
       [tags addObject:row[@"tag"]];

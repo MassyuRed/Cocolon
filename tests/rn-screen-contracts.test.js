@@ -102,7 +102,7 @@ test('App root wires providers through Phase 9 navigation/runtime split modules'
   ], 'App.js Phase 9 provider shell');
 
   assertIncludes(constants, [
-    'export const MAIN_TAB_ROUTES = new Set(["Input", "Analysis", "Piece", "RankingTop", "Settings"]);',
+    'export const MAIN_TAB_ROUTES = new Set(["Input", "Analysis", "Piece", "Settings"]);',
     'export const PIECE_SUB_ROUTES = new Set',
     'export const ANALYSIS_SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY',
   ], 'navigationConstants.js');
@@ -151,7 +151,6 @@ test('App root wires providers through Phase 9 navigation/runtime split modules'
     'InputStackNavigator',
     'AnalysisStackNavigator',
     'PieceStackNavigator',
-    'RankingStackNavigator',
     'SettingsStackNavigator',
     'GlobalFrameLayout',
     'buildAnalysisRootNavigationParams',
@@ -160,7 +159,7 @@ test('App root wires providers through Phase 9 navigation/runtime split modules'
     'setUnread("Piece", "piecesNew"',
   ], 'MainTabs.js');
 
-  assertRegex(inputStack, /<InputStack\.Screen\s+name="Input"\s+component=\{InputScreen\}/, 'Input stack registration');
+  assertRegex(inputStack, /<InputStack\.Screen\s+name="Input">/, 'Input stack registration');
   assertRegex(analysisStack, /<AnalysisStack\.Screen\s+name="Analysis">/, 'Analysis stack registration');
   assertRegex(pieceStack, /<PieceStack\.Screen\s+name="Piece">/, 'Piece stack registration');
   assertRegex(settingsStack, /<SettingsStack\.Screen\s+name="SubscriptionSelect"\s+component=\{SubscriptionSelectScreen\}/, 'Subscription route registration');
@@ -1819,8 +1818,7 @@ test('AccountScreen keeps profile, follow, visibility, subscription, and ID sear
   assertIncludes(accountVisibilitySection, [
     'export default function AccountVisibilitySection',
     'VisibilitySettingRow',
-    'ピースの公開設定',
-    'ランキング表示設定',
+    'アカウントの公開設定',
     'ユーザーID表示設定',
     'ACCOUNT_WIRE.fields.shareCodePublic',
   ], 'AccountVisibilitySection.js');
@@ -2901,8 +2899,8 @@ test('Kokoro weather Phase 6 QA keeps scope on emotion analysis and preserves pl
 
   assertIncludes(guide, [
     'こころ天気（日）・こころ天気（週）・こころ天気（月）',
-    '感情分析のこころ天気',
-    'わたしマップの入口はFreeプランでも見られます。Plusプラン以上では、役割スイッチの一覧、よく通るルート、詳しい自己分析レポートを読めます。',
+    '今のこころ天気',
+    '表示できる内容はプランや保存された分析結果によって異なります。内容がまだ用意されていない場合や入力が足りない場合は、その旨が表示されます。',
   ], 'guide/guidesJa.js preserves emotion-only kokoro weather and self-analysis copy');
 
   assertIncludes(terms, [
@@ -4328,3 +4326,4 @@ test('P10 Gate Recovery public boundary RN contract keeps backend-owned passed p
   assert.equal(isPassedEmlisObservationReply(metaOnlyGateRecoveryPayload), false);
   assert.equal(buildPassedEmlisObservationModalPayload(metaOnlyGateRecoveryPayload), null);
 });
+

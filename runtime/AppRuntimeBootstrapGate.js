@@ -1,9 +1,10 @@
 import React, { useEffect, useRef } from "react";
-import { ActivityIndicator, Alert, Text, TouchableOpacity, View } from "react-native";
+import { Alert, Text, TouchableOpacity, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { useAppRuntime } from "../AppRuntimeContext";
 import { useTheme } from "../theme/ThemeContext";
+import AppStartupLoadingView from "./AppStartupLoadingView";
 import AppRuntimeBlockingScreen from "./AppRuntimeBlockingScreen";
 import { captureClientError } from "../lib/monitoring";
 
@@ -56,11 +57,7 @@ export default function AppRuntimeBootstrapGate({ children }) {
   }, [runBootstrapCheck]);
 
   if (!runtime?.loaded && runtime?.loading) {
-    return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <ActivityIndicator />
-      </View>
-    );
+    return <AppStartupLoadingView />;
   }
 
   if (runtime?.versionStatus?.minimumBlocked) {

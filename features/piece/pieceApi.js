@@ -7,6 +7,16 @@
  * No default entitlement, expiry, renderer, safety verdict or key is invented.
  */
 import { apiFetch, getAccessToken } from "../../lib/apiClient";
+import { NativeModules, Platform } from 'react-native';
+
+// Only advertise the compiled bridge's explicit brand/renderer capability.
+// No import from layout/renderer: those modules depend on this transport.
+function rendererHeaders() {
+  return typeof Platform !== 'undefined' && Platform.OS === 'ios' &&
+    typeof NativeModules !== 'undefined' && NativeModules.PieceTextMetrics?.bitmapRendererVersion === 'piece.rn_bitmap_renderer.ios.v2'
+    ? { 'X-Piece-Renderer': 'piece.rn_bitmap_renderer.ios.v2' } : {};
+}
+
 
 const PATH = '/emotion/piece/preview';
 const FORMATS = ['short_essay', 'quote', 'declaration'];
@@ -263,7 +273,7 @@ async function requestPieceData(value, options = {}, savedInputId = null, visual
       mutation ? `${PATH}/${mutation.preview_id}` : PATH;
     const response = await apiFetch(endpoint, {
       method: sourceRead ? 'GET' : mutation ? 'PATCH' : 'POST', auth: true, expectedUserId,
-      headers: sourceRead || mutation ? { 'Cache-Control': 'no-store' } : { 'Idempotency-Key': idempotencyKey },
+      headers: { ...rendererHeaders(), ...(sourceRead || mutation ? { 'Cache-Control': 'no-store' } : { 'Idempotency-Key': idempotencyKey }) },
       body, signal,
     });
     checkAbort(signal);
@@ -343,7 +353,7 @@ export async function requestPieceSave(value, options = {}) {
     checkAbort(signal);
     const response = await apiFetch('/emotion/piece/save', {
       method: 'POST', auth: true, expectedUserId, signal,
-      headers: { 'Idempotency-Key': idempotencyKey, 'Cache-Control': 'no-store' }, body,
+      headers: { ...rendererHeaders(), 'Idempotency-Key': idempotencyKey, 'Cache-Control': 'no-store' }, body,
     });
     checkAbort(signal);
     const result = await response.json();

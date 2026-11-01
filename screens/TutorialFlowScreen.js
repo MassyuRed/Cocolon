@@ -38,7 +38,6 @@ const HOME_TAB_RESET_ROUTES = [
   "Input",
   "Analysis",
   "Piece",
-  "RankingTop",
   "Settings",
 ];
 
@@ -222,7 +221,7 @@ export default function TutorialFlowScreen({ navigation }) {
           mode: "info",
           title: "その他の機能",
           message:
-            "感情入力に慣れてきたら、通知やランキングも少しずつ見てみてください。\n\n自分のペースで、Emlisの機能を広げていけます。",
+            "感情入力に慣れてきたら、通知や共鳴履歴も少しずつ見てみてください。\n\n自分のペースで、Emlisの機能を広げていけます。",
           nextLabel: "終了へ",
           onNext: () => {
             setTutorialStep(STEP_FINISH);
