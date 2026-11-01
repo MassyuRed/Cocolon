@@ -17,7 +17,7 @@ import json
 from pathlib import Path
 import re
 
-EXPECTED_SHA256 = "14aaf28d2cf3d9c05c4e33372b446a8aacaaca0ca45f7c359d0c5dac8269db7e"
+EXPECTED_SHA256 = "1de446725c9d6145033da1fb4ca285fdc7abd80e28ab57f54d4b39c0eb874b9a"
 PREFIX = '''
 // Hosted-test-only scalar diagnostic, injected in this disposable checkout.
 // No wire field, guard expression, return value, clock or paint is changed.
