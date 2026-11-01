@@ -23,6 +23,7 @@ import { getHistoryRetentionLabel } from "../lib/historyRetentionLabel";
 import { useAuth } from "../AuthContext";
 import { useEmlisThread } from "./input/useEmlisThread";
 import EmlisThreadModal from "./input/EmlisThreadModal";
+import { useAppRuntime } from "../AppRuntimeContext";
 
 const EMOTION_SECRET_URL = "/emotion/secret";
 const EMOTION_HISTORY_SEARCH_URL = "/emotion/history/search";
@@ -197,8 +198,9 @@ function renderHighlightedText(text, rx, highlightStyle) {
     .filter(Boolean);
 }
 
-export default function AnalysisHistoryScreen({ onBack }) {
+export default function AnalysisHistoryScreen({ onBack, navigation }) {
   const { session } = useAuth();
+  const { isFeatureEnabled } = useAppRuntime();
   const emlisThread = useEmlisThread({ userId: session?.user?.id || "" });
   const [query, setQuery] = useState(""); // 入力中（未実行でも変わる）
   const [executedQuery, setExecutedQuery] = useState(""); // 最後に実行した検索語
@@ -650,7 +652,8 @@ export default function AnalysisHistoryScreen({ onBack }) {
 
   return (
     <SafeAreaView style={[styles.container, themed.container]}>
-      <EmlisThreadModal thread={emlisThread} colors={colors} />
+      <EmlisThreadModal thread={emlisThread} colors={colors} navigation={navigation}
+        userId={session?.user?.id || ""} pieceEnabled={isFeatureEnabled("piece_v2_preview_enabled", false) === true} />
       {/* ヘッダー（上段：戻る＋検索、右にソート） */}
       <View style={[styles.header, themed.header]}>
         <View style={styles.headerRow}>
@@ -950,8 +953,8 @@ export default function AnalysisHistoryScreen({ onBack }) {
           renderItem={({ item }) => (
             <View style={[styles.row, themed.row]}>
               {emlisThread.enabled && <TouchableOpacity onPress={() => emlisThread.open(item.id, { showNotCreated: true })}
-                accessibilityRole="button" accessibilityLabel="この記録のEmlisの返事を開く" style={{ paddingVertical: 12 }}>
-                <Text style={{ color: colors.TITLE_GOLD }}>Emlisの返事を開く</Text>
+                accessibilityRole="button" accessibilityLabel="この記録のEmlisからの応答を開く" style={{ paddingVertical: 12 }}>
+                <Text style={{ color: colors.TITLE_GOLD }}>Emlisからの応答を開く</Text>
               </TouchableOpacity>}
               <View style={styles.rowTop}>
                 <Text style={[styles.date, themed.date]}>{item.date}</Text>

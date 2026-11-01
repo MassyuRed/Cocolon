@@ -162,7 +162,7 @@ test('input writes bind the payload owner to the same session that supplies auth
   const legacy = client.getAccessToken(); finishSession({ data: { session: null } });
   assert.equal(await legacy, null);
   const screen = fs.readFileSync(path.join(ROOT, 'screens/InputScreen.js'), 'utf8');
-  for (const call of ['submitEmotionInput(payload', 'previewEmotionPiece(payload', 'publishEmotionPiece(previewId', 'cancelEmotionPiece(previewId']) {
+  for (const call of ['submitEmotionInput(payload']) {
     assert.ok(screen.includes(`${call}, { expectedUserId: requestOwner.id })`));
   }
 });
@@ -274,7 +274,7 @@ test('refinement failure shows old observation as historical and retry only when
   let root;
   await act(async () => { root = Renderer.create(React.createElement(Modal, { thread, colors: {} })); });
   const output = JSON.stringify(root.toJSON());
-  assert.match(output, /以前の返事/); assert.doesNotMatch(output, /現在の返事/);
+  assert.match(output, /以前の返事/); assert.doesNotMatch(output, /反映状況はまだ確認できていません/);
   assert.match(output, /意味の訂正は保存/); assert.equal(root.root.findAllByType('TextInput').length, 0);
   const retry = root.root.findAllByType('Button').find(b => b.props.children === '本文を再試行する');
   await act(async () => retry.props.onPress()); assert.deepEqual(actions, ['retry_response']);
@@ -378,7 +378,7 @@ test('definite conflict permits a new revision after GET while timeout retains i
 
 test('release runtime bootstrap enables reader; default and failed initial load stay off', async () => {
   let payload={feature_flags:{emlis_threads_enabled:true}},fail=false;
-  const runtime=load('AppRuntimeContext.js',{'./lib/apiClient':{apiGet:async()=>{if(fail)throw Error('offline');return payload;}}},false);
+  const runtime=load('AppRuntimeContext.js',{'react-native': { AppState: { currentState: 'active', addEventListener: () => ({ remove() {} }) } }, './lib/supabase': { supabase: { auth: { getSession: async () => ({ data: { session: null } }), onAuthStateChange: () => ({ data: { subscription: { unsubscribe() {} } } }) } } }, './features/piece/pieceRuntime': load('features/piece/pieceRuntime.js'), './lib/apiClient':{apiGet:async()=>{if(fail)throw Error('offline');return payload;}}},false);
   const api={get:async()=>initial};
   const {useEmlisThread}=load('screens/input/useEmlisThread.js',{'../../lib/api/emlisThreadApi':{emlisThreadApi:api},'../../AppRuntimeContext':runtime},false);
   let value,control,root;
@@ -391,15 +391,16 @@ test('release runtime bootstrap enables reader; default and failed initial load 
   await act(async()=>root.unmount());
 });
 
-test('current body leads; original source and older observations remain expandable', async () => {
+test('current response leads with two footer choices and no history or saved-state buttons', async () => {
   const native=Object.fromEntries(['ActivityIndicator','KeyboardAvoidingView','Modal','ScrollView','Text','TextInput','View'].map(x=>[x,x]));
   Object.assign(native,{Platform:{OS:'ios'},StyleSheet:{create:x=>x}});
   const {default:Modal}=load('screens/input/EmlisThreadModal.js',{'react-native':native,'../../components/CocolonButton':p=>React.createElement('Button',p,p.children)});
   const thread={visible:true,dto:completed,draft:''};let root;
   await act(async()=>{root=Renderer.create(React.createElement(Modal,{thread,colors:{}}));});
   let out=JSON.stringify(root.toJSON());assert.match(out,/更新した観測/);assert.doesNotMatch(out,/初回の観測/);
-  const toggle=root.root.findAllByType('Button').find(b=>b.props.children==='元の記録とこれまでのやり取り');
-  await act(async()=>toggle.props.onPress());out=JSON.stringify(root.toJSON());assert.match(out,/初回の観測/);assert.ok(out.indexOf('更新した観測')<out.indexOf('初回の観測'));
+  assert.deepEqual(root.root.findAllByType('Button').map(b=>b.props.children), ['ピースの作成', '閉じる']);
+  assert.match(out,/Emlisからの応答/);assert.match(out,/応答内容/);
+  assert.doesNotMatch(out,/元の記録とこれまでのやり取り|保存状況を確認|この記録へのEmlisの返事です。/);
   await act(async()=>root.unmount());
 });
 
@@ -429,9 +430,9 @@ test('unknown ACK labels the cached body as last confirmed, never current', asyn
   const {default:Modal}=load('screens/input/EmlisThreadModal.js',{'react-native':native,'../../components/CocolonButton':p=>React.createElement('Button',p,p.children)});
   let root;const thread={visible:true,dto:completed,draft:'',uncertain:true};
   await act(async()=>{root=Renderer.create(React.createElement(Modal,{thread,colors:{}}));});
-  let out=JSON.stringify(root.toJSON());assert.match(out,/前回確認した返事/);assert.doesNotMatch(out,/現在の返事/);
-  await act(async()=>root.update(React.createElement(Modal,{thread:{...thread,uncertain:false},colors:{}})));out=JSON.stringify(root.toJSON());assert.match(out,/現在の返事/);
-  await act(async()=>root.update(React.createElement(Modal,{thread:{...thread,uncertain:false,busy:true},colors:{}})));out=JSON.stringify(root.toJSON());assert.match(out,/前回確認した返事/);assert.doesNotMatch(out,/現在の返事/);
+  let out=JSON.stringify(root.toJSON());assert.match(out,/前回確認した内容/);assert.match(out,/反映状況はまだ確認できていません/);
+  await act(async()=>root.update(React.createElement(Modal,{thread:{...thread,uncertain:false},colors:{}})));out=JSON.stringify(root.toJSON());assert.match(out,/応答内容/);assert.doesNotMatch(out,/反映状況はまだ確認できていません/);
+  await act(async()=>root.update(React.createElement(Modal,{thread:{...thread,uncertain:false,busy:true},colors:{}})));out=JSON.stringify(root.toJSON());assert.match(out,/前回確認した内容/);assert.match(out,/反映状況はまだ確認できていません/);
   await act(async()=>root.unmount());
 });
 
@@ -474,6 +475,7 @@ for (const configuredBase of [null, 'https://emlis-development.invalid///']) {
       '../lib/apiClient': client, '../lib/historyRetentionLabel': { getHistoryRetentionLabel: () => '' },
       '../AuthContext': { useAuth: () => ({ session }) }, './input/useEmlisThread': threadHook,
       './input/EmlisThreadModal': { default: Modal, __esModule: true },
+      '../AppRuntimeContext': { useAppRuntime: () => ({ isFeatureEnabled: key => key === 'emlis_threads_enabled' }) },
     }).default;
     const row = { id: 'input', created_at: initial.original.created_at, memo: initial.original.memo, is_secret: false };
     const calls = [];
@@ -492,16 +494,16 @@ for (const configuredBase of [null, 'https://emlis-development.invalid///']) {
     let root;
     t.after(async () => { if (root) await act(async () => root.unmount()); });
     await act(async () => { root = Renderer.create(React.createElement(Screen)); });
-    const open = () => root.root.findByProps({ accessibilityLabel: 'この記録のEmlisの返事を開く' }).props.onPress();
+    const open = () => root.root.findByProps({ accessibilityLabel: 'この記録のEmlisからの応答を開く' }).props.onPress();
     await act(async () => open());
     assert.match(JSON.stringify(root.toJSON()), /その時、どう感じましたか/);
     await act(async () => root.root.findByProps({ accessibilityLabel: 'Emlisへの回答' }).props.onChangeText('今は嬉しい。'));
     await act(async () => root.root.findAllByType('Button').find(b => b.props.children === '回答を送る').props.onPress());
     assert.match(JSON.stringify(root.toJSON()), /更新した観測/);
-    await act(async () => root.root.findByProps({ accessibilityLabel: 'Emlisの返事を閉じる' }).props.onPress());
+    await act(async () => root.root.findByProps({ accessibilityLabel: 'Emlisからの応答を閉じる' }).props.onPress());
     await act(async () => open());
     assert.match(JSON.stringify(root.toJSON()), /更新した観測/);
-    await act(async () => root.root.findByProps({ accessibilityLabel: 'Emlisの返事を閉じる' }).props.onPress());
+    await act(async () => root.root.findByProps({ accessibilityLabel: 'Emlisからの応答を閉じる' }).props.onPress());
     savedDto = {
       schema_version: initial.schema_version, state: 'NOT_CREATED',
       thread_id: null, body_state: null, can_write: false,
@@ -515,7 +517,8 @@ for (const configuredBase of [null, 'https://emlis-development.invalid///']) {
     assert.match(JSON.stringify(root.toJSON()), /この記録への返事はまだ用意されていません/);
     assert.doesNotMatch(JSON.stringify(root.toJSON()), /保存済みの本文と回答は確認できます/);
     assert.equal(root.root.findAllByProps({ accessibilityLabel: 'Emlisへの回答' }).length, 0);
-    await act(async () => root.root.findAllByType('Button').find(b => b.props.children === '保存状況を確認').props.onPress());
+    await act(async () => root.root.findByProps({ accessibilityLabel: 'Emlisからの応答を閉じる' }).props.onPress());
+    await act(async () => open());
     assert.equal(root.root.findByType('Modal').props.visible, true);
     assert.equal(calls.length - beforeMissingRead, 2);
     assert.ok(calls.slice(beforeMissingRead).every(c =>
@@ -525,7 +528,7 @@ for (const configuredBase of [null, 'https://emlis-development.invalid///']) {
     await act(async () => root.root.findAllByType('TouchableOpacity').find(b =>
       b.findAllByType('Icon').some(i => i.props.name === 'trash-outline')).props.onPress());
     await act(async () => confirmDelete());
-    assert.equal(root.root.findAllByProps({ accessibilityLabel: 'この記録のEmlisの返事を開く' }).length, 0);
+    assert.equal(root.root.findAllByProps({ accessibilityLabel: 'この記録のEmlisからの応答を開く' }).length, 0);
     assert.deepEqual(calls.map(({ url, options }) => [options.method, url]), [
       ['POST', `${expectedBase}/emotion/history/search`], ['GET', `${expectedBase}/emlis/threads/by-input/input`],
       ['POST', `${expectedBase}/emlis/threads/thread/answers`], ['GET', `${expectedBase}/emlis/threads/by-input/input`],
@@ -690,7 +693,7 @@ for (const method of ['get', 'answer', 'action', 'frame']) {
 }
 
 for (const resolution of ['answered-elsewhere', 'skipped-elsewhere']) {
-  test(`closed question keeps unknown answer recovery available (${resolution})`, async t => {
+  test(`hook reconciliation preserves same-key unknown answer recovery after a closed question (${resolution})`, async t => {
     const native = Object.fromEntries(['ActivityIndicator', 'KeyboardAvoidingView', 'Modal', 'ScrollView',
       'Text', 'TextInput', 'View'].map(x => [x, x]));
     Object.assign(native, { Platform: { OS: 'ios' }, StyleSheet: { create: x => x } });
@@ -757,7 +760,7 @@ for (const resolution of ['answered-elsewhere', 'skipped-elsewhere']) {
       assert.equal(thread.uncertain, true);
       assert.equal(buttons('同じ回答を再送する').length, 1);
       assert.equal(buttons('同じ回答を再送する')[0].props.disabled, true);
-      await press('保存状況を確認');
+      await act(async () => thread.refresh());
       assert.equal(thread.dto.pending_question, null);
       assert.equal(thread.uncertain, true);
       assert.equal(thread.pendingAction, false);
@@ -767,12 +770,12 @@ for (const resolution of ['answered-elsewhere', 'skipped-elsewhere']) {
       if (remoteAnswer) assert.equal(buttons('もう一点続ける')[0].props.disabled, true);
 
       saved = { ...resolved, can_write: false };
-      await press('保存状況を確認');
+      await act(async () => thread.refresh());
       assert.equal(buttons('同じ回答を再送する')[0].props.disabled, true);
       await act(async () => buttons('同じ回答を再送する')[0].props.onPress());
       assert.equal(answerBodies.length, 1);
       saved = resolved;
-      await press('保存状況を確認');
+      await act(async () => thread.refresh());
       await press('同じ回答を再送する');
       assert.equal(answerBodies.length, 2);
       assert.equal(answerBodies[1], answerBodies[0], 'replay must preserve question, revision, key, text and authored time');
@@ -781,9 +784,9 @@ for (const resolution of ['answered-elsewhere', 'skipped-elsewhere']) {
       assert.equal(thread.dto.current_observation.text, resolved.current_observation.text);
       assert.equal(saved, resolved, 'rejected replay must not overwrite the saved answer or body');
       assert.equal(buttons('同じ回答を再送する').length, 0);
-      await press('保存状況を確認');
+      await act(async () => thread.refresh());
       assert.equal(thread.rejected, false);
-      assert.equal(thread.visible, true, 'recovery must not require closing the reader');
+      assert.equal(thread.visible, true, 'internal hook reconciliation retains the reader; UI recovery uses close/reopen');
       assert.equal(thread.dto, resolved);
       if (remoteAnswer) {
         await press('もう一点続ける');
@@ -809,7 +812,7 @@ for (const readerEnabled of [true, false]) {
     });
     t.mock.method(console, 'log', () => {});
     const native = Object.fromEntries(['ActivityIndicator', 'Text', 'TouchableOpacity', 'View'].map(x => [x, x]));
-    Object.assign(native, { Platform: { OS: 'ios' }, Alert: { alert() {} } });
+    Object.assign(native, { Platform: { OS: 'ios' }, Alert: { alert() {} }, AppState: { currentState: 'active', addEventListener: () => ({ remove() {} }) } });
     const client = load('lib/apiClient.js', {
       'react-native': native,
       './supabase': { supabase: { auth: { getSession: async () => ({ data: {
@@ -818,7 +821,7 @@ for (const readerEnabled of [true, false]) {
       './compat/legacyWireContracts': { readRuntimeApiBaseUrl: () => 'https://bootstrap.invalid' },
       './monitoring': { captureApiError() {} },
     });
-    const runtime = load('AppRuntimeContext.js', { './lib/apiClient': client }, false);
+    const runtime = load('AppRuntimeContext.js', { 'react-native': native, './lib/supabase': { supabase: { auth: { getSession: async () => ({ data: { session: null } }), onAuthStateChange: () => ({ data: { subscription: { unsubscribe() {} } } }) } } }, './features/piece/pieceRuntime': load('features/piece/pieceRuntime.js'), './lib/apiClient': client }, false);
     const { emlisThreadApi } = load('lib/api/emlisThreadApi.js', { '../apiClient': client });
     const { useEmlisThread } = load('screens/input/useEmlisThread.js', {
       '../../lib/api/emlisThreadApi': { emlisThreadApi }, '../../AppRuntimeContext': runtime,
@@ -904,3 +907,85 @@ for (const readerEnabled of [true, false]) {
     }
   });
 }
+
+for (const os of ['ios', 'android']) test(`response create carries only current saved identity after close (${os})`, async t => {
+  const native = Object.fromEntries(['ActivityIndicator','KeyboardAvoidingView','Modal','ScrollView','Text','TextInput','View'].map(x => [x,x]));
+  Object.assign(native, { Platform: { OS: os }, StyleSheet: { create: x => x }, Alert: { alert: () => assert.fail('unexpected alert') } });
+  const Modal = load('screens/input/EmlisThreadModal.js', { 'react-native': native,
+    '../../components/CocolonButton': p => React.createElement('Button', p, p.children) }).default;
+  const inputId = '20000000-0000-4000-8000-000000000002', owner = 'owner';
+  const dto = { ...completed, body_state: 'FINAL', answer_saved: false, can_write: false,
+    original: { ...initial.original, id: inputId }, interpretive_frames: [] };
+  const routes = []; let root, thread;
+  const navigation = { getParent: () => ({ navigate: (...args) => routes.push(args) }) };
+  const render = () => React.createElement(Modal, { thread, colors: {}, navigation, userId: owner, pieceEnabled: true });
+  thread = { visible: true, dto, draft: '', close() { thread = { ...thread, visible: false, dto: null }; root.update(render()); } };
+  await act(async () => { root = Renderer.create(render()); });
+  const create = root.root.findAllByType('Button').find(b => b.props.children === 'ピースの作成');
+  assert.equal(create.props.disabled, false, 'Emlis read-only must not disable independent Piece creation');
+  await act(async () => { create.props.onPress(); create.props.onPress(); });
+  if (os === 'ios') {
+    assert.equal(routes.length, 0, 'wait for native modal dismissal');
+    await act(async () => root.root.findByType('Modal').props.onDismiss());
+    await act(async () => root.root.findByType('Modal').props.onDismiss());
+  }
+  assert.equal(routes.length, 1);
+  assert.equal(routes[0][0], 'Piece'); assert.equal(routes[0][1].screen, 'PieceCreate');
+  const target = routes[0][1].params.savedInput;
+  assert.deepEqual(Object.keys(target).sort(), ['expectedUserId', 'idempotencyKey', 'savedInputId']);
+  assert.equal(target.savedInputId, inputId); assert.equal(target.expectedUserId, owner);
+  assert.match(target.idempotencyKey, /^piece-preview-[0-9a-f]{32}$/);
+  assert.doesNotMatch(JSON.stringify(routes), /更新した観測|褒められた/);
+  await act(async () => root.unmount());
+});
+
+test('a response create waiting for dismissal cannot cross an owner change', async () => {
+  const native = Object.fromEntries(['ActivityIndicator','KeyboardAvoidingView','Modal','ScrollView','Text','TextInput','View'].map(x => [x,x]));
+  Object.assign(native, { Platform: { OS: 'ios' }, StyleSheet: { create: x => x }, Alert: { alert() {} } });
+  const Modal = load('screens/input/EmlisThreadModal.js', { 'react-native': native,
+    '../../components/CocolonButton': p => React.createElement('Button', p, p.children) }).default;
+  const navigation = { getParent: () => ({ navigate: () => assert.fail('old-owner navigation') }) };
+  let root, userId = 'A', thread;
+  const render = () => React.createElement(Modal, { thread, colors: {}, navigation, userId, pieceEnabled: true });
+  thread = { visible: true, draft: '', dto: { ...completed, body_state: 'FINAL', answer_saved: false,
+    original: { id: '20000000-0000-4000-8000-000000000002' } },
+    close() { thread = { ...thread, visible: false, dto: null }; root.update(render()); } };
+  await act(async () => { root = Renderer.create(render()); });
+  await act(async () => root.root.findAllByType('Button').find(b => b.props.children === 'ピースの作成').props.onPress());
+  userId = 'B'; await act(async () => root.update(render()));
+  await act(async () => root.root.findByType('Modal').props.onDismiss());
+  await act(async () => root.unmount());
+});
+
+for (const waitFor of ['focus', 'runtime']) test(`Piece creation waits for ${waitFor}, then consumes explicit request once`, async () => {
+  let focused = waitFor !== 'focus', enabled = waitFor !== 'runtime', owner = 'owner'; const calls = [];
+  const Host = React.forwardRef((props, ref) => { React.useImperativeHandle(ref, () => ({ createFromSavedInput: () => calls.push(props.savedInput) })); return React.createElement('PieceHost', props); });
+  const Screen = load('screens/PieceCreateScreen.js', {
+    'react-native': { ScrollView: 'ScrollView', Text: 'Text', View: 'View', StyleSheet: { create: x => x } },
+    'react-native-safe-area-context': { SafeAreaView: 'SafeAreaView' }, '@react-navigation/native': { useIsFocused: () => focused },
+    '../AuthContext': { useAuth: () => ({ session: { user: { id: owner } } }) },
+    '../AppRuntimeContext': { useAppRuntime: () => ({ isFeatureEnabled: () => enabled }) },
+    '../TutorialContext': { useTutorial: () => ({ isTutorialMode: false }) }, '../theme/ThemeContext': { useTheme: () => ({ colors: {} }) },
+    '../components/CocolonBackButton': 'Back', './input/InputPieceActionArea': { default: Host, __esModule: true },
+    '../features/piece/pieceRenderer': { isPieceBitmapSaveAdmitted: () => true },
+  }).default;
+  const savedInput = { savedInputId: 'input', expectedUserId: owner, idempotencyKey: 'one-explicit-request' };
+  const props = { route: { params: { savedInput } }, navigation: { goBack() {} } }; let root;
+  await act(async () => { root = Renderer.create(React.createElement(Screen, props)); });
+  assert.equal(calls.length, 0);
+  focused = true; enabled = true; await act(async () => root.update(React.createElement(Screen, props)));
+  assert.equal(calls.length, 1);
+  const firstHost = root.root.findByType('PieceHost');
+  focused = false; await act(async () => root.update(React.createElement(Screen, props)));
+  assert.equal(root.root.findByType('PieceHost').props.active, false);
+  focused = true; await act(async () => root.update(React.createElement(Screen, props)));
+  enabled = false; await act(async () => root.update(React.createElement(Screen, props)));
+  assert.equal(root.root.findByType('PieceHost'), firstHost, 'runtime refresh must retain same-key save/cancel recovery');
+  assert.equal(firstHost.props.active, false);
+  enabled = true; await act(async () => root.update(React.createElement(Screen, props)));
+  owner = 'other'; await act(async () => root.update(React.createElement(Screen, props)));
+  assert.equal(root.root.findAllByType('PieceHost').length, 0);
+  owner = 'owner'; await act(async () => root.update(React.createElement(Screen, props)));
+  assert.equal(calls.length, 1, 'focus, runtime and owner returns never create again');
+  await act(async () => root.unmount());
+});

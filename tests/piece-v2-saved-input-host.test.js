@@ -53,6 +53,29 @@ function resolver(u) {
   return u.host.resolveSavedInput();
 }
 
+test('explicit response creation reads source and starts one preview; mount remains IO-free', async () => {
+  const u = fixture(); u.host.props.creationMode = true; u.mount();
+  assert.equal(u.calls.length, 0);
+  await Promise.all([u.host.createFromSavedInput(), u.host.createFromSavedInput()]);
+  await tick();
+  assert.deepEqual(copy(u.calls.map(([, o]) => o.method)), ['GET', 'POST']);
+  assert.equal(u.body().children.join(''), u.expected.piece_text);
+  u.host.componentWillUnmount();
+});
+
+test('losing navigation focus fences a delayed explicit creation and never restarts on focus return', async () => {
+  const f = fixture(), d = f.deferred(), u = fixture({ send: () => d.promise });
+  u.host.props.active = true; u.mount();
+  const pending = u.host.createFromSavedInput(); await tick();
+  u.host.props.active = false;
+  assert.equal(u.tree(), null);
+  u.host.componentDidUpdate();
+  d.resolve(packet(ref())); await pending;
+  u.host.props.active = true; u.host.componentDidUpdate(); await tick();
+  assert.equal(u.calls.length, 1); assert.equal(u.body(), undefined);
+  u.host.componentWillUnmount();
+});
+
 for (const pre of [false, true]) test(`saved ${pre ? 'pre-question' : 'normal'} input -> explicit GET -> separate preview with exact text`, async () => {
   const u = fixture({ pre }); u.mount();
   assert.equal(u.calls.length, 0); assert.deepEqual(u.names(), ['保存入力を確認']);

@@ -1,12 +1,16 @@
 ---
 doc_id: cocolon_piece_read_first
 title: "Cocolon Piece — Read First"
-revision_date: "2026-10-23 JST"
+revision_date: "2026-11-01 JST"
 decision_owner: "Mash"
 workstream: "Cocolon / Piece"
 document_status: "CURRENT_PIECE_WORKSTREAM_ENTRY"
 automatic_progression: false
 ---
+
+> 11/1 UI/Piece導線の最新は[本fileの差分](#response-piece-entry-20261101)とweekly第9回§38。新UIは配布/本人確認待ち。6701の初回実モデル保存再読とは区別する。
+
+
 
 # Cocolon Piece — Read First
 
@@ -4177,3 +4181,21 @@ P-W1本人保存→履歴/詳細が最初の未完のまま。本人session/入�
 最初の資料反映4571ec976e27a9eff50cea31c4cb94cf8435b06bで既存自動検査5件が起動した。39865542709（read-only policy）、39865542871（phase6/PR）、39865524122（phase6/push）はsuccess。39865542760（inventory step9）と39865542717（pytest bootstrap step8）は各225 passed/1 failed。両方ともtest_task_context.py:3831のtest_unit_c_t56_account_profile_read_only_preserves_explicit_gapsで、seed path数の期待[8,5]に対してwhole_product_current_baselineを含む現物[1,8,5]が不一致。対象test/task_profiles.jsonは親87151から全文不変で、今回のPiece変更による失敗、又はfrozen/stale検出の失敗とは扱わない。
 
 3jobの原decoded logをbytes/SHA256付きgzip+base64でmanifestへ可逆保存。検査の失敗は未修復のまま明示し、System Context source/期待値/fixture/workflowの変更、再試行、追加CIは0。既存iOS workflowにこれらの検査を新たな依存条件として設けない。結果記録だけの最終資料補正には[skip ci]を付け、同じ汎用検査を再発火させない。Piece商品credit0と未実施の署名/TestFlight/本人受入れを維持する。
+
+
+<a id="response-piece-entry-20261101"></a>
+## 2026-11-01 — 応答popupからPiece作成へ
+
+Mash明示指示はweekly第9回§38。通常応答表示を「Emlisからの応答」/「応答内容」、説明/履歴展開/保存状況buttonなし、操作は「ピースの作成」「閉じる」へ。問い/回答/訂正は廃止せず必要状態に保持。閉じるは元画面のまま。Pieceは新しい通常作成画面へ、表示中の保存入力ID/本人/opaque keyだけを渡し、既存のpreview/明示保存を使う。Emlis生成本文は本人sourceにしない。
+
+| owner | 今回の責務 |
+|---|---|
+| screens/input/EmlisThreadModal.js | 入力/履歴共用の指定表示、通常2操作、保存ID/本人/keyだけの明示Piece作成要求、native dismiss後の引継ぎ |
+| screens/PieceCreateScreen.js（新規）/navigation/PieceStackNavigator.js | PieceCreate route、本人/focus/runtimeと一回要求の管理。flag更新中は同keyの保存/取消回復hostを維持 |
+| screens/input/InputPieceActionArea.js | 既存saved-input/renderer/controllerを再利用し、明示要求だけsource GET→previewへ。通常mount/復帰では作らない |
+| screens/InputScreen.js / screens/AnalysisHistoryScreen.js / screens/AnalysisScreen.js | 両入口から現在の保存IDとnavigationを渡す。閉じるだけなら元画面を保持 |
+| API piece_v2_source_adapter.py | natural FINALのreceiptと成功finishを照合し、意味checkpointを捏造せず元入力だけPieceへ渡す |
+| API supabase/migrations/20261101022630_piece_natural_reply_context.sql | 既存issue/save/visual-changeの自然profileだけ保存cohort/権利と同期。旧Q3/lock/clock/ACL/枠は保持 |
+
+
+API実装候補1296eaea。native recipientは意図的にMEANING_UPDATEなしのため、natural専用の保存receipt/source/context/FINAL/同attempt成功終了を照合する。意味/analysisを生成済みに偽装しない。旧Q3とnaturalの保存cohortを分け、関連履歴の編集/削除時は拒否する。RN対象209、API/実SQL175成功。新UIのApple配布/本人確認は未完、既存6701の初回接続確認と区別する。GPUはMash停止報告、華恋の再起動0。STRUCTURE_MAP_DELTA_PRESENT（新RN作成screen/routeと自然profileの既存handoff整合、公開wire/table追加なし）。

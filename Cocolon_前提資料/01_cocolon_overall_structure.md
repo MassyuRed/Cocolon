@@ -1,3 +1,5 @@
+> 11/1 UI/Piece導線の最新は[本fileの差分](#response-piece-entry-20261101)とweekly第9回§38。新UIは配布/本人確認待ち。6701の初回実モデル保存再読とは区別する。
+
 > **2026-10-22 現行必読：全機能・全状態は [Cocolon 最新情報](00_cocolon_current_product_and_state.md) を毎作業、全文確認する。** 作業単位ごとに関連差分を同じ変更単位で置換更新する。旧本文の「最新」・07 EOF優先・08を全体現在地とする指示は履歴。08はCycle001専用、07は節目の履歴。仕様・実装・稼働・本人端末・商品受入れを分け、詳細正本と実物へ進む。
 
 本資料は構造・実ファイルへの詳細地図。全機能の現在状態は上記正本へ集約し、以下の追記日付を全製品の最新検証日へ転用しない。
@@ -7392,3 +7394,21 @@ STRUCTURE_MAP_DELTA_PRESENT。承認済み新offline Free profileを既存CMEE E
 ## 2026-10-26 — 4題材6教材のprivate版3接続（CPU完了）
 
 Mash承認c97d6794に基づき、既存4ownerのsource-derived admission/adapter3でBOOK/SHOPの初回実問い→説明ADD・元意味保持・gapのみ解消・一回答END、REPOT/KNIT初回ENDを接続した。本文は独立source readerで主客・時点・否定・程度・本人知覚・二対象の明示不明を照合。外側wire/schema/dataclass・通常API/DTO/DB/RN/依存・通常30秒/明示offline180秒は不変。対象394成功/HTTP2対象外、新SQL6状態の同snapshot再開と完成非生成再読、旧18構成の1,851,616bytes全一致、native6/EOS/context8192 max7935を確認。新4B学習/生成0、旧2560出力枠では2回答targetが長すぎるため次のGPU条件は未決。STRUCTURE_MAP_DELTA_PRESENT、型追加0、商品0/正式0/3/54.50％。実原本・全本文・失敗履歴・全pathは `observation_learning/training/2026-10-26-unconnected-native/README.md#sixrow-cpu-implementation` と最新weekly§56。
+
+
+<a id="response-piece-entry-20261101"></a>
+## 2026-11-01 — 応答popupからPiece作成へ
+
+Mash明示指示はweekly第9回§38。通常応答表示を「Emlisからの応答」/「応答内容」、説明/履歴展開/保存状況buttonなし、操作は「ピースの作成」「閉じる」へ。問い/回答/訂正は廃止せず必要状態に保持。閉じるは元画面のまま。Pieceは新しい通常作成画面へ、表示中の保存入力ID/本人/opaque keyだけを渡し、既存のpreview/明示保存を使う。Emlis生成本文は本人sourceにしない。
+
+| owner | 今回の責務 |
+|---|---|
+| screens/input/EmlisThreadModal.js | 入力/履歴共用の指定表示、通常2操作、保存ID/本人/keyだけの明示Piece作成要求、native dismiss後の引継ぎ |
+| screens/PieceCreateScreen.js（新規）/navigation/PieceStackNavigator.js | PieceCreate route、本人/focus/runtimeと一回要求の管理。flag更新中は同keyの保存/取消回復hostを維持 |
+| screens/input/InputPieceActionArea.js | 既存saved-input/renderer/controllerを再利用し、明示要求だけsource GET→previewへ。通常mount/復帰では作らない |
+| screens/InputScreen.js / screens/AnalysisHistoryScreen.js / screens/AnalysisScreen.js | 両入口から現在の保存IDとnavigationを渡す。閉じるだけなら元画面を保持 |
+| API piece_v2_source_adapter.py | natural FINALのreceiptと成功finishを照合し、意味checkpointを捏造せず元入力だけPieceへ渡す |
+| API supabase/migrations/20261101022630_piece_natural_reply_context.sql | 既存issue/save/visual-changeの自然profileだけ保存cohort/権利と同期。旧Q3/lock/clock/ACL/枠は保持 |
+
+
+API実装候補1296eaea。native recipientは意図的にMEANING_UPDATEなしのため、natural専用の保存receipt/source/context/FINAL/同attempt成功終了を照合する。意味/analysisを生成済みに偽装しない。旧Q3とnaturalの保存cohortを分け、関連履歴の編集/削除時は拒否する。RN対象209、API/実SQL175成功。新UIのApple配布/本人確認は未完、既存6701の初回接続確認と区別する。GPUはMash停止報告、華恋の再起動0。STRUCTURE_MAP_DELTA_PRESENT（新RN作成screen/routeと自然profileの既存handoff整合、公開wire/table追加なし）。

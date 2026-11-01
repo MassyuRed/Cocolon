@@ -64,11 +64,11 @@ export function useEmlisThread({ userId, enabled: explicitEnabled, api = emlisTh
         // their original key below.
         c.pending = null;
         setState(s => ({ ...s, busy: false, uncertain: false, rejected: true, reconciled: false,
-          error: "送信は受け付けられませんでした。保存状況を確認してから、もう一度操作してください。" }));
+          error: "送信は受け付けられませんでした。閉じて、履歴から応答を開き直してください。" }));
       } else {
         setState(s => ({ ...s, busy: false, uncertain: Boolean(c.pending), reconciled: false,
-          error: error?.status === 409 ? "保存状態が更新されています。保存状況を確認してください。"
-            : "通信結果を確認できませんでした。保存状況を確認してください。" }));
+          error: error?.status === 409 ? "保存状態が更新されています。閉じて、履歴から応答を開き直してください。"
+            : "通信結果を確認できませんでした。閉じて、履歴から応答を開き直してください。" }));
       }
       return false;
     } finally { if (active()) c.busy = false; }

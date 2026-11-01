@@ -1,5 +1,7 @@
 # Cocolon 最新情報 — 全機能・全状態
 
+**11/1 UI修正（[第9回§38](weekly_reviews/Cocolon_Weekly_Review_20261031.md#response-modal-piece-entry-20261101)）：** Mash指定で共用応答popupを「Emlisからの応答」/「応答内容」へ変更し、通常説明・履歴展開・保存状況確認を削除。通常footerは「ピースの作成」「閉じる」の2つ。入力/履歴で表示中の保存ID→PieceCreate→既存source-ref/preview/明示保存へ接続し、応答本文を本人原文へ使わない。API1296eaeaにnatural保存結果のoriginal-only handoffと保存cohort対応を実装。RN209/API実SQL175が対象PASS。新UIのiOS配布と本人確認は未完（現端末6701とは別）。GPUはMashから停止報告、華恋の再起動0。
+
 **11/1の稼働・配布：[第9回§37](weekly_reviews/Cocolon_Weekly_Review_20261031.md#testflight6701-device-initial-save-20261101)。** 6601はApple90683で配布不可。写真Usage/Add両目的文とArchive実物検査を修正したRNb8a43e5a/6701は、iOS #67/run41260929560が全工程success、Apple処理通過・暗号化情報保存後、既存内部グループで「テスト中」を確認。Mashは6701の起動と、感情入力→Emlis返事→同じ記録から同じ返事の再表示を確認した。実DB集計はnatural FINAL1/CALL_STARTED1/active0で再読後も増加なし。実Auth→固定4B→DB保存→本人再読の初回配線は完了。モデル提供は初回1477秒＋再開184秒以内で停止し、品質採用には換算しない。API744336c0はdep-dbj9pqvb9u1s73de4160/保存値read_onlyでLive、保存readerとPiece private5ON/public3OFFを維持。iOS metrics19失敗・累積/月次snapshot・Piece実機・Android実配布・実ストア料金/購入/復元・本番原価/申請Consoleは未完。
 
 **11/1の実装/DB：[第9回§32](weekly_reviews/Cocolon_Weekly_Review_20261031.md#release-implementation-20261101)・[§33](weekly_reviews/Cocolon_Weekly_Review_20261031.md#release-source-db-20261101)。** account owner世代分離、購入finish失敗伝播と同一購入結果共有、visibility失敗502、Piece export独立許可/OS直前artifact照合、iOS URL復帰、Android署名AAB手順、ガイド同期を実装。API7bbb4661で関連履歴検索・本人原入力/最大3回答/訂正の別材料化・失効natural本文のtimeline抑止・Analysis複数補足と矛盾照合・adapter SHA対指定を追加し、Supabase migrationを適用。RN151/API284、natural系63、Analysis関係177、RN screen36が局所PASS。API7bbb4661のAnalysis CI41253745568も1634 PASS＋12020 subtests、owner1 PASS・194 deselected、合成保存再読成功。実装/DB/配置/Uploadを実機成功・8タスク全完了へ換算しない。
@@ -20,7 +22,7 @@
 
 **最初のA4500学習実績（§24・履歴）：** [A4500で修正版4B追加学習を完走、重み回収、CMEE採用は未達（§24）](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-a4500-training-and-portable-weights)。[全実結果](observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/repaired_a4500_20261025/README.md)。Mashは4B採用とリリースまでRunpodでの追加学習を明示し、将来は手持ちPCへ移す可能性が高い。RTX A4500 20GB／Secure・EU-RO-1・Pod y0eb0w0qn6nks0を今回の最安の容量候補として確保。GPU$0.25/h・50GB container込み表示$0.26/h。CUDA/BF16正常、修正版2教師/1epoch/2update・adapter保存/非学習reload・前後16生成が20分23.76秒で完走し、20GBで現方式が動くことを確認した。peak allocated14.970/reserved17.588GiB。最終archive全24memberのhashと32tensor有限性/前後重み不変をPod外照合し永続保管済み。NLL0.251117→0.245189、raw6/8変化だが、CMEE意味/本文は前後0/2。初回の根拠座標は通るようになったが必須shape/自然文surface不正、訂正後rawは不変、proxy2件が2048tokenで打切りとなり品質未達。その時点の残件は必須shapeと自然文surfaceで、後続の現在作業は下段へ更新する。この§24のrunはGPUを停止せず終了した。旧3070は今回開始時既に停止表示、華恋のStop操作0。
 
-**GPUの現在状態（11/1・本人初回接続確認後）：** Mash提供Pod6i2aa1nj683s8y/RTX3090×1/$0.51/h。承認済み8888,8000保存/reset後に固定base2shardと隔離venv/提供tool SHAを復元照合。専用キーなしPOST401、synthetic1callの契約成功後、6701の本人入力から実DB FINAL1/CALL_STARTED1を確認。先行1477秒＋再開切上げ184秒で合計1661秒、承認1800秒以内。所有するmodel HTTP processは停止しGPU1MiB/0％。学習0/品質採用0。Pod自体は稼働中で、華恋のStop/新規作成/削除/追加チャージ0。本文/認証token/keyは公開記録しない。
+**GPUの現在状態（11/1・本人初回接続確認後）：** Mash提供Pod6i2aa1nj683s8y/RTX3090×1/$0.51/h。承認済み8888,8000保存/reset後に固定base2shardと隔離venv/提供tool SHAを復元照合。専用キーなしPOST401、synthetic1callの契約成功後、6701の本人入力から実DB FINAL1/CALL_STARTED1を確認。先行1477秒＋再開切上げ184秒で合計1661秒、承認1800秒以内。所有するmodel HTTP processは停止しGPU1MiB/0％。学習0/品質採用0。初回接続後にMashからPod停止報告を受領。華恋の再起動/Stop/新規作成/削除/追加チャージ0、管理画面の再照会0。本文/認証token/keyは公開記録しない。
 
 **10/30の学習履歴（focus29一回完了／不採用閉鎖）：** Mash承認の保存ad8b隔離初期値・現10行各2回＋旧9各1回＝29更新を同Jupyterで一回実行し、29 training forward/optimizer・保存非学習再読・同19行NLL・新2件×5段の10生成/全EOSまで完了。全19教師/messages/encoded/元終端/mask/完全CE/指示/受信/合否は不変。新ed298856は112有限F32/3,833,856params、実runは全112変更を記録した。
 
@@ -126,7 +128,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | 機能 | 現在の実装・境界 | 確認・残件 |
 |---|---|---|
 | 本文・visual recipe | 保存済み本人source→単独で伝わるcanonical text＋画像。現V2 source adapter／pure coreはoriginal＋normal／pre-questionのみ。refinedは別sourceのopt-in補足を使う設計だが、現コードは`source_role_or_stage_not_yet_supported`で未対応 | 旧Q&Aの存在を新商品の定義にしない。Emlis生成本文・Analysis推定の原文流用は禁止。補足をoriginalへ連結してrefined接続済みにしない |
-| preview・保存 | 本文・画像設定・取消・保存・回復のsource接続あり。iOS renderer供給とsame-mount/token current fitを接続。owner／runtime／quotaを別に確認 | 実Authの通常入力→preview→明示private保存は未確認。preview＝保存record＝card＝renderer入力＝export本文を保つ。保存後の本文・format・recipe変更は新record |
+| preview・保存 | 本文・画像設定・取消・保存・回復のsource接続あり。iOS renderer供給とsame-mount/token current fitを接続。owner／runtime／quotaを別に確認 | §38で入力/履歴の応答popup→PieceCreate→既存source-ref/previewへsource接続。本人のpreview→明示private保存は未確認。preview＝保存record＝card＝renderer入力＝export本文を保つ。保存後の本文・format・recipe変更は新record |
 | V2有効化・旧経路 | 11/1 API744336c0の明示factoryでpreview/save/owner-read/export/owner-delete各strict pair ON、public-write/public-read/visibility-toggle OFFをLive確認。default app:appはlegacy/OFF | 稼働設定と本人端末の通常保存は別。tutorial/Nexus旧経路とM5の全公開経路廃止は未完 |
 | 本人履歴・詳細・公開範囲 | owner一覧・詳細・公開切替・削除、通常導線・保存後再取得を接続。privateはownerのみ、publicも既存access policy内 | 同一ownerの実Auth保存→履歴／詳細往復は未完。アプリ内公開と外部画像共有を分ける |
 | export | 本人詳細→独立export許可GET→表示recordのID・row version・3hash・renderer一致→全canvas→Photos／Share直前再確認をsource接続（11/1） | API/RN6701内部配布・本人起動済み。Pieceの実OS写真保存・Share、Android新版export、backend receipt、本人端末商品受入れは未完。外部へ出た画像コピーは内部非公開／削除で回収できない |

@@ -1553,7 +1553,8 @@ ${String(error?.message || error)}`
   discardPendingInputDraft={discardPendingInputDraft}
 />
 
-      <EmlisThreadModal thread={emlisThread} colors={colors} />
+      <EmlisThreadModal thread={emlisThread} colors={colors} navigation={navigation} userId={currentUserId}
+        pieceEnabled={!isTutorialMode && isFeatureEnabled("piece_v2_preview_enabled", false) === true} />
       <InputFeedbackReplyModal
   visible={inputFeedbackModalVisible}
   text={inputFeedbackModalText}

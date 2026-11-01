@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import { ActivityIndicator, AppState, KeyboardAvoidingView, Modal, Platform, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { ActivityIndicator, Alert, AppState, KeyboardAvoidingView, Modal, Platform, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import CocolonButton from "../../components/CocolonButton";
 
 export function threadStatus(dto) {
   if (dto?.state === "NOT_CREATED") return dto.can_write === false ? "この記録への返事はまだ用意されていません。現在は返事の更新を一時停止しています。" : "この記録への返事はまだ用意されていません。";
-  if (dto?.can_write === false) return "返事の更新を一時停止しています。保存済みの本文と回答は確認できます。";
   if (!dto || dto.state === "NOT_CREATED") return "この記録への返事はまだ用意されていません。";
   if (dto.body_state === "CONTEXT_CHANGED") return "参照できる記録や解釈が変わっています。以前の返事は履歴として表示しています。";
-  if (dto.failure_code === "save_result_unknown") return "処理の完了を確認できません。保存状況を確認してください。";
+  if (dto.failure_code === "save_result_unknown") return "処理の完了を確認できません。閉じて、履歴から応答を開き直してください。";
+  if (dto.can_write === false && (!dto.current_observation || dto.pending_question || dto.can_continue)) return "応答の更新を一時停止しています。保存済みの本文と回答は確認できます。";
   if (dto.failure_code === "safe_state_answer_owner_required") return "この内容への専用の返事はまだ用意できていません。記録は保存されています。";
   if (dto.failure_code === "separate_safety_owner_required") return "この内容は通常の返事とは別の対応が必要です。";
   if (dto.body_state === "MEANING_UPDATED_BODY_UNAVAILABLE") return "回答と意味の訂正は保存されています。更新後の本文はまだ用意できていません。";
@@ -20,7 +20,7 @@ export function threadStatus(dto) {
   if (dto.state === "AWAITING_CONTINUE") return dto.can_continue ? "回答を受けた返事です。必要なら、もう一点だけ続けられます。" : "回答後の返事です。この記録で追加できる質問はありません。";
   if (dto.body_state === "REFINED") return "回答を受けてEmlisの返事を更新しました。";
   if (dto.pending_question) return "答えられる範囲で大丈夫です。質問はスキップできます。";
-  return "この記録へのEmlisの返事です。";
+  return "";
 }
 function dateLabel(value) {
   if (!value) return "";
@@ -51,10 +51,13 @@ function FrameEditor({ frame, thread, textStyle, borderColor }) {
   </View>;
 }
 
-export default function EmlisThreadModal({ thread, colors }) {
+export default function EmlisThreadModal({ thread, colors, navigation, userId = "", pieceEnabled = false }) {
   const { dto, busy, error, draft, uncertain } = thread;
   const textStyle = { color: colors.TEXT_ON_LIGHT };
-  const [historyOpen, setHistoryOpen] = useState(false);
+  const pendingPiece = useRef(null);
+  const live = useRef(null);
+  live.current = { thread, navigation, userId, pieceEnabled };
+  useEffect(() => () => { pendingPiece.current = null; live.current = null; }, []);
   const [appState, setAppState] = useState(AppState?.currentState);
   const [readStopped, setReadStopped] = useState(false);
   const polling = useRef(null);
@@ -89,28 +92,70 @@ export default function EmlisThreadModal({ thread, colors }) {
     // Do not abort the hook's shared controller: it may own an answer POST.
     return () => clearTimeout(timer);
   }, [thread.visible, thread.waitForInitial, dto, busy, error, uncertain, thread.rejected, thread.pendingAction, appState, thread.refresh, readStopped]);
-  useEffect(() => setHistoryOpen(false), [dto?.thread_id, thread.visible]);
+  useEffect(() => { if (thread.visible) pendingPiece.current = null; }, [thread.visible, dto?.original?.id]);
   const readOnly = dto?.can_write === false;
   const blocked = readOnly || thread.rejected;
   const history = (dto?.timeline || []).filter(event =>
     !(dto?.current_observation && event.event_id === dto.current_observation.event_id)
     && !(event.kind === "QUESTION" && dto?.pending_question && event.question_id === dto.pending_question.question_id));
 
-  return <Modal visible={thread.visible} transparent animationType="fade" onRequestClose={thread.close}>
+  const canCreatePiece = value => !!value && value.pieceEnabled === true && !!value.userId &&
+    typeof value.navigation?.getParent?.()?.navigate === "function" && value.navigation?.isFocused?.() !== false && value.thread.visible &&
+    !!value.thread.dto?.current_observation && !value.thread.dto.answer_saved &&
+    ["FINAL", "PRE_QUESTION"].includes(value.thread.dto.body_state) &&
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(value.thread.dto.original?.id || "") &&
+    !value.thread.busy && !value.thread.error && !value.thread.uncertain &&
+    !value.thread.rejected && !value.thread.pendingAction;
+  const openPiece = () => {
+    const request = pendingPiece.current;
+    pendingPiece.current = null;
+    const current = live.current;
+    if (!request || !current || current.thread.visible || current.navigation?.isFocused?.() === false || request.owner !== current.userId ||
+        request.navigation !== current.navigation || current.pieceEnabled !== true) return;
+    try {
+      current.navigation.getParent().navigate("Piece", {
+        screen: "PieceCreate", params: { savedInput: request.savedInput }, initial: false,
+      });
+    } catch { Alert.alert("ピースの作成", "作成画面を開けませんでした。もう一度お試しください。"); }
+  };
+  const createPiece = () => {
+    const current = live.current;
+    if (pendingPiece.current || !canCreatePiece(current) || current.thread.dto !== dto) return;
+    try {
+      const bytes = new Uint8Array(16);
+      globalThis.crypto.getRandomValues(bytes);
+      const savedInput = Object.freeze({ savedInputId: dto.original.id, expectedUserId: current.userId,
+        idempotencyKey: "piece-preview-" + Array.from(bytes, v => v.toString(16).padStart(2, "0")).join("") });
+      pendingPiece.current = { savedInput, owner: current.userId, navigation: current.navigation };
+      current.thread.close();
+      // iOS must finish dismissing this native modal before Piece opens its own.
+    } catch {
+      pendingPiece.current = null;
+      Alert.alert("ピースの作成", "作成の準備ができませんでした。もう一度お試しください。");
+    }
+  };
+  useEffect(() => {
+    if (Platform.OS !== "ios" && !thread.visible) openPiece();
+  }, [thread.visible]);
+  const status = error || (readStopped && ["NOT_CREATED", "INITIALIZING", "REFINING"].includes(dto?.state)
+    ? "応答の準備が続いています。閉じて、履歴から応答を開き直してください。" : threadStatus(dto));
+
+  return <Modal visible={thread.visible} transparent animationType={Platform.OS === "ios" ? "fade" : "none"}
+    onRequestClose={thread.close} onDismiss={openPiece}>
     <KeyboardAvoidingView style={s.backdrop} behavior={Platform.OS === "ios" ? "padding" : "height"}>
       <View style={[s.card, { backgroundColor: colors.FIELD_BG, borderColor: colors.CARD_BORDER }]}>
-        <Text style={[s.title, { color: colors.TITLE_GOLD }]}>Emlisの返事</Text>
+        <Text style={[s.title, { color: colors.TITLE_GOLD }]}>Emlisからの応答</Text>
         <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={s.content}>
           {dto?.current_observation && <View style={s.section}>
-            <Text style={[s.label, textStyle]}>{busy || error || uncertain || thread.rejected ? "前回確認した返事（反映状況は未確認）" : "現在の返事"}</Text>
+            <Text style={[s.label, textStyle]}>応答内容</Text>
+            {(busy || error || uncertain || thread.rejected) && <Text style={textStyle}>前回確認した内容です。反映状況はまだ確認できていません。</Text>}
             <Text selectable style={[s.body, textStyle]}>{dto.current_observation.text}</Text>
           </View>}
           {dto?.pending_question && <View style={s.section}>
             <Text style={[s.label, textStyle]}>Emlisからの質問</Text>
             <Text selectable style={[s.body, textStyle]}>{dto.pending_question.text}</Text>
           </View>}
-          <Text accessibilityLiveRegion="polite" style={[s.body, textStyle]}>{error || (readStopped && ["NOT_CREATED", "INITIALIZING", "REFINING"].includes(dto?.state)
-            ? "返事の準備状況は、保存状況を確認して確かめられます。" : threadStatus(dto))}</Text>
+          {!!status && <Text accessibilityLiveRegion="polite" style={[s.body, textStyle]}>{status}</Text>}
           {busy && <ActivityIndicator accessibilityLabel="保存状態を確認中" color={colors.TITLE_GOLD} />}
           {dto?.pending_question && <View style={s.content}>
             <TextInput multiline value={draft} onChangeText={thread.setDraft} editable={!busy && !uncertain && !blocked}
@@ -133,10 +178,7 @@ export default function EmlisThreadModal({ thread, colors }) {
           {uncertain && (thread.pendingAction || !dto?.pending_question) && <CocolonButton disabled={blocked || busy || !thread.reconciled} onPress={thread.replayPending}>
             {thread.pendingAction ? "同じ操作を再送する" : "同じ回答を再送する"}
           </CocolonButton>}
-          {!!dto?.thread_id && <CocolonButton variant="secondary" onPress={() => setHistoryOpen(!historyOpen)}>
-            {historyOpen ? "履歴を閉じる" : "元の記録とこれまでのやり取り"}
-          </CocolonButton>}
-          {(historyOpen || !dto?.current_observation) && <View style={s.content}>
+          {!dto?.current_observation && <View style={s.content}>
           {dto?.original ? <View style={s.section}>
             <Text style={textStyle}>元の記録 · {dateLabel(dto.original.created_at)}</Text>
             {!!dto.original.memo && <Text selectable style={[s.body, textStyle]}>{dto.original.memo}</Text>}
@@ -149,9 +191,9 @@ export default function EmlisThreadModal({ thread, colors }) {
             <Text selectable style={[s.body, textStyle]}>{event.text}</Text>
           </View>)}
           </View>}
-          <CocolonButton variant="secondary" disabled={busy} onPress={thread.refresh}>保存状況を確認</CocolonButton>
         </ScrollView>
-        <CocolonButton variant="secondary" onPress={thread.close} accessibilityLabel="Emlisの返事を閉じる">閉じる</CocolonButton>
+        <CocolonButton disabled={!canCreatePiece(live.current)} onPress={createPiece}>ピースの作成</CocolonButton>
+        <CocolonButton variant="secondary" onPress={thread.close} accessibilityLabel="Emlisからの応答を閉じる">閉じる</CocolonButton>
       </View>
     </KeyboardAvoidingView>
   </Modal>;

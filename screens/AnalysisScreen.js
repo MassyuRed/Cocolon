@@ -481,6 +481,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
       />
       {route === "history" ? (
         <AnalysisHistoryScreen
+          navigation={navigation}
           onBack={() => {
             setRoute(historyBackRoute);
             refreshHomeSummaries();

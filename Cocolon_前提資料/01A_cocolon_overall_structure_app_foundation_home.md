@@ -1,3 +1,5 @@
+> 11/1 UI/Piece導線の最新は[本fileの差分](#response-piece-entry-20261101)とweekly第9回§38。新UIは配布/本人確認待ち。6701の初回実モデル保存再読とは区別する。
+
 > 2026-11-01後続差分：関連資料・本人補足/訂正・Analysis複数補足・候補SHA指定と実DB適用。配置/配布/実機・累積月次は未完。末尾[差分](#related-material-20261101)とweekly§33。
 
 > 2026-11-01最新差分：共通3欠陥・Piece export許可/再照合・iOS URL復帰・Android AAB手順。source実装/局所検証まで、配置・実機は未確認。末尾の[差分](#release-structure-20261101)と第9回weekly§32を参照。
@@ -5895,3 +5897,21 @@ API7bbb4661の製品実装、744336c0の実DB適用記録。`emlis_thread_store.
 `astor_material_snapshots.py` と `cores/analysis/source_adapter.py` は既存Q3最大3回答を保持、`cores/analysis/intent_compiler.py` は先行補足/置換文との矛盾、二重訂正を確認。新規 `ai/tests/test_analysis_multiple_answers.py` と拡張natural/Q3/tool検査。`ai/tools/serve_emlis_natural_reply.py` はweights/config SHA対指定で選択候補をロード前後確認、旧fit38既定と非学習/112tensor/時間・要求上限を維持。サーバー側更新にRN buildを要求しない。
 
 Emlis/Analysis current mapsとweekly§33を同期。その後の実4B HTTPS1回成功/API配置、6601のApple90683拒否と写真目的文修復はweekly§36。後続weekly§37で6701のApple処理/内部配布/本人起動とEmlis初回の実Auth→固定4B→実DB保存→本人同本文再読を確認。累積・月次当時snapshotとPiece本人実機は未完成。今回のRN製品sourceは5f91caceのまま、後続のtutorial契約ラベル同期と文書更新。STRUCTURE_MAP_DELTA_PRESENT。
+
+
+<a id="response-piece-entry-20261101"></a>
+## 2026-11-01 — 応答popupからPiece作成へ
+
+Mash明示指示はweekly第9回§38。通常応答表示を「Emlisからの応答」/「応答内容」、説明/履歴展開/保存状況buttonなし、操作は「ピースの作成」「閉じる」へ。問い/回答/訂正は廃止せず必要状態に保持。閉じるは元画面のまま。Pieceは新しい通常作成画面へ、表示中の保存入力ID/本人/opaque keyだけを渡し、既存のpreview/明示保存を使う。Emlis生成本文は本人sourceにしない。
+
+| owner | 今回の責務 |
+|---|---|
+| screens/input/EmlisThreadModal.js | 入力/履歴共用の指定表示、通常2操作、保存ID/本人/keyだけの明示Piece作成要求、native dismiss後の引継ぎ |
+| screens/PieceCreateScreen.js（新規）/navigation/PieceStackNavigator.js | PieceCreate route、本人/focus/runtimeと一回要求の管理。flag更新中は同keyの保存/取消回復hostを維持 |
+| screens/input/InputPieceActionArea.js | 既存saved-input/renderer/controllerを再利用し、明示要求だけsource GET→previewへ。通常mount/復帰では作らない |
+| screens/InputScreen.js / screens/AnalysisHistoryScreen.js / screens/AnalysisScreen.js | 両入口から現在の保存IDとnavigationを渡す。閉じるだけなら元画面を保持 |
+| API piece_v2_source_adapter.py | natural FINALのreceiptと成功finishを照合し、意味checkpointを捏造せず元入力だけPieceへ渡す |
+| API supabase/migrations/20261101022630_piece_natural_reply_context.sql | 既存issue/save/visual-changeの自然profileだけ保存cohort/権利と同期。旧Q3/lock/clock/ACL/枠は保持 |
+
+
+API実装候補1296eaea。native recipientは意図的にMEANING_UPDATEなしのため、natural専用の保存receipt/source/context/FINAL/同attempt成功終了を照合する。意味/analysisを生成済みに偽装しない。旧Q3とnaturalの保存cohortを分け、関連履歴の編集/削除時は拒否する。RN対象209、API/実SQL175成功。新UIのApple配布/本人確認は未完、既存6701の初回接続確認と区別する。GPUはMash停止報告、華恋の再起動0。STRUCTURE_MAP_DELTA_PRESENT（新RN作成screen/routeと自然profileの既存handoff整合、公開wire/table追加なし）。

@@ -6,6 +6,7 @@ import PieceLibraryScreen from "../screens/PieceLibraryScreen";
 import TutorialFlowScreen from "../screens/TutorialFlowScreen";
 import PieceHistoryMenuScreen from "../screens/PieceHistoryMenuScreen";
 import PieceOwnerHistoryScreen from "../screens/PieceOwnerHistoryScreen";
+import PieceCreateScreen from "../screens/PieceCreateScreen";
 import ResonanceHistoryListScreen from "../screens/ResonanceHistoryListScreen";
 import ResonanceHistoryDetailScreen from "../screens/ResonanceHistoryDetailScreen";
 import EmotionLogScreen from "../screens/EmotionLogScreen";
@@ -38,6 +39,7 @@ export default function PieceStackNavigator({ linkPayload, onConsumeLinkPayload,
       <PieceStack.Screen name="TutorialFlow" component={TutorialFlowScreen} />
       <PieceStack.Screen name="PieceHistory" component={PieceHistoryMenuScreen} />
       <PieceStack.Screen name="PieceOwnerHistory" component={PieceOwnerHistoryScreen} />
+      <PieceStack.Screen name="PieceCreate" component={PieceCreateScreen} />
       <PieceStack.Screen name="ResonanceHistoryList" component={ResonanceHistoryListScreen} />
       <PieceStack.Screen name="ResonanceHistoryDetail" component={ResonanceHistoryDetailScreen} />
       <PieceStack.Screen name="EmotionLog">

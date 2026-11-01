@@ -2,7 +2,7 @@
 doc_id: cocolon_piece_current_structure
 title: "Piece構造 — Current Structure"
 revision_date: "2026-11-01 JST"
-latest_api_implementation: "744336c0de999e271a755b441394f382548829ab"
+latest_api_implementation: "1296eaea589a09fe91f84689c6d55d67e577ec23"
 latest_storage_candidate: "4fcb140b778850a1b7a5a65d8e0a26005b3a24c4"
 document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
@@ -11,6 +11,10 @@ implementation_effect: 0
 activation_effect: 1
 automatic_progression: false
 ---
+
+> 11/1 UI/Piece導線の最新は[本fileの差分](#response-piece-entry-20261101)とweekly第9回§38。新UIは配布/本人確認待ち。6701の初回実モデル保存再読とは区別する。
+
+
 
 # Piece構造 — Current Structure
 
@@ -3520,3 +3524,21 @@ GET /healthz200、/app/bootstrap200とPiece8flag一致（private4true/public-wri
 6601はUpload job成功後、Apple processing90683でNSPhotoLibraryUsageDescription不足となり配布不可。Info.plistへ既存Add keyと同じ保存用途説明を追加。CameraRollのcocolonAddOnly:trueと保存後PHAsset再読をしない既存patchは維持し、写真一覧/撮影/権限要求の機能は追加しない。
 
 既存ios-build.ymlはArchive直後に実app Info.plistの写真Usage/Add両keyが非空stringか検査し、欠落時はIPA/Upload前に停止する。source plist解析、workflow順序、binary archive fixtureで正常/Usage欠落拒否を局所確認。b8a43e5aの#67/6701で実署名Archive検査・IPA/Uploadが成功し、Apple処理も通過。暗号化情報保存後、既存内部グループでテスト中、Mashの6701起動を確認した。Pieceの保存/再読/OS出力の実機確認は未完。Emlis初回保存/再読と混同しない。実結果は第9回weekly§37へ。STRUCTURE_MAP_DELTA_NONE（目的文と既存配布検査の補正、新route/API/DBなし）。
+
+
+<a id="response-piece-entry-20261101"></a>
+## 2026-11-01 — 応答popupからPiece作成へ
+
+Mash明示指示はweekly第9回§38。通常応答表示を「Emlisからの応答」/「応答内容」、説明/履歴展開/保存状況buttonなし、操作は「ピースの作成」「閉じる」へ。問い/回答/訂正は廃止せず必要状態に保持。閉じるは元画面のまま。Pieceは新しい通常作成画面へ、表示中の保存入力ID/本人/opaque keyだけを渡し、既存のpreview/明示保存を使う。Emlis生成本文は本人sourceにしない。
+
+| owner | 今回の責務 |
+|---|---|
+| screens/input/EmlisThreadModal.js | 入力/履歴共用の指定表示、通常2操作、保存ID/本人/keyだけの明示Piece作成要求、native dismiss後の引継ぎ |
+| screens/PieceCreateScreen.js（新規）/navigation/PieceStackNavigator.js | PieceCreate route、本人/focus/runtimeと一回要求の管理。flag更新中は同keyの保存/取消回復hostを維持 |
+| screens/input/InputPieceActionArea.js | 既存saved-input/renderer/controllerを再利用し、明示要求だけsource GET→previewへ。通常mount/復帰では作らない |
+| screens/InputScreen.js / screens/AnalysisHistoryScreen.js / screens/AnalysisScreen.js | 両入口から現在の保存IDとnavigationを渡す。閉じるだけなら元画面を保持 |
+| API piece_v2_source_adapter.py | natural FINALのreceiptと成功finishを照合し、意味checkpointを捏造せず元入力だけPieceへ渡す |
+| API supabase/migrations/20261101022630_piece_natural_reply_context.sql | 既存issue/save/visual-changeの自然profileだけ保存cohort/権利と同期。旧Q3/lock/clock/ACL/枠は保持 |
+
+
+API実装候補1296eaea。native recipientは意図的にMEANING_UPDATEなしのため、natural専用の保存receipt/source/context/FINAL/同attempt成功終了を照合する。意味/analysisを生成済みに偽装しない。旧Q3とnaturalの保存cohortを分け、関連履歴の編集/削除時は拒否する。RN対象209、API/実SQL175成功。新UIのApple配布/本人確認は未完、既存6701の初回接続確認と区別する。GPUはMash停止報告、華恋の再起動0。STRUCTURE_MAP_DELTA_PRESENT（新RN作成screen/routeと自然profileの既存handoff整合、公開wire/table追加なし）。

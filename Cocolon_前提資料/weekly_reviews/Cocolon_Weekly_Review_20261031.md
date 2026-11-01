@@ -1548,3 +1548,29 @@ MashはTestFlightで6701を開けたと回答。その後、通知送信を避�
 今回閉じたのはApple処理を含むiOS配布阻害と本人初回の通常接続/保存/再読。Pieceの本人描画/保存/Photos/Share、Android実配布、実ストア料金/購入/復元、累積/月次当時snapshot、月追加1万円内の本番常時提供、申請Console/本人基本機能一巡、旧V4 metrics19失敗は残る。Apple Developer更新契約のAccount Holder確認バナーも残り、華恋は契約を受諾していない。8タスク全完了・正式商品受入れ・公開可能とは報告しない。
 
 STRUCTURE_MAP_DELTA_NONE。product source/API/DB/依存の追加変更なし。既存全体現在地・全file地図・Piece map・API運用記録へ6701と初回確認結果を同期する。
+
+<a id="response-modal-piece-entry-20261101"></a>
+## 38. 11/1 — 応答ポップアップの表示整理とPiece作成入口（Mash明示指示）
+
+MashはGPUを一旦停止したと報告。華恋は再起動せず、必要になった時点で伝える。
+
+変更仕様：入力直後/感情入力履歴で共用するポップアップの見出しを「Emlisからの応答」、通常本文ラベルを「応答内容」へ。「この記録へのEmlisの返事です。」は削除。「元の記録とこれまでのやり取り」と「保存状況を確認」を削除し、通常の応答表示の操作を「ピースの作成」「閉じる」の2つへ。閉じるはポップアップだけを閉じ、入力/履歴の元画面を保つ。Pieceは表示中の記録に対応する保存IDから既存の作成/画像確認/保存処理へ渡し、応答本文を本人原文として流用しない。
+
+実装順：①共用表示と再読エラー案内を修正、②両入口の本人ID/navigationを渡してPiece作成画面へ接続、③既存saved-input host/controllerを再利用し明示作成要求1回からsource-ref読取→previewへ進める、④新natural FINALが旧meaning checkpoint前提で拒否される箇所だけを補正。新形式の保存receipt・同一source/context・完了attemptを検査し、meaning/analysisを捏造せず、Pieceの意味素材は元入力だけに保つ、⑤対象検証・GitHub反映・API指定版配置・iOS配布確認。GPU/学習/品質候補の生成は不要。
+
+問い/本人回答/訂正の既存機能は廃止しない。準備中/通信結果不明/参照元失効中は作成を開始せず、Pieceの権利・保存枠・renderer・独立保存/OS出力の条件は既存処理で再検査する。実装/対象検証/配置/本人画面確認を区別して後続結果を記載する。
+
+
+### 実装と局所検証
+
+共用EmlisThreadModalの通常応答は指定見出し/本文ラベル、説明文なし、footer「ピースの作成」「閉じる」の2つへ修正。履歴からの入口名も「Emlisからの応答を開く」に揃えた。結果不明/35秒待機停止時の案内は、削除したbuttonを要求せず「閉じて、履歴から応答を開き直す」へ変更。問い/回答/訂正は必要な状態だけ既存どおり保持する。
+
+PieceStackにPieceCreateScreenを追加。入力直後/両履歴入口のnavigationと本人IDを共用modalへ渡し、明示押下時に表示中original.id/本人/乱数preview keyの3値だけを固定してから閉じる。iOSはnative modal dismiss完了後、Androidは非animationのhide後に遷移する。本人/focus変更・unmount・二度押しを遮断し、閉じるだけでは遷移しない。Piece作成画面は既存InputPieceActionArea/Controller/PreviewModal/iOS rendererを使い、その明示要求を一回消費してsource-ref GET→previewだけ開始。実保存は既存の明示保存へ残す。通常mountやtab/runtime復帰では再生成しない。同本人/同要求のhostはruntime OFFでもmountを保ち、同keyのsave/cancel回復を捨てない。初回focus/runtime待機では実開始前に要求を消費しない。
+
+API1296eaeaはnatural専用handoffを追加し、意図的に存在しないMEANING_UPDATEを要求しない。保存receipt/同source-context/現在INITIAL OBSERVATION/同attempt成功終了/原本一致/FINAL/NOT_GENERATEDを検査し、生成本文はPiece意味素材へ使わない。履歴も保存cohort指定のrelated_contextへ揃える。新migration20261101022630（Supabase CLI2.122.0で作成）は既存3RPCのcontext呼出し/旧日数上限だけをnatural限定で補正し、旧Q3・行lock/待機後時計/権利/版/枠/ACLを保つ。
+
+検証はRN対象209 PASS/FAIL0、API+実PGlite SQL対象175 PASS/FAIL0/SKIP0。JSは通常2button・両入口・close/dismiss・同IDとowner・一回要求・初期focus/runtime待機・runtime変化で同host保持・遅延応答破棄・既存保存回復を含む。無関係なMetro bundle検査は今回のローカル対象外。APIは自然保存/旧handoff/7項目HTTP投影、3tierのpreview/visual/save成功、元入力/使用履歴の編集・削除後の3操作×3tier=9拒否、Premium4000日前の権利、関数3本のservice_role限定を確認。警告1は既存。途中の旧UI期待/古いruntime mock・テスト属性名/VM配列比較の不整合を修正後の最終結果で、反復実行は加算しない。
+
+同環境read-only差分監査で、初回非focus時の早期消費とruntime OFFでのhost破棄を指摘され、上記どおり修正/実検査した。別model Pro review・本人新UI/画像作成確認の証拠ではない。
+
+STRUCTURE_MAP_DELTA_PRESENT。新productionはRN screens/PieceCreateScreen.js、既存PieceStackへrouteを追加。新testはAPI ai/tests/piece_v2/test_piece_natural_context_sql.py、新migrationは上記。APIwire/DBtable/依存/課金/品質候補/本番公開境界は追加しない。GitHub反映・実DB適用/API指定配置・iOS新build/Apple内部配布と本人確認はそれぞれの実結果を後続へ記載する。GPU停止はMash報告、華恋の再起動/実provider呼出し/学習0。

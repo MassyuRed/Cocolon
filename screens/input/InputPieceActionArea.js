@@ -79,6 +79,7 @@ export default class InputPieceActionArea extends React.Component {
     this.close = this.close.bind(this);
     this.changed = this.changed.bind(this);
     this.resolveSavedInput = this.resolveSavedInput.bind(this);
+    this.createFromSavedInput = this.createFromSavedInput.bind(this);
     this.receiveSaveFit = this.receiveSaveFit.bind(this);
   }
 
@@ -144,7 +145,7 @@ export default class InputPieceActionArea extends React.Component {
 
   savedEnabled() {
     try {
-      return this.context?.runtime != null &&
+      return this.props.active !== false && this.context?.runtime != null &&
         this.context?.isFeatureEnabled?.('piece_v2_preview_enabled', false) === true;
     } catch { return false; }
   }
@@ -290,6 +291,17 @@ export default class InputPieceActionArea extends React.Component {
         catch { /* A failed refresh cannot authorize a source retry. */ }
       }
     }
+  }
+
+  // The response's explicit create choice owns this GET -> preview sequence.
+  // Ordinary mounts, runtime/focus returns and source reads never call it.
+  async createFromSavedInput() {
+    if (!this.savedMode || !this.isCurrent()) return;
+    const stamp = this.boundStamp, runtime = this.boundRuntime;
+    if (this.sourcePhase !== 'ready') await this.resolveSavedInput();
+    if (!this.isCurrent() || this.boundStamp !== stamp || this.boundRuntime !== runtime ||
+        this.sourcePhase !== 'ready') return;
+    this.start();
   }
 
   changed() {
@@ -453,16 +465,18 @@ export default class InputPieceActionArea extends React.Component {
         (unavailable && this.sourceCode === 'PIECE_TEMPORARILY_UNAVAILABLE');
       return element(View, { testID: 'piece-saved-input-source-area' },
         this.sourcePhase === 'loading' ? element(Text, { accessibilityLiveRegion: 'polite' },
-          '保存入力を確認しています。') : null,
+          this.props.creationMode ? 'ピースを準備しています。' : '保存入力を確認しています。') : null,
         unavailable ? element(Text, { accessibilityRole: 'alert' }, new PieceApiError(this.sourceCode).message) : null,
-        canRead ? element(Button, { title: '保存入力を確認', onPress: this.resolveSavedInput,
-          accessibilityLabel: 'Pieceに使う保存入力を確認' }) : null,
+        canRead ? element(Button, { title: this.props.creationMode ? 'ピースを作成' : '保存入力を確認',
+          onPress: this.props.creationMode ? this.createFromSavedInput : this.resolveSavedInput,
+          accessibilityLabel: this.props.creationMode ? 'ピースを作成' : 'Pieceに使う保存入力を確認' }) : null,
       );
     }
     if (display.phase === 'hidden') return null;
     return element(View, { testID: 'piece-input-action-area' },
       display.phase === 'idle' ? element(Button, {
-        title: 'この入力をPieceにする', onPress: this.start, accessibilityLabel: 'この入力をPieceにする',
+        title: this.props.creationMode ? 'ピースを作成' : 'この入力をPieceにする', onPress: this.start,
+        accessibilityLabel: this.props.creationMode ? 'ピースを作成' : 'この入力をPieceにする',
       }) : null,
       ['unavailable', 'cancelled', 'saved'].includes(display.phase) && !this.state.open
         ? element(Text, { accessibilityRole: display.phase === 'saved' ? undefined : 'alert',

@@ -1,3 +1,5 @@
+> 11/1 UI/Piece導線の最新は[本fileの差分](#response-piece-entry-20261101)とweekly第9回§38。新UIは配布/本人確認待ち。6701の初回実モデル保存再読とは区別する。
+
 > 2026-11-01最新：natural専用関連履歴・本人補足/訂正材料・失効本文のDTO全体抑止・adapter SHA対指定。API7bbb4661、実DB migration適用済み。モデル配置/新配布/本人端末は未完。末尾とweekly§33。
 
 > 10/26最新差分：4題材6教材のprivate版3・CPU完了。末尾の同日節と全機能00/weekly§56を参照。旧学習実績と今回の合成教師検証を区別する。
@@ -1973,3 +1975,21 @@ API `emlis_thread_store.py`/`emlis_thread_service.py` と新private RPC `emlis_t
 新規 `supabase/migrations/20261101010000_emlis_natural_related_context.sql` は実DB適用成功、service_role専用/anon・authenticated実行不可をmetadata確認。新規 `ai/tests/test_analysis_multiple_answers.py` と拡張natural/Q3/提供tool検査を含め、natural系63件・Analysis関係177件が局所PASS。実providerは合成で実4B品質ではない。
 
 `ai/tools/serve_emlis_natural_reply.py` はadapterのweights/config SHA対を明示指定可能。ロード前後hash/112tensor/値一致/非学習/時間・要求上限は保持。サーバー側の候補/指示更新にRN再ビルドを要求しない。新候補採用、追加学習、実4B生成、Render更新、端末配布は今回未実行。実到達HTTPS/初回接続・同本文再読は未完。STRUCTURE_MAP_DELTA_PRESENT。
+
+
+<a id="response-piece-entry-20261101"></a>
+## 2026-11-01 — 応答popupからPiece作成へ
+
+Mash明示指示はweekly第9回§38。通常応答表示を「Emlisからの応答」/「応答内容」、説明/履歴展開/保存状況buttonなし、操作は「ピースの作成」「閉じる」へ。問い/回答/訂正は廃止せず必要状態に保持。閉じるは元画面のまま。Pieceは新しい通常作成画面へ、表示中の保存入力ID/本人/opaque keyだけを渡し、既存のpreview/明示保存を使う。Emlis生成本文は本人sourceにしない。
+
+| owner | 今回の責務 |
+|---|---|
+| screens/input/EmlisThreadModal.js | 入力/履歴共用の指定表示、通常2操作、保存ID/本人/keyだけの明示Piece作成要求、native dismiss後の引継ぎ |
+| screens/PieceCreateScreen.js（新規）/navigation/PieceStackNavigator.js | PieceCreate route、本人/focus/runtimeと一回要求の管理。flag更新中は同keyの保存/取消回復hostを維持 |
+| screens/input/InputPieceActionArea.js | 既存saved-input/renderer/controllerを再利用し、明示要求だけsource GET→previewへ。通常mount/復帰では作らない |
+| screens/InputScreen.js / screens/AnalysisHistoryScreen.js / screens/AnalysisScreen.js | 両入口から現在の保存IDとnavigationを渡す。閉じるだけなら元画面を保持 |
+| API piece_v2_source_adapter.py | natural FINALのreceiptと成功finishを照合し、意味checkpointを捏造せず元入力だけPieceへ渡す |
+| API supabase/migrations/20261101022630_piece_natural_reply_context.sql | 既存issue/save/visual-changeの自然profileだけ保存cohort/権利と同期。旧Q3/lock/clock/ACL/枠は保持 |
+
+
+API実装候補1296eaea。native recipientは意図的にMEANING_UPDATEなしのため、natural専用の保存receipt/source/context/FINAL/同attempt成功終了を照合する。意味/analysisを生成済みに偽装しない。旧Q3とnaturalの保存cohortを分け、関連履歴の編集/削除時は拒否する。RN対象209、API/実SQL175成功。新UIのApple配布/本人確認は未完、既存6701の初回接続確認と区別する。GPUはMash停止報告、華恋の再起動0。STRUCTURE_MAP_DELTA_PRESENT（新RN作成screen/routeと自然profileの既存handoff整合、公開wire/table追加なし）。
