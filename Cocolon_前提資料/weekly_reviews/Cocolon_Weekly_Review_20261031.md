@@ -1609,3 +1609,14 @@ Mashから「指示通りできてた」と応答popupの指定表示につい�
 現生成は4Bを呼ばず、既存CMEEの有限Piece作者を使う。対応する本人価値観/希望/評価、文末、最大6文、選択感情の明示等の対応範囲が狭い。CPU単体の架空2例で、対応する価値観文はshort_essay生成、通常の動作確認メモはexpression_meaning_not_admittedを再現した。これは本人の原入力を取得した結果ではなく、Mashの記録の厳密な内部拒否条件は未確定。一般入力からPieceを生成できる状態は未完成と明示する。生成の拒否を外す/原文を画像へ貼る/別作者や外部AIへ迂回する変更は行わない。
 
 今回の製品差分は既存modal内の表示領域と案内文だけ。STRUCTURE_MAP_DELTA_NONE（新route/公開wire/意味contract/DBtable/保存枠/依存/renderer変更なし）。API生成/DB/稼働設定の追加変更0、GPU再起動/実provider呼出し/学習0。前提資料は全体現在地・全体構造/全file地図・Emlis/Piece map・Piece入口と既存API運用記録へ、本人確認/失敗/修復候補を区別して同期する。
+
+
+### 6901の配布結果
+
+修復sourceはRN `edf7728946fea77d858618390c7e8cc909088d1b`。iOS #69/run41269079158/job124737922381/attempt1を03:24:55 UTCに一回開始し、03:42:29 UTCまでに全工程success。実署名Archive、写真Usage/Add両目的文検査、IPA export、TestFlight upload成功。App Store Connectで1.0(6901)のApple処理通過を確認し、既存実装に対応する暗号化情報を保存した。
+
+途中でchatの処理が中断したが、再開時に暗号化dialogと未提出buttonの消失を読取確認し、保存を再送しなかった。既存内部グループ「Emlis テスト版配布」のbuild一覧で6901「テスト中」を確認。新テスター/外部配布/App Store公開なし。現在地と最新weeklyへ配布の実結果を反映。最後の更新は文書2pathだけで製品codeは署名buildのsourceと同一、再buildはしない。
+
+同sourceの自動Piece RN preview/owner CI41268907294は、JS契約/iOS canvas/Pods/Android source・exportの5jobがsuccess。iOS metricsだけ既存V4 1/20・19FAILが残り、native129/129・V9 46/46・bitmap44/44成功。新規失敗型/metrics source差分なし。局所231 PASSと全CI成功を混同しない。
+
+6901の新しい安全領域・位置と、Pieceの画像保存/OS出力の本人確認は未完。6801の応答popupの本人確認と区別する。生成器は今回変更しておらず、一般入力への対応は未完成、本人の対象記録はpreview422で未作成だった事実を保持。GPU再起動/実モデル呼出し/学習/API再配置/DB追加操作0。表示修復の内部配布を生成完成/商品受入れへ数えない。
