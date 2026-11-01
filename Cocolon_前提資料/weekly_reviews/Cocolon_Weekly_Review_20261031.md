@@ -614,7 +614,7 @@ Analysisの今週範囲は、累積保存を成立させる最小到達点であ
 
 ### 11.6 環境・配布・時間・費用の依存
 
-- GPU停止の記述は10/31計画時点の履歴。最終実行§30では稼働保持だったが、11/1の§34で停止中/GPU割当先利用不可を管理画面確認。11/1に通常接続と平日品質作業に必要な準備を進め、11/2〜11/6は華恋がGPU/サーバー側で実行する。モデル・設定変更をRN再ビルドへ結び付けず、未実行を成功にしない。
+- GPU停止の記述は10/31計画時点の履歴。最終実行§30では稼働保持だったが、11/1の§34で停止中/GPU割当先利用不可を管理画面確認。後続§35でMash提供の新PodへJupyter接続と環境準備を完了し、現在の未完は推論用8000追加のreset保存前確認。11/1に通常接続と平日品質作業に必要な準備を進め、11/2〜11/6は華恋がGPU/サーバー側で実行する。モデル・設定変更をRN再ビルドへ結び付けず、未実行を成功にしない。
 - 比較と接続確認を可能な限り同じモデル起動枠へまとめる。起動前に必要な環境・実行内容・時間枠・準備／保持／回収込みの費用・終了後の状態を具体化する。追加月額上限1万円は維持する。過去の処理按分額を現在の請求額に流用しない。
 - 旧試行の承認は消費済みで、同じrunを再起動しない。新しい有料実行・本番適用・配布等は、既存の有効な許可が実対象を含むか確認し、足りない操作だけをsource準備後に具体化する。計画記載を包括的なGPU起動・課金・配置許可へ変換しない。
 - RNは、新Emlis表示と既存Piece保存接続を含む同一候補で確認する。6501にはPiece新版の29製品パスが未収録。87151候補の29パスはPR30と同一であり、再実装29件は不要。ただし今週のEmlis表示変更後は、その変更も含むfresh候補へ更新する。旧87151を無条件で最新版として配布しない。
@@ -1483,8 +1483,24 @@ Mashの「GitHubのGoogle認証をこのブラウザで継続してよい」を�
 
 Render pluginはstart commandやsource commitを更新できないため既存Dashboardで補完。RenderでGitHub方式はdeployment用accountでlogin未設定と表示されたため、新しいlogin方式を追加せず既存Google方式で同workspaceへ入った。認証値・deploy hook・Jupyter tokenは記録/公開していない。モデルのHTTPS提供口・専用Bearer・Renderのnatural profileは未設定のまま。APIの旧providerへ黙って切り替えたり、公開品質合格のflagを立てたりしない。
 
-Runpod公式の[Pod migration](https://docs.runpod.io/pods/troubleshooting/pod-migration)では同型新Podへvolume `/workspace` を移し、Pod ID/IP/URLは変わり、container diskは移らない。現Podはpersistent storageなし表示なので、モデル環境の保全は未確認。移行の実行は未承認。次の具体案は、同型1GPUの自動移行と初回接続準備を既存残高から合計$1以内・追加チャージなしで進め、上限/同型条件を満たさなければ停止すること。実行前にMashへこの操作を明示して許可を求める。
+Runpod公式の[Pod migration](https://docs.runpod.io/pods/troubleshooting/pod-migration)では同型新Podへvolume `/workspace` を移し、Pod ID/IP/URLは変わり、container diskは移らない。現Podはpersistent storageなし表示なので、モデル環境の保全は未確認。移行の実行は未承認。この時点の具体案は、同型1GPUの自動移行と初回接続準備を既存残高から合計$1以内・追加チャージなしで進め、上限/同型条件を満たさなければ停止すること。実行前にMashへこの操作を明示して許可を求めた。後続§35でMash提供の新Podへ接続し、この移行案は現在の実行対象から外れた。
 
 通常実Auth→実4B→実DB保存→RN表示→同じ本文再読はまだ未完。初回端末確認と最終候補確認に絞る方針、11/2〜11/6のサーバー側品質改善を維持する。累積/月次当時snapshot、Android実配布、実ストア680/1480円・購入/復元、月追加1万円内の本番提供原価、申請Console/基本機能の本人一巡も残る。8タスク全完了・リリース可能・品質合格とは報告しない。
 
 今回のsource追加変更0、DB追加変更0、新しい品質学習/生成0。現在地・本議事録・API既存実装記録を実配置/送信結果へ同期。STRUCTURE_MAP_DELTA_NONE（配置/Upload/稼働設定の既存境界内で、新しいproduct route/contract/fileは追加していない）。
+
+
+<a id="jupyter-new-pod-20261101"></a>
+## 35. 11/1 — 新PodのJupyter認証解消、固定4B環境を準備
+
+MashがPod6i2aa1nj683s8y/cloudy_jade_yakのJupyter URLと稼働画像を提供。旧Podの自動移行は行わず、新Podで初回通常接続を継続する。管理画面でRTX3090×1/$0.51/h、接続開始時残高$5.68を確認。新Pod作成/停止/削除/チャージ操作は華恋0。
+
+直接の/lab URLはJupyterのPassword or token画面へ進んだ。Mashの「Googleアカウントでログインにできない？」を受け、既にGoogle認証済みのRunpod管理画面から正式なJupyter Labリンクを開くとJupyterLabへ認証できた。Jupyter独自Google loginを追加したのではない。tokenをchatへ要求/記録せず、Runpodの既存認証付接続リンクを利用した。SSH鍵追加やWeb terminal有効化は不要だった。
+
+Jupyter内のCPU診断：Python3.12.3/torch2.8.0+cu128、NVIDIA GeForce RTX3090/24576MiB、使用1MiB/0％。初期workspaceは.cacheのみ、固定base cache/transformers/peft/accelerate/safetensorsなし、空き49.98GiB。
+
+初回配線の準備として/workspace/cocolon_initial_connection_20261101の隔離venvにtransformers5.19.0/peft0.21.2/accelerate1.15.0/safetensors0.8.0を導入。既存torchを利用しglobalは置換しない。API744336c0のserve_emlis_natural_reply.pyだけを取得しSHA256 d3b7a04e38769485da995c8323aaaaf4426ff5273fcba6dff578ada85bdb77b6を照合。Qwen/Qwen3.5-4Bの固定revision851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0aを公式public repoから/workspace/cocolon_hf_cache/hubへ準備し、indexが示す2shardの存在と固定依存を再確認した。setup jobはDone。GPUへのmodel load/学習/生成0、旧不採用adapterの転用0、base準備を品質採用へ換算しない。
+
+現HTTP公開は8888/Jupyterのみ。Renderから推論するため8000/httpが必要だが、Edit Podに「Editing a running Pod will cause it to reset. All Pod data will be lost!」と明示。HTTPを8888,8000へ入力しSave可能な確認状態まで準備したが、Save未実行、reset/公開変更0。準備済みvenv/cache/toolも再作成が必要になるため、保存前にMashへ具体的なresetと鍵付き推論口追加を確認する。8888/JupyterのtokenをモデルAPI keyとしてRenderへ入れず、専用Bearer/最大4要求1800秒の初回probeを次の準備対象にする。model HTTP起動/Render natural profile/実Auth→4B→DB保存→本人再読はまだ未完。
+
+現在地とAPI既存実装記録へ同じ差分を反映。STRUCTURE_MAP_DELTA_NONE（既存提供toolと認証入口を利用、product source/公開contract/通常routeの追加変更0）。11/2〜11/6はサーバー側品質枠、候補ごとのRN再ビルド不要という配分を維持する。

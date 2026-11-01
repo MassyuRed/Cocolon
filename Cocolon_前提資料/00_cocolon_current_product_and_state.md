@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-**11/1の稼働・配布：[第9回§34](weekly_reviews/Cocolon_Weekly_Review_20261031.md#release-live-build-20261101)。** API `744336c0` をRenderへ指定commitで配置し、`dep-dbj853ou01pc73enjrt0` は11/1 00:08 UTCにLive。Piece exportを含むprivate5機能ON/public3機能OFF、health 200、未認証export 401/no-storeを実HTTP確認。RN `6675b4ed` の新iOS workflow #66/run41254631100は署名Archive・IPA・TestFlight Uploadまで成功、実ログのBUILD_NUMBER=6601。Apple側処理/配布対象・本人端末導入は未確認。Google/GitHub認証待ちは解消。Runpodの既存Podは停止中・GPU割当先利用不可で、同型GPUへの自動移行が自動承認審査で拒否され未実行。実モデルHTTPSと実Auth→4B→保存→同本文再読はここが未完。iOS metrics CI19失敗、累積/月次当時snapshot、Android実配布、実ストア料金、本番原価・申請Consoleも残る。
+**11/1の稼働・配布：[第9回§34](weekly_reviews/Cocolon_Weekly_Review_20261031.md#release-live-build-20261101)・[新Pod接続§35](weekly_reviews/Cocolon_Weekly_Review_20261031.md#jupyter-new-pod-20261101)。** API `744336c0` をRenderへ指定commitで配置し、`dep-dbj853ou01pc73enjrt0` は11/1 00:08 UTCにLive。Piece exportを含むprivate5機能ON/public3機能OFF、health 200、未認証export 401/no-storeを実HTTP確認。RN `6675b4ed` の新iOS workflow #66/run41254631100は署名Archive・IPA・TestFlight Uploadまで成功、実ログのBUILD_NUMBER=6601。Apple側処理/配布対象・本人端末導入は未確認。Google/GitHub認証待ちは解消。Mash提供の新Pod6i2aa1nj683s8y/RTX3090へ、Runpodの正式Jupyterリンクで認証接続。固定4Bの2shardと依存/提供toolの準備・照合まで完了。推論用HTTP8000番追加はPod全データ消去/resetの警告があるため8888,8000を保存前の状態で保持、未保存。実モデルHTTPSと実Auth→4B→保存→同本文再読は未完。iOS metrics CI19失敗、累積/月次当時snapshot、Android実配布、実ストア料金、本番原価・申請Consoleも残る。
 
 **11/1の実装/DB：[第9回§32](weekly_reviews/Cocolon_Weekly_Review_20261031.md#release-implementation-20261101)・[§33](weekly_reviews/Cocolon_Weekly_Review_20261031.md#release-source-db-20261101)。** account owner世代分離、購入finish失敗伝播と同一購入結果共有、visibility失敗502、Piece export独立許可/OS直前artifact照合、iOS URL復帰、Android署名AAB手順、ガイド同期を実装。API7bbb4661で関連履歴検索・本人原入力/最大3回答/訂正の別材料化・失効natural本文のtimeline抑止・Analysis複数補足と矛盾照合・adapter SHA対指定を追加し、Supabase migrationを適用。RN151/API284、natural系63、Analysis関係177、RN screen36が局所PASS。API7bbb4661のAnalysis CI41253745568も1634 PASS＋12020 subtests、owner1 PASS・194 deselected、合成保存再読成功。実装/DB/配置/Uploadを実機成功・8タスク全完了へ換算しない。
 
@@ -20,7 +20,7 @@
 
 **最初のA4500学習実績（§24・履歴）：** [A4500で修正版4B追加学習を完走、重み回収、CMEE採用は未達（§24）](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-a4500-training-and-portable-weights)。[全実結果](observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/repaired_a4500_20261025/README.md)。Mashは4B採用とリリースまでRunpodでの追加学習を明示し、将来は手持ちPCへ移す可能性が高い。RTX A4500 20GB／Secure・EU-RO-1・Pod y0eb0w0qn6nks0を今回の最安の容量候補として確保。GPU$0.25/h・50GB container込み表示$0.26/h。CUDA/BF16正常、修正版2教師/1epoch/2update・adapter保存/非学習reload・前後16生成が20分23.76秒で完走し、20GBで現方式が動くことを確認した。peak allocated14.970/reserved17.588GiB。最終archive全24memberのhashと32tensor有限性/前後重み不変をPod外照合し永続保管済み。NLL0.251117→0.245189、raw6/8変化だが、CMEE意味/本文は前後0/2。初回の根拠座標は通るようになったが必須shape/自然文surface不正、訂正後rawは不変、proxy2件が2048tokenで打切りとなり品質未達。その時点の残件は必須shapeと自然文surfaceで、後続の現在作業は下段へ更新する。この§24のrunはGPUを停止せず終了した。旧3070は今回開始時既に停止表示、華恋のStop操作0。
 
-**GPUの現在状態（11/1の管理画面確認）：** Pod10o4zhfktg9nc1/RTX PRO4000は停止中。開始表示$0.57/h、残高$5.73。起動操作で「Your Pod’s GPUs are no longer available」となり、同型GPUへの自動データ移行が提示されたが、自動承認審査が新Pod作成/データ移動/追加課金を理由に拒否し未実行。GPU起動・新Pod作成・学習/生成0、container50GB・persistent storageなし。既存ファイル/モデルcacheの存否も未確認。10/31§30の学習/保存/34生成・6e1c不採用と旧5重み保全は履歴として保持し、当時の稼働保持を現在の稼働へ流用しない。
+**GPUの現在状態（11/1・新Pod接続後）：** Mashから新Pod6i2aa1nj683s8y/cloudy_jade_yakのURLと稼働画像を受領。管理画面でもRTX3090×1/$0.51/h、接続開始時残高$5.68を確認。JupyterはGoogleで入ったRunpodの正式接続リンクから認証でき、トークンを本人にchat入力してもらう必要はなかった。Python3.12.3/torch2.8.0+cu128、CUDA24GB/1MiB/0％、初期workspaceは.cacheのみ。固定base2shardと隔離venv依存・source SHAを照合、学習/生成/モデルGPU load0。推論用8000番追加のSaveは全Podデータ消去/reset警告のため未実行。旧Podの自動移行は華恋未実行のまま、新Podで継続する。旧不採用候補/過去重み保全を採用へ変えない。
 
 **10/30の学習履歴（focus29一回完了／不採用閉鎖）：** Mash承認の保存ad8b隔離初期値・現10行各2回＋旧9各1回＝29更新を同Jupyterで一回実行し、29 training forward/optimizer・保存非学習再読・同19行NLL・新2件×5段の10生成/全EOSまで完了。全19教師/messages/encoded/元終端/mask/完全CE/指示/受信/合否は不変。新ed298856は112有限F32/3,833,856params、実runは全112変更を記録した。
 
@@ -180,7 +180,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 | 作業領域 | 次に解消すべき具体的未完了 |
 |---|---|
-| 本人宛応答の通常接続 | API744336c0 Live/RN6601 Uploadまで完了。Runpod GPU割当先利用不可と自動移行の審査拒否が初回実接続を阻む。通常submit/実Auth→4B→DB保存→同本文再読は未完。候補ごとのRNビルド/本人端末待ちを要求せず、11/2〜11/6はサーバー側品質枠を維持。§34へ |
+| 本人宛応答の通常接続 | API744336c0 Live/RN6601 Upload済み。新RTX3090のJupyter接続と固定base/依存/source準備・照合済み。推論用HTTP8000追加は全Podデータ消去/resetの保存前確認待ち。モデルHTTP起動/Render natural設定/実Auth→4B→DB保存→同本文再読は未完。11/2〜11/6はサーバー側品質枠を維持し、候補ごとのRNビルド/本人端末待ちを要求しない。§35へ |
 | 学習済みAI・CMEE接続 | §30は4更新/保存reload/34生成後も6e1c不採用、旧重み保全を保持。11/1は機構準備、11/2〜11/6は華恋がGPU/サーバー側で品質比較・必要な学習・自由生成・候補保存を行う。前版の無期限保留は撤回し、§30末尾の新4生成は未実行の診断案として保持、閉鎖runを再開しない。提供toolは未指定時fit38固定、明示adapter SHA対指定に対応。最大18要求1800秒probeで、選んだ候補のサーバー側反映と本番提供は準備対象。API/保存/表示契約を保つ更新はRN再ビルド不要。最終候補だけ通常提供へ反映し最後に接続確認する |
 | 10/24までの費用・4B選定履歴（当時の構成） | Flex24GBの旧月78,980生成・未測定の速度/起動仮定による運用費95,094円・赤字67,833円の試算は当時の構成の記録で、最新構成の原価ではない。[全仮定・再計算](observation_learning/model_selection/2026-10-24-production-economics/README.md)。旧4B実診断では24GBでLoRA保存・reload・16生成・回収を確認したが、FITは前後0/2。CPU指示修復API1dabc4fは54対象/pack11・合成2/2で、修正版は後続10/25にA4500 20GBで完走・回収済み、最新結果は§24。旧学習peak allocated14.954GiBを本番推論の必要VRAMへ流用しない。4bit/M4を第一候補とした§23は当時の華恋案で、現在の移行先はWindows／Mac未選定。公開API単価を独自育成版の原価へ流用しない。 |
 | Emlis | 一般入力と回答後の意味・自然な本文・有料差、本人実機の保存再読まで。API744336c0配置と通常本人確認を分ける |
