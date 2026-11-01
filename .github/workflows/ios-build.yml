@@ -250,6 +250,25 @@ jobs:
             exit "$status"
           fi
 
+      - name: Validate archived photo-library purpose strings
+        working-directory: ios
+        run: |
+          python3 - <<'PY'
+          import plistlib
+          from pathlib import Path
+
+          files = list(Path("build/Cocolon.xcarchive/Products/Applications").glob("*.app/Info.plist"))
+          if len(files) != 1:
+              raise SystemExit("Expected one archived app Info.plist")
+          with files[0].open("rb") as stream:
+              info = plistlib.load(stream)
+          for key in ("NSPhotoLibraryUsageDescription", "NSPhotoLibraryAddUsageDescription"):
+              value = info.get(key)
+              if not isinstance(value, str) or not value.strip():
+                  raise SystemExit(f"Missing archived purpose string: {key}")
+              print(f"Archived purpose string present: {key}")
+          PY
+
       - name: Create ExportOptions.plist
         working-directory: ios
         env:

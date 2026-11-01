@@ -1504,3 +1504,29 @@ Jupyter内のCPU診断：Python3.12.3/torch2.8.0+cu128、NVIDIA GeForce RTX3090/
 現HTTP公開は8888/Jupyterのみ。Renderから推論するため8000/httpが必要だが、Edit Podに「Editing a running Pod will cause it to reset. All Pod data will be lost!」と明示。HTTPを8888,8000へ入力しSave可能な確認状態まで準備したが、Save未実行、reset/公開変更0。準備済みvenv/cache/toolも再作成が必要になるため、保存前にMashへ具体的なresetと鍵付き推論口追加を確認する。8888/JupyterのtokenをモデルAPI keyとしてRenderへ入れず、専用Bearer/最大4要求1800秒の初回probeを次の準備対象にする。model HTTP起動/Render natural profile/実Auth→4B→DB保存→本人再読はまだ未完。
 
 現在地とAPI既存実装記録へ同じ差分を反映。STRUCTURE_MAP_DELTA_NONE（既存提供toolと認証入口を利用、product source/公開contract/通常routeの追加変更0）。11/2〜11/6はサーバー側品質枠、候補ごとのRN再ビルド不要という配分を維持する。
+
+
+<a id="initial-https-photo-purpose-20261101"></a>
+## 36. 11/1 — 実4B HTTPSは契約成功、Apple6601処理エラーを修正
+
+Mashの8888,8000保存/reset/環境再作成/専用キー付き初回確認の明示承認を受領し実行した。reset後は同じ固定2shard・依存4pin・提供tool SHAを復元照合。Jupyterは既存sessionで再接続でき、専用キーは値をchat/公開source/logへ出さず対象PodとRenderへ設定。モデルをbase明示名cocolon-qwen35-4b-base-851bf6e、最大4要求/1800秒で一回起動した。
+
+鍵なしの実HTTPS POSTは401/unauthorized。既存SelfHostedNaturalReplySourceの実transportで、架空の接続確認材料1件を一回だけ送信。7.771秒、42文字、model/schema/EOS stop/本文形式を含む契約成功、再試行0。本文hash8cc6d2ce2054d830c672eeff05e37925d13c192b8e7961ff330c41f582ea5b1b。本人実Auth/DB/端末や品質の合格ではない。重み追加学習0・不採用adapter転用0。
+
+Render環境変数更新pluginは既存varsをmergeしたが、autoDeploy OFFにもかかわらずmain2d2f06dの配置dep-dbj8pt49v7es739dsefgも起動した。これは00:52:20 UTCにupdate_failed、app logはcreate_application ImportError。旧Live744336c0は維持された。更新操作の挙動確認が不足していた。直ちに744336c0を指定し直し、dep-dbj8rik9v7es739e00q0は00:55:48 UTC Live、health/bootstrap200・threads/export trueを確認。以後のmode操作はDashboardのSave and deploy（既存artifact）を使う。
+
+### 6601のApple processing失敗と修正
+
+MashのApp Store Connect画像で、1.0(6601)は90683・NSPhotoLibraryUsageDescriptionがtempCocolon.appのInfo.plistにないため処理拒否と確認。GitHub Upload successは転送の成功であり、6601は配布不可。端末確認を実行できる状態ではなかった。Apple処理結果の確認前に6601での操作を案内した点を訂正する。
+
+実ファイルはNSPhotoLibraryAddUsageDescriptionだけだった。Info.plistへNSPhotoLibraryUsageDescriptionも同じ「Pieceの画像を写真ライブラリに保存するために使用します。」として追加。実保存は既存のcocolonAddOnly:true、写真一覧読取/撮影の機能追加なし。linked CameraRoll内のPhotos API参照に対応するmetadata修正であり、他の目的文を推測追加しない。
+
+既存.github/workflows/ios-build.ymlにはArchive後・IPA export/Upload前に、実Archiveの唯一のapp Info.plistをplistlibで読み、PhotoLibrary Usage/Add両keyが非空stringであることを検査するstepを追加。ローカルでsource plist解析、workflow順序、binary archive fixtureの正常受理と今回と同じUsage key欠落の拒否を確認。実署名Archive/Apple processingは新buildで確認する。新build起動はこの記録時点でこれから。品質反復のための再buildではなく、配布を阻む実機構欠陥の修復である。
+
+### 待機中の生成停止
+
+本人端末へ導入できないため、所有するHTTP serverを00:51:54 UTCの起動から1477秒で停止要求。生成は上記synthetic1回のみで、残り323秒から安全余白を取り、今後の初回確認は最大3要求/300秒以内に抑える。GPU PodのStop/新規作成/削除/チャージは華恋0。
+
+APIは同じ744336c0の既存artifactへMODE=read_onlyをSave and deployし、dep-dbj96l67bikc73ep8hugは01:18:55 UTC Live。natural_reply.v1と保存済みreaderを保持し、legacyへ戻さない。実Supabaseの本文/owner/inputIDを返さない集計で、00:55:48 UTC以降のnatural thread更新/FINAL保存/active attempt/CALL_STARTEDはいずれも0件。実機初回保存・再読は未完として保持する。
+
+source変更はInfo.plistと既存iOS workflowのみ。全体現在地・file地図/Piece mapへ同じ差分を反映。STRUCTURE_MAP_DELTA_NONE（既存写真保存の目的文と配布前検査の補正、新product route/API/DB/権限schemaなし）。既存8タスク・累積/月次snapshot・Android/課金/本番原価/申請残件は未完を保持する。

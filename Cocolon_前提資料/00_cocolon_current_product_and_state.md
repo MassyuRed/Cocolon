@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-**11/1の稼働・配布：[第9回§34](weekly_reviews/Cocolon_Weekly_Review_20261031.md#release-live-build-20261101)・[新Pod接続§35](weekly_reviews/Cocolon_Weekly_Review_20261031.md#jupyter-new-pod-20261101)。** API `744336c0` をRenderへ指定commitで配置し、`dep-dbj853ou01pc73enjrt0` は11/1 00:08 UTCにLive。Piece exportを含むprivate5機能ON/public3機能OFF、health 200、未認証export 401/no-storeを実HTTP確認。RN `6675b4ed` の新iOS workflow #66/run41254631100は署名Archive・IPA・TestFlight Uploadまで成功、実ログのBUILD_NUMBER=6601。Apple側処理/配布対象・本人端末導入は未確認。Google/GitHub認証待ちは解消。Mash提供の新Pod6i2aa1nj683s8y/RTX3090へ、Runpodの正式Jupyterリンクで認証接続。固定4Bの2shardと依存/提供toolの準備・照合まで完了。推論用HTTP8000番追加はPod全データ消去/resetの警告があるため8888,8000を保存前の状態で保持、未保存。実モデルHTTPSと実Auth→4B→保存→同本文再読は未完。iOS metrics CI19失敗、累積/月次当時snapshot、Android実配布、実ストア料金、本番原価・申請Consoleも残る。
+**11/1の稼働・配布：[第9回§36](weekly_reviews/Cocolon_Weekly_Review_20261031.md#initial-https-photo-purpose-20261101)。** Mash承認後にPodの8888,8000設定を保存/resetし固定4B環境を復元。専用Bearer付き実HTTPSのsynthetic1回は7.771秒で契約成功（再試行0）。API744336c0のnatural設定はdep-dbj8rik9v7es739e00q0でLive、現在は同じsourceのdep-dbj96l67bikc73ep8hugでEmlis read_onlyへ戻した。Piece private5機能ON/public3機能OFFは維持。RN6675b4ed/6601のArchive/IPA/Uploadは成功したが、Apple処理で90683・NSPhotoLibraryUsageDescription不足となり配布不可。Info.plistへ保存目的文を追加し、workflowへArchive実物の写真2key非空検査を追加。新buildはこれから起動する。実機からの実Auth→4B→DB保存→同本文再読は未完、実DBのnatural保存/処理中/呼出しstageは0件。モデル提供は1477秒で停止、残り最大3要求/300秒を新配布候補の初回確認へ残す。iOS metrics19失敗・累積/月次snapshot・Android実配布・ストア料金・本番原価/申請Consoleも未完。
 
 **11/1の実装/DB：[第9回§32](weekly_reviews/Cocolon_Weekly_Review_20261031.md#release-implementation-20261101)・[§33](weekly_reviews/Cocolon_Weekly_Review_20261031.md#release-source-db-20261101)。** account owner世代分離、購入finish失敗伝播と同一購入結果共有、visibility失敗502、Piece export独立許可/OS直前artifact照合、iOS URL復帰、Android署名AAB手順、ガイド同期を実装。API7bbb4661で関連履歴検索・本人原入力/最大3回答/訂正の別材料化・失効natural本文のtimeline抑止・Analysis複数補足と矛盾照合・adapter SHA対指定を追加し、Supabase migrationを適用。RN151/API284、natural系63、Analysis関係177、RN screen36が局所PASS。API7bbb4661のAnalysis CI41253745568も1634 PASS＋12020 subtests、owner1 PASS・194 deselected、合成保存再読成功。実装/DB/配置/Uploadを実機成功・8タスク全完了へ換算しない。
 
@@ -10,7 +10,7 @@
 
 **初版Emlisの最低線は合意済み：** Mashは§10の例に「俺が求めるのもこのライン」と明示し、その水準を目指した改善案と1週間のタスク記載を指示した。[第9回§11](weekly_reviews/Cocolon_Weekly_Review_20261031.md#weekly-tasks-20261031)が現在の基準計画。意味・主体・否定・時点を保ち、不明やない事情を確定せず、自然な返事を返す。短い受け取り・一度の言い換えも認め、高度観測の深さ・毎回の新発見・助言・質問を初版必須にしない。本人宛応答と分析材料を分け、通常実機接続・保存再読・Plusの具体的履歴応答を主成果とする。例文を固定テンプレ・凍結テストへ採用せず、文数固定もしない。最低線の合意と、実4Bの合格・実機成功・商品受入れは別。Plusの既決差とAnalysisの累積／月次構想は保持する。
 
-**商品案の採否：** Pieceを初期の有料価値の中心にする方向を記録。**Plus月680円／Premium月1,480円はMashの最新の実装指示で採用済み。** [第9回§15](weekly_reviews/Cocolon_Weekly_Review_20261031.md#subscription-prices-20261031)に確認と反映を記録。RNの3file／APIの1fileの料金fallbackと、実DBの対象2行の料金・自動更新案内を更新した。初回公開API取得はtimeoutだったが11/1に200/料金を確認。公開bootstrapの680/1480円を確認、RN6601のUpload成功。実ストア請求額・本人端末表示は未確認。12配色・生成枠・iOS先行・SNS後置・Premium等の延期は華恋案で、採用済みではない。Pieceへの4B利用は質問と回答の段階。描画には不要、意味再構成では候補という見解を仕様変更の合意にしない。既決の12/18両ストア公開目標は変更していない。54.50％は前回管理評価を継承し、今回再採点なし、正式商品受入れ0/3。通常AI・累積マップ・Piece本人実機一巡の未達から、期限内完成は保証できない。
+**商品案の採否：** Pieceを初期の有料価値の中心にする方向を記録。**Plus月680円／Premium月1,480円はMashの最新の実装指示で採用済み。** [第9回§15](weekly_reviews/Cocolon_Weekly_Review_20261031.md#subscription-prices-20261031)に確認と反映を記録。RNの3file／APIの1fileの料金fallbackと、実DBの対象2行の料金・自動更新案内を更新した。初回公開API取得はtimeoutだったが11/1に200/料金を確認。公開bootstrapの680/1480円を確認、RN6601のUpload後にApple90683拒否。写真目的文修正版の新buildが必要。実ストア請求額・本人端末表示は未確認。12配色・生成枠・iOS先行・SNS後置・Premium等の延期は華恋案で、採用済みではない。Pieceへの4B利用は質問と回答の段階。描画には不要、意味再構成では候補という見解を仕様変更の合意にしない。既決の12/18両ストア公開目標は変更していない。54.50％は前回管理評価を継承し、今回再採点なし、正式商品受入れ0/3。通常AI・累積マップ・Piece本人実機一巡の未達から、期限内完成は保証できない。
 
 **最新の公開見通し：** [第9回§13](weekly_reviews/Cocolon_Weekly_Review_20261031.md#release-outlook-20261031)。12/18両ストア公開目標は維持するが、通常接続・累積マップ・課金・両OS・原価の未成立から達成の裏付け不足・高リスク。10/31→11/27の提出基準まで27日、その後12/18まで21日を審査・差戻し枠とする管理計画で、所要保証ではない。11/1のPC枠で初回接続・リリース準備、11/2〜11/6は華恋単独の品質改善、11/7は実績・Android差分・販売範囲と原価材料を報告する。11/15結合、11/22候補、11/27両ストア提出の管理線を保持し、品質試行ごとの実機確認・ビルドは要求しない。高度観測を初版へ戻さず、Plus履歴・累積／月次マップ・Piece保存出力・課金権限は残す。iOS先行やSNS後置等の未採用案を工程削減済みにしない。[§14](weekly_reviews/Cocolon_Weekly_Review_20261031.md#karen-opinion-20261031)は華恋の進め方・商品価値への意見。§13の見通し報告時点は実装/稼働変更0。後続11/1の実配置/送信結果は冒頭と§34を参照する。
 
@@ -20,7 +20,7 @@
 
 **最初のA4500学習実績（§24・履歴）：** [A4500で修正版4B追加学習を完走、重み回収、CMEE採用は未達（§24）](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-a4500-training-and-portable-weights)。[全実結果](observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/repaired_a4500_20261025/README.md)。Mashは4B採用とリリースまでRunpodでの追加学習を明示し、将来は手持ちPCへ移す可能性が高い。RTX A4500 20GB／Secure・EU-RO-1・Pod y0eb0w0qn6nks0を今回の最安の容量候補として確保。GPU$0.25/h・50GB container込み表示$0.26/h。CUDA/BF16正常、修正版2教師/1epoch/2update・adapter保存/非学習reload・前後16生成が20分23.76秒で完走し、20GBで現方式が動くことを確認した。peak allocated14.970/reserved17.588GiB。最終archive全24memberのhashと32tensor有限性/前後重み不変をPod外照合し永続保管済み。NLL0.251117→0.245189、raw6/8変化だが、CMEE意味/本文は前後0/2。初回の根拠座標は通るようになったが必須shape/自然文surface不正、訂正後rawは不変、proxy2件が2048tokenで打切りとなり品質未達。その時点の残件は必須shapeと自然文surfaceで、後続の現在作業は下段へ更新する。この§24のrunはGPUを停止せず終了した。旧3070は今回開始時既に停止表示、華恋のStop操作0。
 
-**GPUの現在状態（11/1・新Pod接続後）：** Mashから新Pod6i2aa1nj683s8y/cloudy_jade_yakのURLと稼働画像を受領。管理画面でもRTX3090×1/$0.51/h、接続開始時残高$5.68を確認。JupyterはGoogleで入ったRunpodの正式接続リンクから認証でき、トークンを本人にchat入力してもらう必要はなかった。Python3.12.3/torch2.8.0+cu128、CUDA24GB/1MiB/0％、初期workspaceは.cacheのみ。固定base2shardと隔離venv依存・source SHAを照合、学習/生成/モデルGPU load0。推論用8000番追加のSaveは全Podデータ消去/reset警告のため未実行。旧Podの自動移行は華恋未実行のまま、新Podで継続する。旧不採用候補/過去重み保全を採用へ変えない。
+**GPUの現在状態（11/1・初回HTTPS確認後）：** Mash提供Pod6i2aa1nj683s8y/RTX3090×1/$0.51/h。承認済み8888,8000保存/reset後に固定base2shardと隔離venv/提供tool SHAを復元照合。モデルGPU load後、専用キーなしPOST401、専用キー付きsynthetic1回7.771秒/42文字/契約成功。学習0、品質採用0。00:51:54 UTC起動→1477秒で所有するHTTP processへ停止要求、残り323秒のうち最大300秒・3要求だけを再開枠とする。GPU Pod自体のStop/新規作成/削除/追加チャージは華恋0。旧不採用重みを自動採用せず、user本文/認証token/keyは公開記録しない。
 
 **10/30の学習履歴（focus29一回完了／不採用閉鎖）：** Mash承認の保存ad8b隔離初期値・現10行各2回＋旧9各1回＝29更新を同Jupyterで一回実行し、29 training forward/optimizer・保存非学習再読・同19行NLL・新2件×5段の10生成/全EOSまで完了。全19教師/messages/encoded/元終端/mask/完全CE/指示/受信/合否は不変。新ed298856は112有限F32/3,833,856params、実runは全112変更を記録した。
 
@@ -130,11 +130,11 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | V2有効化・旧経路 | 11/1 API744336c0の明示factoryでpreview/save/owner-read/export/owner-delete各strict pair ON、public-write/public-read/visibility-toggle OFFをLive確認。default app:appはlegacy/OFF | 稼働設定と本人端末の通常保存は別。tutorial/Nexus旧経路とM5の全公開経路廃止は未完 |
 | 本人履歴・詳細・公開範囲 | owner一覧・詳細・公開切替・削除、通常導線・保存後再取得を接続。privateはownerのみ、publicも既存access policy内 | 同一ownerの実Auth保存→履歴／詳細往復は未完。アプリ内公開と外部画像共有を分ける |
 | export | 本人詳細→独立export許可GET→表示recordのID・row version・3hash・renderer一致→全canvas→Photos／Share直前再確認をsource接続（11/1） | API/RN Upload済み。本人端末導入と実OS写真保存・Share、Android新版export、backend receipt、本人端末商品受入れは未完。外部へ出た画像コピーは内部非公開／削除で回収できない |
-| 新renderer | iOS piece.rn_bitmap_renderer.ios.v1。同一bitmap表示/書出し、preview構築8秒、saved画像は8秒後も保持 | APIはTTL600秒/同rendererでLive。RN6675b4ed/6601の署名build/Upload成功。Apple処理/本人導入・通常描画/保存/再読・商品採用は未確認。Android成立へ拡張しない |
+| 新renderer | iOS piece.rn_bitmap_renderer.ios.v1。同一bitmap表示/書出し、preview構築8秒、saved画像は8秒後も保持 | APIはTTL600秒/同rendererでLive。RN6601のArchive/Upload後、Apple90683で写真目的文不足となり配布不可。Add/Usage両keyとArchive実物検査を修正、新build/Apple処理/本人描画・保存・再読が未完。Android成立へ拡張しない |
 | 最新限定検証 | 新export正常8PNG＋native拒否6。JS979・新native44成功。旧195は176PASS／19FAILを保持 | CI39780623108 attempt1 completed／failure、head`d2e1244…`、10/22 JST21:42:54〜22:07:18。CI全体合格ではない。限定TECHNICAL_CREDITの記録あり、product_credit=0 |
-| live・次の未完 | API744336c0/dep-dbj853ou01pc73enjrt0 Live、RN6675b4ed/run41254631100/6601 Upload成功。autoDeploy OFFを維持 | 初回本人保存→履歴/詳細→実Photos/ShareとAndroid/backend receipt、商品受入れは未完。文字計測CIの旧V4 19失敗を残す。§34へ |
+| live・次の未完 | API744336c0/dep-dbj96l67bikc73ep8hug Live、Piece private5ON/public3OFFを維持。Emlisはbuild待機中read_only。RN6601はApple90683で配布不可、写真目的文修正版を準備 | 初回本人保存→履歴/詳細→実Photos/ShareとAndroid/backend receipt、商品受入れは未完。文字計測旧V4 19失敗を残す。§36へ |
 
-詳細owner：[Piece map](current_structure/02_piece_current_structure.md)、[Piece入口](../Cocolon_Piece/00_read_first.md)、[manifest](../Cocolon_Piece/manifest.json)。最新署名Archive/IPA/TestFlight Uploadはrun41254631100、RN6675b4ed、BUILD_NUMBER=6601で成功。旧6501にないPiece保存pathと新Emlisを同一候補へ含む。Apple側処理・配布対象、本人端末導入/保存再読/OS出力は未確認。最新稼働と配布の詳細は第9回§34。
+詳細owner：[Piece map](current_structure/02_piece_current_structure.md)、[Piece入口](../Cocolon_Piece/00_read_first.md)、[manifest](../Cocolon_Piece/manifest.json)。RN6675b4ed/6601の署名Archive/IPA/Uploadは成功したが、Apple処理90683でNSPhotoLibraryUsageDescription不足・配布不可。現在の写真保存目的2keyとArchive検査を含む修正版を新buildへ送る。本人端末導入/保存再読/OS出力は未確認。第9回§36へ。
 
 ## 7. その他の全機能・共通基盤
 
@@ -180,12 +180,12 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 | 作業領域 | 次に解消すべき具体的未完了 |
 |---|---|
-| 本人宛応答の通常接続 | API744336c0 Live/RN6601 Upload済み。新RTX3090のJupyter接続と固定base/依存/source準備・照合済み。推論用HTTP8000追加は全Podデータ消去/resetの保存前確認待ち。モデルHTTP起動/Render natural設定/実Auth→4B→DB保存→同本文再読は未完。11/2〜11/6はサーバー側品質枠を維持し、候補ごとのRNビルド/本人端末待ちを要求しない。§35へ |
+| 本人宛応答の通常接続 | 鍵付き実4B HTTPSのsynthetic1callとAPI744336c0 natural設定Liveまで成立。6601はAppleの写真目的文90683で配布不可、2key宣言とArchive検査を修正し新build待ち。モデル停止/API read_onlyで待機し、実Auth→4B→DB保存→本人同本文再読は未完。実DBのnatural新保存/実行stage0件。品質反復に候補ごとのRNビルドを要求しない。§36へ |
 | 学習済みAI・CMEE接続 | §30は4更新/保存reload/34生成後も6e1c不採用、旧重み保全を保持。11/1は機構準備、11/2〜11/6は華恋がGPU/サーバー側で品質比較・必要な学習・自由生成・候補保存を行う。前版の無期限保留は撤回し、§30末尾の新4生成は未実行の診断案として保持、閉鎖runを再開しない。提供toolは未指定時fit38固定、明示adapter SHA対指定に対応。最大18要求1800秒probeで、選んだ候補のサーバー側反映と本番提供は準備対象。API/保存/表示契約を保つ更新はRN再ビルド不要。最終候補だけ通常提供へ反映し最後に接続確認する |
 | 10/24までの費用・4B選定履歴（当時の構成） | Flex24GBの旧月78,980生成・未測定の速度/起動仮定による運用費95,094円・赤字67,833円の試算は当時の構成の記録で、最新構成の原価ではない。[全仮定・再計算](observation_learning/model_selection/2026-10-24-production-economics/README.md)。旧4B実診断では24GBでLoRA保存・reload・16生成・回収を確認したが、FITは前後0/2。CPU指示修復API1dabc4fは54対象/pack11・合成2/2で、修正版は後続10/25にA4500 20GBで完走・回収済み、最新結果は§24。旧学習peak allocated14.954GiBを本番推論の必要VRAMへ流用しない。4bit/M4を第一候補とした§23は当時の華恋案で、現在の移行先はWindows／Mac未選定。公開API単価を独自育成版の原価へ流用しない。 |
 | Emlis | 一般入力と回答後の意味・自然な本文・有料差、本人実機の保存再読まで。API744336c0配置と通常本人確認を分ける |
 | Analysis | API744336c0に内容修正/最大3ANSWER対応を配置。通常本人生成・同一保存再読、全量累積/旧構造/月次当時snapshot/寿命/月選択/現在比較、一般理解、有料差、IF/Savedは残る。旧6501の不足案内表示は本人確認済みとして保持 |
-| Piece | API private5機能ON/public3機能OFF、RN6601 Upload成功。Apple処理/本人導入、本人保存→同owner履歴/詳細→Photos/Share、Android/backend receipt、商品受入れを次に確認する。§34へ |
+| Piece | API private5ON/public3OFFはLive。6601はApple90683で配布不可、写真目的2keyとArchive検査を修正し新build待ち。Apple処理/本人導入、保存→同owner履歴/詳細→Photos/Share、Android/backend receipt、商品受入れを確認する。§36へ |
 | 全体・release | 自他所有／公開／削除、認証復帰、finish失敗の成功扱い・account切替後旧応答・公開visibility取得失敗時default、共有URL入口、通知配送等の通常実機経路と未受入れ品質 |
 
 この表は新しい作業の自動開始・GPU再起動・merge／deploy／公開の指示ではない。Mashの現行タスクを進め、対象の詳細ownerから具体的な一手を選ぶ。文書更新は商品品質の改善creditに数えない。

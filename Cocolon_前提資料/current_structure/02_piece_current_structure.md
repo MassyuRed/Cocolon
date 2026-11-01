@@ -1,8 +1,8 @@
 ---
 doc_id: cocolon_piece_current_structure
 title: "Piece構造 — Current Structure"
-revision_date: "2026-10-23 JST"
-latest_api_implementation: "3577d7fdeb19158ef5e675f51960652a52c24487"
+revision_date: "2026-11-01 JST"
+latest_api_implementation: "744336c0de999e271a755b441394f382548829ab"
 latest_storage_candidate: "4fcb140b778850a1b7a5a65d8e0a26005b3a24c4"
 document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新は入口§119／map§65.62／weekly§5.6.42／manifest v159。APIのprivacy修復を開発正本PR3@3084c99eへ同一2blobで戻し込み、唯一CI39864098163は1805 PASS/FAIL0/SKIP0。Live3577d7fd/承認設定は不変。本人保存に必要なRN配布差を確定し、TestFlight候補branchを87151d39へ固定。署名build/TestFlight送信は未実行・個別判断前、実本人保存/再読/端末受入れは未確認。**
+**11/1の最新は全体現在地と第9回weekly§36。API744336c0はLive、Piece private5機能ON/public3機能OFFを維持。RN6675b4ed/6601はArchive/IPA/Upload後にApple90683（NSPhotoLibraryUsageDescription欠落）で拒否・配布不可。写真Usage/Add両目的文と実Archive検査を修正して新buildを準備。実保存は既存add-onlyを維持。本人保存/同owner再読/実Photos/Share・Android・商品受入れ、旧V4の19失敗は未完。**
 
 ### §99の判断案（履歴）
 
@@ -3512,3 +3512,11 @@ GET /healthz200、/app/bootstrap200とPiece8flag一致（private4true/public-wri
 新piece_semantic_admission.pyがP1元7field／receiptを再束縛し、P01の6claim／5文／2関係と全選択をimmutable snapshotへ保持。Engineの明示offline Piece inputだけが既存source／compiler／唯一作者／author-free policyのprivate armへ接続する。既存B8／public lifecycle／DB／RN／renderer／fit／exportは未接続・変更0。Emlis／Analysisのsource資格を拡大しない。
 
 出力は原文二段落の保持で、選択不安を本文へ補わず、一般文章整形・商品合格とはしない。private caller-managedの意味／plan／完成本文serialize/reload、意味保存後の作者例外と明示再開、完成本文の非再生成を確認。対象7file339成功、34subtestsは加算しない。実sourceはAPI4fd8db4、全file01A末尾、型05#cmee-p4-actual-types、仕様03#cmee-p4-implemented、結果trial§11／JSON。STRUCTURE_MAP_DELTA_PRESENT、新private dataclass10・例外2（旧共有logical registry不変）。限定TECHNICAL_CREDIT、商品0／正式0/3／candidate_ready=false／automatic_progression=false。通常接続・モデル・P5・一般文章品質は別残件。
+
+
+<a id="photo-purpose-20261101"></a>
+## 2026-11-01 — 6601のApple処理拒否と写真目的文の修復
+
+6601はUpload job成功後、Apple processing90683でNSPhotoLibraryUsageDescription不足となり配布不可。Info.plistへ既存Add keyと同じ保存用途説明を追加。CameraRollのcocolonAddOnly:trueと保存後PHAsset再読をしない既存patchは維持し、写真一覧/撮影/権限要求の機能は追加しない。
+
+既存ios-build.ymlはArchive直後に実app Info.plistの写真Usage/Add両keyが非空stringか検査し、欠落時はIPA/Upload前に停止する。source plist解析、workflow順序、binary archive fixtureで正常/Usage欠落拒否を局所確認。新署名build/Apple処理/本人端末はこれから。実結果は第9回weekly§36から後続へ更新する。STRUCTURE_MAP_DELTA_NONE（目的文と既存配布検査の補正、新route/API/DBなし）。
