@@ -1646,3 +1646,16 @@ Mashの「完成まで進めて」を受領。対象は通常本人入力→Piec
 保存JSONの感情/強さをprivate根拠として既存graph/plan/唯一作者/author-free検査へ接続。本文で表現済みの旧経路はID/本文/hash不変、metadataだけ別nodeで記録時scopeと選択強度を表す。原memo/actionの全命題を保持し、原因/意思/性格へ昇格しない。RNは明示ios.v1の完成採用だけ同artifactへ固定しtimerを解除、初回採用8秒とsource期限600秒を分離した。
 
 API6file557 PASS/FAIL0/SKIP0（既存warning1）、生成した新本文から自然profileの実PGlite preview/visual/private保存/同内容再読・source失効の7 PASS、RN renderer/initial-save-host/export3file251 PASS。感情/強さ/記録根拠改ざん、文欠落・重複・原因/意思追加、旧経路bytes、8秒超完成保持/期限切れ/元timeout callback/初回最終検査の8秒跨ぎを検証。writerは華恋のみ、read-only補助監査に重大指摘なし。本人一件はprivate CPUで生成・本文実読、DB書込/枠消費/モデル呼出し0。一般日本語品質・実iPhone保存の合格ではない。GitHub反映/指定API配置/新iOS内部配布は次工程。
+
+
+### API配置・7001内部配布と、本人一巡の残件
+
+API製品source7f0cee402d9691cfe7fb88f2977817719f4edccfを指定したdep-dbjbtqlg1s2s73faadmgは04:25:24 UTC Live。healthz/app bootstrap200、Piece private5ON/public3OFF、取得範囲の配置後app error0。既存free resource/main/autoDeploy OFFとread_only設定を変更していない。DB追加適用/本人row書込/枠消費/実provider/GPU再起動/学習0。
+
+API自動CI41272660291は、以前追加したexport GETが既存native testの経路一覧にないため、生成前の同一assertで6FAIL/他7PASS。test一覧の1行だけ同期した9dae48b7のCI41273204564/job124750036125は全step success、actual CMEE/実PostgreSQL保存・後段shared API/既定契約まで通過。7f0cee40のAnalysis CI41272660317もsuccess。test/docだけの後続変更でLive製品sourceは7fのまま、API再配置なし。最終運用結果はAPI2f07264eへ保存済み。
+
+RN製品source3a8660ba69253c7a94cc90523dca3af2ab9295e5のiOS #70/run41272806796/job124748867782/attempt1を04:21:55 UTCに一回開始し、04:34:29 UTCまでに全step success。実署名Archive、写真Usage/Add両目的文のArchive検査、IPA、TestFlight Uploadが成功。中断後に同runの成功を読取確認し、再起動しなかった。App Store Connectで7001のApple処理「終了」を確認し、既存のOS提供暗号化のみの実装と対応する情報を保存。dialog/未提出button消失後、既存内部グループ「Emlis テスト版配布」のbuild一覧で1.0(7001)「テスト中」を確認。新テスター追加/外部配布/App Store公開0。
+
+RN自動CI41272673502は全体failureを保持する。JS契約・Android sourceは成功、Pods/Android export jobは変更範囲によりnative compile本体skipで、今回新たなcompile成功へ数えない。iOS metricsの旧V4 19失敗（native129/V9 46/bitmap44成功）に加え、今回はlegacy RN canvas host検査もfailure。report13件はcontainment.prototype.v2の12件/prototype.v3の1件で、最初はnative_checked期待に対するunavailable/diagnostic stage83。製品bitmap ios.v1 reportは0件。native実装/host検査本体は前sourceから不変で、今回のbitmap保持変更が原因とは断定できないが、新たに観測した未解決失敗として残す。artifact13070860298にevidence/xcresultあり。全canvas成功/全CI成功とは扱わず、再試行/新build追加はしない。
+
+今回の実装・配置・配布までは完了。本人実機では7001へ更新し、履歴にある前回の保存記録から「ピースの作成」→画像preview→「Pieceを保存」→「保存したPieceを確認」→「画像の保存・共有を準備」→「写真に保存」の一巡を確認する。新しいEmlis生成は不要でGPUは停止のまま。保存済み同内容の再表示と実Photos保存が確認されるまで、本人一巡/商品受入れは未完とする。広い日本語対応・品質改善、Android/backend receipt、既存8タスク全完了へ拡張しない。結果記録だけのSTRUCTURE_MAP_DELTA_NONE、製品codeは7001のsourceから追加変更なし。
