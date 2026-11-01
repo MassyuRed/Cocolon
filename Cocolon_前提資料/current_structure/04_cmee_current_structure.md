@@ -1936,3 +1936,10 @@ service/factory/通常reply/API、RNのpending→GET→同一保存本文を接�
 ## 2026-11-01 — 実4B直前の明示offline field受口
 
 詳細は[実行準備](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md)、仕様は04#analysis-model-fields-probe-v1、weekly§46。既存semantic_admissionへAnalysisModelFieldsInputとprepare/receive、Engineへ明示型dispatch、intent_compilerへObservedQuotedField/任意node field、唯一realizerへ本人/集合/member/版/全文根拠再束縛の分類候補表示、analysis_cumulative_serviceへ明示offline引数を追加。通常ensure/旧finite/P5は不変。全fieldの候補分類は一般意味抽出ではなく、可視nodeがあっても全件unparsedを維持。補足/訂正・比較はprofile外、全量分割/関係/IF/Savedは残件。対象785成功と隔離SQL同文章/図/ID非生成再読を確認。実4B0、次にGPUを用意して最大4生成/学習0を確認する。STRUCTURE_MAP_DELTA_PRESENT。
+
+
+## 2026-11-02 — 実4B field probeは受理0/4、通常接続は未有効化
+
+固定AF01/AF02×base/保存fit38の4生成を実行し、全stop/13.314〜21.026秒。要求ID転記ミス（AF01両条件）と全文end不一致（全6field）を既存受口が拒否。実raw由来artifact/図/文章/SQL保存0で、同図・文章の保存再読は未到達。rawを補修せず、全quote保持を意味理解へ換算しない。runnerのtoken数記録誤りは元記録を保全し、tokenizer-only539/453で補足訂正。詳細・原本の保全先は[trial実結果](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#gpu4-result-20261102)、最新weekly§47。
+
+モデル読込＋推論77.111162秒で終了、GPU process不在、Pod自体は停止せずMash管理下で稼働維持。学習/再試行/製品source/通常有効化/本番DB/Render/RN変更0。次はsource側で決定できる文字位置・長い参照のモデル再転記責務を外す最小入出力案をCPUで具体化する。現probeは閉鎖、追加生成/学習へ自動進行0。BLOCKER_NARROWED/商品credit0、STRUCTURE_MAP_DELTA_NONE（新owner/型/wire/保存責務の差分なし）。
