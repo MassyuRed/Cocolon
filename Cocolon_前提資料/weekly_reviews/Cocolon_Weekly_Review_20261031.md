@@ -614,7 +614,7 @@ Analysisの今週範囲は、累積保存を成立させる最小到達点であ
 
 ### 11.6 環境・配布・時間・費用の依存
 
-- GPU停止の記述は10/31計画時点の履歴。最終実行§30では稼働保持、今回live再照会は未実施。11/1に通常接続と平日品質作業に必要な準備を進め、11/2〜11/6は華恋がGPU/サーバー側で実行する。モデル・設定変更をRN再ビルドへ結び付けず、未実行を成功にしない。
+- GPU停止の記述は10/31計画時点の履歴。最終実行§30では稼働保持だったが、11/1の§34で停止中/GPU割当先利用不可を管理画面確認。11/1に通常接続と平日品質作業に必要な準備を進め、11/2〜11/6は華恋がGPU/サーバー側で実行する。モデル・設定変更をRN再ビルドへ結び付けず、未実行を成功にしない。
 - 比較と接続確認を可能な限り同じモデル起動枠へまとめる。起動前に必要な環境・実行内容・時間枠・準備／保持／回収込みの費用・終了後の状態を具体化する。追加月額上限1万円は維持する。過去の処理按分額を現在の請求額に流用しない。
 - 旧試行の承認は消費済みで、同じrunを再起動しない。新しい有料実行・本番適用・配布等は、既存の有効な許可が実対象を含むか確認し、足りない操作だけをsource準備後に具体化する。計画記載を包括的なGPU起動・課金・配置許可へ変換しない。
 - RNは、新Emlis表示と既存Piece保存接続を含む同一候補で確認する。6501にはPiece新版の29製品パスが未収録。87151候補の29パスはPR30と同一であり、再実装29件は不要。ただし今週のEmlis表示変更後は、その変更も含むfresh候補へ更新する。旧87151を無条件で最新版として配布しない。
@@ -1435,7 +1435,7 @@ API実装：`6198ca2d8407eff606fc353891a708733c48abf2`。この記録時点でRe
 本人限定4Bの過去成功通信はlocalhost TLSであり、Renderから到達するHTTPS提供口は未完成。Pod10o4zhfktg9nc1の実Connect入口を認証後に取得する必要がある。Jupyter tokenをprovider keyへ転用しない。追加月1万円内の本番提供方式も未成立。補足/訂正の材料化・Plus関連履歴の全権利内検索・Analysis累積/月次snapshotを未完として継続し、8項目全完了や公開可能状態を宣言しない。11/2〜11/6はサーバー側の品質枠、各候補のRNビルド/実機待ちは要求しない。
 
 <a id="release-source-db-20261101"></a>
-## 33. 11/1 — 関連資料・補足を実装、DB反映。配布・モデル接続は認証待ち
+## 33. 11/1 — 関連資料・補足を実装、DB反映（当時の認証待ちは§34で解消）
 
 §32の後続でAPI `7bbb4661416053198ec845d620d97987d62fe70c` を保存した。関連履歴の新RPC/migration、natural材料、Analysis複数回答、候補SHA指定のsourceを実装。新しいモデル学習・実4B生成0。
 
@@ -1465,3 +1465,26 @@ API実装：`6198ca2d8407eff606fc353891a708733c48abf2`。この記録時点でRe
 GitHub RN5f91caceのPiece自動CIはJS契約・iOS canvas・Pods・Android source/exportの5jobが成功。一方iOS metrics job124689186427（run41252646226）はnewV4を含む19失敗があり未解消。内訳は既存129/129、V9 46/46、V4 1/20で、別のbitmap検査44/44は成功。現ios.v1 bitmapは失敗した旧containment V4 inspectorを通らない。原因断定/期待値変更は行わず、19失敗を保持する。native成功群を全体合格へ変換しない。API7bbb4661のAnalysis observed content CIはこの追記時点で実行中。
 
 TestFlightの新workflow起動は未実行。GitHub source更新connectorにはdispatch機能がなく、browserで安全な認証を開始。安全入力でGoogleが選択されsubmittedとなった後、accounts.google.comの観察が**自動承認審査**により拒否された。理由は「GitHub sign-in許可だけではGoogle origin利用を許可しない」という判定で、Mashの手動拒否ではない。回避・認証値のchat入力要求は行わず、GitHubのGoogle認証継続を明示許可してもらう必要がある。認証後は修正済候補のiOS build、Renderの同一API候補/設定、Runpodの実Connect HTTPSをまとめて進める。必要な端末確認は初回と最終、11/2〜11/6の品質反復へ毎回のRN build/実機待ちを追加しない。
+
+
+<a id="release-live-build-20261101"></a>
+## 34. 11/1 — Google認証継続後、新API Live・新TestFlight6601送信成功
+
+Mashの「GitHubのGoogle認証をこのブラウザで継続してよい」を受領し、Google保存accountとGitHub新端末確認を安全入力で完了。§33のGitHub認証待ちは解消した。GitHubの既存iOS workflowを最新feature branchで新規dispatchし、旧runのrerunはしていない。
+
+| 境界 | 実際の結果 | 未完/保持事項 |
+|---|---|---|
+| iOS署名/送信 | RN `6675b4edc073f5121e7207271f7a554bde49d967`、[run41254631100](https://github.com/MassyuRed/Cocolon/actions/runs/41254631100)、#66 attempt1/job124695077754。Archive・IPA・Upload to TestFlight・全job success。実ログ `BUILD_NUMBER=6601`。全体17m32s | Apple側処理・配布group/外部review・本人端末導入は未確認。Upload成功を実機接続/商品受入れへ変換しない |
+| API配置 | 既存Render mashos-apiへ `744336c0de999e271a755b441394f382548829ab` を指定してmanual deploy。`dep-dbj853ou01pc73enjrt0`、11/1 00:06:39 UTC開始→00:08:08 UTC Live。branch main/autoDeploy OFFは維持 | mainの旧sourceを再配置していない。新service/有料planの作成なし |
+| Pieceの稼働設定 | 既存factory構成へexport_requested/export_readyを追加保存。preview/save/owner-read/export/owner-delete各pair ON、public-write/public-read/visibility-toggle OFF。renderer ios.v1/TTL600秒を保持 | 本人保存/再読/Photos/Share、Android新版/backend receiptは未完 |
+| 公開HTTP | healthz200/ok、app/bootstrap200。新exportの未認証GETは401、emotion.piece.export.v2/PIECE_AUTH_REQUIRED、Cache-Control:no-store。配置後app error logsは取得範囲で0件 | 実認証保存/一般性能/全障害の証明ではない。料金680/1480円は公開表示確認で、実ストア商品確認とは別 |
+| Analysis CI | API7bbb4661のrun41253745568/job124692438268 success。1634 PASS＋12020 subtests、owner1 PASS・194 deselected、合成保存再読成功 | 実4B/本人端末/累積月次の完成ではない。RNのiOS metrics V4 19失敗は残る |
+| Runpod | Pod10o4zhfktg9nc1は停止状態。1×RTX PRO4000、開始表示$0.57/h、残高$5.73、container50GB、persistent storageなし。起動要求後「GPUが利用不可」を実画面確認 | 同型新Podへの自動データ移行が提示されたが、自動承認審査が新Pod作成/データ移動/追加課金の可能性を理由に拒否。移行/新Pod作成/GPU起動/学習/生成0。既存モデル/cache存否未確認 |
+
+Render pluginはstart commandやsource commitを更新できないため既存Dashboardで補完。RenderでGitHub方式はdeployment用accountでlogin未設定と表示されたため、新しいlogin方式を追加せず既存Google方式で同workspaceへ入った。認証値・deploy hook・Jupyter tokenは記録/公開していない。モデルのHTTPS提供口・専用Bearer・Renderのnatural profileは未設定のまま。APIの旧providerへ黙って切り替えたり、公開品質合格のflagを立てたりしない。
+
+Runpod公式の[Pod migration](https://docs.runpod.io/pods/troubleshooting/pod-migration)では同型新Podへvolume `/workspace` を移し、Pod ID/IP/URLは変わり、container diskは移らない。現Podはpersistent storageなし表示なので、モデル環境の保全は未確認。移行の実行は未承認。次の具体案は、同型1GPUの自動移行と初回接続準備を既存残高から合計$1以内・追加チャージなしで進め、上限/同型条件を満たさなければ停止すること。実行前にMashへこの操作を明示して許可を求める。
+
+通常実Auth→実4B→実DB保存→RN表示→同じ本文再読はまだ未完。初回端末確認と最終候補確認に絞る方針、11/2〜11/6のサーバー側品質改善を維持する。累積/月次当時snapshot、Android実配布、実ストア680/1480円・購入/復元、月追加1万円内の本番提供原価、申請Console/基本機能の本人一巡も残る。8タスク全完了・リリース可能・品質合格とは報告しない。
+
+今回のsource追加変更0、DB追加変更0、新しい品質学習/生成0。現在地・本議事録・API既存実装記録を実配置/送信結果へ同期。STRUCTURE_MAP_DELTA_NONE（配置/Upload/稼働設定の既存境界内で、新しいproduct route/contract/fileは追加していない）。
