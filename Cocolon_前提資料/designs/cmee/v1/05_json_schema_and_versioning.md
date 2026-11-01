@@ -3255,3 +3255,12 @@ ObservedQuotedFieldは完全fieldのEvidenceRefと原文を持ち、ObservedNode
 API `f7a1389679f15dbb9f24c40c0c5ac0058423c106`、実装/検証/全pathは[Analysis04](04_analysis_v1d_v1e_detailed_design.md#analysis-model-field-kinds-v1)。最終819PASS（新34＋旧785）＋既存共有owner別1PASS、実隔離SQLの同図/文章/ID非生成再読と削除寿命を確認。公開API/DTO/DB/RN/依存/稼働変更0、実4B/追加学習0。次GPUは新4call/600秒の具体案で未実行。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT/商品credit0。
 
 型は同semantic_admission内のAnalysisModelFieldKindsInput(request/source_guard/request_ref/response)、AnalysisModelFieldKindsResponse(request_ref/messages_sha256/raw_sha256/finish_reason/raw)の2つ、frozen/slots/repr=False。入力schema=cocolon.cmee.analysis_model_field_kinds.v1、raw rootはfieldsだけ、各rowはfield(strict int1..N)/node_kindだけ。messages hashはcanonicalなrole/content/順序の全2messages、raw hashはparse前UTF-8。v1 schema/ref/messages、ObservedQuotedField/ObservedNode/既存semantic registry/public DTO/DB/RN版は不変。
+
+
+## 2026-11-02 — private analysis_model_units.v1
+
+API fa995a44。schema `cocolon.cmee.analysis_model_units.v1`、新frozen/slots/repr=False `AnalysisModelUnitsInput`/`AnalysisModelUnitsResponse`。raw exact fields→field/units、unit exact quote/node_kind/parent/scope_role/qualifiers、qualifier exact kind/quote。全field整数順、unit0..8/qualifier0..6、同field親最大2段、一意逐語引用。本人記載不明/従属内容は通常node/UnknownGapへ変換しない。
+
+新private immutable4型はAnalysisUnitQualifier/AnalysisUnitCandidate/AnalysisUnitCandidateField/AnalysisUnitCandidateGraph、private出力AnalysisUnitCandidateArtifact（candidate_id/graph/text/diagram_json）。通常safe_projectionを持たない。graphは全field全文/部分EvidenceRef/parent/qualifier/未割当範囲/全unparsed record refs/route空を保持する。主体はUNRESOLVED_NOT_OWNER_DERIVED、polarity/modality/時点はAS_WRITTEN_UNRESOLVED。
+
+保存schema `cocolon.cmee.analysis_model_units_state.v1`（request_ref/response/candidate_id/graph/text/diagram）をcaller file schema `cocolon.cmee.cumulative_unit_candidates_file.v1`（coverage/state）へ格納。全service coverageをfresh再導出し、旧source/guard/response/保存graph/表示改竄を拒否。trusted callerの対応metadataであり署名ではない。公開DTO/通常private_storage_evidence allowlist/DB/logical registry/旧profile変更0。意味品質は未検証、全結果はtrial/weekly§51。

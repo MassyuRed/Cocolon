@@ -1,6 +1,6 @@
 # Analysis — 最小field接続と実4B probe
 
-**最新：11/2、実4Bの新field-kinds受理・file再読4/4は[実結果](#field-kinds-gpu4-result-20261102)に保持。その次の根拠付き意味単位は[CPU設計案](#semantic-units-cpu-design-20261102)まで具体化。新受口・意味採用は未実装、GPU追加0。旧v1受理0/4も履歴保持。**
+**最新：11/2、意味単位のprivate候補をCPU実装・860件成功。[実装と実4Bへの継続](#semantic-units-implemented-20261102)。一般品質は未確認、実モデル分解を次に確認する。旧runは履歴保持。**
 
 2026-11-01 JST。開始原本：Cocolon PR30 `1c66add4fdf8f5ded18f7443d6b91b1771998244`、API PR3 `36713940ea82e217fab8a7c0a738a33f21df1c4d`。Mashの分析残件開始とweekly§45.4に従う。Codex Work/GPT-6、root華恋が実装/統合/反映、別文脈agentはread-only監査のみ。独立Pro/Ultra又はhuman品質受入れとは呼ばない。System Context最新cacheは未成立のまま、fresh原本fallbackを使用。
 
@@ -154,3 +154,24 @@ Mashの「分析構造の残件作業を続けて」により、実4B接続後�
 [CPU説明例](semantic_units_cpu_example.json)は華恋の手設定で、実モデル出力/教師/凍結評価ではない。既存source prepareから架空AF01/AF02の3fieldを取得し、9unit（path候補3、不明候補1、従属scope5）と7qualifierの全16引用で、元fieldのscalarと元envelope UTF8範囲・quote一致を確認。全文と残範囲を残す。主体の既定値は未解決へ修正し、候補欠落を原文の主体省略へ読み替えない。根拠の機械的一致を意味成功に数えない。新reader/Engine.generate/model call/学習/SQL0、製品source/test変更0。
 
 次の候補はAPI既存製品5＋新test1へCPU実装し、合成候補→全文併記のprivate graph/text→同file非生成再読まで一単位で検証するもの。GPU・追加学習・DB・通常有効化は含めない。これはprivate契約追加なのでRule18§11.3のLEVEL_3で別承認対象。前回GPU4callは消費・閉鎖のまま。今回primary=BLOCKER_NARROWED、商品0/正式0/3/54.50％据置、STRUCTURE_MAP_DELTA_NONE（提案と説明用CPU例のみ）。
+
+
+<a id="semantic-units-implemented-20261102"></a>
+## 11/2 — 全文文脈付き意味候補をCPU実装、実4Bへ継続
+
+Mashは本セッションで、分析残件に必要な作業、GPU利用、途中GitHub反映を承認し、細かい区切りで停止せず継続するよう明示した。§50のprivate契約実装待ちはこの新指示で解消。旧4callの消費/閉鎖は維持し、新要求へ過去の実行回数を流用しない。Codex Work/GPT-6のroot華恋が唯一の実装/write担当、別文脈agentはread-only監査。Pro/Ultra/human受入れとは呼ばない。START_ALLOWED：未完了はwhole-fieldでは否定/不明/時点/従属内容を分けられないこと、DIRECT_PRODUCT_OR_ACCEPTANCE_WORK。今回の完了は合成候補の全文併記/同file再読と実4B出力の内容確認まで。引用不一致・不完全生成・想定外の通常稼働影響は採用せず、原出力を保存して原因へ戻る。通常有効化や品質条件の緩和を成功の代わりにしない。
+
+API commit `fa995a4462bfab0deeafbfd602a5ae803fb0fcb5`。既存製品5＋新test1、旧test/fixture/依存定義変更0。変更6fileのremote全文/blob、親、changed pathsとbranch headを照合した。通常build/ensure/model_input・safe_projection・累積DB保存へ自動接続しない明示private候補arm。
+
+- semantic_admission：新input/response、strict全field/5key unit/2key qualifier、trusted request/messages/raw/finish対応、重なる出現も含む逐語quote一意性とscalar/元envelope UTF8再束縛。
+- intent_compiler：immutable候補graph/field/unit/qualifier。WRITTEN_UNKNOWNは通常UnknownGap/path nodeにしない。親は同field内・最大2段、UNKNOWN_CONTENTの根は本人記載不明。主体とpolarity/modality/時点は未解決のまま、route edge0。
+- observed_route_realizer：既存唯一作者のprivate armでfield全文を各一回、未検証の部分候補と同じ文章/図へ併記。否定を落とした「後悔」だけの候補でも原全文を省けない。未割当範囲と絵文字を保持。
+- engine：新exact input型だけのoffline dispatch。analysis_cumulative_service：新prepare/buildとcaller管理fileのserialize/reload。service全coverage（古い補足の除外件数を含む）も同fileでfresh照合する。
+
+最終対象 **860 PASS/失敗0/skip0、140.22秒**（新41＋旧819）。旧finite/P5/field/field-kinds/累積/保存/複数補足/API/job、既存PGliteの合成SQLを含む。新unit候補自体のSQL commit0。既存warning1。先行new40とpartial112/skip3は最終件数へ重複加算しない。最初の部分回帰はPGlite設定flagなしでSQL3件skip、最終は既存dependencyを設定して全件実行。runtimeは再発見したCPython3.12.14/pytest8.4.1/既存依存で、旧固定環境や実DB検証の成功とは呼ばない。
+
+[CPU実出力](semantic_units_cpu_implemented_example.json)は公開済み架空2record/3fieldの手設定9unit＋7qualifierによる機構検査。[結果](semantic_units_cpu_results.json)。全record unparsed・mapped0・route0。file再読はEngine.generate/compile/realize入口を禁止し、保存ID/graph/text/diagram/全coverageを一致確認。validatorは期待表現を決定的に再計算して比較するため、「作者内部処理を全て0」とは主張しない。新生成した本文を保存値へ置換せず、保存本文/図を返す。意味分解の一般品質、モデル理解、教師、盲検、本人受入れへ換算しない。
+
+次は[新要求](semantic_units_probe_requests.json)と[runner](semantic_units_probe.py)の新4call。base/保存fit38各AF01/AF02、追加学習0、raw補修/自動再試行0、process（import/読込込み）最大600秒、各要求23秒、固定model/revision/adapter/BF16/SDPA/nonthinking/greedy/context8192/max2048を保持。実input_ids.shape[-1]を記録し切捨てない。同Pod表示$0.58/hなら600秒按分上限約$0.0967、準備/待機/回収/保持/保存/税等別。新レンタル/チャージ/Pod操作は行わず、既存Jupyterへ直接接続。全raw/finish/request/response/candidateと失敗理由を回収し、rootが本文を読む。通常map/DB/RNへ未検証候補を採用しない。
+
+STRUCTURE_MAP_DELTA_PRESENT、primary=限定TECHNICAL_CREDIT（CPU候補保持/全文表示/file再読）。商品credit0・正式0/3・管理54.50％据置。System Context最新cache未成立のfresh原本fallbackを使用。今回の継続指示は分析残件を進める権限であり、自己採点による商品受入れではない。

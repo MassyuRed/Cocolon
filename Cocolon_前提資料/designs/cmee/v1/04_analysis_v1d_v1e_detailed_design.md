@@ -1795,3 +1795,11 @@ APIの製品既存exact5、新test1を変更範囲とする。新production file
 現在の全文専用契約のまま一般的な意味単位を採用することはできない。今回の新private wire/typed candidate graph/全文併記の部分候補表示は、Rule18 §11.3の「contract、acceptance…を追加、変更」に該当する実装案として、LEVEL_3で別承認を求める。CPU設計と既存資料へのproposal保存は今回の継続指示に基づき実施し、新製品契約そのものは未実装・未採用。実行modelはCodex Work/GPT-6、root華恋が設計・検算・統合・write、別文脈agentはread-only監査のみ。Pro/Ultra/human品質受入れとは称さない。latest System Context cache未成立のためfresh原本fallbackを使用。
 
 primary=BLOCKER_NARROWED（意味候補の分割/採用に必要なprivate差分を具体化）、商品credit0・正式0/3・管理54.50％据置。STRUCTURE_MAP_DELTA_NONE（active owner/契約/source変更0、提案と説明用CPU例だけ）。next exact1は上記exact5＋新test1のCPU実装・合成候補の全文併記graph/文章とfile再読まで、WORK_ULTRA_REQUIRED相当のWork環境でroot単独writer。通常商品mapへの橋渡し・一般意味品質はこの単位の完了条件へ含めない。Mash承認前の製品effect0、automatic_progression=false。
+
+
+<a id="analysis-model-units-implemented-20261102"></a>
+## 2026-11-02 — analysis_model_units.v1 CPU実装
+
+上のproposalは当時の設計記録。Mashの新しい必要作業/GPU/途中反映の明示承認で実装し、API fa995a44へ反映。exact5＋新test1で、新wire→部分根拠付きimmutable候補graph→同全文併記文章/図→caller管理file再読を実装した。8件/6件/親2段/引用一意性/UNKNOWN_CONTENT根/主体未解決/全record未解析/route0を保持。通常ObservedGraph/safe_projection/DB/HTTP/RNへ未接続。
+
+合成9unit＋7qualifier、全対象860 PASS/失敗0/skip0（新41＋旧819）。service全coverageも同じfileでfresh照合し、古い補足不採用数の消失を防ぐ。再読はEngine/compile/realize入口を呼ばず保存本文を返すが、validator内では期待表現を再計算する。cold meaning再開/SQL commit/一般品質へ換算しない。全結果・実行条件・CPU実例は[trial](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#semantic-units-implemented-20261102)。次の実4B新4callは今回の継続承認範囲で進める。通常採用は候補品質確認後の別判断であり自動有効化しない。

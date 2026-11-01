@@ -1955,3 +1955,13 @@ Mashの分析残件継続指示を受け、§49の実4B接続4/4から、whole-f
 root華恋/Codex Work GPT-6が設計・sourceへの検算・統合・write、別文脈agentはread-only監査のみ。監査で、モデルがactor候補を出さないことと原文の主体省略を同一化しない点、部分候補だけを表示しない点を明確化した。Pro/Ultra/human品質受入れとは呼ばない。primary=BLOCKER_NARROWED、商品0/正式0/3/管理54.50％据置、STRUCTURE_MAP_DELTA_NONE（active構造の変更0）。
 
 次exact1は、設計のAPI既存製品5＋新test1に新private受口/候補graphをCPU実装し、全文併記の文章/図と同fileの生成禁止再読を検証する一作業。追加料金/GPU/学習/SQL/通常有効化0。新private wire/typed candidate graphを追加するためRule18§11.3のLEVEL_3で別承認を求める。今回の継続指示で実装承認済みにはせず、前回GPU承認の再利用・追加生成0、automatic_progression=false。
+
+
+<a id="analysis-model-units-implemented-20261102"></a>
+## 51. 11/2 — Mashの継続承認、意味単位候補のCPU実装と実4Bへ
+
+Mashは必要作業/GPU/途中GitHub反映を一括承認し、区切りごとの承認待ち停止を不要と明示。§50のCPU実装待ちを解消した。旧runの消費/閉鎖・未採用は保持する。
+
+API fa995a44の既存製品5＋新test1で、逐語quoteの部分意味候補/本人記載不明/従属scope/qualifierを元全文と同じ文章/図へ保持し、同fileのID/graph/text/図/coverageを再読する明示offline armを実装。主体未解決・全record unparsed・route0・通常ObservedGraph/safe_projection/DB/HTTP/RNは未切替。新41＋旧819＝860 PASS/失敗0/skip0、140.22秒。先行112/skip3は最終で置換、重複加算なし。validator内の期待表現再計算と保存本文の非生成再読を区別する。
+
+[全実結果・変更owner・実行境界](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#semantic-units-implemented-20261102)。実4Bは新4call/base-fit38各AF01-AF02・学習0・process600秒/各23秒で次に確認し、本文をrootが読む。新要求/runnerはGitHubへ反映してから実行する。今回指示で必要作業は承認済み、旧GPU承認の再利用ではない。一般品質・通常採用・本人受入れは未成立。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT、商品0/正式0/3/54.50％据置。

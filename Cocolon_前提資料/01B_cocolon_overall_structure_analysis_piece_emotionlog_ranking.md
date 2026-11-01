@@ -3126,3 +3126,19 @@ API `f7a1389679f15dbb9f24c40c0c5ac0058423c106` の既存製品3owner：`ai/servi
 ## 2026-11-02 — 意味単位の設計候補と説明file（runtime変更0）
 
 既存Analysis設計04へ[analysis-model-units-proposal-20261102](designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#analysis-model-units-proposal-20261102)を提案として追加。新fileは `Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/semantic_units_cpu_example.json`（公開済み架空例の手設定unit/qualifierを元source座標へ戻した説明用データ、実モデル/教師/新受口ではない）。新production owner0。source/graph/唯一realizerの既存5ownerを使う将来のCPU実装案であり、新private契約は承認前・未実装。通常ObservedGraph/safe projection/P5/field-kinds/DB/RNは変更しない。現在地は00/current03/04/weekly§50。STRUCTURE_MAP_DELTA_NONE（提案navigationと説明fileのみ）。
+
+
+## 2026-11-02 — private意味候補の全変更file地図
+
+API fa995a44、STRUCTURE_MAP_DELTA_PRESENT。新production fileは0。通常累積/API/DB/RNは未切替。
+
+| exact path（mashos-api） | 責務/接続 |
+|---|---|
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py` | analysis_model_units.v1、新input/response、部分引用/親/qualifierのsource再束縛、private file state |
+| 同`intent_compiler.py` | immutableな候補graph/field/unit/qualifier。通常ObservedGraphへ混ぜない |
+| 同`observed_route_realizer.py` | 唯一作者の全文併記private候補arm、保存表現の照合 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py` | 新exact input型の明示offline dispatch |
+| `ai/services/ai_inference/analysis_cumulative_service.py` | 新prepare/build、全coverage付き同file serialize/reload。通常ensureは不変 |
+| `ai/tests/test_analysis_model_units.py` | 合成41件、引用/従属/全文/改竄/生成禁止再読/coverage。教師や商品受入れではない |
+
+実結果/再開は[trial](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#semantic-units-implemented-20261102)とweekly§51。今回の前提資料差分は全機能00/本01B/current03/04/設計04/05/weekly/trialと実行runner/要求/CPU結果に置く。

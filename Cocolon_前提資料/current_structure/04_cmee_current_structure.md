@@ -1,3 +1,5 @@
+> **2026-11-02最新：意味単位のprivate候補をCPU実装・860件成功。** 新`analysis_model_units.v1`→全文併記の候補文章/図→全coverage付きfile再読。通常map/DB/RNへ未接続、全record未解析・route0。実4B分解は次に確認。[weekly§51](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-units-implemented-20261102)と[trial実装記録](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#semantic-units-implemented-20261102)へ。
+
 > 10/28最新差分：named出力型/参照提示修復・CPU351成功、9更新/112再読込/2生成を終了。平坦rootと回答source帰属へ前進も意味/本文0/2・新41c9不採用。末尾の最新結果・全機能00/weekly§90を参照。
 
 > 2026-10-19最新差分：u355。安堵・寂しさと併記された元の経験に未明示の「同時」を足す表現を、原文の接続詞を保つ既存経験文へ修復。意味・選択・Reception不変。対象技術検証321件、保存DTO18件再表示。PRODUCT_NOT_CLEAR／正式Product Read0/3は維持。詳細は[u355監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u355_MixedReceivedTimeNeutral_20261019.md)。

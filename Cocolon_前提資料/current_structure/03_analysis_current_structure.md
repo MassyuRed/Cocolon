@@ -1,4 +1,4 @@
-> 2026-11-01・次の開始位置：[weekly§46](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-fields-cpu-20261101)。CPU最小受口/既存graph・保存非生成再読を実装し対象785件成功。完全fieldの分類候補で一般意味理解は未成立、全件unparsedを維持。通常finite/P5/アプリは不変。**次はGPUが必要**で、Qwen3.5-4Bの最大4生成/学習0を確認する。具体的な入力/重み/時間/費用/回収は[実行準備](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md)。モデル実行0、GPU作成/再起動0。
+> **2026-11-02最新：意味単位のprivate候補をCPU実装・860件成功。** 新`analysis_model_units.v1`→全文併記の候補文章/図→全coverage付きfile再読。通常map/DB/RNへ未接続、全record未解析・route0。実4B分解は次に確認。[weekly§51](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-units-implemented-20261102)と[trial実装記録](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#semantic-units-implemented-20261102)へ。
 
 > 2026-11-01最新：Mash採用の累積/当時月次/プラン差を実装、API36713940/新migration反映済み。RNb187b790のiOS #72/7201は内部配布済み。感情原入力の全期間＋適格本人補足を対象に現在map共通、月次閲覧Free2回/Plus12回/Premium全期間。保存artifactと月参照を分離し、プラン変更では保持、source削除/退会ではpurge。新実装/検証/配置はweekly§44と詳細04#analysis-cumulative-monthly-v1を参照。以下のu250等は旧期間版の内容修正履歴で、新累積方式の現在地ではない。
 
