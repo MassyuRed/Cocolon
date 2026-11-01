@@ -23,14 +23,14 @@ const renderPromise = Promise.resolve((() => {
   assert.deepEqual(imports, [
     "import React from 'react';",
     "import { Modal, View, Text, ScrollView, Button, ActivityIndicator } from 'react-native';",
-    "import { SafeAreaView } from 'react-native-safe-area-context';",
+    "import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';",
     "import PieceVisualCard from './PieceVisualCard';",
   ]);
   const marker = name => ({ component: name });
   const context = vm.createContext({
     React: { createElement: (type, props, ...children) => ({ type, props: props || {}, children }) },
     ...Object.fromEntries(['Modal', 'View', 'Text', 'ScrollView', 'Button', 'ActivityIndicator',
-      'SafeAreaView', 'PieceVisualCard'].map(name => [name, marker(name)])),
+      'SafeAreaProvider', 'SafeAreaView', 'PieceVisualCard'].map(name => [name, marker(name)])),
   });
   const executable = source.replace(/^import .*;$/gm, '').replace(/^export default /gm, '');
   vm.runInContext(executable + '\nglobalThis.renderModal = PiecePreviewModal;', context,
@@ -68,6 +68,35 @@ async function render(display, props = {}) {
   const component = await renderPromise;
   return component({ visible: true, display, onSave() {}, ...props });
 }
+
+test('every visible state uses its own modal safe area for both the header and fixed close control', async () => {
+  for (const phase of ['received', 'loading', 'unavailable', 'saved']) {
+    const tree = await render(fixture({ phase, message: 'この入力からは現在Pieceを作成できません。' }));
+    assert.equal(tree.type.component, 'Modal');
+    const provider = tree.children[0];
+    assert.equal(provider.type.component, 'SafeAreaProvider', 'measure the native modal, not its presenting screen');
+    assert.equal(provider.props.initialMetrics, undefined, 'do not seed a remounting modal with stale window metrics');
+    const safe = provider.children[0];
+    assert.equal(safe.type.component, 'SafeAreaView');
+    assert.deepEqual(Array.from(safe.props.edges).sort(), ['bottom', 'left', 'right', 'top']);
+    assert.equal(safe.props.mode, 'padding');
+    assert.equal(safe.props.style.flex, 1);
+    const body = safe.children[0], scroll = body.children.find(n => n?.type?.component === 'ScrollView');
+    assert.equal(scroll.props.style.flex, 1, 'long content scrolls within the available safe height');
+    assert.ok(body.children.some(n => n?.props?.accessibilityRole === 'header'));
+    assert.ok(button(body, '閉じる'));
+    assert.equal(button(scroll, '閉じる'), undefined, 'close remains outside the long scrolling content');
+  }
+});
+
+test('a rejected creation explains the current input without claiming saving/export are globally disabled', async () => {
+  const message = 'この入力からは現在Pieceを作成できません。';
+  const tree = await render(fixture({ phase: 'unavailable', message, preview: null }));
+  assert.ok(text(tree).includes(message));
+  assert.ok(!text(tree).includes('まだ利用できません'));
+  assert.equal(initial(tree).length, 0);
+  assert.ok(button(tree, '閉じる'));
+});
 
 // Positive cases are explicit synthetic host projections, not proof that the
 // current product host supplies true or that the prototype is admitted.
@@ -111,7 +140,7 @@ test('the rendered save callback retains its original identity/token, not later 
 test('ready save presentation does not simultaneously say Piece saving is unavailable', async () => {
   const tree = await render(fixture());
   assert.equal(initial(tree).length, 1);
-  assert.ok(text(tree).includes('画像の書き出し・共有は、まだ利用できません。'));
+  assert.ok(text(tree).includes('画像の書き出し・共有は、保存したPieceの詳細画面から行えます。'));
   assert.ok(!text(tree).includes('Pieceの保存・画像の書き出し・共有は、まだ利用できません。'));
 });
 
@@ -157,10 +186,10 @@ test('native inspection and remaining quota cannot create canSave', async () => 
   display.preview.quota.remaining_count = null;
   assert.equal(initial(await render(display)).length, 0);
 });
-test('the existing not-yet-enabled host projection keeps the unavailable explanation', async () => {
+test('a candidate without save permission does not claim the whole Piece feature is unavailable', async () => {
   const tree = await render(fixture({ canSave: false }));
   assert.equal(initial(tree).length, 0);
-  assert.ok(text(tree).includes('Pieceの保存・画像の書き出し・共有は、まだ利用できません。'));
+  assert.ok(!text(tree).includes('Pieceの保存・画像の書き出し・共有は、まだ利用できません。'));
 });
 
 // Existing modal responsibilities are retained. No host/controller/renderer

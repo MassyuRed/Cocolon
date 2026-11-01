@@ -1587,3 +1587,25 @@ API `1296eaea589a09fe91f84689c6d55d67e577ec23` の指定commit配置 `dep-dbjafe
 同headの自動CIはJS契約/iOS canvas/Pods/Android source・exportがsuccess。iOS metricsは既存V4 output_v4_*の19失敗（1/20成功）が残る。既存native129/129、V9 46/46、bitmap44/44は成功。前source963944bbとのnative metrics実装/検査差分0で、今回の対象RN209 PASSとは分けて記録する。全CI成功やPiece本人画像の受入れとはしない。
 
 全体現在地/全体構造/全file地図/EmlisとPieceのcurrent map/Piece正本入口/API既存運用記録へ同じ現在状態を反映。残る8タスク・累積/月次snapshot・Android実配布・実ストア料金/購入/復元・月追加1万円内の本番常時提供・申請Console/本人基本機能一巡は、今回のUI修正で完了へ変更しない。11/2〜11/6はサーバー側品質改善、候補ごとのRN再build不要、最終候補だけ接続という配分を維持する。
+
+
+<a id="piece-preview-safe-area-20261101"></a>
+## 39. 11/1 — 6801の応答UIを本人確認、Pieceの画面領域修復と生成状況の訂正
+
+Mashから「指示通りできてた」と応答popupの指定表示について本人確認を受領。一方、Piece作成は未成立で、IMG_3984のpreview見出しがiOSの時計へ重なり、上部の安全領域を侵す実機不具合を受領した。6801の配布/入力引継ぎ成功を、Piece生成・画像保存成功へ換算しない。
+
+### 修正内容と実装順
+
+既存PiecePreviewModal.jsだけを、Modal→SafeAreaProvider→SafeAreaView（top/right/bottom/left、padding）→既存header/ScrollView/footerへ修正。native modal自身の安全領域を測り、root画面の値や固定のステータスバー高さ、remount時のinitialWindowMetricsは流用しない。余白内の残り高さをScrollViewへ割り当て、閉じる操作はscroll外で同じ安全領域に保持する。画像canvasの論理座標やbitmap描画は変更しない。公式の[SafeAreaProvider資料](https://rnsac.appandflow.com/docs/api/safe-area-provider)のmodal root配置と照合した。
+
+作成失敗時に機能全体が未提供であるように見せていた固定文「Pieceの保存・画像の書き出し・共有は、まだ利用できません。」を除去。生成拒否では現在の入力に対するエラーと閉じるを表示し、保存可/保存処理中/保存済みだけ、画像出力は保存後の詳細画面から行う旨を案内する。
+
+既存2test harnessをProviderへ同期。可視4状態でModal固有Provider/上下左右edge/スクロール領域/固定closeが同じ安全領域内にあること、拒否時に全体未提供と誤案内しないことを既存testへ追加。関連3fileの231 PASS/FAIL0/SKIP0。native inset・実iPhone座標の受入れをJS構造検査で代替しない。read-only補助監査に修正後の重大指摘なし、writerは華恋一人。新署名build1本で配布可能にし、Apple processing/内部配布まで確認する。新しい画面位置の本人確認は別に残す。
+
+### 生成処理の現状
+
+同時刻の稼働API記録で03:11:14 UTCのGET /emotion/piece/source-ref/{saved_input_id}は200、その後03:11:17 UTCのPOST /emotion/piece/previewは422、いずれもSupabase errors0を確認。本文/owner/inputIDは記録しない。保存済み記録の引継ぎ後、preview作成側で拒否されており、GPU停止によるモデル接続エラーではない。
+
+現生成は4Bを呼ばず、既存CMEEの有限Piece作者を使う。対応する本人価値観/希望/評価、文末、最大6文、選択感情の明示等の対応範囲が狭い。CPU単体の架空2例で、対応する価値観文はshort_essay生成、通常の動作確認メモはexpression_meaning_not_admittedを再現した。これは本人の原入力を取得した結果ではなく、Mashの記録の厳密な内部拒否条件は未確定。一般入力からPieceを生成できる状態は未完成と明示する。生成の拒否を外す/原文を画像へ貼る/別作者や外部AIへ迂回する変更は行わない。
+
+今回の製品差分は既存modal内の表示領域と案内文だけ。STRUCTURE_MAP_DELTA_NONE（新route/公開wire/意味contract/DBtable/保存枠/依存/renderer変更なし）。API生成/DB/稼働設定の追加変更0、GPU再起動/実provider呼出し/学習0。前提資料は全体現在地・全体構造/全file地図・Emlis/Piece map・Piece入口と既存API運用記録へ、本人確認/失敗/修復候補を区別して同期する。

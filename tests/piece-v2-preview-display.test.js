@@ -86,7 +86,7 @@ function previewUiHarness({ send, currentState = 'active', admitSave = false } =
   const context = vm.createContext({ React, AppState, AbortController, AppRuntimeContext: {},
     Date: class extends Date { static now() { return now; } },
     Modal: 'Modal', View: 'View', Text: 'Text', ScrollView: 'ScrollView', Button: 'Button',
-    ActivityIndicator: 'ActivityIndicator', SafeAreaView: 'SafeAreaView',
+    ActivityIndicator: 'ActivityIndicator', SafeAreaProvider: 'SafeAreaProvider', SafeAreaView: 'SafeAreaView',
     NativeModules: {}, Platform: { OS: 'ios' }, findNodeHandle: () => null,
     setTimeout: (callback, delay) => { const id = ++serial; timers.set(id, { callback, at: now + delay }); return id; },
     clearTimeout: id => timers.delete(id),

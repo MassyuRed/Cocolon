@@ -6,7 +6,7 @@
  */
 import React from 'react';
 import { Modal, View, Text, ScrollView, Button, ActivityIndicator } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import PieceVisualCard from './PieceVisualCard';
 
 const element = React.createElement;
@@ -49,7 +49,9 @@ export default function PiecePreviewModal({ visible = false, display, onClose, o
     display.retryKind === 'recover' ? '最新のプレビューを取得' : '同じ要求で再試行';
   return element(Modal, {
     visible: true, animationType: 'slide', presentationStyle: 'fullScreen', onRequestClose: onClose,
-  }, element(SafeAreaView, { style: { flex: 1, backgroundColor: '#FFFFFF' } },
+  }, element(SafeAreaProvider, { style: { flex: 1, backgroundColor: '#FFFFFF' } },
+    element(SafeAreaView, { edges: ['top', 'right', 'bottom', 'left'], mode: 'padding',
+      style: { flex: 1, backgroundColor: '#FFFFFF' } },
     element(View, { style: { flex: 1, padding: 20 }, accessibilityViewIsModal: true },
       element(Text, { accessibilityRole: 'header', style: { fontSize: 22, color: '#202020', marginBottom: 12 } }, saving ? 'Pieceの保存' : 'Pieceのプレビュー'),
       element(ScrollView, { style: { flex: 1 }, contentContainerStyle: { paddingBottom: 24 } },
@@ -90,9 +92,9 @@ export default function PiecePreviewModal({ visible = false, display, onClose, o
           style: { fontSize: 18, color: '#202020' } }, 'Pieceを保存しました。') : null,
         ['unavailable', 'cancelled'].includes(display.phase) ? element(Text, { accessibilityRole: 'alert',
           style: { fontSize: 16, color: '#202020' } }, display.message) : null,
-        element(Text, { style: { fontSize: 14, lineHeight: 22, color: '#494949', marginTop: 20 } },
-          saving || canSave ? '画像の書き出し・共有は、まだ利用できません。' :
-            'Pieceの保存・画像の書き出し・共有は、まだ利用できません。'),
+        (canSave || saving || display.phase === 'saved') ? element(Text,
+          { style: { fontSize: 14, lineHeight: 22, color: '#494949', marginTop: 20 } },
+          '画像の書き出し・共有は、保存したPieceの詳細画面から行えます。') : null,
       ),
       element(View, { style: { paddingTop: 12 } },
         canSave ? element(Button, {
@@ -112,6 +114,6 @@ export default function PiecePreviewModal({ visible = false, display, onClose, o
         element(Button, { title: '閉じる', onPress: onClose, accessibilityLabel: 'Pieceの画面を閉じる' }),
       ),
     ),
-  ));
+  )));
 }
 
