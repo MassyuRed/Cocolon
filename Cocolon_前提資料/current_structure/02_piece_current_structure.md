@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**11/1の最新は全体現在地と第9回weekly§36。API744336c0はLive、Piece private5機能ON/public3機能OFFを維持。RN6675b4ed/6601はArchive/IPA/Upload後にApple90683（NSPhotoLibraryUsageDescription欠落）で拒否・配布不可。写真Usage/Add両目的文と実Archive検査を修正したb8a43e5a/6701は署名Archive検査/Apple処理通過・既存内部グループでテスト中、本人起動済み。実保存は既存add-onlyを維持。本人保存/同owner再読/実Photos/Share・Android・商品受入れ、旧V4の19失敗は未完。**
+**11/1の最新は全体現在地と第9回weekly§37。API744336c0はLive、Piece private5機能ON/public3機能OFFを維持。RN6675b4ed/6601はArchive/IPA/Upload後にApple90683（NSPhotoLibraryUsageDescription欠落）で拒否・配布不可。写真Usage/Add両目的文と実Archive検査を修正したb8a43e5a/6701は署名Archive検査/Apple処理通過・既存内部グループでテスト中、本人起動済み。実保存は既存add-onlyを維持。本人保存/同owner再読/実Photos/Share・Android・商品受入れ、旧V4の19失敗は未完。**
 
 ### §99の判断案（履歴）
 
