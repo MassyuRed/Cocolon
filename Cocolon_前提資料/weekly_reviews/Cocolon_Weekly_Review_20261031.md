@@ -1530,3 +1530,21 @@ MashのApp Store Connect画像で、1.0(6601)は90683・NSPhotoLibraryUsageDescr
 APIは同じ744336c0の既存artifactへMODE=read_onlyをSave and deployし、dep-dbj96l67bikc73ep8hugは01:18:55 UTC Live。natural_reply.v1と保存済みreaderを保持し、legacyへ戻さない。実Supabaseの本文/owner/inputIDを返さない集計で、00:55:48 UTC以降のnatural thread更新/FINAL保存/active attempt/CALL_STARTEDはいずれも0件。実機初回保存・再読は未完として保持する。
 
 source変更はInfo.plistと既存iOS workflowのみ。全体現在地・file地図/Piece mapへ同じ差分を反映。STRUCTURE_MAP_DELTA_NONE（既存写真保存の目的文と配布前検査の補正、新product route/API/DB/権限schemaなし）。既存8タスク・累積/月次snapshot・Android/課金/本番原価/申請残件は未完を保持する。
+
+
+<a id="testflight6701-device-initial-save-20261101"></a>
+## 37. 11/1 — 6701の内部配布、本人実機から初回生成・保存・同本文再読を確認
+
+RNb8a43e5aのiOS #67/run41260929560/job124713864844は01:38:35 UTCにsuccess。実署名Archive、写真Usage/Add両目的文のArchive実物検査、IPA、Uploadが全て成功。App Store Connectで1.0(6701)のApple処理通過を確認し、OS提供の通信暗号化だけを使用する実装/依存と照合して暗号化情報を保存した。既存内部グループ「Emlis テスト版配布」のビルド一覧で6701「テスト中」を確認。6601の90683は6701で解消。外部配布・新テスター追加・App Store公開操作はしていない。
+
+MashはTestFlightで6701を開けたと回答。その後、通知送信を避けた感情入力1件→Emlis返事→閉じる→分析/入力履歴/感情入力履歴の同じ記録から「Emlisの返事を開く」という手順を案内し、Mashから「同じ返事が表示された」と回答を受領。本人実機の再読はこの回答で確認し、華恋がiPhoneを直接操作/録画した証拠とはしない。本文やowner/inputIDは公開記録に書かない。
+
+実Supabaseのnatural_reply.v1集計は01:52:16 UTCのFINAL/CALL_STARTED/active全0から、01:53:53 UTCに更新1・FINAL1・CALL_STARTED1・active0へ変化。再読回答後の01:57:04 UTCも同じ1/1/1/0。実Auth経路から保存されたFINALのschemaはcocolon.emlis.recipient_reply.v1。生成を増やさず保存済みの同じ返事が表示されたことと整合する。合成HTTP1callと本人入力1callを混同せず、生成品質の採用・一般入力全体の合格へは換算しない。
+
+接続時は既存API744336c0のartifactを維持してMODE=developmentへ切り替え、dep-dbj9lvh42hec73cd65ugが01:51:36 UTC Live。モデルは同じ固定base/専用Bearer/最大3要求300秒で01:51:45 UTCに再開し、FINAL保存・active0の確認後01:54:48 UTCに停止要求。今回の再開は切上げ184秒、先行1477秒との合計1661秒で承認済み1800秒以内。所有server process不在、GPU1MiB/0％を確認。学習0・候補品質反復0。Pod自体は稼働中($0.51/h)で、華恋によるStop/新規作成/削除/チャージ0。
+
+最終read_onlyはdep-dbj9pqvb9u1s73de4160（01:59:49 UTC Live、source744336c0）で反映し、画面reload後の保存値read_onlyも照合した。先行dep-dbj9o1flk1mc738ksqgg（01:55:59 UTC Live）は後の保存値確認でdevelopmentのままと判明したため、編集値を入力/確定して保存し直した。Liveだけでmode反映済みとせず、最終保存値まで確認した。保存済みreaderを維持する。natural_reply.v1/専用endpoint/modelとPiece private5ON/public3OFFは保持する。以後の品質候補ごとのRN再build/実機要求は行わず、11/2〜11/6はサーバー側品質改善、最終候補だけ実機接続するという配分を維持する。
+
+今回閉じたのはApple処理を含むiOS配布阻害と本人初回の通常接続/保存/再読。Pieceの本人描画/保存/Photos/Share、Android実配布、実ストア料金/購入/復元、累積/月次当時snapshot、月追加1万円内の本番常時提供、申請Console/本人基本機能一巡、旧V4 metrics19失敗は残る。Apple Developer更新契約のAccount Holder確認バナーも残り、華恋は契約を受諾していない。8タスク全完了・正式商品受入れ・公開可能とは報告しない。
+
+STRUCTURE_MAP_DELTA_NONE。product source/API/DB/依存の追加変更なし。既存全体現在地・全file地図・Piece map・API運用記録へ6701と初回確認結果を同期する。

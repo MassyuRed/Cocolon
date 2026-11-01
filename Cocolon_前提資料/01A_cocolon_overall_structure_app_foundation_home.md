@@ -5894,4 +5894,4 @@ API7bbb4661の製品実装、744336c0の実DB適用記録。`emlis_thread_store.
 
 `astor_material_snapshots.py` と `cores/analysis/source_adapter.py` は既存Q3最大3回答を保持、`cores/analysis/intent_compiler.py` は先行補足/置換文との矛盾、二重訂正を確認。新規 `ai/tests/test_analysis_multiple_answers.py` と拡張natural/Q3/tool検査。`ai/tools/serve_emlis_natural_reply.py` はweights/config SHA対指定で選択候補をロード前後確認、旧fit38既定と非学習/112tensor/時間・要求上限を維持。サーバー側更新にRN buildを要求しない。
 
-Emlis/Analysis current mapsとweekly§33を同期。その後の実4B HTTPS1回成功/API配置、6601のApple90683拒否と写真目的文修復はweekly§36。本人端末は未完、累積・月次当時snapshotは未完成。今回のRN製品sourceは5f91caceのまま、後続のtutorial契約ラベル同期と文書更新。STRUCTURE_MAP_DELTA_PRESENT。
+Emlis/Analysis current mapsとweekly§33を同期。その後の実4B HTTPS1回成功/API配置、6601のApple90683拒否と写真目的文修復はweekly§36。後続weekly§37で6701のApple処理/内部配布/本人起動とEmlis初回の実Auth→固定4B→実DB保存→本人同本文再読を確認。累積・月次当時snapshotとPiece本人実機は未完成。今回のRN製品sourceは5f91caceのまま、後続のtutorial契約ラベル同期と文書更新。STRUCTURE_MAP_DELTA_PRESENT。

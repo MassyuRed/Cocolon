@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**11/1の最新は全体現在地と第9回weekly§36。API744336c0はLive、Piece private5機能ON/public3機能OFFを維持。RN6675b4ed/6601はArchive/IPA/Upload後にApple90683（NSPhotoLibraryUsageDescription欠落）で拒否・配布不可。写真Usage/Add両目的文と実Archive検査を修正して新buildを準備。実保存は既存add-onlyを維持。本人保存/同owner再読/実Photos/Share・Android・商品受入れ、旧V4の19失敗は未完。**
+**11/1の最新は全体現在地と第9回weekly§36。API744336c0はLive、Piece private5機能ON/public3機能OFFを維持。RN6675b4ed/6601はArchive/IPA/Upload後にApple90683（NSPhotoLibraryUsageDescription欠落）で拒否・配布不可。写真Usage/Add両目的文と実Archive検査を修正したb8a43e5a/6701は署名Archive検査/Apple処理通過・既存内部グループでテスト中、本人起動済み。実保存は既存add-onlyを維持。本人保存/同owner再読/実Photos/Share・Android・商品受入れ、旧V4の19失敗は未完。**
 
 ### §99の判断案（履歴）
 
@@ -3519,4 +3519,4 @@ GET /healthz200、/app/bootstrap200とPiece8flag一致（private4true/public-wri
 
 6601はUpload job成功後、Apple processing90683でNSPhotoLibraryUsageDescription不足となり配布不可。Info.plistへ既存Add keyと同じ保存用途説明を追加。CameraRollのcocolonAddOnly:trueと保存後PHAsset再読をしない既存patchは維持し、写真一覧/撮影/権限要求の機能は追加しない。
 
-既存ios-build.ymlはArchive直後に実app Info.plistの写真Usage/Add両keyが非空stringか検査し、欠落時はIPA/Upload前に停止する。source plist解析、workflow順序、binary archive fixtureで正常/Usage欠落拒否を局所確認。新署名build/Apple処理/本人端末はこれから。実結果は第9回weekly§36から後続へ更新する。STRUCTURE_MAP_DELTA_NONE（目的文と既存配布検査の補正、新route/API/DBなし）。
+既存ios-build.ymlはArchive直後に実app Info.plistの写真Usage/Add両keyが非空stringか検査し、欠落時はIPA/Upload前に停止する。source plist解析、workflow順序、binary archive fixtureで正常/Usage欠落拒否を局所確認。b8a43e5aの#67/6701で実署名Archive検査・IPA/Uploadが成功し、Apple処理も通過。暗号化情報保存後、既存内部グループでテスト中、Mashの6701起動を確認した。Pieceの保存/再読/OS出力の実機確認は未完。Emlis初回保存/再読と混同しない。実結果は第9回weekly§37へ。STRUCTURE_MAP_DELTA_NONE（目的文と既存配布検査の補正、新route/API/DBなし）。
