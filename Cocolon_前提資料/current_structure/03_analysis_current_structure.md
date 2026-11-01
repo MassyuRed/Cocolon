@@ -1,3 +1,5 @@
+> 2026-11-01・次の開始位置：[weekly§45](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-4b-gpu-start-20261101)。Mashは7201依頼修正を確認し、次セッションは分析残件を進めると指示。通常の分析はCMEE接続済み/4B未呼出しの有限文法で、架空の日常8例のCPU確認はmap0/未解析8（一般成功率ではない）。分析を4Bへ接続する最小仕様と受口・元根拠/主体/否定/時点/不明の採用→通常graph/保存再読を先にCPUで準備し、最小準備が通った時点で実4B出力へ進む。**開始直後のGPUは不要、実出力確認前に華恋から用意を連絡する。** 4Bなし現状を発売完成とせず、CPU合成成功を品質成立にしない。
+
 > 2026-11-01最新：Mash採用の累積/当時月次/プラン差を実装、API36713940/新migration反映済み。RNb187b790のiOS #72/7201は内部配布済み。感情原入力の全期間＋適格本人補足を対象に現在map共通、月次閲覧Free2回/Plus12回/Premium全期間。保存artifactと月参照を分離し、プラン変更では保持、source削除/退会ではpurge。新実装/検証/配置はweekly§44と詳細04#analysis-cumulative-monthly-v1を参照。以下のu250等は旧期間版の内容修正履歴で、新累積方式の現在地ではない。
 
 ---
@@ -928,4 +930,7 @@ STRUCTURE_MAP_DELTA_PRESENT、新private型6／例外2、実fileは01A、actual�
 TodayQuestion/Echoes/Discoveriesの旧material集約は保持するが、新累積V2のsource採用済みとはしない。意味sourceの現契約は感情原入力と別本人補足。一般言語品質・IF/Saved・実機/正式商品受入れは別。STRUCTURE_MAP_DELTA_PRESENT。
 
 
-配置/検証更新：新累積ownerはAPI36713940/dep-dbjg0l8ae00c73e4cr20で09:04:51 UTC Live、migration適用済み。local API624成功、RN全JS1287と最終対象64成功。遠隔Analysis/Piece PostgreSQL CI成功。RNb187b790のiOS #72は一回で全工程success、Apple処理/暗号化情報保存後、7201が既存内部グループでテスト中。本人の新Analysis実機確認と正式商品受入れは未実施。全結果・各件数の範囲と制限はweekly§44。旧履歴中の「累積未完」は当時の状態で、この新ownerの未実装を示さない。
+配置/検証更新：新累積ownerはAPI36713940/dep-dbjg0l8ae00c73e4cr20で09:04:51 UTC Live、migration適用済み。local API624成功、RN全JS1287と最終対象64成功。遠隔Analysis/Piece PostgreSQL CI成功。RNb187b790のiOS #72は一回で全工程success、Apple処理/暗号化情報保存後、7201が既存内部グループでテスト中。7201の依頼修正はMash確認済み。一般分析内容の品質と正式商品受入れは未確認。全結果・各件数の範囲と制限はweekly§44。旧履歴中の「累積未完」は当時の状態で、この新ownerの未実装を示さない。
+
+
+次工程の既存owner：analysis_cumulative_service.build_cumulative_map→engine.generate、cores/analysis/semantic_admission（P5限定）、intent_compiler、observed_route_realizer（有限label再解析）、既存artifact/private根拠/保存readerとRN CumulativeWatashiMapView。新規一般model受口の具体仕様・互換・実装順は共有設計01/Analysis詳細04/schema05/実装順06を更新してから実装する。現在のP5を汎用接続済みにせず、単なるフラグ解除やmodel文章のnode直入れを完成としない。今回の製品実装/型/API/schema/生成モデル/稼働の変更は0。調査入力・結果・限界と再開手順はweekly§45へ集約し、別の管理systemを新設しない。STRUCTURE_MAP_DELTA_NONE。

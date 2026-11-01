@@ -1,6 +1,8 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-**11/1・累積Analysis（[第9回§44](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-cumulative-plans-20261101)）：** 全保存期間の感情原入力＋適格本人補足、現在map共通、月次当時保存と現在比較、Free2回/Plus12回/Premium全期間、根拠参照と削除寿命を実装。RNb187b790/API36713940をGitHub反映、新DB migration適用、APIはdep-dbjg0l8ae00c73e4cr20で09:04:51 UTC Live。health/bootstrap200、認証なしlatest/history401、private5ON/public3OFF。local API624/RN1287と対象64、遠隔Analysis/Piece SQL CI成功。iOS #72/run41291615693は全工程success、Apple処理/暗号化情報保存後、1.0（7201）が既存内部グループでテスト中。本人の新Analysis端末確認は未実施。月次は各JST月の初回成功取得を固定し、過去未保存月のbackfillなし。GPU再起動0。
+**11/1・次セッションは分析の4B接続準備（[第9回§45](weekly_reviews/Cocolon_Weekly_Review_20261031.md#three-core-quality-priority-20261101)）：** Mashが7201の依頼修正を確認。架空の日常8例を現分析へCPU処理すると個別/一括ともmapなし（mapped0/未解析8）、既知対照追加では対照1件だけ2node。Pieceの同8例は原文保持の本文生成まで成立（新画像/本番検査ではない）。分析はCMEE接続済みだが4Bを呼ばない有限文法、Emlisのnatural本文から分析材料も未生成。次は分析を4Bへ接続して品質を育てる。開始はCPUで最小接続設計/受口/通常graph・保存の合成検証、最小準備後に実4B出力を確認する時点でGPUを用意。今すぐのレンタルは不要、必要時に華恋から連絡する。Emlis/Pieceの残件と平日配分案・暫定完成度は§45、旧管理54.50％の確定改定ではない。今回製品/稼働/GPU変更0。
+
+**11/1・累積Analysis（[第9回§44](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-cumulative-plans-20261101)）：** 全保存期間の感情原入力＋適格本人補足、現在map共通、月次当時保存と現在比較、Free2回/Plus12回/Premium全期間、根拠参照と削除寿命を実装。RNb187b790/API36713940をGitHub反映、新DB migration適用、APIはdep-dbjg0l8ae00c73e4cr20で09:04:51 UTC Live。health/bootstrap200、認証なしlatest/history401、private5ON/public3OFF。local API624/RN1287と対象64、遠隔Analysis/Piece SQL CI成功。iOS #72/run41291615693は全工程success、Apple処理/暗号化情報保存後、1.0（7201）が既存内部グループでテスト中。Mashが7201の依頼修正を確認。一般分析の内容品質は未確認。月次は各JST月の初回成功取得を固定し、過去未保存月のbackfillなし。GPU再起動0。
 
 **11/1・7101本人確認済み（第9回§43）：** RN7464f858のiOS #71/run41283646380/job124780456306は署名Archive・写真目的文検査・IPA・TestFlight Uploadの全工程success。Mashが7101を反映し、今回依頼した修正の完了を確認した。起動待ち、Home全体行動削除、Ranking撤去、設定以外のガイド同期、新PieceのEmlisロゴを含む。こころ天気は今/日週月/履歴/未読/通知/tutorialを従来どおり維持。API3407402/dep-dbjebcflk1mc7390mnr0は07:11:03 UTC Live、health/bootstrap200・private5ON/public3OFF。API製品同一blobのd43cabcd native PostgreSQL CI41283815884は全step成功。RNの旧V4 metrics19失敗とlegacy canvas13reportは残る。依頼UIの本人確認を、全製品の品質/正式商品受入れへ広げない。GPU再起動0。
 
@@ -108,22 +110,22 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 ## 5. Analysis — 蓄積を本人の情報へ返す
 
-**11/1採用・API/DB反映／7201内部配布済み（第9回§44）：** 対象は感情原入力の全保存期間と適格な本人補足。現在mapは全plan共通、月次はFree2回/Plus12回/Premium全期間を閲覧。旧28日/100件拒否/期間版を新累積と呼ばない。新source/immutable artifact/月参照/現在guard照合、選択月と現在の並列表示、根拠原入力・補足参照を実装し、local/遠隔CIを通過。月次は当月最初の成功取得を固定、過去未保存月の再分析backfillなし。一般日本語の理解は未完成、4B接続は行わない。API配置済み、iOS #72/7201はApple処理を通過し既存内部グループでテスト中。本人の新Analysis端末確認は未実施。§44へ。
+**11/1採用・API/DB反映／7201内部配布済み（第9回§44）：** 対象は感情原入力の全保存期間と適格な本人補足。現在mapは全plan共通、月次はFree2回/Plus12回/Premium全期間を閲覧。旧28日/100件拒否/期間版を新累積と呼ばない。新source/immutable artifact/月参照/現在guard照合、選択月と現在の並列表示、根拠原入力・補足参照を実装し、local/遠隔CIを通過。月次は当月最初の成功取得を固定、過去未保存月の再分析backfillなし。一般日本語の理解は未完成、4B接続は行わない。API配置済み、iOS #72/7201はApple処理を通過し既存内部グループでテスト中。Mashが7201の依頼修正を確認。一般分析の内容品質は未確認。§44へ。
 
 | 機能・構想 | 現在の実装・境界 | 稼働・本人確認・残件 |
 |---|---|---|
 | こころ天気 | 感情選択・強さ・時刻から当日／日／週／月の比率・揺らぎ・切替りを返すAPI／RNあり。日＝前日、週＝7日、月＝28日 | 既存稼働経路。原因・未来を断定しない。短いmemoでも感情記録の集計価値は別に成立し得る。今回、本人データ・実端末の再検証なし |
 | 従来わたしマップ | 役割スイッチ／ルート／分かれ道／未観測領域を表示。旧builder・保存・latest／history／detail・renderer経路あり | 固定4step・汎用結果文を含む旧経路。完成目標の根拠付き観測グラフと同一視しない。V2へのglobal cutover未完了 |
-| V2観測ルート | 期間内の原入力と適格補足から五種node、明示順序・無方向共起、訂正・撤回を限定対応。source adapter／compiler／realizer、immutable保存、既存API分岐、RN表示あり | 一般日本語・全段階の理解は未完成。V1-D基盤とu102〜118は指定開発配置済み。最新内容修正をAPI744336c0で配置。通常本人生成→保存→再表示、保存identity独立照合、商品受入れは残る |
+| V2観測ルート | 期間内の原入力と適格補足から五種node、明示順序・無方向共起、訂正・撤回を限定対応。source adapter／compiler／realizer、immutable保存、既存API分岐、RN表示あり | 一般日本語・全段階の理解は未完成。V1-D基盤とu102〜118は指定開発配置済み。最新内容修正をAPI744336c0で配置。一般入力の内容品質・保存identity独立照合・商品受入れは残る。最新の累積/月次機構と7201確認は§44/45 |
 | P5 offline意味snapshot | 原3構文familyの元7field／18保持単位から同一private graph・文章・図・3段階保存再読。API666b285、新private型6／例外2 | 対象9file905成功。Plus・補足0・比較なしに限定。通常V2／SQL／DB／RNへ未接続。原文保持とprivate図payloadであり、一般文章品質・商品受入れは別 |
 | 守るもの・負荷・不明・不一致 | V2で本人明示の守る意向／現在負荷、対象付きunknown／conflictを文章・図へ接続 | 限定対応。一般的な保護・負荷理解や解釈仮説は未完成。旧v1の未実装表をV2の全未実装へ転用しない |
 | 期間比較 | 隣接等長期間のルート・注記・不明範囲・不一致を比較し保存・表示。前期間なし／比較不能も区別 | 比較SQL適用済み。設定手順はMash報告で、稼働値の独立取得なし。本人の比較成功・正式受入れ未成立。改善・悪化・原因を自動判定しない |
 | もしもルート／IF | 詳細設計あり、runtime未実装。現在の観測ルート＋本人が選ぶ分岐点・意向・制約→条件・負荷・未知を伴う1〜3候補を並列提示 | SELF_ONLY。health／medical、および他人の意図・反応・関係の結末を対象とするIFは対象外。最適解の順位・成功確率を付けない。生成・保存・API・RN・実機・受入れが残る |
 | SavedRouteIntent | 本人がIF候補から明示保存した関心方向を残す設計あり。runtime未実装 | 観測事実、仮想候補、本人の選択を分離。選択を実行済み・達成・失敗・性格へ昇格しない |
 | 最新・履歴・詳細 | 保存成果物、文章と図、期間を同じidentityで再読。認証・tier・期限・source変更を再検査するV2コードあり | 専用table適用済み。6201実機OK・6401送信は過去記録。後続10/10にAPI5c8bd8eを配置し、6501を送信し、「入力情報が少ないため、まだ分析を表示できません。」は本人表示確認済み。端末build独立照合、本文生成・保存再読・比較は未確認。latest再読とmonthly履歴は別経路 |
-| Emlis補足との接続制限 | 11/1 API7bbb4661で最大3本人ANSWERをowner/ID/round束縛で受け渡すよう修正し、744336c0で配置。原入力・補足・訂正を分離しAI生成文を本人sourceにしない | 複数ANSWERの旧全体拒否は解消。合成DB/providerの局所177件とCIは成功。通常実機の全導線・一般理解、累積/月次の実装・API/DB反映は§44、本人実機は未確認 |
+| Emlis補足との接続制限 | 11/1 API7bbb4661で最大3本人ANSWERをowner/ID/round束縛で受け渡すよう修正し、744336c0で配置。原入力・補足・訂正を分離しAI生成文を本人sourceにしない | 複数ANSWERの旧全体拒否は解消。合成DB/providerの局所177件とCIは成功。通常実機の全導線・一般理解は未確認。累積/月次の実装・API/DB反映と7201依頼修正の本人確認は§44/45 |
 
-詳細owner：[Analysis map](current_structure/03_analysis_current_structure.md)、[Analysis詳細設計](designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md) §7〜11・15〜16、schema §7・9.6。10/10の不足案内API5c8bd8e/6501と本人表示は過去記録として保持。最新共通APIは11/1の744336c0/dep-dbj853ou01pc73enjrt0 Live、最新RN配布はb8a43e5a/6701（本人起動済み）。Analysis本文生成・保存再読・比較の本人確認は未完。詳細手順は[第8回§8.5](weekly_reviews/Cocolon_Weekly_Review_20261024.md#details-analysis)。
+詳細owner：[Analysis map](current_structure/03_analysis_current_structure.md)、[Analysis詳細設計](designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md) §7〜11・15〜16、schema §7・9.6。10/10の不足案内API5c8bd8e/6501と本人表示は過去記録として保持。現APIは36713940/dep-dbjg0l8ae00c73e4cr20、RN製品b187b790/7201内部配布・依頼修正本人確認済み。一般入力のAnalysis内容品質は未確認。累積/月次機構・7201依頼修正の本人確認は§44/45。詳細手順は[第8回§8.5](weekly_reviews/Cocolon_Weekly_Review_20261024.md#details-analysis)。
 
 ## 6. Piece — 本人の意味を他者へ伝える
 
@@ -189,11 +191,11 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | 作業領域 | 次に解消すべき具体的未完了 |
 |---|---|
 | 本人宛応答の通常接続 | RN6701内部配布/本人起動後、実Auth→専用Bearer付き固定4B→実DB FINAL1→本人同本文再読を確認。CALL_STARTEDは再読後も1、active0。modelは停止し、保存readerを維持。初回配線完了を品質合格へ換算しない。11/2〜11/6はサーバー側品質改善、候補ごとのRN build不要。§37へ |
-| 学習済みAI・CMEE接続 | §30は4更新/保存reload/34生成後も6e1c不採用、旧重み保全を保持。11/1は機構準備、11/2〜11/6は華恋がGPU/サーバー側で品質比較・必要な学習・自由生成・候補保存を行う。前版の無期限保留は撤回し、§30末尾の新4生成は未実行の診断案として保持、閉鎖runを再開しない。提供toolは未指定時fit38固定、明示adapter SHA対指定に対応。最大18要求1800秒probeで、選んだ候補のサーバー側反映と本番提供は準備対象。API/保存/表示契約を保つ更新はRN再ビルド不要。最終候補だけ通常提供へ反映し最後に接続確認する |
+| 学習済みAI・CMEE接続 | §30は4更新/保存reload/34生成後も6e1c不採用、旧重み保全を保持。11/1は機構準備、11/2〜11/6は華恋がGPU/サーバー側で品質比較・必要な学習・自由生成・候補保存を行う。前版の無期限保留は撤回し、§30末尾の新4生成は未実行の診断案として保持、閉鎖runを再開しない。提供toolは未指定時fit38固定、明示adapter SHA対指定に対応。最大18要求1800秒probeで、選んだ候補のサーバー側反映と本番提供は準備対象。API/保存/表示契約を保つ更新はRN再ビルド不要。最終候補だけ通常提供へ反映し最後に接続確認する。最新の次着手は§45の分析4B接続準備で、GPUは最小CPU準備後の実出力確認時に用意する |
 | 10/24までの費用・4B選定履歴（当時の構成） | Flex24GBの旧月78,980生成・未測定の速度/起動仮定による運用費95,094円・赤字67,833円の試算は当時の構成の記録で、最新構成の原価ではない。[全仮定・再計算](observation_learning/model_selection/2026-10-24-production-economics/README.md)。旧4B実診断では24GBでLoRA保存・reload・16生成・回収を確認したが、FITは前後0/2。CPU指示修復API1dabc4fは54対象/pack11・合成2/2で、修正版は後続10/25にA4500 20GBで完走・回収済み、最新結果は§24。旧学習peak allocated14.954GiBを本番推論の必要VRAMへ流用しない。4bit/M4を第一候補とした§23は当時の華恋案で、現在の移行先はWindows／Mac未選定。公開API単価を独自育成版の原価へ流用しない。 |
 | Emlis | 一般入力と回答後の意味・自然な本文・有料差、本人実機の保存再読まで。API744336c0配置と通常本人確認を分ける |
-| Analysis | API744336c0に内容修正/最大3ANSWER対応を配置。§44で全期間累積・月次当時保存・寿命・月選択/現在比較・2/12/全閲覧を実装、API36713940/DB反映・CI成功。RNb187b790のiOS #72/7201を内部配布済み。一般理解、本人実機確認、IF/Savedは別残件。旧6501の不足案内表示は本人確認済みとして保持 |
-| Piece | API private5ON/public3OFFはLive。6601のApple90683は6701で解消、内部配布/本人起動済み。Pieceの本人保存→同owner履歴/詳細→Photos/Share、Android/backend receipt、商品受入れは未確認。§37へ |
+| Analysis | API744336c0に内容修正/最大3ANSWER対応を配置。§44で全期間累積・月次当時保存・寿命・月選択/現在比較・2/12/全閲覧を実装、API36713940/DB反映・CI成功。RNb187b790のiOS #72/7201を内部配布済み。一般理解の品質、IF/Savedは別残件。7201の依頼修正は本人確認済み。旧6501の不足案内表示は本人確認済みとして保持 |
+| Piece | API private5ON/public3OFFはLive。6601のApple90683は6701で解消、内部配布/本人起動済み。7001の画像生成・一覧・Photosは本人確認済み。Share/Android/backend receipt/公開/実課金と一般文章品質は残る。§41/43/45へ |
 | 全体・release | 自他所有／公開／削除、認証復帰、finish失敗の成功扱い・account切替後旧応答・公開visibility取得失敗時default、共有URL入口、通知配送等の通常実機経路と未受入れ品質 |
 
 この表は新しい作業の自動開始・GPU再起動・merge／deploy／公開の指示ではない。Mashの現行タスクを進め、対象の詳細ownerから具体的な一手を選ぶ。文書更新は商品品質の改善creditに数えない。
