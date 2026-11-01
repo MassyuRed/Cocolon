@@ -20470,3 +20470,10 @@ Mash承認のCM-01/T1をAPI02c0b943へ実装。既存Engine dispatchをそのま
 4Bpackの実native2教師、旧学習外EFREE6 proxy、実tokenizer/indexのCPU確認、context8192/max_new2048、1epoch2updateの診断コード、先退避・非学習reload・raw→CMEE consumerまで整備。教師も実本文も合成編集候補であり、学習済モデルの応答ではない。最大prompt5979+出力上限2048=8027、最大教師7856。入力・labelの切捨てなし、実VRAM/gradient/reloadは未実証。
 
 次は単価・上限時間/支出・実mount・Pod外退避先・停止担当を具体化した一回の16GB優先診断。未確定のplanではrun前に拒否、24GB自動再借用/epoch追加なし。新有料実行・通常有効化・実DB/Render/配布・正式Product Readは未承認/未実施として別に残す。全実出力はnew4B packのCPU結果、全pathは01A、詳細仕様はshared01/02/05。PRODUCT_NOT_CLEAR/正式0/3/全体54.50％を維持。
+
+
+## 2026-11-01 Analysis実4B前の最小接続順
+
+1. Analysis04#analysis-model-fields-probe-v1の範囲で、既存semantic_admissionへprivate要求/受口を追加。完全source/Safety/owner/版/guard/全文coverageを束縛し補足は明示拒否。
+2. 既存ObservedGraphと唯一realizerへtyped全field引用候補を追加。通常有限arm/旧P5を保持し、累積builderの明示offline引数だけへ接続。実graphに基づくcoverageと既存commit/readの同一文章/図再読を確認。
+3. 拒否・旧回帰を確認した時点で準備を閉じ、必要環境/時間/費用をMashへ伝えて少数実4B確認へ進む。大きな仕組みを作り切るまでモデル確認を遅らせない。合成成功/機構接続を理解品質/商品合格としない。

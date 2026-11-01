@@ -1826,3 +1826,19 @@ CPUの合成候補を通すだけで理解品質の合格にせず、大きな�
 GPU準備を連絡する際は、対象モデル/重みと接続口、行う少数入力、最大時間/費用、回収物/終了後の状態を具体化する。今からレンタルして待機させる必要はない。本番常時提供の方式/原価は、この一時的な接続・品質検証とは別の残件。共有4Bを使ってもEmlis生成本文を分析事実へ流用せず、各中核のsource/声/保存責務を維持する。
 
 今回の変更は調査結果・次の着手順・再開位置の記録。製品code/DB/Render/新build/GPU起動/モデル呼出し/学習は0。STRUCTURE_MAP_DELTA_NONE（既存実装owner/API/schema不変）。
+
+
+<a id="analysis-model-fields-cpu-20261101"></a>
+## 46. 11/1 — 分析4B最小受口をCPUで接続、次は実GPU確認
+
+Mashの本セッションでの分析残件開始指示に従い、§45.4の最小CPU準備を実装した。全機能00、作業ルール、必読incident、全体設計/全file地図と関連current owner、最新§45、実sourceを照合。System Context最新cacheは未成立のためfresh原本直接読取。原本はRN1c66add4/API36713940。Codex Work/GPT-6でroot華恋が実装・反映、別文脈agentはread-only監査のみ、Pro/Ultra/human受入れと偽らない。
+
+[実装/検査/次GPUの具体条件](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md)。新profileは普通の日本語を旧finite parserへ戻さず、完全原入力fieldの五種分類候補/UNRESOLVED→既存ObservedGraph/唯一realizer→累積projection/保存へ通す。主体/否定/時点/留保は原文全体へ保持し、意味解決済みとしない。可視labelは「原文・分類候補」、全対象はunparsedに残す。自由label/部分引用/原因/同義統合/関係を追加せず、補足/訂正/比較は明示UNSUPPORTED。旧finite/P5/通常ensureは不変。
+
+最終10file785 passed/FAIL0/SKIP0、95.91秒、既存warning1。新33と旧752で、反復/本文採取/subtestsを加算しない。実sourceのmapなし架空2recordに合成候補を通し、既存projection/private evidenceと実PGlite SQLのcommit/readにより、同文章/図/IDを生成禁止状態でcurrent/monthly再読、元入力削除purgeまで確認。監査で指摘した空refs gap・finish未検査・stale件数固定を修正した。これは機構probeで、一般意味理解・実4B品質・本人端末・商品受入れではない。
+
+最小CPU準備が通ったため、次にGPUが必要。24GB×1枚で固定Qwen3.5-4B base/保存fit38の2条件×架空2入力、最大4生成/追加学習0/再試行0。process最大1800秒、$0.60/h以下なら処理按分$0.30以内（準備/回収/保持等別）。raw/finish/時間/採否と同じ保存結果を回収し、終了時は所有model processを止める。Pod停止/削除/継続保持はMash指示に従う。実単価はレンタル画面で確認。GPUレンタル待ちを理由に大きな追加CPU機構を作らない。
+
+新API既存5製品owner＋test1、前提資料の関連差分。通常API有効化/本番DB書込/Render配置/新RN build/モデル呼出し/学習/GPU作成再起動0。Supabase接続はproject metadataの読取のみ。Renderはworkspace未選択を確認し、今回不要なservice操作は行っていない。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT、商品品質credit0/正式0/3/従来管理54.50％は据置。次は具体GPU確認で、4B接続品質完成とは呼ばない。
+
+API反映commit：`59489814a924eec29f4ee61386e6daa3bec1a49a`（既存PR3、製品5＋test1）。

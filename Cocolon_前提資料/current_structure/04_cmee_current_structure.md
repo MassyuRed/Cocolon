@@ -1931,3 +1931,8 @@ API c920f81aの`fixed_rows_reference_wire.py`が固定列/厳密型から元name
 新ownerは `cocolon_meaning_experience_engine/natural_reply.py`。既存source admissionとSafety ownerから、本人宛初回本文だけを生成する。5段semantic packet・意味checkpoint・3本文を通常応答の必須条件にせず、private `natural_reply.v1`と既存Q3保存/DTOへ接続した。本文は本人sourceやAnalysis graphへ逆流させず、分析材料はNOT_GENERATED。旧offline MODEL_PROFILEと既存意味/本文契約を緩めない。
 
 service/factory/通常reply/API、RNのpending→GET→同一保存本文を接続。GPU側提供口は固定local 4B/fit38・非学習・認証/回数/期限付きのsourceを準備。実モデル・稼働・実機・商品合格は未実施。新問い/補足・分析材料採用・Plus全蓄積検索は未完成。構成pathと検証範囲はEmlis mapの同日節、仕様は詳細02の同日節、実行結果はweekly§16/API開発資料。STRUCTURE_MAP_DELTA_PRESENT、正式0/3/54.50％据置。
+
+
+## 2026-11-01 — 実4B直前の明示offline field受口
+
+詳細は[実行準備](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md)、仕様は04#analysis-model-fields-probe-v1、weekly§46。既存semantic_admissionへAnalysisModelFieldsInputとprepare/receive、Engineへ明示型dispatch、intent_compilerへObservedQuotedField/任意node field、唯一realizerへ本人/集合/member/版/全文根拠再束縛の分類候補表示、analysis_cumulative_serviceへ明示offline引数を追加。通常ensure/旧finite/P5は不変。全fieldの候補分類は一般意味抽出ではなく、可視nodeがあっても全件unparsedを維持。補足/訂正・比較はprofile外、全量分割/関係/IF/Savedは残件。対象785成功と隔離SQL同文章/図/ID非生成再読を確認。実4B0、次にGPUを用意して最大4生成/学習0を確認する。STRUCTURE_MAP_DELTA_PRESENT。

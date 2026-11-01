@@ -5962,3 +5962,10 @@ API piece_source.pyの選択JSON根拠はprivate selection_contextsへ分離し�
 | tests/app-startup.test.js（新規）と既存Piece/subscription/screen tests | 遅い初期通信、owner切替、失敗とretry、mount/draft保持、v1/v2の測定/保持/保存/出力互換 |
 
 分析の画面・履歴・未読・通知・tutorialと課金表示catalogは、Mashの削除取消を受けfresh sourceへ戻した。構造差分は起動/Ranking/brandのみ。署名build/配布は後続。STRUCTURE_MAP_DELTA_PRESENT。
+
+
+## 2026-11-01 Analysis model field probe — 全変更file地図
+
+新production fileは0。API既存5owner：`ai/services/ai_inference/analysis_cumulative_service.py`（明示prepare/model_inputと実graph coverage）、`cocolon_meaning_experience_engine/engine.py`（明示private型dispatch）、同`cores/analysis/semantic_admission.py`（完全source要求/受信/Safety/全field/finish拒否）、同`intent_compiler.py`（ObservedQuotedField/任意quoted node）、同`observed_route_realizer.py`（artifact owner/集合/member/版/全文根拠照合から本人限定分類候補表示）。旧有限/P5/default経路は維持。
+
+新test：API `ai/tests/test_analysis_model_fields.py`（束縛/変異/補足訂正比較Safety/未解析/実SQL保存非生成再読）。新資料：`Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/{README.md,probe_requests.json}`（未実行GPU案と完全架空要求2件）。詳細設計01/04/05/06、current maps03/04、全機能00、最新weeklyを同期。対象785PASS、実4B/通常有効化/DB/RN変更0、商品品質未成立。STRUCTURE_MAP_DELTA_PRESENT。

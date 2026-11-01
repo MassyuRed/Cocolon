@@ -1652,3 +1652,17 @@ RNの現在/履歴/比較/根拠の取得はexpectedUserIdとowner/tier/request�
 3. 共通現在map、月選択、当時/現在の比較、根拠参照、案内・購読説明を接続する。
 4. 201件以上・古いFree原入力・複数補足・訂正・Safety混在、source競合、同月不変保存、2/12/全、降格/再加入、削除、owner/tier/選択の遅着を検査する。
 5. fresh branchへsource・設計・地図・議事録を反映し、SQL/API配置と必要な最終アプリ配布を個別に確認する。機械成功を一般言語品質や本人実機確認へ換算しない。
+
+
+<a id="analysis-model-fields-probe-v1"></a>
+## 2026-11-01 — 実4Bへ早く進む最小CPU接続
+
+Mashの分析残件開始指示とweekly§45.4を実行根拠とする。新private `analysis_model_fields.v1` は原入力の非空memo/memo_action全体を単位に、既存五種node又はUNRESOLVEDへ分類する最小の実モデル接続試験である。自由な分析文・因果・性格・別recordの同義統合を作る完成版ではない。通常生成を自動切替せず、明示offlineだけで既存ObservedGraph/唯一realizer/累積保存へ通す。
+
+requestはowner・元source集合/版・期間・snapshot guardを束縛し、原文field全体を欠落なく送る。候補は全fieldを一回ずつ返し、全文quote・scalar 0..lenの一致を要求する。自由labelや部分切出しは受けない。モデル分類自体は未検証の候補で、原文にない主体・肯否・時点の正解を定数で捏造しない。型付きquoted fieldはそれらをAS_WRITTEN_UNRESOLVEDとして原文全体に保持し、可視labelにも分類候補と明示する。既存有限命題/label再解析armは変えない。
+
+初回profileは比較なし・補足なしの小さな全source requestへ限定する。補足・訂正付きは原文復活を防ぐため明示UNSUPPORTEDとし、通常の補足/訂正経路は保持する。全sourceの既存Safety判定を維持する。対象の一部を黙って送らず成功にせず、入力が大きい場合も切捨てない。全量分割、subclause意味、一般補足/訂正、関係/共通点・IF/Savedは残件。
+
+通常累積builderの明示candidate引数を使う場合のみ、新graphからmappedを導出し、分類候補があっても全対象をunparsedへ残す。UNRESOLVEDはSOURCE_SCOPE gap、関係未確定はROUTE_CONNECTION gapへ残す。文章・図・private evidenceは既存のObservedSelfStructureMapとstorage ownerを使い、既存projection検査→commit/readへ渡す。HTTP/本番有効化、公開DTO/DB/RNのshape変更なし。既存safe_projectionの原文非コピー保証は旧有限armに維持し、新profileだけは本人限定の完全原文引用を分類候補として表示する。
+
+CPUは合成rawの引用/owner/版/guard/全量/補足拒否と同じ文章・図・保存再読を確認するだけ。一般理解品質の合格ではない。最小成功後、現Qwen3.5-4Bの少数実出力を同じ受口へ渡し、モデルの分類/未解決・出力形式・時間を主担当が読む。最初から追加学習を必須にせず、不足を見て次を判断する。

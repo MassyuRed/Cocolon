@@ -934,3 +934,8 @@ TodayQuestion/Echoes/Discoveriesの旧material集約は保持するが、新累�
 
 
 次工程の既存owner：analysis_cumulative_service.build_cumulative_map→engine.generate、cores/analysis/semantic_admission（P5限定）、intent_compiler、observed_route_realizer（有限label再解析）、既存artifact/private根拠/保存readerとRN CumulativeWatashiMapView。新規一般model受口の具体仕様・互換・実装順は共有設計01/Analysis詳細04/schema05/実装順06を更新してから実装する。現在のP5を汎用接続済みにせず、単なるフラグ解除やmodel文章のnode直入れを完成としない。今回の製品実装/型/API/schema/生成モデル/稼働の変更は0。調査入力・結果・限界と再開手順はweekly§45へ集約し、別の管理systemを新設しない。STRUCTURE_MAP_DELTA_NONE。
+
+
+## 2026-11-01 — 実4B直前の明示offline field受口
+
+詳細は[実行準備](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md)、仕様は04#analysis-model-fields-probe-v1、weekly§46。既存semantic_admissionへAnalysisModelFieldsInputとprepare/receive、Engineへ明示型dispatch、intent_compilerへObservedQuotedField/任意node field、唯一realizerへ本人/集合/member/版/全文根拠再束縛の分類候補表示、analysis_cumulative_serviceへ明示offline引数を追加。通常ensure/旧finite/P5は不変。全fieldの候補分類は一般意味抽出ではなく、可視nodeがあっても全件unparsedを維持。補足/訂正・比較はprofile外、全量分割/関係/IF/Savedは残件。対象785成功と隔離SQL同文章/図/ID非生成再読を確認。実4B0、次にGPUを用意して最大4生成/学習0を確認する。STRUCTURE_MAP_DELTA_PRESENT。

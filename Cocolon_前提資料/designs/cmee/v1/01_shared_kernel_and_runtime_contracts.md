@@ -1296,3 +1296,8 @@ Mashの実行指示と第9回§11に従い、本人宛の文章と分析材料�
 通常submitの外側3秒から、初回admission〜生成を強参照付きtaskで分離。serviceの30秒attempt/全処理期限、SQL版/owner/context/期限を保持。STARTED先行、RECEIVED保存、ACK不明fresh回収、GET非生成を接続。通常API/DTO/DB schema・依存は不変。構成はEmlis map、実装順/未完成は詳細02の同日節。providerは設定欠落中でも保存済読取を維持し、新profile書込は不可。
 
 GPU提供口sourceは準備したが、実4B品質・GPU loader成立・常時host方式・原価・配置・端末・商品受入れは未確認。新profileの任意問い/補足・分析材料生成・Plus全蓄積の関連検索は未接続。本人限定検証の成立を公開提供の成立へ拡大しない。
+
+
+## 2026-11-01 Analysisの最小model接続境界
+
+詳細は[Analysis04](04_analysis_v1d_v1e_detailed_design.md#analysis-model-fields-probe-v1)。新private analysis_model_fields.v1は本人原入力から直接要求し、Emlis生成本文を意味sourceにしない。原文field全文を保つ分類候補を通常ObservedGraph/唯一realizerへ明示offlineで接続する。P5 v1/他core/通常defaultを保持し、モデルの位置整合を意味品質の保証にしない。補足/訂正・比較・全量分割は初回profile外。
