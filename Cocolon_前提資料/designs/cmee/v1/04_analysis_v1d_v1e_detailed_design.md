@@ -1715,3 +1715,83 @@ root華恋/Codex Work GPT-6が実装・読解・反映、別文脈agentはread-o
 固定Qwen3.5-4B/revision851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a、保存fit38 SHA ad8b89e8974df9bfe7e804b8f67bbaac59e6cbb37042c3254fb58ffb64230d0a/config ef4b1aef621fb4e234ce6a05601efb62a987c3cf5d40f3995ca1b72200bab145、既存load_generator/pins/BF16/SDPA/non-thinking/greedy/context8192/max2048/各23秒を保持。tokenは実input_ids.shape[-1]で測定し切捨てない。600秒SIGALRMはimport/tokenizer/model読込/推論を含むhard bound、各23秒は既存StoppingCriteria期限。新out必須で上書き/二重実行しない。
 
 runnerはcall前のrequest/messages記録→元raw/finish/response保管→新受口→同artifact/projection/text/private/coverageを回収する。成立時の再読は同一process内file＋既存validatorで、cold再開や実SQL保存と呼ばない。固定synthetic guardをSQL guardへ書換えない。全件拒否/全UNRESOLVEDもそのまま記録し、再生成しない。終了後はrootが外側で所有process/GPU不在と原本回収を確認。Pod停止/削除はMash指示に従う。GPUは本ターン実行0で、次の新実行指示から行う。
+
+
+<a id="analysis-model-units-proposal-20261102"></a>
+## 2026-11-02 — 根拠付き意味単位の最小案（提案・CPU設計のみ）
+
+status=`PROPOSED_NOT_IMPLEMENTED`。最新原本はCocolon d78185cb/API f7a13896、weekly§49の実4B新4件は消費済みで再利用しない。Mashの「分析構造の残件作業を続けて」により、その次作業であるCPU設計を具体化した。今回は製品source/受口/型/既存testの変更0。CPUでは既存source prepareと座標検算だけを実行し、Engine生成/新reader/GPU/学習/SQL/通常有効化0。以下の新private契約の実装は別の具体承認対象であり、設計保存だけで採用済みにしない。
+
+### 商品上の不足と、既存資産の再利用範囲
+
+実4B接続は成立したが、field全体の一分類では、後悔の否定と他者の考えの不明、昨日の理解困難と今日の解決・感情を分けられない。目標は、元文脈を持つ意味候補と従属内容を、同じ根拠から読める文章・図へ結び付けること。分類受理件数を増やすための追加checkerではない。
+
+| 現物owner（API `ai/services/ai_inference/cocolon_meaning_experience_engine/` 配下） | 再利用と境界 |
+|---|---|
+| `contracts.py` EvidenceRef、`cores/analysis/source_adapter.py` source_field_text | 元fieldの部分範囲と元envelopeのUTF8範囲へ戻れる。位置一致は意味の証明ではない。補足専用scoped_source_viewを架空の別record作成へ流用しない |
+| `cores/analysis/intent_compiler.py` ObservedProposition / ObservedGraph | 主体・格・述語・否定・時点等の表現資産はある。通常propositionの有限再解析条件はそのまま保持 |
+| `cores/analysis/semantic_admission.py` P5 unit/group/qualifier | 全文groupと部分単位・従属scopeを併存させる前例。P5は原3family/Plusと期待packet完全一致に閉じるので、AF01/02へ一般化済みとは扱わない |
+| `cores/analysis/observed_route_realizer.py` _safe_label | 既存quoted armは全文・propositionなし・AS_WRITTEN_UNRESOLVED専用。部分quoteへ書き換えない。通常proposition armの完全な有限再解析も弱めない |
+
+現有限inventoryをAFの語句だけで増やす案、全文専用v1へ部分引用を押し込む案、全substring候補を大量列挙する案は採らない。**新private `analysis_model_units.v1` と候補graphへ限定し、既存source・graph所有者・唯一realizerを使う**ことを推奨する。通常ObservedGraph/safe projectionへ未検証の部分意味を投入せず、旧P5/field/field-kindsの受理範囲も変えない。
+
+### 提案するモデル入出力
+
+入力はfield-kindsと同じ、source側で決めた順の整数field/field_path/text。新schema名は `cocolon.cmee.analysis_model_units.v1`。実call前のfull request_ref、owner/元版/guard、実messages hashと、返却後raw SHA/finish/rawをtrusted callerが対応付ける。署名やmetadataの自己認証とは呼ばず、raw単独の取込み・旧rawの変換・自動fallbackはしない。
+
+モデルは原文から意味候補を**逐語引用で選ぶ**。長いID、文字位置、文字数、生成した説明文、原因・性格・相手の意図を返させない。旧runでquoteは保持された一方、end/IDを誤った観測を踏まえる選択で、今後のquote選択精度の保証ではない。source側は重なる出現も含む一意な完全一致から位置を導出する。複数一致・不存在は拒否し、最初の一致採用、文字正規化、曖昧照合、補修をしない。反復句は一意に特定できる長い引用が必要になる制限を明記する。
+
+raw rootはexact `fields`、各fieldはexact `field,units`、全fieldを入力順に一回ずつ返す。`units`は0..8件、各unitは次のexact5key。空unitsも未解析として保持する。
+
+| key | 新private契約の提案 |
+|---|---|
+| `quote` | 同じ元field内で一意な、空でない逐語引用。field本文の置換や別source化はしない |
+| `node_kind` | path候補は既存五種の一つ、本人記載の不明/従属scopeならnull。新たな性格/感情分類を追加しない |
+| `parent` | path候補と本人記載の不明はnull。従属scopeは同field内のunit番号1..N（bool不可）。自己参照・循環・field跨ぎ不可、根のcarrierまで最大2段 |
+| `scope_role` | path候補はnull。本人記載の不明はWRITTEN_UNKNOWN。従属scopeはCONTENT_TARGET / UNKNOWN_CONTENT / ATTRIBUTIVE_CONTENT / TE_CONTEXT / WRITTEN_REASONの一つ。本人記載の不明/scope自体を独立factやroute nodeにしない |
+| `qualifiers` | 0..6件、各exact `kind,quote`。kindはNEGATION / EPISTEMIC_EXPRESSION / RELATIVE_TIME / WRITTEN_MODIFIER / REASON_MARKER / EXPLICIT_ACTOR。quoteはそのunit内で一意な完全一致。意味の付与先は当該unitだけ |
+
+unit番号は返却listの位置。path候補のparent/scope_roleは両null、WRITTEN_UNKNOWNはnode_kind/parentが両null、従属scopeのnode_kindはnullとする。従属scopeだけで終わるtreeは拒否し、各scopeを一つのpath候補又はWRITTEN_UNKNOWNへ束縛する。UNKNOWN_CONTENTは不明carrierの配下だけに許可する。閉じたkey、strict型、上限、引用位置、親の整合性は構造検査であり、分解・分類・scope割当の意味妥当性を証明しない。WRITTEN_UNKNOWNを通常UnknownGap又はpath nodeへ変換しない。
+
+主体は未解決を既定にする。EXPLICIT_ACTOR候補がないことを原文の主体省略の証明にせず、原文が省略している場合もownerからSELFを補わない。EXPLICIT_ACTORが書かれてもモデル提案のままで、ノードの主体解決へ自動昇格しない。NEGATIONの引用を親子や別unitへ伝播せず、RELATIVE_TIMEをrun日付・別述語へ転用しない。EPISTEMIC_EXPRESSIONは書かれた不明/理解困難の表現候補であり、未知の他者意図・現在の不能・材料不足gapを同一化しない。
+
+### CPUで具体化した表示案（実モデル出力ではない）
+
+公開済み架空AF01/AF02の3fieldを使い、華恋が手で置いた9unit（path候補3＋本人記載不明候補1＋従属scope5）と7qualifierを元sourceへ戻した。既存source prepareから導出し、全16引用のscalar/元envelope UTF8/quote一致を確認。全文3fieldを置換せず保持し、unitに割り当てていない範囲も明示した。CPU例は[semantic_units_cpu_example.json](../../../observation_learning/trials/2026-11-01-analysis-model-fields/semantic_units_cpu_example.json)。これは新受口実装・意味採用・Engine生成・教師・凍結評価ではない。CPU例のJSONは説明用のbound previewで、まだ実model wire packetではない。
+
+| 元の一分類表示 | 意味単位と従属内容の表示案 | 確定しないこと |
+|---|---|---|
+| AF01 memo全体が思考候補 | 「後悔してはいない」に対象「断ったこと」と否定候補。「分からない」に内容「相手がどう思ったか」 | 断った行動を否定しない。他者の実際の考えや、両記述の因果を補わない |
+| AF01 action全体が行動候補 | 「今日の集まりへの誘いは断った」に原文の理由scope「疲れていたので」。「今日の集まり」は書かれた修飾として残す | 「今日」を拒否した時刻へ移さない。理由の記載を検証済み因果や性格へ昇格しない |
+| AF02 memo全体が結果候補 | 「うれしい」にte文脈「今日は解けて」、その対象に従属する「昨日は分からなかった問題」を保持。昨日/今日を各scopeへ留める | 「解けて」を独立fact nodeにせず、原文にない努力・能力・改善を補わない。感情の理由も自動確定しない |
+
+元fieldは実際のsource版・記述時点に束縛する。AF01の「でも」等、AF02の句読点/🙂を含む未割当範囲は、全文contextと残範囲として残す。文字範囲をすべて分類したことにせず、**両recordはunparsedのまま、route edge0**。本人が「分からない」と書いた内容とengineの未解析を別に保持する。表示案も、各field全文と未検証の単位/scopeを同時に読める配置を必須とする。部分候補だけの独立表示・通常mapへの採用は含めない。
+
+### graph・文章・保存の実装範囲案
+
+既存Analysis graph所有者の中で、通常ObservedGraph/P5採用済み意味とは区別したimmutableなprivate unit-candidate graphを追加する。全文group・部分単位・従属scopeという既存P5の表現資産を参考にするが、P5のadmission/型/期待packetは一般化しない。新しい有限propositionや`ObservedQuotedField`へ変換しない。path候補/本人記載不明/配下scope/qualifier、元field全文と版、各部分EvidenceRefを保持し、通常UnknownGapを本人の不明の代用品にしない。polarity/modality/temporal_scopeはAS_WRITTEN_UNRESOLVED、actorも未確定を維持する。
+
+文章/図は既存の唯一realizerに明示のprivate candidate armを追加し、**元field全文を各fieldにつき一回、部分候補と同じ表示へ必ず併記する**。各候補は「未検証の意味候補」と示し、部分引用だけのlabelは返さない。モデルが「後悔」だけを選び否定を落とした場合も、否定を含む元全文を省けず、意味保持成功とは数えない。source内parentは従属候補でObservedEdgeへ変換しない。新しい自由作文、別本文作者、因果edge、複数recordの共通点/反復、意味解決済み表示を加えない。通常ObservedGraph/safe projection/HTTP/RNへは接続しない。候補labelを元sourceへ逆流させない。
+
+caller管理の既存file保存方式へ、synthetic request・response binding、元全文を含むprivate candidate payload、同じcandidate ID/graph/text/根拠/coverageを保存する。新しい保存service/helperを作らず、新private型の厳密なpayload検査と保存再読は既存analysis owner内で実装する。再読時は生成を禁止し、同ID・同じ文章/図を保つ。今回は未検証候補のprivate file再読までで、SQL commit、cold meaning checkpoint、実DB、通常有効化を含めない。現在のprivate_storage_evidence allowlist、通常累積artifact保存、公開projection契約は変えず、新候補をそこへ入れない。
+
+### 具体的な変更pathと実装順（承認後のCPU一作業）
+
+APIの製品既存exact5、新test1を変更範囲とする。新production file/helper/dependencyは0。
+
+1. `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py`：新private input/responseとstrict reader、trusted call binding、元field/部分quote再束縛を実装。旧3profileのreader/範囲は保持。
+2. 同`cores/analysis/intent_compiler.py`：新immutable private unit-candidate graph。path候補/本人記載不明/従属scopeと全文/親/qualifierを保持。通常ObservedNode/Graph、有限/P5の意味型・compilerは変更しない。
+3. 同`cores/analysis/observed_route_realizer.py`：唯一作者にexact private candidate graphの検証・全文併記の文章/図を追加。通常quoted/proposition/safe projectionの現検査とkeyを保持。
+4. `ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py`：新exact input型のoffline dispatchだけを追加。
+5. `ai/services/ai_inference/analysis_cumulative_service.py`：既存source prepareを使う明示offlineの新prepare/build関数。通常build/ensure/model_input分岐は切り替えず、新候補専用呼出しで全record未解析のcoverageと空候補を保持。
+6. 新 `ai/tests/test_analysis_model_units.py`：上の同じ候補がgraph/文章/図/file再読まで保たれることと、旧経路非破壊を確認。旧test/凍結fixtureは書換えない。
+
+先に実装・CPUの合成候補→全文併記のprivate graph/text→同file非生成再読までを同じ単位で確認し、受口だけ作って成功扱いしない。quote一意性/重なる反復/Unicode・絵文字、親参照/循環/上限/field跨ぎ、不明carrierの別扱い、主体未解決、否定と不明、時点の付け先、理由/te従属、全文・残範囲、owner/版/guard/messages/raw/finishの対応、旧field-kinds/v1/P5/通常有限/累積の必要回帰を対象とする。「後悔」だけの不十分候補でも全文が併記され、意味成功へ昇格しない対照を含める。テストは構造・保持の検証で、正しい意味分解の一般品質試験へ数えない。
+
+このCPU実装では実モデル生成/学習/GPU/外部AI/依存追加/DB/公開API/DTO/RN/Render/merge/deploy0。追加料金0、CPU検証process累計上限600秒（編集・調査別）、対象失敗やscope外変更が必要なら事実を保存して止め、契約を緩めない。CPU完了後はそこで閉じ、実4Bの新要求・回数・予算は結果を踏まえて別に具体化する。旧GPU4callの承認を使い回さない。
+
+### 今回の結論と承認境界
+
+現在の全文専用契約のまま一般的な意味単位を採用することはできない。今回の新private wire/typed candidate graph/全文併記の部分候補表示は、Rule18 §11.3の「contract、acceptance…を追加、変更」に該当する実装案として、LEVEL_3で別承認を求める。CPU設計と既存資料へのproposal保存は今回の継続指示に基づき実施し、新製品契約そのものは未実装・未採用。実行modelはCodex Work/GPT-6、root華恋が設計・検算・統合・write、別文脈agentはread-only監査のみ。Pro/Ultra/human品質受入れとは称さない。latest System Context cache未成立のためfresh原本fallbackを使用。
+
+primary=BLOCKER_NARROWED（意味候補の分割/採用に必要なprivate差分を具体化）、商品credit0・正式0/3・管理54.50％据置。STRUCTURE_MAP_DELTA_NONE（active owner/契約/source変更0、提案と説明用CPU例だけ）。next exact1は上記exact5＋新test1のCPU実装・合成候補の全文併記graph/文章とfile再読まで、WORK_ULTRA_REQUIRED相当のWork環境でroot単独writer。通常商品mapへの橋渡し・一般意味品質はこの単位の完了条件へ含めない。Mash承認前の製品effect0、automatic_progression=false。

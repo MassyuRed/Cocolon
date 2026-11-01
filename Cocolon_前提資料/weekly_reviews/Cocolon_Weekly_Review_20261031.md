@@ -1941,3 +1941,17 @@ private原本 `cocolon-analysis-field-kinds-gpu4-result-20261102.zip`、Library 
 root華恋/Codex Work GPT-6が実行/読解/統合、別文脈agentはread-only監査のみ、Pro/Ultra/human品質受入れではない。primary=限定TECHNICAL_CREDIT（実4B→新受口→既存graph/text→file再読）、商品credit0/正式0/3/管理54.50％据置。製品source/型/契約/DB/通常有効化/Render/RN build変更0、両Draft PRは未merge。STRUCTURE_MAP_DELTA_NONE。最新cache未成立のfresh原本fallbackを保持。
 
 次はfield全体の一分類から、主体/否定/時点/留保を保った根拠付き意味単位へ分け、原文に明記された理由/時間差だけを整理するCPU設計。既存source/graph ownerを使い、受口・保存checkerを増築することを次の主成果にしない。追加GPU/学習/通常有効化は自動実行しない。
+
+
+<a id="analysis-model-units-design-20261102"></a>
+## 50. 11/2 — 根拠付き意味単位のCPU具体案、実装は別承認対象
+
+Mashの分析残件継続指示を受け、§49の実4B接続4/4から、whole-fieldの一分類では意味を分けられない不足へ戻った。全機能00、全体設計/01A/Bのfile地図、current maps03/04、最新weekly、Analysis設計とAPI f7a13896の現物を確認。System Context最新cache未成立のためfresh原本を直接読む。通常の有限proposition/P5には部分意味の表現資産があるが、field-kindsの全文quoted armは部分引用用ではなく、P5も原3familyに閉じる。
+
+[Analysis設計の具体案](../designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#analysis-model-units-proposal-20261102)に、既存source/graph所有者/唯一realizerの中で新private analysis_model_units.v1を追加する最小範囲と実装順を記載。逐語quote→一意位置導出、path候補と従属scope、本人記載不明の別carrier、未解決の主体、否定/時点/修飾/理由の保持を扱う。部分候補だけで否定/留保を隠さないよう、元field全文の同時併記を必須とし、通常ObservedGraph/safe projectionへ投入しない。新helper/checkerや別作者は作らない。
+
+[CPU例](../observation_learning/trials/2026-11-01-analysis-model-fields/semantic_units_cpu_example.json)は公開済み架空2入力・3fieldへの華恋の手設定。9unit（path候補3＋本人記載不明1＋従属scope5）と7qualifier、全16引用で元sourceのscalar/元envelope UTF8範囲が一致。全文と未割当の接続語/句読点/🙂等を保持、全2record未解析・route0。モデル出力・意味妥当性の検証・教師・凍結評価ではない。新受口実装/Engine.generate/model call/追加学習/SQL0、製品source/型/契約/既存test/依存/本番/Render/RN変更0。
+
+root華恋/Codex Work GPT-6が設計・sourceへの検算・統合・write、別文脈agentはread-only監査のみ。監査で、モデルがactor候補を出さないことと原文の主体省略を同一化しない点、部分候補だけを表示しない点を明確化した。Pro/Ultra/human品質受入れとは呼ばない。primary=BLOCKER_NARROWED、商品0/正式0/3/管理54.50％据置、STRUCTURE_MAP_DELTA_NONE（active構造の変更0）。
+
+次exact1は、設計のAPI既存製品5＋新test1に新private受口/候補graphをCPU実装し、全文併記の文章/図と同fileの生成禁止再読を検証する一作業。追加料金/GPU/学習/SQL/通常有効化0。新private wire/typed candidate graphを追加するためRule18§11.3のLEVEL_3で別承認を求める。今回の継続指示で実装承認済みにはせず、前回GPU承認の再利用・追加生成0、automatic_progression=false。

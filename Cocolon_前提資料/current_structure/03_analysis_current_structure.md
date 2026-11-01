@@ -961,3 +961,10 @@ Mash承認の固定新4生成をCocolon c0859cfb/API f7a13896から一回実行�
 同一入力のbase/fit38 rawは一致。全record未解析1・関係0・AS_WRITTEN_UNRESOLVEDを維持し、whole-field分類から否定/不明/昨日・今日/解決/感情を分ける意味処理は未達。sourceによる原文再投影を理解成功へ数えず、fit38優位/一般品質/商品受入れにしない。旧v1の0/4とは新形式の別run。結果原本はprivate保存と読み戻しhash照合済み。詳細は[新実結果](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#field-kinds-gpu4-result-20261102)、最新weekly§49。
 
 所有推論process/GPU compute-apps空、Pod Stop/削除/再起動0。製品source/型/契約/DB/通常有効化/Render/RN変更0。承認の4callは消費・probe閉鎖。次は既存source/graph ownerで根拠付き意味単位と主体/否定/時点/留保、原文に記載された理由/時間差を扱うCPU設計。限定TECHNICAL_CREDIT/商品credit0、STRUCTURE_MAP_DELTA_NONE（今回は実行観測のみ）。
+
+
+## 2026-11-02 — 意味単位のprivate候補graph案（提案・未実装）
+
+実4B field-kindsの4/4後、全文一分類の不足を既存の意味型/EvidenceRef/P5/realizerへ戻って確認。[Analysis設計の具体案](../designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#analysis-model-units-proposal-20261102)では、原文quoteから位置を導出し、親scope/否定/不明/時点を全文contextと一緒に表示する新private analysis_model_units.v1を提案。本人記載の不明はpath node/UnknownGapへ入れず、主体未解決・全unparsed・route0。通常ObservedGraph/safe projection/HTTP/RN非接続、旧P5/全文quotedの受理範囲は保持する。
+
+新説明fileは既存trial配下の[semantic_units_cpu_example.json](../observation_learning/trials/2026-11-01-analysis-model-fields/semantic_units_cpu_example.json)。華恋の手設定9unit/qualifier7を既存sourceへ戻した16引用の座標一致のみで、新受口/意味採用/実モデル/Engine生成は0。新private実装はAPI既存5＋新test1のCPU一作業として別承認対象。通常商品mapへの橋渡し・一般品質は未達。最新weekly§50、STRUCTURE_MAP_DELTA_NONE（今回active source/契約/型は変更0、将来案のnavigationのみ）。

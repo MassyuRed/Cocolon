@@ -3121,3 +3121,8 @@ API `f7a1389679f15dbb9f24c40c0c5ac0058423c106` の既存製品3owner：`ai/servi
 新file地図：API `ai/tests/test_analysis_model_field_kinds.py`（call/元source束縛・strict番号/JSON・旧互換・実隔離SQL保存再読）。Cocolonの既存trial配下に `field_kinds_probe_requests.json`（新形式の既見架空AF01/02）、`field_kinds_probe.py`（未実行の新4call/600秒one-shot）、`field_kinds_cpu_example.json`（合成graph/文章/coverage）、`field_kinds_cpu_results.json`（重複除外のCPU実結果）を追加。新production owner/別作者/公開wire/DB/RN/依存定義0。
 
 最終819PASS（新34＋旧785）、共有owner identity別1PASS、FAIL/SKIP0。合成candidate→既存graph→隔離SQL commit→同図/文章/IDの生成禁止current/monthly再読・元source削除purgeを確認。実4B改善/意味品質/商品合格ではない。次GPUは新4生成/追加学習0/最大600秒の具体案まで、今回実行0。詳細はAnalysis04#analysis-model-field-kinds-v1、trial README#field-kinds-cpu-20261102、weekly§48。STRUCTURE_MAP_DELTA_PRESENT（新明示private wire/inputと既存graph責務の接続）、限定TECHNICAL_CREDIT/商品0/正式0/3/54.50％据置。
+
+
+## 2026-11-02 — 意味単位の設計候補と説明file（runtime変更0）
+
+既存Analysis設計04へ[analysis-model-units-proposal-20261102](designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#analysis-model-units-proposal-20261102)を提案として追加。新fileは `Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/semantic_units_cpu_example.json`（公開済み架空例の手設定unit/qualifierを元source座標へ戻した説明用データ、実モデル/教師/新受口ではない）。新production owner0。source/graph/唯一realizerの既存5ownerを使う将来のCPU実装案であり、新private契約は承認前・未実装。通常ObservedGraph/safe projection/P5/field-kinds/DB/RNは変更しない。現在地は00/current03/04/weekly§50。STRUCTURE_MAP_DELTA_NONE（提案navigationと説明fileのみ）。

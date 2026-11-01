@@ -1,6 +1,6 @@
 # Analysis — 最小field接続と実4B probe
 
-**最新：11/2、新field-kinds受口で実4Bの新4生成を一回完了。受理・同artifactの図/文章のファイル再読は4/4、process21.510225秒、学習/再試行0。全record未解析・関係0を維持し、意味分解/一般品質は未達。最新は末尾[実結果](#field-kinds-gpu4-result-20261102)。旧v1の受理0/4も履歴保持。**
+**最新：11/2、実4Bの新field-kinds受理・file再読4/4は[実結果](#field-kinds-gpu4-result-20261102)に保持。その次の根拠付き意味単位は[CPU設計案](#semantic-units-cpu-design-20261102)まで具体化。新受口・意味採用は未実装、GPU追加0。旧v1受理0/4も履歴保持。**
 
 2026-11-01 JST。開始原本：Cocolon PR30 `1c66add4fdf8f5ded18f7443d6b91b1771998244`、API PR3 `36713940ea82e217fab8a7c0a738a33f21df1c4d`。Mashの分析残件開始とweekly§45.4に従う。Codex Work/GPT-6、root華恋が実装/統合/反映、別文脈agentはread-only監査のみ。独立Pro/Ultra又はhuman品質受入れとは呼ばない。System Context最新cacheは未成立のまま、fresh原本fallbackを使用。
 
@@ -142,3 +142,15 @@ base/fit38は同一入力にbyte一致のrawを返した。AF01はmemo=ATTENTION
 root華恋/Codex Work GPT-6が実行・元出力読解・統合・反映し、別文脈agentはread-only監査のみ。Pro/Ultra/human品質受入れとは呼ばない。System Context最新cacheは未成立のままfresh原本fallback。primary=TECHNICAL_CREDIT（実4B→新受口→既存候補graph/text→同ファイル再読）、商品credit0/正式0/3/管理54.50％据置。製品source/型/契約/DB/通常有効化/Render/RN build変更0、両PRはDraft/open/unmergedを維持。STRUCTURE_MAP_DELTA_NONE（今回は既存実装の実行観測と資料差分のみ）。
 
 次の一作業は、既存source/graph所有者の中で**field全体の一分類から根拠付き意味単位へ分けるCPU設計**。主体/否定/時点/留保を保ち、不明を確定しない。原文に明記された理由/時間差と、推測の因果/性格/別recordの関係を区別する。受口・保存checkerの増築を次の主成果にせず、今回2例は残件の説明材料として扱い、固定教師や一般品質の合格例へ転用しない。
+
+
+<a id="semantic-units-cpu-design-20261102"></a>
+## 11/2 — 全文文脈を併記する意味候補のCPU設計（未実装）
+
+Mashの「分析構造の残件作業を続けて」により、実4B接続後のwhole-field一分類という不足へ戻った。既存の部分EvidenceRef、P5の全文group/意味unit/従属scope、通常ObservedPropositionとrealizerの検査を確認。意味型の資産はあるが、現在の全文専用field-kindsや有限P5へ一般部分意味をそのまま採用する受口はない。
+
+[具体案・private wire・表示条件・exact変更path・実装順](../../../designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#analysis-model-units-proposal-20261102)を既存Analysis設計へ保存。新private analysis_model_units.v1で原文quoteを選び、sourceが一意な位置を導出する案。親scopeと否定/不明/時点/修飾の候補を保持し、元field全文を部分候補と必ず同時表示する。本人記載の不明は独立carrierで、通常path node/UnknownGapへ変換しない。主体未解決、全record未解析、route0、通常ObservedGraph/safe projection/HTTP/RN非接続を維持する。
+
+[CPU説明例](semantic_units_cpu_example.json)は華恋の手設定で、実モデル出力/教師/凍結評価ではない。既存source prepareから架空AF01/AF02の3fieldを取得し、9unit（path候補3、不明候補1、従属scope5）と7qualifierの全16引用で、元fieldのscalarと元envelope UTF8範囲・quote一致を確認。全文と残範囲を残す。主体の既定値は未解決へ修正し、候補欠落を原文の主体省略へ読み替えない。根拠の機械的一致を意味成功に数えない。新reader/Engine.generate/model call/学習/SQL0、製品source/test変更0。
+
+次の候補はAPI既存製品5＋新test1へCPU実装し、合成候補→全文併記のprivate graph/text→同file非生成再読まで一単位で検証するもの。GPU・追加学習・DB・通常有効化は含めない。これはprivate契約追加なのでRule18§11.3のLEVEL_3で別承認対象。前回GPU4callは消費・閉鎖のまま。今回primary=BLOCKER_NARROWED、商品0/正式0/3/54.50％据置、STRUCTURE_MAP_DELTA_NONE（提案と説明用CPU例のみ）。
