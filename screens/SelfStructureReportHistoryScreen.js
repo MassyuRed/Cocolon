@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
@@ -21,6 +21,7 @@ import { useTheme } from "../theme/ThemeContext";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { useSubscription } from "../SubscriptionContext";
+import { useAuth } from '../AuthContext';
 import {
   canExportWatashiMapPdf,
   canViewWatashiMapHistory,
@@ -242,6 +243,13 @@ export default function SelfStructureReportHistoryScreen({
   const { tier: subscriptionTier, loading: subscriptionLoading } = useSubscription();
   const isDark = themeName === "dark";
   const viewerTier = normalizeWatashiMapTier(subscriptionTier);
+  const { session } = useAuth();
+  const scopeKey = `${session?.user?.id || ''}:${viewerTier}`;
+  const scopeRef = useRef(scopeKey);
+  scopeRef.current = scopeKey;
+  const requestRef = useRef(0);
+  const openRequestRef = useRef(0);
+  const [loadedScope, setLoadedScope] = useState(null);
   const historyAccessible = canViewWatashiMapHistory(viewerTier);
   const historyRetentionLabel = useMemo(
     () => getWatashiMapHistoryRetentionLabel(viewerTier),
@@ -281,7 +289,13 @@ export default function SelfStructureReportHistoryScreen({
   const title = `${TYPE_LABEL[reportType] || "わたしマップ"}の履歴`;
 
   const load = useCallback(async ({ append = false, offset = 0 } = {}) => {
+    const seq = ++requestRef.current;
+    openRequestRef.current += 1;
+    const active = () => scopeRef.current === scopeKey && requestRef.current === seq;
     setErrorMsg("");
+    if (!session?.user?.id) {
+      setRows([]); setLoading(false); setErrorMsg('ログインしてから、もう一度開いてください。'); return;
+    }
     if (!historyAccessible) {
       setRows([]);
       setHasMore(false);
@@ -293,29 +307,36 @@ export default function SelfStructureReportHistoryScreen({
     if (append) setLoadingMore(true);
     else setLoading(true);
     try {
+      if (!append) await apiPost('/self-structure/monthly/ensure', {}, { expectedUserId: session.user.id, timeoutMs: 60000 });
+      if (!active()) return;
       const json = await apiGet(
-        buildSelfStructureReportHistoryPath({ reportType, limit: HISTORY_PAGE_LIMIT, offset })
+        buildSelfStructureReportHistoryPath({ reportType, limit: HISTORY_PAGE_LIMIT, offset }),
+        { expectedUserId: session.user.id }
       );
+      if (!active()) return;
       const baseRows = Array.isArray(json?.items) ? json.items : [];
-      const readSet = await fetchReadReportIdSet(baseRows.map((r) => r.id));
+      const readSet = await fetchReadReportIdSet(baseRows.filter(r => r.source_profile !== 'cumulative.v1').map((r) => r.id));
+      if (!active()) return;
       const mapped = baseRows.map((r) => ({
         ...r,
-        title: sanitizeSelfStructureHistoryTitle(r?.title, r?.report_mode),
-        report_mode_label: formatWatashiMapReportModeLabel(r?.report_mode),
+        title: r.source_profile === 'cumulative.v1' ? `${String(r.snapshot_month).slice(0, 4)}年${Number(String(r.snapshot_month).slice(5, 7))}月のわたしマップ` : sanitizeSelfStructureHistoryTitle(r?.title, r?.report_mode),
+        report_mode_label: r.source_profile === 'cumulative.v1' ? '' : formatWatashiMapReportModeLabel(r?.report_mode),
         isRead: readSet.has(r.id),
       }));
       setRows((prev) => {
         if (!append) return mapped;
-        const existing = new Set((prev || []).map((r) => String(r?.id || "")));
+        const rowKey = r => `${r.snapshot_month || ''}:${r.id}`;
+        const existing = new Set((prev || []).map(rowKey));
         const merged = [...(prev || [])];
         for (const row of mapped) {
-          const id = String(row?.id || "");
+          const id = rowKey(row);
           if (!id || existing.has(id)) continue;
           existing.add(id);
           merged.push(row);
         }
         return merged;
       });
+      setLoadedScope(scopeKey);
       setHasMore(Boolean(json?.has_more));
       setNextOffset(
         typeof json?.next_offset === "number"
@@ -325,19 +346,27 @@ export default function SelfStructureReportHistoryScreen({
             : null
       );
     } catch (e) {
+      if (!active()) return;
       if (!append) setRows([]);
       setHasMore(false);
       setNextOffset(null);
       setErrorMsg(String(e?.message || e));
     } finally {
-      if (append) setLoadingMore(false);
-      else setLoading(false);
+      if (active()) {
+        if (append) setLoadingMore(false);
+        else setLoading(false);
+      }
     }
-  }, [historyAccessible, reportType]);
+  }, [historyAccessible, reportType, scopeKey, session?.user?.id]);
 
   useEffect(() => {
+    setRows([]);
+    setLoadedScope(null);
+    setHasMore(false);
+    setNextOffset(null);
     if (subscriptionLoading) return;
     load({ append: false, offset: 0 });
+    return () => { requestRef.current += 1; openRequestRef.current += 1; };
   }, [load, subscriptionLoading]);
 
   const onRefresh = useCallback(async () => {
@@ -353,27 +382,32 @@ export default function SelfStructureReportHistoryScreen({
   }, [loading, refreshing, loadingMore, hasMore, nextOffset, load]);
 
   const handleOpen = useCallback(
-    async (id) => {
+    async (item) => {
+      const id = item.id;
+      const scope = scopeKey;
+      const openSeq = ++openRequestRef.current;
+      const stillSelected = () => scopeRef.current === scope && openRequestRef.current === openSeq;
       if (!historyAccessible) {
         if (typeof onOpenLatest === "function") onOpenLatest();
         return;
       }
       try {
-        const json = await apiGet(buildSelfStructureReportDetailPath(id));
+        const json = await apiGet(buildSelfStructureReportDetailPath(id, item.snapshot_month), { expectedUserId: session?.user?.id });
+        if (!stillSelected()) return;
         const data = json?.item;
         if (!data) {
           Alert.alert("取得エラー", "レポートの取得に失敗しました");
           return;
         }
 
-        const sanitizedData = {
+        const sanitizedData = data.source_profile === 'cumulative.v1' ? data : {
           ...data,
           title: sanitizeSelfStructureHistoryTitle(data?.title, data?.report_mode),
           content_text: sanitizeSelfStructureReportText(data?.content_text),
         };
 
         try {
-          const ok = await markReportAsRead(id);
+          const ok = data.source_profile === 'cumulative.v1' ? false : await markReportAsRead(id);
           if (ok) {
             setRows((prev) =>
               (prev || []).map((r) =>
@@ -385,12 +419,12 @@ export default function SelfStructureReportHistoryScreen({
           // no-op
         }
 
-        if (onOpenReport) onOpenReport(sanitizedData);
+        if (stillSelected() && onOpenReport) onOpenReport(sanitizedData);
       } catch (e) {
-        Alert.alert("エラー", String(e?.message || e));
+        if (stillSelected()) Alert.alert("エラー", String(e?.message || e));
       }
     },
-    [historyAccessible, onOpenLatest, onOpenReport]
+    [historyAccessible, onOpenLatest, onOpenReport, scopeKey, session?.user?.id]
   );
 
   const handleExport = useCallback(
@@ -463,6 +497,9 @@ export default function SelfStructureReportHistoryScreen({
           </Text>
         </View>
       ) : null}
+      <Text style={[styles.historyRetentionText, { color: colors.TEXT_ON_LIGHT, paddingHorizontal: 16 }]}>
+        月を選ぶと、その月に保存した当時のマップと現在を見比べられます。プラン変更だけで保存済みの履歴は削除されません。
+      </Text>
 
       {!subscriptionLoading && !historyAccessible ? (
         <View style={[styles.accessCard, isDark && themed.row]}>
@@ -504,8 +541,8 @@ export default function SelfStructureReportHistoryScreen({
         </View>
       ) : (
         <FlatList
-          data={rows}
-          keyExtractor={(item) => String(item.id)}
+          data={loadedScope === scopeKey ? rows : []}
+          keyExtractor={(item) => `${item.snapshot_month || ''}:${item.id}`}
           refreshControl={
             <RefreshControl
               refreshing={refreshing}
@@ -530,7 +567,7 @@ export default function SelfStructureReportHistoryScreen({
           renderItem={({ item }) => (
             <TouchableOpacity
               style={[styles.row, themed.row, item.isRead && styles.rowRead]}
-              onPress={() => handleOpen(item.id)}
+              onPress={() => handleOpen(item)}
               activeOpacity={0.85}
             >
               <View style={{ flex: 1 }}>
@@ -548,7 +585,7 @@ export default function SelfStructureReportHistoryScreen({
                   </Text>
                 ) : null}
                 <Text style={[styles.rowMeta, themed.rowMeta]} numberOfLines={1}>
-                  作成: {formatDateJP(item.generated_at || item.updated_at || item.period_end)}
+                  保存: {formatDateJP(item.captured_at || item.generated_at || item.updated_at || item.period_end)}
                 </Text>
               </View>
 

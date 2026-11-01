@@ -1622,3 +1622,33 @@ Mashの具体承認を受け、API [666b285](https://github.com/MassyuRed/mashos
 最終9fileは905 passed／FAIL0／SKIP0、110.62秒、12058 subtestsは上乗せしない、既存warning1。新P5 112＋旧対象793。旧Analysis5file／P1／P4／Emlis snapshotを含む限定範囲で、全suiteや既存広範囲失敗の解消ではない。途中の旧staticmethodの誤patchとprivate境界の例外型漏れを修復。graph/artifactの改変自体は途中でも拒否しており、旧期待・assertionを弱めず最終成功。全履歴とruntimeはtrial§13。
 
 実モデル／推論／重み／学習／課金／C0／実DB／Render／通常application／公開API／DTO／RN／merge／deploy0。追加GitHub CIは[skip ci]で0。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT、product_credit=0／PRODUCT_NOT_CLEAR／正式0/3／candidate_ready=false／automatic_progression=false。本承認単位は実装・必要検証・反映まで完了。一般化、通常接続、複数補足、期間比較、IF／Saved、商品文章品質は別残件。
+
+
+<a id="analysis-cumulative-monthly-v1"></a>
+## 2026-11-01 累積マップ・当時月次保存・閲覧プランの実装設計
+
+Mashの§3.3構想と11/1採用案を優先する。旧28日期間・light/standard/deepの料金差はperiod.v1互換の履歴で、新cumulative.v1では現在mapの対象・内容を全plan共通にする。月次閲覧はFree最新2回、Plus12回、Premium全期間。元入力一般履歴の閲覧期限、Emlis履歴利用、こころ天気は変更しない。
+
+### 保存と更新
+
+- 認証ownerをAPIで解決し、専用source RPCがそのownerの原入力と適格な本人Q/A束縛を一つのDB snapshotで読む。secretを本人分析から除外せず、生成済みEmlis本文をsourceへ混ぜない。28日/100件の切捨てなし。100件ずつ完成graphを結合しない。既存source adapter・compiler・唯一作者を使って全体を再導出する。
+- source guardはtier・時刻・Emlis生成本文・単なるthread revisionを含めず、原入力とQ/A束縛を含む。commit内で同じsourceを再検査。既存sourceと同じ場合は保存mapを再利用し、強制更新だけ別artifactを作る。新記録で古い入力・構造を自動的に対象外にしない。
+- 編集済み原入力へ古い版の補足を付け替えず、除外した補足数を明示する。Safetyや意味未解決は明示されたreasonだけ記録単位で除外。owner/hash/schema不正を対象外扱いで隠さない。未解析/対象外の件数を表示し、全体を分析済みと偽らない。全対象IDはprivate削除依存へ保持する。
+- immutable artifactは既存analysis_observed_artifactsへsource_profile=cumulative.v1で保存。月次table analysis_cumulative_monthsはowner/月/artifact参照/captured_atを保持し、同じartifactの本文・図を再読する。各JST月の最初の成功取得で一度capture。同月上書き・未保存過去月のbackfillなし。source不変なら同じartifactを後月にも参照でき、generated_atとcaptured_atを別表示する。
+- monthlyは現在sourceへ再照合せず当時版を読む。currentは現在guard一致が必要。月次全体の順位を先に計算し、2/12/全の枠を適用してからpagination・id・monthを処理。古い未参照currentのID直打ちは不可。プラン変更だけで保存を削除しない。元入力/回答の明示削除、所有者変更、退会では関連派生物を削除し月参照もcascade。
+
+### 表示・元記録・互換
+
+latest/status/monthly ensure/history/detailの既存routeを維持してobserved有効時に累積ownerへ分岐。内部mode=standard、period=all、source_profile/map_context/report_id/snapshot_month/captured_atを追加する。旧monthlyはperiod版として保存し、新月次一覧へ混ぜない。現在mapと選択月の当時mapを縦に並べて本人が見比べる。旧adjacent equal期間の自動比較を転用せず、自動の改善/悪化/原因説明を追加しない。
+
+根拠APIは認証owner+閲覧可能artifact+node内の原入力membershipを照合し、その記録・補足だけを開く。一般入力履歴の期限を全解除しない。分析後の編集では現在原文であることを表示し、当時の原文へ偽装しない。未保存の過去原文は再構成しない。
+
+RNの現在/履歴/比較/根拠の取得はexpectedUserIdとowner/tier/request世代で束縛する。owner/tier変更時は旧画面を即隠し、月選択/根拠選択/閉じる後の遅着を捨てる。既読は旧myprofile_reportsではなく新artifact tableを使う。旧renderer/profileの互換検査は保持し、旧graphを新累積として表示しない。PDFの既存paid条件は履歴開放へ連動させない。
+
+### 実装順と確認
+
+1. SQL source/commit/read/月index/削除寿命と、map専用source admissionを実装する。
+2. 既存Engineの全量生成、未解析範囲、同じ文章/図の保存再読、API分岐を接続する。
+3. 共通現在map、月選択、当時/現在の比較、根拠参照、案内・購読説明を接続する。
+4. 201件以上・古いFree原入力・複数補足・訂正・Safety混在、source競合、同月不変保存、2/12/全、降格/再加入、削除、owner/tier/選択の遅着を検査する。
+5. fresh branchへsource・設計・地図・議事録を反映し、SQL/API配置と必要な最終アプリ配布を個別に確認する。機械成功を一般言語品質や本人実機確認へ換算しない。

@@ -2900,7 +2900,7 @@ test('Kokoro weather Phase 6 QA keeps scope on emotion analysis and preserves pl
   assertIncludes(guide, [
     'こころ天気（日）・こころ天気（週）・こころ天気（月）',
     '今のこころ天気',
-    '表示できる内容はプランや保存された分析結果によって異なります。内容がまだ用意されていない場合や入力が足りない場合は、その旨が表示されます。',
+    '現在のマップは、蓄積した入力全体を対象に全プラン共通で表示します。解析できていない範囲がある場合は、件数を案内します。',
   ], 'guide/guidesJa.js preserves emotion-only kokoro weather and self-analysis copy');
 
   assertIncludes(terms, [
@@ -2966,7 +2966,7 @@ test('Watashi Map Phase 3 updates top UI labels and keeps Free latest entry open
     'requiresPaid = false',
     'targetRoute: ROUTE_SELF_REPORT_GENERATE',
     'requiresPaid: false',
-    '履歴画面でプラン別に表示範囲を整理します。詳しい自己分析レポートはPlusプラン以上で読めます。',
+    '月次履歴はFreeが直近2回分、Plusが12回分、Premiumが全期間を見比べられます。',
   ], 'Self structure actions keep latest and history route open while screens gate detail');
 
   assertIncludes(generate, [
@@ -3064,9 +3064,9 @@ test('Watashi Map Phase 5 fixes history/detail tier boundaries', () => {
     'export function canViewWatashiMapHistory',
     'export function canViewWatashiMapDetailReport',
     'export function canExportWatashiMapPdf',
-    '履歴の閲覧範囲：Freeは最新概要のみ',
-    '履歴の閲覧範囲：直近1年分',
-    '履歴の閲覧範囲：無制限',
+    '月次マップの閲覧範囲：直近2回分',
+    '月次マップの閲覧範囲：直近12回分',
+    '月次マップの閲覧範囲：全期間',
     'Freeプランでは今のわたしマップ概要を見られます。過去の詳しい自己分析レポートの履歴はPlusプラン以上で読めます。',
     '長期の変化と深い分かれ道はPremiumプランで見られます。',
   ], 'watashiMapAccessPolicy.js defines Phase 5 tier boundaries');
@@ -3074,7 +3074,7 @@ test('Watashi Map Phase 5 fixes history/detail tier boundaries', () => {
   assertIncludes(actions, [
     'openSelfReportHistory',
     'requiresPaid: false',
-    '履歴画面でプラン別に表示範囲を整理します。詳しい自己分析レポートはPlusプラン以上で読めます。',
+    '月次履歴はFreeが直近2回分、Plusが12回分、Premiumが全期間を見比べられます。',
   ], 'useAnalysisSelfStructureActions.js lets history screen own Free/Plus/Premium gating');
 
   assertIncludes(analysis, [
@@ -3173,7 +3173,7 @@ test('Watashi Map Phase 6 copy, tutorial fixture, and QA guardrails stay aligned
     'reading: "わたしマップ"',
     'これは性格タイプではなく、入力から見えた場面ごとの動き方です。',
     'わたしマップで役割スイッチ',
-    '履歴の閲覧範囲：Freeは最新概要のみ',
+    '月次マップの閲覧範囲：直近2回分',
     '長期の変化と深い分かれ道はPremiumプランで見られます。',
     'report_mode_label',
     'buildPalette(colors, isDark)',

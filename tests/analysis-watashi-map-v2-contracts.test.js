@@ -1,3 +1,4 @@
+// Legacy period-profile regression. Current cumulative UI has its own behavioral suite.
 // Uses the existing tests/emlis-q2-tools pinned React/Babel tools.
 // NODE_PATH=tests/emlis-q2-tools/node_modules node --test tests/analysis-watashi-map-v2-contracts.test.js
 const assert = require('node:assert/strict');
@@ -34,6 +35,7 @@ function moduleLoader(extraMocks = {}) {
     '../ui/uiTokens': { makeUiTokens: () => ({ text: {} }) },
     '../ui/applyTypographyTokens': { applyTypographyTokens: (s) => s },
     '../components/CocolonBackButton': () => null,
+    '../components/selfStructure/CumulativeWatashiMapView': () => null,
     '../components/selfStructure/WatashiMapRenderer': () => React.createElement('Text', null, 'LEGACY_RENDERER'),
     ...extraMocks,
   };
@@ -92,7 +94,7 @@ function latestResultHarness(responses) {
     '../lib/compat/legacyWireContracts': { SELF_STRUCTURE_WIRE: {
       routes: { latest: '/self-structure/latest', latestStatus: '/self-structure/latest/status' },
     } },
-  })('screens/SelfStructureReportGenerateScreen.js').default;
+  })('screens/SelfStructureReportGenerateScreen.js').LegacySelfStructureReportGenerateScreen;
   return { Screen, seen, statusReads: () => statusReads, requests: () => requestCount,
     props: { onLatestSeenVersion: (version) => { seen.push(version); } } };
 }
@@ -320,7 +322,7 @@ test('uncertainty, annotations and conflicts keep their graph targets in text an
 test('malformed declared JSON is rejected without legacy text while missing legacy JSON remains supported', async () => {
   assert.equal(contract.parseWatashiMapContent(null), null);
   assert.equal(contract.parseWatashiMapContent(''), null);
-  const Viewer = moduleLoader()('screens/SelfStructureReportViewerScreen.js').default;
+  const Viewer = moduleLoader()('screens/SelfStructureReportViewerScreen.js').LegacySelfStructureReportViewerScreen;
   for (const content of ['{"watashiMap":', '[1]', 'true']) {
     assert.equal(contract.classifyWatashiMapVersion(contract.parseWatashiMapContent(content)), 'UNSUPPORTED');
     let render;
@@ -338,7 +340,7 @@ test('Plus cannot view a deep v2 history report and Premium can', async () => {
   for (const tier of ['plus', 'premium']) {
     const subscription = { tier, loading: false };
     const Viewer = moduleLoader({ '../SubscriptionContext': { useSubscription: () => subscription } })
-      ('screens/SelfStructureReportViewerScreen.js').default;
+      ('screens/SelfStructureReportViewerScreen.js').LegacySelfStructureReportViewerScreen;
     let render;
     await act(async () => { render = TestRenderer.create(React.createElement(Viewer, {
       report: { content_json: fixtures[0].projection, report_mode: 'deep' },
@@ -380,7 +382,7 @@ test('latest seen advances only for an admitted v2 projection and an allowed mod
       '../lib/compat/legacyWireContracts': { SELF_STRUCTURE_WIRE: {
         routes: { latest: '/self-structure/latest', latestStatus: '/self-structure/latest-status' },
       } },
-    })('screens/SelfStructureReportGenerateScreen.js').default;
+    })('screens/SelfStructureReportGenerateScreen.js').LegacySelfStructureReportGenerateScreen;
     let render;
     await act(async () => { render = TestRenderer.create(React.createElement(Screen, {
       embedded: true, initialReportMode: item.tier === 'free' ? 'light' : 'standard',
@@ -444,7 +446,7 @@ test('renderer shows actual graph, uncertainty and matching text without making 
 });
 
 test('history viewer dispatches v2 and never exposes a mismatched legacy content_text', async () => {
-  const Viewer = moduleLoader()('screens/SelfStructureReportViewerScreen.js').default;
+  const Viewer = moduleLoader()('screens/SelfStructureReportViewerScreen.js').LegacySelfStructureReportViewerScreen;
   let render;
   await act(async () => { render = TestRenderer.create(React.createElement(Viewer, {
     report: { title: '観測', content_json: fixtures[0].projection, content_text: 'DO_NOT_DISPLAY_OLD_BODY' },
@@ -460,7 +462,7 @@ test('history remains locked for Free and private preview cannot be displayed as
   for (const tier of ['free', 'plus']) {
     const Viewer = moduleLoader({ '../SubscriptionContext': {
       useSubscription: () => ({ tier, loading: false }),
-    } })('screens/SelfStructureReportViewerScreen.js').default;
+    } })('screens/SelfStructureReportViewerScreen.js').LegacySelfStructureReportViewerScreen;
     let render;
     await act(async () => { render = TestRenderer.create(React.createElement(Viewer, {
       report: { content_json: tier === 'free' ? fixtures[0].projection : {
@@ -488,7 +490,7 @@ test('latest screen consumes a v2 server response and omits legacy content_text'
     '../lib/compat/legacyWireContracts': { SELF_STRUCTURE_WIRE: {
       routes: { latest: '/self-structure/latest', latestStatus: '/self-structure/latest-status' },
     } },
-  })('screens/SelfStructureReportGenerateScreen.js').default;
+  })('screens/SelfStructureReportGenerateScreen.js').LegacySelfStructureReportGenerateScreen;
   let render;
   await act(async () => { render = TestRenderer.create(React.createElement(Screen, { embedded: true })); });
   assert.equal(calls, 1);

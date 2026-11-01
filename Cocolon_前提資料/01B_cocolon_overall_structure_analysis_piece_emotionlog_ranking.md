@@ -3089,3 +3089,18 @@ STRUCTURE_MAP_DELTA_PRESENT。
 | tests/native/piece-rn-canvas-{entry.js,fixtures.cjs,ios.m}/run-piece-rn-canvas-ios.sh | 旧3group不変、新export14を別検証。offscreen実view-shotと同saved PNG/RGBA、native拒否6 |
 
 local13suite979成功。新一度CIは未実行、元8秒・native195/44・旧RN期待を維持する。API/DTO/DB/env/flag/deploy/実OS/配布/main変更0。全変更pathはmanifest、詳細は入口§111/map§65.56/weekly§5.6.36。
+
+
+## 2026-11-01 累積わたしマップの接続差分
+
+通常latest→API analysis_cumulative_service→全期間source→既存CMEE compiler/作者→immutable analysis_observed_artifacts(cumulative.v1)→analysis_cumulative_months。月indexで当時の同一文章/図を保存し、現在map共通/月次閲覧2/12/全・プラン変更保存維持を実装。詳細はcurrent_structure/03と設計04#analysis-cumulative-monthly-v1、最新weekly§44。
+
+新規file地図：
+- Cocolon `components/selfStructure/CumulativeWatashiMapView.js`：現在/当時/比較/根拠の共通画面。Generate/Viewer通常入口から接続。
+- Cocolon `components/selfStructure/cumulativeMapContract.js`：累積profile/件数/保存identity/projectionのclient境界。
+- Cocolon `tests/analysis-cumulative-map.test.js`：React実表示とowner/tier/月/根拠の遅着検査。
+- mashos-api `ai/services/ai_inference/analysis_cumulative_service.py`：全期間生成/保存/再読/履歴/根拠のowner。
+- mashos-api `supabase/migrations/20261101080144_cumulative_watashi_map.sql`：累積RPC/月参照と閲覧rank/削除寿命。
+- mashos-api `ai/tests/test_analysis_cumulative.py`・`test_analysis_cumulative_jobs.py`・`analysis_cumulative_sql.cjs`：実compiler/SQL/Q3/既存jobの検証。
+
+既存変更owner：api_self_structure/reports、report_artifact_read_service、astor_material_snapshots、emlis_thread_service、intent_compiler、astor_self_structure_report、api_emotion_submit、astor_worker、api_cron_distribution、appの旧infer分岐、subscription_bootstrap_store。RNはGenerate/History/Viewer/V2Renderer、wire/access、analysis入口、guide/terms、iapRuntimeCatalog。旧periodやこころ天気/他coreを新累積の受入れへ昇格しない。実配置/配布/残件はweekly§44に分離。

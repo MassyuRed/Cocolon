@@ -26,6 +26,14 @@ import {
 } from "../components/selfStructure/watashiMapAccessPolicy";
 import WatashiMapRenderer from "../components/selfStructure/WatashiMapRenderer";
 import WatashiMapV2Renderer from "../components/selfStructure/WatashiMapV2Renderer";
+import CumulativeWatashiMapView from '../components/selfStructure/CumulativeWatashiMapView';
+
+export default function SelfStructureReportViewerScreen(props) {
+  if (props.report?.source_profile === 'cumulative.v1') {
+    return <CumulativeWatashiMapView reportId={props.report.snapshot_month ? props.report.id : null} month={props.report.snapshot_month} onBack={props.onBack} />;
+  }
+  return <LegacySelfStructureReportViewerScreen {...props} />;
+}
 import { classifyWatashiMapVersion, parseWatashiMapContent } from "../components/selfStructure/watashiMapV2Contract";
 import {
   hasWatashiMapRenderableContent,
@@ -164,7 +172,7 @@ function formatRange(periodStart, periodEnd) {
   }
 }
 
-export default function SelfStructureReportViewerScreen({
+export function LegacySelfStructureReportViewerScreen({
   report,
   onBack,
   initialAnchorKey = null,
@@ -226,7 +234,7 @@ export default function SelfStructureReportViewerScreen({
   const fetchedReportMode = useMemo(() => {
     return normalizeSelfStructureMode(contentJson?.report_mode || report?.report_mode);
   }, [contentJson?.report_mode, report?.report_mode]);
-  const canViewVersionedMap = canViewWatashiMapHistory(viewerTier)
+  const canViewVersionedMap = viewerTier !== 'free' && canViewWatashiMapHistory(viewerTier)
     && canViewWatashiMapMode(viewerTier, contentJson?.report_mode || report?.report_mode || 'standard');
   const canViewFullText = useMemo(() => {
     return !subscriptionLoading && canViewWatashiMapDetailReport(viewerTier, fetchedReportMode);
@@ -338,7 +346,7 @@ export default function SelfStructureReportViewerScreen({
             ) : null}
 
             {!isLegacyMap && !canViewVersionedMap ? (
-              <Text style={[styles.empty, themed.empty]}>{!canViewWatashiMapHistory(viewerTier)
+              <Text style={[styles.empty, themed.empty]}>{viewerTier === 'free'
                 ? '過去のわたしマップはPlusプラン以上で読めます。'
                 : getWatashiMapDetailLockLabel(viewerTier, fetchedReportMode)}</Text>
             ) : null}

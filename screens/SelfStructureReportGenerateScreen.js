@@ -30,6 +30,12 @@ import {
   normalizeWatashiMapPayload,
 } from "../components/selfStructure/watashiMapFormatters";
 import CocolonBackButton from "../components/CocolonBackButton";
+import CumulativeWatashiMapView from '../components/selfStructure/CumulativeWatashiMapView';
+
+export default function SelfStructureReportGenerateScreen(props) {
+  return <CumulativeWatashiMapView onBack={props.onBack} onLatestSeenVersion={props.onLatestSeenVersion}
+    embedded={props.embedded} hideHeader={props.hideHeader} />;
+}
 
 // わたしマップ（Self Structure latest）: latest viewer
 const API_BASE = API_BASE_URL;
@@ -217,7 +223,7 @@ async function getAccessToken() {
   }
 }
 
-export default function SelfStructureReportGenerateScreen({ onBack, initialReportMode = "standard", onLatestSeenVersion, embedded = false, hideHeader = false, useServerDefaultMode = true, titleOverride = "今のわたしマップ", showTitle = true }) {
+export function LegacySelfStructureReportGenerateScreen({ onBack, initialReportMode = "standard", onLatestSeenVersion, embedded = false, hideHeader = false, useServerDefaultMode = true, titleOverride = "今のわたしマップ", showTitle = true }) {
   const { themeName, colors } = useTheme();
   const {
     tier: ctxSubscriptionTier,

@@ -7446,3 +7446,18 @@ Mashは7001で画像生成・一覧表示・スマホ写真フォルダへの保
 API piece_source.pyの選択JSON根拠はprivate selection_contextsへ分離し、可視graph/owner/planの命題にはしない。原recordへの束縛と変更検知を維持する。piece_v1c.pyの唯一作者は元memo/actionだけを整形し、metadataからの追加節を廃止。piece_v2_content_policy.pyの独立検査は余分な節/段落を拒否する。短い完成文もpaddingなしで扱うためshort_essay下限は非空（1..420正規化字/最大6文、1..3段落）。非表示選択だけで名詞断片を完成文へ昇格しない。quote/declarationの制約、既存安全/owner/source/枠/receiptは保持する。
 
 既存保存済みrecord/本文/hash/端末画像を移行・書換しない。RN製品source/公開wire/DB schema/依存変更0、7001を継続し署名build追加0。STRUCTURE_MAP_DELTA_PRESENT（private選択contextと可視本文の分離）。最新の検証・API配置結果はweekly第9回§41へ記録する。Share送信/Android/一般日本語品質/全機能受入れを本人の今回確認へ含めない。
+
+
+## 2026-11-01 累積わたしマップの接続差分
+
+通常latest→API analysis_cumulative_service→全期間source→既存CMEE compiler/作者→immutable analysis_observed_artifacts(cumulative.v1)→analysis_cumulative_months。月indexで当時の同一文章/図を保存し、現在map共通/月次閲覧2/12/全・プラン変更保存維持を実装。詳細はcurrent_structure/03と設計04#analysis-cumulative-monthly-v1、最新weekly§44。
+
+新規file地図：
+- Cocolon `components/selfStructure/CumulativeWatashiMapView.js`：現在/当時/比較/根拠の共通画面。Generate/Viewer通常入口から接続。
+- Cocolon `components/selfStructure/cumulativeMapContract.js`：累積profile/件数/保存identity/projectionのclient境界。
+- Cocolon `tests/analysis-cumulative-map.test.js`：React実表示とowner/tier/月/根拠の遅着検査。
+- mashos-api `ai/services/ai_inference/analysis_cumulative_service.py`：全期間生成/保存/再読/履歴/根拠のowner。
+- mashos-api `supabase/migrations/20261101080144_cumulative_watashi_map.sql`：累積RPC/月参照と閲覧rank/削除寿命。
+- mashos-api `ai/tests/test_analysis_cumulative.py`・`test_analysis_cumulative_jobs.py`・`analysis_cumulative_sql.cjs`：実compiler/SQL/Q3/既存jobの検証。
+
+既存変更owner：api_self_structure/reports、report_artifact_read_service、astor_material_snapshots、emlis_thread_service、intent_compiler、astor_self_structure_report、api_emotion_submit、astor_worker、api_cron_distribution、appの旧infer分岐、subscription_bootstrap_store。RNはGenerate/History/Viewer/V2Renderer、wire/access、analysis入口、guide/terms、iapRuntimeCatalog。旧periodやこころ天気/他coreを新累積の受入れへ昇格しない。実配置/配布/残件はweekly§44に分離。

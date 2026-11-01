@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { buildWatashiMapV2ViewModel, NODE_LABELS } from './watashiMapV2Contract';
 
-export default function WatashiMapV2Renderer({ contentJson, colors, isDark = false }) {
+export default function WatashiMapV2Renderer({ contentJson, colors, isDark = false, onOpenEvidence }) {
   const model = useMemo(() => buildWatashiMapV2ViewModel(contentJson), [contentJson]);
   const styles = useMemo(() => makeStyles(colors, isDark), [colors, isDark]);
   if (!model) return (
@@ -23,6 +23,9 @@ export default function WatashiMapV2Renderer({ contentJson, colors, isDark = fal
             <Text style={styles.kind}>{NODE_LABELS[node.node_kind]}</Text>
             <Text style={styles.body}>{node.visible_label}</Text>
             <Text style={styles.subtle}>{node.evidence_badge_count}件の記録</Text>
+            {onOpenEvidence ? <TouchableOpacity accessibilityRole="button" onPress={() => onOpenEvidence(node.node_ref)}>
+              <Text style={styles.body}>根拠の記録を見る</Text>
+            </TouchableOpacity> : null}
           </View>
         ))}
       </View>
@@ -61,7 +64,7 @@ export default function WatashiMapV2Renderer({ contentJson, colors, isDark = fal
         <Text style={styles.subtle}>関連する観測：{badge.targetLabels.join(' ／ ')}</Text>
         <Text style={styles.body}>{badge.visible_label}</Text>
       </View>)}
-      {model.comparisonState === 'NO_PREVIOUS'
+      {contentJson?.map_context?.profile === 'cumulative.v1' ? null : model.comparisonState === 'NO_PREVIOUS'
         ? <Text style={styles.subtle}>前の期間との比較はありません。</Text>
         : <View style={styles.card}>
           <Text style={styles.section} accessibilityRole="header">前の期間との比較</Text>

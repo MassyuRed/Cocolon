@@ -1,4 +1,4 @@
-> 2026-11-01最新：保存済みQ3の最大3本人回答を資料化し、先行補足/訂正間の矛盾を照合。累積更新・月次当時snapshotの完成ではない。末尾とweekly§33。
+> 2026-11-01最新：Mash採用の累積/当時月次/プラン差を修正中。感情原入力の全期間＋適格本人補足を対象に現在map共通、月次閲覧Free2回/Plus12回/Premium全期間。保存artifactと月参照を分離し、プラン変更では保持、source削除/退会ではpurge。新実装/検証/配置はweekly§44と詳細04#analysis-cumulative-monthly-v1を参照。以下のu250等は旧期間版の内容修正履歴で、新累積方式の現在地ではない。
 
 ---
 doc_id: cocolon_analysis_current_structure
@@ -908,3 +908,21 @@ STRUCTURE_MAP_DELTA_PRESENT、新private型6／例外2、実fileは01A、actual�
 新規 `ai/tests/test_analysis_multiple_answers.py`、既存saved period/storage、verticalの補足/訂正関連で177 PASS / FAIL0 / SKIP0。無関係vertical425件は今回未実行。実Q3の3回答から保存Analysis memberへ全回答を取り込む検査もnatural系63件内で確認。新しい学習/観測モデル生成は0。
 
 通常Analysisの既存原入力→Engine→保存/再読は品質学習待ちにしない。一方、現sourceには100件上限、monthlyが月初をendとする期間版、後日ANSWERの混入、追加/訂正でも当時版を削除するtrigger、現在guard必須の再読、期間比較が重複record/不等長を拒否する制限がある。累積版/当時月次snapshot/自動保存時点/全量処理/現在との比較は未完。最新100切捨て・期間版を累積版と呼ぶ変更はしていない。旧snapshotを保持しつつ削除時purgeする保存寿命の拡張が残る。STRUCTURE_MAP_DELTA_PRESENT。
+
+
+## 2026-11-01 累積方式のcurrent接続owner
+
+| owner | 新しい責務 |
+|---|---|
+| API `analysis_cumulative_service.py` | 共通全期間生成/guard再検査/未解析範囲/当時月次read/根拠投影 |
+| migration `20261101080144_cumulative_watashi_map.sql` | 全量source RPC・累積commit/read/evidence、既存artifactのsource_profile、月index、2/12/全rank、tier保持/source削除寿命 |
+| `astor_material_snapshots._analysis_saved_member(cumulative=True)`・`emlis_thread_service._request(analysis_source_only=True)` | 一般履歴期限とmap分析scopeの分離、owner/原入力版/最大3ANSWER束縛。生成済本文はsourceにしない |
+| 既存`intent_compiler`・`observed_route_realizer`・Engine | 既存作者を継承し全量で構造を作る。反復共起はrecord単位pair索引へ最適化し意味/辺順を維持 |
+| API latest/status/monthly/report history/detail・既存input fallback/worker self標準deep/latest refresh/cron月次 | 観測有効時は新ownerへ接続。旧period builder/tableへの再分岐を止める。こころ天気系は維持 |
+| RN `CumulativeWatashiMapView.js`・`cumulativeMapContract.js` | 共通現在/当時月と現在比較/対象と未解析/元記録補足、安全領域、owner/tier/request世代と閉じる後の遅着排除 |
+| RN Generate/History/Viewer・V2Renderer・wire/access/guide/catalog | 通常入口へ接続。旧period rendererは互換として分離。PDFpaid条件は維持 |
+| tests `test_analysis_cumulative.py`・`test_analysis_cumulative_jobs.py`・`analysis_cumulative_sql.cjs`・既存API tests・RN `analysis-cumulative-map.test.js` | 原入力201/1001全量、実Q3三回答SQL、Safety/訂正/削除、月index保存/閲覧/再読、旧job分岐と遅着を検証 |
+
+各JST月の最初の正常累積取得を月参照へ一度だけ固定。source不変なら同じartifactの再利用でも当月captureを行い、分析日時と保存日時を区別する。未保存の過去月は作り直さない。プラン変更で保存物を消さず、本人の入力削除/退会時は全対象ID（通常分析から除外した記録も含む）の依存先をpurgeする。
+
+TodayQuestion/Echoes/Discoveriesの旧material集約は保持するが、新累積V2のsource採用済みとはしない。意味sourceの現契約は感情原入力と別本人補足。一般言語品質・IF/Saved・実機/正式商品受入れは別。STRUCTURE_MAP_DELTA_PRESENT。
