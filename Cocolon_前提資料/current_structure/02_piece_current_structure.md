@@ -3541,4 +3541,4 @@ Mash明示指示はweekly第9回§38。通常応答表示を「Emlisからの応
 | API supabase/migrations/20261101022630_piece_natural_reply_context.sql | 既存issue/save/visual-changeの自然profileだけ保存cohort/権利と同期。旧Q3/lock/clock/ACL/枠は保持 |
 
 
-API実装候補1296eaea。native recipientは意図的にMEANING_UPDATEなしのため、natural専用の保存receipt/source/context/FINAL/同attempt成功終了を照合する。意味/analysisを生成済みに偽装しない。旧Q3とnaturalの保存cohortを分け、関連履歴の編集/削除時は拒否する。RN対象209、API/実SQL175成功。新UIのApple配布/本人確認は未完、既存6701の初回接続確認と区別する。GPUはMash停止報告、華恋の再起動0。STRUCTURE_MAP_DELTA_PRESENT（新RN作成screen/routeと自然profileの既存handoff整合、公開wire/table追加なし）。
+API1296eaeaを指定配置済み（dep-dbjafelg1s2s73f6mah0/02:46:53 UTC Live）。実DBへnatural補正migrationを適用し、3RPCのservice_role限定・保存値read_only・health/bootstrap200を確認。native recipientは意図的にMEANING_UPDATEなしのため、natural専用の保存receipt/source/context/FINAL/同attempt成功終了を照合する。意味/analysisを生成済みに偽装しない。旧Q3とnaturalの保存cohortを分け、関連履歴の編集/削除時は拒否する。RN対象209、API/実SQL175成功。RNef9f7bfc/6801はArchive/IPA/Upload成功、Apple処理通過・暗号化情報保存後、既存内部グループでテスト中。新UI/Pieceの本人確認は未完で、既存6701の初回接続確認と区別する。旧V4 metrics19失敗は未解消、全CI成功とはしない。GPUはMash停止報告、華恋の再起動0。STRUCTURE_MAP_DELTA_PRESENT（新RN作成screen/routeと自然profileの既存handoff整合、公開wire/table追加なし）。
