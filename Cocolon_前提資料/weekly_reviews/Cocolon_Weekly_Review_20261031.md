@@ -1734,3 +1734,16 @@ Mashは華恋案へ「それでいこう」と明示し、§3.3/§4.2の構想�
 反映前の最終API対象7fileは624 PASS/FAIL0/SKIP0（既存Pydantic warning1）。実際の既存Q3保存処理で3件の本人補足を保存→新source取得→生成→月次再読→根拠→削除連動まで通した。SQLの201原本・15月indexでFree2/Plus12/Premium15、ページ順、ID直読拒否、月次不変、改変競合、権限/RLS、元入力削除を確認。15月はrank用のsynthetic seedで、実時間15か月の月跨ぎ検証とは扱わない。local1001原本は全1001件を処理/写像し約8.934秒（本番性能保証ではない）。
 
 RN全JS1287 PASS/FAIL0、localでMetro依存がない実bundle再構築1件は従来どおり対象外。最後のUI文言/非同期無効化後の対象64件もPASS（全体件数へ加算しない）。新しい8件のbehavior検証には、Free共通current、月次/現在を別保存物として表示、本人/tier切替、根拠選択・閉じた後の遅延応答、月選択競合、PDF権利分離を含む。既知の旧native V4/canvas失敗を今回のJS成功で解消済みとは扱わない。DB migration/API配置/署名buildはこの記録時点で未反映で、後続へ結果を追記する。STRUCTURE_MAP_DELTA_PRESENT。
+
+
+### §44 GitHub・DB・API反映
+
+API36713940ea82e217fab8a7c0a738a33f21df1c4d（19paths）/RNb187b79023a147c9c13f4c1763c29689a8ca7460（22paths）を既存branchへ反映し、GitHubのHEAD・changed-path set・全対象blob SHAとlocal tree一致を再取得確認。通常HTTPS pushは認証不可でref未変更と確定し、利用可能なGitHub連携のblob/tree/commit/ref経路で反映した。main mergeはしていない。
+
+Supabaseの新migrationを適用し、新tableのRLS ON・anon/authenticated SELECTなし、4関数ともanon/authenticated EXECUTEなし・service_roleのみ、固定search_pathを実DBで確認。security advisorの差分は新tableのRLS有効/policyなしINFOのみで、サーバー専用のdeny-all設計。既存WARNは今回修復済みとしない（[該当INFOの説明](https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy)）。同ownerの同時commit競合はauth.users行のFOR UPDATE NOWAITでlookupより前に排他化、SQL再検査成功。PGliteは単一接続なので二接続の実競合試験成功とは報告しない。
+
+Render dep-dbjg0l8ae00c73e4cr20はAPI36713940で09:04:51 UTC Live。healthz/app bootstrap200、Piece private5ON/public3OFF保持、対象期間のapp error0。認証なしlatest/historyは401、実本人の新map生成・端末表示成功は未確認。秘密値扱いの設定内部値readは自動承認レビューで拒否されたため実行せず、設定値・認証情報を成果物へ転載しない。GPU再起動/学習0。
+
+同APIのAnalysis CI41291153964/job124802530601は全step success：既存1634tests/12020subtests、owner1（194 deselected）、新cumulative/Q3/jobs22tests/2subtests、SQL201原本/15月indexも成功。Piece native CI41291153963/job124802530584も全step success、23実行のpassed合計1861（重複を除いた個数ではない）、shared API172/native保存46を含む。異なる検査/再実行の件数は加算しない。
+
+RNの署名iOS #72/run41291615693/job124803858306を一回起動し、b187b790をArchive中。ビルド番号・Apple処理・内部配布の最終結果は後続へ記録する。既存7101の本人確認を、新累積Analysisの端末成功へ流用しない。
