@@ -1,4 +1,4 @@
-> **2026-11-02最新：意味単位のprivate候補をCPU実装・860件成功。** 新`analysis_model_units.v1`→全文併記の候補文章/図→全coverage付きfile再読。通常map/DB/RNへ未接続、全record未解析・route0。実4B分解は次に確認。[weekly§51](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-units-implemented-20261102)と[trial実装記録](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#semantic-units-implemented-20261102)へ。
+> **2026-11-02最新：実意味候補4callは受理/再読1/4、分解品質は未成立。** carrier混同/列挙反復に対しAPI cddf1855で指示版を分離し、旧実保存再読と113件を確認。次は同baseのclarified新2call。[実結果/継続](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#semantic-units-gpu4-and-clarified-20261102)。通常map/DB/RN未切替、全record未解析/route0。
 
 > 10/28最新差分：named出力型/参照提示修復・CPU351成功、9更新/112再読込/2生成を終了。平坦rootと回答source帰属へ前進も意味/本文0/2・新41c9不採用。末尾の最新結果・全機能00/weekly§90を参照。
 

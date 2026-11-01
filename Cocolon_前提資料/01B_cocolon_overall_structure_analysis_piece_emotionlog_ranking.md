@@ -3142,3 +3142,6 @@ API fa995a44、STRUCTURE_MAP_DELTA_PRESENT。新production fileは0。通常累�
 | `ai/tests/test_analysis_model_units.py` | 合成41件、引用/従属/全文/改竄/生成禁止再読/coverage。教師や商品受入れではない |
 
 実結果/再開は[trial](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#semantic-units-implemented-20261102)とweekly§51。今回の前提資料差分は全機能00/本01B/current03/04/設計04/05/weekly/trialと実行runner/要求/CPU結果に置く。
+
+
+11/2後続API cddf1855：上記semantic_admission/service/testの既存3file内で指示版baseline/clarifiedと保存v1/v2を分離。新production file/作者/storage ownerは追加しない。旧実artifact再読と対象113件成功、実分解品質は未成立。trial/weekly§52へ。

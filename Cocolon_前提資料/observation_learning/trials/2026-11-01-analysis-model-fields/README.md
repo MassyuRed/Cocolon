@@ -1,6 +1,6 @@
 # Analysis — 最小field接続と実4B probe
 
-**最新：11/2、意味単位のprivate候補をCPU実装・860件成功。[実装と実4Bへの継続](#semantic-units-implemented-20261102)。一般品質は未確認、実モデル分解を次に確認する。旧runは履歴保持。**
+**最新：11/2、実unit4callは1/4受理、意味分解は未成立。旧保存互換を保つ指示版clarified.v1を実装。[実結果と新2call](#semantic-units-gpu4-and-clarified-20261102)へ。**
 
 2026-11-01 JST。開始原本：Cocolon PR30 `1c66add4fdf8f5ded18f7443d6b91b1771998244`、API PR3 `36713940ea82e217fab8a7c0a738a33f21df1c4d`。Mashの分析残件開始とweekly§45.4に従う。Codex Work/GPT-6、root華恋が実装/統合/反映、別文脈agentはread-only監査のみ。独立Pro/Ultra又はhuman品質受入れとは呼ばない。System Context最新cacheは未成立のまま、fresh原本fallbackを使用。
 
@@ -175,3 +175,23 @@ API commit `fa995a4462bfab0deeafbfd602a5ae803fb0fcb5`。既存製品5＋新test1
 次は[新要求](semantic_units_probe_requests.json)と[runner](semantic_units_probe.py)の新4call。base/保存fit38各AF01/AF02、追加学習0、raw補修/自動再試行0、process（import/読込込み）最大600秒、各要求23秒、固定model/revision/adapter/BF16/SDPA/nonthinking/greedy/context8192/max2048を保持。実input_ids.shape[-1]を記録し切捨てない。同Pod表示$0.58/hなら600秒按分上限約$0.0967、準備/待機/回収/保持/保存/税等別。新レンタル/チャージ/Pod操作は行わず、既存Jupyterへ直接接続。全raw/finish/request/response/candidateと失敗理由を回収し、rootが本文を読む。通常map/DB/RNへ未検証候補を採用しない。
 
 STRUCTURE_MAP_DELTA_PRESENT、primary=限定TECHNICAL_CREDIT（CPU候補保持/全文表示/file再読）。商品credit0・正式0/3・管理54.50％据置。System Context最新cache未成立のfresh原本fallbackを使用。今回の継続指示は分析残件を進める権限であり、自己採点による商品受入れではない。
+
+
+<a id="semantic-units-gpu4-and-clarified-20261102"></a>
+## 11/2 — 実4B意味分解は1/4受理、指示を版分離して修正
+
+CPU実装API fa995a44／要求・runner Cocolon dd30e782から新4callを完了。[body-free実結果](semantic_units_gpu4_results.json)。base AF01/AF02、保存fit38 AF01/AF02の順。実生成は17.830905/4.074274/23.022457/23.026012秒、process82.532446秒。base AF01はstopでもcode fence付きJSONで拒否、他にもREASON_MARKERをnode_kindへ入れる等のcarrier混同。base AF02は受理/全文併記graph/文章/同file再読まで成立したが、全文をSCENE1unitとして昨日/今日/否定を同unitに置いており、意味分解品質は未成立。fit38両件は分類語/同文反復でlengthとなり拒否。受口や既存assertionを緩めず、raw補修0/学習0/通常採用0/新candidate SQL0。
+
+初回起動はadapter引数の階層誤りで6.697189秒/生成0の停止。rootの指定誤りを実配置へ修正し、新output directoryで上の新4callを実行した。初回失敗原本も保持し、成功扱いにしない。配置時の既存test1copy差はGitHub原本へ同期し、対象text source2134fileのSHA差0を確認してから実行。GPU process終了後compute-apps空、Pod自体はMashのレンタル状態を維持。process単価$0.58/h換算は実4call約$0.01330、初回生成0の停止込み約$0.01438、準備/回収/待機/継続保持/保存/税等別で請求総額ではない。
+
+private原本 `cocolon-analysis-units-gpu4-20261102.zip`、Library `libfile_759a1028cb2c819199cf421a84a82aba`、133342bytes、SHA256 `cbbad3afbc98d6bf28e07fe91e61e4ee05de538d3154532e0cc8ed00a7fdd8d4`、24member。全CRC/member hashとGPU側request/runner・保存payloadを回収照合。原rawをpublicへ転載しない。別local processのEngine.generate禁止下でも旧base AF02同candidate ID/図/文章/coverageを再読成功。validator内の期待表現再計算は維持し、新モデルcall0。
+
+### 原出力からの修正と、次の新2call
+
+実sourceの受理条件は保持し、指示のA独立分類/B本人記載不明/C従属内容を明記し、列挙した全kindを出さないこと、fence禁止、不明と単純否定を分けることを説明した。別の架空3例でwireを実演するが、教師/盲検/凍結評価や今回入力の事実へ混ぜない。fit38反復の原因を学習と断定しない。
+
+API `cddf185594b5eeffcf72a92dcc2a2c5a44ff8b4c`、既存semantic_admission/service＋同testの3file。new private `instruction_version`はbaseline.v1/clarified.v1だけ。既定baselineのmessages/ref/state.v1は不変。clarifiedだけrefへ版を加え、state.v2に版を保存。旧rawを新指示扱いにするfallbackなし。異版response/再読は拒否。最終対象113 PASS/失敗0/skip0、15.87秒（旧860と重複加算しない）。旧実base AF02の保存payloadを現コードで生成禁止再読した。全変更3blobのremote全文とheadを照合済み。
+
+次は[clarified新要求](semantic_units_clarified_probe_requests.json)/[runner](semantic_units_clarified_probe.py)で、同じbaseのAF01/AF02を新2call、学習0/process300秒/各23秒。これは先の4callの再開/旧raw修正ではなく、新版指示と旧base指示の比較。上限process按分$0.04834（同Pod表示$0.58/h、保持等別）。rootが全raw/文章/図を読み、明白な不足をMashへ確認依頼せず修正する。baseの分解が進めばfit38の同条件比較・別題材へ続ける。通常map/DB/RNへ未検証候補を自動投入しない。必要作業/GPU/途中反映はMashの本セッション指示で承認済み。
+
+primary=BLOCKER_NARROWED（実モデルのcarrier混同/列挙反復を確認）、商品0/正式0/3/54.50％据置。指示版/保存版差分はSTRUCTURE_MAP_DELTA_PRESENT、通常稼働/公開API/DTO/DB/RN/依存定義/Render/merge変更0。

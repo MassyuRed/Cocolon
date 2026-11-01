@@ -3264,3 +3264,8 @@ API fa995a44。schema `cocolon.cmee.analysis_model_units.v1`、新frozen/slots/r
 新private immutable4型はAnalysisUnitQualifier/AnalysisUnitCandidate/AnalysisUnitCandidateField/AnalysisUnitCandidateGraph、private出力AnalysisUnitCandidateArtifact（candidate_id/graph/text/diagram_json）。通常safe_projectionを持たない。graphは全field全文/部分EvidenceRef/parent/qualifier/未割当範囲/全unparsed record refs/route空を保持する。主体はUNRESOLVED_NOT_OWNER_DERIVED、polarity/modality/時点はAS_WRITTEN_UNRESOLVED。
 
 保存schema `cocolon.cmee.analysis_model_units_state.v1`（request_ref/response/candidate_id/graph/text/diagram）をcaller file schema `cocolon.cmee.cumulative_unit_candidates_file.v1`（coverage/state）へ格納。全service coverageをfresh再導出し、旧source/guard/response/保存graph/表示改竄を拒否。trusted callerの対応metadataであり署名ではない。公開DTO/通常private_storage_evidence allowlist/DB/logical registry/旧profile変更0。意味品質は未検証、全結果はtrial/weekly§51。
+
+
+### 2026-11-02 — instruction_versionと保存state.v2
+
+API cddf1855。AnalysisModelUnitsInputへinstruction_version（既定baseline.v1、他はclarified.v1のみ）を追加。baselineの旧request_ref preimage/messages/state.v1 exact keyは維持。clarifiedはrequest_ref preimageへ版を一要素追加し、保存state.v2にinstruction_versionを追加する。fresh preparedとstate/response/messages hashの全版を照合し、交差転用/不明版/default fallbackを拒否。rawのroot/field/unit/qualifier契約は不変、旧profile/通常DTO/DB非変更。新5件を含む対象113成功と旧実保存payload再読を確認。

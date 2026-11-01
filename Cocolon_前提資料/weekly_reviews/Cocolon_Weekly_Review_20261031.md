@@ -1965,3 +1965,11 @@ Mashは必要作業/GPU/途中GitHub反映を一括承認し、区切りごと�
 API fa995a44の既存製品5＋新test1で、逐語quoteの部分意味候補/本人記載不明/従属scope/qualifierを元全文と同じ文章/図へ保持し、同fileのID/graph/text/図/coverageを再読する明示offline armを実装。主体未解決・全record unparsed・route0・通常ObservedGraph/safe_projection/DB/HTTP/RNは未切替。新41＋旧819＝860 PASS/失敗0/skip0、140.22秒。先行112/skip3は最終で置換、重複加算なし。validator内の期待表現再計算と保存本文の非生成再読を区別する。
 
 [全実結果・変更owner・実行境界](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#semantic-units-implemented-20261102)。実4Bは新4call/base-fit38各AF01-AF02・学習0・process600秒/各23秒で次に確認し、本文をrootが読む。新要求/runnerはGitHubへ反映してから実行する。今回指示で必要作業は承認済み、旧GPU承認の再利用ではない。一般品質・通常採用・本人受入れは未成立。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT、商品0/正式0/3/54.50％据置。
+
+
+<a id="analysis-model-units-gpu-and-clarified-20261102"></a>
+## 52. 11/2 — 実unit4callの不足と、旧保存互換を保つ指示修正
+
+新4callはprocess82.532446秒、base1件だけ受理/file再読、他3はJSON不正/length。baseの1件も全文SCENEで意味分解未成立。carrier混同・fit38の列挙反復をrootが全rawで確認し、未採用を維持。初回はadapter階層指定誤りの生成0/6.697189秒停止で、原本を残して実配置へ修正した。private24member/133342bytes/sha cbbad3af…をLibrary libfile_759a1028cb2c819199cf421a84a82abaへ保全。対象text source2134file一致、終了後GPU compute-apps空。
+
+API cddf1855の既存2owner＋test1でinstruction_versionを版分離。baseline messages/ref/state.v1不変、clarifiedのみ別ref/state.v2。A独立分類/B本人不明/C従属と架空3例、fence/列挙反復禁止を明示。parser・acceptanceは緩めず、113 PASS/失敗0/skip0、15.87秒。旧実AF02を現コードで非生成再読成功。次は同base2入力のclarified新2call/学習0/process300秒、原出力を読んで必要改善と別題材へ続ける。詳細は[trial](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#semantic-units-gpu4-and-clarified-20261102)。今回の継続承認内、旧承認再利用なし。通常有効化0/商品0/正式0/3/54.50％据置。
