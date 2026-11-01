@@ -1659,3 +1659,15 @@ RN製品source3a8660ba69253c7a94cc90523dca3af2ab9295e5のiOS #70/run41272806796/
 RN自動CI41272673502は全体failureを保持する。JS契約・Android sourceは成功、Pods/Android export jobは変更範囲によりnative compile本体skipで、今回新たなcompile成功へ数えない。iOS metricsの旧V4 19失敗（native129/V9 46/bitmap44成功）に加え、今回はlegacy RN canvas host検査もfailure。report13件はcontainment.prototype.v2の12件/prototype.v3の1件で、最初はnative_checked期待に対するunavailable/diagnostic stage83。製品bitmap ios.v1 reportは0件。native実装/host検査本体は前sourceから不変で、今回のbitmap保持変更が原因とは断定できないが、新たに観測した未解決失敗として残す。artifact13070860298にevidence/xcresultあり。全canvas成功/全CI成功とは扱わず、再試行/新build追加はしない。
 
 今回の実装・配置・配布までは完了。本人実機では7001へ更新し、履歴にある前回の保存記録から「ピースの作成」→画像preview→「Pieceを保存」→「保存したPieceを確認」→「画像の保存・共有を準備」→「写真に保存」の一巡を確認する。新しいEmlis生成は不要でGPUは停止のまま。保存済み同内容の再表示と実Photos保存が確認されるまで、本人一巡/商品受入れは未完とする。広い日本語対応・品質改善、Android/backend receipt、既存8タスク全完了へ拡張しない。結果記録だけのSTRUCTURE_MAP_DELTA_NONE、製品codeは7001のsourceから追加変更なし。
+<a id="piece-user-text-only-20261101"></a>
+## 41. 11/1 — 本人が画像生成・一覧・写真保存を確認、感情説明の追加を廃止
+
+Mashから7001で画像生成・一覧での確認・スマホ写真フォルダへの保存まで成功したと回答を受領。華恋の端末直接操作ではなく本人報告を根拠とし、Android/Share送信/一般品質/全機能受入れへ拡張しない。
+
+新指示：画像本文はユーザーが書いた文章を必要に応じて整形したものだけとし、感情選択から「記録時には〜」等の説明文を追加しない。新規ビルドを行わない。既存保存済みPiece/端末画像の本文・hashは書き換えず、新規作成から反映する。
+
+実装順：保存感情のJSON根拠を非表示contextへ分離→graph/plan/唯一作者/独立本文検査の可視対象をユーザー本文だけへ→短文のshort_essay下限を非空へ変更しpadding不要にする（最大420字/6文等は維持）→対象検証・API反映。RN/公開wire/DB schemaは変更せず、既存7001を継続使用する。STRUCTURE_MAP_DELTA_PRESENT（private選択contextと可視本文の責務を分離）。
+
+
+
+検証は対象7file579 PASS/FAIL0/SKIP0（既存warning1）。全5感情/強度、短い本文の全tier生成、元から書いた感情文の保持、追加説明/原因/意思/別段落の独立拒否、選択context改ざん/可視plan混入拒否、自然profileの生成→preview/visual/private保存/再読・source失効を含む。本人原本もprivate CPUで20字の本文だけを生成し実読、本人内容を公開testへ採用しない。限定の述語終端で名詞断片は拒否するが一般日本語の完全理解は主張しない。新規署名build/GPU/DB変更0。API配置結果は後続へ記録する。

@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-**11/1 UI修正（[第9回§38](weekly_reviews/Cocolon_Weekly_Review_20261031.md#response-modal-piece-entry-20261101)）：** Mash指定で共用応答popupを「Emlisからの応答」/「応答内容」へ変更し、通常説明・履歴展開・保存状況確認を削除。通常footerは「ピースの作成」「閉じる」の2つ。入力/履歴で表示中の保存ID→PieceCreate→既存source-ref/preview/明示保存へ接続し、応答本文を本人原文へ使わない。API1296eaeaのoriginal-only handoff/保存cohort補正を実DBへ適用し、dep-dbjafelg1s2s73f6mah0は02:46:53 UTC Live、health/bootstrap200・保存値read_onlyを確認。RN209/API実SQL175が対象PASS。RNef9f7bfc/iOS #68/run41266287100は全工程success、6801はApple処理通過・暗号化情報保存後、既存内部グループでテスト中。Mashが6801の応答popupを指示通りと確認。Pieceはsource-ref取得200後preview422で未作成、見出しが時計へ重なる実機不具合を受領。既存modal内Provider/安全領域と誤案内文を修復、対象231 PASS。RNedf77289/6901は署名Archive/IPA/Upload成功・Apple処理通過・内部テスト中。Mashが6901の表示修復を確認し問題なしと回答。Piece画像保存は未確認。第9回§40で選択感情の拒否を修復し、API564/RN251対象成功、API7f0cee40はLive、RN3a8660ba/7001はApple処理通過・内部テスト中。本人の画像保存一巡と広い日本語対応は未完。GPUはMashから停止報告、華恋の再起動0。
+**11/1 UI修正（[第9回§38](weekly_reviews/Cocolon_Weekly_Review_20261031.md#response-modal-piece-entry-20261101)）：** Mash指定で共用応答popupを「Emlisからの応答」/「応答内容」へ変更し、通常説明・履歴展開・保存状況確認を削除。通常footerは「ピースの作成」「閉じる」の2つ。入力/履歴で表示中の保存ID→PieceCreate→既存source-ref/preview/明示保存へ接続し、応答本文を本人原文へ使わない。API1296eaeaのoriginal-only handoff/保存cohort補正を実DBへ適用し、dep-dbjafelg1s2s73f6mah0は02:46:53 UTC Live、health/bootstrap200・保存値read_onlyを確認。RN209/API実SQL175が対象PASS。RNef9f7bfc/iOS #68/run41266287100は全工程success、6801はApple処理通過・暗号化情報保存後、既存内部グループでテスト中。Mashが6801の応答popupを指示通りと確認。Pieceはsource-ref取得200後preview422で未作成、見出しが時計へ重なる実機不具合を受領。既存modal内Provider/安全領域と誤案内文を修復、対象231 PASS。RNedf77289/6901は署名Archive/IPA/Upload成功・Apple処理通過・内部テスト中。Mashが6901の表示修復を確認し問題なしと回答。第9回§40の修復版7001で、Mashが画像生成・一覧・スマホ写真保存成功を確認。§41の最新指示により画像本文への選択感情説明を廃止し、ユーザー本文だけを必要に応じて整形するAPI修正を実施。対象579成功、新規buildなし、稼働結果は§41へ。GPUはMashから停止報告、華恋の再起動0。
 
 **11/1の稼働・配布：[第9回§37](weekly_reviews/Cocolon_Weekly_Review_20261031.md#testflight6701-device-initial-save-20261101)。** 6601はApple90683で配布不可。写真Usage/Add両目的文とArchive実物検査を修正したRNb8a43e5a/6701は、iOS #67/run41260929560が全工程success、Apple処理通過・暗号化情報保存後、既存内部グループで「テスト中」を確認。Mashは6701の起動と、感情入力→Emlis返事→同じ記録から同じ返事の再表示を確認した。実DB集計はnatural FINAL1/CALL_STARTED1/active0で再読後も増加なし。実Auth→固定4B→DB保存→本人再読の初回配線は完了。モデル提供は初回1477秒＋再開184秒以内で停止し、品質採用には換算しない。この初回確認時のAPI744336c0はdep-dbj9pqvb9u1s73de4160/保存値read_onlyでLive、保存readerとPiece private5ON/public3OFFを維持。iOS metrics19失敗・累積/月次snapshot・Piece実機・Android実配布・実ストア料金/購入/復元・本番原価/申請Consoleは未完。
 
@@ -128,16 +128,16 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | 機能 | 現在の実装・境界 | 確認・残件 |
 |---|---|---|
 | 本文・visual recipe | 保存済み本人source→単独で伝わるcanonical text＋画像。現V2 source adapter／pure coreはoriginal＋normal／pre-questionのみ。refinedは別sourceのopt-in補足を使う設計だが、現コードは`source_role_or_stage_not_yet_supported`で未対応 | 旧Q&Aの存在を新商品の定義にしない。Emlis生成本文・Analysis推定の原文流用は禁止。補足をoriginalへ連結してrefined接続済みにしない |
-| 一般入力への生成 | 通常previewは既存CMEEの有限作者で、4B未接続。対応する価値観/希望/評価・文末/選択感情等の条件で拒否が多い | 6801実機のsource-ref200→preview422を確認。一般入力からの生成は未完成。CPU架空対応例は生成、通常メモは拒否を確認。本人記録の厳密な内部拒否条件は未特定。§39へ |
-| preview・保存 | 本文・画像設定・取消・保存・回復のsource接続あり。iOS renderer供給とsame-mount/token current fitを接続。owner／runtime／quotaを別に確認 | §38で入力/履歴の応答popup→PieceCreate→既存source-ref/previewへsource接続。本人のpreview→明示private保存は未確認。preview＝保存record＝card＝renderer入力＝export本文を保つ。保存後の本文・format・recipe変更は新record |
+| 一般入力への生成 | 既存CMEEの有限作者を使用。最新指示はユーザーが書いた本文だけを必要に応じて整形し、選択感情の説明文は追加しない。短い完成文も水増しせず扱う | §41でprivate selection contextを可視graphから分離、対象579成功。一般日本語全体の品質は未完成、API配置結果は§41へ |
+| preview・保存 | 既存の作成/取消/明示private保存/回復。同一本文・recipe・hashとowner/枠を保持 | Mashが7001で画像生成・一覧での確認・スマホ写真フォルダへの保存成功を報告。既存保存recordは今回の文章方針修正で書換せず、新規作成へ反映 |
 | V2有効化・旧経路 | 11/1 API744336c0の明示factoryでpreview/save/owner-read/export/owner-delete各strict pair ON、public-write/public-read/visibility-toggle OFFをLive確認。default app:appはlegacy/OFF | 稼働設定と本人端末の通常保存は別。tutorial/Nexus旧経路とM5の全公開経路廃止は未完 |
-| 本人履歴・詳細・公開範囲 | owner一覧・詳細・公開切替・削除、通常導線・保存後再取得を接続。privateはownerのみ、publicも既存access policy内 | 同一ownerの実Auth保存→履歴／詳細往復は未完。アプリ内公開と外部画像共有を分ける |
-| export | 本人詳細→独立export許可GET→表示recordのID・row version・3hash・renderer一致→全canvas→Photos／Share直前再確認をsource接続（11/1） | API/RN6701内部配布・本人起動済み。Pieceの実OS写真保存・Share、Android新版export、backend receipt、本人端末商品受入れは未完。外部へ出た画像コピーは内部非公開／削除で回収できない |
+| 本人履歴・詳細・公開範囲 | owner一覧・詳細・公開切替・削除の既存経路。privateはownerのみ | 7001の生成済み画像と一覧は本人確認済み。同一record/hashの独立DB照合・Share送信・公開切替・削除の本人確認へ拡張しない |
+| export | 本人詳細→独立export許可GET→表示artifact照合→全canvas→Photos/Share直前再確認 | 7001の実Photos保存を本人確認済み。Share送信/Android新版export/backend receipt/一般品質は未確認。端末へ出た画像は内部削除で回収できない |
 | 新renderer | iOS piece.rn_bitmap_renderer.ios.v1。同一bitmap表示/書出し、構築/初回採用8秒。新sourceでは完成previewも同画像をsource期限内で保持し、読んでから保存できる。saved保持は維持 | APIはTTL600秒/同rendererでLive。6601のApple90683をAdd/Usage両keyとArchive実物検査で修正。6701はArchive/Apple処理/内部配布/本人起動済み。Pieceの本人描画・保存・再読は未完。Android成立へ拡張しない |
 | 最新限定検証 | 新export正常8PNG＋native拒否6。JS979・新native44成功。旧195は176PASS／19FAILを保持 | CI39780623108 attempt1 completed／failure、head`d2e1244…`、10/22 JST21:42:54〜22:07:18。CI全体合格ではない。限定TECHNICAL_CREDITの記録あり、product_credit=0 |
-| live・次の未完 | 最新API7f0cee40 Live、Piece private5ON/public3OFF。7001は生成修正/完成preview保持を含みApple処理通過・内部テスト中、本人保存一巡は未確認。RN CIは旧V4 19失敗に加え今回legacy canvas13reportの失敗/原因未確定を保持し、全CI成功とはしない。6801の応答popupは本人確認済み。Piece preview422/時計との重なりを受領し§39で修復、最新6901はApple処理通過・内部配布済み。新位置は本人確認済み、一般入力生成/画像保存は未完。6601のApple90683はb8a43e5a/6701で解消、内部配布・本人起動済み。Emlis初回生成/保存/同本文再読は§37で確認 | Piece初回本人保存→履歴/詳細→実Photos/ShareとAndroid/backend receipt、商品受入れは未完。文字計測旧V4 19失敗を残す |
+| live・次の未完 | API7f0cee40は前回配置版。7001で画像生成・一覧・Photos保存を本人確認。今回のユーザー本文限定修正はAPIのみ、配置結果は§41へ | 既知V4 19失敗と今回legacy canvas13reportの失敗/原因未確定を保持。Share/Android/一般日本語品質・正式商品受入れは未完 |
 
-詳細owner：[Piece map](current_structure/02_piece_current_structure.md)、[Piece入口](../Cocolon_Piece/00_read_first.md)、[manifest](../Cocolon_Piece/manifest.json)。RN6675b4ed/6601はApple90683で配布不可だった。目的2keyとArchive検査を含むb8a43e5a/6701はApple処理を通過し、既存内部グループでテスト中・本人起動済み。Piece本人保存再読/OS出力は未確認。第9回§37へ。
+詳細owner：[Piece map](current_structure/02_piece_current_structure.md)、[Piece入口](../Cocolon_Piece/00_read_first.md)、[manifest](../Cocolon_Piece/manifest.json)。RN6675b4ed/6601はApple90683で配布不可だった。目的2keyとArchive検査を含むb8a43e5a/6701はApple処理を通過し、既存内部グループでテスト中・本人起動済み。7001の画像生成/一覧/OS写真保存は本人確認済み。最新は第9回§41へ。
 
 ## 7. その他の全機能・共通基盤
 
