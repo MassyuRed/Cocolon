@@ -1,6 +1,6 @@
 # Analysis — 最小field接続と実4B probe
 
-**最新：11/2の新field-kinds受口はCPU実装・検証済み。前回の実4B受理0/4は履歴保持し、新形式のGPU確認は未実行。現在は末尾[CPU接続](#field-kinds-cpu-20261102)を正とする。**
+**最新：11/2、新field-kinds受口で実4Bの新4生成を一回完了。受理・同artifactの図/文章のファイル再読は4/4、process21.510225秒、学習/再試行0。全record未解析・関係0を維持し、意味分解/一般品質は未達。最新は末尾[実結果](#field-kinds-gpu4-result-20261102)。旧v1の受理0/4も履歴保持。**
 
 2026-11-01 JST。開始原本：Cocolon PR30 `1c66add4fdf8f5ded18f7443d6b91b1771998244`、API PR3 `36713940ea82e217fab8a7c0a738a33f21df1c4d`。Mashの分析残件開始とweekly§45.4に従う。Codex Work/GPT-6、root華恋が実装/統合/反映、別文脈agentはread-only監査のみ。独立Pro/Ultra又はhuman品質受入れとは呼ばない。System Context最新cacheは未成立のまま、fresh原本fallbackを使用。
 
@@ -67,7 +67,7 @@ primary=BLOCKER_NARROWED、商品credit0。現在の阻害点は、source側で�
 
 
 <a id="field-kinds-cpu-20261102"></a>
-## 11/2 — 番号と分類だけを受けるCPU接続（実装済み・新GPU未実行）
+## 11/2 — 番号と分類だけを受けるCPU接続（実装時点の履歴、後続で新GPU確認済み）
 
 前回の実4Bは全4rawが位置/参照の転記で拒否された。Mashの本ターン「分析構造の残件作業を続けて」を、直前に説明したCPU側の入出力見直しへの継続指示として扱い、具体設計→限定実装→検証を行った。旧4callの承認/失敗rawは閉鎖のまま再利用しない。新private受理契約の追加であり、旧v1 rawを補修して通したという変更ではない。
 
@@ -106,10 +106,39 @@ API commit `f7a1389679f15dbb9f24c40c0c5ac0058423c106`。製品exact3：`ai/servi
 
 root華恋/Codex Work GPT-6が実装・読解・反映、別文脈agentはread-only監査のみ。Pro/Ultra/human品質受入れとは呼ばない。System Context最新cacheは未成立のままでfresh原本fallbackを使用。STRUCTURE_MAP_DELTA_PRESENT（新明示private model wire/typed inputと既存graph接続）、限定TECHNICAL_CREDIT、商品credit0/正式0/3/管理54.50％据置。
 
-### 次の実4B一回（準備済み、今回実行0）
+### 新実4B一回の具体案（CPU準備時点、後続の承認で実行済み）
 
 [固定要求2件](field_kinds_probe_requests.json)と[one-shot runner](field_kinds_probe.py)を保存した。AF01/AF02のowner/snapshot/原文は前回と同じ既見の架空例、指示/受口だけを新形式へ変える。base/保存fit38各2件、**新4生成・学習0・再試行0、process最大600秒**。これは旧runの再開ではない。単価$0.60/h以下ならprocess按分最大$0.10、準備/回収/保持/税等別。前回確認単価$0.58/hなら最大約$0.0967だが現在のPod状態/単価は今回未再照会。Podの再起動/停止/新規レンタル/課金操作はしない。
 
 固定Qwen3.5-4B/revision851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a、保存fit38 SHA ad8b89e8974df9bfe7e804b8f67bbaac59e6cbb37042c3254fb58ffb64230d0a/config ef4b1aef621fb4e234ce6a05601efb62a987c3cf5d40f3995ca1b72200bab145、既存load_generator/pins/BF16/SDPA/non-thinking/greedy/context8192/max2048/各23秒を保持。tokenは実input_ids.shape[-1]で測定し切捨てない。600秒SIGALRMはimport/tokenizer/model読込/推論を含むhard bound、各23秒は既存StoppingCriteria期限。新out必須で上書き/二重実行しない。
 
 runnerはcall前のrequest/messages記録→元raw/finish/response保管→新受口→同artifact/projection/text/private/coverageを回収する。成立時の再読は同一process内file＋既存validatorで、cold再開や実SQL保存と呼ばない。固定synthetic guardをSQL guardへ書換えない。全件拒否/全UNRESOLVEDもそのまま記録し、再生成しない。終了後はrootが外側で所有process/GPU不在と原本回収を確認。Pod停止/削除はMash指示に従う。GPUは本ターン実行0で、次の新実行指示から行う。
+
+
+<a id="field-kinds-gpu4-result-20261102"></a>
+## 11/2 — 新field-kinds形式の実4Bは受理・ファイル再読4/4
+
+MashはCocolon `c0859cfbfbb59f24a608c713cde28dbd525c8945` の[具体案](#field-kinds-cpu-20261102)（追加学習なし・新4生成・process最大600秒・単価$0.60/h以下なら按分$0.10以内、準備/保持等別）へ「進めていいよ」と明示承認。API `f7a1389679f15dbb9f24c40c0c5ac0058423c106` と固定runner/要求を変えず、一回だけ実行した。旧v1 runの再開・raw補修ではない。この承認の4callは消費済み、probeは閉鎖。追加生成/学習/通常有効化へ自動進行しない。
+
+接続済みの同一Pod/Jupyterへ直接接続。実行前のCPU preflightでrunner/要求SHA、f7a13896の製品3blob、両入力の実messages/request_ref、model pins、fit38 identityを確認した。probe用venvに既存API依存が不足したため、CPU検証時と同じfastapi0.162.0/httpx0.28.1/jsonschema4.26.0/pydantic2.14.1を導入してから実行。製品依存定義の変更は0、model pinsは不変。固定base revision851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0aと保存fit38（weights ad8b89e8974df9bfe7e804b8f67bbaac59e6cbb37042c3254fb58ffb64230d0a/config ef4b1aef621fb4e234ce6a05601efb62a987c3cf5d40f3995ca1b72200bab145）を既存loader/BF16/SDPA/non-thinking/greedy/context8192/max2048で使用した。
+
+2026-11-02 07:41:41〜07:42:03 JST（UTC11/1 22:41:41〜22:42:03）、RTX PRO4000 Blackwell/24467MiB、torch2.8.0+cu128/CUDA12.8。import/tokenizer/model読込/推論/consumer/fileを含む**process21.510225秒**、exit0、実4生成・追加学習0・再試行0・raw補修0。全件finish=stop。実input_ids.shape[-1]はAF01=251、AF02=221、切捨て0。前回の旧runnerのtoken数誤記とは別の正常計測であり、旧記録は書換えない。
+
+| 条件/入力 | 生成秒 | 新受口 | artifact/同ファイル図・文章再読 | node/edge/未解析record |
+|---|---:|---|---|---|
+| base AF01 | 2.532383 | RETURNED | 作成 / MATCHED | 2 / 0 / 1 |
+| base AF02 | 1.224108 | RETURNED | 作成 / MATCHED | 1 / 0 / 1 |
+| fit38 AF01 | 2.021466 | RETURNED | 作成 / MATCHED | 2 / 0 / 1 |
+| fit38 AF02 | 1.425042 | RETURNED | 作成 / MATCHED | 1 / 0 / 1 |
+
+call前messages/request_ref/guardとcall後raw SHA/finishの外部対応を独立再計算し、元raw/response/reportのhash一致を確認。各callは別artifact IDを持ち、それぞれ同ID/図/本文/private根拠/coverageのfile再読に成功した。GPU runner内の同一process再読に加え、回収後は別local processでMeaningExperienceEngine.generateを禁止し、保存済みactual artifactの同じID/図/本文/coverageとcall bindingを再確認（4 MATCHED/新model call0/Engine.generate0）。これは保存artifactの再読であり、cold meaning checkpoint再開や実SQL保存ではない。**今回の実4B由来SQL commitは0**。前項CPU合成候補の隔離SQL成功を混ぜない。
+
+base/fit38は同一入力にbyte一致のrawを返した。AF01はmemo=ATTENTION_OR_THOUGHT、action=ACTION_OR_NONACTION、AF02はmemo=IMMEDIATE_RESULT_OR_AFTERMATH。分類候補としては粗く妥当だが、AF01の否定された後悔と他者の考えの不明、AF02の昨日/今日・解決/感情を意味単位へ分けていない。疲労と拒否の理由を解決済み因果とも扱わない。全recordはsource/processed/mapped/unparsed各1、excluded0、polarity/modality/temporal_scope=AS_WRITTEN_UNRESOLVEDのまま。否定/留保/時点/絵文字の保持はsource再投影による保証で、モデルの意味理解成功とは数えない。既見の架空2入力×2条件の機構probeであり、教師/盲検評価/一般品質受入れではない。fit38優位性も示していない。旧形式0/4→新形式4/4は入出力設計変更の実接続結果で、学習改善・旧rawの修復・旧受口の緩和ではない。
+
+今回Jupyterを直接使ったため料金UIは再照会せず、同じPodで前回確認した$0.58/hを参照。実処理按分は同単価で約$0.00347、上限単価$0.60/hで約$0.00359。請求総額ではなく、準備/待機/回収/継続保持/保存/通信/税等は別。所有する推論processとnvidia-smi compute-appsが空であることを終了後に確認。Pod Stop/削除/再起動/新規レンタル/チャージ0、PodはMash管理下で稼働維持。今回のGPU処理は完了し、原本も保全済みなので停止可能。
+
+全4callのactual request/messages/raw/finish/response/artifact/report/logと終了状態、別processの生成禁止再読をprivate原本 **`cocolon-analysis-field-kinds-gpu4-result-20261102.zip`** に保全。Library ID `libfile_83a4d737bd9481919f42efd0f3d039ff`、25,782bytes、SHA256 `5b04337c50de872df6c19f67e1be68d8c4c3748aa23788292d91fe738e33afac`、27member。保存先から別pathへ読み戻し、全bytes/CRC/manifestを照合。body-full raw/artifact、資格情報、重みはpublic GitHubへ置かない。ZIP内は資格情報/重み/screenshotなし、repo-backed runner/要求は重複収録せず固定参照/hashを記録。runner SHA256 c7d66260ce76a426e7fd414e503d4a166da85dfb26ed1f987259e756d4e9a0c4、要求218be91fc4fa10ed2349fb8a52360f552494167a328cadf2333a9cf30cd60044を実回収bytesと照合済み。旧v1のprivate失敗原本も変更0。
+
+root華恋/Codex Work GPT-6が実行・元出力読解・統合・反映し、別文脈agentはread-only監査のみ。Pro/Ultra/human品質受入れとは呼ばない。System Context最新cacheは未成立のままfresh原本fallback。primary=TECHNICAL_CREDIT（実4B→新受口→既存候補graph/text→同ファイル再読）、商品credit0/正式0/3/管理54.50％据置。製品source/型/契約/DB/通常有効化/Render/RN build変更0、両PRはDraft/open/unmergedを維持。STRUCTURE_MAP_DELTA_NONE（今回は既存実装の実行観測と資料差分のみ）。
+
+次の一作業は、既存source/graph所有者の中で**field全体の一分類から根拠付き意味単位へ分けるCPU設計**。主体/否定/時点/留保を保ち、不明を確定しない。原文に明記された理由/時間差と、推測の因果/性格/別recordの関係を区別する。受口・保存checkerの増築を次の主成果にせず、今回2例は残件の説明材料として扱い、固定教師や一般品質の合格例へ転用しない。

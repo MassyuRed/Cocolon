@@ -1921,3 +1921,23 @@ root華恋/Codex Work GPT-6が実装・読解・反映、別文脈agentはread-o
 固定Qwen3.5-4B/revision851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a、保存fit38 SHA ad8b89e8974df9bfe7e804b8f67bbaac59e6cbb37042c3254fb58ffb64230d0a/config ef4b1aef621fb4e234ce6a05601efb62a987c3cf5d40f3995ca1b72200bab145、既存load_generator/pins/BF16/SDPA/non-thinking/greedy/context8192/max2048/各23秒を保持。tokenは実input_ids.shape[-1]で測定し切捨てない。600秒SIGALRMはimport/tokenizer/model読込/推論を含むhard bound、各23秒は既存StoppingCriteria期限。新out必須で上書き/二重実行しない。
 
 runnerはcall前のrequest/messages記録→元raw/finish/response保管→新受口→同artifact/projection/text/private/coverageを回収する。成立時の再読は同一process内file＋既存validatorで、cold再開や実SQL保存と呼ばない。固定synthetic guardをSQL guardへ書換えない。全件拒否/全UNRESOLVEDもそのまま記録し、再生成しない。終了後はrootが外側で所有process/GPU不在と原本回収を確認。Pod停止/削除はMash指示に従う。GPUは本ターン実行0で、次の新実行指示から行う。
+
+
+<a id="analysis-model-field-kinds-gpu4-20261102"></a>
+## 49. 11/2 — 新field-kinds形式の実4B接続は4/4、意味分解は残件
+
+Mashは§48の「追加学習なし・新4生成・process最大10分・単価$0.60/h以下なら按分$0.10以内、準備/保持等別」へ「進めていいよ」と承認。Cocolon c0859cfb/API f7a13896の固定runner/要求と既存loader/保存fit38で、接続済み同一Jupyterから一回だけ実行した。新4call消費済み・probe閉鎖。旧v1の4call/raw/失敗原本は変更しない。
+
+base/fit38各AF01/AF02の**新4生成は全stop/RETURNED、実artifact作成・同ファイル図/文章/private根拠/coverage/ID再読4/4**。processはimport/tokenizer/model読込等込み21.510225秒、exit0、追加学習/再試行/raw補修0。生成は順に2.532383/1.224108/2.021466/1.425042秒。input_ids.shape[-1]はAF01=251/AF02=221、切捨て0。終了後に所有推論process/GPU compute-apps空を確認した。
+
+回収actual request/messages/raw/response/reportの対応とSHAを再照合。別local processでもEngine.generate禁止下で保存した同ID/図/本文/coverageを4件MATCHED、新model call0。これは保存artifactの再読でcold meaning checkpoint再開ではない。**実4B由来SQL commit0**で、§48のCPU合成候補の隔離SQL保存とは区別する。API依存不足は実行前にprobe venvへCPU検証時と同じ4packageを導入し解消、model pinsと製品依存定義は変更0。
+
+同一入力のbase/fit38 rawはbyte一致。AF01は思考/行動候補、AF02は結果候補というwhole-field分類。AF01の否定された後悔/他者の考えの不明、AF02の昨日/今日・解決/感情の意味分解はしていない。全record未解析1・関係0・AS_WRITTEN_UNRESOLVEDを維持。否定/留保/時点/絵文字が残るのはsource再投影で、モデル理解・fit38優位・一般品質の実証ではない。既見の架空2例×2条件で、教師/盲検/本人商品受入れにしない。旧形式0/4→新形式4/4は新入出力の実接続結果で、学習改善や旧raw補修/旧受口緩和ではない。
+
+前回の同Pod表示$0.58/hなら実処理按分約$0.00347（$0.60/hなら約$0.00359）。今回はJupyter直接接続のため料金UI未再照会、請求総額ではなく準備/回収/待機/継続保持/税等別。Pod Stop/削除/再起動/新規レンタル/チャージ0。今回のGPU処理と原本保全は終了し停止可能、Pod自体はMash管理下で稼働維持。
+
+private原本 `cocolon-analysis-field-kinds-gpu4-result-20261102.zip`、Library ID `libfile_83a4d737bd9481919f42efd0f3d039ff`、25,782bytes、SHA256 `5b04337c50de872df6c19f67e1be68d8c4c3748aa23788292d91fe738e33afac`。全27memberのCRC/manifestと保存先からの読み戻しbytesを照合。詳細は[trial実結果](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#field-kinds-gpu4-result-20261102)。本文を含む原出力はprivate保持。
+
+root華恋/Codex Work GPT-6が実行/読解/統合、別文脈agentはread-only監査のみ、Pro/Ultra/human品質受入れではない。primary=限定TECHNICAL_CREDIT（実4B→新受口→既存graph/text→file再読）、商品credit0/正式0/3/管理54.50％据置。製品source/型/契約/DB/通常有効化/Render/RN build変更0、両Draft PRは未merge。STRUCTURE_MAP_DELTA_NONE。最新cache未成立のfresh原本fallbackを保持。
+
+次はfield全体の一分類から、主体/否定/時点/留保を保った根拠付き意味単位へ分け、原文に明記された理由/時間差だけを整理するCPU設計。既存source/graph ownerを使い、受口・保存checkerを増築することを次の主成果にしない。追加GPU/学習/通常有効化は自動実行しない。

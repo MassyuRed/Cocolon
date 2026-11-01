@@ -1949,3 +1949,12 @@ service/factory/通常reply/API、RNのpending→GET→同一保存本文を接�
 新private `analysis_model_field_kinds.v1` をCPU接続。モデルは入力順のstrict整数番号＋既存五種又はUNRESOLVEDだけを返す。call前のfull request_ref/実messages hashと返ったraw SHA/finish/rawの外部bindingを必須にし、元source/owner/版/guardと再照合する。raw単独の由来証明やmetadataの自己認証ではない。旧v1 rawの補修・v1packet作成・自動fallbackをせず、両strict readerの後だけ既存ObservedQuotedField/graph/唯一realizerを共有。全unparsed/関係0/通常ensure未有効化、一般意味品質は未検証。
 
 API `f7a1389679f15dbb9f24c40c0c5ac0058423c106`、実装/検証/全pathは[Analysis04](../designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#analysis-model-field-kinds-v1)。最終819PASS（新34＋旧785）＋既存共有owner別1PASS、実隔離SQLの同図/文章/ID非生成再読と削除寿命を確認。公開API/DTO/DB/RN/依存/稼働変更0、実4B/追加学習0。次GPUは新4call/600秒の具体案で未実行。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT/商品credit0。
+
+
+## 2026-11-02 — 新field-kinds形式を実4Bで一回確認、受理・file再読4/4
+
+Mash承認の固定新4生成をCocolon c0859cfb/API f7a13896から一回実行。base/保存fit38各AF01/AF02は全stop/RETURNEDで、各callの別artifactを作成し同じID/図/文章/private根拠/coverageのfile再読4/4。process21.510225秒、追加学習/再試行/raw補修0。回収後は別local processでもEngine.generate禁止の保存artifact再読4 MATCHED、新model call0。cold meaning checkpoint再開やSQL保存ではなく、今回の実4B由来SQL commit0。CPU合成SQL成功とは区別する。
+
+同一入力のbase/fit38 rawは一致。全record未解析1・関係0・AS_WRITTEN_UNRESOLVEDを維持し、whole-field分類から否定/不明/昨日・今日/解決/感情を分ける意味処理は未達。sourceによる原文再投影を理解成功へ数えず、fit38優位/一般品質/商品受入れにしない。旧v1の0/4とは新形式の別run。結果原本はprivate保存と読み戻しhash照合済み。詳細は[新実結果](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#field-kinds-gpu4-result-20261102)、最新weekly§49。
+
+所有推論process/GPU compute-apps空、Pod Stop/削除/再起動0。製品source/型/契約/DB/通常有効化/Render/RN変更0。承認の4callは消費・probe閉鎖。次は既存source/graph ownerで根拠付き意味単位と主体/否定/時点/留保、原文に記載された理由/時間差を扱うCPU設計。限定TECHNICAL_CREDIT/商品credit0、STRUCTURE_MAP_DELTA_NONE（今回は実行観測のみ）。
