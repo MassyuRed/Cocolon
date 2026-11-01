@@ -36,4 +36,4 @@ GPU準備前の計画で、実行0。`probe_requests.json`の架空AF01/AF02を�
 
 API反映commit：`59489814a924eec29f4ee61386e6daa3bec1a49a`（既存PR3、製品5＋test1）。
 
-GitHub反映後、API6file/前提資料13fileの全内容・blobと、両commitの親/変更path/両Draft headを読み戻し照合。既存Analysis CI [41301298465](https://github.com/MassyuRed/mashos-api/actions/runs/41301298465)は確認時点実行中。追加のlocal shared owner identity検査はexportにai/toolsがないためcollection不可であり、local785の失敗へ混ぜず、full checkoutのCI結果を別確認する。
+GitHub反映後、API6file/前提資料13fileの全内容・blobと、両commitの親/変更path/両Draft headを読み戻し照合。既存Analysis CI [41301298465](https://github.com/MassyuRed/mashos-api/actions/runs/41301298465)は全工程success（job124832571851）。追加のlocal shared owner identity検査はexportにai/toolsがないためcollection不可であり、local785の失敗へ混ぜず、full checkoutのCIでは同じ共有owner identity検査もsuccess。通常分析・合成本文・累積API/Q3・月次rank/immutable再読/source削除SQLを含む全工程成功を確認した。
