@@ -1704,4 +1704,12 @@ Mashは§42のロゴ変更を含め、起動時の読込表示を初期準備完
 
 §43 source検証：RNの全JS testは1279 PASS/FAIL0（Metro bundle再構築test1件はローカルにMetro依存がないため--test-skip-patternで対象外。署名buildの実bundleは後続）。API対象4fileは255 PASS/native SQL11 deselected/既存warning1。遅い購読初回通信、Home失敗と再試行、本人切替、mount/下書き保持、新v2のEmlis測定/8秒後同bitmap保持、v1/v2 export private token/binding、HTTP交渉/保存版保持を含む。設定以外のガイド本文リンク/relatedTermsの未定義参照0。独立read-only監査の指摘（購読bootstrap仮loaded、v2試験期限、用語読み、map不足説明）を修正済み。署名build/配置/本人端末はまだ未実行。
 
-§43配布進行：RN7464f858のiOS #71/run41283646380/job124780456306を一度起動、署名Archive進行中。API3407402のdep-dbjebcflk1mc7390mnr0は07:11:03 UTC Live、health/bootstrap200・private5ON/public3OFF。API CIのHTTP27失敗は新allowed_renderersを拒否する旧test wrapperのexpectationと特定し、d43cabcdで集合/許可版検査とv1/v2実SQL再読2件を追加（製品source3file不変）。RN CI41283430228はJS/Android source成功、native metricsは従来V4 19失敗/native129/V9 46/bitmap44成功。canvasは旧stage83実測へ進む前にtest harnessの固定preimage hashで停止したため、今回のnative bitmap実装hashへ固定値を同期。lexical projection一致/既存marker200個をoffline確認、観測や判定は変更しない。Test-only更新で新署名buildは増やさず、7464f858のproductを維持する。
+§43配布進行：RN7464f858のiOS #71/run41283646380/job124780456306を一度起動、署名Archive進行中。API3407402のdep-dbjebcflk1mc7390mnr0は07:11:03 UTC Live、health/bootstrap200・private5ON/public3OFF。API CIのHTTP27失敗は新allowed_renderersを拒否する旧test wrapperのexpectationと特定し、d43cabcdで集合/許可版検査とv1/v2実SQL再読2件を追加（製品source3file不変）。RN CI41283430228はJS/Android source成功、native metricsは従来V4 19失敗/native129/V9 46/bitmap44成功。canvasは旧stage83実測へ進む前にtest harnessの固定preimage hashで停止したため、今回のnative bitmap実装hashへ固定値を同期。lexical projection一致/既存marker104個をoffline確認、観測や判定は変更しない。Test-only更新で新署名buildは増やさず、7464f858のproductを維持する。
+
+### §43 最終結果と本人確認
+
+**11/1・7101本人確認済み（第9回§43）：** RN7464f858のiOS #71/run41283646380/job124780456306は署名Archive・写真目的文検査・IPA・TestFlight Uploadの全工程success。Mashが7101を反映し、今回依頼した修正の完了を確認した。起動待ち、Home全体行動削除、Ranking撤去、設定以外のガイド同期、新PieceのEmlisロゴを含む。こころ天気は今/日週月/履歴/未読/通知/tutorialを従来どおり維持。API3407402/dep-dbjebcflk1mc7390mnr0は07:11:03 UTC Live、health/bootstrap200・private5ON/public3OFF。API製品同一blobのd43cabcd native PostgreSQL CI41283815884は全step成功。RNの旧V4 metrics19失敗とlegacy canvas13reportは残る。依頼UIの本人確認を、全製品の品質/正式商品受入れへ広げない。GPU再起動0。
+
+ローカルの全JS1279成功後、最終Home retry表示の対象169成功（重複のため加算しない）。新APIの実DB CIはfixture同期後success。RN61313bfのtest-only hash同期では104 markerと元token projection一致を確認、canvasはXCTestまで進み旧7001と同系統の13report（containment.v2×12/prototype.v3×1、先頭2件stage83）で失敗。product bitmap v1/v2 reportは0で、この旧suiteから新v2の退行/成立を断定しない。native129/V9 46/bitmap44は成功、V4の19失敗は未解消。7101の依頼範囲の完了はMashの実端末確認を根拠とする。追加署名build/新ユーザー招待/外部配布/App Store公開/GPU起動は行っていない。
+
+Mashの次の依頼は、わたしマップの全入力累積/月次当時保存/現在比較に関する議事録の提示。§3.3/§6.2/§7.1/§11.5/§33を参照し、仕様・華恋案・未決・実装未完を区別して説明する。今回そのAnalysis実装には着手していない。

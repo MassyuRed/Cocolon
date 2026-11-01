@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-**11/1・次の配布候補（第9回§43、検証済み／配置・build前）：** 起動の読込表示を購読設定の初回通信・本人Home初回取得・下書き準備まで維持し、Home「今日の全体行動」とRankingタブ/導線を撤去。設定以外のガイド/用語/チュートリアルを現物へ同期。こころ天気の削除はMashが取り消したため、今/日週月/履歴/未読/通知/分析tutorialは原本どおり保持する。Pieceは新iOSの明示capabilityでios.v2=Emlis、旧ios.v1=Cocolonを保存版に従って再読。本文の選択感情説明廃止APIba0de502を含み、GPU再起動なし。新候補の実機結果は未確認。
+**11/1・7101本人確認済み（第9回§43）：** RN7464f858のiOS #71/run41283646380/job124780456306は署名Archive・写真目的文検査・IPA・TestFlight Uploadの全工程success。Mashが7101を反映し、今回依頼した修正の完了を確認した。起動待ち、Home全体行動削除、Ranking撤去、設定以外のガイド同期、新PieceのEmlisロゴを含む。こころ天気は今/日週月/履歴/未読/通知/tutorialを従来どおり維持。API3407402/dep-dbjebcflk1mc7390mnr0は07:11:03 UTC Live、health/bootstrap200・private5ON/public3OFF。API製品同一blobのd43cabcd native PostgreSQL CI41283815884は全step成功。RNの旧V4 metrics19失敗とlegacy canvas13reportは残る。依頼UIの本人確認を、全製品の品質/正式商品受入れへ広げない。GPU再起動0。
 
 **11/1 UI修正（[第9回§38](weekly_reviews/Cocolon_Weekly_Review_20261031.md#response-modal-piece-entry-20261101)）：** Mash指定で共用応答popupを「Emlisからの応答」/「応答内容」へ変更し、通常説明・履歴展開・保存状況確認を削除。通常footerは「ピースの作成」「閉じる」の2つ。入力/履歴で表示中の保存ID→PieceCreate→既存source-ref/preview/明示保存へ接続し、応答本文を本人原文へ使わない。API1296eaeaのoriginal-only handoff/保存cohort補正を実DBへ適用し、dep-dbjafelg1s2s73f6mah0は02:46:53 UTC Live、health/bootstrap200・保存値read_onlyを確認。RN209/API実SQL175が対象PASS。RNef9f7bfc/iOS #68/run41266287100は全工程success、6801はApple処理通過・暗号化情報保存後、既存内部グループでテスト中。Mashが6801の応答popupを指示通りと確認。Pieceはsource-ref取得200後preview422で未作成、見出しが時計へ重なる実機不具合を受領。既存modal内Provider/安全領域と誤案内文を修復、対象231 PASS。RNedf77289/6901は署名Archive/IPA/Upload成功・Apple処理通過・内部テスト中。Mashが6901の表示修復を確認し問題なしと回答。第9回§40の修復版7001で、Mashが画像生成・一覧・スマホ写真保存成功を確認。§41の最新指示により画像本文への選択感情説明を廃止し、ユーザー本文だけを必要に応じて整形するAPI修正を実施。対象579成功、APIba0de502は14:16:37 JST Live/health・bootstrap200、native PostgreSQL CI成功。新規buildなし、7001継続。§41へ。GPUはMashから停止報告、華恋の再起動0。
 
@@ -136,7 +136,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | 本人履歴・詳細・公開範囲 | owner一覧・詳細・公開切替・削除の既存経路。privateはownerのみ | 7001の生成済み画像と一覧は本人確認済み。同一record/hashの独立DB照合・Share送信・公開切替・削除の本人確認へ拡張しない |
 | export | 本人詳細→独立export許可GET→表示artifact照合→全canvas→Photos/Share直前再確認 | 7001の実Photos保存を本人確認済み。Share送信/Android新版export/backend receipt/一般品質は未確認。端末へ出た画像は内部削除で回収できない |
 | 新renderer | iOS piece.rn_bitmap_renderer.ios.v1。同一bitmap表示/書出し、構築/初回採用8秒。新sourceでは完成previewも同画像をsource期限内で保持し、読んでから保存できる。saved保持は維持 | APIはTTL600秒/同rendererでLive。6601のApple90683をAdd/Usage両keyとArchive実物検査で修正。6701はArchive/Apple処理/内部配布/本人起動済み。Pieceの本人描画・保存・再読は未完。Android成立へ拡張しない |
-| 画像内ブランド | 次候補でios.v2=Emlisを実装。旧ios.v1=Cocolonは保存版どおり保持。新compiled bridgeのみ明示headerでv2を要求し、旧/欠落はv1 | §43の新build指示を受領。recipe内部ID/DB schema不変、owner/保存/bitmap保持/exportの版束縛を維持。現在配布済み7001はCocolon、配置・新配布・端末確認は後続 |
+| 画像内ブランド | 次候補でios.v2=Emlisを実装。旧ios.v1=Cocolonは保存版どおり保持。新compiled bridgeのみ明示headerでv2を要求し、旧/欠落はv1 | §43の新build指示を受領。recipe内部ID/DB schema不変、owner/保存/bitmap保持/exportの版束縛を維持。7101をMashが反映し依頼修正完了を確認。新規v2画像はEmlis、旧v1保存画像はCocolonを保持 |
 | 最新限定検証 | 新export正常8PNG＋native拒否6。JS979・新native44成功。旧195は176PASS／19FAILを保持 | CI39780623108 attempt1 completed／failure、head`d2e1244…`、10/22 JST21:42:54〜22:07:18。CI全体合格ではない。限定TECHNICAL_CREDITの記録あり、product_credit=0 |
 | live・次の未完 | APIba0de502は14:16:37 JST Live/health・bootstrap200。7001で画像生成・一覧・Photos保存を本人確認。ユーザー本文限定修正はAPIのみ、新規buildなし。§41へ | 既知V4 19失敗と今回legacy canvas13reportの失敗/原因未確定を保持。Share/Android/一般日本語品質・正式商品受入れは未完 |
 
@@ -156,7 +156,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | フォロー・申請・推薦 | 作成／解除／フォロワー削除／承認／拒否／取消／おすすめを接続 | 非公開account・推薦除外・公開範囲を保持。見つけることと閲覧許可は別 |
 | アカウント・ID検索 | 自他profile・活動情報・表示名・共有コード、非公開設定、推薦／ランキング可視性 | 共有ID公開、推薦、ランキング、非公開を別設定とする。公開profile APIと認証本人APIを分ける |
 | 共有URL・native／Web入口 | 共有profile URL→公開API→Accountに加え、11/1にiOS cocolon scheme/URL転送とvisibility HTTP失敗時502を実装 | API配置/RN Upload済み。本人認証復帰、HTTPS universal linkのdomain entitlement/Web補助は残件。実漏出を観測したという意味ではない |
-| ランキング・感情集計 | §43の次RN候補でRankingタブ/stack入口/表示設定/guideを撤去。保存データ・APIは削除しない。Pieceの全体感情集計は別経路として維持 | 配布済み7001は変更前。全体感情TOP3はアプリ内集計で、社会全体の代表値ではない |
+| ランキング・感情集計 | §43の次RN候補でRankingタブ/stack入口/表示設定/guideを撤去。保存データ・APIは削除しない。Pieceの全体感情集計は別経路として維持 | 7101で依頼UI修正完了を本人確認。全体感情TOP3はアプリ内集計で、社会全体の代表値ではない |
 | 通知・未読 | push token同期、未読状態、問い・report・感情更新から対応画面へ戻るrouting | token登録と配送成功を分ける。ログアウト／account切替時の本人境界、全cold／warm動作は別確認 |
 | アプリ設定・購読 | theme、全体／個別通知、プラン購入・復元・管理、entitlement。11/1にfinish両失敗の伝播/同一購入の結果共有とowner世代ごとの旧応答遮断を修正 | RN6701内部配布・本人起動済み。実storeのfinish／失効／account切替／復元・release判定は残る。料金表示だけで有料品質成立としない |
 | ガイド・tutorial・お知らせ | ガイド、再体験、tutorial flow、notice current／history／read | mock体験は通常実経路の成功証拠ではない。tutorialを全体価値・入力の悩みの唯一の解決としない |

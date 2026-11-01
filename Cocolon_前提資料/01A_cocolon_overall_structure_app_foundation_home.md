@@ -1,3 +1,5 @@
+> **11/1・7101本人確認済み（第9回§43）：** RN7464f858のiOS #71/run41283646380/job124780456306は署名Archive・写真目的文検査・IPA・TestFlight Uploadの全工程success。Mashが7101を反映し、今回依頼した修正の完了を確認した。起動待ち、Home全体行動削除、Ranking撤去、設定以外のガイド同期、新PieceのEmlisロゴを含む。こころ天気は今/日週月/履歴/未読/通知/tutorialを従来どおり維持。API3407402/dep-dbjebcflk1mc7390mnr0は07:11:03 UTC Live、health/bootstrap200・private5ON/public3OFF。API製品同一blobのd43cabcd native PostgreSQL CI41283815884は全step成功。RNの旧V4 metrics19失敗とlegacy canvas13reportは残る。依頼UIの本人確認を、全製品の品質/正式商品受入れへ広げない。GPU再起動0。
+
 > 11/1最新はweekly第9回§39。6801の応答UIをMashが確認。Piece preview422と時計への重なりを受領し、既存modalの安全領域/案内文を修復。候補/配布/本人確認を区別する。
 
 > 2026-11-01後続差分：関連資料・本人補足/訂正・Analysis複数補足・候補SHA指定と実DB適用。配置/配布/実機・累積月次は未完。末尾[差分](#related-material-20261101)とweekly§33。
