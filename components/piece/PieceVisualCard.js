@@ -5,6 +5,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { PIECE_NATIVE_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION, PIECE_BITMAP_PREVIEW_VERSION, preparePieceNativeCard, createPieceNativeMeasurement, pieceNativeTypography, recordPieceNativeMeasurement } from '../../features/piece/pieceLayout';
 import { inspectPieceText, inspectPieceSelectedLine, inspectPieceSelectedLineV2, inspectPieceSelectedLineV3, inspectPieceSelectedLineV4, pieceContainmentV2DeadlineCurrent, measurePieceCandidates, pieceBitmapNativeView, pieceBitmapDeadlineCurrent, renderPieceBitmapCanvas, releasePieceBitmapCanvas } from '../../features/piece/pieceRenderer';
+import { PIECE_BITMAP_RENDERER_VERSION } from '../../features/piece/pieceLayout';
 import { planPieceMeasuredRows } from '../../features/piece/pieceMeasuredWrap';
 
 let pieceBitmapBindingSerial = 0;
@@ -140,15 +141,21 @@ export default class PieceVisualCard extends React.Component {
     if (this.saveFit || typeof listener !== 'function' || this.props.exportCanvas === true || this.props.savedRecord) return;
     const snapshot = this.state.measurement, binding = this.state.binding, operation = this.inspection, artifact = this.bitmapArtifact;
     const input = preparePieceNativeCard(this.props), token = display?.visualToken;
+    const deadline = this.deadline, retained = input?.rendererVersion === PIECE_BITMAP_RENDERER_VERSION;
+    let completed = artifact?.completedPreview;
+    const completedCurrent = () => retained && !!completed && artifact.completedPreview === completed &&
+      completed.deadline === deadline && completed.snapshot === snapshot && completed.operation === operation &&
+      completed.binding === binding && completed.token === token && completed.key === input.key;
+    const lifetimeCurrent = () => retained && completed ? completedCurrent() : pieceBitmapDeadlineCurrent(deadline);
     if (!input || !token || !artifact || !operation?.bitmap || operation.evidence !== snapshot.inspection ||
-        !this.bindingCurrent(binding) || snapshot.phase !== 'native_checked' || !pieceBitmapDeadlineCurrent(this.deadline)) return;
-    const deadline = this.deadline, record = { valid: true, listener, handle: null };
+        !this.bindingCurrent(binding) || snapshot.phase !== 'native_checked' || !lifetimeCurrent()) return;
+    const record = { valid: true, listener, handle: null };
     record.handle = Object.freeze({ isCurrent: (preview, visualToken) => {
       try {
         if (!record.valid || this.props.onSaveFitChange !== listener || !this.bindingCurrent(binding) ||
             this.state.measurement !== snapshot || this.inspection !== operation || this.bitmapArtifact !== artifact ||
             this.bitmapNode !== artifact.node || this.canvasNode !== operation.canvas ||
-            this.deadline !== deadline || !pieceBitmapDeadlineCurrent(deadline) || visualToken !== token ||
+            this.deadline !== deadline || !lifetimeCurrent() || visualToken !== token ||
             this.props.display?.visualToken !== token || this.props.exportCanvas === true || this.props.savedRecord ||
             operation.nodes.some((node, i) => this.textNodes.get(i)?.value !== node || this.textNodes.get(i)?.generation !== snapshot.generation)) return false;
         const current = preparePieceNativeCard(this.props), requested = preparePieceNativeCard({ display: { phase: 'received', preview, visualToken } });
@@ -156,6 +163,13 @@ export default class PieceVisualCard extends React.Component {
       } catch { return false; }
     } });
     if (!record.handle.isCurrent(display.preview, token)) return;
+    if (retained && !completed) {
+      // First publication must complete within the original construction window.
+      if (!pieceBitmapDeadlineCurrent(deadline)) return;
+      completed = Object.freeze({ deadline, snapshot, operation, binding, token, key: input.key });
+      artifact.completedPreview = completed;
+      clearTimeout(deadline.handle); deadline.handle = null;
+    }
     this.saveFit = record;
     try { listener(record.handle, null); } catch { record.valid = false; if (this.saveFit === record) this.saveFit = null; }
   };
@@ -187,7 +201,8 @@ export default class PieceVisualCard extends React.Component {
       if (pixels && this.deadline?.key === input.key && this.deadline.binding === this.state.binding) {
         // Keep the original construction expiry; never start a new window.
         // A completed saved image has no save fit and stays readable until its
-        // binding or native configuration changes. Preview fit still expires.
+        // binding or native configuration changes. Explicit product preview
+        // stops its timer only after first fit publication; prototype fit expires.
         if (input.candidateProfile !== PIECE_BITMAP_PREVIEW_VERSION ||
             this.props.savedRecord && phase === 'native_checked' && this.bitmapArtifact) {
           clearTimeout(this.deadline.handle); this.deadline.handle = null;

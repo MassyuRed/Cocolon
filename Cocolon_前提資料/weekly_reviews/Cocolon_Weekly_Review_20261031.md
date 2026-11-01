@@ -1629,3 +1629,20 @@ Mashから「修正確認した、問題ない」と回答を受領し、6901の
 Pieceは部分実装で、入力引継ぎ・画像描画・非公開保存/再読・画像出力の経路と限定検証はあるが、想定入力から実機で画像保存する一巡は未成立。通常生成器の対応表現は狭く、今回のpreview422の細かな理由は未特定。表現材料の不足による正当な見送りと、文末/選択感情等の実装未対応を切り分ける必要がある。華恋の推奨は、まず今回の拒否理由を特定し、Pieceにできる材料を持つ普段の入力で生成→プレビュー→明示非公開保存→再読→画像出力の一巡を先に閉じること。既存API形式内の修復は6901を使ってサーバー側で検証し、native/UIの追加欠陥が見つかった場合に限って新ビルドの必要性を判断する。この推奨を新しい生成実装の完了/実行結果とは扱わない。
 
 今回は本人確認と現状説明の差分のみ。製品source/生成条件/API/DB/配布の追加変更、GPU再起動/実モデル呼出し0。STRUCTURE_MAP_DELTA_NONE。
+<a id="piece-first-image-save-completion-20261101"></a>
+## 40. 11/1 — Pieceの画像化・保存一巡を完成させる（Mash明示指示、実施中）
+
+Mashの「完成まで進めて」を受領。対象は通常本人入力→Piece生成→画像preview→明示非公開保存→同owner履歴/詳細再読→Photos/Shareまで。6901の表示修復は本人確認済みとして保持し、画像保存成功とは区別する。
+
+対象の保存記録一件だけを必要範囲でread-only照合し、原本とsource_snapshotの一致、同owner、FINAL/COMPLETEDを確認。本文/ID/ownerは公開しない。現生成器をその保存原本で再現すると、選択済み感情が特定の一人称文型で本文に書かれていないためsaved_emotion_meaning_not_yet_supportedとなる。GPU停止や通信障害ではない。
+
+実装順：①既存source adapterで保存JSONの感情/強さを、本文spanと区別した根拠として扱う。本文に既に同じ意味がある旧経路は重複・bytes変更をしない。②既存plan/唯一作者/author-free検査を同じ選択根拠へ接続し、元メモ/行動メモの全命題と順序、選択強度を保持。感情だけから原因・意思・性格を作らず、declarationへ昇格しない。③明示ios.v1 product previewは最初の完成採用まで8秒を維持し、完成済み同一画像の閲覧/保存はsourceの600秒期限と現在identityで判定する。元8秒で完成後も保存不能になる現仕様を今回の一巡完成要求に合わせて変更する。構築期限の延長/遅延成功救済/期限再起動はしない。④局所検証と本文実読、API配置、RN変更をまとめた一回の署名build/内部配布、最後に本人端末で一巡を確認する。
+
+公開API/source-ref/DB schema/保存枠/owner/receipt/CAS/安全検査は維持する。原文画像への無条件fallback・Emlis生成文の転用・別作者・GPU再起動はしない。STRUCTURE_MAP_DELTA_PRESENT（保存選択のprivate意味根拠と既存renderer完成保持）。未完了を完了へ換算せず、実装/検証/配置/本人確認の結果を以下へ追記する。
+
+
+### 実装と検証
+
+保存JSONの感情/強さをprivate根拠として既存graph/plan/唯一作者/author-free検査へ接続。本文で表現済みの旧経路はID/本文/hash不変、metadataだけ別nodeで記録時scopeと選択強度を表す。原memo/actionの全命題を保持し、原因/意思/性格へ昇格しない。RNは明示ios.v1の完成採用だけ同artifactへ固定しtimerを解除、初回採用8秒とsource期限600秒を分離した。
+
+API6file557 PASS/FAIL0/SKIP0（既存warning1）、生成した新本文から自然profileの実PGlite preview/visual/private保存/同内容再読・source失効の7 PASS、RN renderer/initial-save-host/export3file251 PASS。感情/強さ/記録根拠改ざん、文欠落・重複・原因/意思追加、旧経路bytes、8秒超完成保持/期限切れ/元timeout callback/初回最終検査の8秒跨ぎを検証。writerは華恋のみ、read-only補助監査に重大指摘なし。本人一件はprivate CPUで生成・本文実読、DB書込/枠消費/モデル呼出し0。一般日本語品質・実iPhone保存の合格ではない。GitHub反映/指定API配置/新iOS内部配布は次工程。

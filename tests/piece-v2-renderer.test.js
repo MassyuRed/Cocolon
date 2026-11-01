@@ -2511,6 +2511,48 @@ test('saved explicit bitmap uses a fresh render transaction, publishes no save f
   h.card.bitmapInvalidated({nativeEvent:{binding_token:token}});assert.equal(h.card.state.measurement.phase,'unavailable');
   assert.equal(h.card.bitmapArtifact,null);assert.equal(released.length>0,true);h.card.componentWillUnmount();
 });
+test('completed product preview remains saveable after construction budget only within its original source lifetime', async () => {
+  const p = {...sample(), renderer_version:'piece.rn_bitmap_renderer.ios.v1', expires_at:new Date(NOW+60000).toISOString()};
+  const h=bitmapHarness(v=>v,{packet:p,version:p.renderer_version});
+  await prepare(h);const queuedTimeout=[...h.timers.values()][0];
+  await finishBitmap(h);const fit=h.fit(), artifact=h.card.bitmapArtifact, deadline=h.card.deadline;
+  assert.ok(fit);assert.ok(artifact.completedPreview);assert.equal(h.timers.size,0);
+  const calls=h.bitmapCalls.length;
+  for(const elapsed of [8000,9000,59999]) {
+    h.now(NOW+elapsed);h.monotonic(elapsed);h.card.componentDidUpdate();
+    if(elapsed===9000)queuedTimeout();
+    assert.equal(fit.isCurrent(p,h.token),true);assert.equal(h.card.bitmapArtifact,artifact);
+    assert.equal(h.card.deadline,deadline);assert.equal(deadline.expiresAt,NOW+8000);
+    assert.equal(h.bitmapCalls.length,calls);
+  }
+  h.now(NOW+60000);assert.equal(fit.isCurrent(p,h.token),false);h.card.componentWillUnmount();
+});
+test('completed product preview proof never survives a changed canvas, token, native node or generation', async () => {
+  for(const mutation of ['canvas','token','node','generation','unmount']) {
+    const p={...sample(),renderer_version:'piece.rn_bitmap_renderer.ios.v1',expires_at:new Date(NOW+60000).toISOString()};
+    const h=bitmapHarness(v=>v,{packet:p,version:p.renderer_version});await finishBitmap(h);const fit=h.fit();
+    h.now(NOW+9000);h.monotonic(9000);assert.equal(fit.isCurrent(p,h.token),true);
+    if(mutation==='canvas')h.card.canvasNode={};
+    if(mutation==='token')h.card.props={...h.card.props,display:{...h.card.props.display,visualToken:{}}};
+    if(mutation==='node')h.card.bitmapNode={};
+    if(mutation==='generation')h.card.state={...h.card.state,measurement:{...h.card.state.measurement,generation:999}};
+    if(mutation==='unmount')h.card.componentWillUnmount();
+    assert.equal(fit.isCurrent(p,h.token),false);if(mutation!=='unmount')h.card.componentWillUnmount();
+  }
+});
+test('product bitmap first publication cannot cross eight seconds during its final key verification', async () => {
+  const p={...sample(),renderer_version:'piece.rn_bitmap_renderer.ios.v1',expires_at:new Date(NOW+60000).toISOString()};
+  const h=bitmapHarness(v=>v,{packet:p,version:p.renderer_version}), prepareCard=h.context.preparePieceNativeCard;
+  h.context.preparePieceNativeCard=props=>{
+    const value=prepareCard(props);
+    if(h.card.state.measurement.phase==='native_checked' && props.display && props.display!==h.card.props.display) {
+      h.now(NOW+8000);h.monotonic(8000);
+    }
+    return value;
+  };
+  await finishBitmap(h);assert.equal(h.fit(),undefined);
+  assert.equal(h.card.bitmapArtifact?.completedPreview,undefined);h.card.componentWillUnmount();
+});
 test('actual bitmap fit and explicit supplier gate the existing private-save controller and same-owner reconstruction', async () => {
   const source=fs.readFileSync(path.join(__dirname,'piece-v2-initial-save-host.test.js'),'utf8');
   const body=source.slice(source.indexOf('function integrated('),source.indexOf("test('initial-save integration: actual"));
