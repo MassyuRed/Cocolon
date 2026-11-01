@@ -3247,3 +3247,11 @@ Mash承認c97d6794に基づき、既存4ownerのsource-derived admission/adapter
 profile=`analysis_model_fields.v1`、wire=`cocolon.cmee.analysis_model_fields.v1`。AnalysisModelFieldsInputは元request/guard/request_refとraw/finish_reasonを保持する。finish_reasonはstopだけを受理し、length/timeout/error/不明はJSONが完全でも拒否する。raw closed keysはschema_version/request_ref/source_set_ref/fields。各fieldはfield_ref/node_kind/quote/start/endのみ。field_refは元envelope/field/完全原文digestから導出、node_kindは既存五種又はUNRESOLVED、quoteはfield全文、start=0/end=scalar長のstrict int。空/重複/欠落/余分/版違い/部分引用/自由proseは拒否。
 
 ObservedQuotedFieldは完全fieldのEvidenceRefと原文を持ち、ObservedNode末尾の任意quoted_fieldで識別する。旧nodeはNoneのまま。actor/肯否/時点はモデルの独立factへ昇格せず、quoted nodeのpolarity/modality/temporal_scopeは全てAS_WRITTEN_UNRESOLVED。private dataclass追加2、旧P5/公開DTO/DB/RN版は不変。
+
+## 2026-11-02 — sourceから引用・座標を導出するAnalysis分類受口
+
+新private `analysis_model_field_kinds.v1` をCPU接続。モデルは入力順のstrict整数番号＋既存五種又はUNRESOLVEDだけを返す。call前のfull request_ref/実messages hashと返ったraw SHA/finish/rawの外部bindingを必須にし、元source/owner/版/guardと再照合する。raw単独の由来証明やmetadataの自己認証ではない。旧v1 rawの補修・v1packet作成・自動fallbackをせず、両strict readerの後だけ既存ObservedQuotedField/graph/唯一realizerを共有。全unparsed/関係0/通常ensure未有効化、一般意味品質は未検証。
+
+API `f7a1389679f15dbb9f24c40c0c5ac0058423c106`、実装/検証/全pathは[Analysis04](04_analysis_v1d_v1e_detailed_design.md#analysis-model-field-kinds-v1)。最終819PASS（新34＋旧785）＋既存共有owner別1PASS、実隔離SQLの同図/文章/ID非生成再読と削除寿命を確認。公開API/DTO/DB/RN/依存/稼働変更0、実4B/追加学習0。次GPUは新4call/600秒の具体案で未実行。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT/商品credit0。
+
+型は同semantic_admission内のAnalysisModelFieldKindsInput(request/source_guard/request_ref/response)、AnalysisModelFieldKindsResponse(request_ref/messages_sha256/raw_sha256/finish_reason/raw)の2つ、frozen/slots/repr=False。入力schema=cocolon.cmee.analysis_model_field_kinds.v1、raw rootはfieldsだけ、各rowはfield(strict int1..N)/node_kindだけ。messages hashはcanonicalなrole/content/順序の全2messages、raw hashはparse前UTF-8。v1 schema/ref/messages、ObservedQuotedField/ObservedNode/既存semantic registry/public DTO/DB/RN版は不変。

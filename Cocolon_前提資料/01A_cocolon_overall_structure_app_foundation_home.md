@@ -5969,3 +5969,13 @@ API piece_source.pyの選択JSON根拠はprivate selection_contextsへ分離し�
 新production fileは0。API既存5owner：`ai/services/ai_inference/analysis_cumulative_service.py`（明示prepare/model_inputと実graph coverage）、`cocolon_meaning_experience_engine/engine.py`（明示private型dispatch）、同`cores/analysis/semantic_admission.py`（完全source要求/受信/Safety/全field/finish拒否）、同`intent_compiler.py`（ObservedQuotedField/任意quoted node）、同`observed_route_realizer.py`（artifact owner/集合/member/版/全文根拠照合から本人限定分類候補表示）。旧有限/P5/default経路は維持。
 
 新test：API `ai/tests/test_analysis_model_fields.py`（束縛/変異/補足訂正比較Safety/未解析/実SQL保存非生成再読）。新資料：`Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/{README.md,probe_requests.json}`（未実行GPU案と完全架空要求2件）。詳細設計01/04/05/06、current maps03/04、全機能00、最新weeklyを同期。対象785PASS、実4B/通常有効化/DB/RN変更0、商品品質未成立。STRUCTURE_MAP_DELTA_PRESENT。
+
+## 2026-11-02 — Analysisの番号・分類だけの明示offline接続
+
+前回の位置/長ID転記による実raw受理0/4を受け、CPU側に新private `analysis_model_field_kinds.v1` を接続。モデルは入力順1..Nの番号とnode_kindだけ、元原文/位置/根拠は既存sourceから再導出する。実call前のrequest/messages hashと返却raw/finish/hashをtrusted callerが保存し、別request/版/guardやraw差替えを新受口で拒否する。署名/自己認証ではない。v1 raw修復/自動fallbackなし。
+
+API `f7a1389679f15dbb9f24c40c0c5ac0058423c106` の既存製品3owner：`ai/services/ai_inference/analysis_cumulative_service.py`（明示prepare/build）、`cocolon_meaning_experience_engine/engine.py`（新exact型dispatch）、同`cores/analysis/semantic_admission.py`（新private input/response型2・strict reader・既存graph構築共有）。既存intent_compiler/唯一realizer/storage ownerを維持。全unparsed/関係0/AS_WRITTEN_UNRESOLVED/分類候補表示、通常ensure/旧finite/P5/公開API/DB/RNは不変。
+
+新file地図：API `ai/tests/test_analysis_model_field_kinds.py`（call/元source束縛・strict番号/JSON・旧互換・実隔離SQL保存再読）。Cocolonの既存trial配下に `field_kinds_probe_requests.json`（新形式の既見架空AF01/02）、`field_kinds_probe.py`（未実行の新4call/600秒one-shot）、`field_kinds_cpu_example.json`（合成graph/文章/coverage）、`field_kinds_cpu_results.json`（重複除外のCPU実結果）を追加。新production owner/別作者/公開wire/DB/RN/依存定義0。
+
+最終819PASS（新34＋旧785）、共有owner identity別1PASS、FAIL/SKIP0。合成candidate→既存graph→隔離SQL commit→同図/文章/IDの生成禁止current/monthly再読・元source削除purgeを確認。実4B改善/意味品質/商品合格ではない。次GPUは新4生成/追加学習0/最大600秒の具体案まで、今回実行0。詳細はAnalysis04#analysis-model-field-kinds-v1、trial README#field-kinds-cpu-20261102、weekly§48。STRUCTURE_MAP_DELTA_PRESENT（新明示private wire/inputと既存graph責務の接続）、限定TECHNICAL_CREDIT/商品0/正式0/3/54.50％据置。

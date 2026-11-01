@@ -1666,3 +1666,52 @@ requestはowner・元source集合/版・期間・snapshot guardを束縛し、�
 通常累積builderの明示candidate引数を使う場合のみ、新graphからmappedを導出し、分類候補があっても全対象をunparsedへ残す。UNRESOLVEDはSOURCE_SCOPE gap、関係未確定はROUTE_CONNECTION gapへ残す。文章・図・private evidenceは既存のObservedSelfStructureMapとstorage ownerを使い、既存projection検査→commit/readへ渡す。HTTP/本番有効化、公開DTO/DB/RNのshape変更なし。既存safe_projectionの原文非コピー保証は旧有限armに維持し、新profileだけは本人限定の完全原文引用を分類候補として表示する。
 
 CPUは合成rawの引用/owner/版/guard/全量/補足拒否と同じ文章・図・保存再読を確認するだけ。一般理解品質の合格ではない。最小成功後、現Qwen3.5-4Bの少数実出力を同じ受口へ渡し、モデルの分類/未解決・出力形式・時間を主担当が読む。最初から追加学習を必須にせず、不足を見て次を判断する。
+
+
+<a id="analysis-model-field-kinds-v1"></a>
+## 11/2 — 番号と分類だけを受けるCPU接続（実装済み・新GPU未実行）
+
+前回の実4Bは全4rawが位置/参照の転記で拒否された。Mashの本ターン「分析構造の残件作業を続けて」を、直前に説明したCPU側の入出力見直しへの継続指示として扱い、具体設計→限定実装→検証を行った。旧4callの承認/失敗rawは閉鎖のまま再利用しない。新private受理契約の追加であり、旧v1 rawを補修して通したという変更ではない。
+
+### モデルと実行側の責務
+
+新profile `analysis_model_field_kinds.v1`、入力schema `cocolon.cmee.analysis_model_field_kinds.v1`。モデルに渡す材料は全非空fieldの整数番号、元field_path、元textだけ。source_set_ref/field_ref/request_ref/文字座標/全文再コピーをモデル出力の責務から外した。原文、根拠、位置、owner/版/集合は既存sourceから再導出する。
+
+モデルrawのclosed shapeは次だけ。各fieldの内容全体を既存五種node_kind又はUNRESOLVEDの候補へ分類する。混在、主体、範囲を判断できない場合はUNRESOLVEDと指示する。
+
+```json
+{"fields":[{"field":1,"node_kind":"UNRESOLVED"},{"field":2,"node_kind":"ACTION_OR_NONACTION"}]}
+```
+
+これは合成の形式例で、実モデル出力/正解教師ではない。番号は入力順1..Nのstrict int、全件数/順序/番号を完全一致させる。bool/float/string番号、欠落/重複/並替え/余分なkey/未知kind/重複JSON key/nonfinite/コードフェンスを拒否。旧v1へ自動fallbackせず、部分受理、sort、補完、位置修正、旧packetへの再組立てをしない。
+
+ordinalだけのrawは別requestに対する由来を自己証明できない。そのため、信頼する一つのoffline実行側が、**call前**に新profileを含むfull request_refと、実際のsystem/user2messages（role/content/順序を含む）のcanonical UTF-8 SHA256を固定し、返った元rawのUTF-8 SHA256/finish/rawを同じresponse記録へ保持する。受口は再導出したsource/guard/request_ref/messagesとresponse binding、raw hash、stopを照合した後にJSONを読む。metadataをconsume時に別rawへ後付けして実callと呼ばず、raw単独の取込みは認めない。これはtrusted callerの対応付けであり、悪意あるPython callerによるmetadata丸ごと偽造を防ぐ署名/自己認証ではない。
+
+### 実型・接続・互換
+
+- 新private型2：`AnalysisModelFieldKindsInput(request, source_guard, request_ref, response=None)`、`AnalysisModelFieldKindsResponse(request_ref, messages_sha256, raw_sha256, finish_reason, raw)`。ともにfrozen/slots/repr=False。
+- 既存semantic_admission.pyのprepare/new readerが、既存_model_fields_sourceの全source/Safety/空field/owner/版を再利用。新profileをrequest_refに含め、旧v1のref/messages/厳密拒否は維持する。
+- v1/new readerは各々のstrict受信後だけ、同じ `_realize_model_field_kinds` で既存ObservedQuotedField→ObservedGraph→唯一realizerへ接続する。新semantic graph型、作者、storage ownerは作らない。
+- Engineは新exact input型だけを明示dispatch。累積serviceの新prepareと既存buildの明示model_inputだけが使う。通常ensure/HTTP/旧finite/P5を自動切替しない。
+- 全対象unparsed、関係0、polarity/modality/temporal_scopeはAS_WRITTEN_UNRESOLVED、可視labelは原文・分類候補。全UNRESOLVEDはmapなしでcoverageへ残す。補足/訂正/比較はこのprofileではUNSUPPORTED、通常の旧補足経路は保持。
+- 原文の否定/時点/留保/絵文字が表示へ残るのはsource再投影の保証で、モデルが意味を理解した実証ではない。分類の妥当性、複合fieldの扱い、複数記録の根拠ある関係、一般補足訂正、IF/Saved、通常提供は残件。
+
+### CPU検証と反映
+
+API commit `f7a1389679f15dbb9f24c40c0c5ac0058423c106`。製品exact3：`ai/services/ai_inference/analysis_cumulative_service.py`、同`cocolon_meaning_experience_engine/engine.py`、同`cores/analysis/semantic_admission.py`。新test1：`ai/tests/test_analysis_model_field_kinds.py`。全4fileのremote全文/blob・親/変更path・branch headを照合した。intent_compiler/realizer/DB/RN/公開API/依存定義/稼働設定の変更0、追加CIはskip指定。
+
+最終の重複しない対象は**819 PASS/FAIL0/SKIP0＝新34＋旧785**。既存の共有owner identityは別1 PASS/194 deselected、合計820 distinct。最初の新34は最終新34へ置換し、重複keyだけの4再確認やsubtestsを加算しない。初期6file665 PASS、最終new34＋別legacy148の5file182 PASS、job6 PASS。追加legacyの最初は親cwdでai import不可、owner検査の最初はCI指定PYTHONPATH欠落でtools import不可となり各collection/実行0。既存API root/CIのpath設定へ直し、製品/旧testの変更なしで必要対象を完了。既存Pydantic root_validator非推奨warning1種類を保持する。
+
+同件数別requestのresponse全体/元rawだけの差替え、messages hash/request_ref、owner/版/guard、型/番号/JSON/finish、Safety/補足/比較、旧v1/default/P5を確認。正常な3field packetへ同値の重複keyだけを追加する対照も、JSON readerで拒否する。合成callから実graph/text/private evidenceを作り、隔離PGliteの実累積SQL commit→生成禁止のcurrent/monthly同一文章/図/ID再読、原source削除purgeを確認した。本人DB/実Auth/実4Bではない。
+
+新artifactが成立した合成例は2可視record/2node/edge0/unparsed2。未加工のCPU例は[CPU example](../../../observation_learning/trials/2026-11-01-analysis-model-fields/field_kinds_cpu_example.json)、対象/環境失敗/件数は[CPU result](../../../observation_learning/trials/2026-11-01-analysis-model-fields/field_kinds_cpu_results.json)。これらは公開済み架空sourceに対するCPU機構検査であり、モデル出力/教師/品質受入れへ転用しない。
+
+root華恋/Codex Work GPT-6が実装・読解・反映、別文脈agentはread-only監査のみ。Pro/Ultra/human品質受入れとは呼ばない。System Context最新cacheは未成立のままでfresh原本fallbackを使用。STRUCTURE_MAP_DELTA_PRESENT（新明示private model wire/typed inputと既存graph接続）、限定TECHNICAL_CREDIT、商品credit0/正式0/3/管理54.50％据置。
+
+### 次の実4B一回（準備済み、今回実行0）
+
+[固定要求2件](../../../observation_learning/trials/2026-11-01-analysis-model-fields/field_kinds_probe_requests.json)と[one-shot runner](../../../observation_learning/trials/2026-11-01-analysis-model-fields/field_kinds_probe.py)を保存した。AF01/AF02のowner/snapshot/原文は前回と同じ既見の架空例、指示/受口だけを新形式へ変える。base/保存fit38各2件、**新4生成・学習0・再試行0、process最大600秒**。これは旧runの再開ではない。単価$0.60/h以下ならprocess按分最大$0.10、準備/回収/保持/税等別。前回確認単価$0.58/hなら最大約$0.0967だが現在のPod状態/単価は今回未再照会。Podの再起動/停止/新規レンタル/課金操作はしない。
+
+固定Qwen3.5-4B/revision851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a、保存fit38 SHA ad8b89e8974df9bfe7e804b8f67bbaac59e6cbb37042c3254fb58ffb64230d0a/config ef4b1aef621fb4e234ce6a05601efb62a987c3cf5d40f3995ca1b72200bab145、既存load_generator/pins/BF16/SDPA/non-thinking/greedy/context8192/max2048/各23秒を保持。tokenは実input_ids.shape[-1]で測定し切捨てない。600秒SIGALRMはimport/tokenizer/model読込/推論を含むhard bound、各23秒は既存StoppingCriteria期限。新out必須で上書き/二重実行しない。
+
+runnerはcall前のrequest/messages記録→元raw/finish/response保管→新受口→同artifact/projection/text/private/coverageを回収する。成立時の再読は同一process内file＋既存validatorで、cold再開や実SQL保存と呼ばない。固定synthetic guardをSQL guardへ書換えない。全件拒否/全UNRESOLVEDもそのまま記録し、再生成しない。終了後はrootが外側で所有process/GPU不在と原本回収を確認。Pod停止/削除はMash指示に従う。GPUは本ターン実行0で、次の新実行指示から行う。

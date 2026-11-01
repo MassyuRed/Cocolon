@@ -1,0 +1,176 @@
+{
+  "status": "SYNTHETIC_CPU_ONLY_NOT_MODEL_OUTPUT_OR_TEACHER",
+  "projection": {
+    "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+    "wire_kind": "watashi.map.v2",
+    "projection_of": "artifact:a968b9a3a9be4105ba9bd09f382186ce@1",
+    "artifact_version": 1,
+    "period_label": "2025-01-01T01:00:00+00:00 ～ 2026-11-01T08:00:00+00:00",
+    "period_comparison": {
+      "state": "NO_PREVIOUS",
+      "reason_codes": [],
+      "safe_change_kinds": []
+    },
+    "nodes": [
+      {
+        "node_ref": "n1",
+        "node_kind": "ACTION_OR_NONACTION",
+        "visible_label": "疲れていたので、今日の集まりへの誘いは断った。（原文・分類候補）",
+        "evidence_badge_count": 1
+      },
+      {
+        "node_ref": "n2",
+        "node_kind": "IMMEDIATE_RESULT_OR_AFTERMATH",
+        "visible_label": "昨日は分からなかった問題が、今日は解けてうれしい。🙂（原文・分類候補）",
+        "evidence_badge_count": 1
+      }
+    ],
+    "edges": [],
+    "annotation_badges": [],
+    "unknown_gaps": [
+      {
+        "gap_ref": "g1",
+        "between_node_refs": [
+          "n1"
+        ],
+        "visible_label": "まだ読み取れていない内容は、この記録からは確定していません。"
+      },
+      {
+        "gap_ref": "g2",
+        "between_node_refs": [
+          "n2"
+        ],
+        "visible_label": "まだ読み取れていない内容は、この記録からは確定していません。"
+      }
+    ],
+    "conflict_badges": [],
+    "accessibility_linear_order": [
+      "n1",
+      "n2"
+    ]
+  },
+  "text": "行動・非行動：疲れていたので、今日の集まりへの誘いは断った。（原文・分類候補）（1件の記録）\n結果・余韻：昨日は分からなかった問題が、今日は解けてうれしい。🙂（原文・分類候補）（1件の記録）\n未確定（疲れていたので、今日の集まりへの誘いは断った。（原文・分類候補））：まだ読み取れていない内容は、この記録からは確定していません。\n未確定（昨日は分からなかった問題が、今日は解けてうれしい。🙂（原文・分類候補））：まだ読み取れていない内容は、この記録からは確定していません。",
+  "coverage": {
+    "profile": "cumulative.v1",
+    "source_count": 2,
+    "processed_count": 2,
+    "mapped_count": 2,
+    "unparsed_count": 2,
+    "excluded_count": 0,
+    "exclusion_reasons": {},
+    "stale_supplement_count": 0
+  },
+  "private_evidence": {
+    "schema_version": "analysis.private-evidence.v1",
+    "projection_of": "artifact:a968b9a3a9be4105ba9bd09f382186ce@1",
+    "source_set_ref": "analysis-set:2eedda5acd62944038c0cf9babb730eea9843238100ae81c7818abd649a77ae8",
+    "graph_commitment": "sha256:c09198e4add34e4b1f2fea9f02c399781b09cc01b9140071d5b13b8f5f05cbdd",
+    "graph": {
+      "nodes": [
+        {
+          "node_ref": "n1",
+          "node_kind": "ACTION_OR_NONACTION",
+          "record_refs": [
+            "00000000-0000-0000-0000-000000000065"
+          ],
+          "polarity": "AS_WRITTEN_UNRESOLVED",
+          "modality": "AS_WRITTEN_UNRESOLVED",
+          "temporal_scope": "AS_WRITTEN_UNRESOLVED",
+          "update_refs": [],
+          "evidence_refs": [
+            {
+              "evidence_id": "analysis-evidence:568b686ff5c89c99ec678504e04dd5f879a920f0a2d0f2d9d7d97b089e69e8d5",
+              "source_span_id": "field:10bc9723aeb42c9ddac6dfcbdf2535ebd9a916d4e245a28f4a6191566c781b72",
+              "source_envelope_id": "analysis-source:f4c716b89638da8e52074d1c192029aca70a67b5e0d6dbc5c07091ef2fef6301",
+              "field_path": "memo_action",
+              "element_index": 0,
+              "field_utf8_start": 126,
+              "field_utf8_end": 195,
+              "scalar_start": 0,
+              "scalar_end": 23,
+              "utf8_start": 126,
+              "utf8_end": 195,
+              "field_sha256": "e22b6f54f6c08273696ab7e5697c71c84a90e046767ac082dbcd51f00fbd05e0",
+              "literal_sha256": "e22b6f54f6c08273696ab7e5697c71c84a90e046767ac082dbcd51f00fbd05e0"
+            }
+          ]
+        },
+        {
+          "node_ref": "n2",
+          "node_kind": "IMMEDIATE_RESULT_OR_AFTERMATH",
+          "record_refs": [
+            "00000000-0000-0000-0000-000000000066"
+          ],
+          "polarity": "AS_WRITTEN_UNRESOLVED",
+          "modality": "AS_WRITTEN_UNRESOLVED",
+          "temporal_scope": "AS_WRITTEN_UNRESOLVED",
+          "update_refs": [],
+          "evidence_refs": [
+            {
+              "evidence_id": "analysis-evidence:2f89dcdd38b8f368b4b0700c1efa4287445baea8c8c674652a7c3bfa9e3ee9c6",
+              "source_span_id": "field:39659b1ff032140c7978e1adcc5371f3d9d5d27205eb1e11de8d660186e08e8b",
+              "source_envelope_id": "analysis-source:b19a24d0b0669bab55f35a3765dc7493391c99cbacdd3d2f02a88a94a2530459",
+              "field_path": "memo",
+              "element_index": 0,
+              "field_utf8_start": 8,
+              "field_utf8_end": 87,
+              "scalar_start": 0,
+              "scalar_end": 26,
+              "utf8_start": 8,
+              "utf8_end": 87,
+              "field_sha256": "f1185c460ff4bb54b12a0519595f1325c2117637f3db5ac0f249cd627659d12e",
+              "literal_sha256": "f1185c460ff4bb54b12a0519595f1325c2117637f3db5ac0f249cd627659d12e"
+            }
+          ]
+        }
+      ],
+      "edges": [],
+      "unknown_gaps": [
+        {
+          "gap_ref": "g1",
+          "between_node_refs": [
+            "n1"
+          ],
+          "missing_scope": "SOURCE_SCOPE",
+          "reason_code": "MODEL_CLASSIFICATION_NOT_SEMANTICALLY_VALIDATED"
+        },
+        {
+          "gap_ref": "g2",
+          "between_node_refs": [
+            "n2"
+          ],
+          "missing_scope": "SOURCE_SCOPE",
+          "reason_code": "MODEL_CLASSIFICATION_NOT_SEMANTICALLY_VALIDATED"
+        }
+      ],
+      "source_updates": [],
+      "conflicts": [],
+      "annotations": []
+    },
+    "source_members": [
+      {
+        "saved_record_ref": "00000000-0000-0000-0000-000000000065",
+        "saved_record_version": "sha256:605db132eb45f6995fd137824405cb9e0f2acfad5571649147d0af3ed51b936a",
+        "member_role": "PERIOD_RECORD_IDENTITY",
+        "source_commitment": "sha256:4bd7d4e47605160a16067623c5f96fab4de5ba6884415c8fed65409e5bf1d834",
+        "inclusion_status": "INCLUDED",
+        "inclusion_or_exclusion_reason": "IN_PERIOD",
+        "child_source_envelope_refs": [
+          "analysis-source:f4c716b89638da8e52074d1c192029aca70a67b5e0d6dbc5c07091ef2fef6301"
+        ]
+      },
+      {
+        "saved_record_ref": "00000000-0000-0000-0000-000000000066",
+        "saved_record_version": "sha256:61663b28717b6017bf20d007d01b506c1e90b39a75aa43ba7cf1979e5e6c187d",
+        "member_role": "PERIOD_RECORD_IDENTITY",
+        "source_commitment": "sha256:deaa553f2db0489842dd03fa337c0a39a262153bb3174f1188e4a6b80b33c0d4",
+        "inclusion_status": "INCLUDED",
+        "inclusion_or_exclusion_reason": "IN_PERIOD",
+        "child_source_envelope_refs": [
+          "analysis-source:b19a24d0b0669bab55f35a3765dc7493391c99cbacdd3d2f02a88a94a2530459"
+        ]
+      }
+    ]
+  },
+  "artifact_id": "artifact:a968b9a3a9be4105ba9bd09f382186ce"
+}

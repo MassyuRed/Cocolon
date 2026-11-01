@@ -20477,3 +20477,11 @@ Mash承認のCM-01/T1をAPI02c0b943へ実装。既存Engine dispatchをそのま
 1. Analysis04#analysis-model-fields-probe-v1の範囲で、既存semantic_admissionへprivate要求/受口を追加。完全source/Safety/owner/版/guard/全文coverageを束縛し補足は明示拒否。
 2. 既存ObservedGraphと唯一realizerへtyped全field引用候補を追加。通常有限arm/旧P5を保持し、累積builderの明示offline引数だけへ接続。実graphに基づくcoverageと既存commit/readの同一文章/図再読を確認。
 3. 拒否・旧回帰を確認した時点で準備を閉じ、必要環境/時間/費用をMashへ伝えて少数実4B確認へ進む。大きな仕組みを作り切るまでモデル確認を遅らせない。合成成功/機構接続を理解品質/商品合格としない。
+
+## 2026-11-02 — sourceから引用・座標を導出するAnalysis分類受口
+
+新private `analysis_model_field_kinds.v1` をCPU接続。モデルは入力順のstrict整数番号＋既存五種又はUNRESOLVEDだけを返す。call前のfull request_ref/実messages hashと返ったraw SHA/finish/rawの外部bindingを必須にし、元source/owner/版/guardと再照合する。raw単独の由来証明やmetadataの自己認証ではない。旧v1 rawの補修・v1packet作成・自動fallbackをせず、両strict readerの後だけ既存ObservedQuotedField/graph/唯一realizerを共有。全unparsed/関係0/通常ensure未有効化、一般意味品質は未検証。
+
+API `f7a1389679f15dbb9f24c40c0c5ac0058423c106`、実装/検証/全pathは[Analysis04](04_analysis_v1d_v1e_detailed_design.md#analysis-model-field-kinds-v1)。最終819PASS（新34＋旧785）＋既存共有owner別1PASS、実隔離SQLの同図/文章/ID非生成再読と削除寿命を確認。公開API/DTO/DB/RN/依存/稼働変更0、実4B/追加学習0。次GPUは新4call/600秒の具体案で未実行。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT/商品credit0。
+
+実装順はsource/Safety再利用と新private型/要求→外部call binding/strict raw reader→既存graphhelper共有→Engine exact dispatch→明示累積prepare/build→型/取り違え/strict JSON/旧回帰→実隔離SQL再読/削除→全path反映と読戻し。初期collectionのcwd/PYTHONPATH不備は既存API root/CI設定へ補正し、製品/旧test/品質条件は変えない。旧4callsは閉鎖、新GPUはAF01/AF02×base/fit38の新4生成/600秒/単価$0.60以下で処理按分$0.10以内の具体案として別記し、自動再実行しない。

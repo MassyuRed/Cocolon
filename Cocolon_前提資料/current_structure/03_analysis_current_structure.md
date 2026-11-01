@@ -946,3 +946,9 @@ TodayQuestion/Echoes/Discoveriesの旧material集約は保持するが、新累�
 固定AF01/AF02×base/保存fit38の4生成を実行し、全stop/13.314〜21.026秒。要求ID転記ミス（AF01両条件）と全文end不一致（全6field）を既存受口が拒否。実raw由来artifact/図/文章/SQL保存0で、同図・文章の保存再読は未到達。rawを補修せず、全quote保持を意味理解へ換算しない。runnerのtoken数記録誤りは元記録を保全し、tokenizer-only539/453で補足訂正。詳細・原本の保全先は[trial実結果](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#gpu4-result-20261102)、最新weekly§47。
 
 モデル読込＋推論77.111162秒で終了、GPU process不在、Pod自体は停止せずMash管理下で稼働維持。学習/再試行/製品source/通常有効化/本番DB/Render/RN変更0。次はsource側で決定できる文字位置・長い参照のモデル再転記責務を外す最小入出力案をCPUで具体化する。現probeは閉鎖、追加生成/学習へ自動進行0。BLOCKER_NARROWED/商品credit0、STRUCTURE_MAP_DELTA_NONE（新owner/型/wire/保存責務の差分なし）。
+
+## 2026-11-02 — sourceから引用・座標を導出するAnalysis分類受口
+
+新private `analysis_model_field_kinds.v1` をCPU接続。モデルは入力順のstrict整数番号＋既存五種又はUNRESOLVEDだけを返す。call前のfull request_ref/実messages hashと返ったraw SHA/finish/rawの外部bindingを必須にし、元source/owner/版/guardと再照合する。raw単独の由来証明やmetadataの自己認証ではない。旧v1 rawの補修・v1packet作成・自動fallbackをせず、両strict readerの後だけ既存ObservedQuotedField/graph/唯一realizerを共有。全unparsed/関係0/通常ensure未有効化、一般意味品質は未検証。
+
+API `f7a1389679f15dbb9f24c40c0c5ac0058423c106`、実装/検証/全pathは[Analysis04](../designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#analysis-model-field-kinds-v1)。最終819PASS（新34＋旧785）＋既存共有owner別1PASS、実隔離SQLの同図/文章/ID非生成再読と削除寿命を確認。公開API/DTO/DB/RN/依存/稼働変更0、実4B/追加学習0。次GPUは新4call/600秒の具体案で未実行。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT/商品credit0。
