@@ -1,4 +1,4 @@
-> 2026-11-01・次の開始位置：[weekly§45](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-4b-gpu-start-20261101)。Mashは7201依頼修正を確認し、次セッションは分析残件を進めると指示。通常の分析はCMEE接続済み/4B未呼出しの有限文法で、架空の日常8例のCPU確認はmap0/未解析8（一般成功率ではない）。分析を4Bへ接続する最小仕様と受口・元根拠/主体/否定/時点/不明の採用→通常graph/保存再読を先にCPUで準備し、最小準備が通った時点で実4B出力へ進む。**開始直後のGPUは不要、実出力確認前に華恋から用意を連絡する。** 4Bなし現状を発売完成とせず、CPU合成成功を品質成立にしない。
+> 2026-11-01・次の開始位置：[weekly§46](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-fields-cpu-20261101)。CPU最小受口/既存graph・保存非生成再読を実装し対象785件成功。完全fieldの分類候補で一般意味理解は未成立、全件unparsedを維持。通常finite/P5/アプリは不変。**次はGPUが必要**で、Qwen3.5-4Bの最大4生成/学習0を確認する。具体的な入力/重み/時間/費用/回収は[実行準備](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md)。モデル実行0、GPU作成/再起動0。
 
 > 2026-11-01最新：Mash採用の累積/当時月次/プラン差を実装、API36713940/新migration反映済み。RNb187b790のiOS #72/7201は内部配布済み。感情原入力の全期間＋適格本人補足を対象に現在map共通、月次閲覧Free2回/Plus12回/Premium全期間。保存artifactと月参照を分離し、プラン変更では保持、source削除/退会ではpurge。新実装/検証/配置はweekly§44と詳細04#analysis-cumulative-monthly-v1を参照。以下のu250等は旧期間版の内容修正履歴で、新累積方式の現在地ではない。
 

@@ -1842,3 +1842,5 @@ Mashの本セッションでの分析残件開始指示に従い、§45.4の最�
 新API既存5製品owner＋test1、前提資料の関連差分。通常API有効化/本番DB書込/Render配置/新RN build/モデル呼出し/学習/GPU作成再起動0。Supabase接続はproject metadataの読取のみ。Renderはworkspace未選択を確認し、今回不要なservice操作は行っていない。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT、商品品質credit0/正式0/3/従来管理54.50％は据置。次は具体GPU確認で、4B接続品質完成とは呼ばない。
 
 API反映commit：`59489814a924eec29f4ee61386e6daa3bec1a49a`（既存PR3、製品5＋test1）。
+
+GitHub反映後、API6file/前提資料13fileの全内容・blobと、両commitの親/変更path/両Draft headを読み戻し照合。既存Analysis CI [41301298465](https://github.com/MassyuRed/mashos-api/actions/runs/41301298465)は確認時点実行中。追加のlocal shared owner identity検査はexportにai/toolsがないためcollection不可であり、local785の失敗へ混ぜず、full checkoutのCI結果を別確認する。
