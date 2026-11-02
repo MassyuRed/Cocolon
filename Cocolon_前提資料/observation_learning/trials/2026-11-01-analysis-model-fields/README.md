@@ -373,3 +373,17 @@ DEVの構造受理は6/8で据置、REHEARSALは3/4→4/4。成立10candidateは
 この作業ブロックでは意味単位wireのCPU実装/860対象PASS、版分離113対象PASS（前者と重複あり）、実4Bの新48生成、分析用の16＋32＋64＋128＝240更新、局所診断6forwardを実施。新datasetはroot架空の32例で、既存9/19行教材・通常重み・正式評価は不変。初回のadapter階層指定失敗0生成とmetadata参照失敗0forwardも原本保持。各runの按分額は処理範囲だけで、準備/回収/保持/通信/税等を含む請求額ではない。今回128runの同単価process按分は約$0.05223。
 
 API sourceはcddf1855のまま、rootが全実装/write/実行/全raw統合、別agentはread-only監査のみ。Render/本番/DB/RN/通常有効化/mergeなし、Pod Stop/再起動/削除/追加チャージ0。最終の所有model processは終了。必要作業はMashの本セッション指示で承認済み、次の再開もGitHubの固定資料とprivate重み/原本から行い、完了済みrunを二重に実行しない。正式0/3/54.50％据置、限定TECHNICAL_CREDIT（教師自由生成適合/局所改善と原本回収）、STRUCTURE_MAP_DELTA_NONE（本結果記録の差分。§51の新wire実装PRESENTは保持）。
+
+
+<a id="analysis-quote-first-probe-20261102"></a>
+## 11/2 — 引用先行の版分離・同保存重み12生成の比較準備
+
+Mashは分析残件に必要な実装・GPU利用・途中GitHub反映と区切りを跨ぐ継続を明示承認。Codex Work/GPT-6のrootが実装/実行/write owner、別agentはread-only監査。最新全機能原本を全文、全体設計01のflow/01A–C全file地図の対象owner、fresh tracked tree、三core地図、最新weekly§45〜58、前回12raw/32教師を確認。System Context最新cacheは索引timeoutのままfresh原本fallback。
+
+DIRECT_PRODUCT_OR_ACCEPTANCE_WORK：未学習入力の逐語引用・不明親の転移不足が未完了。32教師には「てはいない」の否定引用、同field親4のUNKNOWN_CONTENTが0。これは誤りの因果確定ではない。targetのcanonical順はnode_kind/parent/qualifiers/quote/scope_roleであり、quote選択が後になる表現を小さく比較する。旧DEV完全同一文を教師へ移さず、epochだけの反復を再開しない。
+
+API `1561526b972bbaba2b77561f57b9a945fdabd9f6`で新指示`quote_first.v1`を既存ownerに追加。元3demo/意味/5key/受口は不変、unit出力をquote→scope_role→node_kind→parent→qualifiers、qualifierをquote→kindの順に示す。助詞を抜かない逐語引用と実不明root番号を指示。baseline/clarifiedのmessages/ref/state互換は保持、新版は既存state.v2と版付きrefへ分離。旧raw補修/親の自動付替え/受理条件緩和なし。CPU対象112 PASS、2 SQL検査はWASM未設定でSKIP、既存非推奨warning1。pytest欠落を検出した最初の実行はcollection0、8.4.1を復元後の実結果であり旧860へ加算しない。
+
+実装順：版分離と再読/異版拒否→CPU確認→同保存09b3/config047aの新指示12生成→全raw/同file再読の内容比較→必要時のみ別題材の少数対照を作る。[要求](semantic_units_quote_first_requests.json)/[runner](semantic_units_quote_first_probe.py)。既見DEV8＋学習済REHEARSAL4で、新12call以内、追加学習0、loader1回、process600秒（外TERM590+kill10）、各23秒、nonthinking/greedy/max2048/context8192。単価表示$0.58/hのprocess上限$0.096667、準備/回収/待機/保持/通信/税等別。入力切捨て/raw補修/自動再試行なし。原32教材/旧重み/通常提供は不変。全raw/finish/同artifact/privategraph/全文/保存fileを回収し、rootが読む。引用不一致/打切り/意味退行は候補不採用とし原因へ戻る。通常map/DB/RN/HTTP有効化/Render配置/mergeなし。
+
+Supabaseはproject metadataだけを読取しACTIVE_HEALTHY、本人row/SQL変更0。Renderはworkspace未選択で本作業には不要、選択/service操作0。GPUは既存同Pod RTX PRO4000/$0.58/h、所有model processなしを確認。Pod作成/再起動/Stop/削除/追加チャージ0。通常map品質・正式0/3・54.50％据置。新指示版のためSTRUCTURE_MAP_DELTA_PRESENT（既存owner/意味wireのまま明示offline版を追加）。この節のGPU比較は準備段階で未実行、後続結果へ更新する。

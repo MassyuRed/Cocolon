@@ -968,3 +968,8 @@ Mash承認の固定新4生成をCocolon c0859cfb/API f7a13896から一回実行�
 実4B field-kindsの4/4後、全文一分類の不足を既存の意味型/EvidenceRef/P5/realizerへ戻って確認。[Analysis設計の具体案](../designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#analysis-model-units-proposal-20261102)では、原文quoteから位置を導出し、親scope/否定/不明/時点を全文contextと一緒に表示する新private analysis_model_units.v1を提案。本人記載の不明はpath node/UnknownGapへ入れず、主体未解決・全unparsed・route0。通常ObservedGraph/safe projection/HTTP/RN非接続、旧P5/全文quotedの受理範囲は保持する。
 
 新説明fileは既存trial配下の[semantic_units_cpu_example.json](../observation_learning/trials/2026-11-01-analysis-model-fields/semantic_units_cpu_example.json)。華恋の手設定9unit/qualifier7を既存sourceへ戻した16引用の座標一致のみで、新受口/意味採用/実モデル/Engine生成は0。新private実装はAPI既存5＋新test1のCPU一作業として別承認対象。通常商品mapへの橋渡し・一般品質は未達。最新weekly§50、STRUCTURE_MAP_DELTA_NONE（今回active source/契約/型は変更0、将来案のnavigationのみ）。
+
+
+## 2026-11-02 — 意味単位実装後の引用先行指示版
+
+§51でprivate analysis_model_units.v1を実装（API fa995a44）、cddf1855でclarified版を追加。新API1561526bでquote_first.v1を同じsemantic_admissionへ追加し、既存state.v2/ref版分離を使う。通常graph/DTO/HTTP/RN未接続、厳密引用/親/全unparsed/主体未解決/route0を維持。新production型/ownerなし。固定32/240更新の結果と新同重み12call比較は[trial](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-quote-first-probe-20261102)、weekly§58/59。STRUCTURE_MAP_DELTA_PRESENT（明示offline指示版追加のみ）。

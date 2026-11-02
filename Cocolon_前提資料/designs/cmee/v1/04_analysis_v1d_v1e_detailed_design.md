@@ -1818,3 +1818,8 @@ clarified base2callも0/2、原文外qualifier/不明親混同/反復打切り�
 ### 2026-11-02 — 意味単位実装と隔離学習の確定結果
 
 API fa995a44/cddf1855でprivate意味単位graph/全文併記/同file再読と版分離を実装し、860対象/113対象（重複あり）のCPU検証。実4Bの新48生成と分析用合計240更新、局所6forwardまで実施。学習済み4/4 JSON同値へ回復したが、未学習完全同一入力では原文外qualifierと不明内容の誤親、受理候補の意味粗化が残る。全重み/原本をPod外回収済み、通常ObservedGraph/safe_projection/DB/RNは未切替。現private graphを通常DTOへ押し込まず、次は既存厳密受口を維持して引用選択/親意味の切分けと最小対照へ戻る。全詳細/再開点はtrial#analysis-fixed32-result-20261102、weekly§58。
+
+
+### 2026-11-02 — quote_first.v1の同重み比較
+
+既存意味wire/受口/保存stateを変えず、新instruction_versionをquote_first.v1として区別。元clarifiedの3demoのJSON key順だけをquote/scope_role/node_kind/parent/qualifiers、qualifierをquote/kindへ並べ、逐語助詞と不明rootの実unit番号を指示する。正しい引用/親の自動補修や現graphの通常DTO化をしない。版ref/state.v2の異版拒否/旧版再読をCPU確認後、同09b3重み/12開発・rehearsal入力を追加学習なしで比較。詳細・実装順・上限・採否はtrial#analysis-quote-first-probe-20261102、通常有効化・商品受入れは別。

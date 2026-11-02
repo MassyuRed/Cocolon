@@ -2025,3 +2025,9 @@ private66member/14427639bytes/SHAe36490c6…をLibrary libfile_53338dfcb1a881919
 全重み/原本71member・CRC/70manifest SHA一致。private Library libfile_609f1e617a688191aadbdb5e8f988a4f、14435522bytes/SHA537b9880…、最終weights09b3a1f6…/config047a624c…。転送APIのfail/timeout通知で通常JSON表示から12rawを先に保全し、共有成果物の実bytes/SHA検索で完了済みZIPを発見、重みのPod外回収も完了。学習/生成を二重実行せず、過去の失敗原本も保持。Reviewのみの旧zipはlibfile_11ed9ed757a08191b7d9b58c7949707f、最新は上記全重みzip。
 
 本ブロックはCPU実装860対象PASS・版分離113対象PASS（重複あり）、実4B新48生成、分析用合計240更新、非学習局所6forwardまで。API cddf1855、通常map/DB/RN/Render/本番/merge不変。必要作業はMashの本セッション承認内。次はこの実rawの逐語引用と不明root接続の切分け、近接対照/表現の最小差分をCPUで検討し、epoch/教材数の自動追加は止める。新しい本人観測会を待たず、旧評価の完全同一文を新教師へ転用しない。[全結果/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-fixed32-result-20261102)。正式0/3/54.50％据置、限定TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_NONE（今回の結果記録差分。§51の新wire実装PRESENTは保持）。
+
+
+<a id="analysis-quote-first-20261102"></a>
+## 59. 11/2 — 引用先行指示を版分離、同重みで転移不足を比較する
+
+最新指示により承認待ちで区切らず、前回固定12raw/32教材の引用と不明接続を切分ける。引用に先立つ分類/親/qualifier出力順を見直すquote_first.v1をAPI1561526bへ追加、旧版/厳密受口/保存互換は保持。112 PASS/SQL依存なしの2SKIP。前回09b3重みで学習0/新12生成/600秒以内の比較を準備。rootが実装/write/実行、agentはread-only監査。詳細と実装順は[trial](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-quote-first-probe-20261102)。通常map/DB/RN/稼働/merge0。正式0/3/54.50％据置。
