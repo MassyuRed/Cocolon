@@ -1,5 +1,7 @@
 # Analysis — 最小field接続と実4B probe
 
+**11/2の割込み修正：** Mashの指示で観測会を止め、わたしマップの選択カテゴリ接続を修正。新しいカテゴリ付き4B準備は[今回の版分離](#analysis-selected-category-context-20261102)を参照。旧runのmessages/ref/raw/教師は旧版のまま保持し、下記のGPU結果/不採用をリセットしない。
+
 **11/2最新再開点：other62の68更新/28生成と、actor/predicate診断の追加学習0/12生成を完了。全270＋66原本/112重み保存、全48＋16応答の保存再読・意味監査済み。改善は動詞×元文脈に限られ、actor名だけでは説明できず通常未採用。次の2文脈×否定/肯定/名詞対象SC6をstrict/実file非生成再読/実tokenizerまでCPU確認（モデル0）。[診断全結果/原本/次の実装順](#analysis-actor-predicate-result-20261102)。完了runを重複起動しない。**
 
 2026-11-01 JST。開始原本：Cocolon PR30 `1c66add4fdf8f5ded18f7443d6b91b1771998244`、API PR3 `36713940ea82e217fab8a7c0a738a33f21df1c4d`。Mashの分析残件開始とweekly§45.4に従う。Codex Work/GPT-6、root華恋が実装/統合/反映、別文脈agentはread-only監査のみ。独立Pro/Ultra又はhuman品質受入れとは呼ばない。System Context最新cacheは未成立のまま、fresh原本fallbackを使用。
@@ -805,3 +807,12 @@ GitHub1d3cdc15固定版を一回、追加学習0/12新stop/2load/185.833775秒�
 次の実装順：旧62＋SC6の意味/対比を保持し、追加モデル作業前に初期保存重み/dose/順/旧保持probe/新しい近接対照/時間上限を明示して一候補へ固定する。診断12改変sourceを自動で教師化せず、89baも通常/初期値へ自動採用しない。参加の名詞対象教材を消さず、行動としての肯定/否定と文脈を対比する。HQ03退行/CQ04少し/HQ04理由は別確認。ここでは次GPU計画の選択/追加実行なし。完了other62と診断を再起動せず、最初に両report/run.exitと本節を確認する。
 
 Mashの必要GPU/実装/GitHub継続明示承認内、Codex Work/GPT-6 root単一writerと同環境read-only監査。独立Pro/Ultra/human受入れではない。通常source/受口/API/DB/RN/Render/Supabase/稼働/merge/deploy/Pod管理操作0。全unparsed/actor未解決/route0、正式0/3・54.50％/candidate_ready=false、BLOCKER_NARROWED/STRUCTURE_MAP_DELTA_NONE。
+
+<a id="analysis-selected-category-context-20261102"></a>
+## 2026-11-02 — 新しいカテゴリ付き4B準備と旧試行の保持
+
+API2c259f0e。通常累積mapは選択カテゴリを保持・集合別集約・既存文章/図へ表示するよう変更。新しい4B比較で本人選択を渡す場合は`analysis_cumulative_service.prepare_cumulative_category_units(owner,snapshot)`を明示的に呼ぶ。これはquoted-parent型の`prompt_version='selected_categories.v1'`、各fieldの`selected_categories`、新ref/保存stateを持つ。カテゴリだけから場面/役割/原因を作らず、quoteは本人本文のみ。build/serialize/reloadは同版を検査する。通常ensureの4B有効化ではない。
+
+旧`prepare_cumulative_quoted_parent_units`はbaseline messages/ref/stateと旧rawを保持するための入口。既存実験runner/教師/保存原本を一括置換せず、旧結果の再読には元のprepareを用いる。旧/新の同じrawを別指示で成功扱いしない。新指示のtoken長/実4B意味品質は今回未確認で、実行回数/学習条件は新比較を具体化してから決める。今回の実4B/学習0。
+
+API `2c259f0e33abcd70cf353a8f53af3dc3b06eb63e`へコード反映済み。[既存CI 41437730142](https://github.com/MassyuRed/mashos-api/actions/runs/41437730142)は全工程success（Analysis1644＋12020subtests、shared-owner1、累積/Q3/API24＋2subtests、月次SQL201原本/15月参照）。本番は`36713940`／`dep-dbjg0l8ae00c73e4cr20`のまま。Renderの指定commit配置はログインが必要なため未実行。本人端末のカテゴリ表示は未確認。 CPU/既存RN表示契約と新旧保存互換の範囲は[Analysis04](../../../designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#analysis-selected-category-context-20261102)、Mash指示と観測会の停止は[weekly§79](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-selected-category-context-20261102)。§78の品質残件をカテゴリ表示で解消済みにしない。

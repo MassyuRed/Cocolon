@@ -3187,3 +3187,21 @@ API86d19b6d、STRUCTURE_MAP_DELTA_PRESENT。通常の累積mapは不変。新ana
 
 
 11/2 actor/predicate診断完了のtrial地図：`semantic_units_actor_predicate_results.json`は新12/再利用4の16raw読解・局所scope比較・全66原本identity、`semantic_units_actor_predicate_saved_replay.py/json`は別CPU processの保存7candidate/9拒否照合。runは完了、再実行しない。次の`semantic_units_scope_contrast_cpu_run.py/json`は旧62不変で新actor/2文脈×否定/肯定/名詞対象SC6のstrict/実file非生成再読/実tokenizerと合成payloadを保有。次GPU計画/新製品ownerではない。README#analysis-actor-predicate-result-20261102/weekly§78、STRUCTURE_MAP_DELTA_NONE。
+
+<a id="analysis-selected-category-context-files-20261102"></a>
+## 2026-11-02 — 選択カテゴリ接続の変更file地図
+
+API2c259f0e、STRUCTURE_MAP_DELTA_PRESENT。新production file/ownerなし。API `2c259f0e33abcd70cf353a8f53af3dc3b06eb63e`へコード反映済み。[既存CI 41437730142](https://github.com/MassyuRed/mashos-api/actions/runs/41437730142)は全工程success（Analysis1644＋12020subtests、shared-owner1、累積/Q3/API24＋2subtests、月次SQL201原本/15月参照）。本番は`36713940`／`dep-dbjg0l8ae00c73e4cr20`のまま。Renderの指定commit配置はログインが必要なため未実行。本人端末のカテゴリ表示は未確認。 設計・表示・互換・検証範囲は[Analysis04最新節](designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#analysis-selected-category-context-20261102)。
+
+| 既存path（mashos-api/ai/配下） | 今回の責務差分 |
+|---|---|
+| `services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/source_adapter.py` | request方針、原record/version付きカテゴリ取得、親補足継承 |
+| `services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | private node文脈とカテゴリ集合別の集約 |
+| `services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py` | 根拠再束縛、既存label内の表示、カテゴリ付き比較と新旧混在拒否 |
+| `services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py` | 明示4B新prompt/保存state版、fieldカテゴリ渡しと旧再読互換 |
+| `services/ai_inference/analysis_observed_service.py` | カテゴリprefixを除いたprotective基底labelの既存検査 |
+| `services/ai_inference/analysis_cumulative_service.py` | 通常カテゴリ方針、新4B prepare/build/save/reload dispatch、旧current一度更新/旧月次維持 |
+| `tests/test_cmee_analysis_v1d_vertical.py` | 新10対象：集約/多選択/補足/根拠/比較/新旧prompt保存 |
+| `tests/test_analysis_cumulative.py` | 旧current更新と再利用、月次不変、protective保存投影の新2対象 |
+
+公開wire/RN/DB schema/依存/こころ天気の変更なし。新4B実行0、旧実験fileは旧promptの履歴として保持する。

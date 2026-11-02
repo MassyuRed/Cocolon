@@ -1855,3 +1855,20 @@ CPU一作業は上記実装→新合成raw→既存graph/text/diagram→同file�
 ## 2026-11-02 — 親quote契約CPU接続のactual
 
 API86d19b6d。上の計画をMash継続承認内で既存3owner＋新test1へ実装。新profile/type/ref/schema/state/fileを分離し、parent_quoteを同field返却親exact1の位置へ束縛、旧integer-parentのfield/source/graph検査と唯一realizerを共有する。旧messages/ref/state/拒否条件と旧実87保存payloadを保持。対象283PASS/3WASM SKIP、新56合成派生のfield内容/文章/図/coverage一致、新file非生成再読を確認。新実4B/学習/SQL/HTTP/通常map/RN/本番変更0、STRUCTURE_MAP_DELTA_PRESENT。詳細・具体path・件数範囲は[trial最新CPU結果](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-quoted-parent-units-cpu-20261102)。計画は実装前の履歴であり現在の未実装を示さない。
+
+<a id="analysis-selected-category-context-20261102"></a>
+## 2026-11-02 — わたしマップへ本人選択カテゴリを接続
+
+Mashの「選択カテゴリを使う接続を直す」指示により、通常累積mapと次の明示4B準備へ実装。対象はわたしマップ。こころ天気の感情分析は変更していない。API `2c259f0e33abcd70cf353a8f53af3dc3b06eb63e`へコード反映済み。[既存CI 41437730142](https://github.com/MassyuRed/mashos-api/actions/runs/41437730142)は全工程success（Analysis1644＋12020subtests、shared-owner1、累積/Q3/API24＋2subtests、月次SQL201原本/15月参照）。本番は`36713940`／`dep-dbjg0l8ae00c73e4cr20`のまま。Renderの指定commit配置はログインが必要なため未実行。本人端末のカテゴリ表示は未確認。
+
+- 通常累積requestは`selected_category_context=True`を選び、元recordの正規化済みカテゴリ集合をrequest-localに保持する。旧offline requestの既定Falseと旧source identityは保持する。
+- 集約とfresh二期間比較の意味keyへカテゴリ集合を含める。異なる集合の同文を反復扱いせず、複数選択の順序/重複で件数を増やさない。新旧カテゴリ方針の混在比較は拒否する。
+- 補足は親原入力の集合を継承する。投影時に原record/version/owner、各recordに対応する証拠、全証拠envelopeを照合し、別recordへの付替えやカテゴリ文脈の除去を拒否する。
+- カテゴリは本人選択の文脈であり、カテゴリ名だけから場面・役割・原因・人格を生成しない。本文の未解析をカテゴリ表示で解消済みにしない。
+- DTOのnodeは既存4keyのまま、`visible_label`へカテゴリと改行を前置する。未選択は「未選択」。同じ唯一realizerから文章と図を作り、protective注記の既存保存validatorも基底labelを検査する。カテゴリの元record JSONは公開/保存projectionに加えない。
+- 旧currentの次回正常ensureは既存commitの`p_force`で一度更新し、新currentは再利用。保存済み月次は生成せず当時の本文/図/IDを返し、過去月の作り直しはしない。DB schema/migration変更なし。
+- 次の新しいカテゴリ付き4B入力は`prepare_cumulative_category_units`→`selected_categories.v1`。各fieldへ`selected_categories`を渡すが、quoteは本人本文からのみ取る。新refと`…quoted_parents_state.categories.v1`へ版分離し、旧baseline prompt/ref/messages/stateと旧rawの非生成再読を保持。旧実験runner/教師/保存結果を新指示で再解釈しない。通常ensureは4Bを呼ばず有限文法のまま。
+
+検証：新規対象10 unittestはPASS（0.471秒）。実compiler/realizerによるカテゴリ別合成mapを、配布済み7201と同じ未変更RN `watashiMapV2Contract.js`へ渡し、closed DTO受理とbackend本文=model本文の一致を確認。local広域493件はassertion失敗なしだが、既存storage試験1件が環境のhttpx未導入でERROR、全成功とはしない。CIは既定runtime/依存で保存・累積API・SQLまで全工程成功。実4B新生成/追加学習0、実機カテゴリ表示/一般意味品質/正式商品受入れは未確認。STRUCTURE_MAP_DELTA_PRESENT、通常4B候補の品質試行とIF/Savedの残件は保持。
+
+既存source adapter/compiler/唯一realizerの責務内の変更。全変更pathは[01Bの最新file地図](../../../01B_cocolon_overall_structure_analysis_piece_emotionlog_ranking.md#analysis-selected-category-context-files-20261102)、最新状態は[weekly§79](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-selected-category-context-20261102)。古い試行節の「通常map不変」は当該試行当時の事実として保持する。

@@ -2187,3 +2187,16 @@ other62全結果/270原本/112重みを3c6e7ff3で確定反映後、MD02/OA02各
 新叔父actor・2別unknown文脈×参加の否定/肯定/名詞対象のSC6をroot合成しCPU具体化。全文ACTION root actor/否定と名詞対象を対比し、旧62/MD02/OA02/model rawを変更/教師コピーしない。strict6/実file同process非生成reload/IDcoverage/実tokenizer終端全一致、最大1007prompt/237target/1244full、各5/5/6unit。モデル/新生成/更新0。一actor近接教材で盲検/Mash教示/6独立観測/モデル品質ではない。次は初期保存重み/dose/順/保持probe/新対照/capを明示固定してから別一候補へ進む。次GPU未選択、診断source/89ba自動採用なし。HQ03主体qualifier退行/CQ04少し/HQ04理由は別残件。
 
 [全結果・原本・CPU6・次の実装順](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-actor-predicate-result-20261102)。処理按分約$0.02994@前回0.58/h、準備/回収/保持等別。Mash継続明示承認内、root単一writer/同環境監査、通常source/map/DB/RN/稼働/正式0/3・54.50％据置、STRUCTURE_MAP_DELTA_NONE。
+
+<a id="analysis-selected-category-context-20261102"></a>
+### §79 わたしマップの本人選択カテゴリを集約・比較・表示へ接続
+
+Mashが「何を求められているか分からない」と再指摘し、カテゴリ接続未完成について修正を明示指示。観測会の問いを止め、わたしマップに限定して実装。こころ天気は感情分析であり今回の対象ではない。同一人物の5件は華恋が作った架空例で、Mashの読み/教師が得られたとは扱わない。
+
+通常のわたしマップでは本人選択カテゴリの集合を観測内容の文脈として保持し、異なるカテゴリ集合を一つの反復として集約しない。本人補足は親原入力のカテゴリを継承し、原record/version・owner・証拠の対応を検査する。文章と図は既存`visible_label`内へ「選択カテゴリ：仕事」等を表示し、公開wireのキー集合は維持。旧currentは次の正常ensureで一度再導出し、保存済み月次は当時版のまま再読する。 多選択は集合で扱い、重複・順序で件数を増やさない。カテゴリ名だけから場面/役割/原因を生成せず、未解析を保持する。fresh期間比較も集合込み、新旧方針の混在は拒否。新4B入力には`prepare_cumulative_category_units`/`selected_categories.v1`を用意し、原文quote規則と旧raw再読を維持した。通常mapは有限文法のままで4B未有効化。
+
+API `2c259f0e33abcd70cf353a8f53af3dc3b06eb63e`へコード反映済み。[既存CI 41437730142](https://github.com/MassyuRed/mashos-api/actions/runs/41437730142)は全工程success（Analysis1644＋12020subtests、shared-owner1、累積/Q3/API24＋2subtests、月次SQL201原本/15月参照）。本番は`36713940`／`dep-dbjg0l8ae00c73e4cr20`のまま。Renderの指定commit配置はログインが必要なため未実行。本人端末のカテゴリ表示は未確認。
+
+新10対象はPASS、実compilerのカテゴリ別合成mapを未変更の配布RN表示契約へ渡し、DTO受理/文章と図の本文一致を確認。local広域493件のうち既存storage1件はhttpx未導入で環境ERROR、assertion失敗0だが全成功ではない。旧current一度更新/次回再利用、旧月次非生成再読、protective投影を既存CIでも確認済み。同環境read-only監査で見つかったrecord証拠対応・文脈除去・混在比較を補修し、最終postimageにblocker指摘なし。独立human/Pro受入れではない。
+
+製品変更は既存production6file＋既存test2file、DB schema/公開DTO/RN/こころ天気/新依存変更0。実4B/新学習0、一般意味品質/カテゴリ別の役割や選択傾向の一般化/本人端末/IF/Savedは残件。正式0/3・54.50％の再採点なし。STRUCTURE_MAP_DELTA_PRESENT。詳細は[Analysis04](../designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#analysis-selected-category-context-20261102)、全file地図は[01B](../01B_cocolon_overall_structure_analysis_piece_emotionlog_ranking.md#analysis-selected-category-context-files-20261102)。§78までの完了GPUrunは再起動しない。
