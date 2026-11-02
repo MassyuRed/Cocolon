@@ -2015,3 +2015,13 @@ private66member/14427639bytes/SHAe36490c6…をLibrary libfile_53338dfcb1a881919
 非学習6forward/11.666034秒、追加生成/更新0。4教師のmessages/ref/token/prefix/mask/全target/EOS一致、保存重みserving NLL差数e-6。AT17/19/21は全target top1正しく、AT29は210/214。最初の分岐は教示16.35％対実raw側83.06％、引用の『を』14.62％対閉じ84.16％。短prefixのprefill cache有無で順位同じ、逐次cache再現ではない。この範囲で経路不一致の証拠はなく、平均NLLが局所未適合を隠していた。初回は設定metadata読取で0forward/8.9549秒停止、optional lookupへ直し別outputで完了。失敗原本を含む11member/18434bytes/SHA5d978a00…をLibrary libfile_4ed46a2a16948191857b075c6ae63414へ保全。
 
 次は同32教材/全messages/target完全不変、追加教材0、保存Analysis02dfa…から別重みへ各4回128update、同32前後NLL/DEV8＋学習済み4の新after12、900秒上限。一意引用/独立願望だけでなくAF02/NV01等の退行も全て読む。AT29だけで採用せず、失敗時epoch自動追加/教材増量を繰返さない。[結果/固定plan](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-alignment-result-and-fixed32-plan-20261102)。本記録時点で128更新未実行、今回承認内。通常採用0/正式0/3/54.50％据置、STRUCTURE_MAP_DELTA_NONE。
+
+
+<a id="analysis-fixed32-result-20261102"></a>
+## 58. 11/2 — 固定教材128更新、学習済み4件一致と全重み回収を完了
+
+同32教材不変の追加128update/12新生成は324.174446秒/exit0、全stop。全112tensor更新/有限保存/非学習reload一致。同32NLL0.024621→0.005013、31件低下/AT15のみ増加。REHEARSAL4は教示JSON全同値、AT29の独立願望/未決と一意引用が回復。DEV構造6/8据置。NV02の話者/本人心配は偽NEGが消えて局所改善、AF01原文外引用/NV01不明親は拒否、受理候補にもqualifier粗化が残り通常未採用。root/読取監査で全raw、SHA12件と教師JSON4件一致。保存10candidateの別local生成/compile/realizer entry禁止再読も一致。旧venv消失による最初のpath失敗0実行後、同Python/Pydantic/FastAPIの隔離再読環境を復元して確認した。旧860/113対象を重複加算しない。
+
+全重み/原本71member・CRC/70manifest SHA一致。private Library libfile_609f1e617a688191aadbdb5e8f988a4f、14435522bytes/SHA537b9880…、最終weights09b3a1f6…/config047a624c…。転送APIのfail/timeout通知で通常JSON表示から12rawを先に保全し、共有成果物の実bytes/SHA検索で完了済みZIPを発見、重みのPod外回収も完了。学習/生成を二重実行せず、過去の失敗原本も保持。Reviewのみの旧zipはlibfile_11ed9ed757a08191b7d9b58c7949707f、最新は上記全重みzip。
+
+本ブロックはCPU実装860対象PASS・版分離113対象PASS（重複あり）、実4B新48生成、分析用合計240更新、非学習局所6forwardまで。API cddf1855、通常map/DB/RN/Render/本番/merge不変。必要作業はMashの本セッション承認内。次はこの実rawの逐語引用と不明root接続の切分け、近接対照/表現の最小差分をCPUで検討し、epoch/教材数の自動追加は止める。新しい本人観測会を待たず、旧評価の完全同一文を新教師へ転用しない。[全結果/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-fixed32-result-20261102)。正式0/3/54.50％据置、限定TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_NONE（今回の結果記録差分。§51の新wire実装PRESENTは保持）。

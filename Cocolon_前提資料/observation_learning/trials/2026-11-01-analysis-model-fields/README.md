@@ -1,6 +1,6 @@
 # Analysis — 最小field接続と実4B probe
 
-**最新：11/2、6forward診断で入力/重み不一致の証拠はなく、2field教師の局所未適合を確認。[同じ32教材を不変にした追加128更新の一候補](#analysis-alignment-result-and-fixed32-plan-20261102)へ。通常未採用。**
+**最新：11/2、固定32教材の追加128更新が完走。学習済み4/4が教示JSONと一致、開発6/8で原文外引用/不明親とqualifier粗化が残り通常未採用。[全重み・原本71fileの回収/最終結果/次の再開点](#analysis-fixed32-result-20261102)。完了済みrunの再実行はしない。**
 
 2026-11-01 JST。開始原本：Cocolon PR30 `1c66add4fdf8f5ded18f7443d6b91b1771998244`、API PR3 `36713940ea82e217fab8a7c0a738a33f21df1c4d`。Mashの分析残件開始とweekly§45.4に従う。Codex Work/GPT-6、root華恋が実装/統合/反映、別文脈agentはread-only監査のみ。独立Pro/Ultra又はhuman品質受入れとは呼ばない。System Context最新cacheは未成立のまま、fresh原本fallbackを使用。
 
@@ -338,3 +338,38 @@ AT17/19/21はteacher-prefix top1が全157/110/99target tokenで正しく、実�
 前runのDEV8＋REHEARSAL4の全12rawをref/messages/SHA照合でbeforeへ再利用、新after12だけ生成。AT29の独立願望/未決と一意引用、学習済み4全体、AF02の不明表現/NV01の誤昇格を含む開発8全体を読む。AT29だけ直れば採用とはせず、JSONのkey順だけの差を意味失敗にもしない。追加更新で未使用入力が改善する保証はなく、一般品質/盲検/本人受入れへ転用しない。
 
 process900秒（外TERM890+kill10）/12新call/各23秒/context8192/max2048、同単価按分上限$0.145、保持/準備等別。失敗時にepoch自動追加/教材増量を繰返さず、局所分岐を読んでtarget/objective/表現の見直しへ戻る。重み初期/保存の全112一致/有限性と元adapter不変、全raw回収を維持。本記録時点で追加128update未実行、今回のMash継続承認内。API cddf1855/通常map/DB/RN不変、正式0/3/54.50％据置、STRUCTURE_MAP_DELTA_NONE。
+
+
+<a id="analysis-fixed32-result-20261102"></a>
+## 11/2 — 固定32教材の追加128更新を完了、学習済み4件一致と残る転移不足
+
+前の32教材/messages/targetを完全不変で各4回128update、同32前後NLL64measurement forward、保存非学習reload後のDEV8＋学習済み4の新12生成を一回完走。process324.174446秒/exit0、全12stop。全112tensor更新/有限保存/非学習112一致、元adapterと旧fit38不変。peak allocated9.293182GiB/reserved10.244141GiB。全assistant target/EOS/改行とprompt mask、weighted/unweighted full-tail loss/grad一致を維持。
+
+同32件の平均unweighted NLL0.024621478→0.005012718。31件低下、AT15だけ0.015241444→0.026874892へ増加した。平均値だけで全面改善としない。
+
+**学習済みREHEARSAL4件は全て教示JSONと同値**。AT29は『引っ越したい』と『時期はまだ決めていない』が独立した思考へ戻り、行動側の一意引用『部屋を』も回復した。rootとread-only監査で全12raw/元sourceを読み、元raw SHA12件、教示JSON4件の一致を確認した。これは局所未適合の診断に対応する教師自由生成の回復であり、盲検/一般品質/本人受入れではない。
+
+| 開発入力 | 内容の判断 |
+|---|---|
+| AF01 | 拒否継続。『てはいない』を原文外『ていない』、存在しない『相手の』modifierへ。理由marker『ので』は回復したが全体を補修しない |
+| AF02 | 前runとbyte一致。時点/結果の3unitは保持、不明表現を単純NEGATIONにする粗化も残る |
+| UV03 | 前runとbyte一致。発話者/引用/本人思考は保持、『気に』の余分なmodifierも残る |
+| UV12 | 願望/未決を独立思考として保持。ただし願望内の否定と未決全文をmodifierへ置くscopeの粗さ |
+| NV01 | 対象語の主体化は減ったが、不明内容の親がunit3の思考でunit4の不明rootへ届かず拒否。待つ行動も思考へ分類 |
+| NV02 | 父の発言/引用内容/本人の心配と少しが整合し、『だ』への偽否定が消えた局所改善 |
+| NV03 | 願望/未決/今日/否定/まだは保持、『たい』の余分なmodifierが増えた |
+| NV04 | 前runとbyte一致。朝/夜→安心、理由不明と内容対象を保持 |
+
+DEVの構造受理は6/8で据置、REHEARSALは3/4→4/4。成立10candidateは同file再読成功。別local processでもEngine.generate/compile entry/realizer entryを禁止し、同candidate ID/coverage10件の再読を確認した。期待表現をvalidator内で再計算することと、新model call/作者entryを再実行しないことは区別する。実4B由来の通常SQL保存/HTTP/DB/RN採用0、全record未解析/route0/主体は未解決、polarity/modality/temporal_scopeはAS_WRITTEN_UNRESOLVEDを維持。途中で再読用の旧scratch venvが失われていたため、同Python3.12.14/Pydantic2.14.1/FastAPI0.162.0等の隔離環境を復元して10件を確認。最初の旧path起動失敗は実行0で、既存860回帰の再実行/再加算ではない。
+
+[全機械結果とroot読解](semantic_units_fixed32_results.json)。通常未採用。AF01/NV01の拒否だけでなく、受理された候補のqualifier意味も未完成のため、入出力を緩めたりrawを直して通すことはしない。追加epoch/教材増量を自動で続けず、次はこの固定実rawを基に逐語引用選択と不明rootへの意味接続を分け、既存32と異なる近接対照/出力表現の最小差分をCPUで検討する。旧評価の完全同一文を新教師へ転用せず、通常graph/DB/RNへの橋渡しは意味候補の妥当性と既存owner境界を保って別段階とする。
+
+### 全重み/原本の回収と再開点
+
+全71member（manifest対象70）のCRC/全SHAを照合し、先に通常JSON表示から保全したreport/全12rawとも一致した。private原本 `cocolon-analysis-fixed32-result-20261102.zip`、Library `libfile_609f1e617a688191aadbdb5e8f988a4f`、14435522bytes/SHA `537b9880e120b9624cf9df38e4707be546433e0b479416f9dd40935895cc3d4a`。最終重みSHA `09b3a1f6beb825e07d82e9d23cce2e69c2099d18041537e38fe5eb8c0c0333f5`、config `047a624c7610132ebfa621642342760060446ed9360dab4ca8e1741ea016738b`。元32教材適合前の02dfa重みも別private原本へ保持。保存対象は全112adapter tensorで、baseはplan記載の固定model/revisionから再読する。
+
+転送APIがfail/timeoutを返し、分割/小metadata/再接続でも同じ通知だったため、学習を再実行せず通常HTTP JSON表示からまず12rawを保全。review JSON63583bytes/SHA0f75eb8c…、review private11904bytes/SHA916abd7a…/Library libfile_11ed9ed757a08191b7d9b58c7949707f。後に共有保存先の実ファイルをsize+SHAで検索すると、元ZIPと一致する完了済みファイルが存在していた。これを取得してCRC/manifestを検証し、**重みを含むPod外回収も完了**した。失敗通知だけで未転送と確定せず、実ファイルを独立照合した。内部ブラウザdownloads画面はURL policyで開けず、そこを迂回して閲覧せず、通常ファイル表示/共有成果物照合で完了した。保存/学習/生成/受口の再試行やraw補修はしていない。
+
+この作業ブロックでは意味単位wireのCPU実装/860対象PASS、版分離113対象PASS（前者と重複あり）、実4Bの新48生成、分析用の16＋32＋64＋128＝240更新、局所診断6forwardを実施。新datasetはroot架空の32例で、既存9/19行教材・通常重み・正式評価は不変。初回のadapter階層指定失敗0生成とmetadata参照失敗0forwardも原本保持。各runの按分額は処理範囲だけで、準備/回収/保持/通信/税等を含む請求額ではない。今回128runの同単価process按分は約$0.05223。
+
+API sourceはcddf1855のまま、rootが全実装/write/実行/全raw統合、別agentはread-only監査のみ。Render/本番/DB/RN/通常有効化/mergeなし、Pod Stop/再起動/削除/追加チャージ0。最終の所有model processは終了。必要作業はMashの本セッション指示で承認済み、次の再開もGitHubの固定資料とprivate重み/原本から行い、完了済みrunを二重に実行しない。正式0/3/54.50％据置、限定TECHNICAL_CREDIT（教師自由生成適合/局所改善と原本回収）、STRUCTURE_MAP_DELTA_NONE（本結果記録の差分。§51の新wire実装PRESENTは保持）。

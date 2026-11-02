@@ -1813,3 +1813,8 @@ primary=BLOCKER_NARROWED（意味候補の分割/採用に必要なprivate差分
 ### 2026-11-02 — 分析protocol専用の隔離学習
 
 clarified base2callも0/2、原文外qualifier/不明親混同/反復打切り。指示だけの追加試行を止め、通常source/API cddf1855を保ったまま新root架空8件/16updateのLoRAを隔離作成する計画へ進む。旧weight非読込、configのみ再利用、未使用4入力の近い構文への転移比較、900秒/新6生成以内。教師のsource再束縛と意味監査済み、GPU学習0。詳細/実装順はtrial#analysis-teaching8-plan-20261102。
+
+
+### 2026-11-02 — 意味単位実装と隔離学習の確定結果
+
+API fa995a44/cddf1855でprivate意味単位graph/全文併記/同file再読と版分離を実装し、860対象/113対象（重複あり）のCPU検証。実4Bの新48生成と分析用合計240更新、局所6forwardまで実施。学習済み4/4 JSON同値へ回復したが、未学習完全同一入力では原文外qualifierと不明内容の誤親、受理候補の意味粗化が残る。全重み/原本をPod外回収済み、通常ObservedGraph/safe_projection/DB/RNは未切替。現private graphを通常DTOへ押し込まず、次は既存厳密受口を維持して引用選択/親意味の切分けと最小対照へ戻る。全詳細/再開点はtrial#analysis-fixed32-result-20261102、weekly§58。
