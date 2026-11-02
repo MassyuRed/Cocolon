@@ -818,3 +818,17 @@ API2c259f0e。通常累積mapは選択カテゴリを保持・集合別集約・
 旧`prepare_cumulative_quoted_parent_units`はbaseline messages/ref/stateと旧rawを保持するための入口。既存実験runner/教師/保存原本を一括置換せず、旧結果の再読には元のprepareを用いる。旧/新の同じrawを別指示で成功扱いしない。新指示のtoken長/実4B意味品質は今回未確認で、実行回数/学習条件は新比較を具体化してから決める。今回の実4B/学習0。
 
 API `2c259f0e33abcd70cf353a8f53af3dc3b06eb63e`へコード反映済み。[既存CI 41437730142](https://github.com/MassyuRed/mashos-api/actions/runs/41437730142)は全工程success（Analysis1644＋12020subtests、shared-owner1、累積/Q3/API24＋2subtests、月次SQL201原本/15月参照）。指定commitを配置したRender `dep-dbk7l2uc6qcc73dp5d70`は11/2 11:58:13 UTC（20:58:13 JST）Live。配置後healthz/app bootstrap200、未認証latest/reports-history401、Piece private5ON/public3OFFを確認。配置開始〜12:00 UTCの取得範囲にapp error0。本人端末のカテゴリ表示は未確認。 CPU/既存RN表示契約と新旧保存互換の範囲は[Analysis04](../../../designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#analysis-selected-category-context-20261102)、Mash指示と観測会の停止は[weekly§79](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-selected-category-context-20261102)。§78の品質残件をカテゴリ表示で解消済みにしない。
+
+
+<a id="analysis-scope68-plan-20261103"></a>
+## 11/3 — 既存62保持と参加scope6の限定比較（実行準備）
+
+Mashの分析残件開始と新規GPU提供に基づく一候補。§82の材料定義・本人基準の役割/判断/選択・既存CMEEへの採用・記録間関係という目的を引き継ぐ。今回はその前段にある行動主体/肯否/名詞対象の局所読解を改善する。SC6だけを残件全体の完成条件にしない。
+
+初期重み89badc47/configb357ff96を明示選択し、旧62を各1回＋既存SC6を各2回＝74更新。旧62のsource/messages/targetは辞書同一で、参加を名詞対象にする旧教材も保持。旧順4件ごとにSC01–06を2巡挿入し、最後14件は旧教材。LR1e-5/seed20261110/全assistant重み付きCE/全prompt mask/clip1/新optimizerを維持する。保存89baの既存24beforeは同一性確認して再利用、SC6と別actor近接診断SD2の新before8＋全32after＝最大40新生成、136測定/3load/900秒（外側TERM890+kill10）。partial保全、延長/再試行/出力補修/受口緩和なし。学習と形式受理を意味品質へ換算しない。HQ03主体qualifier/CQ04少し/HQ04理由は別追跡。
+
+固定Qwen3.5-4B revision851bf6e、既存quoted-parent指示と2134原本を継承。selected_categories.v1へ同時変更しない。新Podの表示はRTX PRO4000、$0.58/h。処理上限按分$0.145、準備/転送/取得/保持等別。新Podの依存/モデルを復元中で、ここでは学習/生成未実行。
+
+復元時に旧2134manifestとAPI86d19b6dのai/tests/test_analysis_model_units.pyだけ差分を検出。分析production source/loaderは一致する。旧manifestは同testのcddf1855版（SHA40abefd1）を含んでいた。検証を緩めず、そのGitHub原本を隔離treeへ復元し2134全一致を要求する。履歴の86d19b6dを完全な単一commit checkoutとして表現しない。旧重み/教材/結果は不変。
+
+実fileは同folderのsemantic_units_scope68_prepare.py/run.py/supervisor.pyとrecover_scope_api.py。prepareは実受口/実file非生成再読/実tokenizerをモデルload前に検査し、supervisorは旧269member/24保存応答/初期重み/2134source/compute空を照合して一回だけ起動する。通常source/API/DB/RN/Render/Supabase/配置/Pod管理0、全未解析/主体未解決/route0・通常未採用を保持。Codex Work/GPT-6 root単一writer、同環境read-only reviewで独立Pro/Ultra/human受入れではない。STRUCTURE_MAP_DELTA_NONE（隔離研究のみ）。
