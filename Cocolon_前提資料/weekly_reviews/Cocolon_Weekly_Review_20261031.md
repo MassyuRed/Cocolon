@@ -2046,3 +2046,13 @@ quote_first指示単独はDEV構造3/8（旧6/8）、学習済構造2/4/教示�
 ### §60 元表現比較の結果、原本保全と最小局所診断
 
 同40/元09b3/同64順の元clarified表現で64update・20生成完走。学習済み4/4は全て教示JSON同値、DEV構造6/8、新CQ4/4（元から4/4、うちCQ01/03はbyte不変）。AF02の不明EPI/主体/否定/未決/時点を保持しCQ02/04に局所改善。ただしAF01にkey欠落・carrier名混同・原文外引用、NV01に親2箇所の誤りが残り通常未採用。全重みと原本はquote/contrast/canonical全て回収・元SHA一致・private保存済み。別processのcandidate再読は5/14/18件全一致。比較合計追加128更新/新52生成は独立52題ではない。次はb8b7固定・原raw不変の少数forwardでkey/copy/carrier/親の分岐を調べる。詳細と保存ID/SHAはtrial最新節。API1561526b/通常map/DB/RN/稼働不変、正式0/3・54.50％据置、STRUCTURE_MAP_DELTA_NONE。
+
+
+### §61 固定b8b7の9局所forwardと親位置の対照設計
+
+7＋2forward/学習0/新生成0を完走、両exit0/compute空/元重み不変/全原本保存。keyを出さず閉じる分岐、分割prefixでの逐語反復、親番号2の強い選択を確認。一方carrier suffix条件は元rawのMODIFIER継続を再現せずANNOTがtopであり、原因解決とはしない。先行親だけを変えても実不明root5はtopにならない。独立root順位2/3と全unit位置3/5の混同仮説があり、BT03/04は両順位一致のため区別を教えていなかった。次は両順位が異なる別題材と逐語reason/carrierの小対照をCPU束縛し、一候補を比較。全値は局所1tokenで、元KV生成再現/全文確率/意味合格ではない。詳細・保存IDはtrial最新節。API1561526b/通常map/DB/RN不変、正式0/3・54.50％据置。
+
+
+### §62 親の全unit位置と逐語reasonの48target候補
+
+§61の診断を受け、旧40target byte不変＋別題材8対照を既存受口へCPU束縛。NT01/02の対象有無でroot順を保ちunit親5/4を分け、待機親3/不明5・3行動子付き不明7、2fieldの逐語reason/carrierを教える。b8b7から旧40各1/新8各3=64update、同48NLL96forward、原16before再利用＋新4before/22after=新26生成、900秒上限の一候補。全raw/旧AT4/新教師2を再読、全重み回収。近接診断を盲検へ換算せず、退行なら通常不採用。詳細・実装順・限界はtrial。ここは準備、GPU未実行。正式0/3・54.50％据置。

@@ -1,6 +1,6 @@
 # Analysis — 最小field接続と実4B probe
 
-**最新：11/2、表現条件3比較の追加128更新・新52生成を完了。元表現候補は学習済4/4教示一致を保持、DEV構造6/8・新CQ4/4だが引用/carrier/親番号が残り通常未採用。全重み・原本を回収済み。[最終結果と局所診断の再開点](#analysis-canonical40-result-20261102)。完了runを二重実行しない。**
+**最新：11/2、追加128更新・新52生成の3比較と、その後の固定b8b7・9局所forward（追加学習/生成0）が完了。学習済4/4を保持する候補でも引用/carrier/key/親番号が残り通常未採用。全重み/原本を保存済み。[局所診断と次の改善](#analysis-branch-diagnosis-result-20261102)。完了runを重複実行しない。**
 
 2026-11-01 JST。開始原本：Cocolon PR30 `1c66add4fdf8f5ded18f7443d6b91b1771998244`、API PR3 `36713940ea82e217fab8a7c0a738a33f21df1c4d`。Mashの分析残件開始とweekly§45.4に従う。Codex Work/GPT-6、root華恋が実装/統合/反映、別文脈agentはread-only監査のみ。独立Pro/Ultra又はhuman品質受入れとは呼ばない。System Context最新cacheは未成立のまま、fresh原本fallbackを使用。
 
@@ -439,3 +439,31 @@ quote-first学習候補は全101member/manifest100一致、全112 F32 tensorを�
 次は固定b8b7と対応messages、未補修AF01/NV01原rawを使用し、最初のkey欠落/引用の繰返し/carrier名/理由kind、および親番号2箇所の選択を少数forwardで読む。前の親だけを変えたprefix比較は反事実診断として区別する。raw再tokenizeを元生成tokenの完全回収と呼ばず、次token順位を修正後全文の意味成立へ換算しない。新生成・追加学習は行わず、原因に応じた最小差分を決める。通常受口やrawを緩和しない。
 
 今回比較は指示単独12＋新対照20＋元表現20＝新52生成、追加128更新。52種類の独立評価ではなく同題材の条件比較を含む。CPU対象112 PASS/2 WASM依存SKIP、旧860の再実行ではない。API1561526b、通常map/DB/RN/Render/merge/Pod Stop・再起動・削除・追加チャージ0、正式0/3・54.50％据置。限定TECHNICAL_CREDIT（局所転移と学習済み保持/重み再開保全）、STRUCTURE_MAP_DELTA_NONE（今回結果・診断準備。同日の新版指示PRESENTを取消さない）。
+
+
+<a id="analysis-branch-diagnosis-result-20261102"></a>
+## 11/2 — 固定重みの9局所forwardを完了、親番号の数え方を分ける対照へ
+
+b8b7を固定し、最初の7forward＋文字prefixを固定した追加2forwardを実行。追加学習0/新生成0、各1load、process11.247586秒/10.234636秒、supervisor12.445977秒/11.507961秒、両exit0/終了compute-apps空。全112tensorを非学習で一致読込、元重み/config不変。実messages/raw/request SHAを照合し原rawを一字も補修せず保存した。[body-free全測定と留保](semantic_units_branch_diagnosis_results.json)。
+
+AF01の最初のkey欠落箇所は次unitへ閉じるtokenがtop1（0.9418）、keyを続ける句読点tokenは2位（0.04138）。最初のcopy比較は別token分割を比べるだけだったため、その値を反復原因としなかった。原raw文字列『疲れて』直後を固定した追加測定では反復側『ていた』token0.7225、逐語側『いた』token0.00404。ただし別の逐語継続『いたので』tokenも0.1612あり、全逐語確率ではない。局所条件で反復傾向を確認した範囲に限る。
+
+carrierのWR tokenは有効なWRITTEN_REASONとも共有するため、無効MODIFIER全体の優越とは断定できない。末尾WRITTEN_で分割した追加条件ではANNOTがtopとなり、元生成と異なる分布だった。carrier原因の解決とは扱わず、強制分割token化の限界として残す。いずれも再tokenizeしたprefillであり、元生成token/KV-cacheの完全再現・完全文字列や意味の確率ではない。
+
+NV01の『返事』の親は2を0.9991で選び、実unit位置3は0.000335。不明親はprefill top4で元raw3と異なり、実root位置5は0.000524。先行親2だけを3にした反事実prefixでは5が0.3633へ上がったがtop4=0.5989のまま。局所依存は見えるが修復成立とはしない。rawの2/3は独立rootだけを数えた順位とも一致し、実unit位置3/5との混同仮説がある。BT03/04は先行行動が全て独立で両順位が同じなので、この規則の区別を直接教えていなかった。因果確定ではなく、次の対照設計の根拠とする。
+
+全原本は両run各13member/manifest12 SHA/CRC一致。7forward原本Library `libfile_a47af2edc63c8191a4ee426efe0ce3f9`、19787bytes/SHA192be86433bcc0c5c289d7213b997cd080cc931fe40b9522c6d8a59c03f35249。追加2forward原本 `libfile_2a9e52f433ec8191aeb2551300955681`、15721bytes/SHAe6ddff95b646b09cde61e477e48766987f1c09ab723c4843cc863e4c03872698。長い準備入力がbrowser timeoutで途中切れ、後続の短い確認文字列と結合してshell構文エラーになった準備失敗はGPU/model実行0。未実行を実行結果へ加えず、通常file chooserでplan/runnerを転送しhash照合して実測を一回ずつ完走した。
+
+次の直接改善は、root順位と全unit位置が異なる別題材の親接続、および逐語reasonコピーとcarrierを分ける小対照。旧40targetを不変に保持し、新targetを既存受口へCPU束縛してから、固定b8b7からの一候補を比較する。DEVの完全同一文を教師へ移さず、旧学習済4件と新題材の双方を再読する。ここまでで通常採用/HTTP/SQL/RN/Render配置/merge0、正式0/3・54.50％据置、STRUCTURE_MAP_DELTA_NONE。
+
+
+<a id="analysis-binding48-plan-20261102"></a>
+## 次の直接改善 — 全unitの親位置と逐語reasonの小対照
+
+[48target plan](semantic_units_binding48_plan.json)/[runner](semantic_units_binding48_run.py)。旧40のsource/messages/assistant targetは完全不変、clarified.v1/既存受口/objectiveも維持。新8例はroot作成の架空教材でMashの教師・本人受入れではない。NT01/02は最初の対象が明記/省略の対で、rootの述語順を保ち、全unit親5/4を教える。省略した対象を推測して足さない。NT03は先行targetの後の待機親3/不明5、NT04は3行動とtargetを含む不明親7。NT05–08は2fieldで不明/否定/独立思考を保持し、原文のreason全体を逐語引用してWRITTEN_REASONとREASON_MARKERを分ける。既見DEVの完全同一fieldを新教師へ移していない。
+
+実装順は新8の意味読解→48targetを不変受口へCPU束縛→既存40のbyte一致/新4診断のfield非重複/旧16rawのref・messages・b8b7・SHA照合→固定b8b7非学習loadで新DQ4before→旧40各1＋新8各3の64更新→同48NLL前後各1（96forward）→112tensor有限保存/実model一致/非学習reload→旧16＋新DQ4＋新教師2の22after→全raw/同file再読/回収。新26生成/3load以内、process900秒（TERM890＋kill10）、各23秒、context8192/max2048、nonthinking/greedy。元重み/通常map不変、切捨て・raw補修・自動再試行0。既存full-target weightedCE/LR5e-5/clip1/終端込みを維持。前16beforeは完了済みcanonical afterを照合再利用し再生成しない。
+
+NLL低下だけ/構造受理だけで採用しない。旧学習済AT4と新NT03/05の教師自由生成、8既見DEV、CQ4、新DQ4を原文ごと読む。新DQは別sourceだが近接構文のため盲検ではない。退行/失敗は記録しepoch/教材/生成を自動で増やさず原因へ戻る。元表現を保つfocused教材＋64更新の複合候補で、どの一例が原因か確定しない。処理按分上限$0.145（観測$0.58/h、準備/回収/保持/通信/税等別）。必要な実装・GPU・GitHub反映はMashの本セッション継続指示で承認済み。この節はCPU準備段階でGPUは未実行、実結果は後続へ記録する。API1561526b/DB/RN/Render/通常有効化/merge0、正式0/3・54.50％据置、STRUCTURE_MAP_DELTA_NONE。
+
+意味監査追記：DQ03『慌てていたので』の連続した『てて』は原文どおり。連続文字を一律に削るルールやraw補修は行わず、原文の完全一致で判定する。read-only監査で旧40不変/新8意味/全48束縛/旧16照合/新DQ非同一/64更新26生成上限を確認した。
