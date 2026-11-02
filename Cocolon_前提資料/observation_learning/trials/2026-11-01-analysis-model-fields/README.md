@@ -1,6 +1,6 @@
 # Analysis — 最小field接続と実4B probe
 
-**11/2実行中：親quote56と元4B対照は完了済み。反復不明58教材の64更新/40新生成・900秒一回比較を起動済み。旧28beforeは99916でのafter原本を完全照合して再利用。[固定計画](#analysis-unknown58-plan-20261102)。実行時は先に /workspace/analysis-unknown58-20261102/result/report.json を確認し、同runを重複起動しない。通常未採用。**
+**11/2再開点：unknown58の64更新/40新生成は完了・原本/全重み保存済み。反復不明と理由は局所改善、旧AT4再現4/4→2/4で通常未採用。次は同99916からLRだけを下げた既見16比較。[実結果](#analysis-unknown58-result-20261102)／[次の固定計画](#analysis-unknown58-lr1-plan-20261102)。各runのreportを先に確認し、重複起動しない。**
 
 2026-11-01 JST。開始原本：Cocolon PR30 `1c66add4fdf8f5ded18f7443d6b91b1771998244`、API PR3 `36713940ea82e217fab8a7c0a738a33f21df1c4d`。Mashの分析残件開始とweekly§45.4に従う。Codex Work/GPT-6、root華恋が実装/統合/反映、別文脈agentはread-only監査のみ。独立Pro/Ultra又はhuman品質受入れとは呼ばない。System Context最新cacheは未成立のまま、fresh原本fallbackを使用。
 
@@ -619,3 +619,24 @@ AF01は不明内容を断ったことへ接続し、unit外のEPI引用と断っ
 PQを見てUQを作ったため、PQ改善を盲検汎化へ数えない。HQ01/02も別題材の順序対で近接診断。HQ03は非行動＋二不明、HQ04は時点/否定/理由保持を調べる。子が誤った有効rootへ結び付く場合は構造受理され得るため、内容と親の意味対応を全文で読む。子なし全文不明rootを親選択成功へ数えない。旧AT4再現、AF01の理由範囲、NV04/SQ03の時点/否定も別に判定する。不足/退行があれば通常未採用、epoch増量/受口緩和/raw補修をしない。
 
 必要な実装/GPU/GitHub途中反映はMashの今回明示指示で承認済み。実行ownerはCodex Work/GPT-6 root、agentは同環境read-only監査のみ。別model Pro/Ultra/human受入れを偽装しない。通常map/API/DB/RN/Render/依存/merge差分0、正式0/3・54.50％据置、STRUCTURE_MAP_DELTA_NONE。新しい商品型/接続ownerは追加せず、既存offline候補の教材/重み比較だけを行う。
+
+
+<a id="analysis-unknown58-result-20261102"></a>
+## 11/2 — 反復不明の親対応が改善、旧教材保持の退行で通常未採用
+
+64更新/116測定/40stop/2before原本群を完走、process558.196543秒（親559.710687秒）/exit0/compute空/元重み不変。新112tensor有限保存・実model一致・非学習reload、全278memberの元SHAを回収照合。rootと同環境read-only監査が34after＋新6before＋旧28beforeの全本文を読解した。[body-free結果](semantic_units_unknown58_results.json)。
+
+UQ2は教示JSON同値、近接PQ02/HQ01/02/03にも一意な全文不明rootと各内容の正しい親対応が出た。UQ2は一題材順序対、PQは既見、HQ01/02も一題材順序対で、独立未見合格率へ数えない。PQ01はbeforeから正しい。AF01の理由範囲/ので、UV03の発話内否定、NV03の選択範囲、CQ01対象親、SQ01過剰修飾、SQ03否定範囲も局所改善。
+
+一方AT17は本人の思考をACTIONへ退行、AT29は原文にない対象引用。旧AT4教示同値4/4→2/4。CQ03はscope_role欠落、CQ04は不存在親/不明rootの非null親/EPI欠落等。NV04は朝の否定を戻したが説明の親が夜の読解ではなく安心root。HQ04は前後不変で、明記されたのでを理由に反映せずTE_CONTEXTのまま。PQ02/HQ03のかもは原文内の粗い余分modifierで、引用創作とはしない。構造26/34→31/34/byte不変15/34を意味合格へ換算しない。
+
+原本：private cocolon-analysis-unknown58-result-20261102.zip／Library libfile_cd78c76c8c9c819199de002eb87defcb、14793507bytes/SHA e1f327eebb4418942b18cd220a8b900b446c56d5632b8a3bfa293659f52f2d2a。全112F32/3,833,856paramsを数値原本から同重みSHA3067ccfa…へ回収、全278member元bytes一致。再圧縮containerは元GPU ZIPのSHAf4ccc3be…とは異なる。run.logのCRを保持するため、その1memberだけ元bytesから追加回収。新重みを通常既定にしない。処理按分約$0.08993@0.58/h、準備/回収/保持/通信/税等別。通常map/API/DB/RN/Render/merge不変、正式0/3・54.50％据置、BLOCKER_NARROWED/STRUCTURE_MAP_DELTA_NONE。
+
+<a id="analysis-unknown58-lr1-plan-20261102"></a>
+## 次の直接比較 — 教材を変えず学習率だけを下げ、旧意味の保持を見る
+
+[plan](semantic_units_unknown58_lr1_plan.json)／[runner](semantic_units_unknown58_lr1_run.py)／[照合/回収](semantic_units_unknown58_lr1_supervisor.py)。旧保持の退行を見たため、99916同初期/全58target/64更新順/seed/完全target objective/optimizer/clipを同一に、LR5e-5→1e-5だけを変えた別候補を一回比較する。3067への追加epochではない。小さいLRが原因解決すると事前断定しない。
+
+実装順：既存CPU58束縛の同一target照合→2134source/loader/99916全SHA/同58・64順・seed照合→既見16の同99916beforeを親afterと前回beforeから照合copy、3067afterも比較copy→58NLL→64更新→58NLL→112tensor保存/非学習reload→16after/全本文読解/保存再読/全重み原本回収。2load/116測定/16新生成、600秒（TERM590+kill10）/各23秒/context8192/max2048/nonthinking/greedy。対象はAF01/NV04/AT4/CQ03・04/SQ01・03/PQ2/UQ2/HQ03・04。全て既見で一般品質率を作らない。新before生成0、未解析/主体未解決/route0/strict受口不変。
+
+退行/非逐語/意味不足が残れば通常未採用、同候補のepoch/受口緩和/raw修復をしない。処理按分上限$0.096667@0.58/h、準備/回収/保持/通信/税等別。必要GPU/実装/途中GitHub反映はMashの現行明示承認内。ここは準備、GPU未実行。新構造/商品型/本番/DB/RN変更0、STRUCTURE_MAP_DELTA_NONE、正式0/3・54.50％据置。
