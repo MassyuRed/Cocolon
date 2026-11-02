@@ -1235,8 +1235,89 @@
   "new_diagnostic_structural": "4/4 vs1/4",
   "trained_rehearsal_structural": "1/4 vs prompt-only2/4 and original4/4",
   "trained_rehearsal_teacher_json_equal": "1/4",
-  "private_preservation": "Text100 members hash-verified; all112 F32 parameter numeric export in progress, not yet declared durable",
+  "private_preservation": {
+    "status": "SAVED_AND_ALL_ORIGINAL_MEMBER_HASHES_VERIFIED",
+    "archive": "cocolon-analysis-contrast40-result-20261102.zip",
+    "library_file_id": "libfile_f66d2f7aea8c8191a0b4a01335fe4b89",
+    "archive_bytes": 14484298,
+    "archive_sha256": "d5af14902ff8c2a446ac54e2258020287c8f84d890753805e8d88049d44a272e",
+    "original_manifest_members": 100,
+    "recompressed_container": true,
+    "original_weights_exact": true
+  },
   "normal_adoption": false,
   "product_credit": 0,
-  "process_usd": 0.05266870278322344
+  "process_usd": 0.05266870278322344,
+  "independent_local_saved_candidate_replays": [
+    {
+      "file": "after_AF01.candidate.json",
+      "candidate_id": "analysis-unit-candidate:5294e6531928f9c81f500c084e01b3866132cecd5b0345577b5c4542deeff2f0",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR"
+    },
+    {
+      "file": "after_AF02.candidate.json",
+      "candidate_id": "analysis-unit-candidate:55ad269b30dd80cf7ddc87b7995cd7628681d8969dd58bb27fcdf4398e5f9137",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR"
+    },
+    {
+      "file": "after_CQ01.candidate.json",
+      "candidate_id": "analysis-unit-candidate:12291178a5fd6d6ed4dfe92c81b82aca0cf417fdabbf1c93beb15b6bb72ca445",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR"
+    },
+    {
+      "file": "after_CQ02.candidate.json",
+      "candidate_id": "analysis-unit-candidate:c6ee511dfe9672efe24827f25825b6a44f10461d096bd77ab301246834e517c5",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR"
+    },
+    {
+      "file": "after_CQ03.candidate.json",
+      "candidate_id": "analysis-unit-candidate:c51c427af0c659b031c6586e371d61c55837226a8de20241ff30b02e2afbb21b",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR"
+    },
+    {
+      "file": "after_CQ04.candidate.json",
+      "candidate_id": "analysis-unit-candidate:1151e1d15efcf5f039e44d2725d329212ab7a9d9075945e8c54c4be9c5ba5d1f",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR"
+    },
+    {
+      "file": "after_NV01.candidate.json",
+      "candidate_id": "analysis-unit-candidate:377e522af0d3f3319e98038647db568ac38c070841be1a08a50fe7470cc0c7ed",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR"
+    },
+    {
+      "file": "after_NV02.candidate.json",
+      "candidate_id": "analysis-unit-candidate:c3b035a03b85823d3b6e005ec048f1b2d9a87fbaf4a874a1f0644c73f2f2c0ef",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR"
+    },
+    {
+      "file": "after_NV03.candidate.json",
+      "candidate_id": "analysis-unit-candidate:29af80da9f31214ec0f174d9ae455801478196098d93ed2d010ece0d9e5b5d6a",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR"
+    },
+    {
+      "file": "after_NV04.candidate.json",
+      "candidate_id": "analysis-unit-candidate:80dae588edd2de7201d5b9f7383e7b1bdb20767964505248d5ce8f757fc83ee3",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR"
+    },
+    {
+      "file": "after_REHEARSAL_AT21.candidate.json",
+      "candidate_id": "analysis-unit-candidate:f417a2445361c6e190455606ed7049b803088bc271b36a1341d90f7c30e1adc2",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR"
+    },
+    {
+      "file": "after_UV03.candidate.json",
+      "candidate_id": "analysis-unit-candidate:63995e102261b9614c900520fc91d02ea1b5d4ec60949dccc22cdfa9e66aa20e",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR"
+    },
+    {
+      "file": "after_UV12.candidate.json",
+      "candidate_id": "analysis-unit-candidate:72bc0463596d60c814176ab03298fc7b16f767ad502d792317111594a719bdc4",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR"
+    },
+    {
+      "file": "before_CQ04.candidate.json",
+      "candidate_id": "analysis-unit-candidate:44238b82207546aca7231f0b124f4e400f01c0582a6eadaa4e48ee5ffb7e6c44",
+      "status": "MATCHED_NO_GENERATION_COMPILATION_AUTHOR"
+    }
+  ]
 }

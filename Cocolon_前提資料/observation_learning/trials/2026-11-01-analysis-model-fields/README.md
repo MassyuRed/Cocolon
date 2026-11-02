@@ -1,6 +1,6 @@
 # Analysis — 最小field接続と実4B probe
 
-**最新：11/2、固定32教材の追加128更新が完走。学習済み4/4が教示JSONと一致、開発6/8で原文外引用/不明親とqualifier粗化が残り通常未採用。[全重み・原本71fileの回収/最終結果/次の再開点](#analysis-fixed32-result-20261102)。完了済みrunの再実行はしない。**
+**最新：11/2、表現条件3比較の追加128更新・新52生成を完了。元表現候補は学習済4/4教示一致を保持、DEV構造6/8・新CQ4/4だが引用/carrier/親番号が残り通常未採用。全重み・原本を回収済み。[最終結果と局所診断の再開点](#analysis-canonical40-result-20261102)。完了runを二重実行しない。**
 
 2026-11-01 JST。開始原本：Cocolon PR30 `1c66add4fdf8f5ded18f7443d6b91b1771998244`、API PR3 `36713940ea82e217fab8a7c0a738a33f21df1c4d`。Mashの分析残件開始とweekly§45.4に従う。Codex Work/GPT-6、root華恋が実装/統合/反映、別文脈agentはread-only監査のみ。独立Pro/Ultra又はhuman品質受入れとは呼ばない。System Context最新cacheは未成立のまま、fresh原本fallbackを使用。
 
@@ -417,3 +417,25 @@ DEV構造は指示単独3/8→8/8（原clarified6/8）、新CQはbefore1/4→aft
 [canonical40 plan](semantic_units_canonical40_plan.json)/[runner](semantic_units_canonical40_run.py)。同じ元09b3・40意味target・64update順/seed/objectiveを保ち、原clarified.v1/system/demo/canonical target順へ戻して比較する。元32assistant targetは元fileのbyte完全一致、新8意味targetだけcanonical表記。同じ失敗cd5の追加epochではなく、元checkpointから表現packageを変える別候補。指示末尾/demo順/target順の複合で、key順単独原因の分離ではない。
 
 元fixed32実12rawのbeforeをref/messages/SHA/09b3照合で再利用し、新CQ4before＋16afterの新20生成/3load/64update/80測定だけ。900秒（外TERM890+kill10）、各23秒、上限按分$0.145、保持等別、切捨て/補修/再試行0。CPU40target再束縛、元32のbyte一致と原12の照合を確認。既見診断を盲検へ戻さず、全rawと旧4rehearsalを再比較する。普通の分析に未確認候補を通さず、同じ親/引用の厳密受口と全unparsedを保持。新規製品source/DB/RN/稼働差分0、STRUCTURE_MAP_DELTA_NONE（同既存private owner内の学習比較）。実結果は後続記録へ。
+
+
+<a id="analysis-canonical40-result-20261102"></a>
+## 11/2 — 元表現で学習済み4件を保持、残る引用・carrier・親番号を局所診断へ
+
+同じ09b3初期重み/40意味target/64更新順/seed/objectiveのままclarified.v1と元target順へ戻す比較を完走。元32assistantはbyte不変。64update/80測定forward/3load/新20生成、process319.891456秒（supervisor321.363159秒）/exit0/全20stop。112tensor全変更・有限・保存一致・非学習reload一致、元checkpoint不変、終了compute-apps空。同40平均unweighted NLL0.019710510→0.003554975であり、別表現のNLLと直接比べない。
+
+DEV構造6/8、学習済み4件は全て教示JSON同値、新CQ構造4/4。ただしCQは更新前から4/4で、CQ01/03はraw byte一致。AF02の過去不明EPI、発話者/引用否定/独立思考、願望/未決、時点/理由不明は保持・局所改善。CQ02のまだ/EPI分離、CQ04の昨日不明と今日理解/安心に改善がある。rootが全20rawを読み、read-only agentと学習済4件の一致を照合した。
+
+**通常は未採用。** AF01 actionは最初のunit3でscope_role key欠落、unit5ではqualifier名WRITTEN_MODIFIERをcarrierへ誤用し、原文にない『疲れてていた』を生成。理由modifier誤分類や対象scope重複も残る。NV01は『返事』の親が2（実際の待機は3）、不明内容の親が3（不明rootは5）。6/8は受口の構造結果で、意味品質合格ではない。[body-free結果](semantic_units_canonical40_results.json)。
+
+### 重みと原本の回収完了
+
+quote-first学習候補は全101member/manifest100一致、全112 F32 tensorを元SHAで復元。`cocolon-analysis-contrast40-result-20261102.zip`、Library `libfile_f66d2f7aea8c8191a0b4a01335fe4b89`、14484298bytes、SHA `d5af14902ff8c2a446ac54e2258020287c8f84d890753805e8d88049d44a272e`。重みcd5b541ab96847f1c433cd3e9ffd7efeb60feeafcbce37085fafdfc3e48e4517/config41fa60faa9a4127b9592e5c5756433cdf68efe40ac5157299f5372272b04b1e1。
+
+元表現候補は全105member/manifest104一致、全112 F32 tensor/3,833,856parameterを元SHAで復元。`cocolon-analysis-canonical40-result-20261102.zip`、Library `libfile_6f703f3b576c8191bda988aea4234173`、14491591bytes、SHA `a2ad7d8549ddc0ac8d83c68dd3556e76e8c5def88b83a112d41d392a6d051fbe`。重み `b8b7c2e978fa15decb60612b1abd44813e8e09987de2210899370f68147bd967`/config `337313ee96a48e4d55abed29b0c0b73f13e7c8c0f7b7e782055c899dd5e93fda`。どちらも通常JSON表示による全textと数値tensorを回収し元内容を照合した再圧縮ZIPで、元container byte同一とは言わない。保存candidateは別local processでquote5/contrast14/canonical18件を新生成・compiler・author entry禁止で再読し全ID一致。
+
+### 現在の再開点
+
+次は固定b8b7と対応messages、未補修AF01/NV01原rawを使用し、最初のkey欠落/引用の繰返し/carrier名/理由kind、および親番号2箇所の選択を少数forwardで読む。前の親だけを変えたprefix比較は反事実診断として区別する。raw再tokenizeを元生成tokenの完全回収と呼ばず、次token順位を修正後全文の意味成立へ換算しない。新生成・追加学習は行わず、原因に応じた最小差分を決める。通常受口やrawを緩和しない。
+
+今回比較は指示単独12＋新対照20＋元表現20＝新52生成、追加128更新。52種類の独立評価ではなく同題材の条件比較を含む。CPU対象112 PASS/2 WASM依存SKIP、旧860の再実行ではない。API1561526b、通常map/DB/RN/Render/merge/Pod Stop・再起動・削除・追加チャージ0、正式0/3・54.50％据置。限定TECHNICAL_CREDIT（局所転移と学習済み保持/重み再開保全）、STRUCTURE_MAP_DELTA_NONE（今回結果・診断準備。同日の新版指示PRESENTを取消さない）。

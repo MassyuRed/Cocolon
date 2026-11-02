@@ -2041,3 +2041,8 @@ quote_first指示単独はDEV構造3/8（旧6/8）、学習済構造2/4/教示�
 ### §59 新8対照64更新の結果と表現条件比較
 
 326.909190秒/64update/20stop/112tensor保存再読を完走。DEV構造8/8・新CQ4/4へ改善したが、学習済構造1/4、修飾/不明分類/対象欠落/重複が残り通常不採用。全20rawをrootとagentが独立読解。text100fileを回収、全重みの回収は進行中。次は同じ元09b3/40意味target/64順/seed/objectiveでclarified/canonical表現へ戻す別候補を20生成以内で比較する。元32target byte/元before12 ref/messages/SHAは一致、失敗candidate追加epochではない。詳細はtrial。通常有効化0/正式0/3/54.50％据置。
+
+
+### §60 元表現比較の結果、原本保全と最小局所診断
+
+同40/元09b3/同64順の元clarified表現で64update・20生成完走。学習済み4/4は全て教示JSON同値、DEV構造6/8、新CQ4/4（元から4/4、うちCQ01/03はbyte不変）。AF02の不明EPI/主体/否定/未決/時点を保持しCQ02/04に局所改善。ただしAF01にkey欠落・carrier名混同・原文外引用、NV01に親2箇所の誤りが残り通常未採用。全重みと原本はquote/contrast/canonical全て回収・元SHA一致・private保存済み。別processのcandidate再読は5/14/18件全一致。比較合計追加128更新/新52生成は独立52題ではない。次はb8b7固定・原raw不変の少数forwardでkey/copy/carrier/親の分岐を調べる。詳細と保存ID/SHAはtrial最新節。API1561526b/通常map/DB/RN/稼働不変、正式0/3・54.50％据置、STRUCTURE_MAP_DELTA_NONE。

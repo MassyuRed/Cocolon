@@ -1,0 +1,133 @@
+{
+  "status": "OFFLINE_FIXED_RAW_BRANCH_DIAGNOSIS_NOT_TRAINING_OR_ACCEPTANCE",
+  "api_commit": "1561526b972bbaba2b77561f57b9a945fdabd9f6",
+  "loader_blob": "722525c2a1f1afe0a5f0902e0bddf5b602db8a1a",
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "adapter_sha256": "b8b7c2e978fa15decb60612b1abd44813e8e09987de2210899370f68147bd967",
+  "adapter_config_sha256": "337313ee96a48e4d55abed29b0c0b73f13e7c8c0f7b7e782055c899dd5e93fda",
+  "private_original_id": "libfile_6f703f3b576c8191bda988aea4234173",
+  "max_forwards": 7,
+  "max_model_loads": 1,
+  "max_updates": 0,
+  "max_new_generations": 0,
+  "max_seconds": 300,
+  "context_tokens": 8192,
+  "gpu_hourly_usd_observed": 0.58,
+  "process_cost_upper_usd": 0.04833333333333333,
+  "method": "Retokenize fixed original messages and text-prefix alternatives. Use the longest common token prefix and one logits_to_keep=1 forward per branch. Report first-divergent-token ranks only, not complete continuation probabilities or original generation token recovery.",
+  "limits": [
+    "BF16 SDPA forward is not the original KV-cached generation replay.",
+    "The last NV01 branch deliberately changes only an earlier parent in its prefix; it is a counterfactual measurement, never a repaired admitted output.",
+    "Carrier alternatives are structural hypotheses; no completed semantic graph is asserted.",
+    "Do not add epochs/data/generation automatically. No normal adoption or source/receiver change."
+  ],
+  "originals": {
+    "AF01": {
+      "raw_sha256": "4a4cc4fa8518857ddc517c34c115c4691ee12038537b9db05cbb20d3d174be92",
+      "request_file_sha256": "22a48b16d8199224e4e449b370785b884aefb98fca7ff6d5960fe95f220aa4af",
+      "request_ref": "analysis-model-units-request:199c8e4965a8e3714e7e7f43d8854fb463ee274bea007a80013a708b62560805"
+    },
+    "NV01": {
+      "raw_sha256": "b20649122ca038f1b4c32afdf95ce5ba71c662db2719e6da843280e4f5ac7ce1",
+      "request_file_sha256": "90bfb884f70bcb9e7e8ea182ed1ce3421a63ac490732bceaf2988d8cdbd88102",
+      "request_ref": "analysis-model-units-request:1eb01e182bd80695fee63d168cd3d95db6d021e946aa8af1104bc23e013c478a"
+    }
+  },
+  "probes": [
+    {
+      "id": "AF01_REQUIRED_SCOPE_KEY",
+      "probe_id": "AF01",
+      "raw_character_end": 774,
+      "raw_prefix_unchanged": true,
+      "counterfactual_previous_parent": null,
+      "prefix": "{\"fields\":[{\"field\":1,\"units\":[{\"node_kind\":\"ATTENTION_OR_THOUGHT\",\"parent\":null,\"qualifiers\":[{\"kind\":\"NEGATION\",\"quote\":\"てはいない\"}],\"quote\":\"後悔してはいない\",\"scope_role\":null},{\"node_kind\":null,\"parent\":1,\"qualifiers\":[],\"quote\":\"断ったこと\",\"scope_role\":\"CONTENT_TARGET\"},{\"node_kind\":null,\"parent\":null,\"qualifiers\":[{\"kind\":\"EPISTEMIC_EXPRESSION\",\"quote\":\"分からない\"}],\"quote\":\"分からない\",\"scope_role\":\"WRITTEN_UNKNOWN\"},{\"node_kind\":null,\"parent\":3,\"qualifiers\":[],\"quote\":\"相手がどう思ったか\",\"scope_role\":\"UNKNOWN_CONTENT\"}]},{\"field\":2,\"units\":[{\"node_kind\":\"ACTION_OR_NONACTION\",\"parent\":null,\"qualifiers\":[],\"quote\":\"断った\",\"scope_role\":null},{\"node_kind\":null,\"parent\":1,\"qualifiers\":[],\"quote\":\"誘い\",\"scope_role\":\"CONTENT_TARGET\"},{\"node_kind\":null,\"parent\":1,\"qualifiers\":[],\"quote\":\"今日の集まりへの\"",
+      "prefix_sha256": "7d03ae0c265ebe4e4d8d53f28638d9a58012f252349b5af355855a4b8b523ff7",
+      "alternatives": {
+        "observed_close": "}",
+        "required_key_continuation": ",\"scope_role\":\"ATTRIBUTIVE_CONTENT\"}"
+      }
+    },
+    {
+      "id": "AF01_LITERAL_COPY",
+      "probe_id": "AF01",
+      "raw_character_end": 1001,
+      "raw_prefix_unchanged": true,
+      "counterfactual_previous_parent": null,
+      "prefix": "{\"fields\":[{\"field\":1,\"units\":[{\"node_kind\":\"ATTENTION_OR_THOUGHT\",\"parent\":null,\"qualifiers\":[{\"kind\":\"NEGATION\",\"quote\":\"てはいない\"}],\"quote\":\"後悔してはいない\",\"scope_role\":null},{\"node_kind\":null,\"parent\":1,\"qualifiers\":[],\"quote\":\"断ったこと\",\"scope_role\":\"CONTENT_TARGET\"},{\"node_kind\":null,\"parent\":null,\"qualifiers\":[{\"kind\":\"EPISTEMIC_EXPRESSION\",\"quote\":\"分からない\"}],\"quote\":\"分からない\",\"scope_role\":\"WRITTEN_UNKNOWN\"},{\"node_kind\":null,\"parent\":3,\"qualifiers\":[],\"quote\":\"相手がどう思ったか\",\"scope_role\":\"UNKNOWN_CONTENT\"}]},{\"field\":2,\"units\":[{\"node_kind\":\"ACTION_OR_NONACTION\",\"parent\":null,\"qualifiers\":[],\"quote\":\"断った\",\"scope_role\":null},{\"node_kind\":null,\"parent\":1,\"qualifiers\":[],\"quote\":\"誘い\",\"scope_role\":\"CONTENT_TARGET\"},{\"node_kind\":null,\"parent\":1,\"qualifiers\":[],\"quote\":\"今日の集まりへの\"},{\"node_kind\":null,\"parent\":1,\"qualifiers\":[{\"kind\":\"RELATIVE_TIME\",\"quote\":\"今日\"}],\"quote\":\"今日の集まりへの誘い\",\"scope_role\":\"ATTRIBUTIVE_CONTENT\"},{\"node_kind\":null,\"parent\":1,\"qualifiers\":[{\"kind\":\"WRITTEN_MODIFIER\",\"quote\":\"ていた\"}],",
+      "prefix_sha256": "e482fd1b41c70cd355f8a858db2f84f3dbe08bcdf2c09f53c77476dd0e19acc3",
+      "alternatives": {
+        "observed_repeat": "\"quote\":\"疲れてていた\",\"scope_role\":",
+        "source_literal": "\"quote\":\"疲れていた\",\"scope_role\":"
+      }
+    },
+    {
+      "id": "AF01_CARRIER_ENUM",
+      "probe_id": "AF01",
+      "raw_character_end": 1018,
+      "raw_prefix_unchanged": true,
+      "counterfactual_previous_parent": null,
+      "prefix": "{\"fields\":[{\"field\":1,\"units\":[{\"node_kind\":\"ATTENTION_OR_THOUGHT\",\"parent\":null,\"qualifiers\":[{\"kind\":\"NEGATION\",\"quote\":\"てはいない\"}],\"quote\":\"後悔してはいない\",\"scope_role\":null},{\"node_kind\":null,\"parent\":1,\"qualifiers\":[],\"quote\":\"断ったこと\",\"scope_role\":\"CONTENT_TARGET\"},{\"node_kind\":null,\"parent\":null,\"qualifiers\":[{\"kind\":\"EPISTEMIC_EXPRESSION\",\"quote\":\"分からない\"}],\"quote\":\"分からない\",\"scope_role\":\"WRITTEN_UNKNOWN\"},{\"node_kind\":null,\"parent\":3,\"qualifiers\":[],\"quote\":\"相手がどう思ったか\",\"scope_role\":\"UNKNOWN_CONTENT\"}]},{\"field\":2,\"units\":[{\"node_kind\":\"ACTION_OR_NONACTION\",\"parent\":null,\"qualifiers\":[],\"quote\":\"断った\",\"scope_role\":null},{\"node_kind\":null,\"parent\":1,\"qualifiers\":[],\"quote\":\"誘い\",\"scope_role\":\"CONTENT_TARGET\"},{\"node_kind\":null,\"parent\":1,\"qualifiers\":[],\"quote\":\"今日の集まりへの\"},{\"node_kind\":null,\"parent\":1,\"qualifiers\":[{\"kind\":\"RELATIVE_TIME\",\"quote\":\"今日\"}],\"quote\":\"今日の集まりへの誘い\",\"scope_role\":\"ATTRIBUTIVE_CONTENT\"},{\"node_kind\":null,\"parent\":1,\"qualifiers\":[{\"kind\":\"WRITTEN_MODIFIER\",\"quote\":\"ていた\"}],\"quote\":\"疲れてていた\",",
+      "prefix_sha256": "491d2f82e0fd278d0174a4fc021708fc333f79ab6092cb13c12e2d9939892ae0",
+      "alternatives": {
+        "observed_invalid_carrier": "\"scope_role\":\"WRITTEN_MODIFIER\"",
+        "context_carrier_alternative": "\"scope_role\":\"TE_CONTEXT\""
+      }
+    },
+    {
+      "id": "AF01_REASON_KIND",
+      "probe_id": "AF01",
+      "raw_character_end": 1095,
+      "raw_prefix_unchanged": true,
+      "counterfactual_previous_parent": null,
+      "prefix": "{\"fields\":[{\"field\":1,\"units\":[{\"node_kind\":\"ATTENTION_OR_THOUGHT\",\"parent\":null,\"qualifiers\":[{\"kind\":\"NEGATION\",\"quote\":\"てはいない\"}],\"quote\":\"後悔してはいない\",\"scope_role\":null},{\"node_kind\":null,\"parent\":1,\"qualifiers\":[],\"quote\":\"断ったこと\",\"scope_role\":\"CONTENT_TARGET\"},{\"node_kind\":null,\"parent\":null,\"qualifiers\":[{\"kind\":\"EPISTEMIC_EXPRESSION\",\"quote\":\"分からない\"}],\"quote\":\"分からない\",\"scope_role\":\"WRITTEN_UNKNOWN\"},{\"node_kind\":null,\"parent\":3,\"qualifiers\":[],\"quote\":\"相手がどう思ったか\",\"scope_role\":\"UNKNOWN_CONTENT\"}]},{\"field\":2,\"units\":[{\"node_kind\":\"ACTION_OR_NONACTION\",\"parent\":null,\"qualifiers\":[],\"quote\":\"断った\",\"scope_role\":null},{\"node_kind\":null,\"parent\":1,\"qualifiers\":[],\"quote\":\"誘い\",\"scope_role\":\"CONTENT_TARGET\"},{\"node_kind\":null,\"parent\":1,\"qualifiers\":[],\"quote\":\"今日の集まりへの\"},{\"node_kind\":null,\"parent\":1,\"qualifiers\":[{\"kind\":\"RELATIVE_TIME\",\"quote\":\"今日\"}],\"quote\":\"今日の集まりへの誘い\",\"scope_role\":\"ATTRIBUTIVE_CONTENT\"},{\"node_kind\":null,\"parent\":1,\"qualifiers\":[{\"kind\":\"WRITTEN_MODIFIER\",\"quote\":\"ていた\"}],\"quote\":\"疲れてていた\",\"scope_role\":\"WRITTEN_MODIFIER\"},{\"node_kind\":null,\"parent\":1,\"qualifiers\":[{",
+      "prefix_sha256": "a40438d091cdfcdbe17df501a22a10b39b3bf6b2a9029633ada1d042ea1e3d72",
+      "alternatives": {
+        "observed_modifier_kind": "\"kind\":\"WRITTEN_MODIFIER\",\"quote\":\"ので\"",
+        "reason_marker_alternative": "\"kind\":\"REASON_MARKER\",\"quote\":\"ので\""
+      }
+    },
+    {
+      "id": "NV01_REPLY_PARENT",
+      "probe_id": "NV01",
+      "raw_character_end": 336,
+      "raw_prefix_unchanged": true,
+      "counterfactual_previous_parent": null,
+      "prefix": "{\"fields\":[{\"field\":1,\"units\":[{\"node_kind\":\"ACTION_OR_NONACTION\",\"parent\":null,\"qualifiers\":[],\"quote\":\"断った\",\"scope_role\":null},{\"node_kind\":null,\"parent\":1,\"qualifiers\":[],\"quote\":\"約束\",\"scope_role\":\"CONTENT_TARGET\"},{\"node_kind\":\"ACTION_OR_NONACTION\",\"parent\":null,\"qualifiers\":[],\"quote\":\"待っている\",\"scope_role\":null},{\"node_kind\":null,",
+      "prefix_sha256": "94eaae86340143a6bfc7c1264f05306a7be9b990dc79600e09d84e188e29e9aa",
+      "alternatives": {
+        "observed_target_parent2": "\"parent\":2,",
+        "waiting_action_parent3": "\"parent\":3,"
+      }
+    },
+    {
+      "id": "NV01_UNKNOWN_PARENT",
+      "probe_id": "NV01",
+      "raw_character_end": 611,
+      "raw_prefix_unchanged": true,
+      "counterfactual_previous_parent": null,
+      "prefix": "{\"fields\":[{\"field\":1,\"units\":[{\"node_kind\":\"ACTION_OR_NONACTION\",\"parent\":null,\"qualifiers\":[],\"quote\":\"断った\",\"scope_role\":null},{\"node_kind\":null,\"parent\":1,\"qualifiers\":[],\"quote\":\"約束\",\"scope_role\":\"CONTENT_TARGET\"},{\"node_kind\":\"ACTION_OR_NONACTION\",\"parent\":null,\"qualifiers\":[],\"quote\":\"待っている\",\"scope_role\":null},{\"node_kind\":null,\"parent\":2,\"qualifiers\":[],\"quote\":\"返事\",\"scope_role\":\"CONTENT_TARGET\"},{\"node_kind\":null,\"parent\":null,\"qualifiers\":[{\"kind\":\"WRITTEN_MODIFIER\",\"quote\":\"まだ\"},{\"kind\":\"EPISTEMIC_EXPRESSION\",\"quote\":\"分からない\"}],\"quote\":\"まだ分からない\",\"scope_role\":\"WRITTEN_UNKNOWN\"},{\"node_kind\":null,",
+      "prefix_sha256": "9af1ebe5447a4d28e9d9842da08eaa6c95397d6977920d1441971b9b23e761bf",
+      "alternatives": {
+        "observed_action_parent3": "\"parent\":3,",
+        "unknown_root_parent5": "\"parent\":5,"
+      }
+    },
+    {
+      "id": "NV01_UNKNOWN_PARENT_WITH_PRIOR_PARENT3",
+      "probe_id": "NV01",
+      "raw_character_end": 611,
+      "raw_prefix_unchanged": false,
+      "counterfactual_previous_parent": [
+        "\"parent\":2,\"qualifiers\":[],\"quote\":\"返事\"",
+        "\"parent\":3,\"qualifiers\":[],\"quote\":\"返事\""
+      ],
+      "prefix": "{\"fields\":[{\"field\":1,\"units\":[{\"node_kind\":\"ACTION_OR_NONACTION\",\"parent\":null,\"qualifiers\":[],\"quote\":\"断った\",\"scope_role\":null},{\"node_kind\":null,\"parent\":1,\"qualifiers\":[],\"quote\":\"約束\",\"scope_role\":\"CONTENT_TARGET\"},{\"node_kind\":\"ACTION_OR_NONACTION\",\"parent\":null,\"qualifiers\":[],\"quote\":\"待っている\",\"scope_role\":null},{\"node_kind\":null,\"parent\":3,\"qualifiers\":[],\"quote\":\"返事\",\"scope_role\":\"CONTENT_TARGET\"},{\"node_kind\":null,\"parent\":null,\"qualifiers\":[{\"kind\":\"WRITTEN_MODIFIER\",\"quote\":\"まだ\"},{\"kind\":\"EPISTEMIC_EXPRESSION\",\"quote\":\"分からない\"}],\"quote\":\"まだ分からない\",\"scope_role\":\"WRITTEN_UNKNOWN\"},{\"node_kind\":null,",
+      "prefix_sha256": "7211c74316cf03885d56f42d66ecf32b65fd7725401f6a9606002068591ab3e0",
+      "alternatives": {
+        "observed_action_parent3": "\"parent\":3,",
+        "unknown_root_parent5": "\"parent\":5,"
+      }
+    }
+  ]
+}
