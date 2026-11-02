@@ -1823,3 +1823,30 @@ API fa995a44/cddf1855でprivate意味単位graph/全文併記/同file再読と�
 ### 2026-11-02 — quote_first.v1の同重み比較
 
 既存意味wire/受口/保存stateを変えず、新instruction_versionをquote_first.v1として区別。元clarifiedの3demoのJSON key順だけをquote/scope_role/node_kind/parent/qualifiers、qualifierをquote/kindへ並べ、逐語助詞と不明rootの実unit番号を指示する。正しい引用/親の自動補修や現graphの通常DTO化をしない。版ref/state.v2の異版拒否/旧版再読をCPU確認後、同09b3重み/12開発・rehearsal入力を追加学習なしで比較。詳細・実装順・上限・採否はtrial#analysis-quote-first-probe-20261102、通常有効化・商品受入れは別。
+
+
+<a id="analysis-quoted-parent-units-plan-20261102"></a>
+## 2026-11-02 — 親の逐語quoteから内部位置を導出する別private契約
+
+status=PLANNED_CPU_IMPLEMENTATION、Mashの必要作業/継続承認内。直前の56教材runは理由・否定を改善した一方、NV04自己参照/CQ02誤親/AT29曖昧引用と旧40保持の退行で通常不採用（weekly§65/trial最新）。旧rawを修復せず、モデルの意味選択と数値の転記を分ける次のCPU作業を具体化する。新wireの実4B互換・意味品質・採用を保証しない。
+
+### 新wireと保持する責務
+
+明示offlineの新profile `analysis_model_units_quoted_parents.v1`、input schema `cocolon.cmee.analysis_model_units_quoted_parents.v1`。旧analysis_model_units.v1とbaseline/clarified/quote_first、旧request/messages/stateは変更しない。新exact frozen/slots/repr=False型 `AnalysisModelQuotedParentUnitsInput` / `AnalysisModelQuotedParentUnitsResponse`。responseのrequest_ref/messages_sha256/raw_sha256/finish_reason/rawは元callのまま保持し、同じowner/source版/guardへ再束縛する。旧型/新型/rawの自動検出・fallback・旧artifact変換は行わない。
+
+root fields、field/units、上限/入力順、node_kind/scope_role/quote/qualifiersは旧意味候補と同じ。unit exact5keyの`parent`だけを`parent_quote`へ替える。独立候補と本人記載不明はparent_quote=null。従属候補は同field内で実際に返された親unitのquoteそのものを空でないstringで指定する。数値、bool、alias、parentとの併記、親quoteの省略は拒否する。モデルが親の意味を選ぶ責務は残る。
+
+全unit quoteを元sourceへ一意完全一致で束縛し、親quoteに完全一致する返却unitが同fieldにexact1の時だけ、実行側が内部list位置を導出する。sourceにその文字列があるだけでは親にならない。不存在・重複候補・自己参照・循環・field跨ぎ・根まで3段以上・UNKNOWN_CONTENTの根が本人不明でない場合を拒否する。親の追加、最も近い親の推測、最初の一致採用、曖昧照合はしない。親quoteを再コピーする失敗や誤った親選択は残る。参照される同一quoteの複数unitは曖昧として拒否し、同じsourceに反復する引用も従来通り一意引用要件を保持する。
+
+source由来の内部位置への束縛後は、既存AnalysisUnitCandidateGraph/compiler/唯一realizerを再利用する。新ObservedGraph/意味型/主体推定/route/API/DB/RNを作らない。全field全文・未割当範囲・原証拠・actor未解決・全unparsed・route0を保持し、反復語やscope/classificationの品質不足をこの形式で解決したとは扱わない。
+
+### 保存・互換・具体的な変更path
+
+新state `cocolon.cmee.analysis_model_units_quoted_parents_state.v1`、外file `cocolon.cmee.cumulative_quoted_parent_unit_candidates_file.v1`。旧state.v2はinstruction版であり、新wire版へ流用しない。保存には新actual raw/bindingと同candidate ID/graph/text/diagram/coverageを保持。fresh sourceから同じ親quote解決を行い、保存graph/可視内容を照合する。再読でEngine.generate/compiler/author entryを呼ばない。
+
+1. `semantic_admission.py`：新exact input/response/ref/messages、strict新reader。旧整数親readerと共通のfield/source/graph束縛部分だけを共有し、rawを旧responseへ変換して再入場させない。新stateのserialize/reloadは別関数。
+2. `analysis_cumulative_service.py`：新専用prepare/build/serialize/reloadのみ。既存source/Safety/coverageを再利用し、通常build/ensure/HTTPは非切替。
+3. `engine.py`：新exact input型だけの明示dispatch。既存graph/compiler/realizerの意味責務は不変。
+4. `ai/tests/test_analysis_model_quoted_parent_units.py`：前方親/根まで2段/親数え直し不要、3field全文/Unicode/残範囲/同file非生成再読、旧新交差拒否、重複/存在しない親/親跨ぎ/自己/循環/深さ/不明根/strict型、owner/guard/版/messages/raw/finish、graph/text/diagram/coverage改竄、通常非選択を検証。既存unit/field/P5/累積の対象回帰を行い、旧fixtureを緩めない。
+
+CPU一作業は上記実装→新合成raw→既存graph/text/diagram→同file非生成再読→旧保存payload再読→全file地図/型/結果の差分更新まで。CPU検証process上限600秒、追加依存/実GPU/学習/本人DB/Render/RN/merge/deploy0。実4BはCPU結果と新target長を確認してから別の有限比較計画へ具体化する。現adapterは整数parentを学習しているため、そのまま新wire互換とは呼ばない。nested treeはコピー負担をさらに外せるが括弧/教師構造の差分が大きく、今回は比較候補に留める。

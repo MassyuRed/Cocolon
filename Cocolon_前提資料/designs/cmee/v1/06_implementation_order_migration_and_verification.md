@@ -20485,3 +20485,8 @@ Mash承認のCM-01/T1をAPI02c0b943へ実装。既存Engine dispatchをそのま
 API `f7a1389679f15dbb9f24c40c0c5ac0058423c106`、実装/検証/全pathは[Analysis04](04_analysis_v1d_v1e_detailed_design.md#analysis-model-field-kinds-v1)。最終819PASS（新34＋旧785）＋既存共有owner別1PASS、実隔離SQLの同図/文章/ID非生成再読と削除寿命を確認。公開API/DTO/DB/RN/依存/稼働変更0、実4B/追加学習0。次GPUは新4call/600秒の具体案で未実行。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT/商品credit0。
 
 実装順はsource/Safety再利用と新private型/要求→外部call binding/strict raw reader→既存graphhelper共有→Engine exact dispatch→明示累積prepare/build→型/取り違え/strict JSON/旧回帰→実隔離SQL再読/削除→全path反映と読戻し。初期collectionのcwd/PYTHONPATH不備は既存API root/CI設定へ補正し、製品/旧test/品質条件は変えない。旧4callsは閉鎖、新GPUはAF01/AF02×base/fit38の新4生成/600秒/単価$0.60以下で処理按分$0.10以内の具体案として別記し、自動再実行しない。
+
+
+## 2026-11-02 — 親quote契約の次CPU作業（計画）
+
+新exact型/別ref/messages→新raw/binding検査→返却親quote exact1の内部位置束縛→共通field/graph条件→既存compiler/唯一realizer→新専用file非生成再読→旧target/保存payloadと通常非選択の回帰→地図/型/結果差分の順。CPU上限600秒、実GPU/学習/本番変更0。 具体仕様・path・拒否条件は[Analysis04](04_analysis_v1d_v1e_detailed_design.md#analysis-quoted-parent-units-plan-20261102)。Mash継続承認内、実装前の計画であり実4B品質や商品採用ではない。

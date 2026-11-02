@@ -1307,3 +1307,8 @@ GPU提供口sourceは準備したが、実4B品質・GPU loader成立・常時ho
 新private `analysis_model_field_kinds.v1` をCPU接続。モデルは入力順のstrict整数番号＋既存五種又はUNRESOLVEDだけを返す。call前のfull request_ref/実messages hashと返ったraw SHA/finish/rawの外部bindingを必須にし、元source/owner/版/guardと再照合する。raw単独の由来証明やmetadataの自己認証ではない。旧v1 rawの補修・v1packet作成・自動fallbackをせず、両strict readerの後だけ既存ObservedQuotedField/graph/唯一realizerを共有。全unparsed/関係0/通常ensure未有効化、一般意味品質は未検証。
 
 API `f7a1389679f15dbb9f24c40c0c5ac0058423c106`、実装/検証/全pathは[Analysis04](04_analysis_v1d_v1e_detailed_design.md#analysis-model-field-kinds-v1)。最終819PASS（新34＋旧785）＋既存共有owner別1PASS、実隔離SQLの同図/文章/ID非生成再読と削除寿命を確認。公開API/DTO/DB/RN/依存/稼働変更0、実4B/追加学習0。次GPUは新4call/600秒の具体案で未実行。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT/商品credit0。
+
+
+## 2026-11-02 — 親quote契約の次CPU作業（計画）
+
+親の位置をモデルへ数えさせず、親unitの逐語quoteを新明示private契約で選ばせる。旧wire/rawは不変、source側は同fieldに実際に返された親exact1だけを内部位置へ束縛する。旧graph/compiler/唯一realizerを共有し、新raw/bindingを保持する。通常map/他core/HTTP/DB/RNへの接続なし。 具体仕様・path・拒否条件は[Analysis04](04_analysis_v1d_v1e_detailed_design.md#analysis-quoted-parent-units-plan-20261102)。Mash継続承認内、実装前の計画であり実4B品質や商品採用ではない。

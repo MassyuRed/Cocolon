@@ -3269,3 +3269,8 @@ API fa995a44。schema `cocolon.cmee.analysis_model_units.v1`、新frozen/slots/r
 ### 2026-11-02 — instruction_versionと保存state.v2
 
 API cddf1855。AnalysisModelUnitsInputへinstruction_version（既定baseline.v1、他はclarified.v1のみ）を追加。baselineの旧request_ref preimage/messages/state.v1 exact keyは維持。clarifiedはrequest_ref preimageへ版を一要素追加し、保存state.v2にinstruction_versionを追加する。fresh preparedとstate/response/messages hashの全版を照合し、交差転用/不明版/default fallbackを拒否。rawのroot/field/unit/qualifier契約は不変、旧profile/通常DTO/DB非変更。新5件を含む対象113成功と旧実保存payload再読を確認。
+
+
+## 2026-11-02 — 親quote契約の次CPU作業（計画）
+
+新profile/schema analysis_model_units_quoted_parents.v1、exact unit keyはnode_kind,parent_quote,qualifiers,quote,scope_role。parent_quoteはnull又は同fieldの一意な返却親quote。新exact Input/Response型と専用state/file schemaを使用し、旧integer-parent版/旧state.v2へ混在・転用しない。親解決後のgraphは既存private型を共有する。 具体仕様・path・拒否条件は[Analysis04](04_analysis_v1d_v1e_detailed_design.md#analysis-quoted-parent-units-plan-20261102)。Mash継続承認内、実装前の計画であり実4B品質や商品採用ではない。
