@@ -1,6 +1,6 @@
 # Analysis — 最小field接続と実4B probe
 
-**最新：11/2、追加128更新・新52生成の3比較と、その後の固定b8b7・9局所forward（追加学習/生成0）が完了。学習済4/4を保持する候補でも引用/carrier/key/親番号が残り通常未採用。全重み/原本を保存済み。[局所診断と次の改善](#analysis-branch-diagnosis-result-20261102)。完了runを重複実行しない。**
+**最新：11/2、48教材候補の64更新・26生成まで完了。既見親3/5と一新入力の逐語reasonを改善、旧学習済4/4を保持したが、理由/対象scopeと明示非行動・否定の分類退行が残り通常未採用。全112重み/136原本保存・25candidate別process再読一致。[最終結果と再開点](#analysis-binding48-result-20261102)。完了runを重複実行しない。**
 
 2026-11-01 JST。開始原本：Cocolon PR30 `1c66add4fdf8f5ded18f7443d6b91b1771998244`、API PR3 `36713940ea82e217fab8a7c0a738a33f21df1c4d`。Mashの分析残件開始とweekly§45.4に従う。Codex Work/GPT-6、root華恋が実装/統合/反映、別文脈agentはread-only監査のみ。独立Pro/Ultra又はhuman品質受入れとは呼ばない。System Context最新cacheは未成立のまま、fresh原本fallbackを使用。
 
@@ -467,3 +467,27 @@ NV01の『返事』の親は2を0.9991で選び、実unit位置3は0.000335。�
 NLL低下だけ/構造受理だけで採用しない。旧学習済AT4と新NT03/05の教師自由生成、8既見DEV、CQ4、新DQ4を原文ごと読む。新DQは別sourceだが近接構文のため盲検ではない。退行/失敗は記録しepoch/教材/生成を自動で増やさず原因へ戻る。元表現を保つfocused教材＋64更新の複合候補で、どの一例が原因か確定しない。処理按分上限$0.145（観測$0.58/h、準備/回収/保持/通信/税等別）。必要な実装・GPU・GitHub反映はMashの本セッション継続指示で承認済み。この節はCPU準備段階でGPUは未実行、実結果は後続へ記録する。API1561526b/DB/RN/Render/通常有効化/merge0、正式0/3・54.50％据置、STRUCTURE_MAP_DELTA_NONE。
 
 意味監査追記：DQ03『慌てていたので』の連続した『てて』は原文どおり。連続文字を一律に削るルールやraw補修は行わず、原文の完全一致で判定する。read-only監査で旧40不変/新8意味/全48束縛/旧16照合/新DQ非同一/64更新26生成上限を確認した。
+
+
+<a id="analysis-binding48-result-20261102"></a>
+## 11/2 — 48教材候補の実結果、親接続/逐語reason改善と分類退行を分けて保全
+
+64update/96測定forward/3load/新26生成を386.871665秒で完走。全26stop、supervisor388.411158秒/exit0/compute-apps空。112tensor全変更・有限・実model保存一致・非学習reload112一致、元b8b7/config不変。rootとread-only agentが全26rawとsourceを独立に読解した。[全body-free結果](semantic_units_binding48_results.json)/[CPU準備の整合記録](semantic_units_binding48_cpu.json)。
+
+| 確認群 | 構造受理 | 内容の判断 |
+|---|---|---|
+| 既見DEV8 | 6/8→8/8 | NV01の対象親3/不明親5が修正。AF01のkey欠落・原文外反復も解消。ただし対象/理由範囲の過大化とmodifier誤分類は残る |
+| 旧学習済AT4 | 4/4 | 全4件が教示JSONと同値 |
+| 新学習済NT2 | 2/2 | NT05同値、NT03は机を/配達をという助詞差でJSON非同値。親3/5と逐語対象は整合。新2件の同値は1/2 |
+| 既見CQ4 | 4/4→4/4 | CQ01が明示非行動→思考へ退行し対象childも消失。CQ02のまだ/EPI分離が粗化。CQ03/04は旧b8b7とraw byte一致 |
+| 新DQ4 | 3/4→4/4 | DQ03の不正JSON/理由過大範囲が正しい2field・逐語reason/REASON_MARKERへ改善。DQ01/02/04はbefore/after byte不変 |
+
+**通常未採用。** UV12でも未決のNEGATIONがWRITTEN_MODIFIERへ退行している。AF01は理由quoteへ行動・対象まで含み、疲れていたのでをmodifierとしREASON_MARKERを欠く。原文外引用が消えたことを理由意味の完成へ換算しない。NV01修正は既見DEV、NT03は学習済み再現。新DQ01/02の自由分解は行動全文をrootにし対象childを省くため、root順位と全unit位置が同じであり、新題材への番号区別の転移証明とはしない。DQ03は「慌てていたので」を原文どおり保持した。DQ04の夕方は対象内にあり延期時刻へ移していない。
+
+同48の平均unweighted NLL0.010221800→0.003467196。旧40は0.003554975→0.003275551（24低下/16増加）、新8は0.043555923→0.004425418（全8低下）。平均低下や全22afterの構造受理を意味品質合格へ置換しない。保存candidate25件は別local processで新生成・compiler・author entryを禁止して再読し、全candidate ID/coverage一致。全unparsed/actor未解決/route0を維持。
+
+### 原本と次の再開点
+
+全136member/manifest135 SHA/CRC、全112 F32 tensor/3,833,856parameterを元重みSHAで一致回収。private `cocolon-analysis-binding48-result-20261102.zip`、Library `libfile_179ddf90fa5c8191acfe12f9d025d2df`、14548458bytes/SHA `f575611c2f88f6b79b91e2f444987aa4977addc827979de3ec0489cddf662016`。重み `6152e16268a17477118dfb79780ee810e729af0ab047a211ea1666d98e5015e8`、config `08715ea255fe433651a4c543d4b40afc10677d14cde772b1e4e42edc97508c56`。数値JSONと全textを照合して再構成した原内容で、再圧縮ZIPは元container SHA f6b62725…と別。前のb8b7原本も保持し、6152を通常既定や次の自動初期値にはしない。
+
+次は理由carrierと対象のscopeを述語/別節まで広げないこと、明示非行動と否定の分類を保持することを分けて検討する。単に同候補のepoch/教材数を増やさず、両checkpointの実rawと旧48targetを基に別題材の最小対照を決める。旧DEV完全同一文を教師へ移さず、既存受口/rawは不変。今回比較群は追加192更新/新78生成と局所診断9forwardで、78種類の独立評価ではない。今回64runのprocess按分約$0.06233（準備/回収/保持/通信/税等別）。API1561526b/通常map/DB/RN/Render/merge/Pod Stop・再起動・削除・追加チャージ0、正式0/3・54.50％据置。限定TECHNICAL_CREDIT（既見親接続/一新入力の逐語理由改善と再開保全）、STRUCTURE_MAP_DELTA_NONE。

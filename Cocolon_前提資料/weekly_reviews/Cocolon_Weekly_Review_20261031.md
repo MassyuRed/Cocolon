@@ -2056,3 +2056,8 @@ quote_first指示単独はDEV構造3/8（旧6/8）、学習済構造2/4/教示�
 ### §62 親の全unit位置と逐語reasonの48target候補
 
 §61の診断を受け、旧40target byte不変＋別題材8対照を既存受口へCPU束縛。NT01/02の対象有無でroot順を保ちunit親5/4を分け、待機親3/不明5・3行動子付き不明7、2fieldの逐語reason/carrierを教える。b8b7から旧40各1/新8各3=64update、同48NLL96forward、原16before再利用＋新4before/22after=新26生成、900秒上限の一候補。全raw/旧AT4/新教師2を再読、全重み回収。近接診断を盲検へ換算せず、退行なら通常不採用。詳細・実装順・限界はtrial。ここは準備、GPU未実行。正式0/3・54.50％据置。
+
+
+### §63 48教材候補の完了、局所改善と分類退行を分離
+
+64update/96測定/26stop、386.871665秒/exit0/112tensor保存・非学習再読一致/元b8b7不変/終了compute空。DEV構造6/8→8/8、NV01実parent3/5とAF01逐語/keyを修正。旧AT4は全教示JSON同値、新NT2は構造2/2・JSON同値1/2（NT03助詞差は意味破壊としない）。新DQ3/4→4/4の改善はDQ03、不正JSONから正しい2field/逐語reason/REASON_MARKERへ。他DQ01/02/04はbyte不変、DQ01/02はrootとunit位置同一の分解で新転移証明ではない。AF01理由/対象scope過大、CQ01非行動→思考、UV12否定→modifier、CQ02不明修飾粗化が残り通常未採用。全26rawをroot/agentが読解、candidate25件は非生成/非compile/非author再読一致、全112重み/136原本を元SHA照合・private保存済み。次はb8b7/6152両原本からscopeと分類の最小対照を分けて検討し、6152の追加epochを自動で重ねない。詳細と保存IDはtrial最新節。今回比較群合計192更新78生成/局所9forwardは独立78題ではない。API1561526b/通常map/DB/RN/稼働不変、正式0/3・54.50％据置。
