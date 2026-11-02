@@ -569,3 +569,22 @@ model processは最大1200秒（外TERM1190+kill10）、各call23秒/context8192
 停止は固定上限、source/依存/初期重み不一致、非有限/実行失敗で、再試行・追加epoch・cap延長を自動で行わない。意味退行を新データ作成や受口緩和で覆わず、原本から次を判断する。今回の直接作業は有限の4B内容比較、実機確認/追加観測会は不要。通常ObservedGraph/HTTP/DB/RN/Render/merge/deploy/IF/Savedは変更0、正式0/3・54.50％据置。STRUCTURE_MAP_DELTA_NONE（新契約自体は前回PRESENT、今回は同owner/同契約の学習比較）。この節は実行準備で、モデル学習/新56生成は未実行。
 
 起動記録：plan c578bb3c…/runner7b57c37a…/prepared e000e38a59baafc9ed9da807e1b9d2588ae82292を固定して一回起動。実reportでSTARTED、学習前15call開始/159.475790秒時点を確認。全2134runtime source SHAとAPI86dの3差分を照合後に実行し、事前tokenizerはモデルload0。処理落ち時も新しい試行を作らず、既存runのstatus/exitと原本を回収する。中間起動状態の保存は商品品質creditではない。
+
+<a id="analysis-parent56-result-20261102"></a>
+## 11/2 — 親quote形式の前後56出力を完了、引用と意味範囲の残件を分離
+
+固定b8b7から派生56target各1回の56更新、112測定/3load/新56生成を687.632696秒で完走。全56stop、supervisor689.096742秒/exit0/終了compute-apps空。全112 F32 tensor/3,833,856parameterが有限で実model保存/非学習reload一致、元b8b7/config不変。rootと別文脈read-only agentが全56rawを原sourceと独立読解した。[body-free全結果](semantic_units_parent56_results.json)。
+
+構造RETURNED17/28→24/28は意味合格率ではない。旧学習済AT4の教師JSON一致は2/4→4/4。NT2は0/2→1/2でNT05一致、NT03は机を/配達をという助詞差があるが対象/親の意味は妥当。UV12は根拠なし理由接続から独立未決思考、DQ01は待機ACTIONと実返却親quote、SQ02は倉庫での場所保持、SQ04は未決思考/対象へ改善した。
+
+通常未採用。AF01は受理されても理由に行動と対象全体を含み、今日をmodifierにしてREASON_MARKERを欠く。SQ01は述語自体をmodifierへ重複分類、SQ03は行動rootの否定を全文対象へ移す。NV04は正しいbeforeからcarrier不正/朝の否定欠落へ退行し、NV03も行くかの選択範囲が縮んだ。CQ01は非行動の分類が戻るが対象親nullで拒否、CQ04も自己親/根拠なし理由/不正carrierで拒否が続く。PQ01の二つの異なる不明親はbeforeから正しくraw不変、追加学習の改善に数えない。PQ02はafterに原文外引用を作り、反復する不明述語の一意引用も未解決。計12/28対はraw byte不変。
+
+新形式内の全56平均unweighted NLL0.026675011→0.013232889、旧40は0.015222139→0.011539624（22低下/18増加）、NT8は0.039239810→0.014958356、ST8は0.071374569→0.019973751で各8低下。旧整数wireのNLLと直接比較せず、ST8の自由生成再現も未測定。新形式＋均等56更新の複合比較でwire単独効果とは呼ばない。保存candidate41fileは別local processで新生成/compile/author entry禁止の再読を行い全ID/coverage一致、全unparsed/actor未解決/route0。
+
+原本全232member/manifest231のSHA/CRC、112tensor元SHA一致で回収。private `cocolon-analysis-parent56-result-20261102.zip`、Library `libfile_bc551c8368a48191a5fa8a356c517175`、14727998bytes/SHA `2e16ff3ce2b6045c84ef5575f73f81583ddca2ffb1d84e161a9125f689b38262`。重み`99916c5704ca9281902254e1ad433e9d3c1d118dcbc21be27e5226fe10b5aa1c`/config`2f4ec2eacf6750602995051a33b30190c96b9d3539e1262fb71bfeb663be159f`。通常JSONの全text/数値tensorを照合して再構成した原内容で、再圧縮containerは遠隔元ZIP SHA a07f3b65…と別。処理按分約$0.11079@0.58/h、保持/準備/回収等別。旧全原本も保持し、新9991を通常既定や追加epochの自動初期値にしない。
+
+### 次の直接切分け — 元4Bの同messages・4callだけ
+
+[base4 plan](semantic_units_base4_plan.json)/[runner](semantic_units_base4_run.py)。追加継続の前に、AF01/NV04/AT29/PQ02の既見4入力でadapterなしQwen/Qwen3.5-4Bの同revisionを一度だけ読む。新形式のmessages/refは今回beforeと完全同一、同loader/BF16/SDPA/nonthinking/greedy/各23秒/context8192/max2048。新教師0/学習0/NLL測定0、1load/新4生成、process300秒（外TERM290+kill10）/按分上限$0.04834、保持等別。同じAPI filtered2134 fileの全SHAと5blob/loaderを再照合し、既存runtime/重みを変更しない。根拠なしの追加epochを避け、元checkpointでも起こる失敗かを4件内で切分ける。wire単独因果/盲検性能/一般採用の証拠ではない。raw補修/再試行/生成追加は行わない。ここは準備でbase4は未実行。
+
+今回比較群は追加312更新/新164生成/局所9forward（固定32以前の240更新/48生成は別）で、独立164題ではない。CPUは全56新束縛とactual tokenizer、41保存再読を実行したが、旧283PASS3SKIP/旧860の再実行ではない。API86d19b6d/通常map/HTTP/DB/RN/Render/稼働/merge/deploy/Pod Stop等0、正式0/3・54.50％据置。primary outcome BLOCKER_NARROWED、STRUCTURE_MAP_DELTA_NONE（既存private ownerの比較）。必要GPU/GitHub保存はMash継続承認内。

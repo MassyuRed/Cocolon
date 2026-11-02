@@ -2083,3 +2083,7 @@ API86d19b6d、新exact Input/Response/別profile/ref/schema/state/file、parent_
 API86d19b6dの新契約で旧56意味targetを各1回/56更新、b8b7初期値、旧40とNT/ST交互、objective/LR/strict受口不変。既存26＋複数不明/反復句PQ2の全28入力をnew-wireでbefore/after＝56新生成、旧raw変換/新before再利用0。実tokenizer84messages/56終端完全一致、最大prompt1029/full1270/target246/prompt+2048=3077、5.601360秒/モデル学習生成0/compute空。3load/112測定、最大1200秒/按分上限$0.19334@0.58（保持等別）。具体順序と停止/採否はtrial最新計画。新形式の前後NLLは旧40/NT/ST別、旧wireと直接比較せず全rawを読む。必要作業はMash継続承認内、通常map/API/DB/RN/稼働不変、正式0/3・54.50％据置。ここは準備でモデル未実行。
 
 §67 実行開始：固定e000e38aの比較を既存Jupyterで一回起動済み。実report STARTED/学習前15call開始/159.475790秒を確認。runtime /workspace/analysis-parent56-20261102/result/report.json を先に確認し、処理落ち後も重複起動しない。まだ学習/比較の完了・新重み保存・品質採用を宣言しない。
+
+### §68 親quote前後56出力の結果と、追加学習前の元4B対照
+
+56更新/112測定/56stop/687.632696秒/exit0、112tensor保存/非学習reload/全原本回収/元b8b7不変。全56rawをroot/別文脈監査が読み、構造17/28→24/28と旧AT教師一致2/4→4/4を確認。UV12/DQ01/SQ02/SQ04に改善、AF01理由過大・SQ01述語modifier・SQ03否定scope誤りは残る。NV04はcarrier/朝の否定へ退行。PQ01はbeforeから正しく不変、PQ02は非逐語/反復引用で拒否継続。旧40新wire内NLL平均は低下するが18/40増加、構造/平均lossを意味品質合格へ換算せず通常未採用。41保存fileの非生成/非compile/非author再読一致、全232原本/112重みはprivate保存済み。次は同messagesの既見4件をadapterなし同revisionで読むだけの0更新/1load/4call/300秒対照。元checkpointからある失敗かを切分け、新教師/追加epochは自動追加しない。詳細・実装順・保存ID/SHAはtrial最新節。API86d19b6d/通常map/DB/RN/稼働不変、正式0/3・54.50％据置。BLOCKER_NARROWED/STRUCTURE_MAP_DELTA_NONE。
