@@ -3154,3 +3154,6 @@ API fa995a44、STRUCTURE_MAP_DELTA_PRESENT。新production fileは0。通常累�
 
 
 11/2第二継続の地図：trial `semantic_units_teaching16_results.json` が32更新/全8raw読解/identity、`semantic_units_teaching32_plan.json` が旧16＋新16/64更新/開発8＋教師自由生成4、`semantic_units_teaching32_run.py` が保存Analysisから別adapterへ継続するowner。既存production owner/DB/RN接続変更なし。trial/weekly§55。
+
+
+11/2局所予測点検の地図：trial `semantic_units_teaching32_results.json` は64更新/開発8＋学習済み4の全読解、`semantic_units_alignment_plan.json` は固定元fileSHA/同重み/6forward、`semantic_units_alignment_probe.py` は既存serving loaderのmodel/tokenizerで非学習token予測を読む限定runner。新商品owner/通常接続なし。trial/weekly§56。

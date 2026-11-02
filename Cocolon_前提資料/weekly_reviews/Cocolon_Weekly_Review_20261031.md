@@ -1999,3 +1999,11 @@ clarified新base2callはprocess48.970337秒、原文外qualifier/不明carrier�
 新16教材/32update/12callはprocess189.266787秒/exit0、全112tensor更新/保存/非学習reload一致、平均unweighted NLL0.129117→0.048250。構造before5/8→after7/8、成立7file再読一致。AF02は前raw byte一致、NV04は理由不明の内容対象が補われた。一方UV03/UV12の『まだ気になる/決めていない』をUNKNOWN化、NV02の修飾を別話者へ接続、NV01の内容対象欠落、AF01の原文外理由markerが残る。全rawをroot/読取監査で確認し未採用。private全63member/14435739bytes/SHA14583168…、Library libfile_67afad9213d081918ae79bd03912e152。旧fit38/初回Analysis重み不変、GPU compute-apps空。
 
 新32教材（旧16不変＋新16）/64updateの別outputを準備。『まだ』3種/報告内容境界/話者修飾/対象/理由marker/2field/2recordを交差し、全target CPU再束縛。8開発入力after＋学習済み自由生成4を別集計、12call/900秒内。教師自身の自由生成が不適格なら教材数をさらに倍増せず、train/inference/target設計の一致へ戻る停止条件を明示。新12題材診断は未実行として保留。具体は[trial](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-teaching16-result-and-teaching32-plan-20261102)。今回承認内、64updateは本記録時点未実行、通常採用0/正式0/3/54.50％/STRUCTURE_MAP_DELTA_NONE。
+
+
+<a id="analysis-teaching32-result-and-alignment-20261102"></a>
+## 56. 11/2 — 64更新完走、教師自身の2field誤りでデータ拡大を止める
+
+32教材64update/12生成はprocess234.434020秒/exit0。全112tensor更新/保存/非学習reload、同32件NLL0.072220→0.024621。開発構造7/8→6/8、学習済み自由生成は3/4JSON同値。UV12/NV03の願望/未決、UV03の発言/本人思考は局所改善。一方AF01原文外引用、NV01主体/不明誤昇格、NV02偽否定、AF02不明表現の単純否定化が残る。AT29は教えた2fieldの独立願望を従属へ変え、曖昧な『部屋』引用で拒否。全rawをroot/読取監査が確認し未採用。
+
+private66member/14427639bytes/SHAe36490c6…をLibrary libfile_53338dfcb1a881919440812b7c9f7bd3へ保全、旧重み不変/GPU compute-apps空。停止条件に沿い教師数のさらなる倍増/新12題材生成を止めた。保存資料で4教師のmessages/ref/encoded/mask/target対応は一致。次は同serving重みで局所tokenのNLL/確率/順位とcache有無を6forwardだけ比較する。追加学習0/生成0/process300秒、詳細は[trial](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-teaching32-result-and-alignment-20261102)。本記録時点で未実行、今回承認内。通常有効化0/正式0/3/54.50％据置、STRUCTURE_MAP_DELTA_NONE。

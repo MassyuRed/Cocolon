@@ -1,6 +1,6 @@
 # Analysis — 最小field接続と実4B probe
 
-**最新：11/2、追加32更新が完走し構造7/8、意味の取り違えは残る。[32教材64更新と教師自由生成の切分け](#analysis-teaching16-result-and-teaching32-plan-20261102)を別重みへ準備。通常未採用。**
+**最新：11/2、64更新完走。願望/未決/話者に局所改善、開発構造6/8・学習済み3/4で未採用。[教材数の追加を止め、追加学習/生成なしの局所予測点検](#analysis-teaching32-result-and-alignment-20261102)へ。**
 
 2026-11-01 JST。開始原本：Cocolon PR30 `1c66add4fdf8f5ded18f7443d6b91b1771998244`、API PR3 `36713940ea82e217fab8a7c0a738a33f21df1c4d`。Mashの分析残件開始とweekly§45.4に従う。Codex Work/GPT-6、root華恋が実装/統合/反映、別文脈agentはread-only監査のみ。独立Pro/Ultra又はhuman品質受入れとは呼ばない。System Context最新cacheは未成立のまま、fresh原本fallbackを使用。
 
@@ -281,3 +281,36 @@ Mashの本セッションの必要作業/GPU利用/途中反映承認に基づ�
 **停止条件：** 学習済み教師の自由生成でも教えたcarrier/話者/qualifier作用域を保てない場合、さらに件数だけ倍増/再runせず、学習と推論の重み/入力/target/生成条件の一致および教材設計を点検する。NLL低下でこの条件を置換しない。新12題材の追加診断は準備したが、本候補の意味不足が明白なので未実行とし、改善に戻った。
 
 同Jupyterで一回、process900秒（外TERM890+kill10）/各23秒/context8192/max2048、同単価按分上限$0.145、準備/保持等別。旧重み/本番/DB/RNを上書きしない。本記録時点は64update未実行。Mashの本セッション継続承認内、API cddf1855不変、商品受入0/正式0/3/54.50％据置、STRUCTURE_MAP_DELTA_NONE。
+
+
+<a id="analysis-teaching32-result-and-alignment-20261102"></a>
+## 11/2 — 64更新と教師自由生成を完了、教材数拡大を止めて局所予測へ戻る
+
+新32教材×2回64update/64training forward、同32教材の前後NLL64measurement forward、開発8＋学習済み自由生成4の12callはprocess234.434020秒/exit0で完走。全112tensor更新/有限保存/非学習reload一致、旧重み不変、GPU終了後compute-apps空。平均unweighted NLLは**同じ今回32件の中で**0.072220150→0.024621478、全32低下。前の16教材平均と同一母集団として比較しない。peak allocated9.293182GiB/reserved10.244141GiB。
+
+開発8の構造受理はbefore7/8→after6/8へ減少。学習済みREHEARSAL4は構造3/4、AT17/19/21は教えたJSON内容と一致し、AT29は不成立。前後全rawをrootとread-only監査が読み、改善と退行を区別した。
+
+| 入力 | 内容の判断 |
+|---|---|
+| AF01 | 依然拒否。原文外modifier/理由marker『てから』に加え、内容対象へ後悔述語が混ざる |
+| AF02 | 今日/昨日/結果の3unitは保持。不明表現がEPISTEMICから単純NEGATIONへ粗化し、一方向の改善とはしない |
+| UV03 | 他者の発言行為/引用内容/本人の気掛かりを区別。不明への誤昇格は消えた。『気に』の余分なmodifierは残る |
+| UV12 | 願望と未決が独立した思考、今日/否定/まだも対応scopeへ。局所的な内容改善を確認 |
+| NV01 | 対象語をEXPLICIT_ACTORへ誤分類、不明内容を独立結果へ昇格し、carrierも不正。退行 |
+| NV02 | 本人の主体と少しのscopeは修正。一方『大丈夫だ』の『だ』をNEGATIONへ誤分類 |
+| NV03 | 願望と未決が思考、今日/否定/まだが整合。局所改善 |
+| NV04 | 朝/夜→安心と理由不明/対象の部分分解を維持 |
+| REHEARSAL_AT17/19/21 | 学習済みJSONと同値。転移や盲検として数えない |
+| REHEARSAL_AT29 | 教えた独立願望を未決rootのCONTENTへ変え、重複する『部屋』を引用して拒否。教えた2field教材自体が未適合 |
+
+[実結果と全root読解](semantic_units_teaching32_results.json)。通常採用0。構造6/8やNLL低下を品質受入れに換算しない。計画の停止条件を適用し、さらに教師数だけを倍増することも新12題材の生成を進めることも止め、入力/重み/target/推論の一致と局所誤りを点検する。
+
+全raw/要求/encoded/重みをprivate66member archiveへ保全、CRC/manifest全SHA一致。`cocolon-analysis-teaching32-result-20261102.zip`、Library `libfile_53338dfcb1a881919440812b7c9f7bd3`、14427639bytes/SHA `e36490c680d80e8e235056107de2b8efcb719cbfb662322abd0ae2adf42bdb39`。新weights `02dfa43f0e848da2d3e2c9bf1e519e76a8e8dfa74e59c855dfee892259e911a7`、config `ad2ff18a05a8b901db0f04a74cacaf3c1360cf342ae07b473b176885bdb3bba5`。同単価の実process按分約$0.03777、準備/回収/保持/税等別。回収準備で実run完了前のassertが一度停止したが学習/生成を再実行せず、完了後に原本を回収した。確認コマンドのUI入力途中タイムアウトも学習runの再実行にはしていない。
+
+### 追加学習なし・生成なしの少数forward診断
+
+保存済み資料のCPU照合で、全4REHEARSALのtrain/eval/実送信messages/request_ref、保存prompt/全input IDs/全maskとtarget列の対応を確認。AT17/19/21はJSON内容一致、AT29だけ不一致。既存loaderは非学習で全112重み一致を検証、dropout0、BF16/SDPA/固定revision/nonthinking/chat templateも同じ。主な実行差はtrainer測定のuse_cache=False/gradient-checkpointing設定と、生成のuse_cache=Trueであり、現段階で原因とは断定しない。
+
+[非学習plan](semantic_units_alignment_plan.json)/[診断runner](semantic_units_alignment_probe.py)は同じ既存serving loaderが読み込んだmodel/tokenizerを使い、4教師targetのNLL/各token誤りを調べる。AT29の最初の分岐を全teacher-prefixと短prefixのcache False/Trueのprefill（逐次cache生成の再現ではない）で比較し、引用『部屋を』近傍の確率/順位も記録する。**計6forward/新生成0/更新0**、300秒（外TERM290+kill10）/同単価按分上限$0.04834、別output一回。元rawから再tokenizeした列は局所診断だけに使い、元生成token列の完全回収とは呼ばず、raw受口へ補修して戻さない。
+
+この記録時点で6forward診断は未実行。必要作業は本セッションのMash指示内。API cddf1855/本番/DB/RN不変、正式0/3/54.50％据置、STRUCTURE_MAP_DELTA_NONE。
