@@ -3157,3 +3157,6 @@ API fa995a44、STRUCTURE_MAP_DELTA_PRESENT。新production fileは0。通常累�
 
 
 11/2局所予測点検の地図：trial `semantic_units_teaching32_results.json` は64更新/開発8＋学習済み4の全読解、`semantic_units_alignment_plan.json` は固定元fileSHA/同重み/6forward、`semantic_units_alignment_probe.py` は既存serving loaderのmodel/tokenizerで非学習token予測を読む限定runner。新商品owner/通常接続なし。trial/weekly§56。
+
+
+11/2固定教材適合の地図：trial `semantic_units_alignment_results.json` が6forwardの全token局所予測/元失敗/解釈、`semantic_units_fixed32_plan.json` が同32教師完全不変/128更新/DEV8＋学習済み4、`semantic_units_fixed32_run.py` が保存Analysisから別重みへ一回継続。通常source/DB/RN owner変更なし。trial/weekly§57。

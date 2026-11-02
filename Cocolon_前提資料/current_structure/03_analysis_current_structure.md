@@ -1,4 +1,4 @@
-> **2026-11-02最新：64更新で願望/未決/話者の局所改善、通常未採用。** 学習済み2fieldも誤るため教師数拡大を止め、同serving重みの少数forwardで入力/target/局所予測を点検。[実結果/次の非学習診断](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-teaching32-result-and-alignment-20261102)。商品構造/本番/DB/RN不変。
+> **2026-11-02最新：非学習6forwardで2field教師の局所未適合を確認。** 同入力/重みの不一致を示す証拠なし。32教材を不変に追加128更新の一候補を準備。[実結果/固定plan](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-alignment-result-and-fixed32-plan-20261102)。商品構造/通常採用/本番/DB/RN不変。
 
 > 2026-11-01最新：Mash採用の累積/当時月次/プラン差を実装、API36713940/新migration反映済み。RNb187b790のiOS #72/7201は内部配布済み。感情原入力の全期間＋適格本人補足を対象に現在map共通、月次閲覧Free2回/Plus12回/Premium全期間。保存artifactと月参照を分離し、プラン変更では保持、source削除/退会ではpurge。新実装/検証/配置はweekly§44と詳細04#analysis-cumulative-monthly-v1を参照。以下のu250等は旧期間版の内容修正履歴で、新累積方式の現在地ではない。
 

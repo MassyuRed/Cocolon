@@ -2007,3 +2007,11 @@ clarified新base2callはprocess48.970337秒、原文外qualifier/不明carrier�
 32教材64update/12生成はprocess234.434020秒/exit0。全112tensor更新/保存/非学習reload、同32件NLL0.072220→0.024621。開発構造7/8→6/8、学習済み自由生成は3/4JSON同値。UV12/NV03の願望/未決、UV03の発言/本人思考は局所改善。一方AF01原文外引用、NV01主体/不明誤昇格、NV02偽否定、AF02不明表現の単純否定化が残る。AT29は教えた2fieldの独立願望を従属へ変え、曖昧な『部屋』引用で拒否。全rawをroot/読取監査が確認し未採用。
 
 private66member/14427639bytes/SHAe36490c6…をLibrary libfile_53338dfcb1a881919440812b7c9f7bd3へ保全、旧重み不変/GPU compute-apps空。停止条件に沿い教師数のさらなる倍増/新12題材生成を止めた。保存資料で4教師のmessages/ref/encoded/mask/target対応は一致。次は同serving重みで局所tokenのNLL/確率/順位とcache有無を6forwardだけ比較する。追加学習0/生成0/process300秒、詳細は[trial](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-teaching32-result-and-alignment-20261102)。本記録時点で未実行、今回承認内。通常有効化0/正式0/3/54.50％据置、STRUCTURE_MAP_DELTA_NONE。
+
+
+<a id="analysis-alignment-result-and-fixed32-plan-20261102"></a>
+## 57. 11/2 — 6forward診断で局所未適合を確認、教材を固定して追加適合へ
+
+非学習6forward/11.666034秒、追加生成/更新0。4教師のmessages/ref/token/prefix/mask/全target/EOS一致、保存重みserving NLL差数e-6。AT17/19/21は全target top1正しく、AT29は210/214。最初の分岐は教示16.35％対実raw側83.06％、引用の『を』14.62％対閉じ84.16％。短prefixのprefill cache有無で順位同じ、逐次cache再現ではない。この範囲で経路不一致の証拠はなく、平均NLLが局所未適合を隠していた。初回は設定metadata読取で0forward/8.9549秒停止、optional lookupへ直し別outputで完了。失敗原本を含む11member/18434bytes/SHA5d978a00…をLibrary libfile_4ed46a2a16948191857b075c6ae63414へ保全。
+
+次は同32教材/全messages/target完全不変、追加教材0、保存Analysis02dfa…から別重みへ各4回128update、同32前後NLL/DEV8＋学習済み4の新after12、900秒上限。一意引用/独立願望だけでなくAF02/NV01等の退行も全て読む。AT29だけで採用せず、失敗時epoch自動追加/教材増量を繰返さない。[結果/固定plan](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-alignment-result-and-fixed32-plan-20261102)。本記録時点で128更新未実行、今回承認内。通常採用0/正式0/3/54.50％据置、STRUCTURE_MAP_DELTA_NONE。

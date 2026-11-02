@@ -1,4 +1,4 @@
-> **2026-11-02最新：64更新で願望/未決/話者の局所改善、通常未採用。** 学習済み2fieldも誤るため教師数拡大を止め、同serving重みの少数forwardで入力/target/局所予測を点検。[実結果/次の非学習診断](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-teaching32-result-and-alignment-20261102)。商品構造/本番/DB/RN不変。
+> **2026-11-02最新：非学習6forwardで2field教師の局所未適合を確認。** 同入力/重みの不一致を示す証拠なし。32教材を不変に追加128更新の一候補を準備。[実結果/固定plan](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-alignment-result-and-fixed32-plan-20261102)。商品構造/通常採用/本番/DB/RN不変。
 
 > 10/28最新差分：named出力型/参照提示修復・CPU351成功、9更新/112再読込/2生成を終了。平坦rootと回答source帰属へ前進も意味/本文0/2・新41c9不採用。末尾の最新結果・全機能00/weekly§90を参照。
 

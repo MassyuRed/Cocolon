@@ -1,6 +1,6 @@
 # Analysis — 最小field接続と実4B probe
 
-**最新：11/2、64更新完走。願望/未決/話者に局所改善、開発構造6/8・学習済み3/4で未採用。[教材数の追加を止め、追加学習/生成なしの局所予測点検](#analysis-teaching32-result-and-alignment-20261102)へ。**
+**最新：11/2、6forward診断で入力/重み不一致の証拠はなく、2field教師の局所未適合を確認。[同じ32教材を不変にした追加128更新の一候補](#analysis-alignment-result-and-fixed32-plan-20261102)へ。通常未採用。**
 
 2026-11-01 JST。開始原本：Cocolon PR30 `1c66add4fdf8f5ded18f7443d6b91b1771998244`、API PR3 `36713940ea82e217fab8a7c0a738a33f21df1c4d`。Mashの分析残件開始とweekly§45.4に従う。Codex Work/GPT-6、root華恋が実装/統合/反映、別文脈agentはread-only監査のみ。独立Pro/Ultra又はhuman品質受入れとは呼ばない。System Context最新cacheは未成立のまま、fresh原本fallbackを使用。
 
@@ -314,3 +314,27 @@ Mashの本セッションの必要作業/GPU利用/途中反映承認に基づ�
 [非学習plan](semantic_units_alignment_plan.json)/[診断runner](semantic_units_alignment_probe.py)は同じ既存serving loaderが読み込んだmodel/tokenizerを使い、4教師targetのNLL/各token誤りを調べる。AT29の最初の分岐を全teacher-prefixと短prefixのcache False/Trueのprefill（逐次cache生成の再現ではない）で比較し、引用『部屋を』近傍の確率/順位も記録する。**計6forward/新生成0/更新0**、300秒（外TERM290+kill10）/同単価按分上限$0.04834、別output一回。元rawから再tokenizeした列は局所診断だけに使い、元生成token列の完全回収とは呼ばず、raw受口へ補修して戻さない。
 
 この記録時点で6forward診断は未実行。必要作業は本セッションのMash指示内。API cddf1855/本番/DB/RN不変、正式0/3/54.50％据置、STRUCTURE_MAP_DELTA_NONE。
+
+
+<a id="analysis-alignment-result-and-fixed32-plan-20261102"></a>
+## 11/2 — 経路のずれではなく局所未適合、同じ32教材を固定した追加128更新へ
+
+非学習診断は6forward/新生成0/更新0、process11.666034秒/exit0で完了。modelは既存serving loaderの非学習・全112tensor一致済みモデルそのもの。4教師のmessages/ref/全input IDs/prompt prefix/mask/assistant全target/EOS/改行が保存trainingと一致した。serving NLLと保存after NLLの差は−1.7〜−6.5e-6程度。model.training=False/全requires_grad=False/LoRA dropout0/gradient checkpointing=False、top config use_cacheなし/text_config=Trueを実読取した。
+
+AT17/19/21はteacher-prefix top1が全157/110/99target tokenで正しく、実自由生成も教示JSONと一致。AT29だけ**210/214**で、平均NLL0.04610が局所誤りを隠していた。
+
+- 最初のraw再tokenize分岐index25（qualifiers開始）で、教師側tokenは確率16.35％/順位2、実raw側は83.06％/順位1。実rawでは独立願望でなく未決を先に選び、願望をその従属へ変えていた。
+- 同じ短prefixのprefillでも教師側18.13％/raw側81.25％、cache False/Trueの順位/確率は同じ。これは逐次cache生成の再現ではない。
+- 教えた一意引用『部屋を』の『を』は14.62％/順位2、引用を閉じるtokenが84.16％/順位1。実rawの曖昧な『部屋』と対応するteacher-prefix上の局所未適合を確認した。
+
+この4例の範囲では入力/重み経路不一致を示す証拠はなく、局所未適合が平均値に隠れたと読む。全ての経路差/逐次cache差を否定したとは言わない。raw再tokenizeは元生成token列の完全回収ではない。[全結果](semantic_units_alignment_results.json)。rootとread-only監査でこの解釈を照合。
+
+初回は記録用のtop config.use_cache参照がAttributeErrorとなり、8.954900秒/0forward/0生成/0更新で終了。optional getattr/text_configの読取へ修正し、旧source/report/logを保持して別result-fixedへ実行した。原本11member `cocolon-analysis-alignment-result-20261102.zip`、Library `libfile_4ed46a2a16948191857b075c6ae63414`、18434bytes/SHA `5d978a0022c34e23ccb1617e41132061408b4f61ac17254fa8de733edab44cf6`。CRC/manifest全SHA一致、終了後GPU compute-apps空/adapter不変。修正版実process按分約$0.00188、初回約$0.00144、保持/準備等別。
+
+### 固定32教材の追加適合を一候補だけ比較
+
+[固定32 plan](semantic_units_fixed32_plan.json)/[runner](semantic_units_fixed32_run.py)。教師/全messages/targetsは先の32教材とJSON完全同一、追加教材0。先の保存Analysis重み02dfa43f…から別new outputへ、既存full-target weighted CE/LR5e-5/clip1を保って各4回128update。32順と逆順を交互にし、対象/EOS/改行を除外しない。前後の同32NLL各1回＝64measurement forward、model load2。これは素材を増やす試行ではなく、局所的な教師自身の未適合を減らせるかを見る。
+
+前runのDEV8＋REHEARSAL4の全12rawをref/messages/SHA照合でbeforeへ再利用、新after12だけ生成。AT29の独立願望/未決と一意引用、学習済み4全体、AF02の不明表現/NV01の誤昇格を含む開発8全体を読む。AT29だけ直れば採用とはせず、JSONのkey順だけの差を意味失敗にもしない。追加更新で未使用入力が改善する保証はなく、一般品質/盲検/本人受入れへ転用しない。
+
+process900秒（外TERM890+kill10）/12新call/各23秒/context8192/max2048、同単価按分上限$0.145、保持/準備等別。失敗時にepoch自動追加/教材増量を繰返さず、局所分岐を読んでtarget/objective/表現の見直しへ戻る。重み初期/保存の全112一致/有限性と元adapter不変、全raw回収を維持。本記録時点で追加128update未実行、今回のMash継続承認内。API cddf1855/通常map/DB/RN不変、正式0/3/54.50％据置、STRUCTURE_MAP_DELTA_NONE。
