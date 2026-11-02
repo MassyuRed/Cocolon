@@ -2173,3 +2173,5 @@ BT07の過去不明、BT08等のまだ否定、既存12理由/ので10/感情親
 other62全結果/270原本/112重みを3c6e7ff3で確定反映後、MD02/OA02各元文脈の姉/父×参加しなかった/返送しなかったを固定。元2source×2保存重みの4結果はmessages/ref/raw/report/admission/adapter/SHA照合再利用、残り6改変source×f982/89baの12新生成だけ。CPU8prepare/refと実tokenizer1004–1007prompt/context内を確認、旧62教師完全一致0、model0。OA02の既学習性を保持、近接最小改変で盲検/教師/一般率/単独原因ではない。
 
 同base/API/loader/2134source/pins/seed/23秒、学習0/2load/12call/300秒打切り（TERM290+10）。partial保全、延長/再試行/受口緩和なし。独立ACTION/actor/NEGATION/actor対象化/不明親を全文で判定する。HQ03退行/CQ04少し/HQ04理由は別追跡。GPUはここでは未実行。[固定計画/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-actor-predicate-plan-20261102)。Mash継続明示承認内、root単一writer/同環境read-only監査、通常source/map/DB/RN/稼働/正式0/3・54.50％据置、STRUCTURE_MAP_DELTA_NONE。
+
+§77実行開始：固定1d3cdc15のplan/prepare/runnerを全SHA照合後、同Jupyterで一回起動。report STARTED/39.979秒/3call開始/1load/更新0。先に `/workspace/analysis-actor-predicate-20261102/report.json` と `run.exit` を確認し重複起動しない。完了/追加学習/採用は未宣言。
