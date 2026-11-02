@@ -1,6 +1,6 @@
 # Analysis — 最小field接続と実4B probe
 
-**実行中：11/2、e000e38aの親quote一回比較を既存Jupyterで起動済み。再開時は先に /workspace/analysis-parent56-20261102/result/report.json を確認し、同runを再起動しない。新wireの全28before→56更新→28afterの途中。[固定計画](#analysis-parent56-plan-20261102)。実結果/重みの回収後に更新する。通常未採用。**
+**11/2再開点：親quote56と元4B対照は完了済み。次は反復不明58教材の64更新/40新生成・900秒一回比較。旧28beforeは99916でのafter原本を完全照合して再利用。[固定計画](#analysis-unknown58-plan-20261102)。実行時は先に /workspace/analysis-unknown58-20261102/result/report.json を確認し、同runを重複起動しない。通常未採用。**
 
 2026-11-01 JST。開始原本：Cocolon PR30 `1c66add4fdf8f5ded18f7443d6b91b1771998244`、API PR3 `36713940ea82e217fab8a7c0a738a33f21df1c4d`。Mashの分析残件開始とweekly§45.4に従う。Codex Work/GPT-6、root華恋が実装/統合/反映、別文脈agentはread-only監査のみ。独立Pro/Ultra又はhuman品質受入れとは呼ばない。System Context最新cacheは未成立のまま、fresh原本fallbackを使用。
 
@@ -607,3 +607,15 @@ AF01は不明内容を断ったことへ接続し、unit外のEPI引用と断っ
 次はこの一つの欠落を補う2targetと既存56保持を組み合わせる有限比較を具体化する。初期重み/doseを既見品質と旧再現の両方で選び、9991への自動継続や教材倍増にしない。理由過大、否定の掛かり先、時点保持は別の残件であり、この2targetで解決したと扱わない。
 
 今回比較群の累計は追加312更新/新168生成/局所9forward（固定32以前の240更新48生成は別）で独立168題ではない。本節の4call/CPU2以外のpytest旧283PASS3SKIP/旧860再実行0。API86d19b6d/通常map/HTTP/DB/RN/Render/稼働/merge/deploy/Pod Stop等0、正式0/3・54.50％据置。BLOCKER_NARROWED/STRUCTURE_MAP_DELTA_NONE。次回は既存parent56/base4完了原本を先に読み、新しい実行を重複起動しない。
+
+
+<a id="analysis-unknown58-plan-20261102"></a>
+## 11/2 — 反復不明の不足2教材と旧56保持を一候補で比較
+
+[plan](semantic_units_unknown58_plan.json)／[runner](semantic_units_unknown58_run.py)／[CPU束縛](semantic_units_unknown58_cpu.json)／[実行前照合と回収](semantic_units_unknown58_supervisor.py)。前回の99916/2f4ec2保存adapterを今回だけ明示初期値とし、fresh optimizerで旧56各1＋UQ01/02各4＝64更新。旧56のsource/messages/targetはdict完全一致、厳密受口/生成設定/LR5e-5/full-target weightedCE/全終端は不変。UQ2は一題材の節順序対で、Mash本人教材・独立2題ではない。
+
+実装順：全58targetをstrict受口へCPU束縛・保存再読→前回終了/2134source/loader/初期値全SHAと旧28afterのrequest/messages/raw/report照合・before原本コピー→UQ2/HQ4の6before→58NLL→64更新→58NLL→112tensor有限保存/実model一致/非学習reload→全34after→全40新rawと旧28beforeの意味読解/保存再読/全重みと原本回収。3load/116測定/40新生成以内、process900秒（TERM890＋kill10）、各23秒/context8192/max2048/nonthinking/greedy。900秒は完走保証ではなく打切り上限。同Pod表示$0.58/hの処理按分上限$0.145、準備/回収/保持/通信/税等別。
+
+PQを見てUQを作ったため、PQ改善を盲検汎化へ数えない。HQ01/02も別題材の順序対で近接診断。HQ03は非行動＋二不明、HQ04は時点/否定/理由保持を調べる。子が誤った有効rootへ結び付く場合は構造受理され得るため、内容と親の意味対応を全文で読む。子なし全文不明rootを親選択成功へ数えない。旧AT4再現、AF01の理由範囲、NV04/SQ03の時点/否定も別に判定する。不足/退行があれば通常未採用、epoch増量/受口緩和/raw補修をしない。
+
+必要な実装/GPU/GitHub途中反映はMashの今回明示指示で承認済み。実行ownerはCodex Work/GPT-6 root、agentは同環境read-only監査のみ。別model Pro/Ultra/human受入れを偽装しない。通常map/API/DB/RN/Render/依存/merge差分0、正式0/3・54.50％据置、STRUCTURE_MAP_DELTA_NONE。新しい商品型/接続ownerは追加せず、既存offline候補の教材/重み比較だけを行う。
