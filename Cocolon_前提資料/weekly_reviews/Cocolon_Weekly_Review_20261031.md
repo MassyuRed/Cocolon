@@ -2127,3 +2127,5 @@ adapterなし同revision/同messagesの4callを52.989783秒/1load/学習測定0�
 新60targetのstrict束縛・実file write/read後の同process非生成reload・ID/coverage一致をCPU確認、最大prompt1028/full1270/target246で全終端一致。20評価messages/refも照合、モデルload/新生成/更新0。旧16beforeは同750a afterから原bytes再利用、新MX2/別題材MD2 before4＋全20after=24新生成、120測定/3load/process900秒（TERM890+kill10）一候補。MD2は肯定本人/他者否定と二不明を近接診断し、盲検一般品質にはしない。AT4/UQ2/MX2再現とHQ03/MD2親対応を全文で読む。理由/時点/修飾残件を別追跡し、意味不足なら通常未採用。
 
 [固定計画・実装順・原本](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-mixed60-plan-20261102)。Mashの必要作業/GPU/GitHub継続明示承認内、Codex Work/GPT-6 root単一writer＋同環境read-only監査。前回単価0.58なら処理按分上限$0.145、準備/回収/保持等別。通常map/受口/API/DB/RN/稼働/正式0/3・54.50％据置、STRUCTURE_MAP_DELTA_NONE。ここは実行前checkpointで新GPU未実行。
+
+§73実行開始：GitHub f93be5ff固定版のplan/runner/supervisor/prepareを全SHA照合後、同Jupyterで一回起動。report STARTED/29.574631秒/更新0/新before2開始/1loadを確認。完了/新保存/採用は未宣言、先に /workspace/analysis-mixed60-20261102/result/report.json と run.exit を確認し重複起動しない。

@@ -1,6 +1,6 @@
 # Analysis — 最小field接続と実4B probe
 
-**11/2最新再開点：LR1までの結果/全重みを保存済み。新mixed60はCPU60教材/保存再読/実tokenizer確認を完了し、66更新/24新生成/900秒の一候補を固定。ここではGPU未起動。[今回の固定計画](#analysis-mixed60-plan-20261102)。開始後は /workspace/analysis-mixed60-20261102/result/report.json と run.exit を先に確認して重複起動しない。前回の残件/採否は[LR1全結果](#analysis-unknown58-lr1-result-20261102)。**
+**11/2最新再開点：LR1までの結果/全重みを保存済み。新mixed60はCPU60教材/保存再読/実tokenizer確認を完了し、66更新/24新生成/900秒の一候補を固定。固定f93be5ffのplan/runnerを照合して一回起動済み（初回report STARTED/29.574631秒/更新0/新before2開始）。[今回の固定計画](#analysis-mixed60-plan-20261102)。開始後は /workspace/analysis-mixed60-20261102/result/report.json と run.exit を先に確認して重複起動しない。前回の残件/採否は[LR1全結果](#analysis-unknown58-lr1-result-20261102)。**
 
 2026-11-01 JST。開始原本：Cocolon PR30 `1c66add4fdf8f5ded18f7443d6b91b1771998244`、API PR3 `36713940ea82e217fab8a7c0a738a33f21df1c4d`。Mashの分析残件開始とweekly§45.4に従う。Codex Work/GPT-6、root華恋が実装/統合/反映、別文脈agentはread-only監査のみ。独立Pro/Ultra又はhuman品質受入れとは呼ばない。System Context最新cacheは未成立のまま、fresh原本fallbackを使用。
 
@@ -687,3 +687,5 @@ CPUは全60targetのstrict束縛、実file write/read後の同process非生成re
 MD01は肯定本人行動と二不明、MD02は他者の否定行動と二不明を、教師と非同一の別fieldで見る。両方root作成の近接診断で、HQ03を見た後の設計。モデル未使用という状態と、盲検評価/一般転移の証明を混同しない。新MX2の教示再現、旧AT4/UQ2保持、HQ03/MD2の意味/明示主体/否定/各不明の正しい親を全文で確認する。旧16内のNV04/CQ04/SQ/PQ02/HQ04の時点・理由・modifier残件も追い、受理数/NLLだけで採用しない。意味不足/退行があれば通常未採用、原raw補修/受口緩和/再試行/追加epochを行わない。
 
 必要GPU/実装/GitHub反映はMashの現在の継続明示承認内、追加の承認待ちへ戻さない。既存Pod kvdyw8xtonhf5wをJupyter直接接続で使用し、新規Pod/チャージ/再起動/Stop/削除は0。前回観測$0.58/hなら処理按分上限$0.145（準備/回収/保持/通信/税等別、総請求保証ではない）。scopeは既存private契約内の内容比較（LEVEL_2相当）、actual execution ownerはCodex Work/GPT-6 root華恋、補助agentは同環境read-only監査。独立Pro/Ultra/human受入れを偽装しない。通常API/受口/意味型/DB/RN/Render/Supabase/依存/稼働/merge/deployを変更しない。STRUCTURE_MAP_DELTA_NONE、正式0/3・54.50％据置。完了は一候補の有限実行・全文比較・原本保存であり、商品完成は未認定。
+
+起動記録（mixed60）：GitHub f93be5ff固定版とPod上plan/runner/supervisor/prepare全SHAを照合して一回起動。初回reportはSTARTED/29.574631秒/更新0/新before2開始/1load。runtime /workspace/analysis-mixed60-20261102/result/report.json、親 /workspace/mixed60-supervisor.log。先にstatus/exitを確認し、完了や採用はまだ宣言しない。重複起動しない。
