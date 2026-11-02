@@ -2165,3 +2165,11 @@ adapterなし同revision/同messagesの4callを52.989783秒/1load/学習測定0�
 BT07の過去不明、BT08等のまだ否定、既存12理由/ので10/感情親1を確認。基本教材不存在を原因とせず、時間/修飾/原因→感情の複合薄さも唯一原因へしない。次は本結果checkpoint後、MD02/OA02文脈のactor姉/父×predicate参加/返送を同f982/89baで比較する有限12新生成/追加学習0/2load/300秒案を固定。元4保存結果再利用、6改変は旧62教師完全一致0、既見最小改変で盲検/教師/一般率へ換算せず、partial保全/延長再試行なし。ここは次診断未実行。
 
 [全結果・原本・次の実装順](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-other62-result-20261102)。処理按分約$0.07808@前回観測0.58/h、準備/回収/保持等別。Mashの継続明示承認内、Codex Work/GPT-6 root単一writerと同環境監査。通常source/受口/map/DB/RN/稼働/正式0/3・54.50％据置、STRUCTURE_MAP_DELTA_NONE。
+
+
+<a id="analysis-actor-predicate-plan-20261102"></a>
+### §77 主語/動詞/二不明文脈を追加学習なしで切り分ける有限診断
+
+other62全結果/270原本/112重みを3c6e7ff3で確定反映後、MD02/OA02各元文脈の姉/父×参加しなかった/返送しなかったを固定。元2source×2保存重みの4結果はmessages/ref/raw/report/admission/adapter/SHA照合再利用、残り6改変source×f982/89baの12新生成だけ。CPU8prepare/refと実tokenizer1004–1007prompt/context内を確認、旧62教師完全一致0、model0。OA02の既学習性を保持、近接最小改変で盲検/教師/一般率/単独原因ではない。
+
+同base/API/loader/2134source/pins/seed/23秒、学習0/2load/12call/300秒打切り（TERM290+10）。partial保全、延長/再試行/受口緩和なし。独立ACTION/actor/NEGATION/actor対象化/不明親を全文で判定する。HQ03退行/CQ04少し/HQ04理由は別追跡。GPUはここでは未実行。[固定計画/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-actor-predicate-plan-20261102)。Mash継続明示承認内、root単一writer/同環境read-only監査、通常source/map/DB/RN/稼働/正式0/3・54.50％据置、STRUCTURE_MAP_DELTA_NONE。

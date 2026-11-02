@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-**11/2・分析の最新（第9回§76）：** other62を68更新/124測定/3load/28stopで正常完了。AT4/UQ2/MX2を保持しOA2適合、OD02他者否定、CQ04過去不明、SQ03まだが局所改善。MD02の主体を対象へ置く誤り、HQ03主体qualifierの退行、CQ04少し/HQ04理由が残り通常未採用。全270原本/112重み保存、45candidate/3拒否を別CPU process照合済み。[全結果/原本/次の切分け](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-other62-result-20261102)。次は追加学習せずactor/動詞の最小改変を両保存重みで有限診断する。通常map/DB/RN/稼働/正式0/3・54.50％据置。
+**11/2・分析の最新（第9回§77）：** other62の68更新/28生成・全270原本/112重み保存・全結果反映を3c6e7ff3で完了。次のactor/predicate診断はCPU8source/ref/保存4結果/実tokenizer照合済み。2文脈の姉/父×参加/返送で元4結果を再利用し、6新source×f982/89baの12新生成だけ、学習0/2load/300秒打切りを固定。[計画と再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-actor-predicate-plan-20261102)。GPU未実行。通常未採用/通常map/DB/RN/稼働/正式0/3・54.50％据置。
 
 **11/1・分析4B接続のCPU最小準備を完了（[第9回§45](weekly_reviews/Cocolon_Weekly_Review_20261031.md#three-core-quality-priority-20261101)）：** Mashが7201の依頼修正を確認。架空の日常8例を現分析へCPU処理すると個別/一括ともmapなし（mapped0/未解析8）、既知対照追加では対照1件だけ2node。Pieceの同8例は原文保持の本文生成まで成立（新画像/本番検査ではない）。分析はCMEE接続済みだが4Bを呼ばない有限文法、Emlisのnatural本文から分析材料も未生成。次は分析を4Bへ接続して品質を育てる。後続§46でCPU最小受口/通常graph・保存再読を実装し、対象785件成功。完全fieldの分類候補で全件未解析を維持し、一般理解品質は未成立。次は実4Bの最大4生成・追加学習なしの確認でGPUが必要。詳細は[実行準備](observation_learning/trials/2026-11-01-analysis-model-fields/README.md)。Emlis/Pieceの残件と平日配分案・暫定完成度は§45、旧管理54.50％の確定改定ではない。§45の調査時点は製品/稼働/GPU変更0。§46で明示offline製品sourceを追加、通常稼働/GPU変更0。
 

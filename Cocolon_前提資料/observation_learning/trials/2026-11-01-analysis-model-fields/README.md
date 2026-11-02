@@ -1,6 +1,6 @@
 # Analysis — 最小field接続と実4B probe
 
-**11/2最新再開点：other62の68更新/28stopを正常完了。AT4/UQ2/MX2と新OA2を再現し、OD02他者否定/CQ04過去不明/SQ03まだが局所改善。MD02主体を対象へ置く誤り、HQ03主体qualifier退行、CQ04少し/HQ04理由が残り通常未採用。全270原本/112重み保存、45candidate/3拒否を別CPU process照合。[全結果・原本・次の切分け](#analysis-other62-result-20261102)。完了runを重複起動しない。**
+**11/2最新再開点：other62全結果/全270原本/112重み保存をGitHub3c6e7ff3で完了。次のactor/predicate診断はCPU8source/ref・保存再利用4結果・実tokenizer照合済み。両文脈で姉/父×参加/返送、6新source×保存f982/89ba=12新生成・学習0/2load/300秒打切りを固定。まだGPU未実行。[固定計画](#analysis-actor-predicate-plan-20261102)。通常未採用、完了other62を重複起動しない。**
 
 2026-11-01 JST。開始原本：Cocolon PR30 `1c66add4fdf8f5ded18f7443d6b91b1771998244`、API PR3 `36713940ea82e217fab8a7c0a738a33f21df1c4d`。Mashの分析残件開始とweekly§45.4に従う。Codex Work/GPT-6、root華恋が実装/統合/反映、別文脈agentはread-only監査のみ。独立Pro/Ultra又はhuman品質受入れとは呼ばない。System Context最新cacheは未成立のまま、fresh原本fallbackを使用。
 
@@ -753,3 +753,17 @@ GitHub65080728固定版を一回、68更新/124測定/3load/28stopで正常完�
 次の実装順：まず本結果/原本をGitHub checkpoint。その後MD02文脈とOA02文脈それぞれで姉/父×参加しなかった/返送しなかったの2×2を作り、元2source×両重みの4保存結果を照合再利用し、残り6改変source×f982/89baだけ12新生成（追加学習0/2loads/300秒打切り）で比較する案を固定する。unknown周辺/行動位置は各文脈で不変、6改変は旧62教師との完全一致0。既見最小改変なので盲検でも新教師でもなく、token単独原因/一般他者理解へ換算しない。上限は完走保証でなくpartialも保全、延長/再試行しない。主語/否定rootと不適切targetを別々に全文で読む。HQ03退行/CQ04少し/HQ04理由は別追跡。ここでは次GPU診断未実行。
 
 処理按分約$0.07808@前回観測0.58/h（準備/回収/保持/通信/税等別、現在単価未再照会）。Codex Work/GPT-6 root単一writer/同環境read-only監査、独立Pro/Ultra/human商品受入れではない。Mashの必要GPU/実装/GitHub継続明示承認内で実行/保存。通常source/受口/API/DB/RN/Render/Supabase/稼働/merge/deploy/Pod管理操作0。全unparsed/actor未解決/route0、正式0/3・54.50％/candidate_ready=false据置、STRUCTURE_MAP_DELTA_NONE、BLOCKER_NARROWED。
+
+
+<a id="analysis-actor-predicate-plan-20261102"></a>
+## 主語/動詞/元文脈による偏りを追加学習なしで比較する診断
+
+other62の全原本/全結果を3c6e7ff3で保存・全byte/親/path/head照合後、MD02失敗/OA02成功の差を直接切分ける。MD文脈は予約/会議の二不明の間、OA文脈は集荷/伝票の二不明の間で、主語姉/父×動詞参加しなかった/返送しなかったの2×2。各文脈内の周囲/位置/句点を固定する。AD01は元MD02、AD08は元OA02。AD02/03/04/05/06/07だけ新改変。元2source×2重みの4保存結果を同messages/ref/raw/adapter/report/admission/SHAで再利用し、不足6source×2重みだけ12新生成する。OA02原文は既学習教材であることもprior_teacher_sourceへ保持。新source6は互いに異なり、旧62教師全field textとの完全一致0。
+
+CPU8prepare/ref/messages、再利用4結果の原bytes/hashとcandidate有無、固定実tokenizerを照合。prompt1004–1007/context8192、新tokens2048内、モデルload/新生成/更新0。plan d40ffd4ed65f78faf8f163c115f36c1786e2f1298293939364baf0697345c77d。prepare/run/plan/cpuをGitHub checkpointしてから実行する。
+
+保存f982/configcc219と89ba/configb357ff96を診断のみに明示使用、loader722525c2/API86d19b6d/source2134/同Qwen3.5-4B851bf6e/pins/seed20261110/nonthinking/greedy/各23秒を維持。追加学習/target/optimizer0、最大2load/12新call/process300秒、外側TERM290+kill10。前回0.58/hなら処理上限約$0.04833、準備/回収/保持等別。300秒は完走保証ではなくpartial打切り上限。partialも原本保存、延長/再試行/出力補修/受口緩和なし。新Pod/チャージ/停止操作なし。
+
+独立全文ACTION root・actor/NEGATION qualifier・actorの不適切target化・二不明の親対応を全16保存出力から別々に読む。構造受理≠意味成功。既見の最小改変であり、盲検/新教師/一般正解率/単独token原因/学習機構の証明にしない。HQ03主体qualifier退行、CQ04少し、HQ04理由は別追跡であり、この診断だけで解消したとはしない。
+
+実装順：固定GitHub→同Jupyterでsource/2重み/reuseを照合して一回起動→全raw読解/保存reader/全原本bytes-SHA照合/private保存→本文なし結果/current/weekly/file地図GitHub反映。先に `/workspace/analysis-actor-predicate-20261102/report.json` と `run.exit` を確認し重複起動しない。現時点GPU未実行。Mashの必要GPU/実装/GitHub継続承認内。Codex Work/GPT-6 root単一writer＋同環境read-only監査、独立Pro/Ultra/human受入れではない。通常source/受口/map/API/DB/RN/Render/Supabase/稼働/merge/deploy0、正式0/3・54.50％、全unparsed/actor未解決/route0、STRUCTURE_MAP_DELTA_NONE。
