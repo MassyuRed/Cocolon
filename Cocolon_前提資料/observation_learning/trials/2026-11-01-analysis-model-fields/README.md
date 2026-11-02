@@ -1,8 +1,10 @@
 # Analysis — 最小field接続と実4B probe
 
-**11/2の割込み修正：** Mashの指示で観測会を止め、わたしマップの選択カテゴリ接続を修正。新しいカテゴリ付き4B準備は[今回の版分離](#analysis-selected-category-context-20261102)を参照。旧runのmessages/ref/raw/教師は旧版のまま保持し、下記のGPU結果/不採用をリセットしない。
+**11/2・残件全体との接続（第9回§82）：** このtrialは、既存CMEEへ普通の文章の意味を渡すための局所読解研究。既存の材料定義・本人基準・役割/判断/選択・記録間関係という目的は[Analysis mapの継承/未達/次の接続](../../../current_structure/03_analysis_current_structure.md#analysis-material-to-route-continuity-20261102)へ戻る。引用・否定・時点・scope・親対応の成果と保存原本は継承するが、全未解析/主体未解決/route0のprivate候補は通常分析の完成ではない。Mashが申し出ている観測会で読み取り方を収集し、実演と華恋の合成教師の由来を分けて既存未達へ照合する。今回の整理で既存教師/重み/評価/rawを変更せず、未実行のSC6/GPU案を自動実行しない。
 
-**11/2最新再開点：other62の68更新/28生成と、actor/predicate診断の追加学習0/12生成を完了。全270＋66原本/112重み保存、全48＋16応答の保存再読・意味監査済み。改善は動詞×元文脈に限られ、actor名だけでは説明できず通常未採用。次の2文脈×否定/肯定/名詞対象SC6をstrict/実file非生成再読/実tokenizerまでCPU確認（モデル0）。[診断全結果/原本/次の実装順](#analysis-actor-predicate-result-20261102)。完了runを重複起動しない。**
+**11/2の割込み修正（経緯を訂正）：** Mashのカテゴリ接続修正指示に対して、華恋が観測会を止めて実装した。Mashの観測会終了指示ではない。わたしマップの選択カテゴリ保持・集約・表示の修正は、役割や選択傾向の意味分析完成と区別する。新しいカテゴリ付き4B準備は[今回の版分離](#analysis-selected-category-context-20261102)を参照。旧runのmessages/ref/raw/教師は旧版のまま保持し、下記のGPU結果/不採用をリセットしない。
+
+**11/2・局所読解試行の再開点：other62の68更新/28生成と、actor/predicate診断の追加学習0/12生成を完了。全270＋66原本/112重み保存、全48＋16応答の保存再読・意味監査済み。改善は動詞×元文脈に限られ、actor名だけでは説明できず通常未採用。次の2文脈×否定/肯定/名詞対象SC6をstrict/実file非生成再読/実tokenizerまでCPU確認（モデル0）。[診断全結果/原本/次の実装順](#analysis-actor-predicate-result-20261102)。完了runを重複起動しない。**
 
 2026-11-01 JST。開始原本：Cocolon PR30 `1c66add4fdf8f5ded18f7443d6b91b1771998244`、API PR3 `36713940ea82e217fab8a7c0a738a33f21df1c4d`。Mashの分析残件開始とweekly§45.4に従う。Codex Work/GPT-6、root華恋が実装/統合/反映、別文脈agentはread-only監査のみ。独立Pro/Ultra又はhuman品質受入れとは呼ばない。System Context最新cacheは未成立のまま、fresh原本fallbackを使用。
 
