@@ -2076,3 +2076,8 @@ quote_first指示単独はDEV構造3/8（旧6/8）、学習済構造2/4/教示�
 ### §66 親quoteの新private契約をCPU実装、旧互換と同内容再読を確認
 
 API86d19b6d、新exact Input/Response/別profile/ref/schema/state/file、parent_quote exact1→source由来内部位置、既存graph/compiler/唯一realizer、service専用4関数/Engine明示dispatchを実装。旧raw修復/旧Response迂回/旧wire緩和なし。新47含む6file171PASS3WASM SKIP＋旧P5別112PASS＝重複なし283PASS3SKIP。旧87保存payloadを非生成/非compile/非author再読しref/messages/ID/coverage/元bytes保持。旧56合成teacherの親指定だけ新形式へ派生し、全56のfield内容/文章/図/coverageを完全保持、新save/reload一致。新9unit/7qualifier fileも別process再読一致。新形式実4B/学習0、次は実tokenizer長と旧40保持条件を含む有限比較を具体化。親の意味選択/引用一意性/旧保持は残件。設計/全file/structure地図を更新、通常map/DB/RN/稼働/merge不変、正式0/3・54.50％据置。詳細と全pathはtrial最新CPU節。STRUCTURE_MAP_DELTA_PRESENT。
+
+
+### §67 親quote新形式の実tokenizer確認と一回比較の具体化
+
+API86d19b6dの新契約で旧56意味targetを各1回/56更新、b8b7初期値、旧40とNT/ST交互、objective/LR/strict受口不変。既存26＋複数不明/反復句PQ2の全28入力をnew-wireでbefore/after＝56新生成、旧raw変換/新before再利用0。実tokenizer84messages/56終端完全一致、最大prompt1029/full1270/target246/prompt+2048=3077、5.601360秒/モデル学習生成0/compute空。3load/112測定、最大1200秒/按分上限$0.19334@0.58（保持等別）。具体順序と停止/採否はtrial最新計画。新形式の前後NLLは旧40/NT/ST別、旧wireと直接比較せず全rawを読む。必要作業はMash継続承認内、通常map/API/DB/RN/稼働不変、正式0/3・54.50％据置。ここは準備でモデル未実行。

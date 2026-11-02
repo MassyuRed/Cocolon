@@ -1,6 +1,6 @@
 # Analysis — 最小field接続と実4B probe
 
-**最新：11/2、56教材の64更新/30生成と原本保全を完了後、親を逐語quoteで指定する別private契約をAPI86d19b6dへCPU実装。対象283PASS/3WASM SKIP、旧実87保存payload再読、新56派生は旧field/文章/図/coverageを保持。[最新CPU結果と再開点](#analysis-quoted-parent-units-cpu-20261102)。新形式の実4Bは未検証、旧候補も通常未採用。**
+**最新：11/2、親quote新形式の実tokenizer確認完了。56派生を各1回、同28入力の新wire前後56生成で親の意味選択と旧保持を比較する一候補を準備。[実行計画](#analysis-parent56-plan-20261102)。前CPU契約はAPI86d19b6d、通常未採用・完了run再実行なし。**
 
 2026-11-01 JST。開始原本：Cocolon PR30 `1c66add4fdf8f5ded18f7443d6b91b1771998244`、API PR3 `36713940ea82e217fab8a7c0a738a33f21df1c4d`。Mashの分析残件開始とweekly§45.4に従う。Codex Work/GPT-6、root華恋が実装/統合/反映、別文脈agentはread-only監査のみ。独立Pro/Ultra又はhuman品質受入れとは呼ばない。System Context最新cacheは未成立のまま、fresh原本fallbackを使用。
 
@@ -547,3 +547,23 @@ API `86d19b6d834676a602b036c89357dfed1003bb2b`、新profile `analysis_model_unit
 新形式の実4B生成/学習は0。親番号の算術を外せても、誤った親quoteの選択、親quoteコピー、反復語の一意引用、理由/修飾scope、旧教材保持の問題は自動では直らない。次はこの56派生targetと元checkpointを使い、実tokenizerでcontext/終端長を確認し、旧40保持を採否条件にした新形式の有限比較を具体化する。新指示だけを現adapter互換と仮定せず、完了済み0e7へepochを重ねない。必要作業はMashの継続承認内で、再承認を待つ作業ではない。
 
 通常map/本番DB/Render/RN/merge/deploy/Pod Stop等0、正式0/3・54.50％据置。今回追加は新private受領契約のCPU接続でSTRUCTURE_MAP_DELTA_PRESENT、GPU実結果の意味品質・商品受入れは未達。設計01/04/05/06・全file地図01A/01B/全体図・current Analysis/CMEE mapを差分更新する。
+
+
+<a id="analysis-parent56-plan-20261102"></a>
+## 次の実4B比較 — 親quote新形式で56教材を均等に一回
+
+[実行plan](semantic_units_parent56_plan.json)/[runner](semantic_units_parent56_run.py)/[実tokenizer計測](semantic_units_parent56_tokenizer.json)。API86d19b6d/Cocolon8077e2a8の新private契約を使用する。全体現在地全文、恒久incident、Karen-Diary、current rules/Rule18、全体図/全file地図01A–C・Analysis/CMEE map・設計04と最新weekly§66を確認。System Context最新cacheは未成立のためfresh原本直接読取を継続し、古い索引をcurrent扱いしない。Codex Work/GPT-6、root華恋がsingle writer/execution owner、別文脈agentはread-only監査。独立Pro/Ultra/human受入れとは呼ばない。
+
+目的は、理由/対象/否定の内容改善を保ちながら、モデルが親の全unit番号を数える責務を外した新形式の実出力を確認すること。既存新56派生は旧56合成教師の意味と原sourceを保持した形式版で、Mashの実教師・56の新意味教材ではない。初期値は旧AT4保持の良い保存b8b7とし、退行6152/0e7を自動で重ねない。56targetを各1回、旧40とNT/STを交互に混ぜる固定56update。full-target weightedCE/LR5e-5/clip1/終端込み/prompt全masked、base4B/revision/SDPA/BF16/112F32/3,833,856parameterは従来どおり。今回は新教材だけを重くせず、objective等も同時に変えない。
+
+全26既存入力（DEV8/旧AT4/CQ4/DQ4/NT2/SQ4）を新wireでbefore/after各一回。さらにPQ01は二つの異なる本人不明rootへの意味対応、PQ02は『分からない』の反復で一意引用を選べるかを別sourceで確認する。既存26は既見開発/再現、PQ2も近接架空診断であり、盲検/一般品質受入れではない。親quoteは構造上有効でも別の不明内容へ誤接続し得るため、全rawを原文ごとに読む。PQで全文不明rootを選び子を出さない場合は、有効な場合でも親の指定精度を証明したとは扱わない。新ST8自身の自由生成は含まれず、NLLを自由生成再現へ換算しない。
+
+旧wireとはmessages/ref/schema/stateが異なるため、旧実rawを新beforeへ変換・再利用しない。全28のnew-wire before→56更新/同56NLL前後112測定→112tensor保存/実model一致/非学習reload→全28after、計56新生成/3load以内。模型の指示・rawを補修せず、new exact responseからnew prepare/build/serialize/reloadだけへ入れる。旧state/候補file/通常mapを変更しない。before/afterの新target NLLは旧40/NT8/ST8で別集計し、旧整数wireのNLLと直接比較しない。旧AT4の意味/引用一意性、主体/否定/時点/理由範囲/不明内容/親の選択を別々に読み、退行なら通常未採用として事実を保持する。構造件数や平均lossだけで採用しない。
+
+固定同revisionの実AutoTokenizerで84messages/56全targetを計測済み。最大prompt1029、target246、全教師1270、prompt+生成枠2048の最大3077で全て8192内。全prompt prefix/実終端<im_end>とnewlineまで一致、切捨てなし、5.601360秒、model load/学習/生成0、終了compute-apps空。これはtokenizerの前提確認で、4B品質の成果ではない。
+
+model processは最大1200秒（外TERM1190+kill10）、各call23秒/context8192/max2048/nonthinking/greedy、同観測$0.58/hの処理按分上限$0.19334（準備/回収/保持/通信/税等別）。必要なGPU使用/実装/GitHub途中反映はMashの現行継続指示で承認済み。新しいPod/料金/チャージは追加せず、同じJupyterの既存GPUだけで実行する。
+
+実装順：56targetの新受口CPU束縛・PQ非同一→実tokenizer確認→plan/run/計測/実装順をGitHub checkpoint→既存API filtered2134 sourceを全SHA照合し、86dの既存3production fileだけを新runtimeへ明示差替え（旧runtime不変）→固定b8b7で上の一候補→全56raw/同candidate非生成再読/全重み回収→結果を同trial/weekly/全体現在地へ反映。runtime manifestと旧API156からの3差分を原本に含め、完全Git checkoutと呼ばない。新testはGPU runtimeには不要で、source commit/CPU結果から参照する。
+
+停止は固定上限、source/依存/初期重み不一致、非有限/実行失敗で、再試行・追加epoch・cap延長を自動で行わない。意味退行を新データ作成や受口緩和で覆わず、原本から次を判断する。今回の直接作業は有限の4B内容比較、実機確認/追加観測会は不要。通常ObservedGraph/HTTP/DB/RN/Render/merge/deploy/IF/Savedは変更0、正式0/3・54.50％据置。STRUCTURE_MAP_DELTA_NONE（新契約自体は前回PRESENT、今回は同owner/同契約の学習比較）。この節は実行準備で、モデル学習/新56生成は未実行。
