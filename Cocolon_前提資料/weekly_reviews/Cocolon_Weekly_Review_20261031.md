@@ -2141,3 +2141,13 @@ adapterなし同revision/同messagesの4callを52.989783秒/1load/学習測定0�
 全60教材では明示他者の独立否定ACTION自体が0だった（肯定他者ACTION6、発話内容の否定/他者否定思考は別）。別題材OA01/02の他者非行動＋二不明を、主体/否定は独立ACTION rootへ、不明内容は各一意全文rootへというCPU教材にした。旧60/受口不変、両5unit strict/実file write-read後同process非生成reload/ID・coverage一致、モデル0。MD02を見た後の1題材2順序であり、唯一原因・独立2題・一般理解成功ではない。次は旧60保持とこの2targetの有限比較条件を固定し、CQ04/SQ03/HQ04は別に追う。
 
 [全結果・原本・実装順/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-mixed60-result-20261102)。直接ZIP download timeout後、既存text/数値tensor回収で元member全一致の再圧縮archiveを保存。GPU再実行ではない。処理按分約$0.06721@前回観測0.58/h、準備/回収/保持等別。通常source/受口/API/DB/RN/Render/Supabase/稼働/merge/deploy/Pod管理操作0、正式0/3・54.50％据置。STRUCTURE_MAP_DELTA_NONE、BLOCKER_NARROWED。Codex Work/GPT-6 root単一writerと同環境read-only監査、独立Pro/Ultra/human受入れではない。Mashの必要作業/GPU/GitHub継続明示承認内で実行・保存。
+
+
+<a id="analysis-other62-plan-20261102"></a>
+### §75 他者否定ACTIONのroot主語/否定を旧60保持と有限比較する準備
+
+最新PR30 fd809ea2/API3 86d19b6d/PR37 99f925ec、全体設計/全file地図/全機能current全文/対象map/設計/目的と§74を再確認。保存mixed60 f982を明示初期値として旧60各1＋他者否定OA2各4=68更新、固定初出順＋交互挿入/最後旧12、同seed/LR1e-5/完全target CE/終端/clipの一候補を具体化。新62targetはstrict束縛/実file非生成再読/ID・coverage/実tokenizer終端が全一致、最大1028prompt/1270full/246target。モデル0。旧20評価の既見ラベルをtrueへ整合した。
+
+旧20beforeは同f982 after原本から照合再利用、新OA2/肯定他者OD01/否定他者OD02 before4＋全24after=28新生成、124測定/3load/process900秒（TERM890+10）。旧AT4/UQ2/MX2保持とMD02/ODの主語/否定/親scope、CQ04/SQ03/HQ04を全文で判定する。OA2はMD02後の1題材2順序、OD2はroot近接診断で盲検品質ではない。意味不足/退行は通常未採用、補修/受口緩和/再試行/追加epochなし。ここはGPU未実行。
+
+[固定計画/実装順/限界](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-other62-plan-20261102)。Mashの必要GPU/実装/GitHub継続明示承認内、Codex Work/GPT-6 root単一writer＋同環境read-only監査、独立Pro/Ultra/human受入れではない。前回単価0.58なら処理按分上限$0.145、準備/回収/保持等別。通常source/受口/map/DB/RN/稼働/正式0/3・54.50％据置、STRUCTURE_MAP_DELTA_NONE。

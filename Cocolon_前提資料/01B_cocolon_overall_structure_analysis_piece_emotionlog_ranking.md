@@ -3175,3 +3175,6 @@ API86d19b6d、STRUCTURE_MAP_DELTA_PRESENT。通常の累積mapは不変。新ana
 
 
 11/2 mixed60のtrial file地図（同trial配下・商品runtime owner追加なし）：`semantic_units_mixed60_prepare.py`は旧58不変＋MX2/MD2のCPU束縛/保存再読/実tokenizer、`semantic_units_mixed60_plan.json`は60教材/20評価/固定66順/上限、`semantic_units_mixed60_cpu.json`は実確認結果、`semantic_units_mixed60_run.py`は一候補の有限GPU比較、`semantic_units_mixed60_supervisor.py`は既存source/初期値/旧16before照合・CPU候補と全原本/重み回収。実結果は`semantic_units_mixed60_results.json`、保存reader検証は`semantic_units_mixed60_saved_replay.py/json`、次のCPU教材は`semantic_units_other_actor_cpu_run.py`と`semantic_units_other_actor_cpu.json`（root合成2例と同保存payload）。意味と次の再開点はtrial README#analysis-mixed60-result-20261102/weekly§74。STRUCTURE_MAP_DELTA_NONE（既存private内容比較の実験file案内）。
+
+
+11/2 other62のtrial file地図（同trial配下）：`semantic_units_other62_prepare.py`は旧60不変＋OA2/OD2のCPU束縛/実保存非生成再読/実tokenizer、`semantic_units_other62_plan.json`は62教材/24評価/68順/初期f982/上限、`semantic_units_other62_cpu.json`は62件実確認、`semantic_units_other62_run.py`は68更新/新28生成の一候補、`semantic_units_other62_supervisor.py`はsource2134/loader/初期値/旧20before照合と全原本/112重み回収。trial README#analysis-other62-plan-20261102/weekly§75。GPUは準備時点未実行、STRUCTURE_MAP_DELTA_NONE（商品runtime owner追加なし）。

@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-**11/2・分析の最新（第9回§74）：** mixed60を66更新/24stopで正常完走。旧AT4=4/4・UQ2=2/2・MX2=2/2を保持し、本人行動＋二不明、朝夜/否定/親scope、過剰modifierに局所改善。一方、他者の否定行動の主体scope、不明→理由の誤分類、時間修飾欠落/理由未反映が残り通常未採用。全233原本/112重み保存、34candidate/6拒否の別CPU process照合済み。旧60に明示他者の独立否定行動教材0を確認し、別1題材2順序OA2をstrict CPU束縛/実file同process非生成再読（モデル0）まで具体化。[結果/原本/次の再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-mixed60-result-20261102)。完了run重複起動不要。通常map/DB/RN/稼働/正式0/3・54.50％据置。
+**11/2・分析の最新（第9回§75）：** mixed60で残った他者否定行動の主語/否定scopeに対し、旧60完全不変＋別1題材2順序OA2をCPU62教材でstrict束縛/実file非生成再読/実tokenizer照合済み。保存f982から68更新、旧20before原本再利用＋新4before/全24after=28新生成、124測定/3load/900秒の一候補を固定。ここはGPU未実行。[計画と再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-other62-plan-20261102)。肯定/否定別例とAT4/UQ2/MX2保持、不明→理由/時点修飾/理由を全文で評価する。通常map/DB/RN/稼働/正式0/3・54.50％据置。
 
 **11/1・分析4B接続のCPU最小準備を完了（[第9回§45](weekly_reviews/Cocolon_Weekly_Review_20261031.md#three-core-quality-priority-20261101)）：** Mashが7201の依頼修正を確認。架空の日常8例を現分析へCPU処理すると個別/一括ともmapなし（mapped0/未解析8）、既知対照追加では対照1件だけ2node。Pieceの同8例は原文保持の本文生成まで成立（新画像/本番検査ではない）。分析はCMEE接続済みだが4Bを呼ばない有限文法、Emlisのnatural本文から分析材料も未生成。次は分析を4Bへ接続して品質を育てる。後続§46でCPU最小受口/通常graph・保存再読を実装し、対象785件成功。完全fieldの分類候補で全件未解析を維持し、一般理解品質は未成立。次は実4Bの最大4生成・追加学習なしの確認でGPUが必要。詳細は[実行準備](observation_learning/trials/2026-11-01-analysis-model-fields/README.md)。Emlis/Pieceの残件と平日配分案・暫定完成度は§45、旧管理54.50％の確定改定ではない。§45の調査時点は製品/稼働/GPU変更0。§46で明示offline製品sourceを追加、通常稼働/GPU変更0。
 
