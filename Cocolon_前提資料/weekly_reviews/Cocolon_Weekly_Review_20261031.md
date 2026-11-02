@@ -2286,3 +2286,15 @@ Codex Work/GPT-6 root単一writer＋同環境read-only確認。独立Pro/Ultra/h
 別CPU processで64応答59candidate ID/coverage一致・5拒否維持、新load/生成/更新0。元run268/manifest267、source276member/112重みbytes-SHA全一致、元report PENDING_RAW_READ bytes保全。[private原本](https://chatgpt.com/library?file_id=libfile_ceb97f613864819184a52359ae56affc&account_id=personal)は14,889,669bytes/SHA4ef5a91abc74c28ad78c8f8f88b3ab38fa19b9b0873ec72c85383c8481716427/281member、ZIP containerのみ再圧縮。§85の中間新18callは華恋の画面誤読で実1callへ訂正、ユーザー途中報告も訂正済み。最終32callは原report/rawで別照合、訂正の追加生成0。
 
 次CPUは不明親一意性・継続修飾・否定ACTION/名詞対象を既存教材から一候補へ具体化。明記理由/修飾scopeは別追跡。次初期/dose/順/保持/近接/cap固定前の次GPU未選定、完了run再起動/延長/追加epoch/補修/受口緩和なし。本人基準の役割/判断/選択・記録間関係と通常graph接続を既存目的として継承。通常source/API/DB/RN/Render/Supabase/稼働/配置/Pod管理0、全未解析/主体未解決/route0・通常未採用、正式0/3・54.50％据置。処理按分約$0.079824@前回確認$0.58/h、準備/回収/保持等別。STRUCTURE_MAP_DELTA_NONE。全体現在地/全file地図/Analysis map/trial同期。Codex Work/GPT-6 root単一writer＋同環境read-only確認、独立Pro/Ultra/human受入れではない。
+
+
+<a id="analysis-replay68-plan-20261103"></a>
+### §87 既存68教材の再掲3枠だけを変える一回比較を固定
+
+[固定条件・3位置・コード・再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-replay68-plan-20261103)。CE68結果はfb496665で既存8fileへ反映し、全blob全文・変更path・親・Draft headを遠隔照合。中断していた最終反映を完了し、中間18→実1件も§85へ訂正した。
+
+次は初期89ba/同68教師/同plain CE・74更新中35SC01→UQ01、40SC02→BT08、55SC05→ST07だけ変更。全68>=1、SC03/04/06各2、最後14旧教材不変。既に正しい3例の二回目を、不明親一意性/継続修飾+否定の既存対比へ移す。新教師/原raw改変なし。MD02改善は約束せず別読解、理由/修飾scopeも別追跡。
+
+同Jupyter CPUで267原manifest/全68辞書/3位置/全74順/before32の要求・raw・89ba proof一致を確認、model/生成/更新0。固定GitHubコード照合後に一回実行する。74更新/136測定/2load/after32、720秒(710+10)、前回確認$0.58/hなら処理上限按分$0.116・準備/取得/回収/保持別。更新前NLL差/dropout0 guardを継承。再開時はまず /workspace/analysis-replay68-20261103/result/report.json/run.exit、重複起動/延長/再試行/受口緩和/出力補修なし。
+
+通常source/API/DB/RN/Render/Supabase/稼働/配置/Pod管理0、全未解析/主体未解決/route0・通常未採用、正式0/3・54.50％据置、STRUCTURE_MAP_DELTA_NONE。本人基準の役割/判断/選択・記録間関係・通常graph接続が既存目的。Codex Work/GPT-6 root単一writer＋同環境read-only静的確認、独立Pro/Ultra/human受入れではない。

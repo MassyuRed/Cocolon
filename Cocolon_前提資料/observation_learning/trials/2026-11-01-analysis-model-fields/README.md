@@ -916,3 +916,25 @@ CE68は同68教材/同74順・初期89baから既存plain CEで74更新/32新sto
 次CPUは改善を保ち、不明親の一意性・継続修飾・否定ACTION/名詞対象を既存教材対比から一候補へ具体化する。新rawを正解へコピーせず、受口緩和/補修/追加epoch/完了run再起動なし。初期/dose/順/保持probe/近接対照/cap固定前の次GPUは未選定。再開時は先に本結果と/workspace/analysis-ce68-20261103/result/report.json/run.exitを確認する。
 
 処理按分約$0.079824@前回確認$0.58/h、準備/回収/転送/保持/税等別。Pod停止/削除/再起動/チャージ0。通常source/API/DB/RN/Render/Supabase/配置/merge0、全未解析/主体未解決/route0・通常未採用、正式0/3・54.50％据置、STRUCTURE_MAP_DELTA_NONE。Codex Work/GPT-6 root単一writer＋同環境read-only確認、独立Pro/Ultra/human受入れではない。本人基準の役割/判断/選択→既存五種/注記/不明→記録間の再出現/変化→通常graph/保存/補足/月次比較という既存目的を継承し、局所成功で分析全体の完成にしない。
+
+
+<a id="analysis-replay68-plan-20261103"></a>
+## 11/3 — 同68教材の再掲3枠だけを変える比較
+
+CE68で生じたOD01の不明親曖昧とSQ03継続修飾欠落を、既存教材で改善する一候補。初期89baから同plain CE、68source/messages/targetsを辞書同一で維持。新b2a5へ追学習せず、診断rawを教師化しない。
+
+| 74更新中の位置 | 旧再掲 | 新再掲 | 狙い |
+| --- | --- | --- | --- |
+| 35 | SC01 | UQ01 | 二不明の全文親を一意に保持 |
+| 40 | SC02 | BT08 | 継続修飾と否定を同時に保持 |
+| 55 | SC05 | ST07 | 内容対象を分けた継続修飾/否定保持 |
+
+SC01/02/05は89baでも教師同値で、二回目の3枠だけを移す。初期未達SC03/04/06は各2回、全68は少なくとも1回、計74、最後14旧教材は順まで不変。MD02の否定ACTION/名詞対象対比はSC04とSC03/06に既存で、本案による改善を約束せず別に読む。HQ04理由/MD01修飾scopeも別追跡。
+
+CPUで旧267manifest・同68辞書・変更3位置・全68>=1・最後14同一・before32の原request/ref/messages/raw/adapter89ba proofを照合。prepareのmodel/新生成/更新0。初期89baとplain CE・LR1e-5/seed20261110/clip1/prompt全mask/full assistant/EOS/生成条件不変。before32はCE68保存89baを再利用、新生成はafter32だけ。更新前68NLLのCE68beforeとの差<=1e-6とDropout module/attention/LoRA dropout0を要求する。
+
+上限74更新/136測定/2load/32新生成、内部720秒/外側TERM710+kill10、前回確認$0.58/hなら処理按分上限$0.116（準備/転送/回収/保持等別）。延長/再試行/受口緩和/出力補修/追加epochなし、partial保全。一回のdose/order比較であり唯一因果の証明や一般意味品質へ拡張しない。固定コード照合後に同Jupyterで一回実行する。
+
+再開時は /workspace/analysis-replay68-20261103/result/report.json とrun.exitを先に確認し、作成済みrootへ重複起動しない。完了CE68は閉鎖のまま。全32を89ba/CE68/原sourceまで読み、SC6/AT4/UQ2/MX2/OA2保持とOD01/SQ03/MD02/HQ03/CQ04/HQ04を別判定、64保存再読と全member/112重みbytes-SHAをprivate保存する。
+
+通常source/API/DB/RN/Render/Supabase/稼働/配置/Pod管理不変、全未解析/主体未解決/route0・通常未採用、STRUCTURE_MAP_DELTA_NONE。本人基準の役割/判断/選択・記録間の再出現/変化・通常graph接続を既存の目的として継承し、この局所比較だけを全体完成へ換算しない。Codex Work/GPT-6 root単一writerと同環境read-only静的確認、独立Pro/Ultra/human受入れではない。
