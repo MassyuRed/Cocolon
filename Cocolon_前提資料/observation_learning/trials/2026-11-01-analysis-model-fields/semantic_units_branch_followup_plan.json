@@ -18,7 +18,6 @@
   "method": "Encode the exact raw-text prefix separately, then rank the first token of each separately encoded continuation. Concatenated decoded IDs must equal the proposed text. This fixed-text-prefix experiment resolves a limitation of the first LCP comparison, not original generation-token recovery or full continuation scoring.",
   "limits": [
     "BF16 SDPA forward is not the original KV-cached generation replay.",
-    "The last NV01 branch deliberately changes only an earlier parent in its prefix; it is a counterfactual measurement, never a repaired admitted output.",
     "Carrier alternatives are structural hypotheses; no completed semantic graph is asserted.",
     "Do not add epochs/data/generation automatically. No normal adoption or source/receiver change.",
     "First comparison copy-path token RETE can also continue literal ITA, and carrier token WR is shared with valid WRITTEN_REASON. Neither proves an entire invalid continuation. This followup measures the repeated syllable and later carrier suffix directly."
