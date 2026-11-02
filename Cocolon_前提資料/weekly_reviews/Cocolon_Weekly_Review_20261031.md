@@ -2267,8 +2267,22 @@ Codex Work/GPT-6 root単一writer＋同環境read-only確認。独立Pro/Ultra/h
 
 [固定条件/コード](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-ce68-plan-20261103)。scope68の時制改変・余分な動詞語幹対象・修飾欠落を既存68教師と照合し、教師不存在とはしない。初期89ba、同source/messages/targets/74順/LR/seed/clip/全assistant/EOS/prompt maskを保持し、既存plain CE経路だけを選ぶ。旧6964へ追学習しない。before32を原request/ref/messages/raw/report/manifest照合で再利用し、新生成はafter32のみ。
 
-固定Cocolon e92c1211の全4blob全文と親/変更pathを読み戻し、同Jupyter上の3script blob一致後に一回起動。CPUで同68teacher/74order/before32一致、更新前68NLL差0、実Dropout全p0・attention_dropout0・LoRA dropout0を確認。74更新/136測定/2loadが完了し、150.368347秒時点で新18call、status STARTED/実行中。ここは生成/意味読解/保存完了を宣言する記録ではない。
+固定Cocolon e92c1211の全4blob全文と親/変更pathを読み戻し、同Jupyter上の3script blob一致後に一回起動。CPUで同68teacher/74order/before32一致、更新前68NLL差0、実Dropout全p0・attention_dropout0・LoRA dropout0を確認。74更新/136測定/2loadが完了し、150.368347秒時点で新1call、status STARTED/実行中。ここは生成/意味読解/保存完了を宣言する記録ではない。
 
 上限74更新/136測定/2load/32新生成、内部720秒・外側TERM710+kill10、前回確認$0.58/hなら処理按分上限$0.116（準備/取得/転送/保持別）。延長/再試行/補修/受口緩和なし。再開時は先に /workspace/analysis-ce68-20261103/result/report.json とrun.exitを確認し重複起動しない。完了後は32原文照合、保存64応答の非生成再読、全member/112重みbytes-SHAとprivate原本保存へ進む。
 
 本人基準の役割/判断/選択・既存五種/注記/不明・記録間関係と通常graphへの接続という目的を継承する。局所学習比較で全体完成とはしない。通常source/API/DB/RN/Render/Supabase/稼働/配置/Pod管理変更0、全未解析/主体未解決/route0・通常未採用、正式0/3・54.50％据置。Codex Work/GPT-6 root単一writer＋同環境read-only監査で独立Pro/Ultra/human受入れではない。STRUCTURE_MAP_DELTA_NONE。
+
+
+<a id="analysis-ce68-result-20261103"></a>
+### §86 CE68比較完了 — 時制/語幹退行の抑制と新しい親曖昧退行
+
+[全条件・結果・原本・再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-ce68-result-20261103)。CE68は同68教材/同74順・初期89baから既存plain CEで74更新/32新stop、495.459095秒で完了。SC6教師一致6/6、AT4/UQ2/MX2/OA2も全一致。weightedの時制改変4件と印刷/返送の余分な対象化は消えた一方、OD01の不明親曖昧という新退行、SQ03の継続修飾欠落、MD02否定不足/対象化、HQ04理由等が残り通常未採用。
+
+固定e92c1211、before32保存原本の全identity照合で再利用、新生成はafter32のみ。更新前68NLL差0/全Dropout・attention・LoRA dropout0、同68教師/74順/LR/seed/clip/全assistant/EOS/prompt mask。74更新/136測定/2load/32stop、495.459095秒（親496.804880）/exit0。新b2a5/config1076は112有限F32/3,833,856paramsを保存・実model一致・非学習reload、初期89ba/weighted6964不変、compute空。
+
+全32の原source/before/weightedをroot/同環境read-only担当が読解。SC04/05/06/SD02の非過去逐語保持、MX02/OA02の余分対象除去を確認。SC05/MX02/OA02は正しい初期への復帰、SC03/SD01/HQ03/CQ04はweightedの改善保持。OD01は二不明の親曖昧で新拒否、SQ03/MD02/HQ04/MD01の未達は残る。raw初期比22/32・weighted比25/32不変、構造before28→after31/32を意味率にしない。一回比較/GPU数値変動の限界を保持し唯一因果や一般品質へ拡張しない。
+
+別CPU processで64応答59candidate ID/coverage一致・5拒否維持、新load/生成/更新0。元run268/manifest267、source276member/112重みbytes-SHA全一致、元report PENDING_RAW_READ bytes保全。[private原本](https://chatgpt.com/library?file_id=libfile_ceb97f613864819184a52359ae56affc&account_id=personal)は14,889,669bytes/SHA4ef5a91abc74c28ad78c8f8f88b3ab38fa19b9b0873ec72c85383c8481716427/281member、ZIP containerのみ再圧縮。§85の中間新18callは華恋の画面誤読で実1callへ訂正、ユーザー途中報告も訂正済み。最終32callは原report/rawで別照合、訂正の追加生成0。
+
+次CPUは不明親一意性・継続修飾・否定ACTION/名詞対象を既存教材から一候補へ具体化。明記理由/修飾scopeは別追跡。次初期/dose/順/保持/近接/cap固定前の次GPU未選定、完了run再起動/延長/追加epoch/補修/受口緩和なし。本人基準の役割/判断/選択・記録間関係と通常graph接続を既存目的として継承。通常source/API/DB/RN/Render/Supabase/稼働/配置/Pod管理0、全未解析/主体未解決/route0・通常未採用、正式0/3・54.50％据置。処理按分約$0.079824@前回確認$0.58/h、準備/回収/保持等別。STRUCTURE_MAP_DELTA_NONE。全体現在地/全file地図/Analysis map/trial同期。Codex Work/GPT-6 root単一writer＋同環境read-only確認、独立Pro/Ultra/human受入れではない。

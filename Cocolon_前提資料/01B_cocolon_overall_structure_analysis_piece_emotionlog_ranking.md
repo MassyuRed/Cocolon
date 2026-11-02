@@ -3222,3 +3222,19 @@ API2c259f0e、STRUCTURE_MAP_DELTA_PRESENT。新production file/ownerなし。API
 | collect_scope68.py | 元archiveを変えず、CPU/復元/再読の原本を集める |
 | export_scope68_numeric.py | 通常ZIP回収失敗時の既存text/数値tensor回収。model/load/生成/更新0 |
 | semantic_units_scope68_results.json | body-freeな実結果・局所意味実読・保持退行・採否・private原本参照 |
+
+
+### 2026-11-03 — 同68/74順CE68比較（隔離研究）
+
+通常Analysisのowner/型/API/DB/RN/依存/稼働構造不変、STRUCTURE_MAP_DELTA_NONE。既存trial内に以下6fileを追加。詳細は同README#analysis-ce68-result-20261103、本文/教師/重み全原本はprivate archiveへ保持。新b2a5は通常/次初期値未採用。
+
+| file | 役割 |
+| --- | --- |
+| semantic_units_ce68_prepare.py | 同68教師/74順・before32 identityをCPU照合しprepared-v2へ固定 |
+| semantic_units_ce68_run.py | 既存plain CE、上限74更新/136測定/2load/32after。更新前NLL/dropout0・112重み保存再読 |
+| semantic_units_ce68_supervisor.py | 2134source/旧原本/89ba/before32を照合し一回実行、timeout/partial/compute保全 |
+| semantic_units_ce68_saved_replay.py | 別CPU processで64応答59候補一致/5拒否維持、保存readerの生成/compiler/author禁止 |
+| export_ce68_numeric.py | CRを保つJSON text/F32 uint32 bit列のlossless回収材料を出す |
+| semantic_units_ce68_results.json | body-free全実数値・意味読解・保持/退行・未採用・private原本参照・次CPU |
+
+原run268/manifest267、source276member/112重みbytes-SHA一致、private ZIP281member。全体現在地/Analysis map/最新weekly§85訂正・§86/trialを同期。形式受理/教材再現を一般意味品質にしない。

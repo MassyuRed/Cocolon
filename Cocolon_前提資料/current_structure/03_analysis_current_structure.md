@@ -1,4 +1,6 @@
-> **2026-11-03最新：** scope68の74更新/40生成を完了。主体・軽度修飾・一部行動scopeの局所改善がある一方、原文の時制改変、語幹対象化、留保欠落と旧保持退行が残り通常未採用。265元member/112重み全bytes-SHAと64保存応答の非生成再読を確認。新6964は通常/次初期値へ自動採用しない。[全結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-scope68-result-20261103)。§82の本人基準の役割・判断・選択と記録間関係/通常graph接続は既存残件。通常source/API/DB/RN/稼働不変、STRUCTURE_MAP_DELTA_NONE。完了runを再起動しない。
+> **2026-11-03最新・CE68：** CE68は同68教材/同74順・初期89baから既存plain CEで74更新/32新stop、495.459095秒で完了。SC6教師一致6/6、AT4/UQ2/MX2/OA2も全一致。weightedの時制改変4件と印刷/返送の余分な対象化は消えた一方、OD01の不明親曖昧という新退行、SQ03の継続修飾欠落、MD02否定不足/対象化、HQ04理由等が残り通常未採用。 [全結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-ce68-result-20261103)。元run268/112重みbytes-SHAと64保存応答再読を確認。新b2a5通常/次初期値未採用。通常source/API/DB/RN/稼働/Pod管理不変、全未解析/主体未解決/route0、STRUCTURE_MAP_DELTA_NONE。本人基準の役割/判断/選択・記録間関係と通常graph接続は既存残件。
+
+> **2026-11-03・scope68履歴：** scope68の74更新/40生成を完了。主体・軽度修飾・一部行動scopeの局所改善がある一方、原文の時制改変、語幹対象化、留保欠落と旧保持退行が残り通常未採用。265元member/112重み全bytes-SHAと64保存応答の非生成再読を確認。新6964は通常/次初期値へ自動採用しない。[全結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-scope68-result-20261103)。§82の本人基準の役割・判断・選択と記録間関係/通常graph接続は既存残件。通常source/API/DB/RN/稼働不変、STRUCTURE_MAP_DELTA_NONE。完了runを再起動しない。
 
 > **2026-11-02・分析残件の継承と補正：** 既存理論/材料定義とこれまでの構造・累積保存・4B読解研究を継承し、本人基準での役割/判断/選択の読解→根拠付き採用→記録間接続の未達を残件へ明記。[対象照合と次の接続](#analysis-material-to-route-continuity-20261102)。局所形式成功・カテゴリ保持を意味分析完成へ昇格しない。
 

@@ -1,4 +1,4 @@
-> **11/3最新：scope68を74更新/40新生成で完了し、通常未採用。** 主体・軽度修飾・一部参加scopeに局所改善がある一方、原文内の時制改変、動詞語幹の余分な対象化、「まだ」の欠落があり、旧保持条件を満たさない。旧89ba/全原本を保持し新6964は通常/初期値へ自動採用しない。265元memberと112重み全bytes/SHA、64応答の非生成再読を確認。詳細は[結果](#analysis-scope68-result-20261103)。これは既存の本人基準の役割/判断/選択・記録間関係を支える前段の局所比較で、分析構造の完成ではない。完了runは再起動しない。
+> **11/3最新・CE68完了：** CE68は同68教材/同74順・初期89baから既存plain CEで74更新/32新stop、495.459095秒で完了。SC6教師一致6/6、AT4/UQ2/MX2/OA2も全一致。weightedの時制改変4件と印刷/返送の余分な対象化は消えた一方、OD01の不明親曖昧という新退行、SQ03の継続修飾欠落、MD02否定不足/対象化、HQ04理由等が残り通常未採用。 [全結果・原本・次作業](#analysis-ce68-result-20261103)。新b2a5を通常/次初期値へ自動採用しない。完了runを再起動しない。
 
 # Analysis — 最小field接続と実4B probe
 
@@ -887,3 +887,32 @@ scope68の全失敗と既存教師を照合した。独立サ変ACTIONはMX/OA/A
 実fileはsemantic_units_ce68_prepare.py/run.py/supervisor.py。CPUは旧265member、同一68teacher/74order、before32同一性を確認する。source/messages/target/tokenizer/profileが不変のため、既存68strict/file/tokenizer結果を引き継ぎ、そのためだけに同じ検査を再実行しない。runnerの全target/gradient窓のCPU確認は維持する。ここは実行準備で新学習/新生成0。
 
 次は既存Jupyterのreport/run.exitとcompute空を確認して、この新candidateを一回だけ起動する。完了scope68の再起動ではない。通常source/API/DB/RN/Render/Supabase/配置/Pod管理0、全未解析/主体未解決/route0・通常未採用、正式0/3・54.50％据置。STRUCTURE_MAP_DELTA_NONE。本人基準の役割/判断/選択・記録間関係への意味採用という既存目的を維持し、局所学習比較を分析全体の完成にしない。
+
+
+<a id="analysis-ce68-result-20261103"></a>
+## 11/3 CE68比較完了 — 改善と新しい親対応退行を保存
+
+CE68は同68教材/同74順・初期89baから既存plain CEで74更新/32新stop、495.459095秒で完了。SC6教師一致6/6、AT4/UQ2/MX2/OA2も全一致。weightedの時制改変4件と印刷/返送の余分な対象化は消えた一方、OD01の不明親曖昧という新退行、SQ03の継続修飾欠落、MD02否定不足/対象化、HQ04理由等が残り通常未採用。
+
+固定e92c1211。before32は全原request/messages/ref/raw/report/manifest同一性を照合再利用し、baseline新生成0。68source/target/74順・LR/seed/clip/prompt mask/full assistant/EOS/生成条件を保持し、training weightingだけ既存plain CEへ変えた。初期推論loadを省略し2load、更新前68NLL最大差0、Dropout module/attention/LoRA dropout0。GPU数値変動を含む一回比較で、唯一因果の証明へしない。
+
+| 対象 | 実結果 |
+| --- | --- |
+| SC04/05/06・SD02 | 原文の非過去unknown内容を逐語保持し、weightedの時制改変が消えた。主体・必要な否定・二不明の親も保持。SC05は正しい89baへの復帰 |
+| MX02/OA02 | weightedの余分な語幹対象化が消え、89ba rawへ完全復帰 |
+| SC03/SD01/HQ03/CQ04 | 名詞対象/行動scope・別actor否定・本人主体/軽度修飾の局所改善を保持。weightedと同一 |
+| OD01 | 二つの不明rootを同じ短いrootに縮め、新たに親曖昧でstrict拒否。action/actor/名詞対象の保持だけで成功にしない |
+| SQ03/MD02 | 継続修飾欠落、主体回復後の否定qualifier不足/語幹対象化が残る |
+| HQ04/MD01 | 理由のTE_CONTEXT誤読/修飾の粗い付け先は未改善 |
+
+教師JSON exactと近接診断/意味読解を分離する。raw byte不変89ba比22/32・weighted比25/32。構造受理before28→after31/32は意味成功率ではない。全32を原source/before/weightedまでrootと同環境read-only担当が読解した。SD2は近接合成で、盲検/Mash実演/一般言語成功にしない。
+
+74更新/136測定/2load/32stop、495.459095秒（親496.804880）/exit0。新b2a5cbf1/config1076df9eの112有限F32/3,833,856paramsを保存・実model一致・非学習reload。初期89ba/weighted6964の重み/config不変、compute空。別CPU processで64応答の59candidate ID/coverage一致・5拒否維持。保存readerのgenerate/compiler/author禁止、新load/生成/更新0。元report PENDING_RAW_READ bytesは保全し、読解済み状態を[結果JSON](semantic_units_ce68_results.json)とprivate reviewへ分離。
+
+[private原本archive](https://chatgpt.com/library?file_id=libfile_ceb97f613864819184a52359ae56affc&account_id=personal)：14,889,669bytes、SHA256 `4ef5a91abc74c28ad78c8f8f88b3ab38fa19b9b0873ec72c85383c8481716427`、281member。元run268/manifest267・全source276memberと112重み元bytes/SHA一致。CRを保つJSON textとF32 uint32 bit列を分割DOM読取して元bytesへ復元、ZIP containerのみ再圧縮。回収のためのモデル再実行0。未凍結の初回CPU準備はcpu-initialに保全し、実行は記録補正後prepared-v2。旧89ba/6964原本は前節のscope68 archiveへ保持。
+
+中間報告の150.368347秒時点新18callは華恋の画面誤読で実1call。ユーザーへの訂正とweekly§85の訂正を記録。最終32callはreport/rawを別照合済み、訂正のための追加生成0。
+
+次CPUは改善を保ち、不明親の一意性・継続修飾・否定ACTION/名詞対象を既存教材対比から一候補へ具体化する。新rawを正解へコピーせず、受口緩和/補修/追加epoch/完了run再起動なし。初期/dose/順/保持probe/近接対照/cap固定前の次GPUは未選定。再開時は先に本結果と/workspace/analysis-ce68-20261103/result/report.json/run.exitを確認する。
+
+処理按分約$0.079824@前回確認$0.58/h、準備/回収/転送/保持/税等別。Pod停止/削除/再起動/チャージ0。通常source/API/DB/RN/Render/Supabase/配置/merge0、全未解析/主体未解決/route0・通常未採用、正式0/3・54.50％据置、STRUCTURE_MAP_DELTA_NONE。Codex Work/GPT-6 root単一writer＋同環境read-only確認、独立Pro/Ultra/human受入れではない。本人基準の役割/判断/選択→既存五種/注記/不明→記録間の再出現/変化→通常graph/保存/補足/月次比較という既存目的を継承し、局所成功で分析全体の完成にしない。
