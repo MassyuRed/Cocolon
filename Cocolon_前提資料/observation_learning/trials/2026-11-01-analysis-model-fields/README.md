@@ -1,6 +1,6 @@
 # Analysis — 最小field接続と実4B probe
 
-**11/2再開点：unknown58の64更新/40新生成は完了・原本/全重み保存済み。反復不明と理由は局所改善、旧AT4再現4/4→2/4で通常未採用。次は同99916からLRだけを下げた既見16比較。[実結果](#analysis-unknown58-result-20261102)／[次の固定計画](#analysis-unknown58-lr1-plan-20261102)。各runのreportを先に確認し、重複起動しない。**
+**11/2再開点：unknown58の64更新/40新生成は完了・原本/全重み保存済み。反復不明と理由は局所改善、旧AT4再現4/4→2/4で通常未採用。同99916からLRだけを下げた既見16比較を起動済み。実行中pathは /workspace/analysis-unknown58-lr1-20261102/result/report.json。[実結果](#analysis-unknown58-result-20261102)／[次の固定計画](#analysis-unknown58-lr1-plan-20261102)。各runのreportを先に確認し、重複起動しない。**
 
 2026-11-01 JST。開始原本：Cocolon PR30 `1c66add4fdf8f5ded18f7443d6b91b1771998244`、API PR3 `36713940ea82e217fab8a7c0a738a33f21df1c4d`。Mashの分析残件開始とweekly§45.4に従う。Codex Work/GPT-6、root華恋が実装/統合/反映、別文脈agentはread-only監査のみ。独立Pro/Ultra又はhuman品質受入れとは呼ばない。System Context最新cacheは未成立のまま、fresh原本fallbackを使用。
 
@@ -640,3 +640,5 @@ UQ2は教示JSON同値、近接PQ02/HQ01/02/03にも一意な全文不明rootと
 実装順：既存CPU58束縛の同一target照合→2134source/loader/99916全SHA/同58・64順・seed照合→既見16の同99916beforeを親afterと前回beforeから照合copy、3067afterも比較copy→58NLL→64更新→58NLL→112tensor保存/非学習reload→16after/全本文読解/保存再読/全重み原本回収。2load/116測定/16新生成、600秒（TERM590+kill10）/各23秒/context8192/max2048/nonthinking/greedy。対象はAF01/NV04/AT4/CQ03・04/SQ01・03/PQ2/UQ2/HQ03・04。全て既見で一般品質率を作らない。新before生成0、未解析/主体未解決/route0/strict受口不変。
 
 退行/非逐語/意味不足が残れば通常未採用、同候補のepoch/受口緩和/raw修復をしない。処理按分上限$0.096667@0.58/h、準備/回収/保持/通信/税等別。必要GPU/実装/途中GitHub反映はMashの現行明示承認内。ここは準備、GPU未実行。新構造/商品型/本番/DB/RN変更0、STRUCTURE_MAP_DELTA_NONE、正式0/3・54.50％据置。
+
+LR1実行開始：固定c777b4dbのplan/runnerを照合して一回起動。report STARTED/64更新完了/116測定/新生成0/144.109秒を確認。旧upload待ちでfile未到着となった最初のlauncherはmodel/GPU実行0、実学習の再試行ではない。転送完了をUIで確認後、hash/exact3member/新run directory未存在を同じPython手順で確認して起動した。各run重複起動0。
