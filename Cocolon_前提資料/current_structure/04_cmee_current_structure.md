@@ -1,4 +1,4 @@
-> **2026-11-02最新：実unit旧4callは1/4、指示修正2callも0/2で意味分解未成立。** parserを保ち、新root架空8教材/16更新・未使用4入力への転移比較を隔離実行する計画へ。学習はまだ0。通常map/DB/RN未切替、全record未解析/route0。[最新継続](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-teaching8-plan-20261102)。
+> **2026-11-02最新：分析用8教材16更新は完走、AF02に意味ある部分改善。** 構造受理2/4だが他3入力に意味誤り、通常未採用。全raw/重みを保全し、16教材32更新の別adapter継続を準備。[実結果/次計画](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-teaching8-result-and-teaching16-plan-20261102)。商品構造/通常map/DB/RN不変。
 
 > 10/28最新差分：named出力型/参照提示修復・CPU351成功、9更新/112再読込/2生成を終了。平坦rootと回答source帰属へ前進も意味/本文0/2・新41c9不採用。末尾の最新結果・全機能00/weekly§90を参照。
 

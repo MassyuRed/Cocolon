@@ -1,6 +1,6 @@
 # Analysis — 最小field接続と実4B probe
 
-**最新：11/2、修正指示の実2件も0/2。指示だけの反復を止め、[新8教材/16更新の隔離学習と未使用入力の前後比較](#analysis-teaching8-plan-20261102)へ進める。学習はまだ未実行。**
+**最新：11/2、8教材16更新が完走。AF02は部分分解へ改善したが他3件に意味誤り。全raw/重みを保全し、[16教材32更新の別adapter継続](#analysis-teaching8-result-and-teaching16-plan-20261102)へ。通常未採用。**
 
 2026-11-01 JST。開始原本：Cocolon PR30 `1c66add4fdf8f5ded18f7443d6b91b1771998244`、API PR3 `36713940ea82e217fab8a7c0a738a33f21df1c4d`。Mashの分析残件開始とweekly§45.4に従う。Codex Work/GPT-6、root華恋が実装/統合/反映、別文脈agentはread-only監査のみ。独立Pro/Ultra又はhuman品質受入れとは呼ばない。System Context最新cacheは未成立のまま、fresh原本fallbackを使用。
 
@@ -219,3 +219,32 @@ Mashの本セッションの必要作業/GPU利用/途中反映承認に基づ�
 - 新output directory一回、旧失敗raw補修/自動rerunなし。全raw/finish/前後loss/update counter/保存重み/同file再読を回収。重みは新しいprivate原本へ保存し、rootが全4入力の前後本文を読んで候補採否を判断する。通常採用や本人商品受入れは自動生成しない。
 
 この段階のGPU学習/更新は未実行。primary=BLOCKER_NARROWED（指示だけでは安定しない内容を確認し、別の直接改善を具体化）、商品0/正式0/3/54.50％据置。STRUCTURE_MAP_DELTA_NONE（今回新しい商品source/contract接続なし、隔離学習計画/runnerのみ）。
+
+
+<a id="analysis-teaching8-result-and-teaching16-plan-20261102"></a>
+## 11/2 — 新8教材16更新は完走、AF02の部分改善と残る意味誤り
+
+§53の計画を同Jupyterの隔離directoryで一回実行。fresh base＋新LoRA、全8教師×2回16update/16 training forward、前後測定16forward、新生成6call、process106.824711秒/exit0。prompt全mask、assistant全target/EOS/改行保持を実tokenで確認し、model load前のCPU full/tail CEと全grad一致も成功。全112tensor/3,833,856paramsが更新され、保存した有限112tensorは実modelと一致、既存loaderの非学習再読も一致。peak allocated9.172043GiB/reserved9.824219GiB。平均unweighted NLL0.172905880→0.097103359、8件全て低下したが自由生成の品質判定には代用しない。
+
+学習前4入力は受理0/4（AF2は旧clarified rawをref/messages/SHA一致で再利用、UV2だけ新生成）。学習後は全4stop、構造受理/同file再読2/4。rootが全rawを読み、次のように区別した。
+
+| 入力 | 実出力の意味読解 | 判断 |
+|---|---|---|
+| AF01 | 後悔/内容/不明/理由を分け始めたが、未知内容の親が不明rootでなく別の従属unit。肯定の『断った』にNEGATION、後悔の否定qualifier欠落 | 構造拒否・未採用 |
+| AF02 | 『うれしい』結果→『今日は解けて』te文脈→『昨日は分からなかった問題』連体内容の3unit。昨日/今日/不明表現も対応scopeへ保持 | 全文一分類/反復から意味ある部分改善。ただし近いprompt例あり、一般品質の受入れではない |
+| UV03 | 同僚の発話を独立思考へ出し、本人の主体と混同。引用符/助詞を不明内容へ分割して10unit | 構造拒否・未採用 |
+| UV12 | 『休みたい』を結果、『まだ決めていない』を理由scopeへ誤接続 | 構造受理されても意味は不適格 |
+
+[機械結果とroot読解](semantic_units_teaching8_results.json)。保存AF02/UV12は現APIでEngine.generate禁止の別local再読も一致。新実SQL/通常map/RNへの採用0。4入力はいずれも学習user/targetに完全同一文を使わないが、教師/既存system3demoと近い構文・語句を共有するため、独立盲検や一般言語理解の証明と呼ばない。
+
+新adapter SHA256 `298403b3705f444ff6c69829af2827520ce8b50cdf1f98359fa2645189b5f2c5`、config `2abb4ea7064b01f4ee6d1d2da4b2ae048c9212d8ece49f94193e78c8b9ea2ae7`。全raw/実messages/response/encoded token/更新記録/重みをprivate34member archiveへ保存し、CRCとmanifest全SHAを照合済み。`cocolon-analysis-teaching8-result-20261102.zip`、Library `libfile_19891a6e03108191bfe496b202ae7c98`、14356049bytes/SHA `19d8309c07e972d043f06781f788f7170dd7042cb6396d853d065ddea35e483c`。終了後GPU compute-apps空、旧fit38 weights/config不変。単価$0.58/hの実process按分約$0.01721、準備/回収/保持/税等別。
+
+### 次の隔離継続：追加8教材を合わせた16件・32更新
+
+[新16件plan](semantic_units_teaching16_plan.json)/[runner](semantic_units_teaching16_run.py)は先の8教材を変更せず、新8件を追加する。unknown親番号と内容、肯定行動と文法否定、報告発話の主体、願望/未決、明記のない理由を交差したroot架空protocol教材で、Mashの教師/正式評価ではない。全targetを現source/受口へCPU再束縛済み。別の新outputに先の隔離Analysis adapterだけを初期値として読み、全112tensor一致を確認する。旧fit38/初回Analysis重み/通常提供を上書きしない。
+
+全16件各2回32update、batch1/accum1/LR5e-5/clip1、既存 `named_reference9_preparation/adaptive_loss.py`（SHA5852c69d…）の全target誤り重みCEをそのまま使う。detached current CEから正の重み1..16を作って正規化し、target/EOS/改行を一つも除外しない。比較NLLはunweightedで別記録。CPU full/maskedとtailのloss/全grad一致をweighted/unweighted両方で実行前確認する。
+
+開発で既見のAF/UV4件は前runの実after rawをref/messages/SHA照合でbeforeへ再利用する。新診断NV01〜04はunknown/発話/願望/時点の別題材、正解教師として未使用。新4before＋8after＝12call以内、model load3回、process900秒（外TERM890+kill10）/同単価按分上限$0.145、各23秒/greedy/nonthinking/max2048/context8192。全raw/finish/保存重みを回収し、受理数と内容妥当性を分けてrootが読む。これは開発試行で、独立盲検/通常採用を自動成立させない。教材追加・更新数・loss重みを同時に変えるため、改善しても継続候補全体の効果でありweighted CE単独の寄与とは断定しない。必要作業は本セッションのMash指示で承認済み。
+
+この記録時点は追加32update未実行。API cddf1855/製品契約/通常提供不変。限定TECHNICAL_CREDIT（AF02の部分改善を実raw確認）/正式0/3/管理54.50％据置、STRUCTURE_MAP_DELTA_NONE。

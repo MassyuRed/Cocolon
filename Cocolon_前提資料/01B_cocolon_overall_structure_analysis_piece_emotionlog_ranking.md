@@ -3148,3 +3148,6 @@ API fa995a44、STRUCTURE_MAP_DELTA_PRESENT。新production fileは0。通常累�
 
 
 11/2隔離学習のsource地図：`observation_learning/trials/2026-11-01-analysis-model-fields/semantic_units_teaching8_plan.json`が新架空8教材/未使用4入力/16更新の定義、`semantic_units_teaching8_run.py`が固定base→新LoRA→保存非学習reload→前後比較を同じJupyterで実行する一回用runner。新production owner/通常API接続なし。旧教材/weightsは保全。trial/weekly§53へ。
+
+
+11/2隔離学習継続の地図差分：trial `semantic_units_teaching8_results.json` は初回16更新/実生成/意味読解/重みidentity、`semantic_units_teaching16_plan.json` は既存8＋新8教師/開発既見4＋新診断4/32更新、`semantic_units_teaching16_run.py` は先のAnalysis adapterから別保存への継続owner。既存adaptive_loss.pyをexact SHAで再利用。商品source/通常接続の新ownerなし。trial/weekly§54参照。

@@ -1981,3 +1981,13 @@ API cddf1855の既存2owner＋test1でinstruction_versionを版分離。baseline
 clarified新base2callはprocess48.970337秒、原文外qualifier/不明carrier親混同と反復lengthで0/2。原本13member/124432bytes/SHA604a18f7…をLibrary libfile_566fc5131b848191849a3747bbbd7d64へ保全。指示だけの第三試行は行わず、現在承認内で新root架空8教材/各2回16updateを計画。旧weightsは読まずfresh base＋既存configから新LoRA、元重み保全。全8targetのCPU再束縛と読取意味監査を完了。旧3demoはmaskされたsystem条件文脈、直接targetは新8だけ。AF/UVの完全同一入力は学習に使わず、近い構文への転移を確認する。
 
 既存AF2rawをSHA/ref/messages照合でbefore再利用、UV2新before＋4新after＝最大6生成。全112tensor/有限性/非学習保存reload、full assistant CE/EOS/末尾改行を保持。process900秒（外TERM890+kill10）・同単価按分上限$0.145、保持等別。具体plan/runner/完了と停止は[trial](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-teaching8-plan-20261102)。本時点は学習0/通常採用0、API cddf1855不変、商品0/正式0/3/54.50％据置。必要作業はMashの本セッション指示で承認済み、旧runの承認再利用ではない。
+
+
+<a id="analysis-teaching8-result-and-teaching16-plan-20261102"></a>
+## 54. 11/2 — Analysis初回16更新が完走、AF02の部分改善と追加16教材へ
+
+新架空8教材×2回16update、6新生成、process106.824711秒/exit0。全112tensor更新/有限保存/非学習reload、CPU full/tail lossとgrad一致。NLL平均0.172906→0.097103だが意味受入れへ換算しない。学習後4stop、構造受理2/4。AF02は結果→今日te→昨日連体の3unitへ実改善。AF01は未知親と偽NEGATION、UV03は発話者/引用内容/10unit、UV12は願望を結果/未決を理由とする誤りが残るため通常未採用。全rawをrootが読解、生成禁止の保存候補再読2件一致。旧weights/本番/DB/RN不変。
+
+全raw/encoded/重み34member・14356049bytes/SHA19d8309c…をprivate Library libfile_19891a6e03108191bfe496b202ae7c98へ保全。GPU compute-apps空、旧fit38不変。実process按分約$0.01721、保持等別。
+
+次は旧8不変＋新8の16教材/32update、保存Analysis隔離重みから新outputへ継続。既存全target誤り重みCEを再利用し、unweighted NLLを別測定。旧4は開発既見として前raw再利用、新診断4before＋全8after＝12新call/process900秒上限。同session承認内、追加学習は本記録時点未実行。詳細は[trial](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-teaching8-result-and-teaching16-plan-20261102)。限定TECHNICAL_CREDIT/正式0/3/54.50％据置、STRUCTURE_MAP_DELTA_NONE。
