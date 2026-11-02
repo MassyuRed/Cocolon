@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-**11/2・Mashの全情報／全ファイル確認指示（第9回§80）：** もっと以前からの蓄積・既存構造を確認し切らず、直近資料で判断したことをMashが指摘。現存する全ての情報と全てのファイルを確認し終えるまで製品作業を開始しない。[CURRENT_RULES R2.1](work_attitude_rules_for_karen/CURRENT_RULES.md#all-existing-information-and-files)と毎回の入口・開始／出力確認へ明文化。全確認は未完了。今回のルール反映を全確認完了や製品の設計・実装・学習・配置再開へ換算しない。既存の理論・構造・教材・旧実装・失敗履歴を、時期・保存先を理由に除外しない。
+**11/2・全情報／全ファイル確認条件を撤回（第9回§81）：** Mashが同日制定の「現存する全情報・全ファイルの確認が終わるまで作業禁止」を明示撤回。全ファイル再監査を作業再開の前提にしない。以前からの材料定義・既存資産とCMEEへの移植内容を踏まえ、対象の原典・実装の必要箇所を確認して進める。材料から場面・役割・考え・行動・結果の構造と根拠のある観測ルートを組む既存枠はある。未完成は一般入力の意味読解と通常graphへの採用・記録間の関係を読む品質で、理論・構造を新規に作り直す前提へ戻さない。教材の不足／未確認を、材料定義や理論の不存在へ置き換えない。撤回は[CURRENT_RULES R2.1](work_attitude_rules_for_karen/CURRENT_RULES.md#all-existing-information-and-files)へ反映。
 
 **11/2・直前の選択カテゴリ修正の実装事実（第9回§79）：** 通常のわたしマップでは本人選択カテゴリの集合を観測内容の文脈として保持し、異なるカテゴリ集合を一つの反復として集約しない。本人補足は親原入力のカテゴリを継承し、原record/version・owner・証拠の対応を検査する。文章と図は既存`visible_label`内へ「選択カテゴリ：仕事」等を表示し、公開wireのキー集合は維持。旧currentは次の正常ensureで一度再導出し、保存済み月次は当時版のまま再読する。 API `2c259f0e33abcd70cf353a8f53af3dc3b06eb63e`へコード反映済み。[既存CI 41437730142](https://github.com/MassyuRed/mashos-api/actions/runs/41437730142)は全工程success（Analysis1644＋12020subtests、shared-owner1、累積/Q3/API24＋2subtests、月次SQL201原本/15月参照）。指定commitを配置したRender `dep-dbk7l2uc6qcc73dp5d70`は11/2 11:58:13 UTC（20:58:13 JST）Live。配置後healthz/app bootstrap200、未認証latest/reports-history401、Piece private5ON/public3OFFを確認。配置開始〜12:00 UTCの取得範囲にapp error0。本人端末のカテゴリ表示は未確認。 通常有限文法・一般読解・4B候補採用・IF/Savedは残件。詳細は[Analysis map最新節](current_structure/03_analysis_current_structure.md#analysis-selected-category-context-20261102)。
 
@@ -44,7 +44,7 @@
 
 今回承認は消費済み・不採用閉鎖。再試行/再生成/次run/新ed298856の製品・初期値自動採用0。既存の正しい教師があり追加観測会不要。通常source/受口/意味型/三core/API/DB/RN/Render/Supabase/依存/merge/deploy差分0、STRUCTURE_MAP_DELTA_NONE。商品0・正式0/3・54.50％・candidate_ready/automatic_progression=false。最新weekly§136。
 
-**11/2の分析観測会：** 同一人物の別場面5件は華恋の架空作例であり、Mashの分析実演/新教師はまだ得ていない。華恋が問いの説明不成立を理由に終了扱いした判断は誤りとして撤回。Mashによる終了指示ではない。現在は全情報・全ファイル確認未完了のため製品作業を停止している。カテゴリの保持・集合別集約・表示は実装したが、Mashが求める役割付け・選択傾向の分析を完成したものではない。§79/80へ。
+**11/2の分析観測会：** 同一人物の別場面5件は華恋の架空作例であり、Mashの分析実演/新教師はまだ得ていない。華恋が問いの説明不成立を理由に終了扱いした判断は撤回し、Mashの終了指示ではないと訂正。カテゴリ保持・集合別集約・表示の実装を、役割付け・選択傾向分析の完成へ換算しない。全情報・全ファイル確認による作業禁止もMashが撤回済み。§79/81へ。
 
 **観測会の基本方針（10/27）：** Mashが、基本相談式／短い実入力式は華恋が基本案・判断に迷う例はMash／分析向けも時々交える、まずEmlisAIを優先する方針を明示決定した。[観測会方針](observation_learning/README.md#observation-session-policy-20261027)と[OBS-20261027-001](observation_learning/sessions/2026/OBS-20261027-001/01_dialogue.md#d00)へ記録。社内勉強会の引き継ぎを題材に、質問前の本人役設定を保持し、D11まで採録。D05のMash観測文とD06の相談者役の確認を保持し、D10で本人の「分かりやすかった」という感想の撤回か、保持したままの気掛かりかを見極める問いだったと教示を受けた。D11は華恋の理解で、具体的な次の問いの分岐は未説明。観測会終了は未指示。形式別の4B学習効果は未比較。材料収集と学習投入を分け、凍結15教材・評価・重みへの変更／追加GPU処理0。直近の意味・本文0/2という学習実結果と商品0／正式0/3／54.50％は変えない。
 
@@ -226,7 +226,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 比較案作成時の追加照合点はCocolon `5d14a293…`／API `a536e50…`。Piece sourceのrefined未対応とAnalysis pureの補足上限を実物で再確認し、上記の設計／実装区分を明確化した。その他の機能を新規再検証した意味ではない。
 
-次回の作業開始にはCURRENT_RULES R2.1の全情報・全ファイル確認完了を必要とする。fresh head・変更path・関連根拠だけの確認を、全確認の代わりにしない。確認していない機能の検証日を更新せず、この一枚を「毎回全体を読む」入口として保つ。
+次回はfresh headと変更pathを比較し、関係する根拠だけを再確認する。確認していない機能の検証日を更新せず、この一枚を「毎回全体を読む」入口として保つ。
 
 10/23今回Piece差分は、正本APIの同一2blob同期/原CI39864098163、既存Render稼働不変、最新TestFlight成功run/source/Upload stepと現RNの配布差、固定candidate refを照合したもの。API source2path/正本の限定CI1/配布候補branch1、今回Render/DB/本人row/署名build/TestFlight送信0。別集計として候補branch既存phase6自動検査1成功、最初のdocs反映4571の既存自動検査5件は3成功/2失敗。System Context2件は変更していないseed期待[8,5]と現profile[1,8,5]の不一致、各225 PASS/1 FAILで当時未修復（本System Context更新でseed期待を修復）。原log・区別は入口§119.5/manifestに記録し、再試行0/最終docs補正は[skip ci]。他機能の品質・本人端末を再検証した意味ではない。
 

@@ -1,6 +1,6 @@
 # Cocolon作業開始チェックリスト
 
-revision_date: 2026-11-02
+revision_date: 2026-10-22
 normative_status: CURRENT_EXECUTION_GATE
 status: CURRENT_EFFECTIVE
 effective_when: NECESSITY_PRODUCT_DIRECTNESS_AND_MINIMUM_SAFETY_BOUNDARY_REMOTE_POSTVERIFIED
@@ -9,15 +9,6 @@ general_rule_owner: CURRENT_RULES.md
 このchecklistは、全ruleの再掲ではありません。
 今回の作業で必要なrule、source、authority、durable ownerを実際に選び、開始可否を判定するGateです。
 一つでも必要項目が未成立なら、その項目に依存する作業を開始しません。
-
-## 全情報・全ファイル確認 — 作業開始条件
-
-- [ ] CURRENT_RULES R2.1に従い、現存する全ての情報・全てのファイルを、過去の原会話・思想・教示・設計・教材・旧実装・失敗履歴・保管物まで含め原本から確認した。直近・関連・currentだけへ縮小していない。
-- [ ] 一覧・索引・検索・要約・記憶・hash・差分・分担報告だけを、原本内容の確認や全確認完了にしていない。
-- [ ] 未取得・読取不能・所在未確認・未確認が残る場合は、全確認未完了を明示し、製品の設計・実装・学習・配置・採用判断へ進めていない。
-- [ ] 確認と規範反映の完了を、全確認完了や製品作業再開へ置き換えていない。今回のルール化はMashの明示指示範囲のみで、一般的なdocs-only例外にしていない。
-
-既存の『必要範囲』『適用対象』『current』『関連差分のみ更新』は、R2.1の全確認を免除しない。確認未完了のままSTART_ALLOWED／全確認完了を出さない。
 
 ## 0. exact start record
 

@@ -221,8 +221,8 @@ authorityとして扱いません。後続の設計本文に矛盾する記載�
 7. 書かれていないことは「書かれていない」とし、許可なく仮説で埋めません。
 8. 確認済み事実、未確認、推測、華恋の意見を分離します。
 9. document ownerを分離します。全製品の目的・全機能・全状態の現在地は`../00_cocolon_current_product_and_state.md`、各商品の詳細目的・仕様は各canonical owner（Emlis roadmapはEmlisの範囲）、技術・商品品質規範は各original design + current alignment、Cycle001経路はexecution plan + closure route、Cycle001専用の進行現在地は`../08_cycle001_current_state.md`、実行事実はactual source / test /確認記録です。historical baseline、`07`、old Plan、old Handoffを全体currentやcurrent next actionへ戻しません。
-10. 全Cocolon作業は下記R2.1の全情報・全ファイル確認条件を満たしてから開始します。`../00_cocolon_current_product_and_state.md`も毎回全文読みます。仕様相談・観測会・AI選定も例外にしません。全体の機能間接続を確認してから個別ownerと実物へ進み、Emlisの一応答だけでCocolon全体を完結して評価しません。既決の学習済AI＋CMEE接続、Piece、Analysis、もしもルートを対象外として消しません。
-11. 毎作業、全体現在地への関連差分を確認し、変化した機能・決定・状態・残件・根拠を同じ変更単位で置換更新します。未実装を理由に決定済みを未決へ戻さず、設計・コード・稼働・本人端末・正式受入れを分けます。差分なしは既存作業記録／PR説明へ理由を一行残し、無関係な書換え・日付更新・新checker・新履歴系列を増やしません。書込み範囲の限定を、R2.1の全確認を省略する根拠にしません。System Contextに未選択／staleでもfresh ownerの原本を直接読みます。
+10. 全Cocolon作業で`../00_cocolon_current_product_and_state.md`を毎回全文読みます。仕様相談・観測会・AI選定も例外にしません。全体の機能間接続を確認してから個別ownerと実物へ進み、Emlisの一応答だけでCocolon全体を完結して評価しません。既決の学習済AI＋CMEE接続、Piece、Analysis、もしもルートを対象外として消しません。
+11. 毎作業、全体現在地への関連差分を確認し、変化した機能・決定・状態・残件・根拠を同じ変更単位で置換更新します。未実装を理由に決定済みを未決へ戻さず、設計・コード・稼働・本人端末・正式受入れを分けます。差分なしは既存作業記録／PR説明へ理由を一行残し、無関係な再監査・日付更新・新checker・新履歴系列を増やしません。System Contextに未選択／staleでもfresh ownerの原本を直接読みます。
 
 source reference:
 - `02_forbidden_assumed_understanding_unverified_assertion.txt`
@@ -230,22 +230,11 @@ source reference:
 - `10_stop_judgment_and_unwritten_rules.txt`
 
 <a id="all-existing-information-and-files"></a>
-### R2.1 現存する全情報・全ファイルの確認を作業開始条件とする
+### R2.1 2026-11-02の全情報・全ファイル確認条件は撤回済み
 
-Mash様の2026-11-02明示指示を、そのまま開始条件とします。
+Mash様は同日、「現存する全情報・全ファイルの確認が終わるまで作業禁止」のルールを明示撤回しました。この条件による作業停止、全ファイル再監査の前提化、過去の蓄積をもう一度ゼロから確認し直す工程は適用しません。
 
-> 現存する全ての情報と全てのファイルを確認しない限り作業すんな。ルール化しろ。
-
-1. Cocolonの作業は、Cocolonに関して現存する全ての情報・全てのファイルの確認完了を開始条件とします。「全て」を、直近の資料、今回の機能、関連ファイル、current owner、最新weekly、System Contextの選択対象だけへ縮小しません。古い時期・旧名称・旧版・別の保存先であることを除外理由にしません。
-2. 過去の原会話・Mash様の思想と教示、Karen-Diary、議事録、設計、教材、旧実装と現実装、検証・失敗・不採用履歴、GitHub上の現存資料・実ファイル・履歴、保管ZIP・Libraryその他の既存情報を含めて所在と内容を確認します。この列挙を対象の上限にせず、参照先・添付・保管物も辿ります。
-3. 全体設計図・全ファイル地図・索引・検索結果・要約・model memory・差分・hash・生成Contextは、原本へ辿るための補助です。それだけで内容を読んだこと、全件の確認・理解が終わったことにしません。各実体を形式に応じて確認し、既存理論、既存構造、既存の機能・責務と、何が蓄積・変更・不採用になったかを把握します。
-4. 確認した情報を、古い思想・原定義から既存の設計・教材・実装を経て現在まで照合します。既存の情報・構造・部品・学習資産を把握する前に、新規設計・作り直し・置換を始めません。「情報や教材がない」「未定義」「新しい観測会が必要」と、未確認を不存在へ置き換えて判断しません。
-5. current/latest、承認済み/提案/廃止/失敗等の区別は、確認した内容から何を現行の判断・実行根拠へ採用するかを決めるためのものです。古い情報・旧構造を確認しなくてよい理由にはしません。新しい資料の存在だけで、以前からの蓄積を上書き・無視しません。
-6. 未取得・読取不能・所在未確認・未確認の内容が残る場合は、既存作業記録へその範囲と状態を明示し、全確認済みと宣言せず、仕様判断・観測会・設計・実装・学習・配置・成果物採用を含むCocolon作業へ進みません。部分確認、一覧取得、分担者の要約だけを全確認完了へ昇格しません。既存閲覧権限・非公開境界は保持し、取得不能を確認済みに変えません。
-7. R1の比例性・最小scope、専門ruleの適用範囲、関連差分のみの更新、standing delegation、過去の確認記録を、本条件の免除に使いません。「関連差分だけを更新する」は書込み範囲の規則であり、確認対象を関連箇所だけへ限定する規則ではありません。本条件に反して確認範囲を縮める既存記述には、今回のMash様の明示指示を優先します。
-8. 全確認には既存の原本・実ファイル・記録を使います。この指示から新しいchecker、独立した管理system、自動writerを作りません。GitHubの反映後検証は技術正本11に従い、内容の全確認と書込み結果の検証を混同しません。反映後の対象path検証だけで、作業前の全確認が終わったことにはしません。
-
-今回の「ルール化しろ」という明示指示は、この条件を既存ルール・入口と現在地へ記載して保存する規範修正として履行します。この記載・反映を全確認完了や製品作業再開の根拠にせず、今後の一般的なdocs-only例外として再利用しません。確認作業と未確認の報告は継続し、全確認未完了の間は製品作業の停止を維持します。
+既存の分析情報・資産とCMEEへの移植内容を踏まえ、今回の材料定義・既存構造・実装の該当箇所を確認して進めます。必要な原典・現物の確認、未確認を事実扱いしないこと、既存の承認・品質・非破壊境界は従来どおり維持します。教材の不足・未確認と、材料定義・分析理論・既存構造がないことを混同しません。撤回前の§80とcommit74be6b57の全確認開始条件を再適用しません。
 
 ## R3. 指示・scope・設計・authority
 
@@ -496,7 +485,7 @@ source reference:
 
 | 条件 | 必ず読むもの |
 |---|---|
-| 全Cocolon作業 | R2.1の現存する全情報・全ファイル確認条件、`../00_cocolon_current_product_and_state.md`全文、 本file、`09_work_start_checklist.txt`、`99_integrated_paste_each_time.txt` |
+| 全Cocolon作業 | `../00_cocolon_current_product_and_state.md`全文、 本file、`09_work_start_checklist.txt`、`99_integrated_paste_each_time.txt` |
 | GitHub write | `08_artifact_delivery_rules.txt`、技術正本`../11_cocolon_github_transport_and_session_continuity.md` |
 | material artifact / handoff / STOP保存 | `17_continuous_durable_work_recording_and_emergency_handoff.txt`、技術正本`../14_cocolon_continuous_work_recording_and_emergency_handoff.md` |
 | Work Python / pytest | `16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt`、技術正本`../13_cocolon_work_test_runner_runtime_continuity.md` |
