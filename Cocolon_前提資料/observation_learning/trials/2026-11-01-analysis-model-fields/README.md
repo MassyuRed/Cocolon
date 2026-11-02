@@ -1,4 +1,4 @@
-> **11/3最新・CE68完了：** CE68は同68教材/同74順・初期89baから既存plain CEで74更新/32新stop、495.459095秒で完了。SC6教師一致6/6、AT4/UQ2/MX2/OA2も全一致。weightedの時制改変4件と印刷/返送の余分な対象化は消えた一方、OD01の不明親曖昧という新退行、SQ03の継続修飾欠落、MD02否定不足/対象化、HQ04理由等が残り通常未採用。 [全結果・原本・次作業](#analysis-ce68-result-20261103)。新b2a5を通常/次初期値へ自動採用しない。完了runを再起動しない。
+> **11/3最新・replay68完了：** 再掲3枠だけを変えたreplay68は74更新/32新stop、491.863046秒で完了したが、新しい意味改善はなく不採用。SQ03/MD02の不足は残り、OD01は不正unitへ変化して拒否継続、MD01にも親曖昧の新拒否。SC6=6/6と旧AT/UQ/MX/OAの教師一致、CE68の局所改善は保持。 旧68にない『対象分離＋継続修飾＋強調否定』と別actor/二不明文脈の組合せ2件を原sourceから合成し、実strict/実file非生成再読/実tokenizer prefix・EOSまでCPU確認。モデル/生成/更新0、新70教材の学習plan/GPUは未選定。診断文やrawの教師化ではない。 [結果・原本・次作業](#analysis-replay68-result-20261103)。完了runを重複起動しない。新bb6eは通常/次初期値へ未採用。
 
 # Analysis — 最小field接続と実4B probe
 
@@ -938,3 +938,43 @@ CPUで旧267manifest・同68辞書・変更3位置・全68>=1・最後14同一�
 再開時は /workspace/analysis-replay68-20261103/result/report.json とrun.exitを先に確認し、作成済みrootへ重複起動しない。完了CE68は閉鎖のまま。全32を89ba/CE68/原sourceまで読み、SC6/AT4/UQ2/MX2/OA2保持とOD01/SQ03/MD02/HQ03/CQ04/HQ04を別判定、64保存再読と全member/112重みbytes-SHAをprivate保存する。
 
 通常source/API/DB/RN/Render/Supabase/稼働/配置/Pod管理不変、全未解析/主体未解決/route0・通常未採用、STRUCTURE_MAP_DELTA_NONE。本人基準の役割/判断/選択・記録間の再出現/変化・通常graph接続を既存の目的として継承し、この局所比較だけを全体完成へ換算しない。Codex Work/GPT-6 root単一writerと同環境read-only静的確認、独立Pro/Ultra/human受入れではない。
+
+
+<a id="analysis-replay68-result-20261103"></a>
+## 11/3 replay68完了 — 再掲3枠では改善せず、次の組合せ2件をCPU確認
+
+再掲3枠だけを変えたreplay68は74更新/32新stop、491.863046秒で完了したが、新しい意味改善はなく不採用。SQ03/MD02の不足は残り、OD01は不正unitへ変化して拒否継続、MD01にも親曖昧の新拒否。SC6=6/6と旧AT/UQ/MX/OAの教師一致、CE68の局所改善は保持。
+
+固定a133906e。初期89ba/同68教師辞書/同plain full-assistant CEを保持し、35 SC01→UQ01・40 SC02→BT08・55 SC05→ST07だけ再配分。全68>=1、SC03/04/06各2、74回/最後14旧順不変。実reportの全74stepも計画と一致。before32は保存89baの全要求/ref/messages/raw/report/proof同一性を照合再利用し、新生成はafter32のみ。更新前68NLL差0、Dropout module/attention/LoRA dropout0。他の学習/生成条件不変で、この3件のdose/orderが一緒に変わる一回比較。全replay方式の無効や唯一原因の証明へしない。
+
+| 対象 | CE68からの実変化 |
+| --- | --- |
+| SQ03/MD02 | raw同一。継続修飾欠落、主体回復後の否定qualifier不足/参加語幹対象化は未改善 |
+| OD01 | 拒否継続。unknown rootの不正parentと内容unit必須key欠落等に変わり、unit_invalidで拒否。元の名詞対象も欠落、全文行動/actorは保持 |
+| MD01 | 二不明を同じ短いrootへ縮め、親曖昧で新拒否。beforeの修飾scopeも既知未達なので、意味全体が正常だったとはしない |
+| PQ01 | 二つの異なる一意な短いrootへ正しい各内容を対応させる有効な表現差。改善/退行へ数えない |
+| SC6/SD2/HQ03/CQ04/MX2/OA2 | CE68の局所結果をbyte同一で保持。weightedの時制/余分対象退行は再発なし |
+| HQ04/MD01修飾scope | 理由/修飾の既知未達は継続 |
+
+全32source/89ba/CE68/新rawをrootと同環境read-only担当が照合。教師JSON exact AT4=4/4・UQ2=2/2・MX2=2/2・OA2=2/2・SC6=6/6。raw byte不変CE68比29/32・89ba比20/32・weighted比23/32。構造before28→CE6831→今回30/32を意味成功率にしない。新bb6eae4f/config85ef77edも通常/次初期値へ自動採用しない。
+
+実74更新/136測定/2load/32stop、491.863046秒（親493.308540）/exit0、compute空。112有限F32/3,833,856paramsの保存実model一致・非学習reload、89ba/weighted6964/CE68b2a5の重み/config不変を確認。別CPU processの64応答は58candidate ID/coverage一致・6拒否維持、保存readerのgenerate/compiler/author禁止、新load/生成/更新0。元report PENDING_RAW_READ bytesを保全し、読解済み判断は[本文なし結果JSON](semantic_units_replay68_results.json)とprivate reviewへ分離。
+
+[private原本archive](https://chatgpt.com/library?file_id=libfile_16270a90f67c8191859d75e8e1fcc578&account_id=personal)：14,870,458bytes、SHA256 `31ec004b9584170e7d40103a4ad6b70f07698ab253b27763af598a7d90d5bdd4`、286member。元run267/manifest266、run関連source273memberと112重み元bytes/SHA一致。CRを保つJSON text/uint32 bit列の分割回収、ZIP containerのみ再圧縮。次のCPU2原本・初回補助失敗も同archiveへ保存。回収のモデル再実行0。処理按分約$0.079245@前回確認$0.58/h、準備/転送/回収/保持/税等別。
+
+<a id="analysis-combination2-cpu-20261103"></a>
+### 次の組合せ2件までCPU実装（学習計画/新GPUではない）
+
+既存BT08は継続修飾＋強調否定だが対象非分離、ST05は対象分離＋強調否定だが継続修飾なし、ST07は対象分離＋継続修飾＋別否定形。既存68にはこの3要素を同時保持するteacher0。別actorの独立否定参加＋二不明はSC01/04の2文脈に限られる。これは組合せのcoverage観測であり、語彙不存在/教師不足が唯一原因とはしない。
+
+旧68にない『対象分離＋継続修飾＋強調否定』と別actor/二不明文脈の組合せ2件を原sourceから合成し、実strict/実file非生成再読/実tokenizer prefix・EOSまでCPU確認。モデル/生成/更新0、新70教材の学習plan/GPUは未選定。診断文やrawの教師化ではない。
+
+RC01は対象を分けた行動に継続修飾/否定を同時保持する2unit、RC02は別actorの全文否定行動＋二つの全文不明root/内容childの5unit。両新全文は旧68/評価32の全memo/action field完全一致0。華恋の架空合成/既見近接で、Mash教示/盲検一般品質ではない。診断SQ03/MD02/OD01そのものやモデルrawはteacherへ使わない。旧68辞書も不変。
+
+実受口strict2、実serialize→file→保存readerの同一ID/coverage再読（generate/compiler/author禁止）、実tokenizer prefix/EOS改行/非切詰め/8192上限が一致。RC01 prompt994+target96=1090、RC02 1005+214=1219。全未解析/主体未解決/route0、通常未採用、モデルload/新生成/学習0。generic helperはsemantic_units_combination2_cpu.py、source/messages/target/候補2/result全bytesはprivate archive内。
+
+最初のCPU試行は華恋がbuild時の既存Engine.generate dispatchまでpatchし、strict前にAssertionErrorで停止した。build周囲のpatchだけを除き、保存再読の禁止を保った同2source/targetをfresh-v2で確認。初回helper/source/失敗metadataを保存。受口・教材を変えた修復やモデル生成ではない。
+
+次はこの2件と旧68の保持を両立する一候補の初期値/dose/順/保持/近接評価/capを固定する。新70教材の学習計画はまだ選定せず、今回の不採用重みへ追学習/完了run重複/追加epoch/出力補修/受口緩和をしない。再開時は本結果と/workspace/analysis-replay68-20261103/result/report.json/run.exitを先に確認する。
+
+通常source/API/DB/RN/Render/Supabase/稼働/配置/merge/Pod管理0、全未解析/主体未解決/route0・通常未採用、正式0/3・54.50％据置。STRUCTURE_MAP_DELTA_NONE、primary TECHNICAL_CREDIT/product_credit0。Codex Work/GPT-6 root単一writer＋同環境read-only確認、独立Pro/Ultra/human受入れではない。本人基準の役割/判断/選択→既存五種/注記/不明→記録間の再出現/変化→通常graph/保存/補足/月次比較という既存残件を継承する。

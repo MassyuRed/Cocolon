@@ -3238,3 +3238,20 @@ API2c259f0e、STRUCTURE_MAP_DELTA_PRESENT。新production file/ownerなし。API
 | semantic_units_ce68_results.json | body-free全実数値・意味読解・保持/退行・未採用・private原本参照・次CPU |
 
 原run268/manifest267、source276member/112重みbytes-SHA一致、private ZIP281member。全体現在地/Analysis map/最新weekly§85訂正・§86/trialを同期。形式受理/教材再現を一般意味品質にしない。
+
+
+### 2026-11-03 — 再掲3枠比較と新組合せ2件のCPU（隔離研究）
+
+通常Analysis owner/型/API/DB/RN/依存/稼働構造不変、STRUCTURE_MAP_DELTA_NONE。以下は既存trial内の新7fileで、別の通常subsystemではない。詳細はREADME#analysis-replay68-result-20261103。本文/教師/重みはprivate archive、publicはgeneric実行code/本文なし結果だけ。
+
+| file | 役割 |
+| --- | --- |
+| semantic_units_replay68_prepare.py | 同68教師・3再掲位置/74順・before32の原本同一性をCPU照合 |
+| semantic_units_replay68_run.py | plain CE/74更新/136測定/2load/32after、更新前NLL/dropout0と112保存再読 |
+| semantic_units_replay68_supervisor.py | 267旧manifest/2134source/89ba/before32を照合、一回上限710+10・partial/compute保全 |
+| semantic_units_replay68_saved_replay.py | 64保存応答58候補一致/6拒否維持、保存readerの生成/compiler/author禁止 |
+| export_replay68_numeric.py | CR付きUTF-8/uint32 bit列を元bytes-SHAで回収する材料 |
+| semantic_units_replay68_results.json | 本文なし実結果/不採用/次CPU2/private原本と未選定GPU |
+| semantic_units_combination2_cpu.py | private新source2件を実strict/serialize/file非生成reload/実tokenizerでCPU確認。初回の過大patchをbuild部分だけ除去しv2成功 |
+
+今回3枠比較に新意味改善なし、MD01構造退行あり通常未採用。新CPU2はモデル品質/70教材planへ昇格しない。原run267/manifest266・source273/112重みbytes-SHA、CPU2の4member/manifest再読を確認。全体現在地/Analysis map/最新weekly§88/trialを同期。

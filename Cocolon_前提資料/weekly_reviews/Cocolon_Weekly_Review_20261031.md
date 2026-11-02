@@ -2298,3 +2298,19 @@ Codex Work/GPT-6 root単一writer＋同環境read-only確認。独立Pro/Ultra/h
 同Jupyter CPUで267原manifest/全68辞書/3位置/全74順/before32の要求・raw・89ba proof一致を確認、model/生成/更新0。固定GitHubコード照合後に一回実行する。74更新/136測定/2load/after32、720秒(710+10)、前回確認$0.58/hなら処理上限按分$0.116・準備/取得/回収/保持別。更新前NLL差/dropout0 guardを継承。再開時はまず /workspace/analysis-replay68-20261103/result/report.json/run.exit、重複起動/延長/再試行/受口緩和/出力補修なし。
 
 通常source/API/DB/RN/Render/Supabase/稼働/配置/Pod管理0、全未解析/主体未解決/route0・通常未採用、正式0/3・54.50％据置、STRUCTURE_MAP_DELTA_NONE。本人基準の役割/判断/選択・記録間関係・通常graph接続が既存目的。Codex Work/GPT-6 root単一writer＋同環境read-only静的確認、独立Pro/Ultra/human受入れではない。
+
+
+<a id="analysis-replay68-result-20261103"></a>
+### §88 再掲3枠比較は不採用、次の新組合せ2件をCPU確認
+
+[全条件・結果・原本・再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-replay68-result-20261103)。再掲3枠だけを変えたreplay68は74更新/32新stop、491.863046秒で完了したが、新しい意味改善はなく不採用。SQ03/MD02の不足は残り、OD01は不正unitへ変化して拒否継続、MD01にも親曖昧の新拒否。SC6=6/6と旧AT/UQ/MX/OAの教師一致、CE68の局所改善は保持。
+
+固定a133906e、同68辞書/初期89ba/同plain CEで3位置だけ変更。全68>=1、74/最後14不変、実74step一致。before32は原本89ba同一性照合で再利用。更新前NLL差0/Dropout module・attention・LoRA0。74更新/136測定/2load/32stop、491.863046秒（親493.308540）/exit0。新bb6e/config85efは112有限F32/3,833,856params保存・実model一致・非学習reload、旧89ba/6964/b2a5不変・compute空。
+
+全32を原source/89ba/CE68までroot/同環境read-only担当が読解。SQ03/MD02未改善、OD01はunit_invalidで拒否継続、MD01は新親曖昧拒否（beforeも修飾scope既知未達）。PQ01は一意な短い二rootの適正表現差で非退行。SC6/SD2/HQ03/CQ04改善は保持、AT4/UQ2/MX2/OA2/SC6教師exact全数維持。raw CE68比29/32・89ba比20/32不変、構造before28/CE6831/今回30を意味率にしない。今回候補も通常/次初期値未採用、一回の3slot dose/order比較で全replayや唯一原因へ一般化しない。
+
+64保存応答58候補一致/6拒否維持、新load/生成/更新0。元run267/manifest266、source273/112重みbytes-SHA一致、元report PENDING_RAW_READ bytes保全。[private原本](https://chatgpt.com/library?file_id=libfile_16270a90f67c8191859d75e8e1fcc578&account_id=personal)は14,870,458bytes/SHA31ec004b9584170e7d40103a4ad6b70f07698ab253b27763af598a7d90d5bdd4/286member。ZIP containerのみ再圧縮、回収のモデル再実行0。
+
+旧68にない『対象分離＋継続修飾＋強調否定』と別actor/二不明文脈の組合せ2件を原sourceから合成し、実strict/実file非生成再読/実tokenizer prefix・EOSまでCPU確認。モデル/生成/更新0、新70教材の学習plan/GPUは未選定。診断文やrawの教師化ではない。 実RC01=2unit/994+96=1090token、RC02=5unit/1005+214=1219token。両sourceは旧68/32全memo/actionと完全一致0、華恋合成/既見近接でMash教示・盲検ではない。初回CPUは華恋の過大patchでbuild dispatch前停止し、buildだけpatch除去/保存再読の禁止保持・同source/targetをfresh-v2で確認。元helper/source/失敗metadata保存、受口変更やモデル生成なし。
+
+次は旧68保持と新2組合せを両立する一候補の初期/dose/順/保持/近接/cap固定。閉鎖run重複/不採用重みへの自動追学習/追加epoch/出力補修/受口緩和なし。本人基準の役割/判断/選択・記録間の再出現/変化・通常graph接続という既存目的を継承。通常source/API/DB/RN/Render/Supabase/稼働/配置/Pod管理0、全未解析/主体未解決/route0、正式0/3・54.50％据置。処理按分約$0.079245@前回確認$0.58/h、準備/回収/保持等別。STRUCTURE_MAP_DELTA_NONE、primary TECHNICAL_CREDIT/product_credit0。全体現在地/全file地図/Analysis map/trial同期。Codex Work/GPT-6 root単一writer＋同環境read-only確認、独立Pro/Ultra/human受入れではない。
