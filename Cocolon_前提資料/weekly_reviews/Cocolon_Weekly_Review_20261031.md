@@ -2117,3 +2117,13 @@ adapterなし同revision/同messagesの4callを52.989783秒/1load/学習測定0�
 旧58に独立行動と二不明を共存するfieldが0だったため、別題材の本人否定行動＋二不明を1題材2順序MX01/02としてCPU束縛/同process serialize-reload一致まで確認。HQ03やモデルrawを教師化しない。これはHQ03を見た後の近接教材で、盲検/独立2題/唯一原因/品質成功の証拠ではない。次は初期値/dose/順/評価/上限を明示した一候補比較を固定してから進め、理由/時点は別の残件として追う。完了runを重複起動しない。
 
 全結果・全原本・CPU限界・次の実装順は[trial LR1結果](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-unknown58-lr1-result-20261102)と[CPU教材](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-mixed-unknown-cpu-20261102)。今回二候補合計128更新/56新生成、処理按分LR1約$0.05212@0.58/h（準備/回収/保持等別）。通常source/受口/map/DB/RN/Render/Supabase/稼働/merge/deploy変更0、正式0/3・54.50％据置。BLOCKER_NARROWED/STRUCTURE_MAP_DELTA_NONE。Codex Work/GPT-6、同環境監査であり独立Pro/Ultra/human受入れとはしない。Mashの必要GPU/実装/GitHub継続明示承認内で完了・保存。local Git metadata消失は残存file＋GitHub親照合/lease反映で吸収し、復旧のためのモデル再実行0。
+
+
+<a id="analysis-mixed60-plan-20261102"></a>
+### §73 行動＋二不明の混在を旧58保持と比較する一候補を固定
+
+最新PR30=0decb5e9/API3=86d19b6d/PR37=99f925ec、全体設計/全file地図/全機能current全文/対象map/目的と§72を確認。保存LR1の750aを今回だけ明示初期値へ選び、旧AT4/UQ2/AF01/CQ03を保持したまま混在不足を見る。新MX2は1題材2順序でHQ03/モデルrawを教師化しない。旧58各1＋MX各4=66更新、固定順/seed/LR1e-5/完全target objective/終端/clip/生成条件を維持し、最後8更新は旧教材。
+
+新60targetのstrict束縛・実file write/read後の同process非生成reload・ID/coverage一致をCPU確認、最大prompt1028/full1270/target246で全終端一致。20評価messages/refも照合、モデルload/新生成/更新0。旧16beforeは同750a afterから原bytes再利用、新MX2/別題材MD2 before4＋全20after=24新生成、120測定/3load/process900秒（TERM890+kill10）一候補。MD2は肯定本人/他者否定と二不明を近接診断し、盲検一般品質にはしない。AT4/UQ2/MX2再現とHQ03/MD2親対応を全文で読む。理由/時点/修飾残件を別追跡し、意味不足なら通常未採用。
+
+[固定計画・実装順・原本](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-mixed60-plan-20261102)。Mashの必要作業/GPU/GitHub継続明示承認内、Codex Work/GPT-6 root単一writer＋同環境read-only監査。前回単価0.58なら処理按分上限$0.145、準備/回収/保持等別。通常map/受口/API/DB/RN/稼働/正式0/3・54.50％据置、STRUCTURE_MAP_DELTA_NONE。ここは実行前checkpointで新GPU未実行。

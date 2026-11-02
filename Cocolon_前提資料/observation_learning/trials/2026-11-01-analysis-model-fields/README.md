@@ -1,6 +1,6 @@
 # Analysis — 最小field接続と実4B probe
 
-**11/2最新再開点：unknown58とLR1は両方完了・全原本/112重みを保存済み。LR1は旧AT4再現4/4と反復不明UQ2再現2/2を両立したが、混在/時点/理由に不足が残り通常未採用。保存37候補/拒否11件の別CPU process照合も完了。次はCPUで成立した「独立した行動＋二つの不明」1題材2順序を使う有限比較の具体化。[LR1全結果/原本](#analysis-unknown58-lr1-result-20261102)／[CPU教材と次の直接作業](#analysis-mixed-unknown-cpu-20261102)。完了runを重複起動しない。**
+**11/2最新再開点：LR1までの結果/全重みを保存済み。新mixed60はCPU60教材/保存再読/実tokenizer確認を完了し、66更新/24新生成/900秒の一候補を固定。ここではGPU未起動。[今回の固定計画](#analysis-mixed60-plan-20261102)。開始後は /workspace/analysis-mixed60-20261102/result/report.json と run.exit を先に確認して重複起動しない。前回の残件/採否は[LR1全結果](#analysis-unknown58-lr1-result-20261102)。**
 
 2026-11-01 JST。開始原本：Cocolon PR30 `1c66add4fdf8f5ded18f7443d6b91b1771998244`、API PR3 `36713940ea82e217fab8a7c0a738a33f21df1c4d`。Mashの分析残件開始とweekly§45.4に従う。Codex Work/GPT-6、root華恋が実装/統合/反映、別文脈agentはread-only監査のみ。独立Pro/Ultra又はhuman品質受入れとは呼ばない。System Context最新cacheは未成立のまま、fresh原本fallbackを使用。
 
@@ -669,3 +669,21 @@ LR1実行開始：固定c777b4dbのplan/runnerを照合して一回起動。repo
 この二候補は合計128更新/56新生成で、前節までの群と合わせ追加440更新/224新生成/局所9forward（固定32以前の240更新/48生成は別）。独立224題ではない。API86d19b6d/通常map/HTTP/DB/RN/Render/Supabase/merge/deploy/Pod Stop等の変更0、正式0/3・54.50％据置。BLOCKER_NARROWED、STRUCTURE_MAP_DELTA_NONE（既存private owner/契約内の内容比較で接続責務は不変、map先頭の実結果案内だけ更新）。Mashの必要作業/GPU/GitHub継続承認内、実際の環境はCodex Work/GPT-6と同環境read-only監査であり独立Pro/Ultra/human受入れではない。
 
 復旧時のlocal Git worktree参照先はscratch cleanupで失われていたため、残存fileとGitHub fresh親730c4627を照合し、Git Data APIのexpected_sha leaseで反映する。Git metadataのために製品sourceを作り直さない。再開時は本節と全結果を読み、完了unknown58/LR1を再起動しない。
+
+
+<a id="analysis-mixed60-plan-20261102"></a>
+## 11/2 — 行動と二不明の混在を、旧58保持と一候補で比較
+
+[固定plan](semantic_units_mixed60_plan.json)/[CPU実結果](semantic_units_mixed60_cpu.json)/[CPU準備script](semantic_units_mixed60_prepare.py)/[GPU runner](semantic_units_mixed60_run.py)/[原本照合・回収](semantic_units_mixed60_supervisor.py)。全機能current全文、恒久incident、Karen-Diary、rule/Rule18、System Context入口、全体設計と全file地図01/01B、Analysis/CMEE map、設計04の新親quote契約、観測学習目的と最新weekly§72を確認。PR30=0decb5e9/API3=86d19b6d/PR37=99f925ec。最新System Context cacheは未成立のままfresh原本fallbackを使い、索引再試行・旧tracked snapshotの流用をしない。
+
+今回の直接不足は、独立した行動＋二つの本人記載不明が同fieldに混在した時に、行動/主体/否定と各不明の親対応を保てないこと。旧58の教材にはその併存が0だった。華恋の1題材2順序MX01/02を別追加し、旧58のsource/messages/targetはdict完全不変。HQ03自体/モデルrawを教師へ移さず、観測した教材不足を唯一原因や盲検一般品質の証拠にしない。
+
+初期値は保存LR1の750a7809/13ca901aを今回だけ明示選択する。99916と旧AT4=4/4を同じく保持し、さらにUQ2=2/2とAF01理由/CQ03keyの改善があるため、この保持を残した混在改善を見る。通常採用や自動追加epochではない。fresh optimizer、旧58各1＋MX各4=66更新、同LR1e-5/seed20261110/weighted全assistant CE/完全終端/prompt全masked/clip1/weight_decay0を使用。旧56の既存interleave順を保ちUQ2/MX2を明記順で挿し、最後8更新は旧教材。具体順はplanで固定し途中変更しない。
+
+CPUは全60targetのstrict束縛、実file write/read後の同process非生成reload、source-bound ID/coverage一致と全unparsedを確認。実AutoTokenizerは最大prompt1028/full1270/target246、全target終端まで完全一致・切捨てなし、生成枠込み8192内。20評価のprepare/messages/refも再照合。model load/新生成/更新0、CPU表現成立はモデル品質ではない。
+
+実装順は、CPU60→plan/runner/結果のGitHub checkpoint→2134source/loader/初期SHA/前回終了と同16request/messages/raw/report照合→750aの新before4（MX2と別題材MD2）→60NLL→固定66更新→60NLL→112tensor有限保存/実model一致→解放/fresh非学習reload→全20after→全rawのsource/意味読解と保存file非生成再読→全重み/原本回収→結果と全体currentの差分更新。旧16beforeは同750a afterを原bytesで再利用し、新beforeへ再生成しない。新24生成/120測定/3load以内、process900秒（TERM890+kill10）、各23秒/context8192/max2048/nonthinking/greedy、固定Qwen3.5-4B/revision851bf6e/BF16/SDPA/既存pinsを維持。最終archiveへCPU60candidate現物も含める。
+
+MD01は肯定本人行動と二不明、MD02は他者の否定行動と二不明を、教師と非同一の別fieldで見る。両方root作成の近接診断で、HQ03を見た後の設計。モデル未使用という状態と、盲検評価/一般転移の証明を混同しない。新MX2の教示再現、旧AT4/UQ2保持、HQ03/MD2の意味/明示主体/否定/各不明の正しい親を全文で確認する。旧16内のNV04/CQ04/SQ/PQ02/HQ04の時点・理由・modifier残件も追い、受理数/NLLだけで採用しない。意味不足/退行があれば通常未採用、原raw補修/受口緩和/再試行/追加epochを行わない。
+
+必要GPU/実装/GitHub反映はMashの現在の継続明示承認内、追加の承認待ちへ戻さない。既存Pod kvdyw8xtonhf5wをJupyter直接接続で使用し、新規Pod/チャージ/再起動/Stop/削除は0。前回観測$0.58/hなら処理按分上限$0.145（準備/回収/保持/通信/税等別、総請求保証ではない）。scopeは既存private契約内の内容比較（LEVEL_2相当）、actual execution ownerはCodex Work/GPT-6 root華恋、補助agentは同環境read-only監査。独立Pro/Ultra/human受入れを偽装しない。通常API/受口/意味型/DB/RN/Render/Supabase/依存/稼働/merge/deployを変更しない。STRUCTURE_MAP_DELTA_NONE、正式0/3・54.50％据置。完了は一候補の有限実行・全文比較・原本保存であり、商品完成は未認定。
