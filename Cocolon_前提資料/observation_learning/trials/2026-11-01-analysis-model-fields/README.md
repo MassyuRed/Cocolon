@@ -989,6 +989,6 @@ Mashの分析残件続行・既存GPU/Jupyter使用・必要作業承認済み�
 
 plain full-assistant CE、LR1e-5/seed20261110/clip1/prompt全mask/EOS/生成条件/strict受口不変。旧68の更新前NLL差<=1e-6とdropout0を維持し、新2件はbefore/after測定。最大78更新/140測定/3load/36新生成、内部900秒・外側TERM890+kill10。前回確認$0.58/hなら処理按分上限$0.145、準備/取得/転送/保持等別。延長・再試行・追加epoch・出力補修・受口緩和なし。partialも保存する。
 
-実fileは同folderのsemantic_units_combination70_prepare.py/run.py/supervisor.py。CPUは旧267manifest/旧68辞書/74部分列/最後14/RC2原本/旧32beforeを照合し、GPU前にGitHubコードを固定する。再開時は /workspace/analysis-combination70-20261103/result/report.json と /workspace/analysis-combination70-20261103/run.exit を先に確認し、rootが存在するなら重複起動しない。
+実fileは同folderのsemantic_units_combination70_prepare.py/run.py/supervisor.py。CPUは旧267manifest/旧68辞書/74部分列/最後14/RC2原本/旧32beforeを照合し、GPU前にGitHubコードを固定する。固定399c1187の3script全bytes一致とCPU準備成功後、同Jupyterで一回起動済み。53.865708秒時点で新2before完了/70測定/2更新、status STARTED。最終結果・品質未確定。再開時は /workspace/analysis-combination70-20261103/result/report.json と /workspace/analysis-combination70-20261103/run.exit を先に確認し、rootが存在するなら重複起動しない。
 
 既存診断へ改善がなければdose/orderの再調整を続けず、実出力に現れた責務と意味採用の原因へ戻る。本人基準の役割/判断/選択→既存五種/注記/不明→記録間の再出現/変化→通常graph/保存/補足/月次比較という全体目的を継承する。今回の局所成功を分析完成にしない。通常source/API/DB/RN/Render/Supabase/配置/Pod管理不変、全未解析/主体未解決/route0・通常未採用。STRUCTURE_MAP_DELTA_NONE（隔離研究のみ）。Codex Work/GPT-6 root単一writer＋同環境read-only確認、別モデルPro/Ultra/human受入れではない。

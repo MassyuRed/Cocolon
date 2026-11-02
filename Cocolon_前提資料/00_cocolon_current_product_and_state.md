@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-**11/3・分析combination70実行準備：** 前回replay68は不採用のまま継承。CPU確認済み原source対比RC2を旧68へ追加し、初期89ba/plain CE・旧CE68の74順を部分列保持した78更新/36新生成（RC2 before2＋全34after）/900秒一回を具体化した。旧32before再利用、旧保持と未学習の既見診断への転移を分離する。次の比較で改善がなければdose/order調整を続けず実出力の原因へ戻る。[計画/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-combination70-plan-20261103)。GPU実結果は未確定。本人基準の役割/判断/選択と記録間関係/通常graph接続は既存残件。通常source/API/DB/RN/稼働/配置/Pod管理不変、STRUCTURE_MAP_DELTA_NONE。
+**11/3・分析combination70実行中：** 前回replay68は不採用のまま継承。CPU確認済み原source対比RC2を旧68へ追加し、初期89ba/plain CE・旧CE68の74順を部分列保持した78更新/36新生成（RC2 before2＋全34after）/900秒一回を具体化した。旧32before再利用、旧保持と未学習の既見診断への転移を分離する。次の比較で改善がなければdose/order調整を続けず実出力の原因へ戻る。[計画/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-combination70-plan-20261103)。固定399c1187のコード/CPU照合後、一回起動。初期2beforeと70測定終了/2更新時点のSTARTEDを確認、最終結果は未確定。本人基準の役割/判断/選択と記録間関係/通常graph接続は既存残件。通常source/API/DB/RN/稼働/配置/Pod管理不変、STRUCTURE_MAP_DELTA_NONE。
 
 **11/3・分析CE68比較完了（第9回§86）：** CE68は同68教材/同74順・初期89baから既存plain CEで74更新/32新stop、495.459095秒で完了。SC6教師一致6/6、AT4/UQ2/MX2/OA2も全一致。weightedの時制改変4件と印刷/返送の余分な対象化は消えた一方、OD01の不明親曖昧という新退行、SQ03の継続修飾欠落、MD02否定不足/対象化、HQ04理由等が残り通常未採用。 元run268member/112重みbytes-SHA、64保存応答再読（59一致/5拒否）を確認。[全結果/原本/次CPU](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-ce68-result-20261103)。新b2a5を通常/次初期値へ自動採用しない。本人基準の役割/判断/選択・記録間関係・通常graph接続は残件。通常source/API/DB/RN/稼働/配置/Pod管理不変、STRUCTURE_MAP_DELTA_NONE。
 

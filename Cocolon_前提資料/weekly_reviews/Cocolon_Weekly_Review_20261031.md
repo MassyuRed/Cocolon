@@ -2321,4 +2321,4 @@ Codex Work/GPT-6 root単一writer＋同環境read-only確認。独立Pro/Ultra/h
 
 Mashの包括的な続行/GPU/Jupyter/GitHub保存指示で、前回の完了run/exit0とcompute空を直接確認した。全体設計と01A〜C全file地図、全体現在地、作業規則、観測学習目的、§82/88と原本を確認。root単一writer、同環境read-only担当が比較案/実装を確認し、正式な別モデル審査とはしない。
 
-[trialの具体条件](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-combination70-plan-20261103)：初期89ba/plain CE、旧68辞書/旧CE74順の部分列/最後14保持、RC2各2追加＝78更新。旧32beforeは同一性照合再利用、RC2新before2＋34after＝36新生成、140測定/3load/900秒・処理按分上限$0.145@前回確認$0.58/h（準備/転送/取得/保持別）。改善がなければdose/orderだけの反復を止める。現在は実行準備、結果未確定。通常source/API/DB/RN/Render/Supabase/配置/Pod管理変更0、STRUCTURE_MAP_DELTA_NONE。全体目的と通常graph接続残件を維持する。
+[trialの具体条件](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-combination70-plan-20261103)：初期89ba/plain CE、旧68辞書/旧CE74順の部分列/最後14保持、RC2各2追加＝78更新。旧32beforeは同一性照合再利用、RC2新before2＋34after＝36新生成、140測定/3load/900秒・処理按分上限$0.145@前回確認$0.58/h（準備/転送/取得/保持別）。改善がなければdose/orderだけの反復を止める。固定399c1187の3script全bytesと6反映pathを読み戻し、同Jupyter CPU準備が成功後、一回起動。53.865708秒時点でRC2 before2完了・70測定・2更新、2load/STARTEDを確認。最終結果未確定。通常source/API/DB/RN/Render/Supabase/配置/Pod管理変更0、STRUCTURE_MAP_DELTA_NONE。全体目的と通常graph接続残件を維持する。
