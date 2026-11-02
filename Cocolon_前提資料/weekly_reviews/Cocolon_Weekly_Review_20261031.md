@@ -2175,3 +2175,15 @@ other62全結果/270原本/112重みを3c6e7ff3で確定反映後、MD02/OA02各
 同base/API/loader/2134source/pins/seed/23秒、学習0/2load/12call/300秒打切り（TERM290+10）。partial保全、延長/再試行/受口緩和なし。独立ACTION/actor/NEGATION/actor対象化/不明親を全文で判定する。HQ03退行/CQ04少し/HQ04理由は別追跡。GPUはここでは未実行。[固定計画/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-actor-predicate-plan-20261102)。Mash継続明示承認内、root単一writer/同環境read-only監査、通常source/map/DB/RN/稼働/正式0/3・54.50％据置、STRUCTURE_MAP_DELTA_NONE。
 
 §77実行開始：固定1d3cdc15のplan/prepare/runnerを全SHA照合後、同Jupyterで一回起動。report STARTED/39.979秒/3call開始/1load/更新0。先に `/workspace/analysis-actor-predicate-20261102/report.json` と `run.exit` を確認し重複起動しない。完了/追加学習/採用は未宣言。
+
+
+<a id="analysis-actor-predicate-result-20261102"></a>
+### §78 actor/predicate診断を完了、文脈別scopeと次CPU6対比へ
+
+固定1d3cdc15で追加学習0/12stop/2load/185.833775秒、親187.112487秒/exit0・compute空。f982/89baの2重み/config不変、元4結果原bytes再利用。全16rawをroot/同環境read-only監査がsourceと全文確認し、7candidate/9拒否を別CPU process非生成保存再読で全一致。全66元member/manifest65のbytes/SHA/CRC一致でprivate Library libfile_a9e85a64a9608191a0e9dfe6f5602d1d、203114bytes/SHAc5e14d8f…へ保存。other62全270原本/112重みは前節保全済み。
+
+89baのOA文脈×返送は姉/父ともroot actor/NEGATION/二不明が揃うが、父返送もMD文脈では失敗。参加は両文脈/両主体でscope不足。MD父参加は父対象化、OA姉参加は構造拒否へ退行。姉単独原因/返送語だけの一般化は支持せず、語×元文脈の偏りへ絞る。旧参加3教材は全CONTENT_TARGET、返送2順序は独立rootだが、件数・整合を唯一因果としない。新12受理は両重み2/6、保存4込み3/8→4/8、raw不変1/8。意味成功率へ換算せず通常未採用。
+
+新叔父actor・2別unknown文脈×参加の否定/肯定/名詞対象のSC6をroot合成しCPU具体化。全文ACTION root actor/否定と名詞対象を対比し、旧62/MD02/OA02/model rawを変更/教師コピーしない。strict6/実file同process非生成reload/IDcoverage/実tokenizer終端全一致、最大1007prompt/237target/1244full、各5/5/6unit。モデル/新生成/更新0。一actor近接教材で盲検/Mash教示/6独立観測/モデル品質ではない。次は初期保存重み/dose/順/保持probe/新対照/capを明示固定してから別一候補へ進む。次GPU未選択、診断source/89ba自動採用なし。HQ03主体qualifier退行/CQ04少し/HQ04理由は別残件。
+
+[全結果・原本・CPU6・次の実装順](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-actor-predicate-result-20261102)。処理按分約$0.02994@前回0.58/h、準備/回収/保持等別。Mash継続明示承認内、root単一writer/同環境監査、通常source/map/DB/RN/稼働/正式0/3・54.50％据置、STRUCTURE_MAP_DELTA_NONE。

@@ -3184,3 +3184,6 @@ API86d19b6d、STRUCTURE_MAP_DELTA_PRESENT。通常の累積mapは不変。新ana
 
 
 11/2 actor/predicate診断のtrial file地図（同trial配下）：`semantic_units_actor_predicate_prepare.py`は2元文脈×主語2×動詞2のsource/ref生成と4保存結果identity/実tokenizer、`semantic_units_actor_predicate_plan.json`は8source/6新/4再利用/12新call/2保存重み/300秒、`semantic_units_actor_predicate_cpu.json`は実CPU照合、`semantic_units_actor_predicate_run.py`は追加学習0の一回生成とpartialを含む原本回収。README#analysis-actor-predicate-plan-20261102/weekly§77。準備時GPU未実行、STRUCTURE_MAP_DELTA_NONE。
+
+
+11/2 actor/predicate診断完了のtrial地図：`semantic_units_actor_predicate_results.json`は新12/再利用4の16raw読解・局所scope比較・全66原本identity、`semantic_units_actor_predicate_saved_replay.py/json`は別CPU processの保存7candidate/9拒否照合。runは完了、再実行しない。次の`semantic_units_scope_contrast_cpu_run.py/json`は旧62不変で新actor/2文脈×否定/肯定/名詞対象SC6のstrict/実file非生成再読/実tokenizerと合成payloadを保有。次GPU計画/新製品ownerではない。README#analysis-actor-predicate-result-20261102/weekly§78、STRUCTURE_MAP_DELTA_NONE。

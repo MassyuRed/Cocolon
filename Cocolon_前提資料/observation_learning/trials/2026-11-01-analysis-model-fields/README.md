@@ -1,6 +1,6 @@
 # Analysis — 最小field接続と実4B probe
 
-**11/2最新再開点：other62全結果/全270原本/112重み保存をGitHub3c6e7ff3で完了。次のactor/predicate診断はCPU8source/ref・保存再利用4結果・実tokenizer照合済み。両文脈で姉/父×参加/返送、6新source×保存f982/89ba=12新生成・学習0/2load/300秒打切りを固定。GitHub1d3cdc15固定版を同Jupyterで一回起動、39.979秒/新3call開始/1load/更新0を確認。完了は未確認。[固定計画](#analysis-actor-predicate-plan-20261102)。通常未採用、完了other62を重複起動しない。**
+**11/2最新再開点：other62の68更新/28生成と、actor/predicate診断の追加学習0/12生成を完了。全270＋66原本/112重み保存、全48＋16応答の保存再読・意味監査済み。改善は動詞×元文脈に限られ、actor名だけでは説明できず通常未採用。次の2文脈×否定/肯定/名詞対象SC6をstrict/実file非生成再読/実tokenizerまでCPU確認（モデル0）。[診断全結果/原本/次の実装順](#analysis-actor-predicate-result-20261102)。完了runを重複起動しない。**
 
 2026-11-01 JST。開始原本：Cocolon PR30 `1c66add4fdf8f5ded18f7443d6b91b1771998244`、API PR3 `36713940ea82e217fab8a7c0a738a33f21df1c4d`。Mashの分析残件開始とweekly§45.4に従う。Codex Work/GPT-6、root華恋が実装/統合/反映、別文脈agentはread-only監査のみ。独立Pro/Ultra又はhuman品質受入れとは呼ばない。System Context最新cacheは未成立のまま、fresh原本fallbackを使用。
 
@@ -769,3 +769,39 @@ CPU8prepare/ref/messages、再利用4結果の原bytes/hashとcandidate有無、
 実装順：固定GitHub→同Jupyterでsource/2重み/reuseを照合して一回起動→全raw読解/保存reader/全原本bytes-SHA照合/private保存→本文なし結果/current/weekly/file地図GitHub反映。先に `/workspace/analysis-actor-predicate-20261102/report.json` と `run.exit` を確認し重複起動しない。現時点GPU未実行。Mashの必要GPU/実装/GitHub継続承認内。Codex Work/GPT-6 root単一writer＋同環境read-only監査、独立Pro/Ultra/human受入れではない。通常source/受口/map/API/DB/RN/Render/Supabase/稼働/merge/deploy0、正式0/3・54.50％、全unparsed/actor未解決/route0、STRUCTURE_MAP_DELTA_NONE。
 
 §77実行開始：1d3cdc15固定のplan/prepare/runner全SHAを照合後、同Jupyterで一回起動。report STARTED/39.979秒/3call開始/1load/更新0。`/workspace/analysis-actor-predicate-20261102/report.json` と `run.exit` を先に確認し重複起動しない。
+
+
+<a id="analysis-actor-predicate-result-20261102"></a>
+## actor/predicate診断完了 — 主体名だけでなく動詞と元文脈のscopeへ絞る
+
+GitHub1d3cdc15固定版を一回、追加学習0/12新stop/2load/185.833775秒、親187.112487秒/exit0で正常完了。元f982/89baの重み/config2対不変、compute空。元MD02/OA02×両重みの保存4結果は全bytes/SHA/要求/ref/adapter/report照合で再利用し、6新sourceだけ生成。原reportのPENDING_MEANING_READは原bytes保持、読解完了はresults.jsonへ記録する。
+
+全8cell×2重みの16rawをrootと同環境read-only監査がsourceと全文照合。下表は独立全文ACTION rootにactor/NEGATIONと二不明対応が揃ったかの局所scope記録で、一般意味品質率ではない。AD01/08は保存再利用、AD08は学習済みOA02で新転移成功へ数えない。
+
+| ID | 元文脈 | 主体 | 動詞 | f982 | 89ba |
+| --- | --- | --- | --- | --- | --- |
+| AD01 | MD予約/会議 | 姉 | 参加 | 主体を対象化、root qualifier欠落 | 同じ残件 |
+| AD02 | MD予約/会議 | 姉 | 返送 | actorを不正scope_roleへ | raw完全不変、同じ拒否 |
+| AD03 | MD予約/会議 | 父 | 参加 | actor付きroot、NEGATION欠落 | 父を対象化する退行 |
+| AD04 | MD予約/会議 | 父 | 返送 | actor/否定を分離、不正carrier | actorを不正scope_roleへ |
+| AD05 | OA集荷/伝票 | 姉 | 参加 | actor付きroot、NEGATION欠落 | 不正carrier二重化で拒否へ退行 |
+| AD06 | OA集荷/伝票 | 姉 | 返送 | NEGATION欠落/伝票のは→もで非逐語 | root actor/NEGATION・二不明が揃う |
+| AD07 | OA集荷/伝票 | 父 | 参加 | actor/否定分離、不正carrier | 不正actor/自己参照target |
+| AD08 | OA集荷/伝票 | 父 | 返送 | actor/否定分離、不正carrier | root actor/NEGATION・二不明が揃う（既学習） |
+
+姉でもAD06が成立し、父でもMD/参加で不足するので、姉だから失敗/父なら成功とは言わない。同一の父は返送しなかったでもMD/OAで異なり、返送語だけの一般化も未成立。参加は両主体/両文脈/両重みで完全なscopeを返せない。旧62では参加3件（AT21/NT05/ST01）が全てCONTENT_TARGET、返送はOA2で独立rootという偏りと整合するが、唯一原因/内部学習機構の証明ではない。各元文脈は周辺語をまとめた条件で、特定周辺tokenを単離していない。送信そのものは教師0でも送っていない系4件とHQ03のACTION/否定は既にあり、語欠落だけで不理解としない。
+
+新12の構造は各重み2/6受理、保存4を含めf9823/8・89ba4/8。これらを意味成功率としない。全raw不変はAD02のみ1/8。7保存candidateのID/coverage一致と9拒否維持を別CPU processで確認（モデルload/新生成/学習0、保存readerのgenerate/compiler/author禁止）。通常採用/正式品質へのcredit0、HQ03主体qualifier/CQ04少し/HQ04理由は別残件のまま。
+
+全66元member/manifest65のbytes/SHA/ZIP CRC一致でprivate保存。[診断原本archive](https://chatgpt.com/library?file_id=libfile_a9e85a64a9608191a0e9dfe6f5602d1d&account_id=personal)、203114bytes/SHAc5e14d8f0fedd2e59f7726bd5a94ea09c60f269a344037f9ed9ac67c17007be2。GPU元ZIP0dc5172fe567e6395340658098aac7ee2615924fe54f98567716502cd8671083と圧縮containerだけ異なり全member同一。新重みは作らず、other62の112重みは前節のprivate原本に保全済み。処理按分約$0.02994@前回観測0.58/h、準備/回収/保持等別・現在単価未再照会。
+
+<a id="analysis-scope-contrast-cpu-20261102"></a>
+### 次のCPU構文対比6件まで具体化（モデル0、次GPU計画ではない）
+
+新叔父actorにより、2つの別unknown文脈×参加しなかった/参加した/参加を断ったの3構文をSC01–06としてroot合成。否定/肯定は全文ACTION rootへactorを保持し、否定だけNEGATION。名詞対象の参加を断ったは肯定された断る行動なのでNEGATIONを推定せず、参加だけCONTENT_TARGETへ分ける。二不明は各全文一意root/内容child。MD02/OA02やモデルrawを新targetへコピーしない。旧62を変更せず、sourceは全6相互に異なり旧62/既存評価の全文一致0。
+
+実API strict6target、実file write/read後の同process非生成reload/ID/coverage、実tokenizerの全文prefix/EOS/非切詰めが全一致。各文脈5/5/6unit、最大prompt1007/target237/full1244、全mapped0/unparsed1/actor未解決/route0。結果file SHA dfa900b01675ad4401adcf9dbb7bc11376ff54421d5cb281bbf5d846843ab430。モデルload/新生成/更新0、root/read-only監査が全target/payload/hash/意味を照合。これは2文脈×3構文・一actorの近接教材で、6独立観測/Mash教示/盲検一般評価/モデル品質ではない。
+
+次の実装順：旧62＋SC6の意味/対比を保持し、追加モデル作業前に初期保存重み/dose/順/旧保持probe/新しい近接対照/時間上限を明示して一候補へ固定する。診断12改変sourceを自動で教師化せず、89baも通常/初期値へ自動採用しない。参加の名詞対象教材を消さず、行動としての肯定/否定と文脈を対比する。HQ03退行/CQ04少し/HQ04理由は別確認。ここでは次GPU計画の選択/追加実行なし。完了other62と診断を再起動せず、最初に両report/run.exitと本節を確認する。
+
+Mashの必要GPU/実装/GitHub継続明示承認内、Codex Work/GPT-6 root単一writerと同環境read-only監査。独立Pro/Ultra/human受入れではない。通常source/受口/API/DB/RN/Render/Supabase/稼働/merge/deploy/Pod管理操作0。全unparsed/actor未解決/route0、正式0/3・54.50％/candidate_ready=false、BLOCKER_NARROWED/STRUCTURE_MAP_DELTA_NONE。

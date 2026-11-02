@@ -1,4 +1,4 @@
-> **2026-11-02最新：other62の68更新/28生成を完了、通常未採用。** AT4/UQ2/MX2保持、OA2/OD02他者否定とCQ04過去不明/SQ03まだに局所改善。MD02主体target化、HQ03主体qualifier退行、CQ04少し/HQ04理由が残る。全270原本/112重み保存、45候補/3拒否を別CPU process照合。[全結果/次の切分け](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-other62-result-20261102)。次は追加学習せず最小actor/動詞改変を両保存重みで有限診断する案。STRUCTURE_MAP_DELTA_NONE、通常map/本番/DB/RN不変。完了runを再起動しない。
+> **2026-11-02最新：other62の68更新/28生成＋追加学習0の診断12生成を完了、通常未採用。** 同じ主体/動詞も元文脈でscopeが変わり、主体名単独の説明は支持せず。全270＋66原本/112重み保全、全保存応答非生成再読済み。次の参加否定/肯定/名詞対象×2文脈SC6はCPU表現/実file再読/実tokenizerまで（モデル0/次GPU未固定）。[全結果/原本/次の実装順](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-actor-predicate-result-20261102)。HQ03主体qualifier/CQ04少し/HQ04理由も残件。STRUCTURE_MAP_DELTA_NONE、通常map/本番/DB/RN不変。完了runを再起動しない。
 
 > 10/28最新差分：named出力型/参照提示修復・CPU351成功、9更新/112再読込/2生成を終了。平坦rootと回答source帰属へ前進も意味/本文0/2・新41c9不採用。末尾の最新結果・全機能00/weekly§90を参照。
 
