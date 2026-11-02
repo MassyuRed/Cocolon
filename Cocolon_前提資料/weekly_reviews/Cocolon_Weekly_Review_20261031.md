@@ -2234,3 +2234,17 @@ Mashは「今まで分析の残件作業を進めている。履歴に残って�
 詳細な材料対応・既存成果/未達・次の接続は[Analysis map](../current_structure/03_analysis_current_structure.md#analysis-material-to-route-continuity-20261102)へ置き、既存trial入口へも接続した。Mashが既に申し出ている観測会は読み取り方の教材収集として継続対象。華恋の架空例/設定・合成教師と、Mashが実際に示す問い/読み/修正を分けて残し、既存未達へ照合する。新理論の依頼、全再監査、新checkerや別管理機構を追加しない。SC6のCPU案・保存重み・完了run・不採用は保持し、今回の整理でGPUを自動起動しない。
 
 変更は既存4文書（全体現在地・Analysis map・trial入口・本議事録）。本節は既存目的・未達の接続と経緯の訂正で、商品source/test/既存教材/重み/API/DB/RN/Render/Supabase/配備変更0、モデルload/学習/新生成0。STRUCTURE_MAP_DELTA_NONE、文書反映を意味品質改善や商品完成へ数えない。全ファイル確認条件の撤回（§81）は維持。Codex Work/GPT-6 root単一writer、同環境read-only確認であり独立Pro/Ultra/human受入れではない。
+
+
+<a id="analysis-scope68-running-20261103"></a>
+### §83 新Podへ保存89ba/2134sourceを復元し、局所scope68比較を一回開始
+
+Mashの分析残件開始と新規GPU提供に基づき、既存全体設計・全file地図・最新全体現在地/§82/材料定義/対象mapを確認。理論と既存構造・累積保存を引き継ぎ、意味採用前段の主体/肯否/名詞対象を既存SC6で局所改善する。SC6だけを残件全体の完成条件にしない。通常graphへの意味採用・本人基準の役割/判断/選択と記録間の共通/変化は引き続き全体目的。
+
+新PodはRTX PRO4000/表示$0.58h。保存other62原本Library8ad5521bを取得し全archiveSHA/CRC/重み89badc47を照合。新環境に依存がなく固定pinsを導入。初回復元は2134manifestとのtest1file不一致で学習前停止し、旧manifestが含むcddf1855版test_analysis_model_units.pyをGitHub原本から復元して全2134一致。分析production/loaderは86d19b6dと一致。元の単一commit全tree一致という説明は補正する。モデルrevision851bf6e取得、setup自体の学習/生成0。
+
+固定[d3e4bd40の実装/条件](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-scope68-plan-20261103)。明示89ba初期値、旧62各1+SC6各2=74更新、旧24before保存原本の同一性照合再利用、新SC6/SD2 before8+全32after=40新生成、136測定/3load/900秒（TERM890+kill10）。旧62とSC6の原本SHA、全68targetの実strict/実file非生成再読/IDcoverage/実tokenizer終端・非切詰め一致、最大full1270。prepareのmodel/load/更新/生成0。
+
+同Jupyterで固定3script blob一致を検査後、supervisorを一回起動。report STARTED/初期更新0/生成0を確認。再開時はまず/workspace/analysis-scope68-20261103/result/report.jsonとrun.exitを確認し、重複起動しない。原文scopeの成功/退行を旧対照含め全文で読む。形式受理/学習再現を一般意味品質にしない。未解析/主体未解決/route0・通常未採用、HQ03/CQ04/HQ04残件を維持。処理上限按分$0.145（準備/取得/転送/保持別）、延長/再試行/出力修復/受口緩和なし。ここは実行開始の記録で成功/新保存/採用未宣言。
+
+Codex Work/GPT-6 root単一writer＋同環境read-only確認。独立Pro/Ultra/human受入れではない。通常source/API/DB/RN/Render/Supabase/配置/Pod管理変更0、STRUCTURE_MAP_DELTA_NONE（隔離研究/新scriptだけ）。全体現在地の製品状態差分なし。必要な復元履歴/全結果/再開点は同trialの既存ownerへ集約し、新管理systemを作らない。
