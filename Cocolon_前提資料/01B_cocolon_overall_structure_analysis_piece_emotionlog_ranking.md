@@ -3205,3 +3205,20 @@ API2c259f0e、STRUCTURE_MAP_DELTA_PRESENT。新production file/ownerなし。API
 | `tests/test_analysis_cumulative.py` | 旧current更新と再利用、月次不変、protective保存投影の新2対象 |
 
 公開wire/RN/DB schema/依存/こころ天気の変更なし。新4B実行0、旧実験fileは旧promptの履歴として保持する。
+
+
+<a id="analysis-scope68-files-20261103"></a>
+## 2026-11-03 — 隔離scope68研究の実file地図
+
+通常Analysisのowner・型・保存/API/RN/依存・稼働構造は変更なし。以下は既存trial `observation_learning/trials/2026-11-01-analysis-model-fields/` 内の研究/回収fileで、通常接続の新subsystemではない。STRUCTURE_MAP_DELTA_NONE。全結果は同README#analysis-scope68-result-20261103。
+
+| file | 責務 |
+| --- | --- |
+| semantic_units_scope68_prepare.py | 旧62辞書保持＋SC6対比、68strict/file再読/tokenizerと近接SD2準備 |
+| semantic_units_scope68_run.py | 明示89ba初期値、74更新/40新生成/900秒の一回の比較 |
+| semantic_units_scope68_supervisor.py | 旧269member/24before/2134source/初期重み照合、単一起動、原本保全 |
+| semantic_units_scope68_saved_replay.py | 64応答の別CPU process再読、saved reader生成禁止 |
+| recover_scope_api.py | 旧manifestに属するtest1fileを正確な原本へ戻す。product sourceの変更なし |
+| collect_scope68.py | 元archiveを変えず、CPU/復元/再読の原本を集める |
+| export_scope68_numeric.py | 通常ZIP回収失敗時の既存text/数値tensor回収。model/load/生成/更新0 |
+| semantic_units_scope68_results.json | body-freeな実結果・局所意味実読・保持退行・採否・private原本参照 |

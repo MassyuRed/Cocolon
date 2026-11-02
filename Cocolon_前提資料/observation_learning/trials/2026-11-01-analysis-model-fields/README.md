@@ -1,3 +1,5 @@
+> **11/3最新：scope68を74更新/40新生成で完了し、通常未採用。** 主体・軽度修飾・一部参加scopeに局所改善がある一方、原文内の時制改変、動詞語幹の余分な対象化、「まだ」の欠落があり、旧保持条件を満たさない。旧89ba/全原本を保持し新6964は通常/初期値へ自動採用しない。265元memberと112重み全bytes/SHA、64応答の非生成再読を確認。詳細は[結果](#analysis-scope68-result-20261103)。これは既存の本人基準の役割/判断/選択・記録間関係を支える前段の局所比較で、分析構造の完成ではない。完了runは再起動しない。
+
 # Analysis — 最小field接続と実4B probe
 
 **11/2・残件全体との接続（第9回§82）：** このtrialは、既存CMEEへ普通の文章の意味を渡すための局所読解研究。既存の材料定義・本人基準・役割/判断/選択・記録間関係という目的は[Analysis mapの継承/未達/次の接続](../../../current_structure/03_analysis_current_structure.md#analysis-material-to-route-continuity-20261102)へ戻る。引用・否定・時点・scope・親対応の成果と保存原本は継承するが、全未解析/主体未解決/route0のprivate候補は通常分析の完成ではない。Mashが申し出ている観測会で読み取り方を収集し、実演と華恋の合成教師の由来を分けて既存未達へ照合する。今回の整理で既存教師/重み/評価/rawを変更せず、未実行のSC6/GPU案を自動実行しない。
@@ -832,3 +834,40 @@ Mashの分析残件開始と新規GPU提供に基づく一候補。§82の材料
 復元時に旧2134manifestとAPI86d19b6dのai/tests/test_analysis_model_units.pyだけ差分を検出。分析production source/loaderは一致する。旧manifestは同testのcddf1855版（SHA40abefd1）を含んでいた。検証を緩めず、そのGitHub原本を隔離treeへ復元し2134全一致を要求する。履歴の86d19b6dを完全な単一commit checkoutとして表現しない。旧重み/教材/結果は不変。
 
 実fileは同folderのsemantic_units_scope68_prepare.py/run.py/supervisor.pyとrecover_scope_api.py。prepareは実受口/実file非生成再読/実tokenizerをモデルload前に検査し、supervisorは旧269member/24保存応答/初期重み/2134source/compute空を照合して一回だけ起動する。通常source/API/DB/RN/Render/Supabase/配置/Pod管理0、全未解析/主体未解決/route0・通常未採用を保持。Codex Work/GPT-6 root単一writer、同環境read-only reviewで独立Pro/Ultra/human受入れではない。STRUCTURE_MAP_DELTA_NONE（隔離研究のみ）。
+
+
+<a id="analysis-scope68-result-20261103"></a>
+## 11/3 scope68完了 — 局所改善と退行を分け、通常未採用を維持
+
+固定d3e4bd40の一候補を74更新/136測定/3load/40新stopで完了。593.866647秒、supervisor595.267491秒/exit0、compute空。旧24beforeは保存89baから原request/messages/ref/raw/report/manifestを照合再利用し、新before8＋全32afterだけ生成。旧62は辞書同一、SC6各2回/最後14件旧教材、指示/目的/受口/学習objective/seed/LR/clip/capを維持した。新69647293/config7b3dbd57の112有限F32/3,833,856paramsを保存・実model一致・非学習reload。初期89ba重み/configは不変。
+
+全32afterと対応beforeをrootと同環境read-only担当が原sourceまで全文確認した。
+
+| 対象 | 実結果 |
+| --- | --- |
+| SC01/02 | 元から教師同値、raw不変。新改善へ数えない |
+| SC03 | 主体付きの断る行動と参加対象を分離し、誤否定を加えず改善 |
+| SC04/05/06・SD02 | 行動側の改善/保持があっても、unknown内容の現在/未来を過去へ改変し全件strict拒否。SC05は正常beforeから退行。SD02も構造受理から拒否へ変わるがbeforeの主体誤読を正常とはしない |
+| SD01 | 別actorの否定ACTIONと二不明の親対応を保持する近接転移の局所改善 |
+| HQ03/CQ04 | 本人主体qualifierと軽度修飾をそれぞれ回復、既存の否定/不明/時点/親対応を保持 |
+| SQ03 | 留保修飾の欠落が再発 |
+| MD02 | 主体はACTIONへ戻るが否定qualifier不足、動詞語幹を余分な対象へ追加。部分改善 |
+| MX02/OA02 | 主体・否定・二不明は保持する一方、動詞語幹を余分なCONTENT_TARGETへ追加 |
+| HQ04 | raw不変、理由をTE_CONTEXTにする不足が残る |
+
+旧教師JSON保持はAT4=4/4/UQ2=2/2/MX2=1/2/OA2=1/2。SC6は3/6でSC03改善とSC05退行が入れ替わる。構造受理は前後28/32、raw byte不変20/32で、一般意味成功率ではない。既見/近接合成・一つの追加curriculum比較であり、盲検/Mash教示/唯一因果の証明へしない。語幹対象化や時制改変を出力補修/受口緩和で成功にしない。
+
+別CPU processで64保存応答の56candidate ID/coverage一致と8拒否維持を確認。保存readerのgenerate/compiler/authorは禁止し、再生成/学習/model load0。新6964は通常/次初期値へ自動採用せず、旧89baと旧62/SC6/全原本を保持する。
+
+### 原本と回収
+新Podの依存復元後、2134manifestとAPI86d19b6dのtest1file不一致で学習前停止。旧manifestに入っていたcddf1855版test_analysis_model_units.py（SHA40abefd1）をGitHubから戻して全2134一致。分析production/loaderは86d19b6dと一致し、単一commit全tree一致とは説明しない。
+
+ZIPの通常ダウンロードは作業領域へ届かなかったため、既存のテキスト/数値tensor回収を使用。長文の取得上限は分割読取で検出・回避し、CRを含む2logはbyte配列で回収。元run265member、追加text342memberとsafetensors元bytes/SHAが全一致。ZIP containerのみ再圧縮した。GPU再実行0。
+[private原本archive](https://chatgpt.com/library?file_id=libfile_0fc1d54f28c881919cdc594b6eba8bfe&account_id=personal)：15,068,340bytes、SHA256 `7a5578009b84e51f52bec3ef1b91502e33216d9cfaf8fe65ff29e133add56eda`、348member。元reportのPENDING_RAW_READ bytesは保全し、読解完了は[結果JSON](semantic_units_scope68_results.json)へ分離する。
+
+処理按分約$0.09568@新Pod確認表示$0.58/h、準備/取得/転送/保持等別。Pod停止/削除/チャージ0。通常source/API/DB/RN/Render/Supabase/稼働/配置/merge0、全未解析/主体未解決/route0・通常未採用、正式0/3・54.50％据置。STRUCTURE_MAP_DELTA_NONE（隔離研究のみ）。Codex Work/GPT-6 root単一writer＋同環境read-only担当で、独立Pro/Ultra/human受入れではない。
+
+### 次の再開点
+完了runを再起動しない。まず本結果・report/run.exit・保存原本を確認する。次のCPU作業は、二不明の子の時制改変・動詞語幹の対象化・留保欠落を旧68教師と今回の失敗から切り分け、旧保持条件を維持する一候補へ具体化すること。モデルrawを正解教師へコピーせず、初期保存重み/dose/順/保持probe/近接対照/capを新GPU前に明示する。新GPU条件未固定、追加epoch/再試行未実行。
+
+本人基準の役割/判断/選択→根拠付き既存五種/注記/不明→記録間の再出現/変化→通常graph/保存/補足/月次比較という§82の残件を継承する。SC6の局所形式や引用/保存だけをその完成条件へ縮小しない。

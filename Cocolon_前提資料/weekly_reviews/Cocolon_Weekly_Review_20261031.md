@@ -2248,3 +2248,15 @@ Mashの分析残件開始と新規GPU提供に基づき、既存全体設計・�
 同Jupyterで固定3script blob一致を検査後、supervisorを一回起動。report STARTED/初期更新0/生成0を確認。再開時はまず/workspace/analysis-scope68-20261103/result/report.jsonとrun.exitを確認し、重複起動しない。原文scopeの成功/退行を旧対照含め全文で読む。形式受理/学習再現を一般意味品質にしない。未解析/主体未解決/route0・通常未採用、HQ03/CQ04/HQ04残件を維持。処理上限按分$0.145（準備/取得/転送/保持別）、延長/再試行/出力修復/受口緩和なし。ここは実行開始の記録で成功/新保存/採用未宣言。
 
 Codex Work/GPT-6 root単一writer＋同環境read-only確認。独立Pro/Ultra/human受入れではない。通常source/API/DB/RN/Render/Supabase/配置/Pod管理変更0、STRUCTURE_MAP_DELTA_NONE（隔離研究/新scriptだけ）。全体現在地の製品状態差分なし。必要な復元履歴/全結果/再開点は同trialの既存ownerへ集約し、新管理systemを作らない。
+
+
+<a id="analysis-scope68-result-20261103"></a>
+### §84 scope68一回を完了、主体/軽度修飾の改善と原文改変/保持退行を保存
+
+[固定条件・全結果・原本・再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-scope68-result-20261103)。74更新/136測定/3load/40新stop、593.866647秒（親595.267491秒）/exit0、compute空。初期89ba不変、112有限F32の新69647293を保存・実model一致・非学習reload。旧24beforeは保存原本を照合再利用。形式/保存を商品品質にしない。
+
+全32after/対応beforeを原sourceまでroot/同環境read-only担当が確認。SC03/SD01の行動scope、HQ03主体/CQ04軽度修飾が局所改善。SC01/02は元から正しい。SC04/05/06/SD02はunknown子の現在/未来→過去改変でstrict拒否、SC05は正常beforeから退行。SD02は構造受理から拒否へ変わるがbeforeの主体誤読を正常とはしない。SQ03留保欠落、MX02/OA02の動詞語幹対象化という保持退行、MD02の否定不足/余分な対象、HQ04理由不足が残る。旧教師保持AT4=4/4・UQ2=2/2・MX2=1/2・OA2=1/2、SC6=3/6。構造前後28/32、raw不変20/32を意味率にせず、通常未採用。
+
+64保存応答は別CPU processで56候補一致/8拒否維持、新生成/学習/load0。元run265memberと追加text342member、112重み元bytes/SHAを照合し、ZIP containerだけ再圧縮して[private原本](https://chatgpt.com/library?file_id=libfile_0fc1d54f28c881919cdc594b6eba8bfe&account_id=personal)へ保存（15,068,340bytes/SHA7a557800…/348member）。回収の長文上限とCRログ変換を検出し、分割DOM読取と元byte回収で全一致。GPU再試行0。初回復元時のtest1file混在と2134原本復元の経過もtrialへ保全。
+
+新重みを通常/次初期値へ自動採用しない。次CPUは時制改変・語幹対象化・留保欠落を既存教師から切り分け、次一候補の条件を固定する。次GPU未固定。本人基準の役割/判断/選択と記録間の再出現/変化、通常graph採用は既存目的のまま残件であり、SC6だけを完成条件にしない。通常source/API/DB/RN/Render/Supabase/稼働/配置/Pod管理0、全未解析/主体未解決/route0、正式0/3・54.50％据置。処理按分約$0.09568@確認表示$0.58/h、準備/取得/転送/保持別。STRUCTURE_MAP_DELTA_NONE。全体現在地・Analysis map・全file地図・trialを同期。
