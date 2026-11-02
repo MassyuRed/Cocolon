@@ -871,3 +871,19 @@ ZIPの通常ダウンロードは作業領域へ届かなかったため、既�
 完了runを再起動しない。まず本結果・report/run.exit・保存原本を確認する。次のCPU作業は、二不明の子の時制改変・動詞語幹の対象化・留保欠落を旧68教師と今回の失敗から切り分け、旧保持条件を維持する一候補へ具体化すること。モデルrawを正解教師へコピーせず、初期保存重み/dose/順/保持probe/近接対照/capを新GPU前に明示する。新GPU条件未固定、追加epoch/再試行未実行。
 
 本人基準の役割/判断/選択→根拠付き既存五種/注記/不明→記録間の再出現/変化→通常graph/保存/補足/月次比較という§82の残件を継承する。SC6の局所形式や引用/保存だけをその完成条件へ縮小しない。
+
+
+<a id="analysis-ce68-plan-20261103"></a>
+## 11/3 — 同一68教師/74更新順でfull-assistant CEの重み付けを比較
+
+scope68の全失敗と既存教師を照合した。独立サ変ACTIONはMX/OA/AT22、真の名詞対象はAT21/NT05/ST01/SC03/06、未来/過去の不明内容はSC04–06自身とNT/AT/UQ/OA、留保/軽度修飾は旧68の中にある。UNKNOWN_CONTENTは旧62で39unit・SC6込み51unit、まだ15target/少し5target。教師不存在を原因としない。
+
+既存weighted lossはtokenCEからdetachした1〜16の重みを全assistant tokenへ付ける。引用を除外・無視する仕組みではなく、低NLLから自由生成の引用保持も保証されない。実失敗をobjectiveの唯一原因とは断定しない。次の一候補は既存plain full-assistant CE経路で学習し、重み付けだけの比較を見る。
+
+明示初期89ba、旧68source/messages/targets・74更新順・LR1e-5・seed20261110・clip1・新optimizer・prompt全mask・EOS/末尾改行・生成条件は維持。退行した6964には追加学習しない。既存scope68のbefore32（全て89ba）をmanifest/request/ref/messages/raw/reportで照合再利用し、baseline再生成0。初期推論loadを省いて2load、全32afterだけ新生成。学習前の68教師NLLがweighted比較時のbeforeと最大差1e-6以内、実Dropout module全p0・text_config.attention_dropout=0・adapter lora_dropout=0を更新前に要求して実値を記録する。これらは初期条件の確認で、学習機構の一意因果の証明ではない。
+
+上限74更新/136測定/2load/32新生成、process720秒・外側TERM710+kill10、前回確認$0.58/hなら処理按分上限$0.116（準備/取得/転送/保持別）。延長/再試行/受口緩和/出力補修/追加epochなし。partialも保全する。AT4/UQ2/MX2/OA2、SC6/SD2、MD02/HQ03/CQ04/SQ03/HQ04を別々に原sourceまで読む。構造数・NLL・教材再現を一般意味率/正式受入れへ換算しない。
+
+実fileはsemantic_units_ce68_prepare.py/run.py/supervisor.py。CPUは旧265member、同一68teacher/74order、before32同一性を確認する。source/messages/target/tokenizer/profileが不変のため、既存68strict/file/tokenizer結果を引き継ぎ、そのためだけに同じ検査を再実行しない。runnerの全target/gradient窓のCPU確認は維持する。ここは実行準備で新学習/新生成0。
+
+次は既存Jupyterのreport/run.exitとcompute空を確認して、この新candidateを一回だけ起動する。完了scope68の再起動ではない。通常source/API/DB/RN/Render/Supabase/配置/Pod管理0、全未解析/主体未解決/route0・通常未採用、正式0/3・54.50％据置。STRUCTURE_MAP_DELTA_NONE。本人基準の役割/判断/選択・記録間関係への意味採用という既存目的を維持し、局所学習比較を分析全体の完成にしない。
