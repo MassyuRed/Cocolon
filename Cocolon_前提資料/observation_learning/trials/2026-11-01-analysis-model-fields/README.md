@@ -1,6 +1,6 @@
 # Analysis — 最小field接続と実4B probe
 
-**11/2再開点：unknown58の64更新/40新生成は完了・原本/全重み保存済み。反復不明と理由は局所改善、旧AT4再現4/4→2/4で通常未採用。同99916からLRだけを下げた既見16比較を起動済み。実行中pathは /workspace/analysis-unknown58-lr1-20261102/result/report.json。[実結果](#analysis-unknown58-result-20261102)／[次の固定計画](#analysis-unknown58-lr1-plan-20261102)。各runのreportを先に確認し、重複起動しない。**
+**11/2最新再開点：unknown58とLR1は両方完了・全原本/112重みを保存済み。LR1は旧AT4再現4/4と反復不明UQ2再現2/2を両立したが、混在/時点/理由に不足が残り通常未採用。保存37候補/拒否11件の別CPU process照合も完了。次はCPUで成立した「独立した行動＋二つの不明」1題材2順序を使う有限比較の具体化。[LR1全結果/原本](#analysis-unknown58-lr1-result-20261102)／[CPU教材と次の直接作業](#analysis-mixed-unknown-cpu-20261102)。完了runを重複起動しない。**
 
 2026-11-01 JST。開始原本：Cocolon PR30 `1c66add4fdf8f5ded18f7443d6b91b1771998244`、API PR3 `36713940ea82e217fab8a7c0a738a33f21df1c4d`。Mashの分析残件開始とweekly§45.4に従う。Codex Work/GPT-6、root華恋が実装/統合/反映、別文脈agentはread-only監査のみ。独立Pro/Ultra又はhuman品質受入れとは呼ばない。System Context最新cacheは未成立のまま、fresh原本fallbackを使用。
 
@@ -642,3 +642,30 @@ UQ2は教示JSON同値、近接PQ02/HQ01/02/03にも一意な全文不明rootと
 退行/非逐語/意味不足が残れば通常未採用、同候補のepoch/受口緩和/raw修復をしない。処理按分上限$0.096667@0.58/h、準備/回収/保持/通信/税等別。必要GPU/実装/途中GitHub反映はMashの現行明示承認内。ここは準備、GPU未実行。新構造/商品型/本番/DB/RN変更0、STRUCTURE_MAP_DELTA_NONE、正式0/3・54.50％据置。
 
 LR1実行開始：固定c777b4dbのplan/runnerを照合して一回起動。report STARTED/64更新完了/116測定/新生成0/144.109秒を確認。旧upload待ちでfile未到着となった最初のlauncherはmodel/GPU実行0、実学習の再試行ではない。転送完了をUIで確認後、hash/exact3member/新run directory未存在を同じPython手順で確認して起動した。各run重複起動0。
+
+
+<a id="analysis-unknown58-lr1-result-20261102"></a>
+## 11/2 — 学習率だけの比較を完了、旧教材保持と反復不明を両立
+
+前節の実行中記録は履歴。LR1は64更新/116測定/2load/16新生成を323.473447秒で完走し、全16stop・親325.023645秒/exit0・compute-apps空、元99916/config不変。全112 F32/3,833,856parameterが変更され有限、実model保存/非学習reload一致。rootと同環境read-only agentが16after/16before/3067比較16を原sourceと全文照合した。[body-free全結果](semantic_units_unknown58_lr1_results.json)。
+
+同99916・58target・64順・seed・完全target objective/optimizer/clipからLRだけ5e-5→1e-5へ変更した比較。新beforeは0、保存beforeと3067比較はrequest/messages/rawの完全同一を照合。対象16内の構造受理は99916=11/16、3067=13/16、LR1=13/16。旧AT4は4/4→2/4→4/4、UQ2もLR1で2/2の教示JSON一致を確認した。AF01の理由修正を保ちCQ03の欠落keyも戻った。rawはbefore比6/16、3067比7/16が不変。全て既見の開発/学習再現であり、構造率・教示一致を一般の意味品質率へ換算しない。
+
+**通常未採用。** NV04のcarrier不正/朝の否定・時点、CQ04の自己親/不明構造/修飾欠落、SQ01の述語への過剰modifier、SQ03の時間修飾欠落が残る。PQ02は二不明の親対応を保つが粗いかもをRELATIVE_TIMEへ誤分類。HQ03は反復する分からないだけの曖昧rootへ退行し、明示主体qualifierも落ちる（完全sourceは保持）。HQ04はraw不変で、明記された理由をTE_CONTEXTへ入れたまま。LRだけで混在/時点/理由の問題が解けたとは判断しない。
+
+全58のunweighted assistant NLLは旧40平均0.011539624→0.004349571、NT8は0.014958356→0.004407080、ST8は0.019973751→0.017640121、UQ2は0.073363185→0.001890657。学習指標でありST8の自由生成や品質受入れではない。[別CPU processの保存再読](semantic_units_unknown58_lr1_saved_replay.json)は37candidate全ID/coverage一致、残る11responseはstrict拒否を再確認。[実行script](semantic_units_saved_replay.py)は保存reader中だけEngine.generate/compiler/author entryを禁止し、モデルload/新生成/更新0。CPU helper初版は束縛側まで禁止して停止、次版は例外型のimport owner違いで停止したため、原本を変えず最終版で実施。GPU再試行ではない。
+
+原本全198member（manifest197）の元bytes/SHAと112tensorを照合し、private cocolon-analysis-unknown58-lr1-result-20261102.zipに保存。Library libfile_41f866f3fc6081918d9ab8caa8f91684、14657769bytes/SHA db4aa8352b15f551590c7712719aadb8922ef8131ee55ae1eb22d8059ebb10c2。重み750a78096fc5c7aa2f145169ac5e60ae7ae38981a6291d5c7e87c09d9c7a9f54/config13ca901a10845054b8226d386c9e08d84671b53493b91c8a1823842ab72c5f22。再圧縮containerは元GPU ZIP c41ab782…と別。処理按分約$0.05212@0.58/h、準備/回収/保持/通信/税等別。元reportのPENDING_RAW_READというstatusは実行時原本として保持し、読解完了/不採用は本結果を正本とする。
+
+<a id="analysis-mixed-unknown-cpu-20261102"></a>
+### 次の直接作業 — 行動と二不明の混在教材を有限比較へ
+
+旧58targetを全件集計すると、一fieldに独立ACTION_OR_NONACTIONと二つ以上のWRITTEN_UNKNOWN rootを共存させる教材は0だった。これは観測した不足で、HQ03失敗の唯一原因を証明しない。[root架空CPU教材MX01/02](semantic_units_mixed_unknown_cpu.json)と[実行原本script](semantic_units_mixed_unknown_cpu_run.py)は別題材の独立本人否定行動＋二不明を一題材二順序で表現する。HQ03そのものやモデルrawを教師へ移さず、各不明rootを一意な全文節、各childを正しいroot quoteへ束縛。明示主体/否定/EPIを保持し、かもを時間修飾へ作らない。
+
+同じAPI86d19b6dのstrict受口で両5unitを束縛、serialize/reloadのID/coverageが同processで一致。model load/新生成/更新0、旧58/受口不変、全unparsed/actor未解決/route0。今回は保存fileの別process再読ではない。HQ03を見た後の近接教材、一題材順序対であり、盲検評価/独立2題/モデル品質成功ではない。
+
+次unitは、この不足2targetと旧58保持を組み合わせる一候補の比較を具体化する。初期値を99916と750aの既見の保持/失敗から明示選択し、教材dose/固定順/評価集合/時間上限/停止条件を先に固定してGitHubへ保存する。3067/750aへの自動追加epochにしない。旧AT4/UQ2保持と、別題材の行動/明示主体/否定/二不明の親対応を別々に読み、理由/時点を独立の残件として追う。新GPU plan/実行はこのCPU2例には含まれない。
+
+この二候補は合計128更新/56新生成で、前節までの群と合わせ追加440更新/224新生成/局所9forward（固定32以前の240更新/48生成は別）。独立224題ではない。API86d19b6d/通常map/HTTP/DB/RN/Render/Supabase/merge/deploy/Pod Stop等の変更0、正式0/3・54.50％据置。BLOCKER_NARROWED、STRUCTURE_MAP_DELTA_NONE（既存private owner/契約内の内容比較で接続責務は不変、map先頭の実結果案内だけ更新）。Mashの必要作業/GPU/GitHub継続承認内、実際の環境はCodex Work/GPT-6と同環境read-only監査であり独立Pro/Ultra/human受入れではない。
+
+復旧時のlocal Git worktree参照先はscratch cleanupで失われていたため、残存fileとGitHub fresh親730c4627を照合し、Git Data APIのexpected_sha leaseで反映する。Git metadataのために製品sourceを作り直さない。再開時は本節と全結果を読み、完了unknown58/LR1を再起動しない。

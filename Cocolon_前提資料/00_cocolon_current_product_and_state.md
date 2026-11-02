@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-**11/2・分析の最新（第9回§71）：** 反復不明58教材/64更新/40新生成を完了。UQ2教師同値と近接別題材の不明root・内容親対応、理由/否定に局所改善。一方旧AT4同値4/4→2/4、非逐語/分類/key/親/理由scopeの不足で通常未採用。全278原本/112重みを元SHA照合・保存済み。次は同99916/58target/64順/seed/objectiveでLRだけ1e-5へ下げた既見16比較（600秒一回、起動済み・64更新完了/16生成前の中間確認）。[結果/原本/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-unknown58-result-20261102)。通常map/DB/RN/稼働/正式0/3・54.50％据置。
+**11/2・分析の最新（第9回§72）：** 反復不明58教材の二候補128更新/56新生成を完了。LR1は旧AT4教示一致4/4とUQ2一致2/2を両立し、AF01理由/CQ03 keyを保持・修復した。一方HQ03の行動＋二不明混在、NV04時点/否定、CQ04親、SQ修飾、HQ04理由に残件があり両候補とも通常未採用。全原本/112重みを各々元SHA照合・保存、LR1保存37候補と拒否11件の別CPU process照合も完了。旧58に独立行動＋二不明の教材0を確認し、別題材一つの2順序をstrict CPU束縛/同process serialize-reload（モデル0）まで具体化。次はその2targetと旧保持の有限比較計画を固定する。[実結果/原本/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-unknown58-lr1-result-20261102)。完了runの重複起動不要。通常map/DB/RN/稼働/正式0/3・54.50％据置。
 
 **11/1・分析4B接続のCPU最小準備を完了（[第9回§45](weekly_reviews/Cocolon_Weekly_Review_20261031.md#three-core-quality-priority-20261101)）：** Mashが7201の依頼修正を確認。架空の日常8例を現分析へCPU処理すると個別/一括ともmapなし（mapped0/未解析8）、既知対照追加では対照1件だけ2node。Pieceの同8例は原文保持の本文生成まで成立（新画像/本番検査ではない）。分析はCMEE接続済みだが4Bを呼ばない有限文法、Emlisのnatural本文から分析材料も未生成。次は分析を4Bへ接続して品質を育てる。後続§46でCPU最小受口/通常graph・保存再読を実装し、対象785件成功。完全fieldの分類候補で全件未解析を維持し、一般理解品質は未成立。次は実4Bの最大4生成・追加学習なしの確認でGPUが必要。詳細は[実行準備](observation_learning/trials/2026-11-01-analysis-model-fields/README.md)。Emlis/Pieceの残件と平日配分案・暫定完成度は§45、旧管理54.50％の確定改定ではない。§45の調査時点は製品/稼働/GPU変更0。§46で明示offline製品sourceを追加、通常稼働/GPU変更0。
 

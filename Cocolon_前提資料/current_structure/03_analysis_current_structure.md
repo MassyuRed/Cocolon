@@ -1,4 +1,4 @@
-> **2026-11-02最新：固定32教材128更新が完走し学習済み4/4が教示JSON一致。** 開発6/8・意味不足で通常未採用、全重み/元出力71fileの回収完了。[最終結果/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-fixed32-result-20261102)。完了run再実行不要、商品構造/本番/DB/RN不変。
+> **2026-11-02最新：反復不明58教材の二候補を完了、通常未採用。** LR1は旧AT4=4/4とUQ2=2/2を両立、混在/時点/理由の残件を分離。全原本/112重みを保存し、LR1の保存37候補/拒否11件を別CPU process照合。行動＋二不明の新1題材2順序はCPU表現確認まで。[実結果/次の再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-unknown58-lr1-result-20261102)。既存offline ownerの内容比較でSTRUCTURE_MAP_DELTA_NONE、通常map/本番/DB/RN不変。完了runを再起動しない。
 
 > 2026-11-01最新：Mash採用の累積/当時月次/プラン差を実装、API36713940/新migration反映済み。RNb187b790のiOS #72/7201は内部配布済み。感情原入力の全期間＋適格本人補足を対象に現在map共通、月次閲覧Free2回/Plus12回/Premium全期間。保存artifactと月参照を分離し、プラン変更では保持、source削除/退会ではpurge。新実装/検証/配置はweekly§44と詳細04#analysis-cumulative-monthly-v1を参照。以下のu250等は旧期間版の内容修正履歴で、新累積方式の現在地ではない。
 

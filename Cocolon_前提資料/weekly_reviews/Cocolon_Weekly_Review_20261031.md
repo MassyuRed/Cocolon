@@ -2105,3 +2105,15 @@ adapterなし同revision/同messagesの4callを52.989783秒/1load/学習測定0�
 558.196543秒/64更新/116測定/40stop/exit0/compute空/元99916不変。UQ2教師同値、PQ02/HQ01/02/03の不明rootと内容親対応、AF01理由等が局所改善。一方旧AT4同値4/4→2/4、AT17分類/AT29非逐語、CQ03/04のkey/親、NV04親scope/HQ04理由が残り通常未採用。構造26/34→31/34は意味合格率ではない。全本文をroot/read-only監査が読解し、全278member/112F32重みを元SHA照合・private保存。Library libfile_cd78c76c8c9c819199de002eb87defcb。次は同99916/58target/64順/seed/objectiveでLRだけ1e-5へ下げ、既見16after/600秒一回を比較する。ここは次run未実行。全手順/原本/限界はtrial#analysis-unknown58-result-20261102と次節。通常map/稼働/正式0/3・54.50％据置。
 
 §71 LR1実行中：c777b4db固定版の同一初期値/58教材/64順で一回起動し、64更新/116測定完了・144.109秒・新生成0を確認。保存後16生成は未完了。先に /workspace/analysis-unknown58-lr1-20261102/result/report.jsonを確認して重複起動しない。
+
+
+<a id="analysis-unknown58-lr1-result-20261102"></a>
+### §72 LR1比較を完了、旧保持と反復不明を両立して混在不足を切分け
+
+同99916/58target/64順/seed/objective/optimizer/clipからLRだけ1e-5にした候補を323.473447秒/64更新/116測定/16stopで完了。親325.023645秒/exit0/compute空、元99916不変。112F32/3,833,856paramsの有限保存・実model/非学習reload一致、全198原本/manifest197を元SHA照合し保存済み。Library libfile_41f866f3fc6081918d9ab8caa8f91684、重み750a7809…、archive db4aa835…。16beforeと3067比較16は完全同一コピー照合、rootと同環境read-only監査が全48rawをsourceと読解。
+
+構造は99916=11/16、3067=13/16、LR1=13/16。旧AT4教師同値4/4→2/4→4/4とUQ2=2/2をLR1で両立し、AF01理由とCQ03必須keyを保つ/修復。before不変6/16、3067比7/16。NV04時点/否定・carrier、CQ04親/不明、SQ修飾、PQ02粗いかも時間誤分類、HQ03の曖昧反復root、HQ04理由が残り通常未採用。構造受理・NLL低下・学習再現を一般意味品質率へ換算しない。保存37candidateは別CPU processで全ID/coverage一致、11拒否も再確認。保存reader中の新生成/compiler/authorを禁止、モデルload/新生成/更新0。
+
+旧58に独立行動と二不明を共存するfieldが0だったため、別題材の本人否定行動＋二不明を1題材2順序MX01/02としてCPU束縛/同process serialize-reload一致まで確認。HQ03やモデルrawを教師化しない。これはHQ03を見た後の近接教材で、盲検/独立2題/唯一原因/品質成功の証拠ではない。次は初期値/dose/順/評価/上限を明示した一候補比較を固定してから進め、理由/時点は別の残件として追う。完了runを重複起動しない。
+
+全結果・全原本・CPU限界・次の実装順は[trial LR1結果](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-unknown58-lr1-result-20261102)と[CPU教材](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-mixed-unknown-cpu-20261102)。今回二候補合計128更新/56新生成、処理按分LR1約$0.05212@0.58/h（準備/回収/保持等別）。通常source/受口/map/DB/RN/Render/Supabase/稼働/merge/deploy変更0、正式0/3・54.50％据置。BLOCKER_NARROWED/STRUCTURE_MAP_DELTA_NONE。Codex Work/GPT-6、同環境監査であり独立Pro/Ultra/human受入れとはしない。Mashの必要GPU/実装/GitHub継続明示承認内で完了・保存。local Git metadata消失は残存file＋GitHub親照合/lease反映で吸収し、復旧のためのモデル再実行0。
