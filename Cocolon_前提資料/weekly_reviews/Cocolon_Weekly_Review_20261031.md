@@ -2314,3 +2314,11 @@ Codex Work/GPT-6 root単一writer＋同環境read-only確認。独立Pro/Ultra/h
 旧68にない『対象分離＋継続修飾＋強調否定』と別actor/二不明文脈の組合せ2件を原sourceから合成し、実strict/実file非生成再読/実tokenizer prefix・EOSまでCPU確認。モデル/生成/更新0、新70教材の学習plan/GPUは未選定。診断文やrawの教師化ではない。 実RC01=2unit/994+96=1090token、RC02=5unit/1005+214=1219token。両sourceは旧68/32全memo/actionと完全一致0、華恋合成/既見近接でMash教示・盲検ではない。初回CPUは華恋の過大patchでbuild dispatch前停止し、buildだけpatch除去/保存再読の禁止保持・同source/targetをfresh-v2で確認。元helper/source/失敗metadata保存、受口変更やモデル生成なし。
 
 次は旧68保持と新2組合せを両立する一候補の初期/dose/順/保持/近接/cap固定。閉鎖run重複/不採用重みへの自動追学習/追加epoch/出力補修/受口緩和なし。本人基準の役割/判断/選択・記録間の再出現/変化・通常graph接続という既存目的を継承。通常source/API/DB/RN/Render/Supabase/稼働/配置/Pod管理0、全未解析/主体未解決/route0、正式0/3・54.50％据置。処理按分約$0.079245@前回確認$0.58/h、準備/回収/保持等別。STRUCTURE_MAP_DELTA_NONE、primary TECHNICAL_CREDIT/product_credit0。全体現在地/全file地図/Analysis map/trial同期。Codex Work/GPT-6 root単一writer＋同環境read-only確認、独立Pro/Ultra/human受入れではない。
+
+
+<a id="analysis-combination70-plan-20261103"></a>
+## 89. 11/3 — 原source対比2件＋旧68保持の一回比較へ
+
+Mashの包括的な続行/GPU/Jupyter/GitHub保存指示で、前回の完了run/exit0とcompute空を直接確認した。全体設計と01A〜C全file地図、全体現在地、作業規則、観測学習目的、§82/88と原本を確認。root単一writer、同環境read-only担当が比較案/実装を確認し、正式な別モデル審査とはしない。
+
+[trialの具体条件](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-combination70-plan-20261103)：初期89ba/plain CE、旧68辞書/旧CE74順の部分列/最後14保持、RC2各2追加＝78更新。旧32beforeは同一性照合再利用、RC2新before2＋34after＝36新生成、140測定/3load/900秒・処理按分上限$0.145@前回確認$0.58/h（準備/転送/取得/保持別）。改善がなければdose/orderだけの反復を止める。現在は実行準備、結果未確定。通常source/API/DB/RN/Render/Supabase/配置/Pod管理変更0、STRUCTURE_MAP_DELTA_NONE。全体目的と通常graph接続残件を維持する。

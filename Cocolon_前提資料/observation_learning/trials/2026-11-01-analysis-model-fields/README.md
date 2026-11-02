@@ -978,3 +978,17 @@ RC01は対象を分けた行動に継続修飾/否定を同時保持する2unit�
 次はこの2件と旧68の保持を両立する一候補の初期値/dose/順/保持/近接評価/capを固定する。新70教材の学習計画はまだ選定せず、今回の不採用重みへ追学習/完了run重複/追加epoch/出力補修/受口緩和をしない。再開時は本結果と/workspace/analysis-replay68-20261103/result/report.json/run.exitを先に確認する。
 
 通常source/API/DB/RN/Render/Supabase/稼働/配置/merge/Pod管理0、全未解析/主体未解決/route0・通常未採用、正式0/3・54.50％据置。STRUCTURE_MAP_DELTA_NONE、primary TECHNICAL_CREDIT/product_credit0。Codex Work/GPT-6 root単一writer＋同環境read-only確認、独立Pro/Ultra/human受入れではない。本人基準の役割/判断/選択→既存五種/注記/不明→記録間の再出現/変化→通常graph/保存/補足/月次比較という既存残件を継承する。
+
+
+<a id="analysis-combination70-plan-20261103"></a>
+## 11/3 — 原source対比2件を加える70教材・78更新の一回比較
+
+Mashの分析残件続行・既存GPU/Jupyter使用・必要作業承認済み・区切りごとのGitHub保存という明示指示に基づく。replay68完了/exit0とcompute空を実画面で確認し、完了runを再起動しない。初期89ba/configb357を明示選択、不採用bb6e/b2a5/6964への追学習なし。
+
+旧CE68の68教師辞書/74更新順を維持し、原順15/30/45/60の直後にCPU確認済みRC01/RC02/RC01/RC02を挿入、計70教材/78更新。旧74は完全な部分列、最後14旧教材は順まで同一。新2件は原source由来の華恋合成で、Mash教示・モデルraw・盲検ではない。旧32beforeは原request/messages/ref/raw/89ba同一性で再利用。RC2のbefore2と全34afterだけ新生成し、教師再現と既存SQ03/MD02/OD01等への転移、旧AT/UQ/MX/OA/SC保持を別々に読む。
+
+plain full-assistant CE、LR1e-5/seed20261110/clip1/prompt全mask/EOS/生成条件/strict受口不変。旧68の更新前NLL差<=1e-6とdropout0を維持し、新2件はbefore/after測定。最大78更新/140測定/3load/36新生成、内部900秒・外側TERM890+kill10。前回確認$0.58/hなら処理按分上限$0.145、準備/取得/転送/保持等別。延長・再試行・追加epoch・出力補修・受口緩和なし。partialも保存する。
+
+実fileは同folderのsemantic_units_combination70_prepare.py/run.py/supervisor.py。CPUは旧267manifest/旧68辞書/74部分列/最後14/RC2原本/旧32beforeを照合し、GPU前にGitHubコードを固定する。再開時は /workspace/analysis-combination70-20261103/result/report.json と /workspace/analysis-combination70-20261103/run.exit を先に確認し、rootが存在するなら重複起動しない。
+
+既存診断へ改善がなければdose/orderの再調整を続けず、実出力に現れた責務と意味採用の原因へ戻る。本人基準の役割/判断/選択→既存五種/注記/不明→記録間の再出現/変化→通常graph/保存/補足/月次比較という全体目的を継承する。今回の局所成功を分析完成にしない。通常source/API/DB/RN/Render/Supabase/配置/Pod管理不変、全未解析/主体未解決/route0・通常未採用。STRUCTURE_MAP_DELTA_NONE（隔離研究のみ）。Codex Work/GPT-6 root単一writer＋同環境read-only確認、別モデルPro/Ultra/human受入れではない。
