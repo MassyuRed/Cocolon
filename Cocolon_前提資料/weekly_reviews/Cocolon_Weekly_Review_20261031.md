@@ -2195,7 +2195,7 @@ Mashが「何を求められているか分からない」と再指摘し、カ�
 
 通常のわたしマップでは本人選択カテゴリの集合を観測内容の文脈として保持し、異なるカテゴリ集合を一つの反復として集約しない。本人補足は親原入力のカテゴリを継承し、原record/version・owner・証拠の対応を検査する。文章と図は既存`visible_label`内へ「選択カテゴリ：仕事」等を表示し、公開wireのキー集合は維持。旧currentは次の正常ensureで一度再導出し、保存済み月次は当時版のまま再読する。 多選択は集合で扱い、重複・順序で件数を増やさない。カテゴリ名だけから場面/役割/原因を生成せず、未解析を保持する。fresh期間比較も集合込み、新旧方針の混在は拒否。新4B入力には`prepare_cumulative_category_units`/`selected_categories.v1`を用意し、原文quote規則と旧raw再読を維持した。通常mapは有限文法のままで4B未有効化。
 
-API `2c259f0e33abcd70cf353a8f53af3dc3b06eb63e`へコード反映済み。[既存CI 41437730142](https://github.com/MassyuRed/mashos-api/actions/runs/41437730142)は全工程success（Analysis1644＋12020subtests、shared-owner1、累積/Q3/API24＋2subtests、月次SQL201原本/15月参照）。本番は`36713940`／`dep-dbjg0l8ae00c73e4cr20`のまま。Renderの指定commit配置はログインが必要なため未実行。本人端末のカテゴリ表示は未確認。
+API `2c259f0e33abcd70cf353a8f53af3dc3b06eb63e`へコード反映済み。[既存CI 41437730142](https://github.com/MassyuRed/mashos-api/actions/runs/41437730142)は全工程success（Analysis1644＋12020subtests、shared-owner1、累積/Q3/API24＋2subtests、月次SQL201原本/15月参照）。指定commitを配置したRender `dep-dbk7l2uc6qcc73dp5d70`は11/2 11:58:13 UTC（20:58:13 JST）Live。配置後healthz/app bootstrap200、未認証latest/reports-history401、Piece private5ON/public3OFFを確認。配置開始〜12:00 UTCの取得範囲にapp error0。本人端末のカテゴリ表示は未確認。
 
 新10対象はPASS、実compilerのカテゴリ別合成mapを未変更の配布RN表示契約へ渡し、DTO受理/文章と図の本文一致を確認。local広域493件のうち既存storage1件はhttpx未導入で環境ERROR、assertion失敗0だが全成功ではない。旧current一度更新/次回再利用、旧月次非生成再読、protective投影を既存CIでも確認済み。同環境read-only監査で見つかったrecord証拠対応・文脈除去・混在比較を補修し、最終postimageにblocker指摘なし。独立human/Pro受入れではない。
 

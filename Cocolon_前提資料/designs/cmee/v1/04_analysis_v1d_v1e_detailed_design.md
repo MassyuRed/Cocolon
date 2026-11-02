@@ -1859,7 +1859,7 @@ API86d19b6d。上の計画をMash継続承認内で既存3owner＋新test1へ実
 <a id="analysis-selected-category-context-20261102"></a>
 ## 2026-11-02 — わたしマップへ本人選択カテゴリを接続
 
-Mashの「選択カテゴリを使う接続を直す」指示により、通常累積mapと次の明示4B準備へ実装。対象はわたしマップ。こころ天気の感情分析は変更していない。API `2c259f0e33abcd70cf353a8f53af3dc3b06eb63e`へコード反映済み。[既存CI 41437730142](https://github.com/MassyuRed/mashos-api/actions/runs/41437730142)は全工程success（Analysis1644＋12020subtests、shared-owner1、累積/Q3/API24＋2subtests、月次SQL201原本/15月参照）。本番は`36713940`／`dep-dbjg0l8ae00c73e4cr20`のまま。Renderの指定commit配置はログインが必要なため未実行。本人端末のカテゴリ表示は未確認。
+Mashの「選択カテゴリを使う接続を直す」指示により、通常累積mapと次の明示4B準備へ実装。対象はわたしマップ。こころ天気の感情分析は変更していない。API `2c259f0e33abcd70cf353a8f53af3dc3b06eb63e`へコード反映済み。[既存CI 41437730142](https://github.com/MassyuRed/mashos-api/actions/runs/41437730142)は全工程success（Analysis1644＋12020subtests、shared-owner1、累積/Q3/API24＋2subtests、月次SQL201原本/15月参照）。指定commitを配置したRender `dep-dbk7l2uc6qcc73dp5d70`は11/2 11:58:13 UTC（20:58:13 JST）Live。配置後healthz/app bootstrap200、未認証latest/reports-history401、Piece private5ON/public3OFFを確認。配置開始〜12:00 UTCの取得範囲にapp error0。本人端末のカテゴリ表示は未確認。
 
 - 通常累積requestは`selected_category_context=True`を選び、元recordの正規化済みカテゴリ集合をrequest-localに保持する。旧offline requestの既定Falseと旧source identityは保持する。
 - 集約とfresh二期間比較の意味keyへカテゴリ集合を含める。異なる集合の同文を反復扱いせず、複数選択の順序/重複で件数を増やさない。新旧カテゴリ方針の混在比較は拒否する。
