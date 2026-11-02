@@ -1,4 +1,4 @@
-> **2026-11-02最新：反復不明58教材の二候補を完了、通常未採用。** LR1は旧AT4=4/4とUQ2=2/2を両立、混在/時点/理由の残件を分離。全原本/112重みを保存し、LR1の保存37候補/拒否11件を別CPU process照合。行動＋二不明の新1題材2順序はCPU表現確認まで。[実結果/次の再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-unknown58-lr1-result-20261102)。既存offline ownerの内容比較でSTRUCTURE_MAP_DELTA_NONE、通常map/本番/DB/RN不変。完了runを再起動しない。
+> **2026-11-02最新：mixed60の66更新/24生成を完了、通常未採用。** AT4/UQ2/MX2を保持し本人混在・朝夜/否定・修飾に局所改善。他者否定scope/不明→理由/時間修飾/理由に残件。全233原本/112重み保存、34候補/6拒否を別CPU process照合。次の他者否定教材1題材2順序はCPU表現/実file再読まで。[全結果/次の再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-mixed60-result-20261102)。既存offline ownerの内容比較でSTRUCTURE_MAP_DELTA_NONE、通常map/本番/DB/RN不変。完了runを再起動しない。
 
 > 10/28最新差分：named出力型/参照提示修復・CPU351成功、9更新/112再読込/2生成を終了。平坦rootと回答source帰属へ前進も意味/本文0/2・新41c9不採用。末尾の最新結果・全機能00/weekly§90を参照。
 

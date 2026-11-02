@@ -1,6 +1,6 @@
 # Analysis — 最小field接続と実4B probe
 
-**11/2最新再開点：LR1までの結果/全重みを保存済み。新mixed60はCPU60教材/保存再読/実tokenizer確認を完了し、66更新/24新生成/900秒の一候補を固定。固定f93be5ffのplan/runnerを照合して一回起動済み（初回report STARTED/29.574631秒/更新0/新before2開始）。[今回の固定計画](#analysis-mixed60-plan-20261102)。開始後は /workspace/analysis-mixed60-20261102/result/report.json と run.exit を先に確認して重複起動しない。前回の残件/採否は[LR1全結果](#analysis-unknown58-lr1-result-20261102)。**
+**11/2最新再開点：mixed60の66更新/24新生成を正常完了。旧AT4/UQ2/MX2を保持し、本人混在・朝夜/否定・修飾に局所改善、他者否定scope/不明→理由等の残件で通常未採用。全233原本/112重み保存、34candidateと6拒否を別CPU process照合済み。[全結果/原本](#analysis-mixed60-result-20261102)。次は旧60に欠けた他者否定行動のroot actor/negation保持を、CPU成立した別1題材2順序から有限比較へ具体化する。[次の直接残件](#analysis-other-actor-cpu-20261102)。完了mixed60を重複起動しない。**
 
 2026-11-01 JST。開始原本：Cocolon PR30 `1c66add4fdf8f5ded18f7443d6b91b1771998244`、API PR3 `36713940ea82e217fab8a7c0a738a33f21df1c4d`。Mashの分析残件開始とweekly§45.4に従う。Codex Work/GPT-6、root華恋が実装/統合/反映、別文脈agentはread-only監査のみ。独立Pro/Ultra又はhuman品質受入れとは呼ばない。System Context最新cacheは未成立のまま、fresh原本fallbackを使用。
 
@@ -689,3 +689,30 @@ MD01は肯定本人行動と二不明、MD02は他者の否定行動と二不明
 必要GPU/実装/GitHub反映はMashの現在の継続明示承認内、追加の承認待ちへ戻さない。既存Pod kvdyw8xtonhf5wをJupyter直接接続で使用し、新規Pod/チャージ/再起動/Stop/削除は0。前回観測$0.58/hなら処理按分上限$0.145（準備/回収/保持/通信/税等別、総請求保証ではない）。scopeは既存private契約内の内容比較（LEVEL_2相当）、actual execution ownerはCodex Work/GPT-6 root華恋、補助agentは同環境read-only監査。独立Pro/Ultra/human受入れを偽装しない。通常API/受口/意味型/DB/RN/Render/Supabase/依存/稼働/merge/deployを変更しない。STRUCTURE_MAP_DELTA_NONE、正式0/3・54.50％据置。完了は一候補の有限実行・全文比較・原本保存であり、商品完成は未認定。
 
 起動記録（mixed60）：GitHub f93be5ff固定版とPod上plan/runner/supervisor/prepare全SHAを照合して一回起動。初回reportはSTARTED/29.574631秒/更新0/新before2開始/1load。runtime /workspace/analysis-mixed60-20261102/result/report.json、親 /workspace/mixed60-supervisor.log。先にstatus/exitを確認し、完了や採用はまだ宣言しない。重複起動しない。
+
+
+<a id="analysis-mixed60-result-20261102"></a>
+## 11/2 — 本人の行動と二不明の混在が改善、他者の否定scopeを残件へ
+
+固定f93be5ffの一候補を66更新/120測定/3load/24新生成で正常完走、全24stop。process417.189449秒、親418.644771秒/exit0/終了compute-apps空、元99916/3067/750aの重みとconfig全3対は不変。全112 F32/3,833,856parameterが有限で実model保存/非学習reload一致。新f9824503b8af3f0b67f6f75cc129f713c861a07d1a9f62f556e4b03461bb522b/config cc21925a85bf067989ca41adadb3fdd1d2051a2150e58ae4c8a9c74ac4575db3。[body-free全結果](semantic_units_mixed60_results.json)。元reportのPENDING_RAW_READは実行時原本として保持し、全文読解完了と通常未採用は本結果を正本とする。
+
+rootと同環境read-only agentが20afterと対応する全20beforeを原sourceと全文照合した。旧AT4=4/4、UQ2=2/2、新MX2=2/2が教示JSON一致を両立。構造15/20→19/20、raw byte不変11/20は意味合格率ではない。NV04は朝/夜と否定、説明→夜の読解→安心の親scope、不明理由の別保持が適正になった。HQ03は本人の否定行動/明示主体と二つの一意な全文不明root/各childを併存。MD01も本人の肯定行動と二不明を保持した。SQ01の述語自体への過剰modifierと、PQ02のかもをRELATIVE_TIMEにする誤りも解消した。AF01理由/CQ03/旧AT/UQ/PQ01の保持を確認。
+
+**通常未採用。** MD02は否定行動のrootからEXPLICIT_ACTOR/NEGATION qualifierが欠け、主体を含む主述語全体をCONTENT_TARGETへ置いてしまう（原文/否定述語自体は保持）。CQ04は自己親が消えても昨日の不明を根拠のないWRITTEN_REASONへ入れ、親/EPIのないcarrierで拒否。SQ03はまだが抽出unitから欠落したまま、HQ04もraw不変で、明記されたのでを理由として結ばずTE_CONTEXTを返す。source全文保持と意味単位抽出成功を混同しない。
+
+旧16は既見、MX2は1題材2順序、MD2は既知HQ03を見た後に作った近接診断。自己採点・一般性能率・独立盲検成功へ換算しない。今回の旧58再学習と新MXを組み合わせた比較であり、新MXだけが全改善の唯一原因とは断定しない。全60のunweighted assistant NLLは旧40平均0.004349571→0.002008655、NT8は0.004407080→0.002146896、ST8は0.017640121→0.013725165、UQ2は0.001890657→0.000989443、MX2は0.035693401→0.001468053。ST8の自由生成品質へは換算しない。
+
+[別CPU process保存再読](semantic_units_mixed60_saved_replay.json)/[実行script](semantic_units_mixed60_saved_replay.py)は34candidate全ID/coverage一致、残る6responseのstrict拒否を再確認。保存reader中だけEngine.generate/compiler/author entryを禁止し、モデルload/新生成/更新0。新before4はresult配下、既存before16はrun rootという実保存位置を事前に合わせて実行した。保存済みmodelrawの補修や受口変更は0。
+
+原本全233member（manifest232、CPU60candidate現物を含む）の元bytes/SHA、全112F32をPod外で照合しprivate保存済み。cocolon-analysis-mixed60-result-20261102.zip、Library libfile_094d5e38d88c8191808fa78c14dfe158、14817119bytes/SHA 28bf1d048d77a1220a732efa62a1ab8ecf3c22817c45a202461f5d5d7bc8b543。元GPU ZIPのSHA04e0c1fe…とは再圧縮containerが異なるが全元memberは同一。直接ZIP downloadはtimeoutしたため、既存の元text/数値tensor回収経路で同重量SHAへ復元した。GPU/モデルの再実行ではない。処理按分約$0.06721@前回観測0.58/h、準備/回収/保持/通信/税等別。
+
+<a id="analysis-other-actor-cpu-20261102"></a>
+### 次の直接残件 — 他者の否定行動の主体と否定を同じrootへ保持する
+
+全60target/sourceを読み、明示他者の独立ACTIONは6件、全て肯定行為で、明示他者の独立否定ACTION自体が0件だった。発話内の否定や他者の否定思考は別に数える。二不明との混在も0。MD02の失敗と対応する教材欠落だが、唯一原因の証明ではない。
+
+[新CPU教材OA01/02](semantic_units_other_actor_cpu.json)/[実行原本](semantic_units_other_actor_cpu_run.py)は、別題材の父の返送非行動＋二つの不明を1題材2順序で教示。MD02/モデルrawを教師化しない。独立ACTIONの全文節root内部へEXPLICIT_ACTOR/NEGATIONを付け、他者や主述語をCONTENT_TARGETへ置かない。不明rootは一意な全文引用で、各UNKNOWN_CONTENTを実返却rootへ束縛。旧60/受口を変えず両5unitのstrict束縛と実file write/read後の同process非生成reload、ID/coverage一致を確認した。原payload2件も合成教材JSON内へ元bytes復元可能な文字列/SHAで保持。全unparsed/actor未解決/route0、モデルload/新生成/更新0。
+
+これはMD02を見た後の近接合成教材、独立2題/盲検/一般他者理解/学習成功ではない。他者/否定/混在の各要因も単独には分離できず、CQ04/SQ03/HQ04は別残件。次の一作業は、この2targetと旧60保持の有限比較について初期値/順/量/評価/上限を明示選択し、CPU/tokenizer確認後に固定すること。新f982の改善保持は候補選択の根拠になるが、通常採用や自動追加epochにはしない。新GPU計画/実行はこのCPU2例には含めない。
+
+今回のGPU一候補66更新/24生成以外のGPU学習/再試行0、旧pytest860/283等の再実行0。通常source/受口/map/HTTP/DB/RN/Render/Supabase/依存/稼働/merge/deploy/Pod Stop/再起動/新規作成/削除/チャージ変更0。全体currentとfile地図は今回の結果/残件/再開点へ差分置換し、構造責務は不変のためSTRUCTURE_MAP_DELTA_NONE。正式0/3・54.50％/candidate_ready=falseを維持、primary outcome=BLOCKER_NARROWED。実環境はCodex Work/GPT-6、同環境read-only監査でありPro/Ultra/human受入れとはしない。必要作業/GPU/GitHub継続はMashの現在の明示承認内。

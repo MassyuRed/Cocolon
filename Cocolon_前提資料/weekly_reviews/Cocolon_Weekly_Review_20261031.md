@@ -2129,3 +2129,15 @@ adapterなし同revision/同messagesの4callを52.989783秒/1load/学習測定0�
 [固定計画・実装順・原本](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-mixed60-plan-20261102)。Mashの必要作業/GPU/GitHub継続明示承認内、Codex Work/GPT-6 root単一writer＋同環境read-only監査。前回単価0.58なら処理按分上限$0.145、準備/回収/保持等別。通常map/受口/API/DB/RN/稼働/正式0/3・54.50％据置、STRUCTURE_MAP_DELTA_NONE。ここは実行前checkpointで新GPU未実行。
 
 §73実行開始：GitHub f93be5ff固定版のplan/runner/supervisor/prepareを全SHA照合後、同Jupyterで一回起動。report STARTED/29.574631秒/更新0/新before2開始/1loadを確認。完了/新保存/採用は未宣言、先に /workspace/analysis-mixed60-20261102/result/report.json と run.exit を確認し重複起動しない。
+
+
+<a id="analysis-mixed60-result-20261102"></a>
+### §74 mixed60で本人混在を改善、他者否定のscopeと不明/理由を残件へ
+
+固定f93be5ffの一候補を66更新/120測定/3load/24stopで正常完走。417.189449秒（親418.644771秒/exit0）、compute空、元99916/3067/750aの重み/config3対不変。112F32/3,833,856paramsの有限保存/実model一致/非学習reload、全233元member/manifest232のbytes/SHA一致を確認。新f9824503/configcc21925a、private Library libfile_094d5e38d88c8191808fa78c14dfe158、14817119bytes/SHA28bf1d04…。34保存candidateの別CPU process再読ID/coverage一致と6拒否維持（モデルload/新生成/更新0）。
+
+全20before/20afterをroot/同環境read-only監査がsourceと全文照合。旧AT4=4/4・UQ2=2/2・MX2=2/2を両立。NV04朝夜/否定/親scope、HQ03本人否定＋二不明、MD01本人肯定＋二不明、SQ01の過剰modifier、PQ02の粗いかも時間分類が局所改善。構造15/20→19/20・raw不変11/20を意味合格率へ数えない。MD02は主体を含む主述語を対象childへ置き、ACTION rootにactor/negation qualifierがない。CQ04不明→理由carrier拒否、SQ03まだ欠落、HQ04理由未反映が残り通常未採用。旧16/1題材順序対/近接MDを盲検一般品質にしない。旧58再学習＋MX追加の複合比較で、MX単独因果も断定しない。
+
+全60教材では明示他者の独立否定ACTION自体が0だった（肯定他者ACTION6、発話内容の否定/他者否定思考は別）。別題材OA01/02の他者非行動＋二不明を、主体/否定は独立ACTION rootへ、不明内容は各一意全文rootへというCPU教材にした。旧60/受口不変、両5unit strict/実file write-read後同process非生成reload/ID・coverage一致、モデル0。MD02を見た後の1題材2順序であり、唯一原因・独立2題・一般理解成功ではない。次は旧60保持とこの2targetの有限比較条件を固定し、CQ04/SQ03/HQ04は別に追う。
+
+[全結果・原本・実装順/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-mixed60-result-20261102)。直接ZIP download timeout後、既存text/数値tensor回収で元member全一致の再圧縮archiveを保存。GPU再実行ではない。処理按分約$0.06721@前回観測0.58/h、準備/回収/保持等別。通常source/受口/API/DB/RN/Render/Supabase/稼働/merge/deploy/Pod管理操作0、正式0/3・54.50％据置。STRUCTURE_MAP_DELTA_NONE、BLOCKER_NARROWED。Codex Work/GPT-6 root単一writerと同環境read-only監査、独立Pro/Ultra/human受入れではない。Mashの必要作業/GPU/GitHub継続明示承認内で実行・保存。
