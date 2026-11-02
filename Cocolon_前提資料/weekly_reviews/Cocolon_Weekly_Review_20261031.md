@@ -2151,3 +2151,5 @@ adapterなし同revision/同messagesの4callを52.989783秒/1load/学習測定0�
 旧20beforeは同f982 after原本から照合再利用、新OA2/肯定他者OD01/否定他者OD02 before4＋全24after=28新生成、124測定/3load/process900秒（TERM890+10）。旧AT4/UQ2/MX2保持とMD02/ODの主語/否定/親scope、CQ04/SQ03/HQ04を全文で判定する。OA2はMD02後の1題材2順序、OD2はroot近接診断で盲検品質ではない。意味不足/退行は通常未採用、補修/受口緩和/再試行/追加epochなし。ここはGPU未実行。
 
 [固定計画/実装順/限界](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-other62-plan-20261102)。Mashの必要GPU/実装/GitHub継続明示承認内、Codex Work/GPT-6 root単一writer＋同環境read-only監査、独立Pro/Ultra/human受入れではない。前回単価0.58なら処理按分上限$0.145、準備/回収/保持等別。通常source/受口/map/DB/RN/稼働/正式0/3・54.50％据置、STRUCTURE_MAP_DELTA_NONE。
+
+§75実行開始：GitHub65080728のplan/prepare/runner/supervisorを全SHA照合後、既存Jupyterで一回起動。report STARTED/更新0/新before1開始/1loadを確認。完了/新保存/採用は未宣言、先に `/workspace/analysis-other62-20261102/result/report.json` と `run.exit` を確認し重複起動しない。
