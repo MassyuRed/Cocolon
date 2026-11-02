@@ -2031,3 +2031,8 @@ private66member/14427639bytes/SHAe36490c6…をLibrary libfile_53338dfcb1a881919
 ## 59. 11/2 — 引用先行指示を版分離、同重みで転移不足を比較する
 
 最新指示により承認待ちで区切らず、前回固定12raw/32教材の引用と不明接続を切分ける。引用に先立つ分類/親/qualifier出力順を見直すquote_first.v1をAPI1561526bへ追加、旧版/厳密受口/保存互換は保持。112 PASS/SQL依存なしの2SKIP。前回09b3重みで学習0/新12生成/600秒以内の比較を準備。rootが実装/write/実行、agentはread-only監査。詳細と実装順は[trial](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-quote-first-probe-20261102)。通常map/DB/RN/稼働/merge0。正式0/3/54.50％据置。
+
+
+### §59 実12生成と次の直接改善
+
+quote_first指示単独はDEV構造3/8（旧6/8）、学習済構造2/4/教示同値1/4（旧4/4）で退行し不採用。全12stop/process134.487394秒、元51file/50hash/12raw照合とprivate原本保存済み。局所EPI/待機/unknown親改善と、主体/未決等の退行を区別。次は新8近接対照＋旧32の意味不変な順序派生の64update/20新生成を一候補だけ比較する。新CQ4は前後、既見12のbeforeは今回実rawを再利用。詳細はtrial§quote-first、通常採用0/正式0/3/54.50％据置。

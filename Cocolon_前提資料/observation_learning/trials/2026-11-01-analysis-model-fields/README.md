@@ -387,3 +387,18 @@ API `1561526b972bbaba2b77561f57b9a945fdabd9f6`で新指示`quote_first.v1`を既
 実装順：版分離と再読/異版拒否→CPU確認→同保存09b3/config047aの新指示12生成→全raw/同file再読の内容比較→必要時のみ別題材の少数対照を作る。[要求](semantic_units_quote_first_requests.json)/[runner](semantic_units_quote_first_probe.py)。既見DEV8＋学習済REHEARSAL4で、新12call以内、追加学習0、loader1回、process600秒（外TERM590+kill10）、各23秒、nonthinking/greedy/max2048/context8192。単価表示$0.58/hのprocess上限$0.096667、準備/回収/待機/保持/通信/税等別。入力切捨て/raw補修/自動再試行なし。原32教材/旧重み/通常提供は不変。全raw/finish/同artifact/privategraph/全文/保存fileを回収し、rootが読む。引用不一致/打切り/意味退行は候補不採用とし原因へ戻る。通常map/DB/RN/HTTP有効化/Render配置/mergeなし。
 
 Supabaseはproject metadataだけを読取しACTIVE_HEALTHY、本人row/SQL変更0。Renderはworkspace未選択で本作業には不要、選択/service操作0。GPUは既存同Pod RTX PRO4000/$0.58/h、所有model processなしを確認。Pod作成/再起動/Stop/削除/追加チャージ0。通常map品質・正式0/3・54.50％据置。新指示版のためSTRUCTURE_MAP_DELTA_PRESENT（既存owner/意味wireのまま明示offline版を追加）。この節のGPU比較は準備段階で未実行、後続結果へ更新する。
+
+
+### 11/2 — 指示単独12生成の実結果：退行のため不採用
+
+全12stop/exit0、process134.487394秒（supervisor135.753298秒）。DEV構造は旧6/8→3/8、学習済rehearsal構造4/4→2/4、教示JSON同値4/4→1/4で指示単独候補は不採用。AF02の過去不明をEPIへ、NV01の待機行動/実unknown親5へ局所改善したが、引用外の主体/日語、独自scope、未決の不明昇格等が退行。受理AT29も未決を願望の理由へ変えており、受理率を意味品質へ換算しない。rootが全12rawを全文比較、別agentがread-only監査。[全body-free結果](semantic_units_quote_first_results.json)。今回の変更はkey順＋末尾指示の複合で、key順単独の因果とはしない。
+
+元ZIPの通常download APIがtimeoutしたため再生成せず、全51 UTF8 memberをJSON表示から損失なしで回収。50manifest hash/全12raw hash一致、全内容から再圧縮しprivate Library `libfile_e99f415e1c548191b49140d9d307fdf3`へ保全。元ZIP container SHA3ffcfd9e…は別記録し、再圧縮ZIPそのものと同一byteとは言わない。保存09b3/config047a不変、終了compute-apps空。今回学習0/新生成12、按分約$0.021667（保持/準備/回収等別）。
+
+### 次の直接改善：新8近接対照と、旧32の意味を保つ出力順派生
+
+[contrast40 plan](semantic_units_contrast40_plan.json)/[runner](semantic_units_contrast40_run.py)。未学習の逐語形・親構成の穴へ別題材BT01〜08を追加し、否定「てはいない/ていない」、不明親4/3、待機行動/気掛かり思考、昨日の不明、願望/未準備を交差。既存32の原source/JSON意味は不変で、指示版/target key順だけを派生。元32ファイルを上書きしない。新40target全て元source/受口へCPU再束縛、別文脈agentの意味監査済み。DEV全文の教師転用0、新CQ4診断は40教師と完全同一文0だが近い構文共有のため盲検ではない。
+
+実装順は元12raw確認/保全→40targetのCPU束縛→同保存09b3を新outputへ読みCQ4のbeforeだけ生成→旧32各1＋新8各4=64update→同40NLL前後各1→保存112tensor照合/非学習reload→DEV8/旧学習済4/新診断4のafter16→全raw比較/回収。新20call以内・load3・train64/measurement80forward以内、process900秒（外TERM890+kill10）・各23秒・max2048/context8192/nonthinking/greedy、同単価按分上限$0.145。旧12beforeは今回rawをrequest/messages/SHA照合して再利用し、二重生成しない。full-target weightedCE/LR5e-5/clip1/終端/文脈条件を保持。32の意味保全と新8教材と出力表現の複合候補であり各要素単独の寄与を主張しない。
+
+期待は逐語否定・unknown接続の新診断を改善し、旧主体/否定/時点/願望の意味を保つこと。構造受理だけ、旧教師再現だけ、平均NLLだけで採用しない。退行なら不採用/原因読解としepochや教材数を自動追加しない。今回も通常ObservedGraph/SQL/RN/HTTP/本番は未接続、正式0/3/54.50％据置。承認はMashの今回明示範囲。新しい本人観測会を待たず実行する。ここは準備時点、GPU実結果は後続へ記録する。
