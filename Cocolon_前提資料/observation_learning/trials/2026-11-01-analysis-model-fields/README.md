@@ -1,6 +1,6 @@
 # Analysis — 最小field接続と実4B probe
 
-**最新：11/2、48教材候補の64更新・26生成まで完了。既見親3/5と一新入力の逐語reasonを改善、旧学習済4/4を保持したが、理由/対象scopeと明示非行動・否定の分類退行が残り通常未採用。全112重み/136原本保存・25candidate別process再読一致。[最終結果と再開点](#analysis-binding48-result-20261102)。完了runを重複実行しない。**
+**最新：11/2、旧48の意味規則整合を再確認。理由/対象scopeと非行動・未決の否定を分ける新8対照をCPU束縛し、保存b8b7から56教材/64更新/30生成の一候補を準備。[実行計画](#analysis-scope56-plan-20261102)。前の6152は通常未採用のまま保持し、完了runを重複実行しない。**
 
 2026-11-01 JST。開始原本：Cocolon PR30 `1c66add4fdf8f5ded18f7443d6b91b1771998244`、API PR3 `36713940ea82e217fab8a7c0a738a33f21df1c4d`。Mashの分析残件開始とweekly§45.4に従う。Codex Work/GPT-6、root華恋が実装/統合/反映、別文脈agentはread-only監査のみ。独立Pro/Ultra又はhuman品質受入れとは呼ばない。System Context最新cacheは未成立のまま、fresh原本fallbackを使用。
 
@@ -491,3 +491,17 @@ NLL低下だけ/構造受理だけで採用しない。旧学習済AT4と新NT03
 全136member/manifest135 SHA/CRC、全112 F32 tensor/3,833,856parameterを元重みSHAで一致回収。private `cocolon-analysis-binding48-result-20261102.zip`、Library `libfile_179ddf90fa5c8191acfe12f9d025d2df`、14548458bytes/SHA `f575611c2f88f6b79b91e2f444987aa4977addc827979de3ec0489cddf662016`。重み `6152e16268a17477118dfb79780ee810e729af0ab047a211ea1666d98e5015e8`、config `08715ea255fe433651a4c543d4b40afc10677d14cde772b1e4e42edc97508c56`。数値JSONと全textを照合して再構成した原内容で、再圧縮ZIPは元container SHA f6b62725…と別。前のb8b7原本も保持し、6152を通常既定や次の自動初期値にはしない。
 
 次は理由carrierと対象のscopeを述語/別節まで広げないこと、明示非行動と否定の分類を保持することを分けて検討する。単に同候補のepoch/教材数を増やさず、両checkpointの実rawと旧48targetを基に別題材の最小対照を決める。旧DEV完全同一文を教師へ移さず、既存受口/rawは不変。今回比較群は追加192更新/新78生成と局所診断9forwardで、78種類の独立評価ではない。今回64runのprocess按分約$0.06233（準備/回収/保持/通信/税等別）。API1561526b/通常map/DB/RN/Render/merge/Pod Stop・再起動・削除・追加チャージ0、正式0/3・54.50％据置。限定TECHNICAL_CREDIT（既見親接続/一新入力の逐語理由改善と再開保全）、STRUCTURE_MAP_DELTA_NONE。
+
+
+<a id="analysis-scope56-plan-20261102"></a>
+## 次の直接改善 — 理由/対象の範囲と否定述語の小対照を分ける
+
+[56target plan](semantic_units_scope56_plan.json)/[runner](semantic_units_scope56_run.py)/[CPU束縛](semantic_units_scope56_cpu.json)。旧48target全件を再読し、意味規則を逆に教える矛盾は検出しなかった。全文root/述語＋対象child、助詞有無の表現差を矛盾扱いして凍結教師を書き換えない。理由8例は理由節だけを引用し、ので/からはREASON_MARKERで整合している。
+
+新ST01–04は別題材の独立思考/名詞化された対象、行動述語/対象名詞句/理由節を分け、理由に行動や対象まで含めない。ST05/06は『てはいない』を共有する取消非行動/未決思考の対、ST07/08は『まだ』『ていない』を共有する未送付/未決思考の対。同じ否定末尾でも述語に即してkindを分け、NEGATIONとまだmodifierを別に保持する。root架空教材でMashの実教師・本人判定ではない。旧48source/messages/targetはbyte不変、新教師に既見DEVの完全同一fieldを移していない。
+
+初期値は退行した6152を重ねず保存b8b7へ戻す。旧48各1＋新8各2＝64updateで、NT親位置対照も一回ずつ保持。clarified.v1/元target順/同full-target weightedCE/LR5e-5/clip1、終端込み・prompt全masked。48既存教材の比率と新8を組み合わせる一候補であり、教材一件やdose単独の寄与を主張しない。
+
+実装順：56targetのCPU再束縛と旧48不変→固定b8b7のbefore20をref/messages/SHAで再利用→新SQ4beforeだけ生成→64update/56NLL前後各1＝112測定→112tensorの有限保存/実model一致/非学習reload→旧DEV8/AT4/CQ4/DQ4/NT2＋新SQ4の26after→全30rawと両既存候補の意味比較/非生成再読/重み原本回収。3load/30新生成/900秒以内（TERM890+kill10）、各23秒、8192context/max2048/nonthinking/greedy。観測$0.58/hの処理按分上限$0.145、保持等別。切捨て/raw補修/受口緩和/自動再試行0。
+
+新SQ4は別sourceでも近接構文の開発診断で盲検ではない。構造受理/NLL/教師再現だけで通常採用せず、理由境界・非行動分類・未決NEGATION・旧主体/時点/不明/親を原文ごと読む。退行なら不採用として内容から次を決める。Mashの継続指示で必要作業/GPU/GitHub保存は承認済み。CPU全56束縛成功、旧48完全一致。実4Bはこの記録時点で未実行。API1561526b/通常map/DB/RN/Render/merge不変、正式0/3・54.50％据置、STRUCTURE_MAP_DELTA_NONE（既存private ownerの教材比較）。
