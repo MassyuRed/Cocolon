@@ -402,3 +402,18 @@ Supabaseはproject metadataだけを読取しACTIVE_HEALTHY、本人row/SQL変�
 実装順は元12raw確認/保全→40targetのCPU束縛→同保存09b3を新outputへ読みCQ4のbeforeだけ生成→旧32各1＋新8各4=64update→同40NLL前後各1→保存112tensor照合/非学習reload→DEV8/旧学習済4/新診断4のafter16→全raw比較/回収。新20call以内・load3・train64/measurement80forward以内、process900秒（外TERM890+kill10）・各23秒・max2048/context8192/nonthinking/greedy、同単価按分上限$0.145。旧12beforeは今回rawをrequest/messages/SHA照合して再利用し、二重生成しない。full-target weightedCE/LR5e-5/clip1/終端/文脈条件を保持。32の意味保全と新8教材と出力表現の複合候補であり各要素単独の寄与を主張しない。
 
 期待は逐語否定・unknown接続の新診断を改善し、旧主体/否定/時点/願望の意味を保つこと。構造受理だけ、旧教師再現だけ、平均NLLだけで採用しない。退行なら不採用/原因読解としepochや教材数を自動追加しない。今回も通常ObservedGraph/SQL/RN/HTTP/本番は未接続、正式0/3/54.50％据置。承認はMashの今回明示範囲。新しい本人観測会を待たず実行する。ここは準備時点、GPU実結果は後続へ記録する。
+
+
+### 11/2 — quote-first＋同32派生/新8対照64更新の結果
+
+64update/80測定forward/3load/20生成を326.909190秒で完走、全20stop、保存112tensor変更/有限/実model一致と非学習reload、元09b3/config不変を確認。新cd5b541a…/config41fa60fa…。同40平均NLL0.123631→0.018978（38低下/2増加）。異なる旧指示/target列のNLLと単純比較しない。
+
+DEV構造は指示単独3/8→8/8（原clarified6/8）、新CQはbefore1/4→after4/4。ただし学習済rehearsalは構造1/4（原4/4）、教示同値1/4。AF01逐語否定/不明親、NV01の待機/まだ/unknown親5、発話主体と本人心配、NV04のなぜ、CQ02親4、CQ04の昨日不明と今日理解に局所改善。一方、AF01は理由表現を有効なWRITTEN_MODIFIERへ意味誤分類、AF02は不明EPIをMODIFIER、UV12は未決否定qualifier欠落、CQ01の申し込み対象欠落、CQ03は待機2unit重複。AT17/19/29も拒否。root/agentは全20rawを独立に読み、通常不採用。[body-free全結果](semantic_units_contrast40_results.json)。全文併記が残ることを候補意味の完成へ換算しない。
+
+終了supervisor328.375250秒/exit0/compute-apps空。原本のtext100memberを全hash一致で回収、保存112tensorの数値チェックポイント回収中。この段階では全重みdurable保存完了とは宣言しない。再実行/通常有効化0。元全51fileのquote比較は別processでも5保存candidateの非生成/非compile/非author再読一致を確認済み。
+
+### 次の一候補：同じ対照教材のまま元の表現条件へ戻す
+
+[canonical40 plan](semantic_units_canonical40_plan.json)/[runner](semantic_units_canonical40_run.py)。同じ元09b3・40意味target・64update順/seed/objectiveを保ち、原clarified.v1/system/demo/canonical target順へ戻して比較する。元32assistant targetは元fileのbyte完全一致、新8意味targetだけcanonical表記。同じ失敗cd5の追加epochではなく、元checkpointから表現packageを変える別候補。指示末尾/demo順/target順の複合で、key順単独原因の分離ではない。
+
+元fixed32実12rawのbeforeをref/messages/SHA/09b3照合で再利用し、新CQ4before＋16afterの新20生成/3load/64update/80測定だけ。900秒（外TERM890+kill10）、各23秒、上限按分$0.145、保持等別、切捨て/補修/再試行0。CPU40target再束縛、元32のbyte一致と原12の照合を確認。既見診断を盲検へ戻さず、全rawと旧4rehearsalを再比較する。普通の分析に未確認候補を通さず、同じ親/引用の厳密受口と全unparsedを保持。新規製品source/DB/RN/稼働差分0、STRUCTURE_MAP_DELTA_NONE（同既存private owner内の学習比較）。実結果は後続記録へ。

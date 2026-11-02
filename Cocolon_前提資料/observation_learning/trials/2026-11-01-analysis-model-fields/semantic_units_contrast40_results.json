@@ -1,0 +1,1242 @@
+{
+  "status": "COMPLETE_STRUCTURAL_IMPROVEMENT_NOT_ADOPTED",
+  "report": {
+    "status": "COMPLETE_NOT_ADOPTED_PENDING_RAW_READ",
+    "plan_sha256": "cae8713e732e6e5ea06f439582413399ecf7076f38dfeca22e808b3c95fd159b",
+    "runner_sha256": "587e625fe774ad008ad484942252c726861a1d38dfe60c58572c18558656c1d9",
+    "plan": {
+      "max_updates": 64,
+      "epochs": null,
+      "batch_size": 1,
+      "gradient_accumulation": 1,
+      "learning_rate": 5e-05,
+      "weight_decay": 0.0,
+      "gradient_clip": 1.0,
+      "seed": 20261106,
+      "max_seconds": 900,
+      "max_new_generations": 20,
+      "request_seconds": 23,
+      "context_tokens": 8192,
+      "max_new_tokens": 2048,
+      "initial": "SAVED_FIXED32_ADAPTER_DERIVED_ORDER_AND_8_NEAR_CONTRAST",
+      "normal_adoption": false,
+      "update_order": [
+        "AT01",
+        "BT01",
+        "AT02",
+        "BT02",
+        "AT03",
+        "BT03",
+        "AT04",
+        "BT04",
+        "AT05",
+        "BT05",
+        "AT06",
+        "BT06",
+        "AT07",
+        "BT07",
+        "AT08",
+        "BT08",
+        "AT09",
+        "BT01",
+        "AT10",
+        "BT02",
+        "AT11",
+        "BT03",
+        "AT12",
+        "BT04",
+        "AT13",
+        "BT05",
+        "AT14",
+        "BT06",
+        "AT15",
+        "BT07",
+        "AT16",
+        "BT08",
+        "AT17",
+        "BT01",
+        "AT18",
+        "BT02",
+        "AT19",
+        "BT03",
+        "AT20",
+        "BT04",
+        "AT21",
+        "BT05",
+        "AT22",
+        "BT06",
+        "AT23",
+        "BT07",
+        "AT24",
+        "BT08",
+        "AT25",
+        "BT01",
+        "AT26",
+        "BT02",
+        "AT27",
+        "BT03",
+        "AT28",
+        "BT04",
+        "AT29",
+        "BT05",
+        "AT30",
+        "BT06",
+        "AT31",
+        "BT07",
+        "AT32",
+        "BT08"
+      ],
+      "model": "Qwen/Qwen3.5-4B",
+      "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "max_model_loads": 3,
+      "trainable_tensors": 112,
+      "trainable_parameters": 3833856,
+      "base_config_sha256": "ef4b1aef621fb4e234ce6a05601efb62a987c3cf5d40f3995ca1b72200bab145",
+      "gpu_hourly_usd_observed": 0.58,
+      "process_cost_upper_usd": 0.145,
+      "shared_demo_scope": "Same three synthetic demonstrations reordered; prompt masked; 32 semantic-equivalent derived targets plus 8 new near-contrast targets; no frozen source modified",
+      "evaluation_scope": "DEV8+trained4 plus new diagnostic4 before/after; no independent general-language acceptance",
+      "max_teacher_measurements": 80,
+      "max_training_forwards": 64,
+      "outer_timeout_term_seconds": 890,
+      "outer_kill_grace_seconds": 10,
+      "training_objective": "EXISTING_FULL_TARGET_DETACHED_ERROR_WEIGHTED_CE_V1",
+      "measurement_objective": "UNWEIGHTED_FULL_ASSISTANT_NLL",
+      "initial_weights_sha256": "09b3a1f6beb825e07d82e9d23cce2e69c2099d18041537e38fe5eb8c0c0333f5",
+      "initial_config_sha256": "047a624c7610132ebfa621642342760060446ed9360dab4ca8e1741ea016738b",
+      "initial_private_library_file_id": "libfile_609f1e617a688191aadbdb5e8f988a4f",
+      "adaptive_loss_source": "Cocolon_前提資料/observation_learning/training/2026-10-26-unconnected-native/named_reference9_preparation/adaptive_loss.py",
+      "adaptive_loss_sha256": "5852c69d2b8dc592762eed100214707648be24fa59f331959b622ef599dde141",
+      "rehearsal_stop_condition": "Read all outputs; reject semantic regression; no automatic epoch repetition, data expansion, or normal adoption",
+      "diagnosis_private_library_file_id": "libfile_4ed46a2a16948191857b075c6ae63414"
+    },
+    "updates_started": 64,
+    "updates_completed": 64,
+    "training_forwards": 64,
+    "measurement_forwards": 80,
+    "model_loads": 3,
+    "new_calls": 20,
+    "calls": [
+      {
+        "phase": "before",
+        "probe_id": "CQ01",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 7.9414466000162065,
+        "finish_reason": "stop",
+        "raw_sha256": "827d11a9edf7f7f43821520097a707b006c2f5e10c3c5ad7f40c6b203caa5562",
+        "admission": "REJECTED",
+        "reason": "analysis_model_units_carrier_invalid"
+      },
+      {
+        "phase": "before",
+        "probe_id": "CQ02",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 9.987517595058307,
+        "finish_reason": "stop",
+        "raw_sha256": "8d8e397c7d938f9a6de1d3ba580c783ed66f379ea48be87186f48e59229c910c",
+        "admission": "REJECTED",
+        "reason": "analysis_model_units_carrier_invalid"
+      },
+      {
+        "phase": "before",
+        "probe_id": "CQ03",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 8.237769803032279,
+        "finish_reason": "stop",
+        "raw_sha256": "f115822f56b47d3b72a7d4d5cd3cda914175df8d483055583c5fc5cc9e93a46d",
+        "admission": "REJECTED",
+        "reason": "analysis_model_units_quote_ambiguous_or_missing"
+      },
+      {
+        "phase": "before",
+        "probe_id": "CQ04",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 7.998064159881324,
+        "finish_reason": "stop",
+        "raw_sha256": "3398e737f189f822d2fba7bcbeb498594bb53b36c36af1c07990f28cbd5b79a4",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:44238b82207546aca7231f0b124f4e400f01c0582a6eadaa4e48ee5ffb7e6c44",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 3,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "AF01",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 16.10806657606736,
+        "finish_reason": "stop",
+        "raw_sha256": "6df911679415725db57af229b672b147296d8ffb01495182a09634c40d2dff38",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:5294e6531928f9c81f500c084e01b3866132cecd5b0345577b5c4542deeff2f0",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 7,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "AF02",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 8.17955369502306,
+        "finish_reason": "stop",
+        "raw_sha256": "053e55aa1173504149c690ea56ca04f86c71a8e0405b58055f8dcbcc5f6362ea",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:55ad269b30dd80cf7ddc87b7995cd7628681d8969dd58bb27fcdf4398e5f9137",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 3,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "UV03",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 8.95819502696395,
+        "finish_reason": "stop",
+        "raw_sha256": "5726c4750b5b3992e3922b36bba457ff974e0ab37362dafe53dbdac3a6289527",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:63995e102261b9614c900520fc91d02ea1b5d4ec60949dccc22cdfa9e66aa20e",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 3,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "UV12",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 6.08567598904483,
+        "finish_reason": "stop",
+        "raw_sha256": "08898645f2d64934595e7be8efc25ed19adc949e24756ac60c709c4bb0bc27ab",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:72bc0463596d60c814176ab03298fc7b16f767ad502d792317111594a719bdc4",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 2,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "NV01",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 11.626812061062083,
+        "finish_reason": "stop",
+        "raw_sha256": "8daddff2189a138a8581608d21648ab20a84545bb8f2529e0678a6f4dffcdaff",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:377e522af0d3f3319e98038647db568ac38c070841be1a08a50fe7470cc0c7ed",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 6,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "NV02",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 8.358783476054668,
+        "finish_reason": "stop",
+        "raw_sha256": "6f7a811d6fa186c788ea76ba870938735d68cddc147545ca018753c65af4f278",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:c3b035a03b85823d3b6e005ec048f1b2d9a87fbaf4a874a1f0644c73f2f2c0ef",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 3,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "NV03",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 7.974478383781388,
+        "finish_reason": "stop",
+        "raw_sha256": "08e4c3a292aef87659a21dcbc2564c92b7deabc8975dd888280279cbe85e266c",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:29af80da9f31214ec0f174d9ae455801478196098d93ed2d010ece0d9e5b5d6a",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 3,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "NV04",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 12.130430290009826,
+        "finish_reason": "stop",
+        "raw_sha256": "5ea5530b0cf3b6cc586e22f2b95520414cf0d5628aa0bf0436b1948741318f26",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:80dae588edd2de7201d5b9f7383e7b1bdb20767964505248d5ce8f757fc83ee3",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 5,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "REHEARSAL_AT17",
+        "status": "RETURNED",
+        "training_use": true,
+        "diagnostic_group": "TRAINED_REHEARSAL",
+        "seconds": 9.945473760832101,
+        "finish_reason": "stop",
+        "raw_sha256": "6aab3dbe166b15c49ddfd56578c8082972abcef6506f9f911ecb3322b9a0f9fb",
+        "admission": "REJECTED",
+        "reason": "analysis_model_units_carrier_invalid"
+      },
+      {
+        "phase": "after",
+        "probe_id": "REHEARSAL_AT19",
+        "status": "RETURNED",
+        "training_use": true,
+        "diagnostic_group": "TRAINED_REHEARSAL",
+        "seconds": 10.396111393114552,
+        "finish_reason": "stop",
+        "raw_sha256": "60094e20ed2fb4dc63c7e39a91658f9405703f40c66c95826cd4ef30e04fdab5",
+        "admission": "REJECTED",
+        "reason": "analysis_model_units_quote_ambiguous_or_missing"
+      },
+      {
+        "phase": "after",
+        "probe_id": "REHEARSAL_AT21",
+        "status": "RETURNED",
+        "training_use": true,
+        "diagnostic_group": "TRAINED_REHEARSAL",
+        "seconds": 6.16360577987507,
+        "finish_reason": "stop",
+        "raw_sha256": "eeb000377748a5ddc01f56c2c9250228b32e16bba8ddaab2a84cb294e459f7ce",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:f417a2445361c6e190455606ed7049b803088bc271b36a1341d90f7c30e1adc2",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 3,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "REHEARSAL_AT29",
+        "status": "RETURNED",
+        "training_use": true,
+        "diagnostic_group": "TRAINED_REHEARSAL",
+        "seconds": 12.896182311931625,
+        "finish_reason": "stop",
+        "raw_sha256": "0a1a234ae0a0b93c62c51dac0b63eba6d72c2bace978fe5ac7b63fbe3a5666b1",
+        "admission": "REJECTED",
+        "reason": "analysis_model_units_quote_ambiguous_or_missing"
+      },
+      {
+        "phase": "after",
+        "probe_id": "CQ01",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 8.068497269181535,
+        "finish_reason": "stop",
+        "raw_sha256": "2cd49b709e3ecd452740f7dc1dfaad707a90a843ab39b0bfbb4d41e02b887775",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:12291178a5fd6d6ed4dfe92c81b82aca0cf417fdabbf1c93beb15b6bb72ca445",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 3,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "CQ02",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 10.931890968000516,
+        "finish_reason": "stop",
+        "raw_sha256": "ffba2f35c70d79acee7d7c0601922a0560bc6b1501f7b2a5129c446408d5a54d",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:c6ee511dfe9672efe24827f25825b6a44f10461d096bd77ab301246834e517c5",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 5,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "CQ03",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 10.109456936828792,
+        "finish_reason": "stop",
+        "raw_sha256": "f25be32890f6acfc27f5c52cbe7a217c628332660e2ba82e6769380819f6202e",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:c51c427af0c659b031c6586e371d61c55837226a8de20241ff30b02e2afbb21b",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 5,
+        "file_replay": "MATCHED"
+      },
+      {
+        "phase": "after",
+        "probe_id": "CQ04",
+        "status": "RETURNED",
+        "training_use": false,
+        "diagnostic_group": "DEVELOPMENT_PROBE",
+        "seconds": 10.599163037957624,
+        "finish_reason": "stop",
+        "raw_sha256": "db42d833d9b0c2cb66eea041f7b0c94fcc0ecc1abd01186bd9c3615430abf9d5",
+        "admission": "RETURNED",
+        "candidate_id": "analysis-unit-candidate:1151e1d15efcf5f039e44d2725d329212ab7a9d9075945e8c54c4be9c5ba5d1f",
+        "coverage": {
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "processed_count": 1,
+          "mapped_count": 0,
+          "unparsed_count": 1,
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "stale_supplement_count": 0
+        },
+        "units": 4,
+        "file_replay": "MATCHED"
+      }
+    ],
+    "steps": [
+      {
+        "step": 1,
+        "teacher": "AT01",
+        "loss": 0.03978075459599495,
+        "gradient_norm": 11.111084938049316
+      },
+      {
+        "step": 2,
+        "teacher": "BT01",
+        "loss": 2.0370407104492188,
+        "gradient_norm": 55.68655014038086
+      },
+      {
+        "step": 3,
+        "teacher": "AT02",
+        "loss": 0.38385823369026184,
+        "gradient_norm": 33.69259262084961
+      },
+      {
+        "step": 4,
+        "teacher": "BT02",
+        "loss": 1.2081927061080933,
+        "gradient_norm": 51.102012634277344
+      },
+      {
+        "step": 5,
+        "teacher": "AT03",
+        "loss": 0.011969024315476418,
+        "gradient_norm": 4.28975772857666
+      },
+      {
+        "step": 6,
+        "teacher": "BT03",
+        "loss": 0.546261727809906,
+        "gradient_norm": 32.7631721496582
+      },
+      {
+        "step": 7,
+        "teacher": "AT04",
+        "loss": 1.1742773056030273,
+        "gradient_norm": 48.10971450805664
+      },
+      {
+        "step": 8,
+        "teacher": "BT04",
+        "loss": 0.2122521549463272,
+        "gradient_norm": 20.01667022705078
+      },
+      {
+        "step": 9,
+        "teacher": "AT05",
+        "loss": 0.6659368872642517,
+        "gradient_norm": 42.68305206298828
+      },
+      {
+        "step": 10,
+        "teacher": "BT05",
+        "loss": 1.2089965343475342,
+        "gradient_norm": 24.372636795043945
+      },
+      {
+        "step": 11,
+        "teacher": "AT06",
+        "loss": 0.0055021680891513824,
+        "gradient_norm": 0.28340134024620056
+      },
+      {
+        "step": 12,
+        "teacher": "BT06",
+        "loss": 0.7349622249603271,
+        "gradient_norm": 32.76992416381836
+      },
+      {
+        "step": 13,
+        "teacher": "AT07",
+        "loss": 0.032792363315820694,
+        "gradient_norm": 3.0440354347229004
+      },
+      {
+        "step": 14,
+        "teacher": "BT07",
+        "loss": 1.5158601999282837,
+        "gradient_norm": 29.152528762817383
+      },
+      {
+        "step": 15,
+        "teacher": "AT08",
+        "loss": 0.5717517137527466,
+        "gradient_norm": 20.77962303161621
+      },
+      {
+        "step": 16,
+        "teacher": "BT08",
+        "loss": 0.507656991481781,
+        "gradient_norm": 23.187429428100586
+      },
+      {
+        "step": 17,
+        "teacher": "AT09",
+        "loss": 0.2716771960258484,
+        "gradient_norm": 8.430046081542969
+      },
+      {
+        "step": 18,
+        "teacher": "BT01",
+        "loss": 0.025242049247026443,
+        "gradient_norm": 1.3736790418624878
+      },
+      {
+        "step": 19,
+        "teacher": "AT10",
+        "loss": 1.3000723123550415,
+        "gradient_norm": 40.88435745239258
+      },
+      {
+        "step": 20,
+        "teacher": "BT02",
+        "loss": 0.0028115930035710335,
+        "gradient_norm": 0.11097618192434311
+      },
+      {
+        "step": 21,
+        "teacher": "AT11",
+        "loss": 0.2839277684688568,
+        "gradient_norm": 8.539037704467773
+      },
+      {
+        "step": 22,
+        "teacher": "BT03",
+        "loss": 0.0017045782878994942,
+        "gradient_norm": 0.06371776014566422
+      },
+      {
+        "step": 23,
+        "teacher": "AT12",
+        "loss": 0.9781792759895325,
+        "gradient_norm": 19.158605575561523
+      },
+      {
+        "step": 24,
+        "teacher": "BT04",
+        "loss": 0.004458706360310316,
+        "gradient_norm": 0.19266800582408905
+      },
+      {
+        "step": 25,
+        "teacher": "AT13",
+        "loss": 0.7740439772605896,
+        "gradient_norm": 16.80189323425293
+      },
+      {
+        "step": 26,
+        "teacher": "BT05",
+        "loss": 0.326316773891449,
+        "gradient_norm": 8.813405990600586
+      },
+      {
+        "step": 27,
+        "teacher": "AT14",
+        "loss": 0.3227146863937378,
+        "gradient_norm": 13.124317169189453
+      },
+      {
+        "step": 28,
+        "teacher": "BT06",
+        "loss": 0.03341105952858925,
+        "gradient_norm": 1.909218430519104
+      },
+      {
+        "step": 29,
+        "teacher": "AT15",
+        "loss": 0.8732756972312927,
+        "gradient_norm": 18.386056900024414
+      },
+      {
+        "step": 30,
+        "teacher": "BT07",
+        "loss": 0.4861105978488922,
+        "gradient_norm": 12.566985130310059
+      },
+      {
+        "step": 31,
+        "teacher": "AT16",
+        "loss": 0.3272516429424286,
+        "gradient_norm": 10.462638854980469
+      },
+      {
+        "step": 32,
+        "teacher": "BT08",
+        "loss": 0.04415125027298927,
+        "gradient_norm": 1.333235263824463
+      },
+      {
+        "step": 33,
+        "teacher": "AT17",
+        "loss": 1.2973887920379639,
+        "gradient_norm": 23.114641189575195
+      },
+      {
+        "step": 34,
+        "teacher": "BT01",
+        "loss": 0.003513119649142027,
+        "gradient_norm": 0.11585594713687897
+      },
+      {
+        "step": 35,
+        "teacher": "AT18",
+        "loss": 0.40464723110198975,
+        "gradient_norm": 21.352642059326172
+      },
+      {
+        "step": 36,
+        "teacher": "BT02",
+        "loss": 0.0029978612437844276,
+        "gradient_norm": 0.11323462426662445
+      },
+      {
+        "step": 37,
+        "teacher": "AT19",
+        "loss": 0.29615700244903564,
+        "gradient_norm": 6.926878929138184
+      },
+      {
+        "step": 38,
+        "teacher": "BT03",
+        "loss": 0.0018352067563682795,
+        "gradient_norm": 0.06948604434728622
+      },
+      {
+        "step": 39,
+        "teacher": "AT20",
+        "loss": 0.22286468744277954,
+        "gradient_norm": 8.099475860595703
+      },
+      {
+        "step": 40,
+        "teacher": "BT04",
+        "loss": 0.0021884385496377945,
+        "gradient_norm": 0.0987134575843811
+      },
+      {
+        "step": 41,
+        "teacher": "AT21",
+        "loss": 0.22281013429164886,
+        "gradient_norm": 13.84018325805664
+      },
+      {
+        "step": 42,
+        "teacher": "BT05",
+        "loss": 0.07206543534994125,
+        "gradient_norm": 2.7006378173828125
+      },
+      {
+        "step": 43,
+        "teacher": "AT22",
+        "loss": 0.7438656091690063,
+        "gradient_norm": 30.665639877319336
+      },
+      {
+        "step": 44,
+        "teacher": "BT06",
+        "loss": 0.012651571072638035,
+        "gradient_norm": 0.9820253849029541
+      },
+      {
+        "step": 45,
+        "teacher": "AT23",
+        "loss": 0.7054054141044617,
+        "gradient_norm": 18.571624755859375
+      },
+      {
+        "step": 46,
+        "teacher": "BT07",
+        "loss": 0.15901201963424683,
+        "gradient_norm": 6.867389678955078
+      },
+      {
+        "step": 47,
+        "teacher": "AT24",
+        "loss": 0.6298087239265442,
+        "gradient_norm": 14.734454154968262
+      },
+      {
+        "step": 48,
+        "teacher": "BT08",
+        "loss": 0.02878694050014019,
+        "gradient_norm": 1.9282768964767456
+      },
+      {
+        "step": 49,
+        "teacher": "AT25",
+        "loss": 0.5634332299232483,
+        "gradient_norm": 20.523666381835938
+      },
+      {
+        "step": 50,
+        "teacher": "BT01",
+        "loss": 0.0029514958150684834,
+        "gradient_norm": 0.08901502937078476
+      },
+      {
+        "step": 51,
+        "teacher": "AT26",
+        "loss": 0.18091270327568054,
+        "gradient_norm": 6.907560348510742
+      },
+      {
+        "step": 52,
+        "teacher": "BT02",
+        "loss": 0.0033359923399984837,
+        "gradient_norm": 0.15595389902591705
+      },
+      {
+        "step": 53,
+        "teacher": "AT27",
+        "loss": 0.03228737786412239,
+        "gradient_norm": 1.2827647924423218
+      },
+      {
+        "step": 54,
+        "teacher": "BT03",
+        "loss": 0.0015367852756753564,
+        "gradient_norm": 0.061523303389549255
+      },
+      {
+        "step": 55,
+        "teacher": "AT28",
+        "loss": 0.45557543635368347,
+        "gradient_norm": 18.594011306762695
+      },
+      {
+        "step": 56,
+        "teacher": "BT04",
+        "loss": 0.0021189546678215265,
+        "gradient_norm": 0.1261453479528427
+      },
+      {
+        "step": 57,
+        "teacher": "AT29",
+        "loss": 0.45764291286468506,
+        "gradient_norm": 12.804566383361816
+      },
+      {
+        "step": 58,
+        "teacher": "BT05",
+        "loss": 0.006190839689224958,
+        "gradient_norm": 0.30038097500801086
+      },
+      {
+        "step": 59,
+        "teacher": "AT30",
+        "loss": 0.38082051277160645,
+        "gradient_norm": 19.699617385864258
+      },
+      {
+        "step": 60,
+        "teacher": "BT06",
+        "loss": 0.03951197862625122,
+        "gradient_norm": 2.4690682888031006
+      },
+      {
+        "step": 61,
+        "teacher": "AT31",
+        "loss": 0.1192871630191803,
+        "gradient_norm": 6.581155776977539
+      },
+      {
+        "step": 62,
+        "teacher": "BT07",
+        "loss": 0.10317451506853104,
+        "gradient_norm": 7.3500471115112305
+      },
+      {
+        "step": 63,
+        "teacher": "AT32",
+        "loss": 0.04546874389052391,
+        "gradient_norm": 2.2902917861938477
+      },
+      {
+        "step": 64,
+        "teacher": "BT08",
+        "loss": 0.01231735572218895,
+        "gradient_norm": 0.6075038313865662
+      }
+    ],
+    "measurements": [
+      {
+        "phase": "before_updates",
+        "losses": {
+          "AT01": 0.011158323846757412,
+          "AT02": 0.03450422361493111,
+          "AT03": 0.011696270667016506,
+          "AT04": 0.1498061716556549,
+          "AT05": 0.17052201926708221,
+          "AT06": 0.027075964957475662,
+          "AT07": 0.11156076192855835,
+          "AT08": 0.10489672422409058,
+          "AT09": 0.1495005190372467,
+          "AT10": 0.020153095945715904,
+          "AT11": 0.07800298929214478,
+          "AT12": 0.22188803553581238,
+          "AT13": 0.11493394523859024,
+          "AT14": 0.0064383200369775295,
+          "AT15": 0.23541177809238434,
+          "AT16": 0.08940790593624115,
+          "AT17": 0.203745037317276,
+          "AT18": 0.17757321894168854,
+          "AT19": 0.19711658358573914,
+          "AT20": 0.21197599172592163,
+          "AT21": 0.0014916850486770272,
+          "AT22": 0.17688843607902527,
+          "AT23": 0.1993454396724701,
+          "AT24": 0.09765690565109253,
+          "AT25": 0.1199103444814682,
+          "AT26": 0.020331375300884247,
+          "AT27": 0.13033798336982727,
+          "AT28": 0.12913106381893158,
+          "AT29": 0.23626956343650818,
+          "AT30": 0.0556032769382,
+          "AT31": 0.11684007197618484,
+          "AT32": 0.09689456969499588,
+          "BT01": 0.16059064865112305,
+          "BT02": 0.18292030692100525,
+          "BT03": 0.07613058388233185,
+          "BT04": 0.10984703153371811,
+          "BT05": 0.1780453473329544,
+          "BT06": 0.1979883760213852,
+          "BT07": 0.2141999900341034,
+          "BT08": 0.11744523793458939
+        },
+        "mean": 0.12363090296566952
+      },
+      {
+        "phase": "after_updates",
+        "losses": {
+          "AT01": 0.00388395506888628,
+          "AT02": 0.005706014111638069,
+          "AT03": 0.000781164737418294,
+          "AT04": 0.03102927841246128,
+          "AT05": 0.09099535644054413,
+          "AT06": 0.0033231854904443026,
+          "AT07": 0.006991384085267782,
+          "AT08": 0.026180807501077652,
+          "AT09": 0.04741425812244415,
+          "AT10": 0.011930746957659721,
+          "AT11": 0.025813477113842964,
+          "AT12": 0.04555702954530716,
+          "AT13": 0.018624521791934967,
+          "AT14": 0.015305344015359879,
+          "AT15": 0.03657810762524605,
+          "AT16": 0.005850093439221382,
+          "AT17": 0.05683457478880882,
+          "AT18": 0.00835536327213049,
+          "AT19": 0.03427885100245476,
+          "AT20": 0.036798156797885895,
+          "AT21": 0.003457039827480912,
+          "AT22": 0.014705638401210308,
+          "AT23": 0.018786659464240074,
+          "AT24": 0.03490972891449928,
+          "AT25": 0.010990780778229237,
+          "AT26": 0.0186062790453434,
+          "AT27": 0.0049249217845499516,
+          "AT28": 0.030978025868535042,
+          "AT29": 0.030868077650666237,
+          "AT30": 0.006953312549740076,
+          "AT31": 0.018946226686239243,
+          "AT32": 0.012440668419003487,
+          "BT01": 0.0022806073538959026,
+          "BT02": 0.001889928593300283,
+          "BT03": 0.0010119844228029251,
+          "BT04": 0.001535832998342812,
+          "BT05": 0.004144861828535795,
+          "BT06": 0.005022103898227215,
+          "BT07": 0.017067348584532738,
+          "BT08": 0.007383442018181086
+        },
+        "mean": 0.01897837848518975
+      }
+    ],
+    "training_initial": "PRIOR_ISOLATED_ANALYSIS_FIXED32_ADAPTER_DERIVED_ORDER_CONTRASTS_NEW_OUTPUT_ONLY",
+    "initial_hashes": {
+      "adapter_config.json": "047a624c7610132ebfa621642342760060446ed9360dab4ca8e1741ea016738b",
+      "adapter_model.safetensors": "09b3a1f6beb825e07d82e9d23cce2e69c2099d18041537e38fe5eb8c0c0333f5"
+    },
+    "training_objective": "EXISTING_FULL_TARGET_DETACHED_ERROR_WEIGHTED_CE_V1",
+    "measurement_objective": "UNWEIGHTED_FULL_ASSISTANT_NLL",
+    "model_adopted": false,
+    "retry": false,
+    "product_credit": 0,
+    "process_seconds": 326.90918968897313,
+    "ce_window_cpu_validation": [
+      {
+        "weighted": false,
+        "loss": 2.9459385871887207,
+        "full_tail_loss_and_all_gradients_match": true,
+        "all_target_weights_positive": true
+      },
+      {
+        "weighted": true,
+        "loss": 2.9459593296051025,
+        "full_tail_loss_and_all_gradients_match": true,
+        "all_target_weights_positive": true
+      }
+    ],
+    "model": "Qwen/Qwen3.5-4B",
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "pins": {
+      "transformers": "5.19.0",
+      "peft": "0.21.2",
+      "accelerate": "1.15.0",
+      "safetensors": "0.8.0"
+    },
+    "torch": "2.8.0+cu128",
+    "gpu": "NVIDIA RTX PRO 4000 Blackwell",
+    "seed": 20261106,
+    "token_counts": {
+      "AT01": {
+        "prompt_tokens": 988,
+        "target_tokens": 144
+      },
+      "AT02": {
+        "prompt_tokens": 987,
+        "target_tokens": 109
+      },
+      "AT03": {
+        "prompt_tokens": 990,
+        "target_tokens": 131
+      },
+      "AT04": {
+        "prompt_tokens": 992,
+        "target_tokens": 176
+      },
+      "AT05": {
+        "prompt_tokens": 983,
+        "target_tokens": 88
+      },
+      "AT06": {
+        "prompt_tokens": 984,
+        "target_tokens": 80
+      },
+      "AT07": {
+        "prompt_tokens": 988,
+        "target_tokens": 111
+      },
+      "AT08": {
+        "prompt_tokens": 990,
+        "target_tokens": 158
+      },
+      "AT09": {
+        "prompt_tokens": 983,
+        "target_tokens": 139
+      },
+      "AT10": {
+        "prompt_tokens": 986,
+        "target_tokens": 142
+      },
+      "AT11": {
+        "prompt_tokens": 987,
+        "target_tokens": 146
+      },
+      "AT12": {
+        "prompt_tokens": 984,
+        "target_tokens": 118
+      },
+      "AT13": {
+        "prompt_tokens": 988,
+        "target_tokens": 119
+      },
+      "AT14": {
+        "prompt_tokens": 983,
+        "target_tokens": 79
+      },
+      "AT15": {
+        "prompt_tokens": 988,
+        "target_tokens": 135
+      },
+      "AT16": {
+        "prompt_tokens": 986,
+        "target_tokens": 128
+      },
+      "AT17": {
+        "prompt_tokens": 988,
+        "target_tokens": 159
+      },
+      "AT18": {
+        "prompt_tokens": 985,
+        "target_tokens": 119
+      },
+      "AT19": {
+        "prompt_tokens": 989,
+        "target_tokens": 111
+      },
+      "AT20": {
+        "prompt_tokens": 985,
+        "target_tokens": 119
+      },
+      "AT21": {
+        "prompt_tokens": 983,
+        "target_tokens": 101
+      },
+      "AT22": {
+        "prompt_tokens": 982,
+        "target_tokens": 97
+      },
+      "AT23": {
+        "prompt_tokens": 984,
+        "target_tokens": 119
+      },
+      "AT24": {
+        "prompt_tokens": 989,
+        "target_tokens": 136
+      },
+      "AT25": {
+        "prompt_tokens": 984,
+        "target_tokens": 119
+      },
+      "AT26": {
+        "prompt_tokens": 987,
+        "target_tokens": 106
+      },
+      "AT27": {
+        "prompt_tokens": 987,
+        "target_tokens": 143
+      },
+      "AT28": {
+        "prompt_tokens": 987,
+        "target_tokens": 154
+      },
+      "AT29": {
+        "prompt_tokens": 1008,
+        "target_tokens": 219
+      },
+      "AT30": {
+        "prompt_tokens": 996,
+        "target_tokens": 122
+      },
+      "AT31": {
+        "prompt_tokens": 987,
+        "target_tokens": 126
+      },
+      "AT32": {
+        "prompt_tokens": 986,
+        "target_tokens": 106
+      },
+      "BT01": {
+        "prompt_tokens": 988,
+        "target_tokens": 120
+      },
+      "BT02": {
+        "prompt_tokens": 986,
+        "target_tokens": 117
+      },
+      "BT03": {
+        "prompt_tokens": 995,
+        "target_tokens": 164
+      },
+      "BT04": {
+        "prompt_tokens": 991,
+        "target_tokens": 136
+      },
+      "BT05": {
+        "prompt_tokens": 987,
+        "target_tokens": 142
+      },
+      "BT06": {
+        "prompt_tokens": 987,
+        "target_tokens": 122
+      },
+      "BT07": {
+        "prompt_tokens": 990,
+        "target_tokens": 161
+      },
+      "BT08": {
+        "prompt_tokens": 986,
+        "target_tokens": 107
+      }
+    },
+    "training_initial_reload": "MATCHED_ALL_112_SAVED_TENSORS",
+    "changed_trainable_tensors": 112,
+    "peak_allocated_gib": 9.32308053970337,
+    "peak_reserved_gib": 10.29296875,
+    "adapter_sha256": "cd5b541ab96847f1c433cd3e9ffd7efeb60feeafcbce37085fafdfc3e48e4517",
+    "adapter_config_sha256": "41fa60faa9a4127b9592e5c5756433cdf68efe40ac5157299f5372272b04b1e1",
+    "saved_adapter_nontraining_reload": "MATCHED_112_TENSORS",
+    "initial_adapter_unchanged": true
+  },
+  "root_read": {
+    "AF01": "Literal negation and unknown root fixed. Written reason carrier kept, but teita-node is mislabeled as WRITTEN_MODIFIER; valid wire, incomplete semantics.",
+    "AF02": "Unknown expression regresses from EPI to WRITTEN_MODIFIER.",
+    "UV03": "Reported speaker/quoted negation and independent self concern with mada retained.",
+    "UV12": "Desire/undecided independent but negation qualifier missing; full quote still contains it.",
+    "NV01": "Waiting/action, both targets, unknown root5 and mada/EPI retained.",
+    "NV02": "Speaker/quoted content and separate self worry with degree retained.",
+    "NV03": "Desire/undecided and local target retained; no spurious tai modifier.",
+    "NV04": "Separate day/night/negation and full why-unknown parent recovered.",
+    "REHEARSAL_AT17": "Invalid actor scope, quote negation missing; rejects.",
+    "REHEARSAL_AT19": "Date outside short quote; extra undecided-as-unknown carrier; rejects.",
+    "REHEARSAL_AT21": "Teacher JSON equivalent.",
+    "REHEARSAL_AT29": "Independent desire and undecided recovered, but repeated room target not unique; rejects.",
+    "CQ01": "Literal negation/unknown root fixed, cancellation target application missing from units (retained in full context).",
+    "CQ02": "Three actions and actual unknown parent4, mada/EPI retained.",
+    "CQ03": "Waiting correctly ACTION but duplicated with modified qualifier, unvalidated semantic failure despite structural acceptance.",
+    "CQ04": "Yesterday unknown EPI and today understanding/degree of relief correctly separate."
+  },
+  "development_structural": "8/8 vs prompt-only3/8 and original6/8",
+  "new_diagnostic_structural": "4/4 vs1/4",
+  "trained_rehearsal_structural": "1/4 vs prompt-only2/4 and original4/4",
+  "trained_rehearsal_teacher_json_equal": "1/4",
+  "private_preservation": "Text100 members hash-verified; all112 F32 parameter numeric export in progress, not yet declared durable",
+  "normal_adoption": false,
+  "product_credit": 0,
+  "process_usd": 0.05266870278322344
+}

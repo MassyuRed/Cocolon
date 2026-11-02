@@ -2036,3 +2036,8 @@ private66member/14427639bytes/SHAe36490c6…をLibrary libfile_53338dfcb1a881919
 ### §59 実12生成と次の直接改善
 
 quote_first指示単独はDEV構造3/8（旧6/8）、学習済構造2/4/教示同値1/4（旧4/4）で退行し不採用。全12stop/process134.487394秒、元51file/50hash/12raw照合とprivate原本保存済み。局所EPI/待機/unknown親改善と、主体/未決等の退行を区別。次は新8近接対照＋旧32の意味不変な順序派生の64update/20新生成を一候補だけ比較する。新CQ4は前後、既見12のbeforeは今回実rawを再利用。詳細はtrial§quote-first、通常採用0/正式0/3/54.50％据置。
+
+
+### §59 新8対照64更新の結果と表現条件比較
+
+326.909190秒/64update/20stop/112tensor保存再読を完走。DEV構造8/8・新CQ4/4へ改善したが、学習済構造1/4、修飾/不明分類/対象欠落/重複が残り通常不採用。全20rawをrootとagentが独立読解。text100fileを回収、全重みの回収は進行中。次は同じ元09b3/40意味target/64順/seed/objectiveでclarified/canonical表現へ戻す別候補を20生成以内で比較する。元32target byte/元before12 ref/messages/SHAは一致、失敗candidate追加epochではない。詳細はtrial。通常有効化0/正式0/3/54.50％据置。
