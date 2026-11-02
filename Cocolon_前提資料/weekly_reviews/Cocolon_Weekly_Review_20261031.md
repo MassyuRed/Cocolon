@@ -2260,3 +2260,15 @@ Codex Work/GPT-6 root単一writer＋同環境read-only確認。独立Pro/Ultra/h
 64保存応答は別CPU processで56候補一致/8拒否維持、新生成/学習/load0。元run265memberと追加text342member、112重み元bytes/SHAを照合し、ZIP containerだけ再圧縮して[private原本](https://chatgpt.com/library?file_id=libfile_0fc1d54f28c881919cdc594b6eba8bfe&account_id=personal)へ保存（15,068,340bytes/SHA7a557800…/348member）。回収の長文上限とCRログ変換を検出し、分割DOM読取と元byte回収で全一致。GPU再試行0。初回復元時のtest1file混在と2134原本復元の経過もtrialへ保全。
 
 新重みを通常/次初期値へ自動採用しない。次CPUは時制改変・語幹対象化・留保欠落を既存教師から切り分け、次一候補の条件を固定する。次GPU未固定。本人基準の役割/判断/選択と記録間の再出現/変化、通常graph採用は既存目的のまま残件であり、SC6だけを完成条件にしない。通常source/API/DB/RN/Render/Supabase/稼働/配置/Pod管理0、全未解析/主体未解決/route0、正式0/3・54.50％据置。処理按分約$0.09568@確認表示$0.58/h、準備/取得/転送/保持別。STRUCTURE_MAP_DELTA_NONE。全体現在地・Analysis map・全file地図・trialを同期。
+
+
+<a id="analysis-ce68-plan-20261103"></a>
+### §85 同68教材/74更新順で学習重み付けだけを変える一回比較を開始
+
+[固定条件/コード](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-ce68-plan-20261103)。scope68の時制改変・余分な動詞語幹対象・修飾欠落を既存68教師と照合し、教師不存在とはしない。初期89ba、同source/messages/targets/74順/LR/seed/clip/全assistant/EOS/prompt maskを保持し、既存plain CE経路だけを選ぶ。旧6964へ追学習しない。before32を原request/ref/messages/raw/report/manifest照合で再利用し、新生成はafter32のみ。
+
+固定Cocolon e92c1211の全4blob全文と親/変更pathを読み戻し、同Jupyter上の3script blob一致後に一回起動。CPUで同68teacher/74order/before32一致、更新前68NLL差0、実Dropout全p0・attention_dropout0・LoRA dropout0を確認。74更新/136測定/2loadが完了し、150.368347秒時点で新18call、status STARTED/実行中。ここは生成/意味読解/保存完了を宣言する記録ではない。
+
+上限74更新/136測定/2load/32新生成、内部720秒・外側TERM710+kill10、前回確認$0.58/hなら処理按分上限$0.116（準備/取得/転送/保持別）。延長/再試行/補修/受口緩和なし。再開時は先に /workspace/analysis-ce68-20261103/result/report.json とrun.exitを確認し重複起動しない。完了後は32原文照合、保存64応答の非生成再読、全member/112重みbytes-SHAとprivate原本保存へ進む。
+
+本人基準の役割/判断/選択・既存五種/注記/不明・記録間関係と通常graphへの接続という目的を継承する。局所学習比較で全体完成とはしない。通常source/API/DB/RN/Render/Supabase/稼働/配置/Pod管理変更0、全未解析/主体未解決/route0・通常未採用、正式0/3・54.50％据置。Codex Work/GPT-6 root単一writer＋同環境read-only監査で独立Pro/Ultra/human受入れではない。STRUCTURE_MAP_DELTA_NONE。
