@@ -1,6 +1,6 @@
 # Analysis — 最小field接続と実4B probe
 
-**最新：11/2、親quote新形式の実tokenizer確認完了。56派生を各1回、同28入力の新wire前後56生成で親の意味選択と旧保持を比較する一候補を準備。[実行計画](#analysis-parent56-plan-20261102)。前CPU契約はAPI86d19b6d、通常未採用・完了run再実行なし。**
+**実行中：11/2、e000e38aの親quote一回比較を既存Jupyterで起動済み。再開時は先に /workspace/analysis-parent56-20261102/result/report.json を確認し、同runを再起動しない。新wireの全28before→56更新→28afterの途中。[固定計画](#analysis-parent56-plan-20261102)。実結果/重みの回収後に更新する。通常未採用。**
 
 2026-11-01 JST。開始原本：Cocolon PR30 `1c66add4fdf8f5ded18f7443d6b91b1771998244`、API PR3 `36713940ea82e217fab8a7c0a738a33f21df1c4d`。Mashの分析残件開始とweekly§45.4に従う。Codex Work/GPT-6、root華恋が実装/統合/反映、別文脈agentはread-only監査のみ。独立Pro/Ultra又はhuman品質受入れとは呼ばない。System Context最新cacheは未成立のまま、fresh原本fallbackを使用。
 
@@ -567,3 +567,5 @@ model processは最大1200秒（外TERM1190+kill10）、各call23秒/context8192
 実装順：56targetの新受口CPU束縛・PQ非同一→実tokenizer確認→plan/run/計測/実装順をGitHub checkpoint→既存API filtered2134 sourceを全SHA照合し、86dの既存3production fileだけを新runtimeへ明示差替え（旧runtime不変）→固定b8b7で上の一候補→全56raw/同candidate非生成再読/全重み回収→結果を同trial/weekly/全体現在地へ反映。runtime manifestと旧API156からの3差分を原本に含め、完全Git checkoutと呼ばない。新testはGPU runtimeには不要で、source commit/CPU結果から参照する。
 
 停止は固定上限、source/依存/初期重み不一致、非有限/実行失敗で、再試行・追加epoch・cap延長を自動で行わない。意味退行を新データ作成や受口緩和で覆わず、原本から次を判断する。今回の直接作業は有限の4B内容比較、実機確認/追加観測会は不要。通常ObservedGraph/HTTP/DB/RN/Render/merge/deploy/IF/Savedは変更0、正式0/3・54.50％据置。STRUCTURE_MAP_DELTA_NONE（新契約自体は前回PRESENT、今回は同owner/同契約の学習比較）。この節は実行準備で、モデル学習/新56生成は未実行。
+
+起動記録：plan c578bb3c…/runner7b57c37a…/prepared e000e38a59baafc9ed9da807e1b9d2588ae82292を固定して一回起動。実reportでSTARTED、学習前15call開始/159.475790秒時点を確認。全2134runtime source SHAとAPI86dの3差分を照合後に実行し、事前tokenizerはモデルload0。処理落ち時も新しい試行を作らず、既存runのstatus/exitと原本を回収する。中間起動状態の保存は商品品質creditではない。

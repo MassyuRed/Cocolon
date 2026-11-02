@@ -2081,3 +2081,5 @@ API86d19b6d、新exact Input/Response/別profile/ref/schema/state/file、parent_
 ### §67 親quote新形式の実tokenizer確認と一回比較の具体化
 
 API86d19b6dの新契約で旧56意味targetを各1回/56更新、b8b7初期値、旧40とNT/ST交互、objective/LR/strict受口不変。既存26＋複数不明/反復句PQ2の全28入力をnew-wireでbefore/after＝56新生成、旧raw変換/新before再利用0。実tokenizer84messages/56終端完全一致、最大prompt1029/full1270/target246/prompt+2048=3077、5.601360秒/モデル学習生成0/compute空。3load/112測定、最大1200秒/按分上限$0.19334@0.58（保持等別）。具体順序と停止/採否はtrial最新計画。新形式の前後NLLは旧40/NT/ST別、旧wireと直接比較せず全rawを読む。必要作業はMash継続承認内、通常map/API/DB/RN/稼働不変、正式0/3・54.50％据置。ここは準備でモデル未実行。
+
+§67 実行開始：固定e000e38aの比較を既存Jupyterで一回起動済み。実report STARTED/学習前15call開始/159.475790秒を確認。runtime /workspace/analysis-parent56-20261102/result/report.json を先に確認し、処理落ち後も重複起動しない。まだ学習/比較の完了・新重み保存・品質採用を宣言しない。
