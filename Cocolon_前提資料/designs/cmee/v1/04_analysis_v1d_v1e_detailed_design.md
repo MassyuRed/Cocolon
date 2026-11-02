@@ -1808,3 +1808,8 @@ primary=BLOCKER_NARROWED（意味候補の分割/採用に必要なprivate差分
 ### 2026-11-02 — 実unit4callと指示版修正
 
 実4B新4callは受理/file再読1/4、受理1件も全文SCENEで分解品質未成立。API cddf1855で受理条件を保ったまま指示をclarified.v1へ版分離。旧baseline/ref/messages/state.v1保持、新指示だけ別ref/state.v2。対象113成功、旧実artifact再読成功。次は同base2入力の新指示比較。詳細はtrial#semantic-units-gpu4-and-clarified-20261102、通常有効化/学習/新candidate SQL0。
+
+
+### 2026-11-02 — 分析protocol専用の隔離学習
+
+clarified base2callも0/2、原文外qualifier/不明親混同/反復打切り。指示だけの追加試行を止め、通常source/API cddf1855を保ったまま新root架空8件/16updateのLoRAを隔離作成する計画へ進む。旧weight非読込、configのみ再利用、未使用4入力の近い構文への転移比較、900秒/新6生成以内。教師のsource再束縛と意味監査済み、GPU学習0。詳細/実装順はtrial#analysis-teaching8-plan-20261102。

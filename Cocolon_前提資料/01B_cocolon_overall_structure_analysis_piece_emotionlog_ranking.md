@@ -3145,3 +3145,6 @@ API fa995a44、STRUCTURE_MAP_DELTA_PRESENT。新production fileは0。通常累�
 
 
 11/2後続API cddf1855：上記semantic_admission/service/testの既存3file内で指示版baseline/clarifiedと保存v1/v2を分離。新production file/作者/storage ownerは追加しない。旧実artifact再読と対象113件成功、実分解品質は未成立。trial/weekly§52へ。
+
+
+11/2隔離学習のsource地図：`observation_learning/trials/2026-11-01-analysis-model-fields/semantic_units_teaching8_plan.json`が新架空8教材/未使用4入力/16更新の定義、`semantic_units_teaching8_run.py`が固定base→新LoRA→保存非学習reload→前後比較を同じJupyterで実行する一回用runner。新production owner/通常API接続なし。旧教材/weightsは保全。trial/weekly§53へ。

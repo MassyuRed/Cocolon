@@ -1,6 +1,6 @@
 # Analysis — 最小field接続と実4B probe
 
-**最新：11/2、実unit4callは1/4受理、意味分解は未成立。旧保存互換を保つ指示版clarified.v1を実装。[実結果と新2call](#semantic-units-gpu4-and-clarified-20261102)へ。**
+**最新：11/2、修正指示の実2件も0/2。指示だけの反復を止め、[新8教材/16更新の隔離学習と未使用入力の前後比較](#analysis-teaching8-plan-20261102)へ進める。学習はまだ未実行。**
 
 2026-11-01 JST。開始原本：Cocolon PR30 `1c66add4fdf8f5ded18f7443d6b91b1771998244`、API PR3 `36713940ea82e217fab8a7c0a738a33f21df1c4d`。Mashの分析残件開始とweekly§45.4に従う。Codex Work/GPT-6、root華恋が実装/統合/反映、別文脈agentはread-only監査のみ。独立Pro/Ultra又はhuman品質受入れとは呼ばない。System Context最新cacheは未成立のまま、fresh原本fallbackを使用。
 
@@ -195,3 +195,27 @@ API `cddf185594b5eeffcf72a92dcc2a2c5a44ff8b4c`、既存semantic_admission/servic
 次は[clarified新要求](semantic_units_clarified_probe_requests.json)/[runner](semantic_units_clarified_probe.py)で、同じbaseのAF01/AF02を新2call、学習0/process300秒/各23秒。これは先の4callの再開/旧raw修正ではなく、新版指示と旧base指示の比較。上限process按分$0.04834（同Pod表示$0.58/h、保持等別）。rootが全raw/文章/図を読み、明白な不足をMashへ確認依頼せず修正する。baseの分解が進めばfit38の同条件比較・別題材へ続ける。通常map/DB/RNへ未検証候補を自動投入しない。必要作業/GPU/途中反映はMashの本セッション指示で承認済み。
 
 primary=BLOCKER_NARROWED（実モデルのcarrier混同/列挙反復を確認）、商品0/正式0/3/54.50％据置。指示版/保存版差分はSTRUCTURE_MAP_DELTA_PRESENT、通常稼働/公開API/DTO/DB/RN/依存定義/Render/merge変更0。
+
+
+<a id="analysis-teaching8-plan-20261102"></a>
+## 11/2 — 指示修正版も0/2、分析専用8教材の隔離16更新へ
+
+clarified base新2callはprocess48.970337秒/exit0、AF01は15.368168秒/stopだが原文にないqualifierと親を持つWRITTEN_UNKNOWN等がありquote不一致で拒否、AF02は23.010650秒/lengthで同じ「解けて」unitとNEGATIONを反復した。受理0/2、artifact/file再読0。fenceは外れ、感情/不明/理由の候補を選び始めたが、正しいscope/qualifierの実用品質には未到達。既存parser・品質条件・旧結果を緩めない。[実結果](semantic_units_clarified2_results.json)。
+
+private全原本は `cocolon-analysis-units-clarified2-20261102.zip`、Library `libfile_566fc5131b848191849a3747bbbd7d64`、124432bytes/SHA256 `604a18f7cea55d642ed146f974a70fee5fd538c8230a4a0c3051759a170de06c`/13member。全CRC/hashを回収照合済み。単価$0.58/hの実process按分約$0.00789、保持/準備等別。通常採用0/追加学習0、先の4call/新2callはそれぞれ閉鎖。指示だけの第三試行へは進めない。
+
+### 新しい最小の学習単位
+
+Mashの本セッションの必要作業/GPU利用/途中反映承認に基づき、[新8教材＋実行plan](semantic_units_teaching8_plan.json)と[限定runner](semantic_units_teaching8_run.py)を作成。API/通常製品sourceはcddf1855のまま。新production file/依存なし。root単独実装/write、agentはread-onlyの意味/実行scope監査のみ。
+
+新8件はroot作成の架空protocol教材で、Mashの観測会教師・旧評価・正式正解ではない。8assistant targetを全て現受口へ再束縛し、全文/否定/時点/主体候補/不明/親scopeがgraphへ保持されることをCPUで確認した。別文脈監査でも修正必須の意味誤りは未検出。原入力と教師/モデル出力の区分は保持する。旧9/19教材・AF01/AF02・UV03/UV12を新assistant targetやuser教材へ転用しない。旧3demoは同じclarified systemの条件文脈に含まれ、prompt全体をloss -100でmaskする。直接の教師target/更新lossとして数えるのは新8件だけであり、「旧demoが学習時入力にも存在しない」とは主張しない。
+
+- 固定Qwen3.5-4B/revision851bf6e、BF16/SDPA、local cache/offlineを維持。
+- fresh baseに保存fit38のconfig（SHA ef4b1aef…、rank8/alpha16/target56）だけを適用し、新random LoRA/B=0を作る。旧fit38 weightsを初期値として読まない。trainable112tensor/3,833,856paramsを確認。旧adapter/base/通常提供は書換0。
+- 新8件を固定順で各2回＝16update、batch1/accum1/LR5e-5/weight_decay0/clip1。full contextを保ち、prompt mask、assistant全token/EOS/末尾改行のfull CE、旧来のP-1 tail loss windowを維持。tokenizerでprefix/終端/context8192を確認し、切捨て0。
+- 更新前/後の各8NLLは適合測定のみ。NLL低下を意味/品質成功へ換算しない。hostのtorch未導入により新CPU gradient比較は未実行で、runnerがモデル読込前にCPU tensorでfull/tail CEと全grad一致を検証する。失敗ならmodel load/update0で停止する。
+- 学習に全文を使わない評価4入力はAF01/AF02/UV03/UV12。AF2入力の旧clarified実rawはimmutable SHA/request_ref/messages hash照合の上でbeforeへ再利用し、再生成しない。UV2入力だけ新before2call、保存adapterの全112tensor一致/有限性と非学習reload後に新after4call。計新6call以内、各23秒/context8192/max2048/nonthinking/greedy。近い構文と語句は共有するため、独立盲検/一般意味理解の実証とは呼ばない。
+- process最大900秒、外側timeoutのTERM890秒＋kill grace10秒で上限を担保する。Python内alarmだけをhard boundとは呼ばない。同単価$0.58/hでprocess按分上限$0.145、準備/回収/待機/保持/保存/税等別。新レンタル/チャージ0、同Jupyterで実行する。
+- 新output directory一回、旧失敗raw補修/自動rerunなし。全raw/finish/前後loss/update counter/保存重み/同file再読を回収。重みは新しいprivate原本へ保存し、rootが全4入力の前後本文を読んで候補採否を判断する。通常採用や本人商品受入れは自動生成しない。
+
+この段階のGPU学習/更新は未実行。primary=BLOCKER_NARROWED（指示だけでは安定しない内容を確認し、別の直接改善を具体化）、商品0/正式0/3/54.50％据置。STRUCTURE_MAP_DELTA_NONE（今回新しい商品source/contract接続なし、隔離学習計画/runnerのみ）。

@@ -1973,3 +1973,11 @@ API fa995a44の既存製品5＋新test1で、逐語quoteの部分意味候補/�
 新4callはprocess82.532446秒、base1件だけ受理/file再読、他3はJSON不正/length。baseの1件も全文SCENEで意味分解未成立。carrier混同・fit38の列挙反復をrootが全rawで確認し、未採用を維持。初回はadapter階層指定誤りの生成0/6.697189秒停止で、原本を残して実配置へ修正した。private24member/133342bytes/sha cbbad3af…をLibrary libfile_759a1028cb2c819199cf421a84a82abaへ保全。対象text source2134file一致、終了後GPU compute-apps空。
 
 API cddf1855の既存2owner＋test1でinstruction_versionを版分離。baseline messages/ref/state.v1不変、clarifiedのみ別ref/state.v2。A独立分類/B本人不明/C従属と架空3例、fence/列挙反復禁止を明示。parser・acceptanceは緩めず、113 PASS/失敗0/skip0、15.87秒。旧実AF02を現コードで非生成再読成功。次は同base2入力のclarified新2call/学習0/process300秒、原出力を読んで必要改善と別題材へ続ける。詳細は[trial](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#semantic-units-gpu4-and-clarified-20261102)。今回の継続承認内、旧承認再利用なし。通常有効化0/商品0/正式0/3/54.50％据置。
+
+
+<a id="analysis-teaching8-plan-20261102"></a>
+## 53. 11/2 — clarified2も0/2、分析用新8教材の隔離学習へ
+
+clarified新base2callはprocess48.970337秒、原文外qualifier/不明carrier親混同と反復lengthで0/2。原本13member/124432bytes/SHA604a18f7…をLibrary libfile_566fc5131b848191849a3747bbbd7d64へ保全。指示だけの第三試行は行わず、現在承認内で新root架空8教材/各2回16updateを計画。旧weightsは読まずfresh base＋既存configから新LoRA、元重み保全。全8targetのCPU再束縛と読取意味監査を完了。旧3demoはmaskされたsystem条件文脈、直接targetは新8だけ。AF/UVの完全同一入力は学習に使わず、近い構文への転移を確認する。
+
+既存AF2rawをSHA/ref/messages照合でbefore再利用、UV2新before＋4新after＝最大6生成。全112tensor/有限性/非学習保存reload、full assistant CE/EOS/末尾改行を保持。process900秒（外TERM890+kill10）・同単価按分上限$0.145、保持等別。具体plan/runner/完了と停止は[trial](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-teaching8-plan-20261102)。本時点は学習0/通常採用0、API cddf1855不変、商品0/正式0/3/54.50％据置。必要作業はMashの本セッション指示で承認済み、旧runの承認再利用ではない。
