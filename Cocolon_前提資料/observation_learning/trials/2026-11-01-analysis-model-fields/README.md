@@ -992,3 +992,26 @@ plain full-assistant CE、LR1e-5/seed20261110/clip1/prompt全mask/EOS/生成条�
 実fileは同folderのsemantic_units_combination70_prepare.py/run.py/supervisor.py。CPUは旧267manifest/旧68辞書/74部分列/最後14/RC2原本/旧32beforeを照合し、GPU前にGitHubコードを固定する。固定399c1187の3script全bytes一致とCPU準備成功後、同Jupyterで一回起動済み。53.865708秒時点で新2before完了/70測定/2更新、status STARTED。最終結果・品質未確定。再開時は /workspace/analysis-combination70-20261103/result/report.json と /workspace/analysis-combination70-20261103/run.exit を先に確認し、rootが存在するなら重複起動しない。
 
 既存診断へ改善がなければdose/orderの再調整を続けず、実出力に現れた責務と意味採用の原因へ戻る。本人基準の役割/判断/選択→既存五種/注記/不明→記録間の再出現/変化→通常graph/保存/補足/月次比較という全体目的を継承する。今回の局所成功を分析完成にしない。通常source/API/DB/RN/Render/Supabase/配置/Pod管理不変、全未解析/主体未解決/route0・通常未採用。STRUCTURE_MAP_DELTA_NONE（隔離研究のみ）。Codex Work/GPT-6 root単一writer＋同環境read-only確認、別モデルPro/Ultra/human受入れではない。
+
+
+<a id="analysis-combination70-result-20261103"></a>
+## 11/3 combination70完了 — 継続修飾と他者否定の局所改善、通常未採用
+
+固定399c1187から78更新/140測定/3load/36新stopを539.472364秒で完了、exit0。旧CE68の68辞書/74順部分列/最後14を維持し、原source対比RC2各2を追加した。旧32before同一性再利用、新RC2 before2＋全34after。初期89baと更新前旧68NLL最大差0、dropout0を確認。新a5eafe34/config9bc9f1f3を112有限F32/3,833,856paramsで保存・実model一致・非学習reload。旧4adapter対不変。
+
+rootと同環境read-only担当が全34source/before/afterを全文確認。SQ03は継続修飾/否定を保持して対象を分離し、MD02は他者主体/否定を同ACTIONへ戻して余分対象を解消。OD01/MD01は89ba rawへ復帰。RC2、旧AT4/UQ2/MX2/OA2/SC6は教師JSON一致。HQ04の明記理由をTE_CONTEXTにする不足、MD01の粗い修飾scope等は残り、一般読解/通常採用は未成立。単一の追加教材比較で、盲検/Mash教示/一般意味率/本人基準の役割や選択・記録間関係の成功へ換算しない。
+
+別CPU processで68保存応答を再読し、保存readerのgenerate/compiler/author禁止を維持。元Pod archiveは295member/14,863,085bytes/SHA256 `3d134d27a21c7f259048b161b9fbf592950ad49fff79481ec65d34f2034f73be`。ブラウザーdownload待機と専用file回収がtimeoutしたため、既存text/F32 bit列経路へ戻した。296text原本全bytes/SHA照合済み、112重み外部回収は進行中で、現時点のprivate保存完了とは記録しない。run原reportのPENDING_RAW_READ bytesは保全し、読解結果は本節/後続結果JSONへ分離する。完了run重複/追加epoch/出力補修/受口緩和0。
+
+新a5eafe/9bcは、上記の実比較を根拠に次の入力版対比の研究用初期値へrootが明示選定。通常採用と次学習への自動継承ではない。通常source/HTTP/DB/RN/Render配置/Pod管理不変、全未解析/主体未解決/route0。処理按分約$0.086915@前回確認$0.58/h、準備/回収/保持別。STRUCTURE_MAP_DELTA_NONE（この学習比較のみ）。
+
+<a id="analysis-material-context8-plan-20261103"></a>
+## 11/3 — 本人材料context欠落を既存入力ownerで補い、実4Bを8回比較
+
+fresh API d18543eeの実物では、quote候補は設計上すべて未解析/主体未解決/route0で、意味採用はまだ行わない。さらにmodelへ渡す材料がfield_path/textとcategory版のカテゴリだけで、原recordのまとまり・保存日時・選択感情/強さが欠けていた。actor qualifierの存在だけを意味確定へ昇格させるbridgeは実益/根拠不足として採らず、原仕様の材料を欠かさず渡す差を既存2ownerへ実装した。
+
+API [5d7f43a8](https://github.com/MassyuRed/mashos-api/commit/5d7f43a888221526342d9c4eddffb0b7be186df7)：semantic_admissionの既存Input型に明示offline prompt版`selected_material.v2`、専用request identity/messages hash/state版を追加。record番号・記録UTC時刻・選択感情/強さ・カテゴリ・所属field番号・分析終点を原owner/versionから生成する。旧baseline/selected_categories.v1のmessages/ref/stateを保持し、旧保存非生成再読を維持。metadataを本文引用にしない、記録時刻を出来事時刻にしない、選択感情から主体/理由/人格を補わない。既存compiler/唯一realizer/strict受口/未解析範囲/通常ensureは不変。
+
+同commitの新8caseを含む142 PASS/2 SKIP/既存warning1（26.58秒）。初回はpytest未導入で実test0、repositoryの既定pytest8.4.1を既存GPU検証環境へ導入して本検査を実行。独立Pro/Ultra/human受入れではなくCodex Work rootと同環境read-onlyレビュー。実DB/Render/RN/通常有効化なし。詳細map/全file地図にこのprivate入力版の差を同期する。
+
+次は追加学習0・明示研究用a5eafe/9bc保存重み1loadで、既存SQ03/MD02/OD01と既存2記録3field合成fixtureを、旧category版/新material版各1＝8新生成。全sourceは同一、両messagesを実tokenizerで非切詰め/8192・生成2048枠確認し、実strict/file保存再読まで行う。新context一式の一回比較で、各metadataの単独因果・未知盲検ではない。最大480秒/各要求45秒、外側TERM470+kill10、処理按分上限約$0.07734@前回確認$0.58/h（準備/回収/保持別）。延長/再試行/出力補修/受口緩和/新学習なし。run-dirは /workspace/analysis-material-context8-20261103、report.jsonと親終了値を先に確認し重複起動しない。通常採用/本人基準の役割・判断・選択/記録間関係の完成へ換算しない。

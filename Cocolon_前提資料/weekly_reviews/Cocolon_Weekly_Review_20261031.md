@@ -2322,3 +2322,11 @@ Codex Work/GPT-6 root単一writer＋同環境read-only確認。独立Pro/Ultra/h
 Mashの包括的な続行/GPU/Jupyter/GitHub保存指示で、前回の完了run/exit0とcompute空を直接確認した。全体設計と01A〜C全file地図、全体現在地、作業規則、観測学習目的、§82/88と原本を確認。root単一writer、同環境read-only担当が比較案/実装を確認し、正式な別モデル審査とはしない。
 
 [trialの具体条件](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-combination70-plan-20261103)：初期89ba/plain CE、旧68辞書/旧CE74順の部分列/最後14保持、RC2各2追加＝78更新。旧32beforeは同一性照合再利用、RC2新before2＋34after＝36新生成、140測定/3load/900秒・処理按分上限$0.145@前回確認$0.58/h（準備/転送/取得/保持別）。改善がなければdose/orderだけの反復を止める。固定399c1187の3script全bytesと6反映pathを読み戻し、同Jupyter CPU準備が成功後、一回起動。53.865708秒時点でRC2 before2完了・70測定・2更新、2load/STARTEDを確認。最終結果未確定。通常source/API/DB/RN/Render/Supabase/配置/Pod管理変更0、STRUCTURE_MAP_DELTA_NONE。全体目的と通常graph接続残件を維持する。
+
+
+<a id="analysis-combination70-result-20261103"></a>
+## 90. 11/3 — 78更新/36生成の局所改善と、材料入力版の欠落修正
+
+[全結果/原本回収/次比較](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-combination70-result-20261103)。combination70は539.472364秒/exit0、78更新/140測定/3load/36stop。SQ03の継続修飾＋対象分離、MD02他者主体＋否定/余分対象解消が改善し、OD01/MD01は89baへ復帰。RC2と旧保持は一致。HQ04理由/MD01修飾scope等は残り、通常未採用。rootと同環境read-only担当が34前後/原sourceを全文確認。68保存応答の非生成再読と旧4adapter保持、296text原本の外部bytes/SHA照合を確認。112重みの回収・新private保存は進行中で、完了と偽らない。新a5eafe/9bcは次入力版比較の研究初期値へ明示選定、通常採用/自動追学習ではない。
+
+通常sourceとprivate候補の責務を実物で再確認。modelにrecord対応/記録時刻/選択感情・強さがなかったため、API5d7f43a8の既存2owner/既存test内へ明示offline selected_material.v2を追加。旧2版messages/ref/stateと保存再読、本文だけの引用、未解析/主体未解決/route0を保持。142PASS/2SKIP/既存warning1（26.58秒）、初回pytest未導入は実test0として分離。次は同4source×2入力版=8実生成、学習0/1load/480秒上限・処理按分上限$0.07734@前回確認$0.58/h。材料一式の比較で、metadata単独因果や一般品質の証明ではない。通常HTTP/DB/RN/Render配置/Pod管理0、private入力版のみSTRUCTURE_MAP_DELTA_PRESENT。全体残件を引用学習だけへ縮小しない。

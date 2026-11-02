@@ -3279,3 +3279,13 @@ API cddf1855。AnalysisModelUnitsInputへinstruction_version（既定baseline.v1
 ## 2026-11-02 — 親quote契約CPU接続のactual
 
 API86d19b6d。上の計画をMash継続承認内で既存3owner＋新test1へ実装。新profile/type/ref/schema/state/fileを分離し、parent_quoteを同field返却親exact1の位置へ束縛、旧integer-parentのfield/source/graph検査と唯一realizerを共有する。旧messages/ref/state/拒否条件と旧実87保存payloadを保持。対象283PASS/3WASM SKIP、新56合成派生のfield内容/文章/図/coverage一致、新file非生成再読を確認。新実4B/学習/SQL/HTTP/通常map/RN/本番変更0、STRUCTURE_MAP_DELTA_PRESENT。詳細・具体path・件数範囲は[trial最新CPU結果](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-quoted-parent-units-cpu-20261102)。計画は実装前の履歴であり現在の未実装を示さない。
+
+
+<a id="analysis-selected-material-v2-20261103"></a>
+## 2026-11-03 — 既存Analysis quoted-parent型のprivate材料context版
+
+実装owner：API5d7f43a8 `cores/analysis/semantic_admission.py`と`analysis_cumulative_service.py`。同じ`AnalysisModelQuotedParentUnitsInput`/Response/候補graphを使用し、明示offline prompt_version=`selected_material.v2`だけ、user materialの各fieldへrecord番号、recordsへrecord/recorded_at/selected_categories/selected_emotions/emotion_details/fields、最上位へanalysis_as_ofを追加する。recorded_atは保存UTC時刻、出来事時刻ではない。原record/version/ownerの検査済み値を渡し、AI生成応答・隠れた本人設定を入力しない。metadataは本文のquote/qualifier/evidenceへ採用しない。
+
+新prompt版はrequest identityと実messages hashへ束縛し、保存schema=`cocolon.cmee.analysis_model_units_quoted_parents_state.material.v2`＋prompt_versionで再読する。旧baseline.v1とselected_categories.v1は従来messages/ref/stateを保持し、新旧保存payloadの版差替えを拒否。出力のfields/field/units/quote/node_kind/parent_quote/scope_role/qualifiersは不変、元field本文内の逐語引用/一意親/否定等の検査を緩めない。normal saved-map/publicDTO/通常ensureへ有効化しない。全未解析/主体未解決/route0は維持する。
+
+対象142PASS/2SKIPで新8caseと旧保存非生成再読を確認。モデル意味品質・本人基準/通常map採用の完成ではない。実4B比較条件と採否は[trial](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-context8-plan-20261103)に戻る。

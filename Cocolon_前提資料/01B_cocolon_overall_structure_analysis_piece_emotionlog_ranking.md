@@ -3255,3 +3255,8 @@ API2c259f0e、STRUCTURE_MAP_DELTA_PRESENT。新production file/ownerなし。API
 | semantic_units_combination2_cpu.py | private新source2件を実strict/serialize/file非生成reload/実tokenizerでCPU確認。初回の過大patchをbuild部分だけ除去しv2成功 |
 
 今回3枠比較に新意味改善なし、MD01構造退行あり通常未採用。新CPU2はモデル品質/70教材planへ昇格しない。原run267/manifest266・source273/112重みbytes-SHA、CPU2の4member/manifest再読を確認。全体現在地/Analysis map/最新weekly§88/trialを同期。
+
+
+## 2026-11-03 — Analysis private材料context入力版の差分
+
+API5d7f43a8：`analysis_cumulative_service.py`の既存`prepare_cumulative_category_units(..., prompt_version=...)`が旧selected_categories.v1を既定で保持し、明示selected_material.v2を選べる。`cores/analysis/semantic_admission.py`の既存Input型/quoted-parent経路が原record対応・記録UTC時刻・選択感情/強さ・カテゴリ・field所属・分析終点を生成し、専用request/messages/state identityへ束縛する。旧2版messages/ref/state/非生成再読を変更しない。新規Engine/入力型/response型/service/HTTP/DB/RNは追加しない。本文外metadataをquote/evidenceへ流用しない。testは既存`ai/tests/test_analysis_model_quoted_parent_units.py`内の新8case、対象142PASS/2SKIP。通常ensureと既存compiler/唯一realizerは不変、全未解析/主体未解決/route0を維持。実4Bの8回比較と残件は[trial](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-context8-plan-20261103)。STRUCTURE_MAP_DELTA_PRESENT（private prompt/state版のみ）。
