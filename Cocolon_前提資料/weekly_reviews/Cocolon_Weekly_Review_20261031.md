@@ -1991,3 +1991,11 @@ clarified新base2callはprocess48.970337秒、原文外qualifier/不明carrier�
 全raw/encoded/重み34member・14356049bytes/SHA19d8309c…をprivate Library libfile_19891a6e03108191bfe496b202ae7c98へ保全。GPU compute-apps空、旧fit38不変。実process按分約$0.01721、保持等別。
 
 次は旧8不変＋新8の16教材/32update、保存Analysis隔離重みから新outputへ継続。既存全target誤り重みCEを再利用し、unweighted NLLを別測定。旧4は開発既見として前raw再利用、新診断4before＋全8after＝12新call/process900秒上限。同session承認内、追加学習は本記録時点未実行。詳細は[trial](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-teaching8-result-and-teaching16-plan-20261102)。限定TECHNICAL_CREDIT/正式0/3/54.50％据置、STRUCTURE_MAP_DELTA_NONE。
+
+
+<a id="analysis-teaching16-result-and-teaching32-plan-20261102"></a>
+## 55. 11/2 — 32更新完走・構造7/8、意味誤りへ32教材の直接改善
+
+新16教材/32update/12callはprocess189.266787秒/exit0、全112tensor更新/保存/非学習reload一致、平均unweighted NLL0.129117→0.048250。構造before5/8→after7/8、成立7file再読一致。AF02は前raw byte一致、NV04は理由不明の内容対象が補われた。一方UV03/UV12の『まだ気になる/決めていない』をUNKNOWN化、NV02の修飾を別話者へ接続、NV01の内容対象欠落、AF01の原文外理由markerが残る。全rawをroot/読取監査で確認し未採用。private全63member/14435739bytes/SHA14583168…、Library libfile_67afad9213d081918ae79bd03912e152。旧fit38/初回Analysis重み不変、GPU compute-apps空。
+
+新32教材（旧16不変＋新16）/64updateの別outputを準備。『まだ』3種/報告内容境界/話者修飾/対象/理由marker/2field/2recordを交差し、全target CPU再束縛。8開発入力after＋学習済み自由生成4を別集計、12call/900秒内。教師自身の自由生成が不適格なら教材数をさらに倍増せず、train/inference/target設計の一致へ戻る停止条件を明示。新12題材診断は未実行として保留。具体は[trial](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-teaching16-result-and-teaching32-plan-20261102)。今回承認内、64updateは本記録時点未実行、通常採用0/正式0/3/54.50％/STRUCTURE_MAP_DELTA_NONE。

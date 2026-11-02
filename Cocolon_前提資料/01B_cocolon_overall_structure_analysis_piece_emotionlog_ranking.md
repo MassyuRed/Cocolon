@@ -3151,3 +3151,6 @@ API fa995a44、STRUCTURE_MAP_DELTA_PRESENT。新production fileは0。通常累�
 
 
 11/2隔離学習継続の地図差分：trial `semantic_units_teaching8_results.json` は初回16更新/実生成/意味読解/重みidentity、`semantic_units_teaching16_plan.json` は既存8＋新8教師/開発既見4＋新診断4/32更新、`semantic_units_teaching16_run.py` は先のAnalysis adapterから別保存への継続owner。既存adaptive_loss.pyをexact SHAで再利用。商品source/通常接続の新ownerなし。trial/weekly§54参照。
+
+
+11/2第二継続の地図：trial `semantic_units_teaching16_results.json` が32更新/全8raw読解/identity、`semantic_units_teaching32_plan.json` が旧16＋新16/64更新/開発8＋教師自由生成4、`semantic_units_teaching32_run.py` が保存Analysisから別adapterへ継続するowner。既存production owner/DB/RN接続変更なし。trial/weekly§55。

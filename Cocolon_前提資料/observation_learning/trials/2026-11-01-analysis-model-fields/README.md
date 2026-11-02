@@ -1,6 +1,6 @@
 # Analysis — 最小field接続と実4B probe
 
-**最新：11/2、8教材16更新が完走。AF02は部分分解へ改善したが他3件に意味誤り。全raw/重みを保全し、[16教材32更新の別adapter継続](#analysis-teaching8-result-and-teaching16-plan-20261102)へ。通常未採用。**
+**最新：11/2、追加32更新が完走し構造7/8、意味の取り違えは残る。[32教材64更新と教師自由生成の切分け](#analysis-teaching16-result-and-teaching32-plan-20261102)を別重みへ準備。通常未採用。**
 
 2026-11-01 JST。開始原本：Cocolon PR30 `1c66add4fdf8f5ded18f7443d6b91b1771998244`、API PR3 `36713940ea82e217fab8a7c0a738a33f21df1c4d`。Mashの分析残件開始とweekly§45.4に従う。Codex Work/GPT-6、root華恋が実装/統合/反映、別文脈agentはread-only監査のみ。独立Pro/Ultra又はhuman品質受入れとは呼ばない。System Context最新cacheは未成立のまま、fresh原本fallbackを使用。
 
@@ -248,3 +248,36 @@ Mashの本セッションの必要作業/GPU利用/途中反映承認に基づ�
 開発で既見のAF/UV4件は前runの実after rawをref/messages/SHA照合でbeforeへ再利用する。新診断NV01〜04はunknown/発話/願望/時点の別題材、正解教師として未使用。新4before＋8after＝12call以内、model load3回、process900秒（外TERM890+kill10）/同単価按分上限$0.145、各23秒/greedy/nonthinking/max2048/context8192。全raw/finish/保存重みを回収し、受理数と内容妥当性を分けてrootが読む。これは開発試行で、独立盲検/通常採用を自動成立させない。教材追加・更新数・loss重みを同時に変えるため、改善しても継続候補全体の効果でありweighted CE単独の寄与とは断定しない。必要作業は本セッションのMash指示で承認済み。
 
 この記録時点は追加32update未実行。API cddf1855/製品契約/通常提供不変。限定TECHNICAL_CREDIT（AF02の部分改善を実raw確認）/正式0/3/管理54.50％据置、STRUCTURE_MAP_DELTA_NONE。
+
+
+<a id="analysis-teaching16-result-and-teaching32-plan-20261102"></a>
+## 11/2 — 追加32更新の構造7/8と、まだ残る意味の取り違え
+
+先のAnalysis隔離adapterを全112tensor一致で読み、新16教材×2回32update/32training forward、前後NLL32measurement forward、新4before＋8after=12callを一回実行した。process189.266787秒/exit0。更新/保存された112tensorは全て有限で元modelと一致し、非学習loaderで再読。full/tail loss/全grad一致と全target正重みをweighted/unweighted両方で実確認。平均unweighted NLL0.129117022→0.048250019、16件全て低下。peak allocated9.169629GiB/reserved9.814453GiB。旧fit38/初回Analysis重み不変、終了後GPU compute-apps空。
+
+構造受理は8開発入力のbefore5/8→after7/8、全stop、成立7fileの非生成再読一致。ただしrootとread-only監査で全rawを読み、意味7/8とは扱わない。
+
+| 入力 | 変化と残る不足 |
+|---|---|
+| AF01 | unknownの親と後悔の否定、肯定行動の偽否定は修正。『疲れていたので』の理由markerを原文にない『てから』へ創作し、全体拒否 |
+| AF02 | 前runとraw byte一致、3unitの部分改善を保持。今回新しい改善として加算しない |
+| UV03 | 発話行為/話者を選べたが、内容に報告述語も含む。『まだ気になる』をWRITTEN_UNKNOWNへ誤分類 |
+| UV12 | 願望が思考になり、未決を理由にする捏造は消えた。未決をWRITTEN_UNKNOWNへ誤分類、時点/修飾の区別も粗い |
+| NV01 | 根は受理されたが、約束/返事/これでよかったかの内容対象が候補から欠落。元全文には残る |
+| NV02 | 父の発話を行動へ寄せたが、本人の『少し』を父側へ誤接続。本人の明示主体も候補から欠落 |
+| NV03 | 願望/未決を思考として選び、非行動/結果へはしない。今日を修飾kindにする分類の粗さ、否定/まだのscope不足 |
+| NV04 | 朝/夜→安心の既存分解を保ち、前beforeで欠けた『なぜ読めたか』を正しい不明rootへ追加 |
+
+[全機械結果＋root読解](semantic_units_teaching16_results.json)。これらは同一語句/近い構文を共有する開発題材で、独立盲検/本人受入れではない。教材料・更新数・loss重みを合わせた候補の効果であり、weighted CE単独の寄与とは断定しない。通常採用0、意味を読み解けない構造を通すための受口緩和/原raw補修0。
+
+全raw/要求/encoded/更新記録/新重みを63member private archiveへ保全、CRC/manifest全SHA一致。`cocolon-analysis-teaching16-result-20261102.zip`、Library `libfile_67afad9213d081918ae79bd03912e152`、14435739bytes/SHA `145831684063f87d9923d7cebd0e5852c820114fbe88d325794e83ef6a44027c`。新weights `590dc0a3632af91f924c9ed7910f20dca3998f261081a2f2974e038558d93943`、config `9f5859a9bbe475bf3cc3bf7a2d15d374c8bf4c9cfb57926c375671783724ef05`。同単価の実process按分約$0.03049、準備/回収/保持/税等別。
+
+### 新32教材・64更新：まだ/不明/未決、話者、複数fieldへの直接改善
+
+[32教材plan](semantic_units_teaching32_plan.json)/[runner](semantic_units_teaching32_run.py)は旧16をJSON不変で保持し、新root架空16教材を追加。『まだ気になる』『まだ分からない』『まだ決めていない』を区別し、引用内容と発話述語の境界、本人の少し/話者、対象付き不明、ので/からの逐語markerを教える。AT29はmemo＋memo_action、AT30は2recordで、同field局所親番号/全field順を保持。emoji、ROLEも含む。全32targetを現受口/sourceへCPU再束縛済み。本人教師/正式評価ではない。
+
+初期値は先のAnalysis継続adapterだけ、別新outputへ64update（全32×2回）。全target/EOS/改行、既存weightedCE/LR5e-5/clip1を保持、比較NLLはunweighted。model load2、8開発入力の実before rawをref/messages/SHA照合で再利用し、新after8＋学習済み教師AT17/19/21/29の自由生成4＝12call以内。後4件はTRAINED_REHEARSALとして別集計し、転移/未使用/盲検へ加えない。
+
+**停止条件：** 学習済み教師の自由生成でも教えたcarrier/話者/qualifier作用域を保てない場合、さらに件数だけ倍増/再runせず、学習と推論の重み/入力/target/生成条件の一致および教材設計を点検する。NLL低下でこの条件を置換しない。新12題材の追加診断は準備したが、本候補の意味不足が明白なので未実行とし、改善に戻った。
+
+同Jupyterで一回、process900秒（外TERM890+kill10）/各23秒/context8192/max2048、同単価按分上限$0.145、準備/保持等別。旧重み/本番/DB/RNを上書きしない。本記録時点は64update未実行。Mashの本セッション継続承認内、API cddf1855不変、商品受入0/正式0/3/54.50％据置、STRUCTURE_MAP_DELTA_NONE。
