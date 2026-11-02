@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-**11/2・分析の最新（第9回§68）：** 親quote形式の56更新/前後56生成を完走、全rawを原文と読み全重み/232原本を保存済み。旧AT4再現は回復したがAF01理由過大、NV04時点/否定退行、PQ02反復引用等が残り通常未採用。構造受理数の増加は意味品質合格ではない。追加学習前に、同messagesの既見4件だけを元4B・adapterなし/学習0で比較する。詳細・上限・再開先は[結果と次の対照](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-parent56-result-20261102)。通常map/DB/RN/稼働/正式0/3・54.50％据置。
+**11/2・分析の最新（第9回§69）：** 親quote56更新/前後56生成と、元4B・学習0の4件対照を完了し全原本/重みを保存。旧AT4再現は戻る一方、理由過大・時点/否定退行・反復不明が残り通常未採用。元4Bでも4件とも拒否で、初期値を戻すだけでは解決しない。既存56に同field複数不明root教材が0と確認し、別題材の節順序対2targetをstrict受口へCPU束縛/保存再読まで用意した。次はこの不足と旧品質保持を含む有限比較を具体化する。[結果と再開先](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-base4-and-repeated-unknown-20261102)。通常map/DB/RN/稼働/正式0/3・54.50％据置。
 
 **11/1・分析4B接続のCPU最小準備を完了（[第9回§45](weekly_reviews/Cocolon_Weekly_Review_20261031.md#three-core-quality-priority-20261101)）：** Mashが7201の依頼修正を確認。架空の日常8例を現分析へCPU処理すると個別/一括ともmapなし（mapped0/未解析8）、既知対照追加では対照1件だけ2node。Pieceの同8例は原文保持の本文生成まで成立（新画像/本番検査ではない）。分析はCMEE接続済みだが4Bを呼ばない有限文法、Emlisのnatural本文から分析材料も未生成。次は分析を4Bへ接続して品質を育てる。後続§46でCPU最小受口/通常graph・保存再読を実装し、対象785件成功。完全fieldの分類候補で全件未解析を維持し、一般理解品質は未成立。次は実4Bの最大4生成・追加学習なしの確認でGPUが必要。詳細は[実行準備](observation_learning/trials/2026-11-01-analysis-model-fields/README.md)。Emlis/Pieceの残件と平日配分案・暫定完成度は§45、旧管理54.50％の確定改定ではない。§45の調査時点は製品/稼働/GPU変更0。§46で明示offline製品sourceを追加、通常稼働/GPU変更0。
 

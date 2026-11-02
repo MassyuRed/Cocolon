@@ -2087,3 +2087,7 @@ API86d19b6dの新契約で旧56意味targetを各1回/56更新、b8b7初期値�
 ### §68 親quote前後56出力の結果と、追加学習前の元4B対照
 
 56更新/112測定/56stop/687.632696秒/exit0、112tensor保存/非学習reload/全原本回収/元b8b7不変。全56rawをroot/別文脈監査が読み、構造17/28→24/28と旧AT教師一致2/4→4/4を確認。UV12/DQ01/SQ02/SQ04に改善、AF01理由過大・SQ01述語modifier・SQ03否定scope誤りは残る。NV04はcarrier/朝の否定へ退行。PQ01はbeforeから正しく不変、PQ02は非逐語/反復引用で拒否継続。旧40新wire内NLL平均は低下するが18/40増加、構造/平均lossを意味品質合格へ換算せず通常未採用。41保存fileの非生成/非compile/非author再読一致、全232原本/112重みはprivate保存済み。次は同messagesの既見4件をadapterなし同revisionで読むだけの0更新/1load/4call/300秒対照。元checkpointからある失敗かを切分け、新教師/追加epochは自動追加しない。詳細・実装順・保存ID/SHAはtrial最新節。API86d19b6d/通常map/DB/RN/稼働不変、正式0/3・54.50％据置。BLOCKER_NARROWED/STRUCTURE_MAP_DELTA_NONE。
+
+### §69 元4Bの4call対照を完了、反復不明の最小CPU教材を用意
+
+adapterなし同revision/同messagesの4callを52.989783秒/1load/学習測定0で完走。全stopだが4件とも引用/carrier/親/未決定と不明の混同で拒否。理由引用や時点/否定に部分保持はあるが、元4B/fresh LoRA優位の根拠は得ず、追加学習は自動起動しない。全rawをroot/別文脈監査が読解、全23原本はSHA/CRC一致でprivate保存、旧adapter不変/exit0/compute空。旧56には同fieldの不明rootが2個以上の教材が0と確認し、PQ完全同一文やrawを転用せず、一つの別題材を節順序入替した2targetをCPUで作成。全文節の一意root quote→各不明内容が両方strict束縛/別process非生成再読一致。旧56/受口不変、モデル学習成功ではない。次はこの欠落2targetと旧56保持の有限比較を具体化し、理由/否定/時点は別残件として扱う。詳細・保存ID/SHAはtrial最新節。累計追加312更新/新168生成は独立168題ではない。通常map/API/DB/RN/稼働/正式0/3・54.50％据置、BLOCKER_NARROWED/STRUCTURE_MAP_DELTA_NONE。

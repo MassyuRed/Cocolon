@@ -588,3 +588,22 @@ model processは最大1200秒（外TERM1190+kill10）、各call23秒/context8192
 [base4 plan](semantic_units_base4_plan.json)/[runner](semantic_units_base4_run.py)。追加継続の前に、AF01/NV04/AT29/PQ02の既見4入力でadapterなしQwen/Qwen3.5-4Bの同revisionを一度だけ読む。新形式のmessages/refは今回beforeと完全同一、同loader/BF16/SDPA/nonthinking/greedy/各23秒/context8192/max2048。新教師0/学習0/NLL測定0、1load/新4生成、process300秒（外TERM290+kill10）/按分上限$0.04834、保持等別。同じAPI filtered2134 fileの全SHAと5blob/loaderを再照合し、既存runtime/重みを変更しない。根拠なしの追加epochを避け、元checkpointでも起こる失敗かを4件内で切分ける。wire単独因果/盲検性能/一般採用の証拠ではない。raw補修/再試行/生成追加は行わない。ここは準備でbase4は未実行。
 
 今回比較群は追加312更新/新164生成/局所9forward（固定32以前の240更新/48生成は別）で、独立164題ではない。CPUは全56新束縛とactual tokenizer、41保存再読を実行したが、旧283PASS3SKIP/旧860の再実行ではない。API86d19b6d/通常map/HTTP/DB/RN/Render/稼働/merge/deploy/Pod Stop等0、正式0/3・54.50％据置。primary outcome BLOCKER_NARROWED、STRUCTURE_MAP_DELTA_NONE（既存private ownerの比較）。必要GPU/GitHub保存はMash継続承認内。
+
+<a id="analysis-base4-and-repeated-unknown-20261102"></a>
+## 11/2 — 元4Bの4call対照を完了、反復不明の不足だけをCPUで具体化
+
+同messages/ref/同revisionのadapterなし4callを52.989783秒/1load/学習0/測定0で完走。全4stopだが全4がstrict受口で拒否。supervisor54.266889秒/exit0/compute-apps空、旧b8b7/9991と両configはSHA不変。[body-free全結果](semantic_units_base4_results.json)。root/別文脈read-only監査が全4rawをsourceおよびparent56前後と独立照合した。
+
+AF01は不明内容を断ったことへ接続し、unit外のEPI引用と断ったの否定誤分類を含む。NV04はscope名をnode_kindへ混入、不明を安心へ従属化。AT29は未決定を願望配下の不明へ変え、まだをEPIにし、本来の不明rootも欠く。PQ02は不明述語と内容を逆転させ、引用範囲と重複に失敗した。一方、base AF01の理由引用/ので、NV04の朝の否定/夜contextには保持部分があり、一律に全内容が劣るとも言わない。4件の構造はbase0/4・b8b7新wire before1/4・9991 after2/4で、いずれも意味合格率ではない。元4Bへ戻すだけ、またはfresh LoRA初期化を優先する根拠は得られなかった。追加epoch/新規LoRAを自動起動しない。
+
+全23member/manifest22 SHA/CRCを照合回収。private cocolon-analysis-base4-result-20261102.zip、Library libfile_79f8a6b0cfd481919b348140851c1504、135585bytes/SHA bf4d2a184f9c689850cc6df565a85a4e84be2af199c8c2ddb3e56b98b769eedc。再圧縮containerは遠隔元ZIP a1198fbc…と別。最初のtext exportがrun.logのCRを正規化しlocal hash不一致で停止したため、未変更の元bytesからexportだけ修正し全SHAを確認した。学習/生成再実行やモデルraw修復ではない。処理按分約$0.00854@0.58/h、準備/回収/保持等別。
+
+### 確認できた教材の欠落と次の再開先
+
+既存56教師を読み取り集計すると、同fieldに二つ以上のWRITTEN_UNKNOWN rootを持つ例は0だった。[反復不明CPU対照](semantic_units_repeated_unknown_cpu.json)として、別題材の荷物/受取人について二つの不明節を順序入替したroot架空教材2つを作成した。一題材の順序対であり、独立した新2題の評価ではない。PQ失敗を見て作った近接構文教材のため、今後PQも独立未見評価へ換算しない。PQの完全同一fieldやモデルrawは教師化せず、旧56/source/messages/targetは不変。
+
+同じ分からないがfield内で2回現れても、各rootを内容込みの一意な全文節引用にし、UNKNOWN_CONTENTがその実返却root quoteを指す。EPIは各root引用内で一意な分からないへ束縛する。新契約のstrict受口を変更せず両4unit/2不明root/2childを束縛し、内部親は両方[null,1,null,3]。同保存fileは別local processでも新生成/compile/author entry禁止で2件ともID/coverage/bytes一致、全unparsed/主体未解決/route0を保持。実4B/学習0、GPU planでも学習成功でもない。
+
+次はこの一つの欠落を補う2targetと既存56保持を組み合わせる有限比較を具体化する。初期重み/doseを既見品質と旧再現の両方で選び、9991への自動継続や教材倍増にしない。理由過大、否定の掛かり先、時点保持は別の残件であり、この2targetで解決したと扱わない。
+
+今回比較群の累計は追加312更新/新168生成/局所9forward（固定32以前の240更新48生成は別）で独立168題ではない。本節の4call/CPU2以外のpytest旧283PASS3SKIP/旧860再実行0。API86d19b6d/通常map/HTTP/DB/RN/Render/稼働/merge/deploy/Pod Stop等0、正式0/3・54.50％据置。BLOCKER_NARROWED/STRUCTURE_MAP_DELTA_NONE。次回は既存parent56/base4完了原本を先に読み、新しい実行を重複起動しない。
