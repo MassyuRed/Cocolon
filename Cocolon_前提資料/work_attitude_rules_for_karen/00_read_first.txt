@@ -1,5 +1,5 @@
 work_attitude_rules_for_karen
-revision_date: 2026-10-25
+revision_date: 2026-11-02
 created_at: 2026-05-17 18:58:26 JST
 format: UTF-8 text / Notepad向け
 normative_status: CURRENT_ENTRY
@@ -8,8 +8,8 @@ normative_status: CURRENT_ENTRY
 
 この資料は、華恋がCocolon作業を始める前に読む唯一の入口です。
 
-大量のrule全文を毎回読むことを目的にしません。
-今回の作業に必要なcurrent正本・専門rule・実ファイルだけを漏れなく選び、未成立のGateがあれば作業を進めないためのrouting ownerです。
+Mash様の2026-11-02指示により、CURRENT_RULES.md R2.1の『現存する全ての情報・全てのファイルの確認完了』を開始条件とします。直近・関連・currentだけを選んで全確認の代わりにしません。過去の原会話、思想、教示、設計、教材、旧実装、失敗履歴、保管物を含む全情報と全ファイルを原本から確認し、未取得・読取不能・未確認が残る間は製品作業を開始しません。
+以下の読順・current owner・専門rule・System Contextの案内は、全確認後の適用判断にも使う案内であり、確認対象の上限ではありません。
 
 ただし、`../audits/emlis_ai/Cocolon_EmlisAI_ProductNeglect_and_CMEE_ProductReadFailure_20260816.md`は
 恒久インシデント記録として例外です。全てのCocolon作業で毎回、先頭からEOFまで全文を読みます。
@@ -19,7 +19,7 @@ normative_status: CURRENT_ENTRY
 
 報告会の目的・進め方・最新回と過去回は `../weekly_reviews/README.md` を参照します。
 全体の現在地、リリース条件、次週計画、Mashと華恋の意見・判断理由を確認するための案内です。
-議事録は仕様正本・実装承認・最新handoffの代替ではなく、全履歴の毎回必読や新しいGateを追加しません。
+議事録は仕様正本・実装承認・最新handoffの代替ではありません。過去回を含む現存する全情報の確認はR2.1に従い、過去回・履歴を確認対象から外しません。
 
 # 0. Model Gate — 最初に必ず確認
 
@@ -47,18 +47,18 @@ non-Pro成果物は`UNTRUSTED_NOT_ADOPTED`として扱い、最後のPro verifie
 2. 本fileを読む。
 3. `../audits/emlis_ai/Cocolon_EmlisAI_ProductNeglect_and_CMEE_ProductReadFailure_20260816.md`を先頭からEOFまで全文読む。設計、実装、診断、監査、文書更新、authority、GitHub write、仕様相談、Product Readの別を問わない。
 4. `CURRENT_RULES.md`と`18_chat_work_environment_selection_rule_2026_08_06.txt`を読む。
-   - 全てのCocolon作業で、fresh applicable ownerの`../00_cocolon_current_product_and_state.md`を先頭からEOFまで全文読む。仕様相談・観測会・AI選定・文書更新も含む。前回の記憶・要約・検索断片で代用しない。全機能の目的、接続、決定、実装・稼働・端末・受入れ・未完了を確認してから、個別資料へ進む。
+   - 全てのCocolon作業で、fresh applicable ownerの`../00_cocolon_current_product_and_state.md`を先頭からEOFまで全文読む。仕様相談・観測会・AI選定・文書更新も含む。前回の記憶・要約・検索断片で代用しない。全機能の目的、接続、決定、実装・稼働・端末・受入れ・未完了を確認する。この一枚の読了や以下の読順だけで、R2.1の全情報・全ファイル確認完了とはしない。
 5. Cycle001作業の場合、fresh applicable refの`../08_cycle001_current_state.md`を解決し、current head、current recovery lineage、last reusable technical credit、first unfinished technical gateを固定する。2026-08-15監査時点ではCocolon Draft PR #29 head `0854e21f92f841fd2cfdcef08b9e3117fc93f96a`がworking currentであり、merge後またはhead更新後はfresh refを再確認する。
 6. `09_work_start_checklist.txt`を今回の作業について埋める。
-7. 全体の現在地は`../00_cocolon_current_product_and_state.md`から確認し、関連する最新作業記録・handoffを読む。`../07_latest_snapshot_diff.md`は関連する節目の履歴として参照し、EOFを全体currentの代用にしない。Cycle001の次作業だけはfreshな`08_cycle001_current_state.md`から選ぶ。
+7. 全体の現在地は`../00_cocolon_current_product_and_state.md`から確認し、過去を含む全確認を満たしたうえで、関連する最新作業記録・handoffから現行の実行根拠を解決する。`../07_latest_snapshot_diff.md`は関連する節目の履歴として参照し、EOFを全体currentの代用にしない。Cycle001の次作業だけはfreshな`08_cycle001_current_state.md`から選ぶ。
 8. GitHub上の`Cocolon` / `mashos-api` current head、対象path、指定predecessorを確認する。
 9. Cocolonについて設計・実装・診断・監査・前提資料更新・仕様判断を行う前に、`../system_context/00_read_first.md`を読み、次を実行する。
    - 実装はPR37 checkout、商品原本はfresh PR30とAPI PR3の別checkoutとする。実行引数・固定環境・cacheは上記technical入口のcurrent手順に従う。商品branch内の旧CLIを現行実装として実行しない。
-   - same-refなら保存済みmanifest／output hashの検証結果を使う。
+   - same-refなら保存済みmanifest／output hashを同一性の確認に使う。hash照合を原本内容の確認・R2.1の全確認完了へ置き換えない。
    - changed-refならchanged path導出後に自動refreshし、stale contextを判断根拠へ使わない。
    - 正規prepareが出力したcache内の`cmee_working/task_context/cmee/full_text_read_order.md`から対象実ファイルを確認する。tracked `system_context/current/**`は8月のhistorical snapshotであり、現在の読順として使わない。
    - Mash様へmanifest確認、SHA比較、更新対象選択、refresh command組立てを戻さない。
-10. `manifest.json`のactivation mapから、今回必要な専門ruleだけを読む。
+10. R2.1に従って全ruleも確認し、`manifest.json`のactivation mapから今回適用する専門ruleを解決する。適用範囲の限定を確認範囲の限定にしない。
 11. EmlisAI / Piece / 分析構造 / CMEEを触る場合、`../current_structure/00_three_core_and_cmee_read_first.md`と対象mapを読み、商品目的、current route、owner path、保護境界、current / futureを固定する。
    - 4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更では、`../observation_learning/README.md#observation-learning-intent-and-assumptions`の「観測学習の目的・用途・前提」を毎回作業前に読む。最新weeklyの決定/実結果と今回の改善対象を結び付け、ローカル運用先はWindows／Mac未選定として確認する。既存資料の再説明をMash様へ要求したり、この確認から別の承認段階/管理票を作ったりしない。
 12. 前提資料を地図、実ファイル・contract・test・logを現物として両方確認する。
@@ -74,7 +74,7 @@ non-Pro成果物は`UNTRUSTED_NOT_ADOPTED`として扱い、最後のPro verifie
 
 - `../00_cocolon_current_product_and_state.md`。全作業で全文必読。
 - 毎作業、関連差分を確認し、変化した機能・決定・状態・残件・根拠だけを当該作業と同じ変更単位で置換更新する。差分なしは既存作業記録／PR説明へ理由を一行残す。
-- System Contextの古いInventoryや生成読順に含まれない場合も、freshな作業ownerから原本を直接読む。生成済みmanifestの手編集・全機能再監査・新checkerは不要。
+- System Contextの古いInventoryや生成読順に含まれない場合も、freshな作業ownerから原本を直接読む。生成済みmanifestの手編集・新checkerは不要。R2.1の全情報・全ファイル確認を省略せず、選択外・古い情報も原本から確認する。
 
 ## Cycle001 current navigation
 

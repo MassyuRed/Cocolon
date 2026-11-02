@@ -2200,3 +2200,14 @@ API `2c259f0e33abcd70cf353a8f53af3dc3b06eb63e`へコード反映済み。[既存
 新10対象はPASS、実compilerのカテゴリ別合成mapを未変更の配布RN表示契約へ渡し、DTO受理/文章と図の本文一致を確認。local広域493件のうち既存storage1件はhttpx未導入で環境ERROR、assertion失敗0だが全成功ではない。旧current一度更新/次回再利用、旧月次非生成再読、protective投影を既存CIでも確認済み。同環境read-only監査で見つかったrecord証拠対応・文脈除去・混在比較を補修し、最終postimageにblocker指摘なし。独立human/Pro受入れではない。
 
 製品変更は既存production6file＋既存test2file、DB schema/公開DTO/RN/こころ天気/新依存変更0。実4B/新学習0、一般意味品質/カテゴリ別の役割や選択傾向の一般化/本人端末/IF/Savedは残件。正式0/3・54.50％の再採点なし。STRUCTURE_MAP_DELTA_PRESENT。詳細は[Analysis04](../designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#analysis-selected-category-context-20261102)、全file地図は[01B](../01B_cocolon_overall_structure_analysis_piece_emotionlog_ranking.md#analysis-selected-category-context-files-20261102)。§78までの完了GPUrunは再起動しない。
+
+<a id="all-existing-information-and-files-20261102"></a>
+### §80 過去からの全情報・全ファイル確認を作業開始条件として明文化
+
+Mashは「もっと昔の話」「現存する全ての情報と全てのファイルを確認しない限り作業すんな」「ルール化しろ」と明示した。直近の観測実演や一部の思想資料を示して、以前からの全蓄積・既存構造の確認へ代えた華恋の判断を訂正する。
+
+規範正本は[CURRENT_RULES R2.1](../work_attitude_rules_for_karen/CURRENT_RULES.md#all-existing-information-and-files)。全てを直近・関連・current・索引の選択対象へ縮小せず、過去の原会話・思想・教示・設計・教材・旧実装・失敗履歴・保管物まで内容とつながりを確認する。未取得・読取不能・所在未確認・未確認が残る間は全確認未完了として、製品の設計・実装・学習・配置・採用判断を開始しない。現行採用の優先順位と、確認対象の網羅性を区別する。関連差分だけの書込みを、関連資料だけの読取り許可へ変換しない。全確認のための新checker・独立管理system・自動writerは作らない。
+
+今回のeffectは、この明示指示を既存のCURRENT_RULES、AGENTS、read-first入口、開始／出力確認、全体現在地と本議事録へ保存する規範修正のみ。全確認は未完了であり、一覧取得・一部原典確認・本規範反映を全確認完了へ変換しない。製品source・test・教材・重み・DB・稼働設定・配置・署名buildは変更0。STRUCTURE_MAP_DELTA_NONE（製品構造変更なし）。全件読了・全既存構造理解・商品進捗は未宣言。
+
+前節のカテゴリ保持・集合別集約・表示の実装とCI／Liveは当時の技術事実として保持するが、役割付けと選択傾向の分析接続が完成したという依頼への完了報告は撤回。観測会の終了扱いも華恋の誤判断で、Mashの終了指示ではない。現在の製品作業停止理由は今回の全情報・全ファイル確認条件の未成立である。

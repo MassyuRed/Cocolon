@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_karen_read_first
 title: "華恋用 READ FIRST"
-revision_date: "2026-10-22"
+revision_date: "2026-11-02"
 permanent_mandatory_incident:
   path: "audits/emlis_ai/Cocolon_EmlisAI_ProductNeglect_and_CMEE_ProductReadFailure_20260816.md"
   read_requirement: "EVERY_COCOLON_WORK_READ_FULL_FROM_FIRST_BYTE_TO_EOF"
@@ -10,7 +10,9 @@ permanent_mandatory_incident:
 source_repositories:
   - Cocolon
   - mashos-api
-source_mode: "canonical_current_authority_plus_last_full_audit"
+source_mode: "all_existing_information_and_files_before_work__CURRENT_RULES_R2_1"
+all_information_and_files_rule: "work_attitude_rules_for_karen/CURRENT_RULES.md#all-existing-information-and-files"
+all_information_and_files_confirmation_status: "NOT_COMPLETE_DO_NOT_START_PRODUCT_WORK"
 whole_product_current_state_owner: "00_cocolon_current_product_and_state.md"
 current_authority_owner: "08_cycle001_current_state.md"
 current_authority_scope: "CYCLE001_ONLY"
@@ -1482,6 +1484,10 @@ coverage:
   grounded_human_reception_p5_p6_p8_release_allowed: false
   grounded_human_reception_full_01_02_regeneration: false
 ---
+# 2026-11-02 Mash指示 — 全情報・全ファイル確認を開始条件とする
+
+現存する全ての情報と全てのファイルを確認し終えるまで、Cocolonの製品作業を開始しない。正本は[CURRENT_RULES R2.1](work_attitude_rules_for_karen/CURRENT_RULES.md#all-existing-information-and-files)。直近・関連・currentだけへ範囲を縮めず、過去の原会話・思想・教示・旧資料・教材・既存構造・旧実装・失敗履歴・保管物も確認する。以下のcoverage、過去の全監査記録、snapshot、索引・読順・current案内を、今回の全確認完了の証明にしない。現時点の全確認は未完了であり、製品の設計・実装・学習・配置は停止中。今回のルール反映だけを、全確認完了や製品作業の再開に変換しない。
+
 
 > **2026-10-22 現行必読：全機能・全状態は [Cocolon 最新情報](00_cocolon_current_product_and_state.md) を毎作業、全文確認する。** 作業単位ごとに関連差分を同じ変更単位で置換更新する。旧本文の「最新」・07 EOF優先・08を全体現在地とする指示は履歴。08はCycle001専用、07は節目の履歴。仕様・実装・稼働・本人端末・商品受入れを分け、詳細正本と実物へ進む。
 # 恒久必読 — EmlisAI商品中核の後回しとCMEE Product Read失敗
