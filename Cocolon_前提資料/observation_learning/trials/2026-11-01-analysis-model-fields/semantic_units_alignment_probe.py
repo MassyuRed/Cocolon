@@ -55,7 +55,7 @@ def main():
         closure=inspect.getclosurevars(generator).nonlocals;model=closure['model'];tokenizer=closure['tokenizer']
         assert not model.training and not any(p.requires_grad for p in model.parameters())
         report.update(serving_loader='EXISTING_LOAD_GENERATOR_NONTRAINING_112_TENSORS_VERIFIED',gpu=torch.cuda.get_device_name(0),
-            actual_flags=dict(training=model.training,any_requires_grad=any(p.requires_grad for p in model.parameters()),lora_dropout={k:v.lora_dropout for k,v in model.peft_config.items()},gradient_checkpointing=getattr(model,'is_gradient_checkpointing',None),config_use_cache=model.config.use_cache),
+            actual_flags=dict(training=model.training,any_requires_grad=any(p.requires_grad for p in model.parameters()),lora_dropout={k:v.lora_dropout for k,v in model.peft_config.items()},gradient_checkpointing=getattr(model,'is_gradient_checkpointing',None),config_use_cache=getattr(model.config,'use_cache',None),text_config_use_cache=getattr(getattr(model.config,'text_config',None),'use_cache',None)),
             cache_comparison_scope='Short-prefix prefill with/without returning cache, not incremental cached generation replay',
             raw_token_scope='Retokenized saved raw text for local prefix diagnostics, not original generation token IDs')
         def distribution(logits,gold,alternative=None):
