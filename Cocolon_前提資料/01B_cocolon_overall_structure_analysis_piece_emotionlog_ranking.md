@@ -3163,3 +3163,12 @@ API fa995a44、STRUCTURE_MAP_DELTA_PRESENT。新production fileは0。通常累�
 
 
 11/2最終実結果の地図：trial `semantic_units_fixed32_results.json` が固定32/128更新/全12raw読解/10保存再読/71file保全/重みidentityの結果owner。既存 `semantic_units_fixed32_plan.json` と `semantic_units_fixed32_run.py` のrunは完了済み、再実行しない。旧分析用重みを含むprivate原本はtrial/weekly§58から辿る。通常source/DB/RNの新ownerなし。
+
+
+## 2026-11-02 — 親quoteをsource内部位置へ束縛する明示private契約
+
+API86d19b6d、STRUCTURE_MAP_DELTA_PRESENT。通常の累積mapは不変。新analysis_model_units_quoted_parents.v1は親の逐語quoteを同field返却unit exact1へ対応させ、source側が内部list位置を導出して既存private候補graph/compiler/唯一realizerへ渡す。新exact Input/Response/ref/schema/state/file、全source/guard/raw/messages束縛、親cycle/depth/UNKNOWN根/引用一意性を保持。旧rawの補修・旧形式fallbackなし。新形式の実4B/学習は未実行、全unparsed/actor未解決/route0、通常HTTP/DB/RNへ未接続。
+
+変更owner：`ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py`（新要求/strict受口・専用保存再読）、`ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py`（新exact型dispatch）、`ai/services/ai_inference/analysis_cumulative_service.py`（新専用prepare/build/serialize/reload）。新production file0、新test `ai/tests/test_analysis_model_quoted_parent_units.py`。compiler/realizerの意味型・通常責務は不変。CPU対象283PASS/3WASM SKIP、旧実87保存payload再読と新56合成派生の同field/文章/図/coverageを確認。実モデル品質・商品受入れではない。設計はAnalysis04#analysis-quoted-parent-units-plan-20261102、全結果/限界/次工程はtrial#analysis-quoted-parent-units-cpu-20261102とweekly§66。
+
+新trial file地図（observation_learning/trials/2026-11-01-analysis-model-fields配下）：`semantic_units_scope56_plan.json`・`semantic_units_scope56_run.py`・`semantic_units_scope56_cpu.json`・`semantic_units_scope56_results.json`は56教材GPU比較の準備/実行/結果。semantic_units_quoted_parent_targets.jsonは同旧56合成教師の親quote形式派生（GPU計画ではない）、semantic_units_quoted_parent_cpu.jsonはCPU実検証と旧保存互換記録、semantic_units_quoted_parent_cpu_example.jsonは合成9unit/7qualifierの専用file保存例。実raw/重み152原本はprivate保存先をresults.json/READMEで参照し、GitHub本文へmodelrawを複製しない。

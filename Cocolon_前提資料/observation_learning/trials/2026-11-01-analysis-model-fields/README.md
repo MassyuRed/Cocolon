@@ -1,6 +1,6 @@
 # Analysis — 最小field接続と実4B probe
 
-**最新：11/2、56教材候補の64更新/30生成を完了。理由・否定と新SQを改善したが、親2件/反復引用1件の退行、旧40NLL悪化で通常未採用。全152原本/112重み保存、25candidate再読一致。[全結果と再開点](#analysis-scope56-result-20261102)。完了runを重複実行しない。**
+**最新：11/2、56教材の64更新/30生成と原本保全を完了後、親を逐語quoteで指定する別private契約をAPI86d19b6dへCPU実装。対象283PASS/3WASM SKIP、旧実87保存payload再読、新56派生は旧field/文章/図/coverageを保持。[最新CPU結果と再開点](#analysis-quoted-parent-units-cpu-20261102)。新形式の実4Bは未検証、旧候補も通常未採用。**
 
 2026-11-01 JST。開始原本：Cocolon PR30 `1c66add4fdf8f5ded18f7443d6b91b1771998244`、API PR3 `36713940ea82e217fab8a7c0a738a33f21df1c4d`。Mashの分析残件開始とweekly§45.4に従う。Codex Work/GPT-6、root華恋が実装/統合/反映、別文脈agentはread-only監査のみ。独立Pro/Ultra又はhuman品質受入れとは呼ばない。System Context最新cacheは未成立のまま、fresh原本fallbackを使用。
 
@@ -531,3 +531,19 @@ NLL低下だけ/構造受理だけで採用しない。旧学習済AT4と新NT03
 次は親番号をモデルが数える責務と、親の意味選択を分ける。親unitの逐語quoteを返す別private契約を既存設計ownerへ具体化し、同fieldで実際に返った親unitが一つだけ完全一致するときだけ内部位置をsource側で導出する案を調べる。旧rawの親補修/旧wire緩和/親unit追加ではない。反復引用、修飾先、旧40保持は別に残り、親quote案だけで解決したとはしない。nested案は括弧/教師差分が大きく比較候補に留める。新contract/本番変更はこの結果記録時点で0。
 
 今回比較群は追加256更新/新108生成/局所9forward（固定32以前の240更新/48生成は別）で、108独立題の評価ではない。process按分約$0.06741、保持/準備/回収等別。CPUは今回56target再束縛/20baseline原request・raw・重み照合/25非生成再読、既存112PASS・2WASM SKIPの再実行でも旧860再実行でもない。API1561526b/通常map/DB/RN/Render/merge/Pod Stop・再起動・削除・追加チャージ0、正式0/3・54.50％据置。限定TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_NONE。
+
+
+<a id="analysis-quoted-parent-units-cpu-20261102"></a>
+## 11/2 — 親quote契約をCPU接続、旧87保存payloadと新56教材の同内容を確認
+
+API `86d19b6d834676a602b036c89357dfed1003bb2b`、新profile `analysis_model_units_quoted_parents.v1` を明示offlineだけへ実装。新exact Input/Response/別ref/messages/schema、parent_quote strict reader、専用state/fileのserialize/reload、service専用4関数、Engine新exact型dispatch。親unitが同fieldの返却listにexact1だけ存在するときにsource側で内部位置を導出する。整数親readerは共通field binderを抽出しただけで、旧ref/messages/旧stateと拒否条件は不変。旧rawの親を補修せず、新rawを旧Responseへ変換して通すこともしない。
+
+既存AnalysisUnitCandidateGraph/compiler/唯一realizerを共有し、新production fileは0。新testは`ai/tests/test_analysis_model_quoted_parent_units.py`。全field全文/部分根拠/残範囲、親最大2段、主体未解決、全unparsed/route0を維持。新typeを通常ObservedGraph/HTTP/DB/RNへ接続していない。
+
+新47を含む6fileは171PASS/3SKIP/31.75秒、旧P5 file112PASS/10.47秒、重複しない最終対象は283PASS/3SKIP。SKIP3は全てPostgreSQL WASM未構成で、実SQL/実DBの成功ではない。初回91PASSはsubsetで加算せず、旧860/全suiteの再実行とも呼ばない。旧実quote/contrast/canonical/binding/scopeの5/14/18/25/25＝87保存payloadを別processで非生成・非compile・非author再読し、全旧ref/messages/ID/coverageと元bytesを保持。87独立題や87種類のIDという意味ではない。
+
+旧56のroot合成教師から、親指定だけを新quote形式に派生。[新56target](semantic_units_quoted_parent_targets.json)は新意味教材・モデルrawの教師化・GPU計画ではない。旧target/source/messagesは不変。全56の新rawを新受口へ束縛すると、旧field graph内容/文章/図/coverageと完全一致。新ref/response/IDは別であり全artifact同一とは呼ばない。新保存rawも不変で、全56serialize/reload一致。[CPU全記録](semantic_units_quoted_parent_cpu.json)。[合成9unit/7qualifierの実保存file](semantic_units_quoted_parent_cpu_example.json)は別local processでも同file bytes/ID/coverageを非生成再読した。
+
+新形式の実4B生成/学習は0。親番号の算術を外せても、誤った親quoteの選択、親quoteコピー、反復語の一意引用、理由/修飾scope、旧教材保持の問題は自動では直らない。次はこの56派生targetと元checkpointを使い、実tokenizerでcontext/終端長を確認し、旧40保持を採否条件にした新形式の有限比較を具体化する。新指示だけを現adapter互換と仮定せず、完了済み0e7へepochを重ねない。必要作業はMashの継続承認内で、再承認を待つ作業ではない。
+
+通常map/本番DB/Render/RN/merge/deploy/Pod Stop等0、正式0/3・54.50％据置。今回追加は新private受領契約のCPU接続でSTRUCTURE_MAP_DELTA_PRESENT、GPU実結果の意味品質・商品受入れは未達。設計01/04/05/06・全file地図01A/01B/全体図・current Analysis/CMEE mapを差分更新する。

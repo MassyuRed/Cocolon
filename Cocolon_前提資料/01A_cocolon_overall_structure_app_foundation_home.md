@@ -5979,3 +5979,10 @@ API `f7a1389679f15dbb9f24c40c0c5ac0058423c106` の既存製品3owner：`ai/servi
 新file地図：API `ai/tests/test_analysis_model_field_kinds.py`（call/元source束縛・strict番号/JSON・旧互換・実隔離SQL保存再読）。Cocolonの既存trial配下に `field_kinds_probe_requests.json`（新形式の既見架空AF01/02）、`field_kinds_probe.py`（未実行の新4call/600秒one-shot）、`field_kinds_cpu_example.json`（合成graph/文章/coverage）、`field_kinds_cpu_results.json`（重複除外のCPU実結果）を追加。新production owner/別作者/公開wire/DB/RN/依存定義0。
 
 最終819PASS（新34＋旧785）、共有owner identity別1PASS、FAIL/SKIP0。合成candidate→既存graph→隔離SQL commit→同図/文章/IDの生成禁止current/monthly再読・元source削除purgeを確認。実4B改善/意味品質/商品合格ではない。次GPUは新4生成/追加学習0/最大600秒の具体案まで、今回実行0。詳細はAnalysis04#analysis-model-field-kinds-v1、trial README#field-kinds-cpu-20261102、weekly§48。STRUCTURE_MAP_DELTA_PRESENT（新明示private wire/inputと既存graph責務の接続）、限定TECHNICAL_CREDIT/商品0/正式0/3/54.50％据置。
+
+
+## 2026-11-02 — 親quoteをsource内部位置へ束縛する明示private契約
+
+API86d19b6d、STRUCTURE_MAP_DELTA_PRESENT。通常の累積mapは不変。新analysis_model_units_quoted_parents.v1は親の逐語quoteを同field返却unit exact1へ対応させ、source側が内部list位置を導出して既存private候補graph/compiler/唯一realizerへ渡す。新exact Input/Response/ref/schema/state/file、全source/guard/raw/messages束縛、親cycle/depth/UNKNOWN根/引用一意性を保持。旧rawの補修・旧形式fallbackなし。新形式の実4B/学習は未実行、全unparsed/actor未解決/route0、通常HTTP/DB/RNへ未接続。
+
+変更owner：`ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py`（新要求/strict受口・専用保存再読）、`ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py`（新exact型dispatch）、`ai/services/ai_inference/analysis_cumulative_service.py`（新専用prepare/build/serialize/reload）。新production file0、新test `ai/tests/test_analysis_model_quoted_parent_units.py`。compiler/realizerの意味型・通常責務は不変。CPU対象283PASS/3WASM SKIP、旧実87保存payload再読と新56合成派生の同field/文章/図/coverageを確認。実モデル品質・商品受入れではない。設計はAnalysis04#analysis-quoted-parent-units-plan-20261102、全結果/限界/次工程はtrial#analysis-quoted-parent-units-cpu-20261102とweekly§66。

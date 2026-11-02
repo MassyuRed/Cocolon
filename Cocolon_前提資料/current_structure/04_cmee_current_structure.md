@@ -1967,3 +1967,10 @@ Mash承認の固定新4生成をCocolon c0859cfb/API f7a13896から一回実行�
 実4B field-kindsの4/4後、全文一分類の不足を既存の意味型/EvidenceRef/P5/realizerへ戻って確認。[Analysis設計の具体案](../designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#analysis-model-units-proposal-20261102)では、原文quoteから位置を導出し、親scope/否定/不明/時点を全文contextと一緒に表示する新private analysis_model_units.v1を提案。本人記載の不明はpath node/UnknownGapへ入れず、主体未解決・全unparsed・route0。通常ObservedGraph/safe projection/HTTP/RN非接続、旧P5/全文quotedの受理範囲は保持する。
 
 新説明fileは既存trial配下の[semantic_units_cpu_example.json](../observation_learning/trials/2026-11-01-analysis-model-fields/semantic_units_cpu_example.json)。華恋の手設定9unit/qualifier7を既存sourceへ戻した16引用の座標一致のみで、新受口/意味採用/実モデル/Engine生成は0。新private実装はAPI既存5＋新test1のCPU一作業として別承認対象。通常商品mapへの橋渡し・一般品質は未達。最新weekly§50、STRUCTURE_MAP_DELTA_NONE（今回active source/契約/型は変更0、将来案のnavigationのみ）。
+
+
+## 2026-11-02 — 親quoteをsource内部位置へ束縛する明示private契約
+
+API86d19b6d、STRUCTURE_MAP_DELTA_PRESENT。通常の累積mapは不変。新analysis_model_units_quoted_parents.v1は親の逐語quoteを同field返却unit exact1へ対応させ、source側が内部list位置を導出して既存private候補graph/compiler/唯一realizerへ渡す。新exact Input/Response/ref/schema/state/file、全source/guard/raw/messages束縛、親cycle/depth/UNKNOWN根/引用一意性を保持。旧rawの補修・旧形式fallbackなし。新形式の実4B/学習は未実行、全unparsed/actor未解決/route0、通常HTTP/DB/RNへ未接続。
+
+変更owner：`ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py`（新要求/strict受口・専用保存再読）、`ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py`（新exact型dispatch）、`ai/services/ai_inference/analysis_cumulative_service.py`（新専用prepare/build/serialize/reload）。新production file0、新test `ai/tests/test_analysis_model_quoted_parent_units.py`。compiler/realizerの意味型・通常責務は不変。CPU対象283PASS/3WASM SKIP、旧実87保存payload再読と新56合成派生の同field/文章/図/coverageを確認。実モデル品質・商品受入れではない。設計はAnalysis04#analysis-quoted-parent-units-plan-20261102、全結果/限界/次工程はtrial#analysis-quoted-parent-units-cpu-20261102とweekly§66。

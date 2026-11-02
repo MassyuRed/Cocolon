@@ -973,3 +973,10 @@ Mash承認の固定新4生成をCocolon c0859cfb/API f7a13896から一回実行�
 ## 2026-11-02 — 意味単位実装後の引用先行指示版
 
 §51でprivate analysis_model_units.v1を実装（API fa995a44）、cddf1855でclarified版を追加。新API1561526bでquote_first.v1を同じsemantic_admissionへ追加し、既存state.v2/ref版分離を使う。通常graph/DTO/HTTP/RN未接続、厳密引用/親/全unparsed/主体未解決/route0を維持。新production型/ownerなし。固定32/240更新の結果と新同重み12call比較は[trial](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-quote-first-probe-20261102)、weekly§58/59。STRUCTURE_MAP_DELTA_PRESENT（明示offline指示版追加のみ）。
+
+
+## 2026-11-02 — 親quoteをsource内部位置へ束縛する明示private契約
+
+API86d19b6d、STRUCTURE_MAP_DELTA_PRESENT。通常の累積mapは不変。新analysis_model_units_quoted_parents.v1は親の逐語quoteを同field返却unit exact1へ対応させ、source側が内部list位置を導出して既存private候補graph/compiler/唯一realizerへ渡す。新exact Input/Response/ref/schema/state/file、全source/guard/raw/messages束縛、親cycle/depth/UNKNOWN根/引用一意性を保持。旧rawの補修・旧形式fallbackなし。新形式の実4B/学習は未実行、全unparsed/actor未解決/route0、通常HTTP/DB/RNへ未接続。
+
+変更owner：`ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py`（新要求/strict受口・専用保存再読）、`ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py`（新exact型dispatch）、`ai/services/ai_inference/analysis_cumulative_service.py`（新専用prepare/build/serialize/reload）。新production file0、新test `ai/tests/test_analysis_model_quoted_parent_units.py`。compiler/realizerの意味型・通常責務は不変。CPU対象283PASS/3WASM SKIP、旧実87保存payload再読と新56合成派生の同field/文章/図/coverageを確認。実モデル品質・商品受入れではない。設計はAnalysis04#analysis-quoted-parent-units-plan-20261102、全結果/限界/次工程はtrial#analysis-quoted-parent-units-cpu-20261102とweekly§66。

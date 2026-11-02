@@ -1312,3 +1312,8 @@ API `f7a1389679f15dbb9f24c40c0c5ac0058423c106`、実装/検証/全pathは[Analys
 ## 2026-11-02 — 親quote契約の次CPU作業（計画）
 
 親の位置をモデルへ数えさせず、親unitの逐語quoteを新明示private契約で選ばせる。旧wire/rawは不変、source側は同fieldに実際に返された親exact1だけを内部位置へ束縛する。旧graph/compiler/唯一realizerを共有し、新raw/bindingを保持する。通常map/他core/HTTP/DB/RNへの接続なし。 具体仕様・path・拒否条件は[Analysis04](04_analysis_v1d_v1e_detailed_design.md#analysis-quoted-parent-units-plan-20261102)。Mash継続承認内、実装前の計画であり実4B品質や商品採用ではない。
+
+
+## 2026-11-02 — 親quote契約CPU接続のactual
+
+API86d19b6d。上の計画をMash継続承認内で既存3owner＋新test1へ実装。新profile/type/ref/schema/state/fileを分離し、parent_quoteを同field返却親exact1の位置へ束縛、旧integer-parentのfield/source/graph検査と唯一realizerを共有する。旧messages/ref/state/拒否条件と旧実87保存payloadを保持。対象283PASS/3WASM SKIP、新56合成派生のfield内容/文章/図/coverage一致、新file非生成再読を確認。新実4B/学習/SQL/HTTP/通常map/RN/本番変更0、STRUCTURE_MAP_DELTA_PRESENT。詳細・具体path・件数範囲は[trial最新CPU結果](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-quoted-parent-units-cpu-20261102)。計画は実装前の履歴であり現在の未実装を示さない。

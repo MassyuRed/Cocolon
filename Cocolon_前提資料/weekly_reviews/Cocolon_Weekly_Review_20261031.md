@@ -2071,3 +2071,8 @@ quote_first指示単独はDEV構造3/8（旧6/8）、学習済構造2/4/教示�
 ### §65 56教材候補を完了、理由/否定改善と旧保持/親の退行を確認
 
 64update/112測定/30stop、418.426390秒/exit0/112tensor保存・非学習reload/元b8b7不変/終了compute空。after構造DEV7/8・AT3/4・NT2/2・CQ3/4・DQ4/4・SQ4/4（before2/4）＝23/26。AF01理由/後悔対象、UV12否定、CQ01非行動、NV01親3/5/mada、DQ01対象分割後の実親3/5は改善。一方NV04自己参照5、CQ02不明親6（root7）、AT29反復部屋を受口が拒否。AF01修飾先/CQ03余計なmodifier/SQ02場所欠落は受理後にも残る。旧40NLL0.003555→0.011288（33増加）、新NT/ST改善による全56平均低下を保持へ換算せず通常未採用。全30rawをroot/agent読解、25candidate非生成/非compile/非author再読一致、全152原本/112重みprivate保存。次は親番号責務を外す別private親quote案を既存ownerへ具体化し、反復引用と旧品質は別途扱う。詳細と保存IDはtrial最新節。API1561526b/通常map/DB/RN/稼働不変、正式0/3・54.50％据置。
+
+
+### §66 親quoteの新private契約をCPU実装、旧互換と同内容再読を確認
+
+API86d19b6d、新exact Input/Response/別profile/ref/schema/state/file、parent_quote exact1→source由来内部位置、既存graph/compiler/唯一realizer、service専用4関数/Engine明示dispatchを実装。旧raw修復/旧Response迂回/旧wire緩和なし。新47含む6file171PASS3WASM SKIP＋旧P5別112PASS＝重複なし283PASS3SKIP。旧87保存payloadを非生成/非compile/非author再読しref/messages/ID/coverage/元bytes保持。旧56合成teacherの親指定だけ新形式へ派生し、全56のfield内容/文章/図/coverageを完全保持、新save/reload一致。新9unit/7qualifier fileも別process再読一致。新形式実4B/学習0、次は実tokenizer長と旧40保持条件を含む有限比較を具体化。親の意味選択/引用一意性/旧保持は残件。設計/全file/structure地図を更新、通常map/DB/RN/稼働/merge不変、正式0/3・54.50％据置。詳細と全pathはtrial最新CPU節。STRUCTURE_MAP_DELTA_PRESENT。

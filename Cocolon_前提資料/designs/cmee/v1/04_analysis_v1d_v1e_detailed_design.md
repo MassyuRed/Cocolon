@@ -1850,3 +1850,8 @@ source由来の内部位置への束縛後は、既存AnalysisUnitCandidateGraph
 4. `ai/tests/test_analysis_model_quoted_parent_units.py`：前方親/根まで2段/親数え直し不要、3field全文/Unicode/残範囲/同file非生成再読、旧新交差拒否、重複/存在しない親/親跨ぎ/自己/循環/深さ/不明根/strict型、owner/guard/版/messages/raw/finish、graph/text/diagram/coverage改竄、通常非選択を検証。既存unit/field/P5/累積の対象回帰を行い、旧fixtureを緩めない。
 
 CPU一作業は上記実装→新合成raw→既存graph/text/diagram→同file非生成再読→旧保存payload再読→全file地図/型/結果の差分更新まで。CPU検証process上限600秒、追加依存/実GPU/学習/本人DB/Render/RN/merge/deploy0。実4BはCPU結果と新target長を確認してから別の有限比較計画へ具体化する。現adapterは整数parentを学習しているため、そのまま新wire互換とは呼ばない。nested treeはコピー負担をさらに外せるが括弧/教師構造の差分が大きく、今回は比較候補に留める。
+
+
+## 2026-11-02 — 親quote契約CPU接続のactual
+
+API86d19b6d。上の計画をMash継続承認内で既存3owner＋新test1へ実装。新profile/type/ref/schema/state/fileを分離し、parent_quoteを同field返却親exact1の位置へ束縛、旧integer-parentのfield/source/graph検査と唯一realizerを共有する。旧messages/ref/state/拒否条件と旧実87保存payloadを保持。対象283PASS/3WASM SKIP、新56合成派生のfield内容/文章/図/coverage一致、新file非生成再読を確認。新実4B/学習/SQL/HTTP/通常map/RN/本番変更0、STRUCTURE_MAP_DELTA_PRESENT。詳細・具体path・件数範囲は[trial最新CPU結果](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-quoted-parent-units-cpu-20261102)。計画は実装前の履歴であり現在の未実装を示さない。
