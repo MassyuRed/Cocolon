@@ -1,6 +1,6 @@
 # Analysis — 最小field接続と実4B probe
 
-**11/2最新再開点：other62のCPU62教材をstrict束縛/実file非生成再読/実tokenizer照合済み。保存mixed60 f982から旧60各1＋他者否定OA2各4=68更新、旧20before再利用＋新4before/全24after=28新生成・124測定/3load/900秒の一候補を固定。GitHub65080728固定版を一回起動し、report STARTED/更新0/新before1開始/1loadを確認。完了/保存は未確認。[計画/実装順/停止条件](#analysis-other62-plan-20261102)。前回mixed60の全233原本/112重みは保存済みで、完了runを重複起動しない。**
+**11/2最新再開点：other62の68更新/28stopを正常完了。AT4/UQ2/MX2と新OA2を再現し、OD02他者否定/CQ04過去不明/SQ03まだが局所改善。MD02主体を対象へ置く誤り、HQ03主体qualifier退行、CQ04少し/HQ04理由が残り通常未採用。全270原本/112重み保存、45candidate/3拒否を別CPU process照合。[全結果・原本・次の切分け](#analysis-other62-result-20261102)。完了runを重複起動しない。**
 
 2026-11-01 JST。開始原本：Cocolon PR30 `1c66add4fdf8f5ded18f7443d6b91b1771998244`、API PR3 `36713940ea82e217fab8a7c0a738a33f21df1c4d`。Mashの分析残件開始とweekly§45.4に従う。Codex Work/GPT-6、root華恋が実装/統合/反映、別文脈agentはread-only監査のみ。独立Pro/Ultra又はhuman品質受入れとは呼ばない。System Context最新cacheは未成立のまま、fresh原本fallbackを使用。
 
@@ -735,3 +735,21 @@ OD01は他者肯定行動＋二不明、OD02は他者否定行動＋二不明。
 
 
 §75実行開始：65080728固定plan/prepare/runner/supervisor全SHAを同Jupyterで照合後、一回起動。report STARTED/更新0/新before1開始/1loadを確認。`/workspace/analysis-other62-20261102/result/report.json` と `run.exit` を先に確認し、重複起動しない。完了/新保存/採用は未宣言。
+
+
+<a id="analysis-other62-result-20261102"></a>
+## other62完了 — 他者否定の局所改善と主体qualifier退行を分けて保存
+
+GitHub65080728固定版を一回、68更新/124測定/3load/28stopで正常完走。処理484.641066秒、親486.115973秒/exit0/compute空、元99916/3067/750a/f982の重み/config4対不変。112有限F32/3,833,856paramsは全112変更、初期学習reload/保存実model一致/非学習freshreload112一致。新89badc47bc21…、configb357ff96373f…、peak allocated9.405558GiB/reserved11.712891GiB。原reportのPENDING_RAW_READは原bytesを保ち、読解完了はresults.jsonに記録する。
+
+全24before/24afterをsourceとroot/同環境read-only監査が全文照合。AT4=4/4、UQ2=2/2、MX2=2/2を保持し、新OA2=0/2→2/2教師JSON同値。OA2とOD02は主語/NEGATIONを独立全文ACTIONへ置き、二不明の内容親対応も正しい。OD01は元から正しくraw不変なので改善へ加算しない。CQ04の過去分からなかったはWRITTEN_UNKNOWN/EPIへ戻り、理由捏造/構造拒否を解消。SQ03のまだを全文ACTION/qualifierへ戻す。構造21/24→24/24、raw不変16/24を一般意味品質率へ換算しない。
+
+残件：MD02はnegative ACTION root参加しなかったにactor/NEGATION qualifierがなく、姉をCONTENT_TARGETへ置く。原fieldと否定predicateは保持され、肯定反転/原入力喪失とはしない。HQ03は前回のEXPLICIT_ACTOR私はqualifierが落ちる退行、全文ACTIONと原fieldの私は/NEGATION/二不明対応は保持。CQ04の少しは抽出結果unitに未反映、HQ04ののではraw不変でTE_CONTEXTのまま。MD01の予備のmodifier追加は原文内引用だが名詞内部をACTION全体へ粗く付けた候補で強い改善へ数えない。これらのため通常未採用、追加epoch/同一run再試行なし。
+
+教材監査では過去形不明BT07、まだ否定AT13/BT08/ST07（まだ＋てはいないはBT08）が既存。理由12件のので10件、感情結果へ結ぶ理由AT08は1件。時間modifierを持つ理由/理由配下の昨日ATTRIBUTIVE_CONTENTは0件だが、基本理由/時間修飾は既にある。CQ04/SQ03を教材不存在とは説明せず、HQ04複合例の薄さも唯一原因とはしない。OAはMD02後の1題材2順序、ODや既知診断はroot近接入力で盲検一般品質ではない。
+
+全270元member/manifest269のbytes/SHA、112tensor/3,833,856有限値を照合、ZIP CRC成功。直接binary downloadを繰り返さずtext/数値F32回収から元member完全一致で再圧縮した。private原本[other62 archive](https://chatgpt.com/library?file_id=libfile_8ad5521b02bc819199f00c2be35ec190&account_id=personal)、14889616bytes/SHA5a141baefbd22873318e192c164ddd22fc1673c1afae09a000f852210a0ceb64。GPU原ZIPはfd99a75f897a66732b2c9a97a7c264dd543bdd8b836bc3840f522e0e6f6e3419、圧縮containerだけ異なり全member同一。保存reader45candidateのID/coverage一致、3拒否維持を別CPU processで確認。モデルload/新生成/更新0、保存reload中generate/compiler/authorは禁止。
+
+次の実装順：まず本結果/原本をGitHub checkpoint。その後MD02文脈とOA02文脈それぞれで姉/父×参加しなかった/返送しなかったの2×2を作り、元2source×両重みの4保存結果を照合再利用し、残り6改変source×f982/89baだけ12新生成（追加学習0/2loads/300秒打切り）で比較する案を固定する。unknown周辺/行動位置は各文脈で不変、6改変は旧62教師との完全一致0。既見最小改変なので盲検でも新教師でもなく、token単独原因/一般他者理解へ換算しない。上限は完走保証でなくpartialも保全、延長/再試行しない。主語/否定rootと不適切targetを別々に全文で読む。HQ03退行/CQ04少し/HQ04理由は別追跡。ここでは次GPU診断未実行。
+
+処理按分約$0.07808@前回観測0.58/h（準備/回収/保持/通信/税等別、現在単価未再照会）。Codex Work/GPT-6 root単一writer/同環境read-only監査、独立Pro/Ultra/human商品受入れではない。Mashの必要GPU/実装/GitHub継続明示承認内で実行/保存。通常source/受口/API/DB/RN/Render/Supabase/稼働/merge/deploy/Pod管理操作0。全unparsed/actor未解決/route0、正式0/3・54.50％/candidate_ready=false据置、STRUCTURE_MAP_DELTA_NONE、BLOCKER_NARROWED。

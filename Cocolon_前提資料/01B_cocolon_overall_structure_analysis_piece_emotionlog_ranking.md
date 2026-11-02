@@ -3178,3 +3178,6 @@ API86d19b6d、STRUCTURE_MAP_DELTA_PRESENT。通常の累積mapは不変。新ana
 
 
 11/2 other62のtrial file地図（同trial配下）：`semantic_units_other62_prepare.py`は旧60不変＋OA2/OD2のCPU束縛/実保存非生成再読/実tokenizer、`semantic_units_other62_plan.json`は62教材/24評価/68順/初期f982/上限、`semantic_units_other62_cpu.json`は62件実確認、`semantic_units_other62_run.py`は68更新/新28生成の一候補、`semantic_units_other62_supervisor.py`はsource2134/loader/初期値/旧20before照合と全原本/112重み回収。trial README#analysis-other62-plan-20261102/weekly§75。GPUは準備時点未実行、STRUCTURE_MAP_DELTA_NONE（商品runtime owner追加なし）。
+
+
+11/2 other62完了の地図：同trial `semantic_units_other62_results.json`は68更新/28生成/全48rawの読解と全270原本/112重みidentity、`semantic_units_other62_saved_replay.py/json`は別CPU process保存45candidate/3拒否の非生成照合。prepare/plan/runner/supervisorのGPUrunは完了、再実行しない。次のactor/predicate文脈別診断は本結果checkpoint後に別計画へ固定する段階。README#analysis-other62-result-20261102/weekly§76、STRUCTURE_MAP_DELTA_NONE（商品owner変更なし）。

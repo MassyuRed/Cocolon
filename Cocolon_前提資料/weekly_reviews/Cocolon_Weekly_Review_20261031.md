@@ -2153,3 +2153,15 @@ adapterなし同revision/同messagesの4callを52.989783秒/1load/学習測定0�
 [固定計画/実装順/限界](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-other62-plan-20261102)。Mashの必要GPU/実装/GitHub継続明示承認内、Codex Work/GPT-6 root単一writer＋同環境read-only監査、独立Pro/Ultra/human受入れではない。前回単価0.58なら処理按分上限$0.145、準備/回収/保持等別。通常source/受口/map/DB/RN/稼働/正式0/3・54.50％据置、STRUCTURE_MAP_DELTA_NONE。
 
 §75実行開始：GitHub65080728のplan/prepare/runner/supervisorを全SHA照合後、既存Jupyterで一回起動。report STARTED/更新0/新before1開始/1loadを確認。完了/新保存/採用は未宣言、先に `/workspace/analysis-other62-20261102/result/report.json` と `run.exit` を確認し重複起動しない。
+
+
+<a id="analysis-other62-result-20261102"></a>
+### §76 other62を完了、他者否定改善と主体qualifier退行を分けて保存
+
+固定65080728を68更新/124測定/3load/28stop、484.641066秒（親486.115973秒）/exit0で正常完了。全112有限F32/3,833,856paramsを保存/非学習reload一致、元重み/config4対不変、compute空。89badc47/configb357ff96、全270元member/manifest269のbytes/SHA/CRCを照合しprivate保存済み。Library libfile_8ad5521b02bc819199f00c2be35ec190、14889616bytes/SHA5a141bae…。45保存candidate/3拒否は別CPU process再読で全一致、モデル0。
+
+全24before/24afterをroot/同環境read-only監査がsourceと全文確認。AT4=4/4・UQ2=2/2・MX2=2/2保持、OA2=0/2→2/2教師JSON同値。OA/OD02の他者否定root主語/NEGATIONと二不明対応、CQ04過去不明/EPI、SQ03まだが局所改善。OD01は元から正しく不変。構造21→24/24・raw不変16/24は意味合格率ではない。MD02は姉を対象へ置きroot主語/NEGATION不在、HQ03の私はqualifierが落ちる退行（全文quote/元fieldの主語・否定は保持）、CQ04少し/HQ04理由が残り通常未採用。MD01の予備のmodifierは原文内だが粗いscopeで強い改善へ数えない。
+
+BT07の過去不明、BT08等のまだ否定、既存12理由/ので10/感情親1を確認。基本教材不存在を原因とせず、時間/修飾/原因→感情の複合薄さも唯一原因へしない。次は本結果checkpoint後、MD02/OA02文脈のactor姉/父×predicate参加/返送を同f982/89baで比較する有限12新生成/追加学習0/2load/300秒案を固定。元4保存結果再利用、6改変は旧62教師完全一致0、既見最小改変で盲検/教師/一般率へ換算せず、partial保全/延長再試行なし。ここは次診断未実行。
+
+[全結果・原本・次の実装順](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-other62-result-20261102)。処理按分約$0.07808@前回観測0.58/h、準備/回収/保持等別。Mashの継続明示承認内、Codex Work/GPT-6 root単一writerと同環境監査。通常source/受口/map/DB/RN/稼働/正式0/3・54.50％据置、STRUCTURE_MAP_DELTA_NONE。

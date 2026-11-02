@@ -1,4 +1,4 @@
-> **2026-11-02最新：mixed60の66更新/24生成を完了、通常未採用。** AT4/UQ2/MX2を保持し本人混在・朝夜/否定・修飾に局所改善。他者否定scope/不明→理由/時間修飾/理由に残件。全233原本/112重み保存、34候補/6拒否を別CPU process照合。次の他者否定教材1題材2順序はCPU表現/実file再読まで。[全結果/次の再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-mixed60-result-20261102)。既存offline ownerの内容比較でSTRUCTURE_MAP_DELTA_NONE、通常map/本番/DB/RN不変。完了runを再起動しない。
+> **2026-11-02最新：other62の68更新/28生成を完了、通常未採用。** AT4/UQ2/MX2保持、OA2/OD02他者否定とCQ04過去不明/SQ03まだに局所改善。MD02主体target化、HQ03主体qualifier退行、CQ04少し/HQ04理由が残る。全270原本/112重み保存、45候補/3拒否を別CPU process照合。[全結果/次の切分け](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-other62-result-20261102)。次は追加学習せず最小actor/動詞改変を両保存重みで有限診断する案。STRUCTURE_MAP_DELTA_NONE、通常map/本番/DB/RN不変。完了runを再起動しない。
 
 > 10/28最新差分：named出力型/参照提示修復・CPU351成功、9更新/112再読込/2生成を終了。平坦rootと回答source帰属へ前進も意味/本文0/2・新41c9不採用。末尾の最新結果・全機能00/weekly§90を参照。
 
