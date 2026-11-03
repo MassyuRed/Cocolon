@@ -2429,3 +2429,15 @@ API dc05dc35の既存2owner/既存testだけへsemantic_boundaries.v2を明示of
 全4原文/8raw/3採用ROLEのgraph/文章/図をroot＋同環境read-only担当が照合。本人役割1→2/2、推測/他者はscope拒否2/2を維持。肯定copula誤modifierが消え、否定役割は旧から意味同じで表現境界のみ整合。推測rawは前後同一で未確定を保持、他者をSELFへ昇格しない。採用ROLEはSELF/fact/past、原文肯否・1node/辺0/4gap・同一文章図。参照JSON一致0→3/4は品質率ではなく、推測参照ROLEと生成WRITTEN_UNKNOWNの差は残る。
 
 8候補＋3ROLEを保存reader内Engine/両compiler/両author呼出し禁止下で同一復元、typed拒否5件はartifactなし。候補8件はmapped0/unparsed1で通常graph到達とは異なる。元ZIP104,824bytes/62member/SHA265f623e…をPod外CRC/全manifest SHA照合、[原本・全読解](https://chatgpt.com/library?file_id=libfile_0f0e514767dc8191b30324cff1e1d752&account_id=personal)（92,946bytes/6member、SHA994c7364…）へ保全。個別本文は公開しない。完了rootの重複起動/再学習0。対象関係MD01/OD01、NV04/PQ02/HQ04、R06/R07、本人基準/複数field/本人補足/記録間関係/通常累積接続は残件。d25はこの診断だけへ明示選定、通常/次学習初期値は未採用。通常HTTP/DB/RN/配置/Pod管理0、GPUレンタル維持、STRUCTURE_MAP_DELTA_NONE、正式0/3・54.50％据置。Mashの現セッション指示内で逐次承認0。
+
+
+## 100. 11/3 — 対象分解粒度と意味誤りを区別する74教師監査
+
+[本文なし監査](../observation_learning/trials/2026-11-01-analysis-model-fields/semantic_units_aligned74_teacher_scope_audit.json)。MD01/OD01/NV04/HQ04の本文そのものは旧74教師一致0。CONTENT_TARGET43、WRITTEN_REASON12、WRITTEN_UNKNOWN/UNKNOWN_CONTENT各53、TE_CONTEXT6、ATTRIBUTIVE_CONTENT1。これは包含件数で意味品質率ではない。対象を全文ACTION内に保持する教師と独立target教師が併存し、現行の指示/strict/設計は全objectの独立target化を必須にしない。したがってMD/ODを語の消失・同一正解の忘却・wire違反と認定せず、独立関係出力の減少と通常graph側の未完の採用責務を区別する。
+
+NV04は結果root重複とWRITTEN_UNKNOWNの親不正という意味/形式未達、HQ04は明示理由markerとWRITTEN_REASONを欠きTE_CONTEXTとする意味未達。関連する二段連体文脈AT03、結果理由AT08等12教師、独立不明AT16/18/26はあるが同じ組合せはない。唯一原因とは断定しない。監査自体の追加GPU/教師/重み/本番変更0。ここまでの次学習未固定判断を履歴として保持し、後続の選定は別条件へ記録する。
+
+
+## 101. 11/3 — 明記理由/結果文脈と独立不明を同時に保持する76比較を固定
+
+[条件/コード/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-reason-unknown76-plan-20261103)。旧74source/target/86順を維持し、原文から作る対照2教材（て文脈/ので理由、各二段連体と独立不明）を各2追加、76教師/90更新/152NLL。d25/config4a46をこの研究初期値へ明示選定、aligned after46＋転移after4をbefore50へ厳密再利用。新before0/after50/2load/900秒・処理上限0.145USD@0.58USD/h（保持等別）。CPU準備全成功とGitHub code読戻し後に一回実行、現時点では結果未確定。新2を唯一原因としない、全対象独立化を新義務にしない。通常採用/採否緩和/DB/RN/配置0、STRUCTURE_MAP_DELTA_NONE。Mash承認済みscope内でcheckpointを継続。

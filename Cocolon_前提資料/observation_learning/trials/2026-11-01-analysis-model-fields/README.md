@@ -1201,3 +1201,23 @@ root＋同環境read-only担当は全4source/8raw/3採用ROLE artifactを確認�
 [全原本・全文読解・再開記録](https://chatgpt.com/library?file_id=libfile_0f0e514767dc8191b30324cff1e1d752&account_id=personal)：92,946bytes/6member/SHA256 994c7364a7bd527b59af67fd9f1d444399744651c41a2c0612cb4d30b22ee9ef。内部未改変ZIPは104,824bytes/62member/SHA256 265f623e44d64c32ce101a7072d1e269c7089a1b46114d4082750298f8e1798f。Jupyter標準Downloadで回収し、Pod外CRC/全manifest bytes-SHA一致。初期73eeと新d25重みは上記aligned74原本をSHAで参照し、ここへ重複収録しない。元reportのPENDING_RAW_READは実行時statusとして未改変、読解完了は派生review/summaryへ記録した。
 
 再開時は両完了runのprepare.exit/run.exit/result/report.json・本節・全結果を先に読む。完了runを重複起動しない。d25はこの診断だけへ明示選定しており、通常/次学習初期値へ未採用。次はMD01/OD01の対象関係欠落を既存74のsource/targetと照合し、教師欠落か保持退行かを区別してからCPU条件を固定する。新system文言だけの反復、既存rawの修正/教師化、同量dose追加だけ、通常の採否条件緩和へ戻さない。本人基準の判断/選択、複数field/本人補足/比較、記録間再出現/変化、通常累積保存接続は未完。通常HTTP/DB/RN/Render/Supabase/配置/Pod管理変更0、GPUレンタル維持。STRUCTURE_MAP_DELTA_NONE、正式0/3・54.50％据置。Codex Work/GPT-6 root＋同環境read-only確認であり、独立Pro/Ultra/human受入れではない。
+
+
+<a id="analysis-teacher-scope-audit-20261103"></a>
+## 11/3 — 対象分解の粒度と残る意味誤りを既存74教師へ照合
+
+semantic_units_aligned74_teacher_scope_audit.jsonは原plan SHA868ae974…を固定した本文なし監査。MD01/OD01/NV04/HQ04の非空本文は教師一致0。旧74の対象分解は全文ACTION内保持と独立CONTENT_TARGETが混在し、dc05の指示/strict/設計に全object独立化義務はない。MD/ODの独立target出力減少を語の消失・同一正解の忘却・wire違反へ換算しない。通常graphでの項/対象/不明の責務は引き続き未完。
+
+NV04は重複result根と親のあるWRITTEN_UNKNOWN、HQ04は明記理由をTE_CONTEXTへ誤分類する未達が残る。AT03の二段連体/文脈1、WRITTEN_REASON12教師（結果→理由AT08等）、独立不明の教材はあるが、同じ組合せのsourceはない。原文から組合せ境界を教える必要性を候補として絞る監査で、単一原因は断定しない。追加GPU/教師変更0の監査snapshotであり、後続の新条件と時点を区別する。
+
+
+<a id="analysis-reason-unknown76-plan-20261103"></a>
+## 11/3 — 結果文脈/明記理由と独立不明の対照2教材による一回比較
+
+§100監査を受け、全対象の独立CONTENT_TARGET化を新義務にせず、NV04の重複結果根/不明の親不正とHQ04の明記理由誤分類へ絞る。新しい華恋合成2sourceを原文から作り、連体二段＋結果に続く独立不明を、て文脈とので理由の対照で教える。各5unit、相対時/否定/明記理由marker/独立不明を根拠引用で保持。個別本文/targetはprivate reason-unknown76-sources.json、SHA256 e70cd50e994b6bbbbb3f9daac2f547660e1453b61b7583bed02da07d3ce3b750。モデルraw教師化0/Mash新教示0。旧74source/target/86順は不変、新RU01/RU02各2を末尾へ足し76教師/90更新。新2は旧74/評価50との非空本文・組一致0をCPU確認する。
+
+研究初期値としてd25da0/config4a46をこの比較だけへrootが明示選定する。通常採用/自動次初期値選定ではなく中断optimizer再開でもない。既存aligned74 after46＋role-transfer4 after4を、同v2/source/owner/snapshot/request/messages/raw/保存artifactまで一致確認してbefore50へ再利用。新before生成0、保存後after50、76前後NLL152、2load、plainCE/LR1e-5/clip1/seed20261111/context8192/max_new2048/各要求23秒/全体900秒（外890+kill10）。現在0.58USD/hなら処理上限0.145USD、準備/回収/保持別。同量追学習controlなし、改善を新2だけの単独因果へ帰属しない。
+
+CPU strict76/T4typed/保存reader内Engine・両compiler・両author禁止/tokenizer prompt-prefix/EOS/改行/非切詰め/before50由来照合が全成功し、GitHubコード全文読戻し後だけ同Jupyterで一回実行。旧6重み対＋d25の全14fileを保持し、新112tensorのsave実一致/非学習reloadと終了compute空を確認する。完了/失敗のpartialを保全、追加epoch/再試行/raw補修/採否条件緩和なし。
+
+コードsemantic_units_reason_unknown76_prepare.py/run.py/supervisor.py、API dc05のclean既存checkout/blobを使用。root=/workspace/analysis-reason-unknown76-20261103、prepared=/workspace/analysis-reason-unknown76-prepared-20261103。再開はprepare.exit/run.exit/result/report.jsonを先に確認し、既存rootを重複起動しない。採否は全50原文/前後raw・ROLE文章図・同保存fileの非生成再読までで、NLL/教師一致を商品品質へ換算しない。通常HTTP/DB/RN/配置は変更0、STRUCTURE_MAP_DELTA_NONE。本人基準の判断/選択、複数field/補足/比較、記録間再出現/変化、通常累積保存接続は残件。Mashの現セッションの必要作業/GPU/Jupyter/GitHub承認内、逐次承認0。Codex Work/GPT-6 root＋同環境補助、独立Pro/Ultra/human受入れではない。

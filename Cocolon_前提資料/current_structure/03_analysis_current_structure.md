@@ -1091,3 +1091,6 @@ API dc05dc35の既存quoted-parent Inputにsemantic_boundaries.v2を追加し、
 ### 2026-11-03 — 既存private役割接続の74教材入力整合比較
 
 [aligned74実結果](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned74-result-20261103)は86更新/46新生成・role4/4と教示4/4、保存非生成再読まで完了。通常/次学習は未採用、本人基準/記録間関係/通常累積接続の残件を保持する。新private graph/作者/型/通常route/DB/RNは追加せず、既存dc05 profileとtyped-role ownerを使用。trial内aligned74 prepare/run/supervisor/collectはCPU整合/学習比較/一回制限/原本保存、role_transfer4 prepare/run/supervisorは新4のCPU参照/旧新8call/一回制限の実行記録用で、商品ownerではない。STRUCTURE_MAP_DELTA_NONE。追加転移4の比較も完了、本人役割1→2/2とscope拒否2/2維持、全8raw/3ROLEと保存readerを照合済み。最新結果と再開はtrial/weekly§99へ戻る。
+
+
+11/3の74教師scope監査は全対象独立化を現行義務とせず、明記理由/文脈と独立不明の組合せへ次比較を限定する。trialのsemantic_units_aligned74_teacher_scope_audit.jsonは本文なし監査、semantic_units_reason_unknown76_prepare.py/run.py/supervisor.pyは旧74＋原文対照2のCPU準備/一回学習比較/上限・原本保持用。既存private候補owner/typed ROLEを使い、商品graph/作者/通常routeは追加しない。新比較の実結果はtrial/weekly§101以降を確認。STRUCTURE_MAP_DELTA_NONE。
