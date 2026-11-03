@@ -1149,3 +1149,17 @@ rootと同環境read-only担当が全46原文/before/after、全11採用ROLE保�
 採否：semantic_boundaries.v2は通常採用せず、baseline/category/materialの各既定/旧保存readerと未検証候補状態を保持。指示追記だけでは役割と従来保持を両立できなかった。単一比較からprompt一般・語彙・学習条件の唯一原因は断定しない。次は既存source-authored74の正解を保持し、ROLEの過去/肯否と旧保持を同時に教える実学習入力との対応を確認して、一回の改善条件へ戻る。system文言だけの反復、raw教師化、不採用重み/指示の自動採用、完了runの再実行へ進まない。
 
 再開は本節/結果JSON/原本と `/workspace/analysis-semantic-boundaries46-20261103/run.exit`、`result/report.json`、`/workspace/semantic-boundaries46-collect.exit`を先に確認。本人基準の判断/選択、複数field/補足/比較、記録間再出現/変化、通常累積保存への一般接続は残件。Mashの読み/問い/修正の新教示は未取得で、観測会終了扱いにしない。通常HTTP/DB/RN/Render/Supabase/稼働/配置/Pod管理変更0、GPUレンタル維持。STRUCTURE_MAP_DELTA_PRESENTはprivate prompt/state版のみ、生成比較はNONE。TECHNICAL_CREDIT/product_credit0、正式0/3・54.50％据置。Codex Work/GPT-6 root＋同環境read-only確認であり、独立Pro/Ultra/humanの商品受入れではない。
+
+
+<a id="analysis-aligned74-plan-20261103"></a>
+## 11/3 — 既存74教師を意味境界入力へ揃える一回比較
+
+§96の指示差不採用と全既存成果を継承する。未達は、明記役割の過去/肯否と従来の引用/主体/否定/不明親/対象scopeの同時保持。新system文言を増やさず、既存source-authored74の原source/assistant_target/86更新順・各曝露をそのままに、実学習messagesを既存semantic_boundaries.v2へ揃える。モデルrawは教師化しない。新教師0、Mashの新教示取得0、既見の合成開発比較で盲検/一般意味品質ではない。
+
+研究用初期値は73ee8d05/config07262234をrootが明示選定する。旧不採用を撤回した通常採用でも中断optimizer再開でもない。同73ee+v2の直前after46をowner/full snapshot/request/messages/raw/保存artifactに照合してbefore46へ再利用。新before生成0、学習/保存後非学習load計2、74教師の前後NLL計148、86更新/新46生成/要求23秒/全体900秒（外側890+kill10）。plain assistant全token CE、LR1e-5/clip1/seed20261111/8192context/2048生成を保持。現在画面のGPUはRTX PRO4000/0.58USD毎時、処理按分上限0.145USD、準備/回収/保持別。基準条件で同量追学習するcontrolはないため、結果をpromptだけの因果へ帰属しない。
+
+CPU準備で74全件の新版messages/request_ref/strict候補・T4のtyped graph・実file非生成再読・実tokenizerのprompt prefix/EOS/改行/非切詰めを照合。新版identityは再導出し旧candidate/role IDは由来として保持する。v2 NLLを旧baseline NLLへ一致させるassertは使わず、今回の前後実測で比較する。候補/ROLE保存readerのEngine/両compiler/両author禁止を維持。新production source/受口緩和/公開wire/DB/RN/通常ensure/配置は変更しない。
+
+実行コードは同folderのsemantic_units_aligned74_prepare.py/run.py/supervisor.py。API dc05dc358d1c44ce47fd844f6041d74f1f74fe6aの既存clean checkoutと対象blobを使用。root=/workspace/analysis-aligned74-20261103、prepared=/workspace/analysis-aligned74-prepared-20261103。再開時はprepare.exit、run.exit、result/report.jsonを先に確認し、存在するrootを重複起動しない。旧6重み対を保持し、partialも別結果として保存。追加epoch/再試行/raw補修/自動通常採用なし。
+
+DIRECT_PRODUCT_OR_ACCEPTANCE_WORK。Mashの現セッションの分析残件続行・必要作業承認・GPU/Jupyter使用/GitHub checkpoint指示内、Codex Work/GPT-6 root単一execution owner＋同環境補助。独立Pro/Ultra/human受入れではない。成功条件は実4Bの原文忠実性と既存typed ROLEの文章/図到達を旧46と比較し、同保存fileをモデル非生成で復元すること。primaryは限定TECHNICAL_CREDIT又はBLOCKER_NARROWED、商品受入れはMash判断。本人基準の判断/選択・複数field/補足/比較・記録間関係・通常累積保存接続は残件、正式0/3・54.50％据置。STRUCTURE_MAP_DELTA_NONE（既存private版の学習比較のみ）。

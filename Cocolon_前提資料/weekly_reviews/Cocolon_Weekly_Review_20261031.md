@@ -2407,3 +2407,8 @@ API dc05dc35の既存2owner/既存testだけへsemantic_boundaries.v2を明示of
 別CPU processの92応答は候補86復元/6拒否、ROLE11復元/13拒否で一致。Engine/両compiler/両authorなし保存再読、追加モデル/load/生成/更新0。API対象666PASS/2SKIP/既存warning1（114.14秒）。初回2launcher構文不備はsetup/pytest/GPU前として記録を保持し、構文確認済み元file転送へ修正後に実testを一回実行。元report PENDING_RAW_READ bytesを保全した。
 
 [全原本](https://chatgpt.com/library?file_id=libfile_933d01e1c04c8191a3aec76fe9ba0e63&account_id=personal)は747,227bytes/409member/SHA25625603cc4…、400元file＋完了log2、派生参照1とreview/recovery等6memberを保存。新重みなし。次は既存source-authored74の正解を保持してROLEの過去/肯否・旧保持を実学習入力へ揃え、一回の改善条件を具体化する。system-only文言反復/raw教師化/完了run再実行なし。本人基準・複数field/補足/比較・記録間関係/通常累積保存は残件。通常HTTP/DB/RN/稼働/配置/Pod管理0、GPUレンタル維持、private版だけSTRUCTURE_MAP_DELTA_PRESENT、比較はNONE。TECHNICAL_CREDIT/product_credit0・正式0/3・54.50％据置。
+
+
+## 97. 11/3 — 既存74教師と意味境界入力を揃える比較条件を固定
+
+[条件・コード・再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned74-plan-20261103)。§96の指示差だけでは役割と旧保持を両立できなかった結果を受け、同じ既存74source/正解/86順を既存v2学習messagesへ揃える。新教師0/生成raw教師化0。73eeを明示研究用初期値として、直前v2 after46をbefore原本再利用、新before0/after46/86更新/148測定/2load/900秒。plain CE/LR1e-5/clip1/seed20261111、現在画面0.58USD/hなら処理上限0.145USD（保持等別）。CPUのstrict/保存再読/tokenizer成功とGitHub元code読戻し後だけ同Jupyterで一回実行。現在は条件固定で、実結果未確定。通常API/DB/RN/配置変更0、STRUCTURE_MAP_DELTA_NONE。残件全体の本人基準の読み/記録間関係を保持し、教示再現を一般品質へ換算しない。Mashの現セッションで必要作業承認済み、逐次承認を戻さずcheckpointを継続する。
