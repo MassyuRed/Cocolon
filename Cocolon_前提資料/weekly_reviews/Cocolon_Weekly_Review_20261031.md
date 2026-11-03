@@ -2807,3 +2807,36 @@ GPU処理按分0.01953687USD@前確認表示0.29/h（CPU準備/回収/待機レ�
 
 実環境GPT-6/Codex Work、root単一実装/実行/判断と同環境read-only補助による差分review。通常採用false/次初期自動採用false、API ded0586/商品source/意味gate/graph型/唯一作者/ensure/HTTP/公開DTO/DB/RN/Render/Supabase/配置/Pod管理変更0。STRUCTURE_MAP_DELTA_NONE。本人基準/補足typed/記録間関係・変化/通常累積/IF・Savedも残件として保持する。
 
+
+
+<a id="analysis-material-v4-target-ul-result-20261103"></a>
+## 131. 11/3 — C4の誤拡張確率は既に極小、予定条件に従い更新前停止
+
+§130は新before発話4件/4stopと、初期a2eでの16測定/2loadまで実行し、77.342319秒で停止した。C4名詞直後のp_badはC01=1.2135e-12、C02=1.5582e-12、C03=1.1513e-11、C04=3.8950e-11。正しい引用終端はp_good=.99999845/.99999857/.99999630/.99999702で、全4とも99.999％を超えた。事前条件「全p_bad<.01なら更新前終了」が成立し、**更新0/新重み0/after生成0**。係数拡大・再実行なし、通常不採用。
+
+raw statusはFAILED_NO_RETRY_NOT_ADOPTED、train exit1/assert=C4_negative_branch_already_negligible_no_trainingとしてそのまま保存した。runtime故障ではなく事前に設けた停止条件の成立だが、完走や16更新成功へ書き換えない。partial_adapterの15351792bytes/SHAは初期a2eと完全同一、新候補ではない。既存のC4平均CEだけでは見えなかったが、正teacher prefixでその負枝を誤選択しているという今回の仮説は支持されず、この局所ULを強める理由がない。C4内の高確率を、自由生成や別語彙の理解・一般品質の証明にはしない。
+
+発話4の新baselineではAT04が非連続の本人引用でquote拒否、AT11がRESULT下のUNKNOWN_CONTENTで親拒否。AT17は発話のthought分類と余分なpredicate対象化があり、candidate形式受理を意味正解に数えない。AT24は推測を含む発話内容の節引用を保持。これらは更新前の旧a2eの観測で、ULが起こした退行ではない。AT17/24のtyped拒否は現限定scopeの未対応。全4原文/rawをrootが読み、同環境補助がC4の分岐位置/実装/旧90の該当語彙を照合した。
+
+原本全161 manifest fileをPod外でSHA照合。転送時だけ省いた初期a2eと完全同一のpartial重みを既存照合済みa2eから復元し、全元memberをlosslessに保った。元remote ZIP15072398bytes/SHA18edfabe6dcd0550fcc0ec158c9e5079750c723edd74ccd1826569707bd5b5b2と同一ZIP bytesの取得をclaimせず、全memberの一致で保存する。復元全member/manifest/trace/logとfinal reviewを含む[原本・測定・停止判断](https://chatgpt.com/library?file_id=libfile_f3e9e62b13108191b0c103cddd22234a&account_id=personal)は15079887bytes/SHA5c5dc7ef7b3b313495ac022688b78b8a3785d8524f51009bcc1b4e802b98cbd2。処理按分0.00623035USD@前表示0.29/h、準備/回収/保持/保存通信税等別・実総請求未測定。親終了直後sampleは2MiB/16％、compute空、後続実測2MiB/0％、レンタル維持。
+
+次の具体差分は、既存二欄ROLE+ACTION教材がN8「音声/メモ」とC4「報告/書く」に限られるというsource上の不足。別の非suru動詞を持つ肯否/欄位置の独立対照で、既に正しいC4終端を強めることと分けて比較する。語彙不足が原因と確定したわけではなく、次の仮説である。通常API/source/意味gate/graph型/作者/DB/RN/Render/Supabase/配置変更0、STRUCTURE_MAP_DELTA_NONE、primary outcome=BLOCKER_NARROWED/product_credit0。X03・MD02・理由/不明・本人基準/補足typed/記録間・通常累積/IF・Savedの残件を保持。
+
+
+<a id="analysis-material-v4-lexical8-plan-20261103"></a>
+## 132. 11/3 — 二欄の非suru動詞を独立8例へ広げる一回比較
+
+§131で既存C4の対象終端は正teacher prefixですでに高確率と分かった。局所ULを追加で強めず、二欄ROLE+ACTION教材がN8「音声/メモ」＋C4「報告/書く」の2語彙だけというsource上の限定を変える。単欄の別の否定/内容節教材を、非suru二欄の多語彙対照が揃っている証拠にはしない。語彙不足がX03の原因と確定したわけではなく、異なる実装差分として比較する。
+
+material_v4_lexical8_sources.json（SHA021637127c5ede8a373a150767b19c9476266d9272320e1296c8cc5c223efc61）に華恋が新規独立作成したL01–08を保存。「項目/調べる」「手順/試す」「画面/見る」「要点/残す」各肯否2、各pair内の主体・ROLE肯否・欄位置は固定し、4pair間でROLE肯否×欄位置を2×2にする。本人明記の確認係と実行/非実行を分け、対象はそれぞれの名詞へ保持。原78/86/90sourceとtargetは不変、X03/模型/展示係/作る・失敗raw・Z4を教師化しない。新8はMash実演や商品goldではなく、華恋合成の開発教示である。
+
+material_v4_lexical8_trial.py（SHA81a44f8383d60bfb033475fa82e4c2c9a88d9ec9fc648b79add58c6ede0998f9）は既存helper946101d4のprepare/bind_save/唯一作者/7呼出禁止保存readerとtrain_phaseを再利用する一回runner。pool98、更新は新L8＋旧N8各1回の16、測定32。旧a2e初期、material.v4、seed/LR1e-5/平均CE/AdamW/clip/dropout0は既存方式。UL・weighting・mask・生成枝数/指示変更・新依存0。旧C4/16更新や完了ULの再実行ではない。
+
+CPU11.739140秒・モデルload/forward0で、新8全source/target/実tokenizer/8192枠、candidateとtyped全2node、同file保存非生成再読を確認。既存90target/encodedは保持し新8だけ追加。原文/target8をrootと同環境read-only補助が全文確認し、旧26baseline（同Pod before22＋§131の発話4）のmessages/ref/raw hashと候補/typed保存を確認。発話4は既存教師由来の保持対照で盲検ではない。
+
+新root=/workspace/analysis-material-v4-lexical8-20261103。新before8→不達があれば16更新/32測定→after38（旧22＋非学習Z4＋発話4＋L8）、最大新46要求/3load/900秒/処理上限0.0725USD@前表示0.29/h、準備/回収/待機保持/保存通信税等別。新8が全typed受理なら更新/afterを行わず不要学習を止める。typedは対象子省略も許すため、この停止だけで対象子全習得とはせずraw/graph/表示を読む。
+
+新8自身の習得と、非学習X03/Z4への転移、旧14成功/発話内容/主体・肯否・理由・不明の保持を分けて採否判断する。全原文/全raw/成功文章図を確認し、loss/形式件数だけで採用しない。完了root再起動、係数/LR/回数/同教示の自動探索0、finally原本/partial重みを保持しPod外回収。通常採用false/次初期自動採用false。
+
+今回の目的は、対象名詞と行動節を取り違えず既存の文章/図へ渡す品質の修正。本人基準/補足typed/記録間の関係・変化/通常累積/IF・Savedの残件も保持する。実環境GPT-6/Codex Work、root最終実装/実行/判断、同環境補助はread-only。API ded0586/商品source/意味gate/graph型/作者/ensure/HTTP/公開DTO/DB/RN/Render/Supabase/配置/Pod管理変更0、STRUCTURE_MAP_DELTA_NONE。
+
