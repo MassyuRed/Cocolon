@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-**11/3・次の意味誤り修正比較（第9回§100–101）：** 対象全分離は現行必須ではないと監査し、明記理由と文脈の混同/結果重複/独立不明の誤従属へ絞る。原文からの対照2教師を旧74不変で追加、d25を研究初期値に76教師/90更新/152NLL・before50再利用/after50/2load/900秒を固定。CPU全成功/GitHub読戻し後に一回実行、結果未確定。[監査・条件・再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-reason-unknown76-plan-20261103)。通常/自動次初期値採用ではない。
+**11/3・次の意味誤り修正比較（第9回§100–101）：** 対象全分離は現行必須ではないと監査し、明記理由と文脈の混同/結果重複/独立不明の誤従属へ絞る。原文からの対照2教師を旧74不変で追加、d25を研究初期値に76教師/90更新/152NLL・before50再利用/after50/2load/900秒を固定。CPU全成功/GitHub全10file読戻し後に一回実行中（76前測定/1更新時点）、結果未確定。[監査・条件・再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-reason-unknown76-plan-20261103)。通常/自動次初期値採用ではない。
 
 **11/3・分析の最新結果（第9回§98）：** 既存74教師をv2学習入力へ整合し、86更新/148測定/46新stop/2loadを631.116秒/exit0で完了。明記役割R4は2→4/4、教示T4は2→4/4、既存教師22のJSON値再現は16→22。全46原文/前後と12ROLEの文章図を読み、保存reader内のEngine/両compiler/両author呼出しを禁止した92保存応答の非生成再読（候補85復元/7拒否、ROLE12復元/12拒否）を確認。新d25は対象関係の欠落・不明/理由scope未達等により通常/次学習未採用。元480member/新adapter全112tensorを回収照合・private保存済み。[結果・原本・再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned74-result-20261103)。旧各重み/既定、通常API/DB/RN/配置不変。本人基準/記録間関係/通常累積接続は残件。STRUCTURE_MAP_DELTA_NONE。
 

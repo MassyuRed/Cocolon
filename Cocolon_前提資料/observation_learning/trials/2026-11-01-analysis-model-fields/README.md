@@ -1221,3 +1221,6 @@ NV04は重複result根と親のあるWRITTEN_UNKNOWN、HQ04は明記理由をTE_
 CPU strict76/T4typed/保存reader内Engine・両compiler・両author禁止/tokenizer prompt-prefix/EOS/改行/非切詰め/before50由来照合が全成功し、GitHubコード全文読戻し後だけ同Jupyterで一回実行。旧6重み対＋d25の全14fileを保持し、新112tensorのsave実一致/非学習reloadと終了compute空を確認する。完了/失敗のpartialを保全、追加epoch/再試行/raw補修/採否条件緩和なし。
 
 コードsemantic_units_reason_unknown76_prepare.py/run.py/supervisor.py、API dc05のclean既存checkout/blobを使用。root=/workspace/analysis-reason-unknown76-20261103、prepared=/workspace/analysis-reason-unknown76-prepared-20261103。再開はprepare.exit/run.exit/result/report.jsonを先に確認し、既存rootを重複起動しない。採否は全50原文/前後raw・ROLE文章図・同保存fileの非生成再読までで、NLL/教師一致を商品品質へ換算しない。通常HTTP/DB/RN/配置は変更0、STRUCTURE_MAP_DELTA_NONE。本人基準の判断/選択、複数field/補足/比較、記録間再出現/変化、通常累積保存接続は残件。Mashの現セッションの必要作業/GPU/Jupyter/GitHub承認内、逐次承認0。Codex Work/GPT-6 root＋同環境補助、独立Pro/Ultra/human受入れではない。
+
+
+76比較の実行checkpoint：GitHub db99329e の全10fileを本文/Git SHA一致で読戻し、3scriptを同JupyterでSHA/AST照合して一回起動（PID117607）。CPU prepare.exit0、旧74不変/新2/既存50再利用/strict/保存reader/T4typed/tokenizer照合が成功。GPU開始39.385秒時点は76前測定/1更新/1load/新call0・STARTED、最終採否未確定。semantic_units_reason_unknown76_collect.pyは終了後に100保存応答を別CPUで非生成再読し、完了/失敗の全原本を重み・API6source・監査とCRC/bytes-SHAで梱包する。失敗ならarchive-onlyへ分岐しGPU再試行しない。

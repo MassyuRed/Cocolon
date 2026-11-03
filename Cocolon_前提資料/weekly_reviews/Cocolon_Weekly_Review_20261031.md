@@ -2441,3 +2441,6 @@ NV04は結果root重複とWRITTEN_UNKNOWNの親不正という意味/形式未�
 ## 101. 11/3 — 明記理由/結果文脈と独立不明を同時に保持する76比較を固定
 
 [条件/コード/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-reason-unknown76-plan-20261103)。旧74source/target/86順を維持し、原文から作る対照2教材（て文脈/ので理由、各二段連体と独立不明）を各2追加、76教師/90更新/152NLL。d25/config4a46をこの研究初期値へ明示選定、aligned after46＋転移after4をbefore50へ厳密再利用。新before0/after50/2load/900秒・処理上限0.145USD@0.58USD/h（保持等別）。CPU準備全成功とGitHub code読戻し後に一回実行、現時点では結果未確定。新2を唯一原因としない、全対象独立化を新義務にしない。通常採用/採否緩和/DB/RN/配置0、STRUCTURE_MAP_DELTA_NONE。Mash承認済みscope内でcheckpointを継続。
+
+
+§101実行checkpoint：db99329e全10fileを全文/SHA読戻し後、同Jupyterで固定sourceと3scriptのSHA/AST一致を確認してPID117607一回起動。CPU prepare.exit0、76strict/T4typed/旧50再利用/保存非生成/tokenizer成功。GPU39.385秒時点76前測定/1更新/1load/新call0。最終未確定。終了後collectは別CPU100保存再読/原本・重み回収のみ、失敗時archive-onlyでGPU再試行0。
