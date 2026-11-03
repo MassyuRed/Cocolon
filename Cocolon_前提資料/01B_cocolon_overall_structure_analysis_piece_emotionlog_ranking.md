@@ -1,4 +1,4 @@
-> **2026-11-03・分析の最新（weekly§106–107）：** 78比較はR08誤modifierを除去しROLE10保持、旧保持退行で新9e未採用。旧9dcを明示比較先に、API58cのsemantic_boundaries.v3指示/専用保存版をprivate opt-in追加。旧4版/既定/typed ROLE/strict/通常HTTP/DB/RNは保持、Jupyter CPU683pass/2skip。次は学習0/53新生成で比較、結果未確定。private profile/stateだけSTRUCTURE_MAP_DELTA_PRESENT、生成比較/通常構造はNONE。[結果/原本/次条件](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-v3-probe53-plan-20261103)。
+> **11/3・分析の最新結果（第9回§108）：** 同9dc/v2→v3の学習0/53新stopを474.553142秒/exit0で完了。明記理由4対照の2例を改善する一方、残る2例は未達、CQ04のscope重なり・MD01/02のcarrier・R01肯定copula誤modifierが新たに発生。候補52→51/53、正常typed ROLE10→9、旧22JSON再現22/22保持。全53原文/前後/19ROLEと106保存再読、元585memberのCRC/全bytes-SHAを照合・保全。新版は通常/次学習へ不採用、完了53を再実行しない。[全結果・原本・再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-v3-probe53-result-20261103)。private v3/profile/stateの既実装以外の通常構造は不変、本人基準/記録間接続は未完。次は旧78教材のv3入力整合をCPU監査してから有限条件を選定、追加GPU未固定。
 
 ---
 title: "01B_Cocolon_全体構造資料_Analysis_Piece_EmotionLog_Ranking系"

@@ -1300,6 +1300,8 @@ NV04はfull独立不明rootと理由問いmarkerへ引用粒度が変わった�
 <a id="analysis-semantic-v3-probe53-plan-20261103"></a>
 ## 11/3 — 旧9dcで明記理由の指示対照を学習0/53生成で比較
 
+実行前条件と途中checkpointの履歴。完了・採否・再開は後続result節を優先。
+
 API58c47dd8d6512fdd7db5eb413a383925e8b31a87にsemantic_boundaries.v3を明示private opt-inとして追加。v2 systemを丸ごとprefixに保ち、連体＋結果でも筆者が理由接続として明記した節は原markerを保つこと、不明の理由問いを既知理由へ昇格しないことを追記し、既存public架空のて文脈例に対になるので理由例1を追加。privateRU/HQ/NV/RB原文は実装demoにコピーしない。user body・ROLE rule/strict/型/witness・既定/通常接続は不変。v3は別request identity/専用saved state、旧baseline/category/material/v2のmessages/ref/candidate保存bytesは固定。
 
 API変更2fileを全文/Git SHA読戻し後、同Jupyterの別clean checkoutへ固定し、既存quoted-parent/units/fields/cumulative/v1dの5suiteをCPUで一回実行、683passed/2skipped/exit0・114.72秒。既存Pydantic deprecation warning1、追加失敗0。coreでは新旧版の差替え拒否、同原文で新旧raw再bindの意味/保存reader境界、unknown全文rootの分離任意とtyped ROLE scopeを維持。tests/job/command/log/exit/setup原本を次ZIPへ保全する。
@@ -1310,3 +1312,19 @@ API変更2fileを全文/Git SHA読戻し後、同Jupyterの別clean checkoutへ�
 
 
 v3比較の実行checkpoint：Cocolon29ab5ae1の全9fileを全文/Git SHA読戻し後、同Jupyterへ2scriptをSHA/AST照合しAPI58c/tests.exit0で一回起動。CPU prepare.exit0、旧53の真のv2原本/provenance/9dc系譜・新API再読・v3同raw再bindの全意味内容一致（明示identity差だけ除外）・保存reader5呼出禁止/tokenizer成功。GPU50.170823秒時点5call/1load/学習0/NLL0・STARTED、最終結果未確定。終了後の別CPU106保存再読/partial原本保全はsupervisorへ一回接続済み。
+
+
+<a id="analysis-semantic-v3-probe53-result-20261103"></a>
+## 11/3 — v3の53比較完了、理由2例を改善・新退行で不採用
+
+同API58c/保存9dc/config4776でv2 before53を厳密再利用し、v3 after53/学習0/NLL0/1loadを474.553142秒（GPU親478.054881秒・supervisor497.226958秒）/exit0で一回完了。全53stop、旧18adapter file不変、終了compute空。処理按分約0.076456USD@前回確認0.58USD/h（準備/回収/保持別）。新重みは作らず、退行9eは使用しない。起動済みjobのreport/exitから継続し重複生成0。
+
+全53原文/前後raw・全19採用ROLE graph/文章/図をroot＋同環境担当が確認。44raw同一/9変化。HQ04/YREASON02は明記理由quote/WRITTEN_REASON/のでmarker・正しい結果parent・連体子/否定/時点を保持し改善。Y01は理由labelが出てもTEの子へ誤接続、markerなし/連体の親とNEG qualifierが崩れ未達、Y03はquoteにのでを入れてもTEのまま。成功は2/4で、未知隣接だけを唯一原因にしない。原文否定語は残り、肯定反転/語消失へ誇張しない。
+
+新退行はCQ04のTE quoteに結果親が重なるscope、MD01の不明root scope=null、MD02の行動否定を不正null childへ分離、R01の肯定過去copula誤modifier。CQ04は形式cycleではない。R06は不正scopeから合法WRITTEN_UNKNOWNへ復帰し未確定を保持するが、一般意味品質/推測ROLE参照との同一性を証明しない。候補52→51/53（before拒否R06、after拒否MD01/02）、typed本人役割10→9（R01新拒否）。保持9pairのgraphと文章図は明示projection identity以外一致、SELF/fact/past/原文正負・1node/辺0/4gapを維持。scope外6拒否も維持。旧22sourceのJSON再現22→22/22、元RU02込み23参照は22→22/23で、再現値を意味率にしない。R07/R08の既存未達は残る。
+
+別CPU106真保存応答は候補103復元/3拒否、ROLE32採否は19復元/13拒否。保存reader内Engine/両compiler/両author禁止で一致、生成/load/更新/NLL0。CPU53新旧identity shadowは本文/意味/証拠保持を検査するだけで、生成/教師へ加算しない。全candidateはmapped0/unparsedで通常graph接続とは異なる。API既存5suiteは683pass/2skip/既存warning1、114.72秒/exit0。旧4版/既定/strict/typed witness不変。
+
+[全原本・全53読解・保存整合監査](https://chatgpt.com/library?file_id=libfile_c662389447a081918838ad0e02df0c53&account_id=personal)（最終ZIP1,144,260bytes/8member/SHA256 f9db844ee77add2a25ce0b37ac90148eb2488a69cc95676e300866876e52b9ed）。元ZIP1,221,559bytes/585member/SHA256 5b30dd18d4a4ea351bc297621792c4b4c8f1b501b8b5db42af781d604caf2794をCRC/安全path/全584member bytes-SHA＋manifest自己をZIP SHAで検証。元PENDING_RAW_READ reportは改変せず、後読解の採否を別review/semantic_units_reason_v3_probe53_results.jsonへ保存。
+
+採否はv3通常/次学習不採用、次GPU未選定。既存78のsource/targetを改変せずv3入力へ再構成したstrict/保存reader/学習prefix・EOS/tokenizer整合のCPU監査を次段階とする。raw教師化/生成後補修/受口緩和/最新版adapterの自動追学習/完了run再実行なし。本人基準の役割/判断/選択、複数field/本人補足/比較、記録間再出現/変化と通常累積接続は残件。通常HTTP/DB/RN/配置/Pod管理0、GPUレンタル維持。生成比較STRUCTURE_MAP_DELTA_NONE、private v3/profile/stateのみ既にPRESENT、TECHNICAL_CREDIT/product_credit0、正式0/3・54.50％据置。Codex Work/GPT-6 root＋同環境補助で、独立Pro/Ultra/human受入れではない。

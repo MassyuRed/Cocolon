@@ -2486,3 +2486,10 @@ NV04は結果root重複とWRITTEN_UNKNOWNの親不正という意味/形式未�
 
 
 §107実行checkpoint：Cocolon29ab5ae1の全9file読戻しとAPI58c CPU5suite exit0後、同Jupyterで2script SHA/AST一致を確認して一回起動。CPU prepare.exit0、旧before53のsource/ref/messages/raw/saved採否/provenance/9dc lineage、新旧再bind意味全一致/保存reader/tokenizer成功。GPU50.170823秒時点5call/1load/学習0、最終未確定。終了後106真保存応答再読/全原本は自動一回で、CPUshadowを生成・教師に数えない。
+
+
+## 108. 11/3 — v3比較完了、理由2例改善と旧保持退行を確定し不採用
+
+[全結果・原本・再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-v3-probe53-result-20261103)。同9dc/v2 before53厳密再利用→v3 after53、学習0/NLL0/1load/53stopを474.553142秒/exit0、旧18file不変/compute空で完了。44raw同一/9変化、全53source/前後/19ROLEを照合。HQ04/Y02は理由marker/parent/連体否定と時点を正しく保持し改善、Y01は理由labelが出てもscope/marker/NEG未達、Y03はTEのまま。CQ04scope重なり、MD01不明carrier、MD02否定carrier、R01肯定copula modifierが新退行。R06合法unknown復帰は一般意味合格とは別。候補52→51/53、本人ROLE10→9、残る9のgraph/文章図は明示identity以外一致・scope拒否6保持。旧22JSON22/22維持、元RU02込み23参照は22/23維持。
+
+別CPU106保存再読は候補103復元/3拒否、ROLE19復元/13拒否、reader5呼出禁止で一致。CPU53shadowは生成/教師へ算入しない。元585memberのCRC/全bytes-SHAを照合し[全原本・全53読解・保存整合監査](https://chatgpt.com/library?file_id=libfile_c662389447a081918838ad0e02df0c53&account_id=personal)（最終ZIP1,144,260bytes/8member/SHA256 f9db844ee77add2a25ce0b37ac90148eb2488a69cc95676e300866876e52b9ed）。API683pass/2skip/114.72秒を保全、private v3/profile/state以外のowner/既定/strict/HTTP/DB/RN/配置/Pod管理変更0。新v3通常/次学習不採用、9e自動利用なし。次は旧78source/target不変のv3学習入力整合CPU監査、次GPU未固定。本人基準/記録間関係/通常累積接続は残件、GPUレンタル維持、STRUCTURE_MAP_DELTA_NONE/TECHNICAL_CREDIT/product_credit0、正式0/3・54.50％据置。完了53を重複起動しない。
