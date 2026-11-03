@@ -1224,3 +1224,21 @@ CPU strict76/T4typed/保存reader内Engine・両compiler・両author禁止/token
 
 
 76比較の実行checkpoint：GitHub db99329e の全10fileを本文/Git SHA一致で読戻し、3scriptを同JupyterでSHA/AST照合して一回起動（PID117607）。CPU prepare.exit0、旧74不変/新2/既存50再利用/strict/保存reader/T4typed/tokenizer照合が成功。GPU開始39.385秒時点は76前測定/1更新/1load/新call0・STARTED、最終採否未確定。semantic_units_reason_unknown76_collect.pyは終了後に100保存応答を別CPUで非生成再読し、完了/失敗の全原本を重み・API6source・監査とCRC/bytes-SHAで梱包する。失敗ならarchive-onlyへ分岐しGPU再試行しない。
+
+
+<a id="analysis-reason-unknown76-result-20261103"></a>
+## 11/3 — 76教材比較完了、不明の親を局所改善・役割保持、理由と複数文の退行は残る
+
+固定76教師/90更新/152NLL/50新stop/2loadを641.971830386秒（親643.454111369秒）/exit0で完了。新9dc4f947/config4776a484を112tensor保存実一致/非学習reload、旧7重み対14file不変・終了compute空。処理按分0.103428795USD@0.58USD/h（準備/回収/保持別）。before50は既存d25原本を厳密再利用、新before0。旧74targetと86順は不変、新原文2を末尾各2追加。同量追学習controlはなく、新2だけの因果とはしない。
+
+全50原文/前後raw、20採用ROLE artifactのgraph/文章/図をroot＋同環境read-only担当が照合。50中46rawは前後bytes同一、差分はNV04/R07/R08/XROLE03の4。NV04は重複result根が消え、本人記載不明が独立rootへ戻り、時点/否定/不明内容を保持してstrict拒否→採用へ改善。HQ04はraw同一で、明記理由をTE_CONTEXTとする誤分類と理由marker欠落が残る。
+
+R08では肯定過去copulaをROLEのWRITTEN_MODIFIERへ戻す新退行を確認。actionは全文引用へ変わり別CONTENT_TARGETはなくなるが対象語は残り、全object分離を新義務にしない。R07は原文外否定quoteが消えてstrictを通るが、copulaを否定とする誤qualifier/ROLE誤分類は残り、意味成功と数えない。XROLE03はUNKNOWN_CONTENTが役割の節まで拡がり推測は保持、typed role拒否も維持するが参照ROLEには未達。候補採用47→49/50を意味率へ換算しない。
+
+R4/T4/Xself2の全10 ROLE pairは前後file bytes同一。SELF/fact/past・原文正負・ROLE1node/辺0/4gap・同じ文章図を保持し、scope controls6の拒否も維持。既存教示22のJSON再現は22→22/22、既見合成再現で一般品質ではない。新RU01/RU02はNLLのみで、生成再現を確認したとは言わない。
+
+終了後の一回待機はGPU terminal manifestを確認してcollectへ接続し、別CPUで100保存応答を再読。保存reader内のEngine/両compiler/両authorを禁止し、候補96復元/4拒否、ROLE20復元/12拒否を一致確認。候補は全mapped0/unparsedで通常graphの意味採用とは異なる。collect.exit0/モデルload0/生成0。元532member/15,568,148bytes/SHA256 1991407bdde4a45cf47e54789fde6b74730525dc00e2a7a9f3a8ba918a994295をJupyter標準Downloadで回収し、Pod外CRC/全member bytes/SHA照合済み。実行時PENDING_RAW_READ reportは未改変で、読解完了は派生review/summaryへ記録。
+
+[全原本・新重み・全50読解・再開記録](https://chatgpt.com/library?file_id=libfile_95c5112daf788191b2ef457ffb81f60d&account_id=personal)：15,419,466bytes/6member、SHA256 c0a1e5f3e5670e01ea375e09cda61c1923fb597e4f447245f99276fd118d1ce7、内部未改変原本532member。全結果はsemantic_units_reason_unknown76_results.json。
+
+採否：新9dcを通常/次学習初期値へ採用しない。次は原文参照RU02とHQ04の述語/独立不明の有無をCPUで対照し、R08の複数文ROLEにおけるcopula境界も同時保持条件へ戻す。追加GPU条件はまだ未固定で、NLL低下やstrict通過の増加だけを理由にdose追加しない。完了3runのexit/reportと原本を先に読み、重複起動しない。raw修復/教師化/受口緩和/全対象分離義務化なし。本人基準の判断/選択、複数field/補足/比較、記録間再出現/変化、通常累積保存接続は未完。通常HTTP/DB/RN/Render/Supabase/配置/Pod管理変更0、GPUレンタル維持、STRUCTURE_MAP_DELTA_NONE、正式0/3・54.50％据置。Codex Work/GPT-6 root＋同環境確認であり、独立Pro/Ultra/human受入れではない。
