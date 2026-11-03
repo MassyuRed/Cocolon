@@ -2472,3 +2472,14 @@ NV04は結果root重複とWRITTEN_UNKNOWNの親不正という意味/形式未�
 
 
 §105実行checkpoint：74ff5f95全11fileの全文/Git SHA読戻し後、同Jupyterで固定source/4script/監査をSHA照合して一回起動。CPU prepare.exit0、78strict/T4typed/新RB2typed拒否/旧76不変/53保存再利用/非生成reader/tokenizer成功。GPU41.549677秒時点78前測定/2更新/1load/新call0。最終未確定、終了後106保存再読/全原本回収を一回接続済み。
+
+
+## 106. 11/3 — 78比較完了、R08誤modifier除去も旧保持退行で不採用
+
+[全結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-boundary78-result-20261103)。106更新/156NLL/53新stop/2loadを698.143533秒/exit0。新9e/config1412、112tensor保存実一致/非学習reload、旧16file不変/compute空。R08直接改善は肯定過去modifier除去、独立ACTIONは元から保持。正常role10pair bytes同一/過去正負/文章図・scope拒否6を維持。一方AF01原文外主体/理由欠落、AT29不明内容誤target、CQ03原文外語、MD01/XROLE03等carrier不正、Y01/Y02原文scope/actor誤りが生じ、候補52→46/53（拒否1→7）・旧22JSON再現22→19。HQ04/Y01の理由生成は未達。NV04のfull不明root/なぜmarker粒度差だけは未知の既知理由化/wire違反と断定しない。NLL全体悪化/個別RU/RB低下、新RB2生成未検査、同量controlなし。
+
+106保存再読は候補98復元/8拒否、ROLE20復元/12拒否、saved reader5呼出禁止で一致。元555memberをCRC/全bytes-SHA照合し[全原本/新重み/読解](https://chatgpt.com/library?file_id=libfile_f0b44ee781e8819188fd9f0c2562d5f7&account_id=personal)へ保全。9e通常/次初期値不採用、次の指示比較には旧9dcを明示選定。通常HTTP/DB/RN/配置/Pod管理0、GPU維持、STRUCTURE_MAP_DELTA_NONE。本人基準/記録間関係/通常累積接続は未完。
+
+## 107. 11/3 — private指示v3と旧9dcによる学習0/53比較を固定
+
+[条件/コード/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-v3-probe53-plan-20261103)。API58cへv2systemprefix＋理由接続/理由問いの区別/連体理由public対照1をv3明示private版として追加。旧4版messages/ref/state保存bytesと既定/ROLE/strict/witnessを保持。2file読戻し後、同Jupyter別checkoutで既存5suiteをCPU実行し683passed/2skipped/114.78秒/exit0、追加失敗0。旧9dc/config4776を研究比較先に明示選定（退行9eを自動使用しない）、before53は78before53の同9dc/v2を厳密再利用。新v3after53/学習0/NLL0/1load/900秒、CPU入力/保存互換/tokenizer成功後に一回実行。現時点結果未確定。旧18file不変、別CPU106保存再読/全原本、失敗partial保全/再試行なし。private profile/stateだけSTRUCTURE_MAP_DELTA_PRESENT、生成比較はNONE。通常HTTP/DB/RN/配置0、GPU維持、正式0/3・54.50％据置。

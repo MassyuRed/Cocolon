@@ -1,4 +1,4 @@
-> **2026-11-03・分析学習比較の最新結果（weekly§100–102）：** 74教師監査後、旧74＋原文対照2で90更新/50新生成を完了。NV04の結果重複/不明親を改善し、役割R4/T4/追加本人2の10pair文章図を保持。HQ04理由誤分類は残りR08肯定過去copulaに退行、通常/次学習未採用。全50/20ROLE読解・100保存非生成再読・元532memberの全bytes-SHA照合済み。全対象分離は現行必須ではない。本人基準/記録間関係/通常累積接続は残件、通常構造・DB/RN/配置変更なし、STRUCTURE_MAP_DELTA_NONE。[結果・原本・再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-reason-unknown76-result-20261103)。
+> **2026-11-03・分析の最新（weekly§106–107）：** 78比較はR08誤modifierを除去しROLE10保持、旧保持退行で新9e未採用。旧9dcを明示比較先に、API58cのsemantic_boundaries.v3指示/専用保存版をprivate opt-in追加。旧4版/既定/typed ROLE/strict/通常HTTP/DB/RNは保持、Jupyter CPU683pass/2skip。次は学習0/53新生成で比較、結果未確定。private profile/stateだけSTRUCTURE_MAP_DELTA_PRESENT、生成比較/通常構造はNONE。[結果/原本/次条件](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-v3-probe53-plan-20261103)。
 
 ---
 title: "01B_Cocolon_全体構造資料_Analysis_Piece_EmotionLog_Ranking系"
@@ -3354,3 +3354,6 @@ API dc05dc35、通常product owner追加なし。既存 `semantic_admission.py` 
 
 
 11/3の理由診断は元教材を含む4条件でWRITTEN_REASON未再現を確認。次にsemantic_units_boundary78_prepare.py/run.py/supervisor.py/collect.pyをtrialへ追加し、旧76不変＋新ROLE/ACTION順序対照2、理由/文脈と役割境界の重点学習・53生成・106保存再読/原本保全を扱う。通常owner/型/DB/RNの変更なし、STRUCTURE_MAP_DELTA_NONE。最新はtrial/weekly§104–105以降を参照。
+
+
+11/3 private入力版の差分：mashos-api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py がsemantic_boundaries.v3・別request identity/専用保存stateを所有し、旧v2指示へ理由のpublic対照を追加。既存service/Engine/compiler/author/normal既定は不変。既存test_analysis_model_quoted_parent_units.pyへ互換/保存境界検査を追加。trialのsemantic_units_reason_v3_probe53.pyと_supervisor.pyはCPU53旧版再読/新版rebind/新53生成/106保存再読/全原本保全のみ。新採用owner/型/通常route/DB/RNは追加しない。private版のみSTRUCTURE_MAP_DELTA_PRESENT、最新結果はweekly§107以降を確認。

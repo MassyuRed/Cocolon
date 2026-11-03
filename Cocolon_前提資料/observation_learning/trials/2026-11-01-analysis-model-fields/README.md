@@ -1280,3 +1280,30 @@ private boundary78-sources.json SHA256 b3648226b8aa1fc28209802586c78f2e767dfb599
 
 
 78比較の実行checkpoint：GitHub74ff5f95の全11fileを全文/Git SHA一致で読戻し、同Jupyterへprivate sourceと4script/監査をSHA/AST照合して一回起動。CPU prepare.exit0、78strict/旧76不変/90prefix/新2typed拒否/T4typed/53before再利用/保存reader/tokenizer成功。GPU41.549677秒時点で78前測定/2更新/1load/新call0・STARTED。最終未確定。終了後collectへの一回待機を接続済みで、失敗時も再実行せずpartialをarchive-only保全する。
+
+
+<a id="analysis-boundary78-result-20261103"></a>
+## 11/3 — 78比較完了、役割の誤copulaを直す一方で旧保持が悪化し不採用
+
+78教師/106更新/156NLL/53新stop/2loadを698.143533秒（親699.620379秒）/exit0で完了。新9e2d45fc/config1412ac3cは112tensor保存実一致/非学習reload、旧8対16file不変/compute空。before53は同9dc/v2原本の厳密再利用、新before0。root＋同環境担当が全53source/前後rawと20ROLE文章図を照合。37raw同一/16変化。
+
+R08では肯定過去copulaのWRITTEN_MODIFIERが除去された。独立ACTIONは前回から存在しており今回はその独立性を維持、回復を新たに達成したとは言わない。正常R4/T4/Xself2の10pairは前後bytes同一でSELF/fact/past/正負・1ROLE/辺0/4gap・文章図を保持、scope拒否6も維持。
+
+しかし旧保持は悪化。AF01は原文外actorと明記理由欠落、AT29は不明内容を調査の対象へ誤接続、CQ03は原文外対象語、PQ02はかもを相対時へ、MD01/XROLE03はcarrier不正。Y01は時点/親誤り、Y02は原文外actor。HQ04は理由誤分類のまま、Y03はのでをquoteへ入れてもTE_CONTEXTのまま。候補52→46/53（拒否1→7）、旧22のJSON再現22→19/22、RU02生成参照は未達。NLL全78平均0.006001→0.041259へ悪化する一方、RU/RB個別は低下。新RB2はNLLのみで生成再現を検査していない。重点量と新2の結合差なので唯一原因は断定せず、同量controlもない。
+
+NV04はfull独立不明rootと理由問いmarkerへ引用粒度が変わった。現wireはUNKNOWN_CONTENT全分離やmarkerの既知理由専用を義務化しておらず、本人の理由不明を全文に保持し既知の原因/route辺へ変換していない。この差だけを意味誤りやwire違反とは認定しない。同様に全文ACTION/思考と別対象unitの増減だけを語の消失と数えない。
+
+別CPU106保存再読は候補98復元/8拒否、ROLE20復元/12拒否、保存reader内Engine/両compiler/両author禁止で一致。モデルload/生成0、全candidate mapped0/unparsed。元555member/15,619,936bytes/SHA256 d6e1a3b37cdaf57d12d0f09e86469c57c5496bd461a46579afbe9759611d36b8をCRC/全bytes-SHA照合。[全原本・新重み・全53読解](https://chatgpt.com/library?file_id=libfile_f0b44ee781e8819188fd9f0c2562d5f7&account_id=personal)は15,471,428bytes/7member/SHA256 0582d210f6b8559de716b1b3f251e0e771464ebcbc32bb947985dc317bc3b9a3。全結果semantic_units_boundary78_results.json。
+
+採否：9eの通常/次初期値を不採用。ここからの指示比較は旧9dcを研究比較先へ明示選定し、最新重みを自動使用しない。完了runは重複起動しない。通常HTTP/DB/RN/配置/Pod管理0、GPU維持、STRUCTURE_MAP_DELTA_NONE。本人基準の判断/選択・複数field/補足/比較・記録間再出現/変化・通常累積接続は未完。正式0/3・54.50％据置。
+
+<a id="analysis-semantic-v3-probe53-plan-20261103"></a>
+## 11/3 — 旧9dcで明記理由の指示対照を学習0/53生成で比較
+
+API58c47dd8d6512fdd7db5eb413a383925e8b31a87にsemantic_boundaries.v3を明示private opt-inとして追加。v2 systemを丸ごとprefixに保ち、連体＋結果でも筆者が理由接続として明記した節は原markerを保つこと、不明の理由問いを既知理由へ昇格しないことを追記し、既存public架空のて文脈例に対になるので理由例1を追加。privateRU/HQ/NV/RB原文は実装demoにコピーしない。user body・ROLE rule/strict/型/witness・既定/通常接続は不変。v3は別request identity/専用saved state、旧baseline/category/material/v2のmessages/ref/candidate保存bytesは固定。
+
+API変更2fileを全文/Git SHA読戻し後、同Jupyterの別clean checkoutへ固定し、既存quoted-parent/units/fields/cumulative/v1dの5suiteをCPUで一回実行、683passed/2skipped/exit0・114.78秒。既存Pydantic deprecation warning1、追加失敗0。coreでは新旧版の差替え拒否、同原文で新旧raw再bindの意味/保存reader境界、unknown全文rootの分離任意とtyped ROLE scopeを維持。tests/job/command/log/exit/setup原本を次ZIPへ保全する。
+
+研究比較先は9eではなく旧9dc/config4776をrootが明示選定。before53はboundary78 before53の同9dc/v2原本をsource/owner/snapshot/request/messages/raw/採否/保存artifactまで照合して再利用。新APIのv2 readerで旧fileをそのまま再読し、新v3への同raw再bindはidentity以外のgraph/text/diagram同一をCPUで確認するが、教師化/新生成評価には数えない。v3入力は同user/v2systemprefix・別ref、実tokenizer/context余裕を確認後だけ、学習0/NLL0/53新call/1load/900秒（外890+kill10、要求23秒/maxnew2048/context8192）を一回実行。0.58USD/hなら処理上限0.145USD、準備保持別。新9eを含む旧9対18file不変/compute空、終了後別CPU106保存応答の実beforev2/newafterv3を再読し、失敗時はpartial archive-only/再試行なし。
+
+コードsemantic_units_reason_v3_probe53.py（prepare/run/archive）とsemantic_units_reason_v3_probe53_supervisor.py、API checkout=/workspace/analysis-reason-v3-api-20261103、root=/workspace/analysis-reason-v3-probe53-20261103。CPU/GitHub全code読戻し/pytest exit0後だけ実行。再開はexit/report/manifest/collectionを確認して重複起動しない。新private profile/stateのみSTRUCTURE_MAP_DELTA_PRESENT、53生成比較はNONE、通常API/DB/RN/配置変更0。正式0/3・54.50％据置。旧版と各不採用重みを保持し、raw修復/受口緩和/通常昇格なし。本人基準/記録間関係/通常累積接続は残件。
