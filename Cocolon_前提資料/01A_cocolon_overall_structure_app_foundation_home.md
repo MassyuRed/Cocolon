@@ -6002,3 +6002,6 @@ API既存analysis_cumulative_service.py: with_action明示prepare/build/save/rel
 
 
 11/3のmaterial.v4 file地図：API既存semantic_admission.pyの人物引用/出力schema対照と新版state、analysis_cumulative_service.pyの同一request再束縛、既存test_analysis_model_material_v3.py/role_action.pyの互換/根拠/保存検証。trial/material_v4_pair12_probe.pyは既存9dcの一回比較用。新graph/作者/公開route/SQL/RN/依存0。STRUCTURE_MAP_DELTA_PRESENTは明示private版のみ。
+
+
+11/3最終API ded0586：上記4fileに加えintent_compiler.pyの既存suru否定operatorだけを修正、role_action既存testを拡張。trial/material_v4_pair12_replay.pyは保存12responseの生成なし再採用と元bytes保持を検証、material_v4_pair12_results.jsonは数値/採否の索引。新graph/作者/公開wire/SQL/RNなし。初回352pass/3skip、補修後199passは合算しない。

@@ -1926,3 +1926,8 @@ APIc9b990e0で4新stop/学習0/37.731331秒、2出力が正しいSELF/fact/past�
 ### 11/3 — 二欄の人物引用/元文脈 selected_material.v4
 
 API61e8aac2の既存semantic_admission.pyがv3継承の明示offline material.v4指示/request identity/専用stateを所有。analysis_cumulative_service.pyは既存build/save/reload/typed入口でv4を同じカテゴリ付き要求へ再束縛。strict/全文witness/唯一作者/normal ensure/公開wire/DB/RNは不変。test_analysis_model_material_v3.pyとtest_analysis_model_role_action.pyでv3/v4と旧v2/v4の source資格・肯否・保存非生成再読を照合。trial/material_v4_pair12_probe.pyは学習0/12生成/元原本保全の比較専用。[条件/再開点](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v4-pair12-plan-20261103)。private指示/保存版だけSTRUCTURE_MAP_DELTA_PRESENT、通常採用は未確定。
+
+
+### 11/3 — material.v4の実12生成と、suru否定の誤拒否修復後の再開点
+
+生成API61e8aac2/最終ded0586、v3候補1/6・typed0→v4候補6/6・typed2。元rawの正しい「しなかった」を、既存のnegative suru有限述語に完全一致するときだけintent_compiler.py:_model_written_role_action_proofで許し、12応答を生成0で再読。v4の3件がROLE肯否/ACTION肯否/カテゴリ仕事・生活ON/欄交換を保持し同じ2node・文章図・保存非生成再読へ到達。元成功2保存/候補7保存bytesは不変。肯定copula誤modifier2件（一方はACTION否定も誤modifier）と推測typed拒否を保持。7suite352passed/3DB依存skip、補修後2suite199passed、非合算。旧6版bytes保持。[全結果/原本/再開点](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v4-pair12-result-20261103)。通常採用false、private指示/stateと既存typed誤拒否修正だけSTRUCTURE_MAP_DELTA_PRESENT。別record集約には既存ROLE作者の一record witnessも対応が必要で、通常累積/本人補足/比較/IF・Savedは残件。

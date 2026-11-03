@@ -1,0 +1,44 @@
+{
+  "status": "COMPLETE_LIMITED_MATERIAL_V4_IMPROVEMENT_NOT_NORMAL_ADOPTION",
+  "generation_api_commit": "61e8aac228ce29573081a5eda87663195ac28afe",
+  "final_api_commit": "ded0586720df0c0d50d8838bcd391a19ca3eead5",
+  "new_calls": 12,
+  "synthetic_sources": 6,
+  "training_updates": 0,
+  "model_loads": 1,
+  "seconds": 102.91365138208494,
+  "all_stop": true,
+  "generation_candidates": {
+    "v3": 1,
+    "v4": 6
+  },
+  "generation_typed": {
+    "v3": 0,
+    "v4": 2
+  },
+  "cpu_replay_typed": {
+    "v3": 0,
+    "v4": 3
+  },
+  "cpu_replay_new_calls": 0,
+  "typed_saved_replays": 3,
+  "unchanged_previous_typed_saved_bytes": 2,
+  "unchanged_candidate_saved_bytes": 7,
+  "initial_tests": {
+    "passed": 352,
+    "skipped": 3,
+    "seconds": 41.62
+  },
+  "final_tests": {
+    "passed": 199,
+    "skipped": 0,
+    "seconds": 16.96
+  },
+  "tests_not_summed": true,
+  "normal_adoption": false,
+  "product_credit": 0,
+  "primary_outcome": "TECHNICAL_CREDIT",
+  "archive_library_file_id": "libfile_104f681dcef88191a43ff3bbd51a5758",
+  "archive_sha256": "a08c26b70125ad9feecf9c5220d9101ef1c51d71887ccccb30b38c61ef7d44e3",
+  "next": "existing modifier boundaries and teacher alignment; supplementary/multi-record/normal-cumulative connection remain unfinished"
+}

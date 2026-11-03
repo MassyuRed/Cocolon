@@ -2577,3 +2577,24 @@ APIの初回7suite761passed/2skipped/110.62秒、独立read-only指摘の根拠�
 Jupyter対象7suiteと旧6版bytes互換が成功したら、material_v4_pair12_probe.py（SHA256 f9fdbe27b3a5694713206f90789e7de1a929b29d6172e9d4f67a615a230fc2da）を新root=/workspace/analysis-material-v4-pair12-20261103で一回実行。旧9dc/config4776を研究比較先へ明示選定し、最新不採用2c01へ自動切替しない。6近接合成source（ROLE/ACTION肯否4、別カテゴリ/欄交換1、推測ROLE1）×selected_material.v3/v4の12call。学習/NLL0、1load、要求45秒/context8192/maxnew2048、全体600秒・外timeout620秒、処理上限約0.0967USD@前確認0.58USD/h（準備/回収/保持等別）。同じ題材の近接開発確認で、Mash教示/独立盲検/一般正解率ではない。単一版を全sourceへ均等に比較し、正解を見たprompt選択をしない。
 
 新rawを補修せず候補/typed gateへ渡し、同じgraphのカテゴリ・根拠・肯否・文章/図と、保存reader内7呼出禁止の再読を確認。全source/raw/採用/拒否をrootが全文照合して採否を別final reviewへ記録する。partialもfinallyでZIP/manifest保全、同root再起動禁止。完了した先行4/10比較・106更新は再実行しない。旧モデルbytes/通常HTTP/API/DB/RN/Render/Supabase/配置/Pod管理は変更しない。GPUレンタル維持。一般本人基準・本人補足のtyped意味採用・記録間/比較/通常累積・IF/Savedは残件。
+
+
+**11/3・分析の最新（第9回§119）：** material.v4の実12生成（6合成source×v3/v4、学習0/1load/102.913651秒）を完了。v3候補1/6・typed0、v4候補6/6・typed2。実rawで正しいsuru否定「しなかった」を誤拒否していた既存述語内条件だけAPI ded0586で補修し、同12rawを生成0で再読してv4の3件がカテゴリON/ROLE肯否/ACTION肯否/欄交換の2node・文章/図・保存再読へ到達。候補7保存bytesと元成功2保存bytesは同一。肯定copula誤modifier2件（一方はACTION否定も誤modifier）と推測typed拒否は残る。初回7suite352passed/3DB依存skip、補修後2suite199passed、重複非加算。旧6版messages/ref/保存bytes保持、全原本/再開点を保存済み。通常採用false、本人補足typed/記録間/通常累積/IF・Savedは残件。GPU2MiB/0％、レンタル維持。
+
+
+<a id="analysis-material-v4-pair12-result-20261103"></a>
+## 119. 11/3 — 二欄の人物引用/元文脈を改善し、実rawから肯定ROLEも文章・図へ接続
+
+生成API61e8aac2/script f9fdbe27、旧9dc/config4776を固定し、6近接合成source×selected_material.v3/v4の12新生成を全stop/学習NLL0/1load・102.913651382秒で完了。処理按分約0.016581USD@前確認0.58USD/h、準備/回収/保持別。prompt2262–2713tokensでcontext8192/新2048以内。旧版では二欄の混入・metadata出力・原文外actorが残り、引用候補1/6・typed0。v4は6/6で形式/欄内引用/候補非生成保存再読を通り、最初の2件は否定ROLE＋ACTION肯否を仕事カテゴリONの同じ2node/文章/図へ採用した。候補受理は意味の正解率ではない。
+
+別カテゴリ/欄交換の1件は、生出力が正しい「しなかった」を持つ一方、既存typed gateの許可表現がfull finiteか「なかった」だけで誤拒否していた。API ded0586の既存_model_written_role_action_proofへ、既存suru lemmaかつ実finiteがlemma[:-2]＋しなかったと完全一致する場合だけ同表現を追加した。既存の負極性・finite内/文末一致・元field引用を保ち、肯定/非suruの部分語/短い「し」/修飾語扱い/文末外の否定は拒否する。新語彙/一般文法/主体推定/通常gateの拡張やraw補修は行わない。
+
+補修後、同12responseを新requestへ偽装せず既存messages/ref/hashのままCPUで再読し、追加生成/load/学習0でv4の3件が2node・文章/図・保存reader内7呼出禁止の同一再読へ到達した。従来の2保存は実bytes同一、候補7保存も全bytes同一。新しい1件は本人の過去役割の肯定＋非行動、生活カテゴリONと欄交換を保持。3件ともSELF/fact/past/一原record/別field/同envelope、正しいscalar/UTF8/全文・literal SHA、辺0/反復0/欠3段＋routegap、図labelと文章と同artifactをrootと同環境read-only担当が全文照合。欄順を出来事の順や因果に変えない。
+
+v4の残る2事実sourceは「だった」をWRITTEN_MODIFIERとする誤りが続き、一方は行動の「なかった」もWRITTEN_MODIFIERへ誤分類。検査を緩めず未採用とした。推測sourceは両版で「かもしれない」を保持し、fact限定typedは正しく拒否した。3/6を一般精度へせず、肯定ROLE全般・全カテゴリ・未知入力の成立を主張しない。材料v4は研究候補のみ、通常prompt/重みの採用false。
+
+初回7suite352passed/3skipped/41.62秒（3skipはPostgreSQL WASM未構成）、補修後関連2suite199passed/16.96秒、両exit0・既存warning1。重複非加算、全backend/実DB/端末の合格ではない。修正前後の旧6profile messages/request_ref/保存bytesを同一確認。今回12生成以外のGPU0、終了時gen process内8938MiBの記録と、終了後の外query2MiB/0％/compute空を区別する。GPUレンタル維持、通常ensure/HTTP/公開DTO/DB/RN/Render/Supabase/配置/Pod管理0、TECHNICAL_CREDIT/product_credit0。
+
+[全原本・全読・補修後再読](https://chatgpt.com/library?file_id=libfile_104f681dcef88191a43ff3bbd51a5758&account_id=personal)は116060bytes/3member/SHA256 a08c26b70125ad9feecf9c5220d9101ef1c51d71887ccccb30b38c61ef7d44e3。生成元ZIP105470bytes/55member/SHA0c8c7afe5c2d6e0e2d37766daa16a5b13137a122d9a7e534217956975eefb573、CPU元ZIP19269bytes/11member/SHAa1feb6483b603212ebc654e4cad45e75b2817a1701f4985de4fbe5f83ef54f82。CRC/安全path/元manifest54＋10をPod外照合。PENDING表記を含む元reportと生出力は不変、最終採否は別final_review.jsonに記録した。
+
+再開はAPI ded0586・保存3graph・残る実誤modifierから。完了12生成/CPU再読/旧4/10/106更新を再実行せず、既存教師と当該意味境界を照合し改善する。別原recordの再出現は既存_proposition_meaning/signature/record別occurrencesを使う経路だが、現ROLE専用_safe_labelも一record/evidenceに限定されるためcompilerだけ広げない。本人補足typed・記録間/比較・通常累積・IF/Savedは未完。新しい理論/作者/一般理解の完成へ置き換えない。追加GPU条件は未固定。

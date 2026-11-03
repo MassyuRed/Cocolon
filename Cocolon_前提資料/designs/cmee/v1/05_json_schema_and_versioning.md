@@ -3331,3 +3331,6 @@ API dc05dc35。既存AnalysisModelQuotedParentUnitsInputのprompt_versionにsema
 ### 11/3 — analysis quoted-parent material.v4 private版
 
 selected_material.v4はselected_material.v3と同じ入力文脈/適格補足条件・quoted-parent出力schemaを使い、人物最小引用/metadata非出力の対照指示だけを追加。request identityへ版を含め、保存schemaをcocolon.cmee.analysis_model_units_quoted_parents_state.material.v4へ分離する。旧6版のmessages/ref/stateを維持し、新旧response/state混用を拒否。既存ROLE/ACTION graph/state/公開DTOは不変、normal ensureで自動選択しない。
+
+
+11/3 material.v4結果補足：最終API ded0586の有限suru否定修復は既存typed witnessの正しい原表現受理だけで、ROLE/ACTION保存schemaやidentityは不変。元2typed保存と7candidate保存を実bytes同一確認し、raw/responseを生成なしで3typedへ再読。新material.v4を通常既定へ採用せず、旧6版のmessages/ref/state bytesも保持。
