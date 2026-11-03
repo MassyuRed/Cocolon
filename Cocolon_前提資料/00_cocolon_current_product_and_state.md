@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-**11/3・分析の最新（第9回§110–111）：** v3の53比較は理由2例改善と新退行で未採用。旧78教材の意味境界に直接矛盾0を確認し、同JupyterのCPU監査は27.258231秒/exit0で全78・候補156/ROLE8保存再読・実tokenizer/78CPU tensorのprefix/EOS/label境界を通過。次は旧78source/target/106順・初期9dcを保持し、学習messagesだけv3へ揃える有限比較を固定。before53は完了v3実原本再利用、新after53/156NLL/106更新/2load/1200秒、準備成功後に一回だけ実行する。[原本/条件/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-plan-20261103)。現時点は実結果未確定、通常採用/HTTP/DB/RN/配置は不変、本人基準/記録間接続は未完。
+**11/3・分析の最新（第9回§110–111）：** v3の53比較は理由2例改善と新退行で未採用。旧78教材の意味境界に直接矛盾0を確認し、同JupyterのCPU監査は27.258231秒/exit0で全78・候補156/ROLE8保存再読・実tokenizer/78CPU tensorのprefix/EOS/label境界を通過。次は旧78source/target/106順・初期9dcを保持し、学習messagesだけv3へ揃える有限比較を固定。before53は完了v3実原本再利用、新after53/156NLL/106更新/2load/1200秒、CPU準備成功後に一回起動し、100.52秒時点で前測定78/更新27/1load。[原本/条件/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-plan-20261103)。現時点は実結果未確定、通常採用/HTTP/DB/RN/配置は不変、本人基準/記録間接続は未完。
 
 **11/3・分析の最新結果（第9回§100–102）：** 74教師監査後、旧74不変＋原文対照2を76教師/90更新/152NLL/50新stop/2load・641.971830秒/exit0で比較。NV04の結果重複/不明の親不正を改善し、R4/T4/追加本人2の10ROLE文章図を前後bytes同一で保持。50rawは46同一/4変化、HQ04理由誤分類は残りR08肯定過去copulaに誤modifier再発。strict候補47→49は意味率ではない。100保存非生成再読/元532memberの全bytes-SHAを確認・新重み9dcを保全、通常/次初期値は未採用。[結果・原本・再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-reason-unknown76-result-20261103)。全対象分離は現行必須でなく、次は理由の述語/不明併存差と複数文copula保持をCPUで切分け。通常HTTP/DB/RN/配置不変、本人基準/記録間関係/通常累積接続は未完。GPUレンタル維持、STRUCTURE_MAP_DELTA_NONE。
 

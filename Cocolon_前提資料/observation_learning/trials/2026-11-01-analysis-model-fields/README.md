@@ -1361,3 +1361,6 @@ before53は完了v3probe53 after53の同9dc/v3実request/raw/response/candidate5
 root=/workspace/analysis-aligned-v3-78-20261103、prepared=/workspace/analysis-aligned-v3-78-prepared-20261103。コードsemantic_units_aligned_v3_78_prepare.py/run.py/supervisor.py/collect.py、plan=semantic_units_aligned_v3_78_plan.json。比較は入力版の研究条件であり、他の同量control/未知盲検なしで単独因果・一般品質は認定しない。採否は理由4対照のmarker/parent/連体否定・独立不明、MD1/2 carrier・R01/R08copulaと既存53全保持/ROLE文章図により判断する。新RB2のNLLだけを生成再現としない。現時点は条件固定で実結果未確定。
 
 既存strict/typed witness/通常既定は緩めず、本人基準の役割/判断/選択・複数field/補足/比較・記録間再出現/変化と通常累積接続は残件。通常HTTP/DB/RN/配置/Pod管理0、GPUレンタル維持、STRUCTURE_MAP_DELTA_NONE/TECHNICAL_CREDIT/product_credit0、正式0/3・54.50％据置。Mashの現セッションで必要作業承認済み、逐次承認0。完了v3probe53/audit/旧78runを再起動しない。
+
+
+学習v3整合比較の実行checkpoint：GitHub301ed26eの全11fileを全文/Git SHA読戻し後、同Jupyterで4script SHA/ASTとAPI58c/tests0/CPUaudit69016/意味監査81dce4を照合しPID151895を一回起動。CPU prepare.exit0、78再束縛/実audit一致/旧source-target-order/実v3before53の全bytes再利用/tokenizer/保存readerを通過。固定plan SHAはf4e590de…、GPU100.524480秒時点で前測定78/更新27/1load/新call0・STARTED。最終結果未確定。終了後の別CPU106保存再読/全原本梱包はsupervisorに一回接続済み。再開は既存report/exit/collectionを先に読み、完了又は実行中rootを重複起動しない。
