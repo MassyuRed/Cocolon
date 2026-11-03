@@ -1,5 +1,5 @@
 {
-  "status": "RUNNING_TRAIN18_NO_RESTART",
+  "status": "COMPLETE_REVIEWED_LOCAL_TWO_FIELD_PROGRESS_NOT_ADOPTED",
   "api_commit": "ded0586720df0c0d50d8838bcd391a19ca3eead5",
   "root": "/workspace/analysis-material-v4-pair8-20261103",
   "pack_sha256": "30afde6a0735aac0b5f23e737b2b80c72e7dd65ba0cdbe4bc791886473f4bbf1",
@@ -14,5 +14,45 @@
   "planned_model_loads": 2,
   "normal_adoption": false,
   "product_credit": 0,
-  "next": "read existing reports only; do not restart"
+  "next": "Do not restart completed runs; retain a2e as bounded research candidate only; source-grounded quality work at listed remaining boundaries; no failed-raw teacher or strict relaxation",
+  "updates": 18,
+  "nll": 172,
+  "new_calls": 22,
+  "model_loads": 2,
+  "seconds": 409.70832407521084,
+  "before14_candidate": 12,
+  "after_same14_candidate": 13,
+  "before14_typed": 5,
+  "after_same14_typed": 7,
+  "before_pair6_typed": 3,
+  "after_pair6_typed": 5,
+  "new_transfer8_typed": 7,
+  "after22_candidate": 20,
+  "after22_typed": 14,
+  "next_training_initial_adoption": false,
+  "research_candidate_retained": true,
+  "weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59",
+  "config_sha256": "006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9",
+  "nll_mean_before": 0.028252394336578977,
+  "nll_mean_after": 0.019889176917532433,
+  "old78_nll_rows_increased": 37,
+  "library_file_id": "libfile_6c46418745e4819191709bbeb3b4bdf5",
+  "archive_sha256": "c95c37e01a9e35e959c40061b93ef1c4f6f7c2b3ac51221fca786d3d93eeccdd",
+  "archive_bytes": 15336063,
+  "original_manifest_verified": 333,
+  "full_review": {
+    "sources": 22,
+    "raws": 36,
+    "successful_projections": 19,
+    "candidate_replays": 32,
+    "typed_replays": 19,
+    "forbidden_saved_calls": 7
+  },
+  "remaining": [
+    "X03 source-external content quote",
+    "X05-X08 CONTENT_TARGET child omission",
+    "MD02 other-person negative-action carrier and NEG",
+    "YREASON01 reason/parent/unknown boundaries",
+    "user-answer typed/multi-record/comparison/normal cumulative/IF-Saved/general personal criteria"
+  ]
 }

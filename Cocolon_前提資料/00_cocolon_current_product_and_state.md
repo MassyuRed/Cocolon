@@ -272,4 +272,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 11/3・分析の次作業（weekly§122）：不採用224ab/完了106更新を繰り返さず、原78不変＋独立作成した二欄8教示（肯否×欄位置）をCPU検証し、旧9dcから新8/旧保持10の各1回＝18更新・86poolの172NLL・同14保持＋別語彙8のafter22生成/2load/900秒で比較する。元PV評価/失敗rawは教師化しない。通常採用false、STRUCTURE_MAP_DELTA_NONE。
 
 
-11/3実行checkpoint：CPU86teacher/新教示8＋非学習X8のstrict/typed2node/保存非生成再読と実tokenizer/元78identity、同14beforeの完全messages/ref/response一致を確認してexit0。新教示8の原文/targetをroot全文照合、同環境read-onlyがsource16/runnerを確認。pack SHA30afde6a0735aac0b5f23e737b2b80c72e7dd65ba0cdbe4bc791886473f4bbf1、runner732d7602、sourceplan1500481d。root=/workspace/analysis-material-v4-pair8-20261103のrun_startedを確認しtrain processが進行中。prepare/run再起動禁止、既存reportから継承する。完了/採否は未確定、通常採用false。
+11/3実行checkpoint：CPU86teacher/新教示8＋非学習X8のstrict/typed2node/保存非生成再読と実tokenizer/元78identity、同14beforeの完全messages/ref/response一致を確認してexit0。新教示8の原文/targetをroot全文照合、同環境read-onlyがsource16/runnerを確認。pack SHA30afde6a0735aac0b5f23e737b2b80c72e7dd65ba0cdbe4bc791886473f4bbf1、runner732d7602、sourceplan1500481d。root=/workspace/analysis-material-v4-pair8-20261103は18更新/172NLL/22生成まで全exit0で完了。prepare/run再起動禁止、最終結果を参照する。新a2eは局所研究候補、通常・次初期へ自動採用しない。
+
+
+11/3・分析の最新（weekly§123）：独立二欄8教示＋旧保持10の18更新/172NLL・22生成/2loadを完了。同じ二欄6例のtyped3→5（肯定ROLE/copulaとACTION NEGの誤modifier2例を修復）、旧成功5保存/projection bytes不変。非学習別語彙8は7件文章図へ到達、原文外CONTENT_TARGET1件は全体拒否、対象子欠落4件を保持。MD02の否定行動/YREASON01の理由・不明境界は旧未達のまま。a2eは研究候補保存、通常/次初期自動採用false。全22source/36raw/19成功文章図と保存再読を照合、全原本/再開点保存済み。API ded0586不変、STRUCTURE_MAP_DELTA_NONE、本人補足typed/記録間・比較/通常累積/IF・Saved等は残件。GPU2MiB/0％、レンタル維持。

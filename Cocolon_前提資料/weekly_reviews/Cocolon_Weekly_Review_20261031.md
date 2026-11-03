@@ -2650,4 +2650,24 @@ CPU成功・source/target全読・GitHub固定後にroot=/workspace/analysis-mat
 新root再prepare/runを禁止し、既存rootへ上書きせず、完了/partialの重み/raw/全log/manifestをfinally保全。root単一writer＋同環境read-only確認、実環境GPT-6/Codex Work、Mash本人教示/独立Pro検証ではない。Mashの残件/GPU/GitHub承認を継承し追加承認待ちなし。通常採用false、API/owner/graph型/作者/通常HTTP/DB/RN/配置/Pod管理変更0、STRUCTURE_MAP_DELTA_NONE。一般本人基準/補足typed/記録間・比較/通常累積/IF・Savedは残件、GPUレンタル維持。
 
 
-11/3実行checkpoint：CPU86teacher/新教示8＋非学習X8のstrict/typed2node/保存非生成再読と実tokenizer/元78identity、同14beforeの完全messages/ref/response一致を確認してexit0。新教示8の原文/targetをroot全文照合、同環境read-onlyがsource16/runnerを確認。pack SHA30afde6a0735aac0b5f23e737b2b80c72e7dd65ba0cdbe4bc791886473f4bbf1、runner732d7602、sourceplan1500481d。root=/workspace/analysis-material-v4-pair8-20261103のrun_startedを確認しtrain processが進行中。prepare/run再起動禁止、既存reportから継承する。完了/採否は未確定、通常採用false。
+11/3実行checkpoint：CPU86teacher/新教示8＋非学習X8のstrict/typed2node/保存非生成再読と実tokenizer/元78identity、同14beforeの完全messages/ref/response一致を確認してexit0。新教示8の原文/targetをroot全文照合、同環境read-onlyがsource16/runnerを確認。pack SHA30afde6a0735aac0b5f23e737b2b80c72e7dd65ba0cdbe4bc791886473f4bbf1、runner732d7602、sourceplan1500481d。root=/workspace/analysis-material-v4-pair8-20261103は18更新/172NLL/22生成まで全exit0で完了。prepare/run再起動禁止、最終結果を参照する。新a2eは局所研究候補、通常・次初期へ自動採用しない。
+
+
+<a id="analysis-material-v4-pair8-result-20261103"></a>
+## 123. 11/3 — 二欄の肯定役割/否定行動を改善、同じ6例のtyped3→5
+
+固定API ded0586/runner732d7602/sourceplan1500481d/pack30afde6a、旧9dc-config4776から新二欄8＋旧保持10の各1回＝18更新、86poolの前後172NLL・保存後非学習reload22生成/2loadを409.708324075秒で完了。2phase全exit0/全22stop。新N8は独立原文の教示で、元78のsource/targetは不変。新N8自身の生成をこの22へ加算しない。元before14は先行原本とのrequest/ref/messages/response/raw bytes完全一致で再利用、追加before生成0。
+
+同じ14sourceの候補12→13・typed5→7、うち二欄PV6のtypedは3→5。PV03/04のROLE「だった」の誤modifierが除かれ、PV04のACTION「なかった」が正しいNEGATIONへ戻った。旧成功T01/T02/PV01/PV02/PV05のraw・typed保存・graph/文章/図projection bytesは完全一致、ROLE肯否/ACTION肯否/仕事・生活/欄交換を保持。PV06の「かもしれない」とfact限定typed拒否は正しく維持する。近接開発の同source比較であり一般精度ではない。
+
+非学習の新X8は7件が同じ2node・文章/図へ到達。X03は否定原文にない「模型を作った」をCONTENT_TARGETへ出し、strictが応答全体を拒否した。修復・対象部分だけの採用は行わない。X05–08はCONTENT_TARGET子を生成しないが、既存の全文finite witnessから対象「模型」を証明する現proofで2nodeが成立する。モデルが全scopeを生成したとは数えない。X8はafterのみ、独立盲検/改善率ではない。N/XいずれもROLE肯否×ACTION肯否×欄位置の2×2×2を維持する。
+
+R08のcopula誤modifier除去、OA01の不明carrier復旧は個別改善。MD02の他者ACTION種別/NEG漏れ、YREASON01の理由marker・親子・不明範囲は旧before rawと同一で未達。HQ04の理由、SC01の他者否定と二不明はbeforeから保持。前節224abで起きたPV05/MD02退行と今回の旧未達を混同しない。同14のrawは10同一/4変更。14には学習既見が含まれ、YREASON01の原文は保持教示RU02と同じため未学習例とは扱わない。全53保持を今回検証したとは主張しない。
+
+rootと同環境read-only担当が全22source/36raw/成功19graph・文章・図を照合。候補32・typed19の保存再読は全MATCHED、reader内7呼出禁止を維持。全成功graphのrecord/別field/同envelope/カテゴリ、SELF/fact/past/肯否、scalar/UTF8/field・literal SHA、同artifactの文章図を確認。二欄graphは辺/反復0・欠3段＋routegap、一欄T01/T02は1node・欠4段を保持し、欄順を因果へ変えない。新商品owner/型/作者は追加しない。
+
+新adapter a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59/config006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9は局所改善の研究候補として原本保存、通常・次学習初期へ自動採用しない。元9dc/元78は不変。平均NLL0.028252394336578977→0.019889176917532433でも旧78中37rowは増加しており、意味の退行件数/一般品質へ換算しない。形式candidate20/22・typed14/22も一般正解率ではない。
+
+[全原本・全読・最終採否](https://chatgpt.com/library?file_id=libfile_6c46418745e4819191709bbeb3b4bdf5&account_id=personal)（15336063bytes/2member/SHA256 c95c37e01a9e35e959c40061b93ef1c4f6f7c2b3ac51221fca786d3d93eeccdd）。元ZIP15506283bytes/334member/SHA47e50fe58aa02b4d78026c2c460ed95dc6c659f3af831a0df6e8e1cd05a2d086、CRC/安全path/全333manifest SHA/weights・config/元78identity/再利用14bytesをPod外検証。PENDING表記を含む元report/raw/保存重みは改変せず、別final_reviewに採否を保存した。処理按分約0.066009USD@前確認0.58USD/h（準備/回収/保持別）、終了後GPU2MiB/0％/compute空、レンタル維持。
+
+再開はこの2つの新PV成功graph/研究候補a2e/原二欄8教示と、X03の原文外CONTENT_TARGET・四つの対象子欠落、MD02の他者否定行動、YREASON01の理由/不明境界から。完了18/106更新・今回/先行生成を繰り返さず、失敗rawを教師化せず、既存原教示・材料sourceを根拠に品質を扱う。strict/typed条件を緩めてモデル誤りを隠さない。本人補足typed・記録間/比較・通常累積/IF・Saved・一般本人基準は引き続き残件。API/通常ensure/prompt/HTTP/公開DTO/DB/RN/Render/Supabase/配置/Pod管理変更0、STRUCTURE_MAP_DELTA_NONE、局所TECHNICAL_CREDIT/product_credit0、正式受入れ未完。

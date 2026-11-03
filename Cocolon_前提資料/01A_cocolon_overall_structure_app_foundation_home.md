@@ -6014,3 +6014,6 @@ API既存analysis_cumulative_service.py: with_action明示prepare/build/save/rel
 
 
 11/3 trial/material_v4_pair8_sources.jsonは独立16source（教示8/非学習近接8）と18更新順、material_v4_pair8_trial.pyは旧78保全のCPU86/18更新/172NLL/同14before再利用/after22/保存再読/原本保全を所有する研究helper。新商品owner/型/作者/通常route追加なし、STRUCTURE_MAP_DELTA_NONE。weekly§122。
+
+
+11/3 trial/material_v4_pair8_results.jsonは完了18更新/22生成・同6typed3→5・局所研究候補a2e・未達source/全原本参照の索引へ更新。実装/通常owner/型/作者変更なし、API ded0586不変、STRUCTURE_MAP_DELTA_NONE。weekly§123。
