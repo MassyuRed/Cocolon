@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-**11/3・分析の最新（第9回§117）：** APIc9b990e0の明記ROLE＋同原記録の単純SELF過去ACTION接続を実4Bで確認。学習0/4新stop/1load/37.731331秒、今回2件が正しい肯否の2node/文章/図・保存非生成再読へ到達、他2件はROLE原文外のactor引用でstrict拒否。辺0/反復0/欠3段＋routegap。実ROLEは否定形のみ、legacy semantic版のためカテゴリOFF（ONはCPU検証のみ）。成功promptは条件で異なり、一般品質/通常採用へ換算しない。初回761passed/2skipped、根拠ID補修後151passed、原本/全読/再開点を保存。先行material v3の10生成は別記録混入等で通常不採用を維持。次は二欄の主体/肯定ROLE/カテゴリ文脈の品質を整え、本人補足/記録間/通常累積への既存残件を進める。追加GPU条件未固定、通常API/DB/RN/配置不変。
+**11/3・分析の最新（第9回§118）：** API61e8aac2へ明示offline selected_material.v4を実装。v3の本人原入力/適格補足・カテゴリ/感情/記録日時を保ち、人物の最小逐語引用と文脈metadataを出力へ複写しない対照例を追加。旧6版・strict・ROLE/ACTION全文witness・通常経路を維持し、新request identity/private material.v4 stateへ分離。関連7suite/旧6版bytesをJupyter検証中。成功後は旧9dc/config4776・学習0・6合成source×v3/v4=12新生成/1load/最大600秒・処理上限約0.0967USD@前確認0.58USD/h（準備/保持等別）で肯否/欄交換/カテゴリON/推測拒否を比較。一般品質・通常採用は未確定、既完了4/10/106更新は再実行しない。
 
 **11/3・分析の最新結果（第9回§100–102）：** 74教師監査後、旧74不変＋原文対照2を76教師/90更新/152NLL/50新stop/2load・641.971830秒/exit0で比較。NV04の結果重複/不明の親不正を改善し、R4/T4/追加本人2の10ROLE文章図を前後bytes同一で保持。50rawは46同一/4変化、HQ04理由誤分類は残りR08肯定過去copulaに誤modifier再発。strict候補47→49は意味率ではない。100保存非生成再読/元532memberの全bytes-SHAを確認・新重み9dcを保全、通常/次初期値は未採用。[結果・原本・再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-reason-unknown76-result-20261103)。全対象分離は現行必須でなく、次は理由の述語/不明併存差と複数文copula保持をCPUで切分け。通常HTTP/DB/RN/配置不変、本人基準/記録間関係/通常累積接続は未完。GPUレンタル維持、STRUCTURE_MAP_DELTA_NONE。
 

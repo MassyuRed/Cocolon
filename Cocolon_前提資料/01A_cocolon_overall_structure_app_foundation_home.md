@@ -5999,3 +5999,6 @@ API既存analysis_cumulative_service.py: with_action明示prepare/build/save/rel
 
 
 11/3上記ROLE＋ACTIONの最終sourceはAPIc9b990e0。5file checkpoint後にcompiler/test2fileで根拠範囲IDを補修。実4生成/2typed graph/文章図/保存をtrial role_action4_results.jsonへ記録。初回7suite761passed/2skipped、補修後の関連2suite151passedとの合算なし。通常route/SQL/RN/新graph型/作者追加0。
+
+
+11/3のmaterial.v4 file地図：API既存semantic_admission.pyの人物引用/出力schema対照と新版state、analysis_cumulative_service.pyの同一request再束縛、既存test_analysis_model_material_v3.py/role_action.pyの互換/根拠/保存検証。trial/material_v4_pair12_probe.pyは既存9dcの一回比較用。新graph/作者/公開route/SQL/RN/依存0。STRUCTURE_MAP_DELTA_PRESENTは明示private版のみ。

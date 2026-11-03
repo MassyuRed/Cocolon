@@ -2562,3 +2562,18 @@ API348b641c/runner e4f4bf55・旧9dc/config4776を固定し、学習0/NLL0/1load
 APIの初回7suite761passed/2skipped/110.62秒、独立read-only指摘の根拠範囲IDを補修後の関連2suite151passed/14.62秒。重複加算しない。最終APIの既存workflow_runs/statusesは取得時空、新CI成功を主張せずJupyterの実検証として記録する。STRUCTURE_MAP_DELTA_PRESENTはprivate二欄意味接続/保存scopeだけ、通常ensure/HTTP/DB/RN/Render/Supabase/配置/Pod管理0。新通常prompt/学習重み採用0、GPUレンタル維持、TECHNICAL_CREDIT/product_credit0。
 
 再開はこのAPI/保存2graphから。完了4/先行10/旧106更新を再実行せず、二欄の主体/肯定ROLE/カテゴリ文脈の品質を既存材料と教示へ照合して改善し、本人補足・記録間・比較・通常累積接続の残件へ広げる。追加GPU条件は未固定。一般の判断基準/選択理解・IF/Saved・本人端末/正式受入れは未完。
+
+
+**11/3・分析の最新（第9回§118）：** API61e8aac2へ明示offline selected_material.v4を実装。v3の本人原入力/適格補足・カテゴリ/感情/記録日時を保ち、人物の最小逐語引用と文脈metadataを出力へ複写しない対照例を追加。旧6版・strict・ROLE/ACTION全文witness・通常経路を維持し、新request identity/private material.v4 stateへ分離。関連7suite/旧6版bytesをJupyter検証中。成功後は旧9dc/config4776・学習0・6合成source×v3/v4=12新生成/1load/最大600秒・処理上限約0.0967USD@前確認0.58USD/h（準備/保持等別）で肯否/欄交換/カテゴリON/推測拒否を比較。一般品質・通常採用は未確定、既完了4/10/106更新は再実行しない。
+
+
+<a id="analysis-material-v4-pair12-plan-20261103"></a>
+## 118. 11/3 — 二欄の主体引用と元文脈の改善を同じ既存graphで比較
+
+前回実4生成の2拒否は所有格ROLEの原文にない「私は」、先行material v3はmetadata複写も含んだ。原因を指示だけに断定せず、API61e8aac2の新opt-in selected_material.v4で既存v3へ対照例を足す。原入力/適格補足の分離、本人カテゴリ/感情/記録日時、理由境界はv3のまま。人物の最小逐語引用、助詞/copulaと修飾の区別、field/unitsだけの出力schemaを示す。例の語は評価の連絡係/資料と別で、既存typed動詞/CONTENT_TARGETのnoun条件へ照合する。strict・compiler・唯一作者・通常ensureを変更しない。旧6版のmessages/request_ref/保存bytesを実固定前後比較、新material.v4 stateを旧版へ混用させない。根拠外actorやmetadataコピーを拒否する検査は維持する。
+
+直接の商品未完了は「本人の役割と行動を、カテゴリ文脈と正しい主体/肯否を保って同じ文章・図へ採用する品質」。root単一writer＋同環境read-only担当。現環境はGPT-6/Codex Workであり、Pro/Ultra独立検証を主張しない。Mashの本セッションの残件/GitHub/GPU実行承認を継承し、追加承認待ちを作らない。System Contextの索引未完成は既存状態、fresh PR30/API PR3の原本を使用する。
+
+Jupyter対象7suiteと旧6版bytes互換が成功したら、material_v4_pair12_probe.py（SHA256 f9fdbe27b3a5694713206f90789e7de1a929b29d6172e9d4f67a615a230fc2da）を新root=/workspace/analysis-material-v4-pair12-20261103で一回実行。旧9dc/config4776を研究比較先へ明示選定し、最新不採用2c01へ自動切替しない。6近接合成source（ROLE/ACTION肯否4、別カテゴリ/欄交換1、推測ROLE1）×selected_material.v3/v4の12call。学習/NLL0、1load、要求45秒/context8192/maxnew2048、全体600秒・外timeout620秒、処理上限約0.0967USD@前確認0.58USD/h（準備/回収/保持等別）。同じ題材の近接開発確認で、Mash教示/独立盲検/一般正解率ではない。単一版を全sourceへ均等に比較し、正解を見たprompt選択をしない。
+
+新rawを補修せず候補/typed gateへ渡し、同じgraphのカテゴリ・根拠・肯否・文章/図と、保存reader内7呼出禁止の再読を確認。全source/raw/採用/拒否をrootが全文照合して採否を別final reviewへ記録する。partialもfinallyでZIP/manifest保全、同root再起動禁止。完了した先行4/10比較・106更新は再実行しない。旧モデルbytes/通常HTTP/API/DB/RN/Render/Supabase/配置/Pod管理は変更しない。GPUレンタル維持。一般本人基準・本人補足のtyped意味採用・記録間/比較/通常累積・IF/Savedは残件。

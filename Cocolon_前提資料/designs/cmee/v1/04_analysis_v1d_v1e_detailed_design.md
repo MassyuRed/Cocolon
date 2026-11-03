@@ -1921,3 +1921,8 @@ APIc9b990e0の明示with_action=Trueだけが、1original/補足0/非空memo＋m
 ### 11/3 — 上記ROLE＋ACTIONの実4B結果と現在の再開点
 
 APIc9b990e0で4新stop/学習0/37.731331秒、2出力が正しいSELF/fact/pastのROLE否定＋ACTION肯否の2node・文章/図・非生成保存再読へ到達。2出力はROLE原文外の「私は」でstrict拒否。辺0/欠3段＋routegapを保持。実ROLEは否定形のみ、legacy semantic v2/v3でカテゴリOFF、カテゴリON/欄交換/ROLE肯否はCPU検証のみ。単一prompt/一般品質/通常採用は未成立。初回761pass/2skipと根拠ID補修後151passは合算しない。[全結果/原本/再開点](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-role-action4-result-20261103)。次は二欄の主体/肯定ROLE/カテゴリ文脈の品質から既存残件へ。通常ensure/HTTP/DB/RN/配置不変、private意味接続だけSTRUCTURE_MAP_DELTA_PRESENT。
+
+
+### 11/3 — 二欄の人物引用/元文脈 selected_material.v4
+
+API61e8aac2の既存semantic_admission.pyがv3継承の明示offline material.v4指示/request identity/専用stateを所有。analysis_cumulative_service.pyは既存build/save/reload/typed入口でv4を同じカテゴリ付き要求へ再束縛。strict/全文witness/唯一作者/normal ensure/公開wire/DB/RNは不変。test_analysis_model_material_v3.pyとtest_analysis_model_role_action.pyでv3/v4と旧v2/v4の source資格・肯否・保存非生成再読を照合。trial/material_v4_pair12_probe.pyは学習0/12生成/元原本保全の比較専用。[条件/再開点](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v4-pair12-plan-20261103)。private指示/保存版だけSTRUCTURE_MAP_DELTA_PRESENT、通常採用は未確定。

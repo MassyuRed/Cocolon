@@ -3326,3 +3326,8 @@ API dc05dc35。既存AnalysisModelQuotedParentUnitsInputのprompt_versionにsema
 ## 11/3 — written role + actionのprivate保存版
 
 新型0。既存build/serialize/reload_cumulative_written_role_mapと意味ownerのwith_action=Trueだけを明示選択。state=cocolon.cmee.analysis_model_written_role_action_state.v1、file=cocolon.cmee.cumulative_written_role_action_file.v1、artifact salt=analysis_model_written_role_action.v1。既存ROLE v1保存/ID/既定は不変。ObservedGraph2node/辺0/3欠段＋routegapのexact source-witnessを保存readerで検証し、新旧stateをラベル交換して読まない。公開DTO/SQL/RNは不変。
+
+
+### 11/3 — analysis quoted-parent material.v4 private版
+
+selected_material.v4はselected_material.v3と同じ入力文脈/適格補足条件・quoted-parent出力schemaを使い、人物最小引用/metadata非出力の対照指示だけを追加。request identityへ版を含め、保存schemaをcocolon.cmee.analysis_model_units_quoted_parents_state.material.v4へ分離する。旧6版のmessages/ref/stateを維持し、新旧response/state混用を拒否。既存ROLE/ACTION graph/state/公開DTOは不変、normal ensureで自動選択しない。
