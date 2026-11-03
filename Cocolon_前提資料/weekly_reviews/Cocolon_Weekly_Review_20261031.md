@@ -2482,4 +2482,7 @@ NV04は結果root重複とWRITTEN_UNKNOWNの親不正という意味/形式未�
 
 ## 107. 11/3 — private指示v3と旧9dcによる学習0/53比較を固定
 
-[条件/コード/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-v3-probe53-plan-20261103)。API58cへv2systemprefix＋理由接続/理由問いの区別/連体理由public対照1をv3明示private版として追加。旧4版messages/ref/state保存bytesと既定/ROLE/strict/witnessを保持。2file読戻し後、同Jupyter別checkoutで既存5suiteをCPU実行し683passed/2skipped/114.78秒/exit0、追加失敗0。旧9dc/config4776を研究比較先に明示選定（退行9eを自動使用しない）、before53は78before53の同9dc/v2を厳密再利用。新v3after53/学習0/NLL0/1load/900秒、CPU入力/保存互換/tokenizer成功後に一回実行。現時点結果未確定。旧18file不変、別CPU106保存再読/全原本、失敗partial保全/再試行なし。private profile/stateだけSTRUCTURE_MAP_DELTA_PRESENT、生成比較はNONE。通常HTTP/DB/RN/配置0、GPU維持、正式0/3・54.50％据置。
+[条件/コード/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-v3-probe53-plan-20261103)。API58cへv2systemprefix＋理由接続/理由問いの区別/連体理由public対照1をv3明示private版として追加。旧4版messages/ref/state保存bytesと既定/ROLE/strict/witnessを保持。2file読戻し後、同Jupyter別checkoutで既存5suiteをCPU実行し683passed/2skipped/114.72秒/exit0、追加失敗0。旧9dc/config4776を研究比較先に明示選定（退行9eを自動使用しない）、before53は78before53の同9dc/v2を厳密再利用。新v3after53/学習0/NLL0/1load/900秒、CPU入力/保存互換/tokenizer成功後に一回実行。現時点結果未確定。旧18file不変、別CPU106保存再読/全原本、失敗partial保全/再試行なし。private profile/stateだけSTRUCTURE_MAP_DELTA_PRESENT、生成比較はNONE。通常HTTP/DB/RN/配置0、GPU維持、正式0/3・54.50％据置。
+
+
+§107実行checkpoint：Cocolon29ab5ae1の全9file読戻しとAPI58c CPU5suite exit0後、同Jupyterで2script SHA/AST一致を確認して一回起動。CPU prepare.exit0、旧before53のsource/ref/messages/raw/saved採否/provenance/9dc lineage、新旧再bind意味全一致/保存reader/tokenizer成功。GPU50.170823秒時点5call/1load/学習0、最終未確定。終了後106真保存応答再読/全原本は自動一回で、CPUshadowを生成・教師に数えない。

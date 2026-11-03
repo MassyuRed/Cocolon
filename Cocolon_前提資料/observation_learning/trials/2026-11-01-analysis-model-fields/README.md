@@ -1302,8 +1302,11 @@ NV04はfull独立不明rootと理由問いmarkerへ引用粒度が変わった�
 
 API58c47dd8d6512fdd7db5eb413a383925e8b31a87にsemantic_boundaries.v3を明示private opt-inとして追加。v2 systemを丸ごとprefixに保ち、連体＋結果でも筆者が理由接続として明記した節は原markerを保つこと、不明の理由問いを既知理由へ昇格しないことを追記し、既存public架空のて文脈例に対になるので理由例1を追加。privateRU/HQ/NV/RB原文は実装demoにコピーしない。user body・ROLE rule/strict/型/witness・既定/通常接続は不変。v3は別request identity/専用saved state、旧baseline/category/material/v2のmessages/ref/candidate保存bytesは固定。
 
-API変更2fileを全文/Git SHA読戻し後、同Jupyterの別clean checkoutへ固定し、既存quoted-parent/units/fields/cumulative/v1dの5suiteをCPUで一回実行、683passed/2skipped/exit0・114.78秒。既存Pydantic deprecation warning1、追加失敗0。coreでは新旧版の差替え拒否、同原文で新旧raw再bindの意味/保存reader境界、unknown全文rootの分離任意とtyped ROLE scopeを維持。tests/job/command/log/exit/setup原本を次ZIPへ保全する。
+API変更2fileを全文/Git SHA読戻し後、同Jupyterの別clean checkoutへ固定し、既存quoted-parent/units/fields/cumulative/v1dの5suiteをCPUで一回実行、683passed/2skipped/exit0・114.72秒。既存Pydantic deprecation warning1、追加失敗0。coreでは新旧版の差替え拒否、同原文で新旧raw再bindの意味/保存reader境界、unknown全文rootの分離任意とtyped ROLE scopeを維持。tests/job/command/log/exit/setup原本を次ZIPへ保全する。
 
 研究比較先は9eではなく旧9dc/config4776をrootが明示選定。before53はboundary78 before53の同9dc/v2原本をsource/owner/snapshot/request/messages/raw/採否/保存artifactまで照合して再利用。新APIのv2 readerで旧fileをそのまま再読し、新v3への同raw再bindはidentity以外のgraph/text/diagram同一をCPUで確認するが、教師化/新生成評価には数えない。v3入力は同user/v2systemprefix・別ref、実tokenizer/context余裕を確認後だけ、学習0/NLL0/53新call/1load/900秒（外890+kill10、要求23秒/maxnew2048/context8192）を一回実行。0.58USD/hなら処理上限0.145USD、準備保持別。新9eを含む旧9対18file不変/compute空、終了後別CPU106保存応答の実beforev2/newafterv3を再読し、失敗時はpartial archive-only/再試行なし。
 
 コードsemantic_units_reason_v3_probe53.py（prepare/run/archive）とsemantic_units_reason_v3_probe53_supervisor.py、API checkout=/workspace/analysis-reason-v3-api-20261103、root=/workspace/analysis-reason-v3-probe53-20261103。CPU/GitHub全code読戻し/pytest exit0後だけ実行。再開はexit/report/manifest/collectionを確認して重複起動しない。新private profile/stateのみSTRUCTURE_MAP_DELTA_PRESENT、53生成比較はNONE、通常API/DB/RN/配置変更0。正式0/3・54.50％据置。旧版と各不採用重みを保持し、raw修復/受口緩和/通常昇格なし。本人基準/記録間関係/通常累積接続は残件。
+
+
+v3比較の実行checkpoint：Cocolon29ab5ae1の全9fileを全文/Git SHA読戻し後、同Jupyterへ2scriptをSHA/AST照合しAPI58c/tests.exit0で一回起動。CPU prepare.exit0、旧53の真のv2原本/provenance/9dc系譜・新API再読・v3同raw再bindの全意味内容一致（明示identity差だけ除外）・保存reader5呼出禁止/tokenizer成功。GPU50.170823秒時点5call/1load/学習0/NLL0・STARTED、最終結果未確定。終了後の別CPU106保存再読/partial原本保全はsupervisorへ一回接続済み。

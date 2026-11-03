@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-**11/3・分析の最新結果と次比較（第9回§104–107）：** 78教師/106更新/53新生成を完了しR08誤copula修飾は除去、正常ROLE10を保持。一方旧例で原文外主体/語・不明scope誤りが増え、候補52→46/53・旧22参照再現22→19で新9eは通常/次初期値不採用。全53/106保存再読と元555memberを照合・保全。次は旧9dcを明示研究比較先として、理由のpublic対照例を加えたv3で学習0/53新生成を固定。API58cの旧版互換/既存5suiteは683passed/2skip。CPU/GitHub確認後一回実行・結果未確定。[結果/原本/次条件](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-v3-probe53-plan-20261103)。private v3/stateのみSTRUCTURE_MAP_DELTA_PRESENT、通常接続/配置不変、本人基準/記録間接続は未完。
+**11/3・分析の最新結果と次比較（第9回§104–107）：** 78教師/106更新/53新生成を完了しR08誤copula修飾は除去、正常ROLE10を保持。一方旧例で原文外主体/語・不明scope誤りが増え、候補52→46/53・旧22参照再現22→19で新9eは通常/次初期値不採用。全53/106保存再読と元555memberを照合・保全。次は旧9dcを明示研究比較先として、理由のpublic対照例を加えたv3で学習0/53新生成を固定。API58cの旧版互換/既存5suiteは683passed/2skip。CPU53旧版再読/新版再bind意味一致/tokenizer全成功後に一回実行中・結果未確定。[結果/原本/次条件](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-v3-probe53-plan-20261103)。private v3/stateのみSTRUCTURE_MAP_DELTA_PRESENT、通常接続/配置不変、本人基準/記録間接続は未完。
 
 **11/3・分析の最新結果（第9回§100–102）：** 74教師監査後、旧74不変＋原文対照2を76教師/90更新/152NLL/50新stop/2load・641.971830秒/exit0で比較。NV04の結果重複/不明の親不正を改善し、R4/T4/追加本人2の10ROLE文章図を前後bytes同一で保持。50rawは46同一/4変化、HQ04理由誤分類は残りR08肯定過去copulaに誤modifier再発。strict候補47→49は意味率ではない。100保存非生成再読/元532memberの全bytes-SHAを確認・新重み9dcを保全、通常/次初期値は未採用。[結果・原本・再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-reason-unknown76-result-20261103)。全対象分離は現行必須でなく、次は理由の述語/不明併存差と複数文copula保持をCPUで切分け。通常HTTP/DB/RN/配置不変、本人基準/記録間関係/通常累積接続は未完。GPUレンタル維持、STRUCTURE_MAP_DELTA_NONE。
 
