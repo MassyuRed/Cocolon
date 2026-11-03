@@ -1063,3 +1063,6 @@ Mashが既に申し出ている観測会は、この読み取り方の教材を�
 初回scopeは1record/非空field1/補足なし、明記SELFの「の役割は」関係と既存名詞文法で読める役割名/過去肯否copulaの全文。原文内にあるだけの誤qualifierは採らず、SELFと実否定operatorのexactを求める。保存は元response/guard/版とgraph/文章/図/coverageを束縛し、Engine/compiler/authorなしで復元・検証する。scope外は未解析を隠すため切り捨てない。
 
 実4B R02の役割否定が旧mapped0/unparsed1→新mapped1/unparsed0、4段gap/辺0。対応範囲の他3件はモデル不適合。別題材4対比はCPUのみで、新しい一般判断/選択・記録間関係の成功ではない。具体owner/保存型は[04現行差分](../designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#analysis-written-role-vertical-20261103)、[schema05](../designs/cmee/v1/05_json_schema_and_versioning.md#analysis-written-role-vertical-20261103)、[全結果](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-written-role-result-20261103)へ。
+
+
+11/3次の隔離比較：上記typed-role受口は変更せず、CPU確認済み肯否T4を旧70へ加え、明示研究用a5eafe/9bcから74教材/86更新を一回実施する条件を固定。旧78順・最後18を保持し、a5eafeのbefore42を同一性照合で再利用、新50生成/148測定/900秒。通常owner/型/HTTP/DB/RNは不変、STRUCTURE_MAP_DELTA_NONE。[実条件と重複起動防止の再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-written-role74-plan-20261103)。

@@ -2354,3 +2354,11 @@ combination70の原本/112重みと新比較の48原本は外部bytes/SHA照合�
 初回testのカテゴリ版保存2件失敗をpayload変換の最小修正で直し、同5fileは657PASS/2SKIP/既存warning1（110.82秒）。別CPU processでR02実fileの同一artifactをEngine/compiler/author禁止で再読、7拒否も維持。公開sourceの初回転送Killedは実GPU前・script/source/pid/report0と分離し、原因推測/重複GPUなし。全原本は[保存済み](https://chatgpt.com/library?file_id=libfile_9e1dc5ec3ad0819195d0549b96da7de9&account_id=personal)（90,029bytes/71member/SHA67259224…）。
 
 旧70教師のROLE1/今回構文0と実不適合を踏まえ、別sourceの肯定2/否定2をstrict→typed map→実file非生成再読→実tokenizerまでCPU確認。新4全文は旧70/評価34/今回8と一致0、華恋合成でMash教示/盲検ではない。旧70/重み不変、新生成/学習0、次の74教材学習条件は未選定。再開はこの4対比と旧70保持による4B役割出力改善へ。本人基準の判断/選択、記録間再出現/変化、複数field/補足/比較・通常累積保存の一般接続は残件。明示offline typed-roleのみSTRUCTURE_MAP_DELTA_PRESENT、primary TECHNICAL_CREDIT/product_credit0。
+
+
+<a id="analysis-written-role74-plan-20261103"></a>
+## 93. 11/3 — 新役割4対比と旧70保持の一回学習を固定
+
+[条件・実装・再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-written-role74-plan-20261103)。前回typed-role1件到達と、対応3件のモデル不適合を引き継ぐ。原source由来の肯定2/否定2を追加し、研究用初期a5eafe/9bcから旧70辞書/旧78順を不変部分列＋T4各2で74教師/86更新。旧最後18を保持する。beforeはa5eafeのafter34＋役割8を同一性照合で42再利用し、T4新before4＋全46after＝新50生成/3load/148測定。NLL比較先はa5eafeのafter70で、89ba初期やCE68beforeを使わない。
+
+plain CE/LR1e-5/clip1/seed20261111、要求23秒、内部900秒/外側890+10秒。前回確認単価なら処理上限按分$0.145、準備/回収/保持別。CPUで現API88078のstrict/実file再読/tokenizerと原本を確認し、GitHub固定・読戻し後に一回実行する。再試行/追加epoch/受口緩和/出力補修なし。before42のUUID単独照合はしない。教示再現/既見診断を一般品質へ換算しない。通常source/API/DB/RN/稼働/配置/Pod管理不変、STRUCTURE_MAP_DELTA_NONE（隔離比較のみ）。

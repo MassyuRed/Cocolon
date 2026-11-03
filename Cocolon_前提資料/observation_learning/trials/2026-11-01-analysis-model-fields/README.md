@@ -1068,3 +1068,19 @@ API [88078cdb](https://github.com/MassyuRed/mashos-api/commit/88078cdb3cf19da0e9
 [private全原本](https://chatgpt.com/library?file_id=libfile_9e1dc5ec3ad0819195d0549b96da7de9&account_id=personal)：90,029bytes/71member/SHA256 `67259224d9404c9b892c4c4c0fb1ccd23459a2a2817474479ea2d4d5f2a7e44a`。GPU54原本＋CPU10原本＋helper/log4原本を全bytes/SHA照合し、review/結果/manifestを保存。新重みは生成せずa5eafe/9bcは既保存原本を継承する。
 
 再開時は本節/結果JSON/CPU4原本と /workspace/written-role8.exit、/workspace/written-role4-cpu.exit を先に確認し、完了runを重複起動しない。次の直接作業は新4肯否対比と旧70保持による4Bの役割出力改善を具体化すること。一般の本人基準の判断/選択、複数field/補足/比較、記録間再出現/変化、通常累積保存/本番接続は残件。STRUCTURE_MAP_DELTA_PRESENTは明示offline typed-role縦接続のみ。primary TECHNICAL_CREDIT/product_credit0、同環境read-only確認は独立Pro/Ultra/human受入れではない。
+
+
+<a id="analysis-written-role74-plan-20261103"></a>
+## 11/3 — 肯否4教材を加え、旧70保持と役割の表示到達を一回比較
+
+Mashの分析残件続行/必要作業承認済み/GPU・Jupyter使用/GitHub checkpoint指示を引き継ぐ。前回は役割対象4件中の否定1件だけがtyped mapへ届き、肯定・二重ROLE・原文外actorの3件が不適合。原sourceからCPU確認済みの肯定2/否定2（モデルrawを教師化しない）で不足を教え、既存意味保持も同時に読む。本人基準の判断/選択・記録間関係の一般完成は引き続き残件。
+
+研究用初期値a5eafe34/config9bc9f1f3をrootが明示選定し、保存重みから新しい一回の学習を始める。中断地点への厳密resume/optimizer再開でも通常採用でもない。旧70教師辞書/元78更新順・各曝露を不変部分列で保持し、元順10/20/30/40/45/50/55/60直後にT01/T02/T03/T04/T01/T02/T03/T04を挿入、74教師/86更新。旧最後18（最後14を含む）は順まで同一。新4source/targetは前回CPU確認原本、旧teacherの同IDと役割artifact IDを混同せず、unit候補IDをCPU保存stateから別取得する。
+
+beforeは同じa5eafeのcombination70 after34とwritten-role8の8を、owner＋snapshot全体/実messages/ref/raw/初期重み/configで照合して42件再利用する。旧89ba beforeは使用しない。新T4 before4＋全46after（旧34＋既見R8＋教示T4）だけ新生成＝50call/3load。T4は教示再現、R8/旧34は既見開発診断/旧保持で、未知盲検/一般意味率ではない。R8/T4は元候補受口とtyped-role受口・同一文章/図/file非生成再読まで両方見る。旧70/NLL基準はa5eafeのcombination70 after70と更新前最大差<=1e-6、新4の初回lossは別測定。
+
+同じplain full-assistant CE/LR1e-5/clip1/seed20261111・prompt全mask・EOS改行・非切詰め/8192・生成2048・要求23秒を固定。上限86更新/148測定/3load/50新生成、内部900秒・外側TERM890+kill10。前回確認$0.58/hなら処理按分上限$0.145、準備/転送/回収/保持等別・現在単価の新照会ではない。再試行/延長/追加epoch/受口緩和/出力補修なし、partialも保存する。
+
+codeは同folderのsemantic_units_written_role74_prepare.py/run.py/supervisor.py。API88078cdb clean sourceと既存5blobを固定し、旧2134manifestを現API全体一致と称さない。CPU準備で旧70/新4のstrict・実file非生成再読/実tokenizerとbefore42の同一性を先に確認し、成功後だけ一回GPUへ進む。実行前にGitHubへcode/本条件を固定・読み戻す。run-dir=/workspace/analysis-written-role74-20261103、準備=/workspace/analysis-written-role74-prepared-20261103。再開時はまずresult/report.json、run.exit、prepare.logを確認し、既存rootがあれば重複起動しない。
+
+DIRECT_PRODUCT_OR_ACCEPTANCE_WORK、root単一writer＋同環境read-only確認（別モデル/本人受入れではない）。通常source/HTTP/DB/RN/Render/Supabase/配置/Pod管理の変更なし。構造差分は隔離学習比較のみSTRUCTURE_MAP_DELTA_NONE、品質採否は全source/前後raw/表示を読んで別に記録し、形式やlossだけで完了にしない。
