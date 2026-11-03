@@ -6011,3 +6011,6 @@ API既存analysis_cumulative_service.py: with_action明示prepare/build/save/rel
 
 
 11/3 trial/material_v4_aligned78_results.jsonは完了106更新/22生成と新224ab不採用・全原本参照・次再開点の索引へ更新。runner/source/商品ownerは追加変更せず、API ded0586不変、STRUCTURE_MAP_DELTA_NONE。最新はweekly§121。
+
+
+11/3 trial/material_v4_pair8_sources.jsonは独立16source（教示8/非学習近接8）と18更新順、material_v4_pair8_trial.pyは旧78保全のCPU86/18更新/172NLL/同14before再利用/after22/保存再読/原本保全を所有する研究helper。新商品owner/型/作者/通常route追加なし、STRUCTURE_MAP_DELTA_NONE。weekly§122。

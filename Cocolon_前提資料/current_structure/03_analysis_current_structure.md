@@ -1171,3 +1171,8 @@ API61e8aac2の既存semantic_admission.pyがv3継承の明示offline material.v4
 ### 11/3 — v4入力整合比較完了・二欄退行で新重み不採用
 
 11/3・分析の最新（weekly§121）：material.v4入力整合の106更新/156NLL・22新生成/3loadを完了。教師NLLは低下したが、二欄typed3→2、PV05の原文外actor/copulaとMD02の不明→RESULT退行により新224ab重みは通常・次初期とも不採用。理由/不明等の個別改善と形式候補12→13/14は意味全体の成立に換算しない。元78/旧9dcは不変、全14source/28raw/成功9文章図・保存再読を全文確認、原本/再開点保存済み。完了run再実行0、次は評価から切り離して独立作成する二欄教示の不足を確認。本人補足typed/記録間・比較/通常累積/IF・Saved等は残件、GPU2MiB/0％・レンタル維持。 [全結果](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v4-aligned78-result-20261103)。既存API ded0586/owner/型/作者/通常接続不変、STRUCTURE_MAP_DELTA_NONE。
+
+
+### 11/3 — 二欄の独立8教示を旧保持10と混ぜた限定比較
+
+11/3・分析の次作業（weekly§122）：不採用224ab/完了106更新を繰り返さず、原78不変＋独立作成した二欄8教示（肯否×欄位置）をCPU検証し、旧9dcから新8/旧保持10の各1回＝18更新・86poolの172NLL・同14保持＋別語彙8のafter22生成/2load/900秒で比較する。元PV評価/失敗rawは教師化しない。通常採用false、STRUCTURE_MAP_DELTA_NONE。 [条件/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v4-pair8-plan-20261103)。

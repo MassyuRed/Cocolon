@@ -2634,3 +2634,17 @@ R08のcopula誤modifier除去、OA01の不明carrier復旧、YREASON01の理由m
 [全原本・全読・最終採否](https://chatgpt.com/library?file_id=libfile_79b7d52f4ac08191b7b008e405fb52a4&account_id=personal)（15076788bytes/2member/SHA256 6dd9d39166f49d5e1b7abad3e400b3f43d66f31c0b2f781626729ce206babfba）。元ZIP15223897bytes/237member/SHA8d6c1e4f3f61a8cc8e24b004100908880416ab4527438aeb9e221161c2721c22、CRC/安全path/全236manifest SHA/新weights・configをPod外照合。PENDINGを含む元report/raw/重みを改変せず別final_reviewに不採用判断を保存した。
 
 処理按分約0.156080USD@前確認0.58USD/h（準備/回収/保持別）。終了後の外GPU2MiB/0％/compute空、レンタル維持。API/通常ensure/prompt/HTTP/公開DTO/DB/RN/Render/Supabase/配置/Pod管理変更0。STRUCTURE_MAP_DELTA_NONE、比較のTECHNICAL_CREDIT/product_credit0。一般本人基準/補足typed/記録間・比較/通常累積/IF・Savedは残件。
+
+
+<a id="analysis-material-v4-pair8-plan-20261103"></a>
+## 122. 11/3 — 独立作成の二欄8教示と旧保持10の18更新で確認
+
+前節の入力整合106更新は完了・不採用を保持し、繰り返さない。元78には一欄ROLE/copula/否定行動や同欄ROLE＋別行動の正しい教示があるが、完全な自己ROLE＋SELF_ACTION二欄のROLE肯否×ACTION肯否×欄位置の均衡教示はない。失敗PV6/rawからtargetを転記せず、華恋が別語彙の新N8（僕/録音係/音声をメモ）を原sourceから独立作成する。原78のsource/targetを変更・切断しない。新X8（自分/展示係/模型を作る）は学習しない近接転移確認として原sourceを別に固定し、afterのみのため改善率/独立盲検にはしない。
+
+新material_v4_pair8_sources.jsonは新16sourceの由来/肯否/欄位置/学習有無と固定更新順を保存。material_v4_pair8_trial.pyはAPI ded0586と旧9dc/config4776を固定し、旧78＋新8＝86poolを現v4でCPU検証する。全teacherのsource資格/strict/保存非生成再読、tokenizerのprefix/全assistant CE/終端/8192枠、原78identity一致を確認し、新8と非学習X8はいずれも同じ既存ROLE＋ACTIONの全文proofで2node/根拠/文章図まで確認する。評価PV6/今回不採用224abの自動利用0。新16sourceは旧78/PV6との全文組合せ一致なしを検査する。
+
+CPU成功・source/target全読・GitHub固定後にroot=/workspace/analysis-material-v4-pair8-20261103へ一回。旧9dcから新8各1＋旧保持10各1の18更新（T01,N01,T02,N08,SC01,N03,OA01,N06,RU01,RB01,N05,RB02,N04,T03,N07,T04,N02,RU02）。旧保持は原78のT4/RB2/SC01/OA01/RU2、plain full-assistant CE/LR1e-5/seed20261111/batch1/accum1/clip1/weight_decay0。86poolの前後NLL172は学習既見の補助値で一般精度ではない。単純な元106再試行や新8だけの反復を避ける研究設計で、教示追加とdose変更の唯一因果は主張しない。
+
+既存before14は前節before8＋PV6のsource/messages/ref/response/元初期lineage完全一致時だけ再利用。afterは同14＋新X8＝22生成、2load（18更新/NLL、別非学習processで保存重みreload）。要求45秒/context8192/新2048、全体900秒・処理上限約0.145USD@前確認0.58USD/h（準備/回収/保持等別）。新N8そのものの生成成功や全53保持をこの22へ加算しない。原文/実raw/typed/文章図/7呼出禁止保存再読を全文照合し、特にPV03/04copula・PV05旧成功・MD02二不明/他者否定・HQ04理由の保持を確認する。strict候補増やNLL低下だけで採用しない。
+
+新root再prepare/runを禁止し、既存rootへ上書きせず、完了/partialの重み/raw/全log/manifestをfinally保全。root単一writer＋同環境read-only確認、実環境GPT-6/Codex Work、Mash本人教示/独立Pro検証ではない。Mashの残件/GPU/GitHub承認を継承し追加承認待ちなし。通常採用false、API/owner/graph型/作者/通常HTTP/DB/RN/配置/Pod管理変更0、STRUCTURE_MAP_DELTA_NONE。一般本人基準/補足typed/記録間・比較/通常累積/IF・Savedは残件、GPUレンタル維持。
