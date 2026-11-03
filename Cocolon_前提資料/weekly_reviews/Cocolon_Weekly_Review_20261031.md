@@ -2961,3 +2961,11 @@ runner=material_v5_negscope_trial.py、SHA d2090f2c9fc5ee4f930b05338124673b33a2e
 再開は既存Jupyterへ戻り、保存した草案/元90/helper/overlay/初期重みのidentityを確認→CUDAを隠してCPUprepare→全16正target/6差分だけ/元90不変/実tokenizer・EOS・8192枠/旧v5 before30保存の一致を確認するところから。CPU成功前にGPUを開始せず、完了済みnegscope30や旧UL/beam/語彙案へ戻らない。これは新しい承認待ちではなく、現在の操作環境の利用不可による停止である。
 
 実環境GPT-6/Codex Work、root単一writer/実行判断、同環境read-only補助。独立Pro/Ultra/Mash Product Readではない。通常採用/次初期採用false、商品API/source/意味gate/graph型/唯一作者/DB/RN/Render/Supabase/配置/Pod管理変更0。STRUCTURE_MAP_DELTA_NONE（研究草案と再開記録のみ）、商品品質credit0。本人基準/補足typed/記録間・変化/通常累積/IF・Savedと分析観測会の残件は保持する。
+
+
+<a id="analysis-material-v5-aligned16-cpu-20261104"></a>
+## 139. 11/4 — 既存16教材のCPU検証完了
+
+§138の固定runner（SHA256 1fc65428f0772a017cfe71d2443ebf32d97e98137e851d2888eab4e645aa27e6）を変更せず、CUDAを隠したローカル環境で実行。API基点 ded0586 と固定overlay、Qwen3.5-4Bの固定リビジョンの実tokenizer・4依存pinを照合し、CPU_PASSED_NO_MODEL（10.12秒）。16件すべての候補の保存再読、N/Cの10件すべてのtyped保存再読、6引用箇所のみ変更、元90の不変、EOS・長さ上限（最大prompt 2810、全長3008）を確認。前回30件は候補29／typed18で保存bytes一致。CPU manifest 202件を再照合。モデルload／forward 0。
+
+[CPU検証原本](https://chatgpt.com/library?file_id=libfile_d25d96bfbfb48191a8d63a5031d5d525&account_id=personal)（ZIP SHA256 62735849748036a41714c8478d14a6b336e5464162ed71ab1f4020892d8f8211）と[復元用入力](https://chatgpt.com/library?file_id=libfile_d3eae2f253b48191a5d513ffc9f4c39d&account_id=personal)を保存。指定Podへはブラウザの再初期化もタイムアウトし、Pod稼働・GPUは未確認。次は接続を回復し、固定API・モデル重み・依存pin・CPU manifestをPod側で照合して§138の一回試行を実行する。CPU検証は完了済み。新規学習・新規生成・採用判定は未実施。STRUCTURE_MAP_DELTA_NONE（分離研究のCPU検証）、商品API・配置・DB・Pod管理の変更なし。
