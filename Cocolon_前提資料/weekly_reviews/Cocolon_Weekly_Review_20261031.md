@@ -2687,3 +2687,20 @@ CPU prepareはrunner cdf7ae3b/source19602537で全90teacherのstrict/保存非�
 研究初期は今回明示選定したa2e62bca/config006ebf7b（通常未採用）。固定16順はC01,N01,C02,N03,T01,N05,C03,N07,T02,N02,C04,N04,SC01,N06,RU02,N08、各1更新。plain full-assistant CE/LR1e-5/seed20261111/BF16/SDPA/batch1/accum1/clip1/weight_decay0を継承。NLLは更新16件のみ前後32で、90件/一般精度の評価ではない。同22のbefore/afterを比較し、非学習Z4はafterのみ。要求45秒/context8192/新2048、全体900秒・GPU処理上限0.0725USD@0.29/h、準備/回収/保持等別。成功時はX03の文章/図復旧、旧成功の保持と引用/肯否/対象/他者/理由を全rawで判定する。対象子欠落だけを新たな必須合格条件にしない。
 
 root単一execution/writer、補助agentの編集は上記2新fileの候補作成のみでrootが全文/diffを確認。実環境GPT-6/Codex Work、Pro/Ultra独立検証ではない。ユーザーの現行残件/GPU/GitHub指示の範囲で進め、新たな承認段階を作らない。新root再実行は禁止し、partial/final重み/raw/log/manifestをfinally保存する。完了後、通常採用は全結果から別に判定する。API/strict/typed/通常ensure/HTTP/公開DTO/DB/RN/配置/Pod管理は変更しない。STRUCTURE_MAP_DELTA_NONE（研究教示と比較のみ）、本人補足typed/記録間・比較/通常累積/IF・Saved/一般本人基準は残件。
+
+<a id="analysis-material-v4-target4-result-20261103"></a>
+## 125. 11/3 — 対象引用4教示の比較を完了、同22例の表示14→13で不採用
+
+新Pod43hpbqcsnqmfny/RTX4000 Ada20GB/表示0.29USD/hへ固定API ded0586・元base revision851bf6・前回a2e/config006eと全原本を復元。CPU90teacher/新8typed2node/実tokenizer/旧22保存再読はexit0。CPU原本runner cdf7/pack0da3は不変、実行版946101d4で同じ新Podのbefore22→16更新/32NLL→after26（48新stop/3load）を680.256935666秒、3phase全exit0で完了した。旧Pod22rawと新before22は全bytes同一。CPU packの旧26call/2load表記と、実行override48call/3loadを混同しない。完了run再prepare/再起動なし。
+
+同22例はcandidate20→20・typed14→13。PV6の5成功/推測拒否は維持、X8は7→6。X01は新たな重複fieldキーと重複ROLE/だった誤modifierにより全体拒否。X03も同じstrict JSON拒否が先に起き、原文外の肯定target引用も生出力内に残る。検査条件を緩めたり、正しい一部分だけ採用したりしない。MD02はcarrier種別のみ形式受理へ戻るが、NEGATION漏れとサ変語幹の誤targetが残り意味改善とはしない。YREASON01の理由marker/親子/誤modifierはraw不変で未達。
+
+X05–08では対象子が復旧し、PV01/X02/X04にもROLE対象子が増えた。ただし前後とも成功した13例のgraph全文・表示文章・図の全値（projection_of以外）は完全同一。7projectionのbytes差はartifact identity2箇所だけで、可視の商品改善には数えない。残り6成功保存/全projection bytesは完全一致。新非学習Z4は全4件が正しいSELF/fact/past/肯否/対象/生活カテゴリ・2node/辺0/欠3段＋routegapの文章図へ到達したが、afterのみ・近接確認であり改善率/盲検/一般精度へ換算しない。
+
+rootと同環境read-only補助が全26原文/48raw/全31成功文章図を確認。候補44・typed31の同file非生成再読は全MATCHED、7生成/compile/作者呼出禁止を維持。全526manifestと元ZIP527memberのCRC/全bytes-SHAを照合し、保存112F32 tensor/3,833,856paramsの有限性・初期a2e/元78/先行86不変を確認。旧53全保持/本人端末/通常累積/実DB/商品受入れの検証ではない。
+
+新d3d5cd73/configc36e2eceは通常・次学習初期とも不採用。a2eは前回の研究候補として保持し、通常採用へ昇格しない。今回の可視商品品質改善は0、完了は限定比較と不採用判断である。処理按分0.0547985USD@0.29/h（準備/回収/保持/通信/税等別）、終了後GPU2MiB/0％/compute空、レンタル維持。新GPU処理の追加なし。
+
+[全原本・保存重み・全読・最終採否](https://chatgpt.com/library?file_id=libfile_42f62b72d2888191a3198abd1ec4ee65&account_id=personal)は15942612bytes/3member/SHA14f6a79f9098e5213bb39df6620d2ed4e8d39dcbfdbea7592b8e448a573b3249。内側元ZIP15939126bytes/527member/SHA95becb8712dcc0a9bd181f1a6e13243a43aa66548d991279c5c559eb5b5a830bを不変保持。通常ダウンロード2経路は回収不能だったため、表示テキストのbyte単位回収で元ZIPそのものの全bytesを復元照合した。既存raw/report/重みは改変せず、最終採否とmetricsを外側へ保存した。本文なし索引はmaterial_v4_target4_results.json。
+
+再開はa2e/旧86原文を保持し、X01/X03の重複キー/ROLEと原文内引用選択を、既存生成owner/教示へ照合する。教材不足だけを原因と断定せず、今回16更新や旧18/106更新を再実行しない。strict/typed/唯一作者/通常ensure/HTTP/公開DTO/DB/RN/Render/配置/Pod管理変更0、STRUCTURE_MAP_DELTA_NONE。本人補足typed/記録間・比較/通常累積/IF・Saved/一般本人基準は未完。

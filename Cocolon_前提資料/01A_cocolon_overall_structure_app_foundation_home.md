@@ -6022,3 +6022,6 @@ API既存analysis_cumulative_service.py: with_action明示prepare/build/save/rel
 ### 11/3 — 分析の二欄対象引用の小比較
 
 trial/material_v4_target4_sources.jsonは独立C4教示と非学習Z4の原文/明示target、material_v4_target4_trial.pyは元86不変のCPU90検証・旧22原本保全・同新Pod before22/16更新/after26/保存非生成再読・原本回収用。商品owner/型/作者/通常接続は増やさない、STRUCTURE_MAP_DELTA_NONE。実行条件とcurrentはweekly§124/trialを参照。
+
+
+11/3・target4比較の最終結果はtrial/material_v4_target4_results.json（本文なし採否/原本/再開索引）とweekly§125へ。同22typed14→13、共通成功13のgraph/表示同一、新d3dは不採用。完了16更新/48生成を再実行しない。新商品owner/型/作者/通常接続0、STRUCTURE_MAP_DELTA_NONE。
