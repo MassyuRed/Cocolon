@@ -2788,3 +2788,22 @@ root単一実行/最終判断、同環境補助が旧学習処理/公式5.19 sou
 
 GPU処理按分0.01953687USD@前確認表示0.29/h（CPU準備/回収/待機レンタル保持/保存通信税等別、実総請求未測定）。rootと同環境read-only補助が全原文/44raw/14projectionを照合し同じ採否、実環境GPT-6/Codex Workで独立Pro/Ultraではない。通常API/source/意味gate/graph型/唯一作者/ensure/HTTP/公開DTO/DB/RN/Render/Supabase/配置/Pod管理変更0。STRUCTURE_MAP_DELTA_NONE。
 
+
+
+<a id="analysis-material-v4-target-ul-plan-20261103"></a>
+## 130. 11/3 — 名詞対象の誤拡張だけを独立教材で対比する局所学習
+
+§129のbeam2は通常不採用・完了を保持し、生成枝数やquote-first/指示の反復へ戻らない。現在の未達はX03の対象名詞と行動節の混同。今回は既存C4の正例を一字も変えず、同じC4で名詞「報告」を原文の行動節「報告を書いた/書かなかった」まで誤拡張した負例4を作り、最初に分かれるtokenだけを下げる。評価X03/失敗rawや別語彙Z4を学習へ使わず、負例を正解へ昇格しない。元78/86/90正本・既定・通常接続は不変。
+
+既存正例全tokenの平均CEに、C4だけ係数1のtoken unlikelihood -log(1-p_bad) を追加する。実装はF32 softplus(z_bad-logsumexp(z_other))。正例と負例の共通prefixに対する既存forwardの同じlogitを使い、負例の追加forwardは0。source/正target/key順/prompt/seed/LR/16更新順/AdamW/clip/初期a2eは旧target4と同じで、目的関数だけを変える別の一回である。C4/16更新のpositive-only再実行ではない。単点係数1は従来平均CEより局所勾配を強めるため、CE/UL/正誤確率/gradientを分けて記録し、保持退行を全件読む。初期C4全てでp_bad<.01なら更新前に打ち切り、係数を増やして追わない。平均CEの小ささだけでは仮説を証明しない。
+
+方法の原典は[Welleck et al. 2019 §5.1](https://arxiv.org/html/1908.04319v2)。この原典の一般的な負例学習式を使うが、Cocolonの対象範囲へ効くことは未確認の仮説で、原典の反復抑制結果を分析意味品質の実証へ流用しない。
+
+新trial/material_v4_target_ul_trial.py（SHA02daa7c4e5d88755fd253e399ddd180592a269be13b59a7fad918b9e2104c3d5）は今回だけのrunner。既存helper946101d4の完全sourceを保存し、同prepare/bind_save/唯一作者/7呼出禁止の保存readerを再利用する。CPU11.030063秒・モデルload/forward0でC4全正例2node/誤拡張全4のcandidate_mismatch拒否、旧22束縛/候補20・typed14再読、実tokenizerの正負prefixを確認。名詞全体の直後で正token「\",\"」と負token「を書」が分かれるため、名詞途中のBPE差への誤罰ではない。logits_indexは115/124/69/78、d-Pで一段shift。小F32 vectorでも式と勾配方向が一致、CUDA初期化0。
+
+「CONTENT_TARGETは常に名詞」という一般則は教えない。元90には発話内容の正しい節対象もあるため、AT04/11/17/24を今回未更新の保持対照として追加し、新before4とafter4を比較する。これらは既存教師由来で盲検ではない。同Pod/a2eの完全identity一致before22は再利用し、before新4→16更新/32測定→after30（旧22＋既存非学習Z4＋発話4）、新計34要求/3load/900秒まで。生成は旧plain num_beams1/no mask、context8192/new2048/stop判定を維持し、raw修復/部分採用/strict・typed緩和/新依存0。
+
+新root=/workspace/analysis-material-v4-target-ul-20261103はCPU準備済み。完了runの再起動・別係数/LR/回数の自動探索をしない。原文/全raw/文章図、正しい節対象・主体/肯否/理由/不明と旧成功保持を読んで採否を決め、loss改善だけでは採用しない。finallyで失敗含む原本/partial重みを保持し、Pod外へ回収する。GPU処理上限0.0725USD@前確認0.29/h（CPU準備/回収/待機保持/保存通信税等別）、新しいMash操作・承認負担0。
+
+実環境GPT-6/Codex Work、root単一実装/実行/判断と同環境read-only補助による差分review。通常採用false/次初期自動採用false、API ded0586/商品source/意味gate/graph型/唯一作者/ensure/HTTP/公開DTO/DB/RN/Render/Supabase/配置/Pod管理変更0。STRUCTURE_MAP_DELTA_NONE。本人基準/補足typed/記録間関係・変化/通常累積/IF・Savedも残件として保持する。
+

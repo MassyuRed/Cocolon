@@ -6039,3 +6039,6 @@ trial/material_v4_target4_sources.jsonは独立C4教示と非学習Z4の原文/�
 
 
 **11/3・§129 枝数2比較結果：** 同重み/同22入力のnum_beamsだけ1→2を完了（新22stop/1load/学習0）。候補20→20・文章図14→14、旧14保存bytes/全graph/文章図一致、X03対象範囲/MD02他者否定は未解消。理由の連体接続1例のみ局所改善で、beam2通常不採用。結果/原本/次の意味修正点は[trial](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v4-beam2-result-20261103)とweekly§129、本文なし索引material_v4_beam2_results.json。既存2pyのowner/配置は§128のまま、新ownerや製品経路の変更なし。STRUCTURE_MAP_DELTA_NONE。
+
+
+11/3・target UL比較のfile地図：trial/material_v4_target_ul_trial.pyは既存C4の誤拡張負例/実token分岐・局所目的関数・既存保存reader・発話4保持を含む一回比較の研究runner。新商品owner/型/作者/通常接続/依存0、STRUCTURE_MAP_DELTA_NONE。条件と採否はweekly§130/trialへ。

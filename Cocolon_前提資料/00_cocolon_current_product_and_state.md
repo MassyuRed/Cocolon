@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-**11/3・分析の枝数2比較完了（第9回§129）：** 同a2e/同22入力でnum_beamsだけ1→2、新22stop/1load/学習0・242.527秒。strict候補20→20、文章・図到達14→14、旧14の保存bytes/graph/文章/図は全同一。理由の連体接続1例は局所改善したがmarker欠落が残り、主対象X03の対象範囲誤りとMD02の他者否定は未解消。beam2通常不採用、原本/採否/再開点を[既存trial](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v4-beam2-result-20261103)へ保存。旧教示の境界/shift/loss/optimizerに具体bug未検出。次は既存modelの名詞対象/行動節の意味選択の具体修正差分を定める。完了run・旧教示・mask・beam拡大の自動反復なし。本人基準/補足typed/記録間・比較/通常累積/IF・Savedは残件。GPU2MiB/0％、レンタル維持。通常API/DB/RN/配置不変、STRUCTURE_MAP_DELTA_NONE。
+**11/3・分析の次比較（第9回§130）：** 枝数2不採用を継承し、既存独立C4の正例不変＋原文内の誤拡張負例4で、名詞直後の分岐だけを局所学習する一回を準備。CPU11.030秒/モデル0で実BPE分岐・正4の2node/負4拒否・旧20候補/14文章図の保存再読を確認。正しい発話節対象4も保持比較に追加し、新34要求/3load/16更新/32測定/最大900秒。lossだけで採用せず全原文/raw/表示と保持を判定する。通常採用false、本人基準/補足typed/記録間・通常累積/IF・Savedは残件、API/DB/RN不変。
 
 **11/3・分析の最新結果（第9回§100–102）：** 74教師監査後、旧74不変＋原文対照2を76教師/90更新/152NLL/50新stop/2load・641.971830秒/exit0で比較。NV04の結果重複/不明の親不正を改善し、R4/T4/追加本人2の10ROLE文章図を前後bytes同一で保持。50rawは46同一/4変化、HQ04理由誤分類は残りR08肯定過去copulaに誤modifier再発。strict候補47→49は意味率ではない。100保存非生成再読/元532memberの全bytes-SHAを確認・新重み9dcを保全、通常/次初期値は未採用。[結果・原本・再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-reason-unknown76-result-20261103)。全対象分離は現行必須でなく、次は理由の述語/不明併存差と複数文copula保持をCPUで切分け。通常HTTP/DB/RN/配置不変、本人基準/記録間関係/通常累積接続は未完。GPUレンタル維持、STRUCTURE_MAP_DELTA_NONE。
 
