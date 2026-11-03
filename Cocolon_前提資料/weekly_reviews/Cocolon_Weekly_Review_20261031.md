@@ -2945,3 +2945,19 @@ runner=material_v5_negscope_trial.py、SHA d2090f2c9fc5ee4f930b05338124673b33a2e
 終了後GPU2MiB/0％、compute空、レンタル維持。前確認0.29USD/hの処理按分0.022796523USD（CPU準備/回収/待機保持/保存通信税等別、実総請求未測定）。完了root/append probe/旧UL・beam・語彙案の自動再起動0。新v5を通常/次初期値へ昇格せず、次は元原文と既存材料・ownerに戻り、肯定ACTIONの出力安定性と明示理由/発話境界の修復条件を定める。次GPU条件は未固定で、追加の指示variant探索は行わない。
 
 本文なし索引material_v5_negscope_results.jsonと再現runnerを同trialへ保持。実環境GPT-6/Codex Work、root単一writer/実行/最終判断。STRUCTURE_MAP_DELTA_NONE（分離研究overlayのみ）、商品API/source/graph型/作者/ensure/HTTP/DTO/DB/RN/Render/Supabase/配置/Pod管理変更0、primary outcome=BLOCKER_NARROWED/product_credit0。本人基準の役割/判断/選択、補足typed、記録間の再出現/変化、通常累積graph、IF/Savedと分析観測会の未取得は継続残件。
+
+
+<a id="analysis-material-v5-aligned16-resume-20261103"></a>
+## 138. 11/3 — 既存16教材のv5整合へ着手、source確認後に作業環境接続が切断
+
+§137の30生成/338原本保全/不採用は完了済みで再実行しない。今回JupyterでC4を含む元90教材の全messages/refを旧v4入力へ照合し、独立否定ACTION23行を確認した。正規sourceは /workspace/analysis-material-v4-target4-20261103/pack.json、SHA 0da3ab47c753c71baa2c51478817009ea36d129330c6d15bc58c683e5802ee08。初期a2eの由来であるpair8 packは86行で、C4込み90のsourceと混同しない。source照合はモデルload/forward0、GPU2MiB/0％・compute空だった。
+
+元source/正targetを全文確認し、N01–08＋C02/C04＋RU01/RU02＋AT04/11/17/24の既存16だけをv5入力へ整合する一回案を具体化。N03/04/07/08のNEG「しなかった」→「メモしなかった」、C02/04の「なかった」→「書かなかった」の6箇所だけを別派生targetで変更する。原90のsource/target/bytesは保持し、その他unit/kind/親/qualifierは不変。RU01のte文脈とRU02の明記理由＋「ので」、思考/発話従属NEGは変更しない。全90をv5整合済みとは記録しない。X/PV/Mの評価rawを教師にしない。AT4とRU2は既存教師の再提示であり盲検評価ではない。
+
+既存plain CE ownerで選択16各1更新/前後32NLL、旧a2e/config006e、LR1e-5/seed20261113、保存reload後の同30新生成/計2loadを予定する。beforeは§137のv5 after30をref/messages/raw/finish/保存bytes一致確認して再利用する。最大GPU処理900秒＋終了処理30秒、前確認0.29USD/hで合計上限0.074917USD（準備/回収/待機レンタル保持/通信保存税等別、総請求未測定）。同run再起動・自動探索0。PV01の肯定行動JSON、HQ04/YREASON01の理由、発話境界、X03新成功と旧成功保持を全件意味確認し、loss/件数だけで採用しない。
+
+コード草案 material_v5_aligned16_trial.py と本文なし計画 material_v5_aligned16_plan.json を保存。同環境read-only補助が草案を全文確認した。可視比較をtext/diagramだけに限定する修正と、実行する外部runner自身をCPU記録SHAへ照合する修正を保存版へ反映。ただし、その直前にWork実行環境がunavailableとなりexec-server接続が切れ、browser操作も利用不可になった。**新runnerのcompile/CPUprepare・学習・新GPU生成は未実行。今回の新GPU load/更新/新生成/新重みは全0。** コードの静的確認を実行成功へ変換しない。Pod自体の停止やデータ消失を観測したわけではなく、環境切断後の稼働/費用は再確認できていない。最後の観測ではレンタル維持。
+
+再開は既存Jupyterへ戻り、保存した草案/元90/helper/overlay/初期重みのidentityを確認→CUDAを隠してCPUprepare→全16正target/6差分だけ/元90不変/実tokenizer・EOS・8192枠/旧v5 before30保存の一致を確認するところから。CPU成功前にGPUを開始せず、完了済みnegscope30や旧UL/beam/語彙案へ戻らない。これは新しい承認待ちではなく、現在の操作環境の利用不可による停止である。
+
+実環境GPT-6/Codex Work、root単一writer/実行判断、同環境read-only補助。独立Pro/Ultra/Mash Product Readではない。通常採用/次初期採用false、商品API/source/意味gate/graph型/唯一作者/DB/RN/Render/Supabase/配置/Pod管理変更0。STRUCTURE_MAP_DELTA_NONE（研究草案と再開記録のみ）、商品品質credit0。本人基準/補足typed/記録間・変化/通常累積/IF・Savedと分析観測会の残件は保持する。

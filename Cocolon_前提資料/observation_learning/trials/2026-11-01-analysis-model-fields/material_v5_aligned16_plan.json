@@ -1,0 +1,136 @@
+{
+  "status": "SOURCE_AUDIT_DONE_RUNNER_DRAFT_CPU_UNVALIDATED_ENVIRONMENT_UNAVAILABLE",
+  "prior_completed_result_commit": "607b0a6f61ca9a73461d9d1f13e516196c79700c",
+  "prior_completed_trial": "material_v5_negscope_trial.py",
+  "profile": "selected_material.v5",
+  "base_api": "ded0586720df0c0d50d8838bcd391a19ca3eead5",
+  "api_overlay_only": true,
+  "source90_path": "/workspace/analysis-material-v4-target4-20261103/pack.json",
+  "source90_sha256": "0da3ab47c753c71baa2c51478817009ea36d129330c6d15bc58c683e5802ee08",
+  "source90_rows": 90,
+  "source_audit_path": "/workspace/material-v5-training-source-audit-20261103.json",
+  "source_audit_messages_and_refs_checked": 90,
+  "independent_negative_action_rows": 23,
+  "selected16_original_source_and_targets_read": true,
+  "derived_negation_changes": [
+    {
+      "id": "N03",
+      "from": "しなかった",
+      "to": "メモしなかった"
+    },
+    {
+      "id": "N04",
+      "from": "しなかった",
+      "to": "メモしなかった"
+    },
+    {
+      "id": "N07",
+      "from": "しなかった",
+      "to": "メモしなかった"
+    },
+    {
+      "id": "N08",
+      "from": "しなかった",
+      "to": "メモしなかった"
+    },
+    {
+      "id": "C02",
+      "from": "なかった",
+      "to": "書かなかった"
+    },
+    {
+      "id": "C04",
+      "from": "なかった",
+      "to": "書かなかった"
+    }
+  ],
+  "preserve": [
+    "all original90 bytes",
+    "all selected source/owner/snapshot",
+    "all other teacher units/kinds/parents/qualifiers",
+    "RU01 TE_CONTEXT / RU02 WRITTEN_REASON + REASON_MARKER ので",
+    "thought and subordinate-content NEG",
+    "meaning gates/compiler/sole author/normal default",
+    "evaluation raw is not new teacher material"
+  ],
+  "update_order": [
+    "N01",
+    "N02",
+    "AT04",
+    "C02",
+    "N03",
+    "RU01",
+    "N04",
+    "AT11",
+    "N05",
+    "C04",
+    "N06",
+    "AT17",
+    "N07",
+    "RU02",
+    "N08",
+    "AT24"
+  ],
+  "measurement_ids": [
+    "N01",
+    "N02",
+    "AT04",
+    "C02",
+    "N03",
+    "RU01",
+    "N04",
+    "AT11",
+    "N05",
+    "C04",
+    "N06",
+    "AT17",
+    "N07",
+    "RU02",
+    "N08",
+    "AT24"
+  ],
+  "planned": {
+    "updates": 16,
+    "measurement_forwards": 32,
+    "after_generations": 30,
+    "reused_before_generations": 30,
+    "model_loads": 2,
+    "seed": 20261113,
+    "learning_rate": 0.00001,
+    "training_owner": "unchanged existing plain-CE h.train_phase",
+    "initial_weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59",
+    "initial_config_sha256": "006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9",
+    "gpu_processing_max_seconds": 900,
+    "cleanup_max_seconds": 30,
+    "processing_and_cleanup_usd_upper_at_previous_display_rate": 0.074917,
+    "previous_display_usd_per_hour": 0.29,
+    "total_billing_measured": false
+  },
+  "actual_this_resume": {
+    "source_audit_model_loads": 0,
+    "source_audit_model_forwards": 0,
+    "new_gpu_model_loads": 0,
+    "updates": 0,
+    "new_generations": 0,
+    "new_weights": 0,
+    "new_runner_compile_check": false,
+    "new_runner_cpu_prepare": false,
+    "new_runner_uploaded_to_pod": false
+  },
+  "draft_static_review": "Same-environment read-only review of first draft; two identified comparison/runner-identity fixes applied to the preserved draft but not runtime-tested.",
+  "resumption": [
+    "restore access to existing Jupyter; do not restart completed negscope30",
+    "read this pinned draft and verify Pod source90/helper/overlay/initial identities",
+    "transfer draft once and run CPU prepare with CUDA hidden",
+    "review all selected16 semantic targets, six-only changes, source90 immutability, tokenizer masks/EOS/context, and reused v5before30 exact bytes",
+    "only after CPU success, perform one bounded16-update/32-measurement/after30 run with no automatic retry",
+    "preserve trained/partial weights; read all raw and resulting text/diagram; do not select initial or normal profile by counts/loss alone"
+  ],
+  "normal_adoption": false,
+  "next_initial_adoption": false,
+  "product_credit": 0,
+  "structure_map_delta": "NONE: research draft only",
+  "environment_blocker": "Work execution environment unavailable; exec-server transport closed and browser namespace removed. This is not evidence that Runpod itself stopped.",
+  "last_observed_pod_gpu": "2 MiB, 0 %; no compute apps at source audit",
+  "rental_last_known": "maintained; current billing/runtime not rechecked after connection loss"
+}

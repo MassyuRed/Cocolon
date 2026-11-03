@@ -6067,3 +6067,9 @@ trial/material_v4_target4_sources.jsonは独立C4教示と非学習Z4の原文/�
 | 同/material_v5_negscope_results.json | 本文を持たない実績/原本保存/不採用の索引 |
 
 API overlay2source＋新testは保存原本へ同梱し、通常repoへ採用した実装とは扱わない。[結果/全原本/再開条件](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v5-negscope-result-20261103)。次は肯定ACTIONの出力安定性と明示理由/発話境界を元原文と既存材料/ownerへ戻して確認し、追加GPUは未固定。本人基準/補足typed/記録間の再出現・変化/通常累積/IF・Savedは未完、分析観測会も継続対象。
+
+
+<a id="analysis-material-v5-aligned16-draft-files-20261103"></a>
+## 11/3・分析研究草案のファイル地図（§138）
+
+同trial内へ material_v5_aligned16_trial.py（未compile/未CPU検証の実行草案）と material_v5_aligned16_plan.json（元90source SHA・選択16・6引用差分・実行上限・実績0・再開条件）を追加。元90原本/既存helper/意味gate/唯一作者を継承し、通常ownerへ接続しない。操作環境切断によりGPUは未開始。[source確認/停止点/再開順](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v5-aligned16-resume-20261103)。STRUCTURE_MAP_DELTA_NONE、商品API/DB/RN/配置変更0。§137の既存原本保全と不採用を維持し、再接続後は新草案のCPUprepareから進める。
