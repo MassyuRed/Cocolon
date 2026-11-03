@@ -1771,3 +1771,17 @@ M4+4診断forwardは47.972818320秒、新probe4は45.854697890秒、計8新stop/
 [原本差分と最終判断](https://chatgpt.com/library?file_id=libfile_823dac8b7f208191b58a7beb4dc6d5d6&account_id=personal)は108288bytes/SHA56622d688a25a79cf9f73628bdf7129388602a568f0b2dd7d7b8a75554fa32f6。新原本66 UTF-8 fileをPod外で全bytes/SHA照合し、新M4のsource/教師/encodedを派生差分として含む。旧source_pack/全pack/全encodedはSHA参照で、旧原本の保存先は§123/125/131を継承する。全root/元ZIPの同一完全回収とは呼ばない。コードmaterial_v4_morph4_trial.pyとmaterial_v4_negquote_probe.py、本文なし索引material_v4_morph4_results.json。
 
 rootが単一writer/実行/採否、同環境read-only補助がsource/runner/結果を照合。実環境GPT-6/Codex Work、独立Pro/Ultra/Mash Product Readではない。通常source/API ded0586/意味gate/型/作者/ensure/HTTP/公開DTO/DB/RN/Render/Supabase/配置/Pod管理変更0、STRUCTURE_MAP_DELTA_NONE。本人基準/補足typed/記録間・比較/通常累積/IF・Savedと分析観測会の未取得は継続残件。
+
+
+<a id="analysis-material-v5-negscope-plan-20261103"></a>
+## 136. 11/3 — 独立否定ACTIONの説明例と指示をそろえる一回比較
+
+§135の不採用probeを再実行せず、指示だけを足す方式から、独立ACTIONの説明例2箇所も一貫させる差分へ進む。新しいoffline selected_material.v5は「行かなかった」「僕は費用を記録しなかった」のNEG引用だけを動詞＋否定語尾へ変更し、独立ACTIONの連続原文引用方針を付す。従属する読めなかった本2例・不明・役割・本人source・対象・主体・親・意味gate・有限compiler・唯一作者は変更しない。旧v4 messagesは不変で、有効な短NEGを意味不正として禁止しない。この競合が失敗原因だとは未確定。
+
+API ded0586720df0c0d50d8838bcd391a19ca3eead5を分離worktreeへ置き、semantic_admission.pyとanalysis_cumulative_service.pyのexplicit profile/state routingを追加、新test1fileを作成したoverlayとして比較する。通常の既定profile/配置は変更しない。API本流へ採用した実装とは呼ばず、overlayは原本へ同梱する。134 tests pass（既存2suite＋v5の6例、既存Pydantic非推奨warning1）、CPU11.406433秒でmodel/forward0。旧30のmessages/ref/raw/finish/hashと候補・typed・投影bytes不変、新v5で同source/新ref・token枠8192内・独立M4の正target保存読戻しを確認。CPUにpytest8.3.5を公式registryから追加したがモデル実行依存/loaderは不変。
+
+新root=/workspace/analysis-material-v5-negscope30-20261103。旧a2e/config006eを固定し、旧22＋既存発話4＋M4の計30を新v5 requestへ束縛してplain greedy/no maskで一回生成する。旧v4の30beforeは完全identity一致の保存原本再利用で、新生成へ加算しない。最大新30要求/1load/600秒（1要求45秒、context8192/new2048）、学習/新重み/診断forward0。前確認0.29USD/hの処理上限0.048334USD、準備/回収/待機レンタル保持/通信保存税等別、実総請求未測定。X03の正答を指示へ渡さず、X03/X04/M02/M04・既存成功・発話内容・主体/肯否/理由/不明を全文で比較する。盲検ではない。
+
+runner=material_v5_negscope_trial.py、SHA d2090f2c9fc5ee4f930b05338124673b33a2edb0cd584c8da9864727d0d530e4。全raw/responseをstop assertion前に保存し、同file保存readerは7生成/compile/作者呼出禁止の既存guardを継承する。collectorは読戻したtyped artifact自身からgraph/文章/図を再投影して保存sidecarと一致確認し、before/afterを別集計する。部分完了は部分完了として残し、完了root再起動/同probe/旧UL・beam・語彙案の自動探索0。finally原本を保持しPod外へ回収する。
+
+今回の継続/Jupyter/GPU/必要資料更新の指示内。root単一実装/実行/最終判断、同環境read-only補助が差分・runnerを確認、実環境GPT-6/Codex Work、独立Pro/Ultra/Mash Product Readではない。通常採用false/次初期自動採用false。商品API/source/graph型/唯一作者/ensure/HTTP/DTO/DB/RN/Render/Supabase/配置/Pod管理変更0、STRUCTURE_MAP_DELTA_NONE（分離研究overlayのみ）。本人基準/補足typed/記録間・通常累積/IF・Savedと分析観測会未取得を継続残件として保持。
