@@ -249,12 +249,13 @@ def run():
     assert sha(OLD)==OLD_SHA and sha(INITIAL/'adapter_model.safetensors')==WEIGHTS and sha(INITIAL/'adapter_config.json')==CONFIG
     with (ROOT/'run_started.json').open('x') as f:json.dump(dict(started=time.time(),max_seconds=LIMIT),f)
     assert not subprocess.check_output(['nvidia-smi','--query-compute-apps=pid,used_memory','--format=csv,noheader'],text=True).strip()
-    start=time.monotonic();deadline=start+LIMIT;report=dict(status='STARTED',api_commit=COMMIT,normal_adoption=False,stages=[])
+    shutil.copyfile(Path(__file__).resolve(),ROOT/'execution_runner.py')
+    start=time.monotonic();deadline=start+LIMIT;report=dict(status='STARTED',api_commit=COMMIT,normal_adoption=False,execution_script_sha256=sha(ROOT/'execution_runner.py'),stages=[])
     try:
         for phase in ('before','train','after'):
             remaining=int(deadline-time.monotonic())-10;assert remaining>0
             with (ROOT/(phase+'.log')).open('x') as log:
-                r=subprocess.run(['timeout','--signal=TERM','--kill-after=10',str(remaining),sys.executable,str(Path(__file__).resolve()),phase,str(deadline)],stdout=log,stderr=subprocess.STDOUT)
+                r=subprocess.run(['timeout','--signal=TERM','--kill-after=10',str(remaining),sys.executable,str(ROOT/'execution_runner.py'),phase,str(deadline)],stdout=log,stderr=subprocess.STDOUT)
             report['stages'].append(dict(phase=phase,exit=r.returncode));write(ROOT/'report.json',report)
             assert r.returncode==0,phase
         assert sha(OLD)==OLD_SHA and sha(INITIAL/'adapter_model.safetensors')==WEIGHTS and sha(INITIAL/'adapter_config.json')==CONFIG
@@ -286,9 +287,10 @@ def run():
 if __name__=='__main__':
     action=sys.argv[1]
     if action=='prepare':
+        preexisting=ROOT.exists()
         try:prepare()
         except BaseException:
-            if ROOT.exists():
+            if not preexisting and ROOT.exists():
                 write(ROOT/'prepare_error.json',dict(status='CPU_PREPARE_FAILED_NO_MODEL',traceback=traceback.format_exc()))
                 write(ROOT/'manifest.json',{str(p.relative_to(ROOT)):sha(p) for p in ROOT.rglob('*') if p.is_file()})
                 with zipfile.ZipFile(W/'cocolon-analysis-material-v4-aligned78-cpu-partial-20261103.zip','x',compression=zipfile.ZIP_DEFLATED) as z:
