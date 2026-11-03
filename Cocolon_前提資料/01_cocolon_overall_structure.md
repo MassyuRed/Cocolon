@@ -7495,3 +7495,6 @@ API86d19b6d、STRUCTURE_MAP_DELTA_PRESENT。通常の累積mapは不変。新ana
 
 
 11/3の74教師scope監査は全対象独立化を現行義務とせず、明記理由/文脈と独立不明の組合せへ次比較を限定する。trialのsemantic_units_aligned74_teacher_scope_audit.jsonは本文なし監査、semantic_units_reason_unknown76_prepare.py/run.py/supervisor.py/collect.pyは旧74＋原文対照2のCPU準備/一回学習比較/上限・原本保持/終了後100保存再読と全原本梱包用。既存private候補owner/typed ROLEを使い、商品graph/作者/通常routeは追加しない。新比較の実結果はtrial/weekly§101以降を確認。STRUCTURE_MAP_DELTA_NONE。
+
+
+11/3・理由2×2診断はsemantic_units_reason_transfer3.py（CPU参照/新3生成/1既存再利用/原本保全）とsemantic_units_reason_transfer3_supervisor.py（段階/上限/16file保持）をtrialへ追加。semantic_units_role_boundary_audit.jsonは旧ROLE5教師/正常10例/複数文候補境界の本文なし監査。通常owner/型/graph/DB/RNは変更しない。最新の診断結果と再開はtrial/weekly§103以降へ戻る。STRUCTURE_MAP_DELTA_NONE。

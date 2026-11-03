@@ -1242,3 +1242,17 @@ R4/T4/Xself2の全10 ROLE pairは前後file bytes同一。SELF/fact/past・原�
 [全原本・新重み・全50読解・再開記録](https://chatgpt.com/library?file_id=libfile_95c5112daf788191b2ef457ffb81f60d&account_id=personal)：15,419,466bytes/6member、SHA256 c0a1e5f3e5670e01ea375e09cda61c1923fb597e4f447245f99276fd118d1ce7、内部未改変原本532member。全結果はsemantic_units_reason_unknown76_results.json。
 
 採否：新9dcを通常/次学習初期値へ採用しない。次は原文参照RU02とHQ04の述語/独立不明の有無をCPUで対照し、R08の複数文ROLEにおけるcopula境界も同時保持条件へ戻す。追加GPU条件はまだ未固定で、NLL低下やstrict通過の増加だけを理由にdose追加しない。完了3runのexit/reportと原本を先に読み、重複起動しない。raw修復/教師化/受口緩和/全対象分離義務化なし。本人基準の判断/選択、複数field/補足/比較、記録間再出現/変化、通常累積保存接続は未完。通常HTTP/DB/RN/Render/Supabase/配置/Pod管理変更0、GPUレンタル維持、STRUCTURE_MAP_DELTA_NONE、正式0/3・54.50％据置。Codex Work/GPT-6 root＋同環境確認であり、独立Pro/Ultra/human受入れではない。
+
+
+<a id="analysis-reason-transfer3-plan-20261103"></a>
+## 11/3 — 理由述語と独立不明の2×2を学習0で切り分ける
+
+§102と原本9dcを引き継ぐ。未達HQ04が新RU02参照自体の生成不一致か、別述語/独立不明の有無への転移差かを区別する。原文由来4参照を、教材RU02の述語/評価HQ04の述語×独立不明有無で固定。RU02全文は既見教師、HQ04原文は既見評価の完了rawをsource/owner/full snapshot/request/messages/response/保存candidate一致で厳密再利用。新3生成（RU02全文/その独立不明なし/HQ04へ同独立不明追加）、before/after学習比較ではない。新2変種だけはfresh合成record、全4参照は理由marker・二段連体・時点/否定を原文引用で保持、未知から因果を追加しない。
+
+private sourceはreason-transfer3-sources.json、SHA256 70fed5a58620cc1a6cf3660aed9a4080df826cd820a99f593e58225affe5b036。原76 plan SHA571434c425f059a8f5f8ffd6a57b5afb1727df46db5a4206e6f35a7ed21972b1、API dc05clean/source6、既存112tensor adapter9dc4f947/config4776a484をこの学習0診断の研究比較先へrootが明示選定する。通常採用/次学習初期値の採用を意味しない。v2同一、学習0/NLL0/新3call/1load/要求23秒/context8192/maxnew2048/全体GPU180秒（外170+kill10）。0.58USD/hなら処理上限0.029USD、準備/回収/保持別。CPU180秒は別枠でモデル0。
+
+CPU4参照strict/保存reader内Engine・両compiler・両author禁止/tokenizer/元HQ04再利用一致成功後だけ同Jupyterで一回生成。全4生成/再利用結果を原文と参照へ照合し、strict通過/参照JSON一致を一般意味率へ換算しない。旧8重み対16file不変/compute空、partial含む全原本/6API/2scriptをCRC/bytes-SHA ZIP保全。モデル再試行/出力補修/採否緩和/通常接続変更なし。
+
+コードsemantic_units_reason_transfer3.py（prepare/run/archive）とsemantic_units_reason_transfer3_supervisor.py。root=/workspace/analysis-reason-transfer3-20261103。再開はprepare.exit/run.exit/report/manifestとcollectionを確認し、存在するrootを重複起動しない。個別本文/raw/参照はprivate ZIP、公開はコード/条件/本文なし結果のみ。正式0/3・54.50％据置、STRUCTURE_MAP_DELTA_NONE。本人基準の判断/選択、複数field/本人補足/比較、記録間再出現/変化、通常累積接続は残件。Mashの現セッションの必要作業/GPU/Jupyter/GitHub承認内、逐次承認0。
+
+同時のsemantic_units_role_boundary_audit.jsonはROLE教師AT32＋T4の5行に誤った肯定copula修飾を教える例0と確認。AT32に既存複数文ROLE＋結果はあるため『複数文教材なし』とは言わない。明記役割＋独立ACTIONの組合せは未教示、正常ROLE10と現typed単一節scopeは保持する。R01/R08の同一ROLE節での差は観測済みだが唯一原因未確定、R07の誤否定/非役割分類も未解決。原文からの順序対照2教材は監査案で、まだ採用/学習条件未選定。

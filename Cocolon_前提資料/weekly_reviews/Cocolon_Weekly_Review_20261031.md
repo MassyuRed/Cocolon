@@ -2453,3 +2453,10 @@ NV04は結果root重複とWRITTEN_UNKNOWNの親不正という意味/形式未�
 全50原文/前後/20ROLE文章図を確認、raw46同一/4変化。NV04の結果重複と不明の親不正は改善しstrict採用へ、HQ04ので理由→TE_CONTEXT誤分類は残る。R08に肯定過去copulaの誤modifierが再発。R07は原文外否定を除きstrict採用するが意味誤分類/誤否定が残る。XROLE03は不明内容引用が拡大するが推測/typed拒否を維持。候補47→49を品質率にしない。全対象独立化は必須でなく、対象語消失とは扱わない。R4/T4/Xself2=10pair bytes同一で過去/正負/SELF・1ROLE/辺0/4gap・文章図保持、scope拒否6維持、旧22教師再現22/22維持。新2はNLLのみで生成再現未確認、同量controlなし。
 
 別CPU100保存再読は候補96復元/4拒否、ROLE20復元/12拒否、保存reader内のEngine/両compiler/両author呼出しを禁止して一致。全候補mapped0/unparsedで通常接続ではない。元532member/15,568,148bytes/SHA1991407b…をCRC/全bytes-SHA照合し、[原本・新重み・全文読解](https://chatgpt.com/library?file_id=libfile_95c5112daf788191b2ef457ffb81f60d&account_id=personal)（15,419,466bytes/6member/SHA c0a1e5f3…）へ保全。新9dcの通常/次初期値は不採用。次CPUは理由転移の述語/独立不明の差と複数文copula保持を切り分け、追加GPU条件未固定。本人基準/記録間関係/通常累積接続は未完。通常HTTP/DB/RN/配置/Pod管理0、GPUレンタル維持、STRUCTURE_MAP_DELTA_NONE、正式0/3・54.50％据置。
+
+
+## 103. 11/3 — 学習0の理由2×2診断と役割境界監査を開始
+
+[条件/コード/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-reason-transfer3-plan-20261103)。§102の未採用9dcをこの研究比較先へ明示選定し、原文参照RU02/HQ04の述語×独立不明有無の4条件を固定。HQ04原文は完了rawを厳密再利用、新3call/1load/学習0/NLL0/180秒（処理上限0.029USD@0.58USD/h、準備保持別）。CPU4strict/保存非生成/tokenizer/旧HQ04一致とGitHub読戻し成功後に一回実行、最終未確定。旧16file保持、通常/次初期値未採用、STRUCTURE_MAP_DELTA_NONE。
+
+同時のROLE境界監査は既存5教師AT32/T4に肯定copula誤modifier教師0、AT32の複数文ROLE＋結果を確認。明記『の役割は』＋独立ACTIONの組合せは未教示で、原因を文数だけと断定しない。R08のactor逆転や対象語消失とも認定しない。正常ROLE10を保持し、複数節をtyped採用するscope拡張なし。新順序対照2教材は監査提案だけで、教師/CPU/GPU未選定。監査自身のモデル/生成/教師/本番変更0。

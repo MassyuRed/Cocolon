@@ -1,5 +1,7 @@
 # Cocolon 最新情報 — 全機能・全状態
 
+**11/3・分析の次の切分け（第9回§103）：** 前回9dcの理由誤分類を、教材/別述語×独立不明有無の2×2で学習0診断。旧HQ04原本1を再利用し、新3call/1load/180秒、CPU/GitHub確認後一回実行・結果未確定。ROLE既存5教師に誤copula修飾0、既存複数文教材AT32はあるため単純な教材欠如と断定しない。正常ROLE10とtyped単一節scopeを保持。[固定条件/監査/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-reason-transfer3-plan-20261103)。通常/次学習採用なし。
+
 **11/3・分析の最新結果（第9回§100–102）：** 74教師監査後、旧74不変＋原文対照2を76教師/90更新/152NLL/50新stop/2load・641.971830秒/exit0で比較。NV04の結果重複/不明の親不正を改善し、R4/T4/追加本人2の10ROLE文章図を前後bytes同一で保持。50rawは46同一/4変化、HQ04理由誤分類は残りR08肯定過去copulaに誤modifier再発。strict候補47→49は意味率ではない。100保存非生成再読/元532memberの全bytes-SHAを確認・新重み9dcを保全、通常/次初期値は未採用。[結果・原本・再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-reason-unknown76-result-20261103)。全対象分離は現行必須でなく、次は理由の述語/不明併存差と複数文copula保持をCPUで切分け。通常HTTP/DB/RN/配置不変、本人基準/記録間関係/通常累積接続は未完。GPUレンタル維持、STRUCTURE_MAP_DELTA_NONE。
 
 **11/3・分析の入力整合比較結果（第9回§98）：** 既存74教師をv2学習入力へ整合し、86更新/148測定/46新stop/2loadを631.116秒/exit0で完了。明記役割R4は2→4/4、教示T4は2→4/4、既存教師22のJSON値再現は16→22。全46原文/前後と12ROLEの文章図を読み、保存reader内のEngine/両compiler/両author呼出しを禁止した92保存応答の非生成再読（候補85復元/7拒否、ROLE12復元/12拒否）を確認。新d25は対象関係の欠落・不明/理由scope未達等により通常/次学習未採用。元480member/新adapter全112tensorを回収照合・private保存済み。[結果・原本・再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned74-result-20261103)。旧各重み/既定、通常API/DB/RN/配置不変。本人基準/記録間関係/通常累積接続は残件。STRUCTURE_MAP_DELTA_NONE。
