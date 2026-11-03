@@ -3297,3 +3297,19 @@ API88078cdb、STRUCTURE_MAP_DELTA_PRESENTは明示offline経路のみ。新produ
 | tests/test_analysis_model_quoted_parent_units.py | source/actor/否定/候補不一致・旧normal不変・3prompt保存・改変拒否・Engine/compiler/authorなし再読 |
 
 同trial内の新research fileはwritten_role8_run.py（8新生成/学習0）、written_role8_supervisor.py（単一起動/timeout/exit）、collect_written_role8.py（採用file再読/7拒否/原本回収）、written_role4_cpu.py（新4原source対比のstrict/map/file/tokenizer、モデル0）、written_role8_results.json（本文なし確定結果/原本/次の再開点）。通常新subsystemではない。
+
+
+<a id="analysis-written-role74-files-20261103"></a>
+## 2026-11-03 — 役割4教材を加えた隔離比較のfile地図
+
+通常Analysisのsource/owner/型/HTTP/DB/RN/依存/稼働構造不変、STRUCTURE_MAP_DELTA_NONE。この差分は既存trial `observation_learning/trials/2026-11-01-analysis-model-fields/` 内だけ。[条件と実行状態](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-written-role74-plan-20261103)。
+
+| file | 責務 |
+| --- | --- |
+| semantic_units_written_role74_prepare.py | 旧70辞書/旧78順部分列/末尾18と新T4、同a5 before42を実strict/保存再読/tokenizerでCPU照合 |
+| semantic_units_written_role74_run.py | 明示a5初期値、74教材/86更新/148測定/新50生成・3load/900秒の一回比較と元raw保持 |
+| semantic_units_written_role74_supervisor.py | 2script SHA/固定API88078/旧5adapter対を検証、単一起動/890+10秒/終了・compute・原本manifest保全 |
+| semantic_units_written_role74_saved_replay.py | 別CPU processで前後92応答を照合。保存readerのEngine/両compiler/両author禁止、役割24判定を候補92判定と分離 |
+| export_written_role74_numeric.py | UTF-8原本とF32 uint32 bit列を元bytes/SHAで外部回収。モデル/load/新生成/更新0 |
+
+GPU実行はCPU成功後に一回起動済み。結果の意味判断/採否は完了後の全source/raw読解へ分け、原reportを改変しない。一般本人基準・記録間関係・通常保存の完成へ換算しない。
