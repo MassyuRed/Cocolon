@@ -337,6 +337,13 @@ for (const tier of ['free', 'plus', 'premium']) {
     assert.equal(labels.includes('9:16'), tier === 'premium');
     assert.equal(labels.includes('表示なし'), tier === 'premium');
     assert.equal(nodes.some(n => n.props.testID === 'piece-visual-theme_id'), tier !== 'free');
+    const swatches = nodes.filter(n => n.props.testID?.startsWith('piece-theme-swatch-'));
+    assert.deepEqual(swatches.map(n => [n.props.testID, n.props.style.backgroundColor,
+      n.children[0].props.style.backgroundColor, n.children[0].props.style.color]), tier === 'free' ? [] : [
+      ['piece-theme-swatch-soft_paper', '#F6F1E8', '#FFFDF8', '#111827'],
+      ['piece-theme-swatch-quiet_night', '#0B1120', '#111827', '#F9FAFB'],
+    ]);
+    assert.ok(swatches.every(n => n.props.accessibilityElementsHidden && n.props.importantForAccessibility === 'no-hide-descendants'));
     assert.equal(nodes.some(n => n.props.testID === 'piece-visual-aspect_ratio'), tier === 'premium');
     assert.equal(nodes.some(n => n.props.testID === 'piece-visual-branding_mode'), tier === 'premium');
     assert.equal(nodes.some(n => n.type === 'Button' && /保存|書き出し|共有/.test(n.props.title)), false);
