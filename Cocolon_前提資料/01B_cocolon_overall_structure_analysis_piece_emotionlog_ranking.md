@@ -1,3 +1,5 @@
+> **2026-11-03・分析学習比較の最新結果（weekly§98–99）：** 既存74教材のv2入力整合を86更新/46新生成で完了し、明記役割2→4/4・教示2→4/4。追加の新4source/学習0/8生成では本人役割1→2/2、推測/他者の拒否2/2を維持。全原文/生成/ROLE文章図/保存reader非生成復元を照合。対象関係欠落等が残り通常/次学習未採用、本人基準/記録間関係/通常累積接続は残件。通常構造・DB/RN/配置変更なし、STRUCTURE_MAP_DELTA_NONE。[結果・原本・再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-role-transfer4-result-20261103)。
+
 ---
 title: "01B_Cocolon_全体構造資料_Analysis_Piece_EmotionLog_Ranking系"
 revision_date: "2026-05-26"
@@ -3338,3 +3340,8 @@ API dc05dc35、通常product owner追加なし。既存 `semantic_admission.py` 
 
 
 同trial追加 `semantic_boundaries46_results.json` は本文なしの確定実結果・役割/旧保持の退行・不採用・92保存応答の照合・400原本/終了log2/private保存先を保持する。上記4scriptと合わせてpublic研究file5件。元教師22/a5原出力34の派生参照と実読reviewはprivate archive内に置き、通常product ownerへ追加しない。[全結果と現在の再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-boundaries46-result-20261103)、weekly§96。API dc05のprivate版は保持するが通常採用せず、旧既定・strict・ROLE scope・HTTP/DB/RN構造は不変。
+
+
+### 2026-11-03 — 既存private役割接続の74教材入力整合比較
+
+[aligned74実結果](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned74-result-20261103)は86更新/46新生成・role4/4と教示4/4、保存非生成再読まで完了。通常/次学習は未採用、本人基準/記録間関係/通常累積接続の残件を保持する。新private graph/作者/型/通常route/DB/RNは追加せず、既存dc05 profileとtyped-role ownerを使用。trial内aligned74 prepare/run/supervisor/collectはCPU整合/学習比較/一回制限/原本保存、role_transfer4 prepare/run/supervisorは新4のCPU参照/旧新8call/一回制限の実行記録用で、商品ownerではない。STRUCTURE_MAP_DELTA_NONE。追加転移4の比較も完了、本人役割1→2/2とscope拒否2/2維持、全8raw/3ROLEと保存readerを照合済み。最新結果と再開はtrial/weekly§99へ戻る。

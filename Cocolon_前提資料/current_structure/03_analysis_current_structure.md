@@ -1,4 +1,6 @@
-> **2026-11-03最新・意味境界指示比較を完了：** 同73ee/同userでsystemだけを追記し、46新生成/1load/学習0・417.780639秒/exit0。引用/対象/否定の3例はa5へ復帰したが、新退行と肯定役割の誤修飾が再発し、役割3→2/4/T4再現4→2/4。新版は通常未採用、旧各版/既定を維持。[全結果・原本・再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-boundaries46-result-20261103)。92保存応答と全原本を照合・保存済み。API dc05のprivate prompt/state版のみSTRUCTURE_MAP_DELTA_PRESENT、通常owner/型/ensure/HTTP/DB/RNは不変。
+> **2026-11-03・分析学習比較の最新結果（weekly§98–99）：** 既存74教材のv2入力整合を86更新/46新生成で完了し、明記役割2→4/4・教示2→4/4。追加の新4source/学習0/8生成では本人役割1→2/2、推測/他者の拒否2/2を維持。全原文/生成/ROLE文章図/保存reader非生成復元を照合。対象関係欠落等が残り通常/次学習未採用、本人基準/記録間関係/通常累積接続は残件。通常構造・DB/RN/配置変更なし、STRUCTURE_MAP_DELTA_NONE。[結果・原本・再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-role-transfer4-result-20261103)。
+
+> **2026-11-03・入力整合前の意味境界指示比較（履歴）：** 同73ee/同userでsystemだけを追記し、46新生成/1load/学習0・417.780639秒/exit0。引用/対象/否定の3例はa5へ復帰したが、新退行と肯定役割の誤修飾が再発し、役割3→2/4/T4再現4→2/4。新版は通常未採用、旧各版/既定を維持。[全結果・原本・再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-boundaries46-result-20261103)。92保存応答と全原本を照合・保存済み。API dc05のprivate prompt/state版のみSTRUCTURE_MAP_DELTA_PRESENT、通常owner/型/ensure/HTTP/DB/RNは不変。
 
 > **2026-11-03履歴・replay68：** 再掲3枠だけを変えたreplay68は74更新/32新stop、491.863046秒で完了したが、新しい意味改善はなく不採用。SQ03/MD02の不足は残り、OD01は不正unitへ変化して拒否継続、MD01にも親曖昧の新拒否。SC6=6/6と旧AT/UQ/MX/OAの教師一致、CE68の局所改善は保持。 旧68にない『対象分離＋継続修飾＋強調否定』と別actor/二不明文脈の組合せ2件を原sourceから合成し、実strict/実file非生成再読/実tokenizer prefix・EOSまでCPU確認。モデル/生成/更新0、新70教材の学習plan/GPUは未選定。診断文やrawの教師化ではない。 [結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-replay68-result-20261103)。通常source/API/DB/RN/稼働/Pod管理不変、全未解析/主体未解決/route0、STRUCTURE_MAP_DELTA_NONE。局所教材/保存の成立を、本人基準の役割/判断/選択と記録間関係・通常graph接続の完成へ換算しない。
 
@@ -1084,3 +1086,8 @@ API dc05dc35の既存quoted-parent Inputにsemantic_boundaries.v2を追加し、
 
 
 11/3の上記指示版比較は完了。既出役割3→2/4と肯定教示の退行により新版を不採用とし、strict/完全source witnessを緩めず旧既定を保持する。ROLEのafter採用4件は否定だけで、元graph/文章図の意味は同一。引用候補の局所改善を通常意味接続・本人基準・記録間関係の完成へ換算しない。次は既存source-authored74の正解と実学習入力の対応を保ち、ROLEの過去/肯否と従来保持を同時に改善する一回条件へ戻る。新system文言だけの反復やraw教師化へ進まない。[実結果・原本・再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-boundaries46-result-20261103)。
+
+
+### 2026-11-03 — 既存private役割接続の74教材入力整合比較
+
+[aligned74実結果](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned74-result-20261103)は86更新/46新生成・role4/4と教示4/4、保存非生成再読まで完了。通常/次学習は未採用、本人基準/記録間関係/通常累積接続の残件を保持する。新private graph/作者/型/通常route/DB/RNは追加せず、既存dc05 profileとtyped-role ownerを使用。trial内aligned74 prepare/run/supervisor/collectはCPU整合/学習比較/一回制限/原本保存、role_transfer4 prepare/run/supervisorは新4のCPU参照/旧新8call/一回制限の実行記録用で、商品ownerではない。STRUCTURE_MAP_DELTA_NONE。追加転移4の比較も完了、本人役割1→2/2とscope拒否2/2維持、全8raw/3ROLEと保存readerを照合済み。最新結果と再開はtrial/weekly§99へ戻る。

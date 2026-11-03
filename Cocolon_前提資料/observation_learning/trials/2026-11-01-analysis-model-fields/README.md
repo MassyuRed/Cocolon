@@ -1187,3 +1187,17 @@ d25をこの診断だけの研究用比較先へrootが明示選定。新4source
 同じAPI dc05/v2/4sourceで保存73eeと保存d25を各4生成、合計8新call/2load/追加学習0/300秒（外290+kill10）/要求23秒/context8192/max_new2048。現在単価0.58USD/hなら処理上限0.048334USD、保持等別。CPUのstrict/typed2採用2拒否/全file非生成再読/実tokenizer成功後だけ一回実行。初期2対を含む旧6対＋新候補全14fileの不変と終了時computeを確認し、partialも保存する。
 
 sourceはprivate role-transfer4-sources.json、SHA256 c46d7d196037176847cf596c25b7953a1f639569085edbd8f5ec14a41ca67b52へ固定。publicはsemantic_units_role_transfer4_prepare.py/run.py/supervisor.pyと条件のみ、個別本文はprivate原本へ残す。root=/workspace/analysis-role-transfer4-20261103、prepared=/workspace/analysis-role-transfer4-prepared-20261103。再開時はprepare.exit/run.exit/result/report.jsonを先に確認し、既存rootを重複起動しない。Mashの現セッションの必要作業/GPU/Jupyter/GitHub指示内、逐次承認を戻さない。通常/次学習採用・受口緩和・出力補修なし。STRUCTURE_MAP_DELTA_NONE。
+
+
+<a id="analysis-role-transfer4-result-20261103"></a>
+## 11/3 — 役割の近接転移4比較完了、本人肯否2/2・scope拒否維持
+
+コード9a7a6657を全5file全文読戻し後、同JupyterでSHA/AST照合・固定private sourceを転送して一回実行。CPU prepare.exit0、旧74/46内の非空133field・memo/action組との一致0、strict参照4/typed2採用2拒否/実保存reader再読/tokenizerを確認。同API dc05/v2/保存73ee対d25、学習0/8新stop/2loadを39.496866857秒（親56.544391875秒）/run.exit0で完了。処理按分0.006363384USD@0.58USD/h、準備/回収/保持別。全14adapter/config fileは前後不変、終了compute空。
+
+root＋同環境read-only担当は全4source/8raw/3採用ROLE artifactを確認。本人過去役割は1→2/2、推測/他者のscope拒否は2/2を維持。XROLE01は肯定copulaの誤WRITTEN_MODIFIERが消えtyped復元へ到達。XROLE02の否定過去役割は旧から意味が同一で、actor境界とqualifier順の参照一致のみ改善。XROLE04もcopula誤modifierが消え、他者actorを維持したまま本人ROLE採用を拒否する。XROLE03は前後raw同一で推測語を保ち、確定roleへの昇格を拒否するが、WRITTEN_UNKNOWN/UNKNOWN_CONTENTとした候補は参照ROLE＋推測に不一致。安全な拒否を意味候補の正解認定へ換算しない。参照JSON一致0→3/4は一般品質率ではない。
+
+採用したROLEは各1node/SELF/fact/past・原文正負・辺0/4gapで、graphから同じ文章/図を投影。8候補/3ROLEの保存reader内ではEngine/両compiler/両author呼出しを禁止して同一復元、typed拒否5件はartifactなし。候補8件はmapped0/unparsed1であり、通常わたしマップの意味採用到達とは異なる。全結果はsemantic_units_role_transfer4_results.json。
+
+[全原本・全文読解・再開記録](https://chatgpt.com/library?file_id=libfile_0f0e514767dc8191b30324cff1e1d752&account_id=personal)：92,946bytes/6member/SHA256 994c7364a7bd527b59af67fd9f1d444399744651c41a2c0612cb4d30b22ee9ef。内部未改変ZIPは104,824bytes/62member/SHA256 265f623e44d64c32ce101a7072d1e269c7089a1b46114d4082750298f8e1798f。Jupyter標準Downloadで回収し、Pod外CRC/全manifest bytes-SHA一致。初期73eeと新d25重みは上記aligned74原本をSHAで参照し、ここへ重複収録しない。元reportのPENDING_RAW_READは実行時statusとして未改変、読解完了は派生review/summaryへ記録した。
+
+再開時は両完了runのprepare.exit/run.exit/result/report.json・本節・全結果を先に読む。完了runを重複起動しない。d25はこの診断だけへ明示選定しており、通常/次学習初期値へ未採用。次はMD01/OD01の対象関係欠落を既存74のsource/targetと照合し、教師欠落か保持退行かを区別してからCPU条件を固定する。新system文言だけの反復、既存rawの修正/教師化、同量dose追加だけ、通常の採否条件緩和へ戻さない。本人基準の判断/選択、複数field/本人補足/比較、記録間再出現/変化、通常累積保存接続は未完。通常HTTP/DB/RN/Render/Supabase/配置/Pod管理変更0、GPUレンタル維持。STRUCTURE_MAP_DELTA_NONE、正式0/3・54.50％据置。Codex Work/GPT-6 root＋同環境read-only確認であり、独立Pro/Ultra/human受入れではない。

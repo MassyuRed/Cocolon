@@ -2412,3 +2412,20 @@ API dc05dc35の既存2owner/既存testだけへsemantic_boundaries.v2を明示of
 ## 97. 11/3 — 既存74教師と意味境界入力を揃える比較条件を固定
 
 [条件・コード・再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned74-plan-20261103)。§96の指示差だけでは役割と旧保持を両立できなかった結果を受け、同じ既存74source/正解/86順を既存v2学習messagesへ揃える。新教師0/生成raw教師化0。73eeを明示研究用初期値として、直前v2 after46をbefore原本再利用、新before0/after46/86更新/148測定/2load/900秒。plain CE/LR1e-5/clip1/seed20261111、現在画面0.58USD/hなら処理上限0.145USD（保持等別）。CPUのstrict/保存再読/tokenizer成功とGitHub元code読戻し後だけ同Jupyterで一回実行。現在は条件固定で、実結果未確定。通常API/DB/RN/配置変更0、STRUCTURE_MAP_DELTA_NONE。残件全体の本人基準の読み/記録間関係を保持し、教示再現を一般品質へ換算しない。Mashの現セッションで必要作業承認済み、逐次承認を戻さずcheckpointを継続する。
+
+
+## 98. 11/3 — 74教師の実学習入力整合を完了、明記役割4/4へ改善
+
+[結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned74-result-20261103)。既存74source/正解/86順は不変、同v2・73ee初期の86更新/148測定/新46stop/2loadを631.116257秒/exit0で完了。保存112tensor実一致/非学習reload、旧6対不変/compute空。新d25/config4a46を生成、処理按分約0.101680USD@0.58USD/h（保持等別）。同量baseline追学習controlはなくprompt単独因果へ帰属しない。
+
+全46原文/前後、全12ROLE文章図をroot＋同環境read-only担当が確認。R4=2→4/4、T4=2→4/4、source-authored22のJSON再現16→22/22。既見合成の再現で一般意味率ではない。独立未決定/主体/継続と対象の局所回復を認める一方、MD01/OD01のCONTENT_TARGET構造化欠落、NV04結果重複/不明不正従属、PQ02/HQ04、R06/R07が残る。全文action中の対象語を消失したと誇張しない。scope外R05〜08のtyped拒否は維持し、通常/次学習は不採用。
+
+92保存応答の別CPU再読は候補85復元/7拒否、ROLE12復元/12拒否。保存reader内のEngine/両compiler/両author呼出しを禁止して復元一致、モデル生成0。15,456,427bytes/480member全原本をPod外CRC/全SHA照合し、[保存重み/全結果](https://chatgpt.com/library?file_id=libfile_9e641f4df39081919d7a396d40fc43c0&account_id=personal)へ保全（最終ZIP15,310,067bytes/SHA1ae9805f…、内部未改変ZIP27b96a70…）。HTML回収待機2件はtimeoutでfile取得を確認できず、Jupyter標準Downloadへ切替え正常回収。GPU再実行0。通常HTTP/DB/RN/配置/Pod管理0、STRUCTURE_MAP_DELTA_NONE、正式0/3・54.50％据置。
+
+## 99. 11/3 — 新しい役割4文の転移比較完了、本人役割1→2/2
+
+[条件/コード/全結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-role-transfer4-result-20261103)。新4華恋合成sourceは既存74/46の非空133fieldとの本文/組一致0をCPU確認し、原文参照・strict4/typed本人肯否2採用/推測他者2拒否/保存reader非生成/tokenizerを準備済み。同API dc05/v2、保存73ee対d25、学習0/8新stop/2loadを39.496867秒（親56.544392秒）/exit0で一回完了。処理按分約0.006363USD@0.58USD/h、準備/回収/保持別。旧6重み対＋新候補全14file不変/終了compute空。
+
+全4原文/8raw/3採用ROLEのgraph/文章/図をroot＋同環境read-only担当が照合。本人役割1→2/2、推測/他者はscope拒否2/2を維持。肯定copula誤modifierが消え、否定役割は旧から意味同じで表現境界のみ整合。推測rawは前後同一で未確定を保持、他者をSELFへ昇格しない。採用ROLEはSELF/fact/past、原文肯否・1node/辺0/4gap・同一文章図。参照JSON一致0→3/4は品質率ではなく、推測参照ROLEと生成WRITTEN_UNKNOWNの差は残る。
+
+8候補＋3ROLEを保存reader内Engine/両compiler/両author呼出し禁止下で同一復元、typed拒否5件はartifactなし。候補8件はmapped0/unparsed1で通常graph到達とは異なる。元ZIP104,824bytes/62member/SHA265f623e…をPod外CRC/全manifest SHA照合、[原本・全読解](https://chatgpt.com/library?file_id=libfile_0f0e514767dc8191b30324cff1e1d752&account_id=personal)（92,946bytes/6member、SHA994c7364…）へ保全。個別本文は公開しない。完了rootの重複起動/再学習0。対象関係MD01/OD01、NV04/PQ02/HQ04、R06/R07、本人基準/複数field/本人補足/記録間関係/通常累積接続は残件。d25はこの診断だけへ明示選定、通常/次学習初期値は未採用。通常HTTP/DB/RN/配置/Pod管理0、GPUレンタル維持、STRUCTURE_MAP_DELTA_NONE、正式0/3・54.50％据置。Mashの現セッション指示内で逐次承認0。
