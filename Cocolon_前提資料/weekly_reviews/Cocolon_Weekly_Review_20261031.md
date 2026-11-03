@@ -2469,3 +2469,6 @@ NV04は結果root重複とWRITTEN_UNKNOWNの親不正という意味/形式未�
 ## 105. 11/3 — 理由/文脈の重点学習と役割/行動の順序対照78を固定
 
 [条件/コード/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-boundary78-plan-20261103)。旧76/90prefixを保持し原文RB2を追加、末尾[RU01,RU02,RB01,RB02]×4で78教師/106更新/156NLL。9dcをこの研究初期値へ明示選定、before53を76after50＋診断Y01〜03から厳密再利用、新before0/after53/2load/900秒・上限0.145USD@0.58USD/h（保持等別）。同量controlなしで追加教材/重点回数を唯一原因としない。新2のstrict/既存T4typed/RB2typed拒否/保存非生成/tokenizerとGitHub読戻し成功後に同Jupyterで一回実行。現時点は条件固定で結果未確定。通常/次初期値自動採用/採否緩和/本番変更0、STRUCTURE_MAP_DELTA_NONE、本人基準/記録間接続は未完。
+
+
+§105実行checkpoint：74ff5f95全11fileの全文/Git SHA読戻し後、同Jupyterで固定source/4script/監査をSHA照合して一回起動。CPU prepare.exit0、78strict/T4typed/新RB2typed拒否/旧76不変/53保存再利用/非生成reader/tokenizer成功。GPU41.549677秒時点78前測定/2更新/1load/新call0。最終未確定、終了後106保存再読/全原本回収を一回接続済み。
