@@ -30,6 +30,8 @@ automatic_progression: false
 
 # 分析構造 — Current Structure
 
+> **11/3・研究比較の最新（第9回§136–137）：** 分離material.v5で指示と説明例をそろえ、新30stop/1load/学習0の一回比較を完了。X03は初めて正しい対象で文章図へ届くが、PV01 JSON破損とHQ04理由退行で不採用。typed18→18は成功の入れ替わり、共通17の全文/図同一。全338原本member/60応答を照合・保存。[結果と再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v5-negscope-result-20261103)。研究overlayは通常APIへ反映していない。通常graph/作者/HTTP/DB/RN/配置不変、STRUCTURE_MAP_DELTA_NONE。次は肯定ACTION安定性・明示理由/発話境界を元材料/ownerから確認し、追加GPU未固定。本人基準/補足typed/記録間・通常累積/IF・Savedは残件。
+
 ## 0. Current conclusion
 
 最新の通常カテゴリ方針は[11/2修正](#analysis-selected-category-context-20261102)。以下の日付付きu250等は各時点の履歴で、現在の未配置一覧ではない。

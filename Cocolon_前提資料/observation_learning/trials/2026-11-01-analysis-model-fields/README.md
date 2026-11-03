@@ -1785,3 +1785,29 @@ API ded0586720df0c0d50d8838bcd391a19ca3eead5を分離worktreeへ置き、semanti
 runner=material_v5_negscope_trial.py、SHA d2090f2c9fc5ee4f930b05338124673b33a2edb0cd584c8da9864727d0d530e4。全raw/responseをstop assertion前に保存し、同file保存readerは7生成/compile/作者呼出禁止の既存guardを継承する。collectorは読戻したtyped artifact自身からgraph/文章/図を再投影して保存sidecarと一致確認し、before/afterを別集計する。部分完了は部分完了として残し、完了root再起動/同probe/旧UL・beam・語彙案の自動探索0。finally原本を保持しPod外へ回収する。
 
 今回の継続/Jupyter/GPU/必要資料更新の指示内。root単一実装/実行/最終判断、同環境read-only補助が差分・runnerを確認、実環境GPT-6/Codex Work、独立Pro/Ultra/Mash Product Readではない。通常採用false/次初期自動採用false。商品API/source/graph型/唯一作者/ensure/HTTP/DTO/DB/RN/Render/Supabase/配置/Pod管理変更0、STRUCTURE_MAP_DELTA_NONE（分離研究overlayのみ）。本人基準/補足typed/記録間・通常累積/IF・Savedと分析観測会未取得を継続残件として保持。
+
+
+<a id="analysis-material-v5-negscope-result-20261103"></a>
+## 137. 11/3 — X03は文章図へ届くが既存成功と理由が退行、一貫版も不採用
+
+§136の比較を一回完了。新v5の30要求全てstop、1load/282.991321538秒、学習0/診断forward0/新重み0、旧a2e/config不変。before30は同一identityの旧v4保存原本再利用で、新生成へ加算しない。通常採用false/次初期自動採用false。API ded0586＋分離overlayの比較であり、API branchへのv5反映/通常既定の変更/配置は行っていない。
+
+| 観測対象 | 実結果と採否への意味 |
+| --- | --- |
+| X03 | 原文外target「模型を作った」を解消し、「模型」＋NEG「作らなかった」で初めて限定typed/文章/図へ到達。SELF/fact/past、ROLE肯定/ACTION否定、生活カテゴリ、2node/edge0を保持。場面/思考/結果と段階接続はgapのまま |
+| PV01 | 旧成功の肯定ACTIONに壊れたqualifier JSONを生成し、全体拒否へ退行。raw修復はせず保存 |
+| HQ04 | 明記理由WRITTEN_REASON＋「ので」からTE_CONTEXTへ変化し、意味上の理由を失う。candidate形式受理を正解へ数えない |
+| MD02 | 無効carrierからACTION＋有効な短NEGへ局所修復。他者「姉」と二つの不明を保持するが、限定typed未対応は継続 |
+| YREASON01 | 連体内容の親は理由へ戻るが、理由marker不足と述語の誤modifier化が残る |
+| 発話AT04/11/17/24 | AT04の原文外連結引用、AT17の発話root分類を局所修復。一方AT11の不正TE_CONTEXT、AT17の述語対象化が残り、AT24には新たな「返事」のサ変述語名詞対象化。全4typed未対応 |
+| X04/M4 | X04とM01/03/04のraw同一。M02は短NEGから長NEGだけ変更。全M4のgraph/全文/図は旧baseline同一。前回probeのM04原文外NEGは再発しないが、元baselineは既に正しく、新改善とは呼ばない |
+
+候補受理は26→29/30、typedは18→18/30。後者はX03新成立とPV01喪失の入れ替わりで、共通17はgraphおよび可視文章/図が全同一。HQ04の理由退行は件数には出ない。新profileと旧v4のsource/意味gate/型/作者は同じで、指示と説明例の一貫化による一局所の成功は認めるが、失われた旧成功/理由を含め**候補は不採用・今回の採用品質修正なし**とする。説明例2変更と追記指示を個別に切り分けた因果証明でも、短NEG一般の誤り証明でもない。
+
+旧30＋新30の全response/raw/requestのref・messages SHA・raw SHA・実finishを照合。保存candidate55/typed36を7生成/compile/作者呼出禁止guardで再読し、読戻したtyped artifact自身からのgraph/文章/図を保存sidecarへ照合した。rootと同環境read-only補助が全30原文/前後rawと成立した全文章/図を確認。134 tests pass、既存Pydantic非推奨warning1。独立Pro/Ultra/Mash Product Readではない。
+
+[全原本・比較・最終判断](https://chatgpt.com/library?file_id=libfile_8b3e4293fa78819195fae244ffcb0caf&account_id=personal)は801917bytes/SHA337a73c343e015343507a7e156e334aca85909873d3771e3bc613e5c8bde2a7e。新root全338 UTF-8 member（manifest対象337＋manifest自身）をPod外へ取り出し、全bytes/SHAを照合した。before/after全request/response/raw/成立保存、全pack、CPU/run/collection、runner/helper、API overlay2source＋test、ログ/exitを含む。最終review/metrics/再照合scriptを添付。remote元ZIP776314bytes/SHAb494f65532c4dfaab4d1474cb185b3ecdea1c79d7963eec4a9f7bd43e416cbadとのZIP bytes同一ではなく、全元member一致での保全。大きな表示は分割取得し、再連結の全文SHAも確認した。
+
+終了後GPU2MiB/0％、compute空、レンタル維持。前確認0.29USD/hの処理按分0.022796523USD（CPU準備/回収/待機保持/保存通信税等別、実総請求未測定）。完了root/append probe/旧UL・beam・語彙案の自動再起動0。新v5を通常/次初期値へ昇格せず、次は元原文と既存材料・ownerに戻り、肯定ACTIONの出力安定性と明示理由/発話境界の修復条件を定める。次GPU条件は未固定で、追加の指示variant探索は行わない。
+
+本文なし索引material_v5_negscope_results.jsonと再現runnerを同trialへ保持。実環境GPT-6/Codex Work、root単一writer/実行/最終判断。STRUCTURE_MAP_DELTA_NONE（分離研究overlayのみ）、商品API/source/graph型/作者/ensure/HTTP/DTO/DB/RN/Render/Supabase/配置/Pod管理変更0、primary outcome=BLOCKER_NARROWED/product_credit0。本人基準の役割/判断/選択、補足typed、記録間の再出現/変化、通常累積graph、IF/Savedと分析観測会の未取得は継続残件。

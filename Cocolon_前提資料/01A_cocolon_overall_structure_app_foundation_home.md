@@ -6054,3 +6054,16 @@ trial/material_v4_target4_sources.jsonは独立C4教示と非学習Z4の原文/�
 
 
 11/3・morph4の最終結果と局所NEG指示probeはweekly§135へ。trial/material_v4_negquote_probe.pyは変更messagesを独自probe identityへ保存し、旧v4consumerへ採用しない比較専用。material_v4_morph4_results.jsonは本文なし結果/差分原本の索引。独立4typed到達で学習なし、追加指示は対照退行で不採用、新商品owner/型/通常接続0、STRUCTURE_MAP_DELTA_NONE。
+
+
+<a id="analysis-material-v5-negscope-files-20261103"></a>
+## 11/3・分析研究のファイル差分と現在地（§136–137）
+
+指示と独立否定ACTIONの説明例2箇所を一貫させた研究v5をJupyterで一回比較。X03の文章図到達と、PV01 JSON破損/HQ04理由退行を全件読解で分け、候補は不採用。typed18→18、共通17のgraph/全文/図同一、新30stop/1load/学習0。全338原本memberと60応答を照合・保存。商品APIへのoverlay反映・配置は0で、STRUCTURE_MAP_DELTA_NONE。
+
+| 追加ファイル | 責務/接続 |
+| --- | --- |
+| observation_learning/trials/2026-11-01-analysis-model-fields/material_v5_negscope_trial.py | 旧API ded0586＋分離overlayのCPU準備→一回30生成→既存consumer/唯一作者→保存非生成再読/比較。通常ownerへ接続しない |
+| 同/material_v5_negscope_results.json | 本文を持たない実績/原本保存/不採用の索引 |
+
+API overlay2source＋新testは保存原本へ同梱し、通常repoへ採用した実装とは扱わない。[結果/全原本/再開条件](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v5-negscope-result-20261103)。次は肯定ACTIONの出力安定性と明示理由/発話境界を元原文と既存材料/ownerへ戻して確認し、追加GPUは未固定。本人基準/補足typed/記録間の再出現・変化/通常累積/IF・Savedは未完、分析観測会も継続対象。

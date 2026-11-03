@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-**11/3・分析の最新結果（第9回§134–135）：** 今回も採用品質の修正には届いていない。独立した作る肯否4原文は旧a2eで全4文章図へ到達し学習停止。実失敗X03/X04の4prefixで前欄肯否とNEG引用範囲の差を測定した。局所指示4生成では元失敗の対象が戻る一方、対照1例の否定引用が原文外へ退行し不採用。計8新stop/4測定/2load・93.827516秒、学習0/新重み0。原本66file差分/最終判断を[trial](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v4-morph4-result-20261103)へ保存。次は新版指示と継承説明例の不一致を最小差分で整える候補。短NEG自体を誤り扱いせず、通常採用/新profile実装は未成立。GPU2MiB/0％・レンタル維持、API/DB/RN不変。本人基準/補足typed/記録間・通常累積/IF・Savedは残件。
+**11/3・分析の最新結果（第9回§136–137）：** Jupyterで指示と説明例をそろえた分離v5を一回比較。X03は正しい対象引用で初めて文章図へ届くが、旧成功PV01のJSON破損とHQ04の理由消失があり不採用。新30stop/1load/282.991322秒、学習0/新重み0。typed18→18は新成立/喪失の入れ替わり、共通17の全文/図は同一。全338原本memberと60応答を照合・保存。[全結果/原本/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v5-negscope-result-20261103)。v5は研究overlayのみでAPI branch/通常既定/配置へ未反映。GPU2MiB/0％・レンタル維持。次は肯定ACTIONの安定性と明示理由/発話境界を元材料/ownerから確認し、追加GPU未固定。本人基準/補足typed/記録間・通常累積/IF・Savedは残件。
 
 **11/3・分析の最新結果（第9回§100–102）：** 74教師監査後、旧74不変＋原文対照2を76教師/90更新/152NLL/50新stop/2load・641.971830秒/exit0で比較。NV04の結果重複/不明の親不正を改善し、R4/T4/追加本人2の10ROLE文章図を前後bytes同一で保持。50rawは46同一/4変化、HQ04理由誤分類は残りR08肯定過去copulaに誤modifier再発。strict候補47→49は意味率ではない。100保存非生成再読/元532memberの全bytes-SHAを確認・新重み9dcを保全、通常/次初期値は未採用。[結果・原本・再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-reason-unknown76-result-20261103)。全対象分離は現行必須でなく、次は理由の述語/不明併存差と複数文copula保持をCPUで切分け。通常HTTP/DB/RN/配置不変、本人基準/記録間関係/通常累積接続は未完。GPUレンタル維持、STRUCTURE_MAP_DELTA_NONE。
 
