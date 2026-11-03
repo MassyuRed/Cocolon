@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-**11/3・分析の最新結果（第9回§125）：** 新Podの同環境before22→16更新/32NLL→after26（48新stop/3load）を680.256936秒で完了。旧Pod22rawと新before22は全同一。同22例の文章図到達は14→13（X01の重複キー/ROLEで新拒否、X03の原文外引用継続）。共通成功13例のgraph/表示文章/図は同一で、対象子補完を商品改善へ数えない。新非学習Z4は4到達だがafterのみ。MD02の否定不足・YREASON01理由境界も残り、新d3d/configc36は通常/次初期とも不採用、a2e研究候補保持。候補44/typed31保存再読、全526manifest/112tensorと全原本を回収照合保存済み。GPU2MiB/0％・レンタル維持、通常/API/DB/RN不変、本人基準/補足typed/記録間/通常累積/IF・Savedは残件。
+**11/3・分析の次比較（第9回§126）：** 前回d3d不採用/a2e研究候補を保持し、追加学習を繰り返さず、同a2e・同22入力で生成時のcompact schema/原文内引用制約を比較する。既存token maskを使い、意味選択/否定/親はモデルと既存CMEEに残す。CPU90target tokenbytesと既存strictを緩めない境界を13.669秒/モデル0で確認。新22生成/1load/学習0/最大900秒、通常/API/DB/RN不変。完了後に全raw/文章図から採否を更新する。
 
 **11/3・分析の最新結果（第9回§100–102）：** 74教師監査後、旧74不変＋原文対照2を76教師/90更新/152NLL/50新stop/2load・641.971830秒/exit0で比較。NV04の結果重複/不明の親不正を改善し、R4/T4/追加本人2の10ROLE文章図を前後bytes同一で保持。50rawは46同一/4変化、HQ04理由誤分類は残りR08肯定過去copulaに誤modifier再発。strict候補47→49は意味率ではない。100保存非生成再読/元532memberの全bytes-SHAを確認・新重み9dcを保全、通常/次初期値は未採用。[結果・原本・再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-reason-unknown76-result-20261103)。全対象分離は現行必須でなく、次は理由の述語/不明併存差と複数文copula保持をCPUで切分け。通常HTTP/DB/RN/配置不変、本人基準/記録間関係/通常累積接続は未完。GPUレンタル維持、STRUCTURE_MAP_DELTA_NONE。
 

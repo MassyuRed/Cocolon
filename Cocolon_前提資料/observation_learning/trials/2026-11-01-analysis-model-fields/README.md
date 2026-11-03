@@ -1570,3 +1570,19 @@ rootと同環境read-only補助が全26原文/48raw/全31成功文章図を確�
 [全原本・保存重み・全読・最終採否](https://chatgpt.com/library?file_id=libfile_42f62b72d2888191a3198abd1ec4ee65&account_id=personal)は15942612bytes/3member/SHA14f6a79f9098e5213bb39df6620d2ed4e8d39dcbfdbea7592b8e448a573b3249。内側元ZIP15939126bytes/527member/SHA95becb8712dcc0a9bd181f1a6e13243a43aa66548d991279c5c559eb5b5a830bを不変保持。通常ダウンロード2経路は回収不能だったため、表示テキストのbyte単位回収で元ZIPそのものの全bytesを復元照合した。既存raw/report/重みは改変せず、最終採否とmetricsを外側へ保存した。本文なし索引はmaterial_v4_target4_results.json。
 
 再開はa2e/旧86原文を保持し、X01/X03の重複キー/ROLEと原文内引用選択を、既存生成owner/教示へ照合する。教材不足だけを原因と断定せず、今回16更新や旧18/106更新を再実行しない。strict/typed/唯一作者/通常ensure/HTTP/公開DTO/DB/RN/Render/配置/Pod管理変更0、STRUCTURE_MAP_DELTA_NONE。本人補足typed/記録間・比較/通常累積/IF・Saved/一般本人基準は未完。
+
+
+<a id="analysis-material-v4-source-mask-plan-20261103"></a>
+## 126. 11/3 — 同じ重み・同じ22入力で、生成時の原文内引用を比較
+
+target4の新d3dは不採用のまま保持する。原文外引用X03と重複キーを、追加教示だけで直る問題と決めつけず、既存の生成ownerへ戻って確認した。現load_generatorは自由なgreedy生成で、strictは生成後に全体を拒否する。既存syntax2bのByteLevel token trie/LogitsProcessor/EOS・空mask停止を再利用し、Analysisのcompact schemaと同field原文内引用だけを生成時に制限する明示offline比較を行う。これはobserved blockerの最小修正と直後の実出力比較であり、新しいservice/検査系列/商品ownerを増やさない。
+
+material_v4_source_mask.pyは入力messagesに既にあるfield番号/textだけを受け取る。field入力順・0..8units・0..6qualifiers・既存key/enumsを保ち、各引用は原文の連続substringをモデルが選ぶ。unit/parentは同field内のoverlapを含む一意性、qualifierは同field内反復を許し、後段でunit内根拠を検査する。文字位置bitsetで全substringを扱い、正解引用・対象名・ROLE数・肯否・親の正解を供給しない。前方親参照も許す。固定compact serializer順は形式の制限で、意味の組合せは既存strict/typedが判断する。既存自由string fast pathは使わず、意味誤り・否定漏れ・誤親/誤modifierをmaskが修正したとは扱わない。
+
+CPUは実tokenizer248056 tokenのbyte mappingと90旧/新targetのtokenbytes受理、先頭2targetのfull mask/EOS境界、原文外引用・重複key・別field・余計なrootの拒否、Unicode/escapeと誤意味の選択可能性を13.669347秒/モデル0で確認。mask253点の平均0.000255709秒/最大0.001385523秒。誤意味選択可能の合成確認は後段semantic拒否の実測ではない。before22のfirst_rejected_byteは、X03の原文外活用以外の多くではJSON完成後の末尾改行を示す。これを意味失敗や検査改善件数へ数えず、実rawは改変しない。
+
+API ded0586/source prompt material.v4/初期a2e62bca-config006ebf7bは同一。d3dや旧完了18/16/106更新を再開しない。既存新Pod before22はsource/messages/ref/raw hash一致で再利用し、新guided22のみ・1load・学習0/重み書込0。runner内の正本load_generator sourceの1箇所だけへfactoryを明示注入し、正本API fileは変更しない。request/ref/raw hash/finish/既存bind_saveと7呼出禁止の非生成再読は同じ。mask不能時の無制約fallback・raw修復・部分採用なし。
+
+root=/workspace/analysis-material-v4-source-mask-20261103のCPU準備は完了、prepare/runの重複起動は禁止。runner SHA5bcd29021fbf5e072e540f8656bd8e863d8a528763e745897e9021e5e4779b0c、grammar SHAf9e20f0e8bb50d1602205c937c4d3e2a9a6f743ac2aa062f165f9801168b38d7、既存syntax2b SHA28e78eb120f07aef0806ddb1159e8257fb83e4972515eed63ec48b33cf205dc5。要求60秒はmask overheadを含む試験上限、context8192/新2048/greedy非thinking不変。全体900秒/処理上限0.0725USD@表示0.29/h（準備・回収・保持等別）。X03の引用だけでなく意味・文章図への到達、同22の旧成功保持、MD02否定/他者とYREASON01理由/不明を全rawで判断し、形式受理増だけで採用しない。失敗/完了の全raw/log/manifestを最後に保存し、同じ比較を自動反復しない。
+
+rootが実行/最終判断の単一担当、同環境補助がgrammar候補作成とrunner読み取りを担当しrootが全文/全90targetを確認。実環境GPT-6/Codex Work、独立Pro/UltraまたはMash実演ではない。今回の継続・GPU利用・GitHub更新の指示内で進め、本人操作を追加しない。通常採用false、production/strict/typed/唯一作者/通常ensure/HTTP/公開DTO/DB/RN/Render/Supabase/Pod管理変更0、STRUCTURE_MAP_DELTA_NONE。本人基準/補足typed/記録間・比較/通常累積/IF・Saved/一般品質は残件。

@@ -6025,3 +6025,6 @@ trial/material_v4_target4_sources.jsonは独立C4教示と非学習Z4の原文/�
 
 
 11/3・target4比較の最終結果はtrial/material_v4_target4_results.json（本文なし採否/原本/再開索引）とweekly§125へ。同22typed14→13、共通成功13のgraph/表示同一、新d3dは不採用。完了16更新/48生成を再実行しない。新商品owner/型/作者/通常接続0、STRUCTURE_MAP_DELTA_NONE。
+
+
+11/3・source mask比較のfile地図：trial/material_v4_source_mask.py（既存Analysis wireのcompact schema/同field逐語substringだけの試験grammar）、material_v4_source_mask_trial.py（既存syntax2b/固定API loaderの明示offline注入・90target CPU・同22比較・既存保存再読・原本回収）。既存syntax2bはfixed_rows/structural_cpu/syntax2b.pyを不変再利用。商品owner/型/作者/通常接続追加0、STRUCTURE_MAP_DELTA_NONE。採否と再開点はweekly§126/trialへ。
