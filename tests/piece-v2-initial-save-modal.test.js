@@ -15,7 +15,7 @@ const vm = require('node:vm');
 
 const root = process.env.PIECE_TEST_ROOT || path.resolve(__dirname, '..');
 const source = fs.readFileSync(path.join(root, 'components/piece/PiecePreviewModal.js'), 'utf8');
-// Follow the existing Piece source-test harness: strip only the four known
+// Follow the existing Piece source-test harness: strip only the known
 // single-line imports and the default export. Do not need experimental VM
 // modules, a new dependency, a runtime flag, or a replacement product module.
 const renderPromise = Promise.resolve((() => {
@@ -25,9 +25,14 @@ const renderPromise = Promise.resolve((() => {
     "import { Modal, View, Text, ScrollView, Button, ActivityIndicator } from 'react-native';",
     "import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';",
     "import PieceVisualCard from './PieceVisualCard';",
+    "import { PIECE_THEME_COLORS } from '../../features/piece/pieceLayout';",
   ]);
   const marker = name => ({ component: name });
   const context = vm.createContext({
+    PIECE_THEME_COLORS: {
+      soft_paper: { canvas: '#F6F1E8', surface: '#FFFDF8', text: '#111827', border: '#D7D2C9' },
+      quiet_night: { canvas: '#0B1120', surface: '#111827', text: '#F9FAFB', border: '#334155' },
+    },
     React: { createElement: (type, props, ...children) => ({ type, props: props || {}, children }) },
     ...Object.fromEntries(['Modal', 'View', 'Text', 'ScrollView', 'Button', 'ActivityIndicator',
       'SafeAreaProvider', 'SafeAreaView', 'PieceVisualCard'].map(name => [name, marker(name)])),

@@ -8,6 +8,7 @@ import React from 'react';
 import { Modal, View, Text, ScrollView, Button, ActivityIndicator } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import PieceVisualCard from './PieceVisualCard';
+import { PIECE_THEME_COLORS } from '../../features/piece/pieceLayout';
 
 const element = React.createElement;
 const formats = { short_essay: 'エッセイ', quote: '引用', declaration: '宣言' };
@@ -24,16 +25,28 @@ export default function PiecePreviewModal({ visible = false, display, onClose, o
   const choices = (label, field, values, labels) => values.length > 1 && typeof onVisualChange === 'function'
     ? element(View, { key: field, testID: `piece-visual-${field}`, style: { marginTop: 12 } },
       element(Text, { style: { fontSize: 16, color: '#202020' } }, label),
-      ...values.map(value => element(Button, { key: value,
-        title: `${labels?.[value] || value}${selection[field] === value ? '（選択中）' : ''}`,
-        accessibilityLabel: `${label}：${labels?.[value] || value}`,
-        accessibilityState: { selected: selection[field] === value, disabled: selection[field] === value },
-        disabled: selection[field] === value,
-        onPress: () => onVisualChange({ ...selection, [field]: value }, {
-          preview_id: preview.preview_id, preview_revision: preview.preview_revision,
-          visual_recipe_hash: preview.visual_recipe_hash,
-        }, display.visualToken),
-      }))) : null;
+      ...values.map(value => {
+        const selected = selection[field] === value;
+        const button = element(Button, { key: value,
+          title: `${labels?.[value] || value}${selected ? '（選択中）' : ''}`,
+          accessibilityLabel: `${label}：${labels?.[value] || value}`,
+          accessibilityState: { selected, disabled: selected },
+          disabled: selected,
+          onPress: () => onVisualChange({ ...selection, [field]: value }, {
+            preview_id: preview.preview_id, preview_revision: preview.preview_revision,
+            visual_recipe_hash: preview.visual_recipe_hash,
+          }, display.visualToken),
+        });
+        const colors = field === 'theme_id' ? PIECE_THEME_COLORS[value] : null;
+        if (!colors) return button;
+        const { canvas, surface, text, border } = colors;
+        return element(View, { key: value, style: { flexDirection: 'row', alignItems: 'center', marginTop: 6 } },
+          element(View, { testID: `piece-theme-swatch-${value}`, accessible: false,
+            accessibilityElementsHidden: true, importantForAccessibility: 'no-hide-descendants',
+            style: { padding: 3, backgroundColor: canvas, borderColor: border, borderWidth: 1, borderRadius: 6 } },
+            element(Text, { allowFontScaling: false, style: { minWidth: 36, paddingVertical: 3, textAlign: 'center', backgroundColor: surface, color: text } }, 'あ')),
+          element(View, { style: { flex: 1 } }, button));
+      })) : null;
   const saving = display.loadingKind === 'save' || display.retryKind === 'save';
   // canSave is a host projection, not a conclusion from quota/hash/native
   // inspection. The controller must recheck current admission at the click.
