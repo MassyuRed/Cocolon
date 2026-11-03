@@ -1,0 +1,17 @@
+{
+  "status": "RUNNING_TRAIN_AFTER_FIXED_BEFORE8_NO_RESTART",
+  "api_commit": "ded0586720df0c0d50d8838bcd391a19ca3eead5",
+  "root": "/workspace/analysis-material-v4-aligned78-20261103",
+  "pack_sha256": "5367a6fdbcaf6f16a0dc1d3aabdd07c8426fb552d8778d01b3587ce2ff4915c2",
+  "execution_script_sha256": "c76f807d3a2de997a0f17bebcaf9834c6be5d2930f83dd7f049ecc3bcaba03e9",
+  "teachers": 78,
+  "planned_updates": 106,
+  "planned_nll_measurements": 156,
+  "planned_new_calls": 22,
+  "planned_model_loads": 3,
+  "reused_before": 6,
+  "before8_complete": true,
+  "normal_adoption": false,
+  "product_credit": 0,
+  "next": "inspect existing report/stage reports;never restart this root"
+}

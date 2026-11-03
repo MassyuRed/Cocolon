@@ -1481,3 +1481,6 @@ API ded0586/元9dc-config4776を固定。新material_v4_aligned78_trial.pyはCPU
 本文/graphの全出力をrootが読み、誤modifier改善と旧肯否/不明/理由/他者の保持、同じ文章図と7呼出禁止保存再読を照合する。CPU/生成/学習/採否を分離する。各phaseを別processとし、partial/final重み・raw・log・manifestをfinallyでZIPへ保全、同root再実行を禁止する。途中のstatusから起動済みrunを継承し、終わった106更新/旧4/10/12生成を再起動しない。成功/未達をGitHubとprivate原本へ保存し、通常prompt/重み/HTTP/DB/RN/配置/Pod管理へ自動進行しない。GPUレンタルは維持する。
 
 Mashの本セッションの残件/GitHub/GPU作業承認を継承。root単一writer＋同環境read-only review、実環境GPT-6/Codex Work、Pro/Ultra独立検証ではない。STRUCTURE_MAP_DELTA_NONE（商品source/型/作者/通常接続を変更せず、既存入力profileへの研究学習整合だけ）。一般本人基準/本人補足typed/記録間・比較/通常累積/IF・Savedの残件を保持し、新理論や分類を追加しない。
+
+
+11/3実行checkpoint：CPU prepareは全78targetのstrict/保存・実tokenizer/元source-target同一、PV6の元manifest/9dc-config4776/同messages-ref-rawと再読3graphを確認してCPU_PREPARED_NO_MODEL。pack SHA5367a6fdbcaf6f16a0dc1d3aabdd07c8426fb552d8778d01b3587ce2ff4915c2、CPU runner40dc3312、実行runner c76f807d（再prepareが既存rootへ書かない最小補修）。再entry拒否でcpu_manifest/pack/元runner bytes不変を実確認。root=/workspace/analysis-material-v4-aligned78-20261103、固定before8は全stop/exit0、学習processが進行中。起動済みrunを読むだけで継承し、prepare/runを再起動しない。完了/採否は未確定、通常採用false。
