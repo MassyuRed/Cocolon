@@ -6045,3 +6045,6 @@ trial/material_v4_target4_sources.jsonは独立C4教示と非学習Z4の原文/�
 
 
 11/3・局所ULはweekly§131で更新前停止/不採用、元161fileをlossless保存。trial/material_v4_target_ul_results.jsonは本文なし採否/原本索引。次trial/material_v4_lexical8_sources.jsonは独立4動詞×肯否8の教示、material_v4_lexical8_trial.pyは同CPU/新before8・既存平均CE16更新/after38/保存再読・原本保全を扱う研究runner。新商品owner/型/作者/通常接続/依存0、STRUCTURE_MAP_DELTA_NONE。条件と採否はweekly§132/trialへ。
+
+
+11/3・lexical8最終結果はtrial/material_v4_lexical8_results.jsonとweekly§133へ。新8は元a2eでtyped全到達のため学習/afterなし停止。対象子4明示/4省略、全8のgraph/可視内容は正target投影と同一。今回品質修正なし、§131と合わせ完了runの自動再実行なし。新商品owner/型/作者/通常接続0、STRUCTURE_MAP_DELTA_NONE。

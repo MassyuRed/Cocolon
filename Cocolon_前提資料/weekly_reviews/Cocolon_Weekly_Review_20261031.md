@@ -2840,3 +2840,27 @@ CPU11.739140秒・モデルload/forward0で、新8全source/target/実tokenizer/
 
 今回の目的は、対象名詞と行動節を取り違えず既存の文章/図へ渡す品質の修正。本人基準/補足typed/記録間の関係・変化/通常累積/IF・Savedの残件も保持する。実環境GPT-6/Codex Work、root最終実装/実行/判断、同環境補助はread-only。API ded0586/商品source/意味gate/graph型/作者/ensure/HTTP/公開DTO/DB/RN/Render/Supabase/配置/Pod管理変更0、STRUCTURE_MAP_DELTA_NONE。
 
+
+
+<a id="analysis-material-v4-lexical8-result-20261103"></a>
+## 133. 11/3 — 独立8例も旧重みで文章図へ到達、学習せず終了・今回の品質修正なし
+
+§132の新before8が全てtyped受理されたため、事前条件に従い学習/afterを行わず終了した。status=TEACHERS_ALREADY_REACHED_NO_TRAINING、before exit0、新8stop/1load/73.320920秒、更新0/測定0/新重み0/after0。初期a2e/configは不変。pool98はCPU用候補で、新8を実学習した事実ではない。全成功を目的に無意味な追加更新へ進めず、同run再起動0。
+
+| 新8の実出力 | 件数 | 原文・保存表示の確認 |
+| --- | --- | --- |
+| L01–04：項目/手順の対象子を明示 | 4 | 正targetとJSON値一致。ROLE/ACTIONと各肯否を保持 |
+| L05–08：画面/要点の対象子を省略 | 4 | 誤範囲/原文外引用ではない。既存全有限field証明が対象を保持 |
+| typed graph・文章/図 | 8 | CPU正targetからの全graph/全可視内容と一致 |
+| 新たな学習による修復 | 0 | 更新/afterをしていないため前後改善とは呼ばない |
+
+rootと同環境read-only補助が全8原文/raw/graphの意味/文章全文/図を確認した。全8で主体SELF、ROLE/ACTION各1node、肯否・過去・選択カテゴリ仕事と欄順を保持し、因果edgeを作らない。場面/思考/結果と段階接続は未確定gapのまま。L05–08は4Bが対象子を出したのではなく、既存ownerが同じ全文sourceからargumentsを保持している。「全8target生成」「新8教師の習得」とは記録しない。正target投影との差はtext/diagramのprojection_ofだけで可視内容は全同一。同file非生成再読は保存before34の候補30/typed22で一致、うち既存26は元response/source/ref/hash同一の再利用で新生成に加算しない。
+
+この8例が旧a2eで文章図へ届くことは確認できたが、「語彙を広げた教材を学習しないと届かない」という今回の見込みは成立しなかった。二欄教師が2語彙に偏っているというsource事実と、X03失敗の原因であるという因果推論を分ける。語彙不足を原因確定にしない。X03/MD02と理由・不明の未達は従来どおり残り、今回はそれらを再生成/修復していない。§131/133を合わせて**今回の品質修正なし、product_credit0**。新12stop/3load/16測定/150.663239秒、学習0/新重み0。無変更の通常/APIを改善したとは扱わない。
+
+元ZIP213member/1019365bytes/SHAfa4eb2d3ca92ca9ab1ec9d1c9869689c5a8ce1e06c2491e726c7abf6973de1a0のCRCと全212 manifest SHAをPod外照合。元ZIP・final review・metrics・照合scriptを含む[原本と停止判断](https://chatgpt.com/library?file_id=libfile_775a95523be8819184d779a8592bc819&account_id=personal)は836906bytes/SHAfeb1d5444c165e7b0f4eb78be53157fdbbc95e4054f4742ce20c0afd99ae7231。§131の局所UL全原本も別保存済み。本文なし索引material_v4_lexical8_results.jsonを追加し、今回の2案を未完了のまま次回自動再開する扱いにしない。
+
+終了直後sampleはGPU2MiB/56％・compute空、後続実測は2MiB/0％、レンタル維持。今回2案の処理按分合計0.01213676USD@前確認0.29/h（CPU準備/回収/待機レンタル保持/保存通信税等別、実総請求未測定）。追加の一般教示・係数・枝数・測定系をこのまま増やすことを止め、本来の誤生成を直す差分へ戻る。次の直接修正の対照は、同じ否定ACTION原文で前欄ROLE肯否だけ異なる既存X03/X04。失敗側の生成prefixへ具体的に対応する差分を定め、正解の外付け/raw修復/strict・typed緩和へ置換しない。次GPU条件は未固定。
+
+実環境GPT-6/Codex Work、独立Pro/Ultra/Mash Product Readではない。通常採用false、API ded0586/商品source/意味gate/graph型/作者/ensure/HTTP/公開DTO/DB/RN/Render/Supabase/配置/Pod管理変更0。STRUCTURE_MAP_DELTA_NONE、primary outcome=BLOCKER_NARROWED/product_credit0。本人基準の役割/判断/選択、補足typed、記録間の再出現/変化、通常累積接続、IF/Savedの残件と分析観測会の未取得も保持する。
+
