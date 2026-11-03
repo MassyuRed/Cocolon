@@ -1537,3 +1537,19 @@ rootと同環境read-only担当が全22source/36raw/成功19graph・文章・図
 [全原本・全読・最終採否](https://chatgpt.com/library?file_id=libfile_6c46418745e4819191709bbeb3b4bdf5&account_id=personal)（15336063bytes/2member/SHA256 c95c37e01a9e35e959c40061b93ef1c4f6f7c2b3ac51221fca786d3d93eeccdd）。元ZIP15506283bytes/334member/SHA47e50fe58aa02b4d78026c2c460ed95dc6c659f3af831a0df6e8e1cd05a2d086、CRC/安全path/全333manifest SHA/weights・config/元78identity/再利用14bytesをPod外検証。PENDING表記を含む元report/raw/保存重みは改変せず、別final_reviewに採否を保存した。処理按分約0.066009USD@前確認0.58USD/h（準備/回収/保持別）、終了後GPU2MiB/0％/compute空、レンタル維持。
 
 再開はこの2つの新PV成功graph/研究候補a2e/原二欄8教示と、X03の原文外CONTENT_TARGET・四つの対象子欠落、MD02の他者否定行動、YREASON01の理由/不明境界から。完了18/106更新・今回/先行生成を繰り返さず、失敗rawを教師化せず、既存原教示・材料sourceを根拠に品質を扱う。strict/typed条件を緩めてモデル誤りを隠さない。本人補足typed・記録間/比較・通常累積/IF・Saved・一般本人基準は引き続き残件。API/通常ensure/prompt/HTTP/公開DTO/DB/RN/Render/Supabase/配置/Pod管理変更0、STRUCTURE_MAP_DELTA_NONE、局所TECHNICAL_CREDIT/product_credit0、正式受入れ未完。
+
+
+<a id="analysis-material-v4-target4-plan-20261103"></a>
+## 124. 11/3 — 二欄の否定行動で原文内の対象引用を保つ小比較
+
+前回pair8は二欄PV6のtyped3→5と旧成功5保存を保持した一方、X03の否定原文から原文外の肯定句をCONTENT_TARGETへ生成して全体拒否、X05–08の対象子欠落を残した。MD02の他者否定行動とYREASON01の理由marker/親子もモデルraw未達。検査を緩める理由はない。YREASON01の一意な「分からない」rootと対象子の組合せは既存指示でも許容され、rootが短いことだけを意味消失と断定しない。
+
+新material_v4_target4_sources.jsonは、華恋が原文から独立作成したC01–04（私/記録係/報告を書く）のACTION肯否×欄位置4教示と、学習しないZ01–04（わたし/点検係/器具を見る）の近接確認4を固定する。ROLEは肯定固定。対象子は名詞句「報告」「器具」、原文にない肯定活用句を作らず、各assistant_targetを明示する。旧N8/PV6/X8の原文・失敗rawを教師化せず、旧78/旧86を変更しない。全8原文/targetをrootが全文確認し、read-only補助の構文/引用確認と区別した。
+
+新Pod43hpbqcsnqmfnyへGoogleの専用認証で接続、Jupyter直接接続を確認。RTX4000 Ada20GB・表示0.29USD/h、Python3.12.3/torch2.8.0+cu128。新規の空workspaceへ前回pair8全原本/研究重みと固定API ded0586・元Qwen3.5-4B revision851bf6を復元し、既存transformers5.19.0/peft0.21.2/accelerate1.15.0/safetensors0.8.0等を隔離環境へ固定した。base取得はofficial hub、trust_remote_code=false、商品依存定義は不変。本人DBの入力/秘密を教材へ取得していない。
+
+CPU prepareはrunner cdf7ae3b/source19602537で全90teacherのstrict/保存非生成再読・tokenizer、C4/Z4のtyped2node、旧22messages/ref/response完全一致/typed14を確認しexit0。pack0da3ab47は初期計画26call/2loadを記録したimmutable CPU原本で、再prepareしない。旧22のbefore原本は旧Podの履歴として保全する。GPU/環境差を学習効果へ誤帰属しないため、実行版は同じ新Podでbefore22→16更新/32選択NLL→after26の新48call/3loadへ限定訂正し、差分理由/実条件をexecution_plan.jsonとreportへ明記する。packを書換えず、元CPU runnerと実行runnerを別保存する。
+
+研究初期は今回明示選定したa2e62bca/config006ebf7b（通常未採用）。固定16順はC01,N01,C02,N03,T01,N05,C03,N07,T02,N02,C04,N04,SC01,N06,RU02,N08、各1更新。plain full-assistant CE/LR1e-5/seed20261111/BF16/SDPA/batch1/accum1/clip1/weight_decay0を継承。NLLは更新16件のみ前後32で、90件/一般精度の評価ではない。同22のbefore/afterを比較し、非学習Z4はafterのみ。要求45秒/context8192/新2048、全体900秒・GPU処理上限0.0725USD@0.29/h、準備/回収/保持等別。成功時はX03の文章/図復旧、旧成功の保持と引用/肯否/対象/他者/理由を全rawで判定する。対象子欠落だけを新たな必須合格条件にしない。
+
+root単一execution/writer、補助agentの編集は上記2新fileの候補作成のみでrootが全文/diffを確認。実環境GPT-6/Codex Work、Pro/Ultra独立検証ではない。ユーザーの現行残件/GPU/GitHub指示の範囲で進め、新たな承認段階を作らない。新root再実行は禁止し、partial/final重み/raw/log/manifestをfinally保存する。完了後、通常採用は全結果から別に判定する。API/strict/typed/通常ensure/HTTP/公開DTO/DB/RN/配置/Pod管理は変更しない。STRUCTURE_MAP_DELTA_NONE（研究教示と比較のみ）、本人補足typed/記録間・比較/通常累積/IF・Saved/一般本人基準は残件。

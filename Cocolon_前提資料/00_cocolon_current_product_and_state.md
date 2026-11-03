@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-**11/3・分析の最新（第9回§120）：** 前回material.v4の実raw3件でカテゴリ付き二欄/保存再読まで成立した結果と、copula/NEG誤modifier2件を継承。既存78正本には正しい教示がある一方、旧学習messagesはfield中心で現在のrecord/カテゴリ/感情/日時付きv4と異なるため、source/target・旧106順/CE/LR/seed不変で入力だけv4へ整合する一回を準備。API ded0586不変。全78のstrict/保存/実tokenizerがCPU通過し、cached6の同一lineage/再読3graphを確認。固定保持8の新before生成が完了し、現在は旧9dc初期・106更新/156NLL・新22生成/3load/最大1200秒（処理上限約0.1934USD@前確認0.58USD/h・準備保持別）。既存PV6 beforeは完全identity一致時だけ再利用、固定保持8は新before/after。通常採用false、本人基準/補足typed/記録間/通常累積/IF・Savedは残件。
+**11/3・分析の最新（第9回§124）：** pair8の二欄typed3→5/旧成功保持を継承し、否定行動から原文外の肯定句を対象引用するX03のモデル誤りを扱う。別語彙の独立C4教示＋非学習Z4を追加、旧86不変・90teacherのCPU strict/保存/tokenizer、新8typed2node、旧22raw同一/typed14を確認してexit0。新PodはRTX4000 Ada20GB/0.29USD/h、固定API/base/依存を復元。a2eを今回の研究初期に明示選定し、環境差を学習効果にしないため同新Podのbefore22→16更新/32NLL→after26（新48call/3load/900秒・処理上限0.0725USD、準備保持別）で比較する。CPU packは26call/2loadの初期原本として不変、実行条件差はexecution_plan/reportへ明記。通常採用false、本人基準/補足typed/記録間/通常累積/IF・Savedは残件。
 
 **11/3・分析の最新結果（第9回§100–102）：** 74教師監査後、旧74不変＋原文対照2を76教師/90更新/152NLL/50新stop/2load・641.971830秒/exit0で比較。NV04の結果重複/不明の親不正を改善し、R4/T4/追加本人2の10ROLE文章図を前後bytes同一で保持。50rawは46同一/4変化、HQ04理由誤分類は残りR08肯定過去copulaに誤modifier再発。strict候補47→49は意味率ではない。100保存非生成再読/元532memberの全bytes-SHAを確認・新重み9dcを保全、通常/次初期値は未採用。[結果・原本・再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-reason-unknown76-result-20261103)。全対象分離は現行必須でなく、次は理由の述語/不明併存差と複数文copula保持をCPUで切分け。通常HTTP/DB/RN/配置不変、本人基準/記録間関係/通常累積接続は未完。GPUレンタル維持、STRUCTURE_MAP_DELTA_NONE。
 
