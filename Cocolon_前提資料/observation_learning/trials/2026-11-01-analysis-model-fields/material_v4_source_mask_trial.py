@@ -18,7 +18,7 @@ import traceback
 import zipfile
 
 W = Path('/workspace')
-ROOT = W/'analysis-material-v4-source-mask-20261103'
+ROOT = W/'analysis-material-v4-source-mask-eos2-20261103'
 PRIOR = W/'analysis-material-v4-target4-20261103'
 API = W/'analysis-material-v3-api-20261103'
 INITIAL = W/'analysis-material-v4-pair8-20261103/train/adapter'
@@ -26,7 +26,7 @@ COMMIT = 'ded0586720df0c0d50d8838bcd391a19ca3eead5'
 WEIGHTS = 'a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59'
 CONFIG = '006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9'
 PROFILE = 'selected_material.v4'
-LIMIT = 900
+LIMIT = 600
 sys.dont_write_bytecode = True
 os.environ.update(HF_HUB_OFFLINE='1', TRANSFORMERS_OFFLINE='1')
 sys.path[:0] = [str(W), str(API/'ai/tools'), str(API/'ai/services/ai_inference')]
@@ -60,13 +60,30 @@ def previous():
 
 def setup():
     import torch
-    from transformers import AutoTokenizer
+    from transformers import AutoTokenizer, AutoConfig, GenerationConfig
     from syntax2b import TokenMask
     from material_v4_source_mask import Grammar
     tokenizer = AutoTokenizer.from_pretrained('Qwen/Qwen3.5-4B',
         revision='851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a', local_files_only=True,
         trust_remote_code=False)
     engine = TokenMask(tokenizer)
+    config = AutoConfig.from_pretrained('Qwen/Qwen3.5-4B',
+        revision='851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a', local_files_only=True,
+        trust_remote_code=False)
+    try:
+        generation = GenerationConfig.from_pretrained('Qwen/Qwen3.5-4B',
+            revision='851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a', local_files_only=True)
+        origin = 'cached_generation_config'
+    except OSError:
+        generation = GenerationConfig.from_model_config(config)
+        origin = 'cached_model_config_fallback_same_as_loader'
+    ids = generation.eos_token_id
+    ids = ids if isinstance(ids, list) else [ids]
+    assert ids and all(type(i) is int and i in tokenizer.all_special_ids and 0 <= i < engine.size for i in ids)
+    engine.eos = ids[0]
+    engine.model_eos_ids = ids
+    engine.eos_origin = origin
+    assert engine.eos not in engine.data
     return torch, tokenizer, engine, Grammar
 
 
@@ -152,6 +169,23 @@ def cpu():
     for text in malformed:
         state = grammar.initial_state().feed(text.encode())
         assert state is None or not state.complete
+    boundary = Grammar([dict(field=1, text='原文')])
+    initial = boundary.initial_state()
+    completed = initial.feed(b'{"fields":[{"field":1,"units":[]}]}')
+    assert completed.complete and not engine.allowed(initial)[engine.eos]
+    assert engine.allowed(completed)[engine.eos] and engine.advance(completed, engine.eos).complete
+    assert not engine.allowed(initial)[tokenizer.eos_token_id]
+    if tokenizer.eos_token_id != engine.eos:
+        assert not engine.allowed(completed)[tokenizer.eos_token_id]
+    # Real HF stop criterion on CPU, no model forward or fake meaning success.
+    from transformers.generation.stopping_criteria import EosTokenCriteria
+    stopped = EosTokenCriteria(engine.model_eos_ids)
+    assert not bool(stopped(torch.tensor([[1]]), None).item())
+    assert bool(stopped(torch.tensor([[1, engine.eos]]), None).item())
+    report['eos_binding'] = dict(tokenizer_eos=tokenizer.eos_token_id,
+        model_eos_ids=engine.model_eos_ids, selected_mask_eos=engine.eos,
+        origin=engine.eos_origin, unfinished_forbidden=True, completed_allowed=True,
+        installed_hf_stopping_criterion_passed_no_forward=True)
     report['checks'].update(source_external_quote_rejected=True, duplicate_key_rejected=True,
         wrong_field_rejected=True, trailing_root_rejected=True, semantic_error_still_selectable=True,
         quotes_unicode_backslash_preserved=True, no_free_string_fast_path=True)
@@ -179,6 +213,8 @@ def run():
     started = time.monotonic(); end = started+LIMIT
     def expired(*_): raise TimeoutError('source_mask_trial_deadline')
     signal.signal(signal.SIGALRM, expired); signal.setitimer(signal.ITIMER_REAL, LIMIT)
+    signal.signal(signal.SIGINT, expired)
+    signal.signal(signal.SIGTERM, expired)
     report = dict(status='RUNNING', policy='compact_schema_and_field_source_quotes.v1',
         generations=[], training_updates=0, model_loads=0, normal_adoption=False)
     directory = ROOT/'guided'; directory.mkdir()
@@ -189,7 +225,9 @@ def run():
         import serve_emlis_natural_reply as server
         torch, tokenizer, engine, Grammar = setup()
         active = []
-        def factory(messages, count):
+        def factory(messages, count, actual_model_eos):
+            actual_ids = actual_model_eos if isinstance(actual_model_eos, list) else [actual_model_eos]
+            assert actual_ids == engine.model_eos_ids and engine.eos in actual_ids
             grammar = Grammar(json.loads(messages[1]['content'])['fields'])
             engine.cache.clear(); engine.tensor_cache.clear()
             processor = SyntaxProcessor(engine, count)
@@ -198,7 +236,7 @@ def run():
             return LogitsProcessorList([processor])
         source = inspect.getsource(server.load_generator)
         old = 'stopping_criteria=StoppingCriteriaList([stopping]))'
-        new = 'stopping_criteria=StoppingCriteriaList([stopping]), logits_processor=source_mask_factory(messages, count))'
+        new = 'stopping_criteria=StoppingCriteriaList([stopping]), logits_processor=source_mask_factory(messages, count, model.generation_config.eos_token_id))'
         assert source.count(old) == 1
         namespace = dict(vars(server), source_mask_factory=factory)
         exec(compile(source.replace(old, new), '<explicit-offline-source-mask-loader>', 'exec'), namespace)
@@ -243,12 +281,12 @@ def run():
         write(ROOT/'run.json',report)
         manifest = {str(p.relative_to(ROOT)):sha(p) for p in sorted(ROOT.rglob('*')) if p.is_file() and p.name!='manifest.json'}
         write(ROOT/'manifest.json',manifest)
-        archive = W/'cocolon-analysis-material-v4-source-mask-20261103.zip'
+        archive = W/'cocolon-analysis-material-v4-source-mask-eos2-20261103.zip'
         with zipfile.ZipFile(archive,'x',compression=zipfile.ZIP_DEFLATED) as z:
             for p in sorted(ROOT.rglob('*')):
                 if p.is_file(): z.write(p,p.relative_to(ROOT))
         payload = dict(report=report, archive_bytes=archive.stat().st_size, archive_sha256=sha(archive))
-        (W/'source-mask-review.html').write_text('<meta charset="utf-8"><h1>Analysis source mask comparison</h1><pre>'+html.escape(json.dumps(payload,ensure_ascii=False,indent=2))+'</pre>')
+        (W/'source-mask-eos2-review.html').write_text('<meta charset="utf-8"><h1>Analysis source mask comparison</h1><pre>'+html.escape(json.dumps(payload,ensure_ascii=False,indent=2))+'</pre>')
 
 
 if __name__ == '__main__':
