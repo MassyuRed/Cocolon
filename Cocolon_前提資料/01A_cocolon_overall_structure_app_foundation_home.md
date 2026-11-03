@@ -6005,3 +6005,6 @@ API既存analysis_cumulative_service.py: with_action明示prepare/build/save/rel
 
 
 11/3最終API ded0586：上記4fileに加えintent_compiler.pyの既存suru否定operatorだけを修正、role_action既存testを拡張。trial/material_v4_pair12_replay.pyは保存12responseの生成なし再採用と元bytes保持を検証、material_v4_pair12_results.jsonは数値/採否の索引。新graph/作者/公開wire/SQL/RNなし。初回352pass/3skip、補修後199passは合算しない。
+
+
+11/3 trial/material_v4_aligned78_trial.pyは、既存78原文/正解/106順を保ったv4入力のCPU整合・固定before8/既存before6再読・106更新/156NLL・保存reload/after14・同文章図保存再読/partial原本保全を扱う研究runner。API/型/通常owner追加変更なし。STRUCTURE_MAP_DELTA_NONE。

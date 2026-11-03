@@ -1163,3 +1163,6 @@ API61e8aac2の既存semantic_admission.pyがv3継承の明示offline material.v4
 ### 11/3 — material.v4の実12生成と、suru否定の誤拒否修復後の再開点
 
 生成API61e8aac2/最終ded0586、v3候補1/6・typed0→v4候補6/6・typed2。元rawの正しい「しなかった」を、既存のnegative suru有限述語に完全一致するときだけintent_compiler.py:_model_written_role_action_proofで許し、12応答を生成0で再読。v4の3件がROLE肯否/ACTION肯否/カテゴリ仕事・生活ON/欄交換を保持し同じ2node・文章図・保存非生成再読へ到達。元成功2保存/候補7保存bytesは不変。肯定copula誤modifier2件（一方はACTION否定も誤modifier）と推測typed拒否を保持。7suite352passed/3DB依存skip、補修後2suite199passed、非合算。旧6版bytes保持。[全結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v4-pair12-result-20261103)。通常採用false、private指示/stateと既存typed誤拒否修正だけSTRUCTURE_MAP_DELTA_PRESENT。別record集約には既存ROLE作者の一record witnessも対応が必要で、通常累積/本人補足/比較/IF・Savedは残件。
+
+
+11/3の次研究はtrial/material_v4_aligned78_trial.pyで、元78source/target/106順を保ち学習messagesだけ既存material.v4へ整合する。旧78はfield中心、現在入力はrecord/カテゴリ/感情/時刻付き。固定保持8の新before/afterと既存PV6 before再利用/afterを比較し、NLLを一般品質へ換算しない。[条件/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v4-aligned78-plan-20261103)。API ded0586/既存writer/typed scope/通常経路は不変、STRUCTURE_MAP_DELTA_NONE。

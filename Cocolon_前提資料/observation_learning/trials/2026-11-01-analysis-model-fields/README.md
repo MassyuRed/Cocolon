@@ -1466,3 +1466,18 @@ v4の残る2事実sourceは「だった」をWRITTEN_MODIFIERとする誤りが�
 [全原本・全読・補修後再読](https://chatgpt.com/library?file_id=libfile_104f681dcef88191a43ff3bbd51a5758&account_id=personal)は116060bytes/3member/SHA256 a08c26b70125ad9feecf9c5220d9101ef1c51d71887ccccb30b38c61ef7d44e3。生成元ZIP105470bytes/55member/SHA0c8c7afe5c2d6e0e2d37766daa16a5b13137a122d9a7e534217956975eefb573、CPU元ZIP19269bytes/11member/SHAa1feb6483b603212ebc654e4cad45e75b2817a1701f4985de4fbe5f83ef54f82。CRC/安全path/元manifest54＋10をPod外照合。PENDING表記を含む元reportと生出力は不変、最終採否は別final_review.jsonに記録した。
 
 再開はAPI ded0586・保存3graph・残る実誤modifierから。完了12生成/CPU再読/旧4/10/106更新を再実行せず、既存教師と当該意味境界を照合し改善する。別原recordの再出現は既存_proposition_meaning/signature/record別occurrencesを使う経路だが、現ROLE専用_safe_labelも一record/evidenceに限定されるためcompilerだけ広げない。本人補足typed・記録間/比較・通常累積・IF/Savedは未完。新しい理論/作者/一般理解の完成へ置き換えない。追加GPU条件は未固定。
+
+
+
+<a id="analysis-material-v4-aligned78-plan-20261103"></a>
+## 11/3 — 既存78教師を現在の元文脈入力へ整合して比較する
+
+前回のv4二欄で、肯定ROLEの「だった」や行動否定の「なかった」が誤modifierとして残る。既存source/target正本78（boundary78 plan SHA72696f33…）のT4/AT32/RB2と負行動17rowを抽出し、正しいcopula/NEG教示が存在することを確認。旧v3整合学習のuser payloadはfields/schema中心、実material.v4はrecord/選択カテゴリ/感情/記録日時/source_role等を含む。入力差を唯一原因と断定せず、元78のowner/snapshot/assistant_target、106更新順、plain full-assistant CE、LR1e-5/seed20261111を保ち、messagesだけを現selected_material.v4で再renderする。
+
+API ded0586/元9dc-config4776を固定。新material_v4_aligned78_trial.pyはCPU prepareで全78targetの同source資格/strict引用/保存非生成再読、実tokenizerのprefix/終端/全assistant CE尾部/8192枠、元identity一致を確認する。PV03/04の失敗rawやPV6評価から教師を作らない。元RB2を二欄へ切らない。教材の原文/正解を上書きせず、root=/workspace/analysis-material-v4-aligned78-20261103へ別packを保存する。
+
+成功後の一回は旧9dcから106更新/156NLL、新22生成/3load（保持8 beforeの旧重み読込、学習、保存後非学習reload）、全体最大1200秒・処理上限約0.1934USD@前確認0.58USD/h、準備/回収/保持等別。要求45秒/context8192/新2048、batch1/accum1/clip1/weight_decay0、旧106順/CE/LR/seedを継承。保持8はT01/T02/R08/SC01/OA01/MD02/HQ04/YREASON01へ固定し新v4 before/after16生成、PV6は前回9dc/v4のsource/messages/ref/response完全一致時だけbefore6を再利用しafter6。旧semantic.v3 rawをv4 beforeへ偽装しない。学習既見と近接開発の固定subsetであり、独立盲検・全53保持・一般精度へ換算しない。元評価・元78/旧重み・通常採用falseを維持する。
+
+本文/graphの全出力をrootが読み、誤modifier改善と旧肯否/不明/理由/他者の保持、同じ文章図と7呼出禁止保存再読を照合する。CPU/生成/学習/採否を分離する。各phaseを別processとし、partial/final重み・raw・log・manifestをfinallyでZIPへ保全、同root再実行を禁止する。途中のstatusから起動済みrunを継承し、終わった106更新/旧4/10/12生成を再起動しない。成功/未達をGitHubとprivate原本へ保存し、通常prompt/重み/HTTP/DB/RN/配置/Pod管理へ自動進行しない。GPUレンタルは維持する。
+
+Mashの本セッションの残件/GitHub/GPU作業承認を継承。root単一writer＋同環境read-only review、実環境GPT-6/Codex Work、Pro/Ultra独立検証ではない。STRUCTURE_MAP_DELTA_NONE（商品source/型/作者/通常接続を変更せず、既存入力profileへの研究学習整合だけ）。一般本人基準/本人補足typed/記録間・比較/通常累積/IF・Savedの残件を保持し、新理論や分類を追加しない。
