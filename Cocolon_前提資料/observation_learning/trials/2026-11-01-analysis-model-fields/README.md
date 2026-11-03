@@ -1,4 +1,4 @@
-> **11/3最新・combination70と材料入力比較を完了：** 70教材/78更新/36新生成でbaseline上のSQ03/MD02は局所改善。続く同4source×category/material入力版の8生成（学習0）では新版の意味改善を確認できず、主体/否定/修飾scopeの不足が残り、両版とも3候補返却/1拒否。通常採用・既定版変更なし。原本/112重み/全8出力を回収・保存済み、[確定結果と再開点](#analysis-material-context8-result-20261103)へ。baselineとcategoryのmessages差を分離し、完了runを重複起動しない。
+> **11/3最新・明記役割の意味接続：** API88078cdbの明示offline経路で、実4Bの本人役割の否定記述1件をSELF/negative/fact/pastの既存ROLE nodeへ渡し、同一文章/図/保存非生成再読が成立。対応範囲4件は1採用/3不適合、scope外4件は不採用。8生成/学習0・42.150621秒/exit0、対象657PASS/2SKIP。通常既定/本番採用・一般分析完成ではない。別題材の肯定2/否定2教材を実strict→typed map→実file再読→tokenizerまでCPU確認し、原本保存済み。[確定結果/次の再開点](#analysis-written-role-result-20261103)。完了runを再起動しない。
 
 # Analysis — 最小field接続と実4B probe
 
@@ -1047,6 +1047,24 @@ API5d7f43a8の材料版は明示offlineで保持し、旧category既定/通常en
 DIRECT_PRODUCT_OR_ACCEPTANCE_WORK、Mashの分析残件続行/必要作業承認/GPU使用/GitHub checkpoint指示内、root単一writer＋同環境read-only確認。成功条件は旧未解析の役割が実4B出力からtyped1nodeとして文章/図へ現れ、同じ保存fileをモデル再生成なしで再読できること。まずCPUで意味対照/拒否/旧互換を確認し、成功後に同Jupyterで追加学習0・最大8新生成/1load/480秒を一回実行する（前回確認$0.58/hなら処理按分上限$0.07734、準備/回収/保持別）。出力補修/受口緩和/再試行/追加epochなし。新しい一般frame契約へ自動拡張せず、不成立ならその実原因と原本を保存する。STRUCTURE_MAP_DELTA_PRESENTはこの明示offline typed-role縦接続のみ、通常商品受入れ/本番採用ではない。
 
 
-実装checkpoint：API [aa48dc75](https://github.com/MassyuRed/mashos-api/commit/aa48dc75ec54b63d6eef3708763d75510ab71283)で既存4owner/既存testに接続。初回Jupyterの対象5fileは655PASS/2FAIL/2SKIP（110.92秒）。失敗2件はcategory/material版のcategory-record dataclassをそのままJSON比較した保存変換の不備で、意味/表示/旧vertical検査は通過した。[88078cdb](https://github.com/MassyuRed/mashos-api/commit/88078cdb3cf19da0e9fe9188915bce9c0899a797)で元payloadへ変換して比較する最小修正、同対象をfresh worktreeで再検査中。実GPU/新生成/学習0。rootと同環境read-only確認により、qualifierは明記SELF/否定operator exactへ限定、保存readerはEngine/compile/authorを呼ばず保存graph復元・source意味/文章図照合に修正済み。旧候補保存readerも不変。
+実装checkpoint：API [aa48dc75](https://github.com/MassyuRed/mashos-api/commit/aa48dc75ec54b63d6eef3708763d75510ab71283)で既存4owner/既存testに接続。初回Jupyterの対象5fileは655PASS/2FAIL/2SKIP（110.92秒）。失敗2件はcategory/material版のcategory-record dataclassをそのままJSON比較した保存変換の不備で、意味/表示/旧vertical検査は通過した。[88078cdb](https://github.com/MassyuRed/mashos-api/commit/88078cdb3cf19da0e9fe9188915bce9c0899a797)で元payloadへ変換して比較する最小修正、同対象をfresh worktreeで再検査し657PASS/2SKIP/既存warning1（110.82秒）。実GPU/新生成/学習0。rootと同環境read-only確認により、qualifierは明記SELF/否定operator exactへ限定、保存readerはEngine/compile/authorを呼ばず保存graph復元・source意味/文章図照合に修正済み。旧候補保存readerも不変。
 
-実GPUを使う場合は同folderのwritten_role8_run.py/supervisor.pyを固定し、private source8はSHA256 `f00549ed9315765cac762dbba9264d3100f373a7c98579f6114e68152d5abf1f`から読む。4つの対応範囲と4つの他者/可能性/非役割/複文scope対照、既存baseline.v1の同一指示と明示研究用a5eafe/9bc、8call/1load/更新0。collect_written_role8.pyは別CPU processで実fileの候補・役割artifactを再読し、全source/logのbytes-SHA付き回収材料を出す。これらは研究scriptであり通常新subsystemではない。
+実GPUを使う場合は同folderのwritten_role8_run.py/supervisor.pyを固定し、private source8はSHA256 `f00549ed9315765cac762dbba9264d3100f373a7c98579f6114e68152d5abf1f`から読む。4つの対応範囲と4つの他者/可能性/非役割/複文scope対照、既存baseline.v1の同一指示と明示研究用a5eafe/9bc、8call/1load/更新0。collect_written_role8.pyは別CPU processで実fileの採用役割artifactを再読し、7拒否も再確認して、全source/logのbytes-SHA付き回収材料を出す。これらは研究scriptであり通常新subsystemではない。
+
+
+<a id="analysis-written-role-result-20261103"></a>
+## 11/3 明記役割の縦接続 — 実4Bの否定役割1件を既存マップへ
+
+API [88078cdb](https://github.com/MassyuRed/mashos-api/commit/88078cdb3cf19da0e9fe9188915bce9c0899a797)、既存4owner/既存testのみ。原引用候補は未検証のまま改変せず、明記SELF＋「の役割は」＋既存名詞文法で読める役割名＋過去copulaの一節全文を独立witnessで検証する。1record/非空field1/補足なしに限り、候補ROLE/節全域/主体と否定qualifierが一致した意味を既存ObservedProposition/ObservedGraph/ObservedSelfStructureMapへ渡す。新role_state=WRITTEN_PAST_ROLE、論理型/graph/Engine追加0、既存唯一authorの同一watashi.map.v2文章/図を使用する。主体省略/他者/引用/推測/複文/別fieldの内容を捨てて採らない。旧normal finite/通常ensure/HTTP/DB/RN/配置は有効化しない。
+
+同じa5eafe/9bc・baseline.v1で8新stop/1load/追加学習0、42.150620832秒/exit0、重み/config不変。rootと同環境read-only担当が全source/raw8/採用artifactを全文確認。R02の本人役割否定をSELF/negative/fact/pastのROLE1nodeへ採用し、旧通常mapped0/unparsed1/表示なし→新明示経路mapped1/unparsed0/同一文章・図へ変わった。実際の役割を肯定的に特定した意味ではない。4段はgap、辺0。対応範囲のR01は過去copula誤modifier、R03はROLE二重化/名詞誤modifier、R04は原文外actor引用で不適合。scope外R05〜08は不採用。全8を一般成功率へ換算しない。[本文なし確定結果](written_role8_results.json)。
+
+別CPU processでR02実fileの同一artifact/coverageをEngine/compile/author禁止で再読し、7拒否も理由を維持。元候補6返却はmapped0/全未解析、2拒否のまま。元report PENDING_RAW_READ bytesを保存し、後読解の判断をprivate review/結果JSONへ分離した。初回test655PASS/2FAIL/2SKIPはcategory-recordのJSON変換不備で、元logを保持。88078の最小修正後、同5fileは657PASS/2SKIP/既存warning1（110.82秒）。保存意味/文章/図/coverage/原文/版/owner改変と、qualifierの誤った部分一致を拒否する。
+
+初回の公開source転送Python processはKilledで止まり、script/source/pid/report不存在・compute空を確認。原因をOOM等へ推測せず、モデルload/生成/更新0と分離した。GitHubと全文一致の原本をJupyter terminalへ転送しSHA照合して、一回のGPUを実行した。GPU再試行/追加学習/出力補修/受口緩和0。
+
+旧70のROLE教師1/「の役割は」構文0というcoverageと今回の不適合を根拠に、原sourceから別題材の肯定2/否定2をCPU確認した（唯一原因とはしない）。新4全文は旧70/評価34/今回8の全memo/action完全一致0、華恋合成・既見近接でMash教示/盲検ではなく、モデルrawの教師化でもない。全4は引用strict→typed ROLE→実file再読（Engine/両compiler/両author禁止）→実tokenizer prefix/EOS改行/非切詰め/8192枠が一致。T01 993+52=1045、T02 995+64=1059、T03 995+54=1049、T04 996+65=1061。旧70plan SHA3717326a…不変、CPUのmodel/load/生成/更新0、新74教材の学習条件/次GPUはまだ選定していない。generic helperはwritten_role4_cpu.py。
+
+[private全原本](https://chatgpt.com/library?file_id=libfile_9e1dc5ec3ad0819195d0549b96da7de9&account_id=personal)：90,029bytes/71member/SHA256 `67259224d9404c9b892c4c4c0fb1ccd23459a2a2817474479ea2d4d5f2a7e44a`。GPU54原本＋CPU10原本＋helper/log4原本を全bytes/SHA照合し、review/結果/manifestを保存。新重みは生成せずa5eafe/9bcは既保存原本を継承する。
+
+再開時は本節/結果JSON/CPU4原本と /workspace/written-role8.exit、/workspace/written-role4-cpu.exit を先に確認し、完了runを重複起動しない。次の直接作業は新4肯否対比と旧70保持による4Bの役割出力改善を具体化すること。一般の本人基準の判断/選択、複数field/補足/比較、記録間再出現/変化、通常累積保存/本番接続は残件。STRUCTURE_MAP_DELTA_PRESENTは明示offline typed-role縦接続のみ。primary TECHNICAL_CREDIT/product_credit0、同環境read-only確認は独立Pro/Ultra/human受入れではない。

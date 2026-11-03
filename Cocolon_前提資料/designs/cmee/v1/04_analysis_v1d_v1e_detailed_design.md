@@ -1872,3 +1872,15 @@ Mashの「選択カテゴリを使う接続を直す」指示により、通常�
 検証：新規対象10 unittestはPASS（0.471秒）。実compiler/realizerによるカテゴリ別合成mapを、配布済み7201と同じ未変更RN `watashiMapV2Contract.js`へ渡し、closed DTO受理とbackend本文=model本文の一致を確認。local広域493件はassertion失敗なしだが、既存storage試験1件が環境のhttpx未導入でERROR、全成功とはしない。CIは既定runtime/依存で保存・累積API・SQLまで全工程成功。実4B新生成/追加学習0、実機カテゴリ表示/一般意味品質/正式商品受入れは未確認。STRUCTURE_MAP_DELTA_PRESENT、通常4B候補の品質試行とIF/Savedの残件は保持。
 
 既存source adapter/compiler/唯一realizerの責務内の変更。全変更pathは[01Bの最新file地図](../../../01B_cocolon_overall_structure_analysis_piece_emotionlog_ranking.md#analysis-selected-category-context-files-20261102)、最新状態は[weekly§79](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-selected-category-context-20261102)。古い試行節の「通常map不変」は当該試行当時の事実として保持する。
+
+
+<a id="analysis-written-role-vertical-20261103"></a>
+## 2026-11-03 actual — 明記本人役割の一節を既存ObservedGraphへ採る縦接続
+
+既存partial EventFrame方針の一単位として、API88078cdbに明示offline written-role経路を実装した。新しい分析体系/graph/Engine/論理型ではない。原quoted-parent unitから、全文に明記された本人役割関係・名詞・肯否・過去が独立に読める範囲だけを既存ObservedProposition→ObservedNode→ObservedGraphへ渡す。唯一authorのwatashi.map.v2文章/図とcaller-managed immutable保存まで通す。
+
+初回対応範囲は1record/非空field1/補足なし。SELF表記＋「の役割は」＋既存_NOMINALで完全に読める役割名＋過去copulaの一節全文。一般名詞や「係」の語尾だけから役割を作らず、主体省略/他者をownerへ補わず、記録時刻をevent timeにしない。可能/引用/伝聞/仮定/複文/別fieldを切り落として採らない。modelは一つのROLE節候補を提案し、原文の全文構文がSELF/role/polarity/pastを証明する。qualifierは明記SELFと実否定operatorのexactに限り、原候補自体の未検証状態は保持する。
+
+採用時はrole_state=WRITTEN_PAST_ROLEの既存型、ROLE1node/残4段gap/辺0。役割否定は否定のまま表示し、実際の役割を肯定的に特定したclaimにしない。新しい意味を旧finite parserで再拒否しないよう、唯一realizerのこのstateだけ同じ全文witnessで完全再検査する。旧normal parser/ensure/HTTP/DB/RNは拡張しない。保存readerは保存graphを復元し、source/typed値/文章図の同一性を検証して返し、Engine/compiler/authorを呼ばない。保存identity/版は[schema05](05_json_schema_and_versioning.md#analysis-written-role-vertical-20261103)。
+
+実4B8出力のうち対応4件中の否定役割1件が、旧通常表示なしから既存mapの文章/図/再読へ到達。残3件はモデル不適合、scope外4件は不採用。対象657PASS/2SKIP、別source4対比はCPU確認のみで追加学習/次GPU条件は未選定。[全文結果/原本/再開点](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-written-role-result-20261103)。本人の判断/選択基準、記録間再出現/変化、複数field/補足/比較・通常累積保存の一般接続は既存残件であり、今回の限定成功を完成へ換算しない。

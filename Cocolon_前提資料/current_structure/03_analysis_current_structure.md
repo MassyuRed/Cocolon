@@ -1,4 +1,4 @@
-> **2026-11-03最新・材料入力比較完了：** API5d7f43a8で明示offline selected_material.v2を追加し、record対応/保存UTC時刻/選択感情・強さ/カテゴリ/field/分析終点を渡す。旧messages/ref/state互換は142PASS/2SKIP。同4source×category/material8生成（学習0）は109.770174秒/exit0だが意味改善を確認できず通常未採用、両版3返却/1拒否。6候補保存再読/2拒否維持、全未解析/主体未解決/route0。combination70 baseline上の局所改善と入力版差を区別する。二試行全原本/112重みの回収保存完了。[結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-context8-result-20261103)。旧category既定/通常ensure不変、意味採用・本人基準の役割/判断/選択・記録間関係/通常graph接続は残件。private入力版のみSTRUCTURE_MAP_DELTA_PRESENT。
+> **2026-11-03最新・明記役割の意味接続：** API88078cdbの明示offline経路で、実4Bの本人役割否定1件をSELF/negative/fact/pastの既存ROLEへ採用し、同じ文章/図/保存非生成再読が成立。対応4件は1採用/3不適合、scope外4件は不採用、8生成/学習0、657PASS/2SKIP。元候補の未検証状態は不変。1record/非空field1/明記一節だけで、実際の役割を肯定的に特定した結果や一般意味採用ではない。通常finite/ensure/HTTP/DB/RN/本番は未有効化。別sourceの肯定2/否定2教材をCPU確認・保存し、旧70不変。[結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-written-role-result-20261103)。private typed-role縦接続のみSTRUCTURE_MAP_DELTA_PRESENT。
 
 > **2026-11-03履歴・replay68：** 再掲3枠だけを変えたreplay68は74更新/32新stop、491.863046秒で完了したが、新しい意味改善はなく不採用。SQ03/MD02の不足は残り、OD01は不正unitへ変化して拒否継続、MD01にも親曖昧の新拒否。SC6=6/6と旧AT/UQ/MX/OAの教師一致、CE68の局所改善は保持。 旧68にない『対象分離＋継続修飾＋強調否定』と別actor/二不明文脈の組合せ2件を原sourceから合成し、実strict/実file非生成再読/実tokenizer prefix・EOSまでCPU確認。モデル/生成/更新0、新70教材の学習plan/GPUは未選定。診断文やrawの教師化ではない。 [結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-replay68-result-20261103)。通常source/API/DB/RN/稼働/Pod管理不変、全未解析/主体未解決/route0、STRUCTURE_MAP_DELTA_NONE。局所教材/保存の成立を、本人基準の役割/判断/選択と記録間関係・通常graph接続の完成へ換算しない。
 
@@ -1053,3 +1053,13 @@ Mashの今回の確認対象は、担当者が理解していたかという自�
 Mashが既に申し出ている観測会は、この読み取り方の教材を得るために継続対象。華恋が一方的に終了・停止を決めた経緯と、相談形式へ戻した事実を区別する。収集したMashの問い/読み/修正と、華恋の架空設定・編集・合成教師を別の由来で保持し、既存試行の未達へ照合して必要箇所だけ教材・実装・評価へ反映する。今回の説明・文書補正だけで、新しい教師の取得・学習投入・4B通常採用・意味品質改善が完了したとはしない。
 
 今回のeffectは既存の全体現在地・本map・既存trial入口・最新weeklyの訂正のみ。商品source/test/既存教材/重み/API/DB/RN/Render/Supabase/配備変更0、モデルload/学習/新生成0。STRUCTURE_MAP_DELTA_NONE（既存構造の位置づけ・未達・継承先を明記、構造実装の変更なし）。Codex Work/GPT-6、root単一writerと同環境read-only確認であり、独立Pro/Ultra又はhumanの商品受入れではない。
+
+
+<a id="analysis-written-role-vertical-20261103"></a>
+## 2026-11-03 — 明記本人役割のtyped partial frame実装
+
+既存semantic_admissionが実quoted-parent応答/source/guardを束縛し、intent_compilerの全文witnessとROLE候補を照合して専用role_state=WRITTEN_PAST_ROLEの既存ObservedProposition/Node/Graphへ入れる。新たなgraphや型ではない。唯一realizerが同じwitnessを再検査し、同じwatashi.map.v2文章/図を作る。cumulative serviceの明示offline build/serialize/reloadだけが選ぶ。旧通常finiteとensure、HTTP/DB/RN・月次・補足・比較は未変更。
+
+初回scopeは1record/非空field1/補足なし、明記SELFの「の役割は」関係と既存名詞文法で読める役割名/過去肯否copulaの全文。原文内にあるだけの誤qualifierは採らず、SELFと実否定operatorのexactを求める。保存は元response/guard/版とgraph/文章/図/coverageを束縛し、Engine/compiler/authorなしで復元・検証する。scope外は未解析を隠すため切り捨てない。
+
+実4B R02の役割否定が旧mapped0/unparsed1→新mapped1/unparsed0、4段gap/辺0。対応範囲の他3件はモデル不適合。別題材4対比はCPUのみで、新しい一般判断/選択・記録間関係の成功ではない。具体owner/保存型は[04現行差分](../designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#analysis-written-role-vertical-20261103)、[schema05](../designs/cmee/v1/05_json_schema_and_versioning.md#analysis-written-role-vertical-20261103)、[全結果](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-written-role-result-20261103)へ。

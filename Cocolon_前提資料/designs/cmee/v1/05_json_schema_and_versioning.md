@@ -3292,3 +3292,13 @@ API86d19b6d。上の計画をMash継続承認内で既存3owner＋新test1へ実
 
 
 11/3実4B比較後：同4source×category/material版8生成（学習0）を完了したが、新材料版に意味改善を確認できず通常未採用。両版3返却/1拒否、6保存候補一致/2拒否維持。上記schema/明示offline選択は保持し、旧既定/通常ensureへ切替えない。材料追加が意味採用・主体解決・record間関係の実装を完了したとはしない。全原本保存・版差と再開点は[確定結果](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-context8-result-20261103)。本段落で新schema/型/通常保存contractの追加なし。
+
+
+<a id="analysis-written-role-vertical-20261103"></a>
+## 2026-11-03 — 既存型による明記本人役割の保存版
+
+API88078cdb。入力は既存AnalysisModelQuotedParentUnitsInput/Response、既存3prompt/messages/refを継承し、新入力型/graph型を追加しない。採用方針identityはanalysis_model_written_role.v1。既存ObservedPropositionのrole_state=WRITTEN_PAST_ROLE、actor=SELF、predicate_lemma=だ、argumentsは明記役割名、polarityは原copulaのpositive/negative、modality=fact、temporal_scope=past。source_partsはSELF_POSSESSIVE/EXPLICIT_ROLE_TOPIC/ROLE_NOMINAL/FINITE_ROLE_COPULAを全文座標で保持する。quote候補の未検証値は書き換えない。
+
+state schema=cocolon.cmee.analysis_model_written_role_state.v1、exact rootはschema_version/request_ref/prompt_version/response/artifact。artifactに既存graph・文章・図とowner/source-set/期間/identityを保存し、caller file schema=cocolon.cmee.cumulative_written_role_file.v1のcoverage/stateへ格納。coverageは限定1recordのsource1/processed1/mapped1/unparsed0/excluded0/stale0。欠ける4段はgap、辺0。元responseの実messages/raw hash/finish/source/guardを再照合し、保存graphを復元して全文witness/typed値/文章/図を検証する。Engine/compiler/author再実行なし。旧unit/quoted-parent/通常保存版は不変で、通常DB版へ自動転用しない。
+
+実4B1件で限定接続成立、対応範囲3件のモデル不適合は残る。657PASS/2SKIPと実file再読の範囲は[結果](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-written-role-result-20261103)。一般役割・判断/選択・複数record/補足/比較・通常ensureの完成ではない。

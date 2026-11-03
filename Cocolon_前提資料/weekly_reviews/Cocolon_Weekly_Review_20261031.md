@@ -2342,3 +2342,15 @@ combination70のafterはbaseline.v1、今回旧側はselected_categories.v1。�
 combination70の原本/112重みと新比較の48原本は外部bytes/SHA照合済み。8比較の[private原本](https://chatgpt.com/library?file_id=libfile_dbc696ebddf48191b7a83305b7ab2187&account_id=personal)は98,243bytes/50member/SHA45ff5e2c8f31532b114cb2ca1a3ecc428a9c30beaceeffec7ec1f845b73f1c29。原report PENDING_RAW_READを保存したまま、後読解の採否を別review/結果JSONへ記録。初回prelaunch SHA不一致はload/生成/更新0として分離し、実runの再試行/追加epoch/補修/受口緩和0。
 
 次は同じdose/order/材料足しへ自動進行せず、本人の役割/判断/選択を根拠付きの既存五種/注記/不明へ入れる意味採用と、記録間の再出現/変化、通常ObservedGraph/保存/補足/月次比較へ接続する責務を既存ownerで進める。観測会の本人の読み/問い/修正の未取得を取得済みにしない。今回の二完了runは重複起動しない。通常HTTP/DB/RN/Render/Supabase稼働/配置/Pod管理不変、全未解析/主体未解決/route0・product_credit0。private入力版のみSTRUCTURE_MAP_DELTA_PRESENT。全体現在地/Analysis map/全file地図/schema/trialへ同期済み。Codex Work/GPT-6 root単一writer＋同環境read-only確認、別モデル/本人受入れではない。
+
+
+<a id="analysis-written-role-result-20261103"></a>
+## 92. 11/3 — 明記役割の意味接続と実4Bの1件成立、次の肯否4教材
+
+[全結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-written-role-result-20261103)。従来の引用候補は全未解析のまま継承し、API88078cdbの既存4ownerに、明記SELF＋「の役割は」＋既存名詞文法の役割名＋過去copulaを全文根拠から採る明示offline縦接続を追加した。既存ObservedProposition/Graph/Mapと唯一authorを使い、論理型/Engine追加0。1record/非空field1/補足なし、通常finite/ensure/HTTP/DB/RN/本番配置は有効化しない。
+
+実4B8生成/学習0/1loadを42.150621秒/exit0で完了し、対応4件中R02の本人役割否定だけがSELF/negative/fact/pastのROLE1node・同一文章/図/非生成保存再読へ到達。役割を肯定的に特定した結果ではない。4段gap/辺0を保持する。残る対応3件は過去形の誤修飾/二重ROLE/原文外actor引用で不適合、scope外4件は不採用。rootと同環境read-only担当が全本文を確認し、形式検査や一般成功率へ置換しない。
+
+初回testのカテゴリ版保存2件失敗をpayload変換の最小修正で直し、同5fileは657PASS/2SKIP/既存warning1（110.82秒）。別CPU processでR02実fileの同一artifactをEngine/compiler/author禁止で再読、7拒否も維持。公開sourceの初回転送Killedは実GPU前・script/source/pid/report0と分離し、原因推測/重複GPUなし。全原本は[保存済み](https://chatgpt.com/library?file_id=libfile_9e1dc5ec3ad0819195d0549b96da7de9&account_id=personal)（90,029bytes/71member/SHA67259224…）。
+
+旧70教師のROLE1/今回構文0と実不適合を踏まえ、別sourceの肯定2/否定2をstrict→typed map→実file非生成再読→実tokenizerまでCPU確認。新4全文は旧70/評価34/今回8と一致0、華恋合成でMash教示/盲検ではない。旧70/重み不変、新生成/学習0、次の74教材学習条件は未選定。再開はこの4対比と旧70保持による4B役割出力改善へ。本人基準の判断/選択、記録間再出現/変化、複数field/補足/比較・通常累積保存の一般接続は残件。明示offline typed-roleのみSTRUCTURE_MAP_DELTA_PRESENT、primary TECHNICAL_CREDIT/product_credit0。

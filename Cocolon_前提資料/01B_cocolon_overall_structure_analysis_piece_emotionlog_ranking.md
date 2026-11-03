@@ -3281,3 +3281,19 @@ API5d7f43a8：`analysis_cumulative_service.py`の既存`prepare_cumulative_categ
 | material_context8_results.json | 全8実読後の新版不採用、版差/保存結果/未達/次の再開点 |
 
 combination70の112重みまで全bytes/SHA照合・保存済み。材料比較は意味改善なし・通常未採用、6候補保存一致/2拒否維持を商品成功に加算しない。二run重複起動なし、全未解析/主体未解決/route0。新しいperson meaning/記録間関係の通常接続は未実装であり、本mapの既存残件へ戻る。
+
+
+<a id="analysis-written-role-files-20261103"></a>
+## 2026-11-03 — 明記役割partial frameの実file差分
+
+API88078cdb、STRUCTURE_MAP_DELTA_PRESENTは明示offline経路のみ。新production file/Engine/graph/論理型0。通常ensure/HTTP/DB/RN/稼働は変更しない。[結果/原本/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-written-role-result-20261103)。
+
+| 既存path（mashos-api/ai/配下） | 新しい責務 |
+| --- | --- |
+| services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py | quoted-parent応答と全文role witnessの採用、元候補を変更しない専用保存state、保存graph復元/意味・文章図の検証 |
+| services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py | 明記SELF/役割関係/過去肯否の全文witness、既存ROLE1node/4gap/辺0、保存値検査。旧normal finiteを拡張しない |
+| services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py | 唯一authorのWRITTEN_PAST_ROLE表示arm、同一文章/図とartifact identity |
+| services/ai_inference/analysis_cumulative_service.py | 明示build/serialize/reload、実graphのmapped1/unparsed0を限定source範囲に束縛 |
+| tests/test_analysis_model_quoted_parent_units.py | source/actor/否定/候補不一致・旧normal不変・3prompt保存・改変拒否・Engine/compiler/authorなし再読 |
+
+同trial内の新research fileはwritten_role8_run.py（8新生成/学習0）、written_role8_supervisor.py（単一起動/timeout/exit）、collect_written_role8.py（採用file再読/7拒否/原本回収）、written_role4_cpu.py（新4原source対比のstrict/map/file/tokenizer、モデル0）、written_role8_results.json（本文なし確定結果/原本/次の再開点）。通常新subsystemではない。
