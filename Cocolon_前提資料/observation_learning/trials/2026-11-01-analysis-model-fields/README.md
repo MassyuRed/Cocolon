@@ -1163,3 +1163,6 @@ CPU準備で74全件の新版messages/request_ref/strict候補・T4のtyped grap
 実行コードは同folderのsemantic_units_aligned74_prepare.py/run.py/supervisor.py。API dc05dc358d1c44ce47fd844f6041d74f1f74fe6aの既存clean checkoutと対象blobを使用。root=/workspace/analysis-aligned74-20261103、prepared=/workspace/analysis-aligned74-prepared-20261103。再開時はprepare.exit、run.exit、result/report.jsonを先に確認し、存在するrootを重複起動しない。旧6重み対を保持し、partialも別結果として保存。追加epoch/再試行/raw補修/自動通常採用なし。
 
 DIRECT_PRODUCT_OR_ACCEPTANCE_WORK。Mashの現セッションの分析残件続行・必要作業承認・GPU/Jupyter使用/GitHub checkpoint指示内、Codex Work/GPT-6 root単一execution owner＋同環境補助。独立Pro/Ultra/human受入れではない。成功条件は実4Bの原文忠実性と既存typed ROLEの文章/図到達を旧46と比較し、同保存fileをモデル非生成で復元すること。primaryは限定TECHNICAL_CREDIT又はBLOCKER_NARROWED、商品受入れはMash判断。本人基準の判断/選択・複数field/補足/比較・記録間関係・通常累積保存接続は残件、正式0/3・54.50％据置。STRUCTURE_MAP_DELTA_NONE（既存private版の学習比較のみ）。
+
+
+実行checkpoint：GitHub01663375の全6fileを全文読戻し後、同Jupyterへ実行3scriptをSHA/構文照合して一回起動。CPU prepare.exit0、74新版教師・T4typed/46before・実tokenizer・保存非生成再読が成功。117.613秒時点で74前測定/44更新/1load・新call0/STARTED。最終採否は未確定。別collectは終了後の92保存再読/全原本回収だけを行い、失敗時は再実行せずpartial原本をそのままarchive-only回収する。
