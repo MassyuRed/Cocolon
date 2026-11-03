@@ -2327,6 +2327,18 @@ Mashの包括的な続行/GPU/Jupyter/GitHub保存指示で、前回の完了run
 <a id="analysis-combination70-result-20261103"></a>
 ## 90. 11/3 — 78更新/36生成の局所改善と、材料入力版の欠落修正
 
-[全結果/原本回収/次比較](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-combination70-result-20261103)。combination70は539.472364秒/exit0、78更新/140測定/3load/36stop。SQ03の継続修飾＋対象分離、MD02他者主体＋否定/余分対象解消が改善し、OD01/MD01は89baへ復帰。RC2と旧保持は一致。HQ04理由/MD01修飾scope等は残り、通常未採用。rootと同環境read-only担当が34前後/原sourceを全文確認。68保存応答の非生成再読と旧4adapter保持、296text原本の外部bytes/SHA照合を確認。112重みの回収・新private保存は進行中で、完了と偽らない。新a5eafe/9bcは次入力版比較の研究初期値へ明示選定、通常採用/自動追学習ではない。
+[全結果/原本回収/次比較](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-combination70-result-20261103)。combination70は539.472364秒/exit0、78更新/140測定/3load/36stop。SQ03の継続修飾＋対象分離、MD02他者主体＋否定/余分対象解消が改善し、OD01/MD01は89baへ復帰。RC2と旧保持は一致。HQ04理由/MD01修飾scope等は残り、通常未採用。rootと同環境read-only担当が34前後/原sourceを全文確認。68保存応答の非生成再読と旧4adapter保持、296text原本の外部bytes/SHA照合を確認。112重みの外部bytes/SHA照合とprivate保存を完了した（[原本](https://chatgpt.com/library?file_id=libfile_d2746636f0a0819195c24541806470b3&account_id=personal)、14,889,674bytes/299member/SHA3918c413…）。新a5eafe/9bcは次入力版比較の研究初期値へ明示選定、通常採用/自動追学習ではない。
 
 通常sourceとprivate候補の責務を実物で再確認。modelにrecord対応/記録時刻/選択感情・強さがなかったため、API5d7f43a8の既存2owner/既存test内へ明示offline selected_material.v2を追加。旧2版messages/ref/stateと保存再読、本文だけの引用、未解析/主体未解決/route0を保持。142PASS/2SKIP/既存warning1（26.58秒）、初回pytest未導入は実test0として分離。次は同4source×2入力版=8実生成、学習0/1load/480秒上限・処理按分上限$0.07734@前回確認$0.58/h。材料一式の比較で、metadata単独因果や一般品質の証明ではない。通常HTTP/DB/RN/Render配置/Pod管理0、private入力版のみSTRUCTURE_MAP_DELTA_PRESENT。全体残件を引用学習だけへ縮小しない。
+
+
+<a id="analysis-material-context8-result-20261103"></a>
+## 91. 11/3 — 材料入力版8生成を完了し、不採用と再開点を確定
+
+[全結果/二つの原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-context8-result-20261103)。追加学習0・同4source×category/material版8新stop/1load、109.770174秒/exit0、初期a5eafe/9bc不変。全4source/raw8をrootと同環境read-only担当が読んだ。SQ03の修飾注記落ち、MD02の主体/否定scope退行、OD01両版拒否、CTX01不明分類等の不足があり、新版の意味改善を確認できない。通常採用/既定版変更なし。6保存候補同一ID/coverage・2拒否維持は技術検査であり、意味品質の成功ではない。
+
+combination70のafterはbaseline.v1、今回旧側はselected_categories.v1。本文/field/path/schema/旧例文は同じだがカテゴリ説明/field追加によりmessages/refは異なる。MD02/OD01 raw差を同一messagesの再生成変動や新materialだけの原因へ断定しない。既見診断と合成fixtureの一回比較で、Mash教示/未知盲検/metadata単独因果ではない。明示offline材料版と旧互換/保存をAPI5d7f43a8へ保持し、対象142PASS/2SKIP/既存warning1を確認した。
+
+combination70の原本/112重みと新比較の48原本は外部bytes/SHA照合済み。8比較の[private原本](https://chatgpt.com/library?file_id=libfile_dbc696ebddf48191b7a83305b7ab2187&account_id=personal)は98,243bytes/50member/SHA45ff5e2c8f31532b114cb2ca1a3ecc428a9c30beaceeffec7ec1f845b73f1c29。原report PENDING_RAW_READを保存したまま、後読解の採否を別review/結果JSONへ記録。初回prelaunch SHA不一致はload/生成/更新0として分離し、実runの再試行/追加epoch/補修/受口緩和0。
+
+次は同じdose/order/材料足しへ自動進行せず、本人の役割/判断/選択を根拠付きの既存五種/注記/不明へ入れる意味採用と、記録間の再出現/変化、通常ObservedGraph/保存/補足/月次比較へ接続する責務を既存ownerで進める。観測会の本人の読み/問い/修正の未取得を取得済みにしない。今回の二完了runは重複起動しない。通常HTTP/DB/RN/Render/Supabase稼働/配置/Pod管理不変、全未解析/主体未解決/route0・product_credit0。private入力版のみSTRUCTURE_MAP_DELTA_PRESENT。全体現在地/Analysis map/全file地図/schema/trialへ同期済み。Codex Work/GPT-6 root単一writer＋同環境read-only確認、別モデル/本人受入れではない。

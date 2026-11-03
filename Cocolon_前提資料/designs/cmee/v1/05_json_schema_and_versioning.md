@@ -3289,3 +3289,6 @@ API86d19b6d。上の計画をMash継続承認内で既存3owner＋新test1へ実
 新prompt版はrequest identityと実messages hashへ束縛し、保存schema=`cocolon.cmee.analysis_model_units_quoted_parents_state.material.v2`＋prompt_versionで再読する。旧baseline.v1とselected_categories.v1は従来messages/ref/stateを保持し、新旧保存payloadの版差替えを拒否。出力のfields/field/units/quote/node_kind/parent_quote/scope_role/qualifiersは不変、元field本文内の逐語引用/一意親/否定等の検査を緩めない。normal saved-map/publicDTO/通常ensureへ有効化しない。全未解析/主体未解決/route0は維持する。
 
 対象142PASS/2SKIPで新8caseと旧保存非生成再読を確認。モデル意味品質・本人基準/通常map採用の完成ではない。実4B比較条件と採否は[trial](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-context8-plan-20261103)に戻る。
+
+
+11/3実4B比較後：同4source×category/material版8生成（学習0）を完了したが、新材料版に意味改善を確認できず通常未採用。両版3返却/1拒否、6保存候補一致/2拒否維持。上記schema/明示offline選択は保持し、旧既定/通常ensureへ切替えない。材料追加が意味採用・主体解決・record間関係の実装を完了したとはしない。全原本保存・版差と再開点は[確定結果](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-context8-result-20261103)。本段落で新schema/型/通常保存contractの追加なし。

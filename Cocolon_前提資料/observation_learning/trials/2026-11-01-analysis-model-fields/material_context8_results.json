@@ -1,0 +1,91 @@
+{
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "api_commit": "5d7f43a888221526342d9c4eddffb0b7be186df7",
+  "initial_weights_sha256": "a5eafe344189ede6a4a664396d43af651e5482c0d3c720d6b329a1b44d01bd41",
+  "initial_config_sha256": "9bc9f1f3f2979d49911dae1b028cc2fb064e8e000baebcb84b84a3f50448b5cf",
+  "model_loads": 1,
+  "new_calls": 8,
+  "training_updates": 0,
+  "process_seconds": 109.77017431613058,
+  "initial_unchanged": true,
+  "normal_adoption": false,
+  "product_credit": 0,
+  "status": "COMPLETE_REVIEWED_NOT_ADOPTED",
+  "all_finish_stop": true,
+  "source_cases": 4,
+  "source_records": 5,
+  "profiles": [
+    "selected_categories.v1",
+    "selected_material.v2"
+  ],
+  "returned_by_profile": {
+    "selected_categories.v1": 3,
+    "selected_material.v2": 3
+  },
+  "rejected_by_profile": {
+    "selected_categories.v1": 1,
+    "selected_material.v2": 1
+  },
+  "saved_replay_candidates_matched": 6,
+  "saved_replay_rejections_preserved": 2,
+  "saved_reader_generate_compiler_author_forbidden": true,
+  "all_returned_candidates_mapped_count": 0,
+  "all_returned_candidates_unparsed": true,
+  "route_edges": 0,
+  "quality_verdicts": {
+    "SQ03": "NO_IMPROVEMENT_MATERIAL_CONTINUATION_QUALIFIER_DROPPED_QUOTE_RETAINED",
+    "MD02": "NO_IMPROVEMENT_MATERIAL_ACTOR_AND_NEGATION_SCOPE_REGRESSION",
+    "OD01": "BOTH_REJECTED_CATEGORY_CARRIER_INVALID_MATERIAL_PARENT_AMBIGUOUS",
+    "CTX01": "NO_NEW_MEANING_IMPROVEMENT_MATERIAL_EPISTEMIC_MISCLASSIFICATION"
+  },
+  "prior_comparison": {
+    "prior_profile": "baseline.v1",
+    "current_category_profile": "selected_categories.v1",
+    "same_model_weights": true,
+    "same_source_text_field_path_schema": true,
+    "same_messages": false,
+    "differences": "category context instruction paragraph and selected_categories field",
+    "raw_equal_cases": [
+      "SQ03"
+    ],
+    "raw_different_cases": [
+      "MD02",
+      "OD01"
+    ],
+    "no_claim_of_same_message_nondeterminism_or_material_only_causality": true
+  },
+  "api_validation": {
+    "passed": 142,
+    "skipped": 2,
+    "existing_warning": 1,
+    "seconds": 26.58,
+    "initial_attempt_no_pytest_no_tests_executed": true
+  },
+  "prelaunch_hash_check_failure": {
+    "model_loads": 0,
+    "generations": 0,
+    "updates": 0,
+    "reason": "local trailing LF differs from unchanged Git blob; verified actual Git blob before single launch"
+  },
+  "selected_material_v2_default_enabled": false,
+  "normal_ensure_enabled": false,
+  "unseen_blind_evaluation": false,
+  "mash_teaching_obtained": false,
+  "metadata_single_factor_causality_test": false,
+  "source_evidence_files": 48,
+  "review": "MEANING_REVIEW.md",
+  "remaining": [
+    "source_grounded_typed_meaning_adoption",
+    "person_grounded_role_decision_choice",
+    "cross_record_recurrence_and_change",
+    "normal_observed_graph_save_supplement_monthly_connection"
+  ],
+  "structure_map_delta": "PRESENT_PRIVATE_INPUT_VERSION_ONLY",
+  "private_archive": {
+    "library_file_id": "libfile_dbc696ebddf48191b7a83305b7ab2187",
+    "bytes": 98243,
+    "members": 50,
+    "sha256": "45ff5e2c8f31532b114cb2ca1a3ecc428a9c30beaceeffec7ec1f845b73f1c29"
+  }
+}

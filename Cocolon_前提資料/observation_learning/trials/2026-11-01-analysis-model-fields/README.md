@@ -1,4 +1,4 @@
-> **11/3最新・replay68完了：** 再掲3枠だけを変えたreplay68は74更新/32新stop、491.863046秒で完了したが、新しい意味改善はなく不採用。SQ03/MD02の不足は残り、OD01は不正unitへ変化して拒否継続、MD01にも親曖昧の新拒否。SC6=6/6と旧AT/UQ/MX/OAの教師一致、CE68の局所改善は保持。 旧68にない『対象分離＋継続修飾＋強調否定』と別actor/二不明文脈の組合せ2件を原sourceから合成し、実strict/実file非生成再読/実tokenizer prefix・EOSまでCPU確認。モデル/生成/更新0、新70教材の学習plan/GPUは未選定。診断文やrawの教師化ではない。 [結果・原本・次作業](#analysis-replay68-result-20261103)。完了runを重複起動しない。新bb6eは通常/次初期値へ未採用。
+> **11/3最新・combination70と材料入力比較を完了：** 70教材/78更新/36新生成でbaseline上のSQ03/MD02は局所改善。続く同4source×category/material入力版の8生成（学習0）では新版の意味改善を確認できず、主体/否定/修飾scopeの不足が残り、両版とも3候補返却/1拒否。通常採用・既定版変更なし。原本/112重み/全8出力を回収・保存済み、[確定結果と再開点](#analysis-material-context8-result-20261103)へ。baselineとcategoryのmessages差を分離し、完了runを重複起動しない。
 
 # Analysis — 最小field接続と実4B probe
 
@@ -1001,7 +1001,7 @@ plain full-assistant CE、LR1e-5/seed20261110/clip1/prompt全mask/EOS/生成条�
 
 rootと同環境read-only担当が全34source/before/afterを全文確認。SQ03は継続修飾/否定を保持して対象を分離し、MD02は他者主体/否定を同ACTIONへ戻して余分対象を解消。OD01/MD01は89ba rawへ復帰。RC2、旧AT4/UQ2/MX2/OA2/SC6は教師JSON一致。HQ04の明記理由をTE_CONTEXTにする不足、MD01の粗い修飾scope等は残り、一般読解/通常採用は未成立。単一の追加教材比較で、盲検/Mash教示/一般意味率/本人基準の役割や選択・記録間関係の成功へ換算しない。
 
-別CPU processで68保存応答を再読し、保存readerのgenerate/compiler/author禁止を維持。元Pod archiveは295member/14,863,085bytes/SHA256 `3d134d27a21c7f259048b161b9fbf592950ad49fff79481ec65d34f2034f73be`。ブラウザーdownload待機と専用file回収がtimeoutしたため、既存text/F32 bit列経路へ戻した。296text原本全bytes/SHA照合済み、112重み外部回収は進行中で、現時点のprivate保存完了とは記録しない。run原reportのPENDING_RAW_READ bytesは保全し、読解結果は本節/後続結果JSONへ分離する。完了run重複/追加epoch/出力補修/受口緩和0。
+別CPU processで68保存応答を再読し、保存readerのgenerate/compiler/author禁止を維持。元Pod archiveは295member/14,863,085bytes/SHA256 `3d134d27a21c7f259048b161b9fbf592950ad49fff79481ec65d34f2034f73be`。ブラウザーdownload待機と専用file回収がtimeoutしたため、既存text/F32 bit列経路へ戻した。296text原本と112重み全bytes/SHAを外部照合済み。private保存を完了した：[原本archive](https://chatgpt.com/library?file_id=libfile_d2746636f0a0819195c24541806470b3&account_id=personal)、14,889,674bytes/299member/SHA256 `3918c413a712020bc2aadf091c6f6fac5ae86af214a2fa77f8cb0a568f312183`。元run関連297memberとreview/result_summaryを保持し、ZIP containerのみ再圧縮。[本文なし確定結果](semantic_units_combination70_results.json)。run原reportのPENDING_RAW_READ bytesは保全し、読解結果は本節/後続結果JSONへ分離する。完了run重複/追加epoch/出力補修/受口緩和0。
 
 新a5eafe/9bcは、上記の実比較を根拠に次の入力版対比の研究用初期値へrootが明示選定。通常採用と次学習への自動継承ではない。通常source/HTTP/DB/RN/Render配置/Pod管理不変、全未解析/主体未解決/route0。処理按分約$0.086915@前回確認$0.58/h、準備/回収/保持別。STRUCTURE_MAP_DELTA_NONE（この学習比較のみ）。
 
@@ -1015,3 +1015,21 @@ API [5d7f43a8](https://github.com/MassyuRed/mashos-api/commit/5d7f43a88822152634
 同commitの新8caseを含む142 PASS/2 SKIP/既存warning1（26.58秒）。初回はpytest未導入で実test0、repositoryの既定pytest8.4.1を既存GPU検証環境へ導入して本検査を実行。独立Pro/Ultra/human受入れではなくCodex Work rootと同環境read-onlyレビュー。実DB/Render/RN/通常有効化なし。詳細map/全file地図にこのprivate入力版の差を同期する。
 
 次は追加学習0・明示研究用a5eafe/9bc保存重み1loadで、既存SQ03/MD02/OD01と既存2記録3field合成fixtureを、旧category版/新material版各1＝8新生成。全sourceは同一、両messagesを実tokenizerで非切詰め/8192・生成2048枠確認し、実strict/file保存再読まで行う。新context一式の一回比較で、各metadataの単独因果・未知盲検ではない。最大480秒/各要求45秒、外側TERM470+kill10、処理按分上限約$0.07734@前回確認$0.58/h（準備/回収/保持別）。延長/再試行/出力補修/受口緩和/新学習なし。run-dirは /workspace/analysis-material-context8-20261103、report.jsonと親終了値を先に確認し重複起動しない。通常採用/本人基準の役割・判断・選択/記録間関係の完成へ換算しない。
+
+
+<a id="analysis-material-context8-result-20261103"></a>
+## 11/3 材料入力比較完了 — 8生成の実読後も通常未採用
+
+同4sourceのselected_categories.v1/selected_material.v2各1、計8新stop/1load/追加学習0を109.770174秒で完了、exit0。初期a5eafe/9bcは不変。rootと同環境read-only担当が全source/raw8を全文読解した。[本文なし確定結果](material_context8_results.json)。元reportのPENDING_RAW_READ bytesは変更せず、読解後の判断は本節とprivate MEANING_REVIEW.mdへ分離した。
+
+SQ03はquote内の継続語/否定を保つが、新版で継続modifierが落ちる。MD02は新版で主体付き全文を内容対象に置き、root主体/否定の適切なscopeを保持しない。OD01は両版拒否（旧carrier_invalid、新parent_ambiguous_or_missing）。CTX01に新しい意味改善はなく、不明表現をmodifierにする誤分類等が残る。両版とも3返却/1拒否、保存6候補同一ID/coverage・2拒否維持。保存readerはgenerate/compiler/author禁止、新load/生成/更新0。全未解析/主体未解決/route0・mapped0で、返却や保存成功を意味品質に加算しない。
+
+combination70 afterはbaseline.v1で、今回のcategory版とは同一messagesではない。3診断の本文/field/path/schema/旧例文は同一だが、category版はsystem末尾へカテゴリ説明・fieldへselected_categoriesを追加し、request_ref/messages hashは異なる。SQ03 rawだけ同じ、MD02/OD01は異なる。同一messagesの非決定性や新materialだけを原因と断定しない。今回4caseは既見診断/合成fixtureで、Mash教示/未知盲検/metadata単独因果の試験ではない。
+
+API5d7f43a8の材料版は明示offlineで保持し、旧category既定/通常ensureへ切替えない。対象142PASS/2SKIP/既存warning1、26.58秒。supervisor初回はlocal末尾LF/Git blob SHA差でprelaunch停止（Popen/model/load/生成/更新0）、元blob同一性を確認後に一回実行した。初回pytest不足/正規8.4.1導入も原logへ保持する。GPU再試行・追加epoch・出力補修・受口緩和なし。
+
+[private全原本](https://chatgpt.com/library?file_id=libfile_dbc696ebddf48191b7a83305b7ab2187&account_id=personal)：98,243bytes/50member/SHA256 `45ff5e2c8f31532b114cb2ca1a3ecc428a9c30beaceeffec7ec1f845b73f1c29`。run/source/raw8/request/response/候補/CPU再読/実行・test logs/API固定3sourceの48原本は全bytes/SHA照合し、別review/結果を追加した。回収にモデル再実行0。combination70原本/重みは上節のarchiveへ保存済み。
+
+再開は本節と二つの本文なし結果を先に読む。両runのreport/exit0を確認して重複起動しない。単純なdose/order変更やmetadata追加を次候補へ自動昇格させず、本人の役割/判断/選択を本文根拠から既存五種/注記/不明へ採る責務と、記録間の再出現/変化を通常compiler/realizerへ接続する責務へ戻る。quote/actor qualifierだけの確定fact昇格はしない。観測会の本人の読み/問い/修正は未取得を取得済みにせず、華恋の合成設定と分けて継承する。Mashの観測会終了指示はない。
+
+通常HTTP/DB/RN/Render/Supabase稼働・配置/Pod管理変更0、通常意味接続は未完、product_credit0。STRUCTURE_MAP_DELTA_PRESENTはprivate prompt/state入力版のみ、学習比較はNONE。全体現在地/Analysis map/01B全file地図/schema05/最新weekly§91を同期。Codex Work/GPT-6 root単一writer＋同環境read-onlyレビューで、独立Pro/Ultra/humanの商品受入れではない。

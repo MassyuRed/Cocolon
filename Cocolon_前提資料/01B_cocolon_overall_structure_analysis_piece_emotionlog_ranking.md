@@ -3260,3 +3260,24 @@ API2c259f0e、STRUCTURE_MAP_DELTA_PRESENT。新production file/ownerなし。API
 ## 2026-11-03 — Analysis private材料context入力版の差分
 
 API5d7f43a8：`analysis_cumulative_service.py`の既存`prepare_cumulative_category_units(..., prompt_version=...)`が旧selected_categories.v1を既定で保持し、明示selected_material.v2を選べる。`cores/analysis/semantic_admission.py`の既存Input型/quoted-parent経路が原record対応・記録UTC時刻・選択感情/強さ・カテゴリ・field所属・分析終点を生成し、専用request/messages/state identityへ束縛する。旧2版messages/ref/state/非生成再読を変更しない。新規Engine/入力型/response型/service/HTTP/DB/RNは追加しない。本文外metadataをquote/evidenceへ流用しない。testは既存`ai/tests/test_analysis_model_quoted_parent_units.py`内の新8case、対象142PASS/2SKIP。通常ensureと既存compiler/唯一realizerは不変、全未解析/主体未解決/route0を維持。実4Bの8回比較と残件は[trial](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-context8-plan-20261103)。STRUCTURE_MAP_DELTA_PRESENT（private prompt/state版のみ）。
+
+
+### 2026-11-03 — combination70完了とmaterial context8の全trial file差分
+
+通常商品ownerの追加なし。下記は既存trial `observation_learning/trials/2026-11-01-analysis-model-fields/` の研究/回収file。学習比較はSTRUCTURE_MAP_DELTA_NONE、API5d7f43a8のprivate入力版だけ上節のPRESENT。全体結果と再開点は[trial](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-context8-result-20261103)。
+
+| file | 責務 |
+| --- | --- |
+| semantic_units_combination70_prepare.py | 旧68辞書/74順部分列/最後14とRC2・before32同一性をCPU照合 |
+| semantic_units_combination70_run.py | 明示89ba、70教材/78更新/140測定/36新生成の一回比較 |
+| semantic_units_combination70_supervisor.py | 固定source/原本/初期重み検査、単一起動/timeout/partial保全 |
+| semantic_units_combination70_saved_replay.py | 68保存応答の64候補一致/4拒否、保存reader生成/compiler/author禁止 |
+| collect_combination70.py | 元run/CPU/再読/実行原本を収集 |
+| export_combination70_numeric.py | UTF-8原文/F32 bit列のlossless外部回収材料 |
+| semantic_units_combination70_results.json | 本文なし結果/局所意味改善/残件/全原本・重み保存参照 |
+| material_context8_run.py | API5d7f43a8の同4source×2入力版8生成、学習0・実strict/保存再読 |
+| material_context8_supervisor.py | child/Git blob/初期重み同一性、470+10秒上限と終了・compute確認 |
+| collect_material_context8.py | 48原本/API固定3source/実test・実行log/CPU再読を収集 |
+| material_context8_results.json | 全8実読後の新版不採用、版差/保存結果/未達/次の再開点 |
+
+combination70の112重みまで全bytes/SHA照合・保存済み。材料比較は意味改善なし・通常未採用、6候補保存一致/2拒否維持を商品成功に加算しない。二run重複起動なし、全未解析/主体未解決/route0。新しいperson meaning/記録間関係の通常接続は未実装であり、本mapの既存残件へ戻る。
