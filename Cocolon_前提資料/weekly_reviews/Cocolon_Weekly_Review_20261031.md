@@ -2460,3 +2460,12 @@ NV04は結果root重複とWRITTEN_UNKNOWNの親不正という意味/形式未�
 [条件/コード/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-reason-transfer3-plan-20261103)。§102の未採用9dcをこの研究比較先へ明示選定し、原文参照RU02/HQ04の述語×独立不明有無の4条件を固定。HQ04原文は完了rawを厳密再利用、新3call/1load/学習0/NLL0/180秒（処理上限0.029USD@0.58USD/h、準備保持別）。CPU4strict/保存非生成/tokenizer/旧HQ04一致とGitHub読戻し成功後に一回実行、最終未確定。旧16file保持、通常/次初期値未採用、STRUCTURE_MAP_DELTA_NONE。
 
 同時のROLE境界監査は既存5教師AT32/T4に肯定copula誤modifier教師0、AT32の複数文ROLE＋結果を確認。明記『の役割は』＋独立ACTIONの組合せは未教示で、原因を文数だけと断定しない。R08のactor逆転や対象語消失とも認定しない。正常ROLE10を保持し、複数節をtyped採用するscope拡張なし。新順序対照2教材は監査提案だけで、教師/CPU/GPU未選定。監査自身のモデル/生成/教師/本番変更0。
+
+
+## 104. 11/3 — 理由2×2の学習0診断完了、元RU02の生成自体が未達
+
+[結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-reason-transfer3-result-20261103)。CPU4参照通過後、保存9dc/v2の新3stop＋旧HQ04再利用1/1load/学習0/NLL0を39.380355秒/exit0。全4で理由marker/WRITTEN_REASONを出さずTE_CONTEXT、参照一致0/4。RU02元教材のsource/owner/snapshot/messages/ref/target完全同一でも生成未再現で、別述語への転移だけ/独立不明の有無だけの説明は支持しない。唯一原因は未確定。旧16file不変/compute空。全4原文/参照/raw/候補と残余を照合、元HQ04の4file bytes同一、全candidate mapped0/unparsed1。保存reader内Engine/両compiler/両authorを禁止し再読一致。元52member CRC/全bytes-SHAを確認し[全文読解・ROLE監査](https://chatgpt.com/library?file_id=libfile_c02ebc0967608191a1d212db49172a6f&account_id=personal)へ保全。通常未採用、STRUCTURE_MAP_DELTA_NONE。
+
+## 105. 11/3 — 理由/文脈の重点学習と役割/行動の順序対照78を固定
+
+[条件/コード/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-boundary78-plan-20261103)。旧76/90prefixを保持し原文RB2を追加、末尾[RU01,RU02,RB01,RB02]×4で78教師/106更新/156NLL。9dcをこの研究初期値へ明示選定、before53を76after50＋診断Y01〜03から厳密再利用、新before0/after53/2load/900秒・上限0.145USD@0.58USD/h（保持等別）。同量controlなしで追加教材/重点回数を唯一原因としない。新2のstrict/既存T4typed/RB2typed拒否/保存非生成/tokenizerとGitHub読戻し成功後に同Jupyterで一回実行。現時点は条件固定で結果未確定。通常/次初期値自動採用/採否緩和/本番変更0、STRUCTURE_MAP_DELTA_NONE、本人基準/記録間接続は未完。

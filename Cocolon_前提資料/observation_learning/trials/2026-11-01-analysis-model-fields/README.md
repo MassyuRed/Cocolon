@@ -1256,3 +1256,24 @@ CPU4参照strict/保存reader内Engine・両compiler・両author禁止/tokenizer
 コードsemantic_units_reason_transfer3.py（prepare/run/archive）とsemantic_units_reason_transfer3_supervisor.py。root=/workspace/analysis-reason-transfer3-20261103。再開はprepare.exit/run.exit/report/manifestとcollectionを確認し、存在するrootを重複起動しない。個別本文/raw/参照はprivate ZIP、公開はコード/条件/本文なし結果のみ。正式0/3・54.50％据置、STRUCTURE_MAP_DELTA_NONE。本人基準の判断/選択、複数field/本人補足/比較、記録間再出現/変化、通常累積接続は残件。Mashの現セッションの必要作業/GPU/Jupyter/GitHub承認内、逐次承認0。
 
 同時のsemantic_units_role_boundary_audit.jsonはROLE教師AT32＋T4の5行に誤った肯定copula修飾を教える例0と確認。AT32に既存複数文ROLE＋結果はあるため『複数文教材なし』とは言わない。明記役割＋独立ACTIONの組合せは未教示、正常ROLE10と現typed単一節scopeは保持する。R01/R08の同一ROLE節での差は観測済みだが唯一原因未確定、R07の誤否定/非役割分類も未解決。原文からの順序対照2教材は監査案で、まだ採用/学習条件未選定。
+
+
+<a id="analysis-reason-transfer3-result-20261103"></a>
+## 11/3 — 学習0診断完了、元教材自体も理由の生成再現に未達
+
+CPU4原文参照/strict/保存reader/tokenizer/既存HQ04一致を通過後、同9dc/v2の学習0/NLL0/新3stop＋既存1再利用/1loadを39.380355秒（GPU親42.802072秒）/exit0で一回完了。旧8対16file不変/compute空。全4source/参照/raw/候補・残余をroot＋同環境担当が照合し、すべてTE_CONTEXTでWRITTEN_REASON/REASON_MARKERなし、参照JSON一致0/4。元RU02のowner/snapshot/messages/ref/target完全同一でも生成未再現で、HQ04への転移だけの問題とは言えない。独立不明の除去/追加も改善を示さず、その有無だけの説明も支持しない。唯一原因は未確定。
+
+元HQ04 request/raw/response/candidateの4fileは前回afterとbytes同一。独立不明/時点/否定を見た範囲で保持しつつ、原RU02のNEG引用境界と不明親の引用粒度は参照と差がある。ので自体は全文/残余に保持され、入力語の削除とは言わない。候補全4はmapped0/unparsed1で通常意味採用ではない。4参照と4結果の保存reader内でEngine/両compiler/両authorを禁止し一致確認。
+
+[原本・全文読解・ROLE監査](https://chatgpt.com/library?file_id=libfile_c02ebc0967608191a1d212db49172a6f&account_id=personal)：268,440bytes/8member/SHA256 5d860e07d853d5059feb4387955d47c62f16cfad2324c68796e5c302afad17a3。内部元52member/260,818bytes/SHA256 1bd22db6fd4c323d169d3c95cdb58378370776ca3c4c3d3eca90c669a4413728をCRC/全bytes-SHA照合。新重みは作らず前回9dcをSHA参照。全結果semantic_units_reason_transfer3_results.json。完了runを再起動しない。通常/次初期値への自動採用なし、STRUCTURE_MAP_DELTA_NONE。
+
+<a id="analysis-boundary78-plan-20261103"></a>
+## 11/3 — 理由/文脈の生成再現と独立役割/行動の境界を結合して学習する
+
+診断で元RU02の生成自体が未達と分かり、NLL平均低下を再現達成と扱わず実出力を直す。旧76source/target/90順は完全不変、原文から新しい明記ROLE＋独立ACTIONの順序対照RB01/RB02を2教材追加して78教師。両rootを独立保持し、書かれないACTION主体・因果・時間順を補わず、肯定copulaをmodifierにしない。新2は全文が複数節のため既存typed role scope拒否を保持する。モデルrawを教師にしない。
+
+更新順は旧90prefix＋[RU01,RU02,RB01,RB02]×4で計106。既存RU01/02のて文脈/ので理由を対で重点化し、新しいROLE/行動の順序対照と交ぜる。同量controlなし、重点回数と新2が同時に変わるため単独因果には帰属しない。初期9dc/config4776をこの研究用へrootが明示選定し、通常/自動次初期値採用や中断optimizer再開とはしない。plainCE/LR1e-5/clip1/seed20261111を保持し、新78前後NLL156・106更新・保存112tensor実一致/非学習reload・after53新stop/2load/900秒（外890+kill10、要求23秒/context8192/maxnew2048）。0.58USD/hなら処理上限0.145USD、準備/回収/保持別。
+
+before53は完了76after50＋学習0診断Y01〜03の同9dc rawを、source/owner/snapshot/request/messages/response/候補ROLE artifactの採否とbytesまで厳密再利用。既存HQ04と重複するY04を追加しない。新before生成0。新RB2の旧76/評価53との完全本文一致0、strict78/T4typed保持/RB2typed拒否/保存reader内Engine・両compiler・両author禁止/tokenizerをCPU確認後、GitHubコード全文読戻し後だけ同Jupyterで一回実行する。旧16file不変/compute空、別CPU106保存応答再読と全原本保全、失敗時archive-onlyでGPU再試行しない。
+
+private boundary78-sources.json SHA256 b3648226b8aa1fc28209802586c78f2e767dfb599b9ae65bf591b4be67510891、元76plan SHA571434c4…、診断CPU c6ee2de3…/report3d475a0b…を固定。root=/workspace/analysis-boundary78-20261103、prepared=/workspace/analysis-boundary78-prepared-20261103。コードsemantic_units_boundary78_prepare.py/run.py/supervisor.py/collect.py、API dc05clean/source6を使用。再開は既存exit/report/manifestを先に確認し、重複起動しない。採否は原文に対する理由marker・不明/役割copula/独立ACTIONと旧53保持、正常ROLE10の文章図/保存再読で判定する。全対象分離義務化/受口緩和/raw修復/通常HTTP/DB/RN/配置変更なし。本人基準の判断/選択、複数field/補足/比較、記録間再出現/変化、通常累積接続は残件。正式0/3・54.50％据置、STRUCTURE_MAP_DELTA_NONE。Mash承認済みscope内で逐次承認0、Codex Work/GPT-6 root＋同環境補助、独立Pro/Ultra/human受入れではない。

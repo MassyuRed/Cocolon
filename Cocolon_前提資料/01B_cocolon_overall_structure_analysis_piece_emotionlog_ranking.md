@@ -3344,10 +3344,13 @@ API dc05dc35、通常product owner追加なし。既存 `semantic_admission.py` 
 
 ### 2026-11-03 — 既存private役割接続の74教材入力整合比較
 
-[aligned74実結果](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned74-result-20261103)は86更新/46新生成・role4/4と教示4/4、保存非生成再読まで完了。通常/次学習は未採用、本人基準/記録間関係/通常累積接続の残件を保持する。新private graph/作者/型/通常route/DB/RNは追加せず、既存dc05 profileとtyped-role ownerを使用。trial内aligned74 prepare/run/supervisor/collectはCPU整合/学習比較/一回制限/原本保存、role_transfer4 prepare/run/supervisorは新4のCPU参照/旧新8call/一回制限の実行記録用で、商品ownerではない。STRUCTURE_MAP_DELTA_NONE。追加転移4の比較も完了、本人役割1→2/2とscope拒否2/2維持、全8raw/3ROLEと保存readerを照合済み。最新結果と再開はtrial/weekly§99へ戻る。
+[aligned74実結果](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned74-result-20261103)は86更新/46新生成・role4/4と教示4/4、保存非生成再読まで完了。通常/次学習は未採用、本人基準/記録間関係/通常累積接続の残件を保持する。新private graph/作者/型/通常route/DB/RNは追加せず、既存dc05 profileとtyped-role ownerを使用。trial内aligned74 prepare/run/supervisor/collectはCPU整合/学習比較/一回制限/原本保存、role_transfer4 prepare/run/supervisorは新4のCPU参照/旧新8call/一回制限の実行記録用で、商品ownerではない。STRUCTURE_MAP_DELTA_NONE。追加転移4の比較も完了、本人役割1→2/2とscope拒否2/2維持、全8raw/3ROLEと保存readerを照合済み。この転移4の履歴結果と再開はtrial/weekly§99へ戻る。
 
 
 11/3の74教師scope監査は全対象独立化を現行義務とせず、明記理由/文脈と独立不明の組合せへ次比較を限定する。trialのsemantic_units_aligned74_teacher_scope_audit.jsonは本文なし監査、semantic_units_reason_unknown76_prepare.py/run.py/supervisor.py/collect.pyは旧74＋原文対照2のCPU準備/一回学習比較/上限・原本保持/終了後100保存再読と全原本梱包用。既存private候補owner/typed ROLEを使い、商品graph/作者/通常routeは追加しない。新比較の実結果はtrial/weekly§101以降を確認。STRUCTURE_MAP_DELTA_NONE。
 
 
 11/3・理由2×2診断はsemantic_units_reason_transfer3.py（CPU参照/新3生成/1既存再利用/原本保全）とsemantic_units_reason_transfer3_supervisor.py（段階/上限/16file保持）をtrialへ追加。semantic_units_role_boundary_audit.jsonは旧ROLE5教師/正常10例/複数文候補境界の本文なし監査。通常owner/型/graph/DB/RNは変更しない。最新の診断結果と再開はtrial/weekly§103以降へ戻る。STRUCTURE_MAP_DELTA_NONE。
+
+
+11/3の理由診断は元教材を含む4条件でWRITTEN_REASON未再現を確認。次にsemantic_units_boundary78_prepare.py/run.py/supervisor.py/collect.pyをtrialへ追加し、旧76不変＋新ROLE/ACTION順序対照2、理由/文脈と役割境界の重点学習・53生成・106保存再読/原本保全を扱う。通常owner/型/DB/RNの変更なし、STRUCTURE_MAP_DELTA_NONE。最新はtrial/weekly§104–105以降を参照。

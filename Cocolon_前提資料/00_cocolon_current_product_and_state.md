@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-**11/3・分析の次の切分け（第9回§103）：** 前回9dcの理由誤分類を、教材/別述語×独立不明有無の2×2で学習0診断。旧HQ04原本1を再利用し、新3call/1load/180秒、CPU/GitHub確認後一回実行・結果未確定。ROLE既存5教師に誤copula修飾0、既存複数文教材AT32はあるため単純な教材欠如と断定しない。正常ROLE10とtyped単一節scopeを保持。[固定条件/監査/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-reason-transfer3-plan-20261103)。通常/次学習採用なし。
+**11/3・分析の最新診断と次比較（第9回§103–105）：** 保存9dcの理由2×2を学習0/新3＋再利用1/39.380355秒で確認し、元RU02教材も含め全4で理由をTE_CONTEXTへ誤分類。転移だけ/独立不明の有無だけでは説明できず、NLL低下を生成再現と扱わない。次は旧76不変＋役割/独立行動の順序対照RB2、既存理由/文脈と交ぜた重点更新で78教師/106更新/156NLL・before53再利用/after53を固定、CPU準備中・結果未確定。[結果/監査/次条件](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-boundary78-plan-20261103)。通常/次初期値の自動採用なし、STRUCTURE_MAP_DELTA_NONE。
 
 **11/3・分析の最新結果（第9回§100–102）：** 74教師監査後、旧74不変＋原文対照2を76教師/90更新/152NLL/50新stop/2load・641.971830秒/exit0で比較。NV04の結果重複/不明の親不正を改善し、R4/T4/追加本人2の10ROLE文章図を前後bytes同一で保持。50rawは46同一/4変化、HQ04理由誤分類は残りR08肯定過去copulaに誤modifier再発。strict候補47→49は意味率ではない。100保存非生成再読/元532memberの全bytes-SHAを確認・新重み9dcを保全、通常/次初期値は未採用。[結果・原本・再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-reason-unknown76-result-20261103)。全対象分離は現行必須でなく、次は理由の述語/不明併存差と複数文copula保持をCPUで切分け。通常HTTP/DB/RN/配置不変、本人基準/記録間関係/通常累積接続は未完。GPUレンタル維持、STRUCTURE_MAP_DELTA_NONE。
 
