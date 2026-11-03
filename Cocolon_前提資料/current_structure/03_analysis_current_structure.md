@@ -30,7 +30,7 @@ automatic_progression: false
 
 # 分析構造 — Current Structure
 
-> **11/3・続行地点（§138）：** 元90のsource照合と、既存16例のv5整合案/コード草案まで。操作環境が利用不可となりcompile/CPUprepare/新GPU実行は未着手。[具体差分と再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v5-aligned16-resume-20261103)。前回§137の完了30比較は再実行しない。通常接続/意味gate/作者/DB/RN/配置不変、STRUCTURE_MAP_DELTA_NONE。
+> **11/4・続行地点（§139）：** 既存16教材のv5整合は実トークナイザーと保存再読のCPU検証を完了。同じ固定runnerで再照合し、CPU manifestの対象202パスが一致。うち201ファイルのSHA256が一致し、`cpu.json`の差は実行時間のみ。[CPU結果と再開点](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-material-v5-aligned16-cpu-20261104)。次は指定Pod上で固定API・モデル重み・依存pin・CPU manifestを照合し、§138の一回試行へ進む。新規学習・生成は未実施。前回§137の完了30比較は再実行しない。通常接続/意味gate/作者/DB/RN/配置に変更なし、STRUCTURE_MAP_DELTA_NONE。
 
 > **11/3・研究比較の最新（第9回§136–137）：** 分離material.v5で指示と説明例をそろえ、新30stop/1load/学習0の一回比較を完了。X03は初めて正しい対象で文章図へ届くが、PV01 JSON破損とHQ04理由退行で不採用。typed18→18は成功の入れ替わり、共通17の全文/図同一。全338原本member/60応答を照合・保存。[結果と再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v5-negscope-result-20261103)。研究overlayは通常APIへ反映していない。通常graph/作者/HTTP/DB/RN/配置不変、STRUCTURE_MAP_DELTA_NONE。次は肯定ACTION安定性・明示理由/発話境界を元材料/ownerから確認し、追加GPU未固定。本人基準/補足typed/記録間・通常累積/IF・Savedは残件。
 
