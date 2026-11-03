@@ -2526,3 +2526,10 @@ CPU106再読は候補101復元/5拒否、ROLE18復元/14拒否、reader5呼出�
 ## 113. 11/3 — 本人sourceから通常累積までの既存残件ownerを再確認
 
 [既存owner/条件](../current_structure/03_analysis_current_structure.md#analysis-existing-material-to-route-resume-20261103)。最新関連6資料・continuity/weekly§82・API58cから、本人原記録/適格ANSWER→selected_material既存入力、引用候補→ObservedProposition/限定ROLE全文witness、通常compilerの明示順序/別record反復、適格期間の意味差分、通常builder→唯一作者→guard commit/月次非生成再読の5入口を確認。現v3はfield中心・補足/比較対象外、通常ensureはprivate候補を受け取らない。既存gateを緩めず新理論/分類/承認要件を作らない。次はsource/回答条件と既存材料/意味gateを同じsource単位で対応確認し、局所dose反復へ自動移行しない。即時修正bug未確認、追加コード/本番設定/GPU0、本人基準/記録間関係/通常累積接続は未完。
+
+
+## 114. 11/3 — 適格本人補足/元記録文脈をprivate 4B入力へ接続
+
+**11/3・分析の最新（第9回§114）：** API348b641cで明示offlineのselected_material.v3を実装。既存の本人/親原版/QUESTION/ANSWER資格とordinary意味条件を通った補足を別envelope/fieldで保持し、選択カテゴリ・感情・記録日時の文脈とsemantic v3境界指示を同時に渡す。訂正/撤回/未解決対立・比較は未対応のまま拒否、旧5profile/ROLE原入力限定/通常ensureは維持。Jupyter対象249passed/2skipped・24.90秒。新test初回はfixture必須感情詳細不足20失敗を修正、productionのgate緩和なし。次は旧9dcを研究比較先に明示選定し、学習0/新10生成/1load/600秒（要求45秒/context8192/maxnew2048）、処理上限約0.0967USD@現0.58USD/h・保持等別で一回の入力文脈比較。実結果/通常採用は未確定。本人基準/五種採用/記録間接続/通常累積は残件。
+
+旧106更新/53比較と不採用判断は継承し再実行しない。本人source→既存材料という§113の最初の欠落を実装したもので、カテゴリ分類/引用/保存成功を本人基準の意味理解へ換算しない。新10比較の原文・raw全読と採否は後続resultへ記載する。STRUCTURE_MAP_DELTA_PRESENTはprivate profile/stateのみ、通常API/DB/RN/Render/Supabase/配置/Pod管理変更0。

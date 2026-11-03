@@ -1896,3 +1896,13 @@ API dc05dc35のsemantic_boundaries.v2は、既存Inputの明示private prompt版
 
 
 11/3 actual：semantic_boundaries.v2の追加学習なし46比較は完了。引用/対象/否定の局所復帰がある一方、役割3→2/4・教示T4 4→2/4と新退行が生じ、新版は通常未採用。意味採用/ROLE witnessや保存条件を緩めず、旧3版/各既定を保持する。[確定実結果・原本・再開点](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-boundaries46-result-20261103)。新しい通常graph/HTTP/DB/RN接続の完成ではない。
+
+
+<a id="analysis-material-v3-source-context-20261103"></a>
+## 11/3 — 適格本人補足と元記録文脈を同じprivate入力へ接続
+
+API348b641cのselected_material.v3は、既存の_saved_member→freeze→_active_sourcesを共用する明示offline profile。通常ensure/HTTP/DB/RNは未変更。上流で適格とされたordinary本人ANSWERを親原入力と連結せず、別source envelope/memo fieldとして渡す。モデルにはrecord ordinal/source_role/supplement ordinalだけを示し、本人ID/記録ID/質問本文/AI生成本文は原文にしない。補足の選択カテゴリは親から保持し、感情・recorded_atは親の値と明示、補足ordinalを質問回や回答日時へ昇格しない。
+
+元selected_material.v2のrecord/カテゴリ/感情/記録日時とsemantic_boundaries.v3指示を併用する。quote/parent/qualifierは対応fieldだけ、guard/request/messages/raw/新保存版を束縛。旧5版のmessages/ref/保存bytesと補足拒否、訂正/撤回/未解決対立/比較の拒否、typed-roleの原入力限定を保持する。引用候補は全未解析/actor未解決/route0であり、五種意味採用や通常マップの完成ではない。
+
+Jupyter5suite249passed/2skipped（DB依存2件）、24.90秒/exit0。初回は追加test fixtureのemotion_details不足で20failed/230passed、fixture修正後通過。SOURCE shapeを緩めず、質問変異testの不正な余剰キー追加も取り除いた。root単一writer＋read-only補助の静的review、商品受入れではない。入力profile/stateだけSTRUCTURE_MAP_DELTA_PRESENT。追加の実4B10比較は[trial](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v3-context10-plan-20261103)へ。

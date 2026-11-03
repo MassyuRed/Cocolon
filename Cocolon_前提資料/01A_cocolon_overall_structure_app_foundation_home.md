@@ -5986,3 +5986,8 @@ API `f7a1389679f15dbb9f24c40c0c5ac0058423c106` の既存製品3owner：`ai/servi
 API86d19b6d、STRUCTURE_MAP_DELTA_PRESENT。通常の累積mapは不変。新analysis_model_units_quoted_parents.v1は親の逐語quoteを同field返却unit exact1へ対応させ、source側が内部list位置を導出して既存private候補graph/compiler/唯一realizerへ渡す。新exact Input/Response/ref/schema/state/file、全source/guard/raw/messages束縛、親cycle/depth/UNKNOWN根/引用一意性を保持。旧rawの補修・旧形式fallbackなし。新形式の実4B/学習は未実行、全unparsed/actor未解決/route0、通常HTTP/DB/RNへ未接続。
 
 変更owner：`ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py`（新要求/strict受口・専用保存再読）、`ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py`（新exact型dispatch）、`ai/services/ai_inference/analysis_cumulative_service.py`（新専用prepare/build/serialize/reload）。新production file0、新test `ai/tests/test_analysis_model_quoted_parent_units.py`。compiler/realizerの意味型・通常責務は不変。CPU対象283PASS/3WASM SKIP、旧実87保存payload再読と新56合成派生の同field/文章/図/coverageを確認。実モデル品質・商品受入れではない。設計はAnalysis04#analysis-quoted-parent-units-plan-20261102、全結果/限界/次工程はtrial#analysis-quoted-parent-units-cpu-20261102とweekly§66。
+
+
+## 11/3 — Analysis本人材料v3の変更file地図
+
+API既存analysis_cumulative_service.pyは_saved_memberを共用するrequest組立てを分離し、新selected_material.v3をprepare/build/save/reloadへ束縛する。既存cores/analysis/semantic_admission.pyは同版だけordinary補足を独立fieldへ追加、material文脈とsemantic v3指示を併用、新state版/typed-role補足拒否を扱う。新test_analysis_model_material_v3.pyは本人/親/回答/引用/旧版/保存境界を検査。trial/material_v3_context_probe.pyは新10生成の一回比較・原本保全用で商品ownerではない。通常ensure/HTTP/DB/RN/唯一作者/共有型/依存は未変更。

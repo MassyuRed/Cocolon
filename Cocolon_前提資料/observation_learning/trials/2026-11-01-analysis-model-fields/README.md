@@ -1396,3 +1396,11 @@ AT29/SQ01/SQ03の全文unit化は対象/不明/否定/継続語を保持する�
 局所53/78の教材再現を、本人基準の役割/判断/選択・記録間再出現/変化と通常累積接続の完成へ換算しない。既存材料定義/weekly§82とAPI58cを照合し、次の入口を既存ownerで再確認した。[既存経路と保持条件](../../../current_structure/03_analysis_current_structure.md#analysis-existing-material-to-route-resume-20261103)。新理論/分類/承認段階は追加せず、即時修正を要する具体bugも今回未確認。
 
 直近の具体入口は、適格な本人原記録/ANSWER回答の条件をsource単位で保持し、既存selected_material入力とsemantic_admission/ObservedPropositionのどの意味gateへ採れるかを対応付けること。現v3はfield中心で補足/比較/訂正更新を対象外、通常ensureもこれらprivate候補を受け取っていない。既存の意味採用から明示順序/別record反復共起、適格期間の意味比較、唯一作者/guard commit/当時月次非生成再読までを残件として引き継ぐ。通常の設定は変更せず、追加GPU条件もこの監査で選定しない。
+
+
+<a id="analysis-material-v3-context10-plan-20261103"></a>
+## 11/3 — 適格補足と元文脈のv3入力、一回10生成の比較
+
+**11/3・分析の最新（第9回§114）：** API348b641cで明示offlineのselected_material.v3を実装。既存の本人/親原版/QUESTION/ANSWER資格とordinary意味条件を通った補足を別envelope/fieldで保持し、選択カテゴリ・感情・記録日時の文脈とsemantic v3境界指示を同時に渡す。訂正/撤回/未解決対立・比較は未対応のまま拒否、旧5profile/ROLE原入力限定/通常ensureは維持。Jupyter対象249passed/2skipped・24.90秒。新test初回はfixture必須感情詳細不足20失敗を修正、productionのgate緩和なし。次は旧9dcを研究比較先に明示選定し、学習0/新10生成/1load/600秒（要求45秒/context8192/maxnew2048）、処理上限約0.0967USD@現0.58USD/h・保持等別で一回の入力文脈比較。実結果/通常採用は未確定。本人基準/五種採用/記録間接続/通常累積は残件。
+
+script=material_v3_context_probe.py、API348b641c、root=/workspace/analysis-material-v3-context10-20261103。華恋の新しい合成3source構成×material.v2/semantic.v3/material.v3=9callと既存適格補足fixture×material.v3=1call。Mash教示/盲検/学習教師ではない。新生成は元記録2欄/二記録/独立不明/本人ANSWERの保持を原文と全rawで照合するため。9dc/config4776は比較用に明示選定、最新2c01を自動使用しない。既存重みを書換せず、学習/NLL0。各request/ref/messages SHA/response/raw/採否/候補/coverageと保存reader内Engine/両compiler/両author禁止の非生成再読を保全。失敗時partialもfinally archiveし再試行しない。GitHub固定/全変更file読戻しとJupyter実tokenizer/context検査後に一回実行。旧完了rootの再起動禁止。

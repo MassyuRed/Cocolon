@@ -1128,3 +1128,13 @@ API dc05dc35の既存quoted-parent Inputにsemantic_boundaries.v2を追加し、
 | 採用意味→文章/図/累積/月次/保存再読 | analysis_cumulative_service.py:build_cumulative_map/ensure_map、cores/analysis/observed_route_realizer.py:_safe_label/safe_projection、analysis_cumulative_commit/read_maps | 通常ensureはsemantic_inputを渡さず、quoted-parent/限定ROLE垂直を通常化しない。唯一作者の全文typed再検査・source guard・寿命/削除を保持し、過去月を再生成/backfillしない。 |
 
 直近は1–2のsource/回答条件と材料入力・既存意味gateを、同じsource単位で対応付ける。既存材料定義と本人実演へ戻り、モデルrawを教師化したり五種を埋めるため背景を補ったりしない。不足は既存未解析/不明として残す。開発生成/比較の既定gateと通常経路は変更しない（現在の稼働環境値は今回照会していない）。即時修正を要する具体bugは本監査で未確認。新しい承認段階/追加GPU条件/通常接続の変更は0、STRUCTURE_MAP_DELTA_NONE。
+
+
+<a id="analysis-material-v3-source-context-20261103"></a>
+## 11/3 — 適格本人補足と元記録文脈を同じprivate入力へ接続
+
+API348b641cのselected_material.v3は、既存の_saved_member→freeze→_active_sourcesを共用する明示offline profile。通常ensure/HTTP/DB/RNは未変更。上流で適格とされたordinary本人ANSWERを親原入力と連結せず、別source envelope/memo fieldとして渡す。モデルにはrecord ordinal/source_role/supplement ordinalだけを示し、本人ID/記録ID/質問本文/AI生成本文は原文にしない。補足の選択カテゴリは親から保持し、感情・recorded_atは親の値と明示、補足ordinalを質問回や回答日時へ昇格しない。
+
+元selected_material.v2のrecord/カテゴリ/感情/記録日時とsemantic_boundaries.v3指示を併用する。quote/parent/qualifierは対応fieldだけ、guard/request/messages/raw/新保存版を束縛。旧5版のmessages/ref/保存bytesと補足拒否、訂正/撤回/未解決対立/比較の拒否、typed-roleの原入力限定を保持する。引用候補は全未解析/actor未解決/route0であり、五種意味採用や通常マップの完成ではない。
+
+Jupyter5suite249passed/2skipped（DB依存2件）、24.90秒/exit0。初回は追加test fixtureのemotion_details不足で20failed/230passed、fixture修正後通過。SOURCE shapeを緩めず、質問変異testの不正な余剰キー追加も取り除いた。root単一writer＋read-only補助の静的review、商品受入れではない。入力profile/stateだけSTRUCTURE_MAP_DELTA_PRESENT。追加の実4B10比較は[trial](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v3-context10-plan-20261103)へ。

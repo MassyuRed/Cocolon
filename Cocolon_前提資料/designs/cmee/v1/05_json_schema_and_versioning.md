@@ -3316,3 +3316,8 @@ API dc05dc35。既存AnalysisModelQuotedParentUnitsInputのprompt_versionにsema
 
 
 11/3の実比較は新版の通常採用を見送り。92保存応答を別CPU processで候補86/拒否6、ROLE11/拒否13の同じ採否と意味・文章/図へ復元確認した。新旧prompt/ref/messages/stateの束縛を保ち、元rawや旧保存schemaを新版へ付替えていない。[実結果・原本・再開点](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-boundaries46-result-20261103)。本private state版の技術検査成功を一般意味品質/通常有効化にしない。
+
+
+## 11/3 — selected_material.v3 private入力/保存版
+
+既存AnalysisModelQuotedParentUnitsInput/Responseと候補graph型を再利用。明示prompt_version=selected_material.v3、state=cocolon.cmee.analysis_model_units_quoted_parents_state.material.v3。model user payloadはmaterial.v2のrecord/fields/analysis_as_ofを保持し、fieldごとのsource_role（ORIGINAL_INPUT/SUPPLEMENTAL_ANSWER）、supplement（原入力null/補足1..3の順番）を追加。引用sourceは各field.textのみ。追加のlogical型0。旧5版と通常DTO/SQL/RN/ROLE保存v1は不変。補足を許すのは本版のみ、既存資格/ordinary意味gateを通す。新旧stateのラベルだけの移植は拒否。詳細はAnalysis mapのanalysis-material-v3-source-context-20261103。
