@@ -1033,3 +1033,15 @@ API5d7f43a8の材料版は明示offlineで保持し、旧category既定/通常en
 再開は本節と二つの本文なし結果を先に読む。両runのreport/exit0を確認して重複起動しない。単純なdose/order変更やmetadata追加を次候補へ自動昇格させず、本人の役割/判断/選択を本文根拠から既存五種/注記/不明へ採る責務と、記録間の再出現/変化を通常compiler/realizerへ接続する責務へ戻る。quote/actor qualifierだけの確定fact昇格はしない。観測会の本人の読み/問い/修正は未取得を取得済みにせず、華恋の合成設定と分けて継承する。Mashの観測会終了指示はない。
 
 通常HTTP/DB/RN/Render/Supabase稼働・配置/Pod管理変更0、通常意味接続は未完、product_credit0。STRUCTURE_MAP_DELTA_PRESENTはprivate prompt/state入力版のみ、学習比較はNONE。全体現在地/Analysis map/01B全file地図/schema05/最新weekly§91を同期。Codex Work/GPT-6 root単一writer＋同環境read-onlyレビューで、独立Pro/Ultra/humanの商品受入れではない。
+
+
+<a id="analysis-written-role-vertical-plan-20261103"></a>
+## 11/3 次作業 — 明記された自分の役割を既存ObservedGraphへ通す
+
+材料context8不採用を引き継ぎ、追加dose/order/metadata試行へ戻らない。現blockerは引用候補に主体/肯否/時点の意味採用がなく、通常唯一realizerも旧finite再解析だけに限られること。今回は、実4Bの既存quoted-parent ROLE候補と、原field全文の独立した構文witnessが一致する一つのpartial frameを採用し、既存ObservedProposition/ObservedGraph/唯一author/同一文章・図/非モデル生成のfile再読まで通す。
+
+初回scopeは1record・非空field1・補足なしの、明記SELF所有＋「の役割は」＋役割名詞＋過去copula（肯定/否定）の一節全文。役割名詞の末尾から役割を推測せず、「無関係だった」のような語を誤分類しない。独立した明記役割scopeに限り、主体省略/他者/引用/伝聞/仮定/不明/別fieldにある発言scopeは採らない。raw候補とその未検証状態は改変せず、原文からSELF/役割名詞/肯否/past/座標を導出して専用role_stateの既存型へ入れる。旧通常parserだけで同結果になるものは改善件数にしない。
+
+新graph/Engine/HTTP/DB/RN/通常既定/配置を追加せず、既存semantic_admission/intent_compiler/observed_route_realizer/analysis_cumulative_serviceと既存test内の明示offline縦接続に限定する。型は既存ObservedProposition/Node/Graph/Mapを再利用。保存版と採用方針identityを明示し、元raw/messages/source/guardと同一文章/図/coverageを再照合する。ほかのstageや未解析部分、記録間関係は完成扱いにしない。
+
+DIRECT_PRODUCT_OR_ACCEPTANCE_WORK、Mashの分析残件続行/必要作業承認/GPU使用/GitHub checkpoint指示内、root単一writer＋同環境read-only確認。成功条件は旧未解析の役割が実4B出力からtyped1nodeとして文章/図へ現れ、同じ保存fileをモデル再生成なしで再読できること。まずCPUで意味対照/拒否/旧互換を確認し、成功後に同Jupyterで追加学習0・最大8新生成/1load/480秒を一回実行する（前回確認$0.58/hなら処理按分上限$0.07734、準備/回収/保持別）。出力補修/受口緩和/再試行/追加epochなし。新しい一般frame契約へ自動拡張せず、不成立ならその実原因と原本を保存する。STRUCTURE_MAP_DELTA_PRESENTはこの明示offline typed-role縦接続のみ、通常商品受入れ/本番採用ではない。
