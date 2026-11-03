@@ -1045,3 +1045,8 @@ API5d7f43a8の材料版は明示offlineで保持し、旧category既定/通常en
 新graph/Engine/HTTP/DB/RN/通常既定/配置を追加せず、既存semantic_admission/intent_compiler/observed_route_realizer/analysis_cumulative_serviceと既存test内の明示offline縦接続に限定する。型は既存ObservedProposition/Node/Graph/Mapを再利用。保存版と採用方針identityを明示し、元raw/messages/source/guardと同一文章/図/coverageを再照合する。ほかのstageや未解析部分、記録間関係は完成扱いにしない。
 
 DIRECT_PRODUCT_OR_ACCEPTANCE_WORK、Mashの分析残件続行/必要作業承認/GPU使用/GitHub checkpoint指示内、root単一writer＋同環境read-only確認。成功条件は旧未解析の役割が実4B出力からtyped1nodeとして文章/図へ現れ、同じ保存fileをモデル再生成なしで再読できること。まずCPUで意味対照/拒否/旧互換を確認し、成功後に同Jupyterで追加学習0・最大8新生成/1load/480秒を一回実行する（前回確認$0.58/hなら処理按分上限$0.07734、準備/回収/保持別）。出力補修/受口緩和/再試行/追加epochなし。新しい一般frame契約へ自動拡張せず、不成立ならその実原因と原本を保存する。STRUCTURE_MAP_DELTA_PRESENTはこの明示offline typed-role縦接続のみ、通常商品受入れ/本番採用ではない。
+
+
+実装checkpoint：API [aa48dc75](https://github.com/MassyuRed/mashos-api/commit/aa48dc75ec54b63d6eef3708763d75510ab71283)で既存4owner/既存testに接続。初回Jupyterの対象5fileは655PASS/2FAIL/2SKIP（110.92秒）。失敗2件はcategory/material版のcategory-record dataclassをそのままJSON比較した保存変換の不備で、意味/表示/旧vertical検査は通過した。[88078cdb](https://github.com/MassyuRed/mashos-api/commit/88078cdb3cf19da0e9fe9188915bce9c0899a797)で元payloadへ変換して比較する最小修正、同対象をfresh worktreeで再検査中。実GPU/新生成/学習0。rootと同環境read-only確認により、qualifierは明記SELF/否定operator exactへ限定、保存readerはEngine/compile/authorを呼ばず保存graph復元・source意味/文章図照合に修正済み。旧候補保存readerも不変。
+
+実GPUを使う場合は同folderのwritten_role8_run.py/supervisor.pyを固定し、private source8はSHA256 `f00549ed9315765cac762dbba9264d3100f373a7c98579f6114e68152d5abf1f`から読む。4つの対応範囲と4つの他者/可能性/非役割/複文scope対照、既存baseline.v1の同一指示と明示研究用a5eafe/9bc、8call/1load/更新0。collect_written_role8.pyは別CPU processで実fileの候補・役割artifactを再読し、全source/logのbytes-SHA付き回収材料を出す。これらは研究scriptであり通常新subsystemではない。
