@@ -1,0 +1,33 @@
+{
+  "status": "COMPLETE_LIMITED_ROLE_ACTION_CONNECTION_NOT_NORMAL_ADOPTION",
+  "api_commit": "c9b990e06b391e09f9835472ba65cb8e51775d19",
+  "new_calls": 4,
+  "unique_synthetic_sources": 2,
+  "all_stop": true,
+  "training_updates": 0,
+  "model_loads": 1,
+  "seconds": 37.73133079404943,
+  "typed_maps": 2,
+  "rejected_calls": 2,
+  "candidate_saved_replays": 2,
+  "typed_saved_replays": 2,
+  "typed_node_count_per_map": 2,
+  "edges_per_map": 0,
+  "unknown_gaps_per_map": 4,
+  "real_role_polarity": "NEGATIVE_ONLY",
+  "real_selected_category_context": false,
+  "cpu_tests_initial": {
+    "passed": 761,
+    "skipped": 2,
+    "seconds": 110.62
+  },
+  "cpu_tests_final": {
+    "passed": 151,
+    "seconds": 14.62
+  },
+  "tests_not_summed": true,
+  "normal_adoption": false,
+  "primary_outcome": "TECHNICAL_CREDIT",
+  "product_credit": 0,
+  "next": "complete-source actor/positive-role/category-context quality, then supplementary/cross-record/normal-cumulative connection"
+}

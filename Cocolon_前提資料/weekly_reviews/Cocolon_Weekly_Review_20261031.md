@@ -2545,3 +2545,20 @@ API348b641c/runner e4f4bf55・旧9dc/config4776を固定し、学習0/NLL0/1load
 ## 116. 11/3 — 同原記録のROLEとACTIONを既存文章/図へ限定接続
 
 **11/3・分析の最新（第9回§115–116）：** 本人補足/元文脈v3の実10生成を104.019968秒/全stop/学習0で完了。補足の別field保存再読は成立したが、extra keys/別記録ROLE混入/不明へのNEG等が残り新profile通常不採用。7候補非生成再読/3拒否、原本は保存済み。次の欠落へAPIc9b990e0で同一原記録の明記ROLE＋単純SELF過去ACTIONを既存graph/文章/図へ接続するwith_action=Trueを実装。原入力1/補足0/二欄全文、辺0/反復0/3段gap＋routegap、旧v1と新state/idを分離。初回7suite761passed/2skipped、read-only指摘の根拠範囲IDを補修し関連151passed/14.62秒を確認。次は旧9dcを研究比較先に明示し学習0/4新生成/1load/300秒・処理上限約0.0484USD@0.58USD/h（保持等別）で肯否と保存再読を確認。実モデル採否/通常接続は未確定。
+
+
+## 117. 11/3 — 実4Bから同原記録のROLE/ACTIONを既存文章・図へ接続
+
+**11/3・分析の最新（第9回§117）：** APIc9b990e0の明記ROLE＋同原記録の単純SELF過去ACTION接続を実4Bで確認。学習0/4新stop/1load/37.731331秒、今回2件が正しい肯否の2node/文章/図・保存非生成再読へ到達、他2件はROLE原文外のactor引用でstrict拒否。辺0/反復0/欠3段＋routegap。実ROLEは否定形のみ、legacy semantic版のためカテゴリOFF（ONはCPU検証のみ）。成功promptは条件で異なり、一般品質/通常採用へ換算しない。初回761passed/2skipped、根拠ID補修後151passed、原本/全読/再開点を保存。先行material v3の10生成は別記録混入等で通常不採用を維持。次は二欄の主体/肯定ROLE/カテゴリ文脈の品質を整え、本人補足/記録間/通常累積への既存残件を進める。追加GPU条件未固定、通常API/DB/RN/配置不変。
+
+固定APIc9b990e0/script51c1f76b/旧9dc-config4776、学習/NLL0/1load/4新stop・37.731330794秒。処理按分約0.006079USD@確認0.58USD/h（準備/回収/保持別）。華恋合成の近接2source構成×semantic v2/v3であり、4つの独立入力やMash教示/盲検ではない。root＋read-only担当が全2source/4raw/2graph/文章/図を全文照合。
+
+今回の2出力は本人の過去役割の否定と、別欄の過去行動の肯定/否定をそれぞれ保持。従来の一欄限定では対象外だった二欄を、現source witnessと実候補の一致から同じObservedGraphの2nodeへ入れ、唯一作者の文章/図と保存reader内7呼出禁止の同一再読2件まで確認した。独立候補の非生成再読も2件。同record/同envelope/別field根拠、正しいscalar/UTF8/hash、辺0/反復0/未確定3段＋routegapを保持。モデル候補自体のactor未解決statusは書換えない。
+
+残り2出力は、ROLE全文の「私の…」にない「私は」をactor qualifierへ出しstrict引用拒否。一方には不適切な「は」modifierもあり、rawの一部だけを修復して採用しない。肯定行動の成功はv3、否定行動の成功はv2で、単一promptの安定合格/正解に応じた通常prompt選択は成立しない。実ROLEは否定のみ、肯定ROLEの実4B成功ではない。実4はlegacy semantic入力でselected_category_context=false/カテゴリ空。カテゴリON・欄交換・ROLE肯否の保持はCPU検証の範囲で、GPU結果へ合算しない。
+
+[全原本・全読・文章/図・保存検証](https://chatgpt.com/library?file_id=libfile_ff1bb859994c8191b03db784e3c3be9a&account_id=personal)（38200bytes/2member/SHA256 e30e69e525052fe80fdb6d2545ed8b5d6c4e999c60ce9d2d50efb55c76feaa0d）。元ZIP39881bytes/26member/SHA1393301bf873e812636d195b51eb967c56a4a2dc5284c3bdc04d8d4fd36d9f75、CRC/全25manifest SHA/安全pathをPod外照合。元STARTED/PENDING reportを改変せず別final_reviewへ採否を保存。旧adapter bytes不変、終了時294MiBは自身のCUDA contextであり、終了後の外GPU2MiB/0%と区別する。
+
+APIの初回7suite761passed/2skipped/110.62秒、独立read-only指摘の根拠範囲IDを補修後の関連2suite151passed/14.62秒。重複加算しない。最終APIの既存workflow_runs/statusesは取得時空、新CI成功を主張せずJupyterの実検証として記録する。STRUCTURE_MAP_DELTA_PRESENTはprivate二欄意味接続/保存scopeだけ、通常ensure/HTTP/DB/RN/Render/Supabase/配置/Pod管理0。新通常prompt/学習重み採用0、GPUレンタル維持、TECHNICAL_CREDIT/product_credit0。
+
+再開はこのAPI/保存2graphから。完了4/先行10/旧106更新を再実行せず、二欄の主体/肯定ROLE/カテゴリ文脈の品質を既存材料と教示へ照合して改善し、本人補足・記録間・比較・通常累積接続の残件へ広げる。追加GPU条件は未固定。一般の判断基準/選択理解・IF/Saved・本人端末/正式受入れは未完。

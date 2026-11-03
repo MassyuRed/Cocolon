@@ -1905,7 +1905,7 @@ API348b641cのselected_material.v3は、既存の_saved_member→freeze→_activ
 
 元selected_material.v2のrecord/カテゴリ/感情/記録日時とsemantic_boundaries.v3指示を併用する。quote/parent/qualifierは対応fieldだけ、guard/request/messages/raw/新保存版を束縛。旧5版のmessages/ref/保存bytesと補足拒否、訂正/撤回/未解決対立/比較の拒否、typed-roleの原入力限定を保持する。引用候補は全未解析/actor未解決/route0であり、五種意味採用や通常マップの完成ではない。
 
-Jupyter5suite249passed/2skipped（DB依存2件）、24.90秒/exit0。初回は追加test fixtureのemotion_details不足で20failed/230passed、fixture修正後通過。SOURCE shapeを緩めず、質問変異testの不正な余剰キー追加も取り除いた。root単一writer＋read-only補助の静的review、商品受入れではない。入力profile/stateだけSTRUCTURE_MAP_DELTA_PRESENT。追加の実4B10比較は[trial](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v3-context10-plan-20261103)へ。
+Jupyter5suite249passed/2skipped（DB依存2件）、24.90秒/exit0。初回は追加test fixtureのemotion_details不足で20failed/230passed、fixture修正後通過。SOURCE shapeを緩めず、質問変異testの不正な余剰キー追加も取り除いた。root単一writer＋read-only補助の静的review、商品受入れではない。入力profile/stateだけSTRUCTURE_MAP_DELTA_PRESENT。追加の実4B10比較は[trial](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v3-context10-plan-20261103)へ。
 
 
 <a id="analysis-written-role-action-20261103"></a>
@@ -1916,3 +1916,8 @@ APIc9b990e0の明示with_action=Trueだけが、1original/補足0/非空memo＋m
 同一ObservedGraph/ObservedProposition/唯一作者で2nodeと文章/図を作り、未観測3段とROUTE_CONNECTION gapを保持。欄の順を時間順へ変えず、辺0/反復0。既存with_action=FalseのROLE1nodeを保持し、新salt analysis_model_written_role_action.v1・新state/file版へ分離する。保存readerは既存dataclassを復元し、原source/候補/全node/根拠/カテゴリ/gapsと同じ文章/図を、Engine/graph compilers/作者なしで検証する。ACTIONの句点除去では根拠範囲/hashだけでなくevidence_idも同範囲から再導出。
 
 初回7suite761passed/2skipped/110.62秒。read-only reviewの根拠ID指摘を上記へ補修し、補修後の関連2suite151passed/14.62秒を確認。normal compiler/ensure/HTTP/DB/RN/採用重みは変更しない。STRUCTURE_MAP_DELTA_PRESENTは明示offlineの意味採用/保存scopeだけ。一般本人基準・複数record/補足/比較の意味採用・通常累積接続は残件。実4Bの肯否4比較はtrialの次planを参照。
+
+
+### 11/3 — 上記ROLE＋ACTIONの実4B結果と現在の再開点
+
+APIc9b990e0で4新stop/学習0/37.731331秒、2出力が正しいSELF/fact/pastのROLE否定＋ACTION肯否の2node・文章/図・非生成保存再読へ到達。2出力はROLE原文外の「私は」でstrict拒否。辺0/欠3段＋routegapを保持。実ROLEは否定形のみ、legacy semantic v2/v3でカテゴリOFF、カテゴリON/欄交換/ROLE肯否はCPU検証のみ。単一prompt/一般品質/通常採用は未成立。初回761pass/2skipと根拠ID補修後151passは合算しない。[全結果/原本/再開点](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-role-action4-result-20261103)。次は二欄の主体/肯定ROLE/カテゴリ文脈の品質から既存残件へ。通常ensure/HTTP/DB/RN/配置不変、private意味接続だけSTRUCTURE_MAP_DELTA_PRESENT。
