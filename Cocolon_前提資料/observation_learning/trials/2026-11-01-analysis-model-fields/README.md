@@ -1166,3 +1166,24 @@ DIRECT_PRODUCT_OR_ACCEPTANCE_WORK。Mashの現セッションの分析残件続�
 
 
 実行checkpoint：GitHub01663375の全6fileを全文読戻し後、同Jupyterへ実行3scriptをSHA/構文照合して一回起動。CPU prepare.exit0、74新版教師・T4typed/46before・実tokenizer・保存非生成再読が成功。117.613秒時点で74前測定/44更新/1load・新call0/STARTED。最終採否は未確定。別collectは終了後の92保存再読/全原本回収だけを行い、失敗時は再実行せずpartial原本をそのままarchive-only回収する。
+
+
+<a id="analysis-aligned74-result-20261103"></a>
+## 11/3 74教材の入力整合比較完了 — 役割4/4、意味保持の欠落で通常未採用
+
+既存74source/正解/86順を既存v2の学習messagesへ揃え、73eeから86更新/148測定/46新stop/2loadを631.116257秒（親632.475186秒）/exit0で完了。保存112tensorの実model一致/非学習reloadを確認し、旧6重み対不変・終了時compute空。新d25da0/config4a46は通常/次学習初期値へ未採用。同量baseline追学習controlはないため、prompt単独の因果へ換算しない。処理按分約0.101680USD@現在画面0.58USD/h、準備/回収/保持別。
+
+rootは全46source/前後rawと採用role artifactを読解。R01/R03の肯定過去誤modifierが消え、既出R4は2→4/4、T4は2→4/4。ROLE1node/SELF/fact/past・正負原文・4段gap/辺0・同一文章図を確認。AT19独立未決定、UQ01不明modifier、HQ03/MX01主体、RC01内容対象が回復。既存22教師JSON値一致16→22/22、旧34raw同一26/全46同一31。これらは既見合成の教示再現で一般意味率ではない。
+
+NV04の結果重複/不明親不正、PQ02のmodifier、HQ04明記理由scopeは残る。MD01は不明親/誤modifierが改善する一方で内容対象unitが欠け、OD01は既存内容対象unitが脱落。全文ACTION引用の対象語は残るため、語自体を削除したと誇張しない。R06形式不正は残り、R07非役割誤分類/原文外否定qualifierは拒否。R05〜08はtyped不採用を保持。
+
+別CPU processで92応答を生成なし再読し、候補85復元/7拒否、ROLE12復元/12拒否の同一性を確認。全原本/新重み入り480member・15,456,427bytes/SHA27b96a70…をPod外回収しCRC/全member SHAを照合済み。HTML内回収linkの待機2件はtimeoutでfile取得を確認できず、Jupyter標準file menuのDownloadへ切替えて回収・全bytes照合した。GPU再実行/学習再試行0。全結果はsemantic_units_aligned74_results.json。[全原本・保存重み・全文読解](https://chatgpt.com/library?file_id=libfile_9e641f4df39081919d7a396d40fc43c0&account_id=personal)は15,310,067bytes/5member（内部未改変原本480member）/SHA1ae9805f…。通常HTTP/DB/RN/配置変更0、STRUCTURE_MAP_DELTA_NONE、本人基準/記録間関係/通常累積接続は未完。
+
+<a id="analysis-role-transfer4-plan-20261103"></a>
+## 11/3 — 新しい肯定/否定/推測/他者の4文で近接転移を比較
+
+d25をこの診断だけの研究用比較先へrootが明示選定。新4sourceは華恋合成で、旧74/46の非空本文/memo-action組に完全一致がないことをCPUで確認する。正解参照は原文から作り、モデルraw教師化/新学習は0。肯定/否定の本人役割2は既存typed scopeへ、推測/他者2は採らない。一般品質/独立盲検/Mash教示ではない。
+
+同じAPI dc05/v2/4sourceで保存73eeと保存d25を各4生成、合計8新call/2load/追加学習0/300秒（外290+kill10）/要求23秒/context8192/max_new2048。現在単価0.58USD/hなら処理上限0.048334USD、保持等別。CPUのstrict/typed2採用2拒否/全file非生成再読/実tokenizer成功後だけ一回実行。初期2対を含む旧6対＋新候補全14fileの不変と終了時computeを確認し、partialも保存する。
+
+sourceはprivate role-transfer4-sources.json、SHA256 c46d7d196037176847cf596c25b7953a1f639569085edbd8f5ec14a41ca67b52へ固定。publicはsemantic_units_role_transfer4_prepare.py/run.py/supervisor.pyと条件のみ、個別本文はprivate原本へ残す。root=/workspace/analysis-role-transfer4-20261103、prepared=/workspace/analysis-role-transfer4-prepared-20261103。再開時はprepare.exit/run.exit/result/report.jsonを先に確認し、既存rootを重複起動しない。Mashの現セッションの必要作業/GPU/Jupyter/GitHub指示内、逐次承認を戻さない。通常/次学習採用・受口緩和・出力補修なし。STRUCTURE_MAP_DELTA_NONE。
