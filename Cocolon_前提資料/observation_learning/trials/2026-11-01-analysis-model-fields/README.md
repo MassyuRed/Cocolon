@@ -1352,6 +1352,8 @@ root=/workspace/analysis-v3-teachers78-audit-20261103、外CPU180秒上限。コ
 <a id="analysis-aligned-v3-78-plan-20261103"></a>
 ## 11/3 — 教材と順序を保持し、学習入力だけv3へ整合する比較を固定
 
+実行前条件と途中checkpointの履歴。現在の完了・採否・再開は後続result節を優先。
+
 直前53の純prompt比較は理由2/4を改善するが新carrier/role退行を伴い通常未採用、旧78のsource/target全読と実v3入力CPU監査は通過した。この差を受け、原文から作った既存78教材・106更新順を変えず、v3推論と学習messagesの版を一致させる別の有限比較へ進む。新教師0、raw教師化/target修復0。旧78 source/assistant_target/update_orderの内容は完全不変、新版ref/候補ID等は別identityとして保持する。入力版以外の初期9dc/config4776・plainCE/LR1e-5/clip1/seed20261111/attention/LoRA dropout0は旧boundary78の条件を保持する。退行9eを使わず、9dcをこの研究初期値へrootが明示選定する。通常採用や自動次学習選定ではない。
 
 before53は完了v3probe53 after53の同9dc/v3実request/raw/response/candidate51/ROLE9を、owner/snapshot/messages/ref/採否/全保存bytesまで照合して再利用する。CPUshadow/v2before/9eafterを混ぜない。新before生成0、新v3after53/前後78NLL156/106更新/2load。NLLは新v3messagesで両方実測し、旧v2NLLと同一になるassertは置かない。初期112tensorとの一致・終了保存112tensor実model一致/非学習reloadを検査し、旧18adapter fileを保持する。
@@ -1367,3 +1369,30 @@ root=/workspace/analysis-aligned-v3-78-20261103、prepared=/workspace/analysis-a
 
 
 進捗読取補正：上記100.524480秒時点の更新数は18（27という転記を修正）。実runは変更/再実行していない。後続233.722754秒時点は更新63/前測定78/1load/新call0、エラーなし・最終未確定。
+
+
+<a id="analysis-aligned-v3-78-result-20261103"></a>
+## 11/3 — v3学習入力の整合比較完了、理由4対照を修復・旧保持未達で不採用
+
+固定301ed26e/API58c、旧78source/target/106順・初期9dc・CE/LR/seed/clip/dropoutを保持し、学習messagesをv3へ揃えた一回比較。CPU準備0後、106更新/156 NLL/53新stop/2loadを840.273622秒（GPU親841.998242秒/準備込親870.890733秒）/exit0で完了。plan SHAf4e590ded4835b22097e08595db4eb68ada6c6e997e7f842a2ea0d8bc15400c6。before53は実v3probe after原本の219fileをbytes同一で再利用、新before0/新教師0/raw教師化0。初期/保存112tensor実一致・非学習reload、新112 F32/3,833,856全有限・byte範囲整合を外部確認。新weights2c01f3dd…/configd012090f…、旧18file不変/終了compute空。処理按分約0.135377USD@前回確認0.58USD/h（準備/回収/保持別）。完了rootを再起動しない。
+
+全53source/前後raw・全18ROLE graph/文章/図をroot＋同環境担当が照合、38raw同一/15変化。理由対照は2→4/4。HQ04/Y02の修復を保持し、Y01元RU02とY03は正しいWRITTEN_REASON＋のでmarker・結果parent・否定連体の子/時点・独立不明を出し、RU02既見教材も初めてJSON再現へ到達。CQ04はTE quoteから親の結果重複を除去した。既見合成/近接変種の局所成果で、一般意味率/唯一原因/本人受入れとはしない。
+
+旧保持は未達。OA01は独立不明carrierをscope=nullにして新strict拒否、OD01は非時間のかもをRELATIVE_TIMEへ、MD02はACTION自身のNEGを戻しstrict復帰する一方で独立不明をRESULTへ誤分類する。分からない等の字面は残り、既知の開催事実へ昇格したとは言わない。R07は既存の非役割/誤否定を解決せず原文外NEG引用が加わりstrict拒否へ。R01/R08の肯定copula誤modifier、MD01 carrier不正は不変。既に誤っていたR07の受理減を、正しい意味の喪失と同一視しない。
+
+AT29/SQ01/SQ03の全文unit化は対象/不明/否定/継続語を保持する粒度差で、全対象/不明内容の別unit化を新義務にしない。CQ03の不明root引用境界、NV04の全文独立不明＋なぜmarker、HQ03のliteral修飾も、それだけで意味消失/時点誤り/既知原因化とはしない。R06/XROLE03は推測を保つROLE全文へ変わりtyped拒否を維持。正常typed ROLE9pairは保存file全bytes同一、SELF/fact/past・原文正負・1node/辺0/4gap・文章図を保持。scope外6拒否とR01追加拒否は不変、過去の10正常ROLEへ復帰したわけではない。
+
+候補51→50/53、before拒否MD01/MD02、after拒否MD01/OA01/R07。旧22のJSON一致22→20だがAT29は有効な粒度差、OA01はcarrier退行であり2意味失敗とは数えない。RU02込み23参照は22→21/23。新v3平均NLL .006836→.018278、重点4個別は低下するが新RB2生成は未検査。過去v2 NLLとの同値比較や損失だけの採否はしない。
+
+別CPU106真保存応答は候補101復元/5拒否、ROLE32採否は18復元/14拒否、保存reader内Engine/両compiler/両author禁止で一致。CPUモデル/load/生成/更新/NLL0、shadow生成0。受理candidate全101はmapped0/未解析/actor等未解決/route0で通常意味接続ではない。
+
+[新重み・全原本・全53読解・残件owner監査](https://chatgpt.com/library?file_id=libfile_33e4f71d95148191a66031fbc6a4949c&account_id=personal)（16,801,329bytes/9member/SHA256 30a054cc39acf89f7136a680208396577eaca06df41cbd47fccbd77b5fe95a24）。元ZIP17,127,945bytes/827member/SHA256 f1621297e3aedd48f4441135c09dac7ce52ede5cbc83c3db38796b56341f3288をCRC/安全path/全826SHA・825sizeまで照合。元PENDING_RAW_READ reportは不変、最終採否は別review/semantic_units_aligned_v3_78_results.jsonへ保存。
+
+採否：新2c01は通常/次初期値不採用、追加GPU未固定。旧9eや最新adapterへ自動追学習しない。通常HTTP/DB/RN/配置/Pod管理0、GPUレンタル維持、STRUCTURE_MAP_DELTA_NONE/TECHNICAL_CREDIT/product_credit0、正式0/3・54.50％据置。API58cの683pass/2skipは継承原本であり、今回新APItestやSQL通過と偽らない。Codex Work/GPT-6 root＋同環境補助、独立Pro/Ultra/human受入れではない。
+
+<a id="analysis-existing-material-owner-resume-20261103"></a>
+## 11/3 — 全体残件を既存source/材料/意味採用ownerへ戻して再開する
+
+局所53/78の教材再現を、本人基準の役割/判断/選択・記録間再出現/変化と通常累積接続の完成へ換算しない。既存材料定義/weekly§82とAPI58cを照合し、次の入口を既存ownerで再確認した。[既存経路と保持条件](../../../current_structure/03_analysis_current_structure.md#analysis-existing-material-to-route-resume-20261103)。新理論/分類/承認段階は追加せず、即時修正を要する具体bugも今回未確認。
+
+直近の具体入口は、適格な本人原記録/ANSWER回答の条件をsource単位で保持し、既存selected_material入力とsemantic_admission/ObservedPropositionのどの意味gateへ採れるかを対応付けること。現v3はfield中心で補足/比較/訂正更新を対象外、通常ensureもこれらprivate候補を受け取っていない。既存の意味採用から明示順序/別record反復共起、適格期間の意味比較、唯一作者/guard commit/当時月次非生成再読までを残件として引き継ぐ。通常の設定は変更せず、追加GPU条件もこの監査で選定しない。

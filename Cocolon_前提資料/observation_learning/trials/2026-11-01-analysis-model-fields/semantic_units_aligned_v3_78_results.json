@@ -1,0 +1,187 @@
+{
+  "status": "COMPLETE_REVIEWED_NOT_ADOPTED",
+  "date": "2026-11-03",
+  "code_commit": "301ed26e016703a4aac75e97ee45832815f6d1d6",
+  "api_commit": "58c47dd8d6512fdd7db5eb413a383925e8b31a87",
+  "plan_sha256": "f4e590ded4835b22097e08595db4eb68ada6c6e997e7f842a2ea0d8bc15400c6",
+  "prompt_version": "semantic_boundaries.v3",
+  "old78_source_target_update_order_unchanged": true,
+  "new_teachers": 0,
+  "generated_raw_used_as_teachers": false,
+  "training_updates": 106,
+  "nll_measurements": 156,
+  "model_loads": 2,
+  "new_generations": 53,
+  "all_finished_stop": true,
+  "before_saved_reused": 53,
+  "before_original_files_bytes_identical": 219,
+  "before_origin": "ACTUAL_V3_PROBE53_AFTER_SAVED_9DC_NOT_CPU_SHADOW_OR_V2",
+  "initial_weights_sha256": "9dc4f947cda74e2c2befea39a978d3ca44295c7526a7ef2db8011a8c63947d4a",
+  "initial_config_sha256": "4776a484561a82593d78f5e79f0e57a503c58d2a9fc54a69fff8890f885a75ce",
+  "saved_weights_sha256": "2c01f3dde3cfac6ec94c1048a863aef6630b76f1981e1d92b66000ad8e4d508e",
+  "saved_config_sha256": "d012090f7bd271a70ecffb475b0905e2d49a3e038a369d9bdc6e52252c066c8e",
+  "saved_tensors": 112,
+  "saved_parameters": 3833856,
+  "saved_dtype": "F32",
+  "all_saved_tensors_finite": true,
+  "save_matches_actual_and_nontraining_reload": true,
+  "process_seconds": 840.273621693952,
+  "gpu_parent_seconds": 841.9982416911516,
+  "parent_including_prepare_seconds": 870.8907333938405,
+  "max_seconds": 1200,
+  "run_exit": 0,
+  "collect_exit": 0,
+  "old_eighteen_adapter_files_unchanged": true,
+  "terminal_compute_empty": true,
+  "raw_unchanged": 38,
+  "raw_changed": 15,
+  "changed_ids": [
+    "NV04",
+    "REHEARSAL_AT29",
+    "CQ03",
+    "CQ04",
+    "SQ01",
+    "SQ03",
+    "HQ03",
+    "MD02",
+    "OA01",
+    "OD01",
+    "R06",
+    "R07",
+    "XROLE03",
+    "YREASON01",
+    "YREASON03"
+  ],
+  "explicit_reason_contrasts": {
+    "count": 4,
+    "correct_before": 2,
+    "correct_after": 4,
+    "improved": [
+      "YREASON01",
+      "YREASON03"
+    ],
+    "retained": [
+      "HQ04",
+      "YREASON02"
+    ],
+    "original_RU02_target_reproduced_after": true,
+    "seen_development_not_general_quality": true
+  },
+  "other_semantic_repair": [
+    "CQ04_CONTEXT_RESULT_OVERLAP_REMOVED"
+  ],
+  "retention_failures_or_unmet": [
+    "OA01_NEW_INVALID_UNKNOWN_CARRIER",
+    "OD01_NEW_NON_TIME_CLASSIFIED_AS_TIME",
+    "MD02_ACTION_NEGATION_REPAIRED_BUT_UNKNOWN_MISCLASSIFIED_AS_RESULT",
+    "R07_PREEXISTING_MEANING_UNMET_AND_NEW_OFF_SOURCE_NEGATION",
+    "MD01_UNCHANGED_INVALID_UNKNOWN_CARRIER",
+    "R01_R08_UNCHANGED_AFFIRMATIVE_COPULA_MODIFIER"
+  ],
+  "grain_or_annotation_differences_not_automatic_failures": [
+    "REHEARSAL_AT29",
+    "SQ01",
+    "SQ03",
+    "CQ03",
+    "NV04",
+    "HQ03",
+    "R06",
+    "XROLE03"
+  ],
+  "candidate_admission": {
+    "before_returned": 51,
+    "after_returned": 50,
+    "count_each": 53,
+    "before_refused": [
+      "MD01",
+      "MD02"
+    ],
+    "after_refused": [
+      "MD01",
+      "OA01",
+      "R07"
+    ],
+    "not_a_meaning_quality_rate": true
+  },
+  "role": {
+    "before_accepted": 9,
+    "after_accepted": 9,
+    "preserved_pairs_full_bytes_identical": 9,
+    "scope_controls_refused_each": 6,
+    "additional_R01_qualifier_refusal_unchanged": true,
+    "self_fact_past_correct_polarity_one_node_zero_edges_four_gaps_preserved": true,
+    "text_diagram_graph_preserved": true
+  },
+  "source_teacher_reproduction": {
+    "old22_before": 22,
+    "old22_after": 20,
+    "AT29_difference_is_valid_granularity": true,
+    "OA01_difference_is_carrier_failure": true,
+    "including_RU02_count": 23,
+    "including_RU02_before": 22,
+    "including_RU02_after": 21,
+    "not_a_meaning_quality_rate": true
+  },
+  "new_v3_nll": {
+    "before": 0.006836228028148001,
+    "after": 0.018278285335607228,
+    "historical_v2_equal_prefix_comparison": false,
+    "new_RB2_generated_reproduction_tested": false
+  },
+  "saved_replay": {
+    "real_response_rows": 106,
+    "candidate_restored": 101,
+    "candidate_refused": 5,
+    "role_admissions": 32,
+    "role_restored": 18,
+    "role_refused": 14,
+    "model_loads": 0,
+    "generations": 0,
+    "updates": 0,
+    "nll_measurements": 0,
+    "cpu_shadow_generations": 0,
+    "reader_engine_both_compilers_both_authors_prohibited": true,
+    "admission_comparison_uses_existing_build": true,
+    "all_candidate_mapped_count": 0
+  },
+  "original_archive": {
+    "bytes": 17127945,
+    "members": 827,
+    "sha256": "f1621297e3aedd48f4441135c09dac7ce52ede5cbc83c3db38796b56341f3288",
+    "crc_safe_paths_all_member_bytes_sha256_verified": true
+  },
+  "normal_adoption": false,
+  "next_training_initial_selected": false,
+  "next_gpu_selected": false,
+  "ordinary_api_db_rn_deploy_changes": 0,
+  "gpu_rental_maintained": true,
+  "structure_map_delta": "NONE",
+  "credit": "TECHNICAL_CREDIT",
+  "product_credit": 0,
+  "formal_product_reads": "0/3",
+  "overall_progress_percent_unchanged": 54.5,
+  "source_bodies_published": false,
+  "review_context": "CODEX_WORK_GPT6_ROOT_AND_SAME_ENVIRONMENT_REVIEWERS_NOT_PRO_ULTRA_OR_HUMAN_ACCEPTANCE",
+  "next_existing_entry": "ADMISSIBLE_ORIGINAL_AND_ANSWER_SOURCE_CONDITIONS_TO_EXISTING_MATERIAL_AND_SEMANTIC_GATES",
+  "remaining_owner_audit_sha256": "7bc7d444d30580c8b792b253403ad7e4da5fc6dec40fe75be680a9b7acd4f0b2",
+  "restart": "Do not rerun completed GPU or audit roots. Research weights2c01 are preserved but not adopted. Use final reviews and existing owner/material admission entrance.",
+  "review_sha256": {
+    "ROOT_REVIEW.md": "d955b731351cf742f6bd5f06701a4b754f5100ccfdc2777a4fb7173c74c61d85",
+    "AGENT_REVIEW.md": "dd271aef718ea2e960b0440225342532af48480179f9f32601c25521d2b6556d",
+    "INTEGRITY_REVIEW.md": "697f6333abb2896f15dfbd93c037687a4794f65ecd4b9d2d88de3ed942df8c0a",
+    "REMAINING_OWNER_AUDIT.md": "7bc7d444d30580c8b792b253403ad7e4da5fc6dec40fe75be680a9b7acd4f0b2"
+  },
+  "result_artifact": {
+    "library_file_id": "libfile_33e4f71d95148191a66031fbc6a4949c",
+    "bytes": 16801329,
+    "members": 9,
+    "sha256": "30a054cc39acf89f7136a680208396577eaca06df41cbd47fccbd77b5fe95a24"
+  },
+  "remaining_owner_paths": [
+    "astor_material_snapshots.py:_analysis_saved_member + cores/analysis/source_adapter.py:freeze_analysis_sources + analysis_cumulative_service.py:prepare_cumulative_category_units",
+    "cores/analysis/semantic_admission.py:_admit_quoted_parent_units/_bind_model_unit_fields + cores/analysis/intent_compiler.py:ObservedProposition/_fragment/_model_written_role_proof",
+    "cores/analysis/intent_compiler.py:compile_observed_graph/_proposition_meaning/_explicit_order_pairs",
+    "cores/analysis/intent_compiler.py:compare_period_meaning + analysis_observed_service.py:generate_saved",
+    "analysis_cumulative_service.py:build_cumulative_map/ensure_map + cores/analysis/observed_route_realizer.py:_safe_label/safe_projection + analysis_cumulative_commit/read_maps"
+  ]
+}

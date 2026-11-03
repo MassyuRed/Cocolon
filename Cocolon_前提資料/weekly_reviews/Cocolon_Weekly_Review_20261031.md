@@ -2513,3 +2513,16 @@ NV04は結果root重複とWRITTEN_UNKNOWNの親不正という意味/形式未�
 
 
 進捗読取補正：上記100.524480秒時点の更新数は18（27という転記を修正）。実runは変更/再実行していない。後続233.722754秒時点は更新63/前測定78/1load/新call0、エラーなし・最終未確定。
+
+
+## 112. 11/3 — v3学習整合完了、明記理由4対照の再現と旧保持未達を確定
+
+[全結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。旧78source/target/106順と初期9dcを保持し入力だけv3整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0、旧18file不変/compute空。新2c01/configd012は112F32保存実一致/非学習reload。全53source/前後/18ROLE読解、38raw同一/15変化。HQ04/Y02保持、Y01元RU02/Y03を正しい理由marker/parent/否定連体/独立不明へ修復して理由2→4/4。CQ04のTEと結果重複も除去。
+
+しかしOA01不明carrier新拒否、OD01非時間かも→時点、MD02否定位置復帰と不明→結果誤分類、R07原文外NEGが残る。R01/R08copula・MD01は不変。AT29/SQ1/3全文化等を語消失や全分離義務違反にしない。ROLE9pair bytes同一/正負過去SELF・文章図保持、scope拒否6＋R01拒否不変。候補51→50/53、旧22JSON22→20のうちAT29は有効粒度差・OA01carrier退行、RU02込み23は22→21。NLL新v3 .006836→.018278、重点低下だけを生成品質にしない。新RB2生成は未検査。
+
+CPU106再読は候補101復元/5拒否、ROLE18復元/14拒否、reader5呼出禁止・モデル生成0、全candidate mapped0/未解析。元827member CRC/全bytesSHAを照合し[新重み・全原本・全53読解・残件owner監査](https://chatgpt.com/library?file_id=libfile_33e4f71d95148191a66031fbc6a4949c&account_id=personal)（16,801,329bytes/9member/SHA256 30a054cc39acf89f7136a680208396577eaca06df41cbd47fccbd77b5fe95a24）へ保全。新2c01通常/次初期値不採用、追加GPU未固定。通常API/DB/RN/配置/Pod管理0、レンタル維持、STRUCTURE_MAP_DELTA_NONE/TECHNICAL_CREDIT/product_credit0、正式0/3・54.50％据置。完了run/CPUauditを再実行しない。
+
+## 113. 11/3 — 本人sourceから通常累積までの既存残件ownerを再確認
+
+[既存owner/条件](../current_structure/03_analysis_current_structure.md#analysis-existing-material-to-route-resume-20261103)。最新関連6資料・continuity/weekly§82・API58cから、本人原記録/適格ANSWER→selected_material既存入力、引用候補→ObservedProposition/限定ROLE全文witness、通常compilerの明示順序/別record反復、適格期間の意味差分、通常builder→唯一作者→guard commit/月次非生成再読の5入口を確認。現v3はfield中心・補足/比較対象外、通常ensureはprivate候補を受け取らない。既存gateを緩めず新理論/分類/承認要件を作らない。次はsource/回答条件と既存材料/意味gateを同じsource単位で対応確認し、局所dose反復へ自動移行しない。即時修正bug未確認、追加コード/本番設定/GPU0、本人基準/記録間関係/通常累積接続は未完。

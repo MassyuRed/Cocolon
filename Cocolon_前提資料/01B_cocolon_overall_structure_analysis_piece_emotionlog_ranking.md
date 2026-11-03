@@ -1,4 +1,4 @@
-> **11/3・分析の最新（第9回§110–111）：** v3の53比較は理由2例改善と新退行で未採用。旧78教材の意味境界に直接矛盾0を確認し、同JupyterのCPU監査は27.258231秒/exit0で全78・候補156/ROLE8保存再読・実tokenizer/78CPU tensorのprefix/EOS/label境界を通過。次は旧78source/target/106順・初期9dcを保持し、学習messagesだけv3へ揃える有限比較を固定。before53は完了v3実原本再利用、新after53/156NLL/106更新/2load/1200秒、準備成功後に一回だけ実行する。[原本/条件/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-plan-20261103)。現時点は実結果未確定、通常採用/HTTP/DB/RN/配置は不変、本人基準/記録間接続は未完。
+> **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
 ---
 title: "01B_Cocolon_全体構造資料_Analysis_Piece_EmotionLog_Ranking系"
@@ -3363,3 +3363,6 @@ API dc05dc35、通常product owner追加なし。既存 `semantic_admission.py` 
 
 
 11/3・v3学習入力整合の地図：trialのsemantic_units_aligned_v3_78_prepare.py/run.py/supervisor.py/collect.pyは、旧78source/target/106順と旧9dcの研究初期を保持し、v3へ学習messagesを揃える比較専用。CPUaudit原本・今回v3 before53を再利用し、106更新/156NLL/53新生成/112tensor保存reload/106保存応答再読/全原本保全を扱う。新商品owner/型/既定route/受口/DB/RNは追加しない、STRUCTURE_MAP_DELTA_NONE。最新条件・結果はtrial/weekly§110以降。
+
+
+11/3 v3整合比較の結果：semantic_units_aligned_v3_78_results.jsonは本文なし最終採否・全原本参照・既存残件ownerの索引。4scriptの106更新/53生成は完了、理由4対照とCQ04は修復する一方で旧保持未達のため新重みは通常/次学習不採用。CPU監査/完了GPUを再実行せず、source_adapter/selected_material既存入力とsemantic_admission→ObservedPropositionの条件対応へ戻る。新owner/型/通常接続/DB/RNの追加はなくSTRUCTURE_MAP_DELTA_NONE。最新はtrial/weekly§112–113。

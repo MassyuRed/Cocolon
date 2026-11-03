@@ -1,4 +1,4 @@
-> **11/3・分析の最新（第9回§110–111）：** v3の53比較は理由2例改善と新退行で未採用。旧78教材の意味境界に直接矛盾0を確認し、同JupyterのCPU監査は27.258231秒/exit0で全78・候補156/ROLE8保存再読・実tokenizer/78CPU tensorのprefix/EOS/label境界を通過。次は旧78source/target/106順・初期9dcを保持し、学習messagesだけv3へ揃える有限比較を固定。before53は完了v3実原本再利用、新after53/156NLL/106更新/2load/1200秒、準備成功後に一回だけ実行する。[原本/条件/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-plan-20261103)。現時点は実結果未確定、通常採用/HTTP/DB/RN/配置は不変、本人基準/記録間接続は未完。
+> **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
 > **2026-11-03・入力整合前の意味境界指示比較（履歴）：** 同73ee/同userでsystemだけを追記し、46新生成/1load/学習0・417.780639秒/exit0。引用/対象/否定の3例はa5へ復帰したが、新退行と肯定役割の誤修飾が再発し、役割3→2/4/T4再現4→2/4。新版は通常未採用、旧各版/既定を維持。[全結果・原本・再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-boundaries46-result-20261103)。92保存応答と全原本を照合・保存済み。API dc05のprivate prompt/state版のみSTRUCTURE_MAP_DELTA_PRESENT、通常owner/型/ensure/HTTP/DB/RNは不変。
 
@@ -1109,3 +1109,22 @@ API dc05dc35の既存quoted-parent Inputにsemantic_boundaries.v2を追加し、
 
 
 11/3・v3学習入力整合の地図：trialのsemantic_units_aligned_v3_78_prepare.py/run.py/supervisor.py/collect.pyは、旧78source/target/106順と旧9dcの研究初期を保持し、v3へ学習messagesを揃える比較専用。CPUaudit原本・今回v3 before53を再利用し、106更新/156NLL/53新生成/112tensor保存reload/106保存応答再読/全原本保全を扱う。新商品owner/型/既定route/受口/DB/RNは追加しない、STRUCTURE_MAP_DELTA_NONE。最新条件・結果はtrial/weekly§110以降。
+
+
+11/3 v3整合比較の結果：semantic_units_aligned_v3_78_results.jsonは本文なし最終採否・全原本参照・既存残件ownerの索引。4scriptの106更新/53生成は完了、理由4対照とCQ04は修復する一方で旧保持未達のため新重みは通常/次学習不採用。CPU監査/完了GPUを再実行せず、source_adapter/selected_material既存入力とsemantic_admission→ObservedPropositionの条件対応へ戻る。新owner/型/通常接続/DB/RNの追加はなくSTRUCTURE_MAP_DELTA_NONE。最新はtrial/weekly§112–113。
+
+
+<a id="analysis-existing-material-to-route-resume-20261103"></a>
+## 11/3 — 既存材料から通常接続までの残件ownerと再開入口
+
+最新weekly§112–113と既存のmaterial-to-route continuityを照合した再開地図。API58cの実ownerを基準にし、理論/五種/注記/unknown/conflictを追加しない。v3局所4対照の改善は通常の本人基準の意味採用完成ではない。
+
+| 残件の確認単位 | 既存owner（mashos-api/ai/services/ai_inference/基準） | 現在の境界 |
+| --- | --- | --- |
+| 本人記録と適格回答の条件→本人の捉え方 | astor_material_snapshots.py:_analysis_saved_member、cores/analysis/source_adapter.py:freeze_analysis_sources、analysis_cumulative_service.py:prepare_cumulative_category_units | live/version/owner/親原版/適格ANSWERを束縛。既存selected_material.v2入口へ照合する。現v3のfield経路は補足/比較/訂正更新を対象外。 |
+| 引用候補→根拠付き役割/判断/選択 | cores/analysis/semantic_admission.py:_admit_quoted_parent_units/_bind_model_unit_fields、cores/analysis/intent_compiler.py:ObservedProposition/_fragment/_model_written_role_proof | 引用/parent一致だけでは意味採用しない。private候補は未解決/route0。限定ROLEは1record/1非空field/明示SELF/単一節過去肯否の全文witnessだけ。 |
+| 記録内順序/別recordでの再出現 | cores/analysis/intent_compiler.py:compile_observed_graph/_proposition_meaning/_explicit_order_pairs | 明示順序を根拠にし、反復は別recordの2機会以上。同record二欄/複数回答を反復にせず、共起を因果へ上げない。カテゴリ集合等の既存整合を保持。 |
+| 再出現と意味の変化 | cores/analysis/intent_compiler.py:compare_period_meaning、analysis_observed_service.py:generate_saved | 同owner/同policy・隣接同長非重複期間。propositionのない候補は意味比較不可。不在を消失/改善悪化/原因にしない。現在の累積ensureはこの比較requestを組まない。 |
+| 採用意味→文章/図/累積/月次/保存再読 | analysis_cumulative_service.py:build_cumulative_map/ensure_map、cores/analysis/observed_route_realizer.py:_safe_label/safe_projection、analysis_cumulative_commit/read_maps | 通常ensureはsemantic_inputを渡さず、quoted-parent/限定ROLE垂直を通常化しない。唯一作者の全文typed再検査・source guard・寿命/削除を保持し、過去月を再生成/backfillしない。 |
+
+直近は1–2のsource/回答条件と材料入力・既存意味gateを、同じsource単位で対応付ける。既存材料定義と本人実演へ戻り、モデルrawを教師化したり五種を埋めるため背景を補ったりしない。不足は既存未解析/不明として残す。開発生成/比較の既定gateと通常経路は変更しない（現在の稼働環境値は今回照会していない）。即時修正を要する具体bugは本監査で未確認。新しい承認段階/追加GPU条件/通常接続の変更は0、STRUCTURE_MAP_DELTA_NONE。
