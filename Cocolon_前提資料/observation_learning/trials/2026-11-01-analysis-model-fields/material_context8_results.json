@@ -87,5 +87,7 @@
     "bytes": 98243,
     "members": 50,
     "sha256": "45ff5e2c8f31532b114cb2ca1a3ecc428a9c30beaceeffec7ec1f845b73f1c29"
-  }
+  },
+  "emotion_strength_quality_evaluated": false,
+  "all_fixture_emotion_details_empty": true
 }

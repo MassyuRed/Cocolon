@@ -1024,7 +1024,7 @@ API [5d7f43a8](https://github.com/MassyuRed/mashos-api/commit/5d7f43a88822152634
 
 SQ03はquote内の継続語/否定を保つが、新版で継続modifierが落ちる。MD02は新版で主体付き全文を内容対象に置き、root主体/否定の適切なscopeを保持しない。OD01は両版拒否（旧carrier_invalid、新parent_ambiguous_or_missing）。CTX01に新しい意味改善はなく、不明表現をmodifierにする誤分類等が残る。両版とも3返却/1拒否、保存6候補同一ID/coverage・2拒否維持。保存readerはgenerate/compiler/author禁止、新load/生成/更新0。全未解析/主体未解決/route0・mapped0で、返却や保存成功を意味品質に加算しない。
 
-combination70 afterはbaseline.v1で、今回のcategory版とは同一messagesではない。3診断の本文/field/path/schema/旧例文は同一だが、category版はsystem末尾へカテゴリ説明・fieldへselected_categoriesを追加し、request_ref/messages hashは異なる。SQ03 rawだけ同じ、MD02/OD01は異なる。同一messagesの非決定性や新materialだけを原因と断定しない。今回4caseは既見診断/合成fixtureで、Mash教示/未知盲検/metadata単独因果の試験ではない。
+combination70 afterはbaseline.v1で、今回のcategory版とは同一messagesではない。3診断の本文/field/path/schema/旧例文は同一だが、category版はsystem末尾へカテゴリ説明・fieldへselected_categoriesを追加し、request_ref/messages hashは異なる。SQ03 rawだけ同じ、MD02/OD01は異なる。同一messagesの非決定性や新materialだけを原因と断定しない。今回4caseは既見診断/合成fixtureで、Mash教示/未知盲検/metadata単独因果の試験ではない。全fixtureのemotion_detailsは空であり、感情の強さを用いた品質差は未測定。
 
 API5d7f43a8の材料版は明示offlineで保持し、旧category既定/通常ensureへ切替えない。対象142PASS/2SKIP/既存warning1、26.58秒。supervisor初回はlocal末尾LF/Git blob SHA差でprelaunch停止（Popen/model/load/生成/更新0）、元blob同一性を確認後に一回実行した。初回pytest不足/正規8.4.1導入も原logへ保持する。GPU再試行・追加epoch・出力補修・受口緩和なし。
 
