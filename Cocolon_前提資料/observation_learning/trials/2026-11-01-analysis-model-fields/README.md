@@ -1730,3 +1730,44 @@ rootと同環境read-only補助が全8原文/raw/graphの意味/文章全文/図
 
 実環境GPT-6/Codex Work、独立Pro/Ultra/Mash Product Readではない。通常採用false、API ded0586/商品source/意味gate/graph型/作者/ensure/HTTP/公開DTO/DB/RN/Render/Supabase/配置/Pod管理変更0。STRUCTURE_MAP_DELTA_NONE、primary outcome=BLOCKER_NARROWED/product_credit0。本人基準の役割/判断/選択、補足typed、記録間の再出現/変化、通常累積接続、IF/Savedの残件と分析観測会の未取得も保持する。
 
+
+
+<a id="analysis-material-v4-morph4-plan-20261103"></a>
+## 134. 11/3 — 作る活用と前欄肯否に限定した四原文・実生成prefix比較
+
+§133の完了2案を再実行しない。既存X03/X04の同じ否定ACTIONは、前欄ROLE肯否だけでなく生成NEG引用の範囲が異なる。C4正教師prefixの極小誤拡張確率を、自由生成prefixにも成立すると拡張できない。ROLE側任意target/単位順の差という仮説は実rawには該当しなかった。
+
+独立原文M4は「自分の役割は受付係だった/ではなかった」「自分は衣装を作った/作らなかった」の2×2、生活カテゴリ。元X/PV本文・失敗rawを教師にしない。元90教師不変、旧a2e/config006e・API ded0586/material.v4/既存loader/strict/typed/作者を固定し、追加4のCPU正target2node・保存reader、旧26raw束縛/再読と4prefixの実token境界を確認した（11.272516秒、model/forward0、runner SHA c062a0e67548dd2ef5c096a2e6696d37bb317d6c7d47bf223f6ef6c00229bd06）。
+
+新before4の自由生成と、X03/X04のROLE肯否×NEG引用範囲2種の4forwardを同じ非学習model loadで測る。prefixは元raw又は診断だけの反事実で、名詞直後までの再tokenize。元生成token列の完全再現ではなく、診断prefixを正答/教師/採用rawへ置換しない。全新4がtyped到達なら追加学習をせず停止。未達でも全rawを読み、作る活用/肯否/対象/前欄干渉への直接対応がなければ学習しない。対象子省略だけを失敗扱いへ変更しない。
+
+直接対応する未達がある場合だけrootがsemantic_training_permissionを記録し、既存plain CE ownerで新4＋N8/T01/T02/SC01/RU02の12保持＝16更新/選択32NLL、保存reload、after30（旧22＋既存発話4＋新4）へ進む。最大34新stop要求/4診断forward/3load、各phase300秒で処理合計900秒上限、前確認0.29USD/hで0.0725USD以下（CPU準備/回収/待機保持/通信保存税等別）。before後は手動意味確認で分岐し、自動学習・同run再起動・係数/枝数探索なし。全原文/raw/文章図と保存再読、旧成功保持を判定し、通常採用は未成立。
+
+code=material_v4_morph4_trial.py、root=/workspace/analysis-material-v4-morph4-20261103。今回の継続/GPU/Jupyter/必要資料更新指示内、rootが単一実装/実行/最終判断、同環境read-onlyが差分を確認。実環境GPT-6/Codex Work、独立Pro/Ultra/Mash Product Readではない。通常source/意味gate/型/作者/ensure/HTTP/公開DTO/DB/RN/Render/Supabase/配置/Pod管理変更0、STRUCTURE_MAP_DELTA_NONE。本人基準/補足typed/記録間・通常累積/IF・Savedと分析観測会未取得を保持する。
+
+
+<a id="analysis-material-v4-morph4-result-20261103"></a>
+## 135. 11/3 — 独立4原文は既に到達、失敗prefixの差を測定・局所指示は対照退行で不採用
+
+§134を一回実行。M4は旧a2eのまま全4がSELF/fact/pastのROLE/ACTION各1node・肯否・カテゴリ生活・欄順・edge0を保持し、文章/図/保存非生成再読へ届いた。M01のみCONTENT_TARGET子を省略するが既存finite proofが原文の対象を保持する。M02–04は名詞対象を明示。全4raw/graph/文章/図を読み、予定条件に従い学習・afterなしで終了した。独立4原文のbefore成功を学習改善へ数えない。
+
+同じ非学習loadで、既存X03/X04の再tokenizeした名詞直後prefixを4forward測定した。元rawは不変、長短NEGの反事実は診断用で教師/採用出力へ使っていない。
+
+| ROLE/NEG引用の診断条件 | 名詞で引用を閉じる確率 | 誤拡張の先頭token確率 |
+| --- | --- | --- |
+| X03相当/短NEG（元raw prefix） | .1557777971 | .4798294008 |
+| X03相当/長NEG（診断だけ） | .9999940395 | 6.02354e-8 |
+| X04相当/短NEG（診断だけ） | .9940313697 | .0040623792 |
+| X04相当/長NEG（元raw prefix） | .9999961853 | 2.35886e-8 |
+
+これは指定したprefixの条件付き分布であり、元生成token列の完全再現、自然生成の成功率、短NEGの意味不正、根本原因確定ではない。M02は短NEGでも正しい対象を生成する。前欄肯否と否定引用範囲の相互作用という局所の切り分けで、C4正teacher-prefixの極小誤拡張を自由生成へ一般化しない。
+
+この新事実から、独立ACTIONのNEGを動詞＋否定語尾で引用する文だけをv4のsystem末尾へ足した診断probe4を追加した。旧v4 request identityに変更messagesを偽って束縛せず、probe_identity/messages SHA/raw SHAを別保存し、旧consumerでの意味採用/文章図生成は0。正しい対象名/答えを指示へ供給しない。1load/新4stop/学習0、全4原文/rawを読んだ。X03は原文外の行動節targetから原名詞へ戻るがNEGは短いまま、X04/M02はraw bytes同一。M04は元の正しい長NEGから原文外NEGへ退行した。従ってこの指示は不採用で、新profile実装や通常接続へ進めない。X03だけの改善を4例全体の修復へ換算しない。
+
+継承するv4内のpublic説明例には独立ACTIONの短NEGが複数あり、追加の生成表現方針と不一致だったことを実sourceで確認した。この競合が退行の原因だとは未確定。次の直接修正候補は、新版の指示と既存説明例を一貫させた最小差分であり、短NEGをstrictで禁止したり、単語mask/出力置換で正答を外付けしたりしない。旧v4の保存互換・限定typed/唯一作者は維持する。新profileの実装/比較条件は未固定、同probe/完了M4/旧UL・beam・語彙拡大の自動再実行0。
+
+M4+4診断forwardは47.972818320秒、新probe4は45.854697890秒、計8新stop/4測定/2load・93.827516209秒、学習0/新重み0。前確認0.29USD/hの処理按分0.007558328USD、CPU準備/回収/待機保持/通信保存税等別・総請求未測定。終了GPU2MiB/0％/compute空、レンタル維持。今回の採用品質修正なし、通常採用false、primary outcome=BLOCKER_NARROWED/product_credit0。
+
+[原本差分と最終判断](https://chatgpt.com/library?file_id=libfile_823dac8b7f208191b58a7beb4dc6d5d6&account_id=personal)は108288bytes/SHA56622d688a25a79cf9f73628bdf7129388602a568f0b2dd7d7b8a75554fa32f6。新原本66 UTF-8 fileをPod外で全bytes/SHA照合し、新M4のsource/教師/encodedを派生差分として含む。旧source_pack/全pack/全encodedはSHA参照で、旧原本の保存先は§123/125/131を継承する。全root/元ZIPの同一完全回収とは呼ばない。コードmaterial_v4_morph4_trial.pyとmaterial_v4_negquote_probe.py、本文なし索引material_v4_morph4_results.json。
+
+rootが単一writer/実行/採否、同環境read-only補助がsource/runner/結果を照合。実環境GPT-6/Codex Work、独立Pro/Ultra/Mash Product Readではない。通常source/API ded0586/意味gate/型/作者/ensure/HTTP/公開DTO/DB/RN/Render/Supabase/配置/Pod管理変更0、STRUCTURE_MAP_DELTA_NONE。本人基準/補足typed/記録間・比較/通常累積/IF・Savedと分析観測会の未取得は継続残件。

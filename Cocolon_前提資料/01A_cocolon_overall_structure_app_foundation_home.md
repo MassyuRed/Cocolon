@@ -6048,3 +6048,9 @@ trial/material_v4_target4_sources.jsonは独立C4教示と非学習Z4の原文/�
 
 
 11/3・lexical8最終結果はtrial/material_v4_lexical8_results.jsonとweekly§133へ。新8は元a2eでtyped全到達のため学習/afterなし停止。対象子4明示/4省略、全8のgraph/可視内容は正target投影と同一。今回品質修正なし、§131と合わせ完了runの自動再実行なし。新商品owner/型/作者/通常接続0、STRUCTURE_MAP_DELTA_NONE。
+
+
+11/3・trial/material_v4_morph4_trial.pyは独立4原文の作る活用/前欄肯否比較と実生成prefix診断を行う一回の研究runner。旧helper946101d4の意味採用・保存reader・16更新を再利用し、新商品owner/型/通常接続を作らない。条件/再開点はweekly§134、STRUCTURE_MAP_DELTA_NONE。
+
+
+11/3・morph4の最終結果と局所NEG指示probeはweekly§135へ。trial/material_v4_negquote_probe.pyは変更messagesを独自probe identityへ保存し、旧v4consumerへ採用しない比較専用。material_v4_morph4_results.jsonは本文なし結果/差分原本の索引。独立4typed到達で学習なし、追加指示は対照退行で不採用、新商品owner/型/通常接続0、STRUCTURE_MAP_DELTA_NONE。
