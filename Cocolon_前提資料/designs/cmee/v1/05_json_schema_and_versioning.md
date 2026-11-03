@@ -3321,3 +3321,8 @@ API dc05dc35。既存AnalysisModelQuotedParentUnitsInputのprompt_versionにsema
 ## 11/3 — selected_material.v3 private入力/保存版
 
 既存AnalysisModelQuotedParentUnitsInput/Responseと候補graph型を再利用。明示prompt_version=selected_material.v3、state=cocolon.cmee.analysis_model_units_quoted_parents_state.material.v3。model user payloadはmaterial.v2のrecord/fields/analysis_as_ofを保持し、fieldごとのsource_role（ORIGINAL_INPUT/SUPPLEMENTAL_ANSWER）、supplement（原入力null/補足1..3の順番）を追加。引用sourceは各field.textのみ。追加のlogical型0。旧5版と通常DTO/SQL/RN/ROLE保存v1は不変。補足を許すのは本版のみ、既存資格/ordinary意味gateを通す。新旧stateのラベルだけの移植は拒否。詳細はAnalysis mapのanalysis-material-v3-source-context-20261103。
+
+
+## 11/3 — written role + actionのprivate保存版
+
+新型0。既存build/serialize/reload_cumulative_written_role_mapと意味ownerのwith_action=Trueだけを明示選択。state=cocolon.cmee.analysis_model_written_role_action_state.v1、file=cocolon.cmee.cumulative_written_role_action_file.v1、artifact salt=analysis_model_written_role_action.v1。既存ROLE v1保存/ID/既定は不変。ObservedGraph2node/辺0/3欠段＋routegapのexact source-witnessを保存readerで検証し、新旧stateをラベル交換して読まない。公開DTO/SQL/RNは不変。

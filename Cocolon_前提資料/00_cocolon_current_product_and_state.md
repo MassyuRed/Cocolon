@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-**11/3・分析の最新（第9回§114）：** API348b641cで明示offlineのselected_material.v3を実装。既存の本人/親原版/QUESTION/ANSWER資格とordinary意味条件を通った補足を別envelope/fieldで保持し、選択カテゴリ・感情・記録日時の文脈とsemantic v3境界指示を同時に渡す。訂正/撤回/未解決対立・比較は未対応のまま拒否、旧5profile/ROLE原入力限定/通常ensureは維持。Jupyter対象249passed/2skipped・24.90秒。新test初回はfixture必須感情詳細不足20失敗を修正、productionのgate緩和なし。次は旧9dcを研究比較先に明示選定し、学習0/新10生成/1load/600秒（要求45秒/context8192/maxnew2048）、処理上限約0.0967USD@現0.58USD/h・保持等別で一回の入力文脈比較。実結果/通常採用は未確定。本人基準/五種採用/記録間接続/通常累積は残件。
+**11/3・分析の最新（第9回§115–116）：** 本人補足/元文脈v3の実10生成を104.019968秒/全stop/学習0で完了。補足の別field保存再読は成立したが、extra keys/別記録ROLE混入/不明へのNEG等が残り新profile通常不採用。7候補非生成再読/3拒否、原本は保存済み。次の欠落へAPIc9b990e0で同一原記録の明記ROLE＋単純SELF過去ACTIONを既存graph/文章/図へ接続するwith_action=Trueを実装。原入力1/補足0/二欄全文、辺0/反復0/3段gap＋routegap、旧v1と新state/idを分離。初回7suite761passed/2skipped、read-only指摘の根拠範囲IDを補修し関連151passed/14.62秒を確認。次は旧9dcを研究比較先に明示し学習0/4新生成/1load/300秒・処理上限約0.0484USD@0.58USD/h（保持等別）で肯否と保存再読を確認。実モデル採否/通常接続は未確定。
 
 **11/3・分析の最新結果（第9回§100–102）：** 74教師監査後、旧74不変＋原文対照2を76教師/90更新/152NLL/50新stop/2load・641.971830秒/exit0で比較。NV04の結果重複/不明の親不正を改善し、R4/T4/追加本人2の10ROLE文章図を前後bytes同一で保持。50rawは46同一/4変化、HQ04理由誤分類は残りR08肯定過去copulaに誤modifier再発。strict候補47→49は意味率ではない。100保存非生成再読/元532memberの全bytes-SHAを確認・新重み9dcを保全、通常/次初期値は未採用。[結果・原本・再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-reason-unknown76-result-20261103)。全対象分離は現行必須でなく、次は理由の述語/不明併存差と複数文copula保持をCPUで切分け。通常HTTP/DB/RN/配置不変、本人基準/記録間関係/通常累積接続は未完。GPUレンタル維持、STRUCTURE_MAP_DELTA_NONE。
 

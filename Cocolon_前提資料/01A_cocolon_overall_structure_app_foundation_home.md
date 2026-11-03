@@ -5991,3 +5991,8 @@ API86d19b6d、STRUCTURE_MAP_DELTA_PRESENT。通常の累積mapは不変。新ana
 ## 11/3 — Analysis本人材料v3の変更file地図
 
 API既存analysis_cumulative_service.pyは_saved_memberを共用するrequest組立てを分離し、新selected_material.v3をprepare/build/save/reloadへ束縛する。既存cores/analysis/semantic_admission.pyは同版だけordinary補足を独立fieldへ追加、material文脈とsemantic v3指示を併用、新state版/typed-role補足拒否を扱う。新test_analysis_model_material_v3.pyは本人/親/回答/引用/旧版/保存境界を検査。trial/material_v3_context_probe.pyは新10生成の一回比較・原本保全用で商品ownerではない。通常ensure/HTTP/DB/RN/唯一作者/共有型/依存は未変更。
+
+
+## 11/3 — ROLE＋ACTION二欄の意味接続file地図
+
+API既存analysis_cumulative_service.py: with_action明示prepare/build/save/reloadの状態分離。cores/analysis/semantic_admission.py: 二欄source受理と新state/保存node復元。intent_compiler.py: 現ROLE proof/既存有限ACTIONの全文/候補/原文範囲から2node/4gapを構築・再検証。observed_route_realizer.py: 同じ作者で新saltのみ分離。新test_analysis_model_role_action.py: 肯否/欄交換/主体/時点/根拠/旧v1/保存非生成再読。trial/role_action4_probe.py: 実4B4call比較と原本保存用。新graph/作者/公開route/SQL/RN/依存0。

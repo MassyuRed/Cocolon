@@ -2533,3 +2533,15 @@ CPU106再読は候補101復元/5拒否、ROLE18復元/14拒否、reader5呼出�
 **11/3・分析の最新（第9回§114）：** API348b641cで明示offlineのselected_material.v3を実装。既存の本人/親原版/QUESTION/ANSWER資格とordinary意味条件を通った補足を別envelope/fieldで保持し、選択カテゴリ・感情・記録日時の文脈とsemantic v3境界指示を同時に渡す。訂正/撤回/未解決対立・比較は未対応のまま拒否、旧5profile/ROLE原入力限定/通常ensureは維持。Jupyter対象249passed/2skipped・24.90秒。新test初回はfixture必須感情詳細不足20失敗を修正、productionのgate緩和なし。次は旧9dcを研究比較先に明示選定し、学習0/新10生成/1load/600秒（要求45秒/context8192/maxnew2048）、処理上限約0.0967USD@現0.58USD/h・保持等別で一回の入力文脈比較。実結果/通常採用は未確定。本人基準/五種採用/記録間接続/通常累積は残件。
 
 旧106更新/53比較と不採用判断は継承し再実行しない。本人source→既存材料という§113の最初の欠落を実装したもので、カテゴリ分類/引用/保存成功を本人基準の意味理解へ換算しない。新10比較の原文・raw全読と採否は後続resultへ記載する。STRUCTURE_MAP_DELTA_PRESENTはprivate profile/stateのみ、通常API/DB/RN/Render/Supabase/配置/Pod管理変更0。
+
+
+## 115. 11/3 — 元文脈/補足10生成完了、新profileの通常採用は見送り
+
+API348b641c/runner e4f4bf55・旧9dc/config4776を固定し、学習0/NLL0/1load/10新stopを104.019968秒で完了。処理按分約0.016759USD@確認0.58USD/h、準備/回収/保持別。全4source構成と10rawをroot全文照合。新v3で適格ANSWERを原入力二欄と分離した3fieldの候補と保存非生成再読まで成立。一方、二欄/二記録のROLEで入力metadataを出力keysへ複写、別記録の否定ROLE混入、不明へのNEG、肯定copula/有限述語の誤modifierが残る。semantic v3だけで改善した不明境界もmaterial v3では保持しない。原文外の値はstrictが拒否し、rawを修復して採用しない。7candidate再読一致/3strict拒否は意味正解率ではなく、全候補mapped0/actor未解決/route0。
+
+[全原本・全読・保存検証](https://chatgpt.com/library?file_id=libfile_9957bff9932c819193b1873664b11f46&account_id=personal)（73761bytes/2member/SHA256 16b315fec233fd15c2d8503341111597b2274acfd02c6fadd583ea0dbe8328cf）。元ZIP79785bytes/45member/SHA18c8b08751e24487ce3215dfe2ce5076a1938c6722012a695483a959f1c8534c、CRC/全44manifest SHA/安全pathをPod外照合。旧adapter bytes不変、終了時294MiBは同processのCUDA context記録で、外からの空GPU確認とは分離。通常提供・次学習へv3を自動採用しない。通常HTTP/DB/RN/配置/Pod管理0、GPUレンタル維持。次は意味を採用する同原記録二欄の限定縦接続へ進む。入力profileの実装creditと実モデルの未達を分ける。
+
+
+## 116. 11/3 — 同原記録のROLEとACTIONを既存文章/図へ限定接続
+
+**11/3・分析の最新（第9回§115–116）：** 本人補足/元文脈v3の実10生成を104.019968秒/全stop/学習0で完了。補足の別field保存再読は成立したが、extra keys/別記録ROLE混入/不明へのNEG等が残り新profile通常不採用。7候補非生成再読/3拒否、原本は保存済み。次の欠落へAPIc9b990e0で同一原記録の明記ROLE＋単純SELF過去ACTIONを既存graph/文章/図へ接続するwith_action=Trueを実装。原入力1/補足0/二欄全文、辺0/反復0/3段gap＋routegap、旧v1と新state/idを分離。初回7suite761passed/2skipped、read-only指摘の根拠範囲IDを補修し関連151passed/14.62秒を確認。次は旧9dcを研究比較先に明示し学習0/4新生成/1load/300秒・処理上限約0.0484USD@0.58USD/h（保持等別）で肯否と保存再読を確認。実モデル採否/通常接続は未確定。

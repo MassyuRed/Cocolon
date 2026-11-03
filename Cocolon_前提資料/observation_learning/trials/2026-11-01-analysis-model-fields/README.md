@@ -1404,3 +1404,17 @@ AT29/SQ01/SQ03の全文unit化は対象/不明/否定/継続語を保持する�
 **11/3・分析の最新（第9回§114）：** API348b641cで明示offlineのselected_material.v3を実装。既存の本人/親原版/QUESTION/ANSWER資格とordinary意味条件を通った補足を別envelope/fieldで保持し、選択カテゴリ・感情・記録日時の文脈とsemantic v3境界指示を同時に渡す。訂正/撤回/未解決対立・比較は未対応のまま拒否、旧5profile/ROLE原入力限定/通常ensureは維持。Jupyter対象249passed/2skipped・24.90秒。新test初回はfixture必須感情詳細不足20失敗を修正、productionのgate緩和なし。次は旧9dcを研究比較先に明示選定し、学習0/新10生成/1load/600秒（要求45秒/context8192/maxnew2048）、処理上限約0.0967USD@現0.58USD/h・保持等別で一回の入力文脈比較。実結果/通常採用は未確定。本人基準/五種採用/記録間接続/通常累積は残件。
 
 script=material_v3_context_probe.py、API348b641c、root=/workspace/analysis-material-v3-context10-20261103。華恋の新しい合成3source構成×material.v2/semantic.v3/material.v3=9callと既存適格補足fixture×material.v3=1call。Mash教示/盲検/学習教師ではない。新生成は元記録2欄/二記録/独立不明/本人ANSWERの保持を原文と全rawで照合するため。9dc/config4776は比較用に明示選定、最新2c01を自動使用しない。既存重みを書換せず、学習/NLL0。各request/ref/messages SHA/response/raw/採否/候補/coverageと保存reader内Engine/両compiler/両author禁止の非生成再読を保全。失敗時partialもfinally archiveし再試行しない。GitHub固定/全変更file読戻しとJupyter実tokenizer/context検査後に一回実行。旧完了rootの再起動禁止。
+
+
+<a id="analysis-material-v3-context10-result-20261103"></a>
+## 11/3 — 元文脈/補足10生成完了、別fieldの保存到達と意味未達を確定
+
+API348b641c/runner e4f4bf55・旧9dc/config4776を固定し、学習0/NLL0/1load/10新stopを104.019968秒で完了。処理按分約0.016759USD@確認0.58USD/h、準備/回収/保持別。全4source構成と10rawをroot全文照合。新v3で適格ANSWERを原入力二欄と分離した3fieldの候補と保存非生成再読まで成立。一方、二欄/二記録のROLEで入力metadataを出力keysへ複写、別記録の否定ROLE混入、不明へのNEG、肯定copula/有限述語の誤modifierが残る。semantic v3だけで改善した不明境界もmaterial v3では保持しない。原文外の値はstrictが拒否し、rawを修復して採用しない。7candidate再読一致/3strict拒否は意味正解率ではなく、全候補mapped0/actor未解決/route0。
+
+[全原本・全読・保存検証](https://chatgpt.com/library?file_id=libfile_9957bff9932c819193b1873664b11f46&account_id=personal)（73761bytes/2member/SHA256 16b315fec233fd15c2d8503341111597b2274acfd02c6fadd583ea0dbe8328cf）。元ZIP79785bytes/45member/SHA18c8b08751e24487ce3215dfe2ce5076a1938c6722012a695483a959f1c8534c、CRC/全44manifest SHA/安全pathをPod外照合。旧adapter bytes不変、終了時294MiBは同processのCUDA context記録で、外からの空GPU確認とは分離。通常提供・次学習へv3を自動採用しない。通常HTTP/DB/RN/配置/Pod管理0、GPUレンタル維持。次は意味を採用する同原記録二欄の限定縦接続へ進む。入力profileの実装creditと実モデルの未達を分ける。
+
+
+<a id="analysis-role-action4-plan-20261103"></a>
+## 11/3 — 同原記録の役割と行動、肯否4生成で実意味接続を確認する
+
+APIc9b990e0、script role_action4_probe.py、root=/workspace/analysis-role-action4-20261103。既存9dc/config4776を研究比較先へ明示選定、最新2c01の自動利用0。原記録1の否定ROLEとACTION肯定/否定の2source構成×semantic_boundaries.v2/v3=4call、学習/NLL0/1load/300秒（要求45/context8192/maxnew2048）。根拠ID補修後の最終対象exit0/原7suite761passを確認し、GitHub script固定/読戻し・実tokenizer/context成功後に一回実行。通常/旧v1の採用は変えない。既存受口の候補と、新ROLE＋ACTIONのtyped graph/文章/図/保存reader内7呼出禁止を実rawそのままで比較し、拒否を保存する。完了10比較を再実行せず、新4だけを数える。終了partialもfinally ZIP/manifestへ保全し、同rootの再起動禁止。華恋合成の近接開発例でMash教示/未見盲検ではない。実モデル結果/採否は未確定。
