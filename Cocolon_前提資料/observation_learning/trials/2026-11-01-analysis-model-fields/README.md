@@ -1338,3 +1338,26 @@ semantic_units_v3_teachers78_audit.pyのaudit/archive二段。旧78plan SHA72696
 実tokenizerをoffline固定revisionで読み、旧実runから抽出したrenderer ASTをCPUで再利用する。非teacher continue guard除去とtensor device=CPUだけを変換し、78組のinput/label/attention/gold tensorを保存reloadする。推論prompt token prefix、実assistant targetとEOS、prompt -100mask、shift後gold、tail位置、context余裕まで検査。モデルforward/loss同値や生成品質は未検証で、合格を意味採用へ換算しない。モデル/生成/更新/NLL0、新教師0、新学習plan/GPUの選定もこの監査自身は行わない。
 
 root=/workspace/analysis-v3-teachers78-audit-20261103、外CPU180秒上限。コードGitHub全文/SHA読戻し後に同Jupyterで一回実行する。成功/失敗にかかわらず別archive phaseが原本/exit/log/API6source/実renderer/全tensorとmanifestをZIPへ保全、partialを再実行しない。現時点は条件固定で実結果未確定。通常HTTP/DB/RN/配置/Pod管理0、GPUレンタル維持、STRUCTURE_MAP_DELTA_NONE/product_credit0。完了v3probe53を再生成せず、その採否は前節の不採用を維持する。
+
+
+<a id="analysis-v3-teachers78-audit-result-20261103"></a>
+## 11/3 — 旧78教材のv3入力監査完了、実label境界を含めCPU全件通過
+
+固定ad5612df/監査script06043883/API58c/旧78plan72696f33/旧実renderer59939d81を同Jupyterで一回CPU実行。27.258231秒/exit0、archiveもexit0。旧78source/target/106順と元dict/plan bytesを保持、候補156とT4ROLE8をreader内5呼出禁止で保存再読。新旧のgraph意味/証拠と文章図は明示identity以外一致、新RB2複数節scope拒否4を維持。実tokenizerと旧実renderer ASTを再利用し、78CPU input/label/attention/gold tensorを保存reload、prompt mask/shift後gold/tail位置/assistant EOSが一致。最低学習context余裕6148/生成予算余裕4342token（8192/2048）。モデルforward/loss数値同値・学習や生成品質は未検証で、CPU合格を商品採用へ換算しない。
+
+全78原source/targetの意味監査は88field/291unitを全読し、指定v3の理由/TE/独立不明/当該否定/肯定ROLEcopulaへ直接矛盾0。由来を問うからと因果接続、任意対象分離、full不明rootを区別する。意味監査自体は新教師0・raw教師化0。CPU監査自身もモデル/load/生成/更新/NLL0、新学習plan/追加GPU選定0。
+
+[全原本・教材全読・実tensor整合監査](https://chatgpt.com/library?file_id=libfile_c7ab2f40bdc081918ccf09e991ed4028&account_id=personal)（944,945bytes/7member/SHA256 f55dc65148ca8b1d7509b7ed1055ca7646a82f7a61974c183db05382a51704be）。元ZIP993,239bytes/261member/SHA256 590eaff22b1416db77a02604df03a46b33e725caa314ad0d1647f66882fc2058をPod外CRC/安全path/全260member bytes-SHAまで照合。result SHA69016aeb4f4ea03f2973f77742b5b9ca591d1f7ee7b75c428f7e904cb361c97b。本文なし結果semantic_units_v3_teachers78_audit_results.json。完了auditを再起動せず、次の条件選定とは区別する。STRUCTURE_MAP_DELTA_NONE/TECHNICAL_CREDIT/product_credit0、通常HTTP/DB/RN/配置不変。
+
+<a id="analysis-aligned-v3-78-plan-20261103"></a>
+## 11/3 — 教材と順序を保持し、学習入力だけv3へ整合する比較を固定
+
+直前53の純prompt比較は理由2/4を改善するが新carrier/role退行を伴い通常未採用、旧78のsource/target全読と実v3入力CPU監査は通過した。この差を受け、原文から作った既存78教材・106更新順を変えず、v3推論と学習messagesの版を一致させる別の有限比較へ進む。新教師0、raw教師化/target修復0。旧78 source/assistant_target/update_orderの内容は完全不変、新版ref/候補ID等は別identityとして保持する。入力版以外の初期9dc/config4776・plainCE/LR1e-5/clip1/seed20261111/attention/LoRA dropout0は旧boundary78の条件を保持する。退行9eを使わず、9dcをこの研究初期値へrootが明示選定する。通常採用や自動次学習選定ではない。
+
+before53は完了v3probe53 after53の同9dc/v3実request/raw/response/candidate51/ROLE9を、owner/snapshot/messages/ref/採否/全保存bytesまで照合して再利用する。CPUshadow/v2before/9eafterを混ぜない。新before生成0、新v3after53/前後78NLL156/106更新/2load。NLLは新v3messagesで両方実測し、旧v2NLLと同一になるassertは置かない。初期112tensorとの一致・終了保存112tensor実model一致/非学習reloadを検査し、旧18adapter fileを保持する。
+
+上限1200秒（外1190+kill10、要求23秒/context8192/maxnew2048）。直前v3生成53で474.55秒、旧v2全処理698.14秒だったため新版の入力増を含む有限上限を設定し、前回確認0.58USD/hなら処理上限0.193334USD、準備/回収/保持別。コードGitHub固定/全文SHA読戻し後、CPU監査result69016aeb/SOURCE_TARGET_REVIEW81dce4e3/旧plan/今回v3report/全code/blob/tokenizer/保存非生成再読の準備が通った場合だけ、同Jupyterで一回実行する。失敗時partial archive-only/モデル再試行0。終了後別CPU106真保存応答再読と全原本/新重み保全を行う。
+
+root=/workspace/analysis-aligned-v3-78-20261103、prepared=/workspace/analysis-aligned-v3-78-prepared-20261103。コードsemantic_units_aligned_v3_78_prepare.py/run.py/supervisor.py/collect.py、plan=semantic_units_aligned_v3_78_plan.json。比較は入力版の研究条件であり、他の同量control/未知盲検なしで単独因果・一般品質は認定しない。採否は理由4対照のmarker/parent/連体否定・独立不明、MD1/2 carrier・R01/R08copulaと既存53全保持/ROLE文章図により判断する。新RB2のNLLだけを生成再現としない。現時点は条件固定で実結果未確定。
+
+既存strict/typed witness/通常既定は緩めず、本人基準の役割/判断/選択・複数field/補足/比較・記録間再出現/変化と通常累積接続は残件。通常HTTP/DB/RN/配置/Pod管理0、GPUレンタル維持、STRUCTURE_MAP_DELTA_NONE/TECHNICAL_CREDIT/product_credit0、正式0/3・54.50％据置。Mashの現セッションで必要作業承認済み、逐次承認0。完了v3probe53/audit/旧78runを再起動しない。

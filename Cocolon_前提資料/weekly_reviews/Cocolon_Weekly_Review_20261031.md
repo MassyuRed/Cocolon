@@ -2498,3 +2498,12 @@ NV04は結果root重複とWRITTEN_UNKNOWNの親不正という意味/形式未�
 ## 109. 11/3 — 既存78教材のv3入力/実学習label境界をCPU監査する
 
 [条件/コード/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-v3-teachers78-audit-plan-20261103)。旧78source/target/106順を全不変とし、API58cのv2/v3 strict候補156/ROLE8保存再読、新RB2typed拒否4を検査。旧実runのrenderer ASTとtensor/gold構築を抽出し、実tokenizer prefix/assistant EOS・CPU tensor78保存reload・prompt mask/shift後gold/tail位置/contextを確認する。モデルforward/loss/生成の成功証明とは別。CPU180秒上限、GitHub固定/読戻し後に同Jupyterで一回、partialもarchive-only保全して再実行しない。結果は未確定、モデル/生成/学習/NLL/新教師0、監査自身の新GPU選定0。通常owner/型/受口/HTTP/DB/RN/配置不変、STRUCTURE_MAP_DELTA_NONE。
+
+
+## 110. 11/3 — 旧78教材のv3 CPU監査完了、正解と実label境界を保持
+
+[全結果/原本](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-v3-teachers78-audit-result-20261103)。固定code/API58c/旧plan/実rendererで27.258231秒/exit0、archive0。旧78source/target/106順/元dict不変、新旧候補156/T4ROLE8保存reader再読、RB2typed拒否4、実tokenizer/78CPU tensor保存reload・prefix/EOS/promptmask/shiftgold/tail位置全成功。context最低余裕6148/生成4342。モデルforward/loss同値や生成品質とは別。source意味全読78/88field/291unitで指定境界の直接矛盾0、新教師/raw教師化0。元261member CRC/全bytes-SHAを外部照合し[全原本・教材全読・実tensor整合監査](https://chatgpt.com/library?file_id=libfile_c7ab2f40bdc081918ccf09e991ed4028&account_id=personal)（944,945bytes/7member/SHA256 f55dc65148ca8b1d7509b7ed1055ca7646a82f7a61974c183db05382a51704be）。モデル/生成/更新/NLL0、新GPU選定はこの監査自身にはない。通常HTTP/DB/RN/配置不変、STRUCTURE_MAP_DELTA_NONE。
+
+## 111. 11/3 — 旧78の学習messagesをv3へ整合する有限比較を選定
+
+[条件/コード/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-plan-20261103)。旧78source/target/106順と初期9dc/config4776、CE/LR/seed/clip/dropoutは保持し、messagesだけv3へ揃える。9dcを研究初期値へroot明示選定、9e自動利用/新教師0。before53は完了v3probe53 after実原本を厳密再利用し新before0。新after53/前後v3NLL156/106更新/2load/1200秒（外1190+kill10、要求23/context8192/maxnew2048）、旧18file保持/112保存reload、別CPU106保存再読/全原本・重み保全、失敗時archive-only/再試行0。GitHub固定/読戻しとCPU監査69016aeb/原文意味監査81dce4e3/準備成功後に一回実行、現時点実結果未確定。旧v2 NLL同値を要求せず、新版で両測定。通常既定/strict/typed scope/API/DB/RN/配置不変、STRUCTURE_MAP_DELTA_NONE、本人基準/記録間関係/通常累積接続は未完。GPUレンタル維持、正式0/3・54.50％据置。

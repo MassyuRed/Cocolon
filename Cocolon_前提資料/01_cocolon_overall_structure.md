@@ -1,4 +1,4 @@
-> **11/3・分析の最新結果（第9回§108）：** 同9dc/v2→v3の学習0/53新stopを474.553142秒/exit0で完了。明記理由4対照の2例を改善する一方、残る2例は未達、CQ04のscope重なり・MD01/02のcarrier・R01肯定copula誤modifierが新たに発生。候補52→51/53、正常typed ROLE10→9、旧22JSON再現22/22保持。全53原文/前後/19ROLEと106保存再読、元585memberのCRC/全bytes-SHAを照合・保全。新版は通常/次学習へ不採用、完了53を再実行しない。[全結果・原本・再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-v3-probe53-result-20261103)。private v3/profile/stateの既実装以外の通常構造は不変、本人基準/記録間接続は未完。次は旧78教材のv3入力整合をCPU監査してから有限条件を選定、追加GPU未固定。
+> **11/3・分析の最新（第9回§110–111）：** v3の53比較は理由2例改善と新退行で未採用。旧78教材の意味境界に直接矛盾0を確認し、同JupyterのCPU監査は27.258231秒/exit0で全78・候補156/ROLE8保存再読・実tokenizer/78CPU tensorのprefix/EOS/label境界を通過。次は旧78source/target/106順・初期9dcを保持し、学習messagesだけv3へ揃える有限比較を固定。before53は完了v3実原本再利用、新after53/156NLL/106更新/2load/1200秒、準備成功後に一回だけ実行する。[原本/条件/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-plan-20261103)。現時点は実結果未確定、通常採用/HTTP/DB/RN/配置は不変、本人基準/記録間接続は未完。
 
 > **11/1・7101本人確認済み（第9回§43）：** RN7464f858のiOS #71/run41283646380/job124780456306は署名Archive・写真目的文検査・IPA・TestFlight Uploadの全工程success。Mashが7101を反映し、今回依頼した修正の完了を確認した。起動待ち、Home全体行動削除、Ranking撤去、設定以外のガイド同期、新PieceのEmlisロゴを含む。こころ天気は今/日週月/履歴/未読/通知/tutorialを従来どおり維持。API3407402/dep-dbjebcflk1mc7390mnr0は07:11:03 UTC Live、health/bootstrap200・private5ON/public3OFF。API製品同一blobのd43cabcd native PostgreSQL CI41283815884は全step成功。RNの旧V4 metrics19失敗とlegacy canvas13reportは残る。依頼UIの本人確認を、全製品の品質/正式商品受入れへ広げない。GPU再起動0。
 
@@ -7507,3 +7507,6 @@ API86d19b6d、STRUCTURE_MAP_DELTA_PRESENT。通常の累積mapは不変。新ana
 
 
 11/3・次入力監査の地図：trialのsemantic_units_v3_teachers78_audit.pyは既存78source/target/106順を不変にして、新旧strict/保存readerとv3学習renderer・CPU tensor/label/shift境界/終端を確認するCPU専用helper。audit/archive二段で完了又はpartial原本を保全し、モデルforward/生成/学習は行わない。最新の結果・再開はtrial/weekly§109以降。通常owner/型/受口/DB/RNは追加変更しない、STRUCTURE_MAP_DELTA_NONE。
+
+
+11/3・v3学習入力整合の地図：trialのsemantic_units_aligned_v3_78_prepare.py/run.py/supervisor.py/collect.pyは、旧78source/target/106順と旧9dcの研究初期を保持し、v3へ学習messagesを揃える比較専用。CPUaudit原本・今回v3 before53を再利用し、106更新/156NLL/53新生成/112tensor保存reload/106保存応答再読/全原本保全を扱う。新商品owner/型/既定route/受口/DB/RNは追加しない、STRUCTURE_MAP_DELTA_NONE。最新条件・結果はtrial/weekly§110以降。
