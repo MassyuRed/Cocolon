@@ -3305,3 +3305,11 @@ state schema=cocolon.cmee.analysis_model_written_role_state.v1、exact rootはsc
 
 
 11/3 role74の後続比較では上記written-role state/fileと既存wireを変更していない。既出対応役割1→3/4とT4教示再現4/4の保存artifactは、元response/原source/typed graph/同一文章図へ束縛し、Engine/両compiler/両authorなしの実file再読で一致。旧34の5退行により新重みは通常/次学習初期値へ未採用。[確定結果・原本・再開点](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-written-role74-result-20261103)。新保存schema/通常契約の追加0、今回研究のSTRUCTURE_MAP_DELTA_NONE。
+
+
+<a id="analysis-semantic-boundaries-state-20261103"></a>
+## 2026-11-03 — semantic_boundaries.v2の明示private identity
+
+API dc05dc35。既存AnalysisModelQuotedParentUnitsInputのprompt_versionにsemantic_boundaries.v2を追加。同じbaseline user materialと既存wireを使い、request identityへ版を入れsystem追記のmessages hashへ束縛する。新stateは `cocolon.cmee.analysis_model_units_quoted_parents_state.semantic_boundaries.v2`、既存のschema_version/request_ref/response/candidate_id/graph/text/diagram＋prompt_versionを保持する。既存累積unit file wrapperは不変。ROLE file/stateも既存版のprompt_version束縛を使い、既存graph/文章図をEngine/compiler/authorなしで検証復元する。
+
+旧baseline/category/materialのstate/schema/keys/messages/refは変更しない。別版のresponse/hash/ref/stateを新版へ付替えず拒否する。新論理型・HTTP/DTO/DB/RN schemaなし。通常既定へ有効化せず、[一回比較と実採否](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-boundaries46-plan-20261103)は別に記録する。private保存版のみSTRUCTURE_MAP_DELTA_PRESENT。

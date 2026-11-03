@@ -1073,3 +1073,11 @@ Mashが既に申し出ている観測会は、この読み取り方の教材を�
 86更新/50新stop/148測定/3load、620.929717秒/exit0。旧70/78順/末尾18を保持したが、旧34に5退行（29同一）が生じ、新73ee8d/072622は通常/次初期値へ未採用。R02否定を維持しR03肯定/R04否定が全文根拠付きROLE1node/4gap/辺0・文章/図へ到達、対応1→3/4、T4=4/4教示再現。R01は誤copula修飾が残り、scope外4件のtyped拒否を維持。候補受理は一般意味正解を示さない。
 
 92保存応答・87候補/5拒否・role8/16拒否、保存readerのEngine/両compiler/両author禁止で再読一致。元718member/112重み全bytes-SHA照合・private保存済み。[全文結果・原本](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-written-role74-result-20261103)。次はR01境界と旧5退行を原source/既存教師へ照合し不足を特定する。単純dose/order反復や不採用重みへの自動追学習へ戻さず、本人基準の判断/選択・複数field/補足/比較・記録間関係・通常累積保存の既存残件を維持する。通常product構造の変更なし、STRUCTURE_MAP_DELTA_NONE。
+
+
+<a id="analysis-semantic-boundaries-input-20261103"></a>
+### 11/3 — 明示offlineの意味境界指示版（通常接続のscopeは不変）
+
+API dc05dc35の既存quoted-parent Inputにsemantic_boundaries.v2を追加し、baselineと同じuser payloadへsystem原理だけを追記する。単語列挙だけでは曖昧だった対象/述語、否定/不明/時間、反復不明親、役割/copula等を区別する候補。元raw修復やsource-only通常化でモデル誤りを隠さない。旧3版のmessages/ref/state、strict、typed-role witness/1record/1field/明記一節、既存文章/図は保持。新request identityとprivate saved-state版へ分離、通常ensure/HTTP/DB/RNは未変更。STRUCTURE_MAP_DELTA_PRESENTはprivate版だけ。
+
+保存73ee/072622を指示差の研究用に明示選定し、baseline before46を再利用、新46生成/1load/学習0/900秒で旧保持とrole表示を一回比較する。[条件・実装・再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-boundaries46-plan-20261103)。成功前に通常採用/一般本人理解/記録間関係の完成へ換算しない。

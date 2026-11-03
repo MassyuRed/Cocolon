@@ -3316,3 +3316,19 @@ GPU実行はCPU成功後に一回完了。全46 source/rawの読解により、�
 
 
 同trialの追加 `semantic_units_written_role74_results.json` は本文なし確定結果、役割の局所改善/旧5退行/非採用/92保存応答再読/元718member・112重みのidentityとprivate原本参照を保持する。上表の5scriptと合わせて今回のpublic研究file6件。外部回収helper/recovery identity/後読解review/全sourceはprivate archive内へ保持し、通常product ownerへ追加しない。[実結果と現在の再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-written-role74-result-20261103)、weekly§94、STRUCTURE_MAP_DELTA_NONE。
+
+
+<a id="analysis-semantic-boundaries-files-20261103"></a>
+## 2026-11-03 — 意味境界指示版と一回比較のfile地図
+
+API dc05dc35、通常product owner追加なし。既存 `semantic_admission.py` が明示semantic_boundaries.v2のsystem追記/newref/専用保存state、既存 `analysis_cumulative_service.py` が明示prepare/build/save/reload同版dispatch、既存 `ai/tests/test_analysis_model_quoted_parent_units.py` が旧互換/版束縛/改変拒否/非生成再読を検査する。元strict/意味型/graph/Engine/HTTP/DB/RN/通常既定は不変。private版のみSTRUCTURE_MAP_DELTA_PRESENT。
+
+既存trial `observation_learning/trials/2026-11-01-analysis-model-fields/` の追加3研究file：
+
+| file | 責務 |
+| --- | --- |
+| semantic_boundaries46_prepare.py | 同73eeの旧46原本・旧baseline互換・new systemだけの差・同user本文・実strict/保存非生成再読/tokenizerをCPU照合 |
+| semantic_boundaries46_run.py | 学習0/保存73ee/1load/新46生成/900秒の一回比較、元raw保持とtyped-role/保存再読 |
+| semantic_boundaries46_supervisor.py | 固定source/SHA/API/旧6adapter対を照合、890+10秒上限/partial/終了・compute・manifest保全 |
+
+結果・再開点は[trial](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-boundaries46-plan-20261103)、weekly§95。今回比較を新しい通常subsystemや一般意味品質へ昇格しない。

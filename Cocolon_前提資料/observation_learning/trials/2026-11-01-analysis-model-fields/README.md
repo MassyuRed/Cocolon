@@ -1106,3 +1106,19 @@ rootと同環境read-only担当が全46 source/before/afterと全8採用role保�
 再開は本節/結果JSON/原本、`/workspace/analysis-written-role74-20261103/run.exit`と`result/report.json`を先に確認し、完了runを重複起動しない。次は残るR01のcopula/役割境界と旧5退行を原source・既存教師へ照合し、不足を特定してから次条件を決める。単純なdose/order変更や不採用重みへの自動追学習へ戻さない。本人基準の判断/選択、複数field/補足/比較、記録間の再出現/変化、通常累積保存への接続を既存残件として継続する。Mashの読み/問い/修正の新教示は未取得であり、観測会終了扱いにしない。
 
 通常source/owner/型/HTTP/DB/RN/Render/Supabase/稼働/配置/Pod管理変更0。GPUレンタル状態は維持。STRUCTURE_MAP_DELTA_NONE（隔離研究のみ）、primary TECHNICAL_CREDIT/product_credit0。全体現在地/Analysis map/全file地図/最新weekly§94と既存設計参照を同期。Codex Work/GPT-6 root単一writer＋同環境read-only確認で、独立Pro/Ultra/humanの商品受入れではない。
+
+
+<a id="analysis-semantic-boundaries46-plan-20261103"></a>
+## 11/3 — 同じ保存重みで意味の区別を明文化し、追加学習なしで46件比較
+
+role74の旧5退行とR01を、原source/旧74教師/指示へ照合した。MX02には同じ入力の正解があり、SCの述語/対象対比・UQの反復不明親・AT32/T4のcopulaにも直接の矛盾教師は見つからない。教材なしや唯一の学習原因とは断定しない。一方、baseline指示はCONTENT_TARGET/ROLE/WRITTEN_MODIFIER等の意味上の区別が主に列挙に留まる。次はdose/orderや追加学習を変えず、既存意味責務を指示へ明文化する差を一回比較する。source-only有限文法の通常化でモデル誤りを迂回する別案へは移らない。
+
+API [dc05dc35](https://github.com/MassyuRed/mashos-api/commit/dc05dc358d1c44ce47fd844f6041d74f1f74fe6a)の既存semantic_admission/analysis_cumulative_service/既存testだけに明示offline `semantic_boundaries.v2`を追加。元systemへ一般原理を追記するだけで、user payload/原source/quote strict/typed-role witness/既存作者/通常ensureは変えない。動詞の一部と対象、当該述語の否定と引用内容の否定、推測と時点、反復不明の一意な親、役割と性質、過去copulaと修飾、逐語引用・主体表記を区別する。個別source/失敗rawの修復・評価文の再掲・新teacher化はしない。旧baseline/category/materialのmessages/ref/stateを保持、新refと専用saved-state版を分離。型/Engine/HTTP/DB/RN/通常既定を追加しない。
+
+保存73ee8d/072622を、指示差だけの研究比較用にrootが明示選定する。通常採用や次学習初期値の選定ではない。role74 after46を、owner/full snapshot/request/messages/raw/保存artifactで照合してbaseline46として再利用する。新版は同じuser payload・同じsource・同じ重みで新46生成/1load/追加学習0、各23秒/context8192/max_new2048、内部900秒/外側890+10秒の一回。旧34/R8/T4は全て既見又は教示再現であり、盲検/Mash教示/一般品質率ではない。全46の意味・旧保持・役割表示と実file再読を確認し、失敗でも元raw/partialを残す。再試行/追加epoch/raw補修/受口緩和なし。前回単価$0.58/hなら処理按分上限$0.145、準備/回収/保持別・現単価未再確認。
+
+実行scriptは `semantic_boundaries46_prepare.py`（before46/新版入力/実strict/保存再読/tokenizer照合）、`semantic_boundaries46_run.py`（固定重みで一回46生成/typed-role接続）、`semantic_boundaries46_supervisor.py`（source/API/SHA/旧6adapter対/一回上限/原本保全）。CPU対象testと準備が成功し、GitHub元bytes読戻し後にだけGPUを一回起動する。再開時は `/workspace/analysis-semantic-boundaries46-20261103/result/report.json` と `run.exit`、test終了値を先に確認し、rootがあれば重複起動しない。
+
+検査起動用の初回2scriptは改行escape不備によりparse前停止、API setup/pytest/モデルload/生成/更新0。元code/logを保持し、構文検査済みfileをSHA照合してJupyterへ渡す方式へ切り替えた。実test/GPUの結果とは分けて記録する。新test結果・比較品質はこの条件固定時点では未確定。root単一writer＋同環境read-only確認、独立Pro/Ultra/human受入れではない。
+
+本人基準の判断/選択、複数field/補足/比較、記録間再出現/変化、通常累積保存への一般接続という既存残件を維持。通常API/DB/RN/Render/Supabase/稼働/配置/Pod管理変更0、GPUレンタル維持。STRUCTURE_MAP_DELTA_PRESENTはprivate prompt/state版のみ、生成比較はNONE、product_credit0。

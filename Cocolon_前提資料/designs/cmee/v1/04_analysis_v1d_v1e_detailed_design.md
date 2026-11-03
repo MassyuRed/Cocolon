@@ -1887,3 +1887,9 @@ Mashの「選択カテゴリを使う接続を直す」指示により、通常�
 
 
 11/3 role74の研究結果：上記意味採用・保存契約を変えず、既出対応4件は1→3が同じROLE/文章/図/非生成再読へ到達。T4は4/4教示再現。一方、旧34に5退行/R01未達があり新73ee8d/072622は通常/次学習初期値へ未採用。通常owner/型/入力版/API/DB/RN・補足/比較/累積保存のscope拡張0、STRUCTURE_MAP_DELTA_NONE（研究比較のみ）。[実結果・原本・再開点](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-written-role74-result-20261103)を現在の採否として優先し、初回8件の実績を上書きしない。
+
+
+<a id="analysis-semantic-boundaries-input-20261103"></a>
+## 2026-11-03 — 同じquoted-parent契約の意味境界指示版
+
+API dc05dc35のsemantic_boundaries.v2は、既存Inputの明示private prompt版だけを追加する。baselineと同じuser payload/原sourceへ、述語と対象・否定scope・不明親・相対時・役割/copula等の一般原理をsystem追記する。旧3版のmessages/ref/state/保存readerは保持し、新ref/private state版へ分離。wire/schema・既存compiler/唯一author・typed-role完全source witness/対応scopeを変更しない。通常ensure/HTTP/DB/RNは選ばない。候補が正しい意味を読めるかは[新46一回比較](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-boundaries46-plan-20261103)で確認し、指示追加そのものを意味品質の改善にしない。private入力版のみSTRUCTURE_MAP_DELTA_PRESENT。

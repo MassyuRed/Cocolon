@@ -2378,3 +2378,13 @@ plain CE/LR1e-5/clip1/seed20261111、要求23秒、内部900秒/外側890+10秒�
 別CPU processで92応答：87候補復元/5拒否、role8復元/16拒否を確認。保存readerのEngine/両compiler/両author禁止、新load/生成/更新0。元718member/112重み全bytes-SHAを外部照合し、[全原本](https://chatgpt.com/library?file_id=libfile_e120a914f9348191b7f065b419e1693b&account_id=personal)へ保存（15,687,638bytes/729member/SHA5d642279…）。原report PENDING_RAW_READ bytesを保全し、後読解の採否は別review/結果JSON。API88078不変、直前657PASS/2SKIPを継承し今回再testと偽らない。
 
 次はR01境界と旧5退行を原source/既存教師へ照合し不足を特定してから次条件を固定する。単純dose/order反復/不採用重み自動追学習/完了run重複/出力補修/受口緩和0。本人基準の判断/選択・記録間再出現/変化・通常累積保存への一般接続は残件。全体現在地/Analysis map/全file地図/trial/設計参照を同期。通常source/API/DB/RN/Render/Supabase/稼働/配置/Pod管理0、GPUレンタル維持、正式0/3・54.50％据置。処理按分約$0.100039@前回確認$0.58/h（準備/回収/保持別）、STRUCTURE_MAP_DELTA_NONE/TECHNICAL_CREDIT/product_credit0。Codex Work/GPT-6 root＋同環境read-only確認、独立Pro/Ultra/human受入れではない。
+
+
+<a id="analysis-semantic-boundaries46-plan-20261103"></a>
+## 95. 11/3 — 意味の区別を明文化した指示差を追加学習なしで比較
+
+[固定条件・実装・再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-boundaries46-plan-20261103)。§94の旧5退行/R01を原source/旧74教師へ照合。MX02は正解教師が既にあり、SC/UQ/AT32/T4にも直接矛盾なし。教材不足や唯一原因とは断定しない。promptで未明文化だった述語/対象、当該述語の否定、相対時/推測、反復不明親、役割/copula/修飾、逐語主体を明示する候補へ進む。追加dose/order/追学習ではない。
+
+API dc05dc35の既存2owner/既存testだけへsemantic_boundaries.v2を明示offline追加。system追記のみ・user本文同一、旧baseline/category/materialのref/messages/stateとstrict/role witness/通常ensureは保持。新ref/private saved-stateを分離。保存73ee/072622は指示差の研究用に明示選定し、通常/次学習初期値採用ではない。role74 after46を全文同一性確認で再利用、新46/1load/学習0、23秒/900秒上限の一回。各bodyと旧保持・typed map/保存を実読し、未知盲検/一般率へ換算しない。
+
+初回test launcher2件は改行escape構文不備でsetup/pytest/GPU前に停止。元log保持、構文検査済み元file＋SHA転送へ変更。対象test/CPU準備成功、GitHubコード読戻し後にGPU一回だけ実行する。モデル再試行/追加epoch/補修/受口緩和0。通常HTTP/DB/RN/配置/Pod管理不変、private入力版だけSTRUCTURE_MAP_DELTA_PRESENT、研究比較はNONE。全体残件・正式0/3・54.50％は据置。
