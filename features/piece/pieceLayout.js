@@ -21,7 +21,7 @@ export const PIECE_BITMAP_PREVIEW_VERSION = 'piece.rn_bitmap_preview.prototype.v
 // External saved identity is distinct from the immutable measurement profile.
 export const PIECE_BITMAP_RENDERER_VERSION = 'piece.rn_bitmap_renderer.ios.v1';
 export const PIECE_BITMAP_RENDERER_V2_VERSION = 'piece.rn_bitmap_renderer.ios.v2';
-const nativeThemes = {
+export const PIECE_THEME_COLORS = {
   soft_paper: { canvas: '#F6F1E8', surface: '#FFFDF8', text: '#111827', secondary: '#4B5563',
     accent: '#800020', border: '#D7D2C9', branding: '#800020', vector_end: '#FFFFFF' },
   quiet_night: { canvas: '#0B1120', surface: '#111827', text: '#F9FAFB', secondary: '#CBD5E1',
@@ -97,7 +97,7 @@ function preparePieceNativeArtifact(p, key, candidateProfile = PIECE_NATIVE_PREV
     lineRatio: nativeLineRatios[p.format_type], paragraphRatio: p.format_type === 'short_essay' ? 0.65 : 0,
     brandingText: p.renderer_version === PIECE_BITMAP_RENDERER_V2_VERSION ? 'Emlis' : 'Cocolon',
     alignment: p.format_type === 'quote' ? 'center' : 'left',
-    colors: { ...nativeThemes[recipe.theme.theme_id] }, brandingMode: recipe.branding.branding_mode });
+    colors: { ...PIECE_THEME_COLORS[recipe.theme.theme_id] }, brandingMode: recipe.branding.branding_mode });
 }
 
 export function createPieceNativeMeasurement(input) {
