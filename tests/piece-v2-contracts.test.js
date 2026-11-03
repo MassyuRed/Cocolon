@@ -92,7 +92,9 @@ function load({ send, session, native = {} } = {}) {
   });
   // Evaluate the actual application module. Only ESM linkage is replaced;
   // the request/response/error/session implementation is not reimplemented.
-  vm.runInContext(source.replace(dependency, '').replace(/^import .*;$/gm, '').replace(/^export /gm, '') +
+  const palette = fs.readFileSync(path.join(path.dirname(sourcePath), 'piecePalette.js'), 'utf8')
+    .replace(/^export /gm, '');
+  vm.runInContext(palette + '\n' + source.replace(dependency, '').replace(/^import .*;$/gm, '').replace(/^export /gm, '') +
     '\n globalThis.testApi = { requestPiecePreview, requestPiecePreviewVisualChange, requestPiecePreviewCancellation, requestPieceSave, PieceApiError };', context, { filename: sourcePath });
   return { ...context.testApi, calls, sessions };
 }
@@ -385,6 +387,42 @@ for (const tier of ['free', 'plus', 'premium']) {
     assert.equal(api.calls.length, 1);
   });
 }
+const expandedThemes = ['soft_paper', 'quiet_night', 'rose_paper', 'rose_berry', 'sand_umber', 'sand_olive',
+  'mist_slate', 'mist_teal', 'lavender_ink', 'lavender_plum', 'forest_mint', 'ocean_ice'];
+function expandedPreview() {
+  const raw = preview('quote');
+  raw.visual_recipe.theme.theme_id = 'rose_berry';
+  raw.visual_recipe_hash = digest(JSON.stringify(canonical(raw.visual_recipe)));
+  raw.plan_capabilities.theme_ids = [...expandedThemes];
+  raw.renderer_version = 'piece.rn_bitmap_renderer.ios.v2';
+  return raw;
+}
+test('a negotiated palette preview accepts the complete ordered paid list, and preserves recipe and hashes', async () => {
+  const raw = expandedPreview();
+  const api = load({ send: async () => ({ status: 200, json: async () => raw }) });
+  const received = await api.requestPiecePreview(request(), options());
+  assert.deepEqual(copy(received), raw);
+  assert.ok(Object.isFrozen(received.plan_capabilities.theme_ids));
+});
+for (const [name, change] of [
+  ['missing', raw => { raw.plan_capabilities.theme_ids.pop(); }],
+  ['reordered', raw => { raw.plan_capabilities.theme_ids.reverse(); }],
+  ['unknown', raw => { raw.plan_capabilities.theme_ids[2] = 'invented'; }],
+  ['new theme outside advertised list', raw => {
+    raw.plan_capabilities.theme_ids = ['soft_paper', 'quiet_night'];
+  }],
+  ['expanded list on Free', raw => {
+    Object.assign(raw, preview());
+    raw.plan_capabilities.theme_ids = [...expandedThemes];
+  }],
+]) test(`palette preview rejects ${name}`, async () => {
+  const raw = expandedPreview();
+  change(raw);
+  raw.visual_recipe_hash = digest(JSON.stringify(canonical(raw.visual_recipe)));
+  const api = load({ send: async () => ({ status: 200, json: async () => raw }) });
+  await assert.rejects(api.requestPiecePreview(request(), options()), isCode('PIECE_TEMPORARILY_UNAVAILABLE'));
+});
+
 const badPlanMetadata = [
   raw => { delete raw.quota; }, raw => { delete raw.plan_capabilities; },
   raw => { raw.quota = null; }, raw => { raw.plan_capabilities = []; },
@@ -697,8 +735,22 @@ test('quota exhaustion is a save error and never a preview rejection or save adm
   await assert.rejects(api.requestPiecePreview(request(), options()), isCode('PIECE_TEMPORARILY_UNAVAILABLE'));
 });
 
-for (const supported of [false,true]) test(`compiled bitmap bridge advertises Emlis capability only when supported (${supported})`, async () => {
-  const h = load({native:{Platform:{OS:'ios'},NativeModules:{PieceTextMetrics:{bitmapRendererVersion:supported?'piece.rn_bitmap_renderer.ios.v2':undefined}}}});
+for (const [os, rendererVersion, supported] of [
+  ['ios', undefined, false],
+  ['ios', 'piece.rn_bitmap_renderer.ios.v1', false],
+  ['ios', 'piece.rn_bitmap_renderer.ios.v2', true],
+  ['android', 'piece.rn_bitmap_renderer.ios.v2', false],
+]) test(`only compiled iOS Emlis renderer opts into the expanded palette (${os}, ${rendererVersion})`, async () => {
+  const h = load({
+    native: { Platform: { OS: os }, NativeModules: { PieceTextMetrics: { bitmapRendererVersion: rendererVersion } } },
+    send: async (url, init) => ({ status: 200, json: async () => url.endsWith('/save')
+      ? saveReceipt() : init.method === 'PATCH' ? visualReply() : preview() }),
+  });
   await h.requestPiecePreview(request(), options());
-  assert.equal(h.calls[0][1].headers['X-Piece-Renderer'], supported ? 'piece.rn_bitmap_renderer.ios.v2' : undefined);
+  await h.requestPiecePreviewVisualChange(visualRequest(), visualOptions());
+  await h.requestPieceSave(saveRequest(), options());
+  for (const [, sent] of h.calls) {
+    assert.equal(sent.headers['X-Piece-Renderer'], supported ? 'piece.rn_bitmap_renderer.ios.v2' : undefined);
+    assert.equal(sent.headers['X-Piece-Palette'], supported ? '2' : undefined);
+  }
 });

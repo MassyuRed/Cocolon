@@ -1,5 +1,5 @@
 /** B13 RN-first preview geometry. No capture, persistence or save authority.
- * Catalog values mirror PCE-5 / backend piece_v2_visual.py v1. Native wrapping
+ * Catalog values mirror PCE-5 / backend piece_v2_visual.py. Native wrapping
  * uses B9 measured row selection; native/device equivalence remains unaccepted.
  * onTextLayout supplies line boxes, NOT glyph availability/ink bounds. Thus
  * geometry_checked never means layout_state=fit or canSave/canExport.
@@ -7,6 +7,7 @@
 import { readPiecePreviewDisplay } from './piecePreviewModel';
 import { readPieceOwnerDisplay } from './pieceOwnerModel';
 import { Platform } from 'react-native';
+import { PIECE_THEME_COLORS } from './piecePalette';
 
 export const PIECE_NATIVE_PREVIEW_VERSION = 'piece.rn_native_preview.prototype.v3';
 export const PIECE_NATIVE_PREVIEW_V4_VERSION = 'piece.rn_native_preview.prototype.v4';
@@ -21,12 +22,6 @@ export const PIECE_BITMAP_PREVIEW_VERSION = 'piece.rn_bitmap_preview.prototype.v
 // External saved identity is distinct from the immutable measurement profile.
 export const PIECE_BITMAP_RENDERER_VERSION = 'piece.rn_bitmap_renderer.ios.v1';
 export const PIECE_BITMAP_RENDERER_V2_VERSION = 'piece.rn_bitmap_renderer.ios.v2';
-export const PIECE_THEME_COLORS = {
-  soft_paper: { canvas: '#F6F1E8', surface: '#FFFDF8', text: '#111827', secondary: '#4B5563',
-    accent: '#800020', border: '#D7D2C9', branding: '#800020', vector_end: '#FFFFFF' },
-  quiet_night: { canvas: '#0B1120', surface: '#111827', text: '#F9FAFB', secondary: '#CBD5E1',
-    accent: '#D4AF37', border: '#334155', branding: '#D4AF37', vector_end: '#1E293B' },
-};
 const nativeScales = {
   short_essay: { '4:5': [48, 44, 40, 36], '9:16': [52, 48, 44, 40] },
   quote: { '4:5': [72, 64, 56], '9:16': [80, 72, 64] },

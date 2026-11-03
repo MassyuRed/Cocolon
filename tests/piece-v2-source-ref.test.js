@@ -31,7 +31,7 @@ function load({ send, session } = {}) {
       return session ? session(owner, sessions.length) : 'synthetic-session';
     },
   });
-  const source = ['pieceApi.js', 'piecePreviewModel.js', 'PieceCreateController.js'].map(name =>
+  const source = ['piecePalette.js', 'pieceApi.js', 'piecePreviewModel.js', 'PieceCreateController.js'].map(name =>
     fs.readFileSync(path.join(__dirname, '../features/piece', name), 'utf8')
       .replace(/^import .*;$/gm, '').replace(/^export /gm, '')).join('\n');
   vm.runInContext(source + '\nglobalThis.api={requestPieceSourceRef,requestPiecePreview,createPieceCreateController,readPiecePreviewDisplay};', context);

@@ -85,7 +85,7 @@ function previewUiHarness({ send, currentState = 'active', admitSave = false } =
   } };
   const context = vm.createContext({ React, AppState, AbortController, AppRuntimeContext: {},
     Date: class extends Date { static now() { return now; } },
-    Modal: 'Modal', View: 'View', Text: 'Text', ScrollView: 'ScrollView', Button: 'Button',
+    Modal: 'Modal', View: 'View', Text: 'Text', ScrollView: 'ScrollView', Button: 'Button', Pressable: 'Pressable',
     ActivityIndicator: 'ActivityIndicator', SafeAreaProvider: 'SafeAreaProvider', SafeAreaView: 'SafeAreaView',
     NativeModules: {}, Platform: { OS: 'ios' }, findNodeHandle: () => null,
     setTimeout: (callback, delay) => { const id = ++serial; timers.set(id, { callback, at: now + delay }); return id; },
@@ -93,7 +93,7 @@ function previewUiHarness({ send, currentState = 'active', admitSave = false } =
     apiFetch: async (...args) => { calls.push(args); return send ? send(...args) : pieceHttp(response()); },
     getAccessToken: async () => 'synthetic-ui-session',
   });
-  const pure = ['pieceApi.js', 'piecePreviewModel.js', 'PieceCreateController.js', 'pieceLayout.js', 'pieceRenderer.js'].map(file =>
+  const pure = ['piecePalette.js', 'pieceApi.js', 'piecePreviewModel.js', 'PieceCreateController.js', 'pieceLayout.js', 'pieceRenderer.js'].map(file =>
     fs.readFileSync(path.join(__dirname, '../features/piece', file), 'utf8')
       .replace(/^import .*;$/gm, '').replace(/^export /gm, '')).join('\n');
   vm.runInContext(pure + '\nglobalThis.displayReader = readPiecePreviewDisplay; globalThis.digestUnderTest = pieceUtf8Digest;', context);
@@ -369,7 +369,38 @@ function changedVisual(p, choice = { theme_id: 'quiet_night' }, delta = 1) {
   next.visual_recipe_hash = hash(JSON.stringify(canonical(next.visual_recipe)));
   return next;
 }
-const uiButton = (u, name) => u.nodes(u.tree()).find(n => n.type === 'Button' && n.props.accessibilityLabel === name);
+const uiButton = (u, name) => u.nodes(u.tree()).find(n => ['Button', 'Pressable'].includes(n.type) && n.props.accessibilityLabel === name);
+
+test('an expanded paid preview exposes all twelve themes and a selection changes only the recipe', async () => {
+  const original = response('quote');
+  original.visual_recipe_hash = hash(JSON.stringify(canonical(original.visual_recipe)));
+  original.renderer_version = 'piece.rn_bitmap_renderer.ios.v2';
+  original.plan_capabilities.theme_ids = ['soft_paper', 'quiet_night', 'rose_paper', 'rose_berry',
+    'sand_umber', 'sand_olive', 'mist_slate', 'mist_teal', 'lavender_ink', 'lavender_plum', 'forest_mint', 'ocean_ice'];
+  const chosen = 'ocean_ice';
+  const u = previewUiHarness({ send: async (url, opt) => {
+    if (opt.method !== 'PATCH') return pieceHttp(original);
+    assert.equal(JSON.parse(opt.body).visual_selection.theme_id, chosen);
+    return pieceHttp(changedVisual(original, { theme_id: chosen }));
+  } });
+  u.mount(); u.host.start(); await pieceTick();
+  const swatches = u.nodes(u.tree()).filter(node => node.props.testID?.startsWith('piece-theme-swatch-'));
+  assert.deepEqual(swatches.map(node => node.props.testID), original.plan_capabilities.theme_ids.map(id => 'piece-theme-swatch-' + id));
+  const roseSwatches = swatches.slice(2, 4).map(node => node.children[0].props.style);
+  assert.equal(roseSwatches[0].backgroundColor, roseSwatches[1].backgroundColor);
+  assert.notEqual(roseSwatches[0].color, roseSwatches[1].color);
+  const choices = u.nodes(u.tree()).filter(node => node.props.accessibilityLabel?.startsWith('テーマ：'));
+  assert.equal(choices.length, 12);
+  assert.ok(choices.every(node => typeof node.props.onPress === 'function'));
+  choices.at(-1).props.onPress(); await pieceTick();
+  const updated = u.read(u.host.controller.getView(), NOW).preview;
+  assert.equal(updated.visual_recipe.theme.theme_id, chosen);
+  assert.equal(updated.piece_text_hash, original.piece_text_hash);
+  assert.equal(updated.content_payload_hash, original.content_payload_hash);
+  assert.equal(updated.preview_revision, 2);
+  assert.equal(u.calls.length, 2);
+  u.host.componentWillUnmount();
+});
 
 test('visual controls send current values, replace only recipe/revisions, and announce the update', async () => {
   const original = response('quote'); let current = original;

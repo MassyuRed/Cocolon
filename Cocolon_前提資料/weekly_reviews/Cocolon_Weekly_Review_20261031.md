@@ -2969,3 +2969,13 @@ runner=material_v5_negscope_trial.py、SHA d2090f2c9fc5ee4f930b05338124673b33a2e
 §138の固定runner（SHA256 1fc65428f0772a017cfe71d2443ebf32d97e98137e851d2888eab4e645aa27e6）を変更せず、CUDAを隠したローカル環境で実行。API基点 ded0586 と固定overlay、Qwen3.5-4Bの固定リビジョンの実tokenizer・4依存pinを照合し、CPU_PASSED_NO_MODEL（10.12秒）。16件すべての候補の保存再読、N/Cの10件すべてのtyped保存再読、6引用箇所のみ変更、元90の不変、EOS・長さ上限（最大prompt 2810、全長3008）を確認。前回30件は候補29／typed18で保存bytes一致。CPU manifest 202件を再照合。モデルload／forward 0。
 
 [CPU検証原本](https://chatgpt.com/library?file_id=libfile_d25d96bfbfb48191a8d63a5031d5d525&account_id=personal)（ZIP SHA256 62735849748036a41714c8478d14a6b336e5464162ed71ab1f4020892d8f8211）と[復元用入力](https://chatgpt.com/library?file_id=libfile_d3eae2f253b48191a5d513ffc9f4c39d&account_id=personal)を保存。指定Podへはブラウザの再初期化もタイムアウトし、Pod稼働・GPUは未確認。次は接続を回復し、固定API・モデル重み・依存pin・CPU manifestをPod側で照合して§138の一回試行を実行する。CPU検証は完了済み。新規学習・新規生成・採用判定は未実施。STRUCTURE_MAP_DELTA_NONE（分離研究のCPU検証）、商品API・配置・DB・Pod管理の変更なし。
+
+
+<a id="piece-palette-expansion-20261104"></a>
+## 140. 11/4 — Pieceの配色を12組へ拡張する実装候補
+
+Mashの続行指示に基づき、Pieceの有料向け配色選択を進めた。Plus／Premiumで既存2組に10組を追加する。背景と文字色の組を直接選べる色見本を作成画面に並べ、配色名と描画色を本人履歴・詳細・画像出力まで共通化した。ローズ、サンド、ミスト、ラベンダーには同じ背景で文字色が異なる組を用意した。Freeの固定配色と、各プランの画像比率・ロゴ・保存回数は従来どおり。任意色の指定は対象外。
+
+対応iOSアプリは `X-Piece-Palette: 2` で拡張対応を伝える。保存は既存のテーマID、版、レシピとハッシュを使用する。旧版の履歴は対応する旧2配色をページング前に抽出する。新配色の保存済みPieceの再表示・画像出力には対応アプリが必要。旧保存済み画像の配色を変更する移行は行わない。
+
+今回の変更はアプリ・API・移行SQLの候補まで。まとめビルド時は、Supabase移行とRenderの対応APIを先に反映し、新ビルドで旧・新配色の作成・再表示・写真保存を確認する。今回は本番反映、ビルド、配布、実機確認なし。詳細は[全機能・全状態](../00_cocolon_current_product_and_state.md#6-piece--本人の意味を他者へ伝える)と[Piece構造](../current_structure/02_piece_current_structure.md)。

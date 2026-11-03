@@ -160,6 +160,7 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
     performance: { now: () => monotonic },
     Date: class extends Date { static now() { return now; } } });
   const modules = [
+    ['features/piece/piecePalette.js', ['PIECE_THEME_COLORS', 'PIECE_LEGACY_THEME_IDS', 'PIECE_THEME_IDS', 'PIECE_VISUAL_CATALOG_V1']],
     ['features/piece/pieceApi.js', ['PieceApiError', 'readPiecePreviewSnapshot', 'readPieceOwnerSnapshot']],
     ['features/piece/piecePreviewModel.js', ['readPiecePreviewDisplay', 'verifyPieceArtifactHashes']],
     ['features/piece/pieceOwnerModel.js', ['readPieceOwnerDisplay']],
@@ -2964,4 +2965,51 @@ test('Emlis bitmap brand is measured and retained after eight seconds without re
   assert.equal(h.card.bitmapArtifact, artifact);
   assert.equal(fit.isCurrent(p, h.token), true);
   h.card.componentWillUnmount();
+});
+
+test('all expanded palettes keep readable colors through preview, saved detail and export drawing', async () => {
+  const version = 'piece.rn_bitmap_renderer.ios.v2';
+  const additions = ['rose_paper', 'rose_berry', 'sand_umber', 'sand_olive', 'mist_slate', 'mist_teal',
+    'lavender_ink', 'lavender_plum', 'forest_mint', 'ocean_ice'];
+  const themeIds = ['soft_paper', 'quiet_night', ...additions];
+  const channels = hex => hex.slice(1).match(/../g).map(pair => parseInt(pair, 16) / 255);
+  const luminance = rgb => rgb
+    .map(c => c <= 0.04045 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4)
+    .reduce((sum, c, i) => sum + c * [0.2126, 0.7152, 0.0722][i], 0);
+  const contrast = (foreground, background) => {
+    const [low, high] = [luminance(foreground), luminance(background)].sort((a, b) => a - b);
+    return (high + 0.05) / (low + 0.05);
+  };
+  const pairs = new Set();
+  for (const theme of themeIds) {
+    const packet = sample('short_essay', '4:5', theme);
+    packet.plan_capabilities.theme_ids = themeIds;
+    const preview = bitmapHarness(value => value, { packet, version });
+    const input = preview.input();
+    assert.ok(input, theme);
+    const colors = input.colors;
+    for (const token of ['canvas', 'surface', 'text', 'secondary', 'accent', 'border', 'branding', 'vector_end']) {
+      assert.match(colors[token], /^#[0-9A-F]{6}$/i, `${theme} ${token}`);
+    }
+    const surface = channels(colors.surface);
+    assert.ok(contrast(channels(colors.text), surface) >= 4.5, `${theme} text contrast`);
+    const subtleBrand = channels(colors.branding).map((value, i) => value * 0.8 + surface[i] * 0.2);
+    assert.ok(contrast(subtleBrand, surface) >= 3, `${theme} branding contrast`);
+    const pair = `${colors.surface}/${colors.text}`;
+    assert.equal(pairs.has(pair), false, `${theme} duplicate palette`);
+    pairs.add(pair);
+
+    await finishBitmap(preview);
+    assert.equal(preview.card.state.measurement.phase, 'native_checked', theme);
+    assert.equal(preview.find('piece-logical-canvas').props.style.backgroundColor, colors.canvas);
+    assert.equal(preview.find('piece-visual-block-0').props.style.color, colors.text);
+    assert.equal(preview.fit().isCurrent(packet, preview.token), true);
+    const record = { ...savedSample(packet), renderer_version: version };
+    const saved = preview.preparePieceNativeSavedDisplay(record);
+    const exported = preview.preparePieceNativeCard({ savedRecord: record, exportCanvas: true });
+    assert.deepEqual(copy(saved.colors), copy(colors));
+    assert.deepEqual(copy(exported), copy(saved));
+    assert.notEqual(saved.key, input.key);
+    preview.card.componentWillUnmount();
+  }
 });

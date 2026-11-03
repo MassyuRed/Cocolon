@@ -5,16 +5,16 @@
  * or creates a save key. The current host/admission supplier remains separate.
  */
 import React from 'react';
-import { Modal, View, Text, ScrollView, Button, ActivityIndicator } from 'react-native';
+import { Modal, View, Text, ScrollView, Button, Pressable, ActivityIndicator } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import PieceVisualCard from './PieceVisualCard';
-import { PIECE_THEME_COLORS } from '../../features/piece/pieceLayout';
+import { PIECE_THEME_COLORS, PIECE_THEME_LABELS } from '../../features/piece/piecePalette';
 
 const element = React.createElement;
 const formats = { short_essay: 'エッセイ', quote: '引用', declaration: '宣言' };
 const plans = { free: 'Free', plus: 'Plus', premium: 'Premium' };
 const branding = { required_small: '小さく表示', required_subtle: '控えめに表示', off: '表示なし' };
-const themes = { soft_paper: 'ソフトペーパー', quiet_night: '静かな夜' };
+const themes = PIECE_THEME_LABELS;
 
 export default function PiecePreviewModal({ visible = false, display, onClose, onRetry, onVisualChange, onCancel, onOpenSaved, onSave, onSaveFitChange }) {
   if (visible !== true || !display || display.phase === 'hidden') return null;
@@ -22,31 +22,42 @@ export default function PiecePreviewModal({ visible = false, display, onClose, o
   const preview = received ? display.preview : null;
   const selection = preview ? { theme_id: preview.visual_recipe.theme.theme_id,
     aspect_ratio: preview.visual_recipe.aspect_ratio, branding_mode: preview.visual_recipe.branding.branding_mode } : null;
+  const changeVisual = (field, value) => onVisualChange({ ...selection, [field]: value }, {
+    preview_id: preview.preview_id, preview_revision: preview.preview_revision,
+    visual_recipe_hash: preview.visual_recipe_hash,
+  }, display.visualToken);
   const choices = (label, field, values, labels) => values.length > 1 && typeof onVisualChange === 'function'
     ? element(View, { key: field, testID: `piece-visual-${field}`, style: { marginTop: 12 } },
       element(Text, { style: { fontSize: 16, color: '#202020' } }, label),
       ...values.map(value => {
         const selected = selection[field] === value;
-        const button = element(Button, { key: value,
+        return element(Button, { key: value,
           title: `${labels?.[value] || value}${selected ? '（選択中）' : ''}`,
           accessibilityLabel: `${label}：${labels?.[value] || value}`,
           accessibilityState: { selected, disabled: selected },
           disabled: selected,
-          onPress: () => onVisualChange({ ...selection, [field]: value }, {
-            preview_id: preview.preview_id, preview_revision: preview.preview_revision,
-            visual_recipe_hash: preview.visual_recipe_hash,
-          }, display.visualToken),
+          onPress: () => changeVisual(field, value),
         });
-        const colors = field === 'theme_id' ? PIECE_THEME_COLORS[value] : null;
-        if (!colors) return button;
-        const { canvas, surface, text, border } = colors;
-        return element(View, { key: value, style: { flexDirection: 'row', alignItems: 'center', marginTop: 6 } },
-          element(View, { testID: `piece-theme-swatch-${value}`, accessible: false,
-            accessibilityElementsHidden: true, importantForAccessibility: 'no-hide-descendants',
-            style: { padding: 3, backgroundColor: canvas, borderColor: border, borderWidth: 1, borderRadius: 6 } },
-            element(Text, { allowFontScaling: false, style: { minWidth: 36, paddingVertical: 3, textAlign: 'center', backgroundColor: surface, color: text } }, 'あ')),
-          element(View, { style: { flex: 1 } }, button));
       })) : null;
+  const paletteOptions = preview?.plan_capabilities.theme_ids;
+  const palettePicker = paletteOptions?.length > 1 && typeof onVisualChange === 'function'
+    ? element(View, { testID: 'piece-visual-theme_id', style: { marginTop: 12 } },
+      element(Text, { style: { fontSize: 16, color: '#202020', marginBottom: 8 } }, '背景と文字色'),
+      element(View, { style: { flexDirection: 'row', flexWrap: 'wrap', gap: 8 } },
+        ...paletteOptions.map(value => {
+          const { canvas, surface, text, border } = PIECE_THEME_COLORS[value];
+          const selected = selection.theme_id === value;
+          return element(Pressable, { key: value, accessibilityRole: 'button',
+            accessibilityLabel: `テーマ：${themes[value]}`, accessibilityState: { selected, disabled: selected },
+            disabled: selected, onPress: () => changeVisual('theme_id', value),
+            style: { flexBasis: '46%', flexGrow: 1, minHeight: 44, padding: 5, borderRadius: 8,
+              borderWidth: 2, borderColor: selected ? '#202020' : '#D1D5DB', backgroundColor: canvas } },
+            element(View, { testID: `piece-theme-swatch-${value}`, accessible: false,
+              accessibilityElementsHidden: true, importantForAccessibility: 'no-hide-descendants',
+              style: { padding: 4, backgroundColor: canvas, borderColor: border, borderWidth: 1, borderRadius: 5 } },
+              element(Text, { style: { padding: 4, textAlign: 'center', backgroundColor: surface, color: text } }, themes[value])),
+            selected ? element(Text, { style: { marginTop: 2, textAlign: 'center', color: text, backgroundColor: surface } }, '選択中') : null);
+        }))) : null;
   const saving = display.loadingKind === 'save' || display.retryKind === 'save';
   // canSave is a host projection, not a conclusion from quota/hash/native
   // inspection. The controller must recheck current admission at the click.
@@ -82,7 +93,7 @@ export default function PiecePreviewModal({ visible = false, display, onClose, o
               preview.plan_capabilities.format_selection === 'automatic' ? '形式：入力に合う形式を自動選択' :
                 `選択できる形式：${preview.eligible_formats.map(format => formats[format]).join(' / ')}`),
           element(Text, { style: { color: '#494949', fontSize: 14, lineHeight: 22 } },
-            `テーマ：${preview.plan_capabilities.theme_ids.map(theme => themes[theme]).join(' / ')}`),
+            paletteOptions.length > 1 ? `背景と文字色：${paletteOptions.length}種類` : `テーマ：${themes[paletteOptions[0]]}`),
           element(Text, { style: { color: '#494949', fontSize: 14, lineHeight: 22 } },
             `画像比率：${preview.plan_capabilities.aspect_ratios.join(' / ')}`),
           element(Text, { style: { color: '#494949', fontSize: 14, lineHeight: 22 } },
@@ -92,7 +103,7 @@ export default function PiecePreviewModal({ visible = false, display, onClose, o
               ? '回数制限なし' : `残り${preview.quota.remaining_count}回 / ${preview.quota.save_limit}回`}`),
           element(Text, { style: { color: '#494949', fontSize: 14, lineHeight: 22 } },
             '取得時点の情報です。保存時に残り回数を確認します。文章の形式変更はまだ利用できません。'),
-          choices('テーマ', 'theme_id', preview.plan_capabilities.theme_ids, themes),
+          palettePicker,
           choices('画像比率', 'aspect_ratio', preview.plan_capabilities.aspect_ratios),
           choices('ブランド表記', 'branding_mode', preview.plan_capabilities.branding_modes, branding),
         ) : null,

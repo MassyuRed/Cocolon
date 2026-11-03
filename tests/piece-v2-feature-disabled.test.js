@@ -34,7 +34,9 @@ function transport(send) {
     .replace(/^import .*;$/gm, '').replace(/^export /gm, '');
   const context = vm.createContext({ AbortController,
     apiFetch: send, getAccessToken: async () => 'synthetic-token' });
-  vm.runInContext(source + '\nglobalThis.api={requestPieceSourceRef,requestPiecePreview};', context);
+  const palette = fs.readFileSync(path.join(ROOT, 'features/piece/piecePalette.js'), 'utf8')
+    .replace(/^export /gm, '');
+  vm.runInContext(palette + '\n' + source + '\nglobalThis.api={requestPieceSourceRef,requestPiecePreview};', context);
   return context.api;
 }
 for (const method of ['GET', 'POST']) test(`${method}: exact 503 disabled is distinct from retryable transport failure`, async () => {

@@ -156,7 +156,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 |---|---|---|
 | 本文・visual recipe | 保存済み本人source→単独で伝わるcanonical text＋画像。現V2 source adapter／pure coreはoriginal＋normal／pre-questionのみ。refinedは別sourceのopt-in補足を使う設計だが、現コードは`source_role_or_stage_not_yet_supported`で未対応 | 旧Q&Aの存在を新商品の定義にしない。Emlis生成本文・Analysis推定の原文流用は禁止。補足をoriginalへ連結してrefined接続済みにしない |
 | 一般入力への生成 | 既存CMEEの有限作者を使用。最新指示はユーザーが書いた本文だけを必要に応じて整形し、選択感情の説明文は追加しない。短い完成文も水増しせず扱う | §41でprivate selection contextを可視graphから分離、対象579成功。一般日本語全体の品質は未完成、API配置結果は§41へ |
-| 配色選択 | 作成プレビューでPlus／Premiumの既存2テーマに、画像と同じ背景・文字色の見本を表示するRN実装を追加 | Freeは固定テーマ。新配色の追加と色の個別指定は残件。新ビルド・実機表示は未確認 |
+| 配色選択 | Plus／Premiumの背景・文字色を固定2組から12組へ拡張する実装候補。作成時に色見本で選び、保存レシピに従い詳細・画像出力でも同じ色を再現する | Freeは固定テーマ。比率・ロゴ・保存回数のプラン差は既存どおり。Supabase適用、Render配置、まとめビルド・実機確認は未実施 |
 | preview・保存 | 既存の作成/取消/明示private保存/回復。同一本文・recipe・hashとowner/枠を保持 | Mashが7001で画像生成・一覧での確認・スマホ写真フォルダへの保存成功を報告。既存保存recordは今回の文章方針修正で書換せず、新規作成へ反映 |
 | V2有効化・旧経路 | 11/1 API744336c0の明示factoryでpreview/save/owner-read/export/owner-delete各strict pair ON、public-write/public-read/visibility-toggle OFFをLive確認。default app:appはlegacy/OFF | 稼働設定と本人端末の通常保存は別。tutorial/Nexus旧経路とM5の全公開経路廃止は未完 |
 | 本人履歴・詳細・公開範囲 | owner一覧・詳細・公開切替・削除の既存経路。privateはownerのみ | 7001の生成済み画像と一覧は本人確認済み。同一record/hashの独立DB照合・Share送信・公開切替・削除の本人確認へ拡張しない |

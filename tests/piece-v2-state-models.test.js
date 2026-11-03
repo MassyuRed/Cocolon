@@ -56,7 +56,7 @@ function load() {
     apiFetch: async (...args) => { calls.push(args); return { status: 200, json: async () => response() }; },
     getAccessToken: async () => 'synthetic-token',
   });
-  const source = ['pieceApi.js', 'piecePreviewModel.js'].map(file => fs.readFileSync(path.join(__dirname, '../features/piece', file), 'utf8')
+  const source = ['piecePalette.js', 'pieceApi.js', 'piecePreviewModel.js'].map(file => fs.readFileSync(path.join(__dirname, '../features/piece', file), 'utf8')
     .replace(/^import .*;$/gm, '').replace(/^export /gm, '')).join('\n');
   vm.runInContext(source + '\n globalThis.model = { PieceApiError, requestPiecePreview, createPiecePreviewState, closePiecePreview, beginPiecePreview, completePiecePreview, failPiecePreview, retryPiecePreview, readPiecePreviewView };', context);
   return { ...context.model, calls };
@@ -245,7 +245,7 @@ function controllerHarness({ send, session, clock = () => NOW, abort = AbortCont
       return session ? session(owner, sessions.length) : 'synthetic-controller-token';
     },
   });
-  const sources = ['pieceApi.js', 'piecePreviewModel.js', 'PieceCreateController.js'].map(file =>
+  const sources = ['piecePalette.js', 'pieceApi.js', 'piecePreviewModel.js', 'PieceCreateController.js'].map(file =>
     fs.readFileSync(path.join(__dirname, '../features/piece', file), 'utf8')
       .replace(/^import .*;$/gm, '').replace(/^export /gm, '')).join('\n');
   vm.runInContext(sources + '\n globalThis.controllerFactory = createPieceCreateController;', context);

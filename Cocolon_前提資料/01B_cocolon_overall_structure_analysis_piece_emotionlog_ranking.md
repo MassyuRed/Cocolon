@@ -3066,6 +3066,7 @@ STRUCTURE_MAP_DELTA_PRESENT。新tracked fileは増やさず、次の既存owner
 | 既存path | 今回のsource責務 |
 |---|---|
 | `features/piece/pieceLayout.js` | 新外部renderer identityと内部bitmap profileの対応、preview/saved別key、同じcatalog/B9/描画入力。旧saved v3を保持。 |
+| `features/piece/piecePalette.js` | 11/4追加。テーマID・名前・固定の背景色と文字色の組を、API応答検証・作成画面・本人履歴・画像描画で共有。既存2組の値を維持し、対応版の有料プランに10組を追加。 |
 | `features/piece/pieceRenderer.js` | 閉preview/hash/expiry/catalog・iOS・必要native interfaceを純粋に確認するeligibility predicate。HTTPや描画を行わない。 |
 | `components/piece/PieceVisualCard.js` | 同profileのpreview/saved描画と失効。元8秒内の完成を要求し、preview fit期限を維持。新formal savedの完成像だけは8秒後も保持し、saved fitを発行しない。 |
 | `screens/InputScreen.js`／`screens/input/InputPieceActionArea.js` | 既存hostへのpredicate供給と、既存same mount/token fit・owner/flag/quotaの保存直前二重確認。 |

@@ -44,6 +44,7 @@ function harness({ send, session, random, exportPrepare } = {}) {
   });
   // Each ESM module retains a distinct scope, as in the application bundle.
   const exports = [
+    ['features/piece/piecePalette.js', ['PIECE_THEME_COLORS', 'PIECE_THEME_LABELS', 'PIECE_LEGACY_THEME_IDS', 'PIECE_THEME_IDS', 'PIECE_VISUAL_CATALOG_V1']],
     ['features/piece/pieceApi.js', ['PieceApiError', 'readPiecePreviewSnapshot', 'preparePiecePreviewRequest', 'requestPieceOwner', 'readPieceOwnerSnapshot']],
     ['features/piece/piecePreviewModel.js', ['verifyPieceArtifactHashes']],
     ['features/piece/pieceOwnerModel.js', ['readPieceOwnerDisplay', 'pieceOwnerPermissions']],
@@ -85,6 +86,29 @@ test('owner history and detail use dedicated no-store routes with both session c
   }
   assert.equal(h.sessions.length, 4);
   assert.equal(h.controller.getView().record.piece_text, record().piece_text);
+});
+
+test('expanded palette records coexist with unchanged legacy records in owner history, detail and export', async () => {
+  const legacy = record();
+  const palette = record({ piece_id: RID, public_id: 'piece:' + RID,
+    renderer_version: 'piece.rn_bitmap_renderer.ios.v2' });
+  palette.visual_recipe.theme.theme_id = 'forest_mint';
+  const canonical = value => value && typeof value === 'object' && !Array.isArray(value)
+    ? Object.fromEntries(Object.keys(value).sort().map(key => [key, canonical(value[key])])) : value;
+  palette.visual_recipe_hash = crypto.createHash('sha256')
+    .update(JSON.stringify(canonical(palette.visual_recipe))).digest('hex');
+  const h = harness({ send: async url => url.includes('/history') ? packet(page([legacy, palette])) : packet(palette) });
+  const history = await h.requestPieceOwner('history', {cursor: null}, options);
+  assert.deepEqual(copy(history.items), [legacy, palette]);
+  const labels = history.items.map(saved => texts(h.PieceOwnerCard({ record: saved })).join(' '));
+  assert.match(labels[0], /ソフトペーパー/);
+  assert.match(labels[1], /深緑 × ミント/);
+  for (const action of ['detail', 'export']) {
+    const saved = await h.requestPieceOwner(action, { piece_id: RID }, options);
+    assert.deepEqual(copy(saved), palette);
+    assert.equal(h.readPieceOwnerDisplay(saved).visual_recipe.theme.theme_id, 'forest_mint');
+  }
+  for (const [, init] of h.calls) assert.equal(init.headers['X-Piece-Palette'], '2');
 });
 
 test('export preparation uses its independent authenticated no-store endpoint',async()=>{

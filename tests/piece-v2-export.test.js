@@ -53,6 +53,7 @@ function harness({os='ios', version=35, record=fixture()} = {}) {
       return Object.hasOwn(state,'photoResult') ? state.photoResult : {saved:true};}}},
   });
   for (const [file,names] of [
+    ['features/piece/piecePalette.js', ['PIECE_THEME_COLORS', 'PIECE_LEGACY_THEME_IDS', 'PIECE_THEME_IDS', 'PIECE_VISUAL_CATALOG_V1']],
     ['features/piece/pieceApi.js',['PieceApiError','readPiecePreviewSnapshot','readPieceOwnerSnapshot']],
     ['features/piece/piecePreviewModel.js',['verifyPieceArtifactHashes']],
     ['features/piece/pieceOwnerModel.js',['readPieceOwnerDisplay']],

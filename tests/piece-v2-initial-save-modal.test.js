@@ -22,23 +22,21 @@ const renderPromise = Promise.resolve((() => {
   const imports = source.match(/^import .*;$/gm) || [];
   assert.deepEqual(imports, [
     "import React from 'react';",
-    "import { Modal, View, Text, ScrollView, Button, ActivityIndicator } from 'react-native';",
+    "import { Modal, View, Text, ScrollView, Button, Pressable, ActivityIndicator } from 'react-native';",
     "import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';",
     "import PieceVisualCard from './PieceVisualCard';",
-    "import { PIECE_THEME_COLORS } from '../../features/piece/pieceLayout';",
+    "import { PIECE_THEME_COLORS, PIECE_THEME_LABELS } from '../../features/piece/piecePalette';",
   ]);
   const marker = name => ({ component: name });
   const context = vm.createContext({
-    PIECE_THEME_COLORS: {
-      soft_paper: { canvas: '#F6F1E8', surface: '#FFFDF8', text: '#111827', border: '#D7D2C9' },
-      quiet_night: { canvas: '#0B1120', surface: '#111827', text: '#F9FAFB', border: '#334155' },
-    },
     React: { createElement: (type, props, ...children) => ({ type, props: props || {}, children }) },
-    ...Object.fromEntries(['Modal', 'View', 'Text', 'ScrollView', 'Button', 'ActivityIndicator',
+    ...Object.fromEntries(['Modal', 'View', 'Text', 'ScrollView', 'Button', 'Pressable', 'ActivityIndicator',
       'SafeAreaProvider', 'SafeAreaView', 'PieceVisualCard'].map(name => [name, marker(name)])),
   });
   const executable = source.replace(/^import .*;$/gm, '').replace(/^export default /gm, '');
-  vm.runInContext(executable + '\nglobalThis.renderModal = PiecePreviewModal;', context,
+  const palette = fs.readFileSync(path.join(root, 'features/piece/piecePalette.js'), 'utf8')
+    .replace(/^export /gm, '');
+  vm.runInContext(palette + '\n' + executable + '\nglobalThis.renderModal = PiecePreviewModal;', context,
     { filename: 'components/piece/PiecePreviewModal.js' });
   return context.renderModal;
 })());
@@ -230,7 +228,8 @@ test('cancel uses the existing identity/token callback without saving', async ()
 test('visual setting changes preserve the existing callback', async () => {
   const display = fixture(), calls = [];
   const tree = await render(display, { onVisualChange(...args) { calls.push(args); } });
-  button(tree, '静かな夜').props.onPress();
+  nodes(tree).find(node => node.type?.component === 'Pressable' &&
+    node.props.accessibilityLabel === 'テーマ：静かな夜').props.onPress();
   assert.equal(calls.length, 1);
   assert.equal(calls[0][0].theme_id, 'quiet_night');
   assert.equal(calls[0][0].aspect_ratio, '4:5');

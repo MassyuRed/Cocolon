@@ -1685,7 +1685,7 @@ MashのPiece続行指示から、§43の最初の残件である既存PATCHの�
 | `features/piece/PieceCreateController.js` | 現候補と画面世代を照合し、変更中は旧候補を隠す。本文/3hash/期限/renderer/非選択recipe保持とrevision増分を確認。不明結果は元POST/keyで明示回収。 |
 | `features/piece/piecePreviewModel.js` | 既存hash/expiry検証を保持し、更新中・再取得・変更告知とbody-freeな表示ticketを渡す。保存/export許可はfalse。 |
 | `components/piece/PiecePreviewModal.js` | 現capabilitiesに含むテーマ・比率・表記の選択操作、選択状態、変更告知、明示再取得ボタン。Free固定項目を無理に選択させず、形式変更は未接続。 |
-| 配色見本（11/4 RN実装） | Plus／Premiumの既存2テーマの選択肢に、`features/piece/pieceLayout.js` の画像描画と共通の背景・文字色を表示。Freeの固定テーマは選択欄なし。既存PATCH、recipe、保存済み画像の色は従来どおり。新ビルド・実機表示は未確認。 |
+| 配色選択（11/4 実装候補） | `features/piece/piecePalette.js` の12配色を作成時の色見本、本人履歴の配色名、描画で共有。対応iOSのPlus／Premiumだけ既存2組に10組を追加。APIは `X-Piece-Palette: 2` で対応を判断し、既存PATCHとレシピのテーマIDを使用。旧レシピ・旧画像の配色は維持。Freeの固定テーマは選択欄なし。 |
 | `screens/input/InputPieceActionArea.js` | 現owner/source/runtime/foreground/openの確認後だけ設定操作を既存controllerへ渡す。 |
 | `tests/piece-v2-contracts.test.js` / `tests/piece-v2-preview-display.test.js` | 上記transport・実host/controller/display sourceの回帰を既存suiteへ追加。 |
 

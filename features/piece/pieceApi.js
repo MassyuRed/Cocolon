@@ -8,13 +8,16 @@
  */
 import { apiFetch, getAccessToken } from "../../lib/apiClient";
 import { NativeModules, Platform } from 'react-native';
+import { PIECE_LEGACY_THEME_IDS, PIECE_THEME_IDS, PIECE_VISUAL_CATALOG_V1 } from './piecePalette';
+
+const PALETTE_HEADER = { 'X-Piece-Palette': '2' };
 
 // Only advertise the compiled bridge's explicit brand/renderer capability.
 // No import from layout/renderer: those modules depend on this transport.
 function rendererHeaders() {
   return typeof Platform !== 'undefined' && Platform.OS === 'ios' &&
     typeof NativeModules !== 'undefined' && NativeModules.PieceTextMetrics?.bitmapRendererVersion === 'piece.rn_bitmap_renderer.ios.v2'
-    ? { 'X-Piece-Renderer': 'piece.rn_bitmap_renderer.ios.v2' } : {};
+    ? { 'X-Piece-Renderer': 'piece.rn_bitmap_renderer.ios.v2', ...PALETTE_HEADER } : {};
 }
 
 
@@ -134,7 +137,8 @@ function validatePreviewPlan(value) {
   const limit = { free: 5, plus: 30, premium: null }[tier];
   const allowed = {
     format_selection: { free: 'fixed', plus: 'automatic', premium: 'eligible_choice' }[tier],
-    theme_ids: tier === 'free' ? ['soft_paper'] : ['soft_paper', 'quiet_night'],
+    theme_ids: tier === 'free' ? ['soft_paper'] :
+      caps?.theme_ids?.length === PIECE_THEME_IDS.length ? PIECE_THEME_IDS : PIECE_LEGACY_THEME_IDS,
     aspect_ratios: tier === 'premium' ? ['4:5', '9:16'] : ['4:5'],
     branding_modes: tier === 'free' ? ['required_small'] :
       tier === 'premium' ? ['required_subtle', 'off'] : ['required_subtle'],
@@ -197,7 +201,7 @@ function validatePieceArtifact(value) {
   if (!exact(recipe, ['visual_recipe_version', 'visual_catalog_version', 'format_type', 'template',
     'theme', 'font_style', 'aspect_ratio', 'branding', 'layout_policy_version', 'language']) ||
       recipe.visual_recipe_version !== 'piece.visual_recipe.v1' ||
-      recipe.visual_catalog_version !== 'piece.visual_catalog.v1' ||
+      recipe.visual_catalog_version !== PIECE_VISUAL_CATALOG_V1 ||
       recipe.layout_policy_version !== 'piece.long_text_layout.v1' ||
       recipe.format_type !== value.format_type || recipe.language !== payload.language ||
       !['4:5', '9:16'].includes(recipe.aspect_ratio) ||
@@ -206,7 +210,7 @@ function validatePieceArtifact(value) {
       !exact(recipe.font_style, ['font_style_id', 'font_style_version']) ||
       !exact(recipe.branding, ['branding_mode', 'branding_mark_id', 'branding_mark_version']) ||
       recipe.template.template_id !== { short_essay: 'essay_frame', quote: 'focus_frame', declaration: 'stance_frame' }[value.format_type] ||
-      recipe.template.template_version !== 1 || !['soft_paper', 'quiet_night'].includes(recipe.theme.theme_id) ||
+      recipe.template.template_version !== 1 || !PIECE_THEME_IDS.includes(recipe.theme.theme_id) ||
       recipe.theme.theme_version !== 1 || recipe.font_style.font_style_id !== 'system_readable' ||
       recipe.font_style.font_style_version !== 1 ||
       !['required_small', 'required_subtle', 'off'].includes(recipe.branding.branding_mode) ||
@@ -239,7 +243,7 @@ export function preparePieceVisualChange(value) {
   const input = JSON.parse(JSON.stringify(value));
   if (!pieceUuid(input.preview_id) || !positive(input.expected_preview_revision) ||
       !exact(input.visual_selection, ['theme_id', 'aspect_ratio', 'branding_mode'])) reject('PIECE_REQUEST_INVALID');
-  for (const [key, allowed] of Object.entries({ theme_id: ['soft_paper', 'quiet_night'],
+  for (const [key, allowed] of Object.entries({ theme_id: PIECE_THEME_IDS,
     aspect_ratio: ['4:5', '9:16'], branding_mode: ['required_small', 'required_subtle', 'off'] })) {
     if (input.visual_selection[key] !== null && !allowed.includes(input.visual_selection[key])) reject('PIECE_VISUAL_SELECTION_NOT_ALLOWED');
   }
@@ -497,7 +501,7 @@ export async function requestPieceOwner(action, value = {}, options = {}) {
     checkAbort(signal);
     if (!text(expectedUserId)) reject('PIECE_AUTH_REQUIRED');
     const input = JSON.parse(JSON.stringify(value));
-    const headers = { 'Cache-Control': 'no-store' };
+    const headers = { 'Cache-Control': 'no-store', ...PALETTE_HEADER };
     let endpoint, method = 'GET', body;
     if (action === 'history') {
       if (!exact(input, ['cursor']) || !(input.cursor === null ||
