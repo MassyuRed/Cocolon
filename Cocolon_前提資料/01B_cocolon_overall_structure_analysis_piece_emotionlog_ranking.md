@@ -3312,4 +3312,7 @@ API88078cdb、STRUCTURE_MAP_DELTA_PRESENTは明示offline経路のみ。新produ
 | semantic_units_written_role74_saved_replay.py | 別CPU processで前後92応答を照合。保存readerのEngine/両compiler/両author禁止、役割24判定を候補92判定と分離 |
 | export_written_role74_numeric.py | UTF-8原本とF32 uint32 bit列を元bytes/SHAで外部回収。モデル/load/新生成/更新0 |
 
-GPU実行はCPU成功後に一回起動済み。結果の意味判断/採否は完了後の全source/raw読解へ分け、原reportを改変しない。一般本人基準・記録間関係・通常保存の完成へ換算しない。
+GPU実行はCPU成功後に一回完了。全46 source/rawの読解により、役割は対応1→3/4へ改善したが旧5退行のため新重みを通常/次初期値へ未採用とした。原reportを改変しない。一般本人基準・記録間関係・通常保存の完成へ換算しない。
+
+
+同trialの追加 `semantic_units_written_role74_results.json` は本文なし確定結果、役割の局所改善/旧5退行/非採用/92保存応答再読/元718member・112重みのidentityとprivate原本参照を保持する。上表の5scriptと合わせて今回のpublic研究file6件。外部回収helper/recovery identity/後読解review/全sourceはprivate archive内へ保持し、通常product ownerへ追加しない。[実結果と現在の再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-written-role74-result-20261103)、weekly§94、STRUCTURE_MAP_DELTA_NONE。

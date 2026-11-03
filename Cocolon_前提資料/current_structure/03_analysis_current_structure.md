@@ -1,4 +1,4 @@
-> **2026-11-03最新・明記役割の意味接続：** API88078cdbの明示offline経路で、実4Bの本人役割否定1件をSELF/negative/fact/pastの既存ROLEへ採用し、同じ文章/図/保存非生成再読が成立。対応4件は1採用/3不適合、scope外4件は不採用、8生成/学習0、657PASS/2SKIP。元候補の未検証状態は不変。1record/非空field1/明記一節だけで、実際の役割を肯定的に特定した結果や一般意味採用ではない。通常finite/ensure/HTTP/DB/RN/本番は未有効化。別sourceの肯定2/否定2教材をCPU確認・保存し、旧70不変。[結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-written-role-result-20261103)。private typed-role縦接続のみSTRUCTURE_MAP_DELTA_PRESENT。
+> **2026-11-03最新・役割学習比較完了：** API88078の同じ限定typed-role受口を変えず74教材/86更新/新50生成を一回完了。既出対応役割は1→3/4、T4は4/4教示再現、同一文章/図/保存再読まで成立。一方、旧34の5退行とR01未達のため新73ee8d/072622は通常/次学習初期値へ未採用。92保存応答と元718member/112重みを全bytes-SHA照合し保存。[全結果・原本・再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-written-role74-result-20261103)。通常owner/型/ensure/HTTP/DB/RNは不変、STRUCTURE_MAP_DELTA_NONE（今回の隔離研究）。本人基準・記録間関係・通常累積保存の一般接続は残件。
 
 > **2026-11-03履歴・replay68：** 再掲3枠だけを変えたreplay68は74更新/32新stop、491.863046秒で完了したが、新しい意味改善はなく不採用。SQ03/MD02の不足は残り、OD01は不正unitへ変化して拒否継続、MD01にも親曖昧の新拒否。SC6=6/6と旧AT/UQ/MX/OAの教師一致、CE68の局所改善は保持。 旧68にない『対象分離＋継続修飾＋強調否定』と別actor/二不明文脈の組合せ2件を原sourceから合成し、実strict/実file非生成再読/実tokenizer prefix・EOSまでCPU確認。モデル/生成/更新0、新70教材の学習plan/GPUは未選定。診断文やrawの教師化ではない。 [結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-replay68-result-20261103)。通常source/API/DB/RN/稼働/Pod管理不変、全未解析/主体未解決/route0、STRUCTURE_MAP_DELTA_NONE。局所教材/保存の成立を、本人基準の役割/判断/選択と記録間関係・通常graph接続の完成へ換算しない。
 
@@ -1062,7 +1062,14 @@ Mashが既に申し出ている観測会は、この読み取り方の教材を�
 
 初回scopeは1record/非空field1/補足なし、明記SELFの「の役割は」関係と既存名詞文法で読める役割名/過去肯否copulaの全文。原文内にあるだけの誤qualifierは採らず、SELFと実否定operatorのexactを求める。保存は元response/guard/版とgraph/文章/図/coverageを束縛し、Engine/compiler/authorなしで復元・検証する。scope外は未解析を隠すため切り捨てない。
 
-実4B R02の役割否定が旧mapped0/unparsed1→新mapped1/unparsed0、4段gap/辺0。対応範囲の他3件はモデル不適合。別題材4対比はCPUのみで、新しい一般判断/選択・記録間関係の成功ではない。具体owner/保存型は[04現行差分](../designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#analysis-written-role-vertical-20261103)、[schema05](../designs/cmee/v1/05_json_schema_and_versioning.md#analysis-written-role-vertical-20261103)、[全結果](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-written-role-result-20261103)へ。
+実4B R02の役割否定が旧mapped0/unparsed1→新mapped1/unparsed0、4段gap/辺0。対応範囲の他3件はモデル不適合。この節の時点では別題材4対比はCPUのみだった。後続の実学習比較でも一般判断/選択・記録間関係の成功へ換算しない。具体owner/保存型は[04現行差分](../designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#analysis-written-role-vertical-20261103)、[schema05](../designs/cmee/v1/05_json_schema_and_versioning.md#analysis-written-role-vertical-20261103)、[全結果](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-written-role-result-20261103)へ。
 
 
-11/3次の隔離比較：上記typed-role受口は変更せず、CPU確認済み肯否T4を旧70へ加え、明示研究用a5eafe/9bcから74教材/86更新を一回実施する条件を固定。旧78順・最後18を保持し、a5eafeのbefore42を同一性照合で再利用、新50生成/148測定/900秒。通常owner/型/HTTP/DB/RNは不変、STRUCTURE_MAP_DELTA_NONE。[実条件と重複起動防止の再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-written-role74-plan-20261103)。
+11/3隔離比較の固定条件（実行前の履歴。完了と採否は下段）：上記typed-role受口は変更せず、CPU確認済み肯否T4を旧70へ加え、明示研究用a5eafe/9bcから74教材/86更新を一回実施する条件を固定。旧78順・最後18を保持し、a5eafeのbefore42を同一性照合で再利用、新50生成/148測定/900秒。通常owner/型/HTTP/DB/RNは不変、STRUCTURE_MAP_DELTA_NONE。[実条件と重複起動防止の再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-written-role74-plan-20261103)。
+
+
+### 11/3 role74結果と現在の再開点
+
+86更新/50新stop/148測定/3load、620.929717秒/exit0。旧70/78順/末尾18を保持したが、旧34に5退行（29同一）が生じ、新73ee8d/072622は通常/次初期値へ未採用。R02否定を維持しR03肯定/R04否定が全文根拠付きROLE1node/4gap/辺0・文章/図へ到達、対応1→3/4、T4=4/4教示再現。R01は誤copula修飾が残り、scope外4件のtyped拒否を維持。候補受理は一般意味正解を示さない。
+
+92保存応答・87候補/5拒否・role8/16拒否、保存readerのEngine/両compiler/両author禁止で再読一致。元718member/112重み全bytes-SHA照合・private保存済み。[全文結果・原本](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-written-role74-result-20261103)。次はR01境界と旧5退行を原source/既存教師へ照合し不足を特定する。単純dose/order反復や不採用重みへの自動追学習へ戻さず、本人基準の判断/選択・複数field/補足/比較・記録間関係・通常累積保存の既存残件を維持する。通常product構造の変更なし、STRUCTURE_MAP_DELTA_NONE。

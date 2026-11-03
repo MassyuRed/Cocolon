@@ -1883,4 +1883,7 @@ Mashの「選択カテゴリを使う接続を直す」指示により、通常�
 
 採用時はrole_state=WRITTEN_PAST_ROLEの既存型、ROLE1node/残4段gap/辺0。役割否定は否定のまま表示し、実際の役割を肯定的に特定したclaimにしない。新しい意味を旧finite parserで再拒否しないよう、唯一realizerのこのstateだけ同じ全文witnessで完全再検査する。旧normal parser/ensure/HTTP/DB/RNは拡張しない。保存readerは保存graphを復元し、source/typed値/文章図の同一性を検証して返し、Engine/compiler/authorを呼ばない。保存identity/版は[schema05](05_json_schema_and_versioning.md#analysis-written-role-vertical-20261103)。
 
-実4B8出力のうち対応4件中の否定役割1件が、旧通常表示なしから既存mapの文章/図/再読へ到達。残3件はモデル不適合、scope外4件は不採用。対象657PASS/2SKIP、別source4対比はCPU確認のみで追加学習/次GPU条件は未選定。[全文結果/原本/再開点](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-written-role-result-20261103)。本人の判断/選択基準、記録間再出現/変化、複数field/補足/比較・通常累積保存の一般接続は既存残件であり、今回の限定成功を完成へ換算しない。
+実4B8出力のうち対応4件中の否定役割1件が、旧通常表示なしから既存mapの文章/図/再読へ到達。残3件はモデル不適合、scope外4件は不採用。対象657PASS/2SKIP。この初回時点では別source4対比はCPU確認のみだったが、後続role74で一回の学習比較を完了した。[全文結果/原本/再開点](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-written-role-result-20261103)。本人の判断/選択基準、記録間再出現/変化、複数field/補足/比較・通常累積保存の一般接続は既存残件であり、今回の限定成功を完成へ換算しない。
+
+
+11/3 role74の研究結果：上記意味採用・保存契約を変えず、既出対応4件は1→3が同じROLE/文章/図/非生成再読へ到達。T4は4/4教示再現。一方、旧34に5退行/R01未達があり新73ee8d/072622は通常/次学習初期値へ未採用。通常owner/型/入力版/API/DB/RN・補足/比較/累積保存のscope拡張0、STRUCTURE_MAP_DELTA_NONE（研究比較のみ）。[実結果・原本・再開点](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-written-role74-result-20261103)を現在の採否として優先し、初回8件の実績を上書きしない。

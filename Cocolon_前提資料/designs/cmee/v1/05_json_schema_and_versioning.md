@@ -3302,3 +3302,6 @@ API88078cdb。入力は既存AnalysisModelQuotedParentUnitsInput/Response、既�
 state schema=cocolon.cmee.analysis_model_written_role_state.v1、exact rootはschema_version/request_ref/prompt_version/response/artifact。artifactに既存graph・文章・図とowner/source-set/期間/identityを保存し、caller file schema=cocolon.cmee.cumulative_written_role_file.v1のcoverage/stateへ格納。coverageは限定1recordのsource1/processed1/mapped1/unparsed0/excluded0/stale0。欠ける4段はgap、辺0。元responseの実messages/raw hash/finish/source/guardを再照合し、保存graphを復元して全文witness/typed値/文章/図を検証する。Engine/compiler/author再実行なし。旧unit/quoted-parent/通常保存版は不変で、通常DB版へ自動転用しない。
 
 実4B1件で限定接続成立、対応範囲3件のモデル不適合は残る。657PASS/2SKIPと実file再読の範囲は[結果](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-written-role-result-20261103)。一般役割・判断/選択・複数record/補足/比較・通常ensureの完成ではない。
+
+
+11/3 role74の後続比較では上記written-role state/fileと既存wireを変更していない。既出対応役割1→3/4とT4教示再現4/4の保存artifactは、元response/原source/typed graph/同一文章図へ束縛し、Engine/両compiler/両authorなしの実file再読で一致。旧34の5退行により新重みは通常/次学習初期値へ未採用。[確定結果・原本・再開点](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-written-role74-result-20261103)。新保存schema/通常契約の追加0、今回研究のSTRUCTURE_MAP_DELTA_NONE。

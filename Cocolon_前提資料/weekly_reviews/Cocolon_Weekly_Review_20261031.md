@@ -2353,12 +2353,28 @@ combination70の原本/112重みと新比較の48原本は外部bytes/SHA照合�
 
 初回testのカテゴリ版保存2件失敗をpayload変換の最小修正で直し、同5fileは657PASS/2SKIP/既存warning1（110.82秒）。別CPU processでR02実fileの同一artifactをEngine/compiler/author禁止で再読、7拒否も維持。公開sourceの初回転送Killedは実GPU前・script/source/pid/report0と分離し、原因推測/重複GPUなし。全原本は[保存済み](https://chatgpt.com/library?file_id=libfile_9e1dc5ec3ad0819195d0549b96da7de9&account_id=personal)（90,029bytes/71member/SHA67259224…）。
 
-旧70教師のROLE1/今回構文0と実不適合を踏まえ、別sourceの肯定2/否定2をstrict→typed map→実file非生成再読→実tokenizerまでCPU確認。新4全文は旧70/評価34/今回8と一致0、華恋合成でMash教示/盲検ではない。旧70/重み不変、新生成/学習0、次の74教材学習条件は未選定。再開はこの4対比と旧70保持による4B役割出力改善へ。本人基準の判断/選択、記録間再出現/変化、複数field/補足/比較・通常累積保存の一般接続は残件。明示offline typed-roleのみSTRUCTURE_MAP_DELTA_PRESENT、primary TECHNICAL_CREDIT/product_credit0。
+旧70教師のROLE1/今回構文0と実不適合を踏まえ、別sourceの肯定2/否定2をstrict→typed map→実file非生成再読→実tokenizerまでCPU確認。新4全文は旧70/評価34/今回8と一致0、華恋合成でMash教示/盲検ではない。当該CPU時点は旧70/重み不変、新生成/学習0、74教材条件は未選定だった。後続§93で固定し§94で一回比較を完了。現在の再開点は§94を優先する。本人基準の判断/選択、記録間再出現/変化、複数field/補足/比較・通常累積保存の一般接続は残件。明示offline typed-roleのみSTRUCTURE_MAP_DELTA_PRESENT、primary TECHNICAL_CREDIT/product_credit0。
 
 
 <a id="analysis-written-role74-plan-20261103"></a>
 ## 93. 11/3 — 新役割4対比と旧70保持の一回学習を固定
 
+実行前の固定条件の履歴。実行は完了し、現在の結果・採否・再開点は§94へ。
+
 [条件・実装・再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-written-role74-plan-20261103)。前回typed-role1件到達と、対応3件のモデル不適合を引き継ぐ。原source由来の肯定2/否定2を追加し、研究用初期a5eafe/9bcから旧70辞書/旧78順を不変部分列＋T4各2で74教師/86更新。旧最後18を保持する。beforeはa5eafeのafter34＋役割8を同一性照合で42再利用し、T4新before4＋全46after＝新50生成/3load/148測定。NLL比較先はa5eafeのafter70で、89ba初期やCE68beforeを使わない。
 
-plain CE/LR1e-5/clip1/seed20261111、要求23秒、内部900秒/外側890+10秒。前回確認単価なら処理上限按分$0.145、準備/回収/保持別。CPUで現API88078のstrict/実file再読/tokenizerと原本を確認し、GitHub固定・読戻し後に一回実行する。再試行/追加epoch/受口緩和/出力補修なし。before42のUUID単独照合はしない。教示再現/既見診断を一般品質へ換算しない。通常source/API/DB/RN/稼働/配置/Pod管理不変、STRUCTURE_MAP_DELTA_NONE（隔離比較のみ）。
+plain CE/LR1e-5/clip1/seed20261111、要求23秒、内部900秒/外側890+10秒。前回確認単価なら処理上限按分$0.145、準備/回収/保持別。CPUで現API88078のstrict/実file再読/tokenizerと原本を確認し、GitHub固定・読戻し後に一回実行した（完了・採否は§94）。再試行/追加epoch/受口緩和/出力補修なし。before42のUUID単独照合はしない。教示再現/既見診断を一般品質へ換算しない。通常source/API/DB/RN/稼働/配置/Pod管理不変、STRUCTURE_MAP_DELTA_NONE（隔離比較のみ）。
+
+
+<a id="analysis-written-role74-result-20261103"></a>
+## 94. 11/3 — 役割3/4へ局所改善、旧5退行で新重み採用を見送り
+
+[全結果・原本・再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-written-role74-result-20261103)。§93の固定条件で一回完了、86更新/148測定/3load/50新stop、620.929716688秒（親622.428950498秒）/exit0。旧70辞書/旧78順部分列/最後18を保持、初期a5の旧70NLL最大差0、attention/LoRA dropout0。新73ee8d/072622は112有限F32保存・実model一致・非学習reloadまで成立、旧5adapter対不変・compute空。
+
+全46 source/before/afterと8採用role保存artifactをroot/同環境read-only担当が全文確認。R02維持、R03の重複/名詞誤modifierとR04の原文外actor/誤modifierを解消し、既出対応4件は1→3が既存ROLE/文章/図/保存へ到達。R01はcopula誤modifierが残る。T4は4/4教師再現、scope外R05〜08はtyped拒否維持。華恋合成・既見の開発比較で、Mash教示/盲検/一般品質率ではない。
+
+旧34は29 raw同一/5退行（CQ03原文外対象、PQ02非時間の時点化、MX02余分対象、MD02否定qualifier欠落＋余分対象、OD01不明親欠落）。否定文字自体の喪失/肯定反転へ誇張しない。AT4/UQ2/OA2/SC6/RC2保持、MX2は1/2、SQ03改善保持、HQ04/MD01既知未達。全74/旧70平均NLL低下を意味成功にしない。通常採用と次初期値自動選定は見送り。
+
+別CPU processで92応答：87候補復元/5拒否、role8復元/16拒否を確認。保存readerのEngine/両compiler/両author禁止、新load/生成/更新0。元718member/112重み全bytes-SHAを外部照合し、[全原本](https://chatgpt.com/library?file_id=libfile_e120a914f9348191b7f065b419e1693b&account_id=personal)へ保存（15,687,638bytes/729member/SHA5d642279…）。原report PENDING_RAW_READ bytesを保全し、後読解の採否は別review/結果JSON。API88078不変、直前657PASS/2SKIPを継承し今回再testと偽らない。
+
+次はR01境界と旧5退行を原source/既存教師へ照合し不足を特定してから次条件を固定する。単純dose/order反復/不採用重み自動追学習/完了run重複/出力補修/受口緩和0。本人基準の判断/選択・記録間再出現/変化・通常累積保存への一般接続は残件。全体現在地/Analysis map/全file地図/trial/設計参照を同期。通常source/API/DB/RN/Render/Supabase/稼働/配置/Pod管理0、GPUレンタル維持、正式0/3・54.50％据置。処理按分約$0.100039@前回確認$0.58/h（準備/回収/保持別）、STRUCTURE_MAP_DELTA_NONE/TECHNICAL_CREDIT/product_credit0。Codex Work/GPT-6 root＋同環境read-only確認、独立Pro/Ultra/human受入れではない。
