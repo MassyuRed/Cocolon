@@ -2761,3 +2761,30 @@ CPU初回はartifact.graphのasdict内tupleと保存JSON listをPythonで直接�
 新root=/workspace/analysis-material-v4-beam2-20261103はCPU準備済み、再prepare/重複runは禁止。旧same-Pod plain before22はidentity一致で再利用し、新beam2は22要求/最終22出力/1load/学習0だけ。beam内部の二枝を44入力や独立44生成へ数えない。要求45秒/全体900秒、処理上限0.0725USD@前確認0.29/h（準備/回収/待機保持/保存通信税等別）。全22の原文/rawを読み、対象範囲・肯否・他者/不明・理由、旧14成功graphと文章/図保持、同file保存非生成再読で判定する。候補数増加/形式成功だけでは採用しない。失敗時を含むlog/raw/manifestをfinally保全し、同じrun・別beam幅を自動反復しない。
 
 root単一実行/最終判断、同環境補助が旧学習処理/公式5.19 sourceとrunnerをread-only確認し、小CPU cache関数候補を作成、rootが全文確認。実環境GPT-6/Codex Work、独立Pro/Ultra/Mash実演ではない。Mashの継続/GPU/GitHub指示内で追加操作・承認負担0。通常採用false、API正本/意味gate/graph型/作者/通常ensure/HTTP/公開DTO/DB/RN/Render/Supabase/配置/Pod管理変更0、STRUCTURE_MAP_DELTA_NONE。本人基準/補足typed/記録間・比較/通常累積/IF・Savedを対象外へ消さず残件として保持する。
+
+
+<a id="analysis-material-v4-beam2-result-20261103"></a>
+## 129. 11/3 — 枝数2の同22入力比較を完了、対象範囲は未解消・通常不採用
+
+§128の一回を実行し、同API ded0586・同material.v4・同a2e/config006e、num_beamsだけ1→2で新22要求/22stop/1load/学習0を完了した。242.526662865654秒、peak allocated9.982GiB/reserved11.492GiB。新重み・教師・prompt・依存0、初期重み/configのSHA不変を確認。終了後GPU2MiB/0％/compute空、レンタル維持。同rootや別beam幅を自動再実行しない。
+
+| 同じ22入力の観測 | plain before | beam2 |
+| --- | --- | --- |
+| strict候補 | 20 | 20 |
+| typedを経て文章・図へ到達 | 14 | 14 |
+| 新たな到達 / 旧成功喪失 | — | 0 / 0 |
+| raw bytes・JSON値が同一 | — | 各20/22 |
+| 共通14のtyped保存bytes・graph・文章・図 | 基準 | 全14同一 |
+
+全22原文と44raw、成功14の文章/図と主体・肯否・時点・欄・カテゴリを読み、全graph/保存projectionも機械比較した。ROLE肯定/否定とACTION肯定/否定、欄逆転の保持、原文にない因果edge0・欠けた場面/考え/結果と接続の不明を維持。before/beam2候補40・typed28の同file非生成再読が一致。PV06の推測はrawに残り、事実限定typedの拒否を維持。X05–08は明示CONTENT_TARGET子を新出力したのではなく、既存全有限field証明による対象/肯否であり、モデルの対象分解改善へ数えない。
+
+変化はSC01とYREASON01だけ。SC01はEXPLICIT_ACTOR「叔父」→「叔父は」で、双方原文内、主体/否定/二つの不明の意味は同じ。YREASON01は連体内容の親が「安心した」から明記理由節「夕方は読み取れたので」へ移り、その接続は原文に合う。一方REASON_MARKER「ので」は依然欠け、WRITTEN_MODIFIERが「れた」→「読み取れた」、連体側にも「読み取れなかった」を追加しており、理由全体を修復したとはしない。短い一意な「分からない」と内容の区別は保持。これらのtyped拒否は現限定ownerの未対応で、拒否件数全てをモデル誤読に換算しない。
+
+主対象X03はraw完全同一で、対象名詞でなく原文外の肯定行動節をCONTENT_TARGETへ返し、既存quote拒否が続く。MD02もraw同一、他者の非行動がnode_kind/scope_roleともnullの無効carrierかつNEGなしで拒否。旧成功14保持は確認できたが、今回の枝数2ではこの2残件も文章/図への到達も改善しなかった。**beam2通常不採用、product_credit0/primary outcome=BLOCKER_NARROWED**。この固定重み/既見22例での結果であり、全生成法の不可能性・一般精度・分析完成・Mash Product Readの証明ではない。
+
+回収した外側原本8member/496392bytes/SHA c967973789cbc15dcdbe57ddd35be62fb8d4738729c5498bfabbae4bd7becbca内に、run原本240member/518561bytes/SHA 4acd2b30bf278a99270963edf3551746d2d8079e7313b39f5584874e59fb4e4dを保持し、両ZIP CRCとmanifest239file全SHAを照合した。初回CPU型比較失敗log/元5356runner、修正c5c7075fとcache934ad8c3、CPU/実行log/環境確認/最終GPU記録も保持。全原本にfinal review・metrics・照合scriptを添えたZIP501659bytes/SHA 82bdbe090270a6a2664931a322376c867782d4ed06d8433e1621b4d1659b8475を[原本と採否記録](https://chatgpt.com/library?file_id=libfile_9cb5f63b4c248191b685349c38685ecc&account_id=personal)へ保存。本文なし索引 material_v4_beam2_results.json を既存trialに追加した。
+
+次の修正点は既存model経路の「名詞対象と行動節の意味選択」に残す。旧90教示の境界/shift/引用終端loss/optimizerに具体bug未検出というCPU所見と、この枝数2で未解消という結果を継承し、新たな具体差分の根拠を原文・教示・rawから定めてから次GPUを組む。完了C4/16更新・引用mask・本run・beam拡大を自動反復せず、正解語の外付け・raw修復・typed緩和へ置換しない。a2eは研究候補、d3dは不採用のまま保持。本人基準/補足typed/記録間の関係・変化/通常累積接続/IF・Savedの残件も保持する。
+
+GPU処理按分0.01953687USD@前確認表示0.29/h（CPU準備/回収/待機レンタル保持/保存通信税等別、実総請求未測定）。rootと同環境read-only補助が全原文/44raw/14projectionを照合し同じ採否、実環境GPT-6/Codex Workで独立Pro/Ultraではない。通常API/source/意味gate/graph型/唯一作者/ensure/HTTP/公開DTO/DB/RN/Render/Supabase/配置/Pod管理変更0。STRUCTURE_MAP_DELTA_NONE。
+
