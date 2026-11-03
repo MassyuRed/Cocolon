@@ -1328,3 +1328,13 @@ v3比較の実行checkpoint：Cocolon29ab5ae1の全9fileを全文/Git SHA読戻�
 [全原本・全53読解・保存整合監査](https://chatgpt.com/library?file_id=libfile_c662389447a081918838ad0e02df0c53&account_id=personal)（最終ZIP1,144,260bytes/8member/SHA256 f9db844ee77add2a25ce0b37ac90148eb2488a69cc95676e300866876e52b9ed）。元ZIP1,221,559bytes/585member/SHA256 5b30dd18d4a4ea351bc297621792c4b4c8f1b501b8b5db42af781d604caf2794をCRC/安全path/全584member bytes-SHA＋manifest自己をZIP SHAで検証。元PENDING_RAW_READ reportは改変せず、後読解の採否を別review/semantic_units_reason_v3_probe53_results.jsonへ保存。
 
 採否はv3通常/次学習不採用、次GPU未選定。既存78のsource/targetを改変せずv3入力へ再構成したstrict/保存reader/学習prefix・EOS/tokenizer整合のCPU監査を次段階とする。raw教師化/生成後補修/受口緩和/最新版adapterの自動追学習/完了run再実行なし。本人基準の役割/判断/選択、複数field/本人補足/比較、記録間再出現/変化と通常累積接続は残件。通常HTTP/DB/RN/配置/Pod管理0、GPUレンタル維持。生成比較STRUCTURE_MAP_DELTA_NONE、private v3/profile/stateのみ既にPRESENT、TECHNICAL_CREDIT/product_credit0、正式0/3・54.50％据置。Codex Work/GPT-6 root＋同環境補助で、独立Pro/Ultra/human受入れではない。
+
+
+<a id="analysis-v3-teachers78-audit-plan-20261103"></a>
+## 11/3 — 旧78教材をv3へ束縛する学習入力のCPU監査を固定
+
+semantic_units_v3_teachers78_audit.pyのaudit/archive二段。旧78plan SHA72696f33ae6e8284eb928e7497fa966b64bb072c99474ea99abc6b5a93b133be、API58c、旧実学習run SHA59939d81022c4e8a86ce2217180a4f8143e6f46cc8141bc28dc6163f1593dbb4を固定。旧78source/assistant_target/106順は辞書全体まで不変と検査、元plan bytesも保持する。全78を現v2/v3 strictへ束縛し候補156保存reader再読、T4役割8保存再読と原meaning/文章図の明示identity以外一致、新RB2複数節のtyped拒否4を検査する。本文/targetはprivate原本だけに置く。
+
+実tokenizerをoffline固定revisionで読み、旧実runから抽出したrenderer ASTをCPUで再利用する。非teacher continue guard除去とtensor device=CPUだけを変換し、78組のinput/label/attention/gold tensorを保存reloadする。推論prompt token prefix、実assistant targetとEOS、prompt -100mask、shift後gold、tail位置、context余裕まで検査。モデルforward/loss同値や生成品質は未検証で、合格を意味採用へ換算しない。モデル/生成/更新/NLL0、新教師0、新学習plan/GPUの選定もこの監査自身は行わない。
+
+root=/workspace/analysis-v3-teachers78-audit-20261103、外CPU180秒上限。コードGitHub全文/SHA読戻し後に同Jupyterで一回実行する。成功/失敗にかかわらず別archive phaseが原本/exit/log/API6source/実renderer/全tensorとmanifestをZIPへ保全、partialを再実行しない。現時点は条件固定で実結果未確定。通常HTTP/DB/RN/配置/Pod管理0、GPUレンタル維持、STRUCTURE_MAP_DELTA_NONE/product_credit0。完了v3probe53を再生成せず、その採否は前節の不採用を維持する。

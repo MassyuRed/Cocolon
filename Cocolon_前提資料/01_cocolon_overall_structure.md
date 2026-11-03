@@ -7504,3 +7504,6 @@ API86d19b6d、STRUCTURE_MAP_DELTA_PRESENT。通常の累積mapは不変。新ana
 
 
 11/3 private入力版の差分：mashos-api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py がsemantic_boundaries.v3・別request identity/専用保存stateを所有し、旧v2指示へ理由のpublic対照を追加。既存service/Engine/compiler/author/normal既定は不変。既存test_analysis_model_quoted_parent_units.pyへ互換/保存境界検査を追加。trialのsemantic_units_reason_v3_probe53.pyと_supervisor.pyはCPU53旧版再読/新版rebind/新53生成/106保存再読/全原本保全のみ。新採用owner/型/通常route/DB/RNは追加しない。private版のみSTRUCTURE_MAP_DELTA_PRESENT、最新結果はweekly§107以降を確認。
+
+
+11/3・次入力監査の地図：trialのsemantic_units_v3_teachers78_audit.pyは既存78source/target/106順を不変にして、新旧strict/保存readerとv3学習renderer・CPU tensor/label/shift境界/終端を確認するCPU専用helper。audit/archive二段で完了又はpartial原本を保全し、モデルforward/生成/学習は行わない。最新の結果・再開はtrial/weekly§109以降。通常owner/型/受口/DB/RNは追加変更しない、STRUCTURE_MAP_DELTA_NONE。

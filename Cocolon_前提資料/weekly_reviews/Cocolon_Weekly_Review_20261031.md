@@ -2493,3 +2493,8 @@ NV04は結果root重複とWRITTEN_UNKNOWNの親不正という意味/形式未�
 [全結果・原本・再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-v3-probe53-result-20261103)。同9dc/v2 before53厳密再利用→v3 after53、学習0/NLL0/1load/53stopを474.553142秒/exit0、旧18file不変/compute空で完了。44raw同一/9変化、全53source/前後/19ROLEを照合。HQ04/Y02は理由marker/parent/連体否定と時点を正しく保持し改善、Y01は理由labelが出てもscope/marker/NEG未達、Y03はTEのまま。CQ04scope重なり、MD01不明carrier、MD02否定carrier、R01肯定copula modifierが新退行。R06合法unknown復帰は一般意味合格とは別。候補52→51/53、本人ROLE10→9、残る9のgraph/文章図は明示identity以外一致・scope拒否6保持。旧22JSON22/22維持、元RU02込み23参照は22/23維持。
 
 別CPU106保存再読は候補103復元/3拒否、ROLE19復元/13拒否、reader5呼出禁止で一致。CPU53shadowは生成/教師へ算入しない。元585memberのCRC/全bytes-SHAを照合し[全原本・全53読解・保存整合監査](https://chatgpt.com/library?file_id=libfile_c662389447a081918838ad0e02df0c53&account_id=personal)（最終ZIP1,144,260bytes/8member/SHA256 f9db844ee77add2a25ce0b37ac90148eb2488a69cc95676e300866876e52b9ed）。API683pass/2skip/114.72秒を保全、private v3/profile/state以外のowner/既定/strict/HTTP/DB/RN/配置/Pod管理変更0。新v3通常/次学習不採用、9e自動利用なし。次は旧78source/target不変のv3学習入力整合CPU監査、次GPU未固定。本人基準/記録間関係/通常累積接続は残件、GPUレンタル維持、STRUCTURE_MAP_DELTA_NONE/TECHNICAL_CREDIT/product_credit0、正式0/3・54.50％据置。完了53を重複起動しない。
+
+
+## 109. 11/3 — 既存78教材のv3入力/実学習label境界をCPU監査する
+
+[条件/コード/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-v3-teachers78-audit-plan-20261103)。旧78source/target/106順を全不変とし、API58cのv2/v3 strict候補156/ROLE8保存再読、新RB2typed拒否4を検査。旧実runのrenderer ASTとtensor/gold構築を抽出し、実tokenizer prefix/assistant EOS・CPU tensor78保存reload・prompt mask/shift後gold/tail位置/contextを確認する。モデルforward/loss/生成の成功証明とは別。CPU180秒上限、GitHub固定/読戻し後に同Jupyterで一回、partialもarchive-only保全して再実行しない。結果は未確定、モデル/生成/学習/NLL/新教師0、監査自身の新GPU選定0。通常owner/型/受口/HTTP/DB/RN/配置不変、STRUCTURE_MAP_DELTA_NONE。
