@@ -270,3 +270,6 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 
 11/3・分析の次作業（weekly§122）：不採用224ab/完了106更新を繰り返さず、原78不変＋独立作成した二欄8教示（肯否×欄位置）をCPU検証し、旧9dcから新8/旧保持10の各1回＝18更新・86poolの172NLL・同14保持＋別語彙8のafter22生成/2load/900秒で比較する。元PV評価/失敗rawは教師化しない。通常採用false、STRUCTURE_MAP_DELTA_NONE。
+
+
+11/3実行checkpoint：CPU86teacher/新教示8＋非学習X8のstrict/typed2node/保存非生成再読と実tokenizer/元78identity、同14beforeの完全messages/ref/response一致を確認してexit0。新教示8の原文/targetをroot全文照合、同環境read-onlyがsource16/runnerを確認。pack SHA30afde6a0735aac0b5f23e737b2b80c72e7dd65ba0cdbe4bc791886473f4bbf1、runner732d7602、sourceplan1500481d。root=/workspace/analysis-material-v4-pair8-20261103のrun_startedを確認しtrain processが進行中。prepare/run再起動禁止、既存reportから継承する。完了/採否は未確定、通常採用false。

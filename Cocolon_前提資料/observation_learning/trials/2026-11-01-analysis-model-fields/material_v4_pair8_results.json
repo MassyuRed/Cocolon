@@ -1,0 +1,18 @@
+{
+  "status": "RUNNING_TRAIN18_NO_RESTART",
+  "api_commit": "ded0586720df0c0d50d8838bcd391a19ca3eead5",
+  "root": "/workspace/analysis-material-v4-pair8-20261103",
+  "pack_sha256": "30afde6a0735aac0b5f23e737b2b80c72e7dd65ba0cdbe4bc791886473f4bbf1",
+  "runner_sha256": "732d7602a2396b8d05b43d3e4caa6310cd08a9e02f32e46da942ff844e89e20c",
+  "teachers": 86,
+  "new_teachers": 8,
+  "updated_examples": 18,
+  "planned_updates": 18,
+  "planned_nll": 172,
+  "reused_before": 14,
+  "planned_new_calls": 22,
+  "planned_model_loads": 2,
+  "normal_adoption": false,
+  "product_credit": 0,
+  "next": "read existing reports only; do not restart"
+}

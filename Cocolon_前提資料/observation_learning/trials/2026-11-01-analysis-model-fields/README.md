@@ -1514,3 +1514,6 @@ CPU成功・source/target全読・GitHub固定後にroot=/workspace/analysis-mat
 既存before14は前節before8＋PV6のsource/messages/ref/response/元初期lineage完全一致時だけ再利用。afterは同14＋新X8＝22生成、2load（18更新/NLL、別非学習processで保存重みreload）。要求45秒/context8192/新2048、全体900秒・処理上限約0.145USD@前確認0.58USD/h（準備/回収/保持等別）。新N8そのものの生成成功や全53保持をこの22へ加算しない。原文/実raw/typed/文章図/7呼出禁止保存再読を全文照合し、特にPV03/04copula・PV05旧成功・MD02二不明/他者否定・HQ04理由の保持を確認する。strict候補増やNLL低下だけで採用しない。
 
 新root再prepare/runを禁止し、既存rootへ上書きせず、完了/partialの重み/raw/全log/manifestをfinally保全。root単一writer＋同環境read-only確認、実環境GPT-6/Codex Work、Mash本人教示/独立Pro検証ではない。Mashの残件/GPU/GitHub承認を継承し追加承認待ちなし。通常採用false、API/owner/graph型/作者/通常HTTP/DB/RN/配置/Pod管理変更0、STRUCTURE_MAP_DELTA_NONE。一般本人基準/補足typed/記録間・比較/通常累積/IF・Savedは残件、GPUレンタル維持。
+
+
+11/3実行checkpoint：CPU86teacher/新教示8＋非学習X8のstrict/typed2node/保存非生成再読と実tokenizer/元78identity、同14beforeの完全messages/ref/response一致を確認してexit0。新教示8の原文/targetをroot全文照合、同環境read-onlyがsource16/runnerを確認。pack SHA30afde6a0735aac0b5f23e737b2b80c72e7dd65ba0cdbe4bc791886473f4bbf1、runner732d7602、sourceplan1500481d。root=/workspace/analysis-material-v4-pair8-20261103のrun_startedを確認しtrain processが進行中。prepare/run再起動禁止、既存reportから継承する。完了/採否は未確定、通常採用false。
