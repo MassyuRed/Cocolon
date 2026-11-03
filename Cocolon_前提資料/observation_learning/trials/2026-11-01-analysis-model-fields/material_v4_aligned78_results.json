@@ -1,5 +1,5 @@
 {
-  "status": "RUNNING_TRAIN_AFTER_FIXED_BEFORE8_NO_RESTART",
+  "status": "COMPLETE_REVIEWED_REJECT_NEW_WEIGHTS",
   "api_commit": "ded0586720df0c0d50d8838bcd391a19ca3eead5",
   "root": "/workspace/analysis-material-v4-aligned78-20261103",
   "pack_sha256": "5367a6fdbcaf6f16a0dc1d3aabdd07c8426fb552d8778d01b3587ce2ff4915c2",
@@ -13,5 +13,32 @@
   "before8_complete": true,
   "normal_adoption": false,
   "product_credit": 0,
-  "next": "inspect existing report/stage reports;never restart this root"
+  "next": "Do not restart completed run; reject224ab; retain9dc; inspect independently authored two-field teacher coverage without using PV evaluation/failed raw as target",
+  "updates": 106,
+  "nll_measurements": 156,
+  "new_calls": 22,
+  "model_loads": 3,
+  "seconds": 968.7720133541152,
+  "before14_candidate": 12,
+  "after14_candidate": 13,
+  "before14_typed": 5,
+  "after14_typed": 4,
+  "before_pair6_typed": 3,
+  "after_pair6_typed": 2,
+  "next_training_initial_adoption": false,
+  "new_weights_sha256": "224ab9a76ec456a61dfa83a3d5f2b49f689c898912b3eb704e8ab76ea05bf838",
+  "nll_mean_before": 0.02729631309510949,
+  "nll_mean_after": 0.011191189453968083,
+  "library_file_id": "libfile_79b7d52f4ac08191b7b008e405fb52a4",
+  "archive_sha256": "6dd9d39166f49d5e1b7abad3e400b3f43d66f31c0b2f781626729ce206babfba",
+  "archive_bytes": 15076788,
+  "original_manifest_verified": 236,
+  "full_review": {
+    "sources": 14,
+    "raws": 28,
+    "successful_projections": 9,
+    "candidate_replays": 25,
+    "typed_replays": 9,
+    "forbidden_saved_calls": 7
+  }
 }

@@ -7513,3 +7513,6 @@ API86d19b6d、STRUCTURE_MAP_DELTA_PRESENT。通常の累積mapは不変。新ana
 
 
 11/3 v3整合比較の結果：semantic_units_aligned_v3_78_results.jsonは本文なし最終採否・全原本参照・既存残件ownerの索引。4scriptの106更新/53生成は完了、理由4対照とCQ04は修復する一方で旧保持未達のため新重みは通常/次学習不採用。CPU監査/完了GPUを再実行せず、source_adapter/selected_material既存入力とsemantic_admission→ObservedPropositionの条件対応へ戻る。新owner/型/通常接続/DB/RNの追加はなくSTRUCTURE_MAP_DELTA_NONE。最新はtrial/weekly§112–113。
+
+
+11/3・分析の最新（weekly§121）：material.v4入力整合の106更新/156NLL・22新生成/3loadを完了。教師NLLは低下したが、二欄typed3→2、PV05の原文外actor/copulaとMD02の不明→RESULT退行により新224ab重みは通常・次初期とも不採用。理由/不明等の個別改善と形式候補12→13/14は意味全体の成立に換算しない。元78/旧9dcは不変、全14source/28raw/成功9文章図・保存再読を全文確認、原本/再開点保存済み。完了run再実行0、次は評価から切り離して独立作成する二欄教示の不足を確認。本人補足typed/記録間・比較/通常累積/IF・Saved等は残件、GPU2MiB/0％・レンタル維持。

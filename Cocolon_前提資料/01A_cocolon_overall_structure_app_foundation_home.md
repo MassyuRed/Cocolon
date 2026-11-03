@@ -6008,3 +6008,6 @@ API既存analysis_cumulative_service.py: with_action明示prepare/build/save/rel
 
 
 11/3 trial/material_v4_aligned78_trial.pyは、既存78原文/正解/106順を保ったv4入力のCPU整合・固定before8/既存before6再読・106更新/156NLL・保存reload/after14・同文章図保存再読/partial原本保全を扱う研究runner。API/型/通常owner追加変更なし。STRUCTURE_MAP_DELTA_NONE。
+
+
+11/3 trial/material_v4_aligned78_results.jsonは完了106更新/22生成と新224ab不採用・全原本参照・次再開点の索引へ更新。runner/source/商品ownerは追加変更せず、API ded0586不変、STRUCTURE_MAP_DELTA_NONE。最新はweekly§121。

@@ -1166,3 +1166,8 @@ API61e8aac2の既存semantic_admission.pyがv3継承の明示offline material.v4
 
 
 11/3の次研究はtrial/material_v4_aligned78_trial.pyで、元78source/target/106順を保ち学習messagesだけ既存material.v4へ整合する。旧78はfield中心、現在入力はrecord/カテゴリ/感情/時刻付き。固定保持8の新before/afterと既存PV6 before再利用/afterを比較し、NLLを一般品質へ換算しない。[条件/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v4-aligned78-plan-20261103)。API ded0586/既存writer/typed scope/通常経路は不変、STRUCTURE_MAP_DELTA_NONE。
+
+
+### 11/3 — v4入力整合比較完了・二欄退行で新重み不採用
+
+11/3・分析の最新（weekly§121）：material.v4入力整合の106更新/156NLL・22新生成/3loadを完了。教師NLLは低下したが、二欄typed3→2、PV05の原文外actor/copulaとMD02の不明→RESULT退行により新224ab重みは通常・次初期とも不採用。理由/不明等の個別改善と形式候補12→13/14は意味全体の成立に換算しない。元78/旧9dcは不変、全14source/28raw/成功9文章図・保存再読を全文確認、原本/再開点保存済み。完了run再実行0、次は評価から切り離して独立作成する二欄教示の不足を確認。本人補足typed/記録間・比較/通常累積/IF・Saved等は残件、GPU2MiB/0％・レンタル維持。 [全結果](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v4-aligned78-result-20261103)。既存API ded0586/owner/型/作者/通常接続不変、STRUCTURE_MAP_DELTA_NONE。

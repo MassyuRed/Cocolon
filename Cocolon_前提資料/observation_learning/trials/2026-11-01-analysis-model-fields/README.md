@@ -1483,4 +1483,20 @@ API ded0586/元9dc-config4776を固定。新material_v4_aligned78_trial.pyはCPU
 Mashの本セッションの残件/GitHub/GPU作業承認を継承。root単一writer＋同環境read-only review、実環境GPT-6/Codex Work、Pro/Ultra独立検証ではない。STRUCTURE_MAP_DELTA_NONE（商品source/型/作者/通常接続を変更せず、既存入力profileへの研究学習整合だけ）。一般本人基準/本人補足typed/記録間・比較/通常累積/IF・Savedの残件を保持し、新理論や分類を追加しない。
 
 
-11/3実行checkpoint：CPU prepareは全78targetのstrict/保存・実tokenizer/元source-target同一、PV6の元manifest/9dc-config4776/同messages-ref-rawと再読3graphを確認してCPU_PREPARED_NO_MODEL。pack SHA5367a6fdbcaf6f16a0dc1d3aabdd07c8426fb552d8778d01b3587ce2ff4915c2、CPU runner40dc3312、実行runner c76f807d（再prepareが既存rootへ書かない最小補修）。再entry拒否でcpu_manifest/pack/元runner bytes不変を実確認。root=/workspace/analysis-material-v4-aligned78-20261103、固定before8は全stop/exit0、学習processが進行中。起動済みrunを読むだけで継承し、prepare/runを再起動しない。完了/採否は未確定、通常採用false。
+11/3実行checkpoint：CPU prepareは全78targetのstrict/保存・実tokenizer/元source-target同一、PV6の元manifest/9dc-config4776/同messages-ref-rawと再読3graphを確認してCPU_PREPARED_NO_MODEL。pack SHA5367a6fdbcaf6f16a0dc1d3aabdd07c8426fb552d8778d01b3587ce2ff4915c2、CPU runner40dc3312、実行runner c76f807d（再prepareが既存rootへ書かない最小補修）。再entry拒否でcpu_manifest/pack/元runner bytes不変を実確認。root=/workspace/analysis-material-v4-aligned78-20261103、固定before8の後、106更新/156NLL/after14まで全exit0で完了した。完了runを再起動せず最終採否は次節を参照。通常・次初期とも新重み不採用。
+
+
+<a id="analysis-material-v4-aligned78-result-20261103"></a>
+## 11/3 — v4入力整合106更新を完了、新重みは二欄退行のため不採用
+
+固定API ded0586/実行script c76f807d、元9dc-config4776から106更新/156NLL・新22生成/3loadを968.772013354秒で完了（before8＋after14、before PV6は同messages/ref/responseの既存6を再利用）。3phase全exit0/全22stop。元78source/target/旧106順を変更せず、material.v4のmessagesだけ整合した比較。全78strict/保存/実tokenizerと再prepare拒否、CPUpack SHA5367a6fdを確認済。平均教師NLLは0.02729631309510949→0.011191189453968083だが意味品質ではない。
+
+rootと同環境read-only担当が全14source/全28raw/成功全9graph・文章・図を全文照合。候補受理は12/14→13/14、typedは5→4（保持T01/T02は2→2、PV6二欄は3→2）。PV03はROLE「だった」の誤modifierが残りACTION「た」も誤modifier化、PV04はcopula/NEGの誤modifierが残る。PV05は所有格ROLEに原文外「私は」とcopula誤modifierを出し、従来成功を失った。MD02は行動/否定が復旧しても第2不明をRESULTへ誤分類しUNKNOWN_CONTENTを失う。形式受理増を改善率へ換算しない。
+
+R08のcopula誤modifier除去、OA01の不明carrier復旧、YREASON01の理由marker/親子/不明範囲復旧は個別改善。HQ04はbeforeから正しくraw不変で新改善ではない。T01/T02/PV01/PV02のraw・typed保存・projection bytesは前後同一、SC01の他者/否定/二不明、PV06の推測とfact限定typed拒否も保持。候補25・typed9保存再読は全一致、reader内Engine/compiler/作者の7呼出禁止。辺/反復0、欠段とroutegap、カテゴリ/根拠/肯否/同artifact文章図を保持した。
+
+新adapter SHA224ab9a76ec456a61dfa83a3d5f2b49f689c898912b3eb704e8ab76ea05bf838/config47b4e02c5d540b27abcf4673099eb848f4b1bd9a5181214707c45fa47efe0c65は通常・次学習初期とも不採用。元9dc/元78bytesは不変。入力整合だけでは二欄copula/NEG残件を解消しないと絞れた比較であり、一般精度/全53保持/本人受入れの達成ではない。完了runを再実行せず、評価PV6や失敗rawを教師化せず、独立作成する二欄教示の不足を次に確認する。
+
+[全原本・全読・最終採否](https://chatgpt.com/library?file_id=libfile_79b7d52f4ac08191b7b008e405fb52a4&account_id=personal)（15076788bytes/2member/SHA256 6dd9d39166f49d5e1b7abad3e400b3f43d66f31c0b2f781626729ce206babfba）。元ZIP15223897bytes/237member/SHA8d6c1e4f3f61a8cc8e24b004100908880416ab4527438aeb9e221161c2721c22、CRC/安全path/全236manifest SHA/新weights・configをPod外照合。PENDINGを含む元report/raw/重みを改変せず別final_reviewに不採用判断を保存した。
+
+処理按分約0.156080USD@前確認0.58USD/h（準備/回収/保持別）。終了後の外GPU2MiB/0％/compute空、レンタル維持。API/通常ensure/prompt/HTTP/公開DTO/DB/RN/Render/Supabase/配置/Pod管理変更0。STRUCTURE_MAP_DELTA_NONE、比較のTECHNICAL_CREDIT/product_credit0。一般本人基準/補足typed/記録間・比較/通常累積/IF・Savedは残件。
