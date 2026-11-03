@@ -3332,3 +3332,6 @@ API dc05dc35、通常product owner追加なし。既存 `semantic_admission.py` 
 | semantic_boundaries46_supervisor.py | 固定source/SHA/API/旧6adapter対を照合、890+10秒上限/partial/終了・compute・manifest保全 |
 
 結果・再開点は[trial](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-boundaries46-plan-20261103)、weekly§95。今回比較を新しい通常subsystemや一般意味品質へ昇格しない。
+
+
+同trialの `semantic_boundaries46_collect.py` は完了後の別CPU processでbefore/after92保存応答とrole24判定を照合し、Engine/両compiler/両authorなしの実保存復元を確認する。元UTF-8 file群とbyte/SHA付き回収材料だけを出し、モデル/load/生成/更新0、新重みコピーなし。API dc05の対象5fileは666PASS/2SKIP、114.14秒。

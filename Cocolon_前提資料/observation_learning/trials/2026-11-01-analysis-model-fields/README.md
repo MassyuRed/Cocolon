@@ -1122,3 +1122,6 @@ API [dc05dc35](https://github.com/MassyuRed/mashos-api/commit/dc05dc358d1c44ce47
 検査起動用の初回2scriptは改行escape不備によりparse前停止、API setup/pytest/モデルload/生成/更新0。元code/logを保持し、構文検査済みfileをSHA照合してJupyterへ渡す方式へ切り替えた。実test/GPUの結果とは分けて記録する。新test結果・比較品質はこの条件固定時点では未確定。root単一writer＋同環境read-only確認、独立Pro/Ultra/human受入れではない。
 
 本人基準の判断/選択、複数field/補足/比較、記録間再出現/変化、通常累積保存への一般接続という既存残件を維持。通常API/DB/RN/Render/Supabase/稼働/配置/Pod管理変更0、GPUレンタル維持。STRUCTURE_MAP_DELTA_PRESENTはprivate prompt/state版のみ、生成比較はNONE、product_credit0。
+
+
+実行checkpoint：API dc05の対象5fileは666PASS/2SKIP/既存warning1、114.14秒/exit0。固定3b8ff717の3script全bytes読戻し後、CPUの旧46採否/保存/同user/tokenizer照合が成功（plan SHA256 `79b7b671f1a82c5b09c0b19f1c2b7ff35b68d2445d2196e98e491f71c2cabc45`）。同Jupyterで一回起動済み、32.759737秒時点で3新要求/1load/STARTED。最終結果・品質は未確定。rootが存在するため重複起動しない。collect helperは別CPU processの92応答/typed-role再読と元UTF-8 filesのbytes/SHA回収だけを行い、モデル/load/生成/更新0。完了後だけ実行する。

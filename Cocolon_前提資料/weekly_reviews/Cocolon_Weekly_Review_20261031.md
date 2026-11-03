@@ -2388,3 +2388,6 @@ plain CE/LR1e-5/clip1/seed20261111、要求23秒、内部900秒/外側890+10秒�
 API dc05dc35の既存2owner/既存testだけへsemantic_boundaries.v2を明示offline追加。system追記のみ・user本文同一、旧baseline/category/materialのref/messages/stateとstrict/role witness/通常ensureは保持。新ref/private saved-stateを分離。保存73ee/072622は指示差の研究用に明示選定し、通常/次学習初期値採用ではない。role74 after46を全文同一性確認で再利用、新46/1load/学習0、23秒/900秒上限の一回。各bodyと旧保持・typed map/保存を実読し、未知盲検/一般率へ換算しない。
 
 初回test launcher2件は改行escape構文不備でsetup/pytest/GPU前に停止。元log保持、構文検査済み元file＋SHA転送へ変更。対象test/CPU準備成功、GitHubコード読戻し後にGPU一回だけ実行する。モデル再試行/追加epoch/補修/受口緩和0。通常HTTP/DB/RN/配置/Pod管理不変、private入力版だけSTRUCTURE_MAP_DELTA_PRESENT、研究比較はNONE。全体残件・正式0/3・54.50％は据置。
+
+
+§95実行checkpoint：API dc05対象5fileは666PASS/2SKIP/既存warning1（114.14秒/exit0）。固定3b8ff717の3scriptをremote全bytes確認し、CPU旧46原本/同採否/保存非生成再読/新user同一/tokenizer確認が成功。plan SHA79b7b671…、同Jupyterで一回起動、32.759737秒で3新要求/1load/STARTED。最終結果・採否は未確定。report/exitを先に読み、起動済みrootを重複実行しない。
