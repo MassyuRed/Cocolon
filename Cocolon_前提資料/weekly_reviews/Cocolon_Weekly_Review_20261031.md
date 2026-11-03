@@ -2509,4 +2509,7 @@ NV04は結果root重複とWRITTEN_UNKNOWNの親不正という意味/形式未�
 [条件/コード/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-plan-20261103)。旧78source/target/106順と初期9dc/config4776、CE/LR/seed/clip/dropoutは保持し、messagesだけv3へ揃える。9dcを研究初期値へroot明示選定、9e自動利用/新教師0。before53は完了v3probe53 after実原本を厳密再利用し新before0。新after53/前後v3NLL156/106更新/2load/1200秒（外1190+kill10、要求23/context8192/maxnew2048）、旧18file保持/112保存reload、別CPU106保存再読/全原本・重み保全、失敗時archive-only/再試行0。GitHub固定/読戻しとCPU監査69016aeb/原文意味監査81dce4e3/準備成功後に一回実行、現時点実結果未確定。旧v2 NLL同値を要求せず、新版で両測定。通常既定/strict/typed scope/API/DB/RN/配置不変、STRUCTURE_MAP_DELTA_NONE、本人基準/記録間関係/通常累積接続は未完。GPUレンタル維持、正式0/3・54.50％据置。
 
 
-§111実行checkpoint：GitHub301ed26eの全11fileを全文/Git SHA読戻し後、同Jupyterで4script SHA/ASTとAPI58c/tests0/CPUaudit69016/意味監査81dce4を照合しPID151895を一回起動。CPU prepare.exit0、78再束縛/実audit一致/旧source-target-order/実v3before53の全bytes再利用/tokenizer/保存readerを通過。固定plan SHAはf4e590de…、GPU100.524480秒時点で前測定78/更新27/1load/新call0・STARTED。最終結果未確定。終了後の別CPU106保存再読/全原本梱包はsupervisorに一回接続済み。再開は既存report/exit/collectionを先に読み、完了又は実行中rootを重複起動しない。
+§111実行checkpoint：GitHub301ed26eの全11fileを全文/Git SHA読戻し後、同Jupyterで4script SHA/ASTとAPI58c/tests0/CPUaudit69016/意味監査81dce4を照合しPID151895を一回起動。CPU prepare.exit0、78再束縛/実audit一致/旧source-target-order/実v3before53の全bytes再利用/tokenizer/保存readerを通過。固定plan SHAはf4e590de…、GPU100.524480秒時点で前測定78/更新18/1load/新call0・STARTED。最終結果未確定。終了後の別CPU106保存再読/全原本梱包はsupervisorに一回接続済み。再開は既存report/exit/collectionを先に読み、完了又は実行中rootを重複起動しない。
+
+
+進捗読取補正：上記100.524480秒時点の更新数は18（27という転記を修正）。実runは変更/再実行していない。後続233.722754秒時点は更新63/前測定78/1load/新call0、エラーなし・最終未確定。
