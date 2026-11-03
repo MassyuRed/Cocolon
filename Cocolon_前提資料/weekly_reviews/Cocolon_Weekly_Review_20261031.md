@@ -2725,3 +2725,23 @@ rootが実行/最終判断の単一担当、同環境補助がgrammar候補作�
 11/3・§126実行補正：最初の接続はtokenizer EOS248046（im_end）と、既存loaderがcached model configから使うEOS248044（endoftext）が不一致だった。T01/T02/R08はJSON完成後も終了せず各60秒length、第4SC01は途中中断。SIGINTは子に効かなかったため既存SIGALRM handlerで打ち切り、232.111664秒/PARTIAL_FAILED・3応答＋第4要求/1load・全partial原本ZIPを保全、GPU2MiB/0％を確認した。品質成功0。最初のCPU EOS検証がtokenizerだけを見て接続先のHF終了条件を見なかった実装不備で、モデルの意味失敗へ帰属しない。旧syntax2bの過去失敗との原因同一性は主張しない。
 
 修正版runner7c3c3554は既存HF生成/finish条件を変えず、factoryへactual model EOSを渡しCPUで得たmodel EOSと一致させる。mask側EOSをその正規IDへ束縛し、既存cacheを消去する。real EosTokenCriteriaで未完成禁止/完成許可/advance/実停止対象を確認し、90target等のCPU再確認は13.534700秒/モデル0で成功。grammar/source/全重み/意味検査は不変。SIGINT/TERMも既存打切りhandlerへ接続した。旧root/旧archiveを上書きせず、新root=/workspace/analysis-material-v4-source-mask-eos2-20261103、新22生成/1load/学習0/最大600秒に限定。旧232.12＋新最大600は元900秒の処理枠内、試行数/読込回数をリセットせず合算記録する。終了値を語彙外fallbackやJSON完成だけでstop扱いにしない。修正版の一回以外を自動反復しない。
+
+
+<a id="analysis-material-v4-source-mask-result-20261103"></a>
+## 127. 11/3 — 原文内引用の一回比較を完了、意味と表示は改善せず通常不採用
+
+§126の最初のEOS接続不備は232.111664秒/3length＋第4要求中断・1loadとして保全した。実model EOS248044へmaskを合わせたrunner7c3c3554/grammarf9e20f0eで、同API ded0586/同material.v4/同a2e-config006eの新22生成を204.867765秒/全stop/1load/学習0で完了。旧partial rootを再実行・上書きせず、新eos2 rootを使用し、最初の3rawは修正後の同3rawと完全同一で正常終了へ戻った。試行を合算すると26要求開始＝22stop＋3length＋1中断、2load/学習0、436.979428秒で元900秒枠内。新重み書込0、初期weights/config不変。
+
+同22例はcandidate20→21、typed文章図14→14。21例のJSON値は同一、変化はX03だけ。原文外「模型を作った」は原文内「模型を作らなかった」へ制限できたが、対象名詞「模型」の代わりに行動節全体をCONTENT_TARGETへ選んでおり、typedはanalysis_written_role_action_candidate_mismatchで正しく拒否する。原文内であることは意味上の対象選択の正しさを保証しない。候補受理増を意味改善へ換算しない。
+
+全14共通成功のgraph全文、文章と図の全値（projection_of以外）は完全同一。全22raw bytesと全14保存bytesはcompact終端/応答identity等で変わるが、可視改善は0。T01/T02の1node・欠4段、二欄12例の2node・欠3段＋routegap、カテゴリ/SELF/fact/past/肯否/欄順・辺0を保持。X05–08の対象子欠落は元のままで、既存の全文finite proofによる成功をモデルの全scope生成へ換算しない。PV06の推測を保持しfact限定typed拒否も維持する。
+
+MD02のnode_kind=null/scope_role=nullという無効carrierとNEG漏れはraw不変、YREASON01のので理由marker欠落・れた誤modifier・連体親誤りも不変。後者の一意な短い不明rootと対象子の組合せは許容され、短さだけを意味消失としない。HQ04理由、SC01の他者否定/二不明、OA01不明は前からの保持で新改善ではない。今回はa2eだけの比較で、前回d3dの重複ROLE退行を修復・採用したのではない。
+
+rootと同環境read-only補助が全22source/44raw/成功14graph・文章・図を確認。候補41・typed28の保存非生成再読は全MATCHED、7生成/compiler/作者呼出禁止を維持。全原本のCRC/安全pathと旧135＋新240manifest SHAをPod外照合。初回EOS検証不足という実装不備と、モデルの意味未達を区別する。実環境GPT-6/Codex Work、Mash実演/独立Pro Product Read/一般正解率の検証ではない。
+
+[初回失敗を含む全原本・全文確認・最終採否](https://chatgpt.com/library?file_id=libfile_ea27b60e3ee48191b0ed89a5065e6a0d&account_id=personal)は785921bytes/3member/SHA01ee9ff6e39030c3d405181e1c03191af21d58083f5d94ce27826575442de2f1。内側originals.zipは782845bytes/9member/SHA9af577a5395934b42530a5c44b623d7ead9e090580c64e5124b4a9c7bfc1d5db、旧partial ZIP300727bytes/SHA d5f01cb9c6235a4b49577827705607a02c4735bff962aff46d5adcd064670afa、新eos2 ZIP530195bytes/SHA e58fe598288e3f5c2e5e52810a78ab709b9d9bd932ccbc255429c0c04504d6d2を不変保持。外側へ最終review/metricsを保存し既存raw/reportを書換えない。本文なし索引はmaterial_v4_source_mask_results.json。
+
+生成制御は研究結果として保存するが通常不採用。a2eは既存研究候補、d3d不採用を維持し、検査緩和や追加maskで意味理解を肩代わりしない。同じ教示/quote-first/指示変更・完了runを自動再試行しない。次は既存の対象名詞と有限述語の教示が生成時の範囲選択へ反映されない箇所を、元原文と既存学習ownerから切り分ける。新しい学習方式/追加GPU条件は未固定。本人基準/補足typed/記録間・比較/通常累積/IF・Savedは残件。
+
+GPU処理按分0.0352011USD@表示0.29/h（CPU準備・回収・待機レンタル保持・保存/通信/税等別、実総請求額は未測定）。終了後GPU2MiB/0％/compute空、レンタル維持。primary outcome=BLOCKER_NARROWED/product_credit0、通常source/strict/typed/唯一作者/ensure/HTTP/公開DTO/DB/RN/Render/Supabase/配置/Pod管理変更0、STRUCTURE_MAP_DELTA_NONE。

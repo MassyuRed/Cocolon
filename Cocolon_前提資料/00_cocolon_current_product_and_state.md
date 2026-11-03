@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-**11/3・分析の次比較（第9回§126）：** 前回d3d不採用/a2e研究候補を保持し、追加学習を繰り返さず、同a2e・同22入力で生成時のcompact schema/原文内引用制約を比較する。既存token maskを使い、意味選択/否定/親はモデルと既存CMEEに残す。CPU90target tokenbytesと既存strictを緩めない境界を13.669秒/モデル0で確認。初回は終了トークン接続不備で232.112秒/3length＋第4中断・保全済み。実model EOSへ合わせたCPU再確認13.535秒が成功し、新rootで22生成/1load/学習0/最大600秒へ補正。旧試行を除外せず合算記録、通常/API/DB/RN不変。完了後に全raw/文章図から採否を更新する。
+**11/3・分析の最新結果（第9回§127）：** 同a2e/同22入力を、生成時のcompact schema/同field原文内引用制約で比較。EOS接続不備の初回232.112秒/3length＋第4中断を保全し、実model EOSへ合わせた修正版は204.868秒/22stop/学習0で完了（合計26要求/2load/436.979秒）。candidate20→21だが、X03は行動節全体を対象とする誤りが残りtyped14→14、旧成功14のgraph/表示は同一。MD02否定/他者とYREASON01理由境界も未達。可視改善0、生成制御は通常不採用、a2e研究候補/d3d不採用を維持。全原本/保存非生成再読/採否を保存、GPU2MiB/0％・レンタル維持。通常/API/DB/RN不変、本人基準/補足typed/記録間/通常累積/IF・Savedは残件。
 
 **11/3・分析の最新結果（第9回§100–102）：** 74教師監査後、旧74不変＋原文対照2を76教師/90更新/152NLL/50新stop/2load・641.971830秒/exit0で比較。NV04の結果重複/不明の親不正を改善し、R4/T4/追加本人2の10ROLE文章図を前後bytes同一で保持。50rawは46同一/4変化、HQ04理由誤分類は残りR08肯定過去copulaに誤modifier再発。strict候補47→49は意味率ではない。100保存非生成再読/元532memberの全bytes-SHAを確認・新重み9dcを保全、通常/次初期値は未採用。[結果・原本・再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-reason-unknown76-result-20261103)。全対象分離は現行必須でなく、次は理由の述語/不明併存差と複数文copula保持をCPUで切分け。通常HTTP/DB/RN/配置不変、本人基準/記録間関係/通常累積接続は未完。GPUレンタル維持、STRUCTURE_MAP_DELTA_NONE。
 
