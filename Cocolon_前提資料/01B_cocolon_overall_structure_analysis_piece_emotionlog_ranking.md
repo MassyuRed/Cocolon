@@ -3335,3 +3335,6 @@ API dc05dc35、通常product owner追加なし。既存 `semantic_admission.py` 
 
 
 同trialの `semantic_boundaries46_collect.py` は完了後の別CPU processでbefore/after92保存応答とrole24判定を照合し、Engine/両compiler/両authorなしの実保存復元を確認する。元UTF-8 file群とbyte/SHA付き回収材料だけを出し、モデル/load/生成/更新0、新重みコピーなし。API dc05の対象5fileは666PASS/2SKIP、114.14秒。
+
+
+同trial追加 `semantic_boundaries46_results.json` は本文なしの確定実結果・役割/旧保持の退行・不採用・92保存応答の照合・400原本/終了log2/private保存先を保持する。上記4scriptと合わせてpublic研究file5件。元教師22/a5原出力34の派生参照と実読reviewはprivate archive内に置き、通常product ownerへ追加しない。[全結果と現在の再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-boundaries46-result-20261103)、weekly§96。API dc05のprivate版は保持するが通常採用せず、旧既定・strict・ROLE scope・HTTP/DB/RN構造は不変。

@@ -1893,3 +1893,6 @@ Mashの「選択カテゴリを使う接続を直す」指示により、通常�
 ## 2026-11-03 — 同じquoted-parent契約の意味境界指示版
 
 API dc05dc35のsemantic_boundaries.v2は、既存Inputの明示private prompt版だけを追加する。baselineと同じuser payload/原sourceへ、述語と対象・否定scope・不明親・相対時・役割/copula等の一般原理をsystem追記する。旧3版のmessages/ref/state/保存readerは保持し、新ref/private state版へ分離。wire/schema・既存compiler/唯一author・typed-role完全source witness/対応scopeを変更しない。通常ensure/HTTP/DB/RNは選ばない。候補が正しい意味を読めるかは[新46一回比較](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-boundaries46-plan-20261103)で確認し、指示追加そのものを意味品質の改善にしない。private入力版のみSTRUCTURE_MAP_DELTA_PRESENT。
+
+
+11/3 actual：semantic_boundaries.v2の追加学習なし46比較は完了。引用/対象/否定の局所復帰がある一方、役割3→2/4・教示T4 4→2/4と新退行が生じ、新版は通常未採用。意味採用/ROLE witnessや保存条件を緩めず、旧3版/各既定を保持する。[確定実結果・原本・再開点](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-boundaries46-result-20261103)。新しい通常graph/HTTP/DB/RN接続の完成ではない。

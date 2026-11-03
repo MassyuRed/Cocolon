@@ -3313,3 +3313,6 @@ state schema=cocolon.cmee.analysis_model_written_role_state.v1、exact rootはsc
 API dc05dc35。既存AnalysisModelQuotedParentUnitsInputのprompt_versionにsemantic_boundaries.v2を追加。同じbaseline user materialと既存wireを使い、request identityへ版を入れsystem追記のmessages hashへ束縛する。新stateは `cocolon.cmee.analysis_model_units_quoted_parents_state.semantic_boundaries.v2`、既存のschema_version/request_ref/response/candidate_id/graph/text/diagram＋prompt_versionを保持する。既存累積unit file wrapperは不変。ROLE file/stateも既存版のprompt_version束縛を使い、既存graph/文章図をEngine/compiler/authorなしで検証復元する。
 
 旧baseline/category/materialのstate/schema/keys/messages/refは変更しない。別版のresponse/hash/ref/stateを新版へ付替えず拒否する。新論理型・HTTP/DTO/DB/RN schemaなし。通常既定へ有効化せず、[一回比較と実採否](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-boundaries46-plan-20261103)は別に記録する。private保存版のみSTRUCTURE_MAP_DELTA_PRESENT。
+
+
+11/3の実比較は新版の通常採用を見送り。92保存応答を別CPU processで候補86/拒否6、ROLE11/拒否13の同じ採否と意味・文章/図へ復元確認した。新旧prompt/ref/messages/stateの束縛を保ち、元rawや旧保存schemaを新版へ付替えていない。[実結果・原本・再開点](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-boundaries46-result-20261103)。本private state版の技術検査成功を一般意味品質/通常有効化にしない。

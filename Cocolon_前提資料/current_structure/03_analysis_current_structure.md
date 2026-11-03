@@ -1,4 +1,4 @@
-> **2026-11-03最新・役割学習比較完了：** API88078の同じ限定typed-role受口を変えず74教材/86更新/新50生成を一回完了。既出対応役割は1→3/4、T4は4/4教示再現、同一文章/図/保存再読まで成立。一方、旧34の5退行とR01未達のため新73ee8d/072622は通常/次学習初期値へ未採用。92保存応答と元718member/112重みを全bytes-SHA照合し保存。[全結果・原本・再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-written-role74-result-20261103)。通常owner/型/ensure/HTTP/DB/RNは不変、STRUCTURE_MAP_DELTA_NONE（今回の隔離研究）。本人基準・記録間関係・通常累積保存の一般接続は残件。
+> **2026-11-03最新・意味境界指示比較を完了：** 同73ee/同userでsystemだけを追記し、46新生成/1load/学習0・417.780639秒/exit0。引用/対象/否定の3例はa5へ復帰したが、新退行と肯定役割の誤修飾が再発し、役割3→2/4/T4再現4→2/4。新版は通常未採用、旧各版/既定を維持。[全結果・原本・再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-boundaries46-result-20261103)。92保存応答と全原本を照合・保存済み。API dc05のprivate prompt/state版のみSTRUCTURE_MAP_DELTA_PRESENT、通常owner/型/ensure/HTTP/DB/RNは不変。
 
 > **2026-11-03履歴・replay68：** 再掲3枠だけを変えたreplay68は74更新/32新stop、491.863046秒で完了したが、新しい意味改善はなく不採用。SQ03/MD02の不足は残り、OD01は不正unitへ変化して拒否継続、MD01にも親曖昧の新拒否。SC6=6/6と旧AT/UQ/MX/OAの教師一致、CE68の局所改善は保持。 旧68にない『対象分離＋継続修飾＋強調否定』と別actor/二不明文脈の組合せ2件を原sourceから合成し、実strict/実file非生成再読/実tokenizer prefix・EOSまでCPU確認。モデル/生成/更新0、新70教材の学習plan/GPUは未選定。診断文やrawの教師化ではない。 [結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-replay68-result-20261103)。通常source/API/DB/RN/稼働/Pod管理不変、全未解析/主体未解決/route0、STRUCTURE_MAP_DELTA_NONE。局所教材/保存の成立を、本人基準の役割/判断/選択と記録間関係・通常graph接続の完成へ換算しない。
 
@@ -1081,3 +1081,6 @@ Mashが既に申し出ている観測会は、この読み取り方の教材を�
 API dc05dc35の既存quoted-parent Inputにsemantic_boundaries.v2を追加し、baselineと同じuser payloadへsystem原理だけを追記する。単語列挙だけでは曖昧だった対象/述語、否定/不明/時間、反復不明親、役割/copula等を区別する候補。元raw修復やsource-only通常化でモデル誤りを隠さない。旧3版のmessages/ref/state、strict、typed-role witness/1record/1field/明記一節、既存文章/図は保持。新request identityとprivate saved-state版へ分離、通常ensure/HTTP/DB/RNは未変更。STRUCTURE_MAP_DELTA_PRESENTはprivate版だけ。
 
 保存73ee/072622を指示差の研究用に明示選定し、baseline before46を再利用、新46生成/1load/学習0/900秒で旧保持とrole表示を一回比較する。[条件・実装・再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-boundaries46-plan-20261103)。成功前に通常採用/一般本人理解/記録間関係の完成へ換算しない。
+
+
+11/3の上記指示版比較は完了。既出役割3→2/4と肯定教示の退行により新版を不採用とし、strict/完全source witnessを緩めず旧既定を保持する。ROLEのafter採用4件は否定だけで、元graph/文章図の意味は同一。引用候補の局所改善を通常意味接続・本人基準・記録間関係の完成へ換算しない。次は既存source-authored74の正解と実学習入力の対応を保ち、ROLEの過去/肯否と従来保持を同時に改善する一回条件へ戻る。新system文言だけの反復やraw教師化へ進まない。[実結果・原本・再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-boundaries46-result-20261103)。

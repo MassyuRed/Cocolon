@@ -2383,6 +2383,8 @@ plain CE/LR1e-5/clip1/seed20261111、要求23秒、内部900秒/外側890+10秒�
 <a id="analysis-semantic-boundaries46-plan-20261103"></a>
 ## 95. 11/3 — 意味の区別を明文化した指示差を追加学習なしで比較
 
+実行前の固定条件/途中checkpointの履歴。完了・採否・現在の再開点は§96を優先する。
+
 [固定条件・実装・再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-boundaries46-plan-20261103)。§94の旧5退行/R01を原source/旧74教師へ照合。MX02は正解教師が既にあり、SC/UQ/AT32/T4にも直接矛盾なし。教材不足や唯一原因とは断定しない。promptで未明文化だった述語/対象、当該述語の否定、相対時/推測、反復不明親、役割/copula/修飾、逐語主体を明示する候補へ進む。追加dose/order/追学習ではない。
 
 API dc05dc35の既存2owner/既存testだけへsemantic_boundaries.v2を明示offline追加。system追記のみ・user本文同一、旧baseline/category/materialのref/messages/stateとstrict/role witness/通常ensureは保持。新ref/private saved-stateを分離。保存73ee/072622は指示差の研究用に明示選定し、通常/次学習初期値採用ではない。role74 after46を全文同一性確認で再利用、新46/1load/学習0、23秒/900秒上限の一回。各bodyと旧保持・typed map/保存を実読し、未知盲検/一般率へ換算しない。
@@ -2391,3 +2393,17 @@ API dc05dc35の既存2owner/既存testだけへsemantic_boundaries.v2を明示of
 
 
 §95実行checkpoint：API dc05対象5fileは666PASS/2SKIP/既存warning1（114.14秒/exit0）。固定3b8ff717の3scriptをremote全bytes確認し、CPU旧46原本/同採否/保存非生成再読/新user同一/tokenizer確認が成功。plan SHA79b7b671…、同Jupyterで一回起動、32.759737秒で3新要求/1load/STARTED。最終結果・採否は未確定。report/exitを先に読み、起動済みrootを重複実行しない。
+
+
+<a id="analysis-semantic-boundaries46-result-20261103"></a>
+## 96. 11/3 — 指示差46生成を完了、一部復帰と新退行により新版を不採用
+
+[全結果・原本・再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-semantic-boundaries46-result-20261103)。API dc05/同73ee/同user、system追記だけを一回比較。46新stop/1load/学習0、417.780638997秒（親427.415777164秒）/exit0、旧6adapter対不変・compute空。処理落ち後も既存Jupyter runは完了しており、再生成/重複起動せず回収・全文読解から再開した。
+
+全46原文/before/afterと全11ROLE保存artifactをroot/同環境read-only担当が全文確認。CQ03/MX02/MD02はa5へ完全復帰、OD01は不明親回復。一方、PQ02の非時間表現はmodifierへ移動し全面解決ではない。NV04/AT19/MD01/RC01に明確な新退行、HQ03/MX01に本人語を残したactor qualifier脱落。旧34は21raw同一/13変化、a5と24/34同一、SQ03は順だけの変化。意味率へ換算しない。
+
+肯定copulaの誤modifierがR03/T01/T03に再発、R01は未改善。役割R4は3→2/4、T4は4→2/4へ低下。after否定4件は同じ意味/文章/図を保持、scope外4件は不採用。教師JSON値一致は21→16/22（AT3/4、UQ1/2、MX1/2、OA2/2、SC6/6、RC1/2、T2/4）。華恋合成/既見で、Mash教示/盲検/一般品質ではない。新版は通常採用せず、旧3版/既定を維持する。
+
+別CPU processの92応答は候補86復元/6拒否、ROLE11復元/13拒否で一致。Engine/両compiler/両authorなし保存再読、追加モデル/load/生成/更新0。API対象666PASS/2SKIP/既存warning1（114.14秒）。初回2launcher構文不備はsetup/pytest/GPU前として記録を保持し、構文確認済み元file転送へ修正後に実testを一回実行。元report PENDING_RAW_READ bytesを保全した。
+
+[全原本](https://chatgpt.com/library?file_id=libfile_933d01e1c04c8191a3aec76fe9ba0e63&account_id=personal)は747,227bytes/409member/SHA25625603cc4…、400元file＋完了log2、派生参照1とreview/recovery等6memberを保存。新重みなし。次は既存source-authored74の正解を保持してROLEの過去/肯否・旧保持を実学習入力へ揃え、一回の改善条件を具体化する。system-only文言反復/raw教師化/完了run再実行なし。本人基準・複数field/補足/比較・記録間関係/通常累積保存は残件。通常HTTP/DB/RN/稼働/配置/Pod管理0、GPUレンタル維持、private版だけSTRUCTURE_MAP_DELTA_PRESENT、比較はNONE。TECHNICAL_CREDIT/product_credit0・正式0/3・54.50％据置。

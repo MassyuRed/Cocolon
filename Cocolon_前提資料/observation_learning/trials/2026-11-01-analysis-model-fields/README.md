@@ -1,4 +1,4 @@
-> **11/3最新・役割74教材比較完了：** 86更新/新50生成/148測定/3loadを620.929717秒で正常終了。既出の対応役割は1→3/4が意味・文章・図・非生成保存再読へ到達し、追加T4は4/4教師再現。一方、旧34の5件に意味退行、R01の過去copula誤modifierも残るため、新73ee8d/072622は通常/次学習初期値へ未採用。全92応答再読、元718member/112重み全bytes-SHAを照合し保存済み。[全結果・原本・再開点](#analysis-written-role74-result-20261103)。今回と旧完了runを再起動しない。
+> **11/3最新・意味境界指示比較完了：** 同じ保存73ee重み/同じuser材料でsystemだけを追記し、46新stop/1load/学習0を417.780639秒/exit0で完了。CQ03/MX02/MD02はa5出力へ復帰しOD01の不明親も回復したが、新退行と肯定役割の誤修飾が生じ、役割R4は3→2/4、T4は4→2/4へ低下。semantic_boundaries.v2は通常採用せず、旧各版/既定を維持。[全結果・原本・再開点](#analysis-semantic-boundaries46-result-20261103)。92保存応答再読、全400原本/終了log2をbytes-SHA照合・保存済み。完了runを再起動しない。
 
 # Analysis — 最小field接続と実4B probe
 
@@ -1111,6 +1111,8 @@ rootと同環境read-only担当が全46 source/before/afterと全8採用role保�
 <a id="analysis-semantic-boundaries46-plan-20261103"></a>
 ## 11/3 — 同じ保存重みで意味の区別を明文化し、追加学習なしで46件比較
 
+本節は実行前に固定した条件と途中checkpointの履歴。現在は完了し、採否・原本・次の再開点は[結果節](#analysis-semantic-boundaries46-result-20261103)を優先する。
+
 role74の旧5退行とR01を、原source/旧74教師/指示へ照合した。MX02には同じ入力の正解があり、SCの述語/対象対比・UQの反復不明親・AT32/T4のcopulaにも直接の矛盾教師は見つからない。教材なしや唯一の学習原因とは断定しない。一方、baseline指示はCONTENT_TARGET/ROLE/WRITTEN_MODIFIER等の意味上の区別が主に列挙に留まる。次はdose/orderや追加学習を変えず、既存意味責務を指示へ明文化する差を一回比較する。source-only有限文法の通常化でモデル誤りを迂回する別案へは移らない。
 
 API [dc05dc35](https://github.com/MassyuRed/mashos-api/commit/dc05dc358d1c44ce47fd844f6041d74f1f74fe6a)の既存semantic_admission/analysis_cumulative_service/既存testだけに明示offline `semantic_boundaries.v2`を追加。元systemへ一般原理を追記するだけで、user payload/原source/quote strict/typed-role witness/既存作者/通常ensureは変えない。動詞の一部と対象、当該述語の否定と引用内容の否定、推測と時点、反復不明の一意な親、役割と性質、過去copulaと修飾、逐語引用・主体表記を区別する。個別source/失敗rawの修復・評価文の再掲・新teacher化はしない。旧baseline/category/materialのmessages/ref/stateを保持、新refと専用saved-state版を分離。型/Engine/HTTP/DB/RN/通常既定を追加しない。
@@ -1125,3 +1127,25 @@ API [dc05dc35](https://github.com/MassyuRed/mashos-api/commit/dc05dc358d1c44ce47
 
 
 実行checkpoint：API dc05の対象5fileは666PASS/2SKIP/既存warning1、114.14秒/exit0。固定3b8ff717の3script全bytes読戻し後、CPUの旧46採否/保存/同user/tokenizer照合が成功（plan SHA256 `79b7b671f1a82c5b09c0b19f1c2b7ff35b68d2445d2196e98e491f71c2cabc45`）。同Jupyterで一回起動済み、32.759737秒時点で3新要求/1load/STARTED。最終結果・品質は未確定。rootが存在するため重複起動しない。collect helperは別CPU processの92応答/typed-role再読と元UTF-8 filesのbytes/SHA回収だけを行い、モデル/load/生成/更新0。完了後だけ実行する。
+
+
+<a id="analysis-semantic-boundaries46-result-20261103"></a>
+## 11/3 意味境界指示比較完了 — 一部の復帰と新退行が併存、新版は未採用
+
+API [dc05dc35](https://github.com/MassyuRed/mashos-api/commit/dc05dc358d1c44ce47fd844f6041d74f1f74fe6a)、固定3b8ff717/13875309のcodeで一回実行した。同73ee/072622保存重み、同じ46 source/user payload、system追記だけの差。role74 after46をowner/full snapshot/request/messages/raw/保存artifactへ束縛して再利用し、新46stop/1load/学習0を417.780638997秒（親427.415777164秒）/exit0で完了。要求23秒/900秒上限内、旧6adapter対不変・終了時compute空。処理按分約$0.067309@前回確認$0.58/h、準備/回収/保持別・現単価未再確認。チャット側作業環境が失われた後も同Jupyter runは完了しており、重複起動/再生成せず回収から再開した。
+
+rootと同環境read-only担当が全46原文/before/after、全11採用ROLE保存artifactを全文確認。[本文なし確定結果](semantic_boundaries46_results.json)。旧5退行のCQ03/MX02/MD02は原文引用/対象/否定がa5の元出力へ完全復帰。OD01は二つの不明親と原文対象を回復した。一方、PQ02は非時間表現のRELATIVE_TIMEが消えてWRITTEN_MODIFIERへ移り、OD01等にも同modifierが追加されたため、5件全ての解決や一般意味成功とはしない。
+
+新たな明確な退行はNV04の結果重複/不明親不正、REHEARSAL_AT19の独立未決定の不正従属化、MD01の同じ不明短親の重複と過去末尾誤modifier、RC01の継続修飾付き動詞句の対象化/本来対象脱落。HQ03/MX01は原文の本人表記を残したままEXPLICIT_ACTOR qualifierが脱落しており、主体反転と誇張しない。SQ03はqualifier順だけ変わり意味保持。旧34は21raw同一/13変化、全46は28同一/18変化、a5原出力とは24/34同一で、これらを意味正解率にしない。
+
+役割R4は3→2/4、T4は4→2/4教示再現。R01の過去copula誤modifierは残り、R03/T01/T03にも再発し肯定ROLEのtyped接続を失った。after採用はR02/R04/T02/T04の否定4件だけで、既存ROLE1node/SELF/negative/fact/past/4段gap/辺0・同じ文章/図/coverageを保持。版によりartifact IDは変わるが、意味改善ではない。R05〜08はtyped採用せず、R06は不正なscope/qualifier種、R07の非役割誤分類/誤modifier/NEGATION混同も保持・増加している。
+
+元のsource-authored教師22を旧plan SHA/owner/snapshot/messagesへ照合し、JSON値一致は21→16/22：AT4 4→3/4、UQ2 2→1/2、MX2 1→1/2（改善/悪化の入替）、OA2 2→2/2、SC6 6→6/6、RC2 2→1/2、T4 4→2/4。SC6/SD2/OA2のraw保持を確認。既見合成の再現比較で、Mash教示/未知盲検/一般品質率ではない。新しい教師を作ったり生成rawを正解へ昇格したりしていない。
+
+別CPU processで92保存応答を再検証：候補86復元/6拒否、ROLE11復元/13拒否一致。保存readerのEngine/両compiler/両authorを禁じ、新load/生成/更新0。API dc05の対象5fileは666PASS/2SKIP/既存warning1（114.14秒）。初回2test launcherの改行escape構文不備はsetup/pytest/GPU前で止まり、元code/logを保全。構文検査済みfileのSHA転送＋Jupyter側compile後、実testを一回実行した。元run reportのPENDING_RAW_READ bytesは変更せず、読解後判断を別review/結果へ分離する。
+
+[private全原本](https://chatgpt.com/library?file_id=libfile_933d01e1c04c8191a3aec76fe9ba0e63&account_id=personal)：747,227bytes/409member/SHA256 `25603cc4acfc34eb70aacab396091187e0d3d4a7d2a8261237928d3b15a6f1a2`。400元file＋完了log2を全bytes/SHA照合し、旧教師22/a5原出力34の派生参照1、review/recovery等6memberを保持。新重みはなく、初期73ee/072622は[既存の重み原本・version1](https://chatgpt.com/library?file_id=libfile_e120a914f9348191b7f065b419e1693b&account_id=personal)をSHAで参照する。model base全重みをこのZIPへ保存した意味ではない。
+
+採否：semantic_boundaries.v2は通常採用せず、baseline/category/materialの各既定/旧保存readerと未検証候補状態を保持。指示追記だけでは役割と従来保持を両立できなかった。単一比較からprompt一般・語彙・学習条件の唯一原因は断定しない。次は既存source-authored74の正解を保持し、ROLEの過去/肯否と旧保持を同時に教える実学習入力との対応を確認して、一回の改善条件へ戻る。system文言だけの反復、raw教師化、不採用重み/指示の自動採用、完了runの再実行へ進まない。
+
+再開は本節/結果JSON/原本と `/workspace/analysis-semantic-boundaries46-20261103/run.exit`、`result/report.json`、`/workspace/semantic-boundaries46-collect.exit`を先に確認。本人基準の判断/選択、複数field/補足/比較、記録間再出現/変化、通常累積保存への一般接続は残件。Mashの読み/問い/修正の新教示は未取得で、観測会終了扱いにしない。通常HTTP/DB/RN/Render/Supabase/稼働/配置/Pod管理変更0、GPUレンタル維持。STRUCTURE_MAP_DELTA_PRESENTはprivate prompt/state版のみ、生成比較はNONE。TECHNICAL_CREDIT/product_credit0、正式0/3・54.50％据置。Codex Work/GPT-6 root＋同環境read-only確認であり、独立Pro/Ultra/humanの商品受入れではない。
