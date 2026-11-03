@@ -2745,3 +2745,19 @@ rootと同環境read-only補助が全22source/44raw/成功14graph・文章・図
 生成制御は研究結果として保存するが通常不採用。a2eは既存研究候補、d3d不採用を維持し、検査緩和や追加maskで意味理解を肩代わりしない。同じ教示/quote-first/指示変更・完了runを自動再試行しない。次は既存の対象名詞と有限述語の教示が生成時の範囲選択へ反映されない箇所を、元原文と既存学習ownerから切り分ける。新しい学習方式/追加GPU条件は未固定。本人基準/補足typed/記録間・比較/通常累積/IF・Savedは残件。
 
 GPU処理按分0.0352011USD@表示0.29/h（CPU準備・回収・待機レンタル保持・保存/通信/税等別、実総請求額は未測定）。終了後GPU2MiB/0％/compute空、レンタル維持。primary outcome=BLOCKER_NARROWED/product_credit0、通常source/strict/typed/唯一作者/ensure/HTTP/公開DTO/DB/RN/Render/Supabase/配置/Pod管理変更0、STRUCTURE_MAP_DELTA_NONE。
+
+
+<a id="analysis-material-v4-beam2-plan-20261103"></a>
+## 128. 11/3 — 既存教示の学習処理を切り分け、生成の枝数だけを2へ変える一回比較
+
+§127の引用mask比較は完了・通常不採用を保持し、再実行しない。X03の対象名詞/行動節の混同を、原sourceと旧90教示/encoded/学習ownerへ戻して確認した。prompt/assistant境界、一段shift、quote終端・JSON終端・im_end/改行のloss範囲は整合し、LoRA112tensorの更新と有限/非0勾配も確認できた。教示先頭落ち・二重shift・引用閉じのloss欠落・optimizer未接続という具体bugは見つからなかった。教師EOS248046と実loader fallbackstop248044は不一致だが、EOS前の対象範囲誤りの原因と断定しない。今回そのEOS設定や凍結教師を変更しない。
+
+現在のplain生成はnum_beams=1で一位の語だけへ絞る。追加教示や意味maskではなく、既存HF generateのnum_beamsだけを2へ変え、途中で二つの候補を保持して最終1出力を返す一回を比較する。最良の意味や一般品質を保証する方法ではなく、既存重みの別の枝から正しい対象範囲へ到達できるかを見る。語句・対象名・正解・品詞やROLE数を外から供給せず、引用mask/JSON mask/raw修復/部分採用/strict・typed緩和は0。前回d3d不採用、a2eは研究候補のまま保持。
+
+material_v4_beam2_trial.pyは固定API ded0586/同material.v4/同a2e62bca-config006eを使う。正本load_generatorを変更せず、試験内inspectsourceのnum_beams=1箇所だけを2へ置換。do_sample=False、context8192/新2048、use_cache、長さ評価等の既定、num_return_sequencesと実model EOS248044/finish判定を据え置く。新重み・新教師・新prompt・新依存0。元helper946101d4の既存bind_save/唯一作者/7呼出禁止保存readerを再利用し、helper全文も原本へ含める。
+
+CPU初回はartifact.graphのasdict内tupleと保存JSON listをPythonで直接比較してassert失敗した。正本や保存値の不一致ではなく検証側の型比較不備で、モデル/forward/GPU0、root作成前に終了。比較を既存canonical JSONでそろえる3箇所だけ修正し、失敗log/元runner5356を保全した。転送完了前の補助起動commandもfile未存在で終了し、CPU/model実行を重複させていない。修正版c5c7075f/CPU8.858909秒で全22source/messages/ref/raw hash、既存候補20/typed14の非生成再読・graph/文章/図一致、実tokenizer/8192枠を確認。beam2_cache_check.py（934ad8c3）は今回だけの小CPU検証で、実DynamicCacheのattention8/linear24の64state tensorが[1,0]で交換されることを確認、実モデルload/forward0。
+
+新root=/workspace/analysis-material-v4-beam2-20261103はCPU準備済み、再prepare/重複runは禁止。旧same-Pod plain before22はidentity一致で再利用し、新beam2は22要求/最終22出力/1load/学習0だけ。beam内部の二枝を44入力や独立44生成へ数えない。要求45秒/全体900秒、処理上限0.0725USD@前確認0.29/h（準備/回収/待機保持/保存通信税等別）。全22の原文/rawを読み、対象範囲・肯否・他者/不明・理由、旧14成功graphと文章/図保持、同file保存非生成再読で判定する。候補数増加/形式成功だけでは採用しない。失敗時を含むlog/raw/manifestをfinally保全し、同じrun・別beam幅を自動反復しない。
+
+root単一実行/最終判断、同環境補助が旧学習処理/公式5.19 sourceとrunnerをread-only確認し、小CPU cache関数候補を作成、rootが全文確認。実環境GPT-6/Codex Work、独立Pro/Ultra/Mash実演ではない。Mashの継続/GPU/GitHub指示内で追加操作・承認負担0。通常採用false、API正本/意味gate/graph型/作者/通常ensure/HTTP/公開DTO/DB/RN/Render/Supabase/配置/Pod管理変更0、STRUCTURE_MAP_DELTA_NONE。本人基準/補足typed/記録間・比較/通常累積/IF・Savedを対象外へ消さず残件として保持する。

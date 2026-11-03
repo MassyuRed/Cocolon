@@ -6033,3 +6033,6 @@ trial/material_v4_target4_sources.jsonは独立C4教示と非学習Z4の原文/�
 
 
 11/3・source mask最終結果はtrial/material_v4_source_mask_results.jsonとweekly§127へ。修正版22stop/学習0、candidate20→21/typed14→14、全14graph/表示不変、X03は原文内でも行動節の誤targetで拒否継続。初回EOS不備/全原本も保存、通常不採用。完了root再実行禁止、商品owner/接続差分0、STRUCTURE_MAP_DELTA_NONE。
+
+
+11/3・beam2比較のfile地図：trial/material_v4_beam2_trial.pyは既存loaderのnum_beamsだけを変える一回比較・CPU22束縛/保存非生成再読・原本保全、beam2_cache_check.pyは同試行のhybrid state交換だけのCPU小検証。新商品owner/型/作者/通常接続/依存0、STRUCTURE_MAP_DELTA_NONE。採否と再開点はweekly§128/trialへ。
