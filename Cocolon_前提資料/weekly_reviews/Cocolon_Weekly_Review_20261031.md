@@ -3431,3 +3431,31 @@ MashからPiece残件の継続指示。開始点はRN `30d1e6537391fd328b602c0bc
 API製品1／既存test1は[fac2bea7](https://github.com/MassyuRed/mashos-api/commit/fac2bea71d7a2146fbc1e53a156a65a5998366f7)へ反映し、全文・blob・変更集合・親commitを読戻した。RN製品2／既存test1と前提資料4は本節と同じ変更単位で反映する。全体現在地・01A・Piece mapは責務と最新参照を置換し、履歴は本節へ記載。検証原本名は `Cocolon_Piece_20261104_keep_qualification_closed_recovery_validation.zip`。開始／最終と中間を分けたlog／XML、保存42条件、独立S7／形式・復帰review、source／test hash、GitHub読戻しを保存し、Git管理source・cache・依存本体を複製しない。
 
 差分はAPI製品1・既存test1、RN製品2・既存test1、前提資料4の計9既存file、新規repo file0。STRUCTURE_MAP_DELTA_NONE（既存原文KEEPの負の形式制約と既存controller／hostの拒否・復帰を修復、新owner・公開API／DTO・DB・renderer・依存・workflow変更なし）。限定TECHNICAL_CREDIT。正式商品受入れ0/3、build・配布・本番配置・live DB・GPU・本人端末操作0。一般日本語品質、Android通常作成／保存、Photos／Share実機確認は残る。
+
+
+<a id="piece-scope-adverb-source-fetch-20261104"></a>
+## 165. 11/4 — 非疑問副詞の本人scope誤拒否と、旧取得からの自動作成を修復
+
+MashからPiece残件の継続指示。開始点はRN `bb9d66c96a7f1339e9ff5f60c671f14d017a779b`／API `fac2bea71d7a2146fbc1e53a156a65a5998366f7`。全体現在地全文、恒久incident、作業姿勢のcurrent規則と全体設計／全file地図の既確認導線、最新weekly§164、Piece currentと対象現物を確認した。System Contextは既存fresh原本直接読取を使用。PIECE_WORK_ALLOWED／LEVEL_2／OBSERVED_BLOCKER_MINIMAL_FIX。rootが統合・反映owner、本文と保存元取得の修正を独立reviewへ渡し、ビルドは後でまとめる指示を維持する。前回のKEEP42／作成拒否18／export再読4・保存reader7等は再実行しない。
+
+**既存の副詞を、別の参加者へ誤読しない。** 「私は迷っているけれど、私は読書が好きです。」は生成できる一方、「どうしても」を添えると、既存の同本人scope照合が語内の「も」を参加者の助詞として拾い、本人評価をevaluation_target_not_self_containedへ閉じていた。焦点構文でも平穏は原文KEEPへ落ち、自己理解は拒否された。通常saved原入力の12診断で原因と開始3製品hash一致を固定した。
+
+既存`_same_self_scope_author`の本文先頭に完全な「どうしても／どうやっても」があり、直後が非ひらがなか末尾の場合だけ、その語内の「も」を照合用viewから除く。以後のは／が／も・読点、依存・伝聞と既存疑問、空本文と既存bare述語の拒否を保つ。原文・主体・scope型、本人評価／焦点のscalar／UTF8根拠は変えない。語頭以外や「もらった」の語内、自由な副詞・助詞解析へ広げない。既存の有限留保の疑問regexは定義をsourceへ移してV1cと共用し、patternと従来の非疑問「でも／どんなに」境界は不変。新しいcue・意味型・語彙辞書・作者は追加しない。
+
+新23を含む既存moduleは、同じ最終testを開始source＋V1cの両bytesへ固定すると232成功／8失敗、最終240成功。旧期待変更0。保存40条件は生成15→20（新5受理）、全source JSON不変、対照28は全出力不変。既存成功3は本来のtyped scopeへ戻り、本文2変更／1保持。既存KEEP4は意味・plan・duty・本文を変えず、既存の留保付き形式制約へ入るoffer／選択形式だけが変化した。最終20はS7とscalar／UTF8根拠照合が成功。rootも全40の原文・可否・本文・duty・形式を読んだ。995候補の旧rawは中間へ分離し、開始fac2のclean40は再実行せず、同じ40のafterだけ最終22a3で一回取得した。
+
+独立reviewで、最初の新armは「何で」の問いと、空述語に水平空白を添えた文を新受理することを検出し、公開反映前に修復した。bare拒否は水平3種だけを照合用にstripし、任意の「です」を外した後の末尾gapも同じviewだけで扱う。raw・座標・作者へstripを流さない。独立21条件（ready7／拒否14）と文字列改変12拒否は末尾1行修正前の995候補で実行し、最後のcopula-gap修復は最終22a3の実prepare1拒否と、1行逆変換で995全bytes／hashへ一致する差分照合で補完した。旧21を最終版で再実行したという記録にはしない。各実行4hash前後不変、追加blocking0。最終moduleと広域は全て22a3／V1c5dd／testc358で検証した。
+
+**中断した古い取得から、新しい入力を自動作成しない。** 作成の初回GETはHTTP取得済みでResponse.jsonだけ待機→focus往復→新しい作成GET409→「保存入力を確認し直す」GET200と進んだ後、旧JSONが完了すると、旧createFromSavedInputのawait継続が現在のreadyだけを見て、新しいキーのPOSTへ進んでいた。実apiFetch／transportと合成ResponseでGET,GET,GET,POSTを再現。任意の同期abortからUIへ再入するobserverは注入していない。HTTP取得後にapiClientが外部abort転送listenerを解除するため、body読取りの遅い完了も取り扱う必要がある。
+
+既存hostのcontextSyncTokenをclearSource／closeでも失効させ、resolveSavedInputはその取得自身が成功した場合だけ本文なしのattemptを返す。作成継続は同じattempt世代・controller・本人／入力／キーbinding・runtimeとreadyを照合する。古い中断／拒否の取得、成功返却後の閉じる／同値A-B-Aの切替は、新しいGETだけの結果をPOSTへ進めない。通常の明示作成と、再確認GET後の別の明示作成は維持。新field・永続保持・transport・公開API変更なし。
+
+新5回帰は同じ最終testで開始1成功／4失敗、最終5成功。作成・保存3suite326成功、旧期待変更0。独立の実apiFetch4条件と成功GET同期通知の2条件はblocking0。旧awaitのPOST0、別の明示作成だけPOST1を確認した。成功returnをcaller前で保持する2条件はscheduling seamであり、実端末タイミングの実証としない。source GETの入力／本人／キー／runtime切替8条件は開始sourceのread-only診断で新bug0。任意のabort callbackだけで作れる同期再入を通常到達bugへ数えず、製品修復は実際の遅いbody読取りに閉じた。
+
+最終RN広域は1,537成功／失敗0、既存Metro再bundle検査は対象外でアプリbuildなし。最終API広域は10,948成功／既存161失敗／error0・native17除外。開始refと一致する前回最終10,925成功／161失敗のXMLを再利用し、失敗identity集合が完全一致、新規失敗0。最終製品／test5fileのhashは広域実行後も不変。対象・独立・診断を広域件数へ加算しない。
+
+exportは新7条件のread-only確認で新bug0・製品／test編集0。実host/controller/APIと合成captureの待機中に、通常画面の公開／削除ボタンと確認Alertから変更し、旧canvas・旧ボタン・遅いcaptureからOSが開始しないことを4条件で確認した。別の実export helper＋合成Photos3条件は、OS開始後のcopy保持・完了後回収、公開／削除後の古い完了案内の失効を確認。Shareシート背面ボタンを通常到達とはせず、実native・権限画面・外部共有の成功へ拡張しない。旧278等は再実行しない。
+
+API製品2／既存test1は[a4dac0a0](https://github.com/MassyuRed/mashos-api/commit/a4dac0a05c4f2b5cf573d7ef6ecbd7759c799dbe)へ反映し、全文・blob・変更集合・親commitを読戻した。RN製品1／既存test1と前提資料4は本節と同じ変更単位で反映する。全体現在地・01A・Piece mapは関連責務と最新参照を置換し、履歴は本節へ記載。検証原本名は `Cocolon_Piece_20261104_scope_adverb_source_fetch_validation.zip`。開始／最終と未採用中間を分けたlog／XML、保存40条件、実transportの旧取得再現と独立review、source／test hash・GitHub読戻しを保存し、Git管理source・cache・依存本体を複製しない。
+
+差分はAPI製品2・既存test1、RN製品1・既存test1、前提資料4の計9既存file、新規repo file0。STRUCTURE_MAP_DELTA_NONE（既存scope本人照合と同じ疑問定義の共用、既存source GET→作成のidentity束縛を修復、新owner・公開API／DTO・DB・renderer・依存・workflow変更なし）。限定TECHNICAL_CREDIT。正式商品受入れ0/3、build・配布・本番配置・live DB・GPU・本人端末操作0。一般日本語品質、Android通常作成／保存、Photos／Share実機確認は残る。

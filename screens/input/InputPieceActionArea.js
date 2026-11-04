@@ -206,6 +206,7 @@ export default class InputPieceActionArea extends React.Component {
 
   clearSource() {
     const previous = this.sourceAttempt;
+    this.contextSyncToken = Object.freeze({});
     this.sourceAttempt = null;
     this.sourcePhase = 'idle';
     this.sourceCode = null;
@@ -314,7 +315,7 @@ export default class InputPieceActionArea extends React.Component {
       this.changed();
       return;
     }
-    const attempt = { abort };
+    const attempt = { abort, contextSyncToken: this.contextSyncToken };
     this.sourceAttempt = attempt;
     this.sourcePhase = 'loading';
     this.sourceCode = null;
@@ -334,6 +335,7 @@ export default class InputPieceActionArea extends React.Component {
       // The source-read phase still changed and must publish its own UI update.
       this.changed();
       // Deliberately do not start(). GET and preview remain separate actions.
+      return attempt;
     } catch (error) {
       if (this.sourceAttempt !== attempt || !this.isCurrent()) return;
       this.sourceAttempt = null;
@@ -382,9 +384,14 @@ export default class InputPieceActionArea extends React.Component {
   // Ordinary mounts, runtime/focus returns and source reads never call it.
   async createFromSavedInput() {
     if (!this.savedMode || !this.isCurrent()) return;
-    const stamp = this.boundStamp, runtime = this.boundRuntime;
-    if (this.sourcePhase !== 'ready') await this.resolveSavedInput();
-    if (!this.isCurrent() || this.boundStamp !== stamp || this.boundRuntime !== runtime ||
+    const controller = this.controller, stamp = this.boundStamp, runtime = this.boundRuntime;
+    if (this.sourcePhase !== 'ready') {
+      const completed = await this.resolveSavedInput();
+      // A discarded/rejected GET cannot adopt a newer explicit source read.
+      // A close/reset after successful receipt also invalidates this chain.
+      if (!completed || completed.contextSyncToken !== this.contextSyncToken) return;
+    }
+    if (!this.isCurrent() || this.controller !== controller || this.boundStamp !== stamp || this.boundRuntime !== runtime ||
         this.sourcePhase !== 'ready') return;
     this.start();
   }
@@ -553,6 +560,7 @@ export default class InputPieceActionArea extends React.Component {
 
   close() {
     if (!this.mounted) return;
+    this.contextSyncToken = Object.freeze({});
     const stamp = this.boundStamp, runtime = this.boundRuntime;
     const rejected = this.savedMode ? this.controller?.getView() : null;
     if (this.sourceAttempt) this.clearSource();

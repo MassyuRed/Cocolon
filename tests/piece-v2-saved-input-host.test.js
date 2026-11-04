@@ -325,6 +325,73 @@ test('losing navigation focus fences a delayed explicit creation and never resta
   u.host.componentWillUnmount();
 });
 
+for (const rereadRejected of [false, true]) {
+  test(`an aborted create body cannot advance a newer source recheck ${rereadRejected ? 'rejection' : 'success'}`, async () => {
+    const seed = fixture(), body = seed.deferred(); let reads = 0;
+    const u = fixture({ send: async (_url, init) => {
+      if (init.method !== 'GET') return packet(seed.expected);
+      if (++reads === 1) return { status: 200, json: () => body.promise };
+      if (reads === 2) return packet({ code: 'PIECE_CONFLICT' }, 409);
+      return rereadRejected ? packet({ code: 'PIECE_SOURCE_NOT_ELIGIBLE' }, 422) : packet(ref());
+    } });
+    u.host.props.creationMode = true; u.mount();
+    const originalCreate = u.host.createFromSavedInput(); await tick();
+    u.host.props = { ...u.host.props, active: false }; u.host.componentDidUpdate();
+    u.host.props = { ...u.host.props, active: true }; u.host.componentDidUpdate();
+    await u.host.createFromSavedInput(); await tick();
+    const reread = u.nodes(u.tree()).find(n => n.props.title === '保存入力を確認し直す'); assert.ok(reread);
+    await reread.props.onPress(); await tick();
+    assert.deepEqual(copy(u.calls.map(([, init]) => init.method)), ['GET', 'GET', 'GET']);
+    body.resolve(ref()); await originalCreate; await tick();
+    assert.equal(u.calls.length, 3, 'the obsolete create cannot adopt a later GET-only operation');
+    if (rereadRejected) {
+      assert.equal(u.host.sourceCode, 'PIECE_SOURCE_NOT_ELIGIBLE');
+      assert.equal(u.host.sourcePhase, 'unavailable');
+    } else {
+      assert.equal(u.host.sourcePhase, 'ready'); assert.equal(u.host.controller.getView().phase, 'idle');
+      u.host.start(); await tick();
+      assert.equal(u.calls.length, 4); assert.equal(u.calls[3][1].method, 'POST');
+      assert.notEqual(u.calls[3][1].headers['Idempotency-Key'], KEY);
+    }
+    u.host.componentWillUnmount();
+  });
+}
+
+for (const boundary of ['close', 'owner-roundtrip', 'key-roundtrip']) {
+  test(`a successful source receipt cannot start creation after a microtask ${boundary}`, async () => {
+    const u = fixture(); u.host.props.creationMode = true; u.mount();
+    const resolve = u.host.resolveSavedInput, savedInput = u.host.props.savedInput;
+    let first = true;
+    u.host.resolveSavedInput = (...args) => {
+      const pending = resolve(...args);
+      if (!first) return pending;
+      first = false;
+      return pending.then(async completed => {
+        // This runs after the real source resolver has returned its receipt,
+        // before createFromSavedInput's await continuation receives it.
+        if (boundary === 'close') u.host.close();
+        else {
+          const next = { ...savedInput, [boundary === 'owner-roundtrip' ? 'expectedUserId' : 'idempotencyKey']:
+            boundary === 'owner-roundtrip' ? 'another-owner' : 'another-navigation-key' };
+          u.host.props = { ...u.host.props, savedInput: next }; u.host.componentDidUpdate();
+          u.host.props = { ...u.host.props, savedInput }; u.host.componentDidUpdate();
+          await resolve();
+          assert.equal(u.host.sourcePhase, 'ready', 'a newer explicit GET has completed under the restored binding');
+        }
+        return completed;
+      });
+    };
+    await u.host.createFromSavedInput(); await tick();
+    assert.deepEqual(copy(u.calls.map(([, init]) => init.method)), boundary === 'close' ? ['GET'] : ['GET', 'GET']);
+    assert.equal(u.host.state.open, false);
+    assert.equal(u.host.controller.getView().phase, 'idle');
+    u.host.start(); await tick();
+    assert.equal(u.calls.at(-1)[1].method, 'POST', 'a separate current create press still works');
+    assert.equal(u.calls.at(-1)[1].headers['Idempotency-Key'], KEY);
+    u.host.componentWillUnmount();
+  });
+}
+
 for (const pre of [false, true]) test(`saved ${pre ? 'pre-question' : 'normal'} input -> explicit GET -> separate preview with exact text`, async () => {
   const u = fixture({ pre }); u.mount();
   assert.equal(u.calls.length, 0); assert.deepEqual(u.names(), ['保存入力を確認']);
