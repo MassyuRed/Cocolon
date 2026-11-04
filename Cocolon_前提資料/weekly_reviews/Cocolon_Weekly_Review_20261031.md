@@ -3407,3 +3407,27 @@ Photos／Capture側の新しいread-only調査では確定不具合0、製品／
 API製品3／既存test1の反映は [718fcd69](https://github.com/MassyuRed/mashos-api/commit/718fcd6923d72ac47e70c4ace195562dadbc8941)。RN製品2／既存test1と前提資料4を同じ変更単位で反映する。全体現在地・01A・Piece current mapは責務行と最新参照だけを置換し、履歴は本節へ記載。検証原本名は `Cocolon_Piece_20261104_topic_terminal_recovery_validation.zip`。開始／最終の検証、保存60条件、独立S7／形式比較、実service4条件、実host復旧とsource／test hash・GitHub読戻しを保存し、Git管理source・取得した依存本体を複製しない。
 
 差分はAPI製品3・既存test1、RN製品2・既存test1、前提資料4の計11既存file、新規repo file0。STRUCTURE_MAP_DELTA_NONE（既存topicの終端照合と作者・独立検査、既存作成hostの明示復旧の修復、新owner・公開API／DTO・DB・renderer・依存・workflow変更なし）。限定TECHNICAL_CREDIT。正式商品受入れ0/3、build・配布・本番配置・live DB・GPU・本人端末操作0。一般日本語品質、Android通常作成／保存、Photos／Share実機確認は残る。
+
+
+<a id="piece-keep-qualification-closed-recovery-20261104"></a>
+## 164. 11/4 — 原文KEEPの留保付き形式と、閉じた作成拒否の復帰を修復
+
+MashからPiece残件の継続指示。開始点はRN `30d1e6537391fd328b602c0bce553ce4718b0f12`／API `718fcd6923d72ac47e70c4ace195562dadbc8941`。全体現在地を全文、作業姿勢・恒久incident、全体設計／全file地図の既確認導線と今回の責務差分、最新weekly§163、Piece currentと対象実物を確認した。System Contextの既存fresh原本直接読取を使用。PIECE_WORK_ALLOWED／LEVEL_2／OBSERVED_BLOCKER_MINIMAL_FIX。rootが統合・反映owner、原因修正と独立reviewを分担し、ビルドは後でまとめる指示を維持した。
+
+**本文を変えず、確認できる留保を引用形式へ昇格させない。** 「私は迷っているけれど、私は静かに休みたい！」等は原文KEEPとして作成できる一方、留保付きの既存構造化経路と異なりquoteもofferしていた。既存`_has_topic_qualification`の負の形式判定だけを、両節の明示一人称が文字列として同じで、既存有限留保末尾・既存operatorと直後読点・完成自己表現を証明できるKEEPへ接続する。source受理、原文、意味型、duty、plan、typed scopeは変更しない。「鳥みたい」も願望か比喩かを新たに分類せず原文保持。異なる本人表記、無読点、未知活用（迷っていた・まだ決めていません等）や未証明の境界はこの制約に広げない。一般KEEPや一般的な条件理解が完成したという結果ではない。
+
+既存自己理解moduleへ新16条件を追加。同じ最終testを開始V1cへ固定すると208成功／9失敗、最終217成功。旧期待変更0。新対照1件の初期期待が既存quoteの最小長と整合せず、開始rawを根拠にその新期待だけ訂正し、初期logを分離した。保存原入力42条件は生成38→38、source JSON・意味・plan・status・全成功本文bytes／hashが不変。変化は対象24の形式offer／選択形式のみで、対照18は全出力不変。最終38はS7とscalar／UTF8根拠照合に成功した。
+
+独立の実saved→prepareは正4・対照8がready。作者／Engine／候補再生成を禁止したS7・形式検査が成功し、余分な形式8と主体／operator／終端の文字列改変12を、直接検査と全reviewの双方で拒否した。全非変異・blocking0。別の二欄／改行12条件は開始bytes一致のread-only診断で、新bug0・製品／test編集0。診断11生成を修復成果や広域件数へ足さない。
+
+**閉じた確定拒否の後も、古いPOSTへ戻らない。** 選択形式POSTまたは画像変更の回収POSTで確定拒否→「閉じる」→focus／runtime／foreground休止と進むと、hostだけの拒否tokenが消え、旧キーと旧選択を通常作成として再送できた。controllerのcloseで確定した元POST拒否を本文なしに保持し、同じ本人・保存入力・元キーの休止では操作ticketを更新する。hostは更新後のticketを使い、既存の保存入力GETと新キー・既定設定POSTを別の明示操作として維持する。本人・入力・元キー変更、画面破棄で破棄し、PATCH自身の拒否・結果不明・保存／取消は元の要求保持を続ける。
+
+独立reviewは反映前の候補で2つの同期通知問題も検出した。復帰通知中に別入力へ切り替わると外側helperがsourcePhaseをreadyへ書き戻し、旧入力POSTへ進む問題は、既存bindingと本文なしcontext世代を通知前後で照合し、新contextが処理済みなら外側callerも続行しない修復で解消した。A-B-Aでも古いreadyを戻さない。foreground通知中の画面破棄でnull controllerをrefreshしていた問題は、通知前のcontrollerを捕捉し、mounted／同instanceを確認してからrefreshする局所修復で解消した。独立greenは新入力099の明示GET1／旧入力POST0、unmount後errorなし・新通信0。新入力GETへ旧source_refを返す独立fixtureは、その先の作成成立を証明するものではない。
+
+新18回帰は同じ最終testで開始5成功／13失敗、最終18成功。作成・保存3suiteは321成功、旧期待変更0。独立の旧4条件は中間sourceの診断として分離し、最終の追加blocking0。RN広域は1,532成功／失敗0、既存Metro再bundle検査は対象外でアプリbuildなし。最終API広域は10,925成功／既存161失敗／error0・native17除外。開始refに一致する前回最終10,909成功／161失敗のXMLを再利用し、失敗identity集合が完全一致、新規失敗0。最終製品／test5fileのhashは広域実行後にも不変。対象・独立・診断集合を広域へ加算しない。
+
+**既存保存と未保存previewの読取も区別。** RNの保存版相違→明示詳細GETの通信中にruntime・background/runtime・owner・focusが変わる新4境界は成功し、新bug0・編集0。保存readerは旧2014作者のquoteを合成stored rowへ固定し、実ASGIのhistory／detail／export3GETで旧本文・3hash・recipeを保持した。現新規形式審査はその旧quoteを拒否するが、保存済み読取は旧sourceや作者・compiler・S7を呼ばない。発行済みpreviewは実read_original_previewで旧quoteを非生成再読し、source欠落・Free変更・TTL失効は既存どおり拒否した。計7条件、禁止呼出し0。合成Auth／PostgREST／typed source／load seamの実service検査であり、SQL、実保存・実発行・本人データ・OS確認へ拡張しない。旧export278・Photos／Share等は再実行しない。
+
+API製品1／既存test1は[fac2bea7](https://github.com/MassyuRed/mashos-api/commit/fac2bea71d7a2146fbc1e53a156a65a5998366f7)へ反映し、全文・blob・変更集合・親commitを読戻した。RN製品2／既存test1と前提資料4は本節と同じ変更単位で反映する。全体現在地・01A・Piece mapは責務と最新参照を置換し、履歴は本節へ記載。検証原本名は `Cocolon_Piece_20261104_keep_qualification_closed_recovery_validation.zip`。開始／最終と中間を分けたlog／XML、保存42条件、独立S7／形式・復帰review、source／test hash、GitHub読戻しを保存し、Git管理source・cache・依存本体を複製しない。
+
+差分はAPI製品1・既存test1、RN製品2・既存test1、前提資料4の計9既存file、新規repo file0。STRUCTURE_MAP_DELTA_NONE（既存原文KEEPの負の形式制約と既存controller／hostの拒否・復帰を修復、新owner・公開API／DTO・DB・renderer・依存・workflow変更なし）。限定TECHNICAL_CREDIT。正式商品受入れ0/3、build・配布・本番配置・live DB・GPU・本人端末操作0。一般日本語品質、Android通常作成／保存、Photos／Share実機確認は残る。

@@ -17,6 +17,8 @@
  *   does not install an expiry timer, AppState hook, Auth or runtime subscription.
  * - close() abandons the local attempt, NOT a server DELETE. Reopening the same
  *   context can replay the same server request/key; disable/dispose clears it.
+ *   A definitive original-POST rejection keeps only its body-free refusal and
+ *   permits explicit source recheck instead of replaying that rejected request.
  *   An explicit cancelPreview keeps a body-free terminal/unknown cancellation
  *   across close and can only retry the same DELETE, never the original POST.
  * - The existing input host supplies strict saveEnabled, the admitted iOS
@@ -752,6 +754,17 @@ export function createPieceCreateController(configuration = {}) {
     const nextEnabled = value?.enabled === true;
     const nextSaveEnabled = nextEnabled && value?.saveEnabled === true;
     if (!saveIntent) {
+      if (value?.preserveSelectedFormat === true && state.phase === 'unavailable' &&
+          sourceRefreshCodes.includes(state.code) && !visualRecovery) {
+        // Keep only a definitive original-POST rejection on this same saved
+        // input. Closing or suspending cannot turn it into an ordinary replay.
+        // PATCH rejection/unknown recovery still owns its original POST below.
+        enabled = nextEnabled;
+        saveEnabled = nextSaveEnabled;
+        state = Object.freeze({ ...state, ticket: Object.freeze({}) });
+        notify();
+        return true;
+      }
       const selectedFormat = value?.preserveSelectedFormat === true && operation.request.requested_format !== null;
       if (selectedFormat) state = expirePiecePreview(state, clock());
       if (state.code === 'PIECE_PREVIEW_EXPIRED' &&
@@ -797,6 +810,9 @@ export function createPieceCreateController(configuration = {}) {
 
   function close(options = {}) {
     if (disposed) return;
+    const rejectedPost = options?.resetSelectedFormat !== true &&
+      !active && !saveIntent && !cancelIntent && !visualRecovery &&
+      state.phase === 'unavailable' && sourceRefreshCodes.includes(state.code) ? state : null;
     if (options?.resetSelectedFormat === true && !saveIntent && !cancelIntent && contextOperation && operation &&
         operation.request.requested_format !== null) {
       // A different navigation binding abandons that selected-format intent,
@@ -810,6 +826,11 @@ export function createPieceCreateController(configuration = {}) {
     // Cancellation or save is terminal/uncertain for this original request.
     // Closing drops display data, but cannot restore POST or retry another ID.
     clearAttempt(!!cancelIntent, !!saveIntent, true);
+    if (rejectedPost) {
+      // The host's closed message is not the owner of this request boundary.
+      // Retain its body-free refusal and rotate the local control ticket.
+      state = Object.freeze({ ...rejectedPost, preview: null, ticket: Object.freeze({}) });
+    }
     notify();
   }
 

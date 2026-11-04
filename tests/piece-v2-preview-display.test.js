@@ -1984,6 +1984,160 @@ test('format rejection recheck cannot cross an owner change and return to the sa
   u.host.componentWillUnmount();
 });
 
+async function closedRejectedPostHost(kind) {
+  const { original, replacement } = formatPair();
+  let defaults = 0, selected = 0;
+  const u = previewUiHarness({ send: async (_url, init) => {
+    if (init.method === 'GET') return pieceHttp(request().source_ref);
+    if (init.method === 'PATCH') throw Error('visual response lost');
+    if (kind === 'format' && JSON.parse(init.body).requested_format) {
+      return ++selected === 1 ? pieceHttp(replacement)
+        : { status: 422, json: async () => ({ code: 'PIECE_FORMAT_NOT_ELIGIBLE' }) };
+    }
+    if (++defaults === 2 && kind === 'visual') {
+      return { status: 422, json: async () => ({ code: 'PIECE_VISUAL_SELECTION_NOT_ALLOWED' }) };
+    }
+    return pieceHttp(defaults === 1 ? kind === 'format' ? original : response('declaration') : response());
+  } });
+  bindSourceRefreshHost(u); await u.host.createFromSavedInput(); await pieceTick();
+  if (kind === 'format') {
+    uiButton(u, '形式：宣言').props.onPress(); await pieceTick();
+    u.host.props = { ...u.host.props, active: false }; u.host.componentDidUpdate();
+    u.host.props = { ...u.host.props, active: true }; u.host.componentDidUpdate();
+    uiButton(u, 'ピースを作成').props.onPress(); await pieceTick();
+  } else {
+    uiButton(u, '画像比率：9:16').props.onPress(); await pieceTick();
+    uiButton(u, '最新のプレビューを取得').props.onPress(); await pieceTick();
+  }
+  const beforeClose = uiButton(u, '保存入力を確認し直す'); assert.ok(beforeClose);
+  uiButton(u, 'Pieceの画面を閉じる').props.onPress();
+  return { u, beforeClose };
+}
+
+for (const kind of ['format', 'visual']) for (const pause of ['focus', 'runtime', 'background']) {
+  test(`closed ${kind} POST rejection retains only explicit source recheck through ${pause}`, async () => {
+    const { u, beforeClose } = await closedRejectedPostHost(kind);
+    const closed = uiButton(u, '保存入力を確認し直す'), count = u.calls.length;
+    if (pause === 'focus') {
+      u.host.props = { ...u.host.props, active: false }; u.host.componentDidUpdate();
+      u.host.props = { ...u.host.props, active: true }; u.host.componentDidUpdate();
+    } else if (pause === 'runtime') {
+      u.host.context = { runtime: {}, isFeatureEnabled: () => false }; u.host.componentDidUpdate();
+      u.host.context = { runtime: {}, isFeatureEnabled: () => true }; u.host.componentDidUpdate();
+    } else { u.background('inactive'); u.background('active'); }
+    beforeClose.props.onPress(); closed.props.onPress(); u.host.start(); u.host.retry(); await pieceTick();
+    assert.equal(u.calls.length, count, 'return and obsolete controls cannot replay a rejected POST');
+    assert.equal(uiButton(u, 'ピースを作成'), undefined);
+    const current = uiButton(u, '保存入力を確認し直す'); assert.ok(current);
+    current.props.onPress(); await pieceTick();
+    assert.equal(u.calls.length, count + 1); assert.equal(u.calls.at(-1)[1].method, 'GET');
+    uiButton(u, 'ピースを作成').props.onPress(); await pieceTick();
+    assert.equal(u.calls.length, count + 2); assert.deepEqual(JSON.parse(u.calls.at(-1)[1].body), request());
+    assert.notEqual(u.calls.at(-1)[1].headers['Idempotency-Key'], u.calls[count - 1][1].headers['Idempotency-Key']);
+    u.host.componentWillUnmount();
+  });
+}
+
+for (const changed of ['owner', 'input', 'key']) {
+  test(`closed POST rejection does not survive ${changed} A-B-A`, async () => {
+    const { u, beforeClose } = await closedRejectedPostHost('format');
+    const savedInput = u.host.props.savedInput, next = { ...savedInput }, count = u.calls.length;
+    if (changed === 'owner') next.expectedUserId = 'another-owner';
+    if (changed === 'input') next.savedInputId = '20000000-0000-4000-8000-000000000099';
+    if (changed === 'key') next.idempotencyKey = 'another-navigation-key';
+    u.host.props = { ...u.host.props, savedInput: next }; u.host.componentDidUpdate();
+    u.host.props = { ...u.host.props, savedInput }; u.host.componentDidUpdate();
+    beforeClose.props.onPress(); await pieceTick();
+    assert.equal(u.calls.length, count);
+    assert.equal(uiButton(u, '保存入力を確認し直す'), undefined);
+    assert.ok(uiButton(u, 'ピースを作成'));
+    u.host.componentWillUnmount();
+  });
+}
+
+for (const changed of ['input', 'key', 'owner', 'input-roundtrip', 'disable', 'unmount']) {
+  test(`resuming a closed rejection cannot publish readiness into synchronous ${changed}`, async () => {
+    const { u, beforeClose } = await closedRejectedPostHost('format');
+    const savedInput = u.host.props.savedInput, count = u.calls.length;
+    u.host.props = { ...u.host.props, active: false }; u.host.componentDidUpdate();
+    let changedOnce = false;
+    u.host.controller.subscribe(() => {
+      if (changedOnce || !u.host.controller.getView().sourceRefreshToken) return;
+      changedOnce = true;
+      if (changed === 'unmount') { u.host.componentWillUnmount(); return; }
+      if (changed === 'disable') {
+        u.host.context = { runtime: {}, isFeatureEnabled: () => false };
+        u.host.componentDidUpdate(); return;
+      }
+      const next = { ...savedInput };
+      if (changed === 'owner') next.expectedUserId = 'another-owner';
+      else if (changed === 'key') next.idempotencyKey = 'another-navigation-key';
+      else { next.savedInputId = '20000000-0000-4000-8000-000000000099'; next.idempotencyKey = 'another-input-key'; }
+      u.host.props = { ...u.host.props, savedInput: next }; u.host.componentDidUpdate();
+      if (changed === 'input-roundtrip') {
+        u.host.props = { ...u.host.props, savedInput }; u.host.componentDidUpdate();
+      }
+    });
+    u.host.props = { ...u.host.props, active: true }; u.host.componentDidUpdate();
+    assert.equal(changedOnce, true);
+    beforeClose.props.onPress(); u.host.start(); u.host.retry(); await pieceTick();
+    assert.equal(u.calls.length, count, 'the old caller and controls cannot advance the new context');
+    if (!['disable', 'unmount'].includes(changed)) {
+      assert.equal(u.host.sourcePhase, 'idle');
+      const current = u.host.props.savedInput;
+      await u.host.resolveSavedInput(); await pieceTick();
+      assert.equal(u.calls.length, count + 1); assert.equal(u.calls.at(-1)[1].method, 'GET');
+      assert.ok(u.calls.at(-1)[0].endsWith(current.savedInputId));
+      assert.equal(u.calls.at(-1)[1].expectedUserId, current.expectedUserId);
+    }
+    if (changed !== 'unmount') u.host.componentWillUnmount();
+  });
+}
+
+test('foreground rejection notification can unmount without refreshing the abandoned controller', async () => {
+  const { u } = await closedRejectedPostHost('format'), count = u.calls.length;
+  u.background('inactive');
+  let unmounted = false;
+  u.host.controller.subscribe(() => {
+    if (unmounted || !u.host.controller.getView().sourceRefreshToken) return;
+    unmounted = true;
+    u.host.componentWillUnmount();
+  });
+  assert.doesNotThrow(() => u.background('active'));
+  assert.equal(unmounted, true); assert.equal(u.host.controller, null);
+  await pieceTick(); assert.equal(u.calls.length, count);
+});
+
+for (const kind of ['unknown-post', 'patch-rejection']) {
+  test(`closing ${kind} before pause preserves its original recovery instead of a fresh source key`, async () => {
+    const { original, replacement } = formatPair(); let selected = 0;
+    const u = previewUiHarness({ send: async (_url, init) => {
+      if (init.method === 'GET') return pieceHttp(request().source_ref);
+      if (init.method === 'PATCH') return { status: 422, json: async () => ({ code: 'PIECE_FORMAT_NOT_ELIGIBLE' }) };
+      if (JSON.parse(init.body).requested_format) {
+        if (++selected === 1) throw Error('selected response lost');
+        return pieceHttp(replacement);
+      }
+      return pieceHttp(original);
+    } });
+    bindSourceRefreshHost(u); await u.host.createFromSavedInput(); await pieceTick();
+    if (kind === 'unknown-post') uiButton(u, '形式：宣言').props.onPress();
+    else uiButton(u, 'テーマ：ソフトペーパー').props.onPress();
+    await pieceTick();
+    const originalPost = u.calls[kind === 'unknown-post' ? 2 : 1][1];
+    assert.equal(uiButton(u, '保存入力を確認し直す'), undefined);
+    uiButton(u, 'Pieceの画面を閉じる').props.onPress();
+    const count = u.calls.length;
+    u.host.props = { ...u.host.props, active: false }; u.host.componentDidUpdate();
+    u.host.props = { ...u.host.props, active: true }; u.host.componentDidUpdate();
+    assert.equal(u.calls.length, count); assert.equal(uiButton(u, '保存入力を確認し直す'), undefined);
+    await u.host.createFromSavedInput(); await pieceTick();
+    assert.equal(u.calls.at(-1)[1].body, originalPost.body);
+    assert.equal(u.calls.at(-1)[1].headers['Idempotency-Key'], originalPost.headers['Idempotency-Key']);
+    u.host.componentWillUnmount();
+  });
+}
+
 for (const operation of ['save', 'cancel']) {
   test(`${operation} conflict never permits replacing the saved source`, async () => {
     const u = previewUiHarness({ admitSave: true, send: async (url, init) => init.method === 'GET'

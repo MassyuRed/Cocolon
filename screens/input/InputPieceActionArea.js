@@ -68,6 +68,7 @@ export default class InputPieceActionArea extends React.Component {
     this.boundRuntime = null;
     this.boundSaveEnabled = null;
     this.boundSavedInputStamp = null;
+    this.contextSyncToken = null;
     this.savedMode = false;
     this.saveDispatching = false;
     this.saveFitHandle = null;
@@ -131,8 +132,9 @@ export default class InputPieceActionArea extends React.Component {
         }
         this.setState({ open: false });
       } else {
+        const controller = this.controller;
         if (this.isCurrent() && !this.syncSavedOperation(true)) this.restoreSaveRecovery();
-        this.controller.refresh();
+        if (this.mounted && this.controller === controller) controller.refresh();
       }
     });
     this.syncContext();
@@ -175,10 +177,23 @@ export default class InputPieceActionArea extends React.Component {
   }
 
   syncSavedOperation(enabled, runtimeRefresh = false) {
-    const retained = this.controller.setSaveAvailability({ enabled, saveEnabled: this.saveEnabled(), runtimeRefresh,
-      preserveSelectedFormat: this.savedMode }) ||
-      this.controller.setCancellationEnabled(enabled);
-    const view = retained ? this.controller.getView() : null;
+    const controller = this.controller, stamp = this.boundStamp, runtime = this.boundRuntime;
+    const sourceStamp = this.boundSavedInputStamp, savedMode = this.savedMode, syncToken = this.contextSyncToken;
+    const stillBound = () => this.mounted && this.controller === controller &&
+      this.boundStamp === stamp && this.boundRuntime === runtime && this.boundSavedInputStamp === sourceStamp &&
+      this.savedMode === savedMode && this.contextSyncToken === syncToken &&
+      (savedMode ? savedInputStamp(this.props) === sourceStamp && this.context?.runtime === runtime
+        : contextStamp(this.props.context) === stamp);
+    let retained = controller.setSaveAvailability({ enabled, saveEnabled: this.saveEnabled(), runtimeRefresh,
+      preserveSelectedFormat: savedMode });
+    // A synchronous subscriber may have already established another context.
+    // Treat it as handled, so this caller cannot close or enable that context.
+    if (!stillBound()) return true;
+    if (!retained) {
+      retained = controller.setCancellationEnabled(enabled);
+      if (!stillBound()) return true;
+    }
+    const view = retained ? controller.getView() : null;
     if (retained && this.savedMode && enabled === true &&
         (view.phase === 'idle' || view.phase === 'unavailable' && !view.retryKind && !view.previewRestartToken)) {
       // The same host already holds the selected format's immutable source
@@ -214,6 +229,7 @@ export default class InputPieceActionArea extends React.Component {
       if (saveEnabled === this.boundSaveEnabled) return;
       // A save-only flag update must not discard a valid source read or preview.
       // A new runtime publication still takes the normal suspension path below.
+      this.contextSyncToken = Object.freeze({});
       this.boundSaveEnabled = saveEnabled;
       if (savedMode) this.controller.setSaveAvailability({
         enabled: this.savedEnabled() && this.foreground, saveEnabled, preservePreview: true,
@@ -235,6 +251,7 @@ export default class InputPieceActionArea extends React.Component {
     const sameSavedSelection = savedMode && this.savedMode && sourceStamp !== null &&
       sourceStamp === this.boundSavedInputStamp;
     if (!sameSavedSelection) this.sourceIdempotencyKey = null;
+    this.contextSyncToken = Object.freeze({});
     this.clearSource();
     this.savedMode = savedMode;
     this.boundStamp = stamp;
@@ -541,11 +558,14 @@ export default class InputPieceActionArea extends React.Component {
     if (this.sourceAttempt) this.clearSource();
     this.controller?.close();
     if (rejected?.sourceRefreshToken && this.isCurrent() && this.boundStamp === stamp && this.boundRuntime === runtime) {
+      const closed = this.controller?.getView();
       // Closing a definitive rejection must not turn the stale request back
       // into an ordinary create button using its obsolete source/choices/key.
-      this.sourcePhase = 'unavailable';
-      this.sourceCode = rejected.sourceRefreshCode;
-      this.sourceFailureToken = rejected.sourceRefreshToken;
+      if (closed?.sourceRefreshToken) {
+        this.sourcePhase = 'unavailable';
+        this.sourceCode = closed.sourceRefreshCode;
+        this.sourceFailureToken = closed.sourceRefreshToken;
+      }
     }
     this.setState({ open: false });
   }
