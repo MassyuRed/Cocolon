@@ -3243,3 +3243,23 @@ APIは[5d6c834e](https://github.com/MassyuRed/mashos-api/commit/5d6c834e34b6998d
 
 差分は製品2・既存test1・前提資料4の計7file、新規repo file0。全体現在地・Piece current map・01Aは関連責務の置換更新、本節を履歴とする。STRUCTURE_MAP_DELTA_NONE（既存の選択bindingと本文保持の共用・接続修復、新owner・公開API／DTO・DB・renderer・依存・workflow変更なし）。primary outcomeは限定TECHNICAL_CREDIT。ビルド・配布・本番配置・DB適用・GPU・本人端末操作は0。一般日本語品質、Android通常作成・保存、Photos／Shareの実機確認と正式商品受入れは残る。
 
+
+<a id="piece-role-label-keep-source-stop-20261104"></a>
+## 156. 11/4 — 役割付きの名前の意味破損、原文保持後の誤省略、保存元取得中の停止を修復
+
+MashのPiece残件継続指示で§155を引き継いだ。開始点はRN `4a185ebd4a8d4cfec0639858a854f51546dca670`／API `5d6c834e34b6998d05aa963d5141d4f643c99346`。全機能現在地と恒久incidentを全文、作業姿勢とルール、全体設計・全file地図の既存導線、Piece current・最新weekly・対象実物を確認。System Contextの最新cache未生成は既定のfresh原本直接読取を継続し、索引再構築を追加前提にしない。分類はOBSERVED_BLOCKER_MINIMAL_FIX、LEVEL_2／Rule18 §0A・§11.3の既存設計内修復。実装とGitHub反映は華恋が単一owner、別担当は読取・再現・独立レビューのみ。
+
+**名前の値が役割付きの場合の意味破損。** 「名前は友人の田中さんです。」が「名前は友人です。」へ変わっていた。既存のidentity-material拒否が裸の名前の直前だけを見ており、labelと名前の間の役割phraseを見落としていた。同じ名前へ束縛された完全なphraseの開始位置にも既存label照合を適用し、inlineの名前付き所有者を含む値を役割へ置換しない。label・役割・名前語彙は追加せず、名前を会話topicにする通常参照や、完成した前文・改行・欄の境界を維持する。独立518入力は旧生成178→15。label matrix480では旧誤生成160→0、470はidentity拒否・10は旧role拒否。境界38の新拒否3も「私の名前は友人です」等の意味破損例で、残る正常生成15の本文・role・spanは不変。新受理・正常な新拒否・独立review失敗は0。
+
+**原文保持KEEPの後の本人topic省略。** 「私は自分の時間を選びたい！その時間なら、私は気持ちを整理したい。」は、Engineが後続の「私は」を省略しても、独立検査はKEEP先行文を作者継続の根拠にせず拒否していた。既存の任意省略を、その先行dutyがKEEPの場合だけ辞退する。感嘆符・原文・参照・条件・後続の明示一人称を保持し、独立検査を緩めない。句点の構造化direct／focal／評価の既存省略、意味やplanの適格性は変えない。独立288入力は生成288を維持し、誤省略64の本文だけを修復、review失敗64→0、duty差分0。別36条件も生成・candidate・独立review成功、不正に本人topicを省いたmutationは拒否。既存関連4moduleの5失敗はguardをメモリ上で外しても同じであり、新規回帰へ数えない。
+
+**保存元GET中の停止と失敗の重なり。** adapter読取中に作成停止とSOURCE_NOT_ELIGIBLE／CONFLICT／timeoutが重なると、旧エラーがRNへ返り、稼働設定の再確認を呼ばず「この入力からは現在Pieceを作成できません。」が残っていた。source-refのadapter awaitに、既存APIのrequest-local停止判定 `_OperationFeatures` を共用する。成功・例外の両方で停止を再確認し、停止時は既存のFEATURE_DISABLEDへ閉じる。認証優先・7fieldの閉じた投影・task取消の伝播・明示再開を維持し、RN製品は変更しない。実ASGI6対照は通常ONの3応答が旧版と一致、途中OFF3応答が503 FEATURE_DISABLEDへ修復。その実JSONを実pieceApi／hostへ通し、3条件ともruntime refresh1、旧案内消失、OFFで非表示、再ONで明示確認だけを表示し、自動GET追加0。Auth／adapterは合成で、live停止試験ではない。
+
+既存test3fileへ新220条件を追加し全成功。対象3file全体は818成功・既存下限期待1失敗。同じ最終testを開始sourceへ固定した比較は616成功・203失敗であり、一般商品品質率に換算しない。最終API広域104fileは10,425成功・既存161失敗・error0・native17除外（167.232秒）。§155の失敗identity集合と完全一致、新規失敗0。旧期待値を変更せず、最終source／test6fileのbytes不変を確認した。
+
+実ASGI＋隔離PGliteの8例×3plan×平穏／自己理解48条件は計204通信が成功。正常36はpreview・同key再読・save・同save key再読・本人GETまで本文・3hash・recipe・rendererが一致し、枠消費は各1回。名前の意味破損を止める拒否12は同key2回とも422、本人別records／枠消費／月lockは前後同一、候補発行・審査・prepare後provider追加呼出し0。prepare自体の合成provider1回を追加0へ混同しない。Auth／providerは合成、live SQL・native描画・本人端末の成功ではない。関連220・独立518／288／36・ASGI48や、初期の通常構文組合せ1800の調査を広域件数へ上乗せしない。通常export／native cleanupも別担当が現物確認したが追加実害は未特定で、仮説だけの変更はしない。最終差分の未解決blocking指摘0。
+
+APIは[622e16bd](https://github.com/MassyuRed/mashos-api/commit/622e16bd0b84798b8c00b6303bc5a1d93211127e)へ反映。全6fileの全文・blob・変更集合・親commitの読戻しが一致した。[検証原本ZIP](https://chatgpt.com/library?file_id=libfile_47aa2f2df5708191bc15f654de5577a2&account_id=personal)は `Cocolon_Piece_20261104_identity_continuation_stop_validation.zip`（89member、413,874bytes、SHA256 `7b3d327be67c94a5d79b31ad13710114d9c9a08dbb7b89d412255b8a7f8ad1d7`）。最終XML・前後比較・全wire・再現runner・source/test hash・GitHub読戻しを保存し、GitHub管理の製品sourceは複製しない。wire runner準備時のcwd誤りとRN scratchのrealm間配列assert誤りは最終検証前に訂正し、製品失敗へ合算しない。
+
+差分は製品3・既存test3・前提資料4の計10file、新規repo file0。全体現在地・Piece current map・01Aは関連する責務だけを置換更新し、本節を履歴とする。STRUCTURE_MAP_DELTA_NONE（既存identity拒否・任意省略・停止helperの接続修復、新owner・意味型・作者・公開契約・DB・renderer・依存・workflow変更なし）。primary outcomeは限定TECHNICAL_CREDIT。ビルド・配布・本番配置・DB適用・GPU・本人端末操作は0。一般日本語品質、Android通常作成・保存への採用、Photos／Shareの実機確認と正式商品受入れは残る。
+
