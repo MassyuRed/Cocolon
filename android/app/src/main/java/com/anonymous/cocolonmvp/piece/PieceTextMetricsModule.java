@@ -4,10 +4,12 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorSpace;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.icu.text.BreakIterator;
 import android.net.Uri;
+import android.os.Build;
 import android.os.SystemClock;
 import android.text.Layout;
 import android.text.Spanned;
@@ -31,7 +33,9 @@ import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.facebook.react.views.text.ReactTextView;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FilterOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.ArrayList;
@@ -44,6 +48,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.zip.CRC32;
 
 /** Read the mounted Paper Text's actual Layout. No network or body log.
  * hasGlyph(false) is unavailable, not a claim that a combining sequence is
@@ -421,12 +426,18 @@ public final class PieceTextMetricsModule extends ReactContextBaseJavaModule {
     File file = null;
     try {
       beforeDeadline(deadline);
-      require(bitmapActive);
+      require(bitmapActive && isOpaqueSrgbCanvas(artifact.bitmap));
       File directory = new File(getReactApplicationContext().getCacheDir(), "piece-capture");
       if (!directory.isDirectory() && !directory.mkdirs() && !directory.isDirectory()) throw new IOException();
       file = File.createTempFile("piece-", ".png", directory);
       try (FileOutputStream stream = new FileOutputStream(file)) {
-        if (!artifact.bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)) throw new IOException();
+        // Android 7's SkPNGImageEncoder omits color metadata. Its pixels are
+        // already sRGB, so add only the standard declaration after IHDR.
+        // Android 8+ Skia emits that declaration from the explicit color space.
+        OutputStream encoded = Build.VERSION.SDK_INT < 26
+            ? new LegacyPngSrgbStream(stream, artifact.bitmap.getWidth(), artifact.bitmap.getHeight()) : stream;
+        if (!artifact.bitmap.compress(Bitmap.CompressFormat.PNG, 100, encoded)) throw new IOException();
+        if (encoded instanceof LegacyPngSrgbStream) ((LegacyPngSrgbStream) encoded).finishHeader();
       }
       beforeDeadline(deadline);
       final File encoded = file;
@@ -453,6 +464,77 @@ public final class PieceTextMetricsModule extends ReactContextBaseJavaModule {
 
   private static void removeTemp(File file) {
     if (file != null) try { file.delete(); } catch (SecurityException ignored) { /* Private cache cleanup can retry. */ }
+  }
+
+  // Only API 24/25's known PNG encoder reaches this stream. Keep the encoder's
+  // complete byte stream intact, inserting one standard sRGB chunk after its
+  // checked 33-byte PNG/IHDR prefix. No pixel or IDAT data is rewritten.
+  private static final class LegacyPngSrgbStream extends FilterOutputStream {
+    private static final byte[] SRGB_CHUNK = {
+        0, 0, 0, 1, 115, 82, 71, 66, 0, (byte) 174, (byte) 206, 28, (byte) 233
+    };
+    private final byte[] header = new byte[33];
+    private final byte[] singleByte = new byte[1];
+    private final int width;
+    private final int height;
+    private int headerLength;
+
+    LegacyPngSrgbStream(OutputStream stream, int width, int height) {
+      super(stream);
+      this.width = width;
+      this.height = height;
+    }
+
+    @Override public void write(int value) throws IOException {
+      singleByte[0] = (byte) value;
+      write(singleByte, 0, 1);
+    }
+
+    @Override public void write(byte[] bytes, int offset, int length) throws IOException {
+      if (offset < 0 || length < 0 || offset > bytes.length - length) throw new IndexOutOfBoundsException();
+      if (headerLength < header.length) {
+        int copied = Math.min(length, header.length - headerLength);
+        System.arraycopy(bytes, offset, header, headerLength, copied);
+        headerLength += copied;
+        offset += copied;
+        length -= copied;
+        if (headerLength == header.length) {
+          validateHeader();
+          out.write(header);
+          out.write(SRGB_CHUNK);
+        }
+      }
+      if (length != 0) out.write(bytes, offset, length);
+    }
+
+    void finishHeader() throws IOException {
+      if (headerLength != header.length) throw new IOException();
+    }
+
+    private void validateHeader() throws IOException {
+      ByteBuffer bytes = ByteBuffer.wrap(header).order(ByteOrder.BIG_ENDIAN);
+      CRC32 crc = new CRC32();
+      crc.update(header, 12, 17);
+      if (bytes.getLong(0) != 0x89504e470d0a1a0aL || bytes.getInt(8) != 13 || bytes.getInt(12) != 0x49484452 ||
+          bytes.getInt(16) != width || bytes.getInt(20) != height || header[24] != 8 || header[25] != 2 ||
+          header[26] != 0 || header[27] != 0 || header[28] != 0 || crc.getValue() != (bytes.getInt(29) & 0xffffffffL)) {
+        throw new IOException();
+      }
+    }
+  }
+
+  private static Bitmap createOpaqueSrgbCanvas(int width, int height) {
+    if (Build.VERSION.SDK_INT >= 26) {
+      return Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888, false, ColorSpace.get(ColorSpace.Named.SRGB));
+    }
+    Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+    bitmap.setHasAlpha(false);
+    return bitmap;
+  }
+
+  private static boolean isOpaqueSrgbCanvas(Bitmap bitmap) {
+    return bitmap.getConfig() == Bitmap.Config.ARGB_8888 && !bitmap.hasAlpha() &&
+        (Build.VERSION.SDK_INT < 26 || bitmap.getColorSpace() != null && bitmap.getColorSpace().isSrgb());
   }
 
   private WritableMap renderAndroidBitmap(ReadableMap request, NativeViewHierarchyManager hierarchy,
@@ -518,8 +600,7 @@ public final class PieceTextMetricsModule extends ReactContextBaseJavaModule {
 
     Bitmap bitmap = null;
     try {
-      bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-      bitmap.setHasAlpha(false);
+      bitmap = createOpaqueSrgbCanvas(width, height);
       Canvas full = new Canvas(bitmap);
       Paint paint = new Paint();
       full.drawColor(background);

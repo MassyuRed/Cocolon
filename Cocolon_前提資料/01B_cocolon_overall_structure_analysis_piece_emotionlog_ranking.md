@@ -3382,3 +3382,15 @@ API dc05dc35、通常product owner追加なし。既存 `semantic_admission.py` 
 | mashos-api `ai/services/ai_inference/piece_v2_generation.py` | 既存の原文から画像本文を作る経路に「受け取り」「閉め」の明示動作を追加。 |
 
 [Piece現行構造](current_structure/02_piece_current_structure.md#piece-android-bitmap-prototype-20261104)
+
+
+<a id="piece-paragraph-os-result-srgb-files-20261104"></a>
+### 2026-11-04 — Pieceの原文段落・OS操作結果・PNGのファイル差分
+
+| 既存ファイル | 責務の差分 |
+|---|---|
+| mashos-api `ai/services/ai_inference/piece_v2_generation.py`・`piece_v2_content_policy.py`、同階層の `cocolon_meaning_experience_engine/piece_source.py`・`piece_v1c.py` | 同じ保存欄の完成した文の改行を、原文の位置・欄と照合した段落へ保持。本文作者と独立検査が同じ段落順・否定・句点を照合する。 |
+| screens/PieceOwnerHistoryScreen.js／features/piece/pieceExport.js | OSへ渡した操作の進行と結果を本文なしで保持。本人・権限の再確認と明示的な同じ保存版の再読後に結果を表示し、実行中の二重開始を防ぐ。 |
+| `android/app/src/main/java/com/anonymous/cocolonmvp/piece/PieceTextMetricsModule.java`、`features/piece/pieceExportPngProfile.js`、`tests/native/piece-rn-android-bitmap-entry.js` | Android試作の不透明sRGB Bitmapと旧OSへの標準色宣言、既存検査の不透明RGB指定を接続。 |
+
+通常起動経路・描画版・公開DTO・依存・DBスキーマは既存のownerを使用する。[Piece現行構造](current_structure/02_piece_current_structure.md#piece-paragraph-os-result-srgb-20261104)

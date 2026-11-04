@@ -824,11 +824,11 @@ test('owner entry remains available independently of public and resonance loadin
   n.dispose();
 });
 
-function exportHost({prepareWait, fresh, captureWait, result={outcome:'saved_to_photos'}}={}) {
+function exportHost({prepareWait, fresh, captureWait, send=ownerSend, result={outcome:'saved_to_photos'}}={}) {
   const events=[];
   const asset={dispose:async()=>events.push('dispose'),saveToPhotos:async()=>{events.push('photos');return result;},
     openShare:async()=>{events.push('share');return result;}};
-  const h=harness({exportPrepare:async options=>{events.push(['prepare',options]);if(prepareWait)await prepareWait;
+  const h=harness({send,exportPrepare:async options=>{events.push(['prepare',options]);if(prepareWait)await prepareWait;
     return {record:fresh||record(),capture:async target=>{events.push(['capture',target]);if(captureWait)await captureWait;return asset;}};}});
   const host=ownerHost(h,savedEntry(),{flags:{piece_v2_owner_read_enabled:true,piece_v2_export_enabled:true}});
   const target={isCurrent:()=>true};
@@ -923,6 +923,239 @@ for(const boundary of ['history','owner','target','flag'])test(`terminal export 
   u.host.componentDidUpdate();assert.equal(u.host.exportMessage,null);u.host.componentWillUnmount();
 });
 
+
+
+function exportAssetHarness(saved) {
+  const prefix = fs.readFileSync(path.join(__dirname, 'piece-v2-export.test.js'), 'utf8')
+    .split('for (const version of')[0];
+  const context = vm.createContext({ require, __dirname, queueMicrotask, Buffer });
+  vm.runInContext(prefix + '\nglobalThis.makeExport = harness;', context);
+  return context.makeExport({ os: 'ios', record: saved });
+}
+
+async function nativeExportHost(action, ordinary = false, send = ownerSend, beforeNative = false) {
+  const u = exportHost({ send });
+  if (ordinary) {
+    u.host.props = { ...u.host.props, savedPiece: null };
+    u.host.componentDidMount();
+    await u.host.act('loadHistory');
+    await u.host.act('openDetail', PID);
+    await u.host.prepareExport(u.host.controller.getView().record);
+    u.host.exportAttempt.onTarget(u.target, null);
+  } else await u.ready();
+  u.host.props = { ...u.host.props, presentationActive: true, runtimePending: false };
+  const native = exportAssetHarness(u.host.controller.getView().record);
+  const job = await native.prepare();
+  const asset = await job.capture(native.target());
+  let finish;
+  const wait = new Promise(resolve => { finish = resolve; });
+  native.state[beforeNative ? 'exportWait' : action === 'saveToPhotos' ? 'photoWait' : 'shareWait'] = { promise: wait };
+  native.state.shareResult = { success: false, dismissedAction: true };
+  const attempt = u.host.exportAttempt;
+  attempt.job = { ...attempt.job, capture: async () => asset };
+  const pending = u.host.exportImage(attempt, action);
+  await tick();
+  assert.equal(native.calls.filter(call => call[0] === (action === 'saveToPhotos' ? 'photo' : 'share')).length, beforeNative ? 0 : 1);
+  return { ...u, native, asset, pending, finish };
+}
+
+function suspendExport(u) {
+  const previous = u.host.props;
+  u.h.background('inactive');
+  u.native.state.current = false;
+  u.host.props = { ...previous, enabled: false, flags: {}, runtimePending: false };
+  u.host.componentDidUpdate();
+  u.host.props = { ...u.host.props, runtimePending: true };
+  u.h.background('active');
+  u.host.componentDidUpdate();
+  assert.equal(u.host.controller.getView().record, null);
+  assert.equal(u.host.exportMessage, null);
+  return () => {
+    u.host.props = { ...previous, runtimePending: false };
+    u.host.componentDidUpdate();
+  };
+}
+
+async function rereadOperatedPiece(u, ordinary) {
+  if (ordinary) {
+    await u.host.act('loadHistory');
+    assert.ok(u.host.exportOperation);
+    await u.host.act('openDetail', PID);
+  } else await u.host.openSavedDetail(u.host.targetKey(), PID);
+  assert.equal(u.host.controller.getView().phase, 'detail');
+}
+
+for (const ordinary of [false, true]) {
+  for (const action of ['saveToPhotos', 'openShare']) {
+    test('native ' + action + ' result survives flag refresh and explicit ' + (ordinary ? 'history' : 'direct') + ' reread', async () => {
+      const u = await nativeExportHost(action, ordinary);
+      const restoreRuntime = suspendExport(u);
+      const count = u.h.calls.length;
+      assert.ok(u.host.exportOperation);
+      assert.doesNotMatch(JSON.stringify(u.host.exportOperation), /piece_text"|content_payload"|visual_recipe"|file:|静かに|Bearer/);
+      u.finish(); await u.pending;
+      assert.equal(u.host.exportOperation.phase, 'complete');
+      assert.equal(u.h.calls.length, count);
+      assert.ok(!texts(u.host.render()).some(value => /写真に保存しました|共有をキャンセル/.test(value)));
+      restoreRuntime(); await tick();
+      assert.equal(u.h.calls.length, count, 'runtime never rereads a record automatically');
+      await rereadOperatedPiece(u, ordinary);
+      assert.ok(texts(u.host.render()).includes(action === 'saveToPhotos'
+        ? '写真に保存しました。' : '共有をキャンセルしました。'));
+      await assert.rejects(u.asset[action]());
+      assert.equal(u.native.calls.filter(call => call[0] === (action === 'saveToPhotos' ? 'photo' : 'share')).length, 1);
+      u.host.componentWillUnmount();
+    });
+  }
+}
+
+for (const ordinary of [false, true]) {
+  test('in-flight photo blocks duplicate after explicit ' + (ordinary ? 'history' : 'direct') + ' reread', async () => {
+    const u = await nativeExportHost('saveToPhotos', ordinary);
+    const restoreRuntime = suspendExport(u);
+    restoreRuntime();
+    await rereadOperatedPiece(u, ordinary);
+    const count = u.events.filter(event => Array.isArray(event) && event[0] === 'prepare').length;
+    assert.equal(button(u.host, '画像の保存・共有を準備').props.disabled, true);
+    await u.host.prepareExport(u.host.controller.getView().record);
+    assert.equal(u.events.filter(event => Array.isArray(event) && event[0] === 'prepare').length, count);
+    assert.ok(texts(u.host.render()).includes('写真への保存結果を待っています。'));
+    u.finish(); await u.pending;
+    assert.ok(texts(u.host.render()).includes('写真に保存しました。'));
+    u.host.componentWillUnmount();
+  });
+}
+
+for (const boundary of ['owner', 'target', 'focus', 'tutorial', 'permission', 'unmount']) {
+  test('suspended native completion cannot return after ' + boundary + ' changes away and back', async () => {
+    const u = await nativeExportHost('saveToPhotos');
+    const restoreRuntime = suspendExport(u);
+    const old = u.host.props;
+    if (boundary === 'owner') u.host.props = { ...old, owner: RID };
+    if (boundary === 'target') u.host.props = { ...old, savedPiece: savedEntry(RID) };
+    if (boundary === 'focus' || boundary === 'tutorial') u.host.props = { ...old, presentationActive: false };
+    if (boundary === 'permission') u.host.props = { ...old, runtimePending: false };
+    if (boundary === 'unmount') u.host.componentWillUnmount();
+    else u.host.componentDidUpdate();
+    assert.equal(u.host.exportOperation, null);
+    u.finish(); await u.pending;
+    if (boundary !== 'unmount') {
+      restoreRuntime();
+      assert.equal(u.host.exportOperation, null);
+      u.host.componentWillUnmount();
+    }
+  });
+}
+
+for (const [action, nativeFailure] of [['saveToPhotos', true], ['openShare', true], ['openShare', false]]) {
+  test('suspended ' + action + (nativeFailure ? ' rejection' : ' unknown reply') + ' stays unconfirmed', async () => {
+    const u = await nativeExportHost(action);
+    const restoreRuntime = suspendExport(u);
+    if (nativeFailure) u.native.state[action === 'saveToPhotos' ? 'photoError' : 'shareError'] = true;
+    else u.native.state.shareResult = undefined;
+    u.finish(); await u.pending;
+    restoreRuntime();
+    await rereadOperatedPiece(u, false);
+    assert.ok(texts(u.host.render()).includes(action === 'saveToPhotos'
+      ? '写真への保存結果を確認できませんでした。写真アプリで保存済みか確認できます。'
+      : '共有結果を確認できませんでした。'));
+    assert.ok(!texts(u.host.render()).some(value => value.includes('保存・共有できませんでした')));
+    assert.equal(u.host.exportOperation.outcome, 'unconfirmed');
+    u.host.componentWillUnmount();
+  });
+}
+
+test('on-time native rejection keeps its existing failure', async () => {
+  const u = await nativeExportHost('saveToPhotos');
+  u.native.state.photoError = true;
+  u.finish(); await u.pending;
+  assert.equal(u.host.exportOperation, null);
+  assert.ok(texts(u.host.render()).includes('画像を保存・共有できませんでした。権限や接続を確認して、もう一度お試しください。'));
+  u.host.componentWillUnmount();
+});
+
+
+test('suspension during pre-OS verification never invents an uncertain external operation', async () => {
+  const u = await nativeExportHost('saveToPhotos', false, ownerSend, true);
+  const restoreRuntime = suspendExport(u);
+  u.finish(); await u.pending;
+  assert.equal(u.asset.nativeStatus, 'not_started');
+  assert.equal(u.host.exportOperation, null);
+  restoreRuntime();
+  await rereadOperatedPiece(u, false);
+  assert.ok(!texts(u.host.render()).some(value => /写真への保存結果|写真に保存しました/.test(value)));
+  assert.equal(u.native.calls.filter(call => call[0] === 'photo').length, 0);
+  u.host.componentWillUnmount();
+});
+
+
+test('runtime loading alone drops the displayed record and requires an explicit reread for completion', async () => {
+  const u = await nativeExportHost('saveToPhotos');
+  const previous = u.host.props;
+  const calls = u.h.calls.length;
+  u.host.props = { ...previous, runtimePending: true };
+  u.host.componentDidUpdate();
+  assert.equal(u.host.controller.getView().record, null);
+  assert.ok(u.host.exportOperation);
+  u.finish(); await u.pending;
+  u.host.props = previous;
+  u.host.componentDidUpdate();
+  assert.equal(u.h.calls.length, calls);
+  assert.equal(u.host.controller.getView().record, null);
+  await rereadOperatedPiece(u, false);
+  assert.ok(texts(u.host.render()).includes('写真に保存しました。'));
+  u.host.componentWillUnmount();
+});
+
+test('a different fresh row version cannot receive the completed native operation notice', async () => {
+  let changed = false;
+  const u = await nativeExportHost('saveToPhotos', false,
+    () => packet(record({ row_version: changed ? 3 : 2 })));
+  const restoreRuntime = suspendExport(u);
+  u.finish(); await u.pending;
+  restoreRuntime(); changed = true;
+  await rereadOperatedPiece(u, false);
+  assert.equal(u.host.controller.getView().record.row_version, 3);
+  assert.equal(u.host.exportOperation, null);
+  assert.ok(!texts(u.host.render()).includes('写真に保存しました。'));
+  u.host.componentWillUnmount();
+});
+
+test('choosing a different history item drops the old completion even when returning to its ID', async () => {
+  const u = await nativeExportHost('saveToPhotos', true);
+  const restoreRuntime = suspendExport(u);
+  u.finish(); await u.pending; restoreRuntime();
+  await u.host.act('loadHistory');
+  await u.host.act('openDetail', RID);
+  assert.equal(u.host.exportOperation, null);
+  await u.host.act('openDetail', PID);
+  assert.equal(u.host.exportOperation, null);
+  assert.ok(!texts(u.host.render()).includes('写真に保存しました。'));
+  u.host.componentWillUnmount();
+});
+
+test('real owner wrapper separates focus and runtime loading from permissions', () => {
+  const file = fs.readFileSync(path.join(ROOT, 'screens/PieceOwnerHistoryScreen.js'), 'utf8');
+  const wrapper = file.slice(file.indexOf('export default function PieceOwnerHistoryScreen')).replace('export default ', '');
+  const state = { focused: true, tutorial: false, runtime: { loaded: true, loading: false }, allowed: true };
+  const context = vm.createContext({
+    useAuth: () => ({ session: { user: { id: OWNER } } }),
+    useAppRuntime: () => ({ runtime: state.runtime, isFeatureEnabled: () => state.allowed }),
+    useTutorial: () => ({ isTutorialMode: state.tutorial }), useIsFocused: () => state.focused,
+    flagNames: ['piece_v2_owner_read_enabled', 'piece_v2_visibility_toggle_enabled',
+      'piece_v2_public_write_enabled', 'piece_v2_delete_enabled', 'piece_v2_export_enabled'],
+    PieceOwnerHistoryHost: 'OwnerHost', h: (type, props) => ({ type, props }),
+  });
+  vm.runInContext(wrapper + '\nglobalThis.Screen = PieceOwnerHistoryScreen;', context);
+  const render = () => context.Screen({ navigation: {}, route: {} }).props;
+  assert.equal(render().presentationActive, true); assert.equal(render().runtimePending, false);
+  state.runtime = { loaded: true, loading: true }; state.allowed = false;
+  assert.equal(render().enabled, false); assert.equal(render().presentationActive, true); assert.equal(render().runtimePending, true);
+  state.runtime = { loaded: true, loading: false, error: new Error('offline') };
+  assert.equal(render().runtimePending, false); assert.equal(render().enabled, false);
+  state.focused = false; assert.equal(render().presentationActive, false);
+  state.focused = true; state.tutorial = true; assert.equal(render().presentationActive, false);
+});
 
 test('receipt transport opts in through a response header and validates an exact body-free acknowledgment', async () => {
   const r = record({renderer_version:'piece.rn_bitmap_renderer.ios.v2'});

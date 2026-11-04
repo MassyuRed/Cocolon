@@ -3645,3 +3645,15 @@ Androidの新規画像作成は引き続き別残件。既存のAndroid文字検
 | `piece_v2_generation.py` → CMEE・独立本文検査 | 明記された対象を伴う「受け取りました／受け取りませんでした」「閉めました／閉めませんでした」を既存の動作文に追加。既知の日付表現や自己理解モードの原文保持を適用し、疑問・未成立の条件・別欄で補った断片は引き続き拒否する。 |
 
 まとめビルドでAndroidを確認する場合は、リポジトリのルートから `PIECE_RN_ANDROID_BITMAP_GROUP=1 node tests/native/piece-rn-canvas-fixtures.cjs > tests/native/piece-rn-android-bitmap-fixtures.json` で合成8ケースを生成する。検証用checkoutの `index.js` を一時的に `import './tests/native/piece-rn-android-bitmap-entry';` として、既存のPaper Android手順で起動する。生成JSONと入口の差替えは検証用checkoutだけに置く。検証画面はPNGの寸法と構造、ハッシュを確認し、取得したファイルを解放する。最終画像の原寸目視、描画時間、sRGB、写真保存・共有、通常保存・本人再表示の受入れはまとめビルド後の範囲。既存配布物・稼働設定・公開API・DBスキーマへの反映は未実施。[週次レビュー§144](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#piece-android-bitmap-prototype-20261104)
+
+
+<a id="piece-paragraph-os-result-srgb-20261104"></a>
+## 2026-11-04 — 原文の段落、OS操作結果の再確認、Android PNG色特性
+
+| 経路 | 差分 |
+|---|---|
+| 保存原入力 → Piece source・plan・独立本文検査 | 同じ欄の成立済みの行を、それぞれ既存の段落へ入れる。句点なしの明確な動作文も各行で照合し、語句や句点を追加しない。句点付きの完成文の改行も保持する。3段落・6文・420文字を越えれば拒否し、段落を連結して収めない。原入力の別欄、未完の行、未解決の指示語を補わない。 |
+| 本人詳細 → pieceExport → Photos／Share → 明示再読 | 端末側の処理へ渡した後に画面が一時停止しても、本人・Piece・保存版・本文等のハッシュ・権限へ結び付いた処理状態と結果だけを保持する。本文・画像・描画対象は既存どおり破棄。稼働設定の再確認後に同じ本人レコードを明示的に取得した場合だけ結果を表示する。処理中は同じ画像操作を二重開始しない。本人・画面・保存版・確定した権限が変われば保持情報を破棄する。 |
+| Android試作Bitmap → PNG → 既存PNG検査 | Android 7の出力はIHDRの寸法・RGB・CRCを照合し、標準sRGB宣言を補う。エンコーダーの元の画像データは変更しない。Android 8以降は不透明sRGB Bitmapを明示作成する。検証専用画面は既存のsRGB検査に不透明RGB指定を渡し、透明度を持つPNGも拒否する。 |
+
+OSへ渡す前に確認が途切れた操作と、OSへ渡した後の結果不明を区別する。後者は成功へ変換せず、写真アプリ等で結果を確認できる案内を出す。共有先や外部の送信完了は保持・判定しない。ビルド、端末の権限ダイアログ・共有画面、AndroidのPNG実出力・描画時間・通常保存への採用は確認が残る。[週次レビュー§145](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#piece-paragraph-os-result-srgb-20261104)

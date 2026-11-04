@@ -21,6 +21,7 @@ export class PieceOwnerHistoryHost extends React.Component {
     this.state = { revision: 0 };
     this.mounted = false; this.foreground = false; this.controller = null; this.binding = null;
     this.requestedSavedTarget = null; this.deletedSavedTarget = null; this.exportAttempt = null; this.exportMessage = null; this.exportSerial = 0;
+    this.exportOperation = null;
   }
   savedTarget() {
     const value = this.props.savedPiece;
@@ -36,10 +37,11 @@ export class PieceOwnerHistoryHost extends React.Component {
     return this.props.savedPiece == null ? null : JSON.stringify(this.savedTarget() || 'invalid');
   }
   stamp() {
-    return JSON.stringify([this.props.owner, this.props.enabled, this.props.flags, this.targetKey()]);
+    return JSON.stringify([this.props.owner, this.props.enabled, this.props.flags, this.targetKey(), this.props.runtimePending === true]);
   }
   current() {
     return this.mounted && this.foreground && this.props.enabled === true &&
+      this.props.runtimePending !== true &&
       !!this.props.owner && this.binding === this.stamp() &&
       (this.props.savedPiece == null || this.savedTarget()?.expectedUserId === this.props.owner);
   }
@@ -57,13 +59,15 @@ export class PieceOwnerHistoryHost extends React.Component {
       if (this.mounted) this.setState(s => ({ revision: s.revision + 1 }));
     });
     this.appSubscription = AppState.addEventListener('change', state => {
-      this.foreground = state === 'active'; this.binding = null; this.cancelExport(); this.sync();
+      this.foreground = state === 'active';
+      if (!this.foreground && this.exportOperation?.phase === 'running') this.exportOperation.suspended = true;
+      this.binding = null; this.cancelExport(); this.sync();
     });
     this.sync();
   }
   componentDidUpdate() { this.sync(); }
   componentWillUnmount() {
-    this.mounted = false; this.cancelExport(); this.unsubscribe?.(); this.appSubscription?.remove(); this.controller?.dispose();
+    this.mounted = false; this.exportOperation = null; this.cancelExport(); this.unsubscribe?.(); this.appSubscription?.remove(); this.controller?.dispose();
   }
   sync() {
     if (!this.mounted) return;
@@ -92,7 +96,48 @@ export class PieceOwnerHistoryHost extends React.Component {
       return this.act('openDetail', pieceId);
     }
   }
-  act(action, ...args) { if (this.current()) return this.controller[action](...args); }
+  act(action, ...args) {
+    if (!this.current()) return;
+    if (action === 'openDetail' && this.exportOperation &&
+        args[0] !== this.exportOperation.pieceId) this.exportOperation = null;
+    return this.controller[action](...args);
+  }
+  exportIdentity(record) {
+    return JSON.stringify([record.piece_id, record.row_version, record.piece_text_hash,
+      record.content_payload_hash, record.visual_recipe_hash, record.renderer_version]);
+  }
+  exportFlags() {
+    return JSON.stringify(flagNames.map(name => this.props.flags?.[name] === true));
+  }
+  presentationActive() {
+    return this.props.presentationActive ?? this.props.enabled;
+  }
+  ownsExportOperation(operation) {
+    if (!operation) return false;
+    const settled = this.foreground && AppState.currentState === 'active' && this.props.runtimePending !== true;
+    const record = this.controller?.getView().record;
+    return this.mounted && this.presentationActive() === true && this.props.owner === operation.owner &&
+      this.targetKey() === operation.targetKey && (!settled ||
+        this.props.enabled === true && this.exportFlags() === operation.flags) &&
+      (!record || this.exportIdentity(record) === operation.identity);
+  }
+  syncExportOperation() {
+    if (!this.ownsExportOperation(this.exportOperation)) this.exportOperation = null;
+    else if (this.exportOperation?.phase === 'running' &&
+        (!this.foreground || this.props.runtimePending === true)) this.exportOperation.suspended = true;
+  }
+  exportOperationFor(record) {
+    const operation = this.exportOperation;
+    return this.ownsExportOperation(operation) && record &&
+      operation.identity === this.exportIdentity(record) ? operation : null;
+  }
+  exportOutcomeMessage(outcome, action) {
+    if (outcome === 'unconfirmed') return action === 'saveToPhotos'
+      ? '写真への保存結果を確認できませんでした。写真アプリで保存済みか確認できます。'
+      : '共有結果を確認できませんでした。';
+    return outcome === 'saved_to_photos' ? '写真に保存しました。'
+      : outcome === 'cancelled' ? '共有をキャンセルしました。' : '共有画面を閉じました。';
+  }
   exportCurrent(attempt) {
     const view = this.controller?.getView();
     return !!attempt && this.exportAttempt === attempt && this.current() &&
@@ -104,6 +149,7 @@ export class PieceOwnerHistoryHost extends React.Component {
     if (old) { old.abort.abort(); void old.asset?.dispose().catch(() => {}); }
   }
   syncExportContext() {
+    this.syncExportOperation();
     if (this.exportAttempt && !this.exportCurrent(this.exportAttempt)) this.cancelExport();
     if(this.exportMessage && (!this.current() || this.controller?.getView().record!==this.exportMessage.displayed ||
         this.stamp()!==this.exportMessage.stamp))this.exportMessage=null;
@@ -111,7 +157,9 @@ export class PieceOwnerHistoryHost extends React.Component {
   async prepareExport(record) {
     if (!this.current() || this.props.flags?.piece_v2_export_enabled !== true ||
         this.controller?.getView().phase !== 'detail' || this.controller.getView().record !== record ||
-        !supportsPieceSavedImage(record.renderer_version) || this.exportAttempt?.busy) return;
+        !supportsPieceSavedImage(record.renderer_version) || this.exportAttempt?.busy ||
+        this.exportOperationFor(record)?.phase === 'running') return;
+    this.exportOperation = null;
     this.cancelExport();
     const attempt = { displayed: record, stamp: this.stamp(), abort: new AbortController(), serial: ++this.exportSerial, busy: true };
     this.exportAttempt = attempt;
@@ -149,17 +197,40 @@ export class PieceOwnerHistoryHost extends React.Component {
     if (!this.exportCurrent(attempt) || attempt.busy || !attempt.job ||
         !['saveToPhotos', 'openShare'].includes(action) || !attempt.target?.isCurrent()) return;
     attempt.busy = true; this.setState(s => ({ revision: s.revision + 1 }));
+    let operation;
     try {
       if (!attempt.asset) attempt.asset = await attempt.job.capture(attempt.target);
       if (!this.exportCurrent(attempt)) { await attempt.asset.dispose(); return; }
+      // Keep only completion identity when lifecycle invalidation drops the
+      // record, canvas and asset. Native effects are never replayed on resume.
+      operation = { owner: this.props.owner, pieceId: attempt.displayed.piece_id,
+        identity: this.exportIdentity(attempt.displayed), flags: this.exportFlags(),
+        targetKey: this.targetKey(), action, phase: 'running', outcome: null, suspended: false };
+      this.exportOperation = operation;
       const result = await attempt.asset[action]();
+      this.syncExportOperation();
+      if (this.exportOperation === operation) {
+        if (['saved_to_photos', 'cancelled', 'share_result_returned'].includes(result?.outcome)) {
+          operation.phase = 'complete';
+          operation.outcome = operation.suspended && attempt.asset.nativeStatus === 'unknown'
+            ? 'unconfirmed' : result.outcome;
+        } else this.exportOperation = null;
+        if (this.mounted) this.setState(s => ({ revision: s.revision + 1 }));
+      }
       if (this.exportCurrent(attempt)) {
         this.cancelExport();
-        this.exportMessage = {displayed:attempt.displayed,stamp:attempt.stamp,text:result.outcome === 'saved_to_photos' ? '写真に保存しました。'
-          : result.outcome === 'cancelled' ? '共有をキャンセルしました。' : '共有画面を閉じました。'};
+        this.exportMessage = {displayed:attempt.displayed,stamp:attempt.stamp,
+          text:this.exportOutcomeMessage(result.outcome)};
         this.setState(s => ({ revision: s.revision + 1 }));
       }
     } catch (error) {
+      this.syncExportOperation();
+      if (operation && this.exportOperation === operation) {
+        if (operation.suspended && ['started', 'unknown'].includes(attempt.asset?.nativeStatus)) {
+          operation.phase = 'complete'; operation.outcome = 'unconfirmed';
+        } else this.exportOperation = null;
+        if (this.mounted) this.setState(s => ({ revision: s.revision + 1 }));
+      }
       if (this.exportCurrent(attempt)) {
         const { PieceExportReceiptRetryError } = require('../features/piece/pieceExport');
         if (typeof PieceExportReceiptRetryError === 'function' && error instanceof PieceExportReceiptRetryError) {
@@ -196,9 +267,12 @@ export class PieceOwnerHistoryHost extends React.Component {
     const targetKey = this.targetKey();
     const target = targetKey === this.deletedSavedTarget ? null : this.savedTarget();
     const attempt = this.exportCurrent(this.exportAttempt) ? this.exportAttempt : null;
-    const exporting = !!attempt?.busy, exportReady = !!attempt?.target?.isCurrent();
-    const exportMessage=this.current()&&record===this.exportMessage?.displayed&&this.stamp()===this.exportMessage?.stamp
-      ? this.exportMessage.text : null;
+    const operation = this.exportOperationFor(record);
+    const pendingOperation = operation?.phase === 'running';
+    const exporting = !!attempt?.busy || pendingOperation, exportReady = !!attempt?.target?.isCurrent();
+    const exportMessage = operation?.phase === 'complete' ? this.exportOutcomeMessage(operation.outcome, operation.action)
+      : this.current() && record === this.exportMessage?.displayed && this.stamp() === this.exportMessage?.stamp
+        ? this.exportMessage.text : null;
     return h(SafeAreaView, { style: { flex: 1, backgroundColor: '#FFFFFF' } },
       h(View, { style: { flex: 1, padding: 20 } },
         h(Text, { accessibilityRole: 'header', style: { color: '#202020', fontSize: 22, marginBottom: 12 } }, '自分のPiece'),
@@ -227,6 +301,8 @@ export class PieceOwnerHistoryHost extends React.Component {
             onPress: () => this.exportImage(attempt, 'saveToPhotos') }) : null,
           attempt?.job ? h(Button, { title: '画像を共有', disabled: exporting || !exportReady,
             onPress: () => this.exportImage(attempt, 'openShare') }) : null,
+          pendingOperation ? h(Text, { accessibilityLiveRegion: 'polite', style: { color: '#202020', fontSize: 16 } },
+            operation.action === 'saveToPhotos' ? '写真への保存結果を待っています。' : '共有画面の終了を待っています。') : null,
           exportMessage ? h(Text, { accessibilityLiveRegion: 'polite', style: { color: '#202020', fontSize: 16 } }, exportMessage) : null,
           record && view.permissions.visibility && (record.visibility_scope === 'public' || view.permissions.publish)
             ? h(Button, { title: record.visibility_scope === 'public' ? '非公開にする' : '公開する', onPress: () => this.confirmVisibility(record) }) : null,
@@ -242,7 +318,7 @@ export class PieceOwnerHistoryHost extends React.Component {
               this.props.flags?.piece_v2_export_enabled === true ? '保存済み本文と画像レイアウトを確認できます。' :
                 '保存済み本文を確認できます。詳細では、対応する画像レイアウトも確認できます。画像の保存・共有は、まだ利用できません。'),
         ),
-        h(Button, { title: '戻る', onPress: () => { this.controller?.close();
+        h(Button, { title: '戻る', onPress: () => { this.exportOperation = null; this.controller?.close();
           this.props.navigation?.setParams?.({ savedPiece: null }); this.props.navigation?.goBack?.(); } }),
       ),
     );
@@ -257,5 +333,7 @@ export default function PieceOwnerHistoryScreen({ navigation, route }) {
   const flags = Object.fromEntries(flagNames.map(name => [name, runtime.isFeatureEnabled(name, false) === true]));
   return h(PieceOwnerHistoryHost, { navigation, savedPiece: route?.params?.savedPiece, owner: session?.user?.id || '', flags,
     enabled: focused && !isTutorialMode && flags.piece_v2_owner_read_enabled,
+    presentationActive: focused && !isTutorialMode,
+    runtimePending: runtime.runtime?.loading === true || runtime.runtime?.loaded !== true,
     refreshRuntime: runtime.refreshAppRuntime });
 }

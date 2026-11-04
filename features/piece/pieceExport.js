@@ -1,7 +1,7 @@
-/** B13 native export prototype. No product caller or admission is added here.
- * The future host must supply current owner/runtime/lifecycle checks, mount the
- * saved-record canvas, and establish renderer admission before exposing actions.
- * Receipt is render evidence only, independent from the later OS operation.
+/** B13 fixed-canvas export for the current owner's saved record.
+ * The host supplies owner/runtime/lifecycle checks, mounts the saved-record
+ * canvas and establishes renderer admission before exposing actions.
+ * A receipt records render evidence before the later OS operation.
  */
 import { Platform, PermissionsAndroid, NativeModules } from 'react-native';
 import { captureRef, releaseCapture } from 'react-native-view-shot';
@@ -158,7 +158,7 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
       }) : null;
       check();
       captured = true;
-      let consumed = false, disposed = false;
+      let consumed = false, disposed = false, nativeStatus = 'not_started';
       const begin = () => {
         current();
         if (consumed || disposed) throw failed();
@@ -186,6 +186,7 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
       };
       return Object.freeze({
         // Candidate metadata only. No body, local URI, recipient or formal receipt.
+        get nativeStatus() { return nativeStatus; },
         candidate: Object.freeze({ piece_id: record.public_id, piece_text_hash: record.piece_text_hash,
           visual_recipe_hash: record.visual_recipe_hash, renderer_version: record.renderer_version,
           asset_sha256: assetHash, mime_type: 'image/png', width: input.width, height: input.height }),
@@ -205,14 +206,20 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
             if (Platform.OS === 'ios') {
               // Pinned 7.10.2 old-architecture opt-in avoids the public API's
               // post-save PHAsset read; the patch returns no asset metadata.
-              const result = await NativeModules.RNCCameraRoll.saveToCameraRoll(`file://${path}`,
+              const saving = NativeModules.RNCCameraRoll.saveToCameraRoll(`file://${path}`,
                 { type: 'photo', album: '', cocolonAddOnly: true });
+              nativeStatus = 'started';
+              const result = await saving;
               if (result?.saved !== true) throw failed();
-            } else await CameraRoll.saveAsset(`file://${path}`, { type: 'photo' });
+            } else {
+              const saving = CameraRoll.saveAsset(`file://${path}`, { type: 'photo' });
+              nativeStatus = 'started';
+              await saving;
+            }
             // The native operation has committed. Later owner/runtime loss or
             // local copy cleanup cannot undo that photo or make it retryable.
             // The host still owns whether this outcome belongs on its screen.
-            saved = true;
+            saved = true; nativeStatus = 'complete';
           } catch (error) {
             if (error instanceof PieceExportReceiptRetryError) {
               retryReceipt = true; throw error;
@@ -243,13 +250,16 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
             // known. Backgrounding, dispose and a rejected/unknown result do
             // not establish that an external reader has finished.
             handedOff = true;
-            const result = await Share.open({ url: `file://${path}`, type: 'image/png', filename, failOnCancel: false });
+            const sharing = Share.open({ url: `file://${path}`, type: 'image/png', filename, failOnCancel: false });
+            nativeStatus = 'started';
+            const result = await sharing;
             const cancelled = result?.success === false && result.dismissedAction === true;
             const completed = result?.success === true && result.dismissedAction === undefined;
             // Pinned RNShare on iOS resolves from UIActivityViewController's
             // completionWithItemsHandler after the service ends/dismisses.
             // Android success resolves at target selection, so its copy stays.
             if (Platform.OS === 'ios' && (completed || cancelled)) handedOff = false;
+            nativeStatus = cancelled || completed ? 'complete' : 'unknown';
             outcome = cancelled ? 'cancelled' : 'share_result_returned';
           } catch (error) {
             if (error instanceof PieceExportReceiptRetryError) {

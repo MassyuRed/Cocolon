@@ -5,7 +5,7 @@ import { Dirs, FileSystem } from 'react-native-file-access';
 import { releaseCapture } from 'react-native-view-shot';
 import { name as appName } from '../../app.json';
 import PieceVisualCard from '../../components/piece/PieceVisualCard';
-import { verifyPieceExportPngStructure } from '../../features/piece/pieceExportPngProfile';
+import { verifyPieceExportPngSrgb } from '../../features/piece/pieceExportPngProfile';
 import fixtures from './piece-rn-android-bitmap-fixtures.json';
 
 function androidCachePath(uri) {
@@ -35,8 +35,8 @@ function AndroidBitmapCases() {
       uri = await target.capture();
       path = androidCachePath(uri);
       const { size } = await FileSystem.stat(path);
-      await verifyPieceExportPngStructure({ size, width: target.width, height: target.height,
-        readChunk: (offset, length) => FileSystem.readFileChunk(path, offset, length, 'base64') });
+      await verifyPieceExportPngSrgb({ size, width: target.width, height: target.height,
+        readChunk: (offset, length) => FileSystem.readFileChunk(path, offset, length, 'base64') }, { opaqueRgb: true });
       const hash = await FileSystem.hash(path, 'SHA-256');
       if (card.current !== current || !target.isCurrent() || !/^[0-9a-f]{64}$/.test(hash)) {
         throw new Error('stale_android_piece_capture');

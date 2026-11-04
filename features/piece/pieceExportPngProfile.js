@@ -32,7 +32,7 @@ function crc32(type, data) {
   return (crc ^ 0xffffffff) >>> 0;
 }
 
-async function verifyPng({ readChunk, size, width, height }, requireSrgb) {
+async function verifyPng({ readChunk, size, width, height }, requireSrgb, opaqueRgb = false) {
   if (typeof readChunk !== 'function' || !Number.isSafeInteger(size) || size < (requireSrgb ? 71 : 58) ||
       !Number.isSafeInteger(width) || width < 1 || !Number.isSafeInteger(height) || height < 1) throw unavailable();
   const read = async (offset, length) => {
@@ -46,6 +46,7 @@ async function verifyPng({ readChunk, size, width, height }, requireSrgb) {
       String.fromCharCode(...start.subarray(12, 16)) !== 'IHDR' ||
       u32(start, 16) !== width || u32(start, 20) !== height ||
       !bitDepths[colorType]?.includes(depth) || requireSrgb && (depth !== 8 || ![2, 6].includes(colorType)) ||
+      opaqueRgb && colorType !== 2 ||
       start[26] !== 0 || start[27] !== 0 || start[28] > 1 ||
       crc32(start.subarray(12, 16), start.subarray(16, 29)) !== u32(start, 29)) throw unavailable();
 
@@ -57,7 +58,7 @@ async function verifyPng({ readChunk, size, width, height }, requireSrgb) {
     const length = u32(header, 0), typeBytes = header.subarray(4), type = String.fromCharCode(...typeBytes);
     const end = offset + 12 + length;
     if (length > 0x7fffffff || end > size || !/^[A-Za-z]{2}[A-Z][A-Za-z]$/.test(type) ||
-        requireSrgb && conflicting.has(type)) throw unavailable();
+        requireSrgb && conflicting.has(type) || opaqueRgb && type === 'tRNS') throw unavailable();
     if (type === 'IDAT') {
       if (requireSrgb && !profiles.has('sRGB') || colorType === 3 && !palette || imageEnded) throw unavailable();
       imageStarted = true;
@@ -99,4 +100,6 @@ async function verifyPng({ readChunk, size, width, height }, requireSrgb) {
 export function verifyPieceExportPngStructure(file) { return verifyPng(file, false); }
 
 // The receipt path additionally requires explicit, consistent sRGB metadata.
-export function verifyPieceExportPngSrgb(file) { return verifyPng(file, true); }
+export function verifyPieceExportPngSrgb(file, { opaqueRgb = false } = {}) {
+  return verifyPng(file, true, opaqueRgb === true);
+}

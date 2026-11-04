@@ -25,10 +25,10 @@ const srgb = chunk('sRGB', Buffer.from([0]));
 const idat = chunk('IDAT', Buffer.alloc(150, 42));
 const end = chunk('IEND');
 const png = (...chunks) => Buffer.concat([signature, header, ...chunks]);
-const check = (bytes, overrides = {}) => verify({
+const check = (bytes, overrides = {}, options) => verify({
   readChunk: async (offset, length) => bytes.subarray(offset, offset + length).toString('base64'),
   size: bytes.length, width, height, ...overrides,
-});
+}, options);
 const checkStructure = bytes => verifyStructure({
   readChunk: async (offset, length) => bytes.subarray(offset, offset + length).toString('base64'),
   size: bytes.length, width, height,
@@ -61,6 +61,17 @@ test('rejects missing, ambiguous, displaced or corrupt sRGB metadata', async () 
     png(srgb, chunk('iCCP', Buffer.from([1, 2, 3])), idat, end),
     png(srgb, idat, chunk('cICP', Buffer.from([1, 13, 0, 1])), end),
   ]) await assert.rejects(check(bytes), unavailable);
+});
+
+test('the opaque RGB option requires sRGB with neither an alpha channel nor transparency metadata', async () => {
+  const rgbHeader = chunk('IHDR', Buffer.concat([unsigned([width, height]), Buffer.from([8, 2, 0, 0, 0])]));
+  const rgb = (...chunks) => Buffer.concat([signature, rgbHeader, ...chunks]);
+  assert.equal(await check(rgb(srgb, idat, end), {}, { opaqueRgb: true }), true);
+  assert.equal(await check(png(srgb, idat, end)), true);
+  for (const bytes of [png(srgb, idat, end), rgb(idat, end),
+    rgb(srgb, chunk('tRNS', Buffer.alloc(6)), idat, end), rgb(srgb, idat, chunk('tRNS', Buffer.alloc(6)), end)]) {
+    await assert.rejects(check(bytes, {}, { opaqueRgb: true }), unavailable);
+  }
 });
 
 test('rejects invalid dimensions, chunk structure and short native reads', async () => {

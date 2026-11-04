@@ -89,7 +89,8 @@ test('standalone Android harness verifies the same target PNG and releases only 
     '../../app.json': { name: 'Emlis' },
     '../../components/piece/PieceVisualCard': Card,
     '../../features/piece/pieceExportPngProfile': {
-      verifyPieceExportPngStructure: async file => {
+      verifyPieceExportPngSrgb: async (file, options) => {
+        assert.equal(options.opaqueRgb, true);
         calls.push(['verify', file.size, file.width, file.height]);
         assert.equal(await file.readChunk(0, 33), 'data');
       },
