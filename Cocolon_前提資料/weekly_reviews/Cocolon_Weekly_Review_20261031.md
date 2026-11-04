@@ -3541,3 +3541,19 @@ API既存test1fileだけを[528fc129](https://github.com/MassyuRed/mashos-api/co
 API既存test1file `ai/tests/piece_v2/test_piece_natural_context_sql.py`を[76f4c466](https://github.com/MassyuRed/mashos-api/commit/76f4c466df0ac795fc48781680e21c74a9f9512e)へ反映し、fresh head・親・tree・全文をreadback。blob `8f6a9bf85196ac2a6e261097f55291cd50332fc7`は検証済みbytesと一致した。全体現在地差分なし（製品source・仕様・責務・API／DTO・schema・稼働・端末状態は不変、既存検証の到達経路のみ補強）。STRUCTURE_MAP_DELTA_NONE。全体00・01A/B/C・Piece mapを形式的に再生成しない。
 
 今回、通常service境界でこの組合せに新しい製品不具合は検出しなかった。次は通常作成の復旧・本人履歴の実コードに戻り、通常操作で再現する未修復又は決定済み未実装へ絞る。本節の58や過去の処理済み検証を活動量のために繰り返さない。一般文章品質、Android通常作成／保存、実Photos／Share、backend receiptの本番適用、正式商品受入れ0/3は残件。ビルド・TestFlight・本番配置・live DB更新・公開ON・GPU・課金・本人端末操作0。指定8時間の実働完了claimなし。
+
+
+<a id="piece-before-object-particle-pause-20261105"></a>
+## 170. 11/5 — 対象と「を」の間の水平空白で完成動作文が拒否される不具合を修復
+
+開始はRN `1aef9032062b059783a8261cdfbc56026d31a750`／API `76f4c466df0ac795fc48781680e21c74a9f9512e`。§169の再開先に従い作成復旧・本人履歴・画像出力の実コードを照合した範囲では新しい不具合を確定できず、既存判定を無理に変更していない。その後、通常の本文入力で「私は本を読みました。」は生成できるが「私は本 を読みました。」は自己理解で拒否されることを再現した。対象・動詞・肯否・時制が同じでも、「を」の前のSPACE／TAB／全角SPACEだけで既存有限動作文の対象末尾検査から外れていた。
+
+既存 `piece_v2_generation.py::_is_unpunctuated_account`のobject末尾照合用viewだけを水平rstripし、原objectとsource・KEEP作者・根拠座標を変更しない。§167の後側pauseと合わせて前後の空白を保持する。最初の修正候補は「何 を」の既存疑問cueも隠すことが新しい負の検証3条件で判明したため、公開前に同じviewを既存疑問regexへ渡す修復を加えた。新しい疑問辞書・語彙・意味型・作者は作らない。改行・NBSP・未知活用・未完の述語・疑問の新規受理はしない。既存の非過去の終端条件と、先行欄の句点省略制限も維持する。
+
+新60条件は同じtestで開始39失敗／21成功、最終全成功。正39は既存13文型×水平3種で、既知7動詞・漢字動作名、肯否・過去／明示終端付き非過去・日付を原文のまま照合。本文hash・原保存JSON・scalar／UTF8根拠と既存の独立本文検査を確認した。負21は疑問・条件・未知活用・空の述語・改行・NBSP・対象なしを拒否する。
+
+同じ製品bytesで関連5suiteは3,094成功／失敗・error0（34.99秒）。その実行中に追加した既存二欄検証の前側pause条件は、この3,094の成功へ加算しない。最終testの対象moduleは427成功（旧366＋新60＋二欄追加1、3.61秒）。二欄追加ではEngine／compiler／唯一作者を例外化しても検査が成功し、空白削除・否定反転・主体変更・記号変更・欄順反転の5改変を拒否。旧after条件も同じmoduleで保持した。旧期待変更0。関連の実HTTP→隔離SQLの検証には新たな二欄・前後pause1組×3プラン×平穏／自己理解＝新6も含め、source-ref GET→preview／同キー再読→保存／再試行→本人再読／export用artifact取得まで成功。実Auth・PostgREST・画像描画・OS保存／Shareの成功ではない。既存Pydantic非推奨警告1を保持、差分検査成功。前回58や統合回帰の数値を今回へ加算しない。
+
+API製品1・既存test2を[2b0b69b3](https://github.com/MassyuRed/mashos-api/commit/2b0b69b3f295be40d907d4e0aaad67de44d77ad2)へ反映し、全3file全文・blobをreadback、検証済みbytesと一致した。全体00・01Aの既存責務・Piece mapは同じ変更単位で前後pauseと疑問境界へ差分更新。本節を再開正本とする。STRUCTURE_MAP_DELTA_NONE（既存有限readerの照合修復、新owner／API／DTO／DB／renderer／依存なし）。一般日本語品質・新たな意味再構成を完成扱いにしない。
+
+次は今回の既知文型の検証を繰り返さず、通常入力で再現する別の誤拒否・本文変化、又は既存の決定済み未完了へ進む。Android通常作成／保存、実Photos／Share、backend receipt本番適用、一般文章品質と正式商品受入れ0/3は残件。ビルド・TestFlight・本番配置・live DB更新・公開ON・GPU・課金・本人端末操作0。指定8時間を実働完了したというclaimはしない。
