@@ -19,13 +19,12 @@
  *   context can replay the same server request/key; disable/dispose clears it.
  *   An explicit cancelPreview keeps a body-free terminal/unknown cancellation
  *   across close and can only retry the same DELETE, never the original POST.
- * - savePreview is an unconnected preparation seam. A future admitted host
- *   supplies strict saveEnabled, isSaveAdmitted and an explicit save key.
+ * - The existing input host supplies strict saveEnabled, the admitted iOS
+ *   renderer's isSaveAdmitted predicate and an explicit save key.
  *   close retains only the save intent/receipt; retry never returns to preview
  *   POST. Revoking saveEnabled alone keeps the intent but stops requests.
- *   General disable, changed context or dispose clears it. The future host
+ *   General disable, changed context or dispose clears it. The input host
  *   handles same-selection runtime/foreground suspension via setSaveAvailability.
- *   Initial save controls and the actual admission supplier remain unconnected.
  *
  * Visual-only changes use the received candidate and a local display ticket.
  * Unknown outcomes recover via the original POST/key, never a PATCH retry.
@@ -165,6 +164,8 @@ export function createPieceCreateController(configuration = {}) {
       expirePiecePreview(state, clock()).code === 'PIECE_PREVIEW_EXPIRED';
     return Object.freeze({ ...view, visualUpdated: visualUpdated && view.phase === 'received',
       ...(expired && contextOperation ? { previewRestartToken: state.ticket } : {}),
+      ...(view.phase === 'unavailable' && state.code === 'PIECE_CONFLICT' &&
+        !active && !visualRecovery && contextOperation ? { sourceRefreshToken: state.ticket } : {}),
       ...(fallback?.phase === 'received' ? { formatRecoveryToken: state.ticket,
         formatRecoveryExpiresAtMs: fallback.expiresAtMs } : {}),
       visualToken: view.phase === 'received' ? state.ticket : null,
@@ -564,10 +565,9 @@ export function createPieceCreateController(configuration = {}) {
     await runCancellation();
   }
 
-  // Preparation only: no current product host supplies isSaveAdmitted or
-  // saveEnabled. The future renderer owner must bind actual admission/fit to
+  // The existing iOS host binds actual renderer admission and mounted fit to
   // this exact preview/token. Quota, native_checked and version strings alone
-  // are not admission. This seam does not promote canSave/canExport.
+  // are not admission. This controller does not promote canSave/canExport.
   async function savePreview(identity, displayToken, idempotencyKey) {
     if (disposed || !enabled || !saveEnabled || !operation || boundaryCode || active ||
         visualRecovery || cancelIntent || saveIntent || !displayToken || displayToken !== state.ticket ||

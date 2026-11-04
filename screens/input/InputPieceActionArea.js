@@ -74,6 +74,8 @@ export default class InputPieceActionArea extends React.Component {
     this.sourceAttempt = null;
     this.sourcePhase = 'idle';
     this.sourceCode = null;
+    this.sourceFailureToken = null;
+    this.sourceIdempotencyKey = null;
     this.foreground = false;
     this.expiryTimer = null;
     this.unsubscribe = null;
@@ -88,6 +90,7 @@ export default class InputPieceActionArea extends React.Component {
     this.close = this.close.bind(this);
     this.changed = this.changed.bind(this);
     this.resolveSavedInput = this.resolveSavedInput.bind(this);
+    this.refreshSavedInput = this.refreshSavedInput.bind(this);
     this.createFromSavedInput = this.createFromSavedInput.bind(this);
     this.receiveSaveFit = this.receiveSaveFit.bind(this);
   }
@@ -181,6 +184,7 @@ export default class InputPieceActionArea extends React.Component {
     this.sourceAttempt = null;
     this.sourcePhase = 'idle';
     this.sourceCode = null;
+    this.sourceFailureToken = null;
     // Fence identity before aborting: transport cancellation is not authority.
     previous?.abort.abort();
   }
@@ -220,6 +224,7 @@ export default class InputPieceActionArea extends React.Component {
       runtime === this.boundRuntime && previous && next && previous[1] === next[1];
     const sameSavedSelection = savedMode && this.savedMode && sourceStamp !== null &&
       sourceStamp === this.boundSavedInputStamp;
+    if (!sameSavedSelection) this.sourceIdempotencyKey = null;
     this.clearSource();
     this.savedMode = savedMode;
     this.boundStamp = stamp;
@@ -272,7 +277,8 @@ export default class InputPieceActionArea extends React.Component {
     const view = this.controller.getView();
     if (view.previewRestartToken || ['cancel', 'save'].includes(view.retryKind)) return;
     // Capture the exact saved ID, owner and future POST key before any await.
-    const [savedInputId, expectedUserId, idempotencyKey] = JSON.parse(this.boundStamp.slice(6));
+    const [savedInputId, expectedUserId, originalKey] = JSON.parse(this.boundStamp.slice(6));
+    const idempotencyKey = this.sourceIdempotencyKey || originalKey;
     let abort;
     try { abort = new AbortController(); }
     catch {
@@ -306,6 +312,7 @@ export default class InputPieceActionArea extends React.Component {
       this.sourceAttempt = null;
       this.sourcePhase = 'unavailable';
       this.sourceCode = error instanceof PieceApiError ? error.code : 'PIECE_TEMPORARILY_UNAVAILABLE';
+      this.sourceFailureToken = this.sourceCode === 'PIECE_CONFLICT' ? attempt : null;
       this.changed();
       if (this.sourceCode === 'PIECE_FEATURE_DISABLED' && this.isCurrent()) {
         this.setState({ open: false });
@@ -313,6 +320,35 @@ export default class InputPieceActionArea extends React.Component {
         catch { /* A failed refresh cannot authorize a source retry. */ }
       }
     }
+  }
+
+  async refreshSavedInput(token) {
+    const current = () => {
+      if (!this.savedMode || !this.isCurrent() || this.sourceAttempt || !token) return false;
+      const view = this.controller.getView();
+      if (['cancel', 'save'].includes(view.retryKind)) return false;
+      return view.sourceRefreshToken === token || this.sourcePhase === 'unavailable' &&
+        this.sourceCode === 'PIECE_CONFLICT' && this.sourceFailureToken === token;
+    };
+    if (!current()) return;
+    const stamp = this.boundStamp, runtime = this.boundRuntime;
+    let key;
+    try { key = pieceActionKey('piece-preview-'); }
+    catch {
+      try { Alert.alert('Pieceの作成', '確認の準備ができませんでした。もう一度お試しください。'); } catch {}
+      return;
+    }
+    if (!current()) return;
+    // A definitive source conflict permits an explicit new source read. An
+    // unknown POST, PATCH, save or cancellation never reaches this action.
+    // Drop the obsolete binding before reading; a different source_ref must
+    // never be submitted under the original preview's idempotency key.
+    this.controller.setContext({ enabled: false });
+    if (!this.isCurrent() || this.boundStamp !== stamp || this.boundRuntime !== runtime) return;
+    this.clearSource();
+    this.sourceIdempotencyKey = key;
+    this.setState({ open: false });
+    await this.resolveSavedInput();
   }
 
   // The response's explicit create choice owns this GET -> preview sequence.
@@ -490,8 +526,17 @@ export default class InputPieceActionArea extends React.Component {
 
   close() {
     if (!this.mounted) return;
+    const stamp = this.boundStamp, runtime = this.boundRuntime;
+    const conflict = this.savedMode ? this.controller?.getView().sourceRefreshToken : null;
     if (this.sourceAttempt) this.clearSource();
     this.controller?.close();
+    if (conflict && this.isCurrent() && this.boundStamp === stamp && this.boundRuntime === runtime) {
+      // Closing a definitive conflict must not turn the stale request back
+      // into an ordinary create button using its obsolete source/key.
+      this.sourcePhase = 'unavailable';
+      this.sourceCode = 'PIECE_CONFLICT';
+      this.sourceFailureToken = conflict;
+    }
     this.setState({ open: false });
   }
 
@@ -515,6 +560,7 @@ export default class InputPieceActionArea extends React.Component {
       const unavailable = this.sourcePhase === 'unavailable';
       const canRead = this.sourcePhase === 'idle' ||
         (unavailable && this.sourceCode === 'PIECE_TEMPORARILY_UNAVAILABLE');
+      const refreshToken = unavailable && this.sourceCode === 'PIECE_CONFLICT' ? this.sourceFailureToken : null;
       return element(View, { testID: 'piece-saved-input-source-area' },
         this.sourcePhase === 'loading' ? element(Text, { accessibilityLiveRegion: 'polite' },
           this.props.creationMode ? 'ピースを準備しています。' : '保存入力を確認しています。') : null,
@@ -522,6 +568,8 @@ export default class InputPieceActionArea extends React.Component {
         canRead ? element(Button, { title: this.props.creationMode ? 'ピースを作成' : '保存入力を確認',
           onPress: this.props.creationMode ? this.createFromSavedInput : this.resolveSavedInput,
           accessibilityLabel: this.props.creationMode ? 'ピースを作成' : 'Pieceに使う保存入力を確認' }) : null,
+        refreshToken ? element(Button, { title: '保存入力を確認し直す', accessibilityLabel: '保存入力を確認し直す',
+          onPress: () => this.refreshSavedInput(refreshToken) }) : null,
       );
     }
     if (display.phase === 'hidden') return null;
@@ -541,10 +589,15 @@ export default class InputPieceActionArea extends React.Component {
         title: '同じ記録から作り直す', accessibilityLabel: '同じ記録から作り直す',
         onPress: () => this.restartExpired(display.previewRestartToken),
       }) : null,
+      !this.state.open && this.savedMode && display.sourceRefreshToken ? element(Button, {
+        title: '保存入力を確認し直す', accessibilityLabel: '保存入力を確認し直す',
+        onPress: () => this.refreshSavedInput(display.sourceRefreshToken),
+      }) : null,
       !this.state.open && onOpenSaved ? element(Button, { title: '保存したPieceを確認',
         accessibilityLabel: '保存したPieceを確認', onPress: onOpenSaved }) : null,
       element(PiecePreviewModal, { visible: this.state.open, display, onClose: this.close, onOpenSaved,
-        onRetry: this.retry, onRestartExpired: this.restartExpired, onVisualChange: this.changeVisual, onFormatChange: this.changeFormat, onReturnToFormat: this.returnToFormat, onCancel: this.cancelPreview, onSave,
+        onRetry: this.retry, onRefreshSource: this.savedMode ? this.refreshSavedInput : null,
+        onRestartExpired: this.restartExpired, onVisualChange: this.changeVisual, onFormatChange: this.changeFormat, onReturnToFormat: this.returnToFormat, onCancel: this.cancelPreview, onSave,
         onSaveFitChange: this.receiveSaveFit }),
     );
   }

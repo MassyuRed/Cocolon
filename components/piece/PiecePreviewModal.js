@@ -16,7 +16,7 @@ const plans = { free: 'Free', plus: 'Plus', premium: 'Premium' };
 const branding = { required_small: '小さく表示', required_subtle: '控えめに表示', off: '表示なし' };
 const themes = PIECE_THEME_LABELS;
 
-export default function PiecePreviewModal({ visible = false, display, onClose, onRetry, onRestartExpired, onVisualChange, onFormatChange, onReturnToFormat, onCancel, onOpenSaved, onSave, onSaveFitChange }) {
+export default function PiecePreviewModal({ visible = false, display, onClose, onRetry, onRefreshSource, onRestartExpired, onVisualChange, onFormatChange, onReturnToFormat, onCancel, onOpenSaved, onSave, onSaveFitChange }) {
   if (visible !== true || !display || display.phase === 'hidden') return null;
   const received = display.phase === 'received' && display.hashVerified === true && display.preview;
   const preview = received ? display.preview : null;
@@ -145,6 +145,10 @@ export default function PiecePreviewModal({ visible = false, display, onClose, o
           title: '保存したPieceを確認', accessibilityLabel: '保存したPieceを確認', onPress: onOpenSaved }) : null,
         display.canRetry === true ? element(Button, {
           title: retryLabel, onPress: onRetry, accessibilityLabel: retryLabel }) : null,
+        display.sourceRefreshToken && typeof onRefreshSource === 'function' ? element(Button, {
+          title: '保存入力を確認し直す', accessibilityLabel: '保存入力を確認し直す',
+          onPress: () => onRefreshSource(display.sourceRefreshToken),
+        }) : null,
         display.previewRestartToken && typeof onRestartExpired === 'function' ? element(Button, {
           title: '同じ記録から作り直す', accessibilityLabel: '同じ記録から作り直す',
           onPress: () => onRestartExpired(display.previewRestartToken),

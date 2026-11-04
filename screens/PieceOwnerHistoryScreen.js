@@ -80,6 +80,8 @@ export class PieceOwnerHistoryHost extends React.Component {
     if (this.deletedSavedTarget !== targetKey) this.deletedSavedTarget = null;
     // A target-only route change must also hide/abort the previous record.
     this.controller.setContext({ enabled: this.current(), expectedUserId: this.props.owner,
+      suspended: this.presentationActive() === true &&
+        (!this.foreground || AppState.currentState !== 'active' || this.props.runtimePending === true),
       flags: this.props.flags, savedPieceId: target && target.expectedUserId === this.props.owner ? target.pieceId : null });
     // The navigation tap requests this read once. Background/flag refresh drops
     // the body; coming back offers an explicit same-ID read, not an auto retry.

@@ -640,6 +640,109 @@ for (const boundary of ['owner', 'target', 'read permission', 'delete permission
   });
 }
 
+
+async function uncertainLifecycleDelete(ordinary, delayed) {
+  let finishFirst, committed = false, deletes = 0;
+  const firstResponse = new Promise(resolve => { finishFirst = resolve; });
+  const h = harness({ send: (url, init) => {
+    if (init.method === 'DELETE') {
+      committed = true; deletes++;
+      if (deletes === 1) {
+        if (delayed) return firstResponse;
+        throw Error('response lost after server commit');
+      }
+      return packet({ piece_id: PID, receipt_id: RID, outcome: 'succeeded', idempotency_replayed: true });
+    }
+    if (url.includes('/history')) return packet(page(committed ? [] : [record()]));
+    return committed ? packet({ code: 'PIECE_NOT_FOUND' }, 404) : packet(record());
+  } });
+  const host = ownerHost(h, ordinary ? null : savedEntry(), {
+    flags, presentationActive: true, runtimePending: false,
+  });
+  host.componentDidMount(); await tick();
+  if (ordinary) { await host.act('loadHistory'); await host.act('openDetail', PID); }
+  const pending = host.act('deleteConfirmed', host.controller.getView().record);
+  await tick();
+  if (!delayed) await pending;
+  const originalRequest = h.calls.find(([, init]) => init.method === 'DELETE');
+  const oldToken = host.controller.getView().deleteRetryToken;
+  const previous = host.props;
+  h.background('inactive');
+  host.props = { ...previous, enabled: false, flags: {}, runtimePending: false };
+  host.componentDidUpdate();
+  assert.equal(originalRequest[1].signal.aborted, delayed);
+  assert.equal(host.controller.getView().record, null);
+  assert.equal(button(host, '同じ削除要求で結果を確認'), undefined);
+  host.props = { ...host.props, runtimePending: true };
+  h.background('active'); host.componentDidUpdate();
+  assert.equal(host.controller.getView().phase, 'hidden');
+  return { h, host, pending, finishFirst, originalRequest, oldToken, previous,
+    countDeletes: () => deletes, resume() { host.props = previous; host.componentDidUpdate(); } };
+}
+
+for (const ordinary of [false, true]) {
+  for (const delayed of [false, true]) {
+    test('same delete survives cleared flags and loading for ' + (ordinary ? 'history' : 'direct') +
+      (delayed ? ' in-flight server commit' : ' lost committed response'), async () => {
+      const u = await uncertainLifecycleDelete(ordinary, delayed);
+      const calls = u.h.calls.length;
+      u.resume(); await tick();
+      assert.equal(u.h.calls.length, calls, 'fresh flags never issue a read or delete');
+      assert.equal(u.host.controller.getView().canRetryDelete, true);
+      assert.ok(!texts(u.host.render()).includes(record().piece_text));
+      await u.host.controller.retryDelete(u.oldToken);
+      assert.equal(u.countDeletes(), 1, 'obsolete controls cannot use the retained key');
+      if (delayed) {
+        u.finishFirst(packet({ piece_id: PID, receipt_id: RID, outcome: 'succeeded', idempotency_replayed: false }));
+        await u.pending;
+        assert.equal(u.host.controller.getView().canRetryDelete, true);
+        assert.ok(!texts(u.host.render()).includes('Pieceを削除しました。保存回数は戻りません。'));
+      }
+      const retry = button(u.host, '同じ削除要求で結果を確認');
+      const next = retry.props.onPress();
+      retry.props.onPress();
+      await next;
+      const requests = u.h.calls.filter(([, init]) => init.method === 'DELETE');
+      assert.equal(requests.length, 2);
+      assert.equal(requests[1][0], u.originalRequest[0]);
+      assert.equal(requests[1][1].body, u.originalRequest[1].body);
+      assert.equal(requests[1][1].headers['Idempotency-Key'], u.originalRequest[1].headers['Idempotency-Key']);
+      assert.ok(texts(u.host.render()).includes('Pieceを削除しました。保存回数は戻りません。'));
+      assert.equal(u.host.controller.getView().canRetryDelete, false);
+      assert.equal(button(u.host, '保存したPieceを読み込む'), undefined);
+      if (!ordinary) {
+        u.h.background('inactive'); u.h.background('active');
+        await u.host.openSavedDetail(u.host.targetKey(), PID);
+        assert.equal(u.h.calls.length, calls + 1);
+      }
+      u.host.componentWillUnmount();
+    });
+  }
+}
+
+for (const boundary of ['owner', 'target', 'read permission', 'delete permission', 'unmount']) {
+  test('lifecycle delete recovery is discarded for settled ' + boundary + ' change', async () => {
+    const u = await uncertainLifecycleDelete(false, false);
+    let changed = { ...u.previous };
+    if (boundary === 'owner') changed.owner = RID;
+    if (boundary === 'target') changed.savedPiece = savedEntry(RID);
+    if (boundary === 'read permission' || boundary === 'delete permission') {
+      changed.flags = { ...flags, [boundary === 'read permission'
+        ? 'piece_v2_owner_read_enabled' : 'piece_v2_delete_enabled']: false };
+    }
+    if (boundary === 'unmount') u.host.componentWillUnmount();
+    else { u.host.props = changed; u.host.componentDidUpdate(); }
+    if (boundary !== 'unmount') {
+      u.resume();
+      await u.host.controller.retryDelete(u.oldToken);
+      assert.equal(u.host.controller.getView().canRetryDelete, false);
+      assert.equal(button(u.host, '同じ削除要求で結果を確認'), undefined);
+      u.host.componentWillUnmount();
+    }
+    assert.equal(u.countDeletes(), 1);
+  });
+}
+
 test('ordinary history clears the saved-entry target and returning clears its navigation params', async () => {
   const params = [], backs = [];
   const h = harness({ send: ownerSend }); const host = ownerHost(h, savedEntry(), {

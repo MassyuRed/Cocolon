@@ -1330,3 +1330,249 @@ test('rebuilding an expired Premium format keeps its most recently applied image
   assert.equal(u.host.controller.getView().preview.preview_id, fresh.preview_id);
   u.host.componentWillUnmount();
 });
+
+function bindSourceRefreshHost(u) {
+  u.host.props = { savedInput: { savedInputId: request().source_ref.source_input_id,
+    expectedUserId: OWNER, idempotencyKey: 'synthetic-conflicted-source-key' }, creationMode: true };
+  u.host.context = { runtime: {}, isFeatureEnabled: name =>
+    ['piece_v2_preview_enabled', 'piece_v2_save_enabled'].includes(name) };
+  u.mount();
+}
+const sourceConflict = () => ({ status: 409, json: async () => ({ code: 'PIECE_CONFLICT' }) });
+
+for (const closeFirst of [false, true]) {
+  test(`definitive preview conflict explicitly rereads saved source with a fresh key ${closeFirst ? 'after closing' : 'from the modal'}`, async () => {
+    const oldSource = request().source_ref;
+    const freshSource = { ...oldSource, source_input_bundle_commitment: 'sha256:' + 'b'.repeat(64) };
+    let reads = 0, previews = 0;
+    const u = previewUiHarness({ send: async (url, init) => init.method === 'GET'
+      ? pieceHttp(++reads === 1 ? oldSource : freshSource)
+      : ++previews === 1 ? sourceConflict() : pieceHttp(response()) });
+    bindSourceRefreshHost(u);
+    await u.host.createFromSavedInput(); await pieceTick();
+    assert.equal(u.host.controller.getView().phase, 'unavailable');
+    assert.equal(u.host.controller.getView().canRetry, false);
+    assert.equal(u.calls.length, 2);
+    if (closeFirst) u.host.close();
+    const action = uiButton(u, '保存入力を確認し直す'); assert.ok(action);
+    action.props.onPress(); await pieceTick();
+    assert.equal(u.calls.length, 3);
+    assert.equal(u.calls[2][1].method, 'GET');
+    assert.equal(u.host.controller.getView().phase, 'idle', 'rereading must not create automatically');
+    assert.equal(u.host.state.open, false);
+    action.props.onPress(); await pieceTick(); assert.equal(u.calls.length, 3, 'old refresh callback is consumed');
+    uiButton(u, 'ピースを作成').props.onPress(); await pieceTick();
+    assert.equal(u.calls.length, 4);
+    assert.deepEqual(JSON.parse(u.calls[3][1].body).source_ref, freshSource);
+    assert.notEqual(u.calls[3][1].headers['Idempotency-Key'], u.calls[1][1].headers['Idempotency-Key']);
+    assert.equal(u.host.controller.getView().phase, 'received');
+    assert.equal(uiButton(u, '保存入力を確認し直す'), undefined);
+    u.host.componentWillUnmount();
+  });
+}
+
+test('a conflict while reading saved source exposes only an explicit fresh read before creation', async () => {
+  const u = previewUiHarness({ send: async (url, init) => u.calls.length === 1
+    ? sourceConflict() : pieceHttp(init.method === 'GET' ? request().source_ref : response()) });
+  bindSourceRefreshHost(u);
+  await u.host.createFromSavedInput();
+  assert.equal(u.calls.length, 1);
+  uiButton(u, '保存入力を確認し直す').props.onPress(); await pieceTick();
+  assert.deepEqual(u.calls.map(([, init]) => init.method), ['GET', 'GET']);
+  assert.equal(u.host.controller.getView().phase, 'idle');
+  uiButton(u, 'ピースを作成').props.onPress(); await pieceTick();
+  assert.notEqual(u.calls[2][1].headers['Idempotency-Key'], u.host.props.savedInput.idempotencyKey);
+  assert.equal(u.host.controller.getView().phase, 'received');
+  u.host.componentWillUnmount();
+});
+
+for (const boundary of ['owner', 'input', 'key', 'runtime', 'inactive', 'unmount']) {
+  test(`a stale source refresh callback cannot cross ${boundary}`, async () => {
+    const u = previewUiHarness({ send: async (url, init) => init.method === 'GET'
+      ? pieceHttp(request().source_ref) : sourceConflict() });
+    bindSourceRefreshHost(u); await u.host.createFromSavedInput(); await pieceTick();
+    const action = uiButton(u, '保存入力を確認し直す'); assert.ok(action);
+    if (['owner', 'input', 'key'].includes(boundary)) {
+      const savedInput = { ...u.host.props.savedInput };
+      if (boundary === 'owner') savedInput.expectedUserId = 'another-owner';
+      if (boundary === 'input') savedInput.savedInputId = '20000000-0000-4000-8000-000000000099';
+      if (boundary === 'key') savedInput.idempotencyKey = 'another-source-key';
+      u.host.props = { ...u.host.props, savedInput };
+      u.host.componentDidUpdate();
+    } else if (boundary === 'runtime') {
+      u.host.context = { runtime: {}, isFeatureEnabled: () => false };
+      u.host.componentDidUpdate();
+    } else if (boundary === 'inactive') u.background('inactive');
+    else u.host.componentWillUnmount();
+    action.props.onPress(); await pieceTick(); assert.equal(u.calls.length, 2);
+    if (boundary !== 'unmount') u.host.componentWillUnmount();
+  });
+}
+
+test('unknown preview outcome keeps the exact original request and never offers source replacement', async () => {
+  let previews = 0;
+  const u = previewUiHarness({ send: async (url, init) => {
+    if (init.method === 'GET') return pieceHttp(request().source_ref);
+    if (++previews === 1) throw Error('lost preview response');
+    return pieceHttp(response());
+  } });
+  bindSourceRefreshHost(u); await u.host.createFromSavedInput(); await pieceTick();
+  assert.equal(uiButton(u, '保存入力を確認し直す'), undefined);
+  await u.host.refreshSavedInput({}); assert.equal(u.calls.length, 2);
+  uiButton(u, '同じ要求で再試行').props.onPress(); await pieceTick();
+  assert.equal(u.calls.length, 3);
+  assert.equal(u.calls[2][1].body, u.calls[1][1].body);
+  assert.equal(u.calls[2][1].headers['Idempotency-Key'], u.calls[1][1].headers['Idempotency-Key']);
+  u.host.componentWillUnmount();
+});
+
+test('unknown visual outcome recovers the original preview rather than replacing its source', async () => {
+  const original = response('quote');
+  const u = previewUiHarness({ send: async (url, init) => init.method === 'GET'
+    ? pieceHttp(request().source_ref) : init.method === 'PATCH' ? sourceConflict() : pieceHttp(original) });
+  bindSourceRefreshHost(u); await u.host.createFromSavedInput(); await pieceTick();
+  uiButton(u, 'テーマ：静かな夜').props.onPress(); await pieceTick();
+  assert.equal(u.host.controller.getView().retryKind, 'recover');
+  assert.equal(u.host.controller.getView().sourceRefreshToken, undefined);
+  assert.equal(uiButton(u, '保存入力を確認し直す'), undefined);
+  uiButton(u, '最新のプレビューを取得').props.onPress(); await pieceTick();
+  assert.equal(u.calls.length, 4);
+  assert.equal(u.calls[3][1].body, u.calls[1][1].body);
+  assert.equal(u.calls[3][1].headers['Idempotency-Key'], u.calls[1][1].headers['Idempotency-Key']);
+  u.host.componentWillUnmount();
+});
+
+for (const operation of ['save', 'cancel']) {
+  test(`${operation} conflict never permits replacing the saved source`, async () => {
+    const u = previewUiHarness({ admitSave: true, send: async (url, init) => init.method === 'GET'
+      ? pieceHttp(request().source_ref) : url.endsWith('/save') || init.method === 'DELETE'
+        ? sourceConflict() : pieceHttp(response()) });
+    bindSourceRefreshHost(u); await u.host.createFromSavedInput(); await pieceTick();
+    if (operation === 'save') await startSyntheticSave(u);
+    else { uiButton(u, 'このPiece候補を取り消す').props.onPress(); await pieceTick(); }
+    assert.equal(u.host.controller.getView().retryKind, operation);
+    assert.equal(u.host.controller.getView().sourceRefreshToken, undefined);
+    assert.equal(uiButton(u, '保存入力を確認し直す'), undefined);
+    await u.host.refreshSavedInput({}); assert.equal(u.calls.length, 3);
+    u.host.componentWillUnmount();
+  });
+}
+
+for (const stage of ['source', 'preview']) {
+  test(`authentication required at ${stage} stays closed without source replacement`, async () => {
+    const u = previewUiHarness({ send: async (url, init) => stage === 'preview' && init.method === 'GET'
+      ? pieceHttp(request().source_ref) : { status: 401, json: async () => ({ code: 'PIECE_AUTH_REQUIRED' }) } });
+    bindSourceRefreshHost(u); await u.host.createFromSavedInput(); await pieceTick();
+    assert.equal(uiButton(u, '保存入力を確認し直す'), undefined);
+    const count = u.calls.length;
+    await u.host.refreshSavedInput({}); assert.equal(u.calls.length, count);
+    u.host.componentWillUnmount();
+  });
+}
+
+test('scope change during conflict reset cannot clear or read the next saved input', async () => {
+  const u = previewUiHarness({ send: async (url, init) => init.method === 'GET'
+    ? pieceHttp(request().source_ref) : sourceConflict() });
+  bindSourceRefreshHost(u); await u.host.createFromSavedInput(); await pieceTick();
+  const action = uiButton(u, '保存入力を確認し直す');
+  u.host.controller.subscribe(() => {
+    u.host.props = { ...u.host.props, savedInput: { ...u.host.props.savedInput,
+      savedInputId: '20000000-0000-4000-8000-000000000099', idempotencyKey: 'next-saved-source-key' } };
+    u.host.componentDidUpdate();
+  });
+  action.props.onPress(); await pieceTick(); assert.equal(u.calls.length, 2);
+  assert.equal(u.host.sourceIdempotencyKey, null);
+  assert.equal(u.host.sourcePhase, 'idle');
+  u.host.componentWillUnmount();
+});
+
+function sourceRefreshSaveRecovery() {
+  const source = fs.readFileSync(path.join(__dirname, '../navigation/MainTabs.js'), 'utf8');
+  const start = source.indexOf('export function createPieceSaveRecovery(');
+  const end = source.indexOf('export default function MainTabs()');
+  return vm.runInNewContext(source.slice(start, end).replace('export function', 'function') +
+    '\ncreatePieceSaveRecovery', {})(OWNER);
+}
+
+for (const boundary of ['background', 'runtime', 'new-host', 'new-navigation-key']) {
+  test(`refreshed-source unknown save keeps actual POST and SAVE keys through ${boundary}`, async () => {
+    let reads = 0, previews = 0;
+    const source = request().source_ref;
+    const freshSource = { ...source, source_input_bundle_commitment: 'sha256:' + 'b'.repeat(64) };
+    const store = sourceRefreshSaveRecovery();
+    const u = previewUiHarness({ admitSave: true, send: async (url, init) => {
+      if (init.method === 'GET') return pieceHttp(++reads === 1 ? source : freshSource);
+      if (url.endsWith('/save')) throw Error('save acknowledgement lost');
+      return ++previews === 1 ? sourceConflict() : pieceHttp(response());
+    } });
+    bindSourceRefreshHost(u); u.host.props = { ...u.host.props, saveRecovery: store };
+    await u.host.createFromSavedInput(); await pieceTick();
+    const obsoleteRefresh = uiButton(u, '保存入力を確認し直す');
+    obsoleteRefresh.props.onPress(); await pieceTick();
+    uiButton(u, 'ピースを作成').props.onPress(); await pieceTick();
+    const previewKey = u.calls[3][1].headers['Idempotency-Key'];
+    await startSyntheticSave(u);
+    const saveCall = u.calls[4][1];
+    const retained = store.find(OWNER, source.source_input_id);
+    assert.equal(retained.operation.idempotencyKey, previewKey);
+    assert.deepEqual(clone(retained.operation.request.source_ref), freshSource);
+    assert.equal(retained.intent.idempotencyKey, saveCall.headers['Idempotency-Key']);
+    obsoleteRefresh.props.onPress(); await pieceTick(); assert.equal(u.calls.length, 5);
+    let resumed = u;
+    if (boundary === 'background') { u.background('inactive'); u.background('active'); }
+    else if (boundary === 'runtime') {
+      u.host.context = { ...u.host.context, runtime: {} }; u.host.componentDidUpdate();
+    } else {
+      u.host.componentWillUnmount();
+      resumed = previewUiHarness({ admitSave: true, send: async () => pieceHttp(uiSaveReceipt({ idempotency_replayed: true })) });
+      // Match the actual separate host and navigation binding, while recovering
+      // the operation retained by MainTabs rather than issuing another GET/POST.
+      resumed.host.props = { ...u.host.props, savedInput: { ...u.host.props.savedInput,
+        ...(boundary === 'new-navigation-key' ? { idempotencyKey: 'new-explicit-navigation-key' } : {}) } };
+      resumed.host.context = { ...u.host.context, runtime: {} }; resumed.mount();
+      assert.equal(resumed.calls.length, 0);
+    }
+    assert.equal(resumed.host.controller.getView().retryKind, 'save');
+    assert.equal(resumed.host.controller.getView().canRetry, true);
+    assert.equal(uiButton(resumed, '保存入力を確認し直す'), undefined);
+    if (resumed === u) {
+      // Replace only the synthetic transport outcome; the retained controller
+      // identity and production store are unchanged.
+      const old = u.calls.length;
+      uiButton(u, '同じ保存要求で結果を確認').props.onPress(); await pieceTick();
+      assert.equal(u.calls.length, old + 1);
+      assert.equal(u.calls.at(-1)[1].body, saveCall.body);
+      assert.equal(u.calls.at(-1)[1].headers['Idempotency-Key'], saveCall.headers['Idempotency-Key']);
+      assert.ok(store.find(OWNER, source.source_input_id));
+    } else {
+      uiButton(resumed, '同じ保存要求で結果を確認').props.onPress(); await pieceTick();
+      assert.equal(resumed.calls.length, 1);
+      assert.ok(resumed.calls[0][0].endsWith('/save'));
+      assert.equal(resumed.calls[0][1].body, saveCall.body);
+      assert.equal(resumed.calls[0][1].headers['Idempotency-Key'], saveCall.headers['Idempotency-Key']);
+      assert.equal(resumed.host.controller.getView().phase, 'saved');
+      assert.equal(store.find(OWNER, source.source_input_id), undefined);
+    }
+    resumed.host.componentWillUnmount();
+  });
+}
+
+test('same-selection runtime pause preserves the refreshed preview key for explicit reentry', async () => {
+  let previews = 0;
+  const freshSource = { ...request().source_ref, source_input_bundle_commitment: 'sha256:' + 'b'.repeat(64) };
+  const u = previewUiHarness({ send: async (url, init) => init.method === 'GET'
+    ? pieceHttp(freshSource) : ++previews === 1 ? sourceConflict() : pieceHttp(response()) });
+  bindSourceRefreshHost(u); await u.host.createFromSavedInput(); await pieceTick();
+  uiButton(u, '保存入力を確認し直す').props.onPress(); await pieceTick();
+  const freshKey = u.host.sourceIdempotencyKey;
+  u.host.context = { runtime: null, isFeatureEnabled: () => false }; u.host.componentDidUpdate();
+  u.host.context = { runtime: {}, isFeatureEnabled: name => name === 'piece_v2_preview_enabled' };
+  u.host.componentDidUpdate();
+  assert.equal(u.calls.length, 3, 'runtime changes do not perform IO');
+  assert.equal(u.host.sourceIdempotencyKey, freshKey);
+  uiButton(u, 'ピースを作成').props.onPress(); await pieceTick();
+  assert.deepEqual(u.calls.slice(3).map(([, init]) => init.method), ['GET', 'POST']);
+  assert.equal(u.calls[4][1].headers['Idempotency-Key'], freshKey);
+  assert.equal(u.host.controller.getView().phase, 'received');
+  u.host.componentWillUnmount();
+});

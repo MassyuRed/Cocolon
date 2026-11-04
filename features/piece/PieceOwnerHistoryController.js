@@ -22,14 +22,16 @@ export function createPieceOwnerHistoryController(configuration = {}) {
   function setContext(next) {
     const snapshot = { enabled: next?.enabled === true && typeof next?.expectedUserId === 'string' && !!next.expectedUserId,
       expectedUserId: next?.expectedUserId, savedPieceId: typeof next?.savedPieceId === 'string' ? next.savedPieceId : null,
-      exportEnabled: next?.flags?.piece_v2_export_enabled === true, flags: pieceOwnerPermissions(next?.flags) };
+      exportEnabled: next?.flags?.piece_v2_export_enabled === true,
+      suspended: next?.suspended === true, flags: pieceOwnerPermissions(next?.flags) };
     // Compare effective permissions, not mutable caller-owned objects.
     const stamp = JSON.stringify(snapshot);
     if (context?.stamp === stamp) return;
     // Preserve only the body-free idempotency identity across a temporary
-    // view boundary with the same owner, route target and delete permission.
-    const keepDeletion = context?.expectedUserId === snapshot.expectedUserId &&
-      context?.savedPieceId === snapshot.savedPieceId && permissions().delete && snapshot.flags.delete;
+    // lifecycle/runtime pause. A settled permission or owner/route change
+    // discards it; the stored request never includes a record body.
+    const keepDeletion = !!deletion && context?.expectedUserId === snapshot.expectedUserId &&
+      context?.savedPieceId === snapshot.savedPieceId && (snapshot.flags.delete || snapshot.suspended);
     blocked = false;
     context = { stamp, enabled: snapshot.enabled, expectedUserId: snapshot.expectedUserId,
       savedPieceId: snapshot.savedPieceId,
