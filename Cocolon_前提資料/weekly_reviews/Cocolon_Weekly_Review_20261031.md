@@ -3613,6 +3613,8 @@ localの既存composition moduleは66成功／失敗0、3.19秒。別の実facto
 
 最終の関連6suiteは**3,249成功／既存1失敗／error0／skip0**、21.61秒。唯一の失敗は`test_existing_free_short_essay_minimum_is_not_relaxed_for_preferences`で、短文エッセイ下限の旧期待。開始API66b58b89の別checkoutでも同じ1失敗を確認し、製品・旧期待を今回変更しなかった。初回7失敗のうち別6はQ2_PGLITE_MODULE未設定であり、設定済みの隔離PostgreSQL WASMで既存SQL6条件は全成功。最終6suiteにはその6も含まれるため加算しない。旧期待変更0。別の既存HTTP／source-ref→隔離SQL保存・本人再読moduleは64成功／失敗・skip0、10.20秒。これは現sourceでの回帰確認であり、新64件の実装成果や本人DBの成功へ換算せず、関連6suiteへ加算しない。Pydantic非推奨警告1を保持。API製品1／既存test2を[96676d30](https://github.com/MassyuRed/mashos-api/commit/96676d309970e8c3bf7c5f27700692005147ced5)へ反映し、GitHubの親commit・変更3path・blobを確認、remote取得bytesと検証済み全3fileが一致した。
 
+反映後の既存[Piece隔離PostgreSQL CI 41919025396](https://github.com/MassyuRed/mashos-api/actions/runs/41919025396)はcompleted／success、job b2b-foundationの全step成功を確認。本人DB・実Auth・実機の成功ではない。同じpushで起動したAnalysis observed content CI 41919025410は、この記録の照合時点で進行中のため成功をclaimしない。
+
 **本人履歴の続きの本文受信。** 続きのfetchがheader受信まで成功しても、`response.json()`の通信失敗は既存の通信不確定catchの外だった。そのため取得済み20件とcursorが全消去された。履歴継続の200応答に限り、JSON解析以外の本文受信失敗を、本人・abortを再確認して既存の確認済み一覧／cursor保持へ接続した。明示操作で同じcursorを再試行し、旧ボタンは失効したまま。SyntaxError、不正payload、401／503等の既知HTTP拒否、本人変更・AbortError、詳細等の別操作は保持へ広げない。未検証の受信本文は採用しない。
 
 新5回帰を含む継続取得14条件は、開始13成功／1失敗、修正後全成功。関連3suiteは379成功。最終RN広域は**1,542成功／失敗0**。既存のMetro再bundle検査1件はビルドをまとめる指示に従い対象外で、アプリbuildなし。最初の広域実行はテスト用React／Babelの未配置とsparse checkout未取得のtutorial等で失敗した。既存test用package.jsonの固定5依存を配置し、未取得原本を同じrefから取得した後に解消。Metro自体の未配置による別1失敗は製品回帰や実bundle成功に数えず、最終はそのbuild検査を明示除外した。製品dependency／lockfile変更0。独立の本文受信Error、AbortError／AccountChangedError、本人確認待ちの切替、本文待ちの無効化、詳細GETの確認もblocking0。これらを広域件数へ加算しない。
