@@ -1853,3 +1853,35 @@ runner=material_v5_negscope_trial.py、SHA d2090f2c9fc5ee4f930b05338124673b33a2e
 次は同run/指示variantを反復せず、既存RU02とAT11/17/24の正targetと自由生成が初めて分岐する内容を、理由・修飾・従属内容の境界へ絞って調べる。教師値は既に存在し、平均lossの低下だけで追加更新を決めない。新GPU条件は未固定。本人基準の役割/判断/選択、補足typed、記録間の再出現/変化、通常累積graph、IF/Savedと分析観測会は継続残件。
 
 実環境GPT-6/Codex Work、root単一writer/実行/判断、同環境read-only補助。独立Pro/Ultra/Mash Product Readではない。限定TECHNICAL_CREDIT、product_credit0。通常商品source/型/意味gate/compiler/唯一作者/ensure/HTTP/DTO/DB/RN/Render/Supabase/配置/Pod管理の変更なし。STRUCTURE_MAP_DELTA_NONE。今回のSupabase操作はschema読取のみ。Renderはworkspace未選択のためservice読取に進まず、稼働stateを未確認のまま成功扱いしない。
+
+<a id="analysis-material-v5-branch16-result-20261105"></a>
+## 140. 11/5 — 誤分岐への局所CEで修飾2例を修復、理由・対象の2例は未解消
+
+最新weekly§175の研究候補419/config4abを明示的な研究初期値に選び、既存16教師/target/messages/順/seed/LR/clipを保持して比較した。通常採用や次初期値への自動採用ではない。新教師/指示variant/語彙追加/意味gateの緩和/出力修復は0。CPUは13.780406秒、実tokenizerで16全文encoded・prompt mask・EOS・8192枠、教師と評価4組のmessages/ref、同Podのbefore30保存bytesを照合。元API ded0586＋v5 overlay/loader/pinは不変。
+
+既存teacherと保存rawの最初の異なるtokenだけを特定し、4 full-teacher＋4 short-prefix cache=True prefillの8forward/1loadで比較した。両分布とも実誤枝tokenがargmaxで、正枝の順位/確率はAT11約.006/rank2、AT17約.434/rank2、RU02約.0156/rank5、AT24約.383/rank2だった。short-prefix prefillは完全なincremental cache生成再現ではなく、保存rawの再tokenizeも元生成token IDそのものではない。条件付き分布である限界を保つ。
+
+rootが全4のactiveを確認後、全行の既存全文平均CEを残し、active4行だけ最初の正teacher-tokenのCEを係数1で追加した。正解は既存teacherから取得し、失敗rawを新教師へ変換しない。16更新/前後32NLL→112tensor保存照合→新重み再読→30新stop、計3loadを一回完了。run train/afterともexit0、診断開始から608.838253秒、元900秒＋終了30秒上限内。同run再起動/追加係数探索/再学習0、初期419不変。
+
+| 対象 | 最終自由生成と採否 |
+| --- | --- |
+| AT11 | 本人結果の程度修飾をrootへ戻し、余分なTE_CONTEXTを除去。既存teacher JSON値と一致 |
+| AT17 | 本人思考の継続修飾をrootへ戻し、述語を対象childへする誤りを除去。既存teacher JSON値と一致 |
+| RU02/YREASON01 | raw完全不変。明記理由のmarker欠如・述語のmodifier誤化が残る |
+| AT24 | raw完全不変。サ変語幹を対象childへする誤りが残る |
+| 旧19 typed | 全graph・可視文章・図が一致。新規表示/喪失とも0。PV01/HQ04/AT04/X03/M4の既存結果を保持 |
+| その他の変更 | R08は原文の正しい対象子を明示。SC01/OA01/MD02は原文内のactor引用末尾に助詞を含めただけ。X06は対象子を省略したが、既存有限証明でgraph/表示は同一 |
+
+raw同一23/変更7、候補30→30/30、typed19→19/30。全30原文/前後rawと成立した全文章/図をrootと同環境read-only補助が読み、今回30の範囲で新たな可視意味退行は確認しなかった。今回の2修復は既に教えたsourceの再現であり、未見転移/一般入力の品質率ではない。同じPod/依存/入力/loaderのbeforeを再利用し、前回の新Pod対歴史beforeという環境差は今回の比較に持ち込んでいない。
+
+**平均lossと局所枝を分ける。** 教師平均NLLは.006690069→.003620820へ下がったが、正枝CEはAT11 5.131270→.000492、AT17 .834123→.000634、RU02 4.158349→2.206451、AT24 .959160→2.508897。正枝確率は順に約.0059→.9995、.4343→.9994、.0156→.1101、.3832→.0814。AT24は明確に悪化し、RU02も自由生成は未修復。途中、華恋はRU02/AT24の小数値を読み違えて「4箇所とも正しい続きが選ばれる」と報告したが、全原本取得時に誤りを認め、最終生成は2修復/2未解消へ訂正した。この途中報告を完了証拠にしない。AT24は自身の更新前にも正枝CE約3.921592へ悪化しており、他の更新との干渉を今後の切分け対象にする。optimizerや単独の原因は確定していない。
+
+保存60応答（候補60/typed38）を生成・compiler・作者禁止guardで非生成再読し、復元typed artifactからのgraph/文章/図をsidecarへ照合。375memberのZIP CRCとmanifest374の全bytes/SHAをPod外で確認した。[全原本・新重み](https://chatgpt.com/library?file_id=libfile_9d7f177b15f081918f764beccdc72700&account_id=personal)は15,163,574bytes/SHA256 6d2cef0fb549d6ffc0916601282cb4ea81bf6d0a63115f197e301e992eb59d43。weights811a33ee11a57ba55a279838aeec84b84fd0d1450ebb04b15403136578ffdf8b、config343ee81f0a3596dd18fcfb3f2817576537a5d56700307557edd806083e3a4422。親419と元90/helper/API原本は§175のprivate原本と既存復元archiveを継承し、新ZIP単独ですべての親依存を収録したとは呼ばない。
+
+code/planはccb0e60a9e33e1f907fa2c1bac5f6b988b75fe9aへ実行前反映・全文読戻し済み。code SHA f82c7c1f9b271a141b86c4eb1331583d9a5ce2412f929e61eb807de63e83c32c。新しい通常product ownerはなく、本文なし結果索引material_v5_branch16_results.jsonを追加。終了GPU2MiB/0%・compute空、レンタル維持。前確認.29USD/hで診断開始からの全608.838253秒を対象とした参考上限.049045304USD、準備/回収/保持/税等は別、実総請求未測定。
+
+通常採用/次初期自動採用false、2修復の研究候補として保全。次は同16更新や係数探索をそのまま繰り返さず、RU02/AT24の正枝が他の更新で弱まる箇所を切り分け、AT11/AT17と旧19を保持する差分へ限定する。次GPU条件は未固定。
+
+通常接続の残件も既存設計04/実ownerへ照合した。今回のprivate model typedは1原記録・補足なしの全文ROLE又はROLE＋SELF過去ACTIONの有限証明に限定され、修飾/従属/結果等を拒否する。既存通常有限解析は五種を扱うが、通常ensureはQuotedParent入力を渡さない。したがって今回の正しい2候補を通常mapへ自動採用したり、単にスイッチをONにして完成扱いしない。本人の思考/結果・他者発話・理由のsource-to-proposition証明と保存再読の対応を既存五種/ObservedGraph/唯一作者内で差分設計する必要がある。本人基準、補足、記録間の再出現/変化、通常累積、IF/Saved、分析観測会の残件は保持する。
+
+実環境GPT-6/Codex Work、root単一writer/実行/判断＋同環境read-only確認。独立Pro/Ultra/Mash Product Readではない。限定TECHNICAL_CREDIT、product_credit0。通常source/型/意味gate/作者/HTTP/DB/RN/Render/Supabase/配置/Pod管理変更0、STRUCTURE_MAP_DELTA_NONE。

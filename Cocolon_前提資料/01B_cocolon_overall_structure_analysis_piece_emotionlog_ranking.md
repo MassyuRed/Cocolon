@@ -3413,3 +3413,7 @@ API dc05dc35、通常product owner追加なし。既存 `semantic_admission.py` 
 ### 2026-11-05 — 分析v5 aligned16の実学習・生成結果の地図
 
 通常production owner/型/意味gate/compiler/唯一作者/ensure/HTTP/DB/RNは不変、STRUCTURE_MAP_DELTA_NONE。既存trialのmaterial_v5_aligned16_trial.pyを変更せず、16更新・32測定・新30生成と保存再読を実行した。新しい本文なし結果索引は同trial内のmaterial_v5_aligned16_results.json、全条件/失敗回復/比較/原本はREADME#analysis-material-v5-aligned16-result-20261105と最新weekly§175。新重みはprivate原本に保存し通常/次初期値へ未採用。00/current03の再開入口を同結果へ更新した。新product code/ownerなし。
+
+### 2026-11-05 — 既存教師の実誤分岐を修復する研究結果の地図
+
+既存trial内のmaterial_v5_branch16_trial.py（CPU準備/8分岐測定/16更新/30生成/保存再読）とmaterial_v5_branch16_plan.json（固定条件）、material_v5_branch16_results.json（本文なし実結果）を追加。全原本はprivate保存、結果/限界/途中誤報告の訂正/次の残件はREADME#analysis-material-v5-branch16-result-20261105と最新weekly§176。旧19表示を全保持、修飾2例を修復、理由・対象の2例は未解消。通常採用/次初期値自動採用false。通常product owner/型/意味gate/compiler/唯一作者/ensure/HTTP/DB/RN不変、STRUCTURE_MAP_DELTA_NONE。

@@ -1,0 +1,128 @@
+{
+  "status": "PARTIAL_SEMANTIC_REPAIR_RESEARCH_CANDIDATE_NOT_ADOPTED",
+  "date_jst": "2026-11-05",
+  "plan_commit": "ccb0e60a9e33e1f907fa2c1bac5f6b988b75fe9a",
+  "weekly_section": 176,
+  "trial_readme_section": 140,
+  "base_api": "ded0586720df0c0d50d8838bcd391a19ca3eead5",
+  "profile": "selected_material.v5",
+  "runner_sha256": "f82c7c1f9b271a141b86c4eb1331583d9a5ce2412f929e61eb807de63e83c32c",
+  "parent_archive_id": "libfile_266a3eef2ce08191afb4d5e23d755419",
+  "diagnostic_forwards": 8,
+  "model_loads": 3,
+  "updates": 16,
+  "measurement_forwards": 32,
+  "new_generations": 30,
+  "reused_before_responses": 30,
+  "same_pod_runtime_comparison": true,
+  "seconds": 608.8382532596588,
+  "stage_exits": [
+    {
+      "phase": "train",
+      "exit": 0
+    },
+    {
+      "phase": "after",
+      "exit": 0
+    }
+  ],
+  "cpu_seconds": 13.780405627563596,
+  "before_candidate": 30,
+  "after_candidate": 30,
+  "before_typed": 19,
+  "after_typed": 19,
+  "prior_graph_and_visible_preserved": 19,
+  "new_typed": [],
+  "lost_typed": [],
+  "raw_same": 23,
+  "raw_changed": 7,
+  "raw_changed_ids": [
+    "R08",
+    "SC01",
+    "OA01",
+    "MD02",
+    "X06",
+    "AT11",
+    "AT17"
+  ],
+  "semantic_repairs": [
+    "AT11",
+    "AT17"
+  ],
+  "remaining_errors": [
+    "YREASON01=RU02",
+    "AT24"
+  ],
+  "new_visible_semantic_regressions_in_30": [],
+  "known_teacher_replay_not_unseen_transfer": true,
+  "objective": "Full existing mean CE on all16; plus coefficient1 first correct divergent teacher token CE on the four measured active rows. No new gold or raw repair.",
+  "coefficient": 1.0,
+  "branch_ce_before": {
+    "AT11": 5.131269931793213,
+    "AT17": 0.8341231346130371,
+    "RU02": 4.158348560333252,
+    "AT24": 0.959160327911377
+  },
+  "branch_ce_after": {
+    "AT11": 0.0004923323867842555,
+    "AT17": 0.0006337541271932423,
+    "RU02": 2.206451416015625,
+    "AT24": 2.508896827697754
+  },
+  "branch_probability_before": {
+    "AT11": 0.00590905161430863,
+    "AT17": 0.43425509779831645,
+    "RU02": 0.015633354154832965,
+    "AT24": 0.3832145254613496
+  },
+  "branch_probability_after": {
+    "AT11": 0.9995077887889182,
+    "AT17": 0.9993664466525364,
+    "RU02": 0.11009062199750871,
+    "AT24": 0.08135794158094582
+  },
+  "teacher_nll_before": 0.006690068858915765,
+  "teacher_nll_after": 0.003620820200012531,
+  "at24_teacher_branch_worsened": true,
+  "interim_report_error": {
+    "claim": "ALL_FOUR_CORRECT_BRANCHES",
+    "cause": "ROOT_MISREAD_DECIMAL_VALUES",
+    "corrected_in_commentary": true,
+    "final_fact": "TWO_REPAIRED_TWO_UNRESOLVED"
+  },
+  "saved_replay": {
+    "responses": 60,
+    "candidate": 60,
+    "typed": 38,
+    "generation_compiler_author_forbidden": true,
+    "projection_sidecar_matches": true
+  },
+  "initial_weights_unchanged": true,
+  "new_weights_sha256": "811a33ee11a57ba55a279838aeec84b84fd0d1450ebb04b15403136578ffdf8b",
+  "new_config_sha256": "343ee81f0a3596dd18fcfb3f2817576537a5d56700307557edd806083e3a4422",
+  "archive": {
+    "library_file_id": "libfile_9d7f177b15f081918f764beccdc72700",
+    "file_name": "Cocolon_Analysis_v5_branch16_20261105.zip",
+    "bytes": 15163574,
+    "sha256": "6d2cef0fb549d6ffc0916601282cb4ea81bf6d0a63115f197e301e992eb59d43",
+    "members": 375,
+    "manifest_entries": 374,
+    "crc_all_bytes_sha_verified": true,
+    "parent_dependencies_retrieved_separately": true
+  },
+  "normal_adoption": false,
+  "next_training_initial_adoption": false,
+  "product_code_change": false,
+  "deployment": false,
+  "db_write": false,
+  "primary_outcome": "TECHNICAL_CREDIT",
+  "product_credit": 0,
+  "structure_map_delta": "NONE",
+  "gpu_end": {
+    "memory": "2 MiB",
+    "utilization": "0 %",
+    "compute_processes": 0,
+    "pod_rental_maintained": true
+  },
+  "next_work": "Resolve RU02/AT24 while retaining AT11/AT17 and prior19; inspect update interference rather than repeat the same16 updates or search coefficients. Typed source-to-proposition witness and normal cumulative connection remain separate existing work."
+}
