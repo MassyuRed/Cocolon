@@ -6087,16 +6087,16 @@ API overlay2source＋新testは保存原本へ同梱し、通常repoへ採用し
 | mashos-api `supabase/migrations/20261104002458_piece_v2_export_receipt.sql` | 既存の記録テーブルにハッシュ2欄とservice-role専用RPCを追加し、本人・保存版と同じキーの再送を照合する。 |
 | mashos-api `ai/tests/piece_v2/test_b13b_piece_v2_export_receipt.py`、`ai/tests/helpers/piece_export_receipt_postgres.cjs` | 隔離DBで書き出し記録の権限、版の不一致、応答消失後の再送を検証する。 |
 
-| 最新の既存ファイル責務（§148〜150） | 責務と接続 |
+| 最新の既存ファイル責務（§148〜151） | 責務と接続 |
 |---|---|
 | mashos-api `ai/services/ai_inference/piece_v2_generation.py` | 保存原入力の既知有限動詞を共用し、明示終端の非過去だけを追加読取。対象・条件・伝聞と疑問cueの境界を検査し、原文・肯否・時制は変更しない。 |
 | mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py` | 有限自己表現と空述語拒否の文法照合に単一感嘆符を同期。原文nodeと証拠座標を保持。 |
-| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_v1c.py` | 明示自己表現と完成動作・留保、既存肯定plain-suruを既存KEEP作者へ渡す。自己理解でも同じ有限文法を使い、新しい関係や宣言適格を作らない。 |
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_v1c.py` | 明示自己表現と完成動作・留保、既存肯定plain-suruを既存KEEP作者へ渡す。自己理解でも同じ有限文法を使い、新しい関係や宣言適格を作らない。留保の丁寧否定・過去形と「迷っている」の活用漏れは、この保持経路だけで修復し、新しい問いcueも局所検査する。 |
 | mashos-api `ai/tests/piece_v2/test_b05a_piece_saved_original_generation.py` | 既存adapterで時制・肯否・主体・句読点・欄／段落・留保の保持と、新経路の対象／条件／報告／疑問の拒否境界を検査。 |
 | Cocolon `features/piece/PieceCreateController.js`・`screens/input/InputPieceActionArea.js` | 明示選択形式の処理中／結果不明・受信確定済みPOSTを同じsaved-inputホストの一時休止で本文なしに保持。復帰後は同じ要求・キーを明示確認し、元の自動形式POSTへ戻さない。確定source競合だけ既存GET再確認へ進める。 |
-| Cocolon `features/piece/PieceOwnerHistoryController.js`・`screens/PieceOwnerHistoryScreen.js` | 共有のnative結果不明を一時停止の有無によらず案内。export準備で版等が異なる場合は同じPieceの明示詳細GETへ進み、準備の自動開始・自動本文置換をしない。 |
-| Cocolon `tests/piece-v2-preview-display.test.js`・`tests/piece-v2-owner-history.test.js` | 選択形式POSTの一時休止、owner／入力／元キー変更、遅延応答と確定拒否、source競合、同じ詳細の再読・旧操作の失効を検査。 |
+| Cocolon `features/piece/PieceOwnerHistoryController.js`・`screens/PieceOwnerHistoryScreen.js` | 共有のnative結果不明を一時停止の有無によらず案内。export準備で版等が異なる場合は同じPieceの明示詳細GETへ進み、準備の自動開始・自動本文置換をしない。失敗済み／通信中の詳細GETは一時停止と稼働設定読込みで本文なしのID・確定案内だけ保持し、fresh tokenで明示再読。abort前に全状態を更新し、同期本人切替後に旧IDを戻さない。 |
+| Cocolon `tests/piece-v2-preview-display.test.js`・`tests/piece-v2-owner-history.test.js` | 選択形式POSTの一時休止、owner／入力／元キー変更、遅延応答と確定拒否、source競合、同じ詳細の再読・旧操作の失効を検査。失敗／通信中の詳細GETと公開変更ACK後の一時停止・稼働設定読込み、本文なし保持・権限喪失・同期abortの本人切替も既存harnessで検査。 |
 
-STRUCTURE_MAP_DELTA_NONE。新しいowner・route・API・DB・描画版はなく、既存経路内の有限文法共用と明示確認の修復。実結果と検証範囲は[週次レビュー§150](weekly_reviews/Cocolon_Weekly_Review_20261031.md#piece-one-hour-finite-format-20261104)へ。
+STRUCTURE_MAP_DELTA_NONE。新しいowner・route・API・DB・描画版はなく、既存経路内の有限文法共用と明示確認の修復。実結果と検証範囲は[週次レビュー§151](weekly_reviews/Cocolon_Weekly_Review_20261031.md#piece-reservation-detail-resume-20261104)へ。
 
 作成モーダル・本人履歴・CMEE本文判定の既存ファイルと新経路の接続は[Piece現行構造](current_structure/02_piece_current_structure.md#piece-format-language-export-20261104)を参照。本番配置・DB移行前の候補。

@@ -3139,3 +3139,17 @@ Mashの「1時間Pieceの残件作業」の指示に従い、UTC04:31:25（JST13
 新差分は製品4・既存test2・前提資料4の計10ファイル、新規repoファイル0。全体現在地・01Aのファイル地図・Piece current構造は関連責務を差分置換し、本節を履歴とする。STRUCTURE_MAP_DELTA_NONE。既存意味型・公開API／DTO・DB・描画版・依存・workflowは変更しない。同環境の分担実装／読取をrootが統合し、GitHubの既存Draftへ反映した。API最終は [47b58f4a](https://github.com/MassyuRed/mashos-api/commit/47b58f4a4f3dc066e8e8f83ac19f51ed35035283)。RNは [Draft PR30](https://github.com/MassyuRed/Cocolon/pull/30)、APIは [Draft PR3](https://github.com/MassyuRed/mashos-api/pull/3)へ反映。ビルド、配布、本番配置、DB適用、GPU、本人端末操作は0。一般日本語品質、Android通常作成・保存への採用、実際のPhotos／Shareと商品受入れは残る。
 
 作業時間記録：UTC04:31:25開始、UTC05:31:59（JST14:31:59）に本節を確定。ここまで実1時間0分34秒。以降のGitHub反映と全文読戻しも続けて確認する。
+
+<a id="piece-reservation-detail-resume-20261104"></a>
+## 151. 11/4 — 留保の活用漏れと、詳細GET中断後の明示再読を修復
+
+MashのPiece残件継続指示に従い、前回引継ぎ・華恋用作業ルール・全体現在地全文・全体設計とファイル地図・Piece current原本・§150と実sourceを確認した。開始点はRN `a0c04b7287e0c033386a1ee70828871042b58d5c`／API `47b58f4a4f3dc066e8e8f83ac19f51ed35035283`。引継ぎlocal snapshotは両GitHub treeの全blobと一致。System Contextは最新索引未生成という既存状態を維持し、正本の直接読取を使用した。追加の索引再構築をPiece修復の前提にしない。Rule18 §0A／§11.3の既存設計内の修復、実装・反映ownerは華恋。別担当は読取・再現・独立レビューのみで、製品ファイルの変更は0。
+
+- **自己理解の留保の活用漏れ。** 「資料を読みました。まだ分かりません。」は平穏では原文生成、自己理解では拒否だった。「わかりません／とは限りません」と各丁寧過去、「迷っている」も同じ原因。既存KEEPの留保経路だけに有限活用を追加し、一般の不確定判定・動詞終端・作者は変更しない。完成動作または明示自己表現を必要とする条件と、主語・否定・時制・記号・欄／段落・順序を保持し、留保単独や未知動詞へ一般化せず宣言適格を作らない。最初の48生成条件は修正前に全拒否、修正後は全て原文生成。独立レビューで新しい「迷っている」経路の疑問cue4例の誤受理を検出し、新経路だけに局所の問い判定を追加した。最終は生成48＋拒否17の新65条件を含む保存原入力suite1,541成功。既存経路での埋込不明や名詞化を後退させず、曖昧な不定表現等の未対応は維持する。これは一般日本語の理解完成ではない。
+- **詳細GETの失敗・通信中の一時停止。** 通常履歴で詳細取得が失敗した後、または通信中にbackground／稼働設定再読込みへ入ると、本文とともに選択IDも消え、復帰後に同じPieceを読み直せなかった。同じ本人・画面のIDと既知の公開変更ACK案内だけを本文なしで保持し、復帰後の明示GETへつなぐ。公開変更ACK直後の詳細GETにも適用し、案内はfresh GET成功後だけ表示する。復帰時の自動通信0、旧token失効、遅延応答の本文復活なし。確定した本人／対象／読取権限／focusの喪失・close／disposeでは破棄し、結果不明な削除を優先する。さらに同期abort listenerで本人が切り替わる再現例を独立レビューで確認し、全状態を書き終えてから旧通信をabortする順序へ修復。新19条件と既存周辺を確認し、最終の独立読取・実行48条件にも未修正指摘なし。
+
+新本文7例×Free／Plus／Premium×平穏／自己理解の実ASGI＋隔離PGlite42条件は、preview・同key再読・保存・同save key再読・本人GETまで成功（実210通信）。本文・段落・3hash・recipe・rendererが一致し、枠消費は各1回。Auth／providerは合成、描画・実端末の成功ではない。最終RNは既存のMetro再bundle検査1件を対象外として1,454成功・失敗0。最終API広域104fileは9,004成功・既存161失敗・native17除外。§150の失敗identity集合と完全一致、新規失敗／error0。対象suite・ASGI・独立レビューの件数を広域へ上乗せしない。初回のTypeScript／React探索不足、PGlite未指定の実行失敗は環境設定として分離し、既存runtimeを再発見して最終確認した。依存追加・lock変更0。途中版の成功や失敗を最終件数へ合算せず、既存161件をPASSへ変更しない。
+
+[検証原本・再現runner・実wire・回帰XML](https://chatgpt.com/library?file_id=libfile_5964d107c83c81918e9b756eac9bf79d&account_id=personal)は `Cocolon_Piece_20261104_reservation_detail_validation.zip`（67member、294,195bytes、SHA256 `d54fcadf8857369313504e92da8adabc5f6b5b72d3f0a3d13d95add514a19105`）。GitHub管理下の製品sourceは複製せず、検証したpostimage hashと原本参照を保存した。
+
+差分は製品2・既存test2・前提資料4の計8file、新規repo file0。全体現在地・Piece current map・01Aは責務を置換更新し、本節だけを履歴とする。STRUCTURE_MAP_DELTA_NONE（既存owner内の留保読取とGET復旧、route・意味型・公開API／DTO・DB・renderer・依存・workflow変更なし）。primary outcomeは限定TECHNICAL_CREDIT、商品受入れへ換算しない。APIは[1ae32fdf](https://github.com/MassyuRed/mashos-api/commit/1ae32fdfb753b9082b26219cd1622ed085a36ebc)へ反映し、全2fileの全文・変更集合・親commitを読戻し確認。RNは既存Draft PR30へ同じ変更単位で反映する。ビルド・配布・本番配置・DB適用・GPU・本人端末操作は0。一般日本語品質、Android通常作成・保存への採用、実機のPhotos／Shareと正式商品受入れは引き続き残件。次もこの残件を直接扱い、まとめビルド前に未確認を完了へ変えない。

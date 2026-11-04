@@ -10,14 +10,21 @@ export function createPieceOwnerHistoryController(configuration = {}) {
   const permissions = () => pieceOwnerPermissions(context?.flags);
   const emit = () => { for (const fn of [...listeners]) { try { fn(); } catch {} } };
   const enabled = () => !disposed && !blocked && context?.enabled === true && permissions().read;
-  function clear(keepDeletion = false) {
+  function clear(keepDeletion = false, keepDetail = false) {
     const previous = active;
+    const retry = keepDetail && !deletion ? state.detailRetry || previous?.detailRetry : null;
     active = null;
     deletion = keepDeletion && deletion ? { ...deletion, token: Object.freeze({}) } : null;
     state = empty();
-    previous?.abort.abort();
     if (deletion) state = { ...empty(), phase: 'unavailable',
       code: 'PIECE_TEMPORARILY_UNAVAILABLE', message: deleteUncertainMessage };
+    else if (retry) state = { ...empty(), phase: 'unavailable',
+      code: 'PIECE_TEMPORARILY_UNAVAILABLE',
+      message: 'Pieceを読み込めませんでした。もう一度読み込んでください。',
+      detailRetry: { pieceId: retry.pieceId, notice: retry.notice, token: Object.freeze({}) } };
+    // Abort listeners can synchronously change the owner/context. Finish all
+    // state writes first so that a nested clear cannot be overwritten.
+    previous?.abort.abort();
   }
   function setContext(next) {
     const snapshot = { enabled: next?.enabled === true && typeof next?.expectedUserId === 'string' && !!next.expectedUserId,
@@ -32,13 +39,20 @@ export function createPieceOwnerHistoryController(configuration = {}) {
     // discards it; the stored request never includes a record body.
     const keepDeletion = !!deletion && context?.expectedUserId === snapshot.expectedUserId &&
       context?.savedPieceId === snapshot.savedPieceId && (snapshot.flags.delete || snapshot.suspended);
+    // A paused detail GET retains only the selected ID/acknowledgement. Both
+    // failed and in-flight reads need a fresh explicit GET after resuming.
+    const keepDetail = !blocked && context?.expectedUserId === snapshot.expectedUserId &&
+      context?.savedPieceId === snapshot.savedPieceId && (context?.suspended || snapshot.suspended) &&
+      (snapshot.enabled || snapshot.suspended) &&
+      (snapshot.flags.read || snapshot.suspended);
     blocked = false;
     context = { stamp, enabled: snapshot.enabled, expectedUserId: snapshot.expectedUserId,
       savedPieceId: snapshot.savedPieceId,
+      suspended: snapshot.suspended,
       flags: { piece_v2_owner_read_enabled: snapshot.flags.read,
         piece_v2_visibility_toggle_enabled: snapshot.flags.visibility,
         piece_v2_public_write_enabled: snapshot.flags.publish, piece_v2_delete_enabled: snapshot.flags.delete } };
-    clear(keepDeletion);
+    clear(keepDeletion, keepDetail);
     emit();
   }
   const current = ticket => enabled() && active === ticket && context === ticket.context;
@@ -60,7 +74,8 @@ export function createPieceOwnerHistoryController(configuration = {}) {
     if (!enabled() || active) return;
     let abort;
     try { abort = new AbortController(); } catch { return; }
-    const ticket = { abort, context };
+    const ticket = { abort, context,
+      ...(action === 'detail' ? { detailRetry: { pieceId: value.piece_id, notice } } : {}) };
     active = ticket;
     const previousPage = action === 'history' && value.cursor !== null ? state : null;
     // Hide stale data while reading/mutating; never display a write as done

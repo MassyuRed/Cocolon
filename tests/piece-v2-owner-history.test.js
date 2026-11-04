@@ -266,6 +266,103 @@ for (const boundary of ['owner', 'target', 'read revoked', 'history', 'close', '
   });
 }
 
+for (const pause of ['background', 'runtime', 'both']) for (const delayed of [false, true]) for (const acknowledged of [false, true]) {
+  test(`ordinary detail recovery survives ${pause} after ${delayed ? 'in-flight' : 'failed'} GET with visibility ACK ${acknowledged}`, async () => {
+    let changed = false, fail = !acknowledged, finish;
+    const wait = new Promise(resolve => { finish = resolve; });
+    const fresh = record({ row_version: 3, visibility_scope: 'public' });
+    const h = harness({ send: (url, init) => {
+      if (url.includes('/history')) return packet(page([record()]));
+      if (init.method === 'PATCH') {
+        changed = true; fail = true;
+        return packet({ piece_id: PID, visibility_scope: 'public', row_version: 3 });
+      }
+      if (fail) return delayed ? wait : Promise.reject(Error('detail response lost'));
+      return packet(changed || !acknowledged ? fresh : record());
+    } });
+    const host = ownerHost(h, null, { flags, presentationActive: true, runtimePending: false });
+    host.componentDidMount(); await host.act('loadHistory');
+    const pending = acknowledged
+      ? (await host.act('openDetail', PID), host.act('setVisibility', 'public'))
+      : host.act('openDetail', PID);
+    await tick(); if (!delayed) await pending;
+    const stale = host.controller.getView().detailRetryToken;
+    const original = host.props, calls = h.calls.length;
+    if (pause !== 'runtime') h.background('inactive');
+    if (pause !== 'background') {
+      host.props = { ...original, enabled: false, flags: {}, runtimePending: true };
+      host.componentDidUpdate();
+    }
+    assert.equal(host.controller.getView().record, null);
+    assert.equal(host.controller.getView().items.length, 0);
+    assert.equal(button(host, '同じPieceを読み込み直す'), undefined);
+    if (delayed) { finish(packet(record())); await pending; }
+    fail = false;
+    if (pause !== 'runtime') h.background('active');
+    host.props = original; host.componentDidUpdate(); await tick();
+    assert.equal(h.calls.length, calls, 'resume must not issue a request');
+    assert.equal(host.controller.getView().record, null);
+    assert.equal(texts(host.render()).includes(record().piece_text), false);
+    assert.equal(host.controller.getView().canRetryDetail, true);
+    await host.act('retryDetail', stale); assert.equal(h.calls.length, calls);
+    const retry = button(host, '同じPieceを読み込み直す'); assert.ok(retry);
+    await retry.props.onPress();
+    assert.equal(h.calls.length, calls + 1);
+    assert.equal(h.calls.at(-1)[0], '/emotion/piece/' + PID);
+    assert.equal(h.calls.at(-1)[1].method, 'GET');
+    assert.equal(h.calls.at(-1)[1].body, undefined);
+    assert.equal(host.controller.getView().record.row_version, 3);
+    assert.equal(host.controller.getView().message, acknowledged ? '公開範囲を変更しました。' : '');
+    assert.equal(changed, acknowledged);
+    await retry.props.onPress(); assert.equal(h.calls.length, calls + 1);
+    host.componentWillUnmount();
+  });
+}
+
+for (const boundary of ['owner', 'target', 'read revoked', 'focus', 'close', 'unmount']) {
+  test(`paused detail recovery is discarded when ${boundary} changes and returns`, async () => {
+    const h = harness({ send: url => url.includes('/history') ? packet(page([record()])) : Promise.reject(Error('lost detail')) });
+    const host = ownerHost(h, null, { flags, presentationActive: true, runtimePending: false });
+    host.componentDidMount(); await host.act('loadHistory'); await host.act('openDetail', PID);
+    h.background('inactive');
+    if (boundary === 'close') host.controller.close();
+    else if (boundary === 'unmount') host.componentWillUnmount();
+    else {
+      const previous = host.props;
+      host.props = boundary === 'owner' ? { ...previous, owner: RID }
+        : boundary === 'target' ? { ...previous, savedPiece: savedEntry(RID) }
+          : boundary === 'focus' ? { ...previous, enabled: false, presentationActive: false }
+          : { ...previous, enabled: false, flags: {}, runtimePending: false };
+      if (boundary === 'read revoked') h.background('active');
+      host.componentDidUpdate(); host.props = previous; host.componentDidUpdate();
+    }
+    h.background('active'); await tick();
+    assert.equal(host.controller.getView().canRetryDetail, false);
+    assert.equal(host.controller.getView().record, null);
+    if (boundary !== 'unmount') host.componentWillUnmount();
+  });
+}
+
+test('a synchronous abort listener cannot restore the paused detail target into another owner', async () => {
+  let controller, finish;
+  const wait = new Promise(resolve => { finish = resolve; });
+  const h = harness({ send: (url, init) => {
+    if (url.includes('/history')) return packet(page([record()]));
+    init.signal.addEventListener('abort', () => controller.setContext({ enabled: true, expectedUserId: RID, flags }));
+    return wait;
+  } });
+  controller = h.controller; await controller.loadHistory();
+  const pending = controller.openDetail(PID); await tick();
+  controller.setContext({ enabled: false, expectedUserId: OWNER, flags, suspended: true });
+  assert.equal(controller.getView().canRetryDetail, false);
+  assert.equal(controller.getView().record, null);
+  assert.equal(controller.getView().phase, 'idle');
+  finish(packet(record())); await pending;
+  assert.equal(controller.getView().record, null);
+  assert.equal(controller.getView().canRetryDetail, false);
+  controller.dispose();
+});
+
 for (const [status, code] of [[401, 'PIECE_AUTH_REQUIRED'], [503, 'PIECE_FEATURE_DISABLED'], [404, 'PIECE_NOT_FOUND']]) {
   test(`failed-detail reread discards its target after definitive ${code}`, async () => {
     let definitive = false;
