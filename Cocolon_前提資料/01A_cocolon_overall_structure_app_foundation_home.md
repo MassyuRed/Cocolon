@@ -6087,18 +6087,18 @@ API overlay2source＋新testは保存原本へ同梱し、通常repoへ採用し
 | mashos-api `supabase/migrations/20261104002458_piece_v2_export_receipt.sql` | 既存の記録テーブルにハッシュ2欄とservice-role専用RPCを追加し、本人・保存版と同じキーの再送を照合する。 |
 | mashos-api `ai/tests/piece_v2/test_b13b_piece_v2_export_receipt.py`、`ai/tests/helpers/piece_export_receipt_postgres.cjs` | 隔離DBで書き出し記録の権限、版の不一致、応答消失後の再送を検証する。 |
 
-| 最新の既存ファイル責務（§148〜153） | 責務と接続 |
+| 最新の既存ファイル責務（§148〜154） | 責務と接続 |
 |---|---|
-| mashos-api `ai/services/ai_inference/piece_v2_generation.py` | 保存原入力の既知有限動詞を共用し、明示終端の非過去だけを追加読取。対象・条件・伝聞と疑問cueの境界を検査し、原文・肯否・時制は変更しない。既存FOCUSの終端を単一の句点／感嘆符で認識する。 |
-| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py` | 有限自己表現と空述語拒否の文法照合に単一感嘆符を同期。既存direct・focal・評価とそれらのscopeの終端にも単一感嘆符を対応し、原文nodeとscalar／UTF8証拠座標を保持。既存role bindingの名前自体の話題は水平空白・氏名・有限命名でも拒否し、集合／親族語の漢字14表記も既存非identity拒否へ同期する。通常名の部分一致と、名付けを会話topicにする参照は拒否しない。 |
-| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_v1c.py` | 明示自己表現と完成動作・留保、既存肯定plain-suruを既存KEEP作者へ渡す。自己理解でも同じ有限文法を使い、新しい関係や宣言適格を作らない。留保の丁寧否定・過去形と「迷っている」の活用漏れは、この保持経路だけで修復し、新しい問いcueも局所検査する。既存編集後に構造化文の元終端記号を復元し、literal自己表現のKEEP／宣言不適格は優先保持する。 |
+| mashos-api `ai/services/ai_inference/piece_v2_generation.py` | 保存原入力の既知有限動詞を共用し、明示終端の非過去だけを追加読取。対象・条件・伝聞と疑問cueの境界を検査し、原文・肯否・時制は変更しない。既存FOCUSの終端を単一の句点／感嘆符で認識する。焦点構文の「のは＋省略可読点」後の水平空白をobject外のseparatorとして読む。新gap armは別読点を越えず、旧no-gap parseを保持する。 |
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py` | 有限自己表現と空述語拒否の文法照合に単一感嘆符を同期。既存direct・focal・評価とそれらのscopeの終端にも単一感嘆符を対応し、原文nodeとscalar／UTF8証拠座標を保持。既存role bindingの名前自体の話題は水平空白・氏名・有限命名でも拒否し、集合／親族語の漢字14表記も既存非identity拒否へ同期する。通常名の部分一致と、名付けを会話topicにする参照は拒否しない。本人評価の焦点対象前の水平gapも同じseparatorとして分離し、原文・評価／参照／scopeのscalar／UTF8座標を保つ。 |
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_v1c.py` | 明示自己表現と完成動作・留保、既存肯定plain-suruを既存KEEP作者へ渡す。自己理解でも同じ有限文法を使い、新しい関係や宣言適格を作らない。留保の丁寧否定・過去形と「迷っている」の活用漏れは、この保持経路だけで修復し、新しい問いcueも局所検査する。既存編集後に構造化文の元終端記号を復元し、literal自己表現のKEEP／宣言不適格は優先保持する。既存SOURCE_FIRST_PERSON_TOPICでも既知の直接構文が成立する時だけ同じobject／predicate境界で実現し、作者と独立検査の水平gap不一致を修復する。一般literalの本文・duty・形式判定は変更しない。 |
 | mashos-api `ai/services/ai_inference/piece_v2_content_policy.py` | 既存author-free検査で構造化文の元終端記号を要求し、句点・感嘆符の差替えを拒否。語順・主体・時点・否定・scope・段落の既存照合を維持。 |
-| mashos-api `ai/tests/piece_v2/test_b05a_piece_saved_original_generation.py` | 既存adapterで時制・肯否・主体・句読点・欄／段落・留保の保持と、新経路の対象／条件／報告／疑問の拒否境界を検査。 |
+| mashos-api `ai/tests/piece_v2/test_b05a_piece_saved_original_generation.py` | 既存adapterで時制・肯否・主体・句読点・欄／段落・留保の保持と、新経路の対象／条件／報告／疑問の拒否境界を検査。焦点／評価と直接wishの対象前gap、二欄・参照座標、対象内部space、余分なseparator／行越えの拒否とartifact改変拒否も実Engine・独立検査で確認する。 |
 | mashos-api `ai/tests/piece_v2/test_b08_piece_script_role_binding.py` | 名前label・identity operatorの水平間隔と氏名、有限命名、集合／親族語の漢字表記の誤抽象化拒否を実Engineで検査する。通常名と名詞topicの正常参照、原文・UTF8根拠・candidateの一致を保持する。 |
 | Cocolon `features/piece/PieceCreateController.js`・`screens/input/InputPieceActionArea.js` | 明示選択形式の処理中／結果不明・受信確定済みPOSTを同じsaved-inputホストの一時休止で本文なしに保持。復帰後は同じ要求・キーを明示確認し、元の自動形式POSTへ戻さない。確定source競合だけ既存GET再確認へ進める。 |
 | Cocolon `features/piece/PieceOwnerHistoryController.js`・`screens/PieceOwnerHistoryScreen.js` | 共有のnative結果不明を一時停止の有無によらず案内。export準備で版等が異なる場合は同じPieceの明示詳細GETへ進み、準備の自動開始・自動本文置換をしない。失敗済み／通信中の詳細GETは一時停止と稼働設定読込みで本文なしのID・確定案内だけ保持し、fresh tokenで明示再読。abort前に全状態を更新し、同期本人切替後に旧IDを戻さない。visibility応答不明も同IDの明示GETへつなぎ、PATCH再送・未確認の成功案内をしない。 |
 | Cocolon `tests/piece-v2-preview-display.test.js`・`tests/piece-v2-owner-history.test.js` | 選択形式POSTの一時休止、owner／入力／元キー変更、遅延応答と確定拒否、source競合、同じ詳細の再読・旧操作の失効を検査。失敗／通信中の詳細GETと公開変更ACK後の一時停止・稼働設定読込み、本文なし保持・権限喪失・同期abortの本人切替も既存harnessで検査。 |
 
-STRUCTURE_MAP_DELTA_NONE。新しいowner・route・API・DB・描画版はなく、既存経路内の有限文法共用と明示確認の修復。実結果と検証範囲は[週次レビュー§153](weekly_reviews/Cocolon_Weekly_Review_20261031.md#piece-identity-material-boundaries-20261104)へ。
+STRUCTURE_MAP_DELTA_NONE。新しいowner・route・API・DB・描画版はなく、既存経路内の有限文法共用と明示確認の修復。実結果と検証範囲は[週次レビュー§154](weekly_reviews/Cocolon_Weekly_Review_20261031.md#piece-focal-direct-horizontal-pauses-20261104)へ。
 
 作成モーダル・本人履歴・CMEE本文判定の既存ファイルと新経路の接続は[Piece現行構造](current_structure/02_piece_current_structure.md#piece-format-language-export-20261104)を参照。本番配置・DB移行前の候補。

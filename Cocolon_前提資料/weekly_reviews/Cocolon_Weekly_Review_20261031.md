@@ -3194,3 +3194,29 @@ APIは[0d8b9401](https://github.com/MassyuRed/mashos-api/commit/0d8b94016f0b6a22
 
 差分は製品1・既存test1・前提資料4の計6file、新規repo file0。全体現在地・Piece current map・01Aは関連責務だけを置換更新、本節を履歴とする。STRUCTURE_MAP_DELTA_NONE（既存role binding拒否内の修復、公開API／DTO・DB・renderer・依存・workflow・新owner変更なし）。primary outcomeは限定TECHNICAL_CREDIT。ビルド・配布・本番配置・DB適用・GPU・本人端末操作は0。一般命名活用・人物理解、一般日本語品質、Android通常作成・保存への採用、Photos／Shareの実機確認と正式商品受入れは残る。
 
+
+<a id="piece-focal-direct-horizontal-pauses-20261104"></a>
+## 154. 11/4 — 空白だけで作成できない焦点表現と、直接wishの作者・検査不一致を修復
+
+MashのPiece残件継続指示で§153を引き継ぎ、中断後も同じ作業を再開した。開始点はRN `ed4570db358abcb4d318cb5cfb8c3c275d392214`／API `0d8b94016f0b6a226c5692922332ff8b53cdf8f2`。全機能現在地を全文、恒久incidentを全文、作業姿勢とルール、全体設計・01A/B/Cの地図とPiece current／最新weekly・現物を確認した。System Contextの最新cache未生成に対しては、既定のfresh原本読取を引き継ぎ、索引再構築へ逸れない。分類はOBSERVED_BLOCKER_MINIMAL_FIX、既存設計内のLEVEL_2／Rule18 §0A・§11.3。実装・GitHub反映ownerは華恋、別担当は読取・再現・独立レビューのみ。既存の同じ商品経路で本文作成の拒否原因を解消する。新しい意味型・作者・語彙・公開契約は追加しない。
+
+**焦点／本人評価の対象前gap。** 「私が選びたいのは、陶芸です。」は作成できるが、「私が選びたいのは、 陶芸です。」は空白がobjectへ入り、完成した名詞でもfocal_object_not_self_containedとして拒否されていた。本人評価の「私にとって大切なのは、 家族です。」、過去否定・modal・条件／時点付き・既存「その時間」参照も同じ原因だった。既存FOCUSとEVALUATIVE_FOCUSの「のは＋省略可の読点」の後だけ、space／TAB／全角spaceをseparatorとして読み、object／target captureから外す。原文をstrip／正規化せず、元field・raw nodeとscalar／UTF8根拠、評価／参照／scopeの位置を保持する。
+
+新しいgap armは水平空白の途中で止めず、次の読点を越えない。単純な空白許容で「読点2個＋gap」を追加受理せず、旧no-gap parseは維持する。transitive焦点の旧「読点2個・gapなし」受理と、評価焦点の同入力拒否を今回一律に変えない。「陶 芸」の内部space拒否と「自分の 時間」の内部space保持も維持する。作者が＋空白、他主体、未完の行、一般文法を新たに許す変更ではない。平穏の既存KEEPで一部のcontrolが生成されるため、全modeで一般疑問・他主体等を拒否したとは報告しない。
+
+**直接wishの作者と独立検査の不一致。** 「私は 陶芸を選びたい。」ではEngineが「私は、 陶芸を選びたい。」を生成しても、独立検査は既知のdirect構文で対象前gapをseparatorとして読み、piece_meaning_not_preservedで拒否していた。実ASGI＋隔離SQLの旧source2modeでもpreview422・候補／保存枠0を確認した。唯一作者の既存SOURCE_FIRST_PERSON_TOPICで、既知の直接構文が成立する場合だけ、同じobject／predicate境界を使って「私は、陶芸を選びたい。」へ実現する。意味・plan・duty・形式／宣言適格の判定は変更しない。未知の直接構文は元のtopic作者を使い、「私は 本を読みたい。」等の既存literal、！／!のKEEP優先、対象内部space、過去／否定／modal／条件を維持する。独立検査を緩めて通す変更ではない。
+
+既存saved-original testへ244条件を追加し、最終244成功。同じ最終テストを開始sourceへ固定した227失敗・17成功を、一般日本語の品質率へ換算しない。対象は2mode・2field・3水平gap・省略／既存読点・肯否／時点／scope・参照位置・内部space・余分なseparator／行越えの拒否と、対象／述語時制／主体／終端を改変したartifactの拒否。独立担当も最終244を実行し成功した。初期controlの期待へ華恋が付けた余計な読点と、wireの評価述語期待へ付けた余計な「です」は、旧原文KEEP／既存の空白なし版と正本作者を照合して訂正した。製品の意味判定や既存期待値をそのために変更しない。
+
+独立366入力の焦点比較は168新生成、既存81本文同一、117拒否維持、新拒否0。新168本文は対応する旧空白なし版と全文一致した。direct-wish576入力は生成560・拒否16が前後同じで、生成560の完全source_meaning／plan／形式条件は不変、拒否16も状態を維持。本文なし16を含む528の本文状態は同一、旧独立検査失敗48だけを同じ対象境界の本文へ修復し、検査失敗48→0、対象外変化0。補助32の最終版は18新生成・10本文不変・4対象boundaryの期待本文変化（旧生成nominal前gap2＋direct修復2）。「既存生成本文は全件不変」とは扱わない。成功全件で独立本文検査とfield／evidence、評価／参照／scopeのscalar↔UTF8を照合し、最終3source差分の未解決blocking指摘は0。合成条件の局所結果で、商品受入れ・一般日本語品質の成功率ではない。
+
+新しい8例×3plan×平穏／自己理解の実ASGI＋隔離PGlite48条件、計204通信が成功。正常36条件はpreview・同key再読・save・同keysave再試行・本人GETまで本文・3hash・recipe・rendererが一致、保存枠消費各1回。拒否12条件は同key2回とも422／閉じたPIECE_SOURCE_NOT_ELIGIBLEで、本人別Piece全row・枠消費・月lockが前後同一、候補発行／審査／prepare後のprovider追加呼出し0。prepare自体のEmlis provider1回を追加0へ混同しない。旧direct sourceの2通信は別比較で、最終204へ上乗せしない。Auth／providerは合成、live SQLやnative描画・実端末の確認ではない。
+
+最終API広域104fileは9,862成功・既存161失敗・error0・native17除外。§153の失敗identity集合と完全一致し、新規失敗0。最終source／testのbytes不変を確認した。途中のfocal単独広域9,784成功、局所120／166、初回wireの期待誤り6失敗等を最終成功へ合算しない。対象244・独立366／576／補助32・ASGI48も広域へ上乗せしない。RN製品／testは変更しておらず、過去のRN成功件数を今回の新規検証へ流用しない。
+
+配色・形式・保存後描画も独立調査し、API/RNの12組全color token一致、previewとsaved owner recordの描画入力144条件一致、実UI/controllerで12回の配色→形式切替とPATCH commit／ACK消失後の元POST明示回収1条件を確認した。この範囲で新規bugは再現せず、仮説だけの製品変更は0。native描画・PNG・Photos／Shareの成功へ拡張しない。
+
+APIは[663a0465](https://github.com/MassyuRed/mashos-api/commit/663a046580e3f38227f229ca7b9030f2381d8c3f)へ反映。全4fileの全文・blob・変更集合・親commitを読戻し一致確認。検証原本は[Cocolon_Piece_20261104_pause_generation_validation.zip](https://chatgpt.com/library?file_id=libfile_511e31acaa8c81918724d317a08dcf58&account_id=personal)（83member、594,725bytes、SHA256 `982cf2119ca054fd46718ac3372cb5f77e980088c4f5e5e86bd525a4857610d4`）。最終広域XML・旧失敗集合、同一新testの前後、独立本文・意味比較、全wireと再現runner・source/test hash・GitHub読戻しを保存。製品sourceの複製は含めず、原本へ戻れる参照を保持した。
+
+差分は製品3・既存test1・前提資料4の計8file、新規repo file0。全体現在地・Piece current map・01Aは関連責務の置換更新、本節を履歴とする。STRUCTURE_MAP_DELTA_NONE（既存構文のseparatorと唯一作者／独立検査の整合修復、新owner・公開API／DTO・DB・renderer・依存・workflow変更なし）。primary outcomeは限定TECHNICAL_CREDIT。ビルド・配布・本番配置・DB適用・GPU・本人端末操作は0。一般日本語品質、Android通常作成・保存、Photos／Shareの実機確認と正式商品受入れは残る。
+
