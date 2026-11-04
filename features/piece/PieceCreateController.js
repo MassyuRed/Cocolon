@@ -59,6 +59,7 @@ export function createPieceCreateController(configuration = {}) {
   let cancelCode = null;
   let saveEnabled = false;
   let saveIntent = null;
+  let saveRecoveryEntry = null;
   let savePhase = null;
   let saveCode = null;
   let savedReceipt = null;
@@ -99,6 +100,7 @@ export function createPieceCreateController(configuration = {}) {
     formatNotice = null;
     if (!keepSave) {
       saveIntent = null;
+      saveRecoveryEntry = null;
       savePhase = null;
       saveCode = null;
       savedReceipt = null;
@@ -126,15 +128,19 @@ export function createPieceCreateController(configuration = {}) {
       expectedUserId: operation?.expectedUserId,
       nowMs: clock(),
     });
-    if (!disposed && enabled && boundaryCode) {
+    const saveBlocked = savePhase === 'unavailable' && saveRecoveryEntry &&
+      !canResumeSharedSave(saveEnabled);
+    const visibleBoundary = boundaryCode || (saveBlocked ? 'PIECE_FEATURE_DISABLED' : null);
+    if (!disposed && enabled && visibleBoundary) {
       return Object.freeze({ ...view, phase: 'unavailable', preview: null,
         ...(saveIntent ? { loadingKind: 'save', retryKind: 'save' } : {}),
-        message: new PieceApiError(boundaryCode).message, canRetry: false });
+        message: new PieceApiError(visibleBoundary).message, canRetry: false });
     }
     if (!disposed && enabled && saveIntent) {
       return Object.freeze({ ...view, phase: savePhase, preview: null,
         loadingKind: 'save', retryKind: 'save', savedReceipt,
-        canRetry: saveEnabled && savePhase === 'unavailable' && saveCode === 'PIECE_TEMPORARILY_UNAVAILABLE',
+        canRetry: saveEnabled && savePhase === 'unavailable' && saveCode === 'PIECE_TEMPORARILY_UNAVAILABLE' &&
+          canResumeSharedSave(saveEnabled),
         message: savePhase === 'saved' ? 'Pieceを保存しました。' :
           saveCode === 'PIECE_TEMPORARILY_UNAVAILABLE'
             ? '保存結果を確認できませんでした。同じ保存要求で結果を確認できます。'
@@ -173,7 +179,7 @@ export function createPieceCreateController(configuration = {}) {
     const saveFlagChanged = saveEnabled !== nextSaveEnabled;
     saveEnabled = nextSaveEnabled;
     // Revoke before abort: a synchronous abort listener may call retry().
-    if (saveFlagChanged && !saveEnabled && saveIntent) clearAttempt(false, true);
+    if (saveFlagChanged && !saveEnabled && saveIntent) clearAttempt(false, true, true);
     if (value?.enabled !== true) {
       enabled = false;
       contextOperation = null;
@@ -397,6 +403,11 @@ export function createPieceCreateController(configuration = {}) {
     await run(begun);
   }
 
+  function enterExpired(captured, error) {
+    const expired = beginPiecePreview(state, captured.request, { ...captured, enabled: true });
+    state = failPiecePreview(expired.state, expired.ticket, error, { expectedUserId: captured.expectedUserId });
+  }
+
   function selectedPreview(identity, displayToken) {
     if (!displayToken || displayToken !== state.ticket) return null;
     const display = readPiecePreviewDisplay(getView(), clock());
@@ -523,7 +534,13 @@ export function createPieceCreateController(configuration = {}) {
       if (!isCurrent()) return;
       cancelPhase = 'unavailable';
       cancelCode = error instanceof PieceApiError ? error.code : 'PIECE_TEMPORARILY_UNAVAILABLE';
-      if (cancelCode === 'PIECE_AUTH_REQUIRED') {
+      if (cancelCode === 'PIECE_PREVIEW_EXPIRED') {
+        // Cancel replay succeeds before the RPC checks a draft's expiry.
+        enterExpired(captured, error);
+        cancelIntent = null;
+        cancelPhase = null;
+        cancelCode = null;
+      } else if (cancelCode === 'PIECE_AUTH_REQUIRED') {
         operation = null;
         boundaryCode = cancelCode;
         cancelIntent = null;
@@ -569,17 +586,73 @@ export function createPieceCreateController(configuration = {}) {
     if (disposed || !enabled || !saveEnabled || operation !== captured || boundaryCode || active ||
         saveIntent || cancelIntent || visualRecovery || state.ticket !== displayToken ||
         readPiecePreviewDisplay(getView(), clock()).phase !== 'received') return;
-    saveIntent = Object.freeze({ idempotencyKey, request: Object.freeze({
+    const intent = Object.freeze({ idempotencyKey, request: Object.freeze({
       preview_id: preview.preview_id, expected_preview_revision: preview.preview_revision,
       piece_text_hash: preview.piece_text_hash, content_payload_hash: preview.content_payload_hash,
       visual_recipe_hash: preview.visual_recipe_hash, visibility_scope: 'private',
     }) });
+    const store = configuration.getSaveRecovery?.();
+    if (store) {
+      const entry = Object.freeze({ operation: captured, intent,
+        visualSelection: Object.freeze(selectedVisual(preview.visual_recipe)) });
+      if (!store.remember(entry)) {
+        restoreSaveRecovery({ expectedUserId: captured.expectedUserId,
+          savedInputId: captured.request.source_ref.source_input_id,
+          idempotencyKey: contextOperation.idempotencyKey, saveEnabled });
+        return;
+      }
+      saveRecoveryEntry = { store, entry };
+    }
+    saveIntent = intent;
     await runSave();
+  }
+
+  function restoreSaveRecovery({ savedInputId, expectedUserId, idempotencyKey, saveEnabled: allowSave }) {
+    if (disposed || saveIntent || cancelIntent) return false;
+    const store = configuration.getSaveRecovery?.();
+    const entry = store?.find(expectedUserId, savedInputId);
+    if (!entry) return false;
+    const captured = entry.operation;
+    const binding = preparePiecePreviewRequest(captured.request, { expectedUserId, idempotencyKey });
+    enabled = false;
+    contextOperation = null;
+    operation = null;
+    clearAttempt();
+    contextOperation = binding;
+    operation = captured;
+    enabled = true;
+    saveEnabled = allowSave === true;
+    lastDisplaySettings = { operation, selection: entry.visualSelection };
+    saveRecoveryEntry = { store, entry };
+    boundaryCode = canResumeSharedSave(saveEnabled) ? null : 'PIECE_FEATURE_DISABLED';
+    saveIntent = entry.intent;
+    savePhase = 'unavailable';
+    saveCode = boundaryCode || 'PIECE_TEMPORARILY_UNAVAILABLE';
+    notify();
+    return true;
+  }
+
+  function forgetSaveRecovery() {
+    if (saveRecoveryEntry) saveRecoveryEntry.store.forget(saveRecoveryEntry.entry);
+    saveRecoveryEntry = null;
+  }
+
+  function canResumeSharedSave(eligible, runtimeRefresh = false) {
+    return !saveRecoveryEntry || saveRecoveryEntry.store.canResume(saveRecoveryEntry.entry,
+      configuration.getRuntimePublication?.(), eligible, runtimeRefresh);
   }
 
   async function runSave() {
     if (active || !saveIntent || !saveEnabled) return;
+    if (!canResumeSharedSave(saveEnabled)) {
+      boundaryCode = 'PIECE_FEATURE_DISABLED';
+      savePhase = 'unavailable';
+      saveCode = boundaryCode;
+      notify();
+      return;
+    }
     const intent = saveIntent, captured = operation;
+    const runtime = configuration.getRuntimePublication?.();
     // No private body or renderer object is retained by the retry intent.
     state = closePiecePreview();
     visualUpdated = false;
@@ -599,18 +672,22 @@ export function createPieceCreateController(configuration = {}) {
       const result = await requestPieceSave(intent.request, { expectedUserId: captured.expectedUserId,
         idempotencyKey: intent.idempotencyKey, signal: abort.signal });
       if (!isCurrent()) return;
+      forgetSaveRecovery();
       savedReceipt = result;
       savePhase = 'saved';
     } catch (error) {
       if (!isCurrent()) return;
       saveCode = error instanceof PieceApiError ? error.code : 'PIECE_TEMPORARILY_UNAVAILABLE';
+      if (saveCode === 'PIECE_FEATURE_DISABLED' && saveRecoveryEntry) {
+        saveRecoveryEntry.store.markDisabled(saveRecoveryEntry.entry, runtime);
+      }
+      if (!['PIECE_TEMPORARILY_UNAVAILABLE', 'PIECE_FEATURE_DISABLED', 'PIECE_AUTH_REQUIRED'].includes(saveCode)) {
+        forgetSaveRecovery();
+      }
       if (saveCode === 'PIECE_PREVIEW_EXPIRED') {
         // The save API checks committed same-key replay before expiry. This
         // result releases the save intent and keeps only the create request.
-        const expired = beginPiecePreview(state, captured.request, { ...captured, enabled: true });
-        state = failPiecePreview(expired.state, expired.ticket, error, {
-          expectedUserId: captured.expectedUserId,
-        });
+        enterExpired(captured, error);
         saveIntent = null;
         savePhase = null;
         saveCode = null;
@@ -636,7 +713,7 @@ export function createPieceCreateController(configuration = {}) {
   function setCancellationEnabled(value) {
     if (disposed || !cancelIntent || !operation || boundaryCode) return false;
     enabled = value === true;
-    clearAttempt(true);
+    clearAttempt(true, false, true);
     notify();
     return true;
   }
@@ -668,13 +745,14 @@ export function createPieceCreateController(configuration = {}) {
       notify();
       return true;
     }
-    if (boundaryCode === 'PIECE_FEATURE_DISABLED' && value?.runtimeRefresh === true && nextSaveEnabled) {
+    if (boundaryCode === 'PIECE_FEATURE_DISABLED' && value?.runtimeRefresh === true && nextSaveEnabled &&
+        canResumeSharedSave(nextSaveEnabled, true)) {
       boundaryCode = null;
       saveCode = 'PIECE_TEMPORARILY_UNAVAILABLE';
     }
     enabled = nextEnabled;
     saveEnabled = nextSaveEnabled;
-    clearAttempt(false, true);
+    clearAttempt(false, true, true);
     notify();
     return true;
   }
@@ -714,6 +792,6 @@ export function createPieceCreateController(configuration = {}) {
     clearAttempt();
   }
 
-  return Object.freeze({ setContext, getView, start, retry, restartExpired, changeVisual, changeFormat, returnToFormat, cancelPreview, savePreview, setCancellationEnabled, setSaveAvailability, close, subscribe, refresh, dispose });
+  return Object.freeze({ setContext, getView, start, retry, restartExpired, changeVisual, changeFormat, returnToFormat, cancelPreview, savePreview, restoreSaveRecovery, setCancellationEnabled, setSaveAvailability, close, subscribe, refresh, dispose });
 }
 

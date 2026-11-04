@@ -10,12 +10,15 @@ import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.style.MetricAffectingSpan;
 import android.text.style.ReplacementSpan;
+import android.util.Base64;
 import android.view.View;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.*;
 import com.facebook.react.uimanager.UIManagerModule;
 import com.facebook.react.uimanager.ViewManager;
 import com.facebook.react.views.text.ReactTextView;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
@@ -88,25 +91,34 @@ public final class PieceTextMetricsModule extends ReactContextBaseJavaModule {
             for (int end = iterator.next(); end != BreakIterator.DONE; end = iterator.next()) offsets.add(end);
             int n = offsets.size() - 1;
             if (n < 1 || n > 420) { unavailable(promise); return; }
-            WritableArray boundaries = Arguments.createArray(), rows = Arguments.createArray();
+            WritableArray boundaries = Arguments.createArray();
             for (int offset : offsets) boundaries.pushInt(offset);
             for (int i = 0; i < n; i++) {
               if (!paint.hasGlyph(expected.substring(offsets.get(i), offsets.get(i + 1)))) { unavailable(promise); return; }
             }
+            // The existing v2 decoder expects seven Float64 values per
+            // ordered range. Keep the measurement arithmetic unchanged and
+            // avoid allocating a bridged array for every substring.
+            int rowCount = n * (n + 1) / 2;
+            ByteBuffer rows = ByteBuffer.allocate(rowCount * 7 * Double.BYTES).order(ByteOrder.LITTLE_ENDIAN);
             Rect ink = new Rect();
             for (int start = 0; start < n; start++) for (int end = start + 1; end <= n; end++) {
               if (Thread.currentThread().isInterrupted() || SystemClock.uptimeMillis() >= deadline) { unavailable(promise); return; }
               String part = expected.substring(offsets.get(start), offsets.get(end));
               double advance = Layout.getDesiredWidth(part, paint) / density;
               paint.getTextBounds(part, 0, part.length(), ink);
-              WritableArray row = Arguments.createArray(); row.pushInt(start); row.pushInt(end);
-              row.pushDouble(advance); row.pushDouble(ink.left / (double) density); row.pushDouble(ink.top / (double) density);
-              row.pushDouble(ink.right / (double) density); row.pushDouble(ink.bottom / (double) density); rows.pushArray(row);
+              rows.putDouble(start).putDouble(end).putDouble(advance);
+              rows.putDouble(ink.left / (double) density).putDouble(ink.top / (double) density);
+              rows.putDouble(ink.right / (double) density).putDouble(ink.bottom / (double) density);
             }
+            if (Thread.currentThread().isInterrupted() || SystemClock.uptimeMillis() >= deadline) { unavailable(promise); return; }
+            String packedRows = Base64.encodeToString(rows.array(), Base64.NO_WRAP);
+            if (Thread.currentThread().isInterrupted() || SystemClock.uptimeMillis() >= deadline) { unavailable(promise); return; }
             WritableMap result = Arguments.createMap();
-            result.putString("version", "piece.native_candidates.v1"); result.putString("platform", "android");
+            result.putString("version", "piece.native_candidates.v2"); result.putString("platform", "android");
             result.putDouble("font_size", expectedSize); result.putInt("utf16_length", expected.length());
-            result.putArray("boundaries", boundaries); result.putArray("rows", rows); result.putString("glyph_check", "no_missing_observed");
+            result.putArray("boundaries", boundaries); result.putString("rows_f64le", packedRows);
+            result.putString("glyph_check", "no_missing_observed");
             promise.resolve(result);
           } catch (RuntimeException | OutOfMemoryError error) { unavailable(promise); }
         });

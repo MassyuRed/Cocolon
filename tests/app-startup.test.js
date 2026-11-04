@@ -29,31 +29,46 @@ const no = () => {};
 const forever = () => new Promise(()=>{});
 
 test('startup covers the mounted home until subscription I/O and home/draft settle, then preserves drafts on refresh', async t => {
-  let mounts=0, readyHome, setDraft;
+  let mounts=0, readyHome, setDraft, owner='A';
   function Input(props) {
     const [draft,update]=React.useState(''); setDraft=update;
     readyHome=()=>props.onInitialInputSettled('A');
     React.useEffect(()=>{mounts++;},[]);
-    return React.createElement('Input',{draft,ready:props.appStartupReady});
+    return React.createElement('Input',{draft,ready:props.appStartupReady,saveRecovery:props.saveRecovery});
   }
   const subscription={tier:'plus',isPaid:true,loading:false,subscriptionBootstrapLoaded:true,subscriptionBootstrapLoading:true};
   const tutorial={isTutorialMode:false,tutorialFlagsLoaded:true,tutorialCompleted:true};
   const unread={getScopeUnread:no,getFeatureUnread:no,setUnread:no,setUnreadGroup:no,getPrefetchEntryFresh:no,setPrefetch:no,applyStartupSnapshot:no};
-  function Navigator(props){return React.createElement('Navigator',props,React.Children.toArray(props.children)[0]);}
+  function Navigator(props){return React.createElement('Navigator',props,React.Children.toArray(props.children)
+    .filter(screen => ['Input', 'Piece'].includes(screen.props.name)));}
   const Screen=props=>typeof props.children==='function'?props.children({}):null;
+  function loadStack(file, screen) {
+    const screenMocks = Object.fromEntries(Array.from(fs.readFileSync(path.join(ROOT, file), 'utf8')
+      .matchAll(/from ["'](\.\.\/screens\/[^"']+)["']/g), match => [match[1], () => null]));
+    return load(file, { ...screenMocks, ...screen, '@react-navigation/native-stack': { createNativeStackNavigator: () => ({
+      Navigator: ({ children }) => React.Children.toArray(children).find(child => ['Input', 'PieceCreate'].includes(child.props.name)),
+      Screen,
+    }) } }).default;
+  }
+  const InputStack = loadStack('navigation/InputStackNavigator.js', { '../screens/InputScreen': Input });
+  const PieceStack = loadStack('navigation/PieceStackNavigator.js', {
+    '../screens/PieceCreateScreen': props => React.createElement('Piece', { saveRecovery: props.saveRecovery }),
+  });
   const Main=load('navigation/MainTabs.js',{
     'react-native':native,'react-native-vector-icons/Ionicons':()=>null,
     '@react-navigation/native':{StackActions:{popToTop:no}},
     '@react-navigation/bottom-tabs':{createBottomTabNavigator:()=>({Navigator,Screen}),BottomTabBar:()=>null},
     '@react-native-async-storage/async-storage':{getItem:forever,setItem:forever},
-    '../AuthContext':{useAuth:()=>({session:{user:{id:'A'}}})},'../UnreadContext':{useUnread:()=>unread},
+    '../AuthContext':{useAuth:()=>({session:{user:{id:owner}}})},'../UnreadContext':{useUnread:()=>unread},
     '../SubscriptionContext':{useSubscription:()=>subscription},'../TutorialContext':{useTutorial:()=>tutorial},
     '../theme/ThemeContext':{useTheme:()=>theme},'../lib/supabase':{supabase:{auth:{getUser:forever,getSession:forever}}},
     '../lib/user':{getCurrentUserId:forever},'../lib/apiClient':{apiFetch:forever,apiGet:forever,apiPost:forever},
     '../lib/nexusApi':{getNexusPiecesAsQnaList:forever},'../components/UnreadBadge':{BottomTabUnreadBadge:()=>null},
     '../components/GlobalFrameLayout':({children})=>React.createElement('Frame',null,children),
     './navigationRef':{navigationRef:{isReady:()=>false},buildAnalysisRootNavigationParams:no},
-    './InputStackNavigator':Input,'./AnalysisStackNavigator':()=>null,'./PieceStackNavigator':()=>null,'./SettingsStackNavigator':()=>null,
+    './InputStackNavigator':InputStack,'./AnalysisStackNavigator':()=>null,
+    './PieceStackNavigator':PieceStack,
+    './SettingsStackNavigator':()=>null,
     '../runtime/AppStartupLoadingView':()=>React.createElement('Loading'),
   }).default;
   let root;await act(async()=>{root=Renderer.create(React.createElement(Main));});t.after(()=>act(async()=>root.unmount()));
@@ -68,6 +83,16 @@ test('startup covers the mounted home until subscription I/O and home/draft sett
   await act(async()=>root.update(React.createElement(Main)));
   assert.equal(root.root.findAllByType('Loading').length,0,'foreground refresh must not restore full startup gate');
   assert.equal(mounts,1);
+  const recovery = root.root.findByType('Input').props.saveRecovery;
+  assert.equal(root.root.findByType('Piece').props.saveRecovery, recovery);
+  const entry = { operation: { expectedUserId: 'A', request: { source_ref: { source_input_id: 'source' } } } };
+  assert.equal(recovery.remember(entry), true);
+  owner = 'B'; await act(async () => root.update(React.createElement(Main)));
+  const replacement = root.root.findByType('Input').props.saveRecovery;
+  assert.notEqual(replacement, recovery);
+  assert.equal(root.root.findByType('Piece').props.saveRecovery, replacement);
+  assert.equal(recovery.find('A', 'source'), undefined);
+  assert.equal(recovery.remember(entry), false);
 });
 
 test('home initial read settles on failure, can retry, and ignores requests from a previous owner', async t => {

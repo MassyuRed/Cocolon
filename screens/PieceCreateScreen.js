@@ -12,7 +12,7 @@ import { isPieceBitmapSaveAdmitted, supportsPieceBitmapCreation } from '../featu
 
 // Navigation contains only the saved ID, expected owner and opaque request key.
 // The saved-source API remains authoritative; no response text is Piece input.
-export default function PieceCreateScreen({ route, navigation }) {
+export default function PieceCreateScreen({ route, navigation, saveRecovery }) {
   const { session } = useAuth();
   const { colors } = useTheme();
   const { isTutorialMode } = useTutorial();
@@ -42,7 +42,7 @@ export default function PieceCreateScreen({ route, navigation }) {
     <ScrollView contentContainerStyle={styles.content}>
       {/* Keep same-request save/cancel recovery through runtime/focus changes. */}
       {bound && creationSupported ? <InputPieceActionArea ref={host} savedInput={savedInput}
-        navigation={navigation} active={active} creationMode
+        navigation={navigation} active={active} creationMode saveRecovery={saveRecovery}
         isSaveAdmitted={isPieceBitmapSaveAdmitted} />
         : <Text accessibilityRole="alert" style={{ color: colors.TEXT_ON_LIGHT }}>
           {bound ? 'この端末ではピースの画像を作成できません。' : '現在、この記録からピースを作成できません。'}

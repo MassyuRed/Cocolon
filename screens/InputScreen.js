@@ -140,7 +140,7 @@ function buildSavedPieceInput(savedInputId, expectedUserId) {
  * Home（InputScreen）
  * - 背景・パネル・ボタンなどを ThemeContext から取得
  */
-export default function InputScreen({ navigation, route, onInitialInputSettled, appStartupReady = true }) {
+export default function InputScreen({ navigation, route, onInitialInputSettled, appStartupReady = true, saveRecovery }) {
   const { colors, themeName } = useTheme();
   const { setUnread } = useUnread();
   const { session } = useAuth();
@@ -1513,7 +1513,7 @@ ${String(error?.message || error)}`
                 <View testID="piece-saved-input-entry" style={showSavedPieceInput ? styles.section : undefined}>
                   {showSavedPieceInput ? <Text style={styles.sectionLabel}>直前に保存した入力</Text> : null}
                   <InputPieceActionArea savedInput={savedPieceInput.savedInput} navigation={navigation}
-                    isSaveAdmitted={isPieceBitmapSaveAdmitted} />
+                    saveRecovery={saveRecovery} isSaveAdmitted={isPieceBitmapSaveAdmitted} />
                 </View>
               ) : null}
 

@@ -3620,3 +3620,15 @@ RN layoutのbrandingTextが表示・計測・文字数照合を統一し、nativ
 | `pieceRenderer.js` → `PieceCreateScreen`・入力／記録の作成入口 | 現端末に既存iOS bitmap用ブリッジが揃っている場合だけ作成を開始。本人履歴のアクセスと既存保存画像の扱いは従来の判定を使う。 |
 
 既存のRN画面、API、SQLを使用。新規Android描画の採用、実機の写真保存・外部共有、配布と本番適用は別の残件。検証結果は[週次レビュー§142](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#piece-recovery-language-20261104)。
+
+<a id="piece-navigation-android-language-20261104"></a>
+## 2026-11-04 — 作成画面の再入場、Android既存描画と本文の追加対応
+
+| 既存経路 | 差分 |
+|---|---|
+| `MainTabs` → 入力の作成入口／`PieceCreateScreen` → `InputPieceActionArea` → `PieceCreateController` | 画面を離れても、同じアカウント・保存入力の結果不明な保存は、元の要求とキーで明示的に確認できる。同じ要求を確認できる場合は新しい作成を自動開始しない。サーバーからの保存停止は新しい稼働設定で保存が許可されるまで引き継ぐ。原文・画像は保持せず、アカウントが変われば確認情報を破棄する。期限切れが確定した保存・取消では最後の画像設定から作り直す。 |
+| Android `PieceTextMetricsModule.java` → `pieceRenderer.js` → B9 | 保存済み画像の折り返し計測を既存の一括形式で返す。全候補の順序、計測値、文字検査、旧描画版を保持。420文字の上限では候補88,410個を個別のブリッジ配列にしない。 |
+| Android `react-native-view-shot` patch → `pieceExport.js` | Pieceの一時PNGは対象view解決と作業開始の後に作る。描画・圧縮・ファイル書き込み・通知が失敗した場合は、その処理で作ったファイルを削除する。成功したファイルは既存の保存／共有経路へ渡す。 |
+| `piece_v2_generation.py` → `piece_v2_content_policy.py` | 「始めました／始めませんでした」と、既知の動詞の前に明記された一部の日付表現を追加。条件付きの比喩など、CMEEが採用した明示主語・述語・条件を独立検査でも原文に照合する。条件の差替え、主語の削除、述語の差替えは拒否する。 |
+
+Androidの新規画像作成は引き続き別残件。既存のAndroid文字検査は配置前の各行、既存の書き出しは端末の画素密度で全体を描いてから縮小する。新規作成の候補には、配置後の検査と同じ描画を固定寸法で出力する経路が必要。旧版の保存画像には保存時の版を使用する。検証と今回の反映範囲は[週次レビュー§143](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#piece-navigation-android-language-20261104)。

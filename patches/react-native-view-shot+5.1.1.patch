@@ -1,5 +1,5 @@
 diff --git a/node_modules/react-native-view-shot/android/src/main/java/fr/greweb/reactnativeviewshot/RNViewShotModule.java b/node_modules/react-native-view-shot/android/src/main/java/fr/greweb/reactnativeviewshot/RNViewShotModule.java
-index 36e7cd6..8c81c19 100644
+index 36e7cd6..a34d3c5 100644
 --- a/node_modules/react-native-view-shot/android/src/main/java/fr/greweb/reactnativeviewshot/RNViewShotModule.java
 +++ b/node_modules/react-native-view-shot/android/src/main/java/fr/greweb/reactnativeviewshot/RNViewShotModule.java
 @@ -58,6 +58,14 @@ public class RNViewShotModule extends NativeRNViewShotSpec {
@@ -17,24 +17,131 @@ index 36e7cd6..8c81c19 100644
          if (parent.equals(reactContext.getExternalCacheDir()) || parent.equals(reactContext.getCacheDir())) {
              file.delete();
          }
-@@ -90,7 +98,15 @@ public class RNViewShotModule extends NativeRNViewShotSpec {
+@@ -89,14 +97,24 @@ public class RNViewShotModule extends NativeRNViewShotSpec {
+
          try {
              File outputFile = null;
++            File pieceOutputDirectory = null;
              if (Results.TEMP_FILE.equals(resultStreamFormat)) {
 -                outputFile = createTempFile(getReactApplicationContext(), extension, fileName);
 +                if (options.hasKey("cocolonPieceCache") && options.getBoolean("cocolonPieceCache")) {
-+                    File pieceCache = new File(context.getCacheDir(), "piece-capture");
-+                    if (!pieceCache.isDirectory() && !pieceCache.mkdirs()) {
-+                        throw new IOException("Cannot create Piece capture directory");
++                    if (imageFormat != Formats.PNG) {
++                        throw new IOException("Piece capture requires PNG");
 +                    }
-+                    outputFile = File.createTempFile("piece-", "." + extension, pieceCache);
++                    // Allocate after view resolution and dispatch. An abandoned
++                    // UI block has no private temporary file to leave behind.
++                    pieceOutputDirectory = new File(context.getCacheDir(), "piece-capture");
 +                } else {
 +                    outputFile = createTempFile(getReactApplicationContext(), extension, fileName);
 +                }
              }
- 
+
              final Activity activity = getCurrentActivity();
+             ViewShot uiBlock = new ViewShot(
+                     tag, extension, imageFormat, quality,
+-                    scaleWidth, scaleHeight, outputFile, resultStreamFormat,
++                    scaleWidth, scaleHeight, outputFile, pieceOutputDirectory, resultStreamFormat,
+                     snapshotContentContainer, reactContext, activity, handleGLSurfaceView, promise, executor
+             );
+
+diff --git a/node_modules/react-native-view-shot/android/src/main/java/fr/greweb/reactnativeviewshot/ViewShot.java b/node_modules/react-native-view-shot/android/src/main/java/fr/greweb/reactnativeviewshot/ViewShot.java
+index bd309a6..3b123f4 100644
+--- a/node_modules/react-native-view-shot/android/src/main/java/fr/greweb/reactnativeviewshot/ViewShot.java
++++ b/node_modules/react-native-view-shot/android/src/main/java/fr/greweb/reactnativeviewshot/ViewShot.java
+@@ -151,6 +151,7 @@ public class ViewShot implements UIBlock, com.facebook.react.fabric.interop.UIBl
+     private final Integer width;
+     private final Integer height;
+     private final File output;
++    private final File pieceOutputDirectory;
+     @Results
+     private final String result;
+     private final Promise promise;
+@@ -172,6 +173,7 @@ public class ViewShot implements UIBlock, com.facebook.react.fabric.interop.UIBl
+             @Nullable Integer width,
+             @Nullable Integer height,
+             final File output,
++            @Nullable final File pieceOutputDirectory,
+             @Results final String result,
+             final Boolean snapshotContentContainer,
+             final ReactApplicationContext reactContext,
+@@ -186,6 +188,7 @@ public class ViewShot implements UIBlock, com.facebook.react.fabric.interop.UIBl
+         this.width = width;
+         this.height = height;
+         this.output = output;
++        this.pieceOutputDirectory = pieceOutputDirectory;
+         this.result = result;
+         this.snapshotContentContainer = snapshotContentContainer;
+         this.reactContext = reactContext;
+@@ -238,7 +241,7 @@ public class ViewShot implements UIBlock, com.facebook.react.fabric.interop.UIBl
+             return;
+         }
+
+-        executor.execute(new Runnable () {
++        final Runnable capture = new Runnable () {
+             @Override
+             public void run() {
+                 try {
+@@ -262,16 +265,45 @@ public class ViewShot implements UIBlock, com.facebook.react.fabric.interop.UIBl
+                         "Failed to capture view snapshot: " + detail, ex);
+                 }
+             }
+-        });
++        };
++        try {
++            executor.execute(capture);
++        } catch (RuntimeException | Error failure) {
++            if (pieceOutputDirectory == null) throw failure;
++            promise.reject(ERROR_UNABLE_TO_SNAPSHOT, "Failed to schedule Piece capture");
++        }
+     }
+
+     private void saveToTempFileOnDevice(@NonNull final View view) throws IOException {
++        if (pieceOutputDirectory != null) {
++            savePieceTempFileOnDevice(view);
++            return;
++        }
+         final FileOutputStream fos = new FileOutputStream(output);
+         captureView(view, fos);
+
+         promise.resolve(Uri.fromFile(output).toString());
+     }
+
++    private void savePieceTempFileOnDevice(@NonNull final View view) throws IOException {
++        if (!pieceOutputDirectory.isDirectory() && !pieceOutputDirectory.mkdirs()
++                && !pieceOutputDirectory.isDirectory()) {
++            throw new IOException("Cannot create Piece capture directory");
++        }
++        final File pieceFile = File.createTempFile("piece-", ".png", pieceOutputDirectory);
++        boolean delivered = false;
++        try {
++            // captureView closes the stream before handing the file to JS.
++            captureView(view, new FileOutputStream(pieceFile));
++            promise.resolve(Uri.fromFile(pieceFile).toString());
++            delivered = true;
++        } finally {
++            if (!delivered) {
++                try { pieceFile.delete(); } catch (SecurityException ignored) { }
++            }
++        }
++    }
++
+     private void saveToRawFileOnDevice(@NonNull final View view) throws IOException {
+         final String uri = Uri.fromFile(output).toString();
+
+@@ -817,7 +849,10 @@ public class ViewShot implements UIBlock, com.facebook.react.fabric.interop.UIBl
+             } else {
+                 final Bitmap.CompressFormat cf = Formats.mapping[this.format];
+
+-                bitmap.compress(cf, (int) (100.0 * quality), os);
++                final boolean compressed = bitmap.compress(cf, (int) (100.0 * quality), os);
++                if (pieceOutputDirectory != null && !compressed) {
++                    throw new IllegalStateException("Cannot encode Piece capture");
++                }
+             }
+
+             return resolution; // return image width and height
 diff --git a/node_modules/react-native-view-shot/ios/RNViewShot.mm b/node_modules/react-native-view-shot/ios/RNViewShot.mm
+index 11540df..5f965fa 100644
 --- a/node_modules/react-native-view-shot/ios/RNViewShot.mm
 +++ b/node_modules/react-native-view-shot/ios/RNViewShot.mm
 @@ -14,6 +14,21 @@
@@ -59,7 +166,7 @@ diff --git a/node_modules/react-native-view-shot/ios/RNViewShot.mm b/node_module
  @implementation RNViewShot
  
  RCT_EXPORT_MODULE()
-@@ -34,6 +49,12 @@
+@@ -34,6 +49,12 @@ RCT_EXPORT_METHOD(captureScreen: (NSDictionary *)options
  
  RCT_EXPORT_METHOD(releaseCapture:(nonnull NSString *)uri)
  {
@@ -72,7 +179,7 @@ diff --git a/node_modules/react-native-view-shot/ios/RNViewShot.mm b/node_module
    NSString *directory = [NSTemporaryDirectory() stringByAppendingPathComponent:@"ReactNative"];
    // Ensure it's a valid file in the tmp directory
    if ([uri hasPrefix:directory] && ![uri isEqualToString:directory]) {
-@@ -134,9 +155,29 @@
+@@ -134,9 +155,29 @@ RCT_EXPORT_METHOD(captureRef:(nonnull NSNumber *)target
        scrollView.frame = CGRectMake(0, 0, scrollView.contentSize.width, scrollView.contentSize.height);
      }
  
@@ -103,7 +210,7 @@ diff --git a/node_modules/react-native-view-shot/ios/RNViewShot.mm b/node_module
  
      UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:size format:rendererFormat];
  
-@@ -158,6 +199,16 @@
+@@ -158,6 +199,16 @@ RCT_EXPORT_METHOD(captureRef:(nonnull NSNumber *)target
        scrollView.frame = savedFrame;
      }
  
@@ -120,7 +227,7 @@ diff --git a/node_modules/react-native-view-shot/ios/RNViewShot.mm b/node_module
      if (!success) {
        reject(RCTErrorUnspecified, @"The view cannot be captured. drawViewHierarchyInRect was not successful. This is a potential technical or security limitation.", nil);
        return;
-@@ -194,7 +245,15 @@
+@@ -194,7 +245,15 @@ RCT_EXPORT_METHOD(captureRef:(nonnull NSNumber *)target
        }
        else {
          // Save to a temp file
@@ -138,7 +245,7 @@ diff --git a/node_modules/react-native-view-shot/ios/RNViewShot.mm b/node_module
            if ([data writeToFile:path options:(NSDataWritingOptions)0 error:&error]) {
              res = path;
 diff --git a/node_modules/react-native-view-shot/lib/index.d.ts b/node_modules/react-native-view-shot/lib/index.d.ts
-index 8dcef00..8ce8fac 100644
+index 8dcef00..e8f9ec8 100644
 --- a/node_modules/react-native-view-shot/lib/index.d.ts
 +++ b/node_modules/react-native-view-shot/lib/index.d.ts
 @@ -1,6 +1,10 @@
@@ -153,7 +260,7 @@ index 8dcef00..8ce8fac 100644
       * (Android only) the file name of the file. Must be at least 3 characters long.
       */
 diff --git a/node_modules/react-native-view-shot/src/index.tsx b/node_modules/react-native-view-shot/src/index.tsx
-index a47e1c1..5e38965 100644
+index a47e1c1..214aa14 100644
 --- a/node_modules/react-native-view-shot/src/index.tsx
 +++ b/node_modules/react-native-view-shot/src/index.tsx
 @@ -25,6 +25,10 @@ const neverEndingPromise = new Promise(() => {});

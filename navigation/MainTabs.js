@@ -93,6 +93,44 @@ function CocolonTabBar(props) {
   );
 }
 
+export function createPieceSaveRecovery(owner) {
+  const pending = new Map();
+  const inputId = entry => entry.operation.request.source_ref.source_input_id;
+  const publication = runtime => runtime !== null && typeof runtime === 'object';
+  let active = true;
+  return Object.freeze({
+    find(expectedUserId, savedInputId) {
+      return active && owner && expectedUserId === owner ? pending.get(savedInputId)?.entry : undefined;
+    },
+    remember(entry) {
+      if (!active || !owner || entry.operation.expectedUserId !== owner || pending.has(inputId(entry))) return false;
+      pending.set(inputId(entry), { entry, stop: null });
+      return true;
+    },
+    forget(entry) {
+      if (pending.get(inputId(entry))?.entry === entry) pending.delete(inputId(entry));
+    },
+    markDisabled(entry, runtime) {
+      const record = pending.get(inputId(entry));
+      if (record?.entry !== entry) return;
+      if (!record.stop) record.stop = { publications: new WeakSet(), unknown: false };
+      if (publication(runtime)) record.stop.publications.add(runtime);
+      else record.stop.unknown = true;
+    },
+    canResume(entry, runtime, eligible, runtimeRefresh = false) {
+      if (!active) return false;
+      const record = pending.get(inputId(entry));
+      if (record?.entry !== entry) return false;
+      if (!record.stop) return true;
+      if (!eligible || !publication(runtime) || record.stop.publications.has(runtime)) return false;
+      if (record.stop.unknown && runtimeRefresh) record.stop.unknown = false;
+      return !record.stop.unknown;
+    },
+    activate() { active = true; },
+    revoke() { active = false; pending.clear(); },
+  });
+}
+
 export default function MainTabs() {
   const { colors } = useTheme();
   const {
@@ -138,6 +176,16 @@ export default function MainTabs() {
   const [initialInputOwner, setInitialInputOwner] = useState(null);
   const [startupComplete, setStartupComplete] = useState(false);
   const currentOwner = session?.user?.id || null;
+  const [pieceSaveScope, setPieceSaveScope] = useState(() => ({ owner: currentOwner,
+    recovery: createPieceSaveRecovery(currentOwner) }));
+  if (pieceSaveScope.owner !== currentOwner) {
+    setPieceSaveScope({ owner: currentOwner, recovery: createPieceSaveRecovery(currentOwner) });
+  }
+  const saveRecovery = pieceSaveScope.recovery;
+  useEffect(() => {
+    saveRecovery.activate();
+    return () => saveRecovery.revoke();
+  }, [saveRecovery]);
   const onInitialInputSettled = React.useCallback((owner) => {
     if (owner && owner === currentOwner) setInitialInputOwner(owner);
   }, [currentOwner]);
@@ -1130,7 +1178,8 @@ export default function MainTabs() {
           name="Input"
           listeners={({ navigation, route }) => ({ tabPress: (e) => handleMainTabPress(route.name, navigation, route, e) })}
         >
-          {(props) => <InputStackNavigator {...props} onInitialInputSettled={onInitialInputSettled} appStartupReady={appStartupReady} />}
+          {(props) => <InputStackNavigator {...props} onInitialInputSettled={onInitialInputSettled}
+            appStartupReady={appStartupReady} saveRecovery={saveRecovery} />}
         </Tab.Screen>
         <Tab.Screen
           name="Analysis"
@@ -1151,6 +1200,7 @@ export default function MainTabs() {
           {(tabProps) => (
             <PieceStackNavigator
               {...tabProps}
+              saveRecovery={saveRecovery}
               linkPayload={pieceLinkPayload}
               onConsumeLinkPayload={() => setPieceLinkPayload(null)}
               onEmotionLogDisplayed={async (lastSeenCreatedAt) => {

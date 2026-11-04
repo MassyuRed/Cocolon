@@ -1006,12 +1006,14 @@ for (const waitFor of ['focus', 'runtime']) test(`Piece creation on the original
   const Screen = loadPieceCreateScreen(Host, { focused: () => focused, owner: () => owner, enabled: () => enabled,
     renderer: pieceRendererFor('ios', {}) });
   const savedInput = { savedInputId: 'input', expectedUserId: owner, idempotencyKey: 'one-explicit-request' };
-  const props = { route: { params: { savedInput } }, navigation: { goBack() {} } }; let root;
+  const saveRecovery = {};
+  const props = { route: { params: { savedInput } }, navigation: { goBack() {} }, saveRecovery }; let root;
   await act(async () => { root = Renderer.create(React.createElement(Screen, props)); });
   assert.equal(calls.length, 0);
   focused = true; enabled = true; await act(async () => root.update(React.createElement(Screen, props)));
   assert.equal(calls.length, 1);
   const firstHost = root.root.findByType('PieceHost');
+  assert.equal(firstHost.props.saveRecovery, saveRecovery);
   focused = false; await act(async () => root.update(React.createElement(Screen, props)));
   assert.equal(root.root.findByType('PieceHost').props.active, false);
   focused = true; await act(async () => root.update(React.createElement(Screen, props)));

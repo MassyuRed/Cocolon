@@ -185,7 +185,7 @@ function harness(options = {}) {
     let n = 0;
     do {
       assert.ok(++n < 30, 'bounded screen render/effect simulation');
-      dirty = false; cursor = 0; tree = Screen({ navigation, route: { params: {} } });
+      dirty = false; cursor = 0; tree = Screen({ navigation, route: { params: {} }, saveRecovery: control.saveRecovery });
       if (flushEffects) while (effects.length) effects.shift()();
     } while (flushEffects && dirty);
     syncHost(); return tree;
@@ -441,8 +441,10 @@ test('screen-fed preview failure retries exactly the original request and key', 
 
 
 test('InputScreen supplies its existing navigator to the saved Piece host without widening saved-input data', async () => {
-  const h = await saved();
+  const saveRecovery = { find: () => undefined };
+  const h = await saved({ saveRecovery });
   assert.equal(h.slot().props.navigation, h.navigation);
+  assert.equal(h.slot().props.saveRecovery, saveRecovery);
   assert.deepEqual(Object.keys(h.slot().props.savedInput).sort(), ['expectedUserId', 'idempotencyKey', 'savedInputId']);
   assert.equal(h.u.calls.length, 0); h.dispose();
 });

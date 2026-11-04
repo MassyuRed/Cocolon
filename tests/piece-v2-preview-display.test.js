@@ -631,7 +631,7 @@ for (const boundary of ['close', 'background', 'account', 'source', 'disable', '
     if (boundary !== 'unmount') u.host.componentWillUnmount();
   });
 }
-for (const code of ['PIECE_PREVIEW_STALE', 'PIECE_CONFLICT', 'PIECE_PREVIEW_EXPIRED', 'PIECE_AUTH_REQUIRED']) {
+for (const code of ['PIECE_PREVIEW_STALE', 'PIECE_CONFLICT', 'PIECE_AUTH_REQUIRED']) {
   test(`cancel ${code} cannot rebind revision, retry POST or report success`, async () => {
     const u = previewUiHarness({ send: async (url, opt) => opt.method === 'DELETE'
       ? { status: code === 'PIECE_AUTH_REQUIRED' ? 401 : 409, json: async () => ({ code }) } : pieceHttp(response()) });
@@ -642,6 +642,25 @@ for (const code of ['PIECE_PREVIEW_STALE', 'PIECE_CONFLICT', 'PIECE_PREVIEW_EXPI
     u.host.componentWillUnmount();
   });
 }
+test('confirmed cancel expiry revokes the closed control and allows an explicit new preview after re-entry', async () => {
+  const original = response(), fresh = { ...original, preview_id: '30000000-0000-4000-8000-000000000004' };
+  const expiry = { status: 409, json: async () => ({ code: 'PIECE_PREVIEW_EXPIRED' }) };
+  let previews = 0;
+  const u = previewUiHarness({ send: async (_, init) => init.method === 'DELETE'
+    ? expiry : [pieceHttp(original), expiry, pieceHttp(fresh)][previews++] });
+  u.mount(); u.host.start(); await pieceTick();
+  uiButton(u, 'このPiece候補を取り消す').props.onPress(); await pieceTick();
+  const stale = uiButton(u, '同じ記録から作り直す'); assert.ok(stale);
+  u.host.close(); stale.props.onPress(); await pieceTick();
+  assert.equal(u.calls.length, 2);
+  u.host.start(); await pieceTick();
+  assert.equal(u.calls[2][1].headers['Idempotency-Key'], u.calls[0][1].headers['Idempotency-Key']);
+  uiButton(u, '同じ記録から作り直す').props.onPress(); await pieceTick();
+  assert.equal(u.calls.length, 4);
+  assert.notEqual(u.calls[3][1].headers['Idempotency-Key'], u.calls[0][1].headers['Idempotency-Key']);
+  assert.equal(u.host.controller.getView().preview.preview_id, fresh.preview_id);
+  u.host.componentWillUnmount();
+});
 test('old cancel callback after reopening same candidate and first action after expiry send no DELETE', async () => {
   const u = previewUiHarness(); u.mount(); u.host.start(); await pieceTick();
   const stale = uiButton(u, 'このPiece候補を取り消す');

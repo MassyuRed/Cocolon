@@ -6,6 +6,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
 const path = require('node:path');
+const crypto = require('node:crypto');
 const OWNER = '10000000-0000-4000-8000-000000000001';
 const INPUT = '20000000-0000-4000-8000-000000000002';
 const OTHER = '20000000-0000-4000-8000-000000000099';
@@ -38,7 +39,7 @@ function fixture({ send, enabled = true, currentState = 'active', pre = false, a
       assert.equal(fallback, false); return name === 'piece_v2_preview_enabled' ? allowed : saveAllowed;
     }, refreshAppRuntime: async () => { refreshes++; } });
   u.host.context = runtime();
-  return { ...u, expected, deferred: f.deferredPieceResponse,
+  return { ...u, expected, makePreview: f.response, deferred: f.deferredPieceResponse,
     saveReceipt: f.uiSaveReceipt, startSave: () => f.startSyntheticSave(u),
     publishSave: value => { saveAllowed = value; u.host.context = runtime(); },
     immediateSave: value => { saveAllowed = value; },
@@ -51,6 +52,178 @@ function fixture({ send, enabled = true, currentState = 'active', pre = false, a
 function resolver(u) {
   assert.equal(typeof u.host.resolveSavedInput, 'function', 'B10_SAVED_INPUT_HOST_CALLER_ABSENT');
   return u.host.resolveSavedInput();
+}
+
+function stackRecovery() {
+  const stack = fs.readFileSync(path.join(__dirname, '../navigation/MainTabs.js'), 'utf8');
+  const helper = stack.slice(stack.indexOf('export function createPieceSaveRecovery'), stack.indexOf('export default'));
+  return vm.runInNewContext(helper.replace('export ', '') + '\ncreatePieceSaveRecovery')(OWNER);
+}
+
+for (const leaveInFlight of [false, true]) {
+  test(`leaving Piece creation ${leaveInFlight ? 'in flight' : 'after a lost save ACK'} restores only same-key confirmation`, async () => {
+    const seed = fixture(), pending = seed.deferred(), recovery = stackRecovery();
+    let saves = 0;
+    const send = async (url, options) => {
+      if (options.method === 'GET') return packet(ref());
+      if (!url.endsWith('/save')) return packet(seed.expected);
+      if (++saves > 1) return packet(seed.saveReceipt({ idempotency_replayed: true }));
+      return leaveInFlight ? pending.promise : packet({ code: 'PIECE_TEMPORARILY_UNAVAILABLE' }, 503);
+    };
+    const first = fixture({ send, admitSave: true, saveEnabled: true });
+    first.host.props = { ...first.host.props, saveRecovery: recovery, creationMode: leaveInFlight };
+    first.mount();
+    if (leaveInFlight) await first.host.createFromSavedInput();
+    else { await resolver(first); first.host.start(); }
+    await tick();
+    const saving = first.startSave(); await tick();
+    const entry = recovery.find(OWNER, INPUT);
+    assert.ok(entry);
+    assert.doesNotMatch(JSON.stringify(entry), /piece_text"|content_payload"|visual_recipe"|静かに/);
+    assert.equal(recovery.find(OTHER, INPUT), undefined);
+    assert.equal(recovery.find(OWNER, OTHER), undefined);
+    first.host.componentWillUnmount();
+    if (leaveInFlight) pending.resolve(packet(seed.saveReceipt()));
+    await saving;
+    assert.equal(recovery.find(OWNER, INPUT), entry, 'an abandoned ACK cannot erase the confirmation');
+
+    const second = fixture({ send, admitSave: true, saveEnabled: true });
+    second.host.props = { ...second.host.props, saveRecovery: recovery, creationMode: !leaveInFlight,
+      savedInput: { ...second.host.props.savedInput, idempotencyKey: 'fresh-navigation-key' } };
+    second.mount();
+    if (!leaveInFlight) await second.host.createFromSavedInput();
+    else { await resolver(second); second.host.start(); }
+    await tick();
+    assert.equal(second.calls.length, 0);
+    assert.equal(second.body(), undefined);
+    assert.ok(second.names().includes('同じ保存要求で結果を確認'));
+    second.host.retry(); second.host.retry(); await tick();
+    assert.equal(second.calls.length, 1);
+    assert.equal(second.calls[0][0], '/emotion/piece/save');
+    assert.equal(second.calls[0][1].expectedUserId, OWNER);
+    assert.equal(second.calls[0][1].body, first.calls[2][1].body);
+    assert.equal(second.calls[0][1].headers['Idempotency-Key'], first.calls[2][1].headers['Idempotency-Key']);
+    assert.equal(second.host.controller.getView().phase, 'saved');
+    assert.equal(recovery.find(OWNER, INPUT), undefined);
+    second.host.componentWillUnmount();
+
+    const newer = fixture({ send, admitSave: true, saveEnabled: true });
+    newer.host.props = { ...newer.host.props, saveRecovery: recovery, creationMode: true,
+      savedInput: { ...newer.host.props.savedInput, idempotencyKey: 'later-navigation-key' } };
+    newer.mount(); await newer.host.createFromSavedInput(); await tick();
+    assert.deepEqual(copy(newer.calls.map(([, options]) => options.method)), ['GET', 'POST']);
+    newer.host.componentWillUnmount();
+  });
+}
+
+for (const publication of ['same', 'unknown']) {
+  test(`a shared save stop blocks re-entry under a ${publication} runtime until a new eligible publication`, async () => {
+    const seed = fixture(), recovery = stackRecovery();
+    let saves = 0;
+    const send = async (url, options) => {
+      if (options.method === 'GET') return packet(ref());
+      if (!url.endsWith('/save')) return packet(seed.expected);
+      return ++saves === 1 ? packet({ code: 'PIECE_FEATURE_DISABLED' }, 503)
+        : packet(seed.saveReceipt({ idempotency_replayed: true }));
+    };
+    const first = fixture({ send, admitSave: true, saveEnabled: true });
+    first.host.props = { ...first.host.props, saveRecovery: recovery };
+    first.mount(); await resolver(first); first.host.start(); await tick(); await first.startSave();
+    assert.equal(first.host.controller.getView().canRetry, false);
+    assert.equal(first.refreshes(), 1);
+    const stoppedRuntime = first.host.context.runtime;
+    first.host.componentWillUnmount();
+
+    const second = fixture({ send, admitSave: true, saveEnabled: true });
+    second.host.context = { ...second.host.context, runtime: publication === 'same' ? stoppedRuntime : true };
+    second.host.props = { ...second.host.props, saveRecovery: recovery, creationMode: true,
+      savedInput: { ...second.host.props.savedInput, idempotencyKey: 'new-navigation-key' } };
+    second.mount(); await second.host.createFromSavedInput();
+    assert.equal(second.host.controller.getView().retryKind, 'save');
+    assert.equal(second.host.controller.getView().canRetry, false);
+    assert.equal(second.body(), undefined);
+    assert.ok(!second.names().includes('同じ保存要求で結果を確認'));
+    await second.host.controller.retry(); await resolver(second);
+    assert.equal(second.calls.length, 0);
+    second.background('inactive'); second.background('active');
+    assert.equal(second.host.controller.getView().canRetry, false);
+    second.publishSave(false); second.host.componentDidUpdate();
+    assert.equal(second.host.controller.getView().canRetry, false);
+    second.publishSave(true); second.host.componentDidUpdate();
+    assert.equal(second.host.controller.getView().canRetry, true);
+    assert.equal(second.calls.length, 0);
+    second.host.retry(); await tick();
+    assert.equal(second.calls.length, 1);
+    assert.equal(second.calls[0][0], '/emotion/piece/save');
+    assert.equal(second.calls[0][1].body, first.calls[2][1].body);
+    assert.equal(second.calls[0][1].headers['Idempotency-Key'], first.calls[2][1].headers['Idempotency-Key']);
+    assert.equal(second.host.controller.getView().phase, 'saved');
+    second.host.componentWillUnmount();
+  });
+}
+
+test('a stale completion cannot remove a newer pending save for the same source', () => {
+  const recovery = stackRecovery();
+  const operation = { expectedUserId: OWNER, request: { source_ref: ref() } };
+  const first = { operation }, later = { operation };
+  assert.equal(recovery.remember(first), true);
+  assert.equal(recovery.remember(later), false);
+  recovery.forget(first);
+  assert.equal(recovery.remember(later), true);
+  recovery.forget(first);
+  const runtime = {};
+  recovery.markDisabled(first, runtime);
+  assert.equal(recovery.find(OWNER, INPUT), later);
+  assert.equal(recovery.canResume(first, runtime, true), false);
+  assert.equal(recovery.canResume(later, runtime, true), true);
+  recovery.revoke();
+  assert.equal(recovery.find(OWNER, INPUT), undefined);
+  assert.equal(recovery.remember(first), false, 'old hosts cannot repopulate a revoked owner');
+});
+
+for (const action of ['save', 'cancel']) {
+  test(`expired ${action} after same-request recovery preserves the last applied visual choices`, async () => {
+    const seed = fixture(), initial = seed.makePreview('quote');
+    const changed = copy(initial);
+    const settings = { theme_id: 'quiet_night', aspect_ratio: '9:16', branding_mode: 'off' };
+    Object.assign(changed.visual_recipe, { aspect_ratio: settings.aspect_ratio });
+    changed.visual_recipe.theme.theme_id = settings.theme_id;
+    changed.visual_recipe.branding.branding_mode = settings.branding_mode;
+    const canonical = value => value && typeof value === 'object' ? Object.fromEntries(Object.keys(value).sort()
+      .map(key => [key, canonical(value[key])])) : value;
+    changed.visual_recipe_hash = crypto.createHash('sha256').update(JSON.stringify(canonical(changed.visual_recipe))).digest('hex');
+    changed.preview_revision = changed.row_version = 2;
+    const rebuilt = { ...changed, preview_revision: 1, row_version: 1,
+      preview_id: '30000000-0000-4000-8000-000000000004', expires_at: '2026-10-08T10:00:10.000Z' };
+    let previews = 0, terminals = 0;
+    const u = fixture({ admitSave: true, saveEnabled: true, send: async (url, options) => {
+      if (options.method === 'GET') return packet(ref());
+      if (options.method === 'PATCH') return packet(changed);
+      if (options.method === 'DELETE' || url.endsWith('/save')) return ++terminals === 1
+        ? packet({ code: 'PIECE_TEMPORARILY_UNAVAILABLE' }, 503) : packet({ code: 'PIECE_PREVIEW_EXPIRED' }, 409);
+      return packet(++previews === 1 ? initial : rebuilt);
+    } });
+    u.mount(); await resolver(u); u.host.start(); await tick();
+    const identity = p => ({ preview_id: p.preview_id, preview_revision: p.preview_revision, visual_recipe_hash: p.visual_recipe_hash });
+    const controller = u.host.controller;
+    await controller.changeVisual(settings, identity(initial), controller.getView().visualToken);
+    assert.equal(controller.getView().preview.visual_recipe_hash, changed.visual_recipe_hash);
+    if (action === 'save') await u.startSave();
+    else await controller.cancelPreview(identity(changed), controller.getView().visualToken);
+    assert.equal(u.calls.length, 4);
+    u.background('inactive'); u.background('active');
+    assert.equal(u.calls.length, 4);
+    u.host.retry(); await tick();
+    assert.equal(u.calls[3][0], u.calls[4][0]);
+    assert.equal(u.calls[3][1].body, u.calls[4][1].body);
+    assert.equal(u.calls[3][1].headers['Idempotency-Key'], u.calls[4][1].headers['Idempotency-Key']);
+    const restart = u.nodes(u.tree()).find(n => n.props.title === '同じ記録から作り直す');
+    assert.ok(restart);
+    restart.props.onPress(); await tick();
+    assert.deepEqual(JSON.parse(u.calls[5][1].body).visual_selection, settings);
+    assert.equal(controller.getView().preview.preview_id, rebuilt.preview_id);
+    u.host.componentWillUnmount();
+  });
 }
 
 async function expiredSave() {

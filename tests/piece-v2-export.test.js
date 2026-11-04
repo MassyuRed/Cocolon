@@ -52,6 +52,7 @@ function harness({os='ios', version=35, record=fixture()} = {}) {
     PermissionsAndroid:{PERMISSIONS:{WRITE_EXTERNAL_STORAGE:'write'},RESULTS:{GRANTED:'granted'},request:async()=>{
       calls.push(['permission']); if(state.permissionWait) await state.permissionWait.promise; return state.granted?'granted':'denied';}},
     captureRef: async (node, options) => {calls.push(['capture',clone(options)]); if(state.captureWait) await state.captureWait.promise;
+      if (state.captureError) throw state.captureError;
       return state.raw || '/cache/piece-capture/piece-new.png';},
     releaseCapture:p=>calls.push(['release',p]),
     Share:{open:async options=>{calls.push(['share',clone(options)]); if(state.shareWait) await state.shareWait.promise; if(state.shareError) throw Error('PRIVATE'); return state.shareResult;}},
@@ -105,6 +106,23 @@ for (const version of ['piece.rn_bitmap_renderer.ios.v1','piece.rn_bitmap_render
   await failure(android.prepare());assert.equal(count(android,'capture'),0);
 });
 async function image(h) {return (await h.prepare()).capture(h.target());}
+
+test('rejected Android native capture cannot create an export copy or reach the OS and can be retried', async () => {
+  const h = harness({ os: 'android' });
+  const job = await h.prepare();
+  h.state.captureError = new Error('PRIVATE native encoder diagnostic');
+  await failure(job.capture(h.target()));
+  assert.equal(count(h, 'capture'), 1);
+  assert.equal(count(h, 'cp'), 0);
+  assert.equal(count(h, 'release'), 0);
+  assert.equal(count(h, 'photo') + count(h, 'share'), 0);
+
+  h.state.captureError = null;
+  const asset = await job.capture(h.target());
+  assert.equal((await asset.saveToPhotos()).outcome, 'saved_to_photos');
+  assert.equal(count(h, 'capture'), 2);
+  assert.equal(count(h, 'photo'), 1);
+});
 
 test('Android and legacy iOS exports reject truncated PNGs before capture acceptance or OS handoff', async () => {
   for (const os of ['android', 'ios']) {

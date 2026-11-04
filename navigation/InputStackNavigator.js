@@ -13,11 +13,12 @@ import FollowListScreen from "../screens/FollowListScreen";
 
 const InputStack = createNativeStackNavigator();
 
-export default function InputStackNavigator({ onInitialInputSettled, appStartupReady }) {
+export default function InputStackNavigator({ onInitialInputSettled, appStartupReady, saveRecovery }) {
   return (
     <InputStack.Navigator initialRouteName="Input" screenOptions={{ headerShown: false }}>
       <InputStack.Screen name="Input">
-        {(props) => <InputScreen {...props} onInitialInputSettled={onInitialInputSettled} appStartupReady={appStartupReady} />}
+        {(props) => <InputScreen {...props} onInitialInputSettled={onInitialInputSettled}
+          appStartupReady={appStartupReady} saveRecovery={saveRecovery} />}
       </InputStack.Screen>
       <InputStack.Screen name="TutorialIntro" component={TutorialFlowScreen} />
       <InputStack.Screen

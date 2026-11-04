@@ -535,6 +535,40 @@ test('packed native transport reaches the same actual planner and inspected canv
   assert.equal(packed.card.state.measurement.canSave, false);
   assert.equal(packed.card.state.measurement.canExport, false);
 });
+test('Android packed transport preserves all 420-grapheme range values and the saved Piece plan', async () => {
+  const fixture = require('./native/piece-rn-canvas-fixtures.cjs').find(value => value.name === 'essay_max420');
+  const record = savedSample(fixture.props.display.preview);
+  const h = rawHarness(record, undefined, true, undefined, NOW, true, 'android');
+  const input = h.input(), sizeIndex = input.sizes.length - 1;
+  const text = input.blocks[0], fontSize = input.sizes[sizeIndex], density = 2.625;
+  const legacy = { ...candidateTable(text, fontSize), platform: 'android' };
+  for (const row of legacy.rows) {
+    const pixelAdvance = Math.fround((row[1] - row[0]) * 33.7 * density);
+    // Android widens the result of float division for advance, but divides
+    // each integer ink coordinate at double precision.
+    row.splice(2, 5, Math.fround(pixelAdvance / density), -1 / density, -75 / density,
+      (Math.ceil(pixelAdvance) - 1) / density, 20 / density);
+  }
+  assert.equal(legacy.boundaries.length, 421);
+  assert.equal(legacy.rows.length, 88410);
+  const packed = packedCandidates(legacy);
+  assert.equal(Buffer.byteLength(packed.rows_f64le, 'base64'), 4950960);
+  h.NativeModules.PieceTextMetrics.measureCandidates = async () => legacy;
+  const before = await h.measurePieceCandidates({ tag: 1 }, text, fontSize);
+  h.NativeModules.PieceTextMetrics.measureCandidates = async () => packed;
+  const after = await h.measurePieceCandidates({ tag: 1 }, text, fontSize);
+  assert.deepEqual(copy(after.boundaries), legacy.boundaries);
+  assert.equal(after.rows.length, before.rows.length);
+  for (let i = 0; i < after.rows.length; i++) {
+    assert.ok(after.rows[i].every((number, j) => Object.is(number, before.rows[i][j])), `range ${i}`);
+  }
+  const beforePlan = h.planPieceMeasuredRows(input, sizeIndex, [before]);
+  const afterPlan = h.planPieceMeasuredRows(input, sizeIndex, [after]);
+  assert.ok(beforePlan);
+  assert.deepEqual(copy(afterPlan), copy(beforePlan));
+  assert.equal(afterPlan.groups[0].join(''), text);
+  h.card.componentWillUnmount();
+});
 test('packed transport rejects malformed bytes and preserves full candidate validation', async () => {
   for (const mutate of [
     r => ({ ...r, rows_f64le: null }),
@@ -1224,9 +1258,9 @@ test('saved rendering validates all hashes, lifecycle and pinned renderer withou
   assert.equal(h.preparePieceNativeCard({}), null);
 });
 test('legacy Android saved export waits for Android text inspection and revokes a replaced canvas', async () => {
-  for (const [ratio, height] of [['4:5', 1350], ['9:16', 1920]]) {
+  for (const encode of [undefined, packedCandidates]) for (const [ratio, height] of [['4:5', 1350], ['9:16', 1920]]) {
     const record = savedSample(sample('short_essay', ratio, 'quiet_night'));
-    const h = rawHarness(record, undefined, true, undefined, NOW, true, 'android');
+    const h = rawHarness(record, undefined, true, encode, NOW, true, 'android');
     assert.equal(h.card.getCaptureTarget(), null);
     await prepare(h);
     assert.equal(h.card.getCaptureTarget(), null);

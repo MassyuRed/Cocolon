@@ -17,7 +17,7 @@ import FollowListScreen from "../screens/FollowListScreen";
 
 const PieceStack = createNativeStackNavigator();
 
-export default function PieceStackNavigator({ linkPayload, onConsumeLinkPayload, onEmotionLogDisplayed }) {
+export default function PieceStackNavigator({ linkPayload, onConsumeLinkPayload, onEmotionLogDisplayed, saveRecovery }) {
   return (
     <PieceStack.Navigator initialRouteName="Piece" screenOptions={{ headerShown: false }}>
       <PieceStack.Screen name="Piece">
@@ -39,7 +39,9 @@ export default function PieceStackNavigator({ linkPayload, onConsumeLinkPayload,
       <PieceStack.Screen name="TutorialFlow" component={TutorialFlowScreen} />
       <PieceStack.Screen name="PieceHistory" component={PieceHistoryMenuScreen} />
       <PieceStack.Screen name="PieceOwnerHistory" component={PieceOwnerHistoryScreen} />
-      <PieceStack.Screen name="PieceCreate" component={PieceCreateScreen} />
+      <PieceStack.Screen name="PieceCreate">
+        {navProps => <PieceCreateScreen {...navProps} saveRecovery={saveRecovery} />}
+      </PieceStack.Screen>
       <PieceStack.Screen name="ResonanceHistoryList" component={ResonanceHistoryListScreen} />
       <PieceStack.Screen name="ResonanceHistoryDetail" component={ResonanceHistoryDetailScreen} />
       <PieceStack.Screen name="EmotionLog">

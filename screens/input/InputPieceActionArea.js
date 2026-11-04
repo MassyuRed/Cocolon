@@ -104,6 +104,8 @@ export default class InputPieceActionArea extends React.Component {
     this.clearSource();
     this.controller = createPieceCreateController({
       isSaveAdmitted: (preview, token) => this.isSaveAdmitted(preview, token),
+      getSaveRecovery: () => this.props.saveRecovery,
+      getRuntimePublication: () => this.boundRuntime,
       onFeatureDisabled: () => {
       // Props may have changed before componentDidUpdate; an old response must
       // not close or refresh the next account/source's runtime presentation.
@@ -126,7 +128,7 @@ export default class InputPieceActionArea extends React.Component {
         }
         this.setState({ open: false });
       } else {
-        if (this.isCurrent()) this.syncSavedOperation(true);
+        if (this.isCurrent() && !this.syncSavedOperation(true)) this.restoreSaveRecovery();
         this.controller.refresh();
       }
     });
@@ -234,6 +236,8 @@ export default class InputPieceActionArea extends React.Component {
       // No source fetch, preview revival or automatic save/cancellation retry.
       // Only a new runtime publication can reopen a server-disabled save.
       // AppState and same-runtime flag changes cannot supply that signal.
+    } else if (this.restoreSaveRecovery()) {
+      // A different navigation key for this saved input can recover the same save.
     } else if (retainBinding && this.controller.getView().phase !== 'hidden' &&
         !['cancel', 'save'].includes(this.controller.getView().retryKind)) this.controller.close();
     // A hidden operation may retain a save/cancel intent. A different selection
@@ -254,9 +258,17 @@ export default class InputPieceActionArea extends React.Component {
       this.boundRuntime === this.context?.runtime && this.boundStamp === 'saved:' + stamp;
   }
 
+  restoreSaveRecovery() {
+    if (!this.props.saveRecovery || !this.savedMode || !this.isCurrent()) return false;
+    const [savedInputId, expectedUserId, idempotencyKey] = JSON.parse(this.boundSavedInputStamp);
+    return this.controller.restoreSaveRecovery({ savedInputId, expectedUserId, idempotencyKey,
+      saveEnabled: this.saveEnabled() });
+  }
+
   async resolveSavedInput() {
     if (!this.savedMode || !this.isCurrent() || this.sourceAttempt ||
         !(this.sourcePhase === 'idle' || this.sourceCode === 'PIECE_TEMPORARILY_UNAVAILABLE')) return;
+    if (this.restoreSaveRecovery()) return;
     const view = this.controller.getView();
     if (view.previewRestartToken || ['cancel', 'save'].includes(view.retryKind)) return;
     // Capture the exact saved ID, owner and future POST key before any await.
@@ -333,7 +345,7 @@ export default class InputPieceActionArea extends React.Component {
   }
 
   start() {
-    if (!this.isCurrent() || (this.savedMode && this.sourcePhase !== 'ready') ||
+    if (!this.isCurrent() || this.restoreSaveRecovery() || (this.savedMode && this.sourcePhase !== 'ready') ||
         this.controller.getView().phase !== 'idle') return;
     this.setState({ open: true });
     void this.controller.start();
