@@ -3322,3 +3322,22 @@ MashのPiece残件継続指示により§158の続きから実施。開始点は
 APIは[abb944c4](https://github.com/MassyuRed/mashos-api/commit/abb944c413c6d54059728fd71f9bbfed08a81986)へ反映し、2fileの全文・blob・変更集合・親commitが一致。RNの製品2／test2と前提資料4は本節と同じ変更単位で反映する。検証原本名は `Cocolon_Piece_20261104_nominal_target_export_stop_validation.zip`。最終XML／log・前後比較・保存9条件・独立review・source/test hash・GitHub読戻しを保存し、GitHub管理の製品source・compiled cache・依存本体は複製しない。
 
 差分は製品3・既存test3・前提資料4の計10file、新規repo file0。STRUCTURE_MAP_DELTA_NONE（既存形式判定と停止情報の伝播修復、新owner・意味型・公開API／DTO・DB・renderer・依存・workflow変更なし）。限定TECHNICAL_CREDIT。build・配布・本番配置・DB適用・GPU・本人端末操作0。一般日本語品質、Android通常作成／保存、Photos／Shareの実機確認と正式商品受入れは残る。
+
+<a id="piece-bound-nominal-doubt-format-20261104"></a>
+## 160. 11/4 — 対象の名詞「迷い」と本人の意思の留保を分け、宣言形式の誤拒否を修復
+
+添付の前回記録からPiece残件を継続した。開始点はRN f49ff228／API3ac9dc97。全体現在地・既存構造地図・作業規則・最新weeklyと対象原本を確認し、System Contextの既定の原本直接読取を使用した。OBSERVED_BLOCKER_MINIMAL_FIX、既存設計内のLEVEL_2／Rule18 §0A・§11.3。実装・反映は華恋、別担当は原本読取・独立比較とreviewのみ。ビルドを後でまとめる方針を維持した。
+
+「私は自分の迷いを整理する時間を選びたい。」等は本文を生成できても、対象内の名詞「迷い」まで全文の留保scanが拾い、宣言形式を選べなかった。既存direct／focal／本人評価の束縛済み対象内にある完全な「迷い＋を／の」だけを限定除外する。助詞自体も対象内に要求し、迷いがち／迷いにくいは除外しない。「のに／ので／のだ／のか／のなら」等の既知の節継続も除外せず、他の留保は全文で検査する。対象全体のscan除外、新しいsource受理、意味型・本文作者の変更はない。過去・modal・否定評価・条件・KEEP不適格を保持し、原文・意味・duty・本文は同一。独立確認で見つけた不自然な「迷いのだ／迷いのに」2例は、公開反映前に同じ有限境界へ閉じた。「迷いのかたち」等の過剰制限と一般文法の未達は残る。
+
+反映直前にAPIのcurrentがabb944c413c6d54059728fd71f9bbfed08a81986へ前進し、同じownerへ有限名詞化の別修復と本人評価40条件が追加されていた。fresh ref・親・全文・差分から確定し、その新しいregex・helper・plan接続・test40のbytesを保持した。今回の名詞判定を新しい既存helperへ統合し、fresh abbを基準に再検証した。進行中のworking refを上書きせず、APIは`agent/piece-bound-nominal-doubt-20261104`、RN資料は`agent/piece-bound-nominal-doubt-docs-20261104`へ保存する。RNの並行更新fe2110dbと既存§159も保持し、本節を§160へ置く。初期beb16323と統合tree候補b5b4810eはref未採用。ref更新のerror／timeoutはfresh refと対象bytesで未反映を確定後、既存Contents APIの逐次反映へ切り替えた。結果不明のwriteの自動再試行、history rewrite、mergeはない。
+
+最終API広域104fileは10,848成功・既存161失敗・error0・native17除外。失敗identity集合は§158の161と一致し、新規失敗0。最終3source／testのbytesは実行前後同一。intent-scopeは新35を含む233成功で、同じ最終testをabb sourceへ固定した比較は212成功／21失敗。本文再生成を禁止した形式reviewも含む。別の本人評価fileとwireを含む356成功／既存1失敗の実行は、広域へ加算しない。既存の期待値は変更していない。
+
+実ASGI＋隔離PGliteは32条件・136通信。通常24は3構文×Free／Plus／Premium既定とPremium明示宣言×平穏／自己理解で、作成・同key再読・保存・同save key再読・本人GETまで本文・3hash・recipe・rendererが一致し、枠消費各1回。留保等の8条件は同keyで各2回のPOSTともFORMAT_NOT_ELIGIBLEの422で、本人records／枠消費／月lockは前後同一、prepare後のprovider／発行／review追加呼出し0。Auth／providerは合成でありlive SQL・端末の確認ではない。
+
+fresh abbとの独立458入力・重複除外2,748条件／版は、意味・duty・段落・通常生成可否・本文／hashの変化0、例外0。宣言適格が改善した253入力だけ、Plus253／Premium253の既定形式とPremiumの明示宣言要求253が変わる。Free既定形式の変更0。raw2,784の重複36は除外し、一般日本語の品質率へ換算しない。以前の3ac基準・中間guardの比較／広域は履歴として分離し、最終へ加算しない。最終の独立reviewに未解決blocking0。
+
+APIは[ff3fc5a9](https://github.com/MassyuRed/mashos-api/commit/ff3fc5a95398ae021a702bd7930764472471c1b0)（製品d0fa4bd4）へ反映し、全2fileの全文・blob・変更集合と専用branchの先端を読戻し一致確認。[検証原本ZIP](https://chatgpt.com/library?file_id=libfile_d2b9d8e0d3008191a7a6d3ccbd75bf2e&account_id=personal)は `Cocolon_Piece_20261104_bound_nominal_doubt_validation.zip`（86member、3,272,173bytes、SHA256 `98b20f8a9262f1e9d6c7fd0022053c32c16edc12d65c8e58922b099a6db50696`）。最終／途中を分けたlog/XML、固定比較原本・再現runner・wire・source hashとAPI読戻しを保存し、GitHub管理の製品source／compiled cacheは複製しない。
+
+今回の変更は製品1・既存test1・前提資料4の計6file、新規repo file0。全体現在地・Piece map・01Aは該当責務を置換し、本節を履歴とする。STRUCTURE_MAP_DELTA_NONE（既存の対象／形式判定内だけの修復、新owner・公開API／DTO・DB・renderer・依存・workflow変更なし）。primary outcomeは限定TECHNICAL_CREDIT。専用branch上の候補であり、既存working refへの統合・build・配布・本番配置・DB適用・GPU・本人端末操作は未実施。一般日本語品質、Android通常作成・保存、Photos／Shareと正式商品受入れは残る。
