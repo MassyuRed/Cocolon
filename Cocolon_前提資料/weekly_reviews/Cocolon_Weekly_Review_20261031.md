@@ -3730,3 +3730,30 @@ code/planはccb0e60a9e33e1f907fa2c1bac5f6b988b75fe9aへ実行前反映・全文�
 通常接続の残件も既存設計04/実ownerへ照合した。今回のprivate model typedは1原記録・補足なしの全文ROLE又はROLE＋SELF過去ACTIONの有限証明に限定され、修飾/従属/結果等を拒否する。既存通常有限解析は五種を扱うが、通常ensureはQuotedParent入力を渡さない。したがって今回の正しい2候補を通常mapへ自動採用したり、単にスイッチをONにして完成扱いしない。本人の思考/結果・他者発話・理由のsource-to-proposition証明と保存再読の対応を既存五種/ObservedGraph/唯一作者内で差分設計する必要がある。本人基準、補足、記録間の再出現/変化、通常累積、IF/Saved、分析観測会の残件は保持する。
 
 実環境GPT-6/Codex Work、root単一writer/実行/判断＋同環境read-only確認。独立Pro/Ultra/Mash Product Readではない。限定TECHNICAL_CREDIT、product_credit0。通常source/型/意味gate/作者/HTTP/DB/RN/Render/Supabase/配置/Pod管理変更0、STRUCTURE_MAP_DELTA_NONE。
+
+<a id="analysis-material-v5-residual2-result-20261105"></a>
+## 177. 11/5 — 対象の1例を修復、理由の否定注記脱落が残り新重み不採用
+
+§176の未解消2件へ、研究初期811/config343から一回だけ継続した。既存16教師/target/messages/encoded/順/seed/LR/clipと全文平均CEを保持し、既に教師JSONと一致したAT11/17の追加枝CEだけを外した。RU02/AT24を実tokenizerで再分岐し、full-teacherとshort-prefix prefillの4forwardで両方の誤枝argmaxを再確認後、同じ係数1の枝CEを2件へ付した。初期値とactive集合の両方が変わるため、改善を追加項除去だけの因果効果とはしない。新教師/指示variant/出力修復/意味gate変更は0。fresh AdamWで、optimizer再開ではない。
+
+CPU14.155542秒、16更新/前後32NLL、112tensor保存照合、新重みreload後30新stop、計3load、train/afterともexit0。診断開始から648.501540秒、元900秒＋終了30秒以内。before30は同Pod/同入力/同loaderの直前afterを完全一致確認して再利用し、新生成へ加算しない。完了run再起動/自動反復0、初期811と既存pack/encodedは不変。
+
+| 対象 | 全文・artifactで確認した結果 |
+| --- | --- |
+| AT24 | サ変述語を不要な対象childへ分ける誤りを除去し、既存教師JSON値と完全一致。他者の発話/推測と本人の行動・速度修飾を保持。この既知1教材は修復 |
+| YREASON01/RU02 | 誤modifier2件を除去したが、REASON_MARKER欠如は継続。ATTRIBUTIVE_CONTENTのNEGATION qualifierが新たに欠落。否定を含む元全文・引用自体は保持しており、肯定への変換や否定本文消失とは区別する。完全修復ではなく、意味carrierの保持退行を記録 |
+| AT04/11/17 | 既存教師JSON値との一致を保持。前回修復2件も保持 |
+| 旧19 typed | 全graph・可視文章・図が一致。新表示/喪失0。PV01/X03/M4も保持 |
+| 全30 | raw28同一/変更2（YREASON01/AT24）、HQ04の理由候補もraw不変。候補30→30、typed19→19。形式受理を意味正解数へ換算しない |
+
+全30原文/前後rawと既存表示をrootと同環境read-only補助で比較。候補全体で「新しい意味退行なし」とは言えないため、新0587重みは通常・次初期値とも採用せず研究保全する。AT24修復は教えたsourceの再現で、未見転移・一般品質・通常端末成功ではない。
+
+**次の誤りは前の分岐より手前。** 既存教師と自由生成の最初の文字差は247→237へ移動。最新rawは時点qualifier直後に配列を閉じ、以前狙ったkind選択へ到達しない。旧teacher-prefix上の正枝CEはRU02 2.206451→0.573883、AT24 2.508897→0.577211、正枝確率は約0.563334/0.561462まで上がったが、全文成功を意味しない。平均NLLも0.003620820→0.001514703。文字差は元生成token IDでもincremental cache再現でもない。同一枝の強化をそのまま反復せず、既存の正teacher内で理由markerと従属否定を同時に保持する差分を次条件とする。新教師や係数探索は未選定。
+
+保存60応答（候補60/typed38）を生成・compiler・作者禁止guardで再読し、復元typed自身のgraph/文章/図をsidecarへ一致確認。375member/manifest374の全bytes/SHAとZIP CRCをPod外で照合した。[全原本・新重み](https://chatgpt.com/library?file_id=libfile_70c4e57dc7b881919451c025885fcdc5&account_id=personal)は15,152,848bytes、SHA256 84c9ce77f3d46ac8fe3d7607ea64381ada1339f46c0c70efc555338de501669b。weights 0587db632df33896d853191816106f13ef41e91440f19fdf08025f587ac3e99f、config a36e96af06b79cf1b2b9b36b528ee06b05cf82d21b7b4872f25d2d07aa9d0269。親811と元90/helper/APIの依存は前回private原本・既存復元archiveを継承し、このZIPだけに全親依存を収録したとはしない。
+
+code/planは実行前commit ace8b762bf0000ab6430f694fba582d69756b41aで全文読戻し済み、runner SHA b38127a4c99b95f8e3d38ed5119f67b52425a8a8d6178c2ee3b3317573fc4118。本文なし結果索引material_v5_residual2_results.jsonを同trialへ追加。終了GPU2MiB/0%・compute空、Podレンタル維持。前確認.29USD/hで診断開始からの全時間を対象とした処理参考上限0.052240402USD。準備/回収/待機保持/通信保存/税等は別、実総請求未測定。
+
+通常接続の次範囲も既存設計04/実ownerへ照合した。単独の本人思考/結果は既存通常finiteで読める範囲があり、単独例のモデル再現を新商品成果にしない。混在発話から本人節を採るには、既存intent_compilerの帰属証明、未読scopeと全文contextを失わない表示、意味採用を保存再読でどこまで保証するかの対応が要る。既存ROLE専用readerやP5の限定profileを一般化する迂回はしない。今回ここは調査のみで、新仕様の採用/接続実装は0。本人基準、補足typed、記録間の再出現/変化、通常累積/ensureへの4B接続、IF/Saved、分析観測会は継続残件。
+
+実環境GPT-6/Codex Work、root単一writer/実行/最終判断＋同環境read-only比較。独立Pro/Ultra/Mash Product Readではない。限定既知教材1修復/残件絞込み、商品credit0。通常source/型/意味gate/compiler/唯一作者/HTTP/DTO/DB/RN/Render/Supabase/配置/Pod管理変更0、STRUCTURE_MAP_DELTA_NONE。

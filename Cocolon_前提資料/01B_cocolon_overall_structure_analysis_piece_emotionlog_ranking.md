@@ -3417,3 +3417,8 @@ API dc05dc35、通常product owner追加なし。既存 `semantic_admission.py` 
 ### 2026-11-05 — 既存教師の実誤分岐を修復する研究結果の地図
 
 既存trial内のmaterial_v5_branch16_trial.py（CPU準備/8分岐測定/16更新/30生成/保存再読）とmaterial_v5_branch16_plan.json（固定条件）、material_v5_branch16_results.json（本文なし実結果）を追加。全原本はprivate保存、結果/限界/途中誤報告の訂正/次の残件はREADME#analysis-material-v5-branch16-result-20261105と最新weekly§176。旧19表示を全保持、修飾2例を修復、理由・対象の2例は未解消。通常採用/次初期値自動採用false。通常product owner/型/意味gate/compiler/唯一作者/ensure/HTTP/DB/RN不変、STRUCTURE_MAP_DELTA_NONE。
+
+<a id="analysis-material-v5-residual2-files-20261105"></a>
+### 11/5 — 未解消2件だけを追加枝CEへ残す比較のファイル地図
+
+既存trialのmaterial_v5_residual2_trial.pyは既存16教師不変のCPU準備・既修復2件の追加枝項除外・残2件の4forward再測定・16更新・30生成・保存非生成再読を所有。material_v5_residual2_plan.jsonは固定条件、material_v5_residual2_results.jsonは本文なし実結果とprivate原本参照。新しい商品ownerは追加しない。AT24を修復、YREASON01は理由marker不足と新しい従属否定qualifier欠落により新重み不採用。旧19表示とAT11/17を保持。[全結果と次条件](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v5-residual2-result-20261105)、最新weekly§177。通常source/型/意味gate/compiler/唯一作者/ensure/HTTP/DB/RN不変、STRUCTURE_MAP_DELTA_NONE。
