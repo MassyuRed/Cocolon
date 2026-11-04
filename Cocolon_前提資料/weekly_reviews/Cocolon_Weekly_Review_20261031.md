@@ -3557,3 +3557,46 @@ API既存test1file `ai/tests/piece_v2/test_piece_natural_context_sql.py`を[76f4
 API製品1・既存test2を[2b0b69b3](https://github.com/MassyuRed/mashos-api/commit/2b0b69b3f295be40d907d4e0aaad67de44d77ad2)へ反映し、全3file全文・blobをreadback、検証済みbytesと一致した。全体00・01Aの既存責務・Piece mapは同じ変更単位で前後pauseと疑問境界へ差分更新。本節を再開正本とする。STRUCTURE_MAP_DELTA_NONE（既存有限readerの照合修復、新owner／API／DTO／DB／renderer／依存なし）。一般日本語品質・新たな意味再構成を完成扱いにしない。
 
 次は今回の既知文型の検証を繰り返さず、通常入力で再現する別の誤拒否・本文変化、又は既存の決定済み未完了へ進む。Android通常作成／保存、実Photos／Share、backend receipt本番適用、一般文章品質と正式商品受入れ0/3は残件。ビルド・TestFlight・本番配置・live DB更新・公開ON・GPU・課金・本人端末操作0。指定8時間を実働完了したというclaimはしない。
+
+
+<a id="piece-eight-hour-window-handoff-20261105"></a>
+## 171. 11/5 — 今回枠の反映一覧・CI同期漏れの修復と残件
+
+fresh開始はRN `ef4ab9b5b2689f5a20093cc818896fd8d9d5e442`／API `2b0b69b3f295be40d907d4e0aaad67de44d77ad2`。全体00・全体設計01／01A/B/Cの対象責務・Piece mapと§170を継承し、古いmainへ戻していない。
+
+### CIの同期漏れを修復
+
+最新APIの[隔離PostgreSQL run41891642633](https://github.com/MassyuRed/mashos-api/actions/runs/41891642633)は、既存native検証の6条件で経路一覧assertが失敗し、7成功の後に停止していた。11/4に準備済みの `POST /emotion/piece/{piece_id}/export-receipt`が期待一覧から欠けていたため、正常生成／本文保存の後段まで進まなかった。開始時点a4dac0a0にも、同経路を含むruntime sourceと、含まない同testがあり、今回の有限動作文修正が追加した経路ではない。製品を古い一覧へ戻したり、失敗を除外・xfailしていない。
+
+既存 `db/test_b10_preview_application_native.py`の経路期待だけを採用済みfactoryに同期し、最初のpreview write前に同じ受付へPOSTして既定OFFの503／FEATURE_DISABLED、作者／review／RPC0・record0・quota0を確認する検査を追加。同じ6条件の生成・hash・保存・非生成replayの期待は保持した。これは受付や公開flagの有効化ではない。
+
+localの既存composition moduleは66成功／失敗0、3.19秒。別の実factory＋合成BearerのHTTP診断も同経路の存在と既定OFF拒否を確認。localにはnative PostgreSQL実行環境がなく、native成功へ換算しない。API既存test1fileを[66b58b89](https://github.com/MassyuRed/mashos-api/commit/66b58b89e7c0ee851079844dbcb12886c7988d33)へ反映し、全文・blob `767e4f256ea05e9209cb032ed55c8c6b76b8b742`をreadback、検証済みbytesと一致した。
+
+反映後の[既存CI run41901486172](https://github.com/MassyuRed/mashos-api/actions/runs/41901486172)／job126824774842は全step success。失敗していたnative moduleは13成功、後続の共有API／default契約172成功、共有APIのnative保存・再読46成功まで到達した。workflow全23 pytest batchの表示件数合計は2,641成功で、local66や過去回帰とは合算しない。Python3.12.16／pytest8.4.1／psycopg3.3.6／PostgreSQL16.15。既存Pydantic／FastAPI等の非推奨警告は保持。実Auth・実PostgREST・本人DB・端末・OS画像出力・商品品質の成功ではない。workflow／requirements／製品sourceを変更せず、通常のpushで起動する既存の隔離検証を確認した。
+
+全体現在地差分なし（製品source・契約・owner・稼働・端末状態は不変、既存native検証の経路一覧と既定OFF検査の同期のみ）。STRUCTURE_MAP_DELTA_NONE。全体00／各mapの形式的な再更新はしない。
+
+### 今回枠のGitHub反映一覧
+
+| 内容 | API product branch | Cocolon product branchの対応資料 |
+|---|---|---|
+| 保存元エラーと重なる作成／画像変更／保存の停止通知 | [183d29b1](https://github.com/MassyuRed/mashos-api/commit/183d29b1d89044e55d8fc2175f1a1c1cde866e04) | [83b924a5](https://github.com/MassyuRed/Cocolon/commit/83b924a5bcf9764abcd46b19b6280c4373c581a9)／[0424a0c2](https://github.com/MassyuRed/Cocolon/commit/0424a0c2bb686ba9141e93470a718d090ae1e33d)・§166 |
+| 本人scopeの既存副詞前の水平空白 | [24439250](https://github.com/MassyuRed/mashos-api/commit/24439250106945967844ad0855aba5bfaa15fda8) | 同上・§166 |
+| 既知動作文の「を」直後の水平空白 | [068c9b13](https://github.com/MassyuRed/mashos-api/commit/068c9b133b1b45d67fb7032cbf3249d92c1c3912) | [d9f3e5e7](https://github.com/MassyuRed/Cocolon/commit/d9f3e5e7b7053a281e6cf94846be3636afbba60c)・§167 |
+| 自己理解・複数文／二欄の保存SQL検証 | [528fc129](https://github.com/MassyuRed/mashos-api/commit/528fc129a68cdd6557055797f1fc4cef8b1495c0) | [3d2e4049](https://github.com/MassyuRed/Cocolon/commit/3d2e4049bf45abaf51028c09bf4e34ff586948cf)・§168 |
+| source-ref HTTP→保存→本人／export用再読の検証 | [76f4c466](https://github.com/MassyuRed/mashos-api/commit/76f4c466df0ac795fc48781680e21c74a9f9512e) | [1aef9032](https://github.com/MassyuRed/Cocolon/commit/1aef9032062b059783a8261cdfbc56026d31a750)・§169 |
+| 既知動作文の「を」直前の水平空白と既存疑問境界 | [2b0b69b3](https://github.com/MassyuRed/mashos-api/commit/2b0b69b3f295be40d907d4e0aaad67de44d77ad2) | [ef4ab9b5](https://github.com/MassyuRed/Cocolon/commit/ef4ab9b5b2689f5a20093cc818896fd8d9d5e442)・§170 |
+| native経路一覧と既定OFF検査の同期 | [66b58b89](https://github.com/MassyuRed/mashos-api/commit/66b58b89e7c0ee851079844dbcb12886c7988d33) | 本節を含む文書commit |
+
+全7 API commitの製品／testと、関連資料は各変更単位でreadback済み。183d29b1／24439250／068c9b13／2b0b69b3の4件が製品不具合修復で、保存SQL・HTTP経路・native一覧の3件は検証補強／同期である。文書や件数を製品修復数へ加算しない。
+
+広域回帰は§166時点のRN1,537成功／API11,025成功＋既存161失敗（native17除外）。その後の本文修復は§167の対象3,157成功、§170の関連3,094成功と最終対象427成功で確認し、重複を加算しない。前段の広域結果を最終headでの再実行と報告しない。各原入力・合成Auth／provider・隔離DB・実機の区分、途中失敗と未実行は各節を正本とする。
+
+### 未完了と次の着手
+
+- 通常入力の意味保持と単独で伝わる自然な再構成は一般品質未達。現在は既知有限文法と原文保持で、空白差の修復を一般日本語理解の成功率にしない。次も実際の通常入力で再現する誤拒否／本文変化から扱い、新しい語彙辞書・型・機構を独断追加しない。
+- Androidの通常作成／保存は未採用。既存bitmap検証候補の実端末・glyph／性能／画像受入れが残る。
+- 実機Photos／Shareとbackend receiptの本番適用は未完。7001の本人確認済みPhotosを今回候補の実機成功へ広げない。
+- 最新候補のまとめビルド／TestFlightと本番配置・live DB適用・公開・実課金は今回範囲外。正式商品受入れ0/3を維持する。
+
+今回の新しいアプリbuild・TestFlight・本番配置・live DB更新・公開ON・GPU・課金・本人端末操作0。この記録を引継ぎ点とし、05:50 JST以降は新規作業を開始しない。指定の8時間枠と実際にtool実行・判断していた時間を区別する。連続実働8時間の計測・達成はしておらず、実働8時間完了と報告しない。
