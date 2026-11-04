@@ -379,6 +379,55 @@ for (const [status, code] of [[401, 'PIECE_AUTH_REQUIRED'], [503, 'PIECE_FEATURE
   });
 }
 
+for (const direct of [false, true]) for (const scenario of ['lost active', 'lost background', 'lost runtime', 'pending background', 'pending runtime']) for (const committed of [false, true]) {
+  test(`visibility uncertainty offers an explicit same-ID read: ${direct}/${scenario}/${committed}`, async () => {
+    let changed = false, finish;
+    const wait = new Promise(resolve => { finish = resolve; });
+    const h = harness({ send: (url, init) => {
+      if (url.includes('/history')) return packet(page([record()]));
+      if (init.method === 'PATCH') {
+        changed = committed;
+        if (scenario.startsWith('pending')) return wait;
+        throw Error('visibility response lost');
+      }
+      return packet(record(changed ? { visibility_scope: 'public', row_version: 3 } : {}));
+    } });
+    const host = ownerHost(h, direct ? savedEntry() : null, { flags, presentationActive: true, runtimePending: false });
+    host.componentDidMount();
+    if (direct) await tick(); else { await host.act('loadHistory'); await host.act('openDetail', PID); }
+    const pending = host.act('setVisibility', 'public'); await tick();
+    if (!scenario.startsWith('pending')) await pending;
+    const stale = host.controller.getView().detailRetryToken;
+    const props = host.props, calls = h.calls.length;
+    if (scenario.endsWith('background')) h.background('inactive');
+    if (scenario.endsWith('runtime')) {
+      host.props = { ...props, enabled: false, flags: {}, runtimePending: true }; host.componentDidUpdate();
+    }
+    if (scenario.startsWith('pending')) {
+      finish(committed ? packet({ piece_id: PID, visibility_scope: 'public', row_version: 3 })
+        : packet({ code: 'PIECE_TEMPORARILY_UNAVAILABLE' }, 503));
+      await pending;
+    }
+    if (scenario.endsWith('background')) h.background('active');
+    host.props = props; host.componentDidUpdate(); await tick();
+    const view = host.controller.getView();
+    assert.equal(h.calls.length, calls, 'resume does not send GET or PATCH');
+    assert.equal(view.canRetryDetail, true); assert.equal(view.record, null);
+    assert.match(view.message, /公開範囲の変更結果を確認できませんでした/);
+    assert.equal(texts(host.render()).includes('公開範囲を変更しました。'), false);
+    if (scenario !== 'lost active') { await host.act('retryDetail', stale); assert.equal(h.calls.length, calls); }
+    const retry = button(host, direct ? '保存したPieceを読み込む' : '同じPieceを読み込み直す'); assert.ok(retry);
+    await retry.props.onPress();
+    assert.equal(h.calls.length, calls + 1); assert.equal(h.calls.at(-1)[0], '/emotion/piece/' + PID);
+    assert.equal(h.calls.at(-1)[1].method, 'GET'); assert.equal(h.calls.at(-1)[1].body, undefined);
+    assert.equal(h.calls.filter(([, init]) => init.method === 'PATCH').length, 1);
+    assert.equal(host.controller.getView().record.visibility_scope, committed ? 'public' : 'private');
+    assert.equal(host.controller.getView().message, '');
+    await retry.props.onPress(); assert.equal(h.calls.length, calls + 1);
+    host.componentWillUnmount();
+  });
+}
+
 test('public-write flag and visibility-toggle flag independently prevent writes', async () => {
   const h = harness({ send: ownerSend });
   h.controller.setContext({ enabled: true, expectedUserId: OWNER, flags: { ...flags, piece_v2_public_write_enabled: false } });

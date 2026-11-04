@@ -3153,3 +3153,22 @@ MashのPiece残件継続指示に従い、前回引継ぎ・華恋用作業ル�
 [検証原本・再現runner・実wire・回帰XML](https://chatgpt.com/library?file_id=libfile_5964d107c83c81918e9b756eac9bf79d&account_id=personal)は `Cocolon_Piece_20261104_reservation_detail_validation.zip`（67member、294,195bytes、SHA256 `d54fcadf8857369313504e92da8adabc5f6b5b72d3f0a3d13d95add514a19105`）。GitHub管理下の製品sourceは複製せず、検証したpostimage hashと原本参照を保存した。
 
 差分は製品2・既存test2・前提資料4の計8file、新規repo file0。全体現在地・Piece current map・01Aは責務を置換更新し、本節だけを履歴とする。STRUCTURE_MAP_DELTA_NONE（既存owner内の留保読取とGET復旧、route・意味型・公開API／DTO・DB・renderer・依存・workflow変更なし）。primary outcomeは限定TECHNICAL_CREDIT、商品受入れへ換算しない。APIは[1ae32fdf](https://github.com/MassyuRed/mashos-api/commit/1ae32fdfb753b9082b26219cd1622ed085a36ebc)へ反映し、全2fileの全文・変更集合・親commitを読戻し確認。RNは既存Draft PR30へ同じ変更単位で反映する。ビルド・配布・本番配置・DB適用・GPU・本人端末操作は0。一般日本語品質、Android通常作成・保存への採用、実機のPhotos／Shareと正式商品受入れは引き続き残件。次もこの残件を直接扱い、まとめビルド前に未確認を完了へ変えない。
+
+<a id="piece-structured-stops-visibility-read-20261104"></a>
+## 152. 11/4 — 構造化本文の感嘆符保持と、公開範囲変更の結果不明からの再読を修復
+
+MashのPiece残件継続指示で、§151を引き継いだ。開始点はRN `22ff85f6d6dcdd476a445823d80410c058bd1db7`／API `1ae32fdfb753b9082b26219cd1622ed085a36ebc`。前提資料・作業ルール・全体設計／ファイル地図・Piece currentと最新weekly・実sourceを照合し、既存設計内のLEVEL_2／Rule18 §0A・§11.3として修復・検証・GitHub反映を行う。実装・反映ownerは華恋、別担当は読取・再現・独立レビューのみ。ビルドはまとめ実施という方針を維持する。
+
+**構造化自己表現の句点固定。** 「私は読書を大切にしています。」「私が選びたいのは、陶芸です。」等は扱えるが、末尾だけ「！」「!」にすると自己理解では拒否、平穏では未編集のKEEPへ落ちていた。直接的な既存価値／希望、焦点構文、本人評価とそれらの条件・時点を伴う文の終端を、既存の4owner内で単一の「。／！／!」として認識する。原文・意味node・field JSONは正規化せず、scalar／UTF8根拠を元bytesへ束縛する。唯一作者の既存の語順・主体継続編集が終わった後に各非KEEP文の元記号を復元し、独立本文検査も同じ元記号を要求する。例えば「私が選びたいのは、陶芸です！」は「私は、陶芸を選びたい！」となり、未明示の理由・相手意図・感情を補わない。
+
+初期案では共有`_SELF_TOPIC`も拡張したが、旧literal「僕は水を飲みたくない！」等12条件の本文保持を変える退行を既存回帰で検出したため撤去した。最終`piece_v2_expression.py`は元blobと一致する。既存のliteral自己表現が成立する感嘆符文はKEEPを優先し、「大切にしたい！」「守りたい！」等も原文・否定・重複・段落・宣言不適格を維持する。新しい構造化表現は既存句点版と同じ明示性・時制・留保条件だけで形式を判定し、感嘆符を強い意思の根拠にしない。一般の自己表現・未知構文・二重記号・疑問文を正規化して受理する変更ではない。
+
+新しい128生成比較（8構文×2mode×2終端×4配置）・拒否7・記号差替え拒否3と、旧literalの明示保護48の計186条件を追加し、全成功。128比較では句点版の本文・段落・duty・形式条件を元終端だけ変えて保持する。独立144条件でも旧literalのKEEP／宣言不適格・同文重複・改行／別欄を保持。追加の疑問・二重記号・未完・伝聞14入力は全拒否。別48条件のうち構造化12group36条件は句点／感嘆符で同じ本文責務・形式条件を保持し、wish-only4group12条件は旧KEEPを優先して原文を保持する。成功例のnode／evidence、参照／scopeのscalar↔UTF8も照合した。途中版の新138成功や12退行を最終版へ合算せず、一般日本語・商品受入れの成功率へ換算しない。
+
+**公開範囲PATCHの応答消失・通信中断。** 通常履歴の選択Pieceで変更がcommitして応答だけ失われる、またはPATCH通信中にbackground／runtime読込へ入ると、本文と一緒に選択IDも消え、同じPieceを読む入口がなくなっていた。既存detailRetryへID・不明案内だけを保持し、復帰後の明示GETで現在の公開範囲を確認できるよう修復した。PATCH再送と自動GETは0。遅いACKを成功へ昇格せず、未知の変更には「公開範囲を変更しました。」を表示しない。確定ACK後の既存follow-up GETだけは従来の成功案内を保持する。新20条件は通常履歴／保存直後、応答消失／通信中断、background／runtime、server commit有無を比較して全成功。独立11条件と既存関連58条件でも、本人／対象／読取権限／focus・close／dispose・履歴移動時の破棄、GET再失敗、新token・旧token失効、削除優先、同期abort本人切替とlate ACKの遮断を確認し、未修正指摘なし。
+
+新構造化7例×3plan×平穏／自己理解の実ASGI＋隔離PGlite42条件（実210通信）はpreview・同key再読・保存・同save key再読・本人GETまで成功。本文・段落・3hash・recipe・rendererが一致し、保存枠消費は各1回。Auth／providerは合成で、実端末・native描画ではない。最終RNは既存Metro再bundle検査1件を対象外として1,474成功・失敗0。最終API広域104fileは9,190成功・既存161失敗・native17除外。§151の失敗identity集合と完全一致し、新規失敗／error0。pure保存原入力1,723成功／SQL4除外は広域と重複し、局所・独立・ASGIの件数も広域へ上乗せしない。RNの最後の変更は説明コメントのみで、その後にowner履歴207条件を最終bytesで再確認した。
+
+[検証原本・再現runner・実wire・広域XML](https://chatgpt.com/library?file_id=libfile_3da0f29be92881918bbda2f743e4873a&account_id=personal)は `Cocolon_Piece_20261104_structured_visibility_validation.zip`（72member、340,944bytes、SHA256 `403739becfac027a0bdc3fab16865a6aae57ffb06fee0576ede3a2fb88b068e5`）。GitHub管理下の製品sourceは複製せず、検証postimageのhashと原本参照を保存した。APIは[f2a837fe](https://github.com/MassyuRed/mashos-api/commit/f2a837fe1604d93dc4c57314c70c6ecd7d9b5307)へ反映し、全5fileの全文・blob・変更集合・親commitを読み戻して確認。RNの反映先は既存Draft PR30。
+
+差分は製品5・既存test2・前提資料4の計11file、新規repo file0。全体現在地・Piece current map・01Aは関連責務を置換更新し、本節を履歴とする。STRUCTURE_MAP_DELTA_NONE（既存文法・唯一作者・author-free検査・同ID GET復旧内の修復、意味型・公開API／DTO・DB・renderer・依存・workflow変更なし）。primary outcomeは限定TECHNICAL_CREDIT。ビルド・配布・本番配置・DB適用・GPU・本人端末操作は0。一般日本語品質、Android通常作成・保存への採用、Photos／Shareの実機確認と正式商品受入れは残る。次も残件の直接修復を継続し、候補反映を本番・実機成功へ読み替えない。

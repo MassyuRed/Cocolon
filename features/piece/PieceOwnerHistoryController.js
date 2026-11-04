@@ -7,6 +7,7 @@ export function createPieceOwnerHistoryController(configuration = {}) {
   const empty = () => ({ phase: 'idle', items: [], record: null, nextCursor: null, message: '', code: null });
   let state = empty(), context = null, active = null, deletion = null, disposed = false, blocked = false;
   const deleteUncertainMessage = '削除の結果を確認できませんでした。同じ削除要求で結果を確認できます。';
+  const visibilityUncertainMessage = '公開範囲の変更結果を確認できませんでした。同じPieceを読み直して現在の公開範囲を確認できます。';
   const permissions = () => pieceOwnerPermissions(context?.flags);
   const emit = () => { for (const fn of [...listeners]) { try { fn(); } catch {} } };
   const enabled = () => !disposed && !blocked && context?.enabled === true && permissions().read;
@@ -20,8 +21,9 @@ export function createPieceOwnerHistoryController(configuration = {}) {
       code: 'PIECE_TEMPORARILY_UNAVAILABLE', message: deleteUncertainMessage };
     else if (retry) state = { ...empty(), phase: 'unavailable',
       code: 'PIECE_TEMPORARILY_UNAVAILABLE',
-      message: 'Pieceを読み込めませんでした。もう一度読み込んでください。',
-      detailRetry: { pieceId: retry.pieceId, notice: retry.notice, token: Object.freeze({}) } };
+      message: retry.message || 'Pieceを読み込めませんでした。もう一度読み込んでください。',
+      detailRetry: { pieceId: retry.pieceId, notice: retry.notice, message: retry.message,
+        token: Object.freeze({}) } };
     // Abort listeners can synchronously change the owner/context. Finish all
     // state writes first so that a nested clear cannot be overwritten.
     previous?.abort.abort();
@@ -39,8 +41,8 @@ export function createPieceOwnerHistoryController(configuration = {}) {
     // discards it; the stored request never includes a record body.
     const keepDeletion = !!deletion && context?.expectedUserId === snapshot.expectedUserId &&
       context?.savedPieceId === snapshot.savedPieceId && (snapshot.flags.delete || snapshot.suspended);
-    // A paused detail GET retains only the selected ID/acknowledgement. Both
-    // failed and in-flight reads need a fresh explicit GET after resuming.
+    // A paused detail read or uncertain visibility mutation retains only its
+    // selected ID/read notice. Neither an old body nor a PATCH is replayed.
     const keepDetail = !blocked && context?.expectedUserId === snapshot.expectedUserId &&
       context?.savedPieceId === snapshot.savedPieceId && (context?.suspended || snapshot.suspended) &&
       (snapshot.enabled || snapshot.suspended) &&
@@ -75,7 +77,10 @@ export function createPieceOwnerHistoryController(configuration = {}) {
     let abort;
     try { abort = new AbortController(); } catch { return; }
     const ticket = { abort, context,
-      ...(action === 'detail' ? { detailRetry: { pieceId: value.piece_id, notice } } : {}) };
+      ...(action === 'detail' || action === 'visibility' ? {
+        detailRetry: { pieceId: value.piece_id, notice: action === 'detail' ? notice : '',
+          ...(action === 'visibility' ? { message: visibilityUncertainMessage } : {}) },
+      } : {}) };
     active = ticket;
     const previousPage = action === 'history' && value.cursor !== null ? state : null;
     // Hide stale data while reading/mutating; never display a write as done
@@ -116,15 +121,15 @@ export function createPieceOwnerHistoryController(configuration = {}) {
         active = null; emit(); return;
       }
       state = { ...empty(), phase: 'unavailable', code, message: new PieceApiError(code).message };
-      if (action === 'detail' && code === 'PIECE_TEMPORARILY_UNAVAILABLE') {
-        // A failed GET drops the old body, but keeps only this already-selected
-        // target and its known acknowledgement for an explicit fresh read.
-        state.detailRetry = { pieceId: value.piece_id, notice, token: Object.freeze({}) };
+      if ((action === 'detail' || action === 'visibility') && code === 'PIECE_TEMPORARILY_UNAVAILABLE') {
+        // A failed read/mutation drops the old body but retains its selected
+        // target. Only an acknowledged mutation owns a success notice.
+        state.detailRetry = { ...ticket.detailRetry, token: Object.freeze({}) };
       }
       if (code === 'PIECE_TEMPORARILY_UNAVAILABLE') state.message = action === 'delete'
         ? deleteUncertainMessage
         : action === 'visibility'
-          ? '公開範囲の変更結果を確認できませんでした。履歴を読み直して確認してください。'
+          ? visibilityUncertainMessage
           : 'Pieceを読み込めませんでした。もう一度読み込んでください。';
       if (code !== 'PIECE_TEMPORARILY_UNAVAILABLE') deletion = null;
       if (code === 'PIECE_CONFLICT' && (action === 'visibility' || action === 'delete')) {
