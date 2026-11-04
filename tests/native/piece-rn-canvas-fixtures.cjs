@@ -137,5 +137,16 @@ for(const mode of ['clear','removed','token','binding','multiple','during']){
   f.evidence_set='export_trap';f.export_trap=mode;delete f.retain_after_deadline;exportCases.push(f);
 }
 module.exports.export=exportCases;
-if (require.main === module) process.stdout.write(JSON.stringify(process.env.PIECE_RN_EXPORT_GROUP === '1' ? exportCases : process.env.PIECE_RN_ADMITTED_GROUP === '1' ? admittedCases
-  : process.env.PIECE_RN_BITMAP_GROUP === '1' ? bitmapCases : module.exports, null, 2) + '\n');
+const androidBitmapCases = bitmapCases.filter(c => c.evidence_set === 'bitmap_preview').map(original => {
+  const fixture = JSON.parse(JSON.stringify(original));
+  fixture.name = fixture.name.replace(/^bitmap_/, 'android_bitmap_');
+  fixture.evidence_set = 'android_bitmap_prototype';
+  fixture.test_profile = 'android-bitmap-v1';
+  fixture.props.androidRasterPrototype = true;
+  fixture.props.display.preview.renderer_version = 'piece.rn_android_bitmap_preview.prototype.v1';
+  return fixture;
+});
+module.exports.androidBitmap = androidBitmapCases;
+if (require.main === module) process.stdout.write(JSON.stringify(process.env.PIECE_RN_ANDROID_BITMAP_GROUP === '1' ? androidBitmapCases
+  : process.env.PIECE_RN_EXPORT_GROUP === '1' ? exportCases : process.env.PIECE_RN_ADMITTED_GROUP === '1' ? admittedCases
+    : process.env.PIECE_RN_BITMAP_GROUP === '1' ? bitmapCases : module.exports, null, 2) + '\n');

@@ -2,7 +2,7 @@
  * Results are local drawing evidence, never server fit/save/export authority.
  */
 import { NativeModules, Platform, findNodeHandle, requireNativeComponent, UIManager } from 'react-native';
-import { PIECE_NATIVE_PREVIEW_V4_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION, PIECE_BITMAP_PREVIEW_VERSION, PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION, preparePieceNativePreview } from './pieceLayout';
+import { PIECE_NATIVE_PREVIEW_V4_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION, PIECE_ANDROID_BITMAP_PREVIEW_VERSION, PIECE_BITMAP_PREVIEW_VERSION, PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION, preparePieceNativePreview } from './pieceLayout';
 
 const pieceNoStart = new Set(Array.from('、。，．,？！!?：；:;)]）］｝】〉》」』〕〗〙〛ー々ぁぃぅぇぉっゃゅょァィゥェォッャュョ'));
 const pieceNoEnd = new Set(Array.from('([（［｛【〈《「『〔〖〘〚'));
@@ -10,6 +10,7 @@ const measurementError = () => new Error('PIECE_NATIVE_MEASUREMENT_UNAVAILABLE')
 const finite = value => typeof value === 'number' && Number.isFinite(value);
 
 const BITMAP_WIRE = 'piece.native_bitmap_canvas.v1';
+const ANDROID_BITMAP_WIRE = 'piece.native_android_bitmap_canvas.v1';
 
 // The original iOS bitmap bridge has these capabilities without a version
 // constant. Check the actual bridge and view before requesting a preview.
@@ -46,7 +47,7 @@ export function pieceBitmapNativeView() {
 export function pieceBitmapDeadlineCurrent(deadline) {
   try {
     const wall = Date.now(), mono = globalThis.performance?.now();
-    return deadline?.profile === PIECE_BITMAP_PREVIEW_VERSION && finite(deadline.startedAt) &&
+    return [PIECE_BITMAP_PREVIEW_VERSION, PIECE_ANDROID_BITMAP_PREVIEW_VERSION].includes(deadline?.profile) && finite(deadline?.startedAt) &&
       finite(deadline.expiresAt) && deadline.expiresAt - deadline.startedAt === 8000 &&
       finite(deadline.monotonicStartedAt) && deadline.monotonicStartedAt >= 0 &&
       finite(wall) && wall < deadline.expiresAt && finite(mono) && mono >= deadline.monotonicStartedAt &&
@@ -127,6 +128,131 @@ export async function renderPieceBitmapCanvas(node, expected) {
     if (typeof value?.artifact_token === 'string') releasePieceBitmapCanvas(node, value.artifact_token);
     throw measurementError();
   }
+}
+
+// This native bridge is reached only by the local Android canvas harness.
+let androidBitmapNativeView;
+export function pieceAndroidBitmapNativeView() {
+  try {
+    if (Platform.OS !== 'android' || typeof requireNativeComponent !== 'function' ||
+        !UIManager?.getViewManagerConfig?.('PieceAndroidBitmapCanvas')) return null;
+    const module = NativeModules.PieceTextMetrics;
+    if (!['renderAndroidBitmapCanvas', 'releaseAndroidBitmapCanvas', 'captureAndroidBitmapCanvas']
+      .every(name => typeof module?.[name] === 'function')) return null;
+    if (!androidBitmapNativeView) androidBitmapNativeView = requireNativeComponent('PieceAndroidBitmapCanvas');
+    return androidBitmapNativeView;
+  } catch { return null; }
+}
+
+export function releasePieceAndroidBitmapCanvas(node, token) {
+  try {
+    const tag = findNodeHandle(node);
+    if (Platform.OS === 'android' && Number.isInteger(tag) && tag > 0 && typeof token === 'string' && token.length) {
+      NativeModules.PieceTextMetrics?.releaseAndroidBitmapCanvas?.(tag, token);
+    }
+  } catch { /* Detachment also releases the native raster. */ }
+}
+
+const androidClosed = (value, keys) => value && typeof value === 'object' && !Array.isArray(value) &&
+  Object.keys(value).sort().join() === keys.split(',').sort().join();
+const androidInk = value => Array.isArray(value) && value.length === 4 && value.every(Number.isInteger) &&
+  value[2] > value[0] && value[3] > value[1];
+
+export function readPieceAndroidBitmapCanvas(value, { input, rows, bindingToken, canvasTag, totalHeight, lineHeight }) {
+  if (Platform.OS !== 'android' || input?.candidateProfile !== PIECE_ANDROID_BITMAP_PREVIEW_VERSION ||
+      !androidClosed(value, 'version,profile,platform,canvas_tag,preview_key,binding_token,width,height,raster_scale,overflow,checked,artifact_token,rows') ||
+      value.version !== ANDROID_BITMAP_WIRE || value.profile !== input.candidateProfile || value.platform !== 'android' ||
+      value.canvas_tag !== canvasTag || !Number.isInteger(canvasTag) || canvasTag <= 0 ||
+      value.preview_key !== input.key || value.binding_token !== bindingToken || typeof bindingToken !== 'string' || !bindingToken ||
+      value.width !== input.width || value.height !== input.height || value.raster_scale !== 1 ||
+      typeof value.overflow !== 'boolean' || value.checked !== !value.overflow || !Array.isArray(value.rows)) throw measurementError();
+  if (value.overflow) {
+    if (value.artifact_token !== null || value.rows.length) throw measurementError();
+    return Object.freeze({ overflow: true, checked: false, artifactToken: null, rows: Object.freeze([]) });
+  }
+  if (typeof value.artifact_token !== 'string' || !value.artifact_token || value.artifact_token.length > 128 ||
+      value.rows.length !== rows.length || rows.length === 0) throw measurementError();
+
+  let rowTop = input.margin + (input.contentHeight - totalHeight) / 2;
+  const evidence = value.rows.map((row, index) => {
+    const source = rows[index], brand = source.kind === 'branding';
+    if (!androidClosed(row, 'tag,kind,local_ink,origin,ink') || row.tag !== source.tag || row.kind !== source.kind ||
+        !androidInk(row.local_ink) || !androidInk(row.ink) || !Array.isArray(row.origin) || row.origin.length !== 2) throw measurementError();
+    const [left, top, right, bottom] = row.local_ink;
+    const width = Math.max(source.lineWidth, right) - Math.min(0, left);
+    const brandTop = input.height - input.margin - input.brandingZone;
+    const x = brand ? input.margin : input.margin - Math.min(0, left) +
+      (input.alignment === 'center' ? (input.contentWidth - width) / 2 : 0);
+    const y = brand ? brandTop : rowTop + (lineHeight - (bottom - top)) / 2 - top;
+    const [l, t, r, b] = row.ink;
+    const slotTop = brand ? brandTop : rowTop, slotHeight = brand ? input.brandingZone : lineHeight;
+    const maxInkHeight = brand ? 40 : lineHeight;
+    if (row.origin[0] !== x || row.origin[1] !== y || width > input.contentWidth ||
+        bottom - top > maxInkHeight || b - t > maxInkHeight || l < input.margin || r > input.width - input.margin ||
+        t < slotTop || b > slotTop + slotHeight ||
+        b > input.height - input.margin - (brand ? 0 : input.brandingZone)) throw measurementError();
+    if (!brand) rowTop += lineHeight + source.gapAfter;
+    return Object.freeze({ tag: row.tag, kind: row.kind, localInk: Object.freeze([...row.local_ink]),
+      origin: Object.freeze([...row.origin]), ink: Object.freeze([...row.ink]) });
+  });
+  return Object.freeze({ version: ANDROID_BITMAP_WIRE, profile: value.profile, canvasTag, bindingToken,
+    previewKey: input.key, artifactToken: value.artifact_token, checked: true, overflow: false,
+    width: value.width, height: value.height, rasterScale: 1, rows: Object.freeze(evidence) });
+}
+
+export async function renderPieceAndroidBitmapCanvas(node, expected) {
+  const { input, deadline, bindingToken, totalHeight, lineHeight } = expected;
+  const module = NativeModules.PieceTextMetrics, canvasTag = findNodeHandle(node);
+  if (Platform.OS !== 'android' || input?.candidateProfile !== PIECE_ANDROID_BITMAP_PREVIEW_VERSION ||
+      deadline?.profile !== input.candidateProfile || !pieceBitmapDeadlineCurrent(deadline) ||
+      !Number.isInteger(canvasTag) || canvasTag <= 0 || typeof module?.renderAndroidBitmapCanvas !== 'function') throw measurementError();
+  const rows = expected.rows.map(row => ({ ...row, tag: findNodeHandle(row.node) }));
+  if (rows.length === 0 || rows.some(row => !Number.isInteger(row.tag) || row.tag <= 0 || row.tag === canvasTag ||
+      !Array.isArray(row.lineEnds) || row.lineEnds.length !== 1 || row.lineEnds[0] !== row.text.length) ||
+      new Set(rows.map(row => row.tag)).size !== rows.length) throw measurementError();
+  const remaining = Math.min(deadline.expiresAt - Date.now(), 8000 - (globalThis.performance.now() - deadline.monotonicStartedAt));
+  const { canvas, surface, border, text, branding } = input.colors;
+  let value;
+  try {
+    value = await module.renderAndroidBitmapCanvas({ version: ANDROID_BITMAP_WIRE, profile: input.candidateProfile,
+      canvas_tag: canvasTag, preview_key: input.key, binding_token: bindingToken,
+      expires_at_ms: deadline.expiresAt, remaining_ms: remaining,
+      width: input.width, height: input.height, margin: input.margin, branding_zone: input.brandingZone,
+      content_width: input.contentWidth, content_height: input.contentHeight, line_height: lineHeight, total_height: totalHeight,
+      alignment: input.alignment, branding_mode: input.brandingMode, colors: { canvas, surface, border, text, branding },
+      rows: rows.map(row => ({ tag: row.tag, text: row.text, font_size: row.fontSize, width: row.box.width,
+        height: row.box.height, line_width: row.lineWidth, gap_after: row.gapAfter, kind: row.kind })) });
+    const result = readPieceAndroidBitmapCanvas(value, { ...expected, rows, canvasTag });
+    if (!pieceBitmapDeadlineCurrent(deadline)) throw measurementError();
+    return result;
+  } catch {
+    if (typeof value?.artifact_token === 'string') releasePieceAndroidBitmapCanvas(node, value.artifact_token);
+    throw measurementError();
+  }
+}
+
+export async function capturePieceAndroidBitmapCanvas(node, artifactToken, bindingToken, isCurrent) {
+  const tag = findNodeHandle(node), module = NativeModules.PieceTextMetrics;
+  if (Platform.OS !== 'android' || !Number.isInteger(tag) || tag <= 0 ||
+      typeof artifactToken !== 'string' || !artifactToken || typeof bindingToken !== 'string' || !bindingToken ||
+      typeof isCurrent !== 'function' || !isCurrent() || typeof module?.captureAndroidBitmapCanvas !== 'function') {
+    throw measurementError();
+  }
+  try {
+    const { Dirs, FileSystem } = require('react-native-file-access');
+    const cache = Dirs.CacheDir;
+    if (typeof cache !== 'string' || !cache.startsWith('/') || cache.endsWith('/')) throw measurementError();
+    const root = `file://${cache}/piece-capture/`;
+    const uri = await module.captureAndroidBitmapCanvas(tag, artifactToken, bindingToken);
+    if (typeof uri !== 'string' || !uri.startsWith(root) || !/^piece-[A-Za-z0-9-]+\.png$/.test(uri.slice(root.length))) {
+      throw measurementError();
+    }
+    if (!isCurrent()) {
+      try { await FileSystem.unlink(uri.slice('file://'.length)); } catch { /* Confined raw cache cleanup may retry. */ }
+      throw measurementError();
+    }
+    return uri;
+  } catch { throw measurementError(); }
 }
 
 export function readPieceTextInspection(value, { text, fontSize, box, lineEnds, platform }) {

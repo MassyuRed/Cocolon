@@ -19,6 +19,7 @@ export const PIECE_NATIVE_PREVIEW_V9_VERSION = 'piece.rn_native_preview.prototyp
 export const PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION = 'piece.rn_native_preview.containment.prototype.v1';
 export const PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION = 'piece.rn_native_preview.containment.prototype.v2';
 export const PIECE_BITMAP_PREVIEW_VERSION = 'piece.rn_bitmap_preview.prototype.v1';
+export const PIECE_ANDROID_BITMAP_PREVIEW_VERSION = 'piece.rn_android_bitmap_preview.prototype.v1';
 // External saved identity is distinct from the immutable measurement profile.
 export const PIECE_BITMAP_RENDERER_VERSION = 'piece.rn_bitmap_renderer.ios.v1';
 export const PIECE_BITMAP_RENDERER_V2_VERSION = 'piece.rn_bitmap_renderer.ios.v2';
@@ -39,6 +40,7 @@ export function preparePieceNativePreview(display, nowMs = Date.now()) {
   const checked = readPiecePreviewDisplay(display, nowMs);
   if (!checked.hashVerified || !checked.preview) return null;
   const p = checked.preview;
+  if (p.renderer_version === PIECE_ANDROID_BITMAP_PREVIEW_VERSION) return null;
   const candidateProfile = [PIECE_BITMAP_PREVIEW_VERSION, PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION].includes(p.renderer_version) ? PIECE_BITMAP_PREVIEW_VERSION
     : p.renderer_version === PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION ? PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION
     : p.renderer_version === PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION ? PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION
@@ -77,6 +79,15 @@ export function preparePieceNativeSavedDisplay(raw) {
 
 export function preparePieceNativeCard(props) {
   const saved = Object.prototype.hasOwnProperty.call(props, 'savedRecord');
+  if (props.androidRasterPrototype === true) {
+    if (Platform.OS !== 'android' || saved || props.exportCanvas === true) return null;
+    const checked = readPiecePreviewDisplay(props.display);
+    const p = checked.preview;
+    if (!checked.hashVerified || p?.renderer_version !== PIECE_ANDROID_BITMAP_PREVIEW_VERSION) return null;
+    const key = JSON.stringify([PIECE_ANDROID_BITMAP_PREVIEW_VERSION, 'local', p.preview_id, p.preview_revision,
+      p.row_version, p.expires_at, p.piece_text_hash, p.content_payload_hash, p.visual_recipe_hash]);
+    return preparePieceNativeArtifact(p, key, PIECE_ANDROID_BITMAP_PREVIEW_VERSION);
+  }
   if (saved && Object.prototype.hasOwnProperty.call(props, 'display')) return null;
   if (saved) return preparePieceNativeSavedDisplay(props.savedRecord);
   const input = preparePieceNativePreview(props.display);
@@ -89,13 +100,14 @@ export function preparePieceNativeCard(props) {
 function preparePieceNativeArtifact(p, key, candidateProfile = PIECE_NATIVE_PREVIEW_VERSION) {
   const recipe = p.visual_recipe, ratio = recipe.aspect_ratio;
   const tall = ratio === '9:16', margin = tall ? 108 : 96, brandingZone = tall ? 84 : 72;
+  const androidPrototype = candidateProfile === PIECE_ANDROID_BITMAP_PREVIEW_VERSION;
   return frozenNative({ key, candidateProfile,
-    ...(candidateProfile === PIECE_BITMAP_PREVIEW_VERSION ? { rendererVersion: p.renderer_version } : {}),
+    ...(candidateProfile === PIECE_BITMAP_PREVIEW_VERSION || androidPrototype ? { rendererVersion: p.renderer_version } : {}),
     width: 1080, height: tall ? 1920 : 1350, margin, brandingZone,
     contentWidth: 1080 - 2 * margin, contentHeight: (tall ? 1920 : 1350) - 2 * margin - brandingZone,
     blocks: [...p.content_payload.body_blocks], sizes: [...nativeScales[p.format_type][ratio]],
     lineRatio: nativeLineRatios[p.format_type], paragraphRatio: p.format_type === 'short_essay' ? 0.65 : 0,
-    brandingText: p.renderer_version === PIECE_BITMAP_RENDERER_V2_VERSION ? 'Emlis' : 'Cocolon',
+    brandingText: p.renderer_version === PIECE_BITMAP_RENDERER_V2_VERSION || androidPrototype ? 'Emlis' : 'Cocolon',
     alignment: p.format_type === 'quote' ? 'center' : 'left',
     colors: { ...PIECE_THEME_COLORS[recipe.theme.theme_id] }, brandingMode: recipe.branding.branding_mode });
 }
@@ -154,12 +166,13 @@ export function recordPieceNativeMeasurement(input, state, ticket, blockIndex, k
   const { gap, lineHeight } = pieceNativeTypography(input, state.sizeIndex);
   const compositionHeight = input.plannedRows ? state.plan.totalHeight : input.blocks.reduce((total, _, index) => total + blocks[index].box.height, 0) +
     (input.rowGaps ? input.rowGaps.reduce((a, b) => a + b, 0) : gap * (input.blocks.length - 1));
-  if (input.candidateProfile === PIECE_BITMAP_PREVIEW_VERSION) {
-    // These Texts only supply the selected TextKit source. Their natural view
-    // height is not the bitmap's ink height. Whole-canvas pixel fit owns that.
+  const androidPrototype = input.candidateProfile === PIECE_ANDROID_BITMAP_PREVIEW_VERSION;
+  if (input.candidateProfile === PIECE_BITMAP_PREVIEW_VERSION || androidPrototype) {
+    // The mounted Text provides the native layout. Its view height is not
+    // the bitmap's ink height, which is checked after placement.
     for (let index = 0; index < count; index++) {
       const { box, lines } = blocks[index], brand = index === input.blocks.length;
-      if (Math.abs(box.width - (brand ? input.contentWidth : input.width)) > 0.5 || lines.length !== 1 ||
+      if (Math.abs(box.width - (brand || androidPrototype ? input.contentWidth : input.width)) > 0.5 || lines.length !== 1 ||
           lines[0].width > input.contentWidth || lines[0].end !== (brand ? input.brandingText : input.blocks[index]).length) {
         return nativeReject(next, 'invalid_bitmap_source');
       }

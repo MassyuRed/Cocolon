@@ -155,7 +155,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | 機能 | 現在の実装・境界 | 確認・残件 |
 |---|---|---|
 | 本文・visual recipe | 保存済み本人source→単独で伝わるcanonical text＋画像。現V2 source adapter／pure coreはoriginal＋normal／pre-questionのみ。refinedは別sourceのopt-in補足を使う設計だが、現コードは`source_role_or_stage_not_yet_supported`で未対応 | 旧Q&Aの存在を新商品の定義にしない。Emlis生成本文・Analysis推定の原文流用は禁止。補足をoriginalへ連結してrefined接続済みにしない |
-| 一般入力への生成 | 既存CMEEでユーザー本文を整形し、選択感情は本文に追加しない。11/4候補は、本文中の感情の時点・主体・否定・強度が選択と異なる場合と、明示的な動作名を伴う一部の短い文を受け付ける | 対象となる最終文で省略された句点はそのまま保持。「送りました」「読みました」「開けました」「始めました」「終えました」と対応する否定形を扱う。対象の後に書かれた一部の日付表現を保持。条件付きの比喩等は、書かれた条件・主語・述語を独立検査する。自己理解の同じ文型は、句点の有無を問わず原文を保持。一般日本語全体の対応、本人端末の確認、今回のAPI配置は残る |
+| 一般入力への生成 | 既存CMEEでユーザー本文を整形し、選択感情は本文に追加しない。11/4候補は、本文中の感情の時点・主体・否定・強度が選択と異なる場合と、明示的な動作名を伴う一部の短い文を受け付ける | 対象となる最終文で省略された句点はそのまま保持。「送りました」「読みました」「開けました」「始めました」「終えました」「受け取りました」「閉めました」と対応する否定形を扱う。対象の後に書かれた一部の日付表現を保持。条件付きの比喩等は、書かれた条件・主語・述語を独立検査する。自己理解の同じ文型は、句点の有無を問わず原文を保持。一般日本語全体の対応、本人端末の確認、今回のAPI配置は残る |
 | 配色選択 | Plus／Premiumの背景・文字色を固定2組から12組へ拡張する実装候補。作成時に色見本で選び、保存レシピに従い詳細・画像出力でも同じ色を再現する | Freeは固定テーマ。比率・ロゴ・保存回数のプラン差は既存どおり。Supabase適用、Render配置、まとめビルド・実機確認は未実施 |
 | preview・保存 | Premiumはその記録に適格な複数形式から選び直せる実装候補。現配色・比率・ロゴを引き継いで新候補を発行し、保存は現在の候補だけを対象とする。保存時に期限切れが確定した場合も、同じ記録から明示的に作り直せる。アプリへ戻った時点では通信せず、同じ記録で作り直しを選んだときだけ開始。結果不明の保存は、同じアカウントで作成画面を開き直した場合も元のキーで明示確認 | Free・Plusの形式決定と保存枠は既存どおり。既存保存済みの本文・画像は保持。7001の写真保存は本人確認済みで、今回の候補はまとめビルド後に実機確認 |
 | V2有効化・旧経路 | 11/1 API744336c0の明示factoryでpreview/save/owner-read/export/owner-delete各strict pair ON、public-write/public-read/visibility-toggle OFFをLive確認。default app:appはlegacy/OFF | 稼働設定と本人端末の通常保存は別。tutorial/Nexus旧経路とM5の全公開経路廃止は未完 |
@@ -166,7 +166,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | 最新限定検証 | 新export正常8PNG＋native拒否6。JS979・新native44成功。旧195は176PASS／19FAILを保持 | CI39780623108 attempt1 completed／failure、head`d2e1244…`、10/22 JST21:42:54〜22:07:18。CI全体合格ではない。限定TECHNICAL_CREDITの記録あり、product_credit=0 |
 | live・次の未完 | APIba0de502は14:16:37 JST Live/health・bootstrap200。7001で画像生成・一覧・Photos保存を本人確認。ユーザー本文限定修正はAPIのみ、新規buildなし。§41へ | 既知V4 19失敗と今回legacy canvas13reportの失敗/原因未確定を保持。Share/Android/一般日本語品質・正式商品受入れは未完 |
 
-11/4の追加候補は[週次レビュー§143](weekly_reviews/Cocolon_Weekly_Review_20261031.md#piece-navigation-android-language-20261104)を参照。Androidと作成用ブリッジがないiOSでは作成通信を開始せず、本人履歴は利用できる。Androidの保存済み画像では計測値を一括で受け取り、画像取得に失敗した際は該当する一時ファイルを回収する。
+11/4の最新候補は[週次レビュー§144](weekly_reviews/Cocolon_Weekly_Review_20261031.md#piece-android-bitmap-prototype-20261104)を参照。Androidの検証専用画面では、配置後に検査した同じ画像を表示し、1080×1350または1080×1920のPNGとして取得するコードを用意した。通常の作成はAndroidと作成用ブリッジがないiOSで停止し、本人履歴は利用できる。既存Androidの保存済み画像は[§143](weekly_reviews/Cocolon_Weekly_Review_20261031.md#piece-navigation-android-language-20261104)の計測一括化と一時ファイル回収を使用する。Android候補の実機描画・PNG色特性・通常保存・写真保存・共有は確認が残る。
 
 詳細owner：[Piece map](current_structure/02_piece_current_structure.md)、[Piece入口](../Cocolon_Piece/00_read_first.md)、[manifest](../Cocolon_Piece/manifest.json)。RN6675b4ed/6601はApple90683で配布不可だった。目的2keyとArchive検査を含むb8a43e5a/6701はApple処理を通過し、既存内部グループでテスト中・本人起動済み。7001の画像生成/一覧/OS写真保存は本人確認済み。最新は第9回§41へ。
 

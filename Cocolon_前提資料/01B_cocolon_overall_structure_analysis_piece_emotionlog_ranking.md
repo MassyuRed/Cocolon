@@ -3368,3 +3368,17 @@ API dc05dc35、通常product owner追加なし。既存 `semantic_admission.py` 
 
 
 11/3 v3整合比較の結果：semantic_units_aligned_v3_78_results.jsonは本文なし最終採否・全原本参照・既存残件ownerの索引。4scriptの106更新/53生成は完了、理由4対照とCQ04は修復する一方で旧保持未達のため新重みは通常/次学習不採用。CPU監査/完了GPUを再実行せず、source_adapter/selected_material既存入力とsemantic_admission→ObservedPropositionの条件対応へ戻る。新owner/型/通常接続/DB/RNの追加はなくSTRUCTURE_MAP_DELTA_NONE。最新はtrial/weekly§112–113。
+
+
+<a id="piece-android-bitmap-files-20261104"></a>
+### 2026-11-04 — Piece Android固定寸法描画のファイル差分
+
+| ファイル | 責務 |
+|---|---|
+| `android/app/src/main/java/com/anonymous/cocolonmvp/piece/PieceTextMetricsModule.java` | 既存Paperの文字計測に加え、検証用 `PieceAndroidBitmapCanvas` を登録。固定寸法への配置・画素検査・表示・一時PNGを同じBitmapに結ぶ。 |
+| `features/piece/pieceLayout.js`、`features/piece/pieceRenderer.js`、`components/piece/PieceVisualCard.js` | 検証専用の版と3ハッシュの照合、計測行の組立て、ネイティブ結果の検査、対象が変わった時の無効化。 |
+| `tests/native/piece-rn-android-bitmap-entry.js`、`tests/native/piece-rn-canvas-fixtures.cjs` | 通常起動と分離したAndroid確認画面と合成8ケース。既存の検証グループを保持する。 |
+| `tests/piece-v2-android-bitmap-harness.test.js`、`tests/piece-v2-renderer.test.js` | 検証専用の入口、描画元の行、失効とPNG取得・回収のJS検査。 |
+| mashos-api `ai/services/ai_inference/piece_v2_generation.py` | 既存の原文から画像本文を作る経路に「受け取り」「閉め」の明示動作を追加。 |
+
+[Piece現行構造](current_structure/02_piece_current_structure.md#piece-android-bitmap-prototype-20261104)

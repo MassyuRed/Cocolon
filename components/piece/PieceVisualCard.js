@@ -3,12 +3,13 @@
  */
 import React from 'react';
 import { View, Text } from 'react-native';
-import { PIECE_NATIVE_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION, PIECE_BITMAP_PREVIEW_VERSION, preparePieceNativeCard, createPieceNativeMeasurement, pieceNativeTypography, recordPieceNativeMeasurement } from '../../features/piece/pieceLayout';
-import { inspectPieceText, inspectPieceSelectedLine, inspectPieceSelectedLineV2, inspectPieceSelectedLineV3, inspectPieceSelectedLineV4, pieceContainmentV2DeadlineCurrent, measurePieceCandidates, pieceBitmapNativeView, pieceBitmapDeadlineCurrent, renderPieceBitmapCanvas, releasePieceBitmapCanvas } from '../../features/piece/pieceRenderer';
+import { PIECE_NATIVE_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION, PIECE_BITMAP_PREVIEW_VERSION, PIECE_ANDROID_BITMAP_PREVIEW_VERSION, preparePieceNativeCard, createPieceNativeMeasurement, pieceNativeTypography, recordPieceNativeMeasurement } from '../../features/piece/pieceLayout';
+import { inspectPieceText, inspectPieceSelectedLine, inspectPieceSelectedLineV2, inspectPieceSelectedLineV3, inspectPieceSelectedLineV4, pieceContainmentV2DeadlineCurrent, measurePieceCandidates, pieceBitmapNativeView, pieceBitmapDeadlineCurrent, renderPieceBitmapCanvas, releasePieceBitmapCanvas, pieceAndroidBitmapNativeView, renderPieceAndroidBitmapCanvas, releasePieceAndroidBitmapCanvas, capturePieceAndroidBitmapCanvas } from '../../features/piece/pieceRenderer';
 import { PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION } from '../../features/piece/pieceLayout';
 import { planPieceMeasuredRows } from '../../features/piece/pieceMeasuredWrap';
 
 let pieceBitmapBindingSerial = 0;
+const fixedRaster = profile => profile === PIECE_BITMAP_PREVIEW_VERSION || profile === PIECE_ANDROID_BITMAP_PREVIEW_VERSION;
 
 export default class PieceVisualCard extends React.Component {
   constructor(props) {
@@ -44,7 +45,10 @@ export default class PieceVisualCard extends React.Component {
   };
   clearBitmapArtifact = () => {
     const old = this.bitmapArtifact; this.bitmapArtifact = null;
-    if (old) releasePieceBitmapCanvas(old.node, old.token);
+    if (old) {
+      const release = old.android ? releasePieceAndroidBitmapCanvas : releasePieceBitmapCanvas;
+      release(old.node, old.token);
+    }
   };
   syncBitmapArtifact = () => {
     const old = this.bitmapArtifact;
@@ -59,8 +63,10 @@ export default class PieceVisualCard extends React.Component {
   };
   bitmapInvalidated = event => {
     const value = event?.nativeEvent, snapshot = this.state.measurement;
-    if (value?.binding_token === this.bitmapBindingFor(snapshot.generation) &&
-        preparePieceNativeCard(this.props)?.candidateProfile === PIECE_BITMAP_PREVIEW_VERSION) this.invalidatePlacement('native_bitmap_invalidated');
+    const profile = preparePieceNativeCard(this.props)?.candidateProfile;
+    if (value?.binding_token === this.bitmapBindingFor(snapshot.generation) && fixedRaster(profile) &&
+        (profile !== PIECE_ANDROID_BITMAP_PREVIEW_VERSION || !this.bitmapArtifact ||
+          value.artifact_token === this.bitmapArtifact.token)) this.invalidatePlacement('native_bitmap_invalidated');
   };
 
   bindingCurrent = binding => this.active && this.state.binding === binding &&
@@ -78,7 +84,9 @@ export default class PieceVisualCard extends React.Component {
   // Only lifecycle methods publish it; reading it performs no native work or
   // notification and adds nothing to a save request or a persistent record.
   syncSaveFit = () => {
-    if (preparePieceNativeCard(this.props)?.candidateProfile === PIECE_BITMAP_PREVIEW_VERSION) { this.syncBitmapSaveFit(); return; }
+    const profile = preparePieceNativeCard(this.props)?.candidateProfile;
+    if (profile === PIECE_ANDROID_BITMAP_PREVIEW_VERSION) { this.clearSaveFit(); return; }
+    if (profile === PIECE_BITMAP_PREVIEW_VERSION) { this.syncBitmapSaveFit(); return; }
     const listener = this.props.onSaveFitChange, display = this.props.display;
     if (this.saveFit && (listener !== this.saveFit.listener ||
         !this.saveFit.handle.isCurrent(display?.preview, display?.visualToken))) this.clearSaveFit();
@@ -175,7 +183,7 @@ export default class PieceVisualCard extends React.Component {
   };
 
   deadlineCurrent = (deadline = this.deadline) => !!deadline &&
-    (preparePieceNativeCard(this.props)?.candidateProfile === PIECE_BITMAP_PREVIEW_VERSION ? pieceBitmapDeadlineCurrent(deadline)
+    (fixedRaster(preparePieceNativeCard(this.props)?.candidateProfile) ? pieceBitmapDeadlineCurrent(deadline)
     : this.props.display?.preview?.renderer_version === PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION
       ? pieceContainmentV2DeadlineCurrent(deadline) : Date.now() < deadline.expiresAt);
 
@@ -188,12 +196,12 @@ export default class PieceVisualCard extends React.Component {
   syncDeadline = () => {
     const phase = this.state.measurement.phase;
     if (!this.bindingCurrent(this.state.binding) ||
-        ![PIECE_BITMAP_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION].includes(preparePieceNativeCard(this.props)?.candidateProfile) &&
+        ![PIECE_BITMAP_PREVIEW_VERSION, PIECE_ANDROID_BITMAP_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION].includes(preparePieceNativeCard(this.props)?.candidateProfile) &&
         !['planning', 'measuring', 'geometry_checked'].includes(phase)) {
       this.clearDeadline(); return;
     }
     const input = preparePieceNativeCard(this.props);
-    const pixels = [PIECE_BITMAP_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION].includes(input?.candidateProfile);
+    const pixels = [PIECE_BITMAP_PREVIEW_VERSION, PIECE_ANDROID_BITMAP_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION].includes(input?.candidateProfile);
     if (!this.bindingCurrent(this.state.binding) || !input || input.key !== this.state.measurement.key) {
       this.clearDeadline(); return;
     }
@@ -220,18 +228,18 @@ export default class PieceVisualCard extends React.Component {
     const key = input.key, binding = this.state.binding;
     const startedAt = Date.now();
     const deadline = { key, binding, handle: null, expiresAt: startedAt + 8000,
-      ...([PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION, PIECE_BITMAP_PREVIEW_VERSION].includes(input.candidateProfile) ? {
+      ...((input.candidateProfile === PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION || fixedRaster(input.candidateProfile)) ? {
         profile: input.candidateProfile, startedAt,
         monotonicStartedAt: typeof globalThis.performance?.now === 'function' ? globalThis.performance.now() : NaN,
       } : {}) };
     this.deadline = deadline;
-    if ([PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION, PIECE_BITMAP_PREVIEW_VERSION].includes(input.candidateProfile) && !this.deadlineCurrent(deadline)) {
+    if ((input.candidateProfile === PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION || fixedRaster(input.candidateProfile)) && !this.deadlineCurrent(deadline)) {
       this.invalidatePlacement('measurement_timeout'); return;
     }
     this.candidates = batch?.key === key && batch.binding === binding ? batch : { key, binding, entries: new Map() };
     deadline.handle = setTimeout(() => {
       if (this.deadline !== deadline || deadline.handle === null) return;
-      if (input.candidateProfile === PIECE_BITMAP_PREVIEW_VERSION) { this.invalidatePlacement('measurement_timeout'); return; }
+      if (fixedRaster(input.candidateProfile)) { this.invalidatePlacement('measurement_timeout'); return; }
       if (!pixels) this.deadline = null;
       if (!this.bindingCurrent(binding) || preparePieceNativeCard(this.props)?.key !== key) return;
       const generation = this.state.measurement.generation;
@@ -279,7 +287,7 @@ export default class PieceVisualCard extends React.Component {
     this.canvasNode = node; this.placementEpoch++;
     if (changed && (this.props.exportCanvas === true && this.inspection?.nodes &&
           this.inspection.snapshot.generation === this.state.measurement.generation ||
-        [PIECE_BITMAP_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION].includes(preparePieceNativeCard(this.props)?.candidateProfile) &&
+        [PIECE_BITMAP_PREVIEW_VERSION, PIECE_ANDROID_BITMAP_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION].includes(preparePieceNativeCard(this.props)?.candidateProfile) &&
           ['positioning', 'native_checked'].includes(this.state.measurement.phase))) this.invalidatePlacement();
   };
 
@@ -292,7 +300,7 @@ export default class PieceVisualCard extends React.Component {
       else if (previous?.generation === generation) this.textNodes.delete(index);
       if (previous?.generation === generation && previous.value !== value && this.state.measurement.generation === generation &&
           (this.props.exportCanvas === true && this.inspection?.snapshot.generation === generation && this.inspection.nodes ||
-            [PIECE_BITMAP_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION].includes(preparePieceNativeCard(this.props)?.candidateProfile) &&
+            [PIECE_BITMAP_PREVIEW_VERSION, PIECE_ANDROID_BITMAP_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION].includes(preparePieceNativeCard(this.props)?.candidateProfile) &&
               ['positioning', 'native_checked'].includes(this.state.measurement.phase))) this.invalidatePlacement();
     };
     this.textRefs.set(index, { generation, callback });
@@ -323,7 +331,7 @@ export default class PieceVisualCard extends React.Component {
     this.deadlineCurrent() && this.state.measurement.phase !== 'unavailable';
 
   measureCandidateBlocks = (input, sizeIndex, nodes) => Promise.all(input.blocks.map((text, index) =>
-    input.candidateProfile === PIECE_NATIVE_PREVIEW_VERSION
+    [PIECE_NATIVE_PREVIEW_VERSION, PIECE_ANDROID_BITMAP_PREVIEW_VERSION].includes(input.candidateProfile)
       ? measurePieceCandidates(nodes[index], text, input.sizes[sizeIndex])
       : measurePieceCandidates(nodes[index], text, input.sizes[sizeIndex],
         [PIECE_BITMAP_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION].includes(input.candidateProfile)
@@ -382,9 +390,12 @@ export default class PieceVisualCard extends React.Component {
 
   inspectBitmapDrawing = async () => {
     const snapshot = this.state.measurement, raw = preparePieceNativeCard(this.props);
-    if (!raw || raw.candidateProfile !== PIECE_BITMAP_PREVIEW_VERSION || snapshot.phase !== 'geometry_checked' ||
+    if (!raw || !fixedRaster(raw.candidateProfile) || snapshot.phase !== 'geometry_checked' ||
         !snapshot.plan || this.inspection?.snapshot === snapshot || !this.bitmapNode) return;
     const input = this.drawingInput(raw, snapshot), binding = this.state.binding, deadline = this.deadline;
+    const android = raw.candidateProfile === PIECE_ANDROID_BITMAP_PREVIEW_VERSION;
+    const render = android ? renderPieceAndroidBitmapCanvas : renderPieceBitmapCanvas;
+    const release = android ? releasePieceAndroidBitmapCanvas : releasePieceBitmapCanvas;
     const operation = { bitmap: true, snapshot, canvas: this.canvasNode, bitmapNode: this.bitmapNode,
       bindingToken: this.bitmapBindingFor(snapshot.generation) };
     this.inspection = operation;
@@ -406,12 +417,12 @@ export default class PieceVisualCard extends React.Component {
           gapAfter: brand ? 0 : input.rowGaps[index], kind: brand ? 'branding' : 'body' };
       });
       operation.nodes = Object.freeze(rows.map(row => row.node));
-      const result = await renderPieceBitmapCanvas(operation.bitmapNode, { input, rows, deadline,
+      const result = await render(operation.bitmapNode, { input, rows, deadline,
         bindingToken: operation.bindingToken, totalHeight: snapshot.plan.totalHeight, lineHeight: snapshot.plan.lineHeight });
-      if (!current()) { releasePieceBitmapCanvas(operation.bitmapNode, result.artifactToken); return; }
+      if (!current()) { release(operation.bitmapNode, result.artifactToken); return; }
       operation.evidence = result.rows; operation.result = result;
       if (!result.overflow) this.bitmapArtifact = { node: operation.bitmapNode, token: result.artifactToken,
-        binding, generation: snapshot.generation, key: input.key, result };
+        binding, generation: snapshot.generation, key: input.key, result, android };
       this.setState(previous => current() && previous.measurement === snapshot ? { measurement: result.overflow
         ? snapshot.sizeIndex + 1 < input.sizes.length ? { ...createPieceNativeMeasurement(raw), sizeIndex: snapshot.sizeIndex + 1 }
           : { ...snapshot, phase: 'unavailable', reason: 'native_ink_overflow', inspection: null }
@@ -422,7 +433,7 @@ export default class PieceVisualCard extends React.Component {
   };
 
   inspectDrawing = async () => {
-    if (preparePieceNativeCard(this.props)?.candidateProfile === PIECE_BITMAP_PREVIEW_VERSION) { await this.inspectBitmapDrawing(); return; }
+    if (fixedRaster(preparePieceNativeCard(this.props)?.candidateProfile)) { await this.inspectBitmapDrawing(); return; }
     const snapshot = this.state.measurement;
     if (!this.active || !['geometry_checked', 'positioning'].includes(snapshot.phase) || this.inspection?.snapshot === snapshot) return;
     const raw = preparePieceNativeCard(this.props), input = raw && this.drawingInput(raw, snapshot);
@@ -516,7 +527,7 @@ export default class PieceVisualCard extends React.Component {
   measure = (ticket, index, kind, value) => {
     if (!this.bindingCurrent(this.state.binding) || this.state.measurement.phase === 'planning') return;
     const raw = preparePieceNativeCard(this.props), input = raw && this.drawingInput(raw);
-    if (input?.candidateProfile === PIECE_BITMAP_PREVIEW_VERSION && this.inspection?.bitmap &&
+    if (fixedRaster(input?.candidateProfile) && this.inspection?.bitmap &&
         this.inspection.snapshot.generation === ticket.generation && this.state.measurement.generation === ticket.generation &&
         recordPieceNativeMeasurement(input, this.state.measurement, ticket, index, kind, value) !== this.state.measurement) {
       this.invalidatePlacement('native_bitmap_source_changed'); return;
@@ -539,15 +550,21 @@ export default class PieceVisualCard extends React.Component {
 
   // A local capture target, not renderer admission or permission to export.
   // Only the dedicated saved-record canvas exposes it, after its final render.
-  getCaptureTarget = () => {
+  getCaptureTarget = () => this.captureTarget(false);
+  getAndroidRasterTarget = () => this.captureTarget(true);
+
+  captureTarget = androidPrototype => {
     const input = preparePieceNativeCard(this.props), snapshot = this.state.measurement;
     const node = this.canvasNode, binding = this.state.binding;
-    if (!this.bindingCurrent(binding) || this.props.exportCanvas !== true || !this.props.savedRecord ||
+    const allowed = () => androidPrototype
+      ? this.props.androidRasterPrototype === true && input?.candidateProfile === PIECE_ANDROID_BITMAP_PREVIEW_VERSION
+      : this.props.exportCanvas === true && !!this.props.savedRecord && input?.candidateProfile !== PIECE_ANDROID_BITMAP_PREVIEW_VERSION;
+    if (!this.bindingCurrent(binding) || !allowed() ||
         !input || input.key !== snapshot.key || snapshot.phase !== 'native_checked' || !node) return null;
-    const bitmap = input.candidateProfile === PIECE_BITMAP_PREVIEW_VERSION;
+    const bitmap = fixedRaster(input.candidateProfile);
     const artifact = this.bitmapArtifact, operation = this.inspection;
     const current = () => {
-      if (!this.bindingCurrent(binding) || this.props.exportCanvas !== true || !this.props.savedRecord ||
+      if (!this.bindingCurrent(binding) || !allowed() ||
           this.canvasNode !== node || this.state.measurement !== snapshot ||
           preparePieceNativeCard(this.props)?.key !== input.key ||
           !operation?.nodes || this.inspection !== operation || operation.canvas !== node ||
@@ -560,6 +577,11 @@ export default class PieceVisualCard extends React.Component {
         artifact.key === input.key && artifact.token === snapshot.bitmapCanvas?.artifactToken;
     };
     if (!current()) return null;
+    if (androidPrototype) return Object.freeze({ width: input.width, height: input.height, isCurrent: current,
+      capture: async () => {
+        if (!current()) throw new Error('PIECE_NATIVE_MEASUREMENT_UNAVAILABLE');
+        return capturePieceAndroidBitmapCanvas(artifact.node, artifact.token, operation.bindingToken, current);
+      } });
     return Object.freeze({ node, key: input.key, width: input.width, height: input.height,
       ...(bitmap ? { bitmapToken: artifact.token, bitmapBinding: operation.bindingToken } : {}), isCurrent: current });
   };
@@ -589,8 +611,9 @@ export default class PieceVisualCard extends React.Component {
         'このPieceの画像レイアウトは現在確認できません。本文は下で確認できます。') : null;
     const element = React.createElement, ready = measurement.phase === 'native_checked', planning = measurement.phase === 'planning';
     const { fontSize, lineHeight, gap } = pieceNativeTypography(input, measurement.sizeIndex);
-    const bitmap = input.candidateProfile === PIECE_BITMAP_PREVIEW_VERSION;
-    const BitmapCanvas = bitmap ? pieceBitmapNativeView() : null;
+    const androidBitmap = input.candidateProfile === PIECE_ANDROID_BITMAP_PREVIEW_VERSION;
+    const bitmap = fixedRaster(input.candidateProfile);
+    const BitmapCanvas = androidBitmap ? pieceAndroidBitmapNativeView() : bitmap ? pieceBitmapNativeView() : null;
     // Reinspection revokes visibility, not this generation's existing placement.
     // Moving the rows back to zero would trigger another layout/inspection cycle.
     const positioned = !!measurement.rowOffsets, pixels = [PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION].includes(input.candidateProfile);
@@ -679,8 +702,13 @@ export default class PieceVisualCard extends React.Component {
           style: { position: 'absolute', left: 0, top: 0, width: input.width, height: input.height },
           onLayout: event => {
             const rect = event.nativeEvent?.layout;
+            const tolerance = androidBitmap ? 0.5 : 0;
             if (bitmap && this.bindingCurrent(this.state.binding) && measurement.generation === this.state.measurement.generation &&
-                (!rect || rect.x !== 0 || rect.y !== 0 || rect.width !== input.width || rect.height !== input.height)) this.invalidatePlacement();
+                (!rect || ![rect.x, rect.y, rect.width, rect.height].every(Number.isFinite) ||
+                  Math.abs(rect.x) > tolerance || Math.abs(rect.y) > tolerance ||
+                  Math.abs(rect.width - input.width) > tolerance || Math.abs(rect.height - input.height) > tolerance)) {
+              this.invalidatePlacement();
+            }
           },
         }) : null,
         element(View, { ...(pixels ? { testID: 'piece-body-composition', collapsable: false,

@@ -3632,3 +3632,16 @@ RN layoutのbrandingTextが表示・計測・文字数照合を統一し、nativ
 | `piece_v2_generation.py` → `piece_v2_content_policy.py` | 「始めました／始めませんでした」と、既知の動詞の前に明記された一部の日付表現を追加。条件付きの比喩など、CMEEが採用した明示主語・述語・条件を独立検査でも原文に照合する。条件の差替え、主語の削除、述語の差替えは拒否する。 |
 
 Androidの新規画像作成は引き続き別残件。既存のAndroid文字検査は配置前の各行、既存の書き出しは端末の画素密度で全体を描いてから縮小する。新規作成の候補には、配置後の検査と同じ描画を固定寸法で出力する経路が必要。旧版の保存画像には保存時の版を使用する。検証と今回の反映範囲は[週次レビュー§143](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#piece-navigation-android-language-20261104)。
+
+
+<a id="piece-android-bitmap-prototype-20261104"></a>
+## 2026-11-04 — Androidの固定寸法描画・PNG試作と本文の追加対応
+
+| 経路 | 差分 |
+|---|---|
+| 検証専用 `PieceVisualCard` → `pieceLayout.js` → `pieceRenderer.js` | Androidの明示的な検証入口で、版 `piece.rn_android_bitmap_preview.prototype.v1` と本文・内容・レシピの3ハッシュが一致するプレビューを受け取る。既存の折り返し計測から選んだ行を、画像の本文領域と同じ幅でマウントする。通常の作成・保存・本人詳細の出力判定は既存版を使用する。 |
+| `PieceTextMetricsModule.java` → `PieceAndroidBitmapCanvas` | マウントされたPaperの文字レイアウトを使用。各行の文字と余白を照合し、小数座標で配置した後の画素が本文・ブランドの各領域内に収まることを検査する。検査を通った画素を、1080×1350または1080×1920の一枚の不透明Bitmapへ合成する。 |
+| `PieceAndroidBitmapCanvas.onDraw` → `captureAndroidBitmapCanvas` | 同じBitmapを表示とPNG圧縮に使う。描画・対象・紐付けが有効な場合のみ、アプリ内の一時ファイルへ出力する。対象の差替え、離脱、モジュール終了や失敗で取得が無効になったファイルを削除する。 |
+| `piece_v2_generation.py` → CMEE・独立本文検査 | 明記された対象を伴う「受け取りました／受け取りませんでした」「閉めました／閉めませんでした」を既存の動作文に追加。既知の日付表現や自己理解モードの原文保持を適用し、疑問・未成立の条件・別欄で補った断片は引き続き拒否する。 |
+
+まとめビルドでAndroidを確認する場合は、リポジトリのルートから `PIECE_RN_ANDROID_BITMAP_GROUP=1 node tests/native/piece-rn-canvas-fixtures.cjs > tests/native/piece-rn-android-bitmap-fixtures.json` で合成8ケースを生成する。検証用checkoutの `index.js` を一時的に `import './tests/native/piece-rn-android-bitmap-entry';` として、既存のPaper Android手順で起動する。生成JSONと入口の差替えは検証用checkoutだけに置く。検証画面はPNGの寸法と構造、ハッシュを確認し、取得したファイルを解放する。最終画像の原寸目視、描画時間、sRGB、写真保存・共有、通常保存・本人再表示の受入れはまとめビルド後の範囲。既存配布物・稼働設定・公開API・DBスキーマへの反映は未実施。[週次レビュー§144](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#piece-android-bitmap-prototype-20261104)

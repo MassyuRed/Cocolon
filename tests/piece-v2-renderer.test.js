@@ -26,7 +26,7 @@ function sample(format = 'short_essay', ratio = '4:5', theme = 'soft_paper', bra
   return p;
 }
 const display = p => ({ phase: 'received', preview: p, hashVerified: true });
-function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates, initialNow = NOW, exportCanvas = false, os = 'ios') {
+function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates, initialNow = NOW, exportCanvas = false, os = 'ios', previewProps = {}) {
   let now = initialNow, serial = 0, monotonic = 0;
   const frames = new Map(), timers = new Map(), nativeCalls = [], candidateCalls = [], mountedNodes = new Map();
   let card;
@@ -37,6 +37,11 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
   }, createElement: (type, props, ...children) => ({ type, props: props || {}, children }) };
   const context = vm.createContext({ React, View: 'View', Text: 'Text',
     Platform: { OS: os }, findNodeHandle: node => node?.tag,
+    Dirs: { CacheDir: '/cache' }, FileSystem: {},
+    require: name => {
+      assert.equal(name, 'react-native-file-access');
+      return { Dirs: context.Dirs, FileSystem: context.FileSystem };
+    },
     UIManager: { getViewManagerConfig: name => name === 'PieceBitmapCanvas' ? {} : null },
     requireNativeComponent: name => name,
     NativeModules: { PieceTextMetrics: { measureCandidates: async (tag, text, fontSize) => {
@@ -164,8 +169,9 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
     ['features/piece/pieceApi.js', ['PieceApiError', 'readPiecePreviewSnapshot', 'readPieceOwnerSnapshot']],
     ['features/piece/piecePreviewModel.js', ['readPiecePreviewDisplay', 'verifyPieceArtifactHashes']],
     ['features/piece/pieceOwnerModel.js', ['readPieceOwnerDisplay']],
-    ['features/piece/pieceLayout.js', ['PIECE_BITMAP_RENDERER_VERSION', 'PIECE_BITMAP_RENDERER_V2_VERSION', 'PIECE_BITMAP_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_V4_VERSION', 'PIECE_NATIVE_PREVIEW_V5_VERSION', 'PIECE_NATIVE_PREVIEW_V6_VERSION', 'PIECE_NATIVE_PREVIEW_V7_VERSION', 'PIECE_NATIVE_PREVIEW_V8_VERSION', 'PIECE_NATIVE_PREVIEW_V9_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION', 'preparePieceNativeSavedDisplay', 'preparePieceNativeCard', 'preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
-    ['features/piece/pieceRenderer.js', ['supportsPieceBitmapCreation', 'isPieceBitmapSaveAdmitted', 'pieceBitmapNativeView', 'pieceBitmapDeadlineCurrent', 'renderPieceBitmapCanvas', 'releasePieceBitmapCanvas', 'readPieceBitmapCanvas', 'inspectPieceText', 'readPieceTextInspection', 'inspectPieceSelectedLine', 'readPieceSelectedLineInspection', 'readPieceSelectedLineV2Inspection', 'inspectPieceSelectedLineV2', 'readPieceSelectedLineV3Inspection', 'inspectPieceSelectedLineV3', 'readPieceSelectedLineV4Inspection', 'inspectPieceSelectedLineV4', 'pieceContainmentV2DeadlineCurrent', 'measurePieceCandidates']],
+    ['features/piece/pieceLayout.js', ['PIECE_BITMAP_RENDERER_VERSION', 'PIECE_BITMAP_RENDERER_V2_VERSION', 'PIECE_BITMAP_PREVIEW_VERSION', 'PIECE_ANDROID_BITMAP_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_V4_VERSION', 'PIECE_NATIVE_PREVIEW_V5_VERSION', 'PIECE_NATIVE_PREVIEW_V6_VERSION', 'PIECE_NATIVE_PREVIEW_V7_VERSION', 'PIECE_NATIVE_PREVIEW_V8_VERSION', 'PIECE_NATIVE_PREVIEW_V9_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION', 'preparePieceNativeSavedDisplay', 'preparePieceNativeCard', 'preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
+    ['features/piece/pieceRenderer.js', ['supportsPieceBitmapCreation', 'isPieceBitmapSaveAdmitted', 'pieceBitmapNativeView', 'pieceBitmapDeadlineCurrent', 'renderPieceBitmapCanvas', 'releasePieceBitmapCanvas', 'readPieceBitmapCanvas', 'pieceAndroidBitmapNativeView', 'readPieceAndroidBitmapCanvas',
+      'renderPieceAndroidBitmapCanvas', 'releasePieceAndroidBitmapCanvas', 'capturePieceAndroidBitmapCanvas', 'inspectPieceText', 'readPieceTextInspection', 'inspectPieceSelectedLine', 'readPieceSelectedLineInspection', 'readPieceSelectedLineV2Inspection', 'inspectPieceSelectedLineV2', 'readPieceSelectedLineV3Inspection', 'inspectPieceSelectedLineV3', 'readPieceSelectedLineV4Inspection', 'inspectPieceSelectedLineV4', 'pieceContainmentV2DeadlineCurrent', 'measurePieceCandidates']],
     ['features/piece/pieceMeasuredWrap.js', ['planPieceMeasuredRows']],
     ['components/piece/PieceVisualCard.js', ['PieceVisualCard']],
   ];
@@ -174,7 +180,7 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
       .replace(/^export default /gm, '').replace(/^export /gm, '');
     vm.runInContext(`{\n${source}\n${names.map(n => `globalThis.${n} = ${n};`).join('\n')}\n}`, context, { filename: file });
   }
-  card = new context.PieceVisualCard(saved ? { savedRecord: p, exportCanvas } : { display: display(p) }); card.componentDidMount();
+  card = new context.PieceVisualCard(saved ? { savedRecord: p, exportCanvas } : { display: display(p), ...previewProps }); card.componentDidMount();
   const render = () => {
     const tree = card.render();
     for (const node of nodes(tree)) if (typeof node.props.ref === 'function') {
@@ -194,7 +200,7 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
     flushFrame: () => { const next = [...frames.values()]; frames.clear(); next.forEach(callback => callback()); }, nativeCalls, candidateCalls, now: value => { now = value; }, monotonic: value => { monotonic = value; },
     input: () => context.preparePieceNativeCard(card.props),
     drawing: () => card.drawingInput(context.preparePieceNativeCard(card.props)),
-    replace: packet => { card.props = saved ? { savedRecord: packet, exportCanvas } : { display: display(packet) };
+    replace: packet => { card.props = saved ? { savedRecord: packet, exportCanvas } : { display: display(packet), ...previewProps };
       card.setState(context.PieceVisualCard.getDerivedStateFromProps(card.props, card.state)); },
   };
 }
@@ -2491,6 +2497,7 @@ const outputDeadline = (start = 0) => ({ profile: outputContainmentProfile, star
   expiresAt: NOW + 8000, monotonicStartedAt: start });
 
 const bitmapProfile = 'piece.rn_bitmap_preview.prototype.v1';
+const androidBitmapProfile = 'piece.rn_android_bitmap_preview.prototype.v1';
 function bitmapReply(request) {
   let top = request.margin + (request.content_height - request.total_height) / 2;
   return { version: 'piece.native_bitmap_canvas.v1', profile: bitmapProfile, platform: 'ios',
@@ -2652,7 +2659,7 @@ async function finishBitmap(h) {
   await prepare(h);
   for (let i = 0; i < h.drawing().blocks.length + (h.input().brandingMode === 'off' ? 0 : 1); i++) {
     const brand = i === h.drawing().blocks.length;
-    sendBlock(h, i, { width: brand ? h.input().contentWidth : h.input().width,
+    sendBlock(h, i, { width: brand || h.input().candidateProfile === androidBitmapProfile ? h.input().contentWidth : h.input().width,
       height: (brand ? 40 : h.card.state.measurement.plan.lineHeight) + 1 / 3,
       lines: [{ text: brand ? h.input().brandingText : h.drawing().blocks[i], x: 0, y: 0, width: 500, height: brand ? 40 : h.card.state.measurement.plan.lineHeight }] });
   }
@@ -3076,4 +3083,123 @@ test('all expanded palettes keep readable colors through preview, saved detail a
     assert.notEqual(saved.key, input.key);
     preview.card.componentWillUnmount();
   }
+});
+
+function androidBitmapReply(request) {
+  let top = request.margin + (request.content_height - request.total_height) / 2;
+  return { version: 'piece.native_android_bitmap_canvas.v1', profile: androidBitmapProfile, platform: 'android',
+    canvas_tag: request.canvas_tag, preview_key: request.preview_key, binding_token: request.binding_token,
+    width: request.width, height: request.height, raster_scale: 1, checked: true, overflow: false,
+    artifact_token: 'android-' + request.binding_token, rows: request.rows.map(row => {
+      const brand = row.kind === 'branding';
+      const local = brand ? [250, 6, 350, 26] : [0, 10, 200, 50];
+      const x = brand ? request.margin : request.margin +
+        (request.alignment === 'center' ? (request.content_width - Math.max(row.line_width, local[2])) / 2 : 0);
+      const y = brand ? request.height - request.margin - request.branding_zone
+        : top + (request.line_height - (local[3] - local[1])) / 2 - local[1];
+      if (!brand) top += request.line_height + row.gap_after;
+      return { tag: row.tag, kind: row.kind, local_ink: local, origin: [x,y],
+        ink: [Math.floor(x + local[0]), Math.floor(y + local[1]), Math.ceil(x + local[2]), Math.ceil(y + local[3])] };
+    }) };
+}
+
+function androidBitmapHarness(reply = value => value, packet = sample()) {
+  packet.renderer_version = androidBitmapProfile;
+  packet.expires_at = new Date(NOW + 60000).toISOString();
+  const fit = [], calls = [], releases = [], captures = [], removed = [];
+  const h = rawHarness(packet, undefined, false, undefined, NOW, false, 'android',
+    { androidRasterPrototype: true, onSaveFitChange: (...args) => fit.push(args) });
+  const module = h.context.NativeModules.PieceTextMetrics;
+  h.context.UIManager.getViewManagerConfig = name => name === 'PieceAndroidBitmapCanvas' ? {} : null;
+  module.renderAndroidBitmapCanvas = async req => { calls.push(req); return reply(androidBitmapReply(req), req); };
+  module.releaseAndroidBitmapCanvas = (...args) => releases.push(args);
+  module.captureAndroidBitmapCanvas = async (...args) => {
+    captures.push(args); return 'file:///cache/piece-capture/piece-1.png';
+  };
+  h.context.FileSystem.unlink = async path => removed.push(path);
+  return { ...h, packet, module, fit, calls, releases, captures, removed };
+}
+
+test('Android opt-in card mounts native bitmap from current rows and only exposes harness capture', async () => {
+  const h = androidBitmapHarness(v => v, sample('quote', '9:16'));
+  assert.equal(h.preparePieceNativePreview(display(h.packet)), null);
+  assert.equal(h.preparePieceNativeCard({ display: display(h.packet) }), null);
+  assert.equal(h.preparePieceNativeSavedDisplay({ ...savedSample(h.packet), renderer_version: androidBitmapProfile }), null);
+  assert.equal(h.isPieceBitmapSaveAdmitted(h.packet, Object.freeze({})), false);
+  assert.equal(h.supportsPieceBitmapCreation(), false);
+  assert.equal(h.card.getAndroidRasterTarget(), null);
+  assert.equal(h.find('piece-bitmap-canvas').type, 'PieceAndroidBitmapCanvas');
+  await finishBitmap(h);
+  assert.equal(h.card.state.measurement.phase, 'native_checked');
+  assert.equal(h.calls.length, 1);
+  const request = h.calls[0];
+  assert.equal(request.version, 'piece.native_android_bitmap_canvas.v1');
+  assert.equal(request.profile, androidBitmapProfile);
+  assert.equal(request.raster_scale, undefined);
+  assert.deepEqual(copy(request.colors), Object.fromEntries(['canvas','surface','border','text','branding']
+    .map(name => [name, h.input().colors[name]])));
+  assert.ok(request.rows.every(row => row.width === request.content_width));
+  assert.equal(request.rows.at(-1).text, 'Emlis');
+  assert.ok(h.candidateCalls.length > 0);
+  assert.ok(h.candidateCalls.every(call => !call.method));
+  assert.equal(h.fit.length, 0);
+  assert.equal(h.card.getCaptureTarget(), null);
+  const target = h.card.getAndroidRasterTarget();
+  assert.ok(target?.isCurrent());
+  assert.deepEqual([target.width,target.height],[1080,1920]);
+  assert.equal(h.timers.size,0);
+  h.now(NOW + 8001); h.monotonic(8001);
+  assert.equal(await target.capture(), 'file:///cache/piece-capture/piece-1.png');
+  assert.deepEqual(h.captures, [[request.canvas_tag, h.card.bitmapArtifact.token, request.binding_token]]);
+  h.card.bitmapInvalidated({ nativeEvent: { binding_token: request.binding_token, artifact_token:'other-artifact' } });
+  assert.equal(target.isCurrent(),true);
+  h.card.bitmapInvalidated({ nativeEvent: { binding_token: request.binding_token, artifact_token:h.card.bitmapArtifact.token } });
+  assert.equal(target.isCurrent(),false);
+  await assert.rejects(target.capture(), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
+  assert.equal(h.captures.length,1);
+  assert.equal(h.releases.length,1);
+  h.card.componentWillUnmount();
+});
+
+test('Android card rejects mismatched proof and releases only its reported native artifact', async () => {
+  for (const mutate of [
+    v => ({ ...v, platform:'ios' }), v => ({ ...v, preview_key:'different' }),
+    v => ({ ...v, binding_token:'different' }), v => ({ ...v, raster_scale:2 }),
+    v => ({ ...v, rows:[{ ...v.rows[0], tag:9 }, ...v.rows.slice(1)] }),
+    v => ({ ...v, rows:[{ ...v.rows[0], origin:[-1,0] }, ...v.rows.slice(1)] }),
+    v => ({ ...v, rows:[{ ...v.rows[0], ink:[-1,1,2,3] }, ...v.rows.slice(1)] }),
+    v => ({ ...v, rows:v.rows.map(row => row.kind === 'branding'
+      ? { ...row, ink:[...row.ink.slice(0,3), row.ink[1] + 41] } : row) }),
+    v => ({ ...v, overflow:true, checked:false, rows:[] }),
+  ]) {
+    const h = androidBitmapHarness(v => mutate(copy(v)));
+    await finishBitmap(h);
+    assert.equal(h.card.state.measurement.phase, 'unavailable');
+    assert.equal(h.card.getAndroidRasterTarget(), null);
+    assert.deepEqual(h.releases, [[h.calls[0].canvas_tag, 'android-' + h.calls[0].binding_token]]);
+    h.card.componentWillUnmount();
+  }
+});
+
+test('Android proof arriving after source replacement is released and stale capture files are removed by exact path', async () => {
+  let deliver, reply;
+  const first = androidBitmapHarness(v => { reply = v; return new Promise(resolve => { deliver = resolve; }); });
+  await finishBitmap(first);
+  first.replace({ ...first.packet, preview_revision:2 });
+  deliver(reply); await tickV9();
+  assert.equal(first.card.getAndroidRasterTarget(),null);
+  assert.deepEqual(first.releases,[[reply.canvas_tag,reply.artifact_token]]);
+  first.card.componentWillUnmount();
+
+  const second = androidBitmapHarness();
+  await finishBitmap(second);
+  const target = second.card.getAndroidRasterTarget();
+  second.module.captureAndroidBitmapCanvas = () => new Promise(resolve => { deliver = resolve; });
+  const capture = target.capture();
+  second.replace({ ...second.packet, preview_revision:2 });
+  deliver('file:///cache/piece-capture/piece-123.png');
+  await assert.rejects(capture, /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
+  assert.deepEqual(second.removed, ['/cache/piece-capture/piece-123.png']);
+  assert.equal(second.card.getAndroidRasterTarget(),null);
+  second.card.componentWillUnmount();
 });
