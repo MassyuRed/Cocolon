@@ -3640,7 +3640,7 @@ Androidの新規画像作成は引き続き別残件。既存のAndroid文字検
 | 経路 | 差分 |
 |---|---|
 | 検証専用 `PieceVisualCard` → `pieceLayout.js` → `pieceRenderer.js` | Androidの明示的な検証入口で、版 `piece.rn_android_bitmap_preview.prototype.v1` と本文・内容・レシピの3ハッシュが一致するプレビューを受け取る。既存の折り返し計測から選んだ行を、画像の本文領域と同じ幅でマウントする。通常の作成・保存・本人詳細の出力判定は既存版を使用する。 |
-| `PieceTextMetricsModule.java` → `PieceAndroidBitmapCanvas` | マウントされたPaperの文字レイアウトを使用。各行の文字と余白を照合し、小数座標で配置した後の画素が本文・ブランドの各領域内に収まることを検査する。検査を通った画素を、1080×1350または1080×1920の一枚の不透明Bitmapへ合成する。 |
+| `PieceTextMetricsModule.java` → `PieceAndroidBitmapCanvas` | マウントされたPaperの文字レイアウトを使用。各行の文字と余白を照合し、実際の行の開始位置を基準にレシピの配置へ置き直す。小数座標で配置した後の画素が本文・ブランドの各領域内に収まることを検査する。検査を通った画素を、1080×1350または1080×1920の一枚の不透明Bitmapへ合成する。 |
 | `PieceAndroidBitmapCanvas.onDraw` → `captureAndroidBitmapCanvas` | 同じBitmapを表示とPNG圧縮に使う。描画・対象・紐付けが有効な場合のみ、アプリ内の一時ファイルへ出力する。対象の差替え、離脱、モジュール終了や失敗で取得が無効になったファイルを削除する。 |
 | `piece_v2_generation.py` → CMEE・独立本文検査 | 明記された対象を伴う「受け取りました／受け取りませんでした」「閉めました／閉めませんでした」を既存の動作文に追加。既知の日付表現や自己理解モードの原文保持を適用し、疑問・未成立の条件・別欄で補った断片は引き続き拒否する。 |
 

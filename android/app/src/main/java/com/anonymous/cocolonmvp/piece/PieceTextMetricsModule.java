@@ -544,12 +544,15 @@ public final class PieceTextMetricsModule extends ReactContextBaseJavaModule {
           int[] scan = new int[scratchWidth];
           int alpha = source.brand && "required_subtle".equals(brandingMode) ? 204 : 255;
           Rect local = paintAndMeasure(source, scratch, scan, pad, 0, 0, alpha, deadline);
-          double rowWidth = Math.max(source.lineWidth, local.right) - Math.min(0, local.left);
+          // The mounted layout can position a line away from zero in an RTL
+          // locale. Rebase the advance and ink together into the card slot.
+          double rowLeft = Math.min(source.lineLeft, local.left);
+          double rowWidth = Math.max(source.lineLeft + source.lineWidth, local.right) - rowLeft;
           int maxInkHeight = source.brand ? 40 : lineHeight;
           if (rowWidth > contentWidth || local.height() > maxInkHeight) return bitmapReply(request, canvasTag, null, null);
           double slotTop = source.brand ? height - margin - brandingZone : rowTop;
           double slotBottom = slotTop + (source.brand ? brandingZone : lineHeight);
-          double x = source.brand ? margin : margin - Math.min(0, local.left) +
+          double x = source.brand ? margin : margin - rowLeft +
               ("center".equals(alignment) ? (contentWidth - rowWidth) / 2 : 0);
           double y = source.brand ? slotTop : slotTop + (lineHeight - local.height()) / 2.0 - local.top;
           int wholeX = (int) Math.floor(x), wholeY = (int) Math.floor(y);
@@ -567,6 +570,7 @@ public final class PieceTextMetricsModule extends ReactContextBaseJavaModule {
           WritableMap row = Arguments.createMap();
           row.putInt("tag", source.tag);
           row.putString("kind", source.brand ? "branding" : "body");
+          row.putDouble("line_left", source.lineLeft);
           row.putArray("local_ink", bounds(local));
           row.putArray("origin", coordinates(x, y));
           row.putArray("ink", bounds(placed));
@@ -597,6 +601,7 @@ public final class PieceTextMetricsModule extends ReactContextBaseJavaModule {
     final float density;
     final int color;
     final double size;
+    final double lineLeft;
     final double lineWidth;
     final double gap;
     final boolean brand;
@@ -620,6 +625,8 @@ public final class PieceTextMetricsModule extends ReactContextBaseJavaModule {
           Math.abs(width / (double) density - boxWidth) <= 0.5 && Math.abs(height / (double) density - boxHeight) <= 0.5 &&
           layout.getLineCount() == 1 && layout.getLineStart(0) == 0 && layout.getLineEnd(0) == text.length() &&
           layout.getEllipsisCount(0) == 0 && Math.abs(layout.getLineWidth(0) / (double) density - lineWidth) <= 0.5);
+      lineLeft = layout.getLineLeft(0) / (double) density;
+      require(Double.isFinite(lineLeft) && lineLeft >= -0.5 && lineLeft <= boxWidth + 0.5);
       TextPaint paint = new TextPaint(layout.getPaint());
       if (layout.getText() instanceof Spanned) {
         Spanned spans = (Spanned) layout.getText();

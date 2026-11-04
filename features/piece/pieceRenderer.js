@@ -176,12 +176,14 @@ export function readPieceAndroidBitmapCanvas(value, { input, rows, bindingToken,
   let rowTop = input.margin + (input.contentHeight - totalHeight) / 2;
   const evidence = value.rows.map((row, index) => {
     const source = rows[index], brand = source.kind === 'branding';
-    if (!androidClosed(row, 'tag,kind,local_ink,origin,ink') || row.tag !== source.tag || row.kind !== source.kind ||
+    if (!androidClosed(row, 'tag,kind,line_left,local_ink,origin,ink') || row.tag !== source.tag || row.kind !== source.kind ||
+        !finite(row.line_left) || row.line_left < -0.5 || row.line_left > source.box.width + 0.5 ||
         !androidInk(row.local_ink) || !androidInk(row.ink) || !Array.isArray(row.origin) || row.origin.length !== 2) throw measurementError();
     const [left, top, right, bottom] = row.local_ink;
-    const width = Math.max(source.lineWidth, right) - Math.min(0, left);
+    const rowLeft = Math.min(row.line_left, left);
+    const width = Math.max(row.line_left + source.lineWidth, right) - rowLeft;
     const brandTop = input.height - input.margin - input.brandingZone;
-    const x = brand ? input.margin : input.margin - Math.min(0, left) +
+    const x = brand ? input.margin : input.margin - rowLeft +
       (input.alignment === 'center' ? (input.contentWidth - width) / 2 : 0);
     const y = brand ? brandTop : rowTop + (lineHeight - (bottom - top)) / 2 - top;
     const [l, t, r, b] = row.ink;

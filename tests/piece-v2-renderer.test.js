@@ -3085,20 +3085,21 @@ test('all expanded palettes keep readable colors through preview, saved detail a
   }
 });
 
-function androidBitmapReply(request) {
+function androidBitmapReply(request, rightAligned = false) {
   let top = request.margin + (request.content_height - request.total_height) / 2;
   return { version: 'piece.native_android_bitmap_canvas.v1', profile: androidBitmapProfile, platform: 'android',
     canvas_tag: request.canvas_tag, preview_key: request.preview_key, binding_token: request.binding_token,
     width: request.width, height: request.height, raster_scale: 1, checked: true, overflow: false,
     artifact_token: 'android-' + request.binding_token, rows: request.rows.map(row => {
       const brand = row.kind === 'branding';
-      const local = brand ? [250, 6, 350, 26] : [0, 10, 200, 50];
-      const x = brand ? request.margin : request.margin +
-        (request.alignment === 'center' ? (request.content_width - Math.max(row.line_width, local[2])) / 2 : 0);
+      const lineLeft = brand ? 250 : rightAligned ? request.content_width - Math.max(row.line_width, 200) - 2 : 0;
+      const local = brand ? [250, 6, 350, 26] : [lineLeft, 10, lineLeft + 200, 50];
+      const x = brand ? request.margin : request.margin - lineLeft +
+        (request.alignment === 'center' ? (request.content_width - Math.max(row.line_width, 200)) / 2 : 0);
       const y = brand ? request.height - request.margin - request.branding_zone
         : top + (request.line_height - (local[3] - local[1])) / 2 - local[1];
       if (!brand) top += request.line_height + row.gap_after;
-      return { tag: row.tag, kind: row.kind, local_ink: local, origin: [x,y],
+      return { tag: row.tag, kind: row.kind, line_left: lineLeft, local_ink: local, origin: [x,y],
         ink: [Math.floor(x + local[0]), Math.floor(y + local[1]), Math.ceil(x + local[2]), Math.ceil(y + local[3])] };
     }) };
 }
@@ -3166,6 +3167,7 @@ test('Android card rejects mismatched proof and releases only its reported nativ
     v => ({ ...v, platform:'ios' }), v => ({ ...v, preview_key:'different' }),
     v => ({ ...v, binding_token:'different' }), v => ({ ...v, raster_scale:2 }),
     v => ({ ...v, rows:[{ ...v.rows[0], tag:9 }, ...v.rows.slice(1)] }),
+    v => ({ ...v, rows:[{ ...v.rows[0], line_left:1080 }, ...v.rows.slice(1)] }),
     v => ({ ...v, rows:[{ ...v.rows[0], origin:[-1,0] }, ...v.rows.slice(1)] }),
     v => ({ ...v, rows:[{ ...v.rows[0], ink:[-1,1,2,3] }, ...v.rows.slice(1)] }),
     v => ({ ...v, rows:v.rows.map(row => row.kind === 'branding'
@@ -3179,6 +3181,18 @@ test('Android card rejects mismatched proof and releases only its reported nativ
     assert.deepEqual(h.releases, [[h.calls[0].canvas_tag, 'android-' + h.calls[0].binding_token]]);
     h.card.componentWillUnmount();
   }
+});
+
+test('Android quote centers the line when the mounted layout starts at the right', async () => {
+  const h = androidBitmapHarness((_, request) => androidBitmapReply(request, true), sample('quote', '9:16'));
+  await finishBitmap(h);
+  const artifact = h.card.state.measurement.bitmapCanvas;
+  const proof = artifact.rows[0], request = h.calls[0];
+  assert.ok(proof.localInk[0] > 0);
+  assert.equal(proof.ink[0], Math.floor(request.margin +
+    (request.content_width - Math.max(request.rows[0].line_width, 200)) / 2));
+  assert.ok(h.card.getAndroidRasterTarget()?.isCurrent());
+  h.card.componentWillUnmount();
 });
 
 test('Android proof arriving after source replacement is released and stale capture files are removed by exact path', async () => {
