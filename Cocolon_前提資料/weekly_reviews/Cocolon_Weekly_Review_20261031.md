@@ -3172,3 +3172,25 @@ MashのPiece残件継続指示で、§151を引き継いだ。開始点はRN `22
 [検証原本・再現runner・実wire・広域XML](https://chatgpt.com/library?file_id=libfile_3da0f29be92881918bbda2f743e4873a&account_id=personal)は `Cocolon_Piece_20261104_structured_visibility_validation.zip`（72member、340,944bytes、SHA256 `403739becfac027a0bdc3fab16865a6aae57ffb06fee0576ede3a2fb88b068e5`）。GitHub管理下の製品sourceは複製せず、検証postimageのhashと原本参照を保存した。APIは[f2a837fe](https://github.com/MassyuRed/mashos-api/commit/f2a837fe1604d93dc4c57314c70c6ecd7d9b5307)へ反映し、全5fileの全文・blob・変更集合・親commitを読み戻して確認。RNの反映先は既存Draft PR30。
 
 差分は製品5・既存test2・前提資料4の計11file、新規repo file0。全体現在地・Piece current map・01Aは関連責務を置換更新し、本節を履歴とする。STRUCTURE_MAP_DELTA_NONE（既存文法・唯一作者・author-free検査・同ID GET復旧内の修復、意味型・公開API／DTO・DB・renderer・依存・workflow変更なし）。primary outcomeは限定TECHNICAL_CREDIT。ビルド・配布・本番配置・DB適用・GPU・本人端末操作は0。一般日本語品質、Android通常作成・保存への採用、Photos／Shareの実機確認と正式商品受入れは残る。次も残件の直接修復を継続し、候補反映を本番・実機成功へ読み替えない。
+
+<a id="piece-identity-material-boundaries-20261104"></a>
+## 153. 11/4 — 人物名の役割化で名前・集合・親族の意味が変わる不具合を修復
+
+MashのPiece残件継続指示で§152を引き継いだ。開始点はRN `76e2c7c088b2c1b917765012bc71fabf98784d51`／API `f2a837fe1604d93dc4c57314c70c6ecd7d9b5307`。前提資料・作業姿勢とルール、全体設計／01A・B・Cのファイル地図、Piece currentと最新weekly・実sourceを引き継ぎ、現行branchと対象preimageをGitHubで照合した。System Contextの最新cache未完成に対しては既定のfresh原本読取を使い、入口の再構築へ逸れない。既存設計内のLEVEL_2／Rule18 §0A・§11.3として修復・検証・GitHub反映を行う。実装・反映ownerは華恋、別担当は読取・再現・独立レビューのみ。ビルドは後でまとめる方針を維持する。
+
+**名前自体を話題にした文の破損。** 既存のsource-bound role bindingは「名前は田中さん」「田中さんという名前」を拒否していたが、半角space・TAB・全角spaceが入ると「名前は 友人」「友人 という名前」へ置き換えていた。既存identity-material拒否の同じownerで、名前labelと「は」前後、既存identity operator前の水平空白を照合する。「氏名」と、有限な「と名付け／と名づけ」の対象表記も同じ拒否へ接続した。例えば「人形を友人の田中さんと名づけたい」を「人形を友人と名づけたい」へ壊した候補は発行しない。有限命名は対象の肯否・過去・丁寧形と後続境界だけに限定し、一般命名活用を網羅したとは扱わない。
+
+単純な「と名付け」の前方一致では「友人の田中さんと名付けについて話したい」まで拒否するため、その案は採用しなかった。有限述語を確認する最終版では、名付けについて／名づけの候補／名付けには参加等の通常の人物参照を保持する。独立レビューが検出したlabel直後の空白と「名付けたいです／名づけたくないです」の漏れも対象内で修復し、最終差分の未解決blocking指摘は0。新しい名前辞書・意味型・本文作者や、sourceにない人物理解を追加していない。
+
+**集合・親族語の表記差。** 「友人のみなさん／おかあさん」等は既存で曖昧なidentityとして拒否していた一方、「友人の皆さん／母さん」は「友人」へ置換され、集合量や関係が落ちていた。既存拒否と同じ概念の漢字14表記（皆・父・母・兄・姉・爺・婆・叔父・伯父・叔母・伯母・旦那・嫁・娘＋さん）を完全一致で同期する。皆川さん・母里さん等の通常名は部分一致で拒否せず、集合の新しい作者を作って補完もしない。
+
+既存script-role testへ428条件を追加し、最終492条件が成功。同じ最終テストを旧sourceへ固定して実行した145成功・347失敗を、製品全体の失敗数へ換算しない。実Engineの495固有入力の前後比較では335件が生成→拒否、70件が生成→生成で本文全文同一、90件が拒否→拒否だった。拒否継続のうち12件は従来より早いidentity-material拒否へ理由codeが変わったため、旧テストの347失敗全件を「誤生成していた」とは報告しない。原文・UTF8根拠・通常candidateの一致も確認した。別担当の独立122条件は全期待と一致し、通常名・名詞topic・別fieldのlabel／留保、raw field／evidence・独立本文検査を確認。これらは合成条件の局所結果で、一般日本語・商品品質の成功率ではない。
+
+新しい7例×3plan×平穏／自己理解の実ASGI＋隔離PGlite42条件、計120通信が成功。30拒否条件は同じkeyで各2回POSTして422／閉じたPIECE_SOURCE_NOT_ELIGIBLEを返し、本人別のPiece全row・保存枠消費・月lockは前後同一、候補発行・審査・準備後のprovider追加呼出しは0。prepare自体のEmlis provider1回を追加0へ混同しない。正常12条件はpreview・同key再取得・save・同keysave再試行・本人GETまで成功し、本文・3hash・recipe・rendererが一致、保存枠消費各1回。Auth／providerは合成で、live SQL・実端末・native描画の確認ではない。
+
+最終API広域104fileは9,618成功・既存161失敗・error0・native17除外。§152の失敗identity集合と完全一致し、新規失敗0。source／testの最終bytes不変を確認した。初期・途中版の396条件、広域9,522成功等は最終成功へ加算しない。対象492・独立122・ASGI42も広域へ上乗せしない。RN製品／testは今回変更せず、過去のRN成功件数を今回の新規検証へ流用しない。通信中断後の操作経路も独立読取したが、新たな不具合は再現せず、仮説だけの修正は加えなかった。取消は生成OFF後も既存cleanupが使えるため、FEATURE_DISABLEDによる復旧不能という初期仮説は撤回した。
+
+APIは[0d8b9401](https://github.com/MassyuRed/mashos-api/commit/0d8b94016f0b6a226c5692922332ff8b53cdf8f2)へ反映。全2fileの全文・blob・変更集合・親commitを読戻して一致を確認。検証原本は[Cocolon_Piece_20261104_identity_semantics_validation.zip](https://chatgpt.com/library?file_id=libfile_b0d1b1766334819184b27e91f2c8116a&account_id=personal)（67member、426,941bytes、SHA256 `0fb6c196e9f549490302b7efce6ff0a2f3d8887c1fa4286e3b7b244e6981f3ac`）。旧／新Engine出力、最終広域XML、wire全原本・再現runner、source/test hashとGitHub読戻しを保存し、GitHub管理の製品sourceは重複保存しない。
+
+差分は製品1・既存test1・前提資料4の計6file、新規repo file0。全体現在地・Piece current map・01Aは関連責務だけを置換更新、本節を履歴とする。STRUCTURE_MAP_DELTA_NONE（既存role binding拒否内の修復、公開API／DTO・DB・renderer・依存・workflow・新owner変更なし）。primary outcomeは限定TECHNICAL_CREDIT。ビルド・配布・本番配置・DB適用・GPU・本人端末操作は0。一般命名活用・人物理解、一般日本語品質、Android通常作成・保存への採用、Photos／Shareの実機確認と正式商品受入れは残る。
+
