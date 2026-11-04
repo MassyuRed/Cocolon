@@ -3493,3 +3493,21 @@ Piece専用入口とmanifestに10/23のTestFlight未送信・本人保存未確�
 後続の因果切分け8条件では「今日は本を読みました。」に続く完成留保「まだ決めていません。」は平穏／自己理解とも生成し、未完の譲歩・条件や「明日も。」は平穏で原文保持、自己理解で拒否された。selected_feelings側の既存any有限文判定と、自己理解側の全sentence完成検査の差であり、普通の叙述全体を未対応と一括しない。平穏の原文保持を、新たな意味解釈や一般文法判定へ換算しない。新しい製品修正はせず、既存の完成文境界を狭く確認した。実行はfreshな同API commitから復元した隔離環境で、前段の統合回帰と別実行。次は、自己理解で拒否された普通の叙述のうち、既存有限文法で完成を証明できる文が誤拒否されていないかを確認する。今回の日常24と旧161を無意味に再実行せず、通常操作での新しい不具合又は決定済み未実装に絞る。一般の自然な再構成、Android通常作成／保存、実Photos／Share、backend receiptの本番適用・正式商品受入れは残る。本番適用やビルドをこの次作業に含めない。
 
 STRUCTURE_MAP_DELTA_NONE（既存service／本人照合修復と入口同期、新owner・API／DTO・DB・renderer変更なし）。限定TECHNICAL_CREDIT、正式商品受入れ0/3。ビルド・配布・本番配置・live DB変更・GPU・本人端末操作0。今回の検証実績と、指定8時間の実働完了は別であり、8時間完了をclaimしない。
+
+
+<a id="piece-object-particle-pause-20261104"></a>
+## 167. 11/4 — 完成動作文の「を」直後の空白で自己理解が誤拒否される不具合を修復
+
+開始はRN `0424a0c2bb686ba9141e93470a718d090ae1e33d`／API `24439250106945967844ad0855aba5bfaa15fda8`。§166の次作業に沿い、保存原入力から既存有限文法で完成を証明できる動作文を照合した。「私は本を読みました。」は生成できるが、「私は本を 読みました。」は自己理解で拒否され、既に対応する動詞・活用にもかかわらず横空白だけで結果が異なった。既存の日付付き「本を昨日に 読みました。」は生成できており、助詞直後のpauseだけが同じ読取へ入っていなかった。
+
+`piece_v2_generation.py::_is_unpunctuated_account`で、最後の「を」の後のpredicateについてSPACE／TAB／全角SPACEだけを照合用viewから除く。原文やobjectをstripせず、KEEP作者、段落・二欄、scalar／UTF8座標は既存どおり保持する。既存の漢字動作名と既知7動詞・肯否／過去／明示終端付き非過去・有限日付の判定を再使用し、未知動詞、改行、NBSP、疑問、条件・報告、空の述語は新たに許可しない。新しい意味型・辞書・作者・API／DTO・DB・rendererは追加しない。
+
+同じ新63条件は修正前39失敗／24成功、修正後63成功。対象moduleは365成功（旧302＋新63）、その後追加した二欄・作者禁止の独立検査1も成功。正39は原文本文・hash・保存JSON・declaration false・S7を照合し、負24は拒否を維持した。二欄検査はEngine／compiler／唯一作者を例外化した後も正しいartifactを検査でき、空白削除・否定反転・本人変更・句読点差替え・欄順反転の5改変を拒否した。新64、旧期待変更0。
+
+関連4suiteは2,674成功。初回はSQL環境未指定により保存stageの7 setup errorがあり、成功扱いにしなかった。既存固定PGlite 0.5.8を復元してその7と初回に除外した既存SQL4だけを再実行し、計11成功。補助的な既存scope2suiteは106成功。重複を除く今回実行の対象は3,157成功、未解消失敗0。前回RN1,537／API広域11,025＋既存161は§166の記録であり、今回の再実行・全API成功には数えない。pytest 8.4.1／FastAPI 0.142.2の隔離環境を使用し、production依存の変更0。
+
+API製品1・既存test1を[068c9b13](https://github.com/MassyuRed/mashos-api/commit/068c9b133b1b45d67fb7032cbf3249d92c1c3912)へ反映。両file全文／blobを読戻して検証済みbytesとの一致を確認した。source SHA256は `9c972ff579f54a6fd296f1002c329ecb1d4dc2f5e85af050eb05654569a3bf80`、testは `89e7ada36ea2d454489e22d0f37b7c71d93a62818cf9ad29750c346463dbbca4`。対象は `test_b05a_piece_self_insight_mode.py`、`test_b05a_piece_saved_original_generation.py`、`test_b05a_piece_saved_state_handoff.py`、`test_b08_source_meaning_review.py`、`test_b08_piece_v2_generation.py`、`test_b08_piece_scoped_subject_ownership.py`、`test_b08_piece_self_scoped_focal.py`。
+
+全体00・01Aの既存責務・Piece current mapを同じ単位で差分同期。STRUCTURE_MAP_DELTA_NONE（既存有限読取のpause対称性修復、新ownerなし）。限定TECHNICAL_CREDIT。ビルド・配布・本番配置・live DB・GPU・本人端末操作0、正式商品受入れ0/3。一般日本語品質や未知動詞全体の対応には拡張しない。
+
+次は、この修復が関与する保存原入力の複数文・二欄・日付付き動作で、既存の完成条件と欄境界が同じかを確認する。今回の63／二欄1や§166の24を再実行するだけの作業へ戻さず、通常操作で再現する別の未完了を直接扱う。Android通常作成・実Photos／Share・backend receiptの本番適用等の残件は維持し、ビルドや本番適用を自動実行しない。
