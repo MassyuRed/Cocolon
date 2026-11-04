@@ -179,6 +179,7 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
           } catch (error) {
             check(); if (disposed) throw failed();
             if (error?.code === 'PIECE_TEMPORARILY_UNAVAILABLE') throw new PieceExportReceiptRetryError();
+            if (error?.code === 'PIECE_FEATURE_DISABLED') throw new PieceApiError('PIECE_FEATURE_DISABLED');
             throw failed();
           }
           check(); if (disposed) throw failed();
@@ -192,7 +193,7 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
           asset_sha256: assetHash, mime_type: 'image/png', width: input.width, height: input.height }),
         async saveToPhotos() {
           begin();
-          let saved = false, cleanupFailed = false, retryReceipt = false;
+          let saved = false, cleanupFailed = false, retryReceipt = false, featureStopped = false;
           try {
             check();
             if (Platform.OS === 'android' && Number(Platform.Version) < 29) {
@@ -224,6 +225,9 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
             if (error instanceof PieceExportReceiptRetryError) {
               retryReceipt = true; throw error;
             }
+            if (nativeStatus === 'not_started' && error?.code === 'PIECE_FEATURE_DISABLED') {
+              featureStopped = true; throw new PieceApiError('PIECE_FEATURE_DISABLED');
+            }
             throw failed();
           } finally {
             operating = false;
@@ -233,7 +237,7 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
               disposed = true;
               try { await cleanup(); }
               catch {
-                if (!saved) throw failed();
+                if (!saved && !featureStopped) throw failed();
                 cleanupFailed = true;
               }
             }
@@ -242,7 +246,7 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
         },
         async openShare() {
           begin();
-          let outcome = null, cleanupFailed = false, retryReceipt = false;
+          let outcome = null, cleanupFailed = false, retryReceipt = false, featureStopped = false;
           try {
             await verify();
             check(); if (disposed) throw failed();
@@ -265,6 +269,9 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
             if (error instanceof PieceExportReceiptRetryError) {
               retryReceipt = true; throw error;
             }
+            if (nativeStatus === 'not_started' && error?.code === 'PIECE_FEATURE_DISABLED') {
+              featureStopped = true; throw new PieceApiError('PIECE_FEATURE_DISABLED');
+            }
             throw failed();
           } finally {
             operating = false;
@@ -275,7 +282,7 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
               try { await cleanup(); }
               catch {
                 // An observed share result survives a cleanup failure.
-                if (!outcome) throw failed();
+                if (!outcome && !featureStopped) throw failed();
                 cleanupFailed = true;
               }
             }

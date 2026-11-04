@@ -21,7 +21,7 @@ export class PieceOwnerHistoryHost extends React.Component {
     this.state = { revision: 0 };
     this.mounted = false; this.foreground = false; this.controller = null; this.binding = null;
     this.requestedSavedTarget = null; this.deletedSavedTarget = null; this.exportAttempt = null; this.exportMessage = null; this.exportSerial = 0;
-    this.exportOperation = null;
+    this.exportOperation = null; this.exportStopStamp = null;
   }
   savedTarget() {
     const value = this.props.savedPiece;
@@ -151,10 +151,31 @@ export class PieceOwnerHistoryHost extends React.Component {
     if (old) { old.abort.abort(); void old.asset?.dispose().catch(() => {}); }
   }
   syncExportContext() {
+    if (this.exportStopStamp !== this.stamp()) this.exportStopStamp = null;
     this.syncExportOperation();
     if (this.exportAttempt && !this.exportCurrent(this.exportAttempt)) this.cancelExport();
     if(this.exportMessage && (!this.current() || this.controller?.getView().record!==this.exportMessage.displayed ||
         this.stamp()!==this.exportMessage.stamp))this.exportMessage=null;
+  }
+  stopExport(attempt) {
+    if (!this.exportCurrent(attempt)) return false;
+    // This is an export-only stop. Keep ordinary detail readable, revoke the
+    // image attempt, and wait for runtime refresh before another explicit try.
+    this.exportStopStamp = attempt.stamp;
+    this.exportOperation = null;
+    this.cancelExport();
+    // Abort listeners may synchronously change owner, route or runtime. The
+    // old stop must not write a notice or refresh that newly selected context.
+    const current = () => this.current() && this.stamp() === attempt.stamp &&
+      this.controller?.getView().record === attempt.displayed &&
+      this.exportStopStamp === attempt.stamp && this.exportAttempt === null;
+    if (!current()) return true;
+    this.exportMessage = { text: '画像の保存・共有は現在利用できません。',
+      displayed: attempt.displayed, stamp: attempt.stamp };
+    this.setState(s => ({ revision: s.revision + 1 }));
+    if (!current()) return true;
+    try { Promise.resolve(this.props.refreshRuntime?.()).catch(() => {}); } catch {}
+    return true;
   }
   rereadExportRecord(record) {
     if (!this.current() || this.controller?.getView().record !== record ||
@@ -166,6 +187,7 @@ export class PieceOwnerHistoryHost extends React.Component {
     if (!this.current() || this.props.flags?.piece_v2_export_enabled !== true ||
         this.controller?.getView().phase !== 'detail' || this.controller.getView().record !== record ||
         !supportsPieceSavedImage(record.renderer_version) || this.exportAttempt?.busy ||
+        this.exportStopStamp === this.stamp() ||
         (this.exportMessage?.displayed === record && this.exportMessage?.needsReread === true) ||
         this.exportOperationFor(record)?.phase === 'running') return;
     this.exportOperation = null;
@@ -198,7 +220,8 @@ export class PieceOwnerHistoryHost extends React.Component {
         }
       };
       this.setState(s => ({ revision: s.revision + 1 }));
-    } catch {
+    } catch (error) {
+      if (error?.code === 'PIECE_FEATURE_DISABLED' && this.stopExport(attempt)) return;
       if (this.exportCurrent(attempt)) {
         this.cancelExport(); this.exportMessage = {
           text: attempt.needsReread === true
@@ -242,6 +265,7 @@ export class PieceOwnerHistoryHost extends React.Component {
         this.setState(s => ({ revision: s.revision + 1 }));
       }
     } catch (error) {
+      if (error?.code === 'PIECE_FEATURE_DISABLED' && this.stopExport(attempt)) return;
       this.syncExportOperation();
       if (operation && this.exportOperation === operation) {
         if (operation.suspended && ['started', 'unknown'].includes(attempt.asset?.nativeStatus)) {
@@ -287,8 +311,10 @@ export class PieceOwnerHistoryHost extends React.Component {
     const attempt = this.exportCurrent(this.exportAttempt) ? this.exportAttempt : null;
     const operation = this.exportOperationFor(record);
     const pendingOperation = operation?.phase === 'running';
-    const exporting = !!attempt?.busy || pendingOperation, exportReady = !!attempt?.target?.isCurrent();
+    const exportStopped = this.current() && this.exportStopStamp === this.stamp();
+    const exporting = !!attempt?.busy || pendingOperation || exportStopped, exportReady = !!attempt?.target?.isCurrent();
     const exportMessage = operation?.phase === 'complete' ? this.exportOutcomeMessage(operation.outcome, operation.action)
+      : exportStopped ? '画像の保存・共有は現在利用できません。'
       : this.current() && record === this.exportMessage?.displayed && this.stamp() === this.exportMessage?.stamp
         ? this.exportMessage.text : null;
     const needsReread = this.current() && record === this.exportMessage?.displayed &&

@@ -3303,3 +3303,22 @@ APIは[3ac9dc97](https://github.com/MassyuRed/mashos-api/commit/3ac9dc97bd72c1bb
 
 差分は製品3・既存test2・前提資料4の計9file、新規repo file0。全体現在地・Piece map・01Aは責務を置換更新し、本節を履歴とする。STRUCTURE_MAP_DELTA_NONE（既存setContextの状態確定順序とsource形式制約の共用修復、新owner・意味型・公開API／DTO・DB・renderer・依存・workflow変更なし）。primary outcomeは限定TECHNICAL_CREDIT。build・配布・本番配置・DB適用・GPU・本人端末操作0。一般日本語品質、Android通常作成・保存、Photos／Shareの実機確認と正式商品受入れは残る。
 
+
+<a id="piece-nominal-target-export-stop-20261104"></a>
+## 159. 11/4 — 対象名詞句の留保誤検出と、画像書き出しの停止通知を修復
+
+MashのPiece残件継続指示により§158の続きから実施。開始点はRN `f49ff228aa5559575b43e75946632a887e6846da`／API `3ac9dc97bd72c1bbc7a442e9de8c9b6da332ec79`。全体現在地、作業姿勢とルール、恒久incident、全体設計・全file地図、current structureとPiece正本、最新weeklyと対象実物を照合。System Contextは既存のfresh原本直接読取を使用し、索引再構築を前提にしない。PIECE_WORK_ALLOWED／LEVEL_2／OBSERVED_BLOCKER_MINIMAL_FIX。rootが統合とGitHub反映owner、担当を分けて原因修正し、別担当が書き出し差分を独立reviewした。ビルドは後でまとめる指示を維持する。
+
+**対象の言葉と本人の留保を区別。** 「私にとって、分からないことが大切です。」等は、対象内の語まで文全体の不確定として拾い、宣言形式を選べなかった。既存のtyped target座標と直接／焦点構文のobjectを使い、対象全体が有限な「分から／わから＋ない／なかった」「迷って＋いる／いた」「まだ決め＋ていない／ていなかった」＋「こと／もの／時間」と完全一致した場合だけ語内cueを除外する。本人評価・wish自身の否定／過去／留保、たぶん／おそらく、読点、条件、自由な前後文脈の制限は維持。対象全体を一律除外する案と部分一致案は、未型付きの条件まで宣言へ上げる反例があったため最終採用しなかった。一般relative、「とき」、自由なmodal prefixを持つ複雑な対象の偽陰性は残件。
+
+既存personal-evaluation testへ新40条件（正18／反22）を追加。局所92条件は同じ最終testを開始sourceへ固定すると73成功／19失敗、最終91成功／既存1失敗（旧Free最小字数期待）。旧期待値は変更しない。独立240条件は生成可否・意味hash・本文・本文hash・段落とscalar／UTF8根拠が全件不変。変化108は正例18×3plan×2paddingの宣言適格・形式一覧・選択形式のみ、反例132は全出力不変。さらに保存原入力から実prepare・宣言形式・author-free安全検査まで9条件を通し、検査中の作者呼出し禁止とartifact非変異を確認。合成source／controlであり実Auth・本人DB・端末の確認ではない。
+
+**書き出し停止を既存設定再確認へ接続。** 画像準備のexport GETと、OS直前の同版GET／書き出し記録POSTの確定停止が汎用エラーへ消え、旧有効UIと操作が残っていた。OS未開始に限って既知の停止codeを保持し、同contextの画像試行を破棄して再準備を止め、既存refreshRuntimeを一回通知する。詳細閲覧は維持し、再許可後も自動準備／OS送信は行わない。同期abortで別本人・対象・無効化・unmountへ移った場合は旧通知と新contextへのrefreshを戻さず、背景化後の遅い停止はpre-OS operationを処理中のまま残さない。一時PNG削除が同時に失敗しても停止codeを上書きしない。OS開始後の完了／結果不明、同receipt再確認と既存cleanupは維持する。
+
+最終export対象2suiteは271成功（新17）／失敗0。別担当のreviewで見つかった同期abort後の新owner refreshとcleanup失敗による停止消失も公開反映前に修正し、独立再現で解消確認した。最終RN全体は1,499成功／失敗0。既存Metro再bundle検査は対象外とし、アプリbuildを行っていない。最終API広域104fileは10,813成功／既存161失敗／error0・native17除外。開始sourceの同一環境は10,773成功／161失敗、XML上の失敗identity集合が完全一致、新規失敗0。対象・独立比較・保存9条件を広域へ加算しない。最終製品／test6fileのbytesを検証後にも照合した。
+
+検証依存不足による初期collection／moduleエラーはテスト用環境を整えてから上記を再実行した。中間の広域／同型件数を最終成功へ足さず、初期失敗も検証ZIP内の記録と区別する。実native PostgreSQLと端末は未実行。取消FEATURE_DISABLEDの追加候補は、停止中も取消を許す現API／設計に反するため変更0。到達性未確認の保存復旧仮説も変更に加えない。
+
+APIは[abb944c4](https://github.com/MassyuRed/mashos-api/commit/abb944c413c6d54059728fd71f9bbfed08a81986)へ反映し、2fileの全文・blob・変更集合・親commitが一致。RNの製品2／test2と前提資料4は本節と同じ変更単位で反映する。検証原本名は `Cocolon_Piece_20261104_nominal_target_export_stop_validation.zip`。最終XML／log・前後比較・保存9条件・独立review・source/test hash・GitHub読戻しを保存し、GitHub管理の製品source・compiled cache・依存本体は複製しない。
+
+差分は製品3・既存test3・前提資料4の計10file、新規repo file0。STRUCTURE_MAP_DELTA_NONE（既存形式判定と停止情報の伝播修復、新owner・意味型・公開API／DTO・DB・renderer・依存・workflow変更なし）。限定TECHNICAL_CREDIT。build・配布・本番配置・DB適用・GPU・本人端末操作0。一般日本語品質、Android通常作成／保存、Photos／Shareの実機確認と正式商品受入れは残る。

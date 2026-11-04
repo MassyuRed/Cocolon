@@ -83,8 +83,8 @@ function harness({os='ios', version=35, record=fixture()} = {}) {
     }
     calls.push(['detail',action,clone(body),clone(options)]);
     options.onExportReceiptSupport?.(state.receiptSupported);
-    if(state.exportError) throw state.exportError;
     if(state.exportWait) await state.exportWait.promise;
+    if(state.exportError) throw state.exportError;
     return state.latestRecord || record;
   };
   const source=fs.readFileSync(path.join(ROOT,'features/piece/pieceExport.js'),'utf8').replace(/^import .*;$/gm,'').replace(/^export /gm,'');
@@ -166,7 +166,8 @@ for (const action of ['saveToPhotos','openShare']) {
     for (const code of ['PIECE_FEATURE_DISABLED','PIECE_AUTH_REQUIRED','PIECE_NOT_FOUND']) {
       const h=harness(), asset=await image(h);
       h.state.exportError=Object.assign(new Error(code),{code});
-      await failure(asset[action]());
+      if (code === 'PIECE_FEATURE_DISABLED') await assert.rejects(asset[action](), error => error.code === code);
+      else await failure(asset[action]());
       assert.equal(count(h,'photo'),0);assert.equal(count(h,'share'),0);
     }
   });
@@ -480,4 +481,30 @@ for (const during of ['fresh export read', 'receipt acknowledgement']) {
     assert.equal(count(h, 'share'), 0);
     assert.ok(h.calls.some(c => c[0] === 'unlink' && c[1].startsWith('/cache/piece-export/')));
   });
+}
+
+
+for (const action of ['saveToPhotos', 'openShare']) {
+  for (const stage of ['export', 'receipt']) for (const cleanupError of [false, true]) {
+    test(`known export stop at ${stage} survives ${action}${cleanupError ? ' and cleanup failure' : ''} without an OS handoff`, async () => {
+      const h = harness({ record: { ...fixture(), renderer_version: receiptRenderer } });
+      h.state.receiptSupported = true;
+      const asset = await (await h.prepare()).capture(bitmapTarget(h));
+      h.state[stage === 'export' ? 'exportError' : 'receiptError'] = { code: 'PIECE_FEATURE_DISABLED' };
+      h.state.cleanupError = cleanupError;
+      await assert.rejects(asset[action](), error => error.code === 'PIECE_FEATURE_DISABLED' &&
+        !/PRIVATE|cache/.test(error.message));
+      assert.equal(asset.nativeStatus, 'not_started');
+      assert.equal(count(h, 'receipt'), stage === 'receipt' ? 1 : 0);
+      assert.equal(count(h, 'photo') + count(h, 'share'), 0);
+      assert.ok(h.calls.some(call => call[0] === 'unlink' && call[1].startsWith('/cache/piece-export/')));
+      await failure(asset[action]());
+      if (cleanupError) {
+        h.state.cleanupError = false;
+        await h.prepare().catch(error => { assert.equal(error.code, 'PIECE_FEATURE_DISABLED'); });
+        await asset.dispose();
+        assert.equal([...h.files.keys()].some(path => /^\/cache\/piece-export\/[a-f0-9]{32}$/.test(path)), false);
+      }
+    });
+  }
 }

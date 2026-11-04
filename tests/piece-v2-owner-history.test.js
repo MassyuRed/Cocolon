@@ -1664,3 +1664,122 @@ test('receipt transport opts in through a response header and validates an exact
   response={...response,asset_sha256:'c'.repeat(64)};
   await assert.rejects(h.requestPieceOwner('exportReceipt',{piece_id:PID,receipt},postOptions),err('PIECE_TEMPORARILY_UNAVAILABLE'));
 });
+
+
+test('known export preparation stop refreshes runtime once and preserves ordinary owner detail', async () => {
+  let prepares = 0, refreshes = 0;
+  const h = harness({ send: ownerSend, exportPrepare: async () => {
+    prepares++; throw { code: 'PIECE_FEATURE_DISABLED' };
+  } });
+  const host = ownerHost(h, savedEntry(), {
+    flags: { piece_v2_owner_read_enabled: true, piece_v2_export_enabled: true },
+    refreshRuntime: () => { refreshes++; },
+  });
+  host.componentDidMount(); await tick();
+  const displayed = host.controller.getView().record;
+  await host.prepareExport(displayed);
+  assert.equal(refreshes, 1);
+  assert.equal(host.controller.getView().record, displayed);
+  assert.equal(host.exportAttempt, null);
+  assert.ok(texts(host.render()).includes('画像の保存・共有は現在利用できません。'));
+  await host.prepareExport(displayed);
+  assert.equal(prepares, 1); assert.equal(refreshes, 1);
+  const previous = host.props;
+  host.props = { ...previous, runtimePending: true }; host.componentDidUpdate();
+  host.props = previous; host.componentDidUpdate();
+  assert.equal(prepares, 1, 'runtime return never prepares automatically');
+  await host.openSavedDetail(host.targetKey(), PID);
+  assert.equal(prepares, 1, 'detail reread never prepares automatically');
+  await host.prepareExport(host.controller.getView().record);
+  assert.equal(prepares, 2); assert.equal(refreshes, 2);
+  host.componentWillUnmount();
+});
+
+for (const action of ['saveToPhotos', 'openShare']) test(`known stop in ${action} revalidation refreshes runtime without changing ordinary detail`, async () => {
+  const u = await nativeExportHost(action, false, ownerSend, true);
+  let refreshes = 0;
+  u.host.props = { ...u.host.props, refreshRuntime: () => { refreshes++; } };
+  const displayed = u.host.controller.getView().record;
+  u.native.state.exportError = { code: 'PIECE_FEATURE_DISABLED' };
+  u.finish(); await u.pending;
+  assert.equal(refreshes, 1);
+  assert.equal(u.host.controller.getView().record, displayed);
+  assert.equal(u.host.exportOperation, null);
+  assert.equal(u.host.exportAttempt, null);
+  assert.ok(texts(u.host.render()).includes('画像の保存・共有は現在利用できません。'));
+  const prepares = u.events.filter(event => Array.isArray(event) && event[0] === 'prepare').length;
+  await u.host.prepareExport(displayed);
+  assert.equal(u.events.filter(event => Array.isArray(event) && event[0] === 'prepare').length, prepares);
+  assert.equal(u.native.calls.filter(call => ['photo', 'share'].includes(call[0])).length, 0);
+  u.host.componentWillUnmount();
+});
+
+
+for (const boundary of ['owner', 'target', 'disabled', 'unmount']) {
+  test(`export stop cannot restore its notice or refresh after synchronous abort changes ${boundary}`, async () => {
+    let rejectPrepare, refreshes = 0;
+    const h = harness({ send: ownerSend, exportPrepare: () => new Promise((resolve, reject) => { rejectPrepare = reject; }) });
+    const host = ownerHost(h, savedEntry(), {
+      flags: { piece_v2_owner_read_enabled: true, piece_v2_export_enabled: true },
+      refreshRuntime: () => { refreshes++; },
+    });
+    host.componentDidMount(); await tick();
+    const pending = host.prepareExport(host.controller.getView().record);
+    host.exportAttempt.abort.signal.addEventListener('abort', () => {
+      if (boundary === 'unmount') { host.componentWillUnmount(); return; }
+      host.props = { ...host.props, ...(boundary === 'owner' ? { owner: RID }
+        : boundary === 'target' ? { savedPiece: savedEntry(RID) } : { enabled: false }) };
+      host.componentDidUpdate();
+    });
+    rejectPrepare({ code: 'PIECE_FEATURE_DISABLED' }); await pending;
+    assert.equal(refreshes, 0);
+    assert.equal(host.exportMessage, null);
+    assert.equal(host.exportAttempt, null);
+    assert.ok(!texts(host.render()).includes('画像の保存・共有は現在利用できません。'));
+    if (boundary !== 'unmount') host.componentWillUnmount();
+  });
+}
+
+
+test('known receipt stop reaches the host even when copy cleanup and runtime refresh both fail', async () => {
+  const saved = record({ renderer_version: 'piece.rn_bitmap_renderer.ios.v2' });
+  const u = exportHost({ fresh: saved, send: () => packet(saved) });
+  const attempt = await u.ready();
+  let refreshes = 0;
+  u.host.props = { ...u.host.props, refreshRuntime: async () => { refreshes++; throw new Error('PRIVATE bootstrap'); } };
+  const native = exportAssetHarness(u.host.controller.getView().record);
+  native.state.receiptSupported = true;
+  const asset = await (await native.prepare()).capture({ ...native.target(), bitmapToken: 'saved-artifact', bitmapBinding: 'saved-binding' });
+  native.state.receiptError = { code: 'PIECE_FEATURE_DISABLED' };
+  native.state.cleanupError = true;
+  attempt.job = { ...attempt.job, capture: async () => asset };
+  const displayed = u.host.controller.getView().record;
+  await u.host.exportImage(attempt, 'saveToPhotos'); await tick();
+  assert.equal(refreshes, 1);
+  assert.equal(native.calls.filter(call => call[0] === 'receipt').length, 1);
+  assert.equal(native.calls.filter(call => ['photo', 'share'].includes(call[0])).length, 0);
+  assert.equal(u.host.controller.getView().record, displayed);
+  assert.ok(texts(u.host.render()).includes('画像の保存・共有は現在利用できません。'));
+  await u.host.prepareExport(displayed);
+  assert.equal(refreshes, 1);
+  assert.equal(u.host.exportAttempt, null);
+  native.state.cleanupError = false; await asset.dispose();
+  u.host.componentWillUnmount();
+});
+
+
+test('late known export stop during suspension clears a pre-OS operation without refreshing stale context', async () => {
+  const u = await nativeExportHost('saveToPhotos', false, ownerSend, true);
+  let refreshes = 0;
+  u.host.props = { ...u.host.props, refreshRuntime: () => { refreshes++; } };
+  const restore = suspendExport(u);
+  u.native.state.exportError = { code: 'PIECE_FEATURE_DISABLED' };
+  u.finish(); await u.pending;
+  assert.equal(u.asset.nativeStatus, 'not_started');
+  assert.equal(u.host.exportOperation, null);
+  assert.equal(refreshes, 0);
+  restore(); await rereadOperatedPiece(u, false);
+  assert.ok(!texts(u.host.render()).some(value => /写真への保存結果|写真に保存しました/.test(value)));
+  assert.equal(button(u.host, '画像の保存・共有を準備').props.disabled, false);
+  u.host.componentWillUnmount();
+});
