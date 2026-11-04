@@ -3322,3 +3322,22 @@ MashのPiece残件継続指示により§158の続きから実施。開始点は
 APIは[abb944c4](https://github.com/MassyuRed/mashos-api/commit/abb944c413c6d54059728fd71f9bbfed08a81986)へ反映し、2fileの全文・blob・変更集合・親commitが一致。RNの製品2／test2と前提資料4は本節と同じ変更単位で反映する。検証原本名は `Cocolon_Piece_20261104_nominal_target_export_stop_validation.zip`。最終XML／log・前後比較・保存9条件・独立review・source/test hash・GitHub読戻しを保存し、GitHub管理の製品source・compiled cache・依存本体は複製しない。
 
 差分は製品3・既存test3・前提資料4の計10file、新規repo file0。STRUCTURE_MAP_DELTA_NONE（既存形式判定と停止情報の伝播修復、新owner・意味型・公開API／DTO・DB・renderer・依存・workflow変更なし）。限定TECHNICAL_CREDIT。build・配布・本番配置・DB適用・GPU・本人端末操作0。一般日本語品質、Android通常作成／保存、Photos／Shareの実機確認と正式商品受入れは残る。
+
+<a id="piece-qualified-argument-format-20261104"></a>
+## 160. 11/4 — 本人評価・焦点構文の条件を引用／宣言へ誤昇格する不具合を修復
+
+MashからPiece残件の継続指示。開始点はRN `fe2110db67287b1b48cb2c53df5c80d5082e8552`／API `abb944c413c6d54059728fd71f9bbfed08a81986`。前回までの全体設計・全file地図とcurrent ownerを継承し、fresh head、全体現在地、作業姿勢・incident、最新weekly§159とPiece map、対象実物／差分を確認。既存の原本直接読取を使い、索引再生成を作業の追加条件にしない。PIECE_WORK_ALLOWED／LEVEL_2／OBSERVED_BLOCKER_MINIMAL_FIX、rootが統合・反映owner、本文担当と独立reviewを分離した。buildは後でまとめる方針を維持。
+
+「私にとって、余裕があるので、陶芸の時間が大切です。」等では条件・理由・譲歩がtyped targetの文字列へ保持されていても、quote／declarationをofferしていた。§158の負の形式制約が既存自己topicだけに接続され、本人評価と焦点構文の対象では未型付きの条件を見ていなかった。既存の対象座標／objectを使い、既存5operatorと直後の読点、その前の有限な留保表現・漢字動作名する・明示[がはも]ある／ないの境界だけを同じshort_essay制約へ接続。正のsource受理、意味型、scope、duty、作者、本文と根拠は変更しない。生成側とauthor-free形式検査は既存の共通pure判定を使う。KEEPと既型scope、読点なし・読点前gap・未知の語尾は今回の判定へ広げない。
+
+初期案の一般account末尾は「はだので、家族と過ごす時間」「神戸のきたので、本を読む時間」等の地名内部にも誤一致することを独立reviewで検出した。公開反映前に裸た／だ等の広い語尾を新target枝から除き、最終の有限境界へ絞った。「さよなら」「おので」と漢字／ひらがな地名の対照は旧形式・本文を保持する。一般的な日本語のscope理解へ拡大したという結果ではない。
+
+既存testへ新29条件（正18／通常対象・境界10／既型scope1）を追加し全成功。局所121は同じ最終testを開始sourceへ固定すると102成功／19失敗、最終120成功／既存1失敗（旧Free最小字数期待）。旧期待値は変更しない。独立294条件は生成可否・意味hash・本文・本文hash・段落・scalar／UTF8根拠が全件不変。変化108は正18×3plan×2paddingの形式制約だけ、対照186は全出力不変。独立reviewの32条件も本文／hash保持・正18の制約／対照14の旧形式を確認し、作者／Engine禁止下で正常形式の全件受理・不適切offer追加18拒否・全入力非変異を確認。未解決blocking指摘0。
+
+rootの保存原入力→実prepare→author-free安全検査10入力は正常short_essayを全件ready、引用／宣言の明示選択20要求を既存FORMAT_NOT_ELIGIBLEへ閉じた。余分なoffer20追加もineligible、検査中の作者呼出し0・元artifact非変異。合成controlであり実Auth・本人DB／端末の検証ではない。最終API広域104fileは10,842成功／既存161失敗／error0・native17除外。§159と同一の失敗identity集合で新規失敗0。局所・294比較・保存10入力を広域へ加算しない。最終source／test2fileのSHA256は検証後も一致。
+
+RN製品／testは変更0。作成の形式・visual PATCH ACK／結果不明とbackground／runtime／focusの実host12条件を確認し、一時停止／復帰の自動IO0、PATCH各1回、明示再開後の形式とrecipe hashを保持。前回export4fileのSHA256一致により既検証271とRN全体1,499を継承し、新規run／新成功数には数えない。continuationのResponse.json通信失敗仮説は、lock一致whatwg-fetchのXHR完了後Response生成とjson一回読取を照合し、RN通常経路の到達性を確認できないため変更0。任意強化や案内変更を残件修正へ捏造しない。
+
+APIは[34326283](https://github.com/MassyuRed/mashos-api/commit/34326283ddd9b0eff4423dd3c14d9a49cd34d3ee)へ反映し、2file全文・blob・親・変更集合の読戻しを確認。前提資料4fileを関連差分だけ置換し、本節を履歴とする。検証原本名は `Cocolon_Piece_20261104_qualified_argument_format_validation.zip`。最終／開始sourceのXML・log、全前後raw、保存10入力、初期／最終の独立review、RN12条件、source/test hashとGitHub読戻しを保存し、Git管理source比較用コピーと取得した依存原本は複製しない。
+
+差分は既存製品1・既存test1・前提資料4の計6file、新規repo file0。STRUCTURE_MAP_DELTA_NONE（既存形式制約の適用先と有限境界の修復、新owner・意味型・公開API／DTO・DB・renderer・製品依存・workflow変更なし）。限定TECHNICAL_CREDIT。build・配布・本番配置・DB適用・GPU・本人端末操作0。一般日本語品質、Android通常作成／保存、Photos／Share実機確認、正式商品受入れは残る。
