@@ -3359,3 +3359,25 @@ RN製品／testは変更0。今回の実host6経路は、形式422後の前候�
 API製品3／既存test1は[fab21b0c](https://github.com/MassyuRed/mashos-api/commit/fab21b0cdc2b55798f53da65d75d5925d002833f)へ反映。全体現在地・01A・Piece current mapは既存責務だけを置換更新し、履歴は本節へ記録する。検証原本名は `Cocolon_Piece_20261104_scoped_terminal_validation.zip`。最終／開始sourceのXML・log、保存36条件、独立比較／改変拒否、RN回復6経路、source／test hashとGitHub読戻しを保存し、Git管理の製品sourceと依存本体を複製しない。
 
 差分は既存製品3・既存test1・前提資料4の計8file、新規repo file0。STRUCTURE_MAP_DELTA_NONE（既存scope内の自己topicの終端照合と作者・S7の接続修復、新owner・意味型・公開API／DTO・DB・renderer・依存・workflow変更なし）。限定TECHNICAL_CREDIT。正式商品受入れ0/3、build・配布・本番配置・live DB・GPU・本人端末操作0。一般日本語品質、Android通常作成／保存、Photos／Share実機確認は残る。
+
+
+<a id="piece-paused-reservation-share-dispatch-20261104"></a>
+## 162. 11/4 — 読点付きの短い留保の原文保持と、失効後に共有が始まる不具合を修復
+
+MashからPiece残件の継続指示。開始点はRN `3bed3f5f8bd3708efcf4146fa6461b1d47ac9abf`／API `fab21b0cdc2b55798f53da65d75d5925d002833f`。全体現在地・作業姿勢・恒久incident、全体設計／全file地図、最新weekly§161、Piece currentと対象実物を確認し、既存の原本直接読取を継続。PIECE_WORK_ALLOWED／LEVEL_2／OBSERVED_BLOCKER_MINIMAL_FIX。rootが統合・反映owner、本文・書き出しの修正と独立reviewを分離した。ビルドは後でまとめる指示を維持する。
+
+**読点を挟んだ有限留保。** 「私は本を読みたい！まだ決めていません。」は通るが、「私は本を読みたい！まだ、決めていません。」は自己理解で拒否されていた。literal fallbackの完成文判定が、連続した「まだ決め」という既存cueだけを照合していたためである。同じ保存済み有効mode内で、「まだ＋単一読点（、／，／,）＋任意の水平空白＋決めて＋いません／いませんでした／いない／いなかった＋単一終端」だけを既存の有限留保へ接続した。語句・時制・否定・語順・元記号と本人を原文どおり保持し、globalな`_UNCERTAIN`、唯一作者、意味型、scope、形式適格を変更しない。無読点の既存経路はそのまま維持する。
+
+初期案のoptionalな「は」topicは、「まだ、余裕があるので私は決めていません。」の理由節まで飲み込むことを独立reviewで確認した。nominal topicを独立検証できる型がないため、このoptional armは全て除去した。「読む日は」「毎日続けるかは」等の対象挿入は未対応のまま。禁止語の追加だけで自由な対象句を受理する変更は採用しない。独立reviewで当初拒否を期待した「迷っているけれど」は、開始sourceでも既存cueによって原文生成されることを確認し、新しい受理／拒否の成果から除外した。
+
+対象moduleは同じ最終testを開始sourceへ固定すると175成功／8失敗、最終183成功。新26条件は正8／反18で、旧期待値は変更0。保存120条件は生成88→104、新受理16。原source JSONは全件不変、旧成功88の全出力も不変、最終生成104はS7・原文根拠とも成功した。独立の保存原入力→実prepare→作者／Engine禁止のS7・形式確認は正8 ready、quote／declaration16拒否、時点・否定・記号の改変24拒否、問い・伝聞・条件・理由・譲歩・未完・未知述語・対象挿入の反11拒否。rootの別16入力もready、形式32要求は拒否した。各集合を広域件数へ加算せず、合成source／controlを実Auth・本人DB・端末の成功へ換算しない。
+
+**共有wrapper内の待機後に失効した画像が開く経路。** lock一致の`react-native-share` 12.3.1では、Androidの`isBase64File`をawaitした後にnative openへ進む。そこでcurrentを失効させたりassetをdisposeしたりしても、wrapperが戻ると共有画面を開くことを実wrapperで再現した。既に検証済みのPiece専用non-base64 file URIだけを対象に、最終の本人・保存版・canvas確認から同じ同期処理内で既存`NativeModules.RNShare.open`を開始する。新しいnative module・endpoint・依存を追加せず、両OSのexact optionsと、rawのfalse結果をdismissedActionへ整形する既存動作を保持する。不正なnull／undefinedは既存wrapperと同じくrejectし、成功へ変えない。
+
+旧architectureのnative登録を現物と照合し、独立4条件も成功した。OS開始後の成功／結果不明、外部readerが参照中のコピー寿命、既存cleanupと写真保存経路は維持する。実OS・権限ダイアログ・共有画面の確認ではない。
+
+最終API広域は 10,891成功／既存161失敗／error0・native17除外（開始10,865成功／161失敗と失敗identity集合が同一、新規失敗0）、最終RNは 1,506成功／失敗0（新7、既存Metro再bundle検査は対象外、アプリbuildなし）。export対象2suiteは278成功／失敗0。最終製品・test5fileのhashは広域実行前後で不変。初回API広域の10,891成功／既存161失敗は、optional topicを含む不採用中間案の結果であり最終へ混ぜない。保存・本人確認・削除の追加調査では新たな確定不具合はなく、保存側の製品編集0、7pathのread-only確認だけを記録。前回のhost6／backend8は再実行・再加算しない。
+
+API製品1／既存test1の反映は [2014de24](https://github.com/MassyuRed/mashos-api/commit/2014de2478b5d9325df9e0ec365d97789f0c55be)。RN製品1／既存test2と前提資料4を同じ変更単位で反映する。全体現在地・01A・Piece current mapは既存責務だけ置換し、履歴は本節へ記載。検証原本名は `Cocolon_Piece_20261104_paused_reservation_share_dispatch_validation.zip`。最終／開始sourceと中間案を区別したXML・log、保存120条件、独立S7／共有境界比較、source／test hashとGitHub読戻しを保存し、Git管理source・取得した依存本体を複製しない。
+
+差分はRN製品1・既存test2、API製品1・既存test1、前提資料4の計9既存file、新規repo file0。STRUCTURE_MAP_DELTA_NONE（既存literal fallbackの有限留保と共有dispatch境界の修復、新owner・意味型・公開API／DTO・DB・renderer・依存・workflow変更なし）。限定TECHNICAL_CREDIT。正式商品受入れ0/3、build・配布・本番配置・live DB・GPU・本人端末操作0。一般日本語品質、Android通常作成／保存、Photos／Share実機確認は残る。

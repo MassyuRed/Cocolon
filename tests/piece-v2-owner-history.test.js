@@ -1513,8 +1513,8 @@ for (const [action, nativeFailure] of [['saveToPhotos', true], ['openShare', tru
 }
 
 for (const ordinary of [false, true]) {
-  for (const [label, reply] of [['missing', undefined], ['null', null], ['empty', {}],
-    ['non-boolean success', { success: 'true' }], ['incomplete failure', { success: false }],
+  for (const [label, reply] of [['empty', {}], ['non-boolean failure', { success: 0 }],
+    ['non-boolean success', { success: 'true' }],
     ['contradictory', { success: true, dismissedAction: true }]]) {
     test('active ' + (ordinary ? 'history' : 'direct') + ' share keeps ' + label + ' native result unconfirmed', async () => {
       const u = await nativeExportHost('openShare', ordinary);
@@ -1545,6 +1545,22 @@ test('on-time native rejection keeps its existing failure', async () => {
   assert.ok(texts(u.host.render()).includes('画像を保存・共有できませんでした。権限や接続を確認して、もう一度お試しください。'));
   u.host.componentWillUnmount();
 });
+
+for (const ordinary of [false, true]) for (const reply of [undefined, null]) {
+  test(`active ${ordinary ? 'history' : 'direct'} missing raw native share result ${reply} keeps wrapper failure`, async () => {
+    const u = await nativeExportHost('openShare', ordinary);
+    u.native.state.shareResult = reply;
+    u.finish(); await u.pending;
+    assert.equal(u.asset.nativeStatus, 'started');
+    assert.equal(u.host.exportOperation, null);
+    assert.ok(texts(u.host.render()).includes('画像を保存・共有できませんでした。権限や接続を確認して、もう一度お試しください。'));
+    assert.equal(u.native.calls.filter(call => call[0] === 'share').length, 1);
+    assert.equal(u.native.calls.some(call => call[0] === 'unlink' && call[1].startsWith('/cache/piece-export/')), false);
+    await assert.rejects(u.asset.openShare());
+    assert.equal(u.native.calls.filter(call => call[0] === 'share').length, 1);
+    u.host.componentWillUnmount();
+  });
+}
 
 
 test('suspension during pre-OS verification never invents an uncertain external operation', async () => {

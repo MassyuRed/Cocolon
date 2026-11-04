@@ -5,7 +5,6 @@
  */
 import { Platform, PermissionsAndroid, NativeModules } from 'react-native';
 import { captureRef, releaseCapture } from 'react-native-view-shot';
-import Share from 'react-native-share';
 import { CameraRoll } from '@react-native-camera-roll/camera-roll';
 import { Dirs, FileSystem } from 'react-native-file-access';
 import { requestPieceOwner, PieceApiError } from './pieceApi';
@@ -253,10 +252,21 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
             // Hand off conservatively until a platform's session-end result is
             // known. Backgrounding, dispose and a rejected/unknown result do
             // not establish that an external reader has finished.
+            if (typeof NativeModules.RNShare?.open !== 'function') throw failed();
+            const uri = `file://${path}`;
+            // This is always our checked, non-base64 file. The pinned Share
+            // wrapper awaits an Android isBase64File bridge query before
+            // native open, allowing a revoked attempt to open afterwards.
+            // Dispatch directly at this checked boundary, retaining its
+            // exact iOS option normalization and failOnCancel:false result.
+            const options = { type: 'image/png', filename, failOnCancel: false,
+              ...(Platform.OS === 'ios' ? { urls: [uri], filenames: [filename] } : { url: uri }) };
             handedOff = true;
-            const sharing = Share.open({ url: `file://${path}`, type: 'image/png', filename, failOnCancel: false });
+            const sharing = NativeModules.RNShare.open(options);
             nativeStatus = 'started';
-            const result = await sharing;
+            const returned = await sharing;
+            const result = !returned.success ? { dismissedAction: true,
+              success: returned.success, message: returned.message } : returned;
             const cancelled = result?.success === false && result.dismissedAction === true;
             const completed = result?.success === true && result.dismissedAction === undefined;
             // Pinned RNShare on iOS resolves from UIActivityViewController's

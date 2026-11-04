@@ -47,6 +47,12 @@ function harness({os='ios', version=35, record=fixture()} = {}) {
     readFileChunk: async (p, offset, length) => state.validPng ? state.png.subarray(offset, offset + length).toString('base64') : 'bad',
     hash: async () => { if(state.hashWait) await state.hashWait.promise; return state.hash; },
   };
+  const openNativeShare = async options => {
+    calls.push(['share',clone(options)]);
+    if(state.shareWait) await state.shareWait.promise;
+    if(state.shareError) throw Error('PRIVATE');
+    return state.shareResult;
+  };
   const context = vm.createContext({ crypto:crypto.webcrypto, Uint8Array, FileSystem, Dirs:{CacheDir:'/cache'},
     Platform:{OS:os,Version:version},
     PermissionsAndroid:{PERMISSIONS:{WRITE_EXTERNAL_STORAGE:'write'},RESULTS:{GRANTED:'granted'},request:async()=>{
@@ -55,10 +61,15 @@ function harness({os='ios', version=35, record=fixture()} = {}) {
       if (state.captureError) throw state.captureError;
       return state.raw || '/cache/piece-capture/piece-new.png';},
     releaseCapture:p=>calls.push(['release',p]),
-    Share:{open:async options=>{calls.push(['share',clone(options)]); if(state.shareWait) await state.shareWait.promise; if(state.shareError) throw Error('PRIVATE'); return state.shareResult;}},
+    // Pinned wrapper preflight has an asynchronous native isBase64File query
+    // on Android, even for this non-base64 URI. The Piece path bypasses it.
+    Share:{open:async options=>{calls.push(['share-wrapper']);
+      if(state.sharePreflightWait) await state.sharePreflightWait.promise;
+      const result=await openNativeShare(options);
+      return !result.success ? {dismissedAction:true,success:result.success,message:result.message} : result;}},
     CameraRoll:{saveAsset:async(...args)=>{calls.push(['photo',...args]); if(state.photoWait) await state.photoWait.promise;
       if(state.photoError) throw Error('PRIVATE_PHOTO');}},
-    NativeModules:{RNCCameraRoll:{saveToCameraRoll:async(...args)=>{calls.push(['photo',...args]);
+    NativeModules:{RNShare:{open:openNativeShare},RNCCameraRoll:{saveToCameraRoll:async(...args)=>{calls.push(['photo',...args]);
       if(state.photoWait) await state.photoWait.promise; if(state.photoError) throw Error('PRIVATE_PHOTO');
       return Object.hasOwn(state,'photoResult') ? state.photoResult : {saved:true};}}},
   });
@@ -90,7 +101,7 @@ function harness({os='ios', version=35, record=fixture()} = {}) {
   const source=fs.readFileSync(path.join(ROOT,'features/piece/pieceExport.js'),'utf8').replace(/^import .*;$/gm,'').replace(/^export /gm,'');
   vm.runInContext(`{${source}\nglobalThis.prepare=preparePieceExportPrototype;}`,context);
   const target=()=>({...context.preparePieceNativeSavedDisplay(record),node:{},isCurrent:()=>state.canvas});
-  return {calls,state,files,record,target, prepare:()=>context.prepare({pieceId:record.piece_id,expectedUserId:'owner',isCurrent:()=>{ state.currentCalls=(state.currentCalls||0)+1; if(state.currentCalls===state.revokeAtCurrent) queueMicrotask(()=>{state.current=false;}); return state.current; }})};
+  return {calls,state,files,record,target,nativeModules:context.NativeModules, prepare:()=>context.prepare({pieceId:record.piece_id,expectedUserId:'owner',isCurrent:()=>{ state.currentCalls=(state.currentCalls||0)+1; if(state.currentCalls===state.revokeAtCurrent) queueMicrotask(()=>{state.current=false;}); return state.current; }})};
 }
 const count=(h,kind)=>h.calls.filter(c=>c[0]===kind).length;
 const failure=p=>assert.rejects(p,e=>e.code==='PIECE_TEMPORARILY_UNAVAILABLE');
@@ -289,7 +300,7 @@ test('Android cancellation is distinct from failure but does not prove the exter
   assert.equal(h.calls.some(c=>c[0]==='unlink'&&c[1].startsWith('/cache/piece-export/')),false);
 });
 test('unknown or contradictory iOS share results do not authorize cleanup or cancellation',async()=>{
-  for(const result of [undefined,null,{}, {success:'true'}, {success:false}, {success:true,dismissedAction:true}]) {
+  for(const result of [{}, {success:'true'}, {success:0}, {success:true,dismissedAction:true}]) {
     const h=harness(),asset=await image(h);h.state.shareResult=result;
     assert.deepEqual(clone(await asset.openShare()),{outcome:'share_result_returned'});await asset.dispose();
     assert.equal(h.calls.some(c=>c[0]==='unlink'&&c[1].startsWith('/cache/piece-export/')),false);
@@ -306,6 +317,7 @@ test('cleanup failure preserves iOS completion or cancellation without exposing 
 test('new export retries only known-safe cleanup; a copy with unknown share completion stays available', async () => {
   const h = harness();
   const shared = await image(h);
+  h.state.shareResult = {};
   const sharedDirectory = h.calls.find(call => call[0] === 'cp')[2].split('/').slice(0, -1).join('/');
   await shared.openShare(); // Missing native result does not establish session end.
   const finished = await image(h);
@@ -321,6 +333,58 @@ test('new export retries only known-safe cleanup; a copy with unknown share comp
   assert.equal(h.calls.filter(call => call[0] === 'unlink' && call[1] === sharedDirectory).length, 0);
   assert.ok(h.files.has(sharedDirectory));
   assert.equal(count(h, 'share'), 2);
+});
+
+for (const os of ['android', 'ios']) test(`checked ${os} file share dispatch has no wrapper preflight gap and preserves native options`, async () => {
+  const h = harness({os}), asset = await image(h);
+  h.state.shareResult = {success:true};
+  h.state.sharePreflightWait = deferred();
+  const pending = asset.openShare();
+  await new Promise(setImmediate);
+  const dispatchedBeforeRevoke = count(h,'share');
+  h.state.current = false;
+  await asset.dispose();
+  h.state.sharePreflightWait.resolve();
+  assert.deepEqual(clone(await pending), {outcome:'share_result_returned'});
+  assert.equal(dispatchedBeforeRevoke,1);
+  assert.equal(count(h,'share-wrapper'),0);
+  assert.equal(count(h,'share'),1);
+  const options=h.calls.find(call=>call[0]==='share')[1];
+  assert.equal(options.type,'image/png');
+  assert.equal(options.failOnCancel,false);
+  assert.match(options.filename,/^cocolon-piece_[0-9a-f]+_[0-9a-f]{12}_4x5\.png$/);
+  const uri='file://'+h.calls.find(call=>call[0]==='cp')[2];
+  assert.deepEqual(options,os==='ios'
+    ? {type:'image/png',filename:options.filename,failOnCancel:false,urls:[uri],filenames:[options.filename]}
+    : {type:'image/png',filename:options.filename,failOnCancel:false,url:uri});
+  await failure(asset.openShare());
+  assert.equal(count(h,'share'),1);
+});
+
+for (const os of ['android', 'ios']) test(`raw ${os} native cancellation retains the wrapper's cancelled outcome`, async () => {
+  const h=harness({os}),asset=await image(h);
+  h.state.shareResult={success:false,message:os==='ios'?'':'CANCELED'};
+  assert.deepEqual(clone(await asset.openShare()),{outcome:'cancelled'});
+  assert.equal(asset.nativeStatus,'complete');
+  assert.equal(count(h,'share-wrapper'),0);
+});
+
+for (const result of [undefined,null]) test(`missing native share result ${result} retains wrapper rejection and possible external reader`, async () => {
+  const h=harness(),asset=await image(h);h.state.shareResult=result;
+  await failure(asset.openShare());await asset.dispose();
+  assert.equal(asset.nativeStatus,'started');
+  assert.equal(count(h,'share'),1);
+  assert.equal(h.calls.some(call=>call[0]==='unlink'&&call[1].startsWith('/cache/piece-export/')),false);
+  await failure(asset.openShare());
+  assert.equal(count(h,'share'),1);
+});
+
+test('missing native share module fails before handoff and removes the safe export copy', async () => {
+  const h=harness(),asset=await image(h);delete h.nativeModules.RNShare;
+  await failure(asset.openShare());
+  assert.equal(asset.nativeStatus,'not_started');
+  assert.equal(count(h,'share'),0);
+  assert.equal(h.calls.some(call=>call[0]==='unlink'&&call[1].startsWith('/cache/piece-export/')),true);
 });
 test('dispose while verifying prevents OS handoff and waits before deleting the file',async()=>{
   const h=harness(),asset=await image(h);h.state.hashWait=deferred();const share=asset.openShare();
