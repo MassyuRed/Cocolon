@@ -3511,3 +3511,17 @@ API製品1・既存test1を[068c9b13](https://github.com/MassyuRed/mashos-api/co
 全体00・01Aの既存責務・Piece current mapを同じ単位で差分同期。STRUCTURE_MAP_DELTA_NONE（既存有限読取のpause対称性修復、新ownerなし）。限定TECHNICAL_CREDIT。ビルド・配布・本番配置・live DB・GPU・本人端末操作0、正式商品受入れ0/3。一般日本語品質や未知動詞全体の対応には拡張しない。
 
 次は、この修復が関与する保存原入力の複数文・二欄・日付付き動作で、既存の完成条件と欄境界が同じかを確認する。今回の63／二欄1や§166の24を再実行するだけの作業へ戻さず、通常操作で再現する別の未完了を直接扱う。Android通常作成・実Photos／Share・backend receiptの本番適用等の残件は維持し、ビルドや本番適用を自動実行しない。
+
+
+<a id="piece-self-insight-sql-paragraphs-20261105"></a>
+## 168. 11/5 — 自己理解の複数文・二欄を隔離SQLから確認
+
+開始はRN `d9f3e5e7b7053a281e6cf94846be3636afbba60c`／API `068c9b133b1b45d67fb7032cbf3249d92c1c3912`。§167の次作業として、既存の原入力→CMEE→本文検査を複数文・二欄・日付・CRLF・重複・留保の組合せで確認した。新しい合成8入力×平穏／自己理解の16条件は生成14／拒否2。全生成のS7が成功し、書かれた否定・段落・欄順・同じ文3回を保持した。未知の意志形・未完条件は自己理解では拒否、平穏では既存の原文保持に留まる。この差を一般文法の成立へ換算しない。新たな製品不具合は検出せず、製品sourceは変更0。
+
+次に既存PGlite 0.5.8の隔離SQLへ、UIと同じ自己理解tag／medium詳細・本人profile／原入力4件を保存し、既存`PieceSavedSourceAdapter.generate_original_candidate_for_development`のSQL read→既存CMEE→再照合を実行。日付付き二欄、句点なしCRLF、同文重複、3段落＋留保の全4件で原文／順序と本文hashを保持した。Emlis thread行0、候補のrecord／quota effect0、production_enabled=false。synthetic bearer認証と明示offline stageの確認であり、通常HTTP・preview発行・Piece保存・quota消費・画像・実Auth／本人端末の成功ではない。
+
+既存SQL回帰は未選択metadataの4ケースしかなく、自己理解modeをDBから読む経路はこの4件に含まれていなかった。既存testの4原入力と期待は保ち、同じSQL検証へ自己理解2ケース（句点なしCRLF＋日付、二欄＋重複＋否定感嘆符）を追加した。新2は動的生成との比較だけでなく、原入力から直接定めた段落配列・全文・SHA256・record／quota effect0を照合する。旧4＋新2のSQL6成功、2333除外、13.28秒。前回の3,157や今回のone-off4／16を件数に加算しない。差分検査成功。
+
+API既存test1fileだけを[528fc129](https://github.com/MassyuRed/mashos-api/commit/528fc129a68cdd6557055797f1fc4cef8b1495c0)へ反映し、全文／blobを読戻して一致を確認。製品不具合の修正とは報告しない。全体現在地差分なし（製品source・owner責務・公開API／DTO・DB schema・稼働・端末状態に変更なし、既存SQL検証の自己理解coverageのみ）。STRUCTURE_MAP_DELTA_NONE。既存全体00・01A/B/C・Piece mapは再生成しない。
+
+次は通常source-ref／preview／保存へ至る既存service境界のうち、保存済み自己理解のmetadataを渡す箇所を確認する。今回の16／4／SQL6を繰り返すだけの作業をせず、実際の不具合又は決定済み未完了に絞る。一般文章品質、Android通常作成、実Photos／Share、backend receiptの本番適用等は引き続き未完。ビルド・配布・本番配置・live DB更新・GPU・本人端末操作0、正式商品受入れ0/3、指定8時間の実働完了claimなし。
