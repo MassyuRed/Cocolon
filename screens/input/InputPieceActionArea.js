@@ -175,8 +175,18 @@ export default class InputPieceActionArea extends React.Component {
   }
 
   syncSavedOperation(enabled, runtimeRefresh = false) {
-    return this.controller.setSaveAvailability({ enabled, saveEnabled: this.saveEnabled(), runtimeRefresh }) ||
+    const retained = this.controller.setSaveAvailability({ enabled, saveEnabled: this.saveEnabled(), runtimeRefresh,
+      preserveSelectedFormat: this.savedMode }) ||
       this.controller.setCancellationEnabled(enabled);
+    const view = retained ? this.controller.getView() : null;
+    if (retained && this.savedMode && enabled === true &&
+        (view.phase === 'idle' || view.phase === 'unavailable' && !view.retryKind && !view.previewRestartToken)) {
+      // The same host already holds the selected format's immutable source
+      // request. Its explicit replay checks source eligibility at the server;
+      // do not first replace it with a new source GET/default-format request.
+      this.sourcePhase = 'ready';
+    }
+    return retained;
   }
 
   clearSource() {
@@ -244,7 +254,7 @@ export default class InputPieceActionArea extends React.Component {
     } else if (this.restoreSaveRecovery()) {
       // A different navigation key for this saved input can recover the same save.
     } else if (retainBinding && this.controller.getView().phase !== 'hidden' &&
-        !['cancel', 'save'].includes(this.controller.getView().retryKind)) this.controller.close();
+        !['cancel', 'save'].includes(this.controller.getView().retryKind)) this.controller.close({ resetSelectedFormat: !sameSavedSelection });
     // A hidden operation may retain a save/cancel intent. A different selection
     // must clear it, even when getView intentionally conceals its retryKind.
     else this.controller.setContext(savedMode ? { enabled: false } : this.props.context);

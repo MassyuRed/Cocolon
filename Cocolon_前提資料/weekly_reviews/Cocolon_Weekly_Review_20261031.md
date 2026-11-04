@@ -3112,3 +3112,30 @@ RN最終はMetro再bundle検査1件を従来どおり対象外として1,401件�
 native画像経路も対象・binding・source/layer/windowの失効、一時PNG回収を現物で確認したが、新たな修正原因は特定できず変更0。既存検査の反復を成果にせず、実機の描画・PNG色特性・時間・書込み失敗時回収・Photos／Shareは未確認のまま残す。今回の実際の写真保存・共有は合成OS応答であり実端末の成功ではない。
 
 新差分は製品5・既存test3・前提資料4の計12ファイル、新規ファイル0。全体現在地・Piece map・01Aの既存ファイル地図は関連差分の置換、本節は履歴。STRUCTURE_MAP_DELTA_NONE。primary outcomeは限定TECHNICAL_CREDIT。既存意味型・公開API／DTO・DB・描画版・依存・workflowは変更しない。ビルド・配布・本番配置・DB適用・GPU操作は行わず、一般日本語品質、Android通常作成・保存への採用と実機のOS操作は残件として引き継ぐ。
+
+<a id="piece-one-hour-finite-format-20261104"></a>
+## 150. 11/4 — Pieceの有限文法と形式選択の復帰を1時間継続して修復
+
+Mashの「1時間Pieceの残件作業」の指示に従い、UTC04:31:25（JST13:31:25）から小単位の完了報告で終了せず作業を継続した。作業時間は本節末尾へ記録する。開始点はRN `2fe642b70796646c04f30878cde0b380af636e76`／API `acbce1d58c1ba68add5c35dd59b7f26697eb7d87`。§149までに確認した前提資料・華恋用作業ルール、全体設計と全ファイル地図、Piece入口／current構造を引き継ぎ、最新head・weekly・関連実物を照合。既存owner内の修復と検証であり、ビルドはまとめ実施へ残す。
+
+- **モードによる有限文法の共用漏れ。** 平穏で使えた「資料を読みました。まだ決めていません。」が自己理解では拒否され、既知stemの「ます／ません」や、既存の肯定・句点付き「する。」も同様だった。完成動作と明示自己表現・留保の有限判定を既存KEEP作者へ共用する。明示終端からだけ非過去を許し、無句点の既存判定は過去形のまま。肯否・時制・主体・欄／段落・句読点・重複を原文で保持し、意図・関係・宣言適格を作らない。留保単独、一般copula、未知stem、否定plain-suruや一般plain動詞へ広げない。
+- **同じ原因の境界も修復。** 独立読取で新経路の空対象、ひらがな続きの条件、言う系列の報告活用、誰／だれ＋「もらった」等の問いcue漏れを検出した。を-objectは既存有限形を共用し、助詞だけの対象を拒否。新scopeは既存の条件・有限report operatorで読み、「迷って」の内部を引用とみなさない。途中の汎用と／って除外は「まだ決めることができません。」等を後退させたため撤去し、こと名詞化・迷っていた等の正例を保持した。誰／だれも、も／でも直後の非ひらがなまたは末尾を確認する。語彙辞書・一般品詞parserを追加していない。
+- **選択形式を一時休止で失わない。** saved-inputホストだけが、形式変更後の一時休止で選択要求を消し、元の自動形式へ戻っていた。同じホスト・本人・保存ID・元の画面キーに限り、処理中／結果不明と受信確定済みの明示選択POSTを本文なしで保持する。本文・旧候補・fitを復活させず、復帰後の本人操作で同じbody／keyをPOSTする。後続visual PATCHがあっても元POSTを書き換えず、APIの同候補・最新recipeを回収する。default形式は従来のsource GET経路を維持。確定した期限切れ／元POST競合を通常idleへ戻さず、既存の明示再作成／source再読を使う。現在APIのAuth／Feature拒否は従来terminalを維持し、この保持で再送可能にしない。client設定OFFは未知commitの確定ではないため本文なしの要求だけ保持し、OFF中・ON復帰時の自動通信は0。本人・入力・元キー変更と画面破棄では破棄する。
+
+言語の最終比較は、同一2,890入力を旧indexの**両module**と現版で別process初回importして採取した。新1,041生成、既存1,360生成本文不変、拒否450保持、新39拒否、既存作者独立検査の失敗0。新生成は全件自己理解で、同じ入力の旧平穏mode本文と1,041件すべて一致し、全dutyは既存KEEP・宣言適格false。新拒否39は、誰／だれの語頭境界の旧past36条件と、旧literal留保の未対応条件／report3条件。rootは新しい文型、主体・時制・否定・留保と全39新拒否を読み、同環境の別担当が空対象・scope・証拠scalar／UTF8／fieldSHAを確認した。全完成本文の人手読了や独立Pro／Ultra／Mashの商品判定ではない。既存の感情選択経路には一部の疑問等の原文生成が残り、一般日本語全体の合格としない。
+
+最終言語9例×Free／Plus／Premium×平穏／自己理解の実ASGI＋隔離PGlite54条件を、preview・同key再読・保存・同save key再読・本人GETまで確認。本文・段落・3hash・recipe・rendererが一致し、枠消費は各1回。対応する実270通信をRN transportで照合した。Auth／providerは合成で、ネイティブ描画や実端末の確認ではない。
+
+形式回収はall-null作成→visual PATCH→明示形式POSTのSQLcommit／ACK消失→同POST回収を実API／SQLで取得し、background／runtime／focusの3ホスト経路へ再生。新しいsource GETや自動POSTを行わず、候補2・保存／枠消費0・回収write0を保持した。受信確定後の後続visual PATCHも、元のbody／keyのまま同IDの最新revision2を回収できた。
+
+実際の600秒TTLも1回だけ待った。開始UTC04:53:16.960、保存された期限05:03:16.956、確認05:03:17.656、実待機600.899秒。時計・DB期限を書き換えず、未知selected quoteの同POSTが409 EXPIRED、その後の別の明示キーが同形式／visual／本文・3hashの新IDを200で返した。旧2draftは全文不変、最終draft3・保存／枠消費0。RNも同wireで期限切れ→明示再作成を確認し、再作成keyはcontrollerへ原本のopaque keyを明示注入した。UIの乱数キー生成は既存回帰で別確認し、この再生を実端末や実UI乱数の観測へ拡張しない。
+
+保存結果不明の既存API境界も調べた。保存commit後のACK消失と保存機能OFFの間は再送を止め、source編集／削除／Free対象期限外／プラン変更後でも、再許可後の同keyは同消費を回収する。未commitの失効は409／404／422等で拒否し、保存・枠・キーを消費しない。保存結果不明のまま本人が履歴から削除した場合、旧save確認は404 NOT_FOUND・RPC0で確定し、quota1とdelete receipt1を保持する。RNはpendingを消して旧再送を止め、別の明示navigationでだけsource GET→別keyの新候補へ進めた。ここは既存API／RNが正しく動き、追加製品変更0。
+
+最終RNはMetro再bundle検査を対象外として1,435件成功・失敗0。API広域104ファイルは8,939件成功・既存失敗161件・native17件除外。§149の失敗identity集合と完全一致し、新規失敗／error0。保存原入力の純粋1,472成功・SQL4件除外は広域と重複し、ASGI54や局所回帰も広域へ加算しない。source／testの最終bytesを検証版へ照合した。既存161件をPASSへ読み替えず、API全体合格や商品受入れを主張しない。
+
+[Cocolon_Piece_20261104_hour_validation.zip](https://chatgpt.com/library?file_id=libfile_aea25fcf9a8881918ce7b45f57395c45&account_id=personal)へ、最終corpusと両processの結果、実wire・再生runner・実TTL原本、回帰log／XML、sourceのhash参照を保全。GitHub管理下の製品sourceを複製しない。全96member（manifest対象95＋manifest自身）、825,207bytes／SHA256 `d858b75b24c5b33454a7b51abc502d3a9000daf10586b61b86985ab04fd42940`。初回のplan関数だけを旧版へ戻した途中比較は最終証拠へ混ぜない。旧age-out probeのPremium準備誤りと修正したFree単独結果も区別する。再現時はbaseline runnerがGit indexを読むため、元のAPI基点と記録SHAのindexを用意し、今回版へstageしたindexを旧版として使わない。
+
+新差分は製品4・既存test2・前提資料4の計10ファイル、新規repoファイル0。全体現在地・01Aのファイル地図・Piece current構造は関連責務を差分置換し、本節を履歴とする。STRUCTURE_MAP_DELTA_NONE。既存意味型・公開API／DTO・DB・描画版・依存・workflowは変更しない。同環境の分担実装／読取をrootが統合し、GitHubの既存Draftへ反映した。API最終は [47b58f4a](https://github.com/MassyuRed/mashos-api/commit/47b58f4a4f3dc066e8e8f83ac19f51ed35035283)。RNは [Draft PR30](https://github.com/MassyuRed/Cocolon/pull/30)、APIは [Draft PR3](https://github.com/MassyuRed/mashos-api/pull/3)へ反映。ビルド、配布、本番配置、DB適用、GPU、本人端末操作は0。一般日本語品質、Android通常作成・保存への採用、実際のPhotos／Shareと商品受入れは残る。
+
+作業時間記録：UTC04:31:25開始、UTC05:31:59（JST14:31:59）に本節を確定。ここまで実1時間0分34秒。以降のGitHub反映と全文読戻しも続けて確認する。

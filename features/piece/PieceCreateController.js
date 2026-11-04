@@ -744,12 +744,28 @@ export function createPieceCreateController(configuration = {}) {
     const nextEnabled = value?.enabled === true;
     const nextSaveEnabled = nextEnabled && value?.saveEnabled === true;
     if (!saveIntent) {
-      if (state.code === 'PIECE_PREVIEW_EXPIRED' && (enabled !== nextEnabled || value?.runtimeRefresh === true)) {
+      const selectedFormat = value?.preserveSelectedFormat === true && operation.request.requested_format !== null;
+      if (selectedFormat) state = expirePiecePreview(state, clock());
+      if (state.code === 'PIECE_PREVIEW_EXPIRED' &&
+          (enabled !== nextEnabled || value?.runtimeRefresh === true || selectedFormat)) {
         // Preserve only the expired request on the same host binding. A
         // callback from before suspension must not start the replacement.
         enabled = nextEnabled;
         saveEnabled = nextSaveEnabled;
         state = Object.freeze({ ...state, ticket: Object.freeze({}) });
+        notify();
+        return true;
+      }
+      if (selectedFormat) {
+        // Keep the selected POST/key, never its displayed body. Definitive
+        // source/eligibility failures remain terminal; an uncertain PATCH
+        // still recovers through that original POST instead of a new source.
+        enabled = nextEnabled;
+        saveEnabled = nextSaveEnabled;
+        if (state.phase === 'unavailable' && state.code !== 'PIECE_TEMPORARILY_UNAVAILABLE' &&
+            !(visualRecovery && recoverable.includes(state.code))) {
+          state = Object.freeze({ ...state, ticket: Object.freeze({}) });
+        } else clearAttempt(false, false, true);
         notify();
         return true;
       }
@@ -771,8 +787,16 @@ export function createPieceCreateController(configuration = {}) {
     return true;
   }
 
-  function close() {
+  function close(options = {}) {
     if (disposed) return;
+    if (options?.resetSelectedFormat === true && !saveIntent && !cancelIntent && contextOperation && operation &&
+        operation.request.requested_format !== null) {
+      // A different navigation binding abandons that selected-format intent,
+      // but keeps the original context/key guard against changed source bytes.
+      operation = contextOperation;
+      formatIntent = null;
+      lastDisplaySettings = null;
+    }
     // A conflict/invalid context remains blocked until a valid context update.
     // Retain only the current body-free request/key; drop the received body.
     // Cancellation or save is terminal/uncertain for this original request.
