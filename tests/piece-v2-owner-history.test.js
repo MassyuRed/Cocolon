@@ -182,6 +182,106 @@ test('visibility conflict refetches once without silent overwrite', async () => 
   assert.equal(h.calls.length, 4); assert.match(h.controller.getView().message, /状態が変わって/);
   assert.equal(h.controller.getView().record.visibility_scope, 'private');
 });
+
+for (const direct of [false, true]) for (const changed of [false, true]) {
+  test(`${direct ? 'saved entry' : 'ordinary history'} explicitly rereads the selected detail after ${changed ? 'acknowledged visibility change' : 'initial read'} response loss`, async () => {
+    let acknowledged = false, failures = changed ? 0 : 1, finish;
+    const fresh = record({ row_version: 3, visibility_scope: 'public' });
+    const h = harness({ send: (url, init) => {
+      if (url.includes('/history')) return packet(page([record()]));
+      if (init.method === 'PATCH') {
+        acknowledged = true; failures = 1;
+        return packet({ piece_id: PID, visibility_scope: 'public', row_version: 3 });
+      }
+      if (failures-- > 0) throw Error('lost selected detail');
+      if (!changed || acknowledged) return new Promise(resolve => { finish = resolve; });
+      return packet(record());
+    } });
+    const host = ownerHost(h, direct ? savedEntry() : null, { flags });
+    host.componentDidMount();
+    if (direct) await tick();
+    else { await host.act('loadHistory'); await host.act('openDetail', PID); }
+    if (changed) await host.act('setVisibility', 'public');
+    const view = host.controller.getView(), before = h.calls.length;
+    assert.equal(view.phase, 'unavailable'); assert.equal(view.canRetryDetail, true);
+    assert.equal(view.record, null); assert.equal(view.items.length, 0);
+    assert.equal(nodes(host.render()).filter(n => n.type === 'PieceVisualCard').length, 0);
+    assert.equal(texts(host.render()).includes(record().piece_text), false);
+    assert.equal(view.message.includes('公開範囲を変更しました'), false, 'do not present old detail after the ACK');
+    await host.act('openDetail', RID); await host.act('retryDetail', {});
+    assert.equal(h.calls.length, before, 'a retained target does not admit arbitrary IDs or tokens');
+    const retry = button(host, direct ? '保存したPieceを読み込む' : '同じPieceを読み込み直す');
+    const pending = retry.props.onPress(); retry.props.onPress(); await tick();
+    assert.equal(h.calls.length, before + 1, 'one explicit reread, with no mutation replay');
+    const [url, init] = h.calls.at(-1);
+    assert.equal(url, '/emotion/piece/' + PID); assert.equal(init.method, 'GET');
+    assert.equal(init.body, undefined); assert.equal(init.headers['Idempotency-Key'], undefined);
+    finish(packet(fresh)); await pending;
+    assert.equal(host.controller.getView().record.row_version, 3);
+    assert.equal(host.controller.getView().record.visibility_scope, 'public');
+    assert.equal(host.controller.getView().message, changed ? '公開範囲を変更しました。' : '');
+    assert.equal(host.controller.getView().canRetryDetail, false);
+    await retry.props.onPress(); assert.equal(h.calls.length, before + 1, 'the consumed callback cannot read again');
+    assert.equal(h.calls.filter(([, item]) => item.method === 'PATCH').length, changed ? 1 : 0);
+    host.componentWillUnmount();
+  });
+}
+
+test('a second lost detail read rotates its token and retains the acknowledged notice until a fresh GET', async () => {
+  let changed = false, fail = true;
+  const h = harness({ send: (url, init) => {
+    if (url.includes('/history')) return packet(page([record()]));
+    if (init.method === 'PATCH') { changed = true; return packet({ piece_id: PID, visibility_scope: 'public', row_version: 3 }); }
+    if (changed && fail) throw Error('detail unavailable');
+    return packet(record(changed ? { visibility_scope: 'public', row_version: 3 } : {}));
+  } });
+  const host = ownerHost(h, null, { flags }); host.componentDidMount();
+  await host.act('loadHistory'); await host.act('openDetail', PID); await host.act('setVisibility', 'public');
+  const old = button(host, '同じPieceを読み込み直す');
+  await old.props.onPress(); const count = h.calls.length;
+  assert.equal(host.controller.getView().canRetryDetail, true);
+  fail = false; await old.props.onPress(); assert.equal(h.calls.length, count);
+  await button(host, '同じPieceを読み込み直す').props.onPress();
+  assert.equal(host.controller.getView().message, '公開範囲を変更しました。');
+  assert.equal(h.calls.length, count + 1); host.componentWillUnmount();
+});
+
+for (const boundary of ['owner', 'target', 'read revoked', 'history', 'close', 'background', 'unmount']) {
+  test(`failed-detail reread cannot survive ${boundary}`, async () => {
+    const h = harness({ send: url => url.includes('/history') ? packet(page([record()])) : Promise.reject(Error('lost detail')) });
+    const host = ownerHost(h, null, { flags }); host.componentDidMount();
+    await host.act('loadHistory'); await host.act('openDetail', PID);
+    const retry = button(host, '同じPieceを読み込み直す'); assert.ok(retry);
+    if (boundary === 'owner') host.props = { ...host.props, owner: RID };
+    if (boundary === 'target') host.props = { ...host.props, savedPiece: savedEntry(RID) };
+    if (boundary === 'read revoked') host.props = { ...host.props, flags: {} };
+    if (['owner', 'target', 'read revoked'].includes(boundary)) host.componentDidUpdate();
+    if (boundary === 'history') await host.act('loadHistory');
+    if (boundary === 'close') host.controller.close();
+    if (boundary === 'background') { h.background('inactive'); h.background('active'); }
+    if (boundary === 'unmount') host.componentWillUnmount();
+    await tick(); const count = h.calls.length;
+    await retry.props.onPress(); assert.equal(h.calls.length, count);
+    if (boundary !== 'unmount') host.componentWillUnmount();
+  });
+}
+
+for (const [status, code] of [[401, 'PIECE_AUTH_REQUIRED'], [503, 'PIECE_FEATURE_DISABLED'], [404, 'PIECE_NOT_FOUND']]) {
+  test(`failed-detail reread discards its target after definitive ${code}`, async () => {
+    let definitive = false;
+    const h = harness({ send: url => url.includes('/history') ? packet(page([record()])) :
+      definitive ? packet({ code }, status) : Promise.reject(Error('lost detail')) });
+    const host = ownerHost(h, null, { flags }); host.componentDidMount();
+    await host.act('loadHistory'); await host.act('openDetail', PID);
+    const retry = button(host, '同じPieceを読み込み直す');
+    definitive = true; await retry.props.onPress(); const count = h.calls.length;
+    assert.equal(host.controller.getView().canRetryDetail, false);
+    assert.equal(host.controller.getView().record, null);
+    await retry.props.onPress(); assert.equal(h.calls.length, count);
+    host.componentWillUnmount();
+  });
+}
+
 test('public-write flag and visibility-toggle flag independently prevent writes', async () => {
   const h = harness({ send: ownerSend });
   h.controller.setContext({ enabled: true, expectedUserId: OWNER, flags: { ...flags, piece_v2_public_write_enabled: false } });

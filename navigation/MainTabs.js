@@ -104,11 +104,20 @@ export function createPieceSaveRecovery(owner) {
     },
     remember(entry) {
       if (!active || !owner || entry.operation.expectedUserId !== owner || pending.has(inputId(entry))) return false;
-      pending.set(inputId(entry), { entry, stop: null });
+      pending.set(inputId(entry), { entry, stop: null, quotaExhausted: false });
       return true;
     },
     forget(entry) {
       if (pending.get(inputId(entry))?.entry === entry) pending.delete(inputId(entry));
+    },
+    setQuotaExhausted(entry, value) {
+      if (!active) return;
+      const record = pending.get(inputId(entry));
+      if (record?.entry === entry) record.quotaExhausted = value === true;
+    },
+    isQuotaExhausted(entry) {
+      const record = pending.get(inputId(entry));
+      return active && record?.entry === entry && record.quotaExhausted === true;
     },
     markDisabled(entry, runtime) {
       const record = pending.get(inputId(entry));

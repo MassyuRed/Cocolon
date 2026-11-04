@@ -227,7 +227,7 @@ index 11540df..5f965fa 100644
      if (!success) {
        reject(RCTErrorUnspecified, @"The view cannot be captured. drawViewHierarchyInRect was not successful. This is a potential technical or security limitation.", nil);
        return;
-@@ -194,7 +245,15 @@ RCT_EXPORT_METHOD(captureRef:(nonnull NSNumber *)target
+@@ -194,10 +245,23 @@ RCT_EXPORT_METHOD(captureRef:(nonnull NSNumber *)target
        }
        else {
          // Save to a temp file
@@ -244,6 +244,14 @@ index 11540df..5f965fa 100644
          if (path && !error) {
            if ([data writeToFile:path options:(NSDataWritingOptions)0 error:&error]) {
              res = path;
+           }
++          else if ([RCTConvert BOOL:options[@"cocolonPieceCache"]]) {
++            // A failed non-atomic write can leave a file whose path never
++            // reaches JS. Only remove this Piece capture's private file.
++            [[NSFileManager defaultManager] removeItemAtPath:path error:NULL];
++          }
+         }
+       }
 diff --git a/node_modules/react-native-view-shot/lib/index.d.ts b/node_modules/react-native-view-shot/lib/index.d.ts
 index 8dcef00..e8f9ec8 100644
 --- a/node_modules/react-native-view-shot/lib/index.d.ts

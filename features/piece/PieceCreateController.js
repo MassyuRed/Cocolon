@@ -64,6 +64,7 @@ export function createPieceCreateController(configuration = {}) {
   let savedReceipt = null;
   const recoverable = ['PIECE_TEMPORARILY_UNAVAILABLE', 'PIECE_PREVIEW_STALE',
     'PIECE_CONFLICT', 'PIECE_VISUAL_SELECTION_NOT_ALLOWED'];
+  const retryableSave = code => code === 'PIECE_TEMPORARILY_UNAVAILABLE' || code === 'PIECE_QUOTA_EXHAUSTED';
 
   // Both sides are detached JSON snapshots made by the existing API reader.
   // Key order does not create a new intent or change exact retry bytes.
@@ -138,11 +139,14 @@ export function createPieceCreateController(configuration = {}) {
     if (!disposed && enabled && saveIntent) {
       return Object.freeze({ ...view, phase: savePhase, preview: null,
         loadingKind: 'save', retryKind: 'save', savedReceipt,
-        canRetry: saveEnabled && savePhase === 'unavailable' && saveCode === 'PIECE_TEMPORARILY_UNAVAILABLE' &&
+        saveQuotaRejected: savePhase === 'unavailable' && saveCode === 'PIECE_QUOTA_EXHAUSTED',
+        canRetry: saveEnabled && savePhase === 'unavailable' && retryableSave(saveCode) &&
           canResumeSharedSave(saveEnabled),
         message: savePhase === 'saved' ? 'Pieceを保存しました。' :
           saveCode === 'PIECE_TEMPORARILY_UNAVAILABLE'
             ? '保存結果を確認できませんでした。同じ保存要求で結果を確認できます。'
+            : saveCode === 'PIECE_QUOTA_EXHAUSTED'
+              ? '今月のPiece保存回数の上限に達したため、このPieceは保存されていません。保存枠が変わった後に、同じ保存要求で再試行できます。'
             : saveCode ? new PieceApiError(saveCode).message : '' });
     }
     if (!disposed && enabled && cancelIntent) {
@@ -363,7 +367,7 @@ export function createPieceCreateController(configuration = {}) {
   async function retry() {
     if (disposed || !enabled || !operation || boundaryCode) return;
     if (saveIntent) {
-      if (saveEnabled && savePhase === 'unavailable' && saveCode === 'PIECE_TEMPORARILY_UNAVAILABLE') await runSave();
+      if (saveEnabled && savePhase === 'unavailable' && retryableSave(saveCode)) await runSave();
       return;
     }
     if (cancelIntent) {
@@ -627,7 +631,8 @@ export function createPieceCreateController(configuration = {}) {
     boundaryCode = canResumeSharedSave(saveEnabled) ? null : 'PIECE_FEATURE_DISABLED';
     saveIntent = entry.intent;
     savePhase = 'unavailable';
-    saveCode = boundaryCode || 'PIECE_TEMPORARILY_UNAVAILABLE';
+    saveCode = boundaryCode || (store.isQuotaExhausted?.(entry) === true
+      ? 'PIECE_QUOTA_EXHAUSTED' : 'PIECE_TEMPORARILY_UNAVAILABLE');
     notify();
     return true;
   }
@@ -653,6 +658,7 @@ export function createPieceCreateController(configuration = {}) {
     }
     const intent = saveIntent, captured = operation;
     const runtime = configuration.getRuntimePublication?.();
+    if (saveRecoveryEntry) saveRecoveryEntry.store.setQuotaExhausted?.(saveRecoveryEntry.entry, false);
     // No private body or renderer object is retained by the retry intent.
     state = closePiecePreview();
     visualUpdated = false;
@@ -681,7 +687,10 @@ export function createPieceCreateController(configuration = {}) {
       if (saveCode === 'PIECE_FEATURE_DISABLED' && saveRecoveryEntry) {
         saveRecoveryEntry.store.markDisabled(saveRecoveryEntry.entry, runtime);
       }
-      if (!['PIECE_TEMPORARILY_UNAVAILABLE', 'PIECE_FEATURE_DISABLED', 'PIECE_AUTH_REQUIRED'].includes(saveCode)) {
+      if (saveCode === 'PIECE_QUOTA_EXHAUSTED' && saveRecoveryEntry) {
+        saveRecoveryEntry.store.setQuotaExhausted?.(saveRecoveryEntry.entry, true);
+      }
+      if (!['PIECE_TEMPORARILY_UNAVAILABLE', 'PIECE_QUOTA_EXHAUSTED', 'PIECE_FEATURE_DISABLED', 'PIECE_AUTH_REQUIRED'].includes(saveCode)) {
         forgetSaveRecovery();
       }
       if (saveCode === 'PIECE_PREVIEW_EXPIRED') {

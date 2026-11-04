@@ -387,8 +387,10 @@ test('admission reentrancy and loading subscriber revocation cannot send an obso
   }
 });
 
-test('known save rejection never retries, regenerates or reports success', async () => {
-  for (const [status, code] of [[409, 'PIECE_QUOTA_EXHAUSTED'], [409, 'PIECE_PREVIEW_STALE'],
+test('non-quota known save rejection never retries, regenerates or reports success', async () => {
+  // Quota can become available later; its exact same-key retry is covered by
+  // the ordinary host tests. Stale/hash/auth rejection remains closed.
+  for (const [status, code] of [[409, 'PIECE_PREVIEW_STALE'],
     [409, 'PIECE_PREVIEW_EXPIRED'], [409, 'PIECE_HASH_MISMATCH'], [409, 'PIECE_CONFLICT'], [401, 'PIECE_AUTH_REQUIRED']]) {
     const u = await saveHarness({ send: async url => url.endsWith('/save')
       ? { status, json: async () => ({ code }) } : pieceHttp(response()) });

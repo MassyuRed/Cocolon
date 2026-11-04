@@ -1576,3 +1576,148 @@ test('same-selection runtime pause preserves the refreshed preview key for expli
   assert.equal(u.host.controller.getView().phase, 'received');
   u.host.componentWillUnmount();
 });
+
+async function quotaRejectedHost({ afterQuota = () => pieceHttp(uiSaveReceipt()), store = sourceRefreshSaveRecovery() } = {}) {
+  let saves = 0;
+  const u = previewUiHarness({ admitSave: true, send: async (url, init) => {
+    if (init.method === 'GET') return pieceHttp(request().source_ref);
+    if (!url.endsWith('/save')) return pieceHttp(response());
+    if (++saves === 1) return { status: 409, json: async () => ({ code: 'PIECE_QUOTA_EXHAUSTED' }) };
+    return afterQuota();
+  } });
+  bindSourceRefreshHost(u); u.host.props = { ...u.host.props, saveRecovery: store };
+  await u.host.createFromSavedInput(); await pieceTick(); await startSyntheticSave(u);
+  return { ...u, store, entry: store.find(OWNER, request().source_ref.source_input_id) };
+}
+
+for (const closeFirst of [false, true]) {
+  test(`quota rejection offers explicit same-save retry ${closeFirst ? 'after close and runtime update' : 'in the modal'}`, async () => {
+    const u = await quotaRejectedHost();
+    const rejected = u.host.controller.getView();
+    assert.equal(rejected.canRetry, true); assert.equal(rejected.saveQuotaRejected, true);
+    assert.match(rejected.message, /保存されていません/);
+    assert.doesNotMatch(rejected.message, /保存結果を確認できません/);
+    assert.equal(u.store.isQuotaExhausted(u.entry), true);
+    assert.doesNotMatch(JSON.stringify(u.entry), /piece_text"|content_payload"|visual_recipe"/);
+    assert.equal(uiButton(u, '保存入力を確認し直す'), undefined);
+    if (closeFirst) {
+      u.host.close();
+      u.host.context = { ...u.host.context, runtime: {} }; u.host.componentDidUpdate();
+      assert.equal(u.calls.length, 3, 'closing or a new runtime never starts a save');
+    }
+    const button = uiButton(u, '保存枠を確認して再試行'); assert.ok(button);
+    button.props.onPress(); button.props.onPress(); await pieceTick();
+    assert.equal(u.calls.length, 4);
+    assert.equal(u.calls[3][1].body, u.calls[2][1].body);
+    assert.equal(u.calls[3][1].headers['Idempotency-Key'], u.calls[2][1].headers['Idempotency-Key']);
+    assert.equal(u.host.controller.getView().phase, 'saved');
+    assert.equal(u.store.find(OWNER, request().source_ref.source_input_id), undefined);
+    assert.equal(u.store.isQuotaExhausted(u.entry), false);
+    u.host.componentWillUnmount();
+  });
+}
+
+test('known quota rejection survives navigation with a distinct message and original save key', async () => {
+  const first = await quotaRejectedHost(), savedCall = first.calls[2][1];
+  first.host.componentWillUnmount();
+  const next = previewUiHarness({ admitSave: true, send: async () => pieceHttp(uiSaveReceipt()) });
+  next.host.props = { ...first.host.props, savedInput: { ...first.host.props.savedInput, idempotencyKey: 'quota-new-navigation' } };
+  next.host.context = { ...first.host.context, runtime: {} }; next.mount();
+  assert.equal(next.calls.length, 0);
+  assert.equal(next.host.controller.getView().saveQuotaRejected, true);
+  assert.match(JSON.stringify(next.tree()), /保存されていません/);
+  assert.equal(uiButton(next, '同じ保存要求で結果を確認'), undefined);
+  uiButton(next, '保存枠を確認して再試行').props.onPress(); await pieceTick();
+  assert.equal(next.calls.length, 1);
+  assert.ok(next.calls[0][0].endsWith('/save'));
+  assert.equal(next.calls[0][1].body, savedCall.body);
+  assert.equal(next.calls[0][1].headers['Idempotency-Key'], savedCall.headers['Idempotency-Key']);
+  assert.equal(next.host.controller.getView().phase, 'saved'); next.host.componentWillUnmount();
+});
+
+test('quota retry becomes unknown before transport and preserves the same save through later navigation', async () => {
+  const pending = deferredPieceResponse();
+  const first = await quotaRejectedHost({ afterQuota: () => pending.promise });
+  const button = uiButton(first, '保存枠を確認して再試行'); button.props.onPress();
+  assert.equal(first.store.isQuotaExhausted(first.entry), false, 'a request in flight is no longer a known rejection');
+  assert.equal(first.host.controller.getView().saveQuotaRejected, false);
+  button.props.onPress(); await pieceTick(); assert.equal(first.calls.length, 4);
+  pending.reject(Error('retry response lost')); await pieceTick();
+  assert.equal(first.host.controller.getView().saveQuotaRejected, false);
+  assert.match(first.host.controller.getView().message, /保存結果を確認できません/);
+  assert.ok(uiButton(first, '同じ保存要求で結果を確認'));
+  first.host.componentWillUnmount();
+  const next = previewUiHarness({ admitSave: true, send: async () => pieceHttp(uiSaveReceipt({ idempotency_replayed: true })) });
+  next.host.props = { ...first.host.props, savedInput: { ...first.host.props.savedInput, idempotencyKey: 'quota-lost-retry-reentry' } };
+  next.host.context = { ...first.host.context, runtime: {} }; next.mount();
+  assert.equal(next.calls.length, 0);
+  assert.equal(next.host.controller.getView().saveQuotaRejected, false);
+  assert.equal(uiButton(next, '保存枠を確認して再試行'), undefined);
+  uiButton(next, '同じ保存要求で結果を確認').props.onPress(); await pieceTick();
+  assert.equal(next.calls.length, 1);
+  assert.equal(next.calls[0][1].body, first.calls[2][1].body);
+  assert.equal(next.calls[0][1].headers['Idempotency-Key'], first.calls[2][1].headers['Idempotency-Key']);
+  assert.equal(next.host.controller.getView().phase, 'saved'); next.host.componentWillUnmount();
+});
+
+for (const code of ['PIECE_QUOTA_EXHAUSTED', 'PIECE_PREVIEW_EXPIRED', 'PIECE_PREVIEW_STALE', 'PIECE_HASH_MISMATCH', 'PIECE_CONFLICT', 'PIECE_AUTH_REQUIRED', 'PIECE_SOURCE_NOT_ELIGIBLE']) {
+  test(`quota retry adopts exact later ${code} without restarting or changing save identity`, async () => {
+    const u = await quotaRejectedHost({ afterQuota: () => ({ status: code === 'PIECE_AUTH_REQUIRED' ? 401
+      : code === 'PIECE_SOURCE_NOT_ELIGIBLE' ? 422 : 409,
+      json: async () => ({ code }) }) });
+    const oldQuotaRetry = uiButton(u, '保存枠を確認して再試行');
+    oldQuotaRetry.props.onPress(); await pieceTick();
+    assert.equal(u.calls.length, 4);
+    assert.equal(u.calls[3][1].body, u.calls[2][1].body);
+    assert.equal(u.calls[3][1].headers['Idempotency-Key'], u.calls[2][1].headers['Idempotency-Key']);
+    assert.equal(u.host.controller.getView().phase, 'unavailable');
+    assert.equal(u.host.controller.getView().canRetry, code === 'PIECE_QUOTA_EXHAUSTED');
+    assert.equal(u.store.isQuotaExhausted(u.entry), code === 'PIECE_QUOTA_EXHAUSTED');
+    assert.equal(u.store.find(OWNER, request().source_ref.source_input_id),
+      ['PIECE_QUOTA_EXHAUSTED', 'PIECE_AUTH_REQUIRED'].includes(code) ? u.entry : undefined);
+    assert.equal(!!uiButton(u, '同じ記録から作り直す'), code === 'PIECE_PREVIEW_EXPIRED');
+    assert.equal(u.host.controller.getView().preview, null);
+    if (code === 'PIECE_SOURCE_NOT_ELIGIBLE') {
+      // A real plan update may invalidate the original Emlis saved context.
+      // Same-key confirmation must expose that new rejection, never force it
+      // through or resurrect the earlier quota outcome after a runtime update.
+      assert.equal(uiButton(u, '保存枠を確認して再試行'), undefined);
+      u.host.close(); u.host.context = { ...u.host.context, runtime: {} }; u.host.componentDidUpdate();
+      oldQuotaRetry.props.onPress(); await pieceTick(); assert.equal(u.calls.length, 4);
+      assert.equal(uiButton(u, '保存枠を確認して再試行'), undefined);
+      assert.match(u.host.controller.getView().message, /この入力からは現在Pieceを作成できません/);
+    }
+    u.host.componentWillUnmount();
+  });
+}
+
+for (const boundary of ['owner', 'input', 'save-off', 'runtime-off', 'inactive', 'unmount']) {
+  test(`quota retry respects current ${boundary} boundary`, async () => {
+    const u = await quotaRejectedHost(), button = uiButton(u, '保存枠を確認して再試行');
+    if (boundary === 'owner' || boundary === 'input') {
+      u.host.props = { ...u.host.props, savedInput: { ...u.host.props.savedInput,
+        ...(boundary === 'owner' ? { expectedUserId: 'other-owner' }
+          : { savedInputId: '20000000-0000-4000-8000-000000000099' }) } };
+    } else if (boundary === 'save-off' || boundary === 'runtime-off') {
+      u.host.context = { runtime: boundary === 'runtime-off' ? null : {},
+        isFeatureEnabled: name => boundary !== 'runtime-off' && name === 'piece_v2_preview_enabled' };
+    } else if (boundary === 'inactive') u.background('inactive');
+    else u.host.componentWillUnmount();
+    button.props.onPress(); await pieceTick(); assert.equal(u.calls.length, 3);
+    if (boundary !== 'unmount') u.host.componentWillUnmount();
+  });
+}
+
+test('quota state is bound to the exact stored entry and is removed on owner revocation', async () => {
+  const u = await quotaRejectedHost();
+  const forged = { ...u.entry };
+  u.store.setQuotaExhausted(forged, false);
+  assert.equal(u.store.isQuotaExhausted(forged), false);
+  assert.equal(u.store.isQuotaExhausted(u.entry), true);
+  assert.equal(u.store.find('other-owner', request().source_ref.source_input_id), undefined);
+  u.store.revoke(); u.store.setQuotaExhausted(u.entry, true);
+  assert.equal(u.store.isQuotaExhausted(u.entry), false);
+  u.store.activate();
+  assert.equal(u.store.find(OWNER, request().source_ref.source_input_id), undefined);
+  u.host.componentWillUnmount();
+});

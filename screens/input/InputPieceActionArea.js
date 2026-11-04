@@ -555,6 +555,7 @@ export default class InputPieceActionArea extends React.Component {
     const onSave = canSave ? (identity, token) => this.savePreview(identity, token, provider, handle) : null;
     const onOpenSaved = display.phase === 'saved' && this.canOpenSavedPiece()
       ? () => this.openSavedPiece(view.savedReceipt) : null;
+    const saveRetryLabel = display.saveQuotaRejected === true ? '保存枠を確認して再試行' : '同じ保存要求で結果を確認';
     if (this.savedMode && this.sourcePhase !== 'ready' && !display.previewRestartToken &&
         !['cancel', 'save'].includes(display.retryKind)) {
       const unavailable = this.sourcePhase === 'unavailable';
@@ -582,8 +583,8 @@ export default class InputPieceActionArea extends React.Component {
         ? element(Text, { accessibilityRole: display.phase === 'saved' ? undefined : 'alert',
           accessibilityLiveRegion: 'polite' }, display.message) : null,
       !this.state.open && display.canRetry && ['cancel', 'save'].includes(display.retryKind) ? element(Button, {
-        title: display.retryKind === 'save' ? '同じ保存要求で結果を確認' : '同じ候補の取消を再試行', onPress: this.retry,
-        accessibilityLabel: display.retryKind === 'save' ? '同じ保存要求で結果を確認' : '同じ候補の取消を再試行',
+        title: display.retryKind === 'save' ? saveRetryLabel : '同じ候補の取消を再試行', onPress: this.retry,
+        accessibilityLabel: display.retryKind === 'save' ? saveRetryLabel : '同じ候補の取消を再試行',
       }) : null,
       !this.state.open && display.previewRestartToken ? element(Button, {
         title: '同じ記録から作り直す', accessibilityLabel: '同じ記録から作り直す',

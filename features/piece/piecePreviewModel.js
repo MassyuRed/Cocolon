@@ -188,6 +188,8 @@ export function readPiecePreviewDisplay(view, nowMs = Date.now()) {
     phase: ['idle', 'loading', 'unavailable', 'cancelled', 'saved'].includes(view.phase) ? view.phase : 'unavailable',
     message: view.phase === 'saved' ? 'Pieceを保存しました。' : typeof view.message === 'string' ? view.message : '',
     canRetry: view.phase === 'unavailable' && view.canRetry === true,
+    ...(view.phase === 'unavailable' && view.retryKind === 'save' && view.saveQuotaRejected === true
+      ? { saveQuotaRejected: true } : {}),
     ...(view.phase === 'unavailable' && view.previewRestartToken ? { previewRestartToken: view.previewRestartToken } : {}),
     ...(view.phase === 'unavailable' && view.sourceRefreshToken ? { sourceRefreshToken: view.sourceRefreshToken } : {}),
     ...(view.phase === 'unavailable' && view.formatRecoveryToken &&

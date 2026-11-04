@@ -310,7 +310,9 @@ export class PieceOwnerHistoryHost extends React.Component {
             ? h(Button, { title: record.visibility_scope === 'public' ? '非公開にする' : '公開する', onPress: () => this.confirmVisibility(record) }) : null,
           record && view.permissions.delete ? h(Button, { title: 'このPieceを削除', onPress: () => this.confirmDelete(record) }) : null,
           available && view.canRetryDelete ? h(Button, { title: '同じ削除要求で結果を確認', onPress: () => this.act('retryDelete', view.deleteRetryToken) }) : null,
-          available && target && !view.canRetryDelete && (view.phase === 'idle' ||
+          available && view.canRetryDetail ? h(Button, { title: target ? '保存したPieceを読み込む' : '同じPieceを読み込み直す',
+            onPress: () => this.act('retryDetail', view.detailRetryToken) }) : null,
+          available && target && !view.canRetryDelete && !view.canRetryDetail && (view.phase === 'idle' ||
             view.phase === 'unavailable' && view.code === 'PIECE_TEMPORARILY_UNAVAILABLE') ? h(Button, {
             title: '保存したPieceを読み込む', onPress: () => this.openSavedDetail(targetKey, target.pieceId) }) : null,
           available && view.phase !== 'loading' && !view.canRetryDelete ? h(Button, { title: record ? '履歴に戻る' : target ? '履歴を読み込む' : '保存済みPieceを読み込む', onPress: () => this.act('loadHistory') }) : null,

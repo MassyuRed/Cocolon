@@ -81,7 +81,9 @@ export default function PiecePreviewModal({ visible = false, display, onClose, o
     display.loadingKind === 'visual' ? '画像設定を更新しています。' :
     display.loadingKind === 'format' ? '選んだ形式でPieceを作成しています。' :
     display.loadingKind === 'recover' ? '最新のプレビューを取得しています。' : 'Pieceを取得しています。';
-  const retryLabel = display.retryKind === 'save' ? '同じ保存要求で結果を確認' : display.retryKind === 'cancel' ? '同じ候補の取消を再試行' :
+  const retryLabel = display.retryKind === 'save'
+    ? display.saveQuotaRejected === true ? '保存枠を確認して再試行' : '同じ保存要求で結果を確認'
+    : display.retryKind === 'cancel' ? '同じ候補の取消を再試行' :
     display.retryKind === 'recover' ? '最新のプレビューを取得' : '同じ要求で再試行';
   return element(Modal, {
     visible: true, animationType: 'slide', presentationStyle: 'fullScreen', onRequestClose: onClose,

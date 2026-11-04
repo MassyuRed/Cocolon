@@ -107,14 +107,16 @@ for (const version of ['piece.rn_bitmap_renderer.ios.v1','piece.rn_bitmap_render
 });
 async function image(h) {return (await h.prepare()).capture(h.target());}
 
-test('rejected Android native capture cannot create an export copy or reach the OS and can be retried', async () => {
-  const h = harness({ os: 'android' });
+for (const os of ['android', 'ios']) test(`rejected ${os} native capture cannot create an export copy or reach the OS and can be retried`, async () => {
+  const h = harness({ os });
   const job = await h.prepare();
   h.state.captureError = new Error('PRIVATE native encoder diagnostic');
   await failure(job.capture(h.target()));
   assert.equal(count(h, 'capture'), 1);
   assert.equal(count(h, 'cp'), 0);
   assert.equal(count(h, 'release'), 0);
+  assert.equal(h.calls.some(call => call[0] === 'mkdir' && call[1].startsWith('/cache/piece-export/')), false);
+  assert.equal(count(h, 'profile') + count(h, 'receipt'), 0);
   assert.equal(count(h, 'photo') + count(h, 'share'), 0);
 
   h.state.captureError = null;

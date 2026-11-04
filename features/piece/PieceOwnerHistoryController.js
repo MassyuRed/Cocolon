@@ -43,10 +43,13 @@ export function createPieceOwnerHistoryController(configuration = {}) {
   }
   const current = ticket => enabled() && active === ticket && context === ticket.context;
   function getView() {
-    if (!enabled()) return Object.freeze({ ...empty(), phase: 'hidden', permissions: pieceOwnerPermissions(), canRetryDelete: false });
+    if (!enabled()) return Object.freeze({ ...empty(), phase: 'hidden', permissions: pieceOwnerPermissions(), canRetryDelete: false, canRetryDetail: false });
     const canRetryDelete = !active && !!deletion && state.code === 'PIECE_TEMPORARILY_UNAVAILABLE' && permissions().delete;
-    return Object.freeze({ ...state, items: Object.freeze([...state.items]), permissions: permissions(),
-      canRetryDelete, deleteRetryToken: canRetryDelete ? deletion.token : null });
+    const canRetryDetail = !active && !deletion && !!state.detailRetry && state.code === 'PIECE_TEMPORARILY_UNAVAILABLE';
+    const { detailRetry, ...display } = state;
+    return Object.freeze({ ...display, items: Object.freeze([...state.items]), permissions: permissions(),
+      canRetryDelete, deleteRetryToken: canRetryDelete ? deletion.token : null,
+      canRetryDetail, detailRetryToken: canRetryDetail ? detailRetry.token : null });
   }
   function newDeleteKey() {
     const bytes = new Uint8Array(24);
@@ -98,6 +101,11 @@ export function createPieceOwnerHistoryController(configuration = {}) {
         active = null; emit(); return;
       }
       state = { ...empty(), phase: 'unavailable', code, message: new PieceApiError(code).message };
+      if (action === 'detail' && code === 'PIECE_TEMPORARILY_UNAVAILABLE') {
+        // A failed GET drops the old body, but keeps only this already-selected
+        // target and its known acknowledgement for an explicit fresh read.
+        state.detailRetry = { pieceId: value.piece_id, notice, token: Object.freeze({}) };
+      }
       if (code === 'PIECE_TEMPORARILY_UNAVAILABLE') state.message = action === 'delete'
         ? deleteUncertainMessage
         : action === 'visibility'
@@ -139,6 +147,11 @@ export function createPieceOwnerHistoryController(configuration = {}) {
         scope === 'public' && !permissions().publish) return;
     return run('visibility', { piece_id: record.piece_id, expected_row_version: record.row_version, visibility_scope: scope });
   }
+  function retryDetail(token) {
+    if (!getView().canRetryDetail || token !== state.detailRetry.token) return;
+    const { pieceId, notice } = state.detailRetry;
+    return run('detail', { piece_id: pieceId }, null, notice);
+  }
   // The UI must pass the exact record the user confirmed, not a later record.
   function deleteConfirmed(record) {
     if (!enabled() || active || state.phase !== 'detail' || record !== state.record || !permissions().delete) return;
@@ -155,7 +168,7 @@ export function createPieceOwnerHistoryController(configuration = {}) {
   }
   function close() { clear(); emit(); }
   function dispose() { disposed = true; clear(); listeners.clear(); context = null; }
-  return Object.freeze({ setContext, getView, loadHistory, loadMore, openDetail, setVisibility,
+  return Object.freeze({ setContext, getView, loadHistory, loadMore, openDetail, retryDetail, setVisibility,
     deleteConfirmed, retryDelete, close, dispose,
     subscribe: fn => { listeners.add(fn); return () => listeners.delete(fn); } });
 }

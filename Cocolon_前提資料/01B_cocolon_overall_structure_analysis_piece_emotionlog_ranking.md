@@ -3396,14 +3396,16 @@ API dc05dc35、通常product owner追加なし。既存 `semantic_admission.py` 
 通常起動経路・描画版・公開DTO・依存・DBスキーマは既存のownerを使用する。[Piece現行構造](current_structure/02_piece_current_structure.md#piece-paragraph-os-result-srgb-20261104)
 
 <a id="piece-source-delete-exclamation-files-20261104"></a>
-### 2026-11-04 — Pieceの保存元再確認・削除復帰・感嘆符のファイル差分
+<a id="piece-literal-save-detail-cache-files-20261104"></a>
+### 2026-11-04 — Pieceの保存・詳細再読・原文保持・途中PNGのファイル地図
 
-| 既存ファイル | 責務の差分 |
+| 既存ファイル | 現在の責務の差分 |
 |---|---|
-| `screens/input/InputPieceActionArea.js` | 確定した保存元競合でのみ明示再取得を受け付ける。新しい作成キーを別に保持し、GETと作成を分ける。同じ入力の一時停止ではそのキーを保持し、選択が変われば破棄する。 |
-| `features/piece/PieceCreateController.js`、`features/piece/piecePreviewModel.js`、`components/piece/PiecePreviewModal.js` | 確定した競合の現在の操作だけに再取得ボタンを結び付ける。結果不明の作成・画像変更・保存・取消は元の復旧経路を使う。 |
-| `features/piece/PieceOwnerHistoryController.js`、`screens/PieceOwnerHistoryScreen.js` | 一時停止・稼働設定再読込を確定した権限変更と区別し、本文なしの同一削除要求を明示確認まで保持する。 |
-| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_v1c.py` | 自己理解の既存動作文で、一つの感嘆符を文法確認から除外して原文のまま生成する。疑問や断片の意味判定は従来どおり。 |
-| `tests/piece-v2-owner-history.test.js`、`tests/piece-v2-preview-display.test.js`、mashos-api `ai/tests/piece_v2/test_b05a_piece_saved_original_generation.py`・`test_piece_natural_context_sql.py` | 実ホストの中断・再入場・同一キー保持と失効、通常の保存元からの生成・保存・本人再読を既存の試験で検査する。端末の成功を示す試験ではない。 |
+| `screens/input/InputPieceActionArea.js`、`features/piece/PieceCreateController.js`、`features/piece/piecePreviewModel.js`、`components/piece/PiecePreviewModal.js` | 確定した保存元競合のGETと新しい作成を分ける。保存枠の確定拒否は元の要求・キーで明示再試行でき、未保存と結果不明の案内を分ける。 |
+| `navigation/MainTabs.js`の既存`createPieceSaveRecovery` | 元の作成・保存の要求とキーに、本文なしの保存枠拒否状態だけを結び付ける。再試行開始で拒否状態を解除し、本人変更と破棄は従来どおり。 |
+| `features/piece/PieceOwnerHistoryController.js`、`screens/PieceOwnerHistoryScreen.js` | 同一削除要求の復帰に加え、選択済み詳細GETの一時失敗から同じIDへの明示再取得を提供する。公開変更の既知の完了案内は最新詳細の取得後に表示する。 |
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py`・`piece_v1c.py` | 既存の明示一人称の有限表現を原文保持し、願望・比喩や宣言へ新しく分類しない。空の本文や既知の文法要素だけからなる本文は採用しない。自己理解の動作文の感嘆符も保持する。 |
+| `patches/react-native-view-shot+5.1.1.patch` | Piece専用iOS PNGの書込み失敗で、JSへ返らない途中ファイルをnative側で回収する。通常caller・成功分岐を保持する。 |
+| 既存`piece-v2-owner-history`・`preview-display`・`state-models`・`export`試験、API `test_b05a_piece_saved_original_generation.py`・`test_piece_natural_context_sql.py` | ホスト・保存復旧の通常復帰、原文保持・空述語拒否、実ASGI／隔離DBの保存・再読・保存枠を確認する。nativeの書込み失敗実行や端末成功の証拠とは分ける。 |
 
-既存の画面・保存復旧情報・HTTP経路を使用し、新規ファイル・API・DBスキーマ・描画版は追加しない。[Piece現行構造](current_structure/02_piece_current_structure.md#piece-source-delete-exclamation-20261104)
+既存の画面・保存復旧情報・HTTP経路を使用し、新規ファイル・API・DBスキーマ・描画版は追加しない。[Piece現行構造](current_structure/02_piece_current_structure.md#piece-literal-save-detail-cache-20261104)
