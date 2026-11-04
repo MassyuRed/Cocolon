@@ -3525,3 +3525,19 @@ API製品1・既存test1を[068c9b13](https://github.com/MassyuRed/mashos-api/co
 API既存test1fileだけを[528fc129](https://github.com/MassyuRed/mashos-api/commit/528fc129a68cdd6557055797f1fc4cef8b1495c0)へ反映し、全文／blobを読戻して一致を確認。製品不具合の修正とは報告しない。全体現在地差分なし（製品source・owner責務・公開API／DTO・DB schema・稼働・端末状態に変更なし、既存SQL検証の自己理解coverageのみ）。STRUCTURE_MAP_DELTA_NONE。既存全体00・01A/B/C・Piece mapは再生成しない。
 
 次は通常source-ref／preview／保存へ至る既存service境界のうち、保存済み自己理解のmetadataを渡す箇所を確認する。今回の16／4／SQL6を繰り返すだけの作業をせず、実際の不具合又は決定済み未完了に絞る。一般文章品質、Android通常作成、実Photos／Share、backend receiptの本番適用等は引き続き未完。ビルド・配布・本番配置・live DB更新・GPU・本人端末操作0、正式商品受入れ0/3、指定8時間の実働完了claimなし。
+
+
+<a id="piece-saved-action-http-sql-lifecycle-20261105"></a>
+## 169. 11/5 — 保存済み本文のHTTP取得・保存・画像出力用再読を照合
+
+開始はRN `3d2e4049bf45abaf51028c09bf4e34ff586948cf`／API `528fc129a68cdd6557055797f1fc4cef8b1495c0`。§168の次作業として、保存済み自己理解metadataを通常service境界へ渡す箇所を確認した。既存の自己理解・平穏の基本文にはpreview／保存の検証が既にあり、それを未実装として作り直していない。既存SQL fixtureでadapterの参照DTOを直接取り出していた箇所を、検査用appの実GET `/emotion/piece/source-ref/{id}`へ接続。認証とPostgREST transportは検査用代替のまま、保存原入力・Emlis完了状態のSQL read、実adapter・CMEE・service・既存SQL RPCは実行する。7fieldとno-storeも確認する。
+
+既存のliteral自己表現検証へ、助詞後のSPACE／TAB、最終欄の句点なしCRLF＋日付、二欄＋同文重複＋否定感嘆符の2組合せを追加。各3プラン×平穏／自己理解の新12条件で、原文から直接定めた段落／欄順／本文をpreviewへ保持し、同キーのpreview再読、保存、保存再試行、本人再読まで到達した。同じliteral検証の全24条件では画像出力前のGET exportも呼び、本人再読と同一artifact・no-storeであることを確認。保存再試行後の枠が一回分であることをSQLで確認した。検査用app内だけ既存export flagを明示し、稼働flagは変更していない。画像生成・native描画・OS写真保存・Share・export receiptの成功ではない。
+
+初回の新12条件は6成功／6失敗。失敗は先行memo欄に句点なしの動作文を置き、後続action欄も記入した組合せで、既存の「句点省略は最終非空欄だけ」という制限に一致した。既存拒否testとsourceを照合し、新たな製品不具合・修復前REDとはしない。受理する組合せでは句点なしの複数行を最終欄へ置き、先行欄の同じ拒否を新6条件として別途保持した。拒否時のpreview発行0・record0・quota0も確認。製品の文法や欄境界を緩めたり、旧期待を書き換えたりしていない。
+
+最終の既存module全体は **58成功／失敗0／error0（11.91秒）**。従来40＋新18で、既存40の期待変更0。export照合を加える前の58成功（13.62秒）は合算しない。§168のSQL6や§167の3,157、§166の統合回帰は再実行せず、今回の件数へ加算しない。既存Pydantic非推奨警告1を保持。差分検査成功。製品sourceの変更0であり、新機能完成・新しい意味解釈・一般日本語品質改善とは報告しない。
+
+API既存test1file `ai/tests/piece_v2/test_piece_natural_context_sql.py`を[76f4c466](https://github.com/MassyuRed/mashos-api/commit/76f4c466df0ac795fc48781680e21c74a9f9512e)へ反映し、fresh head・親・tree・全文をreadback。blob `8f6a9bf85196ac2a6e261097f55291cd50332fc7`は検証済みbytesと一致した。全体現在地差分なし（製品source・仕様・責務・API／DTO・schema・稼働・端末状態は不変、既存検証の到達経路のみ補強）。STRUCTURE_MAP_DELTA_NONE。全体00・01A/B/C・Piece mapを形式的に再生成しない。
+
+今回、通常service境界でこの組合せに新しい製品不具合は検出しなかった。次は通常作成の復旧・本人履歴の実コードに戻り、通常操作で再現する未修復又は決定済み未実装へ絞る。本節の58や過去の処理済み検証を活動量のために繰り返さない。一般文章品質、Android通常作成／保存、実Photos／Share、backend receiptの本番適用、正式商品受入れ0/3は残件。ビルド・TestFlight・本番配置・live DB更新・公開ON・GPU・課金・本人端末操作0。指定8時間の実働完了claimなし。
