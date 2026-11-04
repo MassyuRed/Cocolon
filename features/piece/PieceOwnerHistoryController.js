@@ -64,7 +64,8 @@ export function createPieceOwnerHistoryController(configuration = {}) {
         state = { ...empty(), phase: 'detail', record: readPieceOwnerDisplay(result), message: notice };
       } else if (action === 'delete') {
         deletion = null;
-        state = { ...empty(), phase: 'idle', message: 'Pieceを削除しました。保存回数は戻りません。' };
+        state = { ...empty(), phase: 'idle', deletedPieceId: result.piece_id,
+          message: 'Pieceを削除しました。保存回数は戻りません。' };
       } else {
         // Fetch the current saved record after visibility acknowledgement.
         active = null;

@@ -6,6 +6,7 @@ import { useAuth } from '../AuthContext';
 import { useAppRuntime } from '../AppRuntimeContext';
 import { useTutorial } from '../TutorialContext';
 import { createPieceOwnerHistoryController } from '../features/piece/PieceOwnerHistoryController';
+import { supportsPieceSavedImage } from '../features/piece/pieceLayout';
 import PieceOwnerCard from '../components/piece/PieceOwnerCard';
 import PieceVisualCard from '../components/piece/PieceVisualCard';
 import PieceExportCanvas from '../components/piece/PieceExportCanvas';
@@ -19,7 +20,7 @@ export class PieceOwnerHistoryHost extends React.Component {
     super(props);
     this.state = { revision: 0 };
     this.mounted = false; this.foreground = false; this.controller = null; this.binding = null;
-    this.requestedSavedTarget = null; this.exportAttempt = null; this.exportMessage = null; this.exportSerial = 0;
+    this.requestedSavedTarget = null; this.deletedSavedTarget = null; this.exportAttempt = null; this.exportMessage = null; this.exportSerial = 0;
   }
   savedTarget() {
     const value = this.props.savedPiece;
@@ -48,6 +49,10 @@ export class PieceOwnerHistoryHost extends React.Component {
       if (this.current()) return this.props.refreshRuntime?.();
     } });
     this.unsubscribe = this.controller.subscribe(() => {
+      const deleted = this.controller.getView().deletedPieceId;
+      if (deleted && this.current() && deleted === this.savedTarget()?.pieceId) {
+        this.deletedSavedTarget = this.targetKey();
+      }
       this.syncExportContext();
       if (this.mounted) this.setState(s => ({ revision: s.revision + 1 }));
     });
@@ -68,6 +73,7 @@ export class PieceOwnerHistoryHost extends React.Component {
     this.binding = next;
     const target = this.savedTarget(), targetKey = this.targetKey();
     if (targetKey === null) this.requestedSavedTarget = null;
+    if (this.deletedSavedTarget !== targetKey) this.deletedSavedTarget = null;
     // A target-only route change must also hide/abort the previous record.
     this.controller.close();
     this.controller.setContext({ enabled: this.current(), expectedUserId: this.props.owner,
@@ -75,14 +81,15 @@ export class PieceOwnerHistoryHost extends React.Component {
     // The navigation tap requests this read once. Background/flag refresh drops
     // the body; coming back offers an explicit same-ID read, not an auto retry.
     if (target && this.current() && this.controller.getView().phase !== 'hidden' &&
-        this.requestedSavedTarget !== targetKey) {
+        this.requestedSavedTarget !== targetKey && this.deletedSavedTarget !== targetKey) {
       this.requestedSavedTarget = targetKey;
       void this.controller.openDetail(target.pieceId);
     }
     this.setState(s => ({ revision: s.revision + 1 }));
   }
   openSavedDetail(targetKey, pieceId) {
-    if (this.current() && targetKey === this.targetKey() && pieceId === this.savedTarget()?.pieceId) {
+    if (this.current() && targetKey === this.targetKey() && targetKey !== this.deletedSavedTarget &&
+        pieceId === this.savedTarget()?.pieceId) {
       return this.act('openDetail', pieceId);
     }
   }
@@ -105,7 +112,7 @@ export class PieceOwnerHistoryHost extends React.Component {
   async prepareExport(record) {
     if (!this.current() || this.props.flags?.piece_v2_export_enabled !== true ||
         this.controller?.getView().phase !== 'detail' || this.controller.getView().record !== record ||
-        this.exportAttempt?.busy) return;
+        !supportsPieceSavedImage(record.renderer_version) || this.exportAttempt?.busy) return;
     this.cancelExport();
     const attempt = { displayed: record, stamp: this.stamp(), abort: new AbortController(), serial: ++this.exportSerial, busy: true };
     this.exportAttempt = attempt;
@@ -144,7 +151,7 @@ export class PieceOwnerHistoryHost extends React.Component {
         !['saveToPhotos', 'openShare'].includes(action) || !attempt.target?.isCurrent()) return;
     attempt.busy = true; this.setState(s => ({ revision: s.revision + 1 }));
     try {
-      attempt.asset = await attempt.job.capture(attempt.target);
+      if (!attempt.asset) attempt.asset = await attempt.job.capture(attempt.target);
       if (!this.exportCurrent(attempt)) { await attempt.asset.dispose(); return; }
       const result = await attempt.asset[action]();
       if (this.exportCurrent(attempt)) {
@@ -153,8 +160,15 @@ export class PieceOwnerHistoryHost extends React.Component {
           : result.outcome === 'cancelled' ? '共有をキャンセルしました。' : '共有画面を閉じました。'};
         this.setState(s => ({ revision: s.revision + 1 }));
       }
-    } catch {
+    } catch (error) {
       if (this.exportCurrent(attempt)) {
+        const { PieceExportReceiptRetryError } = require('../features/piece/pieceExport');
+        if (typeof PieceExportReceiptRetryError === 'function' && error instanceof PieceExportReceiptRetryError) {
+          attempt.busy = false;
+          this.exportMessage = {text:'画像の確認結果を受け取れませんでした。接続を確認して、もう一度お試しください。',displayed:attempt.displayed,stamp:attempt.stamp};
+          this.setState(s => ({ revision: s.revision + 1 }));
+          return;
+        }
         this.cancelExport(); this.exportMessage = {text:'画像を保存・共有できませんでした。権限や接続を確認して、もう一度お試しください。',displayed:attempt.displayed,stamp:attempt.stamp};
         this.setState(s => ({ revision: s.revision + 1 }));
       }
@@ -178,7 +192,10 @@ export class PieceOwnerHistoryHost extends React.Component {
     const view = this.current() ? this.controller.getView() : null;
     const available = view && view.phase !== 'hidden';
     const record = available ? view.record : null;
-    const target = this.savedTarget(), targetKey = this.targetKey();
+    const imageSupported = record && supportsPieceSavedImage(record.renderer_version);
+    const exportEnabled = imageSupported && this.props.flags?.piece_v2_export_enabled === true;
+    const targetKey = this.targetKey();
+    const target = targetKey === this.deletedSavedTarget ? null : this.savedTarget();
     const attempt = this.exportCurrent(this.exportAttempt) ? this.exportAttempt : null;
     const exporting = !!attempt?.busy, exportReady = !!attempt?.target?.isCurrent();
     const exportMessage=this.current()&&record===this.exportMessage?.displayed&&this.stamp()===this.exportMessage?.stamp
@@ -192,12 +209,15 @@ export class PieceOwnerHistoryHost extends React.Component {
           available && view.phase === 'loading' ? h(ActivityIndicator, { accessibilityLabel: 'Pieceを確認中' }) : null,
           available && view.phase === 'history' && view.items.length === 0 ? h(Text, { style: { color: '#202020', fontSize: 16 } }, '保存済みのPieceはありません。') : null,
           ...(available ? view.items.map(item => h(PieceOwnerCard, { key: item.piece_id, record: item, onOpen: () => this.act('openDetail', item.piece_id) })) : []),
-          record ? h(PieceVisualCard, { savedRecord: record }) : null,
+          imageSupported ? h(PieceVisualCard, { savedRecord: record }) : null,
           record ? h(PieceOwnerCard, { record }) : null,
-          record && this.props.flags?.piece_v2_export_enabled === true ? h(Text,
+          record && !imageSupported ? h(Text,
+            { style: { color: '#494949', fontSize: 14, lineHeight: 22, marginBottom: 8 } },
+            'この端末では、このPieceの画像を表示・保存・共有できません。') : null,
+          exportEnabled ? h(Text,
             { style: { color: '#494949', fontSize: 14, lineHeight: 22, marginBottom: 8 } },
             '保存・共有した画像は、Cocolonで削除・非公開にしても回収できません。') : null,
-          record && this.props.flags?.piece_v2_export_enabled === true ? h(Button, {
+          exportEnabled ? h(Button, {
             title: attempt ? '画像を準備し直す' : '画像の保存・共有を準備', disabled: exporting,
             onPress: () => this.prepareExport(record) }) : null,
           attempt?.job ? h(View, { pointerEvents: 'none', accessible: false,
@@ -218,7 +238,10 @@ export class PieceOwnerHistoryHost extends React.Component {
             title: '保存したPieceを読み込む', onPress: () => this.openSavedDetail(targetKey, target.pieceId) }) : null,
           available && view.phase !== 'loading' ? h(Button, { title: record ? '履歴に戻る' : target ? '履歴を読み込む' : '保存済みPieceを読み込む', onPress: () => this.act('loadHistory') }) : null,
           available && view.phase === 'history' && view.nextCursor ? h(Button, { title: '続きを読み込む', onPress: () => this.act('loadMore') }) : null,
-          h(Text, { style: { color: '#494949', fontSize: 14, lineHeight: 22, marginTop: 16 } }, this.props.flags?.piece_v2_export_enabled === true ? '保存済み本文と画像レイアウトを確認できます。' : '保存済み本文を確認できます。詳細では、対応する画像レイアウトも確認できます。画像の保存・共有は、まだ利用できません。'),
+          h(Text, { style: { color: '#494949', fontSize: 14, lineHeight: 22, marginTop: 16 } },
+            record && !imageSupported ? '保存済み本文を確認できます。' :
+              this.props.flags?.piece_v2_export_enabled === true ? '保存済み本文と画像レイアウトを確認できます。' :
+                '保存済み本文を確認できます。詳細では、対応する画像レイアウトも確認できます。画像の保存・共有は、まだ利用できません。'),
         ),
         h(Button, { title: '戻る', onPress: () => { this.controller?.close();
           this.props.navigation?.setParams?.({ savedPiece: null }); this.props.navigation?.goBack?.(); } }),

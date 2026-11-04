@@ -155,12 +155,12 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | 機能 | 現在の実装・境界 | 確認・残件 |
 |---|---|---|
 | 本文・visual recipe | 保存済み本人source→単独で伝わるcanonical text＋画像。現V2 source adapter／pure coreはoriginal＋normal／pre-questionのみ。refinedは別sourceのopt-in補足を使う設計だが、現コードは`source_role_or_stage_not_yet_supported`で未対応 | 旧Q&Aの存在を新商品の定義にしない。Emlis生成本文・Analysis推定の原文流用は禁止。補足をoriginalへ連結してrefined接続済みにしない |
-| 一般入力への生成 | 既存CMEEの有限作者を使用。最新指示はユーザーが書いた本文だけを必要に応じて整形し、選択感情の説明文は追加しない。短い完成文も水増しせず扱う | §41でprivate selection contextを可視graphから分離、対象579成功。一般日本語全体の品質は未完成、API配置結果は§41へ |
+| 一般入力への生成 | 既存CMEEでユーザー本文を整形し、選択感情は本文に追加しない。11/4候補は、本文中の感情の時点・主体・否定・強度が選択と異なる場合と、明示的な動作名を伴う一部の短い文を受け付ける | 対象となる最終文で省略された句点はそのまま保持。自己理解モードも書かれた動作だけを受け付ける範囲を追加。一般日本語全体の対応、本人端末の確認、今回のAPI配置は残る |
 | 配色選択 | Plus／Premiumの背景・文字色を固定2組から12組へ拡張する実装候補。作成時に色見本で選び、保存レシピに従い詳細・画像出力でも同じ色を再現する | Freeは固定テーマ。比率・ロゴ・保存回数のプラン差は既存どおり。Supabase適用、Render配置、まとめビルド・実機確認は未実施 |
-| preview・保存 | 既存の作成/取消/明示private保存/回復。同一本文・recipe・hashとowner/枠を保持 | Mashが7001で画像生成・一覧での確認・スマホ写真フォルダへの保存成功を報告。既存保存recordは今回の文章方針修正で書換せず、新規作成へ反映 |
+| preview・保存 | Premiumはその記録に適格な複数形式から選び直せる実装候補。現配色・比率・ロゴを引き継いで新候補を発行し、保存は現在の候補だけを対象とする。期限切れは同じ記録からの明示作り直しに対応 | Free・Plusの形式決定と保存枠は既存どおり。既存保存済みの本文・画像は保持。7001の写真保存は本人確認済みで、今回の候補はまとめビルド後に実機確認 |
 | V2有効化・旧経路 | 11/1 API744336c0の明示factoryでpreview/save/owner-read/export/owner-delete各strict pair ON、public-write/public-read/visibility-toggle OFFをLive確認。default app:appはlegacy/OFF | 稼働設定と本人端末の通常保存は別。tutorial/Nexus旧経路とM5の全公開経路廃止は未完 |
 | 本人履歴・詳細・公開範囲 | owner一覧・詳細・公開切替・削除の既存経路。privateはownerのみ | 7001の生成済み画像と一覧は本人確認済み。同一record/hashの独立DB照合・Share送信・公開切替・削除の本人確認へ拡張しない |
-| export | 本人詳細→独立export許可GET→表示artifact照合→全canvas→Photos/Share直前再確認 | 7001の実Photos保存を本人確認済み。Share送信/Android新版export/backend receipt/一般品質は未確認。端末へ出た画像は内部削除で回収できない |
+| export | 本人詳細から出力可否を判定し、対応端末では画像と保存時点のレシピを再照合する。対応iOSの書き出し記録はPNG寸法・sRGB・ハッシュを検証し、OSへ渡す前に記録する実装候補 | 書き出し記録の既定は無効。本番DB移行、API有効化、今回の写真保存・外部共有の実機確認は残る。AndroidではiOS用の保存済み画像に端末制限を表示し、本文・履歴・削除は利用できる |
 | 新renderer | iOS piece.rn_bitmap_renderer.ios.v1。同一bitmap表示/書出し、構築/初回採用8秒。新sourceでは完成previewも同画像をsource期限内で保持し、読んでから保存できる。saved保持は維持 | APIはTTL600秒/同rendererでLive。6601のApple90683をAdd/Usage両keyとArchive実物検査で修正。6701はArchive/Apple処理/内部配布/本人起動済み。Pieceの本人描画・保存・再読は未完。Android成立へ拡張しない |
 | 画像内ブランド | 次候補でios.v2=Emlisを実装。旧ios.v1=Cocolonは保存版どおり保持。新compiled bridgeのみ明示headerでv2を要求し、旧/欠落はv1 | §43の新build指示を受領。recipe内部ID/DB schema不変、owner/保存/bitmap保持/exportの版束縛を維持。7101をMashが反映し依頼修正完了を確認。新規v2画像はEmlis、旧v1保存画像はCocolonを保持 |
 | 最新限定検証 | 新export正常8PNG＋native拒否6。JS979・新native44成功。旧195は176PASS／19FAILを保持 | CI39780623108 attempt1 completed／failure、head`d2e1244…`、10/22 JST21:42:54〜22:07:18。CI全体合格ではない。限定TECHNICAL_CREDITの記録あり、product_credit=0 |

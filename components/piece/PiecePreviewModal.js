@@ -16,16 +16,27 @@ const plans = { free: 'Free', plus: 'Plus', premium: 'Premium' };
 const branding = { required_small: '小さく表示', required_subtle: '控えめに表示', off: '表示なし' };
 const themes = PIECE_THEME_LABELS;
 
-export default function PiecePreviewModal({ visible = false, display, onClose, onRetry, onVisualChange, onCancel, onOpenSaved, onSave, onSaveFitChange }) {
+export default function PiecePreviewModal({ visible = false, display, onClose, onRetry, onRestartExpired, onVisualChange, onFormatChange, onReturnToFormat, onCancel, onOpenSaved, onSave, onSaveFitChange }) {
   if (visible !== true || !display || display.phase === 'hidden') return null;
   const received = display.phase === 'received' && display.hashVerified === true && display.preview;
   const preview = received ? display.preview : null;
   const selection = preview ? { theme_id: preview.visual_recipe.theme.theme_id,
     aspect_ratio: preview.visual_recipe.aspect_ratio, branding_mode: preview.visual_recipe.branding.branding_mode } : null;
-  const changeVisual = (field, value) => onVisualChange({ ...selection, [field]: value }, {
+  const candidateIdentity = preview ? {
     preview_id: preview.preview_id, preview_revision: preview.preview_revision,
     visual_recipe_hash: preview.visual_recipe_hash,
-  }, display.visualToken);
+  } : null;
+  const changeVisual = (field, value) => onVisualChange({ ...selection, [field]: value }, candidateIdentity, display.visualToken);
+  const formatPicker = preview?.plan_capabilities.format_selection === 'eligible_choice' &&
+    preview.eligible_formats.length > 1 && typeof onFormatChange === 'function'
+    ? element(View, { testID: 'piece-format-options', style: { marginTop: 12 } },
+      element(Text, { style: { fontSize: 16, color: '#202020' } }, '文章の形式'),
+      ...preview.eligible_formats.map(format => {
+        const selected = preview.format_type === format;
+        return element(Button, { key: format, title: `${formats[format]}${selected ? '（選択中）' : ''}`,
+          accessibilityLabel: `形式：${formats[format]}`, accessibilityState: { selected, disabled: selected },
+          disabled: selected, onPress: () => onFormatChange(format, candidateIdentity, display.visualToken) });
+      })) : null;
   const choices = (label, field, values, labels) => values.length > 1 && typeof onVisualChange === 'function'
     ? element(View, { key: field, testID: `piece-visual-${field}`, style: { marginTop: 12 } },
       element(Text, { style: { fontSize: 16, color: '#202020' } }, label),
@@ -68,6 +79,7 @@ export default function PiecePreviewModal({ visible = false, display, onClose, o
   const saveToken = display.visualToken;
   const loading = display.loadingKind === 'save' ? 'Pieceを保存しています。' : display.loadingKind === 'cancel' ? '候補を取り消しています。' :
     display.loadingKind === 'visual' ? '画像設定を更新しています。' :
+    display.loadingKind === 'format' ? '選んだ形式でPieceを作成しています。' :
     display.loadingKind === 'recover' ? '最新のプレビューを取得しています。' : 'Pieceを取得しています。';
   const retryLabel = display.retryKind === 'save' ? '同じ保存要求で結果を確認' : display.retryKind === 'cancel' ? '同じ候補の取消を再試行' :
     display.retryKind === 'recover' ? '最新のプレビューを取得' : '同じ要求で再試行';
@@ -83,6 +95,8 @@ export default function PiecePreviewModal({ visible = false, display, onClose, o
         display.phase === 'loading' ? element(Text, { style: { color: '#202020', fontSize: 16 }, accessibilityLiveRegion: 'polite' }, loading) : null,
         display.visualUpdated === true ? element(Text, { accessibilityRole: 'alert', accessibilityLiveRegion: 'polite',
           style: { color: '#202020', fontSize: 16, marginBottom: 12 } }, '画像設定を更新しました。') : null,
+        display.formatNotice ? element(Text, { accessibilityLiveRegion: 'polite',
+          style: { color: '#202020', fontSize: 16, marginBottom: 12 } }, display.formatNotice) : null,
         preview ? element(Text, { style: { color: '#202020', fontSize: 16, marginBottom: 16 } },
           `${formats[preview.format_type]} / ${themes[preview.visual_recipe.theme.theme_id]} / ${preview.visual_recipe.aspect_ratio}`) : null,
         preview ? element(View, { testID: 'piece-plan-details', style: { marginBottom: 16 } },
@@ -102,7 +116,8 @@ export default function PiecePreviewModal({ visible = false, display, onClose, o
             `${preview.quota.month_key}（日本時間）の保存枠：${preview.quota.remaining_count === null
               ? '回数制限なし' : `残り${preview.quota.remaining_count}回 / ${preview.quota.save_limit}回`}`),
           element(Text, { style: { color: '#494949', fontSize: 14, lineHeight: 22 } },
-            '取得時点の情報です。保存時に残り回数を確認します。文章の形式変更はまだ利用できません。'),
+            '取得時点の情報です。保存時に残り回数を確認します。'),
+          formatPicker,
           palettePicker,
           choices('画像比率', 'aspect_ratio', preview.plan_capabilities.aspect_ratios),
           choices('ブランド表記', 'branding_mode', preview.plan_capabilities.branding_modes, branding),
@@ -130,6 +145,14 @@ export default function PiecePreviewModal({ visible = false, display, onClose, o
           title: '保存したPieceを確認', accessibilityLabel: '保存したPieceを確認', onPress: onOpenSaved }) : null,
         display.canRetry === true ? element(Button, {
           title: retryLabel, onPress: onRetry, accessibilityLabel: retryLabel }) : null,
+        display.previewRestartToken && typeof onRestartExpired === 'function' ? element(Button, {
+          title: '同じ記録から作り直す', accessibilityLabel: '同じ記録から作り直す',
+          onPress: () => onRestartExpired(display.previewRestartToken),
+        }) : null,
+        display.formatRecoveryToken && typeof onReturnToFormat === 'function' ? element(Button, {
+          title: '前のプレビューに戻る', onPress: () => onReturnToFormat(display.formatRecoveryToken),
+          accessibilityLabel: '前のプレビューに戻る',
+        }) : null,
         preview && typeof onCancel === 'function' ? element(Button, {
           title: '候補を取り消す', accessibilityLabel: 'このPiece候補を取り消す',
           onPress: () => onCancel({ preview_id: preview.preview_id,

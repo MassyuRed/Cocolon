@@ -20,6 +20,12 @@ import { readPiecePreviewDisplay } from '../../features/piece/piecePreviewModel'
 import PiecePreviewModal from '../../components/piece/PiecePreviewModal';
 
 const element = React.createElement;
+function pieceActionKey(prefix) {
+  // Use the existing random-values polyfill, without a predictable fallback.
+  const bytes = new Uint8Array(16);
+  globalThis.crypto.getRandomValues(bytes);
+  return prefix + Array.from(bytes, value => value.toString(16).padStart(2, '0')).join('');
+}
 function contextStamp(value) {
   if (value?.enabled !== true) return 'disabled';
   try {
@@ -74,7 +80,10 @@ export default class InputPieceActionArea extends React.Component {
     this.appSubscription = null;
     this.start = this.start.bind(this);
     this.retry = this.retry.bind(this);
+    this.restartExpired = this.restartExpired.bind(this);
     this.changeVisual = this.changeVisual.bind(this);
+    this.changeFormat = this.changeFormat.bind(this);
+    this.returnToFormat = this.returnToFormat.bind(this);
     this.cancelPreview = this.cancelPreview.bind(this);
     this.close = this.close.bind(this);
     this.changed = this.changed.bind(this);
@@ -339,9 +348,39 @@ export default class InputPieceActionArea extends React.Component {
     }
   }
 
+  restartExpired(token) {
+    if (!this.isCurrent() || !this.state.open || !token ||
+        this.controller.getView().previewRestartToken !== token) return;
+    let key;
+    try { key = pieceActionKey('piece-preview-'); }
+    catch {
+      try { Alert.alert('Pieceの作成', '作成の準備ができませんでした。もう一度お試しください。'); } catch {}
+      return;
+    }
+    if (!this.isCurrent() || !this.state.open) return;
+    void this.controller.restartExpired(token, key);
+  }
+
   changeVisual(selection, identity, visualToken) {
     if (!this.isCurrent() || !this.state.open) return;
     void this.controller.changeVisual(selection, identity, visualToken);
+  }
+
+  changeFormat(format, identity, displayToken) {
+    if (!this.isCurrent() || !this.state.open || !displayToken ||
+        this.controller.getView().visualToken !== displayToken) return;
+    let key;
+    try { key = pieceActionKey('piece-format-'); }
+    catch {
+      try { Alert.alert('文章の形式', '変更の準備ができませんでした。もう一度お試しください。'); } catch {}
+      return;
+    }
+    if (!this.isCurrent() || !this.state.open) return;
+    void this.controller.changeFormat(format, identity, displayToken, key);
+  }
+
+  returnToFormat(token) {
+    if (this.isCurrent() && this.state.open) this.controller.returnToFormat(token);
   }
 
   cancelPreview(identity, displayToken) {
@@ -394,13 +433,8 @@ export default class InputPieceActionArea extends React.Component {
           identity.preview_id !== preview.preview_id || identity.preview_revision !== preview.preview_revision ||
           identity.visual_recipe_hash !== preview.visual_recipe_hash || !this.isSaveAdmitted(preview, displayToken)) return;
       let key;
-      try {
-        // Use the already-installed random-values polyfill, as InputScreen does.
-        // No clock, Math.random, source ID, owner ID or preview key fallback.
-        const bytes = new Uint8Array(16);
-        globalThis.crypto.getRandomValues(bytes);
-        key = 'piece-save-' + Array.from(bytes, value => value.toString(16).padStart(2, '0')).join('');
-      } catch {
+      try { key = pieceActionKey('piece-save-'); }
+      catch {
         if (this.isCurrent() && this.state.open && this.controller.getView().visualToken === displayToken) {
           try { Alert.alert('Pieceの保存', '保存の準備ができませんでした。もう一度お試しください。'); } catch {}
         }
@@ -488,7 +522,7 @@ export default class InputPieceActionArea extends React.Component {
       !this.state.open && onOpenSaved ? element(Button, { title: '保存したPieceを確認',
         accessibilityLabel: '保存したPieceを確認', onPress: onOpenSaved }) : null,
       element(PiecePreviewModal, { visible: this.state.open, display, onClose: this.close, onOpenSaved,
-        onRetry: this.retry, onVisualChange: this.changeVisual, onCancel: this.cancelPreview, onSave,
+        onRetry: this.retry, onRestartExpired: this.restartExpired, onVisualChange: this.changeVisual, onFormatChange: this.changeFormat, onReturnToFormat: this.returnToFormat, onCancel: this.cancelPreview, onSave,
         onSaveFitChange: this.receiveSaveFit }),
     );
   }

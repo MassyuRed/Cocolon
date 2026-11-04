@@ -25,15 +25,17 @@ function record(extra = {}) {
   for (const k of ['preview_id', 'preview_revision', 'expires_at', 'eligible_formats', 'quota', 'plan_capabilities']) delete value[k];
   return { ...value, export_contract_version: 'piece.export_contract.v1', render_interface_version: 'piece.render_interface.v1',
     render_reproducibility_version: 'piece.render_reproducibility.v1', piece_id: PID, public_id: 'piece:' + PID,
-    lifecycle_status: 'saved', saved_at: '2026-10-10T01:00:00+00:00', row_version: 2, ...extra };
+    lifecycle_status: 'saved', saved_at: '2026-10-10T01:00:00+00:00', row_version: 2,
+    renderer_version: 'piece.rn_native_preview.prototype.v3', ...extra };
 }
-function harness({ send, session, random, exportPrepare } = {}) {
+function harness({ send, session, random, exportPrepare, os = 'ios' } = {}) {
   const calls = [], sessions = [], alerts = [], appListeners = new Set();
   const React = { Component: class {
     constructor(props) { this.props = props; this.state = {}; }
     setState(v) { this.state = { ...this.state, ...(typeof v === 'function' ? v(this.state) : v) }; }
   }, createElement: (type, props, ...children) => typeof type === 'function' ? type(props || {}) : { type, props: props || {}, children } };
   const context = vm.createContext({ React, AbortController, Uint8Array, Date, Object, JSON,
+    Platform: { OS: os },
     crypto: { getRandomValues: random || (bytes => crypto.randomFillSync(bytes)) },
     apiFetch: async (...args) => { calls.push(args); return send ? send(...args) : packet(record()); },
     getAccessToken: async owner => { sessions.push(owner); return session ? session(owner, sessions.length) : 'synthetic'; },
@@ -48,6 +50,7 @@ function harness({ send, session, random, exportPrepare } = {}) {
     ['features/piece/pieceApi.js', ['PieceApiError', 'readPiecePreviewSnapshot', 'preparePiecePreviewRequest', 'requestPieceOwner', 'readPieceOwnerSnapshot']],
     ['features/piece/piecePreviewModel.js', ['verifyPieceArtifactHashes']],
     ['features/piece/pieceOwnerModel.js', ['readPieceOwnerDisplay', 'pieceOwnerPermissions']],
+    ['features/piece/pieceLayout.js', ['supportsPieceSavedImage']],
     ['features/piece/PieceOwnerHistoryController.js', ['createPieceOwnerHistoryController']],
     ['components/piece/PieceOwnerCard.js', ['PieceOwnerCard']],
     ['screens/PieceOwnerHistoryScreen.js', ['PieceOwnerHistoryHost']],
@@ -411,6 +414,31 @@ test('stale saved-entry read button cannot fetch an earlier target after route c
   await button(host, '保存したPieceを読み込む').props.onPress();
   assert.equal(h.calls.length, 3); assert.ok(h.calls[2][0].endsWith('/' + RID)); host.componentWillUnmount();
 });
+test('confirmed direct-entry delete leaves history available and never offers to reopen the deleted Piece', async () => {
+  let deletes = 0;
+  const h = harness({ send: (url, init) => {
+    if (init.method === 'DELETE') {
+      if (++deletes === 1) throw Error('lost delete response');
+      return packet({ piece_id: PID, receipt_id: RID, outcome: 'succeeded', idempotency_replayed: true });
+    }
+    return url.includes('/history?') ? packet(page([])) : packet(record());
+  } });
+  const host = ownerHost(h, savedEntry(), { flags });
+  host.componentDidMount(); await tick();
+  button(host, 'このPieceを削除').props.onPress();
+  await h.alerts[0][2][1].onPress();
+  const staleRead = button(host, '保存したPieceを読み込む');
+  await button(host, '同じ削除要求で結果を確認').props.onPress();
+  assert.match(texts(host.render()).join(' '), /Pieceを削除しました/);
+  assert.equal(button(host, '保存したPieceを読み込む'), undefined);
+  await staleRead.props.onPress();
+  h.background('background'); h.background('active'); await tick();
+  assert.equal(h.calls.length, 3);
+  assert.equal(button(host, '保存したPieceを読み込む'), undefined);
+  await button(host, '保存済みPieceを読み込む').props.onPress();
+  assert.ok(h.calls[3][0].includes('/history?'));
+  host.componentWillUnmount();
+});
 test('ordinary history clears the saved-entry target and returning clears its navigation params', async () => {
   const params = [], backs = [];
   const h = harness({ send: ownerSend }); const host = ownerHost(h, savedEntry(), {
@@ -620,6 +648,35 @@ test('normal detail export is explicit, defaults OFF, fetches a fresh record and
   assert.ok(texts(u.host.render()).includes('写真に保存しました。'));assert.equal(u.host.controller.getView().record,displayed);
   u.host.componentWillUnmount();
 });
+test('saved detail only offers image preparation on devices that support the saved renderer', async () => {
+  const old = 'piece.rn_native_preview.prototype.v3';
+  const bitmapV1 = 'piece.rn_bitmap_renderer.ios.v1';
+  const bitmapV2 = 'piece.rn_bitmap_renderer.ios.v2';
+  for (const [os, renderer, supported] of [
+    ['android', old, true], ['android', bitmapV1, false], ['android', bitmapV2, false],
+    ['ios', bitmapV1, true], ['ios', bitmapV2, true], ['ios', 'unknown-renderer.v1', false],
+  ]) {
+    const saved = record({ renderer_version: renderer });
+    let preparations = 0;
+    const h = harness({ os, send: () => packet(saved), exportPrepare: async () => {
+      preparations += 1;
+      return { record: saved };
+    } });
+    const host = ownerHost(h, savedEntry(), { flags: { ...flags, piece_v2_export_enabled: true } });
+    host.componentDidMount();
+    await tick();
+    const tree = host.render();
+    assert.ok(texts(tree).includes(saved.piece_text));
+    assert.ok(button(host, 'このPieceを削除'));
+    assert.equal(nodes(tree).some(n => n.type === 'PieceVisualCard'), supported);
+    assert.equal(!!button(host, '画像の保存・共有を準備'), supported);
+    assert.equal(texts(tree).includes('この端末では、このPieceの画像を表示・保存・共有できません。'), !supported);
+    await host.prepareExport(host.controller.getView().record);
+    assert.equal(preparations, supported ? 1 : 0);
+    assert.equal(!!host.exportAttempt?.job, supported);
+    host.componentWillUnmount();
+  }
+});
 test('fresh changed record cannot replace the selected detail for export',async()=>{
   const u=exportHost({fresh:record({row_version:3})});await u.ready();
   assert.equal(u.host.exportAttempt,null);assert.equal(u.events.filter(x=>Array.isArray(x)&&x[0]==='capture').length,0);
@@ -665,3 +722,39 @@ for(const boundary of ['history','owner','target','flag'])test(`terminal export 
   u.host.componentDidUpdate();assert.equal(u.host.exportMessage,null);u.host.componentWillUnmount();
 });
 
+
+test('receipt transport opts in through a response header and validates an exact body-free acknowledgment', async () => {
+  const r = record({renderer_version:'piece.rn_bitmap_renderer.ios.v2'});
+  const receipt = {
+    receipt_version:'piece.export_receipt.v1', piece_id:r.public_id, expected_row_version:r.row_version,
+    piece_text_hash:r.piece_text_hash, visual_recipe_hash:r.visual_recipe_hash,
+    visual_catalog_version:'piece.visual_catalog.v1', layout_policy_version:'piece.long_text_layout.v1',
+    renderer_family:'rn_native', renderer_version:r.renderer_version, export_contract_version:'piece.export_contract.v1',
+    output_profile:'png_1080x1350_srgb_v1', mime_type:'image/png', width:1080, height:1350,
+    asset_sha256:'a'.repeat(64), generated_at:'2026-11-04T00:00:00.000Z',
+    persistent_server_asset:false, body_free:true,
+  };
+  const {expected_row_version, ...reply}=receipt;
+  let response={...reply,export_id:RID};
+  let header=true;
+  const h=harness({send:async url=>url.endsWith('/export-receipt') ? packet(response) : {
+    ...packet(r), headers:{get:name=>header && name==='X-Piece-Export-Receipt' ? '1' : null}
+  }});
+  const seen=[];
+  await h.requestPieceOwner('export',detailInput,{...options,onExportReceiptSupport:x=>seen.push(x)});
+  header=false;
+  await h.requestPieceOwner('export',detailInput,{...options,onExportReceiptSupport:x=>seen.push(x)});
+  assert.deepEqual(seen,[true,false]);
+  assert.equal(h.calls[0][1].headers['X-Piece-Export-Receipt'],'1');
+  const postOptions={...options,idempotencyKey:'b'.repeat(32)};
+  assert.deepEqual(copy(await h.requestPieceOwner('exportReceipt',{piece_id:PID,receipt},postOptions)),response);
+  const [endpoint, init]=h.calls[2];
+  assert.equal(endpoint,'/emotion/piece/'+PID+'/export-receipt');
+  assert.equal(init.method,'POST');
+  assert.equal(init.headers['Idempotency-Key'],postOptions.idempotencyKey);
+  assert.deepEqual(JSON.parse(init.body),receipt);
+  await assert.rejects(h.requestPieceOwner('exportReceipt',{piece_id:PID,receipt:{...receipt,uri:'file:///private'}},postOptions),err('PIECE_REQUEST_INVALID'));
+  assert.equal(h.calls.length,3);
+  response={...response,asset_sha256:'c'.repeat(64)};
+  await assert.rejects(h.requestPieceOwner('exportReceipt',{piece_id:PID,receipt},postOptions),err('PIECE_TEMPORARILY_UNAVAILABLE'));
+});

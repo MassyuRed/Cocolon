@@ -492,6 +492,26 @@ export function readPieceOwnerSnapshot(raw) {
 }
 
 /** Owner-only v2 routes; never use Nexus, legacy aliases or persistent caches. */
+const EXPORT_RECEIPT_FIXED = {
+  receipt_version: 'piece.export_receipt.v1', visual_catalog_version: 'piece.visual_catalog.v1',
+  layout_policy_version: 'piece.long_text_layout.v1', renderer_family: 'rn_native',
+  export_contract_version: 'piece.export_contract.v1', mime_type: 'image/png',
+  persistent_server_asset: false, body_free: true,
+};
+const EXPORT_RECEIPT_FIELDS = [...Object.keys(EXPORT_RECEIPT_FIXED), 'piece_id', 'expected_row_version',
+  'piece_text_hash', 'visual_recipe_hash', 'renderer_version', 'output_profile', 'width', 'height',
+  'asset_sha256', 'generated_at'];
+function validExportReceiptInput(receipt, pieceId) {
+  return exact(receipt, EXPORT_RECEIPT_FIELDS) && receipt.piece_id === 'piece:' + pieceId &&
+    Object.entries(EXPORT_RECEIPT_FIXED).every(([key, value]) => receipt[key] === value) &&
+    positive(receipt.expected_row_version) && receipt.width === 1080 && [1350, 1920].includes(receipt.height) &&
+    receipt.output_profile === `png_1080x${receipt.height}_srgb_v1` &&
+    ['piece.rn_bitmap_renderer.ios.v1', 'piece.rn_bitmap_renderer.ios.v2'].includes(receipt.renderer_version) &&
+    ['piece_text_hash', 'visual_recipe_hash', 'asset_sha256'].every(key => hash(receipt[key])) &&
+    typeof receipt.generated_at === 'string' &&
+    /^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{3}Z$/.test(receipt.generated_at);
+}
+
 export async function requestPieceOwner(action, value = {}, options = {}) {
   let signal;
   try {
@@ -503,6 +523,7 @@ export async function requestPieceOwner(action, value = {}, options = {}) {
     const input = JSON.parse(JSON.stringify(value));
     const headers = { 'Cache-Control': 'no-store', ...PALETTE_HEADER };
     let endpoint, method = 'GET', body;
+    const receiptHeader = 'X-Piece-Export-Receipt';
     if (action === 'history') {
       if (!exact(input, ['cursor']) || !(input.cursor === null ||
           typeof input.cursor === 'string' && /^[A-Za-z0-9_-]{1,512}$/.test(input.cursor))) reject('PIECE_REQUEST_INVALID');
@@ -512,7 +533,17 @@ export async function requestPieceOwner(action, value = {}, options = {}) {
       endpoint = '/emotion/piece/' + input.piece_id;
       if (action === 'detail' || action === 'export') {
         if (!exact(input, ['piece_id'])) reject('PIECE_REQUEST_INVALID');
-        if (action === 'export') endpoint += '/export';
+        if (action === 'export') {
+          endpoint += '/export';
+          if (typeof options.onExportReceiptSupport === 'function') headers[receiptHeader] = '1';
+        }
+      } else if (action === 'exportReceipt') {
+        if (!exact(input, ['piece_id', 'receipt']) || !validExportReceiptInput(input.receipt, input.piece_id) ||
+            typeof idempotencyKey !== 'string' || !/^[0-9a-f]{32}$/.test(idempotencyKey)) reject('PIECE_REQUEST_INVALID');
+        method = 'POST'; endpoint += '/export-receipt';
+        body = JSON.stringify(input.receipt);
+        headers[receiptHeader] = '1';
+        headers['Idempotency-Key'] = idempotencyKey;
       } else if (action === 'visibility') {
         if (!exact(input, ['piece_id', 'expected_row_version', 'visibility_scope']) ||
             !positive(input.expected_row_version) || !['private', 'public'].includes(input.visibility_scope)) reject('PIECE_REQUEST_INVALID');
@@ -550,7 +581,16 @@ export async function requestPieceOwner(action, value = {}, options = {}) {
     if (action === 'detail' || action === 'export') {
       const record = readPieceOwnerSnapshot(result);
       if (record.piece_id !== input.piece_id) reject('PIECE_TEMPORARILY_UNAVAILABLE');
+      if (action === 'export' && typeof options.onExportReceiptSupport === 'function') {
+        options.onExportReceiptSupport(response.headers?.get?.(receiptHeader) === '1');
+      }
       return record;
+    }
+    if (action === 'exportReceipt') {
+      const { expected_row_version, ...expected } = input.receipt;
+      if (!exact(result, ['export_id', ...Object.keys(expected)]) || !pieceUuid(result.export_id) ||
+          Object.keys(expected).some(key => result[key] !== expected[key])) reject('PIECE_TEMPORARILY_UNAVAILABLE');
+      return freeze(result);
     }
     const fields = action === 'visibility' ? ['piece_id', 'visibility_scope', 'row_version']
       : ['piece_id', 'receipt_id', 'outcome', 'idempotency_replayed'];

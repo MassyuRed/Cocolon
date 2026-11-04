@@ -87,7 +87,8 @@ function blockContext(text, table, width, candidateProfile) {
     } else if (row.length !== 7 || !finite(row[3]) || !finite(row[4]) || !finite(row[5]) || !finite(row[6]) ||
         row[5] < row[3] || row[6] < row[4] || bounded && row[2] > width) unavailable();
     rows[row[0]][row[1]] = row;
-    if (!forbiddenBreak[row[1]] && !widthOverflow(row) && measuredWidth(row) <= width) {
+    // Ink can increase the measured width beyond advance, never reduce it.
+    if (row[2] <= width && !forbiddenBreak[row[1]] && measuredWidth(row) <= width) {
       legalWidthEnds[row[0]].push(row[1]);
     }
   }

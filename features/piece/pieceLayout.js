@@ -54,16 +54,21 @@ export function preparePieceNativePreview(display, nowMs = Date.now()) {
   return preparePieceNativeArtifact(p, key, candidateProfile);
 }
 
+export function supportsPieceSavedImage(rendererVersion) {
+  return (Platform.OS === 'ios' || Platform.OS === 'android') && (
+    rendererVersion === PIECE_NATIVE_PREVIEW_VERSION ||
+    Platform.OS === 'ios' && [PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION].includes(rendererVersion)
+  );
+}
+
 // A saved record is not a preview. Recheck the closed saved contract and all
 // three hashes, without inventing expiry, source, quota or current-plan data.
-// Preserve the old v3 appearance. Only the new explicit iOS bitmap identity
-// is additionally reconstructed; prototype/unknown saved versions stay closed.
+// Preserve the renderer identity and appearance that were stored at save.
 export function preparePieceNativeSavedDisplay(raw) {
   try {
     const p = readPieceOwnerDisplay(raw);
-    if (![PIECE_NATIVE_PREVIEW_VERSION, PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION].includes(p.renderer_version) ||
-        [PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION].includes(p.renderer_version) && Platform.OS !== 'ios') return null;
-    const profile = [PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION].includes(p.renderer_version) ? PIECE_BITMAP_PREVIEW_VERSION : PIECE_NATIVE_PREVIEW_VERSION;
+    if (!supportsPieceSavedImage(p.renderer_version)) return null;
+    const profile = p.renderer_version === PIECE_NATIVE_PREVIEW_VERSION ? PIECE_NATIVE_PREVIEW_VERSION : PIECE_BITMAP_PREVIEW_VERSION;
     const key = JSON.stringify([profile, 'saved', p.piece_id, p.public_id,
       p.row_version, p.saved_at, p.piece_text_hash, p.content_payload_hash, p.visual_recipe_hash, p.renderer_version]);
     return preparePieceNativeArtifact(p, key, profile);

@@ -40,6 +40,7 @@ function harness({os='ios', version=35, record=fixture()} = {}) {
   };
   const context = vm.createContext({ crypto:crypto.webcrypto, Uint8Array, FileSystem, Dirs:{CacheDir:'/cache'},
     Platform:{OS:os,Version:version},
+    verifyPieceExportPngSrgb:async()=>{ calls.push(['profile']); if(state.profileError) throw Error('bad profile'); return true; },
     PermissionsAndroid:{PERMISSIONS:{WRITE_EXTERNAL_STORAGE:'write'},RESULTS:{GRANTED:'granted'},request:async()=>{
       calls.push(['permission']); if(state.permissionWait) await state.permissionWait.promise; return state.granted?'granted':'denied';}},
     captureRef: async (node, options) => {calls.push(['capture',clone(options)]); if(state.captureWait) await state.captureWait.promise;
@@ -63,7 +64,14 @@ function harness({os='ios', version=35, record=fixture()} = {}) {
     vm.runInContext(`{${source}\n${names.map(n=>`globalThis.${n}=${n};`).join('\n')}}`,context);
   }
   context.requestPieceOwner=async(action,body,options)=>{
+    if (action === 'exportReceipt') {
+      calls.push(['receipt',clone(body),clone(options)]);
+      if (state.receiptWait) await state.receiptWait.promise;
+      if (state.receiptError) throw state.receiptError;
+      return {export_id:'a0a5bf38-ef0d-49d1-acb3-047d163388c3'};
+    }
     calls.push(['detail',action,clone(body),clone(options)]);
+    options.onExportReceiptSupport?.(state.receiptSupported);
     if(state.exportError) throw state.exportError;
     if(state.exportWait) await state.exportWait.promise;
     return state.latestRecord || record;
@@ -246,6 +254,25 @@ test('cleanup failure preserves iOS completion or cancellation without exposing 
     await failure(asset.openShare());assert.equal(count(h,'share'),1);
   }
 });
+test('new export retries only known-safe cleanup; a copy with unknown share completion stays available', async () => {
+  const h = harness();
+  const shared = await image(h);
+  const sharedDirectory = h.calls.find(call => call[0] === 'cp')[2].split('/').slice(0, -1).join('/');
+  await shared.openShare(); // Missing native result does not establish session end.
+  const finished = await image(h);
+  const finishedDirectory = h.calls.filter(call => call[0] === 'cp').at(-1)[2].split('/').slice(0, -1).join('/');
+  h.state.shareResult = { success: true };
+  h.state.cleanupError = true;
+  assert.deepEqual(clone(await finished.openShare()), { outcome: 'share_result_returned', cleanup_failed: true });
+  assert.ok(h.files.has(finishedDirectory));
+  h.state.cleanupError = false;
+  await Promise.all([h.prepare(), finished.dispose(), finished.dispose()]);
+  assert.equal(h.files.has(finishedDirectory), false);
+  assert.equal(h.calls.filter(call => call[0] === 'unlink' && call[1] === finishedDirectory).length, 2);
+  assert.equal(h.calls.filter(call => call[0] === 'unlink' && call[1] === sharedDirectory).length, 0);
+  assert.ok(h.files.has(sharedDirectory));
+  assert.equal(count(h, 'share'), 2);
+});
 test('dispose while verifying prevents OS handoff and waits before deleting the file',async()=>{
   const h=harness(),asset=await image(h);h.state.hashWait=deferred();const share=asset.openShare();
   await asset.dispose();assert.equal(h.calls.some(c=>c[0]==='unlink'&&c[1].startsWith('/cache/piece-export/')),false);
@@ -282,7 +309,8 @@ for (const os of ['ios','android']) {
   test(`${os} photo success survives copy cleanup failure without another OS save`,async()=>{
     const h=harness({os}),asset=await image(h);h.state.cleanupError=true;
     assert.deepEqual(clone(await asset.saveToPhotos()),{outcome:'saved_to_photos',cleanup_failed:true});
-    await failure(asset.saveToPhotos());await failure(asset.openShare());await asset.dispose();
+    await failure(asset.saveToPhotos());await failure(asset.openShare());
+    h.state.cleanupError=false; await asset.dispose();
     assert.equal(count(h,'photo'),1);assert.equal(count(h,'share'),0);
   });
   test(`${os} confirmed photo result survives owner loss and dispose during native save`,async()=>{
@@ -314,3 +342,94 @@ test('iOS missing or non-boolean save acknowledgement never becomes photo succes
   }
 });
 
+
+const receiptRenderer = 'piece.rn_bitmap_renderer.ios.v2';
+const bitmapTarget = h => ({...h.target(), bitmapToken:'saved-artifact', bitmapBinding:'saved-binding'});
+
+test('receipt acknowledgement precedes OS handoff, and a lost response retries the same image, key and request', async()=>{
+  const h=harness({record:{...fixture(),renderer_version:receiptRenderer}});
+  h.state.receiptSupported=true;
+  const job=await h.prepare(), asset=await job.capture(bitmapTarget(h));
+  h.state.receiptError={code:'PIECE_TEMPORARILY_UNAVAILABLE'};
+  await assert.rejects(asset.saveToPhotos(), e=>e.constructor.name==='PieceExportReceiptRetryError');
+  assert.equal(count(h,'photo'),0);
+  assert.equal(count(h,'receipt'),1);
+  assert.equal(count(h,'capture'),1);
+  assert.ok([...h.files.keys()].some(path=>path.endsWith('.png')));
+  h.state.receiptError=null;
+  assert.equal((await asset.saveToPhotos()).outcome,'saved_to_photos');
+  const receipts=h.calls.filter(call=>call[0]==='receipt');
+  assert.equal(receipts.length,2);
+  assert.deepEqual(receipts[0],receipts[1]);
+  const payload=receipts[0][1].receipt;
+  assert.equal(payload.output_profile,'png_1080x1350_srgb_v1');
+  assert.equal(payload.piece_id,h.record.public_id);
+  assert.equal(payload.expected_row_version,h.record.row_version);
+  assert.equal(payload.asset_sha256,'a'.repeat(64));
+  assert.equal(payload.renderer_version,receiptRenderer);
+  assert.equal(payload.persistent_server_asset,false);
+  assert.equal(payload.body_free,true);
+  assert.match(receipts[0][2].idempotencyKey,/^[0-9a-f]{32}$/);
+  assert.doesNotMatch(JSON.stringify(receipts), /\/cache\/|file:\/\/|recipient|outcome|piece_text":/);
+  assert.ok(h.calls.lastIndexOf(receipts[1]) < h.calls.findIndex(call=>call[0]==='photo'));
+  assert.equal(count(h,'photo'),1);
+  assert.equal(count(h,'profile'),3);
+});
+
+test('unsupported server keeps existing export behavior; strict invalid PNG sends no receipt or OS call', async()=>{
+  const record={...fixture(),renderer_version:receiptRenderer};
+  const old=harness({record});
+  const oldAsset=await (await old.prepare()).capture(bitmapTarget(old));
+  assert.equal((await oldAsset.saveToPhotos()).outcome,'saved_to_photos');
+  assert.equal(count(old,'receipt')+count(old,'profile'),0);
+
+  const invalid=harness({record});
+  invalid.state.receiptSupported=true;
+  invalid.state.profileError=true;
+  await failure((await invalid.prepare()).capture(bitmapTarget(invalid)));
+  assert.equal(count(invalid,'receipt')+count(invalid,'photo')+count(invalid,'share'),0);
+});
+
+test('terminal receipt rejection removes copy; unknown OS outcome cannot rewrite the generation receipt', async()=>{
+  const h=harness({record:{...fixture(),renderer_version:receiptRenderer}});
+  h.state.receiptSupported=true;
+  h.state.receiptError={code:'PIECE_CONFLICT'};
+  const asset=await (await h.prepare()).capture(bitmapTarget(h));
+  await failure(asset.openShare());
+  assert.equal(count(h,'receipt'),1);
+  assert.equal(count(h,'share'),0);
+  assert.ok(h.calls.some(c=>c[0]==='unlink' && c[1].startsWith('/cache/piece-export/')));
+  await failure(asset.openShare());
+
+  const uncertain=harness({record:{...fixture(),renderer_version:receiptRenderer}});
+  uncertain.state.receiptSupported=true;
+  uncertain.state.shareError=true;
+  const uncertainAsset=await (await uncertain.prepare()).capture(bitmapTarget(uncertain));
+  await failure(uncertainAsset.openShare());
+  assert.equal(count(uncertain,'receipt'),1);
+  assert.equal(count(uncertain,'share'),1);
+  assert.equal(Object.hasOwn(uncertain.calls.find(c=>c[0]==='receipt')[1].receipt,'outcome'),false);
+});
+
+
+for (const during of ['fresh export read', 'receipt acknowledgement']) {
+  test(`revoking the captured Text target during ${during} blocks external image handoff`, async () => {
+    const h = harness({record:{...fixture(),renderer_version:receiptRenderer}});
+    h.state.receiptSupported = true;
+    const asset = await (await h.prepare()).capture(bitmapTarget(h));
+    const pending = deferred();
+    if (during === 'fresh export read') h.state.exportWait = pending;
+    else h.state.receiptWait = pending;
+    const saving = asset.saveToPhotos();
+    await new Promise(resolve => setImmediate(resolve));
+    assert.equal(count(h, 'detail'), 2);
+    assert.equal(count(h, 'receipt'), during === 'fresh export read' ? 0 : 1);
+    h.state.canvas = false;
+    pending.resolve();
+    await failure(saving);
+    assert.equal(count(h, 'receipt'), during === 'fresh export read' ? 0 : 1);
+    assert.equal(count(h, 'photo'), 0);
+    assert.equal(count(h, 'share'), 0);
+    assert.ok(h.calls.some(c => c[0] === 'unlink' && c[1].startsWith('/cache/piece-export/')));
+  });
+}

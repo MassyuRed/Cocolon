@@ -1,7 +1,7 @@
 /** B13 native export prototype. No product caller or admission is added here.
  * The future host must supply current owner/runtime/lifecycle checks, mount the
  * saved-record canvas, and establish renderer admission before exposing actions.
- * No receipt is sent; local native checks are not formal fit or export success.
+ * Receipt is render evidence only, independent from the later OS operation.
  */
 import { Platform, PermissionsAndroid, NativeModules } from 'react-native';
 import { captureRef, releaseCapture } from 'react-native-view-shot';
@@ -10,11 +10,15 @@ import { CameraRoll } from '@react-native-camera-roll/camera-roll';
 import { Dirs, FileSystem } from 'react-native-file-access';
 import { requestPieceOwner, PieceApiError } from './pieceApi';
 import { readPieceOwnerDisplay } from './pieceOwnerModel';
-import { preparePieceNativeSavedDisplay, PIECE_NATIVE_PREVIEW_VERSION, PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION } from './pieceLayout';
+import { verifyPieceExportPngSrgb } from './pieceExportPngProfile';
+import { preparePieceNativeSavedDisplay, PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION } from './pieceLayout';
 
 const failed = () => new PieceApiError('PIECE_TEMPORARILY_UNAVAILABLE');
+export class PieceExportReceiptRetryError extends Error {}
+const IOS_RECEIPT_RENDERERS = [PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION];
 const hashPattern = /^[0-9a-f]{64}$/;
 let rawCleanup;
+const pendingExportCleanup = new Map();
 
 function roots() {
   const base = Dirs.CacheDir;
@@ -51,27 +55,50 @@ async function prepareRawCache(root) {
   }
 }
 
+// Only copies with no external reader enter this queue. Unknown or active
+// share handoffs never enter it, including when a different export starts.
+function removeExportCopy(directory) {
+  const pending = pendingExportCleanup.get(directory);
+  if (pending) return pending;
+  const removal = Promise.resolve().then(async () => {
+    try {
+      if (await FileSystem.exists(directory)) await FileSystem.unlink(directory);
+      pendingExportCleanup.delete(directory);
+    } catch {
+      pendingExportCleanup.set(directory, null);
+      throw failed();
+    }
+  });
+  pendingExportCleanup.set(directory, removal);
+  return removal;
+}
+
 function sessionId() {
   const bytes = new Uint8Array(16);
   globalThis.crypto.getRandomValues(bytes);
   return Array.from(bytes, b => b.toString(16).padStart(2, '0')).join('');
 }
 
-async function pngIdentity(path, width, height) {
+async function pngIdentity(path, width, height, requireSrgb = false) {
   const stat = await FileSystem.stat(path);
   if (stat.type !== 'file' || stat.size <= 33) throw failed();
-  // Inspect only the 24-byte PNG signature/IHDR prefix, not image/base64 data.
-  const header = await FileSystem.readFileChunk(path, 0, 24, 'base64');
-  if (typeof header !== 'string' || !/^[A-Za-z0-9+/]{32}$/.test(header)) throw failed();
-  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
-  const bytes = [];
-  for (let i = 0; i < 32; i += 4) {
-    const value = [...header.slice(i, i + 4)].reduce((n, c) => n * 64 + alphabet.indexOf(c), 0);
-    bytes.push((value >>> 16) & 255, (value >>> 8) & 255, value & 255);
+  if (requireSrgb) {
+    if (await verifyPieceExportPngSrgb({ width, height, size: stat.size,
+      readChunk: (offset, length) => FileSystem.readFileChunk(path, offset, length, 'base64') }) !== true) throw failed();
+  } else {
+    // Inspect only the 24-byte PNG signature/IHDR prefix, not image/base64 data.
+    const header = await FileSystem.readFileChunk(path, 0, 24, 'base64');
+    if (typeof header !== 'string' || !/^[A-Za-z0-9+/]{32}$/.test(header)) throw failed();
+    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+    const bytes = [];
+    for (let i = 0; i < 32; i += 4) {
+      const value = [...header.slice(i, i + 4)].reduce((n, c) => n * 64 + alphabet.indexOf(c), 0);
+      bytes.push((value >>> 16) & 255, (value >>> 8) & 255, value & 255);
+    }
+    const uint32 = offset => bytes.slice(offset, offset + 4).reduce((n, b) => n * 256 + b, 0);
+    if (bytes.length !== 24 || bytes.slice(0, 8).join() !== '137,80,78,71,13,10,26,10' ||
+        uint32(8) !== 13 || bytes.slice(12, 16).join() !== '73,72,68,82' || uint32(16) !== width || uint32(20) !== height) throw failed();
   }
-  const uint32 = offset => bytes.slice(offset, offset + 4).reduce((n, b) => n * 256 + b, 0);
-  if (bytes.length !== 24 || bytes.slice(0, 8).join() !== '137,80,78,71,13,10,26,10' ||
-      uint32(8) !== 13 || bytes.slice(12, 16).join() !== '73,72,68,82' || uint32(16) !== width || uint32(20) !== height) throw failed();
   const hash = await FileSystem.hash(path, 'SHA-256');
   if (!hashPattern.test(hash)) throw failed();
   return hash;
@@ -83,14 +110,21 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
     if (signal?.aborted || typeof isCurrent !== 'function' || isCurrent() !== true) throw failed();
   };
   current();
-  const readExportRecord = async () => readPieceOwnerDisplay(await requestPieceOwner('export',
-    { piece_id: pieceId }, { expectedUserId, signal }));
-  const record = await readExportRecord();
+  const readExportRecord = async () => {
+    let receipt = false;
+    const record = readPieceOwnerDisplay(await requestPieceOwner('export',
+      { piece_id: pieceId }, { expectedUserId, signal,
+        ...(Platform.OS === 'ios' ? { onExportReceiptSupport: value => { receipt = value === true; } } : {}) }));
+    return { record, receipt: receipt && IOS_RECEIPT_RENDERERS.includes(record.renderer_version) };
+  };
+  const { record, receipt: requireReceipt } = await readExportRecord();
   current();
   const input = preparePieceNativeSavedDisplay(record);
-  if (!input || ![PIECE_NATIVE_PREVIEW_VERSION, PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION].includes(record.renderer_version)) throw failed();
+  if (!input) throw failed();
   const dirs = roots();
   try { await prepareRawCache(dirs.raw); } catch { throw failed(); }
+  current();
+  await Promise.allSettled(Array.from(pendingExportCleanup.keys(), removeExportCopy));
   current();
   let busy = false, captured = false;
   return Object.freeze({ record, async capture(target) {
@@ -105,8 +139,8 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
     let raw = null, directory = null, path = null, handedOff = false, operating = false;
     const cleanup = async () => {
       if (directory && !handedOff && !operating) {
-        const owned = directory; directory = null;
-        try { await FileSystem.unlink(owned); } catch { throw failed(); }
+        await removeExportCopy(directory);
+        directory = null;
       }
     };
     try {
@@ -117,14 +151,25 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
       const source = rawPath(raw, dirs.raw);
       check();
       const token = sessionId();
-      directory = `${dirs.exports}/${token}`;
-      await FileSystem.mkdir(directory);
+      const exportDirectory = `${dirs.exports}/${token}`;
+      await FileSystem.mkdir(exportDirectory);
+      directory = exportDirectory;
       check();
       const filename = `cocolon-piece_${record.piece_id.replace(/-/g, '')}_${record.visual_recipe_hash.slice(0, 12)}_${record.visual_recipe.aspect_ratio.replace(':', 'x')}.png`;
       path = `${directory}/${filename}`;
       await FileSystem.cp(source, path);
       check();
-      const assetHash = await pngIdentity(path, input.width, input.height);
+      const assetHash = await pngIdentity(path, input.width, input.height, requireReceipt);
+      const receipt = requireReceipt ? Object.freeze({
+        receipt_version: 'piece.export_receipt.v1', piece_id: record.public_id,
+        expected_row_version: record.row_version, piece_text_hash: record.piece_text_hash,
+        visual_recipe_hash: record.visual_recipe_hash, visual_catalog_version: record.visual_recipe.visual_catalog_version,
+        layout_policy_version: record.visual_recipe.layout_policy_version,
+        renderer_family: 'rn_native', renderer_version: record.renderer_version,
+        export_contract_version: record.export_contract_version, mime_type: 'image/png',
+        output_profile: `png_${input.width}x${input.height}_srgb_v1`, width: input.width, height: input.height,
+        asset_sha256: assetHash, generated_at: new Date().toISOString(), persistent_server_asset: false, body_free: true,
+      }) : null;
       check();
       captured = true;
       let consumed = false, disposed = false;
@@ -134,13 +179,24 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
         consumed = true; operating = true;
       };
       const verify = async () => {
-        current();
-        const latest = await readExportRecord();
-        current();
-        if (!['piece_id', 'row_version', 'piece_text_hash', 'content_payload_hash',
+        check();
+        const { record: latest, receipt: receiptSupported } = await readExportRecord();
+        check();
+        if (receiptSupported !== requireReceipt || !['piece_id', 'row_version', 'piece_text_hash', 'content_payload_hash',
           'visual_recipe_hash', 'renderer_version'].every(key => latest[key] === record[key])) throw failed();
-        if (await pngIdentity(path, input.width, input.height) !== assetHash) throw failed();
-        current(); if (disposed) throw failed();
+        if (await pngIdentity(path, input.width, input.height, requireReceipt) !== assetHash) throw failed();
+        check(); if (disposed) throw failed();
+        if (receipt) {
+          try {
+            await requestPieceOwner('exportReceipt', { piece_id: pieceId, receipt },
+              { expectedUserId, signal, idempotencyKey: token });
+          } catch (error) {
+            check(); if (disposed) throw failed();
+            if (error?.code === 'PIECE_TEMPORARILY_UNAVAILABLE') throw new PieceExportReceiptRetryError();
+            throw failed();
+          }
+          check(); if (disposed) throw failed();
+        }
       };
       return Object.freeze({
         // Candidate metadata only. No body, local URI, recipient or formal receipt.
@@ -149,15 +205,16 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
           asset_sha256: assetHash, mime_type: 'image/png', width: input.width, height: input.height }),
         async saveToPhotos() {
           begin();
-          let saved = false, cleanupFailed = false;
+          let saved = false, cleanupFailed = false, retryReceipt = false;
           try {
+            check();
             if (Platform.OS === 'android' && Number(Platform.Version) < 29) {
               const status = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE);
-              current();
+              check();
               if (status !== PermissionsAndroid.RESULTS.GRANTED) throw failed();
             }
             await verify();
-            current(); if (disposed) throw failed();
+            check(); if (disposed) throw failed();
             // No album/read permission: CameraRoll requests iOS add-only itself.
             if (Platform.OS === 'ios') {
               // Pinned 7.10.2 old-architecture opt-in avoids the public API's
@@ -170,23 +227,32 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
             // local copy cleanup cannot undo that photo or make it retryable.
             // The host still owns whether this outcome belongs on its screen.
             saved = true;
-          } catch { throw failed(); }
-          finally {
-            operating = false; disposed = true;
-            try { await cleanup(); }
-            catch {
-              if (!saved) throw failed();
-              cleanupFailed = true;
+          } catch (error) {
+            if (error instanceof PieceExportReceiptRetryError) {
+              retryReceipt = true; throw error;
+            }
+            throw failed();
+          } finally {
+            operating = false;
+            if (retryReceipt && !disposed) {
+              consumed = false;
+            } else {
+              disposed = true;
+              try { await cleanup(); }
+              catch {
+                if (!saved) throw failed();
+                cleanupFailed = true;
+              }
             }
           }
           return Object.freeze({ outcome: 'saved_to_photos', ...(cleanupFailed ? { cleanup_failed: true } : {}) });
         },
         async openShare() {
           begin();
-          let outcome = null, cleanupFailed = false;
+          let outcome = null, cleanupFailed = false, retryReceipt = false;
           try {
             await verify();
-            current(); if (disposed) throw failed();
+            check(); if (disposed) throw failed();
             // Hand off conservatively until a platform's session-end result is
             // known. Backgrounding, dispose and a rejected/unknown result do
             // not establish that an external reader has finished.
@@ -199,15 +265,23 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
             // Android success resolves at target selection, so its copy stays.
             if (Platform.OS === 'ios' && (completed || cancelled)) handedOff = false;
             outcome = cancelled ? 'cancelled' : 'share_result_returned';
-          } catch { throw failed(); }
-          finally {
-            operating = false; disposed = true;
-            try { await cleanup(); }
-            catch {
-              // An observed share result must survive a later cleanup failure,
-              // especially cancellation. Never expose native errors or paths.
-              if (!outcome) throw failed();
-              cleanupFailed = true;
+          } catch (error) {
+            if (error instanceof PieceExportReceiptRetryError) {
+              retryReceipt = true; throw error;
+            }
+            throw failed();
+          } finally {
+            operating = false;
+            if (retryReceipt && !disposed) {
+              consumed = false;
+            } else {
+              disposed = true;
+              try { await cleanup(); }
+              catch {
+                // An observed share result survives a cleanup failure.
+                if (!outcome) throw failed();
+                cleanupFailed = true;
+              }
             }
           }
           return Object.freeze({ outcome, ...(cleanupFailed ? { cleanup_failed: true } : {}) });

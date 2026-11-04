@@ -625,6 +625,8 @@ Cocolon側は本map一つを同期する。全体地図01／01A／01B／01Cの�
 
 現行 `screens/InputScreen.js` は自己理解を単独選択し、強度UIを表示しないまま `medium` を送る。これを感情の強さや「自己理解できた」という命題へ変換しない。自己理解だけの選択と、強度未指定・空文字・現行UIのexact `medium` に限り、原保存JSONとそのidentityへ保持したまま、感情nodeを作らず既存本文生成へ進める。
 
+11/4候補では、自己理解を単独で選んだ保存済み入力で、すべての文に対象と丁寧体過去の動作が明示されている場合にも、書かれたままのPieceを許可する。モードが本文の感情や評価を補うことはない。
+
 混在、重複、余分なkey、別の強度や未証明のaliasは拒否する。通常感情に必要な本人記述・程度・主体・時点の照合は変更しない。既存の保存状態handoff、両記述欄の出典、planと本文の再照合も継承する。source選択を消して成功にする処理や、意味・品質条件の緩和ではない。
 
 ### 18.2 今回実行した検証と分母
@@ -3592,3 +3594,16 @@ public renderer `piece.rn_bitmap_renderer.ios.v1`はCocolon、`.ios.v2`はEmlis�
 RN pieceApiはPieceTextMetricsのcompiled `bitmapRendererVersion`がios.v2の場合のみheaderを付ける。API api_piece_v2の既存runtime v1を既定とし、exact headerの場合だけpreferred v2/allowed(v1,v2)。missing/unknownは既定版。初回発行・保存済みpreview再読・visual・saveのserviceが版を検査し、same-key replayや並行発行結果をv2へ書き換えない。旧7001はv1を継続し、未知v2保存recordの画像は拒否する既存境界を維持する。
 
 RN layoutのbrandingTextが表示・計測・文字数照合を統一し、native brand rowはCocolon/Emlisの二値のみ。Card完成保持/save admission/export native token/binding/useRenderInContextは二版共通。構築/初回採用8秒・source期限/owner/recipe/bitmap同一性を緩めない。対象API255成功（native SQL11はこのローカル実行では除外）、新JS保持/出力試験と起動試験を実施。実native画素/新iPhone結果は別確認。STRUCTURE_MAP_DELTA_PRESENT。
+
+
+<a id="piece-format-language-export-20261104"></a>
+## 2026-11-04 — 形式選択、本文の対応範囲と書き出し記録
+
+| 既存経路 | 差分 |
+|---|---|
+| 作成モーダル → `InputPieceActionArea` → `PieceCreateController` | Premiumの適格な形式を明示選択。既存POSTへ同じ保存sourceと現在の配色・比率・ロゴを渡し、別の候補を取得する。古い保存操作は失効。結果不明は同じキーで再確認でき、前候補が有効な間は戻れる。期限切れは選択形式と最後の画像設定を保ち、同じ記録から明示作り直し。 |
+| APIのPiece原文 → CMEE → 独立本文検査 | 原文で時点・主体・否定・強度が異なる感情と、選択感情を分離する。明示的な動作名を伴う一部の「する。」と、対象が書かれた丁寧過去形で最後の句点が省略された場合を受け付ける。本文の書き足しなし。自己理解の単独選択でも、全行が明示的な丁寧体過去の動作文なら本文をそのまま使う。 |
+| 本人詳細 → `PieceVisualCard` → `pieceExport.js` | この端末で描画できない版は本文・削除を残して画像の制限を案内する。検査済みの文字ノードが差し替われば旧画像を持ち出せない。安全に削除できる一時ファイルだけ、削除失敗後に再処理する。削除済みの直接遷移先を再読候補に出さない。 |
+| 対応iOS → `pieceExportPngProfile.js` → `POST /emotion/piece/{piece_id}/export-receipt` | 寸法・sRGB・ハッシュを確認し、OSへ渡す前の書き出し記録を作る。APIとSQLは本人、保存版、ハッシュ、形式を再照合する。同一キー・同一内容の再試行は同じ記録。画像本体・ファイル位置・共有先・OS結果は送らない。既定無効。 |
+
+前提となる配色移行は `20261103235434_piece_v2_expand_visual_palette.sql`。書き出し記録の移行は `20261104002458_piece_v2_export_receipt.sql`。今回の候補は本番未適用・未配置・未ビルド。Androidの新規画像作成と、今回のiOS実機確認は別残件。詳細は[週次レビュー](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#piece-sustained-session-20261104)。

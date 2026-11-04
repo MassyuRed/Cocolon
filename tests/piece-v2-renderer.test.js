@@ -26,7 +26,7 @@ function sample(format = 'short_essay', ratio = '4:5', theme = 'soft_paper', bra
   return p;
 }
 const display = p => ({ phase: 'received', preview: p, hashVerified: true });
-function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates, initialNow = NOW, exportCanvas = false) {
+function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates, initialNow = NOW, exportCanvas = false, os = 'ios') {
   let now = initialNow, serial = 0, monotonic = 0;
   const frames = new Map(), timers = new Map(), nativeCalls = [], candidateCalls = [], mountedNodes = new Map();
   let card;
@@ -36,11 +36,11 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
       if (change) { this.state = { ...this.state, ...change }; this.updates++; this.componentDidUpdate?.(); } callback?.(); }
   }, createElement: (type, props, ...children) => ({ type, props: props || {}, children }) };
   const context = vm.createContext({ React, View: 'View', Text: 'Text',
-    Platform: { OS: 'ios' }, findNodeHandle: node => node?.tag,
+    Platform: { OS: os }, findNodeHandle: node => node?.tag,
     UIManager: { getViewManagerConfig: name => name === 'PieceBitmapCanvas' ? {} : null },
     requireNativeComponent: name => name,
     NativeModules: { PieceTextMetrics: { measureCandidates: async (tag, text, fontSize) => {
-      const result = candidateTable(text, fontSize); candidateCalls.push({ tag, text, fontSize });
+      const result = { ...candidateTable(text, fontSize), platform: os }; candidateCalls.push({ tag, text, fontSize });
       return nativeCandidates ? nativeCandidates(result, candidateCalls.length) : result;
     }, measureCandidatesForWidth: async (tag, text, fontSize, contentWidth) => {
       const result = widthCandidates(candidateTable(text, fontSize), contentWidth);
@@ -147,7 +147,7 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
     }, inspect: async (tag, text, fontSize) => {
       nativeCalls.push({ tag, text, fontSize });
       const block = card.state.measurement.blocks[tag - 1];
-      const result = { version: 'piece.native_text.v1', platform: 'ios', font_size: fontSize,
+      const result = { version: 'piece.native_text.v1', platform: os, font_size: fontSize,
         width: block.box.width, height: block.box.height, utf16_length: text.length,
         boundaries: [0, ...[...new Intl.Segmenter('ja', { granularity: 'grapheme' }).segment(text)].map(s => s.index + s.segment.length)],
         line_ends: block.lines.map(l => l.end), ink: [0, 0, block.box.width - 1, block.box.height], glyph_check: 'no_missing_observed' };
@@ -1222,6 +1222,30 @@ test('saved rendering validates all hashes, lifecycle and pinned renderer withou
   }
   assert.equal(h.preparePieceNativeCard({ savedRecord: savedSample(), display: display(sample()) }), null);
   assert.equal(h.preparePieceNativeCard({}), null);
+});
+test('legacy Android saved export waits for Android text inspection and revokes a replaced canvas', async () => {
+  for (const [ratio, height] of [['4:5', 1350], ['9:16', 1920]]) {
+    const record = savedSample(sample('short_essay', ratio, 'quiet_night'));
+    const h = rawHarness(record, undefined, true, undefined, NOW, true, 'android');
+    assert.equal(h.card.getCaptureTarget(), null);
+    await prepare(h);
+    assert.equal(h.card.getCaptureTarget(), null);
+    await finish(h);
+    const target = h.card.getCaptureTarget();
+    assert.ok(target);
+    assert.deepEqual([target.key, target.width, target.height], [h.input().key, 1080, height]);
+    assert.equal(target.bitmapToken, undefined);
+    assert.equal(target.isCurrent(), true);
+    assert.ok(h.card.state.measurement.inspection.every(row => row.platform === 'android'));
+    const inspectedText = h.find('piece-visual-block-0');
+    inspectedText.props.ref({ tag: 901 });
+    assert.equal(target.isCurrent(), false, 'a different mounted Text was never inspected');
+    assert.equal(h.card.getCaptureTarget(), null);
+    h.replace({ ...record, row_version: record.row_version + 1 });
+    assert.equal(target.isCurrent(), false);
+    assert.equal(h.card.getCaptureTarget(), null);
+    h.card.componentWillUnmount();
+  }
 });
 test('saved row-version/detail replacement cannot reuse pending native success or old measurement events', async () => {
   let release;

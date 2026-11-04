@@ -188,8 +188,12 @@ export function readPiecePreviewDisplay(view, nowMs = Date.now()) {
     phase: ['idle', 'loading', 'unavailable', 'cancelled', 'saved'].includes(view.phase) ? view.phase : 'unavailable',
     message: view.phase === 'saved' ? 'Pieceを保存しました。' : typeof view.message === 'string' ? view.message : '',
     canRetry: view.phase === 'unavailable' && view.canRetry === true,
+    ...(view.phase === 'unavailable' && view.previewRestartToken ? { previewRestartToken: view.previewRestartToken } : {}),
+    ...(view.phase === 'unavailable' && view.formatRecoveryToken &&
+      Number.isFinite(view.formatRecoveryExpiresAtMs) && view.formatRecoveryExpiresAtMs > nowMs
+      ? { formatRecoveryToken: view.formatRecoveryToken, expiresAtMs: view.formatRecoveryExpiresAtMs } : {}),
     retryKind: ['recover', 'cancel', 'save'].includes(view.retryKind) ? view.retryKind : 'preview',
-    loadingKind: ['visual', 'recover', 'cancel', 'save'].includes(view.loadingKind) ? view.loadingKind : 'preview' });
+    loadingKind: ['visual', 'format', 'recover', 'cancel', 'save'].includes(view.loadingKind) ? view.loadingKind : 'preview' });
   try {
     const preview = readPiecePreviewSnapshot(view.preview);
     const expiresAtMs = expiryMilliseconds(preview.expires_at);
@@ -197,7 +201,8 @@ export function readPiecePreviewDisplay(view, nowMs = Date.now()) {
     if (nowMs >= expiresAtMs) throw new PieceApiError('PIECE_PREVIEW_EXPIRED');
     verifyPieceArtifactHashes(preview);
     return frozen({ ...base, phase: 'received', preview, hashVerified: true, expiresAtMs,
-      visualUpdated: view.visualUpdated === true, visualToken: view.visualToken || null });
+      visualUpdated: view.visualUpdated === true, visualToken: view.visualToken || null,
+      ...(typeof view.formatNotice === 'string' ? { formatNotice: view.formatNotice } : {}) });
   } catch (error) {
     const code = error instanceof PieceApiError ? error.code : 'PIECE_TEMPORARILY_UNAVAILABLE';
     return frozen({ ...base, phase: 'unavailable', message: new PieceApiError(code).message });

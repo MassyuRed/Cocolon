@@ -41,6 +41,9 @@ export function createPieceCreateController(configuration = {}) {
     ? configuration.onFeatureDisabled : null;
   const listeners = new Set();
   let state = createPiecePreviewState();
+  // The host binding stays fixed while explicit draft replacements change
+  // the active request/key within that same owner and saved source.
+  let contextOperation = null;
   let operation = null;
   let enabled = false;
   let boundaryCode = null;
@@ -48,6 +51,9 @@ export function createPieceCreateController(configuration = {}) {
   let disposed = false;
   let visualRecovery = null;
   let visualUpdated = false;
+  let lastDisplaySettings = null;
+  let formatIntent = null;
+  let formatNotice = null;
   let cancelIntent = null;
   let cancelPhase = null;
   let cancelCode = null;
@@ -83,11 +89,14 @@ export function createPieceCreateController(configuration = {}) {
     }
   }
 
-  function clearAttempt(keepCancellation = false, keepSave = false) {
+  function clearAttempt(keepCancellation = false, keepSave = false, keepPreviewRequest = false) {
     const previous = active;
     active = null;
     visualRecovery = null;
     visualUpdated = false;
+    if (!keepPreviewRequest) lastDisplaySettings = null;
+    formatIntent = keepPreviewRequest && formatIntent ? { ...formatIntent, previous: null } : null;
+    formatNotice = null;
     if (!keepSave) {
       saveIntent = null;
       savePhase = null;
@@ -144,9 +153,18 @@ export function createPieceCreateController(configuration = {}) {
       return Object.freeze({ ...view, canRetry: true, retryKind: 'recover',
         message: '変更結果を確認できませんでした。最新のプレビューを取得してください。' });
     }
+    const fallback = view.phase === 'unavailable' && state.code === 'PIECE_TEMPORARILY_UNAVAILABLE'
+      ? previousFormatDisplay() : null;
+    const expired = view.phase === 'unavailable' &&
+      expirePiecePreview(state, clock()).code === 'PIECE_PREVIEW_EXPIRED';
     return Object.freeze({ ...view, visualUpdated: visualUpdated && view.phase === 'received',
+      ...(expired && contextOperation ? { previewRestartToken: state.ticket } : {}),
+      ...(fallback?.phase === 'received' ? { formatRecoveryToken: state.ticket,
+        formatRecoveryExpiresAtMs: fallback.expiresAtMs } : {}),
       visualToken: view.phase === 'received' ? state.ticket : null,
-      loadingKind: visualRecovery && view.phase === 'loading' ? active?.mutation ? 'visual' : 'recover' : 'preview' });
+      formatNotice: view.phase === 'received' ? formatNotice : null,
+      loadingKind: view.phase === 'loading' && formatIntent ? 'format' :
+        visualRecovery && view.phase === 'loading' ? active?.mutation ? 'visual' : 'recover' : 'preview' });
   }
 
   function setContext(value = {}) {
@@ -158,6 +176,7 @@ export function createPieceCreateController(configuration = {}) {
     if (saveFlagChanged && !saveEnabled && saveIntent) clearAttempt(false, true);
     if (value?.enabled !== true) {
       enabled = false;
+      contextOperation = null;
       operation = null;
       boundaryCode = null;
       clearAttempt();
@@ -168,15 +187,15 @@ export function createPieceCreateController(configuration = {}) {
     try { next = preparePiecePreviewRequest(value.request, value); }
     catch (error) {
       enabled = true;
+      contextOperation = null;
       operation = null;
       boundaryCode = error instanceof PieceApiError ? error.code : 'PIECE_REQUEST_INVALID';
       clearAttempt();
       notify();
       return;
     }
-    if (operation?.expectedUserId === next.expectedUserId &&
-        operation.idempotencyKey === next.idempotencyKey &&
-        !equivalent(operation.request, next.request)) {
+    if ([contextOperation, operation].some(prior => prior?.expectedUserId === next.expectedUserId &&
+        prior.idempotencyKey === next.idempotencyKey && !equivalent(prior.request, next.request))) {
       // Keep the previous body-free binding while rejecting this conflict, so
       // repeating the same invalid context cannot erase the key's binding.
       enabled = true;
@@ -188,11 +207,12 @@ export function createPieceCreateController(configuration = {}) {
     // A repeated stale true/source/key must not clear a server-disabled result.
     // A genuine disable/re-enable boundary or different intent can reset it;
     // neither begins a request automatically.
-    if (enabled && (!boundaryCode || boundaryCode === 'PIECE_FEATURE_DISABLED') && equivalent(operation, next)) {
+    if (enabled && (!boundaryCode || boundaryCode === 'PIECE_FEATURE_DISABLED') && equivalent(contextOperation, next)) {
       if (saveFlagChanged) notify();
       return;
     }
     enabled = true;
+    contextOperation = next;
     operation = next;
     boundaryCode = null;
     clearAttempt();
@@ -233,6 +253,19 @@ export function createPieceCreateController(configuration = {}) {
     }
   }
 
+  function selectedVisual(recipe) {
+    return { theme_id: recipe.theme.theme_id, aspect_ratio: recipe.aspect_ratio,
+      branding_mode: recipe.branding.branding_mode };
+  }
+
+  function rememberDisplaySettings() {
+    if (state.phase !== 'received') return;
+    try {
+      verifyPieceArtifactHashes(state.preview);
+      lastDisplaySettings = { operation, selection: selectedVisual(state.preview.visual_recipe) };
+    } catch { lastDisplaySettings = null; }
+  }
+
   async function run(begun, mutation = null) {
     if (!begun.ticket) return;
     state = begun.state;
@@ -261,9 +294,27 @@ export function createPieceCreateController(configuration = {}) {
       });
       if (!current(attempt)) return;
       checkVisualResult(result, mutation);
+      if (formatIntent) {
+        const recipe = result.visual_recipe;
+        const selection = captured.request.visual_selection;
+        if (result.preview_id === formatIntent.previousId || result.preview_revision !== 1 ||
+            result.row_version !== 1 || result.renderer_version !== formatIntent.renderer ||
+            result.quota.subscription_tier !== 'premium' || result.format_type !== captured.request.requested_format ||
+            recipe.theme.theme_id !== selection.theme_id || recipe.aspect_ratio !== selection.aspect_ratio ||
+            recipe.branding.branding_mode !== selection.branding_mode) {
+          throw new PieceApiError('PIECE_TEMPORARILY_UNAVAILABLE');
+        }
+        try { verifyPieceArtifactHashes(result); }
+        catch { throw new PieceApiError('PIECE_TEMPORARILY_UNAVAILABLE'); }
+      }
       state = completePiecePreview(state, attempt.ticket, result, {
         expectedUserId: operation?.expectedUserId, nowMs: clock(),
       });
+      rememberDisplaySettings();
+      if (state.phase === 'received' && formatIntent) {
+        formatIntent = null;
+        formatNotice = '文章の形式を変更しました。';
+      }
       if (state.phase === 'received' && visualRecovery) {
         visualUpdated = state.preview.preview_revision > visualRecovery.preview_revision;
         visualRecovery = null;
@@ -272,6 +323,11 @@ export function createPieceCreateController(configuration = {}) {
       if (!current(attempt)) return;
       state = failPiecePreview(state, attempt.ticket, error, { expectedUserId: operation?.expectedUserId });
     }
+    expirePreviousFormat();
+    if (state.code === 'PIECE_FORMAT_NOT_ELIGIBLE') {
+      restorePreviousFormat(new PieceApiError('PIECE_FORMAT_NOT_ELIGIBLE').message);
+    }
+    if (formatIntent && state.code !== 'PIECE_TEMPORARILY_UNAVAILABLE') formatIntent = null;
     // Clear BEFORE notification. A subscriber may start a new intent here;
     // there is deliberately no old finally block that could clear that intent.
     active = null;
@@ -317,15 +373,107 @@ export function createPieceCreateController(configuration = {}) {
     await run(retryPiecePreview(state, { enabled: true, expectedUserId: operation.expectedUserId }));
   }
 
-  async function changeVisual(selection, identity, visualToken) {
-    if (disposed || !enabled || !operation || boundaryCode || active || visualRecovery || cancelIntent || saveIntent) return;
-    if (!visualToken || visualToken !== state.ticket) return;
+  async function restartExpired(token, idempotencyKey) {
+    if (disposed || !enabled || !operation || !contextOperation || boundaryCode || active || cancelIntent ||
+        saveIntent || !token || token !== state.ticket || idempotencyKey === operation.idempotencyKey ||
+        idempotencyKey === contextOperation.idempotencyKey) return;
+    const expired = expirePiecePreview(state, clock());
+    if (expired.code !== 'PIECE_PREVIEW_EXPIRED') return;
+    let next;
+    try {
+      const request = operation.request;
+      const visual_selection = lastDisplaySettings?.operation === operation
+        ? lastDisplaySettings.selection : request.visual_selection;
+      next = preparePiecePreviewRequest({ ...request, visual_selection }, {
+        expectedUserId: operation.expectedUserId, idempotencyKey,
+      });
+    } catch { return; }
+    const begun = beginPiecePreview(expired, next.request, { ...next, enabled: true });
+    operation = next;
+    formatIntent = null;
+    formatNotice = null;
+    visualRecovery = null;
+    visualUpdated = false;
+    await run(begun);
+  }
+
+  function selectedPreview(identity, displayToken) {
+    if (!displayToken || displayToken !== state.ticket) return null;
     const display = readPiecePreviewDisplay(getView(), clock());
-    if (display.phase !== 'received' || !display.hashVerified) return;
+    if (display.phase !== 'received' || !display.hashVerified) return null;
     const preview = display.preview;
     if (!identity || identity.preview_id !== preview.preview_id ||
         identity.preview_revision !== preview.preview_revision ||
-        identity.visual_recipe_hash !== preview.visual_recipe_hash) return;
+        identity.visual_recipe_hash !== preview.visual_recipe_hash) return null;
+    return preview;
+  }
+
+  function previousFormatDisplay() {
+    const nowMs = clock();
+    return readPiecePreviewDisplay(readPiecePreviewView(formatIntent?.previous, {
+      enabled: !!formatIntent?.previous, expectedUserId: operation?.expectedUserId, nowMs,
+    }), nowMs);
+  }
+
+  function expirePreviousFormat() {
+    if (formatIntent?.previous && expirePiecePreview(formatIntent.previous, clock()).phase !== 'received') {
+      formatIntent.previous = null;
+    }
+  }
+
+  function restorePreviousFormat(notice) {
+    expirePreviousFormat();
+    if (previousFormatDisplay().phase !== 'received') return false;
+    const previous = formatIntent.previous;
+    const restored = beginPiecePreview(state, previous.operation.request, { ...previous.operation, enabled: true });
+    const restoredState = completePiecePreview(restored.state, restored.ticket, previous.preview, {
+      expectedUserId: previous.operation.expectedUserId, nowMs: clock(),
+    });
+    if (restoredState.phase !== 'received') return false;
+    operation = previous.operation;
+    state = restoredState;
+    rememberDisplaySettings();
+    formatIntent = null;
+    formatNotice = notice;
+    return true;
+  }
+
+  function returnToFormat(token) {
+    if (disposed || !enabled || boundaryCode || active || !token || token !== state.ticket ||
+        state.phase !== 'unavailable' || state.code !== 'PIECE_TEMPORARILY_UNAVAILABLE') return;
+    if (restorePreviousFormat('前のプレビューに戻りました。')) notify();
+  }
+
+  async function changeFormat(format, identity, displayToken, idempotencyKey) {
+    if (disposed || !enabled || !operation || boundaryCode || active || visualRecovery || formatIntent ||
+        cancelIntent || saveIntent || idempotencyKey === operation.idempotencyKey ||
+        idempotencyKey === contextOperation?.idempotencyKey) return;
+    const preview = selectedPreview(identity, displayToken);
+    if (!preview || preview.quota.subscription_tier !== 'premium' ||
+        preview.plan_capabilities.format_selection !== 'eligible_choice' ||
+        format === preview.format_type || !preview.eligible_formats.includes(format)) return;
+    const recipe = preview.visual_recipe;
+    let next;
+    try {
+      next = preparePiecePreviewRequest({
+        source_ref: operation.request.source_ref, requested_format: format,
+        visual_selection: selectedVisual(recipe),
+      }, { expectedUserId: operation.expectedUserId, idempotencyKey });
+    } catch { return; }
+    // A format change reauthors the same source into a distinct draft. The
+    // previous artifact cannot be saved while the new request is unresolved.
+    const begun = beginPiecePreview(state, next.request, { ...next, enabled: true });
+    formatIntent = { previousId: preview.preview_id, renderer: preview.renderer_version, previous: state };
+    formatNotice = null;
+    visualUpdated = false;
+    operation = next;
+    await run(begun);
+  }
+
+  async function changeVisual(selection, identity, visualToken) {
+    if (disposed || !enabled || !operation || boundaryCode || active || visualRecovery || cancelIntent || saveIntent) return;
+    const preview = selectedPreview(identity, visualToken);
+    if (!preview) return;
     let mutation;
     try {
       mutation = preparePieceVisualChange({ preview_id: preview.preview_id,
@@ -337,6 +485,7 @@ export function createPieceCreateController(configuration = {}) {
           choice.branding_mode === preview.visual_recipe.branding.branding_mode) return;
     } catch { return; }
     visualRecovery = preview;
+    formatNotice = null;
     visualUpdated = false;
     await run(beginPiecePreview(state, operation.request, { ...operation, enabled: true }), mutation);
   }
@@ -515,7 +664,7 @@ export function createPieceCreateController(configuration = {}) {
     // Retain only the current body-free request/key; drop the received body.
     // Cancellation or save is terminal/uncertain for this original request.
     // Closing drops display data, but cannot restore POST or retry another ID.
-    clearAttempt(!!cancelIntent, !!saveIntent);
+    clearAttempt(!!cancelIntent, !!saveIntent, true);
     notify();
   }
 
@@ -529,6 +678,7 @@ export function createPieceCreateController(configuration = {}) {
   function refresh() {
     if (disposed) return;
     state = expirePiecePreview(state, clock());
+    expirePreviousFormat();
     notify();
   }
 
@@ -537,11 +687,12 @@ export function createPieceCreateController(configuration = {}) {
     disposed = true;
     listeners.clear();
     enabled = false;
+    contextOperation = null;
     operation = null;
     boundaryCode = null;
     clearAttempt();
   }
 
-  return Object.freeze({ setContext, getView, start, retry, changeVisual, cancelPreview, savePreview, setCancellationEnabled, setSaveAvailability, close, subscribe, refresh, dispose });
+  return Object.freeze({ setContext, getView, start, retry, restartExpired, changeVisual, changeFormat, returnToFormat, cancelPreview, savePreview, setCancellationEnabled, setSaveAvailability, close, subscribe, refresh, dispose });
 }
 

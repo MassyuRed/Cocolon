@@ -277,8 +277,10 @@ export default class PieceVisualCard extends React.Component {
     if (node === this.canvasNode) return;
     const changed = !!this.canvasNode;
     this.canvasNode = node; this.placementEpoch++;
-    if (changed && [PIECE_BITMAP_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION].includes(preparePieceNativeCard(this.props)?.candidateProfile) &&
-        ['positioning', 'native_checked'].includes(this.state.measurement.phase)) this.invalidatePlacement();
+    if (changed && (this.props.exportCanvas === true && this.inspection?.nodes &&
+          this.inspection.snapshot.generation === this.state.measurement.generation ||
+        [PIECE_BITMAP_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION].includes(preparePieceNativeCard(this.props)?.candidateProfile) &&
+          ['positioning', 'native_checked'].includes(this.state.measurement.phase))) this.invalidatePlacement();
   };
 
   textRef = (index, generation) => {
@@ -288,10 +290,10 @@ export default class PieceVisualCard extends React.Component {
       const previous = this.textNodes.get(index);
       if (value) this.textNodes.set(index, { value, generation });
       else if (previous?.generation === generation) this.textNodes.delete(index);
-      if (previous?.generation === generation && previous.value !== value &&
-          [PIECE_BITMAP_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION].includes(preparePieceNativeCard(this.props)?.candidateProfile) &&
-          this.state.measurement.generation === generation &&
-          ['positioning', 'native_checked'].includes(this.state.measurement.phase)) this.invalidatePlacement();
+      if (previous?.generation === generation && previous.value !== value && this.state.measurement.generation === generation &&
+          (this.props.exportCanvas === true && this.inspection?.snapshot.generation === generation && this.inspection.nodes ||
+            [PIECE_BITMAP_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION].includes(preparePieceNativeCard(this.props)?.candidateProfile) &&
+              ['positioning', 'native_checked'].includes(this.state.measurement.phase))) this.invalidatePlacement();
     };
     this.textRefs.set(index, { generation, callback });
     return callback;
@@ -547,14 +549,15 @@ export default class PieceVisualCard extends React.Component {
     const current = () => {
       if (!this.bindingCurrent(binding) || this.props.exportCanvas !== true || !this.props.savedRecord ||
           this.canvasNode !== node || this.state.measurement !== snapshot ||
-          preparePieceNativeCard(this.props)?.key !== input.key) return false;
+          preparePieceNativeCard(this.props)?.key !== input.key ||
+          !operation?.nodes || this.inspection !== operation || operation.canvas !== node ||
+          operation.evidence !== snapshot.inspection || operation.snapshot.generation !== snapshot.generation ||
+          operation.nodes.some((value, i) => this.textNodes.get(i)?.value !== value ||
+            this.textNodes.get(i)?.generation !== snapshot.generation)) return false;
       return !bitmap || !!artifact && !!operation?.bitmap && this.bitmapArtifact === artifact &&
-        this.bitmapNode === artifact.node && this.inspection === operation &&
+        this.bitmapNode === artifact.node &&
         artifact.binding === binding && artifact.generation === snapshot.generation &&
-        artifact.key === input.key && artifact.token === snapshot.bitmapCanvas?.artifactToken &&
-        operation.canvas === node && operation.evidence === snapshot.inspection &&
-        operation.nodes.every((value, i) => this.textNodes.get(i)?.value === value &&
-          this.textNodes.get(i)?.generation === snapshot.generation);
+        artifact.key === input.key && artifact.token === snapshot.bitmapCanvas?.artifactToken;
     };
     if (!current()) return null;
     return Object.freeze({ node, key: input.key, width: input.width, height: input.height,

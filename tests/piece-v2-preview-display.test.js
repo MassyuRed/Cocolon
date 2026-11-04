@@ -67,7 +67,7 @@ const pieceHttp = value => ({ status: 200, json: async () => value });
 const modalPath = path.join(__dirname, '../components/piece/PiecePreviewModal.js');
 const hostPath = path.join(__dirname, '../screens/input/InputPieceActionArea.js');
 function previewUiHarness({ send, currentState = 'active', admitSave = false } = {}) {
-  let now = NOW, serial = 0;
+  let now = NOW, serial = 0, keySerial = 0;
   const calls = [], timers = new Map(), appListeners = new Set();
   const React = {
     Component: class {
@@ -93,6 +93,7 @@ function previewUiHarness({ send, currentState = 'active', admitSave = false } =
     apiFetch: async (...args) => { calls.push(args); return send ? send(...args) : pieceHttp(response()); },
     getAccessToken: async () => 'synthetic-ui-session',
   });
+  if (!context.crypto) context.crypto = { getRandomValues: bytes => bytes.fill(++keySerial) };
   const pure = ['piecePalette.js', 'pieceApi.js', 'piecePreviewModel.js', 'PieceCreateController.js', 'pieceLayout.js', 'pieceRenderer.js'].map(file =>
     fs.readFileSync(path.join(__dirname, '../features/piece', file), 'utf8')
       .replace(/^import .*;$/gm, '').replace(/^export /gm, '')).join('\n');
@@ -987,4 +988,254 @@ test('bitmap harness keeps the original 13 fixture bytes and uses a separate exa
   for (const raw of next.filter(row => row.evidence_set === 'bitmap_raw'))
     assert.equal(raw.raw_text, legacy.find(old => raw.name === `bitmap_${old.name}`).raw_text);
   assert.equal(next.at(-1).controlled_host_crop, true);
+});
+
+
+function formatPair() {
+  const original = response('quote');
+  original.eligible_formats = ['quote', 'declaration'];
+  original.visual_recipe.theme.theme_id = 'quiet_night';
+  original.visual_recipe.aspect_ratio = '9:16';
+  original.visual_recipe.branding.branding_mode = 'off';
+  original.visual_recipe_hash = hash(JSON.stringify(canonical(original.visual_recipe)));
+  const replacement = response('declaration');
+  replacement.preview_id = '30000000-0000-4000-8000-000000000004';
+  replacement.eligible_formats = original.eligible_formats;
+  replacement.visual_recipe = { ...clone(original.visual_recipe), format_type: 'declaration',
+    template: { template_id: 'stance_frame', template_version: 1 } };
+  replacement.visual_recipe_hash = hash(JSON.stringify(canonical(replacement.visual_recipe)));
+  return { original, replacement };
+}
+
+test('Premium chooses an eligible format using a fresh POST and the current image settings', async () => {
+  const { original, replacement } = formatPair(), pending = deferredPieceResponse();
+  const u = previewUiHarness({ send: async (_, opt) => JSON.parse(opt.body).requested_format
+    ? pending.promise : pieceHttp(original) });
+  u.mount(); u.host.start(); await pieceTick();
+  const selected = uiButton(u, '形式：引用');
+  const choose = uiButton(u, '形式：宣言');
+  assert.equal(selected.props.accessibilityState.selected, true);
+  assert.equal(uiButton(u, '形式：エッセイ'), undefined);
+  const oldToken = u.host.controller.getView().visualToken;
+  choose.props.onPress(); choose.props.onPress(); await pieceTick();
+  assert.equal(u.host.controller.getView().loadingKind, 'format');
+  assert.equal(u.host.controller.getView().preview, null);
+  assert.equal(u.calls.length, 2);
+  const [url, opt] = u.calls[1];
+  assert.equal(url, u.calls[0][0]);
+  assert.equal(opt.method, 'POST');
+  assert.match(opt.headers['Idempotency-Key'], /^piece-format-[0-9a-f]{32}$/);
+  assert.notEqual(opt.headers['Idempotency-Key'], u.calls[0][1].headers['Idempotency-Key']);
+  assert.deepEqual(JSON.parse(opt.body), { source_ref: request().source_ref, requested_format: 'declaration',
+    visual_selection: visualSelection(original) });
+  pending.resolve(pieceHttp(replacement)); await pieceTick();
+  const view = u.host.controller.getView();
+  assert.equal(view.preview.preview_id, replacement.preview_id);
+  assert.notEqual(view.visualToken, oldToken);
+  assert.equal(uiButton(u, '形式：宣言').props.accessibilityState.selected, true);
+  // Host re-publications retain the chosen preview. Old callback can't resubmit.
+  u.host.controller.setContext(controllerInput());
+  choose.props.onPress(); await pieceTick();
+  assert.equal(u.host.controller.getView().preview.preview_id, replacement.preview_id);
+  assert.equal(u.calls.length, 2);
+  u.host.componentWillUnmount();
+});
+
+test('lost format ACK retries the exact POST once explicitly and never revives the old preview', async () => {
+  const { original, replacement } = formatPair();
+  const u = previewUiHarness({ send: async () => {
+    if (u.calls.length === 2) throw Error('response lost');
+    return pieceHttp(u.calls.length === 1 ? original : replacement);
+  } });
+  u.mount(); u.host.start(); await pieceTick();
+  uiButton(u, '形式：宣言').props.onPress(); await pieceTick();
+  assert.equal(u.host.controller.getView().preview, null);
+  assert.equal(u.host.controller.getView().canRetry, true);
+  assert.equal(u.calls.length, 2);
+  u.host.retry(); await pieceTick();
+  assert.equal(u.calls[2][1].body, u.calls[1][1].body);
+  assert.equal(u.calls[2][1].headers['Idempotency-Key'], u.calls[1][1].headers['Idempotency-Key']);
+  assert.equal(u.host.controller.getView().preview.preview_id, replacement.preview_id);
+  u.host.componentWillUnmount();
+});
+
+test('definitive format rejection restores a fresh token for the still-valid previous candidate', async () => {
+  const { original } = formatPair();
+  const u = previewUiHarness({ send: async () => u.calls.length === 1 ? pieceHttp(original)
+    : { status: 422, json: async () => ({ code: 'PIECE_FORMAT_NOT_ELIGIBLE' }) } });
+  u.mount(); u.host.start(); await pieceTick();
+  const oldToken = u.host.controller.getView().visualToken;
+  uiButton(u, '形式：宣言').props.onPress(); await pieceTick();
+  const view = u.host.controller.getView();
+  assert.equal(view.preview.preview_id, original.preview_id);
+  assert.notEqual(view.visualToken, oldToken);
+  assert.match(view.formatNotice, /選択できません/);
+  u.host.componentWillUnmount();
+});
+
+for (const invalid of ['same_id', 'wrong_format', 'changed_visual', 'bad_hash', 'new_owner']) {
+  test(`format replacement rejects ${invalid}`, async () => {
+    const { original, replacement } = formatPair(), pending = deferredPieceResponse();
+    const u = previewUiHarness({ send: async () => u.calls.length === 1 ? pieceHttp(original) : pending.promise });
+    u.mount(); u.host.start(); await pieceTick();
+    uiButton(u, '形式：宣言').props.onPress(); await pieceTick();
+    if (invalid === 'same_id') replacement.preview_id = original.preview_id;
+    if (invalid === 'changed_visual') {
+      replacement.visual_recipe.theme.theme_id = 'soft_paper';
+      replacement.visual_recipe_hash = hash(JSON.stringify(canonical(replacement.visual_recipe)));
+    }
+    if (invalid === 'bad_hash') replacement.piece_text_hash = '0'.repeat(64);
+    if (invalid === 'new_owner') {
+      u.host.props = { context: controllerInput({ expectedUserId: 'another-owner' }) };
+      u.host.componentDidUpdate();
+    }
+    pending.resolve(pieceHttp(invalid === 'wrong_format' ? { ...original, preview_id: replacement.preview_id } : replacement));
+    await pieceTick();
+    assert.equal(u.host.controller.getView().preview, null);
+    assert.equal(u.calls.length, 2);
+    u.host.componentWillUnmount();
+  });
+}
+
+test('explicitly returning from an unresolved format change keeps the previous draft without another request', async () => {
+  const { original } = formatPair();
+  const u = previewUiHarness({ send: async () => {
+    if (u.calls.length > 1) throw Error('response lost');
+    return pieceHttp(original);
+  } });
+  u.mount(); u.host.start(); await pieceTick();
+  const oldToken = u.host.controller.getView().visualToken;
+  uiButton(u, '形式：宣言').props.onPress(); await pieceTick();
+  const back = uiButton(u, '前のプレビューに戻る');
+  assert.equal(typeof back?.props.onPress, 'function');
+  back.props.onPress(); await pieceTick();
+  const view = u.host.controller.getView();
+  assert.equal(view.preview.preview_id, original.preview_id);
+  assert.notEqual(view.visualToken, oldToken);
+  assert.equal(u.calls.length, 2);
+  u.host.componentWillUnmount();
+});
+
+test('close during format creation reopens only the exact pending POST, fencing the old result', async () => {
+  const { original, replacement } = formatPair(), pending = deferredPieceResponse();
+  const u = previewUiHarness({ send: async () => u.calls.length === 1 ? pieceHttp(original)
+    : u.calls.length === 2 ? pending.promise : pieceHttp(replacement) });
+  u.mount(); u.host.start(); await pieceTick();
+  uiButton(u, '形式：宣言').props.onPress(); await pieceTick();
+  u.host.close();
+  pending.resolve(pieceHttp(replacement)); await pieceTick();
+  assert.equal(u.host.controller.getView().preview, null);
+  assert.equal(u.calls.length, 2);
+  u.host.start(); await pieceTick();
+  assert.equal(u.calls[2][1].headers['Idempotency-Key'], u.calls[1][1].headers['Idempotency-Key']);
+  assert.equal(u.calls[2][1].body, u.calls[1][1].body);
+  assert.equal(u.host.controller.getView().preview.preview_id, replacement.preview_id);
+  u.host.componentWillUnmount();
+});
+
+test('an old return control cannot restore a candidate from a different failed format request', async () => {
+  const { original } = formatPair();
+  const u = previewUiHarness({ send: async () => {
+    if (u.calls.length > 1) throw Error('response lost');
+    return pieceHttp(original);
+  } });
+  u.mount(); u.host.start(); await pieceTick();
+  uiButton(u, '形式：宣言').props.onPress(); await pieceTick();
+  const oldBack = uiButton(u, '前のプレビューに戻る');
+  oldBack.props.onPress();
+  uiButton(u, '形式：宣言').props.onPress(); await pieceTick();
+  oldBack.props.onPress();
+  assert.equal(u.host.controller.getView().phase, 'unavailable');
+  assert.equal(u.calls.length, 3);
+  u.host.componentWillUnmount();
+});
+
+test('a previous draft expires while format recovery is open and cannot revive after clock rollback', async () => {
+  const { original } = formatPair();
+  const u = previewUiHarness({ send: async () => {
+    if (u.calls.length > 1) throw Error('response lost');
+    return pieceHttp(original);
+  } });
+  u.mount(); u.host.start(); await pieceTick();
+  uiButton(u, '形式：宣言').props.onPress(); await pieceTick();
+  const back = uiButton(u, '前のプレビューに戻る');
+  assert.equal(typeof back?.props.onPress, 'function');
+  u.advance(1123);
+  u.advance(-1123);
+  back.props.onPress();
+  assert.equal(u.host.controller.getView().phase, 'unavailable');
+  assert.equal(uiButton(u, '前のプレビューに戻る'), undefined);
+  assert.equal(u.calls.length, 2);
+  u.host.componentWillUnmount();
+});
+
+test('format change fences the old save action and saves only the checked replacement', async () => {
+  const { original, replacement } = formatPair(), pending = deferredPieceResponse();
+  const u = previewUiHarness({ admitSave: true, send: async (url, opt) => {
+    if (url.endsWith('/save')) return pieceHttp(uiSaveReceipt({ piece_id: replacement.preview_id }));
+    return JSON.parse(opt.body).requested_format ? pending.promise : pieceHttp(original);
+  } });
+  u.host.props = { context: controllerInput({ saveEnabled: true }) };
+  u.mount(); u.host.start(); await pieceTick();
+  const controller = u.host.controller, oldToken = controller.getView().visualToken;
+  uiButton(u, '形式：宣言').props.onPress(); await pieceTick();
+  await controller.savePreview(visualIdentity(original), oldToken, 'old-explicit-save');
+  pending.resolve(pieceHttp(replacement)); await pieceTick();
+  await controller.savePreview(visualIdentity(original), oldToken, 'old-explicit-save');
+  assert.equal(u.calls.length, 2);
+  await startSyntheticSave(u);
+  assert.equal(u.calls.length, 3);
+  assert.deepEqual(JSON.parse(u.calls[2][1].body), {
+    preview_id: replacement.preview_id, expected_preview_revision: replacement.preview_revision,
+    piece_text_hash: replacement.piece_text_hash, content_payload_hash: replacement.content_payload_hash,
+    visual_recipe_hash: replacement.visual_recipe_hash, visibility_scope: 'private',
+  });
+  assert.equal(controller.getView().savedReceipt.piece_id, replacement.preview_id);
+  u.host.componentWillUnmount();
+});
+
+for (const expiredFrom of ['timer', 'server']) {
+  test(`expired preview can be rebuilt explicitly after ${expiredFrom} with one fresh request key`, async () => {
+    const original = response(), replacement = response(), pending = deferredPieceResponse();
+    replacement.preview_id = '30000000-0000-4000-8000-000000000004';
+    replacement.expires_at = '2026-10-08T10:00:10.000Z';
+    const u = previewUiHarness({ send: async () => {
+      if (u.calls.length > 1) return pending.promise;
+      return expiredFrom === 'timer' ? pieceHttp(original) :
+        { status: 409, json: async () => ({ code: 'PIECE_PREVIEW_EXPIRED' }) };
+    } });
+    u.mount(); u.host.start(); await pieceTick();
+    if (expiredFrom === 'timer') u.advance(1123);
+    assert.equal(u.calls.length, 1);
+    const rebuild = uiButton(u, '同じ記録から作り直す');
+    assert.equal(typeof rebuild?.props.onPress, 'function');
+    rebuild.props.onPress(); rebuild.props.onPress(); await pieceTick();
+    assert.equal(u.calls.length, 2);
+    assert.deepEqual(JSON.parse(u.calls[1][1].body), { ...request(),
+      visual_selection: expiredFrom === 'timer' ? visualSelection(original) : request().visual_selection });
+    assert.notEqual(u.calls[1][1].headers['Idempotency-Key'], u.calls[0][1].headers['Idempotency-Key']);
+    pending.resolve(pieceHttp(replacement)); await pieceTick();
+    assert.equal(u.host.controller.getView().preview.preview_id, replacement.preview_id);
+    rebuild.props.onPress(); await pieceTick();
+    assert.equal(u.calls.length, 2);
+    u.host.componentWillUnmount();
+  });
+}
+
+test('rebuilding an expired Premium format keeps its most recently applied image settings', async () => {
+  const { original, replacement } = formatPair();
+  const recolored = changedVisual(replacement, { theme_id: 'soft_paper' });
+  const fresh = { ...recolored, preview_id: '30000000-0000-4000-8000-000000000005',
+    preview_revision: 1, row_version: 1, expires_at: '2026-10-08T10:00:10.000Z' };
+  const u = previewUiHarness({ send: async () => pieceHttp([original, replacement, recolored, fresh][u.calls.length - 1]) });
+  u.mount(); u.host.start(); await pieceTick();
+  uiButton(u, '形式：宣言').props.onPress(); await pieceTick();
+  uiButton(u, 'テーマ：ソフトペーパー').props.onPress(); await pieceTick();
+  assert.equal(u.host.controller.getView().preview.visual_recipe.theme.theme_id, 'soft_paper');
+  u.advance(1123);
+  uiButton(u, '同じ記録から作り直す').props.onPress(); await pieceTick();
+  assert.deepEqual(JSON.parse(u.calls[3][1].body), { source_ref: request().source_ref, requested_format: 'declaration',
+    visual_selection: visualSelection(recolored) });
+  assert.equal(u.host.controller.getView().preview.preview_id, fresh.preview_id);
+  u.host.componentWillUnmount();
 });
