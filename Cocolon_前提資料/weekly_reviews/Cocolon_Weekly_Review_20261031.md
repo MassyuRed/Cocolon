@@ -3600,3 +3600,25 @@ localの既存composition moduleは66成功／失敗0、3.19秒。別の実facto
 - 最新候補のまとめビルド／TestFlightと本番配置・live DB適用・公開・実課金は今回範囲外。正式商品受入れ0/3を維持する。
 
 今回の新しいアプリbuild・TestFlight・本番配置・live DB更新・公開ON・GPU・課金・本人端末操作0。この記録を引継ぎ点とし、05:50 JST以降は新規作業を開始しない。指定の8時間枠と実際にtool実行・判断していた時間を区別する。連続実働8時間の計測・達成はしておらず、実働8時間完了と報告しない。
+
+
+<a id="piece-reference-particle-history-body-20261105"></a>
+## 172. 11/5 — 「を」前後の空白で切れる名詞参照と、履歴継続の本文受信失敗を修復
+
+開始点はCocolon PR30 `2f41c67ea97efcbda0b3d1ccdc26b5ebb347f1db`／API PR3 `66b58b89e7c0ee851079844dbcb12886c7988d33`。添付引継ぎ、作業姿勢のcurrent owner、全機能原本全文、恒久incident全文、全体設計01／01A/B/Cと対象の全file地図・Piece current map、最新weekly§171と対象現物を照合した。System Contextの索引未完了は既存どおり保持し、fresh原本を直接読んだ。全repositoryの全blobを意味読了したというclaimではない。PIECE_WORK_ALLOWED／LEVEL_2／OBSERVED_BLOCKER_MINIMAL_FIX。rootを修正・統合・反映ownerに固定し、本文とRNを別のread-only担当が独立確認した。今回の目的は通常入力の既存名詞参照と本人履歴の明示再試行を修復すること。新しい文法辞書・型・作者・機能・補助機構は追加しない。
+
+**既存の直接構文の名詞参照。** 「私は一人で静かに手帳を開く時間を大切にしたい。私はその時間が好きです。」は生成できたが、最後の「を」前後にSPACE／TAB／全角SPACEがあると、既存対象・述語のcaptureへ空白が入り、後続の「その時間」の参照解決が`evaluation_target_not_self_contained`で拒否された。`piece_source.py::_direct_transitive_expression`の既存regexで、この水平空白だけを両captureの外のseparatorへ移した。対象内の空白、否定・時制・modal、原文・scalar／UTF8根拠は保持する。構造化作者は従来のtopic後空白と同じ方針で区切りを整える。感嘆符の原文KEEPでは空白も原文どおり残す。改行・NBSP・空対象・重複助詞・未知述語を新たに受理しない。
+
+既存direct-topic moduleへ新24条件（正18／反6）を追加。同じ新testで開始sourceは18失敗／6成功、修正後のmodule全115は成功。新しい保存二欄6条件では平穏／自己理解×水平空白3種を、実CMEEと既存saved adapterで生成し、元JSON・名詞参照・本文・形式を照合。Engine／compiler／唯一作者を禁止した独立S7が成功し、対象改変を拒否した。初回の新保存testは参照語を展開すると私が誤って期待し6失敗したが、実際の既存作者は「その時間」を保持する。製品を期待へ変えず、新testの期待だけをその既存挙動へ訂正した。
+
+最終の関連6suiteは**3,249成功／既存1失敗／error0／skip0**、21.61秒。唯一の失敗は`test_existing_free_short_essay_minimum_is_not_relaxed_for_preferences`で、短文エッセイ下限の旧期待。開始API66b58b89の別checkoutでも同じ1失敗を確認し、製品・旧期待を今回変更しなかった。初回7失敗のうち別6はQ2_PGLITE_MODULE未設定であり、設定済みの隔離PostgreSQL WASMで既存SQL6条件は全成功。最終6suiteにはその6も含まれるため加算しない。旧期待変更0。別の既存HTTP／source-ref→隔離SQL保存・本人再読moduleは64成功／失敗・skip0、10.20秒。これは現sourceでの回帰確認であり、新64件の実装成果や本人DBの成功へ換算せず、関連6suiteへ加算しない。Pydantic非推奨警告1を保持。API製品1／既存test2を[96676d30](https://github.com/MassyuRed/mashos-api/commit/96676d309970e8c3bf7c5f27700692005147ced5)へ反映し、GitHubの親commit・変更3path・blobを確認、remote取得bytesと検証済み全3fileが一致した。
+
+**本人履歴の続きの本文受信。** 続きのfetchがheader受信まで成功しても、`response.json()`の通信失敗は既存の通信不確定catchの外だった。そのため取得済み20件とcursorが全消去された。履歴継続の200応答に限り、JSON解析以外の本文受信失敗を、本人・abortを再確認して既存の確認済み一覧／cursor保持へ接続した。明示操作で同じcursorを再試行し、旧ボタンは失効したまま。SyntaxError、不正payload、401／503等の既知HTTP拒否、本人変更・AbortError、詳細等の別操作は保持へ広げない。未検証の受信本文は採用しない。
+
+新5回帰を含む継続取得14条件は、開始13成功／1失敗、修正後全成功。関連3suiteは379成功。最終RN広域は**1,542成功／失敗0**。既存のMetro再bundle検査1件はビルドをまとめる指示に従い対象外で、アプリbuildなし。最初の広域実行はテスト用React／Babelの未配置とsparse checkout未取得のtutorial等で失敗した。既存test用package.jsonの固定5依存を配置し、未取得原本を同じrefから取得した後に解消。Metro自体の未配置による別1失敗は製品回帰や実bundle成功に数えず、最終はそのbuild検査を明示除外した。製品dependency／lockfile変更0。独立の本文受信Error、AbortError／AccountChangedError、本人確認待ちの切替、本文待ちの無効化、詳細GETの確認もblocking0。これらを広域件数へ加算しない。
+
+全体00・既存全file地図01A・Piece current mapは今回変化した責務と最新参照だけを置換。STRUCTURE_MAP_DELTA_NONE（既存parserのcapture境界と既存owner transportの通信不確定分類の修復、新owner／公開API／DTO／DB／renderer／workflowなし）。限定TECHNICAL_CREDIT。一般文章品質、Android通常作成／保存、実Photos／Share、backend receiptの本番適用、正式商品受入れ0/3は未完了。疑問詞を含む文の宣言適格は、埋め込み疑問を含む実際の意思との区別が必要であり、単純な語句scanを追加しない。一般品質の既存残差として保持する。
+
+Renderは既存workspaceのAPIがautoDeploy OFF、最新配置は11/2の2c259f0e／dep-dbk7l2uc6qcc73dp5d70でLiveとread-only照合。Supabaseはproject ACTIVE_HEALTHYと既存Piece table名だけを確認し、本人rowの取得・変更は0。今回の修正の配置済みとは扱わない。新しいnative build／TestFlight／本番配置／live DB更新／公開ON／GPU／課金／本人端末操作0。
+
+次はこの空白修復・処理済み検証を繰り返さず、保存原入力から単独で伝わる本文の別の実不具合、又は既に決定された未完了を扱う。実機に依存するAndroid／Photos／Shareはまとめビルド後の受入れへ保持する。外部データ変更や一般品質完成へ自動進行しない。

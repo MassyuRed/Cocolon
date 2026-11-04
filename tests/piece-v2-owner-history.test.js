@@ -501,7 +501,7 @@ function verifiedHistoryPage() {
   return { ...page(items), next_cursor: 'cursor_first' };
 }
 
-for (const failure of ['transport', 'closed 503']) {
+for (const failure of ['transport', 'body transport', 'closed 503']) {
   test(`history continuation keeps verified rows and repeats the exact cursor after ${failure}`, async () => {
     const first = verifiedHistoryPage();
     const second = {
@@ -516,6 +516,8 @@ for (const failure of ['transport', 'closed 503']) {
       if (!url.includes('cursor=')) return packet(first);
       if (++attempts === 1) {
         if (failure === 'transport') throw Error('private connection diagnostics');
+        if (failure === 'body transport') return { status: 200,
+          json: async () => { throw new TypeError('private body transport diagnostics'); } };
         return packet({ code: 'PIECE_TEMPORARILY_UNAVAILABLE' }, 503);
       }
       return packet(url.endsWith('cursor_first') ? second : page([record()]));
@@ -541,7 +543,8 @@ for (const failure of ['transport', 'closed 503']) {
   });
 }
 
-for (const failure of ['unknown 503', 'invalid page', 'out of order', 'duplicate', 'unauthorized', 'feature stop', 'session changed']) {
+for (const failure of ['unknown 503', 'invalid page', 'invalid JSON', 'unauthorized body loss',
+  'feature stop body loss', 'body session changed', 'out of order', 'duplicate', 'unauthorized', 'feature stop', 'session changed']) {
   test(`history continuation does not show earlier private rows after ${failure}`, async () => {
     const first = verifiedHistoryPage();
     let authenticated = true;
@@ -549,6 +552,15 @@ for (const failure of ['unknown 503', 'invalid page', 'out of order', 'duplicate
       if (!url.includes('cursor=')) return packet(first);
       if (failure === 'unknown 503') return packet({ code: 'provider private diagnostic' }, 503);
       if (failure === 'invalid page') return packet(page([record({ public_id: 'bad' })]));
+      if (failure === 'invalid JSON') return { status: 200,
+        json: async () => { throw new SyntaxError('private invalid JSON'); } };
+      if (failure === 'unauthorized body loss' || failure === 'feature stop body loss') return {
+        status: failure === 'unauthorized body loss' ? 401 : 503,
+        json: async () => { throw new TypeError('private body transport diagnostics'); },
+      };
+      if (failure === 'body session changed') return { status: 200, json: async () => {
+        authenticated = false; throw new TypeError('private body transport diagnostics');
+      } };
       if (failure === 'out of order') return packet(page([record({ saved_at: '2026-10-10T01:00:00.000001+00:00' })]));
       if (failure === 'duplicate') return packet(page([{ ...first.items[0], saved_at: '2026-10-10T00:00:00Z' }]));
       if (failure === 'unauthorized') return packet({ code: 'PIECE_AUTH_REQUIRED' }, 401);

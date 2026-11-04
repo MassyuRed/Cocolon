@@ -585,7 +585,20 @@ export async function requestPieceOwner(action, value = {}, options = {}) {
       throw ownerHistoryTransportUncertain();
     }
     checkAbort(signal);
-    const result = await response.json();
+    let result;
+    try {
+      result = await response.json();
+    } catch (error) {
+      checkAbort(signal);
+      // A successful continuation can lose its body after fetch resolves.
+      // Keep only the already verified page; malformed JSON and known HTTP
+      // failures still follow the ordinary closed-response path.
+      if (!continuation || response.status !== 200 || error instanceof PieceApiError ||
+          ['SyntaxError', 'AccountChangedError', 'AbortError'].includes(error?.name)) throw error;
+      await requireSession(expectedUserId);
+      checkAbort(signal);
+      throw ownerHistoryTransportUncertain();
+    }
     await requireSession(expectedUserId);
     checkAbort(signal);
     if (response.status !== 200) {
