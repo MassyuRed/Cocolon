@@ -63,7 +63,9 @@ export function createPieceCreateController(configuration = {}) {
   let saveCode = null;
   let savedReceipt = null;
   const recoverable = ['PIECE_TEMPORARILY_UNAVAILABLE', 'PIECE_PREVIEW_STALE',
-    'PIECE_CONFLICT', 'PIECE_VISUAL_SELECTION_NOT_ALLOWED'];
+    'PIECE_CONFLICT', 'PIECE_FORMAT_NOT_ELIGIBLE', 'PIECE_VISUAL_SELECTION_NOT_ALLOWED'];
+  const sourceRefreshCodes = ['PIECE_CONFLICT', 'PIECE_FORMAT_NOT_ELIGIBLE',
+    'PIECE_VISUAL_SELECTION_NOT_ALLOWED'];
   const retryableSave = code => code === 'PIECE_TEMPORARILY_UNAVAILABLE' || code === 'PIECE_QUOTA_EXHAUSTED';
 
   // Both sides are detached JSON snapshots made by the existing API reader.
@@ -168,8 +170,9 @@ export function createPieceCreateController(configuration = {}) {
       expirePiecePreview(state, clock()).code === 'PIECE_PREVIEW_EXPIRED';
     return Object.freeze({ ...view, visualUpdated: visualUpdated && view.phase === 'received',
       ...(expired && contextOperation ? { previewRestartToken: state.ticket } : {}),
-      ...(view.phase === 'unavailable' && state.code === 'PIECE_CONFLICT' &&
-        !active && !visualRecovery && contextOperation ? { sourceRefreshToken: state.ticket } : {}),
+      ...(view.phase === 'unavailable' && sourceRefreshCodes.includes(state.code) &&
+        !active && !visualRecovery && contextOperation
+        ? { sourceRefreshToken: state.ticket, sourceRefreshCode: state.code } : {}),
       ...(fallback?.phase === 'received' ? { formatRecoveryToken: state.ticket,
         formatRecoveryExpiresAtMs: fallback.expiresAtMs } : {}),
       visualToken: view.phase === 'received' ? state.ticket : null,
@@ -353,9 +356,11 @@ export function createPieceCreateController(configuration = {}) {
     if (featureDisabled) boundaryCode = 'PIECE_FEATURE_DISABLED';
     // A PATCH conflict/unknown result still needs the original POST/key for
     // recovery. If that explicit POST itself reports a definitive source
-    // conflict, use its existing fresh-source action instead of replaying it
-    // forever. No ambiguous mutation, save or cancellation is released here.
-    if (!mutation && state.code === 'PIECE_CONFLICT') visualRecovery = null;
+    // conflict or current plan/visual rejection, use its existing fresh-source
+    // action instead of replaying it forever. A format failure that can restore
+    // the previous candidate has already done so above. No ambiguous mutation,
+    // save or cancellation is released here.
+    if (!mutation && sourceRefreshCodes.includes(state.code)) visualRecovery = null;
     if (state.phase !== 'received' && !recoverable.includes(state.code)) visualRecovery = null;
     notify();
     // Notify only for the still-current settled intent, never for an obsolete

@@ -3381,3 +3381,29 @@ MashからPiece残件の継続指示。開始点はRN `3bed3f5f8bd3708efcf4146fa
 API製品1／既存test1の反映は [2014de24](https://github.com/MassyuRed/mashos-api/commit/2014de2478b5d9325df9e0ec365d97789f0c55be)。RN製品1／既存test2と前提資料4を同じ変更単位で反映する。全体現在地・01A・Piece current mapは既存責務だけ置換し、履歴は本節へ記載。検証原本名は `Cocolon_Piece_20261104_paused_reservation_share_dispatch_validation.zip`。最終／開始sourceと中間案を区別したXML・log、保存120条件、独立S7／共有境界比較、source／test hashとGitHub読戻しを保存し、Git管理source・取得した依存本体を複製しない。
 
 差分はRN製品1・既存test2、API製品1・既存test1、前提資料4の計9既存file、新規repo file0。STRUCTURE_MAP_DELTA_NONE（既存literal fallbackの有限留保と共有dispatch境界の修復、新owner・意味型・公開API／DTO・DB・renderer・依存・workflow変更なし）。限定TECHNICAL_CREDIT。正式商品受入れ0/3、build・配布・本番配置・live DB・GPU・本人端末操作0。一般日本語品質、Android通常作成／保存、Photos／Share実機確認は残る。
+
+
+<a id="piece-topic-terminal-recovery-20261104"></a>
+## 163. 11/4 — 本人topic内の感嘆符と、プラン変更後の作成復旧を修復
+
+MashからPiece残件の継続指示。開始点はRN `cb43ac6d76fb6ed29e8e40bc92b6cbad8758dcee`／API `2014de2478b5d9325df9e0ec365d97789f0c55be`。全体現在地・作業姿勢・恒久incident、全体設計／全file地図、最新weekly§162、Piece currentと対象実物を確認した。PIECE_WORK_ALLOWED／LEVEL_2／OBSERVED_BLOCKER_MINIMAL_FIX。rootが統合・反映owner、本文と作成復旧の修正を独立reviewへ渡し、両方blocking0。ビルドは後でまとめる指示を維持する。
+
+**本人topic内の終端照合。** 「私は母が戻るなら、話したい。」は作成できるが、終端を「！」「!」へ替えると、既存topicの読取り・作者・独立本文検査が繋がらず拒否されたり、原文KEEPとしてquoteへ誤昇格したりする枝があった。本人topic内に書かれた既存operator字面＋直後の読点と既存wish末尾だけを、句点と同じUnicode scalar 1文字分の終端viewへ接続した。原語・本人・肯否・時点・元記号とscalar／UTF8根拠を保持し、短文エッセイだけへ制約する。typed scope・新しい条件命題・語彙・意味型は追加しない。単純literal感嘆符のKEEPは維持する。同じtopicの最終operator読点後にも既存bare集合を適用し、句点・感嘆符とも空述語を拒否する。
+
+「私はさよなら、話したい」の語内「なら＋読点」も既存の表面上の境界に一致する。句点版は開始sourceで既に同じtopic duty・短文エッセイとして受理されており、今回の感嘆符版もその境界に揃う。この有限parserの限界を、条件の意味証明や一般言語理解へ換算しない。単語の禁止リストや新しい述語readerは追加しない。
+
+既存対象moduleは新18条件（正8／反10）を含む201件。同じ最終testを開始sourceへ固定すると190成功／11失敗、最終201成功で、保護した旧期待の変更0。保存原入力60条件は生成36→48（新14受理、旧空述語2を拒否）。旧成功のうち6件は本文／offerが変化し、残り28件は全出力不変。source JSONは全60件不変、最終生成48はS7とscalar／UTF8根拠照合に成功した。独立の最終40条件と改変80拒否を確認した。これらを広域件数へ足さない。
+
+旧artifact6件を、現sourceから再導出したmeaning／planへ固定して非生成で再審査し、S7は全受理した。うち旧quote offerを持つ2件は現形式検査で拒否された。旧serialized assembly自体の復元試験ではない。保存owner／詳細／exportと発行済みpreviewの読取については、既存3path不変と非生成call-chainのread-only照合のみで、実DB・保存rowの再読0。未発行の旧artifactを現reviewerで再審査する場合の制約と、既に保存・発行された本文の読取りを区別する。
+
+**プラン変更後の作成復旧。** Premiumで形式を選び、focus等の休止で前候補の本文を失った後、現在のPlus／Free権限で同じPOSTを確認するとFORMAT_NOT_ELIGIBLEが確定する。画像変更後の元POSTも現在プランでVISUAL_SELECTION_NOT_ALLOWEDとなり得る。実serviceの合成saved／load seamで4条件を確認した。従来は復旧ボタンがなく、閉じて作成を押しても同じ形式・キーをPOSTして拒否を繰り返した。
+
+前候補へ戻れない確定POSTの形式／画像設定拒否だけを、既存の「保存入力を確認し直す」へ接続した。GETと、新しいキー・既定設定によるPOSTは別の明示操作とする。前候補に戻れる既存分岐は維持する。PATCH自身の拒否・結果不明・保存／取消は元の要求とキーを保持し、旧token・本人変更・GET422後の確定拒否を越えない。休止・復帰で自動通信しない。
+
+新8回帰は同じ最終testで開始製品0成功／8失敗、最終8成功。作成・保存3suiteは303成功。旧FORMAT拒否の期待1条件を、通常作成の復活禁止・旧token失効の検査を保ったまま明示GET分岐へ更新した。独立の実host4条件も成功。RN広域は1,514成功／失敗0、既存Metro再bundle検査は対象外でアプリbuildなし。最終API広域は 10,909成功／既存161失敗／error0・native17除外（開始10,891成功／161失敗と失敗identity集合が同一、新規失敗0）。
+
+Photos／Capture側の新しいread-only調査では確定不具合0、製品／test編集0。固定CameraRoll 7.10.2のJS wrapperはnative dispatch前にawaitせず、同じ同期処理内で開始することと直前失効時の拒否を、新2診断で確認した。capture・PNG・receiptの非同期処理も既存照合へ戻る経路を読取り、実OS確認へ広げない。前回のexport278／RN1506等は再実行・再加算しない。
+
+API製品3／既存test1の反映は [718fcd69](https://github.com/MassyuRed/mashos-api/commit/718fcd6923d72ac47e70c4ace195562dadbc8941)。RN製品2／既存test1と前提資料4を同じ変更単位で反映する。全体現在地・01A・Piece current mapは責務行と最新参照だけを置換し、履歴は本節へ記載。検証原本名は `Cocolon_Piece_20261104_topic_terminal_recovery_validation.zip`。開始／最終の検証、保存60条件、独立S7／形式比較、実service4条件、実host復旧とsource／test hash・GitHub読戻しを保存し、Git管理source・取得した依存本体を複製しない。
+
+差分はAPI製品3・既存test1、RN製品2・既存test1、前提資料4の計11既存file、新規repo file0。STRUCTURE_MAP_DELTA_NONE（既存topicの終端照合と作者・独立検査、既存作成hostの明示復旧の修復、新owner・公開API／DTO・DB・renderer・依存・workflow変更なし）。限定TECHNICAL_CREDIT。正式商品受入れ0/3、build・配布・本番配置・live DB・GPU・本人端末操作0。一般日本語品質、Android通常作成／保存、Photos／Share実機確認は残る。

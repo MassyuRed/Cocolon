@@ -338,7 +338,7 @@ export default class InputPieceActionArea extends React.Component {
       const view = this.controller.getView();
       if (['cancel', 'save'].includes(view.retryKind)) return false;
       return view.sourceRefreshToken === token || this.sourcePhase === 'unavailable' &&
-        this.sourceCode === 'PIECE_CONFLICT' && this.sourceFailureToken === token;
+        this.sourceFailureToken === token;
     };
     if (!current()) return;
     const stamp = this.boundStamp, runtime = this.boundRuntime;
@@ -349,8 +349,8 @@ export default class InputPieceActionArea extends React.Component {
       return;
     }
     if (!current()) return;
-    // A definitive source conflict permits an explicit new source read. An
-    // unknown POST, PATCH, save or cancellation never reaches this action.
+    // A definitive POST/source rejection permits an explicit new source read.
+    // An unknown POST, PATCH, save or cancellation never reaches this action.
     // Drop the obsolete binding before reading; a different source_ref must
     // never be submitted under the original preview's idempotency key.
     this.controller.setContext({ enabled: false });
@@ -537,15 +537,15 @@ export default class InputPieceActionArea extends React.Component {
   close() {
     if (!this.mounted) return;
     const stamp = this.boundStamp, runtime = this.boundRuntime;
-    const conflict = this.savedMode ? this.controller?.getView().sourceRefreshToken : null;
+    const rejected = this.savedMode ? this.controller?.getView() : null;
     if (this.sourceAttempt) this.clearSource();
     this.controller?.close();
-    if (conflict && this.isCurrent() && this.boundStamp === stamp && this.boundRuntime === runtime) {
-      // Closing a definitive conflict must not turn the stale request back
-      // into an ordinary create button using its obsolete source/key.
+    if (rejected?.sourceRefreshToken && this.isCurrent() && this.boundStamp === stamp && this.boundRuntime === runtime) {
+      // Closing a definitive rejection must not turn the stale request back
+      // into an ordinary create button using its obsolete source/choices/key.
       this.sourcePhase = 'unavailable';
-      this.sourceCode = 'PIECE_CONFLICT';
-      this.sourceFailureToken = conflict;
+      this.sourceCode = rejected.sourceRefreshCode;
+      this.sourceFailureToken = rejected.sourceRefreshToken;
     }
     this.setState({ open: false });
   }
@@ -571,7 +571,7 @@ export default class InputPieceActionArea extends React.Component {
       const unavailable = this.sourcePhase === 'unavailable';
       const canRead = this.sourcePhase === 'idle' ||
         (unavailable && this.sourceCode === 'PIECE_TEMPORARILY_UNAVAILABLE');
-      const refreshToken = unavailable && this.sourceCode === 'PIECE_CONFLICT' ? this.sourceFailureToken : null;
+      const refreshToken = unavailable ? this.sourceFailureToken : null;
       return element(View, { testID: 'piece-saved-input-source-area' },
         this.sourcePhase === 'loading' ? element(Text, { accessibilityLiveRegion: 'polite' },
           this.props.creationMode ? 'ピースを準備しています。' : '保存入力を確認しています。') : null,
