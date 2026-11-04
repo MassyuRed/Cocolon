@@ -3220,3 +3220,26 @@ APIは[663a0465](https://github.com/MassyuRed/mashos-api/commit/663a046580e3f382
 
 差分は製品3・既存test1・前提資料4の計8file、新規repo file0。全体現在地・Piece current map・01Aは関連責務の置換更新、本節を履歴とする。STRUCTURE_MAP_DELTA_NONE（既存構文のseparatorと唯一作者／独立検査の整合修復、新owner・公開API／DTO・DB・renderer・依存・workflow変更なし）。primary outcomeは限定TECHNICAL_CREDIT。ビルド・配布・本番配置・DB適用・GPU・本人端末操作は0。一般日本語品質、Android通常作成・保存、Photos／Shareの実機確認と正式商品受入れは残る。
 
+
+
+<a id="piece-written-feeling-self-insight-20261104"></a>
+## 155. 11/4 — 自己理解で明示感情文だけが作成拒否となる不具合を修復
+
+MashのPiece残件継続指示で§154を引き継いだ。開始点はRN `4ae6643265045d5a293eda0392620b6b79839271`／API `663a046580e3f38227f229ca7b9030f2381d8c3f`。全機能現在地・恒久incidentを全文、作業姿勢とルール、全体設計と全file地図、Piece current・最新weeklyと対象現物を確認した。最新cache未生成のSystem Contextは既定のfresh原本読取を使用する。OBSERVED_BLOCKER_MINIMAL_FIX、既存設計内のLEVEL_2／Rule18 §0A・§11.3。実装・反映ownerは華恋、別担当は読取・再現・独立レビューのみ。ビルドは後でまとめる方針を維持する。
+
+**実害と原因。** 「私は不安を感じています。」は通常の感情選択では本文KEEPで作成できても、自己理解ではexpression_meaning_not_admittedになっていた。旧sourceの実ASGI＋隔離SQLでも、同じ原文が平穏200／自己理解422、保存枠消費は両方0と確認した。自己理解は感情を追加するselectionではないため、既存の選択bindingは早期returnする一方、完成文判定が本人の明示感情文を共用していなかった。選択modeに合わせて本人の本文を拒否していた接続漏れを直す。
+
+**最小修復。** 既存piece_source内で、明示一人称6表記・任意の既存degree・既存の感情labelの読取をprivate matcherへ共用した。metadataは旧「感じています＋句点」の現在肯定1形だけに固定する。本文保持は通常の感情modeで既にKEEPできる同じ「感じ」の丁寧8表記（ています／ていません／ていました／ていませんでした／ます／ません／ました／ませんでした）と単一。／！／!を、保存済み有効mode内の既存完成文判定へ接続する。自己理解でも全原文をKEEPし、否定・過去・強さ・主語・欄・段落・重複を保ち、宣言適格は追加しない。
+
+選択された感情をvisibleな一文へ戻さず、否定／過去／感嘆符の本文を現在の選択感情へbindしない。strength不一致・重複や別labelは従来のprivate contextを使う。無selection・未保存source、他主体・引用／伝聞・条件・問い、無句点・未完・欄／行の補完・未指定plain形を新たに受理しない。全般的な文末許可や一般copulaへ緩めず、新しい感情語彙・意味型・作者・推定・公開契約を追加しない。
+
+既存saved-original testへ343条件を追加し、最終関連442条件（新343＋既存written99）が成功。同じ最終テストを開始sourceへ固定した比較は292失敗／150成功。5label・8形・3終端・2field、明示一人称／degree／水平間隔、選択binding、hardnegative・無mode、段落／重複／既存留保・完成actionを確認した。既存の期待値・保護条件は変更しない。独立915入力は旧生成306→新557で、新251だけが自己理解の対象形式240・有効metadata9・既存構成2だった。旧生成306の本文・plan・適格性は不変、拒否358も維持。選択binding／source meaningの保存状態比較は915入力で差分0（拒否を含む比較であり、全915の意味採用成立とはしない）。新251は全件KEEP・宣言false、原文・保存JSON・scalar／UTF8を保持し、独立本文検査成功。無selection／hardnegativeの新受理と、否定／過去を現在選択へ誤bindingした例は0。最終2source差分の未解決blocking指摘は0。合成条件の局所結果で、一般日本語品質・商品受入れの成功率ではない。
+
+新しい8例×3plan×平穏／自己理解の実ASGI＋隔離PGlite48条件、計204通信が成功。正常36はpreview・同key再読・save・同keysave再試行・本人GETまで本文・3hash・recipe・renderer一致、保存枠消費各1回。拒否12は同key2回とも422／閉じたPIECE_SOURCE_NOT_ELIGIBLEで、本人別Piece全row・枠消費・月lockは前後同一、候補発行／審査／prepare後provider追加呼出し0。prepare自体のEmlis provider1回を追加0へ混同しない。旧source比較2通信は別記録で最終204へ加算しない。Auth／providerは合成で、live SQL・native描画・実端末の確認ではない。
+
+最終API広域104fileは10,205成功・既存161失敗・error0・native17除外。§154の失敗identity集合と完全一致し、新規失敗0。source／test最終bytesの不変を確認した。途中411等・関連442・独立915・ASGI48・旧source比較2も広域へ上乗せしない。RN製品／testは今回変更せず、過去のRN成功件数を今回へ流用しない。保存の結果不明に稼働設定再読・一時停止・API定義の確定拒否を重ねた別16条件も調査したが新規bugは再現せず、仮説だけの製品修正は0。これは実controller＋合成HTTPで、各原因を新しくDBで発生させた試験ではない。
+
+APIは[5d6c834e](https://github.com/MassyuRed/mashos-api/commit/5d6c834e34b6998d05aa963d5141d4f643c99346)へ反映。全3fileの全文・blob・変更集合・親commitを読戻して一致確認。検証原本は[Cocolon_Piece_20261104_written_feeling_validation.zip](https://chatgpt.com/library?file_id=libfile_21a674447bd0819185f8d266954a09e4&account_id=personal)（75member、642,202bytes、SHA256 `6ae9bd53b477798e6ca36c8af425aed89f907d769559c639e40b0be473bdb9aa`）。最終広域XMLと旧失敗集合、同一新test前後、独立比較・全wireと再現runner、source/test hash・GitHub読戻しを保存し、GitHub管理の製品sourceは複製しない。
+
+差分は製品2・既存test1・前提資料4の計7file、新規repo file0。全体現在地・Piece current map・01Aは関連責務の置換更新、本節を履歴とする。STRUCTURE_MAP_DELTA_NONE（既存の選択bindingと本文保持の共用・接続修復、新owner・公開API／DTO・DB・renderer・依存・workflow変更なし）。primary outcomeは限定TECHNICAL_CREDIT。ビルド・配布・本番配置・DB適用・GPU・本人端末操作は0。一般日本語品質、Android通常作成・保存、Photos／Shareの実機確認と正式商品受入れは残る。
+
