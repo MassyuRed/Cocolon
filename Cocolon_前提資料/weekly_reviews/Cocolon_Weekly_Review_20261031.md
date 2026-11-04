@@ -3263,3 +3263,23 @@ APIは[622e16bd](https://github.com/MassyuRed/mashos-api/commit/622e16bd0b84798b
 
 差分は製品3・既存test3・前提資料4の計10file、新規repo file0。全体現在地・Piece current map・01Aは関連する責務だけを置換更新し、本節を履歴とする。STRUCTURE_MAP_DELTA_NONE（既存identity拒否・任意省略・停止helperの接続修復、新owner・意味型・作者・公開契約・DB・renderer・依存・workflow変更なし）。primary outcomeは限定TECHNICAL_CREDIT。ビルド・配布・本番配置・DB適用・GPU・本人端末操作は0。一般日本語品質、Android通常作成・保存への採用、Photos／Shareの実機確認と正式商品受入れは残る。
 
+
+<a id="piece-finite-name-value-particles-20261104"></a>
+## 157. 11/4 — 名前の「が／も」と有限の命名assignmentで役割へ誤置換する不具合を修復
+
+MashのPiece残件継続指示で§156を引き継いだ。開始点はRN `ece5a790a31c4d515a5f15a0a6363d0a4535bc3f`／API `622e16bd0b84798b8c00b6303bc5a1d93211127e`。前回までの全体現在地・全体設計／全file地図・作業姿勢とルールの原本読取を引き継ぎ、fresh head、同一原本と関連差分、最新weekly・Piece current・対象現物を確認。恒久incidentも全文再読した。System Contextの最新cache未生成は既定の原本直接読取を維持し、索引再構築を前提へ加えない。分類はOBSERVED_BLOCKER_MINIMAL_FIX、LEVEL_2／Rule18 §0A・§11.3。実装・反映は華恋が単一owner、別担当は読取・再現・独立reviewのみ。
+
+**実害。** 「名前が友人の田中さんです。」「名前も友人の田中さんです。」がそれぞれ「名前が友人です。」「名前も友人です。」となり、「私は名前を友人の田中さんにしたい。」も「私は、名前を友人にしたい。」へ変わっていた。名前そのものを値として述べているが、既存のidentity拒否は「は」labelしか照合していなかった。
+
+**修復範囲。** 同じ既存5labelの「が／も」は、名前直後に書かれた有限copulaと単一の句点／感嘆符を確認した場合だけ、同じidentity-material拒否へつなぐ。「を」は直後の「に＋有限のする／願望／否定・過去形」と同じ終端を確認する。完全な役割phraseとinlineの名前付き所有者、既に別文で束縛された裸名にも適用する。既存「は」のregex・幅・句読点・anchorとsuffix無条件の動作は維持する。label・名前・役割語彙、正の文法・作者・意味型は追加せず、「名前が友人に伝わる」「友人に名前を聞く／伝える／知らせる／相談する」、名付けの会話topicは保持する。「が／も」を無条件に追加して通常recipientを拒否する変更は採用しない。これは負の有限照合で、である／であった、任意の命名活用、報告・従属等の一般identity理解の完成ではない。
+
+既存script-role testへ新184条件を追加し、同file最終808成功・失敗0。同じ最終testを開始sourceへ固定した比較は660成功・148失敗。148を全て旧誤生成や一般品質率へ換算しない。既存の期待値は変更しない。独立676入力は旧生成552→新102、変化450は全てidentity拒否だけだった。有限copula300・assignment150、形別では役割付き224・inline所有者6・既束縛裸名220。残る226結果は不変で、旧生成102の意味・plan・artifactの全hashも一致した。保存JSON／原文hashは全676で不変、scalar／UTF8根拠誤り0、正常recipient／name-topicの旧生成42も保持。旧ひらがな裸名等の境界拒否122は修復数へ含めない。最終2fileの独立差分reviewに未解決blocking指摘0。
+
+新8例×3plan×平穏／自己理解の実ASGI＋隔離PGlite48条件・計168通信が成功。正常24はpreview・同key再読・save・同save key再読・本人GETまで本文・3hash・recipe・rendererが一致し、枠消費各1回。意味破損を止める拒否24は同key2回とも閉じた422、本人別records／枠消費／月lockは前後同一、候補発行・審査・prepare後provider追加呼出し0。prepare自体の合成provider1回を追加0と混同しない。Auth／providerは合成で、live SQLや本人端末の成功ではない。
+
+最終API広域104fileは10,609成功・既存161失敗・error0・native17除外。§156の失敗identity集合と完全一致、新規失敗0。source／test2file最終bytes不変を確認した。対象808・新184・独立676・ASGI48や途中310比較を広域へ上乗せしない。並行した新288の連続主体／role置換組合せとAPI lifecycle調査では新実害はなく、仮説だけの修正は0。Unicode8原文／3段落を実作者・独立reviewから実JS Cardへ渡した24条件では8秒境界の失効・late artifact解放・source期限を確認、正常8条件はhost/controllerの初期保存へ同じ本文・内容hashで1回だけ接続した。native計測／描画・HTTPは合成であり、字形・描画時間・OS出力の実機確認へ数えない。同じCardへ強制的に再bindしたscratchの失効は現UIの到達性を確認できず、製品bugへ昇格していない。RN製品／testは変更0。
+
+APIは[fd7b487d](https://github.com/MassyuRed/mashos-api/commit/fd7b487dfdfe6dd79475d9b0a78b9cf52f09767e)へ反映し、全2fileの全文・blob・変更集合・親commitを読戻し一致確認。[検証原本ZIP](https://chatgpt.com/library?file_id=libfile_777c64e805e88191ae9fbdf10c74131d&account_id=personal)は `Cocolon_Piece_20261104_finite_name_value_validation.zip`（73member、689,895bytes、SHA256 `073cba7b36ef3726cb346f4ec1df1e8f30c0f1f97c1e6c7cf5d3df94834d341b`）。最終XML・旧失敗集合・全wire・前後比較／再現runner・source/test hash・GitHub読戻しを保存し、GitHub管理の製品sourceとcompiled cacheは複製しない。初期のscratch import誤りは固定preimageの実importと全676比較で置き換え、初期結果を最終成功へ加算しない。
+
+差分は製品1・既存test1・前提資料4の計6file、新規repo file0。全体現在地・Piece map・01Aは責務を置換更新し、本節を履歴とする。STRUCTURE_MAP_DELTA_NONE（既存identity拒否の有限境界修復、新owner・公開API／DTO・DB・renderer・依存・workflow変更なし）。primary outcomeは限定TECHNICAL_CREDIT。ビルド・配布・本番配置・DB適用・GPU・本人端末操作0。一般日本語品質、Android通常作成・保存、Photos／Shareの実機確認と正式商品受入れは残る。
+
