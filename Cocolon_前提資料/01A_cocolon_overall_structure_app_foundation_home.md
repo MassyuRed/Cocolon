@@ -1,3 +1,5 @@
+> 11/4のPiece作成・本文・書き出し候補は、末尾の[ファイル差分](#piece-format-language-export-files-20261104)と週次レビュー§141を参照。
+
 > **11/1・7101本人確認済み（第9回§43）：** RN7464f858のiOS #71/run41283646380/job124780456306は署名Archive・写真目的文検査・IPA・TestFlight Uploadの全工程success。Mashが7101を反映し、今回依頼した修正の完了を確認した。起動待ち、Home全体行動削除、Ranking撤去、設定以外のガイド同期、新PieceのEmlisロゴを含む。こころ天気は今/日週月/履歴/未読/通知/tutorialを従来どおり維持。API3407402/dep-dbjebcflk1mc7390mnr0は07:11:03 UTC Live、health/bootstrap200・private5ON/public3OFF。API製品同一blobのd43cabcd native PostgreSQL CI41283815884は全step成功。RNの旧V4 metrics19失敗とlegacy canvas13reportは残る。依頼UIの本人確認を、全製品の品質/正式商品受入れへ広げない。GPU再起動0。
 
 > 11/1最新はweekly第9回§39。6801の応答UIをMashが確認。Piece preview422と時計への重なりを受領し、既存modalの安全領域/案内文を修復。候補/配布/本人確認を区別する。
@@ -6073,3 +6075,16 @@ API overlay2source＋新testは保存原本へ同梱し、通常repoへ採用し
 ## 11/3・分析研究草案のファイル地図（§138）
 
 同trial内へ material_v5_aligned16_trial.py（未compile/未CPU検証の実行草案）と material_v5_aligned16_plan.json（元90source SHA・選択16・6引用差分・実行上限・実績0・再開条件）を追加。元90原本/既存helper/意味gate/唯一作者を継承し、通常ownerへ接続しない。操作環境切断によりGPUは未開始。[source確認/停止点/再開順](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v5-aligned16-resume-20261103)。STRUCTURE_MAP_DELTA_NONE、商品API/DB/RN/配置変更0。§137の既存原本保全と不採用を維持し、再接続後は新草案のCPUprepareから進める。
+
+<a id="piece-format-language-export-files-20261104"></a>
+## 11/4 — Piece作成・本文・書き出しのファイル差分（§141）
+
+| 追加ファイル | 責務と接続 |
+|---|---|
+| Cocolon `features/piece/pieceExportPngProfile.js` | `pieceExport.js` が対応iOSで呼ぶPNGメタデータ検査。寸法と明示sRGBを照合する。 |
+| Cocolon `tests/piece-v2-export-png-profile.test.js` | 正常、異なる寸法・色設定、切り詰めを検証する。 |
+| mashos-api `ai/services/ai_inference/piece_v2_export_receipt_service.py` | 本人専用の書き出し記録POSTから、本文を含まない要求を検証し、記録のRPCへ渡す。 |
+| mashos-api `supabase/migrations/20261104002458_piece_v2_export_receipt.sql` | 既存の記録テーブルにハッシュ2欄とservice-role専用RPCを追加し、本人・保存版と同じキーの再送を照合する。 |
+| mashos-api `ai/tests/piece_v2/test_b13b_piece_v2_export_receipt.py`、`ai/tests/helpers/piece_export_receipt_postgres.cjs` | 隔離DBで書き出し記録の権限、版の不一致、応答消失後の再送を検証する。 |
+
+作成モーダル・本人履歴・CMEE本文判定の既存ファイルと新経路の接続は[Piece現行構造](current_structure/02_piece_current_structure.md#piece-format-language-export-20261104)を参照。本番配置・DB移行前の候補。
