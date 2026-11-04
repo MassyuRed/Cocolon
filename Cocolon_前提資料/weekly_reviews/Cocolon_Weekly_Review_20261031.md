@@ -3283,3 +3283,23 @@ APIは[fd7b487d](https://github.com/MassyuRed/mashos-api/commit/fd7b487dfdfe6dd7
 
 差分は製品1・既存test1・前提資料4の計6file、新規repo file0。全体現在地・Piece map・01Aは責務を置換更新し、本節を履歴とする。STRUCTURE_MAP_DELTA_NONE（既存identity拒否の有限境界修復、新owner・公開API／DTO・DB・renderer・依存・workflow変更なし）。primary outcomeは限定TECHNICAL_CREDIT。ビルド・配布・本番配置・DB適用・GPU・本人端末操作0。一般日本語品質、Android通常作成・保存、Photos／Shareの実機確認と正式商品受入れは残る。
 
+
+<a id="piece-context-reentry-topic-format-20261104"></a>
+## 158. 11/4 — 保存中断中のcontext巻戻しと、自己topic内の条件を形式へ誤昇格する接続を修復
+
+MashのPiece残件継続指示で§157を引き継いだ。開始点はRN `a61612cfa36c0328d09b141c3f334a3685dc0d2d`／API `fd7b487dfdfe6dd79475d9b0a78b9cf52f09767e`。既読の全体現在地・全体設計／全file地図・作業姿勢とルールを引き継ぎ、fresh headと同一原本・関連差分、最新weekly・Piece current・形式正本と対象現物を確認。System Contextは既定の原本直接読取を継続し、索引再構築を追加前提にしない。OBSERVED_BLOCKER_MINIMAL_FIX、LEVEL_2／Rule18 §0A・§11.3。実装・GitHub反映は華恋が単一owner、別担当は読取・再現・独立reviewのみ。buildは後でまとめる方針を維持する。
+
+**保存中断中のcontext再入。** Aの保存HTTP中に同じcontextでsaveEnabledをfalseにすると、冒頭のclearAttemptが同期abortを通知した後も外側setContextが旧Aを書き直していた。abort observerで別owner・source・無効化を選んでも戻され、後続の明示startが旧本人・入力・keyのpreview POSTを送る3条件を再現。invalid／conflictの同類も確認した。早いclearを同一context維持の枝へ移し、それ以外は既存の各境界を書き終えてからabortする。saveEnabled自体は先に失効し、同一contextだけ元の保存要求／keyを保持する。同期callbackの新状態を外側で戻さず、旧ACK・自動POST・preview本文復活を防ぐ。新8条件を含むRN target91成功、同じ最終testのcontroller読取だけを親preimageへ固定した比較は86成功／5失敗。独立9条件はbefore4成功→final9成功で、owner/source/disable/invalid/conflict/dispose、同contextのclose/retry、保存body/keyと旧ACK破棄・本人復帰後の自動送信0を確認。history/exportの別10条件は新実害なし。restoreSaveRecovery等の到達性未確定な仮説は変更対象へ広げない。
+
+**型付きscopeがない既存自己topicの形式。** 「余裕があるなら、私は陶芸を選びたい。」は既にshort_essayだけだが、「私は余裕があるなら、陶芸を選びたい。」は条件を本文に持ったままquote／declarationまでofferしていた。既存SOURCE_FIRST_PERSON_TOPIC duty内の既存条件／理由／譲歩operator＋直後の読点だけを有限検出し、同じshort_essay制約へ閉じる。意味型・scope・正のsource文法・作者や本文は追加せず、新しい受理／宣言trueも作らない。KEEP・無読点・読点前gap・未受理roundtripは維持する。typed target内の「迷い／分からない／とき」による宣言の偽陰性は残件。target全spanをscanから外す案は、先頭へ取り込まれた「たぶん／おそらく」の曖昧な留保まで宣言trueへ上げるため採用しなかった。
+
+最初の実ASGIで、華恋が形式一覧のauthor-free検査への接続を漏らし、新offerを旧quote判定で拒否する24条件を検出した。公開反映前に同じpureなsource/format判定を既存safety reviewerへ接続し、正しいofferは通し、余分なquote／declarationは拒否する。作者・Engineの再実行を例外にした新15条件を追加した。API targetは新164を含む198成功、同じ最終testを親source/reviewerへ固定した比較は53成功／145失敗。既存の期待値は変更していない。独立1100条件は意味・duty不変、残る生成664の本文／hash不変、review・証拠誤り0。764→664の新拒否100は明示quote62／declaration38だけ（既存の不完全premise control4を含む）。default生成可否／本文は不変、形式変更124はPlus62＋Premium62、Free0。plan hashは190条件で変わるため不変と報告しない。追加の独立offer検査10は正しい4成功／不適切な追加6拒否、意味／plan／artifactの非変異を確認。最終差分に未解決blocking指摘0。
+
+最終RN全体は1,482成功・失敗0。既存Metro再bundle検査1件を対象外とし、アプリbuildは行っていない。最終API広域104fileは10,773成功・既存161失敗・error0・native17除外。§157の失敗identity集合と完全一致、新規失敗0。最終の製品／test5file bytes不変を確認。途中のAPI183／広域10,758や、対象・独立・wire件数を最終広域へ加算しない。
+
+実ASGI＋隔離PGliteの最終60条件・246通信が成功。通常42はpreview・同key再読・save・同save key再読・本人GETまで本文・3hash・recipe・renderer一致、枠消費各1回。既存未対応source6条件と、追加の明示quote／declaration12条件は同keyで各2回POSTし、それぞれ閉じたSOURCE_NOT_ELIGIBLE／FORMAT_NOT_ELIGIBLEの422。本人別records／枠消費／月lockは前後同一、候補発行・審査・prepare後provider追加呼出し0。prepareの合成Emlis provider1回を追加0へ混同しない。Auth／providerは合成で、live SQL・native描画・本人端末の確認ではない。検証fixtureのmodule境界指定漏れによる初期errorは単一moduleへ集約して解消し、最終60成功だけを採用した。初期失敗と統合漏れを製品配布成功へ変換しない。
+
+APIは[3ac9dc97](https://github.com/MassyuRed/mashos-api/commit/3ac9dc97bd72c1bbc7a442e9de8c9b6da332ec79)へ反映し、全3fileの全文・blob・変更集合・親commitの読戻しが一致。[検証原本ZIP](https://chatgpt.com/library?file_id=libfile_f98efa86bf508191b7d9a2d0751a64c4&account_id=personal)は `Cocolon_Piece_20261104_context_scope_validation.zip`（101member、821,733bytes、SHA256 `f7f7a6fbe75bcdb2587e6428bc502d2fb4538fc6222d6878c541a0d2315a2078`）。最終／初期を分けたXML/log、元失敗集合・全wire・前後比較／再現runner・source/test hash・GitHub読戻しを保存し、GitHub管理の製品source／compiled cacheは複製しない。
+
+差分は製品3・既存test2・前提資料4の計9file、新規repo file0。全体現在地・Piece map・01Aは責務を置換更新し、本節を履歴とする。STRUCTURE_MAP_DELTA_NONE（既存setContextの状態確定順序とsource形式制約の共用修復、新owner・意味型・公開API／DTO・DB・renderer・依存・workflow変更なし）。primary outcomeは限定TECHNICAL_CREDIT。build・配布・本番配置・DB適用・GPU・本人端末操作0。一般日本語品質、Android通常作成・保存、Photos／Shareの実機確認と正式商品受入れは残る。
+

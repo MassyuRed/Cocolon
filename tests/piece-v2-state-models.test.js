@@ -492,6 +492,71 @@ test('save flag revocation is visible to synchronous abort listeners before they
   assert.notEqual(c.getView().phase, 'saved');
 });
 
+for (const boundary of ['owner', 'source', 'disabled', 'invalid', 'conflict', 'dispose']) {
+  test(`save revocation keeps the newer ${boundary} context selected by an abort observer`, async () => {
+    const pending = deferredPieceResponse(); let c, aborted = 0;
+    const next = controllerInput({ saveEnabled: true,
+      expectedUserId: boundary === 'owner' ? 'another-owner' : OWNER,
+      idempotencyKey: boundary === 'conflict' ? options.idempotencyKey : 'new-context-key' });
+    if (boundary === 'source' || boundary === 'conflict') {
+      next.request.source_ref.source_input_id = '20000000-0000-4000-8000-000000000099';
+    }
+    if (boundary === 'invalid') next.request = null;
+    const u = await saveHarness({ send: async (url, init) => {
+      if (!url.endsWith('/save')) return pieceHttp(response());
+      init.signal.addEventListener('abort', () => {
+        aborted++;
+        if (boundary === 'dispose') c.dispose();
+        else c.setContext(boundary === 'disabled' ? { enabled: false } : next);
+      }, { once: true });
+      return pending.promise;
+    } }); c = u.controller;
+    const saving = u.save(); await pieceTick();
+    c.setContext(controllerInput({ saveEnabled: false }));
+    assert.equal(aborted, 1); assert.equal(u.calls.length, 2, 'context changes never send HTTP');
+    pending.resolve(pieceHttp(saveReceipt())); await saving;
+    assert.equal(c.getView().savedReceipt, undefined, 'late old-owner ACK is not restored');
+    await c.start(); await c.retry();
+    if (boundary === 'owner' || boundary === 'source') {
+      assert.equal(u.calls.length, 3);
+      assert.equal(u.calls[2][1].headers['Idempotency-Key'], 'new-context-key');
+      assert.equal(JSON.parse(u.calls[2][1].body).source_ref.source_input_id,
+        next.request.source_ref.source_input_id);
+      assert.equal(u.sessions.at(-1), next.expectedUserId);
+    } else {
+      assert.equal(u.calls.length, 2, 'hidden or invalid current context cannot revive an old preview');
+      assert.equal(c.getView().phase, ['disabled', 'dispose'].includes(boundary) ? 'hidden' : 'unavailable');
+    }
+    c.dispose();
+  });
+}
+
+for (const reentry of ['close', 'retry']) {
+  test(`save revocation keeps the exact same request and key after abort ${reentry}`, async () => {
+    const pending = deferredPieceResponse(); let c, saves = 0;
+    const u = await saveHarness({ send: async (url, init) => {
+      if (!url.endsWith('/save')) return pieceHttp(response());
+      if (++saves === 1) {
+        init.signal.addEventListener('abort', () => { void c[reentry](); }, { once: true });
+        return pending.promise;
+      }
+      return pieceHttp(saveReceipt({ idempotency_replayed: true }));
+    } }); c = u.controller;
+    const saving = u.save(); await pieceTick();
+    c.setContext(controllerInput({ saveEnabled: false })); await pieceTick();
+    assert.equal(c.getView().phase, 'unavailable'); assert.equal(c.getView().canRetry, false);
+    assert.equal(u.calls.length, 2);
+    c.setContext(controllerInput({ saveEnabled: true }));
+    assert.equal(u.calls.length, 2, 're-enabling preserves the intent without sending it');
+    pending.resolve(pieceHttp(saveReceipt())); await saving;
+    assert.notEqual(c.getView().phase, 'saved');
+    await c.retry();
+    assert.equal(u.calls.length, 3); assert.equal(u.calls[1][1].body, u.calls[2][1].body);
+    assert.equal(u.calls[1][1].headers['Idempotency-Key'], u.calls[2][1].headers['Idempotency-Key']);
+    assert.equal(c.getView().phase, 'saved'); c.dispose();
+  });
+}
+
 test('B10 async controller owner exists at the PCE-8 exact path', () => {
   assert.ok(fs.existsSync(controllerPath), 'B10_ASYNC_CONTROLLER_OWNER_ABSENT');
 });

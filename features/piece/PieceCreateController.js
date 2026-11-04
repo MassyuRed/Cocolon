@@ -183,8 +183,6 @@ export function createPieceCreateController(configuration = {}) {
     const nextSaveEnabled = value?.enabled === true && value?.saveEnabled === true;
     const saveFlagChanged = saveEnabled !== nextSaveEnabled;
     saveEnabled = nextSaveEnabled;
-    // Revoke before abort: a synchronous abort listener may call retry().
-    if (saveFlagChanged && !saveEnabled && saveIntent) clearAttempt(false, true, true);
     if (value?.enabled !== true) {
       enabled = false;
       contextOperation = null;
@@ -219,6 +217,11 @@ export function createPieceCreateController(configuration = {}) {
     // A genuine disable/re-enable boundary or different intent can reset it;
     // neither begins a request automatically.
     if (enabled && (!boundaryCode || boundaryCode === 'PIECE_FEATURE_DISABLED') && equivalent(contextOperation, next)) {
+      // This branch keeps the current binding. All other branches establish
+      // their new context before aborting: a synchronous abort observer may
+      // select another owner/source or disable the host, which must not be
+      // overwritten by this older setContext call when the observer returns.
+      if (saveFlagChanged && !saveEnabled && saveIntent) clearAttempt(false, true, true);
       if (saveFlagChanged) notify();
       return;
     }
