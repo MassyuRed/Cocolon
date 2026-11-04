@@ -108,6 +108,15 @@ function load(relative, mocks = {}, dev = true) {
   }, module, module.exports, dev);
   return module.exports;
 }
+function pieceRendererFor(os, viewConfig) {
+  const unused = () => assert.fail('checking capability must not draw or initialize a native component');
+  return load('features/piece/pieceRenderer.js', {
+    'react-native': { Platform: { OS: os }, requireNativeComponent: unused,
+      NativeModules: { PieceTextMetrics: { measureExplorationCandidates: unused, renderBitmapCanvas: unused, releaseBitmapCanvas: unused } },
+      UIManager: { getViewManagerConfig: name => name === 'PieceBitmapCanvas' ? viewConfig : null } },
+    './pieceLayout': {},
+  });
+}
 const initial = {
   schema_version: 'cocolon.emlis_thread.application.v1', thread_id: 'thread', revision: 3,
   state: 'AWAITING_ANSWER', body_state: 'PRE_QUESTION', answer_saved: false,
@@ -475,7 +484,8 @@ for (const configuredBase of [null, 'https://emlis-development.invalid///']) {
       '../lib/apiClient': client, '../lib/historyRetentionLabel': { getHistoryRetentionLabel: () => '' },
       '../AuthContext': { useAuth: () => ({ session }) }, './input/useEmlisThread': threadHook,
       './input/EmlisThreadModal': { default: Modal, __esModule: true },
-      '../AppRuntimeContext': { useAppRuntime: () => ({ isFeatureEnabled: key => key === 'emlis_threads_enabled' }) },
+      '../AppRuntimeContext': { useAppRuntime: () => ({ isFeatureEnabled: key => ['emlis_threads_enabled', 'piece_v2_preview_enabled'].includes(key) }) },
+      '../features/piece/pieceRenderer': pieceRendererFor('android', {}),
     }).default;
     const row = { id: 'input', created_at: initial.original.created_at, memo: initial.original.memo, is_secret: false };
     const calls = [];
@@ -496,6 +506,7 @@ for (const configuredBase of [null, 'https://emlis-development.invalid///']) {
     await act(async () => { root = Renderer.create(React.createElement(Screen)); });
     const open = () => root.root.findByProps({ accessibilityLabel: 'この記録のEmlisからの応答を開く' }).props.onPress();
     await act(async () => open());
+    assert.equal(root.root.findByType(Modal).props.pieceEnabled, false);
     assert.match(JSON.stringify(root.toJSON()), /その時、どう感じましたか/);
     await act(async () => root.root.findByProps({ accessibilityLabel: 'Emlisへの回答' }).props.onChangeText('今は嬉しい。'));
     await act(async () => root.root.findAllByType('Button').find(b => b.props.children === '回答を送る').props.onPress());
@@ -917,11 +928,17 @@ for (const os of ['ios', 'android']) test(`response create carries only current 
   const inputId = '20000000-0000-4000-8000-000000000002', owner = 'owner';
   const dto = { ...completed, body_state: 'FINAL', answer_saved: false, can_write: false,
     original: { ...initial.original, id: inputId }, interpretive_frames: [] };
-  const routes = []; let root, thread;
+  const routes = []; let root, thread, pieceEnabled = false;
   const navigation = { getParent: () => ({ navigate: (...args) => routes.push(args) }) };
-  const render = () => React.createElement(Modal, { thread, colors: {}, navigation, userId: owner, pieceEnabled: true });
+  const render = () => React.createElement(Modal, { thread, colors: {}, navigation, userId: owner, pieceEnabled });
   thread = { visible: true, dto, draft: '', close() { thread = { ...thread, visible: false, dto: null }; root.update(render()); } };
   await act(async () => { root = Renderer.create(render()); });
+  const unavailable = root.root.findAllByType('Button').find(b => b.props.children === 'ピースの作成');
+  assert.equal(unavailable.props.disabled, true);
+  await act(async () => unavailable.props.onPress());
+  assert.equal(thread.visible, true);
+  assert.equal(routes.length, 0);
+  pieceEnabled = true; await act(async () => root.update(render()));
   const create = root.root.findAllByType('Button').find(b => b.props.children === 'ピースの作成');
   assert.equal(create.props.disabled, false, 'Emlis read-only must not disable independent Piece creation');
   await act(async () => { create.props.onPress(); create.props.onPress(); });
@@ -958,18 +975,36 @@ test('a response create waiting for dismissal cannot cross an owner change', asy
   await act(async () => root.unmount());
 });
 
-for (const waitFor of ['focus', 'runtime']) test(`Piece creation waits for ${waitFor}, then consumes explicit request once`, async () => {
-  let focused = waitFor !== 'focus', enabled = waitFor !== 'runtime', owner = 'owner'; const calls = [];
-  const Host = React.forwardRef((props, ref) => { React.useImperativeHandle(ref, () => ({ createFromSavedInput: () => calls.push(props.savedInput) })); return React.createElement('PieceHost', props); });
-  const Screen = load('screens/PieceCreateScreen.js', {
+function loadPieceCreateScreen(Host, { focused, owner, enabled, renderer }) {
+  return load('screens/PieceCreateScreen.js', {
     'react-native': { ScrollView: 'ScrollView', Text: 'Text', View: 'View', StyleSheet: { create: x => x } },
-    'react-native-safe-area-context': { SafeAreaView: 'SafeAreaView' }, '@react-navigation/native': { useIsFocused: () => focused },
-    '../AuthContext': { useAuth: () => ({ session: { user: { id: owner } } }) },
-    '../AppRuntimeContext': { useAppRuntime: () => ({ isFeatureEnabled: () => enabled }) },
+    'react-native-safe-area-context': { SafeAreaView: 'SafeAreaView' }, '@react-navigation/native': { useIsFocused: focused },
+    '../AuthContext': { useAuth: () => ({ session: { user: { id: owner() } } }) },
+    '../AppRuntimeContext': { useAppRuntime: () => ({ isFeatureEnabled: enabled }) },
     '../TutorialContext': { useTutorial: () => ({ isTutorialMode: false }) }, '../theme/ThemeContext': { useTheme: () => ({ colors: {} }) },
     '../components/CocolonBackButton': 'Back', './input/InputPieceActionArea': { default: Host, __esModule: true },
-    '../features/piece/pieceRenderer': { isPieceBitmapSaveAdmitted: () => true },
+    '../features/piece/pieceRenderer': renderer,
   }).default;
+}
+
+for (const [os, viewConfig] of [['android', {}], ['ios', null]]) test(`Piece creation blocks source work on unsupported ${os} device`, async () => {
+  const Host = React.forwardRef(() => assert.fail('unsupported device must not mount the source/preview host'));
+  const Screen = loadPieceCreateScreen(Host, { focused: () => true, owner: () => 'owner', enabled: () => true,
+    renderer: pieceRendererFor(os, viewConfig) });
+  let root;
+  await act(async () => { root = Renderer.create(React.createElement(Screen, {
+    route: { params: { savedInput: { savedInputId: 'input', expectedUserId: 'owner', idempotencyKey: 'request' } } },
+    navigation: { goBack() {} },
+  })); });
+  assert.equal(root.root.findByProps({ accessibilityRole: 'alert' }).props.children, 'この端末ではピースの画像を作成できません。');
+  await act(async () => root.unmount());
+});
+
+for (const waitFor of ['focus', 'runtime']) test(`Piece creation on the original iOS bitmap bridge waits for ${waitFor}, then consumes explicit request once`, async () => {
+  let focused = waitFor !== 'focus', enabled = waitFor !== 'runtime', owner = 'owner'; const calls = [];
+  const Host = React.forwardRef((props, ref) => { React.useImperativeHandle(ref, () => ({ createFromSavedInput: () => calls.push(props.savedInput) })); return React.createElement('PieceHost', props); });
+  const Screen = loadPieceCreateScreen(Host, { focused: () => focused, owner: () => owner, enabled: () => enabled,
+    renderer: pieceRendererFor('ios', {}) });
   const savedInput = { savedInputId: 'input', expectedUserId: owner, idempotencyKey: 'one-explicit-request' };
   const props = { route: { params: { savedInput } }, navigation: { goBack() {} } }; let root;
   await act(async () => { root = Renderer.create(React.createElement(Screen, props)); });

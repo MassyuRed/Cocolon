@@ -24,6 +24,7 @@ import { useAuth } from "../AuthContext";
 import { useEmlisThread } from "./input/useEmlisThread";
 import EmlisThreadModal from "./input/EmlisThreadModal";
 import { useAppRuntime } from "../AppRuntimeContext";
+import { supportsPieceBitmapCreation } from "../features/piece/pieceRenderer";
 
 const EMOTION_SECRET_URL = "/emotion/secret";
 const EMOTION_HISTORY_SEARCH_URL = "/emotion/history/search";
@@ -653,7 +654,7 @@ export default function AnalysisHistoryScreen({ onBack, navigation }) {
   return (
     <SafeAreaView style={[styles.container, themed.container]}>
       <EmlisThreadModal thread={emlisThread} colors={colors} navigation={navigation}
-        userId={session?.user?.id || ""} pieceEnabled={isFeatureEnabled("piece_v2_preview_enabled", false) === true} />
+        userId={session?.user?.id || ""} pieceEnabled={isFeatureEnabled("piece_v2_preview_enabled", false) === true && supportsPieceBitmapCreation()} />
       {/* ヘッダー（上段：戻る＋検索、右にソート） */}
       <View style={[styles.header, themed.header]}>
         <View style={styles.headerRow}>

@@ -47,7 +47,7 @@ function harness({ send, session, random, exportPrepare, os = 'ios' } = {}) {
   // Each ESM module retains a distinct scope, as in the application bundle.
   const exports = [
     ['features/piece/piecePalette.js', ['PIECE_THEME_COLORS', 'PIECE_THEME_LABELS', 'PIECE_LEGACY_THEME_IDS', 'PIECE_THEME_IDS', 'PIECE_VISUAL_CATALOG_V1']],
-    ['features/piece/pieceApi.js', ['PieceApiError', 'readPiecePreviewSnapshot', 'preparePiecePreviewRequest', 'requestPieceOwner', 'readPieceOwnerSnapshot']],
+    ['features/piece/pieceApi.js', ['PieceApiError', 'readPiecePreviewSnapshot', 'preparePiecePreviewRequest', 'requestPieceOwner', 'readPieceOwnerSnapshot', 'isPieceHistoryRecordOlder']],
     ['features/piece/piecePreviewModel.js', ['verifyPieceArtifactHashes']],
     ['features/piece/pieceOwnerModel.js', ['readPieceOwnerDisplay', 'pieceOwnerPermissions']],
     ['features/piece/pieceLayout.js', ['supportsPieceSavedImage']],
@@ -93,7 +93,7 @@ test('owner history and detail use dedicated no-store routes with both session c
 
 test('expanded palette records coexist with unchanged legacy records in owner history, detail and export', async () => {
   const legacy = record();
-  const palette = record({ piece_id: RID, public_id: 'piece:' + RID,
+  const palette = record({ piece_id: RID, public_id: 'piece:' + RID, saved_at: '2026-10-10T00:59:00+00:00',
     renderer_version: 'piece.rn_bitmap_renderer.ios.v2' });
   palette.visual_recipe.theme.theme_id = 'forest_mint';
   const canonical = value => value && typeof value === 'object' && !Array.isArray(value)
@@ -247,6 +247,110 @@ test('pagination retains exact canonical records and passes the server cursor on
   assert.equal(h.controller.getView().items.length, 21);
   assert.equal(h.controller.getView().items[20].piece_text, record().piece_text);
 });
+function verifiedHistoryPage() {
+  const items = Array.from({ length: 20 }, (_, i) => {
+    const id = `30000000-0000-4000-8000-${String(100 - i).padStart(12, '0')}`;
+    return record({ piece_id: id, public_id: 'piece:' + id });
+  });
+  return { ...page(items), next_cursor: 'cursor_first' };
+}
+
+for (const failure of ['transport', 'closed 503']) {
+  test(`history continuation keeps verified rows and repeats the exact cursor after ${failure}`, async () => {
+    const first = verifiedHistoryPage();
+    const second = {
+      ...page(Array.from({ length: 20 }, (_, i) => {
+        const id = `30000000-0000-4000-8000-${String(80 - i).padStart(12, '0')}`;
+        return record({ piece_id: id, public_id: 'piece:' + id });
+      })),
+      next_cursor: 'cursor_second',
+    };
+    let attempts = 0;
+    const h = harness({ send: (url) => {
+      if (!url.includes('cursor=')) return packet(first);
+      if (++attempts === 1) {
+        if (failure === 'transport') throw Error('private connection diagnostics');
+        return packet({ code: 'PIECE_TEMPORARILY_UNAVAILABLE' }, 503);
+      }
+      return packet(url.endsWith('cursor_first') ? second : page([record()]));
+    } });
+    const host = new h.PieceOwnerHistoryHost({ owner: OWNER, flags, enabled: true });
+    host.componentDidMount();
+    await host.act('loadHistory');
+    const firstButton = button(host, '続きを読み込む');
+    await firstButton.props.onPress();
+    assert.deepEqual(copy(host.controller.getView().items), first.items);
+    assert.equal(host.controller.getView().nextCursor, 'cursor_first');
+    assert.match(texts(host.render()).join(' '), /続きを読み込めませんでした/);
+    await button(host, '続きを読み込む').props.onPress();
+    assert.equal(h.calls[1][0], h.calls[2][0]);
+    assert.deepEqual(copy(host.controller.getView().items), [...first.items, ...second.items]);
+    await firstButton.props.onPress();
+    assert.equal(h.calls.length, 3);
+    await button(host, '続きを読み込む').props.onPress();
+    assert.ok(h.calls[3][0].endsWith('cursor_second'));
+    assert.equal(host.controller.getView().items.length, 41);
+    assert.equal(button(host, '続きを読み込む'), undefined);
+    host.componentWillUnmount();
+  });
+}
+
+for (const failure of ['unknown 503', 'invalid page', 'out of order', 'duplicate', 'unauthorized', 'feature stop', 'session changed']) {
+  test(`history continuation does not show earlier private rows after ${failure}`, async () => {
+    const first = verifiedHistoryPage();
+    let authenticated = true;
+    const h = harness({ session: () => authenticated ? 'synthetic' : null, send: (url) => {
+      if (!url.includes('cursor=')) return packet(first);
+      if (failure === 'unknown 503') return packet({ code: 'provider private diagnostic' }, 503);
+      if (failure === 'invalid page') return packet(page([record({ public_id: 'bad' })]));
+      if (failure === 'out of order') return packet(page([record({ saved_at: '2026-10-10T01:00:00.000001+00:00' })]));
+      if (failure === 'duplicate') return packet(page([{ ...first.items[0], saved_at: '2026-10-10T00:00:00Z' }]));
+      if (failure === 'unauthorized') return packet({ code: 'PIECE_AUTH_REQUIRED' }, 401);
+      if (failure === 'feature stop') return packet({ code: 'PIECE_FEATURE_DISABLED' }, 503);
+      authenticated = false;
+      throw Error('network changed during account switch');
+    } });
+    await h.controller.loadHistory();
+    assert.equal(h.controller.getView().items.length, 20);
+    await h.controller.loadMore();
+    assert.equal(h.controller.getView().items.length, 0);
+    assert.equal(h.controller.getView().nextCursor, null);
+    await h.controller.loadMore();
+    assert.equal(h.calls.length, 2);
+  });
+}
+
+test('a late continuation failure cannot restore history after read permission is revoked', async () => {
+  let finish;
+  const pending = new Promise(resolve => { finish = resolve; });
+  const h = harness({ send: url => url.includes('cursor=') ? pending : packet(verifiedHistoryPage()) });
+  await h.controller.loadHistory();
+  const continuation = h.controller.loadMore(); await tick();
+  const context = { enabled: true, expectedUserId: OWNER, flags };
+  h.controller.setContext({ ...context, flags: { ...flags, piece_v2_owner_read_enabled: false } });
+  h.controller.setContext(context);
+  finish(packet({ code: 'PIECE_TEMPORARILY_UNAVAILABLE' }, 503));
+  await continuation;
+  assert.equal(h.controller.getView().phase, 'idle');
+  assert.equal(h.controller.getView().items.length, 0);
+  assert.equal(h.controller.getView().nextCursor, null);
+  assert.equal(h.calls.length, 2);
+});
+
+test('history uses the server descending instant and UUID order at submillisecond precision', async () => {
+  const older = record({ saved_at: '2026-10-10T01:00:00.000001+00:00' });
+  const equalInstantHigherId = record({ piece_id: RID, public_id: 'piece:' + RID, saved_at: '2026-10-10T10:00:00.000001+09:00' });
+  const newer = record({ saved_at: '2026-10-10T01:00:00.000002Z',
+    piece_id: '10000000-0000-4000-8000-000000000001', public_id: 'piece:10000000-0000-4000-8000-000000000001' });
+  const h = harness({ send: () => packet(page([newer, equalInstantHigherId, older])) });
+  await h.controller.loadHistory();
+  assert.deepEqual(copy(h.controller.getView().items), [newer, equalInstantHigherId, older]);
+  const bad = harness({ send: () => packet(page([older, equalInstantHigherId, newer])) });
+  await bad.controller.loadHistory();
+  assert.equal(bad.controller.getView().phase, 'unavailable');
+  assert.equal(bad.controller.getView().items.length, 0);
+});
+
 test('bad page fails wholly, never presenting a partial private history', async () => {
   const h = harness({ send: () => packet(page([record(), record({ piece_id: RID, public_id: 'bad' })])) });
   await h.controller.loadHistory(); assert.equal(h.controller.getView().phase, 'unavailable');
@@ -427,11 +531,13 @@ test('confirmed direct-entry delete leaves history available and never offers to
   host.componentDidMount(); await tick();
   button(host, 'このPieceを削除').props.onPress();
   await h.alerts[0][2][1].onPress();
-  const staleRead = button(host, '保存したPieceを読み込む');
+  assert.equal(button(host, '保存したPieceを読み込む'), undefined);
+  await host.openSavedDetail(host.targetKey(), PID);
+  assert.equal(h.calls.length, 2);
   await button(host, '同じ削除要求で結果を確認').props.onPress();
   assert.match(texts(host.render()).join(' '), /Pieceを削除しました/);
   assert.equal(button(host, '保存したPieceを読み込む'), undefined);
-  await staleRead.props.onPress();
+  await host.openSavedDetail(host.targetKey(), PID);
   h.background('background'); h.background('active'); await tick();
   assert.equal(h.calls.length, 3);
   assert.equal(button(host, '保存したPieceを読み込む'), undefined);
@@ -439,6 +545,101 @@ test('confirmed direct-entry delete leaves history available and never offers to
   assert.ok(h.calls[3][0].includes('/history?'));
   host.componentWillUnmount();
 });
+test('returning to the same saved entry can confirm a delete that committed before backgrounding', async () => {
+  let finishFirst, deletes = 0;
+  const firstResponse = new Promise(resolve => { finishFirst = resolve; });
+  const h = harness({ send: (url, init) => {
+    if (init.method !== 'DELETE') return packet(record());
+    return ++deletes === 1 ? firstResponse : packet({
+      piece_id: PID, receipt_id: RID, outcome: 'succeeded', idempotency_replayed: true,
+    });
+  } });
+  const host = ownerHost(h, savedEntry(), { flags });
+  host.componentDidMount(); await tick();
+  const staleHistory = button(host, '履歴に戻る');
+  button(host, 'このPieceを削除').props.onPress();
+  const first = h.alerts[0][2][1].onPress(); await tick();
+  assert.equal(deletes, 1);
+
+  h.background('background');
+  assert.equal(h.calls[1][1].signal.aborted, true);
+  assert.equal(button(host, '同じ削除要求で結果を確認'), undefined);
+  assert.ok(!texts(host.render()).includes(record().piece_text));
+  h.background('active'); await tick();
+  assert.equal(h.calls.length, 2);
+  assert.equal(host.controller.getView().record, null);
+  const retry = button(host, '同じ削除要求で結果を確認');
+  assert.ok(retry);
+  assert.equal(button(host, '保存したPieceを読み込む'), undefined);
+  assert.equal(button(host, '履歴を読み込む'), undefined);
+  await host.openSavedDetail(host.targetKey(), PID);
+  await staleHistory.props.onPress();
+  assert.equal(h.calls.length, 2);
+
+  // The first response arrives after its view was invalidated. Only the
+  // explicit, same-key request may resolve the uncertainty on this screen.
+  finishFirst(packet({ piece_id: PID, receipt_id: RID, outcome: 'succeeded', idempotency_replayed: false }));
+  await first; await tick();
+  assert.equal(host.controller.getView().canRetryDelete, true);
+  assert.doesNotMatch(texts(host.render()).join(' '), /Pieceを削除しました/);
+  await retry.props.onPress();
+  assert.equal(deletes, 2);
+  assert.equal(h.calls[2][0], h.calls[1][0]);
+  assert.equal(h.calls[2][1].body, h.calls[1][1].body);
+  assert.equal(h.calls[2][1].headers['Idempotency-Key'], h.calls[1][1].headers['Idempotency-Key']);
+  assert.match(texts(host.render()).join(' '), /Pieceを削除しました/);
+  assert.equal(button(host, '保存したPieceを読み込む'), undefined);
+  host.componentWillUnmount();
+});
+
+test('a previous retry button cannot revive across focus while the new button keeps the delete key', async () => {
+  let deletes = 0;
+  const h = harness({ send: (url, init) => {
+    if (init.method !== 'DELETE') return packet(record());
+    if (++deletes === 1) throw Error('lost receipt');
+    return packet({ piece_id: PID, receipt_id: RID, outcome: 'succeeded', idempotency_replayed: true });
+  } });
+  const host = ownerHost(h, savedEntry(), { flags });
+  host.componentDidMount(); await tick();
+  button(host, 'このPieceを削除').props.onPress();
+  await h.alerts[0][2][1].onPress();
+  const staleRetry = button(host, '同じ削除要求で結果を確認');
+  host.props = { ...host.props, enabled: false }; host.componentDidUpdate();
+  host.props = { ...host.props, enabled: true }; host.componentDidUpdate();
+  assert.equal(h.calls.length, 2);
+  await staleRetry.props.onPress();
+  assert.equal(deletes, 1);
+  await button(host, '同じ削除要求で結果を確認').props.onPress();
+  assert.equal(deletes, 2);
+  assert.equal(h.calls[2][1].headers['Idempotency-Key'], h.calls[1][1].headers['Idempotency-Key']);
+  host.componentWillUnmount();
+});
+
+for (const boundary of ['owner', 'target', 'read permission', 'delete permission']) {
+  test(`delete recovery is discarded across ${boundary} loss, even when the old context returns`, async () => {
+    const h = harness({ send: (url, init) => {
+      if (init.method === 'DELETE') throw Error('lost receipt');
+      return packet(record());
+    } });
+    const context = { enabled: true, expectedUserId: OWNER, savedPieceId: PID, flags };
+    h.controller.setContext(context);
+    await h.controller.openDetail(PID);
+    await h.controller.deleteConfirmed(h.controller.getView().record);
+    assert.equal(h.controller.getView().canRetryDelete, true);
+    const staleToken = h.controller.getView().deleteRetryToken;
+    const changed = boundary === 'owner' ? { expectedUserId: RID }
+      : boundary === 'target' ? { savedPieceId: RID }
+      : { flags: { ...flags, [boundary === 'read permission'
+        ? 'piece_v2_owner_read_enabled' : 'piece_v2_delete_enabled']: false } };
+    h.controller.setContext({ ...context, ...changed });
+    assert.equal(h.controller.getView().canRetryDelete, false);
+    h.controller.setContext(context);
+    await h.controller.retryDelete(staleToken);
+    assert.equal(h.controller.getView().canRetryDelete, false);
+    assert.equal(h.calls.length, 2);
+  });
+}
+
 test('ordinary history clears the saved-entry target and returning clears its navigation params', async () => {
   const params = [], backs = [];
   const h = harness({ send: ownerSend }); const host = ownerHost(h, savedEntry(), {

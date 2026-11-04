@@ -29,7 +29,8 @@ assert.equal((compiled.diagnostics || []).filter(d => d.category === ts.Diagnost
 function pieceFixture(send) {
   const file = path.join(__dirname, 'piece-v2-saved-input-host.test.js');
   const prefix = fs.readFileSync(file, 'utf8').split('for (const pre of [false, true]) test(')[0];
-  const context = vm.createContext({ require, __dirname, AbortController, setImmediate });
+  const context = vm.createContext({ require: name => name === 'node:test' ? () => {} : require(name),
+    __dirname, AbortController, setImmediate });
   vm.runInContext(prefix + '\nglobalThis.fixtureExports = { fixture, ref };', context);
   return { ui: context.fixtureExports.fixture({ send }), ref: context.fixtureExports.ref };
 }
@@ -149,7 +150,10 @@ function harness(options = {}) {
       open: async id => { threadIds.push(id); if (control.threadOpen) return control.threadOpen(id);
         control.threadVisible = control.threadMode; return control.threadMode; } }) };
     if (name === './input/InputPieceActionArea') return { __esModule: true, default: Host };
-    if (name === '../features/piece/pieceRenderer') return { isPieceBitmapSaveAdmitted: control.rendererAdmission || (() => false) };
+    if (name === '../features/piece/pieceRenderer') return {
+      isPieceBitmapSaveAdmitted: control.rendererAdmission || (() => false),
+      supportsPieceBitmapCreation: () => control.rendererSupported !== false,
+    };
     if (name === '../components/TutorialOverlay') return { __esModule: true, default: 'TutorialOverlay',
       syncTutorialSpotlightTarget: async () => null, waitForTutorialFrames: async () => {} };
     if (name === '../components/UnreadBadge') return { ScreenUnreadBadge: 'ScreenUnreadBadge' };
@@ -215,6 +219,16 @@ test('InputScreen supplies the explicit renderer predicate to the existing saved
   assert.equal(h.u.calls.length, 0); const writes = h.writes();
   assert.equal(h.slot().props.isSaveAdmitted({}, Object.freeze({})), false);
   assert.equal(h.writes(), writes); assert.equal(h.u.calls.length, 0); h.dispose();
+});
+
+test('unsupported renderer leaves input saving intact and creates neither a Piece ticket nor an Emlis launcher', async () => {
+  const h = await saved({ rendererSupported: false });
+  assert.equal(h.submits.length, 1);
+  assert.equal(h.slot(), undefined);
+  assert.equal(h.find('EmlisThreadModal').props.pieceEnabled, false);
+  assert.equal(h.entropyCalls(), 0);
+  assert.equal(h.u.calls.length, 0);
+  h.dispose();
 });
 
 test('confirmed save reaches the real Piece host after the existing observation closes; no automatic IO', async () => {

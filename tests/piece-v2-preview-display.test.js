@@ -702,6 +702,78 @@ test('actual modal shows pending, unknown retry and saved confirmation from the 
   assert.doesNotMatch(JSON.stringify(u.host.state), /PRIVATE|piece_text|preview_id/);
   u.host.componentWillUnmount();
 });
+
+for (const recoverUnknown of [false, true]) {
+  test(`confirmed save expiry allows an explicit rebuild ${recoverUnknown ? 'after same-key confirmation' : 'without a retry'}`, async () => {
+    const { original, replacement } = formatPair(), pending = deferredPieceResponse();
+    const rebuilt = { ...replacement, preview_id: '30000000-0000-4000-8000-000000000005',
+      expires_at: '2026-10-08T10:00:10.000Z' };
+    const expiry = { status: 409, json: async () => ({ code: 'PIECE_PREVIEW_EXPIRED' }) };
+    let previews = 0, saves = 0;
+    const u = previewUiHarness({ admitSave: true, send: async url => {
+      if (!url.endsWith('/save')) return pieceHttp([original, replacement, rebuilt][previews++]);
+      if (++saves > 1) return expiry;
+      return pending.promise;
+    } });
+    u.host.props = { context: controllerInput({ saveEnabled: true }) };
+    u.mount(); u.host.start(); await pieceTick();
+    uiButton(u, '形式：宣言').props.onPress(); await pieceTick();
+    const saving = startSyntheticSave(u); await pieceTick();
+    u.advance(1123);
+    if (recoverUnknown) {
+      // The expiry code at the wrong status is still an unknown save result.
+      pending.resolve({ ...expiry, status: 503 }); await saving;
+      assert.equal(uiButton(u, '同じ記録から作り直す'), undefined);
+      assert.equal(previews, 2);
+      uiButton(u, '同じ保存要求で結果を確認').props.onPress(); await pieceTick();
+      assert.equal(u.calls[2][1].body, u.calls[3][1].body);
+      assert.equal(u.calls[2][1].headers['Idempotency-Key'], u.calls[3][1].headers['Idempotency-Key']);
+    } else {
+      pending.resolve(expiry); await saving;
+    }
+    assert.equal(saves, recoverUnknown ? 2 : 1);
+    assert.equal(previews, 2, 'no automatic creation');
+    assert.equal(u.host.controller.getView().preview, null);
+    assert.match(JSON.stringify(u.tree()), /プレビューの有効期限が切れています/);
+    assert.equal(uiButton(u, '同じ保存要求で結果を確認'), undefined);
+    const rebuild = uiButton(u, '同じ記録から作り直す');
+    assert.ok(rebuild);
+    rebuild.props.onPress(); rebuild.props.onPress(); await pieceTick();
+    assert.equal(previews, 3);
+    const [url, init] = u.calls.at(-1);
+    assert.equal(url, '/emotion/piece/preview');
+    assert.equal(init.expectedUserId, OWNER);
+    assert.deepEqual(JSON.parse(init.body), { ...request(), requested_format: 'declaration',
+      visual_selection: visualSelection(replacement) });
+    assert.notEqual(init.headers['Idempotency-Key'], u.calls[1][1].headers['Idempotency-Key']);
+    assert.equal(u.host.controller.getView().preview.preview_id, rebuilt.preview_id);
+    u.host.componentWillUnmount();
+  });
+}
+
+test('a delayed save expiry after an account switch cannot offer to rebuild the former draft', async () => {
+  const pending = deferredPieceResponse();
+  const u = previewUiHarness({ admitSave: true, send: async url => url.endsWith('/save')
+    ? pending.promise : pieceHttp(response()) });
+  u.host.props = { context: controllerInput({ saveEnabled: true }) };
+  u.mount(); u.host.start(); await pieceTick();
+  const saving = startSyntheticSave(u); await pieceTick();
+  const next = controllerInput({ saveEnabled: true, expectedUserId: 'another-owner', idempotencyKey: 'another-preview-key' });
+  u.host.props = { context: next };
+  u.host.componentDidUpdate();
+  assert.equal(u.calls[1][1].signal.aborted, true);
+  pending.resolve({ status: 409, json: async () => ({ code: 'PIECE_PREVIEW_EXPIRED' }) });
+  await saving;
+  assert.equal(u.host.controller.getView().phase, 'idle');
+  assert.equal(u.host.controller.getView().previewRestartToken, undefined);
+  assert.equal(uiButton(u, '同じ記録から作り直す'), undefined);
+  assert.equal(u.calls.length, 2);
+  u.host.start(); await pieceTick();
+  assert.equal(u.calls[2][1].expectedUserId, next.expectedUserId);
+  assert.equal(u.calls[2][1].headers['Idempotency-Key'], next.idempotencyKey);
+  u.host.componentWillUnmount();
+});
+
 test('real host construction never supplies admission even when a strict save flag is present', async () => {
   const u = previewUiHarness(); u.host.props = { context: controllerInput({ saveEnabled: true }) };
   u.mount(); u.host.start(); await pieceTick(); await startSyntheticSave(u);

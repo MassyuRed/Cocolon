@@ -7,9 +7,20 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 const crypto = require('node:crypto');
+const { crc32, deflateSync } = require('node:zlib');
 const ROOT = path.resolve(__dirname, '..');
 const clone = x => JSON.parse(JSON.stringify(x));
 const deferred = () => { let resolve; const promise = new Promise(r => { resolve = r; }); return {promise, resolve}; };
+function pngChunk(type, data = Buffer.alloc(0)) {
+  const payload = Buffer.concat([Buffer.from(type), data]);
+  const result = Buffer.alloc(12 + data.length);
+  result.writeUInt32BE(data.length); payload.copy(result, 4); result.writeUInt32BE(crc32(payload), result.length - 4);
+  return result;
+}
+const width = 1080, height = 1350;
+const header = Buffer.alloc(13); header.writeUInt32BE(width); header.writeUInt32BE(height, 4); header[8] = 8;
+const legacyPng = Buffer.concat([Buffer.from([137,80,78,71,13,10,26,10]), pngChunk('IHDR', header),
+  pngChunk('IDAT', deflateSync(Buffer.alloc((width + 1) * height))), pngChunk('IEND')]);
 function fixture() {
   const context = vm.createContext({require, __dirname});
   const prefix = fs.readFileSync(path.join(__dirname, 'piece-v2-preview-display.test.js'), 'utf8').split('function deferredPieceResponse')[0];
@@ -22,9 +33,7 @@ function fixture() {
     render_reproducibility_version:'piece.render_reproducibility.v1', renderer_version:'piece.rn_native_preview.prototype.v3'};
 }
 function harness({os='ios', version=35, record=fixture()} = {}) {
-  const calls = [], files = new Map(), state = {current:true, canvas:true, validPng:true, hash:'a'.repeat(64), granted:true};
-  const header = Buffer.alloc(24); Buffer.from([137,80,78,71,13,10,26,10]).copy(header); header.writeUInt32BE(13,8);
-  header.write('IHDR',12); header.writeUInt32BE(1080,16); header.writeUInt32BE(1350,20);
+  const calls = [], files = new Map(), state = {current:true, canvas:true, png:legacyPng, validPng:true, hash:'a'.repeat(64), granted:true};
   const FileSystem = {
     exists: async p => files.has(p),
     mkdir: async p => {calls.push(['mkdir',p]); if(files.has(p)) throw Error('EEXIST'); files.set(p,'directory');},
@@ -34,13 +43,12 @@ function harness({os='ios', version=35, record=fixture()} = {}) {
       if(state.cleanupError && p.startsWith('/cache/piece-export/') || state.rawUnlinkError && p.startsWith('/cache/piece-capture/')) throw Error('PRIVATE '+p);
       files.delete(p); },
     cp: async (a,b) => {calls.push(['cp',a,b]);files.set(b,'file');},
-    stat: async p => ({type:files.get(p),size:100}),
-    readFileChunk: async () => state.validPng ? header.toString('base64') : 'bad',
+    stat: async p => ({type:files.get(p),size:state.png.length}),
+    readFileChunk: async (p, offset, length) => state.validPng ? state.png.subarray(offset, offset + length).toString('base64') : 'bad',
     hash: async () => { if(state.hashWait) await state.hashWait.promise; return state.hash; },
   };
   const context = vm.createContext({ crypto:crypto.webcrypto, Uint8Array, FileSystem, Dirs:{CacheDir:'/cache'},
     Platform:{OS:os,Version:version},
-    verifyPieceExportPngSrgb:async()=>{ calls.push(['profile']); if(state.profileError) throw Error('bad profile'); return true; },
     PermissionsAndroid:{PERMISSIONS:{WRITE_EXTERNAL_STORAGE:'write'},RESULTS:{GRANTED:'granted'},request:async()=>{
       calls.push(['permission']); if(state.permissionWait) await state.permissionWait.promise; return state.granted?'granted':'denied';}},
     captureRef: async (node, options) => {calls.push(['capture',clone(options)]); if(state.captureWait) await state.captureWait.promise;
@@ -59,10 +67,12 @@ function harness({os='ios', version=35, record=fixture()} = {}) {
     ['features/piece/piecePreviewModel.js',['verifyPieceArtifactHashes']],
     ['features/piece/pieceOwnerModel.js',['readPieceOwnerDisplay']],
     ['features/piece/pieceLayout.js',['preparePieceNativeSavedDisplay','PIECE_NATIVE_PREVIEW_VERSION','PIECE_BITMAP_RENDERER_VERSION','PIECE_BITMAP_RENDERER_V2_VERSION']],
+    ['features/piece/pieceExportPngProfile.js',['verifyPieceExportPngStructure']],
   ]) {
     const source=fs.readFileSync(path.join(ROOT,file),'utf8').replace(/^import .*;$/gm,'').replace(/^export /gm,'');
     vm.runInContext(`{${source}\n${names.map(n=>`globalThis.${n}=${n};`).join('\n')}}`,context);
   }
+  context.verifyPieceExportPngSrgb=async()=>{ calls.push(['profile']); if(state.profileError) throw Error('bad profile'); return true; };
   context.requestPieceOwner=async(action,body,options)=>{
     if (action === 'exportReceipt') {
       calls.push(['receipt',clone(body),clone(options)]);
@@ -95,6 +105,24 @@ for (const version of ['piece.rn_bitmap_renderer.ios.v1','piece.rn_bitmap_render
   await failure(android.prepare());assert.equal(count(android,'capture'),0);
 });
 async function image(h) {return (await h.prepare()).capture(h.target());}
+
+test('Android and legacy iOS exports reject truncated PNGs before capture acceptance or OS handoff', async () => {
+  for (const os of ['android', 'ios']) {
+    const valid = harness({os}), asset = await image(valid);
+    assert.equal((await asset.saveToPhotos()).outcome, 'saved_to_photos');
+    assert.equal(count(valid, 'profile') + count(valid, 'receipt'), 0);
+    for (const length of [legacyPng.length - 12, legacyPng.length - 1]) {
+      const corrupt = harness({os}); corrupt.state.png = legacyPng.subarray(0, length);
+      await failure(image(corrupt));
+      assert.equal(count(corrupt, 'photo') + count(corrupt, 'share'), 0);
+      assert.equal(count(corrupt, 'release'), 1);
+    }
+    const changed = harness({os}), prepared = await image(changed);
+    changed.state.png = legacyPng.subarray(0, legacyPng.length - 12);
+    await failure(prepared.openShare());
+    assert.equal(count(changed, 'share'), 0);
+  }
+});
 
 test('fresh owner detail, verified saved canvas, exact PNG and body-free identity precede iOS add-only save', async()=>{
   const h=harness(), job=await h.prepare(), asset=await job.capture(h.target());

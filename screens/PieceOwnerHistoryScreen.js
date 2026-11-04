@@ -75,9 +75,8 @@ export class PieceOwnerHistoryHost extends React.Component {
     if (targetKey === null) this.requestedSavedTarget = null;
     if (this.deletedSavedTarget !== targetKey) this.deletedSavedTarget = null;
     // A target-only route change must also hide/abort the previous record.
-    this.controller.close();
     this.controller.setContext({ enabled: this.current(), expectedUserId: this.props.owner,
-      flags: this.props.flags, savedPieceId: target?.pieceId });
+      flags: this.props.flags, savedPieceId: target && target.expectedUserId === this.props.owner ? target.pieceId : null });
     // The navigation tap requests this read once. Background/flag refresh drops
     // the body; coming back offers an explicit same-ID read, not an auto retry.
     if (target && this.current() && this.controller.getView().phase !== 'hidden' &&
@@ -232,12 +231,12 @@ export class PieceOwnerHistoryHost extends React.Component {
           record && view.permissions.visibility && (record.visibility_scope === 'public' || view.permissions.publish)
             ? h(Button, { title: record.visibility_scope === 'public' ? '非公開にする' : '公開する', onPress: () => this.confirmVisibility(record) }) : null,
           record && view.permissions.delete ? h(Button, { title: 'このPieceを削除', onPress: () => this.confirmDelete(record) }) : null,
-          available && view.canRetryDelete ? h(Button, { title: '同じ削除要求で結果を確認', onPress: () => this.act('retryDelete') }) : null,
-          available && target && (view.phase === 'idle' ||
+          available && view.canRetryDelete ? h(Button, { title: '同じ削除要求で結果を確認', onPress: () => this.act('retryDelete', view.deleteRetryToken) }) : null,
+          available && target && !view.canRetryDelete && (view.phase === 'idle' ||
             view.phase === 'unavailable' && view.code === 'PIECE_TEMPORARILY_UNAVAILABLE') ? h(Button, {
             title: '保存したPieceを読み込む', onPress: () => this.openSavedDetail(targetKey, target.pieceId) }) : null,
-          available && view.phase !== 'loading' ? h(Button, { title: record ? '履歴に戻る' : target ? '履歴を読み込む' : '保存済みPieceを読み込む', onPress: () => this.act('loadHistory') }) : null,
-          available && view.phase === 'history' && view.nextCursor ? h(Button, { title: '続きを読み込む', onPress: () => this.act('loadMore') }) : null,
+          available && view.phase !== 'loading' && !view.canRetryDelete ? h(Button, { title: record ? '履歴に戻る' : target ? '履歴を読み込む' : '保存済みPieceを読み込む', onPress: () => this.act('loadHistory') }) : null,
+          available && view.phase === 'history' && view.nextCursor ? h(Button, { title: '続きを読み込む', onPress: () => this.act('loadMore', view.nextCursor) }) : null,
           h(Text, { style: { color: '#494949', fontSize: 14, lineHeight: 22, marginTop: 16 } },
             record && !imageSupported ? '保存済み本文を確認できます。' :
               this.props.flags?.piece_v2_export_enabled === true ? '保存済み本文と画像レイアウトを確認できます。' :

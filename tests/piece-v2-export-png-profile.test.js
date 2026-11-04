@@ -8,6 +8,7 @@ const { crc32 } = require('node:zlib');
 
 const source = fs.readFileSync(path.join(__dirname, '../features/piece/pieceExportPngProfile.js'), 'utf8');
 const verify = vm.runInNewContext(source.replace(/^export /gm, '') + '\nverifyPieceExportPngSrgb');
+const verifyStructure = vm.runInNewContext(source.replace(/^export /gm, '') + '\nverifyPieceExportPngStructure');
 const signature = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10]);
 const width = 1080, height = 1350;
 const unsigned = values => {
@@ -27,6 +28,10 @@ const png = (...chunks) => Buffer.concat([signature, header, ...chunks]);
 const check = (bytes, overrides = {}) => verify({
   readChunk: async (offset, length) => bytes.subarray(offset, offset + length).toString('base64'),
   size: bytes.length, width, height, ...overrides,
+});
+const checkStructure = bytes => verifyStructure({
+  readChunk: async (offset, length) => bytes.subarray(offset, offset + length).toString('base64'),
+  size: bytes.length, width, height,
 });
 const unavailable = { message: 'PIECE_EXPORT_PNG_PROFILE_UNAVAILABLE' };
 
@@ -71,4 +76,19 @@ test('rejects invalid dimensions, chunk structure and short native reads', async
   ]) await assert.rejects(check(bytes), unavailable);
   await assert.rejects(check(valid, { height: 1920 }), unavailable);
   await assert.rejects(check(valid, { readChunk: async () => 'AAAA' }), unavailable);
+});
+
+test('accepts complete legacy PNGs without requiring a receipt profile or narrowing valid color types', async () => {
+  const metadata = chunk('tEXt', Buffer.from('encoder\0legacy'));
+  const palette = chunk('PLTE', Buffer.from([0, 0, 0, 255, 255, 255]));
+  const indexed = chunk('IHDR', Buffer.concat([unsigned([width, height]), Buffer.from([1, 3, 0, 0, 0])]));
+  const gray = chunk('IHDR', Buffer.concat([unsigned([width, height]), Buffer.from([16, 4, 0, 0, 0])]));
+  const indexedPng = (...chunks) => Buffer.concat([signature, indexed, ...chunks]);
+  for (const bytes of [png(idat, end), png(metadata, idat, metadata, end), png(srgb, idat, end),
+    indexedPng(palette, idat, end), Buffer.concat([signature, gray, idat, end])]) {
+    assert.equal(await checkStructure(bytes), true);
+  }
+  for (const bytes of [png(idat), png(idat, end, metadata), png(chunk('IDAT'), end),
+    png(idat, metadata, idat, end), png(chunk('ABCD'), idat, end), indexedPng(idat, end),
+    indexedPng(palette, palette, idat, end)]) await assert.rejects(checkStructure(bytes), unavailable);
 });

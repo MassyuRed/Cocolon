@@ -165,7 +165,7 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
     ['features/piece/piecePreviewModel.js', ['readPiecePreviewDisplay', 'verifyPieceArtifactHashes']],
     ['features/piece/pieceOwnerModel.js', ['readPieceOwnerDisplay']],
     ['features/piece/pieceLayout.js', ['PIECE_BITMAP_RENDERER_VERSION', 'PIECE_BITMAP_RENDERER_V2_VERSION', 'PIECE_BITMAP_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_V4_VERSION', 'PIECE_NATIVE_PREVIEW_V5_VERSION', 'PIECE_NATIVE_PREVIEW_V6_VERSION', 'PIECE_NATIVE_PREVIEW_V7_VERSION', 'PIECE_NATIVE_PREVIEW_V8_VERSION', 'PIECE_NATIVE_PREVIEW_V9_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION', 'preparePieceNativeSavedDisplay', 'preparePieceNativeCard', 'preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
-    ['features/piece/pieceRenderer.js', ['isPieceBitmapSaveAdmitted', 'pieceBitmapNativeView', 'pieceBitmapDeadlineCurrent', 'renderPieceBitmapCanvas', 'releasePieceBitmapCanvas', 'readPieceBitmapCanvas', 'inspectPieceText', 'readPieceTextInspection', 'inspectPieceSelectedLine', 'readPieceSelectedLineInspection', 'readPieceSelectedLineV2Inspection', 'inspectPieceSelectedLineV2', 'readPieceSelectedLineV3Inspection', 'inspectPieceSelectedLineV3', 'readPieceSelectedLineV4Inspection', 'inspectPieceSelectedLineV4', 'pieceContainmentV2DeadlineCurrent', 'measurePieceCandidates']],
+    ['features/piece/pieceRenderer.js', ['supportsPieceBitmapCreation', 'isPieceBitmapSaveAdmitted', 'pieceBitmapNativeView', 'pieceBitmapDeadlineCurrent', 'renderPieceBitmapCanvas', 'releasePieceBitmapCanvas', 'readPieceBitmapCanvas', 'inspectPieceText', 'readPieceTextInspection', 'inspectPieceSelectedLine', 'readPieceSelectedLineInspection', 'readPieceSelectedLineV2Inspection', 'inspectPieceSelectedLineV2', 'readPieceSelectedLineV3Inspection', 'inspectPieceSelectedLineV3', 'readPieceSelectedLineV4Inspection', 'inspectPieceSelectedLineV4', 'pieceContainmentV2DeadlineCurrent', 'measurePieceCandidates']],
     ['features/piece/pieceMeasuredWrap.js', ['planPieceMeasuredRows']],
     ['components/piece/PieceVisualCard.js', ['PieceVisualCard']],
   ];
@@ -2502,6 +2502,8 @@ test('explicit iOS bitmap identity shares preview/saved/export drawing while pre
 test('explicit bitmap admission verifies current closed artifact and bridge without drawing or replacing live fit', async () => {
   const h = bitmapHarness(v => v, { version: 'piece.rn_bitmap_renderer.ios.v1' });
   const p = h.card.props.display.preview;
+  assert.equal(h.context.NativeModules.PieceTextMetrics.bitmapRendererVersion, undefined);
+  assert.equal(h.supportsPieceBitmapCreation(), true);
   assert.equal(h.isPieceBitmapSaveAdmitted(p, h.token), true);
   assert.equal(h.fit(), undefined, 'renderer eligibility alone is not mounted fit');
   const counts = [h.bitmapCalls.length, h.bitmapReleases.length, h.candidateCalls.length];
@@ -2513,8 +2515,12 @@ test('explicit bitmap admission verifies current closed artifact and bridge with
   }
   for(const token of [null,undefined,1,'token',[]])assert.equal(h.isPieceBitmapSaveAdmitted(p,token),false);
   const module=h.context.NativeModules.PieceTextMetrics;
-  for(const name of ['measureExplorationCandidates','renderBitmapCanvas','releaseBitmapCanvas']){const old=module[name];delete module[name];assert.equal(h.isPieceBitmapSaveAdmitted(p,h.token),false);module[name]=old;}
-  const manager=h.context.UIManager.getViewManagerConfig;h.context.UIManager.getViewManagerConfig=()=>{throw Error('PRIVATE');};
+  for(const name of ['measureExplorationCandidates','renderBitmapCanvas','releaseBitmapCanvas']){const old=module[name];delete module[name];assert.equal(h.supportsPieceBitmapCreation(),false);assert.equal(h.isPieceBitmapSaveAdmitted(p,h.token),false);module[name]=old;}
+  const manager=h.context.UIManager.getViewManagerConfig;
+  h.context.UIManager.getViewManagerConfig=()=>null;
+  assert.equal(h.supportsPieceBitmapCreation(),false);
+  h.context.UIManager.getViewManagerConfig=()=>{throw Error('PRIVATE');};
+  assert.equal(h.supportsPieceBitmapCreation(),false);
   assert.equal(h.isPieceBitmapSaveAdmitted(p,h.token),false);h.context.UIManager.getViewManagerConfig=manager;
   await finishBitmap(h);const fit=h.fit();assert.ok(fit);assert.equal(fit.isCurrent(p,h.token),true);
   assert.equal(fit.isCurrent({...p,renderer_version:bitmapProfile},h.token),false);

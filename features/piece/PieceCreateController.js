@@ -603,11 +603,23 @@ export function createPieceCreateController(configuration = {}) {
       savePhase = 'saved';
     } catch (error) {
       if (!isCurrent()) return;
-      savePhase = 'unavailable';
       saveCode = error instanceof PieceApiError ? error.code : 'PIECE_TEMPORARILY_UNAVAILABLE';
-      if (saveCode === 'PIECE_AUTH_REQUIRED' || saveCode === 'PIECE_FEATURE_DISABLED') {
-        boundaryCode = saveCode;
-        if (saveCode === 'PIECE_AUTH_REQUIRED') { operation = null; saveIntent = null; }
+      if (saveCode === 'PIECE_PREVIEW_EXPIRED') {
+        // The save API checks committed same-key replay before expiry. This
+        // result releases the save intent and keeps only the create request.
+        const expired = beginPiecePreview(state, captured.request, { ...captured, enabled: true });
+        state = failPiecePreview(expired.state, expired.ticket, error, {
+          expectedUserId: captured.expectedUserId,
+        });
+        saveIntent = null;
+        savePhase = null;
+        saveCode = null;
+      } else {
+        savePhase = 'unavailable';
+        if (saveCode === 'PIECE_AUTH_REQUIRED' || saveCode === 'PIECE_FEATURE_DISABLED') {
+          boundaryCode = saveCode;
+          if (saveCode === 'PIECE_AUTH_REQUIRED') { operation = null; saveIntent = null; }
+        }
       }
     }
     active = null;
@@ -641,6 +653,15 @@ export function createPieceCreateController(configuration = {}) {
     const nextEnabled = value?.enabled === true;
     const nextSaveEnabled = nextEnabled && value?.saveEnabled === true;
     if (!saveIntent) {
+      if (state.code === 'PIECE_PREVIEW_EXPIRED' && (enabled !== nextEnabled || value?.runtimeRefresh === true)) {
+        // Preserve only the expired request on the same host binding. A
+        // callback from before suspension must not start the replacement.
+        enabled = nextEnabled;
+        saveEnabled = nextSaveEnabled;
+        state = Object.freeze({ ...state, ticket: Object.freeze({}) });
+        notify();
+        return true;
+      }
       // Preview visibility/lifecycle remains owned by setContext/close.
       if (value?.preservePreview !== true || enabled !== nextEnabled) return false;
       saveEnabled = nextSaveEnabled;

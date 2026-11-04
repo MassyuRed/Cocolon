@@ -10,18 +10,28 @@ const measurementError = () => new Error('PIECE_NATIVE_MEASUREMENT_UNAVAILABLE')
 const finite = value => typeof value === 'number' && Number.isFinite(value);
 
 const BITMAP_WIRE = 'piece.native_bitmap_canvas.v1';
+
+// The original iOS bitmap bridge has these capabilities without a version
+// constant. Check the actual bridge and view before requesting a preview.
+export function supportsPieceBitmapCreation() {
+  try {
+    if (Platform.OS !== 'ios') return false;
+    const module = NativeModules.PieceTextMetrics;
+    return ['measureExplorationCandidates', 'renderBitmapCanvas', 'releaseBitmapCanvas'].every(name => typeof module?.[name] === 'function') &&
+      typeof UIManager?.getViewManagerConfig === 'function' && !!UIManager.getViewManagerConfig('PieceBitmapCanvas');
+  } catch { return false; }
+}
+
 // Read-only renderer eligibility. The host separately checks owner/runtime/
 // quota and the SAME mounted Card's live token-bound fit before every save.
 // This performs no native drawing, component initialization, HTTP or mutation.
 export function isPieceBitmapSaveAdmitted(preview, displayToken) {
   try {
-    if (Platform.OS !== 'ios' || ![PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION].includes(preview?.renderer_version) ||
+    if (![PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION].includes(preview?.renderer_version) ||
         !displayToken || typeof displayToken !== 'object' || Array.isArray(displayToken)) return false;
     const input = preparePieceNativePreview({ phase: 'received', preview, visualToken: displayToken });
-    const module = NativeModules.PieceTextMetrics;
     return input?.candidateProfile === PIECE_BITMAP_PREVIEW_VERSION && [PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION].includes(input.rendererVersion) &&
-      ['measureExplorationCandidates', 'renderBitmapCanvas', 'releaseBitmapCanvas'].every(name => typeof module?.[name] === 'function') &&
-      typeof UIManager?.getViewManagerConfig === 'function' && !!UIManager.getViewManagerConfig('PieceBitmapCanvas');
+      supportsPieceBitmapCreation();
   } catch { return false; }
 }
 let bitmapNativeView;

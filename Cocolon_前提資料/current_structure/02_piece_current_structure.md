@@ -3607,3 +3607,16 @@ RN layoutのbrandingTextが表示・計測・文字数照合を統一し、nativ
 | 対応iOS → `pieceExportPngProfile.js` → `POST /emotion/piece/{piece_id}/export-receipt` | 寸法・sRGB・ハッシュを確認し、OSへ渡す前の書き出し記録を作る。APIとSQLは本人、保存版、ハッシュ、形式を再照合する。同一キー・同一内容の再試行は同じ記録。画像本体・ファイル位置・共有先・OS結果は送らない。既定無効。 |
 
 前提となる配色移行は `20261103235434_piece_v2_expand_visual_palette.sql`。書き出し記録の移行は `20261104002458_piece_v2_export_receipt.sql`。今回の候補は本番未適用・未配置・未ビルド。Androidの新規画像作成と、今回のiOS実機確認は別残件。詳細は[週次レビュー](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#piece-sustained-session-20261104)。
+
+<a id="piece-recovery-language-20261104"></a>
+## 2026-11-04 — 保存・削除結果の確認、履歴再読、本文とPNGの補修
+
+| 既存経路 | 差分 |
+|---|---|
+| `PieceCreateController` → `InputPieceActionArea` | 保存APIが409の期限切れを返した場合、同じ記録・形式・画像設定から明示的に作り直せる。同じ記録で一時的にアプリを離れた場合も、本文を保持せず再開操作だけを出せる。保存結果が不明な間は元の保存キーを維持する。 |
+| `PieceOwnerHistoryController` → `pieceApi` → `PieceOwnerHistoryScreen` | 同じ本人と対象で削除の確認情報をメモリに保持。再試行は同じキーを使う。履歴の続きが一時失敗したときは確認済みの一覧と取得位置を保持し、取得後に並びとID重複を検査する。本人・権限の切替や壊れた応答では旧内容を表示しない。 |
+| `piece_v2_generation.py` → CMEE・独立本文検査 | 「送り・読み・開け・終え」の丁寧過去と否定を、書かれた対象・成立した文の条件で追加する。末尾の句点を補わない。自己理解で同じ文に句点がある場合も原文を保持。疑問、未完の条件、別欄で補った断片は対象外。 |
+| `pieceExport.js` → `pieceExportPngProfile.js` | 従来の書き出しでも寸法とPNGの末尾を照合し、途中で切れた画像は写真保存・共有へ渡さない。書き出し記録のsRGB条件は維持。 |
+| `pieceRenderer.js` → `PieceCreateScreen`・入力／記録の作成入口 | 現端末に既存iOS bitmap用ブリッジが揃っている場合だけ作成を開始。本人履歴のアクセスと既存保存画像の扱いは従来の判定を使う。 |
+
+既存のRN画面、API、SQLを使用。新規Android描画の採用、実機の写真保存・外部共有、配布と本番適用は別の残件。検証結果は[週次レビュー§142](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#piece-recovery-language-20261104)。

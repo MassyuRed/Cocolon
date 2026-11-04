@@ -53,6 +53,82 @@ function resolver(u) {
   return u.host.resolveSavedInput();
 }
 
+async function expiredSave() {
+  const seed = fixture();
+  const rebuilt = { ...seed.expected, preview_id: '30000000-0000-4000-8000-000000000004',
+    expires_at: '2026-10-08T10:00:10.000Z' };
+  let previews = 0;
+  const u = fixture({ admitSave: true, saveEnabled: true, send: async (url, options) => {
+    if (options.method === 'GET') return packet(ref());
+    if (url.endsWith('/save')) return packet({ code: 'PIECE_PREVIEW_EXPIRED' }, 409);
+    return packet(++previews === 1 ? seed.expected : rebuilt);
+  } });
+  const rebuildButtons = () => u.nodes(u.tree()).filter(n => n.type === 'Button' && n.props.title === '同じ記録から作り直す');
+  u.mount(); await resolver(u); u.host.start(); await tick(); await u.startSave();
+  assert.equal(u.calls.length, 3);
+  assert.equal(rebuildButtons().length, 1);
+  return { ...u, rebuilt, rebuildButtons };
+}
+
+test('confirmed save expiry keeps a body-free explicit restart across the same saved selection pause', async () => {
+  const u = await expiredSave();
+  const old = u.rebuildButtons()[0], token = u.host.controller.getView().previewRestartToken;
+  u.background('inactive');
+  assert.equal(u.tree(), null);
+  old.props.onPress(); await tick();
+  u.background('active');
+  assert.equal(u.host.state.open, false);
+  assert.notEqual(u.host.controller.getView().previewRestartToken, token);
+  assert.equal(u.host.controller.getView().preview, null);
+  assert.equal(u.rebuildButtons().length, 1);
+  old.props.onPress(); await resolver(u); await tick();
+  assert.equal(u.calls.length, 3, 'foreground and obsolete controls are IO-free');
+  const restart = u.rebuildButtons()[0];
+  restart.props.onPress(); restart.props.onPress(); await tick();
+  assert.deepEqual(copy(u.calls.map(([, options]) => options.method)), ['GET', 'POST', 'POST', 'POST']);
+  const [url, options] = u.calls[3];
+  assert.equal(url, '/emotion/piece/preview');
+  assert.equal(options.expectedUserId, OWNER);
+  assert.notEqual(options.headers['Idempotency-Key'], KEY);
+  assert.deepEqual(JSON.parse(options.body), { source_ref: ref(), requested_format: null,
+    visual_selection: { theme_id: 'soft_paper', aspect_ratio: '4:5', branding_mode: 'required_small' } });
+  assert.equal(u.host.controller.getView().preview.preview_id, u.rebuilt.preview_id);
+  u.host.close(); restart.props.onPress(); await tick();
+  assert.equal(u.calls.length, 4);
+  assert.equal(u.rebuildButtons().length, 0);
+  u.host.componentWillUnmount();
+});
+
+for (const changed of ['savedInputId', 'expectedUserId', 'idempotencyKey']) {
+  test(`an expired save does not revive after a hidden ${changed} change and return`, async () => {
+    const u = await expiredSave();
+    const old = u.rebuildButtons()[0];
+    const previous = u.host.props.savedInput;
+    u.background('inactive');
+    u.host.props = { savedInput: { ...previous, [changed]: OTHER } };
+    u.host.componentDidUpdate();
+    u.host.props = { savedInput: previous };
+    u.host.componentDidUpdate();
+    u.background('active');
+    old.props.onPress(); await tick();
+    assert.equal(u.rebuildButtons().length, 0);
+    assert.equal(u.calls.length, 3);
+    assert.deepEqual(u.names(), ['保存入力を確認']);
+    u.host.componentWillUnmount();
+  });
+}
+
+test('closing a confirmed expiry clears its old restart button across a later foreground', async () => {
+  const u = await expiredSave();
+  const old = u.rebuildButtons()[0];
+  u.host.close();
+  u.background('inactive'); u.background('active');
+  old.props.onPress(); await tick();
+  assert.equal(u.rebuildButtons().length, 0);
+  assert.equal(u.calls.length, 3);
+  u.host.componentWillUnmount();
+});
+
 test('explicit response creation reads source and starts one preview; mount remains IO-free', async () => {
   const u = fixture(); u.host.props.creationMode = true; u.mount();
   assert.equal(u.calls.length, 0);

@@ -67,7 +67,7 @@ import { useInputFeedbackModal } from "./input/useInputFeedbackModal";
 import { useInputKeyboardAwareMemo } from "./input/useInputKeyboardAwareMemo";
 import InputActionArea from "./input/InputActionArea";
 import InputPieceActionArea from "./input/InputPieceActionArea";
-import { isPieceBitmapSaveAdmitted } from "../features/piece/pieceRenderer";
+import { isPieceBitmapSaveAdmitted, supportsPieceBitmapCreation } from "../features/piece/pieceRenderer";
 import InputCategorySection from "./input/InputCategorySection";
 import InputEmotionSection from "./input/InputEmotionSection";
 import InputFeedbackReplyModal from "./input/InputFeedbackReplyModal";
@@ -651,8 +651,11 @@ const safeInsets = useSafeAreaInsets();
   // The old preview is a local tutorial demonstration only. Real Piece uses
   // the confirmed saved-input host; disabling V2 never restores legacy HTTP.
   const canPreviewPiece = isTutorialMode && canSubmit;
+  const pieceCreationSupported = supportsPieceBitmapCreation();
+  const piecePreviewEnabled = pieceCreationSupported && !isTutorialMode &&
+    isFeatureEnabled("piece_v2_preview_enabled", false) === true;
   const mountSavedPieceInput =
-    savedPieceInput?.lifetime === pieceInputLifetime.current &&
+    pieceCreationSupported && savedPieceInput?.lifetime === pieceInputLifetime.current &&
     !isTutorialMode && !submitting && !emlisThread.visible && !emlisThread.busy &&
     !inputFeedbackModalVisible && !startupModalVisible &&
     !draftRestoreModalVisible && !hasMemoInput && selectedEmotions.length === 0 &&
@@ -660,8 +663,7 @@ const safeInsets = useSafeAreaInsets();
   // Keep the existing saved-input host through runtime refresh so its
   // body-free cancellation receipt/unknown outcome survives. The host hides
   // all actions while OFF and clears on owner/input/key/lifetime changes.
-  const showSavedPieceInput = mountSavedPieceInput &&
-    isFeatureEnabled("piece_v2_preview_enabled", false) === true;
+  const showSavedPieceInput = mountSavedPieceInput && piecePreviewEnabled;
   const hasUserStartedInput =
     selectedEmotions.length > 0 ||
     memo.trim().length > 0 ||
@@ -1024,6 +1026,7 @@ const safeInsets = useSafeAreaInsets();
     const rememberSavedPieceInput = (savedInputId) => {
       if (!pieceInputMounted.current || !ownsResponse() || isTutorialMode ||
           pieceInputLifetime.current !== pieceLifetime || pieceLifetime.ticket !== pieceTicket ||
+          !supportsPieceBitmapCreation() ||
           isFeatureEnabled("piece_v2_preview_enabled", false) !== true) return;
       const savedInput = buildSavedPieceInput(savedInputId, requestOwner.id);
       if (savedInput) setSavedPieceInput({ lifetime: pieceLifetime, savedInput });
@@ -1545,7 +1548,7 @@ ${String(error?.message || error)}`
 />
 
       <EmlisThreadModal thread={emlisThread} colors={colors} navigation={navigation} userId={currentUserId}
-        pieceEnabled={!isTutorialMode && isFeatureEnabled("piece_v2_preview_enabled", false) === true} />
+        pieceEnabled={piecePreviewEnabled} />
       <InputFeedbackReplyModal
   visible={inputFeedbackModalVisible}
   text={inputFeedbackModalText}

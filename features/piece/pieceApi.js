@@ -491,6 +491,20 @@ export function readPieceOwnerSnapshot(raw) {
   } catch { reject('PIECE_TEMPORARILY_UNAVAILABLE'); }
 }
 
+// PostgREST orders history by timestamp DESC, then UUID DESC. Preserve
+// fractional precision beyond Date.parse's milliseconds at equal timestamps.
+export function isPieceHistoryRecordOlder(record, boundary) {
+  const millis = Date.parse(record.saved_at) - Date.parse(boundary.saved_at);
+  if (millis !== 0) return millis < 0;
+  const fraction = value => (value.saved_at.slice(19).match(/^\.(\d+)/)?.[1] || '').replace(/0+$/, '');
+  const first = fraction(record), second = fraction(boundary);
+  return first !== second ? first < second : record.piece_id < boundary.piece_id;
+}
+
+function ownerHistoryTransportUncertain() {
+  return Object.assign(new PieceApiError('PIECE_TEMPORARILY_UNAVAILABLE'), { ownerHistoryTransportUncertain: true });
+}
+
 /** Owner-only v2 routes; never use Nexus, legacy aliases or persistent caches. */
 const EXPORT_RECEIPT_FIXED = {
   receipt_version: 'piece.export_receipt.v1', visual_catalog_version: 'piece.visual_catalog.v1',
@@ -558,12 +572,25 @@ export async function requestPieceOwner(action, value = {}, options = {}) {
     }
     await requireSession(expectedUserId);
     checkAbort(signal);
-    const response = await apiFetch(endpoint, { method, auth: true, expectedUserId, headers, body, signal });
+    const continuation = action === 'history' && input.cursor !== null;
+    let response;
+    try {
+      response = await apiFetch(endpoint, { method, auth: true, expectedUserId, headers, body, signal });
+    } catch (error) {
+      checkAbort(signal);
+      if (!continuation || error instanceof PieceApiError || error?.name === 'AccountChangedError' ||
+          error?.name === 'AbortError') throw error;
+      await requireSession(expectedUserId);
+      checkAbort(signal);
+      throw ownerHistoryTransportUncertain();
+    }
     checkAbort(signal);
     const result = await response.json();
     await requireSession(expectedUserId);
     checkAbort(signal);
     if (response.status !== 200) {
+      if (continuation && response.status === 503 && exact(result, ['code']) &&
+          result.code === 'PIECE_TEMPORARILY_UNAVAILABLE') throw ownerHistoryTransportUncertain();
       const codes = ['PIECE_REQUEST_INVALID', 'PIECE_AUTH_REQUIRED', 'PIECE_NOT_FOUND',
         'PIECE_TEMPORARILY_UNAVAILABLE', 'PIECE_FEATURE_DISABLED', ...(method === 'GET' ? [] : ['PIECE_CONFLICT'])];
       reject(exact(result, ['code']) && codes.includes(result.code) && STATUS[result.code] === response.status
@@ -575,7 +602,10 @@ export async function requestPieceOwner(action, value = {}, options = {}) {
           !(result.next_cursor === null || typeof result.next_cursor === 'string' && /^[A-Za-z0-9_-]{1,512}$/.test(result.next_cursor)) ||
           result.next_cursor !== null && (result.items.length !== 20 || result.next_cursor === input.cursor)) reject('PIECE_TEMPORARILY_UNAVAILABLE');
       const items = result.items.map(readPieceOwnerSnapshot);
-      if (new Set(items.map(item => item.piece_id)).size !== items.length) reject('PIECE_TEMPORARILY_UNAVAILABLE');
+      if (new Set(items.map(item => item.piece_id)).size !== items.length ||
+          items.some((item, index) => index > 0 && !isPieceHistoryRecordOlder(item, items[index - 1]))) {
+        reject('PIECE_TEMPORARILY_UNAVAILABLE');
+      }
       return freeze({ items, next_cursor: result.next_cursor });
     }
     if (action === 'detail' || action === 'export') {

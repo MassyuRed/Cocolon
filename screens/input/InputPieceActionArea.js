@@ -256,8 +256,9 @@ export default class InputPieceActionArea extends React.Component {
 
   async resolveSavedInput() {
     if (!this.savedMode || !this.isCurrent() || this.sourceAttempt ||
-        ['cancel', 'save'].includes(this.controller.getView().retryKind) ||
         !(this.sourcePhase === 'idle' || this.sourceCode === 'PIECE_TEMPORARILY_UNAVAILABLE')) return;
+    const view = this.controller.getView();
+    if (view.previewRestartToken || ['cancel', 'save'].includes(view.retryKind)) return;
     // Capture the exact saved ID, owner and future POST key before any await.
     const [savedInputId, expectedUserId, idempotencyKey] = JSON.parse(this.boundStamp.slice(6));
     let abort;
@@ -349,7 +350,7 @@ export default class InputPieceActionArea extends React.Component {
   }
 
   restartExpired(token) {
-    if (!this.isCurrent() || !this.state.open || !token ||
+    if (!this.isCurrent() || !token ||
         this.controller.getView().previewRestartToken !== token) return;
     let key;
     try { key = pieceActionKey('piece-preview-'); }
@@ -357,7 +358,11 @@ export default class InputPieceActionArea extends React.Component {
       try { Alert.alert('Pieceの作成', '作成の準備ができませんでした。もう一度お試しください。'); } catch {}
       return;
     }
-    if (!this.isCurrent() || !this.state.open) return;
+    if (!this.isCurrent() || this.controller.getView().previewRestartToken !== token) return;
+    // A retained expired request already has the saved source reference.
+    // The explicit POST reauthenticates and checks that reference again.
+    if (this.savedMode) this.sourcePhase = 'ready';
+    this.setState({ open: true });
     void this.controller.restartExpired(token, key);
   }
 
@@ -493,7 +498,8 @@ export default class InputPieceActionArea extends React.Component {
     const onSave = canSave ? (identity, token) => this.savePreview(identity, token, provider, handle) : null;
     const onOpenSaved = display.phase === 'saved' && this.canOpenSavedPiece()
       ? () => this.openSavedPiece(view.savedReceipt) : null;
-    if (this.savedMode && this.sourcePhase !== 'ready' && !['cancel', 'save'].includes(display.retryKind)) {
+    if (this.savedMode && this.sourcePhase !== 'ready' && !display.previewRestartToken &&
+        !['cancel', 'save'].includes(display.retryKind)) {
       const unavailable = this.sourcePhase === 'unavailable';
       const canRead = this.sourcePhase === 'idle' ||
         (unavailable && this.sourceCode === 'PIECE_TEMPORARILY_UNAVAILABLE');
@@ -518,6 +524,10 @@ export default class InputPieceActionArea extends React.Component {
       !this.state.open && display.canRetry && ['cancel', 'save'].includes(display.retryKind) ? element(Button, {
         title: display.retryKind === 'save' ? '同じ保存要求で結果を確認' : '同じ候補の取消を再試行', onPress: this.retry,
         accessibilityLabel: display.retryKind === 'save' ? '同じ保存要求で結果を確認' : '同じ候補の取消を再試行',
+      }) : null,
+      !this.state.open && display.previewRestartToken ? element(Button, {
+        title: '同じ記録から作り直す', accessibilityLabel: '同じ記録から作り直す',
+        onPress: () => this.restartExpired(display.previewRestartToken),
       }) : null,
       !this.state.open && onOpenSaved ? element(Button, { title: '保存したPieceを確認',
         accessibilityLabel: '保存したPieceを確認', onPress: onOpenSaved }) : null,

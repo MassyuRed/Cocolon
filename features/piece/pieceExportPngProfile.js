@@ -4,6 +4,7 @@ const signature = [137, 80, 78, 71, 13, 10, 26, 10];
 const unavailable = () => new Error('PIECE_EXPORT_PNG_PROFILE_UNAVAILABLE');
 const conflicting = new Set(['iCCP', 'cICP', 'mDCV', 'cLLI', 'acTL', 'fcTL', 'fdAT']);
 const chromaticity = [31270, 32900, 64000, 33000, 30000, 60000, 15000, 6000];
+const bitDepths = { 0: [1, 2, 4, 8, 16], 2: [8, 16], 3: [1, 2, 4, 8], 4: [8, 16], 6: [8, 16] };
 const u32 = (bytes, offset) => bytes[offset] * 16777216 + bytes[offset + 1] * 65536 +
   bytes[offset + 2] * 256 + bytes[offset + 3];
 
@@ -31,10 +32,8 @@ function crc32(type, data) {
   return (crc ^ 0xffffffff) >>> 0;
 }
 
-// Resolves true only for a PNG with explicit sRGB metadata at the expected
-// dimensions. Does not decode pixels or infer an absent color profile.
-export async function verifyPieceExportPngSrgb({ readChunk, size, width, height }) {
-  if (typeof readChunk !== 'function' || !Number.isSafeInteger(size) || size < 71 ||
+async function verifyPng({ readChunk, size, width, height }, requireSrgb) {
+  if (typeof readChunk !== 'function' || !Number.isSafeInteger(size) || size < (requireSrgb ? 71 : 58) ||
       !Number.isSafeInteger(width) || width < 1 || !Number.isSafeInteger(height) || height < 1) throw unavailable();
   const read = async (offset, length) => {
     if (offset + length > size) throw unavailable();
@@ -42,23 +41,25 @@ export async function verifyPieceExportPngSrgb({ readChunk, size, width, height 
     catch { throw unavailable(); }
   };
   const start = await read(0, 33);
+  const depth = start[24], colorType = start[25];
   if (!signature.every((byte, index) => byte === start[index]) || u32(start, 8) !== 13 ||
       String.fromCharCode(...start.subarray(12, 16)) !== 'IHDR' ||
       u32(start, 16) !== width || u32(start, 20) !== height ||
-      start[24] !== 8 || ![2, 6].includes(start[25]) || start[26] !== 0 || start[27] !== 0 || start[28] > 1 ||
+      !bitDepths[colorType]?.includes(depth) || requireSrgb && (depth !== 8 || ![2, 6].includes(colorType)) ||
+      start[26] !== 0 || start[27] !== 0 || start[28] > 1 ||
       crc32(start.subarray(12, 16), start.subarray(16, 29)) !== u32(start, 29)) throw unavailable();
 
   const profiles = new Set();
-  let offset = 33, imageStarted = false, imageBytes = 0, imageEnded = false;
+  let offset = 33, imageStarted = false, imageBytes = 0, imageEnded = false, palette = false;
   for (let chunks = 0; chunks < 1024; chunks++) {
-    if (!imageBytes && (chunks >= 32 || offset > 65536)) throw unavailable();
+    if (requireSrgb && !imageBytes && (chunks >= 32 || offset > 65536)) throw unavailable();
     const header = await read(offset, 8);
     const length = u32(header, 0), typeBytes = header.subarray(4), type = String.fromCharCode(...typeBytes);
     const end = offset + 12 + length;
     if (length > 0x7fffffff || end > size || !/^[A-Za-z]{2}[A-Z][A-Za-z]$/.test(type) ||
-        conflicting.has(type)) throw unavailable();
+        requireSrgb && conflicting.has(type)) throw unavailable();
     if (type === 'IDAT') {
-      if (!profiles.has('sRGB') || imageEnded) throw unavailable();
+      if (requireSrgb && !profiles.has('sRGB') || colorType === 3 && !palette || imageEnded) throw unavailable();
       imageStarted = true;
       imageBytes += length;
     } else {
@@ -68,7 +69,16 @@ export async function verifyPieceExportPngSrgb({ readChunk, size, width, height 
         return true;
       }
       if (imageStarted) imageEnded = true;
-      const profileSize = { sRGB: 1, gAMA: 4, cHRM: 32 }[type];
+      if (!requireSrgb && type === 'PLTE') {
+        if (palette || imageStarted || ![2, 3, 6].includes(colorType) || !length || length % 3 !== 0 ||
+            length > 3 * (colorType === 3 ? 2 ** depth : 256)) throw unavailable();
+        const value = await read(offset + 8, length + 4);
+        if (crc32(typeBytes, value.subarray(0, length)) !== u32(value, length)) throw unavailable();
+        palette = true;
+        offset = end;
+        continue;
+      }
+      const profileSize = requireSrgb ? { sRGB: 1, gAMA: 4, cHRM: 32 }[type] : 0;
       if (profileSize) {
         if (length !== profileSize || imageEnded || profiles.has(type)) throw unavailable();
         const value = await read(offset + 8, length + 4);
@@ -83,3 +93,10 @@ export async function verifyPieceExportPngSrgb({ readChunk, size, width, height 
   }
   throw unavailable();
 }
+
+// Legacy captures need a complete, dimension-matched PNG chunk stream even
+// when the native encoder supplies no sRGB declaration. IDAT pixels are not decoded.
+export function verifyPieceExportPngStructure(file) { return verifyPng(file, false); }
+
+// The receipt path additionally requires explicit, consistent sRGB metadata.
+export function verifyPieceExportPngSrgb(file) { return verifyPng(file, true); }

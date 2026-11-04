@@ -10,7 +10,7 @@ import { CameraRoll } from '@react-native-camera-roll/camera-roll';
 import { Dirs, FileSystem } from 'react-native-file-access';
 import { requestPieceOwner, PieceApiError } from './pieceApi';
 import { readPieceOwnerDisplay } from './pieceOwnerModel';
-import { verifyPieceExportPngSrgb } from './pieceExportPngProfile';
+import { verifyPieceExportPngSrgb, verifyPieceExportPngStructure } from './pieceExportPngProfile';
 import { preparePieceNativeSavedDisplay, PIECE_BITMAP_RENDERER_VERSION, PIECE_BITMAP_RENDERER_V2_VERSION } from './pieceLayout';
 
 const failed = () => new PieceApiError('PIECE_TEMPORARILY_UNAVAILABLE');
@@ -81,24 +81,10 @@ function sessionId() {
 
 async function pngIdentity(path, width, height, requireSrgb = false) {
   const stat = await FileSystem.stat(path);
-  if (stat.type !== 'file' || stat.size <= 33) throw failed();
-  if (requireSrgb) {
-    if (await verifyPieceExportPngSrgb({ width, height, size: stat.size,
-      readChunk: (offset, length) => FileSystem.readFileChunk(path, offset, length, 'base64') }) !== true) throw failed();
-  } else {
-    // Inspect only the 24-byte PNG signature/IHDR prefix, not image/base64 data.
-    const header = await FileSystem.readFileChunk(path, 0, 24, 'base64');
-    if (typeof header !== 'string' || !/^[A-Za-z0-9+/]{32}$/.test(header)) throw failed();
-    const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
-    const bytes = [];
-    for (let i = 0; i < 32; i += 4) {
-      const value = [...header.slice(i, i + 4)].reduce((n, c) => n * 64 + alphabet.indexOf(c), 0);
-      bytes.push((value >>> 16) & 255, (value >>> 8) & 255, value & 255);
-    }
-    const uint32 = offset => bytes.slice(offset, offset + 4).reduce((n, b) => n * 256 + b, 0);
-    if (bytes.length !== 24 || bytes.slice(0, 8).join() !== '137,80,78,71,13,10,26,10' ||
-        uint32(8) !== 13 || bytes.slice(12, 16).join() !== '73,72,68,82' || uint32(16) !== width || uint32(20) !== height) throw failed();
-  }
+  if (stat.type !== 'file') throw failed();
+  const verify = requireSrgb ? verifyPieceExportPngSrgb : verifyPieceExportPngStructure;
+  if (await verify({ width, height, size: stat.size,
+    readChunk: (offset, length) => FileSystem.readFileChunk(path, offset, length, 'base64') }) !== true) throw failed();
   const hash = await FileSystem.hash(path, 'SHA-256');
   if (!hashPattern.test(hash)) throw failed();
   return hash;
