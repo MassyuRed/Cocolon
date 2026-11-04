@@ -3341,3 +3341,21 @@ RN製品／testは変更0。作成の形式・visual PATCH ACK／結果不明と
 APIは[34326283](https://github.com/MassyuRed/mashos-api/commit/34326283ddd9b0eff4423dd3c14d9a49cd34d3ee)へ反映し、2file全文・blob・親・変更集合の読戻しを確認。前提資料4fileを関連差分だけ置換し、本節を履歴とする。検証原本名は `Cocolon_Piece_20261104_qualified_argument_format_validation.zip`。最終／開始sourceのXML・log、全前後raw、保存10入力、初期／最終の独立review、RN12条件、source/test hashとGitHub読戻しを保存し、Git管理source比較用コピーと取得した依存原本は複製しない。
 
 差分は既存製品1・既存test1・前提資料4の計6file、新規repo file0。STRUCTURE_MAP_DELTA_NONE（既存形式制約の適用先と有限境界の修復、新owner・意味型・公開API／DTO・DB・renderer・製品依存・workflow変更なし）。限定TECHNICAL_CREDIT。build・配布・本番配置・DB適用・GPU・本人端末操作0。一般日本語品質、Android通常作成／保存、Photos／Share実機確認、正式商品受入れは残る。
+
+
+<a id="piece-scoped-self-terminal-20261104"></a>
+## 161. 11/4 — 条件等に含まれる自己表現の感嘆符を、作成・本文検査へ接続
+
+MashからPiece残件の継続指示。開始点はRN `a1d558f18d9620297081818dbf51f450d33855cd`／API `34326283ddd9b0eff4423dd3c14d9a49cd34d3ee`。全体現在地・作業姿勢・恒久incident、全体設計／全file地図、最新weekly§160、Piece currentと対象実物を照合。既存の原本直接読取を継続し、索引再生成を追加条件にしない。PIECE_WORK_ALLOWED／LEVEL_2／OBSERVED_BLOCKER_MINIMAL_FIX。rootが統合・反映owner、本文修正と独立reviewを分離し、ビルドは後でまとめる指示を維持した。
+
+**実害と修復。** 「余裕があるなら、私は静かに休みたい。」は通る一方、終端だけを「！」「!」へ替えると、既存scopeの内側で自己topicを読むsource・唯一作者・S7本文検査の境界が一致せず作成できなかった。既に適格なscopeの内側に限り、単一の感嘆符を句点と同じUnicode scalar 1文字分で照合するviewを共用する。原入力を正規化せず、原語・元記号・本人・否定とscalar／UTF8根拠を保持する。願望と比喩が曖昧なliteral感嘆符では原文の全順序を保ち、新しい願望判定・意味型・scope・宣言適格を追加しない。一般の単独literalや未対応の文法へ広げない。
+
+既存testへ新23条件を追加。同じ最終testを開始sourceへ固定した比較は11成功／12失敗、最終23成功。広域中に同test内2本の改変拒否assertを補強した後、23条件を再実行して全成功を確認し、製品3fileのhashも不変だった。最終API広域104fileは10,865成功／既存161失敗／error0・native17除外。開始sourceは10,842成功／161失敗で、失敗identity集合は同一、新規失敗0。対象・保存・独立比較の件数を広域へ足さない。
+
+保存原入力からの36条件は生成24→36、最終S7は全36成功。原source JSONの変化は0、旧成功24件のうち22件は本文不変、2件は「私は、」の読点が加わった。独立saved12＋literal14と、主体・否定・記号・語順等の改変68拒否を確認した。句点版12は本文／hash／source／dutyが不変。旧KEEP10はS7を通り、形式まで通るものは8件。単独の否定引用付き2件は、未発行の旧assemblyを改めて審査する場合に形式不適格となる。既存の保存owner読取・発行済みpreview再読はS7を再実行せず、過去の保存本文を変更・削除しない。rootの追加16入力はready12／transformed4、quote／declarationの明示選択32要求は拒否し、短文エッセイの制約を維持した。いずれも合成source／controlであり、実Auth・本人DB・端末の確認ではない。
+
+RN製品／testは変更0。今回の実host6経路は、形式422後の前候補復帰と再選択、取消／保存の期限切れ後の新key再作成、source競合後のGET422で旧POSTを復活させないこと、visual選択422後の元POST回収と再選択、取消STALEの確定境界を確認し全成功。backendのread-only確認8pathも前回とSHA256が同一で、新たな実行成功数へ加算しない。前回のfocus12条件は再実行しない。開始API343版のpure-only改行診断は生成816件のうち独立本文検査で12件拒否。通常保存の2対照は両方成功し、通常経路の改善は今回確認していないため、この診断を今回の修復へ混ぜず未修復のまま区別する。
+
+API製品3／既存test1は[fab21b0c](https://github.com/MassyuRed/mashos-api/commit/fab21b0cdc2b55798f53da65d75d5925d002833f)へ反映。全体現在地・01A・Piece current mapは既存責務だけを置換更新し、履歴は本節へ記録する。検証原本名は `Cocolon_Piece_20261104_scoped_terminal_validation.zip`。最終／開始sourceのXML・log、保存36条件、独立比較／改変拒否、RN回復6経路、source／test hashとGitHub読戻しを保存し、Git管理の製品sourceと依存本体を複製しない。
+
+差分は既存製品3・既存test1・前提資料4の計8file、新規repo file0。STRUCTURE_MAP_DELTA_NONE（既存scope内の自己topicの終端照合と作者・S7の接続修復、新owner・意味型・公開API／DTO・DB・renderer・依存・workflow変更なし）。限定TECHNICAL_CREDIT。正式商品受入れ0/3、build・配布・本番配置・live DB・GPU・本人端末操作0。一般日本語品質、Android通常作成／保存、Photos／Share実機確認は残る。
