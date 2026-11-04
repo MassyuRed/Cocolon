@@ -3624,3 +3624,29 @@ localの既存composition moduleは66成功／失敗0、3.19秒。別の実facto
 Renderは既存workspaceのAPIがautoDeploy OFF、最新配置は11/2の2c259f0e／dep-dbk7l2uc6qcc73dp5d70でLiveとread-only照合。Supabaseはproject ACTIVE_HEALTHYと既存Piece table名だけを確認し、本人rowの取得・変更は0。今回の修正の配置済みとは扱わない。新しいnative build／TestFlight／本番配置／live DB更新／公開ON／GPU／課金／本人端末操作0。
 
 次はこの空白修復・処理済み検証を繰り返さず、保存原入力から単独で伝わる本文の別の実不具合、又は既に決定された未完了を扱う。実機に依存するAndroid／Photos／Shareはまとめビルド後の受入れへ保持する。外部データ変更や一般品質完成へ自動進行しない。
+
+
+<a id="piece-time-evaluation-pause-20261105"></a>
+## 173. 11/5 — 本人topic後の時点表現と、有限評価の「が」前後の空白による誤拒否を修復
+
+MashのPiece継続指示で再開。freshなPR30 `98a84f7ab2d463e2dd9efdd97397f473b156dbc7`／API PR3 `96676d309970e8c3bf7c5f27700692005147ced5`を確認し、前回§172の全変更を保持した。同じcommit内容の実物と作業姿勢、全体00全文・恒久incident全文、全体設計／全file地図・Piece mapの既確認内容と今回の責務差分、最新weekly§172を照合。System Context索引未完了のため既存どおりfresh原本を直接読んだ。全blobの意味再監査ではない。PIECE_WORK_ALLOWED／LEVEL_2／OBSERVED_BLOCKER_MINIMAL_FIX。root単一writer、本文・RN・サービス／Androidのread-only確認を分担した。新しい語彙辞書・型・作者・公開契約・補助機構は追加しない。
+
+**「私は、 これから毎朝…」の誤拒否。** 空白なしの既存繰返し／数値期間は生成できるが、topic／省略可読点の後にSPACE・TAB・全角SPACEがあるだけで「これから」が未解決参照となった。保存JSONの平穏・自己理解でも再現。`piece_source.py::_calendar_time_adverb_span`で、成立した明示本人topicの枝だけ水平空白を越えてmatcherの開始位置を進める。元の「これから」spanを返し、原文・本文内空白・scalar／UTF8根拠は動かさない。既存の繰返し・数値期間のregexは不変。別の指示語、名詞内の「これから」、改行／NBSP、二重読点、期間の読点欠落、感嘆符版へ対応を広げない。
+
+既存calendar moduleへ新44条件（raw正24・保存正12・反8）。原文と時点・空白・形式、Engine／compiler／作者を禁止した独立S7と時点改変拒否を確認した。最初の保存12条件は合成Auth seamを設定し忘れ、既存adapterの認証入口で停止したため製品の失敗に数えない。新testへ同じ合成本人の明示seamを置いた後、開始API96676d30の別checkoutへ同じ最終testを載せて比較した。関連4suiteは開始324成功／44失敗→修正後360成功／8失敗。内訳は新36誤拒否の解消、反8と旧成功の維持、旧8失敗のidentity完全一致。旧8はcalendar6／duration2の古い短文エッセイ下限期待であり、製品・旧期待は変更しなかった。
+
+**「読書 が 好きです」の誤拒否。** 既存の有限評価でも「が」の直前の空白が対象へ、直後の空白が述語側へ入り、既知対象・本人評価を採用できなかった。`_EVALUATIVE_FINITE`の同じregex内で3種の水平空白だけをtarget／predicate captureの外へ分けた。対象全体、否定・過去・単一modalと原文座標を保持する。作者と独立検査は既存captureを使い、本文の区切りを既存方針で整える。対象内部の空白、焦点構文の主体「が」、未解決参照、主体不足、未知述語、報告／二重modal等の拒否条件は変更しない。
+
+既存finite-evaluation moduleの新42条件は、同じ最終testで開始36失敗／6成功→修正後全成功。正36は2視点・肯定／過去否定modal・3位置×水平3種と後続「その時間」の参照。新反6は改行／NBSP／読点を許可しない。独立確認は実sourceのregexが事前比較した候補と一致することを確認。保存6例でEngine／B8／S7・元JSON・欄／scalar／UTF8を照合し、作者等を禁止した再検査6成功、時点／対象改変6拒否。診断数をsuite件数や商品合格へ加算しない。
+
+**通常HTTP・保存まで。** 既存のHTTP→隔離PostgreSQL WASM検査へ、繰返しと数値期間のtopic空白2ケースを追加。全3プラン×平穏／自己理解の新12条件は、source-ref GET→preview／同キー非生成再読→明示保存／同キー再確認→本人詳細／export用artifact GETまで成功。本文・内容／recipe各hash・rendererの一致、保存消費1回を確認した。同じ新12条件は開始API96676d30の別checkoutでは全12がpreview拒否となり、原因を実経路で確認。これらは合成Bearer／provider／PostgREST seamと隔離SQLであり、実Auth・本人DB・native描画・Photos／Shareの成功ではない。
+
+最終関連9suiteは**3,347成功／既存9失敗／error0／skip0**、32.25秒。新回帰98は全成功し、広域内の部分集合のため加算しない。旧9は上記短文下限8と、`test_b08_piece_scoped_evaluation.py`の旧未対応期待1。後者も開始API96676d30の別checkoutで同じ失敗を再現し、期待は変更しなかった。旧9のidentity集合を分け、今回の新規失敗0とした。Pydantic非推奨警告1を保持。最後のsourceコメント補足はこの実行中で、実行時と最終の実行可能コードは同一、後続の実sourceによるB8／S7確認も成功。source全bytes不変での広域実行と偽って記録しない。
+
+API製品1・既存test3の計4fileを[c62e909c](https://github.com/MassyuRed/mashos-api/commit/c62e909cd6c17b0c11f17a439ffc4a53277e51db)へ反映し、親・変更集合・blobとremote取得bytesを照合した。RN製品／test変更0。前回RN1,542や処理済み64を今回の検証数へ足さず、新規RN広域再実行なし。作成／保存の本文受信失敗・同キー復旧、本人履歴・export、backend replay／停止、Android試作の座標／sRGB／PNG／失効／回収はread-only照合した範囲で新しい確定不具合なし。これを全経路成功・実機成功へ広げない。
+
+同じAPI headの既存[Piece隔離PostgreSQL CI 41921582578](https://github.com/MassyuRed/mashos-api/actions/runs/41921582578)はcompleted／success（11/5 JST07:06:07時点）。runのhead一致と全job成功を照合し、上記local3,347成功とは別の証拠とする。同時起動のAnalysis CI41921582589は記録時in_progressで、成功とは扱わない。workflow定義は変更していない。
+
+全体00・01Aの既存責務・Piece current mapは今回の実装差分と最新参照だけを置換。STRUCTURE_MAP_DELTA_NONE（既存時点matcherの開始位置と有限評価のcapture境界の修復、新owner／API／DTO／DB／renderer／依存／workflowなし）。限定TECHNICAL_CREDIT。一般文章品質、Android通常作成／保存、実Photos／Share、backend receipt本番適用、正式商品受入れ0/3は残件。ビルド／TestFlight／本番配置／live DB更新／公開ON／GPU／課金／本人端末操作0。
+
+次は今回修復した水平空白の単純再検証を繰り返さず、通常入力での別の意味・参照・本文不具合か、既に決定された残件を扱う。Android／実Photos／Shareはまとめビルド後の受入れへ保持する。一般品質完成・本番反映・公開へ自動進行しない。
