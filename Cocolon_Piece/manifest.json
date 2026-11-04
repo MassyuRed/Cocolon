@@ -5,6 +5,17 @@
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
+  "current_route_20261104": {
+    "product_state_owner": "Cocolon_前提資料/00_cocolon_current_product_and_state.md",
+    "structure_owner": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
+    "latest_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261031.md#piece-eight-hour-continuation-20261104",
+    "historical_state_fields_as_of": "2026-10-23 JST",
+    "historical_next_group_is_current": false,
+    "confirmed_owner_generation_list_photos_build": "7001",
+    "confirmed_requested_ui_build": "7101",
+    "latest_candidate_built_deployed_or_device_verified": false,
+    "android_normal_creation_admitted": false
+  },
   "manifest_lineage": {
     "predecessor_schema_version": "cocolon.piece.workstream_manifest.v158",
     "predecessor_head": "87151d3983818f18e556651d333d95be7bb487d7",

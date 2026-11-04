@@ -3,20 +3,20 @@
 ---
 doc_id: cocolon_piece_read_first
 title: "Cocolon Piece — Read First"
-revision_date: "2026-11-01 JST"
+revision_date: "2026-11-04 JST"
 decision_owner: "Mash"
 workstream: "Cocolon / Piece"
 document_status: "CURRENT_PIECE_WORKSTREAM_ENTRY"
 automatic_progression: false
 ---
 
-> 11/1最新は第9回§43。7001の生成/一覧/Photos成功を本人確認済み。本文はユーザー本文のみ、APIba0de502 Live。次候補はios.v2=Emlis、旧v1=Cocolonを保存版どおり保持。compiled capability/保存/描画/保持/exportの二版互換を実装、recipe/DB不変。新配置/署名build/内部配布は後続。詳細はcurrent Piece map §43差分と全体最新情報。
+> 現在の実装・残件は[全体最新情報](../Cocolon_前提資料/00_cocolon_current_product_and_state.md)、[Piece現行構造の末尾](../Cocolon_前提資料/current_structure/02_piece_current_structure.md)、[第9回weekly §166](../Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261031.md#piece-eight-hour-continuation-20261104)へ戻る。7001の生成・一覧・Photos成功と7101の依頼UI確認は本人確認済み。ios.v2=Emlis／旧v1=Cocolonの保存版互換を保持する。11/4の修正候補は未ビルド・未配置・未実機確認。以下の10/23以前のcurrent／next記録を現在の再開指示として使わない。
 
 
 
 # Cocolon Piece — Read First
 
-**最新は入口§119／map§65.62／weekly§5.6.42／manifest v159。APIのprivacy修復を開発正本PR3@3084c99eへ同一2blobで戻し込み、唯一CI39864098163は1805 PASS/FAIL0/SKIP0。Live3577d7fd/承認設定は不変。本人保存に必要なRN配布差を確定し、TestFlight候補branchを87151d39へ固定。署名build/TestFlight送信は未実行・個別判断前、実本人保存/再読/端末受入れは未確認。**
+**以下は10/23 §119時点の履歴（現在の再開指示ではない）：入口§119／map§65.62／weekly§5.6.42／manifest v159。APIのprivacy修復を開発正本PR3@3084c99eへ同一2blobで戻し込み、唯一CI39864098163は1805 PASS/FAIL0/SKIP0。Live3577d7fd/承認設定は不変。本人保存に必要なRN配布差を確定し、TestFlight候補branchを87151d39へ固定。署名build/TestFlight送信は未実行・個別判断前、実本人保存/再読/端末受入れは未確認。**
 
 ### §87の設計時点（履歴）
 

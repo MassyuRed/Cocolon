@@ -3459,3 +3459,37 @@ exportは新7条件のread-only確認で新bug0・製品／test編集0。実host
 API製品2／既存test1は[a4dac0a0](https://github.com/MassyuRed/mashos-api/commit/a4dac0a05c4f2b5cf573d7ef6ecbd7759c799dbe)へ反映し、全文・blob・変更集合・親commitを読戻した。RN製品1／既存test1と前提資料4は本節と同じ変更単位で反映する。全体現在地・01A・Piece mapは関連責務と最新参照を置換し、履歴は本節へ記載。検証原本名は `Cocolon_Piece_20261104_scope_adverb_source_fetch_validation.zip`。開始／最終と未採用中間を分けたlog／XML、保存40条件、実transportの旧取得再現と独立review、source／test hash・GitHub読戻しを保存し、Git管理source・cache・依存本体を複製しない。
 
 差分はAPI製品2・既存test1、RN製品1・既存test1、前提資料4の計9既存file、新規repo file0。STRUCTURE_MAP_DELTA_NONE（既存scope本人照合と同じ疑問定義の共用、既存source GET→作成のidentity束縛を修復、新owner・公開API／DTO・DB・renderer・依存・workflow変更なし）。限定TECHNICAL_CREDIT。正式商品受入れ0/3、build・配布・本番配置・live DB・GPU・本人端末操作0。一般日本語品質、Android通常作成／保存、Photos／Share実機確認は残る。
+
+
+<a id="piece-eight-hour-continuation-20261104"></a>
+## 166. 11/4 — Piece継続作業：停止通知、既存scopeと現在の再開先
+
+Mashの「8時間、Piece残件を進め、区切りごとにGitHub反映」による作業。開始はRN `4e87233aa08c3512799debeac118da5d0d92ba25`／API `a4dac0a05c4f2b5cf573d7ef6ecbd7759c799dbe`。既存PR30／API PR3の作業系統を継続し、古いmainへ戻していない。全体現在地、全体設計01と01A/B/Cの責務・現file地図、Piece現行構造、作業姿勢と§165、実sourceを照合。全tracked一覧はRN5,163／API2,498 pathで、全blobの意味監査というclaimではない。System Contextは既存のfresh原本直接読取を使用。
+
+### 区切り1：保存元確認の失敗に機能停止が隠される不具合
+
+作成・画像設定変更・保存の途中で、保存元の消失／不適格／認証失効／競合／通信失敗と機能停止が重なると、入力エラーが先に返り、RNの既存停止通知・runtime再確認へ進めなかった。`api_piece_v2.py`のservice await3箇所を既存request-local `wrap`へ接続した。新しいguard、epoch、再試行、write取消は追加していない。既にdispatchしたwriteの結果不明は元キーの明示確認を維持する。
+
+新15回帰は同じtestで開始15失敗→最終15成功。関連3suiteは215成功・native11除外。独立の合成HTTP6条件は取消伝播、後段保存元再照合失敗と停止、再許可後の別明示要求／同キー保存再確認、内部診断の非漏出を確認し、blocking0。API既存3fileを[183d29b1](https://github.com/MassyuRed/mashos-api/commit/183d29b1d89044e55d8fc2175f1a1c1cde866e04)へ反映。親commit・全3fileの全文／blob・変更集合を読み戻し、検証済みbytesと一致した。
+
+### 区切り2：水平空白だけで既存の本人scopeが拒否される不具合
+
+「私は どうしても迷っているけれど、私は読書が好きです。」等で、既存SELF_TOPICが扱う水平separatorが副詞prefix照合に残り、既に空白なしで受理する同じ文を拒否／原文fallbackへ落としていた。`piece_source.py`の副詞専用viewだけSPACE／TAB／全角SPACEを除き、原文・本文のseparator・scalar／UTF8根拠と非副詞の従来枝は保持する。一般の副詞・助詞解析へ広げない。
+
+新62回帰を含む対象moduleは最終302成功。同じ選択85を開始sourceへ当てると32失敗／53成功。関連5suiteは非SQL2,785成功、設定漏れで一旦失敗したSQL4は環境を補って対象4だけ再実行し成功。旧期待値の変更0。独立210入力の旧新比較は変化24、全て空白なし旧版で生成できる既存構文。成功36の原保存JSON・scalar／UTF8・独立S7が成功、追加9対照は旧新同一、作者／Engine禁止で新scope3が検査成功し、本文改変12を全拒否した。初期の対照1条件の誤分類による診断停止は最終対照から分離し、製品不具合に数えない。API既存2fileを[24439250](https://github.com/MassyuRed/mashos-api/commit/24439250106945967844ad0855aba5bfaa15fda8)へ反映し、両file全文／blobを読み戻して一致した。
+
+### 統合回帰・確認範囲
+
+最終RNは1,537成功／失敗0。既存Metro再bundle検査は除外し、アプリbuildなし。最終API Pieceは11,025成功／既存161失敗／error0、native17除外（294.86秒）。開始refの前回最終XMLと失敗identity集合が完全一致し、新規失敗0。対象／独立／診断を広域件数に加算しない。既存161は§149の反復一人称の旧期待115／旧最小長19／後続文法・参照の旧拒否24／丁寧体過去helperの旧期待3と一致。旧仕様へ製品を戻したり、GREEN目的で期待を書き換えたりしない。
+
+owner/export既存2suiteは依存解決後278成功、Android bitmap／renderer／PNG既存3suiteは187成功。通常到達の新bugは検出せず、その範囲の製品・testは未変更。新しい日常12原文を平穏／自己理解で比較し、平穏12例は否定・留保・改行・二欄を原文どおり生成。自己理解では既存の明示構文4例のみ生成、普通の叙述8例は意味未採用として拒否。成功16例の独立S7・scalar／UTF8は成功。これを新規文章品質改善・一般成功率へは数えない。
+
+Renderのread-only照会ではAPI `2c259f0e33abcd70cf353a8f53af3dc3b06eb63e`／`dep-dbk7l2uc6qcc73dp5d70`がLive、autoDeploy OFF。SupabaseはPiece既存tableのRLS/FORCE RLSとRPC一覧だけを読み、本人入力取得・変更0。11/4候補のexport receipt RPCは稼働一覧に存在せず、本番適用済みとはしない。
+
+### 現在の入口と次の残件
+
+Piece専用入口とmanifestに10/23のTestFlight未送信・本人保存未確認がcurrentとして残っていたため、旧証拠を保持し、現在の全体00・Piece map・本節への経路を追加。7001の生成／一覧／Photosと7101の依頼UI確認を引き継ぎ、11/4候補の実機成功へ拡張しない。manifest v159の旧identityと履歴fieldsは保持し、`current_route_20261104`が現在の参照を示す。
+
+次は一般の自己理解叙述で拒否される既存入力を、保存原入力→意味採用→既存KEEPの経路で因果切分けする。今回の日常24と旧161を無意味に再実行せず、通常操作での新しい不具合又は決定済み未実装に絞る。一般の自然な再構成、Android通常作成／保存、実Photos／Share、backend receiptの本番適用・正式商品受入れは残る。本番適用やビルドをこの次作業に含めない。
+
+STRUCTURE_MAP_DELTA_NONE（既存service／本人照合修復と入口同期、新owner・API／DTO・DB・renderer変更なし）。限定TECHNICAL_CREDIT、正式商品受入れ0/3。ビルド・配布・本番配置・live DB変更・GPU・本人端末操作0。今回の検証実績と、指定8時間の実働完了は別であり、8時間完了をclaimしない。
