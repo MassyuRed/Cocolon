@@ -3650,3 +3650,25 @@ API製品1・既存test3の計4fileを[c62e909c](https://github.com/MassyuRed/ma
 全体00・01Aの既存責務・Piece current mapは今回の実装差分と最新参照だけを置換。STRUCTURE_MAP_DELTA_NONE（既存時点matcherの開始位置と有限評価のcapture境界の修復、新owner／API／DTO／DB／renderer／依存／workflowなし）。限定TECHNICAL_CREDIT。一般文章品質、Android通常作成／保存、実Photos／Share、backend receipt本番適用、正式商品受入れ0/3は残件。ビルド／TestFlight／本番配置／live DB更新／公開ON／GPU／課金／本人端末操作0。
 
 次は今回修復した水平空白の単純再検証を繰り返さず、通常入力での別の意味・参照・本文不具合か、既に決定された残件を扱う。Android／実Photos／Shareはまとめビルド後の受入れへ保持する。一般品質完成・本番反映・公開へ自動進行しない。
+
+
+<a id="piece-time-exclamation-20261105"></a>
+## 174. 11/5 — 感嘆符付きの本人topicで時点表現を誤拒否する不具合を修復
+
+MashのPiece継続指示。開始はfresh PR30 `302b88e9dea9c5087e170ef0a4e9fc97edb21cea`／API PR3 `c62e909cd6c17b0c11f17a439ffc4a53277e51db`。全体00、恒久incident、作業姿勢current、全体設計／全file地図とPiece current map、最新weekly§173と対象実物を照合し、既存System Context索引未完了はfresh原本の直接読取で補った。全blobの意味再監査ではない。目的は通常の保存原入力で、既存の時点表現と書かれた強調・留保を保持したまま本文を生成できること。PIECE_WORK_ALLOWED／LEVEL_2／OBSERVED_BLOCKER_MINIMAL_FIX、root単一writer、本文・RN・APIをread-only分担。新規費用・Mash操作0、ビルドと本番適用は今回対象外。
+
+**症状と原因。** 「私はこれから毎朝窓辺の葉を眺めたい。」と「私はこれから3日間、窓辺の葉を眺めたい。」は既存の時点表現として読めるが、単一の「！／!」へ変えるだけで`unresolved_reference`となる。`piece_source.py::_calendar_time_adverb_span`が句点限定の`_SELF_TOPIC`を元の感嘆符へ直接照合し、本人topicを越えられず、「これから」を未解決の指示語とした。topic開始位置の照合だけ、既存方針と同じUnicode scalar同幅の句点viewを使う。原文の記号・空白・時点regex・全根拠座標は変更せず、既存KEEP作者で感嘆符と留保をそのまま保持する。新しい語彙・指示語の免除・期間文法・型・作者・形式・fallbackは作らない。
+
+**回帰と本文。** 既存calendar testへ新36条件。raw正12は既存の受理済み焦点文を先行させ、3種の本人topic開始形×繰返し／数値期間×2感嘆符で、従来の焦点編集と後続原文KEEP、時点span、全根拠と形式制約を確認。保存正8は平穏／自己理解×2時点×2感嘆符で、二欄JSON・🌿を含むscalar／UTF8座標・本文2段落を保持する。Engine・compiler・作者を禁止した独立S7が成功し、時点／終端の改変を拒否。反16は別指示語、名詞内の「これから」、期間読点欠落、二重・混合終端と疑問終端を従来どおり拒否した。
+
+途中testでは、未保存literal単独も生成されるという誤期待と、自己理解で未対応の「まだ続けるかは決めていない。」を全行literalとして扱う誤期待があった。製品の未保存受理や留保文法を広げず、rawは既存焦点文との組合せ、保存は既に対応している「続けるかはまだ決めていない。」へ新test材料を訂正。同じ最終testを開始APIの別checkoutへ載せて因果比較した。元の留保を一般対応したとは扱わない。既存の保存平穏modeには質問らしい本文の原文保持も残り、全modeで疑問文を拒否する修復とはしない。
+
+**通常HTTPと保存。** 既存自然文HTTP／隔離PostgreSQL WASM testへ繰返し＋「！」／数値期間＋「!」の2入力を追加。3プラン×平穏／自己理解の新12条件でsource-ref GET→preview／同キー非生成再読→明示保存／同キー保存確認→本人詳細／export用artifact GETを確認。本文・2欄の段落・内容／recipe hash・rendererを同じ保存版で再読し、保存消費は1回。開始sourceでは12条件全てpreview拒否、修復後は全成功。合成Bearer／provider／PostgREST seamと隔離SQLであり、実Auth・本人DB・画像描画・Photos／Shareの成功ではない。
+
+最終関連7suiteは**3,167成功／既存8失敗／error0／skip0**、38.57秒。同じ最終testを載せた開始API c62e909cは3,135成功／40失敗、38.70秒。新48条件の内訳は上記calendar36＋HTTP12で、失敗32→0、既存8のidentity集合は完全一致。新48は関連7suiteの部分集合で、件数を加算しない。旧8はcalendar6／duration2の短文エッセイ下限の旧期待で、旧test・製品下限は変更していない。Pydantic非推奨警告1。実行中と最終source bytesは同一で、試験後の製品追補なし。
+
+API製品1・既存test2の全3pathを[427b7ae3](https://github.com/MassyuRed/mashos-api/commit/427b7ae3315fd304927316eb25053236852f6b3c)へ反映。GitHubの親・変更集合・各blobと、fetch後の全3file bytesを照合済み。限定TECHNICAL_CREDIT。同じheadの既存[Piece隔離PostgreSQL CI41924322966](https://github.com/MassyuRed/mashos-api/actions/runs/41924322966)はcompleted／success、job126904610140もsuccessを確認。localの関連7suiteとは別の証拠であり、実Auth・本人DB・端末成功へ換算しない。同時起動のAnalysis CI41924322975は記録時in_progressで、成功とは扱わない。workflow定義は変更0。
+
+独立本文reviewはactual sourceで正20／反15の一回限り診断を確認し、保持・根拠・B8／S7にblockingな不整合なし。これをsuite件数や商品合格へ加算しない。RNの作成／保存／期限切れ／本人切替／復帰、APIの保存再送／source削除後の保存済み再読／停止は確認範囲で別の確定不具合なし。controller単体では同期abort後の保存復旧書戻し候補があったが、通常hostの事前復旧と画面離脱処理により到達可能な利用者順序を確認できず、製品不具合へ昇格・推測修正していない。RN製品／test・APIサービスの変更0、既に十分な広域を再実行した件数へ数えない。
+
+全体00・01Aの既存責務・Piece current mapは今回のtopic matcherと最新参照だけ置換。STRUCTURE_MAP_DELTA_NONE（既存parserの同幅照合viewだけ、新owner／公開API／DTO／DB／renderer／依存／workflowなし）。一般文章品質、Android通常作成／保存、実Photos／Share、backend receipt本番適用、正式商品受入れ0/3を保持する。ビルド／TestFlight／本番配置／live DB操作／公開ON／GPU／課金／本人端末操作0。次は今回の時点＋単一感嘆符を単純反復せず、通常入力で別の実不具合又は既に決定された残件を扱う。実機依存の残件はまとめビルド後の受入れへ保持する。
