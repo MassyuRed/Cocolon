@@ -3672,3 +3672,29 @@ API製品1・既存test2の全3pathを[427b7ae3](https://github.com/MassyuRed/ma
 独立本文reviewはactual sourceで正20／反15の一回限り診断を確認し、保持・根拠・B8／S7にblockingな不整合なし。これをsuite件数や商品合格へ加算しない。RNの作成／保存／期限切れ／本人切替／復帰、APIの保存再送／source削除後の保存済み再読／停止は確認範囲で別の確定不具合なし。controller単体では同期abort後の保存復旧書戻し候補があったが、通常hostの事前復旧と画面離脱処理により到達可能な利用者順序を確認できず、製品不具合へ昇格・推測修正していない。RN製品／test・APIサービスの変更0、既に十分な広域を再実行した件数へ数えない。
 
 全体00・01Aの既存責務・Piece current mapは今回のtopic matcherと最新参照だけ置換。STRUCTURE_MAP_DELTA_NONE（既存parserの同幅照合viewだけ、新owner／公開API／DTO／DB／renderer／依存／workflowなし）。一般文章品質、Android通常作成／保存、実Photos／Share、backend receipt本番適用、正式商品受入れ0/3を保持する。ビルド／TestFlight／本番配置／live DB操作／公開ON／GPU／課金／本人端末操作0。次は今回の時点＋単一感嘆符を単純反復せず、通常入力で別の実不具合又は既に決定された残件を扱う。実機依存の残件はまとめビルド後の受入れへ保持する。
+
+<a id="analysis-material-v5-aligned16-result-20261105"></a>
+## 175. 11/5 — 16教材の学習・30件比較を完了、旧18表示を保持して1例を復旧
+
+§139のCPU完了物から、新Pod n1c0emcf17xs0uのJupyterへ接続して未実行部分を継続した。固定API ded0586＋既存v5 overlay、元90、初期a2e/config006e、固定runner 1fc654、4依存pin、CPU manifest202件をPod上で照合。RTX 4000 Ada 20,475MiB、torch2.8.0+cu128、表示単価0.29USD/hを確認。既存16教材各1回の16更新、前後32NLL、112tensorの保存照合、新重み再読後の新30生成を完了した。元90・初期重みは不変。新評価rawを教師化していない。
+
+**途中停止と回復。** CPU ZIPはfileだけを収録し、空のafter directoryを含まなかった。復元時にその存在確認を欠いたため、train exit0の後、生成用modelをloadした直後の最初のrequest保存でFileNotFoundErrorになった。新request/raw/生成0。元run_reportのFAILED_NO_RETRY_NOT_ADOPTED・234.734963秒と最初の回収原本は保持した。空directoryだけを復元し、固定runnerのafter phaseで未生成30件を処理した。学習再実行0・元run再起動0・重複生成0、model loadは当初2＋回復1＝計3。deadlineは元開始＋900秒のまま延長せず、回復開始時の残り593.304秒を渡した。全30stop・after COMPLETE・collector完了を確認。627.5秒時点の観測ですべて完了済みで、元900秒＋終了30秒以内。run全体をexit0へ書き換えていない。627.5秒全体を課金対象と置いた上限参考0.050549USDは処理・中断待ちの範囲だけで、事前準備/転送/回収/レンタル保持/税等と実総請求は別・未測定。
+
+| 比較対象 | 全文・実artifactで確認したこと |
+| --- | --- |
+| 旧typed18件 | 全graphと可視文章・図が一致。X03・M4も保持 |
+| PV01 | qualifier JSON破損を解消。本人の否定役割と肯定行動・対象を既存compiler/唯一作者の文章・図へ渡せた。2node/edge0・選択カテゴリ・未確定を保持 |
+| HQ04 | TE_CONTEXTだった明記理由をWRITTEN_REASON＋REASON_MARKERへ回復。時点・従属否定は保持。限定typed未対応は継続 |
+| AT04 | 発話内容・本人の希望・未決定を分離し、既存教師のJSON値と一致。今回再学習したsourceなので未見転移とは呼ばない。限定typed未対応 |
+| YREASON01 | 不明rootの引用範囲だけ変更。理由marker欠如と述語の誤modifier化が残る。教師RU02と同一sourceで、教師再現も未達 |
+| AT11/17/24 | 余分なTE_CONTEXT・述語の対象化・サ変語幹の対象化が残る。いずれも今回再学習した既存教師 |
+| X05–08/M01 | 対象子を明示したが、元から文章・図は対象を保持していた。表示の新改善へ加算しない |
+| MD02等 | 有効な短NEG・他者・別々の不明を保持。限定typedの拒否をモデルの意味誤りへ置換しない |
+
+候補29→30/30、typed18→19/30、raw同一18/変更12。全30原文/前後rawと成立した文章・図をrootと同環境read-only補助が読み、今回の比較範囲で新しい意味退行は確認しなかった。59候補/37typedを含む60保存応答は既存の生成・compiler・作者禁止guardで再読し、復元artifactからgraph/文章/図を再投影してsidecar一致。新Podと歴史beforeはruntime条件が異なり、差を学習だけの因果効果とは断定しない。16教師平均NLL0.028814→0.006690を意味正解率にしない。通常採用/次初期自動採用false、研究候補として保全する。本人の正式Product Read/通常端末/本番成功ではない。
+
+[全原本・新重み](https://chatgpt.com/library?file_id=libfile_266a3eef2ce08191afb4d5e23d755419&account_id=personal)：15,209,194bytes、SHA256 bf7b9fcd2d729977f5db65666e5b37146fa79f0d8cceaa8ddcdbcd87f46e3496。376member、manifest375対象のbytes/SHAとZIP CRCをPod外で照合。元失敗report/log、回復plan、全before/after、元pack/派生target/encoded、runner/helper/API overlay、train/新adapter、collectionを含む。weights419bcacf300ef370c358289e5cad1e55523aa693ddc35f0aff368efb845b1deb、config4ab4f399bbd7b5e6c894452d3385c7d0be1cad2de79bd2c0eb64c2b8dd422c33。終了後GPU2MiB/0%、compute空、Podは稼働維持。
+
+次は同run/指示variantを反復せず、既存RU02とAT11/17/24の正targetと自由生成が初めて分岐する内容を、理由・修飾・従属内容の境界へ絞って調べる。教師値は既に存在し、平均lossの低下だけで追加更新を決めない。新GPU条件は未固定。本人基準の役割/判断/選択、補足typed、記録間の再出現/変化、通常累積graph、IF/Savedと分析観測会は継続残件。
+
+実環境GPT-6/Codex Work、root単一writer/実行/判断、同環境read-only補助。独立Pro/Ultra/Mash Product Readではない。限定TECHNICAL_CREDIT、product_credit0。通常商品source/型/意味gate/compiler/唯一作者/ensure/HTTP/DTO/DB/RN/Render/Supabase/配置/Pod管理の変更なし。STRUCTURE_MAP_DELTA_NONE。今回のSupabase操作はschema読取のみ。Renderはworkspace未選択のためservice読取に進まず、稼働stateを未確認のまま成功扱いしない。

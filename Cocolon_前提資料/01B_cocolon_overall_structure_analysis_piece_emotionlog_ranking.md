@@ -3409,3 +3409,7 @@ API dc05dc35、通常product owner追加なし。既存 `semantic_admission.py` 
 | 既存`piece-v2-owner-history`・`preview-display`・`state-models`・`export`試験、API `test_b05a_piece_saved_original_generation.py`・`test_piece_natural_context_sql.py` | ホスト・保存復旧の通常復帰、原文保持・空述語拒否、実ASGI／隔離DBの保存・再読・保存枠を確認する。nativeの書込み失敗実行や端末成功の証拠とは分ける。 |
 
 既存の画面・保存復旧情報・HTTP経路を使用し、新規ファイル・API・DBスキーマ・描画版は追加しない。[Piece現行構造](current_structure/02_piece_current_structure.md#piece-literal-save-detail-cache-20261104)
+
+### 2026-11-05 — 分析v5 aligned16の実学習・生成結果の地図
+
+通常production owner/型/意味gate/compiler/唯一作者/ensure/HTTP/DB/RNは不変、STRUCTURE_MAP_DELTA_NONE。既存trialのmaterial_v5_aligned16_trial.pyを変更せず、16更新・32測定・新30生成と保存再読を実行した。新しい本文なし結果索引は同trial内のmaterial_v5_aligned16_results.json、全条件/失敗回復/比較/原本はREADME#analysis-material-v5-aligned16-result-20261105と最新weekly§175。新重みはprivate原本に保存し通常/次初期値へ未採用。00/current03の再開入口を同結果へ更新した。新product code/ownerなし。

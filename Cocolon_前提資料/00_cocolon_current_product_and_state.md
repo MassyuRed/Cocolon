@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-**11/4・分析の最新（第9回§139）：** 既存16教材のv5整合について、実トークナイザーと保存再読のCPU検証を完了。元90教材を保持し、派生targetの独立否定引用6箇所だけを変更した。同じ固定runnerでの再照合は8.98秒で完了し、前回とCPU manifestの対象202パスが一致。うち201ファイルのSHA256が一致し、`cpu.json`の差は実行時間のみ。[CPU結果と再開点](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-material-v5-aligned16-cpu-20261104)。次は指定Pod上で固定API・モデル重み・依存pin・CPU manifestを照合して§138の一回試行を実行する。新規学習・生成は未実施。通常接続/API/配置に変更なし。本人基準/補足typed/記録間・通常累積/IF・Savedは残件。
+**11/5・分析の最新（第9回§175）：** 新GPUで既存16教材を16更新・前後32測定し、保存重みを再読して新30件を生成。旧18件のgraph・文章・図を全保持し、肯定行動1例を新たに文章・図へ接続した。明記理由1例と発話境界1例も局所改善。理由と不明の併存、発話内の述語/修飾の境界は未解消で、通常/次初期値へは未採用。空directory復元漏れによる生成前停止は学習を繰り返さず回復し、元失敗記録を保持。全原本・新重み376memberを保存・照合済み。[結果と再開点](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-material-v5-aligned16-result-20261105)。新Podと歴史beforeの環境差があり、差を学習だけへ帰属しない。GPU処理終了・compute空、Pod稼働維持。通常/API/DB/RN/配置の変更なし。本人基準/補足typed/記録間・通常累積/IF・Savedは残件。
 
 **11/3・分析の最新結果（第9回§100–102）：** 74教師監査後、旧74不変＋原文対照2を76教師/90更新/152NLL/50新stop/2load・641.971830秒/exit0で比較。NV04の結果重複/不明の親不正を改善し、R4/T4/追加本人2の10ROLE文章図を前後bytes同一で保持。50rawは46同一/4変化、HQ04理由誤分類は残りR08肯定過去copulaに誤modifier再発。strict候補47→49は意味率ではない。100保存非生成再読/元532memberの全bytes-SHAを確認・新重み9dcを保全、通常/次初期値は未採用。[結果・原本・再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-reason-unknown76-result-20261103)。全対象分離は現行必須でなく、次は理由の述語/不明併存差と複数文copula保持をCPUで切分け。通常HTTP/DB/RN/配置不変、本人基準/記録間関係/通常累積接続は未完。GPUレンタル維持、STRUCTURE_MAP_DELTA_NONE。
 
