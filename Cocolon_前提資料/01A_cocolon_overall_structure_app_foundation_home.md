@@ -6077,7 +6077,7 @@ API overlay2source＋新testは保存原本へ同梱し、通常repoへ採用し
 同trial内へ material_v5_aligned16_trial.py（未compile/未CPU検証の実行草案）と material_v5_aligned16_plan.json（元90source SHA・選択16・6引用差分・実行上限・実績0・再開条件）を追加。元90原本/既存helper/意味gate/唯一作者を継承し、通常ownerへ接続しない。操作環境切断によりGPUは未開始。[source確認/停止点/再開順](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v5-aligned16-resume-20261103)。STRUCTURE_MAP_DELTA_NONE、商品API/DB/RN/配置変更0。§137の既存原本保全と不採用を維持し、再接続後は新草案のCPUprepareから進める。
 
 <a id="piece-format-language-export-files-20261104"></a>
-## 11/4 — Piece作成・本文・書き出しのファイル差分（§141）
+## 11/4 — Piece作成・本文・書き出しのファイル差分（§141〜148）
 
 | 追加ファイル | 責務と接続 |
 |---|---|
@@ -6086,5 +6086,14 @@ API overlay2source＋新testは保存原本へ同梱し、通常repoへ採用し
 | mashos-api `ai/services/ai_inference/piece_v2_export_receipt_service.py` | 本人専用の書き出し記録POSTから、本文を含まない要求を検証し、記録のRPCへ渡す。 |
 | mashos-api `supabase/migrations/20261104002458_piece_v2_export_receipt.sql` | 既存の記録テーブルにハッシュ2欄とservice-role専用RPCを追加し、本人・保存版と同じキーの再送を照合する。 |
 | mashos-api `ai/tests/piece_v2/test_b13b_piece_v2_export_receipt.py`、`ai/tests/helpers/piece_export_receipt_postgres.cjs` | 隔離DBで書き出し記録の権限、版の不一致、応答消失後の再送を検証する。 |
+
+| 今回変更した既存ファイル（§148） | 責務と接続 |
+|---|---|
+| mashos-api `ai/services/ai_inference/piece_v2_generation.py` | 保存原入力の完成文を調べる既存疑問cueを修正。非疑問表現への部分一致だけを除外し、本文・否定・意味型を変更しない。 |
+| mashos-api `ai/tests/piece_v2/test_b05a_piece_saved_original_generation.py` | 量化・不定表現と真の疑問の分離を、2モードの既存adapter・原文本文まで検証する。 |
+| Cocolon `screens/PieceOwnerHistoryScreen.js` | 共有のnative結果不明を、一時停止の有無にかかわらず既存の結果不明表示へ接続する。 |
+| Cocolon `tests/piece-v2-owner-history.test.js` | 通常履歴／保存直後の2入口×欠落・矛盾応答6種の12条件。明示再読、二重送信防止と共有コピー保持を確認する。 |
+
+STRUCTURE_MAP_DELTA_NONE。新しいowner・route・API・DB・描画版はなく、既存経路内の拒否判定と結果表示の修復。実結果と検証範囲は[週次レビュー§148](weekly_reviews/Cocolon_Weekly_Review_20261031.md#piece-question-boundary-share-result-20261104)へ。
 
 作成モーダル・本人履歴・CMEE本文判定の既存ファイルと新経路の接続は[Piece現行構造](current_structure/02_piece_current_structure.md#piece-format-language-export-20261104)を参照。本番配置・DB移行前の候補。

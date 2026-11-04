@@ -1268,6 +1268,31 @@ for (const [action, nativeFailure] of [['saveToPhotos', true], ['openShare', tru
   });
 }
 
+for (const ordinary of [false, true]) {
+  for (const [label, reply] of [['missing', undefined], ['null', null], ['empty', {}],
+    ['non-boolean success', { success: 'true' }], ['incomplete failure', { success: false }],
+    ['contradictory', { success: true, dismissedAction: true }]]) {
+    test('active ' + (ordinary ? 'history' : 'direct') + ' share keeps ' + label + ' native result unconfirmed', async () => {
+      const u = await nativeExportHost('openShare', ordinary);
+      u.native.state.shareResult = reply;
+      u.finish(); await u.pending;
+      assert.equal(u.asset.nativeStatus, 'unknown');
+      assert.ok(texts(u.host.render()).includes('共有結果を確認できませんでした。'));
+      assert.ok(!texts(u.host.render()).includes('共有画面を閉じました。'));
+      assert.ok(!texts(u.host.render()).includes('共有をキャンセルしました。'));
+      assert.equal(u.host.exportOperation.outcome, 'unconfirmed');
+      assert.doesNotMatch(JSON.stringify(u.host.exportOperation), /piece_text"|content_payload"|visual_recipe"|file:|静かに|Bearer/);
+      assert.equal(u.native.calls.filter(call => call[0] === 'share').length, 1);
+      assert.equal(u.native.calls.some(call => call[0] === 'unlink' && call[1].startsWith('/cache/piece-export/')), false);
+      await assert.rejects(u.asset.openShare());
+      await rereadOperatedPiece(u, ordinary);
+      assert.ok(texts(u.host.render()).includes('共有結果を確認できませんでした。'));
+      assert.equal(u.native.calls.filter(call => call[0] === 'share').length, 1);
+      u.host.componentWillUnmount();
+    });
+  }
+}
+
 test('on-time native rejection keeps its existing failure', async () => {
   const u = await nativeExportHost('saveToPhotos');
   u.native.state.photoError = true;

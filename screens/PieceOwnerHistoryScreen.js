@@ -214,7 +214,9 @@ export class PieceOwnerHistoryHost extends React.Component {
       if (this.exportOperation === operation) {
         if (['saved_to_photos', 'cancelled', 'share_result_returned'].includes(result?.outcome)) {
           operation.phase = 'complete';
-          operation.outcome = operation.suspended && attempt.asset.nativeStatus === 'unknown'
+          // A missing/contradictory share response does not establish that the
+          // native session ended, even while this screen remained active.
+          operation.outcome = attempt.asset.nativeStatus === 'unknown'
             ? 'unconfirmed' : result.outcome;
         } else this.exportOperation = null;
         if (this.mounted) this.setState(s => ({ revision: s.revision + 1 }));
