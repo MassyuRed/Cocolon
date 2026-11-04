@@ -6077,7 +6077,7 @@ API overlay2source＋新testは保存原本へ同梱し、通常repoへ採用し
 同trial内へ material_v5_aligned16_trial.py（未compile/未CPU検証の実行草案）と material_v5_aligned16_plan.json（元90source SHA・選択16・6引用差分・実行上限・実績0・再開条件）を追加。元90原本/既存helper/意味gate/唯一作者を継承し、通常ownerへ接続しない。操作環境切断によりGPUは未開始。[source確認/停止点/再開順](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v5-aligned16-resume-20261103)。STRUCTURE_MAP_DELTA_NONE、商品API/DB/RN/配置変更0。§137の既存原本保全と不採用を維持し、再接続後は新草案のCPUprepareから進める。
 
 <a id="piece-format-language-export-files-20261104"></a>
-## 11/4 — Piece作成・本文・書き出しのファイル差分（§141〜148）
+## 11/4 — Piece作成・本文・書き出しのファイル差分（§141〜149）
 
 | 追加ファイル | 責務と接続 |
 |---|---|
@@ -6094,6 +6094,14 @@ API overlay2source＋新testは保存原本へ同梱し、通常repoへ採用し
 | Cocolon `screens/PieceOwnerHistoryScreen.js` | 共有のnative結果不明を、一時停止の有無にかかわらず既存の結果不明表示へ接続する。 |
 | Cocolon `tests/piece-v2-owner-history.test.js` | 通常履歴／保存直後の2入口×欠落・矛盾応答6種の12条件。明示再読、二重送信防止と共有コピー保持を確認する。 |
 
-STRUCTURE_MAP_DELTA_NONE。新しいowner・route・API・DB・描画版はなく、既存経路内の拒否判定と結果表示の修復。実結果と検証範囲は[週次レビュー§148](weekly_reviews/Cocolon_Weekly_Review_20261031.md#piece-question-boundary-share-result-20261104)へ。
+| 今回変更した既存ファイル（§149） | 責務と接続 |
+|---|---|
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py` | 有限自己表現と空述語拒否の文法照合に単一感嘆符を同期。原文のnode・証拠座標を保持。 |
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_v1c.py` | 明示自己表現と、同じ保存原入力の完成した留保を既存のKEEP作者へ渡す。新しい疑問受理・関係・宣言適格を作らない。 |
+| Cocolon `features/piece/PieceCreateController.js` | 画像変更後の元POST回収が確定CONFLICTの場合だけ、既存のsource GET再取得へ明示回復。 |
+| Cocolon `features/piece/PieceOwnerHistoryController.js`・`screens/PieceOwnerHistoryScreen.js` | export準備で版等が異なる場合の、現在表示中の同一Pieceの明示詳細GET。準備の自動開始・自動本文置換はしない。 |
+| API既存 `test_b05a_piece_saved_original_generation.py`、RN既存 `tests/piece-v2-preview-display.test.js`・`tests/piece-v2-owner-history.test.js` | 原文・留保・空述語・疑問と段落／文数／文字数境界、元POST確定競合、同じ詳細の再読・旧操作の失効を検査する。 |
+
+STRUCTURE_MAP_DELTA_NONE。新しいowner・route・API・DB・描画版はなく、既存経路内の原文保持と明示的な再読の修復。実結果と検証範囲は[週次レビュー§149](weekly_reviews/Cocolon_Weekly_Review_20261031.md#piece-literal-reservation-recovery-20261104)へ。
 
 作成モーダル・本人履歴・CMEE本文判定の既存ファイルと新経路の接続は[Piece現行構造](current_structure/02_piece_current_structure.md#piece-format-language-export-20261104)を参照。本番配置・DB移行前の候補。

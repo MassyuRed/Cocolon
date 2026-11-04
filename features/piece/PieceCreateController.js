@@ -348,6 +348,11 @@ export function createPieceCreateController(configuration = {}) {
     }
     const featureDisabled = state.code === 'PIECE_FEATURE_DISABLED';
     if (featureDisabled) boundaryCode = 'PIECE_FEATURE_DISABLED';
+    // A PATCH conflict/unknown result still needs the original POST/key for
+    // recovery. If that explicit POST itself reports a definitive source
+    // conflict, use its existing fresh-source action instead of replaying it
+    // forever. No ambiguous mutation, save or cancellation is released here.
+    if (!mutation && state.code === 'PIECE_CONFLICT') visualRecovery = null;
     if (state.phase !== 'received' && !recoverable.includes(state.code)) visualRecovery = null;
     notify();
     // Notify only for the still-current settled intent, never for an obsolete

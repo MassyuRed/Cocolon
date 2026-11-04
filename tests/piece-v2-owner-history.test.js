@@ -1084,8 +1084,106 @@ test('saved detail only offers image preparation on devices that support the sav
 test('fresh changed record cannot replace the selected detail for export',async()=>{
   const u=exportHost({fresh:record({row_version:3})});await u.ready();
   assert.equal(u.host.exportAttempt,null);assert.equal(u.events.filter(x=>Array.isArray(x)&&x[0]==='capture').length,0);
-  assert.ok(texts(u.host.render()).includes('画像を準備できませんでした。もう一度お試しください。'));u.host.componentWillUnmount();
+  assert.equal(u.host.controller.getView().record.row_version,2);
+  assert.ok(texts(u.host.render()).includes('保存済みのPieceが更新されています。同じPieceを読み直してから画像を準備してください。'));
+  assert.ok(button(u.host,'同じPieceを読み込み直す'));u.host.componentWillUnmount();
 });
+
+async function changedExportRecordHost(ordinary = false, failedReread = false) {
+  const old = record(), fresh = record({ row_version: 3, visibility_scope: 'private' });
+  let reads = 0;
+  const u = exportHost({ fresh, send: url => {
+    if (url.includes('/history')) return packet(page([old]));
+    if (++reads === 2 && failedReread) throw Error('fresh detail response lost');
+    return packet(reads === 1 ? old : fresh);
+  } });
+  u.host.props = { ...u.host.props, flags: { ...u.host.props.flags, piece_v2_delete_enabled: true } };
+  if (ordinary) u.host.props = { ...u.host.props, savedPiece: null };
+  u.host.componentDidMount(); await tick();
+  if (ordinary) { await u.host.act('loadHistory'); await u.host.act('openDetail', PID); }
+  const displayed = u.host.controller.getView().record;
+  await u.host.prepareExport(displayed);
+  return { ...u, displayed };
+}
+
+for (const ordinary of [false, true]) {
+  test('changed export record waits for explicit fresh detail from ' + (ordinary ? 'history' : 'saved entry'), async () => {
+    const u = await changedExportRecordHost(ordinary);
+    assert.equal(u.host.controller.getView().record, u.displayed);
+    assert.equal(button(u.host, '画像の保存・共有を準備').props.disabled, true);
+    await u.host.prepareExport(u.displayed);
+    assert.equal(u.events.filter(event => Array.isArray(event) && event[0] === 'prepare').length, 1);
+    const reread = button(u.host, '同じPieceを読み込み直す');
+    const pending = reread.props.onPress(); reread.props.onPress(); await pending;
+    assert.equal(u.host.controller.getView().record.row_version, 3);
+    assert.equal(u.h.calls.filter(([url]) => url === '/emotion/piece/' + PID).length, 2);
+    const count = u.h.calls.length;
+    reread.props.onPress(); await tick();
+    assert.equal(u.h.calls.length, count, 'the old record cannot issue another detail read');
+    assert.equal(button(u.host, '同じPieceを読み込み直す'), undefined);
+    assert.equal(button(u.host, '画像の保存・共有を準備').props.disabled, false);
+    await u.host.prepareExport(u.host.controller.getView().record);
+    u.host.exportAttempt.onTarget(u.target, null);
+    await u.host.exportImage(u.host.exportAttempt, 'saveToPhotos');
+    assert.equal(u.events.filter(event => event === 'photos').length, 1);
+    assert.ok(texts(u.host.render()).includes('写真に保存しました。'));
+    u.host.componentWillUnmount();
+  });
+  test('changed export record drops the old body when explicit ' + (ordinary ? 'history' : 'saved-entry') + ' detail reread fails', async () => {
+    const u = await changedExportRecordHost(ordinary, true);
+    await button(u.host, '同じPieceを読み込み直す').props.onPress();
+    assert.equal(u.host.controller.getView().record, null);
+    assert.equal(u.host.exportAttempt, null);
+    assert.equal(button(u.host, '画像の保存・共有を準備'), undefined);
+    const retry = button(u.host, ordinary ? '同じPieceを読み込み直す' : '保存したPieceを読み込む');
+    await retry.props.onPress();
+    assert.equal(u.host.controller.getView().record.row_version, 3);
+    assert.equal(u.h.calls.filter(([url]) => url === '/emotion/piece/' + PID).length, 3);
+    assert.equal(u.events.filter(event => Array.isArray(event) && event[0] === 'prepare').length, 1,
+      'detail success does not automatically prepare an image');
+    u.host.componentWillUnmount();
+  });
+}
+
+for (const boundary of ['owner', 'target', 'read permission', 'background', 'history', 'delete', 'unmount']) {
+  test('old changed-record reread cannot cross ' + boundary, async () => {
+    const u = await changedExportRecordHost();
+    const reread = button(u.host, '同じPieceを読み込み直す');
+    if (boundary === 'owner') u.host.props = { ...u.host.props, owner: RID };
+    if (boundary === 'target') u.host.props = { ...u.host.props, savedPiece: savedEntry(RID) };
+    if (boundary === 'read permission') u.host.props = { ...u.host.props,
+      flags: { ...u.host.props.flags, piece_v2_owner_read_enabled: false } };
+    if (boundary === 'background') u.h.background('inactive');
+    if (boundary === 'history') await u.host.act('loadHistory');
+    if (boundary === 'delete') await u.host.act('deleteConfirmed', u.host.controller.getView().record);
+    if (boundary === 'unmount') u.host.componentWillUnmount();
+    const count = u.h.calls.length;
+    await reread.props.onPress();
+    assert.equal(u.h.calls.length, count);
+    if (boundary === 'delete') {
+      assert.equal(u.host.controller.getView().canRetryDelete, true);
+      assert.ok(button(u.host, '同じ削除要求で結果を確認'));
+      assert.equal(button(u.host, '同じPieceを読み込み直す'), undefined);
+    }
+    if (boundary !== 'unmount') u.host.componentWillUnmount();
+  });
+}
+
+for (const [code, status] of [['PIECE_NOT_FOUND', 404], ['PIECE_AUTH_REQUIRED', 401], ['PIECE_FEATURE_DISABLED', 503]]) {
+  test('changed-record explicit detail ' + code + ' drops the old body and cannot prepare an image', async () => {
+    let reads = 0;
+    const u = exportHost({ fresh: record({ row_version: 3 }), send: () => ++reads === 1
+      ? packet(record()) : packet({ code }, status) });
+    await u.ready();
+    await button(u.host, '同じPieceを読み込み直す').props.onPress();
+    assert.equal(u.host.controller.getView().record, null);
+    assert.equal(u.host.exportAttempt, null);
+    assert.equal(button(u.host, '画像の保存・共有を準備'), undefined);
+    assert.ok(!texts(u.host.render()).includes(record().piece_text));
+    assert.equal(u.h.calls.length, 2);
+    u.host.componentWillUnmount();
+  });
+}
 for(const boundary of ['owner','flag','background','history','target','unmount'])test(`export ${boundary} aborts fresh preparation and cannot revive on return`,async()=>{
   let resolve;const wait=new Promise(r=>{resolve=r;});const u=exportHost({prepareWait:wait});u.host.componentDidMount();await tick();
   const pending=u.host.prepareExport(u.host.controller.getView().record),old=u.host.exportAttempt;

@@ -137,7 +137,8 @@ export function createPieceOwnerHistoryController(configuration = {}) {
     if (!enabled() || active || deletion) return;
     // A saved-entry target is independently owner-authenticated by detail GET;
     // it does not require fetching every history page to locate the new record.
-    if (id !== context?.savedPieceId && !state.items.some(item => item.piece_id === id)) return;
+    if (id !== context?.savedPieceId && id !== state.record?.piece_id &&
+        !state.items.some(item => item.piece_id === id)) return;
     return run('detail', { piece_id: id });
   }
   function setVisibility(scope) {

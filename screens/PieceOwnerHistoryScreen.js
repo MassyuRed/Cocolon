@@ -156,10 +156,17 @@ export class PieceOwnerHistoryHost extends React.Component {
     if(this.exportMessage && (!this.current() || this.controller?.getView().record!==this.exportMessage.displayed ||
         this.stamp()!==this.exportMessage.stamp))this.exportMessage=null;
   }
+  rereadExportRecord(record) {
+    if (!this.current() || this.controller?.getView().record !== record ||
+        this.exportMessage?.displayed !== record || this.exportMessage?.needsReread !== true ||
+        this.exportMessage.stamp !== this.stamp()) return;
+    return this.act('openDetail', record.piece_id);
+  }
   async prepareExport(record) {
     if (!this.current() || this.props.flags?.piece_v2_export_enabled !== true ||
         this.controller?.getView().phase !== 'detail' || this.controller.getView().record !== record ||
         !supportsPieceSavedImage(record.renderer_version) || this.exportAttempt?.busy ||
+        (this.exportMessage?.displayed === record && this.exportMessage?.needsReread === true) ||
         this.exportOperationFor(record)?.phase === 'running') return;
     this.exportOperation = null;
     this.cancelExport();
@@ -173,7 +180,10 @@ export class PieceOwnerHistoryHost extends React.Component {
       if (!this.exportCurrent(attempt)) return;
       const identity = value => JSON.stringify([value.piece_id, value.row_version, value.piece_text_hash,
         value.content_payload_hash, value.visual_recipe_hash, value.renderer_version]);
-      if (identity(job.record) !== identity(record)) throw new Error('PIECE_TEMPORARILY_UNAVAILABLE');
+      if (identity(job.record) !== identity(record)) {
+        attempt.needsReread = true;
+        throw new Error('PIECE_TEMPORARILY_UNAVAILABLE');
+      }
       attempt.job = job; attempt.busy = false;
       attempt.onTarget = (target, previous) => {
         if (!this.exportCurrent(attempt)) return;
@@ -190,7 +200,11 @@ export class PieceOwnerHistoryHost extends React.Component {
       this.setState(s => ({ revision: s.revision + 1 }));
     } catch {
       if (this.exportCurrent(attempt)) {
-        this.cancelExport(); this.exportMessage = {text:'画像を準備できませんでした。もう一度お試しください。',displayed:attempt.displayed,stamp:attempt.stamp};
+        this.cancelExport(); this.exportMessage = {
+          text: attempt.needsReread === true
+            ? '保存済みのPieceが更新されています。同じPieceを読み直してから画像を準備してください。'
+            : '画像を準備できませんでした。もう一度お試しください。',
+          needsReread: attempt.needsReread === true, displayed:attempt.displayed,stamp:attempt.stamp};
         this.setState(s => ({ revision: s.revision + 1 }));
       }
     }
@@ -277,6 +291,8 @@ export class PieceOwnerHistoryHost extends React.Component {
     const exportMessage = operation?.phase === 'complete' ? this.exportOutcomeMessage(operation.outcome, operation.action)
       : this.current() && record === this.exportMessage?.displayed && this.stamp() === this.exportMessage?.stamp
         ? this.exportMessage.text : null;
+    const needsReread = this.current() && record === this.exportMessage?.displayed &&
+      this.stamp() === this.exportMessage?.stamp && this.exportMessage?.needsReread === true;
     return h(SafeAreaView, { style: { flex: 1, backgroundColor: '#FFFFFF' } },
       h(View, { style: { flex: 1, padding: 20 } },
         h(Text, { accessibilityRole: 'header', style: { color: '#202020', fontSize: 22, marginBottom: 12 } }, '自分のPiece'),
@@ -295,8 +311,10 @@ export class PieceOwnerHistoryHost extends React.Component {
             { style: { color: '#494949', fontSize: 14, lineHeight: 22, marginBottom: 8 } },
             '保存・共有した画像は、Cocolonで削除・非公開にしても回収できません。') : null,
           exportEnabled ? h(Button, {
-            title: attempt ? '画像を準備し直す' : '画像の保存・共有を準備', disabled: exporting,
+            title: attempt ? '画像を準備し直す' : '画像の保存・共有を準備', disabled: exporting || needsReread,
             onPress: () => this.prepareExport(record) }) : null,
+          needsReread ? h(Button, { title: '同じPieceを読み込み直す',
+            onPress: () => this.rereadExportRecord(record) }) : null,
           attempt?.job ? h(View, { pointerEvents: 'none', accessible: false,
             accessibilityElementsHidden: true, importantForAccessibility: 'no-hide-descendants',
             style: { position: 'absolute', left: -10000, top: 0, width: 1080 } },

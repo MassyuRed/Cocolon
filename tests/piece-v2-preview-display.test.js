@@ -1442,6 +1442,76 @@ test('unknown visual outcome recovers the original preview rather than replacing
   u.host.componentWillUnmount();
 });
 
+for (const closeFirst of [false, true]) {
+  test(`visual recovery POST conflict allows only an explicit fresh source read ${closeFirst ? 'after closing' : 'from the modal'}`, async () => {
+    const original = response('quote'), fresh = response('quote');
+    fresh.preview_id = '30000000-0000-4000-8000-000000000004';
+    const source = request().source_ref;
+    const freshSource = { ...source, source_input_bundle_commitment: 'sha256:' + 'b'.repeat(64) };
+    let reads = 0, previews = 0;
+    const u = previewUiHarness({ send: async (url, init) => {
+      if (init.method === 'GET') return pieceHttp(++reads === 1 ? source : freshSource);
+      if (init.method === 'PATCH') throw Error('visual response lost');
+      if (++previews === 2) return sourceConflict();
+      return pieceHttp(previews === 1 ? original : fresh);
+    } });
+    bindSourceRefreshHost(u); await u.host.createFromSavedInput(); await pieceTick();
+    const oldVisual = uiButton(u, 'テーマ：静かな夜');
+    oldVisual.props.onPress(); await pieceTick();
+    assert.equal(u.calls.length, 3);
+    assert.equal(uiButton(u, '保存入力を確認し直す'), undefined, 'uncertain PATCH keeps original recovery');
+    uiButton(u, '最新のプレビューを取得').props.onPress(); await pieceTick();
+    assert.equal(u.calls.length, 4);
+    assert.equal(u.calls[3][1].body, u.calls[1][1].body);
+    assert.equal(u.calls[3][1].headers['Idempotency-Key'], u.calls[1][1].headers['Idempotency-Key']);
+    assert.equal(u.host.controller.getView().canRetry, false);
+    assert.equal(u.host.controller.getView().preview, null);
+    if (closeFirst) u.host.close();
+    const reread = uiButton(u, '保存入力を確認し直す');
+    assert.ok(reread, 'definitive original POST conflict must expose the existing source reread');
+    reread.props.onPress(); reread.props.onPress(); await pieceTick();
+    assert.equal(u.calls.length, 5);
+    assert.equal(u.calls[4][1].method, 'GET');
+    assert.equal(u.host.controller.getView().phase, 'idle');
+    oldVisual.props.onPress(); await pieceTick();
+    assert.equal(u.calls.length, 5, 'old visual action cannot move onto the fresh saved source');
+    uiButton(u, 'ピースを作成').props.onPress(); await pieceTick();
+    assert.equal(u.calls.length, 6);
+    assert.deepEqual(JSON.parse(u.calls[5][1].body).source_ref, freshSource);
+    assert.notEqual(u.calls[5][1].headers['Idempotency-Key'], u.calls[1][1].headers['Idempotency-Key']);
+    assert.equal(u.host.controller.getView().preview.preview_id, fresh.preview_id);
+    assert.equal(u.calls.filter(([, init]) => init.method === 'PATCH').length, 1);
+    u.host.componentWillUnmount();
+  });
+}
+
+for (const [code, status] of [['PIECE_CONFLICT', 409], ['PIECE_SOURCE_NOT_ELIGIBLE', 422]]) {
+  test('visual recovery source reread keeps definitive ' + code + ' without creating another preview', async () => {
+    let reads = 0, previews = 0;
+    const u = previewUiHarness({ send: async (url, init) => {
+      if (init.method === 'GET') return ++reads === 1 ? pieceHttp(request().source_ref)
+        : { status, json: async () => ({ code }) };
+      if (init.method === 'PATCH') throw Error('visual response lost');
+      return ++previews === 1 ? pieceHttp(response('quote')) : sourceConflict();
+    } });
+    bindSourceRefreshHost(u); await u.host.createFromSavedInput(); await pieceTick();
+    uiButton(u, 'テーマ：静かな夜').props.onPress(); await pieceTick();
+    uiButton(u, '最新のプレビューを取得').props.onPress(); await pieceTick();
+    const reread = uiButton(u, '保存入力を確認し直す');
+    reread.props.onPress(); await pieceTick();
+    assert.equal(u.host.sourcePhase, 'unavailable');
+    assert.equal(u.host.sourceCode, code);
+    assert.equal(u.host.controller.getView().preview, null);
+    assert.equal(uiButton(u, 'ピースを作成'), undefined);
+    assert.equal(u.calls.length, 5);
+    assert.equal(u.calls[4][1].method, 'GET');
+    reread.props.onPress(); await pieceTick();
+    assert.equal(u.calls.length, 5, 'old reread control cannot bypass the new definitive result');
+    assert.equal(previews, 2, 'neither original replay nor fresh source read starts a replacement');
+    u.host.componentWillUnmount();
+  });
+}
+
 for (const operation of ['save', 'cancel']) {
   test(`${operation} conflict never permits replacing the saved source`, async () => {
     const u = previewUiHarness({ admitSave: true, send: async (url, init) => init.method === 'GET'
