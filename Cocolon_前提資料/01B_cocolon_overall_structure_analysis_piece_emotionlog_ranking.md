@@ -1,4 +1,4 @@
-> **11/5開始・分析の継続（第9回§199–200）：v7の局所改善を保持。追加20更新/18stop＋既見診断4stopは完走したが、別文の所有者誤読と理由文の退行が残り新b7は不採用。旧4保存の文章/図/coverageと24応答の0モデル再読、112tensor保全を確認。独立6対照の追加はCPUのみ完了、旧14原本/全mask保持。通常v4・本番・端末・配置は不変。** [全結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-actor-ownership-ce20-20261105)。
+> **11/5開始・分析の継続（第9回§201–202）：旧a2eから48更新/14新stopで同14sourceの保存4→9（診断3改善＋学習既見2再現）。所有否定・他者actor欠落・理由/文脈誤読が残り新6c879は研究候補。28応答の非生成再読と旧4保存を保持。明示v7の実HTTPS→通常API→隔離SQLは4新stop/3保存/他者1未解析、各保存のcurrent/月次/readonly一致。通常既定v4・本番/端末/配置不変。** [全結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-explicit-v7-https-sql-20261105)。
 
 > **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
@@ -3608,3 +3608,16 @@ API意味bytes5a78eaa9・最終test1f4b304f。STRUCTURE_MAP_DELTA_NONE、既存s
 | `actor_ownership_ce20_results.json` | 不採用/原本参照/次CPU現在地。model raw/重みの公開0 |
 
 既存共用入口/semantic admission/intent compiler/作者/API/DB/RNのowner追加0。§199のopt-in v7は保持し、通常v4不変。新b7は理由の候補退行と所有転移未達で通常/次初期未採用。STRUCTURE_MAP_DELTA_NONE。詳細はweekly§200。
+
+## §201–202 — 48更新の保全と明示v7 transportの全差分path
+
+| repository path | 当回の責務 |
+|---|---|
+| API `ai/services/ai_inference/analysis_model_source.py` | constructorだけ明示v4/v7を許可、既知exact型のprofile取得と送信前一致。通常factory/既定v4は保持 |
+| API `ai/services/ai_inference/analysis_cumulative_service.py` | 保存済み再利用後の再構築分岐で上記profileを選択。旧callback/保存read不変 |
+| API `ai/tests/test_analysis_cumulative_model_source.py` | 実TLS v4/v7、版不一致の通信前拒否、明示v7の通常ensure/SQL保存再読、既存AsyncMock互換 |
+| trial `actor_ownership_balanced48_trial.py` / `actor_ownership_balanced48_results.json` | 旧20＋理由/不明anchor2、初期a2eの48更新/14新stop比較と不採用を含む全読集計。raw/新重みはprivate |
+| trial `explicit_v7_model_https_trial.py` / `explicit_v7_model_https_results.json` | 合成認証/隔離SQL/実loopback TLS、研究6c879の4要求240秒上限、通常API保存非生成再読。通常採用ではない |
+
+API db311746。元semantic profile/state/meaning compiler/作者/公開wire/DB/RNのowner追加0、STRUCTURE_MAP_DELTA_NONE。通常v4、研究候補未採用、本番/端末/配置0。詳細はweekly§201–202。
+
