@@ -1,4 +1,4 @@
-> **11/5開始・分析の継続（第9回§199–200）：v7の局所改善を保持。追加20更新/18stop＋既見診断4stopは完走したが、別文の所有者誤読と理由文の退行が残り新b7は不採用。旧4保存の文章/図/coverageと24応答の0モデル再読、112tensor保全を確認。独立6対照の追加はCPUのみ完了、旧14原本/全mask保持。通常v4・本番・端末・配置は不変。** [全結果・原本・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-actor-ownership-ce20-20261105)。
+> **11/5開始・分析の継続（第9回§201–202）：旧a2eから48更新/14新stopで同14sourceの保存4→9（診断3改善＋学習既見2再現）。所有否定・他者actor欠落・理由/文脈誤読が残り新6c879は研究候補。28応答の非生成再読と旧4保存を保持。明示v7の実HTTPS→通常API→隔離SQLは4新stop/3保存/他者1未解析、各保存のcurrent/月次/readonly一致。通常既定v4・本番/端末/配置不変。** [全結果・原本・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-explicit-v7-https-sql-20261105)。
 
 > **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
@@ -1259,3 +1259,11 @@ API入口は合成認証/ASGI、モデルだけ実HTTPS socket、DBは隔離SQL�
 既存intent_compiler.pyだけで、sourceが証明した単一過去行動のUNSPECIFIEDと、完全な単一field内の複数SELF行動／決定を既存graphへ通す。主語をowner・別fieldの役割・所有表現から補わない。全unitの一回消費と原文/UTF-8/hashを確認し、sourceの明記順序だけを保持する。未解析本文・他者混在・複数field・欠落/余分unitは対象外。単一主語省略を同一人物の反復へ集約せず、補足の取得前SELF資格は維持する。
 
 元8応答は同raw旧0→新4保存、別6合成は同raw旧0→新4保存。新14stop/2load/学習0、各保存のcurrent/monthly/readonlyは非生成で文章/図/coverage/ID一致。実応答は隔離mock RPC保存、別合成のSQL保存は182 PASS。一般文章の本人基準/暗黙役割・記録間意味、通常採用/本番/端末/配置は未達。API意味bytes5a78eaa9、最終test1f4b304f。STRUCTURE_MAP_DELTA_NONE（既存owner内の採用証明、型/作者/保存版/DTO/DB/RN変更0）。[全結果・失敗・原本・再開点](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-ordinary-prose-20261105)。
+
+## §201–202 — 主体・所有の局所改善と明示v7の実通信接続
+
+旧22教師の48更新は新6c879研究候補を保全。同14sourceの保存4→9だが診断3改善と学習既見2再現を分け、所有否定/他者主体欠落/文脈比較の誤読を保持する。28応答は0モデルで完全再読、旧成功4件の内容は保持。通常や次初期値に自動採用しない。
+
+API db311746はconstructorだけのv7選択を既存transportへ接続し、保存済み再利用後にprepare版を選ぶ。通常factory/旧callbackはv4。実4B新4stop/1load/学習0で実TLS→通常API→隔離実SQLへ3保存/1未解析、各3並行を1要求に共有、保存再読は生成0でID/内容一致。合成Auth/ASGI入口・loopback TLSの接続試験であり、本番/端末ではない。同本文でも新snapshotで出力が変わるため一般化は未達。
+
+[全結果・原本・再開点](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-explicit-v7-https-sql-20261105)。全pathは01Bの§201–202。本人基準/暗黙役割/記録間意味・観測会・通常重み/外部常時接続/本番/配置は引き続き残件。
