@@ -1,0 +1,30 @@
+{
+  "schema_version": "analysis_private_batch_composition_checkpoint.v1",
+  "status": "SYNTHETIC_COMPOSITION_AND_INPUT_REPLAY_VERIFIED_NO_NORMAL_ACQUISITION",
+  "api_commit": "fc7563b98d5dfa5b8df7815e9a8b89f334b6719b",
+  "targeted_tests": 55,
+  "targeted_seconds": 55.65,
+  "ci": {
+    "run": 42091295426,
+    "job": 127469702801,
+    "conclusion": "success",
+    "generation_passed": 2312,
+    "generation_skipped": 1,
+    "generation_subtests": 12048,
+    "cumulative_passed": 302,
+    "cumulative_subtests": 2,
+    "sql_records": 201,
+    "sql_monthly": 15
+  },
+  "normal_adoption": false,
+  "production_writes": 0,
+  "builds": 0,
+  "merges": 0,
+  "private_archive": {
+    "library_file_id": "libfile_78de85117ab48191ba102c0c2f42ccec",
+    "version": 3,
+    "bytes": 15976405,
+    "sha256": "4f73726e043a55ef709b954b9758b89537b89244eda5320710654f4000a5b834"
+  },
+  "private_evidence_link": "https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal"
+}
