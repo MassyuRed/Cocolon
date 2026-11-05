@@ -1,4 +1,4 @@
-> **11/5開始・分析の継続（第9回§213）：元全文が否定を保つ希望を、原sourceのSELF／negative／wish証明のまま既存consumerへ接続。Jupyter241 PASS・CI全工程成功。同じ実4Bの4原応答を0モデル再読し、WH04だけNoneから否定希望1node、WH02はcanonical一致、WH01／03は未対応を維持。raw修復／NEG追加／DB保存0。初回harness誤比較と商品差を分け、失敗原本も保持。version7保存済み。通常採用・本番未有効化。** [全結果・境界・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-negative-wish-consumer-20261105)。
+> **11/5開始・分析の継続（第9回§214）：新規隔離targetで4vendor kernel bindingを実確認。固定API100c1bb／元a2eの3要求はwarmup候補保持、v7は6欄中field1だけで旧raw同一、v8は23秒signal14で未返却。1load／3開始／2stop、速度改善・全欄保持・意味品質は未証明。global base／商品source／通常選択を維持し、通常採用なし。version8保存済み。** [実結果・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-optional-kernel-diagnostic-20261105)。
 
 # Analysis — 最小field接続と実4B probe
 
@@ -2258,3 +2258,9 @@ API100c1bbでprivate v8を追加。v7 system全文＋実field番号一覧／総�
 API5c9606で、原memoの明記SELF・否定希望current_input／pastを元全文・source proofのままconsumerへ接続。NEG注釈を追加せず、shared checker／grammar／作者は不変。Jupyter241 PASS・CI全工程成功。同じ元実4Bの4Responseを0モデル再読し、WH04だけNone→否定希望1node、WH02肯定pastはcanonical一致、WH01／03は未対応維持。初回harnessのtuple/list誤比較と商品結果を分け、失敗原本も保持。全4replay ZIPのCRC／全manifestを照合し、version7保存済み。通常採用・本番未有効化。
 
 WH04の元rootは既に否定を保持しており、旧consumerの肯定限定が未対応の原因だった。既存原memoの完全source proofとunit照合を保ち、NEG注釈や主体を補完しない。このwish proofと併存するACTIONは従来の肯定過去のみ。一般読解・他者／省略／認知／順序／別欄／補足・全量取得への新しい成功主張はない。[原本・同一応答比較](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-negative-wish-consumer-20261105)。
+
+## §214 — vendor bindingと診断結果を分離
+
+新規隔離targetの0.5系／causal1.7／einopsで4vendor bindingを実確認し、global base／source／元a2e／旧v8失敗rootを保持。固定API100c1bbの実試行は1load／3開始／2stop・100.814029211秒。KW00は候補保持、KW01は6欄中field1だけで旧raw同一・strict拒否、KW02は23秒SIGALRMでraw未返却。warmupはload／初回JITを含み、速度改善・通常期限・意味品質は未証明。通常採用なし。version8保存済み。
+
+先行0.6 import-only失敗はmodel0の別原本。新targetのbinding成功を通常採用・速度対照・品質成功にしない。KW01の欠落は補完せず、KW02はrawなしとして保持する。[原本・計時・限界](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-optional-kernel-diagnostic-20261105)。
