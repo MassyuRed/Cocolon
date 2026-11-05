@@ -1,4 +1,4 @@
-> **11/5・分析の最新（第9回§192）：API722835f9で適格ordinary本人ANSWERを親原入力と別source/根拠のまま既存の明示SELF過去行動へ接続。実4Bの独立合成4要求/原5記録＋補足4・1load・追加学習0・48.576秒、全4保存/5記録mapped/未読0。役割＋行動、回答の否定、同記録の再述count1、異カテゴリの別記録を保持し、辺0・不明段階を維持。最終Jupyter269 PASS/SQL11 SKIP、CI42006289264全step成功。省略主体の取得前拒否も補修。通常HTTP/cronの4B自動接続/配置、一般分析品質・本人基準/記録間関係は未完成、正式受入れ未判定。** [全結果・制限](#analysis-supplemental-answer-result-20261105)。
+> **11/5・分析の最新（第9回§193・2題の限定比較）：明記担当ROLEと決定ACTIONを区別するopt-in selected_material.v6を、独立合成2題でv4と比較。v4は保存0/2（未対応1・strict拒否1）、v6は両題の肯否/元カテゴリ/不明を保つ2nodeを保存し、明記順序あり1辺・順序なし辺0。新4stop/1load/追加学習0・37.101秒、旧rawの修復・kind救済0。Jupyter269 PASS/SQL12 SKIP、CI42011295256全step成功。旧v4 messages/保存版と通常既定は保持。v6の通常採用・一般kind品質/本人基準の理解・配置は未成立。** [全結果・制限](#analysis-role-choice-prompt-result-20261105)。
 
 # 第9回 Cocolon週末報告会 — 2026-10-31（開催中）
 
@@ -4279,3 +4279,33 @@ API722835f9は§191の全INCLUDED原記録資格を継承し、適格ordinary本
 [公開合成結果](../observation_learning/trials/2026-11-01-analysis-model-fields/supplemental_answer_results.json)に原5記録＋回答4、返却field数/kind、全可視本文/meta/coverage、同raw再読と検証結果を保存する。raw/request/messages/元snapshot/保存再読/logの非公開原本は[検証原本](https://chatgpt.com/library?file_id=libfile_c61b29e3a7888191afd814f0d0d4f151&account_id=personal)。保存原本778,047bytes/SHA256 `1385a5e83b4ad807a034a02fc604958bee53159ccd724bc8a48e218386e67472`には、Pod回収JSON619,672bytes/SHA256 `75cfe47c04df846f7ec0090d0082b5bde8cbb5db9833f880891d1f636cf7facc`、最終CIのdecoded log、初回CIの27失敗log、remote blob SHAを含む。Pod内包24fileの全bytes/SHA一致と全4request/response/本文/図を照合済み。
 
 今回も全文が読めない回答、他者/省略主体、未解決対立、訂正/撤回、比較は採用しない。補足のROLE/担当・決定や複数節、WRITTEN_PAST_ROLE_CLAUSEを含む親＋回答は未対応。privateな原入力限定ROLE/ROLE_ACTION/ROLE_CLAUSEの保存契約を維持し、欠落field/誤kindの補完・finiteへの無言置換・新しい親子/回答間/記録間の順序・原因・反復共起は0。通常HTTP/cronの4B自動接続、transport/採用重み/配置、MR02のfield欠落/担当kind、一般本人基準・暗黙役割・判断/選択、記録間の再出現/変化、IF/Saved/観測会は残件。新型/保存版/公開DTO/DB/RN/作者owner/通常provider追加0、未配置、一般分析品質・正式商品受入れは未成立。
+
+<a id="analysis-role-choice-prompt-result-20261105"></a>
+## 193. 11/5：明記担当ROLEと決定ACTION — 2題のv4/v6限定比較
+
+### 実装と比較条件
+
+API8efd07e6は既存quoted-parent familyへopt-in `selected_material.v6`と専用private stateを追加した。v4のuser materialと全messages/保存identityを変えず、v6だけ既存指示へ担当/決定の独立架空対照を追記する。説明は道具管理/順番、比較は別の会場準備/手順と連絡/日程で、評価や失敗rawを教師化していない。source資格、finite compiler、唯一realizer・通常ensureの既定v4は不変。担当を対象作業の完了へ、決定を対象の実行達成・動機・判断基準へ昇格しない。
+
+変更は既存API3path：`ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py`（v6指示/profile/ref/state）、同inference `analysis_cumulative_service.py`（明示profileの既存build/保存/再読/typed選択5箇所）、`ai/tests/test_analysis_model_role_decision.py`（旧v4固定hash、新指示と評価語分離、既存source証明・版別再読/偽装/strict拒否・補足文脈）。source_adapter/finite compiler/唯一realizerと既存workflowは変更0。trial `responsibility_contrast_trial.py`（runnercf3be847）/`responsibility_contrast_results.json`は同2snapshotのv4/v6比較・保存再読/公開結果索引で、通常ensureのprofileを変えるpatchは隔離runner内だけ。
+
+独立合成CP01/02の同じsnapshotをv4/v6各1回、保存a2e/config006e・固定Qwen3.5-4B revision851bf6e/既存pinsで比較し、新4生成/4stop/1load/学習0・37.100584秒で完了。v4は保存0/2、v6は保存2/2で各2node・未読0。CP01は仕事カテゴリの担当＋その後の決定を1本の明記順序線へ保持し、原因とは表示しない。CP02は生活カテゴリの担当否定/決定否定と辺0・接続不明を保持する。これは2題の限定比較で、一般kind精度・本人基準の理解や通常採用の成立ではない。
+
+| 独立合成入力 | v4 | v6 |
+|---|---|---|
+| CP01：私は会場の準備を担当しました。その後、私は手順を決めました。（仕事） | 未対応。担当rootはACTION。決定のRELATIVE_TIME提案も残る | ROLE＋ACTIONの2node、原文の順序1辺、未読0 |
+| CP02：僕は連絡を担当しなかった。僕は日程を決めなかった。（生活） | 担当ACTION誤kindに加え、決定へ原文外NEG「しなかった」を返し422拒否 | 担当と決定の否定を保持する2node、辺0/接続不明、未読0 |
+
+v4のCP01は担当rootがACTIONで未対応。決定側のRELATIVE_TIME「その後」も現witnessで許可するSELF/NEG以外のqualifierであり、唯一原因を誤kindだけと断定しない。CP02は担当のACTION誤kindに加え、「決めなかった」unitへ原文にないNEG「しなかった」を返し、strictで422 `analysis_saved_source_unavailable`となった。両失敗を保持し、ROLE再ラベル・NEG修復・finite結果への置換・追加生成による救済は0。
+
+### 保存再読・検証
+
+全4request/response/rawを0生成/0load・0.379327秒で再読し、状態/拒否理由・本文・coverage・新規artifact UUID以外の全projectionが一致。保存された各artifact内のcurrent/月次/readonlyは本文/図/IDが完全一致した。保存は実ensure/build/commit/read＋隔離mock RPCで、実DB・本人端末の成功ではない。prepareは入力tokens2694/3242/2692/3240＋予約2048<8192、5.189555秒・model0。Jupyter269 PASS/SQL依存12 SKIP/既存warning1・25.16秒、CI42011295256/job127190714884全step成功（生成/保存2240 PASS・旧SQL1 SKIP・12048 subtests、共有owner1 PASS、累積/Q3/jobs92 PASS、SQL201原本/15月参照）。
+
+最終CIの工程別所要は生成/保存269.48秒、共有owner18.38秒、累積/Q3/jobs39.99秒（既存Pydantic warning1・2 subtests）。隔離SQLのowner/閲覧rank/月次不変/削除寿命を通過した。本番Supabaseの再照合ではない。Jupyter Python3.12.3/FastAPI0.162.0/Pydantic2.14.1とCI Python3.12.16/0.142.2/2.13.5は別環境。
+
+### 原本と今回の採否・残件
+
+[公開合成結果](../observation_learning/trials/2026-11-01-analysis-model-fields/responsibility_contrast_results.json)に全2原文、4条件のfield数/kind・全可視本文/meta/coverage/拒否と検証集計を保持する。raw/request/messages/prepare/snapshot/保存再読/logの非公開原本：[検証原本](https://chatgpt.com/library?file_id=libfile_f5d9b44d3f8c8191a9ed77f9ef55ebad&account_id=personal)。保存原本505,188bytes/SHA256 `af3e5a3e808a806ab7a7bc97422f739010368485c37065b694e24e5b818aeecb`には、Pod回収452,421bytes/SHA256 `13784ec43fe674c64158aa6a3daeec0373af6fc4ae9ed5898afb219f99b2ce01`、最終CI decoded log、source3blobのSHAを含む。Pod内包18fileの全bytes/SHA一致、全4source/raw/本文/図と再読identityを照合済み。
+
+§191/192の全原入力・適格ordinary補足・原文/親版/round・同記録count1・未解析表示の境界は保持する。補足ROLE/担当・決定、複数節補足、訂正/撤回/比較の資格は今回拡げない。旧v4や過去の不採用v5を採用済みへ変えず、v6はopt-in候補のまま。通常HTTP/cronの4B自動接続、transport/採用重み、一般本人基準・暗黙役割・判断/選択・記録間の意味関係、IF/Saved/観測会・本人端末/配置は残件。公開API/DTO/DB/RN・新商品owner/作者追加0、未配置、正式商品受入れ未判定。

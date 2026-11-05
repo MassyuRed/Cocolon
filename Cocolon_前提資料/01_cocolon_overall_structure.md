@@ -1,4 +1,4 @@
-> **11/5・分析の最新（第9回§192）：API722835f9で適格ordinary本人ANSWERを親原入力と別source/根拠のまま既存の明示SELF過去行動へ接続。実4Bの独立合成4要求/原5記録＋補足4・1load・追加学習0・48.576秒、全4保存/5記録mapped/未読0。役割＋行動、回答の否定、同記録の再述count1、異カテゴリの別記録を保持し、辺0・不明段階を維持。最終Jupyter269 PASS/SQL11 SKIP、CI42006289264全step成功。省略主体の取得前拒否も補修。通常HTTP/cronの4B自動接続/配置、一般分析品質・本人基準/記録間関係は未完成、正式受入れ未判定。** [全結果・制限](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplemental-answer-result-20261105)。
+> **11/5・分析の最新（第9回§193・2題の限定比較）：明記担当ROLEと決定ACTIONを区別するopt-in selected_material.v6を、独立合成2題でv4と比較。v4は保存0/2（未対応1・strict拒否1）、v6は両題の肯否/元カテゴリ/不明を保つ2nodeを保存し、明記順序あり1辺・順序なし辺0。新4stop/1load/追加学習0・37.101秒、旧rawの修復・kind救済0。Jupyter269 PASS/SQL12 SKIP、CI42011295256全step成功。旧v4 messages/保存版と通常既定は保持。v6の通常採用・一般kind品質/本人基準の理解・配置は未成立。** [全結果・制限](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-role-choice-prompt-result-20261105)。
 
 > **11/1・7101本人確認済み（第9回§43）：** RN7464f858のiOS #71/run41283646380/job124780456306は署名Archive・写真目的文検査・IPA・TestFlight Uploadの全工程success。Mashが7101を反映し、今回依頼した修正の完了を確認した。起動待ち、Home全体行動削除、Ranking撤去、設定以外のガイド同期、新PieceのEmlisロゴを含む。こころ天気は今/日週月/履歴/未読/通知/tutorialを従来どおり維持。API3407402/dep-dbjebcflk1mc7390mnr0は07:11:03 UTC Live、health/bootstrap200・private5ON/public3OFF。API製品同一blobのd43cabcd native PostgreSQL CI41283815884は全step成功。RNの旧V4 metrics19失敗とlegacy canvas13reportは残る。依頼UIの本人確認を、全製品の品質/正式商品受入れへ広げない。GPU再起動0。
 
@@ -7523,16 +7523,18 @@ API86d19b6d、STRUCTURE_MAP_DELTA_PRESENT。通常の累積mapは不変。新ana
 
 11/3・分析の最新（weekly§123）：独立二欄8教示＋旧保持10の18更新/172NLL・22生成/2loadを完了。同じ二欄6例のtyped3→5（肯定ROLE/copulaとACTION NEGの誤modifier2例を修復）、旧成功5保存/projection bytes不変。非学習別語彙8は7件文章図へ到達、原文外CONTENT_TARGET1件は全体拒否、対象子欠落4件を保持。MD02の否定行動/YREASON01の理由・不明境界は旧未達のまま。a2eは研究候補保存、通常/次初期自動採用false。全22source/36raw/19成功文章図と保存再読を照合、全原本/再開点保存済み。API ded0586不変、STRUCTURE_MAP_DELTA_NONE、本人補足typed/記録間・比較/通常累積/IF・Saved等は残件。GPU2MiB/0％、レンタル維持。
 
-### 11/5 §192：適格本人補足の明示行動を、親原入力と別根拠のまま同じmapへ保持
+### 11/5 §193：明記担当と決定の指示比較 — 独立合成2題の限定結果
 
-API722835f9は§191の全INCLUDED原記録資格を継承し、適格ordinary本人ANSWERを別envelope/memo fieldのまま既存の明示SELF/fact/past行動へ渡す。`_analysis_saved_member`の本人・親原入力版・質問/回答ID/round、freezeの原文/位置/カテゴリ、`_active_sources`の補足全文・対立/訂正検査を共用し、全request/messages/responseを先に束縛する。回答自身のproposition.actor==SELFを取得前にも確認し、認証本人や親の役割から省略主体を補わない。親と回答を同じ一記録の機会として扱い、同義再述は原入力・回答の根拠を残してrecord件数1とする。
+API8efd07e6は既存quoted-parent familyへopt-in `selected_material.v6`と専用private stateを追加した。v4のuser materialと全messages/保存identityを変えず、v6だけ既存指示へ担当/決定の独立架空対照を追記する。説明は道具管理/順番、比較は別の会場準備/手順と連絡/日程で、評価や失敗rawを教師化していない。source資格、finite compiler、唯一realizer・通常ensureの既定v4は不変。担当を対象作業の完了へ、決定を対象の実行達成・動機・判断基準へ昇格しない。
 
-保存a2e/config006e・固定Qwen3.5-4B revision851bf6e/既存pinsを使い、独立合成SA01–04をJupyterで新4生成/1load/学習0、48.576299秒で確認。返却fieldは2/2/2/3で全9欄を保持し、4stop/4保存/原5記録mapped/未読0。SA01は親の受付係ROLE＋補足の費用記録、SA02は回答の「記録しなかった」、SA03は同一記録内の再述を1node/count1、SA04は親子の仕事カテゴリと別記録の生活カテゴリを保持した。全caseは辺0、欠けた段階とつながりの不明を残す。通常ensure/commit/readを隔離mock RPCで保存・現在値/月次/読取再表示まで確認した結果で、本番DB・本人端末・一般日本語の成功ではない。
+独立合成CP01/02の同じsnapshotをv4/v6各1回、保存a2e/config006e・固定Qwen3.5-4B revision851bf6e/既存pinsで比較し、新4生成/4stop/1load/学習0・37.100584秒で完了。v4は保存0/2、v6は保存2/2で各2node・未読0。CP01は仕事カテゴリの担当＋その後の決定を1本の明記順序線へ保持し、原因とは表示しない。CP02は生活カテゴリの担当否定/決定否定と辺0・接続不明を保持する。これは2題の限定比較で、一般kind精度・本人基準の理解や通常採用の成立ではない。
 
-最終722835f9へ同じ4request/messages/response/rawを再読し、本文・coverage・projection全体が新規artifact UUIDを示すprojection_of以外一致（0生成/0load・0.666512秒）。各保存artifact内のcurrent/月次/readonlyは本文・図・IDが完全一致した。最終Jupyterは269 PASS/11 SQL依存SKIP/既存warning1・23.94秒、CI42006289264/job127173746422は全step成功（生成/保存2226 PASS・旧SQL1 SKIP・12048 subtests、共有owner1 PASS、累積/API/Q3/jobs92 PASS、SQL201原本/15月参照）。Jupyter Python3.12.3/FastAPI0.162.0/Pydantic2.14.1とCI Python3.12.16/0.142.2/2.13.5は別環境。
+v4のCP01は担当rootがACTIONで未対応。決定側のRELATIVE_TIME「その後」も現witnessで許可するSELF/NEG以外のqualifierであり、唯一原因を誤kindだけと断定しない。CP02は担当のACTION誤kindに加え、「決めなかった」unitへ原文にないNEG「しなかった」を返し、strictで422 `analysis_saved_source_unavailable`となった。両失敗を保持し、ROLE再ラベル・NEG修復・finite結果への置換・追加生成による救済は0。
 
-今回も全文が読めない回答、他者/省略主体、未解決対立、訂正/撤回、比較は採用しない。補足のROLE/担当・決定や複数節、WRITTEN_PAST_ROLE_CLAUSEを含む親＋回答は未対応。privateな原入力限定ROLE/ROLE_ACTION/ROLE_CLAUSEの保存契約を維持し、欠落field/誤kindの補完・finiteへの無言置換・新しい親子/回答間/記録間の順序・原因・反復共起は0。通常HTTP/cronの4B自動接続、transport/採用重み/配置、MR02のfield欠落/担当kind、一般本人基準・暗黙役割・判断/選択、記録間の再出現/変化、IF/Saved/観測会は残件。新型/保存版/公開DTO/DB/RN/作者owner/通常provider追加0、未配置、一般分析品質・正式商品受入れは未成立。
+全4request/response/rawを0生成/0load・0.379327秒で再読し、状態/拒否理由・本文・coverage・新規artifact UUID以外の全projectionが一致。保存された各artifact内のcurrent/月次/readonlyは本文/図/IDが完全一致した。保存は実ensure/build/commit/read＋隔離mock RPCで、実DB・本人端末の成功ではない。prepareは入力tokens2694/3242/2692/3240＋予約2048<8192、5.189555秒・model0。Jupyter269 PASS/SQL依存12 SKIP/既存warning1・25.16秒、CI42011295256/job127190714884全step成功（生成/保存2240 PASS・旧SQL1 SKIP・12048 subtests、共有owner1 PASS、累積/Q3/jobs92 PASS、SQL201原本/15月参照）。
 
-今回の変更fileは既存APIの3path：`ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py`（既存全文行動witnessの共用と全親子graphから回答自身の根拠だけを再証明）、同 `semantic_admission.py`（原入力＋適格補足の資格/明示SELF事前確認、親の既存証明と回答の証明を一機会へ構成）、`ai/tests/test_analysis_cumulative_model_source.py`（親/版/round/カテゴリ/肯否/件数/不採用、実隔離SQL保存・回答変更後の旧response拒否/月次不変・取得中編集CAS）。`astor_material_snapshots.py`/source_adapter/累積service/唯一作者/既存workflowは照合した既存ownerで、今回の変更pathではない。trial `supplemental_answer_trial.py`（runner6e9d020）/`supplemental_answer_results.json`が独立合成入力・比較/表示・実集計を索引化する。
+§191/192の全原入力・適格ordinary補足・原文/親版/round・同記録count1・未解析表示の境界は保持する。補足ROLE/担当・決定、複数節補足、訂正/撤回/比較の資格は今回拡げない。旧v4や過去の不採用v5を採用済みへ変えず、v6はopt-in候補のまま。通常HTTP/cronの4B自動接続、transport/採用重み、一般本人基準・暗黙役割・判断/選択・記録間の意味関係、IF/Saved/観測会・本人端末/配置は残件。公開API/DTO/DB/RN・新商品owner/作者追加0、未配置、正式商品受入れ未判定。
 
-[全結果・失敗履歴・原本](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplemental-answer-result-20261105)。
+変更は既存API3path：`ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py`（v6指示/profile/ref/state）、同inference `analysis_cumulative_service.py`（明示profileの既存build/保存/再読/typed選択5箇所）、`ai/tests/test_analysis_model_role_decision.py`（旧v4固定hash、新指示と評価語分離、既存source証明・版別再読/偽装/strict拒否・補足文脈）。source_adapter/finite compiler/唯一realizerと既存workflowは変更0。trial `responsibility_contrast_trial.py`（runnercf3be847）/`responsibility_contrast_results.json`は同2snapshotのv4/v6比較・保存再読/公開結果索引で、通常ensureのprofileを変えるpatchは隔離runner内だけ。
+
+[全結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-role-choice-prompt-result-20261105)。
