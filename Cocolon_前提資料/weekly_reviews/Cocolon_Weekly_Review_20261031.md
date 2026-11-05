@@ -4824,3 +4824,31 @@ before2＋after14の新16stop／3load、24更新／固定10点の前後NLL20測�
 後続は元a2eを使い、新private v8のsystem末尾へ欄一覧／総数だけを加える2要求比較を予定する。100c1bb候補コードはcheckpointとテスト中の段階であり、本節の実行成果へ含めない。新profileの実4B結果・通常採用を主張しない。本人基準・暗黙役割・記録間意味、実モデル全欄出力と通常全量取得は引き続き残件である。
 
 [本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/multirecord_wire_results.json)。
+
+<a id="analysis-v8-fieldcount-20261105"></a>
+## 212. 11/5開始の継続 — v8の欄一覧教示を実装、実4Bは原応答を返さず終了
+
+§211の学習候補とは分け、元a2eで欄一覧の明記だけを比較するprivate v8を実装した。API [100c1bb65ccaa02f1253f9a43fc33cc9bba3dda4](https://github.com/MassyuRed/mashos-api/commit/100c1bb65ccaa02f1253f9a43fc33cc9bba3dda4)は既存semantic_admission.pyとtest_analysis_model_actor_profile.pyの2pathだけ。v7のsystem教示を全て継承し、末尾へ実field番号一覧・総数と全番号を入力順に一度返す指示だけを加える。user material・元source／guard／record・field refsは同一で、実際に変わるsystem bytesに対応してprivate profile／request_ref／messages hash／state variantを分ける。旧v7応答をv8へ再束縛しない。
+
+通常constructor・既定v4、plannerとbatch envelopeの選択whitelistは拡張していない。意味採用・有限文法・作者・公開DTO／DB／RNも不変。旧v4／v6／v7のmessages・ref・state既知bytes保持、v7/v8のResponse／state混用拒否、二欄原入力＋最大3適格回答の欄一覧、6／7欄のfield1だけの拒否、全欄のempty unitsを未解析で保つこと、stateの非生成再読を既存testへ追加した。
+
+Jupyterは384 PASS／87.39秒、PostgreSQL WASM未設定による19 SKIP。最終CI [42105775747](https://github.com/MassyuRed/mashos-api/actions/runs/42105775747)/job127520073726は全step success：生成／保存2349 PASS・既存SQL依存1 SKIP・12048subtests／309.59秒、共有owner1 PASS／23.05秒、累積／API／jobs302 PASS・既存warning1・2subtests／127.08秒、隔離SQL201原本／15月参照。Jupyterの未設定SKIPとCIの隔離SQL成功を分け、件数を重複加算しない。
+
+### 同じ既知7／6欄での一回実行
+
+初回のCPU準備はprior directory指定誤りでpack.jsonを読めず失敗した。model load／生成／学習0の準備失敗であり、後の実モデル試行の再生成ではない。参照先を直したCPU準備は7.905241100117564秒で完了し、旧v7の原request／source／guardとcached2応答の不変、v7 system全文継承・user完全同一を確認した。
+
+| 予定した要求 | CPUで確認した予算 | 実行結果 |
+|---|---|---|
+| FC01・7field | prompt4375＋予約2048＝6423、本文20284bytes | 1回開始したが原rawを返さずchild終了 |
+| FC03・6field | prompt4274＋予約2048＝6322、本文19885bytes | 未実行 |
+
+context8192／出力予約2048／本文65536を緩めず準備した。実runは1load・model call開始1・返却raw0・新生成0・stop0・学習0、総34.60794290713966秒。runnerがgenerator直前に23秒以内のITIMER_REALとSIGALRM既定動作を設定し、childは-14（signal14）で終了した。状態はFAILED_PARTIAL_NO_RETRY、実model retry0。本試行を再実行していない。
+
+返却rawがないため、全欄欠落の改善／悪化、主体・否定・親子関係の意味、strict受理、map品質は判定できない。strict rejection0は解釈段階へ到達していない結果で、受理成功0件の品質試験へ換算しない。cached旧v7の2rawを新v8出力に数えず、原Responseを修復しない。source・初期a2e・cached v7原本は前後不変、API／DB／map生成／保存は0、通常・次学習初期への採用なし。
+
+実logにはcausal_conv1dとflash-linear-attention不在による4bindingのreference PyTorch fallback警告があった。時間blockerの仮説候補として扱い、今回のsignal終了の因果、内部モデル原因、出力量／メモリ原因を断定しない。optional kernelは公式候補調査・準備までで未導入、速度改善は未測定。後続negativewish API5c9606も候補コードcheckpoint／テスト中だけで、本節の実行成果へ含めない。
+
+原試行ZIPは35,593bytes／SHAc3bb20aeb7a49bc23007f3cd8fe1cbe8c83a434edb5617f70b48d84e4ecbe4c4、15member／全14manifestのbytes・SHA／CRCを照合。[非公開原本](https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal)のversion6へ失敗・未返却・旧原本・review・CIを保存済み（31,354,573bytes、SHAb29b669a0fc181bcf27bfa6fb5e6e6ba57ee9ae09aabd136d7afb31e53d5cc2f）。raw／本文／人物を公開集計へ出さない。private profile／ref／state variantの追加としてSTRUCTURE_MAP_DELTA_PRESENT。通常transport／planner／batch選択、意味型／作者／公開DTO／DB／RN／配置／buildの追加変更0。通常既定v4・重み通常未採用・本番未有効化、一般本人基準・暗黙役割・記録間意味・実全欄出力／通常全量取得の残件を保持する。
+
+[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/v8_fieldcount_results.json)。
