@@ -1,4 +1,4 @@
-> **11/5・分析の最新（第9回§193・2題の限定比較）：明記担当ROLEと決定ACTIONを区別するopt-in selected_material.v6を、独立合成2題でv4と比較。v4は保存0/2（未対応1・strict拒否1）、v6は両題の肯否/元カテゴリ/不明を保つ2nodeを保存し、明記順序あり1辺・順序なし辺0。新4stop/1load/追加学習0・37.101秒、旧rawの修復・kind救済0。Jupyter269 PASS/SQL12 SKIP、CI42011295256全step成功。旧v4 messages/保存版と通常既定は保持。v6の通常採用・一般kind品質/本人基準の理解・配置は未成立。** [全結果・制限](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-role-choice-prompt-result-20261105)。
+> **11/5・分析の最新（第9回§194・適格補足の担当＋決定）：ANSWER自身の過去SELF担当ROLE＋決定ACTIONを既存完全field証拠で採用できるよう接続。実4Bの新source構成4要求（2構成は§193の節を再使用）で、新版は4保存・5record/未解析0、旧版は3未対応＋AC04の独立r2だけ部分保存。回答内明記順序だけ1/0/0/1辺、重複AC03は各2根拠でも記録count1。新4stop/1load/学習0・53.891秒、raw修復0。Jupyter316 PASS/SQL13 SKIP、CI42015033971全step成功。prompt/state/通常既定v4は不変、v6はopt-in・重み通常未採用、一般分析品質／通常4B接続／配置は未成立。** [全結果・制限](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplemental-role-decision-result-20261105)。
 
 # Analysis — 最小field接続と実4B probe
 
@@ -2148,3 +2148,20 @@ v4のCP01は担当rootがACTIONで未対応。決定側のRELATIVE_TIME「その
 [公開2題・4条件の全表示と集計](responsibility_contrast_results.json)、[runnercf3be847](responsibility_contrast_trial.py)、[全検証・原本・次の残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-role-choice-prompt-result-20261105)を参照。旧v4 messages/保存stateは不変、v6だけ別ref/専用private state。同じsnapshotのuser materialはv4/v6で完全一致し、system指示の対照追記だけを比較した。
 
 §191/192の全原入力・適格ordinary補足・原文/親版/round・同記録count1・未解析表示の境界は保持する。補足ROLE/担当・決定、複数節補足、訂正/撤回/比較の資格は今回拡げない。旧v4や過去の不採用v5を採用済みへ変えず、v6はopt-in候補のまま。通常HTTP/cronの4B自動接続、transport/採用重み、一般本人基準・暗黙役割・判断/選択・記録間の意味関係、IF/Saved/観測会・本人端末/配置は残件。公開API/DTO/DB/RN・新商品owner/作者追加0、未配置、正式商品受入れ未判定。
+
+<a id="analysis-supplemental-role-decision-result-20261105"></a>
+## 11/5 §194 — 適格ordinary補足の担当＋決定：限定4構成を商品graphへ接続
+
+APIbb121484は、§192のordinary補足plain ACTIONと§193のopt-in `selected_material.v6`を継承し、ANSWER自身に明記された過去SELFの担当ROLE＋決定ACTIONの完全2nodeを既存商品経路へ接続した。原入力用の完全field証明を共用し、全親原入力＋ANSWER集合を先に既存compilerで検証して、回答自身のenvelope／根拠／元labelだけで同じ証明を行う。新prompt/profile/state・意味型・作者・有限文法は追加せず、誤kind再ラベル／欠落unitやNEGのraw修復／source-only代替は0。
+
+実4Bの新source構成AC01〜04を各1回、保存a2e/config006e・固定Qwen3.5-4B revision851bf6e/既存pinsで生成し、新4stop/1load/学習0・53.891208秒で4保存・5record mapped/未解析0。node数3/3/2/4、辺1/0/0/1。旧8efd07e6へ全く同じ4request/messages/rawを0生成で渡すとAC01〜03は未対応、AC04は独立r2の否定ACTIONだけを保存（1/2record mapped・未解析1）した。旧版を全例無出力とせず、回答側2nodeとそれを持つ親recordのcoverageが商品差分である。
+
+AC01/04の明記順序は回答自身の担当→決定だけで、原因／親→回答／回答→別回答／別recordの辺を作らない。AC02は担当・決定それぞれの否定と順序なしの接続不明を保持。AC03は同意味の無順序重複を2nodeへ集約し、各nodeに原入力＋回答の2根拠を残す一方、同記録のcount/badgeは1。全ケースで元カテゴリ・不明を保持し、回答を別の機会へ数えない。2構成は§193の節を補足へ置き直した新source構成で、独立held-outの一般言語率ではない。
+
+旧／新consumerと新版replayで全4request/response/rawが一致し、新版の0生成/0load再読1.019909秒は本文・coverage・新規artifact UUID以外の全projectionが一致した。各保存artifact内のcurrent/月次/readonlyは本文/図/ID/coverageが完全一致し、生成を禁止して再読した。保存は実ensure/build/commit/read＋隔離mock RPCで、実DBや本人端末の成功ではない。prepareは入力tokens3283/3284/3287/3387＋予約2048<8192・5.403826秒/model0。Jupyter5suiteは316 PASS/SQL依存13 SKIP/既存warning1・30.25秒、CI42015033971全step成功（生成/保存2240 PASS・旧SQL1 SKIP・12048 subtests、共有owner1 PASS、累積/Q3/jobs124 PASS、隔離SQL201原本/15月参照）。
+
+原文／親版／owner／既存QUESTION/ANSWERのround資格／選択カテゴリとsource_set_refは全集合のまま保持する。省略主語を親やownerからSELFへ補完せず、全補足claimのSELF資格・訂正／撤回／未解決対立・比較の拒否、親private ROLE_CLAUSEの未対応を維持。一般複数節補足や単独担当ROLE、暗黙役割・判断基準／理由／性格、担当対象作業の完了や決定対象の実行達成へ拡げない。親の未対応本文はSOURCE_SCOPEとして残す。旧v4 messages/保存版と通常ensure既定v4は不変、v6はopt-in・モデル重みは通常未採用。通常HTTP/cronの4B接続、transport/採用重み、一般本人基準・記録間意味関係、IF/Saved/観測会・本人端末／配置は残件で、一般分析品質・正式商品受入れは未判定。
+
+変更は既存API3path：`ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py`（原入力の担当／決定完全field証明を`_model_role_decision_field_graph`へ共用化し、`compile_model_supplement_role_decision`で全集合から回答自身の根拠を抽出）、同`semantic_admission.py`（`_compile_model_observed_record`で回答局所ref/辺を既存record graphへ束縛し、明記順序の両端の根拠IDとcanonical重複を維持）、`ai/tests/test_analysis_cumulative_model_source.py`（肯否／順序／無順序重複／未解析／主体・field・根拠変異／private clause拒否／保存版／SQL lifecycle）。source_adapter・保存原版／round owner・唯一realizer・service/profile/state・DB/RN/既存workflowの責務追加0。trial `supplemental_role_decision_trial.py`（runner6ad7c0f5）は新4要求・同raw旧／新consumer比較・保存非生成再読を、`supplemental_role_decision_results.json`は公開合成入力と旧新の全表示／集計を所有する。
+
+[公開合成4構成・旧新全表示](supplemental_role_decision_results.json)／[runner6ad7c0f5](supplemental_role_decision_trial.py)／[全検証・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplemental-role-decision-result-20261105)。非公開原本は[検証原本](https://chatgpt.com/library?file_id=libfile_db296c04dcd481918c4d9607d4a07b2d&account_id=personal)。§193の2題比較原本／公開結果は上節のまま保持する。
