@@ -1,4 +1,4 @@
-**11/5開始・分析の継続（第9回§211）：新規complete合成snapshotの複数record教材を24更新・新16stopで比較。matched8の全欄改善0、既知B20の11field欠落は未改善。旧3対照は保持したがAE05は省略主体へ原文外actorを追加して拒否へ退行。新重みは通常・次初期とも不採用。13候補state／37fieldの非生成再読とDB保存0を区別し、全原本・重みはversion5保存済み。後続v8は候補コードcheckpoint／テスト中で成果未算入。** [全結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-multirecord-wire24-20261105)。
+**11/5開始・分析の継続（第9回§212）：v7を継承し欄一覧／総数だけを足すprivate v8を実装、Jupyter384 PASS・CI全工程成功。実4Bは1回開始後signal14で終了し返却raw0、FC03未実行・再試行0。全欄改善／意味品質／strict受理は判定不能。通常選択は拡張せず、失敗原本はversion6保存済み。optional kernel未導入・速度未証明、後続negativewishはコードcheckpoint／テスト中で成果未算入。** [全結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-v8-fieldcount-20261105)。
 
 **11/5・分析の最新（第9回§198）：モデル経路で落ちていた主語未確定の完全過去行動と、同欄の複数本人行動を既存source証明のまま保持。元8応答の同raw比較は0→4保存、別6例も同raw旧0→新4保存。新14stop/2load/学習0、実4B保存は隔離mock RPC・別合成SQL182 PASS。主体・否定・明記順序・保存非生成再読を保持。一般の本人基準／暗黙役割・記録間意味、通常重み採用／本番／端末／配置は未達。最終CI42036416309は全工程成功。** [全結果・失敗・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-ordinary-prose-20261105)。
 
