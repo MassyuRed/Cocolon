@@ -1912,3 +1912,28 @@ code/planは実行前commit ace8b762bf0000ab6430f694fba582d69756b41aで全文読
 通常接続の次範囲も既存設計04/実ownerへ照合した。単独の本人思考/結果は既存通常finiteで読める範囲があり、単独例のモデル再現を新商品成果にしない。混在発話から本人節を採るには、既存intent_compilerの帰属証明、未読scopeと全文contextを失わない表示、意味採用を保存再読でどこまで保証するかの対応が要る。既存ROLE専用readerやP5の限定profileを一般化する迂回はしない。今回ここは調査のみで、新仕様の採用/接続実装は0。本人基準、補足typed、記録間の再出現/変化、通常累積/ensureへの4B接続、IF/Saved、分析観測会は継続残件。
 
 実環境GPT-6/Codex Work、root単一writer/実行/最終判断＋同環境read-only比較。独立Pro/Ultra/Mash Product Readではない。限定既知教材1修復/残件絞込み、商品credit0。通常source/型/意味gate/compiler/唯一作者/HTTP/DTO/DB/RN/Render/Supabase/配置/Pod管理変更0、STRUCTURE_MAP_DELTA_NONE。
+
+<a id="analysis-material-v5-qualifier2-result-20261105"></a>
+## 142. 11/5 — 理由と従属否定を同時に復旧、既存19表示と発話4件を保持
+
+§177で残った理由marker欠如と従属否定qualifier脱落を、既存RU02教師の2 objectへ同時に戻す一回比較を完了。新教師/指示/decoder制約/意味gate/出力修復は0。研究初期として0587/a36eを今回だけ明示再選択し、既存16 target/messages/encoded/順/seed/LR/clip・全文平均CEを保持した。RU02だけ、先行comma込みの2 objectの文字範囲[237,275)/[426,461)と交差するtoken union21（11＋10）の平均CEを係数1で追加。境界tokenの範囲外文字との重なりも原本へ保持した。full rendered IDs=既存encoded、絶対token位置からprompt長を引くcausal CE対応を実tokenizerで確認。単一token枝の反復ではない。
+
+CPU 13.688675秒、16更新/前後32NLL・112tensor保存照合・新重みreload後30新stop、2load、train/after exit0、run 510.412173秒。900秒＋終了30秒内、診断専用load/forward0、同run再起動0。before30は同Podの直前afterを完全一致確認して再利用。packの過去実行metadataと今回の実値を混同しない。
+
+| 対象 | 原文・全文生成・保存での結果 |
+| --- | --- |
+| YREASON01/RU02 | 明記理由markerと従属NEGATIONを正しい親/時点に保持し、既存教師JSON値に完全一致。誤modifierを再発せず、独立不明と内容も保持。前回の否定注記脱落を修復 |
+| AT04/11/17/24 | 4件とも既存教師JSON値一致を保持 |
+| 旧19 typed | graph・可視文章・図が全一致、新表示/喪失0。PV01/X03/M4保持 |
+| OA01 | actor引用末尾の助詞を除いた原文内引用だけの差。主体・否定・二つの不明は同じ |
+| 全30 | raw28同一/変更2、候補30→30、typed19→19。rootと同環境read-only比較で、この30件に新しい意味退行は確認せず。形式受理数を意味正解率にしない |
+
+2span union CEは.134161904→.005269693、教師平均NLLは.001514703→.000363554。従属否定のteacher-forced CEは初期から低く、平均lossだけでは自由生成の欠落を説明・判定できない。今回の成功は全文生成で確認した既知1教材の修復であり、未見転移・一般日本語・商品受入れではない。新7ba4/933cは研究保全、通常採用/次初期自動採用false。
+
+初回CPUでは開始時計startを文字offsetで上書きし、durationだけを誤記録した。GPU load/forwardは0。文字offset変数だけを改名し、最初の全CPU原本を別名で保持してCPU準備を一回やり直した。前後spansの全bytes同一を照合。初回の無効なdurationを処理時間へ算入・修正上書きせず、first_cpu/とfirst_cpu.logを最終原本へ同梱した。学習/生成の再試行ではない。
+
+保存60応答（候補60/typed38）を生成・compiler・作者禁止guardで再読し、復元typed自身のgraph/文章/図とsidecar一致。576member/manifest575の全bytes/SHAとZIP CRCをPod外で照合。[全原本・新重み](https://chatgpt.com/library?file_id=libfile_52b7b011dd948191be9aaf39947e97a8&account_id=personal)は15,718,068bytes、SHA256 558d0229d14a264cf6c6409d987f0b06d97efcb46d08b774cae31a5a237e49fc。weights 7ba4e6e07f69e377b99052d1a795bfa833476c46ae643ec1abc2b638ca64efaa、config 933c124413a8486d79a5da3c151321cf8d0e1622165b6241ddde38939933721c。親依存は前回private原本・既存復元archiveを継承する。実行前code/plan commit8899a27、runner06b31fcはremote全文読戻し済み。
+
+終了GPU2MiB/0%・compute空、Podレンタル維持。前確認.29USD/hでrun全体の処理参考上限0.041116536USD、準備/回収/待機保持/保存通信/税等別、実総請求未測定。次は追加学習せず、新しい未学習4文×初期0587/新7ba4の近接比較を行う。完全盲検や一般品質評価とはせず、本文保持と両adapter不変を確認する。
+
+今回のprivate typedはROLE/ROLE＋SELF過去ACTIONの限定証明で、通常finiteの五種対応とは別。本人思考/結果・他者発話・理由の意味証明、混在sourceの帰属/残scope表示/保存再読、通常ensureへの4B接続、本人基準/補足/記録間・変化/IF・Saved、分析観測会は継続残件。新product owner/通常source/型/意味gate/唯一作者/DB/RN/Render/Supabase/配置変更0、STRUCTURE_MAP_DELTA_NONE。実環境GPT-6/Codex Work、root単一writer/実行/判断＋同環境read-only比較、独立Pro/Ultra/Mash Product Readではない。限定TECHNICAL_CREDIT、product_credit0。

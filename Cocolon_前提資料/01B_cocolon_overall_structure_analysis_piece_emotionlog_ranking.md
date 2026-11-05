@@ -3422,3 +3422,7 @@ API dc05dc35、通常product owner追加なし。既存 `semantic_admission.py` 
 ### 11/5 — 未解消2件だけを追加枝CEへ残す比較のファイル地図
 
 既存trialのmaterial_v5_residual2_trial.pyは既存16教師不変のCPU準備・既修復2件の追加枝項除外・残2件の4forward再測定・16更新・30生成・保存非生成再読を所有。material_v5_residual2_plan.jsonは固定条件、material_v5_residual2_results.jsonは本文なし実結果とprivate原本参照。新しい商品ownerは追加しない。AT24を修復、YREASON01は理由marker不足と新しい従属否定qualifier欠落により新重み不採用。旧19表示とAT11/17を保持。[全結果と次条件](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v5-residual2-result-20261105)、最新weekly§177。通常source/型/意味gate/compiler/唯一作者/ensure/HTTP/DB/RN不変、STRUCTURE_MAP_DELTA_NONE。
+
+### 11/5 — 欠落2注記の同時学習のファイル差分
+
+既存trialのmaterial_v5_qualifier2_trial.pyは実tokenizerのoffsetから既存教師2 object＋先行commaに交差する21 tokenを同時選択し、16更新/30生成/保存再読を行う一回runner。material_v5_qualifier2_plan.jsonは固定条件、material_v5_qualifier2_results.jsonは本文なし実結果・private原本参照。時計変数修正前のCPU原本も保全。既知RU02を修復し、AT4と旧19表示を保持。通常product owner/型/意味gate/compiler/唯一作者/ensure/HTTP/DB/RNは不変、STRUCTURE_MAP_DELTA_NONE。[全結果・次条件](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v5-qualifier2-result-20261105)、weekly§178。
