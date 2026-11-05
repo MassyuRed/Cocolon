@@ -32,7 +32,7 @@ PARENT = W / 'analysis-material-v5-qualifier2-20261105'
 NEAR = W / 'analysis-material-v5-qualifier-near4-20261105'
 INPUT = W / 'analysis_composition4_private_teachers.json'
 INPUT_SHA = '6f92b1e106cedfb9d5cd3d380d79477b95567aba970b0c62cdd70cdc66767a2e'
-ROOT = W / 'analysis-material-v5-component2-20261105'
+ROOT = W / 'analysis-material-v5-component2-cpu2-20261105'
 PREVIOUS = W / 'material_v5_aligned16_trial.py'
 sha = lambda p: hashlib.sha256(Path(p).read_bytes()).hexdigest()
 assert sha(PREVIOUS) == '1fc65428f0772a017cfe71d2443ebf32d97e98137e851d2888eab4e645aa27e6'
@@ -160,7 +160,7 @@ def prepare():
     write(ROOT/'spans.json',selected)
     prior_unit = W/'analysis-material-v5-composition-unit24-20261105'
     assert json.loads((prior_unit/'encoded.json').read_text()) == encoded
-    assert json.loads((prior_unit/'spans.json').read_text()) == selected
+    assert h.canonical(json.loads((prior_unit/'spans.json').read_text())) == h.canonical(selected)
     components = {}
     for key in ('CP02','CP04'):
         row = next(r for r in teachers if r['id']==key)
@@ -204,6 +204,11 @@ def prepare():
     write(ROOT/'cpu.json',dict(status='CPU_PASSED_NO_MODEL',seconds=time.monotonic()-started,runner_sha256=sha(__file__),input_sha256=INPUT_SHA,teachers=24,original90_unchanged=True,original16_encoded_unchanged=True,existing4_targets_bytes_unchanged=True,new_independent_teaching=4,held4_not_trained=True,before_responses=34,before_candidates=34,before_typed=19,model_loads=0,model_forwards=0,planned_updates=24,planned_measurements=48,planned_new_generations=38,max_seconds=LIMIT,normal_adoption=False))
     write(ROOT/'span_summary.json',{k:dict(union_tokens=len(v['ce_indices']),parts=len(v['parts'])) for k,v in selected.items()})
     write(ROOT/'component_summary.json',{k:dict(tokens=len(v['ce_indices']),start=v['target_char_start'],end=v['target_char_end']) for k,v in components.items()})
+    failed = W/'analysis-material-v5-component2-20261105'
+    assert failed.exists() and not (failed/'run_started.json').exists() and not (failed/'cpu.json').exists()
+    assert sha(failed/'failed_runner.py')=='b354751fab236e2381ad37be26d4c8f3fd5d46b9bffe4f1fb4e669439d558867'
+    shutil.copytree(failed,ROOT/'first_cpu')
+    shutil.copyfile(W/'component2-prepare.log',ROOT/'first_cpu.log')
     write(ROOT/'cpu_manifest.json',{str(f.relative_to(ROOT)):sha(f) for f in ROOT.rglob('*') if f.is_file()})
     print((ROOT/'cpu.json').read_text())
 
@@ -387,7 +392,7 @@ def collect():
         comparisons.append(item)
     write(ROOT / 'collection.json', dict(saved=saved, comparisons=comparisons, gpu=subprocess.check_output(['nvidia-smi', '--query-gpu=memory.used,utilization.gpu', '--format=csv,noheader'], text=True).strip(), compute_apps=subprocess.check_output(['nvidia-smi', '--query-compute-apps=pid', '--format=csv,noheader'], text=True).strip()))
     write(ROOT / 'manifest.json', {str(q.relative_to(ROOT)): dict(bytes=q.stat().st_size, sha256=sha(q)) for q in ROOT.rglob('*') if q.is_file() and q.name != 'manifest.json'})
-    archive = W / 'cocolon-analysis-material-v5-component2-20261105.zip'
+    archive = W / 'cocolon-analysis-material-v5-component2-cpu2-20261105.zip'
     with zipfile.ZipFile(archive, 'x', zipfile.ZIP_DEFLATED) as z:
         for q in sorted(ROOT.rglob('*')):
             if q.is_file():

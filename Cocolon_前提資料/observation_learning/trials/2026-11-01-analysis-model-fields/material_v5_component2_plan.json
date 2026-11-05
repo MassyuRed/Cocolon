@@ -4,7 +4,7 @@
   "initial_weights_sha256": "7ba4e6e07f69e377b99052d1a795bfa833476c46ae643ec1abc2b638ca64efaa",
   "initial_config_sha256": "933c124413a8486d79a5da3c151321cf8d0e1622165b6241ddde38939933721c",
   "initial_explicit_research_selection": true,
-  "runner_sha256": "b354751fab236e2381ad37be26d4c8f3fd5d46b9bffe4f1fb4e669439d558867",
+  "runner_sha256": "fd8f40c42e132bad7dfd9b326a5f43e3193f28b03249eae490b53d3eba991375",
   "teachers_unchanged_from_composition24": 24,
   "updates": 24,
   "measurement_forwards": 48,
@@ -49,5 +49,12 @@
   "previous_unadopted_weights_not_initial": true,
   "cpu_status": "PENDING_REAL_TOKENIZER_NO_GPU_BEFORE_PASS",
   "diagnosis": "saved text sequence only, not proven model intent or unique causality",
-  "evaluation": "old30 + heldQF4 + learnedCP4; old19 visible and five teacher matches; CP02 parent uniqueness, CP04 reported-content attribution, QF01 and CP03 local gains, SC01/MD02 NEG range"
+  "evaluation": "old30 + heldQF4 + learnedCP4; old19 visible and five teacher matches; CP02 parent uniqueness, CP04 reported-content attribution, QF01 and CP03 local gains, SC01/MD02 NEG range",
+  "cpu_recovery": {
+    "first_status": "SERIALIZATION_COMPARISON_FAILURE_NO_MODEL",
+    "first_runner_sha256": "b354751fab236e2381ad37be26d4c8f3fd5d46b9bffe4f1fb4e669439d558867",
+    "change": "canonical comparison of identical tuple/list coordinate values; fresh root and preservation of first CPU bytes",
+    "target_mask_objective_or_acceptance_changes": false,
+    "second_failure_stop": true
+  }
 }
