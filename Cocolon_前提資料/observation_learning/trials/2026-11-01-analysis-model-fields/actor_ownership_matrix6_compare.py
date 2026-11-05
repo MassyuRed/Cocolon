@@ -5,6 +5,8 @@ The same frozen snapshots/messages/ref reach both adapters once. Six new calls
 per adapter, two loads and 240 seconds total; no retry, grammar change or normal
 adoption. Storage is the existing isolated mock RPC seam, never production SQL.
 Each response is immediately consumed again with zero model calls.
+The frozen verb 印刷 is outside the finite product-map verb set. This matrix
+therefore diagnoses actor/negation JSON and retention, not map adoption rate.
 """
 import asyncio
 import copy
@@ -33,6 +35,9 @@ SOURCES_SHA = 'ebf0a7b2d426a94ef7b2d4555f80ca06c87265b06fcbf9dc9f51c89303fe3137'
 SEAM = Path('/workspace/actor_ownership_trial.py')
 SEAM_SHA = 'dfb10128d30420f1023b653d8f43141b3252b735b9acc52ffba83af343c3cfa7'
 LIMIT = 240
+LEXICAL_SCOPE = ('Frozen 印刷 target is outside the existing finite product-map verb set. '
+    'Gold candidate/qualifier comparison is separate from typed-map adoption; '
+    'UNSUPPORTED alone is not a model failure or an OTHER-specific success.')
 ADAPTERS = dict(
     initial=dict(path='/workspace/analysis-material-v4-pair8-20261103/train/adapter',
         weights_sha256='a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59',
@@ -106,7 +111,8 @@ def prepare():
         model=MODEL, revision=REVISION, pins=PINS, max_seconds=LIMIT,
         planned_new_generation=12, planned_model_loads=2, new_training=0,
         normal_adoption=False, next_training_initial_adoption=False,
-        interpretation='Independent synthetic matrix; not a general accuracy estimate.'))
+        interpretation='Independent synthetic matrix; not a general accuracy estimate.',
+        lexical_scope=LEXICAL_SCOPE))
     write(ROOT/'cpu_manifest.json', {str(p.relative_to(ROOT)): sha(p) for p in ROOT.rglob('*') if p.is_file()})
     print(canonical(dict(status='CPU_PREPARED_NO_MODEL', rows=6, new_training=0,
         new_generation=0, model_loads=0, planned_calls=12, planned_loads=2,
@@ -127,7 +133,8 @@ def phase(deadline):
     report = dict(status='STARTED', phase=MODE, cases=[], replay_cases=[],
         new_generation=0, model_calls_started=0, model_loads=0, model_loads_started=1,
         new_training=0, normal_adoption=False, adapter=ADAPTERS[MODE],
-        per_call_seconds=23, max_context_tokens=8192, max_new_tokens=2048)
+        per_call_seconds=23, max_context_tokens=8192, max_new_tokens=2048,
+        lexical_scope=LEXICAL_SCOPE)
     generator = None
     started = time.monotonic()
     write(ROOT/(MODE+'.json'), report)
@@ -261,7 +268,8 @@ def run():
         json.dump(dict(max_seconds=LIMIT, planned_calls=12, planned_loads=2, new_training=0), stream)
     report = dict(status='STARTED', stages=[], launched_phases=[], new_training=0, new_generation=0,
         model_loads=0, normal_adoption=False, next_training_initial_adoption=False,
-        api_commit=COMMIT, teachers_sha256=TEACHERS_SHA, max_seconds=LIMIT)
+        api_commit=COMMIT, teachers_sha256=TEACHERS_SHA, max_seconds=LIMIT,
+        lexical_scope=LEXICAL_SCOPE)
     started = time.monotonic()
     deadline = started+LIMIT
     try:
