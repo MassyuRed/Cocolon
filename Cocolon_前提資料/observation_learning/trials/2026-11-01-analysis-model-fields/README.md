@@ -1,4 +1,4 @@
-> **11/5 JST・分析の最新（第9回§188）：最新snapshotの取得後に明示async model_sourceを受け、既存v4応答→通常ensure→commit→再表示へ接続。保存済み再利用/月次/読取では非呼出し、複数原入力・補足は取得前拒否、生成中の編集は既存SQL guardで保存拒否。元22保存応答の照合と独立合成SQL lifecycleの証拠を分離する。通常HTTPの4B自動呼出し/採用重み/配置は未変更。一般本人基準・複数記録接続・IF/Savedは残件。新型/保存版/DB/RN追加0、STRUCTURE_MAP_DELTA_PRESENT、product_credit0、GPU0。** [全結果・再開点](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-ensure-model-source-result-20261105)。
+> **11/5・分析の最新（第9回§189）：同じmemoの明記本人役割と独立した明記本人行動を、元の根拠のまま2nodeへ保持する欠落修正。実4Bの新しい合成4応答を同じまま比較し、4件とも役割だけ→役割＋行動、未読1→0。因果/順序の辺は作らず、主語省略は未読を維持。追加学習0・新応答4/1load、旧22表示保持、Jupyter1006成功・旧SQL1省略、CI全工程成功。通常4B自動呼出し/配置/一般本人基準・記録間接続は残件。新型/保存版/DB/RN追加0、STRUCTURE_MAP_DELTA_PRESENT、正式受入れ未判定。** [結果・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-samefield-role-action-result-20261105)。
 
 # Analysis — 最小field接続と実4B probe
 
@@ -2114,4 +2114,11 @@ Jupyter926 PASS/1 SKIP/1 deselected/11,176 subtests、128.71秒。新13通常row
 APIb77c380e。通常ensureの最新snapshot取得後に明示async model_sourceを受ける入口を実装。資格は既存単記録/原入力限定、保存・月次再読では非呼出し。事前のpreparedはSQL時計差で一致しないため再利用せず、今回取得したpreparedに対するResponseだけを受ける。
 
 [runner](model_ensure_replay.py)は元22のsnapshot/request/messages/ref/raw/hashを維持し、通常ensure/build/commit payload/read_mapsを隔離mock RPCで確認する。最新SQLへの付替えや新4B生成ではない。[結果JSON](model_ensure_results.json)は本文なし実集計と独立合成3例の実SQL文章図。実原文/rawは非公開原本に保存する。検証数・CI・原本・残件は[weekly§188](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-ensure-model-source-result-20261105)。旧不採用重み/完了GPU runは変更せず、HTTP自動呼出し・transport・一般読解/記録間接続は残る。
+
+<a id="analysis-samefield-role-action-result-20261105"></a>
+## 11/5 — 同欄の役割と明記本人行動を両方残す
+
+APIf1048a8f。役割節で早期終了していた通常consumerへ、同欄の独立した明記SELF行動を既存source証明で渡す。新しい合成SF01–04を保存a2e/config006e・material.v4で1load/4応答、45.334195秒で生成し、同一request/raw/responseを前b77c380eへ再読した。全4が前role-only→後2node、unparsed1→0。追加学習/新重み0、候補重みの通常採用falseを維持する。
+
+[runner](same_field_role_action_trial.py)は最大600秒/4生成/再試行なし、[比較結果](same_field_role_action_results.json)は独立合成4原文と前後の通常文章図/集計。実rawは非公開原本へ保全。保存は実ensure/commit payload/read validator＋隔離mock RPCで、実SQLはCIの独立合成検証へ分離する。旧22の16保存/4未対応/2拒否と本文図を保持。省略主体/他者/不確実性は昇格せず、fullwidth「．」は未対応のまま。[全検証/原本/次残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-samefield-role-action-result-20261105)。
 

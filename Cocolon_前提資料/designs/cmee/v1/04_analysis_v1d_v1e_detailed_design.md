@@ -1949,3 +1949,11 @@ API61e8aac2の既存semantic_admission.pyがv3継承の明示offline material.v4
 
 caller自身のtimeout/通信例外/並列重複推論対策は今回の未接続transport側に残る。本番providerや採用重みを自動設定する変更ではない。独立合成SQL lifecycleと元22保存応答のmock RPC再読を分けた[全結果](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-ensure-model-source-result-20261105)を参照。新type/保存版/公開wire/DB/RNなし、STRUCTURE_MAP_DELTA_PRESENT（通常受口責務）、商品credit0。
 
+## 11/5 — 元二文のROLE＋明記SELF ACTIONを通常mapへ構成（第9回§189）
+
+新しい言語文法を作らず、既存_model_written_role_clause_nodeと元source全体のcompile_observed_graphを共用する。共有graphが追加状態/辺なしの単独SELF/fact/past有限行動を持ち、同じmemoの先頭役割と後半行動が全二文を占める場合だけ、新しい通常consumer helperがROLE n1/ACTION n2を既存ObservedGraphへ渡す。ROLEは旧private nodeと同じ、ACTIONは共有元nodeのnode_refだけn2にした値。元field/evidence/原文範囲は変えない。
+
+既存_check_model_action_unitsへ元unit集合と後半開始位置を渡し、SELF/NEGATION qualifierを原欄の座標で照合する。proposition.source_partsはlabel内の相対位置のまま。root/CONTENT_TARGET以外や不正候補からactionを復元しない。役割と行動の肯否を独立保持、関係線0・欠3段＋ROUTE_CONNECTIONとする。旧ROLE_CLAUSE作者の未読経路は正規1node/旧gapだけに拘束し、2nodeはSOURCE_SCOPEの追記でも元source完全照合を迂回できない。
+
+旧private ROLE_CLAUSE保存は1node/未読のまま。fullwidth「．」は共有有限compilerの後半証明が得られず従来のrole-onlyへ残し、「。」/ASCII「.」だけの今回範囲を広げない。[実4B比較・保存/回帰・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-samefield-role-action-result-20261105)。
+

@@ -3374,3 +3374,9 @@ APIb77c380eは明示async caller受口`model_source=None`をPython service引数
 
 現在取得したpreparedをcallerへ渡し、同じpreparedへ既存Responseを結合する。元request/messages/ref/raw/hashを別sourceや別時刻へ再ラベルしない。通常rowへモデルrawや新typed再構築契約を追加せず、保存済み図/本文/coverageの非生成再読を継続する。旧private保存の互換はそのまま。[結果と限界](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-ensure-model-source-result-20261105)。
 
+## 11/5 — 同欄ROLE＋ACTIONの既存graph利用（型/保存版追加なし）
+
+APIf1048a8fは既存AnalysisModelQuotedParentUnitsInput/Response、ObservedGraph/ObservedSelfStructureMap、WRITTEN_PAST_ROLE_CLAUSE、UnknownGapと唯一作者を共用する。同一memoの全二文を独立証明できた通常artifactだけ、既存2node/辺0/ROUTE_CONNECTIONとなる。新dataclass/enum/role_state/profile/state/file版/公開DTO/DB/RN追加0。
+
+private clause=Trueのcompiler/validator/保存ID/本文図は従来role-onlyのまま。通常rowも既存UUID/private-evidence/coverage/cumulative.v1/watashi.map.v2で保存し、新model raw保存や意味再構築契約を追加しない。元候補fieldやrawを分割/修復せず、同応答を前後APIへ結合して比較する。[結果・限界](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-samefield-role-action-result-20261105)。
+

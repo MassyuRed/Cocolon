@@ -4106,3 +4106,49 @@ API [b77c380e](https://github.com/MassyuRed/mashos-api/commit/b77c380e82f67881c3
 
 Render/配置/実DB/RN/Pod管理の変更0。完了した検証processと未実行の今回端末だけを整理し、既存Podレンタルは維持。追加学習・新4B応答・GPUモデル読込0。今回の接続を一般読解・本人端末成功・正式商品受入れへ拡張しない。
 
+<a id="analysis-samefield-role-action-result-20261105"></a>
+## 189. 11/5 — 同じ欄の役割と明記本人行動を通常mapへ両保持
+
+**新しい実4B応答4件を同じまま前後比較し、4件とも「役割のみ」から「役割＋本人行動」へ変わった。** ただし華恋の独立合成4例・既存有限文法内のcandidate改善であり、一般読解・本人端末・Mash正式商品受入れは未成立。通常HTTPの4B自動呼出しや配置も未変更。§188の受口を使い、役割節で早期終了して独立した行動を未読へ落としていた不足を修正した。
+
+### 何が変わったか
+
+API [f1048a8f](https://github.com/MassyuRed/mashos-api/commit/f1048a8f8883791013786dc6da225dcf1e31ae61)は既存compiler/semantic admission/唯一作者の3owner、合成38test、既存累積SQL test、既存workflowの6path変更。先頭の明記SELF役割は旧ROLE_CLAUSE、後半の明記SELF/fact/past有限行動は元source全体の共有compilerで別々に証明し、同じmemoの2nodeへ保持する。原fieldや候補を分割・再ラベルせず、原source/envelope/hash/文字・UTF-8範囲を保つ。qualifier照合だけ元の後半開始位置を使い、propositionのlabel相対座標は維持する。
+
+役割と行動の共起を原因・動機・順序へ変えず、辺0/ROUTE_CONNECTIONを保持する。全二文を読めた場合のみSOURCE_SCOPEを外してunparsed1→0、source/processed/mappedは各1のまま。主語省略R08型は従来の役割だけ・未読1。不正/欠落した行動候補を原文だけで補修・採用しない。private clause=Trueは旧1node/旧保存ID/旧本文図のまま、通常row/schema/作者を共用する。新type/graph/role_state/state/file版/公開DTO/DB/RN追加0、STRUCTURE_MAP_DELTA_PRESENT（既存consumerの同欄構成責務）。
+
+### 同じ実4B応答による前後
+
+原文SF01–04は今回、華恋が独立作成した合成4件。既存失敗rawや評価の正答を新教師へ加工せず、教材更新・学習を行っていない。保存a2e/config006e、material.v4、固定Qwen3.5-4B revision851bf6e、既存loader/依存pin/greedy/BF16/SDPA/非thinkingを使用した。4件のrequest/messages/ref/response/raw/hash/時刻は前b77c380eと後f1048a8fで完全に同じ。
+
+| 新合成原文 | 修正前 | 修正後 |
+|---|---|---|
+| SF01：僕の役割は案内係だった。僕は資料を調べた。 | 役割1・未読1 | 役割＋資料を調べた行動、未読0 |
+| SF02：僕の役割は案内係ではなかった。僕は資料を調べなかった。 | 否定役割1・未読1 | 否定役割＋行わなかった行動、未読0 |
+| SF03：私の役割は記録係でした。私は費用を記録した。 | 役割1・未読1 | 役割＋費用を記録した行動、未読0 |
+| SF04：私の役割は記録係ではありませんでした。私は費用を記録しなかった。 | 否定役割1・未読1 | 否定役割＋行わなかった行動、未読0 |
+
+全4応答stop、new_generation4/model_load1/training0/new_weights0、45.334195秒/exit0。最大600秒/4要求/再試行なしの一回を完了し、前比較は同rawの再読だけ・0load/0生成/0.360794秒/exit0。重み/configは前後不変で、通常採用falseを維持。最適化kernel未導入の既存PyTorch fallback警告は保持し、追加installや環境変更はしていない。
+
+実行順は最新snapshot→明示4B source→通常ensure/build→commit payload→実read_maps。保存自体は隔離mock RPCで、本番/SQLへの実4B保存ではない。全4で現在値/月次/ensure=Falseを生成禁止下で同本文・同図・同IDに再表示した。rootは全4の元原文、元raw、前後文章と図を読み、役割/行動の肯否・根拠・カテゴリ・辺0・未確定部分を確認した。新4だけで一般品質や意味正解率を主張しない。
+
+### 既存保持・回帰
+
+- 旧v4原22は再生成せず、通常ensureで16保存/4未対応/2拒否、16の本文図/coverageと現在値/月次/読取を保持。1.679781秒/exit0。旧R08の省略主体を本人行動へ補わない。
+- Jupyterの隔離コピーで**1,006 PASS・1 SKIP・11,176 subtests PASS、126.53秒、exit0**。今回の38と既存10suite。SKIPは旧model-fields SQLのWASM未設定で、この1件はCI生成工程でも省略のまま。今回実行済みへ数えない。live/前比較/回帰/旧22のdriver4終了code全0、合計183.202430秒。
+- [CI41986905743](https://github.com/MassyuRed/mashos-api/actions/runs/41986905743)、job127109677815はAPIf1048a8f exact checkoutで全step success。生成/保存2,172 PASS・1 SKIP・12,048 subtests PASS（292.74秒）、共有owner1 PASS/194 deselected（22.26秒）、累積API/Q3/既存job47 PASS・既存warning1・2 subtests PASS（29.02秒）、201原本/15月参照の月次順位・不変再読・所有者/削除SQLも成功。新しい同欄の通常保存と強制更新後の月次不変は、CIで独立合成Responseを用いた実SQLとして確認した。
+- Work局所は関連286 PASS（13.67秒）、SQL/既存API47 PASS・2 subtests PASS（39.24秒）。初回と再確認では全角句点「．」まで両保持を期待した4ケースが失敗した。共有有限compilerが後半証明を供給しないことを確認し、文法を広げずrole-only/未読1を維持する未対応確認へ訂正した。この制限を実装済みに数えない。
+- 同環境read-only補助が、2nodeへSOURCE_SCOPEを付けると新しい完全照合を迂回し得る箇所を発見。旧未読経路を正規1node/旧gap/追加状態なしへ限定し、「行動とpropositionを逆の肯否へ変更＋SOURCE_SCOPE追加」を拒否する検査を加えた。privateの正規旧保存は不変。新checker/別作者/保存版を追加する作業にはしていない。
+
+JupyterはPython3.12.3/FastAPI0.162.0/Pydantic2.14.1/torch2.8.0+cu128、CIはPython3.12.16/FastAPI0.142.2/Pydantic2.13.5。二つの同一固定環境成功とは呼ばない。GPUモデル側はtransformers5.19.0/peft0.21.2/accelerate1.15.0/safetensors0.8.0を既存pinへ照合。実行はGPT-6/Codex Workのroot単一writer＋同環境read-only reviewで、独立Pro/Ultra/Mash Product Readではない。
+
+### 原本と次の残件
+
+[検証原本](https://chatgpt.com/library?file_id=libfile_381da1ef97fc8191a40e2dd92d746de4&account_id=personal)は950,606bytes、SHA256 bee8cf19ed3d02d42361c4e768202542d58f51d753376ac369006317df4586de。新4の元request/raw/原文/前後map/保存再読、旧22の原本、失敗を含む全log/source SHA/CIログを保全。Pod回収原本は873,311bytes、SHA256 08e6e688a8dfeb5187d1b73225989b48318132bc6936e428ddedbd754414f7feへ一致照合。Download eventはtimeoutしたが実fileを回収でき、再ダウンロードはしていない。
+
+[公開比較JSON](../observation_learning/trials/2026-11-01-analysis-model-fields/same_field_role_action_results.json)は華恋の合成4原文と前後の通常文章図、旧22の本文なし集計のみ。実raw/旧22原文は公開しない。[runner9ab89aad](https://github.com/MassyuRed/Cocolon/commit/9ab89aadf4c0073ee40a5e9a46e2fd768c50e953)とAPIは公開・読戻し後に公開sourceだけを転送した。既存private入力/重みの新規アップロード0。
+
+次は、通常provider/transportの明示接続と、普通の記録から本人基準/判断・選択を既存構造へ渡す不足、記録間の再出現・変化を継続する。今回の二文証明を、主語省略・他者・推測/報告・余分な文・補足や複数記録へ無条件に広げない。全角句点の後半保持、IF/Saved/観測会/本人端末・配置も残件。既存の不採用重み・完了学習runを自動採用/再実行しない。
+
+Render/実DB/DB schema/RN/配置/Pod管理の変更0。新GPU/追加課金操作0、既存Podレンタルは維持。終端のnvidia-smi compute-appsは空・returncode0で、起動したモデルprocessは終了済み。今回の限定candidate改善を一般品質・アプリ実機成功・正式受入れへ拡張しない。
+

@@ -1,4 +1,4 @@
-> **11/5 JST・分析の最新（第9回§188）：最新snapshotの取得後に明示async model_sourceを受け、既存v4応答→通常ensure→commit→再表示へ接続。保存済み再利用/月次/読取では非呼出し、複数原入力・補足は取得前拒否、生成中の編集は既存SQL guardで保存拒否。元22保存応答の照合と独立合成SQL lifecycleの証拠を分離する。通常HTTPの4B自動呼出し/採用重み/配置は未変更。一般本人基準・複数記録接続・IF/Savedは残件。新型/保存版/DB/RN追加0、STRUCTURE_MAP_DELTA_PRESENT、product_credit0、GPU0。** [全結果・再開点](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-ensure-model-source-result-20261105)。
+> **11/5・分析の最新（第9回§189）：同じmemoの明記本人役割と独立した明記本人行動を、元の根拠のまま2nodeへ保持する欠落修正。実4Bの新しい合成4応答を同じまま比較し、4件とも役割だけ→役割＋行動、未読1→0。因果/順序の辺は作らず、主語省略は未読を維持。追加学習0・新応答4/1load、旧22表示保持、Jupyter1006成功・旧SQL1省略、CI全工程成功。通常4B自動呼出し/配置/一般本人基準・記録間接続は残件。新型/保存版/DB/RN追加0、STRUCTURE_MAP_DELTA_PRESENT、正式受入れ未判定。** [結果・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-samefield-role-action-result-20261105)。
 
 > **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
@@ -1207,4 +1207,12 @@ APIb77c380eの通常ensureに、既定Noneの明示async `model_source`を接続
 再構築時だけ既存単記録consumerの資格を確認し、callerを1回awaitして既存AnalysisModelQuotedParentUnitsResponseを受領、元preparedへ結合して通常build→既存commit→実read_mapsへ渡す。不正応答は422で保存せず、有限経路へ黙って置換しない。生成中のsource編集はSQL guard/CASが拒否する。現在値再利用/月次実capture/ensure=False/read_only/offではcallerを呼ばず、月次はforceでも書換えない。
 
 元22応答の確認はrequest/messages/raw/元時刻を保持したmock RPC persistence。実SQLの通常保存と月次/CASは、最新入力から作る独立合成応答で確認する。両者を実4Bの最新SQL生成や本番Supabase成功へ換算しない。HTTP/cronから自動呼出しするfactory・transport・重み採用は追加していない。callerの通信期限/例外処理と並行要求の重複推論抑止は後続。一般本人基準、暗黙役割、判断/選択、補足typed、記録間の再出現/変化・IF/Saved/観測会は残る。[全結果・原本](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-ensure-model-source-result-20261105)。
+
+## 11/5 — 同じ欄で明記された役割・本人行動の両保持（第9回§189）
+
+旧通常consumerは「僕の役割は案内係だった。僕は資料を調べた。」でもROLE_CLAUSEだけで終了し、独立して証明できる本人行動を未読にしていた。APIf1048a8fでは、元source全体の共有有限compilerが証明したSELF/fact/past行動と、既存の先頭役割証明を同じ2nodeへ渡す。原field/hash/原文scalar・UTF-8位置、label相対のproposition、候補/rawは切り直さない。
+
+2nodeでも辺0/ROUTE_CONNECTIONを保持し、役割が行動の動機・原因・順序を証明したとは言わない。全非句読点部分が既存二文証明で読めた場合だけSOURCE_SCOPEを外し、source/processed/mapped各1・unparsed0となる。省略主体R08型はrole-only/unparsed1。モデルのACTION提案が不正・欠落でもsourceから勝手に補わず、従来の役割だけへ残す。private clause=Trueの型/ID/保存内容/非生成再読は不変。
+
+実4B新4応答では同応答の前後が4件ともrole-only→2nodeとなり、通常ensureの隔離mock RPC保存/現在値/月次/読取を確認。実SQLは別の独立合成caseで検証した。新4は華恋の合成であり、一般品質やMash正式受入れの証拠ではない。全角句点「．」、一般本人基準/選択、混在思考/他者発話/省略主体、補足typed、複数記録の関係、通常HTTPの4B自動接続/transport/配置/IF/Saved/観測会は残る。[全結果・原本](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-samefield-role-action-result-20261105)。
 

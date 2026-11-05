@@ -1,4 +1,4 @@
-> **11/5 JST・分析の最新（第9回§188）：最新snapshotの取得後に明示async model_sourceを受け、既存v4応答→通常ensure→commit→再表示へ接続。保存済み再利用/月次/読取では非呼出し、複数原入力・補足は取得前拒否、生成中の編集は既存SQL guardで保存拒否。元22保存応答の照合と独立合成SQL lifecycleの証拠を分離する。通常HTTPの4B自動呼出し/採用重み/配置は未変更。一般本人基準・複数記録接続・IF/Savedは残件。新型/保存版/DB/RN追加0、STRUCTURE_MAP_DELTA_PRESENT、product_credit0、GPU0。** [全結果・再開点](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-ensure-model-source-result-20261105)。
+> **11/5・分析の最新（第9回§189）：同じmemoの明記本人役割と独立した明記本人行動を、元の根拠のまま2nodeへ保持する欠落修正。実4Bの新しい合成4応答を同じまま比較し、4件とも役割だけ→役割＋行動、未読1→0。因果/順序の辺は作らず、主語省略は未読を維持。追加学習0・新応答4/1load、旧22表示保持、Jupyter1006成功・旧SQL1省略、CI全工程成功。通常4B自動呼出し/配置/一般本人基準・記録間接続は残件。新型/保存版/DB/RN追加0、STRUCTURE_MAP_DELTA_PRESENT、正式受入れ未判定。** [結果・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-samefield-role-action-result-20261105)。
 
 > **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
@@ -3508,4 +3508,17 @@ API3433d807。ObservedGraph/唯一作者/通常rowを共用し、新型/state/fi
 | trial `model_ensure_replay.py` / `model_ensure_results.json` | 元v4の22応答を元snapshotのまま通常ensureへ再読。本文なし実集計と、独立合成3例のSQL文章図を保持 |
 
 APIb77c380e。Input/Response/graph/作者/DTO/row/profile/DB/RN追加0。既存現在値にcallerを付けるだけで強制再生成しない。再構築が必要な場合だけ取得する。[全結果・限界](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-ensure-model-source-result-20261105)。
+
+## 11/5 — 同欄の役割と独立した本人行動（第9回§189）
+
+| owner path | 差分責務 |
+|---|---|
+| API `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | 既存ROLE_CLAUSE証明と元source全体の共有有限ACTION証明を、同じmemoの2nodeへ渡す。候補fieldを切直さず、後半unit/qualifierだけ元座標で照合する |
+| API 同dir `semantic_admission.py` | 明示モデルconsumerで、単独ROLE→同欄ROLE＋ACTION→旧ROLE_CLAUSEの順に既存証明を試す。不正/欠落ACTION候補は旧role-onlyへ残す |
+| API 同dir `observed_route_realizer.py` | 旧role-only未読形を保持。2nodeは元二文・明記SELF・正確な後半根拠・既存gap/辺なしを再確認して既存作者へ渡す |
+| API `ai/tests/test_analysis_model_same_field_role_action.py` | 合成38例。肯否/句点/元位置/qualifier/不採用/旧保存/改変拒否。全角句点の未対応も保持 |
+| API `ai/tests/test_analysis_cumulative_model_source.py` / 既存workflow | 同欄の実SQL通常保存・強制更新後の月次不変を追加し、既存CIへ登録 |
+| trial `same_field_role_action_trial.py` / `same_field_role_action_results.json` | 新しい合成4sourceの実4B1load/4応答→通常ensure、同じ応答の前API比較、旧22保持。公開結果は原本rawを除く比較文章図 |
+
+APIf1048a8f。新graph/type/作者/role_state/保存版/公開DTO/DB/RNは追加しない。private clause=Trueは旧role-onlyのまま。STRUCTURE_MAP_DELTA_PRESENT（既存consumerの同欄構成責務）。[全結果と制限](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-samefield-role-action-result-20261105)。
 
