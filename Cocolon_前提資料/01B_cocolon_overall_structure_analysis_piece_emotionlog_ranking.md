@@ -1,4 +1,4 @@
-> **11/5開始・分析の継続（第9回§210）：原memoの明記SELF・肯定希望を既存graphと時点のままmodel consumerへ接続。新27を含むJupyter185 PASS・CI全工程成功。同じ実4B原応答の0モデル旧新比較ではWH02過去希望だけが1nodeへ接続し、誤kind・主体省略・否定注釈不足は未対応を維持。別の合成20recordは2nodeとなったが、実batchの全欄欠落は未解決。wire24はCPU準備完了・実成果未算入。通常採用・本番/端末未実施。** [結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-plain-wish-20261105)。
+> **11/5開始・分析の継続（第9回§211）：新規complete合成snapshotの複数record教材を24更新・新16stopで比較。matched8の全欄改善0、既知B20の11field欠落は未改善。旧3対照は保持したがAE05は省略主体へ原文外actorを追加して拒否へ退行。新重みは通常・次初期とも不採用。13候補state／37fieldの非生成再読とDB保存0を区別し、全原本・重みはversion5保存済み。後続v8は候補コードcheckpoint／テスト中で成果未算入。** [全結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-multirecord-wire24-20261105)。
 
 > **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
@@ -3674,3 +3674,15 @@ API09b65013658c661cbc33a3857bd2e360e6f4c424、新27を含むJupyter185 PASS、CI
 
 
 公開集計は既存trialの`plain_wish4_results.json`。モデルraw・元Response・保存INPUTは非公開原本へ保持する。
+
+## 11/5 §211 — 研究専用wire24比較と欄欠落・主体退行の切分け
+
+| 既存trial path | 当回の責務・結果 |
+|---|---|
+| `observation_learning/trials/2026-11-01-analysis-model-fields/multirecord_wire_prepare.py` | 元18のencoded identityを保持し、T01/T02の完全recordから新規complete合成snapshotのMW6を作り、全member集合由来の合成用guardを付ける。実DB snapshot／guardではない。既学習sourceのHN／既知非学習診断sourceのHX、cached旧6のexact request束縛、全教師の非生成再読とtoken予算を確認 |
+| `observation_learning/trials/2026-11-01-analysis-model-fields/multirecord_wire_run.py` | 既存a2eから24更新・NLL20・新16stop／3loadを一度実行。原raw・request／Responseを保持し、wire／strict候補／直接private mapを別評価。13候補state／37fieldを非生成再読。通常ensure／保存writerは変更しない |
+| `observation_learning/trials/2026-11-01-analysis-model-fields/multirecord_wire_plan.json` | 更新／生成／測定枠と比較群を固定。MW6 after-only、HN／HX前後、cached成功4＋既知欠落2の評価範囲を分け、一般精度や全20件成功へ換算しない |
+
+API09b650固定。MW6 after-onlyの18field一致は新しい改善率ではなく、matched8で全欄改善0、B20の11field欠落を維持、AE05だけ原文外actor追加で拒否へ退行。AP07／AP08／OP02は保持。新3f937251／configede2ce81は通常・次学習初期とも不採用。研究runnerだけの差分としてSTRUCTURE_MAP_DELTA_NONE。商品owner／意味型／作者／公開DTO／DB／RN／配置／buildの追加変更0。[全結果・境界・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-multirecord-wire24-20261105)。後続v8・100c1bbは候補コードcheckpoint／テスト中と2要求予定の段階で、本節の実行成果に含めない。
+
+公開集計は既存trialの`multirecord_wire_results.json`。元本文・人物・model raw・重みは非公開原本へ保持する。
