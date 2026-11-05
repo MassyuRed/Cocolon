@@ -4066,3 +4066,43 @@ API [3433d807](https://github.com/MassyuRed/mashos-api/commit/3433d807c6edcecdde
 今回成立したのは一記録の明記本人役割と既存有限行動。通常ensure/HTTPの4B自動接続、一般の本人基準/暗黙役割/判断・選択、思考内容/他者発話/省略主体の混在、補足typed、複数記録の再出現/変化・比較、IF/Saved、分析観測会は残る。次は既存のsource資格→モデル受口→通常ensureの未接続部分を確認し、単記録ROLE作者の条件を無条件に複数記録へ拡張しない。新しい型/保存版や旧不採用重みの自動採用を先に増やさない。
 
 GPU load/forward/学習/新生成0、終端compute appなし・既存Podレンタル維持。Render/配置/実DB/RN/Pod管理変更0。Supabaseは関連Analysis表の列schemaをread-only確認しただけで、本人rowの取得/変更0。実行はGPT-6/Codex Workのroot単一writer＋同環境read-only補助。今回の限定接続を一般品質・本人端末成功・正式商品受入れへ拡張しない。
+
+<a id="analysis-ensure-model-source-result-20261105"></a>
+## 188. 11/5 — 最新モデル材料を通常ensureの保存・再表示へ接続
+
+**明示async callerによる通常保存までを実装。HTTPの4B自動呼出し・採用重み・配置・本人端末・一般文章/記録間の読解は残件、product_credit0。** §187の未接続箇所を、既存ownerのまま修正した。SQL snapshotはguardが同じでもperiod_end/analysis_as_ofが取得ごとに変わるため、以前に作ったInputを渡すだけではrequest/messagesが一致しない。今回取得した最新snapshotから準備して応答を受ける順序にした。
+
+### 実装と通常の保存動作
+
+API [b77c380e](https://github.com/MassyuRed/mashos-api/commit/b77c380e82f67881c319276beea4a2c56a33f431) の4変更pathはanalysis_cumulative_service.py、semantic_admission.py、新test_analysis_cumulative_model_source.py、既存Analysis workflow。`ensure_map(..., model_source=None)`は再構築branchだけで既存selected_material.v4を準備し、既存単記録資格を確認、async callerを1回awaitして既存Responseを受け、同じpreparedへ結合して既存build→commit→read_mapsへ渡す。scope helperは元の原入力1/source1/category1・補足/比較なしを共用しただけで、文法や対象範囲を拡張しない。
+
+保存済み現在値を使う場合、今月のcaptureを返す場合、ensure=False/read_only/offではcallerを呼ばない。既存現在値へcallerを付けるだけで再生成しない。月次はforceでも不変。不正responseのref/messages/raw/hash/finish/typeや別owner/旧時刻は422で保存せず、黙って有限mapへ置換しない。source取得中の編集は元guardのSQL CASで409拒否する。新Input/Response/graph/作者/state/file版/公開DTO/DB/RN追加0、STRUCTURE_MAP_DELTA_PRESENT（既存通常受口責務）。通常rowへmodel rawや新意味再構築契約を追加しない。
+
+### 元4B原本とSQL検証を分離した結果
+
+| 確認 | 結果 | 証拠の範囲 |
+|---|---|---|
+| 元v4保存22応答→通常ensure | 16保存、4未対応、2拒否 | 元snapshot/request/messages/ref/raw/hash/元時刻を保持。実build/保存payload/read validatorと隔離mock RPC persistence。最新SQLへの再ラベル/新4B生成ではない |
+| 保存できた16の現在値/月次/読取再表示 | 全16で本文・図・coverageを前回§187と保持 | 保存後はモデル取得、準備、Engine/各compiler/作者を禁止して再表示。UUIDだけ新しい通常artifactとなる |
+| 独立合成の実SQL | 役割単独・役割＋行動・役割節の3例が保存/月次再表示 | SQLが取得した最新時刻のpreparedに、その場で作る合成Responseを結合。実4Bの最新生成ではない |
+| 月次不変/途中編集/実補足 | 強制更新後も月次の元本文/図/capture時刻を保持。途中編集は保存0。実Q3補足付きsourceは応答取得0 | 既存migrationとPython→Node/PGlite0.5.8で確認。本番Supabaseではない |
+
+旧16本文/図の内容は追加変更していない。役割と行動の共起を原因・順序線にせず、役割節の後半は未読を保持する。残るSC01/OA01/HQ04/YREASON01の4未対応、MD02/X03の2拒否を成功へ数えない。16/22を意味正解率や一般品質へ換算しない。元22の再読は1.579691秒・exit0、4B load/forward/学習/新応答0。
+
+### 検証・環境・回復
+
+- Jupyterへ直接接続し、隔離コピーで**985 PASS・6 SKIP・11,176 subtests PASS、122.67秒、exit0**。既存10suiteと新受口22検査を指定。SKIPは旧model-fields1＋新SQL5のWASM未設定で、SQL工程は下記CI/Work側の独立合成検証へ分離。Pod runtimeはPython3.12.3/FastAPI0.162.0/Pydantic2.14.1/pytest8.4.1で、CIと同じ固定環境の成功とは呼ばない。
+- [CI41981587904](https://github.com/MassyuRed/mashos-api/actions/runs/41981587904)、job127092674209はAPIb77c380e checkoutの全step success。生成/保存2,134 PASS・1 SKIP・12,048 subtests PASS（512.14秒）、共有owner1 PASS/194 deselected（30.44秒）、累積API/Q3/受口/既存job46 PASS・既存warning1・2 subtests PASS（43.63秒）、月次順位/不変再読/削除SQLは201原本/15月参照で成功。Python3.12.15/FastAPI0.142.2/Pydantic2.13.5。
+- Workの局所は新受口＋累積/既存API46 PASS・2 subtests PASS（33.48秒）、役割/行動/閉役割138 PASS（7.72秒）。初回と2回目は同じ補足fixture1件だけ失敗し各45成功。古い原入力のFree履歴資格と感情の非canonical fixtureを、既存Q3と同じ直近日付/正規感情shapeへ修正した。製品の採用条件は緩めていない。
+- 最初のJupyter複数行入力は未実行で終了し、単一行起動へ修復。初回回帰は隔離コピーにない既存job testを指定してexit4/テスト0、同driverの元22再読はexit0で完了。対象を既存10suite＋新受口へ修正し、回帰だけ再実行してexit0。原22再読/4B生成を繰返さず、初回log/終了codeも原本に残す。Download eventはtimeoutしたが実fileを回収し、Pod表示の623,143bytes/SHA256 0224a8811feb5dd0e126ef0e80b7012f0130169fb98ff23e89f3e161bd322a40へ一致照合した。
+
+実行はGPT-6/Codex Workのroot単一writer＋同環境read-only補助。補助は最新時刻の結合、SQLブリッジ再利用、実装/検証境界を読取reviewし、独立Pro/Ultra/Mash受入れではない。rootは独立合成3例の原文/保存文章図と、元16の前回同内容への照合を確認した。
+
+### 原本・前提差分・次の残件
+
+[実原本](https://chatgpt.com/library?file_id=libfile_b5feae1540588191bd17eea4072ad9e8&account_id=personal)は732,388bytes、SHA256 1fc58533518a9fd0923c6b67e925a2b6667282f1eb34a90efeb0ce4894508374。元22の入力/応答/通常保存payload/再表示、失敗と成功のログ、source SHA、独立合成SQL3例、CIログを保全。[公開結果JSON](../observation_learning/trials/2026-11-01-analysis-model-fields/model_ensure_results.json)は本文なし実集計＋独立合成3例だけ。実原文/rawは公開しない。再読runnerは[7882acd6](https://github.com/MassyuRed/Cocolon/commit/7882acd6cb54ad53c1fec632ec504032fb07328f)で公開/読戻し後に転送し、非公開原文の新規アップロード0。00/01/01B/Analysis現行map/詳細04/schema05/既存trial/本節を差分更新する。
+
+通常providerは依然として未接続で、通信期限/通信例外処理、同時要求の重複推論抑止、採用重みの判断が残る。次は既存モデル実行側とこの受口の対応を確認し、未採用重みを自動採用せず、単記録の役割証明を複数記録へ広げない。一般の本人基準/暗黙役割/判断・選択、混在思考/他者発話/省略主体、補足typed、記録間の再出現・変化、IF/Savedと観測会は未完了。
+
+Render/配置/実DB/RN/Pod管理の変更0。完了した検証processと未実行の今回端末だけを整理し、既存Podレンタルは維持。追加学習・新4B応答・GPUモデル読込0。今回の接続を一般読解・本人端末成功・正式商品受入れへ拡張しない。
+

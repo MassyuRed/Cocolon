@@ -1,4 +1,4 @@
-> **11/5最新・既存役割の通常consumer統合（weekly§187）：** API3433d807で既存ROLE/ROLE_ACTION/ROLE_CLAUSEのsource証明を通常の明示model_inputへ接続。同じ保存22応答は13→16 map、旧12mapへ役割を追加・独立行動1を保持、旧35保存/通常16rowを非生成再読。Jupyter968成功、CI全工程成功。[全結果・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-observed-roles-result-20261105)、[公開結果](model_observed_roles_results.json)、[比較runner](model_observed_roles_replay.py)。通常4B自動呼出し/配置/本人端末/一般本人基準/記録間接続は残件、学習/新生成0、商品credit0。旧完了run・不採用重みの判断を維持する。
+> **11/5 JST・分析の最新（第9回§188）：最新snapshotの取得後に明示async model_sourceを受け、既存v4応答→通常ensure→commit→再表示へ接続。保存済み再利用/月次/読取では非呼出し、複数原入力・補足は取得前拒否、生成中の編集は既存SQL guardで保存拒否。元22保存応答の照合と独立合成SQL lifecycleの証拠を分離する。通常HTTPの4B自動呼出し/採用重み/配置は未変更。一般本人基準・複数記録接続・IF/Savedは残件。新型/保存版/DB/RN追加0、STRUCTURE_MAP_DELTA_PRESENT、product_credit0、GPU0。** [全結果・再開点](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-ensure-model-source-result-20261105)。
 
 # Analysis — 最小field接続と実4B probe
 
@@ -2107,3 +2107,11 @@ Jupyter888 PASS・1 SKIP・1 deselected・11,176 subtests PASS、133.77秒/exit0
 API64174a2。既存完全SELF役割witnessで、その節だけを閉鎖済みとして扱い、他の報告scope検査を保持。元v4同22応答の明示consumerが7→13 map、PV03/PV04/PV05/X01/X05/X07を回復し、旧7のgraph/文章/図内容・旧候補20/typed14/節1を保持した。元のモデルなしfiniteでも回復6件の行動は表示できており、一般言語理解や意味精度向上の主張ではない。ROLE/主体/関係を補わずSOURCE_SCOPE・edge0を保持。
 
 Jupyter926 PASS/1 SKIP/1 deselected/11,176 subtests、128.71秒。新13通常rowをfile/mock RPCで非生成再読。公開の[本文なし結果と合成表示](model_closed_role_results.json)、任意隔離rootを受ける既存一回runner model_observed_actions_replay.py、[全結果/CI/原本/残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-closed-role-result-20261105)。前CIの10分超cancelledを保持し、既存同jobを15分へ調整。新型/保存版/公開DTO/DB/RNなし、通常4B/配置は未有効化、GPU0、STRUCTURE_MAP_DELTA_PRESENT、商品0。
+
+<a id="analysis-ensure-model-source-result-20261105"></a>
+## 11/5 JST — 元の応答結合を保って通常ensureへ接続
+
+APIb77c380e。通常ensureの最新snapshot取得後に明示async model_sourceを受ける入口を実装。資格は既存単記録/原入力限定、保存・月次再読では非呼出し。事前のpreparedはSQL時計差で一致しないため再利用せず、今回取得したpreparedに対するResponseだけを受ける。
+
+[runner](model_ensure_replay.py)は元22のsnapshot/request/messages/ref/raw/hashを維持し、通常ensure/build/commit payload/read_mapsを隔離mock RPCで確認する。最新SQLへの付替えや新4B生成ではない。[結果JSON](model_ensure_results.json)は本文なし実集計と独立合成3例の実SQL文章図。実原文/rawは非公開原本に保存する。検証数・CI・原本・残件は[weekly§188](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-ensure-model-source-result-20261105)。旧不採用重み/完了GPU runは変更せず、HTTP自動呼出し・transport・一般読解/記録間接続は残る。
+

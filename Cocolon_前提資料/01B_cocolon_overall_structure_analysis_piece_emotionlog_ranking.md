@@ -1,4 +1,4 @@
-> **11/5・分析の最新（第9回§187）：既存ROLE/ROLE_ACTION/ROLE_CLAUSEのsource証明を明示モデルconsumerへ接続。同じv4保存22応答は13→16 map、既存12 mapへ役割を追加・独立行動1 mapは保持。旧候補20/typed14/役割節1の保存値と非生成再読を保持、通常row16再読。Jupyter968成功、API3433d807のCI全工程成功。新型/保存版/公開DTO/DB/RN追加0。通常4B自動呼出し・配置・本人端末・一般読解/記録間接続は残件。STRUCTURE_MAP_DELTA_PRESENT、product_credit0、GPU0。** [全結果・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-observed-roles-result-20261105)。
+> **11/5 JST・分析の最新（第9回§188）：最新snapshotの取得後に明示async model_sourceを受け、既存v4応答→通常ensure→commit→再表示へ接続。保存済み再利用/月次/読取では非呼出し、複数原入力・補足は取得前拒否、生成中の編集は既存SQL guardで保存拒否。元22保存応答の照合と独立合成SQL lifecycleの証拠を分離する。通常HTTPの4B自動呼出し/採用重み/配置は未変更。一般本人基準・複数記録接続・IF/Savedは残件。新型/保存版/DB/RN追加0、STRUCTURE_MAP_DELTA_PRESENT、product_credit0、GPU0。** [全結果・再開点](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-ensure-model-source-result-20261105)。
 
 > **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
@@ -3496,3 +3496,16 @@ API intent_compiler.pyの既存_analysis_prefix_opens_reportで、既存_written
 | 既存trial `model_observed_roles_replay.py` / `model_observed_roles_results.json` | 同22保存応答の前後比較・旧35保存再読と本文なし集計/独立合成3例。実原文/rawは非公開保全 |
 
 API3433d807。ObservedGraph/唯一作者/通常rowを共用し、新型/state/file版/DB/RNを増やさない。ROLE_ACTIONは辺0とROUTE_CONNECTION gap、ROLE_CLAUSEは後半未読とSOURCE_SCOPE。Engineの候補分岐・通常ensure/HTTPは自動有効化しない。[結果・限界](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-observed-roles-result-20261105)。STRUCTURE_MAP_DELTA_PRESENT、商品credit0。
+
+## 11/5 JST — 通常ensureの明示モデル受口（第9回§188）
+
+| 既存path / 追加test | 責務差分 |
+|---|---|
+| API `ai/services/ai_inference/analysis_cumulative_service.py` | `ensure_map(..., model_source=None)`。再構築時だけ最新snapshotからv4入力を準備し、明示async callerの既存Responseを受け、既存build/commit/readへ渡す。HTTP/cronは引数なしの既定経路を維持 |
+| API `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py` | consumerの既存単記録資格を`require_analysis_model_observed_scope`へ共用。応答取得前と採用時で同じ原入力1/category1・補足/比較なしを拘束 |
+| API `ai/tests/test_analysis_cumulative_model_source.py` | 独立合成応答の実SQL通常保存/月次不変/CAS拒否・実補足の非呼出し、ref/messages/raw/hash不正/時計差/別owner/読取境界の22検査 |
+| API 既存 `.github/workflows/analysis-observed-content.yml` | 新22検査を既存PGlite導入済み累積API工程へ追加 |
+| trial `model_ensure_replay.py` / `model_ensure_results.json` | 元v4の22応答を元snapshotのまま通常ensureへ再読。本文なし実集計と、独立合成3例のSQL文章図を保持 |
+
+APIb77c380e。Input/Response/graph/作者/DTO/row/profile/DB/RN追加0。既存現在値にcallerを付けるだけで強制再生成しない。再構築が必要な場合だけ取得する。[全結果・限界](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-ensure-model-source-result-20261105)。
+

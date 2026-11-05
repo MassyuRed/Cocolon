@@ -1940,3 +1940,12 @@ API61e8aac2の既存semantic_admission.pyがv3継承の明示offline material.v4
 既存ObservedGraphを通常realize_observed_graphへ渡すため、新型/作者/保存版/公開wire/DB/RNは0。ROLE単独は欠4段、ROLE_ACTIONは欠3段＋ROUTE_CONNECTION・辺0、ROLE_CLAUSEは欠4段＋SOURCE_SCOPE・後半未読を保持。肯否/SELF/過去/元カテゴリ/座標は原文witnessで検査し、カテゴリを役割名にしない。旧private各保存版は従来IDと非生成readerを維持する。
 
 同22保存応答の13→16 mapと既存12mapへの役割追加を確認。新しい言語理解や意味精度16/22の証明ではない。通常ensure/HTTPの4B接続、複数record集約、補足/比較、一般本人基準、IF/Saved、本番配置と本人端末は未実施。[検証と残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-observed-roles-result-20261105)。STRUCTURE_MAP_DELTA_PRESENT（既存consumer責務）、商品credit0。
+
+## 11/5 JST — 明示モデル受口と通常ensureの結合（第9回§188）
+
+`ensure_map(..., model_source=None)`の既存再構築branchに限り、最新source snapshot→既存selected_material.v4準備→既存単記録consumer資格→async caller1回→既存Responseのexact type確認→preparedへの結合→既存build/保存/再読を行う。保存済み現在値/月次履歴/読取では準備もcallerも使わない。通常API/cronは引数を渡さず既定動作を維持する。
+
+資格判定はsemantic_admissionの既存条件を共用しただけで、複数record/補足/比較の許可や新文法を増やさない。時計を含むrequest/messagesを、guard一致だけで以前の応答へ付け替えない。provider受領後も元snapshotをbuild/SQL guardへ渡し、途中source変更はCAS拒否する。ValueError系の不正responseは既存422、不採用候補はcoverageを持つ非保存となり、応答取得失敗時の無言fallback/retryは追加しない。
+
+caller自身のtimeout/通信例外/並列重複推論対策は今回の未接続transport側に残る。本番providerや採用重みを自動設定する変更ではない。独立合成SQL lifecycleと元22保存応答のmock RPC再読を分けた[全結果](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-ensure-model-source-result-20261105)を参照。新type/保存版/公開wire/DB/RNなし、STRUCTURE_MAP_DELTA_PRESENT（通常受口責務）、商品credit0。
+

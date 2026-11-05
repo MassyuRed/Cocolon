@@ -3367,3 +3367,10 @@ API64174a2。既存_written_role_propositionの完全な過去SELF役割witness�
 API3433d807は§185の明示model_input consumerを、既存ROLE/ROLE_ACTION/ROLE_CLAUSEのsource証明へ接続する。Input/Response/ObservedGraph/ObservedSelfStructureMap、通常UUID/analysis.private-evidence.v1/cumulative.v1/watashi.map.v2とsafe projection版を共有し、新dataclass/enum/profile/state/file/version/公開DTO/DB/RN追加0。旧private ROLE三版とcandidate保存のID/値は不変。
 
 ROLE_ACTIONは通常rowでも2node/辺0/ROUTE_CONNECTION、ROLE_CLAUSEは1node/後半未読/SOURCE_SCOPEとなる。通常rowの非生成再読は保存済み図/文章/coverageを読む既存契約で、model raw/typed意味の再構築や新しい再検証契約を追加しない。実Supabase保存・通常4B自動呼出しの証明ではない。[全結果](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-observed-roles-result-20261105)。STRUCTURE_MAP_DELTA_PRESENT。
+
+## 11/5 JST — 通常ensureへ既存Responseを渡す（保存版追加なし）
+
+APIb77c380eは明示async caller受口`model_source=None`をPython service引数へ追加する。これは保存field/公開DTO/環境flagではない。Input/Response/ObservedGraph/ObservedSelfStructureMap、通常UUID/analysis.private-evidence.v1/cumulative.v1/watashi.map.v2は既存契約を維持し、新dataclass/enum/profile/state/file版/DB/RN追加0。
+
+現在取得したpreparedをcallerへ渡し、同じpreparedへ既存Responseを結合する。元request/messages/ref/raw/hashを別sourceや別時刻へ再ラベルしない。通常rowへモデルrawや新typed再構築契約を追加せず、保存済み図/本文/coverageの非生成再読を継続する。旧private保存の互換はそのまま。[結果と限界](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-ensure-model-source-result-20261105)。
+
