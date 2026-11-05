@@ -152,7 +152,7 @@ def main():
                 '-keyout', str(private_key), '-out', str(cert), '-subj', '/CN=localhost',
                 '-addext', 'subjectAltName=DNS:localhost,IP:127.0.0.1'],
                 check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=15)
-            private_key.chmod(0o240)
+            private_key.chmod(0o600)
             base_handler = probe.make_handler(tracked_generate, api_key=key, model_name=model_name,
                 deadline=started+240, max_requests=len(selected))
             class Handler(base_handler):
