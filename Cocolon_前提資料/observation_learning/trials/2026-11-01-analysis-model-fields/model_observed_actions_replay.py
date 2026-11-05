@@ -12,7 +12,7 @@ import time
 
 mode=sys.argv[1]
 api=Path(sys.argv[2])
-root=Path('/workspace/analysis-model-observed-actions-20261105')
+root=Path(sys.argv[3]) if len(sys.argv)>3 else Path('/workspace/analysis-model-observed-actions-20261105')
 original=Path('/workspace/analysis-role-clause-20261105/input/originals')
 sys.path[:0]=[str(api/'ai/services/ai_inference'),str(api/'ai/services'),str(api/'ai/tests')]
 import analysis_cumulative_service as service
@@ -86,6 +86,10 @@ for row in rows:
                 text=artifact.safe_text_projection(authenticated_owner_scope=owner),diagram=visual,
                 coverage=coverage,private_evidence=service.private_storage_evidence(artifact))))
         else:summary['unsupported']+=1
+    if mode=='before':
+        ordinary,ordinary_counts=service.build_cumulative_map(owner,snap)
+        case['normal_source_nodes']=len(ordinary.graph.nodes) if ordinary else 0
+        case['normal_source_coverage']=ordinary_counts
     summary['cases'].append(case)
     if mode=='after':
         for kind in ('candidate','typed'):
@@ -118,7 +122,10 @@ for row in rows:
         (out/'PV06.actual.json').write_text(admission.canonical(detail))
 
 assert summary['bound_responses']==22
-if mode=='before':assert summary['rejected']==22 and summary['mapped']==0
+if mode=='before':
+    expected_rejected=int(sys.argv[4]) if len(sys.argv)>4 else 22
+    assert summary['rejected']==expected_rejected
+    if expected_rejected==22:assert summary['mapped']==0
 else:
     assert summary['old_candidate_values_retained']==20 and summary['old_typed_values_retained']==14
     assert summary['old_clause_retained']==1

@@ -3356,3 +3356,8 @@ API51d9486。既存AnalysisModelQuotedParentUnitsInput/Responseの完全binding�
 新型/enum/profile/wire/state/file/version追加0。artifactは通常UUID ID、safe projectionは既存v1alpha1/watashi.map.v2、privateはanalysis.private-evidence.v1、source_profile=cumulative.v1の通常rowを共有。ROLE/ROLE_ACTION/ROLE_CLAUSEのprivate state/ID/旧candidate stateは不変。Engineのquoted-parent dispatchは候補専用のまま、通常ensure/HTTPの4B有効化は0。
 
 保存の確認範囲は、file化した通常rowをmock RPCから実read_mapsへ返し、既存wire validatorと文章/図/coverage一致をモデル/各compiler/作者なしで確認したもの。新しいsaved意味再構築・model raw再検証の契約を追加していない。[全実物・検証・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-observed-actions-result-20261105)。STRUCTURE_MAP_DELTA_PRESENT（consumer責務のみ）、商品credit0、配置未実施。
+
+
+## 11/5 — 完全な明記SELF役割文のscope閉鎖（保存契約不変）
+
+API64174a2。既存_written_role_propositionの完全な過去SELF役割witnessを、Analysisの報告scope検査にも再利用する。肯定の「の役割は…だった」を汎用報告導入へ誤分類せず、その節だけを閉鎖する。元source/行動の本人証明/他の報告・引用検査を保ち、普通のmapへROLE nodeや省略主体を補わない。型/enum/wire/profile/state/file/ID/DB/RN変更0。§185の通常row consumer/保存検証範囲も不変。[全結果・限界](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-closed-role-result-20261105)。STRUCTURE_MAP_DELTA_PRESENT（scope責務）、商品0・通常4B/配置未実施。

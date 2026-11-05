@@ -2099,3 +2099,11 @@ Jupyter839 PASS・1 SKIP・1 deselected・11,176 subtests PASS、pytest121.92秒
 API51d9486、既存4owner/合成49/既存CIを変更。元v4 saved22の同request/messages/ref/raw比較で、build_cumulative_mapへの明示quoted-parent入力が22拒否から7件の通常map/文章/図へ進んだ。残13未採用/2strict拒否。7件は通常finiteと同じgraphで、新しい役割・文法を読めた結果ではない。推測役割/他欄未対応はSOURCE_SCOPE、edge0。旧候補20/typed14/前回節1を保持・非生成再読。通常row/read_mapsを共有し新保存版なし。通常4B/ensure/HTTPは未有効化。
 
 Jupyter888 PASS・1 SKIP・1 deselected・11,176 subtests PASS、133.77秒/exit0。新7通常rowのfile＋mock RPC非生成再読で文章/図/coverage一致を確認した。実DB/実Auth/保存rawの意味再検証へ広げない。[全結果・失敗履歴・原本・CI・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-observed-actions-result-20261105)。[本文なし結果と合成例](model_observed_actions_results.json)、一回比較runnerはmodel_observed_actions_replay.py。追加学習/生成/ロード0、配置未実施、STRUCTURE_MAP_DELTA_PRESENT、商品credit0。
+
+
+<a id="analysis-model-closed-role-result-20261105"></a>
+## 150. 11/5 — 肯定役割文のモデルconsumer誤保留を修復
+
+API64174a2。既存完全SELF役割witnessで、その節だけを閉鎖済みとして扱い、他の報告scope検査を保持。元v4同22応答の明示consumerが7→13 map、PV03/PV04/PV05/X01/X05/X07を回復し、旧7のgraph/文章/図内容・旧候補20/typed14/節1を保持した。元のモデルなしfiniteでも回復6件の行動は表示できており、一般言語理解や意味精度向上の主張ではない。ROLE/主体/関係を補わずSOURCE_SCOPE・edge0を保持。
+
+Jupyter926 PASS/1 SKIP/1 deselected/11,176 subtests、128.71秒。新13通常rowをfile/mock RPCで非生成再読。公開の[本文なし結果と合成表示](model_closed_role_results.json)、任意隔離rootを受ける既存一回runner model_observed_actions_replay.py、[全結果/CI/原本/残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-closed-role-result-20261105)。前CIの10分超cancelledを保持し、既存同jobを15分へ調整。新型/保存版/公開DTO/DB/RNなし、通常4B/配置は未有効化、GPU0、STRUCTURE_MAP_DELTA_PRESENT、商品0。

@@ -1,4 +1,4 @@
-> **11/5・分析の最新（第9回§185）：保存済み4Bのquoted-parent入力から、元記録全体で証明できる本人過去行動を通常マップへ渡す明示経路を接続。22応答の同原本比較で、旧入口22拒否→7件の文章/図と通常保存形式の非生成再読。残13未採用/2strict拒否、旧候補20/typed14/役割節1を保持。Jupyter888成功、API51d9486。型・保存版・公開DTO/DB/RN追加0、通常4B有効化/配置/本人端末は未実施。STRUCTURE_MAP_DELTA_PRESENT、product_credit0、GPU0。** [全結果・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-observed-actions-result-20261105)。
+> **11/5・分析の最新（第9回§186）：明示モデルconsumerで肯定の完全SELF役割文を発話導入と誤判定する箇所を修正。同じv4保存22応答で7→13 map、旧7表示・旧候補20/typed14/役割節1を保持。13通常rowのfile/mock RPC非生成再読、Jupyter926成功。API64174a2、型/保存版/公開DTO/DB/RN追加0。通常4B有効化・配置・本人端末は未実施。STRUCTURE_MAP_DELTA_PRESENT、product_credit0、GPU0。** [全結果・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-closed-role-result-20261105)。
 
 > **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
@@ -3479,3 +3479,8 @@ APIの既存intent_compiler.pyで、単一の閉じた肯定過去発話の外�
 | 既存trial `model_observed_actions_replay.py` / `model_observed_actions_results.json` | 元v4応答22件の一回比較と、本文なし実集計/独立合成例。private rawや実本人原文を公開しない |
 
 新しい型/state/file/DB/RNなし。通常保存は既存rowとprivate-evidence v1。実DB保存やモデルrawの意味再検証を、file＋mock RPCによる非生成再読の成功へ混ぜない。[全結果](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-observed-actions-result-20261105)。
+
+
+### 11/5 — 肯定の明記役割文を発話導入へ誤分類しない限定修正
+
+API intent_compiler.pyの既存_analysis_prefix_opens_reportで、既存_written_role_propositionが節全文へ一致する場合だけ、その節自身を閉鎖済みとして次の節へ進める。前後の発話・引用・夢等のscope検査、元source/行動証明は維持する。共有owner/文法/ROLE node/型/保存版は増やさない。新test_analysis_model_closed_role.py（合成38）を既存CIへ接続し、前runの10分設定/cancelledと実測所要に基づき同じworkflowの枠を15分へ変更。既存trialのmodel_observed_actions_replay.pyは任意の隔離root/基点期待を受ける同じ一回runnerへ更新、新本文なし結果model_closed_role_results.jsonへ同22前後を保存。[実結果と限界](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-closed-role-result-20261105)。STRUCTURE_MAP_DELTA_PRESENT、商品credit0。

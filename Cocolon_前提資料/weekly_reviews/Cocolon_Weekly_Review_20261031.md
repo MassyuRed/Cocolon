@@ -3992,3 +3992,39 @@ skip1はPodのWASM未設定、deselect1はPodにhelperのないQ3 SQL。API51d94
 今回の7件をモデル品質の一般化へ換算しない。通常4B接続、同一欄の思考内容/他者発話/省略主体行動の混在（CP03等）のsource証明と採用、暗黙役割・判断/選択・本人基準、補足typed、記録間再出現/変化、IF/Saved、分析観測会は残る。新しい入力型や保存版を足す前に、この既存consumerと元sourceの不足へ続く。v5追加対応/旧不採用重みc522等の採用/新GPU学習比較は自動選択しない。
 
 実行はGPT-6/Codex Work、root単一writer＋同環境read-only補助。独立Pro/Ultra/Mash Product Readではない。GPU load/forward/学習/新生成0、既存Podレンタル維持。Render/Supabase/実DB/RN/配置/Pod管理変更0。STRUCTURE_MAP_DELTA_PRESENT（既存model材料consumerの明示接続）、商品credit0。
+
+
+<a id="analysis-model-closed-role-result-20261105"></a>
+## 186. 11/5 — 肯定の明記役割文によるモデルconsumerの誤保留を修正
+
+**§185に続く同じ作業依頼内の限定修正。通常4B有効化・配置・本人端末・商品受入れは未実施、product_credit0。** 同じv4保存応答のうち、否定役割の組合せは通り、肯定役割の6件だけが保留される差を照合した。原因は既存の汎用的な「の…だった」報告検出が、「私/自分の役割は…だった」にも一致し、新consumerの他欄検査で発話導入へ誤分類することだった。
+
+### 限定修正と実物
+
+Analysisの既存_analysis_prefix_opens_reportで、各節が既存_written_role_propositionへ全文一致した場合だけ、その役割文自身を閉じた文として次の節へ進める。元の前後の発話・報告・夢、引用、推測・未知名詞等を消さず、別の主体をSELFにせず、役割文から後続行動の主体を継承しない。共有ownerの_source_prefix_opens_reportや文法は変更していない。通常graphへROLE nodeを新しく足す修正でもない。
+
+API [64174a2](https://github.com/MassyuRed/mashos-api/commit/64174a26968792b851b2f86fa099aa7c8aebfaca)、変更は既存compiler・合成38caseのtest・既存workflowの3path。前版51dのsourceから隔離コピーを作り、最終compiler SHA256 4cccfc82607dffc29af262bb024e90fcd03ef091ea720e3af4b1e0f5eb1fc1d7とtestをPod/local/Git blobへ照合。他3sourceは51dと同一。
+
+| 同じ22のv4 request/response/raw | 51d | 64174a2 |
+|---|---|---|
+| 明示model_inputから通常mapへ採用 | 7 | 13 |
+| 保留/strict拒否 | 13 / 2 | 7 / 2 |
+| 通常rowの文章/図/coverage非生成再読 | 7一致 | 13一致 |
+
+回復した6件はPV03/PV04/PV05/X01/X05/X07。旧7件はgraph/文章/図の内容を保持（通常の再生成UUID参照は別）。全13のgraphは同じ原文の既存finite結果と一致し、SELF・fact・past ACTION1件、SOURCE_SCOPE・mapped1/unparsed1・edge0を保持した。元のモデルなし経路でも、回復6件には行動1件が出ていた。今回の6件はモデルconsumer側の誤保留の修復であり、通常の言語理解が6件新しく増えた成果や、13/22という意味精度へ換算しない。
+
+### 検証と保存
+
+最終Jupyter一回は926 PASS・1 SKIP・1 deselected・11,176 subtests PASS、pytest128.71秒/親129.474822秒、exit0。新38と§185を含む既存モデル/finite/累積保存を確認。初回37成功/1失敗は、条件付き役割と別欄の行動の扱いまでtest期待を広げていたため、「閉鎖witnessに一致せず既存report方針を維持する」という今回の境界へ修正した。条件文一般の意味解析を修復したとはしない。初回ログを私有原本へ保持し重複加算しない。
+
+全22の実messages/ref/request/response/raw/hashを元v4へ束縛し、前後とも生成0。旧候補20・旧typed14・前回節1の保存値/IDを保持し、35件を生成/各compiler/作者禁止下で再読。新13の通常rowはfile保存＋mock RPCから実read_mapsへ渡し、文章/図/coverageとowner転送を非生成確認した。保存model raw/typed意味の再検証、実Auth/実DB/RN描画の証明ではない。全工程137.583762秒、before再読1.342849秒/after3.383689秒。
+
+[公開結果JSON](../observation_learning/trials/2026-11-01-analysis-model-fields/model_closed_role_results.json)は50,469bytes、SHA256 178f75c1b6d1f99b7c06909b11fc42babc3dfc8943c4e7f18145e93f4059fda0。実結果は本文なしmetadata、表示は独立作成合成3例だけ。通常経路の補助集計2fieldは比較範囲が異なるため除去し、case別の原計数は保持。判定/原raw/表示は変更していない。[実原本](https://chatgpt.com/library?file_id=libfile_be03f00214c081919adfca1b06868e3d&account_id=personal)は642,275bytes、SHA256 bd8a8a86cd26e31fc1d8621739b4b2cf95ed17c7f4c965ac5256821596b551e3。元22の完全request/response/raw/snapshot、前7/後13表示・通常row・全ログ/メタデータを保存した。追加重みなし。
+
+CIについて、前版51dのrun41971076468は10分設定下の10分超でcancelled、月次SQLは未実行だった（§185）。同じ生成/保存/API/SQL検証の内容を削らず、実測512.29秒＋32.20秒＋30.28秒と準備/後段を踏まえ、既存jobの枠を15分へ変更。最終[CI41973870973](https://github.com/MassyuRed/mashos-api/actions/runs/41973870973)・job127068094599はAPI64174a2をcheckoutした全step successを確認。generation/保存2,083 PASS・1 SKIP・12,048 subtests PASS（505.42秒）、shared owner1 PASS（30.82秒）、累積API/Q3/既存job24 PASS・既存warning1・2 subtests PASS（29.24秒）、月次順位/不変再読/削除SQLまで成功。first stepの旧model-fields SQL1件はWASM未設定のSKIPを保持し、後段SQLの成功と同一検証へ換算しない。CIは既存の隔離PostgreSQL WASMであり実Supabase DBではない。
+
+### 残件と次の作業
+
+§185の新consumerは単一の完全SELF過去行動だけを通常rowへ渡す限定scopeのまま。次は既存ROLE/ROLE_ACTION/ROLE_CLAUSEのsource証明と通常consumer/保存の統合不足を確認し、新しい型/保存版を先に増やさず進める。通常4B有効化、同一欄の思考内容/他者発話/省略主体行動（CP03等）、暗黙役割・判断/選択・本人基準、補足typed、記録間再出現/変化、IF/Saved、分析観測会は残る。旧不採用重みや新GPU試行を自動選択しない。
+
+実行はGPT-6/Codex Work、root単一writer＋同環境read-only補助。独立Pro/Ultra/Mash Product Readではない。GPU load/forward/学習/新生成0・既存Pod維持。Render/Supabase/実DB/RN/配置/Pod管理変更0。STRUCTURE_MAP_DELTA_PRESENT（既存Analysis scope/consumer条件）、商品credit0。

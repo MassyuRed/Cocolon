@@ -1,3 +1,5 @@
+> 2026-11-05 最新差分（第9回§186）：API64174a2で、肯定の完全SELF役割文を発話導入へ誤分類するAnalysis scopeを限定修正。既存witnessでその節だけを閉じ、前後の報告/元source/本人行動証明を保持。元v4同22応答の明示consumerは7→13 map、旧7内容・旧20/14/1保存値を保持、13通常rowのfile/mock RPC非生成再読・Jupyter926成功。型/保存版/公開DTO/DB/RN追加0、通常4B/配置未実施。全path01B/契約05/結果と限界weekly§186。前CIcancelを保持し同job枠15分。STRUCTURE_MAP_DELTA_PRESENT、商品0、GPU0。
+
 > 2026-11-05 最新差分（第9回§185）：API51d9486の既存model_inputへquoted-parent材料の明示consumerを接続。全sourceの証明を保つ本人過去行動だけを通常mapへ渡し、未読scope/stale件数を保持。元v4応答22件の同原本比較で7通常map、file＋mock RPCによる非生成再読7件一致。旧候補20/typed14/節1は保持、Jupyter888成功。型・保存版・公開DTO/DB/RN追加0、通常4B/配置は未実施。全path01B、契約05、原本/限界/残件weekly§185。STRUCTURE_MAP_DELTA_PRESENT、商品credit0、GPU0。
 
 > 2026-11-05 最新差分：分析の明記本人役割節を、元4B応答・全文field bindingを保持して既存mapへ渡す限定private経路を接続。後半はSOURCE_SCOPE、旧候補20/typed14を保持・非生成再読。API c033bd4、Jupyter839成功。新private role_state/state/file/identityを05へ追記、型/公開DTO/DB/RN/通常ensure不変。全pathは01B末尾、実物/検証/原本/残件はweekly§184。STRUCTURE_MAP_DELTA_PRESENT、商品credit0、GPU0、配置未実施。
