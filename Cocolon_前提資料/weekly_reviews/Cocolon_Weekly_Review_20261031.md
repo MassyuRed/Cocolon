@@ -4551,3 +4551,39 @@ API最終4d744e36へ同24rawを0生成／0loadでreplay（2.892669秒）。全re
 [全原本](https://chatgpt.com/library?file_id=libfile_1189a389d9e481918f59607846dbe8fe&account_id=personal)、[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/actor_ownership_results.json)。実4Bの原rawは公開GitHubへ置かない。最終CI [42052701621](https://github.com/MassyuRed/mashos-api/actions/runs/42052701621)／job127332726656は全工程success。生成/保存2312 PASS・SQL依存1 SKIP・12048subtests、shared-owner1 PASS、累積/API/Q3/jobs182 PASS＋2subtests、SQL201原本/15月参照。Jupyter先行4suite248 PASS/24.79秒、追加最終9 PASS/1.53秒は重複合算しない。
 
 通常既定v4・v4限定self-hosted transport・旧各重み・既存ownerを保持。新profile/stateだけSTRUCTURE_MAP_DELTA_PRESENT。一般の本人基準・暗黙役割・記録間の意味、通常重み採用／本番／実DB／端末／配置／buildは未達。次は近接例で残った所有者誤読を、AP/OPを教師化せず既存CE学習と旧8教材の保持で比較する。完了runを再起動せず、新しい独立rootで準備する。
+
+
+<a id="analysis-actor-ownership-ce20-20261105"></a>
+## 200. 11/5開始の継続 — 所有表現CE20は不採用、既見再現と転移不足を分けた
+
+§199のv7局所改善と旧v4/v6/通常v4を継承。OP03の誤読が別語彙にも残るため、AP/OPやprompt4実演を教師化せず、新6教師OT01–06と既存N01–08を使い、同一v7の前後比較を行った。N8のid/owner/snapshot/assistant_targetは完全保持し、messages/encodedだけ現v7へ束縛。新6は省略肯否、所有対象、本人/他者主体、反復人称語の一意引用を独立原文で教示。plain全assistant CE/AdamW/LR1e-5/weight_decay0/clip1/seed20261111を既存trainerから継承した。
+
+CPU初回は現Podに旧packがなく、root作成・モデル実行前に停止した。保存済みpair8の外ZIP/内ZIPのCRC/SHAを確認し、同pack30afde6aを原bytes復元。再構成した教師や失敗rawで代替しなかった。修正版は再利用beforeのa2e/config/model/revision/PINS/stopとseam SHAを固定し、timeout時のpartial保存handlerと初期原本の終端不変検査を保持する。
+
+root `/workspace/analysis-actor-ownership-ce20-20261105`、API4d744e36、初期a2e/config006e。新6各2回＋旧N8各1回＝20更新、14教師の前後28NLL、別合成6のbefore新6＋after12＝18新stop、3load、556.595970396秒、before/train/after全exit0。既知v7 before6は同messages/ref/rawを再利用して0生成。全prompt mask/shift/target+終端を確認。初期重み/旧packは不変。
+
+| 比較 | 実結果 | 判断 |
+|---|---|---|
+| 新しいAE6＋既知6の同12source | 保存4→4、raw8同一/4変更 | 一般改善率ではない。範囲外OTHER/ROLE対照も含む |
+| AE01/AE02/AE03/OP03 | 所有者actor、または裸の重複人称引用が残る | 所有表現の転移改善なし |
+| AE05/AP07/AP08/OP02 | 原文/graph/文章/図/coverageを保持 | 新artifact UUID以外の全projection一致 |
+| OP07 | TE_CONTEXTが有限節全体のCONTENT_TARGETへ変わる | 新しい候補の退行。map不採用を維持 |
+| 平均NLL | 0.038026945→0.004037802 | 文章理解や自由生成成功を証明しない |
+
+新b7c00997/config3195f993は研究原本として保持し、通常・次学習初期へ採用しない。全112tensor/3,833,856paramsの保存再読・有限値・初期との差分112を確認したが、これは更新の事実だけで、意味改善ではない。実GPUは終了後2MiB/0％、レンタルは維持。
+
+### 既見の教師2例だけを追加4生成で切分け
+
+root `/workspace/analysis-actor-ownership-fit4-20261105`でOT03/OT06の同snapshot/messagesを旧a2e/新b7に各1回。学習0・4stop・2load・47.679162967秒・全exit0。OT03は新重みだけactorなしの教師JSONと一致し、主体未確定で保存。OT06は両方とも裸の「僕」を引用し、一意な「僕は」へ届かずstrict拒否。既見1例の再現と、未学習文の転移を分ける。ここからteacher forcing単独原因とは断定しない。
+
+CE前後24応答のconsumer再読は、別rootで0生成/0load・2.951681709秒、全request/responseと候補graph/文章/図・map内容が一致。候補22復元/同じ2拒否、保存内容8復元。初回比較はPython asdictのtupleと保存JSONのlistを直接比較して1件目で停止したため、JSON正本のcanonical比較へ修正した。原raw/商品reader/拒否条件を変更せず、失敗logも保持した。各保存artifact内のcurrent/月次/readonlyは生成を禁止して同一ID/内容を再読。保存は隔離mock RPCであり、実DB・端末の証明ではない。
+
+### 次の独立6対照をCPUだけで準備
+
+root `/workspace/analysis-actor-ownership-cpu6-20261105`で、所有だけの抽象対象、別の人称/動詞、否定所有、反復する本人語、他者動作主を新OC01–06として独立作成。旧14のid/owner/snapshot/target/messages/refを保持し、全20教師の逐語引用・既存candidate受理・保存非生成再読・実tokenizer/prefix/全prompt mask/終端を確認。モデルload/生成/学習0。更新順・次初期値はこのCPU段階で未選定。
+
+OT06の保存rawを再tokenizeしてgoldと比較すると、target index34でgold「僕は」とraw「僕」が分かれる。実生成token列やlogitの採取ではなく、保存文字列の再tokenize比較である。OT06のafter教師NLLは0.018102059（85target tokens）で、14平均だけではこの重要引用を評価できない。次は、所有者と主体を分ける語彙/人称/肯否の組合せ不足と、一意な主体引用を別々に扱い、理由/文脈の保持も確認する。
+
+[全原本・新重み・全読・再開点](https://chatgpt.com/library?file_id=libfile_ff44f49225988191b0e670be09d5b96a&account_id=personal)、[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/actor_ownership_ce20_results.json)。CE元ZIP54member/53manifest、診断19member、CPU準備28member/27manifestをPod外CRC/全SHAで照合。旧原reportのPENDING表記は改変せず、別final_reviewへ全読/不採用を保存。公開GitHubへモデルraw/重みを置かない。
+
+APIは§199の4d744e36のまま、CI42052701621全工程successを継承。今回の新API/意味型/有限文法/作者/通常transport/公開DTO/DB/RN/配置/buildは0、STRUCTURE_MAP_DELTA_NONE。本人基準・暗黙役割・記録間意味・通常モデル採用・正式受入れは残件。v7の局所改善を今回の不採用と混同して撤回せず、b7の低NLLを商品成功へ昇格しない。
