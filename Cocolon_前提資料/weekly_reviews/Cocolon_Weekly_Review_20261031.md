@@ -4875,3 +4875,28 @@ WH04だけがNoneからSELF／negative／wish／current_inputの1nodeへ変わ�
 旧新版4replayのZIPを回収し、各22member／21manifestのbytes・SHAとCRCを照合した。同一[非公開原本](https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal)のversion7へ追加保存済み（31,822,535bytes、SHAd7dd58732f847f40d16e9274b0c14ad5721be874030443270c6425b1bdff0b11）。原raw・本文・人物・重みを公開GitHubへ置かない。既存sourceの否定希望を既存consumerへつなぐ限定修正としてSTRUCTURE_MAP_DELTA_NONE。通常constructor／既定v4／planner／batch選択、意味型／作者／公開DTO／DB／RN／配置／buildの追加変更0。通常重み未採用・本番未有効化、全欄出力／通常全量取得・本人基準・暗黙役割・記録間意味の残件を保持する。
 
 [本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/negative_wish_results.json)。
+
+<a id="analysis-optional-kernel-diagnostic-20261105"></a>
+## 214. 11/5開始の継続 — 隔離kernelの実bindingを確認、欄欠落とv8未返却は残る
+
+§212のreference fallback警告を、原因確定ではなく隔離runtimeの検証対象にした。最初のFA0.6案は隔離targetへのpip／hash確認後、Triton3.4のgluon.language.extra不足によりimport-only probeが失敗した（23.125746617093682秒、model load／生成／学習0）。この失敗原本はLibrary7に保持し、成功版へ置換しない。
+
+別variantのv2は新しい隔離targetだけへfla-core／flash-linear-attention0.5.0、causal-conv1d1.7.0、einops0.8.1を配置した。globalのtorch2.8.0+cu128／Triton3.4.0／transformers5.19.0等は維持。install／import確認は28.331790314987302秒、model／tokenizer／生成／学習0、base不変を確認した。続く実runで4bindingがvendor実装のcallableへ解決されていることをclosureの実体で検査した。単なるimport成功や利用可能フラグだけの確認とは分けるが、速度改善の証明ではない。
+
+固定APIは§213の新5cではなく旧100c1bb、初期は元a2e／config006e、Qwen3.5-4B／v7・v8の既知6欄診断である。既存source・user／binding・旧v8失敗root・adapter・base・optional targetは前後不変。通常constructor／既定v4／planner／batch envelopeのwhitelistは拡張していない。
+
+| 要求 | 実結果と範囲 |
+|---|---|
+| KW00・既知AE05のwarmup | stop、原raw SHA7e2b68e1がcached旧版と一致。1fieldの候補保持・private state非生成再読。生成45.107401366秒、load3.472138274秒を含むwarmup wall48.582880923秒。初回JITを含むwarmup90秒枠であり、通常23秒の成功ではない |
+| KW01・v7／6field | stop、17.222018635秒でfield1だけ。515bytesのrawは旧SHA4120951eと完全一致。残り5field欠落でstrict拒否、改善なし |
+| KW02・v8／6field | 1回開始後、23秒枠のSIGALRMでchild -14終了。返却raw0で、意味・欄保持・strict受理は判定不能 |
+
+総100.81402921117842秒、1load／3開始／新返却2／stop2／学習0、strict拒否1、FAILED_PARTIAL_NO_RETRY。実runでのruntime preflightは8.688157690秒。warmupの時間はload・初回JIT・生成を含み、後続のv7→v8という順序と出力量の違いもある。同一条件の速度対照ではなく、改善倍率、通常23秒／全量60秒の成立、タイマー終了との因果を主張しない。
+
+KW00は主体省略と否定を元rawのまま保つ候補確認で、商品map保存や一般意味品質の合格ではない。KW01のfield1を複製して6欄へ直さず、KW02の未返却をstrict拒否や意味失敗へ置き換えない。新source／意味型／文法／作者／公開DTO／DB／RN／配置／build変更0、STRUCTURE_MAP_DELTA_NONE。モデルやkernelの通常採用、本番有効化は行っていない。全欄出力・通常全量取得・本人基準／暗黙役割／記録間意味の残件を保持する。
+
+次は一記録／二記録／三記録で、原sourceと全欄を保つ実出力を、出力2048tokenと共有60秒の既存枠を超えずに確認する。成立前に通常の全量batch接続を進めない。普通文の暗黙役割・本人の基準・記録間の意味は、Mashの実演／教示を既存観測会から教材へつなぐことを含めて残件であり、今回のkernel検証で成立したとは扱わない。
+
+実試行ZIPは74,610bytes／SHA28eef49287999fb1f946a15a19e8fccc8cb1c573a11eb52d5313103e0708176c、16member／全15manifestのbytes・SHA／CRCを照合。同一非公開原本のversion8へ追加保存済み（32,054,078bytes、SHA0f5f3bb3e0a42cd28458c88bee864063aba352c2ac3133ec536f02c7f6766bb8）。 [非公開原本](https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal)。モデルraw・原文・人物・private stateを公開GitHubへ置かない。
+
+[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/optional_kernel_results.json)。
