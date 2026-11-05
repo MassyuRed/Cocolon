@@ -1,4 +1,4 @@
-> **11/5開始・分析の継続（第9回§207）：全record・全欄・本人補足と全量guardを保つoffline入力分割を追加。12計画/488実tokenizer測定で201件も欠落なく入力枠内へ分割し、54追加テストとCI全step成功。通常の全量モデル実行、出力2048/60秒期限の成立は未証明。主体/役割/本人基準・記録間意味の読み取り、通常採用・本番/端末は引き続き残件。** [全結果・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-cumulative-partition-budget-20261105)。
+> **11/5開始・分析の継続（第9回§208–209）：全sourceを保つprivate batch INPUTと全量一回の合成を実装し、201件の合成一致・新55テスト・CI全工程成功。実4Bにも全20件を3分割で送ったが、3stopとも先頭fieldしか返さず全体拒否、合成/保存0。全欄保持と通常の全量取得は未達。希望の取り込み境界は後続修正・確認中。通常採用・本番/端末未実施。** [結果・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-batch20-20261105)。
 
 # Analysis — 最小field接続と実4B probe
 
@@ -2228,3 +2228,9 @@ RNの月次比較でcurrent通信失敗時に履歴まで消える不具合を�
 §206の全量入力超過に対し、全record・全欄・適格本人補足と全量guardを保つoffline入力予算plannerをAPI0018へ実装。12計画/488実tokenizer測定・190.352066秒で全対応を確認し、baseline201件はv4が6組、v7が9組。54追加対象/CI全step成功。通常ensure未選択、生成/API/DB0。出力2048・60秒全量実行・意味合成/保存・本番処理の完了は未証明。
 
 [結果・全原本・再開点](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-cumulative-partition-budget-20261105)。
+
+## §208–209 — private入力合成と実4B全欄保持の区別
+
+API fc756で、各childの元Responseを保つtyped private batch INPUT／exact検査・保存再束縛と、全量parentで一度だけ既存作者へ渡す明示offline合成を実装。合成201child対全量oracleのgraph・文章・図・coverage一致、未解析/欄なし保持、改変・欠落・重複全体拒否、旧9single profileを確認。新55対象/CI302件を含む全工程成功。通常ensure/factory/保存は不変、実4B全量取得・出力2048・60秒・DB commit・本番成功は未証明。
+
+全20件の実3stopは先頭fieldだけとなり全strict拒否、合成/保存0。予備の正規合成応答も旧action+wish consumerではNoneで、再読一致を作者成功にしない。本人基準・暗黙役割・記録間意味、全欄出力、通常全量取得／一回commit・本番/端末は残件。[全結果・原本](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-batch20-20261105)。
