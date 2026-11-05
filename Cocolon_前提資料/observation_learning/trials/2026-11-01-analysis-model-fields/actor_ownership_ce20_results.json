@@ -1,0 +1,30 @@
+{
+  "schema_version": "cocolon.analysis_actor_ownership_ce20_summary.v1",
+  "status": "RUNNING_NOT_ADOPTED",
+  "api_commit": "4d744e36a093aac3ad157a448f06ef6be2be59cb",
+  "runner_commit": "1b36f84c6a4dfe6d92f63802a0c9644a92a18a8f",
+  "jupyter_root": "/workspace/analysis-actor-ownership-ce20-20261105",
+  "source_pack_sha256": "30afde6a0735aac0b5f23e737b2b80c72e7dd65ba0cdbe4bc791886473f4bbf1",
+  "new_pack_sha256": "48844581bd6a52799693b84b35612c0df380004178dbe3414152949299a54a25",
+  "initial_weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59",
+  "initial_config_sha256": "006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9",
+  "teachers": {
+    "new_independently_synthetic": 6,
+    "old_N01_N08_exact": 8,
+    "AP_OP_and_prompt_examples_excluded": true
+  },
+  "planned": {
+    "ce_updates": 20,
+    "nll_forwards": 28,
+    "new_generations": 18,
+    "model_loads": 3,
+    "max_seconds": 900
+  },
+  "observed_checkpoint": {
+    "before_phase_exit": 0,
+    "training_updates_seen": 2
+  },
+  "normal_adoption": false,
+  "next_training_initial_adoption": false,
+  "restart_completed_or_partial_root": false
+}
