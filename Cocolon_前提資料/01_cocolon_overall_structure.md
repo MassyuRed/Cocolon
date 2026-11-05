@@ -1,4 +1,4 @@
-> **11/5開始・分析の継続（第9回§201–202）：旧a2eから48更新/14新stopで同14sourceの保存4→9（診断3改善＋学習既見2再現）。所有否定・他者actor欠落・理由/文脈誤読が残り新6c879は研究候補。28応答の非生成再読と旧4保存を保持。明示v7の実HTTPS→通常API→隔離SQLは4新stop/3保存/他者1未解析、各保存のcurrent/月次/readonly一致。通常既定v4・本番/端末/配置不変。** [全結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-explicit-v7-https-sql-20261105)。
+> **11/5開始・分析の継続（第9回§203–206）：主体×肯否6対照の12新生成で主体引用に局所改善、同じ否定文のmetadata4条件では読解の揺れを再現。追加学習/通常採用なし。月次比較の通信失敗で保存履歴まで消えるRN不具合を修正し11テスト成功・GitHub反映済み。全履歴の短文50件でもモデル入力枠超過を実測し、全量を保つCPU分割準備へ。実通信の全量分割・本番/端末/buildは未完。** [全結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-cumulative-token-budget-20261105)。
 
 > **11/1・7101本人確認済み（第9回§43）：** RN7464f858のiOS #71/run41283646380/job124780456306は署名Archive・写真目的文検査・IPA・TestFlight Uploadの全工程success。Mashが7101を反映し、今回依頼した修正の完了を確認した。起動待ち、Home全体行動削除、Ranking撤去、設定以外のガイド同期、新PieceのEmlisロゴを含む。こころ天気は今/日週月/履歴/未読/通知/tutorialを従来どおり維持。API3407402/dep-dbjebcflk1mc7390mnr0は07:11:03 UTC Live、health/bootstrap200・private5ON/public3OFF。API製品同一blobのd43cabcd native PostgreSQL CI41283815884は全step成功。RNの旧V4 metrics19失敗とlegacy canvas13reportは残る。依頼UIの本人確認を、全製品の品質/正式商品受入れへ広げない。GPU再起動0。
 
