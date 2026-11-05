@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-**11/5・分析の最新（第9回§180）：** 既存16＋原90からの再利用4＋独立作成4の24教材を、保存7ba4から24更新/48測定/38新stopで比較。旧19のgraph・文章・図とRU02/AT4の教師一致を保持したが、新4教材自身の理由/行動の所属は未再現で、未学習QF4の残件も未解消。新27e9は通常/次初期値へ不採用・閉鎖。[結果・原本・次残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-material-v5-composition24-result-20261105)。CP4は学習後再現、QF4は学習未使用の近接確認。理由/否定・時点と独立行動の所属は未解消、CP04の原文外quoteは拒否、SC01のNEG引用範囲は後退したが否定自体は保持。通常finite五種とprivate typed限定を区別し、通常接続/本人基準/補足/記録間・通常累積/IF・Savedは残件。通常API/DB/RN/配置変更なし。GPU処理終了・compute空、Pod稼働維持。
+**11/5・分析の最新（第9回§181）：** 同じ24教材/研究初期7ba4で、理由・思考/独立行動のobject全体へ追加lossを与える一回比較を完了。24更新/48測定/保存後38新stop、721.465899秒。学習未使用QF01の理由/過去時点/否定注記と、CP03の独立記入行動を局所修復し、旧19graph・文章・図/5教師一致を保持。一方CP02の重複親拒否、CP04の他者発話内容の事実化・逆帰属、QF03の不正修飾/過大な行動quoteが残り、新a6b5は通常/次初期へ不採用・閉鎖。[結果・原本・次残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-material-v5-composition-unit24-result-20261105)。局所改善を通常分析完成へ換算せず、通常4B接続/本人基準/補足/記録間/IF・Savedは残件。通常API/DB/RN/配置不変、GPU処理終了・compute空、レンタル維持。
 
 **11/3・分析の最新結果（第9回§100–102）：** 74教師監査後、旧74不変＋原文対照2を76教師/90更新/152NLL/50新stop/2load・641.971830秒/exit0で比較。NV04の結果重複/不明の親不正を改善し、R4/T4/追加本人2の10ROLE文章図を前後bytes同一で保持。50rawは46同一/4変化、HQ04理由誤分類は残りR08肯定過去copulaに誤modifier再発。strict候補47→49は意味率ではない。100保存非生成再読/元532memberの全bytes-SHAを確認・新重み9dcを保全、通常/次初期値は未採用。[結果・原本・再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-reason-unknown76-result-20261103)。全対象分離は現行必須でなく、次は理由の述語/不明併存差と複数文copula保持をCPUで切分け。通常HTTP/DB/RN/配置不変、本人基準/記録間関係/通常累積接続は未完。GPUレンタル維持、STRUCTURE_MAP_DELTA_NONE。
 

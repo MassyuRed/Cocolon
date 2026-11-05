@@ -3835,3 +3835,30 @@ GPU終了2MiB/0%・compute空、Podレンタル維持。前確認.29USD/hでrun�
 次は新4教示自身の自由生成が成立しない箇所を、既存入力/loss/意味owner内で修正する条件へ絞る。先頭の文字差はCP03/04では合法なactor助詞差で、意味誤所属箇所と一致しない。失敗rawを新goldへ昇格したり、同じ24順を盲目的に反復したり、QF4を教師化して転移成功にしない。追加GPU条件は未固定。
 
 通常finite五種とprivate ROLE/ROLE＋ACTION限定は別。通常SOURCE_SCOPE gapは未読である旨と元record版への束縛を保つが、未読本文/具体的不明対象/発話帰属の解析証明をimmutable保存する型ではない。閉じた発話後の本人節を通す案も未実装で、今回の商品修復へ数えない。通常ensureへの4B接続、本人基準/役割・判断・選択、補足/記録間の再出現・変化/IF・Saved/分析観測会は残件。新product owner/通常source/型/意味gate/compiler/唯一作者/HTTP/DTO/DB/RN/Render/Supabase/配置変更0、STRUCTURE_MAP_DELTA_NONE。実環境GPT-6/Codex Work、root単一writer/実行/判断＋同環境read-only補助で、独立Pro/Ultra/Mash Product Readではない。primary=BLOCKER_NARROWED、product_credit0。
+
+
+<a id="analysis-material-v5-composition-unit24-result-20261105"></a>
+## 181. 11/5 — 意味object全体への追加loss比較を完了、局所改善と帰属退行で不採用
+
+前回composition24の24教材・target/messages/encoded/順・seed/LR/clipを不変にし、同じ研究初期7ba4/933cから新しい一回を実施した。不採用27e9の再利用/旧run再開ではない。全文平均CEとRU02の既存21token union係数1を維持し、CP01/02は理由object全体、CP03/04は本人思考/内容/独立行動の末尾3object全体のtoken union平均CEを係数1で追加した。CP unionは51/52/105/102token、先行comma・境界重複を含め実tokenizerのoffsetとcausal shiftを照合。短いlabelだけの強化、教師変更、QF4の教師化、指示/decoder/意味gateの変更は0。
+
+CPU15.962918秒/model load・forward0、24更新/48測定/112tensor保存照合/保存後reload38新stop/2load、run721.465899秒、train/after exit0。900秒＋終了30秒内、再試行0、初期adapter/config不変。before34は初期7ba4と完全messages/ref/response/sidecar一致で再利用。CP4には初期自由生成がなく、前回composition24のCP4との比較は同初期/同教材・順に対する追加項比較であり、今回の初期自由生成前後ではない。24教材全ての自由生成を追加実施したものでもない。
+
+| 対象 | 原文・全文生成の判定 |
+| --- | --- |
+| QF01（学習未使用の近接確認） | 理由marker・従属過去時点・否定の3注記を復旧。不明と親関係も保持。元語句はbeforeからquote内に残っており、元意味全文の新規復旧とは数えない。完全盲検/一般品質成功ではない |
+| QF02/04 | 初期7ba4とraw同一。QF02理由marker不足は継続。QF04の反応/独立署名行動は保持 |
+| QF03 | 記入を独立ACTION rootへ出すが、そのquoteは思考まで含む。有限動詞をWRITTEN_MODIFIERへ入れ、発話内推測も同kindへ付けた。元語句は保持するが、思考/行動のきれいな分離成功とはしない |
+| CP01/02（学習教材） | CP01は理由をTE_CONTEXTへ分類する未達を継続。CP02は同一quoteを文脈/理由の2unitへ重複し、同じquoteを親へ指定してparent_ambiguous_or_missingで全体拒否。前回受理からの新退行。理由注記追加だけを修復へ換算しない |
+| CP03/04（学習教材） | CP03は原文どおりの独立記入行動を思考childから分離。思考内容はroot内に残り、任意child差を欠落に数えない。CP04は原文外SELF付き引用を解消する一方、他者発話の内容を独立ACTIONへ上げ、発話全文をATTRIBUTIVE childへ逆付けする新しい帰属退行。strict受理を意味成功へ換算しない |
+| 従来30/19表示 | RU02/AT04/11/17/24の5教師JSON値一致、旧19graph・可視文章・図を保持。SC01の動詞を含まない短いNEG引用は前回と同じ後退、MD02も既存の同種不足を継続。原文全文と否定自体は保持。X05の任意対象child省略とR08の任意child保持、OA01の助詞差は意味退行へ数えない |
+
+比較可能な初期34はraw30同一/変更4（SC01/X05/QF01/QF03）。前回composition24の38とはraw30同一/変更8。初期34候補は全34維持、新CPは3/4で全37/38、typed19。前回も37/38だが拒否がCP04からCP02へ移ったため、総受理数を品質保持・改善の証拠にしない。CP4教師JSON値一致は0/4だが、これだけでCP03の意味上の局所改善を否定しない。平均NLL .025284686→.014029674、CP object union CEも全低下したが、低下を自由生成成功・因果の唯一性へ置換しない。
+
+72応答の完全request/response/raw/hashを照合し、保存71候補/38typedを生成・compiler・作者禁止guard下で非生成再読、復元typed自身のgraph/文章/図とsidecar一致。rootと同環境read-only補助が全38原文/after、初期before34、前回after38、旧19表示を照合。[全原本・追加重み](https://chatgpt.com/library?file_id=libfile_0a8a2ae3cb24819195b142abe6b60714&account_id=personal)は15,329,218bytes、SHA256 76f4c3e89d990ebc4edb3fd7d8441a850e7bf2bc89f9c79b8fc3f9264e8701b4。430member/manifest429の全bytes/SHA・ZIP CRC、112tensor/3,833,856F32有限をPod外で照合。weights a6b5b5cc836f64f4caee26d47117a12d05cd6b23c141d1f86589c71196eeafca、config 1836ca62ca5dba2f4f8613ec72b4e48723e81d001bb047a71d6391994c772b1e。元4B全重み/原90/旧helper等の親依存は前回private原本と既存復元archiveを継承し、このZIP単独に全部を含むとはしない。
+
+新a6b5/1836は通常・次初期値へ不採用、研究保全して一回閉鎖。GPU終了2MiB/0%・compute空、Podレンタル維持。前確認.29USD/hでrun処理参考按分約0.058118086USD、準備/回収/待機保持/通信保存/税等は別、実総請求未測定。RTX4000 Adaでの今回実値。実行前code/planはeef3e82へ反映/全文・変更path読戻し済み、runner SHA38e6d3727260c3101e9a8099d6025c26cc7fb4b763aa604b01f075a99310e0b2。
+
+次は同じ24更新や追加係数の盲目的反復を止め、CP02の重複親とCP04の発話/事実逆転が実生成のどのprefixで始まるかを、保存raw・既存教師・既存入力/loss ownerで切り分ける。最初の文字差やteacher-forced CEだけを失敗箇所にしない。QF4は確認用のまま、失敗rawを新goldへ昇格しない。追加GPU条件は未固定。
+
+通常finite五種とprivate ROLE/ROLE＋ACTIONの限定意味証明は別。今回QF/CPのtyped scope_unsupported拒否は上記意味誤りを検出した証拠ではない。通常ensureへの4B接続、本人基準/役割・判断・選択、補足typed、記録間再出現/変化、混在sourceの帰属/残scopeの意味保存、IF/Saved、分析観測会は残件。通常source/型/意味gate/compiler/唯一作者/HTTP/DTO/DB/RN/Render/Supabase/配置/Pod管理の変更0、STRUCTURE_MAP_DELTA_NONE。実環境GPT-6/Codex Work、root単一writer/実行/最終判断＋同環境read-only補助であり、独立Pro/Ultra/Mash Product Readではない。局所改善と新退行を併記し、product_credit0、通常採用false。

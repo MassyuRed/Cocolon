@@ -3436,3 +3436,8 @@ API dc05dc35、通常product owner追加なし。既存 `semantic_admission.py` 
 ### 11/5 — 組合せ教材の限定学習と再現未達
 
 既存trial内のmaterial_v5_composition24_trial.pyは旧16・原90再利用4・独立教示4を24更新/48測定/旧30＋held4＋学習4の38生成で比較し、保存再読/回収する一回runner。material_v5_composition24_plan.jsonは固定条件、material_v5_composition24_results.jsonは本文なし実結果/private原本参照。原文/target/raw/追加重みは公開GitHubへ載せない。旧19表示とRU02/AT4一致は保持したが新4教示/held4未達、新27e9不採用。SC01のNEG引用範囲後退とCP04の原文外quote拒否を記録する。新product owner/通常実装の変更0、STRUCTURE_MAP_DELTA_NONE。[全結果](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v5-composition24-result-20261105)、weekly§180。
+
+
+### 11/5 — 既存組合せ教師の意味object全体へのloss比較
+
+既存trial内のmaterial_v5_composition_unit24_trial.pyは教材24/初期7ba4と既存RU02項を保ち、CP4の理由・思考/内容/独立行動のcomplete object unionを追加CEへ選び、CPU実tokenizer/24更新/48測定/保存後38生成/非生成保存再読を行う一回runner。material_v5_composition_unit24_plan.jsonは固定条件、material_v5_composition_unit24_results.jsonは本文なし最終判定/private原本参照。QF01とCP03に局所改善、CP02の重複親とCP04の発話帰属に新退行があり新a6b5不採用。新product owner/型/通常実装変更0、STRUCTURE_MAP_DELTA_NONE。[全結果と再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v5-composition-unit24-result-20261105)、weekly§181。
