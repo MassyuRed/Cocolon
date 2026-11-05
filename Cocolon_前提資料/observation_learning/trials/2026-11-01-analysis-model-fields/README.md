@@ -1,4 +1,4 @@
-> **11/5・分析の最新（第9回§198）：モデル経路で落ちていた主語未確定の完全過去行動と、同欄の複数本人行動を既存source証明のまま保持。元8応答の同raw比較は0→4保存、別6例も同raw旧0→新4保存。新14stop/2load/学習0、実4B保存は隔離mock RPC・別合成SQL182 PASS。主体・否定・明記順序・保存非生成再読を保持。一般の本人基準／暗黙役割・記録間意味、通常重み採用／本番／端末／配置は未達。最終CI42036416309は全工程成功。** [全結果・失敗・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-ordinary-prose-20261105)。
+> **11/5開始・分析の継続（第9回§201–202）：旧a2eから48更新/14新stopで同14sourceの保存4→9（診断3改善＋学習既見2再現）。所有否定・他者actor欠落・理由/文脈誤読が残り新6c879は研究候補。28応答の非生成再読と旧4保存を保持。明示v7の実HTTPS→通常API→隔離SQLは4新stop/3保存/他者1未解析、各保存のcurrent/月次/readonly一致。通常既定v4・本番/端末/配置不変。** [全結果・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-explicit-v7-https-sql-20261105)。
 
 # Analysis — 最小field接続と実4B probe
 
@@ -2206,3 +2206,11 @@ API入口は合成認証/ASGI、モデルだけ実HTTPS socket、DBは隔離SQL�
 ## 200. 所有表現CE20と既見再現4の結果・CPU追加6
 
 `actor_ownership_ce20_trial.py`は初期a2e/14教師/20更新/28NLL/18stopを既存CEで一回比較。保存4→4・所有転移未達・OP07候補退行のため新b7不採用。`actor_ownership_seen_fit_trial.py`の既見2教師×新旧4stopではOT03だけ再現し、OT06の一意引用は未達。`actor_ownership_followup6_sources.json`と`actor_ownership_followup6_prepare.py`は旧14保持＋独立6のCPU受理/保存/mask/token差分だけを完了し、学習0。更新順/初期値は未選定。[集計](actor_ownership_ce20_results.json)、[全原本・失敗・再開点](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-actor-ownership-ce20-20261105)。完了rootを再起動しない。
+
+## §201–202 — 主体・所有の局所改善と明示v7の実通信接続
+
+旧22教師の48更新は新6c879研究候補を保全。同14sourceの保存4→9だが診断3改善と学習既見2再現を分け、所有否定/他者主体欠落/文脈比較の誤読を保持する。28応答は0モデルで完全再読、旧成功4件の内容は保持。通常や次初期値に自動採用しない。
+
+API db311746はconstructorだけのv7選択を既存transportへ接続し、保存済み再利用後にprepare版を選ぶ。通常factory/旧callbackはv4。実4B新4stop/1load/学習0で実TLS→通常API→隔離実SQLへ3保存/1未解析、各3並行を1要求に共有、保存再読は生成0でID/内容一致。合成Auth/ASGI入口・loopback TLSの接続試験であり、本番/端末ではない。同本文でも新snapshotで出力が変わるため一般化は未達。
+
+[全結果・原本・再開点](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-explicit-v7-https-sql-20261105)。全pathは01Bの§201–202。本人基準/暗黙役割/記録間意味・観測会・通常重み/外部常時接続/本番/配置は引き続き残件。
