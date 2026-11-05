@@ -1,4 +1,4 @@
-> **11/5・分析の最新（第9回§197・実4B HTTPS→隔離SQL保存）：通常latestの専用設定から、証明書検証付きloopback HTTPS・保存a2eの実4B・既存CMEE・隔離PGlite SQLへ接続。新4stop/1load/学習0・47.111880秒/exit0で4保存/各2node、各3並行API要求→モデル1回。current/readonly/月次の本文・図・coverage・ID一致、肯否/主体/カテゴリと接続不明を保持。CI42027860903全step成功。合成認証/ASGI入口・localhost限定の接続確認で、一般品質/通常重み採用/常時提供/外部HTTPS/本番DB/端末/配置は未成立。** [全結果・限界](#analysis-actual-https-sql-20261105)。
+> **11/5・分析の最新（第9回§198）：モデル経路で落ちていた主語未確定の完全過去行動と、同欄の複数本人行動を既存source証明のまま保持。元8応答の同raw比較は0→4保存、別6例も同raw旧0→新4保存。新14stop/2load/学習0、実4B保存は隔離mock RPC・別合成SQL182 PASS。主体・否定・明記順序・保存非生成再読を保持。一般の本人基準／暗黙役割・記録間意味、通常重み採用／本番／端末／配置は未達。最終CI42036416309は全工程成功。** [全結果・失敗・残件](#analysis-ordinary-prose-20261105)。
 
 # 第9回 Cocolon週末報告会 — 2026-10-31（開催中）
 
@@ -4471,3 +4471,58 @@ Jupyterには今回SQL runtimeを用意して当回4例を実SQLで確認した�
 **成立したのは、合成認証の通常API→実4Bの検証付きlocalhost TLS→隔離SQL保存・再読という限定一巡。** 外部HTTPSの常時提供・採用重み・本番有効化/配置・実Auth/本番DB・本人端末は未成立。一般文章の暗黙役割/判断/選択・本人基準・記録間意味関係、v6補足の通常選択、IF/Saved/分析観測会、分散重複抑止は残件。次はこの接続成果を保持し、既存の採用/常時提供ownerと一般読解未達へ照合する。Render/Supabase本番操作・main merge・RN build・新GPU購入0。GPT-6/Codex Work＋同環境reviewで、独立Pro/Ultra/Mash正式受入れではない。
 
 [全結果・原本・残件](#analysis-actual-https-sql-20261105)。
+
+<a id="analysis-ordinary-prose-20261105"></a>
+## 198. 11/5 — 主語を補わない日常行動と、同じ欄の複数本人行動をモデル経路へ保持
+
+Mashの8時間継続・区切りごとのGitHub反映・Jupyter直接接続指示に基づく今回の実装／実生成／保存検証の区切り。8時間の連続作業完了や分析全体の完成を示す記録ではない。前回§197の実localhost HTTPS／隔離SQL一巡は継承し、同じ完成runを再起動していない。
+
+### 実測した欠落と、既存設計を使った修正
+
+最初の新しい華恋合成OP01〜08は、保存a2e/config006e・固定Qwen3.5-4B revision851bf6e・既存loader/pins・material.v4のまま8新要求/8stop/1load・62.243047秒で完了。旧API65e7fa0bでは保存0。一般文章を読めたと扱わず、rawと既存source graphの差を確認した。
+
+1. 「資料を調べた」「振り返りメモを残した」は、実モデルが完全なACTION引用を返していた。既存詳細設計§3.30 u200と有限compilerは主体UNSPECIFIEDとして保持できるが、モデルconsumerだけがSELFを必須にして捨てていた。既存9動詞の完全な過去肯否定を、元compilerの主体未確定・根拠・カテゴリ・不足表示のまま渡す。認証owner、別欄の役割、所有表現「私の」からSELFを補わず、主体未確定にEXPLICIT_ACTORを付けた候補は拒否する。同じ文の別記録を同一人物の反復へ集約しない。
+2. 同じ欄の「僕は資料を調べた。僕は費用を記録した。」と「私は資料を見た。その後、私は分担を決めた。」は、モデルが複数の完全な本人行動を返していても、consumerの単一node限定で失われていた。既存graphを一度だけ作り、単一fieldの完全なSELF/fact/past行動・既存決定を節ごとの原文scalar/UTF-8/hashと全unitの一回消費で照合する。順序語は元sourceにある場合だけ元の隣接OBSERVED_ORDERを保持し、model unitの並び順で線を作らない。未解析の途中・末尾、他者、複数field、余分・欠落・誤kind・節をまたぐchild、先頭の未確定な順序は範囲外。
+
+新しい文法、意味型、profile/state、作者、公開DTO、DB schema、RNは追加していない。製品変更は既存intent_compiler.py内のモデル採用証明だけで、semantic_admission、通常ensure、transport、保存readerの責務は継承。補足ANSWERの取得前SELF証明と専用consumerも維持する。STRUCTURE_MAP_DELTA_NONE（既存owner内の接続範囲）。
+
+### 同じ実応答の旧／修正後と、別の6例
+
+元8件のrequest/messages/raw/response/snapshotを変えずに比較。省略主体だけの修正793b7449では2保存、複数行動も接続した2e9cbbc8では4保存。各再読は0load/0生成で、後者は0.584890秒。元8件を再生成していない。
+
+| 例 | 旧版 | 接続修正後 | 保持／残件 |
+|---|---|---|---|
+| OP01 資料を調べた | 未対応 | 1node保存 | 誰の行動かは未確定 |
+| OP02 費用を記録しなかった | 拒否 | 拒否 | rawが原文にない「自分」を主体引用に追加。修復しない |
+| OP03 私の考えを書いた | 未対応 | 未対応 | 所有の「私」を行為者とするmodel qualifierを採用しない |
+| OP04 振り返りメモを残した | 未対応 | 1node保存 | 誰の行動かは未確定 |
+| OP05 明示本人の調査＋記録 | 未対応 | 2node保存 | 順序線0・つながり不明 |
+| OP06 本人の閲覧→明記された決定 | 未対応 | 2node保存 | 明記順序1、原因とはしない |
+| OP07 抜けへの懸念と確認して出したい意向 | 未対応 | 未対応 | 一般の理由・基準・意向の読解は未達 |
+| OP08 旅行候補の調整と自分の希望 | 拒否 | 拒否 | 非連続な対象引用などで元sourceへ結合できない |
+
+別の華恋合成ST01〜06も同じ保存重み・指示・生成設定で、新6stop/1load/学習0・57.386616秒/exit0。連絡先メモ＋会場調査、資料作成の否定→順番を決めておく、ノート記入→閲覧の否定、閲覧＋試行＋メモ保存の4例を2/2/2/3nodeで保存した。明記順序の辺は0/1/1/0。途中の未解析文を含むST05と他者混在ST06は未対応のまま。全6応答を同じ旧API65e7fa0bへ0生成で渡すと保存0であり、同じrawによる4件の接続差を確認した。
+
+全14は華恋の限定合成で、既存有限文法に収まる対照を含む。14件中8保存という件数を一般分析精度・独立held-out評価・Mashの観測実演・正式商品受入れに換算しない。本人基準や暗黙役割を推論してmap化した成果ではない。
+
+### 保存再読・検査・失敗の保持
+
+実4B応答の保存試験は既存ensure/build/commit/read＋隔離mock RPC。保存した各artifact内のcurrent/monthly/readonlyで文章・図・coverage・IDを完全一致させ、生成を禁止して再読した。旧／新のrequestとresponseは全件同一。隔離PGlite SQLは別の独立合成model packetで、主語未確定1行動・本人2行動・明記順序2行動の通常commitと月次不変／非生成再読を追加確認した。実4B rawを実Supabaseへ保存した試験とはしない。
+
+- 最初の7suiteは1 FAIL/524 PASS/SQL16 SKIP・38.91秒。新testがmemo_actionの丁寧否定を既存sourceで証明できると誤って期待した。既存未対応を維持する検査へ訂正し、同範囲527 PASS/16 SKIP・37.68秒。製品の有限文法は拡げていない。
+- 複数行動後の同7suiteは545 PASS/SQL16 SKIP/既存warning1・38.62秒。これらの反復を合算して件数を増やさない。
+- SQL依存を既存Node24.8.0/PGlite0.5.8で有効にした累積/model source/jobs/APIの4suiteは182 PASS/2 subtests/既存warning1・96.84秒。新しい依存の導入0。
+- 広いCI42034913210（API5a78eaa9）は、旧closed-role検査の「省略主体なら全体拒否」期待1件で失敗（1 FAIL/2293 PASS/旧SQL1 SKIP/12048 subtests）。検査を主体UNSPECIFIED・ROLEなし・SOURCE_SCOPE保持・元有限graph一致へ更新し、本人化禁止を維持した。最終1f4b304fの当該suiteはJupyter38 PASS/既存warning1・2.57秒。
+- 最終[CI42036416309](https://github.com/MassyuRed/mashos-api/actions/runs/42036416309)／job127275638882／API1f4b304fは全step成功。生成・保存2294 PASS/旧SQL1 SKIP/12048 subtests・298.51秒、共有owner1 PASS、累積/API/Q3/jobs182 PASS/2 subtests・62.46秒、月次順位/不変再読/削除SQL201原本/15月参照。旧SQL依存1 skipを後段SQLと同一検査の成功へ変換しない。
+
+API runtimeの最終意味bytesは5a78eaa9、後続1f4b304fは上記testだけ。通常採用／本番有効化／配置／本人端末の成功ではない。
+
+### 原本・変更owner・次の直接作業
+
+Jupyterは既存Pod n1c0emcf17xs0uへ直接接続。GPUは実表示RTX4000 Adaで、終了確認2MiB/0％。新14生成/2load、学習・新重み0、モデル処理計119.629663秒。元a2e/configは不変。現在単価と実総請求は未測定で、保持・準備・通信等を含めた費用を処理時間だけから断定しない。新GPU購入・Pod管理変更・公開port変更・Render/Supabase本番write・main merge・RN build0。
+
+公開は[合成sourceと本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/ordinary_prose_results.json)、既存seamを使うordinary_prose_trial.pyとordinary_sequence_transfer_trial.py。全raw/request/response/保存表示/失敗logと68元memberのbytes/SHAを回収照合した[検証原本](https://chatgpt.com/library?file_id=libfile_4cb2f35b427081919b2960a62871d3bf&account_id=personal)はprivateに保持。最初のremote exportは1,581,422bytes/SHA16e353df083184374b6af8027b2820402c852bd4bdbbf8b5af2e31cc6187186b。後付けのCI検証記録はその68原本を改変せず外側へ追加する。
+
+再開時はOP/STの完了runを再起動せず、private原本と最終headをfresh照合する。次の品質残件はOP02/03型の原文の主体・所有・否定を守るmodel品質、OP07/08型の一般文章から役割／判断／選択と本人の基準を読む品質、および記録間意味関係。v6通常選択、IF/Saved、分析観測会、採用重み・常時外部HTTPS・本番有効化・実Auth/DB/本人端末／配置、分散重複抑止も未完のまま。既存の材料定義・CMEE資産・前回の接続成果を無効にせず、その不足へ直接戻る。
+
+全体現在地は冒頭最新段落を置換、Analysis mapと01Bファイル地図を同じ差分で更新。既存API/DB/国家fanoutのcontract変更がないため、02/05の全面再生成は行わない。実環境GPT-6/Codex Work＋同環境read-only差分確認であり、独立Pro／Mashの正式受入れではない。

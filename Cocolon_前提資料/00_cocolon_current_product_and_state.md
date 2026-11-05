@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-**11/5・分析の最新（第9回§197・実4B HTTPS→隔離SQL保存）：通常latestの専用設定から、証明書検証付きloopback HTTPS・保存a2eの実4B・既存CMEE・隔離PGlite SQLへ接続。新4stop/1load/学習0・47.111880秒/exit0で4保存/各2node、各3並行API要求→モデル1回。current/readonly/月次の本文・図・coverage・ID一致、肯否/主体/カテゴリと接続不明を保持。CI42027860903全step成功。合成認証/ASGI入口・localhost限定の接続確認で、一般品質/通常重み採用/常時提供/外部HTTPS/本番DB/端末/配置は未成立。** [全結果・限界](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-actual-https-sql-20261105)。
+**11/5・分析の最新（第9回§198）：モデル経路で落ちていた主語未確定の完全過去行動と、同欄の複数本人行動を既存source証明のまま保持。元8応答の同raw比較は0→4保存、別6例も同raw旧0→新4保存。新14stop/2load/学習0、実4B保存は隔離mock RPC・別合成SQL182 PASS。主体・否定・明記順序・保存非生成再読を保持。一般の本人基準／暗黙役割・記録間意味、通常重み採用／本番／端末／配置は未達。最終CI42036416309は全工程成功。** [全結果・失敗・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-ordinary-prose-20261105)。
 
 **11/3・分析の最新結果（第9回§100–102）：** 74教師監査後、旧74不変＋原文対照2を76教師/90更新/152NLL/50新stop/2load・641.971830秒/exit0で比較。NV04の結果重複/不明の親不正を改善し、R4/T4/追加本人2の10ROLE文章図を前後bytes同一で保持。50rawは46同一/4変化、HQ04理由誤分類は残りR08肯定過去copulaに誤modifier再発。strict候補47→49は意味率ではない。100保存非生成再読/元532memberの全bytes-SHAを確認・新重み9dcを保全、通常/次初期値は未採用。[結果・原本・再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-reason-unknown76-result-20261103)。全対象分離は現行必須でなく、次は理由の述語/不明併存差と複数文copula保持をCPUで切分け。通常HTTP/DB/RN/配置不変、本人基準/記録間関係/通常累積接続は未完。GPUレンタル維持、STRUCTURE_MAP_DELTA_NONE。
 

@@ -1,0 +1,241 @@
+{
+  "schema_version": "analysis_ordinary_prose_connection.v1",
+  "provenance": "Karen synthetic probes; no training targets; not a general-language accuracy score or formal product acceptance",
+  "api_runtime_head": "5a78eaa9507c8001ae39926de4fce299ad3ad9a9",
+  "final_test_head": "1f4b304f7b831f19f0a187b73b38aba3c17aad8a",
+  "new_generations": 14,
+  "model_loads": 2,
+  "new_training": 0,
+  "new_weights": 0,
+  "processing_seconds": 119.62966302689165,
+  "normal_adoption": false,
+  "model_weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59",
+  "model_config_sha256": "006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9",
+  "original_probe_saved_before": 0,
+  "omitted_fix_saved": 2,
+  "complete_fix_saved": 4,
+  "fresh_sequence_probes_saved": 4,
+  "fresh_sequence_probes_old_saved": 0,
+  "persistence": "Existing ensure/build/commit/read, isolated mock RPC for real model responses; separate isolated SQL for synthetic model packets",
+  "jupyter_sequence_tests": "545 passed, 16 SQL dependency skips, 1 existing warning, 38.62 seconds",
+  "jupyter_sql_tests": "182 passed, 2 subtests, 1 existing warning, 96.84 seconds",
+  "ci_status": "SUCCESS",
+  "private_originals": "https://chatgpt.com/library?file_id=libfile_4cb2f35b427081919b2960a62871d3bf&account_id=personal",
+  "cases": [
+    {
+      "id": "OP01",
+      "synthetic_input": "資料を調べた。",
+      "before": "UNSUPPORTED",
+      "after": "SAVED",
+      "nodes": 1,
+      "edges": 0,
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 1,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 0
+      },
+      "text_sha256": "6f2dfc1b1b90e7b58fbb7b97a3cd0598dbbbe4736e61208988e4ef2cd13991e9",
+      "saved_rereads_equal": true
+    },
+    {
+      "id": "OP02",
+      "synthetic_input": "費用を記録しなかった。",
+      "before": "REJECTED",
+      "after": "REJECTED"
+    },
+    {
+      "id": "OP03",
+      "synthetic_input": "私の考えを書いた。",
+      "before": "UNSUPPORTED",
+      "after": "UNSUPPORTED"
+    },
+    {
+      "id": "OP04",
+      "synthetic_input": "振り返りメモを残した。",
+      "before": "UNSUPPORTED",
+      "after": "SAVED",
+      "nodes": 1,
+      "edges": 0,
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 1,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 0
+      },
+      "text_sha256": "60f35b05d152654d9b844a897962a89fe59753c7c95ddd6f1c4906555b7cd784",
+      "saved_rereads_equal": true
+    },
+    {
+      "id": "OP05",
+      "synthetic_input": "僕は資料を調べた。僕は費用を記録した。",
+      "before": "UNSUPPORTED",
+      "after": "SAVED",
+      "nodes": 2,
+      "edges": 0,
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 1,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 0
+      },
+      "text_sha256": "e9f7507c53ade6a2f3505ba805127b4002fc69f46f066e4602e1df7f83e680ad",
+      "saved_rereads_equal": true
+    },
+    {
+      "id": "OP06",
+      "synthetic_input": "私は資料を見た。その後、私は分担を決めた。",
+      "before": "UNSUPPORTED",
+      "after": "SAVED",
+      "nodes": 2,
+      "edges": 1,
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 1,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 0
+      },
+      "text_sha256": "48e08247bece5d922e6aa0e4ec824512b28e9c95be91132c7516814d39b24af6",
+      "saved_rereads_equal": true
+    },
+    {
+      "id": "OP07",
+      "synthetic_input": "抜けがあると後で困るので、送る前にもう一度見直した。急ぐより確認してから出したかった。",
+      "before": "UNSUPPORTED",
+      "after": "UNSUPPORTED"
+    },
+    {
+      "id": "OP08",
+      "synthetic_input": "旅行の日程がなかなか決まらず、候補を三つに絞って皆に送った。自分の希望は最後にした。",
+      "before": "REJECTED",
+      "after": "REJECTED"
+    },
+    {
+      "id": "ST01",
+      "synthetic_input": "私は連絡先をメモした。私は会場を調べた。",
+      "before": "UNSUPPORTED",
+      "after": "SAVED",
+      "nodes": 2,
+      "edges": 0,
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 1,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 0
+      },
+      "text_sha256": "33270f942c34bec81b12f976eac41dc0617acb9c1eef35af5ab7b9d4413b5ad1",
+      "saved_rereads_equal": true
+    },
+    {
+      "id": "ST02",
+      "synthetic_input": "私は資料を作らなかった。それから、私は順番を決めておいた。",
+      "before": "UNSUPPORTED",
+      "after": "SAVED",
+      "nodes": 2,
+      "edges": 1,
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 1,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 0
+      },
+      "text_sha256": "8fad253b6b8b7fd69e0f530a94b5a04a8198d05e5362c20a7ee92eecdeddedbc",
+      "saved_rereads_equal": true
+    },
+    {
+      "id": "ST03",
+      "synthetic_input": "僕は考えをノートに書いた。その後、僕は記録を見なかった。",
+      "before": "UNSUPPORTED",
+      "after": "SAVED",
+      "nodes": 2,
+      "edges": 1,
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 1,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 0
+      },
+      "text_sha256": "8faa4f4fba5b48974cdf89ab89cfaec18a710cb6161f4e303ed48fa41b00ae26",
+      "saved_rereads_equal": true
+    },
+    {
+      "id": "ST04",
+      "synthetic_input": "僕は記録を見た。僕は方法を試した。僕は振り返りメモを残した。",
+      "before": "UNSUPPORTED",
+      "after": "SAVED",
+      "nodes": 3,
+      "edges": 0,
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 1,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 0
+      },
+      "text_sha256": "9b4dacff8482ed55d0c0d6cc3a68e70918d14d349a96837754b3d81179befa00",
+      "saved_rereads_equal": true
+    },
+    {
+      "id": "ST05",
+      "synthetic_input": "私は資料を見た。不明な出来事があった。その後、私は分担を決めた。",
+      "before": "UNSUPPORTED",
+      "after": "UNSUPPORTED"
+    },
+    {
+      "id": "ST06",
+      "synthetic_input": "僕は資料を作った。それから、友人は費用を記録した。",
+      "before": "UNSUPPORTED",
+      "after": "UNSUPPORTED"
+    }
+  ],
+  "ci_run": 42036416309,
+  "ci_job": 127275638882,
+  "ci_head": "1f4b304f7b831f19f0a187b73b38aba3c17aad8a",
+  "ci_summary": {
+    "generation_saved": {
+      "passed": 2294,
+      "skipped": 1,
+      "subtests": 12048
+    },
+    "shared_owner_passed": 1,
+    "cumulative_api_sql": {
+      "passed": 182,
+      "subtests": 2
+    },
+    "monthly_sql": {
+      "source_records": 201,
+      "monthly_references": 15
+    }
+  }
+}

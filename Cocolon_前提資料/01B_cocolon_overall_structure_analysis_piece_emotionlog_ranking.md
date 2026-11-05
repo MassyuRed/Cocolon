@@ -1,4 +1,4 @@
-> **11/5・分析の最新（第9回§197・実4B HTTPS→隔離SQL保存）：通常latestの専用設定から、証明書検証付きloopback HTTPS・保存a2eの実4B・既存CMEE・隔離PGlite SQLへ接続。新4stop/1load/学習0・47.111880秒/exit0で4保存/各2node、各3並行API要求→モデル1回。current/readonly/月次の本文・図・coverage・ID一致、肯否/主体/カテゴリと接続不明を保持。CI42027860903全step成功。合成認証/ASGI入口・localhost限定の接続確認で、一般品質/通常重み採用/常時提供/外部HTTPS/本番DB/端末/配置は未成立。** [全結果・限界](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-actual-https-sql-20261105)。
+> **11/5・分析の最新（第9回§198）：モデル経路で落ちていた主語未確定の完全過去行動と、同欄の複数本人行動を既存source証明のまま保持。元8応答の同raw比較は0→4保存、別6例も同raw旧0→新4保存。新14stop/2load/学習0、実4B保存は隔離mock RPC・別合成SQL182 PASS。主体・否定・明記順序・保存非生成再読を保持。一般の本人基準／暗黙役割・記録間意味、通常重み採用／本番／端末／配置は未達。最終CI42036416309は全工程成功。** [全結果・失敗・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-ordinary-prose-20261105)。
 
 > **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
@@ -3570,3 +3570,14 @@ AC01/04の明記順序は回答自身の担当→決定だけで、原因／親�
 実4B新4stop/1load/学習0、4保存/各2node/未解析0・47.111880秒。元service/source SHA不変、STRUCTURE_MAP_DELTA_NONE。一般意味品質・通常採用・外部/常時HTTPS・本番DB/認証/端末/配置は未成立。
 
 [全結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-actual-https-sql-20261105)。
+
+## 11/5 §198 — 既存モデルconsumerの主体未確定・複数行動接続
+
+| owner path | 当回の責務差分 |
+|---|---|
+| API既存 `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | `_check_model_action_units`/`_model_complete_observed_action`が元sourceのUNSPECIFIEDを保持。`compile_model_observed_actions`内の完全複数行動照合が元graph・全unit・明記順序を再利用。文法・型・作者・edge種別は追加しない |
+| API既存 `ai/tests/test_analysis_model_observed_actions.py` / `test_analysis_model_closed_role.py` | 主体未確定・所有/別欄役割からの本人化禁止・原文座標/否定・複数節全保持と未読/誤unit拒否・保存非生成再読。旧全体拒否期待を主体未確定保持へ更新 |
+| API既存 `ai/tests/test_analysis_cumulative_model_source.py` | 隔離SQLで主語未確定1行動・本人2行動・明記順序2行動の通常commit／current/月次/readonly一致を確認 |
+| trial `ordinary_prose_trial.py` / `ordinary_sequence_transfer_trial.py` / `ordinary_prose_results.json` | 元8と別6の実4B各一回・同raw旧新版比較・非生成保存再読。公開集計からmodel rawを除外、全原本はprivate保存 |
+
+API意味bytes5a78eaa9・最終test1f4b304f。STRUCTURE_MAP_DELTA_NONE、既存semantic source/ensure/transport/作者/公開wire/DB/RNのowner追加0。新14stop/2load/学習0で元8は旧0→新4、別6も旧0→新4の限定接続差。一般読解/本人基準/暗黙役割/記録間、通常採用・本番・端末・配置は未達。[全結果・失敗・原本](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-ordinary-prose-20261105)。
