@@ -4756,3 +4756,43 @@ CPU準備の後、独立した正規合成応答で予備確認した。全20sou
 全source・元adapterは前後不変。全39秒が短いことを、通常HTTP／既存60秒論理期限の全量成功へ換算しない。これはmodel-onlyの3要求であり、通常ensure、HTTP/TLS、DB commit、本番、一般品質の検証ではない。実rawは非公開原本に保持し、公開集計は本文を含まない。希望を既存sourceが証明できてもmodel consumerが受け取れない境界の修正は、後続の独立した実装・テスト・同一応答比較で扱う。
 
 [実測・全読集計](../observation_learning/trials/2026-11-01-analysis-model-fields/cumulative_model_batch20_results.json)、[3raw・予備確認・失敗ログの原本](https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal)。通常既定v4・重み通常未採用・本番未有効化を保持する。
+
+<a id="analysis-model-plain-wish-20261105"></a>
+## 210. 11/5開始の継続 — 明記された希望を元graphのまま受け取る局所修正
+
+§209で切り分けたaction＋wishのconsumer境界を、既存の元source証明に一致する範囲だけ修正した。API [09b65013658c661cbc33a3857bd2e360e6f4c424](https://github.com/MassyuRed/mashos-api/commit/09b65013658c661cbc33a3857bd2e360e6f4c424)の変更は、既存intent_compiler.pyとtest_analysis_model_observed_actions.pyの2pathだけ。compile_model_observed_actionsは、元compile_observed_graphにATTENTION_OR_THOUGHTがある場合、別の狭い_model_complete_observed_plain_wishesへ渡す。純粋な過去行動の既存helper、有限文法・語彙・意味型・作者は変更していない。
+
+対象は一記録・一原入力source・memo一欄に限る。元sourceが明記SELF／肯定を証明し、既存9動詞（書く／調べる／試す／見る／作る／残す／記録する／メモする／続ける）の希望current_input／past、または同欄の肯定SELF過去行動との組合せであることを要求する。複数nodeの場合は過去行動を含む必要があり、複数の希望だけへ範囲を広げない。元のnode／proposition／evidence／gapを返し、希望を実行済み行動や現在の希望へ置き換えない。edgeを足さず、actionとwishのつながり未確定を保持する。
+
+各節のmodel rootのkind・引用と、元sourceの主体・述語・時点・対象を照合する。原文のscalar／UTF-8座標・全文／literal hash・record／envelope束縛と全unitの消費を確認し、前後の未読文字も許容しない。OTHER／主体省略、否定希望、認知・可能性、明記順序、scene／role／修飾や未読scope、補足、memo_actionへの新規採用拡張はない。model rootの誤kindや不足注釈をconsumerで書き直さない。
+
+追加27対象はv4/v7の希望時点と元graph一致、20recordそれぞれの根拠保持、誤kind／欠落／希望operator削除／偽actor・NEGATION／誤修飾／別親child／余分root拒否、順序・他者・省略・否定・認知・未読・別欄／補足の境界、保存済みmapの非生成再読を検証する。新27と既存actions、§208のbatch55を合わせたJupyter検証は185 PASS／62.55秒。185に55が含まれ、個別件数を重複加算しない。
+
+最終CI [42095168200](https://github.com/MassyuRed/mashos-api/actions/runs/42095168200)/job127483170773は全step success：生成／保存2339 PASS・既存SQL依存1 SKIP・12048subtests／389.73秒、共有owner1 PASS／27.51秒、累積／API／jobs302 PASS・既存warning1・2subtests／156.68秒、隔離SQL201原本／15月参照。保存回帰は隔離mock RPCでcompiler・新wish proof・作者を禁止して同一内容を再読したもので、当回の実4rawをDB保存した証明ではない。
+
+### 実4Bの原応答を変えない旧新版比較
+
+旧API fc7563b98d5dfa5b8df7815e9a8b89f334b6719b、Qwen3.5-4B revision851bf6e／元a2e adapter・config006e／v7／既存pinsで、華恋作成の独立4構成を各一度生成した。新4stop・1load・学習0、32.76803073566407秒、全4応答の構文受理を確認。新09b650で生成した試験ではない。元source・adapterは前後不変である。
+
+同じ4request／messages／refs／source／guardと全5項目の元Responseを、旧fc756と新09b650へそれぞれ0生成／0loadで再読した（旧1.374212080613秒、新1.347926709801秒）。原rawの修復・responseの再束縛・再生成は0。旧新ともguard違反0で、元応答とsourceを保持した。
+
+| 構成 | 同じ原応答を読む前後の結果 |
+|---|---|
+| WH01・過去行動＋現在の希望 | 希望rootをmodelがACTION_OR_NONACTIONへ誤分類。旧新ともUNSUPPORTED／mapなし。誤kindを直したり一部だけ成功にしない |
+| WH02・明記SELFの過去の希望 | 元応答のATTENTION_OR_THOUGHTを新consumerだけが接続。NoneからSELF／wish／pastの1nodeとなり、「希望（当時）」を文章と図で保持。mapped0→1／unparsed1→0。実行した事実や今の希望には変えない |
+| WH03・主体省略の希望 | actor qualifierを足さず、旧新ともUNSUPPORTED／mapなし。認証ownerからSELFを補わない |
+| WH04・明記SELFの否定希望 | 原文引用には否定が残るがNEGATION注釈がない。否定が肯定へ反転したとは評価せず、新consumerの対象外として旧新ともmapなしを維持 |
+
+全4件の構文受理と、typed consumerでmapを持てることは別である。WH01の誤kindとWH04の注釈不足は残り、WH03の主体不明も補完しない。既知baselineと近接対照の4構成であり、一般の実行率・読解率、モデル改善率、未知文での品質保証にはしない。
+
+### 別の合成20record INPUTを0モデルで再読
+
+§209のCPU予備確認で作成した正規合成INPUTだけを、新09b650で再読した。旧fc756で束縛済みのparent／7・7・6child、元Response・全messages／refs／sourceとINPUT bytesを保持し、原本不変・再生成／load／学習0、3.67468109447509秒。processed20／mapped0／unparsed20／mapなしから、processed20／mapped20／unparsed0／2nodeとなった。全20recordの根拠を過去行動と希望の各nodeに20件ずつ保持し、edge0・つながり未確定を表示した。
+
+これは同じ二節の本文を20個の合成record IDで反復した接続検証で、20種類の普通文ではない。実4Bの3応答がfield1しか返さなかった§209の欠落rawを修復・再読した結果でもない。実モデルによる全欄出力、通常の分割取得、保存／月次commitの成功へ換算しない。
+
+当回のmodel応答比較と合成INPUT再読は明示offline buildであり、実API呼出し／DBアクセス／保存map／本番write／build／配置／端末作業は0。通常既定v4、研究重みの通常未採用、次学習初期への新規採用なし、本番未有効化を保持する。既存compiler内の限定的なproof接続としてSTRUCTURE_MAP_DELTA_NONE。新しい型／state／公開DTO／owner／DB／RN契約は追加していない。
+
+[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/plain_wish4_results.json)、[全4raw・旧新再読・合成INPUT・検証logの非公開原本](https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal)。同一原本のversion4へ保存済み（16,132,669bytes、SHA3ede2d9d6ae4da3fed70d3c32ea11e5b0b12ead56cd8e84f900dafc2e777dd18）。raw／重みを公開GitHubへ置かない。
+
+次のwire24対照はCPU準備を完了した。実GPU対照の経過・結果は本節の実行成果へ含めず、後続の独立した比較で扱う。全欄を返す実モデル、通常全量取得の期限・出力2048、本人基準・暗黙役割・記録間の意味、一般日本語の読解安定性、通常モデル採用と正式受入れは残件である。
