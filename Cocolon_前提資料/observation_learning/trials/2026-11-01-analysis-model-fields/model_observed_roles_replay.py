@@ -80,7 +80,7 @@ for row in rows:
         if before['case']['status']=='MAPPED':
             assert a is not None,('lost map',key)
             if 'ROLE' not in case['node_kinds']:
-                assert detail['graph']==before['graph'] and detail['text']==before['text']
+                assert admission.canonical(detail['graph'])==admission.canonical(before['graph']) and detail['text']==before['text']
                 case['prior_action_graph_text_retained']=True
             else:case['prior_action_map_upgraded_with_role']=True
         for kind in ('candidate','typed'):
