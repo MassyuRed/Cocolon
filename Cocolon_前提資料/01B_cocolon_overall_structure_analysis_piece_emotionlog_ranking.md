@@ -3426,3 +3426,7 @@ API dc05dc35、通常product owner追加なし。既存 `semantic_admission.py` 
 ### 11/5 — 欠落2注記の同時学習のファイル差分
 
 既存trialのmaterial_v5_qualifier2_trial.pyは実tokenizerのoffsetから既存教師2 object＋先行commaに交差する21 tokenを同時選択し、16更新/30生成/保存再読を行う一回runner。material_v5_qualifier2_plan.jsonは固定条件、material_v5_qualifier2_results.jsonは本文なし実結果・private原本参照。時計変数修正前のCPU原本も保全。既知RU02を修復し、AT4と旧19表示を保持。通常product owner/型/意味gate/compiler/唯一作者/ensure/HTTP/DB/RNは不変、STRUCTURE_MAP_DELTA_NONE。[全結果・次条件](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v5-qualifier2-result-20261105)、weekly§178。
+
+### 11/5 — 未学習4文の旧/新比較のファイル地図
+
+既存trialのmaterial_v5_qualifier_near4_probe.pyはprivateな新4入力を元90/現16/30と重複確認し、0587と新7ba4で追加学習0/8生成/2load/保存非生成再読を行う一回比較。material_v5_qualifier_near4_plan.jsonは固定条件、material_v5_qualifier_near4_results.jsonは本文なし実結果とprivate原本参照。原文/保持条件/rawはpublic GitHubへ入れない。既知修復と新4文の未達を区別し、通常owner/型/意味gate/compiler/唯一作者/ensure/HTTP/DB/RN不変、STRUCTURE_MAP_DELTA_NONE。[全結果・次条件](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v5-qualifier-near4-result-20261105)、weekly§179。

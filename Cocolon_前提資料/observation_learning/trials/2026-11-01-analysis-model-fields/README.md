@@ -1916,7 +1916,7 @@ code/planは実行前commit ace8b762bf0000ab6430f694fba582d69756b41aで全文読
 <a id="analysis-material-v5-qualifier2-result-20261105"></a>
 ## 142. 11/5 — 理由と従属否定を同時に復旧、既存19表示と発話4件を保持
 
-§177で残った理由marker欠如と従属否定qualifier脱落を、既存RU02教師の2 objectへ同時に戻す一回比較を完了。新教師/指示/decoder制約/意味gate/出力修復は0。研究初期として0587/a36eを今回だけ明示再選択し、既存16 target/messages/encoded/順/seed/LR/clip・全文平均CEを保持した。RU02だけ、先行comma込みの2 objectの文字範囲[237,275)/[426,461)と交差するtoken union21（11＋10）の平均CEを係数1で追加。境界tokenの範囲外文字との重なりも原本へ保持した。full rendered IDs=既存encoded、絶対token位置からprompt長を引くcausal CE対応を実tokenizerで確認。単一token枝の反復ではない。
+weekly§177（本README§141）で残った理由marker欠如と従属否定qualifier脱落を、既存RU02教師の2 objectへ同時に戻す一回比較を完了。新教師/指示/decoder制約/意味gate/出力修復は0。研究初期として0587/a36eを今回だけ明示再選択し、既存16 target/messages/encoded/順/seed/LR/clip・全文平均CEを保持した。RU02だけ、先行comma込みの2 objectの文字範囲[237,275)/[426,461)と交差するtoken union21（11＋10）の平均CEを係数1で追加。境界tokenの範囲外文字との重なりも原本へ保持した。full rendered IDs=既存encoded、絶対token位置からprompt長を引くcausal CE対応を実tokenizerで確認。単一token枝の反復ではない。
 
 CPU 13.688675秒、16更新/前後32NLL・112tensor保存照合・新重みreload後30新stop、2load、train/after exit0、run 510.412173秒。900秒＋終了30秒内、診断専用load/forward0、同run再起動0。before30は同Podの直前afterを完全一致確認して再利用。packの過去実行metadataと今回の実値を混同しない。
 
@@ -1937,3 +1937,25 @@ CPU 13.688675秒、16更新/前後32NLL・112tensor保存照合・新重みreloa
 終了GPU2MiB/0%・compute空、Podレンタル維持。前確認.29USD/hでrun全体の処理参考上限0.041116536USD、準備/回収/待機保持/保存通信/税等別、実総請求未測定。次は追加学習せず、新しい未学習4文×初期0587/新7ba4の近接比較を行う。完全盲検や一般品質評価とはせず、本文保持と両adapter不変を確認する。
 
 今回のprivate typedはROLE/ROLE＋SELF過去ACTIONの限定証明で、通常finiteの五種対応とは別。本人思考/結果・他者発話・理由の意味証明、混在sourceの帰属/残scope表示/保存再読、通常ensureへの4B接続、本人基準/補足/記録間・変化/IF・Saved、分析観測会は継続残件。新product owner/通常source/型/意味gate/唯一作者/DB/RN/Render/Supabase/配置変更0、STRUCTURE_MAP_DELTA_NONE。実環境GPT-6/Codex Work、root単一writer/実行/判断＋同環境read-only比較、独立Pro/Ultra/Mash Product Readではない。限定TECHNICAL_CREDIT、product_credit0。
+
+<a id="analysis-material-v5-qualifier-near4-result-20261105"></a>
+## 143. 11/5 — 新しい未学習4文を比較、理由注記と混在行動の読取りは未達
+
+weekly§178（本README§142）の全30原文/生成・5教師一致・旧19graph/文章/図保持をrootと同環境read-only補助で確認後、新しい未学習の架空4文を0587/a36eと新7ba4/933cで比較した。元90/現16教師/現30評価と原文の重複0、追加教師/正解JSON/追加学習/指示variantは0。既知残件を見て作成した近接確認であり、完全盲検・一般品質評価ではない。保持条件はprivate入力へ先に保存したが、model messagesには入れない。
+
+CPU7.242045秒、prompt2784/2784/2788/2784＋生成2048が8192内、model/forward0。旧/新各4の8新stop、2load、学習/診断forward0、run119.112650秒、両phase exit0、両adapter/config不変。600秒＋終了30秒以内、再試行/応答再利用0。実装/API/profileは前比較と同じ。比較が示すのは16更新一式の差で、2span追加項だけの因果効果ではない。
+
+| 新4文 | 旧/新の実生成を読んだ結果 |
+| --- | --- |
+| QF01・理由＋従属否定＋不明 | 新版は不明内容childを追加するが、全文の不明内容は旧版から保持。分離は任意で、欠落修復へ加算しない。理由marker・従属NEG・過去時点のqualifier不足は継続。元語句は各quoteに残り、理由/否定/時点そのものを消したとはしない |
+| QF02・別語彙の理由＋従属否定＋不明 | raw同一。理由marker注記が不足。過去NEG/時点と不明内容の正しい親は保持。短い不明rootと、そのquote外にある同fieldの内容を結ぶことは現契約で許され、包含違反としない |
+| QF03・他者発話＋本人思考/行動 | raw同一。発話内の期間幅/推測、本人の未確定な思考はquoteに保持するが、実際の記入行動を思考のCONTENT_TARGETへ誤所属。独立行動の読み取りは未達 |
+| QF04・他者発話＋本人反応/行動 | 反応と同じ述語を含む大きな対象childの意味上の重複を除き、本人明示の反応rootへ整理する局所改善。署名行動は前後とも独立で、ここを新修復としない。場所の対象child省略は元語句が行動rootに残るため新退行/修復へ数えない |
+
+rootと同環境read-only補助が全4原文/8rawを読解。raw2同一/変更2、候補受理4→4、typed0→0、全8候補は保存非生成再読一致。限定typed拒否はscope_unsupportedで、上の意味誤りを検出した証拠ではない。全record未解析/主体未確定/route0を維持。今回4件で新しい意味退行は見つからないが、理由2近接例と思考/行動の誤所属が未達のため、未学習文への一般化成功とは呼ばない。既知RU02修復を撤回する結果でもない。新7ba4の通常採用/次初期自動採用はfalseを維持する。
+
+[全4原文・保持条件・8出力・保存原本](https://chatgpt.com/library?file_id=libfile_4e0846a2387c8191b8f0bd470f2c71a9&account_id=personal)は88,207bytes、SHA256 4399a8fcb5091b65b211933c7907da7aa3e252059152c89b5f85a0a0fde96310。46member/manifest45の全bytes/SHA・ZIP CRCをPod外とread-only補助で照合。8候補を生成・compiler・作者禁止guardで再読した。重みは不変のためZIPに複製せず、weekly§178・§177（本README§142・§141）のprivate原本から参照する。code/planはbd4e737へ実行前反映・remote全文読戻し済み、runner SHAcfd7dc37c8b22d76f48676079c9cb1b63bce3e8096f0ca85864afb1c98693c29、private input SHAd164bad983fc12e03159a88c30cd7ab745546ddd7e8896b7d294074fd9a82b40。公開GitHubへ原文/raw/保持条件は出していない。
+
+GPU終了2MiB/0%・compute空、レンタル維持。前確認.29USD/hでrun全体の処理参考上限0.009595186USD、準備/回収/待機保持/通信保存/税等は別、実総請求未測定。固定済みRU02の同試行を繰り返さず、今回4確認文を自動で教師化しない。次は一般の理由・否定・時点注記の保持と、混在文の思考/独立行動の所属へ既存教材/owner内で取り組み、確認文は確認用に残す。新GPU条件は未固定。
+
+本人基準・役割/判断/選択、補足typed、記録間の再出現/変化、通常ensureへの4B接続、混在sourceの帰属/全文と残scope表示/保存再読、IF/Savedと分析観測会は継続残件。通常finiteは五種、今回private typedはROLE/ROLE＋ACTION限定という区別も維持。実環境GPT-6/Codex Work、root単一writer/実行/判断＋同環境read-only比較、独立Pro/Ultra/Mash Product Readではない。primary=BLOCKER_NARROWED、product_credit0。通常source/型/意味gate/compiler/唯一作者/HTTP/DTO/DB/RN/Render/Supabase/配置変更0、STRUCTURE_MAP_DELTA_NONE。
