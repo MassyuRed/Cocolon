@@ -147,7 +147,7 @@ def main():
         answer_snapshot = source_snapshot(50)
         target = answer_snapshot['members'][19]
         target['original'].update(memo='僕は本を見た。🧭 café\u0301 雨のち晴れ。',
-            memo_action='僕は費用を記録しなかった。', category=['生活', '家'],
+            memo_action='僕は費用を記録しなかった。', category=['生活', '人間関係'],
             emotion_details=[dict(type='平穏', strength='medium')])
         answer_snapshot['members'][19] = with_answer(target, '僕は日程を決めなかった。')
         fixtures.append(('saved_answer_unicode', 50, answer_snapshot))
