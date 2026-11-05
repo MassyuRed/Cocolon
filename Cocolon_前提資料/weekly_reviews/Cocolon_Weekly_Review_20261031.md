@@ -4711,3 +4711,48 @@ Jupyterの新planner対象54件は50.27秒で全PASS（167件は対象外）。�
 当回12計画はtokenizerのみで、モデルload／生成／学習／ネットワーク要求／API write／DB accessは全て0。CIの隔離SQL検査とは範囲を分ける。入力予算を満たす準備までの結果であり、各応答が2048token以内に収まること、既存60秒の論理期限で全量実行できること、全履歴の意味品質・保存成功・本番処理完了を証明しない。次のbatch応答のprivate契約・全量guardによる一回commit・実通信統合は後続検証とし、未確定の合成結果を本節へ含めない。通常既定v4・研究重み通常未採用・本番未有効化を保持。公開API/DTO/DB/RN/配置/buildは変更していない。既存service内のoffline準備差分としてSTRUCTURE_MAP_DELTA_NONE。
 
 [公開集計](../observation_learning/trials/2026-11-01-analysis-model-fields/cumulative_model_partition_budget_results.json)、[全測定・失敗を含むログ原本](https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal)（同一原本version2、15,895,687bytes、SHA642662d8855660a5ecc09cfba5e83fa09cbf143429a90583bc25e1c507e2774c）。
+
+<a id="analysis-private-batch-composition-20261105"></a>
+## 208. 11/5開始の継続 — 各batchの原応答を保つprivate INPUTと、全量一回の合成
+
+§207の入力予算plannerを受け、各childの応答を原文のまま結び付け、全source集合で一度だけ既存の観測mapを作る明示offline経路を実装した。API [fc7563b9](https://github.com/MassyuRed/mashos-api/commit/fc7563b98d5dfa5b8df7815e9a8b89f334b6719b)、変更は既存service／semantic_admission、新test module、既存workflowの4path。通常ensure／Application factory／HTTP取得／保存契約は変更していない。実4B probeは後続であり、本節は合成応答による契約・合成・input再読の確認だけを扱う。
+
+新しいprivate型`AnalysisModelObservedBatchInput`は、応答未設定の完全parentと、各々の元request/messagesへ結合済みのchild INPUTのtupleを持つ。合成した巨大Responseを捏造する型や、保存済みmapではない。各childを既存strict readerへそのまま渡し、元raw／hash／request_ref／finish、owner／期間／profile／全量guardと原record内容を検査する。全recordと全fieldが親集合の正規順序で一度ずつそろい、元field_ref／source envelope／scalar根拠が対応することを、record graphのcompileより先に確認する。最後のchild内field番号1と全量論理応答のfield番号201は、同じ元field_ref／evidenceに束縛されるため、rawの番号を書き換えて合わせない。
+
+検証済みのrecord別unitを、既存単一応答と共通の`_realize_model_observed_records`へ渡し、recordごとに既存compilerで読んだ結果を、完全parentの順序・source集合・カテゴリのもとで一度だけ集約し、唯一の作者を最終graphへ一回呼ぶ。各childで完成文章を作って連結する経路は追加していない。従来の同一claim集約を継承し、別記録の事実を根拠に主体や意味を補ったり、新しい因果・記録間意味関係を推定したりしない。
+
+欠落・重複・並替え、応答なしのchild、parentへのResponse付与、owner／guard／profile／期間／原入力の不一致は、全体を拒否して部分mapを返さない。一方、全childが正しく取得・結合されていても、既存の有限proofで対応できない他者・未知文・欄なしrecordは、従来どおり全量source_membersと未解析件数へ残す。未取得childの切捨てと、取得済みsourceの意味未対応を混同しない。全量の未読表示もbatchごとに重複させず、既存のglobalなSOURCE_SCOPE表示へ渡す。
+
+private state `cocolon.cmee.analysis_model_observed_batch_input.v1`には、parentの束縛情報と各childのrecord参照／request_ref／元Responseだけをserializeする。これはcaller管理の入力bytesで、DBへの自動保存ではない。再読はfresh parentから同じchildを準備し、原raw・hash・messages／requestの対応を再検査するinputの再束縛で、モデル取得・record graph compile・作者・DBを呼ばない。graph／artifact／coverage等をstateへ追加した場合も拒否する。再読後にmapが必要なら、別の明示buildで既存compiler／作者を呼ぶ。保存済みmapの非生成readerや、同じartifact IDの再読を新たに実装したという主張ではない。service側の新しい明示offline wrapperはbuild／serialize INPUT／reload INPUTの3つだけである。
+
+| 合成検証 | 確認した結果と限界 |
+|---|---|
+| 全201原record・v4/v7 | 各201childの合成応答と、同じ全量sourceへ独立作成した一つの論理合成応答を比較。graph・source集合／カテゴリ／期間／owner・文章・図・coverageが一致。mapped201／unparsed0。図のprojection_ofだけは新規artifact参照のランタイム値として除外 |
+| 他者／未知文／欄なしrecordとカテゴリ差 | 対応できるrecordを保持し、未対応recordと全量未読表示を失わない。入力単位の欠落による部分成功へ置換しない |
+| 二欄原入力＋最大3適格補足、明記ROLE／role-action／clause | 同じ一記録の資格・全欄・根拠を保持し、既存のrecord別proofと集約結果を継承 |
+| private INPUTの往復 | モデル取得・record graph compile・作者・DBを禁止して同じINPUTへ復元。改変／余分キー／欠落／重複・別parentへの再束縛は拒否 |
+| 旧single-recordの9profile | 原messages／Responseと既存graphを保持。分割不要・元record配列が逆順のparentも、元INPUTと正規partitionの区別を維持 |
+
+201件の一つの論理応答はCPUで比較するための合成oracleであり、実モデルの出力2048token以内や一回の60秒取得で扱えることを証明しない。合成されたmapは計算上の結果で、当回のDB保存・月次commit・本人端末の成功ではない。rawの全child保持・全量の合成一致を、一般日本語の理解品質へ換算しない。旧baselineのaction＋wishがartifact Noneとなる件は別の後続比較で扱い、本節で修復済みとしない。
+
+Jupyterの新moduleは55 PASS／55.65秒。最終CI [42091295426](https://github.com/MassyuRed/mashos-api/actions/runs/42091295426)/job127469702801は全step success：生成/保存2312 PASS・既存SQL依存1 SKIP・12048subtests／521.43秒、共有owner1 PASS／30.08秒、累積/API/jobs302 PASS・既存warning1・2subtests／206.50秒、隔離SQL201原本/15月参照を確認。55件はCI302件に含まれ、別成果として重複加算しない。既存workflowは累積suiteの実行対象へ新moduleを追加したもので、署名buildや配置を行うworkflowではない。
+
+新モデル生成／学習は0。私的なモデルrawと重みを公開GitHubへ置かず、必要な原本・CI記録は非公開に保持する。通常既定v4、研究重みの通常未採用、本番未有効化を維持。入力予算に収まった全childを実モデルから期限内に取得する方法、出力2048、全量60秒、単一生成lockの実通信、全量guardによる一回commitは残件である。private INPUT契約と明示offline合成の責務を地図へ追加する差分としてSTRUCTURE_MAP_DELTA_PRESENT。通常／公開DTO／保存map／DB／RNのcontract、Render/Supabase本番設定、build／配置／端末は変更していない。
+
+[集計](../observation_learning/trials/2026-11-01-analysis-model-fields/cumulative_model_batch_composition_results.json)、[全原本・CIログ](https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal)（原本version3、15,976,405bytes、SHA4f73726e043a55ef709b954b9758b89537b89244eda5320710654f4000a5b834）。
+
+
+<a id="analysis-model-batch20-20261105"></a>
+## 209. 11/5開始の継続 — 全20記録を実4Bへ送り、全欄出力の欠落を確認
+
+§208のCPU契約と実モデルの能力を分けて検証した。固定API fc756、runner0d5f9328/SHA3f6d7dcf、元a2e adapter／Qwen3.5-4B／v7と既存pinsを維持。source_snapshot(20)の原本は二節のmemo・元記録時刻・カテゴリ・感情詳細・全量guardを含めて変えず、モデル研究runnerだけ入力計画を6400tokenへ厳しくした。出力予約2048とgenerator8192／本文65536は緩和していない。全20記録は7/7/6件の3child、実入力token4332/4332/4233・本文20137/20137/19740bytesとなった。
+
+CPU準備の後、独立した正規合成応答で予備確認した。全20source・全fieldを保つprivate INPUTの往復と、その前後のcoverage一致を確認（6.315036544秒、モデルload/生成/学習0）。旧consumerでは過去行動と希望が混在する本文が意味proofの範囲外で、mapはNone、processed20/mapped0/unparsed20のまま一致した。これは文章・図の作者や保存map readerの成功ではない。statusもCOMPLETE_INPUT_REPLAY_NO_OBSERVED_MAPとして区別する。
+
+別の新規準備rootで同じ全20原本を実4Bへ送り、全3childを各一度だけ生成した。3stop／1load／学習0、39.439960038秒、全20記録の送信を確認。各childは9.338783750／8.697019671／8.820522052秒で応答し、長さ打切りや期限切れではなかった。しかし、要求7/7/6fieldに対して全3応答がfield1だけを返した。全rawは515bytes/441文字、同一SHA4120951e6217fd47f1906ef40b478b9fa632c3602a0c8363319d196d7daae1a9だった。
+
+3原本を全文照合すると、先頭fieldの過去行動、その対象、希望のATTENTION rootは対応する原文内に残っていた。一方、残りfieldがなく、既存strict readerは全3件をanalysis_quoted_parent_units_packet_invalidで拒否した。全体statusはFAILED_PARTIAL_NO_RETRY、exit1。合成0・保存map0・API/DB0。field1だけを部分成功にしたり、rawへ欠落fieldを足したり、同じ入力を成功まで再生成したりしていない。入力予算fitとstop完了だけでは、全欄を意味的に保持した結果にならないことを確認した。
+
+全source・元adapterは前後不変。全39秒が短いことを、通常HTTP／既存60秒論理期限の全量成功へ換算しない。これはmodel-onlyの3要求であり、通常ensure、HTTP/TLS、DB commit、本番、一般品質の検証ではない。実rawは非公開原本に保持し、公開集計は本文を含まない。希望を既存sourceが証明できてもmodel consumerが受け取れない境界の修正は、後続の独立した実装・テスト・同一応答比較で扱う。
+
+[実測・全読集計](../observation_learning/trials/2026-11-01-analysis-model-fields/cumulative_model_batch20_results.json)、[3raw・予備確認・失敗ログの原本](https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal)。通常既定v4・重み通常未採用・本番未有効化を保持する。
