@@ -612,6 +612,17 @@
       "pydantic": "2.14.1",
       "pytest": "8.4.1",
       "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]"
+    },
+    "skip_details": {
+      "new_model_source_sql": {
+        "skipped_in_jupyter": 5,
+        "executed_and_passed_in_ci": true
+      },
+      "legacy_model_fields_sql": {
+        "skipped_in_jupyter": 1,
+        "skipped_in_ci_generation": 1,
+        "executed_in_this_change": false
+      }
     }
   },
   "source_sha256": {

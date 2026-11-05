@@ -4091,7 +4091,7 @@ API [b77c380e](https://github.com/MassyuRed/mashos-api/commit/b77c380e82f67881c3
 
 ### 検証・環境・回復
 
-- Jupyterへ直接接続し、隔離コピーで**985 PASS・6 SKIP・11,176 subtests PASS、122.67秒、exit0**。既存10suiteと新受口22検査を指定。SKIPは旧model-fields1＋新SQL5のWASM未設定で、SQL工程は下記CI/Work側の独立合成検証へ分離。Pod runtimeはPython3.12.3/FastAPI0.162.0/Pydantic2.14.1/pytest8.4.1で、CIと同じ固定環境の成功とは呼ばない。
+- Jupyterへ直接接続し、隔離コピーで**985 PASS・6 SKIP・11,176 subtests PASS、122.67秒、exit0**。既存10suiteと新受口22検査を指定。SKIPは旧model-fields1＋新SQL5のWASM未設定。新受口のSQL5件は下記CI/Work側の独立合成検証で実行済みだが、旧model-fields SQL1件はCI生成工程でもSKIPのままで、今回実行済みとは扱わない。Pod runtimeはPython3.12.3/FastAPI0.162.0/Pydantic2.14.1/pytest8.4.1で、CIと同じ固定環境の成功とは呼ばない。
 - [CI41981587904](https://github.com/MassyuRed/mashos-api/actions/runs/41981587904)、job127092674209はAPIb77c380e checkoutの全step success。生成/保存2,134 PASS・1 SKIP・12,048 subtests PASS（512.14秒）、共有owner1 PASS/194 deselected（30.44秒）、累積API/Q3/受口/既存job46 PASS・既存warning1・2 subtests PASS（43.63秒）、月次順位/不変再読/削除SQLは201原本/15月参照で成功。Python3.12.15/FastAPI0.142.2/Pydantic2.13.5。
 - Workの局所は新受口＋累積/既存API46 PASS・2 subtests PASS（33.48秒）、役割/行動/閉役割138 PASS（7.72秒）。初回と2回目は同じ補足fixture1件だけ失敗し各45成功。古い原入力のFree履歴資格と感情の非canonical fixtureを、既存Q3と同じ直近日付/正規感情shapeへ修正した。製品の採用条件は緩めていない。
 - 最初のJupyter複数行入力は未実行で終了し、単一行起動へ修復。初回回帰は隔離コピーにない既存job testを指定してexit4/テスト0、同driverの元22再読はexit0で完了。対象を既存10suite＋新受口へ修正し、回帰だけ再実行してexit0。原22再読/4B生成を繰返さず、初回log/終了codeも原本に残す。Download eventはtimeoutしたが実fileを回収し、Pod表示の623,143bytes/SHA256 0224a8811feb5dd0e126ef0e80b7012f0130169fb98ff23e89f3e161bd322a40へ一致照合した。
