@@ -3921,7 +3921,7 @@ Jupyter直接接続・隔離APIコピーで、修正元compilerがGitHub blob de
 
 [実出力原本JSON](analysis_closed_quote_self_results.json)へ全4件のsource・前後graph/文章/図・coverageと検証記録を保存。Pod回収原本39,225bytes、SHA256 76f44754b0473bfa363e399c1d67c476241b78840abe769fba2e25318a562cd7と同じbytes。準備commandの改行入力誤りは実行前SyntaxErrorで修正、回収時のJSON末尾escapeも原本を残して修正し、モデル処理/教材変更はない。Download event timeout後は同じJupyter Editorの本文を選択コピーし、Podのbytes/SHA一致で回収した。これらの機械的修正を品質改善へ数えない。
 
-API source版be2281fの既存[Analysis CI41960307453](https://github.com/MassyuRed/mashos-api/actions/runs/41960307453)は全step成功。追加8testを同じ既存workflowへ登録した0dd31ce版の[CI41961109687](https://github.com/MassyuRed/mashos-api/actions/runs/41961109687)は記録時点で実行中で、Jupyter495成功とCI最終成功を混同しない。CIのDBは既存の隔離PostgreSQL WASMで、Supabase実DBではない。
+API source版be2281fの[Analysis CI41960307453](https://github.com/MassyuRed/mashos-api/actions/runs/41960307453)に続き、追加8testを同じ既存workflowへ登録した最終0dd31ce版の[CI41961109687](https://github.com/MassyuRed/mashos-api/actions/runs/41961109687)もjob127027427841の全step successを確認。分析/保存再読、shared owner、合成本文、累積API/Q3保存source/既存job、月次順位/不変再読/削除SQLを通過した。CIのDBは既存の隔離PostgreSQL WASMで、Supabase実DBではない。
 
 ### 残件と次の作業
 
