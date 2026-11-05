@@ -1,4 +1,4 @@
-> **11/5開始・分析の継続（第9回§203–206）：主体×肯否6対照の12新生成で主体引用に局所改善、同じ否定文のmetadata4条件では読解の揺れを再現。追加学習/通常採用なし。月次比較の通信失敗で保存履歴まで消えるRN不具合を修正し11テスト成功・GitHub反映済み。全履歴の短文50件でもモデル入力枠超過を実測し、全量を保つCPU分割準備へ。実通信の全量分割・本番/端末/buildは未完。** [全結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-cumulative-token-budget-20261105)。
+> **11/5開始・分析の継続（第9回§207）：全record・全欄・本人補足と全量guardを保つoffline入力分割を追加。12計画/488実tokenizer測定で201件も欠落なく入力枠内へ分割し、54追加テストとCI全step成功。通常の全量モデル実行、出力2048/60秒期限の成立は未証明。主体/役割/本人基準・記録間意味の読み取り、通常採用・本番/端末は引き続き残件。** [全結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-cumulative-partition-budget-20261105)。
 
 > **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
@@ -3635,3 +3635,14 @@ API db311746。元semantic profile/state/meaning compiler/作者/公開wire/DB/R
 
 新意味owner/型/作者/DTO/DB/商品依存は追加していない。通常v4と研究候補未採用を保持。全履歴の実モデル分割・本番/端末/buildは未完。詳細はweekly§203–206。
 
+## §207 — 全record保持の入力予算planner（offline準備）
+
+| repository path | 当回の責務 |
+|---|---|
+| API `ai/services/ai_inference/analysis_cumulative_service.py` | 既存service内の入力予算型・計画型・明示offline分割。全量資格を先に検査し、完全record/全欄/適格補足と全量guardを保持。通常ensure/factory未選択 |
+| API `ai/tests/test_analysis_cumulative_model_source.py` | 全201件/原欄/最大3補足/Unicode/欄なしrecord・上限/型・全量拒否/途中計画なし・旧bytesの54追加対象。0018は補足fixtureのcanonical emotionだけ補正 |
+| trial `cumulative_model_partition_budget.py` | 実tokenizer/実JSON encoderの12 CPU計画・488実測、全record/field/envelope/evidence/guard対応と元snapshot/source不変を照合。生成・通信・API/DB0 |
+
+API0018f5bf、CI42086930254成功。入力予算準備だけで、出力2048適合・60秒全量処理・意味合成/保存/本番成功は未証明。通常既定v4を保持し、公開contract/DB/RN/配置/buildの変更0。STRUCTURE_MAP_DELTA_NONE（既存service内のoffline準備）。後続のbatch合成契約は本節と別に検証する。
+
+公開集計はtrial `cumulative_model_partition_budget_results.json`、私的原本はweekly§207を参照する。
