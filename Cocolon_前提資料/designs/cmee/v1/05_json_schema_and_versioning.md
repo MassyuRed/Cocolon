@@ -3361,3 +3361,9 @@ API51d9486。既存AnalysisModelQuotedParentUnitsInput/Responseの完全binding�
 ## 11/5 — 完全な明記SELF役割文のscope閉鎖（保存契約不変）
 
 API64174a2。既存_written_role_propositionの完全な過去SELF役割witnessを、Analysisの報告scope検査にも再利用する。肯定の「の役割は…だった」を汎用報告導入へ誤分類せず、その節だけを閉鎖する。元source/行動の本人証明/他の報告・引用検査を保ち、普通のmapへROLE nodeや省略主体を補わない。型/enum/wire/profile/state/file/ID/DB/RN変更0。§185の通常row consumer/保存検証範囲も不変。[全結果・限界](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-closed-role-result-20261105)。STRUCTURE_MAP_DELTA_PRESENT（scope責務）、商品0・通常4B/配置未実施。
+
+## 11/5 — 通常モデルconsumerへROLE三経路を統合（保存版追加なし）
+
+API3433d807は§185の明示model_input consumerを、既存ROLE/ROLE_ACTION/ROLE_CLAUSEのsource証明へ接続する。Input/Response/ObservedGraph/ObservedSelfStructureMap、通常UUID/analysis.private-evidence.v1/cumulative.v1/watashi.map.v2とsafe projection版を共有し、新dataclass/enum/profile/state/file/version/公開DTO/DB/RN追加0。旧private ROLE三版とcandidate保存のID/値は不変。
+
+ROLE_ACTIONは通常rowでも2node/辺0/ROUTE_CONNECTION、ROLE_CLAUSEは1node/後半未読/SOURCE_SCOPEとなる。通常rowの非生成再読は保存済み図/文章/coverageを読む既存契約で、model raw/typed意味の再構築や新しい再検証契約を追加しない。実Supabase保存・通常4B自動呼出しの証明ではない。[全結果](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-observed-roles-result-20261105)。STRUCTURE_MAP_DELTA_PRESENT。

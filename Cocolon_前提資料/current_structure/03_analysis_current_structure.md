@@ -1,4 +1,4 @@
-> **11/5・分析の最新（第9回§186）：明示モデルconsumerで肯定の完全SELF役割文を発話導入と誤判定する箇所を修正。同じv4保存22応答で7→13 map、旧7表示・旧候補20/typed14/役割節1を保持。13通常rowのfile/mock RPC非生成再読、Jupyter926成功。API64174a2、型/保存版/公開DTO/DB/RN追加0。通常4B有効化・配置・本人端末は未実施。STRUCTURE_MAP_DELTA_PRESENT、product_credit0、GPU0。** [全結果・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-closed-role-result-20261105)。
+> **11/5・分析の最新（第9回§187）：既存ROLE/ROLE_ACTION/ROLE_CLAUSEのsource証明を明示モデルconsumerへ接続。同じv4保存22応答は13→16 map、既存12 mapへ役割を追加・独立行動1 mapは保持。旧候補20/typed14/役割節1の保存値と非生成再読を保持、通常row16再読。Jupyter968成功、API3433d807のCI全工程成功。新型/保存版/公開DTO/DB/RN追加0。通常4B自動呼出し・配置・本人端末・一般読解/記録間接続は残件。STRUCTURE_MAP_DELTA_PRESENT、product_credit0、GPU0。** [全結果・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-observed-roles-result-20261105)。
 
 > **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
@@ -1190,3 +1190,12 @@ API61e8aac2の既存semantic_admission.pyがv3継承の明示offline material.v4
 ### 11/3 — 二欄教示18更新の局所改善と残件
 
 11/3・分析の最新（weekly§123）：独立二欄8教示＋旧保持10の18更新/172NLL・22生成/2loadを完了。同じ二欄6例のtyped3→5（肯定ROLE/copulaとACTION NEGの誤modifier2例を修復）、旧成功5保存/projection bytes不変。非学習別語彙8は7件文章図へ到達、原文外CONTENT_TARGET1件は全体拒否、対象子欠落4件を保持。MD02の否定行動/YREASON01の理由・不明境界は旧未達のまま。a2eは研究候補保存、通常/次初期自動採用false。全22source/36raw/19成功文章図と保存再読を照合、全原本/再開点保存済み。API ded0586不変、STRUCTURE_MAP_DELTA_NONE、本人補足typed/記録間・比較/通常累積/IF・Saved等は残件。GPU2MiB/0％、レンタル維持。 [全結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v4-pair8-result-20261103)。
+
+<a id="analysis-model-observed-roles-20261105"></a>
+## 11/5 — 既存の明記役割graphを通常保存形式へ渡す
+
+API3433d807の既存semantic_admission consumerは、完全response/source検査後、既存compile_model_written_role_graph / _action_graph / _clause_graphのいずれかを用いる。新しい意味解釈・型・作者を追加しない。ROLE/ROLE_ACTION/ROLE_CLAUSEの旧private保存ID/版/値を維持し、通常constructorのUUIDと既存safe DTO/累積rowを使う。補足・比較・複数recordはこの明示経路のscope外。
+
+同じ保存22応答は13→16 map。12の既存行動mapへ元から証明済みの役割を加え、独立行動1を同graph/文章で保持。新3は完全役割2/先頭役割節1。15の役割map（pair12/完全単独2/節1）は既存private証明と同じ意味。pairの共起を関係線にせず辺0、節の後半も行動へ昇格せずSOURCE_SCOPE。通常16rowはfile/mock RPC→実read_mapsの非生成再読、旧35保存も保持。実DB/RN/本人端末ではない。
+
+通常ensure/HTTPの4B自動呼出しと採用重みは未変更。暗黙の役割/本人基準・混在思考/発話/省略主体、補足typed、記録間再出現/変化、IF/Savedと観測会は残件。次は既存source条件/モデル受口/通常ensureの未接続点を同じownerで進め、単記録のROLE証明を複数記録へ無条件に広げない。[全結果・原本](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-observed-roles-result-20261105)。

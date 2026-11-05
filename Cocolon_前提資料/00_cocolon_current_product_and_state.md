@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-**11/5・分析の最新（第9回§186）：明示モデルconsumerで肯定の完全SELF役割文を発話導入と誤判定する箇所を修正。同じv4保存22応答で7→13 map、旧7表示・旧候補20/typed14/役割節1を保持。13通常rowのfile/mock RPC非生成再読、Jupyter926成功。API64174a2、型/保存版/公開DTO/DB/RN追加0。通常4B有効化・配置・本人端末は未実施。STRUCTURE_MAP_DELTA_PRESENT、product_credit0、GPU0。** [全結果・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-closed-role-result-20261105)。
+**11/5・分析の最新（第9回§187）：既存ROLE/ROLE_ACTION/ROLE_CLAUSEのsource証明を明示モデルconsumerへ接続。同じv4保存22応答は13→16 map、既存12 mapへ役割を追加・独立行動1 mapは保持。旧候補20/typed14/役割節1の保存値と非生成再読を保持、通常row16再読。Jupyter968成功、API3433d807のCI全工程成功。新型/保存版/公開DTO/DB/RN追加0。通常4B自動呼出し・配置・本人端末・一般読解/記録間接続は残件。STRUCTURE_MAP_DELTA_PRESENT、product_credit0、GPU0。** [全結果・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-observed-roles-result-20261105)。
 
 **11/3・分析の最新結果（第9回§100–102）：** 74教師監査後、旧74不変＋原文対照2を76教師/90更新/152NLL/50新stop/2load・641.971830秒/exit0で比較。NV04の結果重複/不明の親不正を改善し、R4/T4/追加本人2の10ROLE文章図を前後bytes同一で保持。50rawは46同一/4変化、HQ04理由誤分類は残りR08肯定過去copulaに誤modifier再発。strict候補47→49は意味率ではない。100保存非生成再読/元532memberの全bytes-SHAを確認・新重み9dcを保全、通常/次初期値は未採用。[結果・原本・再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-reason-unknown76-result-20261103)。全対象分離は現行必須でなく、次は理由の述語/不明併存差と複数文copula保持をCPUで切分け。通常HTTP/DB/RN/配置不変、本人基準/記録間関係/通常累積接続は未完。GPUレンタル維持、STRUCTURE_MAP_DELTA_NONE。
 

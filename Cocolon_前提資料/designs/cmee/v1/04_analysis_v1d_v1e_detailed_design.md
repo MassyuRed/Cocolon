@@ -1931,3 +1931,12 @@ API61e8aac2の既存semantic_admission.pyがv3継承の明示offline material.v4
 ### 11/3 — material.v4の実12生成と、suru否定の誤拒否修復後の再開点
 
 生成API61e8aac2/最終ded0586、v3候補1/6・typed0→v4候補6/6・typed2。元rawの正しい「しなかった」を、既存のnegative suru有限述語に完全一致するときだけintent_compiler.py:_model_written_role_action_proofで許し、12応答を生成0で再読。v4の3件がROLE肯否/ACTION肯否/カテゴリ仕事・生活ON/欄交換を保持し同じ2node・文章図・保存非生成再読へ到達。元成功2保存/候補7保存bytesは不変。肯定copula誤modifier2件（一方はACTION否定も誤modifier）と推測typed拒否を保持。7suite352passed/3DB依存skip、補修後2suite199passed、非合算。旧6版bytes保持。[全結果/原本/再開点](../../../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v4-pair12-result-20261103)。通常採用false、private指示/stateと既存typed誤拒否修正だけSTRUCTURE_MAP_DELTA_PRESENT。別record集約には既存ROLE作者の一record witnessも対応が必要で、通常累積/本人補足/比較/IF・Savedは残件。
+
+<a id="analysis-model-observed-roles-20261105"></a>
+## 11/5 — 既存ROLE三経路と通常モデルconsumerの統合
+
+§186までのconsumerは単一の完全SELF過去行動だけだった。API3433d807では、既存quoted-parentの全文source/response検査・原入力/category1・補足/比較なしの資格を通した後、1fieldは完全ROLE、次にmemo先頭ROLE_CLAUSE、2fieldは完全ROLE_ACTIONの既存証明を用いる。証明の失敗でsourceや候補を補修せず、従来の独立行動の証明へ戻る。役割だけ正しい二欄から未読の行動を切り捨てて役割へ部分昇格する実装は追加しない。
+
+既存ObservedGraphを通常realize_observed_graphへ渡すため、新型/作者/保存版/公開wire/DB/RNは0。ROLE単独は欠4段、ROLE_ACTIONは欠3段＋ROUTE_CONNECTION・辺0、ROLE_CLAUSEは欠4段＋SOURCE_SCOPE・後半未読を保持。肯否/SELF/過去/元カテゴリ/座標は原文witnessで検査し、カテゴリを役割名にしない。旧private各保存版は従来IDと非生成readerを維持する。
+
+同22保存応答の13→16 mapと既存12mapへの役割追加を確認。新しい言語理解や意味精度16/22の証明ではない。通常ensure/HTTPの4B接続、複数record集約、補足/比較、一般本人基準、IF/Saved、本番配置と本人端末は未実施。[検証と残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-observed-roles-result-20261105)。STRUCTURE_MAP_DELTA_PRESENT（既存consumer責務）、商品credit0。

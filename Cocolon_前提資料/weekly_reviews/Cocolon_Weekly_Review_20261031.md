@@ -4028,3 +4028,41 @@ CIについて、前版51dのrun41971076468は10分設定下の10分超でcancel
 §185の新consumerは単一の完全SELF過去行動だけを通常rowへ渡す限定scopeのまま。次は既存ROLE/ROLE_ACTION/ROLE_CLAUSEのsource証明と通常consumer/保存の統合不足を確認し、新しい型/保存版を先に増やさず進める。通常4B有効化、同一欄の思考内容/他者発話/省略主体行動（CP03等）、暗黙役割・判断/選択・本人基準、補足typed、記録間再出現/変化、IF/Saved、分析観測会は残る。旧不採用重みや新GPU試行を自動選択しない。
 
 実行はGPT-6/Codex Work、root単一writer＋同環境read-only補助。独立Pro/Ultra/Mash Product Readではない。GPU load/forward/学習/新生成0・既存Pod維持。Render/Supabase/実DB/RN/配置/Pod管理変更0。STRUCTURE_MAP_DELTA_PRESENT（既存Analysis scope/consumer条件）、商品credit0。
+
+<a id="analysis-model-observed-roles-result-20261105"></a>
+## 187. 11/5 — 証明済みの役割を通常マップと保存形式へ接続
+
+**明示モデルconsumerの統合を実装・検証。通常4B自動呼出し・本番配置・本人端末・正式受入れは未実施、product_credit0。** §186の次残件に従い、既存private ROLE/ROLE_ACTION/ROLE_CLAUSEで成立していた根拠付き役割を、通常mapへ渡す不足を既存ownerで修正した。新しい文法/モデル重み/型/保存版/作者を追加する作業ではない。
+
+### 実装と同じ保存原本での結果
+
+API [3433d807](https://github.com/MassyuRed/mashos-api/commit/3433d807c6edcecddea4866d23a08cbdbff6c232) の変更4pathはsemantic_admission.py、新test_analysis_model_observed_roles.py、既存closed_role test、既存Analysis workflow。source本体は既存generate_analysis_model_observed_actions内だけ。1欄は完全ROLE→ROLE_CLAUSE、2欄はROLE_ACTIONの既存証明を用い、成立しなければ従来の独立した完全行動を検査する。owner/版/カテゴリ/全source/response/raw/messages/hashの結合と、原入力/category1・補足/比較なしの資格を維持する。通常ensureへモデルを自動接続しない。
+
+| 同じv4保存22応答 | 前64174a2 | 後3433d807 |
+|---|---|---|
+| 通常mapへ渡せる応答 | 13 | 16 |
+| ROLEを表示するmap | 0 | 15（完全単独2・ROLE_ACTION12・ROLE_CLAUSE1） |
+| 従来の13map | 行動のみ | 12へ元から証明済みの役割を追加、独立行動1はgraph/本文同一 |
+| 未対応 / strict拒否 | 7 / 2 | 4 / 2 |
+| 通常rowのfile/mock RPC→実read_maps非生成再読 | 13一致 | 16一致 |
+
+新規map3はT01/T02/R08。12のpairは元の二欄の肯否・SELF/fact/past・カテゴリ・根拠を保持し、共起を役割→行動の原因/順序線にしない（辺0/ROUTE_CONNECTION gap）。R08の後半は主体を補わず未読/SOURCE_SCOPEへ保持する。推測役割を含むPV06は従来の独立行動1だけを保持。残る4未対応/2拒否は採用条件を緩めず残す。16/22を意味正解率・一般品質へ換算しない。
+
+全22の原request/messages/ref/response/raw/hashを元v4へ照合。旧candidate20・typed14・役割節1の保存値/IDを保持し、35件をEngine/各compiler/作者禁止下で非生成再読。今回の通常graph14件も旧typed graphとJSON値一致を確認した。元responseの書換え・新版付替え・新生成は0。before1.025247秒、after3.175924秒。rootは全16の原文と文章/図、残6の原文/raw/拒否を確認し、同環境read-only補助は実装とsource資格をreviewした。独立Pro/Ultra/Mash Product Readではない。
+
+### 検証・失敗の扱い・原本
+
+- Jupyter直接接続の隔離コピーで**968 PASS・1 SKIP・11,176 subtests PASS、117.73秒**。既存モデル/finite/閉発話と新51を実行。SKIPは旧model-fields SQLのWASM未設定。pytest終了codeはこのbackground起動で回収しておらず、成功footerを確認した事実に限定する。
+- Work補助の全体回帰は2,134 PASS・1 SKIP・12,048 subtests PASS、336.97秒。Python3.12.14/Pydantic2.14.2で、Jupyter/CIの代替や同一固定環境成功としない。
+- [最終CI41977441029](https://github.com/MassyuRed/mashos-api/actions/runs/41977441029)、job127079499899はAPI3433d807 checkoutの全step success。生成/保存2,134 PASS・1 SKIP・12,048 subtests PASS（434.64秒）、共有owner1 PASS/194 deselected（27.41秒）、累積API/Q3/既存job24 PASS・既存warning1・2 subtests PASS（25.51秒）、月次順位/不変再読/削除SQLは201原本/15月参照で成功。CIのDBは隔離PostgreSQL WASM、実Supabase DBではない。
+- 初回局所138件は24失敗/114成功。有限graphとモデルgraphで異なるevidence ID/source_span名まで同一期待した比較を、同じ意味/原文座標/literalへ訂正して138成功。製品条件を緩めたものではない。初回22比較はtupleとJSON配列の直接比較でPV06停止。両保存JSONの意味/本文が同一と確認し、canonical値比較だけを公開runner901ec5へ修正。初回の部分after/logを保持し、before再実行・モデル再生成は0。旧失敗を成功へ加算しない。
+- 最初の未公開source ZIP転送は自動承認審査が明示転送許可不足として拒否。公開GitHubへの通常反映と全4path読戻し後、公開コード3fileだけのZIPへ限定し転送成功。比較runnerも公開・内容照合後に転送した。非公開入力/rawの新規アップロードは0。Download eventはtimeoutしたが実fileを回収でき、Pod出力のbytes/SHAへ照合した。
+- [実原本](https://chatgpt.com/library?file_id=libfile_43eeaed522588191bdee88dca7e56ee1&account_id=personal) は898,727bytes、SHA256 70b27dfc7810b145e715494bd81bef155eed8fb96b4efad0baf6973c681dd7c2。全22の前後request/raw/元snapshot/graph/文章/図、通常16row、失敗/成功ログ、source SHAを保全。[公開結果JSON](../observation_learning/trials/2026-11-01-analysis-model-fields/model_observed_roles_results.json) は本文なし実集計と独立合成3例だけ。実原文・rawは公開しない。
+
+最終semantic_admission SHA256は6ef52b8216b36d666937c843554dab6f0ae2a36da34ee48fb8710928e395ef7c、他3ownerは前64174a2と同じ。新Input/graph/state/file版/公開DTO/DB/RN/依存追加0、STRUCTURE_MAP_DELTA_PRESENT（既存consumerの役割採用接続）。通常rowはモデルrawを保存/意味再検証する新契約ではない。
+
+### 次の残件
+
+今回成立したのは一記録の明記本人役割と既存有限行動。通常ensure/HTTPの4B自動接続、一般の本人基準/暗黙役割/判断・選択、思考内容/他者発話/省略主体の混在、補足typed、複数記録の再出現/変化・比較、IF/Saved、分析観測会は残る。次は既存のsource資格→モデル受口→通常ensureの未接続部分を確認し、単記録ROLE作者の条件を無条件に複数記録へ拡張しない。新しい型/保存版や旧不採用重みの自動採用を先に増やさない。
+
+GPU load/forward/学習/新生成0、終端compute appなし・既存Podレンタル維持。Render/配置/実DB/RN/Pod管理変更0。Supabaseは関連Analysis表の列schemaをread-only確認しただけで、本人rowの取得/変更0。実行はGPT-6/Codex Workのroot単一writer＋同環境read-only補助。今回の限定接続を一般品質・本人端末成功・正式商品受入れへ拡張しない。

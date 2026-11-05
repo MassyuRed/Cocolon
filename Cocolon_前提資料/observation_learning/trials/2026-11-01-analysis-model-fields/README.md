@@ -1,4 +1,4 @@
-> **11/3最新・意味境界指示比較完了：** 同じ保存73ee重み/同じuser材料でsystemだけを追記し、46新stop/1load/学習0を417.780639秒/exit0で完了。CQ03/MX02/MD02はa5出力へ復帰しOD01の不明親も回復したが、新退行と肯定役割の誤修飾が生じ、役割R4は3→2/4、T4は4→2/4へ低下。semantic_boundaries.v2は通常採用せず、旧各版/既定を維持。[全結果・原本・再開点](#analysis-semantic-boundaries46-result-20261103)。92保存応答再読、全400原本/終了log2をbytes-SHA照合・保存済み。完了runを再起動しない。
+> **11/5最新・既存役割の通常consumer統合（weekly§187）：** API3433d807で既存ROLE/ROLE_ACTION/ROLE_CLAUSEのsource証明を通常の明示model_inputへ接続。同じ保存22応答は13→16 map、旧12mapへ役割を追加・独立行動1を保持、旧35保存/通常16rowを非生成再読。Jupyter968成功、CI全工程成功。[全結果・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-observed-roles-result-20261105)、[公開結果](model_observed_roles_results.json)、[比較runner](model_observed_roles_replay.py)。通常4B自動呼出し/配置/本人端末/一般本人基準/記録間接続は残件、学習/新生成0、商品credit0。旧完了run・不採用重みの判断を維持する。
 
 # Analysis — 最小field接続と実4B probe
 
