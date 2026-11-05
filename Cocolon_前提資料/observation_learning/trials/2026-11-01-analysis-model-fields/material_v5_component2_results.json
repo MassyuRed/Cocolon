@@ -1,0 +1,44 @@
+{
+  "kind": "RUNNING_CHECKPOINT_NOT_RESULT",
+  "date": "2026-11-05",
+  "trial": "component2",
+  "runner_sha256": "fd8f40c42e132bad7dfd9b326a5f43e3193f28b03249eae490b53d3eba991375",
+  "root": "/workspace/analysis-material-v5-component2-cpu2-20261105",
+  "first_cpu": {
+    "status": "SERIALIZATION_COMPARISON_FAILURE_NO_MODEL",
+    "runner_sha256": "b354751fab236e2381ad37be26d4c8f3fd5d46b9bffe4f1fb4e669439d558867",
+    "originals_preserved": true
+  },
+  "corrected_cpu": {
+    "status": "CPU_PASSED_NO_MODEL",
+    "seconds": 15.41193901002407,
+    "teachers": 24,
+    "before_responses": 34,
+    "before_candidates": 34,
+    "before_typed": 19,
+    "model_loads": 0
+  },
+  "last_observed_run": {
+    "elapsed_seconds": 263.06908202171326,
+    "updates": 20,
+    "measurement_forwards": 24,
+    "new_generations": 0,
+    "status": "RUNNING_NOT_FINAL"
+  },
+  "planned": {
+    "updates": 24,
+    "measurement_forwards": 48,
+    "new_generations": 38,
+    "model_loads": 2,
+    "max_seconds": 900
+  },
+  "initial_weights_sha256": "7ba4e6e07f69e377b99052d1a795bfa833476c46ae643ec1abc2b638ca64efaa",
+  "same_teachers_targets_messages_order": true,
+  "semantic_review": "PENDING",
+  "collection": "PENDING",
+  "normal_adoption": false,
+  "next_initial_adoption": false,
+  "product_credit": 0,
+  "structure_map_delta": "NONE",
+  "restart_forbidden": true
+}
