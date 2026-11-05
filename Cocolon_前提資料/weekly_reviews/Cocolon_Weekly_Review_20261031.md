@@ -4347,3 +4347,33 @@ Jupyterの13SKIPはPostgreSQL WASM未設定によるSQL依存で、SQL成功へ�
 [公開合成4構成・旧新全表示](../observation_learning/trials/2026-11-01-analysis-model-fields/supplemental_role_decision_results.json)に全原入力／ANSWER、field数/kind・全文本文/meta/coverageと集計を保持する。非公開原本は[検証原本](https://chatgpt.com/library?file_id=libfile_db296c04dcd481918c4d9607d4a07b2d&account_id=personal)。保存原本892,229bytes/SHA256 `6209d93e295624dfdd4427937992f27e40faa5ab14e5162b8015b283544c85d7`には、Pod回収839,409bytes/SHA256 `029ad64811d8049708944025108c864b42a5eb13f17f4422fd63ab80d4bbfe06`、最終CI decoded log、source3blob SHA metadataを含む。Pod内包23fileの全bytes/SHA一致を確認。Pod原本はAPIbb121484のclean状態、旧API8efd07e6、runner6ad7c0f5のcommit/file bytes/SHA metadata、prepare/request/全raw/source入力/保存再読/logを含む。runnerとAPI sourceのコード本文は同梱されず、Gitの固定commitを正本とする。
 
 本単位は適格補足の限定2nodeを商品graphへ通した差分であり、一般言語／kind品質・本人基準の理解や通常モデル採用の成立ではない。完了run／失敗rawの再試行・追加学習0。§193の結果や通常既定を上書きせず、次は今回未対応の意味範囲と通常transport/採用条件を既存残件として扱う。
+
+<a id="analysis-model-source-lifecycle-20261105"></a>
+## 195. 11/5 — 明示モデル更新の同時要求・期限・失敗処理
+
+§188の残件だったモデル待機と同時要求を、既存 `analysis_cumulative_service.py` と `test_analysis_cumulative_model_source.py` の2pathで修正した。API [286cb1e6](https://github.com/MassyuRed/mashos-api/commit/286cb1e6580921e26a12c8d7632b718070b64bca)。通常HTTP/cronの4B factory・transportと採用重みは未接続のまま。この差分は明示callerの実行・保存境界であり、意味の読み方や一般分析品質の改善ではない。
+
+- 同じprocess/event loop・本人・同じcallable identity・force/monthlyの組合せで重なる要求は、最新snapshotの取得からbuild/commit/readまで一つのtaskを共有する。raw応答だけを別時刻のsnapshotへ付け替えない。返却DTOはcallerごとにdeepcopyし、完了結果をcacheしない。異なる本人/提供元/force/月次viewは共有しない。複数workerをまたぐ抑止は未実装。
+- モデル応答待機は内部60秒の協調的期限。期限切れ504、HTTP transport/OSError/RuntimeErrorは秘密の診断文を出さず503、不正response/根拠は従来422。自動retry・finiteへの代替保存をしない。期限後にcallbackが応答を返しても保存しない。callbackのcleanupや別threadのGPU処理を60秒以内に強制停止できる保証ではない。
+- waiterの一人がcancelされても他のwaiterを継続し、最後のwaiterが離れたらtaskをcancelする。sourceがcancelを握り潰してもsource後・commit前のcancel確認で保存へ進ませない。モデル取得前と生成commit前にdevelopmentを再確認する。commit RPC送信後のcancel/設定変更まで原子的に取り消すものではなく、既存のACK不明・CAS境界を保つ。
+- ensure=False/read_only/off、既存current再利用、当月保存済み参照はモデルを取得しない。強制更新失敗でも、以前のcurrent/月次本文・図・ID・captureは保存されたまま。原入力/ANSWER変更中のCAS拒否・全履歴/owner/カテゴリ/不明・同記録count1は継承する。
+
+### 実行と検証
+
+| 実行場所・対象 | 最終結果 |
+|---|---|
+| Jupyter直接 `n1c0emcf17xs0u`、固定API上の累積/source/jobs/quoted-parent/role-decision 5suite | 304 PASS、SQL依存16 SKIP、既存warning1、2 subtests、44.90秒、exit0 |
+| Work隔離PostgreSQL WASM、model-source全file | 119 PASS/skip0、57.35秒。新しい3件同時forceのartifact/月参照各1、timeout後の旧current/月次不変を含む |
+| 最終[CI42020230823](https://github.com/MassyuRed/mashos-api/actions/runs/42020230823)、job127220839491、同API head | 全step success。生成/保存2240 PASS・旧model-fields SQL1 SKIP・12048 subtests/295.40秒、共有owner1 PASS/194 deselected/21.21秒、累積/Q3/API/jobs143 PASS・既存warning1・2 subtests/53.51秒。月次SQLは201原本/15月参照でowner/rank/immutability/deletion成功 |
+
+JupyterのSQL16 SKIPを成功へ加算しない。CIの旧model-fields SQL1 SKIPも未実行として保持する。Jupyter Python3.12.3/FastAPI0.162.0/Pydantic2.14.1、Work3.12.14/0.142.2/2.13.5、CI3.12.15/0.142.2/2.13.5は別環境。APIの2blobは公開読戻しとJupyterのSHA256が一致（service `076fcc09fb172fbb496236feb0079b2a0528ef31d52e97f397fea2f8768bbe80`、test `18722c1a40061728e58c39a1d83f389910378027ce04b246ab3e6253477238e0`）。
+
+§194の実4B AC01〜04は元request/messages/response/rawと元snapshot時刻のまま再読し、4保存/5mapped/未解析0、本文/coverage/UUID以外の図projectionを保持した。単独再読は1.029074秒、追加の同時再読は各ensureを3件ずつgatherし、初回更新4group＋current/月次/readonly各4group＝16group/48caller、応答取得4回・4保存、1.012507秒。各groupの3DTOは全値一致し、元4responseと表示も一致。初回更新だけでは12caller/4取得で、48回のモデル生成ではない。追加学習/モデルload/新生成0、隔離mock RPC保存の結果で、本番DB/本人端末/新しい一般言語評価ではない。元の4B原本は[§194](#analysis-supplemental-role-decision-result-20261105)に保持する。
+
+追加同時試験の初回コマンドは引用符のSyntaxErrorで処理前に停止し、続く複数行入力もターミナルで未実行だった。別のターミナルの一行・適切なshell quotingへ直して上記を完了。失敗をモデル品質や成功件数へ加算せず、新生成/再学習は行っていない。
+
+作業rootは `/workspace/analysis-model-source-lifecycle-20261105`、API clean worktreeは上記固定commit。regression.log/exit、saved-replay.log/exit、concurrent-replay-final.log/exitと各replay JSONは同rootへ保持。private rawを新たに公開/uploadしていない。原本runnerは公開済み `supplemental_role_decision_trial.py`（§194の6ad7c0f5）で、同時試験はそのensure呼出しだけを3並列にしたもの。完了した学習/生成runを再開しない。
+
+### 次の残件
+
+通常HTTP/cron向けのtransport/factory、候補重みの採用と通常接続、複数process間の重複抑止、一般的な本人基準/暗黙役割・判断/選択・記録間意味関係、IF/Saved、分析観測会・本人端末確認・配置は残る。既定v4/v6 opt-in・意味型・唯一作者・公開DTO/DB/RN/商品依存は不変。本番Render操作/DB変更/新GPU購入/Pod管理0。Supabaseはtable一覧のread-onlyだけで本人本文row取得/変更0。Renderはworkspace未選択を確認しただけで稼働状態を再検証していない。実環境はGPT-6/Codex Work、root単一writer＋同環境read-only reviewであり独立Pro/Ultra/Mash Product Readではない。STRUCTURE_MAP_DELTA_NONE（既存service内部の実行寿命）、一般商品品質credit0・通常採用未成立。

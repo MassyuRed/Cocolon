@@ -3537,3 +3537,12 @@ AC01/04の明記順序は回答自身の担当→決定だけで、原因／親�
 変更は既存API3path：`ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py`（原入力の担当／決定完全field証明を`_model_role_decision_field_graph`へ共用化し、`compile_model_supplement_role_decision`で全集合から回答自身の根拠を抽出）、同`semantic_admission.py`（`_compile_model_observed_record`で回答局所ref/辺を既存record graphへ束縛し、明記順序の両端の根拠IDとcanonical重複を維持）、`ai/tests/test_analysis_cumulative_model_source.py`（肯否／順序／無順序重複／未解析／主体・field・根拠変異／private clause拒否／保存版／SQL lifecycle）。source_adapter・保存原版／round owner・唯一realizer・service/profile/state・DB/RN/既存workflowの責務追加0。trial `supplemental_role_decision_trial.py`（runner6ad7c0f5）は新4要求・同raw旧／新consumer比較・保存非生成再読を、`supplemental_role_decision_results.json`は公開合成入力と旧新の全表示／集計を所有する。
 
 [全結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplemental-role-decision-result-20261105)。§193の2題比較・失敗候補・原本は[前回記録](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-role-choice-prompt-result-20261105)に保持する。
+
+## 11/5 §195 — 明示モデル更新の実行寿命（既存2path）
+
+| owner path | 差分責務 |
+|---|---|
+| API `ai/services/ai_inference/analysis_cumulative_service.py` | 同一process/loop・本人・callable・force/月次viewの並行task共有、独立DTO、完了cacheなし。60秒の協調的source期限、503/504・cancel・mode再確認を保存前に限定。既存snapshot/guard/CAS/read ownerを継承 |
+| API `ai/tests/test_analysis_cumulative_model_source.py` | 一回snapshot/保存・返却独立性、timeout/transport失敗と明示再試行、片方/全waiter cancel、遅延応答拒否、mode変更/本人・callable・view分離、実SQL同時forceと失敗後current/月次維持 |
+
+新しい意味owner/型/作者/公開contract/DB/RN/依存追加0。通常HTTP factoryと分散重複抑止は残件。API286cb1e6、STRUCTURE_MAP_DELTA_NONE（既存service内部）。[全検証・限界](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-source-lifecycle-20261105)。

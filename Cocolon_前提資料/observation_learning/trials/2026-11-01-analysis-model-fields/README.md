@@ -2165,3 +2165,9 @@ AC01/04の明記順序は回答自身の担当→決定だけで、原因／親�
 変更は既存API3path：`ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py`（原入力の担当／決定完全field証明を`_model_role_decision_field_graph`へ共用化し、`compile_model_supplement_role_decision`で全集合から回答自身の根拠を抽出）、同`semantic_admission.py`（`_compile_model_observed_record`で回答局所ref/辺を既存record graphへ束縛し、明記順序の両端の根拠IDとcanonical重複を維持）、`ai/tests/test_analysis_cumulative_model_source.py`（肯否／順序／無順序重複／未解析／主体・field・根拠変異／private clause拒否／保存版／SQL lifecycle）。source_adapter・保存原版／round owner・唯一realizer・service/profile/state・DB/RN/既存workflowの責務追加0。trial `supplemental_role_decision_trial.py`（runner6ad7c0f5）は新4要求・同raw旧／新consumer比較・保存非生成再読を、`supplemental_role_decision_results.json`は公開合成入力と旧新の全表示／集計を所有する。
 
 [公開合成4構成・旧新全表示](supplemental_role_decision_results.json)／[runner6ad7c0f5](supplemental_role_decision_trial.py)／[全検証・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplemental-role-decision-result-20261105)。非公開原本は[検証原本](https://chatgpt.com/library?file_id=libfile_db296c04dcd481918c4d9607d4a07b2d&account_id=personal)。§193の2題比較原本／公開結果は上節のまま保持する。
+
+## 11/5 §195 — 明示sourceの待機・同時要求と実4B保存再読
+
+API286cb1e6で既存serviceのasync待機・実行寿命を修正。同一process/loop・本人・callable・force/monthlyの並行更新だけを一回のsnapshot/build/commit/readへ共有し、DTOは別copy。60秒の協調的期限、運用失敗503/期限504、不正応答422、cancel/mode変更後の保存抑止、完了cacheなし。通常transport/重み採用は未変更。
+
+Jupyter304 PASS/SQL16 SKIP、Work隔離SQLのmodel-source119 PASS、CI42020230823全step success（生成/保存2240 PASS・旧SQL1 SKIP・12048 subtests、共有owner1 PASS、累積/Q3/jobs143 PASS、SQL201原本/15月参照）。§194 AC01〜04の同じrequest/response/raw・snapshotを0生成/0loadで再読し、単独と各ensure3件同時の両方で4保存/5mapped/未解析0、本文/coverage/UUID以外の図一致。同時試験は16group/48caller（初回更新12caller/4取得、残りは保存再読）で新しい48生成ではない。新教示/学習/重み/一般言語評価0、v6 opt-in/v4既定は保持。[詳細・失敗・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-source-lifecycle-20261105)。完了GPUrunを再開しない。

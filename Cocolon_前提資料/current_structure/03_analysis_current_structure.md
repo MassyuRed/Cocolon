@@ -1206,7 +1206,7 @@ APIb77c380eの通常ensureに、既定Noneの明示async `model_source`を接続
 
 再構築時だけ既存単記録consumerの資格を確認し、callerを1回awaitして既存AnalysisModelQuotedParentUnitsResponseを受領、元preparedへ結合して通常build→既存commit→実read_mapsへ渡す。不正応答は422で保存せず、有限経路へ黙って置換しない。生成中のsource編集はSQL guard/CASが拒否する。現在値再利用/月次実capture/ensure=False/read_only/offではcallerを呼ばず、月次はforceでも書換えない。
 
-元22応答の確認はrequest/messages/raw/元時刻を保持したmock RPC persistence。実SQLの通常保存と月次/CASは、最新入力から作る独立合成応答で確認する。両者を実4Bの最新SQL生成や本番Supabase成功へ換算しない。HTTP/cronから自動呼出しするfactory・transport・重み採用は追加していない。callerの通信期限/例外処理と並行要求の重複推論抑止は後続。一般本人基準、暗黙役割、判断/選択、補足typed、記録間の再出現/変化・IF/Saved/観測会は残る。[全結果・原本](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-ensure-model-source-result-20261105)。
+元22応答の確認はrequest/messages/raw/元時刻を保持したmock RPC persistence。実SQLの通常保存と月次/CASは、最新入力から作る独立合成応答で確認する。両者を実4Bの最新SQL生成や本番Supabase成功へ換算しない。HTTP/cronから自動呼出しするfactory・transport・重み採用は追加していない。callerの通信期限/例外処理と同じprocess/loop内の同一要求共有は[§195](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-source-lifecycle-20261105)で実装。60秒は協調的期限、別callable/flags/workerは共有せず、通常transport/factoryと採用重みは後続。一般本人基準、暗黙役割、判断/選択、補足typed、記録間の再出現/変化・IF/Saved/観測会は残る。[全結果・原本](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-ensure-model-source-result-20261105)。
 
 ## 11/5 — 同じ欄で明記された役割・本人行動の両保持（第9回§189）
 
@@ -1231,3 +1231,8 @@ AC01/04の明記順序は回答自身の担当→決定だけで、原因／親�
 変更は既存API3path：`ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py`（原入力の担当／決定完全field証明を`_model_role_decision_field_graph`へ共用化し、`compile_model_supplement_role_decision`で全集合から回答自身の根拠を抽出）、同`semantic_admission.py`（`_compile_model_observed_record`で回答局所ref/辺を既存record graphへ束縛し、明記順序の両端の根拠IDとcanonical重複を維持）、`ai/tests/test_analysis_cumulative_model_source.py`（肯否／順序／無順序重複／未解析／主体・field・根拠変異／private clause拒否／保存版／SQL lifecycle）。source_adapter・保存原版／round owner・唯一realizer・service/profile/state・DB/RN/既存workflowの責務追加0。trial `supplemental_role_decision_trial.py`（runner6ad7c0f5）は新4要求・同raw旧／新consumer比較・保存非生成再読を、`supplemental_role_decision_results.json`は公開合成入力と旧新の全表示／集計を所有する。
 
 [全結果・原本・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplemental-role-decision-result-20261105)。§193の2題比較・失敗候補・原本は[前回記録](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-role-choice-prompt-result-20261105)に保持する。
+
+## 11/5 §195 — 明示モデル更新の待機・同時要求
+
+既存 `analysis_cumulative_service.py` 内で同じ本人/callable/force/monthly/loopの並行更新taskを共有し、返却DTOを独立させる。sourceの協調的60秒期限・運用例外の非公開化・waiter cancel・development再確認を保存前へ接続。保存current/月次は失敗後も保持し、読取は生成しない。通常factory/transport・重み採用と分散重複抑止は未実装。意味/graph/作者/DTO/DB/RN責務は不変、STRUCTURE_MAP_DELTA_NONE。
+API286cb1e6・Jupyter304 PASS/SQL16 SKIP、隔離SQL119 PASS、最終CI全工程success。§194の同じ4B応答は3件同時でも4構成4取得/4保存・元本文図一致。[結果・制限・次](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-source-lifecycle-20261105)。
