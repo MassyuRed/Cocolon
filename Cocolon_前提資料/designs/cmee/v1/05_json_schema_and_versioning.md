@@ -3346,3 +3346,13 @@ API c033bd4。既存Input/Response/ObservedGraph型を共有し、既存build/se
 state=`cocolon.cmee.analysis_model_written_role_clause_state.v1`、file=`cocolon.cmee.cumulative_written_role_clause_file.v1`、artifact namespace=`analysis_model_written_role_clause.v1`。既存exact root shapeを共有し新版を旧版へラベル交換しない。coverageはsource1/processed1/mapped1/unparsed1/excluded0/stale0。role以外の4段＋SOURCE_SCOPEをgapに保持。保存readerは原response・全messages/ref/hashと保存graph/文章/図を検査復元し、Engine/各compiler/各作者を呼ばない。
 
 新dataclass/公開wire/DB/RN/通常ensureの変更0。新版は明示offline経路のみ。[実原本/検証/残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-written-role-clause-result-20261105)。STRUCTURE_MAP_DELTA_PRESENT、商品credit0、正式Product Read未実施。
+
+
+<a id="analysis-model-observed-actions-20261105"></a>
+## 11/5 — 既存quoted-parent材料から通常Observed mapへの明示consumer
+
+API51d9486。既存AnalysisModelQuotedParentUnitsInput/Responseの完全bindingを保ち、build_cumulative_map(model_input=...)の明示callerだけで、元全sourceの既存graphと完全SELF過去行動の候補が一致する場合を既存ObservedSelfStructureMapへ渡す。原入力/category1・補足/比較なし、単一の完全行動・辺/更新/矛盾/注記なしの初期scope。モデル単独の主語/役割/因果を採用しない。元node/evidence/gapを保持し、無nucleusの他欄も必要時にSOURCE_SCOPEへ保持。stale補足のcountは既存coverageから継承。
+
+新型/enum/profile/wire/state/file/version追加0。artifactは通常UUID ID、safe projectionは既存v1alpha1/watashi.map.v2、privateはanalysis.private-evidence.v1、source_profile=cumulative.v1の通常rowを共有。ROLE/ROLE_ACTION/ROLE_CLAUSEのprivate state/ID/旧candidate stateは不変。Engineのquoted-parent dispatchは候補専用のまま、通常ensure/HTTPの4B有効化は0。
+
+保存の確認範囲は、file化した通常rowをmock RPCから実read_mapsへ返し、既存wire validatorと文章/図/coverage一致をモデル/各compiler/作者なしで確認したもの。新しいsaved意味再構築・model raw再検証の契約を追加していない。[全実物・検証・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-observed-actions-result-20261105)。STRUCTURE_MAP_DELTA_PRESENT（consumer責務のみ）、商品credit0、配置未実施。

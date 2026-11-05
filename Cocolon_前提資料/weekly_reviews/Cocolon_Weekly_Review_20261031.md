@@ -3957,3 +3957,38 @@ API source版be2281fの[Analysis CI41960307453](https://github.com/MassyuRed/mas
 今回の明記役割節と残scopeの扱いを、一般の役割・選択・本人基準へ拡張したとはしない。通常4B接続、思考内容/他者発話/独立行動の混在意味採用、補足typed、記録間再出現/変化、IF/Saved、分析観測会は残件。通常採用しないc522等の旧判断を維持。次は既存unit→typed ownerで、実際に正しく分離された独立本人行動を、思考の対象や他者発話と混同せず残scope付きで渡す不足へ続く。新しい学習比較を自動選択しない。
 
 実行はGPT-6/Codex Work、root単一writer＋同環境read-only補助。Mash/独立Pro/Ultra Product Readではない。GPU load/forward/学習/新生成0、既存Podレンタル維持。Render/Supabase/実DB/RN/配置/Pod管理は変更0。STRUCTURE_MAP_DELTA_PRESENT（既存ownerの明示private意味/保存版）、商品credit0。
+
+
+<a id="analysis-model-observed-actions-result-20261105"></a>
+## 185. 11/5 — 保存済み4Bの本人行動を通常マップ・通常保存形式へ接続
+
+**既存model_inputの明示caller接続を実装し、実原本による文章/図と保存形式の非生成再読まで確認。通常4B有効化・配置・本人端末・商品受入れは未実施、product_credit0。** §184の次残件のうち、正しく分離された本人行動を含むquoted-parent入力を、通常マップのbuildへ渡すと型bindingで止まる箇所を修正した。
+
+### 何が変わったか
+
+元v4のPV06には、別欄の推測付き役割と、完全に明記された本人過去行動がある。全messages/ref/request/response/raw/hashを照合した同じ保存応答で、修正前の明示model_input経路はanalysis_model_input_binding_invalid、修正後はSELF ACTION1件・文章/図・mapped1/unparsed1・edge0を返す。推測付きROLEは未読のSOURCE_SCOPEに残す。同じ入力をモデルなしの既存finite経路へ渡すと従来も行動1件は表示できており、今回新しく増やしたのはモデル材料→既存typed商品artifactの接続である。一般的な役割理解や新しい文法の成功とはしない。
+
+既存Input/Response/ObservedGraph/通常rowを共有し、元の全sourceを既存compile_observed_graphへ渡す。graphが単一の完全なSELF・fact・pastの既存九動詞行動で、辺/更新/矛盾/注記がなく、実モデルroot・対象child・主体/否定注記が原文と一致する場合だけ採用する。他欄の引用/発話は新しい明示経路では保留し、shared nucleusのない未対応本文もSOURCE_SCOPEを追加する。元node・証拠・gapを捨てず、主体/行動/関係を補わない。原入力1件・category context・補足/比較なしの限定scope。旧ROLE_ACTIONの候補検査を共通化し、旧採否・ID/保存値を保持した。
+
+API [51d9486](https://github.com/MassyuRed/mashos-api/commit/51d94862c5fd081516e6427795bc52e673b9c241)の既存4owner＋合成test49＋既存workflowの6path。GitHub c033の4ownerを基点にblob一致を確認し、最終6pathも検証したローカル/PodのSHAと照合。Engineの候補専用分岐は維持し、通常ensure/HTTPへモデルを自動接続しない。新dataclass/schema/state/file/公開DTO/DB/RN/依存は0。通常UUID map constructorと既存文章/図を共有し、保存契約05・全ファイル地図01Bへ差分を記録。
+
+### 実原本と検証
+
+| 対象 | 同一原本での結果 |
+|---|---|
+| v4保存応答22件の明示model_input | 修正前22拒否。修正後7 mapped / 13 unsupported / 2 strict拒否。7件の元graphは通常finiteと一致。採用率・意味正解率ではない |
+| 通常保存形式の再読 | 7件の文章/図/coverageをfileへ保存し、mock RPCの返却rowを実read_mapsへ渡した。Engine/各compiler/作者を禁止して7件一致・owner転送を確認 |
+| 旧保存版 | 候補20・typed14・前回役割節1の保存値を保持。35件を従来readerで生成/各compiler/作者禁止の非生成再読 |
+| Jupyter最終一回 | 888 PASS、1 SKIP、1 deselected、11,176 subtests PASS、pytest133.77秒/親134.547850秒、exit0。新49・旧モデル経路・finite vertical・閉発話・累積保存 |
+
+skip1はPodのWASM未設定、deselect1はPodにhelperのないQ3 SQL。API51d9486の[CI41971076468](https://github.com/MassyuRed/mashos-api/actions/runs/41971076468)はgeneration/保存2,045 PASS・1 SKIP・12,048 subtests PASS（512.29秒）、shared owner1 PASS（32.20秒）、API/Q3/既存job24 PASS・既存warning1（30.28秒）のログを確認した。ただし10分枠の終了時にjobがcancelledとなり、月次SQLは未実行。CI全完了とはせず、後続の限定修正と同じ検証内容で最終再確認する。通常read_mapsで確認したのは保存DTO/文章/coverageの不変再読であり、保存model rawやtyped graph意味の再検証・実Auth/実DB・RN描画ではない。
+
+前後の22応答を元v4 packへ完全束縛し、新しいresponseの捏造・raw補修・v5→v4付替えを行っていない。前後一括7.208082秒（before .617809秒/after3.284895秒）。[公開結果JSON](../observation_learning/trials/2026-11-01-analysis-model-fields/model_observed_actions_results.json)は37,989bytes、SHA256 ed1f368de2c5b923d44c5344c8ad8302b3ace7095d0455454c113ba065970588。独立作成合成3例のgraph/文章/図と実結果の本文なしmetadataだけを公開。実4Bの原文・raw・新7row/表示・PV06前後・失敗/成功ログは[私有原本](https://chatgpt.com/library?file_id=libfile_f586a36c835c81919d1b94860c6f7734&account_id=personal)へ保存（170,463bytes、SHA256 5b2813a5f6ea7a3fd655f6fdb2ab0461880e506c3c7803204f9aeb29782542a4）。元v4全archiveは同原本の参照先を継承する。
+
+初回の新testは39成功/4失敗。3件は他欄の現在/否定/未閉鎖引用への新経路の限定保留が不足していたため採用を保留へ修正、1件は比較requestが準備段で拒否される範囲へtest期待を移した。元shared compilerの通常判定は変えていない。併せて無nucleusの他欄の未読計上、編集前補足のstale件数、strict結合が通る従属候補の非採用を確認。初回ログは私有原本に保持し、成功数へ加算しない。
+
+### 残件と次の作業
+
+今回の7件をモデル品質の一般化へ換算しない。通常4B接続、同一欄の思考内容/他者発話/省略主体行動の混在（CP03等）のsource証明と採用、暗黙役割・判断/選択・本人基準、補足typed、記録間再出現/変化、IF/Saved、分析観測会は残る。新しい入力型や保存版を足す前に、この既存consumerと元sourceの不足へ続く。v5追加対応/旧不採用重みc522等の採用/新GPU学習比較は自動選択しない。
+
+実行はGPT-6/Codex Work、root単一writer＋同環境read-only補助。独立Pro/Ultra/Mash Product Readではない。GPU load/forward/学習/新生成0、既存Podレンタル維持。Render/Supabase/実DB/RN/配置/Pod管理変更0。STRUCTURE_MAP_DELTA_PRESENT（既存model材料consumerの明示接続）、商品credit0。

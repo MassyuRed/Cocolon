@@ -1,4 +1,4 @@
-> **11/5・分析の最新（第9回§184）：保存済み4Bの明記役割節を、同じ欄の後半と分けて既存graph・文章・図へ渡す限定経路を実装。後半はSOURCE_SCOPE/unparsed1、主体・行動・関係を補わない。元v4応答22件照合、旧候補20/旧typed14保持・非生成再読、Jupyter839成功。API c033bd4、通常4B接続/配置/本人端末は未実施。一般役割・判断/選択・記録間・IF/Savedは残件。GPU処理0、STRUCTURE_MAP_DELTA_PRESENT、product_credit0。** [全結果](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-written-role-clause-result-20261105)。
+> **11/5・分析の最新（第9回§185）：保存済み4Bのquoted-parent入力から、元記録全体で証明できる本人過去行動を通常マップへ渡す明示経路を接続。22応答の同原本比較で、旧入口22拒否→7件の文章/図と通常保存形式の非生成再読。残13未採用/2strict拒否、旧候補20/typed14/役割節1を保持。Jupyter888成功、API51d9486。型・保存版・公開DTO/DB/RN追加0、通常4B有効化/配置/本人端末は未実施。STRUCTURE_MAP_DELTA_PRESENT、product_credit0、GPU0。** [全結果・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-observed-actions-result-20261105)。
 
 > **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
@@ -3465,3 +3465,17 @@ APIの既存intent_compiler.pyで、単一の閉じた肯定過去発話の外�
 | `.github/workflows/analysis-observed-content.yml` | 既存CIに新/旧モデル経路回帰を登録し、pytest基点をcheckoutに固定 |
 
 入力型/graph型/商品owner追加0。private role_stateとstate/file/identityの限定版はschema owner05に追記。公開DTO/HTTP/DB/RN/通常ensure不変。[結果・限界](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-written-role-clause-result-20261105)。
+
+
+### 11/5 — モデル候補を通常マップへ渡す行動接続のファイル差分
+
+| 既存owner / path | 責務の差分 |
+|---|---|
+| API `cores/analysis/intent_compiler.py` | 既存の元source全体のgraphを検査。完全なSELF過去行動と実候補root/注記が一致する場合だけ採用。node/evidence/gapを保持し、必要時に未読scopeを追加。旧ROLE_ACTIONと候補検査を共有 |
+| API 同階層 `semantic_admission.py` | 既存quoted-parent応答の完全bindingと原入力1件/補足・比較なしの資格を検査。通常の型/保存形式へ渡す明示caller経路 |
+| API 同階層 `observed_route_realizer.py` | 既存ordinary UUID map constructorを共有。表示作者・graph型を増やさない |
+| API `analysis_cumulative_service.py` | 既存build_cumulative_mapの明示model_input分岐。stale件数を既存coverageから保持し、通常ensure/HTTPを有効化しない |
+| API `ai/tests/test_analysis_model_observed_actions.py` / 既存Analysis workflow | 合成49ケースを既存回帰へ接続 |
+| 既存trial `model_observed_actions_replay.py` / `model_observed_actions_results.json` | 元v4応答22件の一回比較と、本文なし実集計/独立合成例。private rawや実本人原文を公開しない |
+
+新しい型/state/file/DB/RNなし。通常保存は既存rowとprivate-evidence v1。実DB保存やモデルrawの意味再検証を、file＋mock RPCによる非生成再読の成功へ混ぜない。[全結果](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-observed-actions-result-20261105)。

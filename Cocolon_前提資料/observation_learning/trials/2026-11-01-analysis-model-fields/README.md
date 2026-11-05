@@ -2091,3 +2091,11 @@ API source版be2281fの[Analysis CI41960307453](https://github.com/MassyuRed/mas
 API c033bd4、既存4owner＋新合成66ケース＋既存CIの6pathを変更。元material.v4のR08 request/messages/ref/response/rawを改変せず、先頭ROLE1件を既存文章/図へ渡し、残りはSOURCE_SCOPE/unparsed1・edge0に保持。旧既定は拒否のまま、新clause=Trueだけ別state/file/identityを使う。旧候補20/typed14の保存内容・非生成再読を保持し、通常4B/HTTP/DB/RN/ensureへ有効化しない。
 
 Jupyter839 PASS・1 SKIP・1 deselected・11,176 subtests PASS、pytest121.92秒/exit0。実原本22応答を照合し新R08 saved readも生成禁止下で一致。CPUのfixture/pytest基点/metadata修正と残件、private原本、CIの最終状態は[最新weekly§184](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-written-role-clause-result-20261105)。[公開結果JSON](analysis_role_clause_results.json)は独立作成合成3例と本文なし実集計のみ、実4B本文/rawはprivate保存。GPU0、配置未実施、STRUCTURE_MAP_DELTA_PRESENT、商品credit0。
+
+
+<a id="analysis-model-observed-actions-result-20261105"></a>
+## 149. 11/5 — モデル候補の本人行動を通常マップへ接続
+
+API51d9486、既存4owner/合成49/既存CIを変更。元v4 saved22の同request/messages/ref/raw比較で、build_cumulative_mapへの明示quoted-parent入力が22拒否から7件の通常map/文章/図へ進んだ。残13未採用/2strict拒否。7件は通常finiteと同じgraphで、新しい役割・文法を読めた結果ではない。推測役割/他欄未対応はSOURCE_SCOPE、edge0。旧候補20/typed14/前回節1を保持・非生成再読。通常row/read_mapsを共有し新保存版なし。通常4B/ensure/HTTPは未有効化。
+
+Jupyter888 PASS・1 SKIP・1 deselected・11,176 subtests PASS、133.77秒/exit0。新7通常rowのfile＋mock RPC非生成再読で文章/図/coverage一致を確認した。実DB/実Auth/保存rawの意味再検証へ広げない。[全結果・失敗履歴・原本・CI・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-observed-actions-result-20261105)。[本文なし結果と合成例](model_observed_actions_results.json)、一回比較runnerはmodel_observed_actions_replay.py。追加学習/生成/ロード0、配置未実施、STRUCTURE_MAP_DELTA_PRESENT、商品credit0。
