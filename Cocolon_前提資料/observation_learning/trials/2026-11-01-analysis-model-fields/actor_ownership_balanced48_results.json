@@ -1,0 +1,34 @@
+{
+  "schema_version": "cocolon.analysis_actor_ownership_balanced48_summary.v1",
+  "status": "RUNNING_NOT_ADOPTED",
+  "api_commit": "4d744e36a093aac3ad157a448f06ef6be2be59cb",
+  "runner_commit": "13471a029860920d4e612eb82f6d2eb1aaf2eaa8",
+  "jupyter_root": "/workspace/analysis-actor-ownership-balanced48-20261105",
+  "initial_weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59",
+  "initial_config_sha256": "006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9",
+  "source20_sha256": "bab10642bb2e2ddd5817d0abdf5d6a80ad378f7cd541dceec1948b1c6cf48a8f",
+  "old20_exact": true,
+  "additional_frozen_teachers": [
+    "AT21",
+    "RU01"
+  ],
+  "curriculum": {
+    "omitted6_each": 4,
+    "explicit6_each": 2,
+    "N8_each": 1,
+    "anchors2_each": 2,
+    "shuffle_seed": 20261111
+  },
+  "planned": {
+    "updates": 48,
+    "teachers": 22,
+    "nll_forwards": 44,
+    "reused_before": 14,
+    "new_stops": 14,
+    "model_loads": 2,
+    "max_seconds": 1200
+  },
+  "normal_adoption": false,
+  "next_training_initial_adoption": false,
+  "restart_completed_or_partial_root": false
+}
