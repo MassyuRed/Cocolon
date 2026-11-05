@@ -1,0 +1,34 @@
+{
+  "kind": "ANALYSIS_COMPOSITION_COMPLETE_UNIT24_BODY_FREE_RESULT",
+  "status": "TRAIN_COMPLETE_GENERATION_AND_REVIEW_PENDING",
+  "final": false,
+  "code_ref": "eef3e82fbae497d3e1313a8a312144bad246a3a4",
+  "runner_sha256": "38e6d3727260c3101e9a8099d6025c26cc7fb4b763aa604b01f075a99310e0b2",
+  "cpu": {
+    "status": "CPU_PASSED_NO_MODEL",
+    "seconds": 15.962918070144951,
+    "model_loads": 0,
+    "model_forwards": 0,
+    "selected_union_tokens": {
+      "RU02": 21,
+      "CP01": 51,
+      "CP02": 52,
+      "CP03": 105,
+      "CP04": 102
+    }
+  },
+  "observed_training": {
+    "status": "COMPLETE_NOT_ADOPTED",
+    "updates": 24,
+    "measurement_forwards": 48
+  },
+  "planned_new_generations": 38,
+  "held_QF4_not_trained": true,
+  "normal_adoption": false,
+  "next_initial_auto_adoption": false,
+  "product_credit": 0,
+  "do_not_restart_root": true,
+  "private_artifacts": "awaiting post-run collection; prior library references remain in preceding result",
+  "source_api": "ded0586720df0c0d50d8838bcd391a19ca3eead5",
+  "normal_owner_http_db_rn_deployment_changes": false
+}
