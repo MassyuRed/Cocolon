@@ -1,4 +1,4 @@
-> **11/5開始・分析の継続（第9回§213）：元全文が否定を保つ希望を、原sourceのSELF／negative／wish証明のまま既存consumerへ接続。Jupyter241 PASS・CI全工程成功。同じ実4Bの4原応答を0モデル再読し、WH04だけNoneから否定希望1node、WH02はcanonical一致、WH01／03は未対応を維持。raw修復／NEG追加／DB保存0。初回harness誤比較と商品差を分け、失敗原本も保持。version7保存済み。通常採用・本番未有効化。** [全結果・境界・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-negative-wish-consumer-20261105)。
+> **11/5開始・分析の継続（第9回§214）：新規隔離targetで4vendor kernel bindingを実確認。固定API100c1bb／元a2eの3要求はwarmup候補保持、v7は6欄中field1だけで旧raw同一、v8は23秒signal14で未返却。1load／3開始／2stop、速度改善・全欄保持・意味品質は未証明。global base／商品source／通常選択を維持し、通常採用なし。version8保存済み。** [実結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-optional-kernel-diagnostic-20261105)。
 
 > **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
@@ -3709,3 +3709,14 @@ API100c1bb、Jupyter384 PASS／PG未設定19 SKIP、CI42105775747全工程成功
 API5c9606、Jupyter241 PASS、CI42109915846全工程成功。fresh replay2でWH04だけNone→否定希望1node、WH02肯定pastのgraph／文章／図／coverageを保持し、WH01／03未対応を維持。NEG注釈欠如による意味欠落ではなく、旧consumerの肯定限定を切り分けた。raw修復／モデル／DB保存0、STRUCTURE_MAP_DELTA_NONE。通常選択／型／作者／公開DTO／DB／RNは不変。[全結果・境界・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-negative-wish-consumer-20261105)。version7保存済み。
 
 公開集計は既存trialの`negative_wish_results.json`。元本文・人物・rawとfailed replay原本は非公開に保持する。
+
+## 11/5 §214 — 商品sourceを変えない隔離optional runtime検証
+
+| 研究owner／path | 責務と結果 |
+|---|---|
+| 公開trial v1 `optional_kernel_install.py`／`optional_kernel_control.py`／`optional_kernel_control_plan.json`／`optional_kernel_pypi_metadata.json` | 0.6系の公式metadata／hash固定wheel・隔離target／上限計画とimport-only確認を所有。Triton3.4のgluon.language.extra不足によるmodel0の失敗を保持し、成功版へ置換しない |
+| 公開trial v2 `optional_kernel_install_v2.py`／`optional_kernel_control_v2.py`／`optional_kernel_control_plan_v2.json`／`optional_kernel_pypi_metadata_v2.json` | 0.5系／causal1.7／einopsのmetadata・隔離導入計画と4vendor callable実binding、固定API100c1bb／元a2eのwarmup1＋v7/v8各1を所有。global baseを維持し、原raw・開始／返却・timer終了を分ける |
+| 非公開環境原本内 manifest／installed-files／probe／request・Response | 導入実体・base／source／target／adapterの不変と原raw・private stateを保持。公開metadataや集計へ原文／人物を転記しない |
+| 既存trial新 `optional_kernel_results.json` | runtime版・hash／binding・計時と不変条件、2返却と未返却1・strict欠落拒否を本文なしで集計。速度倍率・通常採用・一般品質へ換算しない |
+
+実結果は1load／3開始／2stop、KW00候補保持・KW01は旧と同じ先頭fieldだけで拒否・KW02は23秒signal14でraw未返却。4vendor実binding成立と、全欄出力／速度・意味品質の未証明を区別する。STRUCTURE_MAP_DELTA_NONE、通常v8 whitelist拡張0、商品owner／意味型／作者／公開DTO／DB／RN／配置／build変更0。version8保存済み。 [全結果・原本・境界](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-optional-kernel-diagnostic-20261105)。
