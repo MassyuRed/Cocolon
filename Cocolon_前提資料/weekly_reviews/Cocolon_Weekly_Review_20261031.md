@@ -4377,3 +4377,45 @@ JupyterのSQL16 SKIPを成功へ加算しない。CIの旧model-fields SQL1 SKIP
 ### 次の残件
 
 通常HTTP/cron向けのtransport/factory、候補重みの採用と通常接続、複数process間の重複抑止、一般的な本人基準/暗黙役割・判断/選択・記録間意味関係、IF/Saved、分析観測会・本人端末確認・配置は残る。既定v4/v6 opt-in・意味型・唯一作者・公開DTO/DB/RN/商品依存は不変。本番Render操作/DB変更/新GPU購入/Pod管理0。Supabaseはtable一覧のread-onlyだけで本人本文row取得/変更0。Renderはworkspace未選択を確認しただけで稼働状態を再検証していない。実環境はGPT-6/Codex Work、root単一writer＋同環境read-only reviewであり独立Pro/Ultra/Mash Product Readではない。STRUCTURE_MAP_DELTA_NONE（既存service内部の実行寿命）、一般商品品質credit0・通常採用未成立。
+
+<a id="analysis-application-model-source-20261105"></a>
+## 196. 11/5 — 分析専用self-hosted設定を通常API/更新/月次の共通入口へ接続
+
+§195の明示callback経路を継承し、通常callerが渡す引数を変えずに、Analysis専用のserver設定から既存の完全候補を取得できるようにした。API [fbbda209](https://github.com/MassyuRed/mashos-api/commit/fbbda2099c919efca3d59e712fa2af2f7e3f1b2e)、通常配置・本番設定変更・重み採用は未実施。新しい意味解釈・作者・保存schema・公開DTOを作る変更ではない。
+
+### 接続と設定
+
+`analysis_cumulative_service.ensure_map` はensure=True/developmentかつ明示model_sourceなしの場合だけ、`analysis_model_source.application_analysis_model_source` を選ぶ。通常latest/monthly API、入力後fallback、worker、共通refresherとcronは既にこのensureへ集まっており、各routeを別writerへ変更しない。認証で本人を解決した後にだけ入る。明示callbackは引き続き優先する。
+
+| server設定 | 意味 |
+|---|---|
+| `COCOLON_ANALYSIS_MODEL_SOURCE` | 未設定/空/offは従来finite経路。`self_hosted.v1`だけが新HTTP経路を選ぶ。他の非空値は生成時503で、finiteへ落とさない |
+| `COCOLON_ANALYSIS_MODEL_ENDPOINT` | HTTPS、userinfo/query/fragmentなし、末尾/chat/completions。環境のproxyを使わず、redirectしない |
+| `COCOLON_ANALYSIS_MODEL` | 運用側が指定するmodel identity。返却model文字列が完全一致することを要求する |
+| `COCOLON_ANALYSIS_MODEL_API_KEY` | Analysis専用Bearer key。Emlis設定・鍵・本文を代用しない。値を公開資料/応答へ書かない |
+| `COCOLON_ANALYSIS_OBSERVED_MODE` | 既存の書込許可。developmentで生成、read_only/offとensure=Falseではfactory/HTTPを使わない |
+
+設定は同一signatureで同じcallableとなり、§195の同時要求共有を保持する。設定不備は実取得時まで遅延し、既存currentの再利用・保存済み月次/readonlyは鍵喪失や未対応selectorでも読める。再構築だけは503となり、finite/別providerへのfallback・自動retryをしない。source中とbuild中の接続先/model/key/selector変更は、応答後とcommit直前のsignature再検査で保存を拒否する。commit RPC送信後の取消しや複数process間の推論抑止を成立済みにしない。
+
+新HTTP sourceは、response未設定の既存 `AnalysisModelQuotedParentUnitsInput` / material.v4と同じsource資格を使う。messagesを一度だけ取得してそのまま送信し、送信したlistのdigestと元request_refへ、未stripのcontent/raw SHAを結合した既存Responseを返す。temperature0/max_tokens2048/非thinking/非streamは既存probeと同じ。返却model、単一choice、assistant、stop、text、tool/function/reasoningなしを確認し、本文の意味・原文/根拠/kindの採否は既存consumerに任せる。HTTP待機25秒、service外側の協調的60秒は継承。decoded responseを16KiBずつ読み262144bytes超を拒否し、providerのstatus/本文/URLをAPIエラーへ出さない。HTTP timeout504、運用/外側envelope不正503、内側候補不正は従来422で保存しない。全履歴をtoken都合で切り詰めないため、提供側context超過を自動解消するものではない。返却model文字列の一致は遠隔weightsの独立証明ではない。
+
+### 検証
+
+| 対象 | 最終結果 |
+|---|---|
+| Jupyter直接、model-source/通常API/jobsの3suite | 152 PASS、SQL依存16 SKIP、既存warning1・2 subtests、20.25秒、exit0 |
+| Work隔離PostgreSQL WASM、同3suite | 168 PASS/skip0、既存warning1・2 subtests、64.96秒。通常HTTPの選択/認証、設定変更拒否、実SQLの最新snapshot/3並列/現在・月次各一保存を含む |
+| 未対応selectorの単独条件確認 | 他の設定を正常に保ったunsupported selectorと、正規selectorの鍵欠落の2件PASS、1.56秒。上表への重複加算なし |
+| [最終CI42023684029](https://github.com/MassyuRed/mashos-api/actions/runs/42023684029) / job127232464199 | 全step success。生成/保存2240 PASS・旧SQL1 SKIP・12048 subtests/372.72秒、共有owner1 PASS/194 deselected/24.37秒、累積/Q3/API/jobs178 PASS・既存warning1・2 subtests/67.54秒。月次SQL201原本/15月参照でowner/rank/immutability/deletion成功 |
+
+Jupyterの16件とCIの旧model-fields SQL1件のSKIPを実行済みにしない。Jupyter Python3.12.3/FastAPI0.162.0/Pydantic2.14.1、Work3.12.14/0.142.2/2.13.5、CI3.12.16/0.142.2/2.13.5は別環境。source/API/test/workflowの公開5pathを読戻し、Jupyterの新source SHA256 `ccd94afcbcce6c61c728db18ee5d4424d29488966f162dadb46c3bf0c8febc3f`、service `d1ce64fbf967bf4adbbaea524aa8c7d04bad96b8091f57cf56d079131fcac2e4` がWorkと一致。
+
+さらに§189の保存済み実4B SF01〜04を、元snapshot/request/messages/rawのままHTTP envelopeへ戻して再読した。service呼出しから明示model_sourceを除き、このprocessだけの専用設定で選択したfactory→SelfHostedAnalysisModelSource→httpx MockTransport→元4B raw→通常build/commit/readへ通した。HTTP側で元messages一致をassertし、各ensureを3並列にして、16group/48callerに対しprovider request4回、4保存/各2node、元Response/request/本文/coverage/UUID以外の図がすべて一致。処理0.457878秒/exit0、新生成/モデルload/学習0。独立する新規言語評価や実TLS通信ではない。RPCも隔離mockで、本番DBと本人端末ではない。元のraw/4B保存重みを変えず、private本文を新たに公開/uploadしていない。
+
+作業rootは `/workspace/analysis-application-model-source-20261105`、固定API clean worktree、regression.log/exitとprotocol-replay.log/exit、protocol-replay/summary.jsonと既存runnerの再読結果を保持。旧SF原本は§189のprivate記録を継承する。完了GPUrunの再起動・追加学習・新4B生成0。
+
+### 変更ownerと残件
+
+新 `ai/services/ai_inference/analysis_model_source.py` はAnalysisのHTTP transportと私有設定factoryだけを担当。既存serviceが中央選択/保存前の設定一致、既存model-source/API testsがHTTP protocol/通常auth/SQL/失敗/同時要求を検証する。既存workflowへ新sourceのpath filterを追加した。公開API/DTO/DB/RN/依存/意味型/唯一作者は不変、STRUCTURE_MAP_DELTA_PRESENT（既存Analysis入口から条件付き外部sourceへの接続、新transport owner追加）。
+
+**コード上の通常設定接続は実装済み。実4Bが常時返すHTTPS提供先・実機一巡・設定有効化と本番配置は未成立。** §193のv6 opt-inとa2e等の通常未採用を維持し、返却model名だけでweights採用へ進めない。一般的な本人基準・暗黙役割/判断・選択・記録間意味関係、IF/Saved/分析観測会、複数process抑止は残件。次は提供方法/採用候補の既存ownerと合わせ、隔離した実4B transport一往復を確認する。これを一般文章品質・正式受入れ・配置済みへ換算しない。Render/Supabaseの本番操作・DB変更・RN build・Pod管理/新GPU購入0。実行GPT-6/Codex Work、root単一writer＋同環境read-only review、独立Pro/Ultra/Mash Product Readではない。

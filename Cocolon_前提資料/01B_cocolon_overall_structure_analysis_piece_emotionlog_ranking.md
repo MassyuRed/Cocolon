@@ -3546,3 +3546,14 @@ AC01/04の明記順序は回答自身の担当→決定だけで、原因／親�
 | API `ai/tests/test_analysis_cumulative_model_source.py` | 一回snapshot/保存・返却独立性、timeout/transport失敗と明示再試行、片方/全waiter cancel、遅延応答拒否、mode変更/本人・callable・view分離、実SQL同時forceと失敗後current/月次維持 |
 
 新しい意味owner/型/作者/公開contract/DB/RN/依存追加0。通常HTTP factoryと分散重複抑止は残件。API286cb1e6、STRUCTURE_MAP_DELTA_NONE（既存service内部）。[全検証・限界](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-source-lifecycle-20261105)。
+
+## 11/5 §196 — 通常設定のAnalysis HTTP source/factory
+
+| owner path | 差分責務 |
+|---|---|
+| API新 `ai/services/ai_inference/analysis_model_source.py` | Analysis専用HTTPS transport・単一provider・既存material.v4/Response結合。private設定ごとの安定factoryと設定変更確認。既定OFF、Emlis本文/設定を代用しない |
+| API既存 `ai/services/ai_inference/analysis_cumulative_service.py` | 明示sourceなしの通常callerへ条件付きfactoryを中央選択。取得前source資格と既存build/save/read、保存前設定一致を継承 |
+| 既存 `ai/tests/test_analysis_cumulative_model_source.py` / `test_analysis_observed_api.py` | protocol/期限/失敗/設定変更/認証と通常HTTPからの保存・実SQLの同時更新、設定喪失後の保存再読 |
+| 既存 `.github/workflows/analysis-observed-content.yml` | 新transport pathも既存の生成/保存/累積SQL CIの起動対象とする |
+
+各API/worker/cronの別writer追加0、意味型/作者/保存版/公開DTO/DB/RN/商品依存追加0。通常設定接続のコードと、実4Bの提供/採用/有効化/配置は区別。APIfbbda209、STRUCTURE_MAP_DELTA_PRESENT。[全結果・制限](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-application-model-source-20261105)。

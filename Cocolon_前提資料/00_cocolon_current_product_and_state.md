@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-**11/5・分析の最新（第9回§195・明示モデル更新の実行寿命）：同一の並行更新で最新snapshotから保存まで一回の処理を共有し、60秒の協調的待機期限・失敗/cancel時の保存抑止を既存serviceへ実装。Jupyter304 PASS/SQL16 SKIP、隔離SQL119 PASS、CI42020230823全step成功。§194の実4B保存応答4構成は各3件同時要求でも4取得/4保存・5record/未解析0、同じ本文図を保持。新生成/学習/load0。既定v4/v6 opt-in・重み通常未採用、通常HTTP/cronの4B接続／一般意味品質／配置は未成立。** [全結果・限界](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-source-lifecycle-20261105)。
+**11/5・分析の最新（第9回§196・通常設定のモデル接続）：Analysis専用self-hosted HTTP source/factoryを中央ensureへdefault OFFで接続。通常API・入力後更新・worker/cronは同じownerを使い、設定不備でも保存済みcurrent/月次は読める。送信messages/未加工rawを既存候補identityへ結合し、設定変更時は保存を拒否。Jupyter152 PASS/SQL16 SKIP、隔離SQL/API168 PASS、CI42023684029全step成功。保存済み実4B応答4構成は設定経由のHTTP形式・同時要求でも同じ4map/各2nodeを保持。MockTransport検証で、新生成/load/学習0。コード接続は実装済み、実4B HTTPS提供・採用重み・本番有効化/配置・一般意味品質は未成立。** [全結果・限界](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-application-model-source-20261105)。
 
 **11/3・分析の最新結果（第9回§100–102）：** 74教師監査後、旧74不変＋原文対照2を76教師/90更新/152NLL/50新stop/2load・641.971830秒/exit0で比較。NV04の結果重複/不明の親不正を改善し、R4/T4/追加本人2の10ROLE文章図を前後bytes同一で保持。50rawは46同一/4変化、HQ04理由誤分類は残りR08肯定過去copulaに誤modifier再発。strict候補47→49は意味率ではない。100保存非生成再読/元532memberの全bytes-SHAを確認・新重み9dcを保全、通常/次初期値は未採用。[結果・原本・再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-reason-unknown76-result-20261103)。全対象分離は現行必須でなく、次は理由の述語/不明併存差と複数文copula保持をCPUで切分け。通常HTTP/DB/RN/配置不変、本人基準/記録間関係/通常累積接続は未完。GPUレンタル維持、STRUCTURE_MAP_DELTA_NONE。
 
@@ -130,7 +130,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 ## 5. Analysis — 蓄積を本人の情報へ返す
 
-**11/1採用・API/DB反映／7201内部配布済み（第9回§44）：** 対象は感情原入力の全保存期間と適格な本人補足。現在mapは全plan共通、月次はFree2回/Plus12回/Premium全期間を閲覧。旧28日/100件拒否/期間版を新累積と呼ばない。新source/immutable artifact/月参照/現在guard照合、選択月と現在の並列表示、根拠原入力・補足参照を実装し、local/遠隔CIを通過。月次は当月最初の成功取得を固定、過去未保存月の再分析backfillなし。一般日本語の理解は未完成。通常累積mapは4Bを呼ばず、新カテゴリ付き4B入口は明示offlineに限定。API配置済み、iOS #72/7201はApple処理を通過し既存内部グループでテスト中。Mashが7201の依頼修正を確認。一般分析の内容品質は未確認。§44へ。
+**11/1採用・API/DB反映／7201内部配布済み（第9回§44）：** 対象は感情原入力の全保存期間と適格な本人補足。現在mapは全plan共通、月次はFree2回/Plus12回/Premium全期間を閲覧。旧28日/100件拒否/期間版を新累積と呼ばない。新source/immutable artifact/月参照/現在guard照合、選択月と現在の並列表示、根拠原入力・補足参照を実装し、local/遠隔CIを通過。月次は当月最初の成功取得を固定、過去未保存月の再分析backfillなし。一般日本語の理解は未完成。通常累積mapの既定はfinite。§196で分析専用設定時の4B HTTP取得を中央ensureへ接続し、通常未設定/未配置のまま。API配置済み、iOS #72/7201はApple処理を通過し既存内部グループでテスト中。Mashが7201の依頼修正を確認。一般分析の内容品質は未確認。§44へ。
 
 | 機能・構想 | 現在の実装・境界 | 稼働・本人確認・残件 |
 |---|---|---|

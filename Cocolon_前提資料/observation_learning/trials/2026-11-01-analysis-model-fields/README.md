@@ -2171,3 +2171,9 @@ AC01/04の明記順序は回答自身の担当→決定だけで、原因／親�
 API286cb1e6で既存serviceのasync待機・実行寿命を修正。同一process/loop・本人・callable・force/monthlyの並行更新だけを一回のsnapshot/build/commit/readへ共有し、DTOは別copy。60秒の協調的期限、運用失敗503/期限504、不正応答422、cancel/mode変更後の保存抑止、完了cacheなし。通常transport/重み採用は未変更。
 
 Jupyter304 PASS/SQL16 SKIP、Work隔離SQLのmodel-source119 PASS、CI42020230823全step success（生成/保存2240 PASS・旧SQL1 SKIP・12048 subtests、共有owner1 PASS、累積/Q3/jobs143 PASS、SQL201原本/15月参照）。§194 AC01〜04の同じrequest/response/raw・snapshotを0生成/0loadで再読し、単独と各ensure3件同時の両方で4保存/5mapped/未解析0、本文/coverage/UUID以外の図一致。同時試験は16group/48caller（初回更新12caller/4取得、残りは保存再読）で新しい48生成ではない。新教示/学習/重み/一般言語評価0、v6 opt-in/v4既定は保持。[詳細・失敗・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-source-lifecycle-20261105)。完了GPUrunを再開しない。
+
+## 11/5 §196 — 通常のAnalysis専用設定をHTTP sourceへ接続
+
+APIfbbda209。新analysis_model_source.pyのHTTPS transport/factoryを中央ensureへ既定OFFで接続し、通常latest/monthly/入力後更新/worker/cronで同じ保存ownerを使えるようにした。Analysis独自のselector/endpoint/model/keyを使い、Emlis生成文/設定で代用しない。material.v4/messages/rawは既存identityへ無加工で結合。鍵欠落や未対応selectorでも保存済み表示は維持し、生成は503、設定変更後は保存しない。HTTP形式不正503・timeout504・意味候補不正422で再試行/fallback0。
+
+Jupyter3suite152 PASS/SQL16 SKIP、Work隔離SQL/API168 PASS、CI42023684029は[最新weekly§196](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-application-model-source-20261105)へ。§189保存済みSF01〜04を専用設定→HTTP MockTransport→既存候補/通常保存へ再読し、明示source引数なし・各ensure3並列で16group/48callerに対しHTTP4要求、4保存/各2node・元Response/request/本文/coverage/UUID以外の図一致。新生成/load/学習0、実TLS/実DB/本人端末ではない。元raw/重み・通常v4/v6 opt-inは不変。実4B HTTPS提供と通常採用/本番有効化/配置・一般意味/記録間関係・IF/Saved/観測会は残件。
