@@ -17,6 +17,7 @@ import os
 from pathlib import Path
 import random
 import shutil
+import signal
 import subprocess
 import sys
 import threading
@@ -44,7 +45,10 @@ import analysis_cumulative_service as service
 from cocolon_meaning_experience_engine.cores.analysis import semantic_admission as admission
 sha=lambda p:hashlib.sha256(Path(p).read_bytes()).hexdigest()
 canonical=admission.canonical
-spec=importlib.util.spec_from_file_location('ownership_seam','/workspace/actor_ownership_trial.py')
+SEAM=Path('/workspace/actor_ownership_trial.py')
+SEAM_SHA='dfb10128d30420f1023b653d8f43141b3252b735b9acc52ffba83af343c3cfa7'
+assert sha(SEAM)==SEAM_SHA
+spec=importlib.util.spec_from_file_location('ownership_seam',str(SEAM))
 seam=importlib.util.module_from_spec(spec);spec.loader.exec_module(seam)
 seam.root=ROOT;seam.api=API
 
@@ -95,6 +99,8 @@ def prepare():
     from transformers import AutoTokenizer
     assert {n:version(n) for n in PINS}==PINS
     prior=json.loads(PRIOR.read_text());assert prior['status']=='COMPLETE'
+    assert prior['weights_sha256']==WEIGHTS and prior['config_sha256']==CONFIG and prior['initial_unchanged']
+    assert prior['model']==MODEL and prior['revision']==REVISION and prior['pins']==PINS
     old=json.loads(OLD.read_text());keys=('id','owner','snapshot','assistant_target')
     originals=[r for r in old['teachers'] if r['id'] in {f'N{i:02}' for i in range(1,9)}]
     assert len(originals)==8
@@ -116,6 +122,7 @@ def prepare():
     for phrase in ('私のノートを見た。','私は同僚のノートを見た。','同僚は私のノートを見た。','記録を残さなかった。'):
         assert phrase not in teaching_texts
     ROOT.mkdir();shutil.copyfile(OLD,ROOT/'original_pack.json');shutil.copyfile(__file__,ROOT/'runner.py')
+    shutil.copyfile(SEAM,ROOT/'ownership_seam.py')
     tokenizer=AutoTokenizer.from_pretrained(MODEL,revision=REVISION,local_files_only=True,trust_remote_code=False)
     encoded={};audits=[]
     for row in teachers:
@@ -150,7 +157,7 @@ def prepare():
     by_id={x['id']:x for x in expected}
     for c in reused:
         e=by_id[c['row']['id']];assert e['request_ref']==c['request']['request_ref'] and e['messages']==c['request']['messages']
-        assert c['response']['messages_sha256']==e['messages_sha256'] and hashlib.sha256(c['response']['raw'].encode()).hexdigest()==c['response']['raw_sha256']
+        assert c['response']['finish_reason']=='stop' and c['response']['messages_sha256']==e['messages_sha256'] and hashlib.sha256(c['response']['raw'].encode()).hexdigest()==c['response']['raw_sha256']
     order=[x[0] for x in specs]*2+[f'N{i:02}' for i in range(1,9)]
     assert len(teachers)==14 and len(encoded)==14 and len(order)==20
     plan=dict(status='CPU_PREPARED_NO_MODEL',teachers=teachers,evaluation=evaluation,expected=expected,seed=20261111,learning_rate=1e-5,update_order=order,max_seconds=LIMIT,profile=PROFILE,initial_weights_sha256=WEIGHTS,initial_config_sha256=CONFIG,original_pack_sha256=OLD_SHA,new_calls=18,model_loads=3,normal_adoption=False,next_training_initial_adoption=False)
@@ -255,11 +262,14 @@ def run():
                 r=subprocess.run(['timeout','--signal=TERM','--kill-after=10',str(remaining),sys.executable,str(ROOT/'execution_runner.py'),phase,str(API),str(ROOT),str(deadline)],stdout=log,stderr=subprocess.STDOUT)
             report['stages'].append(dict(phase=phase,exit=r.returncode));write(ROOT/'report.json',report)
             assert r.returncode==0,phase
+        assert sha(OLD)==OLD_SHA and sha(INITIAL/'adapter_model.safetensors')==WEIGHTS and sha(INITIAL/'adapter_config.json')==CONFIG
         report['status']='COMPLETE_PENDING_ALL_RAW_REVIEW_NOT_ADOPTED'
     except BaseException as exc:
         report.update(status='FAILED_NO_RETRY_NOT_ADOPTED',error=type(exc).__name__,traceback=traceback.format_exc());raise
     finally:
         report.update(seconds=time.monotonic()-start,initial_unchanged=sha(INITIAL/'adapter_model.safetensors')==WEIGHTS and sha(INITIAL/'adapter_config.json')==CONFIG,old_pack_unchanged=sha(OLD)==OLD_SHA,gpu_after_process=subprocess.check_output(['nvidia-smi','--query-gpu=memory.used,utilization.gpu','--format=csv,noheader'],text=True).strip())
+        if not report['initial_unchanged'] or not report['old_pack_unchanged']:
+            report['status']='FAILED_FINAL_LINEAGE_CHANGED_NOT_ADOPTED'
         write(ROOT/'report.json',report)
         write(ROOT/'manifest.json',{str(p.relative_to(ROOT)):sha(p) for p in ROOT.rglob('*') if p.is_file()})
         archive=ROOT.with_suffix('.zip')
@@ -270,6 +280,9 @@ def run():
 
 
 if __name__=='__main__':
+    if MODE in ('before','train','after'):
+        def terminated(*_):raise TimeoutError('bounded_child_terminated')
+        signal.signal(signal.SIGTERM,terminated)
     if MODE=='prepare':prepare()
     elif MODE=='run':run()
     elif MODE=='train':train_phase(float(sys.argv[4]))
