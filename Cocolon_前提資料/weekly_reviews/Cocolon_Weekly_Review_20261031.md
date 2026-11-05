@@ -1,4 +1,4 @@
-> **11/5・分析の最新（第9回§190）：明記された本人の担当＋決定を、既存の全文根拠・明記順序のままモデル経由mapへ保持する接続修正。実4Bの新合成4応答を同じまま比較し、表示0→1、残3は担当をACTIONと返すkind不一致のため未対応を維持。追加学習0・新4/1load・再生成0。旧22と前回4を保持、Jupyter574成功/旧SQL1省略、CI2226成功/旧SQL1省略・累積48成功。次は全記録を保つmodel適用資格（現在1記録限定）を優先。通常4B自動呼出し/配置/一般本人基準・記録間接続は残件。新型/保存版/DB/RN追加0、STRUCTURE_MAP_DELTA_PRESENT、正式受入れ未判定。** [結果・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-role-decision-result-20261105)。
+> **11/5・分析の最新（第9回§191）：明示model受口の1記録制限を、全INCLUDED原入力を保持する資格へ修正。記録ごとの既存役割・行動・担当/決定の証明を使い、原文・版・カテゴリ・根拠を保つ。実4B新2要求/計5記録・1load・学習0、32.714秒。MR01の2記録は3node/辺0で保存・現在値/月次/読取再表示が一致。MR02は3field中1欠落のため全packetを拒否し、有限結果へ置換しない。Jupyter292成功/SQL9省略、最終CI41999746016は全step成功（生成/保存2226 PASS・旧SQL1 SKIP、累積/API65 PASS、SQL201原本/15月参照、Jupyter追補結合7 PASS）。補足/比較、通常4B自動接続/配置、一般本人基準・記録間の意味関係は残件。新型/保存版/公開DTO/DB/RN追加0、STRUCTURE_MAP_DELTA_PRESENT、正式受入れ未判定。** [結果・残件](#analysis-multi-record-result-20261105)。
 
 # 第9回 Cocolon週末報告会 — 2026-10-31（開催中）
 
@@ -4197,3 +4197,49 @@ JupyterはPython3.12.3/FastAPI0.162.0/Pydantic2.14.1/torch2.8.0+cu128、CIはPyt
 **次は全記録を保持するmodel適用資格を優先する。** `_cumulative_model_request` は全snapshot memberを準備する一方、`require_analysis_model_observed_scope` と今回consumerは1記録限定。通常HTTPを先にONにして最新1件へ切り詰める方法では解決しない。既存記録別の根拠・version・意味集約へmodel fieldを結べる条件を確認し、記録間の順序を勝手に生成しない。担当kindの安定化も残3件の明示残件。暗黙主体/役割、本人基準・判断の理由、記録同士の再出現/変化は未完。HTTP/cronのmodel_source明示接続、transport期限・重複推論抑止・採用重み、IF/Saved/観測会/Mash端末/配置は別の残件として継続する。
 
 Render/本番DB/schema/RN/配置/Pod管理の変更0。新GPUや追加購入操作0、既存Podレンタルは維持。商品全体完成・一般意味品質・Mashの正式受入れへ換算しない。
+
+<a id="analysis-multi-record-result-20261105"></a>
+## 191. 11/5：複数の原記録を保持するmodel資格・記録別の根拠・累積保存へ接続
+
+### 変更と確認範囲
+
+§190の次優先だった1記録制限を解消した。API [95019062](https://github.com/MassyuRed/mashos-api/commit/95019062fa7a7cbda4166e9209020a48d593fa44)で、全snapshotを一つの既存request/messages/responseへ束縛し、含まれる各原記録へ既存のROLE/ACTION証明を適用する。最終API [22de881a](https://github.com/MassyuRed/mashos-api/commit/22de881a92e2ebf1c1866ebd02abda4018c61f27)は旧scope検査1箇所の更新だけで、4つのruntime ownerのblobは95019062と同一。最新1件・100件・読めた記録だけへ入力を切り詰めない。これは資格と既存証明の接続であり、一般日本語や本人基準を新しく理解できたことではない。
+
+`require_analysis_model_observed_scope`は非空・全INCLUDED・原入力のみ・補足なし・比較なしを確認する。全packetのfield数/順序、request/ref/messages/raw SHAの照合を終えてから、元source/envelope/unit/record-version/category/evidenceを保った各記録のviewで既存witnessを使う。別記録の主体・根拠で未対応記録を救済しない。通常ensureは明示sourceを渡された再構築時だけ一回取得し、読取・既存月次・read_onlyは生成しない。
+
+既存finite compilerと`_observed_claim_signature`を共用し、ACTION/PAST_RESPONSIBILITYの文法上の同一意味・同カテゴリだけを集約する。明記順序の出現、相対日、今回、カテゴリを混ぜず、record/evidence件数を保持する。private WRITTEN_PAST_ROLE/CLAUSEはまだ記録別node。同じ役割名の再出現・変化や一般の記録間意味関係、反復共起は追加していない。保持する順序線はその原記録で証明されたものだけで、新しい記録間順序・原因を作らない。
+
+唯一の既存作者は全source identityを先に再照合し、役割節を元recordだけのn1/n2証明へ戻して再検査する。別recordと共有された行動は当該recordの原根拠へ戻して確かめる。mapped/unparsedはrecord数で計算し、読めない記録も全source_members・coverage・既存SOURCE_SCOPEの表示へ残す。新しいgraph型/保存版/公開DTO/DB/RN/作者owner/HTTP routeは追加0。既存private単記録の保存identityは維持する。
+
+### Jupyterの実4B — 新2応答、合計5原記録
+
+前回のPod `n1c0emcf17xs0u`のJupyterへ直接接続した。公開済みrunner [11349815](https://github.com/MassyuRed/Cocolon/commit/11349815f0b1b86e8e8dc3fab6b5dd2c462352d7)と、公開APIの固定clean worktreeを使い、保存a2e/config006e・固定Qwen3.5-4B revision851bf6e・既存pin/loader/BF16/SDPA/greedy/非thinkingを継続した。追加学習0・新2生成/1load・再生成0、32.714190886秒/exit0。元adapter/configのSHAは不変。前版への同snapshot再読は0.167219492秒/exit0・0load/0生成。前版は両方とも取得前のscope拒否であり、前版が同rawを意味採用した比較ではない。
+
+| 独立合成snapshot | 原記録/非空field | 前5fd61b3f | 後95019062 |
+|---|---:|---|---|
+| MR01：仕事の受付係＋費用記録、別の生活記録の受付係否定 | 2記録/3field | scope拒否・model取得0・保存0 | raw3field保持、2記録ともmapped・3node/0edge、未読0・保存1 |
+| MR02：担当→決定、別記録の費用記録否定、さらに別記録の落ち着かなさ | 3記録/3field | scope拒否・model取得0・保存0 | modelは2fieldだけ返し第3fieldを欠落。全packetを422拒否・保存0 |
+
+MR01の肯定ROLEと費用のACTIONは「選択カテゴリ：仕事」、別recordの否定ROLEは「選択カテゴリ：生活」を保ち、相反する記述を同一機会の矛盾へ統合しない。場面・考え/注意・結果など不明な段階を残し、ROLEとACTIONの因果/順序を補わない。通常ensureの隔離mock RPC保存後、current/月次/ensure=Falseの本文・図・IDが生成禁止下で一致した。実SQLは別の独立合成responseで確認する。
+
+MR02は、出力field数2が入力3と一致しないため`analysis_quoted_parent_units_packet_invalid`の既存strict条件で拒否する。担当rootもACTION_OR_NONACTIONで、ROLEとの不一致が残る。空fieldを補造したり、出力された2件だけで保存したり、finite結果へ置換しない。新5記録を一般的に分析成功したとは数えず、新2組の保存は1組だけ。実sourceへの全履歴/本人補足適用や通常4B自動接続の完成ではない。
+
+### 検証・失敗を残した修正
+
+Jupyter：対象5suiteは292 PASS/9 SKIP・31.40秒。9件はSQL/WASM未設定で未実行とし、CIの隔離SQL検証と区別する。最終binding検査は7 PASS/42 deselected・3.04秒/exit0（最終22de881a、model再生成0）。
+
+最初の[CI41998532659](https://github.com/MassyuRed/mashos-api/actions/runs/41998532659)は1 FAIL/2225 PASS/旧SQL1 SKIP・12048 subtests/390.35秒。失敗は旧`test_model_response_and_owner_snapshot_binding_are_not_reassigned[multi_record]`が、2recordの新request/一致応答まで作った後で旧1record資格による拒否を期待していた1ケース。他のsource/owner/hash検査は保持する。最終22de881aでは同ケースを削除せず、元1recordの応答を残して第2recordだけ追加し、全snapshot identityが変わった後の古い応答流用拒否を確認するよう修正した。runtime sourceは変更せず、実4Bを再生成していない。
+
+最終[CI41999746016](https://github.com/MassyuRed/mashos-api/actions/runs/41999746016)、job127151672309はexact22de881aをcheckoutし全step success。生成/保存2226 PASS・旧model-fields SQL1 SKIP・12048 subtests/510.80秒、共有owner1 PASS/194 deselected/30.64秒、累積/Q3/API65 PASS・既存warning1・2 subtests/62.38秒。WASMを設定した累積工程では今回の実SQL2件も実行し、月次順位/不変再読/owner/削除のSQLは201原本・15月参照で成功した。旧SQL1 SKIPを実行済みへ加算しない。JupyterはPython3.12.3/FastAPI0.162.0/Pydantic2.14.1、CIはPython3.12.15/FastAPI0.142.2/Pydantic2.13.5であり、同一固定環境とは呼ばない。
+
+新しい独立合成SQLテストでは、3つの物理emotions行→全snapshot→1取得→保存/current/月次/read-only、正常な非先頭更新後のcurrent更新と当時月次の不変、応答取得中の非先頭source変更CAS409・artifact/月参照0を検査する。CPUでは2/201recordの保持、全7recordの混在・未読、同義ACTION/異カテゴリのfinite graph一致、kind不一致、後方record・guard・owner改変、安全sourceの取得前拒否、役割節への別recordの辺/gap混入拒否を検査する。機械検査を一般意味品質・本人端末・商品受入れへ換算しない。
+
+### 原本・ファイル地図・次の再開点
+
+[公開合成結果JSON](../observation_learning/trials/2026-11-01-analysis-model-fields/multi_record_results.json)は新5原文/保存した本文図・未対応理由と本文なし集計だけ。2raw・request/messages・元snapshot・RPC保存再読・実行logは[検証原本](https://chatgpt.com/library?file_id=libfile_7432631d4a208191986edd7225740abc&account_id=personal)へ保存。Pod回収原本100,756bytes/SHA256 `f2fa88e70f10c9e9fcab3e0266921f8ba159e389d761dc406ef3c9e9da76cce5`と全inner bytes/response bindingを照合した。Download eventはtimeoutしたが、実fileが同期済みと確認して再ダウンロードしなかった。
+
+API差分は既存`analysis_cumulative_service.py`、`cores/analysis/semantic_admission.py`、`intent_compiler.py`、`observed_route_realizer.py`の4ownerと、既存`test_analysis_cumulative_model_source.py`/`test_analysis_model_observed_actions.py`の2test。既存CIが両方を選ぶためworkflow追加0。trialの`multi_record_trial.py`/`multi_record_results.json`を索引に追加する。STRUCTURE_MAP_DELTA_PRESENT（既存consumerの複数原記録資格・根拠/coverage接続）。正式受入れは未判定。
+
+次は、MR02のfield欠落・担当kind不一致の品質不足と、適格本人補足を元記録の文脈/根拠のままmodelへ渡す未対応を扱う。通常HTTP/cronの明示provider、transport期限・重複推論抑止・採用重み、一般本人基準/判断理由・記録間の再出現/変化、IF/Saved/観測会/本人端末/配置は継続残件。完了した今回2生成を繰り返さず、既存不採用重みを自動採用しない。
+
+Render/本番DB/schema/RN/配置/Pod管理の変更0。既存Podレンタルは維持、新GPU/追加購入操作0。起動した4Bのprocessは終了し、最後のcompute-apps一覧は空だった。
