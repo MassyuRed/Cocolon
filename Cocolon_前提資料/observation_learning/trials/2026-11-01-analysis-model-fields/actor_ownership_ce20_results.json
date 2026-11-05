@@ -1,30 +1,86 @@
 {
   "schema_version": "cocolon.analysis_actor_ownership_ce20_summary.v1",
-  "status": "RUNNING_NOT_ADOPTED",
+  "status": "COMPLETE_NOT_ADOPTED",
+  "normal_adoption": false,
+  "next_training_initial_adoption": false,
   "api_commit": "4d744e36a093aac3ad157a448f06ef6be2be59cb",
   "runner_commit": "1b36f84c6a4dfe6d92f63802a0c9644a92a18a8f",
   "jupyter_root": "/workspace/analysis-actor-ownership-ce20-20261105",
   "source_pack_sha256": "30afde6a0735aac0b5f23e737b2b80c72e7dd65ba0cdbe4bc791886473f4bbf1",
   "new_pack_sha256": "48844581bd6a52799693b84b35612c0df380004178dbe3414152949299a54a25",
-  "initial_weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59",
-  "initial_config_sha256": "006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9",
-  "teachers": {
-    "new_independently_synthetic": 6,
-    "old_N01_N08_exact": 8,
-    "AP_OP_and_prompt_examples_excluded": true
+  "new_weights_sha256": "b7c00997edf7c4d14a0407e27cd1f7f488107d1b9cf60fec1a6c27210ba64c4c",
+  "new_config_sha256": "3195f9937f1ac082e816ef83a05c26f908f7eaa6977a41aad6a8994a0c5b8f0c",
+  "ce_updates": 20,
+  "nll_forwards": 28,
+  "ce_new_stops": 18,
+  "ce_model_loads": 3,
+  "ce_seconds": 556.5959703959525,
+  "nll_means": [
+    0.03802694457902232,
+    0.00403780197146781
+  ],
+  "old_N8_exact": true,
+  "raws_read": 24,
+  "raws_unchanged": 8,
+  "saved_before": 4,
+  "saved_after": 4,
+  "all_four_saved_projections_preserved": true,
+  "new_regression": "OP07 finite context mislabeled CONTENT_TARGET",
+  "ownership_transfer_unfixed": [
+    "AE01",
+    "AE02",
+    "AE03",
+    "OP03_v7"
+  ],
+  "candidate_replay": {
+    "cases": 24,
+    "success": 22,
+    "rejections_retained": 2,
+    "new_generation": 0,
+    "model_loads": 0,
+    "seconds": 2.9516817089170218
   },
-  "planned": {
-    "ce_updates": 20,
-    "nll_forwards": 28,
-    "new_generations": 18,
-    "model_loads": 3,
-    "max_seconds": 900
+  "tensor_audit": {
+    "tensors": 112,
+    "parameters": 3833856,
+    "changed_tensors": 112,
+    "all_finite": true,
+    "cpu_only": true,
+    "new_generation": 0,
+    "model_loads": 0
   },
-  "observed_checkpoint": {
-    "before_phase_exit": 0,
-    "training_updates_seen": 2
+  "seen_fit": {
+    "calls": 4,
+    "loads": 2,
+    "seconds": 47.679162967950106,
+    "OT03_exact_before": false,
+    "OT03_exact_after": true,
+    "OT06_ambiguous_before_after": true,
+    "training_seen_not_quality_rate": true
   },
-  "normal_adoption": false,
-  "next_training_initial_adoption": false,
-  "restart_completed_or_partial_root": false
+  "cpu_followup": {
+    "status": "COMPLETE_CPU_ONLY",
+    "old14_exact": true,
+    "independent_new_sources": 6,
+    "total_teachers": 20,
+    "new_training": 0,
+    "new_generation": 0,
+    "model_loads": 0,
+    "update_order": null,
+    "initial_adapter": null,
+    "first_divergence": "Re-tokenized saved raw vs gold at target token index34; not captured generation token logits."
+  },
+  "originals": {
+    "library_file_id": "libfile_ff44f49225988191b0e670be09d5b96a",
+    "archive_members": 54,
+    "manifest_members": 53,
+    "diagnostic_members": 19,
+    "cpu_members": 28,
+    "cpu_manifest_members": 27,
+    "archive_sha256": "191043f90089345baf9feb0bffd914783e91ef0ef289595981beff13bdfbf95a",
+    "all_crc_bytes_sha_verified": true
+  },
+  "new_public_raws": 0,
+  "normal_model_source": "selected_material.v4",
+  "ci_unchanged_success": 42052701621
 }
