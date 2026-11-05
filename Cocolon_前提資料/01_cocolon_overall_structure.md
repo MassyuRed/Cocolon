@@ -1,4 +1,4 @@
-> **11/5開始・分析の継続（第9回§207）：全record・全欄・本人補足と全量guardを保つoffline入力分割を追加。12計画/488実tokenizer測定で201件も欠落なく入力枠内へ分割し、54追加テストとCI全step成功。通常の全量モデル実行、出力2048/60秒期限の成立は未証明。主体/役割/本人基準・記録間意味の読み取り、通常採用・本番/端末は引き続き残件。** [全結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-cumulative-partition-budget-20261105)。
+> **11/5開始・分析の継続（第9回§208–209）：全sourceを保つprivate batch INPUTと全量一回の合成を実装し、201件の合成一致・新55テスト・CI全工程成功。実4Bにも全20件を3分割で送ったが、3stopとも先頭fieldしか返さず全体拒否、合成/保存0。全欄保持と通常の全量取得は未達。希望の取り込み境界は後続修正・確認中。通常採用・本番/端末未実施。** [結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-batch20-20261105)。
 
 > **11/1・7101本人確認済み（第9回§43）：** RN7464f858のiOS #71/run41283646380/job124780456306は署名Archive・写真目的文検査・IPA・TestFlight Uploadの全工程success。Mashが7101を反映し、今回依頼した修正の完了を確認した。起動待ち、Home全体行動削除、Ranking撤去、設定以外のガイド同期、新PieceのEmlisロゴを含む。こころ天気は今/日週月/履歴/未読/通知/tutorialを従来どおり維持。API3407402/dep-dbjebcflk1mc7390mnr0は07:11:03 UTC Live、health/bootstrap200・private5ON/public3OFF。API製品同一blobのd43cabcd native PostgreSQL CI41283815884は全step成功。RNの旧V4 metrics19失敗とlegacy canvas13reportは残る。依頼UIの本人確認を、全製品の品質/正式商品受入れへ広げない。GPU再起動0。
 
