@@ -4637,3 +4637,49 @@ APIは§199の4d744e36のまま、CI42052701621全工程successを継承。今�
 
 [本文なし実通信集計](../observation_learning/trials/2026-11-01-analysis-model-fields/explicit_v7_model_https_results.json)、[全原本/失敗/CI/新重み](https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal)。実行前のrunnerで一時TLS鍵permissionの置換誤りを0600へ修正し、修正後だけを実行した。実行・raw・保存内容を再試行で置き換えていない。既存transport内の明示profile拡張として地図を差分更新、owner/公開contractの追加0（STRUCTURE_MAP_DELTA_NONE）。通常v4・研究重み通常未採用・本番未有効化、Render/Supabase本番write・main merge・build・端末作業0。実環境はCodex Work/GPT-6と同環境の差分確認で、独立Pro受入れではない。
 
+<a id="analysis-actor-matrix6-20261105"></a>
+## 203. 11/5開始の継続 — 新対象・動詞で主体×肯否を切り分けた
+
+華恋の独立合成OM01–06は「僕の資料／印刷」を固定し、省略・明記SELF・明記OTHER×肯否を対照化。Mashの観測実演や一般held-outではない。旧22教師/N8/AT21/RU01の原source/target/messages/refを保ち、全28のstrict候補・保存非生成再読・実tokenizer/全mask/終端をCPU確認（2.259987304秒、load/生成/学習0）。新6を学習していない。
+
+その固定6入力をa2eと6c879へ各1回。API4d744e36、runner9e048faa/SHA7d94a9a9、新12stop/2load/学習0・103.331578719秒、両phase exit0。主体qualifierの原文対応は、この6例で2→5件：OM01/02の所有者主体化が消え、OM04は一意な「僕は」へ改善。OM03の裸の重複「僕」は同rawで拒否を維持。他者「兄」は肯否とも前後保持、root/対象も全12で保持。否定3例の「しなかった」は一意な原文の否定句で、gold「なかった」とJSONが違うだけで否定誤読には数えない。完全gold JSON1→2を意味率にしない。
+
+印刷は既存finite map動詞の対象外で、実行前にその制限を確認しrunner/reportへ固定した。map保存0→0は想定範囲で、意味改善の失敗やOTHER防御だけの成功へ換算しない。候補4→5保持、曖昧引用の拒否2→1、raw3組同一/3組変化。12応答を0モデルで同request/responseと候補graph/text/diagramまで再読。保存mapがないためcurrent/月次/readonlyのmap分岐は今回未実行。過去§201–202の保存再読証明と区別する。
+
+初期/候補/元教師/sourceは前後不変、通常・次初期未採用。終了直後2MiB/36％のサンプルは稼働windowを含む観測値で、後続のfresh idleを別確認する。CPU原本38member/37manifest、比較52member/51manifestをCRC/全SHA照合。[集計](../observation_learning/trials/2026-11-01-analysis-model-fields/actor_ownership_matrix6_results.json)、[全原本・全読](https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal)。
+
+<a id="analysis-actor-metadata4-20261105"></a>
+## 204. 11/5開始の継続 — 同じ否定文の時刻×感情詳細4条件を再現
+
+AE02とVH03の実モデルmessagesを比較するとsystem/本文/field/記録時刻/カテゴリ/感情名は同一で、差はanalysis_as_ofとemotion_detailsだけだった。既存全原本のSHAを固定し、両因子を2×2で交差。旧rawを新requestへ再束縛せず、全4条件を6c879で新規に一度ずつ生成した。モデルだけの診断でAPI/DB/意味保存は行っていない。
+
+runnerbda73645/SHAe19d74a1、API4d744e36、新4stop/1load/学習0・35.652107498秒/exit0（全体120秒、各23秒上限）。旧時刻/詳細なし、旧時刻/詳細あり、新時刻/詳細なしのMETA00/01/10は同一rawで誤actor「私」を含み、新時刻/詳細ありのMETA11だけ誤actorが消えた。否定/対象/root/親対応は全4同一。META00は以前のAE02、META11は以前のVH03のraw bytesを新規生成で再現した。
+
+これは既知1文の一回ずつの4条件であり、一般の因子効果・モデル内部原因・決定性の証明ではない。時刻だけ/感情詳細だけで直ったとは言わず、付帯情報削除や成功まで再試行する根拠にしない。読み取り安定性の残件として保持し、通常採用は保留。9member/8manifestと元sourceコピーを全SHA確認。[集計](../observation_learning/trials/2026-11-01-analysis-model-fields/actor_ownership_metadata4_results.json)、[全4raw・全読・条件原本](https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal)。
+
+<a id="analysis-history-comparison-recovery-20261105"></a>
+## 205. 11/5開始の継続 — 現在マップの通信失敗で月次履歴まで消える不具合を修正
+
+既存CumulativeWatashiMapViewは月次履歴を正しく取得しても、比較用currentの503/504等を外側catchへ渡し、取得済みの履歴まで消していた。RN既存2path（componentとanalysis-cumulative-map.test.js）だけを修正。履歴自身をその都度検証したうえで、比較先のHTTP5xx/timeout/network失敗だけ履歴を表示し、比較できない案内と既存「再取得」を使う。自動retryや認証失敗の握り潰しは追加していない。
+
+401/403、本人変更、不正DTOは従来のerror/消去へ進む。key/owner/seqの取消を保持し、古い本人の遅延失敗で履歴を復活させない。修正前sourceへ同回帰を当てると履歴消失で1 FAIL。修正後は実React rendererの既存suite11 PASS/0 SKIP・4.015239192秒。503/504/timeout/network後の履歴保持→明示再取得で比較回復、認証/DTO/本人境界を確認した。test依存は一時領域のみで商品package変更0。
+
+source2efdc782、testsea429f47をGitHub反映。実機/build/配布は未実施。API/DTO/DB/意味型/作者は変更していない（既存RN owner内、STRUCTURE_MAP_DELTA_NONE）。[結果とハッシュ](../validation/2026-11-05-analysis-history-comparison/results.json)、[修正前後log](https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal)。
+
+<a id="analysis-cumulative-token-budget-20261105"></a>
+## 206. 11/5開始の継続 — 全履歴取得と一回のモデル入力上限を分けて実測
+
+全履歴SQL201件や月次保存の検証済み事実を継承する一方、現在のモデル要求は全recordを一回へ束ねている。旧資料でも全量分割は残件だったため、実コードのsource_snapshot(count)で独立した全1/20/50/100/201件の短文fixtureを作り、v4/v7の実tokenizerとhttpx JSON本文を測定した。削減/切断/モデルload/生成/学習/API/DB通信0。API db311746、runnerbd9a9183/SHA66821dc7、9.381645083秒で完走、全ID/全欄/原fixture/source SHAを保持。
+
+| 全record数 | v4入力＋2048 | v7入力＋2048 | v4本文bytes | v7本文bytes |
+|---|---:|---:|---:|---:|
+| 1 | 4724 | 5786 | 12616 | 17772 |
+| 20 | 6649 | 7711 | 20203 | 25359 |
+| 50 | 9739 | 10801 | 32233 | 37389 |
+| 100 | 14893 | 15955 | 52287 | 57443 |
+| 201 | 25700 | 26762 | 93192 | 98348 |
+
+固定generatorは入力＋2048>8192を拒否し、検証serverの本文上限は65536bytes。今回の50/100/201 fixtureは入力枠を超え、201は本文枠も超える。件数だけの一般上限を定めた結果ではなく、本文長・欄・補足ごとの実測が必要。全履歴取得/typed保存の成功を、全履歴4B処理の成功へ広げない。
+
+次の実装はモデルを呼ばない、完全recordと本人補足を保つ入力予算分割planner。通常ensure/HTTP/Response/保存契約は変えず、まず全量parentと全childの過不足・scope・予算を確認する。旧Response rawの連結・field番号の意味的書換え・最新Nへの黙示削減はしない。実通信統合は別private batch envelopeと全量guardでの一回commit、既存60秒論理期限/単一生成lock、出力2048上限を解決する必要があり、CPU分割だけで全履歴分析の完了とは呼ばない。[測定原本/集計](../observation_learning/trials/2026-11-01-analysis-model-fields/cumulative_model_token_budget_results.json)、[全原本](https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal)。
+
