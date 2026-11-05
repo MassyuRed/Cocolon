@@ -3334,3 +3334,15 @@ selected_material.v4はselected_material.v3と同じ入力文脈/適格補足条
 
 
 11/3 material.v4結果補足：最終API ded0586の有限suru否定修復は既存typed witnessの正しい原表現受理だけで、ROLE/ACTION保存schemaやidentityは不変。元2typed保存と7candidate保存を実bytes同一確認し、raw/responseを生成なしで3typedへ再読。新material.v4を通常既定へ採用せず、旧6版のmessages/ref/state bytesも保持。
+
+
+<a id="analysis-written-role-clause-20261105"></a>
+## 11/5 — 先頭の明記役割節を部分根拠で渡すprivate保存版
+
+API c033bd4。既存Input/Response/ObservedGraph型を共有し、既存build/serialize/reload_cumulative_written_role_mapへ明示clause=Trueを追加。with_actionとの同時選択・bool以外を拒否。旧既定clause=FalseのROLE v1/ROLE_ACTION v1のschema/ID/採否は保持。
+
+限定条件は原入力1件・category context1・memoだけ1欄・補足/比較なし、先頭の全文SELF過去役割節＋独立した既存過去行動1文。後半はSELF明記でも省略でも未読に保持し、行動node/edge/選択基準を作らない。開いた発話/引用/推測/継続/撤回等を役割の外へ飛び越さない。role_state=WRITTEN_PAST_ROLE_CLAUSE、actor=SELF、role nominal/copula/肯否/時点は先頭の原文から検査。部分scalar/UTF-8/literal hashに対し、field_sha256とfield_utf8_start/endは元欄全体のまま。
+
+state=`cocolon.cmee.analysis_model_written_role_clause_state.v1`、file=`cocolon.cmee.cumulative_written_role_clause_file.v1`、artifact namespace=`analysis_model_written_role_clause.v1`。既存exact root shapeを共有し新版を旧版へラベル交換しない。coverageはsource1/processed1/mapped1/unparsed1/excluded0/stale0。role以外の4段＋SOURCE_SCOPEをgapに保持。保存readerは原response・全messages/ref/hashと保存graph/文章/図を検査復元し、Engine/各compiler/各作者を呼ばない。
+
+新dataclass/公開wire/DB/RN/通常ensureの変更0。新版は明示offline経路のみ。[実原本/検証/残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-written-role-clause-result-20261105)。STRUCTURE_MAP_DELTA_PRESENT、商品credit0、正式Product Read未実施。

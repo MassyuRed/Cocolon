@@ -1,4 +1,4 @@
-> **11/5・分析の最新（第9回§180）：** 既存16＋原90からの再利用4＋独立作成4の24教材を、保存7ba4から24更新/48測定/38新stopで比較。旧19のgraph・文章・図とRU02/AT4の教師一致を保持したが、新4教材自身の理由/行動の所属は未再現で、未学習QF4の残件も未解消。新27e9は通常/次初期値へ不採用・閉鎖。[全結果/次残件](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v5-composition24-result-20261105)。新教示CP4とheld QF4を分離。原文外quote1拒否とSC01の否定引用範囲の後退を保持。通常finite五種/限定typedの区別、通常接続と残scopeの意味保存等は残件。STRUCTURE_MAP_DELTA_NONE。
+> **11/5・分析の最新（第9回§184）：保存済み4Bの明記役割節を、同じ欄の後半と分けて既存graph・文章・図へ渡す限定経路を実装。後半はSOURCE_SCOPE/unparsed1、主体・行動・関係を補わない。元v4応答22件照合、旧候補20/旧typed14保持・非生成再読、Jupyter839成功。API c033bd4、通常4B接続/配置/本人端末は未実施。一般役割・判断/選択・記録間・IF/Savedは残件。GPU処理0、STRUCTURE_MAP_DELTA_PRESENT、product_credit0。** [全結果](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-written-role-clause-result-20261105)。
 
 > **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
@@ -3451,3 +3451,17 @@ API dc05dc35、通常product owner追加なし。既存 `semantic_admission.py` 
 ### 11/5 — 閉じた発話に隣接する本人行動の取りこぼし修正
 
 APIの既存intent_compiler.pyで、単一の閉じた肯定過去発話の外に直接隣接するSELF過去行動だけを採用し、引用内容は既存SOURCE_SCOPEへ残す。元source/座標/順序根拠と既存作者/公開wireを保持。新ai/tests/test_analysis_closed_quote_self_action.pyを既存Analysis CIへ接続。owner/商品型/DB/RN追加0、STRUCTURE_MAP_DELTA_PRESENT（意味採用範囲の限定修正）。API0dd31ce7、Jupyter495成功・実4対照、配置未実施。[結果と限界](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-closed-quote-self-result-20261105)。
+
+
+### 11/5 — 明記役割節と後半未読を分ける既存ownerの差分
+
+| mashos-api のpath | 責務の差分 |
+|---|---|
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | 元fieldの全文hash/boundsを保持した、先頭SELF過去役割節の部分根拠とSOURCE_SCOPE。後半の行動は採用しない |
+| 同階層 `semantic_admission.py` | 明示clause=Trueの既存Input/Response検査・別state/identity・保存非生成再読 |
+| 同階層 `observed_route_realizer.py` | 元category recordを再freezeして節の根拠を照合し、既存文章/図へ表示 |
+| `ai/services/ai_inference/analysis_cumulative_service.py` | 既存build/serialize/reloadの明示clause選択、mapped1/unparsed1の併存 |
+| `ai/tests/test_analysis_model_role_clause.py` | 公開合成66ケース。原本4B rawを教師へ転記しない |
+| `.github/workflows/analysis-observed-content.yml` | 既存CIに新/旧モデル経路回帰を登録し、pytest基点をcheckoutに固定 |
+
+入力型/graph型/商品owner追加0。private role_stateとstate/file/identityの限定版はschema owner05に追記。公開DTO/HTTP/DB/RN/通常ensure不変。[結果・限界](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-written-role-clause-result-20261105)。

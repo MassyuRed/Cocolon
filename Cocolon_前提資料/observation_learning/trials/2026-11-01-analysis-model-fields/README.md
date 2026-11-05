@@ -2083,3 +2083,11 @@ API source版be2281fの[Analysis CI41960307453](https://github.com/MassyuRed/mas
 今回の有限な取りこぼし修正と、4Bが混在入力を本人の基準で読む品質/typed意味採用は別。通常4B接続、暗黙の役割・判断・選択、補足typed、記録間再出現/変化、IF/Saved、分析観測会は残件。§182等の不採用重み・完了GPUrunを復活させない。次は既存material→typed意味ownerで、他者発話・本人の思考内容・独立行動を混同せず、未読scopeを保つ混在unit採用の不足を進める。今回の変更の配置・本人端末一巡は別の未実施工程として保持する。
 
 実行はGPT-6/Codex Work、root単一writer/実行/最終判断＋同環境read-only補助であり、独立Pro/Ultra/Mash Product Readではない。構造差分は既存finite採用条件と新回帰testの接続だけ。GPU model load/forward/学習/新生成0、既存Podレンタル維持。APIの通常sourceをGitHubへ反映したが、Render/Supabase/実DB/RN/配置/Pod管理の変更0。
+
+
+<a id="analysis-written-role-clause-result-20261105"></a>
+## 148. 11/5 — 明記役割節と後半未読の限定接続
+
+API c033bd4、既存4owner＋新合成66ケース＋既存CIの6pathを変更。元material.v4のR08 request/messages/ref/response/rawを改変せず、先頭ROLE1件を既存文章/図へ渡し、残りはSOURCE_SCOPE/unparsed1・edge0に保持。旧既定は拒否のまま、新clause=Trueだけ別state/file/identityを使う。旧候補20/typed14の保存内容・非生成再読を保持し、通常4B/HTTP/DB/RN/ensureへ有効化しない。
+
+Jupyter839 PASS・1 SKIP・1 deselected・11,176 subtests PASS、pytest121.92秒/exit0。実原本22応答を照合し新R08 saved readも生成禁止下で一致。CPUのfixture/pytest基点/metadata修正と残件、private原本、CIの最終状態は[最新weekly§184](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-written-role-clause-result-20261105)。[公開結果JSON](analysis_role_clause_results.json)は独立作成合成3例と本文なし実集計のみ、実4B本文/rawはprivate保存。GPU0、配置未実施、STRUCTURE_MAP_DELTA_PRESENT、商品credit0。

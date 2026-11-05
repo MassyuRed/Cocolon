@@ -1,3 +1,5 @@
+> 2026-11-05 最新差分：分析の明記本人役割節を、元4B応答・全文field bindingを保持して既存mapへ渡す限定private経路を接続。後半はSOURCE_SCOPE、旧候補20/typed14を保持・非生成再読。API c033bd4、Jupyter839成功。新private role_state/state/file/identityを05へ追記、型/公開DTO/DB/RN/通常ensure不変。全pathは01B末尾、実物/検証/原本/残件はweekly§184。STRUCTURE_MAP_DELTA_PRESENT、商品credit0、GPU0、配置未実施。
+
 > **2026-11-05・分析残件の今回差分（第9回§183）：** Mashの継続指示で、閉じた発話に直接隣接する本人過去行動を落とす既存finite処理を修正。API0dd31ce750e5f1c925053ca6d44ec643ba905df1（compiler/test/既存CIの3path）、Jupyter495成功・同4sourceの前後文章/図を確認。引用はSOURCE_SCOPE保持、配置/実DB/本人端末未実施。通常4B・一般役割/選択/記録間/IF・Savedは残件。全体currentは[00](00_cocolon_current_product_and_state.md)、今回の詳細は[最新weekly§183](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-closed-quote-self-result-20261105)。この追記で下記historical authorityや古い状態をcurrentへ戻さない。
 
 > **2026-10-20 最新方針：学習済み言語能力＋Mashの観測技術の学習へ。応答と問いを一体に、CMEE資産を継承する。具体モデル・費用・配置・学習は未決／未着手。[会話と決定](weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261020-observation-learning)を参照。**

@@ -3928,3 +3928,32 @@ API source版be2281fの[Analysis CI41960307453](https://github.com/MassyuRed/mas
 今回の有限な取りこぼし修正と、4Bが混在入力を本人の基準で読む品質/typed意味採用は別。通常4B接続、暗黙の役割・判断・選択、補足typed、記録間再出現/変化、IF/Saved、分析観測会は残件。§182等の不採用重み・完了GPUrunを復活させない。次は既存material→typed意味ownerで、他者発話・本人の思考内容・独立行動を混同せず、未読scopeを保つ混在unit採用の不足を進める。今回の変更の配置・本人端末一巡は別の未実施工程として保持する。
 
 実行はGPT-6/Codex Work、root単一writer/実行/最終判断＋同環境read-only補助であり、独立Pro/Ultra/Mash Product Readではない。構造差分は既存finite採用条件と新回帰testの接続だけ。GPU model load/forward/学習/新生成0、既存Podレンタル維持。APIの通常sourceをGitHubへ反映したが、Render/Supabase/実DB/RN/配置/Pod管理の変更0。
+
+
+<a id="analysis-written-role-clause-result-20261105"></a>
+## 184. 11/5 — 保存済み4Bの明記役割節を既存文章・図へ渡す
+
+**限定private経路の実装・原本再読まで完了。通常4B有効化・配置・本人端末・商品受入れは未実施。product_credit0。** §183の次残件のうち、4Bが正しい役割を返していても同じ欄に別文があるため全体をtypedへ渡せない箇所を、既存4ownerで修正した。モデルrawの補修・新しいモデル生成/学習は行っていない。
+
+### 実物と限定範囲
+
+元material.v4試行のR08は、先頭の明記本人役割と、後半の主体を明記しない記述を別unitに返していた。全request/messages/ref・response/raw/hashを元packと照合し、同じ応答を使用。旧既定はscope unsupported、新しい明示clause=Trueでは**SELFの過去ROLE1件＋SOURCE_SCOPE・mapped1/unparsed1・edge0**となり、文章と図へ表示できた。後半から本人の行動・判断・役割との関係を作らない。scopeを保った限定採用であり、通常の暗黙役割読解・記録間接続の完成ではない。
+
+原入力1件・category文脈・memo1欄・先頭の明記SELF役割と独立した既存過去行動1文に限定。後半のSELF明記も省略も未読のまま。引用/開いた発話/推測/撤回/追加文等は拒否し、カテゴリだけから役割を作らない。節のscalar/UTF-8/literalを保持し、field hashと境界は欄全体から切り詰めない。元record/版/owner/期間を保持する。
+
+旧ROLE v1・ROLE_ACTION v1の既定/schema/IDを維持し、新しい明示選択は別private role_state/state/file/identityで区別した。型・商品owner・公開DTO/HTTP/DB/RN/通常ensureは増やさない。詳細契約はschema owner05末尾、全変更pathは01B末尾。API [c033bd4](https://github.com/MassyuRed/mashos-api/commit/c033bd4eee35b81157d781501cb1ea41dd9f848c)、変更6pathのGit blobとJupyterで検証した4source/新testのSHAを照合済み。
+
+### 検証・回収
+
+- 保存済みmaterial.v4応答22件を全messages/ref/raw/hashで照合。旧候補20件・旧typed14件の保存値を保持し、Engine/各compiler/各作者を禁止して20＋14を非生成再読。新R08の実fileも同条件で文章/図/graph/coverage一致。原本再読2.699223秒。
+- Jupyter最終一回は839 PASS、1 SKIP、1 deselected、11,176 subtests PASS、pytest121.92秒（親122.637495秒）、exit0。新66ケース、旧モデル各経路、finite vertical、前回閉発話、累積保存を確認。skipはPostgreSQL WASM未設定の1件、deselectはPodにhelperのないQ3 SQL連携1件で、GitHubの完全checkoutによる[CI41967491270](https://github.com/MassyuRed/mashos-api/actions/runs/41967491270)・job127047760580では全step成功。generation/保存再読、shared owner、合成本文、累積API/Q3/既存job、月次順位・不変再読・削除SQLまで確認した。CIのgeneration/保存段は1,996 PASS/1 SKIP・12,048 subtests PASS（311.72秒）、shared owner1 PASS、累積API/Q3/既存jobは24 PASS・既存warning1（18.57秒）、月次SQL成功。最初の段の旧model-fields SQL1件はWASM未設定でSKIPのままで、後段のSQL成功と同じ検証だとはしない。CIは隔離PostgreSQL WASMであり実Supabase DBではない。
+- 最終公開合成3例の原文/graph/文章/図/coverageと本文なしの実結果を[結果JSON](../observation_learning/trials/2026-11-01-analysis-model-fields/analysis_role_clause_results.json)に保存。21,862bytes・SHA256 6e0e42b67e0e4834014c803d1edf743790860cdc3fcce37ecfefd97176abb48c。privateな実4B原文/raw/stateはGitHubへ載せない。
+- [私有の実原本](https://chatgpt.com/library?file_id=libfile_0fc9036ff5c48191873afc1cbbd3f806&account_id=personal)は384,056bytes・SHA256 b10c75690673cd28e8a4e14712a6f7fde2740cbe99e4766510544ffaed4dadcd。元v4全archiveを参照し、今回のR08 request/response/raw・元snapshot・新state/graph/文章/図・検証ログを保存。追加重みなし。
+
+初回の合成fixtureは未対応の他者主語を成功期待に入れ31失敗/34成功となった。意味条件は緩めずfixtureを既存文法内へ修正した。次の一括pytestは/dev基点のmodule IDに既存autouse fixtureが波及し495 setup error、Q3 helper不足2失敗/2skip。既存workflowに--rootdir=.を追加して混線を修正し、Podの対象外SQL1件を分離した。検証後metadataの相対path誤りも集計だけ修正。失敗ログを私有原本に保持し、成功数へ加算しない。Podの既存source相違も検出したためGitHub0ddの4ownerを取り直し、末尾改行を含めGit blobへ整合してからbefore/afterを分離。対象外のPiece5ファイル差を今回のAnalysis修正に混ぜていない。
+
+### 次の残件
+
+今回の明記役割節と残scopeの扱いを、一般の役割・選択・本人基準へ拡張したとはしない。通常4B接続、思考内容/他者発話/独立行動の混在意味採用、補足typed、記録間再出現/変化、IF/Saved、分析観測会は残件。通常採用しないc522等の旧判断を維持。次は既存unit→typed ownerで、実際に正しく分離された独立本人行動を、思考の対象や他者発話と混同せず残scope付きで渡す不足へ続く。新しい学習比較を自動選択しない。
+
+実行はGPT-6/Codex Work、root単一writer＋同環境read-only補助。Mash/独立Pro/Ultra Product Readではない。GPU load/forward/学習/新生成0、既存Podレンタル維持。Render/Supabase/実DB/RN/配置/Pod管理は変更0。STRUCTURE_MAP_DELTA_PRESENT（既存ownerの明示private意味/保存版）、商品credit0。
