@@ -4852,3 +4852,26 @@ context8192／出力予約2048／本文65536を緩めず準備した。実runは
 原試行ZIPは35,593bytes／SHAc3bb20aeb7a49bc23007f3cd8fe1cbe8c83a434edb5617f70b48d84e4ecbe4c4、15member／全14manifestのbytes・SHA／CRCを照合。[非公開原本](https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal)のversion6へ失敗・未返却・旧原本・review・CIを保存済み（31,354,573bytes、SHAb29b669a0fc181bcf27bfa6fb5e6e6ba57ee9ae09aabd136d7afb31e53d5cc2f）。raw／本文／人物を公開集計へ出さない。private profile／ref／state variantの追加としてSTRUCTURE_MAP_DELTA_PRESENT。通常transport／planner／batch選択、意味型／作者／公開DTO／DB／RN／配置／buildの追加変更0。通常既定v4・重み通常未採用・本番未有効化、一般本人基準・暗黙役割・記録間意味・実全欄出力／通常全量取得の残件を保持する。
 
 [本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/v8_fieldcount_results.json)。
+
+<a id="analysis-negative-wish-consumer-20261105"></a>
+## 213. 11/5開始の継続 — 否定を全文で保つ希望を元graphへ接続
+
+§210のWH04について、元rootに否定が残ることと、NEGATION注釈がないことを切り分けた。旧consumerは肯定wishだけを許すため、元sourceがSELF／negative／wish／current_inputを完全証明できても未対応になっていた。今回の原因は否定の意味欠落ではなく、そのconsumerの肯定限定である。§210の注釈不足という記載を、この同一応答比較で具体化する。
+
+API [5c9606507d296adfe69fe0350c84a5d5deab585b](https://github.com/MassyuRed/mashos-api/commit/5c9606507d296adfe69fe0350c84a5d5deab585b)は既存intent_compiler.pyとtest_analysis_model_observed_actions.pyの2pathだけ。狭い原memoのplain wish proof内で、元sourceが明記SELFの否定希望current_input／pastを完全証明し、元model rootの全文引用にも否定が残る場合を接続する。NEGATION qualifierがなくても否定を保った元graphを返し、raw修復・注釈追加・誤kind付替えをしない。既存9動詞・一原record／一原source／原memo一欄・全文根拠／unit照合の境界を保つ。このwish proofに併存させるACTIONは従来の肯定過去factのみで、別の既存ACTION経路を変更していない。
+
+shared checker／有限文法／作者は不変。引用末尾の否定削除・誤kind・偽actor／NEGATION、OTHER／主体省略・認知・可能性・順序・未読scope・別欄／補足を新たに通さない。v4/v7・現在／過去・単独／肯定過去行動併存・NEG注釈あり／なしの元graph／文章一致とraw不変、保存reader内のcompiler／作者禁止を既存testへ追加した。
+
+Jupyterの対象241 PASS／67.00秒。最終CI [42109915846](https://github.com/MassyuRed/mashos-api/actions/runs/42109915846)/job127534442954は全step success：生成／保存2386 PASS・既存SQL依存1 SKIP・12048subtests／379.76秒、共有owner1 PASS／25.35秒、累積／API／jobs302 PASS・既存warning1・2subtests／155.08秒、隔離SQL201原本／15月参照。保存回帰は隔離mock RPCで、次の旧実4B原応答を今回DB保存した結果ではない。
+
+### 同じ実4B原応答4件を0モデルで旧新版再読
+
+元fc756で生成済みの4Responseを、旧100c1bbと新5c9606へそれぞれ一度ずつCPU再読した。最初のharnessは保存JSONのlistとin-memoryのtuple等を直接比較し、WH02を誤って不一致とした。商品source／raw／拒否条件を変えず、比較1点だけを順序付きcanonical JSON表現へ修正した（研究script SHA991f7082643666eb89230aedf3d574d0618a588d425cdf79d2d1052ef3e64b70、Cocolon checkpoint28c7345d4395bb68b0c7a866345f78288794ed3d）。失敗rootとlogも保持し、商品退行や実モデル再生成として数えない。
+
+新fresh replay2は旧1.2956920014694333秒／新1.3430801378563046秒、各4Response・model load／生成／学習0、guard違反0。原request／messages／source／guardと元Responseを保ち、WH01の誤kindとWH03の主体省略は旧新ともUNSUPPORTEDを維持した。WH02の肯定past希望はgraph・文章・図・coverageがcanonical一致し、図と文章のprojection_ofだけは新規artifact UUID参照として除外した。
+
+WH04だけがNoneからSELF／negative／wish／current_inputの1nodeへ変わり、「仕事を続けることを望まない」を文章と図に保持した。否定を肯定に変えず、希望を実行済みや拒否行動の事実へ変えていない。元rawにNEGを足したり、モデルを再実行したりせず、DB保存は0。4構成の局所consumer接続差であり、一般の否定理解・日本語品質・通常モデル採用の証明ではない。
+
+旧新版4replayのZIPを回収し、各22member／21manifestのbytes・SHAとCRCを照合した。同一[非公開原本](https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal)のversion7へ追加保存済み（31,822,535bytes、SHAd7dd58732f847f40d16e9274b0c14ad5721be874030443270c6425b1bdff0b11）。原raw・本文・人物・重みを公開GitHubへ置かない。既存sourceの否定希望を既存consumerへつなぐ限定修正としてSTRUCTURE_MAP_DELTA_NONE。通常constructor／既定v4／planner／batch選択、意味型／作者／公開DTO／DB／RN／配置／buildの追加変更0。通常重み未採用・本番未有効化、全欄出力／通常全量取得・本人基準・暗黙役割・記録間意味の残件を保持する。
+
+[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/negative_wish_results.json)。
