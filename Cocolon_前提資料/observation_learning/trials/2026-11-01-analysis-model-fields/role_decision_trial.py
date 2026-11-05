@@ -170,7 +170,7 @@ def main():
     finally:
         report.update(seconds=time.monotonic()-started,
             saved=sum(x['status']=='SAVED' for x in report['cases']),
-            two_nodes=sum(len(x.get('result',{}).get('meta',{}).get('nodes',[]))==2 for x in report['cases']))
+            two_nodes=sum(len((x.get('result',{}).get('meta') or {}).get('nodes',[]))==2 for x in report['cases']))
         write(root/(mode+'.json'),report)
         if generator is not None:
             del generator;gc.collect()
