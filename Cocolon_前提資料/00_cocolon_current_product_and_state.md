@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-**11/5・分析の最新（第9回§182）：** 同24教材/研究初期7ba4で理由末尾・発話/内容pairへ追加lossを与える一回を24更新/48測定/38新stop・715.927444秒で完了。CP02重複親とCP04発話帰属は直らず、CP03独立行動とOA01否定注記範囲に退行。旧19graph・文章・図/5教師一致は保持するが、新c522は通常/次初期へ不採用。通常EngineのCPU対照で、本人行動単文は生成、閉じた他者発話を前置すると同本人節も未成立になる境界を確認。[全結果・原本・次残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-material-v5-component2-result-20261105)。次は追加係数学習を反復せず既存意味/保存ownerの帰属・残scope条件へ戻る。通常4B接続/本人基準/補足/記録間/IF・Savedは残件、product_credit0、通常API/DB/RN/配置不変、GPU終了・レンタル維持。
+**11/5・分析の最新（第9回§183）：既存finite処理で、単一の閉じた肯定過去発話に直接隣接する、全文SELF過去行動を取りこぼす箇所を修正。引用内容は未読のSOURCE_SCOPEへ残し、主体・原文根拠・既存文章/図を保持する。同じ4入力でnode数[1,0,0,0]→[1,1,1,2]、既存単文のgraph保持。最終495件/失敗0/skip0、保存wire非生成再読と補足/訂正も確認。API0dd31ce7へ反映済み、配置/実DB/本人端末は未実施。4Bの通常採用・本人基準/役割/判断/選択・記録間・IF/Savedは残件。新重みc522等の不採用を維持し、今回GPU処理0。STRUCTURE_MAP_DELTA_PRESENT（既存finite意味採用の限定修正）、product_credit0。** [全結果・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-closed-quote-self-result-20261105)。
 
 **11/3・分析の最新結果（第9回§100–102）：** 74教師監査後、旧74不変＋原文対照2を76教師/90更新/152NLL/50新stop/2load・641.971830秒/exit0で比較。NV04の結果重複/不明の親不正を改善し、R4/T4/追加本人2の10ROLE文章図を前後bytes同一で保持。50rawは46同一/4変化、HQ04理由誤分類は残りR08肯定過去copulaに誤modifier再発。strict候補47→49は意味率ではない。100保存非生成再読/元532memberの全bytes-SHAを確認・新重み9dcを保全、通常/次初期値は未採用。[結果・原本・再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-reason-unknown76-result-20261103)。全対象分離は現行必須でなく、次は理由の述語/不明併存差と複数文copula保持をCPUで切分け。通常HTTP/DB/RN/配置不変、本人基準/記録間関係/通常累積接続は未完。GPUレンタル維持、STRUCTURE_MAP_DELTA_NONE。
 

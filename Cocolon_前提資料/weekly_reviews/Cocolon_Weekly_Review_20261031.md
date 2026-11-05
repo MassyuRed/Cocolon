@@ -3887,3 +3887,44 @@ CPU15.962918秒/model load・forward0、24更新/48測定/112tensor保存照合/
 次は同じ24更新/係数追加を反復せず、既存intent_compiler._fragment/semantic_admissionと保存ownerで、閉じた他者発話後の本人節の主体・全文帰属・残scopeを維持してObservedPropositionへ渡す最小差分条件を具体化する。引用guardを単に削除しない。通常typedは明記ROLE/ROLE＋ACTIONの限定scopeのままで、CP/QFのtyped拒否は今回の意味誤り検出の証拠ではない。通常ensureの4B接続、本人基準/役割・判断・選択、補足typed、記録間再出現/変化、混在source帰属/残scope、IF/Saved、分析観測会は残件。
 
 GPUは回収時2MiB、最終確認170MiB、いずれも利用率0%・compute空、Podレンタル維持。前表示.29USD/hによるrun参考按分約.057671933USD、準備/回収/待機保持/通信保存/税等別・実総請求未測定。通常source/型/意味gate/compiler/唯一作者/HTTP/DTO/DB/RN/Render/Supabase/配置/Pod管理の変更0、STRUCTURE_MAP_DELTA_NONE。実環境GPT-6/Codex Work、root単一writer/実行/最終判断＋同環境read-only補助であり、独立Pro/Ultra/Mash Product Readではない。新c522は研究保全し、完了runを再起動しない。
+
+
+<a id="analysis-closed-quote-self-result-20261105"></a>
+## 183. 11/5 — 閉じた発話の外の本人行動を既存文章/図へ復旧
+
+**既存処理の実装修正と実文章/図まで確認。primary＝TECHNICAL_CREDIT、product_credit0、配置・本人端末未確認。** §182のCPU対照で実測した、他者発話があるfieldから本人行動も全て落ちる箇所を、既存intent_compiler内で修正した。4B追加学習・係数比較を繰り返す作業ではない。
+
+### 修正範囲と実物
+
+API [0dd31ce7](https://github.com/MassyuRed/mashos-api/commit/0dd31ce750e5f1c925053ca6d44ec643ba905df1)（source本体はbe2281fと同一）。対象は既存intent_compiler.pyの意味採用、回帰test_analysis_closed_quote_self_action.py、既存CI analysis-observed-content.ymlの同test登録の3path。新しい商品型、作者、公開wire、DB/RN、外部service、依存追加は0。
+
+例外は、既存話者文法で証明できる単一・非入れ子の「引用」＋肯定過去発話、そのすぐ外に直接隣接する全文SELFの既存過去行動に限定する。肯定/否定行動を保持するが、ROLE/希望/感情/主体省略/複数引用/離れた本人節へ拡張しない。scope検査専用の等長viewだけを使い、元source・proposition・原文座標・順序の根拠は書き換えない。開いた発話、現在/否定/継続発話、入れ子、後続の否定/撤回・不明な中間文、別fieldや先行open reportは元の拒否条件を保持する。
+
+引用部分にshared nucleusがなくても、既存SOURCE_SCOPEへ未読を計上する。補足の完全解釈や訂正対象の根拠を緩めず、引用内容を本人の実行事実にしない。二行動の新対照は明示順序語なしでedge0を確認したもので、一般の明示順序遮断の新証明へ広げない。順序判定は既存の元sourceのまま、既存回帰も保持する。
+
+| 同一の公開合成入力 | 修正前 | 修正後 |
+|---|---|---|
+| 本人行動の単文 | SELF行動1件 | 同じgraph・文章/図を保持 |
+| 受付の人の閉じた発話＋本人行動 | artifactなし | 本人行動1件＋引用部分は未読 |
+| 発話の引用内容が「私は記録を残した」＋外の本人行動 | artifactなし | 外の本人行動だけ1件、引用内SELFを本人事実へ採用しない |
+| 本人行動・引用発話・本人行動 | artifactなし | 本人行動2件、引用は未読、edge0 |
+
+全4原文と前後graph・文章・図・coverageをrootと同環境read-only補助で照合。新表示3件はmapped1とunparsed1を併存し、source1/processed1/excluded0を保持する。nodeのSELF/肯否/時点とscalar/UTF-8/hashを確認。本人基準の一般読解やMashのProduct Read成功ではない。
+
+### 検証と保存
+
+Jupyter直接接続・隔離APIコピーで、修正元compilerがGitHub blob ded8dd3d52175e2b3fe6c5f31e850bbac425c619と同じ原bytesであることを確認。Podのded0586からAPI427b7aeまでの差はAnalysis対象外のPiece等で、今回のAnalysis source一致を照合した。最終compiler SHA256 f57e1d845033c1eea3bf42166563ad4c82158cc4020077eb6b2409cf4b75444a。
+
+最終一回は既存vertical478＋累積9＋新8＝**495 tests、失敗0/skip0、unittest97.738秒（親process100.652375秒）、exit0**。中間の5/478/17成功は重複加算しない。新testは閉じた発話の外の本人行動、引用内SELF/推測の非採用、未閉鎖/現在/否定/継続/条件/入れ子/撤回、中間未読/別field/先行report、原文根拠、補足の未成立、本人行動の撤回/置換、SOURCE_SCOPE、通常累積保存wireの非生成再読を確認した。
+
+保存確認は、実build_cumulative_mapの文章/図/coverageを通常row形式でfileへ保存し、実read_mapsをmock RPCの返却rowで再読。Engine/compile_observed_graph/generate_observed_mapの呼出しを禁止して本文・図・coverage完全一致とp_user_id転送を確認。実DB、実Auth、RN描画、保存graphの意味再構築の証明ではない。明記ROLE専用のmodel readerは流用していない。
+
+[実出力原本JSON](analysis_closed_quote_self_results.json)へ全4件のsource・前後graph/文章/図・coverageと検証記録を保存。Pod回収原本39,225bytes、SHA256 76f44754b0473bfa363e399c1d67c476241b78840abe769fba2e25318a562cd7と同じbytes。準備commandの改行入力誤りは実行前SyntaxErrorで修正、回収時のJSON末尾escapeも原本を残して修正し、モデル処理/教材変更はない。Download event timeout後は同じJupyter Editorの本文を選択コピーし、Podのbytes/SHA一致で回収した。これらの機械的修正を品質改善へ数えない。
+
+API source版be2281fの既存[Analysis CI41960307453](https://github.com/MassyuRed/mashos-api/actions/runs/41960307453)は全step成功。追加8testを同じ既存workflowへ登録した0dd31ce版の[CI41961109687](https://github.com/MassyuRed/mashos-api/actions/runs/41961109687)は記録時点で実行中で、Jupyter495成功とCI最終成功を混同しない。CIのDBは既存の隔離PostgreSQL WASMで、Supabase実DBではない。
+
+### 残件と次の作業
+
+今回の有限な取りこぼし修正と、4Bが混在入力を本人の基準で読む品質/typed意味採用は別。通常4B接続、暗黙の役割・判断・選択、補足typed、記録間再出現/変化、IF/Saved、分析観測会は残件。§182等の不採用重み・完了GPUrunを復活させない。次は既存material→typed意味ownerで、他者発話・本人の思考内容・独立行動を混同せず、未読scopeを保つ混在unit採用の不足を進める。今回の変更の配置・本人端末一巡は別の未実施工程として保持する。
+
+実行はGPT-6/Codex Work、root単一writer/実行/最終判断＋同環境read-only補助であり、独立Pro/Ultra/Mash Product Readではない。構造差分は既存finite採用条件と新回帰testの接続だけ。GPU model load/forward/学習/新生成0、既存Podレンタル維持。APIの通常sourceをGitHubへ反映したが、Render/Supabase/実DB/RN/配置/Pod管理の変更0。

@@ -3446,3 +3446,8 @@ API dc05dc35、通常product owner追加なし。既存 `semantic_admission.py` 
 ### 11/5 — component2の一回比較と通常帰属境界のCPU対照
 
 既存trialにmaterial_v5_component2_trial.py／material_v5_component2_plan.json／material_v5_component2_results.jsonを追加。前回同24教材へ理由末尾/発話内容pairの追加lossのみで比較し、CP02/04未修復・CP03/OA01退行により新重み不採用。[全結果](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-material-v5-component2-result-20261105)。private原本には初回CPU停止/修正後run/通常Engineの二件対照を含める。新しい商品型/owner/経路/DB/RN/配置変更0、STRUCTURE_MAP_DELTA_NONE。
+
+
+### 11/5 — 閉じた発話に隣接する本人行動の取りこぼし修正
+
+APIの既存intent_compiler.pyで、単一の閉じた肯定過去発話の外に直接隣接するSELF過去行動だけを採用し、引用内容は既存SOURCE_SCOPEへ残す。元source/座標/順序根拠と既存作者/公開wireを保持。新ai/tests/test_analysis_closed_quote_self_action.pyを既存Analysis CIへ接続。owner/商品型/DB/RN追加0、STRUCTURE_MAP_DELTA_PRESENT（意味採用範囲の限定修正）。API0dd31ce7、Jupyter495成功・実4対照、配置未実施。[結果と限界](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-closed-quote-self-result-20261105)。
