@@ -105,7 +105,7 @@ def prepare():
     teachers=copy.deepcopy(current['teachers']);assert len(teachers)==20
     keys=('id','owner','snapshot','assistant_target')
     anchors=[{k:copy.deepcopy(row[k]) for k in keys} for row in old['teachers'] if row['id'] in {'AT21','RU01'}]
-    assert len(anchors)==2;teachers+=anchors
+    assert len(anchors)==2;anchor_originals=copy.deepcopy(anchors);teachers+=anchors
     ROOT.mkdir();shutil.copyfile(__file__,ROOT/'runner.py');shutil.copyfile(SEAM,ROOT/'ownership_seam.py')
     shutil.copyfile(OLD,ROOT/'original_pack.json');shutil.copyfile(cpu/'teachers.json',ROOT/'source20.json')
     tokenizer=AutoTokenizer.from_pretrained(MODEL,revision=REVISION,local_files_only=True,trust_remote_code=False)
@@ -127,7 +127,7 @@ def prepare():
         encoded[row['id']]=dict(input_ids=full,labels=[-100]*len(prompt)+full[len(prompt):],loss_start=len(prompt)-1,logits_positions=len(full)-len(prompt)+1)
         audits.append(dict(id=row['id'],prompt_tokens=len(prompt),target_tokens=len(full)-len(prompt),saved_replay=True))
     assert [{k:x[k] for k in keys} for x in teachers[:20]]==[{k:x[k] for k in keys} for x in current['teachers']]
-    assert [{k:x[k] for k in keys} for x in teachers[20:]]==anchors
+    assert [{k:x[k] for k in keys} for x in teachers[20:]]==anchor_originals
     previous=Path('/workspace/analysis-actor-ownership-ce20-20261105');fit=Path('/workspace/analysis-actor-ownership-fit4-20261105')
     prior=json.loads(PRIOR.read_text());fresh=json.loads((previous/'before.json').read_text());seen=json.loads((fit/'initial.json').read_text());fitpack=json.loads((fit/'pack.json').read_text())
     assert prior['status']=='COMPLETE' and prior['weights_sha256']==WEIGHTS and prior['config_sha256']==CONFIG and prior['initial_unchanged']
