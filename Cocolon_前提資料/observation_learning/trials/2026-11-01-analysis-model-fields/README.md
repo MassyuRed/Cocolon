@@ -1,4 +1,4 @@
-> **11/5開始・分析の継続（第9回§203–206）：主体×肯否6対照の12新生成で主体引用に局所改善、同じ否定文のmetadata4条件では読解の揺れを再現。追加学習/通常採用なし。月次比較の通信失敗で保存履歴まで消えるRN不具合を修正し11テスト成功・GitHub反映済み。全履歴の短文50件でもモデル入力枠超過を実測し、全量を保つCPU分割準備へ。実通信の全量分割・本番/端末/buildは未完。** [全結果・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-cumulative-token-budget-20261105)。
+> **11/5開始・分析の継続（第9回§207）：全record・全欄・本人補足と全量guardを保つoffline入力分割を追加。12計画/488実tokenizer測定で201件も欠落なく入力枠内へ分割し、54追加テストとCI全step成功。通常の全量モデル実行、出力2048/60秒期限の成立は未証明。主体/役割/本人基準・記録間意味の読み取り、通常採用・本番/端末は引き続き残件。** [全結果・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-cumulative-partition-budget-20261105)。
 
 # Analysis — 最小field接続と実4B probe
 
@@ -2223,3 +2223,8 @@ RNの月次比較でcurrent通信失敗時に履歴まで消える不具合を�
 
 [全結果・原本・再開点](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-cumulative-token-budget-20261105)。新pathは01Bの§203–206。
 
+## §207 — 全量を保つoffline入力予算分割
+
+§206の全量入力超過に対し、全record・全欄・適格本人補足と全量guardを保つoffline入力予算plannerをAPI0018へ実装。12計画/488実tokenizer測定・190.352066秒で全対応を確認し、baseline201件はv4が6組、v7が9組。54追加対象/CI全step成功。通常ensure未選択、生成/API/DB0。出力2048・60秒全量実行・意味合成/保存・本番処理の完了は未証明。
+
+[結果・全原本・再開点](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-cumulative-partition-budget-20261105)。
