@@ -2201,3 +2201,8 @@ API入口は合成認証/ASGI、モデルだけ実HTTPS socket、DBは隔離SQL�
 ## 11/5 §199 — 所有者と行動主体のopt-in v7比較
 
 既存v4/v6の教示と保存identityを保持し、v7だけ所有対象と動作主の区別を補正。`actor_ownership_trial.py`は同a2e/学習0・新8組と既知8sourceの24stop一回、原rawを変更せず候補/ensure/mock RPC/非生成再読へ渡す。新8は5→6保存、既知8は4→5保存だがOP03誤読等が残り通常未採用。24replay/60原本全SHA/CI全工程成功。[集計](actor_ownership_results.json)、[詳細・原本・次の残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-actor-ownership-20261105)。
+
+
+## 200. 所有表現CE20と既見再現4の結果・CPU追加6
+
+`actor_ownership_ce20_trial.py`は初期a2e/14教師/20更新/28NLL/18stopを既存CEで一回比較。保存4→4・所有転移未達・OP07候補退行のため新b7不採用。`actor_ownership_seen_fit_trial.py`の既見2教師×新旧4stopではOT03だけ再現し、OT06の一意引用は未達。`actor_ownership_followup6_sources.json`と`actor_ownership_followup6_prepare.py`は旧14保持＋独立6のCPU受理/保存/mask/token差分だけを完了し、学習0。更新順/初期値は未選定。[集計](actor_ownership_ce20_results.json)、[全原本・失敗・再開点](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-actor-ownership-ce20-20261105)。完了rootを再起動しない。
