@@ -4587,3 +4587,53 @@ OT06の保存rawを再tokenizeしてgoldと比較すると、target index34でgo
 [全原本・新重み・全読・再開点](https://chatgpt.com/library?file_id=libfile_ff44f49225988191b0e670be09d5b96a&account_id=personal)、[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/actor_ownership_ce20_results.json)。CE元ZIP54member/53manifest、診断19member、CPU準備28member/27manifestをPod外CRC/全SHAで照合。旧原reportのPENDING表記は改変せず、別final_reviewへ全読/不採用を保存。公開GitHubへモデルraw/重みを置かない。
 
 APIは§199の4d744e36のまま、CI42052701621全工程successを継承。今回の新API/意味型/有限文法/作者/通常transport/公開DTO/DB/RN/配置/buildは0、STRUCTURE_MAP_DELTA_NONE。本人基準・暗黙役割・記録間意味・通常モデル採用・正式受入れは残件。v7の局所改善を今回の不採用と混同して撤回せず、b7の低NLLを商品成功へ昇格しない。
+
+<a id="analysis-actor-ownership-balanced48-20261105"></a>
+## 201. 11/5開始の継続 — 所有表現48更新の局所改善と残る誤読
+
+§200の独立OC6と旧14を全て保持し、旧pair8原本のAT21（明記理由）／RU01（時点・結果・不明）の2教師を追加した。旧20のid／owner／snapshot／target／messages／refは不変。2追加は原targetを保持し、messagesだけv7へ束縛した。AP／OP／AEの診断文を教師化していない。初期は旧a2e/config006eへ戻し、CE20のb7は使わなかった。
+
+省略6例各4＋明示主体6例各2＋N8各1＋理由/不明2例各2＝48更新。22教師・44NLL、旧a2eのbefore14は同messages/ref/stopの保存rawを再利用し、新14stop／2loadのみ。API4d744e36、runner13471a02、固定CE/AdamW/LR1e-5/seed20261111を継承し、train/after全exit0・1052.879414420秒。packはea55b497。平均NLL0.067561983→0.005653173は教師の測定値で、自由生成や一般分析品質の成功率ではない。
+
+| 同14sourceの比較 | 結果と範囲 |
+|---|---|
+| 既知の近接診断12 | 保存4→7。AE01／AE03／OP03の3件で所有者の主体化や曖昧引用を改善。独立held-outではない |
+| 学習既見OT03／OT06 | 保存0→2。主体を補わない引用と一意な「僕は」の教師再現。転移の3件と分ける |
+| 全14 | 保存4→9、候補12→14保持、raw6同一/8変化。9/14を一般精度にしない |
+| 旧成功AE05／AP07／AP08／OP02 | graph・文章・coverage完全一致、図は新artifact projection参照以外同一 |
+| AE02 | 省略主語の否定所有文で「私」をactorとする誤読が同rawのまま残る。否定保持、map不採用 |
+| AE04 | 正しい他者actor qualifier「父」を落とす。原文rootの父は残り、SELF化せず未解析だが、候補情報は退行 |
+| OP07／OP08 | 理由/願望の一部は保持するが、全文節のCONTENT_TARGET化と比較節誤分類、未完行動/所有者actor誤読は未達 |
+| AE06 | 正しいROLE候補を保持。ただし「の担当は」は現typed proofの範囲外。map未対応をROLE誤読と混同しない |
+
+追加量・再掲順・2anchorが同時に変わっているため、単独原因は断定しない。新6c879a88/config1deacb44は研究候補として保持し、通常や次学習初期へ採用しない。112tensor/3,833,856paramsをCPUで全保存再読し、全有限・全112が初期と異なることを確認。configのtarget_modulesは列挙順以外同じ。初期a2eと旧pack30afは前後不変、終了GPU2MiB/0％。
+
+別rootで前後28応答を0生成/0load再読（3.421149389秒）。全request/responseとcandidate/map内容一致、26候補と同じ2拒否、保存13内容（before4＋after9）を復元。各artifact内のcurrent/月次/readonlyは生成を禁止してID/本文/図/coverage一致。ここは隔離mock RPCの保存比較であり、次節の隔離実SQLとは区別する。
+
+[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/actor_ownership_balanced48_results.json)、[全原本・新重み・全読・再読・実通信検証](https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal)。元ZIP57member/56manifest、追加診断38member/37manifestをPod外CRC/全SHAで照合。原reportのPENDINGは改変せず別final_reviewへ全読を確定。公開GitHubへモデルraw/重みを置かない。
+
+学習比較自体は新API・意味型・有限文法・作者・DB/RN/配置/build変更0。通常既定v4、本人基準・暗黙役割・記録間意味、分析観測会・通常重み採用・正式受入れは残る。次は省略/SELF/OTHER×肯否を同じ新対象・動詞で切り分けるCPU対照を準備し、旧22を保持する。初期重み・更新順・追加GPUはCPU段階で未選定。完了rootを再起動しない。
+
+
+<a id="analysis-explicit-v7-https-sql-20261105"></a>
+## 202. 11/5開始の継続 — 明示v7の実HTTPSから通常API・隔離SQLを一巡
+
+§196のtransportがv4固定だったため、研究用のv7を通常のprepare/保存経路で選べる最小差分を実装した。API db311746の既存3pathだけを変更。SelfHostedAnalysisModelSourceのconstructorに既定v4・許可v4/v7の読み取り専用prompt_versionを追加し、送信前にprepared版との一致を要求。既知sourceのexact型だけからprofileを取得し、通常callback/AsyncMockはv4を保持する。serviceは保存済み再利用より後の再構築分岐だけでprofileを選ぶ。通常Application factory・設定・環境変数・既定v4は変更していない。
+
+意味採用/有限文法/型/作者/認証/期限/公開DTO/DB/RNは不変。保存再読はsourceの生成やprepareを呼ばず維持する。既存testに版不一致の通信前拒否、未知profile拒否、実TLS v4/v7、通常ensureのv7保存再読、旧callback互換を追加した。Jupyterの関連3suite253 PASS/既存warning1・90.41秒。最終CI [42071956193](https://github.com/MassyuRed/mashos-api/actions/runs/42071956193)/job127401975421は全step success：生成保存2312 PASS/SQL依存1 SKIP/12048subtests、共有owner1 PASS、累積/API/jobs193 PASS/2subtests、SQL201原本/15月参照。重複するJupyter検証を合算しない。
+
+`explicit_v7_model_https_trial.py`（runnerabd1570d/SHA36aaaae1）をJupyterへ固定配置。モデル0の予備確認は1保存・4.697821494秒で完走。その後、新6c879研究候補を一度loadし、新4stop／学習0／36.411600512秒で通常FastAPI ASGI→実127.0.0.1 HTTPS→既存CMEE→当回PGlite SQLを確認した。試験内factoryだけが明示v7の実source型を返し、classやprepare版を強制置換していない。認証は合成、DBは隔離実SQL、外部常設endpoint/実利用者ではない。
+
+| 検証4件 | 実結果 |
+|---|---|
+| VH01・所有対象の考え | 主体を補わず未確定で保存 |
+| VH02・「私は私の本を見た」 | モデルのactor qualifierは欠落。原文全体の明記SELFを既存有限source証明が保持し保存 |
+| VH03・所有対象の否定行動 | 主体未確定と否定を保持し保存 |
+| VH04・父の行動 | 他者をSELFへ昇格せず未解析1、artifact/月参照0 |
+
+各3並行caller（計12）に対してモデル要求は各1回（計4）。保存3件は各artifact1/月参照1、現在/readonly/月次の再読はbuildを禁止しID・本文・図・coverage同一で追加モデル要求0。全HTTP200、未知CAは生成前拒否、CERT_REQUIRED/hostname検証あり、127.0.0.1限定。source2fileとadapterの前後SHA不変、終了GPU2MiB/0％。新しい保存writer/公開port/依存追加はない。
+
+4例は既知の文を新しい合成owner/record/snapshot・感情文脈で流した接続確認。§201の同14source比較とは入力が違うため、3/4を一般品質率へ追加しない。VH03はAE02と同じ本文でも誤actorが消えたが、準備入力が違い、AE02修復の同入力証明ではない。文脈が変わった際の読解安定性が残件である。本人基準・役割/選択の一般化や記録間意味は未達。
+
+[本文なし実通信集計](../observation_learning/trials/2026-11-01-analysis-model-fields/explicit_v7_model_https_results.json)、[全原本/失敗/CI/新重み](https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal)。実行前のrunnerで一時TLS鍵permissionの置換誤りを0600へ修正し、修正後だけを実行した。実行・raw・保存内容を再試行で置き換えていない。既存transport内の明示profile拡張として地図を差分更新、owner/公開contractの追加0（STRUCTURE_MAP_DELTA_NONE）。通常v4・研究重み通常未採用・本番未有効化、Render/Supabase本番write・main merge・build・端末作業0。実環境はCodex Work/GPT-6と同環境の差分確認で、独立Pro受入れではない。
+
