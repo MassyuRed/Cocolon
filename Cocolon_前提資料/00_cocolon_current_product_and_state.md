@@ -1,4 +1,4 @@
-**11/5開始・分析の継続（第9回§199–200）：v7の局所改善を保持。追加20更新/18stop＋既見診断4stopは完走したが、別文の所有者誤読と理由文の退行が残り新b7は不採用。旧4保存の文章/図/coverageと24応答の0モデル再読、112tensor保全を確認。独立6対照の追加はCPUのみ完了、旧14原本/全mask保持。通常v4・本番・端末・配置は不変。** [全結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-actor-ownership-ce20-20261105)。
+**11/5開始・分析の継続（第9回§201–202）：旧a2eから48更新/14新stopで同14sourceの保存4→9（診断3改善＋学習既見2再現）。所有否定・他者actor欠落・理由/文脈誤読が残り新6c879は研究候補。28応答の非生成再読と旧4保存を保持。明示v7の実HTTPS→通常API→隔離SQLは4新stop/3保存/他者1未解析、各保存のcurrent/月次/readonly一致。通常既定v4・本番/端末/配置不変。** [全結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-explicit-v7-https-sql-20261105)。
 
 **11/5・分析の最新（第9回§198）：モデル経路で落ちていた主語未確定の完全過去行動と、同欄の複数本人行動を既存source証明のまま保持。元8応答の同raw比較は0→4保存、別6例も同raw旧0→新4保存。新14stop/2load/学習0、実4B保存は隔離mock RPC・別合成SQL182 PASS。主体・否定・明記順序・保存非生成再読を保持。一般の本人基準／暗黙役割・記録間意味、通常重み採用／本番／端末／配置は未達。最終CI42036416309は全工程成功。** [全結果・失敗・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-ordinary-prose-20261105)。
 
