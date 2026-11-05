@@ -3804,3 +3804,34 @@ rootと同環境read-only補助が全4原文/8rawを読解。raw2同一/変更2�
 GPU終了2MiB/0%・compute空、レンタル維持。前確認.29USD/hでrun全体の処理参考上限0.009595186USD、準備/回収/待機保持/通信保存/税等は別、実総請求未測定。固定済みRU02の同試行を繰り返さず、今回4確認文を自動で教師化しない。次は一般の理由・否定・時点注記の保持と、混在文の思考/独立行動の所属へ既存教材/owner内で取り組み、確認文は確認用に残す。新GPU条件は未固定。
 
 本人基準・役割/判断/選択、補足typed、記録間の再出現/変化、通常ensureへの4B接続、混在sourceの帰属/全文と残scope表示/保存再読、IF/Savedと分析観測会は継続残件。通常finiteは五種、今回private typedはROLE/ROLE＋ACTION限定という区別も維持。実環境GPT-6/Codex Work、root単一writer/実行/判断＋同環境read-only比較、独立Pro/Ultra/Mash Product Readではない。primary=BLOCKER_NARROWED、product_credit0。通常source/型/意味gate/compiler/唯一作者/HTTP/DTO/DB/RN/Render/Supabase/配置変更0、STRUCTURE_MAP_DELTA_NONE。
+
+<a id="analysis-material-v5-composition24-result-20261105"></a>
+## 180. 11/5 — 教材の組合せを補う24更新を完了、新4教示の再現は未達で不採用
+
+weekly§179（trial README§143）の近接4文を教師へ移さず、元90の全source/targetをroot＋同環境read-only補助で照合した。明記理由教師13（ので11/から2）、ATTRIBUTIVE3、理由＋従属否定/時点＋独立不明の組合せはRU02のみ。思考/反応の連用節から同一文内の独立実行へ続く教師はなかった。教材不足は確認したが、生成失敗の唯一の原因とは確定しない。
+
+既存16は全object/encodedを保持し、元90のAT03/AT08/ST03/AT29をtarget bytes不変でv5へ再束縛。既知欠陥を見て華恋が別題材で作成したCP4を追加し、旧16の相対順に8行を挿入して各1回の24更新とした。CP4はMash実演でなく文法組合せの独立教示で、未見評価ではない。QF4の原文/raw/保持条件は学習へ入れない。元90不変、独立ACTION否定6件の既存v5派生も不変。指示/decoder/gate/作者/seed/LR1e-5/clip1/全文mean CE、RU02の既存21token union係数1は変更しない。
+
+実tokenizer・mask/shift/終端・source引用/親/qualifier・旧16encoded・新4非重複・前34の完全messages/ref/response/sidecarをCPU15.166503秒、model load/forward0で確認。公開code/planは実行前7b23d7ebへ反映・全文/変更2path/head読戻し済み。runner SHAd64b9b96c29e4b9e72b680512658659d938adac8c3daa64bd88e7a982581a2e3、private teaching SHA6f92b1e106cedfb9d5cd3d380d79477b95567aba970b0c62cdd70cdc66767a2e。
+
+研究用の初期7ba4/933cを明示選択し、24更新/48NLL/保存112tensor照合後、旧30＋held QF4＋学習CP4の38新生成を実行。2load、761.665802秒、train/after両exit0、全38stop、初期adapter/config不変。900秒＋終了30秒内、再試行0。before34応答は完全identity一致で再利用、新CP4にはbefore自由生成がない。再利用4教材はNLLのみで自由生成を追加しておらず、24教材全再現や38件の未見転移とは呼ばない。
+
+| 対象 | 全文を読んだ結果 |
+| --- | --- |
+| QF01/02 | 理由marker不足、QF01の従属NEG/過去時点注記不足は継続。QF02の変更は合法な不明rootの引用幅差だけで、修復に数えない。元語句はquote内に保持 |
+| QF03/04 | QF03の実行を思考CONTENT_TARGETへ誤所属する出力は同一。QF04の本人反応/独立行動は同一で保持。今回の修復0 |
+| CP01/02 | 学習後も明記理由をTE_CONTEXTへ分類し、REASON_MARKER不足。従属否定/時点と独立不明は保持するが教示再現未達 |
+| CP03 | 発話/推測と本人思考のquoteを保持するが、記入の実行を思考CONTENT_TARGETへ誤所属。教示再現未達 |
+| CP04 | 独立行動に原文外の一人称prefixを加えた連続quoteを補作し、quote_ambiguous_or_missingで候補全体拒否。主観的思考/結果の分類も教示と異なる。beforeがないので新退行とは数えない |
+| 旧30 | RU02/AT04/11/17/24の5教師JSON一致、旧19graph/可視文章/図を全保持。SC01の独立ACTION NEG引用は動詞全体から短い末尾へ後退し、現v5引用範囲方針は未達。否定自体と原文全文は残り、極性喪失とはしない |
+| その他の変更 | R08/X05の任意対象child省略はroot全文に内容を保持。OA01のactor助詞差も同じ主体で、新意味退行へ数えない |
+
+比較34はraw29同一/変更5、候補は旧34が34のまま、新CPは3/4でafter全37/38、typed19。分母が異なる34→37を形式改善に数えない。24教材平均NLLは.025284686→.014458337だが、新CP4は全て教師JSON不一致かつ上記の意味/source未達。前回16教材平均と今回24平均を直接比較しない。新27e9/ba2aは保全し、通常/次初期値の両方で不採用・一回閉鎖。既存研究7ba4を上書きしない。
+
+72応答のrequest/response/raw/hashと保存状態を照合。保存71候補と38typedを、生成/compiler/作者禁止guard下で非生成再読し、graph/文章/図とsidecar一致。CP04の拒否を保持し、受理へ補修しない。root＋同環境read-only補助が全38source/after・前34・旧19表示を照合。ZIP CRC/429member/manifest428全bytes-SHA、112tensor/3,833,856 F32有限を独立照合。[全原文/教示/出力/新重み](https://chatgpt.com/library?file_id=libfile_ee3f634f70648191a3f0a80fada599ee&account_id=personal)は15,322,522bytes、SHA256 03ff7a7ab1a76274ba16d9d55b856e7801466995bdca30339fbb48eb815d133f。weights27e969186c63b5ca1d1f8368473d416df50291161073775fe867c20f81f70714、configba2a4575b6590f8e17c1b620ecbb66cde1bd488c8ecf1a128501e256c3a43d9d。元4B全重み・旧helper・原90等の親依存は§178/179のprivate原本と既存復元archiveを参照する。
+
+GPU終了2MiB/0%・compute空、Podレンタル維持。前確認.29USD/hでrun処理参考按分約0.061356967USD、準備/回収/待機保持/通信保存/税等は別、実総請求未測定。RTX4000 Adaの現環境で、過去のA5000実績へ読み替えない。
+
+次は新4教示自身の自由生成が成立しない箇所を、既存入力/loss/意味owner内で修正する条件へ絞る。先頭の文字差はCP03/04では合法なactor助詞差で、意味誤所属箇所と一致しない。失敗rawを新goldへ昇格したり、同じ24順を盲目的に反復したり、QF4を教師化して転移成功にしない。追加GPU条件は未固定。
+
+通常finite五種とprivate ROLE/ROLE＋ACTION限定は別。通常SOURCE_SCOPE gapは未読である旨と元record版への束縛を保つが、未読本文/具体的不明対象/発話帰属の解析証明をimmutable保存する型ではない。閉じた発話後の本人節を通す案も未実装で、今回の商品修復へ数えない。通常ensureへの4B接続、本人基準/役割・判断・選択、補足/記録間の再出現・変化/IF・Saved/分析観測会は残件。新product owner/通常source/型/意味gate/compiler/唯一作者/HTTP/DTO/DB/RN/Render/Supabase/配置変更0、STRUCTURE_MAP_DELTA_NONE。実環境GPT-6/Codex Work、root単一writer/実行/判断＋同環境read-only補助で、独立Pro/Ultra/Mash Product Readではない。primary=BLOCKER_NARROWED、product_credit0。

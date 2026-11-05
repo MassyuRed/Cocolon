@@ -1,3 +1,5 @@
+> **11/5・分析の最新（第9回§180）：** 既存16＋原90からの再利用4＋独立作成4の24教材を、保存7ba4から24更新/48測定/38新stopで比較。旧19のgraph・文章・図とRU02/AT4の教師一致を保持したが、新4教材自身の理由/行動の所属は未再現で、未学習QF4の残件も未解消。新27e9は通常/次初期値へ不採用・閉鎖。[全結果/次残件](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v5-composition24-result-20261105)。新教示CP4とheld QF4を分離。原文外quote1拒否とSC01の否定引用範囲の後退を保持。通常finite五種/限定typedの区別、通常接続と残scopeの意味保存等は残件。STRUCTURE_MAP_DELTA_NONE。
+
 > **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
 ---
@@ -3430,3 +3432,7 @@ API dc05dc35、通常product owner追加なし。既存 `semantic_admission.py` 
 ### 11/5 — 未学習4文の旧/新比較のファイル地図
 
 既存trialのmaterial_v5_qualifier_near4_probe.pyはprivateな新4入力を元90/現16/30と重複確認し、0587と新7ba4で追加学習0/8生成/2load/保存非生成再読を行う一回比較。material_v5_qualifier_near4_plan.jsonは固定条件、material_v5_qualifier_near4_results.jsonは本文なし実結果とprivate原本参照。原文/保持条件/rawはpublic GitHubへ入れない。既知修復と新4文の未達を区別し、通常owner/型/意味gate/compiler/唯一作者/ensure/HTTP/DB/RN不変、STRUCTURE_MAP_DELTA_NONE。[全結果・次条件](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v5-qualifier-near4-result-20261105)、weekly§179。
+
+### 11/5 — 組合せ教材の限定学習と再現未達
+
+既存trial内のmaterial_v5_composition24_trial.pyは旧16・原90再利用4・独立教示4を24更新/48測定/旧30＋held4＋学習4の38生成で比較し、保存再読/回収する一回runner。material_v5_composition24_plan.jsonは固定条件、material_v5_composition24_results.jsonは本文なし実結果/private原本参照。原文/target/raw/追加重みは公開GitHubへ載せない。旧19表示とRU02/AT4一致は保持したが新4教示/held4未達、新27e9不採用。SC01のNEG引用範囲後退とCP04の原文外quote拒否を記録する。新product owner/通常実装の変更0、STRUCTURE_MAP_DELTA_NONE。[全結果](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v5-composition24-result-20261105)、weekly§180。
