@@ -1,0 +1,145 @@
+{
+  "schema_version": "analysis_actor_matrix6_read_review.v1",
+  "status": "ALL_12_RAW_READ_RESEARCH_NOT_ADOPTED",
+  "api_commit": "4d744e36a093aac3ad157a448f06ef6be2be59cb",
+  "prompt_version": "selected_material.v7",
+  "teachers_sha256": "15b983c0f35cacb6ec46ea7290bbfb6f66e1634715745e044d6651b01b276b03",
+  "sources_sha256": "ebf0a7b2d426a94ef7b2d4555f80ca06c87265b06fcbf9dc9f51c89303fe3137",
+  "runner_sha256": "7d94a9a924077c999771a94d7f7fb437e0a35c31d9ae26c970de7487b7b0a522",
+  "pack_sha256": "c93e921a252bf520184d1486635e6b5aee0bb0eb2c6c0d554b757ea964b6badf",
+  "new_generation": 12,
+  "stop_responses": 12,
+  "model_loads": 2,
+  "new_training": 0,
+  "zero_model_replayed": 12,
+  "seconds": 103.33157871942967,
+  "normal_adoption": false,
+  "next_training_initial_adoption": false,
+  "source_and_adapters_unchanged": true,
+  "stages": [
+    {
+      "exit": 0,
+      "phase": "initial"
+    },
+    {
+      "exit": 0,
+      "phase": "research"
+    }
+  ],
+  "lexical_scope": "Frozen 印刷 target is outside the existing finite product-map verb set. Gold candidate/qualifier comparison is separate from typed-map adoption; UNSUPPORTED alone is not a model failure or an OTHER-specific success.",
+  "provenance": "KAREN_INDEPENDENT_SYNTHETIC_LOCAL_DIAGNOSTIC_NOT_MASH_DEMONSTRATION_NOT_GENERAL_ACCURACY",
+  "frozen_inputs_paired": true,
+  "raw_pairs_same": 3,
+  "raw_pairs_changed": 3,
+  "gold_json_matches_before": 1,
+  "gold_json_matches_after": 2,
+  "actor_qualifier_matches_before": 2,
+  "actor_qualifier_matches_after": 5,
+  "actor_qualifier_count_interpretation": "Exact expected actor binding on this constructed six-case matrix only; no general accuracy or product-acceptance inference.",
+  "negative_qualifiers_preserved_all_negative_cases_both_adapters": true,
+  "targets_and_root_kind_preserved_all_12": true,
+  "private_candidates_preserved_before": 4,
+  "private_candidates_preserved_after": 5,
+  "private_candidates_rejected_before": 2,
+  "private_candidates_rejected_after": 1,
+  "typed_maps_saved_before": 0,
+  "typed_maps_saved_after": 0,
+  "typed_map_interpretation": "印刷 is outside the frozen finite verb set. All-zero product maps are expected lexical scope, not an estimate of model semantics; OTHER unsupported status alone cannot establish correct actor reading.",
+  "storage": "Existing isolated mock RPC; no production SQL/auth/device",
+  "saved_map_current_monthly_readonly_branch": "NOT_EXERCISED_NO_SAVED_TYPED_MAP",
+  "replay_scope": "All twelve exact responses reconsumed with zero model calls; preserved private candidates and identical rejections. No new saved typed-map current/monthly/readonly evidence.",
+  "gpu_after_process_observation": "2 MiB, 36 %",
+  "outstanding": [
+    "OM03 affirmative repeated SELF quote remains ambiguous and rejected.",
+    "Previous AE02/AE04 and OP07 research regressions are not cleared by this local matrix.",
+    "Ordinary criteria, implicit roles, record-to-record meaning and normal model adoption remain incomplete."
+  ],
+  "adapters": {
+    "initial": {
+      "config_sha256": "006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9",
+      "weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59"
+    },
+    "research": {
+      "config_sha256": "1deacb44b87cd363b94fd85fe7f86d5ee671ffe10f6d248405783ecaf45509db",
+      "weights_sha256": "6c879a887e3188f4fa2b6e1df573c8648febaac1661dd874f385d72d1edbd6c9"
+    }
+  },
+  "negation_gold_boundary_difference": "Three negative configurations preserve a unique original negative phrase; gold and generated qualifier boundaries differ. This is JSON mismatch, not semantic-negation error.",
+  "cases": [
+    {
+      "id": "OM01",
+      "actor_condition": "OMITTED",
+      "before_status": "UNSUPPORTED",
+      "after_status": "UNSUPPORTED",
+      "before_gold_json_match": false,
+      "after_gold_json_match": true,
+      "before_actor_binding_match": false,
+      "after_actor_binding_match": true,
+      "semantic_review_ja": "省略された主体を所有者から補っていた初期応答から、actorなしへ改善。gold JSONと一致。"
+    },
+    {
+      "id": "OM02",
+      "actor_condition": "OMITTED",
+      "before_status": "UNSUPPORTED",
+      "after_status": "UNSUPPORTED",
+      "before_gold_json_match": false,
+      "after_gold_json_match": false,
+      "before_actor_binding_match": false,
+      "after_actor_binding_match": true,
+      "semantic_review_ja": "所有者actorを除去。否定引用は原文内の「しなかった」を保持し、goldの「なかった」と範囲が違うだけで否定の欠落・反転ではない。"
+    },
+    {
+      "id": "OM03",
+      "actor_condition": "EXPLICIT_SELF",
+      "before_status": "REJECTED",
+      "after_status": "REJECTED",
+      "before_gold_json_match": false,
+      "after_gold_json_match": false,
+      "before_actor_binding_match": false,
+      "after_actor_binding_match": false,
+      "semantic_review_ja": "肯定SELFで裸の「僕」が二箇所に一致するため、両重みとも同じ曖昧引用として拒否。一意な主語引用は未達。"
+    },
+    {
+      "id": "OM04",
+      "actor_condition": "EXPLICIT_SELF",
+      "before_status": "REJECTED",
+      "after_status": "UNSUPPORTED",
+      "before_gold_json_match": false,
+      "after_gold_json_match": false,
+      "before_actor_binding_match": false,
+      "after_actor_binding_match": true,
+      "semantic_review_ja": "否定SELFのactor引用が一意な「僕は」へ改善し、strict候補を保存可能に。NEGは両重みとも「しなかった」でgoldとの範囲差を維持。"
+    },
+    {
+      "id": "OM05",
+      "actor_condition": "EXPLICIT_OTHER",
+      "before_status": "UNSUPPORTED",
+      "after_status": "UNSUPPORTED",
+      "before_gold_json_match": true,
+      "after_gold_json_match": true,
+      "before_actor_binding_match": true,
+      "after_actor_binding_match": true,
+      "semantic_review_ja": "明記他者「兄」と所有対象を両方保持し、raw同一・gold JSON一致。"
+    },
+    {
+      "id": "OM06",
+      "actor_condition": "EXPLICIT_OTHER",
+      "before_status": "UNSUPPORTED",
+      "after_status": "UNSUPPORTED",
+      "before_gold_json_match": false,
+      "after_gold_json_match": false,
+      "before_actor_binding_match": true,
+      "after_actor_binding_match": true,
+      "semantic_review_ja": "明記他者「兄」と原文内の否定引用を両方保持し、raw同一。NEG範囲差だけでgold JSONは不一致。"
+    }
+  ],
+  "private_originals": "https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal",
+  "private_evidence_link": "https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal",
+  "private_archive_version": 1,
+  "private_archive": {
+    "library_file_id": "libfile_78de85117ab48191ba102c0c2f42ccec",
+    "version": 1,
+    "bytes": 15681307,
+    "sha256": "28d049030e5f9f16691b2b958fd20a3251aeba556973ea8de7f11f112d2634f4"
+  }
+}
