@@ -1,4 +1,4 @@
-> **11/5開始・分析の継続（第9回§208–209）：全sourceを保つprivate batch INPUTと全量一回の合成を実装し、201件の合成一致・新55テスト・CI全工程成功。実4Bにも全20件を3分割で送ったが、3stopとも先頭fieldしか返さず全体拒否、合成/保存0。全欄保持と通常の全量取得は未達。希望の取り込み境界は後続修正・確認中。通常採用・本番/端末未実施。** [結果・原本・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-batch20-20261105)。
+> **11/5開始・分析の継続（第9回§210）：原memoの明記SELF・肯定希望を既存graphと時点のままmodel consumerへ接続。新27を含むJupyter185 PASS・CI全工程成功。同じ実4B原応答の0モデル旧新比較ではWH02過去希望だけが1nodeへ接続し、誤kind・主体省略・否定注釈不足は未対応を維持。別の合成20recordは2nodeとなったが、実batchの全欄欠落は未解決。wire24はCPU準備完了・実成果未算入。通常採用・本番/端末未実施。** [結果・原本・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-plain-wish-20261105)。
 
 > **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
@@ -1287,3 +1287,9 @@ RNの月次比較でcurrent通信失敗時に履歴まで消える不具合を�
 API fc756で、各childの元Responseを保つtyped private batch INPUT／exact検査・保存再束縛と、全量parentで一度だけ既存作者へ渡す明示offline合成を実装。合成201child対全量oracleのgraph・文章・図・coverage一致、未解析/欄なし保持、改変・欠落・重複全体拒否、旧9single profileを確認。新55対象/CI302件を含む全工程成功。通常ensure/factory/保存は不変、実4B全量取得・出力2048・60秒・DB commit・本番成功は未証明。
 
 全20件の実3stopは先頭fieldだけとなり全strict拒否、合成/保存0。予備の正規合成応答も旧action+wish consumerではNoneで、再読一致を作者成功にしない。本人基準・暗黙役割・記録間意味、全欄出力、通常全量取得／一回commit・本番/端末は残件。[全結果・原本](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-batch20-20261105)。
+
+## §210 — 明記SELFの希望を元graphのまま保持
+
+API09b650で、一原memoの明記SELF・肯定の希望を既存sourceのgraph／時点／根拠のままmodel consumerへ接続。新27を含むJupyter185 PASS、CI全工程成功。同じ実4B原応答の0モデル比較ではWH02過去希望だけが「希望（当時）」1nodeへ変わり、誤kind・主体省略・否定注釈不足は未対応を維持。別の合成20record INPUTは2nodeへ接続したが、実batchの全欄欠落は未解決。通常既定v4／研究重み未採用／本番未有効化。wire24はCPU準備完了、実成果未算入。
+
+一原record／原memo一欄に限り、元sourceの肯定SELF・既存9動詞の希望current_input／pastと同欄の過去行動を照合する。pure past helperは不変。OTHER／省略／否定希望／認知／順序／補足／memo_actionの採用範囲を広げず、原graph・時点・根拠・接続不明を保持する。実4rawの構文受理と意味proofを区別し、WH01誤kindとWH04のNEGATION注釈不足は未修復。本人基準・暗黙役割・記録間意味、実モデル全欄出力、通常全量取得／保存・月次commitは残件。[全結果・原本・境界](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-plain-wish-20261105)。
