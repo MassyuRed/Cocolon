@@ -1,0 +1,48 @@
+{
+  "provenance": "ROOT_INDEPENDENT_SYNTHETIC_NOT_MODEL_RAW_NOT_MASH_DEMONSTRATION",
+  "status": "CPU_ONLY_NOT_TRAINED",
+  "examples": [
+    {
+      "id": "OC01",
+      "text": "私の意見を残した。",
+      "actor": null,
+      "target": "私の意見",
+      "negative": null
+    },
+    {
+      "id": "OC02",
+      "text": "僕の計画を書かなかった。",
+      "actor": null,
+      "target": "僕の計画",
+      "negative": "なかった"
+    },
+    {
+      "id": "OC03",
+      "text": "意見を書かなかった。",
+      "actor": null,
+      "target": "意見",
+      "negative": "なかった"
+    },
+    {
+      "id": "OC04",
+      "text": "私は私の計画を記録しなかった。",
+      "actor": "私は",
+      "target": "私の計画",
+      "negative": "なかった"
+    },
+    {
+      "id": "OC05",
+      "text": "僕は僕の意見を書いた。",
+      "actor": "僕は",
+      "target": "僕の意見",
+      "negative": null
+    },
+    {
+      "id": "OC06",
+      "text": "友人は私の意見を書かなかった。",
+      "actor": "友人",
+      "target": "私の意見",
+      "negative": "なかった"
+    }
+  ]
+}
