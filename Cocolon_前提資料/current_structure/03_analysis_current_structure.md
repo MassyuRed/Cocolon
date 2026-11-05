@@ -1,4 +1,4 @@
-> **11/5開始・分析の継続（第9回§211）：新規complete合成snapshotの複数record教材を24更新・新16stopで比較。matched8の全欄改善0、既知B20の11field欠落は未改善。旧3対照は保持したがAE05は省略主体へ原文外actorを追加して拒否へ退行。新重みは通常・次初期とも不採用。13候補state／37fieldの非生成再読とDB保存0を区別し、全原本・重みはversion5保存済み。後続v8は候補コードcheckpoint／テスト中で成果未算入。** [全結果・原本・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-multirecord-wire24-20261105)。
+> **11/5開始・分析の継続（第9回§212）：v7を継承し欄一覧／総数だけを足すprivate v8を実装、Jupyter384 PASS・CI全工程成功。実4Bは1回開始後signal14で終了し返却raw0、FC03未実行・再試行0。全欄改善／意味品質／strict受理は判定不能。通常選択は拡張せず、失敗原本はversion6保存済み。optional kernel未導入・速度未証明、後続negativewishはコードcheckpoint／テスト中で成果未算入。** [全結果・原本・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-v8-fieldcount-20261105)。
 
 > **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
@@ -1299,3 +1299,9 @@ API09b650で、一原memoの明記SELF・肯定の希望を既存sourceのgraph�
 wire24を元a2eから24更新・新16stop／3load／NLL20、544.000332335秒で完走。MW6は新規complete合成snapshot／全member由来の合成guardを持つ学習既見assemblyで、after-only全18field一致だが、matched8の全欄改善は0。HN／HXは元から全4field、旧3対照は保持し、AE05だけ省略主体へ原文外actorを足して拒否へ退行。既知B20の11field欠落は同じraw／Responseのまま未改善。新3f937251は通常・次初期とも不採用。13候補state／37fieldの非生成再読と実DB保存0を区別する。全原本・重み回収とCRC／全manifest SHA照合、version5保存済み。後続v8は候補コードcheckpoint／テスト中と2要求予定の段階で、成果未算入。
 
 assemblyは元の完全recordを組み直した新規complete合成snapshotで、guardも全member集合由来の合成用識別子。実DBのsnapshot／guardではない。学習既見MW6 after-only一致と同入力matched8の比較を分ける。HNはraw同一、HXは正しい対象子2個を加えても直接map同一。AE05の新たな主体創作と、B20の全欄欠落を未解決のまま保持する。通常全量取得・意味品質・本番・本人端末の成功へ換算しない。[原本・実測・境界](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-multirecord-wire24-20261105)。
+
+## §212 — private v8の実装と実モデル原応答未返却
+
+API100c1bbでprivate v8を追加。v7 system全文＋実field番号一覧／総数tailだけを変更し、userとsourceを保持、profile／ref／stateを分離。通常constructor／既定v4／planner／batch選択は不変。Jupyter384 PASS／PG未設定19 SKIP、CI全工程成功。実4Bは1load／開始1／raw0／新生成0／学習0、34.607942907秒・child -14で終了。FC03未実行・model retry0。改善／意味品質／strict受理は判定不能。失敗原本はversion6保存済み。optional kernel未導入・速度未証明、後続negativewishコードは成果未算入。
+
+旧v7のcached原応答を新v8の生成に数えず、source／guard／user不変とprivate identityの差を保持する。CPU入力予算fitと合成回帰成功を、実4Bの全欄出力・map品質へ換算しない。fallback警告は時間blockerの仮説候補で、終了原因を断定しない。[実結果・原本・境界](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-v8-fieldcount-20261105)。
