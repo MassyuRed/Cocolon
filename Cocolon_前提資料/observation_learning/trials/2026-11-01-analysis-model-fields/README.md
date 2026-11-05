@@ -1,4 +1,4 @@
-> **11/5開始・分析の継続（第9回§210）：原memoの明記SELF・肯定希望を既存graphと時点のままmodel consumerへ接続。新27を含むJupyter185 PASS・CI全工程成功。同じ実4B原応答の0モデル旧新比較ではWH02過去希望だけが1nodeへ接続し、誤kind・主体省略・否定注釈不足は未対応を維持。別の合成20recordは2nodeとなったが、実batchの全欄欠落は未解決。wire24はCPU準備完了・実成果未算入。通常採用・本番/端末未実施。** [結果・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-plain-wish-20261105)。
+> **11/5開始・分析の継続（第9回§211）：新規complete合成snapshotの複数record教材を24更新・新16stopで比較。matched8の全欄改善0、既知B20の11field欠落は未改善。旧3対照は保持したがAE05は省略主体へ原文外actorを追加して拒否へ退行。新重みは通常・次初期とも不採用。13候補state／37fieldの非生成再読とDB保存0を区別し、全原本・重みはversion5保存済み。後続v8は候補コードcheckpoint／テスト中で成果未算入。** [全結果・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-multirecord-wire24-20261105)。
 
 # Analysis — 最小field接続と実4B probe
 
@@ -2240,3 +2240,9 @@ API fc756で、各childの元Responseを保つtyped private batch INPUT／exact�
 API09b650で、一原memoの明記SELF・肯定の希望を既存sourceのgraph／時点／根拠のままmodel consumerへ接続。新27を含むJupyter185 PASS、CI全工程成功。同じ実4B原応答の0モデル比較ではWH02過去希望だけが「希望（当時）」1nodeへ変わり、誤kind・主体省略・否定注釈不足は未対応を維持。別の合成20record INPUTは2nodeへ接続したが、実batchの全欄欠落は未解決。通常既定v4／研究重み未採用／本番未有効化。wire24はCPU準備完了、実成果未算入。
 
 一原record／原memo一欄に限り、元sourceの肯定SELF・既存9動詞の希望current_input／pastと同欄の過去行動を照合する。pure past helperは不変。OTHER／省略／否定希望／認知／順序／補足／memo_actionの採用範囲を広げず、原graph・時点・根拠・接続不明を保持する。実4rawの構文受理と意味proofを区別し、WH01誤kindとWH04のNEGATION注釈不足は未修復。本人基準・暗黙役割・記録間意味、実モデル全欄出力、通常全量取得／保存・月次commitは残件。[全結果・原本・境界](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-plain-wish-20261105)。
+
+## §211 — 複数record列挙の未改善と旧成功の主体退行
+
+wire24を元a2eから24更新・新16stop／3load／NLL20、544.000332335秒で完走。MW6は新規complete合成snapshot／全member由来の合成guardを持つ学習既見assemblyで、after-only全18field一致だが、matched8の全欄改善は0。HN／HXは元から全4field、旧3対照は保持し、AE05だけ省略主体へ原文外actorを足して拒否へ退行。既知B20の11field欠落は同じraw／Responseのまま未改善。新3f937251は通常・次初期とも不採用。13候補state／37fieldの非生成再読と実DB保存0を区別する。全原本・重み回収とCRC／全manifest SHA照合、version5保存済み。後続v8は候補コードcheckpoint／テスト中と2要求予定の段階で、成果未算入。
+
+assemblyは元の完全recordを組み直した新規complete合成snapshotで、guardも全member集合由来の合成用識別子。実DBのsnapshot／guardではない。学習既見MW6 after-only一致と同入力matched8の比較を分ける。HNはraw同一、HXは正しい対象子2個を加えても直接map同一。AE05の新たな主体創作と、B20の全欄欠落を未解決のまま保持する。通常全量取得・意味品質・本番・本人端末の成功へ換算しない。[原本・実測・境界](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-multirecord-wire24-20261105)。
