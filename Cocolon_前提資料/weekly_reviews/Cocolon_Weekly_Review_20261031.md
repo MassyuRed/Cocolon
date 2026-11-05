@@ -3886,4 +3886,4 @@ CPU15.962918秒/model load・forward0、24更新/48測定/112tensor保存照合/
 
 次は同じ24更新/係数追加を反復せず、既存intent_compiler._fragment/semantic_admissionと保存ownerで、閉じた他者発話後の本人節の主体・全文帰属・残scopeを維持してObservedPropositionへ渡す最小差分条件を具体化する。引用guardを単に削除しない。通常typedは明記ROLE/ROLE＋ACTIONの限定scopeのままで、CP/QFのtyped拒否は今回の意味誤り検出の証拠ではない。通常ensureの4B接続、本人基準/役割・判断・選択、補足typed、記録間再出現/変化、混在source帰属/残scope、IF/Saved、分析観測会は残件。
 
-GPU2MiB/0%・compute空、Podレンタル維持。前表示.29USD/hによるrun参考按分約.057671933USD、準備/回収/待機保持/通信保存/税等別・実総請求未測定。通常source/型/意味gate/compiler/唯一作者/HTTP/DTO/DB/RN/Render/Supabase/配置/Pod管理の変更0、STRUCTURE_MAP_DELTA_NONE。実環境GPT-6/Codex Work、root単一writer/実行/最終判断＋同環境read-only補助であり、独立Pro/Ultra/Mash Product Readではない。新c522は研究保全し、完了runを再起動しない。
+GPUは回収時2MiB、最終確認170MiB、いずれも利用率0%・compute空、Podレンタル維持。前表示.29USD/hによるrun参考按分約.057671933USD、準備/回収/待機保持/通信保存/税等別・実総請求未測定。通常source/型/意味gate/compiler/唯一作者/HTTP/DTO/DB/RN/Render/Supabase/配置/Pod管理の変更0、STRUCTURE_MAP_DELTA_NONE。実環境GPT-6/Codex Work、root単一writer/実行/最終判断＋同環境read-only補助であり、独立Pro/Ultra/Mash Product Readではない。新c522は研究保全し、完了runを再起動しない。

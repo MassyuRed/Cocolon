@@ -69,7 +69,10 @@
     "reference_usd_hour": 0.29,
     "actual_total_bill_measured": false,
     "preparation_collection_rental_tax_separate": true,
-    "pod_rental_maintained": true
+    "pod_rental_maintained": true,
+    "gpu_after_collection": "2 MiB, 0 %",
+    "gpu_final_confirmation": "170 MiB, 0 %",
+    "compute_apps_final_confirmation": ""
   },
   "measurements": {
     "teacher_mean_ce": [
