@@ -1,4 +1,4 @@
-> **11/5開始・分析の継続（第9回§212）：v7を継承し欄一覧／総数だけを足すprivate v8を実装、Jupyter384 PASS・CI全工程成功。実4Bは1回開始後signal14で終了し返却raw0、FC03未実行・再試行0。全欄改善／意味品質／strict受理は判定不能。通常選択は拡張せず、失敗原本はversion6保存済み。optional kernel未導入・速度未証明、後続negativewishはコードcheckpoint／テスト中で成果未算入。** [全結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-v8-fieldcount-20261105)。
+> **11/5開始・分析の継続（第9回§213）：元全文が否定を保つ希望を、原sourceのSELF／negative／wish証明のまま既存consumerへ接続。Jupyter241 PASS・CI全工程成功。同じ実4Bの4原応答を0モデル再読し、WH04だけNoneから否定希望1node、WH02はcanonical一致、WH01／03は未対応を維持。raw修復／NEG追加／DB保存0。初回harness誤比較と商品差を分け、失敗原本も保持。version7保存済み。通常採用・本番未有効化。** [全結果・境界・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-negative-wish-consumer-20261105)。
 
 > **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
@@ -3697,3 +3697,15 @@ API09b650固定。MW6 after-onlyの18field一致は新しい改善率ではな�
 | 既存trial新 `v8_fieldcount_results.json` | CPU予算・CI・未返却／未実行・version6原本参照hashを本文なしで保存。人物／原文／model rawは含めない |
 
 API100c1bb、Jupyter384 PASS／PG未設定19 SKIP、CI42105775747全工程成功。実試行は1load／開始1／原raw0／新生成0／学習0、34.607942907秒・child -14で、全欄改善／意味品質／strict受理は判定不能。private profile／ref／state variantの追加だけをSTRUCTURE_MAP_DELTA_PRESENTとして記録し、通常設定／planner／batch選択／意味型／作者／公開DTO／DB／RNは不変。optional kernel未導入・速度未証明、後続negativewishコードは成果除外。[原本・実結果・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-v8-fieldcount-20261105)。
+
+## 11/5 §213 — 元全文で否定を保つplain wishの限定接続
+
+| owner path | 当回の責務差分 |
+|---|---|
+| API既存 `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | 既存の`_model_complete_observed_plain_wishes`にSELF／negative／wishのcurrent_input／pastを追加。元sourceの完全proofとroot全文の否定を照合して元graphを返す。NEG注釈欠如をraw修復で補わず、shared checker／grammar／作者は不変。併存ACTIONは従来の肯定過去のみ |
+| API既存 `ai/tests/test_analysis_model_observed_actions.py` | v4/v7・否定希望の現在／過去・単独／行動併存・NEG注釈あり／なし、raw不変・元graph一致、否定削除／誤kind／偽注釈と他者／省略／認知／順序／別欄・補足拒否、保存非生成再読を検証 |
+| 既存trial `observation_learning/trials/2026-11-01-analysis-model-fields/negative_wish_replay.py` | 元fc756の4原Responseを旧100c1bb／新5c9606へ0モデル再読。tuple/list比較誤差はcanonical JSON比較1点だけを修正し、失敗rootも保存。原request／source／rawは変更しない |
+
+API5c9606、Jupyter241 PASS、CI42109915846全工程成功。fresh replay2でWH04だけNone→否定希望1node、WH02肯定pastのgraph／文章／図／coverageを保持し、WH01／03未対応を維持。NEG注釈欠如による意味欠落ではなく、旧consumerの肯定限定を切り分けた。raw修復／モデル／DB保存0、STRUCTURE_MAP_DELTA_NONE。通常選択／型／作者／公開DTO／DB／RNは不変。[全結果・境界・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-negative-wish-consumer-20261105)。version7保存済み。
+
+公開集計は既存trialの`negative_wish_results.json`。元本文・人物・rawとfailed replay原本は非公開に保持する。
