@@ -2196,3 +2196,8 @@ API入口は合成認証/ASGI、モデルだけ実HTTPS socket、DBは隔離SQL�
 旧65e7fa0bで保存0だった新8応答を、同じsnapshot/request/messages/rawのまま修正consumerへ渡し4保存。別の合成6応答も旧0→新4保存を確認した。新14stop/2load/学習0/元a2e/config不変・計119.629663秒。主体未確定をSELFへ補わず、明記された順序だけを元graphへ保持。全文未解析/他者混在/誤った主体や引用は拒否を継続。これらは限定した華恋合成probeで、一般分析精度やMash正式受入れではない。
 
 `ordinary_prose_trial.py`は既存ensure/mock RPC保存/非生成再読を再使用し、`ordinary_sequence_transfer_trial.py`は独立6sourceを渡すだけの一回runner。完了rootの再起動禁止。公開[本文なし集計](ordinary_prose_results.json)、[全結果・失敗・原本・再開点](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-ordinary-prose-20261105)。v4既定/v6 opt-in・研究重み通常未採用、本番/実DB/端末/配置未実施を保持する。
+
+
+## 11/5 §199 — 所有者と行動主体のopt-in v7比較
+
+既存v4/v6の教示と保存identityを保持し、v7だけ所有対象と動作主の区別を補正。`actor_ownership_trial.py`は同a2e/学習0・新8組と既知8sourceの24stop一回、原rawを変更せず候補/ensure/mock RPC/非生成再読へ渡す。新8は5→6保存、既知8は4→5保存だがOP03誤読等が残り通常未採用。24replay/60原本全SHA/CI全工程成功。[集計](actor_ownership_results.json)、[詳細・原本・次の残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-actor-ownership-20261105)。

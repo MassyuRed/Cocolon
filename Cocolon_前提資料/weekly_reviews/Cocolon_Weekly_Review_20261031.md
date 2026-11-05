@@ -4526,3 +4526,28 @@ Jupyterは既存Pod n1c0emcf17xs0uへ直接接続。GPUは実表示RTX4000 Ada�
 再開時はOP/STの完了runを再起動せず、private原本と最終headをfresh照合する。次の品質残件はOP02/03型の原文の主体・所有・否定を守るmodel品質、OP07/08型の一般文章から役割／判断／選択と本人の基準を読む品質、および記録間意味関係。v6通常選択、IF/Saved、分析観測会、採用重み・常時外部HTTPS・本番有効化・実Auth/DB/本人端末／配置、分散重複抑止も未完のまま。既存の材料定義・CMEE資産・前回の接続成果を無効にせず、その不足へ直接戻る。
 
 全体現在地は冒頭最新段落を置換、Analysis mapと01Bファイル地図を同じ差分で更新。既存API/DB/国家fanoutのcontract変更がないため、02/05の全面再生成は行わない。実環境GPT-6/Codex Work＋同環境read-only差分確認であり、独立Pro／Mashの正式受入れではない。
+
+
+<a id="analysis-actor-ownership-20261105"></a>
+## 199. 11/5 — 所有者／動作主の教示補正を実4Bで比較
+
+前回§198の原本とAPI1f4b304fを継承。actor教示の「僕の／僕ははどちらも僕を引用できる」はROLE例では正しいが、通常対象の所有者まで動作主にするOP03と整合する曖昧さがあった。原因と断定せず、旧v4/v6のmessages・request identity・stateを保持した新opt-in `selected_material.v7`で直接比較した。v7は役割を持つ人と対象の所有者を区別し、省略主体を補わない4架空対照を追加。v6の担当／決定の対照を継承し、原文の一意な引用を要求する。有限文法／意味型／作者／通常transportの変更はない。
+
+同a2e/config006e、同API d2416715、同一snapshot/user bytesのv6/v7新8組16応答と、前回8sourceのv7診断8応答を一度ずつ生成。24stop／1load／学習0、169.238874629秒、原重み不変。入力3233–3762tokens＋予約2048<8192。AP07/08は既知のROLE保持対照であり、8例全てを未見の一般評価とは呼ばない。
+
+| 対照 | 変更前 | v7の実結果 | 未達 |
+|---|---|---|---|
+| AP03・所有対象の予定メモ | v6は所有者「私」をactorへ | actorなし＋対象を保持し、誰の行動か未確定で保存 | 近接語彙1例の局所改善 |
+| OP02・費用の記録否定 | 旧v4は原文外「自分」を追加 | 架空主体を除き、否定と費用を保持して保存 | 意味一般化の証明ではない |
+| OP03・考えを書いた | 旧v4の所有者actor誤読 | raw bytes同一、unsupported維持 | 所有者／動作主の一般化は未達 |
+| ROLE＋決定の肯定／否定 | AP07/08 | v6/v7のraw・商品文章が同一。順序は原因にせず、否定を保持 | 担当から完了や選択基準を作らない |
+| 理由／意向 | AP06/OP07 | candidate保存、OP07の願望rootはACTION→ATTENTION | 比較文を理由にする誤り、一般map接続は残る |
+| OP08・旅行 | 旧v4は原文外の合成対象 | 逐語引用は改善しstrict候補を保持 | 未完「決まらず」の独立行動化と所有者actorが残る |
+
+新8組はv6保存5/8→v7保存6/8。他者AP05と理由AP06のunsupportedを保持。既知8sourceは、§198後の現consumerへ同rawを渡したv4の4保存→v7の5保存。分母には範囲対照と既知例が含まれ、一般精度ではない。AP01/02/04/07/08の既存商品文章と、OP01/04/05/06の保存文章を保持した。OP05では任意の費用target子が減っており、全候補粒度同一とは呼ばない。24候補はmapped0／route_edges0／主体・時制・肯否・modality未解決のまま保存し、意味確定へ昇格しない。
+
+API最終4d744e36へ同24rawを0生成／0loadでreplay（2.892669秒）。全request／responseとcandidate graph/text/diagram一致。各保存map内のcurrent／月次／readonlyはID・文章・図・coverage同一で非生成再読。保存は隔離mock RPC。原本60memberをPod外CRC／全bytes-SHA照合。初回回収のlog一つだけread_textでCRがLFへ正規化されたため、同じ元logのSHA一致を確認してbytes.decodeで再回収し全60一致。モデル再実行なし。
+
+[全原本](https://chatgpt.com/library?file_id=libfile_1189a389d9e481918f59607846dbe8fe&account_id=personal)、[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/actor_ownership_results.json)。実4Bの原rawは公開GitHubへ置かない。最終CI [42052701621](https://github.com/MassyuRed/mashos-api/actions/runs/42052701621)／job127332726656は全工程success。生成/保存2312 PASS・SQL依存1 SKIP・12048subtests、shared-owner1 PASS、累積/API/Q3/jobs182 PASS＋2subtests、SQL201原本/15月参照。Jupyter先行4suite248 PASS/24.79秒、追加最終9 PASS/1.53秒は重複合算しない。
+
+通常既定v4・v4限定self-hosted transport・旧各重み・既存ownerを保持。新profile/stateだけSTRUCTURE_MAP_DELTA_PRESENT。一般の本人基準・暗黙役割・記録間の意味、通常重み採用／本番／実DB／端末／配置／buildは未達。次は近接例で残った所有者誤読を、AP/OPを教師化せず既存CE学習と旧8教材の保持で比較する。完了runを再起動せず、新しい独立rootで準備する。

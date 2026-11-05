@@ -1,4 +1,4 @@
-> **11/5・分析の最新（第9回§198）：モデル経路で落ちていた主語未確定の完全過去行動と、同欄の複数本人行動を既存source証明のまま保持。元8応答の同raw比較は0→4保存、別6例も同raw旧0→新4保存。新14stop/2load/学習0、実4B保存は隔離mock RPC・別合成SQL182 PASS。主体・否定・明記順序・保存非生成再読を保持。一般の本人基準／暗黙役割・記録間意味、通常重み採用／本番／端末／配置は未達。最終CI42036416309は全工程成功。** [全結果・失敗・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-ordinary-prose-20261105)。
+> **11/5・分析の最新（第9回§199）：所有者を動作主へ移す曖昧な教示をopt-in v7だけで補正。学習0・同a2e/24stop/1load・169.238875秒。新8例はv6保存5→v7保存6、既知8例は現consumerのv4保存4→v7保存5。AP03とOP02を改善したがOP03の所有者誤読、比較意向/理由、一般分析は未達。旧v4/v6 bytes・通常v4・重み未採用を保持。24保存応答の非生成再読、60原本全SHA、最終CI42052701621全工程成功。** [実結果・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-actor-ownership-20261105)。
 
 > **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
@@ -3581,3 +3581,17 @@ AC01/04の明記順序は回答自身の担当→決定だけで、原因／親�
 | trial `ordinary_prose_trial.py` / `ordinary_sequence_transfer_trial.py` / `ordinary_prose_results.json` | 元8と別6の実4B各一回・同raw旧新版比較・非生成保存再読。公開集計からmodel rawを除外、全原本はprivate保存 |
 
 API意味bytes5a78eaa9・最終test1f4b304f。STRUCTURE_MAP_DELTA_NONE、既存semantic source/ensure/transport/作者/公開wire/DB/RNのowner追加0。新14stop/2load/学習0で元8は旧0→新4、別6も旧0→新4の限定接続差。一般読解/本人基準/暗黙役割/記録間、通常採用・本番・端末・配置は未達。[全結果・失敗・原本](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-ordinary-prose-20261105)。
+
+
+## 11/5 §199 — 所有対象／動作主のprivate profile差分と全変更path
+
+| repository path | 責務 |
+|---|---|
+| API `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py` | opt-in v7の教示・request identity・state/非生成reader。旧v4/v6 bytes保持 |
+| API `ai/services/ai_inference/analysis_cumulative_service.py` | v7のカテゴリ付きsource再束縛。通常ensure既定v4保持 |
+| API `ai/tests/test_analysis_model_actor_profile.py` | 省略・所有・明記主体・反復代名詞・理由/意向・prompt実例のsource束縛と再読 |
+| API `ai/tests/test_analysis_model_role_decision.py` | 新旧profile混用拒否／v7保存state再読 |
+| API `.github/workflows/analysis-observed-content.yml` | 上記新testを既存合成回帰へ追加 |
+| trial `actor_ownership_trial.py`／`actor_ownership_results.json` | 同一source v6/v7実4B一回比較・原本参照と本文なし集計 |
+
+新private profile/stateのみSTRUCTURE_MAP_DELTA_PRESENT、通常transport/意味型/compiler/作者/公開wire/DB/RN不変。API4d744e36／最終CI42052701621成功。一般読解・本人基準・記録間・通常採用は未達。詳細はweekly§199。
