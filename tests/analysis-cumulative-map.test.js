@@ -18,7 +18,7 @@ function latest(p=projection) { return { status:'ok', reason:'up_to_date', has_v
   report_id:id(p), generated_at:'2026-11-01T00:00:00Z', meta:p, map_context:counts }; }
 function row(month='2026-10-01', p=projection) { return { id:id(p), snapshot_month:month, source_profile:'cumulative.v1',
   content_json:{watashiMap:p,map_context:counts}, generated_at:'2026-10-10T00:00:00Z',captured_at:'2026-10-10T00:00:00Z' }; }
-function deferred() { let resolve; const promise=new Promise(r=>resolve=r); return {promise,resolve}; }
+function deferred() { let resolve,reject; const promise=new Promise((r,j)=>{resolve=r;reject=j;}); return {promise,resolve,reject}; }
 function button(render,label) { return render.root.findAllByType('TouchableOpacity').find(n=>n.findAllByType('Text').some(t=>String(t.props.children).includes(label))); }
 function harness(get) {
   const auth={session:{user:{id:owner}}}, plan={tier:'free',loading:false}, calls=[];
@@ -83,6 +83,79 @@ test('month comparison fetches current separately and preserves the captured pro
   assert.equal(JSON.stringify(stored),before);
   assert(h.calls.some(c=>c[1].includes('month=2026-10-01')));
   assert(h.calls.some(c=>c[1].includes('/latest?ensure=true')));
+  await act(async()=>view.unmount());
+});
+
+test('a temporary current comparison failure keeps the captured month and retries only on request',async()=>{
+  const unavailable=[Object.assign(new Error('model unavailable'),{status:503}),
+    Object.assign(new Error('model deadline'),{status:504}),
+    Object.assign(new Error('request timed out'),{name:'TimeoutError'}),new TypeError('Network request failed')];
+  for(const error of unavailable) {
+    const stored=row(), before=JSON.stringify(stored);let currentCalls=0;
+    const currentProjection=copy(projection);currentProjection.projection_of='artifact:00000000000000000000000000000066@1';
+    currentProjection.nodes[0].visible_label='RETRIED_CURRENT_MAP';
+    const h=harness(async url=>{
+      if(url.includes('/reports/'))return {item:stored};
+      currentCalls+=1;if(currentCalls===1)throw error;
+      return latest(currentProjection);
+    });
+    const View=h.load('components/selfStructure/CumulativeWatashiMapView.js').default;let view;
+    await act(async()=>{view=Renderer.create(React.createElement(View,{reportId:stored.id,month:stored.snapshot_month}));});
+    await act(async()=>button(view,'現在のマップと見比べる').props.onPress());
+    const failedBody=JSON.stringify(view.toJSON());
+    assert(failedBody.includes('当時：'));
+    assert(failedBody.includes(projection.nodes[0].visible_label));
+    assert(failedBody.includes('現在のマップを取得できませんでした。'));
+    assert(!failedBody.includes('マップを取得できませんでした。通信状況や現在の閲覧範囲を確認して、再取得してください。'));
+    assert.equal(view.root.findAllByProps({testID:'watashi-map-v2'}).length,1);
+    await act(async()=>{});assert.equal(currentCalls,1);
+    await act(async()=>button(view,'再取得').props.onPress());
+    const retriedBody=JSON.stringify(view.toJSON());
+    assert(retriedBody.includes('RETRIED_CURRENT_MAP'));
+    assert(!retriedBody.includes('現在のマップを取得できませんでした。'));
+    assert.equal(view.root.findAllByProps({testID:'watashi-map-v2'}).length,2);
+    assert.equal(currentCalls,2);assert.equal(JSON.stringify(stored),before);
+    assert(h.calls.every(c=>c[2].expectedUserId===owner));
+    await act(async()=>view.unmount());
+  }
+});
+
+test('comparison authorization failures and invalid current content do not retain the captured month',async()=>{
+  for(const outcome of [Object.assign(new Error('unauthorized'),{status:401}),
+    Object.assign(new Error('forbidden'),{status:403}),Object.assign(new Error('account changed'),{name:'AccountChangedError'}),
+    {...latest(),report_id:'invalid'}]) {
+    const stored=row();const h=harness(async url=>{
+      if(url.includes('/reports/'))return {item:stored};
+      if(outcome instanceof Error)throw outcome;
+      return outcome;
+    });
+    const View=h.load('components/selfStructure/CumulativeWatashiMapView.js').default;let view;
+    await act(async()=>{view=Renderer.create(React.createElement(View,{reportId:stored.id,month:stored.snapshot_month}));});
+    await act(async()=>button(view,'現在のマップと見比べる').props.onPress());
+    const body=JSON.stringify(view.toJSON());
+    assert(body.includes('現在の閲覧範囲を確認して、再取得してください。'));
+    assert.equal(view.root.findAllByProps({testID:'watashi-map-v2'}).length,0);
+    await act(async()=>view.unmount());
+  }
+});
+
+test('an obsolete comparison failure cannot restore the previous owner month',async()=>{
+  const pending=deferred(),stored=row();const nextOwner='00000000-0000-0000-0000-000000000002';
+  const h=harness(async(url,opts)=>{
+    if(opts.expectedUserId===nextOwner)throw Object.assign(new Error('new owner unavailable'),{status:401});
+    return url.includes('/reports/')?{item:stored}:pending.promise;
+  });
+  const View=h.load('components/selfStructure/CumulativeWatashiMapView.js').default;let view;
+  const props={reportId:stored.id,month:stored.snapshot_month};
+  await act(async()=>{view=Renderer.create(React.createElement(View,props));});
+  await act(async()=>{button(view,'現在のマップと見比べる').props.onPress();});
+  h.auth.session.user.id=nextOwner;
+  await act(async()=>view.update(React.createElement(View,props)));
+  await act(async()=>pending.reject(Object.assign(new Error('old model unavailable'),{status:503})));
+  const body=JSON.stringify(view.toJSON());
+  assert(!body.includes(projection.nodes[0].visible_label));
+  assert(!body.includes('当時のマップは保存されています。再取得で確認できます。'));
+  assert.equal(view.root.findAllByProps({testID:'watashi-map-v2'}).length,0);
   await act(async()=>view.unmount());
 });
 
