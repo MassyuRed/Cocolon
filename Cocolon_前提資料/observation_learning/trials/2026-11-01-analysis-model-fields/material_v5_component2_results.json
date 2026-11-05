@@ -1,44 +1,212 @@
 {
-  "kind": "RUNNING_CHECKPOINT_NOT_RESULT",
+  "kind": "BOUNDED_SEMANTIC_COMPONENT2_CLOSED_NOT_ADOPTED",
   "date": "2026-11-05",
-  "trial": "component2",
-  "runner_sha256": "fd8f40c42e132bad7dfd9b326a5f43e3193f28b03249eae490b53d3eba991375",
-  "root": "/workspace/analysis-material-v5-component2-cpu2-20261105",
-  "first_cpu": {
-    "status": "SERIALIZATION_COMPARISON_FAILURE_NO_MODEL",
-    "runner_sha256": "b354751fab236e2381ad37be26d4c8f3fd5d46b9bffe4f1fb4e669439d558867",
-    "originals_preserved": true
-  },
-  "corrected_cpu": {
-    "status": "CPU_PASSED_NO_MODEL",
-    "seconds": 15.41193901002407,
-    "teachers": 24,
-    "before_responses": 34,
-    "before_candidates": 34,
-    "before_typed": 19,
-    "model_loads": 0
-  },
-  "last_observed_run": {
-    "elapsed_seconds": 263.06908202171326,
-    "updates": 20,
-    "measurement_forwards": 24,
-    "new_generations": 0,
-    "status": "RUNNING_NOT_FINAL"
-  },
-  "planned": {
-    "updates": 24,
-    "measurement_forwards": 48,
-    "new_generations": 38,
-    "model_loads": 2,
-    "max_seconds": 900
-  },
-  "initial_weights_sha256": "7ba4e6e07f69e377b99052d1a795bfa833476c46ae643ec1abc2b638ca64efaa",
-  "same_teachers_targets_messages_order": true,
-  "semantic_review": "PENDING",
-  "collection": "PENDING",
+  "primary_outcome": "BLOCKER_NARROWED",
+  "product_credit": 0,
   "normal_adoption": false,
   "next_initial_adoption": false,
-  "product_credit": 0,
+  "initial": {
+    "weights_sha256": "7ba4e6e07f69e377b99052d1a795bfa833476c46ae643ec1abc2b638ca64efaa",
+    "config_sha256": "933c124413a8486d79a5da3c151321cf8d0e1622165b6241ddde38939933721c",
+    "unchanged": true,
+    "research_only": true,
+    "previous_unadopted_outputs_not_used": true
+  },
+  "scope": {
+    "teachers": 24,
+    "new_teachers_this_trial": 0,
+    "original90_unchanged": true,
+    "targets_messages_encoded_order_unchanged": true,
+    "held_QF4_not_trained": true,
+    "objective": "same full CE24 and old RU02/CP unions plus coefficient1 CP02 reason tail and CP04 utterance/content pair",
+    "components": {
+      "CP02": {
+        "target_chars": [
+          241,
+          330
+        ],
+        "tokens": 28
+      },
+      "CP04": {
+        "target_chars": [
+          30,
+          318
+        ],
+        "tokens": 88
+      }
+    },
+    "not_proven_unique_cause": true
+  },
+  "cpu": {
+    "first": "SERIALIZATION_COMPARISON_FAILURE_NO_MODEL",
+    "first_runner_sha256": "b354751fab236e2381ad37be26d4c8f3fd5d46b9bffe4f1fb4e669439d558867",
+    "first_log_sha256": "306575c2db62bb8cd252d16c273b75234957ae714a7bca5a6ae6a81eb405ac69",
+    "corrected": "CPU_PASSED_NO_MODEL",
+    "seconds": 15.41193901002407,
+    "model_loads": 0,
+    "correction": "canonical tuple/list value comparison only; fresh root with first originals preserved",
+    "second_root": "/workspace/analysis-material-v5-component2-cpu2-20261105"
+  },
+  "runtime": {
+    "updates": 24,
+    "measurement_forwards": 48,
+    "new_stop_generations": 38,
+    "retained_baselines": 34,
+    "CP4_initial_free_generation": false,
+    "model_loads": 2,
+    "elapsed_seconds": 715.9274437427521,
+    "stage_exit_codes": [
+      0,
+      0
+    ],
+    "no_retry": true,
+    "weights_sha256": "c52296e13f28971e729e1a8dc4e195023572c018cd2f6387b2b10217036da12f",
+    "config_sha256": "503a46fd0fe2981d672217d515de0a23b99cd5a3948527dbbdc5f4866d5d2954",
+    "runner_sha256": "fd8f40c42e132bad7dfd9b326a5f43e3193f28b03249eae490b53d3eba991375",
+    "gpu_after": "2 MiB, 0 %",
+    "compute_apps_after": "",
+    "processing_reference_usd": 0.05767193296816614,
+    "reference_usd_hour": 0.29,
+    "actual_total_bill_measured": false,
+    "preparation_collection_rental_tax_separate": true,
+    "pod_rental_maintained": true
+  },
+  "measurements": {
+    "teacher_mean_ce": [
+      [
+        "before",
+        0.02528468560209755
+      ],
+      [
+        "after",
+        0.013706225549564502
+      ]
+    ],
+    "components": [
+      {
+        "phase": "before",
+        "losses": {
+          "CP02": 0.23564939200878143,
+          "CP04": 0.037048015743494034
+        }
+      },
+      {
+        "phase": "after",
+        "losses": {
+          "CP02": 0.040919143706560135,
+          "CP04": 0.0453556627035141
+        }
+      }
+    ],
+    "quality_inference": false
+  },
+  "semantic_review": {
+    "coverage": "all38 source/after, retained initial34, preceding unit24 after38, old19 graph/text/diagram",
+    "vs_initial34": {
+      "raw_same": 29,
+      "raw_changed": 5,
+      "changed_ids": [
+        "SC01",
+        "OA01",
+        "X05",
+        "QF01",
+        "QF03"
+      ]
+    },
+    "vs_previous38": {
+      "raw_same": 36,
+      "raw_changed": 2,
+      "changed_ids": [
+        "OA01",
+        "CP03"
+      ]
+    },
+    "CP02": "same duplicate quote in TE_CONTEXT and WRITTEN_REASON; parent ambiguous strict rejection persists",
+    "CP04": "same reported content promoted to independent action with full utterance ATTRIBUTIVE child; attribution reversal persists",
+    "CP03": "regression: previously independent written action becomes CONTENT_TARGET of thought",
+    "OA01": "regression in NEGATION annotation range from full verb to suffix only; full root quote and polarity retained",
+    "QF01": "previous reason/time/negation qualifier repair retained, not a new gain",
+    "QF02": "reason marker omission persists",
+    "QF03": "overbroad action root and invalid modifier persist",
+    "SC01_MD02": "previous short NEGATION ranges persist",
+    "old19_graph_visible_retained": true,
+    "teacher_matches": [
+      "RU02/YREASON01",
+      "AT04",
+      "AT11",
+      "AT17",
+      "AT24"
+    ],
+    "CP_teacher_json_matches": 0,
+    "candidate_before": 34,
+    "candidate_after": 37,
+    "candidate_after_denominator": 38,
+    "typed_after": 19,
+    "candidate_counts_not_semantic_accuracy": true,
+    "CP_QF_typed_scope_unsupported_not_error_detection": true,
+    "hypothesis": "not supported by free generation; no ordinary or next-initial adoption"
+  },
+  "verification": {
+    "request_response_raw_hashes": 72,
+    "exact_before_ids": 34,
+    "exact_after_ids": 38,
+    "saved_candidate_replays": 71,
+    "saved_typed_replays": 38,
+    "replay_guards": "generation/compiler/author prohibited",
+    "old19_graph_text_diagram_asserted": true,
+    "candidate_source_coverage": "each returned candidate source1/processed1/unparsed1,mapped0/excluded0",
+    "zip_crc": true,
+    "manifest_members": 659,
+    "total_members": 660,
+    "all_member_bytes_sha256": true,
+    "adapter_tensors": 112,
+    "adapter_f32_values": 3833856,
+    "all_finite": true,
+    "tensor_offsets_contiguous": true
+  },
+  "owner_probe": {
+    "kind": "CPU_EXISTING_FINITE_ENGINE_PUBLIC_SYNTHETIC_PAIR_NO_MODEL",
+    "cases": 2,
+    "standalone": "GENERATED; one SELF past ACTION node, source evidence, text/diagram and four unknown scopes",
+    "closed_quote_prefix": "UNAVAILABLE; analysis_observed_route_not_established; no artifact",
+    "static_owner": "intent_compiler._fragment field-context quotation guard",
+    "source_commit": "ded0586720df0c0d50d8838bcd391a19ca3eead5",
+    "not_single_cause_proof": true,
+    "not_4B_or_product_acceptance": true,
+    "setup_errors": "test module absent; public fixture input constructors reproduced without API edits. Initial file creation command syntax error corrected before file/Engine execution.",
+    "files": [
+      "owner_closed_quote_probe.stderr",
+      "owner_closed_quote_probe2.py",
+      "owner_closed_quote_probe2.jsonl",
+      "owner_closed_quote_probe2.stderr"
+    ]
+  },
+  "archive": {
+    "library_file_id": "libfile_2814072c358c8191a5f46284dc4b8b08",
+    "bytes": 16014264,
+    "sha256": "8e71a8b0a28e0f8fd70e3bc88b986f20b7906b61c1ce9317f159b28e477d5e29",
+    "file": "Cocolon_Analysis_v5_component2_20261105.zip",
+    "private_originals": true,
+    "contains": "run original files, initial failed CPU files, saved adapter and owner CPU pair",
+    "parent_dependencies_inherited_not_complete_base_model": true
+  },
+  "next": {
+    "additional_GPU": "not fixed; no blind coefficient or same24 repeat",
+    "owner": "existing intent_compiler._fragment and semantic_admission; saved-artifact attribution and residual scope",
+    "task": "specify minimal existing-owner change that admits an evidenced self clause after closed other speech while retaining speech attribution and unparsed scope; check existing counterexamples first, do not simply remove quote guard",
+    "remaining": [
+      "normal 4B ensure connection",
+      "person-specific role/judgment/choice",
+      "supplement typed",
+      "cross-record recurrence/change",
+      "mixed-source attribution/residual semantics",
+      "IF/Saved",
+      "Mash observation teaching"
+    ]
+  },
   "structure_map_delta": "NONE",
-  "restart_forbidden": true
+  "production_changes": 0,
+  "independent_product_read": false,
+  "review": "root sole writer/executor/final judgment plus same-environment read-only auxiliary review; not independent Pro/Ultra/Mash Product Read",
+  "completed_run_restart_forbidden": true
 }

@@ -2017,3 +2017,28 @@ CPU15.962918秒/model load・forward0、24更新/48測定/112tensor保存照合/
 次は同じ24更新や追加係数の盲目的反復を止め、CP02の重複親とCP04の発話/事実逆転が実生成のどのprefixで始まるかを、保存raw・既存教師・既存入力/loss ownerで切り分ける。最初の文字差やteacher-forced CEだけを失敗箇所にしない。QF4は確認用のまま、失敗rawを新goldへ昇格しない。追加GPU条件は未固定。
 
 通常finite五種とprivate ROLE/ROLE＋ACTIONの限定意味証明は別。今回QF/CPのtyped scope_unsupported拒否は上記意味誤りを検出した証拠ではない。通常ensureへの4B接続、本人基準/役割・判断・選択、補足typed、記録間再出現/変化、混在sourceの帰属/残scopeの意味保存、IF/Saved、分析観測会は残件。通常source/型/意味gate/compiler/唯一作者/HTTP/DTO/DB/RN/Render/Supabase/配置/Pod管理の変更0、STRUCTURE_MAP_DELTA_NONE。実環境GPT-6/Codex Work、root単一writer/実行/最終判断＋同環境read-only補助であり、独立Pro/Ultra/Mash Product Readではない。局所改善と新退行を併記し、product_credit0、通常採用false。
+
+
+<a id="analysis-material-v5-component2-result-20261105"></a>
+## 146. 11/5 component2完了 — 追加loss仮説を不採用、既存意味ownerへ戻る
+
+**primary＝BLOCKER_NARROWED、product_credit0、通常/次初期採用false。** 既存24教材・研究初期7ba4/933c、入力/target/encoded/順序/seed/LR/clipを保持し、前回の全体CE＋RU02/CP unionに、CP02の理由注記から同じ理由object末尾28token、CP04の発話root＋引用内容pair88tokenの平均CE（係数各1）だけを追加した一回を閉鎖。新教師0、QF4は非学習確認のまま。24更新/48測定/保存再読後38新stop/2load、**715.927444秒・両工程exit0**、初期重み不変。CP4には初期自由生成beforeがなく、前回unit24のafterと別比較する。
+
+初回CPUは同じ座標のtuple/JSON配列を直接比較した華恋の機械的誤りで停止し、モデル処理0。canonical値比較だけを修正、初回runner/log/rootを保持して新rootで15.411939秒・CPU成功。target/mask/loss/受入条件は変更していない。実行runner SHA fd8f40c42e132bad7dfd9b326a5f43e3193f28b03249eae490b53d3eba991375。code/planは06ea525→a2d097、実行checkpointはb8f9ef5。GPUrun再試行0。
+
+| 対象 | 今回の原文照合結果 |
+|---|---|
+| CP02理由/CP04発話 | 前回rawと完全同一。CP02は同quoteの文脈/理由重複で親曖昧拒否、CP04は他者発話内容の独立ACTION化と発話全文の逆帰属が残る。今回の追加loss仮説は自由生成で支持されない |
+| CP03 | 前回分離した本人の記入行動が、思考のCONTENT_TARGETへ戻る新退行 |
+| OA01 | NEGATION注記が動詞を含む範囲から語尾だけへ縮む新退行。原文全文と否定極性自体は保持。SC01/MD02の同種の旧不足も残る |
+| QF/旧保持 | QF01の前回修復を保持するが今回の新改善ではない。QF02理由marker欠落/QF03過大quote・不正modifierは残る。旧19graph・可視文章・図とRU02/AT04/11/17/24の5教師JSON一致を保持 |
+
+初期before34とはraw29同一/5変更（SC01/OA01/X05/QF01/QF03）、前回unit24の38とはraw36同一/2変更（OA01/CP03）。候補は初期34/34→今回37/38、typed19。CP2の拒否は同じまま、受理数を意味精度へ換算しない。CP4教師JSON一致0/4。平均CE .025284686→.013706226、CP02追加範囲CE .235649392→.040919144、CP04追加範囲CE .037048016→.045355663。CE低下から自由生成成功を推定しない。
+
+72完全request/response/raw/hashと正確なbefore34/after38 IDを照合し、保存71候補/38typedを生成・compiler・作者禁止guard下で非生成再読。旧19のgraph/文章/図一致を必須assertで確認。受理候補は各source1/processed1/unparsed1・mapped0/excluded0。rootと同環境read-only補助が全38原文/after、before34/前回38、旧19表示を確認。[原本・追加重み](https://chatgpt.com/library?file_id=libfile_2814072c358c8191a5f46284dc4b8b08&account_id=personal)は16,014,264bytes、SHA256 8e71a8b0a28e0f8fd70e3bc88b986f20b7906b61c1ce9317f159b28e477d5e29。660member/manifest659の全bytes/SHA・CRC、112tensor/3,833,856F32有限・offset連続をPod外で照合。新weights c52296e13f28971e729e1a8dc4e195023572c018cd2f6387b2b10217036da12f、config 503a46fd0fe2981d672217d515de0a23b99cd5a3948527dbbdc5f4866d5d2954は通常/次初期へ不採用。元4B全重み/旧helper等は既存親archiveを継承し、このZIP単独に全依存を含むとはしない。
+
+**通常接続のCPU対照も実施。** 既存Engineと公開vertical testと同じrecord/request定義で、本人の過去行動単文はSELF ACTION一件・原文evidence・文章/図・未確定4scopeを生成。同じ節の前に閉じた他者発話を置くとUNAVAILABLE（analysis_observed_route_not_established）、artifactなし。実4B生成ではなく合成二件のCPU対照。最初はPodにtest moduleがなくimport停止、入力定義を再現後のfile作成command構文誤りもfile/Engine実行前に修正。初回import stderr・最終script/二結果を原本へ含めた。API ded0586の既存intent_compiler._fragmentがfield全体の引用記号を見て戻すguardはsourceでも確認したが、これを唯一の原因や一般修復証明とはしない。
+
+次は同じ24更新/係数追加を反復せず、既存intent_compiler._fragment/semantic_admissionと保存ownerで、閉じた他者発話後の本人節の主体・全文帰属・残scopeを維持してObservedPropositionへ渡す最小差分条件を具体化する。引用guardを単に削除しない。通常typedは明記ROLE/ROLE＋ACTIONの限定scopeのままで、CP/QFのtyped拒否は今回の意味誤り検出の証拠ではない。通常ensureの4B接続、本人基準/役割・判断・選択、補足typed、記録間再出現/変化、混在source帰属/残scope、IF/Saved、分析観測会は残件。
+
+GPU2MiB/0%・compute空、Podレンタル維持。前表示.29USD/hによるrun参考按分約.057671933USD、準備/回収/待機保持/通信保存/税等別・実総請求未測定。通常source/型/意味gate/compiler/唯一作者/HTTP/DTO/DB/RN/Render/Supabase/配置/Pod管理の変更0、STRUCTURE_MAP_DELTA_NONE。実環境GPT-6/Codex Work、root単一writer/実行/最終判断＋同環境read-only補助であり、独立Pro/Ultra/Mash Product Readではない。新c522は研究保全し、完了runを再起動しない。

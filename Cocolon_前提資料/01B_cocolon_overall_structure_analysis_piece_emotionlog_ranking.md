@@ -3441,3 +3441,8 @@ API dc05dc35、通常product owner追加なし。既存 `semantic_admission.py` 
 ### 11/5 — 既存組合せ教師の意味object全体へのloss比較
 
 既存trial内のmaterial_v5_composition_unit24_trial.pyは教材24/初期7ba4と既存RU02項を保ち、CP4の理由・思考/内容/独立行動のcomplete object unionを追加CEへ選び、CPU実tokenizer/24更新/48測定/保存後38生成/非生成保存再読を行う一回runner。material_v5_composition_unit24_plan.jsonは固定条件、material_v5_composition_unit24_results.jsonは本文なし最終判定/private原本参照。QF01とCP03に局所改善、CP02の重複親とCP04の発話帰属に新退行があり新a6b5不採用。新product owner/型/通常実装変更0、STRUCTURE_MAP_DELTA_NONE。[全結果と再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-material-v5-composition-unit24-result-20261105)、weekly§181。
+
+
+### 11/5 — component2の一回比較と通常帰属境界のCPU対照
+
+既存trialにmaterial_v5_component2_trial.py／material_v5_component2_plan.json／material_v5_component2_results.jsonを追加。前回同24教材へ理由末尾/発話内容pairの追加lossのみで比較し、CP02/04未修復・CP03/OA01退行により新重み不採用。[全結果](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-material-v5-component2-result-20261105)。private原本には初回CPU停止/修正後run/通常Engineの二件対照を含める。新しい商品型/owner/経路/DB/RN/配置変更0、STRUCTURE_MAP_DELTA_NONE。
