@@ -4796,3 +4796,31 @@ CPU準備の後、独立した正規合成応答で予備確認した。全20sou
 [本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/plain_wish4_results.json)、[全4raw・旧新再読・合成INPUT・検証logの非公開原本](https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal)。同一原本のversion4へ保存済み（16,132,669bytes、SHA3ede2d9d6ae4da3fed70d3c32ea11e5b0b12ead56cd8e84f900dafc2e777dd18）。raw／重みを公開GitHubへ置かない。
 
 次のwire24対照はCPU準備を完了した。実GPU対照の経過・結果は本節の実行成果へ含めず、後続の独立した比較で扱う。全欄を返す実モデル、通常全量取得の期限・出力2048、本人基準・暗黙役割・記録間の意味、一般日本語の読解安定性、通常モデル採用と正式受入れは残件である。
+
+<a id="analysis-multirecord-wire24-20261105"></a>
+## 211. 11/5開始の継続 — 複数record教材24更新では既知の欄欠落を改善せず
+
+§210から独立したwire24比較を固定API09b650／Qwen3.5-4B／元a2e・config006eから一度実行した。旧18のencoded／順序をそのまま保持し、既存T01/T02の完全recordを組み合わせたMW6（2／3／4record）だけを追加。本文・元記録時刻・カテゴリ等を部分切出しせず、同一recordの再掲には別IDを割り当て、完全recordの内容を保持した。assemblyは新規のcomplete合成snapshotであり、guardも全member集合から作る合成用識別子である。実DBのsnapshotや実DB guardではない。旧18はv4 encodedのまま、MW6は明示v7。CPUで24教師のstrict候補・非生成再読・実tokenizer／全prompt mask／終端と、旧18のencoded完全一致を確認した。
+
+before2＋after14の新16stop／3load、24更新／固定10点の前後NLL20測定を544.0003323350102秒で完走し、before／train／afterは全exit0。比較用のcached旧6は新生成に数えない。原source・旧pack／encoded・初期a2eは前後不変。新3f937251／configede2ce81は研究候補として保存対象にし、通常にも次学習初期にも採用しない。
+
+全16rawと51要求field位置を全文照合し、欄列挙・原文の意味・strict候補・直接mapを分けて判定した。51は同じsourceの前後等を含む位置数で、独立した51例の精度ではない。
+
+| 比較対象 | 実結果と限界 |
+|---|---|
+| MW6・学習既見assembly | after-onlyで全18fieldが教師と一致。before自由生成がないため、2〜4record列挙の改善とは判定しない |
+| HN01／HX01・各4field | 前後とも全欄あり。HNのrawは同一。HXは対象の正しいCONTENT_TARGET子を2個追加したが、元から直接mapは同一。HNは既学習source、HXも既知の非学習診断sourceの組合せで、blind held-outではない |
+| 旧成功4対照 | AP07／AP08／OP02はraw・候補・直接mapを保持。AE05だけ、省略主体の原文に存在しない「私」をEXPLICIT_ACTORへ追加してstrict拒否へ退行 |
+| 既知B20_C01／C03 | 要求7／6fieldに対し前後ともfield1だけ。rawとResponse全5項目がcached旧版と完全一致し、合計11field欠落は未改善。全20recordの合成は実行していない |
+
+同一入力で比較した8組で、全欄列挙の改善は0。AE05の拒否は人物引用の原文内出現0が原因で、否定そのものは保持されている。NEGATIONの引用範囲拡大と正しい対象子追加を否定誤読の原因にしない。B20のfield1内の行動・対象・希望は保持されるが、欠落した残り欄を複製・補完して部分成功へ変えず、既存packet拒否を維持した。いずれもstopであり、token長打切りや内部原因を断定しない。
+
+13候補state／37fieldの保存非生成再読を確認した。候補graphのUNVALIDATED_MODEL_CANDIDATEを意味確定へ昇格させない。直接offline mapは13生成・3拒否で、実API／DB保存mapは0。旧cachedの保存実績と、今回の直接評価を同じ保存試験として合算しない。全欄不足の既知2件と新しい主体創作1件が残るため、新候補は不採用である。
+
+固定10点の平均NLLは0.00015384457583422773→0.0002040052379015833。元から低かったMW教師NLLやafter-only一致を自由生成の意味品質へ換算せず、旧18全件のNLL保持とも呼ばない。Jupyter上のCPU重み監査では112tensor／3,833,856paramsの全有限・全112変更を確認したが、更新の事実であって品質改善の証明ではない。
+
+本試行の新API／意味型／文法／作者／公開DTO／DB／RN／配置／build変更0、STRUCTURE_MAP_DELTA_NONE。通常既定v4・重み通常未採用・本番未有効化を保持。全原本・新重みをPod外へ回収し、full ZIPの15,274,238bytes／SHA86ba14a67fccb952ffdd29866bec096defa19f2fed0fa8075138acb26154ed7f、97member／全96manifestのSHAとCRCを照合した。同一[非公開原本](https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal)のversion5へ保存済み（31,272,648bytes、SHA5ad02cb7812c0c4749f225f2fc422e7831a6f67376f385e616233e73b7029ee2）。raw／重み／人物を含む原本は公開GitHubへ置かない。原reportのPENDINGは改変せず、別の全読reviewへ不採用判断を残す。
+
+後続は元a2eを使い、新private v8のsystem末尾へ欄一覧／総数だけを加える2要求比較を予定する。100c1bb候補コードはcheckpointとテスト中の段階であり、本節の実行成果へ含めない。新profileの実4B結果・通常採用を主張しない。本人基準・暗黙役割・記録間意味、実モデル全欄出力と通常全量取得は引き続き残件である。
+
+[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/multirecord_wire_results.json)。
