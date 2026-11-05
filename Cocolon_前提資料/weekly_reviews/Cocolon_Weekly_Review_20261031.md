@@ -4683,3 +4683,31 @@ source2efdc782、testsea429f47をGitHub反映。実機/build/配布は未実施�
 
 次の実装はモデルを呼ばない、完全recordと本人補足を保つ入力予算分割planner。通常ensure/HTTP/Response/保存契約は変えず、まず全量parentと全childの過不足・scope・予算を確認する。旧Response rawの連結・field番号の意味的書換え・最新Nへの黙示削減はしない。実通信統合は別private batch envelopeと全量guardでの一回commit、既存60秒論理期限/単一生成lock、出力2048上限を解決する必要があり、CPU分割だけで全履歴分析の完了とは呼ばない。[測定原本/集計](../observation_learning/trials/2026-11-01-analysis-model-fields/cumulative_model_token_budget_results.json)、[全原本](https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal)。
 
+<a id="analysis-cumulative-partition-budget-20261105"></a>
+## 207. 11/5開始の継続 — 全recordと本人補足を保つ入力予算分割をCPUで確認
+
+§206で全履歴の一回入力がcontextとHTTP本文枠を超えることを確認したため、既存Analysis service内へ明示offlineの入力予算plannerを実装した。確認済みAPIは0018f5bf。通常ensure／factory／HTTP取得へはまだ選択しておらず、モデル応答の合成・通常保存・本番全量分析を完了した変更ではない。
+
+`AnalysisModelInputBudget`と`CumulativeModelBatchPlan`、`prepare_cumulative_model_batches`を既存serviceへ追加。呼出側が固定tokenizerと実HTTP JSON encoderによる同期の測定値を渡し、API側へ新しいtokenizer依存や推定値の既定を入れない。context8192、出力予約2048以上、HTTP本文65536bytes以下の既存上限を緩めない。同じ原入力の全欄と適格な本人補足を一単位として保持し、全量のowner／期間／DB guardを全childへ引き継ぐ。各childのrequest／source集合と根拠対応は、その完全record集合から正規に導出する。最新N件への切捨て、捏造したsubset guard、既存rawの連結やfield番号の付替えは行わない。
+
+全sourceの本人資格・safety・回答／更新境界を、予算callbackより前に既存ownerで検査する。欄のないrecordも隣接する完全recordと一緒に保持し、空sourceのモデル要求へ分離しない。分割できない一recordまたはそのgroupが上限を超える場合、途中の一部計画を返さず全準備を拒否する。greedyな連続分割であり、最少分割数の証明や、group拒否時に他の組み方も全て不可能だという証明ではない。
+
+Jupyterの新planner対象54件は50.27秒で全PASS（167件は対象外）。元の予行では実行path設定不足でcollection error。その修正後の2 FAILは、foreign／implicit補足の拒否試験を作るfixtureに`emotion_details`がなく、Emlis側のcanonical source凍結で先に拒否されたものだった。0018f5bfは当該fixtureへ平穏・mediumの正規情報を補ったtest差分であり、productionのsource資格・拒否条件を緩めていない。修正前の失敗logも保持する。
+
+その固定APIで実Qwen3.5-4B tokenizerを使い、独立した全1／20／50／100／201件の既存fixture×v4/v7の10計画と、Unicode・二欄原入力・保存済み本人補足1件を含む全50件fixture×v4/v7の2計画、合計12計画を完走した。実tokenizer測定488回、callback839回のうち再利用351回、190.352066296秒。これはcallbackを839回生成した結果ではない。fixtureは各件数の完全な独立合成集合で、実DBから取得した本人履歴ではない。
+
+| baseline全record数 | v4の分割 | v7の分割 |
+|---|---|---|
+| 1 | 1組・1件 | 1組・1件 |
+| 20 | 1組・20件 | 1組・20件 |
+| 50 | 2組・34/16件 | 3組・24/24/2件 |
+| 100 | 3組・34/34/32件 | 5組・24/24/24/24/4件 |
+| 201 | 6組・34件×5＋31件 | 9組・24件×8＋9件 |
+
+保存補足・Unicodeを含む50件はv4が33/17件、v7が23/24/3件に分かれた。同じ記録の二欄と本人補足1件は分断せず、全52field、全record ID、source envelope／evidence、カテゴリ・感情詳細・分析時点、全量guard／期間／ownerの対応を保持した。最大3本人補足を同じ原入力に保つ条件は別の合成unit testでも確認しており、この実tokenizer fixtureの補足数1件と混同しない。全childは入力token＋2048予約が8192以内かつ本文65536bytes以内、切断0。分割不要時は元parentそのものとmessagesを保持し、元snapshotと検査対象source SHAも前後不変だった。本文bytesは既存wire形と明記した合成model名での計測であり、異なる本番model名を含む要求サイズの保証ではない。
+
+最終CI [42086930254](https://github.com/MassyuRed/mashos-api/actions/runs/42086930254)/job127454452369は全step success。生成/保存2312 PASS・既存SQL依存1 SKIP・12048subtests、共有owner1 PASS、累積/API/jobs247 PASS・2subtests・既存warning1、隔離SQL201原本/15月参照を確認。54件のJupyter対象検証はCIの247件へ重複加算しない。CRC／manifest全SHAの照合済み原本は非公開で保持し、新しいモデルraw・重みは生成していない。従来の私的raw・保存重みも公開GitHubへ転記しない。
+
+当回12計画はtokenizerのみで、モデルload／生成／学習／ネットワーク要求／API write／DB accessは全て0。CIの隔離SQL検査とは範囲を分ける。入力予算を満たす準備までの結果であり、各応答が2048token以内に収まること、既存60秒の論理期限で全量実行できること、全履歴の意味品質・保存成功・本番処理完了を証明しない。次のbatch応答のprivate契約・全量guardによる一回commit・実通信統合は後続検証とし、未確定の合成結果を本節へ含めない。通常既定v4・研究重み通常未採用・本番未有効化を保持。公開API/DTO/DB/RN/配置/buildは変更していない。既存service内のoffline準備差分としてSTRUCTURE_MAP_DELTA_NONE。
+
+[公開集計](../observation_learning/trials/2026-11-01-analysis-model-fields/cumulative_model_partition_budget_results.json)、[全測定・失敗を含むログ原本](https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal)（同一原本version2、15,895,687bytes、SHA642662d8855660a5ecc09cfba5e83fa09cbf143429a90583bc25e1c507e2774c）。
