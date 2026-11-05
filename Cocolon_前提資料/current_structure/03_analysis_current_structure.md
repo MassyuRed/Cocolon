@@ -1,4 +1,4 @@
-> **11/5・分析の最新（第9回§194・適格補足の担当＋決定）：ANSWER自身の過去SELF担当ROLE＋決定ACTIONを既存完全field証拠で採用できるよう接続。実4Bの新source構成4要求（2構成は§193の節を再使用）で、新版は4保存・5record/未解析0、旧版は3未対応＋AC04の独立r2だけ部分保存。回答内明記順序だけ1/0/0/1辺、重複AC03は各2根拠でも記録count1。新4stop/1load/学習0・53.891秒、raw修復0。Jupyter316 PASS/SQL13 SKIP、CI42015033971全step成功。prompt/state/通常既定v4は不変、v6はopt-in・重み通常未採用、一般分析品質／通常4B接続／配置は未成立。** [全結果・制限](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplemental-role-decision-result-20261105)。
+> **11/5・分析の最新（第9回§197・実4B HTTPS→隔離SQL保存）：通常latestの専用設定から、証明書検証付きloopback HTTPS・保存a2eの実4B・既存CMEE・隔離PGlite SQLへ接続。新4stop/1load/学習0・47.111880秒/exit0で4保存/各2node、各3並行API要求→モデル1回。current/readonly/月次の本文・図・coverage・ID一致、肯否/主体/カテゴリと接続不明を保持。CI42027860903全step成功。合成認証/ASGI入口・localhost限定の接続確認で、一般品質/通常重み採用/常時提供/外部HTTPS/本番DB/端末/配置は未成立。** [全結果・限界](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-actual-https-sql-20261105)。
 
 > **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
@@ -1242,3 +1242,14 @@ API286cb1e6・Jupyter304 PASS/SQL16 SKIP、隔離SQL119 PASS、最終CI全工程
 新 `analysis_model_source.py` がHTTPS protocolとprivate設定factoryを持つ。中央 `analysis_cumulative_service.ensure_map` はdevelopment/ensure=True・明示sourceなしの場合だけAnalysis専用設定を選び、通常API/入力後/worker/cronを共通経路のまま接続する。未設定/offは従来finite、未対応の有効設定は生成時503でfallbackしない。設定identityの再確認・同一callable・保存再読・元source資格を保持し、既存material.v4/messages/rawを改変しない。意味の採否・型/作者/DTO/DB/RNは既存ownerのまま。
 
 APIfbbda209、Jupyter152 PASS/SQL16 SKIP・隔離SQL/API168 PASS。保存済み実4B SF4のHTTP形式再読は4保存/各2node・元本文図一致。HTTPはMockTransport、RPCも隔離mockで、実TLS/新生成/本番ではない。実4B HTTPS提供・採用重み・本番有効化/配置、一般本人基準/記録間意味、IF/Saved/観測会は残件。STRUCTURE_MAP_DELTA_PRESENT（条件付きsource接続owner）。[設定・全検証・制限](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-application-model-source-20261105)。
+
+
+## 11/5 §197 — 実4Bの検証付きHTTPSから隔離SQL保存・再読
+
+通常latestの専用設定factoryから、実loopback HTTPS→保存a2eの4B→既存CMEE→当回PGlite SQLへ接続。合成4構成、新4stop/1load/学習0・47.111880秒/exit0で4保存・各2node/1artifact/1月参照。各3並行callerをモデル1回へ共有し、保存後のcurrent/readonly/月次は生成を禁止して本文・図・coverage・ID一致。肯否/本人/過去/元カテゴリと不足/接続不明を保持し、因果や順序の辺は0。未知CA拒否・hostname/CERT_REQUIRED、127.0.0.1限定、source/adapter前後不変を確認。
+
+API65e7fa0bは既存testへの実TLS証明書検査だけ。runner09346d3f/SHA225b1d46と公開合成集計resultsを追加し、商品owner/DTO/DB/RNの責務追加0、STRUCTURE_MAP_DELTA_NONE。Jupyter CPU1 PASS＋smoke1保存、最終CI42027860903全step success（生成保存2240 PASS/旧SQL1 SKIP/12048subtests、共有owner1、累積179、SQL201/15）。予行のdirty/mode不足失敗は原本へ保持。
+
+API入口は合成認証/ASGI、モデルだけ実HTTPS socket、DBは隔離SQL。一般品質/暗黙役割や選択/本人基準/記録間意味・IF/Saved/観測会、採用重み/外部の常時提供/本番有効化/DB/端末/配置は残件。v6 opt-in・通常未採用を維持する。
+
+[全結果・原本・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-actual-https-sql-20261105)。

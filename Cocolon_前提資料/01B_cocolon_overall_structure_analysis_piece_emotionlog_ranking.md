@@ -1,4 +1,4 @@
-> **11/5・分析の最新（第9回§194・適格補足の担当＋決定）：ANSWER自身の過去SELF担当ROLE＋決定ACTIONを既存完全field証拠で採用できるよう接続。実4Bの新source構成4要求（2構成は§193の節を再使用）で、新版は4保存・5record/未解析0、旧版は3未対応＋AC04の独立r2だけ部分保存。回答内明記順序だけ1/0/0/1辺、重複AC03は各2根拠でも記録count1。新4stop/1load/学習0・53.891秒、raw修復0。Jupyter316 PASS/SQL13 SKIP、CI42015033971全step成功。prompt/state/通常既定v4は不変、v6はopt-in・重み通常未採用、一般分析品質／通常4B接続／配置は未成立。** [全結果・制限](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplemental-role-decision-result-20261105)。
+> **11/5・分析の最新（第9回§197・実4B HTTPS→隔離SQL保存）：通常latestの専用設定から、証明書検証付きloopback HTTPS・保存a2eの実4B・既存CMEE・隔離PGlite SQLへ接続。新4stop/1load/学習0・47.111880秒/exit0で4保存/各2node、各3並行API要求→モデル1回。current/readonly/月次の本文・図・coverage・ID一致、肯否/主体/カテゴリと接続不明を保持。CI42027860903全step成功。合成認証/ASGI入口・localhost限定の接続確認で、一般品質/通常重み採用/常時提供/外部HTTPS/本番DB/端末/配置は未成立。** [全結果・限界](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-actual-https-sql-20261105)。
 
 > **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
@@ -3557,3 +3557,16 @@ AC01/04の明記順序は回答自身の担当→決定だけで、原因／親�
 | 既存 `.github/workflows/analysis-observed-content.yml` | 新transport pathも既存の生成/保存/累積SQL CIの起動対象とする |
 
 各API/worker/cronの別writer追加0、意味型/作者/保存版/公開DTO/DB/RN/商品依存追加0。通常設定接続のコードと、実4Bの提供/採用/有効化/配置は区別。APIfbbda209、STRUCTURE_MAP_DELTA_PRESENT。[全結果・制限](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-application-model-source-20261105)。
+
+
+## 11/5 §197 — 実通信・隔離SQL一巡の検証ファイル（商品構造不変）
+
+| owner path | 当回差分 |
+|---|---|
+| API既存 `ai/tests/test_analysis_cumulative_model_source.py` | 実127.0.0.1 TLS serverで未信頼CA拒否・専用SSLContext受理・元packet/Response一致を検証。製品runtime変更なし |
+| trial新 `application_model_https_trial.py` | 既存generic handler/loaderをlocalhost限定TLSで再利用。通常ASGI API＋合成認証・当回隔離SQL・固定a2e/4要求600秒・原本checkpoint・保存非生成再読を検証。production serverではない |
+| trial新 `application_model_https_results.json` | 華恋合成4構成の元入力と本文を含まないcoverage・呼出し/保存集計・表示hash。全表示・model raw・秘密鍵は公開しない |
+
+実4B新4stop/1load/学習0、4保存/各2node/未解析0・47.111880秒。元service/source SHA不変、STRUCTURE_MAP_DELTA_NONE。一般意味品質・通常採用・外部/常時HTTPS・本番DB/認証/端末/配置は未成立。
+
+[全結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-actual-https-sql-20261105)。

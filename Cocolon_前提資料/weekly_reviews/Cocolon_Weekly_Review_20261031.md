@@ -1,4 +1,4 @@
-> **11/5・分析の最新（第9回§194・適格補足の担当＋決定）：ANSWER自身の過去SELF担当ROLE＋決定ACTIONを既存完全field証拠で採用できるよう接続。実4Bの新source構成4要求（2構成は§193の節を再使用）で、新版は4保存・5record/未解析0、旧版は3未対応＋AC04の独立r2だけ部分保存。回答内明記順序だけ1/0/0/1辺、重複AC03は各2根拠でも記録count1。新4stop/1load/学習0・53.891秒、raw修復0。Jupyter316 PASS/SQL13 SKIP、CI42015033971全step成功。prompt/state/通常既定v4は不変、v6はopt-in・重み通常未採用、一般分析品質／通常4B接続／配置は未成立。** [全結果・制限](#analysis-supplemental-role-decision-result-20261105)。
+> **11/5・分析の最新（第9回§197・実4B HTTPS→隔離SQL保存）：通常latestの専用設定から、証明書検証付きloopback HTTPS・保存a2eの実4B・既存CMEE・隔離PGlite SQLへ接続。新4stop/1load/学習0・47.111880秒/exit0で4保存/各2node、各3並行API要求→モデル1回。current/readonly/月次の本文・図・coverage・ID一致、肯否/主体/カテゴリと接続不明を保持。CI42027860903全step成功。合成認証/ASGI入口・localhost限定の接続確認で、一般品質/通常重み採用/常時提供/外部HTTPS/本番DB/端末/配置は未成立。** [全結果・限界](#analysis-actual-https-sql-20261105)。
 
 # 第9回 Cocolon週末報告会 — 2026-10-31（開催中）
 
@@ -4419,3 +4419,55 @@ Jupyterの16件とCIの旧model-fields SQL1件のSKIPを実行済みにしない
 新 `ai/services/ai_inference/analysis_model_source.py` はAnalysisのHTTP transportと私有設定factoryだけを担当。既存serviceが中央選択/保存前の設定一致、既存model-source/API testsがHTTP protocol/通常auth/SQL/失敗/同時要求を検証する。既存workflowへ新sourceのpath filterを追加した。公開API/DTO/DB/RN/依存/意味型/唯一作者は不変、STRUCTURE_MAP_DELTA_PRESENT（既存Analysis入口から条件付き外部sourceへの接続、新transport owner追加）。
 
 **コード上の通常設定接続は実装済み。実4Bが常時返すHTTPS提供先・実機一巡・設定有効化と本番配置は未成立。** §193のv6 opt-inとa2e等の通常未採用を維持し、返却model名だけでweights採用へ進めない。一般的な本人基準・暗黙役割/判断・選択・記録間意味関係、IF/Saved/分析観測会、複数process抑止は残件。次は提供方法/採用候補の既存ownerと合わせ、隔離した実4B transport一往復を確認する。これを一般文章品質・正式受入れ・配置済みへ換算しない。Render/Supabaseの本番操作・DB変更・RN build・Pod管理/新GPU購入0。実行GPT-6/Codex Work、root単一writer＋同環境read-only review、独立Pro/Ultra/Mash Product Readではない。
+
+
+<a id="analysis-actual-https-sql-20261105"></a>
+
+## 197. 通常APIから実4BのHTTPS生成・隔離SQL保存・非生成再読を確認（2026-11-05 JST）
+
+§196のMockTransport再読から進み、Jupyterに直接接続して通常の `GET /self-structure/latest?force=true` →Analysis専用設定factory→証明書検証付きloopback HTTPS→保存済みa2eの実4B→既存CMEE→当回の隔離SQL保存までを一巡した。API入口はASGI内の通常FastAPI route、認証は合成本人token、モデル通信は実HTTPS socket。SQLは既存 `sql_source` fixtureのschema/migrations/RPCを使う新しいPGliteで、mock保存結果の返却ではない。本番Supabase/PostgREST/RLS・実Auth・外部ネットワークの証明とはしない。
+
+### 固定版と実行範囲
+
+- API `65e7fa0b4b29fb293f1da07f866dc6c912bbae29`（親fbbda209、既存model-source test1pathのみ追加）。製品runtimeのsource `ccd94afc…` / service `d1ce64fb…` は§196と同一。実行前/後のSHAを照合。
+- 公開runner `application_model_https_trial.py` はCocolon `09346d3f00d4216729acf143d8d61ca485b23d8e`、SHA256 `225b1d46d781a8a0e774a5f68ccd73ddb1ced2fe79871d7d3cf7e383de4dd75a`。上限4要求・全体600秒、別root既存時は起動拒否。生成原本をHTTP返却前に原子的checkpointし、失敗時もphase/例外型を保持。自動retryなし。
+- 固定Qwen/Qwen3.5-4B revision851bf6e、保存a2e/config006eと既存transformers5.19.0/peft0.21.2/accelerate1.15.0/safetensors0.8.0。学習0、通常採用false、重み/configは前後SHA一致。新GPU購入/レンタル変更なし。
+- 既存の汎用chat handler/検証済みloaderを再使用し、listenは127.0.0.1限定。1日限りのlocalhost証明書を、そのclientだけのSSLContextへ信頼登録。hostname照合/CERT_REQUIREDを維持し、未信頼CAの接続が生成前に拒否されることを実socketで確認。verify=False・global CA変更・公開ポート・永続鍵なし。fresh実AsyncHTTPTransportだけを注入し、モデル通信のMockTransport/ASGI代用なし。
+- test-only Node24.8.0（公式配布checksum照合）/既存PGlite0.5.8を専用rootへ用意。商品依存・製品設定は変更していない。Jupyter Python3.12.3/FastAPI0.162.0/Pydantic2.14.1、httpx0.28.1。
+
+### 4例の原本と保存内容
+
+既知の局所文型に近い華恋の合成4構成であり、独立held-outの一般言語率ではない。
+
+| 例 | 構成 | 通常API/実モデル/保存 |
+|---|---|---|
+| H01 | 別fieldの肯定役割＋肯定行動、仕事 | 3caller→1 HTTP200/stop、2node・1artifact/1月参照 |
+| H02 | 別fieldの否定役割＋否定行動、生活 | 同上。双方の否定をrawと表示へ保持 |
+| H03 | 同fieldの肯定役割＋肯定行動、生活 | 同上。対象の別unitは無いが、完全行動quoteと既存proofから「資料を調べる」を保持 |
+| H04 | 同fieldの丁寧な否定役割＋否定行動、仕事 | 同上。双方の否定をrawと表示へ保持 |
+
+新4stop/1load/学習0、**47.11187983956188秒/exit0、4保存・計8node・未解析0・辺0**。各本人の原入力1recordだけを当回SQLから取得し、元カテゴリは意味役割の代用品にしない。本人・過去時点・役割と行動の肯否を保持し、場面/考え/結果の不足と段階間の接続不明を残した。原文にない因果・順序・判断基準を作らない。全4原文/raw/文章図をrootと同環境read-only reviewerが読解し、raw SHAとsent messages digest・owner/request_ref対応も再計算した。prepare記録は各2回/計8だが、モデル呼出しは各1回/計4である。
+
+保存後は生成を例外で禁止したままcurrent/ensure=false/月次ensureを読み、本文・metaの図・report ID・map_contextのcoverageが全一致、refreshed=false。各ownerのSQL artifact/月参照は1/1。API同時12callerは12生成ではない。製品runtimeの前後SHA一致とadapter/config不変を確認し、完了後nvidia-smiでGPU compute processなし。Podレンタル自体は維持する。
+
+### CPU準備とCI
+
+| 実行 | 結果と限界 |
+|---|---|
+| Work最初のsmoke | dirty tracked testのpreflightで拒否。モデル/生成0 |
+| Work次のsmoke | harnessのdevelopment env不足でlegacy routeへ入り取得前拒否。phase COMPLETEだったがmodel call0のため無効な予行として保持。製品不具合/成功へ換算しない |
+| harness補修後 | development指定・各例ちょうど1モデル呼出し・smokeの保存必須assert、生成例外checkpointを追加。Work最終smoke4.981951秒で1保存、モデル0 |
+| Jupyter CPU | 実TLS証明書test **1 PASS/152 deselected・4.26秒**。同じ固定runnerのsmoke **1保存・6.472730秒**。いずれも実4Bをloadしない |
+| [CI42027860903](https://github.com/MassyuRed/mashos-api/actions/runs/42027860903) / job127246486361 | 全step success。Python3.12.15、生成/保存2240 PASS・旧SQL1 SKIP・12048 subtests/291.15秒、共有owner1 PASS/194 deselected/20.84秒、累積/API/Q3/jobs179 PASS・既存warning1・2 subtests/57.28秒、月次SQL201原本/15月参照成功 |
+
+Jupyterには今回SQL runtimeを用意して当回4例を実SQLで確認したが、§196の旧152件でSKIPだった16testを今回すべて再実行したとはしない。追加した証明書testはWorkとJupyterとCIで成功。全体CIの旧SQL1 SKIPは保持する。GPU警告（base config/未導入optimized kernelによるreference fallback）は原状態を保持し、依存の入替や再実行はしない。
+
+### 原本・変更owner・次
+
+[非公開の全検証原本](https://chatgpt.com/library?file_id=libfile_6b231d704a2881919febd3b3fcf384f4&account_id=personal) は原4応答・送信prepared inputs・4DTO/全再読・CPU失敗を含む準備履歴・CI要約を保持する。Pod原本202,295bytes/SHA256 `aeb052040394e8fb2cbd5dfb82140d6dfd779fc0781caff5f25215dbfd74e0fb` を取得側と照合し、元JSONの正規serializationも保持。TLS秘密鍵/実API鍵は含まない。公開は合成入力と本文を含まない集計の `application_model_https_results.json` とrunnerだけで、model rawをGitHubへ公開しない。
+
+作業root `/workspace/analysis-actual-https-runtime` にclean API worktree、trial.py、smoke/report.json、gpu/report.json・gpu.log/exitを保持。元完成runは再起動しない。今回のAPI差分は既存testだけ、商品構造/意味owner/作者/型/DTO/DB/RNの変更0、STRUCTURE_MAP_DELTA_NONE。既存 `analysis_model_source.py` の実通信経路を確認したもので、常時serverの新ownerを配置していない。
+
+**成立したのは、合成認証の通常API→実4Bの検証付きlocalhost TLS→隔離SQL保存・再読という限定一巡。** 外部HTTPSの常時提供・採用重み・本番有効化/配置・実Auth/本番DB・本人端末は未成立。一般文章の暗黙役割/判断/選択・本人基準・記録間意味関係、v6補足の通常選択、IF/Saved/分析観測会、分散重複抑止は残件。次はこの接続成果を保持し、既存の採用/常時提供ownerと一般読解未達へ照合する。Render/Supabase本番操作・main merge・RN build・新GPU購入0。GPT-6/Codex Work＋同環境reviewで、独立Pro/Ultra/Mash正式受入れではない。
+
+[全結果・原本・残件](#analysis-actual-https-sql-20261105)。
