@@ -214,7 +214,10 @@ def replay(api,source,root,expected,compare_root):
                 old = load(compare_root/(name+'.replay.json'))
                 assert old['bindings'] == bindings, 'old_new_response_or_input_changed'
                 old_map,new_map = old.get('observed_map'),private.get('observed_map')
-                equal = old_map == new_map if old_map is not None and new_map is not None else None
+                # Saved JSON uses lists and encoded byte descriptors; the
+                # in-memory asdict payload still has tuples and bytes. Compare
+                # their complete canonical storage representation, in order.
+                equal = canonical(old_map) == canonical(new_map) if old_map is not None and new_map is not None else None
                 case['comparison'] = dict(old_status=old['status'],new_status=case['status'],
                     same_response_and_input=True,normalized_graph_text_projection_equal=equal,
                     coverage_equal=old['coverage'] == private['coverage'] if 'coverage' in old and 'coverage' in private else None,
