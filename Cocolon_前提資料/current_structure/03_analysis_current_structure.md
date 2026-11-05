@@ -1,4 +1,4 @@
-> **11/5開始・分析の継続（第9回§212）：v7を継承し欄一覧／総数だけを足すprivate v8を実装、Jupyter384 PASS・CI全工程成功。実4Bは1回開始後signal14で終了し返却raw0、FC03未実行・再試行0。全欄改善／意味品質／strict受理は判定不能。通常選択は拡張せず、失敗原本はversion6保存済み。optional kernel未導入・速度未証明、後続negativewishはコードcheckpoint／テスト中で成果未算入。** [全結果・原本・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-v8-fieldcount-20261105)。
+> **11/5開始・分析の継続（第9回§213）：元全文が否定を保つ希望を、原sourceのSELF／negative／wish証明のまま既存consumerへ接続。Jupyter241 PASS・CI全工程成功。同じ実4Bの4原応答を0モデル再読し、WH04だけNoneから否定希望1node、WH02はcanonical一致、WH01／03は未対応を維持。raw修復／NEG追加／DB保存0。初回harness誤比較と商品差を分け、失敗原本も保持。version7保存済み。通常採用・本番未有効化。** [全結果・境界・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-negative-wish-consumer-20261105)。
 
 > **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
@@ -1305,3 +1305,9 @@ assemblyは元の完全recordを組み直した新規complete合成snapshotで�
 API100c1bbでprivate v8を追加。v7 system全文＋実field番号一覧／総数tailだけを変更し、userとsourceを保持、profile／ref／stateを分離。通常constructor／既定v4／planner／batch選択は不変。Jupyter384 PASS／PG未設定19 SKIP、CI全工程成功。実4Bは1load／開始1／raw0／新生成0／学習0、34.607942907秒・child -14で終了。FC03未実行・model retry0。改善／意味品質／strict受理は判定不能。失敗原本はversion6保存済み。optional kernel未導入・速度未証明、後続negativewishコードは成果未算入。
 
 旧v7のcached原応答を新v8の生成に数えず、source／guard／user不変とprivate identityの差を保持する。CPU入力予算fitと合成回帰成功を、実4Bの全欄出力・map品質へ換算しない。fallback警告は時間blockerの仮説候補で、終了原因を断定しない。[実結果・原本・境界](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-v8-fieldcount-20261105)。
+
+## §213 — 否定を全文で保持したplain wishを接続
+
+API5c9606で、原memoの明記SELF・否定希望current_input／pastを元全文・source proofのままconsumerへ接続。NEG注釈を追加せず、shared checker／grammar／作者は不変。Jupyter241 PASS・CI全工程成功。同じ元実4Bの4Responseを0モデル再読し、WH04だけNone→否定希望1node、WH02肯定pastはcanonical一致、WH01／03は未対応維持。初回harnessのtuple/list誤比較と商品結果を分け、失敗原本も保持。全4replay ZIPのCRC／全manifestを照合し、version7保存済み。通常採用・本番未有効化。
+
+WH04の元rootは既に否定を保持しており、旧consumerの肯定限定が未対応の原因だった。既存原memoの完全source proofとunit照合を保ち、NEG注釈や主体を補完しない。このwish proofと併存するACTIONは従来の肯定過去のみ。一般読解・他者／省略／認知／順序／別欄／補足・全量取得への新しい成功主張はない。[原本・同一応答比較](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-negative-wish-consumer-20261105)。
