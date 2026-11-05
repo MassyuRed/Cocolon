@@ -38,7 +38,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
     if (!owner) { setState({ key, error: 'ログインしてから、もう一度開いてください。' }); return; }
     const active = () => currentKey.current === key && request.current === seq;
     try {
-      let row, now = null;
+      let row, now = null, comparisonFailed = false;
       if (reportId) {
         const data = await apiGet(buildSelfStructureReportDetailPath(reportId, month), { expectedUserId: owner });
         if (!active()) return;
@@ -54,12 +54,22 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
         }
       }
       if (withCurrent && reportId) {
-        const data = await apiGet(`${SELF_STRUCTURE_WIRE.routes.latest}?ensure=true`, { expectedUserId: owner, timeoutMs: 60000 });
-        if (!active()) return;
-        now = checkedCurrentResult(data);
+        try {
+          const data = await apiGet(`${SELF_STRUCTURE_WIRE.routes.latest}?ensure=true`, { expectedUserId: owner, timeoutMs: 60000 });
+          if (!active()) return;
+          now = checkedCurrentResult(data);
+        } catch (error) {
+          if (!active()) return;
+          const status = Number(error?.status);
+          const temporarilyUnavailable = (Number.isInteger(status) && status >= 500 && status <= 599)
+            || error?.name === 'TimeoutError'
+            || (error?.name === 'TypeError' && /network|fetch/i.test(String(error?.message || '')));
+          if (!temporarilyUnavailable) throw error;
+          comparisonFailed = true;
+        }
       }
       if (active()) {
-        setState({ key, row, now, comparisonUnavailable: withCurrent && !now });
+        setState({ key, row, now, comparisonUnavailable: withCurrent && !now, comparisonFailed });
       }
     } catch {
       if (active()) setState({ key, error: 'マップを取得できませんでした。通信状況や現在の閲覧範囲を確認して、再取得してください。' });
@@ -133,7 +143,11 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
         {compare ? <Text style={[styles.title, { color: ink }]}>当時：{monthLabel(month)}</Text> : null}
         {renderMap(state.row)}
         {compare && state.now ? <><Text style={[styles.title, { color: ink }]}>現在</Text>{renderMap(state.now)}</> : null}
-        {compare && state.comparisonUnavailable ? <Text style={{ color: ink }}>現在のマップはまだ表示できません。当時のマップは保存されています。</Text> : null}
+        {compare && state.comparisonUnavailable ? <Text style={{ color: ink }} accessibilityRole={state.comparisonFailed ? 'alert' : undefined}>
+          {state.comparisonFailed
+            ? '現在のマップを取得できませんでした。当時のマップは保存されています。再取得で確認できます。'
+            : '現在のマップはまだ表示できません。当時のマップは保存されています。'}
+        </Text> : null}
       </> : null}
       {visible && !state.loading ? <TouchableOpacity style={styles.button} accessibilityRole="button" onPress={() => load(compare)}>
         <Text style={[styles.action, { color: ink }]}>再取得</Text>
