@@ -1,4 +1,4 @@
-> **11/5開始・分析の継続（第9回§207）：全record・全欄・本人補足と全量guardを保つoffline入力分割を追加。12計画/488実tokenizer測定で201件も欠落なく入力枠内へ分割し、54追加テストとCI全step成功。通常の全量モデル実行、出力2048/60秒期限の成立は未証明。主体/役割/本人基準・記録間意味の読み取り、通常採用・本番/端末は引き続き残件。** [全結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-cumulative-partition-budget-20261105)。
+> **11/5開始・分析の継続（第9回§208–209）：全sourceを保つprivate batch INPUTと全量一回の合成を実装し、201件の合成一致・新55テスト・CI全工程成功。実4Bにも全20件を3分割で送ったが、3stopとも先頭fieldしか返さず全体拒否、合成/保存0。全欄保持と通常の全量取得は未達。希望の取り込み境界は後続修正・確認中。通常採用・本番/端末未実施。** [結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-batch20-20261105)。
 
 > **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
@@ -3646,3 +3646,17 @@ API db311746。元semantic profile/state/meaning compiler/作者/公開wire/DB/R
 API0018f5bf、CI42086930254成功。入力予算準備だけで、出力2048適合・60秒全量処理・意味合成/保存/本番成功は未証明。通常既定v4を保持し、公開contract/DB/RN/配置/buildの変更0。STRUCTURE_MAP_DELTA_NONE（既存service内のoffline準備）。後続のbatch合成契約は本節と別に検証する。
 
 公開集計はtrial `cumulative_model_partition_budget_results.json`、私的原本はweekly§207を参照する。
+
+## §208 — 原応答を保つprivate batch INPUTと全量の明示offline合成
+
+| owner path | 当回差分 |
+|---|---|
+| API `.../cores/analysis/semantic_admission.py` | private batch INPUT型/stateと全parent/child/record/fieldのexact検査・input保存再束縛。既存singleと共通のrecord compile/全量集約・最後の一回authorを使用 |
+| API `ai/services/ai_inference/analysis_cumulative_service.py` | 明示offlineのbuild／serialize INPUT／reload INPUTの3wrapper。元snapshot・全量coverageを維持。通常ensure/factory/HTTP/保存不変 |
+| API新 `ai/tests/test_analysis_cumulative_model_batches.py` | 合成応答55対象。201child対全量logical oracle、部分未解析/欄なし・補足/ROLE・input往復・全体拒否・旧9profile保持 |
+| API既存 `.github/workflows/analysis-observed-content.yml` | 既存の累積/API/jobs suiteに新moduleを追加。build/配置なし |
+
+APIfc7563b9、CI42091295426全工程成功。新private INPUT/stateとoffline合成の責務追加としてSTRUCTURE_MAP_DELTA_PRESENT。通常／公開DTO／保存map／DB／RN契約は不変。raw連結・巨大Response再構成はせず、通常分割取得・実4B全量処理・出力2048/全体60秒・一回commitは本節の完了対象ではない。
+
+
+trial `cumulative_model_batch_live.py`は全20件の一回3生成と各raw/拒否理由を非公開保持する研究専用runner。`cumulative_model_batch_composition_results.json`と`cumulative_model_batch20_results.json`が公開集計。通常のmodel factory／ensure／公開DTO／DB／RNの責務は不変。
