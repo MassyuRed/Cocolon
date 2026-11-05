@@ -1,4 +1,4 @@
-> **11/5・分析の最新（第9回§199）：所有者を動作主へ移す曖昧な教示をopt-in v7だけで補正。学習0・同a2e/24stop/1load・169.238875秒。新8例はv6保存5→v7保存6、既知8例は現consumerのv4保存4→v7保存5。AP03とOP02を改善したがOP03の所有者誤読、比較意向/理由、一般分析は未達。旧v4/v6 bytes・通常v4・重み未採用を保持。24保存応答の非生成再読、60原本全SHA、最終CI42052701621全工程成功。** [実結果・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-actor-ownership-20261105)。
+> **11/5開始・分析の継続（第9回§199–200）：v7の局所改善を保持。追加20更新/18stop＋既見診断4stopは完走したが、別文の所有者誤読と理由文の退行が残り新b7は不採用。旧4保存の文章/図/coverageと24応答の0モデル再読、112tensor保全を確認。独立6対照の追加はCPUのみ完了、旧14原本/全mask保持。通常v4・本番・端末・配置は不変。** [全結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-actor-ownership-ce20-20261105)。
 
 > **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
@@ -3595,3 +3595,16 @@ API意味bytes5a78eaa9・最終test1f4b304f。STRUCTURE_MAP_DELTA_NONE、既存s
 | trial `actor_ownership_trial.py`／`actor_ownership_results.json` | 同一source v6/v7実4B一回比較・原本参照と本文なし集計 |
 
 新private profile/stateのみSTRUCTURE_MAP_DELTA_PRESENT、通常transport/意味型/compiler/作者/公開wire/DB/RN不変。API4d744e36／最終CI42052701621成功。一般読解・本人基準・記録間・通常採用は未達。詳細はweekly§199。
+
+
+## §200 — 既存Analysis owner内の学習比較と全追加path
+
+| trial内path | 責務 |
+|---|---|
+| `actor_ownership_ce20_trial.py` | 原N8保持・OT6の既存CE20更新/28NLL/18stop、private source/候補/同map保存再読 |
+| `actor_ownership_seen_fit_trial.py` | 同教師OT03/06をa2e/b7で4回だけ自由生成し、既見再現と転移不足を区別 |
+| `actor_ownership_followup6_sources.json` | evalを教師化しない独立OC6。所有・主体・否定・一意引用 |
+| `actor_ownership_followup6_prepare.py` | 旧14保持/全20受理・保存・実tokenizer mask、保存rawの再tokenize差分。学習0 |
+| `actor_ownership_ce20_results.json` | 不採用/原本参照/次CPU現在地。model raw/重みの公開0 |
+
+既存共用入口/semantic admission/intent compiler/作者/API/DB/RNのowner追加0。§199のopt-in v7は保持し、通常v4不変。新b7は理由の候補退行と所有転移未達で通常/次初期未採用。STRUCTURE_MAP_DELTA_NONE。詳細はweekly§200。
