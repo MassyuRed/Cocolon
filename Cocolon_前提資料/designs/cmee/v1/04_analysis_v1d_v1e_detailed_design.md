@@ -1,4 +1,4 @@
-> **11/5・分析の最新（第9回§190）：明記された本人の担当＋決定を、既存の全文根拠・明記順序のままモデル経由mapへ保持する接続修正。実4Bの新合成4応答を同じまま比較し、表示0→1、残3は担当をACTIONと返すkind不一致のため未対応を維持。追加学習0・新4/1load・再生成0。旧22と前回4を保持、Jupyter574成功/旧SQL1省略、CI2226成功/旧SQL1省略・累積48成功。次は全記録を保つmodel適用資格（現在1記録限定）を優先。通常4B自動呼出し/配置/一般本人基準・記録間接続は残件。新型/保存版/DB/RN追加0、STRUCTURE_MAP_DELTA_PRESENT、正式受入れ未判定。** [結果・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-role-decision-result-20261105)。
+> **11/5・分析の最新（第9回§192）：API722835f9で適格ordinary本人ANSWERを親原入力と別source/根拠のまま既存の明示SELF過去行動へ接続。実4Bの独立合成4要求/原5記録＋補足4・1load・追加学習0・48.576秒、全4保存/5記録mapped/未読0。役割＋行動、回答の否定、同記録の再述count1、異カテゴリの別記録を保持し、辺0・不明段階を維持。最終Jupyter269 PASS/SQL11 SKIP、CI42006289264全step成功。省略主体の取得前拒否も補修。通常HTTP/cronの4B自動接続/配置、一般分析品質・本人基準/記録間関係は未完成、正式受入れ未判定。** [全結果・制限](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplemental-answer-result-20261105)。
 
 # CMEE V1-D / V1-E — Analysis Observed / IF Route 詳細設計
 
@@ -1959,10 +1959,14 @@ caller自身のtimeout/通信例外/並列重複推論対策は今回の未接�
 
 旧private ROLE_CLAUSE保存は1node/未読のまま。fullwidth「．」は共有有限compilerの後半証明が得られず従来のrole-onlyへ残し、「。」/ASCII「.」だけの今回範囲を広げない。[実4B比較・保存/回帰・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-samefield-role-action-result-20261105)。
 
-### 11/5 §190：本人の過去担当・決定と明記順序の通常model接続
+### 11/5 §192：適格本人補足の明示行動を、親原入力と別根拠のまま同じmapへ保持
 
-今回の既存責務は、`intent_compiler.py::compile_model_observed_role_decision` が全文共有compilerで既に証明できる1記録/1memo/明記SELFの過去担当＋過去決定を、元のmodel unitと照合して既存graphそのままで返し、`semantic_admission.py` の通常model consumerが既存作者へ渡す部分。担当は既存ROLE/PAST_RESPONSIBILITY、決定は既存ACTION/決める・決めておく、明記順序は既存OBSERVED_ORDER。原envelope/ref/hash/文字・UTF-8範囲、否定、未確定を不変に保持する。新graph/型/role_state/作者/保存版/公開DTO/DB/RNを追加しない。通常action lemma集合を広げず、private role/clause保存契約も維持。明記順序のない合成対照は辺0/ROUTE_CONNECTIONのまま、原因・動機・記録間の線を作らない。
+API722835f9は§191の全INCLUDED原記録資格を継承し、適格ordinary本人ANSWERを別envelope/memo fieldのまま既存の明示SELF/fact/past行動へ渡す。`_analysis_saved_member`の本人・親原入力版・質問/回答ID/round、freezeの原文/位置/カテゴリ、`_active_sources`の補足全文・対立/訂正検査を共用し、全request/messages/responseを先に束縛する。回答自身のproposition.actor==SELFを取得前にも確認し、認証本人や親の役割から省略主体を補わない。親と回答を同じ一記録の機会として扱い、同義再述は原入力・回答の根拠を残してrecord件数1とする。
 
-全unit・全文の消費、主体/時制/否定/根拠/親子/対象子を照合し、担当kindの誤り・余分な文・別actor・推測/報告・欄を跨ぐ順序を採用しない。実RD02–04の担当rootはACTIONのため、ROLEへ再ラベルしたりfinite結果で代替して成功へ数えない。新4のうちROLEを返したRD01だけが通常ensure/build/commit/readへ到達した。保存は隔離mock RPC、実SQLの独立合成response試験とは区別する。
+保存a2e/config006e・固定Qwen3.5-4B revision851bf6e/既存pinsを使い、独立合成SA01–04をJupyterで新4生成/1load/学習0、48.576299秒で確認。返却fieldは2/2/2/3で全9欄を保持し、4stop/4保存/原5記録mapped/未読0。SA01は親の受付係ROLE＋補足の費用記録、SA02は回答の「記録しなかった」、SA03は同一記録内の再述を1node/count1、SA04は親子の仕事カテゴリと別記録の生活カテゴリを保持した。全caseは辺0、欠けた段階とつながりの不明を残す。通常ensure/commit/readを隔離mock RPCで保存・現在値/月次/読取再表示まで確認した結果で、本番DB・本人端末・一般日本語の成功ではない。
 
-[API5fd61b3f](https://github.com/MassyuRed/mashos-api/commit/5fd61b3fe43d0e7ddb255f34678b85cc19b7e15a)、[全結果/未対応/次工程](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-role-decision-result-20261105)。CI全step success、一般品質/正式受入れの根拠にはしない。
+最終722835f9へ同じ4request/messages/response/rawを再読し、本文・coverage・projection全体が新規artifact UUIDを示すprojection_of以外一致（0生成/0load・0.666512秒）。各保存artifact内のcurrent/月次/readonlyは本文・図・IDが完全一致した。最終Jupyterは269 PASS/11 SQL依存SKIP/既存warning1・23.94秒、CI42006289264/job127173746422は全step成功（生成/保存2226 PASS・旧SQL1 SKIP・12048 subtests、共有owner1 PASS、累積/API/Q3/jobs92 PASS、SQL201原本/15月参照）。Jupyter Python3.12.3/FastAPI0.162.0/Pydantic2.14.1とCI Python3.12.16/0.142.2/2.13.5は別環境。
+
+今回も全文が読めない回答、他者/省略主体、未解決対立、訂正/撤回、比較は採用しない。補足のROLE/担当・決定や複数節、WRITTEN_PAST_ROLE_CLAUSEを含む親＋回答は未対応。privateな原入力限定ROLE/ROLE_ACTION/ROLE_CLAUSEの保存契約を維持し、欠落field/誤kindの補完・finiteへの無言置換・新しい親子/回答間/記録間の順序・原因・反復共起は0。通常HTTP/cronの4B自動接続、transport/採用重み/配置、MR02のfield欠落/担当kind、一般本人基準・暗黙役割・判断/選択、記録間の再出現/変化、IF/Saved/観測会は残件。新型/保存版/公開DTO/DB/RN/作者owner/通常provider追加0、未配置、一般分析品質・正式商品受入れは未成立。
+
+[全結果・失敗履歴・原本](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplemental-answer-result-20261105)。

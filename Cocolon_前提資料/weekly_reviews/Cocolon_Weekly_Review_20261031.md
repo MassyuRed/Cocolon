@@ -1,4 +1,4 @@
-> **11/5・分析の最新（第9回§191）：明示model受口の1記録制限を、全INCLUDED原入力を保持する資格へ修正。記録ごとの既存役割・行動・担当/決定の証明を使い、原文・版・カテゴリ・根拠を保つ。実4B新2要求/計5記録・1load・学習0、32.714秒。MR01の2記録は3node/辺0で保存・現在値/月次/読取再表示が一致。MR02は3field中1欠落のため全packetを拒否し、有限結果へ置換しない。Jupyter292成功/SQL9省略、最終CI41999746016は全step成功（生成/保存2226 PASS・旧SQL1 SKIP、累積/API65 PASS、SQL201原本/15月参照、Jupyter追補結合7 PASS）。補足/比較、通常4B自動接続/配置、一般本人基準・記録間の意味関係は残件。新型/保存版/公開DTO/DB/RN追加0、STRUCTURE_MAP_DELTA_PRESENT、正式受入れ未判定。** [結果・残件](#analysis-multi-record-result-20261105)。
+> **11/5・分析の最新（第9回§192）：API722835f9で適格ordinary本人ANSWERを親原入力と別source/根拠のまま既存の明示SELF過去行動へ接続。実4Bの独立合成4要求/原5記録＋補足4・1load・追加学習0・48.576秒、全4保存/5記録mapped/未読0。役割＋行動、回答の否定、同記録の再述count1、異カテゴリの別記録を保持し、辺0・不明段階を維持。最終Jupyter269 PASS/SQL11 SKIP、CI42006289264全step成功。省略主体の取得前拒否も補修。通常HTTP/cronの4B自動接続/配置、一般分析品質・本人基準/記録間関係は未完成、正式受入れ未判定。** [全結果・制限](#analysis-supplemental-answer-result-20261105)。
 
 # 第9回 Cocolon週末報告会 — 2026-10-31（開催中）
 
@@ -4243,3 +4243,39 @@ API差分は既存`analysis_cumulative_service.py`、`cores/analysis/semantic_ad
 次は、MR02のfield欠落・担当kind不一致の品質不足と、適格本人補足を元記録の文脈/根拠のままmodelへ渡す未対応を扱う。通常HTTP/cronの明示provider、transport期限・重複推論抑止・採用重み、一般本人基準/判断理由・記録間の再出現/変化、IF/Saved/観測会/本人端末/配置は継続残件。完了した今回2生成を繰り返さず、既存不採用重みを自動採用しない。
 
 Render/本番DB/schema/RN/配置/Pod管理の変更0。既存Podレンタルは維持、新GPU/追加購入操作0。起動した4Bのprocessは終了し、最後のcompute-apps一覧は空だった。
+
+<a id="analysis-supplemental-answer-result-20261105"></a>
+## 192. 11/5：適格本人ANSWERと親原入力を別根拠で同じmapへ保持
+
+### 実装と今回の範囲
+
+API722835f9は§191の全INCLUDED原記録資格を継承し、適格ordinary本人ANSWERを別envelope/memo fieldのまま既存の明示SELF/fact/past行動へ渡す。`_analysis_saved_member`の本人・親原入力版・質問/回答ID/round、freezeの原文/位置/カテゴリ、`_active_sources`の補足全文・対立/訂正検査を共用し、全request/messages/responseを先に束縛する。回答自身のproposition.actor==SELFを取得前にも確認し、認証本人や親の役割から省略主体を補わない。親と回答を同じ一記録の機会として扱い、同義再述は原入力・回答の根拠を残してrecord件数1とする。
+
+今回の変更fileは既存APIの3path：`ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py`（既存全文行動witnessの共用と全親子graphから回答自身の根拠だけを再証明）、同 `semantic_admission.py`（原入力＋適格補足の資格/明示SELF事前確認、親の既存証明と回答の証明を一機会へ構成）、`ai/tests/test_analysis_cumulative_model_source.py`（親/版/round/カテゴリ/肯否/件数/不採用、実隔離SQL保存・回答変更後の旧response拒否/月次不変・取得中編集CAS）。`astor_material_snapshots.py`/source_adapter/累積service/唯一作者/既存workflowは照合した既存ownerで、今回の変更pathではない。trial `supplemental_answer_trial.py`（runner6e9d020）/`supplemental_answer_results.json`が独立合成入力・比較/表示・実集計を索引化する。
+
+### Jupyter実4Bと保存後の表示
+
+保存a2e/config006e・固定Qwen3.5-4B revision851bf6e/既存pinsを使い、独立合成SA01–04をJupyterで新4生成/1load/学習0、48.576299秒で確認。返却fieldは2/2/2/3で全9欄を保持し、4stop/4保存/原5記録mapped/未読0。SA01は親の受付係ROLE＋補足の費用記録、SA02は回答の「記録しなかった」、SA03は同一記録内の再述を1node/count1、SA04は親子の仕事カテゴリと別記録の生活カテゴリを保持した。全caseは辺0、欠けた段階とつながりの不明を残す。通常ensure/commit/readを隔離mock RPCで保存・現在値/月次/読取再表示まで確認した結果で、本番DB・本人端末・一般日本語の成功ではない。
+
+| 独立合成case | 原入力＋本人回答 | 観測された文章/図 |
+|---|---|---|
+| SA01 | 仕事：僕の役割は受付係だった。＋僕は費用を記録した。 | ROLE＋ACTIONの2node、count各1、辺0・接続は不明 |
+| SA02 | 生活：私は資料を見た。＋私は費用を記録しなかった。 | 2行動を肯否別に保持、count各1、辺0 |
+| SA03 | 仕事：私は資料を見た。＋同文の本人回答 | 1node/count1、原入力と回答の別根拠を保持 |
+| SA04 | 仕事：資料を見た＋本人回答の資料を調べた／別記録の生活：費用を記録した | 2原記録を保持する3node、元のカテゴリとcount各1、辺0 |
+
+前API22de881aでは同4snapshotを取得前に422拒否、model取得/保存0・0.180997秒。前版が同rawを分析した比較ではない。live生成はAPI c6348b7c、fixture補正dbd72cb8を経た最終actor資格版722835f9で同4rawを再読した。新4応答の全文をrootと同環境read-only補助が確認し、4件成功を一般理解率・Mash正式受入れへ換算しない。
+
+### 検証・失敗と修正
+
+最終722835f9へ同じ4request/messages/response/rawを再読し、本文・coverage・projection全体が新規artifact UUIDを示すprojection_of以外一致（0生成/0load・0.666512秒）。各保存artifact内のcurrent/月次/readonlyは本文・図・IDが完全一致した。最終Jupyterは269 PASS/11 SQL依存SKIP/既存warning1・23.94秒、CI42006289264/job127173746422は全step成功（生成/保存2226 PASS・旧SQL1 SKIP・12048 subtests、共有owner1 PASS、累積/API/Q3/jobs92 PASS、SQL201原本/15月参照）。Jupyter Python3.12.3/FastAPI0.162.0/Pydantic2.14.1とCI Python3.12.16/0.142.2/2.13.5は別環境。
+
+最終CIの工程別所要は生成/保存281.40秒、shared owner19.92秒、累積/API/Q3/jobs42.49秒（既存Pydantic warning1・2 subtests）。SQLはowner/閲覧rank/月次不変/削除寿命を含む隔離PostgreSQLで、本番Supabaseの成功ではない。
+
+初回Jupyterは新fixtureのemotion_details不足で25 FAIL/244 PASS/11 SKIP、fixture補正後は省略主体「費用を記録した。」がmodel取得へ進む1 FAIL/268 PASS/11 SKIPだった。Stage1のcurrent_user核だけでは命題主体を証明しないため、最終版で回答の全命題actor==SELFを取得前に検査し269 PASSへ到達した。初回CI c6348b7cは同fixture原因で27 FAIL/65 PASS・62.44秒。これらを最終CIの成功と混同しない。最初の再読比較は新規artifact UUIDまで同一とした過剰assertで停止し、同じ保存物内のID一致を保ちながら、別build間だけprojection_ofを除く全projection/本文/coverage比較へ直した。モデル再生成や商品出力の補修は0。
+
+### 原本と残件
+
+[公開合成結果](../observation_learning/trials/2026-11-01-analysis-model-fields/supplemental_answer_results.json)に原5記録＋回答4、返却field数/kind、全可視本文/meta/coverage、同raw再読と検証結果を保存する。raw/request/messages/元snapshot/保存再読/logの非公開原本は[検証原本](https://chatgpt.com/library?file_id=libfile_c61b29e3a7888191afd814f0d0d4f151&account_id=personal)。保存原本778,047bytes/SHA256 `1385a5e83b4ad807a034a02fc604958bee53159ccd724bc8a48e218386e67472`には、Pod回収JSON619,672bytes/SHA256 `75cfe47c04df846f7ec0090d0082b5bde8cbb5db9833f880891d1f636cf7facc`、最終CIのdecoded log、初回CIの27失敗log、remote blob SHAを含む。Pod内包24fileの全bytes/SHA一致と全4request/response/本文/図を照合済み。
+
+今回も全文が読めない回答、他者/省略主体、未解決対立、訂正/撤回、比較は採用しない。補足のROLE/担当・決定や複数節、WRITTEN_PAST_ROLE_CLAUSEを含む親＋回答は未対応。privateな原入力限定ROLE/ROLE_ACTION/ROLE_CLAUSEの保存契約を維持し、欠落field/誤kindの補完・finiteへの無言置換・新しい親子/回答間/記録間の順序・原因・反復共起は0。通常HTTP/cronの4B自動接続、transport/採用重み/配置、MR02のfield欠落/担当kind、一般本人基準・暗黙役割・判断/選択、記録間の再出現/変化、IF/Saved/観測会は残件。新型/保存版/公開DTO/DB/RN/作者owner/通常provider追加0、未配置、一般分析品質・正式商品受入れは未成立。

@@ -1,0 +1,742 @@
+{
+  "schema_version": "cocolon.analysis.supplemental_answer.public_results.v1",
+  "provenance": "Karen independently synthetic cases; no private user records; no training targets; model raw and request/messages remain in private evidence",
+  "date": "2026-11-05",
+  "api_before": "22de881a92e2ebf1c1866ebd02abda4018c61f27",
+  "api_live": "c6348b7c0c5ceda66e1fd323f639ab065d1b5bbe",
+  "api_fixture_correction": "dbd72cb820bba57cb5231a4fa2b728bbbbf2174f",
+  "api_final": "722835f9d72183c18c4f590de57b6106466a366b",
+  "runner_commit": "6e9d0200244bfefb862ebdd34f20c470f7503480",
+  "status": "COMPLETE_WITH_LIMITED_SCOPE",
+  "model": {
+    "model": "Qwen/Qwen3.5-4B",
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59",
+    "config_sha256": "006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9",
+    "pins": {
+      "accelerate": "1.15.0",
+      "peft": "0.21.2",
+      "safetensors": "0.8.0",
+      "transformers": "5.19.0"
+    },
+    "max_context_tokens": 8192,
+    "max_new_tokens": 2048,
+    "max_seconds": 600,
+    "per_call_seconds": 45,
+    "initial_unchanged": true,
+    "normal_adoption": false
+  },
+  "execution": {
+    "new_generation": 4,
+    "model_loads": 1,
+    "new_training": 0,
+    "model_calls_started": 4,
+    "stop_responses": 4,
+    "source_acquisitions": 4,
+    "seconds": 48.57629903033376,
+    "input_record_count": 5,
+    "answer_count": 4,
+    "expected_nonempty_fields": 9,
+    "returned_fields": 9,
+    "saved_requests": 4,
+    "mapped_records": 5,
+    "unparsed_records": 0,
+    "rejected_requests": 0
+  },
+  "before": {
+    "api": "22de881a92e2ebf1c1866ebd02abda4018c61f27",
+    "source_acquisitions": 0,
+    "rejected_requests": 4,
+    "saved_requests": 0,
+    "seconds": 0.18099653162062168
+  },
+  "final_replay": {
+    "new_generation": 0,
+    "model_loads": 0,
+    "seconds": 0.6665121726691723,
+    "request_response_exact_all4": true,
+    "full_text_coverage_equal_all4": true,
+    "projection_equal_except_fresh_artifact_uuid_all4": true,
+    "saved_current_monthly_readonly_identity_exact_all4": true
+  },
+  "verification": {
+    "jupyter": {
+      "passed": 269,
+      "skipped": 11,
+      "warnings": 1,
+      "seconds": 23.94,
+      "sql_scope": "NOT_EXECUTED_POSTGRESQL_WASM_UNCONFIGURED",
+      "runtime": {
+        "packages": {
+          "accelerate": "1.15.0",
+          "fastapi": "0.162.0",
+          "peft": "0.21.2",
+          "pydantic": "2.14.1",
+          "safetensors": "0.8.0",
+          "torch": "2.8.0+cu128",
+          "transformers": "5.19.0"
+        },
+        "python": "3.12.3"
+      }
+    },
+    "ci": {
+      "run_id": 42006289264,
+      "job_id": 127173746422,
+      "status": "ALL_STEPS_SUCCESS",
+      "api_commit": "722835f9d72183c18c4f590de57b6106466a366b",
+      "generation_storage": {
+        "passed": 2226,
+        "skipped": 1,
+        "subtests": 12048,
+        "seconds": 281.4
+      },
+      "shared_owner": {
+        "passed": 1,
+        "deselected": 194,
+        "seconds": 19.92
+      },
+      "cumulative_api_q3_jobs": {
+        "passed": 92,
+        "warnings": 1,
+        "subtests": 2,
+        "seconds": 42.49
+      },
+      "cumulative_sql": {
+        "status": "PASSED",
+        "source_records": 201,
+        "monthly_references": 15,
+        "scope": [
+          "owner",
+          "rank",
+          "immutability",
+          "deletion"
+        ]
+      },
+      "runtime": {
+        "python": "3.12.16",
+        "fastapi": "0.142.2",
+        "pydantic": "2.13.5"
+      }
+    },
+    "history": [
+      {
+        "stage": "initial_jupyter",
+        "failed": 25,
+        "passed": 244,
+        "skipped": 11,
+        "warnings": 1,
+        "seconds": 23.76,
+        "cause": "new fixture omitted canonical emotion_details"
+      },
+      {
+        "stage": "fixture_corrected_jupyter",
+        "failed": 1,
+        "passed": 268,
+        "skipped": 11,
+        "warnings": 1,
+        "seconds": 24.01,
+        "cause": "omitted-actor answer acquired a response before exact proposition.actor SELF qualification"
+      },
+      {
+        "stage": "initial_ci_c6348b7c",
+        "failed": 27,
+        "passed": 65,
+        "seconds": 62.44,
+        "cause": "new fixture canonical emotion_details missing; not a completed final CI"
+      },
+      {
+        "stage": "replay_comparison",
+        "cause": "initial cross-build meta assertion treated new random artifact UUID as equal; comparison corrected to retain all semantic projection fields and omit only projection_of; saved-artifact identity remains exact; no model regeneration"
+      }
+    ]
+  },
+  "scope": {
+    "admitted": "validated ordinary supplemental ANSWER with complete explicit SELF past finite action and matching own model units; original and answer remain separate envelopes in one record occasion",
+    "unsupported": [
+      "omitted or other actor",
+      "unread answer remainder",
+      "unresolved opposition",
+      "correction",
+      "withdrawal",
+      "comparison",
+      "supplemental ROLE/responsibility/decision",
+      "parent WRITTEN_PAST_ROLE_CLAUSE with answer"
+    ],
+    "no_new_cross_source_order_or_cause": true,
+    "no_answer_as_independent_record_count": true,
+    "private_original_only_role_saved_contracts_retained": true,
+    "normal_http_cron_model_provider_connected": false,
+    "deployed": false,
+    "general_analysis_quality": "NOT_ESTABLISHED",
+    "formal_product_acceptance": "NOT_ASSESSED"
+  },
+  "private_evidence": {
+    "bundle_bytes": 619672,
+    "bundle_sha256": "75cfe47c04df846f7ec0090d0082b5bde8cbb5db9833f880891d1f636cf7facc",
+    "inner_files_verified": 24,
+    "reference": "https://chatgpt.com/library?file_id=libfile_c61b29e3a7888191afd814f0d0d4f151&account_id=personal",
+    "durable_bundle_bytes": 778047,
+    "durable_bundle_sha256": "1385a5e83b4ad807a034a02fc604958bee53159ccd724bc8a48e218386e67472",
+    "durable_bundle_contents": "original Pod bundle, final decoded CI log, initial CI fixture-failure log, exact remote blob SHA"
+  },
+  "cases": [
+    {
+      "id": "SA01",
+      "provenance": "Karen independently synthetic; no training target; no private user records",
+      "input_records": [
+        {
+          "original": {
+            "memo": "僕の役割は受付係だった。",
+            "memo_action": "",
+            "selected_categories": [
+              "仕事"
+            ],
+            "selected_emotions": [
+              "平穏"
+            ],
+            "emotion_details": [
+              {
+                "strength": "medium",
+                "type": "平穏"
+              }
+            ],
+            "recorded_at": "2026-11-01T01:00:00"
+          },
+          "answers": [
+            "僕は費用を記録した。"
+          ]
+        }
+      ],
+      "raw_field_count": 2,
+      "raw_field_kinds": [
+        {
+          "field": 1,
+          "root_node_kinds": [
+            "ROLE"
+          ],
+          "unit_count": 1
+        },
+        {
+          "field": 2,
+          "root_node_kinds": [
+            "ACTION_OR_NONACTION"
+          ],
+          "unit_count": 2
+        }
+      ],
+      "finish_reason": "stop",
+      "before": {
+        "status": "REJECTED",
+        "source_calls": 0,
+        "commit_count": 0,
+        "error": {
+          "detail": "analysis_saved_source_unavailable",
+          "status_code": 422
+        }
+      },
+      "after": {
+        "status": "SAVED",
+        "source_calls": 1,
+        "node_count": 2,
+        "edge_count": 0,
+        "content_text": "役割：選択カテゴリ：仕事\n僕の役割は受付係だった（記録された役割）（1件の記録）\n行動・非行動：選択カテゴリ：仕事\n費用を記録する（実行済み）（1件の記録）\n未確定（選択カテゴリ：仕事\n僕の役割は受付係だった（記録された役割））：確定していない項目：場面、考え・注意、結果・余韻。\n未確定（選択カテゴリ：仕事\n僕の役割は受付係だった（記録された役割） ／ 選択カテゴリ：仕事\n費用を記録する（実行済み））：段階同士のつながりは、この記録からは確定していません。",
+        "meta": {
+          "accessibility_linear_order": [
+            "n1",
+            "n2"
+          ],
+          "annotation_badges": [],
+          "artifact_version": 1,
+          "conflict_badges": [],
+          "edges": [],
+          "nodes": [
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ROLE",
+              "node_ref": "n1",
+              "visible_label": "選択カテゴリ：仕事\n僕の役割は受付係だった（記録された役割）"
+            },
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ACTION_OR_NONACTION",
+              "node_ref": "n2",
+              "visible_label": "選択カテゴリ：仕事\n費用を記録する（実行済み）"
+            }
+          ],
+          "period_comparison": {
+            "reason_codes": [],
+            "safe_change_kinds": [],
+            "state": "NO_PREVIOUS"
+          },
+          "period_label": "2026-11-01T01:00:00+00:00 ～ 2026-11-05T09:50:26.566498+00:00",
+          "projection_of": "artifact:dda5341cfdc2422f9ff25ce532628cab@1",
+          "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+          "unknown_gaps": [
+            {
+              "between_node_refs": [
+                "n1"
+              ],
+              "gap_ref": "g1",
+              "visible_label": "確定していない項目：場面、考え・注意、結果・余韻。"
+            },
+            {
+              "between_node_refs": [
+                "n1",
+                "n2"
+              ],
+              "gap_ref": "g4",
+              "visible_label": "段階同士のつながりは、この記録からは確定していません。"
+            }
+          ],
+          "wire_kind": "watashi.map.v2"
+        },
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        }
+      },
+      "identity_comparison": {
+        "live_and_final_request_exact": true,
+        "live_and_final_response_exact": true,
+        "live_and_final_text_exact": true,
+        "live_and_final_coverage_exact": true,
+        "live_and_final_projection_equal_except": [
+          "projection_of"
+        ],
+        "fresh_build_artifact_uuid_differs": true,
+        "current_monthly_readonly_exact_identity_within_each_saved_artifact": true
+      }
+    },
+    {
+      "id": "SA02",
+      "provenance": "Karen independently synthetic; no training target; no private user records",
+      "input_records": [
+        {
+          "original": {
+            "memo": "私は資料を見た。",
+            "memo_action": "",
+            "selected_categories": [
+              "生活"
+            ],
+            "selected_emotions": [
+              "平穏"
+            ],
+            "emotion_details": [
+              {
+                "strength": "medium",
+                "type": "平穏"
+              }
+            ],
+            "recorded_at": "2026-11-01T01:00:00"
+          },
+          "answers": [
+            "私は費用を記録しなかった。"
+          ]
+        }
+      ],
+      "raw_field_count": 2,
+      "raw_field_kinds": [
+        {
+          "field": 1,
+          "root_node_kinds": [
+            "ACTION_OR_NONACTION"
+          ],
+          "unit_count": 2
+        },
+        {
+          "field": 2,
+          "root_node_kinds": [
+            "ACTION_OR_NONACTION"
+          ],
+          "unit_count": 2
+        }
+      ],
+      "finish_reason": "stop",
+      "before": {
+        "status": "REJECTED",
+        "source_calls": 0,
+        "commit_count": 0,
+        "error": {
+          "detail": "analysis_saved_source_unavailable",
+          "status_code": 422
+        }
+      },
+      "after": {
+        "status": "SAVED",
+        "source_calls": 1,
+        "node_count": 2,
+        "edge_count": 0,
+        "content_text": "行動・非行動：選択カテゴリ：生活\n資料を見る（実行済み）（1件の記録）\n行動・非行動：選択カテゴリ：生活\n費用を記録する（行わなかった）（1件の記録）\n未確定（選択カテゴリ：生活\n資料を見る（実行済み））：確定していない項目：場面、役割、考え・注意、結果・余韻。\n未確定（選択カテゴリ：生活\n資料を見る（実行済み） ／ 選択カテゴリ：生活\n費用を記録する（行わなかった））：段階同士のつながりは、この記録からは確定していません。",
+        "meta": {
+          "accessibility_linear_order": [
+            "n1",
+            "n2"
+          ],
+          "annotation_badges": [],
+          "artifact_version": 1,
+          "conflict_badges": [],
+          "edges": [],
+          "nodes": [
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ACTION_OR_NONACTION",
+              "node_ref": "n1",
+              "visible_label": "選択カテゴリ：生活\n資料を見る（実行済み）"
+            },
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ACTION_OR_NONACTION",
+              "node_ref": "n2",
+              "visible_label": "選択カテゴリ：生活\n費用を記録する（行わなかった）"
+            }
+          ],
+          "period_comparison": {
+            "reason_codes": [],
+            "safe_change_kinds": [],
+            "state": "NO_PREVIOUS"
+          },
+          "period_label": "2026-11-01T01:00:00+00:00 ～ 2026-11-05T09:50:26.566498+00:00",
+          "projection_of": "artifact:9153fad5b84d4a4cb40fa8e7094988da@1",
+          "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+          "unknown_gaps": [
+            {
+              "between_node_refs": [
+                "n1"
+              ],
+              "gap_ref": "g1",
+              "visible_label": "確定していない項目：場面、役割、考え・注意、結果・余韻。"
+            },
+            {
+              "between_node_refs": [
+                "n1",
+                "n2"
+              ],
+              "gap_ref": "g5",
+              "visible_label": "段階同士のつながりは、この記録からは確定していません。"
+            }
+          ],
+          "wire_kind": "watashi.map.v2"
+        },
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        }
+      },
+      "identity_comparison": {
+        "live_and_final_request_exact": true,
+        "live_and_final_response_exact": true,
+        "live_and_final_text_exact": true,
+        "live_and_final_coverage_exact": true,
+        "live_and_final_projection_equal_except": [
+          "projection_of"
+        ],
+        "fresh_build_artifact_uuid_differs": true,
+        "current_monthly_readonly_exact_identity_within_each_saved_artifact": true
+      }
+    },
+    {
+      "id": "SA03",
+      "provenance": "Karen independently synthetic; no training target; no private user records",
+      "input_records": [
+        {
+          "original": {
+            "memo": "私は資料を見た。",
+            "memo_action": "",
+            "selected_categories": [
+              "仕事"
+            ],
+            "selected_emotions": [
+              "平穏"
+            ],
+            "emotion_details": [
+              {
+                "strength": "medium",
+                "type": "平穏"
+              }
+            ],
+            "recorded_at": "2026-11-01T01:00:00"
+          },
+          "answers": [
+            "私は資料を見た。"
+          ]
+        }
+      ],
+      "raw_field_count": 2,
+      "raw_field_kinds": [
+        {
+          "field": 1,
+          "root_node_kinds": [
+            "ACTION_OR_NONACTION"
+          ],
+          "unit_count": 2
+        },
+        {
+          "field": 2,
+          "root_node_kinds": [
+            "ACTION_OR_NONACTION"
+          ],
+          "unit_count": 2
+        }
+      ],
+      "finish_reason": "stop",
+      "before": {
+        "status": "REJECTED",
+        "source_calls": 0,
+        "commit_count": 0,
+        "error": {
+          "detail": "analysis_saved_source_unavailable",
+          "status_code": 422
+        }
+      },
+      "after": {
+        "status": "SAVED",
+        "source_calls": 1,
+        "node_count": 1,
+        "edge_count": 0,
+        "content_text": "行動・非行動：選択カテゴリ：仕事\n資料を見る（実行済み）（1件の記録）\n未確定（選択カテゴリ：仕事\n資料を見る（実行済み））：確定していない項目：場面、役割、考え・注意、結果・余韻。",
+        "meta": {
+          "accessibility_linear_order": [
+            "n1"
+          ],
+          "annotation_badges": [],
+          "artifact_version": 1,
+          "conflict_badges": [],
+          "edges": [],
+          "nodes": [
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ACTION_OR_NONACTION",
+              "node_ref": "n1",
+              "visible_label": "選択カテゴリ：仕事\n資料を見る（実行済み）"
+            }
+          ],
+          "period_comparison": {
+            "reason_codes": [],
+            "safe_change_kinds": [],
+            "state": "NO_PREVIOUS"
+          },
+          "period_label": "2026-11-01T01:00:00+00:00 ～ 2026-11-05T09:50:26.566498+00:00",
+          "projection_of": "artifact:6847702b44a242c799118e91d1d9895a@1",
+          "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+          "unknown_gaps": [
+            {
+              "between_node_refs": [
+                "n1"
+              ],
+              "gap_ref": "g1",
+              "visible_label": "確定していない項目：場面、役割、考え・注意、結果・余韻。"
+            }
+          ],
+          "wire_kind": "watashi.map.v2"
+        },
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        }
+      },
+      "identity_comparison": {
+        "live_and_final_request_exact": true,
+        "live_and_final_response_exact": true,
+        "live_and_final_text_exact": true,
+        "live_and_final_coverage_exact": true,
+        "live_and_final_projection_equal_except": [
+          "projection_of"
+        ],
+        "fresh_build_artifact_uuid_differs": true,
+        "current_monthly_readonly_exact_identity_within_each_saved_artifact": true
+      }
+    },
+    {
+      "id": "SA04",
+      "provenance": "Karen independently synthetic; no training target; no private user records",
+      "input_records": [
+        {
+          "original": {
+            "memo": "私は資料を見た。",
+            "memo_action": "",
+            "selected_categories": [
+              "仕事"
+            ],
+            "selected_emotions": [
+              "平穏"
+            ],
+            "emotion_details": [
+              {
+                "strength": "medium",
+                "type": "平穏"
+              }
+            ],
+            "recorded_at": "2026-11-01T01:00:00"
+          },
+          "answers": [
+            "私は資料を調べた。"
+          ]
+        },
+        {
+          "original": {
+            "memo": "私は費用を記録した。",
+            "memo_action": "",
+            "selected_categories": [
+              "生活"
+            ],
+            "selected_emotions": [
+              "平穏"
+            ],
+            "emotion_details": [
+              {
+                "strength": "medium",
+                "type": "平穏"
+              }
+            ],
+            "recorded_at": "2026-11-01T01:00:00"
+          },
+          "answers": []
+        }
+      ],
+      "raw_field_count": 3,
+      "raw_field_kinds": [
+        {
+          "field": 1,
+          "root_node_kinds": [
+            "ACTION_OR_NONACTION"
+          ],
+          "unit_count": 1
+        },
+        {
+          "field": 2,
+          "root_node_kinds": [
+            "ACTION_OR_NONACTION"
+          ],
+          "unit_count": 1
+        },
+        {
+          "field": 3,
+          "root_node_kinds": [
+            "ACTION_OR_NONACTION"
+          ],
+          "unit_count": 1
+        }
+      ],
+      "finish_reason": "stop",
+      "before": {
+        "status": "REJECTED",
+        "source_calls": 0,
+        "commit_count": 0,
+        "error": {
+          "detail": "analysis_saved_source_unavailable",
+          "status_code": 422
+        }
+      },
+      "after": {
+        "status": "SAVED",
+        "source_calls": 1,
+        "node_count": 3,
+        "edge_count": 0,
+        "content_text": "行動・非行動：選択カテゴリ：仕事\n資料を見る（実行済み）（1件の記録）\n行動・非行動：選択カテゴリ：仕事\n資料を調べる（実行済み）（1件の記録）\n行動・非行動：選択カテゴリ：生活\n費用を記録する（実行済み）（1件の記録）\n未確定（選択カテゴリ：仕事\n資料を見る（実行済み））：確定していない項目：場面、役割、考え・注意、結果・余韻。\n未確定（選択カテゴリ：仕事\n資料を見る（実行済み） ／ 選択カテゴリ：仕事\n資料を調べる（実行済み））：段階同士のつながりは、この記録からは確定していません。\n未確定（選択カテゴリ：生活\n費用を記録する（実行済み））：確定していない項目：場面、役割、考え・注意、結果・余韻。",
+        "meta": {
+          "accessibility_linear_order": [
+            "n1",
+            "n2",
+            "n3"
+          ],
+          "annotation_badges": [],
+          "artifact_version": 1,
+          "conflict_badges": [],
+          "edges": [],
+          "nodes": [
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ACTION_OR_NONACTION",
+              "node_ref": "n1",
+              "visible_label": "選択カテゴリ：仕事\n資料を見る（実行済み）"
+            },
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ACTION_OR_NONACTION",
+              "node_ref": "n2",
+              "visible_label": "選択カテゴリ：仕事\n資料を調べる（実行済み）"
+            },
+            {
+              "evidence_badge_count": 1,
+              "node_kind": "ACTION_OR_NONACTION",
+              "node_ref": "n3",
+              "visible_label": "選択カテゴリ：生活\n費用を記録する（実行済み）"
+            }
+          ],
+          "period_comparison": {
+            "reason_codes": [],
+            "safe_change_kinds": [],
+            "state": "NO_PREVIOUS"
+          },
+          "period_label": "2026-11-01T01:00:00+00:00 ～ 2026-11-05T09:50:26.566498+00:00",
+          "projection_of": "artifact:9c3fd6a5e88049beafcb31f1b2a4ef15@1",
+          "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+          "unknown_gaps": [
+            {
+              "between_node_refs": [
+                "n1"
+              ],
+              "gap_ref": "g1",
+              "visible_label": "確定していない項目：場面、役割、考え・注意、結果・余韻。"
+            },
+            {
+              "between_node_refs": [
+                "n1",
+                "n2"
+              ],
+              "gap_ref": "g5",
+              "visible_label": "段階同士のつながりは、この記録からは確定していません。"
+            },
+            {
+              "between_node_refs": [
+                "n3"
+              ],
+              "gap_ref": "g6",
+              "visible_label": "確定していない項目：場面、役割、考え・注意、結果・余韻。"
+            }
+          ],
+          "wire_kind": "watashi.map.v2"
+        },
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 2,
+          "processed_count": 2,
+          "profile": "cumulative.v1",
+          "source_count": 2,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        }
+      },
+      "identity_comparison": {
+        "live_and_final_request_exact": true,
+        "live_and_final_response_exact": true,
+        "live_and_final_text_exact": true,
+        "live_and_final_coverage_exact": true,
+        "live_and_final_projection_equal_except": [
+          "projection_of"
+        ],
+        "fresh_build_artifact_uuid_differs": true,
+        "current_monthly_readonly_exact_identity_within_each_saved_artifact": true
+      }
+    }
+  ]
+}
