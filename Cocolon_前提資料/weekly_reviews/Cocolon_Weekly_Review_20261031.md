@@ -1,3 +1,5 @@
+> **11/5・分析の最新（第9回§190）：明記された本人の担当＋決定を、既存の全文根拠・明記順序のままモデル経由mapへ保持する接続修正。実4Bの新合成4応答を同じまま比較し、表示0→1、残3は担当をACTIONと返すkind不一致のため未対応を維持。追加学習0・新4/1load・再生成0。旧22と前回4を保持、Jupyter574成功/旧SQL1省略、CI2226成功/旧SQL1省略・累積48成功。次は全記録を保つmodel適用資格（現在1記録限定）を優先。通常4B自動呼出し/配置/一般本人基準・記録間接続は残件。新型/保存版/DB/RN追加0、STRUCTURE_MAP_DELTA_PRESENT、正式受入れ未判定。** [結果・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-role-decision-result-20261105)。
+
 # 第9回 Cocolon週末報告会 — 2026-10-31（開催中）
 
 > **11/1訂正後の作業順：[§31](#mechanism-first-20261101)。土日はPCを使うリリース準備、11/2〜11/6は華恋が端末操作なしで応答品質改善。実機は初回接続と最終確認に絞り、品質試行ごとのRNビルドは行わない。10/31実績と未達は保持する。**
@@ -4152,3 +4154,46 @@ JupyterはPython3.12.3/FastAPI0.162.0/Pydantic2.14.1/torch2.8.0+cu128、CIはPyt
 
 Render/実DB/DB schema/RN/配置/Pod管理の変更0。新GPU/追加課金操作0、既存Podレンタルは維持。終端のnvidia-smi compute-appsは空・returncode0で、起動したモデルprocessは終了済み。今回の限定candidate改善を一般品質・アプリ実機成功・正式受入れへ拡張しない。
 
+<a id="analysis-role-decision-result-20261105"></a>
+## 190. 11/5：明記された担当・決定・順序を通常model mapへ保持（実4B新4中1、3はkind不一致）
+
+### 結果と対象
+
+API [5fd61b3f](https://github.com/MassyuRed/mashos-api/commit/5fd61b3fe43d0e7ddb255f34678b85cc19b7e15a)で、共有finite compilerが既に読める「私は会合の進行を担当した。その後、私は分担を決めた。」の担当・決定・順序を、model consumerでは渡せなかった欠落を修正した。新しい自然文法や本人基準を発見した作業ではなく、既存根拠を失わず通常mapへ渡す限定接続。実4Bの独立合成4件では同じrawの修正前0保存→修正後1保存。残3件は未対応を保持し、4/4成功とは呼ばない。
+
+今回の既存責務は、`intent_compiler.py::compile_model_observed_role_decision` が全文共有compilerで既に証明できる1記録/1memo/明記SELFの過去担当＋過去決定を、元のmodel unitと照合して既存graphそのままで返し、`semantic_admission.py` の通常model consumerが既存作者へ渡す部分。担当は既存ROLE/PAST_RESPONSIBILITY、決定は既存ACTION/決める・決めておく、明記順序は既存OBSERVED_ORDER。原envelope/ref/hash/文字・UTF-8範囲、否定、未確定を不変に保持する。新graph/型/role_state/作者/保存版/公開DTO/DB/RNを追加しない。通常action lemma集合を広げず、private role/clause保存契約も維持。明記順序のない合成対照は辺0/ROUTE_CONNECTIONのまま、原因・動機・記録間の線を作らない。
+
+全unit・全文の消費、主体/時制/否定/根拠/親子/対象子を照合し、担当kindの誤り・余分な文・別actor・推測/報告・欄を跨ぐ順序を採用しない。実RD02–04の担当rootはACTIONのため、ROLEへ再ラベルしたりfinite結果で代替して成功へ数えない。新4のうちROLEを返したRD01だけが通常ensure/build/commit/readへ到達した。保存は隔離mock RPC、実SQLの独立合成response試験とは区別する。
+
+### 実4Bの原文と同じ応答による前後
+
+| 華恋の独立合成原文 | 4Bの担当root | 前f1048a8f | 後5fd61b3f |
+|---|---|---|---|
+| RD01：私は会合の進行を担当した。その後、私は分担を決めた。 | ROLE | 未対応/0node | 担当＋決定/2node・明記順序1edge、未読0 |
+| RD02：私は会合の進行を担当しなかった。その後、私は分担を決めなかった。 | ACTION_OR_NONACTION | 未対応 | 未対応/未読1・commit0 |
+| RD03：僕は受付を担当した。それから、僕は参加を決めておいた。 | ACTION_OR_NONACTION | 未対応 | 未対応/未読1・commit0 |
+| RD04：僕は受付を担当しなかった。僕は参加を決めなかった。 | ACTION_OR_NONACTION | 未対応 | 未対応/未読1・commit0 |
+
+保存a2e/config006e、固定Qwen3.5-4B revision851bf6e、既存pin/loader/BF16/SDPA/greedy/非thinkingを継続。新4はすべてstop、4request/1load/追加学習0、新重み0・通常採用false。各raw/messages SHA・request identity・元snapshotは前後同一。新評価や失敗rawを教師化しない。担当節は3件がmodel ACTIONで、決定節は全件ACTION。対象・否定・「決めておいた」は原rawのまま保持し、順序qualifierは今回rawに出ていない。rootと同環境read-only補助が全4の原文/raw/前後本文図を読み、この不一致を確認した。独立Pro/Ultra/Mashの受入れ確認ではない。
+
+RD01の表示は「会合の進行を担当した（記録された担当）」と「その後：分担を決める（実行済み）」、記録内順序の線と「原因を示す線ではありません」、未確定な場面・考え/注意・結果/余韻を保持する。現在値/月次/ensure=Falseは生成禁止下で本文・図・ID一致。3件のkind不一致を元原文だけで補修していない。
+
+### 回帰・実SQLと集計不具合
+
+- Work局所：関連291 PASS/14.01秒、独立合成のSQL lifecycle1 PASS/23 deselected/5.99秒。新testは54ケース（肯否・決めておく・順序あり/なし・引用範囲/対象子・誤kind/主体/否定/余分文/保存再読）。
+- Jupyter隔離コピー：574 PASS・旧model-fields SQL1 SKIP/42.10秒。今回実行10suiteの結果であり、前回1006とは対象が違う。旧SQL1はWASM未設定でCI生成工程でもSKIPのまま、今回実行済みに数えない。
+- [CI41993360792](https://github.com/MassyuRed/mashos-api/actions/runs/41993360792)、job127130612355はexact API checkout・全step success。生成/保存2226 PASS・1 SKIP・12048 subtests/275.64秒、共有owner1 PASS/194 deselected/18.90秒、累積API/Q3/既存job48 PASS・既存warning1・2 subtests/28.83秒。201原本/15月参照の月次順位・不変再読・所有者/削除SQLも成功。新担当/決定の実SQLは独立合成responseで通常ensure→保存/再読→両否定への更新→元月次不変まで確認。
+- 旧22は再生成せず16保存/4未対応/2拒否、16の現在/月次/読取と旧本文図/coverageを保持（1.625730秒）。前回SF4も同rawを新APIへ再読し4保存/2nodeを維持（0.404307秒）。
+- 最初のtrial集計は未対応DTOのmeta=Noneを扱えず、全4raw保存後のfinallyでAttributeError。原live reportはRUNNINGのまま、元live/before各exit1と原logを保全した。旧22の最初の起動引数もdirectoryへfileを渡す誤りでexit1、再読未実行だった。新4の生成を繰り返さず、公開runner d7e874c6の集計1行を修正し、同rawだけで後0.362783秒/前0.338207秒を再読、旧22の正しいdirectory再読と合わせた3processは全exit0/合計9.667803秒・0load/0生成。元失敗を成功へ書き換えていない。最初の5task合計97.022895秒はlive1/before1/old221/oldSF0/tests0であり、全成功driverとは呼ばない。4B生成処理の個別秒数は集計失敗のため確定値を記載しない。
+
+JupyterはPython3.12.3/FastAPI0.162.0/Pydantic2.14.1/torch2.8.0+cu128、CIはPython3.12.15/FastAPI0.142.2/Pydantic2.13.5。GPU依存pinはtransformers5.19.0/peft0.21.2/accelerate1.15.0/safetensors0.8.0。二つの同一固定環境とは呼ばない。起動モデル終了後のcompute-appsは空、a2e重み/configのSHAは変化なし。
+
+### 原本・地図・次の残件
+
+[公開合成結果JSON](../observation_learning/trials/2026-11-01-analysis-model-fields/role_decision_results.json)に新4原文/前後表示・図、旧本文なし集計、CI、集計失敗と再開点を記録。元4raw/旧22原文は公開しない。検証原本は[Cocolon_Analysis_RoleDecision_20261105.json](https://chatgpt.com/library?file_id=libfile_ef353a828308819199e11028d74f5c4c&account_id=personal)、1,340,072bytes/SHA256 af7208d2ecf585865b67612b0d8059f781538c2ce0392df17d05c27a110d5a78。Pod回収原本1,280,358bytes/SHA256 abf4d9aef0edbab05b9d6f3229fc0c78fdfbd639e8c52634052315537db77c0cと照合。最初の失敗原本518,389bytes/SHA dbbe5143f5705d9808f42a205fce690e05677d2938c287699ccfc7f2cb741005も内包する。Download event timeout後に実fileを照合し、再ダウンロードしなかった。
+
+ファイル地図差分は既存compiler/admission2path、新独立合成test1path、既存SQL test1path/CI workflow1pathの計5path。trialのrole_decision_trial.pyとrole_decision_results.jsonを索引へ追加。既存作者/共有graph/通常保存row/readerを使い、新schema/DB/RN/公開DTO追加0。STRUCTURE_MAP_DELTA_PRESENT（既存model consumerでの責務接続）。
+
+**次は全記録を保持するmodel適用資格を優先する。** `_cumulative_model_request` は全snapshot memberを準備する一方、`require_analysis_model_observed_scope` と今回consumerは1記録限定。通常HTTPを先にONにして最新1件へ切り詰める方法では解決しない。既存記録別の根拠・version・意味集約へmodel fieldを結べる条件を確認し、記録間の順序を勝手に生成しない。担当kindの安定化も残3件の明示残件。暗黙主体/役割、本人基準・判断の理由、記録同士の再出現/変化は未完。HTTP/cronのmodel_source明示接続、transport期限・重複推論抑止・採用重み、IF/Saved/観測会/Mash端末/配置は別の残件として継続する。
+
+Render/本番DB/schema/RN/配置/Pod管理の変更0。新GPUや追加購入操作0、既存Podレンタルは維持。商品全体完成・一般意味品質・Mashの正式受入れへ換算しない。

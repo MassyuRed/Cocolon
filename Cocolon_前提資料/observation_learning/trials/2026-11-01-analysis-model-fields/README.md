@@ -1,4 +1,4 @@
-> **11/5・分析の最新（第9回§189）：同じmemoの明記本人役割と独立した明記本人行動を、元の根拠のまま2nodeへ保持する欠落修正。実4Bの新しい合成4応答を同じまま比較し、4件とも役割だけ→役割＋行動、未読1→0。因果/順序の辺は作らず、主語省略は未読を維持。追加学習0・新応答4/1load、旧22表示保持、Jupyter1006成功・旧SQL1省略、CI全工程成功。通常4B自動呼出し/配置/一般本人基準・記録間接続は残件。新型/保存版/DB/RN追加0、STRUCTURE_MAP_DELTA_PRESENT、正式受入れ未判定。** [結果・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-samefield-role-action-result-20261105)。
+> **11/5・分析の最新（第9回§190）：明記された本人の担当＋決定を、既存の全文根拠・明記順序のままモデル経由mapへ保持する接続修正。実4Bの新合成4応答を同じまま比較し、表示0→1、残3は担当をACTIONと返すkind不一致のため未対応を維持。追加学習0・新4/1load・再生成0。旧22と前回4を保持、Jupyter574成功/旧SQL1省略、CI2226成功/旧SQL1省略・累積48成功。次は全記録を保つmodel適用資格（現在1記録限定）を優先。通常4B自動呼出し/配置/一般本人基準・記録間接続は残件。新型/保存版/DB/RN追加0、STRUCTURE_MAP_DELTA_PRESENT、正式受入れ未判定。** [結果・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-role-decision-result-20261105)。
 
 # Analysis — 最小field接続と実4B probe
 
@@ -2122,3 +2122,10 @@ APIf1048a8f。役割節で早期終了していた通常consumerへ、同欄の�
 
 [runner](same_field_role_action_trial.py)は最大600秒/4生成/再試行なし、[比較結果](same_field_role_action_results.json)は独立合成4原文と前後の通常文章図/集計。実rawは非公開原本へ保全。保存は実ensure/commit payload/read validator＋隔離mock RPCで、実SQLはCIの独立合成検証へ分離する。旧22の16保存/4未対応/2拒否と本文図を保持。省略主体/他者/不確実性は昇格せず、fullwidth「．」は未対応のまま。[全検証/原本/次残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-samefield-role-action-result-20261105)。
 
+### 11/5 §190：本人の過去担当・決定と明記順序の通常model接続
+
+今回の既存責務は、`intent_compiler.py::compile_model_observed_role_decision` が全文共有compilerで既に証明できる1記録/1memo/明記SELFの過去担当＋過去決定を、元のmodel unitと照合して既存graphそのままで返し、`semantic_admission.py` の通常model consumerが既存作者へ渡す部分。担当は既存ROLE/PAST_RESPONSIBILITY、決定は既存ACTION/決める・決めておく、明記順序は既存OBSERVED_ORDER。原envelope/ref/hash/文字・UTF-8範囲、否定、未確定を不変に保持する。新graph/型/role_state/作者/保存版/公開DTO/DB/RNを追加しない。通常action lemma集合を広げず、private role/clause保存契約も維持。明記順序のない合成対照は辺0/ROUTE_CONNECTIONのまま、原因・動機・記録間の線を作らない。
+
+全unit・全文の消費、主体/時制/否定/根拠/親子/対象子を照合し、担当kindの誤り・余分な文・別actor・推測/報告・欄を跨ぐ順序を採用しない。実RD02–04の担当rootはACTIONのため、ROLEへ再ラベルしたりfinite結果で代替して成功へ数えない。新4のうちROLEを返したRD01だけが通常ensure/build/commit/readへ到達した。保存は隔離mock RPC、実SQLの独立合成response試験とは区別する。
+
+[API5fd61b3f](https://github.com/MassyuRed/mashos-api/commit/5fd61b3fe43d0e7ddb255f34678b85cc19b7e15a)、[全結果/未対応/次工程](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-role-decision-result-20261105)。CI全step success、一般品質/正式受入れの根拠にはしない。

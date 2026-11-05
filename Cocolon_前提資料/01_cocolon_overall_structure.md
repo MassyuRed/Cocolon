@@ -1,4 +1,4 @@
-> **11/5・分析の最新（第9回§189）：同じmemoの明記本人役割と独立した明記本人行動を、元の根拠のまま2nodeへ保持する欠落修正。実4Bの新しい合成4応答を同じまま比較し、4件とも役割だけ→役割＋行動、未読1→0。因果/順序の辺は作らず、主語省略は未読を維持。追加学習0・新応答4/1load、旧22表示保持、Jupyter1006成功・旧SQL1省略、CI全工程成功。通常4B自動呼出し/配置/一般本人基準・記録間接続は残件。新型/保存版/DB/RN追加0、STRUCTURE_MAP_DELTA_PRESENT、正式受入れ未判定。** [結果・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-samefield-role-action-result-20261105)。
+> **11/5・分析の最新（第9回§190）：明記された本人の担当＋決定を、既存の全文根拠・明記順序のままモデル経由mapへ保持する接続修正。実4Bの新合成4応答を同じまま比較し、表示0→1、残3は担当をACTIONと返すkind不一致のため未対応を維持。追加学習0・新4/1load・再生成0。旧22と前回4を保持、Jupyter574成功/旧SQL1省略、CI2226成功/旧SQL1省略・累積48成功。次は全記録を保つmodel適用資格（現在1記録限定）を優先。通常4B自動呼出し/配置/一般本人基準・記録間接続は残件。新型/保存版/DB/RN追加0、STRUCTURE_MAP_DELTA_PRESENT、正式受入れ未判定。** [結果・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-role-decision-result-20261105)。
 
 > **11/1・7101本人確認済み（第9回§43）：** RN7464f858のiOS #71/run41283646380/job124780456306は署名Archive・写真目的文検査・IPA・TestFlight Uploadの全工程success。Mashが7101を反映し、今回依頼した修正の完了を確認した。起動待ち、Home全体行動削除、Ranking撤去、設定以外のガイド同期、新PieceのEmlisロゴを含む。こころ天気は今/日週月/履歴/未読/通知/tutorialを従来どおり維持。API3407402/dep-dbjebcflk1mc7390mnr0は07:11:03 UTC Live、health/bootstrap200・private5ON/public3OFF。API製品同一blobのd43cabcd native PostgreSQL CI41283815884は全step成功。RNの旧V4 metrics19失敗とlegacy canvas13reportは残る。依頼UIの本人確認を、全製品の品質/正式商品受入れへ広げない。GPU再起動0。
 
@@ -7523,3 +7523,12 @@ API86d19b6d、STRUCTURE_MAP_DELTA_PRESENT。通常の累積mapは不変。新ana
 
 11/3・分析の最新（weekly§123）：独立二欄8教示＋旧保持10の18更新/172NLL・22生成/2loadを完了。同じ二欄6例のtyped3→5（肯定ROLE/copulaとACTION NEGの誤modifier2例を修復）、旧成功5保存/projection bytes不変。非学習別語彙8は7件文章図へ到達、原文外CONTENT_TARGET1件は全体拒否、対象子欠落4件を保持。MD02の否定行動/YREASON01の理由・不明境界は旧未達のまま。a2eは研究候補保存、通常/次初期自動採用false。全22source/36raw/19成功文章図と保存再読を照合、全原本/再開点保存済み。API ded0586不変、STRUCTURE_MAP_DELTA_NONE、本人補足typed/記録間・比較/通常累積/IF・Saved等は残件。GPU2MiB/0％、レンタル維持。
 
+### 11/5 §190：本人の過去担当・決定と明記順序の通常model接続
+
+今回の既存責務は、`intent_compiler.py::compile_model_observed_role_decision` が全文共有compilerで既に証明できる1記録/1memo/明記SELFの過去担当＋過去決定を、元のmodel unitと照合して既存graphそのままで返し、`semantic_admission.py` の通常model consumerが既存作者へ渡す部分。担当は既存ROLE/PAST_RESPONSIBILITY、決定は既存ACTION/決める・決めておく、明記順序は既存OBSERVED_ORDER。原envelope/ref/hash/文字・UTF-8範囲、否定、未確定を不変に保持する。新graph/型/role_state/作者/保存版/公開DTO/DB/RNを追加しない。通常action lemma集合を広げず、private role/clause保存契約も維持。明記順序のない合成対照は辺0/ROUTE_CONNECTIONのまま、原因・動機・記録間の線を作らない。
+
+全unit・全文の消費、主体/時制/否定/根拠/親子/対象子を照合し、担当kindの誤り・余分な文・別actor・推測/報告・欄を跨ぐ順序を採用しない。実RD02–04の担当rootはACTIONのため、ROLEへ再ラベルしたりfinite結果で代替して成功へ数えない。新4のうちROLEを返したRD01だけが通常ensure/build/commit/readへ到達した。保存は隔離mock RPC、実SQLの独立合成response試験とは区別する。
+
+ファイル地図差分：既存API compiler/admissionの2owner、`ai/tests/test_analysis_model_role_decision.py`（独立合成54ケース）、既存`test_analysis_cumulative_model_source.py`（実SQLの肯否更新/月次不変1ケース）、既存`analysis-observed-content.yml`へ登録。trialの`role_decision_trial.py`は新4原文・4B単一load・同raw前後・通常保存再読用、`role_decision_results.json`は公開合成原文/本文図と本文なし回帰集計の索引。新しい商品経路/作者/検査体系を増設していない。
+
+[API5fd61b3f](https://github.com/MassyuRed/mashos-api/commit/5fd61b3fe43d0e7ddb255f34678b85cc19b7e15a)、[全結果/未対応/次工程](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-role-decision-result-20261105)。CI全step success、一般品質/正式受入れの根拠にはしない。
