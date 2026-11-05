@@ -1,4 +1,4 @@
-> **11/5開始・分析の継続（第9回§208–209）：全sourceを保つprivate batch INPUTと全量一回の合成を実装し、201件の合成一致・新55テスト・CI全工程成功。実4Bにも全20件を3分割で送ったが、3stopとも先頭fieldしか返さず全体拒否、合成/保存0。全欄保持と通常の全量取得は未達。希望の取り込み境界は後続修正・確認中。通常採用・本番/端末未実施。** [結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-batch20-20261105)。
+> **11/5開始・分析の継続（第9回§210）：原memoの明記SELF・肯定希望を既存graphと時点のままmodel consumerへ接続。新27を含むJupyter185 PASS・CI全工程成功。同じ実4B原応答の0モデル旧新比較ではWH02過去希望だけが1nodeへ接続し、誤kind・主体省略・否定注釈不足は未対応を維持。別の合成20recordは2nodeとなったが、実batchの全欄欠落は未解決。wire24はCPU準備完了・実成果未算入。通常採用・本番/端末未実施。** [結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-plain-wish-20261105)。
 
 > **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
@@ -3660,3 +3660,17 @@ APIfc7563b9、CI42091295426全工程成功。新private INPUT/stateとoffline合
 
 
 trial `cumulative_model_batch_live.py`は全20件の一回3生成と各raw/拒否理由を非公開保持する研究専用runner。`cumulative_model_batch_composition_results.json`と`cumulative_model_batch20_results.json`が公開集計。通常のmodel factory／ensure／公開DTO／DB／RNの責務は不変。
+
+## 11/5 §210 — 既存sourceが証明する明記SELFの希望をconsumerへ接続
+
+| owner path | 当回の責務差分 |
+|---|---|
+| API既存 `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | `compile_model_observed_actions`から狭い`_model_complete_observed_plain_wishes`へ接続。一原record／原memo一欄・明記SELF・肯定・既存9動詞のwish current_input／pastと同欄の過去行動を、元graph・根拠・時点・未確定のまま保持。全文座標／hash／unit／root kindを照合し、純粋な過去行動helper・有限文法・語彙は不変 |
+| API既存 `ai/tests/test_analysis_model_observed_actions.py` | 新27対象。v4/v7時点・元graph一致、20record根拠、誤kind／operator削除／欠落／偽注釈等、他者／省略／否定／認知／順序／未読／別欄・補足の採用拡張禁止、compiler／作者を禁止した保存map再読を検証 |
+
+API09b65013658c661cbc33a3857bd2e360e6f4c424、新27を含むJupyter185 PASS、CI42095168200全工程成功。元fc756で生成した同じ実4Bの4応答を0モデルで旧新版再読し、WH02過去希望のみNoneから「希望（当時）」1nodeへ接続。WH01誤kind／WH03主体省略／WH04否定注釈不足は未対応を保持。別の正規合成20record INPUTはmapped0→20／unparsed0／2nodeだが、実3childの欠落rawを修復した結果ではない。既存owner内の限定proof接続としてSTRUCTURE_MAP_DELTA_NONE。型／state／作者／通常設定／公開DTO／DB／RNの追加変更0。通常全量取得・実全欄出力・一般品質・本番採用は未証明。
+
+[原本・実測・境界・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-model-plain-wish-20261105)。wire24はCPU準備完了。実GPU対照の経過・結果は本節の成果に含めない。
+
+
+公開集計は既存trialの`plain_wish4_results.json`。モデルraw・元Response・保存INPUTは非公開原本へ保持する。
