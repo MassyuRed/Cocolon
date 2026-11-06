@@ -2423,3 +2423,11 @@ Jupyterの実tokenizerは最大input4289／full4510／assistant＋EOS225。元�
 [audit_analysis_wire_fields.py](audit_analysis_wire_fields.py) は18442bytes／SHA `f4c0ed18d753dcd2f69efea92cec11c27898c990d0ec6f7bd1131f046f55bd84`、[checkpoint352b44a5](https://github.com/MassyuRed/Cocolon/commit/352b44a55cfb1490a32f4ca1a00e8f420fcabe11)へ固定し全文readback済み。localとJupyterのCPU監査は保存応答28（前14／後14）／入力44不変、重複key6（前2／後4）／非重複22、自己確認11 PASSを確認し、Jupyter exit0。報告153512bytes／SHA `70e7b58c5aaa725966e724413af8d302afcfa13a4fa32060ec94e1375bc7d088` は完全一致した。
 
 HC01 afterのfield3／4欠落と、field2内3quoteがfield4だけに存在する不整合を保持する。宣言field直前対応とdecoded field内座標は診断専用で、admission=false、CMEE source-envelope Evidenceの代替ではない。strict reader維持、raw補正・追加LM／学習／DB0。Jupyter wire回収ZIPは4member／20,482bytes／SHA `51bff91c0e54bc833af254b839a8cd5b4ed4253a1321768ead00e6f5abcf9dc1`。回収reportはlocal報告と全bytes一致し、入力44fileもroot側で全hash照合した。全reviewと回収原本を上記version6へ保存済み。
+
+
+<a id="analysis-field-object-v11-20261106"></a>
+## 11/6 — 固定重みv11欄組織指示の一回比較
+
+[field_object_prompt_trial.py](field_object_prompt_trial.py) は元before14のsource/応答を照合し、v10材料を変えず欄一覧・object境界だけを加えたv11を比較する。元a2e／学習0、14stop／1load／155.313秒、13候補非生成reloadと14応答再処理一致。初回の環境指定漏れはモデル0で原本保全後、別rootで実行した。
+
+HC03だけが新しく文章図へ到達し、仕事/生活2recordの事実と希望を4nodeに保持。旧12はraw/graph/本文図不変。全14の生成12→13・mapped16→18、HC01部分成立/未解析1とHC10重複field拒否は継続する。既知比較であり一般読解率ではない。通常未採用・raw修復0・実DB/本番変更0。[結果・原本](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-field-object-v11-20261106)／[本文なし集計](field_object_prompt_results.json)。次は原入力＋補足3欄の重複key生成の修正。完了した14生成や不採用23学習を再実行しない。

@@ -3857,3 +3857,16 @@ HC01／02が退行し、HC03／10はraw同一の重複key拒否を継続。HC04�
 
 
 §238の追加実path：`Cocolon/Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/audit_analysis_wire_fields.py`（18442bytes／SHA `f4c0ed18d753dcd2f69efea92cec11c27898c990d0ec6f7bd1131f046f55bd84`、[checkpoint352b44a5](https://github.com/MassyuRed/Cocolon/commit/352b44a55cfb1490a32f4ca1a00e8f420fcabe11)）。[source](observation_learning/trials/2026-11-01-analysis-model-fields/audit_analysis_wire_fields.py)は保存rawのduplicate key・宣言field列挙・source候補をread-only診断し、local／Jupyterとも28応答／44入力不変、重複6／非重複22・自己確認11 PASS、Jupyter exit0で同一報告SHA `70e7b58c5aaa725966e724413af8d302afcfa13a4fa32060ec94e1375bc7d088` を確認した。宣言field直前対応とdecoded field内座標は診断専用、admission=falseでsource-envelope Evidenceの代替ではない。追加LM／学習／DB・raw修正0、product責務追加0。非公開原本version6は170member／15,869,307bytes／SHA `892775f6407ab07770b4716b2dea210a48d57abd94a047d25a6d16afc5dc27f5` で保存済み。version5全payloadを保持し、最終review・wire原本を追加した。
+
+
+## 11/6 §239 — v11欄組織指示の全変更file
+
+| 実path | 既存責務内の差分 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py` | opt-in v11の欄一覧／object境界指示・request/state版。v10意味・親内引用束縛とstrict readerを継承 |
+| `mashos-api/ai/services/ai_inference/analysis_cumulative_service.py` | 既存候補build/serialize/reloadとmap分岐のv11受渡し。通常HTTP/batch許可は据置 |
+| `mashos-api/ai/tests/test_analysis_model_actor_profile.py` | 版間流用拒否、元材料不変、親内引用／保存再読、欠落・重複拒否と通常選択の境界 |
+| `Cocolon/Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/field_object_prompt_trial.py` | 既存before14・固定a2eを使う学習0／14 after-only／300秒の一回比較と非生成再読 |
+| `Cocolon/Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/field_object_prompt_results.json` | 本文なし結果、局所回復・未達・失敗launchと保全先を分離 |
+
+新商品ownerなし、STRUCTURE_MAP_DELTA_NONE。既知HC03の2recordが4nodeへ回復し、全14の生成12→13（うち1部分成立）・mapped16→18。旧12のraw/本文図保持、13候補再読・14応答再処理一致。HC01過去希望とHC10重複fieldは未達。APIff36d037／CI42234794559全step success、通常採用／DB／RN／Render／merge／deploy変更0。[全結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-field-object-v11-20261106)。

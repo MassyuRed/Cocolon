@@ -1405,3 +1405,12 @@ CPU欄診断と原本保存は下記のとおり完了。同23反復は行わず
 
 
 §238・CPU欄診断も完了。[audit_analysis_wire_fields.py](../observation_learning/trials/2026-11-01-analysis-model-fields/audit_analysis_wire_fields.py)（18442bytes／SHA `f4c0ed18d753dcd2f69efea92cec11c27898c990d0ec6f7bd1131f046f55bd84`、checkpoint `352b44a5`）をlocal／Jupyterで確認し、保存応答28／入力44不変・重複6／非重複22、自己確認11 PASS・Jupyter exit0。報告SHA `70e7b58c5aaa725966e724413af8d302afcfa13a4fa32060ec94e1375bc7d088` は両環境一致。宣言fieldとdecoded field座標は診断専用で、source-envelope Evidence／admissionを代替せず、raw補正・追加LM／更新／DB0。非公開原本version6は170member／15,869,307bytes／SHA `892775f6407ab07770b4716b2dea210a48d57abd94a047d25a6d16afc5dc27f5` で保存済み。version5全payloadを保持し、HC品質レビューとwire原source／local・Jupyter報告／logを追加した。回収reportはlocalと全bytes一致、入力44fileも全hash照合した。
+
+
+## 11/6 §239 — 欄組織の研究profile v11と既知2記録の回復
+
+既存semantic_admissionへ明示研究用v11を追加。v10の意味指示・材料・親内引用束縛を保ち、番号一覧／総数と欄object境界だけを追記する。request/state版を分離し、既存analysis_cumulative_serviceの候補生成・保存・再読・map接続へ同じprofileを渡す。通常HTTP/batchのv4/v7許可・既定は変えない。新作者・共有意味型・公開DTO・DB・RN ownerはない。STRUCTURE_MAP_DELTA_NONE。
+
+元a2eで14stop／1load／学習0・155.313秒。HC03が仕事/生活の2record／4nodeへ回復し、全14の生成到達12→13、mapped16→18、node26→30。旧12（部分成立HC01を含む）はraw/graph/count/本文図不変。成功graph34根拠を照合、13候補非生成reloadと全14応答再処理一致。current/月次RPCや実DB保存の新実績へは換算しない。HC01未解析1とHC10重複field拒否を維持。local644 PASS／SQL依存20 SKIP・11subtests、CI42234794559全step success。
+
+[全結果・原本・次の一作業](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-field-object-v11-20261106)／[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/field_object_prompt_results.json)。通常未採用、暗黙役割・本人基準・判断/選択・記録間意味・IF/Saved・実機品質は未達。次は原入力＋補足3欄の重複key生成の修正。§238の不採用重み・元23教師を再学習しない。

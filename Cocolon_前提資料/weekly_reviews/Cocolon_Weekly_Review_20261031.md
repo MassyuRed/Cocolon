@@ -5605,3 +5605,41 @@ APIc150／CI42217456387全工程successと§236の実10応答／修復後32read�
 新source [audit_analysis_wire_fields.py](../observation_learning/trials/2026-11-01-analysis-model-fields/audit_analysis_wire_fields.py) は [352b44a5](https://github.com/MassyuRed/Cocolon/commit/352b44a55cfb1490a32f4ca1a00e8f420fcabe11) へ固定反映し、全文readback一致。18442bytes／SHA `f4c0ed18d753dcd2f69efea92cec11c27898c990d0ec6f7bd1131f046f55bd84`。localとJupyterのCPU監査はいずれも自己確認11 PASS、保存応答28（前14／後14）・入力44file不変、重複key6（前2／後4）・非重複22を確認した。Jupyterはexit0、153512bytesの報告SHA `70e7b58c5aaa725966e724413af8d302afcfa13a4fa32060ec94e1375bc7d088` はlocal最終報告と完全一致。
 
 HC01 afterのfield3／4欠落、field2内の3quoteがfield4だけに存在する不整合も診断した。宣言field直前対応とdecoded field内座標は診断専用であり、CMEE source-envelope Evidenceの再構成・admission判定の代わりではない。strict readerを維持し、raw補正0・admission=false・追加LM／学習／DB0。Jupyter wire回収ZIPは4member／20,482bytes／SHA `51bff91c0e54bc833af254b839a8cd5b4ed4253a1321768ead00e6f5abcf9dc1`。回収reportはlocal報告153512bytesと全bytes一致し、入力44fileをroot側でも全hash照合した。全reviewと回収原本は上記version6へ保全済み。
+
+
+<a id="analysis-field-object-v11-20261106"></a>
+## 239. 11/6 — 欄一覧とobject境界の指示で既知の異カテゴリ2記録を回復
+
+§238の退行した23更新を繰り返さず、元a2e重みを固定して生成側だけを比較した。v10はv7の材料・意味指示と希望説明を継承する一方、v8の今回field番号一覧・総数を継承していなかった。API [ff36d037](https://github.com/MassyuRed/mashos-api/commit/ff36d037fba5149e40a060eb37934ef414f46d22) の明示研究用 `selected_material.v11` は、v10全文の末尾に既存の番号一覧と、各欄を別objectにしてkeyを一度ずつ返す説明だけを追加する。新しい意味例・教師は0。user材料、元record/カテゴリ/補足/根拠を変えず、v10の親内引用位置束縛も継承する。request/refと保存stateは新版へ分離し、旧版への応答流用を拒否する。
+
+### 固定重みでの実結果
+
+Jupyterで元before14のsource/messages/rawと現API再処理を照合後、同じ21source record／28fieldを各一回生成した。最大入力4649token＋予約2048<8192。追加学習0・新教師0・新14stop／1load、155.3132125204429秒・exit0。各生成23秒／全体300秒、生成retry0。以前不採用のb8d096を初期値へ使わず、元a2e/config006eを維持した。
+
+| 指標（既知14要求） | v10/a2e | v11/a2e |
+|---|---:|---:|
+| 文章・図へ到達した要求（部分成立を含む） | 12 | 13 |
+| mapped record | 16 | 18 |
+| node | 26 | 30 |
+| 生成map内の未解析record | 1 | 1 |
+| 全体拒否要求 | 2 | 1 |
+
+HC03が回復した。元の同object内のfield/units重複がなくなり、仕事／生活の2recordを各2nodeへ保持した。本人の肯定過去ACTIONと現在WISHを分け、同文でも別カテゴリを一つの反復へ混ぜず、各記録count1、因果・記録間順序のedge0と未確定を保つ。これは**既知構成の出力組織の局所回復**であり、一般の暗黙役割や本人の選択基準を理解できた証明ではない。
+
+従来成立した12要求（HC01の部分成立を含む）はraw bytes、graph、count、本文・図（再構成artifact UUID以外）が全て不変。全14 source／前後raw／全生成本文と回復graphを読み、成功graphの34根拠についてfield/literal SHA、scalar/UTF8座標、source envelopeとrecord所属を照合した。AP07の担当→決定という明記順序、AP08の否定担当／否定決定、AE05/OP02の省略主体、希望の肯否・時点、元カテゴリを保持した。独立read-only reviewでも一致した。
+
+### 残った失敗を回復へ数えない
+
+HC01のrawは同一で、肯定過去希望の語尾をWRITTEN_MODIFIERにする誤りと、そのrecord全体の未解析1が残った。13到達の全件完全読解ではない。HC10は3fieldを別objectへ分けたものの、各objectのfield keyを二度出すためstrict拒否を継続した。HC10のrawは変わっているが成功扱いしない。reader緩和、重複key削除、raw補完・再ラベルは0。
+
+保存候補13の非生成reloadと、拒否を含む全14応答の再処理が一致した。後者のmapは同rawからの再構成であり、今回current/月次RPC読取や実DB保存を実施したという意味ではない。前回§236の32readはそのまま別実績として保持する。
+
+最初の起動は、華恋が既存optional targetのPYTHONPATHを指定し忘れ、0.01844秒／モデルload・生成0で停止した。原本を保持し、指定を直した別rootで上記一回の推論を完了した。終了直後のGPU原本は2MiB／54％で、後続のfresh画面確認は2MiB／0％・compute apps空。後者で前者のfileを書き換えていない。
+
+### 検証・保全・次の一作業
+
+local最終は644 PASS／SQL環境未設定20 SKIP／11subtests・145.78秒。初期collectionのsparse helper不足と、v11の累積profile分岐不足を検出した失敗logも保全した。分岐補修後に既存CIと同じ隔離方式で再確認。CI [42234794559](https://github.com/MassyuRed/mashos-api/actions/runs/42234794559) は全step success（生成保存2578 PASS／旧SQL1 SKIP／12059subtests、共有owner1、累積302／2subtests、隔離SQL201source／15月参照）。件数を一般品質へ換算しない。
+
+実行source [field_object_prompt_trial.py](../observation_learning/trials/2026-11-01-analysis-model-fields/field_object_prompt_trial.py) は [79c15787](https://github.com/MassyuRed/Cocolon/commit/79c157877f8c5272ed1c65e77ac04a4690b26033) へ先行固定。[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/field_object_prompt_results.json)と、非公開の全raw・source・旧before14・成功/失敗実行・再読・review・local/CI原本を [検証原本ZIP](https://chatgpt.com/library?file_id=libfile_fde3_f-f14ecc77797481919a089435d6c47d10_2f7470f963808191aaebf050935e72de&account_id=personal) に保全した。最終60member／737195bytes／SHA `c3efbffedb1da7f50019d2498cf4f26e3319c003eeecb5d23e8d936816d9796d`。Pod回収原本53memberのCRC／全hashを確認し、そのpayloadを落とさずreviewを追加した。
+
+通常HTTP/batchの許可・既定profile、重み、公開API/DTO、作者、DB/RN/Render/merge/deployは変更0。STRUCTURE_MAP_DELTA_NONE（既存owner内の明示研究profile）。TECHNICAL_CREDITの局所結果であり、Mashの正式商品受入れではない。通常採用は未実施。次は原入力＋補足の3欄で残る重複key生成の修正へ進む。同23学習を反復せず、元rawとstrict条件を保つ。本人基準・暗黙role・判断/choice・記録間意味・全量処理・IF/Saved・実DB／本人端末の品質は残件として継承する。
