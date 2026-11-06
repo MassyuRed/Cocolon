@@ -3161,8 +3161,8 @@ test('Watashi Map Phase 6 copy, tutorial fixture, and QA guardrails stay aligned
 
   assertIncludes(todayQuestionHistory + mainTabs + crossLink, [
     '今のわたしマップが更新されました',
-    '回答を更新しました。わたしマップに反映されます。',
-    '過去の回答を編集すると、わたしマップに反映されます。',
+    '回答を更新しました。',
+    '過去の回答を確認・編集できます。',
     '【わたしマップの深掘り候補】',
     'ピースを開いて「わたしマップ」または「ピースライブラリ」',
     'わたしマップやピースで触れると良さそうな論点',

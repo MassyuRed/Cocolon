@@ -5049,3 +5049,16 @@ Inputの選択iconと、契約の無効CTA・spinnerの読みにくい色も先�
 製品17file＋既存test1＋文書3file。既存5入口401 PASS／FAIL0／SKIP0、変更JS14file parse、XML4file parse・storyboard全constraint参照、diff空白検査を通過。前回400件へroleの非破壊性1件を追加した結果で、実機表示の証明にはしない。実装一覧と再開点は[UI資料§17](../designs/ui/material-ui-design.md#17-116-実装区切り1--共通起動認証)。入力・分析・Piece・アカウント・設定・案内・tutorial・休眠資産の個別仕上げを続ける。
 
 ビルド／native compile／Upload／配布／実機確認、Render／Supabase／GPU操作は0。比較プレビュー・作品renderer／recipe／保存画像・API／DB／AI・権限は変更0。途中の共通部品反映を全UI完成とは扱わない。writerは華恋一人、補助はread-only review。
+
+
+## 220. 11/6 — 入力・応答・問い・履歴のMaterial仕上げ
+
+共通・起動・認証の区切り[683c7f6](https://github.com/MassyuRed/Cocolon/commit/683c7f60d88c48bde037d695cab9ff89bf78e2bc)の全21blob・親・変更集合・headを読み戻した後、入力群H01〜H12を進めた。全画面統一は固定、全source完成後にbuildする方針を保持。
+
+Homeの補助入口・通知設定、入力／問い履歴、Emlisと仮の理解、今日の問い、下書き・旧fallback・tutorial旧Pieceを同じ色・文字・面へ。入力履歴は白固定・斜体を外し、検索／filterも一覧と共にscrollできる記録カードへ。問い履歴はPlus編集・60件・iOS入力・anchorを保持し、失敗と0件を分離、同じpageから再取得できる案内を追加した。未保証の「マップに反映」を現在の閲覧／更新の説明へ直す。
+
+Safe areaと利用可能高さでmodalを制限し、見出し・説明・長文をscrollへ。read-only reviewで問いmodalの読込spinner、履歴の上下inset重複、Emlisのfixed footerが横画面＋keyboardで溢れる点を修正。末尾のPiece作成／閉じるも同じ本文scrollへ置き、すべての操作条件・onDismiss後引渡しを維持。共通buttonのdisabledは透明度で白文字を薄くする表示をやめ、通常面と読める補助文字・spinnerへ揃えた。
+
+製品15file（入力群等13＋共通buttonの無効面に対応するPiece子文字／icon2caller）、既存test2file＋回復test1file、資料3file。既存6入口と新回復2件で447 PASS／FAIL0／SKIP0、変更JS18file parse・diff空白検査成功。実screenの初回失敗再読、追加失敗後の既存回答保持・同じoffset再試行・ID重複除去を確認。React/native・Auth/HTTPは代替を含み、端末描画の合格ではない。途中検査のTypeScript不足は既存pinned5.2.2を一時配置し、旧copy期待だけを現在説明へ変更して解消。依存定義は不変。
+
+詳細・変更path・次の再開点は[UI資料§18](../designs/ui/material-ui-design.md#18-116-実装区切り2--入力応答問い履歴)。残るsource作業は分析全体、Piece・social、アカウント・設定・契約、案内・tutorial・休眠資産と横断仕上げ。ビルド・配布・実機確認は全画面sourceを揃えてからまとめる。今回もbuild／native compile／Upload／配布／Render／Supabase／GPU操作0、作品renderer・保存画像／AI・分析意味・権限・API／DB変更0。writerは華恋一人、補助はread-only review。

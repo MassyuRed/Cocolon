@@ -53,6 +53,7 @@ function InputMemoField({
       {isExpanded ? (
         <View style={[styles.memoCard, styles.memoCardExpanded]}>
           <TextInput
+            accessibilityLabel={label}
             ref={inputRef}
             style={[
               styles.memoInput,

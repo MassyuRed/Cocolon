@@ -35,6 +35,7 @@ export default function InputCategorySection({
                 isDisabled && styles.categoryChipDisabled,
               ]}
               accessibilityLabel={`${category}カテゴリを選択する`}
+              accessibilityState={{ selected: isActive }}
             >
               <Text
                 style={[

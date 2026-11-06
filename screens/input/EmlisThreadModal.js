@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ActivityIndicator, Alert, AppState, KeyboardAvoidingView, Modal, Platform, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import CocolonButton from "../../components/CocolonButton";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export function threadStatus(dto) {
   if (dto?.state === "NOT_CREATED") return dto.can_write === false ? "この記録への返事はまだ用意されていません。現在は返事の更新を一時停止しています。" : "この記録への返事はまだ用意されていません。";
@@ -33,11 +34,11 @@ function FrameEditor({ frame, thread, textStyle, borderColor }) {
   const [editing, setEditing] = useState(false);
   const [value, setValue] = useState(frame.correction_text || "");
   const disabled = thread.busy || thread.uncertain || thread.rejected || thread.dto?.can_write === false;
-  return <View style={s.section}>
+  return <View style={[s.section, { borderColor }]}>
     <Text style={[s.label, textStyle]}>あなたの言葉からの仮の理解</Text>
-    <Text style={textStyle}>{dateLabel(frame.recorded_at)}の「{frame.trigger}」について</Text>
+    <Text style={[s.description, textStyle]}>{dateLabel(frame.recorded_at)}の「{frame.trigger}」について</Text>
     <Text selectable style={[s.body, textStyle]}>{frame.status === "REVISED" ? frame.correction_text : frame.received_meaning}</Text>
-    <Text style={textStyle}>{frame.status === "REJECTED" ? "この理解は今後使いません。" : frame.status === "REVISED" ? "あなたの訂正を保存しました。次の観測から参照します。" : "今回も同じ受け止めとは決めません。違うところは直せます。"}</Text>
+    <Text style={[s.body, textStyle]}>{frame.status === "REJECTED" ? "この理解は今後使いません。" : frame.status === "REVISED" ? "あなたの訂正を保存しました。次の観測から参照します。" : "今回も同じ受け止めとは決めません。違うところは直せます。"}</Text>
     {frame.status === "TENTATIVE" && <CocolonButton disabled={disabled} onPress={() => thread.updateFrame(frame, "CONFIRMED")}>この理解で合っています</CocolonButton>}
     <CocolonButton variant="secondary" disabled={disabled} onPress={() => setEditing(!editing)}>理解を直す</CocolonButton>
     {editing && <>
@@ -142,16 +143,17 @@ export default function EmlisThreadModal({ thread, colors, navigation, userId = 
 
   return <Modal visible={thread.visible} transparent animationType={Platform.OS === "ios" ? "fade" : "none"}
     onRequestClose={thread.close} onDismiss={openPiece}>
+    <SafeAreaView edges={["top", "bottom", "left", "right"]} style={s.safeArea}>
     <KeyboardAvoidingView style={s.backdrop} behavior={Platform.OS === "ios" ? "padding" : "height"}>
       <View style={[s.card, { backgroundColor: colors.FIELD_BG, borderColor: colors.CARD_BORDER }]}>
-        <Text style={[s.title, { color: colors.TITLE_GOLD }]}>Emlisからの応答</Text>
-        <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={s.content}>
-          {dto?.current_observation && <View style={s.section}>
+        <ScrollView style={{ flexShrink: 1 }} keyboardShouldPersistTaps="handled" contentContainerStyle={s.content}>
+          <Text style={[s.title, { color: colors.TITLE_GOLD }]}>Emlisからの応答</Text>
+          {dto?.current_observation && <View style={[s.section, { borderColor: colors.CARD_BORDER }]}>
             <Text style={[s.label, textStyle]}>応答内容</Text>
-            {(busy || error || uncertain || thread.rejected) && <Text style={textStyle}>前回確認した内容です。反映状況はまだ確認できていません。</Text>}
+            {(busy || error || uncertain || thread.rejected) && <Text style={[s.body, textStyle]}>前回確認した内容です。反映状況はまだ確認できていません。</Text>}
             <Text selectable style={[s.body, textStyle]}>{dto.current_observation.text}</Text>
           </View>}
-          {dto?.pending_question && <View style={s.section}>
+          {dto?.pending_question && <View style={[s.section, { borderColor: colors.CARD_BORDER, backgroundColor: colors.SURFACE_TONAL }]}>
             <Text style={[s.label, textStyle]}>Emlisからの質問</Text>
             <Text selectable style={[s.body, textStyle]}>{dto.pending_question.text}</Text>
           </View>}
@@ -161,8 +163,8 @@ export default function EmlisThreadModal({ thread, colors, navigation, userId = 
             <TextInput multiline value={draft} onChangeText={thread.setDraft} editable={!busy && !uncertain && !blocked}
               maxLength={4000} accessibilityLabel="Emlisへの回答" placeholder="この質問への回答"
               placeholderTextColor={colors.TEXT_ON_LIGHT} textAlignVertical="top"
-              style={[s.input, textStyle, { borderColor: colors.CARD_BORDER }]} />
-            <Text style={textStyle}>{[...draft].length} / 2000文字</Text>
+              style={[s.input, textStyle, { borderColor: colors.CARD_BORDER, backgroundColor: colors.FIELD_BG }]} />
+            <Text style={[s.description, textStyle]}>{[...draft].length} / 2000文字</Text>
             <CocolonButton disabled={blocked || busy || thread.pendingAction || (uncertain && !thread.reconciled) || !draft.trim() || [...draft].length > 2000} onPress={thread.sendAnswer}>
               {uncertain ? "同じ回答を再送する" : "回答を送る"}
             </CocolonButton>
@@ -172,37 +174,40 @@ export default function EmlisThreadModal({ thread, colors, navigation, userId = 
             {dto.can_continue && <CocolonButton disabled={blocked || busy || uncertain} onPress={() => thread.action("continue")}>もう一点続ける</CocolonButton>}
             <CocolonButton variant="secondary" disabled={blocked || busy || uncertain} onPress={() => thread.action("stop")}>ここで終える</CocolonButton>
           </View>}
-          {dto?.can_continue && <Text style={textStyle}>この記録では、あと{Math.max(0, dto.question_limit - dto.issued_count)}問まで続けられます。</Text>}
+          {dto?.can_continue && <Text style={[s.description, textStyle]}>この記録では、あと{Math.max(0, dto.question_limit - dto.issued_count)}問まで続けられます。</Text>}
           {(dto?.interpretive_frames || []).map(frame => <FrameEditor key={`${dto.thread_id}:${frame.frame_ref}`} frame={frame} thread={thread} textStyle={textStyle} borderColor={colors.CARD_BORDER} />)}
           {dto?.can_retry && <CocolonButton disabled={blocked || busy || uncertain} onPress={() => thread.action("retry_response")}>本文を再試行する</CocolonButton>}
           {uncertain && (thread.pendingAction || !dto?.pending_question) && <CocolonButton disabled={blocked || busy || !thread.reconciled} onPress={thread.replayPending}>
             {thread.pendingAction ? "同じ操作を再送する" : "同じ回答を再送する"}
           </CocolonButton>}
           {!dto?.current_observation && <View style={s.content}>
-          {dto?.original ? <View style={s.section}>
-            <Text style={textStyle}>元の記録 · {dateLabel(dto.original.created_at)}</Text>
+          {dto?.original ? <View style={[s.section, { borderColor: colors.CARD_BORDER }]}>
+            <Text style={[s.description, textStyle]}>元の記録 · {dateLabel(dto.original.created_at)}</Text>
             {!!dto.original.memo && <Text selectable style={[s.body, textStyle]}>{dto.original.memo}</Text>}
             {!!dto.original.memo_action && <Text selectable style={[s.body, textStyle]}>{dto.original.memo_action}</Text>}
           </View> : null}
-          {history.map(event => <View key={event.event_id} style={s.section}>
+          {history.map(event => <View key={event.event_id} style={[s.section, { borderColor: colors.CARD_BORDER }]}>
             <Text style={[s.label, textStyle]}>{event.kind === "QUESTION" ? `Emlisからの質問${event.round_index ? ` · ${event.round_index}問目` : ""}`
               : event.kind === "ANSWER" ? `あなたの回答 · ${dateLabel(event.authored_at || event.recorded_at)}`
                 : "以前の返事"}</Text>
             <Text selectable style={[s.body, textStyle]}>{event.text}</Text>
           </View>)}
           </View>}
-        </ScrollView>
         <CocolonButton disabled={!canCreatePiece(live.current)} onPress={createPiece}>ピースの作成</CocolonButton>
         <CocolonButton variant="secondary" onPress={thread.close} accessibilityLabel="Emlisからの応答を閉じる">閉じる</CocolonButton>
+        </ScrollView>
       </View>
     </KeyboardAvoidingView>
+    </SafeAreaView>
   </Modal>;
 }
 const s = StyleSheet.create({
-  backdrop: { flex: 1, backgroundColor: "rgba(0,0,0,0.45)", justifyContent: "center", padding: 20 },
-  card: { maxHeight: "90%", borderWidth: 1, borderRadius: 20, padding: 18, gap: 14 },
+  safeArea: { flex: 1, backgroundColor: "rgba(0,0,0,0.45)" },
+  backdrop: { flex: 1, justifyContent: "center", alignItems: "center", padding: 20 },
+  card: { width: "100%", maxWidth: 520, maxHeight: "100%", flexShrink: 1, borderWidth: 1, borderRadius: 24, padding: 20, gap: 14 },
   title: { fontSize: 22, lineHeight: 30, fontWeight: "600" }, content: { gap: 20, paddingBottom: 16 },
-  section: { gap: 8, paddingVertical: 10 }, label: { fontSize: 14, lineHeight: 22, fontWeight: "600" },
+  section: { gap: 8, padding: 16, borderWidth: 1, borderRadius: 16 }, label: { fontSize: 14, lineHeight: 22, fontWeight: "600" },
+  description: { fontSize: 14, lineHeight: 22, fontWeight: "400" },
   body: { fontSize: 16, lineHeight: 27, fontWeight: "400" }, input: { minHeight: 100, maxHeight: 200, borderWidth: 1, borderRadius: 16, padding: 16, fontSize: 16, lineHeight: 27, fontWeight: "400" },
 });
 

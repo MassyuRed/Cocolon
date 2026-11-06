@@ -2,8 +2,8 @@ import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
+  KeyboardAvoidingView,
   Platform,
-  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -13,6 +13,7 @@ import {
   View,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useTheme } from "../theme/ThemeContext";
 import { makeUiTokens } from "../ui/uiTokens";
@@ -52,6 +53,7 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
   const [expandedId, setExpandedId] = useState(null);
   const [editState, setEditState] = useState({});
   const [freeTextContentHeights, setFreeTextContentHeights] = useState({});
+  const [loadError, setLoadError] = useState(null);
 
   const isDark = themeName === "dark";
   const inputMaxHeight = useMemo(() => {
@@ -66,6 +68,7 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
   const showHistoryRetentionLabel = !subscriptionLoading && !!historyRetentionLabel;
 
   const load = useCallback(async ({ append = false, offset = 0 } = {}) => {
+    setLoadError(null);
     if (!todayQuestionHistoryEnabled) {
       setItems([]);
       setHasMore(false);
@@ -107,12 +110,12 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
       );
     } catch (e) {
       console.warn("TodayQuestionHistoryScreen: load failed", e);
+      setLoadError({ append, offset });
       if (!append) {
         setItems([]);
-        Alert.alert("今日の問い", "履歴の取得に失敗しました。");
+        setHasMore(false);
+        setNextOffset(null);
       }
-      setHasMore(false);
-      setNextOffset(null);
     } finally {
       if (append) setLoadingMore(false);
       else setLoading(false);
@@ -209,7 +212,7 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
         await load({ append: false, offset: 0 });
         Alert.alert(
           "今日の問い",
-          "回答を更新しました。わたしマップに反映されます。",
+          "回答を更新しました。",
         );
       } catch (e) {
         console.warn("TodayQuestionHistoryScreen: patch failed", e);
@@ -228,7 +231,7 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
 
   if (!todayQuestionHistoryEnabled) {
     return (
-      <SafeAreaView style={styles.safeArea}>
+      <SafeAreaView edges={["left", "right"]} style={styles.safeArea}>
         <StatusBar
           barStyle={isDark ? "light-content" : "dark-content"}
           backgroundColor={colors.BG_SILVER}
@@ -252,16 +255,17 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
   }
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView edges={["left", "right"]} style={styles.safeArea}>
       <StatusBar
         barStyle={isDark ? "light-content" : "dark-content"}
         backgroundColor={colors.BG_SILVER}
       />
-      <View style={styles.container}>
+      <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === "ios" ? "padding" : "height"}>
         <ScrollView
           style={{ flex: 1 }}
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
         >
           <View style={styles.header}>
             <CocolonBackButton
@@ -279,7 +283,7 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
             </Text>
           ) : (
             <Text style={styles.helpText}>
-              過去の回答を編集すると、わたしマップに反映されます。
+              過去の回答を確認・編集できます。
             </Text>
           )}
 
@@ -294,7 +298,7 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
               <ActivityIndicator size="small" color={colors.TEXT_SUBTLE} />
               <Text style={styles.loadingText}>履歴を読み込み中…</Text>
             </View>
-          ) : items.length === 0 ? (
+          ) : items.length === 0 && !loadError ? (
             <View style={styles.emptyCard}>
               <Text style={styles.emptyText}>
                 まだ今日の問いの履歴はありません。
@@ -321,6 +325,7 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
                     style={styles.itemHeader}
                     onPress={() => openItem(item)}
                     accessibilityLabel="履歴詳細を開く"
+                    accessibilityState={{ expanded }}
                   >
                     <View style={{ flex: 1 }}>
                       <Text style={styles.itemDay}>
@@ -358,6 +363,8 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
                         <>
                           <View style={styles.modeRow}>
                             <CocolonPressable
+                              accessibilityLabel="選択式で答える"
+                              accessibilityState={{ selected: edit.mode !== "free_text" }}
                               style={[
                                 styles.modeChip,
                                 edit.mode !== "free_text" && styles.modeChipOn,
@@ -377,6 +384,8 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
                               </Text>
                             </CocolonPressable>
                             <CocolonPressable
+                              accessibilityLabel="自由回答で答える"
+                              accessibilityState={{ selected: edit.mode === "free_text" }}
                               style={[
                                 styles.modeChip,
                                 edit.mode === "free_text" && styles.modeChipOn,
@@ -399,7 +408,9 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
 
                           {edit.mode === "free_text" ? (
                             <View style={styles.freeTextCard}>
+                              <Text style={styles.optionalFreeTextLabel}>自由回答</Text>
                               <TextInput
+                                accessibilityLabel="今日の問いへの自由回答"
                                 style={[
                                   styles.memoInput,
                                   {
@@ -432,7 +443,7 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
                                 multiline
                                 scrollEnabled
                                 textAlignVertical="top"
-                                placeholderTextColor={colors.TEXT_ON_LIGHT}
+                                placeholderTextColor={colors.TEXT_SUBTLE}
                                 onContentSizeChange={(e) => {
                                   const h = e?.nativeEvent?.contentSize?.height ?? 0;
                                   if (h) updateFreeTextContentHeight(answerId, h);
@@ -448,6 +459,8 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
                                     cid && cid === edit.selectedChoiceId;
                                   return (
                                     <CocolonPressable
+                                      accessibilityState={{ selected: !!active }}
+                                      accessibilityLabel={String(choice?.label || "選択肢")}
                                       key={
                                         cid || String(choice?.choice_key || "")
                                       }
@@ -464,6 +477,8 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
                                         })
                                       }
                                     >
+                                      <Ionicons name={active ? "checkmark-circle" : "ellipse-outline"} size={20}
+                                        color={active ? colors.ON_SURFACE_TONAL : colors.TEXT_SUBTLE} style={{ marginRight: 10 }} />
                                       <Text
                                         style={[
                                           styles.choiceText,
@@ -482,6 +497,7 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
                                     任意でひと言だけ書けます。
                                   </Text>
                                   <TextInput
+                                    accessibilityLabel="任意のひと言"
                                     style={styles.optionalFreeTextInput}
                                     placeholder="ここに書いてください。"
                                     {...(isIOS
@@ -500,7 +516,7 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
                                       : {})}
                                     multiline
                                     textAlignVertical="top"
-                                    placeholderTextColor={colors.TEXT_ON_LIGHT}
+                                    placeholderTextColor={colors.TEXT_SUBTLE}
                                   />
                                 </View>
                               ) : null}
@@ -525,11 +541,20 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
             })
           )}
 
+          {loadError && !loading && !loadingMore ? (
+            <View style={styles.emptyCard}>
+              <Text accessibilityLiveRegion="polite" style={[styles.helpText, { color: colors.ERROR }]}>
+                {loadError.append ? "続きの履歴を取得できませんでした。表示中の回答はそのまま確認できます。" : "履歴を取得できませんでした。もう一度お試しください。"}
+              </Text>
+              <CocolonButton variant="secondary" onPress={() => load(loadError)} title="もう一度読み込む" />
+            </View>
+          ) : null}
+
           {loadingMore ? (
             <View style={styles.loadingWrap}>
               <ActivityIndicator size="small" color={colors.TEXT_SUBTLE} />
             </View>
-          ) : hasMore ? (
+          ) : hasMore && !loadError ? (
             <CocolonPressable
               style={styles.loadMoreBtn}
               onPress={loadMore}
@@ -539,7 +564,7 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
             </CocolonPressable>
           ) : null}
         </ScrollView>
-      </View>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
@@ -548,7 +573,7 @@ function createStyles(COLORS, ui) {
   return StyleSheet.create(applyTypographyTokens({
     safeArea: {
       flex: 1,
-      backgroundColor: COLORS.PANEL_BG,
+      backgroundColor: COLORS.BG_SILVER,
     },
     container: {
       flex: 1,
@@ -557,6 +582,9 @@ function createStyles(COLORS, ui) {
     },
     scrollContent: {
       paddingBottom: 24,
+      width: "100%",
+      maxWidth: 640,
+      alignSelf: "center",
     },
     header: {
       flexDirection: "row",
@@ -571,9 +599,11 @@ function createStyles(COLORS, ui) {
       fontSize: 20,
       fontWeight: "800",
       color: COLORS.TITLE_GOLD,
+      flex: 1,
+      textAlign: "center",
     },
     headerSpacer: {
-      width: 22,
+      width: 44,
     },
     helpText: {
       fontSize: 12,
@@ -600,11 +630,11 @@ function createStyles(COLORS, ui) {
     },
     emptyCard: {
       backgroundColor: COLORS.FIELD_BG,
-      borderRadius: 18,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      paddingHorizontal: 14,
-      paddingVertical: 14,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
     },
     emptyText: {
       fontSize: 13,
@@ -612,7 +642,7 @@ function createStyles(COLORS, ui) {
     },
     itemCard: {
       backgroundColor: COLORS.FIELD_BG,
-      borderRadius: 18,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       marginBottom: 12,
@@ -621,8 +651,8 @@ function createStyles(COLORS, ui) {
     itemHeader: {
       flexDirection: "row",
       alignItems: "center",
-      paddingHorizontal: 14,
-      paddingVertical: 12,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
     },
     itemDay: {
       fontSize: 11,
@@ -643,8 +673,8 @@ function createStyles(COLORS, ui) {
       color: COLORS.TEXT_ON_LIGHT,
     },
     itemBody: {
-      paddingHorizontal: 14,
-      paddingBottom: 14,
+      paddingHorizontal: 20,
+      paddingBottom: 20,
     },
     metaText: {
       fontSize: 11,
@@ -657,6 +687,7 @@ function createStyles(COLORS, ui) {
       alignItems: "center",
       marginTop: 12,
       marginBottom: 10,
+      flexWrap: "wrap",
     },
     modeChip: {
       paddingHorizontal: 12,
@@ -666,10 +697,13 @@ function createStyles(COLORS, ui) {
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.PANEL_BG,
       marginRight: 8,
+      minHeight: 44,
+      justifyContent: "center",
+      marginBottom: 8,
     },
     modeChipOn: {
-      backgroundColor: COLORS.GOLD_BUTTON,
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      borderColor: COLORS.ON_SURFACE_TONAL,
     },
     modeChipText: {
       fontSize: 12,
@@ -677,31 +711,35 @@ function createStyles(COLORS, ui) {
       color: COLORS.TEXT_ON_LIGHT,
     },
     modeChipTextOn: {
-      color: COLORS.ACCENT_TEXT,
+      color: COLORS.ON_SURFACE_TONAL,
     },
     choiceList: {
       marginBottom: 12,
     },
     choiceItem: {
-      borderRadius: 14,
+      borderRadius: 16,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.PANEL_BG,
       paddingHorizontal: 12,
       paddingVertical: 10,
       marginBottom: 8,
+      minHeight: 52,
+      flexDirection: "row",
+      alignItems: "center",
     },
     choiceItemOn: {
-      backgroundColor: COLORS.GOLD_BUTTON,
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      borderColor: COLORS.ON_SURFACE_TONAL,
     },
     choiceText: {
       fontSize: 14,
       color: COLORS.TEXT_ON_LIGHT,
       fontWeight: "600",
+      flex: 1,
     },
     choiceTextOn: {
-      color: COLORS.ACCENT_TEXT,
+      color: COLORS.ON_SURFACE_TONAL,
     },
     loadMoreBtn: {
       marginTop: 6,
@@ -744,16 +782,16 @@ function createStyles(COLORS, ui) {
     },
     freeTextCard: {
       backgroundColor: COLORS.FIELD_BG,
-      borderRadius: 20,
+      borderRadius: 16,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       paddingHorizontal: 12,
       paddingVertical: 10,
       shadowColor: "#000",
-      shadowOpacity: 0.1,
-      shadowRadius: 14,
-      shadowOffset: { width: 0, height: 6 },
-      elevation: 6,
+      shadowOpacity: 0.06,
+      shadowRadius: 4,
+      shadowOffset: {width:0,height:2},
+      elevation: 1,
       minHeight: 120,
       marginBottom: 12,
     },
@@ -763,5 +801,21 @@ function createStyles(COLORS, ui) {
       fontSize: 14,
       color: COLORS.TEXT_ON_LIGHT,
     },
-  }, ui));
+  }, ui, {
+  "headerTitle": "screenTitle",
+  "helpText": "description",
+  "historyRetentionText": "meta",
+  "loadingText": "description",
+  "emptyText": "description",
+  "itemDay": "meta",
+  "itemQuestion": "sectionTitle",
+  "itemAnswer": "body",
+  "metaText": "meta",
+  "modeChipText": "button",
+  "choiceText": "body",
+  "loadMoreText": "button",
+  "optionalFreeTextLabel": "description",
+  "optionalFreeTextInput": "input",
+  "memoInput": "input"
+}));
 }

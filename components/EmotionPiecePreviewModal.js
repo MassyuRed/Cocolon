@@ -7,6 +7,7 @@ import {
   View,
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useTheme } from "../theme/ThemeContext";
 import CocolonButton from "./CocolonButton";
@@ -57,8 +58,9 @@ export default function EmotionPiecePreviewModal({
       animationType="fade"
       onRequestClose={hideCancelButton ? () => {} : onClose}
     >
-      <View style={styles.backdrop}>
+      <SafeAreaView edges={["top", "bottom", "left", "right"]} style={styles.backdrop}>
         <View style={styles.card}>
+          <ScrollView style={styles.bodyScroll} contentContainerStyle={styles.bodyContent} showsVerticalScrollIndicator>
           <View style={styles.header}>
             <View style={styles.titleRow}>
               <Ionicons
@@ -74,11 +76,6 @@ export default function EmotionPiecePreviewModal({
             </Text>
           </View>
 
-          <ScrollView
-            style={styles.bodyScroll}
-            contentContainerStyle={styles.bodyContent}
-            showsVerticalScrollIndicator
-          >
             <View style={styles.block}>
               <Text style={styles.blockLabel}>問い</Text>
               <Text style={styles.blockText}>{questionText || "—"}</Text>
@@ -124,7 +121,7 @@ export default function EmotionPiecePreviewModal({
             </CocolonButton>
           </View>
         </View>
-      </View>
+      </SafeAreaView>
     </Modal>
   );
 }
@@ -137,24 +134,26 @@ function createStyles(COLORS, ui) {
       backgroundColor: "rgba(15, 23, 42, 0.38)",
       justifyContent: "center",
       alignItems: "center",
-      paddingHorizontal: 24,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
     },
     card: {
       width: "100%",
-      maxWidth: 360,
-      maxHeight: 620,
+      maxWidth: 520,
+      maxHeight: "100%",
       borderRadius: 24,
       borderWidth: 1,
-      borderColor: COLORS.BORDER_GOLD,
+      borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.PANEL_BG,
       paddingHorizontal: 20,
       paddingTop: 20,
-      paddingBottom: 18,
+      paddingBottom: 20,
       shadowColor: "#000",
-      shadowOpacity: 0.18,
-      shadowRadius: 18,
-      shadowOffset: { width: 0, height: 10 },
-      elevation: 10,
+      shadowOpacity: 0.06,
+      shadowRadius: 4,
+      shadowOffset: {width:0,height:2},
+      elevation: 1,
+      flexShrink: 1,
     },
     header: {
       alignItems: "center",
@@ -185,15 +184,15 @@ function createStyles(COLORS, ui) {
     },
     bodyScroll: {
       width: "100%",
-      borderRadius: 20,
-      borderWidth: 1,
+      borderRadius: 0,
+      borderWidth: 0,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
-      maxHeight: 380,
+      flexShrink: 1,
     },
     bodyContent: {
-      paddingHorizontal: 18,
-      paddingVertical: 16,
+      paddingHorizontal: 0,
+      paddingVertical: 0,
     },
     block: {
       marginBottom: 14,
@@ -215,9 +214,9 @@ function createStyles(COLORS, ui) {
       flexDirection: "row",
       alignItems: "center",
       borderRadius: 14,
-      borderWidth: 1,
+      borderWidth: 0,
       borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
+      backgroundColor: COLORS.SURFACE_TONAL,
       paddingHorizontal: 12,
       paddingVertical: 10,
       marginTop: 4,
@@ -239,5 +238,11 @@ function createStyles(COLORS, ui) {
     secondaryButtonWrap: {
       marginBottom: 10,
     },
-  }, ui));
+  }, ui, {
+  "title": "modalTitle",
+  "lead": "description",
+  "blockLabel": "description",
+  "blockText": "body",
+  "quotaText": "description"
+}));
 }

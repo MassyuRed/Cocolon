@@ -106,19 +106,20 @@ export default function PieceTutorialCreateModal({
                 style={{ marginTop: 12 }}
                 onPress={onSave}
                 disabled={submitting}
+                loading={submitting}
               >
                 <View style={styles.btnRow}>
                   {submitting ? (
-                    <ActivityIndicator color="#FFFFFF" style={{ marginRight: 8 }} />
+                    <ActivityIndicator color={colors.TEXT_SUBTLE} style={{ marginRight: 8 }} />
                   ) : (
                     <Ionicons
                       name="save-outline"
                       size={18}
-                      color="#FFFFFF"
+                      color={submitting ? colors.TEXT_SUBTLE : colors.ACCENT_TEXT}
                       style={{ marginRight: 6 }}
                     />
                   )}
-                  <Text style={styles.goldButtonText}>保存</Text>
+                  <Text style={[styles.goldButtonText, { color: submitting ? colors.TEXT_SUBTLE : colors.ACCENT_TEXT }]}>保存</Text>
                 </View>
               </CocolonButton>
             </View>

@@ -166,7 +166,7 @@ Mashの比較理由：Day One案は情報の区切りが弱く、視線が動き
 | Piece作成 | 画像／全文を設定より前へ。操作ボタンと外枠をテーマ対応。全条件操作とidentity/tokenの引渡しを保持。作品renderer・recipe・保存画像は変更0 |
 | 設定・周辺 | 設定入口を目的が読める3行へ。テーマ選択面、共通メニュー、契約カード・説明・CTA、Nexusタブと自分のPiece入口を調整 |
 
-**現在の実装：** 下記§17の共通・起動・認証まで追加反映。残る仕上げは§15.1の2〜6群（入力・問い・履歴、分析全体、Piece・social、アカウント・設定、案内・tutorial・休眠資産）。共通テーマの変更が届くだけで、個別画面の仕上げ完了とはしない。全群のsource反映後にまとめてビルド・配布し、3テーマ、文字拡大1.0/1.3/1.6、狭い幅、safe area、キーボード、長文・回復操作の実端末確認を行う。
+**現在の実装：** 下記§17の共通・起動・認証、§18の入力・応答・問い・履歴まで追加反映。残る個別仕上げは§15.1の3〜6群（分析全体、Piece・social、アカウント・設定、案内・tutorial・休眠資産）。共通テーマの変更が届くだけで、個別画面の仕上げ完了とはしない。全群のsource反映後にまとめてビルド・配布し、3テーマ、文字拡大1.0/1.3/1.6、狭い幅、safe area、キーボード、長文・回復操作の実端末確認を行う。
 
 初回反映時の確認：Nodeの既存5入口（画面contract・IAP復元・テーマ可読性・Piece初回保存modal・preview/display）で400 PASS／FAIL0／SKIP0。React/native・Auth/HTTPは各既存testの代替を含む。テーマ検査は旧バーガンディ色・太枠・taglineの固定期待を採用設計へ更新し、3テーマの本文／補助／tonal／操作色の4.5:1を検査した。Piece testの新テーマhookと共有Buttonへのimport適応のみを行い、保存・回復の検査は維持。最初の実行は取得不足の依存fileと旧表示期待で失敗し、依存原本の取得と意図した期待更新後に上記最終実行を通過した。製品の資格判定を緩めていない。今回の全画面設計更新で、これらを再実行したとは扱わない。
 
@@ -257,7 +257,7 @@ OSが描く権限・共有・購入・契約管理・既存Alertは、そのOS�
 | H01 ホーム・感情入力 | `InputScreen.js`、`InputMemoSection.js`、`InputEmotionSection.js`、`InputCategorySection.js`、`InputActionArea.js` | 見出し・ガイド・アカウント・お知らせ→問い／履歴入口→思考・行動の二欄→感情／強さ→カテゴリ→通知→保存。通常5感情の複数選択、自己理解の単独選択、カテゴリ最低1件を保持 |
 | H02 保存・読取の案内 | `InputToastOverlay.js`等 | 該当情報群の失敗＋再読、保存成功toast。キーボード・下部ナビと重ねない。原入力の保存成功をEmlis生成成功と同じ表示にしない |
 | H03 感情入力履歴・行内全文 | `AnalysisHistoryScreen.js` | 戻る→検索→Secret区分／新旧順→条件・保持期間→記録カード。日付・感情・思考全文・行動全文・カテゴリ・応答・削除を区分。追加取得、hit強調、refresh、削除確認を維持 |
-| H04 Emlis応答 | `screens/input/EmlisThreadModal.js` | 見出し→応答本文→任意の質問／本人回答→現在できる操作。本文400。通常footer「ピースの作成」「閉じる」、質問・skip・続行・終了・再試行／同一要求確認を保持 |
+| H04 Emlis応答 | `screens/input/EmlisThreadModal.js` | 見出し→応答本文→任意の質問／本人回答→現在できる操作。本文400。末尾「ピースの作成」「閉じる」、質問・skip・続行・終了・再試行／同一要求確認を保持。横画面＋keyboard時の操作到達を優先し、末尾2操作も同じ本文ScrollView内へ置く |
 | H05 仮の理解・回答編集 | 同modal内のframe／回答部分 | 質問と本人入力を別の面へ。仮の理解は根拠日時／trigger・本文・確認／訂正／不採用。busy・read-only・結果不明・回答上限・2000文字の条件を保持 |
 | H06 旧観測応答popup | `InputFeedbackReplyModal.js` | 同じ長文dialogへ。太枠・強い影・本文600を整理。通常でもthread readerが開けずpassed本文があるfallbackに現れるため必須対象 |
 | H07 今日の問い・ホーム内 | `components/TodayQuestionCard.js` | 問い→選択式／自由回答→回答欄→送信→履歴。配信前、回答済み、任意一言、送信中、question ID/version変更時のresetを保持 |
@@ -465,3 +465,26 @@ Mashが全画面実装の開始と、全画面source完成後にビルドをま�
 検証：既存5入口のNode検査 **401 PASS／FAIL0／SKIP0**。3themeの本文・補助・選択・エラー・主操作の色の可読性、role適用と未指定style／ブランド保持、再試行callbackとloading/disabledの共通部品結線を確認。変更JS14fileのBabel parse、XML4fileのparse、storyboardの全constraint参照、diffの空白検査を通過。read-only reviewで契約spinnerが無効面に白で残る点を修正した。検査はReact/native・Auth/HTTPの代替を含み、端末描画・全操作実行の結果ではない。
 
 **未実施：** app/native build、CI native compile、Upload、TestFlight、本人端末表示。共通・起動・認証も最終実機確認は残す。UI全画面の完成宣言ではない。次は§15.1の入力・応答・問い・履歴を続ける。
+
+
+## 18. 11/6 実装区切り2 — 入力・応答・問い・履歴
+
+区切り1を[683c7f6](https://github.com/MassyuRed/Cocolon/commit/683c7f60d88c48bde037d695cab9ff89bf78e2bc)へ保存し、全21blob本文・親・変更path集合・branch headをGitHubから照合した後、同じ全画面改装の入力群を進めた。
+
+| 対象 | 実装内容・保持した条件 |
+|---|---|
+| Home・入力 | 問い／履歴の入口を44以上・折返し可へ。説明・meta・通知設定・案内の文字役割、カード・影を統一。カテゴリの選択読み上げ、入力欄ラベル、共通switchの色を適用。本人別draft、入力IME／defaultValue、選択規則、保存・timeout・通知・tutorial refsは保持 |
+| 入力履歴 | 白固定・斜体を外し、日付→感情→思考／行動全文→カテゴリ→応答の記録カードへ。検索／filter／sort／条件も同じFlatListのscroll対象とし、短い横画面で本文が押し出されない構造へ。検索hitは可読なtonal面。追加取得・refresh・削除確認、非表示Secret変更を保持 |
+| Emlis応答・仮の理解 | 最大幅520・角丸24・safe area、応答／質問／履歴／仮の理解を区分。裸の説明文字にも本文／補助役割。質問と入力を別の面へ。横画面＋keyboardでfixed footerの最低高さが収まらないため、既存末尾2操作も本文scroll内へ移した。onDismiss後のPiece引渡し、閉じる、再読上限、回答上限、同一要求再送・本人／資格条件は不変 |
+| 今日の問い | 問い本文16/27/400、方式と選択肢はtonal＋check印・選択読み上げ、自由回答の可視ラベル・16文字。textarea上限を画面の一部へ抑え、modalをsafe area＋keyboard回避＋scrollへ。modal見出しの読込spinnerを維持。配信前・回答済み・optional一言・payload・ID/version resetは保持 |
+| 問い履歴・編集 | 最大幅640、カード24、本文／入力／補助を役割別に、選択／展開状態を読み上げへ。keyboard回避。取得失敗を0件と分け、表示中の回答とpageを保ち同じoffsetから再試行。Plus編集・60件・ID重複除去・iOS入力・anchorを保持。V2への採用を保証しないため「マップに反映されます」を「回答を更新しました」「過去の回答を確認・編集できます」へ |
+| 下書き・旧fallback・tutorial旧Piece | 見出し・説明を本文と一緒にscroll可能にし、固定620／最低380等を撤去。外側一枚・控えめな面と影・本文400。復元／破棄の二択必須、passed本文の無加工表示、模擬表示のhideCancelButton／処理中条件を保持 |
+| 共通button補修 | disabledを透明度で薄くする表示からFIELD_BG＋TEXT_SUBTLEへ。処理中spinnerも同じ前景。押下・loading／busy・callback・caller優先順は保持 |
+
+製品変更15file：`CocolonButton`、`EmotionPiecePreviewModal`、`TodayQuestionCard/Modal`、`AnalysisHistoryScreen`、`InputScreen`、`TodayQuestionHistoryScreen`、Input内`EmlisThreadModal/InputActionArea/InputCategorySection/InputFeedbackReplyModal/InputMemoSection/InputStartupModals`の13fileに加え、共通buttonの無効面の影響を受ける`PieceTutorialCreateModal`と`PieceLibraryScreen`の既存子文字・iconも同時補修。後者2fileの画面全体の仕上げを終えたとはしない。既存test2fileと新しい失敗回復test1file、文書3fileを同じ区切りで反映。新route・製品JS owner・依存定義・API・DB・AI／作品renderer変更なし。
+
+検証：既存6入口＋問い履歴回復の実screen検査2件で **447 PASS／FAIL0／SKIP0**。初回失敗→0件と区別→再取得、続きの取得失敗→既存回答保持→同じoffset再試行→重複除去を実componentのcallback経由で確認。既存Piece入力44件は保存・本人／timeout等の結線を確認する代替環境。変更JS18fileのBabel parseとdiff空白検査も成功。最初の検査では既存TypeScript未配置と旧マップ反映文言の期待に失敗し、既存pinned5.2.2を一時環境へ用意・意図したcopy期待を更新した。リポジトリの依存定義は変更しない。
+
+read-only reviewで、問いmodalのhideHeaderによるspinner非表示、Emlis fixed footerの短画面overflow、共通frameと履歴の上下safe area重複を修正。共通buttonの変更が任意React childの文字へ届かないため、上のPiece2callerの白文字／iconも明示補修し、処理中は共通loadingへ渡した。検査はReact・native・Auth/HTTPの代替を含み、実機での見え方・タップ・読み上げの確認ではない。
+
+**次のsource作業：** §15.1の分析全体→Piece・social→アカウント・設定・契約→案内・tutorial・休眠資産と全体仕上げ。H01〜H12も最終実機検査まで完了扱いしない。app/native build・CI native compile・Upload・配布・実機確認は未実施。途中commitは引き続き`[skip ci]`、全UI source完成後にまとめてbuildする。

@@ -134,9 +134,9 @@ test('runtime blocking screen keeps retry and busy/disabled wiring through the s
   assert.match(source, /disabled=\{retrying\}/);
   assert.match(source, /loading=\{retrying\}/);
   const button = read('components/CocolonButton.js');
-  assert.match(button, /backgroundColor: isPrimary \? colors\.GOLD_BUTTON/);
-  assert.match(button, /color: isPrimary \? colors\.ACCENT_TEXT/);
-  assert.match(button, /<ActivityIndicator color=\{isPrimary \? colors\.ACCENT_TEXT/);
+  assert.match(button, /backgroundColor: isDisabled \? colors\.FIELD_BG : isPrimary \? colors\.GOLD_BUTTON/);
+  assert.match(button, /color: isDisabled \? colors\.TEXT_SUBTLE : isPrimary \? colors\.ACCENT_TEXT/);
+  assert.match(button, /<ActivityIndicator color=\{isDisabled \? colors\.TEXT_SUBTLE : isPrimary \? colors\.ACCENT_TEXT/);
   assert.match(button, /const isDisabled = !!disabled \|\| !!loading/);
 });
 

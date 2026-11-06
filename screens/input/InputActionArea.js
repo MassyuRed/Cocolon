@@ -50,7 +50,6 @@ export default function InputActionArea({
               registerInputInteraction?.();
               setSendEmotionNotification(!v);
             }}
-            trackColor={{ false: "#D1D5DB", true: colors.GOLD_BUTTON }}
             thumbColor={
               Platform.OS === "android"
                 ? doNotSendEmotionNotification
@@ -58,7 +57,6 @@ export default function InputActionArea({
                   : "#F9FAFB"
                 : undefined
             }
-            ios_backgroundColor="#D1D5DB"
             disabled={isTutorialMode}
             accessibilityLabel="感情通知を送らない設定を切り替える"
           />

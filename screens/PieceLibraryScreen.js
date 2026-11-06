@@ -2478,27 +2478,23 @@ useEffect(() => {
 
               <CocolonButton
                 variant="primary"
-                style={[
-                  { marginTop: 14 },
-                  (!resonanceStrength || resonanceSubmitting || resonanceDeleting || isResonatedNow) && {
-                    opacity: 0.7,
-                  },
-                ]}
+                style={{ marginTop: 14 }}
                 onPress={submitResonance}
                 disabled={!resonanceStrength || resonanceSubmitting || resonanceDeleting || isResonatedNow}
+                loading={resonanceSubmitting}
               >
                 <View style={styles.btnRow}>
                   {resonanceSubmitting ? (
-                    <ActivityIndicator color="#FFFFFF" style={{ marginRight: 8 }} />
+                    <ActivityIndicator color={colors.TEXT_SUBTLE} style={{ marginRight: 8 }} />
                   ) : (
                     <Ionicons
                       name={isResonatedNow ? "checkmark" : "save-outline"}
                       size={16}
-                      color="#FFFFFF"
+                      color={(!resonanceStrength || resonanceSubmitting || resonanceDeleting || isResonatedNow) ? colors.TEXT_SUBTLE : colors.ACCENT_TEXT}
                       style={{ marginRight: 6 }}
                     />
                   )}
-                  <Text style={styles.goldButtonText}>
+                  <Text style={[styles.goldButtonText, { color: (!resonanceStrength || resonanceSubmitting || resonanceDeleting || isResonatedNow) ? colors.TEXT_SUBTLE : colors.ACCENT_TEXT }]}>
                     {isResonatedNow ? "保存済み" : "保存"}
                   </Text>
                 </View>

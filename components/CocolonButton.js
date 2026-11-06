@@ -102,11 +102,10 @@ export default function CocolonButton({
     {
       maxWidth: ui.layout.maxButtonWidth,
       borderRadius: ui.radius.button,
-      borderColor: isPrimary ? colors.GOLD_BUTTON_BORDER : colors.CARD_BORDER,
-      backgroundColor: isPrimary ? colors.GOLD_BUTTON : colors.FIELD_BG,
+      borderColor: isDisabled ? colors.CARD_BORDER : isPrimary ? colors.GOLD_BUTTON_BORDER : colors.CARD_BORDER,
+      backgroundColor: isDisabled ? colors.FIELD_BG : isPrimary ? colors.GOLD_BUTTON : colors.FIELD_BG,
     },
     isDisabled ? shadowDisabled : pressed ? shadowPressed : shadowFloat,
-    isDisabled && styles.disabled,
     style,
     { transform: [{ scale }] },
   ];
@@ -115,7 +114,7 @@ export default function CocolonButton({
     styles.label,
     {
       fontSize: ui.font.button,
-      color: isPrimary ? colors.ACCENT_TEXT : colors.TEXT_ON_LIGHT,
+      color: isDisabled ? colors.TEXT_SUBTLE : isPrimary ? colors.ACCENT_TEXT : colors.TEXT_ON_LIGHT,
       ...ui.typography.button,
     },
     textStyle,
@@ -135,7 +134,7 @@ export default function CocolonButton({
     >
       <Animated.View style={containerStyle}>
         {loading ? (
-          <ActivityIndicator color={isPrimary ? colors.ACCENT_TEXT : colors.TEXT_ON_LIGHT} />
+          <ActivityIndicator color={isDisabled ? colors.TEXT_SUBTLE : isPrimary ? colors.ACCENT_TEXT : colors.TEXT_ON_LIGHT} />
         ) : typeof label === "string" || typeof label === "number" ? (
           <Text style={labelStyle}>
             {label}
@@ -166,9 +165,6 @@ const styles = StyleSheet.create({
   label: {
     letterSpacing: 0.2,
     textAlign: "center",
-  },
-  disabled: {
-    opacity: 0.55,
   },
 });
 
