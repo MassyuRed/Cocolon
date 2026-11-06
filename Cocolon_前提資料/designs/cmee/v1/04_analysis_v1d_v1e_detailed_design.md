@@ -1,3 +1,5 @@
+> **11/6・最新§238：既存23／v10の23更新・NLL20・14stop／2loadを完了したが、HC01／02が退行し新b8d096は不採用。実行完了・NLL低下・tensor整合を意味品質へ昇格しない。HC04–09＋既知control4は保持、元a2e／APIc150・既存strict境界を維持する。** [結果・原本・未完了](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-existing23-v10-bounded-20261106)／[本文なし集計](../../../observation_learning/trials/2026-11-01-analysis-model-fields/existing23_v10_trial_results.json)。STRUCTURE_MAP_DELTA_NONE（研究比較）。
+
 > **11/6・最新§237：既存23教師を元target／sourceのままv10へCPU整合し、固定tokenizer／prefix・EOS・mask・予算を確認。candidate23／非生成再読23・typed12／unsupported11は教師診断の結果で、LM品質や学習改善の保証ではない。private packは不採用、LM／更新／DB0、新runnerはsource完成・実行前review済、prepare／run未実行。** [実結果・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-existing-teacher-v10-cpu-20261106)／[本文なし集計](../../../observation_learning/trials/2026-11-01-analysis-model-fields/existing_teacher_v10_cpu_results.json)。STRUCTURE_MAP_DELTA_NONE（CPU診断・準備のみ）。
 
 > **11/6・最新§236：固定v10／a2eの実4B10stop／1load／学習0を完了。baseline API5efdの7要求が文章・図へ到達し、mock RPCの保存reader28read一致。引用位置曖昧のHC01はAPI c1502415の既存admission修復により同rawのCPU比較で4node／mapped2／未解析1、不正modifierは未解析のまま。local497 PASS＋11subtests、CI42217456387全工程success。修正版Jupyter同raw比較はexit0、保存reader32readも一致。** [実結果・範囲](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-heterogeneous-v10-live-20261106)／[本文なし集計](../../../observation_learning/trials/2026-11-01-analysis-model-fields/heterogeneous_scope_v10_results.json)。位置束縛の条件と実装範囲は末尾§236。
@@ -2030,3 +2032,17 @@ baseline raw／model packは不変。[保存reader診断source](../../../observa
 
 
 §237の後続source [trial_existing23_v10.py](../../../observation_learning/trials/2026-11-01-analysis-model-fields/trial_existing23_v10.py)（42741bytes／SHA `b3e386fdc7bfc812552a9d4ecc5073e3266600eba0ab6f705d66b786e4f4c83a`）は実行前reviewを終えた未実行planである。新runnerのprepare／runは未実行、上限23更新／NLL20／after14／2load／共有900秒・retry0。元HC01–10と既知保持control4は原本照合済みで、blind評価にはしない。原本不足ならprepare停止、timeoutは途中値／未知を記録し、終了GPU状態を確認する。候補自動採用なし。CPU23 artifact成立と、学習実行・品質改善の証明を分離する。[実行条件と現在地](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-existing-teacher-v10-cpu-20261106)。
+
+
+## 11/6 §238 — 既存23／v10試行の結果と設計境界
+
+§237のrunnerを固定a2e／c150から一回だけ実行し、23更新／NLL20／after14stop／2load、747.8081569029018秒／外側750.5726890042424秒・exit0、GPU cleanup空を確認した。新b8d096候補はHC01／02の退行により不採用で、通常／次初期値へ自動採用しない。今回23は共通10＋既存希望5＋F8・全v10であり、旧18＋5ではない。旧F23とのAPI／評価集合差も保持し、唯一の失敗原因を事後推定で設計へ昇格しない。
+
+4拒否はJSON文法自体の誤りではなく同一object内のfield／units重複keyで、既存strict readerの拒否を維持する。HC01は欄の欠落・source欄の混入・過去行動の思考への誤分類もあり、区切りだけの修復では意味が戻らない。raw補正・新教師化は0。正しい過去希望や別field objectは元23にも存在し、一方で最大1record／2field・ORIGINAL_INPUTのみという範囲を、一般的な教師不存在や原因の断定へ変換しない。
+
+HC生成8→6、全14生成12→10・mapped16→12、whole-request棄却source4→9。生成内未解析1→0は棄却増の影響であり改善ではない。HC03／10のraw同一拒否と、HC04–09＋control4のgraph／本文図保持を分ける。既知controlはblindでなく、固定教師10のNLL平均低下0.1377860303138732→0.04357644593110308も一般品質や全教師保持を示さない。
+
+候補112 F32 tensorと回収68原本のlocal CPU検査、外部41fileのlocal同一bytes照合は実施した。元a2e binaryはlocalにないため、その保持と残30外部fileの不変はlive前後SHA receiptに基づく。local model／tokenizer／live tensor再loadの成功を主張しない。元APIc150／CI成功と§236の32readは当時の原本に属し、今回学習後の保存reader実績へ付け替えない。新product owner／型／共有文法／prompt／通常transport・既定／作者／DB／RNの変更0、STRUCTURE_MAP_DELTA_NONE。[結果file](../../../observation_learning/trials/2026-11-01-analysis-model-fields/existing23_v10_trial_results.json)と[最新原本・未完了](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-existing23-v10-bounded-20261106)へ戻る。同23の反復は行わず、CPU欄診断・原本保存は下記のとおり完了、新GPU／新教師案は未選定で、本人基準・暗黙役割／選択・記録間route・IF／Saved・実DB／実機・通常採用は残件。
+
+
+§238・欄診断は [audit_analysis_wire_fields.py](../../../observation_learning/trials/2026-11-01-analysis-model-fields/audit_analysis_wire_fields.py)（18442bytes／SHA `f4c0ed18d753dcd2f69efea92cec11c27898c990d0ec6f7bd1131f046f55bd84`、checkpoint `352b44a5`）でlocal／Jupyterとも完了した。自己確認11 PASS、既存応答28（前14／後14）／入力44不変、重複6・非重複22、Jupyter exit0、報告SHA `70e7b58c5aaa725966e724413af8d302afcfa13a4fa32060ec94e1375bc7d088` は同一。sourceやwireの受理仕様を変えず、宣言field直前対応・decoded field位置は診断上の情報に閉じ、CMEE source-envelope Evidenceやadmissionを代替しない。raw補正・追加モデル／学習／DB0。非公開原本version6は170member／15,869,307bytes／SHA `892775f6407ab07770b4716b2dea210a48d57abd94a047d25a6d16afc5dc27f5` で保存済み。version5全payloadを保持し、最終reviewとwire原source・local／Jupyter報告・logを追加した。

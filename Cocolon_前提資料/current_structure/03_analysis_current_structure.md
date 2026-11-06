@@ -1,3 +1,5 @@
+> **11/6・最新§238：既存23教師を全v10で一回比較し、23更新／NLL20／14stop／2load・747.8081569029018秒で完走したが、新候補b8d096は不採用。HC01／02が退行し、HC生成8→6、全14のmapped16→12、whole-request棄却source4→9。生成map内unparsed1→0は改善ではない。HC04–09＋既知control4は意味・根拠を保持。a2eを保持し、同23の反復は行わず次はCPU欄診断と原本保存。** [実結果・限界・原本](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-existing23-v10-bounded-20261106)／[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/existing23_v10_trial_results.json)。STRUCTURE_MAP_DELTA_NONE（研究比較のみ）。新GPU案・新教師案は未選定、通常採用・実DB・実機・分析全体の品質は未成立。
+
 > **11/6・最新§237：既存23教師のrow／source／target bytesを変えず、現APIc150の旧v4／v7とv10条件をCPU照合。v10 candidate23／23・非生成reload23、typed12／未対応11を確認し、固定実tokenizerで最大入力4289／full4510／assistant＋EOS225、prefix・EOS・mask・予算を検証した。新private v10 packは不採用、LM load／生成／更新／DB0。F03／F08の肯定過去希望教師は既存だが選択a2eの最終18更新には入っておらず、学習改善は未証明。新runnerは未実行。** [CPU結果・原本・次の境界](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-existing-teacher-v10-cpu-20261106)／[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/existing_teacher_v10_cpu_results.json)。STRUCTURE_MAP_DELTA_NONE（診断・入力準備のみ）。§236の実10応答／32read／CI成功を継承し、一般品質・通常採用へ換算しない。
 
 > **11/6・最新§236：Jupyter直接接続を復旧し、固定v10／a2eで新10stop・1load・学習0を完了。baseline API5efdは7要求／10record／16nodeがtypedへ到達し、3要求を拒否。実projectionのcurrent／月次mock RPC28read一致。同rawの位置束縛修復API c1502415はHC01だけ候補成立・4node／mapped2／未解析1へ変わり、不正pastwish modifierと他9結果は保持。local497 PASS＋11subtests、CI42217456387全工程success。修正版のJupyter同raw比較はexit0、保存reader32read一致。** [全結果・原本・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-heterogeneous-v10-live-20261106)／[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/heterogeneous_scope_v10_results.json)。STRUCTURE_MAP_DELTA_NONE（既存admissionの位置束縛修復）。通常採用・実DB／実機・一般意味品質は未成立。
@@ -1389,3 +1391,17 @@ F03／F08の肯定過去希望教師とF05の否定過去希望教師は既存�
 
 
 §237の未実行plan：[trial_existing23_v10.py](../observation_learning/trials/2026-11-01-analysis-model-fields/trial_existing23_v10.py)（42741bytes／SHA `b3e386fdc7bfc812552a9d4ecc5073e3266600eba0ab6f705d66b786e4f4c83a`）はsource完成・実行前review済。このrunnerのprepare／run・学習／LM生成は未実行で、CPU23準備の実績へ加算しない。最大23更新／NLL20／after14／2load／共有900秒・retry0。元HC01–10＋既知のv10保持control4は原本照合済みだがblind評価ではない。原本不足でprepare停止、timeoutの途中値／未知と終了GPU状態を記録し、自動採用しない計画。[詳細](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-existing-teacher-v10-cpu-20261106)。
+
+
+## 11/6 §238 — 全v10の既存23教師を一回比較し、退行候補を不採用
+
+§237の未実行planは当時の状態として残し、後続の実行結果をここで分ける。実runは23更新／NLL20／14stop／2load、内側747.8081569029018秒／外側750.5726890042424秒・exit0、retry0・終了GPU apps空。固定10教師のNLL meanは0.1377860303138732→0.04357644593110308へ下がったが、HC01／02が新拒否へ退行したため新b8d096は不採用、選択a2eを保持する。全14要求は生成12→10・mapped16→12、全体拒否source4→9。生成内unparsed1→0を読み取り改善とはしない。
+
+4拒否は同一object内のfield／units重複keyで、JSON文法自体はvalid。HC01には欄の欠落・別欄の混入・過去ACTIONの誤kindもあり、区切り修復だけでは直らない。HC03／10は拒否継続・raw bytes同一だが意味保持成功へ数えない。HC04–09と既知control4はgraph／count・本文図（UUID除外）・主体／肯否／時点／カテゴリ／証拠を保持した。strict readerを維持し、raw補正／評価教師化0。
+
+教師構成は共通10＋既存wish5＋F8の全v10で、旧18＋5ではない。元23には正しいpast wish／ACTIONや欄別object例がある一方、最大1record／2field・ORIGINAL_INPUTのみ。旧F23のAPI／評価集合差もあり、教師不足や退行の唯一原因を断定しない。初期a2eと外部30fileの不変はlive receiptの範囲、回収済みbytes・候補112tensorのlocal独立CPU確認と区別する。[全結果・version5時点の原本・限界](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-existing23-v10-bounded-20261106)／[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/existing23_v10_trial_results.json)。
+
+CPU欄診断と原本保存は下記のとおり完了。同23反復は行わず、新GPU／新教師案は未選定。STRUCTURE_MAP_DELTA_NONE、通常採用／DB／Render／merge0。§236のAPIc150／CI成功／32readを保持し、本人基準・暗黙role／choice・記録間route・全量・IF／Saved・実DB／本人端末・一般品質の未達を継承する。
+
+
+§238・CPU欄診断も完了。[audit_analysis_wire_fields.py](../observation_learning/trials/2026-11-01-analysis-model-fields/audit_analysis_wire_fields.py)（18442bytes／SHA `f4c0ed18d753dcd2f69efea92cec11c27898c990d0ec6f7bd1131f046f55bd84`、checkpoint `352b44a5`）をlocal／Jupyterで確認し、保存応答28／入力44不変・重複6／非重複22、自己確認11 PASS・Jupyter exit0。報告SHA `70e7b58c5aaa725966e724413af8d302afcfa13a4fa32060ec94e1375bc7d088` は両環境一致。宣言fieldとdecoded field座標は診断専用で、source-envelope Evidence／admissionを代替せず、raw補正・追加LM／更新／DB0。非公開原本version6は170member／15,869,307bytes／SHA `892775f6407ab07770b4716b2dea210a48d57abd94a047d25a6d16afc5dc27f5` で保存済み。version5全payloadを保持し、HC品質レビューとwire原source／local・Jupyter報告／logを追加した。回収reportはlocalと全bytes一致、入力44fileも全hash照合した。

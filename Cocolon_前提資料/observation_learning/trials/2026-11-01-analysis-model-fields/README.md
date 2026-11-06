@@ -1,3 +1,5 @@
+> **11/6・最新§238：既存23／v10の一回試行は23更新・NLL20・14stop・2load、747.8081569029018秒（外側750.5726890042424秒／exit0）で終了し、GPU cleanupを確認。HC01／02が退行しHC生成8→6、全14生成12→10・mapped16→12のため、新b8d096候補は不採用、元a2eを維持。4拒否は同objectの重複keyでありJSON文法自体はvalid。HC01は欠落・別欄混入・誤kindもあり、区切り修復では解決しない。HC04–09と既知control4は意味を保持。** [全結果・原本・次のCPU区切り](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-existing23-v10-bounded-20261106)／[本文なし集計](existing23_v10_trial_results.json)。NLL低下を品質改善へ換算せず、同23を反復しない。STRUCTURE_MAP_DELTA_NONE（研究比較のみ）。
+
 > **11/6・最新§237：元23教師のrow／source／targetを変えず、現c150＋旧profileとv10をCPU照合。両条件candidate23／非生成reload23、typed12／unsupported11。固定local tokenizerは最大input4289／full4510／tail225、prefix・EOS・maskと予算は全件適合。v10 private packを準備・回収したが未採用、LM／学習／DB0・評価教師化0。正しい過去希望F03／F08は既存教師にある一方、選択a2eのfinal18更新には含まれず、学習改善は未証明。新runnerはsource完成・実行前review済、prepare／run未実行。** [実結果・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-existing-teacher-v10-cpu-20261106)／[本文なし集計](existing_teacher_v10_cpu_results.json)。STRUCTURE_MAP_DELTA_NONE（CPU診断・準備のみ）。
 
 > **11/6・最新§236：Jupyter直接接続復旧後、元v10／a2eで実10stop／1load／学習0、24field・最大入力4502。baseline API5efdは7要求／10mapped record／16node、3strict拒否。実projectionのmock RPC current／月次28read一致。同rawの位置束縛修復c1502415はHC01だけ4node／mapped2／未解析1へ変え、不正pastwish modifierと他9結果は保持。local497 PASS＋11subtests、CI42217456387全工程success。修正版Jupyter同raw比較はexit0、保存reader32read一致。** [結果・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-heterogeneous-v10-live-20261106)／[本文なし集計](heterogeneous_scope_v10_results.json)。STRUCTURE_MAP_DELTA_NONE（既存位置束縛修復）。
@@ -2391,3 +2393,33 @@ Jupyterの実tokenizerは最大input4289／full4510／assistant＋EOS225。元�
 [trial_existing23_v10.py](trial_existing23_v10.py) は42741bytes／SHA `b3e386fdc7bfc812552a9d4ecc5073e3266600eba0ab6f705d66b786e4f4c83a`。source完成・実行前review済で、まだこのrunnerのprepare／runは実行していない。CPU23 audit／prepareの実績とは別に、最大23更新／NLL20 forward／after14生成／2load／共有900秒・各生成23秒／retry0のplanを保持する。元HC01–10＋v10保持control4の原本は照合済みだが、controlは既知の保持確認でblind評価ではない。
 
 原本が不足すればprepareで停止し、timeout時は途中値と未知を残し、終了GPU状態を確認する設計。元target／評価rawを変更せず、候補／通常／次初期値へ自動採用しない。新runnerの学習／LM生成は0であり、source完成を実行成功や学習改善へ数えない。[現在のplan・未完了](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-existing-teacher-v10-cpu-20261106)。
+
+
+<a id="analysis-existing23-v10-bounded-20261106"></a>
+## 11/6 §238 — 既存23／v10の一回試行は退行により不採用
+
+[週次§238](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-existing23-v10-bounded-20261106)／[本文なし集計](existing23_v10_trial_results.json)が実結果。§237の未実行planは、固定元a2e／APIc150から23更新／NLL20／after14stop／2load／retry0、共有900秒内の747.8081569029018秒・外側750.5726890042424秒／exit0で終了した。終了owned process／GPU compute appsは空、GPU2MiB／0％を確認。新重みSHA `b8d096217369bb7b1d262bea0da22a8d6b0a4bbe7ebaf06394e4de2e640a78c5` は不採用で、元a2eを通常・次初期値として維持する。
+
+| 品質比較 | 実結果と解釈 |
+|---|---|
+| 既知HC01–10 | 生成8→6。HC01／02は新規拒否へ退行、HC03／10は同じrawの拒否を継続 |
+| 全14要求／21source | 生成12→10、mapped16→12、whole-request棄却source4→9。生成map内未解析1→0はHC01全体棄却によるもので改善ではない |
+| 4拒否 | JSON文法自体はvalidだが、同一objectにfield／unitsを重複出力。strict readerを維持し、rawを修正しない |
+| HC01の追加失敗 | 肯定過去希望の欄と後続field番号が欠落し、別欄の節を混入、過去行動を思考へ誤分類。区切りだけの修復では採れない |
+| 保持した内容 | HC04–09と既知control4のgraph／countは同一、文章・図はartifact UUID以外同一。追加対象子は元root内の内容であり、新しい意味改善へ数えない |
+| NLL | 固定教師10の平均0.1377860303138732→0.04357644593110308。出力退行と併存し、独立品質評価や全23保持の証明ではない |
+
+今回の23は共通10＋既存希望5＋F8であり、「旧18＋5」ではない。全v10への入力整合、過去F23とのAPI／評価集合の差もあるため、結果の唯一原因を断定しない。元23は最大1record／2field・ORIGINAL_INPUTのみだが、正しい過去希望やfield別objectの教師は既に存在する。教師不存在と一般化せず、評価rawから新教師を作らない。
+
+全68原本のCRC／hashと新候補112 F32 tensorの有限性・位置整合をlocal CPUで確認した。一方、元a2e binaryはlocal回収に含まれず、その不変はliveの前後SHA receiptによる。外部71fileのlive照合のうち、local同一bytesを独立確認できたのは41で、残る30はruntime receiptの根拠と分ける。localでmodel／tokenizer再loadやlive tensor一致の再実行はしていない。
+
+[非公開原本](https://chatgpt.com/library?file_id=libfile_fde3_f-729bd8856e6481918dbff31e0e1565c0_2f7470f963808191aaebf050935e72de&account_id=personal)はversion6、170member／15,869,307bytes／SHA `892775f6407ab07770b4716b2dea210a48d57abd94a047d25a6d16afc5dc27f5` で保存済み。version5全payloadを保持し、HC品質レビューとwire local／Jupyter最終報告・原source・logを追加した。新run全原本・候補weightsも保全している。元raw／教師／入力は補正・上書きせず、通常採用／DB／Render／merge／配置0。§236のAPIc150／CI全success・32readは当時の元raw修復結果として維持する。
+
+同23の試行を再起動・反復しない。CPUでの欄列挙・source対応診断と原本保存は下記のとおり完了した。新GPU案／新教師案は未選定。一般読解、本人基準・暗黙役割／判断・選択／記録間route、通常採用・IF／Saved・実DB／本人端末は残件。
+
+
+### §238・CPU欄診断の確定結果
+
+[audit_analysis_wire_fields.py](audit_analysis_wire_fields.py) は18442bytes／SHA `f4c0ed18d753dcd2f69efea92cec11c27898c990d0ec6f7bd1131f046f55bd84`、[checkpoint352b44a5](https://github.com/MassyuRed/Cocolon/commit/352b44a55cfb1490a32f4ca1a00e8f420fcabe11)へ固定し全文readback済み。localとJupyterのCPU監査は保存応答28（前14／後14）／入力44不変、重複key6（前2／後4）／非重複22、自己確認11 PASSを確認し、Jupyter exit0。報告153512bytes／SHA `70e7b58c5aaa725966e724413af8d302afcfa13a4fa32060ec94e1375bc7d088` は完全一致した。
+
+HC01 afterのfield3／4欠落と、field2内3quoteがfield4だけに存在する不整合を保持する。宣言field直前対応とdecoded field内座標は診断専用で、admission=false、CMEE source-envelope Evidenceの代替ではない。strict reader維持、raw補正・追加LM／学習／DB0。Jupyter wire回収ZIPは4member／20,482bytes／SHA `51bff91c0e54bc833af254b839a8cd5b4ed4253a1321768ead00e6f5abcf9dc1`。回収reportはlocal報告と全bytes一致し、入力44fileもroot側で全hash照合した。全reviewと回収原本を上記version6へ保存済み。

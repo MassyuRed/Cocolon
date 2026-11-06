@@ -5554,3 +5554,54 @@ STRUCTURE_MAP_DELTA_NONE（既存教師の診断・入力準備だけ）。商�
 公開対象の [trial_existing23_v10.py](../observation_learning/trials/2026-11-01-analysis-model-fields/trial_existing23_v10.py) は42741bytes／SHA `b3e386fdc7bfc812552a9d4ecc5073e3266600eba0ab6f705d66b786e4f4c83a`。source完成・実行前レビュー済みであり、このrunner自身のprepare／runは未実行、学習／LM生成は0。前掲のCPU23 audit／prepare完了と混同しない。
 
 未実行planの上限は23更新／NLL20 forward／after14生成／2load／共有900秒・各生成23秒／retry0。元HC01–10とv10保持control4の原本は照合済みで、4controlは既知の保持確認でありblind評価ではない。原本が不足すればprepareで停止し、timeout時は途中値と未知を保持し、終了GPU状態を確認する設計。元target／評価rawを変更せず、候補／通常／次初期値へ自動採用しない。sourceとplanの存在を、実行成功・学習改善の実績へ数えない。
+
+
+<a id="analysis-existing23-v10-bounded-20261106"></a>
+## 238. 11/6 — 既存23教師を全v10で一回学習比較し、退行により候補を不採用
+
+§237のCPU監査・prepareを終えた既存23教師を、元target／source／ownerと固定maskのまま、全v10条件で一回だけ実行した。23教師の構成は**共通10＋既存wish5＋F8**であり、選択a2eの旧18に5件だけを足した比較ではない。旧F23とはAPI・評価集合にも差があるため、結果を一つの変更や教師の有無だけへ帰属させない。今回の評価source／rawを教師化しておらず、新教師0、追加retry0。
+
+### 実行成立と品質結果を分ける
+
+| 確認 | 確定した実結果 |
+|---|---|
+| 一回実行 | 23更新／固定NLL20 forward／after14stop／2load。内側747.8081569029018秒、外側750.5726890042424秒・exit0、各stage exit0 |
+| 終了状態 | owned process／GPU compute appsは空、GPU 2MiB／0％。cleanup確認済み |
+| 固定教師NLL | mean 0.1377860303138732→0.04357644593110308。固定10教師の前後診断であり、自由生成・意味品質改善ではない |
+| HC01–10 | 生成成立8→6要求。HC01／HC02が新しく全体拒否へ退行、HC03／HC10は既存拒否を継続 |
+| 全14要求 | 生成成立12→10、mapped record16→12、全要求で21source。生成map内の処理record17→12、whole-request棄却に属するsource4→9 |
+| 未解析の表示 | 生成map内unparsed1→0は、HC01全体が拒否され集計外になった影響。読み取り改善へ数えない |
+| 保持した出力 | HC04–09と既知control4は、graph／count、本文・図（artifact UUID除外）、主体・肯否・時点・カテゴリ・根拠を保持。blind評価・一般意味率ではない |
+
+新重みSHA `b8d096217369bb7b1d262bea0da22a8d6b0a4bbe7ebaf06394e4de2e640a78c5` は**不採用**。選択a2eを保持し、新候補を通常／次学習初期値へ自動採用しない。完走、損失低下、保存重みの整合を商品品質の改善へ変換しない。[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/existing23_v10_trial_results.json)に件数・比較条件・未達を分離した。
+
+### 全raw・source・graphを読んで分けた失敗
+
+4拒否はいずれもJSONの文法自体は成立しているが、同じobject内で`field`／`units` keyを重複出力したため、既存strict readerが拒否した。括弧やcommaの単純な構文エラーとは記録しない。strict readerを緩めず、rawの区切り修復・再ラベル・補完は0。
+
+HC01は重複keyに加え、肯定過去希望を持つ欄と後続field番号の欠落、別欄の節の混入、過去行動のATTENTIONへの誤分類も併存した。元の不正modifierが見えなくなったのは当該希望欄自体を落としたためで、改善ではない。JSONの区切りだけを直してもsource／意味の不整合は残る。HC02は以前成立した複数recordの集約を重複keyで失った。HC03／HC10は前後raw bytesも同一だったが、拒否statusやerrorの一致を意味保持成功へ数えない。
+
+HC04–09は全6件のsource／実raw／本文／graph／16根拠を前後照合した。HC06–08では任意対象子の追加だけがあり、元root・明記SELF・完全否定・現在／過去とtyped意味は同じ。保持control4も既知の確認であり、AP07／AP08の担当・決定、AE05／OP02の省略主体を含む否定行動の境界保持を、一般的な役割読解の成功率へ広げない。
+
+元23教師には肯定過去希望F03／F08、過去ACTIONとWISHの正しい区別、fieldを別objectへ列挙するN01／N08／AT29／F07が存在する。「対応する正教師がない」とはしない。一方、この23のsourceは最大1record／2field・ORIGINAL_INPUTのみで、今回の複数record／多欄／ordinary補足の組合せを直接持たない。この差は観測事実であり、退行の唯一原因を証明したものではない。評価から新教師を作らない。
+
+### 回収・技術確認・証拠の限界
+
+run全68memberはZIPのCRC／全bytesと両manifestのhashを照合して保全した。候補重みはlocalの独立CPU読取で112 F32 tensor／56 module pair／3,833,856 parameters、offset・hash・有限値を確認した。これは初期a2eとの全tensor差分や、localでのモデル再loadを行ったという意味ではない。
+
+初期a2e binaryはこのlocal回収物に存在せず、その前後不変はsource固定のlive実行receiptに基づく。外部71fileはlive前後hash検査の記録があり、localで同一bytesを独立照合できたのは41file、残り30fileはlive receiptの範囲と明示する。local確認では新モデル／tokenizer／学習を起動していない。技術監査、HC10品質review、control4保持reviewを分け、実行成立と不採用判断の根拠を保存した。
+
+[非公開原本の同じ保存先](https://chatgpt.com/library?file_id=libfile_fde3_f-729bd8856e6481918dbff31e0e1565c0_2f7470f963808191aaebf050935e72de&account_id=personal)は**version6保存済み**、170member／15,869,307bytes／SHA `892775f6407ab07770b4716b2dea210a48d57abd94a047d25a6d16afc5dc27f5`。version5の全payloadを保持し、HC品質レビューとwire local／Jupyter最終報告・原source・logを追加した。元raw／source／model pack、候補重み、全run logを保全した。
+
+### 次の区切り
+
+同23の反復学習・再生成は行わない。CPU欄診断は下記のとおり完了し、原本保存までを今回の区切りとする。新GPU案・新教師案は未選定、追加学習0を維持する。
+
+APIc150／CI42217456387全工程successと§236の実10応答／修復後32readは、それぞれの確定結果として保持し、今回の学習退行へ付け替えない。STRUCTURE_MAP_DELTA_NONE（研究比較のみ）。通常採用・DB／Render変更・merge・本番配置は0。本人基準、暗黙role、判断・choice、記録間route、全量処理、IF／Saved、実DB／本人端末・一般商品品質の未達は継続する。
+
+
+### 同checkpointのCPU欄診断
+
+新source [audit_analysis_wire_fields.py](../observation_learning/trials/2026-11-01-analysis-model-fields/audit_analysis_wire_fields.py) は [352b44a5](https://github.com/MassyuRed/Cocolon/commit/352b44a55cfb1490a32f4ca1a00e8f420fcabe11) へ固定反映し、全文readback一致。18442bytes／SHA `f4c0ed18d753dcd2f69efea92cec11c27898c990d0ec6f7bd1131f046f55bd84`。localとJupyterのCPU監査はいずれも自己確認11 PASS、保存応答28（前14／後14）・入力44file不変、重複key6（前2／後4）・非重複22を確認した。Jupyterはexit0、153512bytesの報告SHA `70e7b58c5aaa725966e724413af8d302afcfa13a4fa32060ec94e1375bc7d088` はlocal最終報告と完全一致。
+
+HC01 afterのfield3／4欠落、field2内の3quoteがfield4だけに存在する不整合も診断した。宣言field直前対応とdecoded field内座標は診断専用であり、CMEE source-envelope Evidenceの再構成・admission判定の代わりではない。strict readerを維持し、raw補正0・admission=false・追加LM／学習／DB0。Jupyter wire回収ZIPは4member／20,482bytes／SHA `51bff91c0e54bc833af254b839a8cd5b4ed4253a1321768ead00e6f5abcf9dc1`。回収reportはlocal報告153512bytesと全bytes一致し、入力44fileをroot側でも全hash照合した。全reviewと回収原本は上記version6へ保全済み。
