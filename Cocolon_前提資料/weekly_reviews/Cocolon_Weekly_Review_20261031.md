@@ -4946,3 +4946,53 @@ Renderは読取確認で既存API2c259f0e／dep-dbk7l2uc6qcc73dp5d70がLive・�
 STRUCTURE_MAP_DELTA_NONE（既存研究受口・作者・意味型・通常契約を維持）。新3stop／1load／学習0、通常採用／次学習初期の新規採用／本番write／merge／build／端末作業0。実環境はCodex Work／GPT-6と同環境の独立read-only reviewで、Pro受入れではない。primary outcomeはBLOCKER_NARROWED。
 
 次は、今回の評価本文／rawを教師へ転用せず、同じ主体・述語で事実と希望を区別する小さな独立教示と、既存5希望の保持を組み合わせるCPU準備。過去／否定希望と、v4／v7入力整合の不足を明示してから最小の一回学習比較を定める。今回の3要求を再実行せず、consumer再分類・raw修復・通常全量接続を先に進めない。一般の本人基準・暗黙役割・記録間意味、二欄／最大3回答を含む全欄出力、IF／Saved・実機／本番採用は引き続き残件。
+
+
+<a id="analysis-fact-wish-fields-20261106"></a>
+## 216. 11/6 — 事実／願望の一回学習比較は不採用、正しい二欄原応答をmapへ接続
+
+分析残件の継続指示に従い、全体現在地・設計図・file地図・最新§215・元86教材・実sourceを確認して進めた。既存PodのJupyterへ直接接続し、研究v7と元a2eを保持した一回比較を実行した。完了／失敗runの再起動、成功までの再生成、原rawの修復・kind付替えは行っていない。
+
+### 教示と実モデルの結果
+
+CPU準備は、元v4の10教師をencodedまで完全保持、元5希望を本文・正解を変えずv7入力へ整合、独立した合成8教師を追加した計23件。新8は同じ主体・述語の実行済み／現在希望／過去希望／肯定・否定、事実＋希望の同欄・別欄を対照化した。評価用6本文・既知N本文は教師へ転用せず、元86poolを変更していない。旧10保持のうち1件を含む固定10教師で20loss測定を行ったが、全旧10のloss保持や独立品質の証明ではない。
+
+APIは5c9606507d296adfe69fe0350c84a5d5deab585b、初期a2e/config006e、Qwen3.5-4B revision851bf6e、既存pins／隔離optional target。trainingは元base、生成だけ既存optional環境を使用し、新packageや通常profileを変更していない。CPU準備／guard追加は759b4a6→067e61b、prepare SHA12b544cd5953304ed5812874cd452786f71024528d7ee14ad22111bff456f136、run SHA97275c93fce38340590f49a30dacea1f5eeb592a304d63c12269b32d602f0e7b。新rootで一度ずつ実行した。
+
+| 実行 | 結果 |
+|---|---|
+| 新生成 | before6＋after12＝18返却、全stop・返却21欄。開始は19要求 |
+| 学習 | 23更新・20測定・trial全体3load（学習1＋生成2）開始、親共有559.727012秒／上限900秒 |
+| 最終after N3 | 要求は保存、23秒SIGALRM（exit−14）で未返却。rawなし・再試行なし |
+| 固定10教師の平均NLL | 0.1350280897 → 0.0207369377。意味品質とは別 |
+| 新adapter | d22c3d8b7500dc3a5b03de262a557e055bb7401e22be9ede2df2ee850c92f3c0、15,351,792bytes／112tensor／3,833,856parameter |
+
+training stageはCOMPLETE_NOT_ADOPTEDだが、trial全体はFAILED_PARTIAL_NO_RETRY_NOT_ADOPTED。after報告のSTARTEDはSIGALRMで最終処理前に終了した原本の状態として保持し、成功へ書き換えない。N3を意味失敗・strict拒否・完了した再検査へ数えない。
+
+評価6構成（E01–04は同述語の語尾対照）では、E01の過去事実だけが旧consumerでmapへ到達する状態は前後不変。E02／E03／E05の願望root・過去修飾の誤分類は継続した。E04は希望kindへ変わったが否定引用が完全な有限述語でなく採用されない。N1／N2も希望rootは改善する一方、対象子が述語まで含むため未採用。引用本文に願望・否定・過去は残っており、「実行済みへ文章を改変」「希望本文を削除」とは判定しない。学習loss低下や部分kind改善から、利用者に通用する意味品質へ昇格しない。新d22cは通常／次学習初期へ採用しない。
+
+返却18＋cached before7＝全25原応答・原sourceを全文確認し、同環境の独立read-only reviewも実施。E01と既知AE05／AP07／AP08／OP02のgraph・文章・図は前後一致（別生成artifactのprojection_ofだけを除外）。省略主体の未確定、担当と選択の区別、明記順序だけの辺を保持した。旧4は省略主体2＋担当／決定2であり、所有者／他者動作主の入替え対照の検査とは称さない。N1–3は以前と同じ本文のprefixで、独立題材の正解率へ加算しない。
+
+### 商品sourceの修正 — 正しい二欄を欄ごとに証明する
+
+E06はbefore／afterのrequestとResponse全5項目が完全同一で、原文・二欄・事実／願望の読み取りは元a2eでも成立していた。旧typed consumerは願望proofをmemo一欄へ限定していたため、二欄原応答はmapへ届かなかった。学習でこの接続不足を補ったことにせず、[API e8f026e](https://github.com/MassyuRed/mashos-api/commit/e8f026e0836ceca2b41c273bc9c793c7998d979d)で既存proofを修正した。
+
+対象は`cores/analysis/intent_compiler.py::_model_complete_observed_plain_wishes`。全sourceを一回compileした元graphを使い、原入力1record／1envelope、memo／memo_actionの重複なし1–2欄に限定する。各nodeの唯一根拠を原欄へ照合し、欄ごとに原文・record・fieldSHA・scalar／UTF8座標・全節・全unit一回消費を確認する。別欄の座標を比較したり、sourceを欄ごとに切り直して伝聞guardを失ったりしない。
+
+既存SELF・既存動詞・肯定過去事実＋現在／過去の肯定／否定希望という意味条件は維持。元graph・原rawを変更せず、SOURCE_SCOPE、未読、他者／省略主体の希望、推測、伝聞、負の行動との組合せ、希望だけ複数、複数根拠へ集約されたnode等を新proofで採用しない。元の独立事実だけを表示し他欄をSOURCE_SCOPEとして残す既存partial pathは維持し、未読を読了へ変えない。欄の順番・併存から順序／因果の辺を作らない。補足回答の希望は今回の対象外。
+
+Jupyterの別checkoutへ固定e8f026eを用意し、元runの全25応答を同じrequest／raw SHAでCPU再読。追加model／生成／学習／HTTP／DBは0。状態が変わったのは、同じE06のbefore／after原応答だけで、独立した二題材ではない。元a2eのまま、memoの過去事実とmemo_actionの現在希望が2node・edge0、mapped1／unparsed0へ到達し、各根拠は別の原欄に残った。場面・役割・結果・段階間のつながりは未確定のまま。原sourceによる通常の一記録graphと一致する。
+
+E06の保存DTOは、既存readerに返すRPCをmockし、compiler／作者を禁止して文章・図・coverageの完全一致を確認。実DB保存／current・月次の一巡や本人端末の成功へ広げない。その他の既存typed graphは全て元原応答の結果を保持した。Jupyter再読report SHA3dbed64ce357e9aa70c2dc1d6fe0ce5d8103fac19da6a7287650ddb6dfe3db4f。
+
+関連5moduleの試験はローカル隔離環境（Python3.12.14／pytest8.3.5）で398成功・1skip・45.06秒。skipはPostgreSQL WASM依存未設定、既存Pydantic警告1。新二欄の入替え・四つの希望形・v4/v7・memo_action単欄・別scalar空間・不明／伝聞／欠落／他欄借用・mock保存再読を含む。最初の追加test3件は既存partial表示を全map拒否と誤って期待したため、元graphと未解析1を保持する検査へ修正した。商品guardを緩めて成功させていない。別artifact UUIDを同一視する試験誤りも、本文・順序とartifact identityを分けて修正した。
+
+### 保全と現在地
+
+元102file（manifest対象101＋manifest原本）を全bytes／SHA照合。新重みはF32数値を原header・各tensorと照合して復元し、元safetensors全体SHAまで一致した。元ZIP binaryそのものを回収したとは称さない。全元file・原86pack／encoded・全raw／request／response／log・新重み・全読・CPU再読を[非公開原本](https://chatgpt.com/library?file_id=libfile_fde3_f-738494bbe5348191963e9a5d5da96163_2f7470f963808191aaebf050935e72de&account_id=personal)へ保存。ZIP16,218,648bytes／110member／SHA d84dcc929d5fbeae4a3274b2fcdb37ff8e9654b5250d11261dab412cb672fa2a、CRC正常。本文・人物・model raw・重みを公開GitHubへ置かない。
+
+実行後GPUはRTX4000 Ada・2MiB／0％・compute processなし。元5c runtimeと新e8 runtimeはtracked clean、初期a2e／元86pack／encoded不変。Render／Supabaseの本番変更・追加rental・port／公開範囲変更・merge・build・端末作業0。前回§215の稼働確認を今回の全面再監査と称さない。
+
+STRUCTURE_MAP_DELTA_PRESENTは原欄proofの範囲と地図だけ。新source route／意味型／作者／通常profile／planner／batch／transport／schema／RNは追加していない。新重みは不採用、source修正は未配置。実環境はCodex Work／GPT-6＋同環境の独立read-only reviewで、Pro受入れではない。直接前進は「正しい二欄原応答を、根拠を混ぜず既存文章・図へ接続した」範囲。
+
+次は、今回のE02／E03／E05の誤kind／過去修飾、E04の否定引用、N1／N2の対象範囲を別々に検討し、改善対象を固定してから教示を選ぶ。今回rawを正解教材へ転用しない。完了／失敗runを再起動せず、d22cを採用しない。一般の本人基準・暗黙役割・選択基準・記録間の意味、適格補足回答の全欄とtyped接続、通常時間内の全量処理、IF／Saved・実DB／実機／商品受入れは引き続き残件。

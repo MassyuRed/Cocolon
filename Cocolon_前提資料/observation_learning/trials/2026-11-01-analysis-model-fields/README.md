@@ -1,4 +1,4 @@
-> **11/6・分析の継続（第9回§215）：元a2e/v7の完全1・2・3記録を各一度生成し、全1/2/3欄を返却。新3stop/1load/学習0、共有model phase43.443701秒で60秒内・各23秒内。1/2記録は希望rootの誤kindで未解析、3記録だけ過去行動＋現在希望の2node/各3根拠・辺0へ到達。既知同文fixtureのprefix比較で一般品質・通常全量取得は未証明、元86教師の希望5・最終18更新の希望0、学習はv4のみとCPU確認。通常採用なし。** [実結果・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-cardinality123-20261106)。
+> **11/6・分析の継続（第9回§216）：Jupyterで23更新を完了し18応答を返却、最後の三記録要求は23秒で停止。願望kind・否定引用・対象範囲の不整合が残り、新d22cは不採用。別途、保存済み25応答を0モデルで照合し、同じ二欄原応答を事実＋希望の2node／edge0へ接続する修正e8f026eを確認。関連398成功・1skip、本番未配置。** [実結果・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-fact-wish-fields-20261106)。
 
 # Analysis — 最小field接続と実4B probe
 
@@ -2264,3 +2264,18 @@ WH04の元rootは既に否定を保持しており、旧consumerの肯定限定�
 新規隔離targetの0.5系／causal1.7／einopsで4vendor bindingを実確認し、global base／source／元a2e／旧v8失敗rootを保持。固定API100c1bbの実試行は1load／3開始／2stop・100.814029211秒。KW00は候補保持、KW01は6欄中field1だけで旧raw同一・strict拒否、KW02は23秒SIGALRMでraw未返却。warmupはload／初回JITを含み、速度改善・通常期限・意味品質は未証明。通常採用なし。version8保存済み。
 
 先行0.6 import-only失敗はmodel0の別原本。新targetのbinding成功を通常採用・速度対照・品質成功にしない。KW01の欠落は補完せず、KW02はrawなしとして保持する。[原本・計時・限界](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-optional-kernel-diagnostic-20261105)。
+
+
+<a id="analysis-fact-wish-fields-20261106"></a>
+## 11/6・事実／願望23更新と原欄proofの修正
+
+[weekly§216](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-fact-wish-fields-20261106)が現在の実結果と再開点。独立8＋旧5希望v7＋旧10完全v4、23更新／18返却／3load、after最終N3未返却でtrialは部分失敗・d22c不採用。全25rawを再読し、正しい二欄E06の同じ原応答をAPIe8f026eの欄別完全proofで2node／edge0へ接続。新生成0、mock保存reader確認。一般品質／全補足／本番受入れではない。
+
+| File | 役割 |
+|---|---|
+| `fact_wish_contrast_prepare.py` | 原86／旧encodedのidentity、23教師・6独立評価・cached7、全欄gold／実tokenizerのCPU準備 |
+| `fact_wish_contrast_run.py` | 一回before／23更新／after。900秒共有・各23秒、原raw先行保存、再試行／自動採用なし |
+| `replay_fact_wish_fields.py` | 保存済み原応答を0モデルで照合し、二欄E06とmock保存readerを確認。新規の文章生成器ではない |
+| `fact_wish_contrast_results.json` | 本文なし集計。新18とcached7、未返却1、CPU接続の効果と学習の未達を分離 |
+
+原本と全重みはweeklyの非公開原本へ保存。完了／失敗runは再実行しない。次の誤kind／否定引用／対象範囲の検討へ戻り、d22cは通常／次初期へ採用しない。

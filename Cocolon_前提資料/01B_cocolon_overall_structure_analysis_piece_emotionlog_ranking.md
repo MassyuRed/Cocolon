@@ -3731,3 +3731,19 @@ API5c9606、Jupyter241 PASS、CI42109915846全工程成功。fresh replay2でWH0
 | trial新 `cardinality_teacher_audit.json` | 元86poolの正解希望5と最終18更新の希望0、学習v4／検証v7の不一致を記録。継承元の未学習や単一原因は断定しない |
 
 商品source／意味型／作者／通常profile／planner／batch／transport／API／DB／RNに追加変更なし、STRUCTURE_MAP_DELTA_NONE。新3stop／1load／学習0、通常採用なし。source／raw／全19原本・元86packは非公開保持、一般品質・全履歴60秒・DB保存／端末の成功へ広げない。実結果と次の独立事実／希望教示のCPU準備は[weekly§215](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-cardinality123-20261106)へ戻る。
+
+
+## 11/6 §216 — 事実／願望の二欄proofと試行file地図
+
+[weekly§216](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-fact-wish-fields-20261106)／[分析current](current_structure/03_analysis_current_structure.md)。APIe8f026eで既存原欄proofだけを拡張。全source→既存source graph→memo／memo_action別の完全照合→既存model consumer→既存文章／図、という接続。1record／1envelope・各node唯一根拠を保持し、別欄の原文や主体を借用しない。新source／作者／型／通常経路なし、未読／接続未確定を保つ。source未配置・d22c不採用。STRUCTURE_MAP_DELTA_PRESENT。
+
+| File | 所有する仕事 |
+|---|---|
+| API `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | `_model_complete_observed_plain_wishes`の原1–2欄完全proof。原graph不変、欄ごとのspan／unit・主体／時点／肯否の証明 |
+| API `ai/tests/test_analysis_model_observed_actions.py` | 二欄／単memo_action・否定／過去・原欄入替え・未読／借用拒否・mock保存再読 |
+| 前提資料 `observation_learning/trials/2026-11-01-analysis-model-fields/fact_wish_contrast_prepare.py` | 一回23教師と独立評価6／cached7のCPU準備・実tokenizer／gold検査 |
+| 同 `fact_wish_contrast_run.py` | 既存4Bのbefore／23更新／after。一回のみ、原raw保存・上限・不採用維持 |
+| 同 `replay_fact_wish_fields.py` | 原応答identityと候補非生成再読、既存typed／mock保存readerのCPU比較 |
+| 同 `fact_wish_contrast_results.json` | 本文なし集計・部分失敗と二欄接続の区別 |
+
+全102元fileと全重みは非公開保存。新18返却／cached7を確認、afterN3は23秒未返却。二欄E06は同じ原応答を0モデルで接続した範囲。一般の本人基準・役割・選択・記録間接続、全補足、IF／Saved／実DB／実機は未完了。

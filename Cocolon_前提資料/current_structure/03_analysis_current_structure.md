@@ -1,4 +1,4 @@
-> **11/6・分析の継続（第9回§215）：元a2e/v7の完全1・2・3記録を各一度生成し、全1/2/3欄を返却。新3stop/1load/学習0、共有model phase43.443701秒で60秒内・各23秒内。1/2記録は希望rootの誤kindで未解析、3記録だけ過去行動＋現在希望の2node/各3根拠・辺0へ到達。既知同文fixtureのprefix比較で一般品質・通常全量取得は未証明、元86教師の希望5・最終18更新の希望0、学習はv4のみとCPU確認。通常採用なし。** [実結果・原本・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-cardinality123-20261106)。
+> **11/6・分析の継続（第9回§216）：Jupyterで23更新を完了し18応答を返却、最後の三記録要求は23秒で停止。願望kind・否定引用・対象範囲の不整合が残り、新d22cは不採用。別途、保存済み25応答を0モデルで照合し、同じ二欄原応答を事実＋希望の2node／edge0へ接続する修正e8f026eを確認。関連398成功・1skip、本番未配置。** [実結果・原本・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-fact-wish-fields-20261106)。
 
 > **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
@@ -1317,3 +1317,10 @@ WH04の元rootは既に否定を保持しており、旧consumerの肯定限定�
 新規隔離targetの0.5系／causal1.7／einopsで4vendor bindingを実確認し、global base／source／元a2e／旧v8失敗rootを保持。固定API100c1bbの実試行は1load／3開始／2stop・100.814029211秒。KW00は候補保持、KW01は6欄中field1だけで旧raw同一・strict拒否、KW02は23秒SIGALRMでraw未返却。warmupはload／初回JITを含み、速度改善・通常期限・意味品質は未証明。通常採用なし。version8保存済み。
 
 先行0.6 import-only失敗はmodel0の別原本。新targetのbinding成功を通常採用・速度対照・品質成功にしない。KW01の欠落は補完せず、KW02はrawなしとして保持する。[原本・計時・限界](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-optional-kernel-diagnostic-20261105)。
+
+
+## 11/6 §216 — 原入力の事実・希望を欄別の完全根拠で接続
+
+[実結果・原本・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-fact-wish-fields-20261106)。APIe8f026eの`intent_compiler._model_complete_observed_plain_wishes`は、全sourceを一回compileしたgraphを保ち、原入力1record／1envelopeのmemo／memo_actionを1–2欄、各nodeの唯一根拠・欄別全節／全unitで証明する。原raw・actor・肯否・modality・時点を補わず、場面／役割／結果・接続未確定とedge0を保持する。未読／伝聞／他者／推測／複数根拠集約等は新proofで採用せず、既存partialのSOURCE_SCOPEは維持。補足回答は今回対象外。
+
+同一E06原応答をJupyterで0モデル再読し、以前未接続だった二欄が2node・mapped1／unparsed0へ到達。mock保存DTOはcompiler／作者禁止で再読一致。一般の役割・選択基準・記録間理解や実DB／端末の受入れへ広げない。398成功・1skip、新23更新候補d22cは意味不整合と最終要求未返却で不採用。通常profile／型／作者／経路／schema／RNは維持、source修正未配置。STRUCTURE_MAP_DELTA_PRESENT（原欄proof範囲）。
