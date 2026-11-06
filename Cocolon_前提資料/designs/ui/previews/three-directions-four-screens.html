@@ -1,0 +1,3623 @@
+<!doctype html>
+<html lang="en" data-visualize-standalone>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com https://persistent.oaistatic.com/plugins/visualize/; style-src 'unsafe-inline' blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Cocolon Ui Four Screens</title>
+<style>:root{color-scheme:light dark;background:light-dark(rgb(255 255 255), rgb(24 24 24))}html,body{margin:0}body{box-sizing:border-box;padding:1rem;background:inherit}iframe{display:block;width:100%;height:calc(100vh - 2rem);margin:0 auto;border:0}</style>
+
+</head>
+<body>
+<iframe id="codex-visualization" sandbox="allow-scripts" referrerpolicy="no-referrer" title="Cocolon Ui Four Screens" data-srcdoc="&lt;!doctype html&gt;
+&lt;html lang=&quot;en&quot; data-visualize-standalone&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;utf-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+&lt;meta name=&quot;referrer&quot; content=&quot;no-referrer&quot;&gt;
+&lt;meta http-equiv=&quot;Content-Security-Policy&quot; content=&quot;default-src &#x27;none&#x27;; script-src &#x27;unsafe-inline&#x27; &#x27;unsafe-eval&#x27; &#x27;wasm-unsafe-eval&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com https://persistent.oaistatic.com/plugins/visualize/; style-src &#x27;unsafe-inline&#x27; blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; img-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; font-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; media-src blob: data: https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://esm.sh https://fonts.bunny.net https://fonts.googleapis.com https://fonts.gstatic.com https://unpkg.com; worker-src blob:; connect-src blob: data:; frame-src &#x27;none&#x27;; object-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;&quot;&gt;
+&lt;title&gt;Cocolon Ui Four Screens&lt;/title&gt;
+&lt;style&gt;:root {
+  color-scheme: light dark;
+  background-color: var(
+    --background,
+    var(--color-background-primary, light-dark(rgb(255 255 255), rgb(24 24 24)))
+  ) !important;
+
+  /* Agent-facing contract; keep in sync with SKILL.md. */
+  --background: var(
+    --color-background-primary,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --card: color-mix(in oklab, var(--foreground) 5%, var(--background));
+  --card-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --popover: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255), rgb(45 45 45))
+  );
+  --popover-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --primary: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --primary-foreground: var(
+    --color-text-inverse,
+    light-dark(rgb(255 255 255), rgb(13 13 13))
+  );
+  --secondary: var(
+    --color-background-secondary,
+    light-dark(rgb(255 255 255 / 96%), rgb(54 54 54 / 96%))
+  );
+  --secondary-foreground: var(
+    --color-text-primary,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --muted: color-mix(in srgb, var(--foreground) 10%, transparent);
+  --muted-foreground: var(
+    --color-text-secondary,
+    light-dark(rgb(26 28 31 / 49.4%), rgb(255 255 255 / 49.8%))
+  );
+  --accent: var(
+    --color-background-info,
+    light-dark(rgb(229 242 255), rgb(13 39 63))
+  );
+  --accent-foreground: var(
+    --color-text-info,
+    light-dark(rgb(51 156 255), rgb(131 195 255))
+  );
+  --destructive: var(
+    --color-text-warning,
+    light-dark(rgb(226 85 7), rgb(255 133 73))
+  );
+  --border: var(
+    --color-border-secondary,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+  --input: var(
+    --color-border-primary,
+    light-dark(
+      rgb(26 28 31 / 11.8%),
+      color-mix(in oklab, rgb(0 0 0) 10%, transparent)
+    )
+  );
+  --ring: var(
+    --color-ring-primary,
+    light-dark(rgb(51 156 255), rgb(131 195 255 / 76%))
+  );
+  --font-size-base: var(--font-text-md-size, 16px);
+  --blue: light-dark(rgb(51 156 255), rgb(51 156 255));
+  --orange: light-dark(rgb(226 85 7), rgb(251 106 34));
+  --green: light-dark(rgb(0 162 64), rgb(64 201 119));
+  --red: light-dark(rgb(224 46 42), rgb(255 103 100));
+  --purple: light-dark(rgb(146 79 247), rgb(173 123 249));
+  --yellow: light-dark(rgb(255 195 0), rgb(255 210 64));
+  --viz-series-1: var(--primary);
+  --viz-series-2: light-dark(rgb(243 136 59), rgb(245 154 86));
+  --viz-series-3: light-dark(rgb(93 201 119), rgb(116 213 139));
+  --viz-series-4: light-dark(rgb(235 119 177), rgb(240 143 192));
+  --viz-series-5: light-dark(rgb(155 121 236), rgb(170 145 239));
+  --viz-series-6: light-dark(rgb(58 185 177), rgb(90 203 194));
+
+  /* Internal implementation variables; not part of the agent contract. */
+  --font-sans:
+    -apple-system-body, ui-sans-serif, -apple-system, system-ui, &quot;Segoe UI&quot;,
+    Helvetica, &quot;Apple Color Emoji&quot;, Arial, sans-serif, &quot;Segoe UI Emoji&quot;,
+    &quot;Segoe UI Symbol&quot;;
+  --font-mono:
+    ui-monospace, SFMono-Regular, &quot;SF Mono&quot;, Menlo, Consolas, &quot;Liberation Mono&quot;,
+    monospace;
+  --font-size-normal: max(11px, var(--font-size-base));
+  --font-size-tooltip: calc(var(--font-size-base) - 1px);
+  --font-size-small: max(11px, calc(var(--font-size-base) - 2px));
+  --font-size-h1: calc(var(--font-size-normal) * 1.7142857143);
+  --font-size-h2: calc(var(--font-size-normal) * 1.4285714286);
+  --font-size-h3: calc(var(--font-size-normal) * 1.2857142857);
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --icon-size: 16px;
+  --line-height-normal: calc(var(--font-size-normal) * 1.5);
+  --line-height-tooltip: calc(var(--font-size-tooltip) * 1.4285714286);
+  --line-height-small: calc(var(--font-size-small) + 4px);
+  --corner-shape: round;
+  --radius: var(--border-radius-lg, 8px);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
+  --radius-lg: var(--radius);
+  --radius-2xl: calc(var(--radius) * 2);
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 8%);
+  --checkmark-image: url(&quot;data:image/svg+xml,%3Csvg xmlns=&#x27;http://www.w3.org/2000/svg&#x27; viewBox=&#x27;0 0 17 17&#x27;%3E%3Cpath d=&#x27;M12.8961 3.64101C13.1297 3.41418 13.4984 3.37523 13.7779 3.56581C14.0571 3.75635 14.1554 4.11331 14.0299 4.41347L13.9615 4.53847L7.71151 13.7045C7.59411 13.8767 7.4063 13.9877 7.19881 14.0072C6.99136 14.0267 6.78564 13.9533 6.63826 13.806L2.88826 10.056L2.79842 9.9457C2.6192 9.67407 2.64927 9.30496 2.88826 9.06581C3.12738 8.82669 3.49647 8.79676 3.76815 8.97597L3.8785 9.06581L7.03084 12.2182L12.8053 3.74941L12.8961 3.64101Z&#x27;/%3E%3C/svg%3E&quot;);
+
+  /* Legacy aliases; not part of the current agent contract. */
+  --viz-bg: transparent;
+  --viz-panel: var(--card);
+  --viz-border: var(--border);
+  --viz-text: var(--foreground);
+  --viz-muted: var(--muted-foreground);
+  --viz-accent: var(--primary);
+  --viz-accent-text: var(--primary-foreground);
+  --viz-accent-bg: var(--accent);
+  --viz-font-size: var(--font-size-base);
+  --viz-warning: var(--destructive);
+}
+
+:root[data-theme=&quot;light&quot;] {
+  color-scheme: light;
+}
+
+:root[data-theme=&quot;dark&quot;] {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html &gt; body {
+  /* Preserve MCP aliases for older inline renderers without creating :root cycles. */
+  --color-background-primary: var(
+    --background,
+    light-dark(rgb(255 255 255), rgb(24 24 24))
+  );
+  --color-text-primary: var(
+    --foreground,
+    light-dark(rgb(26 28 31), rgb(255 255 255))
+  );
+  --color-border-secondary: var(
+    --border,
+    light-dark(rgb(26 28 31 / 8%), rgb(255 255 255 / 8.2%))
+  );
+
+  margin: 0;
+  padding: var(--visualize-paint-gutter, 0px);
+  color: var(--foreground);
+  background: transparent !important;
+  font-family: var(--font-sans) !important;
+  -webkit-font-smoothing: antialiased;
+  font-size: var(--font-size-base);
+  line-height: calc(var(--font-size-base) * 1.625);
+  font-weight: var(--font-weight-normal);
+}
+
+:root:not([data-app-block-surface], [data-visualize-standalone]) &gt; body {
+  padding: 12px;
+}
+
+.cursor-interaction {
+  cursor: var(--cursor-interaction, pointer);
+}
+
+a {
+  color: color-mix(in srgb, var(--viz-accent) 80%, var(--viz-text) 20%);
+  cursor: var(--cursor-interaction, pointer);
+  text-decoration: none;
+  text-underline-offset: 2px;
+  font-weight: inherit;
+}
+
+a:is(:hover, :focus-visible) {
+  text-decoration-line: underline;
+  text-decoration-style: dashed;
+  text-decoration-thickness: 0.5px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-block: 0;
+}
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+li,
+.table {
+  font-family: var(--font-sans);
+}
+
+h1 {
+  font-size: calc(var(--font-size-base) * 1.5);
+  line-height: 1.3333333333;
+}
+
+h2 {
+  font-size: calc(var(--font-size-base) * 1.25);
+  line-height: 1.4;
+}
+h3 {
+  font-size: calc(var(--font-size-base) * 1.125);
+  line-height: 1.5555555556;
+}
+h4 {
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+}
+h5,
+h6 {
+  font-size: var(--font-size-base);
+  line-height: calc(var(--font-size-base) * 1.625);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+b,
+strong,
+th {
+  font-weight: 600;
+}
+
+code:not(pre code) {
+  display: inline;
+  padding: 1px 6px;
+  border-radius: var(--radius-sm);
+  corner-shape: var(--corner-shape);
+  background: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  overflow-wrap: anywhere;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  word-break: break-word;
+}
+pre,
+pre code {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.table {
+  width: 100%;
+  color: var(--foreground);
+  font: inherit;
+  text-align: start;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: calc(var(--font-size-base) * 0.875);
+  line-height: calc(var(--font-size-base) * 1.625);
+  font-family: var(--font-sans);
+}
+
+.table :is(th, td) {
+  padding-block: 10px;
+  padding-inline: 0 24px;
+  overflow-wrap: anywhere;
+  border-bottom: 1px solid var(--border);
+  text-align: start;
+  vertical-align: top;
+  border-bottom-color: color-mix(in srgb, var(--foreground) 5%, transparent);
+}
+.table :is(th, td):not(:last-child) {
+  padding-inline-end: calc(var(--font-size-base) * 1.5);
+}
+
+.table-responsive &gt; .table :is(th, td) {
+  overflow-wrap: break-word;
+}
+
+.table :is(th, td):last-child {
+  padding-inline-end: 0;
+}
+
+.table :is(caption, thead th) {
+  font-weight: 600;
+}
+
+.table thead :is(th, td) {
+  border-bottom-color: var(--border-strong, var(--input));
+  padding-block: calc(var(--font-size-base) / 2);
+  line-height: var(--font-size-base);
+}
+
+.table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+.table tbody :is(th, td) {
+  padding-block: calc(var(--font-size-base) * 0.625);
+}
+
+.table.table-sm :is(th, td) {
+  padding-block: 8px;
+}
+
+.table.table-sm :is(th, td):not(:last-child) {
+  padding-inline-end: 16px;
+}
+
+.table :is(.text-end, [align=&quot;right&quot;]) {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.table :is(.text-center, [align=&quot;center&quot;]) {
+  text-align: center;
+}
+
+.table .text-nowrap {
+  white-space: nowrap;
+}
+
+#widget {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 0;
+  background: transparent !important;
+}
+
+.card {
+  min-width: 0;
+  padding: 12px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  border-radius: var(--radius-2xl);
+  corner-shape: var(--corner-shape);
+  color: var(--card-foreground);
+  background: var(--card);
+}
+
+.widget {
+  min-width: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-lg);
+  corner-shape: var(--corner-shape);
+  box-shadow: 0 0 0 0.5px var(--border-strong, var(--border));
+  color: var(--foreground);
+  background: var(--background);
+}
+
+#widget &gt; :not(.card, .widget, .progress) {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.tooltip {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  width: max-content;
+  max-width: min(
+    20rem,
+    var(--tooltip-available-width, calc(100vw - 10px)),
+    calc(100vw - 10px)
+  );
+  max-height: min(
+    var(--tooltip-available-height, calc(100vh - 10px)),
+    calc(100vh - 10px)
+  );
+  border: 1px solid var(--border);
+  corner-shape: var(--corner-shape);
+  overflow-wrap: break-word;
+  white-space: normal;
+  pointer-events: none;
+  user-select: none;
+  font-family: var(--font-sans);
+  padding: 5px 12px;
+  border-color: color-mix(
+    in oklab,
+    light-dark(var(--primary-foreground), var(--foreground)) 5%,
+    transparent
+  );
+  border-radius: var(--radius-2xl);
+  color: light-dark(var(--primary-foreground), var(--foreground));
+  background: light-dark(var(--foreground), var(--popover));
+  box-shadow: 0 8px 18px rgb(15 23 42 / 20%);
+  letter-spacing: -0.15px;
+  font-size: calc(var(--font-size-base) * 14 / 16);
+  font-size: round(nearest, calc(var(--font-size-base) * 14 / 16), 1px);
+  font-weight: 600;
+  line-height: 18px;
+  text-align: center;
+}
+
+/* The shared runtime owns data-tooltip; suppress AppBlock&#x27;s pseudo-tooltip. */
+main [data-tooltip]::after {
+  content: none;
+}
+
+.viz-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(max(180px, 24%), 1fr));
+  gap: 10px;
+}
+
+.viz-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.viz-stat-value {
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.25;
+}
+
+.viz-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+hr {
+  width: 100%;
+  height: 1px;
+  margin-block: 6px;
+  border: 0;
+  background: var(--border);
+}
+
+.nav {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 4px;
+}
+
+.progress {
+  display: flex;
+  height: 8px;
+  margin-block: calc((var(--line-height-normal, 1.5em) - 8px) / 2);
+  overflow: hidden;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+}
+
+.progress-bar:only-child {
+  border-radius: var(--radius-full);
+}
+
+.progress-bar {
+  height: 100%;
+  flex-shrink: 0;
+  border: 0;
+  background: var(--viz-series-1);
+}
+
+.viz-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  color: color-mix(in srgb, var(--foreground) 40%, var(--muted-foreground));
+  background: color-mix(in srgb, var(--foreground) 5%, transparent);
+  font-family: var(--font-sans);
+  font-size: calc(var(--font-size-base) * 14 / 16);
+  font-size: round(nearest, calc(var(--font-size-base) * 14 / 16), 1px);
+  font-weight: var(--font-weight-normal);
+  line-height: 1;
+}
+
+small,
+.text-small {
+  font-size: var(--font-size-small);
+  line-height: var(--line-height-small);
+}
+
+.text-muted {
+  color: var(--muted-foreground);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.viz-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.viz-controls &gt; .form-label {
+  display: grid;
+  min-width: min(100%, 260px);
+  flex: 1 1 280px;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 2px 12px;
+  margin-bottom: 0;
+}
+
+.viz-controls &gt; .form-label &gt; :is(.form-control, .form-range, .form-select) {
+  grid-column: 1 / -1;
+}
+
+.btn,
+.nav-link,
+.form-check-input,
+.form-control,
+.form-range,
+.form-select {
+  font: inherit;
+}
+
+/* Match inline alignment without overriding a containing flex or grid layout. */
+.btn,
+.nav-link,
+.form-control,
+.form-select,
+.form-range,
+.form-check {
+  vertical-align: middle;
+}
+
+.btn,
+.nav-link {
+  --btn-size: calc(12px + 2 * var(--control-spacing, 12px));
+  appearance: button;
+  display: inline-flex;
+  inline-size: fit-content;
+  max-inline-size: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin: 0;
+  padding: 0 8px;
+  -webkit-app-region: no-drag;
+  border: 1px solid var(--input);
+  corner-shape: var(--corner-shape);
+  cursor: var(--cursor-interaction, pointer);
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  -webkit-font-smoothing: inherit;
+  font-family: var(--font-sans);
+  height: fit-content;
+  min-height: var(--btn-size);
+  padding-inline: var(--control-spacing, 12px);
+  border-color: transparent;
+  border-radius: var(--radius-full);
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--foreground) 5%, transparent);
+  font-size: calc(var(--font-size-base) * 14 / 16);
+  font-size: round(nearest, calc(var(--font-size-base) * 14 / 16), 1px);
+  font-weight: var(--font-weight-normal);
+  line-height: 18px;
+}
+
+.btn {
+  border-color: var(--border);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+}
+
+/* Codex Button size=&quot;compact&quot;; appearance stays with the button variant. */
+.btn-sm {
+  --btn-size: 24px;
+  padding-inline: 8px;
+  font-size: calc(var(--font-size-base) * 12 / 16);
+  font-size: round(nearest, calc(var(--font-size-base) * 12 / 16), 1px);
+  line-height: 16px;
+}
+
+.btn:is(.btn-block, .viz-tile) {
+  inline-size: 100%;
+}
+
+.btn.viz-tile {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+a.btn {
+  cursor: var(--cursor-interaction, pointer);
+  text-decoration: none;
+}
+
+.btn:not(:disabled):hover {
+  background: light-dark(
+    color-mix(in srgb, var(--foreground) 5.5%, transparent),
+    color-mix(in srgb, var(--foreground) 8%, transparent)
+  );
+}
+
+.nav-link:not(:disabled):not([aria-disabled=&quot;true&quot;]):hover {
+  background: color-mix(in srgb, var(--foreground) 10%, transparent);
+}
+
+.btn-primary {
+  border-color: var(--border);
+  color: var(--primary-foreground);
+  background: var(--foreground);
+  background-clip: border-box;
+}
+
+.btn-primary .text-muted {
+  color: color-mix(in srgb, var(--primary-foreground) 50%, transparent);
+}
+
+.btn-primary:not(:disabled):hover {
+  background: color-mix(in srgb, var(--foreground) 80%, transparent);
+  background-clip: border-box;
+}
+
+.btn-ghost {
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.btn-ghost:not(:disabled):hover {
+  color: var(--muted-foreground);
+  background: light-dark(
+    color-mix(in srgb, var(--foreground) 5.5%, transparent),
+    color-mix(in srgb, var(--foreground) 8%, transparent)
+  );
+}
+
+.nav-pills .nav-link {
+  min-width: 0;
+  border-color: transparent;
+  color: var(--muted-foreground);
+  background: transparent;
+}
+
+.nav-justified .nav-link {
+  flex: 1 1 0;
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.nav-pills .nav-link.active {
+  color: var(--foreground);
+  background: var(--muted);
+}
+
+/* Shared preview chrome; product styles stay inside each variant. */
+.viz-dotted-background {
+  background-image: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--foreground) 14%, transparent) 0.8px,
+    transparent 0.8px
+  );
+  background-position: center;
+  background-size: 16px 16px;
+}
+
+.viz-carousel {
+  position: relative;
+  min-width: 0;
+}
+
+.viz-carousel:has(&gt; .viz-carousel-controls) {
+  min-height: calc(60px + var(--viz-carousel-picker-height, 0px));
+  padding-bottom: 60px;
+}
+
+.viz-carousel &gt; [data-variant][hidden] {
+  display: none !important;
+}
+
+.viz-carousel &gt; [data-variant] {
+  isolation: isolate;
+}
+
+.viz-carousel-controls {
+  --viz-carousel-hover: light-dark(
+    color-mix(in srgb, var(--foreground) 5.4%, transparent),
+    color-mix(in srgb, var(--foreground) 7.8%, transparent)
+  );
+  position: absolute;
+  z-index: 2;
+  bottom: 8px;
+  left: 50%;
+  display: flex;
+  width: max-content;
+  /* Leave room for the host&#x27;s design-controls launcher at the trailing edge. */
+  max-width: calc(100% - 96px);
+  align-items: center;
+  gap: 0;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  color: var(--foreground);
+  background: var(--background);
+  font-family: var(--font-sans);
+  /* Match the settings dropdown chrome independently of the content font size. */
+  font-size: 13px;
+  font-weight: var(--font-weight-normal);
+  line-height: 18px;
+  transform: translateX(-50%);
+  user-select: none;
+}
+
+/* Keep authored mockup button styles out of the shared carousel chrome. */
+.viz-carousel-controls button,
+.viz-carousel-picker &gt; summary {
+  display: flex !important;
+  height: auto !important;
+  min-height: 30px;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px;
+  padding: 0 6px !important;
+  -webkit-app-region: no-drag;
+  border: 0 !important;
+  border-radius: 14px !important;
+  color: inherit !important;
+  background: transparent !important;
+  font: inherit !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.viz-carousel-controls &gt; button,
+.viz-carousel-picker &gt; summary {
+  position: relative;
+  isolation: isolate;
+}
+
+.viz-carousel-controls &gt; button {
+  --icon-size: 16px;
+  width: 30px !important;
+  padding: 0 !important;
+}
+
+.viz-carousel-picker &gt; summary {
+  padding-inline: 12px !important;
+}
+
+.viz-carousel-controls .viz-carousel-caret {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  margin: 0;
+  color: inherit;
+  transform: rotate(180deg);
+}
+
+.viz-carousel-controls &gt; button &gt; svg,
+.viz-carousel-controls .viz-carousel-caret,
+.viz-carousel-count {
+  opacity: 0.5;
+}
+
+.viz-carousel-controls &gt; button::before,
+.viz-carousel-picker &gt; summary::before {
+  position: absolute;
+  z-index: -1;
+  inset: 3px;
+  border-radius: 12px;
+  content: &quot;&quot;;
+  pointer-events: none;
+}
+
+.viz-carousel-controls &gt; button:hover::before,
+.viz-carousel-picker &gt; summary:hover::before {
+  background: var(--viz-carousel-hover);
+}
+
+.viz-carousel-controls &gt; button,
+.viz-carousel-controls [data-lucide],
+.viz-carousel-controls .lucide {
+  flex-shrink: 0;
+}
+
+.viz-carousel-picker {
+  min-width: 0;
+}
+
+.viz-carousel-picker &gt; summary {
+  min-width: 0;
+  list-style: none;
+}
+
+.viz-carousel-picker &gt; summary::-webkit-details-marker {
+  display: none;
+}
+
+.viz-carousel-count {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.viz-carousel-name {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.viz-carousel-options {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 4px);
+  left: 0;
+  display: flex;
+  max-height: 240px;
+  flex-direction: column;
+  gap: 2px;
+  overflow: auto;
+  padding: 4px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--background);
+  box-shadow: 0 4px 12px light-dark(rgb(0 0 0 / 6%), rgb(0 0 0 / 25%));
+}
+
+.viz-carousel-options &gt; button {
+  border-radius: max(0px, calc(var(--radius-lg) - 5px)) !important;
+  width: 100% !important;
+  min-height: 28px;
+  justify-content: flex-start !important;
+  padding: 4px 8px !important;
+  font-size: var(--font-size-small) !important;
+  text-align: start;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.viz-carousel-options &gt; [aria-current=&quot;true&quot;],
+.viz-carousel-options &gt; button:hover {
+  background: var(--viz-carousel-hover) !important;
+}
+
+.btn:disabled,
+.nav-link:disabled,
+.nav-link[aria-disabled=&quot;true&quot;] {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+[data-lucide] {
+  stroke-width: 1.6;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--foreground);
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 0 8px;
+  outline: none;
+  border: 1px solid var(--input);
+  corner-shape: var(--corner-shape);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  height: calc(12px + 2 * var(--control-spacing, 12px));
+  min-height: calc(12px + 2 * var(--control-spacing, 12px));
+  padding-inline: calc(4px + var(--control-spacing, 12px) / 2);
+  border-color: var(--input);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--popover) 96%, transparent);
+  font-size: calc(var(--font-size-base) * 14 / 16);
+  font-size: round(nearest, calc(var(--font-size-base) * 14 / 16), 1px);
+  font-weight: var(--font-weight-normal);
+  line-height: 1.4285714286;
+}
+.form-control:is(
+  [type=&quot;file&quot;],
+  [type=&quot;date&quot;],
+  [type=&quot;datetime-local&quot;],
+  [type=&quot;month&quot;],
+  [type=&quot;week&quot;],
+  [type=&quot;color&quot;]
+) {
+  height: calc(12px + 2 * var(--control-spacing, 12px));
+  min-height: calc(12px + 2 * var(--control-spacing, 12px));
+  line-height: 18px;
+}
+.form-control:is(
+  [type=&quot;date&quot;],
+  [type=&quot;datetime-local&quot;],
+  [type=&quot;month&quot;],
+  [type=&quot;week&quot;]
+) {
+  padding-inline: var(--control-spacing, 12px);
+}
+
+.form-control::placeholder {
+  color: var(--muted-foreground);
+}
+
+.form-control[type=&quot;file&quot;] {
+  overflow: hidden;
+  cursor: var(--cursor-interaction, pointer);
+  padding: 0;
+}
+
+.form-control[type=&quot;file&quot;]::file-selector-button {
+  padding: 0 8px;
+  border: 0;
+  border-right: 1px solid var(--input);
+  color: var(--secondary-foreground);
+  background: var(--secondary);
+  cursor: inherit;
+  font: inherit;
+  min-height: calc(10px + 2 * var(--control-spacing, 12px));
+  padding-inline: var(--control-spacing, 12px);
+  margin-inline-end: var(--control-spacing, 12px);
+}
+
+.form-control[type=&quot;file&quot;]:not(:disabled):hover::file-selector-button {
+  background: color-mix(in srgb, var(--foreground) 6%, var(--secondary));
+}
+
+.form-control-color[type=&quot;color&quot;] {
+  width: 40px;
+  height: calc(12px + 2 * var(--control-spacing, 12px));
+  padding: 3px;
+  cursor: var(--cursor-interaction, pointer);
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+.form-control-color[type=&quot;color&quot;]::-webkit-color-swatch {
+  border: 0;
+  border-radius: calc(var(--radius-lg) - 4px);
+  corner-shape: var(--corner-shape);
+}
+
+textarea.form-control {
+  height: auto;
+  resize: vertical;
+  min-height: 96px;
+  padding: 8px 10px;
+}
+
+.form-control:focus-visible {
+  border-color: var(--ring);
+  box-shadow: none;
+}
+.form-control:disabled {
+  color: var(--muted-foreground);
+  background: color-mix(in srgb, var(--foreground) 5%, transparent);
+  opacity: 1;
+}
+.form-control[aria-invalid=&quot;true&quot;] {
+  border-color: var(--red);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--red) 20%, transparent);
+}
+
+.form-control:disabled,
+.form-select:disabled {
+  cursor: not-allowed;
+}
+
+.form-select {
+  appearance: none;
+  display: block;
+  width: 100%;
+  height: fit-content;
+  min-height: calc(12px + 2 * var(--control-spacing, 12px));
+  margin: 0;
+  /* The secondary icon role is 14px at compact density and 16px at web density. */
+  --icon-size: calc(10px + var(--control-spacing, 12px) / 2);
+  /* Settings dropdowns retain a 12px inset and a 4px text-to-chevron gap. */
+  padding: 0 calc(16px + var(--icon-size)) 0 12px;
+  outline: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  corner-shape: var(--corner-shape);
+  color: var(--foreground);
+  background-color: var(--secondary);
+  background-image:
+    linear-gradient(
+      45deg,
+      transparent calc(50% - 0.6px),
+      var(--muted-foreground) calc(50% - 0.6px) calc(50% + 0.6px),
+      transparent calc(50% + 0.6px)
+    ),
+    linear-gradient(
+      135deg,
+      transparent calc(50% - 0.6px),
+      var(--muted-foreground) calc(50% - 0.6px) calc(50% + 0.6px),
+      transparent calc(50% + 0.6px)
+    );
+  background-position:
+    calc(100% - 12px - var(--icon-size) / 2) 50%,
+    calc(100% - 12px - var(--icon-size) * 0.18) 50%;
+  background-repeat: no-repeat;
+  background-size: calc(var(--icon-size) * 0.32) calc(var(--icon-size) * 0.32);
+  cursor: var(--cursor-interaction, default);
+  font-size: calc(var(--font-size-base) * 14 / 16);
+  font-size: round(nearest, calc(var(--font-size-base) * 14 / 16), 1px);
+  font-weight: var(--font-weight-normal);
+  line-height: 18px;
+}
+
+.form-select :is(option, optgroup) {
+  color: var(--popover-foreground);
+  background-color: var(--popover);
+}
+
+.form-select :is(option, optgroup):disabled {
+  color: var(--muted-foreground);
+}
+
+.form-select:not(:disabled):hover {
+  background-color: light-dark(
+    color-mix(in srgb, var(--foreground) 5.5%, transparent),
+    color-mix(in srgb, var(--foreground) 8%, transparent)
+  );
+}
+
+.form-select:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+}
+.form-select:disabled {
+  opacity: 0.4;
+}
+
+.form-check {
+  display: flex;
+  min-height: calc(12px + 2 * var(--control-spacing, 12px));
+  align-items: center;
+  gap: 6px;
+}
+
+.form-check-input {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--input);
+  color: var(--primary-foreground);
+  background-color: transparent;
+  cursor: var(--cursor-interaction, default);
+  transition:
+    background-color 150ms,
+    border-color 150ms,
+    box-shadow 150ms;
+}
+
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;] {
+  corner-shape: round;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  width: calc(10px + var(--control-spacing, 12px) / 2);
+  height: calc(10px + var(--control-spacing, 12px) / 2);
+  border-color: var(--border-strong, var(--input));
+  border-radius: calc(var(--radius-sm) / 2);
+  background-color: transparent;
+  color: var(--foreground);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input:not(:disabled):not(:checked):hover {
+  background-color: var(--card);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type=&quot;checkbox&quot;]:is(:checked, :indeterminate) {
+  border-color: var(--border-strong, var(--input));
+  background-color: color-mix(in srgb, var(--popover) 96%, transparent);
+}
+
+.form-check:not(.form-switch)
+  .form-check-input[type=&quot;checkbox&quot;]:checked::before {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-foreground);
+  content: &quot;&quot;;
+  mask: var(--checkmark-image) center / 12px 12px no-repeat;
+  background-color: var(--foreground);
+}
+.form-check:not(.form-switch)
+  .form-check-input[type=&quot;checkbox&quot;]:indeterminate::before {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 65%;
+  height: 6.65%;
+  margin: auto;
+  border-radius: var(--radius-full);
+  background: var(--foreground);
+  mask: none;
+  content: &quot;&quot;;
+}
+
+.form-check-input[type=&quot;radio&quot;] {
+  border-radius: var(--radius-full);
+  width: 16px;
+  height: 16px;
+  border: 0;
+  box-shadow: inset 0 0 0 1px var(--input);
+}
+
+.form-check-input[type=&quot;radio&quot;]:checked {
+  border: 0;
+  background: radial-gradient(
+    circle,
+    var(--primary-foreground) 0 3px,
+    var(--foreground) 3px
+  );
+  box-shadow: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+.form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;]:focus-visible {
+  border-color: var(--ring);
+  outline: none;
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.form-check:not(.form-switch) .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+}
+.form-check:not(.form-switch) .form-check-input[type=&quot;radio&quot;]:disabled,
+.form-check:not(.form-switch)
+  .form-check-input[type=&quot;radio&quot;]:disabled
+  + .form-check-label {
+  opacity: 0.5;
+}
+
+.form-switch .form-check-input:disabled,
+.form-switch .form-check-input:disabled + .form-check-label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.form-check-label {
+  color: var(--foreground);
+  cursor: var(--cursor-interaction, default);
+}
+
+.form-switch .form-check-input {
+  position: relative;
+  width: 32px;
+  height: 20px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: var(--muted);
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.form-switch .form-check-input::before {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid light-dark(var(--primary-foreground), var(--foreground));
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-sm);
+  content: &quot;&quot;;
+  transform: translate(2px, -50%);
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+  border-color: #fff;
+  background: #fff;
+}
+
+.form-switch .form-check-input:checked {
+  background: var(--blue);
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translate(14px, -50%);
+}
+
+.form-switch .form-check-input:focus-visible {
+  box-shadow: 0 0 0 2px var(--ring);
+  outline: none;
+}
+
+.form-range {
+  appearance: none;
+  display: block;
+  width: 100%;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  accent-color: var(--primary);
+  height: calc(12px + 2 * var(--control-spacing, 12px));
+  min-height: calc(12px + 2 * var(--control-spacing, 12px));
+  outline: none;
+  border-radius: var(--radius-full);
+  color: var(--foreground);
+  background: transparent;
+}
+
+.form-range::-webkit-slider-runnable-track {
+  background: var(--form-range-track, var(--border));
+  height: 2px;
+  border-radius: var(--radius-full);
+}
+
+.form-range::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  margin-top: -9px;
+  border-color: transparent;
+  background: currentColor;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Outline the native track and thumb, preserving the larger input hit area. */
+.form-range:focus-visible::-webkit-slider-runnable-track {
+  outline: 2px auto Highlight;
+  outline-color: -webkit-focus-ring-color;
+}
+
+.form-range::-moz-range-track {
+  background: var(--form-range-track, var(--border));
+  height: 2px;
+  border-radius: var(--radius-full);
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  border-color: transparent;
+  background: currentColor;
+  box-shadow: var(--shadow-sm);
+}
+
+.form-range:focus-visible::-moz-range-thumb {
+  outline: 2px solid Highlight;
+  outline-offset: 2px;
+}
+
+.form-range:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.btn:not(.btn-primary, .viz-tile):is(
+  [aria-pressed=&quot;true&quot;],
+  [aria-selected=&quot;true&quot;],
+  .is-selected
+) {
+  border-color: transparent;
+  color: var(--primary-foreground);
+  background: var(--blue);
+}
+
+.btn.viz-tile:is([aria-pressed=&quot;true&quot;], [aria-selected=&quot;true&quot;], .is-selected) {
+  border-color: var(--primary);
+  box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.btn:focus-visible,
+.nav-link:focus-visible {
+  outline-offset: 2px;
+  outline: none;
+  box-shadow: 0 0 0 2px var(--ring);
+}
+
+.viz-carousel-controls :is(button, summary):focus-visible {
+  outline: 2px solid var(--ring) !important;
+  outline-offset: 2px !important;
+}
+
+/* Web recipes are the default, including on renderers without inline style queries. */
+@supports (border-radius: if(style(--corner-shape: round): 1px; else: 2px)) {
+  /* Match the host&#x27;s proportional text-sm scale at every text preference. */
+  .tooltip,
+  .viz-badge,
+  .btn,
+  .nav-link,
+  .form-control,
+  .form-select {
+    font-size: if(
+      style(--corner-shape: round): round(
+          nearest,
+          calc(var(--font-size-base) * 14 / 16),
+          1px
+        );
+        else: round(nearest, calc(var(--font-size-base) * 13 / 14), 1px)
+    );
+  }
+
+  .btn-sm {
+    font-size: if(
+      style(--corner-shape: round): round(
+          nearest,
+          calc(var(--font-size-base) * 12 / 16),
+          1px
+        );
+        else: round(nearest, calc(var(--font-size-base) * 12 / 14), 1px)
+    );
+  }
+
+  .btn,
+  .nav-link,
+  .form-select {
+    border-radius: if(
+      style(--corner-shape: round): var(--radius-full); else: var(--radius-lg)
+    );
+  }
+
+  .form-check:not(.form-switch) .form-check-input[type=&quot;checkbox&quot;] {
+    border-radius: if(
+      style(--corner-shape: round): calc(var(--radius-sm) / 2);
+        else: calc(var(--radius-lg) * 0.4)
+    );
+  }
+
+  .tooltip {
+    font-weight: if(
+      style(--corner-shape: round): 600; else: var(--font-weight-normal)
+    );
+  }
+}
+
+@media (pointer: coarse) {
+  .viz-carousel:has(&gt; .viz-carousel-controls) {
+    min-height: calc(76px + var(--viz-carousel-picker-height, 0px));
+    padding-bottom: 76px;
+  }
+
+  .btn,
+  .nav-link,
+  .viz-carousel-controls button,
+  .viz-carousel-picker &gt; summary,
+  .form-control,
+  .form-select {
+    --btn-size: 44px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Keep small-screen WebKit from zooming when a text field receives focus. */
+  .form-control,
+  .form-select {
+    font-size: max(16px, calc(var(--font-size-base) * 14 / 16));
+    font-size: max(
+      16px,
+      round(nearest, calc(var(--font-size-base) * 14 / 16), 1px)
+    );
+  }
+  .form-control:is(
+    [type=&quot;file&quot;],
+    [type=&quot;date&quot;],
+    [type=&quot;datetime-local&quot;],
+    [type=&quot;month&quot;],
+    [type=&quot;week&quot;],
+    [type=&quot;time&quot;],
+    [type=&quot;color&quot;]
+  ) {
+    height: 44px;
+    min-height: 44px;
+    font-size: max(16px, calc(var(--font-size-base) * 14 / 16));
+    font-size: max(
+      16px,
+      round(nearest, calc(var(--font-size-base) * 14 / 16), 1px)
+    );
+  }
+
+  .form-control[type=&quot;file&quot;]::file-selector-button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .form-control-color[type=&quot;color&quot;] {
+    width: 44px;
+    height: 44px;
+  }
+
+  .form-control:is(
+    [type=&quot;date&quot;],
+    [type=&quot;datetime-local&quot;],
+    [type=&quot;month&quot;],
+    [type=&quot;time&quot;],
+    [type=&quot;week&quot;]
+  ) {
+    min-width: 0;
+    max-width: 100%;
+    padding-block: 8px;
+  }
+
+  .form-check {
+    min-height: 44px;
+    padding-inline: 15px;
+  }
+
+  .form-check-input {
+    position: relative;
+  }
+
+  .form-check-input::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 44px;
+    height: 44px;
+    content: &quot;&quot;;
+    transform: translate(-50%, -50%);
+  }
+
+  .form-check-label {
+    display: inline-flex;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+  }
+
+  .form-range {
+    height: 44px;
+    touch-action: pan-y;
+  }
+}
+
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+#widget &gt; svg {
+  width: 100%;
+}
+
+/* Model-authored chart rules can otherwise stretch icons after these styles load. */
+svg.lucide {
+  display: block;
+  width: var(--icon-size) !important;
+  height: var(--icon-size) !important;
+  flex: none;
+  margin: 0 !important;
+  stroke-width: 1.6;
+}
+
+.text-warning,
+.text-destructive {
+  color: var(--destructive);
+}
+
+html&gt;body{padding:0}&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;script type=&quot;application/json&quot; id=&quot;codex-visualization-widget-state&quot;&gt;__CODEX_VISUALIZATION_WIDGET_STATE__&lt;/script&gt;
+&lt;script&gt;(() =&gt; {
+  const root = document.documentElement;
+  const mediaQuery = globalThis.matchMedia(&quot;(prefers-color-scheme: dark)&quot;);
+  const apply = Reflect.apply;
+  const isArray = Array.isArray;
+  const hasOwn = Object.hasOwn;
+  const parentWindow = globalThis.parent;
+  const stringify = JSON.stringify;
+  const parse = JSON.parse;
+  const encode = TextEncoder.prototype.encode.bind(new TextEncoder());
+  const initialStateElement = document.getElementById(
+    &quot;codex-visualization-widget-state&quot;,
+  );
+  const initialGlobals = parse(initialStateElement?.textContent ?? &quot;{}&quot;);
+  initialStateElement?.remove();
+  /** @type {Record&lt;string, unknown&gt; | null} */
+  let state = initialGlobals.widgetState ?? null;
+  const statePersistence = initialGlobals.statePersistence ?? &quot;none&quot;;
+  let nextStateRequestId = 0;
+  /** @type {Map&lt;number, { resolve: () =&gt; void; reject: (error: Error) =&gt; void; timeout: ReturnType&lt;typeof globalThis.setTimeout&gt;; serializedState: string }&gt;} */
+  const pendingStateWrites = new Map();
+  const persistenceError = () =&gt;
+    Object.assign(
+      new Error(&quot;The host could not persist the widget state update&quot;),
+      {
+        code: -32000,
+        data: { code: &quot;widget_state_persistence_failed&quot;, retryable: false },
+      },
+    );
+  /**
+   * @param {object} prototype
+   * @param {string} property
+   */
+  const getPrototypeGetter = (prototype, property) =&gt; {
+    // oxlint-disable-next-line typescript/unbound-method -- invoked through captured Reflect.apply
+    const getter = Object.getOwnPropertyDescriptor(prototype, property)?.get;
+    if (getter == null) {
+      throw new Error(`Missing ${property} getter`);
+    }
+    return getter;
+  };
+  const getMessageData = getPrototypeGetter(MessageEvent.prototype, &quot;data&quot;);
+  const getMessagePorts = getPrototypeGetter(MessageEvent.prototype, &quot;ports&quot;);
+  const getMessageSource = getPrototypeGetter(MessageEvent.prototype, &quot;source&quot;);
+  // oxlint-disable-next-line typescript/unbound-method -- captured before the untrusted fragment runs
+  const addHostMessageListener = MessagePort.prototype.addEventListener;
+  // oxlint-disable-next-line typescript/unbound-method -- captured before the untrusted fragment runs
+  const postHostMessage = MessagePort.prototype.postMessage;
+  // oxlint-disable-next-line typescript/unbound-method -- captured before the untrusted fragment runs
+  const startHostPort = MessagePort.prototype.start;
+  // oxlint-disable-next-line typescript/unbound-method -- captured before the untrusted fragment runs
+  const stopMessagePropagation = Event.prototype.stopImmediatePropagation;
+  /** @type {MessagePort | null} */
+  let hostPort = null;
+  const postToHost = (type, payload) =&gt; {
+    if (hostPort != null) {
+      apply(postHostMessage, hostPort, [{ type, ...payload }]);
+    }
+  };
+  const openExternal = ({ href }) =&gt; {
+    if (globalThis.navigator.userActivation?.isActive === true) {
+      postToHost(&quot;open-external&quot;, { href });
+    }
+  };
+  const sendFollowUpMessage = ({ context, prompt, title }) =&gt; {
+    if (globalThis.navigator.userActivation?.isActive === true) {
+      postToHost(&quot;follow-up&quot;, { context, prompt, title });
+    }
+    return Promise.resolve();
+  };
+  /**
+   * @param {Record&lt;string, unknown&gt; | ((previous: Record&lt;string, unknown&gt; | null) =&gt; Record&lt;string, unknown&gt;)} next
+   * @returns {Promise&lt;void&gt;}
+   */
+  const setWidgetState = async (next) =&gt; {
+    const nextState = typeof next === &quot;function&quot; ? next(state) : next;
+    if (
+      nextState == null ||
+      typeof nextState !== &quot;object&quot; ||
+      isArray(nextState)
+    ) {
+      throw new TypeError(&quot;Widget state must be a JSON object&quot;);
+    }
+    const inputState = stringify(
+      nextState,
+      (_key, /** @type {unknown} */ value) =&gt; {
+        if (
+          typeof value === &quot;undefined&quot; ||
+          typeof value === &quot;function&quot; ||
+          typeof value === &quot;symbol&quot; ||
+          (typeof value === &quot;number&quot; &amp;&amp; !Number.isFinite(value))
+        ) {
+          throw new TypeError(&quot;Widget state must be a JSON object&quot;);
+        }
+        return value;
+      },
+    );
+    const parsedState = parse(inputState);
+    if (
+      parsedState == null ||
+      typeof parsedState !== &quot;object&quot; ||
+      isArray(parsedState)
+    ) {
+      throw new TypeError(&quot;Widget state must be a JSON object&quot;);
+    }
+    const storedState = {
+      modelContent: null,
+      privateContent: null,
+      ...parsedState,
+    };
+    const serializedState = stringify(storedState);
+    if (encode(serializedState).length &gt; 16 * 1024) {
+      throw new TypeError(
+        &quot;Widget state must be a JSON object of at most 16 KiB&quot;,
+      );
+    }
+    if (
+      hasOwn(storedState, &quot;imageIds&quot;) &amp;&amp;
+      (!isArray(storedState.imageIds) ||
+        storedState.imageIds.some(
+          (/** @type {unknown} */ id) =&gt; typeof id !== &quot;string&quot;,
+        ))
+    ) {
+      throw new TypeError(&quot;Widget state imageIds must be an array of strings&quot;);
+    }
+    if (storedState.imageIds?.length &gt; 0) {
+      throw Object.assign(
+        new TypeError(&quot;Visualization state does not support image attachments&quot;),
+        { code: -32602, data: { code: &quot;images_unsupported&quot; } },
+      );
+    }
+    state = storedState;
+    globalThis.openai.widgetState = state;
+    globalThis.dispatchEvent(
+      new CustomEvent(&quot;openai:set_globals&quot;, {
+        detail: { globals: { widgetState: state } },
+      }),
+    );
+    if (statePersistence === &quot;none&quot;) {
+      throw persistenceError();
+    }
+    const id = ++nextStateRequestId;
+    return new Promise((resolve, reject) =&gt; {
+      const timeout = globalThis.setTimeout(() =&gt; {
+        pendingStateWrites.delete(id);
+        reject(persistenceError());
+      }, 30_000);
+      pendingStateWrites.set(id, { resolve, reject, timeout, serializedState });
+      postToHost(&quot;widget-state-write&quot;, { id, state: serializedState });
+    });
+  };
+  const mockElement = document.getElementById(&quot;codex-connector-mocks&quot;);
+  const connectorGlobals = {};
+  if (mockElement != null) {
+    const values = new Map(Object.entries(parse(mockElement.textContent)));
+    mockElement.remove();
+    connectorGlobals.visualizationData = {
+      updates: Array.from(values, ([name, value]) =&gt; ({
+        name,
+        revision: 1,
+        state: &quot;ready&quot;,
+        value: { type: &quot;json&quot;, value },
+      })),
+    };
+    connectorGlobals.visualization = {
+      /** @param {string} name @param {(value: unknown) =&gt; void} callback */
+      onData(name, callback) {
+        if (typeof callback !== &quot;function&quot;) {
+          throw new TypeError(&quot;onData requires a callback&quot;);
+        }
+        try {
+          callback(values.get(name));
+        } catch (error) {
+          // oxlint-disable-next-line no-console -- Keep authored callback failures local.
+          console.error(&quot;Live visualization data callback failed&quot;, error);
+        }
+        // A static preview delivers the current fixture once per subscription.
+        return () =&gt; {};
+      },
+    };
+  }
+  const syncTheme = () =&gt; {
+    const theme = mediaQuery.matches ? &quot;dark&quot; : &quot;light&quot;;
+    root.dataset.theme = theme;
+    globalThis.openai = {
+      ...globalThis.openai,
+      ...connectorGlobals,
+      openExternal,
+      sendFollowUpMessage,
+      setWidgetState,
+      theme,
+      visualizationStyleVariables: {},
+      visualizationTheme: theme,
+      widgetState: state,
+      statePersistence,
+      stateModelContext: &quot;none&quot;,
+    };
+    globalThis.dispatchEvent(
+      new CustomEvent(&quot;openai:set_globals&quot;, {
+        detail: { globals: globalThis.openai },
+      }),
+    );
+  };
+  const sendHeight = () =&gt; {
+    postToHost(&quot;height&quot;, {
+      height: Math.ceil(
+        Math.max(
+          document.body.scrollHeight,
+          document.body.getBoundingClientRect().height,
+        ),
+      ),
+    });
+  };
+
+  globalThis.addEventListener(
+    &quot;message&quot;,
+    (event) =&gt; {
+      const data = apply(getMessageData, event, []);
+      const ports = apply(getMessagePorts, event, []);
+      const source = apply(getMessageSource, event, []);
+      if (
+        hostPort != null ||
+        source !== parentWindow ||
+        typeof data !== &quot;object&quot; ||
+        data?.type !== &quot;codex-visualization-initialize&quot; ||
+        !isArray(ports) ||
+        ports.length !== 1
+      ) {
+        return;
+      }
+      apply(stopMessagePropagation, event, []);
+      const nextHostPort = ports[0];
+      try {
+        apply(addHostMessageListener, nextHostPort, [
+          &quot;message&quot;,
+          (event) =&gt; {
+            const data = apply(getMessageData, event, []);
+            if (typeof data === &quot;object&quot; &amp;&amp; data?.type === &quot;measure&quot;) {
+              sendHeight();
+            } else if (
+              typeof data === &quot;object&quot; &amp;&amp;
+              data?.type === &quot;widget-state-result&quot;
+            ) {
+              /** @type {unknown} */
+              const id = data.id;
+              if (typeof id !== &quot;number&quot;) {
+                return;
+              }
+              const pending = pendingStateWrites.get(id);
+              if (pending != null) {
+                pendingStateWrites.delete(id);
+                globalThis.clearTimeout(pending.timeout);
+                if (data.ok === true) {
+                  pending.resolve();
+                } else {
+                  pending.reject(persistenceError());
+                }
+              }
+            }
+          },
+        ]);
+        apply(startHostPort, nextHostPort, []);
+      } catch {
+        return;
+      }
+      hostPort = nextHostPort;
+      for (const [id, { serializedState }] of pendingStateWrites) {
+        postToHost(&quot;widget-state-write&quot;, { id, state: serializedState });
+      }
+      sendHeight();
+    },
+    { capture: true },
+  );
+  document.currentScript?.remove();
+  mediaQuery.addEventListener(&quot;change&quot;, syncTheme);
+  globalThis.addEventListener(&quot;click&quot;, (event) =&gt; {
+    if (event.defaultPrevented) {
+      return;
+    }
+    let element = null;
+    if (event.target instanceof globalThis.Element) {
+      element = event.target;
+    } else if (event.target instanceof globalThis.Node) {
+      element = event.target.parentElement;
+    }
+    const link = element?.closest(&quot;a[href]&quot;);
+    const href = link?.getAttribute(&quot;href&quot;);
+    if (href == null) {
+      return;
+    }
+    if (href.startsWith(&quot;#&quot;)) {
+      let id;
+      try {
+        id = decodeURIComponent(href.slice(1));
+      } catch {
+        return;
+      }
+      const target = id.length === 0 ? root : document.getElementById(id);
+      if (
+        target == null ||
+        globalThis.navigator.userActivation?.isActive !== true
+      ) {
+        return;
+      }
+      event.preventDefault();
+      postToHost(&quot;scroll-to&quot;, {
+        top: target.getBoundingClientRect().top + globalThis.scrollY,
+      });
+      return;
+    }
+    event.preventDefault();
+    openExternal({ href });
+  });
+  new ResizeObserver(sendHeight).observe(document.body);
+  syncTheme();
+})();
+&lt;/script&gt;
+&lt;div id=&quot;cocolon-ui-four&quot;&gt;
+  &lt;div class=&quot;viz-controls&quot; aria-label=&quot;表示する画面&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-preview-view=&quot;home&quot; aria-pressed=&quot;false&quot;&gt;ホーム&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot; data-preview-view=&quot;analysis&quot; aria-pressed=&quot;true&quot;&gt;分析&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-preview-view=&quot;piece&quot; aria-pressed=&quot;false&quot;&gt;Pieceのプレビュー&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;btn&quot; data-preview-view=&quot;settings&quot; aria-pressed=&quot;false&quot;&gt;設定&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;viz-carousel viz-dotted-background&quot; aria-label=&quot;Cocolonの3つのデザイン案&quot; data-previous-label=&quot;前の案&quot; data-next-label=&quot;次の案&quot;&gt;
+    &lt;section class=&quot;c-stage&quot; data-variant=&quot;Day One寄り · 静かな余白&quot; aria-label=&quot;Day Oneを参考にしたCocolon&quot;&gt;
+      &lt;div class=&quot;c-device c-editorial&quot; data-style=&quot;editorial&quot;&gt;&lt;/div&gt;
+    &lt;/section&gt;
+    &lt;section class=&quot;c-stage&quot; data-variant=&quot;How We Feel寄り · やわらかな感情&quot; aria-label=&quot;How We Feelを参考にしたCocolon&quot; hidden&gt;
+      &lt;div class=&quot;c-device c-emotional&quot; data-style=&quot;emotional&quot;&gt;&lt;/div&gt;
+    &lt;/section&gt;
+    &lt;section class=&quot;c-stage&quot; data-variant=&quot;Material寄り · 明快なかたち&quot; aria-label=&quot;Material 3 Expressiveを参考にしたCocolon&quot; hidden&gt;
+      &lt;div class=&quot;c-device c-expressive&quot; data-style=&quot;expressive&quot;&gt;&lt;/div&gt;
+    &lt;/section&gt;
+  &lt;/div&gt;
+  &lt;span class=&quot;sr-only&quot; data-announcement aria-live=&quot;polite&quot;&gt;&lt;/span&gt;
+
+  &lt;template id=&quot;cocolon-four-phone-template&quot;&gt;
+    &lt;div class=&quot;c-status&quot; aria-hidden=&quot;true&quot;&gt;&lt;span&gt;9:41&lt;/span&gt;&lt;span class=&quot;c-status-icons&quot;&gt;&lt;i data-lucide=&quot;signal&quot;&gt;&lt;/i&gt;&lt;i data-lucide=&quot;wifi&quot;&gt;&lt;/i&gt;&lt;i data-lucide=&quot;battery-full&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/div&gt;
+    &lt;div data-app-view=&quot;home&quot;&gt;
+      &lt;header class=&quot;c-brandbar&quot;&gt;
+        &lt;span class=&quot;c-wordmark&quot;&gt;Emlis&lt;span class=&quot;c-brand-dot&quot;&gt;&lt;/span&gt;&lt;/span&gt;
+        &lt;div class=&quot;c-header-actions&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;c-icon-button cursor-interaction&quot; data-action=&quot;history&quot; aria-label=&quot;入力履歴&quot;&gt;&lt;i data-lucide=&quot;history&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;button type=&quot;button&quot; class=&quot;c-avatar cursor-interaction&quot; data-action=&quot;account&quot; aria-label=&quot;アカウント&quot;&gt;M&lt;/button&gt;&lt;/div&gt;
+      &lt;/header&gt;
+      &lt;main class=&quot;c-home-main&quot;&gt;
+        &lt;div class=&quot;c-intro&quot;&gt;&lt;div class=&quot;c-date&quot;&gt;11月6日 金曜日&lt;/div&gt;&lt;h2&gt;今日のあなたを、&lt;br class=&quot;c-emotional-break&quot;&gt;ひとこと。&lt;/h2&gt;&lt;p&gt;まとまっていなくても、そのままで。&lt;/p&gt;&lt;/div&gt;
+        &lt;button type=&quot;button&quot; class=&quot;c-question cursor-interaction&quot; data-action=&quot;question&quot;&gt;&lt;span class=&quot;c-question-symbol&quot;&gt;&lt;i data-lucide=&quot;sparkles&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;span&gt;&lt;small&gt;今日の問い&lt;/small&gt;&lt;strong&gt;今日、心に残った小さなことは？&lt;/strong&gt;&lt;/span&gt;&lt;i data-lucide=&quot;chevron-right&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+        &lt;section class=&quot;c-feelings&quot;&gt;
+          &lt;div class=&quot;c-section-label&quot;&gt;&lt;h3&gt;今の気持ち&lt;/h3&gt;&lt;span class=&quot;c-feeling-summary&quot; data-feeling-name&gt;平穏&lt;/span&gt;&lt;/div&gt;
+          &lt;div class=&quot;c-emotion-options&quot; aria-label=&quot;感情を選ぶ&quot;&gt;
+            &lt;button type=&quot;button&quot; class=&quot;c-emotion c-joy cursor-interaction&quot; data-emotion=&quot;喜び&quot; aria-pressed=&quot;false&quot;&gt;&lt;span class=&quot;c-emotion-circle&quot;&gt;&lt;i data-lucide=&quot;smile&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;span&gt;喜び&lt;/span&gt;&lt;/button&gt;
+            &lt;button type=&quot;button&quot; class=&quot;c-emotion c-sad cursor-interaction&quot; data-emotion=&quot;悲しみ&quot; aria-pressed=&quot;false&quot;&gt;&lt;span class=&quot;c-emotion-circle&quot;&gt;&lt;i data-lucide=&quot;cloud-rain&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;span&gt;悲しみ&lt;/span&gt;&lt;/button&gt;
+            &lt;button type=&quot;button&quot; class=&quot;c-emotion c-anger cursor-interaction&quot; data-emotion=&quot;怒り&quot; aria-pressed=&quot;false&quot;&gt;&lt;span class=&quot;c-emotion-circle&quot;&gt;&lt;i data-lucide=&quot;flame&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;span&gt;怒り&lt;/span&gt;&lt;/button&gt;
+            &lt;button type=&quot;button&quot; class=&quot;c-emotion c-anxiety cursor-interaction&quot; data-emotion=&quot;不安&quot; aria-pressed=&quot;false&quot;&gt;&lt;span class=&quot;c-emotion-circle&quot;&gt;&lt;i data-lucide=&quot;waves&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;span&gt;不安&lt;/span&gt;&lt;/button&gt;
+            &lt;button type=&quot;button&quot; class=&quot;c-emotion c-calm cursor-interaction&quot; data-emotion=&quot;平穏&quot; aria-pressed=&quot;true&quot;&gt;&lt;span class=&quot;c-emotion-circle&quot;&gt;&lt;i data-lucide=&quot;leaf&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;span&gt;平穏&lt;/span&gt;&lt;/button&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;c-feeling-footer&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;c-self cursor-interaction&quot; data-emotion=&quot;自己理解&quot; aria-pressed=&quot;false&quot;&gt;&lt;i data-lucide=&quot;scan-face&quot;&gt;&lt;/i&gt;自己理解&lt;/button&gt;&lt;div class=&quot;c-intensity&quot; aria-label=&quot;感情の強さ&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-intensity=&quot;弱&quot; aria-pressed=&quot;false&quot;&gt;弱&lt;/button&gt;&lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-intensity=&quot;中&quot; aria-pressed=&quot;true&quot;&gt;中&lt;/button&gt;&lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-intensity=&quot;強&quot; aria-pressed=&quot;false&quot;&gt;強&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
+        &lt;/section&gt;
+        &lt;section class=&quot;c-writing&quot;&gt;
+          &lt;div class=&quot;c-section-label&quot;&gt;&lt;h3&gt;言葉にしてみる&lt;/h3&gt;&lt;i data-lucide=&quot;pencil-line&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/div&gt;
+          &lt;label class=&quot;c-writing-field&quot;&gt;&lt;span&gt;考えたこと・感じたこと&lt;/span&gt;&lt;textarea rows=&quot;2&quot; data-field=&quot;thought&quot; aria-label=&quot;考えたこと・感じたこと&quot;&gt;急がない時間も、大切にしたい。&lt;/textarea&gt;&lt;/label&gt;
+          &lt;label class=&quot;c-writing-field&quot;&gt;&lt;span&gt;出来事・行動&lt;/span&gt;&lt;textarea rows=&quot;2&quot; data-field=&quot;action&quot; aria-label=&quot;出来事・行動&quot;&gt;帰り道、公園でひと休みした。&lt;/textarea&gt;&lt;/label&gt;
+        &lt;/section&gt;
+        &lt;section class=&quot;c-context&quot;&gt;
+          &lt;div class=&quot;c-section-label&quot;&gt;&lt;h3&gt;どんな場面？&lt;/h3&gt;&lt;span&gt;複数選択可&lt;/span&gt;&lt;/div&gt;
+          &lt;div class=&quot;c-categories&quot; aria-label=&quot;カテゴリ&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-category=&quot;日常&quot; aria-pressed=&quot;true&quot;&gt;日常&lt;/button&gt;&lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-category=&quot;仕事&quot; aria-pressed=&quot;false&quot;&gt;仕事&lt;/button&gt;&lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-category=&quot;家族&quot; aria-pressed=&quot;false&quot;&gt;家族&lt;/button&gt;&lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-category=&quot;友人&quot; aria-pressed=&quot;false&quot;&gt;友人&lt;/button&gt;&lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-category=&quot;その他&quot; aria-pressed=&quot;false&quot;&gt;その他&lt;/button&gt;&lt;/div&gt;
+        &lt;/section&gt;
+        &lt;div class=&quot;c-home-footer&quot;&gt;
+          &lt;label class=&quot;c-notify&quot;&gt;&lt;span&gt;&lt;i data-lucide=&quot;radio&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;感情通知を送る&lt;/span&gt;&lt;input type=&quot;checkbox&quot; data-field=&quot;notify&quot; aria-label=&quot;感情通知を送る&quot;&gt;&lt;span class=&quot;c-switch&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/label&gt;
+          &lt;button type=&quot;button&quot; class=&quot;c-primary cursor-interaction&quot; data-action=&quot;submit&quot;&gt;&lt;span&gt;この内容でOK&lt;/span&gt;&lt;i data-lucide=&quot;arrow-up-right&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+          &lt;p class=&quot;c-input-error&quot; role=&quot;alert&quot; data-input-error hidden&gt;本文とカテゴリを選んでください。&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/main&gt;
+      &lt;nav class=&quot;c-bottom-nav&quot; aria-label=&quot;メインナビゲーション&quot;&gt;
+        &lt;button type=&quot;button&quot; class=&quot;cursor-interaction is-current&quot; data-action=&quot;home&quot; aria-current=&quot;page&quot;&gt;&lt;span&gt;&lt;i data-lucide=&quot;house&quot;&gt;&lt;/i&gt;&lt;/span&gt;ホーム&lt;/button&gt;
+        &lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-action=&quot;nav-analysis&quot;&gt;&lt;span&gt;&lt;i data-lucide=&quot;chart-no-axes-combined&quot;&gt;&lt;/i&gt;&lt;/span&gt;分析&lt;/button&gt;
+        &lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-action=&quot;nav-piece&quot;&gt;&lt;span&gt;&lt;i data-lucide=&quot;layers&quot;&gt;&lt;/i&gt;&lt;/span&gt;ピース&lt;/button&gt;
+        &lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-action=&quot;nav-settings&quot;&gt;&lt;span&gt;&lt;i data-lucide=&quot;settings-2&quot;&gt;&lt;/i&gt;&lt;/span&gt;設定&lt;/button&gt;
+      &lt;/nav&gt;
+    &lt;/div&gt;
+    &lt;div data-app-view=&quot;piece&quot; hidden&gt;
+      &lt;header class=&quot;c-piece-header&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;c-icon-button cursor-interaction&quot; data-action=&quot;back-home&quot; aria-label=&quot;戻る&quot;&gt;&lt;i data-lucide=&quot;arrow-left&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;div&gt;&lt;span class=&quot;c-piece-eyebrow&quot;&gt;PIECE&lt;/span&gt;&lt;h2&gt;ことばを、一枚に。&lt;/h2&gt;&lt;/div&gt;&lt;button type=&quot;button&quot; class=&quot;c-icon-button cursor-interaction&quot; data-action=&quot;back-home&quot; aria-label=&quot;閉じる&quot;&gt;&lt;i data-lucide=&quot;x&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;/header&gt;
+      &lt;main class=&quot;c-piece-main&quot;&gt;
+        &lt;div class=&quot;c-artwork-stage&quot;&gt;
+          &lt;div class=&quot;c-artwork c-palette-paper&quot; data-artwork role=&quot;img&quot; aria-label=&quot;Pieceの作品プレビュー&quot;&gt;
+            &lt;span class=&quot;c-artwork-mark&quot; aria-hidden=&quot;true&quot;&gt;&lt;i data-lucide=&quot;quote&quot;&gt;&lt;/i&gt;&lt;/span&gt;
+            &lt;div class=&quot;c-artwork-text&quot;&gt;&lt;p data-piece-action&gt;帰り道、公園で&lt;br&gt;ひと休みした。&lt;/p&gt;&lt;p data-piece-thought&gt;急がない時間も、&lt;br&gt;大切にしたい。&lt;/p&gt;&lt;/div&gt;
+            &lt;div class=&quot;c-artwork-brand&quot; data-artwork-brand&gt;Emlis&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;c-piece-caption&quot;&gt;&lt;span&gt;エッセイ&lt;/span&gt;&lt;span data-ratio-caption&gt;4:5&lt;/span&gt;&lt;/div&gt;
+        &lt;section class=&quot;c-piece-settings&quot; aria-label=&quot;Pieceの画像設定&quot;&gt;
+          &lt;div class=&quot;c-section-label&quot;&gt;&lt;h3&gt;背景と文字色&lt;/h3&gt;&lt;span data-theme-label&gt;ペーパー&lt;/span&gt;&lt;/div&gt;
+          &lt;div class=&quot;c-palette-options&quot;&gt;
+            &lt;button type=&quot;button&quot; class=&quot;c-palette-button cursor-interaction&quot; data-palette=&quot;paper&quot; aria-label=&quot;ペーパー：生成りの背景と濃い文字&quot; aria-pressed=&quot;true&quot;&gt;&lt;span class=&quot;c-swatch c-swatch-paper&quot;&gt;Aa&lt;/span&gt;&lt;small&gt;ペーパー&lt;/small&gt;&lt;span class=&quot;c-swatch-check&quot;&gt;&lt;i data-lucide=&quot;check&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/button&gt;
+            &lt;button type=&quot;button&quot; class=&quot;c-palette-button cursor-interaction&quot; data-palette=&quot;night&quot; aria-label=&quot;ナイト：濃紺の背景と明るい文字&quot; aria-pressed=&quot;false&quot;&gt;&lt;span class=&quot;c-swatch c-swatch-night&quot;&gt;Aa&lt;/span&gt;&lt;small&gt;ナイト&lt;/small&gt;&lt;span class=&quot;c-swatch-check&quot;&gt;&lt;i data-lucide=&quot;check&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/button&gt;
+            &lt;button type=&quot;button&quot; class=&quot;c-palette-button cursor-interaction&quot; data-palette=&quot;sage&quot; aria-label=&quot;セージ：淡い緑の背景と深緑の文字&quot; aria-pressed=&quot;false&quot;&gt;&lt;span class=&quot;c-swatch c-swatch-sage&quot;&gt;Aa&lt;/span&gt;&lt;small&gt;セージ&lt;/small&gt;&lt;span class=&quot;c-swatch-check&quot;&gt;&lt;i data-lucide=&quot;check&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/button&gt;
+            &lt;button type=&quot;button&quot; class=&quot;c-palette-button cursor-interaction&quot; data-palette=&quot;rose&quot; aria-label=&quot;ローズ：淡い桃色の背景と濃い赤の文字&quot; aria-pressed=&quot;false&quot;&gt;&lt;span class=&quot;c-swatch c-swatch-rose&quot;&gt;Aa&lt;/span&gt;&lt;small&gt;ローズ&lt;/small&gt;&lt;span class=&quot;c-swatch-check&quot;&gt;&lt;i data-lucide=&quot;check&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/button&gt;
+          &lt;/div&gt;
+          &lt;div class=&quot;c-setting-row&quot;&gt;&lt;span&gt;画像の比率&lt;/span&gt;&lt;div class=&quot;c-segments&quot; aria-label=&quot;画像の比率&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-ratio=&quot;4:5&quot; aria-pressed=&quot;true&quot;&gt;4:5&lt;/button&gt;&lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-ratio=&quot;9:16&quot; aria-pressed=&quot;false&quot;&gt;9:16&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
+          &lt;label class=&quot;c-setting-row c-logo-option&quot;&gt;&lt;span&gt;Emlisロゴ&lt;/span&gt;&lt;input type=&quot;checkbox&quot; data-field=&quot;logo&quot; checked aria-label=&quot;Emlisロゴを表示&quot;&gt;&lt;span class=&quot;c-switch&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/label&gt;
+        &lt;/section&gt;
+        &lt;div class=&quot;c-piece-save&quot;&gt;&lt;div class=&quot;c-save-caption&quot;&gt;&lt;i data-lucide=&quot;lock-keyhole&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;自分だけのPieceとして保存&lt;/span&gt;&lt;/div&gt;&lt;button type=&quot;button&quot; class=&quot;c-primary cursor-interaction&quot; data-action=&quot;save-piece&quot;&gt;&lt;span&gt;このPieceを保存&lt;/span&gt;&lt;i data-lucide=&quot;bookmark&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;button type=&quot;button&quot; class=&quot;c-cancel cursor-interaction&quot; data-action=&quot;cancel-piece&quot;&gt;候補を取り消す&lt;/button&gt;&lt;/div&gt;
+      &lt;/main&gt;
+      &lt;div class=&quot;c-home-indicator&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div data-app-view=&quot;analysis&quot; hidden&gt;
+      &lt;header class=&quot;c-brandbar&quot;&gt;&lt;span class=&quot;c-wordmark&quot;&gt;Emlis&lt;span class=&quot;c-brand-dot&quot;&gt;&lt;/span&gt;&lt;/span&gt;&lt;button type=&quot;button&quot; class=&quot;c-icon-button cursor-interaction&quot; data-action=&quot;analysis-history&quot; aria-label=&quot;分析の履歴&quot;&gt;&lt;i data-lucide=&quot;history&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;/header&gt;
+      &lt;main class=&quot;c-analysis-main&quot;&gt;
+        &lt;div class=&quot;c-view-intro&quot;&gt;&lt;span class=&quot;c-date&quot;&gt;あなたの記録から&lt;/span&gt;&lt;h2&gt;わたしを、振り返る。&lt;/h2&gt;&lt;p&gt;気持ちと、日々の選択を少しずつ。&lt;/p&gt;&lt;/div&gt;
+        &lt;div class=&quot;c-analysis-tabs&quot; role=&quot;group&quot; aria-label=&quot;分析の種類&quot;&gt;
+          &lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-analysis-mode=&quot;weather&quot; aria-pressed=&quot;true&quot;&gt;&lt;i data-lucide=&quot;cloud-sun&quot;&gt;&lt;/i&gt;こころ天気&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-analysis-mode=&quot;map&quot; aria-pressed=&quot;false&quot;&gt;&lt;i data-lucide=&quot;waypoints&quot;&gt;&lt;/i&gt;わたしマップ&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div data-analysis-panel=&quot;weather&quot;&gt;
+          &lt;div class=&quot;c-weather-period&quot;&gt;&lt;div class=&quot;c-period-buttons&quot; aria-label=&quot;集計期間&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-period=&quot;day&quot; aria-pressed=&quot;false&quot;&gt;日&lt;/button&gt;&lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-period=&quot;week&quot; aria-pressed=&quot;true&quot;&gt;週&lt;/button&gt;&lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-period=&quot;month&quot; aria-pressed=&quot;false&quot;&gt;月&lt;/button&gt;&lt;/div&gt;&lt;span data-weather-range&gt;10.31 ― 11.6&lt;/span&gt;&lt;/div&gt;
+          &lt;section class=&quot;c-weather-hero&quot;&gt;
+            &lt;div class=&quot;c-weather-title&quot;&gt;&lt;div&gt;&lt;span data-weather-eyebrow&gt;この1週間のこころ&lt;/span&gt;&lt;h3 data-weather-title&gt;平穏の多かった1週間&lt;/h3&gt;&lt;/div&gt;&lt;div class=&quot;c-weather-symbol&quot;&gt;&lt;i data-lucide=&quot;cloud-sun&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;/div&gt;
+            &lt;div class=&quot;c-weather-chart&quot;&gt;
+              &lt;div class=&quot;c-mood-ring&quot; data-mood-ring role=&quot;img&quot; aria-label=&quot;12件の記録の内訳：平穏5件、喜び3件、悲しみ2件、不安1件、怒り1件&quot;&gt;&lt;span aria-hidden=&quot;true&quot;&gt;&lt;strong data-record-count&gt;12&lt;/strong&gt;&lt;small&gt;件の記録&lt;/small&gt;&lt;/span&gt;&lt;/div&gt;
+              &lt;div class=&quot;c-mood-legend&quot; data-mood-legend&gt;
+                &lt;div&gt;&lt;span class=&quot;c-mood-dot c-dot-calm&quot;&gt;&lt;/span&gt;平穏&lt;strong&gt;5&lt;/strong&gt;&lt;/div&gt;
+                &lt;div&gt;&lt;span class=&quot;c-mood-dot c-dot-joy&quot;&gt;&lt;/span&gt;喜び&lt;strong&gt;3&lt;/strong&gt;&lt;/div&gt;
+                &lt;div&gt;&lt;span class=&quot;c-mood-dot c-dot-sad&quot;&gt;&lt;/span&gt;悲しみ&lt;strong&gt;2&lt;/strong&gt;&lt;/div&gt;
+                &lt;div&gt;&lt;span class=&quot;c-mood-dot c-dot-anxiety&quot;&gt;&lt;/span&gt;不安&lt;strong&gt;1&lt;/strong&gt;&lt;/div&gt;
+                &lt;div&gt;&lt;span class=&quot;c-mood-dot c-dot-anger&quot;&gt;&lt;/span&gt;怒り&lt;strong&gt;1&lt;/strong&gt;&lt;/div&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;p class=&quot;c-weather-copy&quot; data-weather-copy&gt;平穏と喜びの記録が多くありました。ほかの気持ちも、一緒に残っています。&lt;/p&gt;
+          &lt;/section&gt;
+          &lt;section class=&quot;c-week-section&quot; data-week-section&gt;
+            &lt;div class=&quot;c-section-label&quot;&gt;&lt;h3&gt;日ごとの記録&lt;/h3&gt;&lt;span&gt;10月31日〜11月6日&lt;/span&gt;&lt;/div&gt;
+            &lt;div class=&quot;c-week-days&quot; aria-label=&quot;記録した日&quot;&gt;
+              &lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-day=&quot;0&quot; aria-pressed=&quot;false&quot;&gt;&lt;small&gt;土&lt;/small&gt;&lt;span class=&quot;c-day-circle c-day-joy&quot;&gt;31&lt;/span&gt;&lt;em&gt;1件&lt;/em&gt;&lt;/button&gt;
+              &lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-day=&quot;1&quot; aria-pressed=&quot;false&quot;&gt;&lt;small&gt;日&lt;/small&gt;&lt;span class=&quot;c-day-circle c-day-calm&quot;&gt;1&lt;/span&gt;&lt;em&gt;2件&lt;/em&gt;&lt;/button&gt;
+              &lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-day=&quot;2&quot; aria-pressed=&quot;false&quot;&gt;&lt;small&gt;月&lt;/small&gt;&lt;span class=&quot;c-day-circle c-day-anxiety&quot;&gt;2&lt;/span&gt;&lt;em&gt;1件&lt;/em&gt;&lt;/button&gt;
+              &lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-day=&quot;3&quot; aria-pressed=&quot;false&quot;&gt;&lt;small&gt;火&lt;/small&gt;&lt;span class=&quot;c-day-circle c-day-sad&quot;&gt;3&lt;/span&gt;&lt;em&gt;3件&lt;/em&gt;&lt;/button&gt;
+              &lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-day=&quot;4&quot; aria-pressed=&quot;false&quot;&gt;&lt;small&gt;水&lt;/small&gt;&lt;span class=&quot;c-day-circle c-day-anger&quot;&gt;4&lt;/span&gt;&lt;em&gt;1件&lt;/em&gt;&lt;/button&gt;
+              &lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-day=&quot;5&quot; aria-pressed=&quot;false&quot;&gt;&lt;small&gt;木&lt;/small&gt;&lt;span class=&quot;c-day-circle c-day-joy&quot;&gt;5&lt;/span&gt;&lt;em&gt;2件&lt;/em&gt;&lt;/button&gt;
+              &lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-day=&quot;6&quot; aria-pressed=&quot;true&quot;&gt;&lt;small&gt;金&lt;/small&gt;&lt;span class=&quot;c-day-circle c-day-calm&quot;&gt;6&lt;/span&gt;&lt;em&gt;2件&lt;/em&gt;&lt;/button&gt;
+            &lt;/div&gt;
+          &lt;/section&gt;
+          &lt;section class=&quot;c-reflection&quot;&gt;
+            &lt;div class=&quot;c-section-label&quot;&gt;&lt;h3&gt;記録を読み返す&lt;/h3&gt;&lt;button type=&quot;button&quot; class=&quot;c-text-button cursor-interaction&quot; data-action=&quot;analysis-history&quot;&gt;履歴を見る&lt;i data-lucide=&quot;arrow-up-right&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;/div&gt;
+            &lt;button type=&quot;button&quot; class=&quot;c-memory-row cursor-interaction&quot; data-action=&quot;weather-record&quot;&gt;&lt;span class=&quot;c-memory-icon&quot;&gt;&lt;i data-lucide=&quot;leaf&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;span&gt;&lt;small data-memory-date&gt;11月6日 · 日常&lt;/small&gt;&lt;strong data-memory-text&gt;急がない時間も、大切にしたい。&lt;/strong&gt;&lt;/span&gt;&lt;i data-lucide=&quot;chevron-right&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+            &lt;div class=&quot;c-record-excerpt&quot; data-weather-record hidden&gt;&lt;span data-record-heading&gt;11月6日の記録&lt;/span&gt;&lt;p data-record-body&gt;帰り道、公園でひと休みした。急がない時間も、大切にしたい。&lt;/p&gt;&lt;/div&gt;
+          &lt;/section&gt;
+          &lt;div class=&quot;c-analysis-updated&quot;&gt;11月6日 更新&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div data-analysis-panel=&quot;map&quot; hidden&gt;
+          &lt;div class=&quot;c-map-heading&quot;&gt;&lt;div&gt;&lt;span class=&quot;c-date&quot;&gt;今のわたしマップ&lt;/span&gt;&lt;h3&gt;仕事で見えた、小さなつながり。&lt;/h3&gt;&lt;/div&gt;&lt;span class=&quot;c-map-symbol&quot;&gt;&lt;i data-lucide=&quot;waypoints&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/div&gt;
+          &lt;div class=&quot;c-map-coverage&quot;&gt;対象2記録 · 反映2記録 · 未解析0記録&lt;/div&gt;
+          &lt;section class=&quot;c-map-route&quot; aria-label=&quot;記録に書かれた順序のマップ&quot;&gt;
+            &lt;div class=&quot;c-route-context&quot;&gt;&lt;i data-lucide=&quot;briefcase-business&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;仕事の場面&lt;/div&gt;
+            &lt;button type=&quot;button&quot; class=&quot;c-route-node cursor-interaction&quot; data-evidence=&quot;role&quot;&gt;&lt;span class=&quot;c-node-icon&quot;&gt;&lt;i data-lucide=&quot;users-round&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;span&gt;&lt;small&gt;役割&lt;/small&gt;&lt;strong&gt;進行役を担当する&lt;/strong&gt;&lt;/span&gt;&lt;span class=&quot;c-node-source&quot;&gt;2記録&lt;i data-lucide=&quot;chevron-right&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/button&gt;
+            &lt;div class=&quot;c-route-connector&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;small&gt;記録にある順序&lt;/small&gt;&lt;/div&gt;
+            &lt;button type=&quot;button&quot; class=&quot;c-route-node cursor-interaction&quot; data-evidence=&quot;listen&quot;&gt;&lt;span class=&quot;c-node-icon&quot;&gt;&lt;i data-lucide=&quot;messages-square&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;span&gt;&lt;small&gt;行動&lt;/small&gt;&lt;strong&gt;まず、全員の話を聞く&lt;/strong&gt;&lt;/span&gt;&lt;span class=&quot;c-node-source&quot;&gt;2記録&lt;i data-lucide=&quot;chevron-right&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/button&gt;
+            &lt;div class=&quot;c-route-connector&quot;&gt;&lt;span&gt;&lt;/span&gt;&lt;small&gt;その後&lt;/small&gt;&lt;/div&gt;
+            &lt;button type=&quot;button&quot; class=&quot;c-route-node cursor-interaction&quot; data-evidence=&quot;decide&quot;&gt;&lt;span class=&quot;c-node-icon&quot;&gt;&lt;i data-lucide=&quot;list-ordered&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;span&gt;&lt;small&gt;行動&lt;/small&gt;&lt;strong&gt;進める順番を決める&lt;/strong&gt;&lt;/span&gt;&lt;span class=&quot;c-node-source&quot;&gt;1記録&lt;i data-lucide=&quot;chevron-right&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;/button&gt;
+          &lt;/section&gt;
+          &lt;div class=&quot;c-record-excerpt&quot; data-evidence-panel hidden&gt;&lt;span&gt;根拠になった記録&lt;/span&gt;&lt;p data-evidence-text&gt;進行役を担当し、まず全員の話を聞いた。その後、進める順番を決めた。&lt;/p&gt;&lt;/div&gt;
+          &lt;div class=&quot;c-map-unknown&quot;&gt;&lt;span&gt;&lt;i data-lucide=&quot;circle-help&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;まだ分からないこと&lt;/span&gt;&lt;p&gt;別の場面でも同じ役割や行動を選ぶかは、まだ分かりません。&lt;/p&gt;&lt;/div&gt;
+          &lt;button type=&quot;button&quot; class=&quot;c-map-history cursor-interaction&quot; data-action=&quot;map-history&quot;&gt;&lt;span class=&quot;c-memory-icon&quot;&gt;&lt;i data-lucide=&quot;calendar-days&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;span&gt;&lt;strong&gt;わたしマップの履歴&lt;/strong&gt;&lt;small&gt;その月のマップと、今を見比べる&lt;/small&gt;&lt;/span&gt;&lt;i data-lucide=&quot;chevron-right&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+          &lt;div class=&quot;c-map-compare&quot; data-map-compare hidden&gt;&lt;div class=&quot;c-compare-title&quot;&gt;10月の保存マップと現在&lt;/div&gt;&lt;div class=&quot;c-compare-grid&quot;&gt;&lt;div&gt;&lt;small&gt;10月に保存&lt;/small&gt;&lt;strong&gt;進行役&lt;/strong&gt;&lt;span&gt;1記録に根拠&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;small&gt;現在&lt;/small&gt;&lt;strong&gt;進行役&lt;/strong&gt;&lt;span&gt;2記録に根拠&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;&lt;p&gt;役割の記録が増えています。選ぶ理由は、まだ分かりません。&lt;/p&gt;&lt;/div&gt;
+          &lt;div class=&quot;c-analysis-updated&quot;&gt;11月6日 更新&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/main&gt;
+      &lt;div data-nav-slot&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div data-app-view=&quot;settings&quot; hidden&gt;
+      &lt;header class=&quot;c-brandbar&quot;&gt;&lt;span class=&quot;c-wordmark&quot;&gt;Emlis&lt;span class=&quot;c-brand-dot&quot;&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;c-avatar&quot; aria-hidden=&quot;true&quot;&gt;M&lt;/span&gt;&lt;/header&gt;
+      &lt;main class=&quot;c-settings-main&quot;&gt;
+        &lt;div class=&quot;c-view-intro&quot;&gt;&lt;span class=&quot;c-date&quot;&gt;YOUR SPACE&lt;/span&gt;&lt;h2&gt;設定&lt;/h2&gt;&lt;p&gt;あなたに合う使い方で。&lt;/p&gt;&lt;/div&gt;
+        &lt;section class=&quot;c-plan-banner&quot;&gt;&lt;div class=&quot;c-plan-art&quot; aria-hidden=&quot;true&quot;&gt;&lt;i data-lucide=&quot;sparkles&quot;&gt;&lt;/i&gt;&lt;/div&gt;&lt;div class=&quot;c-plan-body&quot;&gt;&lt;small&gt;現在のプラン&lt;/small&gt;&lt;div&gt;&lt;strong&gt;Plus&lt;/strong&gt;&lt;span&gt;月額680円&lt;/span&gt;&lt;/div&gt;&lt;p&gt;日々のことばを、あなたらしく。&lt;/p&gt;&lt;/div&gt;&lt;button type=&quot;button&quot; class=&quot;c-plan-link cursor-interaction&quot; data-settings-panel=&quot;plan&quot; aria-label=&quot;プランを選ぶ&quot;&gt;&lt;i data-lucide=&quot;arrow-up-right&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;/section&gt;
+        &lt;section class=&quot;c-settings-section&quot;&gt;
+          &lt;h3&gt;アプリ設定&lt;/h3&gt;
+          &lt;div class=&quot;c-settings-group&quot;&gt;
+            &lt;button type=&quot;button&quot; class=&quot;c-settings-row cursor-interaction&quot; data-settings-panel=&quot;theme&quot; aria-expanded=&quot;false&quot;&gt;&lt;span class=&quot;c-settings-icon&quot;&gt;&lt;i data-lucide=&quot;palette&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;span&gt;カラーテーマ&lt;/span&gt;&lt;small data-current-theme&gt;デフォルト&lt;/small&gt;&lt;i data-lucide=&quot;chevron-right&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+            &lt;div class=&quot;c-settings-expand&quot; data-setting-content=&quot;theme&quot; hidden&gt;&lt;div class=&quot;c-app-themes&quot; aria-label=&quot;アプリのカラーテーマ&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-app-theme=&quot;default&quot; aria-pressed=&quot;true&quot;&gt;&lt;span class=&quot;c-theme-dot c-theme-default&quot;&gt;&lt;/span&gt;デフォルト&lt;/button&gt;&lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-app-theme=&quot;whitegold&quot; aria-pressed=&quot;false&quot;&gt;&lt;span class=&quot;c-theme-dot c-theme-whitegold&quot;&gt;&lt;/span&gt;ホワイト＆ゴールド&lt;/button&gt;&lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-app-theme=&quot;blacknavy&quot; aria-pressed=&quot;false&quot;&gt;&lt;span class=&quot;c-theme-dot c-theme-blacknavy&quot;&gt;&lt;/span&gt;ブラック＆ネイビー&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
+            &lt;button type=&quot;button&quot; class=&quot;c-settings-row cursor-interaction&quot; data-settings-panel=&quot;notifications&quot; aria-expanded=&quot;false&quot;&gt;&lt;span class=&quot;c-settings-icon&quot;&gt;&lt;i data-lucide=&quot;bell&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;span&gt;通知設定&lt;/span&gt;&lt;small data-notification-summary&gt;オン&lt;/small&gt;&lt;i data-lucide=&quot;chevron-right&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+            &lt;div class=&quot;c-settings-expand&quot; data-setting-content=&quot;notifications&quot; hidden&gt;
+              &lt;label class=&quot;c-notification-option&quot;&gt;&lt;span&gt;全ての通知&lt;/span&gt;&lt;input type=&quot;checkbox&quot; data-setting-notification=&quot;all&quot; checked aria-label=&quot;全ての通知&quot;&gt;&lt;span class=&quot;c-switch&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/label&gt;
+              &lt;label class=&quot;c-notification-option&quot;&gt;&lt;span&gt;今日の問い通知&lt;/span&gt;&lt;input type=&quot;checkbox&quot; data-setting-notification=&quot;question&quot; checked aria-label=&quot;今日の問い通知&quot;&gt;&lt;span class=&quot;c-switch&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/label&gt;
+              &lt;label class=&quot;c-notification-option&quot;&gt;&lt;span&gt;レポート配布通知&lt;/span&gt;&lt;input type=&quot;checkbox&quot; data-setting-notification=&quot;report&quot; checked aria-label=&quot;レポート配布通知&quot;&gt;&lt;span class=&quot;c-switch&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/label&gt;
+              &lt;label class=&quot;c-notification-option&quot;&gt;&lt;span&gt;感情通知&lt;/span&gt;&lt;input type=&quot;checkbox&quot; data-setting-notification=&quot;emotion&quot; checked aria-label=&quot;感情通知&quot;&gt;&lt;span class=&quot;c-switch&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;&lt;/label&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/section&gt;
+        &lt;section class=&quot;c-settings-section&quot;&gt;
+          &lt;h3&gt;サブスク加入状況&lt;/h3&gt;
+          &lt;div class=&quot;c-settings-group&quot;&gt;
+            &lt;button type=&quot;button&quot; class=&quot;c-settings-row cursor-interaction&quot; data-settings-panel=&quot;plan&quot; aria-expanded=&quot;false&quot;&gt;&lt;span class=&quot;c-settings-icon&quot;&gt;&lt;i data-lucide=&quot;gem&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;span&gt;プランを選ぶ&lt;/span&gt;&lt;i data-lucide=&quot;chevron-right&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+            &lt;div class=&quot;c-settings-expand&quot; data-setting-content=&quot;plan&quot; hidden&gt;&lt;div class=&quot;c-plan-choices&quot;&gt;&lt;div&gt;&lt;span&gt;Free&lt;/span&gt;&lt;strong&gt;無料&lt;/strong&gt;&lt;/div&gt;&lt;div class=&quot;is-selected&quot;&gt;&lt;span&gt;Plus&lt;small&gt;選択中&lt;/small&gt;&lt;/span&gt;&lt;strong&gt;月680円&lt;/strong&gt;&lt;/div&gt;&lt;div&gt;&lt;span&gt;Premium&lt;/span&gt;&lt;strong&gt;月1,480円&lt;/strong&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
+            &lt;button type=&quot;button&quot; class=&quot;c-settings-row cursor-interaction&quot; data-action=&quot;restore&quot;&gt;&lt;span class=&quot;c-settings-icon&quot;&gt;&lt;i data-lucide=&quot;rotate-ccw&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;span&gt;購入内容を復元&lt;/span&gt;&lt;i data-lucide=&quot;chevron-right&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+            &lt;button type=&quot;button&quot; class=&quot;c-settings-row cursor-interaction&quot; data-action=&quot;manage-subscription&quot;&gt;&lt;span class=&quot;c-settings-icon&quot;&gt;&lt;i data-lucide=&quot;credit-card&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;span&gt;サブスクリプションを管理&lt;/span&gt;&lt;i data-lucide=&quot;arrow-up-right&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/section&gt;
+        &lt;section class=&quot;c-settings-section&quot;&gt;
+          &lt;h3&gt;その他&lt;/h3&gt;
+          &lt;div class=&quot;c-settings-group&quot;&gt;
+            &lt;button type=&quot;button&quot; class=&quot;c-settings-row cursor-interaction&quot; data-action=&quot;tutorial&quot;&gt;&lt;span class=&quot;c-settings-icon&quot;&gt;&lt;i data-lucide=&quot;book-open&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;span&gt;チュートリアルを再体験する&lt;/span&gt;&lt;i data-lucide=&quot;chevron-right&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+            &lt;button type=&quot;button&quot; class=&quot;c-settings-row cursor-interaction&quot; data-action=&quot;logout-preview&quot;&gt;&lt;span class=&quot;c-settings-icon&quot;&gt;&lt;i data-lucide=&quot;log-out&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;span&gt;ログアウト&lt;/span&gt;&lt;i data-lucide=&quot;chevron-right&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+            &lt;button type=&quot;button&quot; class=&quot;c-settings-row c-delete-row cursor-interaction&quot; data-action=&quot;delete-preview&quot;&gt;&lt;span class=&quot;c-settings-icon&quot;&gt;&lt;i data-lucide=&quot;user-round-x&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/span&gt;&lt;span&gt;アカウント削除&lt;/span&gt;&lt;i data-lucide=&quot;chevron-right&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/section&gt;
+        &lt;div class=&quot;c-settings-legal&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-action=&quot;legal&quot;&gt;利用規約&lt;/button&gt;&lt;span&gt;·&lt;/span&gt;&lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-action=&quot;legal&quot;&gt;プライバシーポリシー&lt;/button&gt;&lt;span&gt;·&lt;/span&gt;&lt;button type=&quot;button&quot; class=&quot;cursor-interaction&quot; data-action=&quot;support&quot;&gt;サポート&lt;/button&gt;&lt;/div&gt;
+      &lt;/main&gt;
+      &lt;div data-nav-slot&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;c-modal-layer&quot; data-modal-layer hidden&gt;
+      &lt;div class=&quot;c-modal-shade&quot;&gt;&lt;/div&gt;
+      &lt;section class=&quot;c-dialog&quot; role=&quot;dialog&quot; aria-modal=&quot;true&quot; aria-label=&quot;Emlisからの応答&quot;&gt;
+        &lt;div class=&quot;c-sheet-handle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
+        &lt;div class=&quot;c-reply-icon&quot;&gt;&lt;i data-lucide=&quot;sparkles&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/div&gt;
+        &lt;span class=&quot;c-dialog-eyebrow&quot;&gt;Emlisからの応答&lt;/span&gt;
+        &lt;h3&gt;今日の言葉を、&lt;br&gt;受け取りました。&lt;/h3&gt;
+        &lt;p&gt;公園でひと休みして、急がない時間も大切にしたいと思ったのですね。&lt;/p&gt;
+        &lt;button type=&quot;button&quot; class=&quot;c-primary cursor-interaction&quot; data-action=&quot;create-piece&quot;&gt;&lt;span&gt;ピースの作成&lt;/span&gt;&lt;i data-lucide=&quot;arrow-up-right&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+        &lt;button type=&quot;button&quot; class=&quot;c-cancel cursor-interaction&quot; data-action=&quot;close-modal&quot;&gt;閉じる&lt;/button&gt;
+      &lt;/section&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;c-toast&quot; role=&quot;status&quot; data-toast hidden&gt;&lt;i data-lucide=&quot;check&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;
+  &lt;/template&gt;
+&lt;/div&gt;
+
+&lt;style&gt;
+#cocolon-ui-four{width:100%}
+#cocolon-ui-four [hidden]{display:none!important}
+#cocolon-ui-four .viz-controls{margin-bottom:16px}
+#cocolon-ui-four .c-stage{min-height:var(--c-stage-height,950px);padding:24px 8px 28px;box-sizing:border-box}
+#cocolon-ui-four .c-device{--c-bg:light-dark(#f5f4f1,#19191c);--c-surface:light-dark(#fff,#242427);--c-text:light-dark(#28272b,#f2efed);--c-muted:light-dark(#77737b,#b9b3bc);--c-line:light-dark(#e8e5e3,#3b383f);--c-accent:light-dark(#7c3c50,#edb4c4);--c-on-accent:light-dark(#fff,#422130);--c-soft:light-dark(#f1e5e9,#3a2931);--c-error:light-dark(#a63240,#ffacb7);--c-shadow:light-dark(#24212a18,#00000055);color-scheme:light dark;width:min(390px,100%);margin:0 auto;background:var(--c-bg);color:var(--c-text);font:400 15px/1.5 -apple-system,BlinkMacSystemFont,&quot;Hiragino Kaku Gothic ProN&quot;,&quot;Noto Sans JP&quot;,&quot;Yu Gothic&quot;,sans-serif;border:1px solid var(--c-line);border-radius:32px;box-shadow:0 18px 48px var(--c-shadow);overflow:hidden;position:relative;isolation:isolate}
+#cocolon-ui-four .c-device *{box-sizing:border-box}
+#cocolon-ui-four .c-device button,#cocolon-ui-four .c-device textarea,#cocolon-ui-four .c-device input{font:inherit;color:inherit}
+#cocolon-ui-four .c-device button{border:0;appearance:none;-webkit-tap-highlight-color:transparent;transition:background .18s ease,transform .18s ease,border-radius .18s ease}
+#cocolon-ui-four .c-device button:active{transform:scale(.975)}
+#cocolon-ui-four .c-device button:disabled{opacity:.38}
+#cocolon-ui-four .c-device svg{width:20px;height:20px;stroke-width:1.65;flex-shrink:0}
+#cocolon-ui-four .c-device h2,#cocolon-ui-four .c-device h3,#cocolon-ui-four .c-device p{margin:0}
+#cocolon-ui-four .c-status{height:38px;padding:13px 27px 4px;display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:600;line-height:1}
+#cocolon-ui-four .c-status-icons{display:flex;gap:5px;align-items:center}
+#cocolon-ui-four .c-status-icons svg{width:14px;height:14px;stroke-width:2}
+#cocolon-ui-four .c-brandbar{display:flex;align-items:center;justify-content:space-between;padding:14px 24px 5px}
+#cocolon-ui-four .c-wordmark{font:500 28px/1.1 Georgia,&quot;Times New Roman&quot;,serif;letter-spacing:-1.2px}
+#cocolon-ui-four .c-brand-dot{display:inline-block;width:5px;height:5px;background:var(--c-accent);border-radius:50%;margin-left:3px}
+#cocolon-ui-four .c-header-actions{display:flex;align-items:center;gap:8px}
+#cocolon-ui-four .c-icon-button{width:40px;height:40px;display:grid;place-items:center;background:transparent;border-radius:50%}
+#cocolon-ui-four .c-avatar{width:32px;height:32px;border-radius:50%;background:var(--c-soft);color:var(--c-accent)!important;font-size:12px!important;font-weight:600!important}
+#cocolon-ui-four .c-home-main{padding:15px 24px 19px;display:flex;flex-direction:column;gap:22px}
+#cocolon-ui-four .c-intro{order:0}
+#cocolon-ui-four .c-date{font-size:12px;color:var(--c-muted);letter-spacing:.04em;margin-bottom:9px}
+#cocolon-ui-four .c-intro h2{font-size:25px;line-height:1.45;letter-spacing:-.055em;font-weight:600}
+#cocolon-ui-four .c-intro p{font-size:12px;color:var(--c-muted);margin-top:6px}
+#cocolon-ui-four .c-emotional-break{display:none}
+#cocolon-ui-four .c-question{order:1;display:flex;align-items:center;text-align:left;gap:10px;width:100%;padding:12px 0;background:transparent;border-top:1px solid var(--c-line)!important;border-bottom:1px solid var(--c-line)!important}
+#cocolon-ui-four .c-question&gt;span:nth-child(2){flex:1;min-width:0}
+#cocolon-ui-four .c-question-symbol{width:32px;height:32px;display:grid;place-items:center;color:var(--c-accent)}
+#cocolon-ui-four .c-question small{display:block;font-size:11px;color:var(--c-muted);margin-bottom:2px}
+#cocolon-ui-four .c-question strong{display:block;font-size:12px;font-weight:400}
+#cocolon-ui-four .c-question&gt;svg{width:15px;color:var(--c-muted)}
+#cocolon-ui-four .c-section-label{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:11px}
+#cocolon-ui-four .c-section-label h3{font-size:13px;line-height:1.5;font-weight:500;letter-spacing:.015em}
+#cocolon-ui-four .c-section-label&gt;span{font-size:11px;color:var(--c-muted)}
+#cocolon-ui-four .c-section-label&gt;svg{width:16px;height:16px;color:var(--c-muted)}
+#cocolon-ui-four .c-writing{order:2}
+#cocolon-ui-four .c-writing-field{display:block;background:var(--c-surface);padding:13px 15px}
+#cocolon-ui-four .c-writing-field:first-of-type{border-radius:14px 14px 0 0;border-bottom:1px solid var(--c-line)}
+#cocolon-ui-four .c-writing-field:last-of-type{border-radius:0 0 14px 14px}
+#cocolon-ui-four .c-writing-field&gt;span{font-size:11px;color:var(--c-muted);display:block;margin-bottom:7px}
+#cocolon-ui-four .c-writing-field textarea{display:block;resize:vertical;min-height:48px;width:100%;border:0;background:transparent;padding:0;outline-offset:4px;font-size:15px;line-height:1.8;letter-spacing:.015em}
+#cocolon-ui-four .c-feelings{order:3}
+#cocolon-ui-four .c-emotion-options{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
+#cocolon-ui-four .c-emotion{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0;padding:0 0 3px;background:transparent;font-size:11px!important;color:var(--c-muted)!important}
+#cocolon-ui-four .c-emotion-circle{display:grid;place-items:center;width:43px;height:43px;border-radius:50%;background:var(--c-surface);border:1px solid var(--c-line)}
+#cocolon-ui-four .c-emotion-circle svg{width:20px;height:20px}
+#cocolon-ui-four .c-emotion[aria-pressed=&quot;true&quot;]{color:var(--c-accent)!important;font-weight:600!important}
+#cocolon-ui-four .c-emotion[aria-pressed=&quot;true&quot;] .c-emotion-circle{background:var(--c-soft);border-color:var(--c-accent)}
+#cocolon-ui-four .c-feeling-footer{display:flex;justify-content:space-between;align-items:center;margin-top:12px;gap:8px}
+#cocolon-ui-four .c-self{display:flex;align-items:center;justify-content:center;gap:5px;border-radius:8px;background:transparent;padding:6px 8px;color:var(--c-muted)!important;font-size:11px!important;min-height:32px}
+#cocolon-ui-four .c-self svg{width:15px;height:15px}
+#cocolon-ui-four .c-self[aria-pressed=&quot;true&quot;]{background:var(--c-soft);color:var(--c-accent)!important}
+#cocolon-ui-four .c-intensity{display:flex;align-items:center;border-radius:8px;background:var(--c-surface);padding:3px;gap:2px}
+#cocolon-ui-four .c-intensity button{width:34px;min-height:28px;border-radius:6px;background:transparent;font-size:11px!important;color:var(--c-muted)!important}
+#cocolon-ui-four .c-intensity button[aria-pressed=&quot;true&quot;]{background:var(--c-soft);color:var(--c-accent)!important}
+#cocolon-ui-four .c-context{order:4}
+#cocolon-ui-four .c-categories{display:flex;flex-wrap:wrap;gap:7px}
+#cocolon-ui-four .c-categories button{background:transparent;border:1px solid var(--c-line)!important;border-radius:8px;padding:7px 11px;font-size:11px!important;min-height:32px;color:var(--c-muted)!important}
+#cocolon-ui-four .c-categories button[aria-pressed=&quot;true&quot;]{background:var(--c-soft);border-color:transparent!important;color:var(--c-accent)!important}
+#cocolon-ui-four .c-home-footer{order:5}
+#cocolon-ui-four .c-notify{display:flex;align-items:center;gap:8px;justify-content:space-between;margin-bottom:15px;min-height:32px;color:var(--c-muted);font-size:11px}
+#cocolon-ui-four .c-notify&gt;span:first-child{display:flex;align-items:center;gap:7px}
+#cocolon-ui-four .c-notify svg{width:14px;height:14px}
+#cocolon-ui-four .c-notify input,#cocolon-ui-four .c-logo-option input{appearance:none;width:38px;height:22px;position:absolute;right:0;opacity:0;z-index:2;margin:0}
+#cocolon-ui-four .c-notify,#cocolon-ui-four .c-logo-option{position:relative}
+#cocolon-ui-four .c-switch{width:36px;height:21px;border-radius:20px;background:var(--c-line);padding:3px;display:block;transition:background .2s ease;flex-shrink:0}
+#cocolon-ui-four .c-switch:after{content:&quot;&quot;;display:block;width:15px;height:15px;border-radius:50%;background:var(--c-surface);transition:transform .2s ease}
+#cocolon-ui-four input:checked+.c-switch{background:var(--c-accent)}
+#cocolon-ui-four input:checked+.c-switch:after{transform:translateX(15px)}
+#cocolon-ui-four input:focus-visible+.c-switch{outline:2px solid var(--c-accent);outline-offset:3px}
+#cocolon-ui-four .c-primary{display:flex;align-items:center;justify-content:center;position:relative;gap:12px;width:100%;padding:15px 18px;min-height:50px;background:var(--c-accent);color:var(--c-on-accent)!important;border-radius:13px;font-size:14px!important;font-weight:500!important;box-shadow:0 4px 10px color-mix(in srgb,var(--c-accent) 10%,transparent)}
+#cocolon-ui-four .c-primary svg{width:18px;height:18px;position:absolute;right:18px}
+#cocolon-ui-four .c-input-error{font-size:11px;color:var(--c-error);margin-top:8px!important}
+#cocolon-ui-four .c-bottom-nav{display:flex;align-items:center;justify-content:space-around;background:color-mix(in srgb,var(--c-surface) 94%,transparent);border-top:1px solid var(--c-line);padding:8px 10px 20px}
+#cocolon-ui-four .c-bottom-nav button{width:25%;display:flex;align-items:center;flex-direction:column;gap:4px;background:transparent;color:var(--c-muted);font-size:11px!important;padding:4px;min-height:45px}
+#cocolon-ui-four .c-bottom-nav button&gt;span{display:grid;place-items:center;height:23px;width:43px;border-radius:12px}
+#cocolon-ui-four .c-bottom-nav .is-current{color:var(--c-accent)}
+#cocolon-ui-four .c-bottom-nav .is-current&gt;span{background:var(--c-soft)}
+#cocolon-ui-four .c-piece-header{display:flex;align-items:center;justify-content:space-between;padding:12px 13px 0;gap:5px}
+#cocolon-ui-four .c-piece-header&gt;div{flex:1;text-align:center}
+#cocolon-ui-four .c-piece-eyebrow{font-size:11px;letter-spacing:.22em;color:var(--c-muted)}
+#cocolon-ui-four .c-piece-header h2{font-size:17px;font-weight:500;letter-spacing:-.035em;line-height:1.5}
+#cocolon-ui-four .c-piece-main{padding:22px 24px 8px}
+#cocolon-ui-four .c-artwork-stage{padding:10px 24px 14px}
+#cocolon-ui-four .c-artwork{aspect-ratio:4/5;width:100%;position:relative;padding:29px 24px 25px;display:flex;flex-direction:column;justify-content:space-between;isolation:isolate;box-shadow:0 12px 25px var(--c-shadow);transition:background .3s ease,color .3s ease,aspect-ratio .25s ease;border:1px solid #00000008}
+#cocolon-ui-four .c-palette-paper{background:#f4eedf;color:#3e3832}
+#cocolon-ui-four .c-palette-night{background:#222c43;color:#f3ebde}
+#cocolon-ui-four .c-palette-sage{background:#dfe9de;color:#29463d}
+#cocolon-ui-four .c-palette-rose{background:#f0dfe0;color:#653946}
+#cocolon-ui-four .c-artwork:after{content:&quot;&quot;;position:absolute;inset:0;background:radial-gradient(ellipse at 10% 0%,#ffffff30,transparent 60%);pointer-events:none;z-index:-1}
+#cocolon-ui-four .c-artwork-mark{opacity:.37}
+#cocolon-ui-four .c-artwork-mark svg{width:19px;height:19px;fill:currentColor;stroke-width:0}
+#cocolon-ui-four .c-artwork-text{font-family:&quot;Hiragino Mincho ProN&quot;,&quot;Yu Mincho&quot;,&quot;Noto Serif JP&quot;,serif;font-size:15px;line-height:2.15;letter-spacing:.035em;margin:15px 0;word-break:normal;overflow-wrap:anywhere;white-space:pre-line}
+#cocolon-ui-four .c-artwork-text p+p{margin-top:20px}
+#cocolon-ui-four .c-artwork-brand{font:500 19px/1.1 Georgia,&quot;Times New Roman&quot;,serif;letter-spacing:-.5px;opacity:.72;display:flex;align-items:baseline;justify-content:space-between;gap:6px}
+#cocolon-ui-four .c-artwork-brand span{font:400 6px/1.3 -apple-system,sans-serif;letter-spacing:.05em}
+#cocolon-ui-four .c-piece-caption{display:flex;align-items:center;justify-content:center;gap:9px;color:var(--c-muted);font-size:11px;margin-bottom:21px}
+#cocolon-ui-four .c-piece-caption span+span:before{content:&quot;·&quot;;margin-right:9px}
+#cocolon-ui-four .c-piece-settings{background:var(--c-surface);padding:16px;border-radius:16px}
+#cocolon-ui-four .c-palette-options{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:14px 0 15px}
+#cocolon-ui-four .c-palette-button{background:transparent;padding:0;position:relative;text-align:center;min-width:0}
+#cocolon-ui-four .c-swatch{height:42px;display:grid;place-items:center;border-radius:9px;font:400 18px/1.2 Georgia,serif;border:1px solid #00000008;transition:transform .2s ease}
+#cocolon-ui-four .c-swatch-paper{background:#f4eedf;color:#3e3832}
+#cocolon-ui-four .c-swatch-night{background:#222c43;color:#f3ebde}
+#cocolon-ui-four .c-swatch-sage{background:#dfe9de;color:#29463d}
+#cocolon-ui-four .c-swatch-rose{background:#f0dfe0;color:#653946}
+#cocolon-ui-four .c-palette-button small{font-size:11px;color:var(--c-muted);display:block;margin-top:6px;white-space:nowrap}
+#cocolon-ui-four .c-swatch-check{display:none;position:absolute;top:-5px;right:-3px;width:17px;height:17px;border-radius:50%;background:var(--c-accent);color:var(--c-on-accent);place-items:center}
+#cocolon-ui-four .c-swatch-check svg{width:11px;height:11px;stroke-width:2.5}
+#cocolon-ui-four .c-palette-button[aria-pressed=&quot;true&quot;] .c-swatch{outline:1.5px solid var(--c-accent);outline-offset:3px}
+#cocolon-ui-four .c-palette-button[aria-pressed=&quot;true&quot;] .c-swatch-check{display:grid}
+#cocolon-ui-four .c-setting-row{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:47px;border-top:1px solid var(--c-line);font-size:12px}
+#cocolon-ui-four .c-segments{display:flex;border-radius:8px;background:var(--c-bg);padding:3px;gap:2px}
+#cocolon-ui-four .c-segments button{background:transparent;border-radius:6px;padding:5px 11px;font-size:11px!important;color:var(--c-muted)}
+#cocolon-ui-four .c-segments button[aria-pressed=&quot;true&quot;]{background:var(--c-surface);color:var(--c-accent);box-shadow:0 1px 3px var(--c-shadow)}
+#cocolon-ui-four .c-piece-save{margin-top:18px}
+#cocolon-ui-four .c-save-caption{display:flex;justify-content:center;align-items:center;gap:5px;font-size:11px;color:var(--c-muted);margin-bottom:9px}
+#cocolon-ui-four .c-save-caption svg{width:12px;height:12px}
+#cocolon-ui-four .c-cancel{display:block;margin:7px auto 0;background:transparent;color:var(--c-muted)!important;padding:10px 16px;font-size:11px!important;min-height:36px}
+#cocolon-ui-four .c-home-indicator{height:4px;width:104px;margin:8px auto 10px;background:var(--c-text);opacity:.85;border-radius:5px}
+#cocolon-ui-four .c-modal-layer{position:absolute;inset:0;z-index:10;display:flex;align-items:flex-end}
+#cocolon-ui-four .c-modal-shade{position:absolute;inset:0;background:#10101666;backdrop-filter:blur(5px)}
+#cocolon-ui-four .c-dialog{width:100%;background:var(--c-surface);padding:12px 27px 28px;position:relative;border-radius:26px 26px 0 0;box-shadow:0 -8px 40px #00000012}
+#cocolon-ui-four .c-sheet-handle{height:4px;width:35px;background:var(--c-line);border-radius:10px;margin:0 auto 20px}
+#cocolon-ui-four .c-reply-icon{display:grid;place-items:center;background:var(--c-soft);color:var(--c-accent);width:43px;height:43px;border-radius:15px;margin-bottom:17px}
+#cocolon-ui-four .c-dialog-eyebrow{font-size:11px;color:var(--c-muted)}
+#cocolon-ui-four .c-dialog h3{font-size:22px;line-height:1.6;font-weight:500;letter-spacing:-.04em;margin-top:9px}
+#cocolon-ui-four .c-dialog p{font-size:14px;line-height:1.9;margin:18px 0 24px}
+#cocolon-ui-four .c-toast{position:absolute;z-index:20;top:58px;left:20px;right:20px;background:var(--c-text);color:var(--c-bg);padding:13px 15px;border-radius:13px;box-shadow:0 6px 25px var(--c-shadow);font-size:12px;display:flex;align-items:center;gap:8px}
+#cocolon-ui-four .c-toast svg{width:15px;height:15px}
+
+#cocolon-ui-four .c-emotional{--c-bg:light-dark(#fbf8f3,#22201e);--c-surface:light-dark(#ffffff,#302d29);--c-text:light-dark(#343d39,#f5f1e9);--c-muted:light-dark(#737b72,#bebfb1);--c-line:light-dark(#e5e7dd,#484a40);--c-accent:light-dark(#3e6656,#bed9bd);--c-on-accent:light-dark(#fff,#233e30);--c-soft:light-dark(#e4eedf,#3a4c3b)}
+#cocolon-ui-four .c-emotional .c-brandbar{padding-bottom:0}
+#cocolon-ui-four .c-emotional .c-wordmark{font-family:Georgia,serif;color:var(--c-accent)}
+#cocolon-ui-four .c-emotional .c-home-main{gap:19px;padding-top:14px}
+#cocolon-ui-four .c-emotional .c-intro h2{font-size:26px;line-height:1.5}
+#cocolon-ui-four .c-emotional .c-emotional-break{display:block}
+#cocolon-ui-four .c-emotional .c-intro p{margin-top:7px}
+#cocolon-ui-four .c-emotional .c-feelings{order:1;background:var(--c-soft);border-radius:26px;padding:17px 13px 11px}
+#cocolon-ui-four .c-emotional .c-feelings .c-section-label{padding:0 3px}
+#cocolon-ui-four .c-emotional .c-emotion-circle{height:46px;width:46px;border:0}
+#cocolon-ui-four .c-emotional .c-emotion-circle svg{width:22px;height:22px}
+#cocolon-ui-four .c-emotional .c-joy .c-emotion-circle{background:light-dark(#f9dda0,#65543a);color:light-dark(#805d20,#fae0ac)}
+#cocolon-ui-four .c-emotional .c-sad .c-emotion-circle{background:light-dark(#d1deee,#3e4b60);color:light-dark(#416286,#c6dcfa)}
+#cocolon-ui-four .c-emotional .c-anger .c-emotion-circle{background:light-dark(#f0c3b6,#69443c);color:light-dark(#97482e,#ffc4b0)}
+#cocolon-ui-four .c-emotional .c-anxiety .c-emotion-circle{background:light-dark(#e0cde9,#594365);color:light-dark(#775384,#e8c7f9)}
+#cocolon-ui-four .c-emotional .c-calm .c-emotion-circle{background:light-dark(#bfd5b5,#3e603e);color:light-dark(#365638,#d5f0c7)}
+#cocolon-ui-four .c-emotional .c-emotion[aria-pressed=&quot;true&quot;] .c-emotion-circle{outline:2px solid var(--c-accent);outline-offset:3px;border-radius:38% 45% 35% 47%;transform:rotate(-5deg)}
+#cocolon-ui-four .c-emotional .c-emotion[aria-pressed=&quot;true&quot;] .c-emotion-circle svg{transform:rotate(5deg)}
+#cocolon-ui-four .c-emotional .c-self,#cocolon-ui-four .c-emotional .c-intensity{background:var(--c-surface);border-radius:20px}
+#cocolon-ui-four .c-emotional .c-intensity button{border-radius:20px}
+#cocolon-ui-four .c-emotional .c-question{order:3;background:var(--c-surface);border:0!important;border-radius:18px;padding:12px}
+#cocolon-ui-four .c-emotional .c-writing-field{padding:12px 0;background:transparent}
+#cocolon-ui-four .c-emotional .c-writing-field:first-of-type{border-bottom:1px solid var(--c-line);border-radius:0}
+#cocolon-ui-four .c-emotional .c-writing-field:last-of-type{border-radius:0;padding-bottom:0}
+#cocolon-ui-four .c-emotional .c-categories button{border:0!important;background:var(--c-surface);border-radius:30px}
+#cocolon-ui-four .c-emotional .c-categories button[aria-pressed=&quot;true&quot;]{background:var(--c-soft)}
+#cocolon-ui-four .c-emotional .c-primary{border-radius:30px}
+#cocolon-ui-four .c-emotional .c-bottom-nav{border:0;background:var(--c-surface);padding-top:9px}
+#cocolon-ui-four .c-emotional .c-bottom-nav .is-current&gt;span{background:transparent}
+#cocolon-ui-four .c-emotional .c-bottom-nav .is-current{font-weight:600}
+#cocolon-ui-four .c-emotional .c-piece-header{padding-top:18px}
+#cocolon-ui-four .c-emotional .c-piece-main{padding-top:20px}
+#cocolon-ui-four .c-emotional .c-artwork-stage{background:var(--c-soft);border-radius:43% 43% 28px 28px;padding:22px 32px 24px;margin:0 -4px}
+#cocolon-ui-four .c-emotional .c-artwork{transform:rotate(-2deg)}
+#cocolon-ui-four .c-emotional .c-piece-caption{margin-top:15px}
+#cocolon-ui-four .c-emotional .c-piece-settings{background:transparent;padding:0 2px;border-radius:0}
+#cocolon-ui-four .c-emotional .c-swatch{border-radius:50%;height:49px;width:49px;margin:0 auto}
+#cocolon-ui-four .c-emotional .c-palette-button[aria-pressed=&quot;true&quot;] .c-swatch{outline-offset:4px}
+#cocolon-ui-four .c-emotional .c-segments,#cocolon-ui-four .c-emotional .c-segments button{border-radius:22px}
+#cocolon-ui-four .c-emotional .c-segments{background:var(--c-surface)}
+#cocolon-ui-four .c-emotional .c-segments button[aria-pressed=&quot;true&quot;]{background:var(--c-soft)}
+
+#cocolon-ui-four .c-expressive{--c-bg:light-dark(#f7f1f8,#201922);--c-surface:light-dark(#fffaff,#302535);--c-text:light-dark(#312436,#f6eaf8);--c-muted:light-dark(#7a6b7d,#c9b6cc);--c-line:light-dark(#e5d7e7,#4d3d51);--c-accent:light-dark(#694775,#dfb3eb);--c-on-accent:light-dark(#fff,#3e2447);--c-soft:light-dark(#eaddf0,#49354f)}
+#cocolon-ui-four .c-expressive .c-wordmark{font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:25px;letter-spacing:-1.3px;font-weight:700}
+#cocolon-ui-four .c-expressive .c-brandbar{padding:12px 20px 4px}
+#cocolon-ui-four .c-expressive .c-header-actions{background:var(--c-soft);padding:1px 4px;border-radius:26px;gap:1px}
+#cocolon-ui-four .c-expressive .c-avatar{background:var(--c-surface)}
+#cocolon-ui-four .c-expressive .c-home-main{padding:15px 20px 19px;gap:17px}
+#cocolon-ui-four .c-expressive .c-intro h2{font-size:27px;line-height:1.45;font-weight:650}
+#cocolon-ui-four .c-expressive .c-date{margin-bottom:7px}
+#cocolon-ui-four .c-expressive .c-question{border:0!important;padding:13px 14px;background:light-dark(#f7e2af,#5a4729);border-radius:18px;gap:8px}
+#cocolon-ui-four .c-expressive .c-question-symbol{color:light-dark(#735726,#f4dcab);background:light-dark(#ffedc9,#6c5631);border-radius:12px}
+#cocolon-ui-four .c-expressive .c-question small{color:light-dark(#776039,#e5cd9d)}
+#cocolon-ui-four .c-expressive .c-question strong{font-weight:500;color:light-dark(#594426,#f7e3bf)}
+#cocolon-ui-four .c-expressive .c-writing{background:var(--c-surface);border-radius:24px;padding:16px}
+#cocolon-ui-four .c-expressive .c-writing .c-section-label{margin-bottom:1px}
+#cocolon-ui-four .c-expressive .c-writing-field{background:transparent;padding:11px 0}
+#cocolon-ui-four .c-expressive .c-writing-field:first-of-type{border-radius:0}
+#cocolon-ui-four .c-expressive .c-writing-field:last-of-type{border-radius:0;padding-bottom:0}
+#cocolon-ui-four .c-expressive .c-feelings{background:var(--c-soft);padding:15px 13px 12px;border-radius:24px}
+#cocolon-ui-four .c-expressive .c-emotion-circle{background:var(--c-surface);border:0;border-radius:15px;width:44px;height:40px}
+#cocolon-ui-four .c-expressive .c-emotion[aria-pressed=&quot;true&quot;] .c-emotion-circle{background:var(--c-accent);color:var(--c-on-accent);border-radius:24px}
+#cocolon-ui-four .c-expressive .c-self{background:var(--c-surface);border-radius:18px}
+#cocolon-ui-four .c-expressive .c-intensity{background:color-mix(in srgb,var(--c-accent) 10%,var(--c-surface));border-radius:20px}
+#cocolon-ui-four .c-expressive .c-intensity button{border-radius:20px}
+#cocolon-ui-four .c-expressive .c-intensity button[aria-pressed=&quot;true&quot;]{background:var(--c-accent);color:var(--c-on-accent)!important}
+#cocolon-ui-four .c-expressive .c-categories{gap:5px}
+#cocolon-ui-four .c-expressive .c-categories button{background:var(--c-surface);border:0!important;border-radius:9px;padding:8px 13px}
+#cocolon-ui-four .c-expressive .c-categories button[aria-pressed=&quot;true&quot;]{background:var(--c-accent);color:var(--c-on-accent)!important;border-radius:20px}
+#cocolon-ui-four .c-expressive .c-primary{min-height:54px;border-radius:27px 27px 12px 27px;box-shadow:none;font-size:15px!important}
+#cocolon-ui-four .c-expressive .c-bottom-nav{border:0;background:var(--c-soft);padding:7px 6px 19px}
+#cocolon-ui-four .c-expressive .c-bottom-nav .is-current&gt;span{background:var(--c-accent);color:var(--c-on-accent);width:54px;height:26px;border-radius:17px}
+#cocolon-ui-four .c-expressive .c-piece-header{padding:12px 11px 0}
+#cocolon-ui-four .c-expressive .c-piece-header .c-icon-button{background:var(--c-soft)}
+#cocolon-ui-four .c-expressive .c-piece-header h2{font-weight:650;font-size:18px}
+#cocolon-ui-four .c-expressive .c-piece-main{padding:18px 20px 8px}
+#cocolon-ui-four .c-expressive .c-artwork-stage{padding:17px 39px 20px;background:var(--c-soft);border-radius:28px}
+#cocolon-ui-four .c-expressive .c-piece-caption{margin-top:11px;margin-bottom:15px}
+#cocolon-ui-four .c-expressive .c-piece-settings{border-radius:24px;padding:16px}
+#cocolon-ui-four .c-expressive .c-swatch{border-radius:17px 17px 7px 17px}
+#cocolon-ui-four .c-expressive .c-segments{background:var(--c-soft);border-radius:20px}
+#cocolon-ui-four .c-expressive .c-segments button{border-radius:17px;padding:6px 13px}
+#cocolon-ui-four .c-expressive .c-segments button[aria-pressed=&quot;true&quot;]{background:var(--c-accent);color:var(--c-on-accent);box-shadow:none}
+#cocolon-ui-four .c-expressive .c-reply-icon{border-radius:50% 50% 14px 50%}
+
+#cocolon-ui-four .c-device{--c-mood-calm:light-dark(#8ca88b,#97b797);--c-mood-joy:light-dark(#dfb35d,#e6c279);--c-mood-sad:light-dark(#8baacb,#9db9da);--c-mood-anxiety:light-dark(#b59abf,#c1a8cd);--c-mood-anger:light-dark(#cc8b78,#e2a08a)}
+#cocolon-ui-four .c-analysis-main,#cocolon-ui-four .c-settings-main{padding:19px 24px 25px}
+#cocolon-ui-four .c-view-intro .c-date{display:block}
+#cocolon-ui-four .c-view-intro h2{font-size:25px;line-height:1.45;letter-spacing:-.045em;font-weight:600;margin:6px 0 5px}
+#cocolon-ui-four .c-view-intro p{font-size:12px;color:var(--c-muted)}
+#cocolon-ui-four .c-analysis-tabs{display:flex;gap:3px;padding:4px;background:var(--c-line);border-radius:12px;margin:23px 0 20px}
+#cocolon-ui-four .c-analysis-tabs button{display:flex;justify-content:center;align-items:center;gap:6px;min-height:39px;flex:1;font-size:12px;background:transparent;border-radius:9px;color:var(--c-muted)}
+#cocolon-ui-four .c-analysis-tabs button svg{width:17px;height:17px}
+#cocolon-ui-four .c-analysis-tabs button[aria-pressed=&quot;true&quot;]{background:var(--c-surface);color:var(--c-accent);box-shadow:0 1px 4px var(--c-shadow);font-weight:500}
+#cocolon-ui-four .c-weather-period{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:15px}
+#cocolon-ui-four .c-weather-period&gt;span{font-size:11px;color:var(--c-muted);letter-spacing:.03em}
+#cocolon-ui-four .c-period-buttons{display:flex;gap:4px}
+#cocolon-ui-four .c-period-buttons button{min-width:36px;min-height:34px;border-radius:8px;background:transparent;font-size:12px;color:var(--c-muted)}
+#cocolon-ui-four .c-period-buttons button[aria-pressed=&quot;true&quot;]{background:var(--c-soft);color:var(--c-accent);font-weight:500}
+#cocolon-ui-four .c-weather-hero{--c-hero-bg:var(--c-surface);background:var(--c-hero-bg);border-radius:18px;padding:21px 19px}
+#cocolon-ui-four .c-weather-title{display:flex;align-items:center;justify-content:space-between;gap:8px}
+#cocolon-ui-four .c-weather-title&gt;div:first-child{min-width:0}
+#cocolon-ui-four .c-weather-title span{font-size:11px;color:var(--c-muted)}
+#cocolon-ui-four .c-weather-title h3{font-size:17px;font-weight:500;line-height:1.55;letter-spacing:-.035em;margin-top:6px}
+#cocolon-ui-four .c-weather-symbol{display:grid;place-items:center;min-width:36px;color:var(--c-accent)}
+#cocolon-ui-four .c-weather-symbol svg{width:30px;height:30px;stroke-width:1.4}
+#cocolon-ui-four .c-weather-chart{display:flex;align-items:center;gap:23px;padding:22px 0 19px}
+#cocolon-ui-four .c-mood-ring{position:relative;width:136px;aspect-ratio:1;border-radius:50%;background:conic-gradient(var(--c-mood-calm) 0% 41.6667%,var(--c-mood-joy) 41.6667% 66.6667%,var(--c-mood-sad) 66.6667% 83.3333%,var(--c-mood-anxiety) 83.3333% 91.6667%,var(--c-mood-anger) 91.6667% 100%);flex-shrink:0}
+#cocolon-ui-four .c-mood-ring:before{content:&quot;&quot;;position:absolute;inset:15px;border-radius:50%;background:var(--c-hero-bg)}
+#cocolon-ui-four .c-mood-ring&gt;span{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+#cocolon-ui-four .c-mood-ring strong{font-size:32px;line-height:1.1;font-weight:500;letter-spacing:-.06em;font-variant-numeric:tabular-nums}
+#cocolon-ui-four .c-mood-ring small{font-size:11px;color:var(--c-muted);margin-top:5px}
+#cocolon-ui-four .c-mood-legend{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px}
+#cocolon-ui-four .c-mood-legend&gt;div{display:flex;align-items:center;gap:7px;font-size:11px}
+#cocolon-ui-four .c-mood-legend strong{margin-left:auto;font-weight:500;font-variant-numeric:tabular-nums}
+#cocolon-ui-four .c-mood-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+#cocolon-ui-four .c-dot-calm{background:var(--c-mood-calm)}
+#cocolon-ui-four .c-dot-joy{background:var(--c-mood-joy)}
+#cocolon-ui-four .c-dot-sad{background:var(--c-mood-sad)}
+#cocolon-ui-four .c-dot-anxiety{background:var(--c-mood-anxiety)}
+#cocolon-ui-four .c-dot-anger{background:var(--c-mood-anger)}
+#cocolon-ui-four .c-weather-copy{font-size:12px;line-height:1.9;color:var(--c-muted);padding-top:13px;border-top:1px solid var(--c-line)}
+#cocolon-ui-four .c-week-section{margin-top:25px}
+#cocolon-ui-four .c-week-days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px}
+#cocolon-ui-four .c-week-days button{display:flex;flex-direction:column;align-items:center;gap:8px;background:transparent;padding:4px 0;color:var(--c-muted);min-width:0}
+#cocolon-ui-four .c-week-days small,#cocolon-ui-four .c-week-days em{font-size:11px;font-style:normal}
+#cocolon-ui-four .c-day-circle{width:31px;height:31px;display:grid;place-items:center;border-radius:50%;font-size:11px;color:var(--c-text)}
+#cocolon-ui-four .c-day-calm{background:color-mix(in srgb,var(--c-mood-calm) 25%,var(--c-bg))}
+#cocolon-ui-four .c-day-joy{background:color-mix(in srgb,var(--c-mood-joy) 25%,var(--c-bg))}
+#cocolon-ui-four .c-day-sad{background:color-mix(in srgb,var(--c-mood-sad) 25%,var(--c-bg))}
+#cocolon-ui-four .c-day-anxiety{background:color-mix(in srgb,var(--c-mood-anxiety) 25%,var(--c-bg))}
+#cocolon-ui-four .c-day-anger{background:color-mix(in srgb,var(--c-mood-anger) 25%,var(--c-bg))}
+#cocolon-ui-four .c-week-days button[aria-pressed=&quot;true&quot;] .c-day-circle{outline:1.5px solid var(--c-accent);outline-offset:2px}
+#cocolon-ui-four .c-reflection{margin-top:26px}
+#cocolon-ui-four .c-text-button{display:flex;align-items:center;gap:3px;background:transparent;color:var(--c-accent)!important;padding:0;font-size:11px!important;min-height:30px}
+#cocolon-ui-four .c-text-button svg{height:13px;width:13px}
+#cocolon-ui-four .c-memory-row,#cocolon-ui-four .c-map-history{width:100%;display:flex;align-items:center;gap:11px;background:var(--c-surface);border-radius:14px;padding:15px;text-align:left}
+#cocolon-ui-four .c-memory-icon{display:grid;place-items:center;width:33px;height:37px;flex-shrink:0;color:var(--c-accent)}
+#cocolon-ui-four .c-memory-row&gt;span:nth-child(2),#cocolon-ui-four .c-map-history&gt;span:nth-child(2){flex:1;min-width:0}
+#cocolon-ui-four .c-memory-row small{display:block;font-size:11px;color:var(--c-muted);margin-bottom:4px}
+#cocolon-ui-four .c-memory-row strong{display:block;font-size:12px;font-weight:400;line-height:1.7}
+#cocolon-ui-four .c-memory-row&gt;svg,#cocolon-ui-four .c-map-history&gt;svg{width:14px;height:14px;color:var(--c-muted)}
+#cocolon-ui-four .c-record-excerpt{margin-top:12px;background:var(--c-soft);border-radius:12px;padding:14px 15px}
+#cocolon-ui-four .c-record-excerpt&gt;span{font-size:11px;color:var(--c-accent)}
+#cocolon-ui-four .c-record-excerpt p{font-size:12px;line-height:1.9;margin-top:7px}
+#cocolon-ui-four .c-analysis-updated{text-align:center;font-size:11px;color:var(--c-muted);margin:20px 0 0}
+#cocolon-ui-four .c-map-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:24px}
+#cocolon-ui-four .c-map-heading h3{font-size:19px;line-height:1.7;letter-spacing:-.04em;font-weight:500;margin-top:6px}
+#cocolon-ui-four .c-map-symbol{display:grid;place-items:center;min-width:38px;height:48px;color:var(--c-accent)}
+#cocolon-ui-four .c-map-symbol svg{width:31px;height:31px}
+#cocolon-ui-four .c-map-coverage{font-size:11px;color:var(--c-muted);margin:12px 0 22px}
+#cocolon-ui-four .c-route-context{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--c-muted);margin-bottom:14px}
+#cocolon-ui-four .c-route-context svg{width:14px;height:14px}
+#cocolon-ui-four .c-route-node{width:100%;display:flex;align-items:center;gap:10px;text-align:left;background:var(--c-surface);border-radius:14px;padding:16px 12px;min-height:76px}
+#cocolon-ui-four .c-node-icon{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:var(--c-soft);color:var(--c-accent);flex-shrink:0}
+#cocolon-ui-four .c-node-icon svg{width:17px;height:17px}
+#cocolon-ui-four .c-route-node&gt;span:nth-child(2){flex:1;min-width:0}
+#cocolon-ui-four .c-route-node small{display:block;font-size:11px;color:var(--c-muted);margin-bottom:3px}
+#cocolon-ui-four .c-route-node strong{display:block;font-size:13px;font-weight:500}
+#cocolon-ui-four .c-node-source{display:flex;align-items:center;gap:2px;font-size:11px;color:var(--c-muted);flex-shrink:0}
+#cocolon-ui-four .c-node-source svg{width:11px;height:11px}
+#cocolon-ui-four .c-route-connector{display:flex;align-items:center;gap:11px;min-height:35px;margin-left:29px;color:var(--c-muted)}
+#cocolon-ui-four .c-route-connector span{display:block;height:35px;width:1px;background:var(--c-line);position:relative}
+#cocolon-ui-four .c-route-connector span:after{content:&quot;&quot;;position:absolute;bottom:2px;left:-2px;width:5px;height:5px;border-bottom:1px solid var(--c-line);border-right:1px solid var(--c-line);transform:rotate(45deg)}
+#cocolon-ui-four .c-route-connector small{font-size:11px}
+#cocolon-ui-four .c-map-unknown{padding:18px 0;margin-top:18px}
+#cocolon-ui-four .c-map-unknown&gt;span{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--c-muted)}
+#cocolon-ui-four .c-map-unknown svg{width:15px;height:15px}
+#cocolon-ui-four .c-map-unknown p{font-size:12px;line-height:1.9;margin-top:7px}
+#cocolon-ui-four .c-map-history{margin-top:12px}
+#cocolon-ui-four .c-map-history strong{font-size:12px;font-weight:500;display:block}
+#cocolon-ui-four .c-map-history small{font-size:11px;color:var(--c-muted);display:block;margin-top:4px}
+#cocolon-ui-four .c-map-compare{background:var(--c-surface);padding:16px;border-radius:14px;margin-top:10px}
+#cocolon-ui-four .c-compare-title{font-size:12px;font-weight:500;margin-bottom:12px}
+#cocolon-ui-four .c-compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+#cocolon-ui-four .c-compare-grid&gt;div{background:var(--c-bg);padding:12px;border-radius:10px;display:flex;flex-direction:column;gap:7px}
+#cocolon-ui-four .c-compare-grid small,#cocolon-ui-four .c-compare-grid span{font-size:11px;color:var(--c-muted)}
+#cocolon-ui-four .c-compare-grid strong{font-size:15px;font-weight:500}
+#cocolon-ui-four .c-map-compare p{font-size:11px;line-height:1.9;color:var(--c-muted);margin-top:12px}
+#cocolon-ui-four .c-plan-banner{display:flex;gap:13px;align-items:center;position:relative;background:var(--c-soft);border-radius:17px;padding:18px 15px;margin:23px 0 28px}
+#cocolon-ui-four .c-plan-art{width:37px;height:43px;color:var(--c-accent);display:grid;place-items:center;flex-shrink:0}
+#cocolon-ui-four .c-plan-art svg{height:28px;width:28px;stroke-width:1.3}
+#cocolon-ui-four .c-plan-body{flex:1;min-width:0}
+#cocolon-ui-four .c-plan-body&gt;small{font-size:11px;color:var(--c-muted)}
+#cocolon-ui-four .c-plan-body&gt;div{display:flex;align-items:baseline;gap:10px;margin-top:2px;flex-wrap:wrap}
+#cocolon-ui-four .c-plan-body strong{font-size:27px;line-height:1.4;font-weight:500;letter-spacing:-.04em}
+#cocolon-ui-four .c-plan-body&gt;div span{font-size:11px;color:var(--c-accent)}
+#cocolon-ui-four .c-plan-body p{font-size:11px;color:var(--c-muted);margin-top:4px;line-height:1.7}
+#cocolon-ui-four .c-plan-link{width:31px;height:35px;background:transparent;color:var(--c-accent)!important;border-radius:50%;display:grid;place-items:center;flex-shrink:0}
+#cocolon-ui-four .c-plan-link svg{width:18px;height:18px}
+#cocolon-ui-four .c-settings-section{margin-top:22px}
+#cocolon-ui-four .c-settings-section&gt;h3{font-size:11px;font-weight:400;color:var(--c-muted);margin:0 0 9px 4px;letter-spacing:.03em}
+#cocolon-ui-four .c-settings-group{background:var(--c-surface);border-radius:15px;padding:0 14px}
+#cocolon-ui-four .c-settings-row{display:flex;align-items:center;gap:10px;width:100%;background:transparent;min-height:53px;text-align:left}
+#cocolon-ui-four .c-settings-row+.c-settings-row{border-top:1px solid var(--c-line)}
+#cocolon-ui-four .c-settings-row&gt;span:nth-child(2){font-size:12px;flex:1;min-width:0}
+#cocolon-ui-four .c-settings-icon{width:24px;height:29px;flex-shrink:0;display:grid;place-items:center;color:var(--c-muted)}
+#cocolon-ui-four .c-settings-icon svg{height:18px;width:18px}
+#cocolon-ui-four .c-settings-row&gt;small{font-size:11px;color:var(--c-muted);max-width:92px;text-align:right}
+#cocolon-ui-four .c-settings-row&gt;svg{width:13px;height:13px;flex-shrink:0;color:var(--c-muted)}
+#cocolon-ui-four .c-delete-row&gt;span:nth-child(2){color:var(--c-error)}
+#cocolon-ui-four .c-settings-expand{border-bottom:1px solid var(--c-line);padding:3px 0 13px}
+#cocolon-ui-four .c-app-themes{display:flex;flex-direction:column;gap:6px}
+#cocolon-ui-four .c-app-themes button{display:flex;align-items:center;gap:9px;text-align:left;background:var(--c-bg);border-radius:10px;padding:10px 12px;font-size:11px}
+#cocolon-ui-four .c-app-themes button[aria-pressed=&quot;true&quot;]{background:var(--c-soft);color:var(--c-accent)}
+#cocolon-ui-four .c-app-themes button[aria-pressed=&quot;true&quot;]:after{content:&quot;✓&quot;;margin-left:auto}
+#cocolon-ui-four .c-theme-dot{width:18px;height:18px;border-radius:50%;flex-shrink:0}
+#cocolon-ui-four .c-theme-default{background:linear-gradient(120deg,#b695a4 50%,#ede4d6 50%)}
+#cocolon-ui-four .c-theme-whitegold{background:linear-gradient(120deg,#f2ecdd 50%,#c1a668 50%)}
+#cocolon-ui-four .c-theme-blacknavy{background:linear-gradient(120deg,#172334 50%,#8698b5 50%)}
+#cocolon-ui-four .c-notification-option{position:relative;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:44px;font-size:11px}
+#cocolon-ui-four .c-notification-option input{position:absolute;right:0;width:44px;height:40px;opacity:0;z-index:2;margin:0}
+#cocolon-ui-four .c-notification-option:has(input:disabled){opacity:.38}
+#cocolon-ui-four .c-plan-choices{display:flex;flex-direction:column;gap:5px}
+#cocolon-ui-four .c-plan-choices&gt;div{display:flex;align-items:center;justify-content:space-between;padding:11px 12px;background:var(--c-bg);border-radius:10px;gap:10px;font-size:12px}
+#cocolon-ui-four .c-plan-choices strong{font-weight:500}
+#cocolon-ui-four .c-plan-choices .is-selected{background:var(--c-soft);color:var(--c-accent)}
+#cocolon-ui-four .c-plan-choices small{font-size:11px;margin-left:7px}
+#cocolon-ui-four .c-settings-legal{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;margin:23px -6px 3px;color:var(--c-muted)}
+#cocolon-ui-four .c-settings-legal button{background:transparent;padding:4px 0;font-size:11px;color:var(--c-muted)}
+#cocolon-ui-four .c-settings-legal&gt;span{font-size:11px;opacity:.5}
+#cocolon-ui-four .c-emotional .c-view-intro h2{font-size:26px;line-height:1.5}
+#cocolon-ui-four .c-emotional .c-analysis-tabs{background:var(--c-soft);border-radius:25px}
+#cocolon-ui-four .c-emotional .c-analysis-tabs button{border-radius:22px}
+#cocolon-ui-four .c-emotional .c-analysis-tabs button[aria-pressed=&quot;true&quot;]{background:var(--c-accent);color:var(--c-on-accent);box-shadow:none}
+#cocolon-ui-four .c-emotional .c-period-buttons button{border-radius:50%}
+#cocolon-ui-four .c-emotional .c-weather-hero{--c-hero-bg:var(--c-soft);border-radius:29px;padding:24px 20px}
+#cocolon-ui-four .c-emotional .c-weather-title h3{font-size:19px}
+#cocolon-ui-four .c-emotional .c-weather-symbol{width:44px;height:44px;border-radius:45% 42% 37% 48%;background:var(--c-surface)}
+#cocolon-ui-four .c-emotional .c-weather-chart{flex-direction:column;padding:23px 0 18px;gap:22px}
+#cocolon-ui-four .c-emotional .c-mood-ring{width:160px}
+#cocolon-ui-four .c-emotional .c-mood-ring:before{inset:19px}
+#cocolon-ui-four .c-emotional .c-mood-ring strong{font-size:39px}
+#cocolon-ui-four .c-emotional .c-mood-legend{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));width:100%;gap:9px}
+#cocolon-ui-four .c-emotional .c-mood-legend&gt;div{flex-direction:column;gap:5px}
+#cocolon-ui-four .c-emotional .c-mood-legend strong{margin:0;font-size:14px}
+#cocolon-ui-four .c-emotional .c-day-circle{border-radius:40% 48% 42% 45%;width:34px;height:36px}
+#cocolon-ui-four .c-emotional .c-memory-row,#cocolon-ui-four .c-emotional .c-map-history{border-radius:23px}
+#cocolon-ui-four .c-emotional .c-route-context{background:var(--c-soft);border-radius:20px;width:max-content;padding:7px 12px}
+#cocolon-ui-four .c-emotional .c-route-node{background:var(--c-soft);border-radius:22px;padding:18px 12px}
+#cocolon-ui-four .c-emotional .c-node-icon{background:var(--c-surface);border-radius:50%}
+#cocolon-ui-four .c-emotional .c-map-unknown{padding:15px 16px;background:var(--c-surface);border-radius:20px}
+#cocolon-ui-four .c-emotional .c-plan-banner{padding:22px 16px;background:var(--c-soft);border-radius:28px 28px 43px 28px}
+#cocolon-ui-four .c-emotional .c-plan-art{width:45px;height:52px;border-radius:47% 45% 39% 50%;background:var(--c-surface)}
+#cocolon-ui-four .c-emotional .c-plan-body strong{font-family:Georgia,serif;font-size:32px}
+#cocolon-ui-four .c-emotional .c-settings-group{border-radius:23px;padding:2px 15px}
+#cocolon-ui-four .c-emotional .c-settings-icon{background:var(--c-soft);border-radius:50%;height:30px;width:30px;color:var(--c-accent)}
+#cocolon-ui-four .c-emotional .c-settings-icon svg{width:15px;height:15px}
+#cocolon-ui-four .c-emotional .c-app-themes button{border-radius:20px}
+#cocolon-ui-four .c-expressive .c-analysis-main,#cocolon-ui-four .c-expressive .c-settings-main{padding-left:20px;padding-right:20px}
+#cocolon-ui-four .c-expressive .c-view-intro h2{font-size:27px;font-weight:650}
+#cocolon-ui-four .c-expressive .c-analysis-tabs{padding:0;background:transparent;gap:8px;margin-top:23px}
+#cocolon-ui-four .c-expressive .c-analysis-tabs button{border-radius:24px;background:var(--c-soft);min-height:44px}
+#cocolon-ui-four .c-expressive .c-analysis-tabs button[aria-pressed=&quot;true&quot;]{background:var(--c-accent);color:var(--c-on-accent);box-shadow:none}
+#cocolon-ui-four .c-expressive .c-period-buttons{background:var(--c-surface);padding:3px;border-radius:22px}
+#cocolon-ui-four .c-expressive .c-period-buttons button{border-radius:20px}
+#cocolon-ui-four .c-expressive .c-period-buttons button[aria-pressed=&quot;true&quot;]{background:var(--c-accent);color:var(--c-on-accent)}
+#cocolon-ui-four .c-expressive .c-weather-hero{border-radius:27px;padding:20px 16px}
+#cocolon-ui-four .c-expressive .c-weather-title h3{font-weight:650;font-size:19px}
+#cocolon-ui-four .c-expressive .c-weather-symbol{background:light-dark(#f3d995,#5b482c);color:light-dark(#715326,#f4d997);border-radius:50% 50% 10px 50%;width:42px;height:42px}
+#cocolon-ui-four .c-expressive .c-weather-chart{background:var(--c-soft);border-radius:23px;padding:17px 13px;margin:17px 0;gap:17px}
+#cocolon-ui-four .c-expressive .c-mood-ring{--c-hero-bg:var(--c-soft);width:122px}
+#cocolon-ui-four .c-expressive .c-weather-copy{border:0;padding-top:0}
+#cocolon-ui-four .c-expressive .c-day-circle{border-radius:12px}
+#cocolon-ui-four .c-expressive .c-week-days button[aria-pressed=&quot;true&quot;] .c-day-circle{outline:0;background:var(--c-accent);color:var(--c-on-accent);border-radius:18px}
+#cocolon-ui-four .c-expressive .c-memory-row,#cocolon-ui-four .c-expressive .c-map-history{border-radius:20px;background:var(--c-soft)}
+#cocolon-ui-four .c-expressive .c-route-context{background:var(--c-accent);color:var(--c-on-accent);border-radius:8px 18px 18px 18px;padding:7px 12px;width:max-content}
+#cocolon-ui-four .c-expressive .c-route-node{border-radius:23px 23px 9px 23px;padding:18px 12px;background:var(--c-soft)}
+#cocolon-ui-four .c-expressive .c-node-icon{background:var(--c-accent);color:var(--c-on-accent);border-radius:50% 50% 8px 50%}
+#cocolon-ui-four .c-expressive .c-map-unknown{background:var(--c-surface);padding:16px;border-radius:20px}
+#cocolon-ui-four .c-expressive .c-plan-banner{background:var(--c-accent);color:var(--c-on-accent);border-radius:28px 28px 11px 28px;padding:21px 17px}
+#cocolon-ui-four .c-expressive .c-plan-art{background:color-mix(in srgb,var(--c-on-accent) 15%,transparent);color:var(--c-on-accent);border-radius:50% 50% 10px 50%;height:48px;width:43px}
+#cocolon-ui-four .c-expressive .c-plan-body&gt;small,#cocolon-ui-four .c-expressive .c-plan-body p,#cocolon-ui-four .c-expressive .c-plan-body&gt;div span,#cocolon-ui-four .c-expressive .c-plan-link{color:var(--c-on-accent)!important}
+#cocolon-ui-four .c-expressive .c-plan-body&gt;small,#cocolon-ui-four .c-expressive .c-plan-body p{opacity:.8}
+#cocolon-ui-four .c-expressive .c-plan-body strong{font-size:34px;font-weight:650}
+#cocolon-ui-four .c-expressive .c-settings-group{background:transparent;padding:0;display:flex;flex-direction:column;gap:3px}
+#cocolon-ui-four .c-expressive .c-settings-row{background:var(--c-surface);border-radius:10px;min-height:56px;padding:0 12px;border:0!important}
+#cocolon-ui-four .c-expressive .c-settings-row:first-child{border-radius:21px 21px 10px 10px}
+#cocolon-ui-four .c-expressive .c-settings-row:last-child{border-radius:10px 10px 21px 21px}
+#cocolon-ui-four .c-expressive .c-settings-icon{background:var(--c-soft);border-radius:11px;color:var(--c-accent);height:31px;width:31px}
+#cocolon-ui-four .c-expressive .c-settings-icon svg{height:16px;width:16px}
+#cocolon-ui-four .c-expressive .c-settings-expand{border:0;padding:9px 12px;background:var(--c-surface);border-radius:12px}
+#cocolon-ui-four .c-expressive .c-app-themes button{border-radius:20px}
+#cocolon-ui-four .c-device[data-preference-theme=&quot;whitegold&quot;]{color-scheme:light;--c-bg:#f8f6ef;--c-surface:#fffefb;--c-text:#3c3628;--c-muted:#7f7660;--c-line:#e9e2d1;--c-accent:#816623;--c-on-accent:#fff;--c-soft:#eee6d0;--c-shadow:#41372313}
+#cocolon-ui-four .c-device[data-preference-theme=&quot;blacknavy&quot;]{color-scheme:dark;--c-bg:#17202e;--c-surface:#202d3e;--c-text:#f0f2f6;--c-muted:#a7b4c8;--c-line:#35465d;--c-accent:#c1d1ec;--c-on-accent:#243750;--c-soft:#2d3e54;--c-shadow:#00000044}
+@media(max-width:350px){
+  #cocolon-ui-four .c-analysis-main,#cocolon-ui-four .c-settings-main{padding-left:16px;padding-right:16px}
+  #cocolon-ui-four .c-weather-hero{padding-left:15px;padding-right:15px}
+  #cocolon-ui-four .c-weather-chart{gap:17px}
+  #cocolon-ui-four .c-mood-ring{width:120px}
+  #cocolon-ui-four .c-weather-title h3{font-size:16px}
+  #cocolon-ui-four .c-emotional .c-mood-legend{gap:5px}
+  #cocolon-ui-four .c-emotional .c-weather-hero{padding-left:15px;padding-right:15px}
+  #cocolon-ui-four .c-expressive .c-analysis-main,#cocolon-ui-four .c-expressive .c-settings-main{padding-left:15px;padding-right:15px}
+  #cocolon-ui-four .c-expressive .c-weather-chart{gap:12px;padding-left:10px;padding-right:10px}
+  #cocolon-ui-four .c-expressive .c-mood-ring{width:108px}
+  #cocolon-ui-four .c-mood-legend&gt;div{gap:5px}
+  #cocolon-ui-four .c-route-node{gap:7px;padding-left:10px;padding-right:10px}
+  #cocolon-ui-four .c-route-node strong{font-size:12px}
+  #cocolon-ui-four .c-node-source{font-size:11px}
+}
+@media(max-width:420px){
+  #cocolon-ui-four .c-stage{padding:16px 0 24px}
+  #cocolon-ui-four .c-device{border-radius:26px}
+  #cocolon-ui-four .c-home-main{padding-left:19px;padding-right:19px}
+  #cocolon-ui-four .c-brandbar{padding-left:19px;padding-right:19px}
+  #cocolon-ui-four .c-piece-main{padding-left:18px;padding-right:18px}
+}
+@media(max-width:350px){
+  #cocolon-ui-four .c-home-main{padding-left:15px;padding-right:15px}
+  #cocolon-ui-four .c-brandbar{padding-left:15px;padding-right:15px}
+  #cocolon-ui-four .c-emotion-circle{width:39px;height:39px}
+  #cocolon-ui-four .c-emotional .c-emotion-circle{width:39px;height:39px}
+  #cocolon-ui-four .c-expressive .c-emotion-circle{width:38px}
+  #cocolon-ui-four .c-categories{gap:5px}
+  #cocolon-ui-four .c-categories button{padding-left:10px;padding-right:10px}
+  #cocolon-ui-four .c-artwork-stage{padding-left:17px;padding-right:17px}
+  #cocolon-ui-four .c-expressive .c-artwork-stage{padding-left:28px;padding-right:28px}
+  #cocolon-ui-four .c-artwork{padding-left:20px;padding-right:20px}
+}
+@media(pointer:coarse){
+  #cocolon-ui-four .c-icon-button{width:44px;height:44px}
+  #cocolon-ui-four .c-emotion{min-height:63px}
+  #cocolon-ui-four .c-categories button{min-height:40px}
+  #cocolon-ui-four .c-intensity button{min-height:38px;width:37px}
+  #cocolon-ui-four .c-self{min-height:40px}
+  #cocolon-ui-four .c-segments button{min-height:38px}
+  #cocolon-ui-four .c-notify,#cocolon-ui-four .c-logo-option{min-height:44px}
+  #cocolon-ui-four .c-notify input,#cocolon-ui-four .c-logo-option input{height:44px;width:44px}
+  #cocolon-ui-four .c-writing-field textarea{font-size:16px}
+}
+@media(prefers-reduced-motion:reduce){
+  #cocolon-ui-four .c-device *,#cocolon-ui-four .c-device *:after{transition:none!important;animation:none!important}
+}
+&lt;/style&gt;
+
+&lt;script&gt;
+(() =&gt; {
+  const root = document.getElementById(&#x27;cocolon-ui-four&#x27;);
+  const template = document.getElementById(&#x27;cocolon-four-phone-template&#x27;);
+  const phones = Array.from(root.querySelectorAll(&#x27;.c-device&#x27;));
+  const state = {view:&#x27;analysis&#x27;,emotion:&#x27;平穏&#x27;,intensity:&#x27;中&#x27;,categories:new Set([&#x27;日常&#x27;]),thought:&#x27;急がない時間も、大切にしたい。&#x27;,action:&#x27;帰り道、公園でひと休みした。&#x27;,notify:false,palette:&#x27;paper&#x27;,ratio:&#x27;4:5&#x27;,logo:true,analysisMode:&#x27;weather&#x27;,period:&#x27;week&#x27;,day:6,weatherRecord:false,mapEvidence:null,mapCompare:false,settingsPanel:null,appTheme:&#x27;default&#x27;,notifications:{all:true,question:true,report:true,emotion:true}};
+  const paletteNames = {paper:&#x27;ペーパー&#x27;,night:&#x27;ナイト&#x27;,sage:&#x27;セージ&#x27;,rose:&#x27;ローズ&#x27;};
+  const themeNames={default:&#x27;デフォルト&#x27;,whitegold:&#x27;ホワイト＆ゴールド&#x27;,blacknavy:&#x27;ブラック＆ネイビー&#x27;};
+  const weatherData={
+    day:{range:&#x27;11.5&#x27;,eyebrow:&#x27;昨日のこころ&#x27;,title:&#x27;喜びを残した1日&#x27;,counts:[0,2,0,0,0],copy:&#x27;昨日は、喜びの記録が2件ありました。どんな場面だったか、読み返せます。&#x27;},
+    week:{range:&#x27;10.31 ― 11.6&#x27;,eyebrow:&#x27;この1週間のこころ&#x27;,title:&#x27;平穏の多かった1週間&#x27;,counts:[5,3,2,1,1],copy:&#x27;平穏と喜びの記録が多くありました。ほかの気持ちも、一緒に残っています。&#x27;},
+    month:{range:&#x27;10.10 ― 11.6&#x27;,eyebrow:&#x27;この28日間のこころ&#x27;,title:&#x27;いくつもの気持ちを、少しずつ&#x27;,counts:[16,12,7,5,3],copy:&#x27;28日間に、43件の気持ちを残しました。平穏16件、喜び12件のほか、さまざまな記録があります。&#x27;}
+  };
+  const moodData=[{name:&#x27;平穏&#x27;,key:&#x27;calm&#x27;},{name:&#x27;喜び&#x27;,key:&#x27;joy&#x27;},{name:&#x27;悲しみ&#x27;,key:&#x27;sad&#x27;},{name:&#x27;不安&#x27;,key:&#x27;anxiety&#x27;},{name:&#x27;怒り&#x27;,key:&#x27;anger&#x27;}];
+  const dayData=[
+    {date:&#x27;10月31日&#x27;,label:&#x27;10月31日 · 日常&#x27;,text:&#x27;好きな音楽を聴きながら、帰った。&#x27;,body:&#x27;帰り道に好きな音楽を聴いた。新しい曲を見つけて嬉しかった。&#x27;},
+    {date:&#x27;11月1日&#x27;,label:&#x27;11月1日 · 日常&#x27;,text:&#x27;予定を入れずに、ゆっくり過ごした。&#x27;,body:&#x27;予定を入れずに、家でゆっくり過ごした。穏やかな一日だった。&#x27;},
+    {date:&#x27;11月2日&#x27;,label:&#x27;11月2日 · 仕事&#x27;,text:&#x27;明日の発表が、少し気になっている。&#x27;,body:&#x27;明日の発表が少し気になって、不安を感じた。資料をもう一度読み直した。&#x27;},
+    {date:&#x27;11月3日&#x27;,label:&#x27;11月3日 · 日常&#x27;,text:&#x27;楽しみにしていた予定が、延期になった。&#x27;,body:&#x27;楽しみにしていた予定が延期になって、悲しかった。&#x27;},
+    {date:&#x27;11月4日&#x27;,label:&#x27;11月4日 · 仕事&#x27;,text:&#x27;急な変更に、いらいらした。&#x27;,body:&#x27;準備した後に急な変更があって、いらいらした。&#x27;},
+    {date:&#x27;11月5日&#x27;,label:&#x27;11月5日 · 日常&#x27;,text:&#x27;帰り道の空が、きれいだった。&#x27;,body:&#x27;帰り道の空がきれいで、写真を撮った。嬉しい気持ちを残しておきたい。&#x27;},
+    {date:&#x27;11月6日&#x27;,label:&#x27;11月6日 · 日常&#x27;,text:&#x27;急がない時間も、大切にしたい。&#x27;,body:&#x27;帰り道、公園でひと休みした。急がない時間も、大切にしたい。&#x27;}
+  ];
+  const evidenceTexts={
+    role:&#x27;10月29日：「今日は進行役を担当した。まず、全員の話を聞いた。」 11月3日：「進行役を担当し、まず全員の話を聞いた。その後、進める順番を決めた。」&#x27;,
+    listen:&#x27;10月29日と11月3日の2記録に、「まず、全員の話を聞いた」と書かれています。&#x27;,
+    decide:&#x27;11月3日：「進行役を担当し、まず全員の話を聞いた。その後、進める順番を決めた。」&#x27;
+  };
+  const toastTimers = new WeakMap();
+  let sizing = false;
+  phones.forEach((phone,index) =&gt; {
+    phone.appendChild(template.content.cloneNode(true));
+    const nav=phone.querySelector(&#x27;.c-bottom-nav&#x27;);
+    phone.querySelectorAll(&#x27;[data-nav-slot]&#x27;).forEach(slot=&gt;slot.replaceWith(nav.cloneNode(true)));
+    phone.querySelectorAll(&#x27;textarea&#x27;).forEach((field,n) =&gt; {field.id=&#x27;cocolon-four-&#x27;+index+&#x27;-&#x27;+n;});
+  });
+  function iconRefresh(){if(globalThis.lucide)globalThis.lucide.createIcons({attrs:{width:20,height:20}});}
+  function announce(message){root.querySelector(&#x27;[data-announcement]&#x27;).textContent=message;}
+  function equalize(){
+    if(sizing)return;
+    sizing=true;
+    const width=root.clientWidth;
+    let max=0;
+    phones.forEach(phone=&gt;{
+      const section=phone.closest(&#x27;[data-variant]&#x27;);
+      const wasHidden=section.hidden;
+      const old=section.getAttribute(&#x27;style&#x27;);
+      section.hidden=false;
+      section.style.cssText=&#x27;position:absolute;visibility:hidden;left:-10000px;top:0;width:&#x27;+width+&#x27;px;min-height:0;pointer-events:none&#x27;;
+      max=Math.max(max,section.scrollHeight);
+      if(old===null)section.removeAttribute(&#x27;style&#x27;);else section.setAttribute(&#x27;style&#x27;,old);
+      section.hidden=wasHidden;
+    });
+    root.style.setProperty(&#x27;--c-stage-height&#x27;,Math.ceil(max)+&#x27;px&#x27;);
+    sizing=false;
+  }
+  function sync(){
+    root.querySelectorAll(&#x27;[data-preview-view]&#x27;).forEach(b=&gt;{
+      const selected=b.dataset.previewView===state.view;
+      b.setAttribute(&#x27;aria-pressed&#x27;,String(selected));b.classList.toggle(&#x27;btn-primary&#x27;,selected);
+    });
+    phones.forEach(phone=&gt;{
+      phone.querySelectorAll(&#x27;[data-app-view]&#x27;).forEach(v=&gt;v.hidden=v.dataset.appView!==state.view);
+      phone.querySelectorAll(&#x27;[data-emotion]&#x27;).forEach(b=&gt;b.setAttribute(&#x27;aria-pressed&#x27;,String(b.dataset.emotion===state.emotion)));
+      phone.querySelector(&#x27;[data-feeling-name]&#x27;).textContent=state.emotion;
+      phone.querySelector(&#x27;.c-intensity&#x27;).hidden=state.emotion===&#x27;自己理解&#x27;;
+      phone.querySelectorAll(&#x27;[data-intensity]&#x27;).forEach(b=&gt;b.setAttribute(&#x27;aria-pressed&#x27;,String(b.dataset.intensity===state.intensity)));
+      phone.querySelectorAll(&#x27;[data-category]&#x27;).forEach(b=&gt;b.setAttribute(&#x27;aria-pressed&#x27;,String(state.categories.has(b.dataset.category))));
+      phone.querySelectorAll(&#x27;[data-palette]&#x27;).forEach(b=&gt;b.setAttribute(&#x27;aria-pressed&#x27;,String(b.dataset.palette===state.palette)));
+      phone.querySelectorAll(&#x27;[data-ratio]&#x27;).forEach(b=&gt;b.setAttribute(&#x27;aria-pressed&#x27;,String(b.dataset.ratio===state.ratio)));
+      phone.querySelectorAll(&#x27;[data-field]&#x27;).forEach(f=&gt;{
+        const key=f.dataset.field;
+        if(f.type===&#x27;checkbox&#x27;)f.checked=state[key];else if(f.value!==state[key])f.value=state[key];
+      });
+      phone.querySelector(&#x27;[data-theme-label]&#x27;).textContent=paletteNames[state.palette];
+      phone.querySelector(&#x27;[data-ratio-caption]&#x27;).textContent=state.ratio;
+      const art=phone.querySelector(&#x27;[data-artwork]&#x27;);
+      art.className=&#x27;c-artwork c-palette-&#x27;+state.palette;
+      art.style.aspectRatio=state.ratio===&#x27;4:5&#x27;?&#x27;4 / 5&#x27;:&#x27;9 / 16&#x27;;
+      phone.querySelector(&#x27;[data-artwork-brand]&#x27;).style.visibility=state.logo?&#x27;visible&#x27;:&#x27;hidden&#x27;;
+      phone.querySelector(&#x27;[data-piece-action]&#x27;).textContent=state.action;
+      phone.querySelector(&#x27;[data-piece-thought]&#x27;).textContent=state.thought;
+      phone.dataset.preferenceTheme=state.appTheme;
+      phone.querySelectorAll(&#x27;.c-bottom-nav button&#x27;).forEach(b=&gt;{
+        const viewForAction={home:&#x27;home&#x27;,&#x27;nav-analysis&#x27;:&#x27;analysis&#x27;,&#x27;nav-piece&#x27;:&#x27;piece&#x27;,&#x27;nav-settings&#x27;:&#x27;settings&#x27;};
+        const current=viewForAction[b.dataset.action]===state.view;
+        b.classList.toggle(&#x27;is-current&#x27;,current);
+        if(current)b.setAttribute(&#x27;aria-current&#x27;,&#x27;page&#x27;);else b.removeAttribute(&#x27;aria-current&#x27;);
+      });
+      phone.querySelectorAll(&#x27;[data-analysis-mode]&#x27;).forEach(b=&gt;b.setAttribute(&#x27;aria-pressed&#x27;,String(b.dataset.analysisMode===state.analysisMode)));
+      phone.querySelectorAll(&#x27;[data-analysis-panel]&#x27;).forEach(p=&gt;p.hidden=p.dataset.analysisPanel!==state.analysisMode);
+      phone.querySelectorAll(&#x27;[data-period]&#x27;).forEach(b=&gt;b.setAttribute(&#x27;aria-pressed&#x27;,String(b.dataset.period===state.period)));
+      const weather=weatherData[state.period];
+      const total=weather.counts.reduce((a,b)=&gt;a+b,0);
+      phone.querySelector(&#x27;[data-weather-range]&#x27;).textContent=weather.range;
+      phone.querySelector(&#x27;[data-weather-eyebrow]&#x27;).textContent=weather.eyebrow;
+      phone.querySelector(&#x27;[data-weather-title]&#x27;).textContent=weather.title;
+      phone.querySelector(&#x27;[data-weather-copy]&#x27;).textContent=weather.copy;
+      phone.querySelector(&#x27;[data-record-count]&#x27;).textContent=String(total);
+      const legend=phone.querySelector(&#x27;[data-mood-legend]&#x27;);
+      legend.replaceChildren();
+      let cumulative=0;
+      const stops=[];
+      moodData.forEach((m,index)=&gt;{
+        const row=document.createElement(&#x27;div&#x27;);
+        const dot=document.createElement(&#x27;span&#x27;);dot.className=&#x27;c-mood-dot c-dot-&#x27;+m.key;
+        const count=document.createElement(&#x27;strong&#x27;);count.textContent=String(weather.counts[index]);
+        row.append(dot,document.createTextNode(m.name),count);legend.append(row);
+        const start=cumulative; cumulative+=weather.counts[index]/total*100;
+        stops.push(&#x27;var(--c-mood-&#x27;+m.key+&#x27;) &#x27;+start+&#x27;% &#x27;+cumulative+&#x27;%&#x27;);
+      });
+      const ring=phone.querySelector(&#x27;[data-mood-ring]&#x27;);
+      ring.style.background=&#x27;conic-gradient(&#x27;+stops.join(&#x27;,&#x27;)+&#x27;)&#x27;;
+      ring.setAttribute(&#x27;aria-label&#x27;,String(total)+&#x27;件の記録：&#x27;+moodData.map((m,i)=&gt;m.name+weather.counts[i]+&#x27;件&#x27;).join(&#x27;、&#x27;));
+      phone.querySelector(&#x27;[data-week-section]&#x27;).hidden=state.period!==&#x27;week&#x27;;
+      phone.querySelectorAll(&#x27;[data-day]&#x27;).forEach(b=&gt;b.setAttribute(&#x27;aria-pressed&#x27;,String(Number(b.dataset.day)===state.day)));
+      const record=dayData[state.period===&#x27;day&#x27;?5:state.day];
+      phone.querySelector(&#x27;[data-memory-date]&#x27;).textContent=record.label;
+      phone.querySelector(&#x27;[data-memory-text]&#x27;).textContent=record.text;
+      phone.querySelector(&#x27;[data-record-heading]&#x27;).textContent=record.date+&#x27;の記録&#x27;;
+      phone.querySelector(&#x27;[data-record-body]&#x27;).textContent=record.body;
+      phone.querySelector(&#x27;[data-weather-record]&#x27;).hidden=!state.weatherRecord;
+      phone.querySelector(&#x27;[data-evidence-panel]&#x27;).hidden=!state.mapEvidence;
+      phone.querySelector(&#x27;[data-evidence-text]&#x27;).textContent=evidenceTexts[state.mapEvidence]||&#x27;&#x27;;
+      phone.querySelectorAll(&#x27;[data-evidence]&#x27;).forEach(b=&gt;b.setAttribute(&#x27;aria-expanded&#x27;,String(state.mapEvidence===b.dataset.evidence)));
+      phone.querySelector(&#x27;[data-map-compare]&#x27;).hidden=!state.mapCompare;
+      phone.querySelectorAll(&#x27;[data-settings-panel]&#x27;).forEach(b=&gt;b.setAttribute(&#x27;aria-expanded&#x27;,String(state.settingsPanel===b.dataset.settingsPanel)));
+      phone.querySelectorAll(&#x27;[data-setting-content]&#x27;).forEach(p=&gt;p.hidden=p.dataset.settingContent!==state.settingsPanel);
+      phone.querySelectorAll(&#x27;[data-app-theme]&#x27;).forEach(b=&gt;b.setAttribute(&#x27;aria-pressed&#x27;,String(state.appTheme===b.dataset.appTheme)));
+      phone.querySelector(&#x27;[data-current-theme]&#x27;).textContent=themeNames[state.appTheme];
+      phone.querySelector(&#x27;[data-notification-summary]&#x27;).textContent=state.notifications.all?&#x27;オン&#x27;:&#x27;オフ&#x27;;
+      phone.querySelectorAll(&#x27;[data-setting-notification]&#x27;).forEach(input=&gt;{
+        input.checked=state.notifications[input.dataset.settingNotification];
+        input.disabled=input.dataset.settingNotification!==&#x27;all&#x27;&amp;&amp;!state.notifications.all;
+      });
+    });
+    requestAnimationFrame(equalize);
+  }
+  function setView(view){
+    state.view=view;
+    phones.forEach(p=&gt;{p.querySelector(&#x27;[data-modal-layer]&#x27;).hidden=true;p.querySelector(&#x27;[data-toast]&#x27;).hidden=true;p.querySelectorAll(&#x27;[data-app-view]&#x27;).forEach(v=&gt;v.inert=false);});
+    const viewNames={home:&#x27;ホーム&#x27;,piece:&#x27;Pieceのプレビュー&#x27;,analysis:&#x27;分析&#x27;,settings:&#x27;設定&#x27;};
+    sync();announce(viewNames[view]+&#x27;を表示&#x27;);
+  }
+  function toast(phone,message){
+    clearTimeout(toastTimers.get(phone));
+    const node=phone.querySelector(&#x27;[data-toast]&#x27;);
+    node.querySelector(&#x27;span&#x27;).textContent=message;node.hidden=false;
+    toastTimers.set(phone,setTimeout(()=&gt;node.hidden=true,2600));
+  }
+  root.addEventListener(&#x27;input&#x27;,event=&gt;{
+    const notification=event.target.closest(&#x27;[data-setting-notification]&#x27;);
+    if(notification){state.notifications[notification.dataset.settingNotification]=notification.checked;sync();return;}
+    const field=event.target.closest(&#x27;[data-field]&#x27;);
+    if(!field)return;
+    const key=field.dataset.field;
+    state[key]=field.type===&#x27;checkbox&#x27;?field.checked:field.value;
+    sync();
+  });
+  root.addEventListener(&#x27;click&#x27;,event=&gt;{
+    const button=event.target.closest(&#x27;button&#x27;);
+    if(!button)return;
+    if(button.dataset.previewView){setView(button.dataset.previewView);return;}
+    const phone=button.closest(&#x27;.c-device&#x27;);if(!phone)return;
+    if(button.dataset.emotion){state.emotion=button.dataset.emotion;sync();return;}
+    if(button.dataset.intensity){state.intensity=button.dataset.intensity;sync();return;}
+    if(button.dataset.category){
+      const c=button.dataset.category;
+      if(state.categories.has(c))state.categories.delete(c);else state.categories.add(c);
+      sync();return;
+    }
+    if(button.dataset.palette){state.palette=button.dataset.palette;sync();announce(paletteNames[state.palette]+&#x27;を選択&#x27;);return;}
+    if(button.dataset.ratio){state.ratio=button.dataset.ratio;sync();return;}
+    if(button.dataset.analysisMode){state.analysisMode=button.dataset.analysisMode;sync();return;}
+    if(button.dataset.period){state.period=button.dataset.period;state.weatherRecord=false;sync();return;}
+    if(button.dataset.day!==undefined){state.day=Number(button.dataset.day);state.weatherRecord=true;sync();return;}
+    if(button.dataset.evidence){state.mapEvidence=state.mapEvidence===button.dataset.evidence?null:button.dataset.evidence;sync();return;}
+    if(button.dataset.settingsPanel){state.settingsPanel=state.settingsPanel===button.dataset.settingsPanel?null:button.dataset.settingsPanel;sync();return;}
+    if(button.dataset.appTheme){state.appTheme=button.dataset.appTheme;sync();announce(themeNames[state.appTheme]+&#x27;を選択&#x27;);return;}
+    const action=button.dataset.action;
+    if(action===&#x27;home&#x27;||action===&#x27;back-home&#x27;){setView(&#x27;home&#x27;);return;}
+    if(action===&#x27;nav-analysis&#x27;){setView(&#x27;analysis&#x27;);return;}
+    if(action===&#x27;nav-settings&#x27;){setView(&#x27;settings&#x27;);return;}
+    if(action===&#x27;nav-piece&#x27;){setView(&#x27;piece&#x27;);return;}
+    if(action===&#x27;weather-record&#x27;){state.weatherRecord=!state.weatherRecord;sync();return;}
+    if(action===&#x27;map-history&#x27;){state.mapCompare=!state.mapCompare;sync();return;}
+    if(action===&#x27;analysis-history&#x27;){
+      if(state.analysisMode===&#x27;map&#x27;)state.mapCompare=!state.mapCompare;else state.weatherRecord=!state.weatherRecord;
+      sync();return;
+    }
+    if(action===&#x27;account&#x27;){setView(&#x27;settings&#x27;);return;}
+    if(action===&#x27;submit&#x27;){
+      const valid=(state.thought.trim()||state.action.trim())&amp;&amp;state.categories.size;
+      phone.querySelector(&#x27;[data-input-error]&#x27;).hidden=!!valid;
+      if(!valid)return;
+      const layer=phone.querySelector(&#x27;[data-modal-layer]&#x27;);
+      layer.hidden=false;
+      phone.querySelector(&#x27;[data-app-view=&quot;home&quot;]&#x27;).inert=true;
+      const para=layer.querySelector(&#x27;p&#x27;);
+      para.textContent=&#x27;「&#x27;+(state.thought.trim()||state.action.trim())+&#x27;」と書いてくれたのですね。&#x27;;
+      layer.querySelector(&#x27;[data-action=&quot;create-piece&quot;]&#x27;).focus({preventScroll:true});
+      return;
+    }
+    if(action===&#x27;close-modal&#x27;){phone.querySelector(&#x27;[data-modal-layer]&#x27;).hidden=true;phone.querySelector(&#x27;[data-app-view=&quot;home&quot;]&#x27;).inert=false;phone.querySelector(&#x27;[data-action=&quot;submit&quot;]&#x27;).focus({preventScroll:true});return;}
+    if(action===&#x27;create-piece&#x27;){setView(&#x27;piece&#x27;);return;}
+    if(action===&#x27;save-piece&#x27;){toast(phone,&#x27;Pieceを保存しました&#x27;);return;}
+    if(action===&#x27;cancel-piece&#x27;){setView(&#x27;home&#x27;);toast(phone,&#x27;候補を取り消しました&#x27;);return;}
+    const messages={history:&#x27;入力履歴は、今回の4画面には含めていません&#x27;,question:&#x27;今日の問いは、表示の見本です&#x27;,restore:&#x27;購入内容の復元は、試作では実行しません&#x27;,&#x27;manage-subscription&#x27;:&#x27;ストアの契約管理は、試作では開きません&#x27;,tutorial:&#x27;チュートリアルは、今回の試作には含めていません&#x27;,&#x27;logout-preview&#x27;:&#x27;ログアウトは、試作では実行しません&#x27;,&#x27;delete-preview&#x27;:&#x27;アカウント削除は、試作では実行しません&#x27;,legal:&#x27;規約ページは、今回の試作には含めていません&#x27;,support:&#x27;サポートページは、今回の試作には含めていません&#x27;};
+    if(messages[action])toast(phone,messages[action]);
+  });
+  root.addEventListener(&#x27;keydown&#x27;,event=&gt;{
+    if(event.key===&#x27;Escape&#x27;){
+      const activePhone=event.target.closest(&#x27;.c-device&#x27;);
+      phones.forEach(phone=&gt;{phone.querySelector(&#x27;[data-modal-layer]&#x27;).hidden=true;phone.querySelectorAll(&#x27;[data-app-view]&#x27;).forEach(v=&gt;v.inert=false);});
+      if(activePhone)activePhone.querySelector(&#x27;[data-action=&quot;submit&quot;]&#x27;).focus({preventScroll:true});
+    }
+  });
+  sync();iconRefresh();
+  if(globalThis.ResizeObserver)new ResizeObserver(()=&gt;requestAnimationFrame(equalize)).observe(root);
+})();
+&lt;/script&gt;
+
+&lt;script src=&quot;https://unpkg.com/@floating-ui/core@1.7.3/dist/floating-ui.core.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;https://unpkg.com/@floating-ui/dom@1.7.4/dist/floating-ui.dom.umd.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  if (window.FloatingUIDOM == null) {
+    return;
+  }
+  const { autoUpdate, computePosition, flip, offset, shift, size } =
+    window.FloatingUIDOM;
+  const tooltipPlacements = new Set([&quot;top&quot;, &quot;right&quot;, &quot;bottom&quot;, &quot;left&quot;]);
+  const tooltipId = `codex-visualization-tooltip-${
+    window.crypto?.randomUUID?.() ?? Date.now().toString(36)
+  }`;
+  const tooltipGap = 5;
+  const hoverDelay = 700;
+  const skipDelay = 300;
+  let activeTrigger = null;
+  let pendingTrigger = null;
+  let tooltip = null;
+  let openTimeout = null;
+  let autoUpdateCleanup = null;
+  let positionRequest = 0;
+  let skipDelayUntil = 0;
+  let lastPointerWasTouch = false;
+  let pinnedByTouch = false;
+
+  const getTrigger = (event) =&gt; {
+    for (const target of event.composedPath()) {
+      if (target?.nodeType === Node.ELEMENT_NODE) {
+        const trigger = target.closest(&quot;[data-tooltip]&quot;);
+        if (trigger) return trigger;
+      }
+    }
+    return null;
+  };
+  const containsTarget = (trigger, target) =&gt;
+    target?.nodeType != null &amp;&amp; trigger.contains(target);
+  const getContent = (trigger) =&gt;
+    trigger.getAttribute(&quot;data-tooltip&quot;)?.trim() ?? &quot;&quot;;
+  const getPlacement = (trigger) =&gt; {
+    const placement = trigger.getAttribute(&quot;data-tooltip-placement&quot;);
+    return tooltipPlacements.has(placement) ? placement : &quot;top&quot;;
+  };
+  const getTooltip = () =&gt; {
+    if (tooltip == null) {
+      tooltip = document.createElement(&quot;div&quot;);
+      tooltip.id = tooltipId;
+      tooltip.className = &quot;tooltip&quot;;
+      tooltip.setAttribute(&quot;role&quot;, &quot;tooltip&quot;);
+    }
+    return tooltip;
+  };
+  const setDescribedBy = (trigger, described) =&gt; {
+    const ids = new Set(
+      (trigger.getAttribute(&quot;aria-describedby&quot;) ?? &quot;&quot;)
+        .split(/\s+/)
+        .filter(Boolean),
+    );
+    if (described) {
+      ids.add(tooltipId);
+    } else {
+      ids.delete(tooltipId);
+    }
+    if (ids.size === 0) {
+      trigger.removeAttribute(&quot;aria-describedby&quot;);
+    } else {
+      trigger.setAttribute(&quot;aria-describedby&quot;, [...ids].join(&quot; &quot;));
+    }
+  };
+  const clearOpenTimeout = () =&gt; {
+    if (openTimeout != null) {
+      window.clearTimeout(openTimeout);
+      openTimeout = null;
+    }
+    pendingTrigger = null;
+  };
+  const closeTooltip = (activateSkipDelay = true) =&gt; {
+    clearOpenTimeout();
+    pinnedByTouch = false;
+    positionRequest += 1;
+    autoUpdateCleanup?.();
+    autoUpdateCleanup = null;
+    if (activeTrigger == null) {
+      return;
+    }
+    setDescribedBy(activeTrigger, false);
+    activeTrigger = null;
+    tooltip?.remove();
+    if (activateSkipDelay) {
+      skipDelayUntil = Date.now() + skipDelay;
+    }
+  };
+  const updatePosition = (trigger, floating) =&gt; {
+    const request = ++positionRequest;
+    void computePosition(trigger, floating, {
+      middleware: [
+        offset(tooltipGap),
+        flip({ padding: tooltipGap }),
+        shift({ padding: tooltipGap }),
+        size({
+          padding: tooltipGap,
+          apply({ availableHeight, availableWidth, elements }) {
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-width&quot;,
+              `${Math.max(0, availableWidth)}px`,
+            );
+            elements.floating.style.setProperty(
+              &quot;--tooltip-available-height&quot;,
+              `${Math.max(0, availableHeight)}px`,
+            );
+          },
+        }),
+      ],
+      placement: getPlacement(trigger),
+      strategy: &quot;fixed&quot;,
+    })
+      .then(({ x, y }) =&gt; {
+        if (activeTrigger !== trigger || request !== positionRequest) {
+          return;
+        }
+        const scale = window.devicePixelRatio || 1;
+        floating.style.transform = `translate(${Math.round(x * scale) / scale}px, ${Math.round(y * scale) / scale}px)`;
+        floating.style.visibility = &quot;visible&quot;;
+      })
+      .catch(() =&gt; {
+        if (activeTrigger === trigger &amp;&amp; request === positionRequest) {
+          closeTooltip(false);
+        }
+      });
+  };
+  const openTooltip = (trigger) =&gt; {
+    const content = getContent(trigger);
+    if (!trigger.isConnected || content.length === 0) {
+      return;
+    }
+    clearOpenTimeout();
+    if (activeTrigger === trigger) {
+      return;
+    }
+    closeTooltip();
+    const floating = getTooltip();
+    floating.textContent = content;
+    floating.style.visibility = &quot;hidden&quot;;
+    floating.style.transform = &quot;translate(0, 0)&quot;;
+    document.body.appendChild(floating);
+    activeTrigger = trigger;
+    setDescribedBy(trigger, true);
+    autoUpdateCleanup = autoUpdate(trigger, floating, () =&gt; {
+      updatePosition(trigger, floating);
+    });
+  };
+  const requestOpen = (trigger, immediate = false) =&gt; {
+    if (
+      getContent(trigger).length === 0 ||
+      activeTrigger === trigger ||
+      pendingTrigger === trigger
+    ) {
+      return;
+    }
+    clearOpenTimeout();
+    pendingTrigger = trigger;
+    const delay =
+      immediate || activeTrigger != null || Date.now() &lt; skipDelayUntil
+        ? 0
+        : hoverDelay;
+    if (delay === 0) {
+      openTooltip(trigger);
+      return;
+    }
+    openTimeout = window.setTimeout(() =&gt; {
+      openTimeout = null;
+      pendingTrigger = null;
+      openTooltip(trigger);
+    }, delay);
+  };
+  const handlePointerOpen = (event) =&gt; {
+    if (event.pointerType === &quot;touch&quot;) {
+      return;
+    }
+    const trigger = getTrigger(event);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    requestOpen(trigger);
+  };
+  const handlePointer = (event) =&gt; {
+    lastPointerWasTouch =
+      event.type === &quot;pointerdown&quot; &amp;&amp; event.pointerType === &quot;touch&quot;;
+  };
+  const handleTouchClick = (event) =&gt; {
+    const isTouch = event.pointerType === &quot;touch&quot; || lastPointerWasTouch;
+    lastPointerWasTouch = false;
+    if (!isTouch || event.detail === 0) {
+      return;
+    }
+    const trigger = getTrigger(event);
+    if (
+      trigger == null ||
+      !trigger.isConnected ||
+      getContent(trigger).length === 0 ||
+      (pinnedByTouch &amp;&amp; activeTrigger === trigger)
+    ) {
+      if (pinnedByTouch) {
+        closeTooltip();
+      }
+      return;
+    }
+    openTooltip(trigger);
+    pinnedByTouch = activeTrigger === trigger;
+    window.setTimeout(() =&gt; {
+      if (activeTrigger === trigger &amp;&amp; !trigger.isConnected) {
+        closeTooltip(false);
+      }
+    }, 0);
+  };
+  const handleLeave = (event) =&gt; {
+    if (pinnedByTouch) {
+      return;
+    }
+    const trigger = getTrigger(event);
+    if (trigger == null || containsTarget(trigger, event.relatedTarget)) {
+      return;
+    }
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handleFocusIn = (event) =&gt; {
+    const trigger = getTrigger(event);
+    if (trigger?.matches(&quot;:focus-visible&quot;)) {
+      requestOpen(trigger, true);
+    }
+  };
+  const handleKeyDown = (event) =&gt; {
+    if (event.key === &quot;Escape&quot;) {
+      closeTooltip();
+    }
+  };
+  const handleContextMenu = (event) =&gt; {
+    lastPointerWasTouch = false;
+    const trigger = getTrigger(event);
+    if (activeTrigger === trigger || pendingTrigger === trigger) {
+      closeTooltip();
+    }
+  };
+  const handlers = {
+    pointerover: handlePointerOpen,
+    pointerdown: handlePointer,
+    pointercancel: handlePointer,
+    click: handleTouchClick,
+    pointerout: handleLeave,
+    focusin: handleFocusIn,
+    focusout: handleLeave,
+    keydown: handleKeyDown,
+    contextmenu: handleContextMenu,
+  };
+  const roots = new Map();
+  const handledEvents = new WeakSet();
+  const handleEvent = (event) =&gt; {
+    if (handledEvents.has(event)) return;
+    handledEvents.add(event);
+    handlers[event.type](event);
+  };
+  const discoverRoots = (node) =&gt; {
+    if (node.shadowRoot) listen(node.shadowRoot);
+    for (const element of node.querySelectorAll(&quot;*&quot;)) {
+      if (element.shadowRoot) listen(element.shadowRoot);
+    }
+  };
+  const listen = (root) =&gt; {
+    if (roots.has(root)) return;
+    for (const type of Object.keys(handlers)) root.addEventListener(type, handleEvent);
+    const observer = new window.MutationObserver((records) =&gt; {
+      for (const { addedNodes } of records) {
+        for (const node of addedNodes) {
+          if (node.nodeType === Node.ELEMENT_NODE) discoverRoots(node);
+        }
+      }
+      for (const [root, cleanup] of roots) {
+        if (root.host &amp;&amp; !root.host.isConnected) {
+          cleanup();
+          roots.delete(root);
+        }
+      }
+      if (activeTrigger &amp;&amp; !activeTrigger.isConnected) closeTooltip(false);
+    });
+    observer.observe(root, { childList: true, subtree: true });
+    roots.set(root, () =&gt; {
+      observer.disconnect();
+      for (const type of Object.keys(handlers)) root.removeEventListener(type, handleEvent);
+    });
+    discoverRoots(root);
+  };
+  const destroy = () =&gt; {
+    closeTooltip(false);
+    lastPointerWasTouch = false;
+    for (const cleanup of roots.values()) cleanup();
+    roots.clear();
+    tooltip = null;
+  };
+
+  // Events between children of one shadow root never reach the document.
+  listen(document);
+  window.addEventListener(&quot;pagehide&quot;, destroy, { once: true });
+})();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-tabs&quot;&gt;
+(() =&gt; {
+  const selector = &#x27;.nav[role=&quot;tablist&quot;] [role=&quot;tab&quot;]&#x27;;
+  const disabled = &#x27;:disabled,[aria-disabled=&quot;true&quot;]&#x27;;
+  const selectTab = (selected) =&gt; {
+    const panelId = selected.getAttribute(&quot;aria-controls&quot;);
+    for (const tab of selected.closest(&#x27;[role=&quot;tablist&quot;]&#x27;).querySelectorAll(&#x27;[role=&quot;tab&quot;]&#x27;)) {
+      const active = tab === selected;
+      tab.classList.toggle(&quot;active&quot;, active);
+      tab.setAttribute(&quot;aria-selected&quot;, String(active));
+      const id = tab.getAttribute(&quot;aria-controls&quot;);
+      const panel = id &amp;&amp; document.getElementById(id);
+      if (panel != null) {
+        panel.hidden = id !== panelId;
+        if (!panel.hidden &amp;&amp; selected.id) {
+          panel.setAttribute(&quot;aria-labelledby&quot;, selected.id);
+        }
+      }
+    }
+  };
+  const interact = (event) =&gt; {
+    const tab = event.target?.closest?.(selector);
+    if (event.defaultPrevented || tab == null || tab.matches(disabled)) {
+      return;
+    }
+    if (event.type === &quot;click&quot;) {
+      selectTab(tab);
+      return;
+    }
+    const tabs = Array.from(
+      tab.closest(&#x27;[role=&quot;tablist&quot;]&#x27;).querySelectorAll(&#x27;[role=&quot;tab&quot;]&#x27;),
+    ).filter((candidate) =&gt; !candidate.matches(disabled));
+    const current = tabs.indexOf(tab);
+    let next;
+    if (event.key === &quot;ArrowRight&quot; || event.key === &quot;ArrowDown&quot;) {
+      next = (current + 1) % tabs.length;
+    } else if (event.key === &quot;ArrowLeft&quot; || event.key === &quot;ArrowUp&quot;) {
+      next = (current + tabs.length - 1) % tabs.length;
+    } else if (event.key === &quot;Home&quot;) {
+      next = 0;
+    } else if (event.key === &quot;End&quot;) {
+      next = tabs.length - 1;
+    } else {
+      return;
+    }
+    event.preventDefault();
+    tabs[next].focus();
+    selectTab(tabs[next]);
+  };
+
+  for (const list of document.querySelectorAll(&#x27;.nav[role=&quot;tablist&quot;]&#x27;)) {
+    const selected =
+      list.querySelector(&#x27;[role=&quot;tab&quot;][aria-selected=&quot;true&quot;]&#x27;) ??
+      list.querySelector(&#x27;[role=&quot;tab&quot;].active&#x27;) ??
+      list.querySelector(&#x27;[role=&quot;tab&quot;]&#x27;);
+    if (selected != null) {
+      selectTab(selected);
+    }
+  }
+  document.addEventListener(&quot;click&quot;, interact);
+  document.addEventListener(&quot;keydown&quot;, interact);
+  window.addEventListener(&quot;pagehide&quot;, () =&gt; {
+    document.removeEventListener(&quot;click&quot;, interact);
+    document.removeEventListener(&quot;keydown&quot;, interact);
+  }, { once: true });
+})();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-carousel&quot;&gt;
+  (() =&gt; {
+    for (const root of document.querySelectorAll(&quot;.viz-carousel&quot;)) {
+      const panels = Array.from(
+        root.querySelectorAll(&quot;:scope &gt; [data-variant]&quot;),
+      );
+      if (panels.length === 0) {
+        continue;
+      }
+      root.setAttribute(&quot;role&quot;, &quot;group&quot;);
+      panels.forEach((panel, index) =&gt; {
+        panel.hidden = index !== 0;
+        panel.setAttribute(&quot;role&quot;, &quot;group&quot;);
+        if (!panel.hasAttribute(&quot;aria-label&quot;)) {
+          panel.setAttribute(&quot;aria-label&quot;, panel.dataset.variant);
+        }
+      });
+      root.dataset.activeVariant = panels[0].dataset.variant;
+      if (panels.length === 1) {
+        continue;
+      }
+
+      const controls = document.createElement(&quot;div&quot;);
+      controls.className = &quot;viz-carousel-controls&quot;;
+      // Portable copy of the settings dropdown&#x27;s legacy glyph; no 14px icon-package preset matches it.
+      // https://github.com/openai/openai/blob/master/codex/codex-apps/webview/src/icons/chevron.svg
+      controls.innerHTML = `
+      &lt;button type=&quot;button&quot; class=&quot;viz-carousel-previous cursor-interaction&quot;&gt;&lt;i data-lucide=&quot;chevron-left&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;
+      &lt;details class=&quot;viz-carousel-picker&quot;&gt;
+        &lt;summary class=&quot;cursor-interaction&quot;&gt;
+          &lt;span class=&quot;viz-carousel-count tabular-nums&quot;&gt;&lt;/span&gt;
+          &lt;span class=&quot;viz-carousel-name&quot;&gt;&lt;/span&gt;
+          &lt;svg class=&quot;viz-carousel-caret&quot; width=&quot;14&quot; height=&quot;14&quot; viewBox=&quot;0 0 20 21&quot; fill=&quot;none&quot; aria-hidden=&quot;true&quot; focusable=&quot;false&quot;&gt;
+            &lt;path d=&quot;M15.2793 7.71101C15.539 7.45131 15.961 7.45131 16.2207 7.71101C16.4804 7.97071 16.4804 8.39272 16.2207 8.65242L10.4707 14.4024C10.211 14.6621 9.78902 14.6621 9.52932 14.4024L3.77932 8.65242L3.69436 8.54792C3.52385 8.28979 3.55205 7.93828 3.77932 7.71101C4.00659 7.48374 4.3581 7.45554 4.61623 7.62605L4.72073 7.71101L10 12.9903L15.2793 7.71101Z&quot; fill=&quot;currentColor&quot; stroke=&quot;currentColor&quot; stroke-width=&quot;0.6&quot; /&gt;
+          &lt;/svg&gt;
+        &lt;/summary&gt;
+        &lt;div class=&quot;viz-carousel-options&quot;&gt;&lt;/div&gt;
+      &lt;/details&gt;
+      &lt;button type=&quot;button&quot; class=&quot;viz-carousel-next cursor-interaction&quot;&gt;&lt;i data-lucide=&quot;chevron-right&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;`;
+      const previous = controls.querySelector(&quot;.viz-carousel-previous&quot;);
+      const next = controls.querySelector(&quot;.viz-carousel-next&quot;);
+      const picker = controls.querySelector(&quot;.viz-carousel-picker&quot;);
+      const summary = picker.querySelector(&quot;summary&quot;);
+      const count = controls.querySelector(&quot;.viz-carousel-count&quot;);
+      const name = controls.querySelector(&quot;.viz-carousel-name&quot;);
+      const options = controls.querySelector(&quot;.viz-carousel-options&quot;);
+      const status = document.createElement(&quot;span&quot;);
+      status.className = &quot;sr-only&quot;;
+      status.setAttribute(&quot;role&quot;, &quot;status&quot;);
+      status.setAttribute(&quot;aria-live&quot;, &quot;polite&quot;);
+      status.setAttribute(&quot;aria-atomic&quot;, &quot;true&quot;);
+      previous.setAttribute(
+        &quot;aria-label&quot;,
+        root.dataset.previousLabel ?? &quot;Previous variant&quot;,
+      );
+      next.setAttribute(&quot;aria-label&quot;, root.dataset.nextLabel ?? &quot;Next variant&quot;);
+
+      let active = 0;
+      let mousePointerId = null;
+      let summaryPointerHandled = false;
+      summary.addEventListener(&quot;pointerdown&quot;, (event) =&gt; {
+        summaryPointerHandled =
+          event.pointerType === &quot;mouse&quot; &amp;&amp; event.button === 0 &amp;&amp; !event.ctrlKey;
+        if (!summaryPointerHandled) {
+          return;
+        }
+        event.preventDefault();
+        summary.focus({ preventScroll: true });
+        picker.open = !picker.open;
+        mousePointerId = picker.open ? event.pointerId : null;
+      });
+      summary.addEventListener(&quot;click&quot;, (event) =&gt; {
+        if (summaryPointerHandled &amp;&amp; event.detail &gt; 0) {
+          event.preventDefault();
+        }
+      });
+      const choices = panels.map((panel, index) =&gt; {
+        const choice = document.createElement(&quot;button&quot;);
+        choice.type = &quot;button&quot;;
+        choice.className = &quot;cursor-interaction&quot;;
+        choice.textContent = panel.dataset.variant;
+        choice.addEventListener(&quot;click&quot;, () =&gt; {
+          select(index);
+          summary.focus();
+        });
+        choice.addEventListener(&quot;pointerup&quot;, (event) =&gt; {
+          if (
+            picker.open &amp;&amp;
+            event.pointerType === &quot;mouse&quot; &amp;&amp;
+            event.button === 0 &amp;&amp;
+            event.pointerId === mousePointerId
+          ) {
+            choice.click();
+          }
+        });
+        options.appendChild(choice);
+        return choice;
+      });
+      const select = (index) =&gt; {
+        const changed = active !== index;
+        active = index;
+        panels.forEach((panel, position) =&gt; {
+          panel.hidden = position !== active;
+          choices[position].setAttribute(
+            &quot;aria-current&quot;,
+            String(position === active),
+          );
+        });
+        root.dataset.activeVariant = panels[active].dataset.variant;
+        count.textContent = `${active + 1} / ${panels.length}`;
+        name.textContent = panels[active].dataset.variant;
+        picker.open = false;
+        mousePointerId = null;
+        if (changed) {
+          status.textContent = `${count.textContent}: ${name.textContent}`;
+        }
+      };
+      previous.addEventListener(&quot;click&quot;, () =&gt;
+        select((active + panels.length - 1) % panels.length),
+      );
+      next.addEventListener(&quot;click&quot;, () =&gt;
+        select((active + 1) % panels.length),
+      );
+      picker.addEventListener(&quot;keydown&quot;, (event) =&gt; {
+        if (event.key === &quot;Escape&quot; &amp;&amp; picker.open) {
+          event.preventDefault();
+          picker.open = false;
+          mousePointerId = null;
+          summary.focus();
+          return;
+        }
+        if (event.altKey || event.ctrlKey || event.metaKey) {
+          return;
+        }
+        const index = choices.indexOf(document.activeElement);
+        let nextIndex;
+        if (event.key === &quot;ArrowDown&quot;) {
+          nextIndex = index &lt; 0 ? active : (index + 1) % choices.length;
+        } else if (event.key === &quot;ArrowUp&quot;) {
+          nextIndex = index &lt; 0 ? active : (index + choices.length - 1) % choices.length;
+        } else if (picker.open &amp;&amp; event.key === &quot;Home&quot;) {
+          nextIndex = 0;
+        } else if (picker.open &amp;&amp; event.key === &quot;End&quot;) {
+          nextIndex = choices.length - 1;
+        } else {
+          return;
+        }
+        event.preventDefault();
+        picker.open = true;
+        choices[nextIndex].focus();
+      });
+      picker.addEventListener(&quot;focusout&quot;, (event) =&gt; {
+        if (!picker.contains(event.relatedTarget)) {
+          picker.open = false;
+          mousePointerId = null;
+        }
+      });
+      const dismiss = (event) =&gt; {
+        if (!summary.contains(event.target)) {
+          mousePointerId = null;
+        }
+        if (!picker.contains(event.target)) {
+          picker.open = false;
+        }
+      };
+      const endPointerSelection = () =&gt; {
+        mousePointerId = null;
+      };
+      const sizePicker = () =&gt; {
+        root.style.setProperty(
+          &quot;--viz-carousel-picker-height&quot;,
+          `${picker.open ? options.offsetHeight : 0}px`,
+        );
+      };
+      picker.addEventListener(&quot;toggle&quot;, sizePicker);
+      window.addEventListener(&quot;resize&quot;, sizePicker);
+      document.addEventListener(&quot;pointerdown&quot;, dismiss);
+      document.addEventListener(&quot;pointerup&quot;, endPointerSelection);
+      document.addEventListener(&quot;pointercancel&quot;, endPointerSelection);
+      window.addEventListener(&quot;blur&quot;, endPointerSelection);
+      window.addEventListener(
+        &quot;pagehide&quot;,
+        () =&gt; {
+          document.removeEventListener(&quot;pointerdown&quot;, dismiss);
+          document.removeEventListener(&quot;pointerup&quot;, endPointerSelection);
+          document.removeEventListener(&quot;pointercancel&quot;, endPointerSelection);
+          window.removeEventListener(&quot;blur&quot;, endPointerSelection);
+          window.removeEventListener(&quot;resize&quot;, sizePicker);
+        },
+        { once: true },
+      );
+      root.append(controls, status);
+      select(0);
+    }
+  })();
+&lt;/script&gt;
+&lt;script id=&quot;codex-visualization-lucide&quot; async src=&quot;https://unpkg.com/lucide@1.17.0/dist/umd/lucide.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+(() =&gt; {
+  const initialize = () =&gt; {
+    globalThis.lucide?.createIcons({ attrs: { width: 16, height: 16 } });
+  };
+  if (globalThis.lucide != null) {
+    initialize();
+    return;
+  }
+  document
+    .getElementById(&quot;codex-visualization-lucide&quot;)
+    ?.addEventListener(&quot;load&quot;, initialize, { once: true });
+})();
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+"></iframe>
+
+<script>(() => {
+  const frame = document.getElementById("codex-visualization");
+  if (!(frame instanceof HTMLIFrameElement)) {
+    return;
+  }
+  const isShare = document.documentElement.classList.contains(
+    "visualization-share-root",
+  );
+  let viewportHeight = globalThis.innerHeight;
+  let sizeFingerprint = null;
+  let sizeWriteTimeout;
+  let lastSize = null;
+  let pendingSize = null;
+  const storageKey = `codex:visualization-widget-state-v2:${JSON.stringify([
+    globalThis.location.pathname,
+    globalThis.location.search,
+  ])}`;
+  const sizeStorageKey = `${storageKey}:share-size-v1`;
+  const parseState = (serializedState) => {
+    if (
+      typeof serializedState !== "string" ||
+      new TextEncoder().encode(serializedState).length > 16 * 1024
+    ) {
+      throw new TypeError(
+        "Widget state must be a JSON object of at most 16 KiB",
+      );
+    }
+    /** @type {unknown} */
+    const state = JSON.parse(serializedState);
+    if (
+      state == null ||
+      typeof state !== "object" ||
+      Array.isArray(state) ||
+      ("imageIds" in state &&
+        (!Array.isArray(state.imageIds) || state.imageIds.length > 0))
+    ) {
+      throw new TypeError("Widget state must be a JSON object");
+    }
+    const storedState = { modelContent: null, privateContent: null, ...state };
+    const canonicalState = JSON.stringify(
+      storedState,
+      (_key, /** @type {unknown} */ value) => {
+        if (typeof value === "number" && !Number.isFinite(value)) {
+          throw new TypeError("Widget state must contain finite numbers");
+        }
+        return value;
+      },
+    );
+    if (new TextEncoder().encode(canonicalState).length > 16 * 1024) {
+      throw new TypeError(
+        "Widget state must be a JSON object of at most 16 KiB",
+      );
+    }
+    return storedState;
+  };
+  let storage = null;
+  let state = null;
+  try {
+    const localStorage = globalThis.localStorage;
+    const probeKey = `${storageKey}:probe`;
+    localStorage.setItem(probeKey, "1");
+    localStorage.removeItem(probeKey);
+    storage = localStorage;
+    const savedState = storage.getItem(storageKey);
+    if (savedState != null) {
+      try {
+        state = parseState(savedState);
+      } catch {
+        // Invalid saved state does not disable future writes.
+      }
+    }
+  } catch {
+    storage = null;
+  }
+  const persistSize = () => {
+    globalThis.clearTimeout(sizeWriteTimeout);
+    if (pendingSize == null) {
+      return;
+    }
+    try {
+      storage?.setItem(sizeStorageKey, pendingSize);
+    } catch {
+      // A denied or full cache must not affect the visualization.
+    }
+    pendingSize = null;
+  };
+  if (isShare) {
+    globalThis.addEventListener("pagehide", persistSize);
+  }
+  const initialGlobals = {
+    widgetState: state,
+    statePersistence: storage == null ? "none" : "local",
+  };
+
+  const channel = new MessageChannel();
+  channel.port1.addEventListener("message", (event) => {
+    const data = event.data;
+    if (typeof data !== "object" || data == null) {
+      return;
+    }
+    if (data.type === "widget-state-write") {
+      if (!Number.isSafeInteger(data.id) || data.id <= 0) {
+        return;
+      }
+      let ok = false;
+      try {
+        if (storage != null) {
+          const state = parseState(data.state);
+          storage.setItem(storageKey, JSON.stringify(state));
+          ok = true;
+        }
+      } catch {
+        // Storage denial, quota limits, and invalid state return a failed receipt.
+      }
+      channel.port1.postMessage({
+        type: "widget-state-result",
+        id: data.id,
+        ok,
+      });
+      return;
+    }
+    if (data.type === "height") {
+      const height = data.height;
+      if (
+        typeof height !== "number" ||
+        !Number.isFinite(height) ||
+        height < 0
+      ) {
+        return;
+      }
+      if (height <= 10_000) {
+        const width = isShare && storage != null ? frame.clientWidth : null;
+        frame.style.height = Math.ceil(height) + "px";
+        if (isShare && storage != null) {
+          const size = JSON.stringify({
+            fingerprint: sizeFingerprint,
+            width,
+            viewportHeight: globalThis.innerHeight,
+            dark: globalThis.matchMedia("(prefers-color-scheme: dark)").matches,
+            scale: globalThis.devicePixelRatio,
+            height: Math.ceil(height),
+          });
+          if (size !== lastSize) {
+            lastSize = size;
+            pendingSize = size;
+            globalThis.clearTimeout(sizeWriteTimeout);
+            sizeWriteTimeout = globalThis.setTimeout(persistSize, 100);
+          }
+        }
+      }
+      if (isShare) {
+        // Keep unusually tall content accessible without accepting an unbounded height.
+        if (height > 10_000 && Number.parseFloat(frame.style.height) === 0) {
+          frame.style.removeProperty("height");
+        }
+        frame.scrolling = height > 10_000 ? "auto" : "no";
+        document.documentElement.classList.add("visualization-share-ready");
+      }
+      return;
+    }
+    if (data.type === "scroll-to") {
+      const top = data.top;
+      if (
+        typeof top === "number" &&
+        Number.isFinite(top) &&
+        top >= 0 &&
+        globalThis.navigator.userActivation?.isActive === true
+      ) {
+        globalThis.scrollTo({
+          top: Math.ceil(
+            globalThis.scrollY + frame.getBoundingClientRect().top + top,
+          ),
+        });
+      }
+      return;
+    }
+    if (data.type === "open-external") {
+      const rawHref = data.href;
+      if (typeof rawHref !== "string") {
+        return;
+      }
+      let href;
+      try {
+        const url = new URL(rawHref, document.baseURI);
+        if (url.protocol !== "https:") {
+          return;
+        }
+        href = url.href;
+      } catch {
+        return;
+      }
+      if (globalThis.navigator.userActivation?.isActive === true) {
+        const anchor = document.createElement("a");
+        anchor.href = href;
+        anchor.rel = "noopener noreferrer";
+        anchor.target = "_blank";
+        document.body.appendChild(anchor);
+        anchor.click();
+        anchor.remove();
+      }
+      return;
+    }
+    if (data.type === "follow-up") {
+      const prompt = data.prompt;
+      if (
+        typeof prompt !== "string" ||
+        globalThis.navigator.userActivation?.isActive !== true
+      ) {
+        return;
+      }
+      const title = data.title;
+      globalThis.prompt(typeof title === "string" ? title : prompt, prompt);
+    }
+  });
+  channel.port1.start();
+  const srcdoc = frame.dataset.srcdoc;
+  if (srcdoc == null) {
+    return;
+  }
+  globalThis.addEventListener("resize", () => {
+    const height = Number.parseFloat(frame.style.height);
+    if (!isShare && (!Number.isFinite(height) || height <= viewportHeight)) {
+      frame.style.removeProperty("height");
+    }
+    viewportHeight = globalThis.innerHeight;
+    channel.port1.postMessage({ type: "measure" });
+  });
+  frame.addEventListener(
+    "load",
+    () => {
+      frame.contentWindow?.postMessage(
+        { type: "codex-visualization-initialize" },
+        "*",
+        [channel.port2],
+      );
+    },
+    { once: true },
+  );
+  // Match the trusted bootstrap element, not the same text in an authored title.
+  const frameHtml = srcdoc.replace(
+    '<script type="application/json" id="codex-visualization-widget-state">__CODEX_VISUALIZATION_WIDGET_STATE__<\/script>',
+    () =>
+      '<script type="application/json" id="codex-visualization-widget-state">' +
+      JSON.stringify(initialGlobals).replaceAll("<", "\\u003c") +
+      "<\/script>",
+  );
+  if (isShare && storage != null) {
+    // Fingerprint the rendered document, including restored widget state, without
+    // storing its content. This is a layout cache, not a security identity.
+    let hash = 5381;
+    for (let index = 0; index < frameHtml.length; index += 1) {
+      hash = (hash * 33 + frameHtml.charCodeAt(index)) % 4_294_967_296;
+    }
+    sizeFingerprint = hash.toString(36);
+    try {
+      const size = JSON.parse(storage.getItem(sizeStorageKey) ?? "null");
+      if (
+        size?.fingerprint === sizeFingerprint &&
+        size.width === frame.clientWidth &&
+        size.viewportHeight === globalThis.innerHeight &&
+        size.dark ===
+          globalThis.matchMedia("(prefers-color-scheme: dark)").matches &&
+        size.scale === globalThis.devicePixelRatio &&
+        typeof size.height === "number" &&
+        Number.isFinite(size.height) &&
+        size.height >= 0 &&
+        size.height <= 10_000
+      ) {
+        frame.style.height = size.height + "px";
+      }
+    } catch {
+      // Ignore missing or invalid cache entries and measure the live frame.
+    }
+  }
+  frame.srcdoc = frameHtml;
+  delete frame.dataset.srcdoc;
+})();
+</script>
+</body>
+</html>

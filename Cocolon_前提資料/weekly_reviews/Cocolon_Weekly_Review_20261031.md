@@ -4996,3 +4996,15 @@ E06の保存DTOは、既存readerに返すRPCをmockし、compiler／作者を�
 STRUCTURE_MAP_DELTA_PRESENTは原欄proofの範囲と地図だけ。新source route／意味型／作者／通常profile／planner／batch／transport／schema／RNは追加していない。新重みは不採用、source修正は未配置。実環境はCodex Work／GPT-6＋同環境の独立read-only reviewで、Pro受入れではない。直接前進は「正しい二欄原応答を、根拠を混ぜず既存文章・図へ接続した」範囲。
 
 次は、今回のE02／E03／E05の誤kind／過去修飾、E04の否定引用、N1／N2の対象範囲を別々に検討し、改善対象を固定してから教示を選ぶ。今回rawを正解教材へ転用しない。完了／失敗runを再起動せず、d22cを採用しない。一般の本人基準・暗黙役割・選択基準・記録間の意味、適格補足回答の全欄とtyped接続、通常時間内の全量処理、IF／Saved・実DB／実機／商品受入れは引き続き残件。
+
+
+<a id="material-ui-decision-20261106"></a>
+## 217. 11/6 — Material UIの採用と具体設計・プレビュー保存
+
+Mashがホーム／Piece／分析／設定の3案を比較し、Material寄りを採用した。Day Oneの区切りの弱さ、How We Feelの配置への違和感を踏まえ、全画面でのわかりやすさと優しいポップさを重視。見出し・ボタンは明快に、長文は軽い太さとゆとりある行間、EmlisロゴとPiece内の文字は操作書体と分ける。「優しく、迷わず使えて、言葉は丁寧に読める」を設計軸とする。
+
+今回の明示指示は、プレビュー付きのUI資料を残し、具体設計したうえで実装へ進むこと。[UI設計入口](../designs/ui/README.md)へ比較元と単体表示用HTML、文字・色・余白・共通部品・各画面配置・状態／権限保持・現物path対応・実装順を保存した。単体HTMLはバージョン固定CDNのアイコン等を使用し、完全オフラインとはしない。全データ・成功操作は架空デモ。公開資料にKaren-Diaryや本人入力は転記していない。
+
+製品sourceはPR30 5284ebfを照合し、同環境のread-only補助reviewで共通UIと画面ごとの既存操作を確認した。華恋が単一writer。実環境はCodex Work／GPT-6。保存を区切りに同タスクの製品反映へ進む。実装状況はUI設計の§12で更新する。UI方針採用を、全画面の製品反映・ビルド・本人端末表示・三中核の商品受入れへ換算しない。
+
+STRUCTURE_MAP_DELTA_NONE：この保存単位は操作UIの設計資料とプレビューだけで、三中核のowner・API・DB・意味／保存契約を変更しない。Render／Supabase／GPU／merge／build／配布の操作0。教材・構造知識の話し合いはMashの指示どおり保留し、UIを進める。

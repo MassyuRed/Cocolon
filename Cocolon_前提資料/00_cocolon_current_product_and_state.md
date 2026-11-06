@@ -176,6 +176,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 | 機能 | 目的・現在の接続 | 未確認・境界 |
 |---|---|---|
+| UI採用方針（11/6） | Material案を採用。「優しく、迷わず使えて、言葉は丁寧に読める」。見出し・操作の明快さ、本文の軽い太さと行間、ロゴ／Piece作品の独立した世界観を分ける。[具体設計と3案×4画面プレビュー](designs/ui/README.md)を保存 | 方針・設計・プレビュー保存済み。製品反映はこれから着手、RNビルド・本人端末表示は未確認。AI／分析内容・Piece保存画像・購入／公開契約は変更しない |
 | 起動・認証 | 登録／ログイン／メール確認再送／再設定／復旧。`App.js`→`RootNavigator`→`MainTabs`→Input／Analysis／Piece／Settingsの4 Stack（次候補でRanking入口を撤去） | native認証リンク・cold／warm復帰の実成立は別確認。旧巨大App／MyModel画面名から現在を復元しない |
 | 今日の問い・回答履歴 | current／answers／history／PATCH／settingsを接続。日常メモと別に考えを記録し、修正・再読 | Emlis任意問いと別機能。旧自己構造素材との接続を、V2全source採用済みへ拡張しない |
 | 投稿・他者のPiece | 通常`PieceEntryScreen`→`NexusScreen`。本人／フォロー中／特定相手、並替・更新・本人投稿削除。linkPayload時のみ`PieceScreen` | 公開条件と新Piece保存成立は別。旧Q&A投稿と新canonical recordを混同しない |
