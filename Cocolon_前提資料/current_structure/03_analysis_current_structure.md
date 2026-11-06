@@ -1,4 +1,4 @@
-> **11/6・分析の継続（第9回§230）：Jupyterで同じ4B重みの10応答を追加学習なしで比較し、現在／過去の希望2例が文章・図へ到達。既存成功6例は生応答・本文・図を保持し、到達6→8/10。否定希望2例の引用不足が残るためprivate material.v9は通常未採用。関連CPU630成功・19skip、GitHub CI全工程成功。保存候補10件の非生成再読と8図の再構築までで、DB/current/月次reader・実機・本番配置は未実施。** [実結果・原本・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-wish-boundary-v9-20261106)。
+> **11/6・分析の継続（第9回§232）：Jupyterの同4B重み・学習0の10応答比較で否定希望E04/E05が文章・図へ到達（8→10/10）。完全な否定希望述語と各rootの明記主体を保持。旧8の全graph／本文／図は一致、生応答は6一致・2候補分解変化。10候補の非生成再読と10mapの固定raw再構築を確認。各1record、計11fieldの範囲で、DB/current/月次reader・複数record/batch・実機・通常採用・本番配置は未実施。** [実結果・原本・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-negative-wish-v10-20261106)。
 
 > **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
@@ -1326,8 +1326,17 @@ WH04の元rootは既に否定を保持しており、旧consumerの肯定限定�
 同一E06原応答をJupyterで0モデル再読し、以前未接続だった二欄が2node・mapped1／unparsed0へ到達。mock保存DTOはcompiler／作者禁止で再読一致。一般の役割・選択基準・記録間理解や実DB／端末の受入れへ広げない。398成功・1skip、新23更新候補d22cは意味不整合と最終要求未返却で不採用。通常profile／型／作者／経路／schema／RNは維持、source修正未配置。STRUCTURE_MAP_DELTA_PRESENT（原欄proof範囲）。
 
 
-## 11/6 §230 — private v9希望境界の明示比較
+## 11/6 §231 — private v9希望境界の明示比較
 
 [全結果・原本・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-wish-boundary-v9-20261106)。API17c7078fは `semantic_admission.AnalysisModelQuotedParentUnitsInput.messages` でv7全指示とuserを保ち、希望と実行事実・過去希望・完全否定引用の説明だけを末尾へ追加する研究用v9を持つ。profile／request_ref／messages digest／private state variantを別にし、`analysis_cumulative_service`の明示callerと保存再構築へ同じcategory sourceを渡す。既定v4、通常transport／planner／batch許可は不変。source compiler／typed consumer／作者・公開DTO／DBは変更しない。
 
 元a2e・学習0の一回10stop／1load・親70.821147秒で、既知最小対照の現在／過去希望2例が各1nodeの既存文章・図へ到達（同じ10構成6→8）。旧成功6のraw／全graph／本文／図を保持。否定希望2例はNEGATIONの完全述語不足、混在文の先行行動に明記主体注釈欠落が残るため通常未採用。保存candidate10は非生成再読、typed8はoffline rebuildでありDB/current／月次の成功ではない。local630 PASS／SQL依存19 SKIP、CI全工程success。STRUCTURE_MAP_DELTA_PRESENTはprivate profile/ref/stateと明示再構築の範囲。通常採用・本番未配置、一般の役割／本人基準／選択／記録間意味とIF／Saved等は引き続き残件。
+
+
+## 11/6 §232 — private v10の否定希望と明記主体
+
+v9を上書きせず、独立の現在否定希望と肯定事実＋過去否定希望の2架空説明例をsystem末尾へ追加した。元material／user／source・typed consumer／作者は不変。研究profile・request_ref／digest／stateだけを別identityとし、明示cumulative再構築は同じカテゴリ文脈を使う。API f50acbc379dfb8f7c01cb7b58dfda9d674914e65、通常transport／planner／batch許可集合は追加していない。
+
+E04はSELF／negative／wish／current_inputの1node、E05はSELF／positive／fact／pastとSELF／negative／wish／pastの2node・edge0。希望を実行事実へ昇格せず、短いNEGATIONをconsumerで救済していない。旧8の全typed graph・文章・図は新artifact由来projection_ofを除き一致。E06の対象候補省略とAE05の否定範囲／対象候補追加によりraw保持は6/8で、候補graph全一致とは扱わない。
+
+全10候補はcompiler／作者禁止下で非生成再読し、同rawの10mapをoffline再構築。これは保存map artifact自体の非生成reloadやDB/current／月次readerではない。一般の本人基準／暗黙役割／選択・記録間関係、N1/N2対象scope等を残す。次は保存済みN1/N2原本と既存材料ownerのCPU照合で、今回run再実行・v10通常採用・追加学習へ自動進行しない。[結果・原本・全検証](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-negative-wish-v10-20261106)。

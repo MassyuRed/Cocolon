@@ -2284,8 +2284,20 @@ WH04の元rootは既に否定を保持しており、旧consumerの肯定限定�
 <a id="analysis-wish-boundary-v9-20261106"></a>
 ## 11/6 — fixed-a2e・学習なしのprivate v9比較
 
-[週次§230](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-wish-boundary-v9-20261106)と `wish_boundary_v9_results.json` が実結果。`wish_boundary_probe.py` はprepare／generate／replayの一回用。既存private prior rootから10源文とv7 baselineを固定し、v9側だけ10stop／1load／学習0、親70.821147秒／exit0。旧raw再生成0、d22c不使用。現在・過去希望2例が新たに文章・図へ到達し、旧成功6の全raw／graph／投影を保持。否定希望2例は完全なNEGATION引用不足が残り通常採用false。
+[週次§231](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-wish-boundary-v9-20261106)と `wish_boundary_v9_results.json` が実結果。`wish_boundary_probe.py` はprepare／generate／replayの一回用。既存private prior rootから10源文とv7 baselineを固定し、v9側だけ10stop／1load／学習0、親70.821147秒／exit0。旧raw再生成0、d22c不使用。現在・過去希望2例が新たに文章・図へ到達し、旧成功6の全raw／graph／投影を保持。否定希望2例は完全なNEGATION引用不足が残り通常採用false。
 
 原本は[private bundle](https://chatgpt.com/library?file_id=libfile_fde3_f-6d9d811d887c8191b67bc0ada201cde4_2f7470f963808191aaebf050935e72de&account_id=personal)。元全28fileとmanifest、公開source5file・review等をlossless保全した39member。通常download失敗後にEditorの全文から回収し、単独CRを含むlogを元manifestへ再照合。原ZIP binary回収ではない。
 
 完了run／prepareの同root再実行禁止。次は評価本文を教師へ転用せず、現在／過去否定希望と明記主体保持の独立説明例をCPU準備する。既定・通常transport／planner／batch、意味consumer／作者・DB／RN／本番設定は変更しない。一般の本人基準／暗黙役割・選択・記録間意味、N1/N2対象scope・全欄補足／全量処理・IF/Saved／実DB／実機・商品受入れは残件。
+
+
+<a id="negative-wish-v10-result-20261106"></a>
+## 11/6 — fixed-a2e・学習なしの否定希望v10比較
+
+[週次§232](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-negative-wish-v10-20261106)／`negative_wish_v10_results.json`が実結果。`negative_wish_probe.py`はv9原本をbeforeへ再利用するafter-only10。新API f50acbc、runner1ae1c811。v10はv9指示＋2独立説明例930字でuser／material不変、同a2e/config006e／pins／optional target、学習0／1load／10stop／11field。親73.99475753959268秒、child68.61624022759497秒、生成53.53791414294392秒、exit0。最大4279入力token＋2048<8192。
+
+否定希望E04/E05のNEGATIONが完全述語になり、E05先行行動の明記主体も復帰してtyped8→10。旧8の全typed graph／文章／図はprojection_ofだけを除き一致。raw一致は6で、E06はCONTENT_TARGETを一つ省略、AE05は否定引用を広げ対象候補を一つ追加した。語尾だけの否定希望をraw修復／consumer緩和で受理していない。
+
+保存candidate10の非生成再読と同rawの10map再構築まで。各1record、計11fieldで、DB/current／月次reader、保存map自体の非生成reload、複数record/full-parent/batchは未検証。local638 PASS／SQL環境19 SKIP、Jupyter37 PASS、CI2442 PASS／既存SQL1 SKIP＋12048subtests、owner1、累積302＋2subtests、隔離SQL201原本／15月参照。重複加算しない。
+
+[非公開原本](https://chatgpt.com/library?file_id=libfile_fde3_f-1f1bf457dbd4819189d6b7841b5f0508_2f7470f963808191aaebf050935e72de&account_id=personal)は42member／374894bytes／SHA `27906586bedbfa694144989fb3a99967e4cd3b940659fa9e870785d9f940b35f`、元33fileのbytes／SHAも一致。v10を通常／次初期値へ採用せず、今回runの再起動をしない。次は保存済みN1/N2対象scopeを元source／既存ownerからCPU照合する。N1/N2/N3の新生成、追加学習、一般の役割／選択／記録間意味、通常全量／IF／Saved・実DB／端末は今回完了へ数えない。

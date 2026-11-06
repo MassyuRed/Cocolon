@@ -5208,9 +5208,9 @@ Analysisは主2pill44・日週月短表示と更新日を折返し行へ、現�
 
 
 <a id="analysis-wish-boundary-v9-20261106"></a>
-## 230. 11/6 — 学習なしの希望境界比較で現在・過去希望2例がmapへ到達
+## 231. 11/6 — 学習なしの希望境界比較で現在・過去希望2例がmapへ到達
 
-Mashの分析残件・Jupyter直接接続指示に基づき、全体現在地・作業ルール・設計図・全file地図・最新§216（後続UI§217〜229も保持）を確認して継続した。PR30開始head662cf49／API PR3開始e8f026eをfresh照合。§216の失敗は、願望root／過去修飾、否定引用、対象scopeの三群へ分けた。v7にも過去希望の既存架空例はあるため「希望が一切教示されていなかった」とは判断しない。説明不足は検証仮説で、前回23更新や不採用d22cを再実行・次初期値へ採用していない。
+Mashの分析残件・Jupyter直接接続指示に基づき、全体現在地・作業ルール・設計図・全file地図・最新§216（後続UI§217〜230も保持）を確認して継続した。PR30開始head662cf49／API PR3開始e8f026eをfresh照合。§216の失敗は、願望root／過去修飾、否定引用、対象scopeの三群へ分けた。v7にも過去希望の既存架空例はあるため「希望が一切教示されていなかった」とは判断しない。説明不足は検証仮説で、前回23更新や不採用d22cを再実行・次初期値へ採用していない。
 
 ### 差分と一回比較
 
@@ -5244,3 +5244,45 @@ E05の先行肯定行動ではEXPLICIT_ACTOR注釈が欠落した。主体の文
 **v9は局所研究候補として保全し、通常採用はしない。** 全体現在地・current map・全file地図・既存trialを差分更新。STRUCTURE_MAP_DELTA_PRESENTはprivate instruction/profile/ref/state variantと明示cumulative再構築だけで、公開DTO／DB schema／意味型／作者／通常選択は不変。実環境はCodex Work／GPT-6＋同環境のread-only reviewで、独立Pro受入れ／Mash Product Readではない。
 
 次は、今回評価本文やrawを転用せず、現在／過去の否定希望を完全な述語で引用する独立説明例をCPUで作り、明記主体の保持と合わせて次の最小比較を定める。今回runを再起動せず、v9を既定／通常transportへ接続しない。対象scope、一般の本人基準・暗黙役割・選択基準・記録間意味、全欄補足／通常時間内全量、IF／Saved・実DB／本人端末・商品受入れは残件。
+
+
+<a id="analysis-negative-wish-v10-20261106"></a>
+## 232. 11/6 — 独立説明例で否定希望の引用と主体を改善し、10構成の文章図へ到達
+
+Mashの「処理落ちしているから続きから再開」に基づき、前回のGitHub保存済み地点Cocolon2a417ba／API17c7078と最新weekly・current／実fileを照合して継続。v9結果は既に完了しており再起動していない。v9の次残件だった否定希望の短いNEGATIONと先行rootのEXPLICIT_ACTOR欠落を、元材料と既存consumerへ戻って修正した。UI7401節と重複していた前回分析v9の番号§230は§231へ訂正し、既存anchor・UI本文は維持する。
+
+### 最小差分とJupyterの一回実行
+
+[API f50acbc](https://github.com/MassyuRed/mashos-api/commit/f50acbc379dfb8f7c01cb7b58dfda9d674914e65)は既存3fileだけ。private `selected_material.v10` はv9全system＋独立2架空説明例930字で、v9 bytesは維持した。現在の否定希望と肯定行動＋過去否定希望の例で、NEGATIONへ動詞を含む完全述語、明記された各rootへ本人のEXPLICIT_ACTORを示す。2例の完全原文は既存86教師／22評価と非重複。評価原文・rawの教師化や学習への追加は0だが、評価自体は既知の近接最小対照でblindではない。
+
+元source／user／requestの材料は同一、profile／request_ref／response digest／保存stateは別identity。明示cumulative callerのcategory context再構築を追加しただけで、source compiler／typed consumer／作者・意味型・公開DTO／DB schema／通常constructor／既定／planner／batch whitelistは変更していない。旧v4/v7/v9のmessages・ref・保存stateは通常／補足の6構成で旧17c7078と全文一致。v10補足3field／2envelopeの保存再読もCPUで一致した。
+
+Jupyterは既存Podへ直接接続。一度の接続エラーから再読込で復帰し、旧結果COMPLETEとRTX4000 Adaの2MiB／0％を確認した。ターミナルの複数行入力が未完になった際はモデルを開始せず、別ターミナルで改行を保持する一行コマンドへ切替。新API checkout／新rootを固定し、旧rootの完了runへ書き込まない。公開runnerは[1ae1c811](https://github.com/MassyuRed/Cocolon/commit/1ae1c811ece7ae00e48f2eaf2ebe892f58ca0358)、SHA `19e75cd71c41ad33396c63fe49aac9f0fb582d7286278b17972855f5487e8bd6`。
+
+元a2e／config006e・Qwen3.5-4B revision851bf6e・pins／隔離optional targetを保持。v9の10before rawを同じAPIで0モデル再読し、v10だけ各一回生成。新上限は全体240秒（親subprocess timeoutでload／consumeも含む）、各生成23秒・最大10生成／1load／学習0。中断後のモデル再試行・新レンタル・Pod管理・port変更は0。
+
+| 確認 | 実結果 |
+|---|---|
+| CPU準備 | 10requestのuser／material同一・別ref、最大4279入力token＋2048<8192 |
+| 実4B | 10開始／10stop／11返却field／1load／学習0、親73.99475753959268秒／child68.61624022759497秒、exit0／timeout false |
+| 生成時間合計 | 53.53791414294392秒。準備・保持・通信等を含む総請求額の測定ではない |
+| map到達 | 既知の同10構成で8→10。各1record、合計11fieldで、一般正解率・別題材数へ換算しない |
+| E04 | 完全述語NEGATIONを保持し、SELF／negative／wish／current_inputの1node・edge0。希望を不実行の事実へ変えない |
+| E05 | 先行行動の明記主体も保持し、SELF／positive／fact／past＋SELF／negative／wish／pastの2node・edge0 |
+| 旧成功8 | 全typed graph・文章・図は別artifactのprojection_ofだけを除き完全一致 |
+| 生応答の差分 | 旧8中6一致。E06の対象候補1個省略、AE05の否定引用拡張＋対象候補1個追加。typed意味は不変で、全candidate同一とは扱わない |
+
+全10source／新旧20rawと10文章・図をrootと同環境read-only reviewerが確認。AE05／OP02の主体未指定は未指定のまま、AP07の原文の明示順序だけをedgeとして保持し、担当の事実から実行完了や選択基準を作らない。E05の2root間に原因・順序を新設していない。
+
+10保存candidateはcompiler／作者を禁止して完全一致で復元し、同rawから10typed／cumulative mapをoffline再構築。補助reviewerも別のCPUメモリで同じ10件を再確認した。これは保存map artifact自体の非生成reload、DB/current／月次reader、複数record/full-parent/batch合成の成功ではない。HTTP／DB／新モデル呼出し0。
+
+### 検証・保全・未完了
+
+- local関連5moduleは638 PASS／PostgreSQL WASM環境未設定19 SKIP／既存warning1、203.89秒。Jupyter actor-profile37 PASS／warning1、5.65秒。37は広いsuiteに含まれ、件数を重複加算しない。
+- [CI42188492957](https://github.com/MassyuRed/mashos-api/actions/runs/42188492957)／job127794437986は全step success。生成保存2442 PASS／既存SQL1 SKIP／12048subtests・391.56秒、共有owner1 PASS・25.79秒、累積/API/jobs302 PASS／2subtests・153.21秒、隔離SQL201原本／15月参照。local19 SKIPをCIの実SQL結果と同一検査の重複成功へ換算しない。
+- [非公開原本](https://chatgpt.com/library?file_id=libfile_fde3_f-1f1bf457dbd4819189d6b7841b5f0508_2f7470f963808191aaebf050935e72de&account_id=personal)は42member／374894bytes／SHA `27906586bedbfa694144989fb3a99967e4cd3b940659fa9e870785d9f940b35f`。CRC／全member照合済み。元33fileはread_bytes().decodeで単独CRも保ち、全bytes／SHAに一致。旧v9result／prior pack／helper／新runner／固定sourceも照合。新旧raw／request／全graph・文章図／replay／tests／CI log／reviewを保存した。公開GitHubへ原文・raw・人物は出さない。
+- API3fileとrunner1fileはGitHubからblob SHAを読み戻してlocalに一致。Jupyter source4fileとrunnerも同じ公開原本に一致し、重み／config／optional targetは前後不変。終了GPUは2MiB／0％。今回のRender／Supabaseの変更・DB書込・本番配置・merge・RN/native build0。
+
+**否定希望の限定改善を確認し、v10は研究候補として保全する。通常／次学習初期値へ自動採用しない。** STRUCTURE_MAP_DELTA_PRESENTはprivate profile/ref/state variantと明示cumulative再構築だけ。一般意味・全履歴の役割／選択／記録間接続の完成やMash Product Readへ昇格しない。実環境はCodex Work／GPT-6と同環境read-only補助で、独立Pro／human受入れではない。
+
+次は保存済みN1/N2の対象scopeを元source・既存材料／ownerへCPUで照合し、対象の過剰な切出しと欠落を分ける。今回runの再起動や、評価rawの教師化、説明を足して成功まで再生成する進め方はしない。N1/N2/N3のv10新生成、一般の本人基準・暗黙役割・選択基準／記録間意味、全欄補足／通常時間内全量、IF／Saved／実DB／本人端末・商品受入れは残件。

@@ -3749,7 +3749,7 @@ API5c9606、Jupyter241 PASS、CI42109915846全工程成功。fresh replay2でWH0
 全102元fileと全重みは非公開保存。新18返却／cached7を確認、afterN3は23秒未返却。二欄E06は同じ原応答を0モデルで接続した範囲。一般の本人基準・役割・選択・記録間接続、全補足、IF／Saved／実DB／実機は未完了。
 
 
-## 11/6 §230 — 希望境界研究profileと実ファイル対応
+## 11/6 §231 — 希望境界研究profileと実ファイル対応
 
 | path | 既存責務への差分 |
 |---|---|
@@ -3759,3 +3759,15 @@ API5c9606、Jupyter241 PASS、CI42109915846全工程成功。fresh replay2でWH0
 | trial `wish_boundary_probe.py`／`wish_boundary_v9_results.json` | fixed-a2e・after-only10・学習0／1load／240秒の一回比較と、本文なし結果／private原本参照 |
 
 API17c7078f／CI42182501217全工程成功。現在・過去希望2例が文章・図へ到達、旧成功6保持、否定希望2例は未対応。private profile/ref/state variantをSTRUCTURE_MAP_DELTA_PRESENTとして記録し、一般意味品質・通常採用／本番配置は未成立。[全結果・再開点](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-wish-boundary-v9-20261106)。
+
+
+## 11/6 §232 — 否定希望説明例の研究差分と実ファイル対応
+
+| path | 既存責務への差分 |
+|---|---|
+| API `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py` | v10はv9全system＋独立2例930字。完全述語NEGATIONと各rootの明記主体を示す。別request／private state、元source／raw／型／consumer／作者は維持 |
+| API `ai/services/ai_inference/analysis_cumulative_service.py` | 明示v10のcandidate／typed／保存再構築へ既存category contextを継承。通常選択は拡張しない |
+| API `ai/tests/test_analysis_model_actor_profile.py` | 実system2例の意味／主体／非生成保存再読、v7/v9/v10のcross拒否、短い否定希望のunsupportedと通常transport／batch拒否 |
+| trial `negative_wish_probe.py`／`negative_wish_v10_results.json` | 固定v9 rawをbeforeへ再利用、新v10だけ10生成／1load／学習0／240秒の一回比較。本文なし集計とprivate原本参照 |
+
+API f50acbc／runner1ae1c811、CI42188492957全工程成功。否定希望2例が到達し旧8typed保持、raw一致は6。STRUCTURE_MAP_DELTA_PRESENTはprivate profile/ref/state variantと明示callerだけ。公開DTO／DB schema／意味型／通常transport・全量batch・RN／稼働採用は変更していない。[結果・保存原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-negative-wish-v10-20261106)。
