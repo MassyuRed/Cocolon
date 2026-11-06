@@ -12,7 +12,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { useTheme } from "../theme/ThemeContext";
-import { makeUiTokens } from "../ui/uiTokens";
+import { makeUiTokens, MODAL_ORIENTATIONS } from "../ui/uiTokens";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { getNoticeButtonActions } from "../lib/noticeActionRuntime";
 import CocolonButton from "./CocolonButton";
@@ -78,6 +78,7 @@ export default function NoticeModal({
       transparent
       animationType="fade"
       onRequestClose={onClose}
+      supportedOrientations={MODAL_ORIENTATIONS}
     >
       <SafeAreaProvider style={styles.backdrop}>
         <Pressable style={styles.overlayTouch} onPress={onClose} />

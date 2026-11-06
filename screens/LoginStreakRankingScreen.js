@@ -127,9 +127,9 @@ function RankingHeader({ styles, title, navigation }) {
       // noop
     }
 
-    // fallback: return to RankingTop tab
+    // fallback: return to the existing legacy Ranking stack entry
     try {
-      navigation?.navigate?.("MainTabs", { screen: "RankingTop" });
+      navigation?.navigate?.("RankingTop");
     } catch {
       // noop
     }
@@ -137,21 +137,12 @@ function RankingHeader({ styles, title, navigation }) {
 
   return (
     <View style={styles.panelHeader}>
-      <TouchableOpacity
+      <CocolonBackButton
+        navigation={navigation}
         onPress={handleBack}
+        fallbackRouteName="RankingTop"
         style={styles.backBtn}
-        activeOpacity={0.85}
-      >
-        <View pointerEvents="none">
-          <CocolonBackButton
-            navigation={navigation}
-            fallbackRouteName="MainTabs"
-            fallbackParams={{ screen: "RankingTop" }}
-            style={{ padding: 0 }}
-          />
-        </View>
-
-      </TouchableOpacity>
+      />
 
       <Text style={styles.panelTitle}>{title}</Text>
 

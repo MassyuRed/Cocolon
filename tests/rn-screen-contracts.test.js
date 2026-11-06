@@ -1855,7 +1855,7 @@ test('TodayQuestionHistoryScreen keeps personal followup source-anchor display a
     '入力: 「',
     'TextInput',
     'optionalFreeTextInput',
-    'Analysisに戻る',
+    '前の画面に戻る',
   ], 'TodayQuestionHistoryScreen.js');
 });
 
@@ -2814,7 +2814,7 @@ test('Kokoro weather Phase 6 QA keeps current card, report strip, modal, and for
 
   assertIncludes(detailModal, [
     'export default function KokoroWeatherDetailModal',
-    '<Modal visible={!!visible} transparent animationType="slide" onRequestClose={onClose}>',
+    '<Modal visible={!!visible} transparent animationType="slide" onRequestClose={onClose} supportedOrientations={MODAL_ORIENTATIONS}>',
     'onPress={onClose}',
     'accessibilityLabel="こころ天気の詳細を閉じる"',
     '時間帯別こころ天気',

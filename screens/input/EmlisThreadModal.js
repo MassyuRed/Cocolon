@@ -1,3 +1,4 @@
+import { MODAL_ORIENTATIONS } from "../../ui/uiTokens";
 import React, { useEffect, useRef, useState } from "react";
 import { ActivityIndicator, Alert, AppState, KeyboardAvoidingView, Modal, Platform, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import CocolonButton from "../../components/CocolonButton";
@@ -142,7 +143,7 @@ export default function EmlisThreadModal({ thread, colors, navigation, userId = 
     ? "応答の準備が続いています。閉じて、履歴から応答を開き直してください。" : threadStatus(dto));
 
   return <Modal visible={thread.visible} transparent animationType={Platform.OS === "ios" ? "fade" : "none"}
-    onRequestClose={thread.close} onDismiss={openPiece}>
+    onRequestClose={thread.close} onDismiss={openPiece} supportedOrientations={MODAL_ORIENTATIONS}>
     <SafeAreaView edges={["top", "bottom", "left", "right"]} style={s.safeArea}>
     <KeyboardAvoidingView style={s.backdrop} behavior={Platform.OS === "ios" ? "padding" : "height"}>
       <View style={[s.card, { backgroundColor: colors.FIELD_BG, borderColor: colors.CARD_BORDER }]}>

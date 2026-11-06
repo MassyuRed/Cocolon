@@ -10,7 +10,7 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import PieceVisualCard from './PieceVisualCard';
 import Button from '../CocolonButton';
 import { useTheme } from '../../theme/ThemeContext';
-import { makeUiTokens } from '../../ui/uiTokens';
+import { makeUiTokens, MODAL_ORIENTATIONS } from '../../ui/uiTokens';
 import { PIECE_THEME_COLORS, PIECE_THEME_LABELS } from '../../features/piece/piecePalette';
 
 const element = React.createElement;
@@ -91,6 +91,7 @@ export default function PiecePreviewModal({ visible = false, display, onClose, o
     : display.retryKind === 'cancel' ? '同じ候補の取消を再試行' :
     display.retryKind === 'recover' ? '最新のプレビューを取得' : '同じ要求で再試行';
   return element(Modal, {
+    supportedOrientations: MODAL_ORIENTATIONS,
     visible: true, animationType: 'slide', presentationStyle: 'fullScreen', onRequestClose: onClose,
   }, element(SafeAreaProvider, { style: { flex: 1, backgroundColor: colors.BG_SILVER } },
     element(SafeAreaView, { edges: ['top', 'right', 'bottom', 'left'], mode: 'padding',

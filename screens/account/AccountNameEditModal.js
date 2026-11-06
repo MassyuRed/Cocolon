@@ -1,3 +1,4 @@
+import { MODAL_ORIENTATIONS } from "../../ui/uiTokens";
 import React from "react";
 import {
   KeyboardAvoidingView,
@@ -36,6 +37,7 @@ export default function AccountNameEditModal({
       transparent
       animationType="fade"
       onRequestClose={closeNameEdit}
+      supportedOrientations={MODAL_ORIENTATIONS}
     >
       <SafeAreaProvider style={{ flex: 1 }}>
       <Pressable style={styles.modalBackdrop} onPress={closeNameEdit} />

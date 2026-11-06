@@ -15,7 +15,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useTheme } from "../theme/ThemeContext";
 import TodayQuestionCard from "./TodayQuestionCard";
-import { makeUiTokens } from "../ui/uiTokens";
+import { makeUiTokens, MODAL_ORIENTATIONS } from "../ui/uiTokens";
 
 export default function TodayQuestionModal({
   visible,
@@ -37,6 +37,7 @@ export default function TodayQuestionModal({
       transparent
       animationType="fade"
       onRequestClose={onClose}
+      supportedOrientations={MODAL_ORIENTATIONS}
     >
       <SafeAreaView edges={["top", "bottom", "left", "right"]} style={styles.backdrop}>
         <Pressable style={styles.overlayTouch} onPress={onClose} />

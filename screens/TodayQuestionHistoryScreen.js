@@ -241,7 +241,7 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
             <CocolonBackButton
               onPress={onBack}
               style={styles.backButton}
-              accessibilityLabel="Analysisに戻る"
+              accessibilityLabel="前の画面に戻る"
             />
             <Text style={styles.headerTitle}>今日の問い履歴</Text>
             <View style={styles.headerSpacer} />
@@ -271,7 +271,7 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
             <CocolonBackButton
               onPress={onBack}
               style={styles.backButton}
-              accessibilityLabel="Analysisに戻る"
+              accessibilityLabel="前の画面に戻る"
             />
             <Text style={styles.headerTitle}>今日の問い履歴</Text>
             <View style={styles.headerSpacer} />

@@ -836,7 +836,7 @@ export default function SubscriptionSelectScreen({ navigation }) {
           <View style={styles.header}>
             <CocolonBackButton
               navigation={navigation}
-              fallbackRouteName="Home"
+              fallbackRouteName="Input"
               style={styles.backButton}
             />
             <Text style={styles.headerTitle}>サブスクリプション</Text>

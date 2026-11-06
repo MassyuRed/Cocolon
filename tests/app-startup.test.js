@@ -235,3 +235,36 @@ test('tutorial fallback card is bounded by usable height including both insets',
   assert.equal(view.cardRect.height, 17);
   assert.equal(view.cardRect.bottom, 49, 'negative margin cannot consume the bottom safe area');
 });
+
+test('back controls keep overrides and history priority with a registered home fallback', async () => {
+  const calls=[];
+  let canGoBack=false;
+  const navigation={canGoBack:()=>canGoBack,goBack:()=>calls.push(['back']),navigate:(...args)=>calls.push(['navigate',...args])};
+  const Back=load('components/CocolonBackButton.js',{
+    'react-native':{TouchableOpacity:'BackControl',StyleSheet:{create:value=>value}},
+    'react-native-vector-icons/Ionicons':()=>null,
+    '@react-navigation/native':{useNavigation:()=>navigation},
+    '../theme/ThemeContext':{useTheme:()=>({colors:{}})},
+  }).default;
+  const scenarios=[
+    {props:{},back:false,expected:[['navigate','Input',undefined]]},
+    {props:{navigation},back:true,expected:[['back']]},
+    {props:{onPress:()=>calls.push(['custom'])},back:true,expected:[['custom']]},
+    {props:{disabled:true},back:true,expected:[]},
+    {props:{fallbackRouteName:''},back:false,expected:[]},
+    {props:{fallbackRouteName:'RankingTop',fallbackParams:{source:'legacy'}},back:false,
+      expected:[['navigate','RankingTop',{source:'legacy'}]]},
+  ];
+  for(const scenario of scenarios){
+    calls.length=0;canGoBack=scenario.back;
+    let view;await act(async()=>{view=Renderer.create(React.createElement(Back,scenario.props));});
+    const button=view.root.findByType('BackControl');
+    assert.equal(button.props.accessibilityState.disabled,!!scenario.props.disabled);
+    await act(async()=>button.props.onPress());
+    assert.deepEqual(calls,scenario.expected);
+    await act(async()=>view.unmount());
+  }
+  assert.match(fs.readFileSync(path.join(ROOT,'navigation/MainTabs.js'),'utf8'),/<Tab\.Screen\s+name="Input"/);
+  for(const file of ['screens/AccountScreen.js','screens/SubscriptionSelectScreen.js'])
+    assert.match(fs.readFileSync(path.join(ROOT,file),'utf8'),/fallbackRouteName="Input"/);
+});

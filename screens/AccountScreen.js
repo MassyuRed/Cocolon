@@ -85,7 +85,7 @@ export default function AccountScreen({ navigation, route, viewedUserId }) {
           <View style={styles.header}>
             <CocolonBackButton
               navigation={navigation}
-              fallbackRouteName="Home"
+              fallbackRouteName="Input"
               style={styles.backButton}
             />
             <Text style={styles.headerTitle}>アカウント</Text>

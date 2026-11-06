@@ -1,3 +1,4 @@
+import { MODAL_ORIENTATIONS } from "../../ui/uiTokens";
 import React from "react";
 import { Modal, ScrollView, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -71,6 +72,7 @@ export default function InputStartupModals({
         transparent
         animationType="fade"
         onRequestClose={() => {}}
+        supportedOrientations={MODAL_ORIENTATIONS}
       >
         <SafeAreaView edges={["top", "bottom", "left", "right"]} style={styles.draftRestoreBackdrop}>
           <View style={styles.draftRestoreCard}>

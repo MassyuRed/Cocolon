@@ -1,3 +1,4 @@
+import { MODAL_ORIENTATIONS } from "../../ui/uiTokens";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import React from "react";
 import { ActivityIndicator, Modal, Pressable, ScrollView, Text, View } from "react-native";
@@ -22,6 +23,7 @@ export default function PieceRecommendModal({
       animationType="fade"
       transparent
       onRequestClose={onClose}
+      supportedOrientations={MODAL_ORIENTATIONS}
     >
       <SafeAreaProvider style={{ flex: 1, backgroundColor: styles.modalOverlay.backgroundColor }}><SafeAreaView edges={["top", "right", "bottom", "left"]} style={{ flex: 1 }}><View style={[styles.modalOverlay, { backgroundColor: "transparent" }]}>
         <View style={styles.modalCard}>

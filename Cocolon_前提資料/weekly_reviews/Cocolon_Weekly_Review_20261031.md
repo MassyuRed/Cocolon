@@ -5157,3 +5157,17 @@ fresh `350f2f9b7be51b3eade3234787d57303d45d3537` から、前提・最新weekly�
 既存9入口178 PASS／FAIL0／SKIP0。感情は実component/styleの36case＋mounted変化、navは実optionsとlock固定原本の24render、Gateは実前後6caseで確認。既存起動testへ320／390幅×倍率1／1.3／1.6のicon枠／bar占有assertを追加、contract期待はflatな折返し表示へ適応。MainTabsの寸法・文字以外AST保持、7JS parse／diff空白検査成功。模擬native／APIを含み、実機での字体・hit-test・読み上げ成功ではない。
 
 詳細は[UI設計§24](../designs/ui/material-ui-design.md#ui-font-scale-finish-20261106)。次は統合ビルドで全画面、3theme・文字拡大・狭幅／短横・safe area／keyboard・長文／回復・全19stepを確認する段階。今回app/native build・CI native compile・Upload・配布・本人端末・Render／Supabase／GPU操作0、commitは[skip ci]。writerは華恋一人、補助はread-onlyとscratch検査。
+
+
+<a id="ui-navigation-modal-finish-20261106"></a>
+## 227. 11/6 — 戻る操作とModalの横向きを仕上げ、統合ビルド候補へ
+
+fresh `e4439d4a86f3ab9f4b92715b7d5151c6ff4470b4` から前提・規則・最新weekly・全画面設計と現sourceを確認し、全6群と前回の仕上げを継承。keyboard中の入力／送信／閉じる到達と戻り先を照合した。keyboard経路の追加確定不具合はなく、実OSの確認を次の統合ビルドへ残す。
+
+共通Back／Account／Subscriptionの未登録Home fallbackを登録済みInputへ修正。onPress優先、goBack履歴、disabledと明示fallbackを保持する。問い履歴はホーム／分析共用なので読み上げを「前の画面に戻る」へ。休眠ログイン順位は二重touchableを整理し、未登録MainTabsのfallbackを既存RankingTopへ合わせる。Rankingを復活させない。
+
+iOS本体が許可するportrait／landscape-left／landscape-rightに対し、RN Modalは指定省略によりportrait既定だった。共有凍結定数で17owner／19 Modalへ同じ3向きを明示し、Android縦固定・plist・presentationStyle・dismiss／保存条件を保つ。orientation追加直前との191 app source比較は、追加定数／import／prop以外AST同一。Piece作品canvas／recipe関連もbytes同一。
+
+製品23＋既存test3＋資料3file。11入口493 PASS／FAIL0／SKIP0（既存9入口179、Piece preview表示／初期保存modal314）。実Backの6条件と初期保存modalの各状態の向きを検査し、天気／問いのsource文字列とPiece import期待のみ適応。passed-only・回復・所有者・保存identityを緩めない。JS parse／空白検査成功。新file／framework／依存／route／API／DB／AI／課金価格／本文・作品画像・本人／公開契約変更0、STRUCTURE_MAP_DELTA_NONE。
+
+詳細は[UI設計§25](../designs/ui/material-ui-design.md#ui-navigation-modal-finish-20261106)。候補保存後に既存workflowから全群をまとめたiOS TestFlightビルドを一回開始する。正確なcandidate commit／run／build番号と各工程の結果は取得後追記。途中群別ビルドは行わない。実機3theme・文字拡大・狭幅／短横・safe area／keyboard・長文／回復・全19stepは未確認。今回source保存は[skip ci]、Render／Supabase／GPU操作0。writerは華恋一人、補助はread-only／scratch照合。

@@ -39,7 +39,7 @@ import TutorialOverlay, {
 import CocolonButton from "../components/CocolonButton";
 import CocolonPressable from "../components/CocolonPressable";
 import CocolonBackButton from "../components/CocolonBackButton";
-import { makeUiTokens } from "../ui/uiTokens";
+import { makeUiTokens, MODAL_ORIENTATIONS } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { TUTORIAL_PIECES, TUTORIAL_TOTAL_STEPS } from "../tutorial/tutorialScenarioData";
 
@@ -2030,6 +2030,7 @@ useEffect(() => {
         animationType="fade"
         transparent
         onRequestClose={() => setUserPickerVisible(false)}
+        supportedOrientations={MODAL_ORIENTATIONS}
       >
         <SafeAreaProvider style={{ flex: 1, backgroundColor: styles.modalOverlay.backgroundColor }}><SafeAreaView edges={["top", "right", "bottom", "left"]} style={{ flex: 1 }}><View ref={tutorialPickUserOverlayRootRef} style={[styles.modalOverlay, { backgroundColor: "transparent" }]} collapsable={false}>
           <View style={styles.modalCard}>
@@ -2201,6 +2202,7 @@ useEffect(() => {
         animationType="fade"
         transparent
         onRequestClose={() => setPickerVisible(false)}
+        supportedOrientations={MODAL_ORIENTATIONS}
       >
         <SafeAreaProvider style={{ flex: 1, backgroundColor: styles.modalOverlay.backgroundColor }}><SafeAreaView edges={["top", "right", "bottom", "left"]} style={{ flex: 1 }}><View style={[styles.modalOverlay, { backgroundColor: "transparent" }]}>
           <View style={styles.modalCard}>
@@ -2319,6 +2321,7 @@ useEffect(() => {
         animationType="fade"
         transparent
         onRequestClose={closeResonanceModal}
+        supportedOrientations={MODAL_ORIENTATIONS}
       >
         <SafeAreaProvider style={{ flex: 1, backgroundColor: styles.modalOverlay.backgroundColor }}><SafeAreaView edges={["top", "right", "bottom", "left"]} style={{ flex: 1 }}><View style={[styles.modalOverlay, { backgroundColor: "transparent" }]}>
           <View style={styles.modalCard}>

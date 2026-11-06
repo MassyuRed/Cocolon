@@ -9,11 +9,11 @@ import { useTheme } from "../theme/ThemeContext";
  * - Design is unified across screens.
  * - Behavior:
  *    - If navigation.canGoBack(): goBack()
- *    - Else: navigate to fallbackRouteName (default: "Home")
+ *    - Else: navigate to fallbackRouteName (default: "Input")
  *
  * Props:
  *  - navigation: optional (if omitted, uses useNavigation())
- *  - fallbackRouteName: string (default: "Home")
+ *  - fallbackRouteName: string (default: "Input")
  *  - fallbackParams: object (optional)
  *  - onPress: function (optional; overrides default behavior)
  *  - style: style object/array for the touchable
@@ -23,7 +23,7 @@ import { useTheme } from "../theme/ThemeContext";
  */
 export default function CocolonBackButton({
   navigation: navigationProp,
-  fallbackRouteName = "Home",
+  fallbackRouteName = "Input",
   fallbackParams,
   onPress,
   style,

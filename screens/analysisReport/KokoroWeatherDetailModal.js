@@ -6,7 +6,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 import { useTheme } from "../../theme/ThemeContext";
-import { makeUiTokens } from "../../ui/uiTokens";
+import { makeUiTokens, MODAL_ORIENTATIONS } from "../../ui/uiTokens";
 import { applyTypographyTokens } from "../../ui/applyTypographyTokens";
 import {
   buildEmotionShareText,
@@ -177,7 +177,7 @@ export default function KokoroWeatherDetailModal({ visible, item, detail, report
   const shareText = buildEmotionShareText(normalized?.emotionSharePct, 2);
 
   return (
-    <Modal visible={!!visible} transparent animationType="slide" onRequestClose={onClose}>
+    <Modal visible={!!visible} transparent animationType="slide" onRequestClose={onClose} supportedOrientations={MODAL_ORIENTATIONS}>
       <SafeAreaProvider><SafeAreaView edges={["top", "bottom", "left", "right"]} style={styles.backdrop}>
       <TouchableOpacity style={StyleSheet.absoluteFillObject} activeOpacity={1} onPress={onClose} accessibilityLabel="こころ天気の詳細を閉じる" accessibilityRole="button" />
         <View style={styles.sheet}>

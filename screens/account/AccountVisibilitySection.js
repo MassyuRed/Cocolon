@@ -1,3 +1,4 @@
+import { MODAL_ORIENTATIONS } from "../../ui/uiTokens";
 import React from "react";
 import {
   ActivityIndicator,
@@ -100,6 +101,7 @@ export default function AccountVisibilitySection({
       transparent
       animationType="fade"
       onRequestClose={closeAccountSettings}
+      supportedOrientations={MODAL_ORIENTATIONS}
     >
       <SafeAreaProvider style={{ flex: 1 }}>
       <Pressable

@@ -10,7 +10,7 @@ import {
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
-import { makeUiTokens } from "../ui/uiTokens";
+import { makeUiTokens, MODAL_ORIENTATIONS } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { useTheme } from "../theme/ThemeContext";
 import CocolonButton from "./CocolonButton";
@@ -31,6 +31,7 @@ export default function TutorialStartModal({
       transparent
       animationType="fade"
       onRequestClose={onDismiss}
+      supportedOrientations={MODAL_ORIENTATIONS}
     >
       <SafeAreaProvider style={{ backgroundColor: "rgba(15, 23, 42, 0.35)" }}>
       <Pressable style={styles.overlayTouch} onPress={onDismiss} />

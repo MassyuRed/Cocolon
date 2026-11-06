@@ -1,3 +1,4 @@
+import { MODAL_ORIENTATIONS } from "../../ui/uiTokens";
 import React from "react";
 import { Modal, ScrollView, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -25,7 +26,7 @@ export default function InputFeedbackReplyModal({
   );
 
   return (
-    <Modal visible={shouldShow} transparent animationType="fade" onRequestClose={onClose}>
+    <Modal visible={shouldShow} transparent animationType="fade" onRequestClose={onClose} supportedOrientations={MODAL_ORIENTATIONS}>
       <SafeAreaView edges={["top", "bottom", "left", "right"]} style={styles.inputFeedbackBackdrop}>
         <View style={styles.inputFeedbackCard}>
           <ScrollView style={styles.inputFeedbackBodyScroll}

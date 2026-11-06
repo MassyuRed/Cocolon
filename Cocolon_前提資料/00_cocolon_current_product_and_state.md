@@ -176,7 +176,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 | 機能 | 目的・現在の接続 | 未確認・境界 |
 |---|---|---|
-| UI採用方針（11/6） | **全画面を例外なくMaterialへ統一するMashの確定方針。** 全6群sourceの一巡後、tap／短横tutorialに続き、感情入力とnavの文字拡大を補修。[最新実装§24](designs/ui/material-ui-design.md#ui-font-scale-finish-20261106) | 感情6選択肢は実幅と文字倍率で1〜3列へ、選択／強度／refを保持。navはlock固定7.14.0原本と占有を揃え、横画面も縦構成、倍率に応じたbar高へ。接続確認中は薄めず補助色。既存9入口178 PASS、感情36／nav24／Gate6の実source代替検査。依存・API／DB／AI・入力保存／本人・公開契約・作品画像は不変。3theme・文字拡大・短横／keyboard・全19step等の実機は未確認。今回ビルド／native compile／配布0、途中commitは[skip ci] |
+| UI採用方針（11/6） | **全画面を例外なくMaterialへ統一するMashの確定方針。** 全6群sourceとtap／短横tutorial・文字拡大の仕上げを継承し、戻る操作とModal方向を補修。[最新実装§25](designs/ui/material-ui-design.md#ui-navigation-modal-finish-20261106) | 履歴なしは登録済みInputへ、問い履歴の戻る案内は共用へ。全19 ModalをiOS既存3向きへ揃え、Android縦固定・Piece作品・保存／本人／回復契約を維持。11入口493 PASS、orientation以外の191 app source AST同一。候補保存後に全群統合iOS TestFlightビルド一回へ進み、正確なcommit／run／結果を追記する。3theme・文字拡大・短横／keyboard・全19step等の実機は未確認。途中commitは[skip ci] |
 | 起動・認証 | 登録／ログイン／メール確認再送／再設定／復旧。`App.js`→`RootNavigator`→`MainTabs`→Input／Analysis／Piece／Settingsの4 Stack（Ranking入口は撤去済み） | native認証リンク・cold／warm復帰の実成立は別確認。旧巨大App／MyModel画面名から現在を復元しない |
 | 今日の問い・回答履歴 | current／answers／history／PATCH／settingsを接続。日常メモと別に考えを記録し、修正・再読 | Emlis任意問いと別機能。旧自己構造素材との接続を、V2全source採用済みへ拡張しない |
 | 投稿・他者のPiece | 通常`PieceEntryScreen`→`NexusScreen`。本人／フォロー中／特定相手、並替・更新・本人投稿削除。linkPayload時のみ`PieceScreen` | 公開条件と新Piece保存成立は別。旧Q&A投稿と新canonical recordを混同しない |

@@ -27,7 +27,7 @@ const renderPromise = Promise.resolve((() => {
     "import PieceVisualCard from './PieceVisualCard';",
     "import Button from '../CocolonButton';",
     "import { useTheme } from '../../theme/ThemeContext';",
-    "import { makeUiTokens } from '../../ui/uiTokens';",
+    "import { makeUiTokens, MODAL_ORIENTATIONS } from '../../ui/uiTokens';",
     "import { PIECE_THEME_COLORS, PIECE_THEME_LABELS } from '../../features/piece/piecePalette';",
   ]);
   const marker = name => ({ component: name });
@@ -81,6 +81,7 @@ test('every visible state uses its own modal safe area for both the header and f
   for (const phase of ['received', 'loading', 'unavailable', 'saved']) {
     const tree = await render(fixture({ phase, message: 'この入力からは現在Pieceを作成できません。' }));
     assert.equal(tree.type.component, 'Modal');
+    assert.deepEqual(Array.from(tree.props.supportedOrientations), ['portrait', 'landscape-left', 'landscape-right']);
     const provider = tree.children[0];
     assert.equal(provider.type.component, 'SafeAreaProvider', 'measure the native modal, not its presenting screen');
     assert.equal(provider.props.initialMetrics, undefined, 'do not seed a remounting modal with stale window metrics');

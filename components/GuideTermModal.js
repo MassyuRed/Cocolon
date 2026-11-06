@@ -13,7 +13,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { useTheme } from "../theme/ThemeContext";
-import { makeUiTokens } from "../ui/uiTokens";
+import { makeUiTokens, MODAL_ORIENTATIONS } from "../ui/uiTokens";
 
 export default function GuideTermModal({
   visible,
@@ -40,6 +40,7 @@ export default function GuideTermModal({
       transparent
       animationType="fade"
       onRequestClose={onClose}
+      supportedOrientations={MODAL_ORIENTATIONS}
     >
       <SafeAreaProvider style={{ backgroundColor: "rgba(15, 23, 42, 0.38)" }}>
       <SafeAreaView edges={["top", "bottom", "left", "right"]} style={[styles.backdrop, { backgroundColor: "transparent" }]}>

@@ -1,3 +1,4 @@
+import { MODAL_ORIENTATIONS } from "../../ui/uiTokens";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import React from "react";
 import { Modal, ScrollView, Text, View } from "react-native";
@@ -18,7 +19,7 @@ export default function NexusOwnerPickerModal({
   handleSelectOwnerOption,
 }) {
   return (
-    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
+    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose} supportedOrientations={MODAL_ORIENTATIONS}>
       <SafeAreaProvider style={{ flex: 1, backgroundColor: styles.pickerBackdrop.backgroundColor }}><SafeAreaView edges={["top", "right", "bottom", "left"]} style={{ flex: 1 }}><View style={[styles.pickerBackdrop, { backgroundColor: "transparent" }]}>
         <View style={styles.pickerCard}>
           <View style={styles.pickerHeader}><Text style={styles.pickerTitle}>表示ユーザー</Text></View>

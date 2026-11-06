@@ -11,7 +11,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import { useTheme } from "../theme/ThemeContext";
 import CocolonButton from "./CocolonButton";
-import { makeUiTokens } from "../ui/uiTokens";
+import { makeUiTokens, MODAL_ORIENTATIONS } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 
 function toJapaneseDigit(value) {
@@ -57,6 +57,7 @@ export default function EmotionPiecePreviewModal({
       transparent
       animationType="fade"
       onRequestClose={hideCancelButton ? () => {} : onClose}
+      supportedOrientations={MODAL_ORIENTATIONS}
     >
       <SafeAreaView edges={["top", "bottom", "left", "right"]} style={styles.backdrop}>
         <View style={styles.card}>

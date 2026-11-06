@@ -1,6 +1,11 @@
 // uiTokens.js
 // Cocolon UI tokens (Design System) - JS版
 
+// Match the orientations enabled by the iOS app; Android keeps its manifest setting.
+export const MODAL_ORIENTATIONS = Object.freeze([
+  "portrait", "landscape-left", "landscape-right",
+]);
+
 export const MAX_BUTTON_WIDTH = 520;
 export const DARK_GRAY_DESC = "#4B5563";
 

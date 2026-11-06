@@ -654,3 +654,23 @@ AppRuntimeBootstrapGateの再確認ボタンはloading時に全体opacity0.65を
 検証：既存9入口 **178 PASS／FAIL0／SKIP0**。実InputEmotionSection＋CocolonPressable＋実style/roleを3theme×4幅×3倍率＝36caseで描画代替し、列幅・順序／toggle・強度3payload／ref・排他／disabled／selected、15/22/600とText shrinkを確認。同じmounted instanceの幅240→354→微小差→倍率1.6→640でも選択を維持。MainTabsの実optionsとlock固定7.14.0の実部品による4route×3倍率×幅320／横667の24renderで、占有枠・予約高・通常icon／縦配置・未読と押下を確認。7.4.7での予備照合は固定版の根拠に数えず、7.14.0で再実行した。実Gateの前後3theme×loading／error＝6caseで、文字色・無効／busy／callbackと、banner切替時の子mount数・下書き保持を確認。MainTabsの意図した寸法・文字style以外のASTはbeforeと同一。7JS parse／diff空白検査成功。
 
 native host・計測・APIは代替であり、実字体の幅・実hit-test・読み上げ・OS文字拡大の実機合格ではない。**次の受入確認は全群をまとめたビルドと実機の全画面。** 今回もapp/native build・CI native compile・Upload・配布・本人端末・Render／Supabase／GPU操作0、commitは[skip ci]。全画面統一の範囲と、前回までの保存／回復／tutorial条件を保持する。
+
+
+<a id="ui-navigation-modal-finish-20261106"></a>
+## 25. 11/6 戻る操作・Modalの向きを仕上げ、統合ビルド候補を固定
+
+fresh `e4439d4a86f3ab9f4b92715b7d5151c6ff4470b4` を起点に全6群と§23〜24を継承。入力・認証・アカウント編集・問い回答・Emlisのkeyboard中の操作到達、履歴／詳細からの戻り先を実sourceで照合した。keyboard経路では追加修正を要する確定不具合は見つからず、実OSでの表示確認は次の統合ビルドで行う。
+
+### 戻る操作は実際に登録された入口へ
+
+共通CocolonBackButtonの履歴なしfallbackと、Account／Subscriptionの明示fallbackが、現MainTabsに未登録のHomeを指定していた。登録済みのInputへ統一。通常の戻る履歴があればgoBack、指定onPressがあればその処理を優先し、disabled中は動かさない契約を維持する。問い履歴はInput／分析の両方から開くため、固定の「Analysisに戻る」を「前の画面に戻る」へ修正。callbackは不変。休眠LoginStreakRankingのfallbackは未登録MainTabsではなく既存RankingStackのRankingTopへ合わせ、重ねていた二重touchableを共通BackButton一つへ整理する。Rankingへの入口を復活させない。
+
+### アプリとModalの許可方向を一致させる
+
+iOS本体のInfo.plistは縦・左横・右横を許可する一方、RN Modalで向きの指定が省略されていた。[RN0.77公式Modal仕様](https://reactnative.dev/docs/0.77/modal#supportedorientations-ios)の既定はportrait。ui/uiTokens.jsへ凍結したMODAL_ORIENTATIONS＝portrait／landscape-left／landscape-rightを置き、全17owner・19呼出（JSX18、PiecePreviewのcreateElement1）に同じsupportedOrientationsを明示した。portrait-upside-downを追加せず、iOS plist／Android Manifestの縦固定／presentationStyle／閉じる条件は変更しない。既存pageSheet／formSheetによる無効化・後続spread上書き・重複propもない。
+
+対象はNotice／GuideTerm／TodayQuestion／EmotionPiece／TutorialStart／CumulativeWatashiMap／PiecePreview、PieceLibrary内3面、AccountName／AccountVisibility／KokoroWeatherDetail、InputStartup／InputFeedbackReply／EmlisThread、PieceRecommend／休眠PieceTutorialCreate／NexusOwnerPicker。作品画像そのものに回転用styleや寸法変更を入れない。
+
+製品23file＋既存test3file＋資料3file。既存11入口 **493 PASS／FAIL0／SKIP0**（従来9入口179＋Piece preview表示／初期保存modal314）。戻るの6条件を実共通componentで検査し、初期保存modalの各状態で3向きをassert。source文字列に依存する天気／問い履歴の期待とPiece import列挙だけを現表示へ適応し、passed-only／本人／回復／保存identityの条件は緩めていない。orientation追加直前の191 app sourceと比べ、定数／import／Modal propだけを除くASTは全一致。PieceVisualCard／PieceExportCanvasとfeatures/pieceの12JSもbytes同一。変更JSのparse／空白検査成功。新file／依存／route／API／DB／AI／価格／入力保存・本人・公開契約・作品画像変更0、STRUCTURE_MAP_DELTA_NONE。
+
+この候補の保存後、**全画面をまとめたiOS TestFlightビルドを一回開始する**。途中群ごとのbuildは行わず、既存手動workflowを使う。build開始時の正確なcommit／run／CFBundleVersionと署名Archive・目的文検査・IPA・Uploadの結果は、結果取得後に追記する。本節の493件はnative描画や実機UI受入れではない。3theme、文字拡大1.0／1.3／1.6、狭幅／短横、safe area／keyboard、長文／回復・全19stepの実機確認は引き続き残る。Render／Supabase／GPU操作0。

@@ -1,3 +1,4 @@
+import { MODAL_ORIENTATIONS } from "../../ui/uiTokens";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import React from "react";
 import {
@@ -44,6 +45,7 @@ export default function PieceTutorialCreateModal({
       animationType="fade"
       transparent
       onRequestClose={onClose}
+      supportedOrientations={MODAL_ORIENTATIONS}
     >
       <SafeAreaProvider style={{ flex: 1, backgroundColor: styles.modalOverlay.backgroundColor }}><SafeAreaView edges={["top", "right", "bottom", "left"]} style={{ flex: 1 }}><KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : undefined}><View ref={refs.modalOverlayRootRef} style={[styles.modalOverlay, { backgroundColor: "transparent" }]} collapsable={false}>
         <View style={styles.modalCard}>

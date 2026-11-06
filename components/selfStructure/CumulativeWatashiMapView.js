@@ -9,7 +9,7 @@ import { SELF_STRUCTURE_WIRE, buildSelfStructureReportDetailPath, buildSelfStruc
 import { getWatashiMapHistoryRetentionLabel } from './watashiMapAccessPolicy';
 import WatashiMapV2Renderer from './WatashiMapV2Renderer';
 import { checkedMapRow, checkedCurrentResult } from './cumulativeMapContract';
-import { makeUiTokens } from '../../ui/uiTokens';
+import { makeUiTokens, MODAL_ORIENTATIONS } from '../../ui/uiTokens';
 import CocolonButton from '../CocolonButton';
 import CocolonBackButton from '../CocolonBackButton';
 
@@ -158,7 +158,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
       </> : null}
       {visible && !state.loading ? <CocolonButton variant="secondary" onPress={() => load(compare)} title="再取得" /> : null}
     </Body>
-    <Modal visible={!!evidence && evidence.key === key} transparent animationType="fade" onRequestClose={closeEvidence}>
+    <Modal visible={!!evidence && evidence.key === key} transparent animationType="fade" onRequestClose={closeEvidence} supportedOrientations={MODAL_ORIENTATIONS}>
       <SafeAreaProvider><SafeAreaView edges={['top', 'bottom', 'left', 'right']} style={styles.overlay}><View style={styles.dialog}>
         <Text style={[styles.modalTitle, { color: ink }]}>根拠の記録</Text>
         <ScrollView style={{ flexShrink: 1 }} contentContainerStyle={{ gap: 16 }}>
