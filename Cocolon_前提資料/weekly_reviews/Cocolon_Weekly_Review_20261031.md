@@ -5075,3 +5075,20 @@ Safe areaと利用可能高さでmodalを制限し、見出し・説明・長文
 製品16file＋既存分析test2＋資料3。対象9入口478 PASS／FAIL0／SKIP0、JS18file parse、diff空白検査成功。累積／旧V2の31件を含み、埋込み縦scrollゼロと根拠button到達／同node_ref引渡しを既存assertへ追加した。13style ownerの615 role×themeもサイズ／行間／太さ一致。テストはReact/native・Auth/HTTP代替を含み、端末視覚合格ではない。補助reviewでDeep棒の固定色、左右header幅、空表示roleを修正。依存の通常取得でtransitive404があったが、既存同version toolsと固定preset/pluginの一時環境で検査し、repo依存定義は変更0。
 
 実装範囲・全path・境界と再開点は[UI設計§19](../designs/ui/material-ui-design.md#ui-analysis-material-20261106)。次はPiece・social。その後アカウント・設定・契約、案内・tutorial・残る休眠資産と全体確認。途中commitは[skip ci]。build／native compile／Upload／配布／実機、Render／Supabase／GPU操作は0。TECHNICAL_CREDITは実装・限定検証のみで、全UI完成や分析内容品質の合格へ換算しない。writerは華恋一人、補助はread-only review。
+
+<a id="ui-piece-material-20261106"></a>
+## 222. 11/6 — Piece・投稿・感情通知・共鳴のMaterial UI
+
+保存済み分析群 `be6f4162afd602a017f4232f91d8aa2f5b5994b4` のfresh head、前提全文・規則・UI設計・最新記録と対象実物を確認し、全画面統一のP01〜P22を進めた。全source完成後にまとめてbuildするMashの方針は不変。
+
+Nexusの4タブ・表示対象・新旧順、投稿の名前／日時・問い／答え・共鳴／本人削除を明確に区分。本文16/27/400、カード24、長い名前の折返し、tonal選択と読み上げへ揃えた。感情通知は5感情のhue背景を保持し、themeのinkで名前・時刻・感情／強さを表示。メモ本文は追加しない。感情ログの二重見出しを整理し、戻る・guideと更新／フォローを分けてscrollへ。おすすめの矢印、失敗と0件の区別、保持中の共鳴履歴とerrorの併記を補修した。
+
+PieceCreate／InputPieceActionAreaの元入力確認・作成・停止・回復を同じ状態カードと共通Buttonへ。新previewは画像／全文→選択設定→保存枠、回復はscroll内、初回保存／閉じるは固定。形式・比率・ブランドの選択面を統一し、実配色の見本はrecipeどおり。保存ID・本人・元キー・一度だけのnavigation消費・token／revision／hash・同一要求再送・失効条件は変更しない。
+
+本人履歴と詳細はtheme色・共通Buttonへ、画像→本文→保存情報→画像準備／写真保存／共有→公開／削除の階層にした。続き・詳細・削除の回復と同じPiece再読、OS開始後の結果不明、外部画像を回収できない説明を維持。自動thumbnail・自動画像準備は足さない。共鳴履歴は保持期間・sort・errorもFlatList内でscrollし、読込中は0件と区別。中継のreplaceは維持する。
+
+linkPayloadの旧Piece入口・Q&A詳細と各選択modal、停止中tutorial描画資産も同じUIへ。全辺safe area・全面scrim・可変高scroll・keyboard対策を適用。通常共鳴のmedium／メモなし直接送信を維持し、未使用の強度／メモmodalや停止中tutorialを有効化しない。新route・権限・公開条件の変更0。
+
+製品26file＋既存test5file＋資料3file。既存7入口814 PASS／FAIL0／SKIP0、変更JS31file parse、diff空白検査、8style ownerの471 role×theme一致。初回6失敗は旧UI tokens stubとprops追加前の静的期待を実tokens／現外観へ適応して解消し、保存・回復判定は緩めない。3classのrender以外と作品canvas subtreeは変更前とAST一致。合成React/native・Auth/HTTP/計測を含み、実端末の描画・ジェスチャー・読み上げの合格ではない。
+
+具体的変更・全path・保持境界と再開点は[UI設計§20](../designs/ui/material-ui-design.md#ui-piece-material-20261106)。次はアカウント・設定・契約、その後案内・tutorial・残る休眠資産と全体横断。source反映の区切りであり、全UI完成ではない。STRUCTURE_MAP_DELTA_NONE、Piece本文／recipe／保存画像／作品描画・計測／API／DB／AI変更0。app/native build・CI native compile・Upload・配布・実機表示・Render／Supabase／GPU操作0。途中commitは[skip ci]。writerは華恋一人、補助はread-only review。

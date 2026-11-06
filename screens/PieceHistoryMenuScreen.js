@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { Alert } from "react-native";
+import { Alert, View } from "react-native";
 
 import { useTutorial } from "../TutorialContext";
 import { useAppRuntime } from "../AppRuntimeContext";
@@ -53,7 +53,7 @@ export default function PieceHistoryMenuScreen({ navigation }) {
 
       <PieceDescription>
         共鳴したピースの履歴を確認できます。{"\n"}
-        一覧から選ぶと、そのピース詳細を開きます。
+        履歴を選ぶと、ピースの詳細を確認できます。
       </PieceDescription>
 
       <PieceMediumCard
@@ -63,13 +63,13 @@ export default function PieceHistoryMenuScreen({ navigation }) {
         chevron="forward"
         accessibilityLabel="共鳴履歴を開く"
       />
-      {canReadOwnPieces ? <PieceMediumCard
+      {canReadOwnPieces ? <View style={{ marginTop: 12 }}><PieceMediumCard
         title="自分のPiece"
         description="保存したPieceの本文と公開範囲を確認します"
         onPress={() => navigation?.navigate?.("PieceOwnerHistory", { savedPiece: null })}
         chevron="forward"
         accessibilityLabel="自分のPieceを開く"
-      /> : null}
+      /></View> : null}
     </PieceMenuScroll>
   );
 }

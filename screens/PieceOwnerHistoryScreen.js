@@ -1,5 +1,5 @@
 import React from 'react';
-import { Alert, AppState, View, Text, ScrollView, Button, ActivityIndicator } from 'react-native';
+import { Alert, AppState, View, Text, ScrollView, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useIsFocused } from '@react-navigation/native';
 import { useAuth } from '../AuthContext';
@@ -7,6 +7,9 @@ import { useAppRuntime } from '../AppRuntimeContext';
 import { useTutorial } from '../TutorialContext';
 import { createPieceOwnerHistoryController } from '../features/piece/PieceOwnerHistoryController';
 import { supportsPieceSavedImage } from '../features/piece/pieceLayout';
+import Button from '../components/CocolonButton';
+import { useTheme } from '../theme/ThemeContext';
+import { makeUiTokens } from '../ui/uiTokens';
 import PieceOwnerCard from '../components/piece/PieceOwnerCard';
 import PieceVisualCard from '../components/piece/PieceVisualCard';
 import PieceExportCanvas from '../components/piece/PieceExportCanvas';
@@ -301,6 +304,7 @@ export class PieceOwnerHistoryHost extends React.Component {
         onPress: () => this.act('deleteConfirmed', record) }]);
   }
   render() {
+    const { colors = {}, ui } = this.props;
     const view = this.current() ? this.controller.getView() : null;
     const available = view && view.phase !== 'hidden';
     const record = available ? view.record : null;
@@ -319,56 +323,56 @@ export class PieceOwnerHistoryHost extends React.Component {
         ? this.exportMessage.text : null;
     const needsReread = this.current() && record === this.exportMessage?.displayed &&
       this.stamp() === this.exportMessage?.stamp && this.exportMessage?.needsReread === true;
-    return h(SafeAreaView, { style: { flex: 1, backgroundColor: '#FFFFFF' } },
-      h(View, { style: { flex: 1, padding: 20 } },
-        h(Text, { accessibilityRole: 'header', style: { color: '#202020', fontSize: 22, marginBottom: 12 } }, '自分のPiece'),
+    return h(SafeAreaView, { edges: ['left', 'right'], style: { flex: 1, backgroundColor: colors.BG_SILVER } },
+      h(View, { style: { flex: 1, padding: 20, width: '100%', maxWidth: 680, alignSelf: 'center' } },
+        h(Text, { accessibilityRole: 'header', style: { ...ui?.typography?.screenTitle, color: colors.TEXT_ON_LIGHT, marginBottom: 12 } }, '自分のPiece'),
         h(ScrollView, { style: { flex: 1 }, contentContainerStyle: { paddingBottom: 20 } },
-          !available ? h(Text, { accessibilityRole: 'alert', style: { color: '#202020', fontSize: 16 } }, '現在、自分のPieceを確認できません。') : null,
-          available && view.message ? h(Text, { accessibilityLiveRegion: 'polite', style: { color: '#202020', fontSize: 16, marginBottom: 12 } }, view.message) : null,
+          !available ? h(Text, { accessibilityRole: 'alert', style: { ...ui?.typography?.body, color: colors.TEXT_ON_LIGHT } }, '現在、自分のPieceを確認できません。') : null,
+          available && view.message ? h(Text, { accessibilityLiveRegion: 'polite', style: { ...ui?.typography?.body, color: colors.TEXT_ON_LIGHT, marginBottom: 12 } }, view.message) : null,
           available && view.phase === 'loading' ? h(ActivityIndicator, { accessibilityLabel: 'Pieceを確認中' }) : null,
-          available && view.phase === 'history' && view.items.length === 0 ? h(Text, { style: { color: '#202020', fontSize: 16 } }, '保存済みのPieceはありません。') : null,
-          ...(available ? view.items.map(item => h(PieceOwnerCard, { key: item.piece_id, record: item, onOpen: () => this.act('openDetail', item.piece_id) })) : []),
-          imageSupported ? h(PieceVisualCard, { savedRecord: record }) : null,
-          record ? h(PieceOwnerCard, { record }) : null,
+          available && view.phase === 'history' && view.items.length === 0 ? h(Text, { style: { ...ui?.typography?.body, color: colors.TEXT_ON_LIGHT } }, '保存済みのPieceはありません。') : null,
+          ...(available ? view.items.map(item => h(PieceOwnerCard, { colors, ui, key: item.piece_id, record: item, onOpen: () => this.act('openDetail', item.piece_id) })) : []),
+          imageSupported ? h(PieceVisualCard, { savedRecord: record, colors, ui }) : null,
+          record ? h(PieceOwnerCard, { record, colors, ui, detail: true }) : null,
           record && !imageSupported ? h(Text,
-            { style: { color: '#494949', fontSize: 14, lineHeight: 22, marginBottom: 8 } },
+            { style: { ...ui?.typography?.description, color: colors.TEXT_SUBTLE, marginBottom: 8 } },
             'この端末では、このPieceの画像を表示・保存・共有できません。') : null,
           exportEnabled ? h(Text,
-            { style: { color: '#494949', fontSize: 14, lineHeight: 22, marginBottom: 8 } },
+            { style: { ...ui?.typography?.description, color: colors.TEXT_SUBTLE, marginBottom: 8 } },
             '保存・共有した画像は、Cocolonで削除・非公開にしても回収できません。') : null,
-          exportEnabled ? h(Button, {
+          exportEnabled ? h(Button, { variant: 'secondary', style: { marginTop: 12 },
             title: attempt ? '画像を準備し直す' : '画像の保存・共有を準備', disabled: exporting || needsReread,
             onPress: () => this.prepareExport(record) }) : null,
-          needsReread ? h(Button, { title: '同じPieceを読み込み直す',
+          needsReread ? h(Button, { variant: 'secondary', style: { marginTop: 12 }, title: '同じPieceを読み込み直す',
             onPress: () => this.rereadExportRecord(record) }) : null,
           attempt?.job ? h(View, { pointerEvents: 'none', accessible: false,
             accessibilityElementsHidden: true, importantForAccessibility: 'no-hide-descendants',
             style: { position: 'absolute', left: -10000, top: 0, width: 1080 } },
             h(PieceExportCanvas, { key: attempt.serial, savedRecord: attempt.job.record, onCaptureTargetChange: attempt.onTarget, onCaptureUnavailable: attempt.onUnavailable })) : null,
-          attempt?.job ? h(Button, { title: '写真に保存', disabled: exporting || !exportReady,
+          attempt?.job ? h(Button, { variant: 'secondary', style: { marginTop: 12 }, title: '写真に保存', disabled: exporting || !exportReady,
             onPress: () => this.exportImage(attempt, 'saveToPhotos') }) : null,
-          attempt?.job ? h(Button, { title: '画像を共有', disabled: exporting || !exportReady,
+          attempt?.job ? h(Button, { variant: 'secondary', style: { marginTop: 12 }, title: '画像を共有', disabled: exporting || !exportReady,
             onPress: () => this.exportImage(attempt, 'openShare') }) : null,
-          pendingOperation ? h(Text, { accessibilityLiveRegion: 'polite', style: { color: '#202020', fontSize: 16 } },
+          pendingOperation ? h(Text, { accessibilityLiveRegion: 'polite', style: { ...ui?.typography?.body, color: colors.TEXT_ON_LIGHT } },
             operation.action === 'saveToPhotos' ? '写真への保存結果を待っています。' : '共有画面の終了を待っています。') : null,
-          exportMessage ? h(Text, { accessibilityLiveRegion: 'polite', style: { color: '#202020', fontSize: 16 } }, exportMessage) : null,
+          exportMessage ? h(Text, { accessibilityLiveRegion: 'polite', style: { ...ui?.typography?.body, color: colors.TEXT_ON_LIGHT } }, exportMessage) : null,
           record && view.permissions.visibility && (record.visibility_scope === 'public' || view.permissions.publish)
-            ? h(Button, { title: record.visibility_scope === 'public' ? '非公開にする' : '公開する', onPress: () => this.confirmVisibility(record) }) : null,
-          record && view.permissions.delete ? h(Button, { title: 'このPieceを削除', onPress: () => this.confirmDelete(record) }) : null,
-          available && view.canRetryDelete ? h(Button, { title: '同じ削除要求で結果を確認', onPress: () => this.act('retryDelete', view.deleteRetryToken) }) : null,
-          available && view.canRetryDetail ? h(Button, { title: target ? '保存したPieceを読み込む' : '同じPieceを読み込み直す',
+            ? h(Button, { variant: 'secondary', style: { marginTop: 12 }, title: record.visibility_scope === 'public' ? '非公開にする' : '公開する', onPress: () => this.confirmVisibility(record) }) : null,
+          record && view.permissions.delete ? h(Button, { variant: 'secondary', style: { marginTop: 12 }, textStyle: { color: colors.ERROR }, title: 'このPieceを削除', onPress: () => this.confirmDelete(record) }) : null,
+          available && view.canRetryDelete ? h(Button, { variant: 'secondary', style: { marginTop: 12 }, title: '同じ削除要求で結果を確認', onPress: () => this.act('retryDelete', view.deleteRetryToken) }) : null,
+          available && view.canRetryDetail ? h(Button, { variant: 'secondary', style: { marginTop: 12 }, title: target ? '保存したPieceを読み込む' : '同じPieceを読み込み直す',
             onPress: () => this.act('retryDetail', view.detailRetryToken) }) : null,
           available && target && !view.canRetryDelete && !view.canRetryDetail && (view.phase === 'idle' ||
-            view.phase === 'unavailable' && view.code === 'PIECE_TEMPORARILY_UNAVAILABLE') ? h(Button, {
+            view.phase === 'unavailable' && view.code === 'PIECE_TEMPORARILY_UNAVAILABLE') ? h(Button, { variant: 'secondary', style: { marginTop: 12 },
             title: '保存したPieceを読み込む', onPress: () => this.openSavedDetail(targetKey, target.pieceId) }) : null,
-          available && view.phase !== 'loading' && !view.canRetryDelete ? h(Button, { title: record ? '履歴に戻る' : target ? '履歴を読み込む' : '保存済みPieceを読み込む', onPress: () => this.act('loadHistory') }) : null,
-          available && view.phase === 'history' && view.nextCursor ? h(Button, { title: '続きを読み込む', onPress: () => this.act('loadMore', view.nextCursor) }) : null,
-          h(Text, { style: { color: '#494949', fontSize: 14, lineHeight: 22, marginTop: 16 } },
+          available && view.phase !== 'loading' && !view.canRetryDelete ? h(Button, { variant: 'secondary', style: { marginTop: 12 }, title: record ? '履歴に戻る' : target ? '履歴を読み込む' : '保存済みPieceを読み込む', onPress: () => this.act('loadHistory') }) : null,
+          available && view.phase === 'history' && view.nextCursor ? h(Button, { variant: 'secondary', style: { marginTop: 12 }, title: '続きを読み込む', onPress: () => this.act('loadMore', view.nextCursor) }) : null,
+          h(Text, { style: { ...ui?.typography?.description, color: colors.TEXT_SUBTLE, marginTop: 16 } },
             record && !imageSupported ? '保存済み本文を確認できます。' :
               this.props.flags?.piece_v2_export_enabled === true ? '保存済み本文と画像レイアウトを確認できます。' :
                 '保存済み本文を確認できます。詳細では、対応する画像レイアウトも確認できます。画像の保存・共有は、まだ利用できません。'),
         ),
-        h(Button, { title: '戻る', onPress: () => { this.exportOperation = null; this.controller?.close();
+        h(Button, { variant: 'secondary', style: { marginTop: 12 }, title: '戻る', onPress: () => { this.exportOperation = null; this.controller?.close();
           this.props.navigation?.setParams?.({ savedPiece: null }); this.props.navigation?.goBack?.(); } }),
       ),
     );
@@ -376,12 +380,14 @@ export class PieceOwnerHistoryHost extends React.Component {
 }
 
 export default function PieceOwnerHistoryScreen({ navigation, route }) {
+  const { colors, themeName } = useTheme();
+  const ui = makeUiTokens(colors, themeName);
   const { session } = useAuth();
   const runtime = useAppRuntime();
   const { isTutorialMode } = useTutorial();
   const focused = useIsFocused();
   const flags = Object.fromEntries(flagNames.map(name => [name, runtime.isFeatureEnabled(name, false) === true]));
-  return h(PieceOwnerHistoryHost, { navigation, savedPiece: route?.params?.savedPiece, owner: session?.user?.id || '', flags,
+  return h(PieceOwnerHistoryHost, { colors, ui, navigation, savedPiece: route?.params?.savedPiece, owner: session?.user?.id || '', flags,
     enabled: focused && !isTutorialMode && flags.piece_v2_owner_read_enabled,
     presentationActive: focused && !isTutorialMode,
     runtimePending: runtime.runtime?.loading === true || runtime.runtime?.loaded !== true,

@@ -892,7 +892,7 @@ test('immutable v1 geometry, colors and discrete type scales cover all formats/r
 });
 test('actual modal integration passes the checked display and retains selectable canonical text', async () => {
   const source = fs.readFileSync(path.join(ROOT, 'components/piece/PiecePreviewModal.js'), 'utf8');
-  assert.match(source, /element\(PieceVisualCard, \{ display, onSaveFitChange \}\)/);
+  assert.match(source, /element\(PieceVisualCard, \{ display, onSaveFitChange, colors, ui \}\)/);
   assert.match(source, /testID: 'piece-canonical-text', selectable: true/);
 });
 test('same native Text instances stay hidden until every paragraph and branding supplies both events', async () => {

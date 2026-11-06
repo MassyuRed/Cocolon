@@ -106,7 +106,7 @@ function harness(options = {}) {
       tutorialFlagsLoaded: true, tutorialStep: control.step, tutorialResetToken: control.reset,
       addTutorialEmotion: noop, ensureTutorialPiecesSeed: () => tutorialSeeds.push(true), setTutorialStep: noop }) };
     if (name === '../theme/ThemeContext') return { useTheme: () => ({ colors, themeName: 'light' }) };
-    if (name === '../ui/uiTokens') return { makeUiTokens: () => ({}) };
+    if (name === '../ui/uiTokens') return { makeUiTokens: Function(fs.readFileSync(path.join(ROOT, 'ui/uiTokens.js'), 'utf8').replace(/^export /gm, '') + '\nreturn makeUiTokens;')() };
     if (name === '../ui/applyTypographyTokens') return { applyTypographyTokens: x => x };
     if (name === 'react-native-safe-area-context') return { useSafeAreaInsets: () => ({}) };
     if (name === '../features/home/useHomeState') return { STARTUP_POPUP_KIND: {}, useHomeState: () => ({ ...home,

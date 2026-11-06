@@ -13,7 +13,8 @@
  */
 import React from 'react';
 import { AppRuntimeContext } from '../../AppRuntimeContext';
-import { Alert, AppState, View, Button, Text } from 'react-native';
+import { Alert, AppState, View, Text } from 'react-native';
+import Button from '../../components/CocolonButton';
 import { createPieceCreateController } from '../../features/piece/PieceCreateController';
 import { PieceApiError, preparePiecePreviewRequest, requestPieceSourceRef } from '../../features/piece/pieceApi';
 import { readPiecePreviewDisplay } from '../../features/piece/piecePreviewModel';
@@ -582,6 +583,10 @@ export default class InputPieceActionArea extends React.Component {
     // A changed account/source/key/selection is concealed in this render,
     // not one effect later. There is no render-time mutation or HTTP call.
     if (!this.isCurrent()) return null;
+    const { colors = {}, ui } = this.props;
+    const bodyStyle = { ...ui?.typography?.body, color: colors.TEXT_ON_LIGHT };
+    const statusStyle = { gap: 12, padding: 20, borderRadius: 24, borderWidth: 1,
+      borderColor: colors.CARD_BORDER, backgroundColor: colors.PANEL_BG };
     const view = this.controller.getView();
     const checked = readPiecePreviewDisplay(view);
     const provider = this.props.isSaveAdmitted, handle = this.saveFitHandle;
@@ -600,10 +605,10 @@ export default class InputPieceActionArea extends React.Component {
       const canRead = this.sourcePhase === 'idle' ||
         (unavailable && this.sourceCode === 'PIECE_TEMPORARILY_UNAVAILABLE');
       const refreshToken = unavailable ? this.sourceFailureToken : null;
-      return element(View, { testID: 'piece-saved-input-source-area' },
-        this.sourcePhase === 'loading' ? element(Text, { accessibilityLiveRegion: 'polite' },
+      return element(View, { testID: 'piece-saved-input-source-area', style: statusStyle },
+        this.sourcePhase === 'loading' ? element(Text, { style: bodyStyle, accessibilityLiveRegion: 'polite' },
           this.props.creationMode ? 'ピースを準備しています。' : '保存入力を確認しています。') : null,
-        unavailable ? element(Text, { accessibilityRole: 'alert' }, new PieceApiError(this.sourceCode).message) : null,
+        unavailable ? element(Text, { style: bodyStyle, accessibilityRole: 'alert' }, new PieceApiError(this.sourceCode).message) : null,
         canRead ? element(Button, { title: this.props.creationMode ? 'ピースを作成' : '保存入力を確認',
           onPress: this.props.creationMode ? this.createFromSavedInput : this.resolveSavedInput,
           accessibilityLabel: this.props.creationMode ? 'ピースを作成' : 'Pieceに使う保存入力を確認' }) : null,
@@ -612,13 +617,13 @@ export default class InputPieceActionArea extends React.Component {
       );
     }
     if (display.phase === 'hidden') return null;
-    return element(View, { testID: 'piece-input-action-area' },
+    return element(View, { testID: 'piece-input-action-area', style: this.state.open ? undefined : statusStyle },
       display.phase === 'idle' ? element(Button, {
         title: this.props.creationMode ? 'ピースを作成' : 'この入力をPieceにする', onPress: this.start,
         accessibilityLabel: this.props.creationMode ? 'ピースを作成' : 'この入力をPieceにする',
       }) : null,
       ['unavailable', 'cancelled', 'saved'].includes(display.phase) && !this.state.open
-        ? element(Text, { accessibilityRole: display.phase === 'saved' ? undefined : 'alert',
+        ? element(Text, { style: bodyStyle, accessibilityRole: display.phase === 'saved' ? undefined : 'alert',
           accessibilityLiveRegion: 'polite' }, display.message) : null,
       !this.state.open && display.canRetry && ['cancel', 'save'].includes(display.retryKind) ? element(Button, {
         title: display.retryKind === 'save' ? saveRetryLabel : '同じ候補の取消を再試行', onPress: this.retry,

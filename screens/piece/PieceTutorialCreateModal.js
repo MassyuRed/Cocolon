@@ -1,7 +1,9 @@
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import React from "react";
 import {
   ActivityIndicator,
   Keyboard,
+  KeyboardAvoidingView,
   Modal,
   Platform,
   Pressable,
@@ -43,7 +45,7 @@ export default function PieceTutorialCreateModal({
       transparent
       onRequestClose={onClose}
     >
-      <View ref={refs.modalOverlayRootRef} style={styles.modalOverlay} collapsable={false}>
+      <SafeAreaProvider style={{ flex: 1, backgroundColor: styles.modalOverlay.backgroundColor }}><SafeAreaView edges={["top", "right", "bottom", "left"]} style={{ flex: 1 }}><KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : undefined}><View ref={refs.modalOverlayRootRef} style={[styles.modalOverlay, { backgroundColor: "transparent" }]} collapsable={false}>
         <View style={styles.modalCard}>
           <View style={styles.modalHeader}>
             <Text style={styles.modalTitle}>チュートリアル ピース</Text>
@@ -151,7 +153,7 @@ export default function PieceTutorialCreateModal({
             />
           </View>
         ) : null}
-      </View>
+      </View></KeyboardAvoidingView></SafeAreaView></SafeAreaProvider>
     </Modal>
   );
 }

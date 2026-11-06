@@ -27,6 +27,7 @@ const renderPromise = Promise.resolve((() => {
     "import PieceVisualCard from './PieceVisualCard';",
     "import Button from '../CocolonButton';",
     "import { useTheme } from '../../theme/ThemeContext';",
+    "import { makeUiTokens } from '../../ui/uiTokens';",
     "import { PIECE_THEME_COLORS, PIECE_THEME_LABELS } from '../../features/piece/piecePalette';",
   ]);
   const marker = name => ({ component: name });
@@ -39,7 +40,8 @@ const renderPromise = Promise.resolve((() => {
   const executable = source.replace(/^import .*;$/gm, '').replace(/^export default /gm, '');
   const palette = fs.readFileSync(path.join(root, 'features/piece/piecePalette.js'), 'utf8')
     .replace(/^export /gm, '');
-  vm.runInContext(palette + '\n' + executable + '\nglobalThis.renderModal = PiecePreviewModal;', context,
+  const uiTokens = fs.readFileSync(path.join(root, 'ui/uiTokens.js'), 'utf8').replace(/^export /gm, '');
+  vm.runInContext(uiTokens + '\n' + palette + '\n' + executable + '\nglobalThis.renderModal = PiecePreviewModal;', context,
     { filename: 'components/piece/PiecePreviewModal.js' });
   return context.renderModal;
 })());

@@ -38,7 +38,7 @@ function NexusPieceControls({
       >
         <View style={styles.ownerFilterButtonContent}>
           <View style={styles.ownerFilterSideSlot} />
-          <Text style={styles.ownerFilterButtonText} numberOfLines={1}>
+          <Text style={styles.ownerFilterButtonText}>
             {selectedOwnerLabel}
           </Text>
           <View style={styles.ownerFilterSideSlot}>
@@ -63,6 +63,7 @@ function NexusPieceControls({
           ]}
           onPress={() => handleSetPieceOrder(PIECE_ORDER_LATEST)}
           accessibilityLabel="新しい順で表示する"
+          accessibilityState={{ selected: pieceOrder === PIECE_ORDER_LATEST }}
         >
           <Text
             style={[
@@ -81,6 +82,7 @@ function NexusPieceControls({
           ]}
           onPress={() => handleSetPieceOrder(PIECE_ORDER_OLDEST)}
           accessibilityLabel="古い順で表示する"
+          accessibilityState={{ selected: pieceOrder === PIECE_ORDER_OLDEST }}
         >
           <Text
             style={[

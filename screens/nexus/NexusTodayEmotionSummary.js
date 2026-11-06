@@ -19,6 +19,8 @@ export default function NexusTodayEmotionSummary({ visible, rankingState, styles
 
       {rankingState.loading ? (
         <Text style={styles.todayOverallEmotionPlaceholder}>読み込み中…</Text>
+      ) : rankingState.error ? (
+        <Text style={styles.errorText} accessibilityRole="alert">{rankingState.error}</Text>
       ) : rankingState.items.length <= 0 ? (
         <Text style={styles.todayOverallEmotionPlaceholder}>
           今日はまだ表示できる感情がありません。

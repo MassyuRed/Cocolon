@@ -98,7 +98,8 @@ function previewUiHarness({ send, currentState = 'active', admitSave = false } =
   const pure = ['piecePalette.js', 'pieceApi.js', 'piecePreviewModel.js', 'PieceCreateController.js', 'pieceLayout.js', 'pieceRenderer.js'].map(file =>
     fs.readFileSync(path.join(__dirname, '../features/piece', file), 'utf8')
       .replace(/^import .*;$/gm, '').replace(/^export /gm, '')).join('\n');
-  vm.runInContext(pure + '\nglobalThis.displayReader = readPiecePreviewDisplay; globalThis.digestUnderTest = pieceUtf8Digest;', context);
+  const uiTokens = fs.readFileSync(path.join(__dirname, '../ui/uiTokens.js'), 'utf8').replace(/^export /gm, '');
+  vm.runInContext(uiTokens + '\n' + pure + '\nglobalThis.displayReader = readPiecePreviewDisplay; globalThis.digestUnderTest = pieceUtf8Digest;', context);
   // Synthetic admission only for save-outcome wiring tests. No production host
   // supplies this callback, and these tests do not qualify a native renderer.
   if (admitSave) vm.runInContext(`const makeController = createPieceCreateController;

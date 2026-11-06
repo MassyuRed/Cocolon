@@ -166,7 +166,7 @@ Mashの比較理由：Day One案は情報の区切りが弱く、視線が動き
 | Piece作成 | 画像／全文を設定より前へ。操作ボタンと外枠をテーマ対応。全条件操作とidentity/tokenの引渡しを保持。作品renderer・recipe・保存画像は変更0 |
 | 設定・周辺 | 設定入口を目的が読める3行へ。テーマ選択面、共通メニュー、契約カード・説明・CTA、Nexusタブと自分のPiece入口を調整 |
 
-**現在の実装：** 下記§17の共通・起動・認証、§18の入力・応答・問い・履歴、§19の分析全体までsourceを追加反映。残る個別仕上げは§15.1の4〜6群（Piece・social、アカウント・設定、案内・tutorial・休眠資産）。共通テーマの変更が届くだけで、個別画面の仕上げ完了とはしない。全群のsource反映後にまとめてビルド・配布し、3テーマ、文字拡大1.0/1.3/1.6、狭い幅、safe area、キーボード、長文・回復操作の実端末確認を行う。
+**現在の実装：** 下記§17の共通・起動・認証、§18の入力・応答・問い・履歴、§19の分析全体、§20のPiece・socialまでsourceを追加反映。残る個別仕上げは§15.1の5〜6群（アカウント・設定・契約、案内・tutorial・残る休眠資産）と全体横断。共通テーマの変更が届くだけで、個別画面の仕上げ完了とはしない。全群のsource反映後にまとめてビルド・配布し、3テーマ、文字拡大1.0/1.3/1.6、狭い幅、safe area、キーボード、長文・回復操作の実端末確認を行う。
 
 初回反映時の確認：Nodeの既存5入口（画面contract・IAP復元・テーマ可読性・Piece初回保存modal・preview/display）で400 PASS／FAIL0／SKIP0。React/native・Auth/HTTPは各既存testの代替を含む。テーマ検査は旧バーガンディ色・太枠・taglineの固定期待を採用設計へ更新し、3テーマの本文／補助／tonal／操作色の4.5:1を検査した。Piece testの新テーマhookと共有Buttonへのimport適応のみを行い、保存・回復の検査は維持。最初の実行は取得不足の依存fileと旧表示期待で失敗し、依存原本の取得と意図した期待更新後に上記最終実行を通過した。製品の資格判定を緩めていない。今回の全画面設計更新で、これらを再実行したとは扱わない。
 
@@ -512,3 +512,28 @@ read-only reviewで、問いmodalのhideHeaderによるspinner非表示、Emlis 
 補助reviewで、残っていたDeep棒の固定色、戻る左右幅の非対称、空表示のrole漏れを修正。検証依存の通常取得はtransitive packageの404となり、既存の同version React／renderer／Babel coreと、正本に固定されたpreset／pluginを一時環境で組み合わせて実行。製品／test-toolsの依存定義は変更しない。
 
 **次の作業：Piece・socialの全表示。** その後アカウント・設定・契約、案内・tutorial・残る休眠資産、全体横断を続ける。全画面source完成までbuildを保留し、途中commitは`[skip ci]`。今回のapp/native build・CI native compile・Upload・配布・本人端末確認・Render／Supabase／GPU操作は0。TECHNICAL_CREDITはsourceと限定検証に限り、全UI完成・実機合格・分析品質向上へ換算しない。
+
+<a id="ui-piece-material-20261106"></a>
+## 20. 11/6 実装区切り4 — Piece・投稿・感情通知・共鳴
+
+前回の分析群を保存した `be6f4162afd602a017f4232f91d8aa2f5b5994b4` を固定起点に、P01〜P22の描画と既存状態を確認して反映。保存済み作品の世界観と、アプリの操作文字を分ける。全画面統一・例外なしと、全source完成後にまとめてbuildするMashの方針を保持する。
+
+| 範囲 | 今回の表示変更・保持した条件 |
+|---|---|
+| Nexus・4タブ | 投稿／感情通知／おすすめ／共鳴の4タブを狭幅でも区分できる折返し配置へ。表示対象・新旧順をtonalと選択読み上げで示し、長い名前を省略しない。投稿は投稿者・日時／未読→問い→答え16/27/400→共鳴、本人削除は本文を覆わない独立操作へ。API・対象絞込み・自己共鳴とフォロー条件・削除確認は保持 |
+| 感情通知・おすすめ | 通知は名前・時刻・感情／強さだけを表示し、メモ本文は追加しない。感情5種の既存hue背景を残し、文字をテーマのinkへ。感情ログの重複見出しを整理、戻る・guideと更新／フォローを分け、全体をscroll対象へ。mock通知・未読・完了条件は保持。おすすめは名前・共有コード・矢印、読込／失敗／0件を区別 |
+| 作成前・回復 | PieceCreateとInputPieceActionAreaを同じ面・本文・共通Buttonへ。保存入力取得、作成停止、結果不明、同一保存／取消要求、期限切れ、元入力再確認、保存済みへの入口は既存条件のまま。親から色・文字を渡し、classのstamp・controller寿命・保存ID／本人／要求キー・一度だけ消費するnavigation要求を変更しない |
+| 新プレビュー | 画像→全文→形式／配色／比率／ブランド→保存枠／条件。選択中の操作はtonal、実配色見本の内側はrecipe色を維持。長い説明・回復操作を本文scrollへ、初回保存と閉じるは固定して到達可能に。独立SafeAreaProviderと全辺を維持。資格・token・revision・元要求・期限・保存条件は不変 |
+| 本人履歴・詳細・画像操作 | 最大幅680（左右20を含む）、カード24／内側20、本文16/27/400。一覧は全文と保存情報、詳細は画像→本文→保存情報→画像操作→公開／削除。共通Button・テーマ色へ。続き／詳細／削除再確認、同じPieceの再読、OS開始後の結果不明、外部画像は回収できない説明を保持。自動thumbnail取得・画像準備は足さない |
+| 共鳴履歴・中継 | 保持期間・新旧順・失敗を同じFlatListのheaderへ。取得中もheaderを表示し、0件の中央寄せがheaderを縮めない。投稿者・日時を全文へ。追加取得・50件・refresh・保持期間と既存詳細replaceを維持。中継失敗は利用者向けの戻り案内にし、長文scrollへ |
+| 条件付き旧Q&A・modal | linkPayload時の旧Piece入口とLibraryも同じ文字・面へ。問い／答え・共鳴数を保持し、新画像Pieceと混同しない。おすすめ・対象・問い・共鳴・停止中tutorial modalへ全辺safe area、全面scrim、可変高scroll。強度／メモの既存keyboard追従を保持、停止中tutorial資産へkeyboard回避を追加。通常の共鳴は既存のmedium・memoなし直接送信を維持し、未使用modalを接続し直さない。tutorialSurfaceEnabled=falseを保持 |
+
+製品26file：`components/piece/{PieceOwnerCard,PiecePreviewModal,PieceVisualCard}.js`、`screens/{EmotionLogScreen,InputScreen,NexusScreen,PieceCreateScreen,PieceHistoryMenuScreen,PieceLibraryScreen,PieceMenuCommon,PieceOwnerHistoryScreen,PieceScreen,ResonanceHistoryDetailScreen,ResonanceHistoryListScreen}.js`、`screens/input/InputPieceActionArea.js`、`screens/nexus/{NexusEmotionLogSection,NexusEmotionRankingCard,NexusHistorySection,NexusOwnerPickerModal,NexusPieceCard,NexusPieceFeedSection,NexusRecommendSection,NexusTabBar,NexusTodayEmotionSummary}.js`、`screens/piece/{PieceRecommendModal,PieceTutorialCreateModal}.js`。未接続NexusEmotionRankingCardは描画資産のみを整え、有効化しない。InputScreenはappearance propsの受渡しだけ。
+
+既存test5fileは、共通Buttonのalias・実UI tokens・追加appearance props・safe areaへのharness／静的期待の適応のみ。新製品file・新route・依存定義・公開API／DB／AI・Piece本文／recipe／hash／保存版の変更なし。通常経路・component責務は既存のままで、STRUCTURE_MAP_DELTA_NONE。
+
+検証：既存7入口（画面contract、theme可読性、Piece owner-history、preview-display、initial-save-modal〔hostも内包〕、input-screen、renderer）で **814 PASS／FAIL0／SKIP0**。初回6失敗は空のUI tokensを返す旧harnessと、appearance props追加前の静的期待によるもの。実tokensの読込と必要な期待へ適応し、保存・回復・本人／focus／runtime失効条件を緩めていない。変更JS31fileのparse、diff空白検査、8style ownerの471 role×themeでサイズ・行間・太さを照合。OwnerHistory／InputActionArea／VisualCardのrender以外のclassメンバーと、`piece-logical-canvas` subtreeは変更前とAST一致。renderer検査は合成の計測・native callback代替で、実描画の再確認ではない。
+
+補助reviewで、無効／選択文字、狭幅見出し、長い対象名、0件と失敗の混同、safe area帯だけ暗転しない表示、回復群の高さ、履歴headerの中央寄せと読込中非表示を補修。writerは華恋一人、補助はread-only review。
+
+**次のsource作業：アカウント・設定・契約。** その後、案内・tutorial・残る休眠資産と全体横断を仕上げる。全画面source完成までbuild保留、途中commitは`[skip ci]`。app/native build・CI native compile・Upload・配布・実機表示・Render／Supabase／GPU操作0。全UI完成・実機合格・一般Piece文章品質の改善とは扱わない。

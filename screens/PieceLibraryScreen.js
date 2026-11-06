@@ -16,7 +16,7 @@ import {
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { useTheme } from "../theme/ThemeContext";
 import { supabase } from "../lib/supabase";
@@ -1902,12 +1902,12 @@ useEffect(() => {
           <View style={styles.actions}>
             <View style={styles.targetRow}>
               <Text style={styles.targetLabel}>対象：</Text>
-              <View ref={pieceSelectorRef} collapsable={false}>
+              <View ref={pieceSelectorRef} collapsable={false} style={{ flex: 1, minWidth: 0 }}>
                 <CocolonPressable
                   onPress={openUserPicker}
                   style={styles.targetNamePressable}
                 >
-                  <Text style={styles.targetName} numberOfLines={1}>
+                  <Text style={styles.targetName}>
                     {isSelfTarget
                       ? "自分"
                       : targetNameLoading
@@ -1929,7 +1929,7 @@ useEffect(() => {
                 <Ionicons
                   name="sparkles-outline"
                   size={18}
-                  color="#FFFFFF"
+                  color={colors.ACCENT_TEXT}
                   style={{ marginRight: 6 }}
                 />
                 <Text style={styles.goldButtonText}>ピースを表示</Text>
@@ -1943,7 +1943,7 @@ useEffect(() => {
               {selected?.title && !detailLoading ? (
                 <>
                   <View ref={qaBlockRef} collapsable={false}>
-                    <Text style={[styles.responseLabel, { fontWeight: "700" }]}>【問い】</Text>
+                    <Text style={[styles.responseLabel, { fontWeight: "600" }]}>【問い】</Text>
                     <View style={styles.responseCard}>
                       <Text style={[styles.detailTitle, { marginBottom: 0 }]}>{selected.title}</Text>
                     </View>
@@ -1951,7 +1951,7 @@ useEffect(() => {
                     <Text
                       style={[
                         styles.responseLabel,
-                        { fontWeight: "700", marginTop: 12 },
+                        { fontWeight: "600", marginTop: 12 },
                       ]}
                     >
                       【応答】
@@ -1981,19 +1981,20 @@ useEffect(() => {
                         onPress={handleResonancePress}
                         style={[
                           styles.resonanceBtn,
-                          isResonatedNow && { opacity: 0.92 },
-                          (resonanceSubmitting || resonanceDeleting) && { opacity: 0.7 },
+                          (resonanceSubmitting || resonanceDeleting) && { backgroundColor: colors.FIELD_BG, borderColor: colors.CARD_BORDER },
                         ]}
                         disabled={resonanceSubmitting || resonanceDeleting}
+                        accessibilityLabel={isResonatedNow ? "共鳴済み" : "共鳴"}
+                        accessibilityState={{ selected: isResonatedNow, busy: resonanceSubmitting || resonanceDeleting }}
                       >
                         <View style={styles.btnRow}>
                           <Ionicons
                             name={isResonatedNow ? "heart" : "heart-outline"}
                             size={14}
-                            color="#FFFFFF"
+                            color={(resonanceSubmitting || resonanceDeleting) ? colors.TEXT_SUBTLE : colors.ACCENT_TEXT}
                             style={{ marginRight: 6 }}
                           />
-                          <Text style={styles.resonanceBtnText}>
+                          <Text style={[styles.resonanceBtnText, { color: (resonanceSubmitting || resonanceDeleting) ? colors.TEXT_SUBTLE : colors.ACCENT_TEXT }]}>
                             {isResonatedNow ? "共鳴済み" : "共鳴"}
                           </Text>
                         </View>
@@ -2003,7 +2004,7 @@ useEffect(() => {
                 </>
               ) : (
                 <>
-                  <Text style={[styles.responseLabel, { fontWeight: "700" }]}>【応答】</Text>
+                  <Text style={[styles.responseLabel, { fontWeight: "600" }]}>【応答】</Text>
                   <View style={styles.responseCard}>
                     <Text style={styles.responseText}>読み込み中…</Text>
                   </View>
@@ -2027,7 +2028,7 @@ useEffect(() => {
         transparent
         onRequestClose={() => setUserPickerVisible(false)}
       >
-        <View ref={tutorialPickUserOverlayRootRef} style={styles.modalOverlay} collapsable={false}>
+        <SafeAreaProvider style={{ flex: 1, backgroundColor: styles.modalOverlay.backgroundColor }}><SafeAreaView edges={["top", "right", "bottom", "left"]} style={{ flex: 1 }}><View ref={tutorialPickUserOverlayRootRef} style={[styles.modalOverlay, { backgroundColor: "transparent" }]} collapsable={false}>
           <View style={styles.modalCard}>
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>フォロー中のユーザー</Text>
@@ -2073,7 +2074,7 @@ useEffect(() => {
                 >
                   <View style={{ flex: 1 }}>
                     <View style={styles.rowTitleLine}>
-                      <Text style={styles.rowTitle} numberOfLines={1}>
+                      <Text style={styles.rowTitle}>
                         自分に戻る
                       </Text>
                       {isSelfTarget ? (
@@ -2117,6 +2118,7 @@ useEffect(() => {
                             : undefined
                         }
                         collapsable={false}
+                        accessibilityRole="button" accessibilityState={{ selected: !!isActive }}
                         onPress={() => selectTargetUser(u.user_id)}
                         style={[
                           styles.listRow,
@@ -2125,7 +2127,7 @@ useEffect(() => {
                       >
                         <View style={{ flex: 1 }}>
                           <View style={styles.rowTitleLine}>
-                            <Text style={styles.rowTitle} numberOfLines={1}>
+                            <Text style={styles.rowTitle}>
                               {u.display_name}
                             </Text>
                             {isActive ? (
@@ -2192,7 +2194,7 @@ useEffect(() => {
             }}
             onMetricsChange={setTutorialPickUserOverlayMetrics}
           />
-        </View>
+        </View></SafeAreaView></SafeAreaProvider>
       </Modal>
 
       {/* Picker modal */}
@@ -2202,7 +2204,7 @@ useEffect(() => {
         transparent
         onRequestClose={() => setPickerVisible(false)}
       >
-        <View style={styles.modalOverlay}>
+        <SafeAreaProvider style={{ flex: 1, backgroundColor: styles.modalOverlay.backgroundColor }}><SafeAreaView edges={["top", "right", "bottom", "left"]} style={{ flex: 1 }}><View style={[styles.modalOverlay, { backgroundColor: "transparent" }]}>
           <View style={styles.modalCard}>
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>問いを選ぶ</Text>
@@ -2214,6 +2216,8 @@ useEffect(() => {
               </Pressable>
             </View>
 
+            <ScrollView style={styles.listArea} keyboardShouldPersistTaps="handled">
+            {listError ? <Text style={styles.modeErrorText} accessibilityRole="alert">一覧取得に失敗: {listError}</Text> : null}
             <View style={styles.sortRow}>
               {[
                 { key: "newest", label: "新着" },
@@ -2223,6 +2227,7 @@ useEffect(() => {
                 return (
                   <Pressable
                     key={x.key}
+                    accessibilityRole="button" accessibilityState={{ selected: active, disabled: listLoading }}
                     onPress={() => changeSortMode(x.key)}
                     style={[styles.sortPill, active && styles.sortPillActive]}
                     disabled={listLoading}
@@ -2246,7 +2251,7 @@ useEffect(() => {
                 <Text style={styles.modalLoadingText}>読み込み中…</Text>
               </View>
             ) : (qnaItems || []).length > 0 ? (
-              <ScrollView style={styles.listArea}>
+              <View>
                 {(qnaItems || []).map((it) => (
                   <Pressable
                     key={it.q_instance_id}
@@ -2256,7 +2261,7 @@ useEffect(() => {
                   >
                     <View style={{ flex: 1 }}>
                       <View style={styles.rowTitleLine}>
-                        <Text style={styles.rowTitle} numberOfLines={2}>
+                        <Text style={styles.rowTitle}>
                           {it.title}
                         </Text>
                         {it.is_new ? (
@@ -2295,8 +2300,8 @@ useEffect(() => {
                     )}
                   </Pressable>
                 ))}
-              </ScrollView>
-            ) : (
+              </View>
+            ) : listError ? null : (
               <View style={styles.modalEmpty}>
                 <Text style={styles.modalEmptyText}>
                   {isTutorialMode
@@ -2305,8 +2310,9 @@ useEffect(() => {
                 </Text>
               </View>
             )}
+            </ScrollView>
           </View>
-        </View>
+        </View></SafeAreaView></SafeAreaProvider>
       </Modal>
 
       {/* Resonance submit modal */}
@@ -2316,7 +2322,7 @@ useEffect(() => {
         transparent
         onRequestClose={closeResonanceModal}
       >
-        <View style={styles.modalOverlay}>
+        <SafeAreaProvider style={{ flex: 1, backgroundColor: styles.modalOverlay.backgroundColor }}><SafeAreaView edges={["top", "right", "bottom", "left"]} style={{ flex: 1 }}><View style={[styles.modalOverlay, { backgroundColor: "transparent" }]}>
           <View style={styles.modalCard}>
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>Resonance</Text>
@@ -2345,6 +2351,7 @@ useEffect(() => {
                   return (
                     <Pressable
                       key={opt.key}
+                      accessibilityRole="button" accessibilityState={{ selected: active }}
                       onPress={() => setResonanceStrength(opt.key)}
                       style={[
                         styles.choiceCard,
@@ -2405,7 +2412,7 @@ useEffect(() => {
                       multiline
                       scrollEnabled
                       textAlignVertical="top"
-                      placeholderTextColor={colors.TEXT_ON_LIGHT}
+                      placeholderTextColor={colors.TEXT_SUBTLE}
                       editable={!isResonatedNow && !resonanceSubmitting && !resonanceDeleting}
                       showSoftInputOnFocus={!isResonatedNow && !resonanceSubmitting && !resonanceDeleting}
                       onFocus={(e) => {
@@ -2455,7 +2462,6 @@ useEffect(() => {
                             !(resonanceMemo && resonanceMemo.trim().length > 0) &&
                               styles.collapsedTextPlaceholder,
                           ]}
-                          numberOfLines={1}
                         >
                           {resonanceMemo && resonanceMemo.trim().length > 0
                             ? resonanceMemo.replace(/\s+/g, " ").trim()
@@ -2505,30 +2511,29 @@ useEffect(() => {
                 style={[
                   styles.historyBtn,
                   { marginTop: 10 },
-                  (!isResonatedNow || resonanceSubmitting || resonanceDeleting) && { opacity: 0.7 },
                 ]}
                 onPress={confirmDeleteResonance}
                 disabled={!isResonatedNow || resonanceSubmitting || resonanceDeleting}
               >
                 <View style={styles.btnRow}>
                   {resonanceDeleting ? (
-                    <ActivityIndicator color="#B91C1C" style={{ marginRight: 8 }} />
+                    <ActivityIndicator color={(!isResonatedNow || resonanceSubmitting || resonanceDeleting) ? colors.TEXT_SUBTLE : colors.ERROR} style={{ marginRight: 8 }} />
                   ) : (
                     <Ionicons
                       name="trash-outline"
                       size={16}
-                      color="#B91C1C"
+                      color={(!isResonatedNow || resonanceSubmitting || resonanceDeleting) ? colors.TEXT_SUBTLE : colors.ERROR}
                       style={{ marginRight: 6 }}
                     />
                   )}
-                  <Text style={[styles.historyBtnText, { color: "#B91C1C" }]}>
+                  <Text style={[styles.historyBtnText, { color: (!isResonatedNow || resonanceSubmitting || resonanceDeleting) ? colors.TEXT_SUBTLE : colors.ERROR }]}>
                     共鳴を解除
                   </Text>
                 </View>
               </CocolonButton>
             </ScrollView>
           </View>
-        </View>
+        </View></SafeAreaView></SafeAreaProvider>
       </Modal>
 
       <TutorialOverlay
@@ -2595,467 +2600,472 @@ function createStyles(COLORS, ui) {
   const font = ui?.font || {};
   const text = ui?.text || {};
   return StyleSheet.create(applyTypographyTokens({
-    container: { flex: 1, backgroundColor: COLORS.PANEL_BG },
+    container: {
+      flex: 1,
+      backgroundColor: COLORS.BG_SILVER,
+    },
     safeContent: { flex: 1 },
     body: { flex: 1 },
     bodyContent: {
       paddingTop: 16,
-      paddingHorizontal: 18,
+      paddingHorizontal: 20,
       alignItems: "stretch",
       paddingBottom: 32,
-      minHeight: PANEL_MIN_HEIGHT,
+      width: '100%',
+      maxWidth: 640,
+      alignSelf: 'center',
     },
 
     // Header
     panelHeader: {
       flexDirection: "row",
-      alignItems: "center",
+      alignItems: 'flex-start',
       justifyContent: "space-between",
-      marginBottom: 16,
+      marginBottom: 20,
+      columnGap: 12,
     },
     panelTitle: {
-      fontSize: 20,
-      fontWeight: "800",
-      color: COLORS.TITLE_GOLD,
-      letterSpacing: 0.8,
+      color: COLORS.TEXT_ON_LIGHT,
+      letterSpacing: 0,
+      flexShrink: 1,
+      minWidth: 0,
     },
     headerRight: {
       flexDirection: "row",
       alignItems: "center",
+      flexShrink: 0,
     },
     panelHeaderRightPlaceholder: {
-      width: 30,
+      width: 44,
     },
 
     // Intro
     qnaIntroCard: {
-      borderRadius: 18,
-      borderWidth: 1,
+      borderRadius: 0,
+      borderWidth: 0,
       borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 10,
-      marginBottom: 12,
+      backgroundColor: 'transparent',
+      paddingHorizontal: 0,
+      paddingVertical: 0,
+      marginBottom: 16,
     },
     qnaIntroTitle: {
-      fontSize: 13,
-      fontWeight: "800",
       color: COLORS.TEXT_ON_LIGHT,
       marginBottom: 4,
     },
     qnaIntroText: {
-      fontSize: 12,
-      lineHeight: 18,
       color: COLORS.TEXT_ON_LIGHT,
     },
 
     // History
     historyCard: {
-      borderRadius: 18,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 12,
-      marginBottom: 12,
+      backgroundColor: COLORS.PANEL_BG,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
+      marginBottom: 16,
     },
     historyCardTitle: {
-      fontSize: 13,
-      fontWeight: "900",
       color: COLORS.TEXT_ON_LIGHT,
     },
     historyEntry: {
       borderRadius: 16,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 12,
+      backgroundColor: COLORS.FIELD_BG,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
+      minHeight: 52,
     },
     historyEntryText: {
-      fontSize: 13,
-      fontWeight: "900",
       color: COLORS.TEXT_ON_LIGHT,
+      flexShrink: 1,
     },
 
     
     // Recommend
     recoCard: {
-      borderRadius: 18,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 12,
-      marginBottom: 12,
+      backgroundColor: COLORS.PANEL_BG,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
+      marginBottom: 16,
     },
     recoHeader: {
       flexDirection: "row",
-      alignItems: "center",
+      alignItems: 'flex-start',
       justifyContent: "space-between",
       marginBottom: 8,
+      columnGap: 12,
     },
     recoTitle: {
-      fontSize: 13,
-      fontWeight: "900",
       color: COLORS.TEXT_ON_LIGHT,
     },
     recoSummaryText: {
-      marginTop: 6,
-      fontSize: 12,
-      lineHeight: 18,
+      marginTop: 8,
       color: COLORS.TEXT_ON_LIGHT,
-      opacity: 0.9,
     },
     recoRefreshBtn: {
-      width: 34,
-      height: 34,
-      borderRadius: 12,
+      width: 44,
+      height: 44,
+      borderRadius: 16,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.PANEL_BG,
       alignItems: "center",
       justifyContent: "center",
+      flexShrink: 0,
     },
     recoToggleRow: {
       flexDirection: "row",
-      alignItems: "center",
+      alignItems: 'stretch',
       marginTop: 4,
-      marginBottom: 10,
+      marginBottom: 12,
+      columnGap: 8,
     },
     recoTogglePill: {
       flex: 1,
-      marginRight: 8,
-      paddingVertical: 8,
+      marginRight: 0,
+      paddingVertical: 10,
       borderRadius: 999,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.PANEL_BG,
       alignItems: "center",
       justifyContent: "center",
+      minHeight: 44,
+      paddingHorizontal: 12,
     },
     recoTogglePillActive: {
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
-      backgroundColor: COLORS.GOLD_BUTTON,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.SURFACE_TONAL,
     },
     recoToggleText: {
-      fontSize: 11,
-      fontWeight: "900",
       color: COLORS.TEXT_ON_LIGHT,
+      flexShrink: 1,
+      textAlign: 'center',
     },
     recoToggleTextActive: {
-      color: "#FFFFFF",
+      color: COLORS.ON_SURFACE_TONAL,
     },
     recoSectionLabel: {
-      fontSize: font.sectionLabel ?? 12,
-      fontWeight: "800",
       color: text.sectionLabel ?? text.primary ?? COLORS.TEXT_ON_LIGHT,
     },
     recoPillScroll: { marginTop: 8 },
     recoPillContent: { paddingRight: 6 },
     recoPill: {
       marginRight: 8,
-      paddingHorizontal: 10,
-      paddingVertical: 8,
+      paddingHorizontal: 12,
+      paddingVertical: 10,
       borderRadius: 999,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.PANEL_BG,
-      maxWidth: 220,
+      maxWidth: 320,
+      minHeight: 44,
     },
     recoPillActive: {
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
-      backgroundColor: COLORS.GOLD_BUTTON,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.SURFACE_TONAL,
     },
     recoPillText: {
-      fontSize: 11,
-      fontWeight: "900",
       color: COLORS.TEXT_ON_LIGHT,
+      flexShrink: 1,
     },
     recoPillTextActive: {
-      color: "#FFFFFF",
+      color: COLORS.ON_SURFACE_TONAL,
     },
     recoUserRow: {
       flexDirection: "row",
-      alignItems: "center",
+      alignItems: 'center',
       borderRadius: 16,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 10,
+      backgroundColor: COLORS.FIELD_BG,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
       marginBottom: 8,
+      minHeight: 64,
     },
     recoUserName: {
-      fontSize: 13,
-      fontWeight: "900",
       color: COLORS.TEXT_ON_LIGHT,
+      flexShrink: 1,
     },
     recoUserSub: {
       marginTop: 2,
-      fontSize: font.description ?? 9,
       color: text.description ?? COLORS.TEXT_SUBTLE,
+      flexShrink: 1,
     },
     recoEmptyText: {
       marginTop: 8,
-      fontSize: 12,
-      lineHeight: 18,
-      color: COLORS.TEXT_ON_LIGHT,
-      opacity: 0.85,
+      color: COLORS.TEXT_SUBTLE,
     },
     recoLoadingRow: {
       flexDirection: "row",
-      alignItems: "center",
+      alignItems: 'flex-start',
       marginTop: 8,
     },
     recoLoadingText: {
       marginLeft: 10,
-      fontSize: 12,
-      color: COLORS.TEXT_ON_LIGHT,
-      opacity: 0.85,
+      color: COLORS.TEXT_SUBTLE,
+      flexShrink: 1,
     },
 
 // Buttons
-    actions: { marginTop: 6, marginBottom: 10 },
+    actions: {
+      marginTop: 16,
+      marginBottom: 12,
+    },
     targetRow: {
       flexDirection: "row",
       alignItems: "center",
-      justifyContent: "center",
-      marginBottom: 10,
+      justifyContent: 'flex-start',
+      marginBottom: 16,
+      flexWrap: 'wrap',
+      columnGap: 8,
+      rowGap: 8,
     },
     targetLabel: {
-      fontSize: font.sectionLabel ?? 12,
       color: text.sectionLabel ?? text.primary ?? COLORS.TEXT_ON_LIGHT,
     },
     targetNamePressable: {
       flexDirection: "row",
       alignItems: "center",
-      marginLeft: 6,
-      paddingHorizontal: 10,
-      paddingVertical: 6,
+      marginLeft: 0,
+      paddingHorizontal: 12,
+      paddingVertical: 10,
       borderRadius: 999,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
-      maxWidth: "80%",
+      maxWidth: '100%',
+      minHeight: 44,
     },
     targetName: {
-      fontSize: 12,
-      fontWeight: "900",
       color: COLORS.TEXT_ON_LIGHT,
+      flexShrink: 1,
+      minWidth: 0,
     },
     goldButton: {
-      paddingVertical: 12,
-      paddingHorizontal: 18,
-      borderRadius: 999,
+      paddingVertical: 14,
+      paddingHorizontal: 20,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.GOLD_BUTTON_BORDER,
       backgroundColor: COLORS.GOLD_BUTTON,
       alignItems: "center",
       justifyContent: "center",
       shadowColor: "#000",
-      shadowOpacity: 0.14,
-      shadowRadius: 12,
-      shadowOffset: { width: 0, height: 6 },
-      elevation: 6,
+      shadowOpacity: 0.06,
+      shadowRadius: 4,
+      shadowOffset: { width: 0, height: 2 },
+      elevation: 1,
+      minHeight: 52,
     },
     goldButtonText: {
-      fontSize: 13,
-      fontWeight: "900",
-      color: "#FFFFFF",
-      letterSpacing: 0.6,
+      color: COLORS.ACCENT_TEXT,
+      letterSpacing: 0,
+      flexShrink: 1,
+      textAlign: 'center',
     },
     btnRow: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
+      maxWidth: '100%',
     },
     tierHintText: {
       marginTop: 8,
-      fontSize: font.description ?? 9,
       color: text.description ?? COLORS.TEXT_SUBTLE,
-      textAlign: "center",
+      textAlign: 'left',
     },
 
     // Response
-    responseGroup: { marginTop: 12 },
+    responseGroup: {
+      marginTop: 24,
+    },
     responseLabel: {
-      fontSize: font.sectionLabel ?? 12,
       color: text.sectionLabel ?? text.primary ?? COLORS.TEXT_ON_LIGHT,
-      marginBottom: 6,
+      marginBottom: 8,
     },
     responseCard: {
-      backgroundColor: COLORS.FIELD_BG,
-      borderRadius: 20,
+      backgroundColor: COLORS.PANEL_BG,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      paddingHorizontal: 12,
-      paddingVertical: 12,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
       shadowColor: "#000",
-      shadowOpacity: 0.1,
-      shadowRadius: 14,
+      shadowOpacity: 0,
+      shadowRadius: 0,
       shadowOffset: { width: 0, height: 6 },
-      elevation: 6,
+      elevation: 0,
     },
     detailTitle: {
-      fontSize: 13,
-      fontWeight: "900",
       color: COLORS.TEXT_ON_LIGHT,
       marginBottom: 10,
     },
     responseText: {
-      fontSize: 13,
-      lineHeight: 20,
       color: COLORS.TEXT_ON_LIGHT,
     },
     responseEmpty: {
-      fontSize: 12,
-      lineHeight: 18,
-      color: COLORS.TEXT_ON_LIGHT,
-      opacity: 0.85,
+      color: COLORS.TEXT_SUBTLE,
     },
 
     metricsRow: {
       flexDirection: "row",
       alignItems: "center",
-      marginTop: 14,
+      marginTop: 16,
+      flexWrap: 'wrap',
+      columnGap: 8,
+      rowGap: 8,
     },
     metricPill: {
       flexDirection: "row",
       alignItems: "center",
-      paddingHorizontal: 10,
-      paddingVertical: 6,
+      paddingHorizontal: 12,
+      paddingVertical: 8,
       borderRadius: 999,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      marginRight: 8,
+      marginRight: 0,
       backgroundColor: COLORS.PANEL_BG,
+      maxWidth: '100%',
     },
     metricText: {
-      fontSize: 12,
-      fontWeight: "800",
       color: COLORS.TEXT_ON_LIGHT,
-      minWidth: 34,
+      minWidth: 0,
       textAlign: "right",
       fontVariant: ["tabular-nums"],
+      flexShrink: 1,
     },
     resonanceBtn: {
-      paddingHorizontal: 14,
+      paddingHorizontal: 16,
       paddingVertical: 10,
-      borderRadius: 999,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.GOLD_BUTTON_BORDER,
       backgroundColor: COLORS.GOLD_BUTTON,
       alignItems: "center",
       justifyContent: "center",
-      marginRight: 8,
+      marginRight: 0,
       minWidth: 86,
+      minHeight: 44,
+      maxWidth: '100%',
     },
     resonanceBtnText: {
-      fontSize: 12,
-      fontWeight: "900",
-      color: "#FFFFFF",
+      color: COLORS.ACCENT_TEXT,
+      textAlign: 'center',
+      flexShrink: 1,
     },
 
     metricsActions: {
-      marginTop: 10,
+      marginTop: 16,
       alignSelf: "flex-end",
       flexDirection: "row",
       alignItems: "center",
+      flexWrap: 'wrap',
+      columnGap: 8,
+      rowGap: 8,
+      maxWidth: '100%',
     },
     historyBtn: {
-      paddingHorizontal: 12,
+      paddingHorizontal: 16,
       paddingVertical: 10,
-      borderRadius: 14,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.PANEL_BG,
       alignItems: "center",
       justifyContent: "center",
+      minHeight: 44,
     },
     historyBtnText: {
-      fontSize: 12,
-      fontWeight: "900",
       color: COLORS.TEXT_ON_LIGHT,
+      flexShrink: 1,
+      textAlign: 'center',
     },
 
     // Resonance modal UI
     modalDescText: {
-      fontSize: 12,
-      lineHeight: 18,
       color: COLORS.TEXT_ON_LIGHT,
-      opacity: 0.9,
+      marginBottom: 12,
     },
     inlineLoadingRow: {
       flexDirection: "row",
-      alignItems: "center",
+      alignItems: 'flex-start',
       marginBottom: 10,
     },
     inlineLoadingText: {
       marginLeft: 10,
-      fontSize: 12,
-      color: COLORS.TEXT_ON_LIGHT,
-      opacity: 0.85,
+      color: COLORS.TEXT_SUBTLE,
+      flexShrink: 1,
     },
     choiceCard: {
       borderRadius: 16,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 12,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
       marginBottom: 8,
+      minHeight: 52,
     },
     choiceCardActive: {
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.SURFACE_TONAL,
     },
     choiceTitleRow: {
       flexDirection: "row",
-      alignItems: "center",
+      alignItems: 'flex-start',
       justifyContent: "space-between",
+      flexWrap: 'wrap',
+      columnGap: 8,
+      rowGap: 6,
     },
     choiceTitle: {
-      flex: 1,
-      fontSize: 13,
-      fontWeight: "900",
       color: COLORS.TEXT_ON_LIGHT,
-      paddingRight: 10,
+      paddingRight: 0,
+      flexGrow: 1,
+      flexShrink: 1,
+      flexBasis: 160,
+      minWidth: 0,
     },
     choiceTitleActive: {
-      color: COLORS.TITLE_GOLD,
+      color: COLORS.ON_SURFACE_TONAL,
     },
     choiceSub: {
-      fontSize: 11,
-      fontWeight: "900",
       color: text.description ?? COLORS.TEXT_SUBTLE,
+      flexShrink: 1,
     },
     choiceSubActive: {
-      color: COLORS.TITLE_GOLD,
+      color: COLORS.ON_SURFACE_TONAL,
     },
 
     inputLabel: {
-      fontSize: font.sectionLabel ?? 12,
-      fontWeight: "900",
       color: text.sectionLabel ?? text.primary ?? COLORS.TEXT_ON_LIGHT,
-      marginBottom: 6,
+      marginBottom: 8,
     },
     /** メモ入力カード（InputScreenと同仕様：展開式） */
     memoCard: {
       backgroundColor: COLORS.FIELD_BG,
-      borderRadius: 20,
+      borderRadius: 16,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      paddingHorizontal: 12,
-      paddingVertical: 10,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
       shadowColor: "#000",
-      shadowOpacity: 0.1,
-      shadowRadius: 14,
+      shadowOpacity: 0,
+      shadowRadius: 0,
       shadowOffset: { width: 0, height: 6 },
-      elevation: 6,
+      elevation: 0,
     },
     memoCardCollapsed: {
-      minHeight: 54,
+      minHeight: 64,
       justifyContent: "center",
     },
     memoCardExpanded: {
@@ -3063,27 +3073,28 @@ function createStyles(COLORS, ui) {
     },
     collapsedRow: {
       flexDirection: "row",
-      alignItems: "center",
+      alignItems: 'flex-start',
       justifyContent: "space-between",
     },
     collapsedLeft: {
       flexDirection: "row",
-      alignItems: "center",
+      alignItems: 'flex-start',
       flex: 1,
       paddingRight: 8,
+      minWidth: 0,
     },
     collapsedText: {
       flex: 1,
-      fontSize: 14,
       color: COLORS.TEXT_ON_LIGHT,
+      minWidth: 0,
+      flexShrink: 1,
     },
     collapsedTextPlaceholder: {
       color: text.description ?? COLORS.TEXT_SUBTLE,
     },
     memoInput: {
       flex: 1,
-      minHeight: 90,
-      fontSize: 14,
+      minHeight: 108,
       color: COLORS.TEXT_ON_LIGHT,
       textAlignVertical: "top",
     },
@@ -3091,9 +3102,7 @@ function createStyles(COLORS, ui) {
     // Error text (re-using old naming)
     modeErrorText: {
       marginTop: 10,
-      fontSize: 11,
-      lineHeight: 16,
-      color: "#B91C1C",
+      color: COLORS.ERROR,
     },
 
     // Upgrade CTA
@@ -3104,66 +3113,78 @@ function createStyles(COLORS, ui) {
       backgroundColor: "rgba(0,0,0,0.35)",
       paddingHorizontal: 16,
       justifyContent: "center",
+      paddingVertical: 16,
     },
     modalCard: {
-      borderRadius: 22,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.PANEL_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 12,
-      maxHeight: "82%",
+      paddingHorizontal: 20,
+      paddingVertical: 20,
+      maxHeight: '90%',
+      width: '100%',
+      maxWidth: 640,
+      alignSelf: 'center',
+      flexShrink: 1,
+      minHeight: 0,
     },
     modalHeader: {
       flexDirection: "row",
-      alignItems: "center",
+      alignItems: 'flex-start',
       justifyContent: "space-between",
-      marginBottom: 10,
+      marginBottom: 16,
+      columnGap: 12,
     },
     modalTitle: {
-      fontSize: 14,
-      fontWeight: "900",
       color: COLORS.TEXT_ON_LIGHT,
+      flex: 1,
+      minWidth: 0,
+      flexShrink: 1,
     },
     modalCloseBtn: {
-      width: 36,
-      height: 36,
-      borderRadius: 12,
+      width: 44,
+      height: 44,
+      borderRadius: 16,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       alignItems: "center",
       justifyContent: "center",
       backgroundColor: COLORS.FIELD_BG,
+      flexShrink: 0,
     },
 
     sortRow: {
       flexDirection: "row",
-      alignItems: "center",
+      alignItems: 'stretch',
       justifyContent: "space-between",
       marginBottom: 10,
+      columnGap: 8,
     },
     sortPill: {
       flex: 1,
-      marginHorizontal: 4,
-      paddingVertical: 8,
+      marginHorizontal: 0,
+      paddingVertical: 10,
       borderRadius: 999,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
       alignItems: "center",
       justifyContent: "center",
+      minHeight: 44,
+      paddingHorizontal: 12,
     },
     sortPillActive: {
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
-      backgroundColor: COLORS.GOLD_BUTTON,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.SURFACE_TONAL,
     },
     sortPillText: {
-      fontSize: 11,
-      fontWeight: "900",
       color: COLORS.TEXT_ON_LIGHT,
+      textAlign: 'center',
+      flexShrink: 1,
     },
     sortPillTextActive: {
-      color: "#FFFFFF",
+      color: COLORS.ON_SURFACE_TONAL,
     },
 
     modalLoading: {
@@ -3173,12 +3194,14 @@ function createStyles(COLORS, ui) {
     },
     modalLoadingText: {
       marginTop: 10,
-      fontSize: 12,
-      color: COLORS.TEXT_ON_LIGHT,
-      opacity: 0.9,
+      color: COLORS.TEXT_SUBTLE,
     },
 
-    listArea: { paddingBottom: 4 },
+    listArea: {
+      paddingBottom: 8,
+      flexShrink: 1,
+      minHeight: 0,
+    },
     listRow: {
       flexDirection: "row",
       alignItems: "center",
@@ -3186,27 +3209,28 @@ function createStyles(COLORS, ui) {
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 10,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
       marginBottom: 8,
+      minHeight: 64,
     },
     listRowActive: {
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.SURFACE_TONAL,
     },
     activeBadge: {
-      paddingHorizontal: 8,
-      paddingVertical: 3,
+      paddingHorizontal: 10,
+      paddingVertical: 6,
       borderRadius: 999,
-      backgroundColor: COLORS.GOLD_BUTTON,
+      backgroundColor: COLORS.SURFACE_TONAL,
       borderWidth: 1,
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      borderColor: COLORS.CARD_BORDER,
       alignSelf: "flex-start",
+      maxWidth: '100%',
     },
     activeBadgeText: {
-      fontSize: 10,
-      fontWeight: "900",
-      color: "#FFFFFF",
+      color: COLORS.ON_SURFACE_TONAL,
+      flexShrink: 1,
     },
     pickerEmptyInline: {
       paddingVertical: 18,
@@ -3218,40 +3242,47 @@ function createStyles(COLORS, ui) {
       flexDirection: "row",
       alignItems: "flex-start",
       justifyContent: "space-between",
+      flexWrap: 'wrap',
+      columnGap: 8,
+      rowGap: 6,
     },
     rowTitle: {
-      flex: 1,
-      fontSize: 13,
-      fontWeight: "900",
       color: COLORS.TEXT_ON_LIGHT,
-      paddingRight: 10,
+      paddingRight: 0,
+      flexGrow: 1,
+      flexShrink: 1,
+      flexBasis: 160,
+      minWidth: 0,
     },
     newBadge: {
-      paddingHorizontal: 8,
-      paddingVertical: 3,
+      paddingHorizontal: 10,
+      paddingVertical: 6,
       borderRadius: 999,
-      backgroundColor: "#EF4444",
+      backgroundColor: COLORS.SURFACE_TONAL,
       alignSelf: "flex-start",
+      maxWidth: '100%',
     },
     newBadgeText: {
-      fontSize: 10,
-      fontWeight: "900",
-      color: "#FFFFFF",
+      color: COLORS.ON_SURFACE_TONAL,
+      flexShrink: 1,
     },
     rowMetaLine: {
       marginTop: 8,
       flexDirection: "row",
       alignItems: "center",
+      flexWrap: 'wrap',
+      columnGap: 12,
+      rowGap: 6,
     },
     rowMetaItem: {
       flexDirection: "row",
       alignItems: "center",
-      marginRight: 12,
+      marginRight: 0,
+      maxWidth: '100%',
     },
     rowMetaText: {
-      fontSize: 12,
-      fontWeight: "800",
       color: COLORS.TEXT_ON_LIGHT,
+      flexShrink: 1,
     },
 
     modalEmpty: {
@@ -3260,11 +3291,8 @@ function createStyles(COLORS, ui) {
       justifyContent: "center",
     },
     modalEmptyText: {
-      fontSize: 12,
-      lineHeight: 18,
-      color: COLORS.TEXT_ON_LIGHT,
-      opacity: 0.9,
+      color: COLORS.TEXT_SUBTLE,
       textAlign: "center",
     },
-  }, ui));
+  }, ui, {"panelTitle":"screenTitle","recoTitle":"sectionTitle","recoSummaryText":"description","recoToggleText":"button","recoToggleTextActive":"button","recoSectionLabel":"sectionTitle","recoPillText":"button","recoPillTextActive":"button","recoEmptyText":"description","recoLoadingText":"description","qnaIntroTitle":"sectionTitle","qnaIntroText":"description","targetLabel":"button","targetName":"button","goldButtonText":"button","historyCardTitle":"sectionTitle","historyEntryText":"button","modalTitle":"modalTitle","modalLoadingText":"description","modalEmptyText":"description","recoUserName":"button","recoUserSub":"meta","rowTitle":"button","activeBadgeText":"meta","modeErrorText":"description","tierHintText":"description","responseLabel":"sectionTitle","detailTitle":"body","responseText":"body","responseEmpty":"description","metricText":"meta","resonanceBtnText":"button","historyBtnText":"button","modalDescText":"body","inlineLoadingText":"description","choiceTitle":"button","choiceTitleActive":"button","choiceSub":"meta","choiceSubActive":"meta","inputLabel":"button","collapsedText":"body","collapsedTextPlaceholder":"body","memoInput":"body","sortPillText":"button","sortPillTextActive":"button","newBadgeText":"meta","rowMetaText":"meta"}));
 }

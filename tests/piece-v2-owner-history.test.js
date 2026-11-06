@@ -1097,7 +1097,7 @@ function nexusEntryHarness(options = {}) {
       if (name.endsWith('/ThemeContext')) return { useTheme: () => ({ colors, themeName: 'light' }) };
       if (name.endsWith('/uiTokens')) return { makeUiTokens: () => ({}) };
       if (name.endsWith('/applyTypographyTokens')) return { applyTypographyTokens: x => x };
-      if (name === 'react-native-safe-area-context') return { useSafeAreaInsets: () => ({}) };
+      if (name === 'react-native-safe-area-context') return { SafeAreaView: 'SafeAreaView', useSafeAreaInsets: () => ({}) };
       if (name.endsWith('/nexusApi')) return new Proxy({}, { get: (_, key) => async (...args) => {
         legacyCalls.push([key, args]);
         if (control.feedFailure && ['getNexusPieces', 'getNexusResonancePieces'].includes(key)) throw Error('feed unavailable');
@@ -1642,6 +1642,7 @@ test('real owner wrapper separates focus and runtime loading from permissions', 
     useAuth: () => ({ session: { user: { id: OWNER } } }),
     useAppRuntime: () => ({ runtime: state.runtime, isFeatureEnabled: () => state.allowed }),
     useTutorial: () => ({ isTutorialMode: state.tutorial }), useIsFocused: () => state.focused,
+    useTheme: () => ({ colors: {}, themeName: 'default' }), makeUiTokens: () => ({}),
     flagNames: ['piece_v2_owner_read_enabled', 'piece_v2_visibility_toggle_enabled',
       'piece_v2_public_write_enabled', 'piece_v2_delete_enabled', 'piece_v2_export_enabled'],
     PieceOwnerHistoryHost: 'OwnerHost', h: (type, props) => ({ type, props }),

@@ -6,6 +6,7 @@ import { useAuth } from '../AuthContext';
 import { useAppRuntime } from '../AppRuntimeContext';
 import { useTutorial } from '../TutorialContext';
 import { useTheme } from '../theme/ThemeContext';
+import { makeUiTokens } from '../ui/uiTokens';
 import CocolonBackButton from '../components/CocolonBackButton';
 import InputPieceActionArea from './input/InputPieceActionArea';
 import { isPieceBitmapSaveAdmitted, supportsPieceBitmapCreation } from '../features/piece/pieceRenderer';
@@ -14,7 +15,8 @@ import { isPieceBitmapSaveAdmitted, supportsPieceBitmapCreation } from '../featu
 // The saved-source API remains authoritative; no response text is Piece input.
 export default function PieceCreateScreen({ route, navigation, saveRecovery }) {
   const { session } = useAuth();
-  const { colors } = useTheme();
+  const { colors, themeName } = useTheme();
+  const ui = makeUiTokens(colors, themeName);
   const { isTutorialMode } = useTutorial();
   const { isFeatureEnabled } = useAppRuntime();
   const focused = useIsFocused();
@@ -34,17 +36,17 @@ export default function PieceCreateScreen({ route, navigation, saveRecovery }) {
     void host.current.createFromSavedInput();
   }, [savedInput, active]);
 
-  return <SafeAreaView style={[styles.page, { backgroundColor: colors.FIELD_BG }]}>
+  return <SafeAreaView edges={['left', 'right']} style={[styles.page, { backgroundColor: colors.BG_SILVER }]}>
     <View style={styles.header}>
       <CocolonBackButton onPress={() => navigation.goBack()} />
       <Text style={[styles.title, { color: colors.TITLE_GOLD }]}>ピースの作成</Text>
     </View>
     <ScrollView contentContainerStyle={styles.content}>
       {/* Keep same-request save/cancel recovery through runtime/focus changes. */}
-      {bound && creationSupported ? <InputPieceActionArea ref={host} savedInput={savedInput}
+      {bound && creationSupported ? <InputPieceActionArea colors={colors} ui={ui} ref={host} savedInput={savedInput}
         navigation={navigation} active={active} creationMode saveRecovery={saveRecovery}
         isSaveAdmitted={isPieceBitmapSaveAdmitted} />
-        : <Text accessibilityRole="alert" style={{ color: colors.TEXT_ON_LIGHT }}>
+        : <Text accessibilityRole="alert" style={{ ...ui.typography.body, color: colors.TEXT_ON_LIGHT }}>
           {bound ? 'この端末ではピースの画像を作成できません。' : '現在、この記録からピースを作成できません。'}
         </Text>}
     </ScrollView>
@@ -52,6 +54,6 @@ export default function PieceCreateScreen({ route, navigation, saveRecovery }) {
 }
 
 const styles = StyleSheet.create({
-  page: { flex: 1 }, header: { flexDirection: 'row', alignItems: 'center', gap: 12, padding: 20 },
-  title: { fontSize: 22, fontWeight: '700' }, content: { padding: 20, gap: 16 },
+  page: { flex: 1 }, header: { flexDirection: 'row', alignItems: 'center', gap: 12, padding: 20, width: '100%', maxWidth: 680, alignSelf: 'center' },
+  title: { fontSize: 26, lineHeight: 34, fontWeight: '600', flex: 1, minWidth: 0, flexShrink: 1 }, content: { padding: 20, gap: 16, width: '100%', maxWidth: 680, alignSelf: 'center' },
 });

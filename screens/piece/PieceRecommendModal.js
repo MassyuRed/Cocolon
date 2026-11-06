@@ -1,3 +1,4 @@
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import React from "react";
 import { ActivityIndicator, Modal, Pressable, ScrollView, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -22,7 +23,7 @@ export default function PieceRecommendModal({
       transparent
       onRequestClose={onClose}
     >
-      <View style={styles.modalOverlay}>
+      <SafeAreaProvider style={{ flex: 1, backgroundColor: styles.modalOverlay.backgroundColor }}><SafeAreaView edges={["top", "right", "bottom", "left"]} style={{ flex: 1 }}><View style={[styles.modalOverlay, { backgroundColor: "transparent" }]}>
         <View style={styles.modalCard}>
           <View style={styles.modalHeader}>
             <Text style={styles.modalTitle}>おすすめ</Text>
@@ -38,6 +39,7 @@ export default function PieceRecommendModal({
           </View>
 
           <ScrollView style={styles.listArea}>
+            {error ? <Text style={styles.modeErrorText} accessibilityRole="alert">取得に失敗: {error}</Text> : null}
             <Text style={styles.recoSectionLabel}>アクティブユーザー</Text>
 
             {loading ? (
@@ -58,8 +60,8 @@ export default function PieceRecommendModal({
                       style={styles.recoUserRow}
                     >
                       <View style={{ flex: 1, paddingRight: 10 }}>
-                        <Text style={styles.recoUserName} numberOfLines={1}>{name}</Text>
-                        <Text style={styles.recoUserSub} numberOfLines={1}>
+                        <Text style={styles.recoUserName}>{name}</Text>
+                        <Text style={styles.recoUserSub}>
                           {handle ? `@${handle}` : " "}
                         </Text>
                       </View>
@@ -74,14 +76,14 @@ export default function PieceRecommendModal({
                   );
                 })}
               </View>
-            ) : (
+            ) : error ? null : (
               <Text style={styles.recoEmptyText}>
-                {error ? `取得に失敗: ${error}` : "候補ユーザーがいません。"}
+                候補ユーザーがいません。
               </Text>
             )}
           </ScrollView>
         </View>
-      </View>
+      </View></SafeAreaView></SafeAreaProvider>
     </Modal>
   );
 }
