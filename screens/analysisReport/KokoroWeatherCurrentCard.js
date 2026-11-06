@@ -190,14 +190,16 @@ function createStyles(colors, ui) {
       marginTop: 6,
       color: text.description ?? colors.TEXT_SUBTLE,
     },
-        action: {
+        actionContainer: {
       alignSelf: "flex-start",
+      marginTop: 10,
+      maxWidth: '100%',
+    },
+    action: {
       flexDirection: "row",
       alignItems: 'center',
-      marginTop: 10,
       paddingVertical: 10,
       minHeight: 44,
-      maxWidth: '100%',
     },
         actionText: {
       color: colors.TITLE_GOLD,
@@ -240,6 +242,7 @@ export default function KokoroWeatherCurrentCard({ currentWeather, onOpenPreviou
         </Text>
         {canOpenPrevious ? (
           <CocolonPressable
+            containerStyle={styles.actionContainer}
             style={styles.action}
             onPress={onOpenPrevious}
             accessibilityLabel={emptyActionLabel}

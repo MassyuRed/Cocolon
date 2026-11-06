@@ -176,7 +176,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 | 機能 | 目的・現在の接続 | 未確認・境界 |
 |---|---|---|
-| UI採用方針（11/6） | **全画面を例外なくMaterialへ統一するMashの確定方針。** 6群のsource実装と全体横断を一巡し、次は全群をまとめたビルド・実機仕上げ。[設計と最新実装§22](designs/ui/material-ui-design.md#ui-final-material-20261106) | 共通／起動／認証→入力／応答／問い／履歴→分析→Piece／social→アカウント／設定／契約に続き、お知らせ／ガイド／tutorial・休眠7screen／旧描画資産を統一。未読NEW・必須案内・toastも補修。既存9入口175 PASS、NoticeHistory7・NoticeModal6・Guide18・Overlay24の一時検査、157role×3theme一致。tutorialは現仕様の説明へ、raw fixtureと通常legacyの資格は保持。全19step・3テーマ・文字拡大・短い横画面・keyboard／safe areaの実機表示は未確認。途中commitは[skip ci]、今回ビルド／native compile／配布0。API／DB／AI・分析本文・作品画像・課金／公開契約は保持 |
+| UI採用方針（11/6） | **全画面を例外なくMaterialへ統一するMashの確定方針。** 全6群のsource一巡後、タップ範囲と短い横画面のtutorialを仕上げ。[最新実装§23](designs/ui/material-ui-design.md#ui-layout-finish-20261106) | 問い／天気／お知らせ／旧Rankingの4file・5操作は外側tapと表示の幅・配置を一致。大きいtutorial対象で説明が1〜12高へ潰れ上下往復する経路を補修し、local safe areaと利用可能高へ制限、同値通知を停止。既存9入口178 PASS、追加再現3件と一時の実source寸法／押下検査成功。API／DB／AI・分析本文・作品画像・本人／公開契約は不変。全19step・3theme・文字拡大・短横／keyboard等の実機は未確認。今回ビルド／native compile／配布0、途中commitは[skip ci] |
 | 起動・認証 | 登録／ログイン／メール確認再送／再設定／復旧。`App.js`→`RootNavigator`→`MainTabs`→Input／Analysis／Piece／Settingsの4 Stack（Ranking入口は撤去済み） | native認証リンク・cold／warm復帰の実成立は別確認。旧巨大App／MyModel画面名から現在を復元しない |
 | 今日の問い・回答履歴 | current／answers／history／PATCH／settingsを接続。日常メモと別に考えを記録し、修正・再読 | Emlis任意問いと別機能。旧自己構造素材との接続を、V2全source採用済みへ拡張しない |
 | 投稿・他者のPiece | 通常`PieceEntryScreen`→`NexusScreen`。本人／フォロー中／特定相手、並替・更新・本人投稿削除。linkPayload時のみ`PieceScreen` | 公開条件と新Piece保存成立は別。旧Q&A投稿と新canonical recordを混同しない |

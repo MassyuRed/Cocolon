@@ -124,6 +124,7 @@ export default function TodayQuestionCard({
           <Text style={styles.lockedBody}>通知時刻になると、質問と回答欄が表示されます。</Text>
           {showHistoryButton ? (
             <CocolonPressable
+              containerStyle={styles.linkContainer}
               style={styles.linkButton}
               onPress={onOpenHistory}
               accessibilityLabel="今日の問い履歴を見る"
@@ -153,6 +154,7 @@ export default function TodayQuestionCard({
           ) : null}
           {showHistoryButton ? (
             <CocolonPressable
+              containerStyle={styles.linkContainer}
               style={styles.linkButton}
               onPress={onOpenHistory}
               accessibilityLabel="今日の問い履歴を見る"
@@ -500,10 +502,12 @@ function createStyles(COLORS, ui) {
       lineHeight: 19,
       color: COLORS.TEXT_ON_LIGHT,
     },
-    linkButton: {
-      minHeight: 44,
+    linkContainer: {
       marginTop: 12,
       alignSelf: "flex-start",
+    },
+    linkButton: {
+      minHeight: 44,
       flexDirection: "row",
       alignItems: "center",
     },

@@ -326,6 +326,7 @@ function RankingPreviewCard({ styles, colors, config, state, navigation, onOpenA
       </View>
 
       <CocolonPressable
+        containerStyle={styles.showAllContainer}
         style={styles.showAllButton}
         onPress={onOpenAll}
         accessibilityLabel={`${config.title}を全表示`}
@@ -553,9 +554,12 @@ function createStyles(COLORS, ui) {
       textAlign: "right",
       minWidth: 0,
     },
-    showAllButton: {
+    showAllContainer: {
       marginTop: 10,
       alignSelf: "flex-end",
+      maxWidth: "100%",
+    },
+    showAllButton: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
@@ -566,7 +570,6 @@ function createStyles(COLORS, ui) {
       borderColor: COLORS.SURFACE_TONAL,
       backgroundColor: COLORS.SURFACE_TONAL,
       minHeight: 44,
-      maxWidth: "100%",
     },
     showAllButtonText: {
       marginRight: 3,

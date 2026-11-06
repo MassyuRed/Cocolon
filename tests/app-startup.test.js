@@ -118,3 +118,104 @@ test('home initial read settles on failure, can retry, and ignores requests from
   await act(async()=>{reads.at(-1).resolve({sections:{input_summary:{today_count:2}}});await retry;});
   assert.equal(value.homeReadError,false);assert.equal(value.homeTodayCount,2);assert.equal(value.initialHomeReadComplete,true);
 });
+
+function loadTutorialOverlay({ width = 844, height = 390, insets } = {}) {
+  return load('components/TutorialOverlay.js', {
+    'react-native': {
+      View: 'View', Text: 'Text', ScrollView: 'ScrollView', Pressable: 'Pressable',
+      StyleSheet: { create: x => x, absoluteFillObject: { position: 'absolute', top: 0, right: 0, bottom: 0, left: 0 } },
+      useWindowDimensions: () => ({ width, height, fontScale: 1 }),
+    },
+    'react-native-safe-area-context': { useSafeAreaInsets: () => insets || { top: 0, right: 0, bottom: 21, left: 0 } },
+    '../theme/ThemeContext': { useTheme: () => ({ colors: {}, themeName: 'default' }) },
+  });
+}
+
+const flatStyle = value => Array.isArray(value)
+  ? Object.assign({}, ...value.filter(Boolean).map(flatStyle)) : value || {};
+const nextFrame = () => new Promise(resolve => setImmediate(resolve));
+
+// These use the real overlay and public measurement helpers. Native measurement
+// is replaced; physical layout, gestures, and OS safe areas still need a device.
+test('tall tutorial information keeps the card usable and identical targets settle', async t => {
+  const oldRaf = global.requestAnimationFrame;
+  global.requestAnimationFrame = cb => setImmediate(cb);
+  let view;
+  t.after(async () => {
+    if (view) await act(async () => view.unmount());
+    await nextFrame(); await nextFrame();
+    if (oldRaf) global.requestAnimationFrame = oldRaf; else delete global.requestAnimationFrame;
+  });
+  const insets = { top: 0, left: 44, right: 44, bottom: 21 };
+  const Overlay = loadTutorialOverlay({ insets }).default;
+  for (const targetHeight of [339, 392, 503]) {
+    let metrics, emissions = 0;
+    function Host() {
+      const [target, setTarget] = React.useState({ x: 20, y: 36, width: 300, height: targetHeight });
+      const onMetrics = React.useCallback(value => {
+        if (!value) return;
+        metrics = value;
+        emissions += 1;
+        // This matches the callers remeasuring into a new object. Bound a
+        // regression's runaway feedback rather than hanging the test process.
+        if (emissions < 12) setTarget(prev => ({ ...prev }));
+      }, []);
+      return React.createElement(Overlay, { visible: true, mode: 'info', targetRect: target,
+        title: '説明', message: '長い欄の使い方', nextLabel: '次へ', onNext: no,
+        onMetricsChange: onMetrics, testID: 'tutorial-layout-root' });
+    }
+    await act(async () => {
+      view = Renderer.create(React.createElement(Host), { createNodeMock: node =>
+        node.props.testID === 'tutorial-layout-root'
+          ? { measureInWindow: cb => cb(44, 55, 756, 335) } : null });
+    });
+    await act(async () => view.root.findAllByType('View').find(node => node.props.testID === 'tutorial-layout-root').props.onLayout({
+      nativeEvent: { layout: { width: 756, height: 335 } },
+    }));
+    await act(async () => { for (let frame = 0; frame < 8; frame += 1) await nextFrame(); });
+    const card = view.root.findAllByType('View').find(node =>
+      node.props.onLayout && flatStyle(node.props.style).maxHeight != null);
+    const bounds = flatStyle(card.props.style);
+    assert.ok(bounds.maxHeight >= 116, `target ${targetHeight}: explanation must not collapse`);
+    assert.ok(metrics.cardRect.bottom <= 335 - 21, 'card remains above the home-indicator inset');
+    assert.equal(metrics.safeInsets.top, 0);
+    assert.equal(metrics.safeInsets.left, 0, 'already consumed horizontal inset is not added twice');
+    assert.equal(metrics.cardRect.width, 640);
+    assert.ok(emissions < 12, 'equal measured coordinates stop the metrics feedback');
+    const primary = view.root.findAllByType('Pressable').find(node => node.props.onPress === no);
+    assert.ok(primary, 'next action remains available');
+    let ancestor = primary.parent;
+    while (ancestor && ancestor.type !== 'ScrollView') ancestor = ancestor.parent;
+    assert.ok(ancestor, 'next remains within the readable card scroll');
+    await act(async () => view.unmount()); view = null;
+  }
+});
+
+test('oversized tutorial target stays at its start without alternating scrolls', async t => {
+  const oldRaf = global.requestAnimationFrame;
+  global.requestAnimationFrame = cb => setImmediate(cb);
+  t.after(() => { if (oldRaf) global.requestAnimationFrame = oldRaf; else delete global.requestAnimationFrame; });
+  const { syncTutorialSpotlightTarget } = loadTutorialOverlay();
+  const currentScrollYRef = { current: 0 }, scrolls = [];
+  const options = {
+    targetRef: { current: { measureInWindow: cb => cb(20, 36 - currentScrollYRef.current, 300, 392) } },
+    rootRef: { current: { measureInWindow: cb => cb(0, 0, 390, 335) } },
+    scrollRef: { current: { scrollTo: value => scrolls.push(value.y) } }, currentScrollYRef,
+    overlayMetrics: { overlayHeight: 335, overlayWindowRect: { x: 0, y: 0, width: 390, height: 335 },
+      safeInsets: { top: 0, bottom: 21 }, cardPlacement: 'bottom',
+      cardRect: { x: 16, y: 67, width: 358, height: 247 } },
+    measureOptions: { maxAttempts: 1, settleFrames: 0 },
+  };
+  for (let repeat = 0; repeat < 4; repeat += 1) await syncTutorialSpotlightTarget(options);
+  assert.deepEqual(scrolls, [], 'the visible start is already aligned; never chase the impossible bottom');
+  assert.equal(currentScrollYRef.current, 0);
+});
+
+test('tutorial fallback card is bounded by usable height including both insets', () => {
+  const { buildTutorialViewport } = loadTutorialOverlay();
+  const view = buildTutorialViewport({ windowHeight: 70, safeInsets: { top: 28, bottom: 21 },
+    cardBottomMargin: -16, fallbackCardHeight: 220 });
+  assert.equal(view.cardRect.y, 32);
+  assert.equal(view.cardRect.height, 17);
+  assert.equal(view.cardRect.bottom, 49, 'negative margin cannot consume the bottom safe area');
+});

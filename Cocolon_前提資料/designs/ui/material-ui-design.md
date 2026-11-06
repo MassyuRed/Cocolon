@@ -166,7 +166,7 @@ Mashの比較理由：Day One案は情報の区切りが弱く、視線が動き
 | Piece作成 | 画像／全文を設定より前へ。操作ボタンと外枠をテーマ対応。全条件操作とidentity/tokenの引渡しを保持。作品renderer・recipe・保存画像は変更0 |
 | 設定・周辺 | 設定入口を目的が読める3行へ。テーマ選択面、共通メニュー、契約カード・説明・CTA、Nexusタブと自分のPiece入口を調整 |
 
-**現在の実装：** §17〜22の全6群へsourceを反映。最後の案内・tutorial・休眠画面と、全体横断で見つかった未読表示／必須案内／旧交差リンクも揃えた。全画面対応表のsource実装を一巡した状態であり、ビルド・配布・実端末での表示合格は未確認。次は全群をまとめたビルドで、3テーマ、文字拡大1.0/1.3/1.6、狭い幅、短い横画面、safe area、キーボード、長文・回復操作、全19tutorial stepを確認し、実際の欠けを直す。sourceの統一と実機での仕上げ完了を分けて管理する。
+**現在の実装：** §17〜22の全6群へsourceを反映し、§23でタップ領域と短い横画面のtutorialを補修。全画面対応表のsource実装を一巡した状態であり、ビルド・配布・実端末での表示合格は未確認。次は全群をまとめたビルドで、3テーマ、文字拡大1.0/1.3/1.6、狭い幅、短い横画面、safe area、キーボード、長文・回復操作、全19tutorial stepを確認し、実際の欠けを直す。sourceの統一と実機での仕上げ完了を分けて管理する。
 
 初回反映時の確認：Nodeの既存5入口（画面contract・IAP復元・テーマ可読性・Piece初回保存modal・preview/display）で400 PASS／FAIL0／SKIP0。React/native・Auth/HTTPは各既存testの代替を含む。テーマ検査は旧バーガンディ色・太枠・taglineの固定期待を採用設計へ更新し、3テーマの本文／補助／tonal／操作色の4.5:1を検査した。Piece testの新テーマhookと共有Buttonへのimport適応のみを行い、保存・回復の検査は維持。最初の実行は取得不足の依存fileと旧表示期待で失敗し、依存原本の取得と意図した期待更新後に上記最終実行を通過した。製品の資格判定を緩めていない。今回の全画面設計更新で、これらを再実行したとは扱わない。
 
@@ -585,3 +585,27 @@ read-only reviewで、問いmodalのhideHeaderによるspinner非表示、Emlis 
 一時検査では実NoticeHistory／RichTextで7 PASS（初回・追加・focus失敗、同offset再試行、重複除去、auto-open、既読・CTA等）、実NoticeModalは3テーマ×通常／welcomeの6case PASS（loading／空本文も確認）。実Guide3部品＋dataで3テーマとunknownを含む18case PASS。両Overlayは幅320／1024×3テーマ×primary有効／無効の24case PASS、cardRectと実style幅／左右gap／proxy callbackを照合。Startの3callback／Android戻る・scroll、Flow完了中の二重操作停止／home resetも確認。既存helper22関数とFlow主要6式、休眠7screenの処理部分とProfile入力／keyboard等21propsがAST一致。16style ownerの157明示role×3palette＝471組、文字サイズ／行間／太さ1,413値が実関数で完全一致。native・safe area・API・遷移・storeは代替を含むため、実描画・実配送・課金成功・全19stepのタップ成功を証明しない。
 
 **次は全群をまとめたビルドと、実機での全画面仕上げ。** source実装は§14の全体を一巡済み。残る受入確認は、全登録／内部routeと条件分岐、3テーマ、幅320〜430・短いiOS横画面、OS文字拡大1.0／1.3／1.6、safe area、keyboard、長文・複数回復、未読、全19tutorial stepの実測。実機で見つかった欠けは同じ改装の残件として修正する。今回のapp/native build・CI native compile・Upload・配布・実機表示・Render／Supabase／GPU操作は0、commitは[skip ci]。全UIの視覚的合格・配布完了とは宣言しない。
+
+
+<a id="ui-layout-finish-20261106"></a>
+## 23. 11/6 全画面一巡後の仕上げ — タップ領域と短い横画面のtutorial
+
+前回の全6群source反映 `46d7e694eb0bf8ec7ed8bc8e53cad96697d66e80` をfresh確認し、寸法と実際の操作範囲を追加確認した。前回の175 PASS／全体一巡を、実描画・実機合格へ換算しない。今回は確実に残っていた2系列の表示不具合だけを修正する。
+
+| 対象 | 確認した問題 | 修正 |
+|---|---|---|
+| お知らせの「さらに表示」 | 640幅の親に対して見えるボタンはmax520だが、styleのない外側Pressableは全幅へstretch。空白も押せ、読み上げfocus矩形も表示より広くなる | CocolonPressableへ任意containerStyleを追加。幅100%／max520／中央配置／上余白を外側へ、背景・内余白・文字・押下scaleは従来の子へ。余白を二重にしない |
+| 今日の問い・今の天気・旧Ranking | 問いの準備中／回答済みの「履歴を見る」、天気の「前回を見る」、休眠Rankingの「全表示」にも、子だけの左右寄せと外側全幅の不一致 | 左／右寄せと上余白・最大幅を外側のcontainerへ移す。4file・実5呼出箇所の同じcallback／disabled／読み上げ条件を保持。CocolonButtonと他callerは幅が一致しているため変更しない |
+| 大きい対象を示すtutorial | header後のroot高335、step3対象下限392／15・16下限339では、旧式はcard maxHeight1〜12になり、padding／border42だけで本文と次へを圧迫。文字拡大で悪化する | infoだけ、上下に最低説明領域を取れない場合は全利用可能高へfallback。対象の一部へ重なっても本文scrollと次へを優先する。action7の生成ボタン／proxyは同じ領域・callbackを保つ |
+| 自動スクロールと同値通知 | 同じ大きい対象の上端と下端を交互に追い、旧式はy36→−99→36等の往復。座標が同じでも新objectでmetrics→再測定が繰り返される | target高＋上下paddingがviewportを超える時は先頭へ一度だけ合わせ、下端を追わない。holeのmemoはx／y／幅／高さの値へ結び付け、同値objectで再通知しない |
+| safe areaと最大高 | GlobalFrameが消費した上部safe areaを再加算、既定bottomMargin−16はhome indicator側へ侵入。spotlightなし／初回fallbackの高も利用可能高で制限されていなかった | 既存overlayWindowRectとwindow寸法からoverlay内の4辺insetへ換算し、描画とmetricsで共有。未計測は保守的global値。bottom既定0・負の余白でもsafe内、cardとfallbackをmin(fullHeight,softCap)へ |
+
+全19stepのsource照合：3／4／5／6／14／15／16／18はspotlight付きinfo、7だけが対象ボタンを押すaction。1／2／8〜13／17はspotlightなし、19は既存の完了ボタンでOverlayなし。今回の共通info修正は8場面へ届き、step遷移・模擬入力・保存・未読・完了処理を変えない。旧root Overlayはsource不変。短画面で対象全体の同時表示が物理的に不可能な時、説明を潰して全体を囲む配置へ戻さない。
+
+製品6file：`components/{CocolonPressable,TodayQuestionCard,TutorialOverlay}.js`、`screens/{NoticeHistoryScreen,RankingTopScreen}.js`、`screens/analysisReport/KokoroWeatherCurrentCard.js`。既存`tests/app-startup.test.js`へ再現3件を追加。新製品file・新test framework・依存・route・API／DB／AI・本人／公開契約・本文／作品画像変更0。任意表示propと既存UI寸法計算の範囲で、STRUCTURE_MAP_DELTA_NONE。
+
+検証：前回と同じ既存9入口で **178 PASS／FAIL0／SKIP0**。新3件は実Overlay＋測定代替で339／392／503高の対象が説明領域を保つこと、同値座標の反復通知が止まること、公開syncの4反復で上下往復しないこと、公開fallbackが両inset内へ収まることを検査。最初の1失敗はtestがnative Viewでなくcompositeを選んだためで、selectorを修正し製品の条件を緩めず再実行した。変更JS7fileのparse／diff空白検査も成功。
+
+一時の前後検査は3theme×前後6caseで外側配置・子余白非重複、callback／disabled／selected／busy／hint／value／hitSlop、translate→rotate→scale順序と押下／解除／無効化のscale復元を保持。実styleと5呼出箇所の式も一致。tutorialの寸法模擬ではroot335のstep3／15／16がmax247へ回復し、5巡のmetrics／scroll更新で安定、同じ座標の新object3回でも追加metrics0。root200・未計測・top47／bottom34でもcard／fallbackは利用可能高115へ一致。action7 proxy／hitSlop12を保持。測定関連17関数、再測定effect、proxy関連bindingはAST同一。これらはnative実寸・実hit-test・描画・読み上げ・全19step実タップの代替ではない。
+
+**残る確認は統合ビルドと実機での全画面仕上げ。** 全6群へ採用デザインを適用した状態を継承し、今回の不具合を補修した。3theme、文字拡大1.0／1.3／1.6、幅320〜430・短いiOS横画面、safe area／keyboard、長文・回復、全19stepを実機で確認する。今回もapp/native build・CI native compile・Upload・配布・本人端末・Render／Supabase／GPU操作0、commitは[skip ci]。source修正と限定検証を、視覚的受入れや商品文章品質の改善へ換算しない。

@@ -5127,3 +5127,17 @@ tutorialの旧Piece Q&A・現在map Plus／28日説明は、画像Pieceと旧投
 製品29file＋既存test2file＋資料3file。既存9入口175 PASS／FAIL0／SKIP0。起動harnessのnative hook代替不足と、初回のruntime依存パス未指定を解消し再実行、assertの緩和はない。一時検査は実NoticeHistory7・NoticeModal6、Guide18、両Overlayの幅320／1024×3theme×有効／無効24case PASS。Startの3callback／Android戻る、Flow二重完了停止／home resetも確認。16owner・157role×3theme＝471組、文字サイズ／行間／太さ1,413値完全一致。既存helper22関数／Flow6式、休眠7screen処理とProfile21propsのAST保持を確認。native／API／遷移を代替しており、実機表示や全19stepの実タップ成功ではない。
 
 全path・設計・保持境界は[UI設計§22](../designs/ui/material-ui-design.md#ui-final-material-20261106)。全6群のsourceは一巡し、次はまとめたビルド・配布と実機での仕上げへ進む段階。全登録／内部route・条件分岐、3theme、文字拡大1.0／1.3／1.6、狭幅／短い横画面、safe area／keyboard、長文・回復・未読・全19stepの実測を残す。今回のapp/native build・CI native compile・Upload・配布・本人端末表示・Render／Supabase／GPU操作0、commitは[skip ci]。新route／依存／API／DB／課金価格／本人・公開契約／AI・分析本文／作品画像の変更0、STRUCTURE_MAP_DELTA_NONE。source完了と実機のUI受入合格を混同しない。writerは華恋一人、補助はread-only review。
+
+
+<a id="ui-layout-finish-20261106"></a>
+## 225. 11/6 — タップ領域と短い横画面のtutorialを補修
+
+fresh `46d7e694eb0bf8ec7ed8bc8e53cad96697d66e80` から全6群の実装を継承し、前提全文・現UI設計・最新weeklyと実sourceを確認。今回は実際の操作範囲と短画面の寸法で残っていた2系列だけを修正した。
+
+CocolonPressableはstyleがAnimated子にだけ付き、お知らせの見える520幅ボタンに対し外側tap／読み上げ範囲が640幅へ広がっていた。任意containerStyleで外側の幅・左右寄せ・上余白を明示し、問いの準備中／回答済み「履歴」、天気「前回」、休眠Ranking「全表示」も同じ原因を修正。4file・実5呼出箇所で、表示・callback・無効条件・読み上げ・押下scaleを維持し、他caller／Buttonには不要な変更をしない。
+
+tutorialでは短い横画面の実領域より大きいtargetを全部囲もうとしてcardが1〜12高に圧縮され、上端／下端を交互に追うスクロールも再現した。spotlight付きinfoの上下不足時は利用可能高へfallbackし、本文と次へを残す。対象がviewport＋paddingへ収まらない時は先頭で止め、同値座標ではmetricsを再通知しない。既存のwindow計測からlocal safeInsetsへ換算し、上部二重確保とbottom−16侵入を修正。spotlightなしと初回fallbackもfullHeightで制限する。action7の生成ボタン／proxy、step遷移・模擬データ・完了処理は不変。sourceの全19stepではinfo3／4／5／6／14／15／16／18、action7、spotlightなし1／2／8〜13／17、Overlayなし19を確認した。
+
+製品6file＋既存test1file＋資料3file。既存9入口は178 PASS／FAIL0／SKIP0。追加の実Overlay再現3件は高い対象・同値metrics・4反復scroll・両inset内fallbackを検証し、初回のcomposite選択ミス1件をtest側だけで補正して成功。7JS parse／diff空白検査成功。一時の共通Pressable前後6caseと実style／5callerのAST照合、tutorial実sourceの335高→card247／200高→115・5巡安定・同値新object追加通知0、action proxy／hitSlop12を確認。測定17関数と再測定effect／proxy bindingはAST同一、旧root Overlayはbyte同一。native測定・実OS・hit-testは代替している。
+
+詳細は[UI設計§23](../designs/ui/material-ui-design.md#ui-layout-finish-20261106)。全6群sourceの一巡後の仕上げであり、全UIの実機合格ではない。次はまとめたビルドと3theme／文字拡大／狭幅・短横／safe area・keyboard／長文・回復／全19stepの実測。今回app/native build・CI compile・Upload・配布・本人端末・Render／Supabase／GPU操作0、commitは[skip ci]。新route／依存／framework／API／DB／AI／本文・作品画像／本人・公開契約変更0、STRUCTURE_MAP_DELTA_NONE。writerは華恋一人、補助はread-onlyとscratch検査。

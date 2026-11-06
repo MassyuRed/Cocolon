@@ -16,7 +16,7 @@ const DEFAULT_DIM_OPACITY = 0.62;
 const DEFAULT_TARGET_PADDING = 8;
 const DEFAULT_TARGET_RADIUS = 16;
 const DEFAULT_CARD_SIDE_MARGIN = 12;
-const DEFAULT_CARD_BOTTOM_MARGIN = -16;
+const DEFAULT_CARD_BOTTOM_MARGIN = 0;
 const DEFAULT_CARD_EDGE_OFFSET = 4;
 const DEFAULT_CARD_FALLBACK_HEIGHT = 220;
 const DEFAULT_CARD_MIN_HEIGHT = 72;
@@ -43,10 +43,27 @@ function getCardAnchors({
 
   return {
     topBase: Math.max(0, Number(safeTop) || 0) + DEFAULT_CARD_EDGE_OFFSET,
-    bottomOffset: Math.max(
-      0,
-      Math.max(0, Number(safeBottom) || 0) + resolvedCardBottomMargin
-    ),
+    bottomOffset:
+      Math.max(0, Number(safeBottom) || 0) + Math.max(0, resolvedCardBottomMargin),
+  };
+}
+
+// Insets are window-relative; this overlay can begin below the app header or
+// inside a safe-area modal. Reuse the measured window rect for local edges.
+function resolveOverlaySafeInsets({ safeInsets, overlayWindowRect, windowWidth, windowHeight }) {
+  const insets = {
+    top: Math.max(0, Number(safeInsets?.top) || 0),
+    right: Math.max(0, Number(safeInsets?.right) || 0),
+    bottom: Math.max(0, Number(safeInsets?.bottom) || 0),
+    left: Math.max(0, Number(safeInsets?.left) || 0),
+  };
+  const rect = normalizeMeasuredRect(overlayWindowRect);
+  if (!rect || !(windowWidth > 0) || !(windowHeight > 0)) return insets;
+  return {
+    top: clamp(insets.top - rect.y, 0, rect.height),
+    right: clamp(rect.right - (windowWidth - insets.right), 0, rect.width),
+    bottom: clamp(rect.bottom - (windowHeight - insets.bottom), 0, rect.height),
+    left: clamp(insets.left - rect.x, 0, rect.width),
   };
 }
 
@@ -473,9 +490,13 @@ function buildFallbackCardRect({
     safeBottom,
     cardBottomMargin,
   });
-  const fallbackCardHeight = Math.min(
-    Number(cardHeight) || DEFAULT_CARD_FALLBACK_HEIGHT,
-    getCardHeightCap(overlayHeight)
+  const fallbackCardHeight = Math.max(
+    1,
+    Math.min(
+      Number(cardHeight) || DEFAULT_CARD_FALLBACK_HEIGHT,
+      getCardHeightCap(overlayHeight),
+      Math.max(0, overlayHeight - topBase - bottomOffset)
+    )
   );
   const top =
     fallbackPlacement === "top"
@@ -556,6 +577,13 @@ function getTutorialScrollDelta(rect, viewport, scrollPadding) {
   if (!safeRect || !viewport) return 0;
 
   const padding = Math.max(0, Number(scrollPadding) || 0);
+  const availableHeight = Math.max(0, viewport.bottom - viewport.top - padding * 2);
+
+  // A tall target cannot satisfy both edges. Keep its start visible instead
+  // of alternating between top and bottom on each metrics update.
+  if (safeRect.height > availableHeight) {
+    return safeRect.y - viewport.top - padding;
+  }
 
   if (safeRect.y < viewport.top) {
     return safeRect.y - viewport.top - padding;
@@ -687,23 +715,31 @@ export default function TutorialOverlay({
 
   const screenWidth = Math.max(1, overlayLayout.width || windowWidth);
   const screenHeight = Math.max(1, overlayLayout.height || windowHeight);
+  const localInsets = useMemo(
+    () => resolveOverlaySafeInsets({ safeInsets: insets, overlayWindowRect, windowWidth, windowHeight }),
+    [insets, overlayWindowRect, windowWidth, windowHeight]
+  );
   const cardSideMargin = Math.max(
     Number.isFinite(Number(requestedCardSideMargin))
       ? Math.max(0, Number(requestedCardSideMargin)) : DEFAULT_CARD_SIDE_MARGIN,
-    16 + Math.max(0, Number(insets.left) || 0),
-    16 + Math.max(0, Number(insets.right) || 0),
+    16 + localInsets.left,
+    16 + localInsets.right,
     (screenWidth - 640) / 2
   );
 
+  const targetX = targetRect?.x ?? targetRect?.left;
+  const targetY = targetRect?.y ?? targetRect?.top;
+  const targetWidth = targetRect?.width;
+  const targetHeight = targetRect?.height;
+  const hasTargetRect = !!targetRect;
   const holeRect = useMemo(
-    () =>
-      normalizeTargetRect(
-        targetRect,
-        screenWidth,
-        screenHeight,
-        Math.max(0, Number(targetPadding) || 0)
-      ),
-    [targetRect, screenWidth, screenHeight, targetPadding]
+    () => normalizeTargetRect(
+      hasTargetRect ? { x: targetX, y: targetY, width: targetWidth, height: targetHeight } : null,
+      screenWidth,
+      screenHeight,
+      Math.max(0, Number(targetPadding) || 0)
+    ),
+    [hasTargetRect, targetX, targetY, targetWidth, targetHeight, screenWidth, screenHeight, targetPadding]
   );
 
   const effectiveShowPrimaryButton =
@@ -734,14 +770,14 @@ export default function TutorialOverlay({
   const { topBase: cardTopBase, bottomOffset: cardBottom } = useMemo(
     () =>
       getCardAnchors({
-        safeTop: insets.top,
-        safeBottom: insets.bottom,
+        safeTop: localInsets.top,
+        safeBottom: localInsets.bottom,
         cardBottomMargin,
       }),
-    [insets.top, insets.bottom, cardBottomMargin]
+    [localInsets.top, localInsets.bottom, cardBottomMargin]
   );
 
-  const { topHeight: topAvailableHeight, bottomHeight: bottomAvailableHeight } = useMemo(
+  const { fullHeight: fullAvailableHeight, topHeight: topAvailableHeight, bottomHeight: bottomAvailableHeight } = useMemo(
     () =>
       getCardAvailableHeights({
         holeRect,
@@ -777,9 +813,18 @@ export default function TutorialOverlay({
 
   const resolvedAvailableHeight =
     resolvedCardPlacement === "top" ? topAvailableHeight : bottomAvailableHeight;
-  const resolvedCardMaxHeight = holeRect
-    ? Math.max(1, Math.min(resolvedAvailableHeight, softCardHeightCap))
-    : softCardHeightCap;
+  // Information steps can describe a section taller than the viewport. In
+  // that case the readable card takes priority over keeping the whole hole free.
+  const needsInfoCardSpace =
+    mode !== "action" && !!holeRect &&
+    Math.max(topAvailableHeight, bottomAvailableHeight) < minimumVisibleCardHeight;
+  const resolvedCardMaxHeight = Math.max(
+    1,
+    Math.min(
+      softCardHeightCap,
+      holeRect && !needsInfoCardSpace ? resolvedAvailableHeight : fullAvailableHeight
+    )
+  );
   const measuredCardHeight = Math.min(cardHeight, resolvedCardMaxHeight);
   const resolvedCardTop =
     resolvedCardPlacement === "top"
@@ -897,10 +942,10 @@ export default function TutorialOverlay({
             cardPlacement: resolvedCardPlacement,
             holeRect,
             safeInsets: {
-              top: insets.top,
-              right: insets.right,
-              bottom: insets.bottom,
-              left: insets.left,
+              top: localInsets.top,
+              right: localInsets.right,
+              bottom: localInsets.bottom,
+              left: localInsets.left,
             },
           }
         : null
@@ -914,10 +959,10 @@ export default function TutorialOverlay({
     resolvedCardRect,
     resolvedCardPlacement,
     holeRect,
-    insets.top,
-    insets.right,
-    insets.bottom,
-    insets.left,
+    localInsets.top,
+    localInsets.right,
+    localInsets.bottom,
+    localInsets.left,
   ]);
 
   if (!visible) return null;

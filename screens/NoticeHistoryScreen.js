@@ -401,6 +401,7 @@ export default function NoticeHistoryScreen({ navigation, route }) {
         <View>
           {loadError === "more" ? <Text style={styles.helpText} accessibilityRole="alert">続きを読み込めませんでした。</Text> : null}
         <CocolonPressable
+          containerStyle={styles.loadMoreContainer}
           style={styles.loadMoreBtn}
           onPress={loadMore}
           accessibilityLabel={loadError === "more" ? "続きをもう一度読み込む" : "さらにお知らせを読み込む"}
@@ -597,8 +598,13 @@ function createStyles(COLORS, ui) {
     ctaButtonWrap: {
       marginTop: 12,
     },
-    loadMoreBtn: {
+    loadMoreContainer: {
       marginTop: 6,
+      width: "100%",
+      maxWidth: 520,
+      alignSelf: "center",
+    },
+    loadMoreBtn: {
       borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
@@ -607,9 +613,6 @@ function createStyles(COLORS, ui) {
       justifyContent: "center",
       paddingHorizontal: 20,
       paddingVertical: 12,
-      width: "100%",
-      maxWidth: 520,
-      alignSelf: "center",
       minHeight: 44,
     },
     loadMoreText: {
