@@ -2114,7 +2114,7 @@ function createStyles(COLORS, ui) {
       fontSize: 14,
       color: COLORS.TEXT_ON_LIGHT,
     },
-    // アクティブ時は ACCENT_TEXT（＝白）で塗る
+    // 選択時はtonal面に対応する前景色を使う
     chipTextOn: {
       color: COLORS.ON_SURFACE_TONAL,
       fontWeight: "600",
@@ -2193,7 +2193,8 @@ function createStyles(COLORS, ui) {
       transform: [],
     },
     categoryChipDisabled: {
-      opacity: 0.45,
+      backgroundColor: COLORS.FIELD_BG,
+      borderColor: COLORS.CARD_BORDER,
     },
     categoryChipText: {
       fontSize: 12,
@@ -2210,7 +2211,7 @@ function createStyles(COLORS, ui) {
       marginTop: 2,
       fontSize: 11,
       lineHeight: 16,
-      color: "#B91C1C",
+      color: COLORS.ERROR,
     },
 
     /** メモ入力カード（展開式：タップで開く） */

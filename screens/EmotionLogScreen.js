@@ -751,13 +751,12 @@ export default function EmotionLogScreen(props) {
                 style={[
                   styles.emotionLogPill,
                   { marginRight: 10 },
-                  effectiveLoading && { opacity: 0.5 },
                 ]}
                 disabled={effectiveLoading}
                 accessibilityLabel="感情ログを更新する" accessibilityState={{ busy: effectiveLoading }}
               >
                 {effectiveLoading ? (
-                  <ActivityIndicator size="small" color={colors.TEXT_ON_LIGHT} />
+                  <ActivityIndicator size="small" color={colors.TEXT_SUBTLE} />
                 ) : (
                   <Ionicons
                     name="refresh"

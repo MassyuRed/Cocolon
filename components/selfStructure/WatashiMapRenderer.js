@@ -68,6 +68,7 @@ export default function WatashiMapRenderer({
   colors,
   isDark = false,
   onUpgradePress,
+  showPlanNotice = true,
 }) {
   const palette = useMemo(() => buildPalette(colors, isDark), [colors, isDark]);
   const ui = useMemo(() => makeUiTokens(colors || {}, isDark ? 'dark' : 'default'), [colors, isDark]);
@@ -118,7 +119,7 @@ export default function WatashiMapRenderer({
         <UnknownAreaCard unknownAreas={payload.unknown_areas || payload.unknownAreas} localStyles={localStyles} />
       ) : null}
 
-      {shouldShowLock ? (
+      {showPlanNotice && shouldShowLock ? (
         <LockedSectionCard payload={payload} localStyles={localStyles} onUpgradePress={onUpgradePress} />
       ) : null}
     </View>

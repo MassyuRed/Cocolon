@@ -57,15 +57,15 @@ export default function InputEmotionSection({
                     disabled={isDisabled}
                     accessibilityLabel={cat}
                     accessibilityState={{ selected: on }}
-                    style={[styles.chip, on && styles.chipOn, isDisabled && { opacity: 0.45 }]}
+                    style={[styles.chip, on && styles.chipOn]}
                   >
                     <Ionicons
                       name={iconNameForEmotion(cat)}
                       size={16}
-                      color={on ? colors.ON_SURFACE_TONAL : colors.TEXT_SUBTLE}
+                      color={isDisabled ? colors.TEXT_SUBTLE : on ? colors.ON_SURFACE_TONAL : colors.TEXT_SUBTLE}
                       style={{ marginRight: 4 }}
                     />
-                    <Text style={[styles.chipText, on && styles.chipTextOn]}>{cat}</Text>
+                    <Text style={[styles.chipText, on && styles.chipTextOn, isDisabled && { color: colors.TEXT_SUBTLE }]}>{cat}</Text>
                   </CocolonPressable>
 
                   <View

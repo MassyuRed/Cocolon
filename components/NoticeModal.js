@@ -10,7 +10,10 @@ import {
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
+import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { useTheme } from "../theme/ThemeContext";
+import { makeUiTokens } from "../ui/uiTokens";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { getNoticeButtonActions } from "../lib/noticeActionRuntime";
 import CocolonButton from "./CocolonButton";
 import NoticeRichText from "./NoticeRichText";
@@ -50,8 +53,9 @@ export default function NoticeModal({
   primaryCloseLabel = null,
   onPrimaryClose,
 }) {
-  const { colors } = useTheme();
-  const styles = useMemo(() => createStyles(colors), [colors]);
+  const { colors, themeName } = useTheme();
+  const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
+  const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const normalizedVariant = normalizeVariant(variant);
   const isWelcomeVariant = normalizedVariant === "welcome";
   const title = String(notice?.title || "お知らせ").trim() || "お知らせ";
@@ -75,9 +79,20 @@ export default function NoticeModal({
       animationType="fade"
       onRequestClose={onClose}
     >
-      <View style={styles.backdrop}>
+      <SafeAreaProvider style={styles.backdrop}>
         <Pressable style={styles.overlayTouch} onPress={onClose} />
+        <SafeAreaView edges={["top", "bottom", "left", "right"]} style={{ flex: 1, justifyContent: "center", padding: 20 }} pointerEvents="box-none">
         <View style={styles.sheet}>
+
+          <View style={styles.headerRow}>
+            <Text
+              style={[
+                styles.badgeText,
+                isWelcomeVariant ? styles.badgeTextWelcome : null,
+              ]}
+            >
+              {String(headerLabel || "お知らせ")}
+            </Text>
           <Pressable
             style={styles.closeButton}
             onPress={onClose}
@@ -88,16 +103,6 @@ export default function NoticeModal({
             <Ionicons name="close" size={18} color={colors.TEXT_ON_LIGHT} />
           </Pressable>
 
-          <View style={styles.headerRow}>
-            <Text
-              style={[
-                styles.badgeText,
-                isWelcomeVariant ? styles.badgeTextWelcome : null,
-              ]}
-              numberOfLines={1}
-            >
-              {String(headerLabel || "お知らせ")}
-            </Text>
           </View>
 
           {loading ? (
@@ -106,7 +111,7 @@ export default function NoticeModal({
               <Text style={styles.loadingText}>お知らせを読み込み中…</Text>
             </View>
           ) : (
-            <View style={[styles.card, isWelcomeVariant ? styles.cardWelcome : null]}>
+            <ScrollView style={styles.bodyScroll} contentContainerStyle={[styles.card, isWelcomeVariant ? styles.cardWelcome : null, styles.bodyScrollContent]} showsVerticalScrollIndicator={false}>
               <Text style={[styles.title, isWelcomeVariant ? styles.titleWelcome : null]}>
                 {title}
               </Text>
@@ -114,14 +119,6 @@ export default function NoticeModal({
                 <Text style={styles.metaText}>配信日: {publishedLabel}</Text>
               ) : null}
 
-              <ScrollView
-                style={[
-                  styles.bodyScroll,
-                  isWelcomeVariant ? styles.bodyScrollWelcome : null,
-                ]}
-                contentContainerStyle={styles.bodyScrollContent}
-                showsVerticalScrollIndicator={false}
-              >
                 <NoticeRichText
                   body={body || "現在表示できる本文はありません。"}
                   bodySegments={notice?.body_segments}
@@ -136,7 +133,7 @@ export default function NoticeModal({
                     isWelcomeVariant ? styles.bodyLinkTextWelcome : null,
                   ]}
                 />
-              </ScrollView>
+
 
               {buttonActions.map((action, index) => (
                 <View
@@ -176,21 +173,20 @@ export default function NoticeModal({
                   </CocolonButton>
                 </View>
               ) : null}
-            </View>
+            </ScrollView>
           )}
         </View>
-      </View>
+        </SafeAreaView>
+      </SafeAreaProvider>
     </Modal>
   );
 }
 
-function createStyles(COLORS) {
-  return StyleSheet.create({
+function createStyles(COLORS, ui) {
+  return StyleSheet.create(applyTypographyTokens({
     backdrop: {
       flex: 1,
       backgroundColor: "rgba(15, 23, 42, 0.35)",
-      justifyContent: "center",
-      paddingHorizontal: 18,
     },
     overlayTouch: {
       ...StyleSheet.absoluteFillObject,
@@ -200,113 +196,117 @@ function createStyles(COLORS) {
       overflow: "hidden",
       backgroundColor: COLORS.PANEL_BG,
       borderWidth: 1,
-      borderColor: COLORS.BORDER_GOLD,
-      paddingHorizontal: 8,
-      paddingTop: 10,
-      paddingBottom: 8,
-      maxHeight: "82%",
+      borderColor: COLORS.CARD_BORDER,
+      paddingHorizontal: 20,
+      paddingTop: 20,
+      paddingBottom: 20,
+      maxHeight: "100%",
+      width: "100%",
+      maxWidth: 640,
+      flexShrink: 1,
+      alignSelf: "center",
+      shadowColor: "#000",
+      shadowOpacity: 0.06,
+      shadowRadius: 4,
+      shadowOffset: {"width":0,"height":2},
+      elevation: 1,
     },
     closeButton: {
-      position: "absolute",
-      top: 10,
-      right: 8,
-      width: 36,
-      height: 36,
-      borderRadius: 12,
+      width: 44,
+      height: 44,
+      borderRadius: 16,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
       alignItems: "center",
       justifyContent: "center",
       zIndex: 2,
+      flexShrink: 0,
     },
     headerRow: {
-      minHeight: 38,
-      justifyContent: "center",
+      minHeight: 44,
+      justifyContent: "space-between",
       alignItems: "center",
-      paddingHorizontal: 56,
-      marginBottom: 8,
+      paddingHorizontal: 0,
+      marginBottom: 16,
+      flexDirection: "row",
+      gap: 12,
+      minWidth: 0,
     },
     loadingWrap: {
       alignItems: "center",
       justifyContent: "center",
       paddingVertical: 32,
-      paddingHorizontal: 20,
+      paddingHorizontal: 0,
     },
     loadingText: {
       marginTop: 10,
-      fontSize: 13,
-      color: COLORS.TEXT_ON_LIGHT,
+      color: COLORS.TEXT_SUBTLE,
     },
     card: {
-      backgroundColor: COLORS.FIELD_BG,
-      borderRadius: 20,
-      borderWidth: 1,
+      backgroundColor: "transparent",
+      borderRadius: 0,
+      borderWidth: 0,
       borderColor: COLORS.CARD_BORDER,
-      paddingHorizontal: 16,
-      paddingVertical: 16,
+      paddingHorizontal: 0,
+      paddingVertical: 0,
+      minWidth: 0,
     },
     cardWelcome: {
-      paddingHorizontal: 18,
-      paddingVertical: 18,
+      paddingHorizontal: 0,
+      paddingVertical: 0,
     },
     badgeText: {
-      fontSize: 11,
-      lineHeight: 16,
-      fontWeight: "800",
-      color: COLORS.TITLE_GOLD,
-      textAlign: "center",
+      color: COLORS.TEXT_SUBTLE,
+      textAlign: "left",
+      flex: 1,
+      minWidth: 0,
+      flexShrink: 1,
     },
     badgeTextWelcome: {
-      fontSize: 18,
-      lineHeight: 26,
+      color: COLORS.TEXT_SUBTLE,
     },
     title: {
-      fontSize: 18,
-      lineHeight: 26,
-      fontWeight: "800",
       color: COLORS.TEXT_ON_LIGHT,
+      minWidth: 0,
+      flexShrink: 1,
     },
     titleWelcome: {
-      fontSize: 14,
-      lineHeight: 22,
+      color: COLORS.TEXT_ON_LIGHT,
     },
     metaText: {
       marginTop: 8,
-      fontSize: 11,
-      lineHeight: 16,
-      color: COLORS.TEXT_ON_LIGHT,
+      color: COLORS.TEXT_SUBTLE,
     },
     bodyScroll: {
-      marginTop: 12,
-      maxHeight: 260,
+      marginTop: 0,
+      flexShrink: 1,
     },
     bodyScrollWelcome: {
-      marginTop: 10,
-      maxHeight: 300,
+      marginTop: 0,
     },
     bodyScrollContent: {
       paddingBottom: 4,
     },
     bodyText: {
-      fontSize: 14,
-      lineHeight: 22,
       color: COLORS.TEXT_ON_LIGHT,
     },
     bodyTextWelcome: {
-      fontSize: 14,
-      lineHeight: 22,
+      color: COLORS.TEXT_ON_LIGHT,
     },
     bodyLinkText: {
       color: COLORS.TITLE_GOLD,
       textDecorationLine: "underline",
-      fontWeight: "700",
     },
     bodyLinkTextWelcome: {
-      fontWeight: "800",
+      color: COLORS.TITLE_GOLD,
+      textDecorationLine: "underline",
     },
     buttonBlock: {
       marginTop: 12,
+      width: "100%",
+      maxWidth: 520,
+      alignSelf: "center",
     },
-  });
+  }, ui, {"loadingText":"description","badgeText":"description","badgeTextWelcome":"description","title":"modalTitle","titleWelcome":"modalTitle","metaText":"meta","bodyText":"body","bodyTextWelcome":"body","bodyLinkText":"body","bodyLinkTextWelcome":"body"}));
 }

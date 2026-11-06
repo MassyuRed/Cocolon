@@ -506,3 +506,29 @@ test('latest screen consumes a v2 server response and omits legacy content_text'
   assert.ok(!body.includes('LEGACY_RENDERER'));
   await act(async () => render.unmount());
 });
+
+// Tutorial hides the legacy commercial notice, never its visibility boundary.
+test('tutorial-only plan notice suppression preserves default notice and locked sections', async () => {
+  const Renderer = moduleLoader()('components/selfStructure/WatashiMapRenderer.js').default;
+  const map = { version: 'watashi.map.v1', status: 'ok', label: 'わたしマップ',
+    visibility: { summary_visible: true, role_switches_visible: true,
+      routes_visible: false, crossroads_visible: false, unknown_areas_visible: true,
+      detail_report_visible: false, locked_sections: ['routes', 'crossroads', 'detail_report'] },
+    overview: { title: 'TUTORIAL_OVERVIEW', summary: 'TUTORIAL_SUMMARY' },
+    routes: [{ title: 'LOCKED_ROUTE_MUST_STAY_HIDDEN', steps: [] }],
+    crossroads: [{ title: 'LOCKED_CROSSROAD_MUST_STAY_HIDDEN' }],
+  };
+  for (const tutorial of [false, true]) {
+    let render;
+    await act(async () => { render = TestRenderer.create(React.createElement(Renderer, {
+      contentJson: { watashiMap: map }, reportMode: 'light', viewerTier: 'free', colors: {},
+      ...(tutorial ? { showPlanNotice: false } : {}),
+    })); });
+    const body = JSON.stringify(render.toJSON());
+    assert.ok(body.includes('TUTORIAL_SUMMARY'));
+    assert.equal(body.includes('Plus'), !tutorial);
+    assert.ok(!body.includes('LOCKED_ROUTE_MUST_STAY_HIDDEN'));
+    assert.ok(!body.includes('LOCKED_CROSSROAD_MUST_STAY_HIDDEN'));
+    await act(async () => render.unmount());
+  }
+});

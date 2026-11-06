@@ -23,6 +23,7 @@ function load(relative, mocks = {}) {
   return module.exports;
 }
 const native = {View:'View',Text:'Text',TouchableOpacity:'TouchableOpacity',ActivityIndicator:'Spinner',
+  useWindowDimensions:()=>({width:390,height:844,fontScale:1}),
   AppState:{currentState:'active',addEventListener:()=>({remove(){}})}};
 const theme={colors:{}};
 const no = () => {};
@@ -56,6 +57,7 @@ test('startup covers the mounted home until subscription I/O and home/draft sett
   });
   const Main=load('navigation/MainTabs.js',{
     'react-native':native,'react-native-vector-icons/Ionicons':()=>null,
+    'react-native-safe-area-context':{useSafeAreaInsets:()=>({top:0,bottom:0,left:0,right:0})},
     '@react-navigation/native':{StackActions:{popToTop:no}},
     '@react-navigation/bottom-tabs':{createBottomTabNavigator:()=>({Navigator,Screen}),BottomTabBar:()=>null},
     '@react-native-async-storage/async-storage':{getItem:forever,setItem:forever},

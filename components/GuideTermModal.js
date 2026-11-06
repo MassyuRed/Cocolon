@@ -7,8 +7,11 @@ import {
   Text,
   View,
 } from "react-native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import CocolonButton from "./CocolonButton";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
+import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { useTheme } from "../theme/ThemeContext";
 import { makeUiTokens } from "../ui/uiTokens";
 
@@ -38,7 +41,8 @@ export default function GuideTermModal({
       animationType="fade"
       onRequestClose={onClose}
     >
-      <View style={styles.backdrop}>
+      <SafeAreaProvider style={{ backgroundColor: "rgba(15, 23, 42, 0.38)" }}>
+      <SafeAreaView edges={["top", "bottom", "left", "right"]} style={[styles.backdrop, { backgroundColor: "transparent" }]}>
         <View style={styles.card}>
           <View style={styles.headerRow}>
             <View style={styles.badge}>
@@ -63,6 +67,8 @@ export default function GuideTermModal({
           </View>
 
           <ScrollView
+            key={term?.termId || "term"}
+            style={{ flexShrink: 1 }}
             contentContainerStyle={styles.scrollContent}
             showsVerticalScrollIndicator={false}
           >
@@ -119,19 +125,12 @@ export default function GuideTermModal({
             ) : null}
           </ScrollView>
 
-          <Pressable
-            accessibilityRole="button"
-            accessibilityLabel="閉じる"
-            onPress={onClose}
-            style={({ pressed }) => [
-              styles.closeButton,
-              pressed && styles.closeButtonPressed,
-            ]}
-          >
-            <Text style={styles.closeButtonText}>閉じる</Text>
-          </Pressable>
+          <View style={{ marginTop: 12 }}>
+            <CocolonButton variant="secondary" onPress={onClose} accessibilityLabel="閉じる">閉じる</CocolonButton>
+          </View>
         </View>
-      </View>
+      </SafeAreaView>
+      </SafeAreaProvider>
     </Modal>
   );
 }
@@ -139,56 +138,57 @@ export default function GuideTermModal({
 function createStyles(colors, ui) {
   const text = ui?.text || {};
 
-  return StyleSheet.create({
+  return StyleSheet.create(applyTypographyTokens({
     backdrop: {
       flex: 1,
       backgroundColor: "rgba(15, 23, 42, 0.38)",
       justifyContent: "center",
       alignItems: "center",
-      paddingHorizontal: 24,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
     },
     card: {
       width: "100%",
-      maxWidth: 380,
-      maxHeight: "78%",
+      maxWidth: 640,
+      maxHeight: '100%',
       borderRadius: 24,
       borderWidth: 1,
-      borderColor: colors.BORDER_GOLD,
-      backgroundColor: colors.PANEL_BG,
-      paddingHorizontal: 18,
-      paddingTop: 16,
-      paddingBottom: 14,
+      borderColor: colors.CARD_BORDER,
+      backgroundColor: colors.FIELD_BG,
+      paddingHorizontal: 20,
+      paddingTop: 20,
+      paddingBottom: 20,
       shadowColor: "#000",
-      shadowOpacity: 0.18,
-      shadowRadius: 18,
-      shadowOffset: { width: 0, height: 10 },
-      elevation: 10,
+      shadowOpacity: 0.06,
+      shadowRadius: 4,
+      shadowOffset: { width: 0, height: 2 },
+      elevation: 1,
+      flexShrink: 1,
     },
     headerRow: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
-      marginBottom: 8,
+      marginBottom: 12,
+      gap: 8,
     },
     badge: {
       borderRadius: 999,
       borderWidth: 1,
       borderColor: colors.CARD_BORDER,
-      backgroundColor: colors.FIELD_BG,
+      backgroundColor: colors.SURFACE_TONAL,
       paddingHorizontal: 10,
-      paddingVertical: 5,
+      paddingVertical: 6,
+      maxWidth: '100%',
     },
     badgeText: {
-      fontSize: 11,
-      lineHeight: 14,
-      fontWeight: "800",
-      color: colors.TITLE_GOLD,
-      letterSpacing: 0.5,
+      color: colors.ON_SURFACE_TONAL,
+      letterSpacing: 0,
     },
     closeIconButton: {
-      width: 34,
-      height: 34,
-      borderRadius: 17,
+      width: 44,
+      height: 44,
+      borderRadius: 22,
       alignItems: "center",
       justifyContent: "center",
       backgroundColor: colors.FIELD_BG,
@@ -199,105 +199,92 @@ function createStyles(colors, ui) {
       opacity: 0.82,
     },
     scrollContent: {
-      paddingTop: 4,
-      paddingBottom: 4,
+      paddingTop: 0,
+      paddingBottom: 12,
     },
     termTitle: {
-      fontSize: 22,
-      lineHeight: 28,
-      fontWeight: "800",
-      color: colors.TEXT_ON_LIGHT,
-      marginBottom: 4,
-    },
-    readingText: {
-      fontSize: 12,
-      lineHeight: 18,
-      color: text.description ?? colors.TEXT_SUBTLE,
-      marginBottom: 12,
-    },
-    shortDefText: {
-      fontSize: 14,
-      lineHeight: 22,
-      color: colors.TITLE_GOLD,
-      fontWeight: "700",
-      marginBottom: 12,
-    },
-    sectionBlock: {
-      marginBottom: 14,
-    },
-    sectionTitle: {
-      fontSize: 13,
-      lineHeight: 18,
-      fontWeight: "800",
       color: colors.TEXT_ON_LIGHT,
       marginBottom: 6,
     },
+    readingText: {
+      color: text.description ?? colors.TEXT_SUBTLE,
+      marginBottom: 16,
+    },
+    shortDefText: {
+      color: colors.TEXT_ON_LIGHT,
+      marginBottom: 16,
+    },
+    sectionBlock: {
+      marginBottom: 16,
+    },
+    sectionTitle: {
+      color: colors.TEXT_ON_LIGHT,
+      marginBottom: 10,
+    },
     bodyText: {
-      fontSize: 14,
-      lineHeight: 24,
       color: colors.TEXT_ON_LIGHT,
     },
     exampleRow: {
       flexDirection: "row",
       alignItems: "flex-start",
-      marginBottom: 6,
+      marginBottom: 8,
+      gap: 8,
     },
     exampleBullet: {
-      width: 16,
-      fontSize: 14,
-      lineHeight: 22,
-      color: colors.TITLE_GOLD,
-      fontWeight: "700",
+      color: colors.TEXT_SUBTLE,
+      minWidth: 18,
+      flexShrink: 0,
     },
     exampleText: {
       flex: 1,
-      fontSize: 14,
-      lineHeight: 22,
       color: colors.TEXT_ON_LIGHT,
+      minWidth: 0,
     },
     relatedTermsWrap: {
       flexDirection: "row",
       flexWrap: "wrap",
-      marginHorizontal: -4,
-      marginTop: 2,
+      marginHorizontal: 0,
+      marginTop: 4,
+      gap: 8,
     },
     relatedTermChip: {
-      marginHorizontal: 4,
-      marginBottom: 8,
+      marginHorizontal: 0,
+      marginBottom: 0,
       paddingHorizontal: 12,
-      paddingVertical: 7,
-      borderRadius: 999,
+      paddingVertical: 10,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: colors.CARD_BORDER,
       backgroundColor: colors.FIELD_BG,
+      maxWidth: '100%',
+      minHeight: 44,
+      justifyContent: 'center',
     },
     relatedTermChipPressed: {
       opacity: 0.82,
     },
     relatedTermChipText: {
-      fontSize: 12,
-      lineHeight: 16,
-      fontWeight: "700",
       color: colors.TEXT_ON_LIGHT,
+      flexShrink: 1,
     },
     closeButton: {
-      marginTop: 6,
-      minHeight: 44,
-      borderRadius: 999,
+      marginTop: 12,
+      minHeight: 52,
+      borderRadius: 24,
       borderWidth: 1,
-      borderColor: colors.GOLD_BUTTON_BORDER,
-      backgroundColor: colors.GOLD_BUTTON,
+      borderColor: colors.CARD_BORDER,
+      backgroundColor: colors.FIELD_BG,
       alignItems: "center",
       justifyContent: "center",
+      paddingHorizontal: 20,
+      paddingVertical: 12,
     },
     closeButtonPressed: {
       opacity: 0.88,
     },
     closeButtonText: {
-      fontSize: 14,
-      lineHeight: 18,
-      fontWeight: "800",
-      color: "#FFFFFF",
+      color: colors.TEXT_ON_LIGHT,
+      textAlign: 'center',
     },
-  });
+  }, ui, {"badgeText":"meta","termTitle":"modalTitle","readingText":"description","shortDefText":"body","sectionTitle":"sectionTitle","bodyText":"body","exampleBullet":"body","exampleText":"body","relatedTermChipText":"button","closeButtonText":"button"}));
 }

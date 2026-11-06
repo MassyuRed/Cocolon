@@ -468,10 +468,8 @@ export default function MainTabs() {
       const json = await apiGet(PIECE_WIRE.routes.publicUnreadStatus);
       const hasUnread = typeof json?.has_unread === "boolean" ? json.has_unread : typeof json?.hasUnread === "boolean" ? json.hasUnread : false;
       setUnread("Piece", "piecesNew", !!hasUnread);
-      
     } catch {
       setUnread("Piece", "piecesNew", false);
-      
     }
   }, [isTutorialMode, setUnread]);
 
@@ -1150,15 +1148,14 @@ export default function MainTabs() {
             const icon = <Ionicons name={iconName} size={size} color={focused ? colors.ON_SURFACE_TONAL : color} />;
             const showUnreadBadge = showTabUnreadBadge(route.name);
             return (
-              <View style={{ width: 64, minHeight: 32, borderRadius: 18,
+              <View style={{ width: 64, minHeight: 48 + Math.max(0, fontScale - 1) * 18, borderRadius: 18,
                 backgroundColor: focused ? colors.SURFACE_TONAL : "transparent",
-                alignItems: "center", justifyContent: "center", overflow: "visible" }}>
+                alignItems: "center", justifyContent: "flex-end", overflow: "visible" }}>
                 {icon}
                 {showUnreadBadge ? (
                   <BottomTabUnreadBadge
                     visible={showUnreadBadge}
-                    style={{ position: "absolute", top: 0, right: -4, minHeight: 12, paddingHorizontal: 4, paddingVertical: 1 }}
-                    textStyle={{ fontSize: 7.5, lineHeight: 8.5, fontWeight: "800" }}
+                    style={{ position: "absolute", top: 0, right: -4, minHeight: 22, paddingHorizontal: 4, paddingVertical: 1 }}
                   />
                 ) : null}
               </View>
@@ -1171,7 +1168,7 @@ export default function MainTabs() {
             borderTopColor: colors.CARD_BORDER,
             borderTopWidth: 0,
             paddingTop: 8,
-            height: 72 + insets.bottom + Math.max(0, fontScale - 1) * 16,
+            height: 80 + insets.bottom + Math.max(0, fontScale - 1) * 40,
             paddingBottom: insets.bottom,
           },
           tabBarLabel: ({ focused, color }) => {

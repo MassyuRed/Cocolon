@@ -475,11 +475,12 @@ export default function AnalysisContentFirstScreen({
                 </View>
                 {tutorialWatashiMapContentJson ? (
                   <WatashiMapRenderer
+                    showPlanNotice={false}
                     contentJson={tutorialWatashiMapContentJson}
                     contentText={tutorialWatashiMapReport?.content_text || tutorialWatashiMapReport?.contentText || ""}
                     reportMode={tutorialWatashiMapReport?.report_mode || tutorialWatashiMapReport?.reportMode || "light"}
                     viewerTier={tutorialWatashiMapReport?.viewer_tier || tutorialWatashiMapReport?.viewerTier || "free"}
-                    periodLabel={tutorialWatashiMapReport?.period_label || tutorialWatashiMapReport?.periodLabel || "直近28日"}
+                    periodLabel={tutorialWatashiMapReport?.period_label || tutorialWatashiMapReport?.periodLabel || "練習用の表示例"}
                     colors={colors}
                     isDark={isDark}
                     onUpgradePress={onOpenSubscription}

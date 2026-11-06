@@ -166,7 +166,7 @@ Mashの比較理由：Day One案は情報の区切りが弱く、視線が動き
 | Piece作成 | 画像／全文を設定より前へ。操作ボタンと外枠をテーマ対応。全条件操作とidentity/tokenの引渡しを保持。作品renderer・recipe・保存画像は変更0 |
 | 設定・周辺 | 設定入口を目的が読める3行へ。テーマ選択面、共通メニュー、契約カード・説明・CTA、Nexusタブと自分のPiece入口を調整 |
 
-**現在の実装：** 下記§17の共通・起動・認証、§18の入力・応答・問い・履歴、§19の分析全体、§20のPiece・social、§21のアカウント・設定・契約までsourceを追加反映。残る個別仕上げは§15.1の6群（案内・tutorial・残る休眠資産）と全体横断。共通テーマの変更が届くだけで、個別画面の仕上げ完了とはしない。全群のsource反映後にまとめてビルド・配布し、3テーマ、文字拡大1.0/1.3/1.6、狭い幅、safe area、キーボード、長文・回復操作の実端末確認を行う。
+**現在の実装：** §17〜22の全6群へsourceを反映。最後の案内・tutorial・休眠画面と、全体横断で見つかった未読表示／必須案内／旧交差リンクも揃えた。全画面対応表のsource実装を一巡した状態であり、ビルド・配布・実端末での表示合格は未確認。次は全群をまとめたビルドで、3テーマ、文字拡大1.0/1.3/1.6、狭い幅、短い横画面、safe area、キーボード、長文・回復操作、全19tutorial stepを確認し、実際の欠けを直す。sourceの統一と実機での仕上げ完了を分けて管理する。
 
 初回反映時の確認：Nodeの既存5入口（画面contract・IAP復元・テーマ可読性・Piece初回保存modal・preview/display）で400 PASS／FAIL0／SKIP0。React/native・Auth/HTTPは各既存testの代替を含む。テーマ検査は旧バーガンディ色・太枠・taglineの固定期待を採用設計へ更新し、3テーマの本文／補助／tonal／操作色の4.5:1を検査した。Piece testの新テーマhookと共有Buttonへのimport適応のみを行い、保存・回復の検査は維持。最初の実行は取得不足の依存fileと旧表示期待で失敗し、依存原本の取得と意図した期待更新後に上記最終実行を通過した。製品の資格判定を緩めていない。今回の全画面設計更新で、これらを再実行したとは扱わない。
 
@@ -346,7 +346,7 @@ IDのコピー形アイコンは現在`Share.share`を呼ぶため、文言はID
 | I04 用語説明modal | `GuideTermModal.js` | 語名・読み→定義→説明・例→関連語→閉じる。×44以上、本文スクロール、関連語へ移っても閉じるを維持 |
 | I05 初回tutorial開始案内 | `TutorialStartModal.js` | 一つの面に保存されない説明→開始→今回のみ／今後表示しない。三重の囲み枠を整理し、閉じ方を保持 |
 | I06 tutorial導入・まとめ・完了 | `TutorialFlowScreen.js` | 導入、4体験、その他、完了を同じ見出し・本文・操作へ。模擬と本人記録を区別し、完了処理の二重操作停止を維持 |
-| I07 各画面のtutorial overlay | `TutorialOverlay.js`、`tutorialScenarioData.js` | 説明カード・本文・次へを共通tokensへ。spotlight、対象ref、測定、代理押下、背景停止、上下配置は保持。全19stepの対象位置を改装後に確認 |
+| I07 各画面のtutorial overlay | `components/TutorialOverlay.js`、旧root `TutorialOverlay.js`、`tutorialScenarioData.js` | 説明カード・本文・次へを共通tokensへ。spotlight、対象ref、測定、代理押下、背景停止、上下配置は保持。全19stepの対象位置を改装後に確認 |
 
 ガイド／tutorialの文言も現在仕様に揃える。残っている「Pieceは問いと答えに整えて投稿」「詳しい現在マップはPlus以上」、旧28日や旧plan差を現在の仕様説明として再使用しない。今日の問い履歴の「編集するとマップに反映」等は、分析sourceの現ownerと照合して文言を確定する。画面の説明を直すためにAIや権利の仕様を変更しない。
 
@@ -376,7 +376,7 @@ IDのコピー形アイコンは現在`Share.share`を呼ぶため、文言はID
 | `InputCountRankingScreen.js`／`InputLengthRankingScreen.js` | 同じ4期間、順位・名前・非公開印・入力数／総文字数・Account遷移を共通一覧へ |
 | `PieceResonanceRankingScreen.js` | 同じ一覧型で共鳴数の意味を維持。人物理解の点数へ装飾しない |
 | `LoginStreakRankingScreen.js` | 順位・名前・連続日数・更新。期間1択は選択controlへせず表示。未接続の旧Ranking戻り先を現行導線と扱わない |
-| 未接続の旧描画・模擬UI | `SelfStructureDeepRenderer`の本文／役割／行動／gap、`NexusEmotionRankingCard`、停止中PieceTutorial等も同じtokensへ。データ形式・表示停止は保持 |
+| 未接続の旧描画・模擬UI | `SelfStructureDeepRenderer`の本文／役割／行動／gap、`NexusEmotionRankingCard`、停止中PieceTutorial、`AnalysisCrossLinkSection`、旧root `TutorialOverlay`も同じtokensへ。データ形式・表示停止は保持 |
 
 8つの休眠screenもrender／styleを追加読取して上表へ含めた。現在の`index.js → AppRegistry(App)`へ接続していないことは、デザインを旧外観のまま使う許可ではない。
 
@@ -560,3 +560,28 @@ read-only reviewで、問いmodalのhideHeaderによるspinner非表示、Emlis 
 変更JS11fileのparse・diff空白検査、4style ownerの216 role×themeのサイズ／行間／太さ一致を確認。read-only reviewでAccountの5hook・本人条件／callback、FollowListのrender前statementと全10onPress、購入／復元／管理・価格／policy等15式、通知の表示用setter以外の取得effect／依存配列と保存／削除／再体験handlerのAST一致を確認。カード上辺・長名・選択check・対象busy・非公開読み上げ・無効前景を補修。writerは華恋一人。
 
 **次のsource作業：案内・お知らせ・ガイド・tutorial・残る休眠資産と全体横断。** 各Stackからの入口、3テーマ・文字拡大・狭幅／短い横画面・safe area・keyboard・長文・失敗回復を最後に横断する。全screen source完成までbuild保留、途中commitは`[skip ci]`。今回のapp/native build・CI native compile・Upload・配布・実機表示・Render／Supabase／GPU操作0。全UI完成・端末での見え方／読み上げ・実ストアや削除の受入れは未確認。
+
+
+<a id="ui-final-material-20261106"></a>
+## 22. 11/6 実装区切り6 — 案内・チュートリアル・休眠画面・全体横断
+
+前回のアカウント群 `c1c6bf638da3a7906ca7e078600051dedf15ce26` をfresh確認し、前提全文・最新weekly・全画面設計と固定sourceから継続。全画面を例外なく同じMaterialへ揃える作業の最後のsource群。途中のnative build・CI compile・Uploadは実行しない。
+
+| 範囲 | 今回の表示設計・保持条件 |
+|---|---|
+| お知らせpopup | 通常／welcomeを同じ一面・幅640以内・角丸24・内側20へ。見出し22/30/600、本文16/27/400。全面scrimと独立Provider／全辺safe area、×44をheader内へ。題名・日時・本文・全CTA・履歴・welcome主操作を一つの可変高scrollへ入れ、本文だけ260／300高の旧構成を解除。×／背景／AndroidはonClose、welcome主操作はonPrimaryCloseを維持。本文リンク・action key正規化・表示条件は不変 |
+| お知らせ履歴 | header・未読・一覧を同じFlatListへ。題名を省略せず、展開を読み上げに渡す。初回失敗を正常0件から区別して再試行を表示。追加失敗は既存rows／hasMore／nextOffset／unreadを保ち、同じoffsetから再試行。focus再読失敗も前回内容と更新失敗を併記。50件・重複除去・指定通知の一度だけの展開・楽観既読・CTA前の既読処理を維持 |
+| ガイド・用語 | 画面名も本文scroll内へ、最大外幅680／左右20。長い対象名を省略せず、説明16/27・見出し18/26、本文内リンクはサイズを継承して600＋下線。用語modalは全辺safe area・幅640／角丸24、本文scrollと44の×／共通閉じるを分離。関連語の切替で本文scrollをreset。term regex／screenId正規化／関連語／戻り先を維持。ProfileCreateを通常利用できる説明から旧機能へ、感情通知には感情・強さ・時刻のみと明記 |
+| tutorial開始・まとめ | 開始案内の三重枠を一面＋tonal説明へ。説明と開始／今回のみ／今後表示しないを同scrollへ入れ、閉じる条件を維持。Flowの導入・4体験・まとめ・完了を同じ文字／面へ。headerのtop safe areaを重ねず、非表示tabbar分のbottomを確保。step1／17／18／19、完了中停止、endTutorialとhome resetは不変 |
+| spotlight overlay | 通常componentと未接続root資産の双方を3テーマ・本文16/27へ。説明とprimaryを同scrollへ入れ、無効面と文字を薄めず分離。左右safe insetを含むmarginと640最大幅を、描画とonMetricsChangeのcardRectで同じ式にする。既存の測定・hole・上下配置・proxy target・背景停止・callbackは保持。root資産の相対theme importも修正し、接続は復活させない |
+| tutorialの現仕様説明 | Pieceは保存した入力本文から画像へ整えること、投稿欄の旧Q&Aとは別と説明。現在マップは全プラン共通、月次2／12／全期間へ。捕捉済みgenerated fixtureは改変・再生成せず、表示adapterでmap本体とreportの期間ラベルを「練習用の表示例」にする。旧rendererへ既定trueのshowPlanNoticeを追加し、tutorial呼出だけfalse。旧保存mapの通常表示・visibility／locked sections・tier／mode・日時／証拠は不変 |
+| 休眠7screen | RankingTop＋感情／入力数／文字数／共鳴／連続ログインの計6screenとProfileCreateを同じカード・本文・フォームへ。期間4択はtonal＋check＋選択読み上げ、1択は表示へ。順位・名前・単位・private印・API／期間キー／戻り先を保持。Profileの5問・折畳み・input ref／keyboard／can_edit／secret／部分保存は維持。secret説明は既存metadata文へ揃え、保存無効時の子Text／iconも補助色にする。routeは再接続しない |
+| 横断補修 | Input必須案内をERRORへ、感情／カテゴリ・更新中・tutorial対象選択の無効opacityを補助前景へ、未読NEWはERROR_BG／ERROR・12/18/600、dotもERRORへ。下部tabの7.5文字overrideを撤去し、NEWとiconの縦領域を分ける（icon面min48＋文字拡大分、bar80＋bottom inset＋拡大分）。保存toastの3行制限を解除。未接続AnalysisCrossLinkの白固定・2行切詰め・800を同じsurface／roleへ。作品canvas／recipe／画像、図の記号と感情hueは保持 |
+
+製品29file：root `TutorialOverlay.js`、`components/{GuideRichText,GuideTermModal,NoticeModal,TutorialOverlay,TutorialStartModal,UnreadBadge}.js`、`components/selfStructure/WatashiMapRenderer.js`、`guide/{guidesJa,termsJa}.js`、`navigation/MainTabs.js`、`screens/{AnalysisContentFirstScreen,AnalysisCrossLinkSection,CocolonGuideScreen,EmotionLogScreen,EmotionRankingScreen,InputCountRankingScreen,InputLengthRankingScreen,InputScreen,LoginStreakRankingScreen,NoticeHistoryScreen,PieceLibraryScreen,PieceResonanceRankingScreen,ProfileCreateScreen,RankingTopScreen,TutorialFlowScreen}.js`、`screens/input/{InputEmotionSection,InputToastOverlay}.js`。既存test2fileは起動harnessの新しい既存native hook代替と、tutorial表示抑止が通常のplan案内・非表示sectionを緩めない回帰assert。新製品file・route・依存・API／DB／課金価格・本人／公開契約・AI／分析内容・作品画像の変更なし。STRUCTURE_MAP_DELTA_NONE。writerは華恋一人。
+
+検証：既存9入口（rn-screen-contracts、theme-readability、analysis-watashi-map-v2-contracts、analysis-cumulative-map、iap-restore-purchases、subscription-owner-race、app-startup、piece-v2-input-screen、today-question-history-recovery）で **175 PASS／FAIL0／SKIP0**。旧起動harnessにsafe area／window dimensionsの代替がなかった1失敗をharnessだけ補い、全assertを保持して再実行した。最初のReact依存パス未指定による実行失敗も、その後既存の一時runtime指定で解消。製品・test-toolsの依存は変更しない。
+
+一時検査では実NoticeHistory／RichTextで7 PASS（初回・追加・focus失敗、同offset再試行、重複除去、auto-open、既読・CTA等）、実NoticeModalは3テーマ×通常／welcomeの6case PASS（loading／空本文も確認）。実Guide3部品＋dataで3テーマとunknownを含む18case PASS。両Overlayは幅320／1024×3テーマ×primary有効／無効の24case PASS、cardRectと実style幅／左右gap／proxy callbackを照合。Startの3callback／Android戻る・scroll、Flow完了中の二重操作停止／home resetも確認。既存helper22関数とFlow主要6式、休眠7screenの処理部分とProfile入力／keyboard等21propsがAST一致。16style ownerの157明示role×3palette＝471組、文字サイズ／行間／太さ1,413値が実関数で完全一致。native・safe area・API・遷移・storeは代替を含むため、実描画・実配送・課金成功・全19stepのタップ成功を証明しない。
+
+**次は全群をまとめたビルドと、実機での全画面仕上げ。** source実装は§14の全体を一巡済み。残る受入確認は、全登録／内部routeと条件分岐、3テーマ、幅320〜430・短いiOS横画面、OS文字拡大1.0／1.3／1.6、safe area、keyboard、長文・複数回復、未読、全19tutorial stepの実測。実機で見つかった欠けは同じ改装の残件として修正する。今回のapp/native build・CI native compile・Upload・配布・実機表示・Render／Supabase／GPU操作は0、commitは[skip ci]。全UIの視覚的合格・配布完了とは宣言しない。

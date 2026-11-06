@@ -1861,6 +1861,9 @@ useEffect(() => {
     !activeViewedUserId ||
     (viewerUserId && String(activeViewedUserId) === String(viewerUserId));
 
+  const tutorialSelfTargetDisabled =
+    isTutorialMode && tutorialStep === STEP_PIECES_SWITCH_AND_REACT && !activeViewedUserId;
+
   const isResonatedNow = !!(selected?.is_resonated ?? selected?.resonated);
 
   return (
@@ -2058,23 +2061,18 @@ useEffect(() => {
                 {/* 自分に戻る */}
                 <Pressable
                   onPress={() => selectTargetUser(null)}
-                  disabled={
-                    isTutorialMode &&
-                    tutorialStep === STEP_PIECES_SWITCH_AND_REACT &&
-                    !activeViewedUserId
-                  }
+                  disabled={tutorialSelfTargetDisabled}
+                  accessibilityRole="button"
+                  accessibilityState={{ disabled: tutorialSelfTargetDisabled, selected: isSelfTarget }}
                   style={[
                     styles.listRow,
                     isSelfTarget && styles.listRowActive,
-                    isTutorialMode &&
-                      tutorialStep === STEP_PIECES_SWITCH_AND_REACT &&
-                      !activeViewedUserId &&
-                      { opacity: 0.5 },
+                    tutorialSelfTargetDisabled && { backgroundColor: colors.FIELD_BG, borderColor: colors.CARD_BORDER },
                   ]}
                 >
                   <View style={{ flex: 1 }}>
                     <View style={styles.rowTitleLine}>
-                      <Text style={styles.rowTitle}>
+                      <Text style={[styles.rowTitle, tutorialSelfTargetDisabled && { color: colors.TEXT_SUBTLE }]}>
                         自分に戻る
                       </Text>
                       {isSelfTarget ? (

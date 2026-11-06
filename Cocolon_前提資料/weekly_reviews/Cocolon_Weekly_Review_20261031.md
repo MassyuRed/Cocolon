@@ -5109,3 +5109,21 @@ linkPayloadの旧Piece入口・Q&A詳細と各選択modal、停止中tutorial描
 製品11file＋資料3file。既存4入口95 PASS／FAIL0／SKIP0、別の一時実画面検証8 PASS／FAIL0／SKIP0。後者は実Settings screen＋React／renderer18.3.1・Babel core7.25.2と代替native/APIで、4取得失敗とfallback、旧owner遅延失敗、親OFFの1＋3payload、親失敗rollback／子write0、子部分失敗OFF／Alertを確認。新しい常設test framework／依存／test fileは追加していない。変更JS11file parse・diff空白検査、4style ownerの216 role×theme一致。補助reviewのAST照合ではAccount5hook・callback、FollowListのrender前statement／全10onPress、契約15式、通知の表示用setter以外のeffect／依存配列・保存／削除／再体験handlerが不変。実store・実API・通知配送・実削除・端末表示の検証ではない。
 
 全path・具体設計・保持境界は[UI設計§21](../designs/ui/material-ui-design.md#ui-account-settings-material-20261106)。次は案内・お知らせ・ガイド・tutorial・残る休眠資産、その後全体横断。全source完成前のbuild／native compile／Upload／配布は行わず、今回も実機表示・Render／Supabase／GPU操作0。STRUCTURE_MAP_DELTA_NONE、API／DB／課金価格／公開・削除契約／AI／分析／作品画像の変更0。全UI完成は未宣言。writerは華恋一人、補助はread-only review。
+
+
+<a id="ui-final-material-20261106"></a>
+## 224. 11/6 — 案内・tutorial・休眠画面を統一し、全画面sourceを一巡
+
+前回 `c1c6bf638da3a7906ca7e078600051dedf15ce26` を固定起点に、前提全文・規則・最新weekly・全画面設計と現物を確認して継続。全画面統一、全source完成後にビルドをまとめるMashの方針を維持した。
+
+お知らせは通常／welcomeを同じ一面・全辺safe area、本文16/27・×44へ。題名・本文・全CTA・履歴・welcome主操作を一つのscrollに入れ、閉じるcallbackとaction正規化を保持した。履歴は初回取得失敗と正常0件を分け、追加取得失敗でも行／cursor／未読を保ち同offsetから再試行。focus失敗時も前回内容を残す。50件・重複除去・一度だけの指定展開・楽観既読・CTA前の既読は維持。
+
+ガイドは画面名も本文scrollへ、用語は本文scrollと×／閉じるを分離し、関連語切替でscrollをreset。ProfileCreateは旧機能と明記し、感情通知は感情・強さ・時刻のみへ。tutorial開始の三重枠を整理、Flowと両Overlayを同じ文字・面へ。左右safe insetと幅640を実cardとmetricsで一致させ、本文と次へを同scrollへ。無効文字を保持し、spotlight／proxy／step／完了処理は不変。旧root資産の相対importも修正した。
+
+tutorialの旧Piece Q&A・現在map Plus／28日説明は、画像Pieceと旧投稿の区別・現在map全plan共通／月次2・12・全期間・練習用ラベルへ修正。generated原本は再生成せず、表示adapterでラベルを投影した。旧rendererのplan案内は既定表示を保持し、tutorialだけ抑止する。visibility／locked sections・tier／mode・日時／証拠は変えない。
+
+休眠のRanking6＋ProfileCreateも同じMaterialへ。期間キー・API・順位／値・private・戻り先・5問／can_edit／secret／部分保存／keyboardを保ち、routeを復活させない。全体横断でInput必須色と感情／カテゴリ・更新中・tutorial対象選択の無効表示、12/18の未読NEWとtab領域、toast全文、未接続AnalysisCrossLinkの旧色・太字・切詰めを補修した。作品canvas／recipe／保存画像・感情hueは不変。
+
+製品29file＋既存test2file＋資料3file。既存9入口175 PASS／FAIL0／SKIP0。起動harnessのnative hook代替不足と、初回のruntime依存パス未指定を解消し再実行、assertの緩和はない。一時検査は実NoticeHistory7・NoticeModal6、Guide18、両Overlayの幅320／1024×3theme×有効／無効24case PASS。Startの3callback／Android戻る、Flow二重完了停止／home resetも確認。16owner・157role×3theme＝471組、文字サイズ／行間／太さ1,413値完全一致。既存helper22関数／Flow6式、休眠7screen処理とProfile21propsのAST保持を確認。native／API／遷移を代替しており、実機表示や全19stepの実タップ成功ではない。
+
+全path・設計・保持境界は[UI設計§22](../designs/ui/material-ui-design.md#ui-final-material-20261106)。全6群のsourceは一巡し、次はまとめたビルド・配布と実機での仕上げへ進む段階。全登録／内部route・条件分岐、3theme、文字拡大1.0／1.3／1.6、狭幅／短い横画面、safe area／keyboard、長文・回復・未読・全19stepの実測を残す。今回のapp/native build・CI native compile・Upload・配布・本人端末表示・Render／Supabase／GPU操作0、commitは[skip ci]。新route／依存／API／DB／課金価格／本人・公開契約／AI・分析本文／作品画像の変更0、STRUCTURE_MAP_DELTA_NONE。source完了と実機のUI受入合格を混同しない。writerは華恋一人、補助はread-only review。
