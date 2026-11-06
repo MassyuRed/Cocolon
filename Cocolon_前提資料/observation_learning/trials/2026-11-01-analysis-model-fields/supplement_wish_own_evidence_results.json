@@ -486,10 +486,43 @@
     }
   ],
   "ci": {
-    "conclusion": null,
+    "completed_at": "2026-11-06T11:02:07Z",
+    "conclusion": "success",
+    "cumulative_api_jobs": {
+      "passed": 302,
+      "seconds": 207.68,
+      "subtests": 2,
+      "warning": 1
+    },
+    "generation_and_saved_read": {
+      "passed": 2557,
+      "seconds": 554.76,
+      "skip_reason": "Existing test_analysis_model_fields.py:147 PostgreSQL WASM dependency absent in generation step",
+      "skipped": 1,
+      "subtests": 12048
+    },
+    "head_sha": "5efdafab93f555dc777a07a886d051d72b8fe1a9",
+    "isolated_sql": {
+      "monthlyReferences": 15,
+      "sourceRecords": 201,
+      "status": "passed"
+    },
     "job_id": 127850808182,
+    "log_sha256": "3d68b3c4e8731d1440a0bc88bbbb7d87ae82bb9e24bdf3cebd5eb0dc6d9abc3a",
     "run_id": 42205450639,
-    "status": "in_progress",
+    "runtime": {
+      "fastapi": "0.142.2",
+      "httpx": "0.28.1",
+      "pydantic": "2.13.5",
+      "pytest": "8.4.1",
+      "python": "3.12.16"
+    },
+    "shared_owner": {
+      "deselected": 194,
+      "passed": 1,
+      "seconds": 31.56
+    },
+    "status": "completed",
     "url": "https://github.com/MassyuRed/mashos-api/actions/runs/42205450639"
   },
   "cpu_seconds": 4.38001400900248,
@@ -537,6 +570,6 @@
   "schema_version": "analysis_supplement_wish_own_evidence_result.v1",
   "scope": "Ordinary answer-owned single explicit SELF plain wish within existing finite grammar; no real model inference.",
   "source_unchanged": true,
-  "status": "SYNTHETIC_CPU_REPLAY_VERIFIED_CI_IN_PROGRESS",
+  "status": "SYNTHETIC_CPU_REPLAY_VERIFIED_CI_SUCCESS",
   "structure_map_delta": "PRESENT: narrow responsibility extension in existing observed consumer; no public type, author, grammar, DB or RN changes"
 }

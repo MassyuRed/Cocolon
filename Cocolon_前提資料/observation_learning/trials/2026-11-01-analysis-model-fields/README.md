@@ -1,4 +1,4 @@
-> **11/6・最新§235：API 5efdafabでordinary補足自身の単一SELF希望を限定接続。新88＋既存232＝320 PASS、CI42205450639進行中。`replay_heterogeneous_scope_cpu.py`は元合成packetを変更せず10/10・候補reload10／mock RPC保存reader40readを確認。HC09はdb6での既回復を保持。新モデル／raw取得／DB0、Browser状態取得とJupyter直接タブ作成が各300秒で未応答、Jupyter到達・新結果は未確認・5時間依頼未完了。** [範囲・原本・再開点](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplement-wish-own-evidence-20261106)／[本文なし集計](supplement_wish_own_evidence_results.json)。
+> **11/6・最新§235：API 5efdafabでordinary補足自身の単一SELF希望を限定接続。新88＋既存232＝320 PASS、CI42205450639全工程success。`replay_heterogeneous_scope_cpu.py`は元合成packetを変更せず10/10・候補reload10／mock RPC保存reader40readを確認。HC09はdb6での既回復を保持。新モデル／raw取得／DB0、Browser状態取得とJupyter直接タブ作成が各300秒で未応答、Jupyter到達・新結果は未確認・5時間依頼未完了。** [範囲・原本・再開点](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplement-wish-own-evidence-20261106)／[本文なし集計](supplement_wish_own_evidence_results.json)。
 
 > **11/6・履歴（第9回§216）：Jupyterで23更新を完了し18応答を返却、最後の三記録要求は23秒で停止。願望kind・否定引用・対象範囲の不整合が残り、新d22cは不採用。別途、保存済み25応答を0モデルで照合し、同じ二欄原応答を事実＋希望の2node／edge0へ接続する修正e8f026eを確認。関連398成功・1skip、本番未配置。** [実結果・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-fact-wish-fields-20261106)。
 
@@ -2334,7 +2334,7 @@ mapped0/0/3→1/2/3、全未解析0。全parent内の各元fieldが完全な行�
 
 [週次§235](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplement-wish-own-evidence-20261106)が最新結果と再開点。API [5efdafab](https://github.com/MassyuRed/mashos-api/commit/5efdafab93f555dc777a07a886d051d72b8fe1a9) で既存ordinary ACTION／担当＋決定の後に、補足memo一欄の単一明記SELF希望を自身の完全根拠で証明する経路を追加した。既存9動詞・肯否／現在過去、原入力専用wish guard・親全体検証・未読・カテゴリ・同一record countを保つ。原文やモデルraw、source roleの変換はしない。
 
-新88＋旧232＝320 PASS／失敗・skip0・40.45秒、広域282 PASS／SQL WASM未設定20 SKIP／失敗0・208.15秒。対象を合算しない。保存DTOの非生成再読はmock RPC下の実readerであり、実DB／RLS／月次captureではない。5変更blobは読戻し一致、CI42205450639進行中。STRUCTURE_MAP_DELTA_PRESENT（既存consumer責務の限定拡張）、公開型／作者／共有文法／DB／RN／通常profile・transport不変。
+新88＋旧232＝320 PASS／失敗・skip0・40.45秒、広域282 PASS／SQL WASM未設定20 SKIP／失敗0・208.15秒。対象を合算しない。保存DTOの非生成再読はmock RPC下の実readerであり、実DB／RLS／月次captureではない。5変更blobは読戻し一致、CI42205450639全工程success。STRUCTURE_MAP_DELTA_PRESENT（既存consumer責務の限定拡張）、公開型／作者／共有文法／DB／RN／通常profile・transport不変。
 
 | file | 所有する作業と状態 |
 |---|---|

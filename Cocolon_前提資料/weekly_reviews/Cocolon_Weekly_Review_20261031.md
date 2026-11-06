@@ -5390,7 +5390,7 @@ API [5efdafab93f555dc777a07a886d051d72b8fe1a9](https://github.com/MassyuRed/mash
 
 `test_analysis_model_supplement_wish.py` 新88件と既存 `test_analysis_model_observed_actions.py` 232件は **320 PASS／0 FAIL／0 SKIP、40.45秒**。既存Pydantic deprecation warning1。四希望形と既存9動詞、原入力ACTION／WISH／未対応親との併存、canonical重複の回答自身の再導出、複数回答／複数record／カテゴリ、根拠・親版・owner／roundの改変拒否、更新／衝突／注釈・複数節等の拒否を確認した。四希望形と9動詞の全36交差組を独立評価したという件数にはしない。
 
-広域5fileは **282 PASS／20 SKIP／0 FAIL、208.15秒**。20 SKIPはすべてSQL WASM環境未設定（cumulative1＋model_source19）で、SQL成功へ数えない。上記320件と合算しない。[CI42205450639](https://github.com/MassyuRed/mashos-api/actions/runs/42205450639)は進行中であり、全工程成功や隔離SQL成功はまだ主張しない。
+広域5fileは **282 PASS／20 SKIP／0 FAIL、208.15秒**。20 SKIPはすべてSQL WASM環境未設定（cumulative1＋model_source19）で、SQL成功へ数えない。上記320件と合算しない。[CI42205450639](https://github.com/MassyuRed/mashos-api/actions/runs/42205450639)は全工程completed／success。固定環境の実logと全stepを照合し、末尾へ件数を確定した。
 
 新補足希望と既存保存wireのprojection DTOは、実read_maps／mock RPC下でEngine・compiler・新wish proof・作者の生成入口を禁止して同一値を再読した。静的本文整合検査は維持する。これは実DB永続化／RLS／月次capture、private graph全復元や本人実機の成功ではない。
 
@@ -5413,7 +5413,22 @@ rootと同環境read-only補助が全10の本文・graph・証拠対応を確認
 
 今回の新モデルcall／load／raw取得／学習／DB呼出しは0。元 `heterogeneous_scope_probe.py` のgenerateは引き続き未実行で、5時間依頼を完了したとは主張しない。新local回帰成功を、未回収のJupyter検証結果へ付け替えない。Render／Supabase変更、本番配置／merge／RN buildも0。
 
-1. CI42205450639の終了状態・実logを回収し、成功／skip／失敗を対象ごとに確定する。同packet CPU比較は完了しており再実行せず、比較器訂正前の失敗原本も保持する。
+1. CI42205450639の全工程successと同packet CPU比較は確定済み。これらを再実行せず、比較器訂正前の失敗原本も保持してJupyter結果回収へ進む。
 2. Jupyterへ接続できた場合、§234末尾の未回収JSON／test log・terminal未完入力・既存root／outputの有無を先に読む。既存処理や完了runを重複起動しない。
 3. 後日 `heterogeneous_scope_probe.py` を使う場合、旧f50acbc／db6a571の比較用rootを保持し、別runtimeをAPI `5efdafab93f555dc777a07a886d051d72b8fe1a9` へ固定する。runner／fixture／元a2e／config006e／pins・optional targetのbytesを照合し、新rootでprepareと入力予算を確認してから一回generateを扱う。旧prepareのidentityを新sourceへ流用しない。
 4. 実raw未取得の段階ではモデル品質・成功率を主張しない。一般の本人基準／暗黙役割／選択基準／記録間意味、全補足・分割batch／全履歴の通常時間内処理、IF／Saved・実DB／本人端末・商品受入れは残件。
+
+### 同checkpointのCI確定
+
+API `5efdafab93f555dc777a07a886d051d72b8fe1a9` の[CI42205450639](https://github.com/MassyuRed/mashos-api/actions/runs/42205450639)／job127850808182は、11/6 **20:02:07 JSTにcompleted／success**。全step・対象head・実logを確認した。実行環境はPython3.12.16／pytest8.4.1／FastAPI0.142.2／pydantic2.13.5／httpx0.28.1で、localの依存版と区別する。
+
+| CIの対象 | 確定結果 |
+|---|---|
+| 生成・保存再読 | 2557 PASS／既存SQL1 SKIP／12048 subtests、554.76秒 |
+| 共有owner identity | 1 PASS／194 deselected、31.56秒 |
+| 累積API・Q3保存元・既存jobs | 302 PASS／2subtests／既存warning1、207.68秒。WASM依存を設定してlocalの20 SKIP対象も実行 |
+| 独立SQLの月次rank／不変読込／削除 | passed、201 sourceRecords／15 monthlyReferences |
+
+生成stepの1 SKIPは `test_analysis_model_fields.py:147` のPostgreSQL WASM未設定による既存skipであり、後続302 PASSや独立SQLの成功でそのtest自体の実行済みを主張しない。local320／282とCIを別の問題解決件数へ重複加算しない。CI実logの保存fileは48561bytes／SHA `3d68b3c4e8731d1440a0bc88bbbb7d87ae82bb9e24bdf3cebd5eb0dc6d9abc3a`。非公開bundleは作成時CI進行中の記録を保持し、後続の確定値だけを本節と本文なし集計へ追記した。
+
+コード5file checkpointと、先行資料8fileのcheckpoint [48a53f9](https://github.com/MassyuRed/Cocolon/commit/48a53f92142c53796b88b219425b478923d355c6) は全変更blobのリモート全文・親・changed path集合を確認済み。両PRはDraft／open／unmerged。新モデル0・Jupyter新結果未回収・5時間依頼未完了、一般意味品質／通常採用／実DB／本人実機／配置は引き続き未成立。
