@@ -5432,3 +5432,43 @@ API `5efdafab93f555dc777a07a886d051d72b8fe1a9` の[CI42205450639](https://github
 生成stepの1 SKIPは `test_analysis_model_fields.py:147` のPostgreSQL WASM未設定による既存skipであり、後続302 PASSや独立SQLの成功でそのtest自体の実行済みを主張しない。local320／282とCIを別の問題解決件数へ重複加算しない。CI実logの保存fileは48561bytes／SHA `3d68b3c4e8731d1440a0bc88bbbb7d87ae82bb9e24bdf3cebd5eb0dc6d9abc3a`。非公開bundleは作成時CI進行中の記録を保持し、後続の確定値だけを本節と本文なし集計へ追記した。
 
 コード5file checkpointと、先行資料8fileのcheckpoint [48a53f9](https://github.com/MassyuRed/Cocolon/commit/48a53f92142c53796b88b219425b478923d355c6) は全変更blobのリモート全文・親・changed path集合を確認済み。両PRはDraft／open／unmerged。新モデル0・Jupyter新結果未回収・5時間依頼未完了、一般意味品質／通常採用／実DB／本人実機／配置は引き続き未成立。
+
+<a id="analysis-heterogeneous-v10-live-20261106"></a>
+## 236. 11/6 — Jupyter直接接続を復旧し、旧実行原本を回収（途中checkpoint）
+
+BrowserのgetStateが復旧し、既存Jupyter URLへ新tabを直接作成して接続した。残存terminalを確認し、§234–235で未回収だった旧runtimeの6fileを先に回収した。既存処理の再起動や旧rootの修理、モデルの新規起動は行っていない。
+
+[回収原本](https://chatgpt.com/library?file_id=libfile_fde3_f-83458ee8f9888191b06c881db285216f_2f7470f963808191aaebf050935e72de&account_id=personal)は6file／67747bytes、SHA `38a12f9fa851b502984a8b5987d70f1d97d3a2bf2a1fc62e1769368f2e8cdd1d`。CRCと全bytesを照合した。旧失敗logも保持し、成功版へ上書きしない。原文／raw／資格情報を公開GitHubへ転記しない。
+
+### 回収して確定した旧状態
+
+| 対象 | 確認結果と解釈 |
+|---|---|
+| 旧CPU before | API f50の合成10構成で9期待一致。§234の既知beforeであり、モデル応答や新修復版の成功結果ではない |
+| 旧CPU after JSON／pytest log／元model runner | 対象の旧runtimeに存在しなかった。after10/10やJupyter pytest成功件数を成立させない |
+| after.log | `unexpected_api_commit`。固定commit検査で止まっており、修復版の成功結果として扱わない |
+| fetch log | 56 unresolved deltasとinvalid index-packの失敗を保持。取得完了・整合したGit rootとはしない |
+| setup log | 親commit `f1048..` の欠落とdb6がrefでない失敗を確認。db6切替成功の証拠へ使わない |
+
+§234は「db6切替後のcommand実行を見たが結果未回収」という当時の観察を記録した。今回の回収結果から、そこをJupyter上の修復版CPU／pytest成功へ補完しない。§235のlocal320 PASS、合成packet10/10／40readとCI全工程successは別の確定結果であり、今回の旧Jupyter失敗へ帰属させたり再実行したりしない。
+
+### 新runtimeの途中状態
+
+壊れた古いAPI rootは修理せず、そのまま比較・失敗原本として保持する。既存Jupyter terminalのUIから、公開repositoryを新path `/workspace/analysis-supplement-wish-runtime-20261106` へdepth1 sparse cloneするcommandを実行し、shell promptへの復帰まで確認した。**新rootのHEAD／tracked clean／source hashはまだ確認していない。cloneのprompt復帰だけでAPI5efd固定成功と報告しない。**
+
+この時点で新prepare／tokenizer測定／model call／model load／raw取得／学習は未実施。DB／Render／Supabase／RN／通常採用／配置の変更も0。source／prompt／型／公開DTO／共有文法／作者／DB schema／RN／通常transportの構造差分なし、STRUCTURE_MAP_DELTA_NONE。これは復旧状態と次の実行条件の記録で、5時間依頼の完了・一般意味品質の成功ではない。
+
+### 次の一回比較への条件
+
+1. 新runtimeのHEADをAPI `5efdafab93f555dc777a07a886d051d72b8fe1a9` へ固定し、tracked cleanと対象source hashを確認する。旧f50／db6 rootは変更しない。既存CPU比較とCIは完了済みの結果を使う。
+2. 元 `heterogeneous_scope_probe.py`（SHA `be9f9f030cd3addd9ab54eb1835572b0fa9dcdf027de2422f9fe6b6c5d68478c`）／CPU fixture／元runtime pack・helper／a2e／config006e／既存pins・optional targetを照合する。新しい存在しないoutput rootを使い、旧APIのprepare identityを流用しない。
+3. `prepare` で全10完全sourceと全fieldのmessages／request_ref／guard、実tokenizer入力＋予約2048<=8192を確認する。手書きCPU packetや期待値をpromptへ送らない。
+4. 元v10／元a2e・最大10生成／1load／各23秒／外側親subprocess300秒／学習0の一回だけを実行する。元raw／Responseをconsume前に保存し、同raw比較・非生成replay・保存readerを分ける。既存resultがあるrootは再起動せず、部分失敗を成功まで反復しない。
+
+実モデル原応答の異内容／カテゴリ・本人補足対応、本来の本人基準／暗黙役割／判断・選択／記録間意味、全量処理・IF／Saved・実DB／本人端末・商品受入れは引き続き残件。後続の新HEAD確認・prepare・モデル結果は、実際の成立後に本節へ追記する。
+
+### 同checkpointの新runtimeとprepare確定
+
+公開repoからの別root取得とsparse展開が成功し、HEAD `5efdafab93f555dc777a07a886d051d72b8fe1a9` とtracked cleanを実runnerの検査で確認した。公開済みrunner／fixtureのSHAも一致。旧runtime pack／helper／元adapter/configの固定SHAを保ち、実tokenizerの新prepareは **10構成／24field、最大4502token＋予約2048＝6550<=8192** で `CPU_PREPARED_NO_MODEL` となった。元snapshotのみをmessagesへ渡し、手書きpacket／期待は送信しない。新rootは `/workspace/analysis-heterogeneous-v10-own-evidence-20261106`。GPU queryはreturn0・active processなし。
+
+上段のHEAD未確認／prepare未実施は途中時点の記録で、本追記によりこの2点を確定した。新生成／model load／学習／DBはまだ0。次はこのpackから元runnerを一回だけ外側300秒で実行し、原raw先行保存・同raw比較・非生成再読へ進む。prepare完了をモデル結果や商品品質成功へ換算しない。
