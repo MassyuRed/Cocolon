@@ -45,9 +45,10 @@ function harness(get) {
         if(target.endsWith('/SubscriptionContext.js'))return {useSubscription:()=>plan};
         if(target.endsWith('/theme/ThemeContext.js'))return {useTheme:()=>({colors:{},themeName:'light'})};
         if(target.endsWith('/lib/apiClient.js'))return api;
-        if(target.endsWith('/ui/uiTokens.js'))return {makeUiTokens:()=>({text:{}})};
         if(target.endsWith('/ui/applyTypographyTokens.js'))return {applyTypographyTokens:x=>x};
         if(target.endsWith('/components/CocolonBackButton.js'))return ()=>null;
+        if(target.endsWith('/components/CocolonButton.js'))return props=>React.createElement('TouchableOpacity',
+          {...props,disabled:!!props.disabled||!!props.loading},React.createElement('Text',null,props.children??props.title));
         return load(path.relative(root,target));
       }
       return require(name);
@@ -69,6 +70,7 @@ test('Free reads the common full map and acknowledges only its displayed identit
   const h=harness(async()=>latest());const View=h.load('components/selfStructure/CumulativeWatashiMapView.js').default;const seen=[];
   let view;await act(async()=>{view=Renderer.create(React.createElement(View,{onLatestSeenVersion:x=>seen.push(x),embedded:true,hideHeader:true}));});
   assert(JSON.stringify(view.toJSON()).includes('watashi-map-v2'));
+  assert.equal(view.root.findAllByType('ScrollView').length,0,'embedded map delegates vertical scrolling to its parent');
   assert.deepEqual(seen,[projection.projection_of]);
   assert(h.calls.every(c=>c[2].expectedUserId===owner));
   await act(async()=>view.unmount());

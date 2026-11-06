@@ -5062,3 +5062,16 @@ Safe areaと利用可能高さでmodalを制限し、見出し・説明・長文
 製品15file（入力群等13＋共通buttonの無効面に対応するPiece子文字／icon2caller）、既存test2file＋回復test1file、資料3file。既存6入口と新回復2件で447 PASS／FAIL0／SKIP0、変更JS18file parse・diff空白検査成功。実screenの初回失敗再読、追加失敗後の既存回答保持・同じoffset再試行・ID重複除去を確認。React/native・Auth/HTTPは代替を含み、端末描画の合格ではない。途中検査のTypeScript不足は既存pinned5.2.2を一時配置し、旧copy期待だけを現在説明へ変更して解消。依存定義は不変。
 
 詳細・変更path・次の再開点は[UI資料§18](../designs/ui/material-ui-design.md#18-116-実装区切り2--入力応答問い履歴)。残るsource作業は分析全体、Piece・social、アカウント・設定・契約、案内・tutorial・休眠資産と横断仕上げ。ビルド・配布・実機確認は全画面sourceを揃えてからまとめる。今回もbuild／native compile／Upload／配布／Render／Supabase／GPU操作0、作品renderer・保存画像／AI・分析意味・権限・API／DB変更0。writerは華恋一人、補助はread-only review。
+
+<a id="ui-analysis-material-20261106"></a>
+## 221. 11/6 — 分析全体のMaterial UIを仕上げ
+
+前回2ff59e1をfixed headに、前提全文・現UI設計・最新weekly・作業規則と対象実装を確認して継続。全画面統一、全source完成後にまとめてbuildするMashの方針を保持した。今回の範囲はA01〜A14と、同じstyleを使う未接続の旧表示資産。
+
+分析入口・二段選択・天気／履歴／詳細、現在map・月次当時版と現在比較・根拠modal、旧V2／保存mapを同じ文字・面・操作へ。長い天気メモは縦scroll、狭い週月グラフは横scroll、日付・天気ラベルは全文へ。時間帯リングの補助数値は全5感情を0%込みで残し、全0は不足のまま。埋込みviewerの重複見出しを抑え、期間は保持。CumulativeのembeddedはViewとして親だけが縦scrollする。根拠は原文二欄と本人補足を区分し、nodeの読み上げgroupに子buttonを埋めない。
+
+履歴の予定・保持範囲・エラーも一覧scrollへ。既読opacityを外し、既読trueだけ印を追加。月次は月と保存日時を分け、cumulativeに一律未読を足さない。天気の追加取得失敗は元行とoffsetを保ち同じ位置から再試行。3plan共通現在map、月次2／12／全期間、旧modeとtier、owner／seq／artifact、当時版不変、比較失敗、本文／根拠、tutorial停止、アンカー移動、非表示mode・PDF・CrossLinkは保持。旧mapを新累積へ変換せず、内容／AI／DB／保存contractは変更しない。
+
+製品16file＋既存分析test2＋資料3。対象9入口478 PASS／FAIL0／SKIP0、JS18file parse、diff空白検査成功。累積／旧V2の31件を含み、埋込み縦scrollゼロと根拠button到達／同node_ref引渡しを既存assertへ追加した。13style ownerの615 role×themeもサイズ／行間／太さ一致。テストはReact/native・Auth/HTTP代替を含み、端末視覚合格ではない。補助reviewでDeep棒の固定色、左右header幅、空表示roleを修正。依存の通常取得でtransitive404があったが、既存同version toolsと固定preset/pluginの一時環境で検査し、repo依存定義は変更0。
+
+実装範囲・全path・境界と再開点は[UI設計§19](../designs/ui/material-ui-design.md#ui-analysis-material-20261106)。次はPiece・social。その後アカウント・設定・契約、案内・tutorial・残る休眠資産と全体確認。途中commitは[skip ci]。build／native compile／Upload／配布／実機、Render／Supabase／GPU操作は0。TECHNICAL_CREDITは実装・限定検証のみで、全UI完成や分析内容品質の合格へ換算しない。writerは華恋一人、補助はread-only review。

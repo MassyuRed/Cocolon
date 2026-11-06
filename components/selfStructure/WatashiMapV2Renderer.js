@@ -18,8 +18,7 @@ export default function WatashiMapV2Renderer({ contentJson, colors, isDark = fal
       <View style={styles.lane}>
         <Text style={styles.section} accessibilityRole="header">観測された内容</Text>
         {model.nodes.map((node) => (
-          <View key={node.node_ref} style={styles.card} accessible
-            accessibilityLabel={`${NODE_LABELS[node.node_kind]}。${node.visible_label}。${node.evidence_badge_count}件の記録。`}>
+          <View key={node.node_ref} style={styles.card}>
             <Text style={styles.kind}>{NODE_LABELS[node.node_kind]}</Text>
             <Text style={styles.body}>{node.visible_label}</Text>
             <Text style={styles.subtle}>{node.evidence_badge_count}件の記録</Text>

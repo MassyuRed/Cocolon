@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { ActivityIndicator, Modal, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { ActivityIndicator, Modal, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useAuth } from '../../AuthContext';
 import { useSubscription } from '../../SubscriptionContext';
@@ -9,6 +9,9 @@ import { SELF_STRUCTURE_WIRE, buildSelfStructureReportDetailPath, buildSelfStruc
 import { getWatashiMapHistoryRetentionLabel } from './watashiMapAccessPolicy';
 import WatashiMapV2Renderer from './WatashiMapV2Renderer';
 import { checkedMapRow, checkedCurrentResult } from './cumulativeMapContract';
+import { makeUiTokens } from '../../ui/uiTokens';
+import CocolonButton from '../CocolonButton';
+import CocolonBackButton from '../CocolonBackButton';
 
 const dateLabel = value => value ? new Date(value).toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' }) : '';
 const monthLabel = value => value ? `${value.slice(0, 4)}年${Number(value.slice(5, 7))}月` : '';
@@ -16,6 +19,8 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
   const { session } = useAuth();
   const { tier, loading: planLoading } = useSubscription();
   const { colors, themeName } = useTheme();
+  const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
+  const styles = useMemo(() => makeStyles(colors, ui), [colors, ui]);
   const owner = session?.user?.id || '';
   const key = `${owner}:${tier}:${reportId || 'current'}:${month || ''}`;
   const currentKey = useRef(key);
@@ -107,11 +112,11 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
   const closeEvidence = () => { evidenceRequest.current += 1; setEvidence(null); };
 
   const coverage = value => value ? <View style={styles.notice}>
-    <Text style={{ color: ink }}>対象：感情入力の記録{value.source_count}件と、その本人補足。構造に反映できた記録：{value.mapped_count}件。</Text>
-    {value.unparsed_count || value.excluded_count ? <Text style={{ color: ink }}>
+    <Text style={[styles.bodyText, { color: ink }]}>対象：感情入力の記録{value.source_count}件と、その本人補足。構造に反映できた記録：{value.mapped_count}件。</Text>
+    {value.unparsed_count || value.excluded_count ? <Text style={[styles.bodyText, { color: ink }]}>
       未解析の範囲があります（全体または一部を読み取れていない記録{value.unparsed_count}件、通常分析の対象外{value.excluded_count}件）。
     </Text> : null}
-    {value.stale_supplement_count ? <Text style={{ color: ink }}>編集前の入力に結び付いた補足は、現在の入力の説明には使用していません（{value.stale_supplement_count}件）。</Text> : null}
+    {value.stale_supplement_count ? <Text style={[styles.bodyText, { color: ink }]}>編集前の入力に結び付いた補足は、現在の入力の説明には使用していません（{value.stale_supplement_count}件）。</Text> : null}
   </View> : null;
 
   const renderMap = row => <View>
@@ -124,60 +129,70 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
 
   const visible = state.key === key && !planLoading;
   const Container = embedded ? View : SafeAreaView;
-  return <Container style={[styles.root, { backgroundColor: paper }]}>
+  const Body = embedded ? View : ScrollView;
+  return <Container {...(!embedded ? { edges: ['left', 'right'] } : {})}
+    style={[embedded ? styles.embeddedRoot : styles.root, { backgroundColor: paper }]}>
     {!hideHeader ? <View style={styles.header}>
-      <TouchableOpacity onPress={onBack} accessibilityRole="button"><Text style={[styles.action, { color: ink }]}>閉じる</Text></TouchableOpacity>
+      <CocolonBackButton onPress={onBack} accessibilityLabel="わたしマップから戻る" />
       <Text style={[styles.title, { color: ink }]}>{reportId ? `${monthLabel(month)}のわたしマップ` : '今のわたしマップ'}</Text>
+      <View style={{ width: 44 }} />
     </View> : null}
-    <ScrollView contentContainerStyle={styles.body}>
+    <Body {...(embedded ? { style: [styles.body, styles.embeddedBody] } : { contentContainerStyle: styles.body })}>
       <Text style={[styles.meta, { color: ink }]}>{getWatashiMapHistoryRetentionLabel(tier)}</Text>
-      {!visible || state.loading ? <ActivityIndicator accessibilityLabel="マップを読み込んでいます" /> : null}
-      {visible && state.error ? <Text style={{ color: ink }} accessibilityRole="alert">{state.error}</Text> : null}
-      {visible && state.empty ? <><Text style={{ color: ink }}>{state.insufficient ? '入力情報から構造を十分に読み取れていないため、まだマップを表示できません。' : '現在表示できるわたしマップはありません。'}</Text>{coverage(state.coverage)}</> : null}
+      {!visible || state.loading ? <ActivityIndicator color={colors.TITLE_GOLD} accessibilityLabel="マップを読み込んでいます" /> : null}
+      {visible && state.error ? <Text style={styles.error} accessibilityRole="alert">{state.error}</Text> : null}
+      {visible && state.empty ? <><Text style={[styles.bodyText, { color: ink }]}>{state.insufficient ? '入力情報から構造を十分に読み取れていないため、まだマップを表示できません。' : '現在表示できるわたしマップはありません。'}</Text>{coverage(state.coverage)}</> : null}
       {visible && state.row ? <>
         {reportId ? <Text style={[styles.meta, { color: ink }]}>その月に保存した当時の分析です。現在の内容で書き換えていません。</Text> :
           <Text style={[styles.meta, { color: ink }]}>これまでの入力全体から、構造とルートを確認できます。現在のマップの内容は全プラン共通です。</Text>}
-        {reportId ? <TouchableOpacity style={styles.button} accessibilityRole="button" onPress={() => { setCompare(!compare); load(!compare); }}>
-          <Text style={[styles.action, { color: ink }]}>{compare ? '当時のマップだけを見る' : '現在のマップと見比べる'}</Text>
-        </TouchableOpacity> : null}
-        {compare ? <Text style={[styles.title, { color: ink }]}>当時：{monthLabel(month)}</Text> : null}
+        {reportId ? <CocolonButton variant="secondary" onPress={() => { setCompare(!compare); load(!compare); }}
+          title={compare ? '当時のマップだけを見る' : '現在のマップと見比べる'} /> : null}
+        {compare ? <Text style={[styles.sectionTitle, { color: ink }]}>当時：{monthLabel(month)}</Text> : null}
         {renderMap(state.row)}
-        {compare && state.now ? <><Text style={[styles.title, { color: ink }]}>現在</Text>{renderMap(state.now)}</> : null}
-        {compare && state.comparisonUnavailable ? <Text style={{ color: ink }} accessibilityRole={state.comparisonFailed ? 'alert' : undefined}>
+        {compare && state.now ? <><Text style={[styles.sectionTitle, { color: ink }]}>現在</Text>{renderMap(state.now)}</> : null}
+        {compare && state.comparisonUnavailable ? <Text style={[styles.bodyText, { color: ink }]} accessibilityRole={state.comparisonFailed ? 'alert' : undefined}>
           {state.comparisonFailed
             ? '現在のマップを取得できませんでした。当時のマップは保存されています。再取得で確認できます。'
             : '現在のマップはまだ表示できません。当時のマップは保存されています。'}
         </Text> : null}
       </> : null}
-      {visible && !state.loading ? <TouchableOpacity style={styles.button} accessibilityRole="button" onPress={() => load(compare)}>
-        <Text style={[styles.action, { color: ink }]}>再取得</Text>
-      </TouchableOpacity> : null}
-    </ScrollView>
+      {visible && !state.loading ? <CocolonButton variant="secondary" onPress={() => load(compare)} title="再取得" /> : null}
+    </Body>
     <Modal visible={!!evidence && evidence.key === key} transparent animationType="fade" onRequestClose={closeEvidence}>
-      <SafeAreaProvider><SafeAreaView style={styles.overlay}><View style={[styles.dialog, { backgroundColor: paper }]}>
-        <Text style={[styles.title, { color: ink }]}>根拠の記録</Text>
-        <ScrollView>
-          {evidence?.loading ? <ActivityIndicator /> : null}
-          {evidence?.error ? <Text style={{ color: ink }}>記録を取得できませんでした。</Text> : null}
+      <SafeAreaProvider><SafeAreaView edges={['top', 'bottom', 'left', 'right']} style={styles.overlay}><View style={styles.dialog}>
+        <Text style={[styles.modalTitle, { color: ink }]}>根拠の記録</Text>
+        <ScrollView style={{ flexShrink: 1 }} contentContainerStyle={{ gap: 16 }}>
+          {evidence?.loading ? <ActivityIndicator color={colors.TITLE_GOLD} /> : null}
+          {evidence?.error ? <Text style={styles.error}>記録を取得できませんでした。</Text> : null}
           {evidence?.items?.map(item => <View key={item.id} style={styles.notice}>
             <Text style={[styles.meta, { color: ink }]}>{dateLabel(item.created_at)}</Text>
-            {item.version_state !== 'CURRENT' ? <Text style={{ color: ink }}>この記録は分析後に編集されています。以下は現在の内容です。</Text> : null}
-            {item.memo ? <Text style={[styles.record, { color: ink }]}>{item.memo}</Text> : null}
-            {item.memo_action ? <Text style={[styles.record, { color: ink }]}>{item.memo_action}</Text> : null}
+            {item.version_state !== 'CURRENT' ? <Text style={[styles.bodyText, { color: ink }]}>この記録は分析後に編集されています。以下は現在の内容です。</Text> : null}
+            {item.memo ? <><Text style={styles.label}>思考内容</Text><Text style={[styles.record, { color: ink }]}>{item.memo}</Text></> : null}
+            {item.memo_action ? <><Text style={styles.label}>行動内容</Text><Text style={[styles.record, { color: ink }]}>{item.memo_action}</Text></> : null}
+            {item.answers?.length ? <Text style={styles.label}>本人補足</Text> : null}
             {item.answers?.map((answer, index) => <Text key={index} style={[styles.record, { color: ink }]}>補足：{answer}</Text>)}
           </View>)}
         </ScrollView>
-        <TouchableOpacity style={styles.button} accessibilityRole="button" onPress={closeEvidence}><Text style={[styles.action, { color: ink }]}>閉じる</Text></TouchableOpacity>
+        <CocolonButton variant="secondary" onPress={closeEvidence} title="閉じる" />
       </View></SafeAreaView></SafeAreaProvider>
     </Modal>
   </Container>;
 }
 
-const styles = StyleSheet.create({
-  root: { flex: 1 }, header: { padding: 16, gap: 12 }, title: { fontSize: 19, fontWeight: '700' },
-  body: { padding: 16, gap: 16, paddingBottom: 40 }, meta: { fontSize: 13, lineHeight: 21 },
-  action: { fontSize: 16, fontWeight: '600' }, button: { padding: 14, borderWidth: 1, borderColor: '#9ca3af', borderRadius: 10, alignItems: 'center' },
-  notice: { padding: 12, gap: 8, borderBottomWidth: 1, borderColor: '#9ca3af' }, record: { fontSize: 16, lineHeight: 25 },
-  overlay: { flex: 1, backgroundColor: '#0008', padding: 20, justifyContent: 'center' },
-  dialog: { maxHeight: '90%', padding: 16, borderRadius: 16, gap: 12 },
-});
+function makeStyles(colors, ui) {
+  return StyleSheet.create({
+    root: { flex: 1 }, embeddedRoot: { alignSelf: 'stretch' },
+    header: { padding: 20, gap: 8, flexDirection: 'row', alignItems: 'center' },
+    title: { ...ui.typography.screenTitle, flex: 1, textAlign: 'center' },
+    sectionTitle: { ...ui.typography.sectionTitle }, modalTitle: { ...ui.typography.modalTitle },
+    body: { padding: 20, gap: 16, paddingBottom: 24, width: '100%', maxWidth: 680, alignSelf: 'center' },
+    embeddedBody: { padding: 0, paddingBottom: 8 },
+    meta: { ...ui.typography.meta }, bodyText: { ...ui.typography.body, color: colors.TEXT_ON_LIGHT },
+    error: { ...ui.typography.description, color: colors.ERROR },
+    label: { ...ui.typography.description, fontWeight: '600', color: colors.TEXT_SUBTLE },
+    notice: { padding: 16, gap: 8, borderWidth: 1, borderRadius: 16, borderColor: colors.CARD_BORDER, backgroundColor: colors.SURFACE_TONAL },
+    record: { ...ui.typography.body },
+    overlay: { flex: 1, backgroundColor: '#0008', padding: 20, justifyContent: 'center', alignItems: 'center' },
+    dialog: { width: '100%', maxWidth: 640, maxHeight: '100%', flexShrink: 1, padding: 20, borderRadius: 24, gap: 16, backgroundColor: colors.FIELD_BG, borderWidth: 1, borderColor: colors.CARD_BORDER },
+  });
+}

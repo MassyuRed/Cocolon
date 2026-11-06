@@ -166,7 +166,7 @@ Mashの比較理由：Day One案は情報の区切りが弱く、視線が動き
 | Piece作成 | 画像／全文を設定より前へ。操作ボタンと外枠をテーマ対応。全条件操作とidentity/tokenの引渡しを保持。作品renderer・recipe・保存画像は変更0 |
 | 設定・周辺 | 設定入口を目的が読める3行へ。テーマ選択面、共通メニュー、契約カード・説明・CTA、Nexusタブと自分のPiece入口を調整 |
 
-**現在の実装：** 下記§17の共通・起動・認証、§18の入力・応答・問い・履歴まで追加反映。残る個別仕上げは§15.1の3〜6群（分析全体、Piece・social、アカウント・設定、案内・tutorial・休眠資産）。共通テーマの変更が届くだけで、個別画面の仕上げ完了とはしない。全群のsource反映後にまとめてビルド・配布し、3テーマ、文字拡大1.0/1.3/1.6、狭い幅、safe area、キーボード、長文・回復操作の実端末確認を行う。
+**現在の実装：** 下記§17の共通・起動・認証、§18の入力・応答・問い・履歴、§19の分析全体までsourceを追加反映。残る個別仕上げは§15.1の4〜6群（Piece・social、アカウント・設定、案内・tutorial・休眠資産）。共通テーマの変更が届くだけで、個別画面の仕上げ完了とはしない。全群のsource反映後にまとめてビルド・配布し、3テーマ、文字拡大1.0/1.3/1.6、狭い幅、safe area、キーボード、長文・回復操作の実端末確認を行う。
 
 初回反映時の確認：Nodeの既存5入口（画面contract・IAP復元・テーマ可読性・Piece初回保存modal・preview/display）で400 PASS／FAIL0／SKIP0。React/native・Auth/HTTPは各既存testの代替を含む。テーマ検査は旧バーガンディ色・太枠・taglineの固定期待を採用設計へ更新し、3テーマの本文／補助／tonal／操作色の4.5:1を検査した。Piece testの新テーマhookと共有Buttonへのimport適応のみを行い、保存・回復の検査は維持。最初の実行は取得不足の依存fileと旧表示期待で失敗し、依存原本の取得と意図した期待更新後に上記最終実行を通過した。製品の資格判定を緩めていない。今回の全画面設計更新で、これらを再実行したとは扱わない。
 
@@ -488,3 +488,27 @@ Mashが全画面実装の開始と、全画面source完成後にビルドをま�
 read-only reviewで、問いmodalのhideHeaderによるspinner非表示、Emlis fixed footerの短画面overflow、共通frameと履歴の上下safe area重複を修正。共通buttonの変更が任意React childの文字へ届かないため、上のPiece2callerの白文字／iconも明示補修し、処理中は共通loadingへ渡した。検査はReact・native・Auth/HTTPの代替を含み、実機での見え方・タップ・読み上げの確認ではない。
 
 **次のsource作業：** §15.1の分析全体→Piece・social→アカウント・設定・契約→案内・tutorial・休眠資産と全体仕上げ。H01〜H12も最終実機検査まで完了扱いしない。app/native build・CI native compile・Upload・配布・実機確認は未実施。途中commitは引き続き`[skip ci]`、全UI source完成後にまとめてbuildする。
+
+<a id="ui-analysis-material-20261106"></a>
+## 19. 11/6 実装区切り3 — 分析全体
+
+入力群の保存済みhead `2ff59e188be86f392ffd67480cb6447e5daa9b4a` を起点に、A01〜A14の実表示を揃えた。関係48source／資料のlocal bytesを同headのGit blobと照合し、前提・最新weekly・設計と現物から継続。全UI統一と、全source完了後にまとめてbuildするMashの方針は不変。
+
+| 範囲 | 今回の表示変更と保持した条件 |
+|---|---|
+| 分析入口・補助メニュー | 見出し・説明・更新日時・二段tab・未読・履歴操作を同じ文字階層とtonal選択へ。選択／展開を読み上げへ渡し、長いラベルを折返す。共通scrollの左右safe areaと最大幅を確保。今の天気→二段選択→内容→履歴、tutorial ref・操作停止、内部routeと戻り先は維持 |
+| 今の天気・日週月 | 静的cardの強い影、白固定・黄色／茶文字、900太字を整理。主情報と観測メモを分け、本文16/27/400。日付一覧は168幅・内容に応じた高さとし、ラベル・メモを切らない。前回参照、no_observation、温度・中心感情・揺れ・memo.visibleを保持 |
+| 天気詳細・図 | 独立SafeAreaProvider内で、長いメモ・時間帯を縦scroll、期間／時間帯の横scrollと44の×を維持。背景tap／Android戻るも同じcloseへ。週月グラフは固定列が狭幅で溢れない横scrollへ。感情識別色・数値・集計は不変。時間帯リングの補助数値は5感情すべてを0%込みで表示し、全0は従来の不足表示を維持。埋込みhideHeaderは見出しだけを抑制し、期間は残す |
+| 天気履歴・月次マップ履歴 | 配布予定・閲覧範囲・説明・エラーを同じFlatListのheaderへ。初回読込／0件も一覧内に置き、短画面で本文が押し出されない構造に。記録カード・44操作、既読は薄くせず既読trueだけ印へ。月次は月を主情報に、保存日時は別meta。cumulative.v1を一律未読扱いしない。天気の追加取得失敗は元の行とoffsetを保ち再試行を表示 |
+| 現在・当時・比較 | Cumulativeのembeddedは自然高View、全面はScrollViewとし、親との縦scroll二重化を解除。現在・当時を同じsection階層、分析日時と月次保存日時は別metaに。全蓄積／coverage／未解析／編集前補足の説明、3plan共通の現在map、月次2／12／全期間、当時版不変と比較失敗時の保持、owner／seq／保存identityを維持 |
+| 根拠・V2 | 根拠modalは最大幅640・角丸24・内側20・本文scroll＋閉じる。思考／行動／本人補足、分析後編集の注意と通信失敗を区分し、原文を無加工表示。V2 nodeの読み上げgroup化を外し、子の根拠buttonへ到達可能に。edgeの無方向／明記順序と原因でない説明、unknown／conflictを保持 |
+| 旧保存map・旧描画 | WatashiMapRenderer／Deepへ実uiと明示roleを渡し、5構成部品の本文・役割・ルート・分かれ道・未観測を同じ型へ。固定118幅の説明列と3列比較は縦へ。役割matrixの横scroll・score／dotは維持。Legacy Generate／Viewerのmode・tier・version分岐・アンカー移動、非表示mode／PDF／CrossLinkを保持し、保存内容を新累積へ置換しない |
+| 休眠資産 | AnalysisTop等の共通メニュー資産と、AnalysisScreen内の未接続helperのstyleも統一。呼出・routeを復活させず、ブランド書体と図の点記号は操作文字から分離 |
+
+製品16file：`components/selfStructure/{CumulativeWatashiMapView,SelfStructureDeepRenderer,WatashiMapRenderer,WatashiMapV2Renderer}.js`、`screens/{AnalysisContentFirstScreen,AnalysisMenuCommon,AnalysisReportHistoryScreen,AnalysisReportViewerScreen,AnalysisScreen,SelfStructureReportGenerateScreen,SelfStructureReportHistoryScreen,SelfStructureReportViewerScreen}.js`、`screens/analysisReport/{AnalysisReportUpgradeCard,KokoroWeatherCurrentCard,KokoroWeatherDetailModal,KokoroWeatherForecastStrip}.js`。既存分析test2fileは共通button・実tokens・safe areaへのharness適応と、埋込みscroll／根拠操作の回帰assertを追加。新製品file・依存定義・route・公開API／DB／AI／意味型・保存本文・作品画像変更なし。構造ownerは既存のまま。
+
+検証：前回の7入口＋累積／旧V2の既存2入口を同時実行し、**478 PASS／FAIL0／SKIP0**。追加31件はowner・tier変更、遅延応答、月次・比較失敗、保存同一性、根拠closeと本文／artifact一致等の実React検査。既存assertへ、embeddedの縦ScrollViewゼロと根拠button到達・同じnode_refの引渡しを追加。13style ownerの615 role×theme組合せでサイズ・行間・太さを実関数から照合。変更JS18fileのBabel parseとdiff空白検査成功。React Native・Auth／HTTPは代替を含み、実端末の描画・ジェスチャー・読み上げ成功の証明ではない。
+
+補助reviewで、残っていたDeep棒の固定色、戻る左右幅の非対称、空表示のrole漏れを修正。検証依存の通常取得はtransitive packageの404となり、既存の同version React／renderer／Babel coreと、正本に固定されたpreset／pluginを一時環境で組み合わせて実行。製品／test-toolsの依存定義は変更しない。
+
+**次の作業：Piece・socialの全表示。** その後アカウント・設定・契約、案内・tutorial・残る休眠資産、全体横断を続ける。全画面source完成までbuildを保留し、途中commitは`[skip ci]`。今回のapp/native build・CI native compile・Upload・配布・本人端末確認・Render／Supabase／GPU操作は0。TECHNICAL_CREDITはsourceと限定検証に限り、全UI完成・実機合格・分析品質向上へ換算しない。

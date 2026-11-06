@@ -4,7 +4,6 @@ import {
   Alert,
   FlatList,
   RefreshControl,
-  SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -13,6 +12,7 @@ import {
   Linking,
   Share,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import CocolonBackButton from "../components/CocolonBackButton";
 import { supabase } from "../lib/supabase";
@@ -293,6 +293,7 @@ export default function AnalysisReportHistoryScreen({
   const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [loadingMore, setLoadingMore] = useState(false);
+  const [loadMoreError, setLoadMoreError] = useState(false);
   const [hasMore, setHasMore] = useState(false);
   const [nextOffset, setNextOffset] = useState(null);
   const [errorMsg, setErrorMsg] = useState("");
@@ -346,54 +347,7 @@ export default function AnalysisReportHistoryScreen({
     return false;
   }, [normalizedReportType]);
 
-  const themed = useMemo(() => {
-    if (!isDark) return {};
-    return {
-      container: { backgroundColor: colors.BG_SILVER },
-      header: {
-        backgroundColor: colors.BG_SILVER,
-        borderBottomColor: colors.CARD_BORDER,
-      },
-      backText: { color: colors.TEXT_ON_LIGHT },
-      headerTitle: { color: colors.TEXT_ON_LIGHT },
-
-      scheduleCard: {
-        backgroundColor: colors.PANEL_BG,
-        borderColor: colors.CARD_BORDER,
-      },
-      scheduleTitle: { color: colors.TEXT_ON_LIGHT },
-      scheduleLine: { color: colors.TEXT_ON_LIGHT },
-      scheduleHint: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
-
-      generateBtn: {
-        backgroundColor: colors.BORDER_GOLD,
-        borderColor: colors.BORDER_GOLD,
-      },
-      generateText: { color: colors.ACCENT_TEXT },
-
-      // paywall CTA
-      paywallBtn: {
-        backgroundColor: colors.BORDER_GOLD,
-        borderColor: colors.BORDER_GOLD,
-      },
-      paywallBtnText: { color: colors.ACCENT_TEXT },
-
-      row: {
-        backgroundColor: colors.PANEL_BG,
-        borderBottomColor: colors.CARD_BORDER,
-      },
-      rowTitle: { color: colors.TEXT_ON_LIGHT },
-      rowSub: { color: colors.TEXT_ON_LIGHT },
-      rowMeta: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
-
-      iconBtn: {
-        backgroundColor: colors.PANEL_BG,
-        borderColor: colors.CARD_BORDER,
-      },
-      iconBtnText: { color: colors.TEXT_ON_LIGHT },
-      listEmptyText: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
-    };
-  }, [isDark, colors, ui]);
+  const themed = {};
 
   const title = `${TYPE_JP[normalizedReportType] || "こころ天気"}の履歴`;
   const load = useCallback(async () => {
@@ -407,6 +361,7 @@ export default function AnalysisReportHistoryScreen({
     });
 
     setErrorMsg("");
+    setLoadMoreError(false);
     setLoading(true);
     try {
       const accessToken = await getAccessToken();
@@ -510,9 +465,10 @@ export default function AnalysisReportHistoryScreen({
   const loadMore = useCallback(async () => {
     if (loading || refreshing || loadingMore || !hasMore || nextOffset == null) return;
     setLoadingMore(true);
+    setLoadMoreError(false);
     try {
       const accessToken = await getAccessToken();
-      if (!accessToken) return;
+      if (!accessToken) { setLoadMoreError(true); return; }
       const ready = await fetchReadyReports(accessToken, normalizedReportType, {
         limit: READY_PAGE_LIMIT,
         offset: nextOffset,
@@ -551,6 +507,7 @@ export default function AnalysisReportHistoryScreen({
       }
     } catch (e) {
       console.warn("AnalysisReportHistoryScreen: loadMore failed", e);
+      setLoadMoreError(true);
     } finally {
       setLoadingMore(false);
     }
@@ -713,17 +670,7 @@ export default function AnalysisReportHistoryScreen({
   );
   const showHistoryRetentionLabel = !tierLoading && !!historyRetentionLabel;
 
-  return (
-    <SafeAreaView style={[styles.container, themed.container]}>
-      {/* ヘッダー */}
-      <View style={[styles.header, themed.header]}>
-        <CocolonBackButton onPress={onBack} style={[styles.backBtn, { width: 70 }]} />
-
-        <Text style={[styles.headerTitle, themed.headerTitle, { color: colors.TITLE_GOLD }]}>{headerLabel}</Text>
-
-        <View style={{ width: 70 }} />
-      </View>
-
+  const listHeader = (<View>
       {/* 操作 */}
       <View style={styles.topActions}>
         <View style={[styles.scheduleCard, themed.scheduleCard]}
@@ -790,13 +737,22 @@ export default function AnalysisReportHistoryScreen({
       {/* エラー */}
       {errorMsg ? <Text style={styles.error}>取得エラー: {errorMsg}</Text> : null}
 
+  </View>);
+
+  return (
+    <SafeAreaView edges={["left", "right"]} style={[styles.container, themed.container]}>
+      {/* ヘッダー */}
+      <View style={[styles.header, themed.header]}>
+        <CocolonBackButton onPress={onBack} style={styles.backBtn} />
+
+        <Text style={[styles.headerTitle, themed.headerTitle, { color: colors.TITLE_GOLD }]}>{headerLabel}</Text>
+
+        <View style={{ width: 44 }} />
+      </View>
+
       {/* リスト */}
-      {loading && rows.length === 0 ? (
-        <View style={styles.center}>
-          <ActivityIndicator size="small" color={isDark ? colors.TEXT_ON_LIGHT : undefined} />
-        </View>
-      ) : (
-        <FlatList
+      <FlatList
+          ListHeaderComponent={listHeader}
           data={rows}
           keyExtractor={(item) => String(item.id)}
           refreshControl={
@@ -807,10 +763,10 @@ export default function AnalysisReportHistoryScreen({
               colors={[colors.TEXT_ON_LIGHT]}
             />
           }
-          contentContainerStyle={{ paddingVertical: 8 }}
+          contentContainerStyle={styles.listContent}
           ListEmptyComponent={
-            !errorMsg ? (
-              <Text style={[{ padding: 16, color: ui?.text?.description ?? colors.TEXT_SUBTLE }, themed.listEmptyText]}>
+            loading ? <ActivityIndicator accessibilityLabel="履歴を読み込み中" color={colors.TITLE_GOLD} style={{ padding: 24 }} /> : !errorMsg ? (
+              <Text style={[{ ...ui.typography.description, padding: 16, color: ui?.text?.description ?? colors.TEXT_SUBTLE }, themed.listEmptyText]}>
                 まだ履歴がありません（配布タイミングになると自動で追加されます）\n次回配布: {nextJstLabel}
               </Text>
             ) : null
@@ -822,17 +778,19 @@ export default function AnalysisReportHistoryScreen({
                 themed.row,
                 readIdSet.has(String(item.id)) && styles.rowRead,
               ]}
+              accessibilityRole="button"
               onPress={() => handleOpen(item.id)}
               activeOpacity={0.85}
             >
               <View style={{ flex: 1 }}>
-                <Text style={[styles.rowTitle, themed.rowTitle]} numberOfLines={1}>
+                {readIdSet.has(String(item.id)) ? <Text style={[styles.rowMeta, { color: colors.TITLE_GOLD }]}>既読</Text> : null}
+                <Text style={[styles.rowTitle, themed.rowTitle]}>
                   {item.title || title}
                 </Text>
-                <Text style={[styles.rowSub, themed.rowSub]} numberOfLines={1}>
+                <Text style={[styles.rowSub, themed.rowSub]}>
                   {formatRangeJP(item.period_start, item.period_end, normalizedReportType)}
                 </Text>
-                <Text style={[styles.rowMeta, themed.rowMeta]} numberOfLines={1}>
+                <Text style={[styles.rowMeta, themed.rowMeta]}>
                   作成: {formatDateJP(item.generated_at || item.updated_at || item.period_end)}
                 </Text>
               </View>
@@ -846,17 +804,20 @@ export default function AnalysisReportHistoryScreen({
                 <ActivityIndicator size="small" color={isDark ? colors.TEXT_ON_LIGHT : undefined} />
               </View>
             ) : hasMore ? (
+              <View>
+                {loadMoreError ? <Text accessibilityLiveRegion="polite" style={styles.error}>続きの履歴を取得できませんでした。表示中の履歴を保ったまま再試行できます。</Text> : null}
               <TouchableOpacity
                 style={styles.loadMoreBtn}
                 onPress={loadMore}
+                accessibilityRole="button" accessibilityLabel="さらに履歴を読み込む"
                 activeOpacity={0.85}
               >
-                <Text style={[styles.loadMoreText, themed.rowMeta]}>さらに表示</Text>
+                <Text style={[styles.loadMoreText, themed.rowMeta]}>{loadMoreError ? "もう一度読み込む" : "さらに表示"}</Text>
               </TouchableOpacity>
+              </View>
             ) : <View style={styles.listFooterSpacer} />
           }
         />
-      )}
     </SafeAreaView>
   );
 }
@@ -864,106 +825,206 @@ export default function AnalysisReportHistoryScreen({
 function createStyles(COLORS, ui) {
   const text = ui?.text || {};
   return StyleSheet.create(applyTypographyTokens({
-  container: { flex: 1, backgroundColor: "#fff" },
+  listContent: { width: "100%", maxWidth: 680, alignSelf: "center", paddingHorizontal: 20, paddingBottom: 24 },
+  container: {
+      flex: 1,
+      backgroundColor: COLORS.BG_SILVER,
+    },
   header: {
-    paddingTop: 10,
-    paddingHorizontal: 12,
-    paddingBottom: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#E5E7EB",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  backBtn: { flexDirection: "row", alignItems: "center", width: 70 },
-  backText: { marginLeft: 2, color: text.description ?? COLORS.TEXT_SUBTLE, fontSize: 13, fontWeight: "600" },
-  headerTitle: { fontSize: 20, fontWeight: "800", color: text.primary ?? COLORS.TEXT_ON_LIGHT },
+      paddingTop: 10,
+      paddingHorizontal: 20,
+      paddingBottom: 10,
+      borderBottomWidth: 1,
+      borderBottomColor: COLORS.CARD_BORDER,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      width: "100%",
+      maxWidth: 640,
+      alignSelf: "center",
+    },
+  backBtn: {
+      flexDirection: "row",
+      alignItems: "center",
+      width: 44,
+      minWidth: 44,
+      minHeight: 44,
+      flexShrink: 0,
+      justifyContent: "center",
+    },
+  backText: {
+      marginLeft: 2,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+    },
+  headerTitle: {
+      color: COLORS.TEXT_ON_LIGHT,
+      flex: 1,
+      flexShrink: 1,
+      minWidth: 0,
+      marginHorizontal: 8,
+      letterSpacing: 0,
+      textAlign: "center",
+    },
 
-  topActions: { paddingHorizontal: 12, paddingTop: 10, paddingBottom: 8 },
+  topActions: {
+      paddingHorizontal: 0,
+      paddingTop: 16,
+      paddingBottom: 12,
+      width: "100%",
+      maxWidth: 640,
+      alignSelf: "center",
+    },
   historyRetentionText: {
-    marginTop: 8,
-    fontSize: 12,
-    fontWeight: "600",
-    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-  },
+      marginTop: 8,
+      color: COLORS.TEXT_ON_LIGHT,
+    },
 
   scheduleCard: {
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    borderRadius: 12,
-    backgroundColor: "#F9FAFB",
-    padding: 12,
-  },
-  scheduleTitle: { fontSize: 12, fontWeight: "800", color: text.primary ?? COLORS.TEXT_ON_LIGHT, marginBottom: 6 },
-  scheduleLine: { fontSize: 12, color: text.description ?? COLORS.TEXT_SUBTLE, marginBottom: 2 },
-  scheduleHint: { fontSize: 11, color: text.description ?? COLORS.TEXT_SUBTLE, marginTop: 6 },
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      borderRadius: 24,
+      backgroundColor: COLORS.PANEL_BG,
+      padding: 20,
+    },
+  scheduleTitle: {
+      color: COLORS.TEXT_ON_LIGHT,
+      marginBottom: 8,
+    },
+  scheduleLine: {
+      color: COLORS.TEXT_SUBTLE,
+      marginBottom: 4,
+    },
+  scheduleHint: {
+      color: COLORS.TEXT_SUBTLE,
+      marginTop: 6,
+    },
 
   generateBtn: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 10,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    backgroundColor: "#F3F4F6",
-  },
-  generateText: { fontSize: 13, color: text.primary ?? COLORS.TEXT_ON_LIGHT, fontWeight: "700" },
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      paddingVertical: 12,
+      borderRadius: 24,
+      borderWidth: 1,
+      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.GOLD_BUTTON,
+      minHeight: 44,
+      maxWidth: 520,
+      paddingHorizontal: 16,
+    },
+  generateText: {
+      color: COLORS.ACCENT_TEXT,
+      flexShrink: 1,
+      textAlign: "center",
+    },
 
   // paywall CTA
   paywallBtn: {
-    marginTop: 10,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 10,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    backgroundColor: "#F3F4F6",
-  },
+      marginTop: 10,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      paddingVertical: 12,
+      borderRadius: 24,
+      borderWidth: 1,
+      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.GOLD_BUTTON,
+      minHeight: 44,
+      maxWidth: 520,
+      paddingHorizontal: 16,
+    },
   paywallBtnText: {
-    fontSize: 13,
-    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-    fontWeight: "800",
-    marginRight: 2,
-  },
+      color: COLORS.ACCENT_TEXT,
+      marginRight: 8,
+      flexShrink: 1,
+      textAlign: "center",
+    },
 
-  error: { paddingHorizontal: 12, paddingTop: 6, paddingBottom: 6, color: "#B91C1C" },
+  error: {
+      paddingHorizontal: 0,
+      color: COLORS.ERROR,
+      width: "100%",
+      maxWidth: 640,
+      alignSelf: "center",
+      paddingVertical: 12,
+    },
   center: { flex: 1, alignItems: "center", justifyContent: "center" },
 
   row: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 14,
-    paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: "#F3F4F6",
-  },
+      flexDirection: "row",
+      alignItems: "center",
+      paddingHorizontal: 20,
+      paddingVertical: 16,
+      borderBottomWidth: 1,
+      borderBottomColor: COLORS.CARD_BORDER,
+      width: "100%",
+      maxWidth: 640,
+      alignSelf: "center",
+      minHeight: 44,
+      backgroundColor: COLORS.PANEL_BG,
+      gap: 12,
+      borderWidth: 1, borderColor: COLORS.CARD_BORDER, borderRadius: 24, marginBottom: 12,
+    },
   // ✅ 既読の行は少し暗めに（未読が目立つ）
   rowRead: {
-    opacity: 0.55,
-  },
-  rowTitle: { fontSize: 14, fontWeight: "800", color: text.primary ?? COLORS.TEXT_ON_LIGHT },
-  rowSub: { marginTop: 2, fontSize: 12, color: text.description ?? COLORS.TEXT_SUBTLE },
-  rowMeta: { marginTop: 2, fontSize: 11, color: text.description ?? COLORS.TEXT_SUBTLE },
+
+    },
+  rowTitle: {
+      color: COLORS.TEXT_ON_LIGHT,
+      flexShrink: 1,
+      minWidth: 0,
+    },
+  rowSub: {
+      marginTop: 4,
+      color: COLORS.TEXT_SUBTLE,
+    },
+  rowMeta: {
+      marginTop: 4,
+      color: COLORS.TEXT_SUBTLE,
+    },
   listFooter: { paddingVertical: 16, alignItems: "center", justifyContent: "center" },
   listFooterSpacer: { height: 12 },
-  loadMoreBtn: { marginHorizontal: 16, marginTop: 8, marginBottom: 16, borderWidth: 1, borderColor: "#E5E7EB", borderRadius: 12, paddingVertical: 10, alignItems: "center", justifyContent: "center" },
-  loadMoreText: { fontSize: 13, fontWeight: "700", color: text.description ?? COLORS.TEXT_SUBTLE },
+  loadMoreBtn: {
+      marginHorizontal: 0,
+      marginTop: 8,
+      marginBottom: 16,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      borderRadius: 24,
+      paddingVertical: 12,
+      alignItems: "center",
+      justifyContent: "center",
+      width: "90%",
+      maxWidth: 520,
+      alignSelf: "center",
+      minHeight: 44,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      paddingHorizontal: 16,
+    },
+  loadMoreText: {
+      color: COLORS.ON_SURFACE_TONAL,
+      textAlign: "center",
+      flexShrink: 1,
+    },
 
   iconBtn: {
-    marginLeft: 10,
-    marginRight: 10,
-    paddingHorizontal: 8,
-    paddingVertical: 6,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  iconBtnText: { marginTop: 2, fontSize: 10, color: text.primary ?? COLORS.TEXT_ON_LIGHT, fontWeight: "700" },
-  }, ui));
+      marginLeft: 10,
+      marginRight: 10,
+      paddingHorizontal: 8,
+      paddingVertical: 6,
+      borderRadius: 16,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.PANEL_BG,
+      alignItems: "center",
+      justifyContent: "center",
+      minWidth: 44,
+      minHeight: 44,
+    },
+  iconBtnText: {
+      marginTop: 2,
+      color: COLORS.TEXT_ON_LIGHT,
+      textAlign: "center",
+    },
+  }, ui, {"backText":"button","headerTitle":"screenTitle","historyRetentionText":"description","scheduleTitle":"sectionTitle","scheduleLine":"description","scheduleHint":"description","generateText":"button","paywallBtnText":"button","error":"body","rowTitle":"body","rowSub":"description","rowMeta":"meta","loadMoreText":"button","iconBtnText":"button"}));
 }

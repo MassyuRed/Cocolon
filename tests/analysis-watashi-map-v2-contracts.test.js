@@ -32,7 +32,7 @@ function moduleLoader(extraMocks = {}) {
     '@react-navigation/native': { useNavigation: () => ({ navigate() {} }) },
     '../theme/ThemeContext': { useTheme: () => ({ themeName: 'light', colors: {} }) },
     '../SubscriptionContext': { useSubscription: () => subscription },
-    '../ui/uiTokens': { makeUiTokens: () => ({ text: {} }) },
+    'react-native-safe-area-context': { SafeAreaView: 'SafeAreaView' },
     '../ui/applyTypographyTokens': { applyTypographyTokens: (s) => s },
     '../components/CocolonBackButton': () => null,
     '../components/selfStructure/CumulativeWatashiMapView': () => null,
@@ -433,7 +433,8 @@ test('private, future and malformed v2 never enter legacy normalization', () => 
 
 test('renderer shows actual graph, uncertainty and matching text without making cooccurrence directional', () => {
   const Renderer = moduleLoader()('components/selfStructure/WatashiMapV2Renderer.js').default;
-  const render = TestRenderer.create(React.createElement(Renderer, { contentJson: fixtures[0].projection }));
+  const opened = [];
+  const render = TestRenderer.create(React.createElement(Renderer, { contentJson: fixtures[0].projection, onOpenEvidence: ref => opened.push(ref) }));
   const labels = render.root.findAllByType('Text').map((n) => n.props.children);
   assert.ok(labels.includes(fixtures[0].text_projection.text));
   assert.ok(labels.includes('まだ確定していない部分'));
@@ -442,6 +443,11 @@ test('renderer shows actual graph, uncertainty and matching text without making 
   assert.equal(edge.length, 1);
   assert.match(edge[0].props.accessibilityLabel, /順序や原因は確定していません/);
   assert.ok(!JSON.stringify(render.toJSON()).includes('LEGACY_RENDERER'));
+  const evidenceButtons = render.root.findAllByType('TouchableOpacity');
+  assert.ok(evidenceButtons.length > 0);
+  assert.notEqual(evidenceButtons[0].parent.props.accessible, true, 'node grouping must not hide its evidence action');
+  evidenceButtons[0].props.onPress();
+  assert.deepEqual(opened, [fixtures[0].projection.nodes[0].node_ref]);
   render.unmount();
 });
 

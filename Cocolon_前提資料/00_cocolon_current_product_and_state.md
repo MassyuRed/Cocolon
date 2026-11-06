@@ -176,7 +176,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 | 機能 | 目的・現在の接続 | 未確認・境界 |
 |---|---|---|
-| UI採用方針（11/6） | **全画面を例外なく今回のMaterialデザインへ統一することはMash確定。** 6画面群で実装・検査・GitHub保存し、全画面source完成後にビルドをまとめる。[全画面設計と実装現在地](designs/ui/material-ui-design.md#18-116-実装区切り2--入力応答問い履歴) | 共通・起動・認証は683c7f6へ保存・全21file読戻し済み。続いて入力・応答・問い・入力／問い履歴等15fileを変更（Piece2callerは共通button無効面への子文字修正のみ）、本文400、選択面、長文・横画面／keyboard時のscroll・safe area、失敗／0件の区別と同じpage再試行を実装。対象447 PASS、変更JS18file解析・diff確認。分析全体、Piece・social、アカウント・設定、案内・tutorial・休眠資産の個別仕上げは残る。途中UI commitは[skip ci]でnative compileも保留。ビルド／配布／実機表示は未実施。作品画像・AI／分析内容・購入／公開契約は保持 |
+| UI採用方針（11/6） | **全画面を例外なく今回のMaterialデザインへ統一することはMash確定。** 6画面群で実装・検査・GitHub保存し、全画面source完成後にビルドをまとめる。[全画面設計と実装現在地](designs/ui/material-ui-design.md#ui-analysis-material-20261106) | 共通・起動・認証と入力群は683c7f6／2ff59e1へ保存・全変更blob読戻し済み。続いて分析の入口・天気／履歴／詳細・現在／月次／比較・根拠・旧保存描画を製品16fileで統一。既存9入口478 PASS、変更JS18file解析、3themeの615文字role照合。分析内容・プラン判定・保存版・未読・本人境界を維持。残る個別仕上げはPiece・social、アカウント・設定、案内・tutorial・休眠資産と全体横断。途中UI commitは[skip ci]でnative compileも保留。ビルド／配布／実機表示は未実施。作品画像・AI／分析内容・購入／公開契約は保持 |
 | 起動・認証 | 登録／ログイン／メール確認再送／再設定／復旧。`App.js`→`RootNavigator`→`MainTabs`→Input／Analysis／Piece／Settingsの4 Stack（Ranking入口は撤去済み） | native認証リンク・cold／warm復帰の実成立は別確認。旧巨大App／MyModel画面名から現在を復元しない |
 | 今日の問い・回答履歴 | current／answers／history／PATCH／settingsを接続。日常メモと別に考えを記録し、修正・再読 | Emlis任意問いと別機能。旧自己構造素材との接続を、V2全source採用済みへ拡張しない |
 | 投稿・他者のPiece | 通常`PieceEntryScreen`→`NexusScreen`。本人／フォロー中／特定相手、並替・更新・本人投稿削除。linkPayload時のみ`PieceScreen` | 公開条件と新Piece保存成立は別。旧Q&A投稿と新canonical recordを混同しない |

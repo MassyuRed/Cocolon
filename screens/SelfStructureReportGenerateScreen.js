@@ -308,33 +308,7 @@ const [loading, setLoading] = useState(true);
   const [meta, setMeta] = useState(null);
 
 
-  const themed = useMemo(() => {
-    if (!isDark) return {};
-    return {
-      container: { backgroundColor: colors.BG_SILVER },
-
-      headerRow: { backgroundColor: colors.BG_SILVER },
-      headerTitle: { color: colors.TEXT_ON_LIGHT },
-
-      smallBtn: {
-        borderColor: colors.CARD_BORDER,
-        backgroundColor: colors.PANEL_BG,
-      },
-      smallBtnText: { color: colors.TEXT_ON_LIGHT },
-
-      title: { color: colors.TEXT_ON_LIGHT },
-
-      errorText: { color: "#FCA5A5" },
-
-      bodyCard: {
-        borderColor: colors.CARD_BORDER,
-        backgroundColor: colors.PANEL_BG,
-      },
-      sectionLabel: { color: colors.TEXT_ON_LIGHT },
-      p: { color: colors.TEXT_ON_LIGHT },
-      empty: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
-    };
-  }, [isDark, colors, ui]);
+  const themed = {};
 
   const reportTitle = titleOverride || "今のわたしマップ";
 
@@ -622,7 +596,7 @@ const run = useCallback(async ({ force = false } = {}) => {
                 ? colors.TEXT_SUBTLE
                 : ui?.text?.description ?? colors.TEXT_SUBTLE
               : active
-              ? "#FFFFFF"
+              ? colors.ON_SURFACE_TONAL
               : isDark
               ? colors.TEXT_ON_LIGHT
               : ui?.text?.primary ?? colors.TEXT_ON_LIGHT;
@@ -630,13 +604,14 @@ const run = useCallback(async ({ force = false } = {}) => {
             return (
               <TouchableOpacity
                 key={m}
+                accessibilityRole="button" accessibilityState={{ selected: active }}
                 style={[
                   styles.modeBtn,
                   isDark && themed.smallBtn,
                   active && styles.modeBtnActive,
                   active && {
-                    backgroundColor: colors.GOLD_BUTTON || "#D4AF37",
-                    borderColor: colors.GOLD_BUTTON_BORDER || "#C9A227",
+                    backgroundColor: colors.SURFACE_TONAL,
+                    borderColor: colors.ON_SURFACE_TONAL,
                   },
                   !allowed && styles.modeBtnDisabled,
                 ]}
@@ -755,7 +730,7 @@ const run = useCallback(async ({ force = false } = {}) => {
   );
 
   if (embedded) {
-    return <View style={[styles.container, themed.container]}>{bodyContent}</View>;
+    return <View style={[styles.container, themed.container, { flex: 0, paddingHorizontal: 0, maxWidth: 640 }]}>{bodyContent}</View>;
   }
 
   return (
@@ -799,121 +774,163 @@ const run = useCallback(async ({ force = false } = {}) => {
 function createStyles(COLORS, ui) {
   const text = ui?.text || {};
   return StyleSheet.create(applyTypographyTokens({
-  container: { flex: 1, backgroundColor: "#fff" },
+  container: {
+      flex: 1,
+      backgroundColor: COLORS.BG_SILVER,
+      width: '100%',
+      maxWidth: 680,
+      alignSelf: 'center',
+      paddingHorizontal: 20,
+    },
 
   headerRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: 12,
-  },
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      padding: 0,
+      paddingTop: 12,
+      paddingBottom: 16,
+      flexWrap: 'wrap',
+      gap: 12,
+    },
   backBtn: {
-    width: 70,
-    alignItems: "flex-start",
-    justifyContent: "center",
-    paddingVertical: 4,
-  },
+      width: 70,
+      alignItems: "flex-start",
+      justifyContent: "center",
+      paddingVertical: 0,
+      minWidth: 44,
+      minHeight: 44,
+    },
 
-  headerRight: { flexDirection: "row", alignItems: "center" },
+  headerRight: {
+      flexDirection: "row",
+      alignItems: "center",
+      flexWrap: 'wrap',
+      gap: 8,
+    },
   smallBtn: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginLeft: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 6,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    backgroundColor: "#F9FAFB",
-  },
+      flexDirection: "row",
+      alignItems: "center",
+      marginLeft: 10,
+      paddingHorizontal: 14,
+      paddingVertical: 10,
+      borderRadius: 24,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      minHeight: 44,
+    },
   smallBtnText: {
-    marginLeft: 6,
-    fontSize: 12,
-    fontWeight: "700",
-    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-  },
+      marginLeft: 6,
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+    },
 
   headerTitle: {
-    fontSize: 26,
-    lineHeight: 32,
-    fontWeight: "800",
-    letterSpacing: 0.6,
-    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-    textAlign: "center",
-    marginBottom: 10,
-    paddingHorizontal: 16,
-  },
+      letterSpacing: 0,
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      textAlign: "center",
+      marginBottom: 16,
+      paddingHorizontal: 0,
+    },
 
   // 🧭 mode selector
   modeCard: {
-    display: "none",
-    marginHorizontal: 12,
-    marginBottom: 10,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    borderRadius: 12,
-    backgroundColor: "#FFFFFF",
-    padding: 12,
-  },
+      display: "none",
+      marginHorizontal: 0,
+      marginBottom: 16,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      borderRadius: 24,
+      backgroundColor: COLORS.FIELD_BG,
+      padding: 20,
+    },
   modeHeaderRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: 10,
-  },
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      marginBottom: 10,
+      flexWrap: 'wrap',
+      gap: 8,
+    },
   modeTitle: {
-    fontSize: 13,
-    fontWeight: "800",
-    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-  },
-  modeTierText: { fontSize: 11, color: text.description ?? COLORS.TEXT_SUBTLE, fontWeight: "700" },
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+    },
+  modeTierText: {
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+    },
   modeButtonsRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: 'flex-start',
+      flexWrap: 'wrap',
+      gap: 8,
+    },
   modeBtn: {
-    flex: 1,
-    marginHorizontal: 4,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 9,
-    paddingHorizontal: 10,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    backgroundColor: "#F9FAFB",
-  },
+      marginHorizontal: 0,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      paddingVertical: 10,
+      paddingHorizontal: 14,
+      borderRadius: 24,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      flexShrink: 1,
+      minHeight: 44,
+    },
   modeBtnActive: {
-    backgroundColor: "#D4AF37",
-    borderColor: "#C9A227",
-  },
-  modeBtnDisabled: { opacity: 0.45 },
-  modeBtnText: { fontSize: 12, fontWeight: "900", color: text.primary ?? COLORS.TEXT_ON_LIGHT },
-  modeBtnTextActive: { color: "#FFFFFF" },
-  modeBtnTextDisabled: { color: text.subtle ?? COLORS.TEXT_SUBTLE },
-  modeHint: { marginTop: 8, fontSize: 11, lineHeight: 16, color: text.description ?? COLORS.TEXT_SUBTLE },
-  modeErrorText: { marginTop: 6, fontSize: 11, lineHeight: 16, color: "#B91C1C" },
+      backgroundColor: COLORS.SURFACE_TONAL,
+      borderColor: COLORS.ON_SURFACE_TONAL,
+    },
+  modeBtnDisabled: {
+      backgroundColor: COLORS.FIELD_BG,
+      borderColor: COLORS.CARD_BORDER,
+    },
+  modeBtnText: {
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+    },
+  modeBtnTextActive: {
+      color: COLORS.ON_SURFACE_TONAL,
+    },
+  modeBtnTextDisabled: {
+      color: COLORS.TEXT_SUBTLE,
+    },
+  modeHint: {
+      marginTop: 12,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+    },
+  modeErrorText: {
+      marginTop: 8,
+      color: COLORS.ERROR,
+    },
 
-  errorText: { paddingHorizontal: 16, paddingBottom: 8, color: "#B91C1C" },
+  errorText: {
+      paddingHorizontal: 0,
+      paddingBottom: 12,
+      color: COLORS.ERROR,
+    },
 
   bodyCard: {
-    marginHorizontal: 12,
-    marginBottom: 14,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    borderRadius: 12,
-    backgroundColor: "#FFFFFF",
-    padding: 12,
-  },
+      marginHorizontal: 0,
+      marginBottom: 16,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      borderRadius: 24,
+      backgroundColor: COLORS.FIELD_BG,
+      padding: 20,
+    },
   sectionLabel: {
-    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-    fontSize: 12,
-    fontWeight: "800",
-    marginBottom: 8,
-  },
-  p: { color: text.description ?? COLORS.TEXT_SUBTLE, fontSize: 14, lineHeight: 20, marginBottom: 4 },
-  empty: { padding: 12, color: text.description ?? COLORS.TEXT_SUBTLE },
-  }, ui));
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      marginBottom: 12,
+    },
+  p: {
+      color: COLORS.TEXT_ON_LIGHT,
+      marginBottom: 8,
+    },
+  empty: {
+      padding: 16,
+      color: COLORS.TEXT_SUBTLE,
+    },
+  }, ui, {"smallBtnText":"button","headerTitle":"screenTitle","modeTitle":"sectionTitle","modeTierText":"meta","modeBtnText":"button","modeHint":"description","modeErrorText":"description","errorText":"description","sectionLabel":"sectionTitle","p":"body","empty":"description"}));
 }

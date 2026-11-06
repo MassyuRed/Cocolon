@@ -4,7 +4,6 @@ import {
   Alert,
   FlatList,
   RefreshControl,
-  SafeAreaView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -13,6 +12,7 @@ import {
   Linking,
   Share,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import CocolonBackButton from "../components/CocolonBackButton";
 import { apiGet, apiPost } from "../lib/apiClient";
@@ -257,34 +257,7 @@ export default function SelfStructureReportHistoryScreen({
   );
   const showHistoryRetentionLabel = !subscriptionLoading && !!historyRetentionLabel;
 
-  const themed = useMemo(() => {
-    if (!isDark) return {};
-    return {
-      container: { backgroundColor: colors.BG_SILVER },
-      header: {
-        backgroundColor: colors.BG_SILVER,
-        borderBottomColor: colors.CARD_BORDER,
-      },
-      backText: { color: colors.TEXT_ON_LIGHT },
-      headerTitle: { color: colors.TEXT_ON_LIGHT },
-
-      row: {
-        backgroundColor: colors.PANEL_BG,
-        borderBottomColor: colors.CARD_BORDER,
-      },
-      rowTitle: { color: colors.TEXT_ON_LIGHT },
-      rowSub: { color: colors.TEXT_ON_LIGHT },
-      rowMeta: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
-
-      iconBtn: {
-        backgroundColor: colors.PANEL_BG,
-        borderColor: colors.CARD_BORDER,
-      },
-      iconBtnText: { color: colors.TEXT_ON_LIGHT },
-
-      listEmptyText: { color: ui?.text?.description ?? colors.TEXT_SUBTLE },
-    };
-  }, [isDark, colors, ui]);
+  const themed = {};
 
   const title = `${TYPE_LABEL[reportType] || "わたしマップ"}の履歴`;
 
@@ -464,26 +437,7 @@ export default function SelfStructureReportHistoryScreen({
     return `${jp}の履歴`;
   }, [reportType]);
 
-  return (
-    <SafeAreaView style={[styles.container, themed.container]}>
-      {/* ヘッダー */}
-      <View style={[styles.header, themed.header]}>
-        <CocolonBackButton
-          onPress={onBack}
-          style={styles.backBtn}
-          accessibilityLabel="わたしマップの履歴から戻る"
-        />
-
-        <Text
-          style={[styles.headerTitle, themed.headerTitle, { color: colors.TITLE_GOLD }]}
-          numberOfLines={1}
-        >
-          {headerLabel}
-        </Text>
-
-        <View style={styles.headerSide} />
-      </View>
-
+  const listHeader = (<View>
       {/* 履歴保持範囲 */}
       {showHistoryRetentionLabel ? (
         <View style={styles.topActions}>
@@ -497,7 +451,7 @@ export default function SelfStructureReportHistoryScreen({
           </Text>
         </View>
       ) : null}
-      <Text style={[styles.historyRetentionText, { color: colors.TEXT_ON_LIGHT, paddingHorizontal: 16 }]}>
+      <Text style={[styles.historyRetentionText, { color: colors.TEXT_ON_LIGHT, paddingHorizontal: 0 }]}>
         月を選ぶと、その月に保存した当時のマップと現在を見比べられます。プラン変更だけで保存済みの履歴は削除されません。
       </Text>
 
@@ -527,36 +481,46 @@ export default function SelfStructureReportHistoryScreen({
       {/* エラー */}
       {errorMsg ? <Text style={styles.error}>取得エラー: {errorMsg}</Text> : null}
 
+  </View>);
+
+  return (
+    <SafeAreaView edges={["left", "right"]} style={[styles.container, themed.container]}>
+      {/* ヘッダー */}
+      <View style={[styles.header, themed.header]}>
+        <CocolonBackButton
+          onPress={onBack}
+          style={styles.backBtn}
+          accessibilityLabel="わたしマップの履歴から戻る"
+        />
+
+        <Text
+          style={[styles.headerTitle, themed.headerTitle, { color: colors.TITLE_GOLD }]}
+        >
+          {headerLabel}
+        </Text>
+
+        <View style={styles.headerSide} />
+      </View>
+
       {/* リスト */}
-      {subscriptionLoading ? (
-        <View style={styles.center}>
-          <ActivityIndicator size="small" color={isDark ? colors.TEXT_ON_LIGHT : undefined} />
-        </View>
-      ) : !historyAccessible ? null : loading && rows.length === 0 ? (
-        <View style={styles.center}>
-          <ActivityIndicator
-            size="small"
-            color={isDark ? colors.TEXT_ON_LIGHT : undefined}
-          />
-        </View>
-      ) : (
-        <FlatList
-          data={loadedScope === scopeKey ? rows : []}
+      <FlatList
+          ListHeaderComponent={listHeader}
+          data={!subscriptionLoading && historyAccessible && loadedScope === scopeKey ? rows : []}
           keyExtractor={(item) => `${item.snapshot_month || ''}:${item.id}`}
           refreshControl={
-            <RefreshControl
+            !subscriptionLoading && historyAccessible ? <RefreshControl
               refreshing={refreshing}
               onRefresh={onRefresh}
               tintColor={colors.TEXT_ON_LIGHT}
               colors={[colors.TEXT_ON_LIGHT]}
-            />
+            /> : undefined
           }
-          contentContainerStyle={{ paddingVertical: 8 }}
+          contentContainerStyle={styles.listContent}
           ListEmptyComponent={
-            !errorMsg ? (
+            subscriptionLoading || loading ? <ActivityIndicator accessibilityLabel="履歴を読み込み中" color={colors.TITLE_GOLD} style={{ padding: 24 }} /> : historyAccessible && !errorMsg ? (
               <Text
                 style={[
-                  { padding: 16, color: ui?.text?.description ?? colors.TEXT_SUBTLE },
+                  { ...ui.typography.description, padding: 16, color: ui?.text?.description ?? colors.TEXT_SUBTLE },
                   themed.listEmptyText,
                 ]}
               >
@@ -567,24 +531,26 @@ export default function SelfStructureReportHistoryScreen({
           renderItem={({ item }) => (
             <TouchableOpacity
               style={[styles.row, themed.row, item.isRead && styles.rowRead]}
+              accessibilityRole="button"
               onPress={() => handleOpen(item)}
               activeOpacity={0.85}
             >
               <View style={{ flex: 1 }}>
+                {item.isRead ? <Text style={[styles.rowMeta, { color: colors.TITLE_GOLD }]}>既読</Text> : null}
                 <View style={styles.rowTitleLine}>
-                  <Text style={[styles.rowTitle, themed.rowTitle]} numberOfLines={1}>
-                    {item.title || title}
+                  <Text style={[styles.rowTitle, themed.rowTitle]}>
+                    {item.snapshot_month ? `${item.snapshot_month.slice(0, 4)}年${Number(item.snapshot_month.slice(5, 7))}月` : item.title || title}
                   </Text>
                   {item.report_mode_label ? (
                     <Text style={[styles.modeBadge, themed.rowMeta]}>{item.report_mode_label}</Text>
                   ) : null}
                 </View>
                 {formatRangeJP(item.period_start, item.period_end, reportType) ? (
-                  <Text style={[styles.rowSub, themed.rowSub]} numberOfLines={1}>
+                  <Text style={[styles.rowSub, themed.rowSub]}>
                     {formatRangeJP(item.period_start, item.period_end, reportType)}
                   </Text>
                 ) : null}
-                <Text style={[styles.rowMeta, themed.rowMeta]} numberOfLines={1}>
+                <Text style={[styles.rowMeta, themed.rowMeta]}>
                   保存: {formatDateJP(item.captured_at || item.generated_at || item.updated_at || item.period_end)}
                 </Text>
               </View>
@@ -601,10 +567,11 @@ export default function SelfStructureReportHistoryScreen({
               <View style={styles.listFooter}>
                 <ActivityIndicator size="small" color={isDark ? colors.TEXT_ON_LIGHT : undefined} />
               </View>
-            ) : hasMore ? (
+            ) : !subscriptionLoading && historyAccessible && hasMore ? (
               <TouchableOpacity
                 style={styles.loadMoreBtn}
                 onPress={loadMore}
+                accessibilityRole="button" accessibilityLabel="さらに履歴を読み込む"
                 activeOpacity={0.85}
               >
                 <Text style={[styles.loadMoreText, themed.rowMeta]}>さらに表示</Text>
@@ -612,7 +579,6 @@ export default function SelfStructureReportHistoryScreen({
             ) : <View style={styles.listFooterSpacer} />
           }
         />
-      )}
     </SafeAreaView>
   );
 }
@@ -620,128 +586,228 @@ export default function SelfStructureReportHistoryScreen({
 function createStyles(COLORS, ui) {
   const text = ui?.text || {};
   return StyleSheet.create(applyTypographyTokens({
-  container: { flex: 1, backgroundColor: "#fff" },
+  listContent: { width: "100%", maxWidth: 680, alignSelf: "center", paddingHorizontal: 20, paddingBottom: 24 },
+  container: {
+      flex: 1,
+      backgroundColor: COLORS.BG_SILVER,
+    },
   header: {
-    paddingTop: 10,
-    paddingHorizontal: 12,
-    paddingBottom: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#E5E7EB",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  backBtn: { width: 70, alignItems: "flex-start", justifyContent: "center" },
-  backText: { marginLeft: 2, color: text.description ?? COLORS.TEXT_SUBTLE, fontSize: 13, fontWeight: "600" },
-  headerSide: { width: 70 },
+      paddingTop: 10,
+      paddingHorizontal: 20,
+      paddingBottom: 10,
+      borderBottomWidth: 1,
+      borderBottomColor: COLORS.CARD_BORDER,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      width: "100%",
+      maxWidth: 640,
+      alignSelf: "center",
+    },
+  backBtn: {
+      width: 44,
+      alignItems: "flex-start",
+      justifyContent: "center",
+      minWidth: 44,
+      minHeight: 44,
+      flexShrink: 0,
+    },
+  backText: {
+      marginLeft: 2,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+    },
+  headerSide: {
+      width: 44,
+      flexShrink: 0,
+    },
   headerTitle: {
-    flex: 1,
-    marginHorizontal: 10,
-    fontSize: 26,
-    lineHeight: 32,
-    fontWeight: "800",
-    letterSpacing: 0.6,
-    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-    textAlign: "center",
-  },
+      flex: 1,
+      marginHorizontal: 8,
+      letterSpacing: 0,
+      color: COLORS.TEXT_ON_LIGHT,
+      textAlign: "center",
+      flexShrink: 1,
+      minWidth: 0,
+    },
 
-  topActions: { paddingHorizontal: 12, paddingTop: 10, paddingBottom: 8 },
+  topActions: {
+      paddingHorizontal: 0,
+      paddingTop: 16,
+      paddingBottom: 12,
+      width: "100%",
+      maxWidth: 640,
+      alignSelf: "center",
+    },
   historyRetentionText: {
-    marginTop: 0,
-    fontSize: 12,
-    fontWeight: "600",
-    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-  },
+      marginTop: 0,
+      color: COLORS.TEXT_ON_LIGHT,
+    },
   error: {
-    paddingHorizontal: 12,
-    paddingTop: 6,
-    paddingBottom: 6,
-    color: "#B91C1C",
-  },
+      paddingHorizontal: 0,
+      color: COLORS.ERROR,
+      width: "100%",
+      maxWidth: 640,
+      alignSelf: "center",
+      paddingVertical: 12,
+    },
   center: { flex: 1, alignItems: "center", justifyContent: "center" },
 
   accessCard: {
-    marginHorizontal: 14,
-    marginTop: 10,
-    marginBottom: 8,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    borderRadius: 16,
-    backgroundColor: "#FFFBEB",
-    padding: 14,
-  },
-  accessTitle: { fontSize: 16, lineHeight: 22, fontWeight: "900", color: text.primary ?? COLORS.TEXT_ON_LIGHT },
-  accessBody: { marginTop: 6, fontSize: 13, lineHeight: 20, color: text.description ?? COLORS.TEXT_SUBTLE, fontWeight: "600" },
-  accessButtonRow: { flexDirection: "row", flexWrap: "wrap", marginTop: 12 },
+      marginHorizontal: 0,
+      marginTop: 10,
+      marginBottom: 8,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      borderRadius: 24,
+      backgroundColor: COLORS.PANEL_BG,
+      padding: 20,
+      width: "90%",
+      maxWidth: 640,
+      alignSelf: "center",
+    },
+  accessTitle: {
+      color: COLORS.TEXT_ON_LIGHT,
+    },
+  accessBody: {
+      marginTop: 8,
+      color: COLORS.TEXT_SUBTLE,
+    },
+  accessButtonRow: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      marginTop: 12,
+      gap: 8,
+    },
   accessPrimaryButton: {
-    borderRadius: 999,
-    backgroundColor: COLORS.GOLD_BUTTON || "#D4AF37",
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    marginRight: 8,
-    marginBottom: 8,
-  },
-  accessPrimaryButtonText: { fontSize: 12, fontWeight: "900", color: COLORS.ACCENT_TEXT || "#111827" },
+      borderRadius: 24,
+      backgroundColor: COLORS.GOLD_BUTTON,
+      paddingHorizontal: 16,
+      paddingVertical: 12,
+      marginRight: 0,
+      marginBottom: 0,
+      minHeight: 44,
+      maxWidth: "100%",
+      flexShrink: 1,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+  accessPrimaryButtonText: {
+      color: COLORS.ACCENT_TEXT,
+      textAlign: "center",
+      flexShrink: 1,
+    },
   accessSecondaryButton: {
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    backgroundColor: "#FFFFFF",
-    paddingHorizontal: 14,
-    paddingVertical: 8,
-    marginBottom: 8,
-  },
-  accessSecondaryButtonText: { fontSize: 12, fontWeight: "900", color: text.description ?? COLORS.TEXT_SUBTLE },
+      borderRadius: 24,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      paddingHorizontal: 16,
+      paddingVertical: 12,
+      marginBottom: 0,
+      minHeight: 44,
+      maxWidth: "100%",
+      flexShrink: 1,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+  accessSecondaryButtonText: {
+      color: COLORS.ON_SURFACE_TONAL,
+      textAlign: "center",
+      flexShrink: 1,
+    },
 
   row: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 14,
-    paddingVertical: 12,
-    borderBottomWidth: 1,
-    borderBottomColor: "#F3F4F6",
-  },
+      flexDirection: "row",
+      alignItems: "center",
+      paddingHorizontal: 20,
+      paddingVertical: 16,
+      borderBottomWidth: 1,
+      borderBottomColor: COLORS.CARD_BORDER,
+      width: "100%",
+      maxWidth: 640,
+      alignSelf: "center",
+      minHeight: 44,
+      backgroundColor: COLORS.PANEL_BG,
+      gap: 12,
+      borderWidth: 1, borderColor: COLORS.CARD_BORDER, borderRadius: 24, marginBottom: 12,
+    },
   rowRead: {
-    opacity: 0.6,
-  },
-  rowTitleLine: { flexDirection: "row", alignItems: "center", marginRight: 8 },
-  rowTitle: { flex: 1, fontSize: 14, fontWeight: "800", color: text.primary ?? COLORS.TEXT_ON_LIGHT },
+
+    },
+  rowTitleLine: {
+      flexDirection: "column",
+      alignItems: "flex-start",
+      marginRight: 8,
+      gap: 8,
+    },
+  rowTitle: {
+      color: COLORS.TEXT_ON_LIGHT,
+      flexShrink: 1,
+      minWidth: 0,
+    },
   modeBadge: {
-    overflow: "hidden",
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    paddingHorizontal: 7,
-    paddingVertical: 2,
-    fontSize: 10,
-    fontWeight: "800",
-    color: text.description ?? COLORS.TEXT_SUBTLE,
-  },
-  rowSub: { marginTop: 2, fontSize: 12, color: text.description ?? COLORS.TEXT_SUBTLE },
-  rowMeta: { marginTop: 2, fontSize: 11, color: text.description ?? COLORS.TEXT_SUBTLE },
+      borderRadius: 12,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      paddingHorizontal: 10,
+      paddingVertical: 4,
+      color: COLORS.ON_SURFACE_TONAL,
+      maxWidth: "100%",
+      alignSelf: "flex-start",
+      backgroundColor: COLORS.SURFACE_TONAL,
+    },
+  rowSub: {
+      marginTop: 4,
+      color: COLORS.TEXT_SUBTLE,
+    },
+  rowMeta: {
+      marginTop: 4,
+      color: COLORS.TEXT_SUBTLE,
+    },
   listFooter: { paddingVertical: 16, alignItems: "center", justifyContent: "center" },
   listFooterSpacer: { height: 12 },
-  loadMoreBtn: { marginHorizontal: 16, marginTop: 8, marginBottom: 16, borderWidth: 1, borderColor: "#E5E7EB", borderRadius: 12, paddingVertical: 10, alignItems: "center", justifyContent: "center" },
-  loadMoreText: { fontSize: 13, fontWeight: "700", color: text.description ?? COLORS.TEXT_SUBTLE },
+  loadMoreBtn: {
+      marginHorizontal: 0,
+      marginTop: 8,
+      marginBottom: 16,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      borderRadius: 24,
+      paddingVertical: 12,
+      alignItems: "center",
+      justifyContent: "center",
+      width: "90%",
+      maxWidth: 520,
+      alignSelf: "center",
+      minHeight: 44,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      paddingHorizontal: 16,
+    },
+  loadMoreText: {
+      color: COLORS.ON_SURFACE_TONAL,
+      textAlign: "center",
+      flexShrink: 1,
+    },
 
   iconBtn: {
-    marginLeft: 10,
-    marginRight: 10,
-    paddingHorizontal: 8,
-    paddingVertical: 6,
-    borderRadius: 10,
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+      marginLeft: 10,
+      marginRight: 10,
+      paddingHorizontal: 8,
+      paddingVertical: 6,
+      borderRadius: 16,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.PANEL_BG,
+      alignItems: "center",
+      justifyContent: "center",
+      minWidth: 44,
+      minHeight: 44,
+    },
   iconBtnText: {
-    marginTop: 2,
-    fontSize: 10,
-    color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-    fontWeight: "700",
-  },
-  }, ui));
+      marginTop: 2,
+      color: COLORS.TEXT_ON_LIGHT,
+      textAlign: "center",
+    },
+  }, ui, {"backText":"button","headerTitle":"screenTitle","historyRetentionText":"description","error":"body","accessTitle":"sectionTitle","accessBody":"body","accessPrimaryButtonText":"button","accessSecondaryButtonText":"button","rowTitle":"body","modeBadge":"description","rowSub":"description","rowMeta":"meta","loadMoreText":"button","iconBtnText":"button"}));
 }
 

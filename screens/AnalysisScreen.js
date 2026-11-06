@@ -752,7 +752,7 @@ function AnalysisHome({
                 </View>
                 <View style={styles.dashboardSummaryRow}>
                   <Text style={styles.dashboardSummaryLabel}>主要感情</Text>
-                  <Text style={styles.dashboardSummaryValue} numberOfLines={2}>
+                  <Text style={styles.dashboardSummaryValue}>
                     {Array.isArray(weeklySummary.top) && weeklySummary.top.length > 0
                       ? weeklySummary.top.map(([name]) => name).join(" / ")
                       : "—"}
@@ -955,11 +955,11 @@ function QuickLink({
           />
         </View>
         <View style={styles.linkTextWrap}>
-          <Text numberOfLines={1} style={styles.linkLabel}>
+          <Text style={styles.linkLabel}>
             {label}
           </Text>
           {subtitle ? (
-            <Text numberOfLines={1} style={styles.linkSubtitle}>
+            <Text style={styles.linkSubtitle}>
               {subtitle}
             </Text>
           ) : null}
@@ -985,7 +985,10 @@ function createStyles(COLORS, ui) {
 
   return StyleSheet.create(applyTypographyTokens({
     // ルート
-    container: { flex: 1, backgroundColor: COLORS.PANEL_BG },
+    container: {
+      flex: 1,
+      backgroundColor: COLORS.BG_SILVER,
+    },
     safeContent: { flex: 1 },
 
     // Analysis Home 用
@@ -993,7 +996,10 @@ function createStyles(COLORS, ui) {
       paddingTop: 16,
       paddingBottom: 32,
       alignItems: "stretch",
-      paddingHorizontal: 18,
+      paddingHorizontal: 20,
+      width: "100%",
+      maxWidth: 680,
+      alignSelf: "center",
     },
 
     // Emlis ロゴ
@@ -1006,52 +1012,60 @@ function createStyles(COLORS, ui) {
       fontSize: 24,
       color: COLORS.BRAND_GOLD,
       letterSpacing: 1.2,
+      lineHeight: 32,
     },
     appSubtitleText: {
       fontFamily: "CormorantGaramond-Regular",
       marginTop: 4,
-      fontSize: 11,
+      fontSize: 14,
       color: COLORS.BRAND_GOLD,
       letterSpacing: 0.8,
+      lineHeight: 22,
     },
 
     // メインパネル
     panel: {
-      width: "94%",
-      backgroundColor: COLORS.PANEL_BG,
-      borderRadius: 26,
-      borderWidth: 2,
-      borderColor: COLORS.BORDER_GOLD,
-      paddingHorizontal: 18,
+      width: "100%",
+      backgroundColor: COLORS.FIELD_BG,
+      borderRadius: 24,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      paddingHorizontal: 20,
       paddingVertical: 20,
       shadowColor: "#000",
-      shadowOpacity: 0.24,
-      shadowRadius: 26,
-      shadowOffset: { width: 0, height: 16 },
-      elevation: 12,
-      height: PANEL_MIN_HEIGHT,
+      shadowOpacity: ui.shadow.float.shadowOpacity,
+      shadowRadius: ui.shadow.float.shadowRadius,
+      shadowOffset: ui.shadow.float.shadowOffset,
+      elevation: ui.shadow.float.elevation,
+      maxWidth: 640,
+      alignSelf: "center",
     },
     panelHeader: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
       marginBottom: 20,
+      minWidth: 0,
+      flexWrap: "wrap",
+      gap: 12,
     },
     panelTitle: {
-      fontSize: font.title ?? 20,
-      fontWeight: "800",
       color: COLORS.TITLE_GOLD,
-      letterSpacing: 0.8,
+      letterSpacing: 0,
+      minWidth: 0,
+      flexShrink: 1,
     },
 
     panelTitleRow: {
       flexDirection: "row",
       alignItems: "center",
+      minWidth: 0,
+      flexShrink: 1,
     },
     guideButton: {
-      width: 36,
-      height: 32,
-      borderRadius: 12,
+      width: 44,
+      height: 44,
+      borderRadius: 22,
       alignItems: "center",
       justifyContent: "center",
       backgroundColor: COLORS.FIELD_BG,
@@ -1062,9 +1076,11 @@ function createStyles(COLORS, ui) {
 
     section: {
       marginBottom: 18,
+      width: "100%",
+      maxWidth: 640,
+      alignSelf: "center",
     },
     sectionLabel: {
-      fontSize: font.sectionLabel ?? 12,
       color: text.sectionLabel ?? text.primary ?? COLORS.TEXT_ON_LIGHT,
       marginBottom: 8,
     },
@@ -1074,22 +1090,26 @@ function createStyles(COLORS, ui) {
       flexGrow: 1,
       justifyContent: "space-between",
     },
-    linkItem: { marginBottom: 10 },
+    linkItem: {
+      marginBottom: 10,
+      minHeight: 44,
+    },
     linkInner: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
       backgroundColor: COLORS.FIELD_BG,
-      borderRadius: 16,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      paddingHorizontal: 14,
-      paddingVertical: 14,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
       shadowColor: "#000",
-      shadowOpacity: 0.08,
-      shadowRadius: 8,
-      shadowOffset: { width: 0, height: 4 },
-      elevation: 3,
+      shadowOpacity: ui.shadow.float.shadowOpacity,
+      shadowRadius: ui.shadow.float.shadowRadius,
+      shadowOffset: ui.shadow.float.shadowOffset,
+      elevation: ui.shadow.float.elevation,
+      minHeight: 52,
     },
     linkIconWrap: {
       width: 32,
@@ -1102,82 +1122,105 @@ function createStyles(COLORS, ui) {
     },
     linkTextWrap: {
       flex: 1,
+      minWidth: 0,
     },
     linkLabel: {
-      fontSize: font.body ?? 13,
-      fontWeight: "600",
       color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      minWidth: 0,
+      flexShrink: 1,
     },
     linkSubtitle: {
       marginTop: 2,
-      fontSize: font.description ?? 9,
       color: text.description ?? COLORS.TEXT_SUBTLE,
+      minWidth: 0,
+      flexShrink: 1,
     },
 
     dashboardSummaryCard: {
-      borderRadius: 18,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 12,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
+      shadowOpacity: ui.shadow.float.shadowOpacity,
+      shadowRadius: ui.shadow.float.shadowRadius,
+      shadowOffset: ui.shadow.float.shadowOffset,
+      elevation: ui.shadow.float.elevation,
     },
     dashboardSummaryHeader: {
       flexDirection: "row",
       alignItems: "center",
       marginBottom: 8,
+      minWidth: 0,
     },
     dashboardSummaryTitle: {
       flex: 1,
-      fontSize: font.body ?? 14,
-      fontWeight: "800",
       color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      minWidth: 0,
+      flexShrink: 1,
     },
     dashboardSummaryLoadingRow: {
       flexDirection: "row",
       alignItems: "center",
+      minWidth: 0,
+      flexWrap: "wrap",
+      gap: 8,
     },
     dashboardSummaryRow: {
       flexDirection: "row",
       alignItems: "flex-start",
       justifyContent: "space-between",
       paddingVertical: 2,
+      minWidth: 0,
+      flexWrap: "wrap",
+      rowGap: 8,
     },
     dashboardSummaryLabel: {
-      fontSize: font.sectionLabel ?? 12,
       color: text.sectionLabel ?? text.primary ?? COLORS.TEXT_ON_LIGHT,
       paddingRight: 12,
+      minWidth: 0,
+      maxWidth: "100%",
+      flexShrink: 1,
     },
     dashboardSummaryValue: {
       flex: 1,
-      fontSize: font.body ?? 14,
-      fontWeight: "700",
       color: text.primary ?? COLORS.TEXT_ON_LIGHT,
       textAlign: "right",
+      minWidth: 0,
+      maxWidth: "100%",
+      flexShrink: 1,
     },
     dashboardSummaryHint: {
       marginTop: 8,
-      fontSize: font.description ?? 9,
-      lineHeight: 15,
       color: text.description ?? COLORS.TEXT_SUBTLE,
     },
 
     // Dashboard buttons card (Piece-like)
     dashboardButtonsCard: {
-      borderRadius: 18,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 12,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
+      shadowOpacity: ui.shadow.float.shadowOpacity,
+      shadowRadius: ui.shadow.float.shadowRadius,
+      shadowOffset: ui.shadow.float.shadowOffset,
+      elevation: ui.shadow.float.elevation,
     },
     dashboardInfoCard: {
-      borderRadius: 18,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 12,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
+      shadowOpacity: ui.shadow.float.shadowOpacity,
+      shadowRadius: ui.shadow.float.shadowRadius,
+      shadowOffset: ui.shadow.float.shadowOffset,
+      elevation: ui.shadow.float.elevation,
+      minHeight: 52,
     },
     dashboardButtonWrap: {
       position: "relative",
@@ -1190,34 +1233,40 @@ function createStyles(COLORS, ui) {
     dashboardCardTitleRow: {
       flexDirection: "row",
       alignItems: "center",
+      minWidth: 0,
     },
     dashboardCardRight: {
       flexDirection: "row",
       alignItems: "center",
       marginLeft: 8,
+      flexShrink: 0,
     },
     dashboardCardChevron: {
       marginLeft: 6,
     },
     dashboardCardTitle: {
-      fontSize: 13,
-      fontWeight: "900",
       color: text.primary ?? COLORS.TEXT_ON_LIGHT,
       flex: 1,
+      minWidth: 0,
+      flexShrink: 1,
     },
     dashboardUnreadBadge: {
       marginLeft: 8,
+      flexShrink: 0,
     },
     monthlySummaryRow: {
       marginTop: 8,
       flexDirection: "row",
       alignItems: "center",
+      minWidth: 0,
+      flexWrap: "wrap",
+      gap: 8,
     },
     monthlySummaryText: {
       marginTop: 8,
-      fontSize: font.body ?? 13,
       color: text.description ?? COLORS.TEXT_SUBTLE,
-      opacity: 0.9,
+      minWidth: 0,
+      flexShrink: 1,
     },
     dashboardDivider: {
       height: 1,
@@ -1228,18 +1277,21 @@ function createStyles(COLORS, ui) {
     historyInlineLink: {
       flexDirection: "row",
       alignItems: "center",
-      alignSelf: "flex-start",
+      alignSelf: "stretch",
       paddingVertical: 4,
       marginBottom: 8,
+      minHeight: 44,
+      maxWidth: "100%",
     },
     historyInlineText: {
-      fontSize: font.body ?? 13,
-      fontWeight: "700",
-      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      color: COLORS.TITLE_GOLD,
       marginRight: 4,
+      minWidth: 0,
+      flexShrink: 1,
     },
     historyInlineUnreadBadge: {
       marginRight: 6,
+      flexShrink: 0,
     },
 
     // Shared button row (Piece style)
@@ -1247,12 +1299,15 @@ function createStyles(COLORS, ui) {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
+      width: "100%",
+      minWidth: 0,
     },
     goldButtonText: {
-      fontSize: 13,
-      fontWeight: "900",
-      color: "#FFFFFF",
-      letterSpacing: 0.6,
+      color: COLORS.ACCENT_TEXT,
+      letterSpacing: 0.2,
+      minWidth: 0,
+      flexShrink: 1,
+      textAlign: "center",
     },
 
 
@@ -1267,54 +1322,93 @@ function createStyles(COLORS, ui) {
     reportContainer: {
       flex: 1,
       backgroundColor: COLORS.BG_SILVER,
-      paddingHorizontal: 12,
+      paddingHorizontal: 20,
+      width: "100%",
+      maxWidth: 680,
+      alignSelf: "center",
     },
     headerRow: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
-      paddingVertical: 10,
+      paddingVertical: 12,
+      minHeight: 64,
+      gap: 8,
     },
     backBtn: {
       flexDirection: "row",
       alignItems: "center",
       paddingVertical: 4,
       paddingRight: 10,
+      minWidth: 44,
+      minHeight: 44,
+      justifyContent: "center",
     },
     backText: {
       marginLeft: 2,
       color: text.description ?? COLORS.TEXT_SUBTLE,
-      fontSize: 13,
-      fontWeight: "600",
     },
-    reportTitle: { fontSize: 16, fontWeight: "700", color: text.primary ?? COLORS.TEXT_ON_LIGHT },
-    error: { padding: 12, color: "#B91C1C" },
+    reportTitle: {
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      minWidth: 0,
+      flex: 1,
+      flexShrink: 1,
+    },
+    error: {
+      padding: 16,
+      color: COLORS.ERROR,
+      width: "100%",
+      maxWidth: 640,
+      alignSelf: "center",
+      borderRadius: 16,
+      backgroundColor: COLORS.ERROR_BG,
+    },
 
     summaryCard: {
       marginTop: 6,
       marginBottom: 10,
-      padding: 12,
+      padding: 20,
       borderWidth: 1,
-      borderColor: "#E5E7EB",
-      borderRadius: 12,
-      backgroundColor: "#F9FAFB",
+      borderColor: COLORS.CARD_BORDER,
+      borderRadius: 24,
+      backgroundColor: COLORS.FIELD_BG,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
+      shadowOpacity: ui.shadow.float.shadowOpacity,
+      shadowRadius: ui.shadow.float.shadowRadius,
+      shadowOffset: ui.shadow.float.shadowOffset,
+      elevation: ui.shadow.float.elevation,
+      width: "100%",
+      maxWidth: 640,
+      alignSelf: "center",
     },
     summaryTitle: {
-      fontWeight: "700",
       color: text.primary ?? COLORS.TEXT_ON_LIGHT,
       marginBottom: 6,
     },
-    summaryItem: { color: text.description ?? COLORS.TEXT_SUBTLE, marginBottom: 2 },
+    summaryItem: {
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+      marginBottom: 2,
+    },
 
     row: {
-      paddingHorizontal: 12,
-      paddingVertical: 10,
+      paddingHorizontal: 20,
+      paddingVertical: 16,
       borderBottomWidth: 1,
-      borderColor: "#EEE",
+      borderColor: COLORS.CARD_BORDER,
+      minHeight: 44,
     },
-    dateText: { fontWeight: "700", color: text.primary ?? COLORS.TEXT_ON_LIGHT, marginBottom: 4 },
-    emotionsText: { color: text.description ?? COLORS.TEXT_SUBTLE },
-    memoText: { color: text.description ?? COLORS.TEXT_SUBTLE, marginTop: 4, fontStyle: "italic" },
-  }, ui));
+    dateText: {
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      marginBottom: 4,
+    },
+    emotionsText: {
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+    },
+    memoText: {
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+      marginTop: 4,
+    },
+  }, ui, {"panelTitle":"screenTitle","sectionLabel":"sectionTitle","linkLabel":"button","linkSubtitle":"description","dashboardSummaryTitle":"sectionTitle","dashboardSummaryLabel":"description","dashboardSummaryValue":"body","dashboardSummaryHint":"description","dashboardCardTitle":"sectionTitle","monthlySummaryText":"body","historyInlineText":"button","goldButtonText":"button","backText":"button","reportTitle":"screenTitle","error":"body","summaryTitle":"sectionTitle","summaryItem":"body","dateText":"sectionTitle","emotionsText":"description","memoText":"body"}));
 }
 
