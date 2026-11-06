@@ -1,4 +1,4 @@
-**11/6・分析の継続（第9回§233）：API f50acbc／現v10／元a2eを変更せず、未確認の1・2・3記録を新3stop／1load／学習0で比較。旧v7で未対応だった1・2記録も、行動と希望を区別して文章・図へ到達（mapped0/0/3→1/2/3、未解析全0）。完全rootに対象は残り、対象子省略による意味欠落なし。既存成功N3の全graph／本文図を保持。保存projectionは生成入口禁止・mock RPCの現在／月次readerで計12read一致。既知1本文familyの記録数対照で、一般品質・実DB保存・通常採用／本番配置は未成立。** [実結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-target-scope-v10-20261106)。
+**11/6・分析の途中checkpoint（第9回§234）：異内容・カテゴリ・ordinary本人補足の完全合成CPU10構成を確認。カテゴリ分離・同意味集約を保持した一方、原入力の希望＋本人行動補足で原希望が落ちる不整合を特定。original-onlyのsourcesとmember child参照の不一致が原因で、既存原希望を保持する局所修復へ進む。補足希望自体は未対応、モデル生成／学習／DB変更0。5時間依頼の途中であり完了扱いしない。** [結果・原本・再開点](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-heterogeneous-scope-cpu-20261106)。
 
 **11/5・分析の最新（第9回§198）：モデル経路で落ちていた主語未確定の完全過去行動と、同欄の複数本人行動を既存source証明のまま保持。元8応答の同raw比較は0→4保存、別6例も同raw旧0→新4保存。新14stop/2load/学習0、実4B保存は隔離mock RPC・別合成SQL182 PASS。主体・否定・明記順序・保存非生成再読を保持。一般の本人基準／暗黙役割・記録間意味、通常重み採用／本番／端末／配置は未達。最終CI42036416309は全工程成功。** [全結果・失敗・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-ordinary-prose-20261105)。
 

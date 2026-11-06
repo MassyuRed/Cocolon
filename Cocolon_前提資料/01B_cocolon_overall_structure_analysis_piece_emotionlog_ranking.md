@@ -3782,3 +3782,8 @@ API f50acbc／runner1ae1c811、CI42188492957全工程成功。否定希望2例�
 | trial `target_scope_v10_results.json` | 1/2/3記録のmapped差分、対象子省略と意味保持、保存reader12readの限定、private原本参照 |
 
 API f50acbc・semantic_admission／intent_compiler／cumulative serviceは無変更。通常profile選択・batch合成・DB schema／API／RN構造も不変。STRUCTURE_MAP_DELTA_NONE、map差分は今回の検証範囲更新だけ。[結果・再開点](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-target-scope-v10-20261106)。
+
+
+## 11/6 §234 — 異内容／補足CPU診断file対応
+
+trial `heterogeneous_scope_cpu.py`は完全合成snapshotとpacketを実prepare／strict／通常mapへ通す診断、`heterogeneous_scope_cpu_results.json`は本文なし集計を所有。新商品owner／通常経路／API／DB／RN構造の変更なし、STRUCTURE_MAP_DELTA_NONE。原希望と補足の局所source view不整合を[weekly§234](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-heterogeneous-scope-cpu-20261106)へ記録。

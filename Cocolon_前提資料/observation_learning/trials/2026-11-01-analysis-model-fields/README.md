@@ -2315,3 +2315,8 @@ mapped0/0/3→1/2/3、全未解析0。全parent内の各元fieldが完全な行�
 `replay_target_scope_saved.py`は実projection／文章／coverage／IDを保ち、実read_mapsとensure=Falseをcurrent／月次へ各一回、計12read確認する。DBはread専用mock RPC、生成入口を禁止し静的_text_from_visual検査を保つ。月／時刻は合成metadataで、実保存やprivate graph全復元ではない。production/test sourceを変えていないので新pytest／CIは起動せず、既存f50acbcのCI42188492957 successを参照する。
 
 [原本](https://chatgpt.com/library?file_id=libfile_fde3_f-ddde83d625848191918b9af3558ee1f2_2f7470f963808191aaebf050935e72de&account_id=personal)は26member／209189bytes／SHA `473f0fce42a4ad288ee4766e8ac0a643bc5bb00ff33f604bee2956eeab179c0a`。元18fileのbytes／SHAと全archive memberを照合済み。通常／次初期値は未採用、今回run再実行0。次は異なる内容・カテゴリ／本人補足の元field対応をCPUで確認し、分割batch／全量／一般意味・実DB／実機は残す。
+
+
+## 11/6 §234 — 異内容・カテゴリ・本人補足のCPU対応
+
+`heterogeneous_scope_cpu.py`／`heterogeneous_scope_cpu_results.json`は完全合成10構成・生成0。カテゴリ別集約等の9期待一致と、原希望＋補足ACTIONで原希望が落ちるHC09を分離した。実原因はoriginal-only viewのchild参照不整合。補足希望の未対応は維持。[実結果・原本・途中再開点](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-heterogeneous-scope-cpu-20261106)。

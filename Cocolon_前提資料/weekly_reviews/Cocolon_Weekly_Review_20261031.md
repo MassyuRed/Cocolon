@@ -5329,3 +5329,17 @@ rootと同環境read-only reviewerが全3source／新旧6raw・全graph／文章
 **現v10が今回の既知3構成へ及ぶことを確認した。追加例／新profile／owner緩和は不要で、通常採用・次初期値／本番へ自動進行しない。** STRUCTURE_MAP_DELTA_NONE：production source／prompt／profile／公開DTO／DB schema／RN・通常transport／budgeted batch許可は前回のまま。資料mapは検証範囲の差分更新だけ。実環境はCodex Work／GPT-6と同環境read-only補助で、独立ProやMash Product Readではない。
 
 次は異なる内容・カテゴリと本人補足の元field／owner対応をCPUで照合し、次の最小比較を決める。今回の同本文反復を、一般の本人基準・暗黙役割・選択基準／記録間意味、全欄補足、分割batchの合成／全履歴の通常時間内処理、IF／Saved・実DB／本人端末・商品受入れの完成へ換算しない。
+
+
+<a id="analysis-heterogeneous-scope-cpu-20261106"></a>
+## 234. 11/6 — 異内容・カテゴリ・本人補足のCPU比較で原希望の取りこぼしを特定
+
+Mashの5時間の分析残件・Jupyter直接接続・区切りごとのGitHub反映指示で、PR30開始5984c959／API PR3 f50acbc、全機能現在地・設計図／全file地図・最新§233・作業規則・実ownerを確認して開始。旧Jupyter URLはHTTP failureだったため既存Podの現在のリンクを確認し、JupyterLabへ直接接続した。Pod管理／新レンタル／port変更0。ターミナルの入力未完はモデルを起動せず、新terminalへ移って短い一行入力と実行を分離し解消した。
+
+`heterogeneous_scope_cpu.py`は独立に作成した完全合成snapshot10構成を、実prepare／strict candidate／compiler／通常mapへ通す一回診断。packetは合成手書きであり、4Bのraw・評価教師・モデル正解率ではない。異内容3記録は6node／未解析0、同意味同カテゴリ2記録は2nodeに各2根拠、異カテゴリは4node、カテゴリ集合の順序違いは同じ集合へ集約し部分集合は分離した。ordinary補足ACTIONは対応し、補足WISH3形は既存どおり未対応。他記録の既読を消さない構成も保持した。10構成の事前期待9一致、1新所見。
+
+**HC09：原入力の希望＋適格ordinary本人行動補足で、原希望が落ちて補足行動1node／未解析1となった。** 原compilerは元希望を正しく返す。`_compile_model_observed_record`がoriginal-onlyのsourcesへ切り替える一方、member.child_source_envelope_refsは原入力＋補足の2件を保持し、既存plain-wishのoriginal-only完全照合が拒否する。モデル誤kind・引用不足ではない。原希望を既存資格のまま保持する局所修復へ進み、補足希望自体の未対応を解除しない。
+
+CPUは再発見した既存venvのPython3.12.14／pytest8.3.5／FastAPI0.162.0／pydantic2.14.3／httpx0.28.1、1.896085秒・exit0。固定CI環境の正式成功とは区別する。生成／load／tokenizer／学習／DB呼出し・製品変更0。 [本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/heterogeneous_scope_cpu_results.json)と[原本](https://chatgpt.com/library?file_id=libfile_fde3_f-23d2bfa1e04481919859f6e8db667426_2f7470f963808191aaebf050935e72de&account_id=personal)を保全。原本384410bytes／SHA410d2cdbf1d5c07fa0b4c47ecae3ec7f165a1193164285bc000e110c859d2cde。原本を後続の修復結果で上書きしない。
+
+STRUCTURE_MAP_DELTA_NONE（診断runnerと検証範囲だけ）。通常profile／研究重み未採用・本番／実DB／本人端末は未実施。5時間依頼の途中checkpointであり、5時間作業完了とはしない。次は原入力だけの局所viewを整合させる最小修復・回帰と、同じ合成入力での前後比較。以後、固定v10／元a2eの別一回model比較で実field保持を確認する。旧run再起動や成功までの生成反復は行わない。

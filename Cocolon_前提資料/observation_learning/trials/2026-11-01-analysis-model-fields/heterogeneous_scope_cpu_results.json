@@ -1,0 +1,177 @@
+{
+  "api_commit": "f50acbc379dfb8f7c01cb7b58dfda9d674914e65",
+  "api_source_sha256": {
+    "ai/services/ai_inference/analysis_cumulative_service.py": "362739b57a70cfeadc8c23caada0f44226af96140a98a79ca715d87959ba615c",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py": "a452842ff0677d795b4db0a694060450d5234dd0b253a9abe6287fea015a9976",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py": "17a09c6faf32b4a2ec36eaa59f3362a6b376d06fdce55ceabefd76437f1dcd97",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py": "29f19e249c3674af5da8d14bffcc011a12972758fea176733bf4430e15b9b123",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/source_adapter.py": "e27d21c760b572cd7cfab1b4755eb4af25189e938af30399445b184021afc630"
+  },
+  "db_calls": 0,
+  "expectation_matches": 9,
+  "fixture_count": 10,
+  "model_calls": 0,
+  "model_loads": 0,
+  "normal_adoption": false,
+  "profile": "selected_material.v10",
+  "runtime": {
+    "implementation": "CPython",
+    "packages": {
+      "fastapi": "0.162.0",
+      "httpx": "0.28.1",
+      "pydantic": "2.14.3",
+      "pytest": "8.3.5"
+    },
+    "python": "3.12.14"
+  },
+  "schema_version": "analysis_heterogeneous_scope_cpu.v1",
+  "scope": "Independently synthetic CPU packets; not real model output or DB persistence.",
+  "seconds": 1.8960846350091742,
+  "source_unchanged": true,
+  "tokenizer_calls": 0,
+  "updates": 0,
+  "cases": [
+    {
+      "id": "HC01",
+      "status": "GENERATED_SYNTHETIC_ONLY",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 3,
+        "processed_count": 3,
+        "profile": "cumulative.v1",
+        "source_count": 3,
+        "stale_supplement_count": 0,
+        "unparsed_count": 0
+      }
+    },
+    {
+      "id": "HC02",
+      "status": "GENERATED_SYNTHETIC_ONLY",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 2,
+        "processed_count": 2,
+        "profile": "cumulative.v1",
+        "source_count": 2,
+        "stale_supplement_count": 0,
+        "unparsed_count": 0
+      }
+    },
+    {
+      "id": "HC03",
+      "status": "GENERATED_SYNTHETIC_ONLY",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 2,
+        "processed_count": 2,
+        "profile": "cumulative.v1",
+        "source_count": 2,
+        "stale_supplement_count": 0,
+        "unparsed_count": 0
+      }
+    },
+    {
+      "id": "HC04",
+      "status": "GENERATED_SYNTHETIC_ONLY",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 3,
+        "processed_count": 3,
+        "profile": "cumulative.v1",
+        "source_count": 3,
+        "stale_supplement_count": 0,
+        "unparsed_count": 0
+      }
+    },
+    {
+      "id": "HC05",
+      "status": "GENERATED_SYNTHETIC_ONLY",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 1,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 0
+      }
+    },
+    {
+      "id": "HC06",
+      "status": "UNSUPPORTED",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 0,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      }
+    },
+    {
+      "id": "HC07",
+      "status": "UNSUPPORTED",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 0,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      }
+    },
+    {
+      "id": "HC08",
+      "status": "UNSUPPORTED",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 0,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      }
+    },
+    {
+      "id": "HC09",
+      "status": "GENERATED_SYNTHETIC_ONLY",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 1,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      }
+    },
+    {
+      "id": "HC10",
+      "status": "GENERATED_SYNTHETIC_ONLY",
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 1,
+        "processed_count": 2,
+        "profile": "cumulative.v1",
+        "source_count": 2,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      }
+    }
+  ],
+  "private_original": "https://chatgpt.com/library?file_id=libfile_fde3_f-23d2bfa1e04481919859f6e8db667426_2f7470f963808191aaebf050935e72de&account_id=personal",
+  "finding": "HC09: an original wish is lost when an ordinary supplemental past action is present; original-only sources view retains the answer child-envelope reference."
+}
