@@ -166,7 +166,7 @@ Mashの比較理由：Day One案は情報の区切りが弱く、視線が動き
 | Piece作成 | 画像／全文を設定より前へ。操作ボタンと外枠をテーマ対応。全条件操作とidentity/tokenの引渡しを保持。作品renderer・recipe・保存画像は変更0 |
 | 設定・周辺 | 設定入口を目的が読める3行へ。テーマ選択面、共通メニュー、契約カード・説明・CTA、Nexusタブと自分のPiece入口を調整 |
 
-**現在の実装：** §17〜22の全6群を適用し、§23〜25でタップ領域・短横tutorial・文字拡大・戻る・Modal方向を補修。source候補`ae70f7c7`の全画面統合iOS7301を一回開始し、Archiveが進行中（[§26](#ui-integrated-ios-7301-20261106)）。native build／Uploadの最終結果と実端末の表示合格は未確認。同じ7301で全個別画面を一巡し、3テーマ・文字拡大・狭幅／短横・safe area／keyboard・長文／回復・全19tutorial stepを確認する。
+**現在の実装：** §17〜22の全6群を適用し、§23〜25でタップ領域・短横tutorial・文字拡大・戻る・Modal方向を補修。source候補`ae70f7c7`の全画面統合iOS7301は一回のビルドで署名Archive／目的文検査／IPA／TestFlight Uploadまで成功（[§26](#ui-integrated-ios-7301-20261106)）。Apple側処理・内部配布・実端末の表示は未確認。同じ7301で全個別画面を一巡し、3テーマ・文字拡大・狭幅／短横・safe area／keyboard・長文／回復・全19tutorial stepを確認する。
 
 初回反映時の確認：Nodeの既存5入口（画面contract・IAP復元・テーマ可読性・Piece初回保存modal・preview/display）で400 PASS／FAIL0／SKIP0。React/native・Auth/HTTPは各既存testの代替を含む。テーマ検査は旧バーガンディ色・太枠・taglineの固定期待を採用設計へ更新し、3テーマの本文／補助／tonal／操作色の4.5:1を検査した。Piece testの新テーマhookと共有Buttonへのimport適応のみを行い、保存・回復の検査は維持。最初の実行は取得不足の依存fileと旧表示期待で失敗し、依存原本の取得と意図した期待更新後に上記最終実行を通過した。製品の資格判定を緩めていない。今回の全画面設計更新で、これらを再実行したとは扱わない。
 
@@ -677,11 +677,22 @@ iOS本体のInfo.plistは縦・左横・右横を許可する一方、RN Modal�
 
 
 <a id="ui-integrated-ios-7301-20261106"></a>
-## 26. 11/6 全画面統合iOS 7301 — ビルド進行中
+## 26. 11/6 全画面統合iOS 7301 — ビルド・TestFlight送信成功
 
 source候補は `ae70f7c7e09788c4f4e015be105516f42c9bfcf3`。全29変更fileの本文／blob SHA再読込、親・変更path集合・branch headを照合した後、既存Actions画面から[全画面統合ビルド #73](https://github.com/MassyuRed/Cocolon/actions/runs/42169862420)を**一回だけ**開始した。run `42169862420`、attempt 1、開始2026-11-06 05:41:03 UTC。既存式run_number×100＋attemptのCFBundleVersionは7301、version 1.0。workflow／依存・署名設定の変更はない。
 
-05:43:17 UTC時点で依存・Pods・署名証明書／profile・build番号設定はsuccess、iOS Archiveが進行中。署名Archive／目的文検査／IPA／TestFlight Uploadの最終結果、Apple側処理と端末導入は未確認。後続の資料だけの保存commitはこのビルド元SHAと区別し、再ビルドしない。
+**05:55:22 UTCにworkflow全体successで完了（14分19秒）。** job `127734893906` の全19stepもsuccess。GitHub APIのrun／job、ブラウザのSuccess表示、候補head一致を独立に確認した。Archive実コマンドのCURRENT_PROJECT_VERSIONとINFOPLIST_KEY_CFBundleVersionも7301で一致する。
+
+| 工程 | 7301で確認した結果 |
+|---|---|
+| 署名付きiOS Archive | success |
+| 実Archiveの写真ライブラリ目的文検査 | 2項目の検査step success |
+| IPA export | success |
+| TestFlight Upload | success |
+
+工程結果の根拠はrun／job APIのsuccessとActions画面、7301はArchive実行行。固定workflowのUploadはset -euo pipefailでaltoolを実行し、写真目的文2項目は実Archiveのplistを検査する。最終ログ全文APIはTransport closedで未取得のため、具体的なIPA名や送信receipt本文を読んだとは記録しない。
+
+今回のapp buildは一回、rerunは0。Actions artifact一覧は0件で、IPAの別配布URLがあるとは扱わない。Apple側processing完了・内部グループへの配布・本人端末の導入／実表示は未確認。TestFlight送信成功を、端末で使える状態や全UIの視覚的合格へ置き換えない。後続の資料だけの保存commitはbuilt sourceの`ae70f7c7`と区別し、追加ビルドを起動しない。Android／Render／Supabase／GPU操作0。
 
 ### 7301導入後の確認順
 

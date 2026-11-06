@@ -5174,10 +5174,10 @@ iOS本体が許可するportrait／landscape-left／landscape-rightに対し、R
 
 
 <a id="ui-integrated-ios-7301-20261106"></a>
-## 228. 11/6 — 全画面統合iOS 7301を一回開始
+## 228. 11/6 — 全画面統合iOS 7301のビルド・TestFlight送信成功
 
-全6群＋仕上げのsource候補 `ae70f7c7e09788c4f4e015be105516f42c9bfcf3` を保存し、全29fileの全文／SHA再読込・親／path集合／head一致を確認。既存Actionsの[手動iOS #73](https://github.com/MassyuRed/Cocolon/actions/runs/42169862420)を05:41:03 UTCに一回dispatchした。run42169862420・attempt1、既存番号式による7301／version1.0。05:43:17 UTC時点で依存・Pods・署名準備・番号設定success、Archive中。最終のArchive／目的文／IPA／Upload、Apple処理／実機は未確認。build元は上記SHAで固定し、後続資料commitと混同しない。
+全6群＋仕上げのsource候補 `ae70f7c7e09788c4f4e015be105516f42c9bfcf3` を保存し、全29fileの全文／SHA再読込・親／path集合／head一致を確認。既存Actionsの[手動iOS #73](https://github.com/MassyuRed/Cocolon/actions/runs/42169862420)を05:41:03 UTCに一回dispatchし、**05:55:22 UTCに全体successで完了（14分19秒）**。run42169862420・attempt1・job127734893906全19step success、7301／version1.0。署名Archive・実Archiveの写真目的文2項目検査・IPA export・TestFlight Uploadが全てsuccess。実Archiveコマンドのbuild値7301、run head ae70f7c7、ブラウザSuccessも照合した。Actions artifact一覧0件。build元は上記SHAで固定し、資料のみの350daf20および後続commitと混同しない。
 
 [UI設計§26](../designs/ui/material-ui-design.md#ui-integrated-ios-7301-20261106)へ同じ7301での初回確認順を追記：標準条件で起動／入力→分析→Piece／social→設定／案内の全個別画面を一巡し、3theme・文字拡大・短横／keyboard・状態／回復、最後に全19tutorial stepを確認する。§14〜16の全範囲を維持し、未表示条件や休眠資産は未確認として残す。一巡分の指摘を再現してまとめて修正し、途中画面群別のbinaryを増やさない。実課金・削除・公開はUI確認のために行わない。
 
-この記録は資料のみ[skip ci]、追加build／rerun／Android／Render／Supabase／GPU操作0。署名workflow成功と実機の視覚的受入れを分けて結果を追記する。
+今回は全群をまとめたapp build一回・rerun0。最終結果と初回確認順を同じ節へ置換記録した。Apple側processing・内部配布・本人端末導入／実表示は未確認で、Upload successを配布済み・実機合格へ換算しない。残るUI作業は同じ7301を用いた§14〜16の実表示と操作の仕上げ。この記録は資料のみ[skip ci]、追加build／Android／Render／Supabase／GPU操作0。
