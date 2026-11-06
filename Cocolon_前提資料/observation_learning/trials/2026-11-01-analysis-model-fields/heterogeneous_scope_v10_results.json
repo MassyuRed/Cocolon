@@ -13,6 +13,13 @@
       "candidate_non_generation_reload": false,
       "candidate_status": "REJECTED",
       "counts": null,
+      "diagnosis": {
+        "global_target_occurrences": 2,
+        "invalid_modifier_still_unread": true,
+        "kind": "ambiguous_target_and_independent_invalid_past_wish_modifier",
+        "repaired_target_scalar_end": 4,
+        "repaired_target_scalar_start": 2
+      },
       "edges": 0,
       "field_count": 4,
       "finish_reason": "stop",
@@ -28,6 +35,22 @@
       },
       "raw_sha256": "16042a7708d2469a8933f4171d862cceba53e467831fd3dc47340405e7a4b42b",
       "reason": "analysis_model_units_quote_ambiguous_or_missing",
+      "repaired_consumer": {
+        "counts": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 2,
+          "processed_count": 3,
+          "profile": "cumulative.v1",
+          "source_count": 3,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "edges": 0,
+        "nodes": 4,
+        "reason": null,
+        "status": "GENERATED_PRIVATE_ONLY"
+      },
       "source_records": 3,
       "status": "REJECTED"
     },
@@ -43,6 +66,9 @@
         "source_count": 2,
         "stale_supplement_count": 0,
         "unparsed_count": 0
+      },
+      "diagnosis": {
+        "kind": "reviewed_generated_graph_no_observed_meaning_mismatch"
       },
       "edges": 0,
       "field_count": 2,
@@ -69,6 +95,22 @@
       "old_success_graph_text_projection_exact_except_artifact_id": true,
       "raw_sha256": "d757cd93ae81a3097cb18294ea89ca26bac47e6cd9238e9a6e3c42399308d2dc",
       "reason": null,
+      "repaired_consumer": {
+        "counts": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 2,
+          "processed_count": 2,
+          "profile": "cumulative.v1",
+          "source_count": 2,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "edges": 0,
+        "nodes": 2,
+        "reason": null,
+        "status": "GENERATED_PRIVATE_ONLY"
+      },
       "source_records": 2,
       "status": "GENERATED_PRIVATE_ONLY"
     },
@@ -76,6 +118,14 @@
       "candidate_non_generation_reload": false,
       "candidate_status": "REJECTED",
       "counts": null,
+      "diagnosis": {
+        "keys": [
+          "field",
+          "units"
+        ],
+        "kind": "duplicate_object_keys",
+        "strict_json_reader_kept": true
+      },
       "edges": 0,
       "field_count": 2,
       "finish_reason": "stop",
@@ -91,6 +141,13 @@
       },
       "raw_sha256": "dd4871f5bf329c199726bc8b348faf3ab8e4a99f6d7d6cbd7aa46467a8442460",
       "reason": "analysis_semantic_json_invalid",
+      "repaired_consumer": {
+        "counts": null,
+        "edges": 0,
+        "nodes": 0,
+        "reason": "analysis_semantic_json_invalid",
+        "status": "REJECTED"
+      },
       "source_records": 2,
       "status": "REJECTED"
     },
@@ -106,6 +163,9 @@
         "source_count": 3,
         "stale_supplement_count": 0,
         "unparsed_count": 0
+      },
+      "diagnosis": {
+        "kind": "reviewed_generated_graph_no_observed_meaning_mismatch"
       },
       "edges": 0,
       "field_count": 3,
@@ -132,6 +192,22 @@
       "old_success_graph_text_projection_exact_except_artifact_id": true,
       "raw_sha256": "9e3a6f3ec957669ee09b93d501a2ffbdf2877a725f5044cff30453402c685ae5",
       "reason": null,
+      "repaired_consumer": {
+        "counts": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 3,
+          "processed_count": 3,
+          "profile": "cumulative.v1",
+          "source_count": 3,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "edges": 0,
+        "nodes": 4,
+        "reason": null,
+        "status": "GENERATED_PRIVATE_ONLY"
+      },
       "source_records": 3,
       "status": "GENERATED_PRIVATE_ONLY"
     },
@@ -147,6 +223,9 @@
         "source_count": 1,
         "stale_supplement_count": 0,
         "unparsed_count": 0
+      },
+      "diagnosis": {
+        "kind": "reviewed_generated_graph_no_observed_meaning_mismatch"
       },
       "edges": 0,
       "field_count": 2,
@@ -173,6 +252,22 @@
       "old_success_graph_text_projection_exact_except_artifact_id": true,
       "raw_sha256": "24409ef70f2408d9a075b4ce21b9a993e7f83840de25bfadd0008a1b3a811895",
       "reason": null,
+      "repaired_consumer": {
+        "counts": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "edges": 0,
+        "nodes": 2,
+        "reason": null,
+        "status": "GENERATED_PRIVATE_ONLY"
+      },
       "source_records": 1,
       "status": "GENERATED_PRIVATE_ONLY"
     },
@@ -188,6 +283,9 @@
         "source_count": 1,
         "stale_supplement_count": 0,
         "unparsed_count": 0
+      },
+      "diagnosis": {
+        "kind": "reviewed_generated_graph_no_observed_meaning_mismatch"
       },
       "edges": 0,
       "field_count": 2,
@@ -213,6 +311,22 @@
       },
       "raw_sha256": "32916bb870aabab22a4c609ae9a5c65cb7565faff3938f24820e7ef0325877e9",
       "reason": null,
+      "repaired_consumer": {
+        "counts": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "edges": 0,
+        "nodes": 2,
+        "reason": null,
+        "status": "GENERATED_PRIVATE_ONLY"
+      },
       "source_records": 1,
       "status": "GENERATED_PRIVATE_ONLY"
     },
@@ -228,6 +342,9 @@
         "source_count": 1,
         "stale_supplement_count": 0,
         "unparsed_count": 0
+      },
+      "diagnosis": {
+        "kind": "reviewed_generated_graph_no_observed_meaning_mismatch"
       },
       "edges": 0,
       "field_count": 2,
@@ -253,6 +370,22 @@
       },
       "raw_sha256": "22604475d0db6489ebcf33c1b726d54947d36f956d82a19ab97f9ad26687c7dc",
       "reason": null,
+      "repaired_consumer": {
+        "counts": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "edges": 0,
+        "nodes": 2,
+        "reason": null,
+        "status": "GENERATED_PRIVATE_ONLY"
+      },
       "source_records": 1,
       "status": "GENERATED_PRIVATE_ONLY"
     },
@@ -268,6 +401,9 @@
         "source_count": 1,
         "stale_supplement_count": 0,
         "unparsed_count": 0
+      },
+      "diagnosis": {
+        "kind": "reviewed_generated_graph_no_observed_meaning_mismatch"
       },
       "edges": 0,
       "field_count": 2,
@@ -293,6 +429,22 @@
       },
       "raw_sha256": "83e0f23598cb8510a3f2cc64b7f2056060fb69130b3eab0388eb8205ca081c4b",
       "reason": null,
+      "repaired_consumer": {
+        "counts": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "edges": 0,
+        "nodes": 2,
+        "reason": null,
+        "status": "GENERATED_PRIVATE_ONLY"
+      },
       "source_records": 1,
       "status": "GENERATED_PRIVATE_ONLY"
     },
@@ -308,6 +460,9 @@
         "source_count": 1,
         "stale_supplement_count": 0,
         "unparsed_count": 0
+      },
+      "diagnosis": {
+        "kind": "reviewed_generated_graph_no_observed_meaning_mismatch"
       },
       "edges": 0,
       "field_count": 2,
@@ -333,6 +488,22 @@
       },
       "raw_sha256": "21d997a9436377be0b2fa633f674b4a9f72653aaf35b09ae6c4253adc75f76a0",
       "reason": null,
+      "repaired_consumer": {
+        "counts": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "edges": 0,
+        "nodes": 2,
+        "reason": null,
+        "status": "GENERATED_PRIVATE_ONLY"
+      },
       "source_records": 1,
       "status": "GENERATED_PRIVATE_ONLY"
     },
@@ -340,6 +511,14 @@
       "candidate_non_generation_reload": false,
       "candidate_status": "REJECTED",
       "counts": null,
+      "diagnosis": {
+        "keys": [
+          "field",
+          "units"
+        ],
+        "kind": "duplicate_object_keys",
+        "strict_json_reader_kept": true
+      },
       "edges": 0,
       "field_count": 3,
       "finish_reason": "stop",
@@ -355,6 +534,13 @@
       },
       "raw_sha256": "4e97875304de62aea218613f555d46ec5c90d08f7a545e450466a6a5eac34d27",
       "reason": "analysis_semantic_json_invalid",
+      "repaired_consumer": {
+        "counts": null,
+        "edges": 0,
+        "nodes": 0,
+        "reason": "analysis_semantic_json_invalid",
+        "status": "REJECTED"
+      },
       "source_records": 2,
       "status": "REJECTED"
     }
@@ -365,9 +551,82 @@
     "raw_preserved_before_consume": true,
     "replay_exit_code": 0,
     "same_raw_old_compare_model_calls": 0,
-    "saved_projection_reader": "PENDING"
+    "saved_projection_reader": {
+      "baseline": {
+        "execution": "CPU local clean baseline worktree",
+        "output_sha256": "758c30e2e51a07e235f045d234df6d35b5675a75c2dc6c97213074188b21bc76",
+        "reads": 28
+      },
+      "repaired": {
+        "execution": "Direct Jupyter CPU, no inference",
+        "input_bytes_unchanged": true,
+        "output_sha256": "bf20ed547ccb9ee16f4ceca3d0a31f182dd48fd0f111846c439e8c76224fb995",
+        "reads": 32
+      }
+    }
+  },
+  "ci": {
+    "api_commit": "c1502415cc5d0e4fb9ff1fd5e1fcbe7a1af848b9",
+    "completed_at": "2026-11-06T12:38:33Z",
+    "conclusion": "success",
+    "cumulative_api_jobs": {
+      "passed": 302,
+      "seconds": 212.94,
+      "subtests": 2,
+      "warning": 1
+    },
+    "generation_saved": {
+      "passed": 2570,
+      "seconds": 549.61,
+      "skipped": 1,
+      "subtests": 12059
+    },
+    "id": 42217456387,
+    "isolated_sql": {
+      "monthlyReferences": 15,
+      "sourceRecords": 201,
+      "status": "passed"
+    },
+    "job_id": 127890917700,
+    "runtime": {
+      "fastapi": "0.142.2",
+      "httpx": "0.28.1",
+      "pydantic": "2.13.5",
+      "pytest": "8.4.1",
+      "python": "3.12.16"
+    },
+    "shared_owner": {
+      "deselected": 194,
+      "passed": 1,
+      "seconds": 31.32
+    },
+    "status": "completed",
+    "url": "https://github.com/MassyuRed/mashos-api/actions/runs/42217456387"
   },
   "compare_sha256": "18f4873abdf76787c2b95bb8e63a279ed14fd53e020b944eced3723de443b706",
+  "consumer_repair": {
+    "api_commit": "c1502415cc5d0e4fb9ff1fd5e1fcbe7a1af848b9",
+    "api_hashes": {
+      "ai/services/ai_inference/analysis_cumulative_service.py": "362739b57a70cfeadc8c23caada0f44226af96140a98a79ca715d87959ba615c",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py": "65852d072f3a58fe1b448224b3509837e20a5a40911583f306e0aabf6a47a64e",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py": "17a09c6faf32b4a2ec36eaa59f3362a6b376d06fdce55ceabefd76437f1dcd97",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py": "5d667397839ad959b3c5cb1a64218acaa4b933a5fc71fe4c35cdae07fc56e607",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/source_adapter.py": "e27d21c760b572cd7cfab1b4755eb4af25189e938af30399445b184021afc630",
+      "ai/tools/serve_emlis_natural_reply.py": "d3b7a04e38769485da995c8323aaaaf4426ff5273fcba6dff578ada85bdb77b6"
+    },
+    "compare_sha256": "2b14c640e031a02d3c192ae5346b7bee192f45ebde90c10614fcfac34765bc90",
+    "complete_requests": 7,
+    "mapped_records": 12,
+    "model_calls": 0,
+    "model_loads": 0,
+    "nodes": 20,
+    "other_nine_graph_text_counts_rejection_unchanged": true,
+    "partial_requests": 1,
+    "raw_unchanged": true,
+    "rejected_requests": 2,
+    "successful_requests": 8,
+    "unparsed_records_in_generated_maps": 1
+  },
   "db_calls": 0,
   "fixtures_sha256": "e78facdb332ba9cd066b3ff5acb95d641d92eef8993bbfc7809a877b1afd9737",
   "initial_config_sha256": "006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9",
@@ -376,8 +635,22 @@
     "Ten requests share known synthetic content families and category/answer arrangements; this is not independent general language accuracy.",
     "HC09 original-wish preservation was repaired at db6 before this run; do not attribute it to the new answer-wish change.",
     "HC01/HC03/HC10 remain strict rejections, not repaired or retried.",
-    "No live DB, RLS, monthly capture, normal adoption, deployment or real-device acceptance."
+    "No live DB, RLS, monthly capture, normal adoption, deployment or real-device acceptance.",
+    "Initial always-parent-local proposal regressed legitimate bare-predicate targets; final implementation retains original globally unique bindings first."
   ],
+  "local_regression": {
+    "failed": 0,
+    "fastapi": "0.141.1",
+    "httpx": "0.28.1",
+    "passed": 497,
+    "pydantic": "2.13.4",
+    "pytest": "8.4.1",
+    "python": "3.12.14",
+    "runtime_scope": "Isolated pytest with existing system libraries; unrelated absent SQL plugin excluded explicitly",
+    "seconds": 35.19,
+    "skipped": 0,
+    "subtests": 11
+  },
   "model": {
     "calls_started": 10,
     "generation_seconds_total": 107.18651543464512,
@@ -393,6 +666,13 @@
   "normal_adoption": false,
   "old_api_commit": "f50acbc379dfb8f7c01cb7b58dfda9d674914e65",
   "pack_sha256": "5716d011e818586ea1f87cef1116fe33b3b265fe5a47b9eac2f5ad4470e1cf55",
+  "private_bundle": {
+    "bytes": 525025,
+    "library_file_id": "libfile_fde3_f-729bd8856e6481918dbff31e0e1565c0_2f7470f963808191aaebf050935e72de",
+    "members": 62,
+    "sha256": "446d99c0a579e8d2b6416cecf6bfc881a8d4ac4f3ed93d8046944c6bc1f83115",
+    "version": 2
+  },
   "profile": "selected_material.v10",
   "public_type_source_grammar_default_transport_change": false,
   "replay_sha256": "775ae6e18556500c545ccf83b189980abe66195268e8c5e1aaabc8ee8370aabd",
@@ -408,5 +688,5 @@
     "successful_requests": 7,
     "total_fields": 24
   },
-  "status": "MODEL_COMPLETE_REVIEW_AND_SAVED_READER_PENDING_NOT_ADOPTED"
+  "status": "MODEL_AND_REPAIRED_CONSUMER_VERIFIED_CI_SUCCESS_NOT_ADOPTED"
 }

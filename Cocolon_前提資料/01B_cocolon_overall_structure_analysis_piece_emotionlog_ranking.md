@@ -1,4 +1,6 @@
-> **11/6・最新§235：API 5efdafabはordinary本人補足の単一SELF希望を、自身の完全根拠で既存consumerへ接続。実file地図は末尾§235、320 PASS／CI42205450639全工程success。同packet10/10・候補reload10／mock RPC保存reader40read、モデル／DB0、Jupyter新結果未回収。** [現在地・範囲](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplement-wish-own-evidence-20261106)／[本文なし集計](observation_learning/trials/2026-11-01-analysis-model-fields/supplement_wish_own_evidence_results.json)。STRUCTURE_MAP_DELTA_PRESENT（既存consumer責務の限定拡張、公開型／作者／文法／DB／RN／通常profile・transport不変）。
+> **11/6・最新§236：固定v10／a2eの実4Bは10stop／1load／学習0。baseline API5efdは7要求が文章・図へ到達し、保存projectionのmock RPC28read一致。HC01の引用位置曖昧を既存admissionだけで修復したAPI c1502415は、同rawのCPU比較で4node／mapped2／未解析1へ到達し、不正modifierと他9件の結果を保持。local497 PASS＋11subtests、CI42217456387全工程success。修正版Jupyter同raw比較はexit0、保存reader32readも一致。** [実結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-heterogeneous-v10-live-20261106)／[本文なし集計](observation_learning/trials/2026-11-01-analysis-model-fields/heterogeneous_scope_v10_results.json)。実file差分は末尾§236。STRUCTURE_MAP_DELTA_NONE（既存の位置束縛修復）。
+
+> **11/6・§235時点：API 5efdafabはordinary本人補足の単一SELF希望を、自身の完全根拠で既存consumerへ接続。実file地図は末尾§235、320 PASS／CI42205450639全工程success。同packet10/10・候補reload10／mock RPC保存reader40read、モデル／DB0、Jupyter新結果は当時未回収。** [当時の範囲](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplement-wish-own-evidence-20261106)／[本文なし集計](observation_learning/trials/2026-11-01-analysis-model-fields/supplement_wish_own_evidence_results.json)。STRUCTURE_MAP_DELTA_PRESENT（既存consumer責務の限定拡張、公開型／作者／文法／DB／RN／通常profile・transport不変）。
 
 > **11/5開始・分析の履歴（第9回§214）：新規隔離targetで4vendor kernel bindingを実確認。固定API100c1bb／元a2eの3要求はwarmup候補保持、v7は6欄中field1だけで旧raw同一、v8は23秒signal14で未返却。1load／3開始／2stop、速度改善・全欄保持・意味品質は未証明。global base／商品source／通常選択を維持し、通常採用なし。version8保存済み。** [実結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-optional-kernel-diagnostic-20261105)。
 
@@ -3811,3 +3813,19 @@ API [5efdafab](https://github.com/MassyuRed/mashos-api/commit/5efdafab93f555dc77
 | `Cocolon/Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/supplement_wish_own_evidence_results.json`（新） | 本文なし集計。元f50／直前db6／現5efdの比較、local検査と進行中CI、モデル／実DB0、非公開原本への参照を分離 |
 
 新88＋旧232＝320 PASS、広域282 PASS／SQL環境20 SKIP、CI42205450639全工程success。同packet10/10・4.380014秒、HC09の2nodeは直前db6の回復を保持し今回の新効果へ数えない。新model／raw取得／DB0、Jupyter新結果未回収。元 `heterogeneous_scope_probe.py` は依然実model未実行で、将来使う場合は5efdafabへ固定した別runtimeが必要。STRUCTURE_MAP_DELTA_PRESENT（既存consumer責務）。公開型／唯一作者／共有文法／DB／RN／通常profile・transport不変。[全結果・境界・再開点](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplement-wish-own-evidence-20261106)／[本文なし集計](observation_learning/trials/2026-11-01-analysis-model-fields/supplement_wish_own_evidence_results.json)。
+
+> 継続更新：§235の実model未実行／Jupyter未回収は当時の状態。後続§236で旧原本回収と固定baselineの一回実行を行い、元raw／model packを不変で保持した。
+
+## 11/6 §236 — 実モデル異内容比較と位置束縛修復の実file対応
+
+| 実path | 今回の責務・差分 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py` | API `c1502415cc5d0e4fb9ff1fd5e1fcbe7a1af848b9`。既存の全field一意引用を優先し、曖昧なv10のdirect-root `CONTENT_TARGET`だけを、全fieldで一意な親引用内の唯一位置へ束縛する。型・既存意味proof・qualifier規則・他profileを変更しない |
+| `mashos-api/ai/tests/test_analysis_model_parent_local_content.py`（新） | 13 methods。親／子の一意性、絶対scalar・UTF8座標、従来wire／profile・nested／UNKNOWN等の拒否、合法bare predicateと保存再読、不正過去希望modifierの未解析保持 |
+| `mashos-api/.github/workflows/analysis-observed-content.yml` | 既存生成・保存検証へ上記回帰moduleを追加。配置や通常採用の有効化ではない |
+| `Cocolon/Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/replay_heterogeneous_scope_saved.py`（新） | 元実応答と同raw比較結果を照合し、既存projection／本文／coverageを実current・月次readerへ非生成再読する診断。[source](observation_learning/trials/2026-11-01-analysis-model-fields/replay_heterogeneous_scope_saved.py)、最終SHA `0ab6d58159b267e2cd5eecf59e0185b96e46576cdb630728bd98f5aae8b2864c` |
+| `Cocolon/Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/heterogeneous_scope_v10_results.json`（新） | [本文なし集計](observation_learning/trials/2026-11-01-analysis-model-fields/heterogeneous_scope_v10_results.json)。実4B baseline、同rawの旧版／修復版比較、非生成reader、未完了と非公開原本参照を分ける |
+
+実4Bは24field／最大4502入力token、10stop／1load／学習0、child128.340060778秒／parent134.238438373秒・exit0。baseline5efdは7要求／10mapped record／16node、HC01は引用位置曖昧、HC03／10は重複JSON keyで拒否。baselineの同raw f50比較と候補非生成再読、7成功×current／月次各2入口＝mock RPC28read一致を確認した。
+
+位置束縛修復後の同raw CPU比較はHC01だけ候補成立・4node／mapped2／未解析1へ変わり、日記の過去希望に付いた不正modifierは拒否、他9件の全graph／count／拒否を保持。初版の親内強制による合法bare predicate回帰はレビューで検出し、全field一意優先へ訂正した。初期記録は保持する。local497 PASS＋11subtests／失敗・skip0・35.19秒、CI42217456387全工程success。修正版のJupyter同raw比較はexit0、保存reader32read一致。新型／文法／prompt／作者／通常transport・既定／DB／RNの差分0、STRUCTURE_MAP_DELTA_NONE。一般品質・通常採用／実DB／本人端末／IF・Savedは未成立。[最新記録](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-heterogeneous-v10-live-20261106)。

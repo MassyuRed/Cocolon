@@ -1,4 +1,6 @@
-> **11/6・最新§235：API 5efdafabでordinary補足自身の単一SELF希望を限定接続。新88＋既存232＝320 PASS、CI42205450639全工程success。`replay_heterogeneous_scope_cpu.py`は元合成packetを変更せず10/10・候補reload10／mock RPC保存reader40readを確認。HC09はdb6での既回復を保持。新モデル／raw取得／DB0、Browser状態取得とJupyter直接タブ作成が各300秒で未応答、Jupyter到達・新結果は未確認・5時間依頼未完了。** [範囲・原本・再開点](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplement-wish-own-evidence-20261106)／[本文なし集計](supplement_wish_own_evidence_results.json)。
+> **11/6・最新§236：Jupyter直接接続復旧後、元v10／a2eで実10stop／1load／学習0、24field・最大入力4502。baseline API5efdは7要求／10mapped record／16node、3strict拒否。実projectionのmock RPC current／月次28read一致。同rawの位置束縛修復c1502415はHC01だけ4node／mapped2／未解析1へ変え、不正pastwish modifierと他9結果は保持。local497 PASS＋11subtests、CI42217456387全工程success。修正版Jupyter同raw比較はexit0、保存reader32read一致。** [結果・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-heterogeneous-v10-live-20261106)／[本文なし集計](heterogeneous_scope_v10_results.json)。STRUCTURE_MAP_DELTA_NONE（既存位置束縛修復）。
+
+> **11/6・§235時点：API 5efdafabでordinary補足自身の単一SELF希望を限定接続。新88＋既存232＝320 PASS、CI42205450639全工程success。`replay_heterogeneous_scope_cpu.py`は元合成packetを変更せず10/10・候補reload10／mock RPC保存reader40readを確認。HC09はdb6での既回復を保持。新モデル／raw取得／DB0、Browser状態取得とJupyter直接タブ作成が各300秒で未応答、Jupyter到達・新結果は当時未確認・5時間依頼未完了。** [当時の範囲・原本・再開点](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplement-wish-own-evidence-20261106)／[本文なし集計](supplement_wish_own_evidence_results.json)。後続の実モデル結果は§236を参照。
 
 > **11/6・履歴（第9回§216）：Jupyterで23更新を完了し18応答を返却、最後の三記録要求は23秒で停止。願望kind・否定引用・対象範囲の不整合が残り、新d22cは不採用。別途、保存済み25応答を0モデルで照合し、同じ二欄原応答を事実＋希望の2node／edge0へ接続する修正e8f026eを確認。関連398成功・1skip、本番未配置。** [実結果・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-fact-wish-fields-20261106)。
 
@@ -2347,3 +2349,20 @@ mapped0/0/3→1/2/3、全未解析0。全parent内の各元fieldが完全な行�
 CPU replayは `--api`／`--prior-json`／`--output` を取り、元report SHA `410d2cdbf1d5c07fa0b4c47ecae3ec7f165a1193164285bc000e110c859d2cde` と新outputを要求する。v2は4.380014秒、全snapshot／messages／request_ref／guard／raw相当bytes不変、HC01–05はartifact UUIDを除きgraph／本文図一致。直前db6比でHC06–08は0→2node、HC10は2→4node、HC09の2node／mapped1／unparsed0は保持である。合成packetのstrict受理を実4Bのraw品質へ換算しない。[本文なし集計](supplement_wish_own_evidence_results.json)と[非公開原本](https://chatgpt.com/library?file_id=libfile_fde3_f-fdbb3a61c7b481919f0b623d2962e507_2f7470f963808191aaebf050935e72de&account_id=personal)（14member／497233bytes／SHA `4142a3443adc1bc9b14ab7afe4d0fee9ece96a89b46cb40d7d17f63cad8b3b6f`、CRC／全bytes一致）へ元失敗も保持。作成時CI進行中と後続CI結果を分ける。同環境root／補助の全10確認はMash／human／独立Pro受入れではない。
 
 新モデル／raw取得／学習／DB呼出し0。Browser状態取得とJupyter直接タブ作成が各300秒で未応答、Jupyter到達・新結果は未確認。タブ作成の実HTTP到達は不明で、全接続試行をPodアクセス0とは断定しない。resetのdispatch前中止と補助のtool不在による追加Podアクセスは0。新Pod管理操作0・5時間依頼は未完了。接続後は旧JSON／test log／terminal状態を先に回収し、旧runを再実行しない。元model runnerを後日使う場合、旧f50acbc／db6a571 rootは比較用に保持し、API `5efdafab93f555dc777a07a886d051d72b8fe1a9` の別runtimeを用意して `--expected-api-commit` で固定する。元a2e／config006e／pins／optional target／runner・fixtureを照合し、新prepare／新outputで扱う。現段階で実raw／モデル品質・通常採用／本番成功を主張しない。
+
+<a id="analysis-heterogeneous-v10-live-20261106"></a>
+## 11/6 §236 — 異内容・カテゴリ・本人補足の実10応答と位置束縛修復
+
+[週次§236](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-heterogeneous-v10-live-20261106)／[本文なし集計](heterogeneous_scope_v10_results.json)が最新結果。元 `heterogeneous_scope_probe.py` をJupyterから固定v10／a2e・API5efdで一回実行し、10stop／1load／学習0、child128.340060778秒／parent134.238438373秒・exit0。全24field、最大入力4502＋予約2048<8192。baselineは成功7要求／10mapped record／16nodeで、HC01は引用位置の曖昧、HC03／HC10は同一object内のfield／units重複keyでstrict拒否。後者は括弧等のJSON構文不備ではない。全rawは先行保存し、追加生成せず同rawのf50比較・候補非生成再読を確認した。
+
+| 実file | 今回の責務・確定範囲 |
+|---|---|
+| [heterogeneous_scope_probe.py](heterogeneous_scope_probe.py) | 実10応答のprepare／一回generate／非生成replay／旧f50 compare。baseline raw／pack／resultを上書きしない |
+| [replay_heterogeneous_scope_saved.py](replay_heterogeneous_scope_saved.py)（新） | 実projection／本文／coverage／IDを保ち、実current／月次readerへmock RPCで再表示。baseline7成功×4＝28read一致、拒否3はread0。生成／モデル／DBを禁止し、静的本文照合を維持 |
+| [heterogeneous_scope_v10_results.json](heterogeneous_scope_v10_results.json)（新） | 実10応答・baseline保存reader・同raw位置束縛修復・進行中CIと未完了を本文なしで分離 |
+
+保存reader helperの最終SHAは `0ab6d58159b267e2cd5eecf59e0185b96e46576cdb630728bd98f5aae8b2864c`。`--comparison` は元10source／snapshot／messages／request_ref／guard／rawを完全照合してから別consumerの同raw結果を読み、commit別outputへ保存する。実DB／RLS／transaction／月次captureの確認ではない。
+
+API [c1502415](https://github.com/MassyuRed/mashos-api/commit/c1502415cc5d0e4fb9ff1fd5e1fcbe7a1af848b9) は元の全field一意引用を優先し、曖昧なv10 direct-root CONTENT_TARGETだけ、全fieldで一意な親引用内へ一意束縛して絶対座標へ戻す。初案の親内強制による合法barepredicate回帰はレビューで検出し、v2で既存global一意位置を保持する方式へ訂正、初期記録も保存した。同じ実rawのCPU比較でHC01は候補成立・typed4node／mapped2／未解析1となり、日記pastwishの不正modifier拒否と他9件の全graph／count／拒否を維持。新test13methodを含むlocal497 PASS＋11subtests／FAIL・SKIP0、35.19秒。CI42217456387全工程success。新型／文法／prompt／作者／通常profile・transport／DB／RN変更0、STRUCTURE_MAP_DELTA_NONE（既存admission位置束縛修復）。
+
+修正版のJupyter同raw比較はexit0、8生成map（うち1部分成立）の保存reader32readが一致した。baseline28readと混同しない。追加モデル生成はせず、元pack／raw／baseline reader出力と訂正前の失敗を保持し、別consumer結果を別outputへ回収する。一般意味品質・通常採用・本番／実DB／本人端末、本人基準／暗黙役割／判断・選択／記録間意味・全量処理・IF／Savedは残件。

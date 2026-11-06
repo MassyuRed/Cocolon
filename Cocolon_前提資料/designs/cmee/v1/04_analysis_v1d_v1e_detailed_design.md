@@ -1,4 +1,6 @@
-> **11/6・最新§235：ordinary補足の単一明記SELF希望を、原入力専用証明を保った別のanswer-owned証明へ接続。API 5efdafab、320 PASS／CI42205450639全工程success。設計条件と実装済み範囲は末尾§235へ分離記載。同packet10/10・候補reload10／mock RPC保存reader40read、新モデル／raw取得／DB0・Jupyter新結果未回収。** [実結果・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplement-wish-own-evidence-20261106)／[本文なし集計](../../../observation_learning/trials/2026-11-01-analysis-model-fields/supplement_wish_own_evidence_results.json)。
+> **11/6・最新§236：固定v10／a2eの実4B10stop／1load／学習0を完了。baseline API5efdの7要求が文章・図へ到達し、mock RPCの保存reader28read一致。引用位置曖昧のHC01はAPI c1502415の既存admission修復により同rawのCPU比較で4node／mapped2／未解析1、不正modifierは未解析のまま。local497 PASS＋11subtests、CI42217456387全工程success。修正版Jupyter同raw比較はexit0、保存reader32readも一致。** [実結果・範囲](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-heterogeneous-v10-live-20261106)／[本文なし集計](../../../observation_learning/trials/2026-11-01-analysis-model-fields/heterogeneous_scope_v10_results.json)。位置束縛の条件と実装範囲は末尾§236。
+
+> **11/6・§235時点：ordinary補足の単一明記SELF希望を、原入力専用証明を保った別のanswer-owned証明へ接続。API 5efdafab、320 PASS／CI42205450639全工程success。設計条件と実装済み範囲は末尾§235へ分離記載。同packet10/10・候補reload10／mock RPC保存reader40read、新モデル／raw取得／DB0・Jupyter新結果は当時未回収。** [当時の範囲](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplement-wish-own-evidence-20261106)／[本文なし集計](../../../observation_learning/trials/2026-11-01-analysis-model-fields/supplement_wish_own_evidence_results.json)。
 
 > **11/5・履歴（第9回§194・適格補足の担当＋決定）：ANSWER自身の過去SELF担当ROLE＋決定ACTIONを既存完全field証拠で採用できるよう接続。実4Bの新source構成4要求（2構成は§193の節を再使用）で、新版は4保存・5record/未解析0、旧版は3未対応＋AC04の独立r2だけ部分保存。回答内明記順序だけ1/0/0/1辺、重複AC03は各2根拠でも記録count1。新4stop/1load/学習0・53.891秒、raw修復0。Jupyter316 PASS/SQL13 SKIP、CI42015033971全step成功。prompt/state/通常既定v4は不変、v6はopt-in・重み通常未採用、一般分析品質／通常4B接続／配置は未成立。** [全結果・制限](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplemental-role-decision-result-20261105)。
 
@@ -1993,3 +1995,20 @@ ordinary ANSWERは親原入力と同一recordの補足資料である。本人�
 API [5efdafab93f555dc777a07a886d051d72b8fe1a9](https://github.com/MassyuRed/mashos-api/commit/5efdafab93f555dc777a07a886d051d72b8fe1a9) の既存 `intent_compiler.py` に `compile_model_supplement_plain_wish` を追加し、原入力wrapperのguardを保って内部の完全field照合だけを共用した。既存 `semantic_admission._compile_model_observed_record` がACTION／担当＋決定の証明で採れない回答に第三経路として試す。新しい型・source grammar・作者・profile／state版・公開wire・service／DB／RNは追加していない。通常profile・transport選択と配置も不変。STRUCTURE_MAP_DELTA_PRESENTは既存consumer責務の限定拡張である。
 
 新module88＋既存232＝320 PASS／失敗・skip0、40.45秒・既存Pydantic warning1。広域5fileは282 PASS／SQL WASM未設定20 SKIP／失敗0、208.15秒で、件数を合算しない。同一合成packetのCPU再読は10/10・4.380014秒、候補非生成reload10・補足自身の証拠10・mock RPCの実current／月次reader40read一致。元snapshot／messages／request_ref／guard／raw相当文字列は不変。HC01–05はartifact UUIDを除くgraph／本文図一致、HC09の2nodeは直前db6の既回復を保持し、今回の新効果としない。新旧保存projectionはEngine・compiler・新proof・作者の生成入口を禁止して同一DTOを確認した。これは実DB／RLS／月次captureの証明ではない。5変更blobはGitHub読戻し一致、CI42205450639全工程success。新モデル／raw取得／学習／DB呼出し0。Jupyter新結果は未回収、5時間依頼完了とは扱わない。一般の本人基準／暗黙役割／選択／記録間意味、全補足・全量処理・IF／Saved／実DB／本人端末・商品受入れは残件。[現在の実結果・原本・再開点](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplement-wish-own-evidence-20261106)／[本文なし集計](../../../observation_learning/trials/2026-11-01-analysis-model-fields/supplement_wish_own_evidence_results.json)。
+
+
+## 11/6 §236 — 既存quoted-parentの対象位置を一意な親引用から束縛
+
+### 設計条件
+
+モデルが返したroot／target／qualifierと元rawを変更せず、source所有の位置だけを決定する。従来どおり全fieldで引用が一意なら、その位置を最優先で保持する。これにより、合法な有限述語rootと同欄の別引用対象を含む既存candidate／typed graph／保存再読の契約を狭めない。
+
+全field内で実在するが曖昧な `CONTENT_TARGET` に限り、明示v10・直接親がnode root・親引用が全fieldで一意・子引用がその親の範囲内で一意という条件で、親内相対位置から元fieldの絶対scalar／UTF8位置へ戻す。存在しない引用、曖昧なroot、nested／WRITTEN_UNKNOWN親はこの局所探索で補わない。qualifierの引用範囲、WRITTEN_REASONの既存field束縛、cycle／depth／UNKNOWN親の拒否と他profile／integer-parent wireは保持する。これは意味・主体・否定・時点を認定する新proofではなく、既存typed consumerの検査を前段の誤った位置曖昧拒否で妨げないための修復である。
+
+### 実装済み範囲・実結果・未確認
+
+API [c1502415cc5d0e4fb9ff1fd5e1fcbe7a1af848b9](https://github.com/MassyuRed/mashos-api/commit/c1502415cc5d0e4fb9ff1fd5e1fcbe7a1af848b9) の既存 `semantic_admission._bind_model_unit_fields` へ上記fallbackを限定実装し、quoted-v10呼出しだけが選ぶ。新test `ai/tests/test_analysis_model_parent_local_content.py` の13 methodsで位置／境界・合法bare predicate・保存再読を保護し、既存workflowへ追加した。初版は全targetを親内へ強制して合法bare predicateを新拒否する回帰があったが、レビューで検出し、全field一意優先のv2へ訂正した。初期記録は上書きしない。local497 PASS＋11subtests／失敗・skip0・35.19秒、CI42217456387全工程success。
+
+固定baseline API5efdの実4Bは24field／最大4502入力token、10stop／1load／学習0、child128.340060778秒／parent134.238438373秒・exit0。7要求／10mapped record／16nodeを保持し、HC01は引用位置曖昧、HC03／10はJSON文法自体でなく重複field／units keyのstrict拒否だった。同raw f50比較・候補非生成再読と、実projectionのcurrent／月次mock RPC28read一致を確認した。修復版の同raw CPU比較ではHC01だけ候補成立・4node／mapped2／未解析1となり、別recordの日記過去希望の不正WRITTEN_MODIFIER拒否と他9件の全graph／count／拒否を保持した。
+
+baseline raw／model packは不変。[保存reader診断source](../../../observation_learning/trials/2026-11-01-analysis-model-fields/replay_heterogeneous_scope_saved.py)（SHA `0ab6d58159b267e2cd5eecf59e0185b96e46576cdb630728bd98f5aae8b2864c`）は元応答と比較結果を照合し、保存済み文章／図／coverageを非生成再読する。修正版のJupyter同raw比較はexit0、保存reader32read一致。新型／共有文法／prompt／作者／通常transport・既定／DB／RNの変更0、STRUCTURE_MAP_DELTA_NONE（既存admissionの位置束縛修復）。一般品質／通常採用、実DB／RLS／本人端末、全量処理／IF・Savedの商品受入れは未成立。[最新の実結果・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-heterogeneous-v10-live-20261106)／[本文なし集計](../../../observation_learning/trials/2026-11-01-analysis-model-fields/heterogeneous_scope_v10_results.json)。

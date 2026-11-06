@@ -5484,3 +5484,36 @@ API5efd／元a2e・config006e／Qwen固定revision・pins／元optional target�
 [実4B原本](https://chatgpt.com/library?file_id=libfile_fde3_f-729bd8856e6481918dbff31e0e1565c0_2f7470f963808191aaebf050935e72de&account_id=personal)は285512bytes／SHA `260dd2932805e84ffb5c32aba75dcb442d5e09df2b688def351ea4a05cacafe7`、36member・CRC／manifest全memberのbytes/SHA一致。pack、全10raw／Response、全結果・同raw旧比較・replay、実log・runtime pack/helper・公開runner/fixtureを保持。作成時は保存reader・詳細読解の確認中で、後続結果は別に追記する。
 
 [本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/heterogeneous_scope_v10_results.json)と新 `replay_heterogeneous_scope_saved.py` で全10を保持し、生成済みの実projectionのみcurrent／月次readerへ通す準備を行う。拒否ケースを集計から消さず、読込0として残す。実DB／RLS／月次capture／private graph全復元の証明ではない。今回は商品source／prompt／型／文法／作者／DB／RN／通常transportを変更せず、通常採用・次学習初期値・本番へ自動進行しない。
+
+### 同checkpointの位置束縛修復とJupyter再読確定
+
+HC01のdirect CONTENT_TARGETは、親rootが全fieldで一意・子が親内で一意でも、同じ語が別rootにも現れるため全field一意照合で拒否されていた。API [c1502415](https://github.com/MassyuRed/mashos-api/commit/c1502415cc5d0e4fb9ff1fd5e1fcbe7a1af848b9) は従来の全field一意位置を優先し、曖昧なv10直接対象だけ親内の唯一位置へ束縛する。旧profile／integer-parent wire、曖昧root／親内重複、nested／UNKNOWN、qualifier／reason／cycle／depthの既存境界は保持する。
+
+初案は対象を常に親内へ限定し、合法barepredicate＋同fieldの別引用対象を拒否する回帰があった。read-onlyレビューで発見し、global一意優先のv2へ訂正。初回495 PASSだけを完成判断にせず、v10の肯否barepredicate・旧候補／本文・保存再読の2methodを追加した。最終13methodを含む5moduleは497 PASS／11subtests／FAIL・SKIP0・35.19秒。local runtimeはPython3.12.14／pytest8.4.1／FastAPI0.141.1／pydantic2.13.4／httpx0.28.1。欠落した無関係なSQL pluginは実行引数で明示除外し、開始失敗logを保持する。CI42217456387は進行中で、正式CI依存版の結果を別途確定する。
+
+同じ実10rawのCPU比較でHC01は候補成立・4node／mapped2／未解析1へ変わった。過去希望に不正なWRITTEN_MODIFIERを付けた別recordは未読を維持し、rawやqualifierを修復していない。他9件のgraph・本文図・counts／拒否は新artifact UUID以外一致、全10source／messages／ref／guard／raw／source_set／member／61根拠のscalar・UTF8・hash対応を保持した。HC03／HC10は括弧等の構文不備ではなく、同一objectのfield／units重複keyによるstrict拒否である。最後の値だけを残すJSON解析へ緩めない。
+
+Jupyterに別clean API c150 runtimeを置き、元pack/result/10Response/10rawの22入力を同一bytesで別rootへコピーした。元runは再起動せず、元runnerのcompareと保存readerをモデル0の別processで実行し、各exit0。修復後は8要求（うち1部分成立）・12mapped record／20node、1未解析recordと2全拒否要求を保持。実current／月次readerのmock RPC32readがprojection／本文／coverage／IDを完全一致で返した。モデル／compiler／作者の生成入口は禁止、静的本文整合は維持する。baseline7成功の28readとは別の対象集合であり、一般正解率や独立60件へ加算しない。実DB永続化／RLS／月次capture／本人実機ではない。
+
+非公開原本の同じ保存先をversion1へ更新し、61member／515053bytes／SHA `c45dfbd7867dee6fefccd17d6527a02b17b6da3a641fac46efad34dd1045e8e3`、CRC・全member bytes/SHAを照合。元36member checkpointはversion0で保持し、元35payloadと旧manifestのbytesも最新bundle内に残す。Jupyter修復後8member原本は130496bytes／SHA `3f13849ec995e1633d2fa706b3d6086d3ed83b03d6dec21c0efd43efd6191086`。レビュー・初期/最終test log・同raw比較・source patchも保全した。
+
+資料転送では先行518a475のweeklyだけに本文省略を検出した。手元の全文をc8edd91で復元し、独立に計算したGit blobと転送blobが一致、1050932bytesのリモート全文を再取得して全bytes一致を確認した。分析code／model rawは影響0。以後の長文転送はchunkのbytes数と独立Git blobを照合し、転送用文字列だけの自己一致を完全性証明にしない。
+
+新prompt／教師／学習／重み／公開型／共有文法／作者／通常transport／DB schema／RN変更0、STRUCTURE_MAP_DELTA_NONE（既存admissionの位置束縛修復）。追加model callは0、元v10/a2eの通常採用・次初期値・本番反映は行わない。次はCI確定結果を追記し、残る重複key／過去希望modifierについて既存正教師のv4/v10入力整合をCPUで確認する。現評価source／rawは教師化しない。
+
+### 同checkpointのCI全工程確定
+
+APIc150の[CI42217456387](https://github.com/MassyuRed/mashos-api/actions/runs/42217456387)／job127890917700は11/6 **21:38:33 JST completed／success**。全stepと対象head・実logを照合。固定環境はPython3.12.16／pytest8.4.1／FastAPI0.142.2／pydantic2.13.5／httpx0.28.1で、local依存版とは区別する。
+
+| 対象 | 実結果 |
+|---|---|
+| 生成・保存再読 | 2570 PASS／既存SQL1 SKIP／12059 subtests、549.61秒 |
+| 共有owner identity | 1 PASS／194 deselected、31.32秒 |
+| 累積API／Q3保存元／既存jobs | 302 PASS／2subtests／既存warning1、212.94秒 |
+| 隔離SQL | passed、201 sourceRecords／15 monthlyReferences、月次rank・不変再読・source削除 |
+
+生成stepの1 SKIPは既存 `test_analysis_model_fields.py:147` のWASM未設定であり、後続SQL成功からこのtestを実行済みへ読み替えない。local497とCIを別の解決件数へ重複加算しない。全fileのsource bytes／blob SHA／remote changed pathsとheadを確認する。
+
+非公開原本は同じ保存先のversion2へ更新。62member／525025bytes／SHA `446d99c0a579e8d2b6416cecf6bfc881a8d4ac4f3ed93d8046944c6bc1f83115`、CRC／全bytes一致。version0の原応答・version1の修復後比較を保持し、version2に最終CI実logを追加した。source／raw／モデルpack／両readerの元bytesは不変。
+
+本区切りは実4B原応答による補足希望接続の確認、位置束縛修復、同rawのpartial mapと保存非生成再読、回帰CIまでを完了。一般読解、通常採用／本番配置、本人基準・暗黙役割・記録間意味、IF／Saved、実DB／本人実機は未成立。5時間作業は継続し、次のCPU整合監査は既存正教師だけを使い、今回評価source／rawを教師化しない。
