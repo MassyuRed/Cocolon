@@ -2322,3 +2322,5 @@ mapped0/0/3→1/2/3、全未解析0。全parent内の各元fieldが完全な行�
 `heterogeneous_scope_cpu.py`／`heterogeneous_scope_cpu_results.json`は完全合成10構成・生成0。カテゴリ別集約等の9期待一致と、原希望＋補足ACTIONで原希望が落ちるHC09を分離した。実原因はoriginal-only viewのchild参照不整合。補足希望の未対応は維持。[実結果・原本・途中再開点](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-heterogeneous-scope-cpu-20261106)。
 
 §234継続：原希望とordinary補足ACTIONの併存はAPI db6a571のoriginal-only view修復でmodule231 PASS。`heterogeneous_scope_probe.py`はHC01〜10／v10／元a2e・学習0／最大10生成／1load／300秒・23秒の次比較sourceで、現時点実model未実行。同raw旧API比較・非生成reloadを区別する。
+
+§234確定：API db6a571のCI42199766784全工程success。Jupyter CPU after／関連testのcommand終了後、prepare入力中に作業環境が切断し結果未回収。4B generate未起動・新生成／学習0。5時間依頼は未完了。復旧後は既存Pod出力を先に回収し、新10要求を重複起動せず進める。[正確な再開点](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-heterogeneous-scope-cpu-20261106)。

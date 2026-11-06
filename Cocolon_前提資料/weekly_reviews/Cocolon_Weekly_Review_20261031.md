@@ -5342,6 +5342,28 @@ Mashの5時間の分析残件・Jupyter直接接続・区切りごとのGitHub�
 
 CPUは再発見した既存venvのPython3.12.14／pytest8.3.5／FastAPI0.162.0／pydantic2.14.3／httpx0.28.1、1.896085秒・exit0。固定CI環境の正式成功とは区別する。生成／load／tokenizer／学習／DB呼出し・製品変更0。 [本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/heterogeneous_scope_cpu_results.json)と[原本](https://chatgpt.com/library?file_id=libfile_fde3_f-23d2bfa1e04481919859f6e8db667426_2f7470f963808191aaebf050935e72de&account_id=personal)を保全。原本384410bytes／SHA410d2cdbf1d5c07fa0b4c47ecae3ec7f165a1193164285bc000e110c859d2cde。原本を後続の修復結果で上書きしない。
 
-STRUCTURE_MAP_DELTA_NONE（診断runnerと検証範囲だけ）。通常profile／研究重み未採用・本番／実DB／本人端末は未実施。5時間依頼の途中checkpointであり、5時間作業完了とはしない。続いて[API db6a571](https://github.com/MassyuRed/mashos-api/commit/db6a571689dca883ece187a21deefad45e6e08bd)の既存ownerで、original-only viewのmember child参照も原入力だけへ揃える8行修復を反映。最終artifactは元のfull source集合のまま。既存module全231 PASS／失敗・skip0、15.41秒（新26回帰、旧205を保持）。初回6失敗は新testのDTOキー期待・source例外型の誤りを訂正した。補足希望未対応を検証する旧test、原希望の証明条件、prompt／通常既定は不変。同環境read-only reviewは問題なし。全2変更blobをGitHubから全文読み戻して一致。CI42199766784は進行中で未合格。
+STRUCTURE_MAP_DELTA_NONE（診断runnerと検証範囲だけ）。通常profile／研究重み未採用・本番／実DB／本人端末は未実施。5時間依頼の途中checkpointであり、5時間作業完了とはしない。続いて[API db6a571](https://github.com/MassyuRed/mashos-api/commit/db6a571689dca883ece187a21deefad45e6e08bd)の既存ownerで、original-only viewのmember child参照も原入力だけへ揃える8行修復を反映。最終artifactは元のfull source集合のまま。既存module全231 PASS／失敗・skip0、15.41秒（新26回帰、旧205を保持）。初回6失敗は新testのDTOキー期待・source例外型の誤りを訂正した。補足希望未対応を検証する旧test、原希望の証明条件、prompt／通常既定は不変。同環境read-only reviewは問題なし。全2変更blobをGitHubから全文読み戻して一致。CI42199766784は後述のとおり全工程success。
 
 `heterogeneous_scope_probe.py`は同HC01〜10の元snapshotだけを現v10／元a2eへ一回ずつ渡す準備source。CPU合成packet／期待をpromptへ送らず、学習0・最大10生成／1load／親300秒・各23秒。全rawをconsume前に保存し、同rawの旧f50acbc比較と非生成再読を分離する。AST確認のみ、実model未実行。Jupyter修復版rootへ固定APIを配置し、CPU前後と関連検証へ進む。旧run再起動や成功までの生成反復は行わない。
+
+
+### 同checkpointの確定結果と環境切断
+
+API db6a571の[CI42199766784](https://github.com/MassyuRed/mashos-api/actions/runs/42199766784)／job127831871759は、11/6 19:14:17 JSTにcompleted／success。job全工程をAPIと実logで照合した。生成保存2468 PASS／既存SQL1 SKIP／12048 subtests・399.41秒、共有owner1 PASS／194 deselected・27.32秒、累積/API/jobs302 PASS／2subtests／既存warning1・160.50秒、隔離SQL201原本／15月参照。local231とCIを別件数へ重複加算しない。稼働Supabaseや本人端末の成功ではない。
+
+Jupyter上では、新コピーのoriginが旧local copyを指しており新commitを取得できず、最初のCPU precheckはunexpected_api_commitで停止した。新コピーだけのoriginを正しい公開GitHubへ修正し、固定db6a571へ切替後、同じCPU10構成のafterと関連3moduleのコマンドを実行した。shell promptへの復帰は見たが、after JSON・test log・exitは切断前に回収できず、Jupyterの成功件数やafter10/10を確定しない。既存before/afterのoutputがある場合、再実行せず先に読み戻す。旧f50acbc rootと元adapterは変更していない。
+
+その後、モデルrunner取得＋prepareを入力するブラウザ操作中にexec-server transportが切断。作業環境status=unavailableとなり、Browser toolも利用不能になった。準備commandをReturnで実行した確認はない。generate modeは一度も入力・起動しておらず、今回の新4B生成／model load／学習は0で確定する。Jupyter側モデル結果・token数は存在を仮定しない。接続切断をPod停止やGPU自体の障害と断定しない。レンタル停止／再起動／新レンタル／port変更は行っていない。
+
+**5時間の依頼は未完了で、環境切断による途中終了である。** 5時間を実施済みと報告せず、実施を確認できた今回作業と未実施時間を混同しない。今回成立したのは、合成CPU10構成からの原因特定、原希望保持の既存owner修復、local／CI検証、GitHubの区切り保存まで。4B実比較、Jupyter結果回収、補足希望の接続拡張、一般意味品質・通常採用／本番配置・実DB／実機は未完了。
+
+### 復旧後の再開点
+
+1. fresh PR30／API PR3と本節、保存原本を確認する。API修復checkpointはdb6a571689dca883ece187a21deefad45e6e08bd、モデルrunner checkpointはe27910e9ae72400a49ed1af127003ca0acba2869。旧完了runは起動しない。
+2. 既存Jupyterへ直接接続し、terminalに未完の入力がないかを先に確認する。生成を開始せず、/workspace/hetero-cpu-before-20261106.json、hetero-cpu-after-20261106.json、hetero-jupyter-tests.log、hetero-runtime-setup.log、hetero-runtime-fetch.logを回収する。原失敗logを成功で上書きしない。現在の入力が未完なら解除してから続ける。
+3. 新API root=/workspace/analysis-heterogeneous-runtime-20261106のHEAD／tracked cleanとsource hashを確認。旧root=/workspace/analysis-negative-wish-v10-runtime-20261106（f50acbc）は同raw比較用で保持する。
+4. 公開runner heterogeneous_scope_probe.py（18458bytes／SHA be9f9f030cd3addd9ab54eb1835572b0fa9dcdf027de2422f9fe6b6c5d68478c）とCPU fixture runnerを同一bytesへ照合。runtime pack=/workspace/analysis-fact-wish23-20261106/pack.json（SHA7acc464f1b45916a9d96bf91a27b042b71532456cec667e123d86208cf0c58e3）、runtime helper=同runner.py（SHA97275c93fce38340590f49a30dacea1f5eeb592a304d63c12269b32d602f0e7b）を使う。
+5. 新root=/workspace/analysis-heterogeneous-v10-20261106の有無を確認。prepare未完なら上記固定条件でprepareし、全10 source／全field／実tokenizer入力＋2048<=8192を確認する。既存packやresultがあれば再起動せず状態を先に読む。generateは未実行で、最初の一回だけ最大10／1load／親subprocess300秒・各23秒／学習0。原raw先行保存、同raw旧f50acbc比較、非生成replay、保存projection readerを分けて確認する。
+6. HC06–08等の本人補足希望は現consumerの既存未対応であり、誤kind／引用／source proofのどこで止まるかを実rawから分ける。原入力専用wish proofを補足へ流用しない。別のanswer-owned proofの最小案は同環境read-only確認までで、実装・テスト・採用はまだ行っていない。
+
+GitHubへ公開してよいsource／本文なし集計／現在地だけを反映し、原文・raw・人物・tokenを公開しない。非公開CPU原本は前掲の保存先に保全済み。Jupyter未回収fileはPod側に残っている可能性があるがPod外保全済みとは主張しない。API／資料の全変更blobは各checkpointで読み戻し一致、両PRはDraft／open／unmerged。本番反映・merge・RN build・DB書込は0。

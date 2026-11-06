@@ -3789,3 +3789,5 @@ API f50acbc・semantic_admission／intent_compiler／cumulative serviceは無変
 trial `heterogeneous_scope_cpu.py`は完全合成snapshotとpacketを実prepare／strict／通常mapへ通す診断、`heterogeneous_scope_cpu_results.json`は本文なし集計を所有。新商品owner／通常経路／API／DB／RN構造の変更なし、STRUCTURE_MAP_DELTA_NONE。原希望と補足の局所source view不整合を[weekly§234](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-heterogeneous-scope-cpu-20261106)へ記録。
 
 §234継続：API既存 `semantic_admission._compile_model_observed_record` は原入力専用sourcesとmember child参照の局所viewを整合し、最終source集合を保持する。既存 `test_analysis_model_observed_actions.py` へ26回帰、trial `heterogeneous_scope_probe.py` は固定モデル比較を所有。新商品owner／型／公開DTO／DB／RN構造は追加しない。
+
+§234確定：API db6a571の既存2file修復はCI全工程success。heterogeneous_scope_probe.pyは準備sourceのみ、実model未起動。Jupyter未回収結果と復旧手順はweekly§234末尾。STRUCTURE_MAP_DELTA_NONE（既存局所view修復と診断runner、通常API／DB／RN構造追加0）。
