@@ -5780,3 +5780,51 @@ Pod ZIP27member／943859bytes／SHA `5f936e6a613dbe180f7ded2ef1e9e928ab6263c4cdd
 STRUCTURE_MAP_DELTA_PRESENTは既存compiler／realizer内の意味採用と未確定表示の限定拡張。新しいprofile／型／共有意味owner／作者／公開API／DB／RN／Render変更なし。通常モデル既定・transport・重みは不変、本番配置・merge・モデル採用は未実施。有限consumerのsource変更を「通常経路のコード変更0」とは書かない。保存済みcurrent／月次を遡って再生成せず、この実装だけで既存cacheが全更新されるとは主張しない。TECHNICAL_CREDITの局所接続で、一般品質／正式受入れは未成立。
 
 WC04は「断る」の語彙・対象句・対象主題はの3箇所が既存証明外とCPU確認済みで、未対応のまま。次はその一文の根拠を落とさず既存行動／非行動へ渡す最小の原入力専用範囲を固め、同rawで実装比較する。主体・理由・当日実行を補わない。暗黙役割・本人基準・判断／選択・記録間意味、全量処理・IF/Saved・実DB／端末、通常重み採用と前回の対象子5減少は残件。 完了した19保存応答の再生成や不採用23学習へ戻らない。
+
+
+<a id="analysis-original-refusal-20261107"></a>
+## 243. 11/7 — 原入力の過去拒否を、主語と拒否日を補わず文章・図へ接続
+
+§242の次作業をJupyterへ直接接続して継続した。前回添付記録、fresh PR30/API PR3、System Context PR37入口、Cocolon_前提資料・作業姿勢と現行ルール・全機能現在地・全体設計/ファイル地図のrouting・Analysis現行03/詳細04と実compiler/admission/累積service/作者を照合。全repo全blob読了とはしない。実行はCodex Work/GPT-6のroot華恋、補助agentはread-onlyで、別環境Pro/Ultra・人間受入れとは報告しない。
+
+### 今回の限定scopeと商品上の変化
+
+原入力の唯一memoにある、一つの完全な過去拒否を既存ACTION_OR_NONACTIONへ接続した。断ったはpositive/fact/pastの拒否行動、断らなかったはnegative/fact/pastの拒否しなかった記述として分ける。拒否行動を参加しなかった結果へ変えず、拒否しなかったことを承諾した結果へ変えない。
+
+対象headは誘い/依頼/提案/招待、名詞は既存有限語彙と集まり/誘い、明記された名詞内連結に閉じる。人物のは主題を対象と誤認しないよう対象headを検査し、原表記は/をを保持する。今日の/昨日のは対象名詞の修飾であり、拒否日のrelative_dayは空のまま。誰が断ったかはUNSPECIFIEDで、理由・意図・役割・参加結果を足さない。
+
+変更は既存intent_compilerの有限parser、_fragmentの原入力/唯一memo/全文拘束、既存モデル完全field証明の専用分岐。モデルrootが短い有限述語でも、完全な対象子・同じ親子・全unit消費・既存qualifier検査が揃う時だけ採る。sourceから欠落子を捏造したり、他の行動に短いquote許可を広げたりしない。汎用_VERBS/_ARGUMENT/共有owner、admission、累積service、唯一realizerは変更しない。敬体・明示SELF/他者・副詞/理由・希望/認知・複文・別欄・補足は今回未対応。
+
+API [4e1f8347](https://github.com/MassyuRed/mashos-api/commit/4e1f83473a73301c6a84b199db72dd8e57ccc3f9)のsource/test/workflow exact3へ反映した。比較runnerは実行前のCocolon [e2dd4f86](https://github.com/MassyuRed/Cocolon/commit/e2dd4f8672c4d8fe7871239b99c7a0ba0d2f80ff)で固定。既存branchだけを更新し、main/merge/deployは行っていない。
+
+### 取得済み19応答のJupyter同raw比較
+
+元19応答は§242 afterとして保存済みの原本を使用。旧95c546と新4e1f834を別checkoutで各1回消費した。旧版6.270702886395156秒、新版5.207104365341365秒、exit0。新生成/load/学習/実DB呼出し0。
+
+| 確認対象 | 旧95c546 | 新4e1f834 |
+|---|---:|---:|
+| 前回の19typed結果と同一 | 19 | 18 |
+| 対象拒否record mapped/未解析 | 0/1 | 1/0 |
+| 対象拒否node/edge | 0/0 | 1/0 |
+| 入力row/request/response/raw/候補保存の一致 | 19 | 19 |
+| 候補保存readerの非生成再読 | 19 | 19 |
+
+差分1件は短い拒否rootと完全な対象子を、その元memo全文の証明で採ったもの。元node/根拠には対象のは・原文と原座標、元recordと生活カテゴリを保持し、表示には誰の行動かは未確定・記録1件が残る。SCENE/ROLE/ATTENTION_OR_THOUGHT/IMMEDIATE_RESULT_OR_AFTERMATHの四不足、edge0/注記0/対立0を維持する。前回回復した主語省略希望も含む他18のgraph/件数/本文/図は新artifact UUID以外同一。モデルの意味発見や新しい一般言語成功率ではない。
+
+全19のcandidate storage文字列を前後bytesまで保持し、保存readerではモデル・候補compiler・候補作者を禁止して一致確認した。新nodeの原文literal/scalar/UTF8座標・field/literal hash、親record/envelopeを照合。独立read-only補助reviewも全19の入力/raw hash/候補state、唯一typed差分と新根拠を確認した。今回のsaved-map読取検査は合成RPCのreport-id readerで生成を禁止したもの。実DB/current/月次captureの新成功として扱わない。
+
+### 回帰検査と保全
+
+Jupyter新suite55 PASS/6.83秒。既存の行動・主語省略希望・本人補足希望・役割/判断・名詞関係を含む7suiteは630 PASS/133subtests/46.44秒/exit0。55は630へ内包されるため合算しない。2recordの不明主体を同じ人物として集約しないこと、日付と人物topic・別欄/補足/引用/夢/理由/条件/未読tailの拒否、完全対象子の必須性、保存後の生成禁止読取も確認した。
+
+最終[CI42313404029](https://github.com/MassyuRed/mashos-api/actions/runs/42313404029)はAPI4e1f8347をcheckoutし全工程success。生成保存2755 PASS/旧SQL1 SKIP/12058subtests（578.05秒）、共有owner1 PASS/194deselected、累積/Q3/job302 PASS/2subtests/既存warning1（209.28秒）、隔離SQL201source/15月参照。機械検証成功を一般読解品質・商品受入れへ換算しない。
+
+PodのZIPは13member/569574bytes/SHA `23ab00fe38f9aec16d120004dfca6f02dbc2c95f9f491402fd21da7bd0bbd8d9`。CRCと全12manifest entryのbytes/SHAを回収後照合した。ZIP作成で最初の複数行端末入力が連結してsyntax error、単一行化後もPython文字列内改行でsyntax errorになった。改行をchr(10)へ直し成功。商品source・raw・model/testの再実行で回避したものではない。失敗経緯を成功結果で消さない。
+
+全19の原入力/request/raw/候補stateと旧新typed本文図・前後log・検査log・独立review・実行版参照を[検証原本ZIP](https://chatgpt.com/library?file_id=libfile_fde3_f-bb2c9bf654ac819196bd2faac4e224fa_2f7470f963808191aaebf050935e72de&account_id=personal)へ保全。最終ZIPは20member/583132bytes/SHA `9c8776df08a013a9a484026e1bfb900d4341c18ec774f95d40bb8952304480c3`、bundle manifest全19entryを照合した。公開repoには本文なしの[集計](../observation_learning/trials/2026-11-01-analysis-model-fields/refusal_results.json)とrunner/設計を置き、private本文や個別rawを転載しない。終了時のfresh Jupyter画面はGPU2MiB/0％。
+
+### 現在地・残件
+
+STRUCTURE_MAP_DELTA_PRESENTは既存compiler内の限定拡張で、新しい商品owner/型/作者/公開DTO/DB/RNは追加しない。通常finite consumerのsource変更はある。通常モデル既定・HTTP/batch profile・transport・重み採用、Render/実DB/本人端末/ビルド・本番配置・mergeは変更0。古いcurrent/月次保存を再生成していない。TECHNICAL_CREDITの局所接続で、一般品質/商品受入れ未成立。
+
+§241の中間対象子5減少、本人基準/暗黙役割/判断/選択・記録間意味、全量処理・IF/Saved・通常モデル採用・実DB/端末は残件。§242の拒否文一件のblockerは解消。次は既存教材の本人基準・判断理由の未対応範囲を、元source/rawと既存構造へ戻して照合する。新しい教材・追加学習/GPU条件は今回固定せず、完了19応答の再生成や不採用23学習へ戻らない。

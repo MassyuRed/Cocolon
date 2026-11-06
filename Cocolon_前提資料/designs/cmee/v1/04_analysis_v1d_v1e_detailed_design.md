@@ -1,4 +1,4 @@
-> **11/7・分析の最新（第9回§242）：原入力memo唯一・単一完全希望を主体UNSPECIFIEDのまま扱う有限consumerを実装。既存9動詞×plain現在／過去・肯否、を格必須。保存済み19応答をJupyterで旧新CPU比較し、WC02だけ未対応→過去希望1node・主体未確定表示へ回復。他18のgraph／件数／本文図を保持、raw／入力／候補保存state19は前後完全同一。前後各19の非生成保存再読、171根拠照合。新生成／load／学習／DB0。関連515 PASS＋26subtests／最終CI全工程success。補足SELF限定・別record非同一化を維持、本番未配置・一般品質未成立。** [実結果・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-omitted-wish-20261107)／[本文なし集計](../../../observation_learning/trials/2026-11-01-analysis-model-fields/omitted_wish_results.json)。WC04は「断る」の語彙・対象句・対象主題はの3箇所が既存証明外とCPU確認済みで、未対応のまま。次はその一文の根拠を落とさず既存行動／非行動へ渡す最小の原入力専用範囲を固め、同rawで実装比較する。主体・理由・当日実行を補わない。暗黙役割・本人基準・判断／選択・記録間意味、全量処理・IF/Saved・実DB／端末、通常重み採用と前回の対象子5減少は残件。 STRUCTURE_MAP_DELTA_PRESENT（既存compiler／realizer内の限定拡張）。
+> **11/7・分析の最新（第9回§243）：原入力の唯一memoにある単一の過去拒否を既存行動／非行動へ接続。断った／断らなかった、明記対象のは／を、主体UNSPECIFIED・過去・元カテゴリを保持し、対象名詞の日付を拒否日へ変換しない。保存済み19応答のJupyter同raw旧新比較で1件だけ未対応→1nodeへ回復、他18のgraph・件数・文章図と全19の入力／raw／候補保存内容は同一。前後各19の非生成候補再読、関連630 PASS＋133subtests、最終CI全工程success。モデル生成／load／学習／実DB0。通常未採用・本番未配置、一般の役割／判断基準／記録間読解と対象子5減少は残件。** [実結果・範囲・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-original-refusal-20261107)。STRUCTURE_MAP_DELTA_PRESENT（既存compiler内の限定拡張）。
 
 > **11/6・最新§237：既存23教師を元target／sourceのままv10へCPU整合し、固定tokenizer／prefix・EOS・mask・予算を確認。candidate23／非生成再読23・typed12／unsupported11は教師診断の結果で、LM品質や学習改善の保証ではない。private packは不採用、LM／更新／DB0、新runnerはsource完成・実行前review済、prepare／run未実行。** [実結果・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-existing-teacher-v10-cpu-20261106)／[本文なし集計](../../../observation_learning/trials/2026-11-01-analysis-model-fields/existing_teacher_v10_cpu_results.json)。STRUCTURE_MAP_DELTA_NONE（CPU診断・準備のみ）。
 
@@ -2062,3 +2062,13 @@ _model_complete_observed_plain_wish_fieldsの省略主体許可は、既存原�
 ### 実装と確認範囲
 
 API [95c546c2](https://github.com/MassyuRed/mashos-api/commit/95c546c27ab106f4b30bc850a13737f48cf4d6ec)の既存compiler／realizer、専用testと既存workflowへ実装。Jupyter515 PASS＋26subtests／最終CI全工程success。保存済み19応答の同raw比較でWC02のみ1node回復、他18typed結果と19candidate storageを保持、前後各19の非生成候補再読一致。一般意味品質・実DB／本人端末・本番配置・モデル採用・human受入れは未成立。前回の対象子5減少は未修復。STRUCTURE_MAP_DELTA_PRESENT。[実結果・失敗・原本](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-omitted-wish-20261107)。
+
+
+<a id="analysis-original-refusal-20261107"></a>
+## 11/7 §243 — 原入力だけの過去拒否・対象主題の保持
+
+原入力ORIGINAL_INPUTのmemoだけが非空で、完全な一文である場合に限定。断った／断らなかったを肯定／否定の過去factとして認識し、主体はUNSPECIFIEDのまま。対象headは誘い／依頼／提案／招待、名詞内は既存名詞＋集まり／誘いと有限の連結から証明する。対象のは／をを原表記で保持し、は→をの変換や人物主題の対象化を行わない。今日の／昨日のは対象名詞の修飾で、行動の日付relative_dayを作らない。
+
+汎用_VERBS／_ARGUMENT／共有ownerを拡張しない。_fragmentで原入力・唯一memo・全文・明示根拠を拘束する。モデルの短い有限述語rootは、この専用分岐で完全な対象子があり、全unitと親子・既存qualifier照合が成立する場合だけ採る。一般ACTIONの短縮quote許可や、欠落子のsource補完は追加しない。敬体／希望／認知／明示SELF・他者／理由・副詞／複文／別欄／補足は未対応のまま。
+
+既存realizer／集約規則を再利用。拒否の実行と不実行を区別し、参加／不参加・理由・意図・役割・結果・他記録との関係は生成しない。不明主体の別recordを同じ人の反復へまとめない。保存reader・公開型／DB／RN変更なし。API4e1f8347、同raw19比較と630 PASSはweekly§243へ。一般品質／商品受入れ・通常採用・本番配置を証明しない。STRUCTURE_MAP_DELTA_PRESENT。

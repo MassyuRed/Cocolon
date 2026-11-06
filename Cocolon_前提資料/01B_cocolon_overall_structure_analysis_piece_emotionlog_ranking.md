@@ -1,3 +1,5 @@
+> **11/7・分析の最新（第9回§243）：原入力の唯一memoにある単一の過去拒否を既存行動／非行動へ接続。断った／断らなかった、明記対象のは／を、主体UNSPECIFIED・過去・元カテゴリを保持し、対象名詞の日付を拒否日へ変換しない。保存済み19応答のJupyter同raw旧新比較で1件だけ未対応→1nodeへ回復、他18のgraph・件数・文章図と全19の入力／raw／候補保存内容は同一。前後各19の非生成候補再読、関連630 PASS＋133subtests、最終CI全工程success。モデル生成／load／学習／実DB0。通常未採用・本番未配置、一般の役割／判断基準／記録間読解と対象子5減少は残件。** [実結果・範囲・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-original-refusal-20261107)。STRUCTURE_MAP_DELTA_PRESENT（既存compiler内の限定拡張）。
+
 > **11/6・最新§238：既存23／v10の一回23更新・14stopは完走したが、HC01／02が退行して新b8d096候補は不採用、元a2eを維持。HC生成8→6／全14生成12→10・mapped16→12、棄却source4→9。HC04–09＋既知control4の意味は保持。NLL低下を品質改善にしない。** [実結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-existing23-v10-bounded-20261106)／[本文なし集計](observation_learning/trials/2026-11-01-analysis-model-fields/existing23_v10_trial_results.json)。新GPU／新教師は未選定、CPU欄診断もlocal／Jupyterで完了。STRUCTURE_MAP_DELTA_NONE。
 
 > **11/6・最新§237：既存23教師のCPU audit／v10入力準備を完了。元target／source不変、candidate23／非生成再読23、typed12／unsupported11、実tokenizerとmask／予算を確認。LM／更新／DB0・private pack不採用、新runnerはsource完成・実行前review済、prepare／run未実行。新2診断sourceと本文なし集計の実file地図は末尾§237。** [結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-existing-teacher-v10-cpu-20261106)。STRUCTURE_MAP_DELTA_NONE（CPU診断・準備のみ）。
@@ -3910,3 +3912,16 @@ HC01／02が退行し、HC03／10はraw同一の重複key拒否を継続。HC04�
 | 同directoryの`omitted_wish_results.json` | 本文なしの局所回復・保持・失敗・未完了・保全先 |
 
 前提資料は00／この01B／current_structure03／詳細設計04／trial README／weekly§242を差分更新。admission／累積service／共有意味／profile／DTO／DB／RNは変更しない。STRUCTURE_MAP_DELTA_PRESENT（既存意味採用とsafe表示範囲の限定拡張、新ownerなし）。[全結果・次の一作業](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-omitted-wish-20261107)。
+
+
+## 11/7 §243 — 原入力の過去拒否・全変更path
+
+| 実path | 差分／責務 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | 原入力専用の完全拒否節と対象主題はの証明。2plain過去活用・明記対象・主体未確定・同raw根子照合 |
+| `mashos-api/ai/tests/test_analysis_model_refusal.py` | 意味／元根拠／別record／source範囲／モデル子必須／保存readerの55条件 |
+| `mashos-api/.github/workflows/analysis-observed-content.yml` | 既存回帰jobへ新suite一行 |
+| `Cocolon/Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/refusal_saved_trial.py` | 既存19応答の0生成比較、入力・raw・候補保存不変、唯一typed差分と既存18保持 |
+| 同directoryの`refusal_results.json` | 本文なし集計・検証範囲・未採用／未配置・private原本参照 |
+
+資料は00／この01B／Analysis current03／詳細設計04／trial README／weekly§243を差分更新。realizer／admission／累積service／共有意味owner／DTO／DB／RNは不変。STRUCTURE_MAP_DELTA_PRESENT（既存compiler内の限定拡張、新商品ownerなし）。

@@ -1,0 +1,96 @@
+{
+  "schema_version": "analysis_original_refusal_results.v1",
+  "work_date": "2026-11-07",
+  "status": "LIMITED_FINITE_CONSUMER_IMPLEMENTED_NOT_DEPLOYED",
+  "api_commit": "4e1f83473a73301c6a84b199db72dd8e57ccc3f9",
+  "predecessor_api": "95c546c27ab106f4b30bc850a13737f48cf4d6ec",
+  "runner_commit": "e2dd4f8672c4d8fe7871239b99c7a0ba0d2f80ff",
+  "scope": "Sole original memo, one complete plain past refusal, bounded explicit object heads and written topic/object particle. No owner-derived actor or action date.",
+  "new_generation": 0,
+  "model_loads": 0,
+  "training_updates": 0,
+  "db_calls": 0,
+  "requests": 19,
+  "raw_request_candidate_exact": 19,
+  "changed_typed_count": 1,
+  "unchanged_typed": 18,
+  "candidate_saved_reloads_before": 19,
+  "candidate_saved_reloads_after": 19,
+  "before_seconds": 6.270702886395156,
+  "after_seconds": 5.207104365341365,
+  "typed_recovery": {
+    "mapped_before": 0,
+    "mapped_after": 1,
+    "unparsed_before": 1,
+    "unparsed_after": 0,
+    "nodes": 1,
+    "edges": 0,
+    "actor": "UNSPECIFIED",
+    "polarity": "positive",
+    "modality": "fact",
+    "temporal_scope": "past",
+    "relative_day": "",
+    "written_case_preserved": true,
+    "original_record_and_category_preserved": true
+  },
+  "tests": {
+    "targeted": 55,
+    "regression": 630,
+    "subtests": 133,
+    "regression_seconds": 46.44,
+    "ci_run_id": 42313404029,
+    "ci_status": "SUCCESS",
+    "ci": {
+      "run_id": 42313404029,
+      "job_id": 128220090836,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "4e1f83473a73301c6a84b199db72dd8e57ccc3f9",
+      "generation_saved": {
+        "passed": 2755,
+        "skipped": 1,
+        "subtests": 12058,
+        "seconds": 578.05
+      },
+      "shared_owner": {
+        "passed": 1,
+        "deselected": 194
+      },
+      "cumulative": {
+        "passed": 302,
+        "warnings": 1,
+        "subtests": 2,
+        "seconds": 209.28
+      },
+      "sql": {
+        "status": "passed",
+        "source_records": 201,
+        "monthly_references": 15
+      }
+    }
+  },
+  "scope_limits": [
+    "No polite, explicit SELF/other actor, report, dream, cognition, reason, adverb, multiclausal or supplemental-answer extension.",
+    "No inference of attendance, motive, role, result or cross-record meaning.",
+    "Candidate child loss of five units in the preceding model prompt comparison remains unresolved.",
+    "General role/decision/choice and personal criteria reading, cross-record semantics, IF/Saved, normal model adoption and live DB/device validation remain incomplete."
+  ],
+  "normal_adoption": false,
+  "deployed": false,
+  "structure_map_delta": "PRESENT_WITHIN_EXISTING_COMPILER",
+  "primary_outcome": "TECHNICAL_CREDIT",
+  "pod_archive": {
+    "bytes": 569574,
+    "members": 13,
+    "sha256": "23ab00fe38f9aec16d120004dfca6f02dbc2c95f9f491402fd21da7bd0bbd8d9",
+    "crc_and_manifest_verified": 12
+  },
+  "preserved_artifact": "https://chatgpt.com/library?file_id=libfile_fde3_f-bb2c9bf654ac819196bd2faac4e224fa_2f7470f963808191aaebf050935e72de&account_id=personal",
+  "independent_read_only_review": "Source scope and all19 comparison/evidence checked; no blockers found. Same-environment assistance, not human acceptance.",
+  "final_archive": {
+    "bytes": 583132,
+    "members": 20,
+    "sha256": "9c8776df08a013a9a484026e1bfb900d4341c18ec774f95d40bb8952304480c3",
+    "library_version": 1
+  }
+}
