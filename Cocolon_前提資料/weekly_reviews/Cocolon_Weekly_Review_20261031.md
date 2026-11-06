@@ -5683,3 +5683,49 @@ Pod原本59member／927034bytes／SHA `a20dfae84b93789499d448f9b11a25bcaaf3a8769
 今回は研究sourceのみでAPI変更0。§239のCI42234794559全step successは既存実績として継承し、新しいAPI CI実行とは数えない。通常HTTP/batch・重み・公開API/DTO・DB・RN・Render・merge/deployの変更0、通常採用未実施。STRUCTURE_MAP_DELTA_NONE（新商品ownerなし）。TECHNICAL_CREDITの局所回復で、Mashの商品受入れを代行しない。
 
 次はHC01の肯定過去希望に付く誤修飾の修正。今回の欄構造回復と旧13の意味保持を比較基準にし、strict readerと元sourceを保つ。完了済み14生成や不採用23学習を同条件で繰り返さない。本人基準・暗黙role・判断/choice・記録間意味・全量処理・IF/Saved・実DB／本人端末の品質は別の残件として継承する。
+
+
+<a id="analysis-positive-past-wish-20261107"></a>
+## 241. 11/7 — 肯定過去希望の誤修飾を局所回復、失敗v12と中間候補減少を分離記録
+
+§240の次作業HC01をJupyter直接接続で継続した。設計00／01A–C／Analysis現行地図03／最新weekly§239–240と、作業姿勢・現行ルール・商品読解の必須記録を参照。全repository blobを読んだという主張はしない。
+
+### 比較条件と失敗を含む実行結果
+
+元a2e重み/config006e、既存shape mask（引用・parent・qualifier文字列は自由）、strict reader、compiler、原sourceとuser messageを固定。v12は活用境界の追加説明案で24stop／1load／学習0／187.82016548793763秒／exit0。HC01はbaselineとraw bytesまで同一で誤WRITTEN_MODIFIERが残った。OP02で原文にないSELFを生成し、`analysis_model_units_quote_ambiguous_or_missing`で全要求を拒否。既知14の到達14→13、mapped20→19／node34→33／map内未解析1。説明案v12は不採用、失敗rawを修復せず保全した。control5のv11/v12 rawも同一で改善なし。
+
+v13は失敗v12を継承せず、v11＋独立した肯定過去希望の合成例1つだけ。既存負例の行動節と別の希望節を組み合わせ、HC01やcontrolの本文・期待rawを例示へ入れない。ただし既知fixtureを診断後の局所修正なのでblind試験ではない。実行前にAPI [91f3e67](https://github.com/MassyuRed/mashos-api/commit/91f3e67b8daff5b66dabb7b2a7875dc191a72831)／runner [22934ca](https://github.com/MassyuRed/Cocolon/commit/22934ca3f24c71198eb6396ff8c407e0e1cc36b5)へ固定。中間659be80版は未生成のまま差し替え、実行版と混同しない。v12/v13は固有profile/ref/stateで相互再利用を拒否し、補足・親内束縛・保存reader・累積経路を既存責務で通す。
+
+v13は19入力（旧14＋v11で取得済みcontrol5）を一度だけ新生成。prepare19／最大input4855、実EOS248044・token mapping248056を検証。19stop／1load／学習0／retry0／169.69736406300217秒／exit0、各生成35秒・親480秒以内。同23教師の再学習はしない。今回合計43新生成／2load／更新0、357.5175295509398秒。v12とv13の対照を独立母数の一般成功率へ足し合わせない。
+
+| 既知14要求 | 元v11＋shape | 失敗v12 | v13 |
+|---|---:|---:|---:|
+| 文章・図へ到達した要求 | 14（1件部分成立） | 13（1件部分成立） | 14 |
+| mapped record | 20 | 19 | 21 |
+| typed node | 34 | 33 | 36 |
+| 生成map内の未解析record | 1 | 1 | 0 |
+| 全要求拒否 | 0 | 1 | 0 |
+
+### HC01の回復と、保持できた範囲／減った候補
+
+HC01は生活recordの過去希望に付いていた誤修飾が消え、そのrecordの写真ACTIONと日記WISH（SELF／positive／past）がtypedへ到達。両root自体は旧rawにも存在しており、新発見された意味とは呼ばない。record全体の証明が成立しmapped2→3／node4→6／未解析1→0。旧4nodeはnode_refの付番以外、命題・根拠・記録・カテゴリを完全保持。新2nodeは同じ生活record／各count1・edge0、役割・場面・結果・段階の接続は未確定のまま。本文は過去希望を「当時」と表示し、実行した事実に変換しない。
+
+他13要求はtyped graph／counts／本文／図がartifact UUID以外同一。同カテゴリ反復・異カテゴリ分離・カテゴリ集合、原入力と補足の所属／同一機会count1、否定希望の現在／過去、主語未確定の否定行動、明記された順序だけを線にする条件を保った。rawまで同一は11要求。**HC01のCONTENT_TARGET子2、HC05子2、AE05子1の計5unitが減少**。完全root、typed argumentsと根拠に対象語は残るが、全中間候補保持ではない。この副作用を記録しv13通常採用は保留する。
+
+control5はv11とraw／JSON／typed結果が全て同一。明示SELFの過去希望だけtyped1node。主語省略・他者・認知埋込の希望は全文を保持したまま現consumerでは未対応で、SELF追加や埋込を除いた平叙希望に変えない。WC04にはbaselineからWRITTEN_MODIFIERがなく、正当modifierの保持証拠に数えない。
+
+全19の元欄・前後raw・本文と差分graphを読解し、170根拠をscalar／UTF8座標、literal/field hash、envelope／field／record所属で照合。独立read-only reviewは明示順序edgeの根拠も照合した。19候補のモデルなし保存再読／19応答の再処理一致。v12も24再処理一致。実DBやcurrent／月次RPCの新検証実績ではない。途中画面から出した「v12 HC01回復」「たかった→かった」は読み違いであり、回収原本を根拠に訂正した。正式結果に含めない。
+
+### 回帰検査と保全
+
+Jupyter targetedはv12 160 PASS＋11subtests／v13 172 PASS＋11subtests。最終APIの[CI42303432367](https://github.com/MassyuRed/mashos-api/actions/runs/42303432367)は全工程success（生成保存2604 PASS／1skip／12059subtests、共有owner1 PASS、累積/Q3/job302 PASS＋2subtests、SQL201source／15月参照）。v12 CI42300821146もsuccess（生成保存2592 PASS）。既知回帰検査の成功を一般意味品質・Mashの商品受入れに換算しない。
+
+最初のshared cloneはobject不足で失敗し、model生成0。独立Git clone v2は成功してv12実行に使用。未使用overlayはcurl失敗で実行なし。v13も独立Git checkoutで実行。退避時に複数行端末入力が連結してsyntax errorになったが、単一行起動でZIPを作成しモデルは再実行しない。
+
+Pod v12 ZIP87member／1107529bytes／SHA `317a8b1bc4a2c5b71fc17af896fd1a36256e7bc1e4c1442fbc68c455da6ba7b1` と、v13 ZIP78member／1371100bytes／SHA `9f6888e0eda9bba3ef8d92ae3453a6aaca92794a464dd7d3b1489d9ae9fe3692` をCRC／全manifest hashで回収。全source・pack・全raw・before/after・実行失敗を含むlog・replay・root/独立review・実CI logを[原本ZIP](https://chatgpt.com/library?file_id=libfile_fde3_f-a519aa1597588191a9ab4b4547e29f85_2f7470f963808191aaebf050935e72de&account_id=personal)へ保全。最終ZIP188member／4914143bytes／SHA `6c3b54444ec0ae63521462751c85e314fc035f9787d36815975d456a9ad076ff`。[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/positive_past_wish_results.json)。終了後fileとfresh Jupyter画面のGPU2MiB／0%、compute apps空。
+
+### 現在地と次の一作業
+
+研究profileの局所回復で、通常HTTP/batchはv4/v7のまま。重み採用・実DB・公開型/DTO・RN・Render・main/merge/deployは変更なし。STRUCTURE_MAP_DELTA_NONE（既存admission/profileの内部研究分岐、新商品ownerなし）。TECHNICAL_CREDITであり商品受入れは未成立。
+
+次は原入力memoの単一完全希望について、主体未確定の表示と別recordを同一人物へ集約しない条件を、取得済みWC02 rawのCPU比較で検証する案。現SELF限定の拡張であり未実装。補足・複文・他者・埋込希望は対象外。本人基準・暗黙役割・判断／選択・記録間意味・全量処理・IF/Saved・実DB／端末は未完。 前提資料の00・Analysis03の先頭を現結果へ更新し、全変更pathは01Bへ差分追記。完了した43生成や不採用23学習を同条件で繰り返さない。

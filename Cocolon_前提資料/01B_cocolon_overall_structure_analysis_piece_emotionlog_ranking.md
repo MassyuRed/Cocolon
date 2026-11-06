@@ -3881,3 +3881,17 @@ HC01／02が退行し、HC03／10はraw同一の重複key拒否を継続。HC04�
 | `Cocolon/Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/field_object_shape_results.json` | 本文なしの形式回復／意味保持／未達／保全先の分離集計 |
 
 既存syntax2bとenum参照を改変せず再利用。API変更0・新商品ownerなし、STRUCTURE_MAP_DELTA_NONE。HC10の原入力＋補足3欄が2record／4nodeへ回復、全14の到達13→14（うち1部分成立）・mapped18→20。旧13のraw末尾LF以外／意味／本文図保持、14候補再読・14応答再処理一致。通常未採用、DB／RN／Render／merge／deploy変更0。[全結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-field-object-shape-20261107)。
+
+
+## 11/7 §241 — 過去希望profile比較の全変更file
+
+| 実path | 差分／責務 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py` | opt-in v12説明／v13独立例示、固有ref/state、既存親内検証。v13はv11継承、失敗v12を継承しない |
+| `mashos-api/ai/services/ai_inference/analysis_cumulative_service.py` | 既存累積経路で研究profile v12/v13を検証。通常profile選択は維持 |
+| `mashos-api/ai/tests/test_analysis_model_actor_profile.py` | 新profile、活用4対照、source/ref/state分離、候補再読、補足・親内範囲・通常既定を検査 |
+| `Cocolon/Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/wish_inflection_prompt_trial.py` | v12の旧14＋新control前後10＝24生成を一回比較。失敗rawを保持 |
+| 同directoryの`wish_positive_example_trial.py` | 元v11 baseline14と保存control5からv13だけ19生成、CPU事前検査・source/hash固定・非生成再読 |
+| 同directoryの`positive_past_wish_results.json` | 本文なしのv12不採用／v13局所回復／中間5unit減少／未採用・保全先 |
+
+資料変更は00／この01B／current_structure03／trial README／最新weekly§241／集計JSON。既存compiler・realizer・serve runtime・shape mask・syntax/enumsは不変。新ownerなし、STRUCTURE_MAP_DELTA_NONE。通常未採用・DB/RN/Render変更0。[実結果・次の一作業](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-positive-past-wish-20261107)。

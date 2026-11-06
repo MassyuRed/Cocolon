@@ -2439,3 +2439,11 @@ HC03だけが新しく文章図へ到達し、仕事/生活2recordの事実と�
 [analysis_field_object_mask.py](analysis_field_object_mask.py) は番号・順序・key・型・上限だけを制限する研究Grammar。引用文字列と分類はモデルが選び、既存CMEEが検査する。[field_object_shape_trial.py](field_object_shape_trial.py) は§239と同じ14入力／v11 messages／元a2eを固定して一度だけ生成した。syntax2bとenum参照のhash、token248056／EOS248044を照合、学習0・14stop／1load／171.429秒、14候補非生成reload・14応答再処理一致。
 
 HC10の原入力2欄＋補足1欄が2record／4nodeへ回復。旧13はraw末尾LF一字以外同一で、意味・根拠・graph/count/本文図保持。全14の到達13→14／mapped18→20／node30→34。ただしHC01の肯定過去希望の誤修飾／record未解析1は継続。通常未採用、raw修復・実DB／本番変更0。[全結果・原本](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-field-object-shape-20261107)／[本文なし集計](field_object_shape_results.json)。次は過去希望の誤修飾を修正する。
+
+
+<a id="analysis-positive-past-wish-20261107"></a>
+## 11/7 — 肯定過去希望の局所回復、v12失敗と中間候補減少
+
+[wish_inflection_prompt_trial.py](wish_inflection_prompt_trial.py) は説明案v12を24生成し、HC01未改善／OP02主体捏造をstrict拒否したため不採用。[wish_positive_example_trial.py](wish_positive_example_trial.py) はv11＋独立例1つのv13を19生成、学習0／169.697秒。HC01の同recordから過去事実＋過去希望を回復し、旧14全体mapped20→21／node34→36／未解析1→0。他13のtyped graph/count/text/図を保持したが、HC01/05/AE05の対象子計5unit減少は残る。control5のrawはv11と一致し、主語省略等4件の現consumer未対応も維持。
+
+19候補保存再読／19応答再処理一致、targeted172 PASS／最終CI全工程success。通常未採用。[実結果・失敗・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-positive-past-wish-20261107)／[本文なし集計](positive_past_wish_results.json)。次は原入力memoの単一完全希望について、主体未確定の表示と別recordを同一人物へ集約しない条件を、取得済みWC02 rawのCPU比較で検証する案。現SELF限定の拡張であり未実装。補足・複文・他者・埋込希望は対象外。本人基準・暗黙役割・判断／選択・記録間意味・全量処理・IF/Saved・実DB／端末は未完。
