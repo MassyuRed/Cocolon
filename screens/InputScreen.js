@@ -2082,16 +2082,23 @@ function createStyles(COLORS, ui) {
     },
     emotionRow: {
       flexDirection: "row",
-      justifyContent: "space-between",
+      flexWrap: "wrap",
+      gap: 12,
       marginBottom: 12,
     },
     emotionBlock: {
-      width: "30%",
-      alignItems: "center",
+      alignItems: "stretch",
+      minWidth: 0,
+    },
+    emotionChipContainer: {
+      width: "100%",
     },
     chip: {
+      width: "100%",
+      minWidth: 0,
       flexDirection: "row",
       alignItems: "center",
+      justifyContent: "center",
       paddingVertical: 8,
       paddingHorizontal: 14,
       marginBottom: 4,
@@ -2111,8 +2118,10 @@ function createStyles(COLORS, ui) {
       borderColor: COLORS.BORDER_GOLD,
     },
     chipText: {
-      fontSize: 14,
       color: COLORS.TEXT_ON_LIGHT,
+      flexShrink: 1,
+      minWidth: 0,
+      textAlign: "center",
     },
     // 選択時はtonal面に対応する前景色を使う
     chipTextOn: {
@@ -2122,6 +2131,7 @@ function createStyles(COLORS, ui) {
 
     /** 感情強度（高さ固定） */
     strengthRow: {
+      width: "100%",
       flexDirection: "row",
       justifyContent: "center",
       alignItems: "center",
@@ -2626,6 +2636,8 @@ toastText: {
 },
   }, ui, {
   "panelTitle": "screenTitle",
+  "chipText": "button",
+  "strengthText": "button",
   "inputTrialPromoHeadline": "description",
   "inputTrialPromoButtonText": "button",
   "homeQuickActionTitle": "description",

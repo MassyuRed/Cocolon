@@ -88,9 +88,9 @@ export default function AppRuntimeBootstrapGate({ children }) {
             accessibilityRole="button"
             accessibilityState={{ disabled: !!runtime?.loading, busy: !!runtime?.loading }}
             accessibilityLabel="接続情報を再確認する"
-            style={{ minHeight: 44, justifyContent: "center", opacity: runtime?.loading ? 0.65 : 1 }}
+            style={{ minHeight: 44, justifyContent: "center" }}
           >
-            <Text style={{ ...ui.typography.button, color: colors.ON_SURFACE_TONAL }}>もう一度確認する</Text>
+            <Text style={{ ...ui.typography.button, color: runtime?.loading ? colors.TEXT_SUBTLE : colors.ON_SURFACE_TONAL }}>もう一度確認する</Text>
           </TouchableOpacity>
         </View>
       ) : null}

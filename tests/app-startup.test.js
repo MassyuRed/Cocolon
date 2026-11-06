@@ -30,7 +30,7 @@ const no = () => {};
 const forever = () => new Promise(()=>{});
 
 test('startup covers the mounted home until subscription I/O and home/draft settle, then preserves drafts on refresh', async t => {
-  let mounts=0, readyHome, setDraft, owner='A';
+  let mounts=0, readyHome, setDraft, owner='A', navLayoutScale=1, navLayoutWidth=390;
   function Input(props) {
     const [draft,update]=React.useState(''); setDraft=update;
     readyHome=()=>props.onInitialInputSettled('A');
@@ -56,7 +56,8 @@ test('startup covers the mounted home until subscription I/O and home/draft sett
     '../screens/PieceCreateScreen': props => React.createElement('Piece', { saveRecovery: props.saveRecovery }),
   });
   const Main=load('navigation/MainTabs.js',{
-    'react-native':native,'react-native-vector-icons/Ionicons':()=>null,
+    'react-native':{...native,useWindowDimensions:()=>({width:navLayoutWidth,height:844,fontScale:navLayoutScale})},
+    'react-native-vector-icons/Ionicons':()=>null,
     'react-native-safe-area-context':{useSafeAreaInsets:()=>({top:0,bottom:0,left:0,right:0})},
     '@react-navigation/native':{StackActions:{popToTop:no}},
     '@react-navigation/bottom-tabs':{createBottomTabNavigator:()=>({Navigator,Screen}),BottomTabBar:()=>null},
@@ -95,6 +96,21 @@ test('startup covers the mounted home until subscription I/O and home/draft sett
   assert.equal(root.root.findByType('Piece').props.saveRecovery, replacement);
   assert.equal(recovery.find('A', 'source'), undefined);
   assert.equal(recovery.remember(entry), false);
+  for (const width of [320, 390]) for (const scale of [1, 1.3, 1.6]) {
+    navLayoutWidth=width; navLayoutScale=scale;
+    await act(async()=>root.update(React.createElement(Main)));
+    const options=root.root.findByType('Navigator').props.screenOptions({route:{name:'Input'}});
+    const icon=options.tabBarIcon({color:'#000000',size:25,focused:true});
+    const label=options.tabBarLabel({color:'#000000',focused:true});
+    const iconStyle=flatStyle(icon.props.style);
+    assert.equal(options.tabBarLabelPosition,'below-icon','keep the same stack in landscape');
+    assert.equal(options.tabBarIconStyle.height,iconStyle.minHeight,'reserve the displayed icon area');
+    assert.equal(options.tabBarIconStyle.width,iconStyle.width);
+    assert.ok(options.tabBarIconStyle.width<=width/4-10,'icon fits the item padding at narrow width');
+    const required=options.tabBarIconStyle.height+label.props.style.lineHeight*scale+10;
+    assert.ok(options.tabBarStyle.height-options.tabBarStyle.paddingBottom-options.tabBarStyle.paddingTop>=required,
+      'scaled icon and label fit the actual item content area');
+  }
 });
 
 test('home initial read settles on failure, can retry, and ignores requests from a previous owner', async t => {

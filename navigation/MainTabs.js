@@ -145,6 +145,11 @@ export default function MainTabs() {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const { fontScale } = useWindowDimensions();
+  const navigationFontScale = Math.max(1, Number(fontScale) || 1);
+  const tabIconAreaHeight = 48 + (navigationFontScale - 1) * 18;
+  const tabLabelLineHeight = 18;
+  // The item adds 5px above and below the icon/label stack.
+  const tabBarContentHeight = Math.ceil(8 + 10 + tabIconAreaHeight + tabLabelLineHeight * navigationFontScale);
   const {
     getScopeUnread,
     getFeatureUnread,
@@ -1136,6 +1141,8 @@ export default function MainTabs() {
             borderLeftWidth: HIDDEN_SCREENS.has(route.name) ? 0 : FRAME_BORDER_WIDTH,
             borderRightWidth: HIDDEN_SCREENS.has(route.name) ? 0 : FRAME_BORDER_WIDTH,
           },
+          tabBarLabelPosition: "below-icon",
+          tabBarIconStyle: { width: 64, height: tabIconAreaHeight },
           tabBarIcon: ({ color, size, focused }) => {
             let iconName;
             switch (route.name) {
@@ -1148,7 +1155,7 @@ export default function MainTabs() {
             const icon = <Ionicons name={iconName} size={size} color={focused ? colors.ON_SURFACE_TONAL : color} />;
             const showUnreadBadge = showTabUnreadBadge(route.name);
             return (
-              <View style={{ width: 64, minHeight: 48 + Math.max(0, fontScale - 1) * 18, borderRadius: 18,
+              <View style={{ width: 64, minHeight: tabIconAreaHeight, borderRadius: 18,
                 backgroundColor: focused ? colors.SURFACE_TONAL : "transparent",
                 alignItems: "center", justifyContent: "flex-end", overflow: "visible" }}>
                 {icon}
@@ -1168,7 +1175,7 @@ export default function MainTabs() {
             borderTopColor: colors.CARD_BORDER,
             borderTopWidth: 0,
             paddingTop: 8,
-            height: 80 + insets.bottom + Math.max(0, fontScale - 1) * 40,
+            height: tabBarContentHeight + insets.bottom,
             paddingBottom: insets.bottom,
           },
           tabBarLabel: ({ focused, color }) => {
@@ -1182,7 +1189,7 @@ export default function MainTabs() {
             }
             const showUnreadBadge = showTabUnreadBadge(route.name);
             const labelColor = focused || !showUnreadBadge ? color : colors.TEXT_ON_LIGHT;
-            return <Text style={{ color: labelColor, fontSize: 12, fontWeight: focused || showUnreadBadge ? "600" : "400" }}>{label}</Text>;
+            return <Text style={{ color: labelColor, fontSize: 12, lineHeight: tabLabelLineHeight, includeFontPadding: false, textAlign: "center", fontWeight: focused || showUnreadBadge ? "600" : "400" }}>{label}</Text>;
           },
         })}
       >

@@ -336,7 +336,7 @@ test('InputScreen keeps the emotion input, Emlis reply, draft, today question, a
 
   assertIncludes(inputEmotionSection, [
     'export default function InputEmotionSection',
-    'EMOTION_ROWS.map',
+    'EMOTION_ROWS.flat()',
     'SELF_INSIGHT',
     'changeStrength',
     'strengthRowRefs.current[cat]',

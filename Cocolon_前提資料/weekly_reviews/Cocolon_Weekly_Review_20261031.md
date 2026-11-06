@@ -5141,3 +5141,19 @@ tutorialでは短い横画面の実領域より大きいtargetを全部囲もう
 製品6file＋既存test1file＋資料3file。既存9入口は178 PASS／FAIL0／SKIP0。追加の実Overlay再現3件は高い対象・同値metrics・4反復scroll・両inset内fallbackを検証し、初回のcomposite選択ミス1件をtest側だけで補正して成功。7JS parse／diff空白検査成功。一時の共通Pressable前後6caseと実style／5callerのAST照合、tutorial実sourceの335高→card247／200高→115・5巡安定・同値新object追加通知0、action proxy／hitSlop12を確認。測定17関数と再測定effect／proxy bindingはAST同一、旧root Overlayはbyte同一。native測定・実OS・hit-testは代替している。
 
 詳細は[UI設計§23](../designs/ui/material-ui-design.md#ui-layout-finish-20261106)。全6群sourceの一巡後の仕上げであり、全UIの実機合格ではない。次はまとめたビルドと3theme／文字拡大／狭幅・短横／safe area・keyboard／長文・回復／全19stepの実測。今回app/native build・CI compile・Upload・配布・本人端末・Render／Supabase／GPU操作0、commitは[skip ci]。新route／依存／framework／API／DB／AI／本文・作品画像／本人・公開契約変更0、STRUCTURE_MAP_DELTA_NONE。writerは華恋一人、補助はread-onlyとscratch検査。
+
+
+<a id="ui-font-scale-finish-20261106"></a>
+## 226. 11/6 — 文字拡大の感情入力と下部ナビを仕上げ
+
+fresh `350f2f9b7be51b3eade3234787d57303d45d3537` から、前提・最新weekly・全画面設計と現sourceを確認して継続。全6群と前回のtap／tutorial修正を継承し、今回確実に見つかった3箇所を補修した。
+
+感情入力の3列固定は、カード内240で各72しかなく、icon／余白後の22へ拡大文字がはみ出していた。実表示幅とfontScale、実styleから1〜3列を算出して同じ6感情を折返し、外／内width100%とText shrinkで列内へ収める。文字は15/22/600。通常の複数選択／自己理解排他・強度payload／ref・順序と保存条件は維持し、幅・倍率変更で選択を失わない。
+
+下部ナビはcustom面64×min48に対してlibrary枠31×28／compact23×20のため、labelへ重なる経路を確認。同じicon領域をtabBarIconStyleへ渡し、横画面もbelow-icon、文字12/18と実占有に応じた予約高へ。倍率1／1.3／1.6の実占有84／94.8／105.6に対し84／95／106を確保し、bottom insetを別加算する。実lock固定はbottom-tabs7.14.0で、宣言下限7.4.7の予備結果とは分離。公開tarballのSHA512がlock integrityと一致した7.14.0原本で最終24renderを再実行した。依存file／variant／4route／遷移／未読／色は変えない。
+
+接続確認中の再確認ボタンは全体opacityを撤去し、補助文字色で無効を示す。disabled／busy・再確認callback・bannerと子の位置は保持。製品5file＋既存test2file＋資料3file。新file／framework／依存／route／API／DB／AI／保存・本人・公開契約／作品画像変更0、STRUCTURE_MAP_DELTA_NONE。
+
+既存9入口178 PASS／FAIL0／SKIP0。感情は実component/styleの36case＋mounted変化、navは実optionsとlock固定原本の24render、Gateは実前後6caseで確認。既存起動testへ320／390幅×倍率1／1.3／1.6のicon枠／bar占有assertを追加、contract期待はflatな折返し表示へ適応。MainTabsの寸法・文字以外AST保持、7JS parse／diff空白検査成功。模擬native／APIを含み、実機での字体・hit-test・読み上げ成功ではない。
+
+詳細は[UI設計§24](../designs/ui/material-ui-design.md#ui-font-scale-finish-20261106)。次は統合ビルドで全画面、3theme・文字拡大・狭幅／短横・safe area／keyboard・長文／回復・全19stepを確認する段階。今回app/native build・CI native compile・Upload・配布・本人端末・Render／Supabase／GPU操作0、commitは[skip ci]。writerは華恋一人、補助はread-onlyとscratch検査。

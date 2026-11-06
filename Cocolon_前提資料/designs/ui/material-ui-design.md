@@ -166,7 +166,7 @@ Mashの比較理由：Day One案は情報の区切りが弱く、視線が動き
 | Piece作成 | 画像／全文を設定より前へ。操作ボタンと外枠をテーマ対応。全条件操作とidentity/tokenの引渡しを保持。作品renderer・recipe・保存画像は変更0 |
 | 設定・周辺 | 設定入口を目的が読める3行へ。テーマ選択面、共通メニュー、契約カード・説明・CTA、Nexusタブと自分のPiece入口を調整 |
 
-**現在の実装：** §17〜22の全6群へsourceを反映し、§23でタップ領域と短い横画面のtutorialを補修。全画面対応表のsource実装を一巡した状態であり、ビルド・配布・実端末での表示合格は未確認。次は全群をまとめたビルドで、3テーマ、文字拡大1.0/1.3/1.6、狭い幅、短い横画面、safe area、キーボード、長文・回復操作、全19tutorial stepを確認し、実際の欠けを直す。sourceの統一と実機での仕上げ完了を分けて管理する。
+**現在の実装：** §17〜22の全6群へsourceを反映し、§23でタップ領域と短い横画面のtutorial、§24で文字拡大時の感情入力・下部ナビ・接続案内を補修。全画面対応表のsource実装を一巡した状態であり、ビルド・配布・実端末での表示合格は未確認。次は全群をまとめたビルドで、3テーマ、文字拡大1.0/1.3/1.6、狭い幅、短い横画面、safe area、キーボード、長文・回復操作、全19tutorial stepを確認し、実際の欠けを直す。sourceの統一と実機での仕上げ完了を分けて管理する。
 
 初回反映時の確認：Nodeの既存5入口（画面contract・IAP復元・テーマ可読性・Piece初回保存modal・preview/display）で400 PASS／FAIL0／SKIP0。React/native・Auth/HTTPは各既存testの代替を含む。テーマ検査は旧バーガンディ色・太枠・taglineの固定期待を採用設計へ更新し、3テーマの本文／補助／tonal／操作色の4.5:1を検査した。Piece testの新テーマhookと共有Buttonへのimport適応のみを行い、保存・回復の検査は維持。最初の実行は取得不足の依存fileと旧表示期待で失敗し、依存原本の取得と意図した期待更新後に上記最終実行を通過した。製品の資格判定を緩めていない。今回の全画面設計更新で、これらを再実行したとは扱わない。
 
@@ -254,7 +254,7 @@ OSが描く権限・共有・購入・契約管理・既存Alertは、そのOS�
 
 | ID・対象 | 実装 | 配置と必要な操作／状態 |
 |---|---|---|
-| H01 ホーム・感情入力 | `InputScreen.js`、`InputMemoSection.js`、`InputEmotionSection.js`、`InputCategorySection.js`、`InputActionArea.js` | 見出し・ガイド・アカウント・お知らせ→問い／履歴入口→思考・行動の二欄→感情／強さ→カテゴリ→通知→保存。通常5感情の複数選択、自己理解の単独選択、カテゴリ最低1件を保持 |
+| H01 ホーム・感情入力 | `InputScreen.js`、`InputMemoSection.js`、`InputEmotionSection.js`、`InputCategorySection.js`、`InputActionArea.js` | 見出し・ガイド・アカウント・お知らせ→問い／履歴入口→思考・行動の二欄→感情／強さ→カテゴリ→通知→保存。感情は実幅と文字倍率に応じた1〜3列で折返す。通常5感情の複数選択、自己理解の単独選択、カテゴリ最低1件を保持 |
 | H02 保存・読取の案内 | `InputToastOverlay.js`等 | 該当情報群の失敗＋再読、保存成功toast。キーボード・下部ナビと重ねない。原入力の保存成功をEmlis生成成功と同じ表示にしない |
 | H03 感情入力履歴・行内全文 | `AnalysisHistoryScreen.js` | 戻る→検索→Secret区分／新旧順→条件・保持期間→記録カード。日付・感情・思考全文・行動全文・カテゴリ・応答・削除を区分。追加取得、hit強調、refresh、削除確認を維持 |
 | H04 Emlis応答 | `screens/input/EmlisThreadModal.js` | 見出し→応答本文→任意の質問／本人回答→現在できる操作。本文400。末尾「ピースの作成」「閉じる」、質問・skip・続行・終了・再試行／同一要求確認を保持。横画面＋keyboard時の操作到達を優先し、末尾2操作も同じ本文ScrollView内へ置く |
@@ -609,3 +609,48 @@ read-only reviewで、問いmodalのhideHeaderによるspinner非表示、Emlis 
 一時の前後検査は3theme×前後6caseで外側配置・子余白非重複、callback／disabled／selected／busy／hint／value／hitSlop、translate→rotate→scale順序と押下／解除／無効化のscale復元を保持。実styleと5呼出箇所の式も一致。tutorialの寸法模擬ではroot335のstep3／15／16がmax247へ回復し、5巡のmetrics／scroll更新で安定、同じ座標の新object3回でも追加metrics0。root200・未計測・top47／bottom34でもcard／fallbackは利用可能高115へ一致。action7 proxy／hitSlop12を保持。測定関連17関数、再測定effect、proxy関連bindingはAST同一。これらはnative実寸・実hit-test・描画・読み上げ・全19step実タップの代替ではない。
 
 **残る確認は統合ビルドと実機での全画面仕上げ。** 全6群へ採用デザインを適用した状態を継承し、今回の不具合を補修した。3theme、文字拡大1.0／1.3／1.6、幅320〜430・短いiOS横画面、safe area／keyboard、長文・回復、全19stepを実機で確認する。今回もapp/native build・CI native compile・Upload・配布・本人端末・Render／Supabase／GPU操作0、commitは[skip ci]。source修正と限定検証を、視覚的受入れや商品文章品質の改善へ換算しない。
+
+
+<a id="ui-font-scale-finish-20261106"></a>
+## 24. 11/6 文字拡大の仕上げ — 感情入力・下部ナビ・接続案内
+
+fresh `350f2f9b7be51b3eade3234787d57303d45d3537` を起点に、文字拡大と狭幅の表示を確認。全6群と§23の修正を継承し、今回確認できた3箇所だけを補修する。
+
+### 感情入力は実幅と文字サイズで1〜3列
+
+旧emotionBlockは30%の3列固定で、カード内240幅では1列72。左右padding28＋border2＋icon16＋間隔4の後に文字の幅が22しか残らず、1.6倍の感情名が列を越える。実buttonsのonLayout幅とOS fontScaleから列数を決め、同じ順の6選択肢を折返す配置へ変更。初回未計測はwindowから保守的な幅を使う。
+
+最小列幅は、実chipの左右padding／border＋（最長ラベル4字×実button文字15＋icon16＋間隔4）×文字倍率。gap12、最大3列で、列幅は利用可能幅からgapを引いて等分する。iconの拡大も見込む保守的な算定とし、TextのflexShrink／minWidth0と外側／内側の幅100%も併用する。感情名と強度の操作文字は15/22/600へ明示適用。本文や作品書体は変更しない。
+
+| buttons実幅 | 倍率1.0 | 倍率1.3 | 倍率1.6 |
+|---|---:|---:|---:|
+| 240 | 2列 | 1列 | 1列 |
+| 350 | 2列 | 2列 | 2列 |
+| 354 | 3列 | 2列 | 2列 |
+| 640 | 3列 | 3列 | 3列 |
+
+選択順は喜び→悲しみ→怒り→不安→平穏→自己理解のまま。通常感情の複数選択、自己理解の排他、強度weak／medium／strongのpayload、強度rowのref、既存の保存条件は保持。幅／倍率変更で選択をresetせず、0幅と0.5未満の計測揺れは無視する。3列2段という旧commentだけを「順序」に訂正し、データ定義自体は不変。
+
+### 下部ナビはライブラリの占有枠と実表示を一致させる
+
+実ビルドの`package-lock.json`（blob `e83c6a45b5758dcf7116c76988f780587d2209bd`）は`@react-navigation/bottom-tabs 7.14.0`。宣言は`^7.4.7`であり、下限版を固定版と扱わない。公開された7.14.0 tarballのSHA512をlockのintegrityと照合し、実BottomTabItem／TabBarIcon／BottomTabBarを読んだ。依存fileは変更しない。
+
+旧sourceはcustom icon面64×min48に対し、libraryのlayout枠は通常31×28／横画面compact23×20。中央に置かれる子が上下へ溢れ、下のラベルと重なる。tabBarIconStyleへ同じ64×実icon領域高を渡し、tabBarLabelPositionをbelow-iconへ固定。横画面でも同じ縦構成と通常iconを保つ。variant・4route・遷移・未読・色は維持する。
+
+文字は12/18、ラベルのfont paddingを外す。icon領域は48＋(倍率−1)×18、barのbottom insetを除く予約高はceil(top8＋item上下padding10＋icon領域＋18×倍率)。文字倍率は1未満でも最低1の領域を確保する。
+
+| 文字倍率 | icon領域高 | icon＋文字＋余白の実占有 | bar予約高（bottom inset別） |
+|---|---:|---:|---:|
+| 1.0 | 48 | 84 | 84 |
+| 1.3 | 53.4 | 94.8 | 95 |
+| 1.6 | 58.8 | 105.6 | 106 |
+
+### 接続確認中も読める無効表示
+
+AppRuntimeBootstrapGateの再確認ボタンはloading時に全体opacity0.65を掛けていたため、通常の可読前景まで薄くなる。opacityを外し、loading時の文字をTEXT_SUBTLE、通常時をON_SURFACE_TONALへ。既存disabled／busy、再確認callback、bannerと子の位置を保持し、通信中に画面や未保存入力を再mountしない。
+
+製品5file：`navigation/MainTabs.js`、`runtime/AppRuntimeBootstrapGate.js`、`screens/InputScreen.js`、`screens/input/{InputEmotionSection,inputOptions}.js`。既存test2fileはrowの折返し構成へのcontract期待適応と、起動の実MainTabs検査へ幅320／390×文字1／1.3／1.6の占有整合を追加。新製品file・新framework・依存・route・API／DB／AI・入力保存／本人／公開契約・作品画像の変更0。表示用幅stateのみ、STRUCTURE_MAP_DELTA_NONE。
+
+検証：既存9入口 **178 PASS／FAIL0／SKIP0**。実InputEmotionSection＋CocolonPressable＋実style/roleを3theme×4幅×3倍率＝36caseで描画代替し、列幅・順序／toggle・強度3payload／ref・排他／disabled／selected、15/22/600とText shrinkを確認。同じmounted instanceの幅240→354→微小差→倍率1.6→640でも選択を維持。MainTabsの実optionsとlock固定7.14.0の実部品による4route×3倍率×幅320／横667の24renderで、占有枠・予約高・通常icon／縦配置・未読と押下を確認。7.4.7での予備照合は固定版の根拠に数えず、7.14.0で再実行した。実Gateの前後3theme×loading／error＝6caseで、文字色・無効／busy／callbackと、banner切替時の子mount数・下書き保持を確認。MainTabsの意図した寸法・文字style以外のASTはbeforeと同一。7JS parse／diff空白検査成功。
+
+native host・計測・APIは代替であり、実字体の幅・実hit-test・読み上げ・OS文字拡大の実機合格ではない。**次の受入確認は全群をまとめたビルドと実機の全画面。** 今回もapp/native build・CI native compile・Upload・配布・本人端末・Render／Supabase／GPU操作0、commitは[skip ci]。全画面統一の範囲と、前回までの保存／回復／tutorial条件を保持する。
