@@ -5018,3 +5018,21 @@ STRUCTURE_MAP_DELTA_NONE：この保存単位は操作UIの設計資料とプレ
 既存5test入口の最終実行は400 PASS／FAIL0／SKIP0、4.20秒。画面contract・IAP復元・テーマ可読性・Piece初回保存／回復・preview表示を対象とし、React/native・Auth/HTTPは各testの代替を含む。旧配色・太枠・taglineの固定期待と、新hook／Button importのtest配線を4既存testfileで更新。最初の取得不足によるENOENTと旧表示期待の失敗を隠さず、必要原本の取得・期待補正後に最終成功。製品の資格guardは緩めていない。JS/JSXを既存ローカルBabel parserで確認、diff空白エラー0。同環境の独立read-only reviewが見つけた色とナビ高さは修正済み。
 
 これは初回のsource反映。自分のPiece履歴／詳細の専用UI、アカウント・各履歴・ガイド等の個別仕上げと、複数回復ボタン／長文／3theme／OS文字拡大での実端末表示確認は残る。UI設計§12が実装済み／未確認のowner。native build／配布／本番API・DB・GPU変更0、三中核の内容品質や正式受入れへ換算しない。STRUCTURE_MAP_DELTA_NONE：既存の画面・component・routeの表示のみで、新owner・意味型・API／DB／保存契約は追加していない。
+
+
+<a id="material-ui-all-screens-20261106"></a>
+## 218. 11/6 — 全画面Material統一は確定、実装の作業単位と全表示の設計を具体化
+
+Mashの指示は「全画面を今回のデザインへ絶対に統一、例外なし」。相談していたのは採否ではなく、一気に変更するか、作業量に応じて分けるかだった。華恋が採用範囲の相談として受け取った点を訂正し、**対象は全画面、実装・確認・GitHub保存は画面群ごと**と明記した。部分対応を完成版にせず、全画面の仕上げと全体確認までを一つのUI改装にする。
+
+Cocolon PR30 f35213fbを固定して、起動／全Stack登録、分析内11routeと戻り先、PieceEntryの通常／linkPayload分岐、Auth、共有モーダル、各画面のrender／style／関連状態を分担読取し、経路を独立照合した。UI資料の[§13](../designs/ui/material-ui-design.md#13-全画面へ適用する共通設計)に共通レイアウト・選択／無効／感情色・閉じ方、[§14](../designs/ui/material-ui-design.md#14-全画面の具体設計)に全画面と各状態の配置／操作、[§15](../designs/ui/material-ui-design.md#15-実装の進め方と完了条件)に6作業群・優先修正・全体完了条件、§16に確認範囲を追加した。比較プレビューは保存した原本のまま。
+
+34登録／重複除外22route名だけでは全表示を覆えない。分析内の履歴／詳細／条件付き戻り先、Nexusと旧Q&A分岐、rootのAuth4mode、native launch、runtime banner、下書き／今日の問い／応答／根拠／用語等のmodal、tutorial19stepを対象へ入れた。screens直下40moduleは32参照＋8休眠でcontainerも含むため、これを利用者画面数や実機確認数とは呼ばない。休眠8screenもrender／styleを読んで共通化先を記載し、Ranking等の入口は復活させない。
+
+重要な未対応は、Authの白／indigo固定、Piece中間／履歴／詳細のnative Buttonと白黒固定、履歴の斜体・固定面、今日の問いmodalのスクロール／keyboard、tutorialとnative起動の旧外観。初回反映後に残る感情選択iconの白と、契約無効CTAの前景不足も優先修正へ記載した。感情の色相は既存分析定数とログで一致を確認し、操作色と分ける。アカウント・入力履歴・感情通知の取り違え、未接続の編集UI追加、旧Piece／旧mapの内容置換、隠した操作やPDFの復活を避ける対応を具体化した。
+
+実装は①共通・起動・認証、②入力・応答・問い・履歴、③分析全体、④Piece・感情通知・共鳴、⑤アカウント・設定・契約、⑥案内・tutorial・全体仕上げで区切る。これは範囲の分割や反復承認待ちではなく、確認と再開点の単位。通常のビルド・配布はsource全画面反映後にまとめ、途中でnative確認が必要になった場合だけ必要な中間ビルドを行う推奨とした。各画面の標準表示を一巡し、3theme実装・各レイアウト型の小画面／文字拡大・高リスク長文／回復群／比較・現在許可されるiOS横向きも確認対象とする。
+
+確認はsource・経路・状態の照合であり、実機描画や全操作実行ではない。Android同名splash PNG5密度の存在／参照は確認したが画素外観・実選択資産は未確認。OS所有の権限／共有／ストア／AlertはOS外観を使用し、その前後のアプリUIを統一する。保存Piece画像のrecipe・renderer・本文は今回の操作UIとは分ける。
+
+今回は既存文書4fileのみ更新。製品JS／native／画像／API／DB／購入／削除／公開、build／Upload／配布、Render／Supabase／GPUの変更0。前回400 PASSを今回の再実行や全画面視覚合格へ換算しない。read-only補助reviewと華恋の単一writer、実環境はCodex Work／GPT-6。STRUCTURE_MAP_DELTA_NONE（表示実装の改造・新owner・route・意味／保存契約の変更なし）。ADMINISTRATIVE_ONLY、商品品質の実装完了とはしない。

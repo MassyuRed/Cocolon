@@ -4,6 +4,10 @@
 
 状態：方向性はMash採用済み。以下の寸法・色・実装順は、その方向を具体化した設計値。比較プレビューの承認と、製品実装・ビルド・本人端末での表示確認は区別する。
 
+**対象範囲は確定：全画面を今回のMaterialデザインへ統一する。例外は設けない。** 主タブだけでなく、起動・認証、履歴・詳細、本人／他者、条件付きの互換表示、モーダル、チュートリアル、読込・失敗・結果不明も含む。Mashが相談したのは実装の作業量と区切り方であり、全画面統一の採否ではない。
+
+実装は共通部品から始め、関連する画面群ごとに確認・GitHub保存を行う。区切るのは作業と保存の単位で、対応範囲ではない。全画面分を同じ設計に載せ、全体の確認までを一つのUI改装として扱う。具体的な全画面対応表は§14、進め方は§15、今回の確認範囲は§16に置く。
+
 ## 1. 採用した方針と理由
 
 **「優しく、迷わず使えて、言葉は丁寧に読める」Material寄りのCocolon。**
@@ -128,9 +132,11 @@ Mashの比較理由：Day One案は情報の区切りが弱く、視線が動き
 
 幅320–430、OS文字拡大1.0/1.3/1.6で、ラベル折返し・タブ・下部ナビ・モーダル・キーボード・safe areaを確認する。ボタンを1行固定で切り詰めず、本文は選択・再読できる。VoiceOver/TalkBackへ選択・無効・処理中を伝える。動きは短い押下フィードバックを基本とし、情報の理解に必須にしない。
 
-## 11. 現物との対応と実装順
+## 11. 初回実装の現物対応
 
 現物照合：Cocolon PR30 `5284ebf625ee3d69241d31c426171a1e26c5ce51`。API/DB/GPU作業はUI実装の前提にしない。新規依存・新規フォント不要。
+
+この表は初回反映時の対応表。全画面の作業範囲と現在の実装順は、後続の§14・15で具体化した。
 
 | 順 | owner | 変更する表示 |
 |---|---|---|
@@ -151,7 +157,7 @@ Mashの比較理由：Day One案は情報の区切りが弱く、視線が動き
 
 比較プレビューと本設計を先に保存した区切りは[4604310](https://github.com/MassyuRed/Cocolon/commit/46043100b08746a6db0d0deac4857eddab015391)。その後、同じ依頼の範囲で製品UIの初回反映を進めた。全画面の仕上げ完了・実端末確認済みとは扱わない。
 
-| 範囲 | 今回の実装 |
+| 範囲 | 初回反映f35213fの実装 |
 |---|---|
 | 共通 | defaultをラベンダー／プラムへ。3テーマの保存値とラベル維持。tonal面・文字役割追加、重い影・外周枠・常時taglineを整理。ロゴはブランド書体のまま |
 | ボタン・ナビ | 600の文字、複数行、主操作色、disabled/busyの読み上げ。4tabの選択面。下部safe areaと文字拡大に応じた高さを確保。未読・遷移・回復処理は維持 |
@@ -162,6 +168,280 @@ Mashの比較理由：Day One案は情報の区切りが弱く、視線が動き
 
 **残る仕上げ：** 自分のPiece履歴／詳細の専用枠とnative Button、その他のアカウント・各履歴・ガイド等の個別表示。共通テーマの変更は届くが、各専用画面をこの版で一つずつ最終調整したとはしない。応答／Pieceで回復操作が複数併存する時のfooter高さ、長文、文字拡大1.0/1.3/1.6、3テーマ、safe area、キーボードを実端末で確認する。
 
-確認：Nodeの既存5入口（画面contract・IAP復元・テーマ可読性・Piece初回保存modal・preview/display）で400 PASS／FAIL0／SKIP0。React/native・Auth/HTTPは各既存testの代替を含む。テーマ検査は旧バーガンディ色・太枠・taglineの固定期待を採用設計へ更新し、3テーマの本文／補助／tonal／操作色の4.5:1を検査した。Piece testの新テーマhookと共有Buttonへのimport適応のみを行い、保存・回復の検査は維持。最初の実行は取得不足の依存fileと旧表示期待で失敗し、依存原本の取得と意図した期待更新後に上記最終実行を通過した。製品の資格判定を緩めていない。
+初回反映時の確認：Nodeの既存5入口（画面contract・IAP復元・テーマ可読性・Piece初回保存modal・preview/display）で400 PASS／FAIL0／SKIP0。React/native・Auth/HTTPは各既存testの代替を含む。テーマ検査は旧バーガンディ色・太枠・taglineの固定期待を採用設計へ更新し、3テーマの本文／補助／tonal／操作色の4.5:1を検査した。Piece testの新テーマhookと共有Buttonへのimport適応のみを行い、保存・回復の検査は維持。最初の実行は取得不足の依存fileと旧表示期待で失敗し、依存原本の取得と意図した期待更新後に上記最終実行を通過した。製品の資格判定を緩めていない。今回の全画面設計更新で、これらを再実行したとは扱わない。
 
 変更したJS/JSXはローカル既存Babel parserで構文確認し、diffの空白エラーも0。これはRNビルド・描画検証ではない。今回のブラウザ描画の自動検査、nativeビルド、TestFlight配布、本人端末表示確認、Render／Supabase／GPU操作は未実施。比較プレビューはユーザーが閲覧・採用済みだが、その採用を製品画面の実機確認へ置き換えない。
+
+## 13. 全画面へ適用する共通設計
+
+### 13.1 画面の構成と共通部品
+
+同じデザインに統一し、機能に必要な配置の違いは保つ。入力フォーム、読む画面、一覧、設定の全てを同じカードで埋めない。
+
+| 共通の型 | 配置・寸法 | 使う場所 |
+|---|---|---|
+| 主画面 | ブランド＋画面見出し、必要なガイド／補助操作、主内容、4タブ | ホーム・分析・Piece・設定 |
+| 子画面 | 44以上の戻る領域＋画面名、説明、主内容。本文側に同じ見出しを重ねない | 全履歴・詳細・フォロー・アカウント・設定下層 |
+| 一覧 | 目的／期間→既存の検索・条件→日付とタイトルの行→追加取得。初回読込・0件・失敗・追加取得失敗を分ける | 入力・問い・レポート・マップ・Piece・共鳴・お知らせ・ユーザー |
+| 本文・詳細 | 対象／日時→本文→関連情報→必要な操作。長文16/27/400を全文表示 | Emlis、記録、分析、Piece、ガイド、お知らせ |
+| 入力フォーム | 明示ラベル→入力→制約／エラー→主操作。文字16以上、キーボード回避とスクロール | 認証、入力、問い、名前、共鳴メモ |
+| 設定行 | 項目名＋短い説明、右側に選択／switch／矢印。長い名前は上下へ折返す | 設定・公開範囲・通知・表示対象 |
+| 説明・入力モーダル | 同じsurface、角丸24、内側20。タイトル22/30/600、本文16/27。safe area内で本文スクロールと操作への到達を確保 | 応答、今日の問い、名前編集、公開設定、根拠、用語、選択、案内 |
+| 状態表示 | 読込／空／不足／失敗／結果不明ごとに理由と現在できる操作。独立した装飾カードを増やさない | 全画面・全モーダル |
+
+本文の横幅は広い端末・iOS横向きでも概ね640以内、フォーム・主操作は既存の最大幅520を基本に中央へ。外側の余白は狭い幅で16、通常20。幅が足りない行は折返し、文字を縮小して押し込まない。月次の当時／現在比較は縦並びを基本とし、十分な横幅がある時だけ並列を検討する。
+
+共通ownerは`theme/ThemeContext.js`、`ui/uiTokens.js`、`ui/applyTypographyTokens.js`、`components/GlobalFrameLayout.js`、`CocolonButton.js`、`CocolonPressable.js`、`CocolonBackButton.js`、`CocolonSwitch.js`、`screens/AnalysisMenuCommon.js`、`PieceMenuCommon.js`、`MenuActionCardCommon.js`。新しいUIフレームワークは追加せず、既存部品を完成させる。
+
+親の共通ボタンだけ変えても、子Text・icon・spinner・画面固有styleの白固定／800・900太字／強い影が残れば未完了。`CocolonPressable`は呼出し元の選択・無効状態を読み上げへ渡す設計にし、戻る／×／更新等の小さいアイコンにも44以上の領域を確保する。
+
+### 13.2 選択・無効・感情の色
+
+| 役割 | 表示規則 |
+|---|---|
+| 主操作 | `GOLD_BUTTON`上へ`ACCENT_TEXT`。子のicon・spinnerも同じ組合せ |
+| 選択済み | `SURFACE_TONAL`上へ`ON_SURFACE_TONAL`。文字・iconを同じ前景にし、チェックや「選択中」を併記 |
+| 未選択 | 通常面＋本文／補助文字。押せる範囲・選択肢の区切りを余白で示す |
+| 無効 | 通常面＋読める補助文字、無効理由を隣接。白文字を明るい無効背景へ残さず、行全体の透明度だけへ頼らない |
+| 処理中 | 実際の処理名・spinner・重複操作停止。進捗率や完了時刻を作らない |
+| エラー／危険操作 | 操作色と別の意味色＋説明。削除・解除・取消の意味を区別する。分析上の未確定はエラー色にしない |
+| リンク | 本文中は下線＋操作色。外部リンク、アプリ内の移動、選択操作を同じ文言にしない |
+
+エラー・危険操作の設計色は明るいテーマで文字#B3261E／淡い面#F9DEDC、darkで文字#F2B8B5／面#601410。説明を省略する根拠には使わず、同じ意味の操作には同じ色を使う。成功や不明を同じ赤へまとめない。
+
+感情の識別色は現在の分析グラフと感情ログの対応が一致していることを照合した。色相を再割当てせず、操作の紫／金／紺とは別の意味色として統一する。
+
+| 感情 | 識別色 | 入力アイコン |
+|---|---|---|
+| 喜び | #10B981 | happy-outline |
+| 悲しみ | #6366F1 | sad-outline |
+| 怒り | #EF4444 | flash-outline |
+| 不安 | #38BDF8 | alert-circle-outline |
+| 平穏 | #EAB308 | leaf-outline |
+| 自己理解 | 感情分布へ混ぜず、通常の選択面 | bulb-outline |
+
+識別色は図のmark・小さい色見本へ使い、名称・値・本文は各テーマの読める前景色で示す。感情チップの淡い面はテーマの背景と合成し、darkでも濃色文字を固定しない。入力で選択を示す面と感情固有の意味色を混同しない。根拠は`analysisReportConstants.js`、`EmotionLogScreen.js::emotionTint`、`InputEmotionSection.js`。
+
+### 13.3 閉じ方・状態・プラットフォーム
+
+モーダルの外観は共通化し、閉じ方の条件は各処理を保持する。下書き復元のように選択が必要なもの、背景押下で閉じられるもの、処理中に閉じられないものを、一律のdismissへ変えない。回復操作が多い状態では、その群を本文のスクロール内へ置き、固定footerは現在の主操作と閉じるを軸にする。操作を消して高さだけを縮めない。
+
+OSが描く権限・共有・購入・契約管理・既存Alertは、そのOS部品を使用する。アプリ側の説明・表示前後・操作名・状態を同じUIへ揃える。これはアプリ画面の適用除外ではなく、OS所有の外観を独自の偽画面へ置き換えないという実装境界。
+
+現在iOSは縦・左右横向き、Androidは縦固定。対応する向きを改装の都合で縮めない。status barとAndroid navigation barも周囲の面に合う明暗へ。OS文字拡大1.0／1.3／1.6、最小幅320、短い横画面、キーボード、VoiceOver／TalkBack、動きを減らす設定を全画面の確認へ含める。
+
+## 14. 全画面の具体設計
+
+確認ref：Cocolon PR30 `f35213fb57b68796f969d60595609fceef3e378f`。下表は画面と表示状態の対応表であり、行数を独立した画面数や実機確認件数とは呼ばない。全行が今回のMaterial統一対象。既に初回反映した部分も最終の全体確認へ含める。
+
+### 14.1 起動・認証・全体状態
+
+| ID・対象 | 実装・入口 | 配置と必要な操作／状態 |
+|---|---|---|
+| G01 ネイティブ起動 | iOS `LaunchScreen.storyboard`、Android SplashScreen theme | defaultの背景とEmlisブランド色をRN起動へ連続させる。旧生成り・バーガンディ・英語taglineを残さない。起動時にまだ読めない値を進捗率へしない |
+| G02 RN読込・起動overlay | `runtime/AppStartupLoadingView.js`、Root／MainTabs／runtime gate | 中央の進行表示と14/22の案内。契約・認証・tutorial・Home準備を待つ役割と、背面操作／読み上げ遮断を保持 |
+| G03 接続案内banner | `runtime/AppRuntimeBootstrapGate.js` | 短い説明＋再確認をtonalの一群へ。折返し・safe areaを確保。子画面の位置を維持し、未保存入力を再mountしない |
+| G04 更新必須 | `runtime/AppRuntimeBlockingScreen.js` | 共通の見出し→理由・必要version→再確認。確認中を区別。現状にないストア導線を接続済みにしない |
+| G05 メンテナンス・推奨更新・マップ更新案内 | runtimeのOS Alert、`MainTabs.js`の更新banner | 現行の通知条件と一度だけの表示を保持。アプリ所有bannerの文字・面・操作を統一し、メンテナンスを新しい全画面ロックへ変えない |
+| AU01 ログイン | root `AuthScreen.js` signin | ロゴ→見出し→メール・パスワード→案内／エラー→ログイン→再設定・登録・条件付きメール再送。3テーマ、スクロール、キーボード対応 |
+| AU02 新規登録 | 同 signup | メール・パスワード・確認・公開ユーザー名15字→作成→ログインへ。公開案内を名前入力に隣接し、不一致・不足・作成中・確認メール待ちを区別 |
+| AU03 再設定リンク送信 | 同 forgot | メール一欄→送信→送信完了／失敗→ログイン・登録へ戻る。同じフォーム部品を使う |
+| AU04 パスワード復旧 | 同 reset、Root recoveryMode | 新パスワード2欄→6字以上・不一致の案内→設定／取消。復旧modeの表示固定と処理中条件を保持 |
+
+ネイティブ入口はiOS `Info.plist`の`UILaunchStoryboardName=LaunchScreen`、Android `AndroidManifest.xml`の`Theme.App.SplashScreen`→`styles.xml`、`MainActivity.kt`の`installSplashScreen()`。Androidは`values/colors.xml`の背景、`drawable/splashscreen_logo.xml`と同名PNGのmdpi／hdpi／xhdpi／xxhdpi／xxxhdpiを同じ変更単位で確認する。XMLだけ変更して完了にしない。`values-night/colors.xml`は現状空で、夜間上書きはない。PNGの画素外観と端末で選ばれる資産の実測は今回未確認。
+
+### 14.2 ホーム・入力・Emlis・今日の問い
+
+| ID・対象 | 実装 | 配置と必要な操作／状態 |
+|---|---|---|
+| H01 ホーム・感情入力 | `InputScreen.js`、`InputMemoSection.js`、`InputEmotionSection.js`、`InputCategorySection.js`、`InputActionArea.js` | 見出し・ガイド・アカウント・お知らせ→問い／履歴入口→思考・行動の二欄→感情／強さ→カテゴリ→通知→保存。通常5感情の複数選択、自己理解の単独選択、カテゴリ最低1件を保持 |
+| H02 保存・読取の案内 | `InputToastOverlay.js`等 | 該当情報群の失敗＋再読、保存成功toast。キーボード・下部ナビと重ねない。原入力の保存成功をEmlis生成成功と同じ表示にしない |
+| H03 感情入力履歴・行内全文 | `AnalysisHistoryScreen.js` | 戻る→検索→Secret区分／新旧順→条件・保持期間→記録カード。日付・感情・思考全文・行動全文・カテゴリ・応答・削除を区分。追加取得、hit強調、refresh、削除確認を維持 |
+| H04 Emlis応答 | `screens/input/EmlisThreadModal.js` | 見出し→応答本文→任意の質問／本人回答→現在できる操作。本文400。通常footer「ピースの作成」「閉じる」、質問・skip・続行・終了・再試行／同一要求確認を保持 |
+| H05 仮の理解・回答編集 | 同modal内のframe／回答部分 | 質問と本人入力を別の面へ。仮の理解は根拠日時／trigger・本文・確認／訂正／不採用。busy・read-only・結果不明・回答上限・2000文字の条件を保持 |
+| H06 旧観測応答popup | `InputFeedbackReplyModal.js` | 同じ長文dialogへ。太枠・強い影・本文600を整理。通常でもthread readerが開けずpassed本文があるfallbackに現れるため必須対象 |
+| H07 今日の問い・ホーム内 | `components/TodayQuestionCard.js` | 問い→選択式／自由回答→回答欄→送信→履歴。配信前、回答済み、任意一言、送信中、question ID/version変更時のresetを保持 |
+| H08 今日の問いmodal | `components/TodayQuestionModal.js` | H07を共通の長文／入力modalへ。safe area、本文スクロール、キーボード回避、閉じる／回答操作に到達できる高さを確保 |
+| H09 今日の問い履歴 | `TodayQuestionHistoryScreen.js` | 戻る→閲覧／編集条件・保持期間→日付・問い・回答→さらに表示。全員閲覧／Plus以上編集、60件単位、停止・初回読込・0件・失敗を区別 |
+| H10 同・展開詳細／編集 | 同screen内展開 | 回答・編集日時／元入力anchor／全文→許可時のみ方式・選択肢・自由回答・任意一言・更新。別の詳細routeを新設せず、一覧内展開を維持 |
+| H11 下書き復元 | `InputStartupModals.js` | 一枚のdialogに端末の送信前入力の説明・保存日時・48時間→復元／新しく入力。現状の選択必須と本人別の下書きを保持 |
+| H12 tutorialの旧Pieceプレビュー | `InputPiecePreviewController.js`→`EmotionPiecePreviewModal.js` | 模擬体験の問い／答え・枠数・生成を同じ文字・面・操作へ。`isTutorialMode`と`hideCancelButton`等を保持。新Pieceが通常経路であることを変えない |
+
+本人の入力履歴はH03で、Pieceの`EmotionLog`とは別。現在H03は別detail routeを持たず行内に全文を出す。省略するなら全文への導線を必ず残す。隠れているSecret変更ボタン（`display:none`）を復活させず、表示中の検索filterを揃える。
+
+### 14.3 分析・レポート・月次・根拠
+
+| ID・対象 | 実装 | 配置と必要な操作／状態 |
+|---|---|---|
+| A01 分析ホーム | `AnalysisContentFirstScreen.js` | 今の天気→こころ天気／わたしマップ→日週月→内容→履歴。二段の選択、更新日、未読、guideを統一。埋込み結果の重複headerを出さない |
+| A02 今のこころ天気 | `KokoroWeatherCurrentCard.js` | 天気・温度・中心感情を主情報、揺れ・観測メモを補足へ。観測なしと前回への操作を残し、0点に見せない |
+| A03 日／週／月レポート | `AnalysisReportViewerScreen.js`、`AnalysisReportCharts.js` | 天気一覧→図・グラフ→権利内の分析群→本文。埋込みと全画面で内容部品を共有。時間推移、時間帯、Deepのメモテーマ・遷移・回復等、月前後半を勝手に省略しない |
+| A04 天気の日付一覧 | `KokoroWeatherForecastStrip.js` | 日本語の日付・天気・温度・観測メモを共通書体へ。期間の横スクロールは残せるが、固定116幅・1行省略・900太字を見直す |
+| A05 天気詳細sheet | `KokoroWeatherDetailModal.js` | 天気→温度／中心感情→メモ→時間帯→閉じる。縦スクロールとsafe area。黄色固定面・茶色文字を意味別の共通色へ |
+| A06 天気履歴 | `AnalysisReportHistoryScreen.js` | 戻る→配布予定→閲覧範囲→日週月の履歴行→追加取得。既読は印・ラベルで示し、行全体のopacity0.6だけにしない |
+| A07 現在の累積マップ | `SelfStructureReportGenerateScreen.js` default→`CumulativeWatashiMapView.js` | 全蓄積の説明→日時・対象／反映／未解析→観測→関係→未確定→文章→根拠。3プラン共通。埋込み時のスクロールownerを整理 |
+| A08 マップ月次履歴 | `SelfStructureReportHistoryScreen.js` | 月を主情報、保存日時・既読を補助へ。月とartifactの対応、2回／12回／全期間、追加取得・refresh・現在map／プラン導線を保持 |
+| A09 当時版・現在比較 | `SelfStructureReportViewerScreen.js` cumulative分岐→`CumulativeWatashiMapView.js` | 「当時：月」「現在」を順に同じ階層で表示。分析日時と月次保存日時を区別。現在比較の失敗でも取得済み当時版を残し、過去を再描画しない |
+| A10 根拠の記録modal | `CumulativeWatashiMapView.js`内Modal | 読込→日付・原入力二欄・本人補足→編集後の注意→閉じる。原文と注意、unknownと取得エラーを区別 |
+| A11 V2・旧保存mapの描画 | `WatashiMapV2Renderer.js`、旧viewer、`WatashiMapRenderer.js`と構成部品 | 観測、edge、守る対象／負荷、unknown／conflict、全文を同じ面と文字へ。旧版の保存形式・mode・権利を保持し、新cumulativeへ置換しない |
+| A12 条件付き補助メニュー3種 | `AnalysisEmotionScreen.js`、`AnalysisSelfStructureScreen.js`、`AnalysisInputHistoryMenuScreen.js` | 共通メニュー行・展開・未読へ。天気の最新／履歴×日週月、現在／月次map、感情／問い履歴の必要導線を保つ。戻る先として表示されるため必須対象 |
+| A13 分析からの入力／問い履歴 | `AnalysisHistoryScreen.js`、`TodayQuestionHistoryScreen.js` | H03・H09と同じ部品・文字・条件にする。分析から開いた戻り先を維持 |
+| A14 利用条件・プラン案内 | `AnalysisReportUpgradeCard.js`、各履歴・mapのlock表示 | 閲覧できる情報を保ち、制限対象の近くに理由＋プランへの操作。判定中を不足と誤表示しない。tutorial中の操作停止も保持 |
+
+`AnalysisScreen`はStack登録以外に内部routeで画面を切り替える。外部から開いた履歴等の戻り先は`emotionAnalysis / selfStructure / inputHistory`になるため、A12を旧配置という理由で外さない。旧保存mapのoverview／役割／ルート／分かれ道／未観測の全構成も対象。viewerで非表示のCrossLinkとcomment-outのPDFを刷新の理由で復活させない。IF／SavedRouteIntentは設計済み未実装であり、画面を追加する時も本UIに従う。
+
+### 14.4 Piece・投稿・感情通知・共鳴
+
+| ID・対象 | 実装 | 配置と必要な操作／状態 |
+|---|---|---|
+| P01 Piece通常入口・投稿feed | `PieceEntryScreen.js`→`NexusScreen.js` | 見出し・guide・フォロー／更新→自分のPiece→全体感情→4タブ→表示対象／新旧順→投稿カード。全体感情TOP3を小さい独立群へ |
+| P02 旧Q&A投稿カード | `screens/nexus/NexusPieceCard.js` | 投稿者・日時・未読→問いを補助見出し→答え16/27/400→共鳴数／操作。本人削除を独立。新画像Pieceへ仕様置換しない |
+| P03 Nexus感情通知 | `NexusEmotionLogSection.js` | 名前・時刻→感情名＋強さ。意味色と文字を併記し、メモ本文を公開表示へ足さない |
+| P04 おすすめユーザー | `NexusRecommendSection.js` | 見出し→表示名・共有コード・矢印の行。候補なし・読込・失敗、既存Account遷移を保持 |
+| P05 Nexus共鳴タブ | `NexusHistorySection.js` | 新旧順→P02と同じ投稿カード。投稿feedとの違いをタブで示し、共鳴済み・処理中・取得状態を保つ |
+| P06 表示ユーザーmodal | `NexusOwnerPickerModal.js` | 全体／自分／特定ユーザーの選択→閉じる。tonal＋チェック、名前折返し、行44以上、スクロール |
+| P07 感情通知ログ | `EmotionLogScreen.js`、Pieceの`EmotionLog` | 戻る／更新／フォロー→名前・時刻・感情＋強さ。二重の画面名を整理。未読・0件・失敗・tutorial模擬通知を保持。本人入力履歴と混同しない |
+| P08 ピース作成画面 | `PieceCreateScreen.js` | 戻る・見出し→元入力／準備の状態→作成／回復。保存ID・本人・元要求キーの束縛を保つ |
+| P09 作成前・modal閉後の中間状態 | `InputPieceActionArea.js` | 元入力取得中／失敗→作成、元入力再確認、同じ保存／取消要求の確認、期限切れ再作成、保存済み確認を共通状態カード・ボタンへ。現在のnative Buttonも置換対象 |
+| P10 新Pieceプレビュー | `PiecePreviewModal.js` | 状態→画像→全文→形式・配色・比率・ブランド→残枠／条件。回復群は本文内、主操作と閉じるへ必ず到達可能に。全資格・token・revision・要求を保持 |
+| P11 自分のPiece一覧 | `PieceOwnerHistoryScreen.js` history | 見出し→状態→保存日・公開範囲・本文の一覧→追加取得。初回・0件・追加失敗・再試行・戻るを統一。新しい画像取得／生成を自動追加しない |
+| P12 自分のPiece詳細 | 同 detail、`PieceOwnerCard.js` | 画像→本文全文→保存日・形式・公開範囲→画像操作→公開／削除。白／黒固定とnative Buttonを置換。themeは外側の関数screenからclassへ渡し、controller寿命を変えない |
+| P13 画像準備・写真保存・共有 | 同詳細、`PieceVisualCard.js`の作品外案内 | 準備→写真保存／共有→処理中／完了／結果不明／同Piece再読。作品外の説明も共通色へ。OS操作前後の資格と外部画像を回収できない説明を維持 |
+| P14 履歴メニュー | `PieceHistoryMenuScreen.js` | 戻る→説明→共鳴履歴／条件付き自分のPieceの行。owner-readフラグとtutorial条件を保持 |
+| P15 共鳴履歴一覧 | `ResonanceHistoryListScreen.js` | 戻る→保持期間→新旧順→問い・投稿者・共鳴日時→追加取得。refresh・空・失敗・選択を一覧共通へ |
+| P16 共鳴詳細への中継 | `ResonanceHistoryDetailScreen.js` | PieceLibraryへの既存replace中を共通読込表示へ。失敗・戻るの文言を利用者向けにし、新しい詳細画面を増築しない |
+| P17 linkPayload時のPiece入口 | `PieceEntryScreen.js`→`PieceScreen.js` | 全体活動→閲覧・感情通知・探す・履歴を同じカード／行へ。通常Nexusと同じ外観。別の旧デザインを残さない |
+| P18 おすすめmodal | `screens/piece/PieceRecommendModal.js` | 見出し・更新・閉じる→ユーザー行。P04と同じ階層で候補なし・取得失敗を表示 |
+| P19 旧Q&A詳細 | `PieceLibraryScreen.js` | 戻る→対象ユーザー→表示するPiece→問い／答え全文→共鳴数／操作。保存作品画像とは区別し、読むUIの面・文字は統一 |
+| P20 同・対象／問い選択modal | 同screen内Modal | 対象は自分・フォロー中・使用中の印。問いは新着／人気・New・共鳴数の行。選択後の全文、通信・空・失敗、tutorial指定／refを保持 |
+| P21 同・共鳴modal | 同screen内Modal | 強度→任意メモ→保存／保存済み→解除。キーボードとスクロール、自己共鳴拒否・フォロー条件・通信中・解除確認を保持 |
+| P22 tutorialのPiece表示 | `EmotionPiecePreviewModal.js`、`PieceTutorialCreateModal.js` | 同じUIで模擬表示を明示。前者は現役tutorial条件。後者は現在停止中の資産で、同じ設計対象に残すが刷新で有効化しない |
+
+作品canvasのfont・色・計測・renderer版・recipe・保存hashと、アプリの操作枠は別。全画面統一で調整するのは外側UIであり、保存済み作品の世界観や旧画像を描き直さない。通常feedの旧Q&Aと、新保存canonical画像の機能差も保持する。
+
+### 14.5 本人／他者アカウント・フォロー
+
+| ID・対象 | 実装 | 配置と必要な操作／状態 |
+|---|---|---|
+| C01 本人アカウント | `AccountScreen.js`、`screens/account/` | プロフィール→ID検索→活動6指標。名前を主情報、IDを補助へ。名前編集、ID共有、プロフィールURL共有、公開設定、フォロー一覧を同じ操作体系へ |
+| C02 他者アカウント | 同screenの他者分岐 | 同じ部品に公開条件・関係操作を適用。非公開／ID非表示／フォロー／申請中の状態を保持し、本人用操作を足さない |
+| C03 名前編集modal | `AccountNameEditModal.js` | 公開案内→名前→確認・エラー→保存／取消。固定top140を避け、safe area・キーボード・文字拡大へ。処理中の閉じる条件を維持 |
+| C04 公開設定modal | `AccountVisibilitySection.js`等 | 説明→アカウント公開／非公開→ID公開／非公開。選択はtonal＋文字／check。固定top120を避ける。非公開で推薦OFFになる連動は保持 |
+| C05 本人のフォロー一覧 | `FollowListScreen.js` | フォロー中／フォロワー／申請中／承認待ち→名前＋行操作。狭い幅は2列2段、操作は次行へ。通知ON/OFF、解除、承認／拒否／取消、未読と各処理中を維持 |
+| C06 他者のフォロー一覧 | 同screen他者分岐 | 前2タブと閲覧・更新を同じ一覧へ。本人用の通知・関係変更・申請タブを表示しない |
+
+IDのコピー形アイコンは現在`Share.share`を呼ぶため、文言はID共有とする。現Accountの契約hookは表示へ使われていないので契約カードを追加しない。bio／cover編集・独立した推薦／ランキング設定も新設しない。フォロー関係の解除は現状の直接操作を保持し、見た目の作業で確認段階を追加しない。二段階確認を保持する対象は既存のアカウント削除等に限定する。
+
+### 14.6 設定・契約・案内・チュートリアル
+
+| ID・対象 | 実装 | 配置と必要な操作／状態 |
+|---|---|---|
+| S01 設定入口 | `SettingsScreen.js` | 見出し→短い説明→アプリ設定／加入状況／その他の3行。行は文字量で伸ばす |
+| S02 アプリ設定 | `SettingsAppSettingsScreen.js` | 見た目→テーマ3択の色見本・名称・現在印、通知→全体と3子switch。全体OFFの説明、取得／更新中・部分保存失敗・復元を読み分ける。配信時刻の編集UIを新設しない |
+| S03 その他・ログアウト・削除 | `SettingsOtherScreen.js` | tutorial再体験→別群のログアウト→末尾の危険操作。flag・認証・二段階確認・処理中停止を保持 |
+| S04 加入状況・購入・復元 | `SubscriptionSelectScreen.js` | 現契約・更新／有効期限→販売状態→プラン比較→自動更新等の重要説明→復元・管理・規約・privacy・support。現在／購入中／復元中／保留／失効／停止を区別。復元を販売停止で一律に隠さない |
+| I01 お知らせmodal／welcome | `NoticeModal.js`、`NoticeRichText.js` | 題名・配信日→長文・リンク→動的CTA→履歴／閉じる。welcomeも同じ面・本文へ。複数CTAでも本文と閉じるへ到達可能に |
+| I02 お知らせ履歴・展開詳細 | `NoticeHistoryScreen.js` | 日付・題名・New／未読→展開本文・配信／既読日時・カテゴリ・CTA→追加取得。初回／追加読込・空・失敗を分ける |
+| I03 各画面ガイド | `CocolonGuideScreen.js`、`GuideRichText.js` | 対象画面名→要約→説明section→関連用語。本文16/27、用語リンクは下線。screenId別／準備中も同じ設計 |
+| I04 用語説明modal | `GuideTermModal.js` | 語名・読み→定義→説明・例→関連語→閉じる。×44以上、本文スクロール、関連語へ移っても閉じるを維持 |
+| I05 初回tutorial開始案内 | `TutorialStartModal.js` | 一つの面に保存されない説明→開始→今回のみ／今後表示しない。三重の囲み枠を整理し、閉じ方を保持 |
+| I06 tutorial導入・まとめ・完了 | `TutorialFlowScreen.js` | 導入、4体験、その他、完了を同じ見出し・本文・操作へ。模擬と本人記録を区別し、完了処理の二重操作停止を維持 |
+| I07 各画面のtutorial overlay | `TutorialOverlay.js`、`tutorialScenarioData.js` | 説明カード・本文・次へを共通tokensへ。spotlight、対象ref、測定、代理押下、背景停止、上下配置は保持。全19stepの対象位置を改装後に確認 |
+
+ガイド／tutorialの文言も現在仕様に揃える。残っている「Pieceは問いと答えに整えて投稿」「詳しい現在マップはPlus以上」、旧28日や旧plan差を現在の仕様説明として再使用しない。今日の問い履歴の「編集するとマップに反映」等は、分析sourceの現ownerと照合して文言を確定する。画面の説明を直すためにAIや権利の仕様を変更しない。
+
+### 14.7 経路の取り落としを防ぐ対応
+
+現在の起点は`index.js → AppRegistry(App) → AppRuntimeBootstrapGate → RootNavigator`。RootからAuthかMainTabsへ分岐する。主タブはInput／Analysis／Piece／Settingsの4つ。
+
+| Stack | 登録されている個別route | 共有route |
+|---|---|---|
+| Input | Input、TutorialIntro、InputHistory、TodayQuestionHistory、NoticeHistory | Account、CocolonGuide、SubscriptionSelect、FollowListScreen |
+| Analysis | Analysis | 同上 |
+| Piece | Piece、PieceLibrary、TutorialFlow、PieceHistory、PieceOwnerHistory、PieceCreate、ResonanceHistoryList、ResonanceHistoryDetail、EmotionLog | 同上 |
+| Settings | Settings、SettingsAppSettings、SettingsOther | 同上 |
+
+34登録・重複除外22route名だが、これはユーザー画面の総数ではない。同じ実装の複数入口は同じデザインを使い、戻り先・params・通知からの入口を保持する。`TutorialIntro`と`TutorialFlow`は同じ`TutorialFlowScreen`、`InputHistory`は`AnalysisHistoryScreen`、`EmotionLog`は感情通知の`EmotionLogScreen`。`PieceLibraryScreen`という互換aliasを、新しい登録route名として増やさない。
+
+分析には内部route `home / history / reportHistory / reportView / emotionAnalysis / selfStructure / inputHistory / selfReportHistory / selfReportView / selfReportGenerate / todayQuestionHistory`がある。Stack登録だけを見て完了判定しない。Piece入口のNexus／linkPayload時のPieceScreenの両分岐も含む。
+
+休眠の`AnalysisTopScreen.js`、`ProfileCreateScreen.js`、RankingTopと5種ranking screen、および未接続の旧描画部品も、旧外観を流用しない対象として管理する。現在の導線へ表示されていない事実と、デザイン適用除外を混同しない。スタイルを共通化しても、廃止されたRankingや停止中機能を再接続しない。Expoの`app/_layout.tsx`／`app/+not-found.tsx`は現起動経路外の旧scaffoldで、通常画面数へ加算しない。
+
+| 現在表示しない資産 | 現物にある表示と共通化先 |
+|---|---|
+| `AnalysisTopScreen.js` | 感情分析／わたしマップの2カード・更新日・未読・表示操作を共通メニューへ。現在のContentFirst入口は維持 |
+| `ProfileCreateScreen.js` | 5問・回答数・折畳み／展開入力・各secret・保存をフォーム／設定行へ。can_edit・部分保存・keyboardを保持。説明内の公開範囲の矛盾を新仕様として採用しない |
+| `RankingTopScreen.js` | 4指標カード・上位5行・全表示・JST注記を共通の指標／一覧型へ。入口は復活させない |
+| `EmotionRankingScreen.js` | 今日／7日／30日／全体、感情名・件数・更新を共通の期間選択／集計行へ |
+| `InputCountRankingScreen.js`／`InputLengthRankingScreen.js` | 同じ4期間、順位・名前・非公開印・入力数／総文字数・Account遷移を共通一覧へ |
+| `PieceResonanceRankingScreen.js` | 同じ一覧型で共鳴数の意味を維持。人物理解の点数へ装飾しない |
+| `LoginStreakRankingScreen.js` | 順位・名前・連続日数・更新。期間1択は選択controlへせず表示。未接続の旧Ranking戻り先を現行導線と扱わない |
+| 未接続の旧描画・模擬UI | `SelfStructureDeepRenderer`の本文／役割／行動／gap、`NexusEmotionRankingCard`、停止中PieceTutorial等も同じtokensへ。データ形式・表示停止は保持 |
+
+8つの休眠screenもrender／styleを追加読取して上表へ含めた。現在の`index.js → AppRegistry(App)`へ接続していないことは、デザインを旧外観のまま使う許可ではない。
+
+## 15. 実装の進め方と完了条件
+
+### 15.1 一度に全ファイルを変えず、全画面分を完成させる
+
+**範囲は全画面、実装・検査・保存は画面群ごと。** 共通部分と各画面の固有表示が併存するため、一括で大量変更すると、見た目の欠けや操作不具合の原因を追いにくい。途中のGitHub保存は処理停止後の再開点にする。主要4画面だけを完成版にせず、同じUI改装の残件として全表を進める。
+
+| 作業単位 | 含める範囲 | その区切りで確認して保存するもの |
+|---|---|---|
+| 1 共通・起動・認証 | tokens、ボタン／選択／戻る／switch、主frame、nav、native起動、runtime、Auth | 子Text／icon／無効状態まで含めた色と書体。3テーマ、起動の連続、認証フォームとキーボード。下記の既知の色不整合を先に修正 |
+| 2 入力・応答・問い・履歴 | H01–12、入力／問い履歴からの応答再読 | 入力二欄・全選択、本人別draft、保存と応答の区別、全modalの長文・dismiss・回復、一覧からの全文 |
+| 3 分析全体 | A01–14、旧保存結果、戻り先メニュー | 日週月、埋込み／全面表示、月次・現在比較・根拠、未確定、全履歴・条件付き表示。表示内容とプラン境界を保つ |
+| 4 Piece・感情通知・共鳴 | P01–22、Nexusと条件付き旧Q&A | 作成前→preview→保存→履歴→詳細→画像操作、全回復、4タブ・対象選択、旧Q&A・共鳴。保存画像はそのまま |
+| 5 アカウント・設定・契約 | C01–06、S01–04、各Stackからの共有入口 | 本人／他者、公開条件、フォロー全状態、通知の親子、購入／復元／管理・無効CTA、削除の既存確認 |
+| 6 お知らせ・ガイド・tutorial・全体仕上げ | I01–07、休眠資産のstyle、全画面の横断確認 | 全19stepの対象位置、本文リンク・説明、全入口／戻る／通知・長文・文字拡大。全画面の対応漏れを閉じる |
+
+共通部品に新しい不具合が見つかった時は、その部品と影響画面を同じ区切りで直す。固定順序のために誤りを次群へ先送りしない。上表の区切りは新しい承認待ちや恒久checkerを増やすものではない。既存の設計資料とGitHub履歴に、済んだ表示・残る表示・確認結果を置換記録すればよい。
+
+通常のビルド・テスト配布は全画面のsource反映をまとめてから行い、Mashに画面群ごとの反復導入を求めない。nativeやキーボード等、途中でビルドしないと判断できない問題が実際に生じた場合は、その確認に必要な中間ビルドだけを行う。作業を分けることと、旧新混在を完成扱いして配布することは別。
+
+### 15.2 今回見つかった優先修正
+
+| 現物で確認した点 | 次の実装に必要な修正 |
+|---|---|
+| Input選択面はtonal、感情iconは白`ACCENT_TEXT`のまま | `InputEmotionSection`の選択iconを`ON_SURFACE_TONAL`へ。ラベルだけでなくiconも確認 |
+| 契約の`planCtaTextDisabled`が未定義 | 明るい無効面上に白文字を残さない。disabled前景を明示し、spinner／子iconも各面に対応 |
+| Authはindigo・白card固定、一部文字だけtheme対応 | 外枠・入力・本文・操作を一括して3テーマへ。スクロールとキーボード回避を追加 |
+| InputPieceActionArea／OwnerHistory／OwnerCard等がnative Button・白黒固定 | 全中間状態・一覧・詳細・作品外案内へ共通UIを適用。classの処理寿命を表示変更から分離 |
+| 入力履歴の白固定・斜体、分析履歴の既読opacity、旧viewerの独立色 | 全文を通常書体へ、既読は印へ。保存版の意味は維持して外側を統一 |
+| 今日の問いmodalに本文スクロール・safe area・キーボード回避が不足 | 共用の長文入力modalへ。問い・回答・閉じる・送信の全てへ到達可能に |
+| TutorialOverlayの生成り・茶枠・黒文字、native起動の旧色が固定 | 全部のテーマ／起動資産を共通色へ。模擬画面も例外にしない |
+| 共通部品を子の独自styleが上書き、Pressableで状態propsが渡らない | `MenuActionCard`等の子Text／icon／影も移行し、選択・無効のアクセシビリティ情報を渡す |
+| 感情通知の淡色面と濃色文字が固定 | 感情色相は保ち、全テーマで面と文字の組合せを確認 |
+
+これらは今回のsource確認で見つけた未修正事項。前回の400 PASSは既存contract検査の結果であり、全画面の視覚的完成や、上の不整合がない証明ではない。
+
+### 15.3 全体の完了条件
+
+1. §14の全表示へ同じ色・文字・面・余白・操作を適用し、初回反映済みも含めて一巡する。起動・認証・条件分岐・戻り先・モーダルを残さない。
+2. default／ホワイト＆ゴールド／ブラック＆ネイビー全てへ実装を対応させる。各レイアウト型で3テーマ・文字拡大・狭い幅を確認し、長文・複数回復操作・比較・認証は個別にも確認する。
+3. 各画面を標準条件で確認し、共通の型だけで個別画面の表示確認を代用しない。短いiOS横画面、キーボード、safe area、実際のタップ領域と読み上げも対象にする。
+4. 全機能の既存操作・権限・本人境界・回復・未読・tutorialを保持する。UI検査は既存の合成状態／fixtureを使い、実際の課金・削除・公開を見た目確認のためだけに行わない。
+5. source反映・自動検査・native build／Upload・本人端末での見え方を別々に記録する。標準一覧と、空／読込／失敗／結果不明の状態も、適切な型・高リスク箇所で確認する。
+6. 旧新混在を今回の改装完了としない。Mashへ最終確認を依頼する前に華恋が全体を確認し、既知の欠け・読めない操作・切れた本文を直す。
+
+今あるプレビューは方向性を共有した4画面の参考。全画面実装の証拠として使い回さず、残る画面を単にその4画面の外側へ色だけ当てて完了にしない。
+
+## 16. 確認範囲・根拠・今回の変更
+
+今回確認したものは、固定refの全体現在地、現在の起動／全Stackの登録、分析内部routeと戻り先、Piece入口の分岐、および§14の各表示の実ファイル・render・style・関連状態。認証は`screens/`外、起動はnative資産も含めて照合した。画面群を分担したread-only reviewと、経路の独立照合を統合し、文書のwriterは華恋一人。
+
+`screens/*Screen.js`は40fileあり、現在のStack／分析内部／Piece入口から参照される32fileには画面切替containerも含む。8fileが現在未接続。これらの数字をユーザー画面数・全状態数・実機確認数へ換算しない。
+
+| 範囲 | 直接確認した主な実ファイル |
+|---|---|
+| 全経路 | `index.js`、`App.js`、`AuthContext.js`、`navigation/RootNavigator.js`、`MainTabs.js`、Input／Analysis／Piece／Settings／Ranking各Stack、navigation constants／ref／linking／notification、analysis route model／state、`PieceEntryScreen.js` |
+| 入力・履歴・問い | `InputScreen.js`、`AnalysisHistoryScreen.js`、`TodayQuestionHistoryScreen.js`、`screens/input/`のMemo／Emotion／Category／Action／Startup／Toast／FeedbackReply／PiecePreview／PieceActionArea／EmlisThreadModalと関連state、`TodayQuestionCard.js`／`TodayQuestionModal.js` |
+| 分析 | `AnalysisScreen.js`、ContentFirst／Emotion／SelfStructure／InputHistoryMenu／Top、ReportHistory／Viewer、SelfStructureReportGenerate／History／Viewer、`screens/analysisReport/`のCharts／Upgrade／CurrentWeather／ForecastStrip／DetailModal／Constants、`components/selfStructure/`のCumulative／V2／旧Rendererと構成部品 |
+| Piece・social | PieceCreate／OwnerHistory／HistoryMenu／Library／PieceScreen、ResonanceHistoryList／Detail、Nexus／EmotionLog、`components/piece/`のPreviewModal／OwnerCard／VisualCard、`screens/nexus/`のHeader／TabBar／Feed／PieceCard／EmotionLog／History／Recommend／OwnerPicker／Summary、`screens/piece/`のHomeActions／Recommend／TutorialCreateと関連条件 |
+| アカウント・お知らせ | `AccountScreen.js`、`FollowListScreen.js`、`screens/account/`の表示部品／hooks、`NoticeHistoryScreen.js`、`NoticeModal.js`／`NoticeRichText.js` |
+| 設定・説明・起動 | Settings／AppSettings／Other／SubscriptionSelect、GuideScreen／RichText／TermModal、TutorialStartModal／Overlay／FlowScreen／Context／scenario、guide本文・用語、runtime3file、共通操作部品、iOS LaunchScreen／Info.plist、Android Manifest／MainActivity／colors／styles／drawable |
+
+確認は実装と経路の照合。**全画面の端末描画を閲覧した、全操作を実行した、全画像資産の画素を確認したという意味ではない。** 実機・native描画・3テーマ横断の最終確認は未実施として残す。
+
+今回の変更は既存UI設計・入口・全体現在地・議事録の更新のみ。製品JS／native／API／DB／画像／購入／削除／公開、ビルド・配布、GPU・Render・Supabaseの変更は0。プレビュー原本も変更0。全画面統一の確定と、画面群ごとの実装・保存という推奨手順を具体化した。STRUCTURE_MAP_DELTA_NONE：商品route・component責務・意味／保存契約は変更していない。
+

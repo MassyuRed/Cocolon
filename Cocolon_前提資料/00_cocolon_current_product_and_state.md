@@ -176,21 +176,21 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 | 機能 | 目的・現在の接続 | 未確認・境界 |
 |---|---|---|
-| UI採用方針（11/6） | Material案を採用。「優しく、迷わず使えて、言葉は丁寧に読める」。見出し・操作の明快さ、本文の軽い太さと行間、ロゴ／Piece作品の独立した世界観を分ける。[具体設計と3案×4画面プレビュー](designs/ui/README.md)を保存 | 方針・具体設計・3案×4画面プレビューを保存後、共通UI、Home／応答、分析、Piece作成、設定、Nexus／契約カードへ初回反映。対象400 PASS。自分のPiece履歴／詳細や周辺専用画面の仕上げ・RNビルド・本人端末表示は未確認。AI／分析内容・Piece保存画像・購入／公開契約は変更しない |
-| 起動・認証 | 登録／ログイン／メール確認再送／再設定／復旧。`App.js`→`RootNavigator`→`MainTabs`→Input／Analysis／Piece／Settingsの4 Stack（次候補でRanking入口を撤去） | native認証リンク・cold／warm復帰の実成立は別確認。旧巨大App／MyModel画面名から現在を復元しない |
+| UI採用方針（11/6） | **全画面を例外なく今回のMaterialデザインへ統一することはMash確定。** 起動・認証、履歴・詳細、モーダル、本人／他者、条件付き互換表示、tutorial・全体状態を含む。実装は共通部品から6つの画面群で確認・保存し、全画面の仕上げまでを一つの改装にする。[全画面の具体設計・対応表・実装順](designs/ui/material-ui-design.md#14-全画面の具体設計) | 初回f35213fで製品17fileへ反映済み、既存対象400 PASSはその時点の検査。全経路と表示実装を再照合し、native起動／Auth／条件付き旧表示等を設計へ追加。色の不整合・個別画面の仕上げは§15.2に残す。今回の製品変更0、全画面の実機表示・ビルド／配布は未確認。作品画像・AI／分析内容・購入／公開契約は保持 |
+| 起動・認証 | 登録／ログイン／メール確認再送／再設定／復旧。`App.js`→`RootNavigator`→`MainTabs`→Input／Analysis／Piece／Settingsの4 Stack（Ranking入口は撤去済み） | native認証リンク・cold／warm復帰の実成立は別確認。旧巨大App／MyModel画面名から現在を復元しない |
 | 今日の問い・回答履歴 | current／answers／history／PATCH／settingsを接続。日常メモと別に考えを記録し、修正・再読 | Emlis任意問いと別機能。旧自己構造素材との接続を、V2全source採用済みへ拡張しない |
 | 投稿・他者のPiece | 通常`PieceEntryScreen`→`NexusScreen`。本人／フォロー中／特定相手、並替・更新・本人投稿削除。linkPayload時のみ`PieceScreen` | 公開条件と新Piece保存成立は別。旧Q&A投稿と新canonical recordを混同しない |
 | 共鳴・履歴 | submit／delete／historyと一覧・詳細あり | 自己共鳴・フォロー外制御あり。共鳴数を人間理解の正しさへ換算しない |
 | 感情通知・感情ログ | feed／unread／既読、個人別受信設定、送信選択。Nexusの投稿／感情通知／おすすめ／共鳴履歴の一部 | 感情・強さ・時刻であり、メモ本文の公開ではない。実配送・通知許諾・全起動先は未確認 |
 | フォロー・申請・推薦 | 作成／解除／フォロワー削除／承認／拒否／取消／おすすめを接続 | 非公開account・推薦除外・公開範囲を保持。見つけることと閲覧許可は別 |
-| アカウント・ID検索 | 自他profile・活動情報・表示名・共有コード、非公開設定、推薦／ランキング可視性 | 共有ID公開、推薦、ランキング、非公開を別設定とする。公開profile APIと認証本人APIを分ける |
+| アカウント・ID検索 | 自他profile・活動6指標・表示名・ID共有／プロフィールURL共有。RNの公開操作はアカウント公開とID公開の2群。非公開化は推薦OFFへ連動 | 現画面にランキング設定・独立した推薦設定・bio／cover編集はない。既存API／保存列の存在とRNで見える操作を分ける。公開profile APIと認証本人APIを分ける |
 | 共有URL・native／Web入口 | 共有profile URL→公開API→Accountに加え、11/1にiOS cocolon scheme/URL転送とvisibility HTTP失敗時502を実装 | API配置/RN Upload済み。本人認証復帰、HTTPS universal linkのdomain entitlement/Web補助は残件。実漏出を観測したという意味ではない |
 | ランキング・感情集計 | §43の次RN候補でRankingタブ/stack入口/表示設定/guideを撤去。保存データ・APIは削除しない。Pieceの全体感情集計は別経路として維持 | 7101で依頼UI修正完了を本人確認。全体感情TOP3はアプリ内集計で、社会全体の代表値ではない |
 | 通知・未読 | push token同期、未読状態、問い・report・感情更新から対応画面へ戻るrouting | token登録と配送成功を分ける。ログアウト／account切替時の本人境界、全cold／warm動作は別確認 |
 | アプリ設定・購読 | theme、全体／個別通知、プラン購入・復元・管理、entitlement。11/1にfinish両失敗の伝播/同一購入の結果共有とowner世代ごとの旧応答遮断を修正 | RN6701内部配布・本人起動済み。実storeのfinish／失効／account切替／復元・release判定は残る。料金表示だけで有料品質成立としない |
 | ガイド・tutorial・お知らせ | ガイド、再体験、tutorial flow、notice current／history／read | mock体験は通常実経路の成功証拠ではない。tutorialを全体価値・入力の悩みの唯一の解決としない |
 | ログアウト・退会 | feature flag・二段確認・`/account/delete`後local cleanup／signOutのコードあり | 実データ全削除完了は未確認。元情報と派生物、内部保存と外部画像の境界を分ける |
-| ProfileCreate旧資産 | `ProfileCreateScreen.js`・`api_profile_create.py`は現存 | fresh Root＋5 Stackに通常route／importを確認できず。通常入口接続済みへ昇格しない |
+| ProfileCreate旧資産 | `ProfileCreateScreen.js`・`api_profile_create.py`は現存 | fresh Root＋4 Stackに通常route／importを確認できず。通常入口接続済みへ昇格しない |
 | 国家システム・非同期処理 | 原入力保存・event dispatch、分析素材／queue、通知・集計・保持期限、API／DB／認証・公開governanceが各ownerを持つ | 原入力の保存を生成成功に従属させない。Emlis補足・続行を入力件数／課金eventへ再加算しない。queue・job・retryの存在をlive稼働／全処理成功へ換算しない |
 | 生成基盤・開発運用 | APIのCMEE EngineにEmlis thread／Piece／Analysis consumer分岐あり。既存共有text core・生成guard・contract・tests、RN build／CIは支援基盤 | 固定snapshot／旧禁止条項はその時点の範囲。学習済AIはprivate注入境界・保存rawのconsumerを実装済み。受け取りloss4更新/LR比較後の既知FITは意味/本文2/2。実モデル2callのoffline一往復（actual prior、問い1、訂正3更新、END）まで成立。Engineのcold file再開2/2、承認済みoffline180秒/通常30秒を実装。実4Bのfresh ID02で初回/訂正後service・隔離SQL保存、意味保存後中断/明示再開、保存済み非生成再読まで成立。さらに4題材6教材の合成nativeをprivate版3へ接続し、隔離SQL6状態の同snapshot再開/保存非生成再読までCPU確認。当該CPU確認での実4B生成は0。本人端末/一般言語品質は未成立。稼働設定・秘密値・DB実値・端末は原本sourceから推測しない |
 | System Context | 実装正本はPR37、商品原本はPR30/API PR3の別checkout。旧CLI/追跡読順を正規routeへ同期し、全機能原本・最新weekly・観測教材・三core現物を選択対象へ追加、seed期待の不一致を修復 | 最新cacheは未生成。固定環境doctor34項目/関連CIは成功したが、API Python索引1874対象が1200秒/1800秒ともtimeout。2回目は処理中のPR30費用案更新により終了時head確認も不一致。失敗・原本との差を[PR37](https://github.com/MassyuRed/Cocolon/pull/37)へ記録し、同じ時間延長だけの再試行を停止。tracked currentは8月snapshotで使用不可。fresh原本の直接読取を使い、最新索引完成とは扱わない |
