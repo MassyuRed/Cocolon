@@ -24,8 +24,6 @@ import {
   useTheme,
 } from "../theme/ThemeContext";
 import {
-  AnalysisDescription,
-  AnalysisMediumCard,
   AnalysisMenuScroll,
   AnalysisSubHeader,
   useAnalysisMenuStyles,
@@ -61,30 +59,52 @@ function resolveEmotionNotificationEnabled(payload) {
 }
 
 function createLocalStyles(colors, ui) {
-  const text = ui?.text || {};
-
   return StyleSheet.create(applyTypographyTokens({
+    sectionRow: {
+      minHeight: 64,
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 12,
+      paddingHorizontal: 12,
+      paddingVertical: 10,
+      borderRadius: 10,
+      backgroundColor: colors.PANEL_BG,
+    },
+    firstRow: { borderTopLeftRadius: 24, borderTopRightRadius: 24 },
+    lastRow: { borderBottomLeftRadius: 24, borderBottomRightRadius: 24 },
+    sectionIcon: {
+      width: 32,
+      height: 32,
+      flexShrink: 0,
+      borderRadius: 11,
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: colors.SURFACE_TONAL,
+    },
+    sectionContent: { flex: 1, minWidth: 0, gap: 2 },
+    sectionLabel: { color: colors.TEXT_ON_LIGHT, flexShrink: 1 },
+    sectionMeta: { color: colors.TEXT_SUBTLE, flexShrink: 1 },
     groupWrap: {
-      marginTop: 12,
-      marginBottom: 24,
+      marginTop: 3,
+      paddingHorizontal: 12,
+      paddingVertical: 8,
+      borderRadius: 12,
+      backgroundColor: colors.PANEL_BG,
     },
     optionRow: {
       marginLeft: 0,
-      minHeight: 60,
-      borderRadius: 24,
-      borderWidth: 1,
-      borderColor: colors.CARD_BORDER,
+      minHeight: 48,
+      borderRadius: 10,
       backgroundColor: colors.PANEL_BG,
-      paddingHorizontal: 20,
-      paddingVertical: 20,
+      paddingHorizontal: 12,
+      paddingVertical: 10,
     },
+    themeChoice: { borderRadius: 20, backgroundColor: colors.BG_SILVER },
     optionRowSelected: {
-      borderColor: colors.CARD_BORDER,
       backgroundColor: colors.SURFACE_TONAL,
     },
     optionRowDisabled: {
-      backgroundColor: colors.FIELD_BG,
-      borderColor: colors.CARD_BORDER,
+      opacity: 0.6,
     },
     optionRowInner: {
       flexDirection: "row",
@@ -100,7 +120,7 @@ function createLocalStyles(colors, ui) {
       color: colors.TEXT_ON_LIGHT,
       flexGrow: 1,
       flexShrink: 1,
-      flexBasis: 160,
+      flexBasis: 120,
       minWidth: 0,
     },
     optionMetaWrap: {
@@ -120,11 +140,36 @@ function createLocalStyles(colors, ui) {
       flexShrink: 1,
     },
     helperText: {
-      marginTop: 12,
-      marginLeft: 0,
+      marginTop: 8,
+      marginHorizontal: 12,
+      marginBottom: 4,
       color: colors.TEXT_SUBTLE,
     },
-  }, ui, {"optionLabel":"button","optionMetaText":"meta","helperText":"description"}));
+  }, ui, {"sectionLabel":"button","sectionMeta":"description","optionLabel":"button","optionMetaText":"meta","helperText":"description"}));
+}
+
+function SettingSectionRow({ icon, label, summary, expanded, onPress, position }) {
+  const { colors, ui } = useAnalysisMenuStyles();
+  const localStyles = useMemo(() => createLocalStyles(colors, ui), [colors, ui]);
+
+  return (
+    <CocolonPressable
+      style={[localStyles.sectionRow, position === "first" && localStyles.firstRow, position === "last" && localStyles.lastRow]}
+      onPress={onPress}
+      accessibilityState={{ expanded }}
+      accessibilityLabel={`${label}の設定を${expanded ? "閉じる" : "開く"}`}
+      accessibilityValue={{ text: summary }}
+    >
+      <View style={localStyles.sectionIcon} accessible={false} importantForAccessibility="no-hide-descendants">
+        <Ionicons name={icon} size={18} color={colors.ON_SURFACE_TONAL} />
+      </View>
+      <View style={localStyles.sectionContent}>
+        <Text style={localStyles.sectionLabel}>{label}</Text>
+        <Text style={localStyles.sectionMeta}>{summary}</Text>
+      </View>
+      <Ionicons name={expanded ? "chevron-up" : "chevron-down"} size={16} color={colors.TEXT_SUBTLE} />
+    </CocolonPressable>
+  );
 }
 
 function SettingChoiceRow({
@@ -139,14 +184,14 @@ function SettingChoiceRow({
 
   return (
     <CocolonPressable
-      style={[localStyles.optionRow, selected && localStyles.optionRowSelected]}
+      style={[localStyles.optionRow, localStyles.themeChoice, selected && localStyles.optionRowSelected]}
       onPress={onPress}
       accessibilityRole="button"
       accessibilityState={{ selected }}
       accessibilityLabel={`${label}${selected ? " 現在選択中" : ""}`}
     >
       <View style={localStyles.optionRowInner}>
-        <View accessible={false} importantForAccessibility="no-hide-descendants" style={{ width: 36, height: 36, flexShrink: 0, borderRadius: 18, borderWidth: 1, borderColor: THEME_PALETTES[themeKey].TITLE_GOLD, backgroundColor: THEME_PALETTES[themeKey].BG_SILVER, alignItems: 'center', justifyContent: 'center' }}>
+        <View accessible={false} importantForAccessibility="no-hide-descendants" style={{ width: 24, height: 24, flexShrink: 0, borderRadius: 12, borderWidth: 1, borderColor: THEME_PALETTES[themeKey].TITLE_GOLD, backgroundColor: THEME_PALETTES[themeKey].BG_SILVER, alignItems: 'center', justifyContent: 'center' }}>
           <View style={{ width: 16, height: 16, borderRadius: 8, backgroundColor: THEME_PALETTES[themeKey].GOLD_BUTTON }} />
         </View>
         <Text style={[localStyles.optionLabel, selected && { color: colors.ON_SURFACE_TONAL }]}>{label}</Text>
@@ -561,27 +606,25 @@ export default function SettingsAppSettingsScreen({ navigation }) {
   return (
     <AnalysisMenuScroll>
       <AnalysisSubHeader title="アプリ設定" onBack={() => navigation.goBack()} />
-      <AnalysisDescription>
-        変更したい設定を選んでください。
-      </AnalysisDescription>
 
-      <AnalysisMediumCard
-        title="カラーテーマ"
-        description="アプリの見た目を設定します"
+      <SettingSectionRow
+        icon="color-palette-outline"
+        label="カラーテーマ"
+        summary={THEME_LABELS_JA[themeName] ?? themeName}
+        expanded={expandedSection === "theme"}
         onPress={() => toggleSection("theme")}
-        chevron={expandedSection === "theme" ? "up" : "down"}
-        accessibilityLabel="カラーテーマの設定を開く"
+        position="first"
       />
 
       {expandedSection === "theme" ? (
         <View style={localStyles.groupWrap}>
           {themeOptions.map((option, index) => (
-            <View key={option.key} style={index > 0 ? { marginTop: 8 } : null}>
+            <View key={option.key} style={index > 0 ? { marginTop: 6 } : null}>
               <SettingChoiceRow
                 themeKey={option.key}
                 label={THEME_LABELS_JA[option.key] ?? option.key}
                 selected={themeName === option.key}
-                rightText={themeName === option.key ? "現在" : undefined}
+                rightText={themeName === option.key ? "選択中" : undefined}
                 onPress={() => setThemeName(option.key)}
               />
             </View>
@@ -589,13 +632,14 @@ export default function SettingsAppSettingsScreen({ navigation }) {
         </View>
       ) : null}
 
-      <View style={{ marginTop: 12 }}>
-        <AnalysisMediumCard
-          title="通知設定"
-          description="通知の受け取り方を設定します"
+      <View style={{ marginTop: 3 }}>
+        <SettingSectionRow
+          icon="notifications-outline"
+          label="通知設定"
+          summary={notificationSettingsLoading ? "読み込み中…" : localProcessing ? "保存中…" : failedNotificationLabels.length > 0 ? "一部の設定を取得できませんでした" : pushEnabled ? "通知オン" : "通知オフ"}
+          expanded={expandedSection === "notifications"}
           onPress={() => toggleSection("notifications")}
-          chevron={expandedSection === "notifications" ? "up" : "down"}
-          accessibilityLabel="通知設定を開く"
+          position="last"
         />
       </View>
 
@@ -611,32 +655,26 @@ export default function SettingsAppSettingsScreen({ navigation }) {
             disabled={notificationSettingsLoading || isBusy}
           />
 
-          <View style={{ marginTop: 8 }}>
-            <SettingSwitchRow
-              label="今日の問い通知"
-              value={todayQuestionNotificationEnabled}
-              onValueChange={updateTodayQuestionNotificationEnabled}
-              disabled={todayQuestionLoading || isBusy || !pushEnabled}
-            />
-          </View>
+          <SettingSwitchRow
+            label="今日の問い通知"
+            value={todayQuestionNotificationEnabled}
+            onValueChange={updateTodayQuestionNotificationEnabled}
+            disabled={todayQuestionLoading || isBusy || !pushEnabled}
+          />
 
-          <View style={{ marginTop: 8 }}>
-            <SettingSwitchRow
-              label="レポート配布通知"
-              value={reportDistributionNotificationEnabled}
-              onValueChange={updateReportDistributionNotificationEnabled}
-              disabled={reportDistributionLoading || isBusy || !pushEnabled}
-            />
-          </View>
+          <SettingSwitchRow
+            label="レポート配布通知"
+            value={reportDistributionNotificationEnabled}
+            onValueChange={updateReportDistributionNotificationEnabled}
+            disabled={reportDistributionLoading || isBusy || !pushEnabled}
+          />
 
-          <View style={{ marginTop: 8 }}>
-            <SettingSwitchRow
-              label="感情通知"
-              value={emotionNotificationEnabled}
-              onValueChange={updateEmotionNotificationEnabled}
-              disabled={emotionNotificationLoading || isBusy || !pushEnabled}
-            />
-          </View>
+          <SettingSwitchRow
+            label="感情通知"
+            value={emotionNotificationEnabled}
+            onValueChange={updateEmotionNotificationEnabled}
+            disabled={emotionNotificationLoading || isBusy || !pushEnabled}
+          />
 
           {!pushEnabled ? (
             <Text style={localStyles.helperText}>

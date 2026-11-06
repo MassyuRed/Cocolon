@@ -251,7 +251,7 @@ function createStyles(colors, ui) {
 
         descriptionText: {
       color: text.description ?? colors.TEXT_SUBTLE,
-      marginBottom: 20,
+      marginBottom: 16,
     },
 
         summaryBlock: {
@@ -283,21 +283,12 @@ function createStyles(colors, ui) {
     },
 
         largeCard: {
-      minHeight: 126,
       borderRadius: 24,
-      borderWidth: 1,
-      borderColor: colors.CARD_BORDER,
-      backgroundColor: colors.FIELD_BG,
-      paddingHorizontal: 20,
-      paddingVertical: 20,
-      shadowColor: "#000",
-      shadowOpacity: ui.shadow.float.shadowOpacity,
-      shadowRadius: ui.shadow.float.shadowRadius,
-      shadowOffset: ui.shadow.float.shadowOffset,
-      elevation: ui.shadow.float.elevation,
+      backgroundColor: colors.PANEL_BG,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
     },
         largeCardContent: {
-          flex: 1,
           justifyContent: "space-between",
         },
         cardTitleRow: {
@@ -321,30 +312,22 @@ function createStyles(colors, ui) {
       flexShrink: 0,
     },
         largeCardDescription: {
-      marginTop: 10,
+      marginTop: 6,
       color: text.description ?? colors.TEXT_SUBTLE,
     },
         largeCardUpdate: {
-      marginTop: 12,
+      marginTop: 8,
       color: text.description ?? colors.TEXT_SUBTLE,
     },
 
         mediumCard: {
-      minHeight: 88,
+      minHeight: 56,
       borderRadius: 24,
-      borderWidth: 1,
-      borderColor: colors.CARD_BORDER,
-      backgroundColor: colors.FIELD_BG,
-      paddingHorizontal: 20,
-      paddingVertical: 20,
-      shadowColor: "#000",
-      shadowOpacity: ui.shadow.float.shadowOpacity,
-      shadowRadius: ui.shadow.float.shadowRadius,
-      shadowOffset: ui.shadow.float.shadowOffset,
-      elevation: ui.shadow.float.elevation,
+      backgroundColor: colors.PANEL_BG,
+      paddingHorizontal: 16,
+      paddingVertical: 14,
     },
         mediumCardContent: {
-          flex: 1,
           justifyContent: "center",
         },
         mediumCardTitle: {
@@ -359,7 +342,7 @@ function createStyles(colors, ui) {
       flexShrink: 0,
     },
         mediumCardDescription: {
-      marginTop: 6,
+      marginTop: 4,
       color: text.description ?? colors.TEXT_SUBTLE,
     },
         chevronIcon: {
@@ -368,13 +351,11 @@ function createStyles(colors, ui) {
 
         optionRow: {
       marginLeft: 0,
-      minHeight: 60,
-      borderRadius: 24,
-      borderWidth: 1,
-      borderColor: colors.CARD_BORDER,
+      minHeight: 44,
+      borderRadius: 16,
       backgroundColor: colors.FIELD_BG,
-      paddingHorizontal: 20,
-      paddingVertical: 20,
+      paddingHorizontal: 16,
+      paddingVertical: 12,
     },
         optionRowInner: {
       flexDirection: "row",

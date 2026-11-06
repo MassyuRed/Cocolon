@@ -13,7 +13,7 @@ function InputMemoField({
   field,
   iconName,
   label,
-  hint,
+  isLast = false,
   value,
   setValue,
   inputRef,
@@ -47,9 +47,8 @@ function InputMemoField({
   }, [field, inputRef, isTutorialMode, registerInputInteraction, setActiveField]);
 
   return (
-    <View style={styles.heroFieldBlock}>
-      <Text style={styles.heroFieldLabel}>{label}</Text>
-      <Text style={styles.heroFieldHint}>{hint}</Text>
+    <View style={[styles.heroFieldBlock, isLast && styles.heroFieldBlockLast]}>
+      <Text style={styles.memoFieldLabel}>{label}</Text>
       {isExpanded ? (
         <View style={[styles.memoCard, styles.memoCardExpanded]}>
           <TextInput
@@ -74,7 +73,7 @@ function InputMemoField({
             scrollEnabled={contentHeight >= inputMaxHeight}
             disableFullscreenUI
             textAlignVertical="top"
-            placeholderTextColor={colors.TEXT_ON_LIGHT}
+            placeholderTextColor={colors.TEXT_SUBTLE}
             onFocus={(e) => {
               if (isTutorialMode) return;
               registerInputInteraction?.();
@@ -116,7 +115,7 @@ function InputMemoField({
                   styles.collapsedText,
                   !compactOneLine(value) && styles.collapsedTextPlaceholder,
                 ]}
-                numberOfLines={1}
+                numberOfLines={2}
               >
                 {compactOneLine(value) || "ここに書いてください。"}
               </Text>
@@ -157,8 +156,7 @@ export default function InputMemoSection({
       <InputMemoField
         field="memo"
         iconName="create-outline"
-        label="思考内容（考えていること）"
-        hint="何を思った／どう感じた／どう解釈した？"
+        label="考えたこと・感じたこと"
         value={memo}
         setValue={setMemo}
         inputRef={memoInputRef}
@@ -179,8 +177,8 @@ export default function InputMemoSection({
       <InputMemoField
         field="memoAction"
         iconName="walk-outline"
-        label="行動内容（実際に起こった出来事）"
-        hint="何が起きた／何をした／結果どうなった？"
+        label="出来事・行動"
+        isLast
         value={memoAction}
         setValue={setMemoAction}
         inputRef={memoActionInputRef}

@@ -28,8 +28,8 @@ function buildPalette(colors, isDark) {
     border: colors?.CARD_BORDER || (isDark ? "#374151" : "#E5E7EB"),
     text: colors?.TEXT_ON_LIGHT || (isDark ? "#F9FAFB" : "#111827"),
     subtle: readableDescription || (isDark ? "#9CA3AF" : DARK_GRAY_DESC),
-    accent: colors?.TITLE_GOLD || "#694775",
-    buttonBg: colors?.GOLD_BUTTON || "#694775",
+    accent: colors?.TITLE_GOLD || "#800020",
+    buttonBg: colors?.GOLD_BUTTON || "#5A1020",
     accentBorder: colors?.GOLD_BUTTON_BORDER || "#C9A227",
     accentText: colors?.ACCENT_TEXT || (isDark ? "#111827" : "#111827"),
   };

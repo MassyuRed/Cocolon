@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View, useWindowDimensions } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import CocolonPressable from "../../components/CocolonPressable";
@@ -15,18 +15,16 @@ import {
   normalizeKokoroWeather,
 } from "./kokoroWeatherFormatters";
 
-function createStyles(colors, ui) {
+function createStyles(colors, ui, fontScale = 1) {
   const text = ui?.text || {};
   return StyleSheet.create(
     applyTypographyTokens(
       {
         card: {
-      borderWidth: 1,
-      borderColor: colors.CARD_BORDER,
       borderRadius: 24,
       backgroundColor: colors.PANEL_BG,
-      paddingHorizontal: 20,
-      paddingVertical: 20,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
       marginBottom: 16,
       width: '100%',
       maxWidth: 640,
@@ -54,16 +52,14 @@ function createStyles(colors, ui) {
         summaryRow: {
       flexDirection: "row",
       flexWrap: "wrap",
-      marginTop: 8,
-      marginBottom: 12,
+      marginTop: 4,
+      marginBottom: 8,
     },
         chip: {
-      borderRadius: 999,
-      paddingHorizontal: 12,
-      paddingVertical: 6,
+      borderRadius: 10,
+      paddingHorizontal: 8,
+      paddingVertical: 4,
       backgroundColor: colors.SURFACE_TONAL,
-      borderWidth: 1,
-      borderColor: colors.CARD_BORDER,
       marginRight: 6,
       marginBottom: 6,
       maxWidth: '100%',
@@ -73,36 +69,37 @@ function createStyles(colors, ui) {
       flexShrink: 1,
     },
         helperText: {
-      marginBottom: 12,
+      marginBottom: 10,
       color: text.description ?? colors.TEXT_SUBTLE,
     },
+        itemContainer: {
+      width: Math.max(140, Math.min(224, 140 * fontScale)),
+      marginRight: 8,
+      flexShrink: 0,
+    },
         item: {
-      width: 168,
+      width: "100%",
       borderRadius: 16,
-      backgroundColor: colors.FIELD_BG,
-      borderWidth: 1,
-      borderColor: colors.CARD_BORDER,
-      paddingHorizontal: 16,
-      paddingVertical: 16,
-      marginRight: 12,
+      backgroundColor: colors.SURFACE_TONAL,
+      paddingHorizontal: 12,
+      paddingVertical: 12,
       minHeight: 0,
     },
         itemDisabled: {
-      backgroundColor: colors.FIELD_BG,
+      backgroundColor: colors.SURFACE_TONAL,
     },
         itemLabel: {
       color: text.primary ?? colors.TEXT_ON_LIGHT,
-      marginBottom: 8,
+      marginBottom: 6,
       flexShrink: 1,
     },
         iconWrap: {
       borderRadius: 12,
       alignItems: "center",
       justifyContent: "center",
-      backgroundColor: colors.SURFACE_TONAL,
-      marginBottom: 8,
-      minHeight: 52,
-      paddingVertical: 8,
+      marginBottom: 6,
+      minHeight: 36,
+      paddingVertical: 4,
     },
         weatherLabel: {
       color: text.primary ?? colors.TEXT_ON_LIGHT,
@@ -112,7 +109,7 @@ function createStyles(colors, ui) {
       flexDirection: "row",
       alignItems: 'flex-start',
       justifyContent: "space-between",
-      marginTop: 8,
+      marginTop: 6,
       flexWrap: 'wrap',
       columnGap: 8,
       rowGap: 4,
@@ -130,17 +127,17 @@ function createStyles(colors, ui) {
       flexShrink: 1,
     },
         dominantText: {
-      marginTop: 8,
+      marginTop: 6,
       color: text.description ?? colors.TEXT_SUBTLE,
       textAlign: "center",
     },
         memoBadge: {
       alignSelf: "center",
-      marginTop: 8,
-      borderRadius: 999,
-      paddingHorizontal: 10,
-      paddingVertical: 6,
-      backgroundColor: colors.SURFACE_TONAL,
+      marginTop: 6,
+      borderRadius: 10,
+      paddingHorizontal: 6,
+      paddingVertical: 4,
+      backgroundColor: colors.PANEL_BG,
       maxWidth: '100%',
     },
         memoText: {
@@ -176,8 +173,9 @@ export default function KokoroWeatherForecastStrip({
   disabled = false,
 }) {
   const { colors, themeName } = useTheme();
+  const { fontScale } = useWindowDimensions();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
-  const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
+  const styles = useMemo(() => createStyles(colors, ui, fontScale), [colors, ui, fontScale]);
   const weather = useMemo(() => normalizeKokoroWeather(kokoroWeather, reportType), [kokoroWeather, reportType]);
   const items = useMemo(() => getKokoroWeatherItems(weather), [weather]);
 
@@ -232,6 +230,7 @@ export default function KokoroWeatherForecastStrip({
               return (
                 <CocolonPressable
                   key={key}
+                  containerStyle={styles.itemContainer}
                   onPress={() => handleSelect(item)}
                   disabled={isDisabled}
                   accessibilityLabel={`${item.label || "対象"}のこころ天気詳細を開く`}

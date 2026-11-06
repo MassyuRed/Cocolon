@@ -84,9 +84,8 @@ function CocolonTabBar(props) {
   return (
     <View
       style={{
-        backgroundColor: colors.FIELD_BG,
-        borderTopColor: colors.CARD_BORDER,
-        borderTopWidth: 1,
+        backgroundColor: colors.SURFACE_TONAL,
+        borderTopWidth: 0,
       }}
     >
       <BottomTabBar {...props} state={filteredState} />
@@ -146,7 +145,7 @@ export default function MainTabs() {
   const insets = useSafeAreaInsets();
   const { fontScale } = useWindowDimensions();
   const navigationFontScale = Math.max(1, Number(fontScale) || 1);
-  const tabIconAreaHeight = 48 + (navigationFontScale - 1) * 18;
+  const tabIconAreaHeight = 28 + (navigationFontScale - 1) * 18;
   const tabLabelLineHeight = 18;
   // The item adds 5px above and below the icon/label stack.
   const tabBarContentHeight = Math.ceil(8 + 10 + tabIconAreaHeight + tabLabelLineHeight * navigationFontScale);
@@ -1142,7 +1141,7 @@ export default function MainTabs() {
             borderRightWidth: HIDDEN_SCREENS.has(route.name) ? 0 : FRAME_BORDER_WIDTH,
           },
           tabBarLabelPosition: "below-icon",
-          tabBarIconStyle: { width: 64, height: tabIconAreaHeight },
+          tabBarIconStyle: { width: 54, height: tabIconAreaHeight },
           tabBarIcon: ({ color, size, focused }) => {
             let iconName;
             switch (route.name) {
@@ -1152,12 +1151,12 @@ export default function MainTabs() {
               case "Settings": iconName = "settings-outline"; break;
               default: iconName = "ellipse-outline";
             }
-            const icon = <Ionicons name={iconName} size={size} color={focused ? colors.ON_SURFACE_TONAL : color} />;
+            const icon = <Ionicons name={iconName} size={20} color={focused ? colors.ACCENT_TEXT : color} />;
             const showUnreadBadge = showTabUnreadBadge(route.name);
             return (
-              <View style={{ width: 64, minHeight: tabIconAreaHeight, borderRadius: 18,
-                backgroundColor: focused ? colors.SURFACE_TONAL : "transparent",
-                alignItems: "center", justifyContent: "flex-end", overflow: "visible" }}>
+              <View style={{ width: 54, minHeight: tabIconAreaHeight, borderRadius: 17,
+                backgroundColor: focused ? colors.GOLD_BUTTON : "transparent",
+                alignItems: "center", justifyContent: "center", overflow: "visible" }}>
                 {icon}
                 {showUnreadBadge ? (
                   <BottomTabUnreadBadge
@@ -1171,7 +1170,7 @@ export default function MainTabs() {
           tabBarActiveTintColor: colors.TITLE_GOLD,
           tabBarInactiveTintColor: colors.TEXT_SUBTLE,
           tabBarStyle: {
-            backgroundColor: colors.FIELD_BG,
+            backgroundColor: colors.SURFACE_TONAL,
             borderTopColor: colors.CARD_BORDER,
             borderTopWidth: 0,
             paddingTop: 8,

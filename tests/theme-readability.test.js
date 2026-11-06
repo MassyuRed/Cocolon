@@ -42,6 +42,7 @@ const COLOR_KEYS = [
   'TITLE_GOLD', 'BRAND_GOLD', 'TEXT_ON_LIGHT', 'TEXT_ON_DARK',
   'TEXT_SUBTLE', 'CARD_BORDER', 'ACCENT_TEXT',
   'SURFACE_TONAL', 'ON_SURFACE_TONAL',
+  'SURFACE_HIGHLIGHT', 'ON_SURFACE_HIGHLIGHT',
   'ERROR', 'ERROR_BG',
 ].sort();
 
@@ -81,9 +82,20 @@ test('light/dark backgrounds and decorative color families stay compatible', () 
     },
   };
   for (const theme of ['light', 'dark']) {
-    const { TITLE_GOLD, BRAND_GOLD, GOLD_BUTTON, TEXT_SUBTLE, SURFACE_TONAL, ON_SURFACE_TONAL, ERROR, ERROR_BG, ...unchanged } = palettes[theme];
+    const { TITLE_GOLD, BRAND_GOLD, GOLD_BUTTON, TEXT_SUBTLE, SURFACE_TONAL, ON_SURFACE_TONAL, SURFACE_HIGHLIGHT, ON_SURFACE_HIGHLIGHT, ERROR, ERROR_BG, ...unchanged } = palettes[theme];
     assert.deepEqual(unchanged, expected[theme]);
   }
+});
+
+test('default keeps Mash burgundy and ivory brand colors', () => {
+  const palette = palettes.default;
+  assert.deepEqual(Object.fromEntries(['BG_SILVER', 'PANEL_BG', 'FIELD_BG', 'BORDER_GOLD',
+    'GOLD_BUTTON', 'GOLD_BUTTON_BORDER', 'TITLE_GOLD', 'BRAND_GOLD', 'TEXT_ON_LIGHT', 'CARD_BORDER']
+    .map(key => [key, palette[key]])), {
+    BG_SILVER: '#F6F1E8', PANEL_BG: '#F9F9F9', FIELD_BG: '#FFFFFF', BORDER_GOLD: '#800020',
+    GOLD_BUTTON: '#5A1020', GOLD_BUTTON_BORDER: '#430814', TITLE_GOLD: '#800020',
+    BRAND_GOLD: '#800020', TEXT_ON_LIGHT: '#111827', CARD_BORDER: '#D7D2C9',
+  });
 });
 
 test('readable text stays in the gold and navy/blue color families', () => {
@@ -104,6 +116,7 @@ for (const theme of ['default', 'light', 'dark']) {
       assertReadable(palette.TEXT_SUBTLE, palette[surface], `${theme} secondary/${surface}`);
     }
     assertReadable(palette.ON_SURFACE_TONAL, palette.SURFACE_TONAL, `${theme} tonal selection`);
+    assertReadable(palette.ON_SURFACE_HIGHLIGHT, palette.SURFACE_HIGHLIGHT, `${theme} question surface`);
     assertReadable(palette.ACCENT_TEXT, palette.GOLD_BUTTON, `${theme} button label/spinner`);
     assertReadable(palette.ERROR, palette.ERROR_BG, `${theme} error panel`);
     for (const surface of SURFACES) assertReadable(palette.ERROR, palette[surface], `${theme} inline error/${surface}`);

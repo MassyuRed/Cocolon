@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { Alert, View } from "react-native";
+import React, { useMemo, useState } from "react";
+import { Alert, StyleSheet, Text, View } from "react-native";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 import { useAuth } from "../AuthContext";
 import { useTutorial } from "../TutorialContext";
@@ -7,12 +8,69 @@ import { useUnread } from "../UnreadContext";
 import { useAppRuntime } from "../AppRuntimeContext";
 import { apiPost } from "../lib/apiClient";
 import { clearDeletedAccountLocalState } from "../lib/accountLocalCleanup";
+import CocolonPressable from "../components/CocolonPressable";
+import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import {
-  AnalysisDescription,
-  AnalysisMediumCard,
   AnalysisMenuScroll,
   AnalysisSubHeader,
+  useAnalysisMenuStyles,
 } from "./AnalysisMenuCommon";
+
+function createLocalStyles(colors, ui) {
+  return StyleSheet.create(applyTypographyTokens({
+    group: { gap: 3 },
+    row: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 12,
+      minHeight: 56,
+      paddingHorizontal: 12,
+      paddingVertical: 12,
+      borderRadius: 10,
+      backgroundColor: colors.PANEL_BG,
+    },
+    firstRow: { borderTopLeftRadius: 24, borderTopRightRadius: 24 },
+    lastRow: { borderBottomLeftRadius: 24, borderBottomRightRadius: 24 },
+    icon: {
+      width: 32,
+      height: 32,
+      flexShrink: 0,
+      borderRadius: 11,
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: colors.SURFACE_TONAL,
+    },
+    content: { flex: 1, minWidth: 0, gap: 2 },
+    label: { color: colors.TEXT_ON_LIGHT, flexShrink: 1 },
+    description: { color: colors.TEXT_SUBTLE, flexShrink: 1 },
+    helperText: { color: colors.TEXT_SUBTLE, marginTop: 12 },
+    disabled: { opacity: 0.6 },
+  }, ui, { label: "button", description: "description", helperText: "description" }));
+}
+
+function SettingActionRow({ title, description, icon, onPress, disabled, destructive, position }) {
+  const { colors, ui } = useAnalysisMenuStyles();
+  const localStyles = useMemo(() => createLocalStyles(colors, ui), [colors, ui]);
+  const foreground = disabled ? colors.TEXT_SUBTLE : destructive ? colors.ERROR : colors.TEXT_ON_LIGHT;
+
+  return (
+    <CocolonPressable
+      style={[localStyles.row, position === "first" && localStyles.firstRow, position === "last" && localStyles.lastRow, disabled && localStyles.disabled]}
+      disabled={disabled}
+      onPress={onPress}
+      accessibilityLabel={title}
+    >
+      <View style={[localStyles.icon, destructive && { backgroundColor: colors.ERROR_BG }]} accessible={false} importantForAccessibility="no-hide-descendants">
+        <Ionicons name={icon} size={18} color={destructive ? colors.ERROR : colors.ON_SURFACE_TONAL} />
+      </View>
+      <View style={localStyles.content}>
+        <Text style={[localStyles.label, { color: foreground }]}>{title}</Text>
+        {description ? <Text style={localStyles.description}>{description}</Text> : null}
+      </View>
+      <Ionicons name="chevron-forward" size={16} color={colors.TEXT_SUBTLE} />
+    </CocolonPressable>
+  );
+}
 
 export default function SettingsOtherScreen({ navigation }) {
   const { signOut, authLoading, user } = useAuth();
@@ -22,6 +80,8 @@ export default function SettingsOtherScreen({ navigation }) {
   const [localProcessing, setLocalProcessing] = useState(false);
   const isBusy = authLoading || localProcessing;
   const accountDeleteEnabled = isFeatureEnabled("account_delete_enabled", true);
+  const { colors, ui } = useAnalysisMenuStyles();
+  const localStyles = useMemo(() => createLocalStyles(colors, ui), [colors, ui]);
 
   const openTutorialRestart = () => {
     if (isBusy) return;
@@ -179,31 +239,25 @@ export default function SettingsOtherScreen({ navigation }) {
   return (
     <AnalysisMenuScroll>
       <AnalysisSubHeader title="その他" onBack={() => navigation.goBack()} />
-      <AnalysisDescription>
-        実行したい内容を選んでください。
-      </AnalysisDescription>
 
-      <AnalysisMediumCard
-        title="チュートリアルを再体験する"
-        description="現在の入力や記録を変えずに最初から体験します"
-        disabled={isBusy}
-        onPress={openTutorialRestart}
-        accessibilityLabel="チュートリアルを再体験する"
-      />
-
-      <View style={{ marginTop: 24 }}>
-        <AnalysisMediumCard
+      <View style={localStyles.group}>
+        <SettingActionRow
+          title="チュートリアルを再体験する"
+          description="入力や記録はそのままです"
+          icon="book-outline"
+          disabled={isBusy}
+          onPress={openTutorialRestart}
+          position="first"
+        />
+        <SettingActionRow
           title="ログアウト"
-          description="現在のアカウントからログアウトします"
+          icon="log-out-outline"
           disabled={isBusy}
           onPress={handleLogout}
-          accessibilityLabel="ログアウト"
         />
-      </View>
-
-      <View style={{ marginTop: 32 }}>
-        <AnalysisMediumCard
+        <SettingActionRow
           title="アカウント削除"
+          icon="person-remove-outline"
           description={
             accountDeleteEnabled
               ? "アカウント情報と全入力を削除します"
@@ -212,9 +266,10 @@ export default function SettingsOtherScreen({ navigation }) {
           disabled={isBusy}
           destructive
           onPress={handleDeleteAccount}
-          accessibilityLabel="アカウント削除"
+          position="last"
         />
       </View>
+      {localProcessing ? <Text style={localStyles.helperText} accessibilityLiveRegion="polite">処理しています…</Text> : null}
     </AnalysisMenuScroll>
   );
 }

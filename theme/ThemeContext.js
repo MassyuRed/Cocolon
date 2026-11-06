@@ -5,7 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
  * Cocolon / Emlis 用テーマコンテキスト
  *
  * Theme variants:
- * - default       : Material方向のラベンダー／プラム（"Default"）
+ * - default       : Mash バーガンディ／アイボリー（"Default"）
  * - light  (白系) : White & Gold / ホワイト＆ゴールド
  * - dark   (黒系) : Black & Navy / ブラック＆ネイビー
  */
@@ -18,24 +18,25 @@ export const THEME_VARIANTS = {
 
 const PALETTES = {
   [THEME_VARIANTS.DEFAULT]: {
-    // 既存キーは画面互換のため維持し、操作用の色へ対応する。
-    BG_SILVER: "#F7F1F8",
-    PANEL_BG: "#FFFAFF",
-    FIELD_BG: "#FFFAFF",
-    BORDER_GOLD: "#694775",
-    GOLD_BUTTON: "#694775",
-    GOLD_BUTTON_BORDER: "#694775",
-    TITLE_GOLD: "#694775",
-    BRAND_GOLD: "#694775",
-    TEXT_ON_LIGHT: "#312436",
+    // Mashの既存ブランド色（バーガンディ／アイボリー）。面の役割だけを追加する。
+    BG_SILVER: "#F6F1E8",
+    PANEL_BG: "#F9F9F9",
+    FIELD_BG: "#FFFFFF",
+    BORDER_GOLD: "#800020",
+    GOLD_BUTTON: "#5A1020",
+    GOLD_BUTTON_BORDER: "#430814",
+    TITLE_GOLD: "#800020",
+    BRAND_GOLD: "#800020",
+    TEXT_ON_LIGHT: "#111827",
     TEXT_ON_DARK: "#F2F2F2",
-    TEXT_SUBTLE: "#6B5D6E",
-    CARD_BORDER: "#E5D7E7",
-    SURFACE_TONAL: "#EADDF0",
-    ON_SURFACE_TONAL: "#583864",
+    TEXT_SUBTLE: "#6B625C",
+    CARD_BORDER: "#D7D2C9",
+    SURFACE_TONAL: "#EFE1DD",
+    ON_SURFACE_TONAL: "#64172A",
+    SURFACE_HIGHLIGHT: "#F0E5CF",
+    ON_SURFACE_HIGHLIGHT: "#664A23",
     ERROR: "#B3261E",
     ERROR_BG: "#F9DEDC",
-    // アクセント（ボタン・チップ）上の文字色
     ACCENT_TEXT: "#FFFFFF",
   },
 
@@ -63,6 +64,8 @@ const PALETTES = {
     CARD_BORDER: "#E5E7EB",
     SURFACE_TONAL: "#F5EACD",
     ON_SURFACE_TONAL: "#76570B",
+    SURFACE_HIGHLIGHT: "#F5EACD",
+    ON_SURFACE_HIGHLIGHT: "#76570B",
     ERROR: "#B3261E",
     ERROR_BG: "#F9DEDC",
 
@@ -94,6 +97,8 @@ const PALETTES = {
     CARD_BORDER: "#1F2937",
     SURFACE_TONAL: "#15233F",
     ON_SURFACE_TONAL: "#B3C6F4",
+    SURFACE_HIGHLIGHT: "#263752",
+    ON_SURFACE_HIGHLIGHT: "#D8E2F8",
     ERROR: "#F2B8B5",
     ERROR_BG: "#601410",
 

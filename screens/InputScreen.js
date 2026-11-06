@@ -523,9 +523,6 @@ const safeInsets = useSafeAreaInsets();
   const shouldHideTodayQuestionForTutorial = isTutorialMode;
   const shouldHideInputHistoryForTutorial =
     isInputTutorialStep && tutorialStep === INPUT_TUTORIAL_STEP_START;
-  const shouldShowHomeQuickActionsRow =
-    (!shouldHideTodayQuestionForTutorial && hasTodayQuestionSlot) ||
-    !shouldHideInputHistoryForTutorial;
 
   const shouldApplyTutorialInputSample =
     isInputTutorialStep && tutorialStep >= 3;
@@ -1306,6 +1303,15 @@ ${String(error?.message || error)}`
                 </View>
 
                 <View style={styles.headerRight}>
+                  {!shouldHideInputHistoryForTutorial ? (
+                    <CocolonPressable
+                      style={styles.historyIconButton}
+                      onPress={handleOpenEmotionHistory}
+                      accessibilityLabel="入力履歴を開く"
+                    >
+                      <Ionicons name="time-outline" size={20} color={colors.TEXT_ON_LIGHT} />
+                    </CocolonPressable>
+                  ) : null}
                   <CocolonPressable
                     style={styles.accountIconButton}
                     onPress={handlePressAccount}
@@ -1344,72 +1350,32 @@ ${String(error?.message || error)}`
                     <CocolonPressable accessibilityRole="button" accessibilityLabel="ホームをもう一度読み込む" style={{ minHeight: 44, justifyContent: "center" }} onPress={() => loadHomeState({ force: true, includeStartupCandidate: false })} disabled={noticeLoading}><Text style={{ color: colors.TITLE_GOLD }}>もう一度読み込む</Text></CocolonPressable>
                   </View>
                 ) : null}
-                {shouldShowHomeQuickActionsRow ? (
-                  <View style={styles.homeQuickActionsRow}>
-                  {!shouldHideTodayQuestionForTutorial && hasTodayQuestionSlot ? (
-                    <Pressable
-                      style={styles.homeQuickActionButton}
-                      onPress={() => setIsTodayQuestionExpanded((prev) => !prev)}
-                      accessibilityRole="button"
-                      accessibilityLabel={`今日の問い ${todayQuestionStatusLabel}`}
-                      accessibilityState={{ expanded: isTodayQuestionExpanded }}
-                    >
-                      <View style={styles.homeQuickActionLeft}>
-                        <Ionicons
-                          name="help-circle-outline"
-                          size={17}
-                          color={colors.TEXT_SUBTLE}
-                          style={styles.homeQuickActionIcon}
-                        />
-                        <Text
-                          style={styles.homeQuickActionTitle}
-                        >
-                          今日の問い
-                        </Text>
-                      </View>
-                      {todayQuestionLoading ? (
-                        <ActivityIndicator
-                          size="small"
-                          color={colors.TEXT_SUBTLE}
-                          style={styles.homeQuickActionSpinner}
-                        />
-                      ) : null}
-                      <Ionicons
-                        name={isTodayQuestionExpanded ? "chevron-up" : "chevron-down"}
-                        size={17}
-                        color={colors.TEXT_SUBTLE}
-                      />
-                    </Pressable>
-                  ) : null}
-
-                  {!shouldHideInputHistoryForTutorial ? (
-                    <Pressable
-                      style={styles.homeQuickActionButton}
-                      onPress={handleOpenEmotionHistory}
-                      accessibilityRole="button"
-                      accessibilityLabel="入力履歴を開く"
-                    >
-                    <View style={styles.homeQuickActionLeft}>
-                      <Ionicons
-                        name="time-outline"
-                        size={17}
-                        color={colors.TEXT_SUBTLE}
-                        style={styles.homeQuickActionIcon}
-                      />
-                      <Text
-                        style={styles.homeQuickActionTitle}
-                      >
-                        入力履歴
+                {!shouldHideTodayQuestionForTutorial && hasTodayQuestionSlot ? (
+                  <Pressable
+                    style={styles.homeQuestionButton}
+                    onPress={() => setIsTodayQuestionExpanded((prev) => !prev)}
+                    accessibilityRole="button"
+                    accessibilityLabel={`今日の問い ${todayQuestionStatusLabel}`}
+                    accessibilityState={{ expanded: isTodayQuestionExpanded }}
+                  >
+                    <View style={styles.homeQuestionIcon}>
+                      <Ionicons name="sparkles-outline" size={20} color={colors.ON_SURFACE_HIGHLIGHT} />
+                    </View>
+                    <View style={styles.homeQuickActionTextWrap}>
+                      <Text style={styles.homeQuestionLabel}>今日の問い · {todayQuestionStatusLabel}</Text>
+                      <Text style={styles.homeQuestionText}>
+                        {todayQuestionBundle?.question?.text || todayQuestionBundle?.release_message || "今日の問いを開く"}
                       </Text>
                     </View>
+                    {todayQuestionLoading ? (
+                      <ActivityIndicator size="small" color={colors.ON_SURFACE_HIGHLIGHT} />
+                    ) : null}
                     <Ionicons
-                      name="chevron-forward"
-                      size={17}
-                      color={colors.TEXT_SUBTLE}
+                      name={isTodayQuestionExpanded ? "chevron-up" : "chevron-down"}
+                      size={18}
+                      color={colors.ON_SURFACE_HIGHLIGHT}
                     />
-                    </Pressable>
-                  ) : null}
-                </View>
+                  </Pressable>
                 ) : null}
 
                 {!shouldHideTodayQuestionForTutorial && hasTodayQuestionSlot && isTodayQuestionExpanded ? (
@@ -1436,11 +1402,8 @@ ${String(error?.message || error)}`
 
               <View style={styles.heroMemoCard}>
                 <View style={styles.heroCardHeader}>
-                  <Text style={styles.heroEyebrow}>感情入力</Text>
-                  <Text style={styles.heroTitle}>今の気持ちを残す</Text>
-                  <Text style={styles.heroLead}>
-                    思ったことや起きたことを入力して、今の感情を選んでください。
-                  </Text>
+                  <Text style={styles.heroFieldLabel}>言葉にしてみる</Text>
+                  <Ionicons name="create-outline" size={20} color={colors.TEXT_SUBTLE} />
                 </View>
 
                 <InputMemoSection
@@ -1466,44 +1429,44 @@ ${String(error?.message || error)}`
                   styles={styles}
                   colors={colors}
                 />
-
-                <InputEmotionSection
-                  sectionRef={emotionAreaRef}
-                  selectedEmotions={selectedEmotions}
-                  isSelfInsightSelected={isSelfInsightSelected}
-                  toggleEmotion={toggleEmotion}
-                  changeStrength={changeStrength}
-                  strengthRowRefs={strengthRowRefs}
-                  styles={styles}
-                  colors={colors}
-                />
-
-                <InputCategorySection
-                  sectionRef={categorySectionRef}
-                  hasMemoInput={hasMemoInput}
-                  hasSelectedCategories={hasSelectedCategories}
-                  selectedCategories={selectedCategories}
-                  toggleCategory={toggleCategory}
-                  styles={styles}
-                />
-
-                <InputActionArea
-                  notificationRef={notificationRef}
-                  pieceButtonRef={pieceButtonRef}
-                  okButtonRef={okButtonRef}
-                  doNotSendEmotionNotification={doNotSendEmotionNotification}
-                  isTutorialMode={isTutorialMode}
-                  registerInputInteraction={registerInputInteraction}
-                  setSendEmotionNotification={setSendEmotionNotification}
-                  handlePreviewPiece={handlePreviewPiece}
-                  canPreviewPiece={canPreviewPiece}
-                  handleOk={handleOk}
-                  canSubmit={canSubmit}
-                  submitting={submitting}
-                  styles={styles}
-                  colors={colors}
-                />
               </View>
+
+              <InputEmotionSection
+                sectionRef={emotionAreaRef}
+                selectedEmotions={selectedEmotions}
+                isSelfInsightSelected={isSelfInsightSelected}
+                toggleEmotion={toggleEmotion}
+                changeStrength={changeStrength}
+                strengthRowRefs={strengthRowRefs}
+                styles={styles}
+                colors={colors}
+              />
+
+              <InputCategorySection
+                sectionRef={categorySectionRef}
+                hasMemoInput={hasMemoInput}
+                hasSelectedCategories={hasSelectedCategories}
+                selectedCategories={selectedCategories}
+                toggleCategory={toggleCategory}
+                styles={styles}
+              />
+
+              <InputActionArea
+                notificationRef={notificationRef}
+                pieceButtonRef={pieceButtonRef}
+                okButtonRef={okButtonRef}
+                doNotSendEmotionNotification={doNotSendEmotionNotification}
+                isTutorialMode={isTutorialMode}
+                registerInputInteraction={registerInputInteraction}
+                setSendEmotionNotification={setSendEmotionNotification}
+                handlePreviewPiece={handlePreviewPiece}
+                canPreviewPiece={canPreviewPiece}
+                handleOk={handleOk}
+                canSubmit={canSubmit}
+                submitting={submitting}
+                styles={styles}
+                colors={colors}
+              />
 
               {mountSavedPieceInput ? (
                 <View testID="piece-saved-input-entry" style={showSavedPieceInput ? styles.section : undefined}>
@@ -1611,12 +1574,15 @@ function createStyles(COLORS, ui) {
       paddingTop: 16,
       paddingBottom: 32,
       paddingHorizontal: 20,
+      width: "100%",
+      maxWidth: 680,
+      alignSelf: "center",
       alignItems: "stretch",
     },
     homeOverviewBlock: {
       width: "100%",
       alignSelf: "stretch",
-      marginBottom: 8,
+      marginBottom: 17,
     },
 
     /** ブランドヘッダー */
@@ -1656,8 +1622,10 @@ function createStyles(COLORS, ui) {
     },
     panelHeader: {
       flexDirection: "row",
+      flexWrap: "wrap",
       justifyContent: "space-between",
       alignItems: "center",
+      gap: 8,
       marginBottom: 16,
     },
     panelTitle: {
@@ -1674,17 +1642,55 @@ function createStyles(COLORS, ui) {
     guideTitleButton: {
       width: 44,
       height: 44,
-      borderRadius: 12,
+      borderRadius: 22,
       alignItems: "center",
       justifyContent: "center",
-      backgroundColor: COLORS.FIELD_BG,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      marginLeft: 10,
+      backgroundColor: "transparent",
+      marginLeft: 4,
     },
     headerRight: {
       flexDirection: "row",
       alignItems: "center",
+      gap: 6,
+    },
+    historyIconButton: {
+      width: 44,
+      height: 44,
+      borderRadius: 22,
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: COLORS.FIELD_BG,
+    },
+    homeQuestionButton: {
+      width: "100%",
+      minHeight: 68,
+      paddingHorizontal: 14,
+      paddingVertical: 13,
+      borderRadius: 18,
+      backgroundColor: COLORS.SURFACE_HIGHLIGHT,
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 8,
+    },
+    homeQuestionIcon: {
+      width: 32,
+      height: 32,
+      borderRadius: 12,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    homeQuestionLabel: {
+      fontSize: 12,
+      lineHeight: 18,
+      fontWeight: "400",
+      color: COLORS.ON_SURFACE_HIGHLIGHT,
+      marginBottom: 2,
+    },
+    homeQuestionText: {
+      fontSize: 15,
+      lineHeight: 22,
+      fontWeight: "600",
+      color: COLORS.ON_SURFACE_HIGHLIGHT,
     },
     inputTrialPromoCard: {
       marginBottom: 14,
@@ -1733,23 +1739,18 @@ function createStyles(COLORS, ui) {
     accountIconButton: {
       width: 44,
       height: 44,
-      borderRadius: 12,
+      borderRadius: 22,
       alignItems: "center",
       justifyContent: "center",
       backgroundColor: COLORS.FIELD_BG,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      marginRight: 10,
     },
     noticePill: {
       width: 44,
       height: 44,
-      borderRadius: 12,
+      borderRadius: 22,
       alignItems: "center",
       justifyContent: "center",
       backgroundColor: COLORS.FIELD_BG,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
       position: "relative",
       overflow: "visible",
     },
@@ -1860,14 +1861,10 @@ function createStyles(COLORS, ui) {
     },
     todayQuestionInlineContent: {
       marginTop: 8,
-      borderRadius: 24,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
+      borderRadius: 18,
+      borderWidth: 0,
       backgroundColor: COLORS.FIELD_BG,
-      overflow: "hidden",
-      paddingHorizontal: 20,
-      paddingTop: 16,
-      paddingBottom: 16,
+      padding: 16,
     },
     todayQuestionAccordionCard: {
       marginBottom: 10,
@@ -1958,22 +1955,16 @@ function createStyles(COLORS, ui) {
     },
 
     heroMemoCard: {
-      marginBottom: 18,
+      marginBottom: 17,
       borderRadius: 24,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
-      paddingHorizontal: 20,
-      paddingTop: 20,
-      paddingBottom: 20,
-      shadowColor: "#000",
-      shadowOpacity: 0,
-      shadowRadius: 18,
-      shadowOffset: { width: 0, height: 10 },
-      elevation: 0,
+      backgroundColor: COLORS.FIELD_BG,
+      padding: 16,
     },
     heroCardHeader: {
-      marginBottom: 12,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      gap: 8,
     },
     heroEyebrow: {
       fontSize: 11,
@@ -1997,17 +1988,31 @@ function createStyles(COLORS, ui) {
       fontWeight: "400",
     },
     heroMemoInputGroup: {
-      marginTop: 2,
+      marginTop: 0,
     },
     heroFieldBlock: {
-      marginBottom: 14,
+      paddingVertical: 11,
+      borderBottomWidth: 1,
+      borderBottomColor: COLORS.CARD_BORDER,
+    },
+    heroFieldBlockLast: {
+      borderBottomWidth: 0,
+      paddingBottom: 0,
+    },
+    memoFieldLabel: {
+      fontSize: 14,
+      lineHeight: 22,
+      fontWeight: "400",
+      color: COLORS.TEXT_SUBTLE,
+      marginBottom: 6,
     },
     heroFieldLabel: {
-      fontSize: 16,
-      lineHeight: 24,
+      fontSize: 15,
+      lineHeight: 22,
       fontWeight: "600",
-      color: text.sectionLabel ?? text.primary ?? COLORS.TEXT_ON_LIGHT,
-      marginBottom: 8,
+      color: COLORS.TEXT_ON_LIGHT,
+      flexShrink: 1,
+      minWidth: 0,
     },
     heroFieldHint: {
       fontSize: 14,
@@ -2017,11 +2022,58 @@ function createStyles(COLORS, ui) {
       marginBottom: 8,
     },
     heroEmotionSection: {
-      marginTop: 2,
-      marginBottom: 4,
+      marginBottom: 17,
+      borderRadius: 24,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      paddingHorizontal: 13,
+      paddingTop: 15,
+      paddingBottom: 12,
+    },
+    emotionSectionHeader: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      alignItems: "center",
+      justifyContent: "space-between",
+      gap: 6,
+      marginBottom: 11,
+    },
+    emotionSectionMeta: {
+      fontSize: 12,
+      lineHeight: 18,
+      color: COLORS.ON_SURFACE_TONAL,
+    },
+    emotionIconSurface: {
+      width: 44,
+      height: 44,
+      borderRadius: 15,
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: COLORS.FIELD_BG,
+    },
+    emotionIconSurfaceOn: {
+      borderRadius: 24,
+      backgroundColor: COLORS.GOLD_BUTTON,
+    },
+    emotionFooter: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      alignItems: "center",
+      gap: 8,
+      marginTop: 12,
+    },
+    selfInsightContainer: {
+      maxWidth: "100%",
+    },
+    selfInsightHint: {
+      flex: 1,
+      minWidth: 96,
+      fontSize: 12,
+      lineHeight: 18,
+      color: COLORS.ON_SURFACE_TONAL,
     },
     heroActionArea: {
-      marginTop: 10,
+      marginTop: 0,
+      marginBottom: 17,
     },
     preferenceCardInActionArea: {
       marginTop: 0,
@@ -2041,30 +2093,26 @@ function createStyles(COLORS, ui) {
 
     /** 感情ボタン */
     buttons: {
-      marginTop: 2,
+      marginTop: 0,
     },
     selfInsightCard: {
       backgroundColor: COLORS.FIELD_BG,
-      borderRadius: 16,
+      borderRadius: 18,
       borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      paddingHorizontal: 14,
-      paddingVertical: 12,
-      shadowColor: "#000",
-      shadowOpacity: 0,
-      shadowRadius: 8,
-      shadowOffset: { width: 0, height: 4 },
-      elevation: 0,
-      minHeight: 48,
+      borderColor: "transparent",
+      paddingHorizontal: 12,
+      paddingVertical: 8,
+      minHeight: 44,
+      justifyContent: "center",
     },
     selfInsightCardOn: {
-      backgroundColor: COLORS.SURFACE_TONAL,
+      backgroundColor: COLORS.FIELD_BG,
       borderColor: COLORS.BORDER_GOLD,
     },
     selfInsightRow: {
       flexDirection: "row",
       alignItems: "center",
-      justifyContent: "space-between",
+      gap: 5,
     },
     selfInsightLeft: {
       flexDirection: "row",
@@ -2074,8 +2122,10 @@ function createStyles(COLORS, ui) {
     },
     selfInsightText: {
       fontSize: 14,
-      fontWeight: "700",
-      color: COLORS.TEXT_ON_LIGHT,
+      lineHeight: 20,
+      fontWeight: "600",
+      color: COLORS.TEXT_SUBTLE,
+      flexShrink: 1,
     },
     selfInsightTextOn: {
       color: COLORS.ON_SURFACE_TONAL,
@@ -2083,8 +2133,7 @@ function createStyles(COLORS, ui) {
     emotionRow: {
       flexDirection: "row",
       flexWrap: "wrap",
-      gap: 12,
-      marginBottom: 12,
+      gap: 4,
     },
     emotionBlock: {
       alignItems: "stretch",
@@ -2096,29 +2145,19 @@ function createStyles(COLORS, ui) {
     chip: {
       width: "100%",
       minWidth: 0,
-      flexDirection: "row",
+      minHeight: 70,
+      flexDirection: "column",
       alignItems: "center",
-      justifyContent: "center",
-      paddingVertical: 8,
-      paddingHorizontal: 14,
-      marginBottom: 4,
-      backgroundColor: COLORS.FIELD_BG,
-      borderRadius: 20,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      shadowColor: "#000",
-      shadowOpacity: 0,
-      shadowRadius: 8,
-      shadowOffset: { width: 0, height: 4 },
-      elevation: 0,
-      minHeight: 44,
+      justifyContent: "flex-start",
+      paddingHorizontal: 0,
+      gap: 6,
     },
     chipOn: {
       backgroundColor: COLORS.SURFACE_TONAL,
       borderColor: COLORS.BORDER_GOLD,
     },
     chipText: {
-      color: COLORS.TEXT_ON_LIGHT,
+      color: COLORS.ON_SURFACE_TONAL,
       flexShrink: 1,
       minWidth: 0,
       textAlign: "center",
@@ -2129,90 +2168,112 @@ function createStyles(COLORS, ui) {
       fontWeight: "600",
     },
 
-    /** 感情強度（高さ固定） */
+    /** 選択した感情だけ強度を表示。空のrefは高さを予約しない。 */
     strengthRow: {
       width: "100%",
+      minHeight: 0,
       flexDirection: "row",
-      justifyContent: "center",
-      alignItems: "center",
-      marginTop: 2,
-      minHeight: 44,
       flexWrap: "wrap",
+      alignItems: "center",
+      gap: 0,
+    },
+    strengthRowActive: {
+      marginTop: 10,
+      gap: 8,
+    },
+    strengthLabel: {
+      fontSize: 14,
+      lineHeight: 22,
+      fontWeight: "400",
+      color: COLORS.ON_SURFACE_TONAL,
+      flexShrink: 1,
+    },
+    strengthOptions: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      gap: 4,
     },
     strengthChip: {
-      paddingVertical: 4,
+      paddingVertical: 8,
       paddingHorizontal: 10,
-      marginHorizontal: 2,
-      borderRadius: 10,
-      backgroundColor: COLORS.FIELD_BG,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
+      minWidth: 44,
       minHeight: 44,
+      borderRadius: 20,
+      backgroundColor: COLORS.FIELD_BG,
       justifyContent: "center",
+      alignItems: "center",
     },
     strengthChipOn: {
-      backgroundColor: COLORS.SURFACE_TONAL,
-      borderColor: COLORS.BORDER_GOLD,
+      backgroundColor: COLORS.GOLD_BUTTON,
     },
     strengthText: {
-      fontSize: 12,
+      fontSize: 15,
+      lineHeight: 22,
+      fontWeight: "600",
       color: COLORS.TEXT_ON_LIGHT,
     },
     strengthTextOn: {
-      color: COLORS.ON_SURFACE_TONAL,
+      color: COLORS.ACCENT_TEXT,
       fontWeight: "600",
     },
 
     categorySection: {
-      marginTop: 12,
-      marginBottom: 10,
+      marginBottom: 17,
+    },
+    categoryHeader: {
+      flexDirection: "row",
+      flexWrap: "wrap",
+      alignItems: "center",
+      justifyContent: "space-between",
+      gap: 6,
+      marginBottom: 6,
+    },
+    categoryMetaText: {
+      fontSize: 12,
+      lineHeight: 18,
+      color: COLORS.TEXT_SUBTLE,
+    },
+    categoryChipContainer: {
+      maxWidth: "100%",
     },
     categoryHintText: {
-      marginBottom: 10,
-      fontSize: 11,
-      lineHeight: 16,
-      color: text.description ?? COLORS.TEXT_SUBTLE,
+      marginBottom: 9,
+      fontSize: 13,
+      lineHeight: 20,
+      fontWeight: "400",
+      color: COLORS.TEXT_SUBTLE,
     },
     categoryGrid: {
       flexDirection: "row",
       flexWrap: "wrap",
-      marginHorizontal: -4,
+      gap: 5,
     },
     categoryChip: {
-      minWidth: "28%",
-      marginHorizontal: 4,
-      marginBottom: 8,
       paddingVertical: 8,
-      paddingHorizontal: 12,
-      borderRadius: 999,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
+      paddingHorizontal: 13,
+      borderRadius: 9,
       backgroundColor: COLORS.FIELD_BG,
       alignItems: "center",
       justifyContent: "center",
-      shadowColor: "#000",
-      shadowOpacity: 0,
-      shadowRadius: 8,
-      shadowOffset: { width: 0, height: 4 },
-      elevation: 0,
       minHeight: 44,
     },
     categoryChipOn: {
-      backgroundColor: COLORS.SURFACE_TONAL,
-      borderColor: COLORS.BORDER_GOLD,
-      transform: [],
+      backgroundColor: COLORS.GOLD_BUTTON,
+      borderRadius: 20,
     },
     categoryChipDisabled: {
       backgroundColor: COLORS.FIELD_BG,
       borderColor: COLORS.CARD_BORDER,
     },
     categoryChipText: {
-      fontSize: 12,
+      fontSize: 14,
+      lineHeight: 20,
       fontWeight: "600",
       color: COLORS.TEXT_ON_LIGHT,
+      flexShrink: 1,
     },
     categoryChipTextOn: {
-      color: COLORS.ON_SURFACE_TONAL,
+      color: COLORS.ACCENT_TEXT,
     },
     categoryChipTextDisabled: {
       color: text.description ?? COLORS.TEXT_SUBTLE,
@@ -2226,24 +2287,16 @@ function createStyles(COLORS, ui) {
 
     /** メモ入力カード（展開式：タップで開く） */
     memoCard: {
-      backgroundColor: COLORS.FIELD_BG,
-      borderRadius: 16,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      paddingHorizontal: 16,
-      paddingVertical: 14,
-      shadowColor: "#000",
-      shadowOpacity: 0,
-      shadowRadius: 14,
-      shadowOffset: { width: 0, height: 6 },
-      elevation: 0,
+      backgroundColor: "transparent",
+      paddingHorizontal: 0,
+      paddingVertical: 0,
     },
     memoCardCollapsed: {
       minHeight: 54,
       justifyContent: "center",
     },
     memoCardExpanded: {
-      minHeight: 120,
+      minHeight: 44,
     },
     collapsedRow: {
       flexDirection: "row",
@@ -2265,12 +2318,13 @@ function createStyles(COLORS, ui) {
       color: text.description ?? COLORS.TEXT_SUBTLE,
     },
     memoInput: {
-      flex: 1,
-      minHeight: 90,
+      minHeight: 44,
       fontSize: 16,
       color: COLORS.TEXT_ON_LIGHT,
       lineHeight: 27,
       fontWeight: "400",
+      paddingHorizontal: 0,
+      paddingVertical: 0,
     },
     memoSection: {
       marginTop: 0,
@@ -2291,19 +2345,16 @@ function createStyles(COLORS, ui) {
      * - 感情通知（送信しない設定）
      */
     preferenceCard: {
-      marginTop: 18,
-      borderRadius: 24,
-      borderWidth: 1,
-      borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-      overflow: "hidden",
+      marginTop: 0,
+      borderRadius: 0,
+      backgroundColor: "transparent",
     },
     preferenceRow: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
-      paddingHorizontal: 16,
-      paddingVertical: 16,
+      paddingHorizontal: 0,
+      paddingVertical: 8,
     },
     preferenceLeft: {
       flexDirection: "row",
@@ -2636,8 +2687,16 @@ toastText: {
 },
   }, ui, {
   "panelTitle": "screenTitle",
-  "chipText": "button",
   "strengthText": "button",
+  "collapsedText": "body",
+  "homeQuestionLabel": "meta",
+  "homeQuestionText": "button",
+  "memoFieldLabel": "description",
+  "emotionSectionMeta": "meta",
+  "selfInsightHint": "meta",
+  "categoryMetaText": "meta",
+  "categoryHintText": "description",
+  "strengthLabel": "description",
   "inputTrialPromoHeadline": "description",
   "inputTrialPromoButtonText": "button",
   "homeQuickActionTitle": "description",

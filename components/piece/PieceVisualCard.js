@@ -661,7 +661,7 @@ export default class PieceVisualCard extends React.Component {
           this.setState({ width: Math.min(width, 1080) });
         }
       } },
-      element(Text, { style: { fontSize: 18, lineHeight: 26, fontWeight: '600', color: this.props.colors?.TEXT_ON_LIGHT, marginBottom: 12 } }, '画像レイアウト（確認用）'),
+      this.props.showInspectionLabels !== false ? element(Text, { style: { fontSize: 18, lineHeight: 26, fontWeight: '600', color: this.props.colors?.TEXT_ON_LIGHT, marginBottom: 12 } }, '画像レイアウト（確認用）') : null,
       element(View, { style: { width: this.state.width, height: measurement.phase === 'unavailable' ? 0 : input.height * scale },
         accessible: false, accessibilityElementsHidden: true, importantForAccessibility: 'no-hide-descendants' },
         measurement.phase !== 'unavailable' && this.state.width > 0 ? element(View, {
@@ -741,13 +741,13 @@ export default class PieceVisualCard extends React.Component {
           fontSize: 28, lineHeight: 40, includeFontPadding: false, textAlign: 'center',
           color: input.colors.branding, opacity: bitmap ? 0 : input.brandingMode === 'required_subtle' ? 0.8 : 1,
         } }, input.brandingText)) : null),
-      element(Text, { testID: 'piece-visual-status', accessibilityLiveRegion: 'polite',
+      this.props.showInspectionLabels !== false || !ready ? element(Text, { testID: 'piece-visual-status', accessibilityLiveRegion: 'polite',
         style: { fontSize: 14, lineHeight: 22, fontWeight: '400', color: this.props.colors?.TEXT_SUBTLE, marginTop: 8 } },
         measurement.phase === 'unavailable' ? '画像レイアウトを確認できませんでした。本文は下で確認できます。' :
           ready ? Object.prototype.hasOwnProperty.call(this.props, 'savedRecord')
             ? '保存済みPieceの画像レイアウトの確認用表示です。'
             : '画像レイアウトの確認用表示です。'
-          : '画像レイアウトを確認しています。'),
+          : '画像レイアウトを確認しています。') : null,
     );
   }
 }

@@ -176,7 +176,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 | 機能 | 目的・現在の接続 | 未確認・境界 |
 |---|---|---|
-| UI採用方針（11/6） | **全画面を例外なくMaterialへ統一するMashの確定方針。** 全6群と仕上げの`ae70f7c7`から、全画面統合iOS7301の一回ビルド・TestFlight送信が成功。[結果§26](designs/ui/material-ui-design.md#ui-integrated-ios-7301-20261106) | source11入口493 PASS・全29file再読込一致。run42169862420／#73 attempt1、05:55:22 UTC全体success、署名Archive／写真目的文／IPA／Uploadとjob全19step success。rerun0。Apple処理・内部配布・実機表示は未確認。同じ7301で全個別画面→3theme／文字拡大／短横・keyboard→全19stepを確認し、指摘をまとめて修正する。資料commitは[skip ci]、built sourceと区別 |
+| UI採用方針（11/6） | **全画面を例外なくMaterialへ統一。ただしdefaultは元のバーガンディ／アイボリー。** Mashの実機5枚で7301と採用プレビューの構成差を受領し修正中。[現在地§27](designs/ui/material-ui-design.md#ui-preview-fidelity-correction-20261106) | 当時の4画面HTML／元ソースはGitHubに保存済み・原本不変。元配色と起動色を復元し、入力／感情／カテゴリの面分離・未選択強度空白0、分析pill／期間、Piece台座と設定群、設定連結行・共通navを修正。12入口673 PASS、最終関連80 PASS。製品21file・未ビルド、機能／保存／本人／公開／AI不変。source修正をまとめた統合build後、全画面と状態を実機確認する。現段階受入れをデザイン一致・全UI合格へ読み替えない |
 | 起動・認証 | 登録／ログイン／メール確認再送／再設定／復旧。`App.js`→`RootNavigator`→`MainTabs`→Input／Analysis／Piece／Settingsの4 Stack（Ranking入口は撤去済み） | native認証リンク・cold／warm復帰の実成立は別確認。旧巨大App／MyModel画面名から現在を復元しない |
 | 今日の問い・回答履歴 | current／answers／history／PATCH／settingsを接続。日常メモと別に考えを記録し、修正・再読 | Emlis任意問いと別機能。旧自己構造素材との接続を、V2全source採用済みへ拡張しない |
 | 投稿・他者のPiece | 通常`PieceEntryScreen`→`NexusScreen`。本人／フォロー中／特定相手、並替・更新・本人投稿削除。linkPayload時のみ`PieceScreen` | 公開条件と新Piece保存成立は別。旧Q&A投稿と新canonical recordを混同しない |

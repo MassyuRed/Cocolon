@@ -14,11 +14,14 @@ export default function InputCategorySection({
 }) {
   return (
     <View ref={sectionRef} collapsable={false} style={styles.categorySection}>
-      <Text style={styles.heroFieldLabel}>このメモの内容カテゴリ</Text>
+      <View style={styles.categoryHeader}>
+        <Text style={styles.heroFieldLabel}>どんな場面？</Text>
+        <Text style={styles.categoryMetaText}>複数選択可</Text>
+      </View>
       <Text style={styles.categoryHintText}>
         {hasMemoInput
-          ? "この出来事や思考に近いカテゴリを、1つ以上選んでください。"
-          : "思考内容または行動内容を入力すると選択できます。"}
+          ? "近いカテゴリを1つ以上選んでください。"
+          : "文章を入力すると選べます。"}
       </Text>
       <View style={styles.categoryGrid}>
         {CATEGORY_OPTIONS.map((category) => {
@@ -29,6 +32,7 @@ export default function InputCategorySection({
               key={category}
               onPress={() => toggleCategory(category)}
               disabled={isDisabled}
+              containerStyle={styles.categoryChipContainer}
               style={[
                 styles.categoryChip,
                 isActive && styles.categoryChipOn,

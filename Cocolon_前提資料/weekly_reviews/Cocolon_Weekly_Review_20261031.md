@@ -5181,3 +5181,19 @@ iOS本体が許可するportrait／landscape-left／landscape-rightに対し、R
 [UI設計§26](../designs/ui/material-ui-design.md#ui-integrated-ios-7301-20261106)へ同じ7301での初回確認順を追記：標準条件で起動／入力→分析→Piece／social→設定／案内の全個別画面を一巡し、3theme・文字拡大・短横／keyboard・状態／回復、最後に全19tutorial stepを確認する。§14〜16の全範囲を維持し、未表示条件や休眠資産は未確認として残す。一巡分の指摘を再現してまとめて修正し、途中画面群別のbinaryを増やさない。実課金・削除・公開はUI確認のために行わない。
 
 今回は全群をまとめたapp build一回・rerun0。最終結果と初回確認順を同じ節へ置換記録した。Apple側processing・内部配布・本人端末導入／実表示は未確認で、Upload successを配布済み・実機合格へ換算しない。残るUI作業は同じ7301を用いた§14〜16の実表示と操作の仕上げ。この記録は資料のみ[skip ci]、追加build／Android／Render／Supabase／GPU操作0。
+
+
+<a id="ui-preview-fidelity-correction-20261106"></a>
+## 229. 11/6 — 実機指摘を受け、元配色と採用プレビューの構成へ修正
+
+Mashから実機5枚と「プレビューと全然違う」という指摘を受領。7301の色・文字等の統一を、採用した配置・面分け・密度へ十分つなげられていなかった。さらにdefaultを紫へ変えたことはMashの指示ではなかった。Mashは「バーガンディとアイボリーを維持。現段階は受け入れるが、プレビューへ寄せる修正を始める。ビルドせず可能な修正をまとめてからbuild」と明示した。現段階受入れはデザイン一致・UI完成の承認ではない。
+
+GitHub db7df2c7に当時の4画面比較HTML（blob7618f4d2）と元ソース（7e0e61f3）が残ることを確認し、ローカル原本の全bytes-SHAも一致。PNG/JPEG保存とは言わず、原本2fileを紫の比較資料のまま保持する。[UI設計§27](../designs/ui/material-ui-design.md#ui-preview-fidelity-correction-20261106)へ原本リンク・最新色・配置基準・保持条件を置いた。
+
+改装前4604310のdefault背景#F6F1E8、見出し／ロゴ#800020、主操作#5A1020等を復元し、iOS／Android起動も揃えた。旧補助灰色#BFC3C7は低contrastへ戻さず#6B625Cへ。Homeは2入力の白面／感情tonal面／外のカテゴリへ分離、通常5感情をicon上・名称下、自己理解を独立下段へ。未選択の強度refは残して高さ0とし、選択した感情だけ強度を表示。問いを全幅highlight面、履歴をheaderへ。guideも新入力ラベルに対応した。
+
+Analysisは主2pill44・日週月短表示と更新日を折返し行へ、現在天気／forecastの群と余白を整理。Pieceは初回固定の台座左右39/max350で作品を収め、設定・残枠・補助操作・全文を区切った。確認用の成功見出し／captionだけ抑止し、未準備・失敗・他callerを保持。論理canvas／recipe／export／保存guardは不変、resize後の自動再fitは追加しない。Settingsはicon付き連結行とし、既存3route／通知親子・rollback／削除確認を保持。共通navはtonal全体＋主色選択、通常予約高64（倍率1.3/1.6で75/86）＋insetへ。
+
+製品21＋既存test2＋資料3file。12入口673 PASS／FAIL0／SKIP0、最終のchip余白／guide対応後は関係2入口80 PASS。初回の旧source文字列期待1件だけを新表示propまで含む厳密な期待へ適応。Analysis前後612 mock render／21 AST、Piece資格12宣言／onPress11個、VisualCardのrender外34member／canvas ASTの保持を確認。JS20／XML3 parse・空白検査成功。machine検査やsource比較を、実機での原本一致へ換算しない。
+
+現時点はsource修正・未ビルドとして保存。途中群別のbuildを増やさず、次の統合native確認は候補固定の一回にまとめ、そのsource／run／結果を別記する。全登録／内部route／3theme／文字拡大／狭幅・短横／keyboard／長文・回復／全19stepの実機確認は残る。API／DB／AI／価格／本人・公開／保存guard変更0、Render／Supabase／GPU操作0、STRUCTURE_MAP_DELTA_NONE。実装分担は表示ownerのfileを分離してrootが統合、GitHub writerはroot一人。

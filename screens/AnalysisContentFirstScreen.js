@@ -48,23 +48,25 @@ function createLocalStyles(colors, ui) {
       flexDirection: "row",
       alignItems: "stretch",
       justifyContent: "space-between",
-      backgroundColor: colors.FIELD_BG,
-      borderRadius: 24,
-      padding: 4,
-      borderBottomWidth: 0,
-      borderBottomColor: colors.CARD_BORDER,
-      marginBottom: 14,
+      gap: 8,
+      marginBottom: 16,
+    },
+        periodRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      flexWrap: "wrap",
+      gap: 8,
+      marginBottom: 12,
     },
         secondaryTabBar: {
       flexDirection: "row",
       alignItems: "stretch",
-      justifyContent: "space-between",
-      borderBottomWidth: 0,
-      borderBottomColor: colors.CARD_BORDER,
-      marginBottom: 12,
       backgroundColor: colors.FIELD_BG,
-      borderRadius: 24,
-      padding: 4,
+      borderRadius: 22,
+      padding: 3,
+      maxWidth: "100%",
+      flexShrink: 1,
     },
         tabItemWrap: {
       flex: 1,
@@ -74,9 +76,7 @@ function createLocalStyles(colors, ui) {
         tabItem: {
       alignItems: "center",
       justifyContent: "center",
-      minHeight: 52,
-      paddingVertical: 4,
-      paddingHorizontal: 4,
+      minHeight: 44,
       width: "100%",
     },
         tabLabelWrap: {
@@ -84,18 +84,43 @@ function createLocalStyles(colors, ui) {
       justifyContent: "center",
       width: "100%",
       minHeight: 44,
-      paddingVertical: 8,
-      paddingHorizontal: 4,
-      borderRadius: 20,
-      borderBottomWidth: 0,
-      borderBottomColor: "transparent",
+      paddingVertical: 10,
+      paddingHorizontal: 10,
+      borderRadius: 24,
+      backgroundColor: colors.SURFACE_TONAL,
       minWidth: 0,
-      borderWidth: 1,
-      borderColor: "transparent",
     },
         tabLabelWrapActive: {
-      backgroundColor: colors.SURFACE_TONAL,
-      borderColor: colors.ON_SURFACE_TONAL,
+      backgroundColor: colors.GOLD_BUTTON,
+    },
+        periodTabItemWrap: {
+      minWidth: 44,
+      flexShrink: 0,
+    },
+        periodTabItem: {
+      alignItems: "center",
+      justifyContent: "center",
+      minHeight: 44,
+      minWidth: 44,
+      paddingHorizontal: 2,
+      paddingVertical: 2,
+    },
+        periodTabLabelWrap: {
+      alignItems: "center",
+      justifyContent: "center",
+      minHeight: 40,
+      minWidth: 40,
+      paddingVertical: 8,
+      paddingHorizontal: 10,
+      borderRadius: 20,
+      maxWidth: "100%",
+    },
+        periodTabLabelWrapActive: {
+      backgroundColor: colors.GOLD_BUTTON,
+    },
+        tabIcon: {
+      marginRight: 6,
+      flexShrink: 0,
     },
         tabLabelRow: {
       flexDirection: "row",
@@ -104,14 +129,20 @@ function createLocalStyles(colors, ui) {
       width: "100%",
       minWidth: 0,
     },
+        periodTabLabelRow: {
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+      minWidth: 0,
+    },
         tabLabelText: {
-      color: text.description ?? colors.TEXT_SUBTLE,
+      color: colors.ON_SURFACE_TONAL,
       flexShrink: 1,
       minWidth: 0,
       textAlign: "center",
     },
         tabLabelTextActive: {
-      color: colors.ON_SURFACE_TONAL,
+      color: colors.ACCENT_TEXT,
     },
         tabBadge: {
       marginLeft: 6,
@@ -120,15 +151,17 @@ function createLocalStyles(colors, ui) {
     },
         updateLabel: {
       color: text.description ?? colors.TEXT_SUBTLE,
+      flexShrink: 1,
+      minWidth: 0,
+    },
+        selfUpdateLabel: {
       marginBottom: 10,
     },
         emptyCard: {
-      borderWidth: 1,
-      borderColor: colors.CARD_BORDER,
       borderRadius: 24,
       backgroundColor: colors.FIELD_BG,
-      paddingHorizontal: 20,
-      paddingVertical: 20,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
       marginBottom: 10,
       width: "100%",
       maxWidth: 640,
@@ -146,8 +179,8 @@ function createLocalStyles(colors, ui) {
       borderColor: colors.CARD_BORDER,
       borderRadius: 24,
       backgroundColor: colors.FIELD_BG,
-      paddingHorizontal: 20,
-      paddingVertical: 20,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
       marginBottom: 14,
       width: "100%",
       maxWidth: 640,
@@ -184,7 +217,10 @@ function createLocalStyles(colors, ui) {
       flexDirection: "row",
       alignItems: "center",
       alignSelf: "stretch",
-      paddingVertical: 6,
+      paddingVertical: 10,
+      paddingHorizontal: 14,
+      borderRadius: 18,
+      backgroundColor: colors.FIELD_BG,
       marginTop: 4,
       minHeight: 44,
       maxWidth: "100%",
@@ -304,10 +340,10 @@ export default function AnalysisContentFirstScreen({
     onOpenDailyHistory?.();
   };
 
-  const renderTab = ({ tabKey, label, active, badgeVisible, onPress, targetRef = null }) => {
+  const renderTab = ({ tabKey, label, displayLabel = label, icon, active, badgeVisible, onPress, targetRef = null, period = false }) => {
     const content = (
       <CocolonPressable
-        style={localStyles.tabItem}
+        style={period ? localStyles.periodTabItem : localStyles.tabItem}
         onPress={isTutorialMode ? undefined : onPress}
         disabled={isTutorialMode}
         accessibilityLabel={label}
@@ -315,18 +351,21 @@ export default function AnalysisContentFirstScreen({
       >
         <View
           style={[
-            localStyles.tabLabelWrap,
-            active && localStyles.tabLabelWrapActive,
+            period ? localStyles.periodTabLabelWrap : localStyles.tabLabelWrap,
+            active && (period ? localStyles.periodTabLabelWrapActive : localStyles.tabLabelWrapActive),
           ]}
         >
-          <View style={localStyles.tabLabelRow}>
+          <View style={period ? localStyles.periodTabLabelRow : localStyles.tabLabelRow}>
+            {icon ? (
+              <Ionicons name={icon} size={17} color={active ? colors.ACCENT_TEXT : colors.ON_SURFACE_TONAL} style={localStyles.tabIcon} />
+            ) : null}
             <Text
               style={[
                 localStyles.tabLabelText,
                 active && localStyles.tabLabelTextActive,
               ]}
             >
-              {label}
+              {displayLabel}
             </Text>
             {badgeVisible ? (
               <ScreenUnreadBadge
@@ -347,7 +386,7 @@ export default function AnalysisContentFirstScreen({
       );
     }
 
-    return <View key={tabKey} style={localStyles.tabItemWrap}>{content}</View>;
+    return <View key={tabKey} style={period ? localStyles.periodTabItemWrap : localStyles.tabItemWrap}>{content}</View>;
   };
 
   return (
@@ -386,6 +425,7 @@ export default function AnalysisContentFirstScreen({
           renderTab({
             tabKey: tab.key,
             label: tab.label,
+            icon: tab.key === "emotion" ? "partly-sunny-outline" : "git-network-outline",
             active: activeAnalysisTab === tab.key,
             badgeVisible: tab.key === "emotion" ? unreadEmotion : unreadSelfStructure,
             onPress: () => setActiveAnalysisTab(tab.key),
@@ -396,22 +436,25 @@ export default function AnalysisContentFirstScreen({
 
       {activeAnalysisTab === "emotion" ? (
         <>
-          <View style={localStyles.secondaryTabBar}>
-            {EMOTION_REPORT_TABS.map((tab) =>
-              renderTab({
-                tabKey: tab.key,
-                label: tab.label,
-                active: activeEmotionReportType === tab.key,
-                badgeVisible:
-                  (tab.key === "daily" && unreadDaily) ||
-                  (tab.key === "weekly" && unreadWeekly) ||
-                  (tab.key === "monthly" && unreadMonthly),
-                onPress: () => setActiveEmotionReportType(tab.key),
-              })
-            )}
+          <View style={localStyles.periodRow}>
+            <View style={localStyles.secondaryTabBar}>
+              {EMOTION_REPORT_TABS.map((tab) =>
+                renderTab({
+                  tabKey: tab.key,
+                  label: tab.label,
+                  displayLabel: { daily: "日", weekly: "週", monthly: "月" }[tab.key],
+                  period: true,
+                  active: activeEmotionReportType === tab.key,
+                  badgeVisible:
+                    (tab.key === "daily" && unreadDaily) ||
+                    (tab.key === "weekly" && unreadWeekly) ||
+                    (tab.key === "monthly" && unreadMonthly),
+                  onPress: () => setActiveEmotionReportType(tab.key),
+                })
+              )}
+            </View>
+            <Text style={localStyles.updateLabel}>{emotionUpdateLabel}</Text>
           </View>
-
-          <Text style={localStyles.updateLabel}>{emotionUpdateLabel}</Text>
 
           <View ref={tutorialRefs?.reportRef} collapsable={false}>
             {effectiveHomeSummariesLoading && !currentEmotionReport ? (
@@ -460,7 +503,7 @@ export default function AnalysisContentFirstScreen({
         </>
       ) : (
         <>
-          <Text style={localStyles.updateLabel}>{selfStructureUpdateLabel}</Text>
+          <Text style={[localStyles.updateLabel, localStyles.selfUpdateLabel]}>{selfStructureUpdateLabel}</Text>
 
           <View ref={tutorialRefs?.selfReportRef} collapsable={false}>
             {isTutorialMode ? (
