@@ -182,7 +182,13 @@ def prepare(args):
     evaluation=[_new_row(s,by_id['T01'],50+i) for i,s in enumerate(eval_specs,1)]
     # Independent gold remains evaluation-only. Its CPU validation is not a model result.
     for row,spec in zip(evaluation,eval_specs):
-        prepared,_=prepare_row(row);target=_new_target(spec,prepared);_candidate(prepared,target)
+        prepared,_=prepare_row(row);target=_new_target(spec,prepared);_,bound=_candidate(prepared,target)
+        artifact,coverage=service.build_cumulative_map(row['owner'],row['snapshot'],model_input=bound)
+        assert (artifact is not None)==row['typed_map_expected'], 'new_evaluation_map_scope_'+row['id']
+        if artifact:
+            normal,normal_counts=service.build_cumulative_map(row['owner'],row['snapshot'])
+            assert normal is not None and artifact.graph==normal.graph and coverage==normal_counts
+        row['gold_typed_map_verified']=True
         row['review_gold']=target
     cached=[]
     for wrapper in read(WIRE_ROOT/'reused_before.json'):
