@@ -5008,3 +5008,13 @@ Mashがホーム／Piece／分析／設定の3案を比較し、Material寄り�
 製品sourceはPR30 5284ebfを照合し、同環境のread-only補助reviewで共通UIと画面ごとの既存操作を確認した。華恋が単一writer。実環境はCodex Work／GPT-6。保存を区切りに同タスクの製品反映へ進む。実装状況はUI設計の§12で更新する。UI方針採用を、全画面の製品反映・ビルド・本人端末表示・三中核の商品受入れへ換算しない。
 
 STRUCTURE_MAP_DELTA_NONE：この保存単位は操作UIの設計資料とプレビューだけで、三中核のowner・API・DB・意味／保存契約を変更しない。Render／Supabase／GPU／merge／build／配布の操作0。教材・構造知識の話し合いはMashの指示どおり保留し、UIを進める。
+
+### §217の実装追記
+
+設計保存4604310の読戻し確認後、採用したUIを既存製品17fileへ初回反映した。defaultの淡いラベンダー／プラム、共通の面・文字・余白、丸いボタンと控えめな影、外周枠と常時taglineの整理、4tabの選択面とsafe area／文字拡大時の高さを実装。Homeの入力と感情／強さ／カテゴリ、Emlis本文、分析のタブ・天気・マップ、Piece画像／全文優先のpreview、設定入口／テーマ選択、Nexusと契約カードを調整した。
+
+ロゴは既存ブランド書体、Piece作品は保存recipe／rendererのまま。操作の通信／資格／identity・token／回復／通知／購入／削除／未読／tutorialの処理は維持。補助色のtonal面での不足を検出し、default#6B5D6E／light#606774へ補正した。比較プレビュー原本は変更せず、採用後の調整を設計へ明記した。
+
+既存5test入口の最終実行は400 PASS／FAIL0／SKIP0、4.20秒。画面contract・IAP復元・テーマ可読性・Piece初回保存／回復・preview表示を対象とし、React/native・Auth/HTTPは各testの代替を含む。旧配色・太枠・taglineの固定期待と、新hook／Button importのtest配線を4既存testfileで更新。最初の取得不足によるENOENTと旧表示期待の失敗を隠さず、必要原本の取得・期待補正後に最終成功。製品の資格guardは緩めていない。JS/JSXを既存ローカルBabel parserで確認、diff空白エラー0。同環境の独立read-only reviewが見つけた色とナビ高さは修正済み。
+
+これは初回のsource反映。自分のPiece履歴／詳細の専用UI、アカウント・各履歴・ガイド等の個別仕上げと、複数回復ボタン／長文／3theme／OS文字拡大での実端末表示確認は残る。UI設計§12が実装済み／未確認のowner。native build／配布／本番API・DB・GPU変更0、三中核の内容品質や正式受入れへ換算しない。STRUCTURE_MAP_DELTA_NONE：既存の画面・component・routeの表示のみで、新owner・意味型・API／DB／保存契約は追加していない。

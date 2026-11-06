@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { AppState, Text, TouchableOpacity, View } from "react-native";
+import { AppState, Text, TouchableOpacity, useWindowDimensions, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { StackActions } from "@react-navigation/native";
 import { createBottomTabNavigator, BottomTabBar } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -83,9 +84,9 @@ function CocolonTabBar(props) {
   return (
     <View
       style={{
-        backgroundColor: colors.BG_SILVER,
-        borderTopColor: colors.BORDER_GOLD,
-        borderTopWidth: FRAME_BORDER_WIDTH,
+        backgroundColor: colors.FIELD_BG,
+        borderTopColor: colors.CARD_BORDER,
+        borderTopWidth: 1,
       }}
     >
       <BottomTabBar {...props} state={filteredState} />
@@ -142,6 +143,8 @@ export function createPieceSaveRecovery(owner) {
 
 export default function MainTabs() {
   const { colors } = useTheme();
+  const insets = useSafeAreaInsets();
+  const { fontScale } = useWindowDimensions();
   const {
     getScopeUnread,
     getFeatureUnread,
@@ -1135,7 +1138,7 @@ export default function MainTabs() {
             borderLeftWidth: HIDDEN_SCREENS.has(route.name) ? 0 : FRAME_BORDER_WIDTH,
             borderRightWidth: HIDDEN_SCREENS.has(route.name) ? 0 : FRAME_BORDER_WIDTH,
           },
-          tabBarIcon: ({ color, size }) => {
+          tabBarIcon: ({ color, size, focused }) => {
             let iconName;
             switch (route.name) {
               case "Input": iconName = "create-outline"; break;
@@ -1144,17 +1147,17 @@ export default function MainTabs() {
               case "Settings": iconName = "settings-outline"; break;
               default: iconName = "ellipse-outline";
             }
-            const icon = <Ionicons name={iconName} size={size} color={color} />;
+            const icon = <Ionicons name={iconName} size={size} color={focused ? colors.ON_SURFACE_TONAL : color} />;
             const showUnreadBadge = showTabUnreadBadge(route.name);
-            const shouldWrap = showUnreadBadge || route.name === "Analysis";
-            if (!shouldWrap) return icon;
             return (
-              <View style={{ width: size + (showUnreadBadge ? 22 : 10), height: size + (showUnreadBadge ? 12 : 10), alignItems: "center", justifyContent: "center", overflow: "visible" }}>
+              <View style={{ width: 64, minHeight: 32, borderRadius: 18,
+                backgroundColor: focused ? colors.SURFACE_TONAL : "transparent",
+                alignItems: "center", justifyContent: "center", overflow: "visible" }}>
                 {icon}
                 {showUnreadBadge ? (
                   <BottomTabUnreadBadge
                     visible={showUnreadBadge}
-                    style={{ position: "absolute", top: 0, right: -8, minHeight: 12, paddingHorizontal: 4, paddingVertical: 1 }}
+                    style={{ position: "absolute", top: 0, right: -4, minHeight: 12, paddingHorizontal: 4, paddingVertical: 1 }}
                     textStyle={{ fontSize: 7.5, lineHeight: 8.5, fontWeight: "800" }}
                   />
                 ) : null}
@@ -1164,9 +1167,12 @@ export default function MainTabs() {
           tabBarActiveTintColor: colors.TITLE_GOLD,
           tabBarInactiveTintColor: colors.TEXT_SUBTLE,
           tabBarStyle: {
-            backgroundColor: colors.BG_SILVER,
-            borderTopColor: colors.BORDER_GOLD,
+            backgroundColor: colors.FIELD_BG,
+            borderTopColor: colors.CARD_BORDER,
             borderTopWidth: 0,
+            paddingTop: 8,
+            height: 72 + insets.bottom + Math.max(0, fontScale - 1) * 16,
+            paddingBottom: insets.bottom,
           },
           tabBarLabel: ({ focused, color }) => {
             let label;
@@ -1179,7 +1185,7 @@ export default function MainTabs() {
             }
             const showUnreadBadge = showTabUnreadBadge(route.name);
             const labelColor = focused || !showUnreadBadge ? color : colors.TEXT_ON_LIGHT;
-            return <Text style={{ color: labelColor, fontSize: 12, fontWeight: focused || showUnreadBadge ? "700" : "400" }}>{label}</Text>;
+            return <Text style={{ color: labelColor, fontSize: 12, fontWeight: focused || showUnreadBadge ? "600" : "400" }}>{label}</Text>;
           },
         })}
       >
@@ -1231,4 +1237,5 @@ export default function MainTabs() {
     </View>
   );
 }
+
 

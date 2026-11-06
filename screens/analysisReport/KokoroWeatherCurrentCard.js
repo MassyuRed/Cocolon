@@ -77,10 +77,10 @@ function createStyles(colors, ui) {
         card: {
           borderWidth: 1,
           borderColor: colors.CARD_BORDER,
-          borderRadius: 18,
+          borderRadius: 24,
           backgroundColor: colors.PANEL_BG || colors.FIELD_BG,
-          paddingHorizontal: 16,
-          paddingVertical: 14,
+          paddingHorizontal: 20,
+          paddingVertical: 20,
           marginBottom: 14,
           ...ui?.shadow?.float,
         },
@@ -96,7 +96,7 @@ function createStyles(colors, ui) {
         },
         title: {
           fontSize: 14,
-          fontWeight: "900",
+          fontWeight: "600",
           color: colors.TITLE_GOLD || text.primary || colors.TEXT_ON_LIGHT,
           marginLeft: 6,
         },
@@ -318,3 +318,4 @@ export default function KokoroWeatherCurrentCard({ currentWeather, onOpenPreviou
     </View>
   );
 }
+

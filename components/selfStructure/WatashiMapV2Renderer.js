@@ -23,8 +23,8 @@ export default function WatashiMapV2Renderer({ contentJson, colors, isDark = fal
             <Text style={styles.kind}>{NODE_LABELS[node.node_kind]}</Text>
             <Text style={styles.body}>{node.visible_label}</Text>
             <Text style={styles.subtle}>{node.evidence_badge_count}件の記録</Text>
-            {onOpenEvidence ? <TouchableOpacity accessibilityRole="button" onPress={() => onOpenEvidence(node.node_ref)}>
-              <Text style={styles.body}>根拠の記録を見る</Text>
+            {onOpenEvidence ? <TouchableOpacity accessibilityRole="button" style={styles.evidenceAction} onPress={() => onOpenEvidence(node.node_ref)}>
+              <Text style={styles.evidenceLabel}>根拠の記録を見る</Text>
             </TouchableOpacity> : null}
           </View>
         ))}
@@ -84,15 +84,17 @@ function makeStyles(colors, dark) {
   const border = colors?.CARD_BORDER || (dark ? '#64748b' : '#c4ced8');
   const paper = colors?.PANEL_BG || (dark ? '#17212b' : '#ffffff');
   return StyleSheet.create({
-    root: { padding: 12, gap: 12 },
-    title: { color: ink, fontSize: 21, fontWeight: '700' },
-    section: { color: ink, fontSize: 16, fontWeight: '700', marginBottom: 8 },
-    body: { color: ink, fontSize: 16, lineHeight: 25 },
-    subtle: { color: muted, fontSize: 13, lineHeight: 20 },
-    kind: { color: muted, fontSize: 13, fontWeight: '700', marginBottom: 5 },
-    lane: { borderLeftWidth: 3, borderColor: border, paddingLeft: 12, gap: 8 },
-    card: { backgroundColor: paper, borderColor: border, borderWidth: 1, borderRadius: 12, padding: 14, gap: 5 },
-    unknown: { borderStyle: 'dashed' },
+    root: { padding: 0, gap: 16 },
+    title: { color: ink, fontSize: 22, lineHeight: 30, fontWeight: '600' },
+    section: { color: ink, fontSize: 18, lineHeight: 26, fontWeight: '600', marginBottom: 8 },
+    body: { color: ink, fontSize: 16, lineHeight: 27, fontWeight: '400' },
+    subtle: { color: muted, fontSize: 14, lineHeight: 22, fontWeight: '400' },
+    kind: { color: muted, fontSize: 14, lineHeight: 22, fontWeight: '600', marginBottom: 5 },
+    lane: { gap: 12 },
+    card: { backgroundColor: paper, borderColor: border, borderWidth: 1, borderRadius: 24, padding: 20, gap: 8 },
+    unknown: { backgroundColor: colors?.SURFACE_TONAL || paper },
+    evidenceAction: { minHeight: 44, justifyContent: 'center', alignSelf: 'flex-start' },
+    evidenceLabel: { color: colors?.TITLE_GOLD || ink, fontSize: 15, lineHeight: 24, fontWeight: '600' },
     gap: { borderTopWidth: 1, borderColor: border, borderStyle: 'dashed', paddingTop: 8, marginTop: 8 },
     connection: { alignItems: 'stretch', paddingVertical: 6 },
     endpoint: { borderWidth: 1, borderColor: border, borderRadius: 8, padding: 10 },
@@ -102,3 +104,4 @@ function makeStyles(colors, dark) {
       borderBottomWidth: 2, borderRightWidth: 2, borderColor: border, transform: [{ rotate: '45deg' }] },
   });
 }
+

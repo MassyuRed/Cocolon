@@ -84,6 +84,7 @@ function previewUiHarness({ send, currentState = 'active', admitSave = false } =
     return { remove: () => appListeners.delete(listener) };
   } };
   const context = vm.createContext({ React, AppState, AbortController, AppRuntimeContext: {},
+    useTheme: () => ({ colors: { BG_SILVER: '#F7F1F8', TEXT_ON_LIGHT: '#312436', TEXT_SUBTLE: '#6B5D6E' } }),
     Date: class extends Date { static now() { return now; } },
     Modal: 'Modal', View: 'View', Text: 'Text', ScrollView: 'ScrollView', Button: 'Button', Pressable: 'Pressable',
     ActivityIndicator: 'ActivityIndicator', SafeAreaProvider: 'SafeAreaProvider', SafeAreaView: 'SafeAreaView',
@@ -2417,3 +2418,4 @@ test('quota state is bound to the exact stored entry and is removed on owner rev
   assert.equal(u.store.find(OWNER, request().source_ref.source_input_id), undefined);
   u.host.componentWillUnmount();
 });
+

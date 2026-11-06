@@ -1733,8 +1733,8 @@ function createStyles(COLORS, ui) {
     },
 
     accountIconButton: {
-      width: 42,
-      height: 38,
+      width: 44,
+      height: 44,
       borderRadius: 12,
       alignItems: "center",
       justifyContent: "center",
@@ -1744,8 +1744,8 @@ function createStyles(COLORS, ui) {
       marginRight: 10,
     },
     noticePill: {
-      width: 42,
-      height: 38,
+      width: 44,
+      height: 44,
       borderRadius: 12,
       alignItems: "center",
       justifyContent: "center",
@@ -1961,18 +1961,18 @@ function createStyles(COLORS, ui) {
 
     heroMemoCard: {
       marginBottom: 18,
-      borderRadius: 26,
+      borderRadius: 24,
       borderWidth: 1,
-      borderColor: COLORS.BORDER_GOLD,
+      borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.PANEL_BG,
-      paddingHorizontal: 16,
-      paddingTop: 16,
-      paddingBottom: 16,
+      paddingHorizontal: 20,
+      paddingTop: 20,
+      paddingBottom: 20,
       shadowColor: "#000",
-      shadowOpacity: 0.14,
+      shadowOpacity: 0,
       shadowRadius: 18,
       shadowOffset: { width: 0, height: 10 },
-      elevation: 10,
+      elevation: 0,
     },
     heroCardHeader: {
       marginBottom: 12,
@@ -1988,15 +1988,15 @@ function createStyles(COLORS, ui) {
       marginTop: 3,
       fontSize: 20,
       lineHeight: 28,
-      fontWeight: "800",
+      fontWeight: "600",
       color: COLORS.TEXT_ON_LIGHT,
     },
     heroLead: {
       marginTop: 6,
-      fontSize: font.description ?? 12,
-      lineHeight: 19,
+      fontSize: 14,
+      lineHeight: 22,
       color: text.description ?? COLORS.TEXT_SUBTLE,
-      fontWeight: "600",
+      fontWeight: "400",
     },
     heroMemoInputGroup: {
       marginTop: 2,
@@ -2005,17 +2005,17 @@ function createStyles(COLORS, ui) {
       marginBottom: 14,
     },
     heroFieldLabel: {
-      fontSize: font.sectionLabel ?? 12,
-      lineHeight: 18,
-      fontWeight: "800",
+      fontSize: 16,
+      lineHeight: 24,
+      fontWeight: "600",
       color: text.sectionLabel ?? text.primary ?? COLORS.TEXT_ON_LIGHT,
-      marginBottom: 4,
+      marginBottom: 8,
     },
     heroFieldHint: {
-      fontSize: font.description ?? 11,
-      lineHeight: 17,
+      fontSize: 14,
+      lineHeight: 22,
       color: text.description ?? COLORS.TEXT_SUBTLE,
-      fontWeight: "600",
+      fontWeight: "400",
       marginBottom: 8,
     },
     heroEmotionSection: {
@@ -2038,6 +2038,7 @@ function createStyles(COLORS, ui) {
       fontSize: font.sectionLabel ?? 12,
       color: text.sectionLabel ?? text.primary ?? COLORS.TEXT_ON_LIGHT,
       marginBottom: 8,
+      fontWeight: "600",
     },
 
     /** 感情ボタン */
@@ -2052,14 +2053,15 @@ function createStyles(COLORS, ui) {
       paddingHorizontal: 14,
       paddingVertical: 12,
       shadowColor: "#000",
-      shadowOpacity: 0.08,
+      shadowOpacity: 0,
       shadowRadius: 8,
       shadowOffset: { width: 0, height: 4 },
-      elevation: 3,
+      elevation: 0,
+      minHeight: 48,
     },
     selfInsightCardOn: {
-      backgroundColor: COLORS.GOLD_BUTTON,
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      borderColor: COLORS.BORDER_GOLD,
     },
     selfInsightRow: {
       flexDirection: "row",
@@ -2078,7 +2080,7 @@ function createStyles(COLORS, ui) {
       color: COLORS.TEXT_ON_LIGHT,
     },
     selfInsightTextOn: {
-      color: COLORS.ACCENT_TEXT,
+      color: COLORS.ON_SURFACE_TONAL,
     },
     emotionRow: {
       flexDirection: "row",
@@ -2100,14 +2102,15 @@ function createStyles(COLORS, ui) {
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       shadowColor: "#000",
-      shadowOpacity: 0.08,
+      shadowOpacity: 0,
       shadowRadius: 8,
       shadowOffset: { width: 0, height: 4 },
-      elevation: 3,
+      elevation: 0,
+      minHeight: 44,
     },
     chipOn: {
-      backgroundColor: COLORS.GOLD_BUTTON,
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      borderColor: COLORS.BORDER_GOLD,
     },
     chipText: {
       fontSize: 14,
@@ -2115,7 +2118,7 @@ function createStyles(COLORS, ui) {
     },
     // アクティブ時は ACCENT_TEXT（＝白）で塗る
     chipTextOn: {
-      color: COLORS.ACCENT_TEXT,
+      color: COLORS.ON_SURFACE_TONAL,
       fontWeight: "600",
     },
 
@@ -2125,27 +2128,30 @@ function createStyles(COLORS, ui) {
       justifyContent: "center",
       alignItems: "center",
       marginTop: 2,
-      height: 28,
+      minHeight: 44,
+      flexWrap: "wrap",
     },
     strengthChip: {
       paddingVertical: 4,
-      paddingHorizontal: 8,
+      paddingHorizontal: 10,
       marginHorizontal: 2,
       borderRadius: 10,
       backgroundColor: COLORS.FIELD_BG,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
+      minHeight: 44,
+      justifyContent: "center",
     },
     strengthChipOn: {
-      backgroundColor: COLORS.GOLD_BUTTON,
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      borderColor: COLORS.BORDER_GOLD,
     },
     strengthText: {
       fontSize: 12,
       color: COLORS.TEXT_ON_LIGHT,
     },
     strengthTextOn: {
-      color: COLORS.ACCENT_TEXT,
+      color: COLORS.ON_SURFACE_TONAL,
       fontWeight: "600",
     },
 
@@ -2177,26 +2183,27 @@ function createStyles(COLORS, ui) {
       alignItems: "center",
       justifyContent: "center",
       shadowColor: "#000",
-      shadowOpacity: 0.08,
+      shadowOpacity: 0,
       shadowRadius: 8,
       shadowOffset: { width: 0, height: 4 },
-      elevation: 3,
+      elevation: 0,
+      minHeight: 44,
     },
     categoryChipOn: {
-      backgroundColor: COLORS.GOLD_BUTTON,
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
-      transform: [{ scale: 1.04 }],
+      backgroundColor: COLORS.SURFACE_TONAL,
+      borderColor: COLORS.BORDER_GOLD,
+      transform: [],
     },
     categoryChipDisabled: {
       opacity: 0.45,
     },
     categoryChipText: {
       fontSize: 12,
-      fontWeight: "700",
+      fontWeight: "600",
       color: COLORS.TEXT_ON_LIGHT,
     },
     categoryChipTextOn: {
-      color: COLORS.ACCENT_TEXT,
+      color: COLORS.ON_SURFACE_TONAL,
     },
     categoryChipTextDisabled: {
       color: text.description ?? COLORS.TEXT_SUBTLE,
@@ -2211,16 +2218,16 @@ function createStyles(COLORS, ui) {
     /** メモ入力カード（展開式：タップで開く） */
     memoCard: {
       backgroundColor: COLORS.FIELD_BG,
-      borderRadius: 20,
+      borderRadius: 16,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      paddingHorizontal: 12,
-      paddingVertical: 10,
+      paddingHorizontal: 16,
+      paddingVertical: 14,
       shadowColor: "#000",
-      shadowOpacity: 0.1,
+      shadowOpacity: 0,
       shadowRadius: 14,
       shadowOffset: { width: 0, height: 6 },
-      elevation: 6,
+      elevation: 0,
     },
     memoCardCollapsed: {
       minHeight: 54,
@@ -2251,8 +2258,10 @@ function createStyles(COLORS, ui) {
     memoInput: {
       flex: 1,
       minHeight: 90,
-      fontSize: 14,
+      fontSize: 16,
       color: COLORS.TEXT_ON_LIGHT,
+      lineHeight: 27,
+      fontWeight: "400",
     },
     memoSection: {
       marginTop: 0,
@@ -2609,3 +2618,4 @@ toastText: {
 },
   }, ui));
 }
+

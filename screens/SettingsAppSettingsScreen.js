@@ -66,9 +66,9 @@ function createLocalStyles(colors, ui) {
       marginTop: 8,
     },
     optionRow: {
-      marginLeft: 12,
+      marginLeft: 0,
       minHeight: 58,
-      borderRadius: 16,
+      borderRadius: 20,
       borderWidth: 1,
       borderColor: colors.CARD_BORDER,
       backgroundColor: colors.FIELD_BG,
@@ -77,7 +77,7 @@ function createLocalStyles(colors, ui) {
     },
     optionRowSelected: {
       borderColor: colors.TITLE_GOLD,
-      backgroundColor: colors.FIELD_BG,
+      backgroundColor: colors.SURFACE_TONAL,
     },
     optionRowDisabled: {
       opacity: 0.58,
@@ -90,9 +90,10 @@ function createLocalStyles(colors, ui) {
     optionLabel: {
       flex: 1,
       paddingRight: 12,
-      fontSize: 18,
-      fontWeight: "700",
+      fontSize: 16,
+      fontWeight: "600",
       color: text.primary ?? colors.TEXT_ON_LIGHT,
+      lineHeight: 24,
     },
     optionMetaWrap: {
       flexDirection: "row",
@@ -613,3 +614,4 @@ export default function SettingsAppSettingsScreen({ navigation }) {
     </AnalysisMenuScroll>
   );
 }
+

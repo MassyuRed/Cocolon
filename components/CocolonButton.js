@@ -14,12 +14,14 @@ import { makeUiTokens } from "../ui/uiTokens";
 export default function CocolonButton({
   variant = "primary",
   children,
+  title,
   onPress,
   disabled = false,
   loading = false,
   style,
   textStyle,
   accessibilityLabel,
+  accessibilityState,
   testID,
 }) {
   const { colors, themeName } = useTheme();
@@ -57,6 +59,7 @@ export default function CocolonButton({
     };
 
   const isDisabled = !!disabled || !!loading;
+  const label = children ?? title;
   const [pressed, setPressed] = useState(false);
 
   const scale = useRef(new Animated.Value(1)).current;
@@ -98,7 +101,7 @@ export default function CocolonButton({
     styles.base,
     {
       maxWidth: ui.layout.maxButtonWidth,
-      borderRadius: ui.radius.pill,
+      borderRadius: ui.radius.button,
       borderColor: isPrimary ? colors.GOLD_BUTTON_BORDER : colors.CARD_BORDER,
       backgroundColor: isPrimary ? colors.GOLD_BUTTON : colors.FIELD_BG,
     },
@@ -112,8 +115,8 @@ export default function CocolonButton({
     styles.label,
     {
       fontSize: ui.font.button,
-      color: isPrimary ? "#FFFFFF" : colors.TEXT_ON_LIGHT,
-      fontWeight: "800",
+      color: isPrimary ? colors.ACCENT_TEXT : colors.TEXT_ON_LIGHT,
+      ...ui.typography.button,
     },
     textStyle,
   ];
@@ -127,17 +130,18 @@ export default function CocolonButton({
       style={[styles.pressable, { maxWidth: ui.layout.maxButtonWidth }]}
       accessibilityRole="button"
       accessibilityLabel={accessibilityLabel}
+      accessibilityState={{ ...accessibilityState, disabled: isDisabled, busy: !!loading }}
       testID={testID}
     >
       <Animated.View style={containerStyle}>
         {loading ? (
-          <ActivityIndicator color={isPrimary ? "#FFFFFF" : colors.TEXT_ON_LIGHT} />
-        ) : typeof children === "string" || typeof children === "number" ? (
-          <Text style={labelStyle} numberOfLines={1}>
-            {children}
+          <ActivityIndicator color={isPrimary ? colors.ACCENT_TEXT : colors.TEXT_ON_LIGHT} />
+        ) : typeof label === "string" || typeof label === "number" ? (
+          <Text style={labelStyle}>
+            {label}
           </Text>
         ) : (
-          children
+          label
         )}
       </Animated.View>
     </Pressable>
@@ -153,16 +157,18 @@ const styles = StyleSheet.create({
     width: "100%",
     alignSelf: "center",
     paddingVertical: 14,
-    paddingHorizontal: 16,
-    minHeight: 48,
+    paddingHorizontal: 20,
+    minHeight: 52,
     borderWidth: 1,
     alignItems: "center",
     justifyContent: "center",
   },
   label: {
     letterSpacing: 0.2,
+    textAlign: "center",
   },
   disabled: {
     opacity: 0.55,
   },
 });
+

@@ -5,7 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
  * Cocolon / Emlis 用テーマコンテキスト
  *
  * Theme variants:
- * - default       : いままでの Mash バーガンディテーマ（"Default"）
+ * - default       : Material方向のラベンダー／プラム（"Default"）
  * - light  (白系) : White & Gold / ホワイト＆ゴールド
  * - dark   (黒系) : Black & Navy / ブラック＆ネイビー
  */
@@ -18,19 +18,21 @@ export const THEME_VARIANTS = {
 
 const PALETTES = {
   [THEME_VARIANTS.DEFAULT]: {
-    // いま使っているデフォルト（バーガンディ）テーマ
-    BG_SILVER: "#F6F1E8",
-    PANEL_BG: "#F9F9F9",
-    FIELD_BG: "#FFFFFF",
-    BORDER_GOLD: "#800020",
-    GOLD_BUTTON: "#5A1020",
-    GOLD_BUTTON_BORDER: "#430814",
-    TITLE_GOLD: "#800020",
-    BRAND_GOLD: "#800020",
-    TEXT_ON_LIGHT: "#111827",
+    // 既存キーは画面互換のため維持し、操作用の色へ対応する。
+    BG_SILVER: "#F7F1F8",
+    PANEL_BG: "#FFFAFF",
+    FIELD_BG: "#FFFAFF",
+    BORDER_GOLD: "#694775",
+    GOLD_BUTTON: "#694775",
+    GOLD_BUTTON_BORDER: "#694775",
+    TITLE_GOLD: "#694775",
+    BRAND_GOLD: "#694775",
+    TEXT_ON_LIGHT: "#312436",
     TEXT_ON_DARK: "#F2F2F2",
-    TEXT_SUBTLE: "#BFC3C7",
-    CARD_BORDER: "#D7D2C9",
+    TEXT_SUBTLE: "#6B5D6E",
+    CARD_BORDER: "#E5D7E7",
+    SURFACE_TONAL: "#EADDF0",
+    ON_SURFACE_TONAL: "#583864",
     // アクセント（ボタン・チップ）上の文字色
     ACCENT_TEXT: "#FFFFFF",
   },
@@ -46,7 +48,7 @@ const PALETTES = {
     BORDER_GOLD: "#D4AF37", // ゴールド
 
     // ボタン系：暗いゴールド
-    GOLD_BUTTON: "#B8860B", // Dark Goldenrod 系
+    GOLD_BUTTON: "#87630D", // 白文字の可読性を確保するゴールド
     GOLD_BUTTON_BORDER: "#8B6914",
 
     // 枠の金色は維持し、文字は白背景で読める濃い金色にする。
@@ -55,8 +57,10 @@ const PALETTES = {
 
     TEXT_ON_LIGHT: "#111827",
     TEXT_ON_DARK: "#F9FAFB",
-    TEXT_SUBTLE: "#6B7280",
+    TEXT_SUBTLE: "#606774",
     CARD_BORDER: "#E5E7EB",
+    SURFACE_TONAL: "#F5EACD",
+    ON_SURFACE_TONAL: "#76570B",
 
     // アクセント（ボタン・チップ）上の文字色
     ACCENT_TEXT: "#FFFFFF",
@@ -84,6 +88,8 @@ const PALETTES = {
     TEXT_ON_DARK: "#111827",
     TEXT_SUBTLE: "#9CA3AF",
     CARD_BORDER: "#1F2937",
+    SURFACE_TONAL: "#15233F",
+    ON_SURFACE_TONAL: "#B3C6F4",
 
     // アクセント（ボタン・チップ）上の文字色（＝白）
     ACCENT_TEXT: "#FFFFFF",

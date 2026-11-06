@@ -48,7 +48,10 @@ function createLocalStyles(colors, ui) {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          borderBottomWidth: 1,
+          backgroundColor: colors.SURFACE_TONAL,
+          borderRadius: 24,
+          padding: 4,
+          borderBottomWidth: 0,
           borderBottomColor: colors.CARD_BORDER,
           marginBottom: 14,
         },
@@ -56,7 +59,7 @@ function createLocalStyles(colors, ui) {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          borderBottomWidth: 1,
+          borderBottomWidth: 0,
           borderBottomColor: colors.CARD_BORDER,
           marginBottom: 12,
         },
@@ -66,18 +69,23 @@ function createLocalStyles(colors, ui) {
         tabItem: {
           alignItems: "center",
           justifyContent: "center",
-          paddingTop: 10,
+          minHeight: 48,
+          paddingVertical: 4,
           paddingHorizontal: 4,
         },
         tabLabelWrap: {
           alignItems: "center",
           justifyContent: "center",
-          paddingBottom: 9,
-          borderBottomWidth: 2,
+          width: "100%",
+          minHeight: 40,
+          paddingVertical: 8,
+          paddingHorizontal: 4,
+          borderRadius: 20,
+          borderBottomWidth: 0,
           borderBottomColor: "transparent",
         },
         tabLabelWrapActive: {
-          borderBottomColor: colors.TITLE_GOLD,
+          backgroundColor: colors.FIELD_BG,
         },
         tabLabelRow: {
           flexDirection: "row",
@@ -86,7 +94,7 @@ function createLocalStyles(colors, ui) {
         },
         tabLabelText: {
           fontSize: 13,
-          fontWeight: "800",
+          fontWeight: "600",
           color: text.description ?? colors.TEXT_SUBTLE,
         },
         tabLabelTextActive: {
@@ -502,3 +510,4 @@ export default function AnalysisContentFirstScreen({
     </AnalysisMenuScroll>
   );
 }
+

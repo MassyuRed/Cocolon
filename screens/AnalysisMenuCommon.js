@@ -197,14 +197,14 @@ function createStyles(colors, ui) {
         homeTitle: {
           fontSize: 26,
           lineHeight: 32,
-          fontWeight: "800",
-          letterSpacing: 0.8,
+          fontWeight: "600",
+          letterSpacing: 0,
           color: colors.TITLE_GOLD,
         },
         guideButton: {
-          width: 36,
-          height: 32,
-          borderRadius: 12,
+          width: 44,
+          height: 44,
+          borderRadius: 22,
           alignItems: "center",
           justifyContent: "center",
           backgroundColor: colors.FIELD_BG,
@@ -233,15 +233,16 @@ function createStyles(colors, ui) {
           textAlign: "center",
           fontSize: 26,
           lineHeight: 32,
-          fontWeight: "800",
-          letterSpacing: 0.6,
+          fontWeight: "600",
+          letterSpacing: 0,
         },
 
         descriptionText: {
-          fontSize: 13,
-          lineHeight: 20,
+          fontSize: 14,
+          lineHeight: 22,
           color: text.description ?? colors.TEXT_SUBTLE,
           marginBottom: 20,
+          fontWeight: "400",
         },
 
         summaryBlock: {
@@ -276,17 +277,17 @@ function createStyles(colors, ui) {
 
         largeCard: {
           minHeight: 126,
-          borderRadius: 22,
+          borderRadius: 24,
           borderWidth: 1,
-          borderColor: colors.BORDER_GOLD,
+          borderColor: colors.CARD_BORDER,
           backgroundColor: colors.FIELD_BG,
           paddingHorizontal: 20,
           paddingVertical: 18,
           shadowColor: "#000",
-          shadowOpacity: 0.12,
+          shadowOpacity: 0,
           shadowRadius: 10,
           shadowOffset: { width: 0, height: 6 },
-          elevation: 5,
+          elevation: 0,
         },
         largeCardContent: {
           flex: 1,
@@ -298,9 +299,9 @@ function createStyles(colors, ui) {
         },
         largeCardTitle: {
           flex: 1,
-          fontSize: 22,
-          lineHeight: 30,
-          fontWeight: "900",
+          fontSize: 20,
+          lineHeight: 28,
+          fontWeight: "600",
           color: text.primary ?? colors.TEXT_ON_LIGHT,
           letterSpacing: 0.2,
           includeFontPadding: true,
@@ -313,9 +314,10 @@ function createStyles(colors, ui) {
         },
         largeCardDescription: {
           marginTop: 10,
-          fontSize: 13,
-          lineHeight: 19,
+          fontSize: 14,
+          lineHeight: 22,
           color: text.description ?? colors.TEXT_SUBTLE,
+          fontWeight: "400",
         },
         largeCardUpdate: {
           marginTop: 12,
@@ -325,18 +327,18 @@ function createStyles(colors, ui) {
         },
 
         mediumCard: {
-          minHeight: 78,
-          borderRadius: 20,
+          minHeight: 88,
+          borderRadius: 24,
           borderWidth: 1,
           borderColor: colors.CARD_BORDER,
           backgroundColor: colors.FIELD_BG,
           paddingHorizontal: 18,
           paddingVertical: 15,
           shadowColor: "#000",
-          shadowOpacity: 0.1,
+          shadowOpacity: 0,
           shadowRadius: 8,
           shadowOffset: { width: 0, height: 4 },
-          elevation: 4,
+          elevation: 0,
         },
         mediumCardContent: {
           flex: 1,
@@ -344,9 +346,10 @@ function createStyles(colors, ui) {
         },
         mediumCardTitle: {
           flex: 1,
-          fontSize: 21,
-          fontWeight: "800",
+          fontSize: 18,
+          fontWeight: "600",
           color: text.primary ?? colors.TEXT_ON_LIGHT,
+          lineHeight: 26,
         },
         mediumCardBadge: {
           marginLeft: 8,
@@ -354,18 +357,19 @@ function createStyles(colors, ui) {
         },
         mediumCardDescription: {
           marginTop: 6,
-          fontSize: 13,
-          lineHeight: 18,
+          fontSize: 14,
+          lineHeight: 22,
           color: text.description ?? colors.TEXT_SUBTLE,
+          fontWeight: "400",
         },
         chevronIcon: {
           color: text.description ?? colors.TEXT_SUBTLE,
         },
 
         optionRow: {
-          marginLeft: 12,
-          minHeight: 58,
-          borderRadius: 16,
+          marginLeft: 0,
+          minHeight: 60,
+          borderRadius: 20,
           borderWidth: 1,
           borderColor: colors.CARD_BORDER,
           backgroundColor: colors.FIELD_BG,
@@ -384,9 +388,10 @@ function createStyles(colors, ui) {
           paddingRight: 12,
         },
         optionLabel: {
-          fontSize: 18,
-          fontWeight: "700",
+          fontSize: 16,
+          fontWeight: "600",
           color: text.primary ?? colors.TEXT_ON_LIGHT,
+          lineHeight: 24,
         },
         optionBadge: {
           marginLeft: 8,
@@ -406,3 +411,4 @@ function createStyles(colors, ui) {
     )
   );
 }
+

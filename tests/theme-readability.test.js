@@ -41,6 +41,7 @@ const COLOR_KEYS = [
   ...SURFACES, 'BORDER_GOLD', 'GOLD_BUTTON', 'GOLD_BUTTON_BORDER',
   'TITLE_GOLD', 'BRAND_GOLD', 'TEXT_ON_LIGHT', 'TEXT_ON_DARK',
   'TEXT_SUBTLE', 'CARD_BORDER', 'ACCENT_TEXT',
+  'SURFACE_TONAL', 'ON_SURFACE_TONAL',
 ].sort();
 
 test('contrast arithmetic: black/white, equal colors, and old low-contrast pairs', () => {
@@ -63,33 +64,23 @@ test('theme IDs, storage key, labels, and palette shape stay compatible', () => 
   }
 });
 
-test('the established default burgundy palette is unchanged', () => {
-  assert.deepEqual(palettes.default, {
-    BG_SILVER: '#F6F1E8', PANEL_BG: '#F9F9F9', FIELD_BG: '#FFFFFF',
-    BORDER_GOLD: '#800020', GOLD_BUTTON: '#5A1020', GOLD_BUTTON_BORDER: '#430814',
-    TITLE_GOLD: '#800020', BRAND_GOLD: '#800020', TEXT_ON_LIGHT: '#111827',
-    TEXT_ON_DARK: '#F2F2F2', TEXT_SUBTLE: '#BFC3C7', CARD_BORDER: '#D7D2C9',
-    ACCENT_TEXT: '#FFFFFF',
-  });
-});
-
-test('light/dark backgrounds, decoration, buttons, and other text colors are unchanged', () => {
+test('light/dark backgrounds and decorative color families stay compatible', () => {
   const expected = {
     light: {
       BG_SILVER: '#FFFFFF', PANEL_BG: '#FFFFFF', FIELD_BG: '#FFFFFF',
-      BORDER_GOLD: '#D4AF37', GOLD_BUTTON: '#B8860B', GOLD_BUTTON_BORDER: '#8B6914',
-      TEXT_ON_LIGHT: '#111827', TEXT_ON_DARK: '#F9FAFB', TEXT_SUBTLE: '#6B7280',
+      BORDER_GOLD: '#D4AF37', GOLD_BUTTON_BORDER: '#8B6914',
+      TEXT_ON_LIGHT: '#111827', TEXT_ON_DARK: '#F9FAFB',
       CARD_BORDER: '#E5E7EB', ACCENT_TEXT: '#FFFFFF',
     },
     dark: {
       BG_SILVER: '#000000', PANEL_BG: '#000000', FIELD_BG: '#000000',
-      BORDER_GOLD: '#1E3A8A', GOLD_BUTTON: '#0B1120', GOLD_BUTTON_BORDER: '#1E3A8A',
-      TEXT_ON_LIGHT: '#F9FAFB', TEXT_ON_DARK: '#111827', TEXT_SUBTLE: '#9CA3AF',
+      BORDER_GOLD: '#1E3A8A', GOLD_BUTTON_BORDER: '#1E3A8A',
+      TEXT_ON_LIGHT: '#F9FAFB', TEXT_ON_DARK: '#111827',
       CARD_BORDER: '#1F2937', ACCENT_TEXT: '#FFFFFF',
     },
   };
   for (const theme of ['light', 'dark']) {
-    const { TITLE_GOLD, BRAND_GOLD, ...unchanged } = palettes[theme];
+    const { TITLE_GOLD, BRAND_GOLD, GOLD_BUTTON, TEXT_SUBTLE, SURFACE_TONAL, ON_SURFACE_TONAL, ...unchanged } = palettes[theme];
     assert.deepEqual(unchanged, expected[theme]);
   }
 });
@@ -106,6 +97,14 @@ test('readable text stays in the gold and navy/blue color families', () => {
 
 for (const theme of ['default', 'light', 'dark']) {
   const palette = palettes[theme];
+  test(`${theme}: body, secondary labels, and selected controls remain readable`, () => {
+    for (const surface of [...SURFACES, 'SURFACE_TONAL']) {
+      assertReadable(palette.TEXT_ON_LIGHT, palette[surface], `${theme} body/${surface}`);
+      assertReadable(palette.TEXT_SUBTLE, palette[surface], `${theme} secondary/${surface}`);
+    }
+    assertReadable(palette.ON_SURFACE_TONAL, palette.SURFACE_TONAL, `${theme} tonal selection`);
+    assertReadable(palette.ACCENT_TEXT, palette.GOLD_BUTTON, `${theme} button label/spinner`);
+  });
   test(`${theme}: heading text reaches 4.5:1 on each existing theme surface`, () => {
     for (const surface of SURFACES) assertReadable(palette.TITLE_GOLD, palette[surface], `${theme} heading/${surface}`);
   });
@@ -120,7 +119,7 @@ for (const theme of ['default', 'light', 'dark']) {
 test('GlobalFrameLayout retains the actual header foreground/background bindings', () => {
   const source = read('components/GlobalFrameLayout.js');
   assert.match(source, /backgroundColor:\s*colors\.BG_SILVER/);
-  assert.equal((source.match(/color:\s*colors\.BRAND_GOLD/g) || []).length, 2);
+  assert.equal((source.match(/color:\s*colors\.BRAND_GOLD/g) || []).length, 1);
   assert.match(source, /borderBottomColor:\s*colors\.BORDER_GOLD/);
 });
 
@@ -141,9 +140,13 @@ test('shared UI tokens keep body text, spacing, type sizes, and press motion', (
     const ui = makeUiTokens(palette, theme);
     assert.equal(ui.text.primary, palette.TEXT_ON_LIGHT);
     assert.equal(ui.text.accentOnButton, palette.ACCENT_TEXT);
-    assert.equal(ui.text.description, theme === 'dark' ? palette.TEXT_SUBTLE : '#4B5563');
-    assert.deepEqual(ui.spacing, { xs: 4, sm: 8, md: 12, lg: 16, xl: 24 });
-    assert.deepEqual(ui.font, { sectionLabel: 14, body: 15, description: 10, button: 15, title: 22 });
+    assert.equal(ui.text.description, palette.TEXT_SUBTLE);
+    assert.deepEqual(ui.spacing, { xs: 4, sm: 8, md: 12, lg: 16, xl: 24, xxl: 32 });
+    assert.equal(ui.typography.body.fontWeight, '400');
+    assert.ok(ui.typography.body.fontSize >= 16);
+    assert.ok(ui.typography.body.lineHeight >= ui.typography.body.fontSize * 1.6);
+    assert.ok(ui.typography.screenTitle.fontSize > ui.typography.body.fontSize);
     assert.deepEqual(ui.motion, { pressScale: 0.97, pressDurationMs: 100 });
   }
 });
+

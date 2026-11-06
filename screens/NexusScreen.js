@@ -1393,18 +1393,18 @@ function createStyles(COLORS, ui) {
         panelTitle: {
           fontSize: 26,
           lineHeight: 32,
-          fontWeight: "800",
+          fontWeight: "600",
           color: COLORS.TITLE_GOLD,
-          letterSpacing: 0.8,
+          letterSpacing: 0,
         },
         panelTitleRow: {
           flexDirection: "row",
           alignItems: "center",
         },
         guideTitleButton: {
-          width: 36,
-          height: 32,
-          borderRadius: 12,
+          width: 44,
+          height: 44,
+          borderRadius: 22,
           alignItems: "center",
           justifyContent: "center",
           backgroundColor: COLORS.FIELD_BG,
@@ -1418,9 +1418,9 @@ function createStyles(COLORS, ui) {
           justifyContent: "flex-end",
         },
         refreshButton: {
-          width: 40,
-          height: 36,
-          borderRadius: 12,
+          width: 44,
+          height: 44,
+          borderRadius: 22,
           alignItems: "center",
           justifyContent: "center",
           backgroundColor: COLORS.FIELD_BG,
@@ -1438,16 +1438,16 @@ function createStyles(COLORS, ui) {
           paddingHorizontal: 14,
           paddingVertical: 12,
           marginBottom: 14,
-          borderRadius: 12,
+          borderRadius: 20,
           borderWidth: 1,
           borderColor: COLORS.CARD_BORDER,
-          backgroundColor: COLORS.FIELD_BG,
+          backgroundColor: COLORS.SURFACE_TONAL,
         },
         ownerHistoryButtonText: {
           fontSize: 14,
           lineHeight: 20,
-          fontWeight: "700",
-          color: COLORS.TEXT_ON_LIGHT,
+          fontWeight: "600",
+          color: COLORS.ON_SURFACE_TONAL,
         },
         todayOverallEmotionSummary: {
           paddingVertical: 8,
@@ -1485,9 +1485,12 @@ function createStyles(COLORS, ui) {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
-          borderBottomWidth: 1,
+          borderBottomWidth: 0,
           borderBottomColor: COLORS.CARD_BORDER,
           marginBottom: 14,
+          backgroundColor: COLORS.SURFACE_TONAL,
+          borderRadius: 24,
+          padding: 4,
         },
         tabItemWrap: {
           flex: 1,
@@ -1497,13 +1500,20 @@ function createStyles(COLORS, ui) {
           justifyContent: "center",
           paddingTop: 10,
           paddingHorizontal: 2,
+          minHeight: 48,
+          paddingVertical: 4,
         },
         tabLabelWrap: {
           alignItems: "center",
           justifyContent: "center",
-          paddingBottom: 9,
-          borderBottomWidth: 2,
+          paddingBottom: 8,
+          borderBottomWidth: 0,
           borderBottomColor: "transparent",
+          width: "100%",
+          minHeight: 40,
+          paddingVertical: 8,
+          paddingHorizontal: 4,
+          borderRadius: 20,
         },
         tabLabelRow: {
           flexDirection: "row",
@@ -1512,10 +1522,11 @@ function createStyles(COLORS, ui) {
         },
         tabLabelWrapActive: {
           borderBottomColor: COLORS.TITLE_GOLD,
+          backgroundColor: COLORS.FIELD_BG,
         },
         tabLabelText: {
           fontSize: 13,
-          fontWeight: "800",
+          fontWeight: "600",
           color: text.description ?? COLORS.TEXT_SUBTLE,
         },
         tabLabelTextActive: {
@@ -1832,3 +1843,4 @@ function createStyles(COLORS, ui) {
     )
   );
 }
+

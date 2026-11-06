@@ -44,7 +44,7 @@ function pickTargetFontSize(styleName, originalSize, ui) {
   }
 
   if (isExactTokenScreenTitleStyle(name)) {
-    return font.title ?? 22;
+    return ui?.typography?.screenTitle?.fontSize ?? font.title ?? 22;
   }
 
   if (isTopLevelTitleStyle(name)) {
@@ -111,3 +111,4 @@ export function applyTypographyTokens(styleMap, ui) {
 
   return next;
 }
+

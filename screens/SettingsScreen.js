@@ -2,8 +2,7 @@ import React from "react";
 import { Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-import { PieceLargeCard } from "./PieceMenuCommon";
-import { AnalysisMenuScroll, useAnalysisMenuStyles } from "./AnalysisMenuCommon";
+import { AnalysisDescription, AnalysisMediumCard, AnalysisMenuScroll, useAnalysisMenuStyles } from "./AnalysisMenuCommon";
 
 export default function SettingsScreen() {
   const navigation = useNavigation();
@@ -17,26 +16,28 @@ export default function SettingsScreen() {
         </View>
       </View>
 
-      <PieceLargeCard
+      <AnalysisDescription>見た目や通知、プラン、アカウントの設定を確認できます。</AnalysisDescription>
+
+      <AnalysisMediumCard
         title="アプリ設定"
-        description="アプリの見た目や通知に関する設定です"
+        description="カラーテーマ・通知の受け取り方"
         onPress={() => navigation.navigate("SettingsAppSettings")}
         accessibilityLabel="アプリ設定を開く"
       />
 
       <View style={{ marginTop: 16 }}>
-        <PieceLargeCard
+        <AnalysisMediumCard
           title="サブスク加入状況"
-          description="サブスクの加入状況に関する画面です"
+          description="現在のプラン・購入の復元・契約の管理"
           onPress={() => navigation.navigate("SubscriptionSelect")}
           accessibilityLabel="サブスク加入状況を開く"
         />
       </View>
 
       <View style={{ marginTop: 16 }}>
-        <PieceLargeCard
+        <AnalysisMediumCard
           title="その他"
-          description="チュートリアルやアカウント操作に関する設定です"
+          description="チュートリアル・ログアウト・アカウント削除"
           onPress={() => navigation.navigate("SettingsOther")}
           accessibilityLabel="その他の設定を開く"
         />
@@ -44,3 +45,4 @@ export default function SettingsScreen() {
     </AnalysisMenuScroll>
   );
 }
+

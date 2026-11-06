@@ -1069,32 +1069,36 @@ function createStyles(COLORS, ui) {
       marginTop: 12,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      borderRadius: 18,
+      borderRadius: 24,
       backgroundColor: COLORS.FIELD_BG,
-      padding: 14,
+      padding: 20,
     },
     planCardCurrent: {
       borderColor: COLORS.TITLE_GOLD,
       borderWidth: 1.5,
+      backgroundColor: COLORS.SURFACE_TONAL,
     },
     planHeaderRow: { flexDirection: "row", alignItems: "flex-start" },
     planTitle: {
-      fontSize: font.button ?? 15,
-      fontWeight: "900",
+      fontSize: 18,
+      fontWeight: "600",
       color: text.primary ?? COLORS.TEXT_ON_LIGHT,
       marginRight: spacing.sm ?? 8,
+      lineHeight: 26,
     },
     planPrice: {
       marginTop: 2,
-      fontSize: 13,
-      fontWeight: "800",
+      fontSize: 16,
+      fontWeight: "600",
       color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      lineHeight: 24,
     },
     planSubtitle: {
       marginTop: 2,
-      fontSize: 11,
+      fontSize: 14,
       color: text.description ?? COLORS.TEXT_SUBTLE,
-      lineHeight: 16,
+      lineHeight: 22,
+      fontWeight: "400",
     },
     planSubtitleHighlighted: {
       color: COLORS.TITLE_GOLD,
@@ -1132,16 +1136,18 @@ function createStyles(COLORS, ui) {
     },
 
     planFeature: {
-      fontSize: font.sectionLabel ?? 12,
+      fontSize: 14,
       color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-      lineHeight: 18,
+      lineHeight: 24,
       marginBottom: 2,
+      fontWeight: "400",
     },
     planNote: {
-      fontSize: 11,
+      fontSize: 14,
       color: text.description ?? COLORS.TEXT_SUBTLE,
-      lineHeight: 16,
+      lineHeight: 22,
       marginBottom: 2,
+      fontWeight: "400",
     },
     planNoteError: {
       marginTop: 6,
@@ -1161,6 +1167,8 @@ function createStyles(COLORS, ui) {
       backgroundColor: COLORS.GOLD_BUTTON,
       borderWidth: 1,
       borderColor: COLORS.GOLD_BUTTON_BORDER,
+      minHeight: 48,
+      justifyContent: "center",
     },
     planCtaDisabled: {
       backgroundColor: COLORS.PANEL_BG,
@@ -1168,7 +1176,7 @@ function createStyles(COLORS, ui) {
     },
     planCtaText: {
       fontSize: 13,
-      fontWeight: "900",
+      fontWeight: "600",
       color: text.accentOnButton ?? COLORS.FIELD_BG,
     },
 
@@ -1233,3 +1241,4 @@ function createStyles(COLORS, ui) {
     },
   }, ui));
 }
+

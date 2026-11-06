@@ -22,13 +22,16 @@ const renderPromise = Promise.resolve((() => {
   const imports = source.match(/^import .*;$/gm) || [];
   assert.deepEqual(imports, [
     "import React from 'react';",
-    "import { Modal, View, Text, ScrollView, Button, Pressable, ActivityIndicator } from 'react-native';",
+    "import { Modal, View, Text, ScrollView, Pressable, ActivityIndicator } from 'react-native';",
     "import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';",
     "import PieceVisualCard from './PieceVisualCard';",
+    "import Button from '../CocolonButton';",
+    "import { useTheme } from '../../theme/ThemeContext';",
     "import { PIECE_THEME_COLORS, PIECE_THEME_LABELS } from '../../features/piece/piecePalette';",
   ]);
   const marker = name => ({ component: name });
   const context = vm.createContext({
+    useTheme: () => ({ colors: { BG_SILVER: '#F7F1F8', TEXT_ON_LIGHT: '#312436', TEXT_SUBTLE: '#6B5D6E' } }),
     React: { createElement: (type, props, ...children) => ({ type, props: props || {}, children }) },
     ...Object.fromEntries(['Modal', 'View', 'Text', 'ScrollView', 'Button', 'Pressable', 'ActivityIndicator',
       'SafeAreaProvider', 'SafeAreaView', 'PieceVisualCard'].map(name => [name, marker(name)])),
@@ -267,3 +270,4 @@ test('saving spinner and message remain the existing save outcome UI', async () 
 // Keep the existing CI entry point; these additional cases exercise the host
 // separately and include the existing actual controller with synthetic IO.
 require('./piece-v2-initial-save-host.test.js');
+

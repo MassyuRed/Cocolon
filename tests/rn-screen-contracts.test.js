@@ -184,9 +184,9 @@ test('App root wires providers through Phase 9 navigation/runtime split modules'
   ], 'AppRuntimeBlockingScreen.js');
 
   assertIncludes(globalFrame, [
-    'export const FRAME_BORDER_WIDTH = 2;',
+    'export const FRAME_BORDER_WIDTH = 0;',
     'export default function GlobalFrameLayout',
-    '～Emotion Limbic Internal Structure～',
+    'fontFamily: "CormorantGaramond-Bold"',
     'useSafeAreaInsets',
   ], 'GlobalFrameLayout.js');
 });
@@ -4326,4 +4326,5 @@ test('P10 Gate Recovery public boundary RN contract keeps backend-owned passed p
   assert.equal(isPassedEmlisObservationReply(metaOnlyGateRecoveryPayload), false);
   assert.equal(buildPassedEmlisObservationModalPayload(metaOnlyGateRecoveryPayload), null);
 });
+
 

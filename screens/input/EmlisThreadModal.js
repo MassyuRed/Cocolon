@@ -201,7 +201,8 @@ export default function EmlisThreadModal({ thread, colors, navigation, userId = 
 const s = StyleSheet.create({
   backdrop: { flex: 1, backgroundColor: "rgba(0,0,0,0.45)", justifyContent: "center", padding: 20 },
   card: { maxHeight: "90%", borderWidth: 1, borderRadius: 20, padding: 18, gap: 14 },
-  title: { fontSize: 20, fontWeight: "700" }, content: { gap: 14, paddingBottom: 12 },
-  section: { gap: 6, paddingVertical: 10 }, label: { fontSize: 13, fontWeight: "700" },
-  body: { fontSize: 16, lineHeight: 26 }, input: { minHeight: 100, maxHeight: 200, borderWidth: 1, borderRadius: 12, padding: 12, fontSize: 16, lineHeight: 24 },
+  title: { fontSize: 22, lineHeight: 30, fontWeight: "600" }, content: { gap: 20, paddingBottom: 16 },
+  section: { gap: 8, paddingVertical: 10 }, label: { fontSize: 14, lineHeight: 22, fontWeight: "600" },
+  body: { fontSize: 16, lineHeight: 27, fontWeight: "400" }, input: { minHeight: 100, maxHeight: 200, borderWidth: 1, borderRadius: 16, padding: 16, fontSize: 16, lineHeight: 27, fontWeight: "400" },
 });
+
