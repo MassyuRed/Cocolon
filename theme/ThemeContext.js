@@ -33,6 +33,8 @@ const PALETTES = {
     CARD_BORDER: "#E5D7E7",
     SURFACE_TONAL: "#EADDF0",
     ON_SURFACE_TONAL: "#583864",
+    ERROR: "#B3261E",
+    ERROR_BG: "#F9DEDC",
     // アクセント（ボタン・チップ）上の文字色
     ACCENT_TEXT: "#FFFFFF",
   },
@@ -61,6 +63,8 @@ const PALETTES = {
     CARD_BORDER: "#E5E7EB",
     SURFACE_TONAL: "#F5EACD",
     ON_SURFACE_TONAL: "#76570B",
+    ERROR: "#B3261E",
+    ERROR_BG: "#F9DEDC",
 
     // アクセント（ボタン・チップ）上の文字色
     ACCENT_TEXT: "#FFFFFF",
@@ -90,6 +94,8 @@ const PALETTES = {
     CARD_BORDER: "#1F2937",
     SURFACE_TONAL: "#15233F",
     ON_SURFACE_TONAL: "#B3C6F4",
+    ERROR: "#F2B8B5",
+    ERROR_BG: "#601410",
 
     // アクセント（ボタン・チップ）上の文字色（＝白）
     ACCENT_TEXT: "#FFFFFF",

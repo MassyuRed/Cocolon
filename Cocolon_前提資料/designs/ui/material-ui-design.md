@@ -166,7 +166,7 @@ Mashの比較理由：Day One案は情報の区切りが弱く、視線が動き
 | Piece作成 | 画像／全文を設定より前へ。操作ボタンと外枠をテーマ対応。全条件操作とidentity/tokenの引渡しを保持。作品renderer・recipe・保存画像は変更0 |
 | 設定・周辺 | 設定入口を目的が読める3行へ。テーマ選択面、共通メニュー、契約カード・説明・CTA、Nexusタブと自分のPiece入口を調整 |
 
-**残る仕上げ：** 自分のPiece履歴／詳細の専用枠とnative Button、その他のアカウント・各履歴・ガイド等の個別表示。共通テーマの変更は届くが、各専用画面をこの版で一つずつ最終調整したとはしない。応答／Pieceで回復操作が複数併存する時のfooter高さ、長文、文字拡大1.0/1.3/1.6、3テーマ、safe area、キーボードを実端末で確認する。
+**現在の実装：** 下記§17の共通・起動・認証まで追加反映。残る仕上げは§15.1の2〜6群（入力・問い・履歴、分析全体、Piece・social、アカウント・設定、案内・tutorial・休眠資産）。共通テーマの変更が届くだけで、個別画面の仕上げ完了とはしない。全群のsource反映後にまとめてビルド・配布し、3テーマ、文字拡大1.0/1.3/1.6、狭い幅、safe area、キーボード、長文・回復操作の実端末確認を行う。
 
 初回反映時の確認：Nodeの既存5入口（画面contract・IAP復元・テーマ可読性・Piece初回保存modal・preview/display）で400 PASS／FAIL0／SKIP0。React/native・Auth/HTTPは各既存testの代替を含む。テーマ検査は旧バーガンディ色・太枠・taglineの固定期待を採用設計へ更新し、3テーマの本文／補助／tonal／操作色の4.5:1を検査した。Piece testの新テーマhookと共有Buttonへのimport適応のみを行い、保存・回復の検査は維持。最初の実行は取得不足の依存fileと旧表示期待で失敗し、依存原本の取得と意図した期待更新後に上記最終実行を通過した。製品の資格判定を緩めていない。今回の全画面設計更新で、これらを再実行したとは扱わない。
 
@@ -413,7 +413,7 @@ IDのコピー形アイコンは現在`Share.share`を呼ぶため、文言はID
 | 共通部品を子の独自styleが上書き、Pressableで状態propsが渡らない | `MenuActionCard`等の子Text／icon／影も移行し、選択・無効のアクセシビリティ情報を渡す |
 | 感情通知の淡色面と濃色文字が固定 | 感情色相は保ち、全テーマで面と文字の組合せを確認 |
 
-これらは今回のsource確認で見つけた未修正事項。前回の400 PASSは既存contract検査の結果であり、全画面の視覚的完成や、上の不整合がない証明ではない。
+これらは全画面設計時点の優先事項。§17で感情選択icon、契約の無効CTA、Auth、共通部品、native起動を修正した。残りの各画面は同じ改装の残件として進める。前回400 PASSや今回401 PASSを全画面の視覚的完成の証明にしない。
 
 ### 15.3 全体の完了条件
 
@@ -445,3 +445,23 @@ IDのコピー形アイコンは現在`Share.share`を呼ぶため、文言はID
 
 今回の変更は既存UI設計・入口・全体現在地・議事録の更新のみ。製品JS／native／API／DB／画像／購入／削除／公開、ビルド・配布、GPU・Render・Supabaseの変更は0。プレビュー原本も変更0。全画面統一の確定と、画面群ごとの実装・保存という推奨手順を具体化した。STRUCTURE_MAP_DELTA_NONE：商品route・component責務・意味／保存契約は変更していない。
 
+
+
+## 17. 11/6 実装区切り1 — 共通・起動・認証
+
+Mashが全画面実装の開始と、全画面source完成後にビルドをまとめる方針を明示。通常pushでPiece検査workflowのnative compileが走るため、途中のUI commitは `[skip ci]` とし、既存Node検査と構文・XML検査をlocalで実施する。workflow・依存・配布設定は変更しない。全UI実装完了後に必要なnative検証と配布buildをまとめる。途中で実機が必要な具体的問題が出た場合のみ、その必要性を説明する。
+
+| 実装対象 | この区切りの変更 |
+|---|---|
+| 共通tokens | modal22/30、入力16/27、meta12/18の役割追加。既存サイズ推定を保持しつつ明示roleで太さ・行間を適用可能に。3themeへエラー前景／面を追加 |
+| 共通操作 | Pressableが選択・無効・hint/valueを受け渡す。戻る44角、switchのtheme track。MenuActionCardの子文字・icon・丸み・強い影まで統一し、長い見出しを既定で省略しない |
+| Auth4mode | ログイン／登録／再設定メール／新password設定を同じ面へ。入力ごとの可視ラベル、本文色、16文字、ScrollViewとkeyboard回避、共通主button。submit／recovery／再送／入力条件は保持 |
+| 起動・通信状態 | RNのブランド＋読込、最低version停止画面の本文scroll・共通再試行、通信bannerをtonal化。再試行時のchildren位置・draft寿命を保持 |
+| native launch | iOSの旧taglineと静的pulseを整理しplum＋lavenderへ。既存logoとloadingの制約を維持。Androidの既存pulse形状を独立vector名で表示し同色・mask内余白へ。同名PNGの密度別選択へ依存しない |
+| 先行して見つかった不整合 | Input選択iconをtonal文字色へ。契約disabled CTAの前景を定義し、処理中spinnerもdisabled面に対応。購入条件と状態分岐は保持 |
+
+製品17file、既存test1file、現在地・本設計・weekly3fileを同じ区切りで反映する。新製品fileは既存Android splash用vector1点のみ。新route・JS component・依存・API/DB/AI・作品renderer変更なし。構造mapの論理owner変更はなく、native資産の参照変更を本節に固定する。
+
+検証：既存5入口のNode検査 **401 PASS／FAIL0／SKIP0**。3themeの本文・補助・選択・エラー・主操作の色の可読性、role適用と未指定style／ブランド保持、再試行callbackとloading/disabledの共通部品結線を確認。変更JS14fileのBabel parse、XML4fileのparse、storyboardの全constraint参照、diffの空白検査を通過。read-only reviewで契約spinnerが無効面に白で残る点を修正した。検査はReact/native・Auth/HTTPの代替を含み、端末描画・全操作実行の結果ではない。
+
+**未実施：** app/native build、CI native compile、Upload、TestFlight、本人端末表示。共通・起動・認証も最終実機確認は残す。UI全画面の完成宣言ではない。次は§15.1の入力・応答・問い・履歴を続ける。

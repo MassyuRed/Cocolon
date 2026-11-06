@@ -42,6 +42,7 @@ const COLOR_KEYS = [
   'TITLE_GOLD', 'BRAND_GOLD', 'TEXT_ON_LIGHT', 'TEXT_ON_DARK',
   'TEXT_SUBTLE', 'CARD_BORDER', 'ACCENT_TEXT',
   'SURFACE_TONAL', 'ON_SURFACE_TONAL',
+  'ERROR', 'ERROR_BG',
 ].sort();
 
 test('contrast arithmetic: black/white, equal colors, and old low-contrast pairs', () => {
@@ -80,7 +81,7 @@ test('light/dark backgrounds and decorative color families stay compatible', () 
     },
   };
   for (const theme of ['light', 'dark']) {
-    const { TITLE_GOLD, BRAND_GOLD, GOLD_BUTTON, TEXT_SUBTLE, SURFACE_TONAL, ON_SURFACE_TONAL, ...unchanged } = palettes[theme];
+    const { TITLE_GOLD, BRAND_GOLD, GOLD_BUTTON, TEXT_SUBTLE, SURFACE_TONAL, ON_SURFACE_TONAL, ERROR, ERROR_BG, ...unchanged } = palettes[theme];
     assert.deepEqual(unchanged, expected[theme]);
   }
 });
@@ -104,6 +105,8 @@ for (const theme of ['default', 'light', 'dark']) {
     }
     assertReadable(palette.ON_SURFACE_TONAL, palette.SURFACE_TONAL, `${theme} tonal selection`);
     assertReadable(palette.ACCENT_TEXT, palette.GOLD_BUTTON, `${theme} button label/spinner`);
+    assertReadable(palette.ERROR, palette.ERROR_BG, `${theme} error panel`);
+    for (const surface of SURFACES) assertReadable(palette.ERROR, palette[surface], `${theme} inline error/${surface}`);
   });
   test(`${theme}: heading text reaches 4.5:1 on each existing theme surface`, () => {
     for (const surface of SURFACES) assertReadable(palette.TITLE_GOLD, palette[surface], `${theme} heading/${surface}`);
@@ -111,8 +114,8 @@ for (const theme of ['default', 'light', 'dark']) {
   test(`${theme}: header text, including the small subtitle, reaches 4.5:1`, () => {
     for (const surface of SURFACES) assertReadable(palette.BRAND_GOLD, palette[surface], `${theme} header/${surface}`);
   });
-  test(`${theme}: runtime retry label stays readable when TITLE_GOLD is its background`, () => {
-    assertReadable(palette.PANEL_BG, palette.TITLE_GOLD, `${theme} retry label`);
+  test(`${theme}: runtime retry uses the readable shared primary button pair`, () => {
+    assertReadable(palette.ACCENT_TEXT, palette.GOLD_BUTTON, `${theme} retry label/spinner`);
   });
 }
 
@@ -123,14 +126,33 @@ test('GlobalFrameLayout retains the actual header foreground/background bindings
   assert.match(source, /borderBottomColor:\s*colors\.BORDER_GOLD/);
 });
 
-test('runtime blocking screen retains inverse label/spinner colors and retry controls', () => {
+test('runtime blocking screen keeps retry and busy/disabled wiring through the shared button', () => {
   const source = read('runtime/AppRuntimeBlockingScreen.js');
-  assert.match(source, /backgroundColor:\s*colors\.TITLE_GOLD/);
-  assert.match(source, /<Text style=\{\{ color:\s*colors\.PANEL_BG/);
-  assert.match(source, /<ActivityIndicator size="small" color=\{colors\.PANEL_BG\}/);
+  assert.match(source, /import CocolonButton from "\.\.\/components\/CocolonButton"/);
+  assert.match(source, /<CocolonButton/);
   assert.match(source, /onPress=\{onRetry\}/);
   assert.match(source, /disabled=\{retrying\}/);
-  assert.match(source, /opacity:\s*retrying\s*\?\s*0\.65\s*:\s*1/);
+  assert.match(source, /loading=\{retrying\}/);
+  const button = read('components/CocolonButton.js');
+  assert.match(button, /backgroundColor: isPrimary \? colors\.GOLD_BUTTON/);
+  assert.match(button, /color: isPrimary \? colors\.ACCENT_TEXT/);
+  assert.match(button, /<ActivityIndicator color=\{isPrimary \? colors\.ACCENT_TEXT/);
+  assert.match(button, /const isDisabled = !!disabled \|\| !!loading/);
+});
+
+test('explicit typography roles replace weight and leading without altering artwork or unmapped styles', () => {
+  const tokenSource = read('ui/uiTokens.js').replace(/export\s+(const|function)\s+/g, '$1 ');
+  const makeUiTokens = Function(tokenSource + '\nreturn makeUiTokens;')();
+  const source = read('ui/applyTypographyTokens.js').replace(/export\s+function\s+/g, 'function ');
+  const apply = Function(source + '\nreturn applyTypographyTokens;')();
+  const ui = makeUiTokens(palettes.default, 'default');
+  const original = { content: { fontSize: 18, fontWeight: '800', lineHeight: 20, color: '#312436' }, icon: { fontSize: 32 }, brand: { fontFamily: 'CormorantGaramond-Bold', fontSize: 38 } };
+  const legacy = apply(original, ui);
+  const mapped = apply(original, ui, { content: 'body' });
+  assert.deepEqual(mapped.content, { ...original.content, ...ui.typography.body });
+  assert.deepEqual(mapped.icon, legacy.icon);
+  assert.deepEqual(mapped.brand, legacy.brand);
+  assert.equal(original.content.fontWeight, '800');
 });
 
 test('shared UI tokens keep body text, spacing, type sizes, and press motion', () => {

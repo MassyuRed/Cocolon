@@ -18,6 +18,9 @@ export default function CocolonPressable({
   style,
   accessibilityLabel,
   accessibilityRole = "button",
+  accessibilityState,
+  accessibilityHint,
+  accessibilityValue,
   testID,
   hitSlop,
 }) {
@@ -88,6 +91,9 @@ export default function CocolonPressable({
       disabled={isDisabled}
       accessibilityRole={accessibilityRole}
       accessibilityLabel={accessibilityLabel}
+      accessibilityState={{ ...accessibilityState, disabled: isDisabled }}
+      accessibilityHint={accessibilityHint}
+      accessibilityValue={accessibilityValue}
       testID={testID}
       hitSlop={hitSlop}
     >

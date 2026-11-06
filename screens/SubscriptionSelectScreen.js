@@ -327,14 +327,14 @@ function PlanCard({
             {ctaLoading && !isCurrent ? (
               <ActivityIndicator
                 size="small"
-                color={colors.FIELD_BG}
+                color={disabled ? colors.TEXT_SUBTLE : colors.ACCENT_TEXT}
                 style={{ marginRight: 8 }}
               />
             ) : (
               <Ionicons
                 name="card-outline"
                 size={18}
-                color={disabled ? colors.TEXT_SUBTLE : colors.FIELD_BG}
+                color={disabled ? colors.TEXT_SUBTLE : colors.ACCENT_TEXT}
                 style={{ marginRight: 6 }}
               />
             )}
@@ -1175,9 +1175,12 @@ function createStyles(COLORS, ui) {
       borderColor: COLORS.CARD_BORDER,
     },
     planCtaText: {
-      fontSize: 13,
-      fontWeight: "600",
-      color: text.accentOnButton ?? COLORS.FIELD_BG,
+      ...ui.typography.button,
+      flexShrink: 1,
+      color: text.accentOnButton ?? COLORS.ACCENT_TEXT,
+    },
+    planCtaTextDisabled: {
+      color: COLORS.TEXT_SUBTLE,
     },
 
     noticeBox: {

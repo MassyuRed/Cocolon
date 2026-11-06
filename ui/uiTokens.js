@@ -44,8 +44,11 @@ export function makeUiTokens(colors, themeName) {
     typography: {
       screenTitle: { fontSize: 26, lineHeight: 34, fontWeight: "600" },
       sectionTitle: { fontSize: 18, lineHeight: 26, fontWeight: "600" },
+      modalTitle: { fontSize: 22, lineHeight: 30, fontWeight: "600" },
       body: { fontSize: 16, lineHeight: 27, fontWeight: "400" },
+      input: { fontSize: 16, lineHeight: 27, fontWeight: "400" },
       description: { fontSize: 14, lineHeight: 22, fontWeight: "400" },
+      meta: { fontSize: 12, lineHeight: 18, fontWeight: "400" },
       button: { fontSize: 15, lineHeight: 22, fontWeight: "600" },
     },
 

@@ -5036,3 +5036,16 @@ Cocolon PR30 f35213fbを固定して、起動／全Stack登録、分析内11rout
 確認はsource・経路・状態の照合であり、実機描画や全操作実行ではない。Android同名splash PNG5密度の存在／参照は確認したが画素外観・実選択資産は未確認。OS所有の権限／共有／ストア／AlertはOS外観を使用し、その前後のアプリUIを統一する。保存Piece画像のrecipe・renderer・本文は今回の操作UIとは分ける。
 
 今回は既存文書4fileのみ更新。製品JS／native／画像／API／DB／購入／削除／公開、build／Upload／配布、Render／Supabase／GPUの変更0。前回400 PASSを今回の再実行や全画面視覚合格へ換算しない。read-only補助reviewと華恋の単一writer、実環境はCodex Work／GPT-6。STRUCTURE_MAP_DELTA_NONE（表示実装の改造・新owner・route・意味／保存契約の変更なし）。ADMINISTRATIVE_ONLY、商品品質の実装完了とはしない。
+
+
+## 219. 11/6 — 全画面UIの実装開始、共通・起動・認証を反映
+
+Mashから全画面実装の開始を受けた。全画面を例外なくMaterialへ統一する範囲は固定し、実装・検査・GitHub保存だけを画面群で区切る。全UIのsource完成後にビルドをまとめる。通常pushの既存Piece workflowにもnative compileが含まれるため、途中のUI commitは `[skip ci]` とし、localの既存Node・Babel・XML検査で確認する。workflowや依存の変更はしない。
+
+共通部品の子Text/iconと影、44の戻る領域、theme switch、Pressable選択／無効の読み上げを整えた。Authの4modeを固定白・indigoからthemeに移し、明示ラベル・入力16・scroll／keyboard回避・共通主buttonへ。認証条件、submit／recovery／再送の処理は維持。RN起動、最低version停止と通信banner、iOS launch、Android splashも同じ色へ。Androidは既存のpulse形状を新しい独立vector名から参照し、密度別の同名旧PNGを誤選択しない。新製品資産はvector1file、JS owner／route追加なし。
+
+Inputの選択iconと、契約の無効CTA・spinnerの読みにくい色も先行修正した。read-only reviewで処理中も無効背景になることを再確認し、spinnerへ同じ前景条件を適用。購入／契約状態は変更しない。3themeのエラー前景／面、明示文字roleを追加し、ブランド・作品文字へ一括適用しない。
+
+製品17file＋既存test1＋文書3file。既存5入口401 PASS／FAIL0／SKIP0、変更JS14file parse、XML4file parse・storyboard全constraint参照、diff空白検査を通過。前回400件へroleの非破壊性1件を追加した結果で、実機表示の証明にはしない。実装一覧と再開点は[UI資料§17](../designs/ui/material-ui-design.md#17-116-実装区切り1--共通起動認証)。入力・分析・Piece・アカウント・設定・案内・tutorial・休眠資産の個別仕上げを続ける。
+
+ビルド／native compile／Upload／配布／実機確認、Render／Supabase／GPU操作は0。比較プレビュー・作品renderer／recipe／保存画像・API／DB／AI・権限は変更0。途中の共通部品反映を全UI完成とは扱わない。writerは華恋一人、補助はread-only review。

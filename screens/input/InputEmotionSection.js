@@ -55,12 +55,14 @@ export default function InputEmotionSection({
                   <CocolonPressable
                     onPress={() => toggleEmotion(cat)}
                     disabled={isDisabled}
+                    accessibilityLabel={cat}
+                    accessibilityState={{ selected: on }}
                     style={[styles.chip, on && styles.chipOn, isDisabled && { opacity: 0.45 }]}
                   >
                     <Ionicons
                       name={iconNameForEmotion(cat)}
                       size={16}
-                      color={on ? colors.ACCENT_TEXT : colors.TEXT_SUBTLE}
+                      color={on ? colors.ON_SURFACE_TONAL : colors.TEXT_SUBTLE}
                       style={{ marginRight: 4 }}
                     />
                     <Text style={[styles.chipText, on && styles.chipTextOn]}>{cat}</Text>
@@ -78,6 +80,8 @@ export default function InputEmotionSection({
                         <CocolonPressable
                           key={s}
                           onPress={() => changeStrength(cat, s)}
+                          accessibilityLabel={`${cat}の強さ：${STRENGTH_LABELS[s]}`}
+                          accessibilityState={{ selected: emotion?.strength === s }}
                           style={[
                             styles.strengthChip,
                             emotion?.strength === s && styles.strengthChipOn,

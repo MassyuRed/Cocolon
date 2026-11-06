@@ -73,7 +73,7 @@ function pickTargetFontSize(styleName, originalSize, ui) {
   return Math.max(originalSize, font.description ?? 10);
 }
 
-export function applyTypographyTokens(styleMap, ui) {
+export function applyTypographyTokens(styleMap, ui, roles = {}) {
   if (!styleMap || typeof styleMap !== "object") return styleMap;
 
   const next = {};
@@ -81,6 +81,13 @@ export function applyTypographyTokens(styleMap, ui) {
   Object.entries(styleMap).forEach(([styleName, styleDef]) => {
     if (!styleDef || typeof styleDef !== "object" || Array.isArray(styleDef)) {
       next[styleName] = styleDef;
+      return;
+    }
+
+    // Explicit roles include weight and leading. Artwork/icon styles stay opt-in.
+    const role = ui?.typography?.[roles[styleName]];
+    if (role) {
+      next[styleName] = { ...styleDef, ...role };
       return;
     }
 

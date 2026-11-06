@@ -4,13 +4,15 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { useAppRuntime } from "../AppRuntimeContext";
 import { useTheme } from "../theme/ThemeContext";
+import { makeUiTokens } from "../ui/uiTokens";
 import AppStartupLoadingView from "./AppStartupLoadingView";
 import AppRuntimeBlockingScreen from "./AppRuntimeBlockingScreen";
 import { captureClientError } from "../lib/monitoring";
 
 export default function AppRuntimeBootstrapGate({ children }) {
   const { runtime, refreshAppRuntime } = useAppRuntime();
-  const { colors } = useTheme();
+  const { colors, themeName } = useTheme();
+  const ui = makeUiTokens(colors, themeName);
   const insets = useSafeAreaInsets();
   const checkInFlightRef = useRef(false);
   const maintenanceAlertShownRef = useRef(null);
@@ -74,8 +76,8 @@ export default function AppRuntimeBootstrapGate({ children }) {
   return (
     <View style={{ flex: 1 }}>
       {(runtime?.error || runtime?.loading) ? (
-        <View style={{ backgroundColor: colors.PANEL_BG, paddingTop: insets.top + 8, paddingHorizontal: 16, paddingBottom: 8 }}>
-          <Text accessibilityLiveRegion="polite" style={{ color: colors.TEXT_ON_LIGHT }}>
+        <View style={{ backgroundColor: colors.SURFACE_TONAL, paddingTop: insets.top + 8, paddingHorizontal: 20, paddingBottom: 8 }}>
+          <Text accessibilityLiveRegion="polite" style={{ ...ui.typography.description, color: colors.ON_SURFACE_TONAL }}>
             {runtime?.loading
               ? "接続情報を確認しています…"
               : "接続情報を取得できませんでした。一部の機能を利用できない場合があります。"}
@@ -84,10 +86,11 @@ export default function AppRuntimeBootstrapGate({ children }) {
             onPress={runBootstrapCheck}
             disabled={runtime?.loading}
             accessibilityRole="button"
+            accessibilityState={{ disabled: !!runtime?.loading, busy: !!runtime?.loading }}
             accessibilityLabel="接続情報を再確認する"
             style={{ minHeight: 44, justifyContent: "center", opacity: runtime?.loading ? 0.65 : 1 }}
           >
-            <Text style={{ color: colors.TITLE_GOLD }}>もう一度確認する</Text>
+            <Text style={{ ...ui.typography.button, color: colors.ON_SURFACE_TONAL }}>もう一度確認する</Text>
           </TouchableOpacity>
         </View>
       ) : null}

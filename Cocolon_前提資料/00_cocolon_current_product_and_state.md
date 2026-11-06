@@ -176,7 +176,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 | 機能 | 目的・現在の接続 | 未確認・境界 |
 |---|---|---|
-| UI採用方針（11/6） | **全画面を例外なく今回のMaterialデザインへ統一することはMash確定。** 起動・認証、履歴・詳細、モーダル、本人／他者、条件付き互換表示、tutorial・全体状態を含む。実装は共通部品から6つの画面群で確認・保存し、全画面の仕上げまでを一つの改装にする。[全画面の具体設計・対応表・実装順](designs/ui/material-ui-design.md#14-全画面の具体設計) | 初回f35213fで製品17fileへ反映済み、既存対象400 PASSはその時点の検査。全経路と表示実装を再照合し、native起動／Auth／条件付き旧表示等を設計へ追加。色の不整合・個別画面の仕上げは§15.2に残す。今回の製品変更0、全画面の実機表示・ビルド／配布は未確認。作品画像・AI／分析内容・購入／公開契約は保持 |
+| UI採用方針（11/6） | **全画面を例外なく今回のMaterialデザインへ統一することはMash確定。** 起動・認証、履歴・詳細、モーダル、本人／他者、条件付き互換表示、tutorial・全体状態を含む。6画面群で実装・検査・GitHub保存し、全画面source完成後にビルドをまとめる。[全画面設計と実装現在地](designs/ui/material-ui-design.md#17-116-実装区切り1--共通起動認証) | 初回f35213fの製品17fileに続き、共通・起動・認証の製品17fileを実装。Auth4mode、runtime、iOS／Android splash、Pressable／戻る／switch／共通card、選択iconと契約無効CTAを整えた。既存対象401 PASS、JS14file・XML4file解析とconstraint参照確認。入力・分析・Piece・アカウント・設定・案内等の個別仕上げは継続。途中UI commitは[skip ci]でnative compileも保留しlocal検査。ビルド／配布／実機表示は未実施。作品画像・AI／分析内容・購入／公開契約は保持 |
 | 起動・認証 | 登録／ログイン／メール確認再送／再設定／復旧。`App.js`→`RootNavigator`→`MainTabs`→Input／Analysis／Piece／Settingsの4 Stack（Ranking入口は撤去済み） | native認証リンク・cold／warm復帰の実成立は別確認。旧巨大App／MyModel画面名から現在を復元しない |
 | 今日の問い・回答履歴 | current／answers／history／PATCH／settingsを接続。日常メモと別に考えを記録し、修正・再読 | Emlis任意問いと別機能。旧自己構造素材との接続を、V2全source採用済みへ拡張しない |
 | 投稿・他者のPiece | 通常`PieceEntryScreen`→`NexusScreen`。本人／フォロー中／特定相手、並替・更新・本人投稿削除。linkPayload時のみ`PieceScreen` | 公開条件と新Piece保存成立は別。旧Q&A投稿と新canonical recordを混同しない |

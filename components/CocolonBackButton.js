@@ -63,6 +63,7 @@ export default function CocolonBackButton({
       activeOpacity={0.7}
       accessibilityRole="button"
       accessibilityLabel={accessibilityLabel}
+      accessibilityState={{ disabled: !!disabled }}
       disabled={disabled}
       testID={testID}
     >
@@ -74,5 +75,9 @@ export default function CocolonBackButton({
 const styles = StyleSheet.create({
   backButton: {
     padding: 4,
+    minWidth: 44,
+    minHeight: 44,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
