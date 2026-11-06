@@ -3720,3 +3720,14 @@ API5c9606、Jupyter241 PASS、CI42109915846全工程成功。fresh replay2でWH0
 | 既存trial新 `optional_kernel_results.json` | runtime版・hash／binding・計時と不変条件、2返却と未返却1・strict欠落拒否を本文なしで集計。速度倍率・通常採用・一般品質へ換算しない |
 
 実結果は1load／3開始／2stop、KW00候補保持・KW01は旧と同じ先頭fieldだけで拒否・KW02は23秒signal14でraw未返却。4vendor実binding成立と、全欄出力／速度・意味品質の未証明を区別する。STRUCTURE_MAP_DELTA_NONE、通常v8 whitelist拡張0、商品owner／意味型／作者／公開DTO／DB／RN／配置／build変更0。version8保存済み。 [全結果・原本・境界](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-optional-kernel-diagnostic-20261105)。
+
+
+## 11/6 §215 — 既存v7による完全1・2・3記録と教材coverage監査
+
+| path | 責務 |
+|---|---|
+| trial新 `cardinality123_probe.py` | 既存API100c1bb／元a2e／隔離optional runtimeで完全record prefixをCPU準備し、新3要求を共有60秒・各23秒内で一回生成。原raw／Responseを保持し、既存strict候補と非生成再読を使用 |
+| trial新 `cardinality123_results.json` | 全欄／候補／typed mapを分ける本文なし集計。N1/N2の希望誤kindによる未解析と、N3の過去行動＋現在希望2node・各3根拠／辺0を保持 |
+| trial新 `cardinality_teacher_audit.json` | 元86poolの正解希望5と最終18更新の希望0、学習v4／検証v7の不一致を記録。継承元の未学習や単一原因は断定しない |
+
+商品source／意味型／作者／通常profile／planner／batch／transport／API／DB／RNに追加変更なし、STRUCTURE_MAP_DELTA_NONE。新3stop／1load／学習0、通常採用なし。source／raw／全19原本・元86packは非公開保持、一般品質・全履歴60秒・DB保存／端末の成功へ広げない。実結果と次の独立事実／希望教示のCPU準備は[weekly§215](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-cardinality123-20261106)へ戻る。

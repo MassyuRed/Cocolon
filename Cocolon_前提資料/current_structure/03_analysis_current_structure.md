@@ -1,4 +1,4 @@
-> **11/5開始・分析の継続（第9回§214）：新規隔離targetで4vendor kernel bindingを実確認。固定API100c1bb／元a2eの3要求はwarmup候補保持、v7は6欄中field1だけで旧raw同一、v8は23秒signal14で未返却。1load／3開始／2stop、速度改善・全欄保持・意味品質は未証明。global base／商品source／通常選択を維持し、通常採用なし。version8保存済み。** [実結果・原本・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-optional-kernel-diagnostic-20261105)。
+> **11/6・分析の継続（第9回§215）：元a2e/v7の完全1・2・3記録を各一度生成し、全1/2/3欄を返却。新3stop/1load/学習0、共有model phase43.443701秒で60秒内・各23秒内。1/2記録は希望rootの誤kindで未解析、3記録だけ過去行動＋現在希望の2node/各3根拠・辺0へ到達。既知同文fixtureのprefix比較で一般品質・通常全量取得は未証明、元86教師の希望5・最終18更新の希望0、学習はv4のみとCPU確認。通常採用なし。** [実結果・原本・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-cardinality123-20261106)。
 
 > **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 

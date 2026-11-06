@@ -4900,3 +4900,49 @@ KW00は主体省略と否定を元rawのまま保つ候補確認で、商品map�
 実試行ZIPは74,610bytes／SHA28eef49287999fb1f946a15a19e8fccc8cb1c573a11eb52d5313103e0708176c、16member／全15manifestのbytes・SHA／CRCを照合。同一非公開原本のversion8へ追加保存済み（32,054,078bytes、SHA0f5f3bb3e0a42cd28458c88bee864063aba352c2ac3133ec536f02c7f6766bb8）。 [非公開原本](https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal)。モデルraw・原文・人物・private stateを公開GitHubへ置かない。
 
 [本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/optional_kernel_results.json)。
+
+
+<a id="analysis-cardinality123-20261106"></a>
+## 215. 11/6 — 完全1・2・3記録の全欄を返却、希望の分類は件数で不安定
+
+Mashの分析残件・Jupyter直接接続指示を受け、設計図・全file地図・最新§214と実sourceを照合して継続した。既存Pod n1c0emcf17xs0uのJupyterへ直接接続し、RTX4000 Ada・開始時2MiB/0％を確認。通常経路を変更せず、既存の原source証明と研究v7を使う、一記録／二記録／三記録の一回比較を実行した。前回の完了／失敗runは再起動していない。
+
+固定APIは100c1bb65ccaa02f1253f9a43fc33cc9bba3dda4で、現作業branchの5c9606を配置した試験ではない。元a2e/config006e・Qwen3.5-4B revision851bf6e・既存pins・既存隔離optional targetを保持した。runnerは[12323274](https://github.com/MassyuRed/Cocolon/commit/12323274698241fcdc16c689e705aae783fb4d0e)、SHA05a4b67ee1d3de76b5d7882f91e9a318bdb9ebcd80f3f670a3720f3130f07657。fresh rootでCPU準備と実モデルを一度ずつ実行した。通常profile／planner／batch／transportの許可集合は拡張していない。
+
+### 実入力と時間
+
+既存B20 source_snapshot(20)の先頭完全1／2／3memberと同じ原本を使い、原文・元記録時刻・カテゴリ・感情情報・owner・期間・synthetic guardを変更しなかった。各recordはmemo一欄に過去行動と現在希望を持つ同文fixtureで、二欄や適格ANSWERの実生成試験ではない。三条件は重なるprefixであり、独立した三題材や六例の精度へ換算しない。
+
+| 条件 | prompt token／本文bytes | 要求／返却欄 | 生成秒 | 同じ原応答の意味採用 |
+|---|---|---|---|---|
+| N1・1記録 | 3738／17755 | 1／[1] | 8.246609 | 希望rootをACTIONへ誤分類。mapなし・mapped0／unparsed1 |
+| N2・2記録 | 3837／18152 | 2／[1,2] | 10.652727 | 両欄の希望rootをACTIONへ誤分類。mapなし・mapped0／unparsed2 |
+| N3・3記録 | 3936／18549 | 3／[1,2,3] | 20.340851 | 過去行動と現在希望を分離。2node・各3記録／3根拠、mapped3／unparsed0、edge0 |
+
+全3応答はstopで、出力2048／context8192／本文65536以内、各要求23秒以内。生成計39.240188秒・load3.635797秒、load＋三要求＋候補解析／非生成再読を含む共有phase43.443701秒で60秒以内。親child wall56.175908秒はruntime preflight等も含む。CPU準備8.460682秒とarchive回収等は別。実HTTP／通常ensure／全20記録／全履歴の60秒成立や、速度改善倍率へ拡張しない。
+
+### 全rawと文章・図の確認
+
+全3source・全3raw・全3候補を全文確認。原raw・元Responseの修復、欠落欄の複製、誤kindの付替え、成功までの再生成は0。三件とも構文候補と候補stateの非生成再読は成立したが、意味成功とは区別した。
+
+N1／N2の原引用には希望の語尾が残る。「実行済みの文章へ書き換えた」とは判定せず、誤ったnode_kindのままconsumerが採用しない結果とする。N2では対象子もN1／N3より少ないが、rootに原文は残っており、これを希望本文の欠落へ置き換えない。
+
+N3はSELF／positive／fact／pastの行動と、SELF／positive／wish／current_inputの希望を保持する。既存の文章・図は、実行済み行動と仕事を続ける希望を区別し、各nodeへ三記録の根拠を持たせる。場面・役割・結果・段階間のつながりは未確定、因果／順序／記録間の意味辺は0。カテゴリを役割へ変えていない。元rawを0モデルでbuild_cumulative_mapへ渡した直接offline結果で、DB保存・current／月次の一巡ではない。N3のserialized projectionは生成を禁止した状態で既存saved-wire validatorへ通したが、DB readerやimmutable map全体の再開成功へ拡張しない。
+
+### 元a2e教材のCPU監査
+
+[既存pair8結果](../observation_learning/trials/2026-11-01-analysis-model-fields/material_v4_pair8_results.json)と同じ元pack SHA30afde6a0735aac0b5f23e737b2b80c72e7dd65ba0cdbe4bc791886473f4bbf1／runner732d7602／source plan1500481dを照合し、86教師と実18更新順、a2e/config006eの系譜を確認した。
+
+86poolには希望の正解5件（AT04／AT12／AT19／AT29／BT08）があり、全てfield1の肯定現在・将来希望→ATTENTION_OR_THOUGHT。assistant正解の過去希望／否定希望は0。一方、systemの説明例には過去希望→ATTENTIONがあり、説明例と正解教師を混同しない。最終18更新には希望0・ATTENTION根0（ACTION12／ROLE14／RESULT2／WRITTEN_UNKNOWN6）。正しい区別がpoolにあることと、その18更新で直接復習したことを分け、継承元9dcで未学習だったとは断定しない。
+
+86教師は全てv4 system（SHA c0a36d5c…）、今回のv7はSHA a2edc79a…で、v7教師0。v7はv4の完全な末尾追加ではなく、動作主と所有者の段落変更、所有対照・担当／決定の説明追加を持つ。B20/Nの完全一致本文はpool内0。この差だけで誤読の単一原因とは断定しない。[本文なし監査](../observation_learning/trials/2026-11-01-analysis-model-fields/cardinality_teacher_audit.json)へ記録した。監査の新model load／生成／学習は0。
+
+### 保全・稼働・次の一作業
+
+全19 UTF8原本のbytes／SHAと元manifest16fileを照合し、raw・request／response・候補state・失敗のない実log・N3文章図・元86source pack・全読結果を[非公開原本](https://chatgpt.com/library?file_id=libfile_fde3_f-d636c3ec5d6881919b861f5ed6b4bf5f_2f7470f963808191aaebf050935e72de&account_id=personal)version1へ保存した。新ZIPは92,732bytes／SHA90a0480b9875c5c295907633f097d4cd6fc802c627ae5b7e0adf131c1e6bbdd9・23member／CRC正常。Jupyterの通常downloadは失敗したため、表示された原文を回収し、制御文字を含む各bytes／SHAを照合した。元ZIP binaryそのものの回収一致は主張せず、全元fileを保持するlossless bundleとして保存した。本文・model raw・重みを公開GitHubへ出さない。
+
+Renderは読取確認で既存API2c259f0e／dep-dbk7l2uc6qcc73dp5d70がLive・自動deploy OFF、今回sourceは未配置。SupabaseはACTIVE_HEALTHY、最新migrationは11/1累積mapで、本人row取得／DB write0。これは今回のschema全面再監査ではない。
+
+STRUCTURE_MAP_DELTA_NONE（既存研究受口・作者・意味型・通常契約を維持）。新3stop／1load／学習0、通常採用／次学習初期の新規採用／本番write／merge／build／端末作業0。実環境はCodex Work／GPT-6と同環境の独立read-only reviewで、Pro受入れではない。primary outcomeはBLOCKER_NARROWED。
+
+次は、今回の評価本文／rawを教師へ転用せず、同じ主体・述語で事実と希望を区別する小さな独立教示と、既存5希望の保持を組み合わせるCPU準備。過去／否定希望と、v4／v7入力整合の不足を明示してから最小の一回学習比較を定める。今回の3要求を再実行せず、consumer再分類・raw修復・通常全量接続を先に進めない。一般の本人基準・暗黙役割・記録間意味、二欄／最大3回答を含む全欄出力、IF／Saved・実機／本番採用は引き続き残件。
