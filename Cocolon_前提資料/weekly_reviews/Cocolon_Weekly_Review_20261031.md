@@ -5205,3 +5205,42 @@ Analysisは主2pill44・日週月短表示と更新日を折返し行へ、現�
 §229／UI設計§27の製品21＋test2＋資料3fileを `b64cfa7692d464fbcf047263f1113c6feec96690` に保存。全26file全文／SHA再読込、親／変更path集合／head、比較HTML／sourceの不変を確認してから、[既存iOS #74](https://github.com/MassyuRed/Cocolon/actions/runs/42176982238)を**15:50:24 JSTに一回**dispatchし、**16:06:27 JSTにsuccessで完了（16分03秒）**。run42176982238・attempt1、version1.0／7401。job127757593740の全19step、署名Archive／実Archive写真Usage・Add目的文検査／IPA export／TestFlight Uploadが全てsuccess。run／job API・候補head・ブラウザSuccessを照合した。artifact一覧0件、巨大ログ本文APIは再取得していない。
 
 今回の修正一式のapp build一回・途中群別build／rerun0、workflow・依存・署名設定の変更0。built sourceはb64cfa76に固定し、資料のみ48e59ff9と後続commitを区別する。[UI設計§28](../designs/ui/material-ui-design.md#ui-preview-correction-ios-7401-20261106)へ最終結果を置換記録した。Apple側processing・内部配布・本人端末7401表示／原本との一致は未確認。3theme／文字拡大／全画面と状態の実機確認は引き続き残る。追加Android／Render／Supabase／GPU操作0。
+
+
+<a id="analysis-wish-boundary-v9-20261106"></a>
+## 230. 11/6 — 学習なしの希望境界比較で現在・過去希望2例がmapへ到達
+
+Mashの分析残件・Jupyter直接接続指示に基づき、全体現在地・作業ルール・設計図・全file地図・最新§216（後続UI§217〜229も保持）を確認して継続した。PR30開始head662cf49／API PR3開始e8f026eをfresh照合。§216の失敗は、願望root／過去修飾、否定引用、対象scopeの三群へ分けた。v7にも過去希望の既存架空例はあるため「希望が一切教示されていなかった」とは判断しない。説明不足は検証仮説で、前回23更新や不採用d22cを再実行・次初期値へ採用していない。
+
+### 差分と一回比較
+
+[API17c7078f](https://github.com/MassyuRed/mashos-api/commit/17c7078f2fb867f69e966b8c0b9c384fa2e47a1d)の既存3pathで、明示研究用 `selected_material.v9` を追加した。v7の全system＋希望／実行事実・希望過去語尾・完全な否定希望引用の319字だけをsystem末尾へ追加。user/material・原sourceは同一で、profile／request_ref／response digest／private保存stateを別identityへ分ける。cumulativeの明示callerと保存再読で同じcategory contextを再構築する。意味型・source compiler・typed consumer・作者を変更せず、原rawの修復／誤kind付替え／source-only代替を行わない。通常constructor／既定v4／planner／batch parentの許可集合はv9を選ばない。
+
+元a2e/config006e、Qwen3.5-4B revision851bf6e、既存pins／隔離optional targetを保持。既存10入力のv7 baseline rawを再利用し、同じ現APIで0モデル再読して比較元を固定した。v9側だけ各一回生成。評価本文・rawの教師化0、追加学習0、新重み0。研究用API checkoutと新rootを分け、全体240秒・各要求23秒・最大10生成/1loadで一度だけ実行した。runnerは[dc085ef9](https://github.com/MassyuRed/Cocolon/commit/dc085ef9ef7764b5b3a0749d345a4266352e5c6a)、SHA `c3a955be796eb0fc2d45822d089822f5acc007e87a531e514a5eb57ecdba6028`。
+
+| 確認 | 実結果 |
+|---|---|
+| CPU入力照合 | 10request、user/material不変、別ref、最大3938入力token＋2048<8192。モデル0 |
+| 実4B | 10要求／10stop／11返却field／1load／学習0、親70.82114694919437秒／child65.92518838401884秒、exit0 |
+| 生成時間合計 | 51.181330990977585秒。load／準備／保持／通信費等を含む総請求の測定ではない |
+| 旧v7→v9 map | 同じ10構成で6→8。既知の最小対照であり、独立題材数・一般正解率ではない |
+| E02／E03 | 現在希望と過去希望のrootがATTENTIONへ改善、E03の誤WRITTEN_MODIFIERなし。SELF／positive／wish／current_inputまたはpastを保持し各1node・edge0・未解析0 |
+| E04／E05 | rootの希望分類は改善したが、NEGATIONが短い接尾辞のままでtyped未対応。否定・過去の文字列自体は原quoteに保持 |
+| 旧成功6構成 | E01／E06／AE05／AP07_v7／AP08_v7／OP02_v7のraw・全graph・文章／図は、別artifactのprojection_ofを除き完全一致 |
+
+E05の先行肯定行動ではEXPLICIT_ACTOR注釈が欠落した。主体の文字列は元root quoteに残っており、「主語を削除」「他者へ改変」とは記録しない。E04/E05は失敗を保持し、成功までの再生成やNEGATIONの修復をしていない。N1/N2対象scope・N3を今回再生成・改善へ数えない。
+
+全10原文／新旧20rawと8文章・図をrootと同環境read-only reviewerが全文確認。保存candidate10件はcompiler／作者を禁止して完全一致で復元。8typed mapも0モデルの直接offline rebuildで本文・図・graphを確認したが、これはDB/current／月次readerの成功ではない。原欄の根拠、主体省略の未確定、担当と決定の区別、明記順序だけの辺、場面／役割／結果・段階間の接続不明を保持する。
+
+### 検証・保全・稼働
+
+- local関連5moduleは630 PASS／PostgreSQL WASM環境未設定19 SKIP／既存warning1、131.27秒。Jupyterのactor-profileは29 PASS／warning1、5.22秒。29は各広いsuiteに含まれるため重複加算しない。
+- 最初の追加検査はdefault categoryを通常batch v4と取り違えた期待1件と、cumulativeの研究profile context再構築漏れ4件で失敗。期待を元selected_categories.v1へ修正し、明示v9の再構築／保存判定だけを既存category集合へ接続した。consumerの意味条件を緩めていない。
+- [CI42182501217](https://github.com/MassyuRed/mashos-api/actions/runs/42182501217)／job127775124816は全step success。生成保存2434 PASS／既存SQL1 SKIP／12048subtests・393.16秒、共有owner1 PASS、累積/API/jobs302 PASS・153.77秒、隔離SQL201原本／15月参照。local19 SKIPとCIの実SQL成功を同じ検査の重複成功へ換算しない。
+- [非公開原本](https://chatgpt.com/library?file_id=libfile_fde3_f-6d9d811d887c8191b67bc0ada201cde4_2f7470f963808191aaebf050935e72de&account_id=personal)は39member／361372bytes／SHA `3f923a105d87bb65208436788db29a961acce835a9ab073fa7711c02033a5c57`。CRCと全member照合済み。元28file＋manifest原本、公開source5file、新旧raw／request／全図／log／replay／reviewを保持。通常ZIP downloadが失敗したためEditorの全文からlossless回収し、generate.logの単独CRを追加回収して元manifest全28fileのbytes／SHAに一致させた。元ZIP binary自体の回収一致は主張しない。公開GitHubへ原文・人物・rawを出さない。
+- APIの3変更pathはGitHub blobとlocalが一致。Jupyter実行前後の固定API／source／a2e／config／optional target不変。終了時RTX4000 Adaは2MiB／0％。レンタル自体は保持し、新rental／Pod管理／port変更0。
+- Renderは既存workspace読取許可とfresh一覧を照合し、現在liveはAPI2c259f0e／dep-dbk7l2uc6qcc73dp5d70（11/2 20:58:13 JST）を確認。SupabaseはACTIVE_HEALTHYと分析4table存在／RLS有効をread-only確認。本人row／SQL実行／設定変更／DB変更／本番配置／merge／RN build0。
+
+**v9は局所研究候補として保全し、通常採用はしない。** 全体現在地・current map・全file地図・既存trialを差分更新。STRUCTURE_MAP_DELTA_PRESENTはprivate instruction/profile/ref/state variantと明示cumulative再構築だけで、公開DTO／DB schema／意味型／作者／通常選択は不変。実環境はCodex Work／GPT-6＋同環境のread-only reviewで、独立Pro受入れ／Mash Product Readではない。
+
+次は、今回評価本文やrawを転用せず、現在／過去の否定希望を完全な述語で引用する独立説明例をCPUで作り、明記主体の保持と合わせて次の最小比較を定める。今回runを再起動せず、v9を既定／通常transportへ接続しない。対象scope、一般の本人基準・暗黙役割・選択基準・記録間意味、全欄補足／通常時間内全量、IF／Saved・実DB／本人端末・商品受入れは残件。

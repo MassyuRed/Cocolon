@@ -2279,3 +2279,13 @@ WH04の元rootは既に否定を保持しており、旧consumerの肯定限定�
 | `fact_wish_contrast_results.json` | 本文なし集計。新18とcached7、未返却1、CPU接続の効果と学習の未達を分離 |
 
 原本と全重みはweeklyの非公開原本へ保存。完了／失敗runは再実行しない。次の誤kind／否定引用／対象範囲の検討へ戻り、d22cは通常／次初期へ採用しない。
+
+
+<a id="analysis-wish-boundary-v9-20261106"></a>
+## 11/6 — fixed-a2e・学習なしのprivate v9比較
+
+[週次§230](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-wish-boundary-v9-20261106)と `wish_boundary_v9_results.json` が実結果。`wish_boundary_probe.py` はprepare／generate／replayの一回用。既存private prior rootから10源文とv7 baselineを固定し、v9側だけ10stop／1load／学習0、親70.821147秒／exit0。旧raw再生成0、d22c不使用。現在・過去希望2例が新たに文章・図へ到達し、旧成功6の全raw／graph／投影を保持。否定希望2例は完全なNEGATION引用不足が残り通常採用false。
+
+原本は[private bundle](https://chatgpt.com/library?file_id=libfile_fde3_f-6d9d811d887c8191b67bc0ada201cde4_2f7470f963808191aaebf050935e72de&account_id=personal)。元全28fileとmanifest、公開source5file・review等をlossless保全した39member。通常download失敗後にEditorの全文から回収し、単独CRを含むlogを元manifestへ再照合。原ZIP binary回収ではない。
+
+完了run／prepareの同root再実行禁止。次は評価本文を教師へ転用せず、現在／過去否定希望と明記主体保持の独立説明例をCPU準備する。既定・通常transport／planner／batch、意味consumer／作者・DB／RN／本番設定は変更しない。一般の本人基準／暗黙役割・選択・記録間意味、N1/N2対象scope・全欄補足／全量処理・IF/Saved／実DB／実機・商品受入れは残件。

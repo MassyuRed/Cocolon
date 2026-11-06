@@ -3747,3 +3747,15 @@ API5c9606、Jupyter241 PASS、CI42109915846全工程成功。fresh replay2でWH0
 | 同 `fact_wish_contrast_results.json` | 本文なし集計・部分失敗と二欄接続の区別 |
 
 全102元fileと全重みは非公開保存。新18返却／cached7を確認、afterN3は23秒未返却。二欄E06は同じ原応答を0モデルで接続した範囲。一般の本人基準・役割・選択・記録間接続、全補足、IF／Saved／実DB／実機は未完了。
+
+
+## 11/6 §230 — 希望境界研究profileと実ファイル対応
+
+| path | 既存責務への差分 |
+|---|---|
+| API `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py` | 明示v9はv7 material／全指示＋319字の希望境界tail。別request／response／private state variantと非生成再読。意味採用・raw修復は追加しない |
+| API `ai/services/ai_inference/analysis_cumulative_service.py` | 明示v9のcandidate／typed map／保存再構築で同じcategory contextを選ぶ。通常transport／既定v4／planner／batch許可集合は拡張しない |
+| API `ai/tests/test_analysis_model_actor_profile.py` | v7 user／default保持、v7/v8/v9間のcross-response／state拒否、四希望形の元graph・保存非生成再読、通常transport／batch拒否 |
+| trial `wish_boundary_probe.py`／`wish_boundary_v9_results.json` | fixed-a2e・after-only10・学習0／1load／240秒の一回比較と、本文なし結果／private原本参照 |
+
+API17c7078f／CI42182501217全工程成功。現在・過去希望2例が文章・図へ到達、旧成功6保持、否定希望2例は未対応。private profile/ref/state variantをSTRUCTURE_MAP_DELTA_PRESENTとして記録し、一般意味品質・通常採用／本番配置は未成立。[全結果・再開点](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-wish-boundary-v9-20261106)。

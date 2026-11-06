@@ -1,4 +1,4 @@
-> **11/6・分析の継続（第9回§216）：Jupyterで23更新を完了し18応答を返却、最後の三記録要求は23秒で停止。願望kind・否定引用・対象範囲の不整合が残り、新d22cは不採用。別途、保存済み25応答を0モデルで照合し、同じ二欄原応答を事実＋希望の2node／edge0へ接続する修正e8f026eを確認。関連398成功・1skip、本番未配置。** [実結果・原本・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-fact-wish-fields-20261106)。
+> **11/6・分析の継続（第9回§230）：Jupyterで同じ4B重みの10応答を追加学習なしで比較し、現在／過去の希望2例が文章・図へ到達。既存成功6例は生応答・本文・図を保持し、到達6→8/10。否定希望2例の引用不足が残るためprivate material.v9は通常未採用。関連CPU630成功・19skip、GitHub CI全工程成功。保存候補10件の非生成再読と8図の再構築までで、DB/current/月次reader・実機・本番配置は未実施。** [実結果・原本・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-wish-boundary-v9-20261106)。
 
 > **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
@@ -1324,3 +1324,10 @@ WH04の元rootは既に否定を保持しており、旧consumerの肯定限定�
 [実結果・原本・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-fact-wish-fields-20261106)。APIe8f026eの`intent_compiler._model_complete_observed_plain_wishes`は、全sourceを一回compileしたgraphを保ち、原入力1record／1envelopeのmemo／memo_actionを1–2欄、各nodeの唯一根拠・欄別全節／全unitで証明する。原raw・actor・肯否・modality・時点を補わず、場面／役割／結果・接続未確定とedge0を保持する。未読／伝聞／他者／推測／複数根拠集約等は新proofで採用せず、既存partialのSOURCE_SCOPEは維持。補足回答は今回対象外。
 
 同一E06原応答をJupyterで0モデル再読し、以前未接続だった二欄が2node・mapped1／unparsed0へ到達。mock保存DTOはcompiler／作者禁止で再読一致。一般の役割・選択基準・記録間理解や実DB／端末の受入れへ広げない。398成功・1skip、新23更新候補d22cは意味不整合と最終要求未返却で不採用。通常profile／型／作者／経路／schema／RNは維持、source修正未配置。STRUCTURE_MAP_DELTA_PRESENT（原欄proof範囲）。
+
+
+## 11/6 §230 — private v9希望境界の明示比較
+
+[全結果・原本・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-wish-boundary-v9-20261106)。API17c7078fは `semantic_admission.AnalysisModelQuotedParentUnitsInput.messages` でv7全指示とuserを保ち、希望と実行事実・過去希望・完全否定引用の説明だけを末尾へ追加する研究用v9を持つ。profile／request_ref／messages digest／private state variantを別にし、`analysis_cumulative_service`の明示callerと保存再構築へ同じcategory sourceを渡す。既定v4、通常transport／planner／batch許可は不変。source compiler／typed consumer／作者・公開DTO／DBは変更しない。
+
+元a2e・学習0の一回10stop／1load・親70.821147秒で、既知最小対照の現在／過去希望2例が各1nodeの既存文章・図へ到達（同じ10構成6→8）。旧成功6のraw／全graph／本文／図を保持。否定希望2例はNEGATIONの完全述語不足、混在文の先行行動に明記主体注釈欠落が残るため通常未採用。保存candidate10は非生成再読、typed8はoffline rebuildでありDB/current／月次の成功ではない。local630 PASS／SQL依存19 SKIP、CI全工程success。STRUCTURE_MAP_DELTA_PRESENTはprivate profile/ref/stateと明示再構築の範囲。通常採用・本番未配置、一般の役割／本人基準／選択／記録間意味とIF／Saved等は引き続き残件。
