@@ -1,3 +1,5 @@
+> **11/6・最新§237：元23教師のrow／source／targetを変えず、現c150＋旧profileとv10をCPU照合。両条件candidate23／非生成reload23、typed12／unsupported11。固定local tokenizerは最大input4289／full4510／tail225、prefix・EOS・maskと予算は全件適合。v10 private packを準備・回収したが未採用、LM／学習／DB0・評価教師化0。正しい過去希望F03／F08は既存教師にある一方、選択a2eのfinal18更新には含まれず、学習改善は未証明。新runnerはsource完成・実行前review済、prepare／run未実行。** [実結果・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-existing-teacher-v10-cpu-20261106)／[本文なし集計](existing_teacher_v10_cpu_results.json)。STRUCTURE_MAP_DELTA_NONE（CPU診断・準備のみ）。
+
 > **11/6・最新§236：Jupyter直接接続復旧後、元v10／a2eで実10stop／1load／学習0、24field・最大入力4502。baseline API5efdは7要求／10mapped record／16node、3strict拒否。実projectionのmock RPC current／月次28read一致。同rawの位置束縛修復c1502415はHC01だけ4node／mapped2／未解析1へ変え、不正pastwish modifierと他9結果は保持。local497 PASS＋11subtests、CI42217456387全工程success。修正版Jupyter同raw比較はexit0、保存reader32read一致。** [結果・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-heterogeneous-v10-live-20261106)／[本文なし集計](heterogeneous_scope_v10_results.json)。STRUCTURE_MAP_DELTA_NONE（既存位置束縛修復）。
 
 > **11/6・§235時点：API 5efdafabでordinary補足自身の単一SELF希望を限定接続。新88＋既存232＝320 PASS、CI42205450639全工程success。`replay_heterogeneous_scope_cpu.py`は元合成packetを変更せず10/10・候補reload10／mock RPC保存reader40readを確認。HC09はdb6での既回復を保持。新モデル／raw取得／DB0、Browser状態取得とJupyter直接タブ作成が各300秒で未応答、Jupyter到達・新結果は当時未確認・5時間依頼未完了。** [当時の範囲・原本・再開点](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplement-wish-own-evidence-20261106)／[本文なし集計](supplement_wish_own_evidence_results.json)。後続の実モデル結果は§236を参照。
@@ -2366,3 +2368,26 @@ CPU replayは `--api`／`--prior-json`／`--output` を取り、元report SHA `4
 API [c1502415](https://github.com/MassyuRed/mashos-api/commit/c1502415cc5d0e4fb9ff1fd5e1fcbe7a1af848b9) は元の全field一意引用を優先し、曖昧なv10 direct-root CONTENT_TARGETだけ、全fieldで一意な親引用内へ一意束縛して絶対座標へ戻す。初案の親内強制による合法barepredicate回帰はレビューで検出し、v2で既存global一意位置を保持する方式へ訂正、初期記録も保存した。同じ実rawのCPU比較でHC01は候補成立・typed4node／mapped2／未解析1となり、日記pastwishの不正modifier拒否と他9件の全graph／count／拒否を維持。新test13methodを含むlocal497 PASS＋11subtests／FAIL・SKIP0、35.19秒。CI42217456387全工程success。新型／文法／prompt／作者／通常profile・transport／DB／RN変更0、STRUCTURE_MAP_DELTA_NONE（既存admission位置束縛修復）。
 
 修正版のJupyter同raw比較はexit0、8生成map（うち1部分成立）の保存reader32readが一致した。baseline28readと混同しない。追加モデル生成はせず、元pack／raw／baseline reader出力と訂正前の失敗を保持し、別consumer結果を別outputへ回収する。一般意味品質・通常採用・本番／実DB／本人端末、本人基準／暗黙役割／判断・選択／記録間意味・全量処理・IF／Savedは残件。
+
+
+<a id="analysis-existing-teacher-v10-cpu-20261106"></a>
+## 11/6 §237 — 既存23教師のv10 CPU監査と入力準備
+
+[週次§237](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-existing-teacher-v10-cpu-20261106)／[本文なし集計](existing_teacher_v10_cpu_results.json)が実結果。固定元packの23教師について、元row・source／owner・target UTF8 bytesを保ち、現API c150で元v4／v7条件とv10を比較した。歴史的APIの再現ではない。両条件ともstrict候補23／非生成再読23、typed12／unsupported11であり、教師targetの受理とLM自由生成の品質を区別する。元正教師F03／F08には肯定過去希望があり、F05には否定過去希望がある。F03／F08は選択a2eのfinal18更新に含まれず、旧F23／MWの学習候補も不採用のため、現モデルの学習改善はまだ未証明。全祖先での未学習と断定しない。
+
+| 公開source | 役割・固定identity |
+|---|---|
+| [audit_existing_teacher_v10.py](audit_existing_teacher_v10.py) | 既存targetを新しいrequestへ診断用束縛し、候補／typed／非生成再読と固定tokenizerをCPU監査。15012bytes／SHA `aa778c9225c9b87599c4620d3807f33d73077c662b5b837e232b84b556fac8c1`、checkpoint `bcc541f` |
+| [prepare_existing_teacher_v10.py](prepare_existing_teacher_v10.py) | 元target・sourceのままv10 messages／request_ref／encodingだけを新しいprivate rootへ準備。13666bytes／SHA `caca683c0391092e0815f9d5a054efc587b69b2990b801d299b7fcd120c91add`、checkpoint `976ddf`。validate modeはtokenizer未確認のreceiptだけでpack／encodedを作らない |
+| [existing_teacher_v10_cpu_results.json](existing_teacher_v10_cpu_results.json) | 本文なしのidentity／件数／token・mask／旧更新履歴・未採用／保全先を分離した集計 |
+
+Jupyterの実tokenizerは最大input4289／full4510／assistant＋EOS225。元／v10のrequest・guard・user材料一致、prompt prefixとtarget＋EOSの正確な復号、prompt全label=-100／target＋EOSだけ有効、2048出力枠・8192 context／training長を全件確認した。preparedのpack／encoded／audit／manifestを回収し、23target bytes、maskとmanifest／stdoutのhashを照合。入力を上書きせず、新rootと排他的作成を使う。exit0とmanifest照合までを準備完了条件とする。
+
+[非公開原本](https://chatgpt.com/library?file_id=libfile_fde3_f-729bd8856e6481918dbff31e0e1565c0_2f7470f963808191aaebf050935e72de&account_id=personal)は同ID version3、77member／710442bytes／SHA `ed9e3686cb180e7d61f216e9b398cc3dd87701491752df8239baee75f98f3a06`。以前の実10応答／修復／reader／CI原本を保持し、新audit／prepare原本を追加した。新private packは不採用、LM load／生成／更新／DB0、評価rawの教師化・MW assembly利用0。新runnerはsource完成・実行前review済、prepare／run未実行で、成功や学習改善を先取りしない。§236の実10stop／1load／学習0、修正版same raw32readとCI42217456387全工程successは別の確定結果として維持する。STRUCTURE_MAP_DELTA_NONE。一般意味品質・通常採用・本人基準／役割・判断／記録間意味・全量処理・IF／Saved・実DB／実機は残件。
+
+
+### §237後続source — 既存23／v10の未実行一回plan
+
+[trial_existing23_v10.py](trial_existing23_v10.py) は42741bytes／SHA `b3e386fdc7bfc812552a9d4ecc5073e3266600eba0ab6f705d66b786e4f4c83a`。source完成・実行前review済で、まだこのrunnerのprepare／runは実行していない。CPU23 audit／prepareの実績とは別に、最大23更新／NLL20 forward／after14生成／2load／共有900秒・各生成23秒／retry0のplanを保持する。元HC01–10＋v10保持control4の原本は照合済みだが、controlは既知の保持確認でblind評価ではない。
+
+原本が不足すればprepareで停止し、timeout時は途中値と未知を残し、終了GPU状態を確認する設計。元target／評価rawを変更せず、候補／通常／次初期値へ自動採用しない。新runnerの学習／LM生成は0であり、source完成を実行成功や学習改善へ数えない。[現在のplan・未完了](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-existing-teacher-v10-cpu-20261106)。

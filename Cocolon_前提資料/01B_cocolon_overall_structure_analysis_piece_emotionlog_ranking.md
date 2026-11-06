@@ -1,3 +1,5 @@
+> **11/6・最新§237：既存23教師のCPU audit／v10入力準備を完了。元target／source不変、candidate23／非生成再読23、typed12／unsupported11、実tokenizerとmask／予算を確認。LM／更新／DB0・private pack不採用、新runnerはsource完成・実行前review済、prepare／run未実行。新2診断sourceと本文なし集計の実file地図は末尾§237。** [結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-existing-teacher-v10-cpu-20261106)。STRUCTURE_MAP_DELTA_NONE（CPU診断・準備のみ）。
+
 > **11/6・最新§236：固定v10／a2eの実4Bは10stop／1load／学習0。baseline API5efdは7要求が文章・図へ到達し、保存projectionのmock RPC28read一致。HC01の引用位置曖昧を既存admissionだけで修復したAPI c1502415は、同rawのCPU比較で4node／mapped2／未解析1へ到達し、不正modifierと他9件の結果を保持。local497 PASS＋11subtests、CI42217456387全工程success。修正版Jupyter同raw比較はexit0、保存reader32readも一致。** [実結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-heterogeneous-v10-live-20261106)／[本文なし集計](observation_learning/trials/2026-11-01-analysis-model-fields/heterogeneous_scope_v10_results.json)。実file差分は末尾§236。STRUCTURE_MAP_DELTA_NONE（既存の位置束縛修復）。
 
 > **11/6・§235時点：API 5efdafabはordinary本人補足の単一SELF希望を、自身の完全根拠で既存consumerへ接続。実file地図は末尾§235、320 PASS／CI42205450639全工程success。同packet10/10・候補reload10／mock RPC保存reader40read、モデル／DB0、Jupyter新結果は当時未回収。** [当時の範囲](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplement-wish-own-evidence-20261106)／[本文なし集計](observation_learning/trials/2026-11-01-analysis-model-fields/supplement_wish_own_evidence_results.json)。STRUCTURE_MAP_DELTA_PRESENT（既存consumer責務の限定拡張、公開型／作者／文法／DB／RN／通常profile・transport不変）。
@@ -3829,3 +3831,17 @@ API [5efdafab](https://github.com/MassyuRed/mashos-api/commit/5efdafab93f555dc77
 実4Bは24field／最大4502入力token、10stop／1load／学習0、child128.340060778秒／parent134.238438373秒・exit0。baseline5efdは7要求／10mapped record／16node、HC01は引用位置曖昧、HC03／10は重複JSON keyで拒否。baselineの同raw f50比較と候補非生成再読、7成功×current／月次各2入口＝mock RPC28read一致を確認した。
 
 位置束縛修復後の同raw CPU比較はHC01だけ候補成立・4node／mapped2／未解析1へ変わり、日記の過去希望に付いた不正modifierは拒否、他9件の全graph／count／拒否を保持。初版の親内強制による合法bare predicate回帰はレビューで検出し、全field一意優先へ訂正した。初期記録は保持する。local497 PASS＋11subtests／失敗・skip0・35.19秒、CI42217456387全工程success。修正版のJupyter同raw比較はexit0、保存reader32read一致。新型／文法／prompt／作者／通常transport・既定／DB／RNの差分0、STRUCTURE_MAP_DELTA_NONE。一般品質・通常採用／実DB／本人端末／IF・Savedは未成立。[最新記録](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-heterogeneous-v10-live-20261106)。
+
+
+## 11/6 §237 — 既存教師のCPU監査・準備source地図
+
+| 実path | 今回の責務 |
+|---|---|
+| `Cocolon/Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/audit_existing_teacher_v10.py` | 固定23既存teacher／targetを現c150の旧profileとv10へCPU束縛し、候補・typed・非生成再読／固定tokenizerを監査。15012bytes／SHA `aa778c9225c9b87599c4620d3807f33d73077c662b5b837e232b84b556fac8c1`、checkpoint `bcc541f` |
+| `Cocolon/Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/prepare_existing_teacher_v10.py` | 元target／sourceを維持し、v10 messages／ref／encodingだけを新private packへ準備。13666bytes／SHA `caca683c0391092e0815f9d5a054efc587b69b2990b801d299b7fcd120c91add`、checkpoint `976ddf`。validateはreceiptのみ |
+| `Cocolon/Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/existing_teacher_v10_cpu_results.json` | [本文なし集計](observation_learning/trials/2026-11-01-analysis-model-fields/existing_teacher_v10_cpu_results.json)。23候補／再読とtyped12／未対応11、token／mask、旧学習履歴と未採用・保全先を分離 |
+
+新product owner／型／共有文法／通常profile・transport／DB／RN／作者は追加しない。固定tokenizerで最大input4289／full4510／tail225、prefix／EOS／maskと予算を照合したCPU準備であり、新学習や一般品質の証明ではない。元23target／source不変・評価教師化0・LM／更新／DB0、新private pack不採用、新runnerはsource完成・実行前review済、prepare／run未実行。正しい過去希望F03／F08と選択a2e final18更新の不一致を、教師不存在や全祖先の未学習へ読み替えない。§236のc150／CI42217456387全success・実10応答とsame raw32readはそのまま保持。STRUCTURE_MAP_DELTA_NONE。[最新結果・原本・再開点](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-existing-teacher-v10-cpu-20261106)。
+
+
+§237・未実行runnerの追加実path：`Cocolon/Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/trial_existing23_v10.py`（42741bytes／SHA `b3e386fdc7bfc812552a9d4ecc5073e3266600eba0ab6f705d66b786e4f4c83a`）。source完成・実行前review済、prepare／run未実行。最大23更新／NLL20／after14／2load／共有900秒・retry0の一回planを所有する。元HC01–10＋v10保持control4の原本照合済み、controlは既知保持でblindではない。原本不足時prepare停止・timeout途中値／未知保持・終了GPU確認・候補自動採用なし。CPU23監査／入力準備の完了をrunnerの学習／生成成功へ読み替えない。[source](observation_learning/trials/2026-11-01-analysis-model-fields/trial_existing23_v10.py)／[planと未完了](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-existing-teacher-v10-cpu-20261106)。

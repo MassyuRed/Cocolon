@@ -5517,3 +5517,40 @@ APIc150の[CI42217456387](https://github.com/MassyuRed/mashos-api/actions/runs/4
 非公開原本は同じ保存先のversion2へ更新。62member／525025bytes／SHA `446d99c0a579e8d2b6416cecf6bfc881a8d4ac4f3ed93d8046944c6bc1f83115`、CRC／全bytes一致。version0の原応答・version1の修復後比較を保持し、version2に最終CI実logを追加した。source／raw／モデルpack／両readerの元bytesは不変。
 
 本区切りは実4B原応答による補足希望接続の確認、位置束縛修復、同rawのpartial mapと保存非生成再読、回帰CIまでを完了。一般読解、通常採用／本番配置、本人基準・暗黙役割・記録間意味、IF／Saved、実DB／本人実機は未成立。5時間作業は継続し、次のCPU整合監査は既存正教師だけを使い、今回評価source／rawを教師化しない。
+
+<a id="analysis-existing-teacher-v10-cpu-20261106"></a>
+## 237. 11/6 — 既存23教師のv10整合監査とCPU入力準備
+
+§236の重複key／過去希望modifierの残件へ戻り、今回の評価source／rawを教師化せず、既存の正教師23だけをCPU確認した。元pack SHA `7acc464f1b45916a9d96bf91a27b042b71532456cec667e123d86208cf0c58e3`、全row／source／owner／target bytesを不変に保ち、現API `c1502415cc5d0e4fb9ff1fd5e1fcbe7a1af848b9` で元v4／v7とv10の条件を比較した。`original_consumer`も現c150＋元promptの結果であり、過去APIを再実行した比較ではない。
+
+### 監査と入力準備の確定結果
+
+| 確認 | 結果と範囲 |
+|---|---|
+| source／target対応 | 元messages／request_refを再現し、旧条件とv10のrequest／guard／user材料を完全一致。変えたのはsystem・それに束縛されるrefとencodeだけ |
+| strict候補／保存再読 | 同じ既存23targetをv10へ束縛しcandidate23／23・非生成reload23を確認。新モデル応答ではない |
+| typed到達 | 既存targetのCPU結果は12成立／11未対応。全意味保持・自由生成品質・一般正解率の保証ではない |
+| 固定実tokenizer | 最大入力4289／full4510／assistant＋EOS225。prompt prefix一致、target＋EOSの正確な復号、入力＋予約2048／全長8192以内を確認 |
+| label mask | prompt全体は-100、target＋EOS側だけ有効。loss_start／logits_positionsは既存lossのshiftと整合し、全23のmaskを回収後にも照合 |
+| 新private準備物 | `COMPLETE_CPU_PREPARED_NOT_ADOPTED`。v10 messages／ref／encodeを別rootへ保存し、元23target／snapshot／ownerを保持。manifestとstdoutの全hash一致、原入力bytes不変を確認 |
+
+Jupyterのauditは`COMPLETE_CPU_AUDIT`、prepareは固定cached tokenizerを使う`prepare` modeで完了した。`validate`だけのtokenizer未確認結果と混同しない。回収したpack／encoded／auditの3fileはmanifest／stdout hashと一致し、23教師・target bytesと全maskを再確認した。新root必須・排他的作成により上書きせず、終了コードとmanifest成立前の部分出力を完成扱いしない。
+
+公開sourceは [audit_existing_teacher_v10.py](../observation_learning/trials/2026-11-01-analysis-model-fields/audit_existing_teacher_v10.py)（15012bytes／SHA `aa778c9225c9b87599c4620d3807f33d73077c662b5b837e232b84b556fac8c1`、checkpoint `bcc541f`）と [prepare_existing_teacher_v10.py](../observation_learning/trials/2026-11-01-analysis-model-fields/prepare_existing_teacher_v10.py)（13666bytes／SHA `caca683c0391092e0815f9d5a054efc587b69b2990b801d299b7fcd120c91add`、checkpoint `976ddf`）。[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/existing_teacher_v10_cpu_results.json)にCPU結果と未完了を分けた。原source／target・private pack／encoded本体は公開しない。
+
+### 過去希望教師と選択重みの区別
+
+肯定過去希望の既存教師F03／F08、否定過去希望のF05は元23教師内に存在する。不正な過去希望suffixのWRITTEN_MODIFIERは既存23targetに0だった。一方、F03／F08は現在選択しているa2eの最終18更新には含まれず、過去F23／MW更新は不採用候補の履歴である。「正しい過去希望教師が存在しない」とせず、教師の存在・実更新への所属・選択重みの品質を分ける。今回のCPU整合やprivate encodeの成立だけで、追加学習の改善を実証したとはしない。
+
+今回のLM load／生成／学習更新／DB呼出しは0。新教師0、評価source／rawの教師化0、MW assembly使用0、新private packの通常／次学習初期値への採用0。新runnerはsource完成・実行前review済、prepare／run未実行で、学習実行・完走・意味改善・採用の成功へ数えない。次の実行条件はそのrunnerの実体と既存材料を確認して別に固定し、今回の準備完了から自動進行しない。
+
+[非公開原本の同じ保存先](https://chatgpt.com/library?file_id=libfile_fde3_f-729bd8856e6481918dbff31e0e1565c0_2f7470f963808191aaebf050935e72de&account_id=personal)をversion3へ更新した。77member／710442bytes／SHA `ed9e3686cb180e7d61f216e9b398cc3dd87701491752df8239baee75f98f3a06`。旧payloadを保持し、§236の実4B10stop／1load／学習0・同raw修復後32read・APIc150／CI42217456387全工程successの原本を上書きしない。今回CPU工程を追加model callへ数えず、既存CIを重複実行した成功件数にも加算しない。
+
+STRUCTURE_MAP_DELTA_NONE（既存教師の診断・入力準備だけ）。商品source／型／共有文法／通常profile・transport／DB／RNの変更0。一般読解、通常採用／本番配置、本人基準・暗黙役割・判断／選択・記録間意味、全量処理・IF／Saved・実DB／本人実機・商品受入れは未成立のまま継承する。
+
+
+### 同checkpointの新runner sourceと未実行plan
+
+公開対象の [trial_existing23_v10.py](../observation_learning/trials/2026-11-01-analysis-model-fields/trial_existing23_v10.py) は42741bytes／SHA `b3e386fdc7bfc812552a9d4ecc5073e3266600eba0ab6f705d66b786e4f4c83a`。source完成・実行前レビュー済みであり、このrunner自身のprepare／runは未実行、学習／LM生成は0。前掲のCPU23 audit／prepare完了と混同しない。
+
+未実行planの上限は23更新／NLL20 forward／after14生成／2load／共有900秒・各生成23秒／retry0。元HC01–10とv10保持control4の原本は照合済みで、4controlは既知の保持確認でありblind評価ではない。原本が不足すればprepareで停止し、timeout時は途中値と未知を保持し、終了GPU状態を確認する設計。元target／評価rawを変更せず、候補／通常／次初期値へ自動採用しない。sourceとplanの存在を、実行成功・学習改善の実績へ数えない。
