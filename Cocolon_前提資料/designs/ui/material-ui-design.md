@@ -166,7 +166,7 @@ Mashの比較理由：Day One案は情報の区切りが弱く、視線が動き
 | Piece作成 | 画像／全文を設定より前へ。操作ボタンと外枠をテーマ対応。全条件操作とidentity/tokenの引渡しを保持。作品renderer・recipe・保存画像は変更0 |
 | 設定・周辺 | 設定入口を目的が読める3行へ。テーマ選択面、共通メニュー、契約カード・説明・CTA、Nexusタブと自分のPiece入口を調整 |
 
-**現在の実装：** 下記§17の共通・起動・認証、§18の入力・応答・問い・履歴、§19の分析全体、§20のPiece・socialまでsourceを追加反映。残る個別仕上げは§15.1の5〜6群（アカウント・設定・契約、案内・tutorial・残る休眠資産）と全体横断。共通テーマの変更が届くだけで、個別画面の仕上げ完了とはしない。全群のsource反映後にまとめてビルド・配布し、3テーマ、文字拡大1.0/1.3/1.6、狭い幅、safe area、キーボード、長文・回復操作の実端末確認を行う。
+**現在の実装：** 下記§17の共通・起動・認証、§18の入力・応答・問い・履歴、§19の分析全体、§20のPiece・social、§21のアカウント・設定・契約までsourceを追加反映。残る個別仕上げは§15.1の6群（案内・tutorial・残る休眠資産）と全体横断。共通テーマの変更が届くだけで、個別画面の仕上げ完了とはしない。全群のsource反映後にまとめてビルド・配布し、3テーマ、文字拡大1.0/1.3/1.6、狭い幅、safe area、キーボード、長文・回復操作の実端末確認を行う。
 
 初回反映時の確認：Nodeの既存5入口（画面contract・IAP復元・テーマ可読性・Piece初回保存modal・preview/display）で400 PASS／FAIL0／SKIP0。React/native・Auth/HTTPは各既存testの代替を含む。テーマ検査は旧バーガンディ色・太枠・taglineの固定期待を採用設計へ更新し、3テーマの本文／補助／tonal／操作色の4.5:1を検査した。Piece testの新テーマhookと共有Buttonへのimport適応のみを行い、保存・回復の検査は維持。最初の実行は取得不足の依存fileと旧表示期待で失敗し、依存原本の取得と意図した期待更新後に上記最終実行を通過した。製品の資格判定を緩めていない。今回の全画面設計更新で、これらを再実行したとは扱わない。
 
@@ -537,3 +537,26 @@ read-only reviewで、問いmodalのhideHeaderによるspinner非表示、Emlis 
 補助reviewで、無効／選択文字、狭幅見出し、長い対象名、0件と失敗の混同、safe area帯だけ暗転しない表示、回復群の高さ、履歴headerの中央寄せと読込中非表示を補修。writerは華恋一人、補助はread-only review。
 
 **次のsource作業：アカウント・設定・契約。** その後、案内・tutorial・残る休眠資産と全体横断を仕上げる。全画面source完成までbuild保留、途中commitは`[skip ci]`。app/native build・CI native compile・Upload・配布・実機表示・Render／Supabase／GPU操作0。全UI完成・実機合格・一般Piece文章品質の改善とは扱わない。
+
+<a id="ui-account-settings-material-20261106"></a>
+## 21. 11/6 実装区切り5 — アカウント・設定・契約
+
+前回のPiece群を保存した `642069b255984ea70a11f8ae37f2d9b262391fd7` を固定起点に、C01〜C06・S01〜S04の本人／他者・各操作状態と実装を確認。全画面統一、全source完成後にまとめてbuildするMashの方針を継続する。
+
+| 範囲 | 今回の表示変更と保持した条件 |
+|---|---|
+| アカウント | プロフィール・ID検索・活動6指標を角丸24の面と文字階層へ。名前は22/30/600の主情報、ID・人数・指標は別の補助／本文へ。長名を省略せず、指標のラベルと値を縦にし、検索入力は16/27・52以上へ。左右safe area、外幅680／内側20、keyboard回避とscroll。共有は既存Share.shareのまま、IDのiconも共有へ合わせる。本人だけの編集／公開設定、他者のフォロー／申請中、非公開・ID公開条件、未使用契約hookは維持 |
+| 名前・公開設定modal | 固定top140／120・左右位置を外し、独立SafeAreaProviderと全辺safe area内の可変高scrollへ。名前編集はkeyboard回避、公開案内を入力前に常設、保存／取消を共通Buttonへ。保存・重複確認中の閉じる拒否と15文字・名前検査は保持。公開設定は説明→公開／非公開の選択へtonal＋check＋読み上げを付け、保存中の操作停止と閉じる条件を維持。非公開と推薦OFFの連動、ID公開の独立PATCHは不変 |
+| フォロー一覧 | 本人4タブ・他者2タブを同じ2列配置へ。戻る／更新は44、画面名・タブ・errorもFlatListのscroll対象、取得中も条件を読める。名前／非公開印・申請日・通知状態と、関係操作を別段／別tapへ。正常0件と取得・操作失敗を分離し、通知ON/OFF・承認／拒否／取消・解除をtonal／danger／無効面で区別。対象requestだけbusy、全申請操作disabledの既存条件は維持。300件取得・本人条件・未読・楽観更新／rollback・直接解除は不変。新しい確認やbusy制御は足さない |
+| 設定入口・テーマ | S01の3入口は既に共通のAnalysisMenuScroll／MediumCardへ接続済みで、その配置を確認。S02は3テーマの実paletteから背景／操作色の見本、現在印・tonal文字へ。保存ID・名称・順序・setThemeNameは維持。通知の親子4行は無効時も薄めず補助文字、switchは親行の読み上げ対象を一つにし、指操作のcallbackは保持 |
+| 通知の状態 | 既存の読込・保存フラグで進行を表示。4取得経路のcatchへ、現在の本人に結び付けた表示専用の失敗情報を追加し、失敗した項目名を案内する。旧ownerの遅い失敗はcancelled guardで捨て、現在本人と一致するものだけ表示。従来のtrue fallback・値・保存可否・通信・時刻／timezone・保存handlerは変えない。親OFF→子3件、親失敗→4値復元、子だけの部分失敗→OFF維持＋既存Alert、親ONで子を自動ONにしない動作を保持 |
+| その他・危険操作 | 再体験→別群のログアウト→末尾の削除を余白で区分。既存共通カードへ既定falseのdisabled／destructive表示を追加し、isBusyを実表示と読み上げへ。削除はERROR_BG／ERROR、無効は通常面／TEXT_SUBTLE。feature OFF時の説明Alert、入口と実行での本人確認、二段確認、削除→local cleanup→signOut、再体験／未読／遷移は不変 |
+| 契約・購入・復元 | 現プラン・更新／期限→販売状態→プラン→重要説明→復元／管理／規約等を同じ文字・面へ。長い見出し・プラン名／おすすめ・リンク／CTAは折返し、本文16/27、購入52・補助操作44以上。CTAの利用中／手続き中／受付停止と復元不可を明示。販売停止で復元を隠さず、既存のrestore_enabled条件を維持。管理・URL・support条件、購入判定・価格・features・note・owner処理は不変。商品情報取得失敗で利用者にBundle ID等の開発者設定確認を求める文言だけを改めた |
+
+製品11file：`screens/{AccountScreen,AnalysisMenuCommon,FollowListScreen,SettingsAppSettingsScreen,SettingsOtherScreen,SubscriptionSelectScreen}.js`、`screens/account/{AccountIdSearchSection,AccountNameEditModal,AccountProfileSection,AccountStatusSection,AccountVisibilitySection}.js`。S01本体は共通部品への既存委譲を確認し、不要な編集を足していない。新製品file・route・依存・API／DB・課金価格・公開／削除契約・AI／分析／作品画像の変更なし。既存の表示責務内の任意props追加と表示専用エラー情報で、STRUCTURE_MAP_DELTA_NONE。
+
+検証：既存4入口（rn-screen-contracts、theme-readability、iap-restore-purchases、subscription-owner-race）は **95 PASS／FAIL0／SKIP0**。追加の一時検証で、実SettingsAppSettingsScreenをReact／renderer18.3.1・Babel core7.25.2の代替native/API環境で実行し **8 PASS／FAIL0／SKIP0**。4種類の取得失敗表示と既存fallback、本人変更後の遅延失敗破棄、親OFFの親1＋子3payload、親保存失敗の4値復元／子write0、子部分失敗時のOFF維持／Alertを確認。新しい常設test framework・依存・test fileは追加しない。実API／通知配送／ストア／削除の成功検証ではない。
+
+変更JS11fileのparse・diff空白検査、4style ownerの216 role×themeのサイズ／行間／太さ一致を確認。read-only reviewでAccountの5hook・本人条件／callback、FollowListのrender前statementと全10onPress、購入／復元／管理・価格／policy等15式、通知の表示用setter以外の取得effect／依存配列と保存／削除／再体験handlerのAST一致を確認。カード上辺・長名・選択check・対象busy・非公開読み上げ・無効前景を補修。writerは華恋一人。
+
+**次のsource作業：案内・お知らせ・ガイド・tutorial・残る休眠資産と全体横断。** 各Stackからの入口、3テーマ・文字拡大・狭幅／短い横画面・safe area・keyboard・長文・失敗回復を最後に横断する。全screen source完成までbuild保留、途中commitは`[skip ci]`。今回のapp/native build・CI native compile・Upload・配布・実機表示・Render／Supabase／GPU操作0。全UI完成・端末での見え方／読み上げ・実ストアや削除の受入れは未確認。

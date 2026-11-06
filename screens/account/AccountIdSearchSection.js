@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import CocolonButton from "../../components/CocolonButton";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 export default function AccountIdSearchSection({
@@ -27,6 +28,7 @@ export default function AccountIdSearchSection({
         <TextInput
           style={styles.idSearchInput}
           placeholder="ユーザーID"
+          accessibilityLabel="検索するユーザーID"
           placeholderTextColor={ui?.text?.description ?? colors.TEXT_SUBTLE}
           value={idSearchQuery}
           onChangeText={onChangeIdSearchQuery}
@@ -36,22 +38,9 @@ export default function AccountIdSearchSection({
           onSubmitEditing={searchUserById}
           editable={!idSearchLoading}
         />
-        <TouchableOpacity
-          style={[
-            styles.idSearchButton,
-            idSearchLoading && styles.idSearchButtonDisabled,
-          ]}
-          onPress={searchUserById}
-          activeOpacity={0.85}
-          disabled={idSearchLoading}
-          accessibilityLabel="ユーザーIDを検索"
-        >
-          {idSearchLoading ? (
-            <ActivityIndicator size="small" color={colors.ACCENT_TEXT} />
-          ) : (
-            <Text style={styles.idSearchButtonText}>検索</Text>
-          )}
-        </TouchableOpacity>
+        <CocolonButton variant="primary" title="検索" loading={idSearchLoading}
+          style={[styles.idSearchButton, idSearchLoading && styles.idSearchButtonDisabled]}
+          onPress={searchUserById} disabled={idSearchLoading} accessibilityLabel="ユーザーIDを検索" />
       </View>
 
       {idSearchResult ? (
@@ -61,14 +50,14 @@ export default function AccountIdSearchSection({
           activeOpacity={0.85}
           accessibilityLabel="検索したアカウントを開く"
         >
-          <Text style={styles.idSearchResultName} numberOfLines={1}>
+          <Text style={styles.idSearchResultName}>
             {idSearchResult.displayName}
           </Text>
           <Ionicons
             name="chevron-forward"
             size={16}
             color={colors.TEXT_ON_LIGHT}
-            style={{ marginLeft: 8, opacity: 0.65 }}
+            style={{ marginLeft: 8 }}
           />
         </TouchableOpacity>
       ) : idSearchError ? (

@@ -1,6 +1,8 @@
 import React from "react";
 import {
-  ActivityIndicator,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
   Modal,
   Pressable,
   Text,
@@ -8,6 +10,8 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import CocolonButton from "../../components/CocolonButton";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import { DISPLAY_NAME_MAX_LENGTH } from "./accountModel";
@@ -33,9 +37,14 @@ export default function AccountNameEditModal({
       animationType="fade"
       onRequestClose={closeNameEdit}
     >
+      <SafeAreaProvider style={{ flex: 1 }}>
       <Pressable style={styles.modalBackdrop} onPress={closeNameEdit} />
 
-      <View style={styles.nameModalCard}>
+      <SafeAreaView edges={["top", "right", "bottom", "left"]} style={{ flex: 1 }} pointerEvents="box-none">
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === "ios" ? "padding" : undefined} pointerEvents="box-none">
+      <View style={{ flex: 1, justifyContent: 'center', padding: 20 }} pointerEvents="box-none">
+      <View style={styles.nameModalCard} accessibilityViewIsModal>
+      <ScrollView style={{ flexShrink: 1 }} keyboardShouldPersistTaps="handled" contentContainerStyle={{ paddingBottom: 4 }}>
         <View style={styles.nameModalHeader}>
           <Text style={styles.nameModalTitle}>ユーザー名の編集</Text>
           <TouchableOpacity
@@ -43,16 +52,19 @@ export default function AccountNameEditModal({
             onPress={closeNameEdit}
             disabled={nameSaving || nameChecking}
             activeOpacity={0.8}
+            accessibilityRole="button" accessibilityLabel="ユーザー名の編集を閉じる"
           >
             <Ionicons name="close" size={20} color={colors.TEXT_ON_LIGHT} />
           </TouchableOpacity>
         </View>
 
-        <Text style={styles.nameModalHint}>新しいユーザー名を入力してください。</Text>
+        <Text style={styles.nameModalHint}>ユーザー名は他のユーザーに公開されます。</Text>
+        <Text style={styles.nameModalHint}>新しいユーザー名</Text>
 
         <TextInput
           style={styles.nameInput}
           placeholder="ユーザー名"
+          accessibilityLabel="新しいユーザー名"
           placeholderTextColor={ui?.text?.description ?? colors.TEXT_SUBTLE}
           value={nameDraft}
           onChangeText={(value) => {
@@ -68,45 +80,23 @@ export default function AccountNameEditModal({
         />
 
         {nameError ? (
-          <Text style={styles.nameErrorText}>{nameError}</Text>
+          <Text style={styles.nameErrorText} accessibilityRole="alert">{nameError}</Text>
         ) : nameChecking ? (
-          <Text style={styles.nameHelperText}>ユーザー名の重複を確認しています…</Text>
+          <Text style={styles.nameHelperText} accessibilityLiveRegion="polite">ユーザー名の重複を確認しています…</Text>
         ) : (
-          <Text style={styles.nameHelperText}>※ユーザー名は他ユーザーに公開されます。（{DISPLAY_NAME_MAX_LENGTH}文字まで）</Text>
+          <Text style={styles.nameHelperText}>{DISPLAY_NAME_MAX_LENGTH}文字まで入力できます。</Text>
         )}
 
         <View style={styles.nameModalActions}>
-          <TouchableOpacity
-            style={[styles.nameModalBtn, styles.nameModalBtnGhost]}
-            onPress={closeNameEdit}
-            disabled={nameSaving || nameChecking}
-            activeOpacity={0.85}
-          >
-            <Text style={[styles.nameModalBtnText, styles.nameModalBtnGhostText]}>
-              キャンセル
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={[
-              styles.nameModalBtn,
-              styles.nameModalBtnPrimary,
-              (nameSaving || nameChecking) && styles.nameModalBtnDisabled,
-            ]}
-            onPress={saveDisplayName}
-            disabled={nameSaving || nameChecking}
-            activeOpacity={0.85}
-          >
-            {nameSaving || nameChecking ? (
-              <ActivityIndicator size="small" color="#FFFFFF" />
-            ) : (
-              <Text style={[styles.nameModalBtnText, styles.nameModalBtnPrimaryText]}>
-                保存
-              </Text>
-            )}
-          </TouchableOpacity>
+          <CocolonButton variant="primary" title="保存" onPress={saveDisplayName}
+            loading={nameSaving || nameChecking} disabled={nameSaving || nameChecking} />
+          <CocolonButton variant="secondary" title="キャンセル" onPress={closeNameEdit}
+            disabled={nameSaving || nameChecking} />
         </View>
+      </ScrollView>
       </View>
+      </View>
+      </KeyboardAvoidingView></SafeAreaView></SafeAreaProvider>
     </Modal>
   );
 }

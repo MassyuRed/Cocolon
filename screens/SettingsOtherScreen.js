@@ -186,20 +186,22 @@ export default function SettingsOtherScreen({ navigation }) {
       <AnalysisMediumCard
         title="チュートリアルを再体験する"
         description="現在の入力や記録を変えずに最初から体験します"
+        disabled={isBusy}
         onPress={openTutorialRestart}
         accessibilityLabel="チュートリアルを再体験する"
       />
 
-      <View style={{ marginTop: 12 }}>
+      <View style={{ marginTop: 24 }}>
         <AnalysisMediumCard
           title="ログアウト"
           description="現在のアカウントからログアウトします"
+          disabled={isBusy}
           onPress={handleLogout}
           accessibilityLabel="ログアウト"
         />
       </View>
 
-      <View style={{ marginTop: 12 }}>
+      <View style={{ marginTop: 32 }}>
         <AnalysisMediumCard
           title="アカウント削除"
           description={
@@ -207,6 +209,8 @@ export default function SettingsOtherScreen({ navigation }) {
               ? "アカウント情報と全入力を削除します"
               : "現在、この機能は一時的に利用できません"
           }
+          disabled={isBusy}
+          destructive
           onPress={handleDeleteAccount}
           accessibilityLabel="アカウント削除"
         />

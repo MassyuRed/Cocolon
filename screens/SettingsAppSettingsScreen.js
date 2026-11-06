@@ -5,6 +5,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { useAuth } from "../AuthContext";
 import CocolonPressable from "../components/CocolonPressable";
 import CocolonSwitch from "../components/CocolonSwitch";
+import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { apiGet, apiPatch, apiPost } from "../lib/apiClient";
 import { EMOTION_NOTIFICATION_WIRE, readEmotionNotificationOwnerId } from "../lib/compat/legacyWireContracts";
 import {
@@ -18,6 +19,7 @@ import {
 } from "../lib/todayQuestionApi";
 import {
   THEME_LABELS_JA,
+  THEME_PALETTES,
   THEME_VARIANTS,
   useTheme,
 } from "../theme/ThemeContext";
@@ -61,61 +63,72 @@ function resolveEmotionNotificationEnabled(payload) {
 function createLocalStyles(colors, ui) {
   const text = ui?.text || {};
 
-  return StyleSheet.create({
+  return StyleSheet.create(applyTypographyTokens({
     groupWrap: {
-      marginTop: 8,
+      marginTop: 12,
+      marginBottom: 24,
     },
     optionRow: {
       marginLeft: 0,
-      minHeight: 58,
-      borderRadius: 20,
+      minHeight: 60,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: colors.CARD_BORDER,
-      backgroundColor: colors.FIELD_BG,
-      paddingHorizontal: 16,
-      paddingVertical: 14,
+      backgroundColor: colors.PANEL_BG,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
     },
     optionRowSelected: {
-      borderColor: colors.TITLE_GOLD,
+      borderColor: colors.CARD_BORDER,
       backgroundColor: colors.SURFACE_TONAL,
     },
     optionRowDisabled: {
-      opacity: 0.58,
+      backgroundColor: colors.FIELD_BG,
+      borderColor: colors.CARD_BORDER,
     },
     optionRowInner: {
       flexDirection: "row",
-      alignItems: "center",
+      alignItems: 'center',
       justifyContent: "space-between",
+      minWidth: 0,
+      flexWrap: 'wrap',
+      columnGap: 12,
+      rowGap: 8,
     },
     optionLabel: {
-      flex: 1,
-      paddingRight: 12,
-      fontSize: 16,
-      fontWeight: "600",
-      color: text.primary ?? colors.TEXT_ON_LIGHT,
-      lineHeight: 24,
+      paddingRight: 0,
+      color: colors.TEXT_ON_LIGHT,
+      flexGrow: 1,
+      flexShrink: 1,
+      flexBasis: 160,
+      minWidth: 0,
     },
     optionMetaWrap: {
       flexDirection: "row",
       alignItems: "center",
+      minWidth: 0,
+      maxWidth: '100%',
+      flexShrink: 1,
+      flexWrap: 'wrap',
+      justifyContent: 'flex-end',
+      columnGap: 8,
+      rowGap: 4,
     },
     optionMetaText: {
-      fontSize: 12,
-      lineHeight: 16,
-      color: text.description ?? colors.TEXT_ON_LIGHT,
-      marginRight: 8,
+      color: colors.TEXT_SUBTLE,
+      marginRight: 0,
+      flexShrink: 1,
     },
     helperText: {
-      marginTop: 10,
-      marginLeft: 12,
-      fontSize: 12,
-      lineHeight: 18,
-      color: text.description ?? colors.TEXT_ON_LIGHT,
+      marginTop: 12,
+      marginLeft: 0,
+      color: colors.TEXT_SUBTLE,
     },
-  });
+  }, ui, {"optionLabel":"button","optionMetaText":"meta","helperText":"description"}));
 }
 
 function SettingChoiceRow({
+  themeKey,
   label,
   selected,
   onPress,
@@ -133,13 +146,16 @@ function SettingChoiceRow({
       accessibilityLabel={`${label}${selected ? " 現在選択中" : ""}`}
     >
       <View style={localStyles.optionRowInner}>
-        <Text style={localStyles.optionLabel}>{label}</Text>
+        <View accessible={false} importantForAccessibility="no-hide-descendants" style={{ width: 36, height: 36, flexShrink: 0, borderRadius: 18, borderWidth: 1, borderColor: THEME_PALETTES[themeKey].TITLE_GOLD, backgroundColor: THEME_PALETTES[themeKey].BG_SILVER, alignItems: 'center', justifyContent: 'center' }}>
+          <View style={{ width: 16, height: 16, borderRadius: 8, backgroundColor: THEME_PALETTES[themeKey].GOLD_BUTTON }} />
+        </View>
+        <Text style={[localStyles.optionLabel, selected && { color: colors.ON_SURFACE_TONAL }]}>{label}</Text>
         <View style={localStyles.optionMetaWrap}>
-          {rightText ? <Text style={localStyles.optionMetaText}>{rightText}</Text> : null}
+          {rightText ? <Text style={[localStyles.optionMetaText, selected && { color: colors.ON_SURFACE_TONAL }]}>{rightText}</Text> : null}
           <Ionicons
             name={selected ? "checkmark-circle" : "ellipse-outline"}
             size={20}
-            color={selected ? colors.TITLE_GOLD : colors.TEXT_SUBTLE}
+            color={selected ? colors.ON_SURFACE_TONAL : colors.TEXT_SUBTLE}
           />
         </View>
       </View>
@@ -174,8 +190,10 @@ function SettingSwitchRow({
       accessibilityLabel={label}
     >
       <View style={localStyles.optionRowInner}>
-        <Text style={localStyles.optionLabel}>{label}</Text>
+        <Text style={[localStyles.optionLabel, disabled && { color: colors.TEXT_SUBTLE }]}>{label}</Text>
         <CocolonSwitch
+          containerStyle={{ flexShrink: 0 }}
+          accessible={false}
           value={value}
           onValueChange={onValueChange}
           disabled={disabled}
@@ -196,6 +214,7 @@ export default function SettingsAppSettingsScreen({ navigation }) {
   );
 
   const [expandedSection, setExpandedSection] = useState(null);
+  const [notificationReadFailures, setNotificationReadFailures] = useState({});
   const [localProcessing, setLocalProcessing] = useState(false);
   const [pushEnabled, setPushEnabled] = useState(true);
   const [pushLoading, setPushLoading] = useState(true);
@@ -217,6 +236,9 @@ export default function SettingsAppSettingsScreen({ navigation }) {
     reportDistributionLoading ||
     emotionNotificationLoading;
 
+  const failedNotificationLabels = Object.entries({ push: '全ての通知', question: '今日の問い通知', report: 'レポート配布通知', emotion: '感情通知' })
+    .filter(([key]) => !!user?.id && notificationReadFailures[key] === user.id).map(([, label]) => label);
+
   const themeOptions = [
     { key: THEME_VARIANTS.DEFAULT },
     { key: THEME_VARIANTS.LIGHT },
@@ -227,6 +249,7 @@ export default function SettingsAppSettingsScreen({ navigation }) {
     let cancelled = false;
 
     const loadPushEnabled = async () => {
+      setNotificationReadFailures(previous => ({ ...previous, push: null }));
       if (!user?.id) {
         if (!cancelled) {
           setPushEnabled(true);
@@ -242,6 +265,7 @@ export default function SettingsAppSettingsScreen({ navigation }) {
         if (!cancelled) setPushEnabled(enabled !== false);
       } catch (error) {
         console.warn("SettingsAppSettingsScreen: load push_enabled failed", error);
+        if (!cancelled) setNotificationReadFailures(previous => ({ ...previous, push: user.id }));
         if (!cancelled) setPushEnabled(true);
       } finally {
         if (!cancelled) setPushLoading(false);
@@ -258,6 +282,7 @@ export default function SettingsAppSettingsScreen({ navigation }) {
     let cancelled = false;
 
     const loadTodayQuestion = async () => {
+      setNotificationReadFailures(previous => ({ ...previous, question: null }));
       if (!user?.id) {
         if (!cancelled) {
           setTodayQuestionNotificationEnabled(true);
@@ -281,6 +306,7 @@ export default function SettingsAppSettingsScreen({ navigation }) {
         }
       } catch (error) {
         console.warn("SettingsAppSettingsScreen: load today question settings failed", error);
+        if (!cancelled) setNotificationReadFailures(previous => ({ ...previous, question: user.id }));
         if (!cancelled) {
           setTodayQuestionNotificationEnabled(true);
           setTodayQuestionDeliveryTime("18:00");
@@ -301,6 +327,7 @@ export default function SettingsAppSettingsScreen({ navigation }) {
     let cancelled = false;
 
     const loadReportDistribution = async () => {
+      setNotificationReadFailures(previous => ({ ...previous, report: null }));
       if (!user?.id) {
         if (!cancelled) {
           setReportDistributionNotificationEnabled(true);
@@ -324,6 +351,7 @@ export default function SettingsAppSettingsScreen({ navigation }) {
         }
       } catch (error) {
         console.warn("SettingsAppSettingsScreen: load report distribution settings failed", error);
+        if (!cancelled) setNotificationReadFailures(previous => ({ ...previous, report: user.id }));
         if (!cancelled) {
           setReportDistributionNotificationEnabled(true);
           setReportDistributionDeliveryTime("00:00");
@@ -344,6 +372,7 @@ export default function SettingsAppSettingsScreen({ navigation }) {
     let cancelled = false;
 
     const loadEmotionNotification = async () => {
+      setNotificationReadFailures(previous => ({ ...previous, emotion: null }));
       if (!user?.id) {
         if (!cancelled) {
           setEmotionNotificationEnabled(true);
@@ -360,6 +389,7 @@ export default function SettingsAppSettingsScreen({ navigation }) {
         }
       } catch (error) {
         console.warn("SettingsAppSettingsScreen: load emotion notification settings failed", error);
+        if (!cancelled) setNotificationReadFailures(previous => ({ ...previous, emotion: user.id }));
         if (!cancelled) {
           setEmotionNotificationEnabled(true);
         }
@@ -548,6 +578,7 @@ export default function SettingsAppSettingsScreen({ navigation }) {
           {themeOptions.map((option, index) => (
             <View key={option.key} style={index > 0 ? { marginTop: 8 } : null}>
               <SettingChoiceRow
+                themeKey={option.key}
                 label={THEME_LABELS_JA[option.key] ?? option.key}
                 selected={themeName === option.key}
                 rightText={themeName === option.key ? "現在" : undefined}
@@ -570,6 +601,9 @@ export default function SettingsAppSettingsScreen({ navigation }) {
 
       {expandedSection === "notifications" ? (
         <View style={localStyles.groupWrap}>
+          {notificationSettingsLoading ? <Text style={localStyles.helperText} accessibilityLiveRegion="polite">通知設定を読み込んでいます…</Text> : null}
+          {localProcessing ? <Text style={localStyles.helperText} accessibilityLiveRegion="polite">通知設定を保存しています…</Text> : null}
+          {failedNotificationLabels.length > 0 ? <Text style={[localStyles.helperText, { color: colors.ERROR }]} accessibilityRole="alert">読み込みに失敗した項目：{failedNotificationLabels.join('、')}。設定の表示を再確認するには、画面を開き直してください。</Text> : null}
           <SettingSwitchRow
             label="全ての通知"
             value={pushEnabled}

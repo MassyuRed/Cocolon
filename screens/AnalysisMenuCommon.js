@@ -109,8 +109,11 @@ export function AnalysisMediumCard({
   badgeVisible = false,
   chevron = "forward",
   accessibilityLabel,
+  disabled = false,
+  destructive = false,
 }) {
-  const { styles } = useAnalysisMenuStyles();
+  const { styles, colors } = useAnalysisMenuStyles();
+  const foreground = disabled ? colors.TEXT_SUBTLE : destructive ? colors.ERROR : null;
 
   const iconName =
     chevron === "down"
@@ -121,21 +124,22 @@ export function AnalysisMediumCard({
 
   return (
     <CocolonPressable
-      style={styles.mediumCard}
+      style={[styles.mediumCard, destructive && { borderColor: colors.ERROR, backgroundColor: colors.ERROR_BG }, disabled && { borderColor: colors.CARD_BORDER, backgroundColor: colors.FIELD_BG }]}
       onPress={onPress}
+      disabled={disabled}
       accessibilityLabel={accessibilityLabel || title}
       accessibilityState={chevron === "down" || chevron === "up" ? { expanded: chevron === "up" } : undefined}
     >
       <View style={styles.mediumCardContent}>
         <View style={styles.cardTitleRow}>
-          <Text style={styles.mediumCardTitle}>{title}</Text>
+          <Text style={[styles.mediumCardTitle, foreground && { color: foreground }]}>{title}</Text>
           <ScreenUnreadBadge
             visible={badgeVisible}
             style={styles.mediumCardBadge}
           />
-          <Ionicons name={iconName} size={18} style={styles.chevronIcon} />
+          <Ionicons name={iconName} size={18} style={[styles.chevronIcon, foreground && { color: foreground }]} />
         </View>
-        <Text style={styles.mediumCardDescription}>{description}</Text>
+        <Text style={[styles.mediumCardDescription, foreground && { color: foreground }]}>{description}</Text>
       </View>
     </CocolonPressable>
   );

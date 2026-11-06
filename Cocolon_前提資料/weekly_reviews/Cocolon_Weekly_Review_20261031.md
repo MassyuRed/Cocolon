@@ -5092,3 +5092,20 @@ linkPayloadの旧Piece入口・Q&A詳細と各選択modal、停止中tutorial描
 製品26file＋既存test5file＋資料3file。既存7入口814 PASS／FAIL0／SKIP0、変更JS31file parse、diff空白検査、8style ownerの471 role×theme一致。初回6失敗は旧UI tokens stubとprops追加前の静的期待を実tokens／現外観へ適応して解消し、保存・回復判定は緩めない。3classのrender以外と作品canvas subtreeは変更前とAST一致。合成React/native・Auth/HTTP/計測を含み、実端末の描画・ジェスチャー・読み上げの合格ではない。
 
 具体的変更・全path・保持境界と再開点は[UI設計§20](../designs/ui/material-ui-design.md#ui-piece-material-20261106)。次はアカウント・設定・契約、その後案内・tutorial・残る休眠資産と全体横断。source反映の区切りであり、全UI完成ではない。STRUCTURE_MAP_DELTA_NONE、Piece本文／recipe／保存画像／作品描画・計測／API／DB／AI変更0。app/native build・CI native compile・Upload・配布・実機表示・Render／Supabase／GPU操作0。途中commitは[skip ci]。writerは華恋一人、補助はread-only review。
+
+<a id="ui-account-settings-material-20261106"></a>
+## 223. 11/6 — アカウント・設定・契約のMaterial UI
+
+前回 `642069b255984ea70a11f8ae37f2d9b262391fd7` をfresh確認し、前提全文・規則・現UI設計・最新weeklyと実物からC01〜C06／S01〜S04を継続。全画面統一、全source完成後にbuildをまとめるMashの方針を維持した。
+
+本人／他者アカウントはプロフィール→ID検索→活動6指標を同じ面・文字階層へ。長い名前を主情報として全文表示し、人数・ID・指標は別の行へ。名前編集と公開設定は固定top位置を外し、独立safe area・可変高scroll、名前入力はkeyboard回避と公開案内・共通保存／取消へ。本人限定・他者フォロー／申請中・ID公開条件、Share.share、名前確認／保存中の閉じる拒否、公開／推薦OFFの連動を維持する。
+
+フォロー一覧は本人4／他者2タブを2列配置、画面名・tab・失敗も一覧内でscroll。名前・非公開印／申請日／通知と、関係操作を別段・別tapへ。選択checkと読み上げ、対象requestだけbusy、全申請disabledは既存どおり。取得中／正常0件／失敗を分け、共用errorの案内を処理全般の文言へ。本人条件・300件・未読・通知の楽観更新とrollback・直接解除・承認／拒否／取消のhandlerと通信は維持する。
+
+設定3入口は既存共通行を確認し、テーマ3択に実paletteの色見本・現在印を追加。通知は親子4行の無効前景・読み上げを揃え、読込／保存中と、本人に結び付けた項目別の取得失敗を表示する。表示専用state以外の値・fallback・API・保存可否・payloadは維持。親OFF→子3件、親保存失敗の4値復元、子だけ部分失敗時のOFF維持＋Alert、全体ONで子を自動ONにしない動作は不変。その他は再体験→ログアウト→危険な削除を区分し、共通カードの既定false propsでisBusy停止と危険色を表現。二段削除とflag／本人確認、cleanup→signOut、再体験の遷移・未読は維持する。
+
+契約画面は現プラン・期限→販売状態→プラン比較→重要説明→復元／管理／規約等の階層。本文16/27、長名・badge・リンク／CTA折返し、受付停止・復元不可・処理中を明示。販売停止中も復元の既存条件を変えず、購入／管理／policy／owner・価格・featureは不変。利用者にBundle ID等の開発者設定を確認させる商品取得失敗文だけを改めた。
+
+製品11file＋資料3file。既存4入口95 PASS／FAIL0／SKIP0、別の一時実画面検証8 PASS／FAIL0／SKIP0。後者は実Settings screen＋React／renderer18.3.1・Babel core7.25.2と代替native/APIで、4取得失敗とfallback、旧owner遅延失敗、親OFFの1＋3payload、親失敗rollback／子write0、子部分失敗OFF／Alertを確認。新しい常設test framework／依存／test fileは追加していない。変更JS11file parse・diff空白検査、4style ownerの216 role×theme一致。補助reviewのAST照合ではAccount5hook・callback、FollowListのrender前statement／全10onPress、契約15式、通知の表示用setter以外のeffect／依存配列・保存／削除／再体験handlerが不変。実store・実API・通知配送・実削除・端末表示の検証ではない。
+
+全path・具体設計・保持境界は[UI設計§21](../designs/ui/material-ui-design.md#ui-account-settings-material-20261106)。次は案内・お知らせ・ガイド・tutorial・残る休眠資産、その後全体横断。全source完成前のbuild／native compile／Upload／配布は行わず、今回も実機表示・Render／Supabase／GPU操作0。STRUCTURE_MAP_DELTA_NONE、API／DB／課金価格／公開・削除契約／AI／分析／作品画像の変更0。全UI完成は未宣言。writerは華恋一人、補助はread-only review。
