@@ -1,0 +1,542 @@
+{
+  "api_commit": "5efdafab93f555dc777a07a886d051d72b8fe1a9",
+  "api_source_sha256": {
+    "ai/services/ai_inference/analysis_cumulative_service.py": "362739b57a70cfeadc8c23caada0f44226af96140a98a79ca715d87959ba615c",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py": "65852d072f3a58fe1b448224b3509837e20a5a40911583f306e0aabf6a47a64e",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py": "17a09c6faf32b4a2ec36eaa59f3362a6b376d06fdce55ceabefd76437f1dcd97",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py": "024ef1f0a734939353692df2b4a97770c2b08caac6a83bd3f7b8001317688417",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/source_adapter.py": "e27d21c760b572cd7cfab1b4755eb4af25189e938af30399445b184021afc630"
+  },
+  "api_tracked_status": [],
+  "baseline_db6_report_sha256": "542048af2d86ffb1dfcd4f0675d104e6b9a1edcc477e163d66a35ba7c6e4c7e5",
+  "baseline_f50_report_sha256": "410d2cdbf1d5c07fa0b4c47ecae3ec7f165a1193164285bc000e110c859d2cde",
+  "baseline_unchanged": true,
+  "candidate_non_generation_reloads": 10,
+  "case_count": 10,
+  "cases": [
+    {
+      "baseline_db6": {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 3,
+          "processed_count": 3,
+          "profile": "cumulative.v1",
+          "source_count": 3,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "nodes": 6
+      },
+      "candidate_non_generation_reload": true,
+      "f50_comparison_checks": {
+        "candidate_counts_equal": true,
+        "candidate_graph_equal": true,
+        "counts_equal": true,
+        "graph_equal": true,
+        "projection_equal": true,
+        "status_equal": true,
+        "text_equal": true
+      },
+      "id": "HC01",
+      "new": {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 3,
+          "processed_count": 3,
+          "profile": "cumulative.v1",
+          "source_count": 3,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "edges": 0,
+        "nodes": 6
+      },
+      "passed": true,
+      "same_raw_bytes": true,
+      "saved_reader_calls": 4,
+      "source_evidence_verified": true
+    },
+    {
+      "baseline_db6": {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 2,
+          "processed_count": 2,
+          "profile": "cumulative.v1",
+          "source_count": 2,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "nodes": 2
+      },
+      "candidate_non_generation_reload": true,
+      "f50_comparison_checks": {
+        "candidate_counts_equal": true,
+        "candidate_graph_equal": true,
+        "counts_equal": true,
+        "graph_equal": true,
+        "projection_equal": true,
+        "status_equal": true,
+        "text_equal": true
+      },
+      "id": "HC02",
+      "new": {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 2,
+          "processed_count": 2,
+          "profile": "cumulative.v1",
+          "source_count": 2,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "edges": 0,
+        "nodes": 2
+      },
+      "passed": true,
+      "same_raw_bytes": true,
+      "saved_reader_calls": 4,
+      "source_evidence_verified": true
+    },
+    {
+      "baseline_db6": {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 2,
+          "processed_count": 2,
+          "profile": "cumulative.v1",
+          "source_count": 2,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "nodes": 4
+      },
+      "candidate_non_generation_reload": true,
+      "f50_comparison_checks": {
+        "candidate_counts_equal": true,
+        "candidate_graph_equal": true,
+        "counts_equal": true,
+        "graph_equal": true,
+        "projection_equal": true,
+        "status_equal": true,
+        "text_equal": true
+      },
+      "id": "HC03",
+      "new": {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 2,
+          "processed_count": 2,
+          "profile": "cumulative.v1",
+          "source_count": 2,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "edges": 0,
+        "nodes": 4
+      },
+      "passed": true,
+      "same_raw_bytes": true,
+      "saved_reader_calls": 4,
+      "source_evidence_verified": true
+    },
+    {
+      "baseline_db6": {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 3,
+          "processed_count": 3,
+          "profile": "cumulative.v1",
+          "source_count": 3,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "nodes": 4
+      },
+      "candidate_non_generation_reload": true,
+      "f50_comparison_checks": {
+        "candidate_counts_equal": true,
+        "candidate_graph_equal": true,
+        "counts_equal": true,
+        "graph_equal": true,
+        "projection_equal": true,
+        "status_equal": true,
+        "text_equal": true
+      },
+      "id": "HC04",
+      "new": {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 3,
+          "processed_count": 3,
+          "profile": "cumulative.v1",
+          "source_count": 3,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "edges": 0,
+        "nodes": 4
+      },
+      "passed": true,
+      "same_raw_bytes": true,
+      "saved_reader_calls": 4,
+      "source_evidence_verified": true
+    },
+    {
+      "baseline_db6": {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "nodes": 2
+      },
+      "candidate_non_generation_reload": true,
+      "f50_comparison_checks": {
+        "candidate_counts_equal": true,
+        "candidate_graph_equal": true,
+        "counts_equal": true,
+        "graph_equal": true,
+        "projection_equal": true,
+        "status_equal": true,
+        "text_equal": true
+      },
+      "id": "HC05",
+      "new": {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "edges": 0,
+        "nodes": 2
+      },
+      "passed": true,
+      "same_raw_bytes": true,
+      "saved_reader_calls": 4,
+      "source_evidence_verified": true
+    },
+    {
+      "baseline_db6": {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 0,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "nodes": 0
+      },
+      "candidate_non_generation_reload": true,
+      "f50_comparison_checks": {
+        "all_records_preserved": true,
+        "candidate_counts_equal": true,
+        "candidate_graph_equal": true,
+        "exact_written_claims_and_category_parent": true,
+        "generated": true,
+        "mapped_count": true,
+        "no_cross_record_merge": true,
+        "no_source_scope_gap": true,
+        "no_unwritten_edges": true,
+        "node_count": true,
+        "old_nodes_evidence_preserved": true,
+        "unparsed_count": true,
+        "wish_semantics_exact": true
+      },
+      "id": "HC06",
+      "new": {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "edges": 0,
+        "nodes": 2
+      },
+      "passed": true,
+      "same_raw_bytes": true,
+      "saved_reader_calls": 4,
+      "source_evidence_verified": true
+    },
+    {
+      "baseline_db6": {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 0,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "nodes": 0
+      },
+      "candidate_non_generation_reload": true,
+      "f50_comparison_checks": {
+        "all_records_preserved": true,
+        "candidate_counts_equal": true,
+        "candidate_graph_equal": true,
+        "exact_written_claims_and_category_parent": true,
+        "generated": true,
+        "mapped_count": true,
+        "no_cross_record_merge": true,
+        "no_source_scope_gap": true,
+        "no_unwritten_edges": true,
+        "node_count": true,
+        "old_nodes_evidence_preserved": true,
+        "unparsed_count": true,
+        "wish_semantics_exact": true
+      },
+      "id": "HC07",
+      "new": {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "edges": 0,
+        "nodes": 2
+      },
+      "passed": true,
+      "same_raw_bytes": true,
+      "saved_reader_calls": 4,
+      "source_evidence_verified": true
+    },
+    {
+      "baseline_db6": {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 0,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "nodes": 0
+      },
+      "candidate_non_generation_reload": true,
+      "f50_comparison_checks": {
+        "all_records_preserved": true,
+        "candidate_counts_equal": true,
+        "candidate_graph_equal": true,
+        "exact_written_claims_and_category_parent": true,
+        "generated": true,
+        "mapped_count": true,
+        "no_cross_record_merge": true,
+        "no_source_scope_gap": true,
+        "no_unwritten_edges": true,
+        "node_count": true,
+        "old_nodes_evidence_preserved": true,
+        "unparsed_count": true,
+        "wish_semantics_exact": true
+      },
+      "id": "HC08",
+      "new": {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "edges": 0,
+        "nodes": 2
+      },
+      "passed": true,
+      "same_raw_bytes": true,
+      "saved_reader_calls": 4,
+      "source_evidence_verified": true
+    },
+    {
+      "baseline_db6": {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "nodes": 2
+      },
+      "candidate_non_generation_reload": true,
+      "f50_comparison_checks": {
+        "all_records_preserved": true,
+        "candidate_counts_equal": true,
+        "candidate_graph_equal": true,
+        "exact_written_claims_and_category_parent": true,
+        "generated": true,
+        "mapped_count": true,
+        "no_cross_record_merge": true,
+        "no_source_scope_gap": true,
+        "no_unwritten_edges": true,
+        "node_count": true,
+        "old_nodes_evidence_preserved": true,
+        "unparsed_count": true,
+        "wish_semantics_exact": true
+      },
+      "id": "HC09",
+      "new": {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 1,
+          "profile": "cumulative.v1",
+          "source_count": 1,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "edges": 0,
+        "nodes": 2
+      },
+      "passed": true,
+      "same_raw_bytes": true,
+      "saved_reader_calls": 4,
+      "source_evidence_verified": true
+    },
+    {
+      "baseline_db6": {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 1,
+          "processed_count": 2,
+          "profile": "cumulative.v1",
+          "source_count": 2,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "nodes": 2
+      },
+      "candidate_non_generation_reload": true,
+      "f50_comparison_checks": {
+        "all_records_preserved": true,
+        "candidate_counts_equal": true,
+        "candidate_graph_equal": true,
+        "exact_written_claims_and_category_parent": true,
+        "generated": true,
+        "mapped_count": true,
+        "no_cross_record_merge": true,
+        "no_source_scope_gap": true,
+        "no_unwritten_edges": true,
+        "node_count": true,
+        "old_nodes_evidence_preserved": true,
+        "unparsed_count": true,
+        "wish_semantics_exact": true
+      },
+      "id": "HC10",
+      "new": {
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 2,
+          "processed_count": 2,
+          "profile": "cumulative.v1",
+          "source_count": 2,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "edges": 0,
+        "nodes": 4
+      },
+      "passed": true,
+      "same_raw_bytes": true,
+      "saved_reader_calls": 4,
+      "source_evidence_verified": true
+    }
+  ],
+  "ci": {
+    "conclusion": null,
+    "job_id": 127850808182,
+    "run_id": 42205450639,
+    "status": "in_progress",
+    "url": "https://github.com/MassyuRed/mashos-api/actions/runs/42205450639"
+  },
+  "cpu_seconds": 4.38001400900248,
+  "effects": {
+    "deploys": 0,
+    "live_db_calls": 0,
+    "merges": 0,
+    "model_calls": 0,
+    "model_loads": 0,
+    "tokenizer_calls": 0,
+    "training": 0
+  },
+  "first_failed_report_sha256": "cb4429574238f855fe0446ceac14a21f2778ccd84d8294e9d9177d9794ecfb21",
+  "limitations": [
+    "Synthetic hand-written model packets are not model quality or general language accuracy evidence.",
+    "HC09 was already fixed at db6; preserving it is regression evidence, not a new effect of this patch.",
+    "Reader dates/month references and RPC rows are synthetic; no live DB persistence, RLS or monthly capture.",
+    "Current/monthly readers restore public projection DTOs, not the private artifact graph.",
+    "Jupyter connection and prior result recovery remain unavailable; no new model run was started.",
+    "Initial comparator failure was empty tuple versus list; previous failure report retained and product code unchanged for replay rerun.",
+    "General roles, choice criteria, relationships between records, normal provider adoption and real device acceptance remain open."
+  ],
+  "local_tests": {
+    "cumulative_api_jobs": {
+      "failed": 0,
+      "log_sha256": "a60edb07941f10499fda9908887d7e5d890741feded56e0dd3a9b0555b28947c",
+      "passed": 282,
+      "seconds": 208.15,
+      "skip_reason": "PostgreSQL WASM module absent locally; 1 cumulative + 19 model-source tests",
+      "skipped": 20
+    },
+    "targeted": {
+      "failed": 0,
+      "log_sha256": "204bf2fe6a049175e120f7554819f1c248000d070cb065e4ec4e23e44c583e83",
+      "passed": 320,
+      "seconds": 40.45,
+      "skipped": 0
+    }
+  },
+  "normal_adoption": false,
+  "passed": 10,
+  "replay_report_sha256": "5566010127d725d4284ec5a1c5a7da82d3be226713fbf175b8b83abc88711bdc",
+  "replay_runner_sha256": "387849b41d47af43acc1cb1cd750d77e8fffb68151d788f2f91f4479e5ce28c6",
+  "saved_projection_mock_rpc_reads": 40,
+  "schema_version": "analysis_supplement_wish_own_evidence_result.v1",
+  "scope": "Ordinary answer-owned single explicit SELF plain wish within existing finite grammar; no real model inference.",
+  "source_unchanged": true,
+  "status": "SYNTHETIC_CPU_REPLAY_VERIFIED_CI_IN_PROGRESS",
+  "structure_map_delta": "PRESENT: narrow responsibility extension in existing observed consumer; no public type, author, grammar, DB or RN changes"
+}

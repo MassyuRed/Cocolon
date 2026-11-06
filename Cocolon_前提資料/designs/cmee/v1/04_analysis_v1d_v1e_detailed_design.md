@@ -1,4 +1,6 @@
-> **11/5・分析の最新（第9回§194・適格補足の担当＋決定）：ANSWER自身の過去SELF担当ROLE＋決定ACTIONを既存完全field証拠で採用できるよう接続。実4Bの新source構成4要求（2構成は§193の節を再使用）で、新版は4保存・5record/未解析0、旧版は3未対応＋AC04の独立r2だけ部分保存。回答内明記順序だけ1/0/0/1辺、重複AC03は各2根拠でも記録count1。新4stop/1load/学習0・53.891秒、raw修復0。Jupyter316 PASS/SQL13 SKIP、CI42015033971全step成功。prompt/state/通常既定v4は不変、v6はopt-in・重み通常未採用、一般分析品質／通常4B接続／配置は未成立。** [全結果・制限](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplemental-role-decision-result-20261105)。
+> **11/6・最新§235：ordinary補足の単一明記SELF希望を、原入力専用証明を保った別のanswer-owned証明へ接続。API 5efdafab、320 PASS／CI42205450639進行中。設計条件と実装済み範囲は末尾§235へ分離記載。同packet10/10・候補reload10／mock RPC保存reader40read、新モデル／raw取得／DB0・Jupyter新結果未回収。** [実結果・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplement-wish-own-evidence-20261106)／[本文なし集計](../../../observation_learning/trials/2026-11-01-analysis-model-fields/supplement_wish_own_evidence_results.json)。
+
+> **11/5・履歴（第9回§194・適格補足の担当＋決定）：ANSWER自身の過去SELF担当ROLE＋決定ACTIONを既存完全field証拠で採用できるよう接続。実4Bの新source構成4要求（2構成は§193の節を再使用）で、新版は4保存・5record/未解析0、旧版は3未対応＋AC04の独立r2だけ部分保存。回答内明記順序だけ1/0/0/1辺、重複AC03は各2根拠でも記録count1。新4stop/1load/学習0・53.891秒、raw修復0。Jupyter316 PASS/SQL13 SKIP、CI42015033971全step成功。prompt/state/通常既定v4は不変、v6はopt-in・重み通常未採用、一般分析品質／通常4B接続／配置は未成立。** [全結果・制限](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplemental-role-decision-result-20261105)。
 
 # CMEE V1-D / V1-E — Analysis Observed / IF Route 詳細設計
 
@@ -1974,3 +1976,20 @@ AC01/04の明記順序は回答自身の担当→決定だけで、原因／親�
 変更は既存API3path：`ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py`（原入力の担当／決定完全field証明を`_model_role_decision_field_graph`へ共用化し、`compile_model_supplement_role_decision`で全集合から回答自身の根拠を抽出）、同`semantic_admission.py`（`_compile_model_observed_record`で回答局所ref/辺を既存record graphへ束縛し、明記順序の両端の根拠IDとcanonical重複を維持）、`ai/tests/test_analysis_cumulative_model_source.py`（肯否／順序／無順序重複／未解析／主体・field・根拠変異／private clause拒否／保存版／SQL lifecycle）。source_adapter・保存原版／round owner・唯一realizer・service/profile/state・DB/RN/既存workflowの責務追加0。trial `supplemental_role_decision_trial.py`（runner6ad7c0f5）は新4要求・同raw旧／新consumer比較・保存非生成再読を、`supplemental_role_decision_results.json`は公開合成入力と旧新の全表示／集計を所有する。
 
 [全結果・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplemental-role-decision-result-20261105)。§193の2題比較・失敗候補・原本は[前回記録](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-role-choice-prompt-result-20261105)に保持する。
+
+
+## 11/6 §235 — ordinary補足の単一plain SELF希望
+
+### 設計条件
+
+ordinary ANSWERは親原入力と同一recordの補足資料である。本人の希望を実行事実へ変えず、回答ごとに自身の完全な原文・主体・否定・時点・根拠が成立するときだけ既存ObservedGraphへ接続する。対象は補足memo一欄の単一明記SELF希望、既存9動詞（書く／調べる／試す／見る／作る／残す／記録する／メモする／続ける）の肯定／否定×current_input／past。原入力専用wish証明を補足へ転用せず、source roleも変更しない。
+
+全親原入力＋全適格補足を先に既存compilerで検証し、更新／衝突／注釈を切り離して都合のよい補足だけを採らない。当該sourceが親memberのrecord/version／child envelopeに属し、モデルfieldが同じmemo全文・版・scalar／UTF8範囲・field／literal hashを指すことを確認する。canonical nodeが原入力や先行回答の代表を持つ場合も、今回回答のliteralから命題とsource_partsを再導出し、意味・肯否・modality・時点を元graphと照合する。別sourceから主語・否定・時点や座標を借りない。
+
+唯一の回答根拠と全field／全unitの照合が必要。複数節・二希望・部分引用・未読尾部・OTHER／省略主体・認知／留保・相対日／順序、当該回答またはcanonical nodeに関わる辺は拒否する。回答の単一希望を独立した機会や関係線へしない。親の未対応本文はSOURCE_SCOPEに残し、カテゴリ継承・異カテゴリ集合の分離・record数と証拠数の区別を保つ。保存再読は既存DTOを再表示し、意味採用や生成を繰り返さない。
+
+### 実装済み範囲と確認範囲
+
+API [5efdafab93f555dc777a07a886d051d72b8fe1a9](https://github.com/MassyuRed/mashos-api/commit/5efdafab93f555dc777a07a886d051d72b8fe1a9) の既存 `intent_compiler.py` に `compile_model_supplement_plain_wish` を追加し、原入力wrapperのguardを保って内部の完全field照合だけを共用した。既存 `semantic_admission._compile_model_observed_record` がACTION／担当＋決定の証明で採れない回答に第三経路として試す。新しい型・source grammar・作者・profile／state版・公開wire・service／DB／RNは追加していない。通常profile・transport選択と配置も不変。STRUCTURE_MAP_DELTA_PRESENTは既存consumer責務の限定拡張である。
+
+新module88＋既存232＝320 PASS／失敗・skip0、40.45秒・既存Pydantic warning1。広域5fileは282 PASS／SQL WASM未設定20 SKIP／失敗0、208.15秒で、件数を合算しない。同一合成packetのCPU再読は10/10・4.380014秒、候補非生成reload10・補足自身の証拠10・mock RPCの実current／月次reader40read一致。元snapshot／messages／request_ref／guard／raw相当文字列は不変。HC01–05はartifact UUIDを除くgraph／本文図一致、HC09の2nodeは直前db6の既回復を保持し、今回の新効果としない。新旧保存projectionはEngine・compiler・新proof・作者の生成入口を禁止して同一DTOを確認した。これは実DB／RLS／月次captureの証明ではない。5変更blobはGitHub読戻し一致、CI42205450639進行中。新モデル／raw取得／学習／DB呼出し0。Jupyter新結果は未回収、5時間依頼完了とは扱わない。一般の本人基準／暗黙役割／選択／記録間意味、全補足・全量処理・IF／Saved／実DB／本人端末・商品受入れは残件。[現在の実結果・原本・再開点](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplement-wish-own-evidence-20261106)／[本文なし集計](../../../observation_learning/trials/2026-11-01-analysis-model-fields/supplement_wish_own_evidence_results.json)。

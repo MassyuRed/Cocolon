@@ -1,4 +1,6 @@
-> **11/6・分析の継続（第9回§216）：Jupyterで23更新を完了し18応答を返却、最後の三記録要求は23秒で停止。願望kind・否定引用・対象範囲の不整合が残り、新d22cは不採用。別途、保存済み25応答を0モデルで照合し、同じ二欄原応答を事実＋希望の2node／edge0へ接続する修正e8f026eを確認。関連398成功・1skip、本番未配置。** [実結果・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-fact-wish-fields-20261106)。
+> **11/6・最新§235：API 5efdafabでordinary補足自身の単一SELF希望を限定接続。新88＋既存232＝320 PASS、CI42205450639進行中。`replay_heterogeneous_scope_cpu.py`は元合成packetを変更せず10/10・候補reload10／mock RPC保存reader40readを確認。HC09はdb6での既回復を保持。新モデル／raw取得／DB0、Browser状態取得とJupyter直接タブ作成が各300秒で未応答、Jupyter到達・新結果は未確認・5時間依頼未完了。** [範囲・原本・再開点](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplement-wish-own-evidence-20261106)／[本文なし集計](supplement_wish_own_evidence_results.json)。
+
+> **11/6・履歴（第9回§216）：Jupyterで23更新を完了し18応答を返却、最後の三記録要求は23秒で停止。願望kind・否定引用・対象範囲の不整合が残り、新d22cは不採用。別途、保存済み25応答を0モデルで照合し、同じ二欄原応答を事実＋希望の2node／edge0へ接続する修正e8f026eを確認。関連398成功・1skip、本番未配置。** [実結果・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-fact-wish-fields-20261106)。
 
 # Analysis — 最小field接続と実4B probe
 
@@ -2324,3 +2326,24 @@ mapped0/0/3→1/2/3、全未解析0。全parent内の各元fieldが完全な行�
 §234継続：原希望とordinary補足ACTIONの併存はAPI db6a571のoriginal-only view修復でmodule231 PASS。`heterogeneous_scope_probe.py`はHC01〜10／v10／元a2e・学習0／最大10生成／1load／300秒・23秒の次比較sourceで、現時点実model未実行。同raw旧API比較・非生成reloadを区別する。
 
 §234確定：API db6a571のCI42199766784全工程success。Jupyter CPU after／関連testのcommand終了後、prepare入力中に作業環境が切断し結果未回収。4B generate未起動・新生成／学習0。5時間依頼は未完了。復旧後は既存Pod出力を先に回収し、新10要求を重複起動せず進める。[正確な再開点](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-heterogeneous-scope-cpu-20261106)。
+
+> 継続更新：§234の補足希望未対応は当時の記録である。後続§235で回答自身の単一SELF希望を限定接続した。元CPU原本・packetは変更しない。
+
+<a id="analysis-supplement-wish-own-evidence-20261106"></a>
+## 11/6 §235 — 回答自身の単一SELF希望と固定CPU packetの再読
+
+[週次§235](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplement-wish-own-evidence-20261106)が最新結果と再開点。API [5efdafab](https://github.com/MassyuRed/mashos-api/commit/5efdafab93f555dc777a07a886d051d72b8fe1a9) で既存ordinary ACTION／担当＋決定の後に、補足memo一欄の単一明記SELF希望を自身の完全根拠で証明する経路を追加した。既存9動詞・肯否／現在過去、原入力専用wish guard・親全体検証・未読・カテゴリ・同一record countを保つ。原文やモデルraw、source roleの変換はしない。
+
+新88＋旧232＝320 PASS／失敗・skip0・40.45秒、広域282 PASS／SQL WASM未設定20 SKIP／失敗0・208.15秒。対象を合算しない。保存DTOの非生成再読はmock RPC下の実readerであり、実DB／RLS／月次captureではない。5変更blobは読戻し一致、CI42205450639進行中。STRUCTURE_MAP_DELTA_PRESENT（既存consumer責務の限定拡張）、公開型／作者／共有文法／DB／RN／通常profile・transport不変。
+
+| file | 所有する作業と状態 |
+|---|---|
+| `replay_heterogeneous_scope_cpu.py`（新） | §234元CPU原本SHA固定・完全snapshot／合成packetを変更せず、候補／typed map／保存candidate／current・月次projection readerを0モデルで再読。初回tuple／JSON list比較器の一行を訂正し、別outputで10/10・候補reload10／mock RPC reader40read一致。元失敗を保持 |
+| `heterogeneous_scope_cpu.py`（既存） | 独立作成した元10完全合成snapshotと手書きpacketのbefore診断。元reportは上書きしない |
+| `heterogeneous_scope_probe.py`（既存） | 固定v10／元a2eのprepare／generate／replay／compare source。実model generateは未実行のまま |
+| API `ai/tests/test_analysis_model_supplement_wish.py`（新） | 回答自身の証拠、四希望形／既存9動詞、canonical／親未読／複数回答・記録・カテゴリ、改変拒否、非生成保存再読の88検査 |
+| `supplement_wish_own_evidence_results.json`（新） | 本文なし集計。元f50／直前db6／現5efdの効果、local／進行中CI、モデル／実DB0と非公開原本参照を分離 |
+
+CPU replayは `--api`／`--prior-json`／`--output` を取り、元report SHA `410d2cdbf1d5c07fa0b4c47ecae3ec7f165a1193164285bc000e110c859d2cde` と新outputを要求する。v2は4.380014秒、全snapshot／messages／request_ref／guard／raw相当bytes不変、HC01–05はartifact UUIDを除きgraph／本文図一致。直前db6比でHC06–08は0→2node、HC10は2→4node、HC09の2node／mapped1／unparsed0は保持である。合成packetのstrict受理を実4Bのraw品質へ換算しない。[本文なし集計](supplement_wish_own_evidence_results.json)と[非公開原本](https://chatgpt.com/library?file_id=libfile_fde3_f-fdbb3a61c7b481919f0b623d2962e507_2f7470f963808191aaebf050935e72de&account_id=personal)（14member／497233bytes／SHA `4142a3443adc1bc9b14ab7afe4d0fee9ece96a89b46cb40d7d17f63cad8b3b6f`、CRC／全bytes一致）へ元失敗も保持。作成時CI進行中と後続CI結果を分ける。同環境root／補助の全10確認はMash／human／独立Pro受入れではない。
+
+新モデル／raw取得／学習／DB呼出し0。Browser状態取得とJupyter直接タブ作成が各300秒で未応答、Jupyter到達・新結果は未確認。タブ作成の実HTTP到達は不明で、全接続試行をPodアクセス0とは断定しない。resetのdispatch前中止と補助のtool不在による追加Podアクセスは0。新Pod管理操作0・5時間依頼は未完了。接続後は旧JSON／test log／terminal状態を先に回収し、旧runを再実行しない。元model runnerを後日使う場合、旧f50acbc／db6a571 rootは比較用に保持し、API `5efdafab93f555dc777a07a886d051d72b8fe1a9` の別runtimeを用意して `--expected-api-commit` で固定する。元a2e／config006e／pins／optional target／runner・fixtureを照合し、新prepare／新outputで扱う。現段階で実raw／モデル品質・通常採用／本番成功を主張しない。

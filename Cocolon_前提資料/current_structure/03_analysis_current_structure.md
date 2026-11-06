@@ -1,4 +1,6 @@
-> **11/6・§234：原希望＋ordinary本人補足ACTIONで原希望が落ちるlocal view不整合をAPI db6a571へ修復。local231 PASS／CI42199766784全工程success、変更blob読戻し済み。カテゴリ・全source・根拠・通常既定を保持。Jupyter after／test結果は未回収、4B新試行は未起動。環境切断で5時間依頼は未完了、再開点を保存。補足希望・暗黙役割／本人基準／記録間意味、通常採用／本番は残件。** [結果・再開点](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-heterogeneous-scope-cpu-20261106)。
+> **11/6・最新§235：ordinary補足自身の単一SELF希望をAPI 5efdafabへ限定接続。親全体を検証し、補足自身の全文・版・座標・hashと既存9動詞／肯否／現在過去を照合する。原入力専用証明、親未読、同一機会とカテゴリを維持。320 PASS、同packet10/10・候補reload10／mock RPC保存reader40read、全変更blob一致。HC09は直前db6の既回復を保持。CI42205450639進行中、新モデル／raw取得／DB0。Browser状態取得とJupyter直接タブ作成が各300秒で未応答、Jupyter到達・新結果は未確認・5時間依頼未完了。** [範囲・再開点](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplement-wish-own-evidence-20261106)／[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/supplement_wish_own_evidence_results.json)。STRUCTURE_MAP_DELTA_PRESENT（既存consumer責務）。
+
+> **11/6・§234時点：原希望＋ordinary本人補足ACTIONで原希望が落ちるlocal view不整合をAPI db6a571へ修復。local231 PASS／CI42199766784全工程success、変更blob読戻し済み。カテゴリ・全source・根拠・通常既定を保持。Jupyter after／test結果は未回収、4B新試行は未起動。環境切断で5時間依頼は未完了、再開点を保存。補足希望・暗黙役割／本人基準／記録間意味、通常採用／本番は当時の残件。** [当時の結果・再開点](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-heterogeneous-scope-cpu-20261106)。補足希望の後続差分は§235を参照。
 
 > **11/6・分析の継続（第9回§233）：追加教示・学習・owner修正なしの現v10で1/2/3記録の3応答が文章・図へ到達。mapped0/0/3→1/2/3、各mapは過去事実＋現在希望の2node・edge0、各nodeの記録／根拠数1/2/3を保持。全対象子必須化やraw修復なし。保存projectionはmock RPCの実current／月次readerで生成禁止の12read一致。実DB／月次capture・private graph完全復元／分割batch／通常採用・本番は未実施。** [結果・範囲・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-target-scope-v10-20261106)。
 
@@ -1351,3 +1353,14 @@ E04はSELF／negative／wish／current_inputの1node、E05はSELF／positive／f
 全fieldの完全rootと明記主体・格関係／対象を保持し、希望を事実へ変えない。対象子なしでも元root内の対象は消えておらず、対象子全件必須化は不要。N3の元typed graph・本文図はprojection_ofを除き一致。元3候補の非生成再読と同rawの3map再構築に加え、実readerの保存projection再読を確認した。readerは実`read_maps`／`ensure_map(ensure=False)`×current／月次、mock RPC12read。モデル・compiler／作者の生成入口を禁止し、静的本文整合検査を保持する。合成の日時／月参照を使い、実DB保存／RLS／月次captureやprivate graph完全復元とは区別。
 
 STRUCTURE_MAP_DELTA_NONE：production source／prompt／private profile／型／通常transport／batch許可／DB／RNは前回のまま。新trialと保存reader診断の実file対応を01Bへ追記。次は異内容・異カテゴリ／本人補足との元field対応のCPU照合。分割batch／全履歴の通常時間内処理・本人基準の役割／選択／記録間意味・IF／Saved・実機は残件。[全結果](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-target-scope-v10-20261106)。
+
+
+## 11/6 §235 — ordinary本人補足の単一SELF希望を自身の根拠で接続
+
+API `5efdafab93f555dc777a07a886d051d72b8fe1a9` の既存 `intent_compiler.compile_model_supplement_plain_wish` は、全親原入力＋適格ANSWER集合を既存compilerへ通してから、当該補足のmemo一欄・単一希望だけを証明する。既存9動詞（書く／調べる／試す／見る／作る／残す／記録する／メモする／続ける）の明記SELF、wishの肯定／否定・current_input／pastに限定。補足をORIGINAL_INPUTへ変換せず、原入力専用 `_model_complete_observed_plain_wishes` のguardは保持する。共用部分は原欄と回答欄それぞれの完全field／全unit照合だけ。
+
+memberの親record/version、source envelope、補足自身の全文・scalar／UTF8座標・field／literal hashを照合する。canonical集約の代表が原入力や先行補足でも、今回の補足literalからpropositionとsource_partsを再導出し、その補足の唯一根拠へ束縛する。別sourceの主語／時点／否定／原文範囲は借用しない。全親に更新／衝突／注釈があれば拒否し、補足自身やそのcanonical nodeに関わる辺も受理しない。複数節・二希望・未読尾部・OTHER／省略主体・認知／留保・相対日／順序は対象外。
+
+既存 `semantic_admission._compile_model_observed_record` がordinary ACTION／担当＋決定の証明に続く第三経路として使い、既存record graphへ戻す。親が未対応ならSOURCE_SCOPEを保持し、同じ原記録＋複数補足を別機会へ数えない。カテゴリは親から継承し、異カテゴリ集合・別recordの既存集約規則を維持。回答間や親→回答の関係線は作らない。
+
+新88＋既存232＝320 PASS／0 FAIL／0 SKIP・40.45秒、広域5fileは282 PASS／SQL WASM未設定20 SKIP／0 FAIL・208.15秒。件数を合算しない。同一合成packetのCPU再読は10/10・4.380014秒で、元snapshot／messages／request_ref／guard／raw相当文字列を不変にした候補reload10・自身の証拠10・mock RPCのcurrent／月次40readが一致。直前db6比でHC06–08は0→2node、HC10は2→4nodeとなり、HC09の2nodeは既回復を保持した。HC01–05のgraph／本文図はartifact UUIDを除き同一。実DB／RLS／月次captureとは区別する。5変更blob読戻し一致、CI42205450639進行中、新モデル／raw取得／DB呼出し0。Browser状態取得とJupyter直接タブ作成が各300秒で未応答、Jupyter到達・新結果は未確認、5時間完了とはしない。[最新結果・原本・再開点](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplement-wish-own-evidence-20261106)／[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/supplement_wish_own_evidence_results.json)。STRUCTURE_MAP_DELTA_PRESENT（既存consumer責務の限定拡張）。公開型／作者／共有文法／DB／RN／通常profile・transport・配置は不変。

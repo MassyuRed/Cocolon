@@ -5367,3 +5367,53 @@ Jupyter上では、新コピーのoriginが旧local copyを指しており新com
 6. HC06–08等の本人補足希望は現consumerの既存未対応であり、誤kind／引用／source proofのどこで止まるかを実rawから分ける。原入力専用wish proofを補足へ流用しない。別のanswer-owned proofの最小案は同環境read-only確認までで、実装・テスト・採用はまだ行っていない。
 
 GitHubへ公開してよいsource／本文なし集計／現在地だけを反映し、原文・raw・人物・tokenを公開しない。非公開CPU原本は前掲の保存先に保全済み。Jupyter未回収fileはPod側に残っている可能性があるがPod外保全済みとは主張しない。API／資料の全変更blobは各checkpointで読み戻し一致、両PRはDraft／open／unmerged。本番反映・merge・RN build・DB書込は0。
+
+> 継続更新：§234の「補足希望未対応」「別proofは未実装」は当時の確定状態として残す。後続§235でordinary補足自身の単一SELF希望の接続と回帰検証を行った。旧CPU原本とJupyter未回収結果を、新しいlocal検証で上書きしない。
+
+<a id="analysis-supplement-wish-own-evidence-20261106"></a>
+## 235. 11/6 — ordinary本人補足の単一SELF希望を自身の完全根拠で接続
+
+Mashの継続中の分析残件・本人補足対応指示の範囲で、§234の原希望保持修復API db6a571を起点に、既存source adapter／共有文法／model consumer／唯一作者と回帰境界を照合した。補足の単一希望はprepare／candidateの資格を既に通り、既存typed consumerに回答用のwish証明がないため未対応だった。新profileや原入力専用guardの緩和を作らず、ordinary ACTION／担当＋決定と同様の回答自身の証明へ接続した。
+
+### 実装済みの限定範囲
+
+API [5efdafab93f555dc777a07a886d051d72b8fe1a9](https://github.com/MassyuRed/mashos-api/commit/5efdafab93f555dc777a07a886d051d72b8fe1a9) の変更は既存production2file、既存test1file、新test1file、既存workflow1file。5変更blobをGitHubから読み戻し、local bytes／Git blobへ一致を確認した。
+
+- `intent_compiler.compile_model_supplement_plain_wish` は、親原入力＋全ANSWERの既存compileを先に行い、更新／衝突／注釈を拒否する。当該補足memo一欄・一つの明記SELF希望だけを、親memberのrecord/version・child envelope、自身の全文・scalar／UTF8範囲・field／literal hashで証明する。
+- 既存9動詞（書く／調べる／試す／見る／作る／残す／記録する／メモする／続ける）のwish、肯定／否定×現在current_input／過去pastを保持する。canonical nodeの代表が原入力や先行補足でも、今回の補足literalからproposition／source_partsを再導出する。元の肯否・時点・modalityを変えず、原文外のSELFや否定注釈は補わない。
+- 原入力専用 `_model_complete_observed_plain_wishes` のguardは維持し、source roleの変換なし。共用するのは完全field／全unit照合だけ。複数節・二希望・未読尾部・他者／主体省略・認知／留保・相対日／順序、補足またはcanonical nodeに関わる辺を採らない。
+- `semantic_admission._compile_model_observed_record` は既存ACTION／担当＋決定が採れない場合の第三経路として使う。親のSOURCE_SCOPE、親から継承するカテゴリ、異カテゴリ集合の分離を保つ。原入力と複数補足は同一recordの一機会であり、根拠数が増えてもrecord count／badgeを水増ししない。親→回答／回答間／別recordの関係線を新設しない。
+
+公開型／唯一作者／共有文法／DB／RN／通常profile・transport／budgeted batch選択は不変。新prompt・説明例・教師・重み・学習は0。STRUCTURE_MAP_DELTA_PRESENT（既存consumer責務の限定拡張）であり、通常採用・本番配置・意味品質完成の判定ではない。
+
+### local検証と同packet比較の確定結果
+
+`test_analysis_model_supplement_wish.py` 新88件と既存 `test_analysis_model_observed_actions.py` 232件は **320 PASS／0 FAIL／0 SKIP、40.45秒**。既存Pydantic deprecation warning1。四希望形と既存9動詞、原入力ACTION／WISH／未対応親との併存、canonical重複の回答自身の再導出、複数回答／複数record／カテゴリ、根拠・親版・owner／roundの改変拒否、更新／衝突／注釈・複数節等の拒否を確認した。四希望形と9動詞の全36交差組を独立評価したという件数にはしない。
+
+広域5fileは **282 PASS／20 SKIP／0 FAIL、208.15秒**。20 SKIPはすべてSQL WASM環境未設定（cumulative1＋model_source19）で、SQL成功へ数えない。上記320件と合算しない。[CI42205450639](https://github.com/MassyuRed/mashos-api/actions/runs/42205450639)は進行中であり、全工程成功や隔離SQL成功はまだ主張しない。
+
+新補足希望と既存保存wireのprojection DTOは、実read_maps／mock RPC下でEngine・compiler・新wish proof・作者の生成入口を禁止して同一値を再読した。静的本文整合検査は維持する。これは実DB永続化／RLS／月次capture、private graph全復元や本人実機の成功ではない。
+
+新source `replay_heterogeneous_scope_cpu.py` は、§234の固定CPU原本（SHA `410d2cdbf1d5c07fa0b4c47ecae3ec7f165a1193164285bc000e110c859d2cde`）の全snapshot／合成packet／messages／request_ref／guard／raw相当bytesを変更せず、現consumerと保存candidate／projection readerへ通すCPU診断。合成手書きpacketを実4B応答と呼ばない。初回比較器はJSON空配列とdataclass空tupleの表現差を同一扱いしない不備があり、HC06–10をfailと記録した。実保存edges=[]と意味検査は一致しており、production修正なしで比較器の一行を訂正した。初回原本を保持し、別outputのv2は **10/10 PASS・4.380014秒**。候補非生成reload10・source evidence10・mock RPCの実current／月次reader40readが一致し、model／tokenizer／学習／DB呼出し0。
+
+| 直前db6a571からの同packet比較 | 現5efdafabの結果 |
+|---|---|
+| HC06–08の補足希望 | 各0→2node、mapped0→1／unparsed1→0 |
+| HC10の独立record＋補足希望record | 2→4node、mapped1→2／unparsed1→0 |
+| HC09の原希望＋補足ACTION | 2node／mapped1／unparsed0を保持。f50からの回復は§234のdb6修復によるもので、今回の新効果へ帰属しない |
+| HC01–05の既対応内容 | 全graph／本文／projectionはartifact UUIDだけを除き完全一致 |
+
+rootと同環境read-only補助が全10の本文・graph・証拠対応を確認した。保存reportのstatusは `COMPLETE_SYNTHETIC_REPLAY_PENDING_REVIEW` のまま保持し、後続の同環境確認をMash／human／独立Pro受入れとは呼ばない。runner SHA `387849b41d47af43acc1cb1cd750d77e8fffb68151d788f2f91f4479e5ce28c6`、v2 JSONは1347799bytes／SHA `5566010127d725d4284ec5a1c5a7da82d3be226713fbf175b8b83abc88711bdc`。[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/supplement_wish_own_evidence_results.json)へ比較・未完了を分離した。
+
+[非公開原本](https://chatgpt.com/library?file_id=libfile_fde3_f-fdbb3a61c7b481919f0b623d2962e507_2f7470f963808191aaebf050935e72de&account_id=personal) `Cocolon_Analysis_SupplementWishOwnEvidence_20261106.zip` は497233bytes／SHA `4142a3443adc1bc9b14ab7afe4d0fee9ece96a89b46cb40d7d17f63cad8b3b6f`、14memberのCRC／全bytes一致。元f50 CPU原本・直前db6比較・初回失敗・v2・現runner・API5file patch・途中／最終test log・metadata・README／manifestを保持する。作成時のCIは進行中であり、後続CI結果はこの記録へ別に追記する。原文／raw／人物は公開資料へ転記しない。
+
+### Jupyter接続状態と次の再開点
+
+ローカル実行とGitHub反映は復旧した。一方、Browserの状態取得1回と既存Jupyter URLへの直接タブ作成1回が各300秒で未応答となり、Jupyter到達・未回収CPU after／test logの結果は未確認。後者の実HTTP到達も不明で、この2回を追加Podアクセス0とは断定しない。rootのresetはdispatch前に中止され、補助環境にはBrowser toolがなく接続確認できなかった。このresetと補助による追加Podアクセスは0。接続未確認を、Pod停止・GPU障害・Jupyter処理の成功／失敗と断定しない。
+
+今回の新モデルcall／load／raw取得／学習／DB呼出しは0。元 `heterogeneous_scope_probe.py` のgenerateは引き続き未実行で、5時間依頼を完了したとは主張しない。新local回帰成功を、未回収のJupyter検証結果へ付け替えない。Render／Supabase変更、本番配置／merge／RN buildも0。
+
+1. CI42205450639の終了状態・実logを回収し、成功／skip／失敗を対象ごとに確定する。同packet CPU比較は完了しており再実行せず、比較器訂正前の失敗原本も保持する。
+2. Jupyterへ接続できた場合、§234末尾の未回収JSON／test log・terminal未完入力・既存root／outputの有無を先に読む。既存処理や完了runを重複起動しない。
+3. 後日 `heterogeneous_scope_probe.py` を使う場合、旧f50acbc／db6a571の比較用rootを保持し、別runtimeをAPI `5efdafab93f555dc777a07a886d051d72b8fe1a9` へ固定する。runner／fixture／元a2e／config006e／pins・optional targetのbytesを照合し、新rootでprepareと入力予算を確認してから一回generateを扱う。旧prepareのidentityを新sourceへ流用しない。
+4. 実raw未取得の段階ではモデル品質・成功率を主張しない。一般の本人基準／暗黙役割／選択基準／記録間意味、全補足・分割batch／全履歴の通常時間内処理、IF／Saved・実DB／本人端末・商品受入れは残件。

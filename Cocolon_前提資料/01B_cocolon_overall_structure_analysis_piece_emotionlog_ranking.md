@@ -1,4 +1,6 @@
-> **11/5開始・分析の継続（第9回§214）：新規隔離targetで4vendor kernel bindingを実確認。固定API100c1bb／元a2eの3要求はwarmup候補保持、v7は6欄中field1だけで旧raw同一、v8は23秒signal14で未返却。1load／3開始／2stop、速度改善・全欄保持・意味品質は未証明。global base／商品source／通常選択を維持し、通常採用なし。version8保存済み。** [実結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-optional-kernel-diagnostic-20261105)。
+> **11/6・最新§235：API 5efdafabはordinary本人補足の単一SELF希望を、自身の完全根拠で既存consumerへ接続。実file地図は末尾§235、320 PASS／CI42205450639進行中。同packet10/10・候補reload10／mock RPC保存reader40read、モデル／DB0、Jupyter新結果未回収。** [現在地・範囲](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplement-wish-own-evidence-20261106)／[本文なし集計](observation_learning/trials/2026-11-01-analysis-model-fields/supplement_wish_own_evidence_results.json)。STRUCTURE_MAP_DELTA_PRESENT（既存consumer責務の限定拡張、公開型／作者／文法／DB／RN／通常profile・transport不変）。
+
+> **11/5開始・分析の履歴（第9回§214）：新規隔離targetで4vendor kernel bindingを実確認。固定API100c1bb／元a2eの3要求はwarmup候補保持、v7は6欄中field1だけで旧raw同一、v8は23秒signal14で未返却。1load／3開始／2stop、速度改善・全欄保持・意味品質は未証明。global base／商品source／通常選択を維持し、通常採用なし。version8保存済み。** [実結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-optional-kernel-diagnostic-20261105)。
 
 > **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
@@ -3791,3 +3793,21 @@ trial `heterogeneous_scope_cpu.py`は完全合成snapshotとpacketを実prepare�
 §234継続：API既存 `semantic_admission._compile_model_observed_record` は原入力専用sourcesとmember child参照の局所viewを整合し、最終source集合を保持する。既存 `test_analysis_model_observed_actions.py` へ26回帰、trial `heterogeneous_scope_probe.py` は固定モデル比較を所有。新商品owner／型／公開DTO／DB／RN構造は追加しない。
 
 §234確定：API db6a571の既存2file修復はCI全工程success。heterogeneous_scope_probe.pyは準備sourceのみ、実model未起動。Jupyter未回収結果と復旧手順はweekly§234末尾。STRUCTURE_MAP_DELTA_NONE（既存局所view修復と診断runner、通常API／DB／RN構造追加0）。
+
+> 継続更新：§234の補足希望未対応／別proof未実装は当時の記録。後続§235で単一SELF希望だけを回答自身の完全根拠で接続した。旧診断と原本は上書きしない。
+
+## 11/6 §235 — 補足自身のplain SELF wish証明と実file地図
+
+API [5efdafab](https://github.com/MassyuRed/mashos-api/commit/5efdafab93f555dc777a07a886d051d72b8fe1a9) の変更は下記既存4file＋新test1file。新product ownerは追加せず、既存consumer責務を限定拡張する。
+
+| 実path | 責務と今回の差分 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | 原入力専用wish wrapperを保持し、完全field／全unit照合だけを共用。新 `compile_model_supplement_plain_wish` が全親検証後、補足自身のmemo／版／envelope／座標／hashと再導出したSELF命題で単一希望を証明 |
+| `mashos-api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py` | 既存ordinary ACTION／ROLE＋決定に続く第三の回答経路として接続。元カテゴリ・同一recordの機会count・親SOURCE_SCOPEを既存集約へ保持 |
+| `mashos-api/ai/tests/test_analysis_model_supplement_wish.py`（新） | 88検査。肯否／現在過去、既存9動詞、canonical代表の再導出、親未読、カテゴリ／複数record／複数回答、根拠改変・更新／衝突／注釈拒否、保存非生成再読 |
+| `mashos-api/ai/tests/test_analysis_model_observed_actions.py` | 原入力専用wrapperの補足拒否を直接検査し、新しい別proofとの境界を確認。既存原希望・ordinary ACTION・保存wire回帰を保持 |
+| `mashos-api/.github/workflows/analysis-observed-content.yml` | 既存生成保存検査へ新補足wish moduleを追加。通常runtime／配置の有効化ではない |
+| `Cocolon/Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/replay_heterogeneous_scope_cpu.py`（新） | 元CPU原本SHAを固定し、元10完全snapshot／合成packetを変更せずcandidate／typed map／保存candidate／current・月次projection readerへ通す0モデル診断。10/10・候補reload10／mock RPC reader40read。元の比較器失敗は別原本へ保持 |
+| `Cocolon/Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/supplement_wish_own_evidence_results.json`（新） | 本文なし集計。元f50／直前db6／現5efdの比較、local検査と進行中CI、モデル／実DB0、非公開原本への参照を分離 |
+
+新88＋旧232＝320 PASS、広域282 PASS／SQL環境20 SKIP、CI42205450639進行中。同packet10/10・4.380014秒、HC09の2nodeは直前db6の回復を保持し今回の新効果へ数えない。新model／raw取得／DB0、Jupyter新結果未回収。元 `heterogeneous_scope_probe.py` は依然実model未実行で、将来使う場合は5efdafabへ固定した別runtimeが必要。STRUCTURE_MAP_DELTA_PRESENT（既存consumer責務）。公開型／唯一作者／共有文法／DB／RN／通常profile・transport不変。[全結果・境界・再開点](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-supplement-wish-own-evidence-20261106)／[本文なし集計](observation_learning/trials/2026-11-01-analysis-model-fields/supplement_wish_own_evidence_results.json)。
