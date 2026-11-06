@@ -2986,14 +2986,9 @@ Mashの続行指示に基づき、Pieceの有料向け配色選択を進めた�
 <a id="piece-sustained-session-20261104"></a>
 ## 141. 11/4 — Pieceの作成・本文・書き出しをまとめて進めた
 
-Mashの指定に従い、今回の変更はまとめビルドまでコードとして保持する。
-
-- Premiumの作成画面で、記録に適格な形式が複数あるときに選び直せる。現在の配色・比率・ロゴを引き継ぎ、既存POSTへ新しいキーで別候補を要求する。応答が途切れた場合は同じキーを再利用し、元の候補が有効な間は戻れる。旧ボタンから別候補を保存できない。期限切れは選択した形式と最後に反映した画像設定を保ち、同じ記録から明示的に作り直せる。
-- 画像本文に使うのは本人が書いた文章。選択感情と過去・他者・否定・強度の表現が一致しなくても、本文をそのまま保てる場合は生成する。明示動作名を伴う一部の「する。」、末尾の句点を省略した明確な丁寧体過去の文、同じ文型だけで構成された自己理解モードの記録を追加。「誰が」「誰の」などの疑問と「もし」で始まる未完の文は、句点が省略されていても生成対象に含めない。不明参照と既存の安全上の拒否も保持。既存保存済み本文とハッシュは移行しない。
-- 対応iOSのPNGについて、寸法・sRGB・ハッシュ確認後に本人専用の書き出し記録を残す候補を追加。APIとDBが本人・保存版・ハッシュを検証し、同じキーと内容には同じ記録IDを返す。OSへの写真保存や外部送信の結果は含まない。サーバー側の有効設定は既定でOFF。
-- Androidでは描画できないiOS用保存画像の案内を出し、本文と削除を残す。出力可否が確定した場合だけ準備へ進む。検査した文字表示が差し替わったら旧キャプチャを無効にし、APIの照合中に差し替わった場合も写真・共有へ渡さない。削除済みの遷移先は再読込候補から外し、共有が終わったと確認できる一時コピーは削除失敗時に再処理する。
-
-本番の読取ではRenderの自動配置OFF、Supabaseの既存記録テーブルとRLS有効を確認。拡張配色と書き出し記録のDB移行は未適用。今回のネイティブビルド、配布、Render配置、実機確認は未実施。Androidの新規画像作成は独立残件。次のまとめ反映時は[Piece構造](../current_structure/02_piece_current_structure.md#piece-format-language-export-20261104)とAPIの配置記録を参照する。
+Mashの指定に従い、�
+... 2356 bytes omitted ...
+時は[Piece構造](../current_structure/02_piece_current_structure.md#piece-format-language-export-20261104)とAPIの配置記録を参照する。
 
 検証では架空の36記録をFree・Plus・Premiumで同じ条件にかけ、各プランで従来の6件の候補・graph・本文を保持し、新たに15件を原文のまま生成した。これは実入力全体の成功率ではない。自己理解の保存モード7種は別の検査。隔離APIと実SQLが返した16通信をRNで再生し、形式変更・応答消失・保存・本人読取・同じ書き出し記録の再取得を照合。過去CIのiOS出力PNG8件は現在のsRGB・寸法検査を通過し、同じファイルを切り詰めた8件は拒否。本人実機での書き出しや共有送信の再確認ではない。
 
@@ -5472,3 +5467,15 @@ BrowserのgetStateが復旧し、既存Jupyter URLへ新tabを直接作成して
 公開repoからの別root取得とsparse展開が成功し、HEAD `5efdafab93f555dc777a07a886d051d72b8fe1a9` とtracked cleanを実runnerの検査で確認した。公開済みrunner／fixtureのSHAも一致。旧runtime pack／helper／元adapter/configの固定SHAを保ち、実tokenizerの新prepareは **10構成／24field、最大4502token＋予約2048＝6550<=8192** で `CPU_PREPARED_NO_MODEL` となった。元snapshotのみをmessagesへ渡し、手書きpacket／期待は送信しない。新rootは `/workspace/analysis-heterogeneous-v10-own-evidence-20261106`。GPU queryはreturn0・active processなし。
 
 上段のHEAD未確認／prepare未実施は途中時点の記録で、本追記によりこの2点を確定した。新生成／model load／学習／DBはまだ0。次はこのpackから元runnerを一回だけ外側300秒で実行し、原raw先行保存・同raw比較・非生成再読へ進む。prepare完了をモデル結果や商品品質成功へ換算しない。
+
+### 同checkpointの実4B一回比較と原本回収
+
+API5efd／元a2e・config006e／Qwen固定revision・pins／元optional target・v10指示を保持し、用意済みの10完全sourceだけを一回ずつ生成した。新10開始／10stop／1load／学習0、child128.340060778秒、外側parent134.238438373秒／exit0／timeout false。生成時間と読み込み・検証・回収・保持料金を混同しない。全Response/rawをconsume前に保存し、helper・API／重み／config／optional manifestの固定照合も終了した。終了GPU queryはreturn0、active processなし。
+
+現consumerは7要求を文章・図へ返し、HC01／HC03／HC10の3要求はstrict拒否となった。HC06–08の本人補足希望は同raw旧f50の0node／未解析1から、新2node／未解析0へ到達し、肯否・現在／過去と親の過去行動を保持する。HC09は原希望＋ordinary行動補足の旧1node／未解析1から2node／未解析0へ回復するが、これは前回db6修復を保持した効果で今回の補足希望実装だけへ帰属しない。HC02／HC04／HC05の既対応graph・counts・本文・図は、新artifact UUID以外一致した。
+
+全10原応答の非生成replayと同じmessages/ref/guard/rawによる旧f50比較を別processで各exit0確認。候補7は生成禁止の保存reloadも一致。HC01は引用不足／曖昧の拒否、HC03／HC10はJSON不正の拒否であり、原文やrawを修復せず、追加生成もしない。正確な位置・意味への影響を確認中で、7/10を一般入力の正解率へ換算しない。
+
+[実4B原本](https://chatgpt.com/library?file_id=libfile_fde3_f-729bd8856e6481918dbff31e0e1565c0_2f7470f963808191aaebf050935e72de&account_id=personal)は285512bytes／SHA `260dd2932805e84ffb5c32aba75dcb442d5e09df2b688def351ea4a05cacafe7`、36member・CRC／manifest全memberのbytes/SHA一致。pack、全10raw／Response、全結果・同raw旧比較・replay、実log・runtime pack/helper・公開runner/fixtureを保持。作成時は保存reader・詳細読解の確認中で、後続結果は別に追記する。
+
+[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/heterogeneous_scope_v10_results.json)と新 `replay_heterogeneous_scope_saved.py` で全10を保持し、生成済みの実projectionのみcurrent／月次readerへ通す準備を行う。拒否ケースを集計から消さず、読込0として残す。実DB／RLS／月次capture／private graph全復元の証明ではない。今回は商品source／prompt／型／文法／作者／DB／RN／通常transportを変更せず、通常採用・次学習初期値・本番へ自動進行しない。
