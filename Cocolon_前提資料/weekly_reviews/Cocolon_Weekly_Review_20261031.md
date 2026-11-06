@@ -5171,3 +5171,13 @@ iOS本体が許可するportrait／landscape-left／landscape-rightに対し、R
 製品23＋既存test3＋資料3file。11入口493 PASS／FAIL0／SKIP0（既存9入口179、Piece preview表示／初期保存modal314）。実Backの6条件と初期保存modalの各状態の向きを検査し、天気／問いのsource文字列とPiece import期待のみ適応。passed-only・回復・所有者・保存identityを緩めない。JS parse／空白検査成功。新file／framework／依存／route／API／DB／AI／課金価格／本文・作品画像・本人／公開契約変更0、STRUCTURE_MAP_DELTA_NONE。
 
 詳細は[UI設計§25](../designs/ui/material-ui-design.md#ui-navigation-modal-finish-20261106)。候補保存後に既存workflowから全群をまとめたiOS TestFlightビルドを一回開始する。正確なcandidate commit／run／build番号と各工程の結果は取得後追記。途中群別ビルドは行わない。実機3theme・文字拡大・狭幅／短横・safe area／keyboard・長文／回復・全19stepは未確認。今回source保存は[skip ci]、Render／Supabase／GPU操作0。writerは華恋一人、補助はread-only／scratch照合。
+
+
+<a id="ui-integrated-ios-7301-20261106"></a>
+## 228. 11/6 — 全画面統合iOS 7301を一回開始
+
+全6群＋仕上げのsource候補 `ae70f7c7e09788c4f4e015be105516f42c9bfcf3` を保存し、全29fileの全文／SHA再読込・親／path集合／head一致を確認。既存Actionsの[手動iOS #73](https://github.com/MassyuRed/Cocolon/actions/runs/42169862420)を05:41:03 UTCに一回dispatchした。run42169862420・attempt1、既存番号式による7301／version1.0。05:43:17 UTC時点で依存・Pods・署名準備・番号設定success、Archive中。最終のArchive／目的文／IPA／Upload、Apple処理／実機は未確認。build元は上記SHAで固定し、後続資料commitと混同しない。
+
+[UI設計§26](../designs/ui/material-ui-design.md#ui-integrated-ios-7301-20261106)へ同じ7301での初回確認順を追記：標準条件で起動／入力→分析→Piece／social→設定／案内の全個別画面を一巡し、3theme・文字拡大・短横／keyboard・状態／回復、最後に全19tutorial stepを確認する。§14〜16の全範囲を維持し、未表示条件や休眠資産は未確認として残す。一巡分の指摘を再現してまとめて修正し、途中画面群別のbinaryを増やさない。実課金・削除・公開はUI確認のために行わない。
+
+この記録は資料のみ[skip ci]、追加build／rerun／Android／Render／Supabase／GPU操作0。署名workflow成功と実機の視覚的受入れを分けて結果を追記する。

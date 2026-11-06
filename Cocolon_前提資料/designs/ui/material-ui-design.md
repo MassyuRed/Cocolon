@@ -166,7 +166,7 @@ Mashの比較理由：Day One案は情報の区切りが弱く、視線が動き
 | Piece作成 | 画像／全文を設定より前へ。操作ボタンと外枠をテーマ対応。全条件操作とidentity/tokenの引渡しを保持。作品renderer・recipe・保存画像は変更0 |
 | 設定・周辺 | 設定入口を目的が読める3行へ。テーマ選択面、共通メニュー、契約カード・説明・CTA、Nexusタブと自分のPiece入口を調整 |
 
-**現在の実装：** §17〜22の全6群へsourceを反映し、§23でタップ領域と短い横画面のtutorial、§24で文字拡大時の感情入力・下部ナビ・接続案内を補修。全画面対応表のsource実装を一巡した状態であり、ビルド・配布・実端末での表示合格は未確認。次は全群をまとめたビルドで、3テーマ、文字拡大1.0/1.3/1.6、狭い幅、短い横画面、safe area、キーボード、長文・回復操作、全19tutorial stepを確認し、実際の欠けを直す。sourceの統一と実機での仕上げ完了を分けて管理する。
+**現在の実装：** §17〜22の全6群を適用し、§23〜25でタップ領域・短横tutorial・文字拡大・戻る・Modal方向を補修。source候補`ae70f7c7`の全画面統合iOS7301を一回開始し、Archiveが進行中（[§26](#ui-integrated-ios-7301-20261106)）。native build／Uploadの最終結果と実端末の表示合格は未確認。同じ7301で全個別画面を一巡し、3テーマ・文字拡大・狭幅／短横・safe area／keyboard・長文／回復・全19tutorial stepを確認する。
 
 初回反映時の確認：Nodeの既存5入口（画面contract・IAP復元・テーマ可読性・Piece初回保存modal・preview/display）で400 PASS／FAIL0／SKIP0。React/native・Auth/HTTPは各既存testの代替を含む。テーマ検査は旧バーガンディ色・太枠・taglineの固定期待を採用設計へ更新し、3テーマの本文／補助／tonal／操作色の4.5:1を検査した。Piece testの新テーマhookと共有Buttonへのimport適応のみを行い、保存・回復の検査は維持。最初の実行は取得不足の依存fileと旧表示期待で失敗し、依存原本の取得と意図した期待更新後に上記最終実行を通過した。製品の資格判定を緩めていない。今回の全画面設計更新で、これらを再実行したとは扱わない。
 
@@ -674,3 +674,26 @@ iOS本体のInfo.plistは縦・左横・右横を許可する一方、RN Modal�
 製品23file＋既存test3file＋資料3file。既存11入口 **493 PASS／FAIL0／SKIP0**（従来9入口179＋Piece preview表示／初期保存modal314）。戻るの6条件を実共通componentで検査し、初期保存modalの各状態で3向きをassert。source文字列に依存する天気／問い履歴の期待とPiece import列挙だけを現表示へ適応し、passed-only／本人／回復／保存identityの条件は緩めていない。orientation追加直前の191 app sourceと比べ、定数／import／Modal propだけを除くASTは全一致。PieceVisualCard／PieceExportCanvasとfeatures/pieceの12JSもbytes同一。変更JSのparse／空白検査成功。新file／依存／route／API／DB／AI／価格／入力保存・本人・公開契約・作品画像変更0、STRUCTURE_MAP_DELTA_NONE。
 
 この候補の保存後、**全画面をまとめたiOS TestFlightビルドを一回開始する**。途中群ごとのbuildは行わず、既存手動workflowを使う。build開始時の正確なcommit／run／CFBundleVersionと署名Archive・目的文検査・IPA・Uploadの結果は、結果取得後に追記する。本節の493件はnative描画や実機UI受入れではない。3theme、文字拡大1.0／1.3／1.6、狭幅／短横、safe area／keyboard、長文／回復・全19stepの実機確認は引き続き残る。Render／Supabase／GPU操作0。
+
+
+<a id="ui-integrated-ios-7301-20261106"></a>
+## 26. 11/6 全画面統合iOS 7301 — ビルド進行中
+
+source候補は `ae70f7c7e09788c4f4e015be105516f42c9bfcf3`。全29変更fileの本文／blob SHA再読込、親・変更path集合・branch headを照合した後、既存Actions画面から[全画面統合ビルド #73](https://github.com/MassyuRed/Cocolon/actions/runs/42169862420)を**一回だけ**開始した。run `42169862420`、attempt 1、開始2026-11-06 05:41:03 UTC。既存式run_number×100＋attemptのCFBundleVersionは7301、version 1.0。workflow／依存・署名設定の変更はない。
+
+05:43:17 UTC時点で依存・Pods・署名証明書／profile・build番号設定はsuccess、iOS Archiveが進行中。署名Archive／目的文検査／IPA／TestFlight Uploadの最終結果、Apple側処理と端末導入は未確認。後続の資料だけの保存commitはこのビルド元SHAと区別し、再ビルドしない。
+
+### 7301導入後の確認順
+
+対象と受入条件は§14〜16を継承し、確認順だけを追加する。同じ7301で一巡分の指摘を集め、再現・切分けしてからまとめて修正する。休眠資産や現在出せない条件は、対象から除外せず未確認として管理する。
+
+| 順 | 同じバイナリで確認する範囲 |
+|---|---|
+| 1 | default・文字1.0・縦で起動／認証→ホーム→入力・問い・Emlis・履歴。区切り、主操作、保存と応答の区別 |
+| 2 | 分析→日週月→各履歴／詳細→現在マップ・月次比較・根拠。長文、スクロール、閉じる、元画面への戻り |
+| 3 | Pieceの4タブ→本人一覧／詳細・作成プレビュー・画像操作→本人／他者アカウント・フォロー。作品と操作枠の区別 |
+| 4 | 設定・契約→お知らせ／履歴→各画面ガイド・関連用語。§14の通常到達できる個別画面を標準条件で一巡 |
+| 5 | 正常／空／通信失敗・再試行、3テーマ、文字1.3／1.6、左右の短い横画面、keyboard中の入力・操作・閉じる。各型と高リスク個別条件 |
+| 6 | tutorial全19stepのspotlight・代理tap・説明全文・次へ・完了。長文／短横で気になるstepも同じ7301で再確認 |
+
+見た目確認のための実課金・削除・公開は行わない。表示状態は既存の安全なfixture／合成条件を使い、本人端末で確認できた範囲を別に記録する。
