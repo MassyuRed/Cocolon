@@ -5197,3 +5197,11 @@ Analysisは主2pill44・日週月短表示と更新日を折返し行へ、現�
 製品21＋既存test2＋資料3file。12入口673 PASS／FAIL0／SKIP0、最終のchip余白／guide対応後は関係2入口80 PASS。初回の旧source文字列期待1件だけを新表示propまで含む厳密な期待へ適応。Analysis前後612 mock render／21 AST、Piece資格12宣言／onPress11個、VisualCardのrender外34member／canvas ASTの保持を確認。JS20／XML3 parse・空白検査成功。machine検査やsource比較を、実機での原本一致へ換算しない。
 
 現時点はsource修正・未ビルドとして保存。途中群別のbuildを増やさず、次の統合native確認は候補固定の一回にまとめ、そのsource／run／結果を別記する。全登録／内部route／3theme／文字拡大／狭幅・短横／keyboard／長文・回復／全19stepの実機確認は残る。API／DB／AI／価格／本人・公開／保存guard変更0、Render／Supabase／GPU操作0、STRUCTURE_MAP_DELTA_NONE。実装分担は表示ownerのfileを分離してrootが統合、GitHub writerはroot一人。
+
+
+<a id="ui-preview-correction-ios-7401-20261106"></a>
+## 230. 11/6 — 修正一式を固定し、統合iOS7401を一回開始
+
+§229／UI設計§27の製品21＋test2＋資料3fileを `b64cfa7692d464fbcf047263f1113c6feec96690` に保存。全26file全文／SHA再読込、親／変更path集合／head、比較HTML／sourceの不変を確認してから、[既存iOS #74](https://github.com/MassyuRed/Cocolon/actions/runs/42176982238)を**15:50:24 JSTに一回**dispatchした。run42176982238・attempt1、version1.0／7401。現時点は進行中、Archive／目的文／IPA／Upload・Apple側処理・端末表示は未確認。
+
+途中群別build／rerun0、workflow・依存・署名設定の変更0。built sourceはb64cfa76に固定し、後続の資料commitと混同しない。[UI設計§28](../designs/ui/material-ui-design.md#ui-preview-correction-ios-7401-20261106)へ同じ結果を記録し、最終工程を確認後にこの節を更新する。3theme／文字拡大／全画面と状態の実機確認は引き続き残る。追加Android／Render／Supabase／GPU操作0。
