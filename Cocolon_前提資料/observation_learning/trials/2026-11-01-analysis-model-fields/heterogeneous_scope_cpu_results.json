@@ -43,7 +43,8 @@
         "source_count": 3,
         "stale_supplement_count": 0,
         "unparsed_count": 0
-      }
+      },
+      "expectation_matches": true
     },
     {
       "id": "HC02",
@@ -57,7 +58,8 @@
         "source_count": 2,
         "stale_supplement_count": 0,
         "unparsed_count": 0
-      }
+      },
+      "expectation_matches": true
     },
     {
       "id": "HC03",
@@ -71,7 +73,8 @@
         "source_count": 2,
         "stale_supplement_count": 0,
         "unparsed_count": 0
-      }
+      },
+      "expectation_matches": true
     },
     {
       "id": "HC04",
@@ -85,7 +88,8 @@
         "source_count": 3,
         "stale_supplement_count": 0,
         "unparsed_count": 0
-      }
+      },
+      "expectation_matches": true
     },
     {
       "id": "HC05",
@@ -99,7 +103,8 @@
         "source_count": 1,
         "stale_supplement_count": 0,
         "unparsed_count": 0
-      }
+      },
+      "expectation_matches": true
     },
     {
       "id": "HC06",
@@ -113,7 +118,8 @@
         "source_count": 1,
         "stale_supplement_count": 0,
         "unparsed_count": 1
-      }
+      },
+      "expectation_matches": true
     },
     {
       "id": "HC07",
@@ -127,7 +133,8 @@
         "source_count": 1,
         "stale_supplement_count": 0,
         "unparsed_count": 1
-      }
+      },
+      "expectation_matches": true
     },
     {
       "id": "HC08",
@@ -141,7 +148,8 @@
         "source_count": 1,
         "stale_supplement_count": 0,
         "unparsed_count": 1
-      }
+      },
+      "expectation_matches": true
     },
     {
       "id": "HC09",
@@ -155,7 +163,8 @@
         "source_count": 1,
         "stale_supplement_count": 0,
         "unparsed_count": 1
-      }
+      },
+      "expectation_matches": false
     },
     {
       "id": "HC10",
@@ -169,7 +178,8 @@
         "source_count": 2,
         "stale_supplement_count": 0,
         "unparsed_count": 1
-      }
+      },
+      "expectation_matches": true
     }
   ],
   "private_original": "https://chatgpt.com/library?file_id=libfile_fde3_f-23d2bfa1e04481919859f6e8db667426_2f7470f963808191aaebf050935e72de&account_id=personal",

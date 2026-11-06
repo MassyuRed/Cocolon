@@ -1,4 +1,4 @@
-**11/6・分析の途中checkpoint（第9回§234）：異内容・カテゴリ・ordinary本人補足の完全合成CPU10構成を確認。カテゴリ分離・同意味集約を保持した一方、原入力の希望＋本人行動補足で原希望が落ちる不整合を特定。original-onlyのsourcesとmember child参照の不一致が原因で、既存原希望を保持する局所修復へ進む。補足希望自体は未対応、モデル生成／学習／DB変更0。5時間依頼の途中であり完了扱いしない。** [結果・原本・再開点](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-heterogeneous-scope-cpu-20261106)。
+**11/6・分析の途中checkpoint（第9回§234）：異内容・カテゴリ・ordinary本人補足の完全合成CPU10構成から、原希望が行動補足追加時に落ちる不整合を特定。API db6a571でoriginal-only viewのchild参照を整合し、既存module231 PASS（新26）で保持を確認。カテゴリ分離・根拠・通常既定・補足希望未対応は維持。GitHub反映／全変更blob読戻し済み。固定v10／元a2eの新10要求runnerを準備、Jupyter検証と実model比較はこれから。5時間依頼の途中であり完了扱いしない。** [結果・原本・再開点](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-heterogeneous-scope-cpu-20261106)。
 
 **11/5・分析の最新（第9回§198）：モデル経路で落ちていた主語未確定の完全過去行動と、同欄の複数本人行動を既存source証明のまま保持。元8応答の同raw比較は0→4保存、別6例も同raw旧0→新4保存。新14stop/2load/学習0、実4B保存は隔離mock RPC・別合成SQL182 PASS。主体・否定・明記順序・保存非生成再読を保持。一般の本人基準／暗黙役割・記録間意味、通常重み採用／本番／端末／配置は未達。最終CI42036416309は全工程成功。** [全結果・失敗・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-ordinary-prose-20261105)。
 

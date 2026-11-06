@@ -5342,4 +5342,6 @@ Mashの5時間の分析残件・Jupyter直接接続・区切りごとのGitHub�
 
 CPUは再発見した既存venvのPython3.12.14／pytest8.3.5／FastAPI0.162.0／pydantic2.14.3／httpx0.28.1、1.896085秒・exit0。固定CI環境の正式成功とは区別する。生成／load／tokenizer／学習／DB呼出し・製品変更0。 [本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/heterogeneous_scope_cpu_results.json)と[原本](https://chatgpt.com/library?file_id=libfile_fde3_f-23d2bfa1e04481919859f6e8db667426_2f7470f963808191aaebf050935e72de&account_id=personal)を保全。原本384410bytes／SHA410d2cdbf1d5c07fa0b4c47ecae3ec7f165a1193164285bc000e110c859d2cde。原本を後続の修復結果で上書きしない。
 
-STRUCTURE_MAP_DELTA_NONE（診断runnerと検証範囲だけ）。通常profile／研究重み未採用・本番／実DB／本人端末は未実施。5時間依頼の途中checkpointであり、5時間作業完了とはしない。次は原入力だけの局所viewを整合させる最小修復・回帰と、同じ合成入力での前後比較。以後、固定v10／元a2eの別一回model比較で実field保持を確認する。旧run再起動や成功までの生成反復は行わない。
+STRUCTURE_MAP_DELTA_NONE（診断runnerと検証範囲だけ）。通常profile／研究重み未採用・本番／実DB／本人端末は未実施。5時間依頼の途中checkpointであり、5時間作業完了とはしない。続いて[API db6a571](https://github.com/MassyuRed/mashos-api/commit/db6a571689dca883ece187a21deefad45e6e08bd)の既存ownerで、original-only viewのmember child参照も原入力だけへ揃える8行修復を反映。最終artifactは元のfull source集合のまま。既存module全231 PASS／失敗・skip0、15.41秒（新26回帰、旧205を保持）。初回6失敗は新testのDTOキー期待・source例外型の誤りを訂正した。補足希望未対応を検証する旧test、原希望の証明条件、prompt／通常既定は不変。同環境read-only reviewは問題なし。全2変更blobをGitHubから全文読み戻して一致。CI42199766784は進行中で未合格。
+
+`heterogeneous_scope_probe.py`は同HC01〜10の元snapshotだけを現v10／元a2eへ一回ずつ渡す準備source。CPU合成packet／期待をpromptへ送らず、学習0・最大10生成／1load／親300秒・各23秒。全rawをconsume前に保存し、同rawの旧f50acbc比較と非生成再読を分離する。AST確認のみ、実model未実行。Jupyter修復版rootへ固定APIを配置し、CPU前後と関連検証へ進む。旧run再起動や成功までの生成反復は行わない。
