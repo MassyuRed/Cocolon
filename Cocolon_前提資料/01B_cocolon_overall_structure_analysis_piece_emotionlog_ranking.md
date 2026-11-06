@@ -3895,3 +3895,18 @@ HC01／02が退行し、HC03／10はraw同一の重複key拒否を継続。HC04�
 | 同directoryの`positive_past_wish_results.json` | 本文なしのv12不採用／v13局所回復／中間5unit減少／未採用・保全先 |
 
 資料変更は00／この01B／current_structure03／trial README／最新weekly§241／集計JSON。既存compiler・realizer・serve runtime・shape mask・syntax/enumsは不変。新ownerなし、STRUCTURE_MAP_DELTA_NONE。通常未採用・DB/RN/Render変更0。[実結果・次の一作業](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-positive-past-wish-20261107)。
+
+
+## 11/7 §242 — 主体未確定の希望・全変更path
+
+| 実path | 同じ既存owner内の責務 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | 原入力memo全文に閉じた9動詞4plain希望、UNSPECIFIED、model完全field証明、別recordの不明主体を非集約 |
+| 同directoryの`observed_route_realizer.py` | 文章・図共通labelに主体未確定と過去時点を保持 |
+| `mashos-api/ai/tests/test_analysis_model_omitted_wish.py` | 36活用条件、source/主体/別record/保存境界。最初の5fixtureを修正、商品source不変 |
+| `mashos-api/ai/tests/test_cmee_analysis_nominal_relations.py` | 新scopeに当たる旧拒否一例をwish/UNSPECIFIED/根拠を検証するpositive testへ移し、その他の拒否を保持 |
+| `mashos-api/.github/workflows/analysis-observed-content.yml` | 既存回帰jobへ新test一行を追加 |
+| `Cocolon/Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/omitted_wish_saved_trial.py` | 取得済み19応答を旧新APIで0生成のまま消費し、raw保持とtyped差分を比較 |
+| 同directoryの`omitted_wish_results.json` | 本文なしの局所回復・保持・失敗・未完了・保全先 |
+
+前提資料は00／この01B／current_structure03／詳細設計04／trial README／weekly§242を差分更新。admission／累積service／共有意味／profile／DTO／DB／RNは変更しない。STRUCTURE_MAP_DELTA_PRESENT（既存意味採用とsafe表示範囲の限定拡張、新ownerなし）。[全結果・次の一作業](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-omitted-wish-20261107)。

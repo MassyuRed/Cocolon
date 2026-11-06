@@ -1,4 +1,4 @@
-> **11/6・最新§238：既存23／v10の23更新・NLL20・14stop／2loadを完了したが、HC01／02が退行し新b8d096は不採用。実行完了・NLL低下・tensor整合を意味品質へ昇格しない。HC04–09＋既知control4は保持、元a2e／APIc150・既存strict境界を維持する。** [結果・原本・未完了](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-existing23-v10-bounded-20261106)／[本文なし集計](../../../observation_learning/trials/2026-11-01-analysis-model-fields/existing23_v10_trial_results.json)。STRUCTURE_MAP_DELTA_NONE（研究比較）。
+> **11/7・分析の最新（第9回§242）：原入力memo唯一・単一完全希望を主体UNSPECIFIEDのまま扱う有限consumerを実装。既存9動詞×plain現在／過去・肯否、を格必須。保存済み19応答をJupyterで旧新CPU比較し、WC02だけ未対応→過去希望1node・主体未確定表示へ回復。他18のgraph／件数／本文図を保持、raw／入力／候補保存state19は前後完全同一。前後各19の非生成保存再読、171根拠照合。新生成／load／学習／DB0。関連515 PASS＋26subtests／最終CI全工程success。補足SELF限定・別record非同一化を維持、本番未配置・一般品質未成立。** [実結果・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-omitted-wish-20261107)／[本文なし集計](../../../observation_learning/trials/2026-11-01-analysis-model-fields/omitted_wish_results.json)。WC04は「断る」の語彙・対象句・対象主題はの3箇所が既存証明外とCPU確認済みで、未対応のまま。次はその一文の根拠を落とさず既存行動／非行動へ渡す最小の原入力専用範囲を固め、同rawで実装比較する。主体・理由・当日実行を補わない。暗黙役割・本人基準・判断／選択・記録間意味、全量処理・IF/Saved・実DB／端末、通常重み採用と前回の対象子5減少は残件。 STRUCTURE_MAP_DELTA_PRESENT（既存compiler／realizer内の限定拡張）。
 
 > **11/6・最新§237：既存23教師を元target／sourceのままv10へCPU整合し、固定tokenizer／prefix・EOS・mask・予算を確認。candidate23／非生成再読23・typed12／unsupported11は教師診断の結果で、LM品質や学習改善の保証ではない。private packは不採用、LM／更新／DB0、新runnerはsource完成・実行前review済、prepare／run未実行。** [実結果・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-existing-teacher-v10-cpu-20261106)／[本文なし集計](../../../observation_learning/trials/2026-11-01-analysis-model-fields/existing_teacher_v10_cpu_results.json)。STRUCTURE_MAP_DELTA_NONE（CPU診断・準備のみ）。
 
@@ -2046,3 +2046,19 @@ HC生成8→6、全14生成12→10・mapped16→12、whole-request棄却source4�
 
 
 §238・欄診断は [audit_analysis_wire_fields.py](../../../observation_learning/trials/2026-11-01-analysis-model-fields/audit_analysis_wire_fields.py)（18442bytes／SHA `f4c0ed18d753dcd2f69efea92cec11c27898c990d0ec6f7bd1131f046f55bd84`、checkpoint `352b44a5`）でlocal／Jupyterとも完了した。自己確認11 PASS、既存応答28（前14／後14）／入力44不変、重複6・非重複22、Jupyter exit0、報告SHA `70e7b58c5aaa725966e724413af8d302afcfa13a4fa32060ec94e1375bc7d088` は同一。sourceやwireの受理仕様を変えず、宣言field直前対応・decoded field位置は診断上の情報に閉じ、CMEE source-envelope Evidenceやadmissionを代替しない。raw補正・追加モデル／学習／DB0。非公開原本version6は170member／15,869,307bytes／SHA `892775f6407ab07770b4716b2dea210a48d57abd94a047d25a6d16afc5dc27f5` で保存済み。version5全payloadを保持し、最終reviewとwire原source・local／Jupyter報告・logを追加した。
+
+
+<a id="analysis-original-omitted-wish-20261107"></a>
+## 11/7 §242 — 原入力memoの単一完全希望・主体未確定
+
+### 設計条件
+
+原入力ORIGINAL_INPUTのmemoだけが非空の意味fieldである場合に、一つの完全なplain希望を既存9動詞・現在／過去・肯否の4活用とを格対象から証明し、actor=UNSPECIFIEDへ保持する。本人／ownerを主語にせず、願望を実行事実へ昇格しない。単一終端と外側水平空白以外の未読範囲は許可しない。純粋parserの認識だけでは採らず、_fragmentのsource role／全文／欄境界も必要とする。
+
+_model_complete_observed_plain_wish_fieldsの省略主体許可は、既存原入力wrapperが1memo／1nodeの場合だけ渡す。§235のordinary補足SELF限定、memo_action単独、原入力の別欄併存、複文、明示他者、認知埋込／伝聞／夢／条件、日付／順序／副詞、polite・未知動詞は拡張しない。独立に適格なSELF回答が原入力と併存する既存flowは、別sourceのまま同recordへ保持できる。
+
+同じ原文希望でもUNSPECIFIED同士は別recordを同一人物の反復にしない。occurrence evidence identityを集約keyへ含め、従来SELF集約は維持する。唯一realizerの共通safe labelで「誰の希望かは未確定」と過去の「当時」を表示し、場面／役割／行動／結果の不明を保つ。新しい関係線・意味型・公開DTO／DB／RN・作者は追加しない。
+
+### 実装と確認範囲
+
+API [95c546c2](https://github.com/MassyuRed/mashos-api/commit/95c546c27ab106f4b30bc850a13737f48cf4d6ec)の既存compiler／realizer、専用testと既存workflowへ実装。Jupyter515 PASS＋26subtests／最終CI全工程success。保存済み19応答の同raw比較でWC02のみ1node回復、他18typed結果と19candidate storageを保持、前後各19の非生成候補再読一致。一般意味品質・実DB／本人端末・本番配置・モデル採用・human受入れは未成立。前回の対象子5減少は未修復。STRUCTURE_MAP_DELTA_PRESENT。[実結果・失敗・原本](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-omitted-wish-20261107)。

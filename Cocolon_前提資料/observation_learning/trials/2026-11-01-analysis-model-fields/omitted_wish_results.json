@@ -1,0 +1,173 @@
+{
+  "schema_version": "analysis_omitted_wish_results.v1",
+  "work_date": "2026-11-07",
+  "status": "LIMITED_FINITE_CONSUMER_IMPLEMENTED_NOT_DEPLOYED",
+  "api_commit": "95c546c27ab106f4b30bc850a13737f48cf4d6ec",
+  "jupyter_consumer_commit": "fc475e77b36628446990b165f5ae890d33cd9724",
+  "production_source_identical_to_jupyter": true,
+  "predecessor_api": "91f3e67b8daff5b66dabb7b2a7875dc191a72831",
+  "runner_commit": "87fc86e2ee92b0ba5872c6fb85c42d83d5dff314",
+  "scope": "Original input memo is its only nonempty meaning field and contains one complete plain wish. Existing nine verbs, four plain wish inflections and explicit を object. Wisher stays UNSPECIFIED.",
+  "unchanged_scope": [
+    "Supplemental answers remain SELF-only.",
+    "No new multiclause, explicit other actor, embedded/report/dream/conditional wish, date/order/adverb or polite wish support.",
+    "No model request, raw, candidate, profile default, transport, weights, public DTO, DB or RN change."
+  ],
+  "new_generation": 0,
+  "model_loads": 0,
+  "training_updates": 0,
+  "db_calls": 0,
+  "requests": 19,
+  "raw_request_source_exact": 19,
+  "candidate_storage_exact": 19,
+  "newly_typed": [
+    "WC02_v13"
+  ],
+  "unchanged_typed": 18,
+  "before_seconds": 6.583607033826411,
+  "after_seconds": 6.781401987187564,
+  "recovered": {
+    "actor": "UNSPECIFIED",
+    "modality": "wish",
+    "polarity": "positive",
+    "time": "past",
+    "mapped_before": 0,
+    "mapped_after": 1,
+    "unparsed_before": 1,
+    "unparsed_after": 0,
+    "nodes": 1,
+    "edges": 0,
+    "record_count": 1,
+    "evidence_count": 1,
+    "unknown_scopes": [
+      "SCENE",
+      "ROLE",
+      "ACTION_OR_NONACTION",
+      "IMMEDIATE_RESULT_OR_AFTERMATH"
+    ]
+  },
+  "cross_record_identity": "Unspecified wishes retain occurrence/evidence identity; separate records are not aggregated as one person. Existing SELF aggregation retained.",
+  "evidence_checks": 171,
+  "candidate_saved_reloads_before": 19,
+  "candidate_saved_reloads_after": 19,
+  "replay_scope": "Candidate saved-state reload and same-raw typed map reconstruction. New saved-map read test uses mock RPC and prohibits generators; not live DB/current/month capture.",
+  "tests": {
+    "jupyter_passed": 515,
+    "jupyter_subtests": 26,
+    "jupyter_seconds": 45.34,
+    "plain_verb_inflection_matrix": 36,
+    "initial_fixture_failures": 5,
+    "initial_passed": 510,
+    "initial_seconds": 45.9,
+    "source_changed_for_fixture_fix": false,
+    "ci": {
+      "run_id": 42309976442,
+      "job_id": 128208742430,
+      "head_sha": "95c546c27ab106f4b30bc850a13737f48cf4d6ec",
+      "conclusion": "success",
+      "pytest_and_sql_summaries": [
+        "2026-11-06T23:20:06.5682472Z 2700 passed, 1 skipped, 12058 subtests passed in 589.02s (0:09:49)",
+        "2026-11-06T23:20:39.6224080Z 1 passed, 194 deselected in 32.20s",
+        "2026-11-06T23:24:20.2653045Z 302 passed, 1 warning, 2 subtests passed in 215.73s (0:03:35)",
+        "2026-11-06T23:24:29.0032543Z {\"status\":\"passed\",\"sourceRecords\":201,\"monthlyReferences\":15,\"scope\":\"cumulative SQL/owner/rank/immutability/deletion\"}"
+      ],
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Check out the triggering commit",
+          "conclusion": "success"
+        },
+        {
+          "name": "Set up Python",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install isolated-test dependencies",
+          "conclusion": "success"
+        },
+        {
+          "name": "Record tested source and runtime",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify Analysis generation and saved read",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify shared owner identity",
+          "conclusion": "success"
+        },
+        {
+          "name": "Read synthetic Analysis content",
+          "conclusion": "success"
+        },
+        {
+          "name": "Set up Node for existing PostgreSQL test harness",
+          "conclusion": "success"
+        },
+        {
+          "name": "Install PostgreSQL WASM test dependency",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify cumulative API, Q3 saved sources and existing job entrypoints",
+          "conclusion": "success"
+        },
+        {
+          "name": "Verify monthly rank, immutable re-read and source deletion SQL",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Set up Node for existing PostgreSQL test harness",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Set up Python",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Check out the triggering commit",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    }
+  },
+  "previous_intermediate_losses": {
+    "total": 5,
+    "by_request": {
+      "HC01": 2,
+      "HC05": 2,
+      "AE05": 1
+    },
+    "fixed": false
+  },
+  "private_bundle": {
+    "filename": "Cocolon_Analysis_OmittedWish_20261107.zip",
+    "bytes": 2115393,
+    "members": 47,
+    "sha256": "6df950df3f000ef9face44d8653d2b21d57ee66030b481703214538965b09c81",
+    "url": "https://chatgpt.com/library?file_id=libfile_fde3_f-5f5e537d29908191ad2c97bee0a27ae0_2f7470f963808191aaebf050935e72de&account_id=personal",
+    "library_file_id": "libfile_fde3_f-5f5e537d29908191ad2c97bee0a27ae0_2f7470f963808191aaebf050935e72de"
+  },
+  "deployed": false,
+  "model_adoption": false,
+  "normal_model_profile_defaults_unchanged": true,
+  "structure_map_delta": "PRESENT",
+  "new_product_owners": 0,
+  "primary_outcome": "TECHNICAL_CREDIT",
+  "human_product_acceptance": false,
+  "limits": [
+    "One saved model response recovers through a finite consumer; not a new model generation or general quality trial.",
+    "The two-record non-aggregation proof is in synthetic tests, not in the nineteen saved model cases.",
+    "The omitted-wish test author also supplied one review; a different helper performed another read-only review. Neither is human acceptance.",
+    "Existing current/monthly artifacts are not retroactively regenerated by this work."
+  ],
+  "next_work": "WC04は「断る」の語彙・対象句・対象主題はの3箇所が既存証明外とCPU確認済みで、未対応のまま。次はその一文の根拠を落とさず既存行動／非行動へ渡す最小の原入力専用範囲を固め、同rawで実装比較する。主体・理由・当日実行を補わない。暗黙役割・本人基準・判断／選択・記録間意味、全量処理・IF/Saved・実DB／端末、通常重み採用と前回の対象子5減少は残件。"
+}

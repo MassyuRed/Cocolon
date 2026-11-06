@@ -1,4 +1,4 @@
-> **11/7・分析の最新（第9回§241）：固定a2e／学習0、Jupyterでv11＋独立した肯定過去希望例1つのv13を19生成。HC01の誤修飾が消え、旧4node保持＋同recordの過去事実／過去希望2nodeが文章図へ到達。既知14のmapped20→21／node34→36／未解析1→0、他13のtyped graph・本文図・件数一致。中間CONTENT_TARGET子5つ減少は残り、通常採用保留。失敗v12はHC01未改善・SELF捏造1要求拒否で不採用。全43生成／2load／更新0、v13保存再読19・再処理19一致、targeted172 PASS／CI全工程success。** [全結果・原本・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-positive-past-wish-20261107)／[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/positive_past_wish_results.json)。次は原入力memoの単一完全希望について、主体未確定の表示と別recordを同一人物へ集約しない条件を、取得済みWC02 rawのCPU比較で検証する案。現SELF限定の拡張であり未実装。補足・複文・他者・埋込希望は対象外。本人基準・暗黙役割・判断／選択・記録間意味・全量処理・IF/Saved・実DB／端末は未完。 STRUCTURE_MAP_DELTA_NONE。
+> **11/7・分析の最新（第9回§242）：原入力memo唯一・単一完全希望を主体UNSPECIFIEDのまま扱う有限consumerを実装。既存9動詞×plain現在／過去・肯否、を格必須。保存済み19応答をJupyterで旧新CPU比較し、WC02だけ未対応→過去希望1node・主体未確定表示へ回復。他18のgraph／件数／本文図を保持、raw／入力／候補保存state19は前後完全同一。前後各19の非生成保存再読、171根拠照合。新生成／load／学習／DB0。関連515 PASS＋26subtests／最終CI全工程success。補足SELF限定・別record非同一化を維持、本番未配置・一般品質未成立。** [実結果・原本・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-omitted-wish-20261107)／[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/omitted_wish_results.json)。WC04は「断る」の語彙・対象句・対象主題はの3箇所が既存証明外とCPU確認済みで、未対応のまま。次はその一文の根拠を落とさず既存行動／非行動へ渡す最小の原入力専用範囲を固め、同rawで実装比較する。主体・理由・当日実行を補わない。暗黙役割・本人基準・判断／選択・記録間意味、全量処理・IF/Saved・実DB／端末、通常重み採用と前回の対象子5減少は残件。 STRUCTURE_MAP_DELTA_PRESENT（既存compiler／realizer内の限定拡張）。
 
 > **11/6・最新§237：既存23教師のrow／source／target bytesを変えず、現APIc150の旧v4／v7とv10条件をCPU照合。v10 candidate23／23・非生成reload23、typed12／未対応11を確認し、固定実tokenizerで最大入力4289／full4510／assistant＋EOS225、prefix・EOS・mask・予算を検証した。新private v10 packは不採用、LM load／生成／更新／DB0。F03／F08の肯定過去希望教師は既存だが選択a2eの最終18更新には入っておらず、学習改善は未証明。新runnerは未実行。** [CPU結果・原本・次の境界](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-existing-teacher-v10-cpu-20261106)／[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/existing_teacher_v10_cpu_results.json)。STRUCTURE_MAP_DELTA_NONE（診断・入力準備のみ）。§236の実10応答／32read／CI成功を継承し、一般品質・通常採用へ換算しない。
 
@@ -1432,3 +1432,12 @@ APIff36d037／v11・元a2eを固定し、Jupyterの既存generatorへrequest単�
 API91f3e67の研究v13はv11＋独立肯定過去希望例1つ。失敗v12説明を継承せず、strict reader/compiler/realizerを変更しない。固有profile/ref/stateを既存補足・親内束縛・累積・候補保存経路へ通すだけで、新商品ownerなし。HC01では既存rawのroot2つから誤modifierが消えrecord全体の証明が成立した。新2typed nodeは同record/count1・edge0、役割・因果は補わない。
 
 中間対象子5減少（HC01:2／HC05:2／AE05:1）は未解決。完全rootとtyped arguments/evidenceは保持し、旧13のgraph/count/text/図はUUID以外同一。全19保存再読／再処理は生成なしで一致。一般の読み取り完成・商品受入れ・通常採用とは扱わない。次案のUNSPECIFIED希望は現SELF限定の拡張で未実装。
+
+
+## 11/7 §242 — 主体を省いた希望を不明のまま接続
+
+**11/7・分析の最新（第9回§242）：原入力memo唯一・単一完全希望を主体UNSPECIFIEDのまま扱う有限consumerを実装。既存9動詞×plain現在／過去・肯否、を格必須。保存済み19応答をJupyterで旧新CPU比較し、WC02だけ未対応→過去希望1node・主体未確定表示へ回復。他18のgraph／件数／本文図を保持、raw／入力／候補保存state19は前後完全同一。前後各19の非生成保存再読、171根拠照合。新生成／load／学習／DB0。関連515 PASS＋26subtests／最終CI全工程success。補足SELF限定・別record非同一化を維持、本番未配置・一般品質未成立。** [実結果・原本・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-omitted-wish-20261107)／[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/omitted_wish_results.json)。WC04は「断る」の語彙・対象句・対象主題はの3箇所が既存証明外とCPU確認済みで、未対応のまま。次はその一文の根拠を落とさず既存行動／非行動へ渡す最小の原入力専用範囲を固め、同rawで実装比較する。主体・理由・当日実行を補わない。暗黙役割・本人基準・判断／選択・記録間意味、全量処理・IF/Saved・実DB／端末、通常重み採用と前回の対象子5減少は残件。 STRUCTURE_MAP_DELTA_PRESENT（既存compiler／realizer内の限定拡張）。
+
+原入力ORIGINAL_INPUTの唯一非空memo・単一完全節、を格対象・既存9動詞plain4形だけをsource compilerとmodel証明が同じ境界で採る。supplement callerはallow_omitted既定FalseでSELF限定。別recordのUNSPECIFIEDはevidence occurrence単位を保ち、本人反復へまとめない。唯一realizerが文章・図へ未確定主体／当時を表示する。独立SELF回答との併存は同record/count1と別根拠を保持する。
+
+今回の新4B生成・学習は0、旧19のcandidate/rawを改変しない。新しい商品owner／型／作者／公開契約を作らず、詳細設計04の原入力専用§242と元補足§235を分離。通常重みは未採用、本番／実DB／端末確認は未実施。前回の対象子5減少・一般本人基準の読み取りを解決したとは扱わない。

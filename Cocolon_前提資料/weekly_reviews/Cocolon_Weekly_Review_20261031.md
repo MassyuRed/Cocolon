@@ -5729,3 +5729,54 @@ Pod v12 ZIP87member／1107529bytes／SHA `317a8b1bc4a2c5b71fc17af896fd1a36256e7b
 研究profileの局所回復で、通常HTTP/batchはv4/v7のまま。重み採用・実DB・公開型/DTO・RN・Render・main/merge/deployは変更なし。STRUCTURE_MAP_DELTA_NONE（既存admission/profileの内部研究分岐、新商品ownerなし）。TECHNICAL_CREDITであり商品受入れは未成立。
 
 次は原入力memoの単一完全希望について、主体未確定の表示と別recordを同一人物へ集約しない条件を、取得済みWC02 rawのCPU比較で検証する案。現SELF限定の拡張であり未実装。補足・複文・他者・埋込希望は対象外。本人基準・暗黙役割・判断／選択・記録間意味・全量処理・IF/Saved・実DB／端末は未完。 前提資料の00・Analysis03の先頭を現結果へ更新し、全変更pathは01Bへ差分追記。完了した43生成や不採用23学習を同条件で繰り返さない。
+
+
+<a id="analysis-omitted-wish-20261107"></a>
+## 242. 11/7 — 主体を省いた希望を未確定のまま文章・図へ接続
+
+§241で次案にした原入力の主体省略希望へ着手。current原本・最新weekly・全体設計のroutingとAnalysis地図・詳細設計04のordinary補足SELF限定、実compiler／realizer／admission／累積serviceを照合した。全repositoryの全blob読了や全機能の再検証とはしない。モデルを再生成して同じrawを取り直す必要はなく、取得済み19応答を直接使う。
+
+### 採用範囲と既存ownerの変更
+
+原入力のmemo／memo_actionのうちmemoだけが非空で、一つの完全なplain希望が書かれている場合に限る。既存9動詞（書く／調べる／試す／見る／作る／残す／記録する／メモする／続ける）、肯定／否定×現在／過去の4plain活用、を格の対象が必須。_parsed_propositionで認識しても、それだけでは採らず、_fragmentでORIGINAL_INPUT・memo全文・explicit source・単一節を拘束する。語尾を足す、部分引用を全文にする、owner／別欄／親からSELFを借りる処理はない。
+
+モデル側の完全field証明は、原入力wrapperの1memo／1nodeの場合だけallow_omittedを渡す。ordinary補足のcallerは既定Falseのままで、§235のSELF限定を変えない。単一原入力に別途成立するSELF回答がある場合は、独立した根拠を同じrecord／count1へ保持する。新たに補足の省略希望を採るという意味ではない。
+
+唯一realizerの文章・図共通labelに「誰の希望かは未確定」を添え、過去は「当時」を保つ。希望を実行事実へ変換しない。UNSPECIFIEDの希望はoccurrence evidenceを集約keyに含め、別recordを同じ人の繰返しとみなさない。明示SELFの従来集約は保持する。公開DTO／schema／DB／RNのキー追加、新作者や商品ownerは不要。
+
+API source2は[baf97127](https://github.com/MassyuRed/mashos-api/commit/baf97127f10861addd771e754f24b9e9a68f2449)、Jupyter consumer検証版は[fc475e77](https://github.com/MassyuRed/mashos-api/commit/fc475e77b36628446990b165f5ae890d33cd9724)。旧test期待を同期した最終[95c546c2](https://github.com/MassyuRed/mashos-api/commit/95c546c27ab106f4b30bc850a13737f48cf4d6ec)も商品source2は完全同一。比較runnerは[87fc86e2](https://github.com/MassyuRed/Cocolon/commit/87fc86e2ee92b0ba5872c6fb85c42d83d5dff314)で実行前固定した。
+
+### 同じ実モデル保存rawのJupyter CPU比較
+
+| 確認 | 旧API91f3 | 修正版fc475 |
+|---|---:|---:|
+| v13保存結果と同じtyped結果 | 19 | 18 |
+| WC02：mapped／未解析 | 0／1 | 1／0 |
+| WC02：typed node／edge | 0／0 | 1／0 |
+| raw／入力／候補storageの前後完全同一 | 19 | 19 |
+| 候補保存の非生成再読 | 19 | 19 |
+| CPU再消費秒 | 6.583607 | 6.781402 |
+
+WC02は全文「写真を見たかった」をATTENTION_OR_THOUGHT一つ、qualifierなしで出した保存応答である。生出力や候補を修復せず、UNSPECIFIED／positive／wish／past／見る／写真を、生活recordのmemo根拠1つから1nodeへ接続。利用者の文章・図には「写真を見ることへの希望（当時）（誰の希望かは未確定）」と1件の記録を表示する。場面・役割・行動／非行動・結果／余韻の四不足、edge0を保持し、誰が希望したかや実際に見たかは補わない。
+
+他18要求のgraph全文／counts／本文／図は新artifact UUID以外すべて同じ。19件すべてのrow／request／messages／response／raw/hash、candidate保存storageは文字列bytesまで前後同一で、旧保存結果とも一致する。現モデルを呼んで取り直した結果ではない。新generation／load／training／DB call0。前後各19候補再読はモデル・候補compiler／作者を禁止して実施。typed本文図は同rawの再構築で、実DB／current／月次captureや19件すべての意味理解を証明しない。
+
+候補field33＋unit48＋qualifier48＋typed根拠42の計171を、逐語引用・scalar／UTF8座標・field/literal hash・envelope／field／record所属で照合し、独立reviewは既存edge根拠2も確認した。171は独立record数やtyped node数ではない。別record非集約は新しい合成testで確認し、今回の19保存応答自身にその対照があるとは言わない。
+
+### 回帰検査・失敗の扱い
+
+Jupyterの関連6suiteは最終515 PASS／26subtests／45.34秒／exit0。9動詞×plain4活用の36条件、主体未確定の文章図・時点／否定・四不足、を格なし／polite・他者／埋込／疑問／複文／別欄の拒否、補足SELF限定、2record非同一化とSELF集約対照、binding／保存改竄拒否、生成禁止の保存projection読取を確認した。
+
+初回は5FAIL／510PASS／26subtests／45.90秒。4件は補足fixtureの既存拒否がprepare時に発生するのをbuild後だけで捕捉した誤り、1件はwith_answerの元emotion_detailsが非canonicalだった。既存testと同じ拒否捕捉範囲と正規入力へ直し、拒否・意味・countの期待や商品source2は変えない。最初のlocal比較もasdictのtupleと保存JSONのlistの直接比較で不一致になったが、canonical値で照合し直すとHC01の実結果は不変だった。各失敗log／diagnosticを成功結果へ消し替えない。
+
+初回広域CI42308453073は旧期待1subtest失敗／2699PASS／1skip／12058subtests。旧nominal testが「資料を調べたい」を過去行動の一律拒否に含めていた。今回の原入力限定scopeに当たる一例だけを、主体UNSPECIFIED／wish／current_input・元根拠・未確定label・非実行済みを検証するpositive testへ分離し、他の拒否は保持。対応する2unittestはlocal PASS、商品source2は変更しない。初回CI logも保全する。
+
+最終[CI42309976442](https://github.com/MassyuRed/mashos-api/actions/runs/42309976442)は全工程success。実pytest summaryは本文なし集計のCI欄と保全logへ戻る。新test作者を兼ねる補助reviewと、別の非作者補助reviewを実施した。同環境のread-only支援であり、別環境の実モデル試験・人間の商品受入れではない。
+
+### 保全・現在地・次の作業
+
+Pod ZIP27member／943859bytes／SHA `5f936e6a613dbe180f7ded2ef1e9e928ab6263c4cdd586c9c706f1bb9f2a7626` をCRC／全26manifest hashで回収照合。旧新source・19全入力とraw／before-after／初回失敗と再検証log／runner／根拠確認／二つの補助review／実CI logを[検証原本ZIP](https://chatgpt.com/library?file_id=libfile_fde3_f-5f5e537d29908191ad2c97bee0a27ae0_2f7470f963808191aaebf050935e72de&account_id=personal)へ保全。最終ZIP47member／2115393bytes／SHA `6df950df3f000ef9face44d8653d2b21d57ee66030b481703214538965b09c81`。[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/omitted_wish_results.json)。GPU終了記録とfresh Jupyter画面は2MiB／0％、compute apps空、モデルを新しくloadしていない。
+
+STRUCTURE_MAP_DELTA_PRESENTは既存compiler／realizer内の意味採用と未確定表示の限定拡張。新しいprofile／型／共有意味owner／作者／公開API／DB／RN／Render変更なし。通常モデル既定・transport・重みは不変、本番配置・merge・モデル採用は未実施。有限consumerのsource変更を「通常経路のコード変更0」とは書かない。保存済みcurrent／月次を遡って再生成せず、この実装だけで既存cacheが全更新されるとは主張しない。TECHNICAL_CREDITの局所接続で、一般品質／正式受入れは未成立。
+
+WC04は「断る」の語彙・対象句・対象主題はの3箇所が既存証明外とCPU確認済みで、未対応のまま。次はその一文の根拠を落とさず既存行動／非行動へ渡す最小の原入力専用範囲を固め、同rawで実装比較する。主体・理由・当日実行を補わない。暗黙役割・本人基準・判断／選択・記録間意味、全量処理・IF/Saved・実DB／端末、通常重み採用と前回の対象子5減少は残件。 完了した19保存応答の再生成や不採用23学習へ戻らない。

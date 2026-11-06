@@ -2447,3 +2447,11 @@ HC10の原入力2欄＋補足1欄が2record／4nodeへ回復。旧13はraw末尾
 [wish_inflection_prompt_trial.py](wish_inflection_prompt_trial.py) は説明案v12を24生成し、HC01未改善／OP02主体捏造をstrict拒否したため不採用。[wish_positive_example_trial.py](wish_positive_example_trial.py) はv11＋独立例1つのv13を19生成、学習0／169.697秒。HC01の同recordから過去事実＋過去希望を回復し、旧14全体mapped20→21／node34→36／未解析1→0。他13のtyped graph/count/text/図を保持したが、HC01/05/AE05の対象子計5unit減少は残る。control5のrawはv11と一致し、主語省略等4件の現consumer未対応も維持。
 
 19候補保存再読／19応答再処理一致、targeted172 PASS／最終CI全工程success。通常未採用。[実結果・失敗・原本・残件](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-positive-past-wish-20261107)／[本文なし集計](positive_past_wish_results.json)。次は原入力memoの単一完全希望について、主体未確定の表示と別recordを同一人物へ集約しない条件を、取得済みWC02 rawのCPU比較で検証する案。現SELF限定の拡張であり未実装。補足・複文・他者・埋込希望は対象外。本人基準・暗黙役割・判断／選択・記録間意味・全量処理・IF/Saved・実DB／端末は未完。
+
+
+<a id="analysis-omitted-wish-20261107"></a>
+## 11/7 — 保存rawの主体省略希望を未確定のまま接続
+
+[omitted_wish_saved_trial.py](omitted_wish_saved_trial.py)は§241の19応答を旧新APIでCPU再消費する。0load／0新生成／0学習／0DB、旧19全結果一致、新版はWC02だけUNSPECIFIED／past wish1nodeへ回復。他18のtyped graph/count/text/図、19raw/request/source/candidate保存stateを保持。前後各19候補の非生成再読、171根拠照合。Jupyter関連515 PASS＋26subtests／最終CI全工程success。初回5fixture失敗も保全した。
+
+適用範囲は原入力memo唯一・単一完全plain希望・を格対象・既存9動詞4形。補足SELF限定、他者／複文／埋込等は維持。別recordを同じ主体の反復にせず、文章図に主体未確定・過去の当時を表示する。前回の対象子5減少は今回も未修復、本番／実DB／端末・モデル採用未実施。[実結果・原本・次の作業](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-omitted-wish-20261107)／[本文なし集計](omitted_wish_results.json)。WC04は「断る」の語彙・対象句・対象主題はの3箇所が既存証明外とCPU確認済みで、未対応のまま。次はその一文の根拠を落とさず既存行動／非行動へ渡す最小の原入力専用範囲を固め、同rawで実装比較する。主体・理由・当日実行を補わない。暗黙役割・本人基準・判断／選択・記録間意味、全量処理・IF/Saved・実DB／端末、通常重み採用と前回の対象子5減少は残件。
