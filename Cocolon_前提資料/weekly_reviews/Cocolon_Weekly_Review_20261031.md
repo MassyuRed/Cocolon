@@ -5643,3 +5643,43 @@ local最終は644 PASS／SQL環境未設定20 SKIP／11subtests・145.78秒。�
 実行source [field_object_prompt_trial.py](../observation_learning/trials/2026-11-01-analysis-model-fields/field_object_prompt_trial.py) は [79c15787](https://github.com/MassyuRed/Cocolon/commit/79c157877f8c5272ed1c65e77ac04a4690b26033) へ先行固定。[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/field_object_prompt_results.json)と、非公開の全raw・source・旧before14・成功/失敗実行・再読・review・local/CI原本を [検証原本ZIP](https://chatgpt.com/library?file_id=libfile_fde3_f-f14ecc77797481919a089435d6c47d10_2f7470f963808191aaebf050935e72de&account_id=personal) に保全した。最終60member／737195bytes／SHA `c3efbffedb1da7f50019d2498cf4f26e3319c003eeecb5d23e8d936816d9796d`。Pod回収原本53memberのCRC／全hashを確認し、そのpayloadを落とさずreviewを追加した。
 
 通常HTTP/batchの許可・既定profile、重み、公開API/DTO、作者、DB/RN/Render/merge/deployは変更0。STRUCTURE_MAP_DELTA_NONE（既存owner内の明示研究profile）。TECHNICAL_CREDITの局所結果であり、Mashの正式商品受入れではない。通常採用は未実施。次は原入力＋補足の3欄で残る重複key生成の修正へ進む。同23学習を反復せず、元rawとstrict条件を保つ。本人基準・暗黙role・判断/choice・記録間意味・全量処理・IF/Saved・実DB／本人端末の品質は残件として継承する。
+
+
+<a id="analysis-field-object-shape-20261107"></a>
+## 240. 11/7 — 生成中のJSON構造制限で原入力＋補足3欄の重複keyを回復
+
+§239の次作業だったHC10に着手し、API ff36d037／prompt v11／元a2eを固定した。意味説明や教師を追加せず、既存syntax2bのtoken判定を使い、生成中にfield番号・順序・keyの一回性・既存enum型・units上限8／qualifiers上限6だけを制限する。quote／parent_quote／qualifier quoteは自由なJSON文字列のまま。原文語彙へ限定せず、例文注入・case id分岐・意味分類の強制・重複keyの事後削除はない。原文内引用制限を含む旧source-mask Grammarは再利用しない。親内で同じ語を別targetへ使うv11の既存条件も緩和しない。
+
+### 実装・事前検査・一回の生成
+
+実行source2本は [c9897994](https://github.com/MassyuRed/Cocolon/commit/c989799427dcd6efeb0bce7915c922b271065c45) へ先行固定した。frozen syntax2bはSHA `28e78eb120f07aef0806ddb1159e8257fb83e4972515eed63ec48b33cf205dc5`、enum参照は `f9e20f0e8bb50d1602205c937c4d3e2a9a6f743ac2aa062f165f9801168b38d7` と照合。token248056のbyte対応、旧13例の正規JSON1962token位置、重複／欠落／欄違い／余分root／打切り／units超過、自由引用・UTF8・escape・前方parentをCPU検査した。原文外引用と不正carrierは形として通し、既存CMEEが拒否する境界も確認した。旧13の正規化は構造検査用であり、旧raw bytesがそのまま生成されたという証拠ではない。
+
+tokenizer EOS248046を流用せず、model generation configの実EOS248044をgeneration呼出時にも照合した。既存load_generatorの一箇所だけへLogitsProcessorを束縛し、原source／差替sourceも原本へ保存。実API・既存parser／compiler／保存／typed mapは変更しない。
+
+Jupyterで同21record／28fieldのv11 messages・request/source guard・before rawを再照合し、追加学習0・新教師0・新14stop／1load・retry0、171.42905565537512秒／exit0で完了した。各生成35秒／親300秒の上限内。最大input4649＋output予約2048<8192。元a2e/config006eは前後一致し、不採用23更新重みは使わない。
+
+| 指標（既知14要求） | v11・制限前 | v11・構造制限後 |
+|---|---:|---:|
+| 文章・図へ到達した要求（部分成立を含む） | 13 | 14 |
+| mapped record | 18 | 20 |
+| node | 30 | 34 |
+| 生成map内の未解析record | 1 | 1 |
+| 全体拒否要求 | 1 | 0 |
+
+### 回復した内容と保持確認
+
+HC10は原入力2欄＋補足1欄の全3objectを重複keyなしで生成した。仕事側recordの肯定過去ACTIONと現在WISH、生活側recordの肯定過去ACTIONと補足の現在WISHが4nodeに分かれる。補足は生活側recordに所属し、仕事と生活を混ぜず、各record count1、edge0。役割・場面・結果・つながりは原文から確定しないまま保つ。beforeはstrict parse不能なので、重複を潰した値を意味基準として成功比較へ使っていない。afterの全引用と元欄から独立に確認した。
+
+従来成立した13要求は**末尾LF一字を除きraw同一**。raw SHA／保存候補のresponse_refは変わるため、raw bytes完全一致とは書かない。JSON値・unitとqualifierの順序／多重集合、candidateのsource diagram、typed graph全文・counts・本文・図（projection_ofのartifact UUID以外）は同一。HC02の同カテゴリ反復、HC03の異カテゴリ分離、HC04のカテゴリ集合、HC05–09の補足の所属とcount1、HC07/08の否定希望の現在／当時、AE05/OP02の主体未確定、AP07だけの明示順序とAP08の否定を保つ。
+
+全14の元欄／前後raw／全生成本文とHC10のgraphを読み、候補field・unit・qualifierとtyped graphの根拠159箇所についてliteral/field SHA、scalar/UTF8座標、source envelope／欄とrecord所属を照合した。159は独立記録数やtyped node数ではない。独立read-only reviewも実施。候補14件の非生成reloadと全14応答の再処理は一致。実DB保存やcurrent/月次RPCの新実績へは数えない。
+
+HC01の肯定過去希望にWRITTEN_MODIFIERを付ける誤りは同じまま残り、そのrecord全体の未解析1を維持する。14要求到達は全21recordの完全読解ではない。一般の暗黙役割・本人基準・判断／選択・記録間の意味を解決したという意味でもない。
+
+### 保全・現在地・次の一作業
+
+Pod原本59member／927034bytes／SHA `a20dfae84b93789499d448f9b11a25bcaaf3a87694bd89d6881d1bf46d85f99b` をCRCと全manifest hashで回収照合。全source／raw／before／loader束縛／CPU検査／実行log／非生成再読／reviewを[検証原本ZIP](https://chatgpt.com/library?file_id=libfile_fde3_f-69d28332aa44819198fa0560d3d40cbe_2f7470f963808191aaebf050935e72de&account_id=personal)へ保全した。最終ZIPは67member／2229376bytes／SHA `6ed6dc3fadfcbcff3c6dd1c5087d5d22d782bfd4ae92ab6fce93ebb2e74c4181`。[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/field_object_shape_results.json)。終了後fileとfresh画面のGPUは2MiB／0％、compute apps空。
+
+今回は研究sourceのみでAPI変更0。§239のCI42234794559全step successは既存実績として継承し、新しいAPI CI実行とは数えない。通常HTTP/batch・重み・公開API/DTO・DB・RN・Render・merge/deployの変更0、通常採用未実施。STRUCTURE_MAP_DELTA_NONE（新商品ownerなし）。TECHNICAL_CREDITの局所回復で、Mashの商品受入れを代行しない。
+
+次はHC01の肯定過去希望に付く誤修飾の修正。今回の欄構造回復と旧13の意味保持を比較基準にし、strict readerと元sourceを保つ。完了済み14生成や不採用23学習を同条件で繰り返さない。本人基準・暗黙role・判断/choice・記録間意味・全量処理・IF/Saved・実DB／本人端末の品質は別の残件として継承する。

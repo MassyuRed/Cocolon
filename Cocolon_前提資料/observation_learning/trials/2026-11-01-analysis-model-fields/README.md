@@ -2431,3 +2431,11 @@ HC01 afterのfield3／4欠落と、field2内3quoteがfield4だけに存在する
 [field_object_prompt_trial.py](field_object_prompt_trial.py) は元before14のsource/応答を照合し、v10材料を変えず欄一覧・object境界だけを加えたv11を比較する。元a2e／学習0、14stop／1load／155.313秒、13候補非生成reloadと14応答再処理一致。初回の環境指定漏れはモデル0で原本保全後、別rootで実行した。
 
 HC03だけが新しく文章図へ到達し、仕事/生活2recordの事実と希望を4nodeに保持。旧12はraw/graph/本文図不変。全14の生成12→13・mapped16→18、HC01部分成立/未解析1とHC10重複field拒否は継続する。既知比較であり一般読解率ではない。通常未採用・raw修復0・実DB/本番変更0。[結果・原本](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-field-object-v11-20261106)／[本文なし集計](field_object_prompt_results.json)。次は原入力＋補足3欄の重複key生成の修正。完了した14生成や不採用23学習を再実行しない。
+
+
+<a id="analysis-field-object-shape-20261107"></a>
+## 11/7 — 固定v11/a2eの生成構造制限
+
+[analysis_field_object_mask.py](analysis_field_object_mask.py) は番号・順序・key・型・上限だけを制限する研究Grammar。引用文字列と分類はモデルが選び、既存CMEEが検査する。[field_object_shape_trial.py](field_object_shape_trial.py) は§239と同じ14入力／v11 messages／元a2eを固定して一度だけ生成した。syntax2bとenum参照のhash、token248056／EOS248044を照合、学習0・14stop／1load／171.429秒、14候補非生成reload・14応答再処理一致。
+
+HC10の原入力2欄＋補足1欄が2record／4nodeへ回復。旧13はraw末尾LF一字以外同一で、意味・根拠・graph/count/本文図保持。全14の到達13→14／mapped18→20／node30→34。ただしHC01の肯定過去希望の誤修飾／record未解析1は継続。通常未採用、raw修復・実DB／本番変更0。[全結果・原本](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-field-object-shape-20261107)／[本文なし集計](field_object_shape_results.json)。次は過去希望の誤修飾を修正する。

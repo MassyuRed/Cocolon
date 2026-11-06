@@ -1414,3 +1414,12 @@ CPU欄診断と原本保存は下記のとおり完了。同23反復は行わず
 元a2eで14stop／1load／学習0・155.313秒。HC03が仕事/生活の2record／4nodeへ回復し、全14の生成到達12→13、mapped16→18、node26→30。旧12（部分成立HC01を含む）はraw/graph/count/本文図不変。成功graph34根拠を照合、13候補非生成reloadと全14応答再処理一致。current/月次RPCや実DB保存の新実績へは換算しない。HC01未解析1とHC10重複field拒否を維持。local644 PASS／SQL依存20 SKIP・11subtests、CI42234794559全step success。
 
 [全結果・原本・次の一作業](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-field-object-v11-20261106)／[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/field_object_prompt_results.json)。通常未採用、暗黙役割・本人基準・判断/選択・記録間意味・IF/Saved・実機品質は未達。次は原入力＋補足3欄の重複key生成の修正。§238の不採用重み・元23教師を再学習しない。
+
+
+## 11/7 §240 — 研究用の生成構造制限と原入力＋補足3欄の回復
+
+APIff36d037／v11・元a2eを固定し、Jupyterの既存generatorへrequest単位のJSON構造LogitsProcessorを束縛。field順序・key一回性・型／既存上限だけを制限し、引用・parent・qualifier文字列は自由。既存CMEEの意味検査・親内引用束縛を緩和しない。通常経路へは未接続、新owner／公開DTO／DB／RN変更なし。STRUCTURE_MAP_DELTA_NONE。
+
+14stop／1load・学習0／171.429秒、HC10の2record/3fieldを4nodeへ回復。全14の到達13→14（HC01は部分成立）、mapped18→20／node30→34、未解析record1。従来13はraw末尾LF以外同一、JSON／候補source diagram／typed graph／counts／本文図を保持。候補14非生成reload・14応答再処理一致。候補とtyped graphの159根拠を照合。通常未採用・実DB/current/月次RPCの新実績なし。
+
+[全結果・原本・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-field-object-shape-20261107)／[本文なし集計](../observation_learning/trials/2026-11-01-analysis-model-fields/field_object_shape_results.json)。次はHC01の肯定過去希望へ付く誤修飾。今回の構造回復と旧13保持を基準にし、暗黙役割・本人基準・判断/選択・記録間意味・IF/Saved・実機の未達を継承する。

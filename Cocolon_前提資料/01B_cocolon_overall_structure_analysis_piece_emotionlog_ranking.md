@@ -3870,3 +3870,14 @@ HC01／02が退行し、HC03／10はraw同一の重複key拒否を継続。HC04�
 | `Cocolon/Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/field_object_prompt_results.json` | 本文なし結果、局所回復・未達・失敗launchと保全先を分離 |
 
 新商品ownerなし、STRUCTURE_MAP_DELTA_NONE。既知HC03の2recordが4nodeへ回復し、全14の生成12→13（うち1部分成立）・mapped16→18。旧12のraw/本文図保持、13候補再読・14応答再処理一致。HC01過去希望とHC10重複fieldは未達。APIff36d037／CI42234794559全step success、通常採用／DB／RN／Render／merge／deploy変更0。[全結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-field-object-v11-20261106)。
+
+
+## 11/7 §240 — 研究用生成構造制限の全変更file
+
+| 実path | 既存責務内の差分 |
+|---|---|
+| `Cocolon/Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/analysis_field_object_mask.py` | field番号・順序・key一回性・型を制限する研究Grammar。引用文字列は自由、意味採用の作者にならない |
+| `Cocolon/Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/field_object_shape_trial.py` | 固定v11/a2e・旧14入力との一回比較、既存syntax2b／実model EOSの照合、生成前後hash・原raw・非生成再読を保持 |
+| `Cocolon/Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/field_object_shape_results.json` | 本文なしの形式回復／意味保持／未達／保全先の分離集計 |
+
+既存syntax2bとenum参照を改変せず再利用。API変更0・新商品ownerなし、STRUCTURE_MAP_DELTA_NONE。HC10の原入力＋補足3欄が2record／4nodeへ回復、全14の到達13→14（うち1部分成立）・mapped18→20。旧13のraw末尾LF以外／意味／本文図保持、14候補再読・14応答再処理一致。通常未採用、DB／RN／Render／merge／deploy変更0。[全結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-field-object-shape-20261107)。
