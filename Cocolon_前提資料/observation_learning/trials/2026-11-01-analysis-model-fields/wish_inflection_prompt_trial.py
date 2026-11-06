@@ -152,8 +152,11 @@ def main():
     if a.mode=='replay':
         result=read(root/'result.private.json');assert result['status']=='COMPLETE_NOT_ADOPTED_PENDING_REVIEW'
         assert not (root/'replay.private.json').exists()
+        assert [c['id'] for c in result['cases']]==IDS
+        assert result['calls_started']==result['new_generation']==24 and result['model_loads']==1
         for saved in result['cases']:
             c=next(c for c in pack['cases'] if c['id']==saved['id'])
+            assert all(saved[k]==c[k] for k in ('row','request','profile'))
             raw=(root/(c['id']+'.raw.txt')).read_text();assert raw==saved['response']['raw']
             fresh=consume(c,admission.AnalysisModelQuotedParentUnitsResponse(**saved['response']))
             assert canonical(fresh['candidate'])==canonical(saved['candidate']);comparable(fresh['cumulative'],saved['cumulative'])
@@ -224,6 +227,8 @@ def main():
             print(canonical(dict(id=c['id'],seconds=elapsed,status=out['cumulative']['status'],
                 counts=out['cumulative'].get('counts'),reason=out['cumulative'].get('reason'))),flush=True)
         assert vendor.installed_files(Path(oldpack['optional_target']))==manifest['installed_files']
+        assert [c['id'] for c in result['cases']]==IDS
+        assert result['calls_started']==result['new_generation']==24 and result['model_loads']==1
         result['status']='COMPLETE_NOT_ADOPTED_PENDING_REVIEW'
     except BaseException:
         result.update(status='FAILED_PARTIAL_NO_RETRY',traceback=traceback.format_exc())
