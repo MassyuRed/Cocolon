@@ -5286,3 +5286,46 @@ Jupyterは既存Podへ直接接続。一度の接続エラーから再読込で�
 **否定希望の限定改善を確認し、v10は研究候補として保全する。通常／次学習初期値へ自動採用しない。** STRUCTURE_MAP_DELTA_PRESENTはprivate profile/ref/state variantと明示cumulative再構築だけ。一般意味・全履歴の役割／選択／記録間接続の完成やMash Product Readへ昇格しない。実環境はCodex Work／GPT-6と同環境read-only補助で、独立Pro／human受入れではない。
 
 次は保存済みN1/N2の対象scopeを元source・既存材料／ownerへCPUで照合し、対象の過剰な切出しと欠落を分ける。今回runの再起動や、評価rawの教師化、説明を足して成功まで再生成する進め方はしない。N1/N2/N3のv10新生成、一般の本人基準・暗黙役割・選択基準／記録間意味、全欄補足／通常時間内全量、IF／Saved／実DB／本人端末・商品受入れは残件。
+
+
+> 継続更新：§232末尾のN1/N2確認は、後続§233で現v10の別一回比較まで完了した。前回runを再起動せず、再開先は§233末尾を使う。
+
+<a id="analysis-target-scope-v10-20261106"></a>
+## 233. 11/6 — 現v10の1〜3記録比較と保存projectionの現在／月次再読を確認
+
+Mashの分析残件続行指示で、fresh PR30=a7ba53d8／API PR3=f50acbc、全体現在地全文・設計図／全file地図・国家flow・作業規則・最新§232と実sourceを照合。前回残件の対象scopeを、保存済み原文／rawへ戻って切り分けた。
+
+旧a2e＋v7 before N1/N2はwish rootをACTIONへ誤分類し、それぞれmapped0／unparsed1と0／2。before N3は3／0で正常だった。対象子が述語まで広がる失敗は不採用d22c after N1/N2側であり、現a2e＋v10には未確認だった。N3のd22c afterはraw未返却で、意味失敗へ数えない。完全root内に対象が残るとき、任意のCONTENT_TARGET子を省略しただけでは意味欠落ではない。既存strictの名詞句一致を緩めたり対象子を全件必須にせず、現v10の実応答を先に確認した。
+
+### 変更なしの現候補を一回比較
+
+API f50acbc・v10全指示・元a2e/config006e・Qwen3.5-4B revision851bf6e・pins／隔離optional targetを固定。追加説明例／教師編集／学習／新重み／production API/test変更0。新runner [e48f899](https://github.com/MassyuRed/Cocolon/commit/e48f899fac4f97cb6a47ba89e106b0d0c3e5f037)、SHA `2a64ee45b7bcc4c5ce4973840fe9aaca936119804171111226a1e28cb1ea823b` をJupyterから直接実行した。元v7の3before rawは再生成せず、messages／request_ref／digestを現preparedと完全照合。v10側だけ各一回、新root／全体180秒の親timeout・各生成23秒／最大3生成・1load・学習0。前回run再起動／モデル再試行0。
+
+| 確認 | 実結果 |
+|---|---|
+| 入力 | 1・2・3recordの3要求、計6field。最大4443入力token＋2048<8192 |
+| 実4B | 3開始／3stop／6返却field／1load／学習0、親54.359616533853114秒／child49.20237685739994秒、exit0／timeout false |
+| 生成時間合計 | 34.37632082588971秒。準備・保持・通信等を含む総請求額の測定ではない |
+| N1 | mapped0→1、unparsed1→0。過去の肯定事実＋現在の肯定希望の2node・edge0 |
+| N2 | mapped0→2、unparsed2→0。同じ2nodeの各record_refs／根拠数2、edge0 |
+| N3 | mapped3／unparsed0を保持。各nodeのrecord_refs／根拠数3、元の全typed graph／文章図はprojection_ofを除き一致 |
+
+正規の全prepared requestを`generate_analysis_model_observed_actions`と`build_cumulative_map`へ渡し、既存ownerがrecordごとに元field／envelopeを局所化してmergeする。1record制約を持つ低位consumerへ全parentを直渡ししていない。全field・明記主体・格関係／対象を完全rootに保持し、希望を実行事実へ変えない。全新rawは旧v7と異なり、対象子は省略されたが元rootの意味は残る。record間の因果／順序は新設せずedge0。不採用d22cの出力を修復・再採用していない。
+
+rootと同環境read-only reviewerが全3source／新旧6raw・全graph／文章図を読み、各nodeの記録／根拠／envelopeの1/2/3対応を確認。3候補はcompiler／作者禁止下で非生成reloadし、同rawの3observed／cumulative mapをCPU再構築して全graph／counts／本文図一致。N1/N2が現v10で到達したことを、今回対象scope専用の新修正の効果へ帰属させない。この比較は既知1本文familyの記録数対照で、独立6題材や一般意味正解率ではない。
+
+### 保存projection readerのCPU確認
+
+実モデル由来のprojection／text／coverage／artifact IDを変えず、`replay_target_scope_saved.py`から実`read_maps`と実`ensure_map(ensure=False)`をcurrent／月次の各2入口へ通し、3artifact×4読取＝12readで保存値と完全一致した。文章投影と図の元projection_of／読み上げ順も一致をassertする。RPCは`analysis_cumulative_read`だけをmockし、それ以外のDB操作・モデル取得／response・Engine・compiler／作者の生成入口を禁止。readerの既存`_text_from_visual`による静的本文整合検査は維持し、「作者module全関数0」とは呼ばない。
+
+生成時刻／capture時刻／月参照は合成fixture metadataである。これは保存projection DTOの非生成再表示で、実DB永続化／RLS／transaction／月次capture、private artifact graphの完全復元、実HTTP/Auth／本人実機の証拠ではない。read-only補助も別harnessと元scriptのメモリ実行で同じ12read結果を確認し、元report bytes／SHA不変。root／補助の再確認を独立件数へ重複加算しない。
+
+### 保存と次の残件
+
+- [非公開原本](https://chatgpt.com/library?file_id=libfile_fde3_f-ddde83d625848191918b9af3558ee1f2_2f7470f963808191aaebf050935e72de&account_id=personal)は26member／209189bytes／SHA `473f0fce42a4ad288ee4766e8ac0a643bc5bb00ff33f604bee2956eeab179c0a`。CRC／全memberと元18fileのbytes／SHAを照合。旧before／不採用after診断／新raw／全map／source pin／replay／保存reader／独立reviewを保持し、公開GitHubへ原文・raw・人物を出さない。
+- API f50acbcは変更なし。既存[CI42188492957](https://github.com/MassyuRed/mashos-api/actions/runs/42188492957)のsuccessを参照し、新pytest／CI／native buildは起動していない。今回の新確認はモデル3要求、候補3replay、同raw3map、mock RPC12readと分ける。
+- 実行前後のAPI／source／重み／config／optional targetは不変。終了GPUはRTX4000 Ada・2MiB／0％。新レンタル・Pod管理／port変更・Render／Supabase変更・DB書込・本番配置／merge0。
+
+**現v10が今回の既知3構成へ及ぶことを確認した。追加例／新profile／owner緩和は不要で、通常採用・次初期値／本番へ自動進行しない。** STRUCTURE_MAP_DELTA_NONE：production source／prompt／profile／公開DTO／DB schema／RN・通常transport／budgeted batch許可は前回のまま。資料mapは検証範囲の差分更新だけ。実環境はCodex Work／GPT-6と同環境read-only補助で、独立ProやMash Product Readではない。
+
+次は異なる内容・カテゴリと本人補足の元field／owner対応をCPUで照合し、次の最小比較を決める。今回の同本文反復を、一般の本人基準・暗黙役割・選択基準／記録間意味、全欄補足、分割batchの合成／全履歴の通常時間内処理、IF／Saved・実DB／本人端末・商品受入れの完成へ換算しない。

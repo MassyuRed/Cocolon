@@ -1,4 +1,4 @@
-> **11/6・分析の継続（第9回§232）：Jupyterの同4B重み・学習0の10応答比較で否定希望E04/E05が文章・図へ到達（8→10/10）。完全な否定希望述語と各rootの明記主体を保持。旧8の全graph／本文／図は一致、生応答は6一致・2候補分解変化。10候補の非生成再読と10mapの固定raw再構築を確認。各1record、計11fieldの範囲で、DB/current/月次reader・複数record/batch・実機・通常採用・本番配置は未実施。** [実結果・原本・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-negative-wish-v10-20261106)。
+> **11/6・分析の継続（第9回§233）：追加教示・学習・owner修正なしの現v10で1/2/3記録の3応答が文章・図へ到達。mapped0/0/3→1/2/3、各mapは過去事実＋現在希望の2node・edge0、各nodeの記録／根拠数1/2/3を保持。全対象子必須化やraw修復なし。保存projectionはmock RPCの実current／月次readerで生成禁止の12read一致。実DB／月次capture・private graph完全復元／分割batch／通常採用・本番は未実施。** [結果・範囲・残件](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-target-scope-v10-20261106)。
 
 > **11/3・分析の最新（第9回§112–113）：** 旧78教材/106順と初期9dcを保持し、学習入力をv3へ整合。106更新/156測定/53新stop/2loadを840.273622秒/exit0で完了。理由対照は2→4/4、元RU02の生成再現とCQ04範囲重複を修復。ROLE9pairは全文bytes保持。一方OA01 carrier退行/OD01誤時点/MD02不明→結果等が残り、新2c01は通常/次初期値不採用。全53/106保存再読・827元memberを照合保全。[全結果/原本/再開点](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-aligned-v3-78-result-20261103)。次は適格本人source/回答条件→既存材料入力/意味gateの対応確認へ戻り、追加GPU未固定。通常HTTP/DB/RN/配置不変、本人基準/記録間接続は未完。
 
@@ -1340,3 +1340,12 @@ v9を上書きせず、独立の現在否定希望と肯定事実＋過去否定
 E04はSELF／negative／wish／current_inputの1node、E05はSELF／positive／fact／pastとSELF／negative／wish／pastの2node・edge0。希望を実行事実へ昇格せず、短いNEGATIONをconsumerで救済していない。旧8の全typed graph・文章・図は新artifact由来projection_ofを除き一致。E06の対象候補省略とAE05の否定範囲／対象候補追加によりraw保持は6/8で、候補graph全一致とは扱わない。
 
 全10候補はcompiler／作者禁止下で非生成再読し、同rawの10mapをoffline再構築。これは保存map artifact自体の非生成reloadやDB/current／月次readerではない。一般の本人基準／暗黙役割／選択・記録間関係、N1/N2対象scope等を残す。次は保存済みN1/N2原本と既存材料ownerのCPU照合で、今回run再実行・v10通常採用・追加学習へ自動進行しない。[結果・原本・全検証](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-negative-wish-v10-20261106)。
+
+
+## 11/6 §233 — 現v10の対象scopeと複数record／保存projection読取
+
+旧v7 before N1/N2の拒否は希望rootのkind、過剰CONTENT_TARGETは不採用d22c after側だった。現a2e＋v10への不整合と断定して追加教示せず、保存比較元と同じ1/2/3記録を各一回だけ生成した。正規full prepared requestを`generate_analysis_model_observed_actions`と`build_cumulative_map`へ渡し、既存ownerがrecordごとに原field／envelopeを局所化してmergeする。低位の1record consumerへfull parentを直渡しした結果ではない。
+
+全fieldの完全rootと明記主体・格関係／対象を保持し、希望を事実へ変えない。対象子なしでも元root内の対象は消えておらず、対象子全件必須化は不要。N3の元typed graph・本文図はprojection_ofを除き一致。元3候補の非生成再読と同rawの3map再構築に加え、実readerの保存projection再読を確認した。readerは実`read_maps`／`ensure_map(ensure=False)`×current／月次、mock RPC12read。モデル・compiler／作者の生成入口を禁止し、静的本文整合検査を保持する。合成の日時／月参照を使い、実DB保存／RLS／月次captureやprivate graph完全復元とは区別。
+
+STRUCTURE_MAP_DELTA_NONE：production source／prompt／private profile／型／通常transport／batch許可／DB／RNは前回のまま。新trialと保存reader診断の実file対応を01Bへ追記。次は異内容・異カテゴリ／本人補足との元field対応のCPU照合。分割batch／全履歴の通常時間内処理・本人基準の役割／選択／記録間意味・IF／Saved・実機は残件。[全結果](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-target-scope-v10-20261106)。

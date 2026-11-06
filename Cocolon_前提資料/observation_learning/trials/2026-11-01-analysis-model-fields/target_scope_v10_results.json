@@ -1,0 +1,142 @@
+{
+  "schema_version": "analysis_target_scope_fixed_v10_public_result.v1",
+  "status": "EXISTING_V10_TRANSFER_CONFIRMED_NOT_NORMALLY_ADOPTED",
+  "api_commit": "f50acbc379dfb8f7c01cb7b58dfda9d674914e65",
+  "api_production_or_test_changed": false,
+  "runner_commit": "e48f899fac4f97cb6a47ba89e106b0d0c3e5f037",
+  "runner_sha256": "2a64ee45b7bcc4c5ce4973840fe9aaca936119804171111226a1e28cb1ea823b",
+  "saved_reader_sha256": "8da37ba6b01991da12a7ab23a2bf9e87a3b14b158693e0ed157ba6e1a3df7435",
+  "profile": "selected_material.v10",
+  "baseline_profile": "selected_material.v7",
+  "fixed_weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59",
+  "fixed_config_sha256": "006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9",
+  "instruction_changes": 0,
+  "new_examples": 0,
+  "training_updates": 0,
+  "baseline": "Original fixed-a2e v7 responses reused; rejected d22c after responses are CPU diagnosis only.",
+  "limits": {
+    "seconds": 180,
+    "per_generation_seconds": 23,
+    "new_generation": 3,
+    "model_loads": 1
+  },
+  "actual": {
+    "parent_seconds": 54.359616533853114,
+    "child_seconds": 49.20237685739994,
+    "generation_seconds": 34.37632082588971,
+    "new_generation": 3,
+    "stop": 3,
+    "fields": 6,
+    "model_loads": 1,
+    "updates": 0,
+    "exit": 0,
+    "timeout": false,
+    "real_api_calls": 0,
+    "real_db_calls": 0
+  },
+  "max_input_tokens": 4443,
+  "output_tokens": 2048,
+  "context_tokens": 8192,
+  "results": [
+    {
+      "id": "N1",
+      "source_records": 1,
+      "before": "UNSUPPORTED",
+      "after": "GENERATED_PRIVATE_ONLY",
+      "raw_same": false,
+      "seconds": 7.15274497307837,
+      "nodes": 2,
+      "edges": 0,
+      "unparsed": 0,
+      "raw_sha256": "923d8de805115b313cfc0bcec215cf14af16e8d57ff180141e4a3af1f58afa69"
+    },
+    {
+      "id": "N2",
+      "source_records": 2,
+      "before": "UNSUPPORTED",
+      "after": "GENERATED_PRIVATE_ONLY",
+      "raw_same": false,
+      "seconds": 11.380893499590456,
+      "nodes": 2,
+      "edges": 0,
+      "unparsed": 0,
+      "raw_sha256": "108c297a9e06dfc6212054bf7e1a5c7d21d6fd337fc0ded0637a0e846e29bc5e"
+    },
+    {
+      "id": "N3",
+      "source_records": 3,
+      "before": "GENERATED_PRIVATE_ONLY",
+      "after": "GENERATED_PRIVATE_ONLY",
+      "raw_same": false,
+      "seconds": 15.84268235322088,
+      "nodes": 2,
+      "edges": 0,
+      "unparsed": 0,
+      "graph_same": true,
+      "text_same": true,
+      "projection_same": true,
+      "raw_sha256": "4b2dbf478b43925ba755afc26dbe4fd98404d0f36253dcfaf3ad0f173cb8f7cf"
+    }
+  ],
+  "supported_configurations_before": 1,
+  "supported_configurations_after": 3,
+  "mapped_records_before": [
+    0,
+    0,
+    3
+  ],
+  "mapped_records_after": [
+    1,
+    2,
+    3
+  ],
+  "content_family_count": 1,
+  "independent_general_evaluation": false,
+  "content_target_child_required": false,
+  "interpretation": "Complete roots preserve actor and all arguments without optional CONTENT_TARGET children; no scope-specific prompt or consumer change was needed.",
+  "candidate_non_generating_reloads": 3,
+  "fixed_raw_map_rebuilds": 3,
+  "saved_projection_reader": {
+    "configuration_count": 3,
+    "synthetic_rpc_reads": 12,
+    "entrypoints": [
+      "read_maps current",
+      "read_maps monthly",
+      "ensure_map ensure=False current",
+      "ensure_map ensure=False monthly"
+    ],
+    "model_and_generation_entrypoints_forbidden": true,
+    "projection_text_coverage_id_exact": true,
+    "actual_db_persistence": false,
+    "private_graph_restore": false
+  },
+  "source_ci": {
+    "new_run": false,
+    "source_unchanged": true,
+    "prior_passing_run": 42188492957
+  },
+  "preservation": {
+    "filename": "Cocolon_Analysis_TargetScopeV10_20261106.zip",
+    "bytes": 209189,
+    "sha256": "473f0fce42a4ad288ee4766e8ac0a643bc5bb00ff33f604bee2956eeab179c0a",
+    "members": 26,
+    "original_remote_members": 18,
+    "all_original_members_bytes_sha_matched": true,
+    "export_bytes": 1069899,
+    "export_sha256": "eded20cc4ea942b2a5474e303c3c9bc480c86b6c8bb47a95fa1e97633cfaa5be",
+    "private_reference": "https://chatgpt.com/library?file_id=libfile_fde3_f-ddde83d625848191918b9af3558ee1f2_2f7470f963808191aaebf050935e72de&account_id=personal"
+  },
+  "normal_adoption": false,
+  "next_training_initial_adoption": false,
+  "production_deployed": false,
+  "automatic_progression": false,
+  "structure_map_delta": "NONE",
+  "limitations": [
+    "One known synthetic prose family repeated in 1/2/3-record configurations; not six independent examples or general accuracy.",
+    "All new raw responses differ from v7; N3 typed graph/text/projection match except projection_of.",
+    "No new target-scope-specific instruction, owner correction or training; no attribution to one of the earlier v9/v10 instruction additions.",
+    "Saved reader uses mock RPC and synthetic timestamp/month references, not actual DB/RLS/monthly capture or private graph restoration.",
+    "Different content/categories, supplements, budgeted batch composition, full-history runtime and phone acceptance remain unverified."
+  ],
+  "next": "CPU-check original-field/owner binding across different content/categories and supplemental answers, then determine the next minimal runtime comparison; do not rerun this closed probe."
+}

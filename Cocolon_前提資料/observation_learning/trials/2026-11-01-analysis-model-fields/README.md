@@ -2301,3 +2301,17 @@ WH04の元rootは既に否定を保持しており、旧consumerの肯定限定�
 保存candidate10の非生成再読と同rawの10map再構築まで。各1record、計11fieldで、DB/current／月次reader、保存map自体の非生成reload、複数record/full-parent/batchは未検証。local638 PASS／SQL環境19 SKIP、Jupyter37 PASS、CI2442 PASS／既存SQL1 SKIP＋12048subtests、owner1、累積302＋2subtests、隔離SQL201原本／15月参照。重複加算しない。
 
 [非公開原本](https://chatgpt.com/library?file_id=libfile_fde3_f-1f1bf457dbd4819189d6b7841b5f0508_2f7470f963808191aaebf050935e72de&account_id=personal)は42member／374894bytes／SHA `27906586bedbfa694144989fb3a99967e4cd3b940659fa9e870785d9f940b35f`、元33fileのbytes／SHAも一致。v10を通常／次初期値へ採用せず、今回runの再起動をしない。次は保存済みN1/N2対象scopeを元source／既存ownerからCPU照合する。N1/N2/N3の新生成、追加学習、一般の役割／選択／記録間意味、通常全量／IF／Saved・実DB／端末は今回完了へ数えない。
+
+
+> 継続更新：上のv10比較に残したN1/N2/N3は、後続[§233](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-target-scope-v10-20261106)で別一回比較を完了。完了runを再起動せず、同節の再開点を使う。
+
+<a id="target-scope-v10-result-20261106"></a>
+## 11/6 — 現v10を変更せず1/2/3記録へ比較を広げる
+
+[週次§233](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-target-scope-v10-20261106)／`target_scope_v10_results.json`が実結果。`target_scope_probe.py`は固定v10の新3生成だけ。旧v7 beforeのN1/N2はwishkind誤り、N3は正常。過剰targetのd22c afterは不採用版のCPU原因診断として分離し、現v10の欠陥と決め付けない。元a2e／config006e・API f50acbc・指示／教師／重みを変えず、3stop／6field／1load／学習0、親54.359616533853114秒／child49.20237685739994秒／exit0。生成時間合計34.37632082588971秒、最大4443入力token＋2048<8192。
+
+mapped0/0/3→1/2/3、全未解析0。全parent内の各元fieldが完全な行動root／希望rootを返し、主体・引数を保持。対象子の省略は対象意味の欠落でなく、typed N3の全graph・本文／図は元と一致（projection_of除外）。これは既知1本文familyを1/2/3recordへ反復した3構成で、独立6題材・一般率とはしない。
+
+`replay_target_scope_saved.py`は実projection／文章／coverage／IDを保ち、実read_mapsとensure=Falseをcurrent／月次へ各一回、計12read確認する。DBはread専用mock RPC、生成入口を禁止し静的_text_from_visual検査を保つ。月／時刻は合成metadataで、実保存やprivate graph全復元ではない。production/test sourceを変えていないので新pytest／CIは起動せず、既存f50acbcのCI42188492957 successを参照する。
+
+[原本](https://chatgpt.com/library?file_id=libfile_fde3_f-ddde83d625848191918b9af3558ee1f2_2f7470f963808191aaebf050935e72de&account_id=personal)は26member／209189bytes／SHA `473f0fce42a4ad288ee4766e8ac0a643bc5bb00ff33f604bee2956eeab179c0a`。元18fileのbytes／SHAと全archive memberを照合済み。通常／次初期値は未採用、今回run再実行0。次は異なる内容・カテゴリ／本人補足の元field対応をCPUで確認し、分割batch／全量／一般意味・実DB／実機は残す。

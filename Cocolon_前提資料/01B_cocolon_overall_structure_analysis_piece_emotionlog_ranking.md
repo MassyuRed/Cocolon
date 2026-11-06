@@ -3771,3 +3771,14 @@ API17c7078f／CI42182501217全工程成功。現在・過去希望2例が文章�
 | trial `negative_wish_probe.py`／`negative_wish_v10_results.json` | 固定v9 rawをbeforeへ再利用、新v10だけ10生成／1load／学習0／240秒の一回比較。本文なし集計とprivate原本参照 |
 
 API f50acbc／runner1ae1c811、CI42188492957全工程成功。否定希望2例が到達し旧8typed保持、raw一致は6。STRUCTURE_MAP_DELTA_PRESENTはprivate profile/ref/state variantと明示callerだけ。公開DTO／DB schema／意味型／通常transport・全量batch・RN／稼働採用は変更していない。[結果・保存原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-negative-wish-v10-20261106)。
+
+
+## 11/6 §233 — 現v10対象scopeと保存readerの診断file対応
+
+| path | 責務・実行範囲 |
+|---|---|
+| trial `target_scope_probe.py` | 元a2eのv7 before N1/N2/N3を固定し、同source／userの現v10を新3生成／1load／学習0／180秒だけ実行。全parentは既存record ownerへ渡し、旧runを再起動しない |
+| trial `replay_target_scope_saved.py` | 実生成由来の文章／図／coverage／artifact IDを変えず、mock RPCから実current／月次readerを各2入口で再読。モデル／compiler／作者の生成入口禁止、静的本文照合は維持 |
+| trial `target_scope_v10_results.json` | 1/2/3記録のmapped差分、対象子省略と意味保持、保存reader12readの限定、private原本参照 |
+
+API f50acbc・semantic_admission／intent_compiler／cumulative serviceは無変更。通常profile選択・batch合成・DB schema／API／RN構造も不変。STRUCTURE_MAP_DELTA_NONE、map差分は今回の検証範囲更新だけ。[結果・再開点](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-target-scope-v10-20261106)。
