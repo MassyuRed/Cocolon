@@ -5200,8 +5200,8 @@ Analysisは主2pill44・日週月短表示と更新日を折返し行へ、現�
 
 
 <a id="ui-preview-correction-ios-7401-20261106"></a>
-## 230. 11/6 — 修正一式を固定し、統合iOS7401を一回開始
+## 230. 11/6 — 修正一式の統合iOS7401がビルド・TestFlight送信成功
 
-§229／UI設計§27の製品21＋test2＋資料3fileを `b64cfa7692d464fbcf047263f1113c6feec96690` に保存。全26file全文／SHA再読込、親／変更path集合／head、比較HTML／sourceの不変を確認してから、[既存iOS #74](https://github.com/MassyuRed/Cocolon/actions/runs/42176982238)を**15:50:24 JSTに一回**dispatchした。run42176982238・attempt1、version1.0／7401。現時点は進行中、Archive／目的文／IPA／Upload・Apple側処理・端末表示は未確認。
+§229／UI設計§27の製品21＋test2＋資料3fileを `b64cfa7692d464fbcf047263f1113c6feec96690` に保存。全26file全文／SHA再読込、親／変更path集合／head、比較HTML／sourceの不変を確認してから、[既存iOS #74](https://github.com/MassyuRed/Cocolon/actions/runs/42176982238)を**15:50:24 JSTに一回**dispatchし、**16:06:27 JSTにsuccessで完了（16分03秒）**。run42176982238・attempt1、version1.0／7401。job127757593740の全19step、署名Archive／実Archive写真Usage・Add目的文検査／IPA export／TestFlight Uploadが全てsuccess。run／job API・候補head・ブラウザSuccessを照合した。artifact一覧0件、巨大ログ本文APIは再取得していない。
 
-途中群別build／rerun0、workflow・依存・署名設定の変更0。built sourceはb64cfa76に固定し、後続の資料commitと混同しない。[UI設計§28](../designs/ui/material-ui-design.md#ui-preview-correction-ios-7401-20261106)へ同じ結果を記録し、最終工程を確認後にこの節を更新する。3theme／文字拡大／全画面と状態の実機確認は引き続き残る。追加Android／Render／Supabase／GPU操作0。
+今回の修正一式のapp build一回・途中群別build／rerun0、workflow・依存・署名設定の変更0。built sourceはb64cfa76に固定し、資料のみ48e59ff9と後続commitを区別する。[UI設計§28](../designs/ui/material-ui-design.md#ui-preview-correction-ios-7401-20261106)へ最終結果を置換記録した。Apple側processing・内部配布・本人端末7401表示／原本との一致は未確認。3theme／文字拡大／全画面と状態の実機確認は引き続き残る。追加Android／Render／Supabase／GPU操作0。

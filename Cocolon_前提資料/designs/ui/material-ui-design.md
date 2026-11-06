@@ -166,7 +166,7 @@ defaultの背景・面・主色・見出し・ロゴ・本文・区切りは改�
 | Piece作成 | 画像／全文を設定より前へ。操作ボタンと外枠をテーマ対応。全条件操作とidentity/tokenの引渡しを保持。作品renderer・recipe・保存画像は変更0 |
 | 設定・周辺 | 設定入口を目的が読める3行へ。テーマ選択面、共通メニュー、契約カード・説明・CTA、Nexusタブと自分のPiece入口を調整 |
 
-**現在の実装：** 7301への実機指摘を受け、元のブランド配色と採用原本の配置・面分け・密度へ修正した（§27）。修正一式`b64cfa76`の統合iOS7401を一回開始し、現在進行中（[§28](#ui-preview-correction-ios-7401-20261106)）。実OSの表示・プレビュー一致は未確認。全画面・内部route／各状態の受入条件は§14〜16を継承する。
+**現在の実装：** 実機指摘を受け、元のブランド配色と採用原本の配置・面分け・密度へ修正した（§27）。修正一式`b64cfa76`の統合iOS7401は一回のbuildで署名Archive／目的文検査／IPA／TestFlight送信までsuccess（[§28](#ui-preview-correction-ios-7401-20261106)）。Apple側処理・内部配布・実機の表示／プレビュー一致は未確認。全画面・内部route／各状態の受入条件は§14〜16を継承する。
 
 初回反映時の確認：Nodeの既存5入口（画面contract・IAP復元・テーマ可読性・Piece初回保存modal・preview/display）で400 PASS／FAIL0／SKIP0。React/native・Auth/HTTPは各既存testの代替を含む。テーマ検査は旧バーガンディ色・太枠・taglineの固定期待を採用設計へ更新し、3テーマの本文／補助／tonal／操作色の4.5:1を検査した。Piece testの新テーマhookと共有Buttonへのimport適応のみを行い、保存・回復の検査は維持。最初の実行は取得不足の依存fileと旧表示期待で失敗し、依存原本の取得と意図した期待更新後に上記最終実行を通過した。製品の資格判定を緩めていない。今回の全画面設計更新で、これらを再実行したとは扱わない。
 
@@ -748,12 +748,21 @@ GitHubのdb7df2c7で存在・全文／blob SHAを確認した。現在保存さ�
 
 分担の一時前後照合ではAnalysis612 mock render・21 AST、Home／Settingsの処理不変、Piece初期保存資格12宣言／onPress11個のAST一致を確認。独立reviewでもVisualCardのrender以外34memberと作品canvas subtreeはHEAD同一、Homeの文字／面ペアは3themeで4.5以上（最小4.67）、Settingsに本文を切る固定高さ追加なし。変更JS20fileのparse、native XML3fileのparse、diff空白検査成功。これらは実OS描画・文字計測・タップ・読み上げ・プレビューとの視覚的一致の合格ではない。
 
-今回の原本参照・配色復元・構成修正を同じ候補へまとめて保存し、追加source修正があれば同じ改装内で継続する。途中の画面群別buildは行わない。次のnative確認を行う場合は候補を固定した統合build一回とし、run／source／結果を別記する。現時点の修正は未ビルド。全画面・内部route／各状態の実機最終確認は§14〜16を継承する。API／DB／AI／料金／本人・公開／保存guard変更0、Render／Supabase／GPU操作0。責任範囲を分離した表示fileの実装分担をrootが統合し、scopeと変更前後を確認した。新責務・データ流なし、STRUCTURE_MAP_DELTA_NONE。
+今回の原本参照・配色復元・構成修正を同じ候補へまとめて保存し、追加source修正があれば同じ改装内で継続する。途中の画面群別buildは行わない。次のnative確認を行う場合は候補を固定した統合build一回とし、run／source／結果を別記する。このsource保存時点は未ビルド。後続の統合7401結果は§28。全画面・内部route／各状態の実機最終確認は§14〜16を継承する。API／DB／AI／料金／本人・公開／保存guard変更0、Render／Supabase／GPU操作0。責任範囲を分離した表示fileの実装分担をrootが統合し、scopeと変更前後を確認した。新責務・データ流なし、STRUCTURE_MAP_DELTA_NONE。
 
 
 <a id="ui-preview-correction-ios-7401-20261106"></a>
-## 28. 11/6 配色復元・プレビュー構成修正の統合iOS7401 — 進行中
+## 28. 11/6 配色復元・プレビュー構成修正の統合iOS7401 — ビルド・送信成功
 
 §27の修正一式を `b64cfa7692d464fbcf047263f1113c6feec96690` に保存し、全26変更fileの全文／SHA再読込・親／path集合／head・比較原本2file不変を確認。その候補を固定して[統合iOS #74](https://github.com/MassyuRed/Cocolon/actions/runs/42176982238)を一回開始した。run `42176982238`、attempt1、開始2026-11-06 **15:50:24 JST**。既存番号式によるversion1.0／build7401。workflow55e06093は7301と同じで変更していない。
 
-現在はビルド進行中。署名Archive・実Archiveの写真目的文検査・IPA export・TestFlight Uploadの結果は未確認。資料だけの後続commitとbuilt sourceを区別し、画面群ごとの途中buildやrerunは開始していない。実機の見え方・原本との視覚的一致は未確認であり、build成功で代用しない。
+**16:06:27 JSTにworkflow全体successで完了（16分03秒）。** job `127757593740` の全19stepもsuccess。run／job APIのstatus・head／#74 attempt1、Actions画面のSuccessを照合した。
+
+| 工程 | 結果 |
+|---|---|
+| 署名付きiOS Archive | success |
+| 実Archiveの写真Usage／Add目的文検査 | success |
+| IPA export | success |
+| TestFlight Upload | success |
+
+今回の修正一式のapp buildは一回、途中群別build／rerunは0。Actions artifact一覧0件。結果の根拠はrun／job APIとActions画面で、巨大なログ本文APIは再取得していない。built sourceは`b64cfa76`、後続の資料commitはこのバイナリへ含まれない。Apple側processing・内部グループ配布・本人端末の7401導入／実表示・原本との視覚的一致は未確認。build成功をその合格へ置き換えず、全画面・各状態の確認は§14〜16を継承する。追加Android／Render／Supabase／GPU操作0。
