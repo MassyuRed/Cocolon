@@ -66,11 +66,11 @@
     "local_health_http": 200,
     "bridge_authenticated_empty_payload_upstream_http": 400,
     "bridge_set_cookie": false,
-    "real_generation_verified": false,
+    "real_generation_verified": true,
     "render_settings_merge": "APPLIED_AFTER_EXPLICIT_MASH_APPROVAL",
     "production_env_changed": true,
     "deploy_started": true,
-    "next_action": "Read current provider response, resolve current 503 if necessary, and verify ordinary authenticated v3 save/read/device display; no model-quality-before-device gate.",
+    "next_action": "Await normal authenticated 7701 refresh; confirm v3 commit/read and human device graph/prose/detail. No new build, no model-quality gate.",
     "deploy_live": true,
     "initial_live_commit": "d63647a816a9f4024aee16bade7735f1b9700e9c",
     "initial_deploy": "dep-dbnglopsrm7s739cqcsg",
@@ -90,8 +90,8 @@
     "json_fence_fix_tests": 44,
     "json_fence_payload_unchanged": true,
     "latest_device_http": 503,
-    "latest_device_seconds": 12.338,
-    "synthetic_provider_probe": "first direct existing synthetic T01 request returned429 busy, 0 content; same-weights provider restarted and health200; one post-restart request in progress",
+    "latest_device_seconds": 50.101,
+    "synthetic_provider_probe": "Unicode/EOS fixed full T01: HTTP200/175.505s/stop/4486Japanese chars; unchanged CMEE admitted watashi.map.v3",
     "provider_restart": {
       "old_pid": 17275,
       "signal": "TERM",
@@ -100,6 +100,54 @@
       "jupyter_or_pod_restarted": false,
       "local_health_http": 200,
       "cpu_threads": 1
-    }
+    },
+    "real_generation_scope": "Normal device model response reached CMEE; before constraints synthetic T01 HTTP200/stop; no v3 save yet",
+    "latest_device_reason": "Old constrained provider interrupted during narrow fix restart; not a result of the new free-text fix",
+    "post_fence_evidence_rejection": {
+      "at_utc": "2026-11-07T12:02:20Z",
+      "http": 422,
+      "seconds": 89.336,
+      "stage": "_semantic_map_evidence:2334"
+    },
+    "constrained_timeout": {
+      "at_utc": "2026-11-07T12:33:38Z",
+      "http": 503,
+      "seconds": 215.681
+    },
+    "gpu_generation_source_commit": "ccab8cf2794353a7f4d0b68bb075501f15895096",
+    "generation_constraint_tests": {
+      "passed": 75,
+      "failed": 0,
+      "skipped": 0
+    },
+    "unicode_failure": {
+      "synthetic_bounded_tokens": 128,
+      "seconds": 8.884,
+      "premature_parser_completion_after_japanese": true,
+      "repeated_im_end_count": 107,
+      "tokenizer_eos_id": 248046,
+      "independent_fixed_source_reproduced": true
+    },
+    "unicode_fix": {
+      "parser_alphabet_config_before_context": true,
+      "generation_and_finish_eos_same_tokenizer": true,
+      "source_and_evidence_unchanged": true
+    },
+    "synthetic_runtime_validation": {
+      "source": "T01_manual10",
+      "synthetic_only": true,
+      "seconds": 175.505,
+      "http": 200,
+      "finish": "stop",
+      "characters": 4486,
+      "raw_sha256": "52900ae2bf821f90bb5d1a680aab13621aa76944fd1695fe48d438ae5fb9c843",
+      "cmee_admitted": true,
+      "nodes": 10,
+      "edges": 3,
+      "prose_characters": 1964,
+      "meaning_quality_accepted": false,
+      "device_saved": false
+    },
+    "device_refresh_instructions_issued": true
   }
 }
