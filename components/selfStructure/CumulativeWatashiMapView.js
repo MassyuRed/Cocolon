@@ -116,10 +116,14 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
   }, [key, owner]);
   const closeEvidence = () => { evidenceRequest.current += 1; setEvidence(null); };
 
-  const coverage = value => value ? <View style={styles.notice}>
-    <Text style={[styles.bodyText, { color: ink }]}>対象：感情入力の記録{value.source_count}件と、その本人補足。構造に反映できた記録：{value.mapped_count}件。</Text>
+  const coverage = (value, isSemantic = false) => value ? <View style={styles.notice}>
+    <Text style={[styles.bodyText, { color: ink }]}>{isSemantic
+      ? `対象の記録${value.source_count}件／根拠として結び付いた記録${value.mapped_count}件。`
+      : `対象：感情入力の記録${value.source_count}件と、その本人補足。構造に反映できた記録：${value.mapped_count}件。`}</Text>
     {value.unparsed_count || value.excluded_count ? <Text style={[styles.bodyText, { color: ink }]}>
-      未解析の範囲があります（全体または一部を読み取れていない記録{value.unparsed_count}件、通常分析の対象外{value.excluded_count}件）。
+      {isSemantic
+        ? `図に結び付けていない記録${value.unparsed_count}件／分析に使っていない記録${value.excluded_count}件。`
+        : `未解析の範囲があります（全体または一部を読み取れていない記録${value.unparsed_count}件、通常分析の対象外${value.excluded_count}件）。`}
     </Text> : null}
     {value.stale_supplement_count ? <Text style={[styles.bodyText, { color: ink }]}>編集前の入力に結び付いた補足は、現在の入力の説明には使用していません（{value.stale_supplement_count}件）。</Text> : null}
   </View> : null;
@@ -130,7 +134,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
     {about ? <View style={{ marginTop: 16 }}>
       <Text style={[styles.meta, { color: ink }]}>分析日時：{dateLabel(row.generated_at)}</Text>
       {row.captured_at ? <Text style={[styles.meta, { color: ink }]}>月次保存日時：{dateLabel(row.captured_at)}</Text> : null}
-      {coverage(row.content_json?.map_context)}
+      {coverage(row.content_json?.map_context, row.content_json?.watashiMap?.wire_kind === 'watashi.map.v3')}
     </View> : null}
   </View>;
 

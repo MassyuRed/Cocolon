@@ -228,18 +228,24 @@ test('Free monthly access does not unlock the existing paid PDF export',()=>{
 
 test('semantic renderer is negotiated with owner binding and processing metadata starts collapsed',async()=>{
   const semantic=require('./fixtures/analysis-semantic-map-v3-synthetic.json');
-  const h=harness(async()=>latest(semantic));
+  const result={...latest(semantic),map_context:{...counts,processed_count:4,mapped_count:3,unparsed_count:1,excluded_count:1}};
+  const h=harness(async()=>result);
   const Screen=h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
   let view;await act(async()=>{view=Renderer.create(React.createElement(Screen,{embedded:true,hideHeader:true}));});
   assert.equal(view.root.findAllByProps({testID:'watashi-map-v3'}).length,1);
   assert(JSON.stringify(view.toJSON()).includes(semantic.overview.title));
   assert(!JSON.stringify(view.toJSON()).includes('対象：感情入力の記録'));
+  assert(!JSON.stringify(view.toJSON()).includes('根拠として結び付いた記録'));
   const latestCall=h.calls.find(c=>c[1].includes('/latest?ensure=true'));
   assert.equal(latestCall[2].headers['X-Watashi-Map-Renderer'],'semantic.v1');
   assert.equal(latestCall[2].timeoutMs,240000);
   assert.equal(latestCall[2].expectedUserId,owner);
   await act(async()=>button(view,'分析について').props.onPress());
-  assert(JSON.stringify(view.toJSON()).includes('対象：感情入力の記録'));
+  const about=JSON.stringify(view.toJSON());
+  assert(about.includes('対象の記録5件／根拠として結び付いた記録3件'));
+  assert(about.includes('図に結び付けていない記録1件／分析に使っていない記録1件'));
+  assert(!about.includes('構造に反映できた記録'));
+  assert(!about.includes('未解析の範囲'));
   await act(async()=>view.unmount());
 });
 
