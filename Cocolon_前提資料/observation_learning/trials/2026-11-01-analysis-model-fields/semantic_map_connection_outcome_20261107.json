@@ -70,7 +70,7 @@
     "render_settings_merge": "APPLIED_AFTER_EXPLICIT_MASH_APPROVAL",
     "production_env_changed": true,
     "deploy_started": true,
-    "next_action": "Review full prose and node/edge detail appearance on the displayed saved result; identify measured generation-latency improvement. Do not require all semantic-quality repairs or another build first.",
+    "next_action": "Next integrated build includes hidden category/emotion context; continue reducing initial/update generation latency without changing input, coverage or semantic quality. Existing saved same-owner/source maps are reused on normal display.",
     "deploy_live": true,
     "initial_live_commit": "d63647a816a9f4024aee16bade7735f1b9700e9c",
     "initial_deploy": "dep-dbnglopsrm7s739cqcsg",
@@ -114,7 +114,7 @@
       "http": 503,
       "seconds": 215.681
     },
-    "gpu_generation_source_commit": "ccab8cf2794353a7f4d0b68bb075501f15895096",
+    "gpu_generation_source_commit": "529f6817eb84ed6a3d85beab4ea22cc62dcbdc5c",
     "generation_constraint_tests": {
       "passed": 75,
       "failed": 0,
@@ -205,10 +205,11 @@
       "one_time_android_ios_node_dialogs_checked": 14,
       "analysis_context_preserved": true,
       "device_build_7701_has_change": false,
-      "build_status": "await next integrated build"
+      "build_status": "await next integrated build",
+      "source_commit": "ec49d9812f7939ae0b93fcbd6ffb57489aae999c"
     },
     "token_filter_optimization_20261108": {
-      "kind": "synthetic_cpu_only",
+      "kind": "synthetic_cpu_and_gpu",
       "ordered_result_and_rejection_equivalence_cases": 400,
       "vocabulary_size": 248046,
       "repetitions": 31,
@@ -218,7 +219,7 @@
         "quote_before_median_ms": 5.833,
         "quote_after_median_ms": 5.7783
       },
-      "actual_gpu_latency_measured": false,
+      "actual_gpu_latency_measured": true,
       "private_source_or_output_included": false,
       "model_weights_or_input_budgets_changed": false,
       "source_base_commit": "ccab8cf2794353a7f4d0b68bb075501f15895096",
@@ -239,7 +240,218 @@
         "corrected_by_same_ref_materialization": true,
         "source_changes_to_fix_environment": 0
       },
-      "source_commit": "529f6817eb84ed6a3d85beab4ea22cc62dcbdc5c"
+      "source_commit": "529f6817eb84ed6a3d85beab4ea22cc62dcbdc5c",
+      "actual_gpu_result": {
+        "stage": "complete",
+        "synthetic_only": true,
+        "source_commit": "529f6817eb84ed6a3d85beab4ea22cc62dcbdc5c",
+        "kernel_versions": {},
+        "provider_pid": 20854,
+        "seconds": 171.34955875994638,
+        "http": 200,
+        "finish": "stop",
+        "characters": 4486,
+        "raw_sha256": "52900ae2bf821f90bb5d1a680aab13621aa76944fd1695fe48d438ae5fb9c843",
+        "cmee_admitted": true,
+        "nodes": 10,
+        "edges": 3,
+        "prose_characters": 1964,
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 10,
+          "processed_count": 10,
+          "profile": "cumulative.v1",
+          "source_count": 10,
+          "stale_supplement_count": 0,
+          "unparsed_count": 0
+        },
+        "health_http": 200,
+        "model_weights_changed": false,
+        "request_messages_changed": false,
+        "context_or_output_budgets_changed": false,
+        "meaning_quality_accepted": false
+      },
+      "baseline_seconds": 175.505,
+      "baseline_raw_identical": true,
+      "single_run_only": true,
+      "authenticated_device_remeasurement": false
+    },
+    "fast_kernel_probe_20261108": {
+      "actual_gpu": true,
+      "synthetic_only": true,
+      "model_loaded": false,
+      "kernel_versions": {
+        "fla-core": "0.5.0",
+        "causal-conv1d": "1.7.0",
+        "einops": "0.8.1"
+      },
+      "existing_versions_preserved": {
+        "torch": "2.8.0+cu128",
+        "triton": "3.4.0",
+        "transformers": "5.19.0"
+      },
+      "probe_log": [
+        {
+          "stage": "start",
+          "synthetic_only": true,
+          "model_loaded": false,
+          "torch": "2.8.0+cu128",
+          "rtol": 0.05,
+          "atol": 0.03
+        },
+        {
+          "stage": "warmup",
+          "case": "recurrent",
+          "implementation": "fla.ops.gated_delta_rule.fused_recurrent"
+        },
+        {
+          "case": "recurrent",
+          "numerical": [
+            {
+              "max_abs": 0,
+              "relative_rms": 0
+            },
+            {
+              "max_abs": 7.450580596923828e-09,
+              "relative_rms": 8.850033331143291e-08
+            }
+          ],
+          "cold_seconds": 0.9357296118978411,
+          "reference_ms": 0.4423669306561351,
+          "optimized_ms": 0.17843907698988914
+        },
+        {
+          "stage": "warmup",
+          "case": "chunk",
+          "implementation": "fla.ops.gated_delta_rule.chunk"
+        },
+        {
+          "case": "chunk",
+          "numerical": [
+            {
+              "max_abs": 3.0517578125e-05,
+              "relative_rms": 0.0044445075115622425
+            },
+            {
+              "max_abs": 0.0003203675150871277,
+              "relative_rms": 0.0031576935565782232
+            }
+          ],
+          "cold_seconds": 37.67397761205211,
+          "reference_ms": 0.9686190169304609,
+          "optimized_ms": 0.8807143894955516
+        },
+        {
+          "stage": "warmup",
+          "case": "conv_prefill",
+          "implementation": "causal_conv1d.causal_conv1d_interface"
+        },
+        {
+          "case": "conv_prefill",
+          "numerical": [
+            {
+              "max_abs": 0.0009765625,
+              "relative_rms": 0.002847876698270907
+            }
+          ],
+          "cold_seconds": 0.005290705012157559,
+          "reference_ms": 0.07245445158332586,
+          "optimized_ms": 0.0639845384284854
+        },
+        {
+          "stage": "warmup",
+          "case": "conv_update",
+          "implementation": "causal_conv1d.causal_conv1d_interface"
+        },
+        {
+          "case": "conv_update",
+          "numerical": [
+            {
+              "max_abs": 0.00048828125,
+              "relative_rms": 0.0022980064588701663
+            },
+            {
+              "max_abs": 0,
+              "relative_rms": 0
+            }
+          ],
+          "cold_seconds": 0.0017733678687363863,
+          "reference_ms": 0.12480397708714008,
+          "optimized_ms": 0.0581544591113925
+        },
+        {
+          "stage": "complete",
+          "cases": 4,
+          "numerical_pass": true,
+          "exact_token_equivalence": false
+        }
+      ],
+      "unadopted_candidate": {
+        "fla-core": "0.6.0",
+        "reason": "Triton3.4 missing triton.experimental.gluon.language.extra; current server unchanged during failed isolated probe"
+      },
+      "causal_wheel_sha256": "a1fcd5d022b67ddfc9e1c291f890004c1c081a03d66b532f6eebe31219168e0e",
+      "fla_core_wheel_sha256": "5c826ff32daf6b629658e3e4f6125d87cf8c32eea937e3be9ba85f51951d809a",
+      "model_runtime_candidate_tested_later": true,
+      "model_runtime_candidate_adopted": false,
+      "model_runtime_result": {
+        "stage": "complete",
+        "synthetic_only": true,
+        "source_commit": "529f6817eb84ed6a3d85beab4ea22cc62dcbdc5c",
+        "kernel_versions": {
+          "fla-core": "0.5.0",
+          "causal-conv1d": "1.7.0",
+          "einops": "0.8.1"
+        },
+        "provider_pid": 20117,
+        "seconds": 185.88516809605062,
+        "http": 200,
+        "finish": "stop",
+        "characters": 4270,
+        "raw_sha256": "cc704a051250459091f4d1d551615e6d04c2b78eb13edf6a3bd138a744ead9ef",
+        "cmee_admitted": true,
+        "nodes": 9,
+        "edges": 5,
+        "prose_characters": 1812,
+        "coverage": {
+          "excluded_count": 0,
+          "exclusion_reasons": {},
+          "mapped_count": 9,
+          "processed_count": 10,
+          "profile": "cumulative.v1",
+          "source_count": 10,
+          "stale_supplement_count": 0,
+          "unparsed_count": 1
+        },
+        "health_http": 200,
+        "model_weights_changed": false,
+        "request_messages_changed": false,
+        "context_or_output_budgets_changed": false,
+        "meaning_quality_accepted": false
+      },
+      "final_provider": {
+        "pid": 20854,
+        "health_http": 200,
+        "fast_target_active": false,
+        "original_torch_math": true,
+        "source_commit": "529f6817eb84ed6a3d85beab4ea22cc62dcbdc5c",
+        "existing_key_weights_budgets_unchanged": true
+      },
+      "model_loaded_scope": "initial synthetic-tensor kernel probe only; later model runtime comparison is recorded separately"
+    },
+    "latency_scope_20261108": {
+      "new_synthetic_model_generations": 2,
+      "new_device_generations_requested": 0,
+      "training": 0,
+      "new_pod_rental": 0,
+      "render_deploy": 0,
+      "render_settings_changed": false,
+      "db_mutation": false,
+      "build_started": false,
+      "kernel_target_installation_isolated": true,
+      "model_venv_dependency_pins_unchanged": true,
+      "quality_acceptance_unchanged": true
     }
   }
 }

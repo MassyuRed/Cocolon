@@ -1394,4 +1394,16 @@ Mashの6枚の実機画像で、7701の関係図・全体の読み・3項目の�
 
 生成の繰返しtoken除外を1回走査へまとめるAPI `529f6817` は既存87 PASS／失敗・SKIP0（SQL依存1件は対象外）、旧新の順序付き結果／拒否400構成一致。CPU合成vocab248046・31回の自由文中央値13.0738→6.4254ms、引用は5.8330→5.7783ms。生成上限・入力・重み・出力候補・quote検査を変えず、実GPUの短縮量とは区別する。関連sourceをGitHub保存・読戻し一致。
 
-実Jupyterの既存provider logでcausal_conv1d／gated-deltaのTorch低速fallbackを確認。Python3.12.3／torch2.8.0+cu128／triton3.4.0／transformers5.19.0／RTX4000Ada／ABI TRUE。高速実装候補を既存環境と別targetへ固定導入し、通常serverを保ったまま合成tensorだけで比較中。新モデル・量子化・LoRA統合・原入力の短縮は行わない。実行結果と最終稼働状態は後続確認に記録する。STRUCTURE_MAP_DELTA_NONE（既存表示と提供処理内の限定修正）。
+実Jupyterの既存provider logでcausal_conv1d／gated-deltaのTorch低速fallbackを確認。Python3.12.3／torch2.8.0+cu128／triton3.4.0／transformers5.19.0／RTX4000Ada／ABI TRUE。高速実装候補を既存環境と別targetへ固定導入し、合成tensor4ケースを元計算と比較後、同保存120更新4B・同T01 messages／request_ref・同token上限で実生成を比較した。新モデル・量子化・LoRA統合・原入力の短縮は行っていない。STRUCTURE_MAP_DELTA_NONE（既存表示と提供処理内の限定修正）。
+
+| 同じ架空T01・各1回の実生成 | 時間 | raw／CMEE | 採用判断 |
+|---|---:|---|---|
+| 元のUnicode修復版ccab8cf2 | 175.505秒 | SHA52900ae2…、10項目／3線、mapped10／unparsed0、本文1964文字 | 基準 |
+| 529f6817＋FLA0.5／causal_conv1d1.7 | 185.885168秒 | SHAcc704a05…、9項目／5線、mapped9／unparsed1、本文1812文字 | 出力変化と取りこぼし増加、初回短縮もなく不採用 |
+| 529f6817の除外走査だけ、元のTorch計算 | 171.349559秒 | 基準raw全文SHA一致、10項目／3線、mapped10／unparsed0、本文1964文字 | 内容不変の軽量化だけ反映 |
+
+約4.16秒・2.37％の差は各1回の観測で、安定した改善率や本人端末の短縮を保証しない。CPUの除外処理半減を全生成の半減と呼ばない。初回・明示更新の分単位待機は未解決。本人150.751秒の入力と架空T01を混ぜず、意味品質・正式受入れも据え置く。元HTTP基準と新候補raw／計測を既存 `semantic_map_runtime_unicode_20261107.json` へ追記した。
+
+FLA0.6はTriton3.4にGluon extraがなく隔離importで失敗し未使用。0.5のtensor比較はBF16許容誤差内でも最終token一致を保証しなかった。通常提供を再loadして候補を実測したが上記理由で外し、最後は元のTorch計算＋529f6817のprovider PID20854、/healthz HTTP200、PYTHONPATHのfast targetなしを確認。旧globalモデル環境pin・保存重み・鍵・8000入口／bridgeとRender既存設定は維持した。単発checkerの初期dependency不足／旧GPU cloneと教材packetの版ずれは生成前assertで停止し、別targetの既存API依存＋529f6817固定cloneと正しいteacher planへそろえてから生成した。
+
+通常7701の表示はload(false)からensure=trueで、force=trueを付けるのは『分析を更新』だけ。同owner／同source guardの保存v3は既存IDを再利用し、4B／CMEE再生成と新artifact挿入を行わない。今回この経路の製品変更はない。新規の本人生成要求・本人データ書込・学習・新Podレンタル・Render配置／設定変更・署名buildは0、架空の新生成2件とprovider再loadを実施した。UIはCocolon ec49d981へ保存済み、次の統合buildに含める。
