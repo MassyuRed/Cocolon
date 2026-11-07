@@ -3708,3 +3708,5 @@ API候補は5065730ead6fc97a47a03858d0707bbf3e1c568c、本番liveは2c259f0e。�
 `PieceLibraryScreen.js` は共鳴POSTだけでなく既読副作用のあるdetail GET／一覧・未読等も開始owner・auth世代・signalへ束縛し、古い選択・応答の混入を防ぐ。旧recommendのprofile照合が失敗／不正の場合を公開許可へ変換しない。旧公開metricのread-modify-write競合と公開ID別名を、既存table／本人照合・旧alias互換を保って修復中。新table・公開機能の有効化・既存反応の一括移行はしない。
 
 全API Piece試験のCPU再検査は11,516 PASS／161 FAIL／ERROR・SKIP0、native17 deselected。161は後続の本文仕様（反復一人称の省略、短い完成文の非padding、後続文法、過去形保持）と旧期待の不一致として個別分離。期待改変・skip／xfailは0で、全成功とは報告しない。native・実DB・実機の成功へ換算しない。追加修復の検証・反映、既存失敗の詳細は第10回§15へ。iOS7501とMashの大ボタン／Piece今回確認は保持し、この後の修復全体を実機確認済みとはしない。
+
+旧公開互換の修復を確定し、API6385606a（親6657a9cf）へ20pathを保存・全bytes/SHA/親/tree/path/PR3 head一致確認。source許可後のcanonical/旧aliasは `piece_generated_identity.py`、型別lookupは`piece_generated_access.py`、全aliasの既読/反応/metric再読は `piece_public_read_store.py`／service、状態とcounter同transactionは `api_piece_runtime.py` と新SQL `20261107040354_piece_legacy_metrics_atomic.sql` → `20261107040430_piece_legacy_reaction_alias.sql`。新table／一括移行／V2公開有効化0。rootのPiece174＋follow6は180 PASS／FAIL・SKIP0。既存PostgreSQL16 CIに独立接続9件を追加して実行中、DB適用／配置は未実施。広域CPUの11,516成功／161旧期待不一致はdbディレクトリを対象外にした実行で、その中のnative17もdeselected。全native試験が17件だけとはしない。

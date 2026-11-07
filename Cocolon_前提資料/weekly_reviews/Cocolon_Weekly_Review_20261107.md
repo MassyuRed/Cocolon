@@ -1110,3 +1110,33 @@ Mashは、カテゴリ9個を3個に絞ったこと、感情強度を省いた�
 実screenで11件の各送信payloadと票が一致し、coverage検査1件を加え既存66＋新12＝78 PASS／FAIL・SKIP0。APIの実Request model／感情・カテゴリ正規化／実insert関数（DB通信だけ合成）11件、元7field固定1件、実累積compiler／作者1件の13 PASS／FAIL・SKIP0、既存Pydantic警告1。本人Auth／HTTP／本番DB／実機は未実施。
 
 同じ11packetの通常有限compiler結果を実読した。source11／processed11／mapped3／unparsed11／excluded0、ROLE2＋ACTION3の5nodeで、根拠は全て元memo_action。会議の担当・資料の調査／作成、写真を見る行動は表示されるが、多くの自然な本文は未読取りのまま残る。これを入力仕様の保持成功・全件理解成功へ混同せず、表示を良く見せるために本文を得意な構文へ差替えていない。二欄修復は既存文法の欄による差を閉じたもので、一般の役割・判断基準・記録間の意味理解の残件を消さない。新学習・モデル実行・実機確認済みの結果でもない。
+
+
+### 15.8 チェックポイントと一回の統合iOSビルド開始
+
+- RN `56e65b1a97a63f707abd4e043bcfadd82e051573`（親49ac81d4、PR30）：本文欄・入力検証、owner寿命・設定／私有履歴／IAP・PieceLibrary、全体現在地／地図・5規則ファイル・旧研究coverage注記と入力票の59pathを保存。全59blobの原bytes／SHA、親／tree／差分path集合／PR headを読戻し一致確認。rootの最終10suite287 PASS／FAIL・SKIP0（7.81秒）、担当の別scopeの140／324／Piece等と重複合算しない。
+- API第2 `6657a9cfa9a8f8dd7e0fe63bd7a1658f6ab50ad5`（親5993e911、PR3）：通常Analysis二欄／shared既定不変・旧test期待修復・新二欄回帰、RNと同byteの入力票・実API13件の6pathを保存。全6blobの原bytes／SHAと親／tree／差分path集合／PR headを読戻し一致。1MB超のshared原本はcontents APIが本文0を返したためSHA指定blobから全bytesを取得して一致確認した。空本文を読了扱いにしていない。
+- iOS既存workflowを固定source56e65b1aで一回実行。run `42337152593`、#76 attempt1、2026-11-07 **13:09:10 JST開始**。job `128296557390`。開始後、MCP run metadataとGitHub画面のhead／in_progressを照合。7601は既存採番式からの番号で、Archive／IPA／Upload／Apple処理／配布成功はまだ確認していない。追加dispatch／再実行0。
+- Piece旧公開修復のSQLは公式Supabase CLI3.0.0の`migration new`で正本名を生成し、本文同一のまま `20261107040354_piece_legacy_metrics_atomic.sql` → `20261107040430_piece_legacy_reaction_alias.sql` へ整理した。旧70000／71000の重複は削除、testはsuffix唯一解決。174 PASS（旧170＋RPC2×anon／authenticatedの実42501拒否4）、別261 PASS／native4未実行を維持。新しい独立PostgreSQL接続9検査を既存CIへ準備中。実本番適用は0。
+- 本番の4物理tableはrelkind=r／RLS=true、既存service_roleのSELECT／INSERT／UPDATE／DELETEはtrue。global／instance部分uniqueと共鳴／echoのcomposite uniqueをmetadataのみで確認。個人row読取0。新関数はSECURITY INVOKER／service_roleのみexecuteとし、V2公開・既存table権限を拡張しない。
+
+旧reportの根拠循環は修復継続中。sourceと候補を独立させ、standard/deepの全key・5section／詳細数値を保つ。新集計例で本文量が減っていないことを確認中で、一般の自己理解分析の完成・追加4B採用へ置換しない。cron direct dailyの前日未取得・stable固定も別に修復する。
+
+
+### 15.9 公開Piece互換の第3チェックポイントと継続検証
+
+API `6385606a0505219b524145653ab53745ce21281e`（親6657a9cf、PR3）へ旧Piece公開5product／SQL2／回帰・既存CI2本／follow修復と記録の20pathを保存。全20blobの原bytes／SHA、親／tree／変更path集合／PR headを読戻し一致。rootでPiece174＋follow6をまとめ180 PASS／FAIL・ERROR・SKIP0（11.25秒、既存warning5）。別261成功の旧仕様回帰とは合算しない。
+
+実2connectionの検証は既存PostgreSQL16 CIの一時child DBのみを使用し、新9件を追加した。loopback／使い捨てACK／空の親DB等の既存境界を維持し、独立4PIDの実待機と同時add／remove、途中失敗rollback・source変更待機を確認する。run42337602974／job128297968428はこの記録時点in_progress。Analysis既存CI run42337602053／job128297964169もin_progress。まだ全CI成功とは扱わない。新規本番DDL／Render配置0。
+
+今後の再発対策として、既存RNのLinux検証jobへ今回の本人切替・遅延操作の回帰を追加し、既存Analysis CIへ二欄・同一11ケース入力票の回帰を追加した。新しい永続checklist/Gateは作らない。いずれも各条件内の検証で、全ファイル・全仕様の理解を機械的に認定するものではない。追加署名buildは行わず、実行中の一回のiOS76を継続する。
+
+広域Piece CPUの11,516 PASS／161 FAILはdbディレクトリ対象外の検査で、同命令内のnative17もdeselectedだった。全native試験が17件のみ、またはnative検証済みとはしていない。今回の独立接続CIはその未確認範囲の一部を別に検証する。
+
+
+CI再現の準備中に、RNの新social回帰が既存TypeScript単独依存では起動しないことも検出。署名buildや製品依存の問題ではなくtest環境のReact不足だったため、既存 `tests/emlis-q2-tools/package.json` の5つの固定直接依存を変えずlockfileを生成し、既存Linux jobだけで使い捨てdirectoryへ導入するよう修復した。アプリpackage／lock・依存版は変更0。依存がある最終21suiteは1,547 PASS／FAIL・SKIP0（16.95秒）。依存不足の最初の失敗を成功扱いにしていない。
+
+Piece実PG CIの第1回42337602974はB2のFree quiet_nightを拒否する旧期待3件で43 PASS／3 FAILとなり、新native9は未実行（後段skip）。これはMashが指定したFree2色の現契約と試験の矛盾で、現palette migrationを含む正しいfixtureへ修復中。新9を未実行のまま成功と説明せず、新sourceで再検証する。署名iOS76は別にArchive進行中で、追加dispatch0。
+
+
+API第4 `b95fb8f8500aaf39a998e785ac71104a939aadfc`（親6385606a）は上記B2 current palette fixtureと新native stepの2pathのみ。全原bytes/SHA・親/tree/path/PR3 headを読戻し一致。新run42338097893／job128299492936で再検証中。製品・SQL本文の追加変更は0、旧161件の本文期待は変更していない。RNの生成した固定test-tools lockから`npm ci`した隔離環境でも、今回追加job相当8suite167 PASS／FAIL・SKIP0。先の実体あり最終21suite1,547成功と重複合算しない。

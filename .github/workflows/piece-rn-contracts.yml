@@ -14,6 +14,31 @@ name: Piece RN preview and owner contracts
       - screens/PieceHistoryMenuScreen.js
       - navigation/PieceStackNavigator.js
       - AppRuntimeContext.js
+      - AuthContext.js
+      - TutorialContext.js
+      - hooks/useOwnerRequestScope.js
+      - lib/apiClient.js
+      - lib/api/account/**
+      - lib/api/home/**
+      - lib/iap/**
+      - lib/nexusApi.js
+      - lib/pushToken.js
+      - lib/reportDistributionApi.js
+      - navigation/MainTabs.js
+      - screens/FollowListScreen.js
+      - screens/NexusScreen.js
+      - screens/NoticeHistoryScreen.js
+      - screens/PieceLibraryScreen.js
+      - screens/ResonanceHistoryListScreen.js
+      - screens/SettingsAppSettingsScreen.js
+      - screens/SettingsOtherScreen.js
+      - screens/SubscriptionSelectScreen.js
+      - screens/TodayQuestionHistoryScreen.js
+      - screens/account/**
+      - tests/*owner-race.test.js
+      - tests/api-client-cancellation.test.js
+      - tests/social-owner-request-race.test.js
+      - tests/fixtures/cocolon-input-contract-samples-20261107.json
       - tests/piece-v2-*.test.js
       - tests/fixtures/piece-b9-wrap-oracle.json
       - tests/native/piece-ios-react-shim.h
@@ -65,6 +90,24 @@ jobs:
           node --version
           node -p "require('typescript').version"
           node --test tests/piece-v2-contracts.test.js tests/piece-v2-state-models.test.js tests/piece-v2-preview-display.test.js tests/piece-v2-runtime.test.js tests/piece-v2-feature-disabled.test.js tests/piece-v2-saved-input-host.test.js tests/piece-v2-source-ref.test.js tests/piece-v2-input-screen.test.js tests/piece-v2-owner-history.test.js tests/piece-v2-renderer.test.js tests/piece-v2-measured-wrap.test.js tests/piece-v2-export.test.js tests/piece-v2-initial-save-modal.test.js
+      - name: Install the existing pinned React test tools in a disposable directory
+        run: |
+          mkdir -p "$RUNNER_TEMP/piece-react-tests"
+          cp tests/emlis-q2-tools/package.json tests/emlis-q2-tools/package-lock.json "$RUNNER_TEMP/piece-react-tests/"
+          npm ci --prefix "$RUNNER_TEMP/piece-react-tests" --ignore-scripts --no-audit --no-fund
+      - name: Verify actual input and pending owner operations
+        env:
+          NODE_PATH: ${{ runner.temp }}/piece-react-tests/node_modules:${{ runner.temp }}/piece-node-tests/node_modules
+        run: >-
+          node --test
+          tests/api-client-cancellation.test.js
+          tests/account-profile-owner-race.test.js
+          tests/account-settings-owner-race.test.js
+          tests/tutorial-owner-race.test.js
+          tests/iap-owner-race.test.js
+          tests/private-history-owner-race.test.js
+          tests/social-owner-request-race.test.js
+          tests/piece-v2-resonance-owner-binding.test.js
 
   piece-android-source:
     if: github.repository == 'MassyuRed/Cocolon'

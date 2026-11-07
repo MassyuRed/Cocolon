@@ -3952,3 +3952,5 @@ HC01／02が退行し、HC03／10はraw同一の重複key拒否を継続。HC04�
 - Piece：本文はユーザーの二欄原文のみ。9場面・各感情強度を保持したまま非表示選択情報を本文へ自動追記しない11/1決定を維持。`PieceLibraryScreen.js` の共鳴・既読／読取と遅延確認を開始本人へ束縛。旧公開読取のvisibility不明を公開許可扱いする処理、公開metricの非原子加算・公開ID別名の互換は修復中。
 
 既存currentのsource_guard一致時再利用、月次当時版の不変性を維持する。compiler修正だけで同じ保存currentを再解析したとは説明しない。実入力・実機の分析確認は未了。全試験成功／一般品質完成を宣言せず、第10回§15と各core current mapで具体範囲を引き継ぐ。
+
+旧公開互換の修復を確定し、API6385606a（親6657a9cf）へ20pathを保存・全bytes/SHA/親/tree/path/PR3 head一致確認。source許可後のcanonical/旧aliasは `piece_generated_identity.py`、型別lookupは`piece_generated_access.py`、全aliasの既読/反応/metric再読は `piece_public_read_store.py`／service、状態とcounter同transactionは `api_piece_runtime.py` と新SQL `20261107040354_piece_legacy_metrics_atomic.sql` → `20261107040430_piece_legacy_reaction_alias.sql`。新table／一括移行／V2公開有効化0。rootのPiece174＋follow6は180 PASS／FAIL・SKIP0。既存PostgreSQL16 CIに独立接続9件を追加して実行中、DB適用／配置は未実施。広域CPUの11,516成功／161旧期待不一致はdbディレクトリを対象外にした実行で、その中のnative17もdeselected。全native試験が17件だけとはしない。
