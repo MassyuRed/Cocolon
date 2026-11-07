@@ -1,5 +1,5 @@
 {
-  "status": "ORDINARY_ANALYSIS_ENABLED_FOR_DEVICE_REVIEW_NOT_QUALITY_ACCEPTED",
+  "status": "ORDINARY_7701_V3_SAVED_AND_MAP_DISPLAY_CONFIRMED_NOT_QUALITY_ACCEPTED",
   "base_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
   "weights_sha256": "ecbdd0d113cfcdc38a17be4b17c708678c01c5071ae86c8a30ca9a5de5900495",
   "effective_updates": 120,
@@ -28,7 +28,7 @@
   "material_remaining": [
     "source-faithful meanings without invented facts or wish/actual reversals",
     "entire-history processing beyond the current single-call token/body budgets",
-    "accepted v3 save/read and user-device display; current model-provider error response"
+    "human device full-prose and node/edge-detail appearance review; semantic quality and generation latency"
   ],
   "production_model_environment_changed": true,
   "gpu_reasoning_text_exported": false,
@@ -40,7 +40,7 @@
     "run": 42360257959,
     "commit": "27cc48b43acbccf052334ec555b3f4ebc292f311",
     "upload": "success",
-    "availability": "unverified_apple_session_expired"
+    "availability": "7701_USER_DEVICE_USE_CONFIRMED_BY_USER_AND_NORMAL_REQUEST_LOGS"
   },
   "retained_weights_archive": {
     "file_name": "Cocolon_Analysis_Semantic_Map_Training_20261107.zip",
@@ -70,7 +70,7 @@
     "render_settings_merge": "APPLIED_AFTER_EXPLICIT_MASH_APPROVAL",
     "production_env_changed": true,
     "deploy_started": true,
-    "next_action": "Await normal authenticated 7701 refresh; confirm v3 commit/read and human device graph/prose/detail. No new build, no model-quality gate.",
+    "next_action": "Review full prose and node/edge detail appearance on the displayed saved result; identify measured generation-latency improvement. Do not require all semantic-quality repairs or another build first.",
     "deploy_live": true,
     "initial_live_commit": "d63647a816a9f4024aee16bade7735f1b9700e9c",
     "initial_deploy": "dep-dbnglopsrm7s739cqcsg",
@@ -78,7 +78,7 @@
       422,
       422
     ],
-    "new_v3_saved": false,
+    "new_v3_saved": true,
     "nullable_metadata_fix_commit": "ad9794ca3c3e5d5903a8d170a74add0e6962530d",
     "nullable_metadata_fix_tests": 37,
     "private_safe_code_location_diagnostic": true,
@@ -89,8 +89,8 @@
     "json_fence_fix_commit": "4ba011c6a72b56cbeb7505a3a6ee7c9f849d7467",
     "json_fence_fix_tests": 44,
     "json_fence_payload_unchanged": true,
-    "latest_device_http": 503,
-    "latest_device_seconds": 50.101,
+    "latest_device_http": 200,
+    "latest_device_seconds": 150.751,
     "synthetic_provider_probe": "Unicode/EOS fixed full T01: HTTP200/175.505s/stop/4486Japanese chars; unchanged CMEE admitted watashi.map.v3",
     "provider_restart": {
       "old_pid": 17275,
@@ -101,8 +101,8 @@
       "local_health_http": 200,
       "cpu_threads": 1
     },
-    "real_generation_scope": "Normal device model response reached CMEE; before constraints synthetic T01 HTTP200/stop; no v3 save yet",
-    "latest_device_reason": "Old constrained provider interrupted during narrow fix restart; not a result of the new free-text fix",
+    "real_generation_scope": "Normal authenticated 7701 ensure reached new CMEE v3 DB save and same-current DB reread; user confirms map display",
+    "latest_device_reason": "New v3 saved successfully; generated-result node evidence returned HTTP200",
     "post_fence_evidence_rejection": {
       "at_utc": "2026-11-07T12:02:20Z",
       "http": 422,
@@ -148,6 +148,51 @@
       "meaning_quality_accepted": false,
       "device_saved": false
     },
-    "device_refresh_instructions_issued": true
+    "device_refresh_instructions_issued": true,
+    "device_validation_20261108": {
+      "observed_at_jst": "2026-11-08T07:38:42+09:00",
+      "request_path": "/self-structure/latest?ensure=true",
+      "force": false,
+      "app_build": 7701,
+      "http": 200,
+      "response_seconds": 150.751,
+      "application_wall_seconds": 150.7485,
+      "database_calls": 4,
+      "database_seconds": 2.2216,
+      "database_errors": 0,
+      "wire_kind": "watashi.map.v3",
+      "private_schema": "analysis.semantic-private-evidence.v1",
+      "nodes": 3,
+      "edges": 2,
+      "prose_characters": 1271,
+      "coverage": {
+        "source_count": 87,
+        "processed_count": 35,
+        "mapped_count": 33,
+        "unparsed_count": 2,
+        "excluded_count": 52,
+        "exclusion_reasons": {
+          "analysis_semantic_text_empty": 52
+        },
+        "stale_supplement_count": 0
+      },
+      "current_database_non_generating_reread_same_saved_artifact": true,
+      "node_evidence_read": {
+        "observed_at_jst": "2026-11-08T07:39:13+09:00",
+        "node": "n2",
+        "http": 200,
+        "seconds": 0.753
+      },
+      "map_display_user_confirmed": true,
+      "full_prose_appearance_user_confirmed": false,
+      "node_edge_detail_appearance_user_confirmed": false,
+      "meaning_quality_accepted": false,
+      "model_and_cmee_individual_latency_measured": false,
+      "new_generation_requested_this_session": false,
+      "production_settings_changed_this_session": false,
+      "new_build_this_session": false,
+      "db_mutation_this_session": false,
+      "private_bodies_exported": false
+    }
   }
 }

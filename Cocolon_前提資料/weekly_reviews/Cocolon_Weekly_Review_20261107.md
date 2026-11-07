@@ -1362,3 +1362,24 @@ ccab8cf2でtokenizer_data.tokenizer_alphabetをCharacterLevelParserConfigへ先�
 修復後の既存架空T01実要求は175.505秒でHTTP200／stop、最終本文4486文字・非空白4486。元の同messages／request_ref一致を確認し、その受領rawを一文字も変更せず既存のCMEEへ渡した。根拠・owner・source guardの検査を通り、watashi.map.v3の10nodes／3edges、全体/項目/線をつなぐ文章1964文字、source10／mapped10／unparsed0へ到達した。raw SHA256は52900ae2bf821f90bb5d1a680aab13621aa76944fd1695fe48d438ae5fb9c843。元HTTP応答・同CMEE結果・投影・教材参照をsemantic_map_runtime_unicode_20261107.jsonへ保存する。内容には行動時点の補足や感情の誤帰属などが残るため、意味品質合格へは変更しない。ただし、その全修正を実機表示の先行条件へ戻さない。
 
 本人へ7701の「分析→わたしマップ→分析を更新」を案内。RNの通常入口はsemantic.v1 headerで取得し、有効v3なら新しい図・全文・node/edge詳細へ直接分岐することを再照合した。追加buildは不要。画面を開いたままの自動再取得はなく、過去月v2は当時版を保持する。現時点では新しい本人iOS要求とv3実DB保存を確認できておらず、最後の集計は既存v2が2artifact、新v3が0。本人への認証を迂回するtoken生成やuser_id代入は行わない。
+
+
+<a id="analysis-semantic-device-save-20261108"></a>
+### 11/8続行：7701本人取得・新規保存・実機表示を確認
+
+Mashから「読み込みにかなり時間がかかったけど、わたしマップの表示はした」と受領。11/7末の「本人要求／新v3保存が未確認」は当時の履歴であり、今回の結果に置き換える。前提・作業規則、全体現在地、全体設計／file地図、Analysis current map、§16と実装を指定のCocolon6511983／APIccab8cfから照合した。mainは旧履歴のため使用していない。
+
+| 確認対象 | 実結果と範囲 |
+|---|---|
+| 通常本人要求 | 11/8 7:38:42 JST、7701のGET `/self-structure/latest?ensure=true` がHTTP200。force要求ではない。Render request 150.751秒、application wall150.7485秒、DB4call・2.2216秒・error0 |
+| 実DBの新規保存 | 同時刻の新しいcurrent artifactが `watashi.map.v3`、semantic-private v1、3項目・2関係線・本文1271文字。本人原文・個人ID・artifact ID・生成本文・鍵値は本資料へ複製しない |
+| 全量材料と採用範囲 | 保存source refs87。coverageはsource87／processed35／mapped33／unparsed2／excluded52（analysis_semantic_text_empty）／stale supplement0。全87件の意味理解成功とはしない |
+| 保存済み再読 | 既存 `analysis_cumulative_read` のcurrent読取で同じ新保存物、v3・本文1271・同coverageを再取得。4B／CMEEの再生成要求は0。これはDB RPCの非生成再読で、本人の再表示HTTP成功を代用しない |
+| 項目の根拠詳細 | 7:39:13 JST、同保存物のevidence?node=n2を7701がHTTP200・0.753秒で取得。詳細画面の全表示や関係線詳細の本人確認とは区別する |
+| 実機 | Mashがわたしマップの表示を確認。本文全文・項目／線詳細の見え方、読みの妥当性・商品受入れはまだ未確認 |
+
+待ち時間のうちDB計測は約1.47％で、残り約148.53秒は生成を含む非DB時間。sourceではsemanticモデル1call→CMEE→保存／再読を同一要求内で待つ。今回のAPI計測だけでGPU推論、通信、CMEEの個別秒数を確定しない。保存v3で本人とsource guardが同じ通常閲覧は既存保存を再利用し、モデル／CMEE生成を省く（analysis_cumulative_service.py:726–745）。「分析を更新」はforce生成なので、通常の再表示と分ける。次回必ず何秒で出るとは保証しない。
+
+Renderの既存deploy dep-dbnh12lg1s2s73cma8o0／API4ba011c6のlive継続を読取確認。今回source／通常設定／鍵／production配置／GPU process・Pod／重み／新生成要求／学習／署名build／DB schema・data変更は0。新規pytest合格は主張しない（既存保存再読testはローカルpytest不足で収集前終了）。実DBと通常HTTPの確認結果を根拠とする。STRUCTURE_MAP_DELTA_NONE。
+
+次の直接作業は、表示された同じ結果について本文全文・項目／線詳細の見え方を確認し、実測された待ち時間の改善箇所を特定すること。全意味品質修正、追加入力、追加build、全ファイル再監査を先行条件にしない。本文には表記・読みの品質残差があり、表示成功を分析完成・正式受入れへ拡張しない。現在の全体評価61.25％と正式0/3は再採点しない。
