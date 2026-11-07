@@ -1328,3 +1328,12 @@ Mashは『専用の分析API鍵をRenderのmashos-apiへ登録し、現在のRun
 独立read-only検査が、source admissionでは受理済みのcategory=NULL/emotion_details=NULL・文字列detailsを、新context表示がlist/dict前提で読み、生成後TypeError/AttributeErrorになる不具合を再現。本文/個人IDなし集計では全1697入力中774カテゴリNULL、87件の記録群は67カテゴリNULLだった（今回の各422の発生位置自体は旧ログでは未確定）。API ad9794caでcontext表示コピーだけを既存normalize_emlis_current_inputへ渡し、元material/messages/hash/原根拠を維持。強度欠損へmediumを補わない。カテゴリなし時の先頭コロンも除いた。EngineとAPIの拒否には関数名/行番号と固定例外型だけをログし、source/model/str(exc)/localsは記録しない。
 
 関連37 PASS／FAIL・SKIP0・1.25秒（既存Pydantic警告1）。NULLカテゴリ/NULL details/文字列details/全NULLの4回帰、原material不変、private markerがログに出ない検査を含む。独立reviewはblockerなし。4pathをGitHub保存/全bytes読戻し一致。dep-dbngsqh5efls73babe2gが20:42:55 JST Live。本人へ再取得を案内し、新図・文章・詳細へ進む実応答を確認中。今回の修正は既存context表示と最小diagnosticで、STRUCTURE_MAP_DELTA_NONE。新モデル学習・新署名build・新DDL・本人入力書換え・認証迂回は0。内容品質を実機確認の前提へ戻さない。
+
+
+### 同日続行：実機のJSON読取失敗の特定と外装互換修復
+
+ad9794ca配置後の通常iOS再取得は20:45:48 JST、126.210秒後422。新しい本文なし診断がgenerate_analysis_semantic_map→_admit_analysis_semantic_map_responseのJSON解析拒否を示し、Render→4Bの最終応答受領からCMEE受口までは到達したことを確認した。新v3保存は0。元のNULL/scalar metadata修正だけで実機成功と扱わない。
+
+4ba011c6で、一つの完全なJSON code fenceをtransport外装として受け取り、元rawのsubstringをJSON解析へ渡すよう修復。外部prose・複数block・重複key・不正制御文字は拒否し、元raw hash/request/messages bindingとsource evidence完全一致を保つ。生成文字列の構文修復・候補の部分採用・本文の作成代替は0。最初のsplitlines案がVT/FFを置換して不正JSONを受理することを独立reviewで発見し、未公開の段階で元raw直接captureへ修正、内側VT/外側FFの拒否回帰を追加した。44 PASS/FAIL・SKIP0、既存Pydantic警告1、1.51秒。最終独立review blocker0、2pathをGitHub保存/全bytes読戻し一致。dep-dbnh12lg1s2s73cma8o0は20:51:53 JST Live。
+
+配置切替直後のiOS要求に502があり、後続20:53:17の要求は12.338秒で503だった。未確認の503をJSON修正成功・図表示成功としない。モデル提供口は起動を維持し、GPU idleも観測。端末再操作を増やす前に、既存架空T01の同messagesを現在の提供口へ1回通す切分けを開始した。確認コマンドの引用入力不備を修正して新Jupyter terminalから実行し直し、HTTP429/busy・生成本文0を実確認した。localhost8000のserver PID17275を特定してTERMで停止・port解放を確認し、同じtracked CLI/保存重み/model名で再起動した。OMP_NUM_THREADS=1/MKL_NUM_THREADS=1/TOKENIZERS_PARALLELISM=falseでCPU併用数を固定し、health200を確認。新たな重み/学習/Pod/Jupyter再起動は0。再開後の同T01確認要求1件はこのcheckpoint時点で結果待ち。本人原文/個人IDを取得・公開していない。87件の記録群の原二欄は集計1146文字・最大77文字で、現在の503を長大本文の問題とは確定していない。次はこの提供応答と通常実機再取得を確認し、新v3保存/表示まで進める。新学習・新署名build・新DDLは0、STRUCTURE_MAP_DELTA_NONE。

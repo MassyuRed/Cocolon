@@ -28,13 +28,13 @@
   "material_remaining": [
     "source-faithful meanings without invented facts or wish/actual reversals",
     "entire-history processing beyond the current single-call token/body budgets",
-    "real Render-to-GPU generation and user-device display"
+    "accepted v3 save/read and user-device display; current model-provider error response"
   ],
   "production_model_environment_changed": true,
   "gpu_reasoning_text_exported": false,
   "api_core_commit": "1cd4ada6c076cd72f3710a8412f7dabce855e09c",
-  "api_live_commit": "ad9794ca3c3e5d5903a8d170a74add0e6962530d",
-  "render_deploy": "dep-dbngsqh5efls73babe2g",
+  "api_live_commit": "4ba011c6a72b56cbeb7505a3a6ee7c9f849d7467",
+  "render_deploy": "dep-dbnh12lg1s2s73cma8o0",
   "testflight": {
     "build": 7701,
     "run": 42360257959,
@@ -70,7 +70,7 @@
     "render_settings_merge": "APPLIED_AFTER_EXPLICIT_MASH_APPROVAL",
     "production_env_changed": true,
     "deploy_started": true,
-    "next_action": "Observe ordinary authenticated iOS retry after nullable metadata fix; correct the exact remaining failure if present and verify v3 save/display.",
+    "next_action": "Read current provider response, resolve current 503 if necessary, and verify ordinary authenticated v3 save/read/device display; no model-quality-before-device gate.",
     "deploy_live": true,
     "initial_live_commit": "d63647a816a9f4024aee16bade7735f1b9700e9c",
     "initial_deploy": "dep-dbnglopsrm7s739cqcsg",
@@ -81,6 +81,25 @@
     "new_v3_saved": false,
     "nullable_metadata_fix_commit": "ad9794ca3c3e5d5903a8d170a74add0e6962530d",
     "nullable_metadata_fix_tests": 37,
-    "private_safe_code_location_diagnostic": true
+    "private_safe_code_location_diagnostic": true,
+    "model_response_received_by_cmee": true,
+    "post_metadata_retry_http": 422,
+    "post_metadata_retry_seconds": 126.21,
+    "post_metadata_retry_rejection": "CMEE JSON parsing",
+    "json_fence_fix_commit": "4ba011c6a72b56cbeb7505a3a6ee7c9f849d7467",
+    "json_fence_fix_tests": 44,
+    "json_fence_payload_unchanged": true,
+    "latest_device_http": 503,
+    "latest_device_seconds": 12.338,
+    "synthetic_provider_probe": "first direct existing synthetic T01 request returned429 busy, 0 content; same-weights provider restarted and health200; one post-restart request in progress",
+    "provider_restart": {
+      "old_pid": 17275,
+      "signal": "TERM",
+      "port_released": true,
+      "same_saved_weights": true,
+      "jupyter_or_pod_restarted": false,
+      "local_health_http": 200,
+      "cpu_threads": 1
+    }
   }
 }
