@@ -1383,3 +1383,15 @@ Mashから「読み込みにかなり時間がかかったけど、わたしマ�
 Renderの既存deploy dep-dbnh12lg1s2s73cma8o0／API4ba011c6のlive継続を読取確認。今回source／通常設定／鍵／production配置／GPU process・Pod／重み／新生成要求／学習／署名build／DB schema・data変更は0。新規pytest合格は主張しない（既存保存再読testはローカルpytest不足で収集前終了）。実DBと通常HTTPの確認結果を根拠とする。STRUCTURE_MAP_DELTA_NONE。
 
 次の直接作業は、表示された同じ結果について本文全文・項目／線詳細の見え方を確認し、実測された待ち時間の改善箇所を特定すること。全意味品質修正、追加入力、追加build、全ファイル再監査を先行条件にしない。本文には表記・読みの品質残差があり、表示成功を分析完成・正式受入れへ拡張しない。現在の全体評価61.25％と正式0/3は再採点しない。
+
+
+<a id="analysis-detail-context-speed-20261108"></a>
+### 11/8続行：実機画像の詳細確認とカテゴリ／感情列挙の非表示
+
+Mashの6枚の実機画像で、7701の関係図・全体の読み・3項目の詳細が開くことを確認した。線詳細の個別画像・意味品質の受入れは確認していない。画像や本人本文を公開repositoryへ複製しない。Mashから、詳細に灰色で出るカテゴリ／感情選択の列挙を非表示にする指示と、読み込み短縮の要望を受領した。
+
+既存 `components/selfStructure/SemanticWatashiMap.js` の項目詳細にある `chosen.context.join` の表示1行だけを除去。材料、wire、保存、CMEE根拠、項目summary／explanation／unknowns、根拠ボタン、関係の両端名は保持する。既存semantic UI検証7 PASS。既存harnessを使う一回のAndroid／iOS全14項目詳細確認で、一覧非表示と本文全文・不明・根拠ボタンの維持を確認した。新テストや依存lock変更は0、既存test用lockの隔離環境を使用。現7701は修正前であり、反映は次の統合build。今回は署名buildを起動していない。
+
+生成の繰返しtoken除外を1回走査へまとめるAPI `529f6817` は既存87 PASS／失敗・SKIP0（SQL依存1件は対象外）、旧新の順序付き結果／拒否400構成一致。CPU合成vocab248046・31回の自由文中央値13.0738→6.4254ms、引用は5.8330→5.7783ms。生成上限・入力・重み・出力候補・quote検査を変えず、実GPUの短縮量とは区別する。関連sourceをGitHub保存・読戻し一致。
+
+実Jupyterの既存provider logでcausal_conv1d／gated-deltaのTorch低速fallbackを確認。Python3.12.3／torch2.8.0+cu128／triton3.4.0／transformers5.19.0／RTX4000Ada／ABI TRUE。高速実装候補を既存環境と別targetへ固定導入し、通常serverを保ったまま合成tensorだけで比較中。新モデル・量子化・LoRA統合・原入力の短縮は行わない。実行結果と最終稼働状態は後続確認に記録する。STRUCTURE_MAP_DELTA_NONE（既存表示と提供処理内の限定修正）。

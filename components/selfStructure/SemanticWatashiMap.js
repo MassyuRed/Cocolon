@@ -119,7 +119,6 @@ export default function SemanticWatashiMap({ contentJson, colors, isDark = false
             {selection?.kind === 'edge' && chosen ? <Text style={styles.context}>{nodeName(chosen.from_ref)} ／ {nodeName(chosen.to_ref)}</Text> : null}
             {selection?.kind === 'node' && chosen ? <>
               <Text style={styles.summary}>{chosen.summary}</Text>
-              {chosen.context.length ? <Text style={styles.context}>{chosen.context.join(' ／ ')}</Text> : null}
             </> : null}
             <Text style={styles.body}>{selection?.kind === 'overview' ? chosen?.summary : chosen?.explanation}</Text>
             {selection?.kind === 'overview' ? <View style={styles.relatedNodes}>

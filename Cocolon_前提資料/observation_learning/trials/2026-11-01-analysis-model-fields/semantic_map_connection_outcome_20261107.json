@@ -184,7 +184,7 @@
         "seconds": 0.753
       },
       "map_display_user_confirmed": true,
-      "full_prose_appearance_user_confirmed": false,
+      "full_prose_appearance_user_confirmed": true,
       "node_edge_detail_appearance_user_confirmed": false,
       "meaning_quality_accepted": false,
       "model_and_cmee_individual_latency_measured": false,
@@ -192,7 +192,54 @@
       "production_settings_changed_this_session": false,
       "new_build_this_session": false,
       "db_mutation_this_session": false,
-      "private_bodies_exported": false
+      "private_bodies_exported": false,
+      "node_detail_appearance_user_confirmed": true,
+      "edge_detail_appearance_user_confirmed": false,
+      "device_evidence": "User-supplied six screenshots: overview, graph and three node detail dialogs; screenshots not copied to public repository"
+    },
+    "ui_context_display_20261108": {
+      "request": "hide category/emotion context listing in node details",
+      "source_path": "components/selfStructure/SemanticWatashiMap.js",
+      "implemented": true,
+      "existing_tests_passed": 7,
+      "one_time_android_ios_node_dialogs_checked": 14,
+      "analysis_context_preserved": true,
+      "device_build_7701_has_change": false,
+      "build_status": "await next integrated build"
+    },
+    "token_filter_optimization_20261108": {
+      "kind": "synthetic_cpu_only",
+      "ordered_result_and_rejection_equivalence_cases": 400,
+      "vocabulary_size": 248046,
+      "repetitions": 31,
+      "timings": {
+        "free_before_median_ms": 13.0738,
+        "free_after_median_ms": 6.4254,
+        "quote_before_median_ms": 5.833,
+        "quote_after_median_ms": 5.7783
+      },
+      "actual_gpu_latency_measured": false,
+      "private_source_or_output_included": false,
+      "model_weights_or_input_budgets_changed": false,
+      "source_base_commit": "ccab8cf2794353a7f4d0b68bb075501f15895096",
+      "changed_path": "ai/tools/serve_emlis_natural_reply.py",
+      "source_postimage_sha256": "4c16bb4d459b657e13d2a28579caf0d787401f31500d4d3a77f0b6a90c940251",
+      "pinned_lmfe_commit": "817f944fcc8851917c40300a47f62d1defc3ffc3",
+      "tests": {
+        "passed": 87,
+        "failed": 0,
+        "skipped": 0,
+        "deselected": 1,
+        "seconds": 6.68,
+        "warning": "existing Pydantic root_validator deprecation",
+        "selection": "semantic generation schema + probe HTTP + semantic map + semantic integration, excluding actual isolated SQL dependency case"
+      },
+      "initial_environment_error": {
+        "missing_existing_sparse_dictionary": true,
+        "corrected_by_same_ref_materialization": true,
+        "source_changes_to_fix_environment": 0
+      },
+      "source_commit": "529f6817eb84ed6a3d85beab4ea22cc62dcbdc5c"
     }
   }
 }

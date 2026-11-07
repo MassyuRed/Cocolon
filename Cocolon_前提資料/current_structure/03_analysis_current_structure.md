@@ -1494,3 +1494,8 @@ TestFlight7701（run42360257959、source27cc48b）は一回の署名/IPA/upload�
 11/7の末尾にある通常生成／本人表示未確認は当時の記録。11/8 7:38:42 JSTの7701通常ensureはHTTP200・150.751秒で、新v3の3項目／2関係線／本文1271文字を保存。既存current RPCの非生成再読と7:39:13のn2根拠HTTP200・0.753秒を確認し、Mashもわたしマップ表示を確認した。本文全文と線詳細の実機の見え方・意味品質受入れは未確認。source87／mapped33／unparsed2／空本文52除外を、全件理解成功としない。
 
 API/DB/RNの新しい責任・配線は追加していない。保存v3・同source guardの通常閲覧は非生成再利用、明示更新だけforce。待機150.7485秒のDB分は2.2216秒で、残りをGPU／CMEEの個別内訳と断定しない。今回華恋によるsource・設定・配置・重み変更・新生成要求・学習・build・DB変更0、STRUCTURE_MAP_DELTA_NONE。最新の実結果と次の確認範囲は[第10回§16の11/8確認](../weekly_reviews/Cocolon_Weekly_Review_20261107.md#analysis-semantic-device-save-20261108)へ戻る。
+
+
+### 2026-11-08 — 実機詳細のカテゴリ／感情一覧を非表示
+
+本人の6画像で全体の読み・3項目詳細まで確認。指示によりRN `SemanticWatashiMap.js` の項目詳細にあるcontext列挙の表示だけを除去し、概要／説明全文／不明・根拠の記録を保持。カテゴリ・感情は分析材料と保存wireに残る。既存UI7 PASS／Android・iOS全14項目詳細の一回確認、現7701は変更前・次の統合buildへ。4Bのtoken除外1回走査はAPI529f6817、87 PASSと400同値構成／CPU合成計測を確認し、GPUの短縮量と混同しない。高速kernelの実行結果・稼働は[第10回続行節](../weekly_reviews/Cocolon_Weekly_Review_20261107.md#analysis-detail-context-speed-20261108)を参照。STRUCTURE_MAP_DELTA_NONE（新owner／契約なし）。
