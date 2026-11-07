@@ -3994,4 +3994,4 @@ HC01／02が退行し、HC03／10はraw同一の重複key拒否を継続。HC04�
 
 ### 2026-11-07 同日続行：既存GPU portでの推論専用転送
 
-API `ai/tools/analysis_jupyter_bridge.py`／`ai/tests/test_analysis_jupyter_bridge.py` は、Podのデータ消去を伴うポート編集を避け、既存Jupyter8888にmodel-key専用の固定localhost転送を追加する候補。Jupyter管理認証と推論鍵を分離し、Cookieを転送・発行しない。API97858022でsource／testを保存、5局所検証成功。実転送・Render切替・新buildは未成立。4B実10入力の最初の二応答は不採用であり、実機分析の成功ではない。現在状態は第10回weekly§16とAnalysis current map末尾を参照する。
+API `ai/tools/analysis_jupyter_bridge.py`／`ai/tests/test_analysis_jupyter_bridge.py` は、Podのデータ消去を伴うポート編集を避け、既存Jupyter8888にmodel-key専用の固定localhost転送を追加する候補。Jupyter管理認証と推論鍵を分離し、Cookieを転送・発行しない。API97858022でsource／testを保存、5局所検証成功。実Jupyter専用口と管理APIの分離を確認し、Render外部接続・切替・新buildは未成立。4Bの実4応答は不採用。モデル内node_idとfield番号を分離するv2、架空9教師＋学習外4入力の小量学習を準備したが、実機分析の成功ではない。現在状態は第10回weekly§16とAnalysis current map末尾を参照する。
