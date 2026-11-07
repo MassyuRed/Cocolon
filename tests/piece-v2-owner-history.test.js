@@ -111,7 +111,28 @@ test('expanded palette records coexist with unchanged legacy records in owner hi
     assert.deepEqual(copy(saved), palette);
     assert.equal(h.readPieceOwnerDisplay(saved).visual_recipe.theme.theme_id, 'forest_mint');
   }
-  for (const [, init] of h.calls) assert.equal(init.headers['X-Piece-Palette'], '2');
+  for (const [, init] of h.calls) assert.equal(init.headers['X-Piece-Palette'], '3');
+});
+
+test('Free quiet-night small-logo artifacts survive owner history, detail and export beside legacy records', async () => {
+  const legacy = record();
+  const dark = record({ piece_id: RID, public_id: 'piece:' + RID, saved_at: '2026-10-10T00:59:00+00:00',
+    renderer_version: 'piece.rn_bitmap_renderer.ios.v2' });
+  dark.visual_recipe.theme.theme_id = 'quiet_night';
+  dark.visual_recipe.branding.branding_mode = 'required_small';
+  const canonical = value => value && typeof value === 'object' && !Array.isArray(value)
+    ? Object.fromEntries(Object.keys(value).sort().map(key => [key, canonical(value[key])])) : value;
+  dark.visual_recipe_hash = crypto.createHash('sha256')
+    .update(JSON.stringify(canonical(dark.visual_recipe))).digest('hex');
+  const h = harness({ send: async url => url.includes('/history') ? packet(page([legacy, dark])) : packet(dark) });
+  const history = await h.requestPieceOwner('history', { cursor: null }, options);
+  assert.deepEqual(copy(history.items), [legacy, dark]);
+  assert.match(texts(h.PieceOwnerCard({ record: history.items[1] })).join(' '), /静かな夜/);
+  for (const action of ['detail', 'export']) {
+    const received = await h.requestPieceOwner(action, { piece_id: RID }, options);
+    assert.deepEqual(copy(received), dark);
+    assert.equal(h.readPieceOwnerDisplay(received).visual_recipe_hash, dark.visual_recipe_hash);
+  }
 });
 
 test('export preparation uses its independent authenticated no-store endpoint',async()=>{

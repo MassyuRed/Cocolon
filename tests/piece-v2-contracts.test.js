@@ -404,6 +404,63 @@ test('a negotiated palette preview accepts the complete ordered paid list, and p
   assert.deepEqual(copy(received), raw);
   assert.ok(Object.isFrozen(received.plan_capabilities.theme_ids));
 });
+
+function subscriberVisualPreview(tier) {
+  const raw = preview();
+  const limit = { free: 5, plus: 30, premium: null }[tier];
+  raw.quota = { ...raw.quota, subscription_tier: tier, save_limit: limit,
+    remaining_count: limit === null ? null : limit - raw.quota.saved_count };
+  raw.plan_capabilities = {
+    format_selection: planCases[tier].format_selection,
+    theme_ids: tier === 'free' ? ['soft_paper', 'quiet_night'] : [...expandedThemes],
+    aspect_ratios: tier === 'free' ? ['4:5'] : ['4:5', '9:16'],
+    branding_modes: tier === 'free' ? ['required_small'] : ['required_subtle', 'off'],
+  };
+  raw.visual_recipe.theme.theme_id = tier === 'free' ? 'quiet_night' : 'forest_mint';
+  raw.visual_recipe.aspect_ratio = tier === 'free' ? '4:5' : '9:16';
+  raw.visual_recipe.branding.branding_mode = tier === 'free' ? 'required_small' : 'off';
+  raw.visual_recipe_hash = digest(JSON.stringify(canonical(raw.visual_recipe)));
+  raw.renderer_version = 'piece.rn_bitmap_renderer.ios.v2';
+  return raw;
+}
+for (const tier of ['free', 'plus', 'premium']) {
+  test(`palette v3 ${tier} snapshot preserves the complete visual policy and selected recipe`, async () => {
+    const raw = subscriberVisualPreview(tier);
+    const api = load({ send: async () => ({ status: 200, json: async () => raw }) });
+    const received = await api.requestPiecePreview(request(), options());
+    assert.deepEqual(copy(received), raw);
+    assert.ok(Object.isFrozen(received.plan_capabilities));
+    assert.ok(Object.isFrozen(received.visual_recipe));
+  });
+}
+test('a Free second-color PATCH keeps the fixed ratio and logo and receives the next revision', async () => {
+  const raw = subscriberVisualPreview('free');
+  raw.preview_revision = 2; raw.row_version = 2;
+  const input = { preview_id: raw.preview_id, expected_preview_revision: 1,
+    visual_selection: { theme_id: 'quiet_night', aspect_ratio: '4:5', branding_mode: 'required_small' } };
+  const api = load({ send: async () => ({ status: 200, json: async () => raw }) });
+  const received = await api.requestPiecePreviewVisualChange(input, { expectedUserId: OWNER });
+  assert.deepEqual(copy(received), raw);
+  assert.deepEqual(JSON.parse(api.calls[0][1].body).visual_selection, input.visual_selection);
+});
+for (const [name, tier, mutate] of [
+  ['third Free color', 'free', raw => raw.plan_capabilities.theme_ids.push('rose_paper')],
+  ['Free tall ratio', 'free', raw => raw.plan_capabilities.aspect_ratios.push('9:16')],
+  ['Free logo off', 'free', raw => raw.plan_capabilities.branding_modes.push('off')],
+  ['Free paid recipe', 'free', raw => { raw.visual_recipe.theme.theme_id = 'rose_paper'; }],
+  ['small logo on paid color', 'free', raw => { raw.visual_recipe.theme.theme_id = 'forest_mint'; }],
+  ['small logo on tall canvas', 'free', raw => { raw.visual_recipe.aspect_ratio = '9:16'; }],
+  ['partial new Plus rights', 'plus', raw => { raw.plan_capabilities.branding_modes = ['required_subtle']; }],
+  ['new Plus rights with old palette', 'plus', raw => { raw.plan_capabilities.theme_ids = ['soft_paper', 'quiet_night']; }],
+  ['reordered Free colors', 'free', raw => raw.plan_capabilities.theme_ids.reverse()],
+]) {
+  test(`palette v3 rejects ${name}`, async () => {
+    const raw = subscriberVisualPreview(tier); mutate(raw);
+    raw.visual_recipe_hash = digest(JSON.stringify(canonical(raw.visual_recipe)));
+    const api = load({ send: async () => ({ status: 200, json: async () => raw }) });
+    await assert.rejects(api.requestPiecePreview(request(), options()), isCode('PIECE_TEMPORARILY_UNAVAILABLE'));
+  });
+}
 for (const [name, change] of [
   ['missing', raw => { raw.plan_capabilities.theme_ids.pop(); }],
   ['reordered', raw => { raw.plan_capabilities.theme_ids.reverse(); }],
@@ -435,7 +492,7 @@ const badPlanMetadata = [
   raw => { raw.quota.save_limit = null; }, raw => { raw.quota.remaining_count = null; },
   raw => { raw.quota.remaining_count = 4; }, raw => { raw.quota.can_save = false; },
   raw => { raw.quota.can_save = 1; }, raw => { raw.plan_capabilities.format_selection = 'eligible_choice'; },
-  raw => { raw.plan_capabilities.theme_ids.push('quiet_night'); },
+  raw => { raw.plan_capabilities.theme_ids.push('rose_paper'); },
   raw => { raw.plan_capabilities.theme_ids.push('soft_paper'); },
   raw => { raw.plan_capabilities.aspect_ratios.push('9:16'); },
   raw => { raw.plan_capabilities.branding_modes = ['off']; },
@@ -751,6 +808,6 @@ for (const [os, rendererVersion, supported] of [
   await h.requestPieceSave(saveRequest(), options());
   for (const [, sent] of h.calls) {
     assert.equal(sent.headers['X-Piece-Renderer'], supported ? 'piece.rn_bitmap_renderer.ios.v2' : undefined);
-    assert.equal(sent.headers['X-Piece-Palette'], supported ? '2' : undefined);
+    assert.equal(sent.headers['X-Piece-Palette'], supported ? '3' : undefined);
   }
 });

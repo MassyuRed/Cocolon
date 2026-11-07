@@ -1,3 +1,5 @@
+> **11/7最新・ビルド前準備：** Mash指定でFree初期2色、Plus／Premiumは12色・両比率・ロゴ有無を選択する候補へ更新。全12見本とFreeの鍵／グレー・案内popupを実装し、API 5065730e／新header3／未適用配色SQLとRNを同期。旧clientのcapabilitiesと履歴互換、保存recipe／hashを維持。今回の実DB・Render・build・実機変更は0。[終了・作業結果と次の反映順は第10回§11〜12](../weekly_reviews/Cocolon_Weekly_Review_20261107.md#piece-ui-prebuild-preparation-20261107)。
+
 > **11/1・7101本人確認済み（第9回§43）：** RN7464f858のiOS #71/run41283646380/job124780456306は署名Archive・写真目的文検査・IPA・TestFlight Uploadの全工程success。Mashが7101を反映し、今回依頼した修正の完了を確認した。起動待ち、Home全体行動削除、Ranking撤去、設定以外のガイド同期、新PieceのEmlisロゴを含む。こころ天気は今/日週月/履歴/未読/通知/tutorialを従来どおり維持。API3407402/dep-dbjebcflk1mc7390mnr0は07:11:03 UTC Live、health/bootstrap200・private5ON/public3OFF。API製品同一blobのd43cabcd native PostgreSQL CI41283815884は全step成功。RNの旧V4 metrics19失敗とlegacy canvas13reportは残る。依頼UIの本人確認を、全製品の品質/正式商品受入れへ広げない。GPU再起動0。
 
 ---
@@ -3680,3 +3682,20 @@ OSへ渡す前に確認が途切れた操作と、OSへ渡した後の結果不�
 | `PieceOwnerHistoryHost` → export準備 → 既存本人detail GET | 画像準備の版・hash・rendererが表示中の詳細と異なる場合、旧版での準備を停止し、同じPieceを明示再読する。準備API応答の本文・保存版を自動採用せず、詳細GET成功後の別操作で画像を準備する。通常履歴でも現在表示中の同じIDだけを再読できる。一時失敗時は旧本文を落とし、既存同一ID再試行へ進む。本人・対象・権限・画面・削除結果不明の境界を越えない。 |
 
 本文・否定・記号・段落・同文の重複は原文どおり保持する。既存の完成動作文では「を」の前後にSPACE／TAB／全角SPACEがあっても、既知の動詞と有限活用を照合用viewで読める。「何 を／なに を」の同じ空白は既存の疑問cueを隠さず拒否する。原文の空白・否定・句読点・欄と根拠はそのまま保持し、改行・NBSP・未知動詞・疑問・未完の文は新たに許可しない。比喩等も新しい願望へ解釈せず、語彙の品詞や一般文法を完全判定する仕組みは追加していない。新しい意味型・語彙辞書・API・DB・描画版なし。ビルド、本番配置、DB適用、端末操作は未実施。Androidの通常作成・保存への採用とOS操作の受入れは残る。[週次レビュー§170](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#piece-before-object-particle-pause-20261105)
+
+
+<a id="piece-subscriber-visual-settings-prebuild-20261107"></a>
+## 2026-11-07 — 画像設定の新権利・ロック案内と旧client互換（候補）
+
+| owner | 今回の責務・境界 |
+|---|---|
+| RN PiecePreviewModal | 全12色の見本、Free初期2色以外の鍵、Free比率／ロゴのグレーと案内popup。権利外操作は変更要求を送らず、candidate identity／visualToken／保存判定を維持 |
+| RN pieceApi | 対応clientのheader3交渉、新しいtier別完全caps組と旧caps組を厳密受理。Free暗色required_smallの保存再読。異なる権利組の混在は拒否 |
+| API api_piece_v2／quota／visual | server tierでFree初期2色／加入者12色・両比率・ロゴ有無を判定。Premium本文形式選択とquotaは保持。無指定／2に新capsを強制しない |
+| API owner_service | 新Free暗色を解釈できない旧clientだけ、そのrecipeを既存queryのLIMIT／keyset前で除外し、受信後も照合。旧paid暗色・header2の12色と新clientの全再読を保持 |
+| 既存未適用palette SQL | 保存recipe CHECKのテーマを12色へ、required_smallを初期2色・4:5へ拡張。旧保存物・権限・RLSを変更しない |
+| 共通UI | CocolonButtonの右下12指定を削除、radius999で大ボタンをカプセルへ。Account検索／Piece保存の局所overrideも修正。入力・作品の論理canvasは不変 |
+
+API候補は5065730ead6fc97a47a03858d0707bbf3e1c568c、本番liveは2c259f0e。配色SQLと新receipt SQLは本番未適用、receipt readinessは無効のまま。次はSQL→API指定配置→必要確認→一回のまとめbuild・実機。分析は通常finiteの限定改善をAPI配置で反映し、研究4Bを自動採用しない。保存済みcurrentの再利用と月次当時版を区別する。
+
+詳細な新プラン正本は [visual recipe §6](../../Cocolon_Piece/pce5_visual_recipe_export/Piece_Visual_Recipe_Contract_20260808.md#6-plan-matrix)、全結果・未確認・次操作は [第10回§12](../weekly_reviews/Cocolon_Weekly_Review_20261107.md#piece-ui-prebuild-preparation-20261107)。STRUCTURE_MAP_DELTA_PRESENT（既存画像設定権利・対応交渉・owner互換の限定拡張）。今回のcode候補を本番・build・実機受入れへ換算しない。

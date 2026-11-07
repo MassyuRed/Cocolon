@@ -3925,3 +3925,18 @@ HC01／02が退行し、HC03／10はraw同一の重複key拒否を継続。HC04�
 | 同directoryの`refusal_results.json` | 本文なし集計・検証範囲・未採用／未配置・private原本参照 |
 
 資料は00／この01B／Analysis current03／詳細設計04／trial README／weekly§243を差分更新。realizer／admission／累積service／共有意味owner／DTO／DB／RNは不変。STRUCTURE_MAP_DELTA_PRESENT（既存compiler内の限定拡張、新商品ownerなし）。
+
+
+## 11/7 報告会後 — Piece設定と共通ボタンのビルド前差分
+
+| 実path | 今回の差分 |
+|---|---|
+| Cocolon/components/CocolonButton.js／ui/uiTokens.js／screens/AccountScreen.js | 大ボタンの均等カプセルと局所override修正（既存01A／01Cのownerを継承） |
+| Cocolon/components/piece/PiecePreviewModal.js | 全12見本、Free10鍵、比率・ロゴのグレーと加入者限定案内。既存候補・保存境界を維持 |
+| Cocolon/features/piece/pieceApi.js | 新header3・tier別完全caps・Free暗色の保存読取、旧API互換 |
+| mashos-api/ai/services/ai_inference/{api_piece_v2,piece_v2_quota,piece_v2_visual,piece_v2_owner_service}.py | 新画像設定権利・交渉・旧client向け既存owner queryの互換filter |
+| mashos-api/supabase/migrations/20261103235434_piece_v2_expand_visual_palette.sql | 既存未適用配色CHECKをFree初期2色へ。実DB未適用 |
+| mashos-api/ai/tests/piece_v2/test_b09_subscriber_visual_entitlements.py | 新規の画像設定・権利回帰。旧testsの権利／SQL・保存互換も拡張 |
+| Cocolon/tests/piece-v2-{contracts,owner-history,initial-save-modal,preview-display}.test.js | 新旧権利・Free popup／無変更・paid選択・保存再読・既存回復の継承 |
+
+新production fileは0。本文・共有意味型・source・保存枠・公開範囲・研究4B採用は不変。STRUCTURE_MAP_DELTA_PRESENT（既存画像設定とowner互換の限定拡張）。配置・build・実機は未実施。詳細ownerはPiece current02／visual recipe §6／UI §29／第10回§12。

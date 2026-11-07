@@ -10,7 +10,7 @@ import { apiFetch, getAccessToken } from "../../lib/apiClient";
 import { NativeModules, Platform } from 'react-native';
 import { PIECE_LEGACY_THEME_IDS, PIECE_THEME_IDS, PIECE_VISUAL_CATALOG_V1 } from './piecePalette';
 
-const PALETTE_HEADER = { 'X-Piece-Palette': '2' };
+const PALETTE_HEADER = { 'X-Piece-Palette': '3' };
 
 // Only advertise the compiled bridge's explicit brand/renderer capability.
 // No import from layout/renderer: those modules depend on this transport.
@@ -135,7 +135,10 @@ function validatePreviewPlan(value) {
   }
   const tier = quota.subscription_tier;
   const limit = { free: 5, plus: 30, premium: null }[tier];
-  const allowed = {
+  // Keep complete legacy snapshots readable during a staged API/app rollout.
+  // The new policy is accepted only as its exact tier-specific combination;
+  // a larger palette alone never grants ratio or logo selection.
+  const legacy = {
     format_selection: { free: 'fixed', plus: 'automatic', premium: 'eligible_choice' }[tier],
     theme_ids: tier === 'free' ? ['soft_paper'] :
       caps?.theme_ids?.length === PIECE_THEME_IDS.length ? PIECE_THEME_IDS : PIECE_LEGACY_THEME_IDS,
@@ -143,12 +146,20 @@ function validatePreviewPlan(value) {
     branding_modes: tier === 'free' ? ['required_small'] :
       tier === 'premium' ? ['required_subtle', 'off'] : ['required_subtle'],
   };
+  const current = {
+    format_selection: legacy.format_selection,
+    theme_ids: tier === 'free' ? PIECE_LEGACY_THEME_IDS : PIECE_THEME_IDS,
+    aspect_ratios: tier === 'free' ? ['4:5'] : ['4:5', '9:16'],
+    branding_modes: tier === 'free' ? ['required_small'] : ['required_subtle', 'off'],
+  };
+  const allowed = [legacy, current].find(policy => exact(caps, Object.keys(policy)) &&
+    caps.format_selection === policy.format_selection &&
+    ['theme_ids', 'aspect_ratios', 'branding_modes'].every(key => Array.isArray(caps[key]) &&
+      caps[key].length === policy[key].length && caps[key].every((item, i) => item === policy[key][i])));
   if (quota.save_limit !== limit ||
       quota.remaining_count !== (limit === null ? null : Math.max(0, limit - quota.saved_count)) ||
       quota.can_save !== (limit === null || quota.saved_count < limit) ||
-      !exact(caps, Object.keys(allowed)) || caps.format_selection !== allowed.format_selection ||
-      !['theme_ids', 'aspect_ratios', 'branding_modes'].every(key => Array.isArray(caps[key]) &&
-        caps[key].length === allowed[key].length && caps[key].every((item, i) => item === allowed[key][i])) ||
+      !allowed ||
       (tier === 'free' && value.format_type !== 'short_essay') ||
       !allowed.theme_ids.includes(recipe.theme.theme_id) ||
       !allowed.aspect_ratios.includes(recipe.aspect_ratio) ||
@@ -216,7 +227,7 @@ function validatePieceArtifact(value) {
       !['required_small', 'required_subtle', 'off'].includes(recipe.branding.branding_mode) ||
       recipe.branding.branding_mark_id !== 'cocolon_text_mark' || recipe.branding.branding_mark_version !== 1 ||
       (recipe.branding.branding_mode === 'required_small' &&
-        (recipe.aspect_ratio !== '4:5' || recipe.theme.theme_id !== 'soft_paper'))) {
+        (recipe.aspect_ratio !== '4:5' || !PIECE_LEGACY_THEME_IDS.includes(recipe.theme.theme_id)))) {
     reject('PIECE_TEMPORARILY_UNAVAILABLE');
   }
 }

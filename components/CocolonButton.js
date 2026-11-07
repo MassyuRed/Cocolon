@@ -102,7 +102,6 @@ export default function CocolonButton({
     {
       maxWidth: ui.layout.maxButtonWidth,
       borderRadius: ui.radius.button,
-      borderBottomRightRadius: isPrimary ? 12 : ui.radius.button,
       borderColor: isDisabled ? colors.CARD_BORDER : isPrimary ? colors.GOLD_BUTTON_BORDER : colors.CARD_BORDER,
       backgroundColor: isDisabled ? colors.FIELD_BG : isPrimary ? colors.GOLD_BUTTON : colors.FIELD_BG,
     },

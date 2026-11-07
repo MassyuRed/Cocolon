@@ -39,7 +39,7 @@ Mashの比較理由：Day One案は情報の区切りが弱く、視線が動き
 | 画面左右余白 | 標準20、狭い画面16。safe areaは別に確保 |
 | 間隔 | 4 / 8 / 12 / 16 / 20 / 24 / 32。見出しと説明8、同群の操作12、別の群24 |
 | 面 | 背景→通常surface→tonal surfaceの3段。カードを何重にも重ねない |
-| 角丸 | 入力16、カード24、主ボタン24を基本。丸みは残す |
+| 角丸 | 入力16、カード24。11/7 Mash指定で大ボタンは四隅均等のカプセル（共通button radius999）。右下だけ別の角丸へしない |
 | 主ボタン | 最低高さ52、上下14・左右20。文言は折り返し可。画面内で最も目立つ操作を1つにする |
 | 補助操作 | 通常surface＋薄い境界。テキストだけの操作も最小44のタップ領域を確保 |
 | 影 | 操作の浮き上がりが必要な所だけ、小さく。静的な全カードへ強い影を付けない |
@@ -104,7 +104,7 @@ defaultの背景・面・主色・見出し・ロゴ・本文・区切りは改�
 
 プレビューは状態案内→作品画像→本文全文→形式・配色・比率・ブランド表記→利用条件／残枠→保存等の操作。作品を確認する前に大量の設定を読ませない。保存前に重要条件を確認できる順序にする。
 
-形式と設定は`plan_capabilities`／`eligible_formats`、色は既存palette、ブランドは既存modeから表示。プレビュー4色や単純ON/OFFを製品へ持ち込まない。選択済みを日本語で示す。アプリの外枠・ボタンと、作品画像内の書体・配色を分離する。
+形式と設定は`plan_capabilities`／`eligible_formats`、色は既存palette、ブランドは既存modeから表示。11/7のMash指定に従い、Freeは初期2色を選択、有料10色は鍵付きの見本を表示する。Freeの比率とロゴはグレーで現在値を示し、ロック操作は加入者限定popupだけを開く。Plus／Premiumは12色・両比率・ロゴの「あり／なし」を選択する。表示は単純化しても保存mode・ブランド版は変換しない。プレビューの4色を製品の色数上限にせず、選択中を日本語で示す。アプリの外枠・ボタンと作品画像内の書体・配色を分離する。
 
 候補identity・visualToken・revision・hash・保存可否・残枠の判定と、回復／再取得／期限切れ再作成／形式に戻る／取消／閉じる等の全操作を保持。画面をきれいにするために失敗を成功へ変えたり、自動通信を増やしたりしない。旧保存画像のロゴ・改行・色・rendererを描き直さない。
 
@@ -766,3 +766,17 @@ GitHubのdb7df2c7で存在・全文／blob SHAを確認した。現在保存さ�
 | TestFlight Upload | success |
 
 今回の修正一式のapp buildは一回、途中群別build／rerunは0。Actions artifact一覧0件。結果の根拠はrun／job APIとActions画面で、巨大なログ本文APIは再取得していない。built sourceは`b64cfa76`、後続の資料commitはこのバイナリへ含まれない。Apple側processing・内部グループ配布・本人端末の7401導入／実表示・原本との視覚的一致は未確認。build成功をその合格へ置き換えず、全画面・各状態の確認は§14〜16を継承する。追加Android／Render／Supabase／GPU操作0。
+
+
+<a id="ui-piece-pill-subscriber-prebuild-20261107"></a>
+## 29. 11/7 大ボタンとPiece設定 — ビルド前準備
+
+Mashの実画面3枚でprimaryの右下だけ小さい角丸を確認。CocolonButton内のborderBottomRightRadius=12を削除し、共通button radius999で文字拡大時も均等カプセルへ。Account検索のradius24上書きと、Piece保存の右下12も除去した。カードの角丸や作品canvasをカプセルへ変更していない。
+
+保存済みプレビューHTML／sourceにあるPiece設定を、最新の明示仕様で通常modalへ出す。Freeはsoft_paper／quiet_nightを選択、他10色は鍵。比率・ロゴはグレーで現在値を示し、ロックを押した場合は加入者限定のAlertだけを表示する。Plus／Premiumは全12色・4:5／9:16・ロゴあり／なしを選択。server capsを権利の正本とし、body・候補identity・visualToken・保存条件は維持する。Premium本文形式選択・保存枠は変更なし。
+
+プレビューの4色を色数の上限にせず、紫を既定色へ戻さない。両HTMLにPiece・背景と文字色・画像の比率・Emlisロゴがあることを再確認し、原本を変更せず保存している。
+
+既存RN10入口の3群は374＋371＋354＝1099 PASS／FAIL・SKIP0、変更JS9fileのTypeScript5.2.2 parseとdiff検査成功。共通style生成54条件と独立source reviewも確認。実機再描画・読み上げ・native image操作は未確認。初回の旧ラベル期待6失敗を新表示に合わせて解消し、権利・保存・中断復旧の検査を維持した。
+
+API 5065730e／配色SQL／新RN header3を準備。DB→API→一回のまとめbuildが必要で、今回はbuild・TestFlight送信・本番反映0。反映範囲・分析保存物・未採用研究候補・実行順は [第10回§12](../../weekly_reviews/Cocolon_Weekly_Review_20261107.md#piece-ui-prebuild-preparation-20261107)。

@@ -84,6 +84,7 @@ function previewUiHarness({ send, currentState = 'active', admitSave = false } =
     return { remove: () => appListeners.delete(listener) };
   } };
   const context = vm.createContext({ React, AppState, AbortController, AppRuntimeContext: {},
+    Alert: { alert() {} },
     useTheme: () => ({ colors: { BG_SILVER: '#F7F1F8', TEXT_ON_LIGHT: '#312436', TEXT_SUBTLE: '#6B5D6E' } }),
     Date: class extends Date { static now() { return now; } },
     Modal: 'Modal', View: 'View', Text: 'Text', ScrollView: 'ScrollView', Button: 'Button', Pressable: 'Pressable',
@@ -336,19 +337,21 @@ for (const tier of ['free', 'plus', 'premium']) {
     assert.match(labels, /2026-10（日本時間）の保存枠/);
     assert.ok(labels.includes({ free: '残り0回 / 5回', plus: '残り28回 / 30回', premium: '回数制限なし' }[tier]));
     assert.ok(labels.includes({ free: '形式：エッセイ（固定）', plus: '形式：入力に合う形式を自動選択', premium: '選択できる形式：引用' }[tier]));
-    assert.equal(labels.includes('静かな夜'), tier !== 'free');
-    assert.equal(labels.includes('9:16'), tier === 'premium');
-    assert.equal(labels.includes('表示なし'), tier === 'premium');
-    assert.equal(nodes.some(n => n.props.testID === 'piece-visual-theme_id'), tier !== 'free');
+    assert.equal(labels.includes('静かな夜'), true, 'paid choices remain visible when locked');
+    assert.equal(labels.includes('9:16'), true);
+    assert.equal(nodes.some(n => n.props.testID === 'piece-visual-theme_id'), true);
     const swatches = nodes.filter(n => n.props.testID?.startsWith('piece-theme-swatch-'));
-    assert.deepEqual(swatches.map(n => [n.props.testID, n.props.style.backgroundColor,
-      n.children[0].props.style.backgroundColor, n.children[0].props.style.color]), tier === 'free' ? [] : [
+    assert.equal(swatches.length, 12);
+    assert.deepEqual(swatches.slice(0, 2).map(n => [n.props.testID, n.props.style.backgroundColor,
+      n.children[0].props.style.backgroundColor, n.children[0].props.style.color]), [
       ['piece-theme-swatch-soft_paper', '#F6F1E8', '#FFFDF8', '#111827'],
       ['piece-theme-swatch-quiet_night', '#0B1120', '#111827', '#F9FAFB'],
     ]);
     assert.ok(swatches.every(n => n.props.accessibilityElementsHidden && n.props.importantForAccessibility === 'no-hide-descendants'));
-    assert.equal(nodes.some(n => n.props.testID === 'piece-visual-aspect_ratio'), tier === 'premium');
-    assert.equal(nodes.some(n => n.props.testID === 'piece-visual-branding_mode'), tier === 'premium');
+    assert.equal(nodes.filter(n => n.props.testID?.startsWith('piece-theme-lock-')).length,
+      12 - raw.plan_capabilities.theme_ids.length);
+    assert.equal(nodes.some(n => n.props.testID === 'piece-visual-aspect_ratio'), true);
+    assert.equal(nodes.some(n => n.props.testID === 'piece-visual-branding_mode'), true);
     assert.equal(nodes.some(n => n.type === 'Button' && /保存|書き出し|共有/.test(n.props.title)), false);
     const display = u.read(receivedView(raw), NOW);
     assert.equal(display.canSave, false); assert.equal(display.canExport, false);
@@ -429,10 +432,10 @@ test('visual controls send current values, replace only recipe/revisions, and an
   assert.equal(view.canSave, false); assert.equal(view.canExport, false);
   assert.ok(u.nodes(u.tree()).some(n => n.children.includes('画像設定を更新しました。')));
   staleControl.props.onPress(); await pieceTick(); assert.equal(u.calls.length, 2, 'obsolete controls cannot mutate a new revision');
-  uiButton(u, '画像比率：9:16').props.onPress(); await pieceTick();
+  uiButton(u, '画像の比率：9:16').props.onPress(); await pieceTick();
   assert.deepEqual(JSON.parse(u.calls[2][1].body), { expected_preview_revision: 2,
     visual_selection: { theme_id: 'quiet_night', aspect_ratio: '9:16', branding_mode: 'required_subtle' } });
-  uiButton(u, 'ブランド表記：表示なし').props.onPress(); await pieceTick();
+  uiButton(u, 'Emlisロゴ：なし').props.onPress(); await pieceTick();
   assert.equal(u.read(u.host.controller.getView(), NOW).preview.visual_recipe.branding.branding_mode, 'off');
   u.host.componentWillUnmount();
 });
@@ -1912,7 +1915,7 @@ for (const closeFirst of [false, true]) {
       return pieceHttp(previews === 1 ? original : response());
     } });
     bindSourceRefreshHost(u); await u.host.createFromSavedInput(); await pieceTick();
-    const oldVisual = uiButton(u, '画像比率：9:16');
+    const oldVisual = uiButton(u, '画像の比率：9:16');
     oldVisual.props.onPress(); await pieceTick();
     assert.equal(uiButton(u, '保存入力を確認し直す'), undefined);
     uiButton(u, '最新のプレビューを取得').props.onPress(); await pieceTick();
@@ -2008,7 +2011,7 @@ async function closedRejectedPostHost(kind) {
     u.host.props = { ...u.host.props, active: true }; u.host.componentDidUpdate();
     uiButton(u, 'ピースを作成').props.onPress(); await pieceTick();
   } else {
-    uiButton(u, '画像比率：9:16').props.onPress(); await pieceTick();
+    uiButton(u, '画像の比率：9:16').props.onPress(); await pieceTick();
     uiButton(u, '最新のプレビューを取得').props.onPress(); await pieceTick();
   }
   const beforeClose = uiButton(u, '保存入力を確認し直す'); assert.ok(beforeClose);

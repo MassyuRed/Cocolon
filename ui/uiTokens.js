@@ -32,7 +32,7 @@ export function makeUiTokens(colors, themeName) {
       lg: 16,
       xl: 20,
       card: 24,
-      button: 24,
+      button: 999,
       pill: 999,
     },
 

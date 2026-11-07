@@ -274,7 +274,7 @@ function createStyles(COLORS, ui) {
     idSearchButton: {
       marginLeft: 0,
       minWidth: 0,
-      borderRadius: 24,
+      borderRadius: ui.radius.button,
       borderWidth: 1,
       borderColor: COLORS.GOLD_BUTTON_BORDER,
       backgroundColor: COLORS.GOLD_BUTTON,

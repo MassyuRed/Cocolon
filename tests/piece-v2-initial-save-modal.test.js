@@ -14,6 +14,7 @@ const path = require('node:path');
 const vm = require('node:vm');
 
 const root = process.env.PIECE_TEST_ROOT || path.resolve(__dirname, '..');
+const alerts = [];
 const source = fs.readFileSync(path.join(root, 'components/piece/PiecePreviewModal.js'), 'utf8');
 // Follow the existing Piece source-test harness: strip only the known
 // single-line imports and the default export. Do not need experimental VM
@@ -22,16 +23,17 @@ const renderPromise = Promise.resolve((() => {
   const imports = source.match(/^import .*;$/gm) || [];
   assert.deepEqual(imports, [
     "import React from 'react';",
-    "import { Modal, View, Text, ScrollView, Pressable, ActivityIndicator } from 'react-native';",
+    "import { Alert, Modal, View, Text, ScrollView, Pressable, ActivityIndicator } from 'react-native';",
     "import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';",
     "import PieceVisualCard from './PieceVisualCard';",
     "import Button from '../CocolonButton';",
     "import { useTheme } from '../../theme/ThemeContext';",
     "import { makeUiTokens, MODAL_ORIENTATIONS } from '../../ui/uiTokens';",
-    "import { PIECE_THEME_COLORS, PIECE_THEME_LABELS } from '../../features/piece/piecePalette';",
+    "import { PIECE_THEME_COLORS, PIECE_THEME_LABELS, PIECE_THEME_IDS } from '../../features/piece/piecePalette';",
   ]);
   const marker = name => ({ component: name });
   const context = vm.createContext({
+    Alert: { alert: (...args) => alerts.push(args) },
     useTheme: () => ({ colors: { BG_SILVER: '#F7F1F8', TEXT_ON_LIGHT: '#312436', TEXT_SUBTLE: '#6B5D6E' } }),
     React: { createElement: (type, props, ...children) => ({ type, props: props || {}, children }) },
     ...Object.fromEntries(['Modal', 'View', 'Text', 'ScrollView', 'Button', 'Pressable', 'ActivityIndicator',
@@ -55,7 +57,7 @@ function fixture(overrides = {}) {
     visual_recipe: { theme: { theme_id: 'soft_paper' }, aspect_ratio: '4:5', branding: { branding_mode: 'required_small' } },
     quota: { subscription_tier: 'free', month_key: '2026-10', remaining_count: 2, save_limit: 5 },
     plan_capabilities: { format_selection: 'fixed', theme_ids: ['soft_paper', 'quiet_night'],
-      aspect_ratios: ['4:5', '9:16'], branding_modes: ['required_small', 'off'] },
+      aspect_ratios: ['4:5'], branding_modes: ['required_small'] },
   };
   return { phase: 'received', hashVerified: true, preview, visualToken: Object.freeze({}),
     canSave: true, canRetry: false, ...overrides };
@@ -240,6 +242,51 @@ test('visual setting changes preserve the existing callback', async () => {
   assert.equal(calls[0][0].theme_id, 'quiet_night');
   assert.equal(calls[0][0].aspect_ratio, '4:5');
   assert.equal(calls[0][2], display.visualToken);
+});
+test('Free shows all twelve colors and locked controls explain access without changing the candidate', async () => {
+  const display = fixture(), original = JSON.stringify(display.preview), changes = [];
+  const tree = await render(display, { onVisualChange: (...args) => changes.push(args) });
+  const all = nodes(tree);
+  assert.equal(all.filter(node => node.props.testID?.startsWith('piece-theme-option-')).length, 12);
+  assert.equal(all.filter(node => node.props.testID?.startsWith('piece-theme-lock-')).length, 10);
+  const night = all.find(node => node.props.testID === 'piece-theme-option-quiet_night');
+  assert.equal(night.props.disabled, false);
+  alerts.length = 0;
+  const locked = ['piece-theme-option-rose_paper', 'piece-option-aspect_ratio-4:5',
+    'piece-option-aspect_ratio-9:16', 'piece-option-branding_mode-required_small', 'piece-option-branding_mode-off'];
+  for (const id of locked) {
+    const option = all.find(node => node.props.testID === id);
+    assert.equal(option.props.disabled, false, 'locked settings remain tappable for an explanation');
+    option.props.onPress();
+  }
+  assert.equal(alerts.length, locked.length);
+  assert.ok(alerts.every(args => args[0] === 'サブスク加入者限定です'));
+  assert.equal(changes.length, 0);
+  assert.equal(JSON.stringify(display.preview), original);
+});
+for (const tier of ['plus', 'premium']) test(`${tier} can select paid colors, aspect and logo without changing source or text`, async () => {
+  const display = fixture(), calls = [];
+  display.preview.quota.subscription_tier = tier;
+  display.preview.visual_recipe.branding.branding_mode = 'required_subtle';
+  display.preview.plan_capabilities = {
+    format_selection: tier === 'plus' ? 'automatic' : 'eligible_choice',
+    theme_ids: ['soft_paper', 'quiet_night', 'rose_paper', 'rose_berry', 'sand_umber', 'sand_olive',
+      'mist_slate', 'mist_teal', 'lavender_ink', 'lavender_plum', 'forest_mint', 'ocean_ice'],
+    aspect_ratios: ['4:5', '9:16'], branding_modes: ['required_subtle', 'off'],
+  };
+  const original = JSON.stringify(display.preview);
+  const all = nodes(await render(display, { onVisualChange: (...args) => calls.push(args) }));
+  assert.equal(all.filter(node => node.props.testID?.startsWith('piece-theme-lock-')).length, 0);
+  alerts.length = 0;
+  for (const id of ['piece-theme-option-ocean_ice', 'piece-option-aspect_ratio-9:16', 'piece-option-branding_mode-off']) {
+    all.find(node => node.props.testID === id).props.onPress();
+  }
+  assert.equal(alerts.length, 0);
+  assert.equal(calls.length, 3);
+  assert.deepEqual(calls.map(args => [args[0].theme_id, args[0].aspect_ratio, args[0].branding_mode]),
+    [['ocean_ice', '4:5', 'required_subtle'], ['soft_paper', '9:16', 'required_subtle'], ['soft_paper', '4:5', 'off']]);
+  assert.ok(calls.every(args => args[2] === display.visualToken));
+  assert.equal(JSON.stringify(display.preview), original);
 });
 test('close remains independent of save and retry', async () => {
   let close = 0, save = 0, retry = 0;

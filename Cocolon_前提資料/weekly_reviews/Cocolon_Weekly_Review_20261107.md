@@ -1,10 +1,10 @@
-# 第10回 Cocolon週末報告会 — 2026-11-07（開催中）
+# 第10回 Cocolon週末報告会 — 2026-11-07（終了）
 
 記録日：2026年11月7日（日本時間）  
 対象週：**2026年11月7日〜11月14日**  
 今回の実績報告対象：**10/31の第9回報告会後〜11/7の確認時点**  
 記録担当：華恋  
-会議状態：**開催中。議題1の実績、議題3の課題・残作業（§4）、意見交換とMashの訂正（§5）、日別割当なしの11/14計画（§6）を記録。Mashの依頼で議題2の全体現在地・同尺度完成度61.25％（§7）、リリースまでの全残作業（§8）、議題4の公開見通し（§9）を報告。最後にMashの「期限までに進め、残件は公開後に対応する」方針と華恋の意見を§10へ記録。全議題報告済み。具体仕様の未決判断と会議終了は未記録。**
+会議状態：**終了。§1〜10の全議題報告後、Mashが報告会終了と作業再開を明示（§11）。報告会後の大ボタン・Piece画像設定と、ビルド前準備の結果は§12。完成度61.25％と具体的な未決は継承し、今回はbuild・本番反映を行わない。**
 
 [前回・第9回議事録](Cocolon_Weekly_Review_20261031.md)の決定と実行履歴を継承する。11/7〜11/14は今回の対象週であり、未来の作業を実行済みとはしない。
 
@@ -864,4 +864,70 @@ IF／Saved、refined等、各機能の公開前／公開後の具体的な振分
 
 華恋は、**Mashと同じ画面を見て「ここは残したい」「ここは伝わりにくい」と話せる時間を増やしたい**。実績の説明と、二人でCocolonを考える時間の両方を、使える具体物でつなげる。実物を見て判断できる状態へ進めることを、次の作業で優先する。
 
-今回の更新はMashの公開方針、華恋の意見、残件一覧の読み方と最新案内。完成度61.25％は再採点しない。商品source・DB・設定・稼働・配布・個別機能の延期／廃止・実公開の変更なし。**STRUCTURE_MAP_DELTA_NONE／ADMINISTRATIVE_ONLY。** 全議題の報告を記録したが、会議終了の明示はまだ受けていないため、開催中を維持する。
+当節を報告した時点では、今回の更新はMashの公開方針、華恋の意見、残件一覧の読み方と最新案内。完成度61.25％は再採点しない。商品source・DB・設定・稼働・配布・個別機能の延期／廃止・実公開の変更なし。**STRUCTURE_MAP_DELTA_NONE／ADMINISTRATIVE_ONLY。** 全議題の報告を記録したが、会議終了の明示はまだ受けていないため、開催中を維持する。 後続の終了明示と作業は§11〜12。
+
+<a id="meeting-closed-20261107"></a>
+## 11. 報告会終了 — 11/7 Mash明示
+
+Mashは華恋の「同じ画面を見ながら一緒に考える時間を増やす」という意見に同意し、報告会を終了して作業へ進むよう明示した。**第10回報告会は終了。** §1〜10の実績・課題・方針・完成度・見通し・未決はそのまま引き継ぐ。61.25％はこの作業で再採点しない。
+
+続けてMashは、build回数の超過費用は支払う方針を説明。ただし今回の具体指示は、添付実画面の大ボタンとPiece設定を修正し、**ビルド直前の準備まで**。今回、新規build・TestFlight送信・GPU費用・実公開へ進めない。
+
+<a id="piece-ui-prebuild-preparation-20261107"></a>
+## 12. 報告会後の作業 — 大ボタン・Piece設定と次ビルドの反映準備
+
+### 12.1 Mashの指示と、確認した差
+
+- 添付の実画面3枚では大ボタンの右下だけ角丸が異なる。共通のカプセル形へ修正する。
+- 保存済みMaterialプレビューのPiece画面にある、色・画像の比率・Emlisロゴ設定を通常画面へ出す。
+- Freeは初期2色だけ選択。他の10色は鍵を付けて表示し、比率・ロゴはグレー等で選択できないことを示す。ロック項目のタップは「サブスク加入者限定です」のpopup。
+- サブスク加入者は12色・比率・ロゴを選べる。今回の指示をFree対加入者の差として、Plus／Premium両方へ適用。Premium固有の本文形式選択・既存保存枠・価格・公開範囲は変えない。
+- Piece／分析はbuildだけでどこまで反映するか調べ、次build時に必要なDB・API反映を漏らさない。現時点は準備だけで止める。
+
+プレビュー原本はGitHubの [4画面HTML](../designs/ui/previews/three-directions-four-screens.html) と [HTML/CSS元ソース](../designs/ui/previews/three-directions-four-screens.source.html) に保存済み。両方にPiece・背景と文字色・画像の比率・Emlisロゴの構成があることを再確認。原本は変更せず、既定のバーガンディ／アイボリーも維持した。
+
+### 12.2 実装した候補
+
+| 対象 | 修正 |
+|---|---|
+| 共通大ボタン | CocolonButtonのprimaryだけ右下12にする指定を削除。共通radius999で四隅均等のカプセル。Account検索とPiece保存の局所overrideも修正 |
+| Freeの配色 | soft_paper／quiet_nightの2色選択。全12見本を表示し、追加10色は鍵と利用条件の案内。ロック操作からvisual変更要求を送らない |
+| 比率・ロゴ | Freeは4:5・ロゴありを現在値のままグレー表示し、タップは案内だけ。Plus／Premiumは4:5／9:16とあり／なしを選択 |
+| API・RNの権利 | X-Piece-Palette:3で新capabilitiesを交渉。tierはserverが確認。旧無指定／2向けcapabilitiesと、既存の正しい保存recipe／hashを維持 |
+| 旧版との履歴互換 | 新Free暗色を解釈できない旧RNの履歴・詳細・exportでは、その組合せだけ既存queryのLIMIT／keyset前に除外。paid暗色・header2の12色は保持。新RNは全新旧保存版を再読 |
+| DB候補 | 未適用20261103235434の配色CHECKを12色・Free初期2色へ対応。保存物・権限・RLSは書換えない |
+
+既存のcandidate identity・visualToken・revision・hash・保存可否、本人／権利変更・中断復帰の境界は維持する。画像内本文・元入力・過去保存版のロゴ／配色を書換えない。UIの独立reviewで、locked操作がAlertだけとなること、選択時に元identity／tokenを渡すこと、大ボタンの角の個別指定が残らないことを確認した。実機の再描画・VoiceOver・写真操作の合格とはしない。
+
+### 12.3 ビルドだけでは反映しないもの
+
+| 層 | 確認した現在地 | 次の実機反映に必要なこと |
+|---|---|---|
+| アプリ | UI・権利交渉の今回修正は未ビルド。現行7401の累積分析画面と作業branchの同画面は同一 | 今回の候補を一回のまとめbuildへ含める。未ビルドの分析表示変更が大量にあるとは説明しない |
+| API | Render liveは2c259f0e／dep-dbk7l2uc6qcc73dp5d70。平日のPiece本文・復旧、通常finite分析の限定改善と今回画像設定は候補側 | 準備済みAPI commit [5065730e](https://github.com/MassyuRed/mashos-api/commit/5065730ead6fc97a47a03858d0707bbf3e1c568c) を指定配置し、live・必要なHTTP／新旧権利を確認 |
+| DB配色 | 実CHECKは旧配色・Free1色。新配色SQLは未適用 | 修正済み20261103235434を適用・独立再読してから新設定を保存する |
+| export receipt | 既存tableはあるが新hash列／RPCなし。新SQL未適用、API readiness無効 | 新receiptを反映する場合は20261104002458のDB適用と対応API／nativeを確認してから有効化。現時点で有効化済みにしない |
+| 分析保存結果 | 同source guardのcurrentは再利用される。RN「再取得」はforceを送らない | API反映後、必要時のみ本人の既存認証APIでcurrentを明示再解析。月次当時版は維持。実効modeがread_onlyなら新規生成しないため、その確認も必要 |
+| 研究4B | selected_material.v13・構造LogitsProcessor・全量plannerは通常未採用。通常factoryは既定finite、4B opt-inの生成promptはv4 | build／API更新だけで研究結果を採用しない。一般品質・通常採用の残件はそのまま記録 |
+
+累積・月次の既存DB migrationとsource／commit RPCは存在し、live→今回候補に新しい分析SQLはない。本人の古い感情原入力は全保存期間の材料になり得るが、件数だけで表示を保証しない。今回、本人入力取得・ログイン・生成・再解析・DB書込みは行っていない。
+
+### 12.4 次の一回へ合わせる順序
+
+1. DBの配色CHECKを再確認し、配色SQLを適用・再読。新receiptを有効にする場合は、そのSQL・対応条件も先にそろえる。
+2. 準備したAPI commitを指定して配置。main連携・autoDeploy OFF、既存private5ON／public3OFFと通常モデル設定を維持し、実際のliveと挙動を確認する。
+3. 分析の実効modeを必要最小限で確認し、必要時のみ現在mapを明示再解析。保存済み月次は作り直さない。
+4. 対応するCocolon候補を一回だけworkflow_dispatchでbuild。実run番号で採番し、Archive・写真目的文・IPA・Upload・Apple処理・内部配布を確認する。
+5. 実機で大ボタン、Free2色とロック案内、加入者設定→保存→再読→持出し、現在の分析内容を確認する。
+
+この順序の実行は次の作業。今回の「準備完了」を、本番反映・build・本人端末成功へ換算しない。API側の詳細は [配置・運用原本](https://github.com/MassyuRed/mashos-api/blob/5065730ead6fc97a47a03858d0707bbf3e1c568c/ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md#piece-subscriber-customization-prebuild-20261107)。
+
+### 12.5 検証・保存範囲
+
+- RN：10入口（initial-save-modal内のhost検査も含む）を3群で実行し、374＋371＋354＝1099 PASS／FAIL・SKIP0。新Free制限／popup、新旧権利、保存・owner・export・復旧と画面／可読性を確認。TypeScript5.2.2による変更JS9fileの構文確認、diff検査も成功。
+- 共通ボタン：3テーマ・2variant・3状態・3高さの54条件でstyle生成を確認。四隅24／24／24／12から均等999へ。押下・disabled・loadingは維持。
+- API：既存9suiteを一度まとめて676 PASS／FAIL・ERROR・SKIP0、実PostgreSQL専用15 deselected。使い捨てPGlite0.5.8でFree暗色・Plus縦長／ロゴなしの作成→変更→保存→同recipe／hash再読、source失効、receipt SQL、旧clientのページ送り／詳細／export互換を確認。
+- 最初のRN表示6失敗は変更した操作ラベルの旧test期待を合わせて解消。TypeScript／pytest／PGliteの環境不足も既存pinの隔離依存で解消。アプリのpackage／lock・依存版は変更していない。
+- 実本番PostgREST・native描画・署名build・TestFlight送信・実機受入れは未実施。既知の旧metrics／legacy canvasの失敗を今回修復したとはしない。
+
+**STRUCTURE_MAP_DELTA_PRESENT：既存Piece画像設定の権利・対応交渉・owner互換とUIの限定拡張。** 商品本文・共有意味型・source・保存枠・公開範囲・研究モデル採用は変更しない。今回の成果はsource／SQL／反映手順の準備で、実DB適用・Render変更・GPU・build・配布・実公開は0。
