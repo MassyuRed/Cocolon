@@ -4752,3 +4752,10 @@ checkpointの詳細は07 / Planへ委譲し、本資料ではbackend support上�
 - API `api_follow_graph.py`：非公開profile照合の例外を公開扱いに落とさず、既存エラーとして書込前に停止する。
 
 新規回帰：`account-settings-owner-race.test.js`、`iap-owner-race.test.js`、`private-history-owner-race.test.js`、API `test_subscription_purchase_owner_hint.py`、`test_subscription_live_console_readiness.py`、`test_follow_private_visibility_failure.py`。隔離合成検証と実ストア購入／本人削除／通知／配布を区別する。現在の合否・反映先は第10回§15へ。
+
+
+## 2026-11-07 — 全残件再点検の最終追加修復・反映記録への接続
+
+本人切替／auth世代・遅延操作・購入開始／復元・private履歴・通知等の修復をRN56e65b1aへまとめ、7601の内部Testingまで確認した。API側の購入hint／Console診断・profile失敗時の扱いは5993以後の候補へ保持。価格／SKU／実販売設定は変更していない。旧Piece公開の2原子関数は実DBへ適用し、既存4table／RLS／service権限と関数定義・ACLを照合した。新table・V2公開の有効化・データ一括移行0。
+
+この追記より前の候補／未配置／点検中の記述は当時の履歴。最新source・全CIの実結果・配置と配布・未確認は[第10回§15.10](weekly_reviews/Cocolon_Weekly_Review_20261107.md#input-contract-repair-final-20261107)を参照する。7,817blob一致を全意味読了とせず、一般意味品質・保存currentの本人再解析・月次当時版の保持・実環境受入れをそれぞれ区別する。

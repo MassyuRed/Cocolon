@@ -3710,3 +3710,10 @@ API候補は5065730ead6fc97a47a03858d0707bbf3e1c568c、本番liveは2c259f0e。�
 全API Piece試験のCPU再検査は11,516 PASS／161 FAIL／ERROR・SKIP0、native17 deselected。161は後続の本文仕様（反復一人称の省略、短い完成文の非padding、後続文法、過去形保持）と旧期待の不一致として個別分離。期待改変・skip／xfailは0で、全成功とは報告しない。native・実DB・実機の成功へ換算しない。追加修復の検証・反映、既存失敗の詳細は第10回§15へ。iOS7501とMashの大ボタン／Piece今回確認は保持し、この後の修復全体を実機確認済みとはしない。
 
 旧公開互換の修復を確定し、API6385606a（親6657a9cf）へ20pathを保存・全bytes/SHA/親/tree/path/PR3 head一致確認。source許可後のcanonical/旧aliasは `piece_generated_identity.py`、型別lookupは`piece_generated_access.py`、全aliasの既読/反応/metric再読は `piece_public_read_store.py`／service、状態とcounter同transactionは `api_piece_runtime.py` と新SQL `20261107040354_piece_legacy_metrics_atomic.sql` → `20261107040430_piece_legacy_reaction_alias.sql`。新table／一括移行／V2公開有効化0。rootのPiece174＋follow6は180 PASS／FAIL・SKIP0。既存PostgreSQL16 CIに独立接続9件を追加して実行中、DB適用／配置は未実施。広域CPUの11,516成功／161旧期待不一致はdbディレクトリを対象外にした実行で、その中のnative17もdeselected。全native試験が17件だけとはしない。
+
+
+## 2026-11-07 — 全残件再点検の最終追加修復・反映記録への接続
+
+旧公開source／canonical／aliasの許可と原子更新をAPI6385606a以後の候補へ保存した。実DBにはmetrics_atomic→reaction_aliasの順で適用、実登録版20261107045211／20261107045213。2関数原文・SECURITY INVOKER・search_path・service_roleのみのアプリ実行権と既存4tableのRLS／既存CRUDを照合。個人row取得／DML／一括移行／新table／V2 public有効化0。API30c7の既存PostgreSQL16 CI42340598228は全step成功し、新独立接続9、入力材料等108、B12 native46の実成功を確認。RNの入力／Piece／owner回帰21suiteは1547 PASS、Linux CIでも1380＋167 PASS／skip0。iOS7601は既存内部グループTestingだが、今回追加修復の本人一巡受入れは未確認。旧未採用V4単体19失敗／Canvas stage83は未解消で、通常bitmap v1/v2の結果へ混ぜない。
+
+この追記より前の候補／未配置／点検中の記述は当時の履歴。最新source・全CIの実結果・配置と配布・未確認は[第10回§15.10](../weekly_reviews/Cocolon_Weekly_Review_20261107.md#input-contract-repair-final-20261107)を参照する。7,817blob一致を全意味読了とせず、一般意味品質・保存currentの本人再解析・月次当時版の保持・実環境受入れをそれぞれ区別する。

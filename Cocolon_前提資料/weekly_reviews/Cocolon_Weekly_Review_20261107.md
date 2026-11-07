@@ -1133,6 +1133,8 @@ API `6385606a0505219b524145653ab53745ce21281e`（親6657a9cf、PR3）へ旧Piece
 
 広域Piece CPUの11,516 PASS／161 FAILはdbディレクトリ対象外の検査で、同命令内のnative17もdeselectedだった。全native試験が17件のみ、またはnative検証済みとはしていない。今回の独立接続CIはその未確認範囲の一部を別に検証する。
 
+**以下3段は第3〜第4チェックポイント時点の履歴です。** 後続の確定検証・DB適用・配布は§15.10を現在の状態とし、当時の「進行中」を現時点へ読み替えない。
+
 
 CI再現の準備中に、RNの新social回帰が既存TypeScript単独依存では起動しないことも検出。署名buildや製品依存の問題ではなくtest環境のReact不足だったため、既存 `tests/emlis-q2-tools/package.json` の5つの固定直接依存を変えずlockfileを生成し、既存Linux jobだけで使い捨てdirectoryへ導入するよう修復した。アプリpackage／lock・依存版は変更0。依存がある最終21suiteは1,547 PASS／FAIL・SKIP0（16.95秒）。依存不足の最初の失敗を成功扱いにしていない。
 
@@ -1140,3 +1142,53 @@ Piece実PG CIの第1回42337602974はB2のFree quiet_nightを拒否する旧期�
 
 
 API第4 `b95fb8f8500aaf39a998e785ac71104a939aadfc`（親6385606a）は上記B2 current palette fixtureと新native stepの2pathのみ。全原bytes/SHA・親/tree/path/PR3 headを読戻し一致。新run42338097893／job128299492936で再検証中。製品・SQL本文の追加変更は0、旧161件の本文期待は変更していない。RNの生成した固定test-tools lockから`npm ci`した隔離環境でも、今回追加job相当8suite167 PASS／FAIL・SKIP0。先の実体あり最終21suite1,547成功と重複合算しない。
+
+
+<a id="input-contract-repair-final-20261107"></a>
+### 15.10 最終追加修復・検証と、実反映の記録
+
+#### 仕様欠落を生んだ進め方への修復
+
+サンプルの3項目を補うだけで終わらせず、現在の入力→保存→三中核の材料→本文／図→再読→本人・購読境界を実装と照合した。仕様が存在したのに個々の出力・修正へ適用しなかったことを問題とし、作業姿勢の既存5file（入口／CURRENT_RULES／07／09／99）を更新済み。全ファイル・全仕様を確認対象とし、その結果を仕様判断・修正・操作例・報告へ反映する。全tree／全blob一致を意味読了・仕様全把握へ換算せず、未読・未確認も具体的に記録する。サンプルでは全選択肢・排他・各強度・両欄／空欄・通知等を明示し、提示票と実検証packetを同じにする。限定した検証を全入力の成功と説明しない。
+
+#### 旧reportで追加して直したこと
+
+生成候補の文章を、その候補自身の根拠へ戻す循環を解消した。snapshotの全binding（owner／ID／hash／scope／期間／type／stage）を照合し、候補とは独立した固定資料から本文・図・weather・補足を再描画して全可視payloadと照合する。検証機能の欠落／例外は保存許可にしない。private source bytesは公開metadataへ出さない。これは通常累積CMEEとは別の旧report経路の修復である。
+
+期間素材は空pageまで全件取得し、短pageを終端と扱わず実受信件数で送る。不正JSON・型・後続HTTP失敗で部分保存しない。旧globalの20,000件／recent200件という既存上限は保持する。二欄・カテゴリ配列・全感情／各強度・時点／ID／secretを含む元rowの内容hashと実producerを対応させる。cron直接日次も同じ入力契約とページ送りを守り、前日未取得を「前日0件」として比較しない。
+
+standard5section／4時間帯card、deep日次5／週次6／月次7section、全数値graph／card、light5sectionと直接日次3見出しを保持した。推測していた心理・原因句は根拠のある観測記述へ修復し、件数と強度加重合計を区別する。「公開入力／公開対象」という可視文言を「分析対象の入力／感情記録」へ統一し、is_secret=falseと本文の公開を混同させない。wire／hash／privacyの意味は変えない。
+
+alignmentだけ欠ける旧derivedは、他の全binding一致後に既存snapshot→standard→deep jobで再導出する。処理中は既存skipped＋analysis_snapshot_alignment_pending、enqueue失敗はerror、他mismatchは再投入0。既定ASTOR_ENABLE_EMOTION_REPORT_V2=Falseでは、既存deepのsnapshot ID／hashに結び付くprivate proofと、実standard結果のID／hashが完全一致する修復だけを許可する。deep未存在・既aligned・不正proof・snapshot変化から新deepへ進めず、自動report生成を広げない。設定・queue・モデル・新tableの追加はない。
+
+原入力専用wish wrapperも、二欄でSELF過去行動と主体未指定希望を併存させると全artifactを落とす不備を修復した。各unitの元欄・根拠と主体UNSPECIFIEDを保持し、補足のSELF条件を広げない。関連613件、独立542件が成功（重複のため合算しない）。研究4Bの重み／raw／過去教師は変更していない。
+
+#### GitHubの最終追加単位
+
+| source | 保存・確認した内容 |
+|---|---|
+| API b12769308b5e17cc6a68711684ec91649a405e9a | 上記factual12path、原入力wish4path、B12 native loader1path、既存CI2path、既存deployment記録の計20path。全原文／SHA・親／tree／差分path・PR3 headを読戻し一致 |
+| API 30c7dceb3d89db16912e853758ab6f10090d0061 | 新しく追加した材料検証stepのPYTHONPATH漏れを既存workflow1pathで修復。製品source変更0、全内容／親／tree／path／PR head一致 |
+| API afae81d5cfee5bc88bf75568c1271721464e39f4 | shared GPの二欄修復後も古かったcurrent Q1 owner証拠fixture1pathを既存導出方法で更新。2identityとGP payload hash／bytesだけが変わり、他17payload・全source symbol・scope・歴史IM03は保持。製品source変更0、全文／親／tree／path／PR head一致 |
+| API 238f0d6332aca8da48ec6d9433373df9a438005b | 追加した最終report検証が旧15分上限で未完になったため、既存workflowのtimeoutだけ25分へ。検査省略・期待緩和・製品source変更0、全文／親／tree／path／PR head一致 |
+| RN e3305f26b29caff3bbffe813af55d8e88411eaef | 56e65b1a以後は既存Piece CIのowner回帰／隔離test lockと資料だけの5path。製品source／native変更0、全内容／親／tree／path／PR head一致 |
+
+factual最終20suiteはCI同一pinで407 PASS・738 subtests PASS、FAIL／ERROR／SKIP／deselected0（38.31秒）。独立139件も成功するが重複を合算しない。HTTP ensure→実enqueue→実worker→実producer→再ensure保存を両flag×3期間で合成確認し、standard既aligned／deepだけ欠落のFalse境界も確認した。実本番DB・本人入力・端末の成功とは区別する。
+
+API b127のCI前段で2,818 PASS／12,236 subtests PASSを確認した後、古いcurrent owner fixture1件の不一致で停止した。これを期待緩和で通さず、GPの既存8関数の限定変更と証拠payloadを照合し、current fixtureを再生成した。元selectorはCI同PYTHONPATH／plugin条件で1 PASS／194 deselected／skip0（22.12秒）。後段407件がその失敗runでは実行されなかった事実は保持する。
+
+afaeの通しCI42341029712は前段2818 PASS／12236 subtests PASS（578.18秒）、共有owner1 PASS／194 deselected（32.31秒）、累積335 PASS／2subtests PASS（215.32秒）、月次SQL201原本／15月参照まで成功。最後の407は53％で打切り、完走成功へ換算しない。GitHub job Annotationsで「The job has exceeded the maximum execution time of 15m0s」を直接確認した。担当やrootのcancel操作0。既存workflowの時間枠だけを15→25分にし、238f0d63の通常pushで同じ全検査を再実行中（run42342266869／job128312337842、14:19:57 JST開始）。追加署名iOS build0。
+
+#### 実DBと一回のiOS配布
+
+Supabase oeahmpmigszggnkyiivqへ既存SQL原文を順適用した。実登録版は20261107045211_piece_legacy_metrics_atomic、次に20261107045213_piece_legacy_reaction_alias。2関数のprosrcはGitHub原文と完全一致、SECURITY INVOKER／search_path=pg_catalog、PUBLIC／anon／authenticated実行false、service_role実行true。既存4物理tableのRLS=true・既存service CRUDを維持。migrationは14→16、security advisoryは前後7件で新規0。個人row取得・DML・反応の一括移行・新table・公開機能有効化0。
+
+iOSは固定RN56e65b1a／run42337152593／#76 attempt1を一回だけ実行。13:09:10 JST開始、13:26:16 JSTに全19step success、署名Archive・写真Usage/Add目的文検査・IPA・TestFlight Uploadまで成功した。Appleで実1.0（7601）を照合し、前版から変えていないOS提供暗号化の情報を保存してReady to Submitへ遷移。既存内部グループ「Emlis テスト版配布」のBuildsに7601 Testingを確認。新テスター・外部グループ・App Store公開0、追加署名build／再dispatch0。今回修復全体のMashによる実機受入れとは区別する。
+
+#### 未解消・未確認として残すこと
+
+- 全7,817blobの一致と、上記の各機能読取・実試験は、全ファイルの意味／全過去commit／全仕様を完全に把握した証拠ではない。未読・未確定範囲を残し、全監査完了・全修復完了とは主張しない。
+- 同じ架空11入力はsource11／processed11／mapped3／unparsed11／excluded0。項目保持・原材料接続の修復を、一般文章から役割・判断基準・記録間意味を十分に読める品質と混同しない。読みやすい文法へ入力票を改変して成功数を上げない。
+- Piece広域の旧期待不一致161、Emlis広域の旧287失敗を期待書換え／skip／xfailで消していない。変更前同集合という比較だけで、全件の本文品質を合格扱いにしない。
+- RN e330の6run／11jobは9成功・2失敗・実行中0。失敗は未採用V4候補の単体19／20とCanvas stage83で、自然layerと参照画像の画素占有不一致が残る。通常UI・保存再表示・exportが選ぶbitmap ios.v1/v2と区別する。旧candidateの根因未確定・未解消を保持し、全CI成功としない。
+- 保存済み本人currentの強制再解析・本人の新規入力と内容／全画面受入れは未実施。月次当時版を書換えず、研究4B通常採用・新モデル／GPU・実課金・実公開0。既存の一般品質・常時提供・両OS等の残件と完成度61.25％を消さない。

@@ -6127,3 +6127,10 @@ STRUCTURE_MAP_DELTA_NONE。新しいowner・route・API・DB・描画版はな�
 新規遅延回帰は `tests/api-client-cancellation.test.js`、`account-profile-owner-race.test.js`、`tutorial-owner-race.test.js`、`private-history-owner-race.test.js` 等。具体的な合否と変更pathは第10回§15。source候補とLive／build／本人確認は分ける。
 
 修正版11件の実値は第10回§15.7と `tests/fixtures/cocolon-input-contract-samples-20261107.json`。実screen照合12追加で入力suite78成功、API側同一byte票と13検査で正規化・insert・元7field・累積compilerを確認。全件理解・実機成功とは区別する。
+
+
+## 2026-11-07 — 全残件再点検の最終追加修復・反映記録への接続
+
+入力・本人寿命の追加修復は固定RN56e65b1aから一回の署名buildへまとめ、実1.0（7601）の既存内部グループTestingまで確認した。後続e330は資料／CI／隔離test lockだけでアプリsource差分0。実screenとAPIで同一byteの11入力票を検証し、全9場面・各強度・二欄・排他・通知の契約を省略しない。端末での全修復受入れや一般分析品質とは区別する。
+
+この追記より前の候補／未配置／点検中の記述は当時の履歴。最新source・全CIの実結果・配置と配布・未確認は[第10回§15.10](weekly_reviews/Cocolon_Weekly_Review_20261107.md#input-contract-repair-final-20261107)を参照する。7,817blob一致を全意味読了とせず、一般意味品質・保存currentの本人再解析・月次当時版の保持・実環境受入れをそれぞれ区別する。

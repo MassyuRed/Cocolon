@@ -2356,3 +2356,15 @@ Q1・Q2・Q3のコード実装を完了として記録し、次はQ4の実装統
 `EmlisThreadModal.js` の原記録fallbackは二欄名を付けて混同を修復。`tests/piece-v2-input-screen.test.js` は偽self_insight／value／数値強度stubをやめ、実選択モジュール・実screenのpayload、全9場面・全15強度組・複数／排他・両／片／空欄・本人別draftを検証。`tests/emlis-thread.test.js` は実React表示で二欄名と原文byte保持を検証する。ガイドも同じ実選択定数と照合。確認範囲・実行結果・未実機は第10回§15へ。
 
 修正版11件の実値は第10回§15.7と `tests/fixtures/cocolon-input-contract-samples-20261107.json`。実screen照合12追加で入力suite78成功、API側同一byte票と13検査で正規化・insert・元7field・累積compilerを確認。全件理解・実機成功とは区別する。
+
+## 2026-11-07 — 入力から独立事実・保存再読・導出復旧までの後続確認
+
+入力契約再照合と他資料の初期「点検中」は、その時点の履歴として保持する。後続sourceはAPI `afae81d5cfee5bc88bf75568c1271721464e39f4`へGitHub保存済みで、追記時点では候補未配置。確定範囲・最新の配置／実DB／Apple配布は[第10回§15.10](weekly_reviews/Cocolon_Weekly_Review_20261107.md#input-contract-repair-final-20261107)を参照する。
+
+原入力二欄、9場面、選択感情ごとの強度、自己理解の区別を元7field／owner／source_guardへ保持したまま、旧期間／global素材の内容identityも照合する。`api_analysis_reports.py`のdirect dailyは当期と前期の原入力行を取得し、不変なsourceから集計・本文を再導出する。snapshot経路は本人・期間・種別・stage・snapshot ID／hashと独立した事実sourceを照合し、候補summaryやcontentTextを自分自身の根拠へ使わない。`analysis_composer.py`も同じsourceと本文の対応を検査する。既存の全key、standard5section／4時間帯card、deep日次5／週次6／月次7section、light5sectionと直接日次3見出し、全数値graph／cardの情報枠を保持し、新規感情入力や国家eventを増やす修復ではない。
+
+手動ensureのalignment欠落は、既存の同一snapshotと正確なprivate proofが成立する場合だけ、既存snapshot job→standard／deep導出へ戻す。`EMOTION_REPORT_V2_ENABLED=false`では既存deep行の一致修復だけを許し、新規deepや自動report生成へ拡張しない。不正proof・別owner／期間・変更source・空や不一致のalignmentは拒否する。同sourceのcurrent再利用、保存済み本文の非生成再読、月次当時版は維持する。旧globalの20,000行上限／recent200表示は通常累積の全保存期間sourceとは別である。
+
+原入力の希望は、§242研究当時の単一memo制約から、原入力専用の完全1–2欄の既存scopeへ後続修復した。各希望の元field・全unit・scalar／UTF8根拠を照合し、省略主体UNSPECIFIEDを別欄SELFへ置換せず通常graphを保つ。補足回答のSELF必須は維持し、補足・続行・訂正を新規入力件数／課金event／通知へ数えない。元19研究のraw／教師は不変、4B通常未採用も維持する。共有GP差分に伴うcurrent Q1 stampのみ既存方法で更新し、historical IM03 proofや検査条件は変更しない。
+
+最終factual／source／recoveryのlocal CI同pin検証は407 PASS＋738 subtests PASS、失敗／skip／deselected0。独立139 PASSは重複し、原入力wrapperの関連613 PASSとは別集合である。同一11入力票の通常finite結果はsource11／processed11／mapped3／unparsed11／excluded0、ROLE2＋ACTION3の5node。入力仕様・保存対応の保持を全件意味理解／実機成功へ換算しない。情報量の削減は行わず、分析内容を実機確認した後で表示改善の必要性を判断する。STRUCTURE_MAP_DELTA_PRESENT（既存入力sourceから派生・復旧へ至る責務の修復、新しい入力／国家event契約なし）。

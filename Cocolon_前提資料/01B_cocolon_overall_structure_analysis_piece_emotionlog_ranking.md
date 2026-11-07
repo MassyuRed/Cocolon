@@ -3954,3 +3954,21 @@ HC01／02が退行し、HC03／10はraw同一の重複key拒否を継続。HC04�
 既存currentのsource_guard一致時再利用、月次当時版の不変性を維持する。compiler修正だけで同じ保存currentを再解析したとは説明しない。実入力・実機の分析確認は未了。全試験成功／一般品質完成を宣言せず、第10回§15と各core current mapで具体範囲を引き継ぐ。
 
 旧公開互換の修復を確定し、API6385606a（親6657a9cf）へ20pathを保存・全bytes/SHA/親/tree/path/PR3 head一致確認。source許可後のcanonical/旧aliasは `piece_generated_identity.py`、型別lookupは`piece_generated_access.py`、全aliasの既読/反応/metric再読は `piece_public_read_store.py`／service、状態とcounter同transactionは `api_piece_runtime.py` と新SQL `20261107040354_piece_legacy_metrics_atomic.sql` → `20261107040430_piece_legacy_reaction_alias.sql`。新table／一括移行／V2公開有効化0。rootのPiece174＋follow6は180 PASS／FAIL・SKIP0。既存PostgreSQL16 CIに独立接続9件を追加して実行中、DB適用／配置は未実施。広域CPUの11,516成功／161旧期待不一致はdbディレクトリを対象外にした実行で、その中のnative17もdeselected。全native試験が17件だけとはしない。
+
+## 2026-11-07 — 再点検後続の全ファイル地図：事実根拠・復旧・原入力proofとcurrent stamp
+
+上の再点検初期節で旧reportを「点検中」とした記述、§242／§243の単一memo制約は各記録時点の履歴である。後続のsourceはAPI `afae81d5cfee5bc88bf75568c1271721464e39f4`へGitHub保存済み、追記時点では候補未配置。最新の配置・実DB・Apple配布は[第10回§15.10](weekly_reviews/Cocolon_Weekly_Review_20261107.md#input-contract-repair-final-20261107)へ戻り、過去の未適用／実行中を現在状態へ固定しない。
+
+| 既存owner／実path | 後続で確定した責務 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/api_analysis_reports.py` | direct dailyの当期・前期原入力とsnapshotの独立事実sourceを束縛し、本文をそのsourceから再導出。全key、standard5section／4時間帯card、deep日次5／週次6／月次7section、light5sectionと直接日次3見出し、全数値graph／cardを保持。手動ensureのalignment欠落を限定復旧 |
+| 同directoryの`astor_material_snapshots.py`／`astor_worker.py` | 元二欄・場面・感情ごとの強度を含む素材identity、独立したsnapshot事実束縛、globalページ取得と既存導出job。flagFalseは正確なprivate snapshot ID／hash等で証明された既存deepの一致修復だけで、新deep／自動reportを追加しない |
+| 同directoryの`cocolon_text_generation_core/adapters/analysis_composer.py` | 生成済み候補本文を根拠にせず、不変sourceから再導出した事実・本文との一致を検査。情報枠と不足表示を保持 |
+| 同directoryの`cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | 原入力1record／1envelope・完全1–2欄の各希望を、自身のfield／全unit／根拠で証明。省略主体UNSPECIFIEDと通常graph全体を保持し、別欄SELF・順序を補わない。補足SELF必須は維持 |
+| 同directoryの`emlis_ai_grounded_observation_plan.py`と`ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | Analysis明示opt-inの既存8関数差分を、current language／runtime stampと該当GP payloadへ反映。他17payload・source symbol全体・scopeと旧IM03歴史proofは保持 |
+| `mashos-api/ai/tests/test_analysis_{snapshot_factual_binding,global_material_pagination,daily_rows_factual_binding,ensure_alignment_recovery,report_factual_sections,material_input_integrity,legacy_report_source_integrity,report_kokoro_weather,parallel_emotion_chronology}.py` | 元source・本文・数値・全情報枠、両flag、同一snapshot復旧と誤った復旧拒否、元欄と同時選択／時系列境界の回帰 |
+| `mashos-api/ai/tests/test_analysis_model_{observed_actions,refusal,omitted_wish}.py` | 二欄の過去否定・拒否、希望の元欄証拠・主体未確定、モデル誤注釈拒否と保存非生成再読。元19研究raw／教師を改変しない |
+
+最終factual／source／recovery集合はlocal CI同pinで407 PASS＋738 subtests PASS、失敗／skip／deselected0。独立139 PASSは同集合に重複する。原入力wrapperは別の関連集合で重複除外613 PASS、current stampのCI同条件selectorは1 PASS／194 deselected。これらを一つの商品合格率へ合算しない。
+
+同一11入力票の通常finiteはsource11／processed11／mapped3／unparsed11／excluded0、5node（ROLE2・ACTION3）にとどまる。全原入力の保持と一般の意味理解を区別し、通常累積の全保存期間sourceを旧globalの20,000行上限／recent200表示と混同しない。既存current再利用・月次当時版、standard／deepの情報量、4B研究の通常未採用を保持する。STRUCTURE_MAP_DELTA_PRESENT（既存owner内の根拠・復旧・原入力proof修復）。

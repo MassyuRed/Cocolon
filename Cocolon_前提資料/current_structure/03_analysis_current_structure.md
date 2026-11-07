@@ -1454,3 +1454,17 @@ API91f3e67の研究v13はv11＋独立肯定過去希望例1つ。失敗v12説明
 通常Analysis関連7fileは750 PASS／1 SKIP、その同一SKIPの隔離SQLを別実行で成功（新10＋SQL1＝11 PASS／SKIP0）。有限compiler変更後も同source保存currentは再利用される。研究重みの通常採用、本人の強制再解析、月次当時版の上書き、実機内容確認は行っていない。正確な結果・既存失敗・候補反映は第10回§15へ。情報量を減らす仕様変更やUIの先行再設計はしない。
 
 二欄修復の最終4pathを独立担当がdiff・新10件実行で照合し、sharedの既定quote早期returnと入力object identityも維持。広域旧期待の残287件は変更前sharedでも同一集合で失敗（新規失敗nodeid0）、13SQL省略は別実行13成功、旧checkpoint SQL2とu355現行102も成功。全品質合格とはしない。
+
+## 2026-11-07 — 再点検の後続：独立した事実根拠・既存レポートの復旧・原入力二欄の希望
+
+直前の再点検初期節にある旧reportの「点検中」は、その時点の履歴である。後続の確定範囲と最新の稼働・DB・配布状態は[第10回§15.10](../weekly_reviews/Cocolon_Weekly_Review_20261107.md#input-contract-repair-final-20261107)を参照する。最終sourceはAPI `afae81d5cfee5bc88bf75568c1271721464e39f4`へGitHub保存済みで、追記時点ではこの候補を未配置。GitHub保存と稼働反映を分ける。
+
+既存 `api_analysis_reports.py`／`astor_material_snapshots.py`／`analysis_composer.py` は、候補本文と独立した元snapshotまたは原入力行の不変なsourceから事実・数値と本文を再導出する。owner・期間・種別・stage・source hash／alignmentを照合し、生成済みのsummary／contentText自体を本人の根拠として循環利用しない。既存key、standard5section／4時間帯card、deep日次5／週次6／月次7section、light5sectionと直接日次3見出し、全数値graph／cardの情報枠を保持し、根拠のない心理説明を事実・不足の説明へ修復した。これは自由な日本語や本人の判断基準の理解完成ではない。
+
+direct dailyは当期・前期を原入力から取得して束縛し、snapshot経路は同じsnapshotのstandard／deep導出へ束縛する。手動ensureの復旧は、既存の同一snapshot／hash等が一致してalignmentだけが欠けた場合に限定する。`EMOTION_REPORT_V2_ENABLED=false`でも、正確なprivate snapshot ID／hashを証明できる既存deep行の一致だけを修復できる。新規deepや自動report生成の許可範囲を広げず、変更source・不正proof・別owner／期間・空または不一致のalignmentを成功へ変換しない。
+
+§242の元19応答研究にある「唯一memo／単一完全希望」は当時の限定範囲である。今回の原入力専用 `intent_compiler._model_complete_observed_plain_wishes` は、1record／1原入力envelope・完全なmemo／memo_actionの1–2欄の既存scope内で、各希望を自身の全文unit・元欄・scalar／UTF8根拠へ照合する。主体省略はUNSPECIFIEDのまま、別欄のSELF行動から主体や順序を借りず、通常finiteの行動＋希望2node全体を保持する。補足回答のSELF必須は維持し、他者・引用・留保・未読欄・不正unitを省略して採用しない。元19のraw／教師・研究結果と4B通常未採用は変更しない。
+
+shared GPのAnalysis opt-in修復後に古くなったcurrent Q1 stampは、既存の導出で `cmee_emlis_q1_shared_owner_identity_v1.json` のlanguage／runtime identityと該当GP payloadを更新した。他17payloadとsource symbol全体・scope、旧IM03のhistorical proofは保持し、検査の等値条件を緩めない。CIと同じ条件の元selectorは1 PASS／194 deselected。
+
+最終factual／source／recoveryのlocal CI同pin検証は407 PASS＋738 subtests PASS／失敗・skip・deselected0。独立139 PASSはこの407と重複するため加算しない。原入力wrapperの関連検証は追加保存再読を含む重複除外613 PASSで、限定した別集合である。同じ修正版11入力票の通常finite結果はsource11／processed11／mapped3／unparsed11／excluded0、ROLE2＋ACTION3の5nodeであり、全件理解・実機成功ではない。旧globalの20,000行上限／recent200表示と、通常累積の全保存期間sourceも区別する。source_guard一致currentの再利用、月次当時版、情報量を充実させる方針と実機確認後の表示判断を保持する。STRUCTURE_MAP_DELTA_PRESENT（既存根拠・導出復旧・原入力proofの責務修復、新商品ownerなし）。
