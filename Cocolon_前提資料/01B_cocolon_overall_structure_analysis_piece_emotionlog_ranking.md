@@ -3972,3 +3972,21 @@ HC01／02が退行し、HC03／10はraw同一の重複key拒否を継続。HC04�
 最終factual／source／recovery集合はlocal CI同pinで407 PASS＋738 subtests PASS、失敗／skip／deselected0。独立139 PASSは同集合に重複する。原入力wrapperは別の関連集合で重複除外613 PASS、current stampのCI同条件selectorは1 PASS／194 deselected。これらを一つの商品合格率へ合算しない。
 
 同一11入力票の通常finiteはsource11／processed11／mapped3／unparsed11／excluded0、5node（ROLE2・ACTION3）にとどまる。全原入力の保持と一般の意味理解を区別し、通常累積の全保存期間sourceを旧globalの20,000行上限／recent200表示と混同しない。既存current再利用・月次当時版、standard／deepの情報量、4B研究の通常未採用を保持する。STRUCTURE_MAP_DELTA_PRESENT（既存owner内の根拠・復旧・原入力proof修復）。
+
+
+### 2026-11-07 わたしマップの意味読解・関係図を通常4B経路へ接続する修復候補
+
+現時点は[第10回§16](weekly_reviews/Cocolon_Weekly_Review_20261107.md#analysis-semantic-map-repair-20261107)。過去の有限ROLE／分類候補の成功を人間分析の成立へ読み替えない。
+
+| 実ファイル | 責任 |
+|---|---|
+| API新 `ai/services/ai_inference/analysis_semantic_map.py` | 原典辞書・全適格原入力の意味読解要求、モデル応答の元欄根拠照合、v3の関係図／詳しい説明／private根拠 |
+| API既存 `analysis_model_source.py`／`analysis_cumulative_service.py` | 専用自己hosted4B→通常ensure→immutable保存／非生成再読、失敗時の有限差替え禁止、新旧client交渉 |
+| API既存 `api_self_structure.py`／`api_self_structure_reports.py` | `X-Watashi-Map-Renderer`によるv3と旧端末v2説明の出し分け |
+| API既存 `ai/tools/serve_emlis_natural_reply.py` | 元probeは保持し、明示`--analysis-service`で通常Analysisを継続提供 |
+| API新 `supabase/migrations/20261107071033_analysis_semantic_map_wire.sql` | 旧v2／既存private型を保ち、新v3とsemantic-privateの対をCHECKへ追加。既存ID／guard／RLS／ACLは不変 |
+| RN新 `components/selfStructure/SemanticWatashiMap.js`／`semanticMapContract.js` | 実際の関係図と閉じた型、項目／関係の詳細、同じ元記録への入口、本人・成果物切替境界 |
+| RN既存 `WatashiMapV2Renderer.js`／`cumulativeMapContract.js`／`CumulativeWatashiMapView.js` | v3への分岐／旧保存互換、通常取得の型交渉と処理項目折畳み |
+| API新 `test_analysis_semantic_map.py`／`test_analysis_semantic_integration.py`・RN新 `tests/analysis-semantic-map.test.js` | 合成応答・隔離実SQLの保存／根拠／再読、図配置と詳細操作。実モデル品質の判定は含まない |
+
+実4B・稼働設定・配置・署名build／実機は別の実行事実として§16へ記録する。全ファイル意味読了・商品完成とはしない。

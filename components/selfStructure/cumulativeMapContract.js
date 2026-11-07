@@ -1,4 +1,5 @@
 const { readWatashiMapV2Projection } = require('./watashiMapV2Contract');
+const { readSemanticMapProjection } = require('./semanticMapContract');
 
 function checkCoverage(c) {
   if (!c || c.profile !== 'cumulative.v1') return false;
@@ -9,7 +10,7 @@ function checkCoverage(c) {
 }
 
 function checkedMapRow(row) {
-  const projection = readWatashiMapV2Projection(row?.content_json);
+  const projection = readSemanticMapProjection(row?.content_json) || readWatashiMapV2Projection(row?.content_json);
   if (row?.source_profile !== 'cumulative.v1' || !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(row.id || '')
     || !projection || projection.projection_of !== `artifact:${row.id.replace(/-/g, '')}@1`
     || !checkCoverage(row.content_json.map_context)) throw new Error('analysis_saved_artifact_invalid');

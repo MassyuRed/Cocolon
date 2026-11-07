@@ -37,6 +37,7 @@ function harness(get) {
     const req=name=>{
       if(name==='react')return React;
       if(name==='react-native')return native;
+      if(name==='react-native-svg')return {__esModule:true,default:'Svg',Path:'Path'};
       if(name==='react-native-safe-area-context')return {SafeAreaView:'SafeAreaView',SafeAreaProvider:'SafeAreaProvider'};
       if(name.includes('react-native-vector-icons'))return ()=>null;
       if(name.startsWith('.')) {
@@ -85,6 +86,9 @@ test('month comparison fetches current separately and preserves the captured pro
   assert.equal(JSON.stringify(stored),before);
   assert(h.calls.some(c=>c[1].includes('month=2026-10-01')));
   assert(h.calls.some(c=>c[1].includes('/latest?ensure=true')));
+  await act(async()=>button(view,'再取得').props.onPress());
+  assert(h.calls.every(c=>!c[1].includes('force=true')),'monthly comparison and retry never force a fresh analysis');
+  assert.equal(JSON.stringify(stored),before);
   await act(async()=>view.unmount());
 });
 
@@ -220,4 +224,37 @@ test('Free monthly access does not unlock the existing paid PDF export',()=>{
   assert.equal(policy.getWatashiMapHistoryLimit('free'),2);assert.equal(policy.getWatashiMapHistoryLimit('plus'),12);
   assert.equal(policy.getWatashiMapHistoryLimit('premium'),null);
   assert.equal(policy.canExportWatashiMapPdf('free'),false);
+});
+
+test('semantic renderer is negotiated with owner binding and processing metadata starts collapsed',async()=>{
+  const semantic=require('./fixtures/analysis-semantic-map-v3-synthetic.json');
+  const h=harness(async()=>latest(semantic));
+  const Screen=h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
+  let view;await act(async()=>{view=Renderer.create(React.createElement(Screen,{embedded:true,hideHeader:true}));});
+  assert.equal(view.root.findAllByProps({testID:'watashi-map-v3'}).length,1);
+  assert(JSON.stringify(view.toJSON()).includes(semantic.overview.title));
+  assert(!JSON.stringify(view.toJSON()).includes('対象：感情入力の記録'));
+  const latestCall=h.calls.find(c=>c[1].includes('/latest?ensure=true'));
+  assert.equal(latestCall[2].headers['X-Watashi-Map-Renderer'],'semantic.v1');
+  assert.equal(latestCall[2].timeoutMs,240000);
+  assert.equal(latestCall[2].expectedUserId,owner);
+  await act(async()=>button(view,'分析について').props.onPress());
+  assert(JSON.stringify(view.toJSON()).includes('対象：感情入力の記録'));
+  await act(async()=>view.unmount());
+});
+
+test('current analysis is forced only by the explicit update action, with the authenticated owner bound',async()=>{
+  const semantic=require('./fixtures/analysis-semantic-map-v3-synthetic.json');
+  const h=harness(async()=>latest(semantic));
+  const Screen=h.load('components/selfStructure/CumulativeWatashiMapView.js').default;
+  let view;await act(async()=>{view=Renderer.create(React.createElement(Screen,{embedded:true,hideHeader:true}));});
+  const updates=()=>h.calls.filter(c=>c[1].includes('/latest?ensure=true'));
+  assert.equal(updates().length,1);
+  assert(!updates()[0][1].includes('force=true'),'opening a saved map must not acquire a paid model update');
+  await act(async()=>button(view,'分析を更新').props.onPress());
+  assert.equal(updates().length,2);
+  assert(updates()[1][1].endsWith('?ensure=true&force=true'));
+  assert.equal(updates()[1][2].expectedUserId,owner);
+  assert.equal(updates()[1][2].headers['X-Watashi-Map-Renderer'],'semantic.v1');
+  await act(async()=>view.unmount());
 });

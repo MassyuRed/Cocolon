@@ -32,10 +32,11 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
   const [state, setState] = useState({ key: null, loading: true });
   const [evidence, setEvidence] = useState(null);
   const [compare, setCompare] = useState(false);
+  const [about, setAbout] = useState(false);
   const ink = colors?.TEXT_ON_LIGHT || '#17212b';
   const paper = colors?.BG_SILVER || '#fff';
 
-  const load = useCallback(async (withCurrent = false) => {
+  const load = useCallback(async (withCurrent = false, force = false) => {
     const seq = ++request.current;
     evidenceRequest.current += 1;
     setState({ key, loading: true });
@@ -45,12 +46,14 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
     try {
       let row, now = null, comparisonFailed = false;
       if (reportId) {
-        const data = await apiGet(buildSelfStructureReportDetailPath(reportId, month), { expectedUserId: owner });
+        const data = await apiGet(buildSelfStructureReportDetailPath(reportId, month), {
+          expectedUserId: owner, headers: { 'X-Watashi-Map-Renderer': 'semantic.v1' }, timeoutMs: 240000 });
         if (!active()) return;
         row = checkedMapRow(data?.item);
         if (row.id !== reportId || (month && row.snapshot_month !== month)) throw new Error('analysis_month_mismatch');
       } else {
-        const data = await apiGet(`${SELF_STRUCTURE_WIRE.routes.latest}?ensure=true`, { expectedUserId: owner, timeoutMs: 60000 });
+        const data = await apiGet(`${SELF_STRUCTURE_WIRE.routes.latest}?ensure=true${force ? '&force=true' : ''}`, {
+          expectedUserId: owner, headers: { 'X-Watashi-Map-Renderer': 'semantic.v1' }, timeoutMs: 240000 });
         if (!active()) return;
         row = checkedCurrentResult(data);
         if (!row) {
@@ -60,7 +63,8 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
       }
       if (withCurrent && reportId) {
         try {
-          const data = await apiGet(`${SELF_STRUCTURE_WIRE.routes.latest}?ensure=true`, { expectedUserId: owner, timeoutMs: 60000 });
+          const data = await apiGet(`${SELF_STRUCTURE_WIRE.routes.latest}?ensure=true`, {
+            expectedUserId: owner, headers: { 'X-Watashi-Map-Renderer': 'semantic.v1' }, timeoutMs: 240000 });
           if (!active()) return;
           now = checkedCurrentResult(data);
         } catch (error) {
@@ -83,6 +87,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
 
   useEffect(() => {
     setCompare(false);
+    setAbout(false);
     setEvidence(null);
     if (!planLoading) load(false);
     return () => { request.current += 1; evidenceRequest.current += 1; };
@@ -120,11 +125,13 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
   </View> : null;
 
   const renderMap = row => <View>
-    <Text style={[styles.meta, { color: ink }]}>分析日時：{dateLabel(row.generated_at)}</Text>
-    {row.captured_at ? <Text style={[styles.meta, { color: ink }]}>月次保存日時：{dateLabel(row.captured_at)}</Text> : null}
-    {coverage(row.content_json?.map_context)}
-    <WatashiMapV2Renderer contentJson={row.content_json} colors={colors} isDark={themeName === 'dark'}
+    <WatashiMapV2Renderer key={`${key}:${row.id}`} contentJson={row.content_json} colors={colors} isDark={themeName === 'dark'}
       onOpenEvidence={node => showEvidence(row, node)} />
+    {about ? <View style={{ marginTop: 16 }}>
+      <Text style={[styles.meta, { color: ink }]}>分析日時：{dateLabel(row.generated_at)}</Text>
+      {row.captured_at ? <Text style={[styles.meta, { color: ink }]}>月次保存日時：{dateLabel(row.captured_at)}</Text> : null}
+      {coverage(row.content_json?.map_context)}
+    </View> : null}
   </View>;
 
   const visible = state.key === key && !planLoading;
@@ -138,13 +145,14 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
       <View style={{ width: 44 }} />
     </View> : null}
     <Body {...(embedded ? { style: [styles.body, styles.embeddedBody] } : { contentContainerStyle: styles.body })}>
-      <Text style={[styles.meta, { color: ink }]}>{getWatashiMapHistoryRetentionLabel(tier)}</Text>
-      {!visible || state.loading ? <ActivityIndicator color={colors.TITLE_GOLD} accessibilityLabel="マップを読み込んでいます" /> : null}
+      {!visible || state.loading ? <View style={{ gap: 12 }}>
+        <ActivityIndicator color={colors.TITLE_GOLD} accessibilityLabel="記録を読み取っています" />
+        <Text style={[styles.meta, { color: ink }]}>記録を読み取り、つながりを整理しています。</Text>
+      </View> : null}
       {visible && state.error ? <Text style={styles.error} accessibilityRole="alert">{state.error}</Text> : null}
-      {visible && state.empty ? <><Text style={[styles.bodyText, { color: ink }]}>{state.insufficient ? '入力情報から構造を十分に読み取れていないため、まだマップを表示できません。' : '現在表示できるわたしマップはありません。'}</Text>{coverage(state.coverage)}</> : null}
+      {visible && state.empty ? <><Text style={[styles.bodyText, { color: ink }]}>{state.insufficient ? '今回の記録から、表示できる分析を作成できませんでした。' : '現在表示できるわたしマップはありません。'}</Text>{about ? coverage(state.coverage) : null}</> : null}
       {visible && state.row ? <>
-        {reportId ? <Text style={[styles.meta, { color: ink }]}>その月に保存した当時の分析です。現在の内容で書き換えていません。</Text> :
-          <Text style={[styles.meta, { color: ink }]}>これまでの入力全体から、構造とルートを確認できます。現在のマップの内容は全プラン共通です。</Text>}
+        {reportId ? <Text style={[styles.meta, { color: ink }]}>{monthLabel(month)}に保存した当時のマップ</Text> : null}
         {reportId ? <CocolonButton variant="secondary" onPress={() => { setCompare(!compare); load(!compare); }}
           title={compare ? '当時のマップだけを見る' : '現在のマップと見比べる'} /> : null}
         {compare ? <Text style={[styles.sectionTitle, { color: ink }]}>当時：{monthLabel(month)}</Text> : null}
@@ -156,7 +164,11 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
             : '現在のマップはまだ表示できません。当時のマップは保存されています。'}
         </Text> : null}
       </> : null}
-      {visible && !state.loading ? <CocolonButton variant="secondary" onPress={() => load(compare)} title="再取得" /> : null}
+      {visible && (state.row || state.empty) ? <CocolonButton variant="secondary" onPress={() => setAbout(!about)} title={about ? '分析について閉じる' : '分析について'} /> : null}
+      {visible && about ? <Text style={[styles.meta, { color: ink }]}>{getWatashiMapHistoryRetentionLabel(tier)}</Text> : null}
+      {visible && !state.loading ? <CocolonButton variant="secondary"
+        onPress={() => load(compare, !!state.row && !reportId)}
+        title={state.row && !reportId ? '分析を更新' : '再取得'} /> : null}
     </Body>
     <Modal visible={!!evidence && evidence.key === key} transparent animationType="fade" onRequestClose={closeEvidence} supportedOrientations={MODAL_ORIENTATIONS}>
       <SafeAreaProvider><SafeAreaView edges={['top', 'bottom', 'left', 'right']} style={styles.overlay}><View style={styles.dialog}>

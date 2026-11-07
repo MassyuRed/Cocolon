@@ -8,6 +8,7 @@ name: Piece RN preview and owner contracts
       - .github/workflows/piece-rn-contracts.yml
       - features/piece/**
       - components/piece/**
+      - components/selfStructure/**
       - screens/input/InputPieceActionArea.js
       - screens/InputScreen.js
       - screens/PieceOwnerHistoryScreen.js
@@ -36,6 +37,8 @@ name: Piece RN preview and owner contracts
       - screens/TodayQuestionHistoryScreen.js
       - screens/account/**
       - tests/*owner-race.test.js
+      - tests/analysis-semantic-map.test.js
+      - tests/fixtures/analysis-semantic-map-v3-synthetic.json
       - tests/api-client-cancellation.test.js
       - tests/social-owner-request-race.test.js
       - tests/fixtures/cocolon-input-contract-samples-20261107.json
@@ -108,6 +111,7 @@ jobs:
           tests/private-history-owner-race.test.js
           tests/social-owner-request-race.test.js
           tests/piece-v2-resonance-owner-binding.test.js
+          tests/analysis-semantic-map.test.js
 
   piece-android-source:
     if: github.repository == 'MassyuRed/Cocolon'

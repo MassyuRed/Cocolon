@@ -1214,3 +1214,39 @@ RN75db8c5c／API0c8d313cの公開treeと全working原bytesを照合した。RN5,
 - Piece広域の旧期待不一致161、Emlis広域の旧287失敗を期待書換え／skip／xfailで消していない。変更前同集合という比較だけで、全件の本文品質を合格扱いにしない。
 - RN e330の6run／11jobは9成功・2失敗・実行中0。失敗は未採用V4候補の単体19／20とCanvas stage83で、自然layerと参照画像の画素占有不一致が残る。通常UI・保存再表示・exportが選ぶbitmap ios.v1/v2と区別する。旧candidateの根因未確定・未解消を保持し、全CI成功としない。
 - 保存済み本人currentの強制再解析・本人の新規入力と内容／全画面受入れは未実施。月次当時版を書換えず、研究4B通常採用・新モデル／GPU・実課金・実公開0。既存の一般品質・常時提供・両OS等の残件と完成度61.25％を消さない。
+
+
+<a id="analysis-semantic-map-repair-20261107"></a>
+## 16. わたしマップの読解・関係図と、通常4B接続の修復
+
+### Mashの指摘と今回の対象
+
+Mashは実機のわたしマップを、自己理解につながる分析ではなく履歴・処理情報の列挙として拒否した。先ほどの架空入力①〜⑩から華恋が手作業で示した読みは「ギリ及第点」であり、実装・モデル・UI全体の受入れではない。今の優先は4Bを通常経路へつなぎ、その読解を図と詳細・根拠として返すこと。他作業や新しい管理規則を先行させない。
+
+原典の`mashos-api/ai/data/processed/structure_dictionary.json`《役割》は自己世界／他者世界における座標、対象をどう定義するか、認識による役割付け、自己定義と他者定義のずれ・出力による再定義を扱う。従来のROLE=担当構文を増やすことや、4Bの引用分類をONにするだけでは、この意味を実装したことにならない。
+
+### 実装した候補
+
+- API新`analysis_semantic_map.py`が既存の原情報資格・根拠座標・原典辞書を使い、全適格記録を4Bへ渡す。環境・全選択感情と各強度・思考／行動二欄・時点・適格本人補足を別材料のまま保持。職務や性格タイプへ置換せず、自己の位置／対象の意味／選択と出力／状態の関係を、図の短い題名と、豊かな説明へする。
+- `analysis_model_source.py`の`self_hosted.semantic.v1`と`analysis_cumulative_service.ensure_map`を接続。応答は元入力・版・全量guard・request／messagesへ束縛し、各引用を元欄の実文字列・scalar／UTF-8へ照合。失敗時に有限処理へ差し替えない。
+- 公開`watashi.map.v3`とprivate根拠を既存immutable保存／月次／元記録参照へつなぐ。旧v2保存は維持。新旧端末は`X-Watashi-Map-Renderer: semantic.v1`で交渉し、旧端末へは不明・文脈を保持したv2説明を返す。旧端末には新しい関係図と全体・関係詳細は出ない。
+- RNは関係図を主表示にし、項目／線のことば→詳細→根拠の記録へ進む。全体の読みは初期3行から同じ詳細Modalで全文を開き、関連項目へ進む。保存済み現在マップの「分析を更新」だけを明示forceとし、初回・履歴・比較の閲覧で毎回再生成しない。解析件数・日時・閲覧期間等は「分析について」へまとめる。情報を削って薄い分析にする変更ではない。iOSは詳細Modalが閉じた後に根拠Modalを開き、本人／成果物変更で古い操作を失効する。
+- 既存GPU提供serverへ`--analysis-service`を追加。既存probeの制限は維持し、明示した通常提供だけ4096出力token／16384文脈／210秒を使用。新学習・新外部providerは追加しない。
+
+### 検証した範囲
+
+合成モデル応答で、通常設定→HTTPS transport→生成結果の保存→保存済み非生成再読を確認。既存PGlite実migration／RPCで保存・元記録取得・月次不変と、不正な公開／private型の組合せ拒否を確認した。SQLの旧CHECKが新形式を拒否する実不具合は、公式CLI生成`20261107071033_analysis_semantic_map_wire.sql`で対処。v2と既存private v1/v2を保ち、v3とsemantic-private v1の対だけを追加し、RLS／ACL／本人ID／source guardを変えない。
+
+新API／提供serverの最終局所49 PASS、旧累積／提供元の既確認227 PASS・SQL未設定20 SKIPは別範囲で合算しない。RNの図・詳細・旧v2／月次互換・iOSModalと長文概要の局所検査は41 PASS。これらは4Bの意味読解品質や本人実機の成功ではない。
+
+画面候補は[関係図](../designs/ui/previews/20261107-watashi-map-graph.png)・[項目詳細](../designs/ui/previews/20261107-watashi-map-detail.png)・[関係詳細](../designs/ui/previews/20261107-watashi-map-relation.png)。実装の配置計算と①〜⑩から手作業で作った架空fixtureを描画したもの。4Bの実生成・端末スクリーンショット・MashのUI受入れではない。
+
+### 稼働と残差
+
+Mashから、旧GPU停止と新Pod `f1lle4xwq3wjln`の提示を受領。新consoleはRunpodログイン画面へ到達し、認証handoffを依頼済み。GPUの実状態／固定baseの復元／実tokenizer予算／実4Bの10入力出力／Render実接続／新RN署名build・本人実機は、この記録時点で未成立。旧Jupyter URL policy拒否を回避していない。本文・キー・認証値をGitHubへ記録しない。
+
+旧研究a2eは引用分類向けで、新しい意味読解へ自動採用しない。固定base4Bを実生成で読み、使用する重みを実結果から記録する。既存原典・教材・研究重みは保持する。長大履歴がモデル文脈を超える場合の分割統合、訂正／撤回を含む記録の一般読解は残差。原入力を黙って直近へ切り詰めず、関係図が描けたことを分析品質の完成としない。
+
+今回の構造差分あり。完成度は再採点しない。次は新Podの認証完了または新Jupyter直接URLから、実4B→同じ10入力→実応答を自分で読み、通常API設定・指定配置・一回の統合buildへつなぐ。
+
+**今回の公開・実DBチェックポイント：** API [48ca38b1](https://github.com/MassyuRed/mashos-api/commit/48ca38b1b27e83e683f772c822e1b135bbcf736f)の12pathをGitHubへ保存し、全blob／親／treeを読戻し一致。元SQLをSupabaseへ一度適用し、実登録版`20261107071920_analysis_semantic_map_wire`を確認した（sourceファイルのCLI版は071033）。新旧形式の対を許可する2CHECKはvalidated=true、RLS=true。anon／authenticated SELECT=false、service SELECT／INSERT／DELETE=true・UPDATE=falseを維持。security advisoryは前後同じ7分類で新規0。本人row取得・DML・API環境設定／配置・新GPUload／生成・新署名buildは0。

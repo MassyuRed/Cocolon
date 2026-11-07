@@ -1,8 +1,17 @@
 import React, { useMemo } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { buildWatashiMapV2ViewModel, NODE_LABELS } from './watashiMapV2Contract';
+import { readSemanticMapProjection } from './semanticMapContract';
 
-export default function WatashiMapV2Renderer({ contentJson, colors, isDark = false, onOpenEvidence }) {
+export default function WatashiMapV2Renderer(props) {
+  if (readSemanticMapProjection(props.contentJson)) {
+    const SemanticWatashiMap = require('./SemanticWatashiMap').default;
+    return <SemanticWatashiMap {...props} />;
+  }
+  return <LegacyWatashiMapV2Renderer {...props} />;
+}
+
+function LegacyWatashiMapV2Renderer({ contentJson, colors, isDark = false, onOpenEvidence }) {
   const model = useMemo(() => buildWatashiMapV2ViewModel(contentJson), [contentJson]);
   const styles = useMemo(() => makeStyles(colors, isDark), [colors, isDark]);
   if (!model) return (
