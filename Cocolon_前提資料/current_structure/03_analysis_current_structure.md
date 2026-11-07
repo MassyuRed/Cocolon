@@ -1470,3 +1470,12 @@ direct dailyは当期・前期を原入力から取得して束縛し、snapshot
 shared GPのAnalysis opt-in修復後に古くなったcurrent Q1 stampは、既存の導出で `cmee_emlis_q1_shared_owner_identity_v1.json` のlanguage／runtime identityと該当GP payloadを更新した。他17payloadとsource symbol全体・scope、旧IM03のhistorical proofは保持し、検査の等値条件を緩めない。CIと同じ条件の元selectorは1 PASS／194 deselected。
 
 最終factual／source／recoveryのlocal CI同pin検証は407 PASS＋738 subtests PASS／失敗・skip・deselected0。独立139 PASSはこの407と重複するため加算しない。原入力wrapperの関連検証は追加保存再読を含む重複除外613 PASSで、限定した別集合である。同じ修正版11入力票の通常finite結果はsource11／processed11／mapped3／unparsed11／excluded0、ROLE2＋ACTION3の5nodeであり、全件理解・実機成功ではない。旧globalの20,000行上限／recent200表示と、通常累積の全保存期間sourceも区別する。source_guard一致currentの再利用、月次当時版、情報量を充実させる方針と実機確認後の表示判断を保持する。STRUCTURE_MAP_DELTA_PRESENT（既存根拠・導出復旧・原入力proofの責務修復、新商品ownerなし）。
+
+
+## 2026-11-07 — 役割付けと記録間の意味を4B候補から受ける経路
+
+通常累積の `analysis_semantic_map.py` は、原典の役割（世界での本人／対象の位置づけ）と本人sourceを区別して全適格記録の候補を要求する。`analysis_model_source.py` の `self_hosted.semantic.v1` → CMEEの原情報資格／request・messages束縛／quote座標照合 → 既存累積保存へ接続。公開v3の図・項目／線の説明とprivate根拠、旧v2保存／旧端末の本文互換は既存consumerで保持する。RNはsemantic.v1交渉で関係図→詳細→原記録を表示する。全量guardと月次当時版は変更しない。
+
+GPU提供ownerはAPI `ai/tools/serve_emlis_natural_reply.py --analysis-service`。空の新Podで固定base4Bを起動し、実10入力の生成まで到達したが、最初の二応答は本人の動機・他者認識の創作や構造不正で不採用。API97858022は不正な形式例を修正したcheckpointであり、一般読解や商品合格ではない。
+
+HTTPポート編集でPod dataを消さないため、新 `ai/tools/analysis_jupyter_bridge.py` を既存Jupyter extra_servicesへ追加する接続候補を用意。推論専用routeはmodel bearerのみで固定localhostへ転送し、Jupyter IdentityProviderとCookieを使用しない。他の管理routeの認証を維持する。新 `ai/tests/test_analysis_jupyter_bridge.py` が認証・非転送境界を確認する。反映時点で実Jupyter有効化／通常Render設定／新buildは未成立。現在の実結果と次作業は[最新weekly第10回§16](../weekly_reviews/Cocolon_Weekly_Review_20261107.md#analysis-semantic-map-repair-20261107)へ集約する。

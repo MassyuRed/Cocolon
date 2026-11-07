@@ -1250,3 +1250,16 @@ Mashから、旧GPU停止と新Pod `f1lle4xwq3wjln`の提示を受領。新conso
 今回の構造差分あり。完成度は再採点しない。次は新Podの認証完了または新Jupyter直接URLから、実4B→同じ10入力→実応答を自分で読み、通常API設定・指定配置・一回の統合buildへつなぐ。
 
 **今回の公開・実DBチェックポイント：** API [48ca38b1](https://github.com/MassyuRed/mashos-api/commit/48ca38b1b27e83e683f772c822e1b135bbcf736f)の12pathをGitHubへ保存し、全blob／親／treeを読戻し一致。元SQLをSupabaseへ一度適用し、実登録版`20261107071920_analysis_semantic_map_wire`を確認した（sourceファイルのCLI版は071033）。新旧形式の対を許可する2CHECKはvalidated=true、RLS=true。anon／authenticated SELECT=false、service SELECT／INSERT／DELETE=true・UPDATE=falseを維持。security advisoryは前後同じ7分類で新規0。本人row取得・DML・API環境設定／配置・新GPUload／生成・新署名buildは0。
+
+
+### 同日続行：実4B起動と、最初の実読解の拒否（接続作業中）
+
+Google認証から新PodのJupyterへ到達。RTX 4000 Ada 20,475MiB、torch2.8.0+cu128を実測し、別venvへ固定依存transformers5.19.0／peft0.21.2／accelerate1.15.0／safetensors0.8.0を導入。固定base851bf6eを取得し、旧引用分類adapterを使わずserverを起動。元10入力の実tokenizerは3,466、出力4,096との合計7,562で省略なし。local health200とGPU常駐8,862MiBを確認した。
+
+最初の実4B応答は123.524秒・stopで完結したが、Markdown外枠、辞書の一般論から本人の動機／変化・他者認識を創作、記録番号をnode接続先に使う不備があり不採用。二回目も他者認識・服従・拒否等の創作、quote／enum／接続先の不正が残り不採用。合成の手作業例を実モデル成功へ扱っていない。原本は同trialのsemantic_map_base_first_rejected_20261107.json／semantic_map_base_second_rejected_20261107.json。いずれも架空10入力への実応答であり、本人記録は含まない。
+
+指示内にnodes1個／to2の不正な形式例があったため修復し、field番号とnode番号を区別する例を追加。API97858022の3path（指示修正・Jupyter専用分析転送口・認証test）をGitHub読戻し一致。既存接続／保存49 PASS・SKIP0、転送口5 PASSを確認。ただし、この時点で転送口の実HTTP有効化・Render設定／配置・新署名buildはまだ行っていない。
+
+RunpodのHTTPポート編集は全data喪失警告があるため未実施。既存Jupyter8888の専用routeへ、管理tokenと分離したmodel bearerで固定localhost8000を転送する最小経路を準備。既存Jupyter認証／XSRF全体は変更せず、model keyを管理Cookieへ昇格させない。生成後にJupyterだけを既存argv／envを維持して一度再起動する。GPUプロセスのnohup／stdio切離しとstart.shのsleep infinityを確認し、Pod resetは行わない。
+
+二回目の失敗を受け、原典の役割は定義＋注記へ絞り、別人の料理／旅行の完全JSON例で根拠と未確定、希望と実出力、nodeの接続を示す三回目を試行中。これは一般品質合格ではなく、実rawの読解と既存CMEE採否確認が次の直接作業。わたしマップ実機表示の完了は未成立。

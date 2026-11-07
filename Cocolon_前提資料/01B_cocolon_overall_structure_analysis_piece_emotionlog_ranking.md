@@ -3990,3 +3990,8 @@ HC01／02が退行し、HC03／10はraw同一の重複key拒否を継続。HC04�
 | API新 `test_analysis_semantic_map.py`／`test_analysis_semantic_integration.py`・RN新 `tests/analysis-semantic-map.test.js` | 合成応答・隔離実SQLの保存／根拠／再読、図配置と詳細操作。実モデル品質の判定は含まない |
 
 実4B・稼働設定・配置・署名build／実機は別の実行事実として§16へ記録する。全ファイル意味読了・商品完成とはしない。
+
+
+### 2026-11-07 同日続行：既存GPU portでの推論専用転送
+
+API `ai/tools/analysis_jupyter_bridge.py`／`ai/tests/test_analysis_jupyter_bridge.py` は、Podのデータ消去を伴うポート編集を避け、既存Jupyter8888にmodel-key専用の固定localhost転送を追加する候補。Jupyter管理認証と推論鍵を分離し、Cookieを転送・発行しない。API97858022でsource／testを保存、5局所検証成功。実転送・Render切替・新buildは未成立。4B実10入力の最初の二応答は不採用であり、実機分析の成功ではない。現在状態は第10回weekly§16とAnalysis current map末尾を参照する。
