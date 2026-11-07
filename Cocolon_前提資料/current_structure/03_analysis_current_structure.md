@@ -1474,10 +1474,16 @@ shared GPのAnalysis opt-in修復後に古くなったcurrent Q1 stampは、既�
 
 ## 2026-11-07 — 役割付けと記録間の意味を4B候補から受ける経路
 
-通常累積の `analysis_semantic_map.py` は、原典の役割（世界での本人／対象の位置づけ）と本人sourceを区別して全適格記録の候補を要求する。`analysis_model_source.py` の `self_hosted.semantic.v1` → CMEEの原情報資格／request・messages束縛／quote座標照合 → 既存累積保存へ接続。公開v3の図・項目／線の説明とprivate根拠、旧v2保存／旧端末の本文互換は既存consumerで保持する。RNはsemantic.v1交渉で関係図→詳細→原記録を表示する。全量guardと月次当時版は変更しない。
+通常累積のapplication `analysis_semantic_map.py` はDB snapshotからの準備とCMEE呼出しだけを持つ46行のadapter。`analysis_model_source.py` の `self_hosted.semantic.v1` で受けた4B候補を `MeaningExperienceEngine.generate` の exact型dispatchへ通す。従来候補はCMEEのsource基盤を再利用していてもEngine本体を通さずAPIで本文/図を別構築しており、この未統合を今回修復した。
 
-GPU提供ownerはAPI `ai/tools/serve_emlis_natural_reply.py --analysis-service`。空の新Podで固定base4Bを起動し、実10入力の生成まで到達したが、通常指示3回とthinking有効1回の4応答は、本人の動機・他者認識の創作、見本混入、構造不正等で全て不採用。API97858022は不正な形式例を修正したcheckpointであり、一般読解や商品合格ではない。
+既存coreの `semantic_admission.py` が `AnalysisSemanticMapInput` と元request/snapshotからの再prepare一致・raw/request/messages/finish/hash・strict JSON・引用座標を検査する。`intent_compiler.py` が本人/対象/選択/状態の可視意味とrecord/evidence rootsを同居させたimmutable `AnalysisSemanticMapGraph` を作る。`observed_route_realizer.py` の `AnalysisSemanticMapArtifact` は、そのGraphだけから公開v3図・本文・private evidenceを導く。旧有限ROLE/ACTION compilerへ意味を戻さない。元recordへの参照はprivateに保ち、単なる引用一致を心理的真実の証明とはしない。
 
-HTTPポート編集でPod dataを消さないため、新 `ai/tools/analysis_jupyter_bridge.py` を既存Jupyter extra_servicesへ追加する接続候補を用意。推論専用routeはmodel bearerのみで固定localhostへ転送し、Jupyter IdentityProviderとCookieを使用しない。他の管理routeの認証を維持する。新 `ai/tests/test_analysis_jupyter_bridge.py` が認証・非転送境界を確認する。専用routeを実Jupyterへ有効化。無認証401、model bearerは推論口503（GPU提供停止中）・管理API403、Cookie発行なしを実HTTP確認した。Renderからの外部接続／通常設定・配置／新buildは未成立。モデル内protocol v2はnode_id=n1,n2と文字列端点を必須とし、field番号の混同を拒否する。公開v3・private保存形式は変更しない。原典は役割の定義＋注記を保持し、長い一般論の本人への誤適用を避ける。既存小量学習runnerを基に、fresh base＋新LoRAへ架空9教師を教える一回24更新上限の準備を保存。旧研究重み・Mash逐語教師は変更せず、学習外4入力を分離し、意味品質は実rawから判断する。現在の実結果と次作業は[最新weekly第10回§16](../weekly_reviews/Cocolon_Weekly_Review_20261107.md#analysis-semantic-map-repair-20261107)へ集約する。
+公開 `watashi.map.v3`、private envelope `analysis.semantic-private-evidence.v1`、全量source guard、immutable保存・月次・元記録参照を維持する。private graph nodeには既存root keysに可視意味を加え、graph commitmentが本文も含む。旧保存物は書換えない。既存SQLの許容内で新DDLなし。RNはsemantic.v1交渉の関係図→項目/線詳細→原記録、旧v2/旧端末互換を維持する。色はバーガンディ/アイボリー。
 
-24更新の実学習／非学習reload／5生成は完了したが、意味品質は不採用。モデル内端点IDの分離、完全同一説明nodeの拒否、専用転送口の20秒JSON空白flushを修復（公開v3／DB schema不変）。同9教師の順をschema／overview／nodes／edgesへ整え、検証済み24重みからfresh optimizerで追加96更新を開始したが、Jupyter再起動直後に追加57で停止。保存56（有効累計80）から元順序の残40を独立sessionで再開した。既存の短引用分類教師・重みは初期値へ戻さない。詳細と境界はweekly§16の24更新節を参照。
+実統合はAPI1cd4ada6、既存3補足上限へtestを整合したd63647a8までGitHub読戻し一致。Render指定deploy `dep-dbnfq115efls73b7kqcg` がlive、healthz200を確認。新局所65 PASS、13入力messages/refと9教師の公開図/本文/coverage/旧rootの一致を確認。既存30file回帰は2456 PASS・既存由来1 SUBFAIL、修正した補足境界と周辺4fileは88 PASS/38 subtests PASS・FAIL/SKIP0。各集合は重複し、加算しない。shared Q1の18 language/18 runtime payloadとowner symbolsは不変でstamp刷新不要。
+
+GPU ownerは `ai/tools/serve_emlis_natural_reply.py --analysis-service`、接続候補はJupyter8888の専用model bearer口 `analysis_jupyter_bridge.py`。管理認証と鍵を分離し、Cookieを転送/発行しない。20秒JSON空白flushはモデル本文/hashを変更せず、開始後の上流失敗を固定errorにする。通常Renderのモデル設定は変更しておらず、実Render→GPU生成は未確認。
+
+固定baseの4試行は不採用。架空9教師の24更新→追加56保存→回復40で有効120更新（途中の追加57報告のうち未保存1は系列へ算入しない）。optimizer/RNG非保存のため厳密再開ではない。120重みの5生成は全stop・形式3/5通過だが、感情誤帰属/未実行→不能/時点/quote不正等で意味0/5。検討有効だけでは210秒で最終回答なし。検討512token上限の3生成は全stop、形式通過H04に限定的な意味改善があるが通常採用を裏付けない。全重みと実原本を保持し、新GPU試行や通常有効化を成功へ換算しない。
+
+TestFlight7701（run42360257959、source27cc48b）は一回の署名/IPA/uploadに成功。Apple管理画面はsession失効のためTesting配布状態未確認で、本人実機の新4B分析成功ではない。DBは本文を取得せず集計だけ確認し、最大765件/本文あり712件/107498文字の履歴が存在する。現1callの16384文脈/262144byte提供口で全履歴へ一般対応できたとはしない。無断で直近へ切り詰めず、長履歴の分割・蓄積と品質を残件へ保つ。次の直接残件と実結果原本はweekly§16および同trialのsemantic_map_connection_outcome_20261107.jsonを参照。

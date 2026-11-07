@@ -1,0 +1,45 @@
+{
+  "status": "NOT_ADOPTED_FOR_ORDINARY_ANALYSIS",
+  "base_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "weights_sha256": "ecbdd0d113cfcdc38a17be4b17c708678c01c5071ae86c8a30ca9a5de5900495",
+  "effective_updates": 120,
+  "optimizer_rng_exact_resume": false,
+  "nonthinking120": {
+    "real_calls": 5,
+    "complete": 5,
+    "cmee_format_pass": 3,
+    "meaning_accepted": 0
+  },
+  "thinking_unbounded": {
+    "real_calls": 1,
+    "seconds": 210.044,
+    "finish": "length",
+    "final_answer_present": false
+  },
+  "thinking_budget512": {
+    "real_calls": 3,
+    "complete": 3,
+    "cmee_format_pass": 1,
+    "limited_meaning_candidate": [
+      "H04_garden"
+    ],
+    "ordinary_quality_accepted": false
+  },
+  "material_remaining": [
+    "source-faithful meanings without invented facts or wish/actual reversals",
+    "entire-history processing beyond the current single-call token/body budgets",
+    "real Render-to-GPU generation and user-device display"
+  ],
+  "production_model_environment_changed": false,
+  "gpu_reasoning_text_exported": false,
+  "api_core_commit": "1cd4ada6c076cd72f3710a8412f7dabce855e09c",
+  "api_live_commit": "d63647a816a9f4024aee16bade7735f1b9700e9c",
+  "render_deploy": "dep-dbnfq115efls73b7kqcg",
+  "testflight": {
+    "build": 7701,
+    "run": 42360257959,
+    "commit": "27cc48b43acbccf052334ec555b3f4ebc292f311",
+    "upload": "success",
+    "availability": "unverified_apple_session_expired"
+  }
+}

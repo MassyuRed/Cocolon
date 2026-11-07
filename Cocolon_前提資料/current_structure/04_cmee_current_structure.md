@@ -1974,3 +1974,10 @@ Mash承認の固定新4生成をCocolon c0859cfb/API f7a13896から一回実行�
 API86d19b6d、STRUCTURE_MAP_DELTA_PRESENT。通常の累積mapは不変。新analysis_model_units_quoted_parents.v1は親の逐語quoteを同field返却unit exact1へ対応させ、source側が内部list位置を導出して既存private候補graph/compiler/唯一realizerへ渡す。新exact Input/Response/ref/schema/state/file、全source/guard/raw/messages束縛、親cycle/depth/UNKNOWN根/引用一意性を保持。旧rawの補修・旧形式fallbackなし。新形式の実4B/学習は未実行、全unparsed/actor未解決/route0、通常HTTP/DB/RNへ未接続。
 
 変更owner：`ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py`（新要求/strict受口・専用保存再読）、`ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py`（新exact型dispatch）、`ai/services/ai_inference/analysis_cumulative_service.py`（新専用prepare/build/serialize/reload）。新production file0、新test `ai/tests/test_analysis_model_quoted_parent_units.py`。compiler/realizerの意味型・通常責務は不変。CPU対象283PASS/3WASM SKIP、旧実87保存payload再読と新56合成派生の同field/文章/図/coverageを確認。実モデル品質・商品受入れではない。設計はAnalysis04#analysis-quoted-parent-units-plan-20261102、全結果/限界/次工程はtrial#analysis-quoted-parent-units-cpu-20261102とweekly§66。
+
+
+## 2026-11-07 — 4B関係mapをCMEE本体へ統合
+
+API1cd4ada6/d63647a8で、従来application側だった4B関係mapの作者を既存CMEE ownerへ移した。Engine.generateがAnalysisSemanticMapInputをexact型dispatchし、semantic_admissionが元request/snapshotから再prepare・応答結合・引用を検査、intent_compilerが可視本文/根拠同居のAnalysisSemanticMapGraphを構築、observed_route_realizerだけが図/本文/privateを導く。application analysis_semantic_map.pyに別作者は残さない。旧有限ROLE/ACTION判定や他coreの生成方式は変更しない。
+
+公開v3/private envelope v1と既存immutable保存/RPCを維持し、private graph commitmentへ可視意味も含めた。新65 PASS、13入力messages/ref・9教師出力の互換を確認。Q1 shared stampは実値一致で変更不要。Renderコード配置はlive/healthz200だが、4Bの通常生成設定は未変更。実モデルの全件正しい意味・外部生成・本人端末表示を、構造統合の成功へ合算しない。現結果と残件はAnalysis current map末尾と最新weekly§16へ。
