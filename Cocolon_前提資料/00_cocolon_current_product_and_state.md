@@ -36,7 +36,7 @@
 
 更新日：2026-11-01 JST（最新差分：Mashの説明に基づき工程を訂正。11/1はリリース機構・配布・運用・初回接続、11/2〜11/6は華恋がGPU/サーバー側で品質改善。実機は初回と最終確認に絞り、品質試行ごとのRNビルドは行わない。品質以外を先に整え、公開日まで育てた品質を反映できる状態を目指す）。全Cocolon作業の必読原本。
 
-> **最新報告会：[第10回・2026-11-07、11/7〜11/14](weekly_reviews/Cocolon_Weekly_Review_20261107.md)。開催中。** 10/31報告会後〜11/7の作業と成果に続き、[課題と残作業](weekly_reviews/Cocolon_Weekly_Review_20261107.md#agenda-3-open-work)を報告。EmlisとPieceの本人端末一巡、累積・月次機構の反映、分析／Pieceの限定改善、7401の送信成功と未確認を分けて記録した。課題は一般読解・自然応答・通常提供と、候補反映／実環境確認へ整理。11/14までの日別割当なしの計画は第10回§6。全体評価・公開見通し・会議終了、具体仕様の未決は別に扱い、機能状態・商品受入れをこの記録だけで変更しない。
+> **最新報告会：[第10回・2026-11-07、11/7〜11/14](weekly_reviews/Cocolon_Weekly_Review_20261107.md)。開催中。** 実績・課題・意見交換・日別割当なしの11/14計画に続き、[全体現在地・完成度61.25％](weekly_reviews/Cocolon_Weekly_Review_20261107.md#overall-current-status-and-completion-20261107)、[リリースまでの全残作業](weekly_reviews/Cocolon_Weekly_Review_20261107.md#all-remaining-work-through-release-20261107)、[12/18両ストア公開の見通し](weekly_reviews/Cocolon_Weekly_Review_20261107.md#release-outlook-20261107)を報告。前回54.50％から同尺度＋6.75ポイント。目標維持・達成の裏付け不足で高リスク。現在の分析を実機で確認してから改善を判断し、情報量は充実させる。具体仕様の未決・会議終了・商品受入れと分ける。
 
 > **前回の方針・既決仕様：[第9回・10/31〜11/7](weekly_reviews/Cocolon_Weekly_Review_20261031.md)。** [§3のMashの方針・既決仕様](weekly_reviews/Cocolon_Weekly_Review_20261031.md#confirmed-directions)、[§4の華恋の商品案](weekly_reviews/Cocolon_Weekly_Review_20261031.md#release-product-proposal)、[§11の合意最低線と週間基準計画](weekly_reviews/Cocolon_Weekly_Review_20261031.md#weekly-tasks-20261031)、[§7の未決・会議進行](weekly_reviews/Cocolon_Weekly_Review_20261031.md#meeting-agenda-and-open-items)を区別する。Emlisは人間的応答のみの表示へ変更し、意図的短文化・1〜2文固定はしない。観測ラインは分析へ活かす。Free当回入力のみ／Plus過去本人入力も照合は既決仕様の再確認で、通常4Bでの意味ある履歴応答は未完成。わたしマップは全蓄積の構造・ルートと月ごとの当時snapshot、現在との見比べが構想。28日・最新100だけ・最新1枚は華恋の判断・撤回案で、Mashの構想ではない。下表の期間実装と新目標を混同しない。
 
@@ -44,7 +44,7 @@
 
 **商品案の採否：** Pieceを初期の有料価値の中心にする方向を記録。**Plus月680円／Premium月1,480円はMashの最新の実装指示で採用済み。** [第9回§15](weekly_reviews/Cocolon_Weekly_Review_20261031.md#subscription-prices-20261031)に確認と反映を記録。RNの3file／APIの1fileの料金fallbackと、実DBの対象2行の料金・自動更新案内を更新した。初回公開API取得はtimeoutだったが11/1に200/料金を確認。公開bootstrapの680/1480円を確認。6601のApple90683を修正した6701は内部配布/本人起動済み。実ストア請求額・料金の本人端末表示は未確認。12配色・生成枠・iOS先行・SNS後置・Premium等の延期は華恋案で、採用済みではない。Pieceへの4B利用は質問と回答の段階。描画には不要、意味再構成では候補という見解を仕様変更の合意にしない。既決の12/18両ストア公開目標は変更していない。54.50％は前回管理評価を継承し、今回再採点なし、正式商品受入れ0/3。通常AI・累積マップ・Piece本人実機一巡の未達から、期限内完成は保証できない。
 
-**最新の公開見通し：** [第9回§13](weekly_reviews/Cocolon_Weekly_Review_20261031.md#release-outlook-20261031)。12/18両ストア公開目標は維持するが、常時提供・累積マップ・課金・両OS・原価の未成立から達成の裏付け不足・高リスク。10/31→11/27の提出基準まで27日、その後12/18まで21日を審査・差戻し枠とする管理計画で、所要保証ではない。11/1のPC枠で初回接続・リリース準備、11/2〜11/6は華恋単独の品質改善、11/7は実績・Android差分・販売範囲と原価材料を報告する。11/15結合、11/22候補、11/27両ストア提出の管理線を保持し、品質試行ごとの実機確認・ビルドは要求しない。高度観測を初版へ戻さず、Plus履歴・累積／月次マップ・Piece保存出力・課金権限は残す。iOS先行やSNS後置等の未採用案を工程削減済みにしない。[§14](weekly_reviews/Cocolon_Weekly_Review_20261031.md#karen-opinion-20261031)は華恋の進め方・商品価値への意見。§13の見通し報告時点は実装/稼働変更0。後続11/1の実配置/配布/本人初回確認は冒頭と§37を参照する。
+**最新の公開見通し（11/7）：** [第10回§9](weekly_reviews/Cocolon_Weekly_Review_20261107.md#release-outlook-20261107)。現行目標は2026-12-18・両ストア正式公開、残41暦日。既存11/27提出管理線まで20暦日、その後21暦日は審査・差戻しの計画枠で、所要保証ではない。一般分析・実全量処理・有料内容と専用テーマ・常時提供と実費・実課金・Androidを含む両OS・申請の未完から、達成の裏付け不足・高リスク。現在の分析実機確認→加入価値の具体化→分析通常完成とPiece／テーマ／UI・提供準備の並行→同一候補の実課金・両OS結合→提出・審査・実公開へ進める。日別再割当はせず、旧11/1〜11/6や旧学習→P6→初回配線を現在の初手へ戻さない。IF／Saved・refined・公開／交流・Androidを無断で後置しない。全残件と完了条件は[第10回§8](weekly_reviews/Cocolon_Weekly_Review_20261107.md#all-remaining-work-through-release-20261107)。この報告による稼働・配布変更はない。
 
 **現在の直接作業（11/1）：** [第9回§31](weekly_reviews/Cocolon_Weekly_Review_20261031.md#mechanism-first-20261101)を訂正。11/1はPCを使うリリース準備と初回接続を先行し、11/2〜11/6は華恋がGPU/Jupyter・サーバー側で応答品質を改善する。API/保存/表示契約を保てば重み・指示・生成設定の更新にRN再ビルドは不要。初回に実機から実4Bまで接続・保存再読を確認し、各品質試行は端末操作なしで進め、最終候補反映後に最後の接続確認を行う。最終確認日は未指定。8タスクと料金/Android/原価/申請残件は保持。現在の初回source・隔離HTTPS保存だけを本人端末成功へ数えず、本人補足/訂正の材料化・権利内関連検索・共通3欠陥のsource/DB実装と、実モデル/実機・新観測材料生成・配布/運用の未完を分けて進める。前版の『アプリ上で品質改善』『機構全完了まで品質を一律保留』は華恋の誤解で撤回。過去の不採用・正式0/3・54.50％は変更しない。
 
@@ -116,7 +116,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 全機能表の「接続あり」は2026-10-22のsource照合であり、実端末・live・ストア・配送の今回確認を意味しない。公開APIの200／401、migration成功、test成功、TestFlight送信から商品完成へ飛躍しない。
 
-**10/24報告会の全体管理評価：54.50％（前回53.25％、＋1.25ポイント）。** 同じ尺度でEmlis/CMEE57.50％・Piece41.25％・Analysis51.25％・基本機能/RN/公開63.75％・UI60％。増分はPiece画像/書出し25→50のみ。正式商品受入れ0/3は未変更。残45.50は管理点で、残工数や12/18達成確率ではない。公開は目標維持・高リスクとし、[第8回§9](weekly_reviews/Cocolon_Weekly_Review_20261024.md#overall-status-and-release-outlook)に算術・根拠・判断点を記録した。
+**11/7報告会の全体管理評価：61.25％（約61％、10/24の54.50％から＋6.75ポイント）。** 前回と同じ5領域・小項目段階で、Emlis/CMEE57.50％、Piece61.25％、Analysis55.00％、基本機能/RN/公開70.00％、UI67.50％。全体算術は17.25＋12.25＋11.00＋14.00＋6.75＝61.25。初回本人接続・Piece写真保存・累積プラン履歴・RN・UIの前進を反映し、未実装の有料追加内容・専用テーマは加点しない。小数は配点計算の結果で、品質合格率・残工数・資産価値・公開確率ではない。正式商品受入れ0/3は未変更。尺度・全小項目・根拠は[第10回§7](weekly_reviews/Cocolon_Weekly_Review_20261107.md#overall-current-status-and-completion-20261107)。過去の54.50％据置は当時の履歴として保持する。
 
 ## 4. 入力・Emlis・学習済AI
 
@@ -243,7 +243,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | 範囲 | 詳細原本・現物 |
 |---|---|
 | 全体構想・設計 | `cocolon_thought_material_for_karen.md`、`01_cocolon_overall_structure.md`と分冊01A／01B／01C、`02_cocolon_national_system.md`、`current_structure/00_three_core_and_cmee_read_first.md`と01〜04 |
-| 最新判断・配置記録 | 最新報告会は[第10回・11/7〜11/14](weekly_reviews/Cocolon_Weekly_Review_20261107.md)・開催中、議題1の今週実績と議題3の課題・残作業を報告済み。[第9回・10/31〜11/7](weekly_reviews/Cocolon_Weekly_Review_20261031.md)の方針・実行履歴を継承。[第8回・10/24〜10/31](weekly_reviews/Cocolon_Weekly_Review_20261024.md)は終了記録・実行履歴。方針・承認・配置の原記録は`weekly_reviews/Cocolon_Weekly_Review_20261017.md`（10/20観測学習、最新AL等）とAPI `ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md`へ戻る。会議記録は仕様・実装事実の代用ではない |
+| 最新判断・配置記録 | 最新報告会は[第10回・11/7〜11/14](weekly_reviews/Cocolon_Weekly_Review_20261107.md)・開催中。実績・課題・意見交換・11/14計画と、§7の全体61.25％・§8の全公開残件・§9の公開見通しを報告済み。[第9回・10/31〜11/7](weekly_reviews/Cocolon_Weekly_Review_20261031.md)の方針・実行履歴を継承。[第8回・10/24〜10/31](weekly_reviews/Cocolon_Weekly_Review_20261024.md)は終了記録・実行履歴。方針・承認・配置の原記録は`weekly_reviews/Cocolon_Weekly_Review_20261017.md`（10/20観測学習、最新AL等）とAPI `ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md`へ戻る。会議記録は仕様・実装事実の代用ではない |
 | Emlis・CMEE実物 | API `cocolon_meaning_experience_engine/engine.py`、`emlis_thread_service.py`とthread source／question／answer_update／surface、RN `InputScreen`・`useEmlisThread`・`EmlisThreadModal`。API path prefixは`ai/services/ai_inference/` |
 | AI試験 | `observation_learning/trials/2026-10-21-qwen27-demo/README.md`と8出力JSON。`fine_tuning_performed=false`、`cmee_integration_performed=false` |
 | Analysis実物 | API `astor_material_snapshots.py`、`analysis_observed_service.py`、`watashi_map_service.py`、`kokoro_weather_service.py`、RN `WatashiMapV2Renderer`・access policy。設計04 §10 IF／§11 Saved、schema05 §7・9.6 |
