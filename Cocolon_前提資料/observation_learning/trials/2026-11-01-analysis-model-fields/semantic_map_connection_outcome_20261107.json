@@ -1,5 +1,5 @@
 {
-  "status": "NOT_ADOPTED_FOR_ORDINARY_ANALYSIS",
+  "status": "ORDINARY_ANALYSIS_ENABLED_FOR_DEVICE_REVIEW_NOT_QUALITY_ACCEPTED",
   "base_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
   "weights_sha256": "ecbdd0d113cfcdc38a17be4b17c708678c01c5071ae86c8a30ca9a5de5900495",
   "effective_updates": 120,
@@ -30,11 +30,11 @@
     "entire-history processing beyond the current single-call token/body budgets",
     "real Render-to-GPU generation and user-device display"
   ],
-  "production_model_environment_changed": false,
+  "production_model_environment_changed": true,
   "gpu_reasoning_text_exported": false,
   "api_core_commit": "1cd4ada6c076cd72f3710a8412f7dabce855e09c",
-  "api_live_commit": "d63647a816a9f4024aee16bade7735f1b9700e9c",
-  "render_deploy": "dep-dbnfq115efls73b7kqcg",
+  "api_live_commit": "ad9794ca3c3e5d5903a8d170a74add0e6962530d",
+  "render_deploy": "dep-dbngsqh5efls73babe2g",
   "testflight": {
     "build": 7701,
     "run": 42360257959,
@@ -67,9 +67,20 @@
     "bridge_authenticated_empty_payload_upstream_http": 400,
     "bridge_set_cookie": false,
     "real_generation_verified": false,
-    "render_settings_merge": "AUTO_REVIEW_REJECTED_CREDENTIAL_EGRESS_EXPLICIT_APPROVAL_REQUIRED",
-    "production_env_changed": false,
-    "deploy_started": false,
-    "next_action": "Obtain explicit approval to register the dedicated model API key with Render and apply the existing Runpod endpoint settings; then deploy the current API commit and verify v3 through the ordinary path."
+    "render_settings_merge": "APPLIED_AFTER_EXPLICIT_MASH_APPROVAL",
+    "production_env_changed": true,
+    "deploy_started": true,
+    "next_action": "Observe ordinary authenticated iOS retry after nullable metadata fix; correct the exact remaining failure if present and verify v3 save/display.",
+    "deploy_live": true,
+    "initial_live_commit": "d63647a816a9f4024aee16bade7735f1b9700e9c",
+    "initial_deploy": "dep-dbnglopsrm7s739cqcsg",
+    "initial_device_http_statuses": [
+      422,
+      422
+    ],
+    "new_v3_saved": false,
+    "nullable_metadata_fix_commit": "ad9794ca3c3e5d5903a8d170a74add0e6962530d",
+    "nullable_metadata_fix_tests": 37,
+    "private_safe_code_location_diagnostic": true
   }
 }

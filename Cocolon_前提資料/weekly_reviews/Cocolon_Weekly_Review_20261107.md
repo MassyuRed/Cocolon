@@ -1317,3 +1317,14 @@ Supabaseは本文/個人IDを取得せず件数/文字数/重複数のみ集計�
 新学習を追加せず、既存Pod f1lle4xwq3wjln・固定base851bf6e・保存120更新ecbdd0d1/config4389a598を既存tracked serverの--analysis-serviceで起動。offline環境不足の初回失敗を修正し、モデルID cocolon-qwen3.5-4b-analysis-semantic-120u、出力4096・文脈16384・一生成210秒で常時提供を開始した。local healthz200/status ok、専用8888 bridgeへ既存model bearerで空JSONを送り、upstream400/request_invalid・Set-Cookieなしを実確認。これは接続口とserverへの到達検査で、生成・保存・実機の成功ではない。Pod reset/再借換え/Jupyter再起動は行っていない。
 
 Render srv-d4ppfpm3jp1c73952bj0の環境キーのみを確認し、他設定を保持する5項目merge（development、self_hosted.semantic.v1、既存Runpod専用endpoint、model ID、専用model API鍵）を試みたが、自動承認審査が『鍵をRenderへ渡し外部model endpointを設定することへの明示承認不足』として拒否した。環境値は未変更、deployも追加0。browserや別経路での迂回は行わない。次の一操作は、この専用API鍵をRenderへ登録し既存Runpodへの通常接続設定を反映することへの明示承認。その後、d63647a8へ当該環境を適用してRender→4B→CMEE→v3保存/取得を実確認し、7701で図・文章・詳細を確認する。内容品質合格を新しい先行Gateとして戻さない。
+
+
+### 同日続行：専用接続の明示承認・本番設定反映と実機422の修復
+
+Mashは『専用の分析API鍵をRenderのmashos-apiへ登録し、現在のRunpod4Bへ接続する設定反映』を明示承認した。同じ5環境設定をMCPでmergeし成功。副作用として旧main2d2f配置dep-dbngkh3l550s73f5hr7gが開始されたが、55秒でcancel・Liveへ未移行を確認し、d63647a8を明示指定し直した。dep-dbnglopsrm7s739cqcsgは20:27:49 JST Live、実healthz200/status ok、通常設定キー5項目の存在を確認。鍵値はログ/画面/資料へ記録せず、既存の他環境は置換していない。
+
+通常iOSの本人sessionによるGET /self-structure/latest?ensure=trueが実到達した。73.429秒・39.992秒後に各422となり、保存済み新v3は0。status/homeの200と新分析成功を混同しない。rootが7701での開き直しを案内し、既存認証を迂回するtoken生成・user_id代入は行っていない。
+
+独立read-only検査が、source admissionでは受理済みのcategory=NULL/emotion_details=NULL・文字列detailsを、新context表示がlist/dict前提で読み、生成後TypeError/AttributeErrorになる不具合を再現。本文/個人IDなし集計では全1697入力中774カテゴリNULL、87件の記録群は67カテゴリNULLだった（今回の各422の発生位置自体は旧ログでは未確定）。API ad9794caでcontext表示コピーだけを既存normalize_emlis_current_inputへ渡し、元material/messages/hash/原根拠を維持。強度欠損へmediumを補わない。カテゴリなし時の先頭コロンも除いた。EngineとAPIの拒否には関数名/行番号と固定例外型だけをログし、source/model/str(exc)/localsは記録しない。
+
+関連37 PASS／FAIL・SKIP0・1.25秒（既存Pydantic警告1）。NULLカテゴリ/NULL details/文字列details/全NULLの4回帰、原material不変、private markerがログに出ない検査を含む。独立reviewはblockerなし。4pathをGitHub保存/全bytes読戻し一致。dep-dbngsqh5efls73babe2gが20:42:55 JST Live。本人へ再取得を案内し、新図・文章・詳細へ進む実応答を確認中。今回の修正は既存context表示と最小diagnosticで、STRUCTURE_MAP_DELTA_NONE。新モデル学習・新署名build・新DDL・本人入力書換え・認証迂回は0。内容品質を実機確認の前提へ戻さない。
