@@ -1177,13 +1177,31 @@ factual最終20suiteはCI同一pinで407 PASS・738 subtests PASS、FAIL／ERROR
 
 API b127のCI前段で2,818 PASS／12,236 subtests PASSを確認した後、古いcurrent owner fixture1件の不一致で停止した。これを期待緩和で通さず、GPの既存8関数の限定変更と証拠payloadを照合し、current fixtureを再生成した。元selectorはCI同PYTHONPATH／plugin条件で1 PASS／194 deselected／skip0（22.12秒）。後段407件がその失敗runでは実行されなかった事実は保持する。
 
-afaeの通しCI42341029712は前段2818 PASS／12236 subtests PASS（578.18秒）、共有owner1 PASS／194 deselected（32.31秒）、累積335 PASS／2subtests PASS（215.32秒）、月次SQL201原本／15月参照まで成功。最後の407は53％で打切り、完走成功へ換算しない。GitHub job Annotationsで「The job has exceeded the maximum execution time of 15m0s」を直接確認した。担当やrootのcancel操作0。既存workflowの時間枠だけを15→25分にし、238f0d63の通常pushで同じ全検査を再実行中（run42342266869／job128312337842、14:19:57 JST開始）。追加署名iOS build0。
+afaeの通しCI42341029712は前段2818 PASS／12236 subtests PASS（578.18秒）、共有owner1 PASS／194 deselected（32.31秒）、累積335 PASS／2subtests PASS（215.32秒）、月次SQL201原本／15月参照まで成功。最後の407は53％で打切り、完走成功へ換算しない。GitHub job Annotationsで「The job has exceeded the maximum execution time of 15m0s」を直接確認した。担当やrootのcancel操作0。既存workflowの時間枠だけを15→25分にし、238f0d63の通常pushで同じ全検査を再実行した（run42342266869／job128312337842、14:19:57 JST開始）。追加署名iOS build0。
+
+25分版run42342266869は**14:30:13 JSTに全工程success**。source238f0d63／attempt1、前段2818 PASS／12236 subtests PASS（380.27秒）、共有owner1 PASS／194意図的deselected（22.52秒）、累積335 PASS／2subtests PASS（146.65秒）、月次SQL201原本／15月参照、最終407 PASS／738subtests PASS（39.55秒）。FAIL／ERROR／SKIPによる停止0、後処理もsuccess。各段は重複するので合算しない。[実run](https://github.com/MassyuRed/mashos-api/actions/runs/42342266869)。Piece30c7のrun42340598228も14:00:12 JST全step success、新独立接続9 PASS・材料等108 PASS・B12 native46 PASS／各skip0。238fまでの後続変更はcurrent fixtureとCIのみでPiece製品source差分0。
 
 #### 実DBと一回のiOS配布
 
 Supabase oeahmpmigszggnkyiivqへ既存SQL原文を順適用した。実登録版は20261107045211_piece_legacy_metrics_atomic、次に20261107045213_piece_legacy_reaction_alias。2関数のprosrcはGitHub原文と完全一致、SECURITY INVOKER／search_path=pg_catalog、PUBLIC／anon／authenticated実行false、service_role実行true。既存4物理tableのRLS=true・既存service CRUDを維持。migrationは14→16、security advisoryは前後7件で新規0。個人row取得・DML・反応の一括移行・新table・公開機能有効化0。
 
 iOSは固定RN56e65b1a／run42337152593／#76 attempt1を一回だけ実行。13:09:10 JST開始、13:26:16 JSTに全19step success、署名Archive・写真Usage/Add目的文検査・IPA・TestFlight Uploadまで成功した。Appleで実1.0（7601）を照合し、前版から変えていないOS提供暗号化の情報を保存してReady to Submitへ遷移。既存内部グループ「Emlis テスト版配布」のBuildsに7601 Testingを確認。新テスター・外部グループ・App Store公開0、追加署名build／再dispatch0。今回修復全体のMashによる実機受入れとは区別する。
+
+#### 修正版APIの指定配置・Liveと実HTTP確認
+
+API **238f0d6332aca8da48ec6d9433373df9a438005b**を一回だけ指定配置。Render `dep-dbnbf9lg1s2s73c81sm0` は14:31:18 JST開始、**14:32:28 JST Live**。MCP deployの全SHA／ID／statusとDashboardのSource／Deploy succeeded | Liveを照合した。main連携・autoDeploy OFF・Free1instance・既存起動factoryは前後一致、変更0。研究4B・新receipt readinessは有効化しない。
+
+14:33:40〜14:33:46 JSTの実HTTP8件は全て期待どおり。healthz200/status ok、bootstrap200とcompiled ios.v2＋palette3 headerのbootstrap200。両方でprivate5=true／public3=falseの全8flagを実値照合した。認証なしPiece history／quota／preview POST空JSON、self-structure latest?ensure=false&force=false、analysis reports readyは全401。新本人入力・生成・保存・実課金・端末内容の成功とは区別する。配置後のapp error log取得は0件（取得時間範囲内）。
+
+起動時の既存課金診断ios_ready=false／android_ready=false、API側EXPO_PUBLIC_TERMS_URL／PRIVACY_URL未設定warningは残る。設定・実Store・本人の法的導線・販売受入れを今回完了としない。実ログのpackage版もCI固定pinと同一とはせず、sourceと稼働／認証境界の確認を分ける。新環境変数・価格／SKU／権利・実販売設定の変更0。
+
+#### 旧Emlis失敗287件の追加照合
+
+全287 unique nodeidとtraceを照合した。Q1 3／Q3 260／generic24。停止箇所の排他的分類は、本文・文法の固定文字列期待225、旧語句への変異／旧private parser前提47、Move・選択位置・状態・private helper前提10、test double属性／引数不足3、低層inverse例外の返却境界2。これは品質合格数ではない。47には現本文へ変異が届いていない試験もあり、全負例拒否の証明へ使わない。
+
+未判定だったgeneric0058は、action欄の一週間の記録・比較計画が全文と必須5核／2関係／全選択核の根拠に保持され、未来の意図を実行済みにしないことを確認。0066は嬉しさ・留保付き安心・認めて伝え直した行動の3核を3Moveで各節1回保持し、二欄／カテゴリ／全3感情強度の原source一致を確認した。全本文読了と独立したJSON機械比較で、当該2例の主体／否定／時点反転、欠落／重複の確定なし。未使用の旧batchloader importだけを診断process内で無効化（呼出時raise・呼出0）し、製品source・期待・fixtureは編集していない。
+
+低層inverse2例外は、実HTTP→実EmlisThreadService／Engineのinverse呼出へ各例外を一度注入し、合成local PGliteの実migration／RPCで確認。両方HTTP200のMEANING_UPDATED_BODY_UNAVAILABLE、回答・意味保存true、current_observation=None、誤った新OBSERVATION保存0・旧本文current復活0・GET非生成再読・例外私文露出0。低層のresult返却形差2件は残し、通常HTTPでの誤本文受理／保存破損とはしない。今回の9カテゴリ／各強度／二欄欠落による追加確定製品バグは、この確認範囲で0。既存の条件付き旧有限callerと別natural_reply.v1の品質を混同しない。
 
 #### 未解消・未確認として残すこと
 
