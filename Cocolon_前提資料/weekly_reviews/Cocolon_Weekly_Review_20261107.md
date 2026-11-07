@@ -4,7 +4,7 @@
 対象週：**2026年11月7日〜11月14日**  
 今回の実績報告対象：**10/31の第9回報告会後〜11/7の確認時点**  
 記録担当：華恋  
-会議状態：**終了。§1〜10の全議題報告後、Mashが報告会終了と作業再開を明示（§11）。報告会後の大ボタン・Piece画像設定と、ビルド前準備の結果は§12。完成度61.25％と具体的な未決は継承し、今回はbuild・本番反映を行わない。**
+会議状態：**終了。§1〜10の全議題報告後、Mashが報告会終了と作業再開を明示（§11）。報告会後の大ボタン・Piece画像設定とビルド前準備は§12。後続の実DB／API反映と一回の統合iOS build進行は§13。Archive・写真目的文検査・IPA・Uploadは11:28:26 JSTにsuccess。Apple処理と既存内部グループの7501 Testingを確認。本人実機は未確認。完成度61.25％と具体的未決を継承。**
 
 [前回・第9回議事録](Cocolon_Weekly_Review_20261031.md)の決定と実行履歴を継承する。11/7〜11/14は今回の対象週であり、未来の作業を実行済みとはしない。
 
@@ -931,3 +931,52 @@ Mashは華恋の「同じ画面を見ながら一緒に考える時間を増や�
 - 実本番PostgREST・native描画・署名build・TestFlight送信・実機受入れは未実施。既知の旧metrics／legacy canvasの失敗を今回修復したとはしない。
 
 **STRUCTURE_MAP_DELTA_PRESENT：既存Piece画像設定の権利・対応交渉・owner互換とUIの限定拡張。** 商品本文・共有意味型・source・保存枠・公開範囲・研究モデル採用は変更しない。今回の成果はsource／SQL／反映手順の準備で、実DB適用・Render変更・GPU・build・配布・実公開は0。
+
+<a id="piece-ui-live-and-ios-build-20261107"></a>
+## 13. 準備後の実反映 — 配色DB・API Live、統合iOS7501の内部配布完了
+
+§12の「準備のみ」はその記録時点の範囲として保持し、後続の実行結果を本節へ分ける。大ボタン・Piece設定、平日のPiece本文／復旧と通常finite分析の限定修正を、DB・API・対応アプリの版でそろえる。研究prompt／重みの通常採用や、本人の分析再生成は今回の実行に含めない。
+
+### 13.1 配色DBとAPI配置
+
+| 層 | 実行・確認したこと | 未完・維持する境界 |
+|---|---|---|
+| 配色DB | migration actual `20261107020543_piece_v2_expand_visual_palette` を適用。CHECKを全12色／Free初期2色へ更新し、validatedを確認 | DML／RLS変更0。既存本文・recipe／hash・保存物を書換えない |
+| API | commit `5065730ead6fc97a47a03858d0707bbf3e1c568c` を指定配置。Render `dep-dbn8h2jl550s73efmcng` は2026-11-07 **11:12:02 JST Live** | main連携・autoDeploy OFFを維持。旧clientのcapabilities・履歴互換、Premium本文形式選択・保存枠・価格を維持 |
+| 配置後 | health／bootstrap200、Piece private5true／public3false、11:12:52〜11:13:05 JSTの本人境界7smokeは期待どおり | 通常の実Authによる作成・保存・画像／Share・本人端末成功とは区別 |
+| export receipt | §12の未適用SQL／API readiness条件は引き継ぐ | 今回、新receiptの適用／有効化済みとは扱わない |
+
+### 13.2 一回の統合iOSビルド・7501内部配布 — success
+
+[run42328190568](https://github.com/MassyuRed/Cocolon/actions/runs/42328190568)、#75・attempt1、固定head `e0ec6d6a9330f9e493308be85debbb1b062d80f6`。2026-11-07 **11:14:01 JST**に開始。**11:28:26 JSTにcompleted／success**。job `128268319338` の全19step successを確認した。既存採番式は75×100＋attempt1で1.0（7501）。
+
+| 工程 | この記録時点の結果 |
+|---|---|
+| 署名Archive | success |
+| 実Archiveの写真Usage／Add目的文検査 | success |
+| IPA export | success |
+| TestFlight Upload | success |
+| Apple処理・内部配布 | 1.0（7501）実番号を照合、暗号化情報保存後に既存内部グループ「Emlis テスト版配布」でTesting |
+| 本人端末導入、大ボタン・Piece設定・通常操作の確認 | pending |
+
+固定sourceのrunはこの1件で、追加dispatch／再実行0。run／job終端と全stepを照合した。Apple処理・配布・本人確認は別に記録し、Upload成功へまとめない。 Apple側でも1.0（7501）の実番号を照合。Missing Complianceに対し、前版から変更のないOS提供の通信暗号化のみという実装と対応する情報を保存し、dialog消失・Ready to Submitへの遷移を確認した。続けて既存内部グループ「Emlis テスト版配布」のBuildsで**1.0（7501）Testing**を確認した。新テスター追加・外部グループ配布・App Store公開は0。
+
+### 13.3 分析の反映範囲と、実機で見るまでの残条件
+
+- 通常finite compilerの限定修正は今回のAPI候補へ含まれ、API配置は成立した。研究4B `selected_material.v13`、生成構造制限・全量plannerは通常未採用のまま。build／API更新だけで研究結果まで採用されたとは説明しない。
+- RN累積マップ画面は7401 built sourceと同じ。既存source guardが一致するcurrentはAPI側で再利用されるため、API更新後も保存済み本文を自動上書きしない。
+- RNの「再取得」は `ensure=true` のみ。最新compilerでcurrentを明示再解析する必要がある場合は、まず有効保存物と実効modeを確認し、必要な本人認証の既存latest APIで `ensure=true&force=true` を明示実行する。**read_onlyではforce=trueでも新規生成／保存はしない。** Renderの対象項目だけを読み、実効設定 `COCOLON_ANALYSIS_OBSERVED_MODE=development` を確認。model selector項目の登録・linked environment groupはなく、既存有限compilerを継続。設定変更・本人の原入力取得・再解析は未実行。
+- 月次は当時版を維持し、未保存過去月を再生成して当時版へ置き換えない。累積table／source_profile列／sourceとcommit RPCの存在をmetadataで確認済み、実適用履歴は `20261101090034 cumulative_watashi_map`。今回新しい分析SQLはない。
+- 旧テスト入力は全保存期間の原入力として対象になり得るが、本人・元record互換・解析成否・保存状態による。件数だけで表示を保証しない。通常の分析を見てから改善を判断し、情報量を減らさない方針は継承。
+
+### 13.4 現時点の範囲
+
+実DB配色CHECKとAPI指定配置は実施。対応RNは一回の統合buildで署名Archive・写真目的文検査・IPA・TestFlight送信まで成功。Apple処理後の既存内部グループ7501 Testingまで確認。本人端末の導入・大ボタン・Piece操作・分析内容の確認は未実施。研究モデル採用・新モデル生成／学習・GPU・本人の分析再解析・実公開は0。既存の公開範囲・保存枠・価格・RLS・本人の入力／保存物を変更したという記録にはしない。完成度61.25％は再採点しない。**STRUCTURE_MAP_DELTA_PRESENT：既存Piece画像設定・権利とowner互換の配置。分析研究候補の通常採用は含まない。**
+
+### 13.5 Mashの実機で次に確認する内容
+
+- TestFlightのEmlisを1.0（7501）へ更新し、検索・Piece保存等の大ボタンが四隅とも均等なカプセルかを見る。
+- 新規Pieceの画像設定でFree初期2色が選べ、他10色に鍵、比率／ロゴが無効表示となり、タップ時に加入者限定の案内が出るかを見る。Plus／Premiumは12色・4:5／9:16・ロゴ有無の変更→保存→同設定の再表示→写真保存を確認する。
+- 分析は既存本人入力を使って現在の実画面と内容を先に確認する。保存current再利用と「再取得」のensure-onlyを区別し、必要時だけ本人currentの明示再解析へ進む。本人認証なしの再解析・月次当時版の上書きは行わない。情報量削減や部分詳細UIの組み直しを先に決定しない。
+
+これらは本人実機の確認待ちで、配布成功から合格へ換算しない。実行したAPI配置の記録はmashos-api `3195a024832b82f240cfe4d488d29fa005676416` の既存deployment文書へ保存し、全bytes／親／変更path／PR headを読戻し照合した。Live APIは製品source5065730eのまま、資料commitを再配置しない。

@@ -780,3 +780,12 @@ Mashの実画面3枚でprimaryの右下だけ小さい角丸を確認。CocolonB
 既存RN10入口の3群は374＋371＋354＝1099 PASS／FAIL・SKIP0、変更JS9fileのTypeScript5.2.2 parseとdiff検査成功。共通style生成54条件と独立source reviewも確認。実機再描画・読み上げ・native image操作は未確認。初回の旧ラベル期待6失敗を新表示に合わせて解消し、権利・保存・中断復旧の検査を維持した。
 
 API 5065730e／配色SQL／新RN header3を準備。DB→API→一回のまとめbuildが必要で、今回はbuild・TestFlight送信・本番反映0。反映範囲・分析保存物・未採用研究候補・実行順は [第10回§12](../../weekly_reviews/Cocolon_Weekly_Review_20261107.md#piece-ui-prebuild-preparation-20261107)。
+
+<a id="ui-piece-live-ios-build-20261107"></a>
+## 30. 11/7 大ボタン・Piece設定の統合iOS — ビルド・送信成功
+
+§29の準備後、配色migration actual `20261107020543_piece_v2_expand_visual_palette` を適用。全12色／Free初期2色のCHECK validated、DML／RLS変更0。API `5065730ead6fc97a47a03858d0707bbf3e1c568c` はRender `dep-dbn8h2jl550s73efmcng` で **11:12:02 JST Live**、health／bootstrap200・private5ON／public3OFF・本人境界7smoke期待どおりを確認した。
+
+大ボタンの均等カプセルとPiece画像設定を含むRN source `e0ec6d6a9330f9e493308be85debbb1b062d80f6` を固定し、[統合iOS #75](https://github.com/MassyuRed/Cocolon/actions/runs/42328190568)を一回開始。run `42328190568`、attempt1、開始2026-11-07 **11:14:01 JST**。**11:28:26 JSTに全19step successで完了**。job128268319338、署名Archive・実Archive写真目的文検査・IPA export・TestFlight Uploadは全てsuccess。run75／attempt1と既存採番式から1.0（7501）。Apple側でも実版1.0（7501）を照合し、従来と同じOS提供の暗号化情報を保存。既存内部グループ「Emlis テスト版配布」で**7501 Testing**を確認した。本人端末導入／実表示は未確認。
+
+配色DB・APIの実反映と、nativeアプリのbuild・送信・配布・実機を分ける。完了前の工程を成功へ換算せず、全画面／ロック操作／保存・再読・写真操作の確認は候補完成後に行う。研究4Bの採用、分析currentの明示再生成、生成mode変更、GPU・本人入力操作は行っていない。分析は同source current再利用・read_onlyではforceでも新規生成しない制約を保持し、実効設定developmentを読取確認済み（設定変更0）。詳細は[第10回§13](../../weekly_reviews/Cocolon_Weekly_Review_20261107.md#piece-ui-live-and-ios-build-20261107)。
