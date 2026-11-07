@@ -41,5 +41,20 @@
     "commit": "27cc48b43acbccf052334ec555b3f4ebc292f311",
     "upload": "success",
     "availability": "unverified_apple_session_expired"
+  },
+  "retained_weights_archive": {
+    "file_name": "Cocolon_Analysis_Semantic_Map_Training_20261107.zip",
+    "version": 1,
+    "sha256": "a7081da470d85364497f924199b0e416031db98d21e9aa0f08a914864392478a",
+    "bytes": 42734454,
+    "members": 7,
+    "effective_updates": [
+      24,
+      80,
+      120
+    ],
+    "weights_and_config_verified": true,
+    "optimizer_rng_included": false,
+    "source_and_real_results_commit": "44f306246d015cca77e348ef712f6258ca35d5ff"
   }
 }
