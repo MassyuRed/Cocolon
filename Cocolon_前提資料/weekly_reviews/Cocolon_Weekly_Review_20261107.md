@@ -1203,6 +1203,10 @@ API **238f0d6332aca8da48ec6d9433373df9a438005b**を一回だけ指定配置。Re
 
 低層inverse2例外は、実HTTP→実EmlisThreadService／Engineのinverse呼出へ各例外を一度注入し、合成local PGliteの実migration／RPCで確認。両方HTTP200のMEANING_UPDATED_BODY_UNAVAILABLE、回答・意味保存true、current_observation=None、誤った新OBSERVATION保存0・旧本文current復活0・GET非生成再読・例外私文露出0。低層のresult返却形差2件は残し、通常HTTPでの誤本文受理／保存破損とはしない。今回の9カテゴリ／各強度／二欄欠落による追加確定製品バグは、この確認範囲で0。既存の条件付き旧有限callerと別natural_reply.v1の品質を混同しない。
 
+#### 最終公開内容の読戻し
+
+RN75db8c5c／API0c8d313cの公開treeと全working原bytesを照合した。RN5,314／API2,538、計7,852blobでmissing0／mismatch0、未反映のsource file0（git／依存cache／実行cacheを除く）。開始時7,817からの差分35blobを含む。公開commitの親／tree／path集合／PR headと全変更本文も別に読戻している。これは原本・所在と保存内容の一致であり、全ファイルの意味読了・全過去修正の妥当性・一般品質・本人受入れの証明ではない。
+
 #### 未解消・未確認として残すこと
 
 - 全7,817blobの一致と、上記の各機能読取・実試験は、全ファイルの意味／全過去commit／全仕様を完全に把握した証拠ではない。未読・未確定範囲を残し、全監査完了・全修復完了とは主張しない。
