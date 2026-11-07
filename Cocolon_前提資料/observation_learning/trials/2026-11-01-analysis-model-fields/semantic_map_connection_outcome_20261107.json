@@ -1,0 +1,153 @@
+{
+  "status": "ORDINARY_ANALYSIS_ENABLED_FOR_DEVICE_REVIEW_NOT_QUALITY_ACCEPTED",
+  "base_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "weights_sha256": "ecbdd0d113cfcdc38a17be4b17c708678c01c5071ae86c8a30ca9a5de5900495",
+  "effective_updates": 120,
+  "optimizer_rng_exact_resume": false,
+  "nonthinking120": {
+    "real_calls": 5,
+    "complete": 5,
+    "cmee_format_pass": 3,
+    "meaning_accepted": 0
+  },
+  "thinking_unbounded": {
+    "real_calls": 1,
+    "seconds": 210.044,
+    "finish": "length",
+    "final_answer_present": false
+  },
+  "thinking_budget512": {
+    "real_calls": 3,
+    "complete": 3,
+    "cmee_format_pass": 1,
+    "limited_meaning_candidate": [
+      "H04_garden"
+    ],
+    "ordinary_quality_accepted": false
+  },
+  "material_remaining": [
+    "source-faithful meanings without invented facts or wish/actual reversals",
+    "entire-history processing beyond the current single-call token/body budgets",
+    "accepted v3 save/read and user-device display; current model-provider error response"
+  ],
+  "production_model_environment_changed": true,
+  "gpu_reasoning_text_exported": false,
+  "api_core_commit": "1cd4ada6c076cd72f3710a8412f7dabce855e09c",
+  "api_live_commit": "4ba011c6a72b56cbeb7505a3a6ee7c9f849d7467",
+  "render_deploy": "dep-dbnh12lg1s2s73cma8o0",
+  "testflight": {
+    "build": 7701,
+    "run": 42360257959,
+    "commit": "27cc48b43acbccf052334ec555b3f4ebc292f311",
+    "upload": "success",
+    "availability": "unverified_apple_session_expired"
+  },
+  "retained_weights_archive": {
+    "file_name": "Cocolon_Analysis_Semantic_Map_Training_20261107.zip",
+    "version": 1,
+    "sha256": "a7081da470d85364497f924199b0e416031db98d21e9aa0f08a914864392478a",
+    "bytes": 42734454,
+    "members": 7,
+    "effective_updates": [
+      24,
+      80,
+      120
+    ],
+    "weights_and_config_verified": true,
+    "optimizer_rng_included": false,
+    "source_and_real_results_commit": "44f306246d015cca77e348ef712f6258ca35d5ff"
+  },
+  "device_review_activation": {
+    "priority": "device graph/prose/detail review before completing all model-quality changes",
+    "rn_build_ready": 7701,
+    "new_build_required_for_v3": false,
+    "gpu_service": "RUNNING",
+    "model": "cocolon-qwen3.5-4b-analysis-semantic-120u",
+    "local_health_http": 200,
+    "bridge_authenticated_empty_payload_upstream_http": 400,
+    "bridge_set_cookie": false,
+    "real_generation_verified": true,
+    "render_settings_merge": "APPLIED_AFTER_EXPLICIT_MASH_APPROVAL",
+    "production_env_changed": true,
+    "deploy_started": true,
+    "next_action": "Await normal authenticated 7701 refresh; confirm v3 commit/read and human device graph/prose/detail. No new build, no model-quality gate.",
+    "deploy_live": true,
+    "initial_live_commit": "d63647a816a9f4024aee16bade7735f1b9700e9c",
+    "initial_deploy": "dep-dbnglopsrm7s739cqcsg",
+    "initial_device_http_statuses": [
+      422,
+      422
+    ],
+    "new_v3_saved": false,
+    "nullable_metadata_fix_commit": "ad9794ca3c3e5d5903a8d170a74add0e6962530d",
+    "nullable_metadata_fix_tests": 37,
+    "private_safe_code_location_diagnostic": true,
+    "model_response_received_by_cmee": true,
+    "post_metadata_retry_http": 422,
+    "post_metadata_retry_seconds": 126.21,
+    "post_metadata_retry_rejection": "CMEE JSON parsing",
+    "json_fence_fix_commit": "4ba011c6a72b56cbeb7505a3a6ee7c9f849d7467",
+    "json_fence_fix_tests": 44,
+    "json_fence_payload_unchanged": true,
+    "latest_device_http": 503,
+    "latest_device_seconds": 50.101,
+    "synthetic_provider_probe": "Unicode/EOS fixed full T01: HTTP200/175.505s/stop/4486Japanese chars; unchanged CMEE admitted watashi.map.v3",
+    "provider_restart": {
+      "old_pid": 17275,
+      "signal": "TERM",
+      "port_released": true,
+      "same_saved_weights": true,
+      "jupyter_or_pod_restarted": false,
+      "local_health_http": 200,
+      "cpu_threads": 1
+    },
+    "real_generation_scope": "Normal device model response reached CMEE; before constraints synthetic T01 HTTP200/stop; no v3 save yet",
+    "latest_device_reason": "Old constrained provider interrupted during narrow fix restart; not a result of the new free-text fix",
+    "post_fence_evidence_rejection": {
+      "at_utc": "2026-11-07T12:02:20Z",
+      "http": 422,
+      "seconds": 89.336,
+      "stage": "_semantic_map_evidence:2334"
+    },
+    "constrained_timeout": {
+      "at_utc": "2026-11-07T12:33:38Z",
+      "http": 503,
+      "seconds": 215.681
+    },
+    "gpu_generation_source_commit": "ccab8cf2794353a7f4d0b68bb075501f15895096",
+    "generation_constraint_tests": {
+      "passed": 75,
+      "failed": 0,
+      "skipped": 0
+    },
+    "unicode_failure": {
+      "synthetic_bounded_tokens": 128,
+      "seconds": 8.884,
+      "premature_parser_completion_after_japanese": true,
+      "repeated_im_end_count": 107,
+      "tokenizer_eos_id": 248046,
+      "independent_fixed_source_reproduced": true
+    },
+    "unicode_fix": {
+      "parser_alphabet_config_before_context": true,
+      "generation_and_finish_eos_same_tokenizer": true,
+      "source_and_evidence_unchanged": true
+    },
+    "synthetic_runtime_validation": {
+      "source": "T01_manual10",
+      "synthetic_only": true,
+      "seconds": 175.505,
+      "http": 200,
+      "finish": "stop",
+      "characters": 4486,
+      "raw_sha256": "52900ae2bf821f90bb5d1a680aab13621aa76944fd1695fe48d438ae5fb9c843",
+      "cmee_admitted": true,
+      "nodes": 10,
+      "edges": 3,
+      "prose_characters": 1964,
+      "meaning_quality_accepted": false,
+      "device_saved": false
+    },
+    "device_refresh_instructions_issued": true
+  }
+}

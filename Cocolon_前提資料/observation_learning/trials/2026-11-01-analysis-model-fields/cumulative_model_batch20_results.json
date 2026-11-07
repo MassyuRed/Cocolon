@@ -1,0 +1,239 @@
+{
+  "schema_version": "analysis_model_batch20_read_review.v1",
+  "status": "ALL_THREE_STOP_RESPONSES_READ_REJECTED_NO_RETRY",
+  "smoke": {
+    "adapter_config_sha256": "006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9",
+    "adapter_unchanged": true,
+    "adapter_weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59",
+    "admission_rejections": 0,
+    "all_planned_children_generated": false,
+    "all_planned_children_observed": true,
+    "all_records_sent": 0,
+    "api_calls": 0,
+    "api_commit": "fc7563b98d5dfa5b8df7815e9a8b89f334b6719b",
+    "batch_record_counts": [
+      7,
+      7,
+      6
+    ],
+    "child_exit": 0,
+    "child_results": [
+      {
+        "finish_reason": "stop",
+        "index": 1,
+        "model_request_started": false,
+        "phase": "ADMITTED",
+        "raw_file_sha256": "7ae2a41549339afd0e426f97335efa3655da552c65d404c3e3a122a41822116d",
+        "record_count": 7,
+        "seconds": 0.03785375878214836
+      },
+      {
+        "finish_reason": "stop",
+        "index": 2,
+        "model_request_started": false,
+        "phase": "ADMITTED",
+        "raw_file_sha256": "7ae2a41549339afd0e426f97335efa3655da552c65d404c3e3a122a41822116d",
+        "record_count": 7,
+        "seconds": 0.038283681496977806
+      },
+      {
+        "finish_reason": "stop",
+        "index": 3,
+        "model_request_started": false,
+        "phase": "ADMITTED",
+        "raw_file_sha256": "ee417e13cd3aa9b68f7b28a78a651876d4db98362ccd3757c610d44c51131912",
+        "record_count": 6,
+        "seconds": 0.03462319169193506
+      }
+    ],
+    "children": 3,
+    "composition_calls": 2,
+    "coverage": {
+      "excluded_count": 0,
+      "exclusion_reasons": {},
+      "mapped_count": 0,
+      "processed_count": 20,
+      "profile": "cumulative.v1",
+      "source_count": 20,
+      "stale_supplement_count": 0,
+      "unparsed_count": 20
+    },
+    "coverage_replay_match": true,
+    "database_access": 0,
+    "fixture": "test_analysis_cumulative.source_snapshot(20)",
+    "fixture_scope": "Complete independent synthetic fixture; unchanged fixture clock/guard, not a database snapshot.",
+    "fixture_sha256": "852261dca3a378d65cb92798bfacbae2f89909970d98f5de1235f4854b2690ea",
+    "fixture_unchanged": true,
+    "graph_text_projection_coverage_match": false,
+    "input_replay_match": true,
+    "interpretation": "Known unchanged synthetic20, private model-only offline composition. No normal ensure, saved-map reader, production/quality rate, 60-second batching or general output-fit claim.",
+    "max_processing_seconds": 240,
+    "max_request_bytes": 65536,
+    "mode": "smoke",
+    "model_calls_started": 0,
+    "model_context_tokens": 8192,
+    "model_loads": 0,
+    "model_loads_started": 0,
+    "new_generation": 0,
+    "new_model_calls_on_replay": 0,
+    "new_training": 0,
+    "normal_adoption": false,
+    "observed_map_present": false,
+    "per_child_seconds": 25,
+    "planner_context_tokens": 6400,
+    "prompt_tokens": [
+      4332,
+      4332,
+      4233
+    ],
+    "prompt_version": "selected_material.v7",
+    "replay_match": true,
+    "request_body_bytes": [
+      20137,
+      20137,
+      19740
+    ],
+    "reserved_new_tokens": 2048,
+    "runner_sha256": "3f6d7dcf17bb5a582086b11714c9e873cdd0d5dacb2a5f641cde9469920c0189",
+    "saved_maps": 0,
+    "schema_version": "analysis_cumulative_model_batch_live_aggregate.v1",
+    "seconds": 6.315036543644965,
+    "smoke_observed_map_author_verified": false,
+    "smoke_scope": "input replay and matching no-map outcome; observed map author not verified",
+    "source_count": 20,
+    "source_hashes_unchanged": true,
+    "status": "COMPLETE_INPUT_REPLAY_NO_OBSERVED_MAP",
+    "stop_count": 0,
+    "synthetic_records_exercised": 20,
+    "synthetic_responses": 3,
+    "synthetic_whole_input_oracle_match": true
+  },
+  "live": {
+    "adapter_config_sha256": "006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9",
+    "adapter_unchanged": true,
+    "adapter_weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59",
+    "admission_rejections": 3,
+    "all_planned_children_generated": true,
+    "all_planned_children_observed": true,
+    "all_records_sent": 20,
+    "api_calls": 0,
+    "api_commit": "fc7563b98d5dfa5b8df7815e9a8b89f334b6719b",
+    "batch_record_counts": [
+      7,
+      7,
+      6
+    ],
+    "child_exit": 1,
+    "child_results": [
+      {
+        "admission_error_type": "AnalysisSemanticError",
+        "finish_reason": "stop",
+        "index": 1,
+        "model_request_started": true,
+        "phase": "ADMISSION_REJECTED",
+        "raw_file_sha256": "4120951e6217fd47f1906ef40b478b9fa632c3602a0c8363319d196d7daae1a9",
+        "record_count": 7,
+        "seconds": 9.33878375031054
+      },
+      {
+        "admission_error_type": "AnalysisSemanticError",
+        "finish_reason": "stop",
+        "index": 2,
+        "model_request_started": true,
+        "phase": "ADMISSION_REJECTED",
+        "raw_file_sha256": "4120951e6217fd47f1906ef40b478b9fa632c3602a0c8363319d196d7daae1a9",
+        "record_count": 7,
+        "seconds": 8.697019671089947
+      },
+      {
+        "admission_error_type": "AnalysisSemanticError",
+        "finish_reason": "stop",
+        "index": 3,
+        "model_request_started": true,
+        "phase": "ADMISSION_REJECTED",
+        "raw_file_sha256": "4120951e6217fd47f1906ef40b478b9fa632c3602a0c8363319d196d7daae1a9",
+        "record_count": 6,
+        "seconds": 8.820522052235901
+      }
+    ],
+    "children": 3,
+    "composition_calls": 0,
+    "database_access": 0,
+    "error_type": "AssertionError",
+    "fixture": "test_analysis_cumulative.source_snapshot(20)",
+    "fixture_scope": "Complete independent synthetic fixture; unchanged fixture clock/guard, not a database snapshot.",
+    "fixture_sha256": "852261dca3a378d65cb92798bfacbae2f89909970d98f5de1235f4854b2690ea",
+    "interpretation": "Known unchanged synthetic20, private model-only offline composition. No normal ensure, saved-map reader, production/quality rate, 60-second batching or general output-fit claim.",
+    "max_processing_seconds": 240,
+    "max_request_bytes": 65536,
+    "mode": "gpu",
+    "model_calls_started": 3,
+    "model_context_tokens": 8192,
+    "model_loads": 1,
+    "model_loads_started": 1,
+    "new_generation": 3,
+    "new_training": 0,
+    "normal_adoption": false,
+    "observed_map_present": false,
+    "per_child_seconds": 25,
+    "planner_context_tokens": 6400,
+    "prompt_tokens": [
+      4332,
+      4332,
+      4233
+    ],
+    "prompt_version": "selected_material.v7",
+    "request_body_bytes": [
+      20137,
+      20137,
+      19740
+    ],
+    "reserved_new_tokens": 2048,
+    "runner_sha256": "3f6d7dcf17bb5a582086b11714c9e873cdd0d5dacb2a5f641cde9469920c0189",
+    "saved_maps": 0,
+    "schema_version": "analysis_cumulative_model_batch_live_aggregate.v1",
+    "seconds": 39.43996003828943,
+    "source_count": 20,
+    "source_hashes_unchanged": true,
+    "status": "FAILED_PARTIAL_NO_RETRY",
+    "stop_count": 3,
+    "synthetic_records_exercised": 0,
+    "synthetic_responses": 0
+  },
+  "private_archive": {
+    "library_file_id": "libfile_78de85117ab48191ba102c0c2f42ccec",
+    "version": 3,
+    "bytes": 15976405,
+    "sha256": "4f73726e043a55ef709b954b9758b89537b89244eda5320710654f4000a5b834"
+  },
+  "private_evidence_link": "https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal",
+  "runner_commit": "0d5f93289d9041b4bcb23c19080dc965b80435a0",
+  "read_review": {
+    "all_three_raw_same": true,
+    "raw_bytes": 515,
+    "raw_characters": 441,
+    "raw_sha256": "4120951e6217fd47f1906ef40b478b9fa632c3602a0c8363319d196d7daae1a9",
+    "returned_field_ordinals": [
+      [
+        1
+      ],
+      [
+        1
+      ],
+      [
+        1
+      ]
+    ],
+    "expected_field_counts": [
+      7,
+      7,
+      6
+    ],
+    "strict_rejection": "analysis_quoted_parent_units_packet_invalid",
+    "locally_retained": "First field has source-matching past action, its target and an ATTENTION wish. This does not establish full-record or all-field understanding.",
+    "partial_maps": 0,
+    "output_length_failure": false,
+    "normal_60_second_success": false,
+    "normal_adoption": false
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "status": "CPU_TOKENIZATION_VERIFIED_NO_MODEL_OR_GPU_CALL",
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "manifest_sha256": "a98ec8e2251fc0c7595e1f331ecbaf2dda5193e132ce1a9b8f3dc91d4d6fe3d3",
+  "rows": [
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "prompt_tokens": 2076,
+      "assistant_eos_tokens": 1374,
+      "full_tokens": 3450
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "prompt_tokens": 5030,
+      "assistant_eos_tokens": 2330,
+      "full_tokens": 7360
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "prompt_tokens": 2072,
+      "assistant_eos_tokens": 1374,
+      "full_tokens": 3446
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "prompt_tokens": 5045,
+      "assistant_eos_tokens": 2333,
+      "full_tokens": 7378
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "prompt_tokens": 2069,
+      "assistant_eos_tokens": 1364,
+      "full_tokens": 3433
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "prompt_tokens": 5028,
+      "assistant_eos_tokens": 2339,
+      "full_tokens": 7367
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "prompt_tokens": 2033,
+      "assistant_eos_tokens": 1645,
+      "full_tokens": 3678
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "prompt_tokens": 2028,
+      "assistant_eos_tokens": 1619,
+      "full_tokens": 3647
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "prompt_tokens": 2032,
+      "assistant_eos_tokens": 1658,
+      "full_tokens": 3690
+    }
+  ],
+  "tokenization_verified": true,
+  "token_counter_is_stub": false,
+  "training_updates": 0,
+  "model_calls": 0
+}

@@ -1,0 +1,55 @@
+{
+  "status": "CLOSED_DIAGNOSTIC_ONLY_NOT_ADOPTED",
+  "source_commit": "f6f1bb485dc73c11e6669062301893440502d248",
+  "adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "a08f36c4b7f29abc7d85564e876ff7b90ce7fe6aa641ffe1b25fb56c908809db",
+    "adapter_model.safetensors": "f4932d3a2bac1d8e78d0bf86579868e29546914512234d31556840eb28a85c19"
+  },
+  "training_updates": 0,
+  "model_loads": 1,
+  "model_calls": 4,
+  "processing_seconds": 120.66807183402125,
+  "process_cost_usd": 0.009385294475979432,
+  "cmee_cpu_seconds": 1.8458052210044116,
+  "eos": 2,
+  "strict_json": 1,
+  "conditional_meaning": 0,
+  "conditional_body": 0,
+  "gold_assisted": true,
+  "eligible_for_full_generation_credit": false,
+  "product_credit": 0,
+  "automatic_progression": false,
+  "frozen_inputs_and_adapter_unchanged": true,
+  "retry": false,
+  "cases": [
+    {
+      "probe_id": "FT-BOOK-AFTER-ANSWER--GOLD_MEANING",
+      "meaning": false,
+      "body": false,
+      "decision": "HOLD",
+      "reason": "model_v3_explanation_updates_not_bound"
+    },
+    {
+      "probe_id": "FT-BOOK-AFTER-ANSWER--GOLD_MEANING_AND_UPDATES",
+      "meaning": false,
+      "body": false,
+      "decision": "REJECT",
+      "reason": "semantic_receipt_not_validated"
+    },
+    {
+      "probe_id": "FT-SHOP-AFTER-ANSWER--GOLD_MEANING",
+      "meaning": false,
+      "body": false,
+      "decision": "REJECT",
+      "reason": "semantic_receipt_not_validated"
+    },
+    {
+      "probe_id": "FT-SHOP-AFTER-ANSWER--GOLD_MEANING_AND_UPDATES",
+      "meaning": false,
+      "body": false,
+      "decision": "REJECT",
+      "reason": "semantic_receipt_not_validated"
+    }
+  ]
+}

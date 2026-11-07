@@ -1,0 +1,1 @@
+python3.12 /workspace/cocolon_aligned19_pack_20261030/export_aligned19.py

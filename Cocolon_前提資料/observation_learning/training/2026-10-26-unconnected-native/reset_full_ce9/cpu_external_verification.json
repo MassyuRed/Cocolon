@@ -1,0 +1,16 @@
+{
+  "archive_bytes": 81036,
+  "archive_sha256": "0bb24002062261eba67a2acd4425e9aeb0dd17e781eb73e6ee32914d7ca1f03b",
+  "payloads": 15,
+  "members": 16,
+  "all_crc_hash_size_verified": true,
+  "source4_exact": true,
+  "cpu_seconds": 6.749000140000135,
+  "model_loads": 0,
+  "model_forwards": 0,
+  "training_updates": 0,
+  "generations": 0,
+  "sql_operations": 0,
+  "cuda_initialized": false,
+  "failed_cpu_preflight_preserved": true
+}

@@ -1,0 +1,42 @@
+{
+  "SOURCE_COMMIT": {
+    "sha256": "a64ba5cdf53adba6553920c5e07d17ababc2790e4c4d77502fcc7746585537bf",
+    "bytes": 41
+  },
+  "attempt.json": {
+    "sha256": "7f08da778d5df35110b464c54bdd0e31595646f9d6da1c8914735d1f4def35d2",
+    "bytes": 77
+  },
+  "correction_cmee.json": {
+    "sha256": "2f73daab2187dfa1883f818b352e15a55dff6dfc490e7ae7a980d6b15d98f6a3",
+    "bytes": 207708
+  },
+  "correction_messages.json": {
+    "sha256": "928a4e4fd924961bac1956a8f56c3b287548622d85001f89c47931477d0b3421",
+    "bytes": 17562
+  },
+  "correction_raw.jsonl": {
+    "sha256": "e010723bad0a6dc9468f3d972deae2f7b96bf5adc2d725c1efa02f10b15ba07e",
+    "bytes": 27631
+  },
+  "initial_cmee.json": {
+    "sha256": "896a2bad48b04f7cd6cfc8a4adc0a828b0daacc7dda9809ce7f00f71b2d619d3",
+    "bytes": 94347
+  },
+  "initial_messages.json": {
+    "sha256": "a59c8e4f5c0344f3e7ca66ddf912e25f32c08ffd5ea711bcc6195f9339f7edaf",
+    "bytes": 8143
+  },
+  "initial_raw.jsonl": {
+    "sha256": "d9408b97bb552f240fa117e6ef204927eb12cd22777558de23f922b309278c09",
+    "bytes": 17349
+  },
+  "run.json": {
+    "sha256": "f5e3199f77eec6c9a45be5d3730c72a922e65c4d56e8175f56ca5a0c21be92e8",
+    "bytes": 10231
+  },
+  "run_roundtrip.py": {
+    "sha256": "007233cdf80f3372c5417f949bc1997bb1be3f8308afc3d97a1ac6b0fc51b4ac",
+    "bytes": 8267
+  }
+}

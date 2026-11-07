@@ -1,0 +1,25 @@
+{
+  "status": "EARLY_ARCHIVE_EXTERNALLY_VERIFIED",
+  "archive_bytes": 3481783,
+  "archive_sha256": "6b3ff9bebf268bdde437b49aa8e48bd0d81bbd713fd3b96957ee36d738e83f3d",
+  "payload_count": 16,
+  "members": 17,
+  "archived_stage": "saved_before_reload",
+  "archived_seconds": 399.800995906,
+  "updates": 30,
+  "generations": 0,
+  "source_commit": "5b115939e2f05e47b0c3d8fef8ce54e9cf11068c",
+  "adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "53b3c707e17717d1ff0dfdfac68c3340604af34e9abce47c368869fb879bba29",
+    "adapter_model.safetensors": "483d74b7d6796398b06f80b486228bec86658e8bcdc3d03c71cb5006d3b75de9"
+  },
+  "all_manifest_members_verified": true,
+  "finite_f32_tensors": 32,
+  "base_weights_included": false,
+  "optimizer_rng_included": false,
+  "strict_optimizer_resume": false,
+  "library_preservation": "COMPLETE_VERSION_0",
+  "library_file_id": "libfile_00da515f0f7c8191a0886e28af4f923e",
+  "library_version": 0
+}

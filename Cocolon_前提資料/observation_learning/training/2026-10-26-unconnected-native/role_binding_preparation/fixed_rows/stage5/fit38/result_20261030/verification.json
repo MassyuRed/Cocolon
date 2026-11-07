@@ -1,0 +1,22 @@
+{
+  "status": "CPU_ORIGINALS_AND_SCHEDULE_VERIFIED_NOT_MODEL_IMPROVEMENT",
+  "archive_bytes": 198735,
+  "archive_members": 15,
+  "payloads": 14,
+  "archive_sha256": "f5dd08d65af99a24a437af3b77a315ec815fd725b2b799b378b585eb81df4c32",
+  "all_crc_bytes_sha": true,
+  "runtime_source_bytes_match_commit": true,
+  "same_encoded19_counts_cases": true,
+  "same_train19_bytes": true,
+  "same19_order_twice": true,
+  "planned_updates": 38,
+  "planned_teacher_forwards": 57,
+  "actual_model_loads": 0,
+  "actual_model_forwards": 0,
+  "actual_updates": 0,
+  "actual_generations": 0,
+  "actual_cmee_calls": 0,
+  "paid_run_approved": false,
+  "product_credit": 0,
+  "automatic_progression": false
+}

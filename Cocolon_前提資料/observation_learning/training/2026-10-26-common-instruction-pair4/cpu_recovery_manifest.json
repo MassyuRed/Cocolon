@@ -1,0 +1,26 @@
+{
+  "run_instruction_pair4.py": {
+    "bytes": 9767,
+    "sha256": "546c5f9e6e7ca97cc576445ae361a22ce8d3129d4c55fbf6e8ff5844555c9077"
+  },
+  "instruction_pair4_cases.jsonl": {
+    "bytes": 12642,
+    "sha256": "937eb2137f11542a0048f044eea057edfa3f90e8a4ea5aba3a40e91928dc04b0"
+  },
+  "instruction_pair4.plan.json": {
+    "bytes": 2916,
+    "sha256": "4f0e93744d0fe32f161318f70ad3fa36c7297d9e024360ec3c1a5e72cff253ba"
+  },
+  "common_instruction.txt": {
+    "bytes": 1772,
+    "sha256": "bf1fd0583f2d557264958bdd452c27ad1beb0bf21bafb0f8a308230bdd3c72bc"
+  },
+  "instruction_pair4_cpu_preflight.json": {
+    "bytes": 35196,
+    "sha256": "7ab280c6b52043a2e33a9eb02be94e68dbf641bf863eb01cb0a1615c3a009dba"
+  },
+  "cpu_launch.json": {
+    "bytes": 895,
+    "sha256": "64dca53b6aed71b631414adbfac2323b9d6c8df2d715709e03577ecdb0e9ac8a"
+  }
+}

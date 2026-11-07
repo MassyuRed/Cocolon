@@ -1,13 +1,16 @@
 import React, { useMemo, useState } from "react";
 import {
   Pressable,
+  ScrollView,
   StyleSheet,
   Text,
   useWindowDimensions,
   View,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useTheme } from "../theme/ThemeContext";
+import { makeUiTokens } from "./ui/uiTokens";
+import { applyTypographyTokens } from "./ui/applyTypographyTokens";
+import { useTheme } from "./theme/ThemeContext";
 
 const DEFAULT_DIM_OPACITY = 0.62;
 const DEFAULT_TARGET_PADDING = 8;
@@ -153,15 +156,24 @@ export default function TutorialOverlay({
   targetPadding = DEFAULT_TARGET_PADDING,
   targetRadius = DEFAULT_TARGET_RADIUS,
   dimOpacity = DEFAULT_DIM_OPACITY,
-  cardSideMargin = DEFAULT_CARD_SIDE_MARGIN,
+  cardSideMargin: requestedCardSideMargin = DEFAULT_CARD_SIDE_MARGIN,
   cardBottomMargin = DEFAULT_CARD_BOTTOM_MARGIN,
   cardPlacement = "bottom", // "bottom" | "top" | "auto"
   testID,
 }) {
-  const { colors } = useTheme();
+  const { colors, themeName } = useTheme();
+  const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
+  const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const insets = useSafeAreaInsets();
   const { width: screenWidth, height: screenHeight } = useWindowDimensions();
   const [cardHeight, setCardHeight] = useState(DEFAULT_CARD_FALLBACK_HEIGHT);
+  const cardSideMargin = Math.max(
+    Number.isFinite(Number(requestedCardSideMargin))
+      ? Math.max(0, Number(requestedCardSideMargin)) : DEFAULT_CARD_SIDE_MARGIN,
+    16 + Math.max(0, Number(insets.left) || 0),
+    16 + Math.max(0, Number(insets.right) || 0),
+    (screenWidth - 640) / 2
+  );
 
   const holeRect = useMemo(
     () =>
@@ -184,16 +196,15 @@ export default function TutorialOverlay({
     Math.max(0.1, Number(dimOpacity) || DEFAULT_DIM_OPACITY)
   )})`;
 
-  const highlightBorderColor =
-    colors?.GOLD_BUTTON_BORDER || colors?.TITLE_GOLD || "#D4AF37";
-  const cardBackgroundColor = colors?.FIELD_BG || colors?.PANEL_BG || "#FFFFFF";
-  const cardBorderColor = colors?.CARD_BORDER || "rgba(255,255,255,0.14)";
-  const titleColor = colors?.TITLE_GOLD || colors?.TEXT_ON_LIGHT || "#111827";
-  const bodyColor = colors?.TEXT_ON_LIGHT || "#111827";
-  const subtleColor = colors?.TEXT_SUBTLE || colors?.TEXT_ON_LIGHT || "#6B7280";
-  const buttonBackgroundColor = colors?.GOLD_BUTTON || colors?.TITLE_GOLD || "#A16207";
-  const buttonTextColor = colors?.ACCENT_TEXT || "#FFFFFF";
-  const stepPillBackground = colors?.PANEL_BG || "rgba(255,255,255,0.08)";
+  const highlightBorderColor = colors.TITLE_GOLD;
+  const cardBackgroundColor = colors.FIELD_BG;
+  const cardBorderColor = colors.CARD_BORDER;
+  const titleColor = colors.TEXT_ON_LIGHT;
+  const bodyColor = colors.TEXT_ON_LIGHT;
+  const subtleColor = colors.TEXT_SUBTLE;
+  const buttonBackgroundColor = colors.GOLD_BUTTON;
+  const buttonTextColor = colors.ACCENT_TEXT;
+  const stepPillBackground = colors.SURFACE_TONAL;
 
   const cardBottom = Math.max(insets.bottom, cardBottomMargin) + 8;
   const cardTopBase = Math.max(insets.top, 12) + 12;
@@ -319,6 +330,7 @@ export default function TutorialOverlay({
           {
             left: cardSideMargin,
             right: cardSideMargin,
+            maxHeight: Math.max(1, screenHeight - cardTopBase - cardBottom),
             backgroundColor: cardBackgroundColor,
             borderColor: cardBorderColor,
           },
@@ -331,6 +343,7 @@ export default function TutorialOverlay({
           }
         }}
       >
+        <ScrollView style={{ flexShrink: 1 }} showsVerticalScrollIndicator={false}>
         {typeof step === "number" && typeof totalSteps === "number" ? (
           <View
             style={[
@@ -341,7 +354,7 @@ export default function TutorialOverlay({
               },
             ]}
           >
-            <Text style={[styles.stepText, { color: subtleColor }]}>
+            <Text style={[styles.stepText, { color: colors.ON_SURFACE_TONAL }]}>
               Step {step} / {totalSteps}
             </Text>
           </View>
@@ -365,7 +378,7 @@ export default function TutorialOverlay({
               },
             ]}
           >
-            <Text style={[styles.actionHintText, { color: subtleColor }]}>
+            <Text style={[styles.actionHintText, { color: colors.ON_SURFACE_TONAL }]}>
               {actionHint || DEFAULT_ACTION_HINT}
             </Text>
           </View>
@@ -380,27 +393,31 @@ export default function TutorialOverlay({
         {effectiveShowPrimaryButton ? (
           <Pressable
             onPress={onNext}
+            accessibilityRole="button"
+            accessibilityState={{ disabled: !onNext || primaryDisabled }}
             disabled={!onNext || primaryDisabled}
             style={({ pressed }) => [
               styles.primaryButton,
               {
-                backgroundColor: buttonBackgroundColor,
-                borderColor: highlightBorderColor,
-                opacity: !onNext || primaryDisabled ? 0.5 : pressed ? 0.88 : 1,
+                backgroundColor: !onNext || primaryDisabled ? colors.FIELD_BG : buttonBackgroundColor,
+                borderColor: !onNext || primaryDisabled ? colors.CARD_BORDER : highlightBorderColor,
+                opacity: pressed && onNext && !primaryDisabled ? 0.88 : 1,
               },
             ]}
           >
-            <Text style={[styles.primaryButtonText, { color: buttonTextColor }]}>
+            <Text style={[styles.primaryButtonText, { color: !onNext || primaryDisabled ? colors.TEXT_SUBTLE : buttonTextColor }]}>
               {nextLabel || DEFAULT_NEXT_LABEL}
             </Text>
           </Pressable>
         ) : null}
+        </ScrollView>
       </View>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
+function createStyles(colors, ui) {
+return StyleSheet.create(applyTypographyTokens({
   overlayRoot: {
     ...StyleSheet.absoluteFillObject,
     zIndex: 9999,
@@ -424,70 +441,63 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
   },
   card: {
-    position: "absolute",
-    borderRadius: 22,
-    borderWidth: 1,
-    paddingHorizontal: 16,
-    paddingVertical: 16,
-    shadowColor: "#000",
-    shadowOpacity: 0.18,
-    shadowRadius: 18,
-    shadowOffset: { width: 0, height: 8 },
-    elevation: 14,
-  },
+      position: "absolute",
+      borderRadius: 24,
+      borderWidth: 1,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
+      shadowColor: "#000",
+      shadowOpacity: 0.08,
+      shadowRadius: 8,
+      shadowOffset: { width: 0, height: 2 },
+      elevation: 4,
+      overflow: 'hidden',
+    },
   stepPill: {
-    alignSelf: "flex-start",
-    borderRadius: 999,
-    borderWidth: 1,
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    marginBottom: 10,
-  },
+      alignSelf: "flex-start",
+      borderRadius: 999,
+      borderWidth: 1,
+      paddingHorizontal: 10,
+      paddingVertical: 6,
+      marginBottom: 12,
+      maxWidth: '100%',
+    },
   stepText: {
-    fontSize: 11,
-    fontWeight: "800",
-    letterSpacing: 0.3,
-  },
+      letterSpacing: 0,
+      flexShrink: 1,
+    },
   title: {
-    fontSize: 15,
-    fontWeight: "900",
-    lineHeight: 22,
-  },
+      minWidth: 0,
+    },
   message: {
-    marginTop: 8,
-    fontSize: 14,
-    lineHeight: 21,
-    fontWeight: "500",
-  },
+      marginTop: 8,
+    },
   actionHintWrap: {
-    marginTop: 14,
-    borderRadius: 14,
-    borderWidth: 1,
-    paddingHorizontal: 12,
-    paddingVertical: 10,
-  },
+      marginTop: 12,
+      borderRadius: 16,
+      borderWidth: 1,
+      paddingHorizontal: 12,
+      paddingVertical: 12,
+    },
   actionHintText: {
-    fontSize: 12,
-    lineHeight: 18,
-    fontWeight: "700",
-  },
+    },
   footerText: {
-    marginTop: 10,
-    fontSize: 12,
-    lineHeight: 18,
-  },
+      marginTop: 8,
+    },
   primaryButton: {
-    marginTop: 16,
-    minHeight: 48,
-    borderRadius: 999,
-    borderWidth: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 18,
-  },
+      marginTop: 12,
+      minHeight: 52,
+      borderRadius: 24,
+      borderWidth: 1,
+      alignItems: "center",
+      justifyContent: "center",
+      paddingHorizontal: 20,
+      paddingVertical: 14,
+    },
   primaryButtonText: {
-    fontSize: 14,
-    fontWeight: "900",
-    letterSpacing: 0.4,
-  },
-});
+      letterSpacing: 0,
+      flexShrink: 1,
+      textAlign: 'center',
+    },
+}, ui, {"stepText":"meta","title":"modalTitle","message":"body","actionHintText":"description","footerText":"description","primaryButtonText":"button"}));
+}

@@ -1,0 +1,9 @@
+{
+  "scope": "CPU preflight only; fake adapter hash was in-memory and never loaded/saved",
+  "frozen_metadata_simulation": "PASS",
+  "actual_unfilled_eval_plan_rejected": true,
+  "training_uuid_count": 12,
+  "training_timestamp_count": 9,
+  "new_model_calls": 0,
+  "gpu_operations": 0
+}

@@ -1,0 +1,2 @@
+{"id": "FT-CHAIR-INITIAL", "loss_tokens": 1094, "nll": 0.0029341974295675755}
+{"id": "FT-CHAIR-AFTER-CORRECTION", "loss_tokens": 1877, "nll": 0.0024221953935921192}

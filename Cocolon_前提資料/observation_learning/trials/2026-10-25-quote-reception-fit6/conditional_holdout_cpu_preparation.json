@@ -1,0 +1,19 @@
+{
+  "model_calls_started": 0,
+  "model_calls_completed": 0,
+  "source_calls": 2,
+  "sql_rpc_calls": 30,
+  "forbidden_generation_calls": 0,
+  "forbidden_source_calls": 0,
+  "saved_reread_cases": [
+    "HOLDOUT-DAILY-FOCUS12-01",
+    "HOLDOUT-DAILY-FOCUS12-02"
+  ],
+  "meaning_interruption_resume_cases": [
+    "HOLDOUT-DAILY-FOCUS12-02"
+  ],
+  "status": "SYNTHETIC_SQL_TWO_SAVED_READS_AND_ONE_MEANING_INTERRUPTION_RESUME_PASS",
+  "new_model_calls": 0,
+  "training_updates": 0,
+  "production_db_calls": 0
+}

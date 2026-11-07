@@ -1,0 +1,14 @@
+{
+  "token_mask_preflight.json": {
+    "bytes": 207183,
+    "sha256": "f7561fe504518429c7e9d7b929b77b8b91725fbf65caf132d2c97e4cf5e5bc97"
+  },
+  "token_preflight_launch.json": {
+    "bytes": 566,
+    "sha256": "f2d0f88750cc9b7334a1096fd652253eedb7ccc4347453faa9b5e9ab2354edd4"
+  },
+  "token_preflight.log": {
+    "bytes": 228,
+    "sha256": "b9c79f15049ca796d6d33bb2cc7e7679e6be3eec1e41e2ac7a5559c59f9a4e60"
+  }
+}

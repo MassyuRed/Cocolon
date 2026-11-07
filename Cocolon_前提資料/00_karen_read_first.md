@@ -1,12 +1,19 @@
 ---
 doc_id: cocolon_karen_read_first
 title: "華恋用 READ FIRST"
-revision_date: "2026-08-10"
+revision_date: "2026-10-22"
+permanent_mandatory_incident:
+  path: "audits/emlis_ai/Cocolon_EmlisAI_ProductNeglect_and_CMEE_ProductReadFailure_20260816.md"
+  read_requirement: "EVERY_COCOLON_WORK_READ_FULL_FROM_FIRST_BYTE_TO_EOF"
+  summary_or_link_only_is_sufficient: false
+  removal_requires: "MASH_EXPLICIT_APPROVAL"
 source_repositories:
   - Cocolon
   - mashos-api
 source_mode: "canonical_current_authority_plus_last_full_audit"
+whole_product_current_state_owner: "00_cocolon_current_product_and_state.md"
 current_authority_owner: "08_cycle001_current_state.md"
+current_authority_scope: "CYCLE001_ONLY"
 current_authority_effective_when: "PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED"
 milestone_evidence_owner: "07_latest_snapshot_diff.md"
 source_snapshot:
@@ -1475,6 +1482,19 @@ coverage:
   grounded_human_reception_p5_p6_p8_release_allowed: false
   grounded_human_reception_full_01_02_regeneration: false
 ---
+
+> **2026-10-22 現行必読：全機能・全状態は [Cocolon 最新情報](00_cocolon_current_product_and_state.md) を毎作業、全文確認する。** 作業単位ごとに関連差分を同じ変更単位で置換更新する。旧本文の「最新」・07 EOF優先・08を全体現在地とする指示は履歴。08はCycle001専用、07は節目の履歴。仕様・実装・稼働・本人端末・商品受入れを分け、詳細正本と実物へ進む。
+# 恒久必読 — EmlisAI商品中核の後回しとCMEE Product Read失敗
+
+全てのCocolon作業で、行動前に次のincidentを先頭からEOFまで全文読む。
+
+- `audits/emlis_ai/Cocolon_EmlisAI_ProductNeglect_and_CMEE_ProductReadFailure_20260816.md`
+- normative owner: `work_attitude_rules_for_karen/CURRENT_RULES.md` R1.4
+
+リンク確認、見出し確認、要約、過去の読了またはmodel memoryで代用しない。この必読は、商品中核を
+後回しにして補助経路を精密化し、低品質なEmlisAI観測をMashへ提示した失敗を全作業の判断へ戻すための
+恒久拘束である。これを新しい補助systemまたはproduct creditへ変換しない。
+
 # これは何か
 
 この一式は、**華恋の作業精度を上げるための作業用地図**です。  

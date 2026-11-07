@@ -1,0 +1,137 @@
+{
+  "schema_version": "analysis_optional_kernel_results.v1",
+  "status": "FAILED_PARTIAL_NO_RETRY",
+  "api_commit": "100c1bb65ccaa02f1253f9a43fc33cc9bba3dda4",
+  "adapter_weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59",
+  "adapter_config_sha256": "006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9",
+  "runner_sha256": "22a32ac3da55184c04e66b2d19b391104a4efd7de332d0a2731e9208e1be120c",
+  "optional_manifest_sha256": "ae1d4ace434fc021dee8f5fae0ba543307529593bdb7859fd4ec94bcc7678ee7",
+  "first_variant": {
+    "fla_version": "0.6.0",
+    "status": "IMPORT_ONLY_FAILED_GLUON_LANGUAGE_EXTRA_MISSING",
+    "seconds": 23.125746617093682,
+    "model_loads": 0,
+    "new_generation": 0,
+    "new_training": 0,
+    "preserved_in_private_archive_version": 7
+  },
+  "second_variant": {
+    "target": "NEW_ISOLATED_TARGET",
+    "fla_core": "0.5.0",
+    "flash_linear_attention": "0.5.0",
+    "causal_conv1d": "1.7.0",
+    "einops": "0.8.1",
+    "base_torch": "2.8.0_CU128",
+    "base_triton": "3.4.0",
+    "base_transformers": "5.19.0",
+    "installation_seconds": 28.331790314987302,
+    "install_base_unchanged": true,
+    "install_model_loads": 0,
+    "install_tokenizer_loads": 0,
+    "install_new_generation": 0,
+    "install_training": 0
+  },
+  "vendor_bindings": [
+    {
+      "binding": "causal_conv1d_fn",
+      "exact_vendor_implementation": true
+    },
+    {
+      "binding": "causal_conv1d_update",
+      "exact_vendor_implementation": true
+    },
+    {
+      "binding": "chunk_gated_delta_rule",
+      "exact_vendor_implementation": true
+    },
+    {
+      "binding": "fused_recurrent_gated_delta_rule",
+      "exact_vendor_implementation": true
+    }
+  ],
+  "execution": {
+    "model_loads": 1,
+    "model_calls_started": 3,
+    "returned_raws": 2,
+    "stop_count": 2,
+    "new_training": 0,
+    "strict_rejections": 1,
+    "child_exit": -14,
+    "seconds": 100.81402921117842,
+    "runtime_preflight_seconds": 8.688157689757645,
+    "model_load_seconds": 3.472138274461031,
+    "warmup_limit_seconds": 90,
+    "timed_case_limit_seconds": 23,
+    "retry": 0
+  },
+  "cases": [
+    {
+      "id": "KW00",
+      "profile": "KNOWN_AE05_WARMUP",
+      "expected_fields": 1,
+      "returned_fields": 1,
+      "status": "CANDIDATE_PRESERVED",
+      "finish_reason": "STOP",
+      "generation_seconds": 45.107401366345584,
+      "warmup_wall_seconds": 48.582880922593176,
+      "raw_sha256": "7e2b68e11add9df655e2cf43f53e49c97df77c34b911ecba4d6d2456995eefc6",
+      "cached_raw_exact": true,
+      "private_state_non_generating_replay": true,
+      "product_map_saved": false
+    },
+    {
+      "id": "KW01",
+      "profile": "SELECTED_MATERIAL_V7",
+      "expected_fields": 6,
+      "returned_fields": 1,
+      "missing_fields": 5,
+      "status": "STRICT_REJECTED",
+      "finish_reason": "STOP",
+      "generation_seconds": 17.22201863490045,
+      "raw_sha256": "4120951e6217fd47f1906ef40b478b9fa632c3602a0c8363319d196d7daae1a9",
+      "cached_raw_exact": true,
+      "rejection": "analysis_quoted_parent_units_packet_invalid"
+    },
+    {
+      "id": "KW02",
+      "profile": "SELECTED_MATERIAL_V8",
+      "expected_fields": 6,
+      "status": "STARTED_NO_RETURNED_RAW_SIGALRM",
+      "returned_raws": 0,
+      "strict_evaluation": "NOT_REACHED",
+      "quality_evaluation": "NOT_EVALUABLE"
+    }
+  ],
+  "unchanged": {
+    "base_and_product_sources": true,
+    "adapter": true,
+    "optional_target": true,
+    "old_failed_v8_root": true
+  },
+  "constructor_default_planner_batch_whitelists_expanded": false,
+  "normal_adoption": false,
+  "next_training_initial_adoption": false,
+  "general_speedup_claim": false,
+  "general_quality_claim": false,
+  "timer_causality_claim": false,
+  "usual_23_second_completion_claim": false,
+  "full60_second_success_claim": false,
+  "full_field_output_improved": false,
+  "trial_archive": {
+    "bytes": 74610,
+    "sha256": "28eef49287999fb1f946a15a19e8fccc8cb1c573a11eb52d5313103e0708176c",
+    "members": 16,
+    "manifest_verified": 15,
+    "crc_verified": true
+  },
+  "private_archive": {
+    "version": 8,
+    "saved": true,
+    "bytes": 32054078,
+    "sha256": "0f5f3bb3e0a42cd28458c88bee864063aba352c2ac3133ec536f02c7f6766bb8"
+  },
+  "production_writes": 0,
+  "builds": 0,
+  "deployments": 0,
+  "structure_map_delta": "NONE_ISOLATED_RUNTIME_DIAGNOSTIC_ONLY"
+}

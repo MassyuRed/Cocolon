@@ -1,0 +1,33 @@
+[
+  {
+    "case_id": "FT-BOOK-AFTER-ANSWER",
+    "added_roles": [
+      "self_statement",
+      "late_awareness",
+      "no_contact",
+      "returned",
+      "counterfactual",
+      "continuing_concern"
+    ],
+    "required_update_count": 7,
+    "before": "For each added answer role in role_order, emit one ADD targeting the prior unknown gap, replacement_refs=[new claim ID, then each new relation ID whose to-role is this role, in written_link_order]. Evidence order: the claim quote, then the attached relation scopes, deduplicated. Keep every initial meaning/ID. Last emit INVALIDATE_GAP for that gap only, replacement_refs=[], evidence=[answer_explains_target scope]. No old claim or relation is invalidated. Each new role keeps its own time rather than all being ORIGINAL_OCCASION.",
+    "candidate": "Exactly 7 updates in order: ADD self_statement(); ADD late_awareness(); ADD no_contact(statement_concession,awareness_time,answer_explains_target); ADD returned(); ADD counterfactual(); ADD continuing_concern(returned_concession,concern_content); INVALIDATE_GAP(answer_explains_target). Every target_kind=UNKNOWN, target_ref=prior gap ID, prior_snapshot_ref=actual prior ref. ADD role(links): replacement_refs=[role claim ID,listed link IDs]; evidence_indexes=[own quote,listed link scopes], deduplicated. Final replacement_refs=[], evidence_indexes=[answer_explains_target scope]. Keep every initial meaning/ID and each new role's time. Never merge ADDs.",
+    "character_delta": 124
+  },
+  {
+    "case_id": "FT-SHOP-AFTER-ANSWER",
+    "added_roles": [
+      "shared_talk",
+      "no_joint_preparation",
+      "no_promise",
+      "perceived_realization",
+      "answer_joy",
+      "felt_distance",
+      "answer_sadness"
+    ],
+    "required_update_count": 8,
+    "before": "For each added answer role in role_order, emit one ADD targeting the prior unknown gap, replacement_refs=[new claim ID, then each new relation ID whose to-role is this role, in written_link_order]. Evidence order: the claim quote, then the attached relation scopes, deduplicated. Keep every initial meaning/ID. Last emit INVALIDATE_GAP for that gap only, replacement_refs=[], evidence=[answer_explains_target scope]. No old claim or relation is invalidated. Each new role keeps its own time rather than all being ORIGINAL_OCCASION.",
+    "candidate": "Exactly 8 updates in order: ADD shared_talk(); ADD no_joint_preparation(); ADD no_promise(); ADD perceived_realization(past_reference); ADD answer_joy(); ADD felt_distance(answer_explains_target); ADD answer_sadness(answer_concession,distance_link); INVALIDATE_GAP(answer_explains_target). Every target_kind=UNKNOWN, target_ref=prior gap ID, prior_snapshot_ref=actual prior ref. ADD role(links): replacement_refs=[role claim ID,listed link IDs]; evidence_indexes=[own quote,listed link scopes], deduplicated. Final replacement_refs=[], evidence_indexes=[answer_explains_target scope]. Keep every initial meaning/ID and each new role's time. Never merge ADDs.",
+    "character_delta": 127
+  }
+]

@@ -1,0 +1,451 @@
+{
+  "status": "COMPLETE_REVIEWED_NOT_ADOPTED",
+  "normal_adoption": false,
+  "product_credit": 0,
+  "source_prepared_commit": "65080728208e55246139dab9c28bcb7737dd660a",
+  "source_running_commit": "4de0ba7fb7453c97e6d43d49a12260bc54dc0a5b",
+  "api_commit": "86d19b6d834676a602b036c89357dfed1003bb2b",
+  "runtime_scope": "Verified filtered2134 source, not full Git checkout.",
+  "loader_blob": "722525c2a1f1afe0a5f0902e0bddf5b602db8a1a",
+  "plan_sha256": "708e979b8b20b9dac8bd55181ff624e478a6db492f439052171e9093f5a94698",
+  "runner_sha256": "1dea10a30db9496a6115078159561a0e442cef1ec9c7aa8021bea56ed7d33d45",
+  "updates": 68,
+  "training_forwards": 68,
+  "measurements": 124,
+  "loads": 3,
+  "new_calls": 28,
+  "all_new_finish_stop": true,
+  "seconds": 484.6410663819406,
+  "supervisor": {
+    "process_seconds": 486.1159726579208,
+    "exit": 0,
+    "prior_unchanged": true,
+    "compute_apps": ""
+  },
+  "adapter_sha256": "89badc47bc21bf315e4475267c007b9ee51c0b013a4d7d3161333f02fd30f580",
+  "adapter_config_sha256": "b357ff96373f1dac800ce0e5216daabbd9741358a2c72674c2838ac470cf60eb",
+  "finite_F32_tensors": 112,
+  "parameters": 3833856,
+  "changed_tensors": 112,
+  "initial_training_reload": "MATCHED_ALL_112_SAVED_TENSORS",
+  "saved_nontraining_reload": "MATCHED_112_TENSORS",
+  "peak_allocated_gib": 9.405558109283447,
+  "peak_reserved_gib": 11.712890625,
+  "teacher_json_equal_groups": {
+    "AT4": {
+      "before": 4,
+      "after": 4,
+      "count": 4
+    },
+    "UQ2": {
+      "before": 2,
+      "after": 2,
+      "count": 2
+    },
+    "MX2": {
+      "before": 2,
+      "after": 2,
+      "count": 2
+    },
+    "OA2": {
+      "before": 0,
+      "after": 2,
+      "count": 2
+    }
+  },
+  "structural_admission_before_after": [
+    21,
+    24
+  ],
+  "meaning_success_rate": null,
+  "unchanged_raw": 16,
+  "evaluation_count": 24,
+  "readers": [
+    "root Karen, Codex Work/GPT-6",
+    "read-only agent same environment, not independent Pro/Ultra/human acceptance"
+  ],
+  "evaluation": [
+    {
+      "probe_id": "AF01",
+      "training_use": false,
+      "before_raw_sha256": "8665bb894ae6be629935a1dfc7f8edbb7c372662ce4f3dacd91bdd94087196ae",
+      "after_raw_sha256": "8665bb894ae6be629935a1dfc7f8edbb7c372662ce4f3dacd91bdd94087196ae",
+      "raw_unchanged": true,
+      "before_structurally_admitted": true,
+      "after_structurally_admitted": true,
+      "teacher_json_equal_before_after": null,
+      "reading": "Prior local meaning retained; see unchanged raw hashes and preserved source.",
+      "quality_scope": "PREVIOUSLY_SEEN_MIXED60_OUTPUT_REUSED_EXACTLY"
+    },
+    {
+      "probe_id": "NV04",
+      "training_use": false,
+      "before_raw_sha256": "5a48d4ccc81c0831b31f2dc209e7dc9f06f1b887ffba0f42d072c9803f943f4a",
+      "after_raw_sha256": "5a48d4ccc81c0831b31f2dc209e7dc9f06f1b887ffba0f42d072c9803f943f4a",
+      "raw_unchanged": true,
+      "before_structurally_admitted": true,
+      "after_structurally_admitted": true,
+      "teacher_json_equal_before_after": null,
+      "reading": "Prior local meaning retained; see unchanged raw hashes and preserved source.",
+      "quality_scope": "PREVIOUSLY_SEEN_MIXED60_OUTPUT_REUSED_EXACTLY"
+    },
+    {
+      "probe_id": "REHEARSAL_AT17",
+      "training_use": true,
+      "before_raw_sha256": "d059a4ea2ee83d906b748483c5114ebeb15a10b6a2ce74ecb64d50aa1061aaa4",
+      "after_raw_sha256": "d059a4ea2ee83d906b748483c5114ebeb15a10b6a2ce74ecb64d50aa1061aaa4",
+      "raw_unchanged": true,
+      "before_structurally_admitted": true,
+      "after_structurally_admitted": true,
+      "teacher_json_equal_before_after": [
+        true,
+        true
+      ],
+      "reading": "Prior local meaning retained; see unchanged raw hashes and preserved source.",
+      "quality_scope": "PREVIOUSLY_SEEN_MIXED60_OUTPUT_REUSED_EXACTLY"
+    },
+    {
+      "probe_id": "REHEARSAL_AT19",
+      "training_use": true,
+      "before_raw_sha256": "81bee326acddc8f20ca11086e6c6b2639eab6b1559684774f594cd542e0ee429",
+      "after_raw_sha256": "81bee326acddc8f20ca11086e6c6b2639eab6b1559684774f594cd542e0ee429",
+      "raw_unchanged": true,
+      "before_structurally_admitted": true,
+      "after_structurally_admitted": true,
+      "teacher_json_equal_before_after": [
+        true,
+        true
+      ],
+      "reading": "Prior local meaning retained; see unchanged raw hashes and preserved source.",
+      "quality_scope": "PREVIOUSLY_SEEN_MIXED60_OUTPUT_REUSED_EXACTLY"
+    },
+    {
+      "probe_id": "REHEARSAL_AT21",
+      "training_use": true,
+      "before_raw_sha256": "0fa0fd46b3697d99946d2ce855f71e5d3da16518fd85776f1e2be606ce251c4b",
+      "after_raw_sha256": "0fa0fd46b3697d99946d2ce855f71e5d3da16518fd85776f1e2be606ce251c4b",
+      "raw_unchanged": true,
+      "before_structurally_admitted": true,
+      "after_structurally_admitted": true,
+      "teacher_json_equal_before_after": [
+        true,
+        true
+      ],
+      "reading": "Prior local meaning retained; see unchanged raw hashes and preserved source.",
+      "quality_scope": "PREVIOUSLY_SEEN_MIXED60_OUTPUT_REUSED_EXACTLY"
+    },
+    {
+      "probe_id": "REHEARSAL_AT29",
+      "training_use": true,
+      "before_raw_sha256": "787161699e068729ee7618bd41435201d7d6214e845d2282fcb3d2a67d49c2e3",
+      "after_raw_sha256": "787161699e068729ee7618bd41435201d7d6214e845d2282fcb3d2a67d49c2e3",
+      "raw_unchanged": true,
+      "before_structurally_admitted": true,
+      "after_structurally_admitted": true,
+      "teacher_json_equal_before_after": [
+        true,
+        true
+      ],
+      "reading": "Prior local meaning retained; see unchanged raw hashes and preserved source.",
+      "quality_scope": "PREVIOUSLY_SEEN_MIXED60_OUTPUT_REUSED_EXACTLY"
+    },
+    {
+      "probe_id": "CQ03",
+      "training_use": false,
+      "before_raw_sha256": "9af2b1fb315f4b3a2ec1b8eeffd5826ebcb5a8c8a87635116494d2a7fad6cd3b",
+      "after_raw_sha256": "9af2b1fb315f4b3a2ec1b8eeffd5826ebcb5a8c8a87635116494d2a7fad6cd3b",
+      "raw_unchanged": true,
+      "before_structurally_admitted": true,
+      "after_structurally_admitted": true,
+      "teacher_json_equal_before_after": null,
+      "reading": "Prior local meaning retained; see unchanged raw hashes and preserved source.",
+      "quality_scope": "PREVIOUSLY_SEEN_MIXED60_OUTPUT_REUSED_EXACTLY"
+    },
+    {
+      "probe_id": "CQ04",
+      "training_use": false,
+      "before_raw_sha256": "3cc4c9fd2859c7dd23a4fdf1e8265530a7196e9d832eac37865af916ea17e42d",
+      "after_raw_sha256": "06700bcd1854dd2d7519d132050b8932571b084e63e04ee81385828d5f7c63f5",
+      "raw_unchanged": false,
+      "before_structurally_admitted": false,
+      "after_structurally_admitted": true,
+      "teacher_json_equal_before_after": null,
+      "reading": "Past unknown/EPI and correct parent restored; slight modifier remains absent from extracted relief unit, not lost from source field.",
+      "quality_scope": "PREVIOUSLY_SEEN_MIXED60_OUTPUT_REUSED_EXACTLY"
+    },
+    {
+      "probe_id": "SQ01",
+      "training_use": false,
+      "before_raw_sha256": "ff0783162b75c6cab20aa250df86e8b2fee83acd25e4e41f88d2affc17dfc274",
+      "after_raw_sha256": "ff0783162b75c6cab20aa250df86e8b2fee83acd25e4e41f88d2affc17dfc274",
+      "raw_unchanged": true,
+      "before_structurally_admitted": true,
+      "after_structurally_admitted": true,
+      "teacher_json_equal_before_after": null,
+      "reading": "Prior local meaning retained; see unchanged raw hashes and preserved source.",
+      "quality_scope": "PREVIOUSLY_SEEN_MIXED60_OUTPUT_REUSED_EXACTLY"
+    },
+    {
+      "probe_id": "SQ03",
+      "training_use": false,
+      "before_raw_sha256": "7117e094835774821aa606f88608f83ebf865d8c2b141b8c1553ac6a70cf5aa3",
+      "after_raw_sha256": "0b770cddcd4fab6d58f701a71e34000f0f10fb8f103bdfe9d8a50c56339042ac",
+      "raw_unchanged": false,
+      "before_structurally_admitted": true,
+      "after_structurally_admitted": true,
+      "teacher_json_equal_before_after": null,
+      "reading": "Full negative ACTION including mada and its modifier/NEGATION restored.",
+      "quality_scope": "PREVIOUSLY_SEEN_MIXED60_OUTPUT_REUSED_EXACTLY"
+    },
+    {
+      "probe_id": "PQ01",
+      "training_use": false,
+      "before_raw_sha256": "0a5848d0a0a5575eed7a4824aba02f013a5a19809b2c190bb4c014032825e35b",
+      "after_raw_sha256": "0a5848d0a0a5575eed7a4824aba02f013a5a19809b2c190bb4c014032825e35b",
+      "raw_unchanged": true,
+      "before_structurally_admitted": true,
+      "after_structurally_admitted": true,
+      "teacher_json_equal_before_after": null,
+      "reading": "Prior local meaning retained; see unchanged raw hashes and preserved source.",
+      "quality_scope": "PREVIOUSLY_SEEN_MIXED60_OUTPUT_REUSED_EXACTLY"
+    },
+    {
+      "probe_id": "PQ02",
+      "training_use": false,
+      "before_raw_sha256": "fbf0c77bd275baf6088c96a0e39f66bf111cfc83b1815912b6162eb628731f7a",
+      "after_raw_sha256": "fbf0c77bd275baf6088c96a0e39f66bf111cfc83b1815912b6162eb628731f7a",
+      "raw_unchanged": true,
+      "before_structurally_admitted": true,
+      "after_structurally_admitted": true,
+      "teacher_json_equal_before_after": null,
+      "reading": "Prior local meaning retained; see unchanged raw hashes and preserved source.",
+      "quality_scope": "PREVIOUSLY_SEEN_MIXED60_OUTPUT_REUSED_EXACTLY"
+    },
+    {
+      "probe_id": "UQ01",
+      "training_use": true,
+      "before_raw_sha256": "201d8f58e51700cb481eb4ba3d77373778cb19cd82ea1d1f7f9799ad26baa0c3",
+      "after_raw_sha256": "201d8f58e51700cb481eb4ba3d77373778cb19cd82ea1d1f7f9799ad26baa0c3",
+      "raw_unchanged": true,
+      "before_structurally_admitted": true,
+      "after_structurally_admitted": true,
+      "teacher_json_equal_before_after": [
+        true,
+        true
+      ],
+      "reading": "Prior local meaning retained; see unchanged raw hashes and preserved source.",
+      "quality_scope": "PREVIOUSLY_SEEN_MIXED60_OUTPUT_REUSED_EXACTLY"
+    },
+    {
+      "probe_id": "UQ02",
+      "training_use": true,
+      "before_raw_sha256": "1cf93d0018f2fc99b88f1653688c6e75a13cc2710f52b9c8eade9126f159f6d1",
+      "after_raw_sha256": "1cf93d0018f2fc99b88f1653688c6e75a13cc2710f52b9c8eade9126f159f6d1",
+      "raw_unchanged": true,
+      "before_structurally_admitted": true,
+      "after_structurally_admitted": true,
+      "teacher_json_equal_before_after": [
+        true,
+        true
+      ],
+      "reading": "Prior local meaning retained; see unchanged raw hashes and preserved source.",
+      "quality_scope": "PREVIOUSLY_SEEN_MIXED60_OUTPUT_REUSED_EXACTLY"
+    },
+    {
+      "probe_id": "HQ03",
+      "training_use": false,
+      "before_raw_sha256": "a0549eb719d646308e29d8b0cfa60baf35a38e834ada9b4752f409338d59596f",
+      "after_raw_sha256": "40dadc08e4533e1ddd9b4da897e5f0101e7c224da178fe86ce2d1a09c6aa8583",
+      "raw_unchanged": false,
+      "before_structurally_admitted": true,
+      "after_structurally_admitted": true,
+      "teacher_json_equal_before_after": null,
+      "reading": "Regression: EXPLICIT_ACTOR qualifier omitted; full ACTION quote and original field still retain watashi-wa. Negation/unknown parents retained.",
+      "quality_scope": "PREVIOUSLY_SEEN_MIXED60_OUTPUT_REUSED_EXACTLY"
+    },
+    {
+      "probe_id": "HQ04",
+      "training_use": false,
+      "before_raw_sha256": "6d7cae6194a183bc3e3eab1112e840fb41dd5c8e9c66769304d993237e4bd208",
+      "after_raw_sha256": "6d7cae6194a183bc3e3eab1112e840fb41dd5c8e9c66769304d993237e4bd208",
+      "raw_unchanged": true,
+      "before_structurally_admitted": true,
+      "after_structurally_admitted": true,
+      "teacher_json_equal_before_after": null,
+      "reading": "The clause containing explicit ので remains TE_CONTEXT without WRITTEN_REASON/REASON_MARKER.",
+      "quality_scope": "PREVIOUSLY_SEEN_MIXED60_OUTPUT_REUSED_EXACTLY"
+    },
+    {
+      "probe_id": "MX01",
+      "training_use": true,
+      "before_raw_sha256": "74c064736c8076e772378ff11187a12dcd14b4e37c435777c88b162b79361e6a",
+      "after_raw_sha256": "74c064736c8076e772378ff11187a12dcd14b4e37c435777c88b162b79361e6a",
+      "raw_unchanged": true,
+      "before_structurally_admitted": true,
+      "after_structurally_admitted": true,
+      "teacher_json_equal_before_after": [
+        true,
+        true
+      ],
+      "reading": "Prior local meaning retained; see unchanged raw hashes and preserved source.",
+      "quality_scope": "PREVIOUSLY_SEEN_MIXED60_OUTPUT_REUSED_EXACTLY"
+    },
+    {
+      "probe_id": "MX02",
+      "training_use": true,
+      "before_raw_sha256": "bdb6ff186a3d96b657b82bd542d0742388eafdf85b247b112413ea8266117c1e",
+      "after_raw_sha256": "bdb6ff186a3d96b657b82bd542d0742388eafdf85b247b112413ea8266117c1e",
+      "raw_unchanged": true,
+      "before_structurally_admitted": true,
+      "after_structurally_admitted": true,
+      "teacher_json_equal_before_after": [
+        true,
+        true
+      ],
+      "reading": "Prior local meaning retained; see unchanged raw hashes and preserved source.",
+      "quality_scope": "PREVIOUSLY_SEEN_MIXED60_OUTPUT_REUSED_EXACTLY"
+    },
+    {
+      "probe_id": "MD01",
+      "training_use": false,
+      "before_raw_sha256": "3dededc9f0e8f43299fb03b8148d6fd0be0cc4a02303a2102b83145f4f79bac8",
+      "after_raw_sha256": "4a9a84f4185fbadbdc472a578e6ecd61bad332ad74e62534a258876001f79757",
+      "raw_unchanged": false,
+      "before_structurally_admitted": true,
+      "after_structurally_admitted": true,
+      "teacher_json_equal_before_after": null,
+      "reading": "Full self positive ACTION and two unknown parents retained. New yobi-no modifier quotes source noun internally but scopes coarsely to ACTION; no strong improvement credit.",
+      "quality_scope": "PREVIOUSLY_SEEN_MIXED60_OUTPUT_REUSED_EXACTLY"
+    },
+    {
+      "probe_id": "MD02",
+      "training_use": false,
+      "before_raw_sha256": "a8994d14479d0011e56f674163f4ed7186305778b2eb682d4be624e14afb7753",
+      "after_raw_sha256": "0b4c780f593ca3588c29cf6a66b226604d8855f3fae94b17b7abf88990a12246",
+      "raw_unchanged": false,
+      "before_structurally_admitted": true,
+      "after_structurally_admitted": true,
+      "teacher_json_equal_before_after": null,
+      "reading": "Residual: negative ACTION quote lacks actor and NEGATION qualifiers; sister becomes CONTENT_TARGET. Raw predicate remains negative and original field unchanged; not a positive flip.",
+      "quality_scope": "PREVIOUSLY_SEEN_MIXED60_OUTPUT_REUSED_EXACTLY"
+    },
+    {
+      "probe_id": "OA01",
+      "training_use": true,
+      "before_raw_sha256": "d4f4b2c436b174245ba01ff51d3042d86515d29d077a2051fda12921ce3eaef7",
+      "after_raw_sha256": "018c5329a0818775be09471a3ba74d43b7360cbe2bda83c25d9034779ba3d514",
+      "raw_unchanged": false,
+      "before_structurally_admitted": true,
+      "after_structurally_admitted": true,
+      "teacher_json_equal_before_after": [
+        false,
+        true
+      ],
+      "reading": "Both actor and negation now on independent full ACTION root; two unknown parent pairings correct.",
+      "quality_scope": "TRAINED_OTHER_NEGATIVE_REHEARSAL_ONE_TOPIC_TWO_ORDERS"
+    },
+    {
+      "probe_id": "OA02",
+      "training_use": true,
+      "before_raw_sha256": "9410caf452b4e52d78b90de76b08c6e1429dd475c3083e185992733537531bf6",
+      "after_raw_sha256": "65b934edc9d0d2b95c6854fd417f52972b1b1732e19630251ab4359b7d70a60d",
+      "raw_unchanged": false,
+      "before_structurally_admitted": false,
+      "after_structurally_admitted": true,
+      "teacher_json_equal_before_after": [
+        false,
+        true
+      ],
+      "reading": "Invalid before carrier replaced with target-equivalent 5-unit actor/negation/unknown scopes.",
+      "quality_scope": "TRAINED_OTHER_NEGATIVE_REHEARSAL_ONE_TOPIC_TWO_ORDERS"
+    },
+    {
+      "probe_id": "OD01",
+      "training_use": false,
+      "before_raw_sha256": "97fb93729d0c445c1e11503ee4a3c8b4f47cb5c9100ed67a017d6686f4914407",
+      "after_raw_sha256": "97fb93729d0c445c1e11503ee4a3c8b4f47cb5c9100ed67a017d6686f4914407",
+      "raw_unchanged": true,
+      "before_structurally_admitted": true,
+      "after_structurally_admitted": true,
+      "teacher_json_equal_before_after": null,
+      "reading": "Correct positive OTHER and two unknown parents already before; unchanged, no improvement credit.",
+      "quality_scope": "ROOT_SYNTHETIC_NEARBY_OTHER_ACTOR_DIAGNOSTIC_NOT_BLIND_GENERAL_ACCEPTANCE"
+    },
+    {
+      "probe_id": "OD02",
+      "training_use": false,
+      "before_raw_sha256": "4389b574577ae5eaeee929f390e41da008a143187e28f95d4d168c31f55bdc90",
+      "after_raw_sha256": "502b496947795ae65cfe4a025b34de225c8e84dfbffa1e4418280fde79791667",
+      "raw_unchanged": false,
+      "before_structurally_admitted": false,
+      "after_structurally_admitted": true,
+      "teacher_json_equal_before_after": null,
+      "reading": "Invalid actor child replaced with full independent negative OTHER ACTION with actor/negation and correct two unknown parents.",
+      "quality_scope": "ROOT_SYNTHETIC_NEARBY_OTHER_ACTOR_DIAGNOSTIC_NOT_BLIND_GENERAL_ACCEPTANCE"
+    }
+  ],
+  "saved_cpu_replay": {
+    "status": "SAVED_FILES_REPLAYED_IN_SEPARATE_CPU_PROCESS",
+    "matched_candidates": 45,
+    "rejected_responses": 3,
+    "model_loads": 0,
+    "new_generations": 0,
+    "training_updates": 0,
+    "reader_generate_compiler_author_forbidden": true
+  },
+  "preservation": {
+    "library_file_id": "libfile_8ad5521b02bc819199f00c2be35ec190",
+    "filename": "cocolon-analysis-other62-result-20261102.zip",
+    "bytes": 14889616,
+    "archive_sha256": "5a141baefbd22873318e192c164ddd22fc1673c1afae09a000f852210a0ceb64",
+    "original_gpu_zip_sha256": "fd99a75f897a66732b2c9a97a7c264dd543bdd8b836bc3840f522e0e6f6e3419",
+    "members": 270,
+    "manifest_members": 269,
+    "every_original_member_bytes_sha256_matched": true,
+    "zip_crc_valid": true,
+    "container_recompressed": true
+  },
+  "limits": [
+    "OA2 one topic two orders after MD02 seen, not independent topics.",
+    "OD2 and old development probes root-authored/seen nearby, not blind general acceptance.",
+    "Old60 replay plus OA/initial/ordering is a compound comparison, no sole causal attribution.",
+    "Structural admission, NLL and teacher JSON fit are not general meaning quality.",
+    "All candidates remain unparsed/actor unresolved/route0; ordinary map/API/DB/RN/production unchanged."
+  ],
+  "residuals": [
+    "MD02 actor as CONTENT_TARGET and absent root actor/NEGATION",
+    "HQ03 actor qualifier regression, full source retained",
+    "CQ04 slight modifier absent from extracted unit",
+    "HQ04 explicit reason not represented"
+  ],
+  "teaching_coverage_audit": {
+    "past_unknown": [
+      "BT07"
+    ],
+    "mada_negative": [
+      "AT13",
+      "BT08",
+      "ST07"
+    ],
+    "exact_mada_tewainai": [
+      "BT08"
+    ],
+    "reason_teacher_count": 12,
+    "reason_to_emotion": [
+      "AT08"
+    ],
+    "relative_time_on_reason_target_count": 0,
+    "attributive_child_under_reason_target_count": 0,
+    "conclusion": "Basic lessons already exist; absence cannot explain CQ04/SQ03. HQ04 composition sparse, not established sole cause.",
+    "reason_marker_counts": {
+      "ので": 10
+    }
+  },
+  "next_step": "No extra epoch. Preserve current result first; prepare a finite actor/predicate-by-source-context diagnosis using f982 and89ba, reuse old MD02/OA02 outputs exactly and generate only6new sources x2adapters=12 calls, train0.",
+  "formal_read": "0/3",
+  "management_completion_percent": 54.5,
+  "candidate_ready": false,
+  "structure_map_delta": "NONE",
+  "process_cost_usd_at_previously_observed_hourly_058": 0.07808106069486821,
+  "cost_excludes": "Preparation/recovery/holding/storage/network/tax and current-price recheck."
+}

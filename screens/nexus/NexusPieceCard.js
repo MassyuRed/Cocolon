@@ -80,7 +80,7 @@ export default function NexusPieceCard({
             color={colors.TEXT_ON_LIGHT}
             style={styles.ownerIcon}
           />
-          <Text numberOfLines={1} style={styles.ownerText}>
+          <Text style={styles.ownerText}>
             {ownerName}
           </Text>
         </CocolonPressable>
@@ -92,6 +92,7 @@ export default function NexusPieceCard({
               onPress={() => setMenuVisible((current) => !current)}
               disabled={deleteSubmitting}
               accessibilityLabel="ピースのメニューを開く"
+              accessibilityState={{ expanded: menuVisible, busy: deleteSubmitting }}
               hitSlop={8}
             >
               {deleteSubmitting ? (
@@ -147,10 +148,11 @@ export default function NexusPieceCard({
             onPress={onPressResonance}
             disabled={buttonDisabled}
             accessibilityLabel={buttonLabel}
+            accessibilityState={{ selected: isResonated, busy: resonanceSubmitting }}
             hitSlop={8}
           >
             {resonanceSubmitting ? (
-              <ActivityIndicator size="small" color={colors.TEXT_ON_LIGHT} />
+              <ActivityIndicator size="small" color={colors.TEXT_SUBTLE} />
             ) : (
               <Text
                 style={[
@@ -179,7 +181,7 @@ export default function NexusPieceCard({
             <Ionicons
               name="trash-outline"
               size={16}
-              color="#DC2626"
+              color={colors.ERROR}
               style={styles.actionMenuIcon}
             />
             <Text style={styles.actionMenuDeleteText}>削除</Text>
@@ -196,138 +198,135 @@ function createStyles(COLORS, ui) {
   return StyleSheet.create(applyTypographyTokens({
     card: {
       position: "relative",
-      borderRadius: 18,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 14,
-      paddingVertical: 14,
-      marginBottom: 12,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
+      marginBottom: 16,
       shadowColor: "#000",
-      shadowOpacity: 0.08,
-      shadowRadius: 8,
-      shadowOffset: { width: 0, height: 4 },
-      elevation: 3,
+      shadowOpacity: 0.06,
+      shadowRadius: 4,
+      shadowOffset: { width: 0, height: 2 },
+      elevation: 1,
     },
     headerRow: {
-      flexDirection: "row",
-      alignItems: "flex-start",
+      flexDirection: 'column',
+      alignItems: 'stretch',
       justifyContent: "space-between",
-      marginBottom: 10,
+      marginBottom: 16,
+      gap: 8,
     },
     ownerChip: {
       flexDirection: "row",
       alignItems: "center",
       flexShrink: 1,
-      paddingRight: 8,
+      paddingRight: 0,
+      width: '100%',
+      minHeight: 44,
     },
     ownerIcon: {
       marginRight: 6,
     },
     ownerText: {
-      fontSize: 13,
-      fontWeight: "800",
       color: COLORS.TEXT_ON_LIGHT,
-      maxWidth: 180,
+      flex: 1,
+      minWidth: 0,
     },
     headerRight: {
-      alignItems: "flex-end",
-      justifyContent: "flex-start",
-      minWidth: 82,
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      minWidth: 0,
+      flexDirection: 'row',
+      gap: 8,
     },
     moreButton: {
-      width: 30,
-      height: 28,
-      borderRadius: 14,
+      width: 44,
+      height: 44,
+      borderRadius: 22,
       alignItems: "center",
       justifyContent: "center",
-      marginBottom: 2,
+      marginBottom: 0,
     },
     moreButtonDisabled: {
-      opacity: 0.58,
+
     },
     moreButtonSpacer: {
-      width: 30,
-      height: 28,
-      marginBottom: 2,
+      width: 44,
+      height: 44,
+      marginBottom: 0,
     },
     timeRow: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "flex-end",
+      flexWrap: 'wrap',
+      flexShrink: 1,
+      gap: 6,
     },
     timeText: {
-      fontSize: 11,
       color: text.description ?? COLORS.TEXT_SUBTLE,
+      flexShrink: 1,
     },
     newBadge: {
-      marginLeft: 8,
+      marginLeft: 0,
     },
     actionMenu: {
-      position: "absolute",
-      top: 42,
-      right: 10,
-      zIndex: 20,
-      elevation: 10,
-      minWidth: 142,
-      borderRadius: 14,
+      position: 'relative',
+      elevation: 1,
+      minWidth: 0,
+      borderRadius: 16,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
       shadowColor: "#000",
-      shadowOpacity: 0.14,
-      shadowRadius: 12,
-      shadowOffset: { width: 0, height: 6 },
+      shadowOpacity: 0.06,
+      shadowRadius: 4,
+      shadowOffset: { width: 0, height: 2 },
       paddingVertical: 4,
+      width: '100%',
+      marginTop: 12,
     },
     actionMenuItem: {
       flexDirection: "row",
       alignItems: "center",
-      paddingHorizontal: 14,
+      paddingHorizontal: 16,
       paddingVertical: 12,
+      minHeight: 44,
     },
     actionMenuIcon: {
       marginRight: 8,
     },
     actionMenuDeleteText: {
-      fontSize: 13,
-      lineHeight: 18,
-      fontWeight: "900",
-      color: "#DC2626",
+      color: COLORS.ERROR,
     },
     questionBlock: {
       position: "relative",
       zIndex: 1,
     },
     questionLabel: {
-      fontSize: 11,
-      fontWeight: "800",
-      color: COLORS.TITLE_GOLD,
-      marginBottom: 4,
+      color: COLORS.TEXT_SUBTLE,
+      marginBottom: 6,
     },
     questionText: {
-      fontSize: 15,
-      lineHeight: 23,
-      fontWeight: "700",
       color: COLORS.TEXT_ON_LIGHT,
-      marginBottom: 10,
+      marginBottom: 16,
     },
     bodyLabel: {
-      fontSize: 11,
-      fontWeight: "800",
-      color: COLORS.TITLE_GOLD,
-      marginBottom: 4,
+      color: COLORS.TEXT_SUBTLE,
+      marginBottom: 6,
     },
     bodyText: {
-      fontSize: 14,
-      lineHeight: 23,
       color: COLORS.TEXT_ON_LIGHT,
     },
     metricsRow: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
-      marginTop: 12,
+      marginTop: 16,
+      flexWrap: 'wrap',
+      gap: 8,
     },
     metricChip: {
       flexDirection: "row",
@@ -335,46 +334,42 @@ function createStyles(COLORS, ui) {
       borderRadius: 999,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      paddingHorizontal: 10,
-      paddingVertical: 6,
+      paddingHorizontal: 12,
+      paddingVertical: 8,
       backgroundColor: COLORS.PANEL_BG,
-      marginRight: 8,
+      marginRight: 0,
     },
     metricIcon: {
       marginRight: 4,
     },
     metricText: {
-      fontSize: 12,
       color: text.description ?? COLORS.TEXT_SUBTLE,
-      fontWeight: "700",
     },
     resonanceButton: {
       minWidth: 74,
-      minHeight: 34,
-      borderRadius: 999,
+      minHeight: 44,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.GOLD_BUTTON_BORDER,
       backgroundColor: COLORS.GOLD_BUTTON,
-      paddingHorizontal: 14,
-      paddingVertical: 8,
+      paddingHorizontal: 16,
+      paddingVertical: 12,
       alignItems: "center",
       justifyContent: "center",
     },
     resonanceButtonDone: {
       borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
+      backgroundColor: COLORS.FIELD_BG,
     },
     resonanceButtonDisabled: {
-      opacity: 0.72,
+      backgroundColor: COLORS.FIELD_BG,
+      borderColor: COLORS.CARD_BORDER,
     },
     resonanceButtonText: {
-      fontSize: 12,
-      lineHeight: 16,
-      fontWeight: "900",
       color: COLORS.ACCENT_TEXT,
     },
     resonanceButtonTextDone: {
-      color: text.description ?? COLORS.TEXT_SUBTLE,
+      color: COLORS.TEXT_SUBTLE,
     },
-  }, ui));
+  }, ui, {"ownerText":"button","timeText":"meta","actionMenuDeleteText":"button","questionLabel":"meta","questionText":"description","bodyLabel":"description","bodyText":"body","metricText":"meta","resonanceButtonText":"button"}));
 }

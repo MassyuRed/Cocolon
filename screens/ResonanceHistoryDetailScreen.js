@@ -1,7 +1,8 @@
+import { SafeAreaView } from "react-native-safe-area-context";
 import React, { useEffect, useMemo, useState } from "react";
 import {
   ActivityIndicator,
-  SafeAreaView,
+  ScrollView,
   StatusBar,
   StyleSheet,
   Text,
@@ -10,6 +11,7 @@ import {
 
 import { useTheme } from "../theme/ThemeContext";
 import { makeUiTokens } from "../ui/uiTokens";
+import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import CocolonBackButton from "../components/CocolonBackButton";
 
 function hasRouteNameInState(state, routeName) {
@@ -87,12 +89,12 @@ export default function ResonanceHistoryDetailScreen({ navigation, route }) {
   }, [navigation, route?.params]);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView edges={["left", "right"]} style={styles.container}>
       <StatusBar
         barStyle={isDark ? "light-content" : "dark-content"}
         backgroundColor={colors.BG_SILVER}
       />
-      <View style={styles.body}>
+      <ScrollView contentContainerStyle={styles.body}>
         <View style={styles.headerRow}>
           <View style={styles.headerSide}>
             <CocolonBackButton
@@ -112,7 +114,7 @@ export default function ResonanceHistoryDetailScreen({ navigation, route }) {
             <>
               <Text style={styles.messageTitle}>ピース詳細を開けませんでした</Text>
               <Text style={styles.messageText}>
-                共通ピース詳細画面の登録状況を確認してください。
+                戻って、もう一度ピースを選んでください。
               </Text>
             </>
           ) : (
@@ -122,7 +124,7 @@ export default function ResonanceHistoryDetailScreen({ navigation, route }) {
             </>
           )}
         </View>
-      </View>
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -130,18 +132,30 @@ export default function ResonanceHistoryDetailScreen({ navigation, route }) {
 function createStyles(COLORS, ui) {
   const font = ui?.font || {};
   const text = ui?.text || {};
-  return StyleSheet.create({
-    container: { flex: 1, backgroundColor: COLORS.PANEL_BG },
-    body: { flex: 1, paddingTop: 16, paddingHorizontal: 18, paddingBottom: 18 },
+  return StyleSheet.create(applyTypographyTokens({
+    container: {
+      flex: 1,
+      backgroundColor: COLORS.BG_SILVER,
+    },
+    body: {
+      flexGrow: 1,
+      paddingTop: 16,
+      paddingHorizontal: 20,
+      paddingBottom: 20,
+      width: "100%",
+      maxWidth: 680,
+      alignSelf: "center",
+    },
     headerRow: {
       flexDirection: "row",
       alignItems: "center",
-      marginBottom: 14,
+      marginBottom: 20,
     },
     headerSide: {
-      width: 34,
+      width: 52,
       alignItems: "flex-start",
       justifyContent: "center",
+      minHeight: 44,
     },
     headerCenter: {
       flex: 1,
@@ -149,34 +163,30 @@ function createStyles(COLORS, ui) {
       justifyContent: "center",
     },
     titleText: {
-      fontSize: font.title ?? 20,
-      fontWeight: "800",
       color: COLORS.TITLE_GOLD,
-      letterSpacing: 0.8,
+      letterSpacing: 0,
+      textAlign: "center",
+      flexShrink: 1,
     },
     messageCard: {
-      borderRadius: ui?.radius?.md ?? 12,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 14,
-      paddingVertical: 18,
+      paddingHorizontal: 20,
+      paddingVertical: 24,
       alignItems: "center",
       justifyContent: "center",
     },
     messageTitle: {
-      fontSize: font.body ?? 14,
-      fontWeight: "800",
       color: text.primary ?? COLORS.TEXT_ON_LIGHT,
       marginBottom: 8,
       textAlign: "center",
     },
     messageText: {
       marginTop: 10,
-      fontSize: font.body ?? 14,
-      lineHeight: 20,
-      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      color: COLORS.TEXT_SUBTLE,
       textAlign: "center",
     },
-  });
+  }, ui, {"titleText":"screenTitle","messageTitle":"sectionTitle","messageText":"body"}));
 }

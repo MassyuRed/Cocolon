@@ -3,9 +3,10 @@ import { Modal, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "rea
 
 // Phase 4: 時間帯別こころ天気を横スクロールで確認する詳細Modal。
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 import { useTheme } from "../../theme/ThemeContext";
-import { makeUiTokens } from "../../ui/uiTokens";
+import { makeUiTokens, MODAL_ORIENTATIONS } from "../../ui/uiTokens";
 import { applyTypographyTokens } from "../../ui/applyTypographyTokens";
 import {
   buildEmotionShareText,
@@ -26,153 +27,141 @@ function createStyles(colors, ui) {
           backgroundColor: "rgba(0,0,0,0.32)",
         },
         sheet: {
-          borderTopLeftRadius: 22,
-          borderTopRightRadius: 22,
-          backgroundColor: colors.BG_SILVER || "#FFFFFF",
-          paddingHorizontal: 18,
-          paddingTop: 14,
-          paddingBottom: 24,
-          maxHeight: "82%",
-        },
+      borderTopLeftRadius: 24,
+      borderTopRightRadius: 24,
+      backgroundColor: colors.PANEL_BG,
+      paddingHorizontal: 20,
+      paddingTop: 20,
+      paddingBottom: 20,
+      maxHeight: '90%',
+      width: '100%',
+      maxWidth: 640,
+      alignSelf: 'center',
+      flexShrink: 1,
+      minHeight: 0,
+    },
         handle: {
-          alignSelf: "center",
-          width: 42,
-          height: 4,
-          borderRadius: 999,
-          backgroundColor: colors.CARD_BORDER,
-          marginBottom: 12,
-        },
+      alignSelf: "center",
+      width: 42,
+      height: 4,
+      borderRadius: 999,
+      backgroundColor: colors.CARD_BORDER,
+      marginBottom: 16,
+    },
         headerRow: {
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginBottom: 12,
-        },
+      flexDirection: "row",
+      alignItems: 'flex-start',
+      justifyContent: "space-between",
+      marginBottom: 16,
+    },
         title: {
-          flex: 1,
-          fontSize: 16,
-          fontWeight: "900",
-          color: text.primary ?? colors.TEXT_ON_LIGHT,
-          marginRight: 12,
-        },
+      flex: 1,
+      color: text.primary ?? colors.TEXT_ON_LIGHT,
+      marginRight: 12,
+      minWidth: 0,
+      flexShrink: 1,
+    },
         closeButton: {
-          width: 36,
-          height: 36,
-          borderRadius: 18,
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: colors.FIELD_BG,
-          borderWidth: 1,
-          borderColor: colors.CARD_BORDER,
-        },
+      width: 44,
+      height: 44,
+      borderRadius: 22,
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: colors.FIELD_BG,
+      borderWidth: 1,
+      borderColor: colors.CARD_BORDER,
+      flexShrink: 0,
+    },
         summaryCard: {
-          borderWidth: 1,
-          borderColor: colors.CARD_BORDER,
-          borderRadius: 16,
-          backgroundColor: colors.FIELD_BG,
-          paddingHorizontal: 14,
-          paddingVertical: 14,
-          marginBottom: 12,
-        },
+      borderWidth: 1,
+      borderColor: colors.CARD_BORDER,
+      borderRadius: 24,
+      backgroundColor: colors.FIELD_BG,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
+      marginBottom: 16,
+    },
         summaryTop: {
-          flexDirection: "row",
-          alignItems: "center",
-        },
+      flexDirection: "row",
+      alignItems: 'flex-start',
+    },
         weatherText: {
-          marginLeft: 10,
-          fontSize: 15,
-          fontWeight: "900",
-          color: text.primary ?? colors.TEXT_ON_LIGHT,
-        },
+      marginLeft: 10,
+      color: text.primary ?? colors.TEXT_ON_LIGHT,
+      flex: 1,
+      minWidth: 0,
+      flexShrink: 1,
+    },
         tempText: {
-          marginTop: 8,
-          fontSize: 13,
-          fontWeight: "800",
-          color: text.primary ?? colors.TEXT_ON_LIGHT,
-        },
+      marginTop: 8,
+      color: text.primary ?? colors.TEXT_ON_LIGHT,
+    },
         metaText: {
-          marginTop: 6,
-          fontSize: 12,
-          lineHeight: 18,
-          color: text.description ?? colors.TEXT_SUBTLE,
-        },
+      marginTop: 8,
+      color: text.description ?? colors.TEXT_SUBTLE,
+    },
         memoBox: {
-          marginTop: 10,
-          borderRadius: 12,
-          paddingHorizontal: 10,
-          paddingVertical: 8,
-          backgroundColor: "#FEF3C7",
-        },
+      marginTop: 12,
+      borderRadius: 16,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
+      backgroundColor: colors.SURFACE_TONAL,
+    },
         memoLabel: {
-          fontSize: 12,
-          fontWeight: "900",
-          color: "#92400E",
-        },
+      color: colors.ON_SURFACE_TONAL,
+    },
         memoDetail: {
-          marginTop: 3,
-          fontSize: 12,
-          lineHeight: 18,
-          color: "#92400E",
-        },
+      marginTop: 8,
+      color: colors.ON_SURFACE_TONAL,
+    },
         sectionTitle: {
-          marginTop: 6,
-          marginBottom: 10,
-          fontSize: 13,
-          fontWeight: "900",
-          color: text.primary ?? colors.TEXT_ON_LIGHT,
-        },
+      marginTop: 8,
+      marginBottom: 12,
+      color: text.primary ?? colors.TEXT_ON_LIGHT,
+    },
         bucketCard: {
-          width: 126,
-          borderRadius: 14,
-          borderWidth: 1,
-          borderColor: colors.CARD_BORDER,
-          backgroundColor: colors.FIELD_BG,
-          paddingHorizontal: 10,
-          paddingVertical: 10,
-          marginRight: 10,
-          minHeight: 132,
-        },
+      width: 168,
+      borderRadius: 16,
+      borderWidth: 1,
+      borderColor: colors.CARD_BORDER,
+      backgroundColor: colors.FIELD_BG,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
+      marginRight: 12,
+      minHeight: 0,
+    },
         bucketLabel: {
-          fontSize: 12,
-          fontWeight: "900",
-          color: text.primary ?? colors.TEXT_ON_LIGHT,
-          marginBottom: 8,
-        },
+      color: text.primary ?? colors.TEXT_ON_LIGHT,
+      marginBottom: 8,
+    },
         bucketIconWrap: {
-          height: 42,
-          alignItems: "center",
-          justifyContent: "center",
-          borderRadius: 12,
-          backgroundColor: colors.PANEL_BG,
-          marginBottom: 8,
-        },
+      alignItems: "center",
+      justifyContent: "center",
+      borderRadius: 12,
+      backgroundColor: colors.SURFACE_TONAL,
+      marginBottom: 8,
+      minHeight: 52,
+      paddingVertical: 8,
+    },
         bucketWeather: {
-          fontSize: 12,
-          fontWeight: "900",
-          color: text.primary ?? colors.TEXT_ON_LIGHT,
-          textAlign: "center",
-        },
+      color: text.primary ?? colors.TEXT_ON_LIGHT,
+      textAlign: "center",
+    },
         bucketTemp: {
-          marginTop: 6,
-          fontSize: 15,
-          fontWeight: "900",
-          color: colors.TITLE_GOLD,
-          textAlign: "center",
-        },
+      marginTop: 6,
+      color: colors.TEXT_ON_LIGHT,
+      textAlign: "center",
+    },
         bucketMeta: {
-          marginTop: 6,
-          fontSize: 11,
-          lineHeight: 16,
-          color: text.description ?? colors.TEXT_SUBTLE,
-          textAlign: "center",
-        },
+      marginTop: 6,
+      color: text.description ?? colors.TEXT_SUBTLE,
+      textAlign: "center",
+    },
         emptyText: {
-          fontSize: 12,
-          lineHeight: 18,
-          color: text.description ?? colors.TEXT_SUBTLE,
-        },
+      color: text.description ?? colors.TEXT_SUBTLE,
+    },
       },
-      ui
+      ui, {"title":"modalTitle","weatherText":"sectionTitle","tempText":"button","metaText":"description","memoLabel":"button","memoDetail":"body","sectionTitle":"sectionTitle","bucketLabel":"button","bucketWeather":"button","bucketTemp":"body","bucketMeta":"description","emptyText":"description"}
     )
   );
 }
@@ -188,9 +177,10 @@ export default function KokoroWeatherDetailModal({ visible, item, detail, report
   const shareText = buildEmotionShareText(normalized?.emotionSharePct, 2);
 
   return (
-    <Modal visible={!!visible} transparent animationType="slide" onRequestClose={onClose}>
-      <TouchableOpacity style={styles.backdrop} activeOpacity={1} onPress={onClose}>
-        <TouchableOpacity style={styles.sheet} activeOpacity={1} onPress={() => {}}>
+    <Modal visible={!!visible} transparent animationType="slide" onRequestClose={onClose} supportedOrientations={MODAL_ORIENTATIONS}>
+      <SafeAreaProvider><SafeAreaView edges={["top", "bottom", "left", "right"]} style={styles.backdrop}>
+      <TouchableOpacity style={StyleSheet.absoluteFillObject} activeOpacity={1} onPress={onClose} accessibilityLabel="こころ天気の詳細を閉じる" accessibilityRole="button" />
+        <View style={styles.sheet}>
           <View style={styles.handle} />
           <View style={styles.headerRow}>
             <Text style={styles.title}>{title}</Text>
@@ -198,12 +188,14 @@ export default function KokoroWeatherDetailModal({ visible, item, detail, report
               style={styles.closeButton}
               onPress={onClose}
               accessibilityLabel="こころ天気の詳細を閉じる"
+              accessibilityRole="button"
               // こころ天気詳細を閉じる
             >
               <Ionicons name="close" size={20} color={colors.TEXT_ON_LIGHT} />
             </TouchableOpacity>
           </View>
 
+          <ScrollView style={{ flexShrink: 1 }} contentContainerStyle={{ paddingBottom: 8 }}>
           <View style={styles.summaryCard}>
             <View style={styles.summaryTop}>
               <Ionicons name={normalized?.iconName || "ellipse-outline"} size={24} color={colors.TITLE_GOLD} />
@@ -228,11 +220,11 @@ export default function KokoroWeatherDetailModal({ visible, item, detail, report
                 const key = bucket.id || bucket.bucketKey || `bucket-${idx}`;
                 return (
                   <View key={key} style={styles.bucketCard}>
-                    <Text style={styles.bucketLabel} numberOfLines={1}>{bucket.label}</Text>
+                    <Text style={styles.bucketLabel}>{bucket.label}</Text>
                     <View style={styles.bucketIconWrap}>
                       <Ionicons name={bucket.iconName || "ellipse-outline"} size={26} color={colors.TITLE_GOLD} />
                     </View>
-                    <Text style={styles.bucketWeather} numberOfLines={1}>{bucket.weatherLabel}</Text>
+                    <Text style={styles.bucketWeather}>{bucket.weatherLabel}</Text>
                     <Text style={styles.bucketTemp}>{bucket.temperatureDisplay || bucket.temperatureHighDisplay || "—"}</Text>
                     {bucketDominant || bucketShare ? <Text style={styles.bucketMeta}>{bucketDominant || bucketShare}</Text> : null}
                     {bucket.observationMemo?.visible ? <Text style={styles.bucketMeta}>{bucket.observationMemo.label}</Text> : null}
@@ -243,8 +235,9 @@ export default function KokoroWeatherDetailModal({ visible, item, detail, report
           ) : (
             <Text style={styles.emptyText}>時間帯別のこころ天気はまだありません。</Text>
           )}
-        </TouchableOpacity>
-      </TouchableOpacity>
+          </ScrollView>
+        </View>
+      </SafeAreaView></SafeAreaProvider>
     </Modal>
   );
 }

@@ -1,0 +1,377 @@
+{
+  "record_kind": "BODY_FREE_READ_ONLY_TEACHER_SCOPE_AUDIT",
+  "date_jst": "2026-11-03",
+  "source": {
+    "api_commit": "dc05dc358d1c44ce47fd844f6041d74f1f74fe6a",
+    "plan_sha256": "868ae97435fcb98b4c6d8806c2b9eadfca080f4043b38c1e490e230ad77d6ab4",
+    "teacher_count": 74,
+    "evaluation_count": 46
+  },
+  "global_teacher_scope_counts": {
+    "CONTENT_TARGET": 43,
+    "WRITTEN_REASON": 12,
+    "WRITTEN_UNKNOWN": 53,
+    "UNKNOWN_CONTENT": 53,
+    "TE_CONTEXT": 6,
+    "ATTRIBUTIVE_CONTENT": 1
+  },
+  "global_teacher_node_kind_counts": {
+    "ACTION_OR_NONACTION": 59,
+    "IMMEDIATE_RESULT_OR_AFTERMATH": 11,
+    "ATTENTION_OR_THOUGHT": 31,
+    "SCENE": 3,
+    "ROLE": 5
+  },
+  "written_reason_teacher_ids": [
+    "AT01",
+    "AT08",
+    "AT21",
+    "AT22",
+    "NT05",
+    "NT06",
+    "NT07",
+    "NT08",
+    "ST01",
+    "ST02",
+    "ST03",
+    "ST04"
+  ],
+  "lexical_granularity_observation": {
+    "action_quotes_containing_wo_particle": 14,
+    "with_content_target_child": 3,
+    "without_content_target_child": 11,
+    "teacher_ids_without_child": [
+      "AT13",
+      "AT16",
+      "AT24",
+      "BT01",
+      "BT02",
+      "BT03",
+      "BT04"
+    ],
+    "interpretation": "Lexical audit only, not an exhaustive semantic object count or a declaration that whole-action representations are erroneous."
+  },
+  "current_contract_findings": {
+    "every_object_requires_a_separate_content_target": false,
+    "wire_allows_zero_to_eight_units": true,
+    "complete_source_and_unassigned_ranges_preserved": true,
+    "all_unit_candidates_remain_unparsed": true,
+    "structural_admission_is_not_semantic_acceptance": true,
+    "authority_refs": [
+      {
+        "repository": "MassyuRed/mashos-api",
+        "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py",
+        "symbols": [
+          "_clarified_units_instruction",
+          "AnalysisModelQuotedParentUnitsInput.messages",
+          "_bind_model_unit_fields"
+        ]
+      },
+      {
+        "repository": "MassyuRed/Cocolon",
+        "path": "Cocolon_前提資料/designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md",
+        "anchors": [
+          "analysis-model-units-proposal-20261102",
+          "analysis-quoted-parent-units-plan-20261102"
+        ]
+      }
+    ],
+    "conclusion": "No current rule requires every lexical object to be a separate CONTENT_TARGET. Missing independent target output is an observed representational delta, not by itself a wire violation, proven lexical loss, or proven erroneous teacher. The source-grounded argument/scope responsibility required for later ordinary graph adoption remains unfinished.",
+    "current_v2_instruction_prohibits_sahen_stem_false_targets": true
+  },
+  "case_audits": [
+    {
+      "probe_id": "MD01",
+      "exact_nonempty_source_teacher_matches": 0,
+      "matching_teacher_ids": [],
+      "before": {
+        "units": 6,
+        "node_kind_counts": {
+          "ACTION_OR_NONACTION": 1
+        },
+        "scope_counts": {
+          "CONTENT_TARGET": 1,
+          "WRITTEN_UNKNOWN": 2,
+          "UNKNOWN_CONTENT": 2
+        },
+        "qualifier_kind_counts": {
+          "EXPLICIT_ACTOR": 1,
+          "WRITTEN_MODIFIER": 1,
+          "EPISTEMIC_EXPRESSION": 2
+        },
+        "duplicate_quote_groups": 1,
+        "written_unknown_units_with_parent": 0,
+        "raw_sha256": "1e902c1428f577907b6ea6a209ec7be0d805b47ee5955e19dc3e7d47881a1804"
+      },
+      "after": {
+        "units": 5,
+        "node_kind_counts": {
+          "ACTION_OR_NONACTION": 1
+        },
+        "scope_counts": {
+          "WRITTEN_UNKNOWN": 2,
+          "UNKNOWN_CONTENT": 2
+        },
+        "qualifier_kind_counts": {
+          "EXPLICIT_ACTOR": 1,
+          "EPISTEMIC_EXPRESSION": 2
+        },
+        "duplicate_quote_groups": 0,
+        "written_unknown_units_with_parent": 0,
+        "raw_sha256": "3dededc9f0e8f43299fb03b8148d6fd0be0cc4a02303a2102b83145f4f79bac8"
+      },
+      "related_teacher_ids": {
+        "explicit_target": [
+          "NT01",
+          "NT02",
+          "NT03",
+          "NT04",
+          "SC03",
+          "SC06"
+        ],
+        "whole_action_without_separate_target": [
+          "AT13",
+          "BT01",
+          "BT02",
+          "BT03",
+          "BT04"
+        ],
+        "two_unknown": [
+          "UQ01",
+          "UQ02",
+          "MX01",
+          "MX02",
+          "OA01",
+          "OA02",
+          "SC01",
+          "SC02",
+          "SC03",
+          "SC04",
+          "SC05",
+          "SC06",
+          "RC02"
+        ]
+      },
+      "differential_conclusion": "Separate CONTENT_TARGET output changed from one to zero while its lexical content remains within the full ACTION quote. Exact source was not taught. Existing targets mix whole-action and split-target representations; this is not proven to be forgetting of an exact target or a current wire violation. No sole cause established."
+    },
+    {
+      "probe_id": "OD01",
+      "exact_nonempty_source_teacher_matches": 0,
+      "matching_teacher_ids": [],
+      "before": {
+        "units": 6,
+        "node_kind_counts": {
+          "ACTION_OR_NONACTION": 1
+        },
+        "scope_counts": {
+          "CONTENT_TARGET": 1,
+          "WRITTEN_UNKNOWN": 2,
+          "UNKNOWN_CONTENT": 2
+        },
+        "qualifier_kind_counts": {
+          "EXPLICIT_ACTOR": 1,
+          "EPISTEMIC_EXPRESSION": 2,
+          "WRITTEN_MODIFIER": 1
+        },
+        "duplicate_quote_groups": 0,
+        "written_unknown_units_with_parent": 0,
+        "raw_sha256": "7b4828fd008a56c3474112ad166336c7b9bb88d7a15b734573fbfed19fda9beb"
+      },
+      "after": {
+        "units": 5,
+        "node_kind_counts": {
+          "ACTION_OR_NONACTION": 1
+        },
+        "scope_counts": {
+          "WRITTEN_UNKNOWN": 2,
+          "UNKNOWN_CONTENT": 2
+        },
+        "qualifier_kind_counts": {
+          "EXPLICIT_ACTOR": 1,
+          "EPISTEMIC_EXPRESSION": 2
+        },
+        "duplicate_quote_groups": 0,
+        "written_unknown_units_with_parent": 0,
+        "raw_sha256": "97fb93729d0c445c1e11503ee4a3c8b4f47cb5c9100ed67a017d6686f4914407"
+      },
+      "related_teacher_ids": {
+        "explicit_target": [
+          "NT01",
+          "NT02",
+          "NT03",
+          "NT04",
+          "SC03",
+          "SC06"
+        ],
+        "whole_action_without_separate_target": [
+          "AT13",
+          "BT01",
+          "BT02",
+          "BT03",
+          "BT04"
+        ],
+        "two_unknown": [
+          "UQ01",
+          "UQ02",
+          "MX01",
+          "MX02",
+          "OA01",
+          "OA02",
+          "SC01",
+          "SC02",
+          "SC03",
+          "SC04",
+          "SC05",
+          "SC06",
+          "RC02"
+        ]
+      },
+      "differential_conclusion": "Separate CONTENT_TARGET output changed from one to zero while its lexical content remains within the full ACTION quote. Exact source was not taught. Existing targets mix whole-action and split-target representations; this is not proven to be forgetting of an exact target or a current wire violation. No sole cause established."
+    },
+    {
+      "probe_id": "NV04",
+      "exact_nonempty_source_teacher_matches": 0,
+      "matching_teacher_ids": [],
+      "before": {
+        "units": 6,
+        "node_kind_counts": {
+          "IMMEDIATE_RESULT_OR_AFTERMATH": 2
+        },
+        "scope_counts": {
+          "TE_CONTEXT": 1,
+          "ATTRIBUTIVE_CONTENT": 1,
+          "WRITTEN_UNKNOWN": 1,
+          "UNKNOWN_CONTENT": 1
+        },
+        "qualifier_kind_counts": {
+          "RELATIVE_TIME": 2,
+          "NEGATION": 1,
+          "EPISTEMIC_EXPRESSION": 1
+        },
+        "duplicate_quote_groups": 1,
+        "written_unknown_units_with_parent": 1,
+        "raw_sha256": "34e5dc42a2619122ff96594ea5f2ea3edf11bb10cbf154c11c441c4c53dd0ef4"
+      },
+      "after": {
+        "units": 6,
+        "node_kind_counts": {
+          "IMMEDIATE_RESULT_OR_AFTERMATH": 2
+        },
+        "scope_counts": {
+          "TE_CONTEXT": 1,
+          "ATTRIBUTIVE_CONTENT": 1,
+          "WRITTEN_UNKNOWN": 1,
+          "UNKNOWN_CONTENT": 1
+        },
+        "qualifier_kind_counts": {
+          "RELATIVE_TIME": 2,
+          "NEGATION": 1,
+          "EPISTEMIC_EXPRESSION": 1
+        },
+        "duplicate_quote_groups": 1,
+        "written_unknown_units_with_parent": 1,
+        "raw_sha256": "34e5dc42a2619122ff96594ea5f2ea3edf11bb10cbf154c11c441c4c53dd0ef4"
+      },
+      "related_teacher_ids": {
+        "nested_result_context": [
+          "AT03"
+        ],
+        "past_unknown_current_result": [
+          "BT07"
+        ],
+        "independent_written_unknown": [
+          "AT16",
+          "AT18",
+          "AT26"
+        ]
+      },
+      "differential_conclusion": "Raw unchanged from prior v2 result. Duplicate result root and a WRITTEN_UNKNOWN unit carrying a parent remain invalid. Related component lessons exist, but this exact nested-result-plus-independent-unknown source is absent. No contradiction in those reference targets identified; composition failure is not assigned a sole cause."
+    },
+    {
+      "probe_id": "HQ04",
+      "exact_nonempty_source_teacher_matches": 0,
+      "matching_teacher_ids": [],
+      "before": {
+        "units": 3,
+        "node_kind_counts": {
+          "IMMEDIATE_RESULT_OR_AFTERMATH": 1
+        },
+        "scope_counts": {
+          "TE_CONTEXT": 1,
+          "ATTRIBUTIVE_CONTENT": 1
+        },
+        "qualifier_kind_counts": {
+          "RELATIVE_TIME": 2,
+          "NEGATION": 1
+        },
+        "duplicate_quote_groups": 0,
+        "written_unknown_units_with_parent": 0,
+        "raw_sha256": "6d7cae6194a183bc3e3eab1112e840fb41dd5c8e9c66769304d993237e4bd208"
+      },
+      "after": {
+        "units": 3,
+        "node_kind_counts": {
+          "IMMEDIATE_RESULT_OR_AFTERMATH": 1
+        },
+        "scope_counts": {
+          "TE_CONTEXT": 1,
+          "ATTRIBUTIVE_CONTENT": 1
+        },
+        "qualifier_kind_counts": {
+          "RELATIVE_TIME": 2,
+          "NEGATION": 1
+        },
+        "duplicate_quote_groups": 0,
+        "written_unknown_units_with_parent": 0,
+        "raw_sha256": "6d7cae6194a183bc3e3eab1112e840fb41dd5c8e9c66769304d993237e4bd208"
+      },
+      "written_reason_marker_present_in_source": true,
+      "related_teacher_ids": {
+        "written_reason": [
+          "AT01",
+          "AT08",
+          "AT21",
+          "AT22",
+          "NT05",
+          "NT06",
+          "NT07",
+          "NT08",
+          "ST01",
+          "ST02",
+          "ST03",
+          "ST04"
+        ],
+        "nested_attributive_context": [
+          "AT03"
+        ],
+        "past_unknown_current_result": [
+          "BT07"
+        ]
+      },
+      "differential_conclusion": "Raw unchanged. Explicit reason marker and WRITTEN_REASON are absent from the candidate, which uses TE_CONTEXT. Twelve written-reason lessons exist, including result plus reason. The exact attributive-past-plus-written-reason composition is absent; no same-source wrong teacher or sole cause established."
+    }
+  ],
+  "decision": {
+    "normal_adoption": false,
+    "next_training_initial_selected": false,
+    "additional_training_plan": "NOT_FIXED",
+    "recommended_next_scope": "Clarify required argument/scope preservation against the existing meaning owner before choosing any new source-authored references or training conditions; do not copy model raw into teachers or tighten the receiver merely to force one decomposition."
+  },
+  "effects": {
+    "gpu_runs": 0,
+    "model_loads": 0,
+    "generations": 0,
+    "teacher_changes": 0,
+    "weight_changes": 0,
+    "production_changes": 0,
+    "db_changes": 0,
+    "public_api_changes": 0,
+    "rule_changes": 0,
+    "body_or_raw_included": false
+  },
+  "limitations": [
+    "Exact-source absence does not prove missing component lessons or a single causal explanation.",
+    "Teacher-target equality, scope counts and structural admission are not general meaning quality or product acceptance.",
+    "This result introduces no new product contract, checker, acceptance rule or automatic progression."
+  ]
+}

@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import { AppState, Text, TouchableOpacity, View } from "react-native";
+import { AppState, Text, TouchableOpacity, useWindowDimensions, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { StackActions } from "@react-navigation/native";
 import { createBottomTabNavigator, BottomTabBar } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { useAuth } from "../AuthContext";
+import { useOwnerRequestScope } from "../hooks/useOwnerRequestScope";
 import { useUnread } from "../UnreadContext";
 import { useSubscription } from "../SubscriptionContext";
 import { useTutorial } from "../TutorialContext";
@@ -21,7 +23,7 @@ import { navigationRef, buildAnalysisRootNavigationParams } from "./navigationRe
 import InputStackNavigator from "./InputStackNavigator";
 import AnalysisStackNavigator from "./AnalysisStackNavigator";
 import PieceStackNavigator from "./PieceStackNavigator";
-import RankingStackNavigator from "./RankingStackNavigator";
+import AppStartupLoadingView from "../runtime/AppStartupLoadingView";
 import SettingsStackNavigator from "./SettingsStackNavigator";
 import {
   ANALYSIS_REPORT_READ_STATUS_CHUNK_SIZE,
@@ -64,9 +66,7 @@ function CocolonTabBar(props) {
   const currentRoute = state.routes[state.index];
   const currentRouteName = currentRoute?.name;
   const effectiveRouteName =
-    typeof currentRouteName === "string" && currentRouteName.startsWith("Ranking")
-      ? "RankingTop"
-      : PIECE_SUB_ROUTES.has(currentRouteName)
+    PIECE_SUB_ROUTES.has(currentRouteName)
       ? "Piece"
       : currentRouteName;
 
@@ -85,9 +85,8 @@ function CocolonTabBar(props) {
   return (
     <View
       style={{
-        backgroundColor: colors.BG_SILVER,
-        borderTopColor: colors.BORDER_GOLD,
-        borderTopWidth: FRAME_BORDER_WIDTH,
+        backgroundColor: colors.SURFACE_TONAL,
+        borderTopWidth: 0,
       }}
     >
       <BottomTabBar {...props} state={filteredState} />
@@ -95,8 +94,62 @@ function CocolonTabBar(props) {
   );
 }
 
+export function createPieceSaveRecovery(owner) {
+  const pending = new Map();
+  const inputId = entry => entry.operation.request.source_ref.source_input_id;
+  const publication = runtime => runtime !== null && typeof runtime === 'object';
+  let active = true;
+  return Object.freeze({
+    find(expectedUserId, savedInputId) {
+      return active && owner && expectedUserId === owner ? pending.get(savedInputId)?.entry : undefined;
+    },
+    remember(entry) {
+      if (!active || !owner || entry.operation.expectedUserId !== owner || pending.has(inputId(entry))) return false;
+      pending.set(inputId(entry), { entry, stop: null, quotaExhausted: false });
+      return true;
+    },
+    forget(entry) {
+      if (pending.get(inputId(entry))?.entry === entry) pending.delete(inputId(entry));
+    },
+    setQuotaExhausted(entry, value) {
+      if (!active) return;
+      const record = pending.get(inputId(entry));
+      if (record?.entry === entry) record.quotaExhausted = value === true;
+    },
+    isQuotaExhausted(entry) {
+      const record = pending.get(inputId(entry));
+      return active && record?.entry === entry && record.quotaExhausted === true;
+    },
+    markDisabled(entry, runtime) {
+      const record = pending.get(inputId(entry));
+      if (record?.entry !== entry) return;
+      if (!record.stop) record.stop = { publications: new WeakSet(), unknown: false };
+      if (publication(runtime)) record.stop.publications.add(runtime);
+      else record.stop.unknown = true;
+    },
+    canResume(entry, runtime, eligible, runtimeRefresh = false) {
+      if (!active) return false;
+      const record = pending.get(inputId(entry));
+      if (record?.entry !== entry) return false;
+      if (!record.stop) return true;
+      if (!eligible || !publication(runtime) || record.stop.publications.has(runtime)) return false;
+      if (record.stop.unknown && runtimeRefresh) record.stop.unknown = false;
+      return !record.stop.unknown;
+    },
+    activate() { active = true; },
+    revoke() { active = false; pending.clear(); },
+  });
+}
+
 export default function MainTabs() {
   const { colors } = useTheme();
+  const insets = useSafeAreaInsets();
+  const { fontScale } = useWindowDimensions();
+  const navigationFontScale = Math.max(1, Number(fontScale) || 1);
+  const tabIconAreaHeight = 28 + (navigationFontScale - 1) * 18;
+  const tabLabelLineHeight = 18;
+  // The item adds 5px above and below the icon/label stack.
+  const tabBarContentHeight = Math.ceil(8 + 10 + tabIconAreaHeight + tabLabelLineHeight * navigationFontScale);
   const {
     getScopeUnread,
     getFeatureUnread,
@@ -107,8 +160,8 @@ export default function MainTabs() {
     applyStartupSnapshot,
   } = useUnread();
 
-  const { isPaid, loading: subscriptionLoading } = useSubscription();
-  const { session, recoveryMode } = useAuth();
+  const { isPaid, loading: subscriptionLoading, tier, subscriptionBootstrapLoaded, subscriptionBootstrapLoading } = useSubscription();
+  const { session, recoveryMode, authOwnerGeneration } = useAuth();
   const {
     isTutorialMode,
     tutorialFlagsLoaded,
@@ -136,6 +189,30 @@ export default function MainTabs() {
   const analysisSubscriptionRefreshPendingRef = useRef(false);
 
   const [activeRouteName, setActiveRouteName] = useState("Input");
+  const [activeLeafName, setActiveLeafName] = useState("Input");
+  const [initialInputOwner, setInitialInputOwner] = useState(null);
+  const [startupComplete, setStartupComplete] = useState(false);
+  const currentOwner = session?.user?.id || null;
+  const { scope: ownerRequest, isCurrent: isOwnerCurrent } = useOwnerRequestScope(currentOwner, authOwnerGeneration);
+  const [pieceSaveScope, setPieceSaveScope] = useState(() => ({ owner: currentOwner,
+    recovery: createPieceSaveRecovery(currentOwner) }));
+  if (pieceSaveScope.owner !== currentOwner) {
+    setPieceSaveScope({ owner: currentOwner, recovery: createPieceSaveRecovery(currentOwner) });
+  }
+  const saveRecovery = pieceSaveScope.recovery;
+  useEffect(() => {
+    saveRecovery.activate();
+    return () => saveRecovery.revoke();
+  }, [saveRecovery]);
+  const onInitialInputSettled = React.useCallback((owner) => {
+    if (owner && owner === currentOwner) setInitialInputOwner(owner);
+  }, [currentOwner]);
+  const commonStartupReady = subscriptionBootstrapLoaded && !subscriptionBootstrapLoading && !subscriptionLoading && tier !== "unknown" && tutorialFlagsLoaded;
+  const homeStartupRequired = !isTutorialMode && activeRouteName === "Input" && activeLeafName === "Input";
+  const appStartupReady = startupComplete || (commonStartupReady && (!homeStartupRequired || initialInputOwner === currentOwner));
+  useEffect(() => {
+    if (appStartupReady) setStartupComplete(true);
+  }, [appStartupReady]);
   const frameEnabled = !HIDDEN_SCREENS.has(activeRouteName);
   const [pieceLinkPayload, setPieceLinkPayload] = useState(null);
 
@@ -176,9 +253,7 @@ export default function MainTabs() {
   const getTabBarActiveName = React.useCallback((name) => {
     const n = typeof name === "string" ? name : "";
     const effective =
-      n.startsWith("Ranking")
-        ? "RankingTop"
-        : PIECE_SUB_ROUTES.has(n)
+      PIECE_SUB_ROUTES.has(n)
         ? "Piece"
         : n;
     return MAIN_TAB_ROUTES.has(effective) ? effective : "Input";
@@ -263,6 +338,7 @@ export default function MainTabs() {
   }, [getFeatureUnread]);
 
   const applyAnalysisUnreadPatch = React.useCallback((patch, options = {}) => {
+    if (!isOwnerCurrent(ownerRequest)) return;
     const preserveTruthyKeys = options?.preserveTruthyKeys === true;
     const targetKeys = Array.isArray(options?.keys) && options.keys.length > 0
       ? options.keys
@@ -294,7 +370,7 @@ export default function MainTabs() {
     }
 
     return next;
-  }, [setUnreadGroup]);
+  }, [setUnreadGroup, ownerRequest, isOwnerCurrent]);
 
   const extractAnalysisUnreadFromStartupSnapshot = React.useCallback((payload) => {
     if (!payload || typeof payload !== "object" || Array.isArray(payload)) return null;
@@ -371,54 +447,46 @@ export default function MainTabs() {
   const screenPrefetchTimerRef = React.useRef(null);
 
   const pingActivityLogin = React.useCallback(async () => {
+    if (!isOwnerCurrent(ownerRequest)) return;
     try {
       const now = Date.now();
       const last = Number(__lastActivityLoginPingAtRef.current || 0) || 0;
       if (now - last < 10 * 1000) return;
       __lastActivityLoginPingAtRef.current = now;
-      const { data: sessionData } = await supabase.auth.getSession();
-      const accessToken = sessionData?.session?.access_token ?? null;
-      if (!accessToken) return;
       const url = `${API_BASE_URL}/activity/login`;
       const res = await apiFetch(url, {
         method: "POST",
-        auth: false,
-        headers: { Authorization: `Bearer ${accessToken}` },
+        ...ownerRequest.options,
       });
       if (!res.ok) {}
     } catch {}
-  }, []);
+  }, [ownerRequest, isOwnerCurrent]);
 
   const refreshPieceUnreadBadge = React.useCallback(async () => {
+    if (!isOwnerCurrent(ownerRequest)) return;
     try {
       if (isTutorialMode) {
         setUnread("Piece", "piecesNew", false);
         
         return;
       }
-      const json = await apiGet(PIECE_WIRE.routes.publicUnreadStatus);
+      const json = await apiGet(PIECE_WIRE.routes.publicUnreadStatus, ownerRequest.options);
+      if (!isOwnerCurrent(ownerRequest)) return;
       const hasUnread = typeof json?.has_unread === "boolean" ? json.has_unread : typeof json?.hasUnread === "boolean" ? json.hasUnread : false;
       setUnread("Piece", "piecesNew", !!hasUnread);
-      
     } catch {
+      if (!isOwnerCurrent(ownerRequest)) return;
       setUnread("Piece", "piecesNew", false);
-      
     }
-  }, [isTutorialMode, setUnread]);
+  }, [isTutorialMode, setUnread, ownerRequest, isOwnerCurrent]);
 
   const getAnalysisSelfStructureLatestSeenStorageKey = React.useCallback(async () => {
-    try {
-      const { data } = await supabase.auth.getSession();
-      const userId = String(data?.session?.user?.id || "").trim();
-      return userId
-        ? `${ANALYSIS_SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY}:${userId}`
-        : ANALYSIS_SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY;
-    } catch {
-      return ANALYSIS_SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY;
-    }
-  }, []);
+    return isOwnerCurrent(ownerRequest)
+      ? `${ANALYSIS_SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY}:${ownerRequest.owner}` : null;
+  }, [ownerRequest, isOwnerCurrent]);
 
   const fetchAnalysisReportReadIdSet = React.useCallback(async (reportIds) => {
+    if (!isOwnerCurrent(ownerRequest)) return new Set();
     const ids = Array.from(
       new Set(
         (Array.isArray(reportIds) ? reportIds : [])
@@ -435,7 +503,9 @@ export default function MainTabs() {
       const query = chunk
         .map((id) => `report_ids=${encodeURIComponent(id)}`)
         .join("&");
-      const json = await apiGet(`/report-reads/status?${query}`);
+      if (!isOwnerCurrent(ownerRequest)) return new Set();
+      const json = await apiGet(`/report-reads/status?${query}`, ownerRequest.options);
+      if (!isOwnerCurrent(ownerRequest)) return new Set();
       const readIds = Array.isArray(json?.read_ids) ? json.read_ids : [];
       readIds.forEach((id) => {
         const normalized = String(id || "").trim();
@@ -443,16 +513,18 @@ export default function MainTabs() {
       });
     }
     return readSet;
-  }, []);
+  }, [ownerRequest, isOwnerCurrent]);
 
   const fetchAnalysisSelfStructureLatestUnread = React.useCallback(async () => {
-    if (!isPaid) return false;
+    if (!isPaid || !isOwnerCurrent(ownerRequest)) return false;
 
     const storageKey = await getAnalysisSelfStructureLatestSeenStorageKey();
+    if (!storageKey || !isOwnerCurrent(ownerRequest)) return false;
     const [statusJson, seenVersionKey] = await Promise.all([
-      apiGet(SELF_STRUCTURE_WIRE.routes.latestStatus),
+      apiGet(SELF_STRUCTURE_WIRE.routes.latestStatus, ownerRequest.options),
       AsyncStorage.getItem(storageKey),
     ]);
+    if (!isOwnerCurrent(ownerRequest)) return false;
 
     const versionKey = String(statusJson?.version_key || "").trim();
     const hasVisibleContent = !!statusJson?.has_visible_content;
@@ -460,14 +532,15 @@ export default function MainTabs() {
 
     if (!versionKey || !hasVisibleContent) return false;
     return versionKey !== seenKey;
-  }, [getAnalysisSelfStructureLatestSeenStorageKey, isPaid]);
+  }, [getAnalysisSelfStructureLatestSeenStorageKey, isPaid, ownerRequest, isOwnerCurrent]);
 
   const fetchAnalysisSelfStructureHistoryUnread = React.useCallback(async () => {
-    if (!isPaid) return false;
+    if (!isPaid || !isOwnerCurrent(ownerRequest)) return false;
 
     const historyJson = await apiGet(
-      buildSelfStructureReportHistoryPath({ reportType: "monthly", limit: ANALYSIS_SELF_STRUCTURE_HISTORY_FETCH_LIMIT, offset: 0 })
+      buildSelfStructureReportHistoryPath({ reportType: "monthly", limit: ANALYSIS_SELF_STRUCTURE_HISTORY_FETCH_LIMIT, offset: 0 }), ownerRequest.options
     );
+    if (!isOwnerCurrent(ownerRequest)) return false;
     const items = Array.isArray(historyJson?.items) ? historyJson.items : [];
     const ids = items
       .map((item) => String(item?.id || "").trim())
@@ -477,7 +550,7 @@ export default function MainTabs() {
 
     const readSet = await fetchAnalysisReportReadIdSet(ids);
     return ids.some((id) => !readSet.has(id));
-  }, [fetchAnalysisReportReadIdSet, isPaid]);
+  }, [fetchAnalysisReportReadIdSet, isPaid, ownerRequest, isOwnerCurrent]);
 
   const clearAnalysisStartupWarmupTimer = React.useCallback(() => {
     try {
@@ -489,6 +562,7 @@ export default function MainTabs() {
   }, []);
 
   const refreshAnalysisReportsUnreadBadge = React.useCallback(async (options = {}) => {
+    if (!isOwnerCurrent(ownerRequest)) return;
     const preserveTruthyKeys = options?.preserveTruthyKeys === true;
     if (!preserveTruthyKeys) {
       analysisStartupWarmupSeqRef.current += 1;
@@ -496,7 +570,7 @@ export default function MainTabs() {
     }
 
     const refreshSeq = ++analysisUnreadRefreshSeqRef.current;
-    const isStale = () => refreshSeq !== analysisUnreadRefreshSeqRef.current;
+    const isStale = () => !isOwnerCurrent(ownerRequest) || refreshSeq !== analysisUnreadRefreshSeqRef.current;
     const canResolveSelfStructureUnread = !subscriptionLoading;
 
     const applyBaseUnread = (unread) => {
@@ -543,7 +617,7 @@ export default function MainTabs() {
       : Promise.resolve(false);
 
     try {
-      const json = await apiGet(`${ANALYSIS_WIRE.routes.reportsUnreadStatus}?${baseQuery}`);
+      const json = await apiGet(`${ANALYSIS_WIRE.routes.reportsUnreadStatus}?${baseQuery}`, ownerRequest.options);
       const unread = json?.unread_by_type || {};
       applyBaseUnread(unread);
     } catch (e) {
@@ -561,9 +635,11 @@ export default function MainTabs() {
     applyAnalysisUnreadPatch,
     fetchAnalysisSelfStructureLatestUnread,
     fetchAnalysisSelfStructureHistoryUnread,
+    ownerRequest, isOwnerCurrent,
   ]);
 
   const fetchAndApplyStartupSnapshot = React.useCallback(async ({ forceRefresh = false, source = "startup", applyIf, preserveTruthyKeys = false } = {}) => {
+    if (!isOwnerCurrent(ownerRequest)) return null;
     const params = new URLSearchParams();
     if (forceRefresh) {
       params.set("force_refresh", "true");
@@ -578,7 +654,8 @@ export default function MainTabs() {
 
     const query = params.toString();
     const path = query ? `/app/startup?${query}` : "/app/startup";
-    const json = await apiGet(path);
+    const json = await apiGet(path, ownerRequest.options);
+    if (!isOwnerCurrent(ownerRequest)) return null;
 
     if (typeof applyIf === "function") {
       try {
@@ -610,9 +687,11 @@ export default function MainTabs() {
     applyStartupSnapshot,
     extractAnalysisUnreadFromStartupSnapshot,
     stripAnalysisUnreadFromStartupSnapshot,
+    ownerRequest, isOwnerCurrent,
   ]);
 
   const revalidateAnalysisUnreadFromStartup = React.useCallback(async ({ source = ANALYSIS_WIRE.startupSource.startup, applyIf } = {}) => {
+    if (!isOwnerCurrent(ownerRequest)) return;
     try {
       await fetchAndApplyStartupSnapshot({
         forceRefresh: true,
@@ -624,6 +703,7 @@ export default function MainTabs() {
       console.warn("MainTabs: failed to hydrate Analysis unread from startup snapshot", e);
     }
 
+    if (!isOwnerCurrent(ownerRequest)) return;
     if (typeof applyIf === "function") {
       try {
         if (!applyIf()) return;
@@ -637,9 +717,10 @@ export default function MainTabs() {
     } catch (e) {
       console.warn("MainTabs: failed to refresh Analysis unread badges on startup", e);
     }
-  }, [fetchAndApplyStartupSnapshot, refreshAnalysisReportsUnreadBadge]);
+  }, [fetchAndApplyStartupSnapshot, refreshAnalysisReportsUnreadBadge, ownerRequest, isOwnerCurrent]);
 
   const warmAnalysisUnreadAtStartup = React.useCallback(async ({ force = false, sourcePrefix = ANALYSIS_WIRE.startupSource.startup } = {}) => {
+    if (!isOwnerCurrent(ownerRequest)) return;
     try {
       const now = Date.now();
       const last = Number(analysisStartupWarmupLastRunAtRef.current || 0) || 0;
@@ -649,7 +730,7 @@ export default function MainTabs() {
       clearAnalysisStartupWarmupTimer();
 
       const warmupSeq = ++analysisStartupWarmupSeqRef.current;
-      const isWarmupStale = () => warmupSeq !== analysisStartupWarmupSeqRef.current;
+      const isWarmupStale = () => !isOwnerCurrent(ownerRequest) || warmupSeq !== analysisStartupWarmupSeqRef.current;
       const applyIfCurrent = () => !isWarmupStale();
       if (!force) {
         try {
@@ -694,32 +775,37 @@ export default function MainTabs() {
     clearAnalysisStartupWarmupTimer,
     fetchAndApplyStartupSnapshot,
     revalidateAnalysisUnreadFromStartup,
+    ownerRequest, isOwnerCurrent,
   ]);
 
   const refreshEmotionLogUnreadState = React.useCallback(async () => {
+    if (!isOwnerCurrent(ownerRequest)) return null;
     try {
-      const json = await apiGet("/emotion-log/unread-status");
+      const json = await apiGet("/emotion-log/unread-status", ownerRequest.options);
+      if (!isOwnerCurrent(ownerRequest)) return null;
       const nextFeed = !!json?.feed_unread;
       const nextRequests = !!json?.requests_unread;
       setUnread("EmotionLog", "feed", nextFeed);
       setUnread("EmotionLog", "requests", nextRequests);
       return { feed: nextFeed, requests: nextRequests };
     } catch (e) {
+      if (!isOwnerCurrent(ownerRequest)) return null;
       console.warn("MainTabs: failed to refresh EmotionLog unread state", e);
       setUnread("EmotionLog", "feed", false);
       setUnread("EmotionLog", "requests", false);
       return null;
     }
-  }, [setUnread]);
+  }, [setUnread, ownerRequest, isOwnerCurrent]);
 
   const markEmotionLogFeedRead = React.useCallback(async (lastSeenCreatedAt = null) => {
+    if (!isOwnerCurrent(ownerRequest)) return;
     try {
       const body = lastSeenCreatedAt ? { last_seen_created_at: lastSeenCreatedAt } : {};
-      await apiPost("/emotion-log/unread/read-feed", body);
+      await apiPost("/emotion-log/unread/read-feed", body, ownerRequest.options);
     } catch (e) {
       console.warn("MainTabs: failed to mark EmotionLog feed read", e);
     }
-  }, []);
+  }, [ownerRequest, isOwnerCurrent]);
 
   const PREFETCH_MAX_AGE_MS = 2 * 60 * 1000;
   const __lastScreenPrefetchAtRef = React.useRef(0);
@@ -732,15 +818,17 @@ export default function MainTabs() {
   }, []);
 
   const prefetchEmotionLogFeed = React.useCallback(async () => {
+    if (!isOwnerCurrent(ownerRequest)) return;
     try {
-      const userId = await resolveCurrentUserId();
+      const userId = ownerRequest.owner;
       if (!userId) return;
       try {
         const fresh = getPrefetchEntryFresh?.("EmotionLog", "feed", PREFETCH_MAX_AGE_MS);
         if (fresh?.value?.userId && String(fresh.value.userId) === String(userId)) return;
       } catch {}
 
-      const json = await apiGet("/emotion-log/feed");
+      const json = await apiGet("/emotion-log/feed", ownerRequest.options);
+      if (!isOwnerCurrent(ownerRequest)) return;
       const rows = Array.isArray(json?.items) ? json.items : Array.isArray(json?.data) ? json.data : Array.isArray(json) ? json : [];
       const mapped = rows.map((row) => ({
         id: row?.id,
@@ -751,23 +839,21 @@ export default function MainTabs() {
       }));
       try { setPrefetch("EmotionLog", "feed", { userId, items: mapped }); } catch {}
     } catch {}
-  }, [formatTimeLabel, getPrefetchEntryFresh, setPrefetch]);
+  }, [formatTimeLabel, getPrefetchEntryFresh, setPrefetch, ownerRequest, isOwnerCurrent]);
 
   const prefetchPieceScreenData = React.useCallback(async () => {
+    if (!isOwnerCurrent(ownerRequest)) return;
     try {
-      const userId = await resolveCurrentUserId();
-      const { data: sessionData } = await supabase.auth.getSession();
-      const accessToken = sessionData?.session?.access_token ?? null;
-      if (!userId || !accessToken) return;
-      const headers = { "Content-Type": "application/json", Authorization: `Bearer ${accessToken}` };
+      const userId = ownerRequest.owner;
 
       try {
         const fresh = getPrefetchEntryFresh?.("Piece", "recoUsers", PREFETCH_MAX_AGE_MS);
         const isFresh = !!fresh?.value?.userId && String(fresh.value.userId) === String(userId);
         if (!isFresh) {
           const url = `${API_BASE_URL}${PIECE_WIRE.routes.recommendUsers}?limit=20`;
-          const res = await apiFetch(url, { method: "GET", auth: false, headers });
+          const res = await apiFetch(url, { method: "GET", ...ownerRequest.options });
           const json = await res.json().catch(() => null);
+          if (!isOwnerCurrent(ownerRequest)) return;
           if (res.ok) {
             const users = Array.isArray(json?.users)
               ? json.users
@@ -784,6 +870,7 @@ export default function MainTabs() {
       } catch {}
 
       try {
+        if (!isOwnerCurrent(ownerRequest)) return;
         const cacheKey = `qnaList:${userId}:newest`;
         const fresh = getPrefetchEntryFresh?.("Piece", cacheKey, PREFETCH_MAX_AGE_MS);
         const isFresh = !!fresh?.value?.targetUserId && String(fresh.value.targetUserId) === String(userId);
@@ -792,16 +879,18 @@ export default function MainTabs() {
             targetUserId: userId,
             mode: "newest",
             limit: 100,
-          });
+          }, ownerRequest.options);
+          if (!isOwnerCurrent(ownerRequest)) return;
           const items = Array.isArray(json?.items) ? json.items : [];
           const meta = json?.meta && typeof json.meta === "object" ? json.meta : null;
           setPrefetch("Piece", cacheKey, { userId, targetUserId: userId, mode: "newest", items, meta });
         }
       } catch {}
     } catch {}
-  }, [getPrefetchEntryFresh, setPrefetch]);
+  }, [getPrefetchEntryFresh, setPrefetch, ownerRequest, isOwnerCurrent]);
 
   const runAllScreenPrefetch = React.useCallback(async () => {
+    if (!isOwnerCurrent(ownerRequest)) return;
     try {
       const now = Date.now();
       const last = Number(__lastScreenPrefetchAtRef.current || 0) || 0;
@@ -809,12 +898,14 @@ export default function MainTabs() {
       __lastScreenPrefetchAtRef.current = now;
       const tasks = [prefetchEmotionLogFeed, prefetchPieceScreenData];
       for (const fn of tasks) {
+        if (!isOwnerCurrent(ownerRequest)) return;
         try { await fn(); } catch {}
       }
     } catch {}
-  }, [prefetchEmotionLogFeed, prefetchPieceScreenData]);
+  }, [prefetchEmotionLogFeed, prefetchPieceScreenData, ownerRequest, isOwnerCurrent]);
 
   const runAllUnreadPrefetch = React.useCallback((opts = {}) => {
+    if (!isOwnerCurrent(ownerRequest)) return;
     const includeScreenPrefetch = opts?.includeScreenPrefetch !== false;
     try { pingActivityLogin(); } catch {}
 
@@ -852,6 +943,7 @@ export default function MainTabs() {
     refreshPieceUnreadBadge,
     warmAnalysisUnreadAtStartup,
     runAllScreenPrefetch,
+    ownerRequest, isOwnerCurrent,
   ]);
 
   const clearSelfStructureBannerTimer = React.useCallback(() => {
@@ -948,9 +1040,10 @@ export default function MainTabs() {
   }, [hideSelfStructureBanner, isPaid, subscriptionLoading]);
 
   const refreshSelfStructureLatestStatus = React.useCallback(async () => {
-    if (subscriptionLoading || !isPaid || !isAppActive) return;
+    if (subscriptionLoading || !isPaid || !isAppActive || !isOwnerCurrent(ownerRequest)) return;
     try {
-      const json = await apiGet(SELF_STRUCTURE_WIRE.routes.latestStatus);
+      const json = await apiGet(SELF_STRUCTURE_WIRE.routes.latestStatus, ownerRequest.options);
+      if (!isOwnerCurrent(ownerRequest)) return;
       const nextVersionKey = String(json?.version_key || "").trim() || null;
       const hasVisibleContent = !!json?.has_visible_content;
       const reportMode = String(json?.saved_report_mode || "").trim().toLowerCase() === "deep" ? "deep" : "standard";
@@ -964,7 +1057,7 @@ export default function MainTabs() {
         if (nextVersionKey && hasVisibleContent) showSelfStructureBanner(reportMode);
       }
     } catch {}
-  }, [isAppActive, isPaid, showSelfStructureBanner, subscriptionLoading]);
+  }, [isAppActive, isPaid, showSelfStructureBanner, subscriptionLoading, ownerRequest, isOwnerCurrent]);
 
   useEffect(() => {
     if (subscriptionLoading || !isPaid || !isAppActive) return undefined;
@@ -1042,6 +1135,8 @@ export default function MainTabs() {
   ) : null;
 
   return (
+    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1 }} accessibilityElementsHidden={!appStartupReady} importantForAccessibility={appStartupReady ? "auto" : "no-hide-descendants"}>
     <GlobalFrameLayout frameEnabled={frameEnabled} headerBottomSlot={selfStructureBannerHud}>
       <Tab.Navigator
         backBehavior="history"
@@ -1053,6 +1148,9 @@ export default function MainTabs() {
             const name = st?.routes?.[st?.index]?.name;
             if (!name) return;
             setActiveRouteName((prev) => (prev === name ? prev : name));
+            let leaf = st?.routes?.[st?.index];
+            while (leaf?.state?.routes?.length) leaf = leaf.state.routes[leaf.state.index || 0];
+            setActiveLeafName(leaf?.name || name);
           },
         }}
         screenOptions={({ route }) => ({
@@ -1064,28 +1162,28 @@ export default function MainTabs() {
             borderLeftWidth: HIDDEN_SCREENS.has(route.name) ? 0 : FRAME_BORDER_WIDTH,
             borderRightWidth: HIDDEN_SCREENS.has(route.name) ? 0 : FRAME_BORDER_WIDTH,
           },
-          tabBarIcon: ({ color, size }) => {
+          tabBarLabelPosition: "below-icon",
+          tabBarIconStyle: { width: 54, height: tabIconAreaHeight },
+          tabBarIcon: ({ color, size, focused }) => {
             let iconName;
             switch (route.name) {
               case "Input": iconName = "create-outline"; break;
               case "Analysis": iconName = "globe-outline"; break;
               case "Piece": iconName = "cube-outline"; break;
-              case "RankingTop": iconName = "trophy-outline"; break;
               case "Settings": iconName = "settings-outline"; break;
               default: iconName = "ellipse-outline";
             }
-            const icon = <Ionicons name={iconName} size={size} color={color} />;
+            const icon = <Ionicons name={iconName} size={20} color={focused ? colors.ACCENT_TEXT : color} />;
             const showUnreadBadge = showTabUnreadBadge(route.name);
-            const shouldWrap = showUnreadBadge || route.name === "Analysis";
-            if (!shouldWrap) return icon;
             return (
-              <View style={{ width: size + (showUnreadBadge ? 22 : 10), height: size + (showUnreadBadge ? 12 : 10), alignItems: "center", justifyContent: "center", overflow: "visible" }}>
+              <View style={{ width: 54, minHeight: tabIconAreaHeight, borderRadius: 17,
+                backgroundColor: focused ? colors.GOLD_BUTTON : "transparent",
+                alignItems: "center", justifyContent: "center", overflow: "visible" }}>
                 {icon}
                 {showUnreadBadge ? (
                   <BottomTabUnreadBadge
                     visible={showUnreadBadge}
-                    style={{ position: "absolute", top: 0, right: -8, minHeight: 12, paddingHorizontal: 4, paddingVertical: 1 }}
-                    textStyle={{ fontSize: 7.5, lineHeight: 8.5, fontWeight: "800" }}
+                    style={{ position: "absolute", top: 0, right: -4, minHeight: 22, paddingHorizontal: 4, paddingVertical: 1 }}
                   />
                 ) : null}
               </View>
@@ -1094,9 +1192,12 @@ export default function MainTabs() {
           tabBarActiveTintColor: colors.TITLE_GOLD,
           tabBarInactiveTintColor: colors.TEXT_SUBTLE,
           tabBarStyle: {
-            backgroundColor: colors.BG_SILVER,
-            borderTopColor: colors.BORDER_GOLD,
+            backgroundColor: colors.SURFACE_TONAL,
+            borderTopColor: colors.CARD_BORDER,
             borderTopWidth: 0,
+            paddingTop: 8,
+            height: tabBarContentHeight + insets.bottom,
+            paddingBottom: insets.bottom,
           },
           tabBarLabel: ({ focused, color }) => {
             let label;
@@ -1104,21 +1205,22 @@ export default function MainTabs() {
               case "Input": label = "ホーム"; break;
               case "Analysis": label = "分析"; break;
               case "Piece": label = "ピース"; break;
-              case "RankingTop": label = "ランキング"; break;
               case "Settings": label = "設定"; break;
               default: label = route.name;
             }
             const showUnreadBadge = showTabUnreadBadge(route.name);
             const labelColor = focused || !showUnreadBadge ? color : colors.TEXT_ON_LIGHT;
-            return <Text style={{ color: labelColor, fontSize: 12, fontWeight: focused || showUnreadBadge ? "700" : "400" }}>{label}</Text>;
+            return <Text style={{ color: labelColor, fontSize: 12, lineHeight: tabLabelLineHeight, includeFontPadding: false, textAlign: "center", fontWeight: focused || showUnreadBadge ? "600" : "400" }}>{label}</Text>;
           },
         })}
       >
         <Tab.Screen
           name="Input"
-          component={InputStackNavigator}
           listeners={({ navigation, route }) => ({ tabPress: (e) => handleMainTabPress(route.name, navigation, route, e) })}
-        />
+        >
+          {(props) => <InputStackNavigator {...props} onInitialInputSettled={onInitialInputSettled}
+            appStartupReady={appStartupReady} saveRecovery={saveRecovery} />}
+        </Tab.Screen>
         <Tab.Screen
           name="Analysis"
           listeners={({ navigation, route }) => ({ tabPress: (e) => handleMainTabPress(route.name, navigation, route, e) })}
@@ -1138,6 +1240,7 @@ export default function MainTabs() {
           {(tabProps) => (
             <PieceStackNavigator
               {...tabProps}
+              saveRecovery={saveRecovery}
               linkPayload={pieceLinkPayload}
               onConsumeLinkPayload={() => setPieceLinkPayload(null)}
               onEmotionLogDisplayed={async (lastSeenCreatedAt) => {
@@ -1148,17 +1251,16 @@ export default function MainTabs() {
           )}
         </Tab.Screen>
         <Tab.Screen
-          name="RankingTop"
-          component={RankingStackNavigator}
-          listeners={({ navigation, route }) => ({ tabPress: (e) => handleMainTabPress(route.name, navigation, route, e) })}
-        />
-        <Tab.Screen
           name="Settings"
           component={SettingsStackNavigator}
           listeners={({ navigation, route }) => ({ tabPress: (e) => handleMainTabPress(route.name, navigation, route, e) })}
         />
       </Tab.Navigator>
     </GlobalFrameLayout>
+    </View>
+    {!appStartupReady ? <AppStartupLoadingView overlay /> : null}
+    </View>
   );
 }
+
 

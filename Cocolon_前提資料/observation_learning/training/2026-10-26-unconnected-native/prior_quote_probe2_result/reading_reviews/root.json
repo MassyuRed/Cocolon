@@ -1,0 +1,184 @@
+{
+  "reviewer": "Karen/root",
+  "formal_human_or_independent_Pro_Ultra_acceptance": false,
+  "product_accepted": false,
+  "scope": "Actual two after-answer raws, source and unchanged teacher, previous same-weight adaptive30 outputs, actual CMEE receipt/admission",
+  "source_run_sha256": "9eea21a00af228520f897d71be041d12a63260057bbb79f6dfa46f93f2f91070",
+  "diagnosis_sha256": "699fed3a392af969d35bbb0c1cf94c80d1dc0058bd20b4a841742b2bd2583baf",
+  "findings": {
+    "BOOK": "strict/EOS維持、引用15中12..14の3つは原欄不在で生成surfaceと対応。初回4claim/2relationは保持するが回答後の根拠・時点・no_contact役割が崩れ、必要7更新に1本。update_refs[1,2]やevidence15/16/17は配列外。受け取りは一人称回答の再掲と後悔反復。実receipt INVALID_EVIDENCE/REJECTで本文readerには未到達。",
+    "SHOP": "前回の重複schema key/数値座標/改変引用は消え、strict JSONで14引用全て原欄に一意。ただし根拠4/5等の誤参照と範囲外14、共通二否定・時点のscope不足。更新target_kind/refは復帰してもADD1だけで必要8未達、update_refs[1]も配列外。本文は主観の留保を落とし、未報告の想起可能性を追加。実UNSUPPORTED/model_evidence_out_of_scopeで本文reader未到達。"
+  },
+  "conclusion": "Format improved on SHOP; selected meaning/body remained0/2. No promotion or new paid trial.",
+  "cases": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "raw_sha256": "a68b12690de6be4d989f57045c76eb1e71408ad954ba6fbe32cfa9f58ebccac8",
+      "actual_receipt_status": "INVALID_EVIDENCE",
+      "actual_decision": "REJECT",
+      "actual_reason_code": "semantic_receipt_not_validated",
+      "surface_proposal": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "returned",
+              "continuing_concern",
+              "counterfactual"
+            ],
+            "relation_refs": [
+              "returned_concession",
+              "concern_content"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "late_return",
+              "apologize",
+              "reassurance_received",
+              "remaining_concern",
+              "self_statement",
+              "late_awareness",
+              "no_contact",
+              "returned",
+              "counterfactual",
+              "continuing_concern"
+            ],
+            "relation_refs": [
+              "action_link",
+              "memo_link",
+              "statement_concession",
+              "awareness_time",
+              "returned_concession",
+              "concern_content",
+              "answer_explains_target"
+            ],
+            "section": "reception"
+          },
+          {
+            "claim_refs": [
+              "late_awareness",
+              "no_contact",
+              "counterfactual"
+            ],
+            "relation_refs": [
+              "awareness_time",
+              "statement_concession",
+              "concern_content"
+            ],
+            "section": "update_note",
+            "update_refs": [
+              0,
+              1,
+              2
+            ]
+          }
+        ],
+        "observation": "遅くして本を返したのですね。また、自分から「週末に返すね」と言っていたのですね。",
+        "reception": "自分から「週末に返すね」と言っていたのに、遅くなると分かった時点で連絡しなかったことです。本は返したのですが、「一言、遅くなるって伝えておけばよかったな」と、まだ気になっています。遅くなるって伝えておけばよかったな。",
+        "update_note": "遅くなると分かった時点で連絡しなかったことです。遅くなるって伝えておけばよかったな。"
+      },
+      "question_proposal": null,
+      "updates": [
+        {
+          "evidence_indexes": [
+            12,
+            13,
+            14,
+            15,
+            16,
+            17
+          ],
+          "operation": "ADD",
+          "prior_snapshot_ref": "semantic-4520ef0d995a8c13b04aeccdce90c571a71f9960a7a52eed7676a29bc99d3d15",
+          "replacement_refs": [
+            "late_awareness",
+            "no_contact",
+            "counterfactual",
+            "statement_concession",
+            "concern_content",
+            "answer_explains_target"
+          ],
+          "target_kind": "UNKNOWN",
+          "target_ref": "missing_explanation"
+        }
+      ],
+      "static_findings_are_not_alternative_engine_reason": true
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "raw_sha256": "6074d356c35b15d842ce4ee41978978a5d22e682401d6e064b83f33dc531e426",
+      "actual_receipt_status": "CANDIDATE_UNREVIEWED",
+      "actual_decision": "UNSUPPORTED",
+      "actual_reason_code": "model_evidence_out_of_scope",
+      "surface_proposal": {
+        "bindings": [
+          {
+            "claim_refs": [
+              "opening_known",
+              "celebration_sent",
+              "joy",
+              "felt_left_behind"
+            ],
+            "relation_refs": [
+              "action_link",
+              "memo_link"
+            ],
+            "section": "observation"
+          },
+          {
+            "claim_refs": [
+              "shared_talk",
+              "perceived_realization",
+              "felt_distance",
+              "answer_joy",
+              "answer_sadness"
+            ],
+            "relation_refs": [
+              "past_reference",
+              "answer_explains_target",
+              "distance_link",
+              "answer_concession"
+            ],
+            "section": "reception"
+          },
+          {
+            "claim_refs": [
+              "no_joint_preparation",
+              "no_promise"
+            ],
+            "relation_refs": [],
+            "section": "update_note",
+            "update_refs": [
+              0,
+              1
+            ]
+          }
+        ],
+        "observation": "昔からの友人が店を開いたと知り、お祝いのメッセージを送ったのですね。うれしかったと聞けて、二人で話していた未来が、友人の方ではもう現実になっていたのですね。",
+        "reception": "あの話を一緒にしていた頃から少し離れてしまったようで、寂しかったですと聞けて、あの時を思い出せますね。",
+        "update_note": "一緒に準備をしていたわけでも、約束していたわけでもありませんと、その通りです。"
+      },
+      "question_proposal": null,
+      "updates": [
+        {
+          "evidence_indexes": [
+            6,
+            7,
+            8
+          ],
+          "operation": "ADD",
+          "prior_snapshot_ref": "semantic-077176d422c89b505d63586a9490148d0773d6a74be223afe66fa6d7a9d7f2c6",
+          "replacement_refs": [
+            "shared_talk",
+            "no_joint_preparation",
+            "no_promise"
+          ],
+          "target_kind": "UNKNOWN",
+          "target_ref": "missing_explanation"
+        }
+      ],
+      "static_findings_are_not_alternative_engine_reason": true
+    }
+  ]
+}

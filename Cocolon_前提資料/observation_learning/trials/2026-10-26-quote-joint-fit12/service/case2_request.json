@@ -1,0 +1,92 @@
+{
+  "request_id": "emlis-0636cfd4-76c2-4463-9163-ec2223475949",
+  "current_input_bundle": {
+    "thought_text": "温かいものを食べたら、少し落ち着いた。",
+    "action_text": "帰ってから、雑炊を作って食べた。",
+    "emotions": [
+      {
+        "type": "平穏",
+        "strength": "medium",
+        "source_field": "emotion_details"
+      },
+      {
+        "type": "喜び",
+        "strength": "weak",
+        "source_field": "emotion_details"
+      }
+    ],
+    "emotion_strength_summary": {
+      "primary_type": "平穏",
+      "primary_strength": "medium",
+      "strongest_type": "平穏",
+      "strongest_strength": "medium",
+      "max_strength_score": 2,
+      "has_strong": false,
+      "strength_counts": [
+        [
+          "medium",
+          1
+        ],
+        [
+          "weak",
+          1
+        ]
+      ]
+    },
+    "categories": [
+      "生活"
+    ],
+    "selected_at": "2026-10-25T11:13:24.871403+00:00",
+    "source_record_id": "475866f3-134b-42c5-b28b-194e6999b2f1",
+    "is_secret": false,
+    "selection_seed": "",
+    "schema_version": "emlis.current_input_bundle.v1",
+    "raw_current_input": {
+      "id": "475866f3-134b-42c5-b28b-194e6999b2f1",
+      "memo": "温かいものを食べたら、少し落ち着いた。",
+      "category": [
+        "生活"
+      ],
+      "emotions": [
+        "平穏",
+        "喜び"
+      ],
+      "created_at": "2026-10-25T11:13:24.871403+00:00",
+      "memo_action": "帰ってから、雑炊を作って食べた。",
+      "emotion_details": [
+        {
+          "type": "平穏",
+          "strength": "medium"
+        },
+        {
+          "type": "喜び",
+          "strength": "weak"
+        }
+      ]
+    }
+  },
+  "expected_source_record_id": "475866f3-134b-42c5-b28b-194e6999b2f1",
+  "core_id": "emlis_ai",
+  "product_job": "OBSERVE_AND_CLARIFY",
+  "execution_mode": "OFFLINE_CANDIDATE",
+  "emlis_thread": {
+    "thread_id": "0636cfd4-76c2-4463-9163-ec2223475949",
+    "original_source_ref": "src-424a2c496893fec91993228a",
+    "answers": [],
+    "admitted_history": [],
+    "current_round": 0,
+    "capability_snapshot": "FREE_Q1",
+    "question_control_context": {
+      "pending_question": null,
+      "asked_target_refs": [],
+      "issued_count": 0,
+      "stop": false,
+      "issued_questions": [],
+      "question_limit": 1
+    },
+    "prepared_meaning_checkpoint_ref": null,
+    "schema_version": "cocolon.cmee.emlis_thread.v1",
+    "rejected_frame_keys": [],
+    "frame_feedback_sources": []
+  }
+}

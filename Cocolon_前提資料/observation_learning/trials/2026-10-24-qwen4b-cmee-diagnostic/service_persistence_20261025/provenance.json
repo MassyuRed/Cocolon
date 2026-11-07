@@ -1,0 +1,12 @@
+{
+  "premise_commit": "db0ce12408e9c6c066fb650cabb941b1ba83099f",
+  "api_commit": "7a4dc32c07f8c8a30609e8345207c6a9c831de23",
+  "script_repository_path": "Cocolon_前提資料/observation_learning/training/2026-10-24-emlis-4b-training/persistence_check/check_saved_roundtrip.py",
+  "script_sha256": "e193e4d6a149313059f33549c82cd413b47e6e52e53349e5564b429c34a1883f",
+  "fixture_persons_fictitious": true,
+  "new_model_calls": 0,
+  "new_training_updates": 0,
+  "sql_runtime": "NOT_EXECUTED_NOT_FOUND_IN_CHECKED_LOCATIONS",
+  "service_runtime": "NOT_EXECUTED",
+  "gpu_lifecycle_operations": 0
+}

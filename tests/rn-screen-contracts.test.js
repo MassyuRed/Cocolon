@@ -102,7 +102,7 @@ test('App root wires providers through Phase 9 navigation/runtime split modules'
   ], 'App.js Phase 9 provider shell');
 
   assertIncludes(constants, [
-    'export const MAIN_TAB_ROUTES = new Set(["Input", "Analysis", "Piece", "RankingTop", "Settings"]);',
+    'export const MAIN_TAB_ROUTES = new Set(["Input", "Analysis", "Piece", "Settings"]);',
     'export const PIECE_SUB_ROUTES = new Set',
     'export const ANALYSIS_SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY',
   ], 'navigationConstants.js');
@@ -141,7 +141,7 @@ test('App root wires providers through Phase 9 navigation/runtime split modules'
     'syncPushTokenOnce({ userId })',
     'startPushTokenSync({ userId })',
     'tryOpenRouteIfPending();',
-    '<MainTabs key={`main-tabs-${tutorialResetToken || 0}`} />',
+    '<MainTabs key={`main-tabs-${session.user.id}-${tutorialResetToken || 0}`} />',
   ], 'RootNavigator.js');
 
   assertIncludes(mainTabs, [
@@ -151,7 +151,6 @@ test('App root wires providers through Phase 9 navigation/runtime split modules'
     'InputStackNavigator',
     'AnalysisStackNavigator',
     'PieceStackNavigator',
-    'RankingStackNavigator',
     'SettingsStackNavigator',
     'GlobalFrameLayout',
     'buildAnalysisRootNavigationParams',
@@ -160,7 +159,7 @@ test('App root wires providers through Phase 9 navigation/runtime split modules'
     'setUnread("Piece", "piecesNew"',
   ], 'MainTabs.js');
 
-  assertRegex(inputStack, /<InputStack\.Screen\s+name="Input"\s+component=\{InputScreen\}/, 'Input stack registration');
+  assertRegex(inputStack, /<InputStack\.Screen\s+name="Input">/, 'Input stack registration');
   assertRegex(analysisStack, /<AnalysisStack\.Screen\s+name="Analysis">/, 'Analysis stack registration');
   assertRegex(pieceStack, /<PieceStack\.Screen\s+name="Piece">/, 'Piece stack registration');
   assertRegex(settingsStack, /<SettingsStack\.Screen\s+name="SubscriptionSelect"\s+component=\{SubscriptionSelectScreen\}/, 'Subscription route registration');
@@ -185,9 +184,9 @@ test('App root wires providers through Phase 9 navigation/runtime split modules'
   ], 'AppRuntimeBlockingScreen.js');
 
   assertIncludes(globalFrame, [
-    'export const FRAME_BORDER_WIDTH = 2;',
+    'export const FRAME_BORDER_WIDTH = 0;',
     'export default function GlobalFrameLayout',
-    '～Emotion Limbic Internal Structure～',
+    'fontFamily: "CormorantGaramond-Bold"',
     'useSafeAreaInsets',
   ], 'GlobalFrameLayout.js');
 });
@@ -213,9 +212,6 @@ test('InputScreen keeps the emotion input, Emlis reply, draft, today question, a
 
   assertIncludes(input, [
     'import { submitEmotionInput } from "../lib/api/home/emotionSubmitApi";',
-    'previewEmotionPiece',
-    'publishEmotionPiece',
-    'cancelEmotionPiece',
     'InputPiecePreviewController',
     'TodayQuestionCard',
     'InputStartupModals',
@@ -340,7 +336,7 @@ test('InputScreen keeps the emotion input, Emlis reply, draft, today question, a
 
   assertIncludes(inputEmotionSection, [
     'export default function InputEmotionSection',
-    'EMOTION_ROWS.map',
+    'EMOTION_ROWS.flat()',
     'SELF_INSIGHT',
     'changeStrength',
     'strengthRowRefs.current[cat]',
@@ -393,8 +389,9 @@ test('InputScreen keeps the emotion input, Emlis reply, draft, today question, a
   ], 'InputPiecePreviewController.js');
 
   assertRegex(input, /await\s+submitEmotionInput\(/, 'emotion submit call');
-  assertRegex(input, /await\s+previewEmotionPiece\(/, 'Piece preview call');
-  assertRegex(input, /await\s+publishEmotionPiece\(/, 'Piece publish call');
+  assertNotIncludes(input, ['previewEmotionPiece', 'publishEmotionPiece', 'cancelEmotionPiece',
+    '../lib/api/home/emotionPieceApi'], 'InputScreen must use the saved-input Piece v2 host, never raw legacy Piece HTTP');
+  assertIncludes(input, ['InputPieceActionArea', 'savedInput={savedPieceInput.savedInput}'], 'saved-input Piece route');
   assertIncludes(input, [
     'const openedObservation = openInputFeedbackModal',
     'if (!openedObservation)',
@@ -1684,7 +1681,7 @@ test('Tutorial screens keep the current guided flow count and generated fixture 
     'TUTORIAL_FOLLOWED_USER_PIECE',
     'TUTORIAL_WATASHI_MAP',
     'TUTORIAL_WATASHI_MAP_PREVIEW',
-    'Emlisの観測',
+    'Emlisからの返答',
     'こころ天気',
     'わたしマップ',
     'ピース',
@@ -1736,15 +1733,16 @@ test('AccountScreen keeps profile, follow, visibility, subscription, and ID sear
 
   assertIncludes(accountProfileHook, [
     'export function useAccountProfile',
-    'apiGet("/account/profile/me")',
+    'apiGet("/account/profile/me", request)',
     '/account/display-name/availability',
     'apiPatch("/account/profile/me"',
-    'supabase.auth.updateUser',
+    'expectedUserId: user?.id',
     'Share.share({ message: code })',
     'https://emlis.app/u/${code}',
     'readShareCode',
     'readConnectCode',
   ], 'useAccountProfile.js');
+  assert.doesNotMatch(accountProfileHook, /supabase\.auth\.updateUser\(/, 'profile edits must not retarget a current-session metadata write');
 
   assertIncludes(accountFollowHook, [
     'export function useAccountFollowState',
@@ -1821,8 +1819,7 @@ test('AccountScreen keeps profile, follow, visibility, subscription, and ID sear
   assertIncludes(accountVisibilitySection, [
     'export default function AccountVisibilitySection',
     'VisibilitySettingRow',
-    'ピースの公開設定',
-    'ランキング表示設定',
+    'アカウントの公開設定',
     'ユーザーID表示設定',
     'ACCOUNT_WIRE.fields.shareCodePublic',
   ], 'AccountVisibilitySection.js');
@@ -1859,7 +1856,7 @@ test('TodayQuestionHistoryScreen keeps personal followup source-anchor display a
     '入力: 「',
     'TextInput',
     'optionalFreeTextInput',
-    'Analysisに戻る',
+    '前の画面に戻る',
   ], 'TodayQuestionHistoryScreen.js');
 });
 
@@ -1970,7 +1967,6 @@ test('Phase 10 Emlis observation release gate keeps regression and release-ready
     'observationStatus: inputFeedbackAI?.observation_status',
     'if (!openedObservation)',
     'showToast(`記録しました',
-    'showToast("ピースを生成しました")',
     'completeTutorialAfterReply();',
   ], 'InputScreen.js non-passed observation fallback behavior');
 
@@ -2819,7 +2815,7 @@ test('Kokoro weather Phase 6 QA keeps current card, report strip, modal, and for
 
   assertIncludes(detailModal, [
     'export default function KokoroWeatherDetailModal',
-    '<Modal visible={!!visible} transparent animationType="slide" onRequestClose={onClose}>',
+    '<Modal visible={!!visible} transparent animationType="slide" onRequestClose={onClose} supportedOrientations={MODAL_ORIENTATIONS}>',
     'onPress={onClose}',
     'accessibilityLabel="こころ天気の詳細を閉じる"',
     '時間帯別こころ天気',
@@ -2904,8 +2900,8 @@ test('Kokoro weather Phase 6 QA keeps scope on emotion analysis and preserves pl
 
   assertIncludes(guide, [
     'こころ天気（日）・こころ天気（週）・こころ天気（月）',
-    '感情分析のこころ天気',
-    'わたしマップの入口はFreeプランでも見られます。Plusプラン以上では、役割スイッチの一覧、よく通るルート、詳しい自己分析レポートを読めます。',
+    '今のこころ天気',
+    '現在のマップは、蓄積した入力全体を対象に全プラン共通で表示します。解析できていない範囲がある場合は、件数を案内します。',
   ], 'guide/guidesJa.js preserves emotion-only kokoro weather and self-analysis copy');
 
   assertIncludes(terms, [
@@ -2971,7 +2967,7 @@ test('Watashi Map Phase 3 updates top UI labels and keeps Free latest entry open
     'requiresPaid = false',
     'targetRoute: ROUTE_SELF_REPORT_GENERATE',
     'requiresPaid: false',
-    '履歴画面でプラン別に表示範囲を整理します。詳しい自己分析レポートはPlusプラン以上で読めます。',
+    '月次履歴はFreeが直近2回分、Plusが12回分、Premiumが全期間を見比べられます。',
   ], 'Self structure actions keep latest and history route open while screens gate detail');
 
   assertIncludes(generate, [
@@ -3069,9 +3065,9 @@ test('Watashi Map Phase 5 fixes history/detail tier boundaries', () => {
     'export function canViewWatashiMapHistory',
     'export function canViewWatashiMapDetailReport',
     'export function canExportWatashiMapPdf',
-    '履歴の閲覧範囲：Freeは最新概要のみ',
-    '履歴の閲覧範囲：直近1年分',
-    '履歴の閲覧範囲：無制限',
+    '月次マップの閲覧範囲：直近2回分',
+    '月次マップの閲覧範囲：直近12回分',
+    '月次マップの閲覧範囲：全期間',
     'Freeプランでは今のわたしマップ概要を見られます。過去の詳しい自己分析レポートの履歴はPlusプラン以上で読めます。',
     '長期の変化と深い分かれ道はPremiumプランで見られます。',
   ], 'watashiMapAccessPolicy.js defines Phase 5 tier boundaries');
@@ -3079,7 +3075,7 @@ test('Watashi Map Phase 5 fixes history/detail tier boundaries', () => {
   assertIncludes(actions, [
     'openSelfReportHistory',
     'requiresPaid: false',
-    '履歴画面でプラン別に表示範囲を整理します。詳しい自己分析レポートはPlusプラン以上で読めます。',
+    '月次履歴はFreeが直近2回分、Plusが12回分、Premiumが全期間を見比べられます。',
   ], 'useAnalysisSelfStructureActions.js lets history screen own Free/Plus/Premium gating');
 
   assertIncludes(analysis, [
@@ -3166,8 +3162,8 @@ test('Watashi Map Phase 6 copy, tutorial fixture, and QA guardrails stay aligned
 
   assertIncludes(todayQuestionHistory + mainTabs + crossLink, [
     '今のわたしマップが更新されました',
-    '回答を更新しました。わたしマップに反映されます。',
-    '過去の回答を編集すると、わたしマップに反映されます。',
+    '回答を更新しました。',
+    '過去の回答を確認・編集できます。',
     '【わたしマップの深掘り候補】',
     'ピースを開いて「わたしマップ」または「ピースライブラリ」',
     'わたしマップやピースで触れると良さそうな論点',
@@ -3178,7 +3174,7 @@ test('Watashi Map Phase 6 copy, tutorial fixture, and QA guardrails stay aligned
     'reading: "わたしマップ"',
     'これは性格タイプではなく、入力から見えた場面ごとの動き方です。',
     'わたしマップで役割スイッチ',
-    '履歴の閲覧範囲：Freeは最新概要のみ',
+    '月次マップの閲覧範囲：直近2回分',
     '長期の変化と深い分かれ道はPremiumプランで見られます。',
     'report_mode_label',
     'buildPalette(colors, isDark)',
@@ -4331,4 +4327,5 @@ test('P10 Gate Recovery public boundary RN contract keeps backend-owned passed p
   assert.equal(isPassedEmlisObservationReply(metaOnlyGateRecoveryPayload), false);
   assert.equal(buildPassedEmlisObservationModalPayload(metaOnlyGateRecoveryPayload), null);
 });
+
 

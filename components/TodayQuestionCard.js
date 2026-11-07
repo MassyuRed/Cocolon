@@ -13,6 +13,8 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { useTheme } from "../theme/ThemeContext";
 import CocolonButton from "./CocolonButton";
 import CocolonPressable from "./CocolonPressable";
+import { makeUiTokens } from "../ui/uiTokens";
+import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 
 export default function TodayQuestionCard({
   question,
@@ -30,8 +32,9 @@ export default function TodayQuestionCard({
   onSubmit,
   onOpenHistory,
 }) {
-  const { colors } = useTheme();
-  const styles = useMemo(() => createStyles(colors), [colors]);
+  const { colors, themeName } = useTheme();
+  const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
+  const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const { height: windowHeight } = useWindowDimensions();
   const isIOS = Platform.OS === "ios";
   const [mode, setMode] = useState("choice");
@@ -42,8 +45,8 @@ export default function TodayQuestionCard({
 
   const inputMaxHeight = useMemo(() => {
     const h = windowHeight || 0;
-    if (!h) return 520;
-    return Math.max(260, Math.floor(h * 0.75));
+    if (!h) return 240;
+    return Math.max(96, Math.min(240, Math.floor(h * 0.32)));
   }, [windowHeight]);
 
   useEffect(() => {
@@ -121,6 +124,7 @@ export default function TodayQuestionCard({
           <Text style={styles.lockedBody}>通知時刻になると、質問と回答欄が表示されます。</Text>
           {showHistoryButton ? (
             <CocolonPressable
+              containerStyle={styles.linkContainer}
               style={styles.linkButton}
               onPress={onOpenHistory}
               accessibilityLabel="今日の問い履歴を見る"
@@ -150,6 +154,7 @@ export default function TodayQuestionCard({
           ) : null}
           {showHistoryButton ? (
             <CocolonPressable
+              containerStyle={styles.linkContainer}
               style={styles.linkButton}
               onPress={onOpenHistory}
               accessibilityLabel="今日の問い履歴を見る"
@@ -166,6 +171,7 @@ export default function TodayQuestionCard({
               style={[styles.modeChip, mode === "choice" && styles.modeChipOn]}
               onPress={() => setMode("choice")}
               accessibilityLabel="選択式で答える"
+              accessibilityState={{ selected: mode === "choice" }}
             >
               <Text style={[styles.modeChipText, mode === "choice" && styles.modeChipTextOn]}>
                 選択で答える
@@ -176,6 +182,7 @@ export default function TodayQuestionCard({
                 style={[styles.modeChip, mode === "free_text" && styles.modeChipOn]}
                 onPress={() => setMode("free_text")}
                 accessibilityLabel="自由回答で答える"
+                accessibilityState={{ selected: mode === "free_text" }}
               >
                 <Text
                   style={[
@@ -204,7 +211,10 @@ export default function TodayQuestionCard({
                         setSelectedChoiceKey(String(choice?.choice_key || "") || null);
                       }}
                       accessibilityLabel={String(choice?.label || "選択肢")}
+                      accessibilityState={{ selected: !!active }}
                     >
+                      <Ionicons name={active ? "checkmark-circle" : "ellipse-outline"} size={20}
+                        color={active ? colors.ON_SURFACE_TONAL : colors.TEXT_SUBTLE} style={{ marginRight: 10 }} />
                       <Text style={[styles.choiceText, active && styles.choiceTextOn]}>
                         {String(choice?.label || "")}
                       </Text>
@@ -216,6 +226,7 @@ export default function TodayQuestionCard({
                 <View style={styles.optionalFreeTextCard}>
                   <Text style={styles.optionalFreeTextLabel}>任意でひと言だけ書けます。</Text>
                   <TextInput
+                    accessibilityLabel="任意のひと言"
                     style={styles.optionalFreeTextInput}
                     placeholder="ここに書いてください。"
                     {...(isIOS ? { defaultValue: freeText } : { value: freeText })}
@@ -234,7 +245,9 @@ export default function TodayQuestionCard({
             </>
           ) : (
             <View style={styles.freeTextCard}>
+              <Text style={styles.optionalFreeTextLabel}>自由回答</Text>
               <TextInput
+                accessibilityLabel="今日の問いへの自由回答"
                 style={[
                   styles.memoInput,
                   {
@@ -283,20 +296,17 @@ export default function TodayQuestionCard({
   );
 }
 
-function createStyles(COLORS) {
-  return StyleSheet.create({
+function createStyles(COLORS, ui) {
+  return StyleSheet.create(applyTypographyTokens({
     card: {
       backgroundColor: COLORS.FIELD_BG,
-      borderRadius: 20,
+      borderRadius: ui.radius.card,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      paddingHorizontal: 14,
-      paddingVertical: 14,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
       shadowColor: "#000",
-      shadowOpacity: 0.08,
-      shadowRadius: 10,
-      shadowOffset: { width: 0, height: 4 },
-      elevation: 3,
+      ...ui.shadow.float,
     },
     cardCompact: {
       marginTop: 0,
@@ -337,10 +347,13 @@ function createStyles(COLORS) {
     },
     modeRow: {
       flexDirection: "row",
+      flexWrap: "wrap",
       alignItems: "center",
       marginBottom: 12,
     },
     modeChip: {
+      minHeight: 44,
+      justifyContent: "center",
       paddingHorizontal: 12,
       paddingVertical: 8,
       borderRadius: 999,
@@ -348,10 +361,11 @@ function createStyles(COLORS) {
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.PANEL_BG,
       marginRight: 8,
+      marginBottom: 8,
     },
     modeChipOn: {
-      backgroundColor: COLORS.GOLD_BUTTON,
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      borderColor: COLORS.ON_SURFACE_TONAL,
     },
     modeChipText: {
       fontSize: 12,
@@ -359,13 +373,16 @@ function createStyles(COLORS) {
       color: COLORS.TEXT_ON_LIGHT,
     },
     modeChipTextOn: {
-      color: COLORS.ACCENT_TEXT,
+      color: COLORS.ON_SURFACE_TONAL,
     },
     choiceList: {
       marginBottom: 12,
     },
     choiceItem: {
-      borderRadius: 14,
+      minHeight: 52,
+      flexDirection: "row",
+      alignItems: "center",
+      borderRadius: 16,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.PANEL_BG,
@@ -374,17 +391,18 @@ function createStyles(COLORS) {
       marginBottom: 8,
     },
     choiceItemOn: {
-      backgroundColor: COLORS.GOLD_BUTTON,
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      borderColor: COLORS.ON_SURFACE_TONAL,
     },
     choiceText: {
+      flex: 1,
       fontSize: 14,
       lineHeight: 20,
       color: COLORS.TEXT_ON_LIGHT,
       fontWeight: "600",
     },
     choiceTextOn: {
-      color: COLORS.ACCENT_TEXT,
+      color: COLORS.ON_SURFACE_TONAL,
     },
     optionalFreeTextCard: {
       backgroundColor: COLORS.PANEL_BG,
@@ -417,10 +435,7 @@ function createStyles(COLORS) {
       paddingHorizontal: 12,
       paddingVertical: 10,
       shadowColor: "#000",
-      shadowOpacity: 0.1,
-      shadowRadius: 14,
-      shadowOffset: { width: 0, height: 6 },
-      elevation: 6,
+      ...ui.shadow.float,
       minHeight: 120,
       marginBottom: 12,
     },
@@ -487,9 +502,12 @@ function createStyles(COLORS) {
       lineHeight: 19,
       color: COLORS.TEXT_ON_LIGHT,
     },
-    linkButton: {
+    linkContainer: {
       marginTop: 12,
       alignSelf: "flex-start",
+    },
+    linkButton: {
+      minHeight: 44,
       flexDirection: "row",
       alignItems: "center",
     },
@@ -499,5 +517,10 @@ function createStyles(COLORS) {
       color: COLORS.TEXT_ON_LIGHT,
       marginRight: 4,
     },
-  });
+  }, ui, {
+    badgeText: "sectionTitle", questionText: "body", modeChipText: "button",
+    choiceText: "body", optionalFreeTextLabel: "description",
+    optionalFreeTextInput: "input", memoInput: "input", lockedTitle: "sectionTitle",
+    lockedBody: "description", answeredTitle: "sectionTitle", answeredBody: "body", linkText: "button",
+  }));
 }

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "adaptive_loss.py",
+    "git_blob": "8ed580004bee211f92f477b097ae9b406da15503",
+    "sha256": "5852c69d2b8dc592762eed100214707648be24fa59f331959b622ef599dde141",
+    "github_match": true
+  },
+  {
+    "name": "consume_aligned13.py",
+    "git_blob": "d698e77c2d1769d7dc08cfd921e0f3f55825a68c",
+    "sha256": "a51b097aca6d58fa1f1373410d7db0765c627083e1db7ad00239adb705a77d98",
+    "github_match": true
+  },
+  {
+    "name": "prepare_aligned13.py",
+    "git_blob": "16cfcd68592dce3a0ca38da846c8a56250d5af21",
+    "sha256": "ddd56f9a5724dc2020834d6b66e53255809d4b288e90b9a8bf47e07fd20e8deb",
+    "github_match": true
+  },
+  {
+    "name": "train_messages.jsonl",
+    "git_blob": "bf5b266a9f87a0a34453081b8c33ef241f12935a",
+    "sha256": "a80f08e96576251071f4c2e318e28ddc2160682dcbaab1701dd0e82b17153b34",
+    "github_match": true
+  },
+  {
+    "name": "eval_inputs.json",
+    "git_blob": "13be0cee86e8d65695c6576d537b62a60e1387cd",
+    "sha256": "05d2e02f042b478dec28605d28f6dd9ae93c132aeb7a715f95a83bb4458d1774",
+    "github_match": true
+  },
+  {
+    "name": "run_aligned13.py",
+    "git_blob": "68589ed3aa4ae9cb01c171605da5d036ca85a05d",
+    "sha256": "96b2b9187d6897a52f600796dcb67740ee74d8aba6c76aefb4cddae50c949503",
+    "github_match": true
+  },
+  {
+    "name": "aligned13.plan.json",
+    "git_blob": "9d163562256fdf4f7778b05bf5e6e5d33ecd1e75",
+    "sha256": "61254ba1eb5b40cf020e5296e42c898532d230035c94f8ee6d93d2b51d29bba3",
+    "github_match": true
+  },
+  {
+    "name": "actual_cpu_check.json",
+    "git_blob": "7e7790a26f7b46c1f113a7008b3ee49352f3b32e",
+    "sha256": "d3734933db85aa34bf608ae791a6ce3734812fdf237e4fb028336b5334f073d4",
+    "github_match": true
+  }
+]

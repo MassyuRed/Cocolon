@@ -1,0 +1,10 @@
+{
+  "status": "PRE_EXECUTION_REJECTED_ZERO_MODEL",
+  "source_commit": "ef3bf3dfb451abfdd9ac462e64560083c46e22df",
+  "cause": "approval JSON serialization changed gradient_clip float1.0 to int1",
+  "output_directory_created": false,
+  "real_model_loads": 0,
+  "training_updates": 0,
+  "generations": 0,
+  "original_log_sha256": "770738a87246df92c1ff782280ecd12b1c12b5db6f7081e255907e676f3b0a89"
+}

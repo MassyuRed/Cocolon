@@ -1,0 +1,15 @@
+{
+  "exit_code": 0,
+  "outer_seconds": 2.1100283060222864,
+  "source_commit": "29130e554d24754641dca830992a3589ad8258d3",
+  "expected_source_sha256": {
+    "prepare_cpu.py": "f03e7f4945bb5bb77d11e59f9668ec6d52b2525153671944eed4ac51aca95979",
+    "run_continuation17.py": "08c7bd3ef4e71f289f6aa81bd420877732d0b4fd9608961c092d17a3f2d8d14e",
+    "plan.json": "c5d82db7ff20bced3556447a58852b044d1f30f0a06cd1b1839739ee597eeb6e"
+  },
+  "retry": false,
+  "model_loads": 0,
+  "model_forwards": 0,
+  "updates": 0,
+  "generations": 0
+}

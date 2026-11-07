@@ -1,0 +1,23 @@
+{
+  "status": "VERIFIED",
+  "archive_bytes": 16641896,
+  "archive_sha256": "43b53b96cda2516c6fbedf7cd7c9ef73fdb655830a3e234b3d2d6b6870e66919",
+  "payloads": 161,
+  "members": 162,
+  "all_crc_hashes_sizes": true,
+  "cpu_original_exact": true,
+  "source6_exact": true,
+  "all_api_sources_exact": true,
+  "early_book_exact": true,
+  "tensors": 112,
+  "parameters": 3833856,
+  "all_f32_finite": true,
+  "initial_and_reload_names_shapes_exact": true,
+  "adapter_sha256": "3a43df7fd09cbf61bb5e329467f82e393e0e6fd325d7b6a457308e41a20a0228",
+  "sql_operations": 0,
+  "exact9_order_and_finite_gradients": true,
+  "gpu_and_consumer_exit_code": 0,
+  "initial_284f_and_sources_unchanged": true,
+  "post_release_allocated_bytes_recorded": 17039360,
+  "additional_host_assertion_failed": "An additional host check incorrectly required post_release_allocated_bytes == 0. Actual raw reports17039360 bytes inside the still-alive GPU process; the expectation was removed, original run and weights unchanged, no model retry or raw repair. GPU process exit is0."
+}

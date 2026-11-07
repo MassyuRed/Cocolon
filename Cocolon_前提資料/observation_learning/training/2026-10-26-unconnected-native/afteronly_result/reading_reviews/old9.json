@@ -1,0 +1,554 @@
+{
+  "schema": "cocolon.native15_afteronly.old9_reading_review.v1",
+  "review_date_jst": "2026-10-27",
+  "scope": "Read-only review of the current actual after-only old-nine raws against immutable evaluation inputs and teachers. No CMEE consumer execution, GPU operation, generation or database action in this review.",
+  "reviewed_case_count": 9,
+  "independent_language_families": 2,
+  "source_run": "/workspace/scratch/8b32a91611bc/afteronly_preview/run_snapshot.json",
+  "input_file": {
+    "path": "/workspace/scratch/8b32a91611bc/restore_plan/native15_pack/eval_inputs.jsonl",
+    "sha256": "c67fa4098bafa10508bf57bf1975fcdfd6f2359f851e34c0f26148310eb8b75e"
+  },
+  "teacher_file": {
+    "path": "/workspace/scratch/8b32a91611bc/restore_plan/native15_pack/train_messages.jsonl",
+    "sha256": "29f37e38f4a615220c739176a6eaa2e0e01aae36c7bb6f87db8be248aecd1772"
+  },
+  "model_calls_in_review": 0,
+  "training_updates_in_review": 0,
+  "gpu_operations_in_review": 0,
+  "cmee_adoption_evaluated": false,
+  "cmee_adoption_note": "Root is measuring adoption separately. EOS/JSON completion and teacher equality here are not CMEE or product acceptance.",
+  "product_accepted": false,
+  "automatic_progression": false,
+  "cases": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "input_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/restore_plan/native15_pack/eval_inputs.jsonl",
+        "line": 1,
+        "content_path": "messages[1].content -> material.sources[].text_fields"
+      },
+      "teacher_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/restore_plan/native15_pack/train_messages.jsonl",
+        "line": 1,
+        "content_path": "messages[2].content"
+      },
+      "actual_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/afteronly_preview/after_TRAIN-SERVICE-CHAIR-01-INITIAL.jsonl",
+        "line": 1,
+        "sha256": "59e17146b26bfefc4e5133cbe65a1b744aedc1846162eb9fdd085c8aa1734e05",
+        "content_paths": [
+          "raw_text",
+          "parsed.candidate",
+          "parsed.evidence_quotes"
+        ]
+      },
+      "eos_reached": true,
+      "json_parsed": true,
+      "parsed_equals_teacher": false,
+      "findings": [
+        {
+          "kind": "reference_type_error",
+          "path": "parsed.candidate.surface_proposal.bindings[1].claim_refs",
+          "actual": [
+            "solo_appraisal_object",
+            "joy",
+            "joy_ground"
+          ],
+          "detail": "Contains relation ID joy_ground in claim_refs and drops teacher claim reference usable_again. joy_ground is a relation, not a claim."
+        },
+        {
+          "kind": "prose_drift",
+          "path": "parsed.candidate.surface_proposal.reception",
+          "actual": "全部一人で直せたことが、うれしかったのですね。またその喜びの根拠も聞けてよかったです。",
+          "detail": "Adds a metalinguistic closing about having heard the grounds of the joy. Detailed personal significance is still NOT_STATED and is being asked in question_proposal, so the new closing is an unnecessary, potentially premature impression of understanding. No new person-specific motive is established by this wording."
+        },
+        {
+          "kind": "preserved",
+          "paths": [
+            "parsed.candidate.claims",
+            "parsed.candidate.relations",
+            "parsed.candidate.unknowns",
+            "parsed.candidate.question_proposal",
+            "parsed.evidence_quotes"
+          ],
+          "detail": "These meaning, evidence and question fields equal the teacher. The basic repair/result/joy/solo-appraisal content and the optional question are retained."
+        }
+      ],
+      "cmee_decision": null,
+      "reading_status": "VISIBLE_BINDING_ERROR_AND_PROSE_DRIFT"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "input_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/restore_plan/native15_pack/eval_inputs.jsonl",
+        "line": 2,
+        "content_path": "messages[1].content -> material.sources[].text_fields"
+      },
+      "teacher_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/restore_plan/native15_pack/train_messages.jsonl",
+        "line": 2,
+        "content_path": "messages[2].content"
+      },
+      "actual_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/afteronly_preview/after_TRAIN-SERVICE-CHAIR-01-CORRECTION.jsonl",
+        "line": 1,
+        "sha256": "60629e5ef9bad13db57946da6d5b7e4e2ce3d7dcefbeff2ed0ed0903cf641793",
+        "content_paths": [
+          "raw_text",
+          "parsed.candidate",
+          "parsed.evidence_quotes"
+        ]
+      },
+      "eos_reached": true,
+      "json_parsed": true,
+      "parsed_equals_teacher": false,
+      "findings": [
+        {
+          "kind": "preserved",
+          "paths": [
+            "parsed.candidate.claims",
+            "parsed.candidate.relations",
+            "parsed.candidate.updates",
+            "parsed.candidate.surface_proposal"
+          ],
+          "detail": "Candidate claims, relations, updates and visible prose equal the teacher, but the evidence table changed underneath those references."
+        },
+        {
+          "kind": "evidence_table_shrink_and_misalignment",
+          "path": "parsed.evidence_quotes",
+          "expected_count": 12,
+          "actual_count": 9,
+          "detail": "friend_guidance evidence index7 now points to the negated solo-reason quote; joint_repair index8 points to the reuse-appraisal quote. repair_and_result index4 points to the friend-guidance quote rather than the action connector."
+        },
+        {
+          "kind": "out_of_range_evidence",
+          "paths": [
+            "parsed.candidate.claims[5].evidence_indexes[0]",
+            "parsed.candidate.relations[1].evidence_indexes[0]",
+            "parsed.candidate.updates[1].evidence_indexes",
+            "parsed.candidate.updates[2].evidence_indexes"
+          ],
+          "actual_indexes": [
+            9,
+            10,
+            11
+          ],
+          "valid_range": [
+            0,
+            8
+          ],
+          "detail": "Reuse claim, revised joy relation and later update evidence still use old indexes outside the new nine-row table."
+        }
+      ],
+      "cmee_decision": null,
+      "reading_status": "VISIBLE_EVIDENCE_INDEX_ERRORS"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "input_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/restore_plan/native15_pack/eval_inputs.jsonl",
+        "line": 3,
+        "content_path": "messages[1].content -> material.sources[].text_fields"
+      },
+      "teacher_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/restore_plan/native15_pack/train_messages.jsonl",
+        "line": 3,
+        "content_path": "messages[2].content"
+      },
+      "actual_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/afteronly_preview/after_TRAIN-SERVICE-CHAIR-02-INITIAL.jsonl",
+        "line": 1,
+        "sha256": "7930f6cb26c37f9bfcf0208bcc94249dc328fb50c3f8345bd8e0fc4566be5816",
+        "content_paths": [
+          "raw_text",
+          "parsed.candidate",
+          "parsed.evidence_quotes"
+        ]
+      },
+      "eos_reached": true,
+      "json_parsed": true,
+      "parsed_equals_teacher": false,
+      "findings": [
+        {
+          "kind": "reference_type_error",
+          "path": "parsed.candidate.surface_proposal.bindings[1].claim_refs",
+          "actual": [
+            "solo_appraisal_object",
+            "joy",
+            "joy_ground"
+          ],
+          "detail": "Contains relation ID joy_ground in claim_refs and drops teacher claim reference usable_again. joy_ground is a relation, not a claim."
+        },
+        {
+          "kind": "prose_drift",
+          "path": "parsed.candidate.surface_proposal.reception",
+          "actual": "全部一人で直せたことが、うれしかったのですね。またその喜びの根拠も聞けてよかったです。",
+          "detail": "Adds a metalinguistic closing about having heard the grounds of the joy. Detailed personal significance is still NOT_STATED and is being asked in question_proposal, so the new closing is an unnecessary, potentially premature impression of understanding. No new person-specific motive is established by this wording."
+        },
+        {
+          "kind": "preserved",
+          "paths": [
+            "parsed.candidate.claims",
+            "parsed.candidate.relations",
+            "parsed.candidate.unknowns",
+            "parsed.candidate.question_proposal",
+            "parsed.evidence_quotes"
+          ],
+          "detail": "These meaning, evidence and question fields equal the teacher. The basic repair/result/joy/solo-appraisal content and the optional question are retained."
+        }
+      ],
+      "cmee_decision": null,
+      "reading_status": "VISIBLE_BINDING_ERROR_AND_PROSE_DRIFT"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "input_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/restore_plan/native15_pack/eval_inputs.jsonl",
+        "line": 4,
+        "content_path": "messages[1].content -> material.sources[].text_fields"
+      },
+      "teacher_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/restore_plan/native15_pack/train_messages.jsonl",
+        "line": 4,
+        "content_path": "messages[2].content"
+      },
+      "actual_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/afteronly_preview/after_TRAIN-SERVICE-CHAIR-02-CORRECTION.jsonl",
+        "line": 1,
+        "sha256": "0dcfc0af74ffba1f347b11d0adedfe29efe2251ecd484b30c8857505511430fc",
+        "content_paths": [
+          "raw_text",
+          "parsed.candidate",
+          "parsed.evidence_quotes"
+        ]
+      },
+      "eos_reached": true,
+      "json_parsed": true,
+      "parsed_equals_teacher": false,
+      "findings": [
+        {
+          "kind": "content_loss",
+          "path": "parsed.candidate.claims",
+          "expected_count": 6,
+          "actual_count": 4,
+          "missing_claims": [
+            "friend_guidance",
+            "joint_repair"
+          ],
+          "detail": "The friend teaching the procedure and the person repairing together are absent as claims and absent from the observation."
+        },
+        {
+          "kind": "wrong_source_field",
+          "paths": [
+            "parsed.evidence_quotes[0]",
+            "parsed.evidence_quotes[1]",
+            "parsed.evidence_quotes[4]"
+          ],
+          "detail": "Quotes from original memo_action are assigned to the answer source answer_text_private, where they do not occur."
+        },
+        {
+          "kind": "invented_combined_quote",
+          "path": "parsed.evidence_quotes[5].quote",
+          "actual": "捨てずにまた使えるようになったからです、うれしかったのですか",
+          "detail": "This joined question-like expression does not occur in the unchanged answer field."
+        },
+        {
+          "kind": "update_loss_and_bad_references",
+          "paths": [
+            "parsed.candidate.updates",
+            "parsed.candidate.surface_proposal.bindings[1].update_refs"
+          ],
+          "expected_update_count": 3,
+          "actual_update_count": 2,
+          "actual_update_refs": [
+            2,
+            5
+          ],
+          "detail": "INVALIDATE_GAP is omitted; update_note references indexes2 and5 even though only updates0 and1 exist."
+        },
+        {
+          "kind": "repeated_question_in_reception",
+          "path": "parsed.candidate.surface_proposal.reception",
+          "actual": "捨てずにまた使えるようになったことが、うれしかったのですか？",
+          "detail": "Asks whether reuse was gladness after the answer explicitly gave that reason and the one-question budget is used. question_proposal remains null, so the visible reception bypasses the intended question channel."
+        },
+        {
+          "kind": "internal_label_exposure",
+          "path": "parsed.candidate.surface_proposal.update_note",
+          "actual": "本人の意味づけは未記載。本人の訂正はreuse_appraisal_objectとjoyの更新です。",
+          "detail": "Exposes internal claim labels and declares personal meaning unrecorded despite the explicit correction explaining the gladness."
+        }
+      ],
+      "cmee_decision": null,
+      "reading_status": "VISIBLE_SOURCE_ERRORS_CONTENT_LOSS_AND_REQUESTION"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "input_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/restore_plan/native15_pack/eval_inputs.jsonl",
+        "line": 5,
+        "content_path": "messages[1].content -> material.sources[].text_fields"
+      },
+      "teacher_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/restore_plan/native15_pack/train_messages.jsonl",
+        "line": 5,
+        "content_path": "messages[2].content"
+      },
+      "actual_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/afteronly_preview/after_TRAIN-SERVICE-CHAIR-03-INITIAL.jsonl",
+        "line": 1,
+        "sha256": "d3f0fb58172fc669a199fe7bdf60d5abb07493c827d4de42661e6c23e9fe0a20",
+        "content_paths": [
+          "raw_text",
+          "parsed.candidate",
+          "parsed.evidence_quotes"
+        ]
+      },
+      "eos_reached": true,
+      "json_parsed": true,
+      "parsed_equals_teacher": false,
+      "findings": [
+        {
+          "kind": "reference_type_error",
+          "path": "parsed.candidate.surface_proposal.bindings[1].claim_refs",
+          "actual": [
+            "solo_appraisal_object",
+            "joy",
+            "joy_ground"
+          ],
+          "detail": "Contains relation ID joy_ground in claim_refs and drops teacher claim reference usable_again. joy_ground is a relation, not a claim."
+        },
+        {
+          "kind": "prose_drift",
+          "path": "parsed.candidate.surface_proposal.reception",
+          "actual": "全部一人で直せたことが、うれしかったのですね。またその喜びの根拠も聞けて、私もうれしいです。",
+          "detail": "Adds a metalinguistic closing about having heard the grounds of the joy. Detailed personal significance is still NOT_STATED and is being asked in question_proposal, so the new closing is an unnecessary, potentially premature impression of understanding. No new person-specific motive is established by this wording."
+        },
+        {
+          "kind": "preserved",
+          "paths": [
+            "parsed.candidate.claims",
+            "parsed.candidate.relations",
+            "parsed.candidate.unknowns",
+            "parsed.candidate.question_proposal",
+            "parsed.evidence_quotes"
+          ],
+          "detail": "These meaning, evidence and question fields equal the teacher. The basic repair/result/joy/solo-appraisal content and the optional question are retained."
+        }
+      ],
+      "cmee_decision": null,
+      "reading_status": "VISIBLE_BINDING_ERROR_AND_PROSE_DRIFT"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "input_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/restore_plan/native15_pack/eval_inputs.jsonl",
+        "line": 6,
+        "content_path": "messages[1].content -> material.sources[].text_fields"
+      },
+      "teacher_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/restore_plan/native15_pack/train_messages.jsonl",
+        "line": 6,
+        "content_path": "messages[2].content"
+      },
+      "actual_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/afteronly_preview/after_TRAIN-SERVICE-CHAIR-03-CORRECTION.jsonl",
+        "line": 1,
+        "sha256": "1caaf3ca5fb5376aac652298451ea6d040e8eae85cf55ffa9d96d7c7cf6eea38",
+        "content_paths": [
+          "raw_text",
+          "parsed.candidate",
+          "parsed.evidence_quotes"
+        ]
+      },
+      "eos_reached": true,
+      "json_parsed": true,
+      "parsed_equals_teacher": false,
+      "findings": [
+        {
+          "kind": "missing_claim_and_merged_events",
+          "path": "parsed.candidate.claims",
+          "expected_count": 6,
+          "actual_count": 4,
+          "missing_claims": [
+            "joy",
+            "friend_guidance"
+          ],
+          "detail": "The joy claim is absent. Friend guidance and joint repair are collapsed into a single joint_repair claim, though their text remains in that combined claim."
+        },
+        {
+          "kind": "undefined_relation_endpoint",
+          "path": "parsed.candidate.relations[1].to_claim_id",
+          "actual": "joy",
+          "detail": "The revised joy-ground relation points to a joy claim that is not defined."
+        },
+        {
+          "kind": "invalid_evidence_field",
+          "path": "parsed.evidence_quotes[5].field_path",
+          "actual": "joy_ground RELATION",
+          "detail": "joy_ground RELATION is not an allowed source text field."
+        },
+        {
+          "kind": "invalid_update_shape_and_out_of_range_evidence",
+          "path": "parsed.candidate.updates[0]",
+          "actual_target_kind": "CLAIM_RELATION_UNKNOWN",
+          "actual_evidence_indexes": [
+            6,
+            7,
+            8,
+            9
+          ],
+          "expected_update_count": 3,
+          "actual_update_count": 1,
+          "detail": "Combines CLAIM/RELATION/UNKNOWN into the unsupported target_kind CLAIM_RELATION_UNKNOWN and refers to evidence6..9 despite only evidence0..5 existing. Separate relation revision and gap invalidation are not represented."
+        },
+        {
+          "kind": "unwritten_feeling_added",
+          "path": "parsed.candidate.surface_proposal.reception",
+          "actual": "捨てずにまた使えるようになったことが、うれしかったのですね。また、一緒に直せたこと自体も、嬉しかったのですね。",
+          "detail": "Adds that repairing together itself also made the person glad. The answer states joy because the chair can be used again rather than because of doing it alone; gladness about joint repair is not supplied."
+        },
+        {
+          "kind": "observation_does_not_reflect_correction",
+          "path": "parsed.candidate.surface_proposal.observation",
+          "actual": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+          "detail": "Repeats the original repair/result observation and does not visibly acknowledge the friend teaching or joint repair."
+        }
+      ],
+      "cmee_decision": null,
+      "reading_status": "VISIBLE_MISSING_ENDPOINT_INVALID_SHAPE_AND_ADDED_FEELING"
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "input_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/restore_plan/native15_pack/eval_inputs.jsonl",
+        "line": 7,
+        "content_path": "messages[1].content -> material.sources[].text_fields"
+      },
+      "teacher_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/restore_plan/native15_pack/train_messages.jsonl",
+        "line": 7,
+        "content_path": "messages[2].content"
+      },
+      "actual_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/afteronly_preview/after_TRAIN-DAILY-CALM-01-INITIAL.jsonl",
+        "line": 1,
+        "sha256": "1779d3d059ae393ff77496dabe4cf51b2e45f7af247377350fc28e3ef9b1aa5c",
+        "content_paths": [
+          "raw_text",
+          "parsed.candidate",
+          "parsed.evidence_quotes"
+        ]
+      },
+      "eos_reached": true,
+      "json_parsed": true,
+      "parsed_equals_teacher": true,
+      "findings": [
+        {
+          "kind": "preserved",
+          "paths": [
+            "parsed.candidate.claims",
+            "parsed.candidate.relations",
+            "parsed.candidate.surface_proposal",
+            "parsed.evidence_quotes"
+          ],
+          "detail": "Parsed proposal equals the teacher in full. Returning before cooking and eating, the written food, warm-food eating and slight calm are preserved. No hunger, purpose, bodily cause or new background was added. The three daily IDs are the same language family, not three independent unknown inputs."
+        }
+      ],
+      "cmee_decision": null,
+      "reading_status": "NO_VISIBLE_DEVIATION_IN_THIS_TEACHER_FIT"
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "input_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/restore_plan/native15_pack/eval_inputs.jsonl",
+        "line": 8,
+        "content_path": "messages[1].content -> material.sources[].text_fields"
+      },
+      "teacher_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/restore_plan/native15_pack/train_messages.jsonl",
+        "line": 8,
+        "content_path": "messages[2].content"
+      },
+      "actual_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/afteronly_preview/after_TRAIN-DAILY-CALM-02-INITIAL.jsonl",
+        "line": 1,
+        "sha256": "4cb511f2997b400ea60f31fd6861dc065fdbd8339de4e3e2ec8f0fcddb9d193b",
+        "content_paths": [
+          "raw_text",
+          "parsed.candidate",
+          "parsed.evidence_quotes"
+        ]
+      },
+      "eos_reached": true,
+      "json_parsed": true,
+      "parsed_equals_teacher": true,
+      "findings": [
+        {
+          "kind": "preserved",
+          "paths": [
+            "parsed.candidate.claims",
+            "parsed.candidate.relations",
+            "parsed.candidate.surface_proposal",
+            "parsed.evidence_quotes"
+          ],
+          "detail": "Parsed proposal equals the teacher in full. Returning before cooking and eating, the written food, warm-food eating and slight calm are preserved. No hunger, purpose, bodily cause or new background was added. The three daily IDs are the same language family, not three independent unknown inputs."
+        }
+      ],
+      "cmee_decision": null,
+      "reading_status": "NO_VISIBLE_DEVIATION_IN_THIS_TEACHER_FIT"
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "input_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/restore_plan/native15_pack/eval_inputs.jsonl",
+        "line": 9,
+        "content_path": "messages[1].content -> material.sources[].text_fields"
+      },
+      "teacher_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/restore_plan/native15_pack/train_messages.jsonl",
+        "line": 9,
+        "content_path": "messages[2].content"
+      },
+      "actual_reference": {
+        "file": "/workspace/scratch/8b32a91611bc/afteronly_preview/after_TRAIN-DAILY-CALM-03-INITIAL.jsonl",
+        "line": 1,
+        "sha256": "52c4a06e630b06e26bcee0052e248f5ef855e00bf440dcea9c7512352bd87980",
+        "content_paths": [
+          "raw_text",
+          "parsed.candidate",
+          "parsed.evidence_quotes"
+        ]
+      },
+      "eos_reached": true,
+      "json_parsed": true,
+      "parsed_equals_teacher": true,
+      "findings": [
+        {
+          "kind": "preserved",
+          "paths": [
+            "parsed.candidate.claims",
+            "parsed.candidate.relations",
+            "parsed.candidate.surface_proposal",
+            "parsed.evidence_quotes"
+          ],
+          "detail": "Parsed proposal equals the teacher in full. Returning before cooking and eating, the written food, warm-food eating and slight calm are preserved. No hunger, purpose, bodily cause or new background was added. The three daily IDs are the same language family, not three independent unknown inputs."
+        }
+      ],
+      "cmee_decision": null,
+      "reading_status": "NO_VISIBLE_DEVIATION_IN_THIS_TEACHER_FIT"
+    }
+  ],
+  "summary": {
+    "eos_json_complete_count": 9,
+    "parsed_exact_teacher_count": 3,
+    "daily_exact_teacher_count": 3,
+    "chair_initial_visible_binding_error_count": 3,
+    "chair_correction_visible_error_count": 3,
+    "cmee_adoption_count": null,
+    "product_quality_pass_count": null,
+    "prior_joint12_nine_of_nine_reused": false,
+    "subject_time_note": "No clear person/time inversion was observed in daily or initial-chair meaning fields. Correction failures are primarily source-field/reference errors, missing/merged claims and an added feeling; these must not be disguised as mere stylistic variation."
+  }
+}

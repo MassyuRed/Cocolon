@@ -1,0 +1,30 @@
+{
+  "schema": "cocolon.prior_quote_probe2_once.v1",
+  "adapter_sha256": "d431a07ce227c05e81eca5afb9461d91cf8101d50af0d27ec1a81844ce8ac684",
+  "pod_id": "bkj4qvnhwtdqc2",
+  "expected_gpu_name": "NVIDIA RTX A5000",
+  "output_directory": "/workspace/cocolon_prior_quote_probe2_run_20261027",
+  "training_updates": 0,
+  "max_model_calls": 2,
+  "case_ids": [
+    "FT-BOOK-AFTER-ANSWER",
+    "FT-SHOP-AFTER-ANSWER"
+  ],
+  "max_seconds": 600,
+  "per_generation_seconds": 180,
+  "gpu_hourly_usd": 0.28,
+  "max_process_usd": 0.047,
+  "context_tokens": 8192,
+  "retry": false,
+  "gpu_lifecycle_operations": 0,
+  "production_sql_operations": 0,
+  "automatic_progression": false,
+  "product_credit": 0,
+  "status": "AUTHORIZED_ONCE_BOUND",
+  "gpu_run_authorized": true,
+  "approval_basis": "Mash explicit approval in this conversation on 2026-10-27 JST: 進めていいよ。 Pinned proposal f8fa522440671b75250be55d9f839921f2694333: no training, saved d431 adapter112 F32 inference-only load, BOOK and SHOP after-answer each one generation (maximum2), only prior start/end removed, unchanged raw CMEE/full-body/all7or8 updates/cold review. Max600sec/USD0.047 processing prorated; preparation,CPU,recovery,holding,storage,transfer and other costs separate. One actual run only, no retry, no GPU lifecycle operation, no automatic progression.",
+  "runner_sha256": "76eca409b1746e9a2bd7e6490c1c7d2659e7816c1661787eaafe071206b8c292",
+  "cpu_check_sha256": "e5a409b988771e422d34a4bcca8cb32e34772fea4ea2bd4f3f9566380b81db86",
+  "eval_inputs_sha256": "05d2e02f042b478dec28605d28f6dd9ae93c132aeb7a715f95a83bb4458d1774",
+  "api_candidate_commit": "64c6cb1a41620fd2d7690e0b6f1af30ae0e624a4"
+}

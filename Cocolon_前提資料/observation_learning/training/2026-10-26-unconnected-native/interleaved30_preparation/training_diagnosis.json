@@ -1,0 +1,502 @@
+{
+  "schema": "cocolon.continuation27.training_diagnosis.v1",
+  "date_jst": "2026-10-27",
+  "scope": "旧joint12実原本とnative15実原本のread-only比較。新教材・採用条件・生成制約・実GPUを導入していない。",
+  "sources": [
+    {
+      "path": "/workspace/scratch/8b32a91611bc/continuation27_joint12_evidence/run.json",
+      "bytes": 25699,
+      "sha256": "18820713155c81f39a0b4efa756095c00db1bd6b2ef768efe2b75516c77641b4"
+    },
+    {
+      "path": "/workspace/scratch/8b32a91611bc/continuation27_joint12_evidence/train_messages.jsonl",
+      "bytes": 157443,
+      "sha256": "1da50c6655d132954e89511796a27f71b0cca4fc827125f54c11dd1c5088022f"
+    },
+    {
+      "path": "/workspace/scratch/8b32a91611bc/continuation27_joint12_evidence/after_fit.jsonl",
+      "bytes": 211319,
+      "sha256": "a22f50b8d6d12e891dab5c972127b932fc878019c9c8cf1a08cb2b2a8dcb646c"
+    },
+    {
+      "path": "/workspace/scratch/8b32a91611bc/continuation27_joint12_evidence/training.jsonl",
+      "bytes": 2996,
+      "sha256": "65c72b2c0aaeea8d3227411ce19d46ea0f2a8d9201d1e53c3d66b26c8bd24431"
+    },
+    {
+      "path": "/workspace/scratch/8b32a91611bc/continuation27_joint12_evidence/runner_source.py",
+      "bytes": 28123,
+      "sha256": "c5dd1679c605e020e4dad56951c79d7c0661a1279a34a0ae0d47666d639d7128"
+    },
+    {
+      "path": "/workspace/scratch/8b32a91611bc/continuation27_joint12_evidence/joint_fit12_tokenization.json",
+      "bytes": 5876,
+      "sha256": "62bcaf28d06f0ceda1d9db95e831715deb52c1de803501db68664a386e2cff87"
+    },
+    {
+      "path": "/workspace/scratch/8b32a91611bc/afteronly_final/run/run.json",
+      "bytes": 18890,
+      "sha256": "4c63f492c99c57322427f8e5500931ee2707a6b07dc1125cad51d8c03038b4e3"
+    },
+    {
+      "path": "/workspace/scratch/8b32a91611bc/afteronly_final/run/training.jsonl",
+      "bytes": 1712,
+      "sha256": "73dcbb8f2381be568cbfa5e6ac11a5081078aea8a48a4543a92288a7a0e0dc03"
+    },
+    {
+      "path": "/workspace/scratch/8b32a91611bc/afteronly_final/run/run_native15_afteronly.py",
+      "bytes": 17891,
+      "sha256": "a62d3ed74e76a26c01fe66b9eba32d42631acac170cfd9c8dcb2c7cdf5076552"
+    },
+    {
+      "path": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/train_messages.jsonl",
+      "bytes": 349174,
+      "sha256": "29f37e38f4a615220c739176a6eaa2e0e01aae36c7bb6f87db8be248aecd1772"
+    },
+    {
+      "path": "/workspace/scratch/8b32a91611bc/native15_successor_candidate/eval_inputs.jsonl",
+      "bytes": 169628,
+      "sha256": "c67fa4098bafa10508bf57bf1975fcdfd6f2359f851e34c0f26148310eb8b75e"
+    },
+    {
+      "path": "/workspace/scratch/8b32a91611bc/restore_plan/native15_pack/prepare_native15.py",
+      "bytes": 6860,
+      "sha256": "602033ae0d84b7d6a4dff88b4c25d571bf1acc47af7876d46373e715da5abecb"
+    },
+    {
+      "path": "/workspace/scratch/8b32a91611bc/restore_plan/run_pilot.py",
+      "bytes": 28950,
+      "sha256": "2f659078c05bee6d7b32f50aae8b9eebc03c767d4a3be084bc17e9e3ccc4c10d"
+    }
+  ],
+  "old_source_commit": "fe3f0f9a01968bd283b73d22d91d77f516c661ae",
+  "old_initial": "138b9ff7e5b7df59e6da80126a52b309edf9c22a9a860f2c165189a9e453c102",
+  "old_saved": "45779ad97111dd2d91c1f7f1a4b0ca697ef0586c5190cd56b1b7675fe540dab6",
+  "new_source_commit": "9a6c56ed5657e50e31cef50bab0015fc5e6484f9",
+  "new_initial": "45779ad97111dd2d91c1f7f1a4b0ca697ef0586c5190cd56b1b7675fe540dab6",
+  "new_saved": "278fdc26e56c2cd84b39bec19d484374d4504c656fbd5d1f8112d006e8c6457d",
+  "interface_cases": [
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "messages_equal": false,
+      "input_equal": false,
+      "target_equal": false,
+      "candidate_equal": true,
+      "old_keys": [
+        "candidate",
+        "evidence"
+      ],
+      "new_keys": [
+        "candidate",
+        "evidence_quotes",
+        "schema_version"
+      ],
+      "old_prompt_tokens": 2076,
+      "new_prompt_tokens": 1705,
+      "projected_evidence_equal": true
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "messages_equal": false,
+      "input_equal": false,
+      "target_equal": false,
+      "candidate_equal": true,
+      "old_keys": [
+        "candidate",
+        "evidence"
+      ],
+      "new_keys": [
+        "candidate",
+        "evidence_quotes",
+        "schema_version"
+      ],
+      "old_prompt_tokens": 5030,
+      "new_prompt_tokens": 3839,
+      "projected_evidence_equal": true
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "messages_equal": false,
+      "input_equal": false,
+      "target_equal": false,
+      "candidate_equal": true,
+      "old_keys": [
+        "candidate",
+        "evidence"
+      ],
+      "new_keys": [
+        "candidate",
+        "evidence_quotes",
+        "schema_version"
+      ],
+      "old_prompt_tokens": 2072,
+      "new_prompt_tokens": 1701,
+      "projected_evidence_equal": true
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "messages_equal": false,
+      "input_equal": false,
+      "target_equal": false,
+      "candidate_equal": true,
+      "old_keys": [
+        "candidate",
+        "evidence"
+      ],
+      "new_keys": [
+        "candidate",
+        "evidence_quotes",
+        "schema_version"
+      ],
+      "old_prompt_tokens": 5045,
+      "new_prompt_tokens": 3854,
+      "projected_evidence_equal": true
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "messages_equal": false,
+      "input_equal": false,
+      "target_equal": false,
+      "candidate_equal": true,
+      "old_keys": [
+        "candidate",
+        "evidence"
+      ],
+      "new_keys": [
+        "candidate",
+        "evidence_quotes",
+        "schema_version"
+      ],
+      "old_prompt_tokens": 2069,
+      "new_prompt_tokens": 1698,
+      "projected_evidence_equal": true
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "messages_equal": false,
+      "input_equal": false,
+      "target_equal": false,
+      "candidate_equal": true,
+      "old_keys": [
+        "candidate",
+        "evidence"
+      ],
+      "new_keys": [
+        "candidate",
+        "evidence_quotes",
+        "schema_version"
+      ],
+      "old_prompt_tokens": 5028,
+      "new_prompt_tokens": 3837,
+      "projected_evidence_equal": true
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "messages_equal": true,
+      "input_equal": true,
+      "target_equal": true,
+      "candidate_equal": true,
+      "old_keys": [
+        "candidate",
+        "evidence_quotes",
+        "schema_version"
+      ],
+      "new_keys": [
+        "candidate",
+        "evidence_quotes",
+        "schema_version"
+      ],
+      "old_prompt_tokens": 1733,
+      "new_prompt_tokens": 1733,
+      "projected_evidence_equal": true
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "messages_equal": true,
+      "input_equal": true,
+      "target_equal": true,
+      "candidate_equal": true,
+      "old_keys": [
+        "candidate",
+        "evidence_quotes",
+        "schema_version"
+      ],
+      "new_keys": [
+        "candidate",
+        "evidence_quotes",
+        "schema_version"
+      ],
+      "old_prompt_tokens": 1728,
+      "new_prompt_tokens": 1728,
+      "projected_evidence_equal": true
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "messages_equal": true,
+      "input_equal": true,
+      "target_equal": true,
+      "candidate_equal": true,
+      "old_keys": [
+        "candidate",
+        "evidence_quotes",
+        "schema_version"
+      ],
+      "new_keys": [
+        "candidate",
+        "evidence_quotes",
+        "schema_version"
+      ],
+      "old_prompt_tokens": 1732,
+      "new_prompt_tokens": 1732,
+      "projected_evidence_equal": true
+    }
+  ],
+  "old_order": [
+    "TRAIN-DAILY-CALM-01-INITIAL",
+    "TRAIN-SERVICE-CHAIR-01-INITIAL",
+    "TRAIN-DAILY-CALM-02-INITIAL",
+    "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+    "TRAIN-DAILY-CALM-03-INITIAL",
+    "TRAIN-SERVICE-CHAIR-02-INITIAL",
+    "TRAIN-DAILY-CALM-01-INITIAL",
+    "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+    "TRAIN-DAILY-CALM-02-INITIAL",
+    "TRAIN-SERVICE-CHAIR-03-INITIAL",
+    "TRAIN-DAILY-CALM-03-INITIAL",
+    "TRAIN-SERVICE-CHAIR-03-CORRECTION"
+  ],
+  "new_order": [
+    "TRAIN-SERVICE-CHAIR-01-INITIAL",
+    "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+    "TRAIN-SERVICE-CHAIR-02-INITIAL",
+    "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+    "TRAIN-SERVICE-CHAIR-03-INITIAL",
+    "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+    "TRAIN-DAILY-CALM-01-INITIAL",
+    "TRAIN-DAILY-CALM-02-INITIAL",
+    "TRAIN-DAILY-CALM-03-INITIAL",
+    "FT-BOOK-INITIAL",
+    "FT-BOOK-AFTER-ANSWER",
+    "FT-SHOP-INITIAL",
+    "FT-SHOP-AFTER-ANSWER",
+    "FT-REPOT-INITIAL",
+    "FT-KNIT-INITIAL"
+  ],
+  "metrics": {
+    "old_chair": {
+      "steps": 6,
+      "mean_online_loss": 0.0011681358058316012,
+      "min_loss": 0.0008732109563425183,
+      "max_loss": 0.0013457458699122071,
+      "mean_preclip_norm": 0.35085536415378255,
+      "clipped_steps": 0
+    },
+    "old_daily_mixed": {
+      "steps": 6,
+      "mean_online_loss": 0.026733664718146127,
+      "min_loss": 0.005845953070092946,
+      "max_loss": 0.07035977928899229,
+      "mean_preclip_norm": 0.67746352404356,
+      "clipped_steps": 1
+    },
+    "new_chair": {
+      "steps": 6,
+      "mean_online_loss": 0.009120738483034074,
+      "min_loss": 0.0020549895707517862,
+      "max_loss": 0.022316839545965195,
+      "mean_preclip_norm": 0.871261345843474,
+      "clipped_steps": 4
+    },
+    "new_daily": {
+      "steps": 3,
+      "mean_online_loss": 0.0014817070138330262,
+      "min_loss": 0.001189953531138599,
+      "max_loss": 0.0019000581232830882,
+      "mean_preclip_norm": 0.13792304322123528,
+      "clipped_steps": 0
+    },
+    "new6": {
+      "steps": 6,
+      "mean_online_loss": 0.13550740169982115,
+      "min_loss": 0.03141496703028679,
+      "max_loss": 0.19411924481391907,
+      "mean_preclip_norm": 1.9823927680651348,
+      "clipped_steps": 6
+    }
+  },
+  "current_cmee": {
+    "meaning": 3,
+    "body": 3,
+    "total": 15,
+    "adopted_ids": [
+      "TRAIN-DAILY-CALM-01-INITIAL",
+      "TRAIN-DAILY-CALM-02-INITIAL",
+      "TRAIN-DAILY-CALM-03-INITIAL"
+    ]
+  },
+  "processing_seconds": 1190.5218645449495,
+  "generation_seconds": 982.3950137967477,
+  "peak_allocated_gib": 19.65499496459961,
+  "peak_reserved_gib": 23.1640625,
+  "archive_provenance": {
+    "outer": "/workspace/scratch/8b32a91611bc/restore_plan/recovery/cocolon_joint12_20261026.tar.gz",
+    "member": "training_checkpoint.tar.gz",
+    "extracted_directory": "/workspace/scratch/8b32a91611bc/continuation27_joint12_evidence",
+    "old_training_file_verified_as_actual": "train_messages.jsonl 157443 bytes / 1da50c6655d132954e89511796a27f71b0cca4fc827125f54c11dd1c5088022f",
+    "old_successful_outputs": "after_fit.jsonl 211319 bytes / a22f50b8d6d12e891dab5c972127b932fc878019c9c8cf1a08cb2b2a8dcb646c",
+    "old_eval_inputs": "独立eval_inputs memberはない。実runner L403-409がexamples.messages[:-1]を評価へ渡す。sft_examples.messagesと実train_messages.messagesは全9完全一致。旧成功rawのchair6もnumeric、daily3はquote。"
+  },
+  "main_finding": "旧chair6成功と今回chair6不採用は同一入力比較ではない。chair6はpromptとtarget wireが全件numeric→quoteへ変わった。意味candidateと根拠quote順は不変だが、モデルが読む/返す形式は別。今回の結果だけで『同じ既知chairを学習で忘れた』と確定できない。",
+  "confirmed_differences": [
+    {
+      "name": "input_output_protocol",
+      "old": "chair6はcandidate/evidence数値座標形式、field_unicode_spans付きprompt。daily3のみquote形式。",
+      "new": "全15がcandidate/evidence_quotes/schema_versionのquote形式。chair6の原文とcandidate意味は同じだが入力/出力bytesは別。",
+      "evidence": [
+        "/workspace/scratch/8b32a91611bc/continuation27_joint12_evidence/train_messages.jsonl:1",
+        "/workspace/scratch/8b32a91611bc/continuation27_joint12_evidence/after_fit.jsonl:1",
+        "/workspace/scratch/8b32a91611bc/native15_successor_candidate/train_messages.jsonl:1",
+        "/workspace/scratch/8b32a91611bc/restore_plan/native15_pack/prepare_native15.py:46"
+      ],
+      "interpretation": "新quote interfaceへのfitも必要。旧numeric9/9を新quote9/9の保持基準へ流用しない。"
+    },
+    {
+      "name": "loss_and_weights",
+      "old": "chairはassistant全文+EOS mean CE。dailyは0.5*全文mean CE + 0.5*連続surface25 token mean CE。",
+      "new": "全15がassistant全文+EOS mean CEのみ。daily専用surface25 objectiveなし。",
+      "evidence": [
+        "/workspace/scratch/8b32a91611bc/continuation27_joint12_evidence/runner_source.py:182",
+        "/workspace/scratch/8b32a91611bc/continuation27_joint12_evidence/runner_source.py:194",
+        "/workspace/scratch/8b32a91611bc/continuation27_joint12_evidence/runner_source.py:205",
+        "/workspace/scratch/8b32a91611bc/afteronly_final/run/run_native15_afteronly.py:157"
+      ],
+      "interpretation": "daily本文の追加重みはなくなった。ただし今回daily3は実際に全て採用されており、このloss差だけをchair失敗の主因とは言えない。"
+    },
+    {
+      "name": "order_and_replay",
+      "old": "12更新。daily各2回、chair各1回を交互に配分。最後はchair03訂正。",
+      "new": "15更新。chair6→daily3→新6を各1回。新6を最後に連続学習し、その後の旧題材replayなし。",
+      "evidence": [
+        "/workspace/scratch/8b32a91611bc/continuation27_joint12_evidence/runner_source.py:211",
+        "/workspace/scratch/8b32a91611bc/restore_plan/native15_pack/prepare_native15.py:36",
+        "/workspace/scratch/8b32a91611bc/afteronly_final/run/run_native15_afteronly.py:154",
+        "/workspace/scratch/8b32a91611bc/afteronly_final/run/training.jsonl:10"
+      ],
+      "interpretation": "新しい題材の更新が旧題材を最後に見た後へ集中する。共有LoRAへの干渉/旧quote fitの不足は候補仮説であり、単独原因の証明ではない。"
+    },
+    {
+      "name": "amount_and_scope",
+      "old": "言語2題材、9 identity/stage行、12 optimizer更新、最長7378 tokens。",
+      "new": "言語6題材、15行、15 optimizer更新、最長7935 tokens。新6には説明ADD・否定・知覚・対象付き不明を含む。",
+      "evidence": [
+        "/workspace/scratch/8b32a91611bc/continuation27_joint12_evidence/joint_fit12_tokenization.json",
+        "/workspace/scratch/8b32a91611bc/native15_successor_candidate/cpu_preparation.json"
+      ],
+      "interpretation": "各行1更新で新schema/題材のfitが成立するとは確認されていない。"
+    },
+    {
+      "name": "initial_checkpoint",
+      "old": "138b9ff7…から学習し45779…を保存。",
+      "new": "その実45779…を起点に学習し278fdc…を保存。",
+      "evidence": [
+        "/workspace/scratch/8b32a91611bc/continuation27_joint12_evidence/run.json",
+        "/workspace/scratch/8b32a91611bc/afteronly_final/run/run.json"
+      ],
+      "interpretation": "保存重みからの継続。両runとも新AdamWで、optimizer/RNG途中再開ではない。"
+    }
+  ],
+  "unchanged_conditions": {
+    "model": "Qwen/Qwen3.5-4B",
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "optimizer": "fresh AdamW",
+    "learning_rate": 0.00005,
+    "weight_decay": 0,
+    "batch_size": 1,
+    "gradient_accumulation": 1,
+    "clip_norm": 1,
+    "seed": 20261024,
+    "base_dtype": "BF16",
+    "lora_dtype": "F32",
+    "lora_rank": 8,
+    "lora_alpha": 16,
+    "lora_dropout": 0,
+    "trainable_tensors": 32,
+    "target_modules": 16,
+    "adapter_verification": {
+      "target_module_sets_equal": true,
+      "other_config_equal": true,
+      "tensor_name_shape_dtype_sets_equal": true,
+      "tensor_count": 32
+    },
+    "adapter_config_sha_difference": "target_modules配列の順序だけ。集合および他configは一致し、32 tensorのname/shape/dtype集合も一致。対象module拡張の証拠なし。",
+    "teacher_loss_helper_sha256": "2f659078c05bee6d7b32f50aae8b9eebc03c767d4a3be084bc17e9e3ccc4c10d",
+    "labels": "同helperでpromptを-100、assistant全文+EOSを連続教師化。context切捨てなし。",
+    "evidence": [
+      "/workspace/scratch/8b32a91611bc/afteronly_final/run/run_native15_afteronly.py:122",
+      "/workspace/scratch/8b32a91611bc/afteronly_final/run/run_native15_afteronly.py:126",
+      "/workspace/scratch/8b32a91611bc/afteronly_final/run/run_native15_afteronly.py:149",
+      "/workspace/scratch/8b32a91611bc/afteronly_final/run/run_native15_afteronly.py:151",
+      "/workspace/scratch/8b32a91611bc/restore_plan/run_pilot.py:163",
+      "/workspace/scratch/8b32a91611bc/restore_plan/run_pilot.py:196"
+    ]
+  },
+  "log_interpretation": [
+    "新6のオンライン全文loss平均は0.135507、chair6は0.009121、daily3は0.001482。新6のpreclip normは6/6で1を超えclipされた。chairは4/6、dailyは0/3。新題材側のfit負荷が大きいことは観測される。",
+    "記録lossは各行の更新前にその時点の変わる重みで測った値であり、同一重みでのbefore/after NLLではない。",
+    "gradient_normはclip前。clip後の更新量がpreclip normに比例したとは扱わない。gradient方向/cosine/干渉の直接測定はない。",
+    "旧dailyの0.5全文+0.5surface値と新dailyの全文だけの値は、そのまま損失改善の比較に使えない。",
+    "全文lossは各sequence内の平均CEであり、長文という理由だけで行全体がtoken数比例の重みを持つとは言えない。自然本文/EOSのsequence内比率は小さくなり得る。",
+    "A4500→A5000というGPU差もある。Torch2.8.0+cu128とpinは同じだが、bitwise kernel同一性やGPU差の因果は未測定。"
+  ],
+  "not_established": [
+    "45779の全quote15での未学習beforeはない。旧numeric FIT9成功で新quote-before欠測を埋めない。",
+    "step9時点のadapter/生成は保存されていない。新6へ入る前にchair quoteがfitしたか不明。",
+    "最終teacher-forced NLL・局所logit・gradient干渉を今回測定していないため、忘却/未学習/interface移行のどれか一つを主因に確定できない。",
+    "CPU教師15/15の採用成功はtargetがCMEEへ通る証拠であり、モデルがそれを学んだ証拠ではない。",
+    "FIT15成立と自然な本人理解・未知一般化・三中核の商品受入れは別。"
+  ],
+  "next_candidate": {
+    "verdict": "ROOTのbefore0・混在配分/順序30更新・保存reload・after15という一回候補に技術上合意。主因確定や改善保証はしない。",
+    "start_adapter": "45779ad97111dd2d91c1f7f1a4b0ca697ef0586c5190cd56b1b7675fe540dab6",
+    "data": "同じ凍結quote15 train/eval bytesを維持。元行順とafter15順序は不変。",
+    "changes": [
+      "各既存行を2回ずつ＝30 optimizer更新。",
+      "passごとに旧/新を混在した固定optimizer順序を記録。seed固定。",
+      "beforeの新生成0。保存/非学習reload後に同15を生成し、前回278fdcの同quote15結果と候補間比較する。"
+    ],
+    "unchanged": [
+      "LR5e-5、full assistant+EOS loss、AdamW/clip1/batch1、LoRAとbase。",
+      "context8192・旧9cap2560/新6cap3712、1call180秒、global2700秒、実A5000/.28h/最大.21という記録済み枠。",
+      "教師/採用reader/meaning/本文/品質条件・raw非補修・自動再試行なし。"
+    ],
+    "why_before0": "numeric/quote2callは診断用で、今回の有限fit獲得へ必須ではない。before失敗で学習未到達となった旧経緯を踏まえ、quote-before欠測を明示したまま実本文を優先する。",
+    "smaller_alternative": "順序だけ変える15更新はより小さく、順序介入の解釈も単純。ただしschema移行/新題材に十分なfit露出を与えない可能性があり、追加の予備試行としては提案しない。",
+    "implementation_cautions": [
+      "教材arrayを並べ替えてCPU_preparation対応を崩さず、別optimizer_visit_order 30indexを持つ。",
+      "各passは全15 indexを1回、全体は各index2回。logはrows[index].idを使用し、step番号をrow indexにしない。",
+      "現在consumerのoptimizer_steps_completed==15と旧runner filenameを新実行scopeへ合わせる。CMEE採否条件を変更しない。",
+      "15*180秒だけで2700秒なので、学習/保存込みの全15完了保証はない。欠測・途中成果・STOPを保持する。",
+      "観測peak reserved23.164GiB。同A5000を維持し、OOM時のdtype/mask/GPU自動変更を行わない。"
+    ],
+    "approval_boundary": "rootが具体案とCPU準備を保存し、30更新の新しい一回についてMashの判断へ戻す予定。今回のread-only診断は実行承認やGPU開始ではない。"
+  },
+  "timing_note": {
+    "processing_seconds": 1190.5218645449495,
+    "generation_seconds": 982.3950137967477,
+    "other_seconds": 208.12685074820183,
+    "peak_allocated_gib": 19.65499496459961,
+    "peak_reserved_gib": 23.1640625,
+    "interpretation": "前回1190.52秒には余裕があるが30更新の実時間保証ではない。"
+  },
+  "effects": {
+    "new_model_calls": 0,
+    "gpu_operations": 0,
+    "training_updates": 0,
+    "cmee_reruns": 0,
+    "new_teachers": 0,
+    "admission_changes": 0,
+    "generation_constraint_changes": 0,
+    "github_writes": 0,
+    "external_writes": 0
+  }
+}

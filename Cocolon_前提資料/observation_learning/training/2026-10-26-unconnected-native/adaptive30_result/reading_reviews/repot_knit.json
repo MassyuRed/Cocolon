@@ -1,0 +1,1871 @@
+{
+  "schema": "cocolon.adaptive30.repot_knit.read_only_review.v1",
+  "review_status": "READ_ONLY_STATIC_COMPARISON_WITH_SEPARATE_ACTUAL_CONSUMER_RESULT_NOT_FORMAL_ACCEPTANCE",
+  "reviewer_role": "read-only supplemental agent; root retains final verification and publication",
+  "formal_pro_ultra_or_human_product_acceptance": false,
+  "product_credit": 0,
+  "scope": [
+    "FT-REPOT-INITIAL",
+    "FT-KNIT-INITIAL"
+  ],
+  "effects": {
+    "model_calls": 0,
+    "training_updates": 0,
+    "sql_operations": 0,
+    "github_operations": 0,
+    "source_raw_teacher_changes": 0
+  },
+  "sources": {
+    "training_messages": {
+      "path": "/workspace/scratch/d71884a6a7b6/recovered/adaptive30/run/train_messages.jsonl",
+      "sha256": "34e082ed14b5d074ddd18544cd1b8850cc35bea0eb583932fbadefcc1753f396"
+    },
+    "actual_consumer": {
+      "path": "/workspace/scratch/d71884a6a7b6/recovered/adaptive30/diagnosis/diagnosis.json",
+      "sha256": "d71db945a89d810f3f4eeacc5c9aa8f80cc4cadd302daabd7bf60a60f66e0aaf",
+      "api_commit": "a4b91b4788b2fb29483a4c77869c91b36402ae9f",
+      "status": "CPU_ADAPTIVE30_DIAGNOSED_NOT_SERVICE_OR_PRODUCT_ACCEPTED"
+    },
+    "run": {
+      "path": "/workspace/scratch/d71884a6a7b6/recovered/adaptive30/run/run.json",
+      "sha256": "70c876212a46a3b299e406dd4cebb949ef2554163d7c9e14179626f2f254d931",
+      "source_commit": "5c2fe64e89e2d5f87c24a85692ee19c5af1dc567"
+    }
+  },
+  "identity_observations": {
+    "model": "Qwen/Qwen3.5-4B",
+    "base_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "actual_adapter_sha256": "d431a07ce227c05e81eca5afb9461d91cf8101d50af0d27ec1a81844ce8ac684",
+    "adapter_bytes_hashed_by_this_reviewer": true,
+    "reloaded_tensors_metadata": {
+      "path": "/workspace/scratch/d71884a6a7b6/recovered/adaptive30/run/reloaded_tensors.json",
+      "sha256": "8db843456c150b019c7ce9f7db269f6ccfeb9954cb476338d6e0a6d52d8a46a5",
+      "count": 112,
+      "unique_names": 112,
+      "parameter_count": 3833856,
+      "all_reported_float32": true,
+      "all_reported_finite": true
+    },
+    "limit": "This reviewer read tensor metadata and hashed the adapter; no actual tensor/model reload or value comparison was executed by this reviewer."
+  },
+  "consumer_run_summary": {
+    "meaning_adopted_count": 11,
+    "body_available_count": 9,
+    "cold_file_checked_count": 11,
+    "cold_file_failures": 0,
+    "new_model_calls": 0,
+    "training_updates": 0,
+    "sql_operations": 0,
+    "service_saved_roundtrip": false,
+    "dynamic_prior": false,
+    "product_accepted": false,
+    "automatic_progression": false
+  },
+  "cases": [
+    {
+      "case_id": "FT-REPOT-INITIAL",
+      "source_original": {
+        "category": [
+          "生活"
+        ],
+        "created_at": "2026-10-26T00:00:00Z",
+        "emotion_details": [
+          {
+            "strength": "medium",
+            "type": "平穏"
+          }
+        ],
+        "emotions": [
+          "平穏"
+        ],
+        "id": "FT-REPOT-O",
+        "is_secret": false,
+        "memo": "やり方が分かって安心した。",
+        "memo_action": "植え替えの手順を叔父に説明してもらい、最後まで聞いた。"
+      },
+      "source_text_fields": {
+        "FT-REPOT-O": {
+          "memo": "やり方が分かって安心した。",
+          "memo_action": "植え替えの手順を叔父に説明してもらい、最後まで聞いた。"
+        }
+      },
+      "teacher_origin": {
+        "commit": "8eeb8e4c5577cc00fab53b3de413a894172ac5e1",
+        "path": "Cocolon_前提資料/observation_learning/training/2026-10-24-emlis-free-pilot/sft_examples.jsonl",
+        "row_id": "FT-REPOT-INITIAL"
+      },
+      "evidence": {
+        "current_raw": {
+          "path": "/workspace/scratch/d71884a6a7b6/recovered/adaptive30/run/after_FT-REPOT-INITIAL.jsonl",
+          "file_sha256": "e330a9ff65d63f8a09eddeb5332916c5a81a12574181ef5558f82ae65efbf809",
+          "raw_text_sha256": "a40ff67612ef43b265a01998a69bed12022025010f6402b3490c44852230d39c",
+          "stored_raw_text_sha256_matches": true,
+          "parsed_full_packet": {
+            "candidate": {
+              "claims": [
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-REPOT-O",
+                    "evidence_indexes": [
+                      0
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                  },
+                  "claim_id": "guidance_received",
+                  "evidence_indexes": [
+                    0
+                  ],
+                  "kind": "EVENT",
+                  "modality": {
+                    "evidence_indexes": [
+                      0
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      0
+                    ],
+                    "scope_refs": [
+                      "guidance_received"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "植え替えの手順を叔父に説明してもらい"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "植え替えの手順を叔父に説明してもらい"
+                },
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-REPOT-O",
+                    "evidence_indexes": [
+                      1
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                  },
+                  "claim_id": "listened_to_end",
+                  "evidence_indexes": [
+                    1
+                  ],
+                  "kind": "EVENT",
+                  "modality": {
+                    "evidence_indexes": [
+                      1
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      1
+                    ],
+                    "scope_refs": [
+                      "listened_to_end"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "最後まで聞いた"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "最後まで聞いた"
+                },
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-REPOT-O",
+                    "evidence_indexes": [
+                      2
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                  },
+                  "claim_id": "understood_method",
+                  "evidence_indexes": [
+                    2
+                  ],
+                  "kind": "STATE",
+                  "modality": {
+                    "evidence_indexes": [
+                      2
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      2
+                    ],
+                    "scope_refs": [
+                      "understood_method"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "やり方が分かって"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "やり方が分かって"
+                },
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-REPOT-O",
+                    "evidence_indexes": [
+                      3
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                  },
+                  "claim_id": "relief",
+                  "evidence_indexes": [
+                    3
+                  ],
+                  "kind": "STATE",
+                  "modality": {
+                    "evidence_indexes": [
+                      3
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      3
+                    ],
+                    "scope_refs": [
+                      "relief"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "安心した"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "安心した"
+                }
+              ],
+              "conflicts": [],
+              "core": "emlis",
+              "question_proposal": null,
+              "relations": [
+                {
+                  "evidence_indexes": [
+                    4
+                  ],
+                  "from_claim_id": "guidance_received",
+                  "polarity": "AFFIRMED",
+                  "qualifiers": [],
+                  "relation_id": "action_link",
+                  "scope_refs": [
+                    "action_link"
+                  ],
+                  "to_claim_id": "listened_to_end",
+                  "type": "SOURCE_WRITTEN_CONTINUATIVE_LINK"
+                },
+                {
+                  "evidence_indexes": [
+                    5
+                  ],
+                  "from_claim_id": "understood_method",
+                  "polarity": "AFFIRMED",
+                  "qualifiers": [],
+                  "relation_id": "memo_link",
+                  "scope_refs": [
+                    "memo_link"
+                  ],
+                  "to_claim_id": "relief",
+                  "type": "SOURCE_WRITTEN_TE_LINK"
+                }
+              ],
+              "schema_version": "cocolon.cmee.semantic_and_surface_proposal.v1",
+              "surface_proposal": {
+                "bindings": [
+                  {
+                    "claim_refs": [
+                      "guidance_received",
+                      "listened_to_end"
+                    ],
+                    "relation_refs": [
+                      "action_link"
+                    ],
+                    "section": "observation"
+                  },
+                  {
+                    "claim_refs": [
+                      "understood_method",
+                      "relief"
+                    ],
+                    "relation_refs": [
+                      "memo_link"
+                    ],
+                    "section": "reception"
+                  }
+                ],
+                "observation": "叔父に植え替えの手順を説明し、最後まで聞かせてください。",
+                "reception": "やり方が分かって安心しました。",
+                "update_note": null
+              },
+              "unknowns": [],
+              "updates": []
+            },
+            "evidence_quotes": [
+              {
+                "field_path": "memo_action",
+                "quote": "植え替えの手順を叔父に説明してもらい",
+                "source_id": "FT-REPOT-O"
+              },
+              {
+                "field_path": "memo_action",
+                "quote": "最後まで聞いた",
+                "source_id": "FT-REPOT-O"
+              },
+              {
+                "field_path": "memo",
+                "quote": "やり方が分かって",
+                "source_id": "FT-REPOT-O"
+              },
+              {
+                "field_path": "memo",
+                "quote": "安心した",
+                "source_id": "FT-REPOT-O"
+              },
+              {
+                "field_path": "memo_action",
+                "quote": "植え替えの手順を叔父に説明してもらい、最後まで聞いた",
+                "source_id": "FT-REPOT-O"
+              },
+              {
+                "field_path": "memo",
+                "quote": "やり方が分かって安心した",
+                "source_id": "FT-REPOT-O"
+              }
+            ],
+            "schema_version": "cocolon.cmee.quote_candidate.v1"
+          }
+        },
+        "teacher": {
+          "parsed_full_packet": {
+            "candidate": {
+              "claims": [
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-REPOT-O",
+                    "evidence_indexes": [
+                      0
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                  },
+                  "claim_id": "guidance_received",
+                  "evidence_indexes": [
+                    0
+                  ],
+                  "kind": "EVENT",
+                  "modality": {
+                    "evidence_indexes": [
+                      0
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      0
+                    ],
+                    "scope_refs": [
+                      "guidance_received"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "植え替えの手順を叔父に説明してもらい"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "植え替えの手順を叔父に説明してもらい"
+                },
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-REPOT-O",
+                    "evidence_indexes": [
+                      1
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                  },
+                  "claim_id": "listened_to_end",
+                  "evidence_indexes": [
+                    1
+                  ],
+                  "kind": "EVENT",
+                  "modality": {
+                    "evidence_indexes": [
+                      1
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      1
+                    ],
+                    "scope_refs": [
+                      "listened_to_end"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "最後まで聞いた"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "最後まで聞いた"
+                },
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-REPOT-O",
+                    "evidence_indexes": [
+                      2
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                  },
+                  "claim_id": "understood_method",
+                  "evidence_indexes": [
+                    2
+                  ],
+                  "kind": "STATE",
+                  "modality": {
+                    "evidence_indexes": [
+                      2
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      2
+                    ],
+                    "scope_refs": [
+                      "understood_method"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "やり方が分かって"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "やり方が分かって"
+                },
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-REPOT-O",
+                    "evidence_indexes": [
+                      3
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                  },
+                  "claim_id": "relief",
+                  "evidence_indexes": [
+                    3
+                  ],
+                  "kind": "STATE",
+                  "modality": {
+                    "evidence_indexes": [
+                      3
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      3
+                    ],
+                    "scope_refs": [
+                      "relief"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "安心した"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "安心した"
+                }
+              ],
+              "conflicts": [],
+              "core": "emlis",
+              "question_proposal": null,
+              "relations": [
+                {
+                  "evidence_indexes": [
+                    4
+                  ],
+                  "from_claim_id": "guidance_received",
+                  "polarity": "AFFIRMED",
+                  "qualifiers": [],
+                  "relation_id": "action_link",
+                  "scope_refs": [
+                    "action_link"
+                  ],
+                  "to_claim_id": "listened_to_end",
+                  "type": "SOURCE_WRITTEN_CONTINUATIVE_LINK"
+                },
+                {
+                  "evidence_indexes": [
+                    5
+                  ],
+                  "from_claim_id": "understood_method",
+                  "polarity": "AFFIRMED",
+                  "qualifiers": [],
+                  "relation_id": "memo_link",
+                  "scope_refs": [
+                    "memo_link"
+                  ],
+                  "to_claim_id": "relief",
+                  "type": "SOURCE_WRITTEN_TE_LINK"
+                }
+              ],
+              "schema_version": "cocolon.cmee.semantic_and_surface_proposal.v1",
+              "surface_proposal": {
+                "bindings": [
+                  {
+                    "claim_refs": [
+                      "guidance_received",
+                      "listened_to_end"
+                    ],
+                    "relation_refs": [
+                      "action_link"
+                    ],
+                    "section": "observation"
+                  },
+                  {
+                    "claim_refs": [
+                      "understood_method",
+                      "relief"
+                    ],
+                    "relation_refs": [
+                      "memo_link"
+                    ],
+                    "section": "reception"
+                  }
+                ],
+                "observation": "叔父に植え替えの手順を説明してもらい、最後まで聞いたのですね。",
+                "reception": "やり方が分かって、安心できてよかったです。",
+                "update_note": null
+              },
+              "unknowns": [],
+              "updates": []
+            },
+            "evidence_quotes": [
+              {
+                "field_path": "memo_action",
+                "quote": "植え替えの手順を叔父に説明してもらい",
+                "source_id": "FT-REPOT-O"
+              },
+              {
+                "field_path": "memo_action",
+                "quote": "最後まで聞いた",
+                "source_id": "FT-REPOT-O"
+              },
+              {
+                "field_path": "memo",
+                "quote": "やり方が分かって",
+                "source_id": "FT-REPOT-O"
+              },
+              {
+                "field_path": "memo",
+                "quote": "安心した",
+                "source_id": "FT-REPOT-O"
+              },
+              {
+                "field_path": "memo_action",
+                "quote": "植え替えの手順を叔父に説明してもらい、最後まで聞いた",
+                "source_id": "FT-REPOT-O"
+              },
+              {
+                "field_path": "memo",
+                "quote": "やり方が分かって安心した",
+                "source_id": "FT-REPOT-O"
+              }
+            ],
+            "schema_version": "cocolon.cmee.quote_candidate.v1"
+          }
+        },
+        "previous_109c_raw": {
+          "path": "/workspace/scratch/d71884a6a7b6/baseline_raw/after_FT-REPOT-INITIAL.jsonl",
+          "file_sha256": "a10870b380c273b3e74aa7aa298e64ce4dd84f4ce9516b2cdc83cd5c2330a902",
+          "raw_text_sha256": "e33ff3b8a753b17e00fdea7d42ba4c4e41afa4a0056fe702fbc8e3817758f9f6",
+          "parsed_full_packet": {
+            "candidate": {
+              "claims": [
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-REPOT-O",
+                    "evidence_indexes": [
+                      0
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                  },
+                  "claim_id": "guidance_received",
+                  "evidence_indexes": [
+                    0
+                  ],
+                  "kind": "EVENT",
+                  "modality": {
+                    "evidence_indexes": [
+                      0
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      0
+                    ],
+                    "scope_refs": [
+                      "guidance_received"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "植え替えの手順を叔父に説明してもらい"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "植え替えの手順を叔父に説明してもらい"
+                },
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-REPOT-O",
+                    "evidence_indexes": [
+                      1
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                  },
+                  "claim_id": "listened_to_end",
+                  "evidence_indexes": [
+                    1
+                  ],
+                  "kind": "EVENT",
+                  "modality": {
+                    "evidence_indexes": [
+                      1
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      1
+                    ],
+                    "scope_refs": [
+                      "listened_to_end"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "最後まで聞いた"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "最後まで聞いた"
+                },
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-REPOT-O",
+                    "evidence_indexes": [
+                      2
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                  },
+                  "claim_id": "understood_method",
+                  "evidence_indexes": [
+                    2
+                  ],
+                  "kind": "STATE",
+                  "modality": {
+                    "evidence_indexes": [
+                      2
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      2
+                    ],
+                    "scope_refs": [
+                      "understood_method"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "やり方が分かって"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "やり方が分かって"
+                },
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-REPOT-O",
+                    "evidence_indexes": [
+                      3
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                  },
+                  "claim_id": "relief",
+                  "evidence_indexes": [
+                    3
+                  ],
+                  "kind": "STATE",
+                  "modality": {
+                    "evidence_indexes": [
+                      3
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      3
+                    ],
+                    "scope_refs": [
+                      "relief"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "安心した"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "安心した"
+                }
+              ],
+              "conflicts": [],
+              "core": "emlis",
+              "question_proposal": null,
+              "relations": [
+                {
+                  "evidence_indexes": [
+                    4
+                  ],
+                  "from_claim_id": "guidance_received",
+                  "polarity": "AFFIRMED",
+                  "qualifiers": [],
+                  "relation_id": "action_link",
+                  "scope_refs": [
+                    "action_link"
+                  ],
+                  "to_claim_id": "listened_to_end",
+                  "type": "SOURCE_WRITTEN_CONTINUATIVE_LINK"
+                },
+                {
+                  "evidence_indexes": [
+                    5
+                  ],
+                  "from_claim_id": "understood_method",
+                  "polarity": "AFFIRMED",
+                  "qualifiers": [],
+                  "relation_id": "memo_link",
+                  "scope_refs": [
+                    "memo_link"
+                  ],
+                  "to_claim_id": "relief",
+                  "type": "SOURCE_WRITTEN_TE_LINK"
+                }
+              ],
+              "schema_version": "cocolon.cmee.semantic_and_surface_proposal.v1",
+              "surface_proposal": {
+                "bindings": [
+                  {
+                    "claim_refs": [
+                      "guidance_received",
+                      "listened_to_end"
+                    ],
+                    "relation_refs": [
+                      "action_link"
+                    ],
+                    "section": "observation"
+                  },
+                  {
+                    "claim_refs": [
+                      "understood_method",
+                      "relief"
+                    ],
+                    "relation_refs": [
+                      "memo_link"
+                    ],
+                    "section": "reception"
+                  }
+                ],
+                "observation": "叔父に植え替えの手順を説明し、最後まで聞けてよかったです。",
+                "reception": "やり方が分かって、安心できよかったです。",
+                "update_note": null
+              },
+              "unknowns": [],
+              "updates": []
+            },
+            "evidence_quotes": [
+              {
+                "field_path": "memo_action",
+                "quote": "植え替えの手順を叔父に説明してもらい",
+                "source_id": "FT-REPOT-O"
+              },
+              {
+                "field_path": "memo_action",
+                "quote": "最後まで聞いた",
+                "source_id": "FT-REPOT-O"
+              },
+              {
+                "field_path": "memo",
+                "quote": "やり方が分かって",
+                "source_id": "FT-REPOT-O"
+              },
+              {
+                "field_path": "memo",
+                "quote": "安心した",
+                "source_id": "FT-REPOT-O"
+              },
+              {
+                "field_path": "memo_action",
+                "quote": "植え替えの手順を叔父に説明してもらい、最後まで聞いた",
+                "source_id": "FT-REPOT-O"
+              },
+              {
+                "field_path": "memo",
+                "quote": "やり方が分かって安心した",
+                "source_id": "FT-REPOT-O"
+              }
+            ],
+            "schema_version": "cocolon.cmee.quote_candidate.v1"
+          }
+        }
+      },
+      "static_format_identity": {
+        "duplicate_keys": [],
+        "finish_reason": "stop",
+        "eos_reached": true,
+        "parse_error": null,
+        "base_revision_matches_reviewed_identity": true,
+        "adapter_revision_matches_actual_adapter_hash": true,
+        "run_call_digest_is_entire_jsonl_digest_not_raw_text_digest": true
+      },
+      "actual_consumer_result": {
+        "meaning_adopted": true,
+        "body_available": false,
+        "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL",
+        "outcome_status": "UNAVAILABLE",
+        "body": null,
+        "question": null,
+        "question_decision": {
+          "disposition": "BLOCKED",
+          "target_ref": null,
+          "target_kind": null,
+          "supporting_evidence_refs": [],
+          "missing_dimension": null,
+          "affected_meaning_refs": [],
+          "affected_reception_refs": [],
+          "asked_target_refs": [],
+          "decision_reason": "model_surface_not_validated"
+        }
+      },
+      "static_comparison": {
+        "candidate_without_surface_equal_to_teacher": true,
+        "evidence_quotes_equal_to_teacher": true,
+        "quote_location_checks": [
+          {
+            "index": 0,
+            "field_path": "memo_action",
+            "quote": "植え替えの手順を叔父に説明してもらい",
+            "source_id": "FT-REPOT-O",
+            "exact_occurrence_count_in_original_field": 1
+          },
+          {
+            "index": 1,
+            "field_path": "memo_action",
+            "quote": "最後まで聞いた",
+            "source_id": "FT-REPOT-O",
+            "exact_occurrence_count_in_original_field": 1
+          },
+          {
+            "index": 2,
+            "field_path": "memo",
+            "quote": "やり方が分かって",
+            "source_id": "FT-REPOT-O",
+            "exact_occurrence_count_in_original_field": 1
+          },
+          {
+            "index": 3,
+            "field_path": "memo",
+            "quote": "安心した",
+            "source_id": "FT-REPOT-O",
+            "exact_occurrence_count_in_original_field": 1
+          },
+          {
+            "index": 4,
+            "field_path": "memo_action",
+            "quote": "植え替えの手順を叔父に説明してもらい、最後まで聞いた",
+            "source_id": "FT-REPOT-O",
+            "exact_occurrence_count_in_original_field": 1
+          },
+          {
+            "index": 5,
+            "field_path": "memo",
+            "quote": "やり方が分かって安心した",
+            "source_id": "FT-REPOT-O",
+            "exact_occurrence_count_in_original_field": 1
+          }
+        ],
+        "observation_reception_identical": false,
+        "all_unknown_ids_match_existing_ascii64_shape": true,
+        "question_proposal": null,
+        "updates": [],
+        "conflicts": []
+      },
+      "static_findings": [
+        {
+          "kind": "SEMANTIC_PACKET_COMPARISON",
+          "text": "4claims/2relations/6quotes、主語OMITTED・時点・肯否・modality・各参照・bindings・unknowns・question・updatesは教師と一致。全packet差分はobservation/receptionの2文字列だけ。"
+        },
+        {
+          "kind": "SURFACE_ROLE_REVERSAL",
+          "text": "原文は叔父が説明者、本人が説明を受け最後まで聞く側。今回observation「叔父に植え替えの手順を説明し」は本人から叔父へ説明する表現となり、原文の役割を逆転させる。"
+        },
+        {
+          "kind": "SURFACE_SPEECH_ACT_DRIFT",
+          "text": "「最後まで聞かせてください」は依頼であり、原文の完了済みの過去行動「最後まで聞いた」を観測として保持していない。"
+        },
+        {
+          "kind": "SURFACE_ADDRESSED_RECEPTION_MISSING",
+          "text": "「やり方が分かって安心しました。」は一人称報告として読め、本人に向けた受け取りの教師文と一致しない。"
+        },
+        {
+          "kind": "PREVIOUS_COMPARISON",
+          "text": "旧109cも「叔父に…説明し」で同じ説明者逆転があり、今回も解消していない。旧の末尾「最後まで聞けてよかったです。」から今回「聞かせてください。」へ変わり依頼化が加わった。本文改善成立とは扱わない。"
+        }
+      ],
+      "conclusion": "実consumerは意味採用true・本文false、UNAVAILABLE/model_surface_not_validated。意味採用snapshotはcold-file一致。静的所見も本文の主客反転・依頼化を確認し、本文成功とはしない。"
+    },
+    {
+      "case_id": "FT-KNIT-INITIAL",
+      "source_original": {
+        "category": [
+          "生活"
+        ],
+        "created_at": "2026-10-26T00:00:00Z",
+        "emotion_details": [
+          {
+            "strength": "weak",
+            "type": "悲しみ"
+          }
+        ],
+        "emotions": [
+          "悲しみ"
+        ],
+        "id": "FT-KNIT-O",
+        "is_secret": false,
+        "memo": "ほどくのは面倒だった。さみしさも少しあった。二つがどうつながるかは、自分でも分からない。",
+        "memo_action": "今日は編みかけの見本をほどいた。"
+      },
+      "source_text_fields": {
+        "FT-KNIT-O": {
+          "memo": "ほどくのは面倒だった。さみしさも少しあった。二つがどうつながるかは、自分でも分からない。",
+          "memo_action": "今日は編みかけの見本をほどいた。"
+        }
+      },
+      "teacher_origin": {
+        "commit": "8eeb8e4c5577cc00fab53b3de413a894172ac5e1",
+        "path": "Cocolon_前提資料/observation_learning/training/2026-10-24-emlis-free-pilot/sft_examples.jsonl",
+        "row_id": "FT-KNIT-INITIAL"
+      },
+      "evidence": {
+        "current_raw": {
+          "path": "/workspace/scratch/d71884a6a7b6/recovered/adaptive30/run/after_FT-KNIT-INITIAL.jsonl",
+          "file_sha256": "85c4e8272379514b0bd4f0a10c499aa280624d89f768aaf27583317307a9be4f",
+          "raw_text_sha256": "641ae3e2579aa1a6644b1f42091b1ab4475e19264355c6076240874a5703c851",
+          "stored_raw_text_sha256_matches": true,
+          "parsed_full_packet": {
+            "candidate": {
+              "claims": [
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-KNIT-O",
+                    "evidence_indexes": [
+                      0
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                  },
+                  "claim_id": "unravelled",
+                  "evidence_indexes": [
+                    0
+                  ],
+                  "kind": "EVENT",
+                  "modality": {
+                    "evidence_indexes": [
+                      0
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      0
+                    ],
+                    "scope_refs": [
+                      "unravelled"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "今日は編みかけの見本をほどいた。"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "今日は編みかけの見本をほどいた。"
+                },
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-KNIT-O",
+                    "evidence_indexes": [
+                      1
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                  },
+                  "claim_id": "burden",
+                  "evidence_indexes": [
+                    1
+                  ],
+                  "kind": "STATE",
+                  "modality": {
+                    "evidence_indexes": [
+                      1
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      1
+                    ],
+                    "scope_refs": [
+                      "burden"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "ほどくのは面倒だった。"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "ほどくのは面倒だった。"
+                },
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-KNIT-O",
+                    "evidence_indexes": [
+                      2
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                  },
+                  "claim_id": "sadness",
+                  "evidence_indexes": [
+                    2
+                  ],
+                  "kind": "STATE",
+                  "modality": {
+                    "evidence_indexes": [
+                      2
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      2
+                    ],
+                    "scope_refs": [
+                      "sadness"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "さみしさも少しあった。"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "さみしさも少しあった。"
+                },
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-KNIT-O",
+                    "evidence_indexes": [
+                      3
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PRESENT"
+                  },
+                  "claim_id": "stated_unknown",
+                  "evidence_indexes": [
+                    3
+                  ],
+                  "kind": "EXPLICIT_UNKNOWN",
+                  "modality": {
+                    "evidence_indexes": [
+                      3
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      3
+                    ],
+                    "scope_refs": [
+                      "stated_unknown"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "二つがどうつながるかは、自分でも分からない。"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "二つがどうつながるかは、自分でも分からない。"
+                }
+              ],
+              "conflicts": [],
+              "core": "emlis",
+              "question_proposal": null,
+              "relations": [],
+              "schema_version": "cocolon.cmee.semantic_and_surface_proposal.v1",
+              "surface_proposal": {
+                "bindings": [
+                  {
+                    "claim_refs": [
+                      "unravelled",
+                      "burden",
+                      "sadness",
+                      "stated_unknown"
+                    ],
+                    "relation_refs": [],
+                    "section": "observation"
+                  },
+                  {
+                    "claim_refs": [
+                      "unravelled",
+                      "burden",
+                      "sadness",
+                      "stated_unknown"
+                    ],
+                    "relation_refs": [],
+                    "section": "reception"
+                  }
+                ],
+                "observation": "今日、編みかけの見本をほどいたのですね。ほどくのが面倒で、さみしさも少しあったと聞けて、少し安心しました。二つがどうつながるかは、自分でも分からないと明言して、そのままでいいと受け止めます。",
+                "reception": "今日、編みかけの見本をほどいたのですね。ほどくのが面倒で、さみしさも少しあったと聞けて、少し安心しました。二つがどうつながるかは、自分でも分からないと明言して、そのままでいいと受け止めます。",
+                "update_note": null
+              },
+              "unknowns": [
+                {
+                  "description": "二つがどうつながるかは、自分でも分からない。",
+                  "evidence_indexes": [
+                    3,
+                    1,
+                    2
+                  ],
+                  "kind": "PERSON_STATED",
+                  "target_claim_refs": [
+                    "burden",
+                    "sadness"
+                  ],
+                  "unknown_id": "knit-connection-unknown"
+                }
+              ],
+              "updates": []
+            },
+            "evidence_quotes": [
+              {
+                "field_path": "memo_action",
+                "quote": "今日は編みかけの見本をほどいた。",
+                "source_id": "FT-KNIT-O"
+              },
+              {
+                "field_path": "memo",
+                "quote": "ほどくのは面倒だった。",
+                "source_id": "FT-KNIT-O"
+              },
+              {
+                "field_path": "memo",
+                "quote": "さみしさも少しあった。",
+                "source_id": "FT-KNIT-O"
+              },
+              {
+                "field_path": "memo",
+                "quote": "二つがどうつながるかは、自分でも分からない。",
+                "source_id": "FT-KNIT-O"
+              }
+            ],
+            "schema_version": "cocolon.cmee.quote_candidate.v1"
+          }
+        },
+        "teacher": {
+          "parsed_full_packet": {
+            "candidate": {
+              "claims": [
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-KNIT-O",
+                    "evidence_indexes": [
+                      0
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                  },
+                  "claim_id": "unravelled",
+                  "evidence_indexes": [
+                    0
+                  ],
+                  "kind": "EVENT",
+                  "modality": {
+                    "evidence_indexes": [
+                      0
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      0
+                    ],
+                    "scope_refs": [
+                      "unravelled"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "今日は編みかけの見本をほどいた"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "今日は編みかけの見本をほどいた"
+                },
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-KNIT-O",
+                    "evidence_indexes": [
+                      1
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                  },
+                  "claim_id": "burden",
+                  "evidence_indexes": [
+                    1
+                  ],
+                  "kind": "STATE",
+                  "modality": {
+                    "evidence_indexes": [
+                      1
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      1
+                    ],
+                    "scope_refs": [
+                      "burden"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "ほどくのは面倒だった"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "ほどくのは面倒だった"
+                },
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-KNIT-O",
+                    "evidence_indexes": [
+                      2
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                  },
+                  "claim_id": "sadness",
+                  "evidence_indexes": [
+                    2
+                  ],
+                  "kind": "STATE",
+                  "modality": {
+                    "evidence_indexes": [
+                      2
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      2
+                    ],
+                    "scope_refs": [
+                      "sadness"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "さみしさも少しあった"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "さみしさも少しあった"
+                },
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-KNIT-O",
+                    "evidence_indexes": [
+                      3
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PRESENT"
+                  },
+                  "claim_id": "stated_unknown",
+                  "evidence_indexes": [
+                    3
+                  ],
+                  "kind": "EXPLICIT_UNKNOWN",
+                  "modality": {
+                    "evidence_indexes": [
+                      3
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      3
+                    ],
+                    "scope_refs": [
+                      "stated_unknown"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "二つがどうつながるかは、自分でも分からない"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "二つがどうつながるかは、自分でも分からない"
+                }
+              ],
+              "conflicts": [],
+              "core": "emlis",
+              "question_proposal": null,
+              "relations": [],
+              "schema_version": "cocolon.cmee.semantic_and_surface_proposal.v1",
+              "surface_proposal": {
+                "bindings": [
+                  {
+                    "claim_refs": [
+                      "unravelled",
+                      "burden",
+                      "sadness"
+                    ],
+                    "relation_refs": [],
+                    "section": "observation"
+                  },
+                  {
+                    "claim_refs": [
+                      "stated_unknown",
+                      "burden",
+                      "sadness"
+                    ],
+                    "relation_refs": [],
+                    "section": "reception"
+                  }
+                ],
+                "observation": "編みかけの見本をほどいたのですね。面倒だったことと、少しさみしかったことが、どちらもあったのですね。",
+                "reception": "二つがどうつながるのかは、まだ分からないのですね。分からないところも含めて、今の言葉として聞いていたいです。",
+                "update_note": null
+              },
+              "unknowns": [
+                {
+                  "description": "二つがどうつながるかは、自分でも分からない",
+                  "evidence_indexes": [
+                    3,
+                    1,
+                    2
+                  ],
+                  "kind": "PERSON_STATED",
+                  "target_claim_refs": [
+                    "burden",
+                    "sadness"
+                  ],
+                  "unknown_id": "unknown_connection"
+                }
+              ],
+              "updates": []
+            },
+            "evidence_quotes": [
+              {
+                "field_path": "memo_action",
+                "quote": "今日は編みかけの見本をほどいた",
+                "source_id": "FT-KNIT-O"
+              },
+              {
+                "field_path": "memo",
+                "quote": "ほどくのは面倒だった",
+                "source_id": "FT-KNIT-O"
+              },
+              {
+                "field_path": "memo",
+                "quote": "さみしさも少しあった",
+                "source_id": "FT-KNIT-O"
+              },
+              {
+                "field_path": "memo",
+                "quote": "二つがどうつながるかは、自分でも分からない",
+                "source_id": "FT-KNIT-O"
+              }
+            ],
+            "schema_version": "cocolon.cmee.quote_candidate.v1"
+          }
+        },
+        "previous_109c_raw": {
+          "path": "/workspace/scratch/d71884a6a7b6/baseline_raw/after_FT-KNIT-INITIAL.jsonl",
+          "file_sha256": "d8f9da0da288d962b7a282cab03478f8d45184e0373cde9e448494f7a185d888",
+          "raw_text_sha256": "29bc5e4a425e60c53cb0e75170a6be3486916620e9bfc63a9716ed398c01fd8f",
+          "parsed_full_packet": {
+            "candidate": {
+              "claims": [
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-KNIT-O",
+                    "evidence_indexes": [
+                      0
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                  },
+                  "claim_id": "unravelled",
+                  "evidence_indexes": [
+                    0
+                  ],
+                  "kind": "EVENT",
+                  "modality": {
+                    "evidence_indexes": [
+                      0
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      0
+                    ],
+                    "scope_refs": [
+                      "unravelled"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "今日は編みかけの見本をほどいた。"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "今日は編みかけの見本をほどいた。"
+                },
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-KNIT-O",
+                    "evidence_indexes": [
+                      1
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                  },
+                  "claim_id": "burden",
+                  "evidence_indexes": [
+                    1
+                  ],
+                  "kind": "STATE",
+                  "modality": {
+                    "evidence_indexes": [
+                      1
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      1
+                    ],
+                    "scope_refs": [
+                      "burden"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "ほどくのは面倒だった。"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "ほどくのは面倒だった。"
+                },
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-KNIT-O",
+                    "evidence_indexes": [
+                      2
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                  },
+                  "claim_id": "sadness",
+                  "evidence_indexes": [
+                    2
+                  ],
+                  "kind": "STATE",
+                  "modality": {
+                    "evidence_indexes": [
+                      2
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      2
+                    ],
+                    "scope_refs": [
+                      "sadness"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "さみしさも少しあった。"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "さみしさも少しあった。"
+                },
+                {
+                  "about_time": {
+                    "anchor_source_id": "FT-KNIT-O",
+                    "evidence_indexes": [
+                      3
+                    ],
+                    "expression": null,
+                    "kind": "WRITTEN_PRESENT"
+                  },
+                  "claim_id": "stated_unknown",
+                  "evidence_indexes": [
+                    3
+                  ],
+                  "kind": "EXPLICIT_UNKNOWN",
+                  "modality": {
+                    "evidence_indexes": [
+                      3
+                    ],
+                    "value": "ASSERTED_AS_WRITTEN"
+                  },
+                  "polarity": {
+                    "evidence_indexes": [
+                      3
+                    ],
+                    "scope_refs": [
+                      "stated_unknown"
+                    ],
+                    "value": "AFFIRMED"
+                  },
+                  "predicate": {
+                    "arguments": [],
+                    "surface": "二つがどうつながるかは、自分でも分からない。"
+                  },
+                  "qualifiers": [],
+                  "subject": {
+                    "binding": "OMITTED",
+                    "evidence_indexes": [],
+                    "source_entity": null
+                  },
+                  "text": "二つがどうつながるかは、自分でも分からない。"
+                }
+              ],
+              "conflicts": [],
+              "core": "emlis",
+              "question_proposal": null,
+              "relations": [],
+              "schema_version": "cocolon.cmee.semantic_and_surface_proposal.v1",
+              "surface_proposal": {
+                "bindings": [
+                  {
+                    "claim_refs": [
+                      "unravelled",
+                      "burden",
+                      "sadness",
+                      "stated_unknown"
+                    ],
+                    "relation_refs": [],
+                    "section": "observation"
+                  },
+                  {
+                    "claim_refs": [
+                      "unravelled",
+                      "burden",
+                      "sadness",
+                      "stated_unknown"
+                    ],
+                    "relation_refs": [],
+                    "section": "reception"
+                  }
+                ],
+                "observation": "今日、編みかけの見本をほどいたのですね。ほどくのが面倒だったと聞けて、少し安心しました。さみしさも少しあったと、その気持ちも受け取ります。二つがどうつながるかは、自分でも分からないと、その不明さを保持します。",
+                "reception": "今日、編みかけの見本をほどいたのですね。ほどくのが面倒だったと聞けて、少し安心しました。さみしさも少しあったと、その気持ちも受け取ります。二つがどうつながるかは、自分でも分からないと、その不明さを保持します。",
+                "update_note": null
+              },
+              "unknowns": [
+                {
+                  "description": "二つがどうつながるかは、自分でも分からない。",
+                  "evidence_indexes": [
+                    3,
+                    1,
+                    2
+                  ],
+                  "kind": "PERSON_STATED",
+                  "target_claim_refs": [
+                    "burden",
+                    "sadness"
+                  ],
+                  "unknown_id": "knit-unknown-01"
+                }
+              ],
+              "updates": []
+            },
+            "evidence_quotes": [
+              {
+                "field_path": "memo_action",
+                "quote": "今日は編みかけの見本をほどいた。",
+                "source_id": "FT-KNIT-O"
+              },
+              {
+                "field_path": "memo",
+                "quote": "ほどくのは面倒だった。",
+                "source_id": "FT-KNIT-O"
+              },
+              {
+                "field_path": "memo",
+                "quote": "さみしさも少しあった。",
+                "source_id": "FT-KNIT-O"
+              },
+              {
+                "field_path": "memo",
+                "quote": "二つがどうつながるかは、自分でも分からない。",
+                "source_id": "FT-KNIT-O"
+              }
+            ],
+            "schema_version": "cocolon.cmee.quote_candidate.v1"
+          }
+        }
+      },
+      "static_format_identity": {
+        "duplicate_keys": [],
+        "finish_reason": "stop",
+        "eos_reached": true,
+        "parse_error": null,
+        "base_revision_matches_reviewed_identity": true,
+        "adapter_revision_matches_actual_adapter_hash": true,
+        "run_call_digest_is_entire_jsonl_digest_not_raw_text_digest": true
+      },
+      "actual_consumer_result": {
+        "meaning_adopted": false,
+        "body_available": false,
+        "cold_file_status": "NO_ADOPTED_SNAPSHOT",
+        "decision": "UNSUPPORTED",
+        "reason_code": "model_evidence_out_of_scope"
+      },
+      "static_comparison": {
+        "candidate_without_surface_equal_to_teacher": false,
+        "evidence_quotes_equal_to_teacher": false,
+        "quote_location_checks": [
+          {
+            "index": 0,
+            "field_path": "memo_action",
+            "quote": "今日は編みかけの見本をほどいた。",
+            "source_id": "FT-KNIT-O",
+            "exact_occurrence_count_in_original_field": 1
+          },
+          {
+            "index": 1,
+            "field_path": "memo",
+            "quote": "ほどくのは面倒だった。",
+            "source_id": "FT-KNIT-O",
+            "exact_occurrence_count_in_original_field": 1
+          },
+          {
+            "index": 2,
+            "field_path": "memo",
+            "quote": "さみしさも少しあった。",
+            "source_id": "FT-KNIT-O",
+            "exact_occurrence_count_in_original_field": 1
+          },
+          {
+            "index": 3,
+            "field_path": "memo",
+            "quote": "二つがどうつながるかは、自分でも分からない。",
+            "source_id": "FT-KNIT-O",
+            "exact_occurrence_count_in_original_field": 1
+          }
+        ],
+        "observation_reception_identical": true,
+        "all_unknown_ids_match_existing_ascii64_shape": true,
+        "question_proposal": null,
+        "updates": [],
+        "conflicts": []
+      },
+      "static_findings": [
+        {
+          "kind": "VISIBLE_CLAUSE_PRESENCE_ONLY",
+          "text": "候補テキストには、今日ほどいた行動・面倒さ・少しの寂しさ・現在のつながり不明の4項目がある。これは文字列読解であり、意味admissionの成立を主張しない。"
+        },
+        {
+          "kind": "EXACT_SOURCE_QUOTE_BUT_NOT_ADMISSION",
+          "text": "今回4引用は句点込みで原欄に実在し、各1回出現する。教師4引用とclaim.text/predicate.surfaceは句点なし。引用が存在しない・句点が原文にないとは判定しない。実consumerのmodel_evidence_out_of_scopeはそのまま記録し、この位置一致で上書きしない。どのscope条件が因果かは本読解だけでは確定しない。"
+        },
+        {
+          "kind": "UNKNOWN_STATIC_REFERENCE",
+          "text": "PERSON_STATEDのdescriptionは原文の不明文（句点込み）、targetsはburden/sadness、evidence_indexesは[3,1,2]。knit-connection-unknownはASCII64制約内の合法別名で他IDと非衝突。合法IDを意味採用成立へ換算しない。"
+        },
+        {
+          "kind": "SECTION_DUPLICATION",
+          "text": "observation/receptionは同一の3文全文で、双方のbindingsも全4claim。観測と受け取りの責務分離が未成立。"
+        },
+        {
+          "kind": "UNSUPPORTED_RECEPTION_AND_NORMATIVE_ADDITION",
+          "text": "「少し安心しました」はEmlis側の安堵として追加され、「そのままでいい」は原文にない肯定・許容判断を加える。未知の関係を解決してはいないが、原文の不明保持だけを自然に受け取る教師とは異なる。"
+        },
+        {
+          "kind": "PREVIOUS_COMPARISON",
+          "text": "旧109cもobservation/reception全文重複とEmlis安堵の追加があった。今回は文章とunknown_idを変えているが、反復と不適切な受け取りは残る。本文改善成立とは扱わない。"
+        }
+      ],
+      "conclusion": "実consumerはUNSUPPORTED/model_evidence_out_of_scope、意味採用false・本文false・採用snapshotなし。静的引用位置一致・合法ID・4項目の文字列存在は別観測であり、実admission失敗を覆さない。本文にも同一全文反復と余分な受け取り判断が残る。"
+    }
+  ],
+  "overall_conclusion": "対象2件に本文成立の増加はない。REPOTは実意味採用済みだが本文不採用、KNITは実意味admissionで拒否。前回の未完了を保持する。正式Pro/Ultra/human商品受入れ・未知一般化・通常service/SQL/本人端末の確認ではない。"
+}

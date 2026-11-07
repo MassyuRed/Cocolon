@@ -268,3 +268,56 @@ BACKEND_EXPORT_INITIAL_EXACT0
 PRODUCTION_EFFECT_EXACT0
 PCE6_COMPLETE_DESIGN_ONLY
 ```
+
+## 11. 2026-10-08 source-reference transport binding — non-production scope
+
+The preceding sections retain the August design and its history. The following
+additive binding supplies the existing section 2 source_ref; it does not replace
+the preview request/response, saved-source owner or clean-cutover requirements.
+
+Mash's continuation instruction followed Karen's specific proposal to adopt
+`GET /emotion/piece/source-ref/{saved_input_id}` and apply the prepared candidate
+to non-running code, excluding live DB changes, deployment and activation. Work
+is restricted to that presented scope. This is not blanket approval of B12-C,
+server flag configuration, actual user access, public rollout or other APIs.
+
+| Additional method/path | Contract |
+|---|---|
+| `GET /emotion/piece/source-ref/{saved_input_id}` | Explicit authenticated read of exactly the seven existing original-source references; no generation, persistence or quota consumption |
+
+The path parameter is a canonical lower-case, nonzero UUID. No query parameters
+or request body are accepted. Bearer authentication uses the existing HTTP
+owner, then `PieceSavedSourceAdapter.resolve_original_source_ref` checks the
+saved source/current observation and revalidates before returning. The response
+object contains exactly `source_input_id`, `source_input_version`,
+`source_input_bundle_commitment`, `emlis_observation_stage`,
+`emlis_observation_result_identity`, `question_need_decision_identity` and
+`supplemental_answer_identity`. It is not wrapped in a new envelope. The existing
+bundle version is `emlis.current_input_bundle.v1`; the commitment is lower-case
+`sha256:` plus 64 hex digits. Original-only normal/pre-question stages are
+supported. Normal stage has a null question identity; pre-question stage has a
+nonempty reference. The supplemental identity is null. Refined-source support
+is not added by this binding.
+
+Raw input, Emlis/Analysis text, owner ID, caller tier, eligibility, effective
+flags and safety verdicts are neither accepted nor returned. Missing, extra or
+invalid response fields produce an unavailable error, not partial projection.
+Responses use `Cache-Control: no-store`; 401 also uses `WWW-Authenticate: Bearer`.
+Closed errors are 400/PIECE_REQUEST_INVALID, 401/PIECE_AUTH_REQUIRED,
+404/PIECE_SOURCE_NOT_FOUND, 409/PIECE_CONFLICT,
+422/PIECE_SOURCE_NOT_ELIGIBLE and 503/PIECE_TEMPORARILY_UNAVAILABLE.
+Unexpected details are not echoed; task cancellation is not converted to success.
+
+RN uses the existing `features/piece/pieceApi.js` owner through an explicit
+`requestPieceSourceRef` call, checking the expected session before and after IO.
+It sends no Idempotency-Key or body and generates no preview automatically.
+A later explicit preview POST retains its existing request/key contract and
+independently revalidates the saved state. These references confer no ongoing
+access, renderer admission, save authority or feature enablement.
+
+Implementation lives in the separate `piece_v2_source_ref_http.source_ref_router`
+and is not included in `api_piece_v2.router` or `app.py`. Live registration must
+still include authoritative server-effective gating, source/access prerequisites
+and the separately approved cutover. The RN function has no InputScreen caller
+in this unit. Code existence and synthetic transport tests are not actual
+Auth/DB/native evidence or completion of the October 10 product milestone.

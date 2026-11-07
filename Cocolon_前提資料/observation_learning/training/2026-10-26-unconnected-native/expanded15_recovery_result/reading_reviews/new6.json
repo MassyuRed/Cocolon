@@ -1,0 +1,91 @@
+{
+  "coverage": "All6 original inputs/teachers/raw compared with saved1d/dd/ordered; actual CMEE status/body absence overlaid after full consumer; root plus read-only supplement, not formal acceptance.",
+  "language_families": 4,
+  "cases": [
+    {
+      "case_id": "FT-BOOK-INITIAL",
+      "review": "4claim/2relation/6引用は教師一致。不明IDと問いtargetが説明文へ変形。観測に未記載の安心感と本文内質問が残る。Receptionの二重質問は一方消えたが状態報告。CMEEはmodel_v3_unknown_not_source_boundで意味不採用。",
+      "metrics": {
+        "quote_keys": 6,
+        "forbidden_start_keys": 0,
+        "system_instruction_leak": false
+      },
+      "cmEE_status": "SEMANTIC_NOT_ADOPTED",
+      "body_available": false,
+      "cold_file_status": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT"
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "review": "全文JSONは未完結。読解用の完全candidate prefixだけでは10claim/7relationだが役割/時点を混同し、教師7更新に対しADD1・GAP解消なし。3本文が同じ一人称復唱、未記載の直接発話を補完。引用表で編集連結句を反復して打切り。prefix抽出をraw補修やCMEE採用には使わない。",
+      "metrics": {
+        "quote_keys": 40,
+        "forbidden_start_keys": 0,
+        "system_instruction_leak": false,
+        "candidate_prefix_only": {
+          "claims": 10,
+          "relations": 7,
+          "updates": 1,
+          "not_a_valid_full_packet": true
+        }
+      },
+      "cmEE_status": "SEMANTIC_NOT_ADOPTED",
+      "body_available": false,
+      "cold_file_status": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT"
+    },
+    {
+      "case_id": "FT-SHOP-INITIAL",
+      "review": "4claim/2relation/6引用は教師一致。不明IDはmissing_reason。喜びと置いていかれた感覚が現れるが、観測への問い混入と开店表記、近い復唱が残る。意味採用・本文なし、実reason=model_surface_not_validated。",
+      "metrics": {
+        "quote_keys": 6,
+        "forbidden_start_keys": 0,
+        "system_instruction_leak": false
+      },
+      "cmEE_status": "MEANING_ADOPTED_BODY_UNAVAILABLE",
+      "body_available": false,
+      "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL"
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "review": "全文JSONは未完結。読解用の完全candidate prefixは11claim/5relation/ADD1（教師relation6/更新8）。answer_concession/GAP解消が欠落、ID/引用index/refsが不整合。回答済み内容を再質問し一人称と呼びかけが混線。引用表の禁止start座標と反復で切断。prefixをraw補修/採用には使わない。",
+      "metrics": {
+        "quote_keys": 45,
+        "forbidden_start_keys": 44,
+        "system_instruction_leak": false,
+        "candidate_prefix_only": {
+          "claims": 11,
+          "relations": 5,
+          "updates": 1,
+          "not_a_valid_full_packet": true
+        }
+      },
+      "cmEE_status": "SEMANTIC_NOT_ADOPTED",
+      "body_available": false,
+      "cold_file_status": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT"
+    },
+    {
+      "case_id": "FT-REPOT-INITIAL",
+      "review": "raw_textは初期1d/ddと完全一致。4claim/2relation/6引用は教師一致、orderedの縮退から復旧。しかし本文案の説明する側/聞く側の二重反転が残る。意味採用・本文なし、実reason=model_surface_not_validated。",
+      "metrics": {
+        "quote_keys": 6,
+        "forbidden_start_keys": 0,
+        "system_instruction_leak": false
+      },
+      "cmEE_status": "MEANING_ADOPTED_BODY_UNAVAILABLE",
+      "body_available": false,
+      "cold_file_status": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL"
+    },
+    {
+      "case_id": "FT-KNIT-INITIAL",
+      "review": "明示不明と対象2つの断片は保持。観測はですね復唱、Receptionへsystem指示の逐語露出がある。unknown_idの2899桁数字反復で引用/更新/JSON末尾へ未到達。orderedで消えていた指示露出が再発。",
+      "metrics": {
+        "quote_keys": 0,
+        "forbidden_start_keys": 0,
+        "system_instruction_leak": true,
+        "unknown_id_digit_count": 2899
+      },
+      "cmEE_status": "SEMANTIC_NOT_ADOPTED",
+      "body_available": false,
+      "cold_file_status": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT"
+    }
+  ]
+}

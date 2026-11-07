@@ -1,0 +1,24 @@
+{
+  "status": "CPU_CONSUMER_LAUNCHED_ONCE",
+  "pid": 76212,
+  "started_unix": 1793067263.7321732,
+  "command": [
+    "/usr/local/bin/python",
+    "-u",
+    "-B",
+    "/workspace/cocolon_native15_continuation30_pack_20261027/consume_continuation30.py",
+    "--run",
+    "/workspace/cocolon_native15_continuation30_run_20261027",
+    "--out",
+    "/workspace/cocolon_native15_continuation30_diagnosis_20261027",
+    "--api",
+    "/workspace/cocolon_afteronly_api_20261027",
+    "--runtime-python",
+    "/usr/local/lib/python3.12/site-packages",
+    "--expected-source-commit",
+    "e1ed975034ffaf6eb1c1b8a662d8cf8e16c4d3aa"
+  ],
+  "new_model_calls": 0,
+  "sql_operations": 0,
+  "retry": false
+}

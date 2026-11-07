@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_chat_work_environment_rule_index
 title: "GPT-5.6 Pro / Work Ultra 実行環境ルール索引"
-revision_date: "2026-08-12"
+revision_date: "2026-10-20"
 normative_status: "CURRENT_INDEX"
 decision_owner: "Mash"
 operational_owner: "Karen"
@@ -17,6 +17,8 @@ canonical_rule: "work_attitude_rules_for_karen/18_chat_work_environment_selectio
 `Cocolon_前提資料/work_attitude_rules_for_karen/18_chat_work_environment_selection_rule_2026_08_06.txt`
 
 # 2. 最重要境界
+
+> Piece残件は2026-10-20 Mash決定のRule18 §0Aを優先します。Pro以外・モデル不明だけでは停止せず、`PIECE_WORK_ALLOWED`で実際の環境を記録します。以下の一般モデル・担当条件は、このPiece例外を除いて適用します。品質・承認・検証条件は維持します。
 
 - ChatでCocolon作業を行うmodelは`GPT-5.6 Pro`。
 - Pro以外またはmodel identity不明では`MODEL_OR_ENVIRONMENT_NOT_ELIGIBLE_STOP`。

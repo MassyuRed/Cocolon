@@ -1,0 +1,90 @@
+{
+  "plan.json": {
+    "bytes": 4274,
+    "sha256": "b506047f5f01d9b9a4782b45ce2a1db5ff267a6f1f8cd57d701d22e962753d5b"
+  },
+  "dataset_manifest.json": {
+    "bytes": 1837,
+    "sha256": "a98ec8e2251fc0c7595e1f331ecbaf2dda5193e132ce1a9b8f3dc91d4d6fe3d3"
+  },
+  "cpu_connection_results.json": {
+    "bytes": 234074,
+    "sha256": "6e6e678bc054d514df3aa34e73b94a94c3e8d6b3dd241b02049b12e78316c260"
+  },
+  "generate_candidates.py": {
+    "bytes": 8015,
+    "sha256": "db83739b58ee6731d06363cb73f21fa5980a3a5b2322d49fbe7a7aae3a15d9c7"
+  },
+  "sft_examples.jsonl": {
+    "bytes": 295701,
+    "sha256": "118a9d7e3bd5728d66af95d7a7388504683da957a2c9b24fa1632ac9ef780f8c"
+  },
+  "source_mapping_candidate.json": {
+    "bytes": 11310,
+    "sha256": "43439c5d1a05fc8c62cd21fb5e39f37a21ca638767145d6298124b5576bd8a68"
+  },
+  "train_messages.jsonl": {
+    "bytes": 159255,
+    "sha256": "07644176add91ed858f1de2ac2a8d73b4ceed02814f9962c70af1b850c366942"
+  },
+  "runner_source.py": {
+    "bytes": 18950,
+    "sha256": "549a2b5dcee6f994bdf8a77081a6655410fe84af8a488e4613190b8121eaf506"
+  },
+  "legacy_run_pilot.py": {
+    "bytes": 28950,
+    "sha256": "2f659078c05bee6d7b32f50aae8b9eebc03c767d4a3be084bc17e9e3ccc4c10d"
+  },
+  "SOURCE_COMMIT": {
+    "bytes": 41,
+    "sha256": "2a52a686b89336db95b209100dc3c6e34e0914049ba1b9d1c7e4898afa74004e"
+  },
+  "attempt.json": {
+    "bytes": 183,
+    "sha256": "0978ac42c9acf84a7c4b926bc9b5b6226b5b7ea848cf8a75527c86e19257d8d4"
+  },
+  "run.json": {
+    "bytes": 23132,
+    "sha256": "261a3bd70ac90a0b72391748e42aeb0a7dc568944aaf0997f178a8ee9a65bd1f"
+  },
+  "before_nll.jsonl": {
+    "bytes": 819,
+    "sha256": "5d36191a1c0b4e155b206c407199052e8a5691fc3bf0c1d5ecb5a54abedc769d"
+  },
+  "training.jsonl": {
+    "bytes": 2361,
+    "sha256": "741f16cd77713eb1a833baf569b6e26624bd6ce0c6dacc69638c3938f6d24572"
+  },
+  "after_nll.jsonl": {
+    "bytes": 823,
+    "sha256": "de49c89f203ffd1d7902451451d1f670a9c9fd38f2c7dd6fc8141330daebd0f2"
+  },
+  "after_fit.jsonl": {
+    "bytes": 214100,
+    "sha256": "bdf4f684517a351c2cd13b8ce13cdbfc5df0c90e33f92db1a6cd017b3aa59da6"
+  },
+  "fit_consumer.json": {
+    "bytes": 1415134,
+    "sha256": "df556a796f1273dccde757f59e08179c6bd2ba110c733465bc00e47396ce04ca"
+  },
+  "runtime/daily_fit_launch.json": {
+    "bytes": 669,
+    "sha256": "6abddd7ae9d429b7088bbd7bf608778b06057a8b0a848a23efa4188cdd3236a0"
+  },
+  "runtime/daily_fit.log": {
+    "bytes": 3541,
+    "sha256": "556e941def93804e3c918f3b410f3a765ae14d50b404078c8863e4262656a5c2"
+  },
+  "runtime/run_daily_calm_fit.py": {
+    "bytes": 18950,
+    "sha256": "549a2b5dcee6f994bdf8a77081a6655410fe84af8a488e4613190b8121eaf506"
+  },
+  "runtime/consume_fit_raw.py": {
+    "bytes": 7437,
+    "sha256": "f2cd8ca471eda8e9af84c99b792256b61acac0719702885366afd5a35deda8a5"
+  },
+  "runtime/cpu_tokenization_results.json": {
+    "bytes": 1720,
+    "sha256": "71a7719d86727583bf551b2f34b1bdd11613a5164024fbc6208f8a3bec76cce5"
+  }
+}

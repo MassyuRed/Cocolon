@@ -1,0 +1,13 @@
+{
+  "archive": "cocolon-shape2-cpu-20261029.zip",
+  "bytes": 201969,
+  "sha256": "8888c0c696159385f67e5323be0635521fda9559421573d8f83d3a781113c411",
+  "member_count": 10,
+  "manifest_payloads": 8,
+  "crc_and_manifest_all_lengths_sha_verified": true,
+  "prepare_source_separate_member_matches_frozen_and_local": true,
+  "prepare_source_sha256": "5d593c56aa20230f055b0bec2bdb9670f04be8cd098e65a4dfc177c710d41ec0",
+  "cpu_report_sha256": "3cc1ff07d6aba5f1013fedc2f284efe1317ba9b0144fb02a671c6c9417848b1f",
+  "library_file_id": "libfile_d410d543c4548191857be2a3acdb0465",
+  "base_weights_and_adapter_included": false
+}

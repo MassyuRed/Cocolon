@@ -1,0 +1,42 @@
+{
+  "name": "cocolon_adaptive30_weights_and_runtime_originals_20261027.zip",
+  "bytes": 14841180,
+  "sha256": "39ac2ff058fe65a961b70f8477c2561306ca2daa1029a1bf3bb33f620c0df342",
+  "payloads": 76,
+  "members": 77,
+  "manifest": "runtime_archive_manifest.json",
+  "library_file_id": "libfile_3e5553b6d2488191a753b8baee0f077f",
+  "preserved_url": "https://chatgpt.com/library?file_id=libfile_3e5553b6d2488191a753b8baee0f077f&account_id=personal",
+  "source_commit": "5c2fe64e89e2d5f87c24a85692ee19c5af1dc567",
+  "adapter_sha256": "d431a07ce227c05e81eca5afb9461d91cf8101d50af0d27ec1a81844ce8ac684",
+  "included": [
+    "new adapter weights/config",
+    "complete run originals",
+    "complete diagnosis originals",
+    "4 GPU/CPU launch and log originals"
+  ],
+  "excluded": [
+    "base full weights",
+    "optimizer state",
+    "RNG state",
+    "subsequent root and helper reading reviews",
+    "subsequent repository documentation and screenshot"
+  ],
+  "strict_optimizer_resume": false,
+  "gpu_lifecycle_operations": 0,
+  "workers": [
+    {
+      "pid": 222461,
+      "state": "EXITED"
+    },
+    {
+      "pid": 231168,
+      "state": "EXITED"
+    }
+  ],
+  "nvidia_smi_after_exit": {
+    "name": "NVIDIA RTX A5000",
+    "used_mib": 1,
+    "total_mib": 24564
+  }
+}

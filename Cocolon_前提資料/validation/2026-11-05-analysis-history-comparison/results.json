@@ -1,0 +1,66 @@
+{
+  "schema_version": "analysis_history_comparison_operational_recovery.v1",
+  "status": "COMMITTED_LOCAL_REACT_TESTS_PASSED_NOT_BUILT",
+  "scope": "RN only; current comparison temporary failure retains freshly verified month; manual retry only",
+  "files": [
+    {
+      "path": "components/selfStructure/CumulativeWatashiMapView.js",
+      "baseline_commit": "5d65b513a0e07486f192be559f88cb7eba3af54d",
+      "baseline_blob": "e3edc03447079134c7b1847575f18bd31d8469ad",
+      "before_sha256": "7376bd59a1691792dca579decd42d9fa120a0a21268c891f2909c4074be8a109",
+      "after_sha256": "78d46cff5f3e23c700ea7fd64ea9472ea7ead52818cc4592a2aec5406eaf6705"
+    },
+    {
+      "path": "tests/analysis-cumulative-map.test.js",
+      "baseline_commit": "5d65b513a0e07486f192be559f88cb7eba3af54d",
+      "baseline_blob": "b1cf9e3828b73d2cf4a23037b917caf0440d6736",
+      "before_sha256": "00404ff2fd0d15268039ec68c4994ec448dc1b62c5f7b616581a359a8031ac1c",
+      "after_sha256": "4b957ab26a7c2d8c13516e20883c6b61d7764277217a1b61f6ffd203c5fe6820"
+    }
+  ],
+  "before_regression": {
+    "passed": 0,
+    "failed": 1,
+    "assertion": "captured month disappeared after current503",
+    "seconds": 0.792424993,
+    "log": "history-comparison-before.log"
+  },
+  "after": {
+    "passed": 11,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 4.015239192,
+    "log": "history-comparison-after.log"
+  },
+  "boundaries": [
+    "HTTP503/504, timeout and network failures retain month",
+    "401/403, account change and invalid DTO clear content",
+    "obsolete owner comparison failure cannot restore old map",
+    "manual re-fetch is separate explicit request; no automatic retry",
+    "current map empty state and existing history loading/error behavior unchanged"
+  ],
+  "validation_environment": {
+    "node": "primary runtime node",
+    "react": "18.3.1",
+    "react_test_renderer": "18.3.1",
+    "babel_core": "7.25.2",
+    "babel_preset_react": "7.24.7",
+    "babel_commonjs": "7.24.8",
+    "test_dependencies": "disposable directory outside repo"
+  },
+  "production_dependencies_changed": false,
+  "api_changed": false,
+  "dto_changed": false,
+  "db_changed": false,
+  "builds": 0,
+  "deploys": 0,
+  "source_commit": "2efdc7825262e571cad4b8e5df95c3cf61e3752e",
+  "tests_commit": "ea429f47de9bf3c1d30a08765c0e47e47b22fa5c",
+  "private_evidence_link": "https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal",
+  "private_archive": {
+    "library_file_id": "libfile_78de85117ab48191ba102c0c2f42ccec",
+    "version": 1,
+    "bytes": 15681307,
+    "sha256": "28d049030e5f9f16691b2b958fd20a3251aeba556973ea8de7f11f112d2634f4"
+  }
+}

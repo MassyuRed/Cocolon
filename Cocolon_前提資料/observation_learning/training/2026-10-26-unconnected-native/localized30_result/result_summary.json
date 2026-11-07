@@ -1,0 +1,107 @@
+{
+  "archive_bytes": 15171902,
+  "archive_sha256": "d77f865ef019c6cd69988733ac4dcb13b808292157660057497590b1c7ad6a20",
+  "payloads": 82,
+  "members": 83,
+  "all_payload_size_hash_and_crc_match": true,
+  "ordered_updates": 30,
+  "local_token_exposures": 396,
+  "finite_saved_f32_tensors": 112,
+  "parameters": 3833856,
+  "two_loads_complete": true,
+  "raw_count": 15,
+  "eos_count": 15,
+  "strict_json_count": 14,
+  "meaning_count": 11,
+  "body_count": 9,
+  "cold_equal": 11,
+  "cold_failures": 0,
+  "processing_seconds": 1524.4009482470574,
+  "process_cost_usd": 0.11856451819699337,
+  "adapter_sha256": "937233a0d2f89425bf42abf971f4e37662bb2db8c6fddaf3fe5884349e1d95bd",
+  "model_reexecution_for_external_verification": false,
+  "status": "RUN_CLOSED_REJECTED_CANDIDATE",
+  "source_commit": "d54ea1db19ab8fb3c3a57fc07b5a20566f245591",
+  "api_commit": "a4b91b4788b2fb29483a4c77869c91b36402ae9f",
+  "approval_proposal_commit": "1cfc0f838186574c6cbc870e7b94f6706dab39aa",
+  "actual_model_runs": 1,
+  "wrapper_attempts": 2,
+  "preexecution_rejections": 1,
+  "model_retries": 0,
+  "generated_count": 15,
+  "old9_meaning_count": 9,
+  "old9_body_count": 9,
+  "new6_meaning_count": 2,
+  "new6_body_count": 0,
+  "new6_eos_count": 6,
+  "new6_strict_json_count": 5,
+  "cold_equal_count": 11,
+  "cold_checked_count": 11,
+  "cpu_consumer_seconds": 101.88008124206681,
+  "cpu_consumer_pid": 203548,
+  "gpu_wrapper_pid": 194923,
+  "new_model_calls_after_frozen_generation": 0,
+  "sql_operations": 0,
+  "service_saved_roundtrip": false,
+  "dynamic_prior": false,
+  "training_updates": 30,
+  "base_model_loads": 2,
+  "strict_optimizer_resume": false,
+  "product_accepted": false,
+  "product_credit": 0,
+  "formal_product_read": "0/3",
+  "product_management_percent": 54.5,
+  "structure_map_delta": "STRUCTURE_MAP_DELTA_NONE",
+  "candidate_ready": false,
+  "automatic_progression": false,
+  "gpu_lifecycle_operations": 0,
+  "normal_candidate_adopted": false,
+  "qualitative_summary": "旧9は全raw_text/教師packet/本文を維持。新6はEOS6/strict5まで完結性が改善したが、BOOKのID・重複キー、回答後の根拠/更新不足、REPOT主客反転、KNIT意味scope/本文反復が残った。",
+  "decision_japanese": "新937233a0は通常不採用。意味11/本文9・新6本文0で前回から本文成立は増えていない。",
+  "next_action_japanese": "既存教師で長い意味・全更新・根拠・自然本文を同時に保持する学習設計をCPU準備から見直す",
+  "archive_members": 83,
+  "archive_payloads": 82,
+  "archive_library_id": "libfile_93e16ba81d5c8191986438057de80a9a",
+  "result_file_groups": [
+    {
+      "paths": "README.md・result_summary.json",
+      "role": "一回閉鎖・実測・採否・本文所見と次の作業境界"
+    },
+    {
+      "paths": "run.json・training.jsonl・localized30.plan.json・initial_loaded_tensors.json・reloaded_tensors.json",
+      "role": "実30更新/2読込/112F32照合・当時の承認計画。RAW_COMPLETE statusは原本不変"
+    },
+    {
+      "paths": "after_*.jsonl（15file）・case_comparison.json",
+      "role": "無補修全raw/usage/adapter identityと旧109c/凍結教師比較"
+    },
+    {
+      "paths": "run_localized30.py・consume_localized30.py・prepare_localized30.py・local_token_loss.py・fixed_token_mask.json・train_messages.jsonl・eval_inputs.jsonl",
+      "role": "実行時凍結source/重点198位置/同15入力・教師。追加実行指示ではない"
+    },
+    {
+      "paths": "actual_cpu_check.json・api_changes.json・consumer_cpu_check.json・cpu_launch*.json・dependency_bindings.json・pending_execution_check.json・preparation_manifest.json",
+      "role": "前段CPU/source/input同一性。準備ZIPは既存preparation owner"
+    },
+    {
+      "paths": "diagnosis/summary.json・diagnosis/cases/*.json（15）",
+      "role": "固定CMEEの完全診断をmetadata+caseへ値不変で分割。全値再組立て一致"
+    },
+    {
+      "paths": "diagnosis/*_saved.json・*_saved_completed.json・*_cold.json（各11）",
+      "role": "採用snapshotの保存・完成と別process全outcome再読。本文なし2件を含む"
+    },
+    {
+      "paths": "adapter/README.md・adapter_config.json・archive_identity.json・runtime_archive_manifest.json・external_verification.json・verify_recovery_external.py",
+      "role": "新9372重みと原本ZIPの保存先/CRC・hash/112有限照合。safetensors本体は重み入り原本へ"
+    },
+    {
+      "paths": "execution/*（7）",
+      "role": "最初の事前型拒否と修正後実GPU一回、CPU consumerの全起動/log原本"
+    },
+    {
+      "paths": "reading_reviews/root.json・body_review.json・identity_review.json",
+      "role": "全15本文/問い/全更新とidentityのroot・read-only補助所見。正式商品受入れではない"
+    }
+  ]
+}

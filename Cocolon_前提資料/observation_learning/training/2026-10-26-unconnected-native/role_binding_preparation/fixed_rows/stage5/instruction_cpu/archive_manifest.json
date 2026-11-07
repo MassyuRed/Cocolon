@@ -1,0 +1,142 @@
+[
+  {
+    "path": "cocolon_rehearsal13_cpu_20261029/eval_inputs11.json",
+    "bytes": 131321,
+    "sha256": "6eaa2acd66f359da1d0e77bdb48c1eb483138dbcc50cb30ce7673b6da499b4ea"
+  },
+  {
+    "path": "cocolon_rehearsal13_cpu_20261029/train_messages11.jsonl",
+    "bytes": 269883,
+    "sha256": "1401ee1144b820bbedbbcf1740133ca7d4330231f0d04732692820723bccff3b"
+  },
+  {
+    "path": "cocolon_stage5_instruction_check_20261030/candidate_train10.jsonl",
+    "bytes": 258544,
+    "sha256": "98db959bf2f0161f399a4bdcab472836397a5148d22ff2eec58e995d66fd8105"
+  },
+  {
+    "path": "cocolon_stage5_instruction_check_20261030/original_syntax_reference.json",
+    "bytes": 139067,
+    "sha256": "7d7168084b972bc67a3f7b7461e6b02a2bf6a31230c60446096f0fe232b6f3fc"
+  },
+  {
+    "path": "cocolon_stage5_instruction_check_20261030/report.json",
+    "bytes": 7701,
+    "sha256": "3465946ceea6794001494506347947f01b4c1e40b54fb60ea01dbdbb71451413"
+  },
+  {
+    "path": "cocolon_stage5_instruction_final_20261030/candidate_train10.jsonl",
+    "bytes": 259384,
+    "sha256": "d6d420da072fd1a4d6be856ef4ae0716d5f2c4af8da0a0be694e462120189e42"
+  },
+  {
+    "path": "cocolon_stage5_instruction_final_20261030/original_syntax_reference.json",
+    "bytes": 139067,
+    "sha256": "7d7168084b972bc67a3f7b7461e6b02a2bf6a31230c60446096f0fe232b6f3fc"
+  },
+  {
+    "path": "cocolon_stage5_instruction_final_20261030/report.json",
+    "bytes": 8182,
+    "sha256": "dd789df006b0033f0ca970f7213dc1d0495c983b42bb65050018fdf223d93980"
+  },
+  {
+    "path": "cocolon_stage5_instruction_final_pack_20261030/check_once.py",
+    "bytes": 10457,
+    "sha256": "622e86a33745e08ccbd02aa571c701181e1d3caef3908e0f3c1276af113a50e2"
+  },
+  {
+    "path": "cocolon_stage5_instruction_final_pack_20261030/cpu.exit",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "cocolon_stage5_instruction_final_pack_20261030/cpu.log",
+    "bytes": 1365,
+    "sha256": "0565a4e7c0075b6e653593aa1799dbefd91b5b08083122c1e9729b0b842bb15b"
+  },
+  {
+    "path": "cocolon_stage5_instruction_final_pack_20261030/prompt_stage_only.py",
+    "bytes": 9019,
+    "sha256": "5796284d6eea6888592bfa28a8be2807819f223b18179faf0ec93f46779297a6"
+  },
+  {
+    "path": "cocolon_stage5_instruction_pack_20261030/check_once.py",
+    "bytes": 8765,
+    "sha256": "e473925caf5e121c686b2c3bd2de1974ff70700ede51f0268b644ebf69d0f13d"
+  },
+  {
+    "path": "cocolon_stage5_instruction_pack_20261030/cpu.exit",
+    "bytes": 2,
+    "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  },
+  {
+    "path": "cocolon_stage5_instruction_pack_20261030/cpu.log",
+    "bytes": 991,
+    "sha256": "955ec11488f97d3785f918b1962247adc2f07d849917443c79313902465b2b8f"
+  },
+  {
+    "path": "cocolon_stage5_instruction_pack_20261030/prompt_stage_only.py",
+    "bytes": 5960,
+    "sha256": "31f4f3e9b22edc530773fa6728093caff3f710ebdf3589545e83ae082fea2f89"
+  },
+  {
+    "path": "cocolon_stage5_pack_20261030/consume_stage5.py",
+    "bytes": 9946,
+    "sha256": "92bf81c1ca52a72480753010efc911fc132c74f4208a533853feb70fc5650713"
+  },
+  {
+    "path": "cocolon_stage5_prepared_20261030/prepared_cpu.json.gz",
+    "bytes": 151910,
+    "sha256": "08670691b085d2b7d3ba6548661052f5bf04422a65134c3a49d89f03a86d0308"
+  },
+  {
+    "path": "cocolon_stage5_prepared_20261030/train19.jsonl",
+    "bytes": 413995,
+    "sha256": "1804a703609d6a1c6d7cef4786728409bc8d2b07aaf4ac475a087eddd23ee80d"
+  },
+  {
+    "path": "cocolon_stage5_run_20261030/FT-BOOK-AFTER-ANSWER_stages.json",
+    "bytes": 29808,
+    "sha256": "d99c50ed30fc95ac5f78a82eadb707f02a48342181b01e34e6eb45f194f509c2"
+  },
+  {
+    "path": "cocolon_stage5_run_20261030/FT-SHOP-AFTER-ANSWER_stages.json",
+    "bytes": 90365,
+    "sha256": "8a007875105fd41491bfcd015ee48e3ea6e66cd5aab1299d75bc5ed14f87392e"
+  },
+  {
+    "path": "cocolon_stage5_run_20261030/run.json",
+    "bytes": 9373,
+    "sha256": "a75b68eb3d31eac003df869ba6b5e742b6d17390574811555b44e9101da888a4"
+  },
+  {
+    "path": "cocolon_stage5_run_20261030/stage1_FT-BOOK-AFTER-ANSWER.jsonl",
+    "bytes": 4938,
+    "sha256": "a5b7cc15356cc219489c79514d46899b529f2f20cebe264a1afba214a4b36c57"
+  },
+  {
+    "path": "cocolon_stage5_run_20261030/stage1_FT-BOOK-AFTER-ANSWER.jsonl.messages.json",
+    "bytes": 19382,
+    "sha256": "b6556c8efb725c9a9cc215ae18db5c36ba2302055fb48c045f08ed29ea6de3d1"
+  },
+  {
+    "path": "cocolon_stage5_run_20261030/stage1_FT-SHOP-AFTER-ANSWER.jsonl",
+    "bytes": 8058,
+    "sha256": "6f1060573003d34907c733669c3bc205b832c48197c719d5de9970ff0cf96899"
+  },
+  {
+    "path": "cocolon_stage5_run_20261030/stage1_FT-SHOP-AFTER-ANSWER.jsonl.messages.json",
+    "bytes": 19978,
+    "sha256": "4ad86796a06e3d29cb8cc831cd5cdacc45db16e3a21b81fe33e6159b304d7b7b"
+  },
+  {
+    "path": "cocolon_stage5_run_20261030/stage2_FT-SHOP-AFTER-ANSWER.jsonl",
+    "bytes": 18434,
+    "sha256": "0f7b8dc5770e2ee5f48e2322018a5637254f67edf0d163bb0fad99ac3ee3c6fe"
+  },
+  {
+    "path": "cocolon_stage5_run_20261030/stage2_FT-SHOP-AFTER-ANSWER.jsonl.messages.json",
+    "bytes": 22182,
+    "sha256": "ff3dbbffc7da26c9095dad224c62d101eac982c122aeaaa17db1fe709309df80"
+  }
+]

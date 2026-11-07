@@ -1,0 +1,17 @@
+{
+  "status": "COMPLETE_NOT_ADOPTED",
+  "api_commit": "348b641c4a68c03ae0318b1160740b3dea891e94",
+  "new_calls": 10,
+  "all_stop": true,
+  "training_updates": 0,
+  "model_loads": 1,
+  "seconds": 104.0199683199171,
+  "strict_candidates": 7,
+  "rejected": 3,
+  "non_generating_saved_replays": 7,
+  "normal_adoption": false,
+  "adapter_unchanged": true,
+  "product_credit": 0,
+  "source_context": "original fields and eligible ordinary supplements remain separate; candidate meaning remains unresolved",
+  "next": "explicit source-witnessed ROLE and simple past ACTION from one original, no inferred edge"
+}

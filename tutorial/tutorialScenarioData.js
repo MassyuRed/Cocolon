@@ -75,7 +75,7 @@ function normalizeWatashiMapReport(report) {
     title: compact(safe.title) || "今のわたしマップ",
     report_mode: compact(safe.report_mode || safe.reportMode) || "light",
     viewer_tier: compact(safe.viewer_tier || safe.viewerTier) || "free",
-    period_label: compact(safe.period_label || safe.periodLabel) || "直近28日",
+    period_label: "練習用の表示例",
     content_text: compact(safe.content_text || safe.contentText),
     content_json: freezeClone(contentJson),
   });
@@ -278,9 +278,11 @@ const FALLBACK_WATASHI_MAP = Object.freeze({
   }),
 });
 
-export const TUTORIAL_WATASHI_MAP = freezeClone(
-  Object.keys(fixtureWatashiMap).length > 0 ? fixtureWatashiMap : FALLBACK_WATASHI_MAP
-);
+// Keep the captured fixture intact; project only the tutorial's display label.
+export const TUTORIAL_WATASHI_MAP = freezeClone({
+  ...(Object.keys(fixtureWatashiMap).length > 0 ? fixtureWatashiMap : FALLBACK_WATASHI_MAP),
+  period_label: "練習用の表示例",
+});
 
 export const TUTORIAL_WATASHI_MAP_REPORT = freezeClone({
   ...fixtureWatashiMapLatest,
@@ -289,7 +291,7 @@ export const TUTORIAL_WATASHI_MAP_REPORT = freezeClone({
   report_type: compact(fixtureWatashiMapLatest.report_type) || "self_structure",
   report_mode: compact(fixtureWatashiMapLatest.report_mode || fixtureWatashiMapLatest.reportMode) || "light",
   viewer_tier: compact(fixtureWatashiMapLatest.viewer_tier || fixtureWatashiMapLatest.viewerTier) || "free",
-  period_label: compact(fixtureWatashiMapLatest.period_label || fixtureWatashiMapLatest.periodLabel) || "直近28日",
+  period_label: "練習用の表示例",
   content_text:
     compact(fixtureWatashiMapLatest.content_text || fixtureWatashiMapLatest.contentText) ||
     "人は、相手や場所によって少しずつ違う自分で動いています。",
@@ -341,7 +343,7 @@ export const TUTORIAL_INTRO_FLOWCHART = Object.freeze({
   nodes: Object.freeze([
     Object.freeze({
       label: "その場で受け取る",
-      title: "Emlisの観測",
+      title: "Emlisからの返答",
     }),
     Object.freeze({
       label: "あとで振り返る",
@@ -360,10 +362,10 @@ export const TUTORIAL_INTRO_FLOWCHART = Object.freeze({
 
 export const TUTORIAL_CONNECTION_ROWS = Object.freeze([
   Object.freeze({
-    title: "Emlisの観測",
+    title: "Emlisからの返答",
     description:
-      "入力した気持ちを、その場でEmlisが観測して言葉にします。",
-    example: "今の言葉を、ひとつの観測として受け取れます。",
+      "保存した入力を受け取り、その内容にEmlisが返答します。",
+    example: "返答は、あとから同じ内容を読み返せます。",
   }),
   Object.freeze({
     title: "こころ天気",
@@ -380,8 +382,8 @@ export const TUTORIAL_CONNECTION_ROWS = Object.freeze([
   Object.freeze({
     title: "ピース",
     description:
-      "あなたの入力内容を、問いと答えに整えて投稿します。",
-    example: "自分の価値観や考え方を投稿でき、他者の価値観や考え方を閲覧できます。",
+      "保存した入力の本文をもとに、言葉を画像のピースに整えられます。",
+    example: "作った画像はアプリ内で見返し、写真へ保存できます。投稿欄では、これまでの問いと答えのピースも読めます。",
   }),
 ]);
 
@@ -392,7 +394,7 @@ export const TUTORIAL_SELF_ANALYSIS_GUIDE = Object.freeze({
     "わたしマップでは、あなたがどんな場面でどんな役割になりやすいか、そしてそのとき選びやすい行動を見ていきます。",
     `例：${TUTORIAL_WATASHI_MAP_PREVIEW.summary}`,
     "これは性格タイプではなく、入力から見えた場面ごとの動き方です。",
-    "入口はFreeプランでも見られ、詳しい自己分析レポートはPlusプラン以上で読めます。",
+    "今のわたしマップは全プランで利用できます。月次履歴はFreeが直近2回分、Plusが12回分、Premiumが全期間を見比べられます。",
   ].join("\n"),
   watashiMap: TUTORIAL_WATASHI_MAP,
 });
@@ -400,5 +402,5 @@ export const TUTORIAL_SELF_ANALYSIS_GUIDE = Object.freeze({
 export const TUTORIAL_OTHER_ELEMENTS_GUIDE = Object.freeze({
   title: "その他の機能",
   body:
-    "Emlisには、感情通知やランキングなど、他にも楽しめる機能があります。\nチュートリアルが終わったら、アプリ内で確認してみてください。",
+    "Emlisには、感情通知や共鳴履歴など、他にも楽しめる機能があります。\nチュートリアルが終わったら、アプリ内で確認してみてください。",
 });

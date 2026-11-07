@@ -1,0 +1,201 @@
+{
+  "status": "SAVED_16_REPLAYED_IN_SEPARATE_CPU_PROCESS",
+  "rows": [
+    {
+      "condition": "f982",
+      "probe_id": "AD01",
+      "reused": true,
+      "admission": "RETURNED",
+      "candidate_id": "analysis-unit-candidate:24966e2d786256873f900f32f898910d9126cf6f72f4f4345376cdb19750fd20",
+      "coverage": {
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "processed_count": 1,
+        "mapped_count": 0,
+        "unparsed_count": 1,
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "stale_supplement_count": 0
+      },
+      "serialized_sha256": "d9dea1d9eb871eec0bf100698fdd7760fb312cc7654dc44b0c8a8dbe1332449d"
+    },
+    {
+      "condition": "f982",
+      "probe_id": "AD02",
+      "reused": false,
+      "admission": "REJECTED",
+      "reason": "analysis_model_units_carrier_invalid"
+    },
+    {
+      "condition": "f982",
+      "probe_id": "AD03",
+      "reused": false,
+      "admission": "RETURNED",
+      "candidate_id": "analysis-unit-candidate:9bf0b2d651ac3e6a9cc95fce7442bfcf97a42a7484c49dfa2f837b869c82fbdd",
+      "coverage": {
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "processed_count": 1,
+        "mapped_count": 0,
+        "unparsed_count": 1,
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "stale_supplement_count": 0
+      },
+      "serialized_sha256": "638ee26a9c1afb26409fb2951f28500887af36dce341ed046463874e4ce0d762"
+    },
+    {
+      "condition": "f982",
+      "probe_id": "AD04",
+      "reused": false,
+      "admission": "REJECTED",
+      "reason": "analysis_model_units_carrier_invalid"
+    },
+    {
+      "condition": "f982",
+      "probe_id": "AD05",
+      "reused": false,
+      "admission": "RETURNED",
+      "candidate_id": "analysis-unit-candidate:0dfd69f9f4e10c3caa96295ae4e572f031622cfcfcda00a9cc139962cbe7a267",
+      "coverage": {
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "processed_count": 1,
+        "mapped_count": 0,
+        "unparsed_count": 1,
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "stale_supplement_count": 0
+      },
+      "serialized_sha256": "b1a4bc325e119f955519a936e64eb9cf85accb98480183b567bcbd385c4c7adc"
+    },
+    {
+      "condition": "f982",
+      "probe_id": "AD06",
+      "reused": false,
+      "admission": "REJECTED",
+      "reason": "analysis_model_units_quote_ambiguous_or_missing"
+    },
+    {
+      "condition": "f982",
+      "probe_id": "AD07",
+      "reused": false,
+      "admission": "REJECTED",
+      "reason": "analysis_model_units_carrier_invalid"
+    },
+    {
+      "condition": "f982",
+      "probe_id": "AD08",
+      "reused": true,
+      "admission": "REJECTED",
+      "reason": "analysis_model_units_carrier_invalid"
+    },
+    {
+      "condition": "89ba",
+      "probe_id": "AD01",
+      "reused": true,
+      "admission": "RETURNED",
+      "candidate_id": "analysis-unit-candidate:7776eae6c07d73c5bcfcf1f7bd9355ee861a7cb74d98223add85fcdcd606acdb",
+      "coverage": {
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "processed_count": 1,
+        "mapped_count": 0,
+        "unparsed_count": 1,
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "stale_supplement_count": 0
+      },
+      "serialized_sha256": "cfdaab414fd37a73ce5e63b2ea8ad7db7f30999f321a05c551e703e65b6077d7"
+    },
+    {
+      "condition": "89ba",
+      "probe_id": "AD02",
+      "reused": false,
+      "admission": "REJECTED",
+      "reason": "analysis_model_units_carrier_invalid"
+    },
+    {
+      "condition": "89ba",
+      "probe_id": "AD03",
+      "reused": false,
+      "admission": "RETURNED",
+      "candidate_id": "analysis-unit-candidate:c7be51d70ae8fd8498516bc61a95c3666054766c574fa7d6cc55fc2eff1d331d",
+      "coverage": {
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "processed_count": 1,
+        "mapped_count": 0,
+        "unparsed_count": 1,
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "stale_supplement_count": 0
+      },
+      "serialized_sha256": "c46273d9136f22ec1cc4fb2006b30c421f7b6c5ccc20981fcb064ec371175f37"
+    },
+    {
+      "condition": "89ba",
+      "probe_id": "AD04",
+      "reused": false,
+      "admission": "REJECTED",
+      "reason": "analysis_model_units_carrier_invalid"
+    },
+    {
+      "condition": "89ba",
+      "probe_id": "AD05",
+      "reused": false,
+      "admission": "REJECTED",
+      "reason": "analysis_model_units_carrier_invalid"
+    },
+    {
+      "condition": "89ba",
+      "probe_id": "AD06",
+      "reused": false,
+      "admission": "RETURNED",
+      "candidate_id": "analysis-unit-candidate:1551f619f9e3df5c5a8d6490b844415e9b8f792413c82f4bcab1fd51c25e7c86",
+      "coverage": {
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "processed_count": 1,
+        "mapped_count": 0,
+        "unparsed_count": 1,
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "stale_supplement_count": 0
+      },
+      "serialized_sha256": "bdfb705b3cdd373c2294a6c563c5d7bb63ad30b6d47af1eaf1e3881477784d85"
+    },
+    {
+      "condition": "89ba",
+      "probe_id": "AD07",
+      "reused": false,
+      "admission": "REJECTED",
+      "reason": "analysis_model_units_carrier_invalid"
+    },
+    {
+      "condition": "89ba",
+      "probe_id": "AD08",
+      "reused": true,
+      "admission": "RETURNED",
+      "candidate_id": "analysis-unit-candidate:16d6fd1d902c374ee2e7d49d98e5c7d7f1abc90980b06cfb7fbf0f6a607732f5",
+      "coverage": {
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "processed_count": 1,
+        "mapped_count": 0,
+        "unparsed_count": 1,
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "stale_supplement_count": 0
+      },
+      "serialized_sha256": "2fe86934258b1181b68f5bcd5fcad26777f0eda4cad89758f55dc2e0fe36b260"
+    }
+  ],
+  "matched_candidates": 7,
+  "rejected_responses": 9,
+  "model_loads": 0,
+  "new_generations": 0,
+  "training_updates": 0,
+  "saved_reader_generate_compiler_author_patched_to_fail": true,
+  "quality_credit": 0
+}

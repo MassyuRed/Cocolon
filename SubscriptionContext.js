@@ -65,6 +65,8 @@ export function SubscriptionProvider({ children }) {
   const bootstrapInFlightRef = useRef(null);
   const bootstrapRef = useRef(buildFallbackSubscriptionBootstrap());
   const mountedRef = useRef(true);
+  const ownerRef = useRef(undefined);
+  const ownerEpochRef = useRef(0);
 
   const setTier = useCallback((next) => {
     const v = String(next || "unknown").trim().toLowerCase() || "unknown";
@@ -105,11 +107,28 @@ export function SubscriptionProvider({ children }) {
     setProductId(null);
   }, []);
 
+  const selectOwner = useCallback((userId) => {
+    const nextOwner = userId || null;
+    if (ownerRef.current === nextOwner) return;
+    ownerRef.current = nextOwner;
+    ownerEpochRef.current += 1;
+    inFlightRef.current = null;
+    lastFetchedAtRef.current = 0;
+    setTier(nextOwner ? "unknown" : DEFAULT_TIER);
+    if (mountedRef.current) {
+      setAllowedSelfStructureModes([]);
+      setLoading(false);
+    }
+    resetSubscriptionState();
+  }, [resetSubscriptionState, setTier]);
+
   useEffect(() => {
     mountedRef.current = true;
     applyBootstrap(buildFallbackSubscriptionBootstrap());
     return () => {
       mountedRef.current = false;
+      ownerEpochRef.current += 1;
+      inFlightRef.current = null;
       clearSubscriptionRuntimeCatalog();
     };
   }, [applyBootstrap]);
@@ -162,8 +181,43 @@ export function SubscriptionProvider({ children }) {
     [applyBootstrap, subscriptionBootstrapLoaded]
   );
 
-  const refreshTier = useCallback(
+  const refreshTierState = useCallback(
     async ({ force = false } = {}) => {
+      // Resolve the owner before consulting an owner-specific cache/promise.
+      // An auth event during getSession invalidates this invocation as well.
+      const startingEpoch = ownerEpochRef.current;
+      const startingOwner = ownerRef.current;
+      let session;
+      try {
+        const { data } = await supabase.auth.getSession();
+        session = data?.session;
+      } catch {
+        if (mountedRef.current && ownerEpochRef.current === startingEpoch && tierRef.current === "unknown") {
+          setTier(DEFAULT_TIER);
+          setAllowedSelfStructureModes([]);
+          resetSubscriptionState();
+        }
+        return { tier: DEFAULT_TIER, epoch: -1 };
+      }
+      const userId = session?.user?.id || null;
+      // Concurrent startup reads may discover the same initial owner. Any
+      // later switch (including away and back) still invalidates this read.
+      const sameInitialDiscovery = startingOwner === undefined &&
+        ownerEpochRef.current === startingEpoch + 1 && ownerRef.current === userId;
+      if (!mountedRef.current || (ownerEpochRef.current !== startingEpoch && !sameInitialDiscovery)) {
+        return { tier: DEFAULT_TIER, epoch: -1 };
+      }
+      selectOwner(userId);
+      const epoch = ownerEpochRef.current;
+      const isCurrent = () => mountedRef.current && ownerEpochRef.current === epoch && ownerRef.current === userId;
+      const resultFor = (value) => ({ tier: value, epoch });
+      const stale = () => ({ tier: DEFAULT_TIER, epoch: -1 });
+      if (!userId || !session?.access_token) {
+        setTier(DEFAULT_TIER);
+        setAllowedSelfStructureModes([]);
+        resetSubscriptionState();
+        return resultFor(DEFAULT_TIER);
+      }
       const now = Date.now();
       const cur = tierRef.current;
 
@@ -173,14 +227,15 @@ export function SubscriptionProvider({ children }) {
         cur !== "unknown" &&
         now - (Number(lastFetchedAtRef.current || 0) || 0) < REFRESH_TTL_MS
       ) {
-        return cur;
+        return resultFor(cur);
       }
 
       if (inFlightRef.current) {
         try {
-          return await inFlightRef.current;
+          const result = await inFlightRef.current.promise;
+          return isCurrent() ? result : stale();
         } catch {
-          return tierRef.current;
+          return isCurrent() ? resultFor(tierRef.current) : stale();
         }
       }
 
@@ -188,18 +243,8 @@ export function SubscriptionProvider({ children }) {
         if (mountedRef.current) setLoading(true);
 
         try {
-          const { data: sessionData } = await supabase.auth.getSession();
-          const accessToken = sessionData?.session?.access_token ?? null;
-
-          if (!accessToken) {
-            setTier(DEFAULT_TIER);
-            if (mountedRef.current) setAllowedSelfStructureModes([]);
-            resetSubscriptionState();
-            lastFetchedAtRef.current = Date.now();
-            return DEFAULT_TIER;
-          }
-
-          const json = await getSubscriptionMe();
+          const json = await getSubscriptionMe({ expectedUserId: userId });
+          if (!isCurrent()) return stale();
           const nextTier = normalizeTier(json?.subscription_tier);
           setTier(nextTier);
 
@@ -209,48 +254,61 @@ export function SubscriptionProvider({ children }) {
 
           applySubscriptionState(json);
           lastFetchedAtRef.current = Date.now();
-          return nextTier;
+          return resultFor(nextTier);
         } catch {
+          if (!isCurrent()) return stale();
           resetSubscriptionState();
           const prev = tierRef.current;
           if (!prev || prev === "unknown") {
             setTier(DEFAULT_TIER);
             if (mountedRef.current) setAllowedSelfStructureModes([]);
             lastFetchedAtRef.current = Date.now();
-            return DEFAULT_TIER;
+            return resultFor(DEFAULT_TIER);
           }
           lastFetchedAtRef.current = Date.now();
-          return prev;
+          return resultFor(prev);
         } finally {
-          if (mountedRef.current) setLoading(false);
+          if (isCurrent()) setLoading(false);
         }
       })();
 
-      inFlightRef.current = p;
+      const flight = { promise: p, userId, epoch };
+      inFlightRef.current = flight;
       try {
-        return await p;
+        const result = await p;
+        return isCurrent() ? result : stale();
       } finally {
-        inFlightRef.current = null;
+        if (inFlightRef.current === flight) inFlightRef.current = null;
       }
     },
-    [applySubscriptionState, resetSubscriptionState, setTier]
+    [applySubscriptionState, resetSubscriptionState, selectOwner, setTier]
   );
 
-  const ensureTier = useCallback(async () => {
+  const refreshTier = useCallback(async (options) => {
+    const result = await refreshTierState(options);
+    return result.epoch === ownerEpochRef.current && mountedRef.current ? result.tier : DEFAULT_TIER;
+  }, [refreshTierState]);
+
+  const ensureTierState = useCallback(async () => {
     const cur = tierRef.current;
-    if (cur && cur !== "unknown") return cur;
-    return await refreshTier({ force: true });
-  }, [refreshTier]);
+    if (cur && cur !== "unknown") return { tier: cur, epoch: ownerEpochRef.current };
+    return await refreshTierState({ force: true });
+  }, [refreshTierState]);
+
+  const ensureTier = useCallback(async () => {
+    const result = await ensureTierState();
+    return result.epoch === ownerEpochRef.current && mountedRef.current ? result.tier : DEFAULT_TIER;
+  }, [ensureTierState]);
 
   const ensurePaid = useCallback(async () => {
-    const t = await ensureTier();
-    return t === "plus" || t === "premium";
-  }, [ensureTier]);
+    const result = await ensureTierState();
+    return mountedRef.current && result.epoch === ownerEpochRef.current && (result.tier === "plus" || result.tier === "premium");
+  }, [ensureTierState]);
 
   const ensurePremium = useCallback(async () => {
-    const t = await ensureTier();
-    return t === "premium";
-  }, [ensureTier]);
+    const result = await ensureTierState();
+    return mountedRef.current && result.epoch === ownerEpochRef.current && result.tier === "premium";
+  }, [ensureTierState]);
 
   useEffect(() => {
     refreshSubscriptionBootstrap({ force: true }).catch(() => null);
@@ -279,9 +337,11 @@ export function SubscriptionProvider({ children }) {
 
     try {
       const { data } = supabase.auth.onAuthStateChange((_event, session) => {
+        selectOwner(session?.user?.id || null);
         refreshSubscriptionBootstrap({ force: true }).catch(() => null);
         if (session?.access_token) {
-          refreshTier({ force: true }).catch(() => null);
+          // Leave the auth callback before calling another Supabase auth API.
+          setTimeout(() => refreshTier({ force: true }).catch(() => null), 0);
         } else {
           setTier(DEFAULT_TIER);
           setAllowedSelfStructureModes([]);
@@ -300,7 +360,7 @@ export function SubscriptionProvider({ children }) {
         // noop
       }
     };
-  }, [refreshSubscriptionBootstrap, refreshTier, resetSubscriptionState, setTier]);
+  }, [refreshSubscriptionBootstrap, refreshTier, resetSubscriptionState, selectOwner, setTier]);
 
   const value = useMemo(() => {
     const norm = tier === "unknown" ? "unknown" : normalizeTier(tier);

@@ -1,0 +1,27 @@
+{
+  "previous_trial": "2026-10-26-quote-balanced-fit12",
+  "rows": 9,
+  "parsed_teacher_matches": 8,
+  "differences": [
+    {
+      "id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "teacher_span": [
+        3933,
+        3936
+      ],
+      "teacher_fragment": "\",\"",
+      "raw_span": [
+        3933,
+        3934
+      ],
+      "raw_fragment": " ",
+      "eos": true,
+      "output_tokens": 1584,
+      "raw_sha256": "0ccedb1a8d3585246a7dd1eab3af062de03a0338acc91b1aca7df69bb5494778"
+    }
+  ],
+  "old_objective": "Daily reception value11 tokens only; preceding JSON boundary masked",
+  "new_objective": "Union original11 with exact preceding observation/reception delimiter tokens; other labels masked",
+  "new_training_updates": 0,
+  "new_model_calls": 0
+}

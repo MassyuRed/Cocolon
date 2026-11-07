@@ -1,0 +1,281 @@
+{
+  "status": "POD_OUTSIDE_PROBE2_ORIGINALS_VERIFIED_NOT_PRODUCT_ACCEPTED",
+  "source_commit": "2ab02db37484ea9898990ef2d4a6ebc6b3451bb7",
+  "adapter_sha256": "d431a07ce227c05e81eca5afb9461d91cf8101d50af0d27ec1a81844ce8ac684",
+  "saved_adapter_unchanged": true,
+  "tensor_count": 112,
+  "parameter_count": 3833856,
+  "all_f32_finite": true,
+  "loaded_tensor_metadata_equal_previous_save_reload": true,
+  "training_updates": 0,
+  "model_loads": 1,
+  "generations": 2,
+  "eos": 2,
+  "strict_json": 2,
+  "meaning_adopted_count": 0,
+  "body_available_count": 0,
+  "cold_file_count": 0,
+  "cold_file_applicability": "NO_ADOPTED_SNAPSHOT",
+  "archive_payloads_verified": 15,
+  "cases": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "output_tokens": 2724,
+      "eos": true,
+      "strict_json": true,
+      "duplicate_keys": [],
+      "previous_duplicate_keys": [],
+      "raw_text_equal_previous": false,
+      "claims": 10,
+      "relations": 7,
+      "evidence_quotes": 15,
+      "quoted_source_misses": [
+        12,
+        13,
+        14
+      ],
+      "coordinate_rows": 0,
+      "updates": 1,
+      "teacher_updates": 7,
+      "quotes": [
+        {
+          "index": 0,
+          "source_id": "FT-BOOK-O",
+          "field_path": "memo_action",
+          "occurrences": 1,
+          "extra_coordinate_fields": []
+        },
+        {
+          "index": 1,
+          "source_id": "FT-BOOK-O",
+          "field_path": "memo_action",
+          "occurrences": 1,
+          "extra_coordinate_fields": []
+        },
+        {
+          "index": 2,
+          "source_id": "FT-BOOK-O",
+          "field_path": "memo",
+          "occurrences": 1,
+          "extra_coordinate_fields": []
+        },
+        {
+          "index": 3,
+          "source_id": "FT-BOOK-O",
+          "field_path": "memo",
+          "occurrences": 1,
+          "extra_coordinate_fields": []
+        },
+        {
+          "index": 4,
+          "source_id": "FT-BOOK-O",
+          "field_path": "memo_action",
+          "occurrences": 1,
+          "extra_coordinate_fields": []
+        },
+        {
+          "index": 5,
+          "source_id": "FT-BOOK-O",
+          "field_path": "memo",
+          "occurrences": 1,
+          "extra_coordinate_fields": []
+        },
+        {
+          "index": 6,
+          "source_id": "sixrow-answer-book",
+          "field_path": "answer_text_private",
+          "occurrences": 1,
+          "extra_coordinate_fields": []
+        },
+        {
+          "index": 7,
+          "source_id": "sixrow-answer-book",
+          "field_path": "answer_text_private",
+          "occurrences": 1,
+          "extra_coordinate_fields": []
+        },
+        {
+          "index": 8,
+          "source_id": "sixrow-answer-book",
+          "field_path": "answer_text_private",
+          "occurrences": 1,
+          "extra_coordinate_fields": []
+        },
+        {
+          "index": 9,
+          "source_id": "sixrow-answer-book",
+          "field_path": "answer_text_private",
+          "occurrences": 1,
+          "extra_coordinate_fields": []
+        },
+        {
+          "index": 10,
+          "source_id": "sixrow-answer-book",
+          "field_path": "answer_text_private",
+          "occurrences": 1,
+          "extra_coordinate_fields": []
+        },
+        {
+          "index": 11,
+          "source_id": "sixrow-answer-book",
+          "field_path": "answer_text_private",
+          "occurrences": 1,
+          "extra_coordinate_fields": []
+        },
+        {
+          "index": 12,
+          "source_id": "sixrow-answer-book",
+          "field_path": "answer_text_private",
+          "occurrences": 0,
+          "extra_coordinate_fields": []
+        },
+        {
+          "index": 13,
+          "source_id": "sixrow-answer-book",
+          "field_path": "answer_text_private",
+          "occurrences": 0,
+          "extra_coordinate_fields": []
+        },
+        {
+          "index": 14,
+          "source_id": "sixrow-answer-book",
+          "field_path": "answer_text_private",
+          "occurrences": 0,
+          "extra_coordinate_fields": []
+        }
+      ],
+      "actual_outcome": {
+        "meaning_adopted": false,
+        "body_available": false,
+        "cold_file_status": "NO_ADOPTED_SNAPSHOT",
+        "decision": "REJECT",
+        "reason_code": "semantic_receipt_not_validated"
+      }
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "output_tokens": 2637,
+      "eos": true,
+      "strict_json": true,
+      "duplicate_keys": [],
+      "previous_duplicate_keys": [
+        "schema_version"
+      ],
+      "raw_text_equal_previous": false,
+      "claims": 11,
+      "relations": 6,
+      "evidence_quotes": 14,
+      "quoted_source_misses": [],
+      "coordinate_rows": 0,
+      "updates": 1,
+      "teacher_updates": 8,
+      "quotes": [
+        {
+          "index": 0,
+          "source_id": "FT-SHOP-O",
+          "field_path": "memo_action",
+          "occurrences": 1,
+          "extra_coordinate_fields": []
+        },
+        {
+          "index": 1,
+          "source_id": "FT-SHOP-O",
+          "field_path": "memo_action",
+          "occurrences": 1,
+          "extra_coordinate_fields": []
+        },
+        {
+          "index": 2,
+          "source_id": "FT-SHOP-O",
+          "field_path": "memo",
+          "occurrences": 1,
+          "extra_coordinate_fields": []
+        },
+        {
+          "index": 3,
+          "source_id": "FT-SHOP-O",
+          "field_path": "memo",
+          "occurrences": 1,
+          "extra_coordinate_fields": []
+        },
+        {
+          "index": 4,
+          "source_id": "FT-SHOP-O",
+          "field_path": "memo_action",
+          "occurrences": 1,
+          "extra_coordinate_fields": []
+        },
+        {
+          "index": 5,
+          "source_id": "FT-SHOP-O",
+          "field_path": "memo",
+          "occurrences": 1,
+          "extra_coordinate_fields": []
+        },
+        {
+          "index": 6,
+          "source_id": "sixrow-answer-shop",
+          "field_path": "answer_text_private",
+          "occurrences": 1,
+          "extra_coordinate_fields": []
+        },
+        {
+          "index": 7,
+          "source_id": "sixrow-answer-shop",
+          "field_path": "answer_text_private",
+          "occurrences": 1,
+          "extra_coordinate_fields": []
+        },
+        {
+          "index": 8,
+          "source_id": "sixrow-answer-shop",
+          "field_path": "answer_text_private",
+          "occurrences": 1,
+          "extra_coordinate_fields": []
+        },
+        {
+          "index": 9,
+          "source_id": "sixrow-answer-shop",
+          "field_path": "answer_text_private",
+          "occurrences": 1,
+          "extra_coordinate_fields": []
+        },
+        {
+          "index": 10,
+          "source_id": "sixrow-answer-shop",
+          "field_path": "answer_text_private",
+          "occurrences": 1,
+          "extra_coordinate_fields": []
+        },
+        {
+          "index": 11,
+          "source_id": "sixrow-answer-shop",
+          "field_path": "answer_text_private",
+          "occurrences": 1,
+          "extra_coordinate_fields": []
+        },
+        {
+          "index": 12,
+          "source_id": "sixrow-answer-shop",
+          "field_path": "answer_text_private",
+          "occurrences": 1,
+          "extra_coordinate_fields": []
+        },
+        {
+          "index": 13,
+          "source_id": "sixrow-answer-shop",
+          "field_path": "answer_text_private",
+          "occurrences": 1,
+          "extra_coordinate_fields": []
+        }
+      ],
+      "actual_outcome": {
+        "meaning_adopted": false,
+        "body_available": false,
+        "cold_file_status": "NO_ADOPTED_SNAPSHOT",
+        "decision": "UNSUPPORTED",
+        "reason_code": "model_evidence_out_of_scope"
+      }
+    }
+  ]
+}

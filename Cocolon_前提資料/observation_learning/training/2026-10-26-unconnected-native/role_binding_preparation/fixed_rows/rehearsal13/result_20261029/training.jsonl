@@ -1,0 +1,13 @@
+{"step": 1, "id": "FT-BOOK-AFTER-ANSWER", "loss": 0.2678050398826599, "gradient_norm": 1.7938286066055298, "target_tokens": 2148, "loss_type": "complete_assistant_plus_eos_ce"}
+{"step": 2, "id": "TRAIN-SERVICE-CHAIR-01-INITIAL", "loss": 0.0016850755782797933, "gradient_norm": 0.14137102663516998, "target_tokens": 1331, "loss_type": "complete_assistant_plus_eos_ce"}
+{"step": 3, "id": "FT-SHOP-AFTER-ANSWER", "loss": 0.2665741741657257, "gradient_norm": 1.4762511253356934, "target_tokens": 2424, "loss_type": "complete_assistant_plus_eos_ce"}
+{"step": 4, "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION", "loss": 0.004358775448054075, "gradient_norm": 0.3597215414047241, "target_tokens": 2228, "loss_type": "complete_assistant_plus_eos_ce"}
+{"step": 5, "id": "TRAIN-SERVICE-CHAIR-02-INITIAL", "loss": 0.0011766665847972035, "gradient_norm": 0.06810314953327179, "target_tokens": 1331, "loss_type": "complete_assistant_plus_eos_ce"}
+{"step": 6, "id": "FT-BOOK-AFTER-ANSWER", "loss": 0.1722135692834854, "gradient_norm": 0.9654352068901062, "target_tokens": 2148, "loss_type": "complete_assistant_plus_eos_ce"}
+{"step": 7, "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION", "loss": 0.0021243540104478598, "gradient_norm": 0.34144797921180725, "target_tokens": 2231, "loss_type": "complete_assistant_plus_eos_ce"}
+{"step": 8, "id": "TRAIN-SERVICE-CHAIR-03-INITIAL", "loss": 0.0010057110339403152, "gradient_norm": 0.04281643033027649, "target_tokens": 1321, "loss_type": "complete_assistant_plus_eos_ce"}
+{"step": 9, "id": "FT-SHOP-AFTER-ANSWER", "loss": 0.1973555088043213, "gradient_norm": 0.8808506727218628, "target_tokens": 2424, "loss_type": "complete_assistant_plus_eos_ce"}
+{"step": 10, "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION", "loss": 0.0014821509830653667, "gradient_norm": 0.13630810379981995, "target_tokens": 2237, "loss_type": "complete_assistant_plus_eos_ce"}
+{"step": 11, "id": "TRAIN-DAILY-CALM-01-INITIAL", "loss": 0.006307296920567751, "gradient_norm": 0.5066611170768738, "target_tokens": 1585, "loss_type": "complete_assistant_plus_eos_ce"}
+{"step": 12, "id": "TRAIN-DAILY-CALM-02-INITIAL", "loss": 0.0043224161490798, "gradient_norm": 0.4896964430809021, "target_tokens": 1559, "loss_type": "complete_assistant_plus_eos_ce"}
+{"step": 13, "id": "TRAIN-DAILY-CALM-03-INITIAL", "loss": 0.0021230641286820173, "gradient_norm": 0.2114909291267395, "target_tokens": 1598, "loss_type": "complete_assistant_plus_eos_ce"}

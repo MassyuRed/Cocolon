@@ -1,0 +1,36 @@
+{
+  "archive": "cocolon-cont17-weights-originals-20261030.zip",
+  "bytes": 17009656,
+  "sha256": "7cd7f4de5317f1151013413995a6132832a6aa35903037d1610b2ab39cb9baf1",
+  "members": 208,
+  "payloads": 207,
+  "all_crc_bytes_sha256_identical": true,
+  "source_plan_prepared_identical": true,
+  "completed_updates": 17,
+  "raw_calls": 2,
+  "tensors": [
+    {
+      "path": "run/adapter/adapter_model.safetensors",
+      "count": 112,
+      "dtype": "F32",
+      "all_finite": true,
+      "sha256": "7fcca3ce034dfdb9162ae31c3a1bec59c8918762d3da07d58b64f8bdf1220981"
+    }
+  ],
+  "cuda_used": false,
+  "model_loads": 0,
+  "forwards": 0,
+  "updates": 0,
+  "generations": 0,
+  "cmee_calls": 0,
+  "root_additional_readback_checks": {
+    "raw_utf8_sha256_and_output_token_ids_length": "2/2 identical",
+    "receipt_raw_adapter_revision_and_usage": "2/2 identical",
+    "adapter_three_files_match_run_hashes": true,
+    "initial_and_reloaded_tables": "112 F32 finite each",
+    "training_schedule_losses_gradients": "17 planned rows, finite positive gradient norms",
+    "root_reading": "BOOK8279 and SHOP11124 raw characters all read; 0 formed person bodies",
+    "cmee_directory": "diagnosis.json only; no saved/cold files",
+    "no_additional_model_or_cmee_execution": true
+  }
+}

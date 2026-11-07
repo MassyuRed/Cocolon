@@ -1,0 +1,9 @@
+__pycache__/
+preflight.json
+SOURCE_COMMIT
+run_attempt.json
+results/
+*.tar.gz
+*.tar.gz.sha256
+*.download
+dataset-fetch-list.txt

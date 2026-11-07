@@ -1,0 +1,331 @@
+{
+  "scope": "REAL_4B_TYPED_FIT_TRAINING_NOT_PRODUCT_ACCEPTANCE",
+  "source_commit": "cd3fbf4505ccf0cfe9fbbade41bafd95472ef073",
+  "api_commit": "a6838fc17cc657f9f80da28bb93b422d0f94a2dd",
+  "archive_sha256": "d46ae21ffef258221f15d360260e9ace8d778ddd7a6970e410e10600307ac3a0",
+  "archive_member_count": 25,
+  "every_member_hash_verified": true,
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "run_id": "20261025-025406-cc300de8",
+  "adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "118dc380430ce01b4670be99942d711750b3b8ef415dd3cea6e43f6d88e8867d",
+    "adapter_model.safetensors": "06ca6381828841edd2b9c8237c3f7dc61f8242cba42eb8f9047d651fd5dc5749"
+  },
+  "adapter_tensors": [
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.q_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.q_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        8192,
+        8
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.v_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.v_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        1024,
+        8
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.q_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.q_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        8192,
+        8
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.v_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.v_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        1024,
+        8
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.q_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.q_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        8192,
+        8
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.v_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.v_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        1024,
+        8
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.q_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.q_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        8192,
+        8
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.v_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.v_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        1024,
+        8
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.q_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.q_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        8192,
+        8
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.v_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.v_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        1024,
+        8
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.q_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.q_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        8192,
+        8
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.v_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.v_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        1024,
+        8
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.q_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.q_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        8192,
+        8
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.v_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.v_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        1024,
+        8
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.q_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.q_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        8192,
+        8
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.v_proj.lora_A.weight",
+      "dtype": "F32",
+      "shape": [
+        8,
+        2560
+      ],
+      "finite": true
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.v_proj.lora_B.weight",
+      "dtype": "F32",
+      "shape": [
+        1024,
+        8
+      ],
+      "finite": true
+    }
+  ],
+  "base_weights_included": false,
+  "optimizer_rng_checkpoint_included": false,
+  "gpu_stopped": false,
+  "selected_case_ids": [
+    "FIT-FT-CHAIR-INITIAL",
+    "FIT-FT-CHAIR-AFTER-CORRECTION"
+  ],
+  "optimizer_steps_completed": 2,
+  "epochs": 1,
+  "stage_results": [
+    {
+      "stage": "before",
+      "meaning_adopted_count": 0,
+      "body_available_count": 0,
+      "missing_fit_cases": []
+    },
+    {
+      "stage": "after",
+      "meaning_adopted_count": 0,
+      "body_available_count": 0,
+      "missing_fit_cases": []
+    }
+  ],
+  "portable_archive_saved": true,
+  "old_adapter_unchanged": true
+}

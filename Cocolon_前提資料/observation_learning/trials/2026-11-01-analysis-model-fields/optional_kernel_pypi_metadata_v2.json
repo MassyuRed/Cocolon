@@ -1,0 +1,67 @@
+{
+  "einops": {
+    "name": "einops",
+    "requires_dist": null,
+    "requires_python": ">=3.8",
+    "version": "0.8.1",
+    "wheels": [
+      {
+        "digests": {
+          "blake2b_256": "87629773de14fe6c45c23649e98b83231fffd7b9892b6cf863251dc2afa73643",
+          "md5": "f38bb8b6b7244e8fd82572929fa30034",
+          "sha256": "919387eb55330f5757c6bea9165c5ff5cfe63a642682ea788a6d472576d81737"
+        },
+        "filename": "einops-0.8.1-py3-none-any.whl",
+        "size": 64359,
+        "url": "https://files.pythonhosted.org/packages/87/62/9773de14fe6c45c23649e98b83231fffd7b9892b6cf863251dc2afa73643/einops-0.8.1-py3-none-any.whl"
+      }
+    ]
+  },
+  "fla-core": {
+    "name": "fla-core",
+    "requires_dist": [
+      "torch>=2.7.0",
+      "einops"
+    ],
+    "requires_python": ">=3.10",
+    "version": "0.5.0",
+    "wheels": [
+      {
+        "digests": {
+          "blake2b_256": "f40396e6820d176256353670b41ca56dabbbebe129674b4f4ad7b54a152b7b36",
+          "md5": "faafeccf6d0e25afe1d7433f724a3d27",
+          "sha256": "5c826ff32daf6b629658e3e4f6125d87cf8c32eea937e3be9ba85f51951d809a"
+        },
+        "filename": "fla_core-0.5.0-py3-none-any.whl",
+        "size": 595276,
+        "url": "https://files.pythonhosted.org/packages/f4/03/96e6820d176256353670b41ca56dabbbebe129674b4f4ad7b54a152b7b36/fla_core-0.5.0-py3-none-any.whl"
+      }
+    ]
+  },
+  "flash-linear-attention": {
+    "name": "flash-linear-attention",
+    "requires_dist": [
+      "fla-core==0.5.0",
+      "transformers",
+      "tilelang; extra == \"tilelang\"",
+      "causal-conv1d>=1.4.0; extra == \"conv1d\"",
+      "matplotlib; extra == \"benchmark\"",
+      "datasets>=3.3.0; extra == \"benchmark\"",
+      "pytest; extra == \"test\""
+    ],
+    "requires_python": ">=3.10",
+    "version": "0.5.0",
+    "wheels": [
+      {
+        "digests": {
+          "blake2b_256": "cc167736db08806981562c728f32ea1dcb4565948fa9faffdbf4ffbf72522fbf",
+          "md5": "682dbe179456fb893d915896991557fe",
+          "sha256": "92e64e989ed34355c1f838232597b2e39783ee0494ada3199b58e156aa1d8eb8"
+        },
+        "filename": "flash_linear_attention-0.5.0-py3-none-any.whl",
+        "size": 319037,
+        "url": "https://files.pythonhosted.org/packages/cc/16/7736db08806981562c728f32ea1dcb4565948fa9faffdbf4ffbf72522fbf/flash_linear_attention-0.5.0-py3-none-any.whl"
+      }
+    ]
+  }
+}

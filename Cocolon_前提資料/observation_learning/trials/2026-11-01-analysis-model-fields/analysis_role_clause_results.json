@@ -1,0 +1,624 @@
+{
+  "actual": {
+    "after_edges": 0,
+    "after_nodes": 1,
+    "before": {
+      "code": "analysis_written_role_scope_unsupported",
+      "error_type": "AnalysisSourceError",
+      "status": "UNSUPPORTED"
+    },
+    "full_field_hash_preserved": true,
+    "id": "R08",
+    "mapped_count": 1,
+    "original_raw_sha256": "46350c2c4cddad8077590367a30c7dc4cf7ad28666e8901b37947d1e967fc577",
+    "partial_literal": true,
+    "saved_non_generating_equal": true,
+    "source_scope_preserved": true,
+    "unparsed_count": 1
+  },
+  "api_commit": "c033bd4eee35b81157d781501cb1ea41dd9f848c",
+  "baseline_api": "0dd31ce750e5f1c925053ca6d44ec643ba905df1",
+  "counts": {
+    "bound_responses": 22,
+    "saved_candidate_reads": 20,
+    "saved_typed_reads": 14,
+    "unchanged_candidates": 20,
+    "unchanged_typed": 14
+  },
+  "deployment": false,
+  "model_loads": 0,
+  "new_generation": 0,
+  "new_training": 0,
+  "normal_4b_adoption": false,
+  "product_credit": 0,
+  "seconds": 2.6992232659831643,
+  "source_sha256": {
+    "ai/services/ai_inference/analysis_cumulative_service.py": "a29aff9371d1bf0e49f3f63fda9addc06e6c8fc3399c587de9cc02ea52b9e883",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py": "3badc7919637fdd86ccabe56cd871b1a4009ff8e85ec66fd354dad5c7b615b44",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py": "cd744d2d77ae6d78d5ae995a2a353cbc1d225b3d3ba7b7c4c91636242d7e2070",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py": "d1f260e38f67b827c6b28797cf52b286883c5383de9671eb85a0450b49c6c54d"
+  },
+  "status": "PASS",
+  "synthetic_examples": [
+    {
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 1,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      },
+      "diagram": {
+        "accessibility_linear_order": [
+          "n1"
+        ],
+        "annotation_badges": [],
+        "artifact_version": 1,
+        "conflict_badges": [],
+        "edges": [],
+        "nodes": [
+          {
+            "evidence_badge_count": 1,
+            "node_kind": "ROLE",
+            "node_ref": "n1",
+            "visible_label": "選択カテゴリ：仕事\n僕の役割は受付係だった（記録された役割）"
+          }
+        ],
+        "period_comparison": {
+          "reason_codes": [],
+          "safe_change_kinds": [],
+          "state": "NO_PREVIOUS"
+        },
+        "period_label": "2025-01-01T01:00:00+00:00 ～ 2026-11-01T08:00:00+00:00",
+        "projection_of": "artifact:e24b0d4ae4d7ef19bf3c2d5bfc1c10783aa48603a252cd68bca96112e4d61a2b@1",
+        "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+        "unknown_gaps": [
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g1",
+            "visible_label": "確定していない項目：場面、考え・注意、行動・非行動、結果・余韻。"
+          },
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g5",
+            "visible_label": "まだ読み取れていない内容は、この記録からは確定していません。"
+          }
+        ],
+        "wire_kind": "watashi.map.v2"
+      },
+      "graph": {
+        "annotations": [],
+        "conflicts": [],
+        "edges": [],
+        "nodes": [
+          {
+            "evidence_refs": [
+              {
+                "element_index": 0,
+                "evidence_id": "analysis-unit-evidence:8c8dbadc3a170151ee6dac76d3c3e7924947a6e12c9bd42b66d1b5718aed44f9",
+                "field_path": "memo",
+                "field_sha256": "61e66dd0c3c1b9e4884f880c340041c0f5f98927a7c048bb7524f9380d8ca460",
+                "field_utf8_end": 68,
+                "field_utf8_start": 8,
+                "literal_sha256": "9f44fadc2973d80be699e97c9325756c615d55381e3e8903324e924e80bcda46",
+                "scalar_end": 11,
+                "scalar_start": 0,
+                "source_envelope_id": "analysis-source:5ab49bb770023e103cb7b0f2b523b44d405f5b3bba70a09e6b096125aef5c737",
+                "source_span_id": "field:43616eb93037b2ff14492a8a76e2d8924ba0a0704cca58aebb9cf3b55e95e7e7",
+                "utf8_end": 41,
+                "utf8_start": 8
+              }
+            ],
+            "modality": "fact",
+            "node_kind": "ROLE",
+            "node_ref": "n1",
+            "polarity": "positive",
+            "proposition": {
+              "actor": "SELF",
+              "arguments": [
+                [
+                  "は",
+                  "受付係"
+                ]
+              ],
+              "dependent_form": "",
+              "modality": "fact",
+              "polarity": "positive",
+              "possible_content": null,
+              "predicate_lemma": "だ",
+              "relative_day": "",
+              "result_state": "",
+              "role_state": "WRITTEN_PAST_ROLE_CLAUSE",
+              "scene_state": "",
+              "sequence_marker": "",
+              "source_parts": [
+                [
+                  "SELF_POSSESSIVE",
+                  0,
+                  1
+                ],
+                [
+                  "EXPLICIT_ROLE_TOPIC",
+                  1,
+                  5
+                ],
+                [
+                  "ROLE_NOMINAL",
+                  5,
+                  8
+                ],
+                [
+                  "FINITE_ROLE_COPULA",
+                  8,
+                  11
+                ]
+              ],
+              "temporal_scope": "past",
+              "written_modifiers": []
+            },
+            "quoted_field": null,
+            "record_refs": [
+              "00000000-0000-0000-0000-000000000065"
+            ],
+            "selected_categories": [
+              "仕事"
+            ],
+            "selected_category_context": true,
+            "temporal_scope": "past",
+            "update_refs": [],
+            "visible_label": "僕の役割は受付係だった"
+          }
+        ],
+        "source_updates": [],
+        "unknown_gaps": [
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g1",
+            "missing_scope": "SCENE",
+            "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+          },
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g2",
+            "missing_scope": "ATTENTION_OR_THOUGHT",
+            "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+          },
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g3",
+            "missing_scope": "ACTION_OR_NONACTION",
+            "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+          },
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g4",
+            "missing_scope": "IMMEDIATE_RESULT_OR_AFTERMATH",
+            "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+          },
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g5",
+            "missing_scope": "SOURCE_SCOPE",
+            "reason_code": "UNSUPPORTED_OR_UNCERTAIN_SOURCE_SCOPE"
+          }
+        ]
+      },
+      "id": "positive",
+      "source": "僕の役割は受付係だった。費用を記録した。",
+      "text": {
+        "accessibility_linear_order": [
+          "n1"
+        ],
+        "projection_of": "artifact:e24b0d4ae4d7ef19bf3c2d5bfc1c10783aa48603a252cd68bca96112e4d61a2b@1",
+        "text": "役割：選択カテゴリ：仕事\n僕の役割は受付係だった（記録された役割）（1件の記録）\n未確定（選択カテゴリ：仕事\n僕の役割は受付係だった（記録された役割））：確定していない項目：場面、考え・注意、行動・非行動、結果・余韻。\n未確定（選択カテゴリ：仕事\n僕の役割は受付係だった（記録された役割））：まだ読み取れていない内容は、この記録からは確定していません。"
+      }
+    },
+    {
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 1,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      },
+      "diagram": {
+        "accessibility_linear_order": [
+          "n1"
+        ],
+        "annotation_badges": [],
+        "artifact_version": 1,
+        "conflict_badges": [],
+        "edges": [],
+        "nodes": [
+          {
+            "evidence_badge_count": 1,
+            "node_kind": "ROLE",
+            "node_ref": "n1",
+            "visible_label": "選択カテゴリ：仕事\n僕の役割は受付係ではなかった（記録された役割）"
+          }
+        ],
+        "period_comparison": {
+          "reason_codes": [],
+          "safe_change_kinds": [],
+          "state": "NO_PREVIOUS"
+        },
+        "period_label": "2025-01-01T01:00:00+00:00 ～ 2026-11-01T08:00:00+00:00",
+        "projection_of": "artifact:c069574ea3973fa66040f9ed51fb08a361d992e8e38ae5cc9904ae08de7110b5@1",
+        "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+        "unknown_gaps": [
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g1",
+            "visible_label": "確定していない項目：場面、考え・注意、行動・非行動、結果・余韻。"
+          },
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g5",
+            "visible_label": "まだ読み取れていない内容は、この記録からは確定していません。"
+          }
+        ],
+        "wire_kind": "watashi.map.v2"
+      },
+      "graph": {
+        "annotations": [],
+        "conflicts": [],
+        "edges": [],
+        "nodes": [
+          {
+            "evidence_refs": [
+              {
+                "element_index": 0,
+                "evidence_id": "analysis-unit-evidence:0ad04b7a76e704af67e5c13b541c7e458820512d38be3afaf0f4371cd4d10c12",
+                "field_path": "memo",
+                "field_sha256": "aeadd0cb84ad8f03b4ed0642ade622e5b62999847ef3ddf7210c89c6a45a3258",
+                "field_utf8_end": 77,
+                "field_utf8_start": 8,
+                "literal_sha256": "3eb810b91e97860e0585c99e9bfe8d2128dde075050d5a021283160d58c49b4b",
+                "scalar_end": 14,
+                "scalar_start": 0,
+                "source_envelope_id": "analysis-source:d2682aece6b653ec24fecf799b8980da049db0df78f4f1bd0d9a93f63aa59641",
+                "source_span_id": "field:d7976df3de48bef0cb0597912eac8d306b4a383d26b77cf726de02dce77a3371",
+                "utf8_end": 50,
+                "utf8_start": 8
+              }
+            ],
+            "modality": "fact",
+            "node_kind": "ROLE",
+            "node_ref": "n1",
+            "polarity": "negative",
+            "proposition": {
+              "actor": "SELF",
+              "arguments": [
+                [
+                  "は",
+                  "受付係"
+                ]
+              ],
+              "dependent_form": "",
+              "modality": "fact",
+              "polarity": "negative",
+              "possible_content": null,
+              "predicate_lemma": "だ",
+              "relative_day": "",
+              "result_state": "",
+              "role_state": "WRITTEN_PAST_ROLE_CLAUSE",
+              "scene_state": "",
+              "sequence_marker": "",
+              "source_parts": [
+                [
+                  "SELF_POSSESSIVE",
+                  0,
+                  1
+                ],
+                [
+                  "EXPLICIT_ROLE_TOPIC",
+                  1,
+                  5
+                ],
+                [
+                  "ROLE_NOMINAL",
+                  5,
+                  8
+                ],
+                [
+                  "FINITE_ROLE_COPULA",
+                  8,
+                  14
+                ]
+              ],
+              "temporal_scope": "past",
+              "written_modifiers": []
+            },
+            "quoted_field": null,
+            "record_refs": [
+              "00000000-0000-0000-0000-000000000065"
+            ],
+            "selected_categories": [
+              "仕事"
+            ],
+            "selected_category_context": true,
+            "temporal_scope": "past",
+            "update_refs": [],
+            "visible_label": "僕の役割は受付係ではなかった"
+          }
+        ],
+        "source_updates": [],
+        "unknown_gaps": [
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g1",
+            "missing_scope": "SCENE",
+            "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+          },
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g2",
+            "missing_scope": "ATTENTION_OR_THOUGHT",
+            "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+          },
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g3",
+            "missing_scope": "ACTION_OR_NONACTION",
+            "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+          },
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g4",
+            "missing_scope": "IMMEDIATE_RESULT_OR_AFTERMATH",
+            "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+          },
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g5",
+            "missing_scope": "SOURCE_SCOPE",
+            "reason_code": "UNSUPPORTED_OR_UNCERTAIN_SOURCE_SCOPE"
+          }
+        ]
+      },
+      "id": "negative",
+      "source": "僕の役割は受付係ではなかった。費用を記録した。",
+      "text": {
+        "accessibility_linear_order": [
+          "n1"
+        ],
+        "projection_of": "artifact:c069574ea3973fa66040f9ed51fb08a361d992e8e38ae5cc9904ae08de7110b5@1",
+        "text": "役割：選択カテゴリ：仕事\n僕の役割は受付係ではなかった（記録された役割）（1件の記録）\n未確定（選択カテゴリ：仕事\n僕の役割は受付係ではなかった（記録された役割））：確定していない項目：場面、考え・注意、行動・非行動、結果・余韻。\n未確定（選択カテゴリ：仕事\n僕の役割は受付係ではなかった（記録された役割））：まだ読み取れていない内容は、この記録からは確定していません。"
+      }
+    },
+    {
+      "coverage": {
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "mapped_count": 1,
+        "processed_count": 1,
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "stale_supplement_count": 0,
+        "unparsed_count": 1
+      },
+      "diagram": {
+        "accessibility_linear_order": [
+          "n1"
+        ],
+        "annotation_badges": [],
+        "artifact_version": 1,
+        "conflict_badges": [],
+        "edges": [],
+        "nodes": [
+          {
+            "evidence_badge_count": 1,
+            "node_kind": "ROLE",
+            "node_ref": "n1",
+            "visible_label": "選択カテゴリ：仕事\n僕の役割は受付係だった（記録された役割）"
+          }
+        ],
+        "period_comparison": {
+          "reason_codes": [],
+          "safe_change_kinds": [],
+          "state": "NO_PREVIOUS"
+        },
+        "period_label": "2025-01-01T01:00:00+00:00 ～ 2026-11-01T08:00:00+00:00",
+        "projection_of": "artifact:4dd5c367dda56df65af4076d475700accfb5385f55345526c604bc94ac39bcf2@1",
+        "schema_version": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+        "unknown_gaps": [
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g1",
+            "visible_label": "確定していない項目：場面、考え・注意、行動・非行動、結果・余韻。"
+          },
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g5",
+            "visible_label": "まだ読み取れていない内容は、この記録からは確定していません。"
+          }
+        ],
+        "wire_kind": "watashi.map.v2"
+      },
+      "graph": {
+        "annotations": [],
+        "conflicts": [],
+        "edges": [],
+        "nodes": [
+          {
+            "evidence_refs": [
+              {
+                "element_index": 0,
+                "evidence_id": "analysis-unit-evidence:b1549763dc83b97b43e976e480a0b1559cf902b9f5eb9aaafa498e416a8a9fa3",
+                "field_path": "memo",
+                "field_sha256": "32d350a985ec2e5ca029047b395571a4cb49775fb3f3e1a7964afba9b9066c2d",
+                "field_utf8_end": 83,
+                "field_utf8_start": 8,
+                "literal_sha256": "9f44fadc2973d80be699e97c9325756c615d55381e3e8903324e924e80bcda46",
+                "scalar_end": 11,
+                "scalar_start": 0,
+                "source_envelope_id": "analysis-source:f87a886f29a58a65399b633a915e82234285b6d13ab8a5ef97c3050aae99636f",
+                "source_span_id": "field:42e3b296f92bc4ea465fe055a3f2ade4b13a8a8efc1f979deb294f48456a8947",
+                "utf8_end": 41,
+                "utf8_start": 8
+              }
+            ],
+            "modality": "fact",
+            "node_kind": "ROLE",
+            "node_ref": "n1",
+            "polarity": "positive",
+            "proposition": {
+              "actor": "SELF",
+              "arguments": [
+                [
+                  "は",
+                  "受付係"
+                ]
+              ],
+              "dependent_form": "",
+              "modality": "fact",
+              "polarity": "positive",
+              "possible_content": null,
+              "predicate_lemma": "だ",
+              "relative_day": "",
+              "result_state": "",
+              "role_state": "WRITTEN_PAST_ROLE_CLAUSE",
+              "scene_state": "",
+              "sequence_marker": "",
+              "source_parts": [
+                [
+                  "SELF_POSSESSIVE",
+                  0,
+                  1
+                ],
+                [
+                  "EXPLICIT_ROLE_TOPIC",
+                  1,
+                  5
+                ],
+                [
+                  "ROLE_NOMINAL",
+                  5,
+                  8
+                ],
+                [
+                  "FINITE_ROLE_COPULA",
+                  8,
+                  11
+                ]
+              ],
+              "temporal_scope": "past",
+              "written_modifiers": []
+            },
+            "quoted_field": null,
+            "record_refs": [
+              "00000000-0000-0000-0000-000000000065"
+            ],
+            "selected_categories": [
+              "仕事"
+            ],
+            "selected_category_context": true,
+            "temporal_scope": "past",
+            "update_refs": [],
+            "visible_label": "僕の役割は受付係だった"
+          }
+        ],
+        "source_updates": [],
+        "unknown_gaps": [
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g1",
+            "missing_scope": "SCENE",
+            "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+          },
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g2",
+            "missing_scope": "ATTENTION_OR_THOUGHT",
+            "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+          },
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g3",
+            "missing_scope": "ACTION_OR_NONACTION",
+            "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+          },
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g4",
+            "missing_scope": "IMMEDIATE_RESULT_OR_AFTERMATH",
+            "reason_code": "NOT_ESTABLISHED_FROM_SOURCE"
+          },
+          {
+            "between_node_refs": [
+              "n1"
+            ],
+            "gap_ref": "g5",
+            "missing_scope": "SOURCE_SCOPE",
+            "reason_code": "UNSUPPORTED_OR_UNCERTAIN_SOURCE_SCOPE"
+          }
+        ]
+      },
+      "id": "explicit_self_tail_unread",
+      "source": "僕の役割は受付係だった。僕は予定を記録しなかった。",
+      "text": {
+        "accessibility_linear_order": [
+          "n1"
+        ],
+        "projection_of": "artifact:4dd5c367dda56df65af4076d475700accfb5385f55345526c604bc94ac39bcf2@1",
+        "text": "役割：選択カテゴリ：仕事\n僕の役割は受付係だった（記録された役割）（1件の記録）\n未確定（選択カテゴリ：仕事\n僕の役割は受付係だった（記録された役割））：確定していない項目：場面、考え・注意、行動・非行動、結果・余韻。\n未確定（選択カテゴリ：仕事\n僕の役割は受付係だった（記録された役割））：まだ読み取れていない内容は、この記録からは確定していません。"
+      }
+    }
+  ],
+  "test_sha256": "aef3237d37e4ca6f593ad9f8a01eb1f2988189b887ab42a61f25e2fb78e7ea73",
+  "tests": {
+    "deselected": 1,
+    "new_cases": 66,
+    "parent_seconds": 122.63749453425407,
+    "passed": 839,
+    "pytest_seconds": 121.92,
+    "skipped": 1,
+    "subtests_passed": 11176
+  }
+}

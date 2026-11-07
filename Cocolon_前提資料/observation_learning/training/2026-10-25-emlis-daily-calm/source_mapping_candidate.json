@@ -1,0 +1,435 @@
+{
+  "status": "PROPOSED_NOT_ADOPTED_NOT_TRAINED",
+  "teacher_id": "FT-UDON-INITIAL",
+  "origin": "KAREN_EDIT_OF_EXISTING_RECORD",
+  "source_refs": [
+    {
+      "path": "Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261022-002/01_dialogue.md",
+      "commit": "d57fe2205cfa74d018b2a33a1e4e74ca6837310d",
+      "blob_sha": "7c432eb03550569abe434d4f41560345098a7024",
+      "dialogue_id": "D04",
+      "start_scalar": 2357,
+      "end_scalar_exclusive": 2506,
+      "quote": "| 項目 | 入力内容 |\n| --- | --- |\n| 感情選択 | 平穏（中）・喜び（弱） |\n| 思考内容（考えていること） | あったかいもの食べたら、ちょっと落ち着いた。 |\n| 行動内容（実際に起こった出来事） | 帰ってから、うどんを作って食べた。 |\n| カテゴリー | 生活 |"
+    }
+  ],
+  "original": {
+    "id": "FT-UDON-O",
+    "memo": "あったかいもの食べたら、ちょっと落ち着いた。",
+    "memo_action": "帰ってから、うどんを作って食べた。",
+    "category": [
+      "生活"
+    ],
+    "emotions": [
+      "平穏",
+      "喜び"
+    ],
+    "emotion_details": [
+      {
+        "type": "平穏",
+        "strength": "medium"
+      },
+      {
+        "type": "喜び",
+        "strength": "weak"
+      }
+    ],
+    "created_at": "2026-10-25T10:00:00Z",
+    "is_secret": false
+  },
+  "packet": {
+    "candidate": {
+      "schema_version": "cocolon.cmee.semantic_and_surface_proposal.v1",
+      "core": "emlis",
+      "claims": [
+        {
+          "claim_id": "return",
+          "kind": "EVENT",
+          "text": "帰って",
+          "subject": {
+            "binding": "OMITTED",
+            "source_entity": null,
+            "evidence_indexes": []
+          },
+          "predicate": {
+            "surface": "帰って",
+            "arguments": []
+          },
+          "polarity": {
+            "value": "AFFIRMED",
+            "scope_refs": [
+              "return"
+            ],
+            "evidence_indexes": [
+              0
+            ]
+          },
+          "modality": {
+            "value": "ASSERTED_AS_WRITTEN",
+            "evidence_indexes": [
+              0
+            ]
+          },
+          "about_time": {
+            "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+            "expression": null,
+            "anchor_source_id": "FT-UDON-O",
+            "evidence_indexes": [
+              0
+            ]
+          },
+          "qualifiers": [],
+          "evidence_indexes": [
+            0
+          ]
+        },
+        {
+          "claim_id": "cook",
+          "kind": "EVENT",
+          "text": "うどんを作って",
+          "subject": {
+            "binding": "OMITTED",
+            "source_entity": null,
+            "evidence_indexes": []
+          },
+          "predicate": {
+            "surface": "うどんを作って",
+            "arguments": []
+          },
+          "polarity": {
+            "value": "AFFIRMED",
+            "scope_refs": [
+              "cook"
+            ],
+            "evidence_indexes": [
+              1
+            ]
+          },
+          "modality": {
+            "value": "ASSERTED_AS_WRITTEN",
+            "evidence_indexes": [
+              1
+            ]
+          },
+          "about_time": {
+            "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+            "expression": null,
+            "anchor_source_id": "FT-UDON-O",
+            "evidence_indexes": [
+              1
+            ]
+          },
+          "qualifiers": [],
+          "evidence_indexes": [
+            1
+          ]
+        },
+        {
+          "claim_id": "eat",
+          "kind": "EVENT",
+          "text": "食べた",
+          "subject": {
+            "binding": "OMITTED",
+            "source_entity": null,
+            "evidence_indexes": []
+          },
+          "predicate": {
+            "surface": "食べた",
+            "arguments": []
+          },
+          "polarity": {
+            "value": "AFFIRMED",
+            "scope_refs": [
+              "eat"
+            ],
+            "evidence_indexes": [
+              2
+            ]
+          },
+          "modality": {
+            "value": "ASSERTED_AS_WRITTEN",
+            "evidence_indexes": [
+              2
+            ]
+          },
+          "about_time": {
+            "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+            "expression": null,
+            "anchor_source_id": "FT-UDON-O",
+            "evidence_indexes": [
+              2
+            ]
+          },
+          "qualifiers": [],
+          "evidence_indexes": [
+            2
+          ]
+        },
+        {
+          "claim_id": "warm_food_eat",
+          "kind": "EVENT",
+          "text": "あったかいもの食べた",
+          "subject": {
+            "binding": "OMITTED",
+            "source_entity": null,
+            "evidence_indexes": []
+          },
+          "predicate": {
+            "surface": "あったかいもの食べた",
+            "arguments": []
+          },
+          "polarity": {
+            "value": "AFFIRMED",
+            "scope_refs": [
+              "warm_food_eat"
+            ],
+            "evidence_indexes": [
+              3
+            ]
+          },
+          "modality": {
+            "value": "ASSERTED_AS_WRITTEN",
+            "evidence_indexes": [
+              3
+            ]
+          },
+          "about_time": {
+            "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+            "expression": null,
+            "anchor_source_id": "FT-UDON-O",
+            "evidence_indexes": [
+              3
+            ]
+          },
+          "qualifiers": [],
+          "evidence_indexes": [
+            3
+          ]
+        },
+        {
+          "claim_id": "slight_calm",
+          "kind": "STATE",
+          "text": "ちょっと落ち着いた",
+          "subject": {
+            "binding": "OMITTED",
+            "source_entity": null,
+            "evidence_indexes": []
+          },
+          "predicate": {
+            "surface": "ちょっと落ち着いた",
+            "arguments": []
+          },
+          "polarity": {
+            "value": "AFFIRMED",
+            "scope_refs": [
+              "slight_calm"
+            ],
+            "evidence_indexes": [
+              4
+            ]
+          },
+          "modality": {
+            "value": "ASSERTED_AS_WRITTEN",
+            "evidence_indexes": [
+              4
+            ]
+          },
+          "about_time": {
+            "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+            "expression": null,
+            "anchor_source_id": "FT-UDON-O",
+            "evidence_indexes": [
+              4
+            ]
+          },
+          "qualifiers": [],
+          "evidence_indexes": [
+            4
+          ]
+        }
+      ],
+      "relations": [
+        {
+          "relation_id": "return_before_cook",
+          "type": "SOURCE_WRITTEN_TEMPORAL_KARA_LINK",
+          "from_claim_id": "return",
+          "to_claim_id": "cook",
+          "polarity": "AFFIRMED",
+          "scope_refs": [
+            "return_before_cook"
+          ],
+          "qualifiers": [],
+          "evidence_indexes": [
+            5
+          ]
+        },
+        {
+          "relation_id": "return_before_eat",
+          "type": "SOURCE_WRITTEN_TEMPORAL_KARA_LINK",
+          "from_claim_id": "return",
+          "to_claim_id": "eat",
+          "polarity": "AFFIRMED",
+          "scope_refs": [
+            "return_before_eat"
+          ],
+          "qualifiers": [],
+          "evidence_indexes": [
+            5
+          ]
+        },
+        {
+          "relation_id": "cook_and_eat",
+          "type": "SOURCE_WRITTEN_TE_LINK",
+          "from_claim_id": "cook",
+          "to_claim_id": "eat",
+          "polarity": "AFFIRMED",
+          "scope_refs": [
+            "cook_and_eat"
+          ],
+          "qualifiers": [],
+          "evidence_indexes": [
+            6
+          ]
+        },
+        {
+          "relation_id": "written_eat_calm",
+          "type": "SOURCE_WRITTEN_TARA_LINK",
+          "from_claim_id": "warm_food_eat",
+          "to_claim_id": "slight_calm",
+          "polarity": "AFFIRMED",
+          "scope_refs": [
+            "written_eat_calm"
+          ],
+          "qualifiers": [],
+          "evidence_indexes": [
+            7
+          ]
+        }
+      ],
+      "unknowns": [],
+      "conflicts": [],
+      "updates": [],
+      "surface_proposal": {
+        "observation": "帰ってから、うどんを作って食べたのですね。",
+        "reception": "あったかいものを食べて、少し落ち着けてよかったです。",
+        "update_note": null,
+        "bindings": [
+          {
+            "section": "observation",
+            "claim_refs": [
+              "return",
+              "cook",
+              "eat"
+            ],
+            "relation_refs": [
+              "return_before_cook",
+              "return_before_eat",
+              "cook_and_eat"
+            ]
+          },
+          {
+            "section": "reception",
+            "claim_refs": [
+              "warm_food_eat",
+              "slight_calm"
+            ],
+            "relation_refs": [
+              "written_eat_calm"
+            ]
+          }
+        ]
+      },
+      "question_proposal": null
+    },
+    "evidence": [
+      {
+        "source_id": "FT-UDON-O",
+        "field_path": "memo_action",
+        "start": 0,
+        "end": 3,
+        "quote": "帰って"
+      },
+      {
+        "source_id": "FT-UDON-O",
+        "field_path": "memo_action",
+        "start": 6,
+        "end": 13,
+        "quote": "うどんを作って"
+      },
+      {
+        "source_id": "FT-UDON-O",
+        "field_path": "memo_action",
+        "start": 13,
+        "end": 16,
+        "quote": "食べた"
+      },
+      {
+        "source_id": "FT-UDON-O",
+        "field_path": "memo",
+        "start": 0,
+        "end": 10,
+        "quote": "あったかいもの食べた"
+      },
+      {
+        "source_id": "FT-UDON-O",
+        "field_path": "memo",
+        "start": 12,
+        "end": 21,
+        "quote": "ちょっと落ち着いた"
+      },
+      {
+        "source_id": "FT-UDON-O",
+        "field_path": "memo_action",
+        "start": 0,
+        "end": 16,
+        "quote": "帰ってから、うどんを作って食べた"
+      },
+      {
+        "source_id": "FT-UDON-O",
+        "field_path": "memo_action",
+        "start": 10,
+        "end": 16,
+        "quote": "作って食べた"
+      },
+      {
+        "source_id": "FT-UDON-O",
+        "field_path": "memo",
+        "start": 0,
+        "end": 21,
+        "quote": "あったかいもの食べたら、ちょっと落ち着いた"
+      }
+    ]
+  },
+  "new_private_relation_values_pending_approval": [
+    "SOURCE_WRITTEN_TEMPORAL_KARA_LINK",
+    "SOURCE_WRITTEN_TARA_LINK"
+  ],
+  "selections_preserved": {
+    "category": [
+      "生活"
+    ],
+    "emotions": [
+      "平穏",
+      "喜び"
+    ],
+    "emotion_details": [
+      {
+        "type": "平穏",
+        "strength": "medium"
+      },
+      {
+        "type": "喜び",
+        "strength": "weak"
+      }
+    ],
+    "is_secret": false
+  },
+  "forbidden_inferences": [
+    "warm_food_is_udon_identity",
+    "hunger",
+    "purpose_of_calming",
+    "general_physiological_cause",
+    "personality"
+  ],
+  "human_quality_acceptance": false
+}

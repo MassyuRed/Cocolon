@@ -1,0 +1,130 @@
+{
+  "schema": "cocolon.cmee.known_engine_cold_file_resume.v1",
+  "scope": "Known fictional chair raw replay and CMEE engine-only cold file resume. No service/SQL/RPC/Auth/HTTP/RN/device validation, no new model or training, no general-input quality or product acceptance.",
+  "status": "KNOWN_ENGINE_COLD_FILE_RESUME_COMPLETE_NOT_SERVICE_OR_PRODUCT_ACCEPTED",
+  "api_commit": "7a4dc32c07f8c8a30609e8345207c6a9c831de23",
+  "adapter_revision": "9b845eced7738b32eb21cfe9193798a41ae58d6f439aac9a5731c68e96952835",
+  "source_hashes": {
+    "training/2026-10-24-emlis-4b-training/sft_examples.jsonl": "198847f535eed7a3cac8d6f9cd59f8bfe3e53bc9165eb6d3fb32ed6b17ee54d0",
+    "training/2026-10-24-emlis-4b-training/verify_cmee.py": "6c042267eeaa9dace4a63abd2ae1ad42f2486c722947a08ed3d1daf571a7684b",
+    "training/2026-10-24-emlis-4b-training/run_pilot.py": "2f659078c05bee6d7b32f50aae8b9eebc03c767d4a3be084bc17e9e3ccc4c10d",
+    "training/2026-10-24-emlis-4b-training/dataset_manifest.json": "189fcc3a424731ad4074ef2901a6c8b5546913ea6410bbdca4e800fc73d6c867",
+    "trials/2026-10-24-qwen4b-cmee-diagnostic/model_roundtrip_20261025/file_manifest.json": "74c2c3439e1cf54963b24f8a1b911c3c0fcceae890c4342494990af38c086d28",
+    "trials/2026-10-24-qwen4b-cmee-diagnostic/model_roundtrip_20261025/run.json": "f5e3199f77eec6c9a45be5d3730c72a922e65c4d56e8175f56ca5a0c21be92e8",
+    "trials/2026-10-24-qwen4b-cmee-diagnostic/model_roundtrip_20261025/initial_raw.jsonl": "d9408b97bb552f240fa117e6ef204927eb12cd22777558de23f922b309278c09",
+    "trials/2026-10-24-qwen4b-cmee-diagnostic/model_roundtrip_20261025/initial_cmee.json": "896a2bad48b04f7cd6cfc8a4adc0a828b0daacc7dda9809ce7f00f71b2d619d3",
+    "trials/2026-10-24-qwen4b-cmee-diagnostic/model_roundtrip_20261025/initial_messages.json": "a59c8e4f5c0344f3e7ca66ddf912e25f32c08ffd5ea711bcc6195f9339f7edaf",
+    "trials/2026-10-24-qwen4b-cmee-diagnostic/model_roundtrip_20261025/correction_raw.jsonl": "e010723bad0a6dc9468f3d972deae2f7b96bf5adc2d725c1efa02f10b15ba07e",
+    "trials/2026-10-24-qwen4b-cmee-diagnostic/model_roundtrip_20261025/correction_cmee.json": "2f73daab2187dfa1883f818b352e15a55dff6dfc490e7ae7a980d6b15d98f6a3",
+    "trials/2026-10-24-qwen4b-cmee-diagnostic/model_roundtrip_20261025/correction_messages.json": "928a4e4fd924961bac1956a8f56c3b287548622d85001f89c47931477d0b3421"
+  },
+  "new_model_calls": 0,
+  "new_training_updates": 0,
+  "database_operations": 0,
+  "service_saved_roundtrip": false,
+  "sql_persistence_tested": false,
+  "pglite_available": false,
+  "product_accepted": false,
+  "automatic_progression": false,
+  "raw_modified": false,
+  "parent_process_id": 2,
+  "stages": [
+    {
+      "stage": "initial",
+      "status": "QUESTION_PENDING",
+      "body_state": "PRE_QUESTION",
+      "question": {
+        "question_id": "emlis-question-cd72ae18d958a726228058745f68f4bde42bd028848a1435c6bb3ca58c695db3",
+        "parent_request_id": "ft-chair-native-request",
+        "thread_id": "ft-chair-native-thread",
+        "original_source_ref": "src-7554a750377f05e1e107e620",
+        "decision": {
+          "disposition": "ASK",
+          "target_ref": "emlis-target-197b04852b24ae8e28a256206c0138736a22c5db99602680bcb20763af88248a",
+          "target_kind": "PERSONAL_JOY_SIGNIFICANCE",
+          "supporting_evidence_refs": [
+            "model-question-evidence-b2506749fd6f620133ce3218549fbf7a23bdce6accd2d76a30f7fef9a9494e15",
+            "model-question-evidence-95241c2a93fd315955908f2ea8697353b635f9c7014a3166abb7bda415a0b8b7"
+          ],
+          "missing_dimension": "personal_joy_significance",
+          "affected_meaning_refs": [
+            "solo_appraisal_object",
+            "joy"
+          ],
+          "affected_reception_refs": [
+            "solo_appraisal_object",
+            "joy"
+          ],
+          "asked_target_refs": [],
+          "decision_reason": "source_bound_joy_personal_significance_missing"
+        },
+        "prompt_private": "「全部一人で直せたこと」がなぜ嬉しかったのですか？",
+        "skip_allowed": true,
+        "answer_limit": 1,
+        "answer_source_role": "SUPPLEMENTAL_ANSWER",
+        "schema_version": "cocolon.cmee.emlis_clarification.v1"
+      },
+      "body": {
+        "artifact_id": "emlis-model-artifact-25f39ce168877444c93cc55cdb409b83c537561fd9a32d0b23a65fd23d3b5b1e",
+        "schema_version": "cocolon.cmee.emlis_model_thread_artifact.v1",
+        "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+        "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "update_note": null,
+        "text": "見えたこと：\nぐらついていた椅子を直し、また座れるようになったのですね。\n\nEmlisから：\n全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。"
+      },
+      "updates": 0,
+      "saved_input_sha256": "7e1ab219df0570151329fd6ed6ea0fc082505c516fa54bf2fb5038db31b0cb02",
+      "cold_outcome_sha256": "7dbbfa9bf88fb2b7162ea180c854820ab21de62278f5a5fba2069ea24561ec3c",
+      "full_outcome_sha256": "aa0cfcb37d9d238c444e24ad51d6e3f0a367d4f1823e241634650699edbdcfc8",
+      "full_outcome_equal": true,
+      "child_process_id": 11,
+      "snapshot_unchanged": true,
+      "checkpoint_unchanged": true,
+      "resume_modes": [
+        "RESUME_ADOPTED",
+        "RESUME_ADOPTED"
+      ],
+      "new_candidate_calls": 0,
+      "fresh_adoptions_during_resume": 0,
+      "worker_stderr": ""
+    },
+    {
+      "stage": "correction",
+      "status": "GENERATED",
+      "body_state": "REFINED",
+      "question": null,
+      "body": {
+        "artifact_id": "emlis-model-artifact-7a28cc404c7d88ccf2bba36ed31a0d60262f8db172b7debc4d11766b7f224e0c",
+        "schema_version": "cocolon.cmee.emlis_model_thread_artifact.v1",
+        "observation": "友人に手順を教わり、一緒に椅子を直したのですね。",
+        "reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+        "update_note": "共同修理と、また使えることへの喜びへ訂正しました。",
+        "text": "見えたこと：\n友人に手順を教わり、一緒に椅子を直したのですね。\n\nEmlisから：\n捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。\n\n読み直したこと：\n共同修理と、また使えることへの喜びへ訂正しました。"
+      },
+      "updates": 3,
+      "saved_input_sha256": "520c0ecb7c8c954a1552d06b73213aae2e1300d31211f62db9142a61822a7d1b",
+      "cold_outcome_sha256": "dc2e0f827cb8c205c51cb66f2a425b3eaf36abfe197c3e578beac12fb8c9a52d",
+      "full_outcome_sha256": "925ad9cb1160de454a5234152d4767b4d2c36c32c19e0bb4fcdb050d0f420abb",
+      "full_outcome_equal": true,
+      "child_process_id": 18,
+      "snapshot_unchanged": true,
+      "checkpoint_unchanged": true,
+      "resume_modes": [
+        "RESUME_ADOPTED",
+        "RESUME_ADOPTED",
+        "RESUME_ADOPTED",
+        "RESUME_ADOPTED"
+      ],
+      "new_candidate_calls": 0,
+      "fresh_adoptions_during_resume": 0,
+      "worker_stderr": ""
+    }
+  ],
+  "source_files_unchanged": true,
+  "actual_initial_snapshot_used": true,
+  "full_outcome_equal_count": 2,
+  "meaning_count": 2,
+  "body_count": 2,
+  "correction_updates": 3,
+  "seconds": 30.241580957001133
+}

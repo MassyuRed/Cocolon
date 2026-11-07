@@ -83,7 +83,9 @@ export function useHomeState({
 }) {
   const { isFeatureEnabled } = useAppRuntime();
   const todayQuestionFeatureEnabled = isFeatureEnabled("today_question_enabled", true);
-  const [globalEmotionUsers, setGlobalEmotionUsers] = useState(null);
+  const [initialHomeRead, setInitialHomeRead] = useState({ owner: null, settled: false, error: false });
+  const currentOwnerRef = useRef(currentUserId);
+  currentOwnerRef.current = currentUserId;
   const [homeTodayCount, setHomeTodayCount] = useState(null);
   const [homeMonthCount, setHomeMonthCount] = useState(null);
   const [homeWeekCount, setHomeWeekCount] = useState(null);
@@ -152,13 +154,6 @@ export function useHomeState({
         setHomeStreakDays(Number.isFinite(streakDays) ? streakDays : 0);
       }
 
-      if (globalSummary) {
-        const nextEmotionUsers = Number(globalSummary?.emotion_users);
-        if (Number.isFinite(nextEmotionUsers)) {
-          setGlobalEmotionUsers(nextEmotionUsers);
-        }
-      }
-
       if (isTutorialMode) {
         clearNoticeUi();
         clearTodayQuestionUi();
@@ -202,6 +197,8 @@ export function useHomeState({
         return { noticeCandidate: null, todayQuestionCandidate: null, aborted: false };
       }
 
+      const requestOwner = currentUserId;
+      const isCurrentRequest = () => homeStateRequestIdRef.current === requestId && currentOwnerRef.current === requestOwner;
       setNoticeLoading(true);
       if (todayQuestionFeatureEnabled) {
         setTodayQuestionLoading(true);
@@ -213,10 +210,11 @@ export function useHomeState({
           forceRefresh: force,
           timezoneName: getInputLocalTimezoneName(),
         });
-        if (homeStateRequestIdRef.current !== requestId) {
+        if (!isCurrentRequest()) {
           return { noticeCandidate: null, todayQuestionCandidate: null, aborted: true };
         }
 
+        setInitialHomeRead({ owner: requestOwner, settled: true, error: false });
         const normalized = applyHomeStatePayload(json);
         const noticesCurrent = normalized?.noticesCurrent || null;
         const todayQuestionCurrent = todayQuestionFeatureEnabled
@@ -281,13 +279,14 @@ export function useHomeState({
           payload: json,
         };
       } catch (e) {
-        if (homeStateRequestIdRef.current !== requestId) {
+        if (!isCurrentRequest()) {
           return { noticeCandidate: null, todayQuestionCandidate: null, aborted: true };
         }
+        setInitialHomeRead({ owner: requestOwner, settled: true, error: true });
         console.warn("InputScreen: loadHomeState failed", e);
         return { noticeCandidate: null, todayQuestionCandidate: null, aborted: false };
       } finally {
-        if (homeStateRequestIdRef.current === requestId) {
+        if (isCurrentRequest()) {
           setNoticeLoading(false);
           setTodayQuestionLoading(false);
         }
@@ -483,7 +482,8 @@ export function useHomeState({
 
   return useMemo(
     () => ({
-      globalEmotionUsers,
+      initialHomeReadComplete: isTutorialMode || (initialHomeRead.owner === currentUserId && initialHomeRead.settled),
+      homeReadError: initialHomeRead.owner === currentUserId && initialHomeRead.error,
       homeTodayCount,
       homeMonthCount,
       homeWeekCount,
@@ -515,7 +515,9 @@ export function useHomeState({
       activeStartupPopup,
       advanceStartupPopupQueue,
       closeStartupPopupWindow,
-      globalEmotionUsers,
+      initialHomeRead,
+      currentUserId,
+      isTutorialMode,
       homeMonthCount,
       homeStreakDays,
       homeTodayCount,

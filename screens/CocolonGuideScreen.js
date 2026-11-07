@@ -1,6 +1,5 @@
 import React, { useCallback, useMemo, useState } from "react";
 import {
-  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -8,6 +7,7 @@ import {
   View,
   Pressable,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import { useTheme } from "../theme/ThemeContext";
@@ -60,31 +60,32 @@ export default function CocolonGuideScreen({ route } = {}) {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView edges={["left", "right"]} style={styles.container}>
       <StatusBar
         barStyle={isDark ? "light-content" : "dark-content"}
         backgroundColor={colors.BG_SILVER}
       />
 
+
+      <ScrollView
+        contentContainerStyle={styles.scrollContainer}
+        showsVerticalScrollIndicator={false}
+      >
       <View style={styles.headerRow}>
         <CocolonBackButton
           style={styles.backBtn}
           fallbackRouteName="Input"
           accessibilityLabel="戻る"
         />
-        <Text style={styles.headerTitle} numberOfLines={1}>
+        <Text style={styles.headerTitle}>
           Cocolonガイド
         </Text>
         <View style={styles.headerRightSpacer} />
       </View>
 
-      <ScrollView
-        contentContainerStyle={styles.scrollContainer}
-        showsVerticalScrollIndicator={false}
-      >
         <View style={styles.targetRow}>
           <View style={styles.targetPill}>
-            <Text style={styles.targetPillText} numberOfLines={1}>
+            <Text style={styles.targetPillText}>
               {content?.title || "ガイド"}
             </Text>
           </View>
@@ -97,7 +98,7 @@ export default function CocolonGuideScreen({ route } = {}) {
           <Ionicons
             name="sparkles-outline"
             size={18}
-            color={colors.TITLE_GOLD}
+            color={colors.ON_SURFACE_TONAL}
             style={styles.tipLeadIcon}
           />
           <Text style={styles.tipLeadText}>
@@ -155,135 +156,132 @@ function createStyles(COLORS, ui) {
     applyTypographyTokens(
       {
         container: {
-          flex: 1,
-          backgroundColor: COLORS.PANEL_BG,
-        },
+      flex: 1,
+      backgroundColor: COLORS.BG_SILVER,
+    },
 
         headerRow: {
-          paddingHorizontal: 18,
-          paddingTop: 10,
-          paddingBottom: 8,
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-        },
+      paddingHorizontal: 0,
+      paddingTop: 0,
+      paddingBottom: 16,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      gap: 8,
+    },
         backBtn: {
-          width: 32,
-        },
+      width: 44,
+      minHeight: 44,
+    },
         headerTitle: {
-          flex: 1,
-          textAlign: "center",
-          fontSize: 20,
-          fontWeight: "900",
-          color: COLORS.TITLE_GOLD,
-          letterSpacing: 0.6,
-        },
+      flex: 1,
+      textAlign: "center",
+      color: COLORS.TITLE_GOLD,
+      letterSpacing: 0,
+      minWidth: 0,
+    },
         headerRightSpacer: {
-          width: 32,
-        },
+      width: 44,
+    },
 
         scrollContainer: {
-          paddingHorizontal: 18,
-          paddingBottom: 28,
-          paddingTop: 10,
-          alignItems: "stretch",
-        },
+      paddingHorizontal: 20,
+      paddingBottom: 24,
+      paddingTop: 16,
+      alignItems: "stretch",
+      width: '100%',
+      maxWidth: 680,
+      alignSelf: 'center',
+    },
 
         targetRow: {
-          marginBottom: 12,
-        },
+      marginBottom: 16,
+    },
         targetPill: {
-          alignSelf: "flex-start",
-          paddingHorizontal: 10,
-          paddingVertical: 6,
-          borderRadius: 999,
-          borderWidth: 1,
-          borderColor: COLORS.CARD_BORDER,
-          backgroundColor: COLORS.FIELD_BG,
-        },
+      alignSelf: "flex-start",
+      paddingHorizontal: 12,
+      paddingVertical: 8,
+      borderRadius: 999,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      maxWidth: '100%',
+    },
         targetPillText: {
-          fontSize: 12,
-          fontWeight: "900",
-          color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-        },
+      color: COLORS.ON_SURFACE_TONAL,
+    },
         targetHint: {
-          marginTop: 8,
-          fontSize: font.description ?? 11,
-          lineHeight: 18,
-          color: text.description ?? COLORS.TEXT_SUBTLE,
-          opacity: 0.9,
-        },
+      marginTop: 12,
+      color: text.description ?? COLORS.TEXT_SUBTLE,
+    },
 
         tipLeadCard: {
-          marginBottom: 12,
-          borderRadius: 16,
-          borderWidth: 1,
-          borderColor: COLORS.CARD_BORDER,
-          backgroundColor: COLORS.FIELD_BG,
-          paddingHorizontal: 12,
-          paddingVertical: 12,
-          flexDirection: "row",
-          alignItems: "flex-start",
-        },
+      marginBottom: 16,
+      borderRadius: 16,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
+      flexDirection: "row",
+      alignItems: "flex-start",
+    },
         tipLeadIcon: {
           marginTop: 1,
           marginRight: 8,
         },
         tipLeadText: {
-          flex: 1,
-          fontSize: 13,
-          lineHeight: 20,
-          fontWeight: "700",
-          color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-        },
+      flex: 1,
+      color: COLORS.ON_SURFACE_TONAL,
+    },
 
         card: {
-          borderRadius: 18,
-          borderWidth: 1,
-          borderColor: COLORS.CARD_BORDER,
-          backgroundColor: COLORS.FIELD_BG,
-          paddingHorizontal: 14,
-          paddingVertical: 14,
-          marginBottom: 12,
-          shadowColor: "#000",
-          shadowOpacity: 0.06,
-          shadowRadius: 10,
-          shadowOffset: { width: 0, height: 5 },
-          elevation: 4,
-        },
+      borderRadius: 24,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
+      marginBottom: 16,
+      shadowColor: "#000",
+      shadowOpacity: 0.06,
+      shadowRadius: 4,
+      shadowOffset: { width: 0, height: 2 },
+      elevation: 1,
+    },
         sectionTitle: {
-          fontSize: 12,
-          fontWeight: "900",
-          color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-          marginBottom: 10,
-        },
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      marginBottom: 12,
+    },
 
         relatedTermsWrap: {
-          flexDirection: "row",
-          flexWrap: "wrap",
-          marginHorizontal: -4,
-        },
+      flexDirection: "row",
+      flexWrap: "wrap",
+      marginHorizontal: 0,
+      gap: 8,
+    },
         relatedTermChip: {
-          marginHorizontal: 4,
-          marginBottom: 8,
-          paddingHorizontal: 12,
-          paddingVertical: 8,
-          borderRadius: 999,
-          borderWidth: 1,
-          borderColor: COLORS.CARD_BORDER,
-          backgroundColor: COLORS.PANEL_BG,
-        },
+      marginHorizontal: 0,
+      marginBottom: 0,
+      paddingHorizontal: 12,
+      paddingVertical: 10,
+      borderRadius: 24,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.FIELD_BG,
+      maxWidth: '100%',
+      minHeight: 44,
+      justifyContent: 'center',
+    },
         relatedTermChipPressed: {
           opacity: 0.82,
         },
         relatedTermChipText: {
-          fontSize: 12,
-          lineHeight: 16,
-          fontWeight: "700",
-          color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-        },
+      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      flexShrink: 1,
+    },
       },
-      ui
+      ui, {"headerTitle":"screenTitle","targetPillText":"description","targetHint":"description","tipLeadText":"description","sectionTitle":"sectionTitle","relatedTermChipText":"button"}
     )
   );
 }

@@ -1,0 +1,14 @@
+{
+  "pid": 383113,
+  "source_commit": "a79f2525149cf12ea25fc05241da7e2eb19c269f",
+  "max_seconds": 180,
+  "max_process_usd": 0.014,
+  "approval": {
+    "user_text": "「4B学習＋CMEE接続」を続けて。",
+    "received_date_utc": "2026-10-30",
+    "proposal_commit": "f5120ba03522b4f01e8f8ddde418bb126367d080",
+    "scope": "Immediately following the concrete one-SHOP same-prefix comparison proposal; one execution, max180 seconds, GPU processing prorated max USD0.014; preparation/recovery/holding etc extra. No training/free generation/new CMEE/retry.",
+    "interpretation_owner": "root Karen"
+  },
+  "retry": false
+}

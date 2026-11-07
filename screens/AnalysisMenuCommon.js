@@ -26,7 +26,7 @@ export function AnalysisMenuScroll({ children, scrollRef, onScroll }) {
       ref={scrollRef}
       contentContainerStyle={[
         styles.scrollContainer,
-        { paddingBottom: 24 + (insets?.bottom || 0) },
+        { paddingBottom: 24 + (insets?.bottom || 0), paddingLeft: 20 + (insets?.left || 0), paddingRight: 20 + (insets?.right || 0) },
       ]}
       showsVerticalScrollIndicator={false}
       keyboardShouldPersistTaps="handled"
@@ -51,7 +51,7 @@ export function AnalysisSubHeader({ title, onBack }) {
         />
       </View>
 
-      <Text style={[styles.subHeaderTitle, { color: colors.TITLE_GOLD }]} numberOfLines={1}>
+      <Text style={[styles.subHeaderTitle, { color: colors.TITLE_GOLD }]}>
         {title}
       </Text>
 
@@ -85,7 +85,7 @@ export function AnalysisLargeCard({
       <View style={styles.largeCardContent}>
         <View>
           <View style={styles.cardTitleRow}>
-            <Text numberOfLines={1} style={styles.largeCardTitle}>
+            <Text style={styles.largeCardTitle}>
               {title}
             </Text>
             <ScreenUnreadBadge
@@ -109,8 +109,11 @@ export function AnalysisMediumCard({
   badgeVisible = false,
   chevron = "forward",
   accessibilityLabel,
+  disabled = false,
+  destructive = false,
 }) {
-  const { styles } = useAnalysisMenuStyles();
+  const { styles, colors } = useAnalysisMenuStyles();
+  const foreground = disabled ? colors.TEXT_SUBTLE : destructive ? colors.ERROR : null;
 
   const iconName =
     chevron === "down"
@@ -121,20 +124,22 @@ export function AnalysisMediumCard({
 
   return (
     <CocolonPressable
-      style={styles.mediumCard}
+      style={[styles.mediumCard, destructive && { borderColor: colors.ERROR, backgroundColor: colors.ERROR_BG }, disabled && { borderColor: colors.CARD_BORDER, backgroundColor: colors.FIELD_BG }]}
       onPress={onPress}
+      disabled={disabled}
       accessibilityLabel={accessibilityLabel || title}
+      accessibilityState={chevron === "down" || chevron === "up" ? { expanded: chevron === "up" } : undefined}
     >
       <View style={styles.mediumCardContent}>
         <View style={styles.cardTitleRow}>
-          <Text style={styles.mediumCardTitle}>{title}</Text>
+          <Text style={[styles.mediumCardTitle, foreground && { color: foreground }]}>{title}</Text>
           <ScreenUnreadBadge
             visible={badgeVisible}
             style={styles.mediumCardBadge}
           />
-          <Ionicons name={iconName} size={18} style={styles.chevronIcon} />
+          <Ionicons name={iconName} size={18} style={[styles.chevronIcon, foreground && { color: foreground }]} />
         </View>
-        <Text style={styles.mediumCardDescription}>{description}</Text>
+        <Text style={[styles.mediumCardDescription, foreground && { color: foreground }]}>{description}</Text>
       </View>
     </CocolonPressable>
   );
@@ -180,9 +185,12 @@ function createStyles(colors, ui) {
     applyTypographyTokens(
       {
         scrollContainer: {
-          paddingTop: 16,
-          paddingHorizontal: 20,
-        },
+      paddingTop: 16,
+      paddingHorizontal: 20,
+      width: "100%",
+      maxWidth: 680,
+      alignSelf: "center",
+    },
 
         homeHeaderRow: {
           flexDirection: "row",
@@ -191,20 +199,21 @@ function createStyles(colors, ui) {
           marginBottom: 16,
         },
         homeTitleRow: {
-          flexDirection: "row",
-          alignItems: "center",
-        },
+      flexDirection: "row",
+      alignItems: "center",
+      minWidth: 0,
+      flexShrink: 1,
+    },
         homeTitle: {
-          fontSize: 26,
-          lineHeight: 32,
-          fontWeight: "800",
-          letterSpacing: 0.8,
-          color: colors.TITLE_GOLD,
-        },
+      letterSpacing: 0,
+      color: colors.TITLE_GOLD,
+      flexShrink: 1,
+      minWidth: 0,
+    },
         guideButton: {
-          width: 36,
-          height: 32,
-          borderRadius: 12,
+          width: 44,
+          height: 44,
+          borderRadius: 22,
           alignItems: "center",
           justifyContent: "center",
           backgroundColor: colors.FIELD_BG,
@@ -220,29 +229,30 @@ function createStyles(colors, ui) {
           marginBottom: 12,
         },
         subHeaderSide: {
-          width: 70,
-          alignItems: "flex-start",
-          justifyContent: "center",
-        },
+      width: 44,
+      alignItems: "flex-start",
+      justifyContent: "center",
+      flexShrink: 0,
+    },
         backButton: {
-          paddingHorizontal: 4,
-          paddingVertical: 4,
-        },
+      paddingHorizontal: 4,
+      paddingVertical: 4,
+      minWidth: 44,
+      minHeight: 44,
+    },
         subHeaderTitle: {
-          flex: 1,
-          textAlign: "center",
-          fontSize: 26,
-          lineHeight: 32,
-          fontWeight: "800",
-          letterSpacing: 0.6,
-        },
+      flex: 1,
+      textAlign: "center",
+      letterSpacing: 0,
+      minWidth: 0,
+      flexShrink: 1,
+      marginHorizontal: 8,
+    },
 
         descriptionText: {
-          fontSize: 13,
-          lineHeight: 20,
-          color: text.description ?? colors.TEXT_SUBTLE,
-          marginBottom: 20,
-        },
+      color: text.description ?? colors.TEXT_SUBTLE,
+      marginBottom: 16,
+    },
 
         summaryBlock: {
           marginBottom: 14,
@@ -262,147 +272,131 @@ function createStyles(colors, ui) {
           marginRight: 6,
         },
         summaryLabel: {
-          fontSize: 11,
-          fontWeight: "800",
-          letterSpacing: 0.3,
-          color: text.primary ?? colors.TEXT_ON_LIGHT,
-        },
+      letterSpacing: 0.3,
+      color: text.primary ?? colors.TEXT_ON_LIGHT,
+      flexShrink: 1,
+    },
         summaryText: {
-          fontSize: 12,
-          lineHeight: 18,
-          color: text.primary ?? colors.TEXT_ON_LIGHT,
-          marginBottom: 2,
-        },
+      color: text.primary ?? colors.TEXT_ON_LIGHT,
+      marginBottom: 2,
+      flexShrink: 1,
+    },
 
         largeCard: {
-          minHeight: 126,
-          borderRadius: 22,
-          borderWidth: 1,
-          borderColor: colors.BORDER_GOLD,
-          backgroundColor: colors.FIELD_BG,
-          paddingHorizontal: 20,
-          paddingVertical: 18,
-          shadowColor: "#000",
-          shadowOpacity: 0.12,
-          shadowRadius: 10,
-          shadowOffset: { width: 0, height: 6 },
-          elevation: 5,
-        },
+      borderRadius: 24,
+      backgroundColor: colors.PANEL_BG,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
+    },
         largeCardContent: {
-          flex: 1,
           justifyContent: "space-between",
         },
         cardTitleRow: {
-          flexDirection: "row",
-          alignItems: "center",
-        },
+      flexDirection: "row",
+      alignItems: "center",
+      minWidth: 0,
+    },
         largeCardTitle: {
-          flex: 1,
-          fontSize: 22,
-          lineHeight: 30,
-          fontWeight: "900",
-          color: text.primary ?? colors.TEXT_ON_LIGHT,
-          letterSpacing: 0.2,
-          includeFontPadding: true,
-          marginRight: 8,
-          paddingBottom: 1,
-        },
+      flex: 1,
+      color: text.primary ?? colors.TEXT_ON_LIGHT,
+      letterSpacing: 0.2,
+      includeFontPadding: true,
+      marginRight: 8,
+      paddingBottom: 1,
+      minWidth: 0,
+      flexShrink: 1,
+    },
         largeCardBadge: {
-          marginLeft: 8,
-          alignSelf: "flex-start",
-        },
+      marginLeft: 8,
+      alignSelf: "flex-start",
+      flexShrink: 0,
+    },
         largeCardDescription: {
-          marginTop: 10,
-          fontSize: 13,
-          lineHeight: 19,
-          color: text.description ?? colors.TEXT_SUBTLE,
-        },
+      marginTop: 6,
+      color: text.description ?? colors.TEXT_SUBTLE,
+    },
         largeCardUpdate: {
-          marginTop: 12,
-          fontSize: 11,
-          lineHeight: 16,
-          color: text.description ?? colors.TEXT_SUBTLE,
-        },
+      marginTop: 8,
+      color: text.description ?? colors.TEXT_SUBTLE,
+    },
 
         mediumCard: {
-          minHeight: 78,
-          borderRadius: 20,
-          borderWidth: 1,
-          borderColor: colors.CARD_BORDER,
-          backgroundColor: colors.FIELD_BG,
-          paddingHorizontal: 18,
-          paddingVertical: 15,
-          shadowColor: "#000",
-          shadowOpacity: 0.1,
-          shadowRadius: 8,
-          shadowOffset: { width: 0, height: 4 },
-          elevation: 4,
-        },
+      minHeight: 56,
+      borderRadius: 24,
+      backgroundColor: colors.PANEL_BG,
+      paddingHorizontal: 16,
+      paddingVertical: 14,
+    },
         mediumCardContent: {
-          flex: 1,
           justifyContent: "center",
         },
         mediumCardTitle: {
-          flex: 1,
-          fontSize: 21,
-          fontWeight: "800",
-          color: text.primary ?? colors.TEXT_ON_LIGHT,
-        },
+      flex: 1,
+      color: text.primary ?? colors.TEXT_ON_LIGHT,
+      minWidth: 0,
+      flexShrink: 1,
+    },
         mediumCardBadge: {
-          marginLeft: 8,
-          marginRight: 10,
-        },
+      marginLeft: 8,
+      marginRight: 10,
+      flexShrink: 0,
+    },
         mediumCardDescription: {
-          marginTop: 6,
-          fontSize: 13,
-          lineHeight: 18,
-          color: text.description ?? colors.TEXT_SUBTLE,
-        },
+      marginTop: 4,
+      color: text.description ?? colors.TEXT_SUBTLE,
+    },
         chevronIcon: {
           color: text.description ?? colors.TEXT_SUBTLE,
         },
 
         optionRow: {
-          marginLeft: 12,
-          minHeight: 58,
-          borderRadius: 16,
-          borderWidth: 1,
-          borderColor: colors.CARD_BORDER,
-          backgroundColor: colors.FIELD_BG,
-          paddingHorizontal: 16,
-          paddingVertical: 14,
-        },
+      marginLeft: 0,
+      minHeight: 44,
+      borderRadius: 16,
+      backgroundColor: colors.FIELD_BG,
+      paddingHorizontal: 16,
+      paddingVertical: 12,
+    },
         optionRowInner: {
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-        },
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+      minWidth: 0,
+      flexWrap: "wrap",
+      rowGap: 8,
+    },
         optionLabelWrap: {
-          flexDirection: "row",
-          alignItems: "center",
-          flex: 1,
-          paddingRight: 12,
-        },
+      flexDirection: "row",
+      alignItems: "center",
+      flex: 1,
+      paddingRight: 12,
+      minWidth: 0,
+    },
         optionLabel: {
-          fontSize: 18,
-          fontWeight: "700",
-          color: text.primary ?? colors.TEXT_ON_LIGHT,
-        },
+      color: text.primary ?? colors.TEXT_ON_LIGHT,
+      flex: 1,
+      minWidth: 0,
+      flexShrink: 1,
+    },
         optionBadge: {
-          marginLeft: 8,
-        },
+      marginLeft: 8,
+      flexShrink: 0,
+    },
         optionMetaWrap: {
-          flexDirection: "row",
-          alignItems: "center",
-        },
+      flexDirection: "row",
+      alignItems: "center",
+      minWidth: 0,
+      flexShrink: 1,
+    },
         optionMeta: {
-          fontSize: 12,
-          lineHeight: 16,
-          color: text.description ?? colors.TEXT_SUBTLE,
-          marginRight: 8,
-        },
+      color: text.description ?? colors.TEXT_SUBTLE,
+      marginRight: 8,
+      minWidth: 0,
+      flexShrink: 1,
+    },
       },
-      ui
+      ui, {"homeTitle":"screenTitle","subHeaderTitle":"screenTitle","descriptionText":"description","summaryLabel":"description","summaryText":"description","largeCardTitle":"sectionTitle","largeCardDescription":"description","largeCardUpdate":"meta","mediumCardTitle":"sectionTitle","mediumCardDescription":"description","optionLabel":"button","optionMeta":"meta"}
     )
   );
 }
+

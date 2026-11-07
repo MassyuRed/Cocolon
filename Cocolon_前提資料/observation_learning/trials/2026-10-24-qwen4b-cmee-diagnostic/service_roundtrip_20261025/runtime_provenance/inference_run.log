@@ -1,0 +1,12 @@
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights:   3%|▎         | 22/723 [00:00<00:03, 211.63it/s]Loading weights:   8%|▊         | 58/723 [00:00<00:02, 296.92it/s]Loading weights:  13%|█▎        | 94/723 [00:00<00:01, 316.01it/s]Loading weights:  18%|█▊        | 131/723 [00:00<00:01, 333.64it/s]Loading weights:  23%|██▎       | 168/723 [00:00<00:01, 346.39it/s]Loading weights:  28%|██▊       | 203/723 [00:00<00:01, 347.41it/s]Loading weights:  33%|███▎      | 239/723 [00:00<00:01, 350.99it/s]Loading weights:  38%|███▊      | 278/723 [00:00<00:01, 359.35it/s]Loading weights:  43%|████▎     | 314/723 [00:00<00:01, 350.20it/s]Loading weights:  49%|████▉     | 356/723 [00:01<00:00, 371.10it/s]Loading weights:  54%|█████▍    | 394/723 [00:01<00:00, 363.07it/s]Loading weights:  60%|██████    | 435/723 [00:01<00:00, 376.28it/s]Loading weights:  89%|████████▉ | 646/723 [00:01<00:00, 888.47it/s]Loading weights: 100%|██████████| 723/723 [00:01<00:00, 527.00it/s]
+MODEL_RELOADED_INFERENCE_ONLY
+MODEL_CALL_STARTED initial
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `fused_recurrent_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+MODEL_CALL_COMPLETED initial stop
+MODEL_CALL_STARTED correction
+MODEL_CALL_COMPLETED correction stop
+{"status": "ACTUAL_CORRECTION_DID_NOT_REACH_AUTHOR_NO_RESUME", "model_calls_started": 2, "model_calls_completed": 2, "service_saved_roundtrip": false, "seconds": 155.7606736123562}
+ARCHIVE_SHA256 941f5911367bfabbca0665008e613e4d4bbe4a7133dbfd7f8f63ff83239c5d13

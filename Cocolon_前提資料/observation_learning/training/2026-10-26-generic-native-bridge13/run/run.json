@@ -1,0 +1,111 @@
+{
+  "status": "BRIDGE13_RAW_COMPLETE_PENDING_CONTENT_AND_NATIVE_CMEE_REVIEW",
+  "source_commit": "f9d248ee6c387e6de804cb2354d91312417b39bd",
+  "plan": {
+    "schema": "cocolon.generic_native_bridge13.plan.v1",
+    "status": "AUTHORIZED_ONCE",
+    "gpu_run_authorized": true,
+    "initial_adapter_sha256": "45779ad97111dd2d91c1f7f1a4b0ca697ef0586c5190cd56b1b7675fe540dab6",
+    "training_rows": 10,
+    "generic_rows": 1,
+    "native_rows": 9,
+    "optimizer_steps": 13,
+    "training_order": [
+      9,
+      0,
+      1,
+      2,
+      9,
+      3,
+      4,
+      5,
+      9,
+      6,
+      7,
+      8,
+      9
+    ],
+    "learning_rate": 5e-05,
+    "context_tokens": 8192,
+    "max_new_tokens": 2560,
+    "max_seconds": 1800,
+    "per_generation_seconds": 180,
+    "max_model_calls": 11,
+    "gpu_hourly_usd": 0.26,
+    "max_process_usd": 0.13,
+    "seed": 20261024,
+    "generic_full_loss_weight": 1.0,
+    "native_daily_full_loss_weight": 0.5,
+    "native_daily_surface_loss_weight": 0.5,
+    "minimum_free_gib": 14,
+    "retry": false,
+    "automatic_progression": false,
+    "cmee_generic_adoption": false,
+    "service_sql_calls": 0,
+    "new_teacher_text": false,
+    "runner_sha256": "f54645b246822ca251c0ab6f6a9aa6fc3eddaca3cdde5b39d984246d31ae4cfd",
+    "payloads": {
+      "bridge_eval_inputs.jsonl": {
+        "sha256": "56d8545c4a8215e2196ce00e8b57706691626eceac0bee2b33fa14c42f4f32b4",
+        "bytes": 103599
+      },
+      "source_manifest.json": {
+        "sha256": "10e27aa74a7e634eadce8f73c3f78fb89aa7ca176e950adc025b4e16062be075",
+        "bytes": 2126
+      },
+      "bridge_train_messages.jsonl": {
+        "sha256": "60efe0a0ef95fa79687e015083733cea4bfa8154d4f0952e655164acb48d4567",
+        "bytes": 160042
+      },
+      "generic_teacher_provenance.json": {
+        "sha256": "66070252f9f7e1f8174ba2a7c3d35100c579896d91437011e0824fb53ab4ef03",
+        "bytes": 4038
+      },
+      "source_comparison.json": {
+        "sha256": "659823496ff555ddd51c495477b0b5681003e3c4d9514c4ffcb4e6ddfceb130e",
+        "bytes": 1862
+      }
+    },
+    "before_generations": 0,
+    "baseline_source": "2026-10-26-common-instruction-pair4/run/case1_raw.jsonl + case2_raw.jsonl; same45779 and exact baseline messages",
+    "native_consumer": "Unchanged consume_quote_fit_raw.py on after_native_fit.jsonl only; generic raw never enters native admission",
+    "scope": "One interface bridge candidate; no service SQL, live changes, fallback prompt, retries or automatic extra candidate.",
+    "cost_scope": "Processing allocation USD0.13 at1800seconds/0.26 perhour; preparation/recovery/holding/storage/tax separate, not invoice cap.",
+    "provenance": "Existing KAREN_EDIT teacher; not Mash completed response or product gold.",
+    "success": "Native9 meaning/body9/9 with original chair ASK/correction3update/dailyEND; root reads all11 raw. UDON grounded direct reception without wrong food/body/intent invention; E05 intent/time/uncertainty retained. Failures close trial, never loosen reader. No generalization/product claim.",
+    "execution_owner": "root Karen / Codex Work / GPT-6; separate-context read-only review is not independent Pro/Ultra/human acceptance",
+    "approval_basis": "Mash explicit approval on2026-10-26 JST: 0e105dd36597472c7f4ddd1898656fd7b32ad723 bridge13 proposal; 13updates -> save/reload ->11checks once; model process maximum30min USD0.13 allocation excluding holding/recovery/storage/tax. Includes recovery, native CPU consumption, content review, durable weight/result preservation and GitHub readback. No repeated approval between these approved stages."
+  },
+  "optimizer_steps_completed": 13,
+  "model_calls_started": 11,
+  "model_calls_completed": 11,
+  "initial_adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "26095c64075c5e88934f200eed8a6a3b5e389ad708d394f8567a1180e4aeb89c",
+    "adapter_model.safetensors": "45779ad97111dd2d91c1f7f1a4b0ca697ef0586c5190cd56b1b7675fe540dab6"
+  },
+  "product_accepted": false,
+  "cmee_generic_adoption": false,
+  "automatic_progression": false,
+  "strict_optimizer_resume": false,
+  "retry": false,
+  "seconds": 999.2710109157488,
+  "gpu": {
+    "name": "NVIDIA RTX A4500",
+    "free_bytes": 20818427904,
+    "total_bytes": 21018640384,
+    "torch": "2.8.0+cu128",
+    "cuda_build": "12.8",
+    "bf16_supported": true
+  },
+  "adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "9a70592b2ebfc03653fdcfdeb5054016f617e9c74c6499821881f4cca6672042",
+    "adapter_model.safetensors": "c39bbc27936d98ad45b0b42b43c476cad0c34f19e9f960f1a74f51eb05a564e5"
+  },
+  "peak_allocated_bytes": 17364226560,
+  "peak_reserved_bytes": 20493369344,
+  "initial_adapter_unchanged": true,
+  "saved_adapter_unchanged_after_generation": true,
+  "fixed_sources_unchanged": true
+}

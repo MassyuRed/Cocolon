@@ -1,0 +1,77 @@
+{
+  "status": "CPU_JOINT_CANDIDATE_VERIFIED_NO_4B_CALL",
+  "checks": [
+    {
+      "name": "unapproved_candidate_valid_for_cpu_only",
+      "passed": true
+    },
+    {
+      "name": "unapproved_gpu_rejected",
+      "passed": true
+    },
+    {
+      "name": "changed_max_optimizer_steps_rejected",
+      "passed": true
+    },
+    {
+      "name": "changed_daily_full_loss_weight_rejected",
+      "passed": true
+    },
+    {
+      "name": "changed_daily_surface_loss_weight_rejected",
+      "passed": true
+    },
+    {
+      "name": "changed_initial_adapter_sha256_rejected",
+      "passed": true
+    },
+    {
+      "name": "source_hash_fixed",
+      "passed": true
+    },
+    {
+      "name": "real_tokenizer_all9_no_model_no_truncation",
+      "passed": true
+    },
+    {
+      "name": "full_json_and_eos_supervised_for_all9",
+      "passed": true
+    },
+    {
+      "name": "same_surface25_and_fixed12_order",
+      "passed": true
+    },
+    {
+      "name": "sequential_backward_equals_joint_objective_gradient",
+      "passed": true
+    },
+    {
+      "name": "single_clip_and_adamw_step_matches_joint_objective",
+      "passed": true
+    },
+    {
+      "name": "chair_gradient_unchanged_and_prompt_not_supervised",
+      "passed": true
+    },
+    {
+      "name": "holdout_acceptance_unchanged_and_old_result_not_accepted",
+      "passed": true
+    }
+  ],
+  "passed": 14,
+  "failed": 0,
+  "runner_sha256": "c5dd1679c605e020e4dad56951c79d7c0661a1279a34a0ae0d47666d639d7128",
+  "tokenization_sha256": "62bcaf28d06f0ceda1d9db95e831715deb52c1de803501db68664a386e2cff87",
+  "torch_version": "2.8.0+cu128",
+  "tiny_synthetic_cpu_gradient_max_error": 0.0,
+  "tokenizer": "fixed local Qwen3.5 cache",
+  "tiny_synthetic_parameter_update_steps": 1,
+  "actual_4b_training_updates": 0,
+  "actual_4b_model_loads": 0,
+  "actual_4b_forwards": 0,
+  "model_generations": 0,
+  "gpu_access": false,
+  "gpu_run_authorized": false,
+  "sql_calls": 0,
+  "scope": "One finite candidate check; synthetic CPU gradient evidence is not a 4B learning result or product acceptance"
+}

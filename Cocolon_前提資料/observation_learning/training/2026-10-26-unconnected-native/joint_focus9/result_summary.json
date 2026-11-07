@@ -1,0 +1,101 @@
+{
+  "status": "CLOSED_NOT_ADOPTED_NO_RETRY",
+  "source_commit": "998f24b881167d2b47dce8fd6e4c66d7caca07e7",
+  "api_commit": "7b9ee073de03940ba71587297d8600b2b6094dd1",
+  "primary": "BLOCKER_NARROWED",
+  "optimizer_steps": 9,
+  "model_loads": 2,
+  "generations": 2,
+  "changed_tensors": 112,
+  "weight_parameters": 3833856,
+  "processing_seconds": 483.3823727410054,
+  "process_cost_usd": 0.037596406768744865,
+  "cost_excludes": [
+    "preparation",
+    "CPU",
+    "recovery",
+    "holding",
+    "storage",
+    "network",
+    "tax"
+  ],
+  "cpu_new_seconds": 6.672460324014537,
+  "prior353_reused_not_rerun": true,
+  "sql12_excluded": true,
+  "cmee_cpu_seconds": 1.8309825280448422,
+  "all15_prompt_teacher_bytes_unchanged": true,
+  "mixture": {
+    "full_adaptive": 0.5,
+    "ground": 0.25,
+    "prose": 0.25
+  },
+  "meaning_adopted_count": 0,
+  "body_available_count": 0,
+  "adopted_snapshots": 0,
+  "cold_read_applicable": false,
+  "cases": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "output_tokens": 2746,
+      "eos_reached": true,
+      "seconds": 117.04861651698593,
+      "parse_error": "Expecting ',' delimiter: line 2 column 1 (char 9319)",
+      "unclosed_json_containers": [
+        {
+          "kind": "object",
+          "character_offset": 0
+        }
+      ],
+      "receipt_status": "INVALID_FORMAT",
+      "decision": "REJECT",
+      "reason_code": "semantic_receipt_not_validated",
+      "meaning_adopted": false,
+      "body_available": false,
+      "cold_file_status": "NO_ADOPTED_SNAPSHOT"
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "output_tokens": 3017,
+      "eos_reached": true,
+      "seconds": 129.16070323099848,
+      "parse_error": "Expecting ',' delimiter: line 2 column 1 (char 10239)",
+      "unclosed_json_containers": [
+        {
+          "kind": "object",
+          "character_offset": 0
+        }
+      ],
+      "receipt_status": "INVALID_FORMAT",
+      "decision": "REJECT",
+      "reason_code": "semantic_receipt_not_validated",
+      "meaning_adopted": false,
+      "body_available": false,
+      "cold_file_status": "NO_ADOPTED_SNAPSHOT"
+    }
+  ],
+  "new_adapter_sha256": "2952ec5839a63789f1416aa6ebd19323b73a1610e6e0135da582c0dff7f92e73",
+  "new_adapter_adopted": false,
+  "initial_284f_d431_and_prior_runs_preserved": true,
+  "archive": {
+    "bytes": 16145834,
+    "sha256": "bf1df033106739c92d693ed46a9a6c45fdb13756b6cee00391c7e3cb76f1905e",
+    "payloads": 146,
+    "manifest_members": 1,
+    "library_file_id": "libfile_739efcbd074c81919e9d0ca8befb34c5",
+    "library_version": 0
+  },
+  "raw_repaired": false,
+  "receipt_or_meaning_reader_relaxed": false,
+  "additional_observation_needed_for_current_blocker": false,
+  "next_candidate": "Revisit coherent full JSON/grounded role and relation/update learning using existing teachers; closure-only repair cannot solve the observed semantic/body defects. No automatic GPU execution.",
+  "candidate_ready": false,
+  "automatic_progression": false,
+  "product_credit": 0,
+  "formal_acceptance": "0/3",
+  "management_percent": 54.5,
+  "structure_map_delta": "NONE",
+  "gpu_held": true,
+  "gpu_lifecycle_operations": 0,
+  "sql_operations": 0,
+  "production_changes": 0
+}

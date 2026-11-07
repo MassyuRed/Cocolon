@@ -1,0 +1,31 @@
+{
+  "full_archive_bytes": 16221481,
+  "full_archive_sha256": "9a1876e1118c737b342baedf07c68da0a67294ad78696b1d3d994d765a684c13",
+  "payloads": 150,
+  "members": 151,
+  "crc_hash_size_all_verified": true,
+  "cpu_archive_exact": true,
+  "api_source_test_remote_verified_bytes_exact": true,
+  "plan_and_manifest_exact": true,
+  "weights": [
+    {
+      "path": "run/adapter/adapter_model.safetensors",
+      "sha256": "41c9d82c58c977ccf7563abfd2b37b2693bfa579be4de1977cc6b51461b2bd8a",
+      "tensors": 112,
+      "parameters": 3833856,
+      "dtype": "F32",
+      "all_finite": true,
+      "shapes_match_initial_and_reload": true
+    }
+  ],
+  "optimizer_steps": 9,
+  "generations": 2,
+  "meaning_adopted": 0,
+  "body_available": 0,
+  "model_loads": 0,
+  "training_updates": 0,
+  "new_generations": 0,
+  "sql_operations": 0,
+  "product_credit": 0,
+  "automatic_progression": false
+}

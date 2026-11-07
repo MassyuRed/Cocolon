@@ -1,0 +1,1394 @@
+{
+  "status": "CPU_CHARACTER_RANGES_VERIFIED_NOT_BPE_TOKENIZED",
+  "runner_sha256": "47b981e7b1391435724d839375068748a70f7c931626314d263670cb8b218aab",
+  "plan_sha256": "52b78d8fc2cc7d1f058fb3328a9c110b8d8dcec1f666ea759ef15fd454e6e424",
+  "teacher_manifest_sha256": "a98ec8e2251fc0c7595e1f331ecbaf2dda5193e132ce1a9b8f3dc91d4d6fe3d3",
+  "training_updates": 0,
+  "model_calls": 0,
+  "gpu_calls": 0,
+  "teacher_changed": false,
+  "rows": [
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "loss_scope": "FULL_ASSISTANT_JSON_AND_EOS",
+      "training_occurrences": 1
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "loss_scope": "FULL_ASSISTANT_JSON_AND_EOS",
+      "training_occurrences": 1
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "loss_scope": "FULL_ASSISTANT_JSON_AND_EOS",
+      "training_occurrences": 1
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "loss_scope": "FULL_ASSISTANT_JSON_AND_EOS",
+      "training_occurrences": 1
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "loss_scope": "FULL_ASSISTANT_JSON_AND_EOS",
+      "training_occurrences": 1
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "loss_scope": "FULL_ASSISTANT_JSON_AND_EOS",
+      "training_occurrences": 1
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "loss_scope": "DAILY_SELECTED_VALUES",
+      "training_occurrences": 2,
+      "ranges": [
+        {
+          "path": [
+            "candidate",
+            "claims",
+            0,
+            "about_time",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 116,
+          "char_end": 119
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            0,
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 220,
+          "char_end": 223
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            0,
+            "modality",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 270,
+          "char_end": 273
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            0,
+            "polarity",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 336,
+          "char_end": 339
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            0,
+            "predicate",
+            "surface"
+          ],
+          "kind": "claim_value",
+          "char_start": 422,
+          "char_end": 427
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            0,
+            "subject",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 495,
+          "char_end": 497
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            0,
+            "text"
+          ],
+          "kind": "claim_value",
+          "char_start": 527,
+          "char_end": 532
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            1,
+            "about_time",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 626,
+          "char_end": 629
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            1,
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 728,
+          "char_end": 731
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            1,
+            "modality",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 778,
+          "char_end": 781
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            1,
+            "polarity",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 844,
+          "char_end": 847
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            1,
+            "predicate",
+            "surface"
+          ],
+          "kind": "claim_value",
+          "char_start": 928,
+          "char_end": 937
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            1,
+            "subject",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 1005,
+          "char_end": 1007
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            1,
+            "text"
+          ],
+          "kind": "claim_value",
+          "char_start": 1037,
+          "char_end": 1046
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            2,
+            "about_time",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 1140,
+          "char_end": 1143
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            2,
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 1241,
+          "char_end": 1244
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            2,
+            "modality",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 1291,
+          "char_end": 1294
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            2,
+            "polarity",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 1357,
+          "char_end": 1360
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            2,
+            "predicate",
+            "surface"
+          ],
+          "kind": "claim_value",
+          "char_start": 1440,
+          "char_end": 1445
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            2,
+            "subject",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 1513,
+          "char_end": 1515
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            2,
+            "text"
+          ],
+          "kind": "claim_value",
+          "char_start": 1545,
+          "char_end": 1550
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            3,
+            "about_time",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 1644,
+          "char_end": 1647
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            3,
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 1755,
+          "char_end": 1758
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            3,
+            "modality",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 1805,
+          "char_end": 1808
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            3,
+            "polarity",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 1871,
+          "char_end": 1874
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            3,
+            "predicate",
+            "surface"
+          ],
+          "kind": "claim_value",
+          "char_start": 1964,
+          "char_end": 1976
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            3,
+            "subject",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 2044,
+          "char_end": 2046
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            3,
+            "text"
+          ],
+          "kind": "claim_value",
+          "char_start": 2076,
+          "char_end": 2088
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            4,
+            "about_time",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 2182,
+          "char_end": 2185
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            4,
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 2291,
+          "char_end": 2294
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            4,
+            "modality",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 2341,
+          "char_end": 2344
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            4,
+            "polarity",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 2407,
+          "char_end": 2410
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            4,
+            "predicate",
+            "surface"
+          ],
+          "kind": "claim_value",
+          "char_start": 2498,
+          "char_end": 2509
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            4,
+            "subject",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 2577,
+          "char_end": 2579
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            4,
+            "text"
+          ],
+          "kind": "claim_value",
+          "char_start": 2609,
+          "char_end": 2620
+        },
+        {
+          "path": [
+            "candidate",
+            "relations"
+          ],
+          "kind": "complete_daily_value",
+          "char_start": 2690,
+          "char_end": 3555
+        },
+        {
+          "path": [
+            "candidate",
+            "surface_proposal"
+          ],
+          "kind": "complete_daily_value",
+          "char_start": 3640,
+          "char_end": 3995
+        },
+        {
+          "path": [
+            "evidence"
+          ],
+          "kind": "evidence_table",
+          "char_start": 4035,
+          "char_end": 4972,
+          "value_sha256": "321faab598a628f1b37d5e891eda7b3a6d9dfdc21174005ff3b81bfcaf41905d",
+          "evidence_row_count": 8
+        }
+      ],
+      "range_count": 38,
+      "selected_characters": 2311,
+      "teacher_characters": 4973,
+      "character_ranges_verified": true,
+      "bpe_token_positions_verified": false
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "loss_scope": "DAILY_SELECTED_VALUES",
+      "training_occurrences": 2,
+      "ranges": [
+        {
+          "path": [
+            "candidate",
+            "claims",
+            0,
+            "about_time",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 116,
+          "char_end": 119
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            0,
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 220,
+          "char_end": 223
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            0,
+            "modality",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 270,
+          "char_end": 273
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            0,
+            "polarity",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 336,
+          "char_end": 339
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            0,
+            "predicate",
+            "surface"
+          ],
+          "kind": "claim_value",
+          "char_start": 422,
+          "char_end": 427
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            0,
+            "subject",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 495,
+          "char_end": 497
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            0,
+            "text"
+          ],
+          "kind": "claim_value",
+          "char_start": 527,
+          "char_end": 532
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            1,
+            "about_time",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 626,
+          "char_end": 629
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            1,
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 728,
+          "char_end": 731
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            1,
+            "modality",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 778,
+          "char_end": 781
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            1,
+            "polarity",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 844,
+          "char_end": 847
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            1,
+            "predicate",
+            "surface"
+          ],
+          "kind": "claim_value",
+          "char_start": 928,
+          "char_end": 937
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            1,
+            "subject",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 1005,
+          "char_end": 1007
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            1,
+            "text"
+          ],
+          "kind": "claim_value",
+          "char_start": 1037,
+          "char_end": 1046
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            2,
+            "about_time",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 1140,
+          "char_end": 1143
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            2,
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 1241,
+          "char_end": 1244
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            2,
+            "modality",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 1291,
+          "char_end": 1294
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            2,
+            "polarity",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 1357,
+          "char_end": 1360
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            2,
+            "predicate",
+            "surface"
+          ],
+          "kind": "claim_value",
+          "char_start": 1440,
+          "char_end": 1445
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            2,
+            "subject",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 1513,
+          "char_end": 1515
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            2,
+            "text"
+          ],
+          "kind": "claim_value",
+          "char_start": 1545,
+          "char_end": 1550
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            3,
+            "about_time",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 1644,
+          "char_end": 1647
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            3,
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 1755,
+          "char_end": 1758
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            3,
+            "modality",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 1805,
+          "char_end": 1808
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            3,
+            "polarity",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 1871,
+          "char_end": 1874
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            3,
+            "predicate",
+            "surface"
+          ],
+          "kind": "claim_value",
+          "char_start": 1964,
+          "char_end": 1976
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            3,
+            "subject",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 2044,
+          "char_end": 2046
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            3,
+            "text"
+          ],
+          "kind": "claim_value",
+          "char_start": 2076,
+          "char_end": 2088
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            4,
+            "about_time",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 2182,
+          "char_end": 2185
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            4,
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 2291,
+          "char_end": 2294
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            4,
+            "modality",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 2341,
+          "char_end": 2344
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            4,
+            "polarity",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 2407,
+          "char_end": 2410
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            4,
+            "predicate",
+            "surface"
+          ],
+          "kind": "claim_value",
+          "char_start": 2498,
+          "char_end": 2509
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            4,
+            "subject",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 2577,
+          "char_end": 2579
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            4,
+            "text"
+          ],
+          "kind": "claim_value",
+          "char_start": 2609,
+          "char_end": 2620
+        },
+        {
+          "path": [
+            "candidate",
+            "relations"
+          ],
+          "kind": "complete_daily_value",
+          "char_start": 2690,
+          "char_end": 3555
+        },
+        {
+          "path": [
+            "candidate",
+            "surface_proposal"
+          ],
+          "kind": "complete_daily_value",
+          "char_start": 3640,
+          "char_end": 3995
+        },
+        {
+          "path": [
+            "evidence"
+          ],
+          "kind": "evidence_table",
+          "char_start": 4035,
+          "char_end": 4972,
+          "value_sha256": "28b2c0213b8f020f69bdc35f3fadfb40d3530ee089a1b03f0c29784050f3b9f0",
+          "evidence_row_count": 8
+        }
+      ],
+      "range_count": 38,
+      "selected_characters": 2311,
+      "teacher_characters": 4973,
+      "character_ranges_verified": true,
+      "bpe_token_positions_verified": false
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "loss_scope": "DAILY_SELECTED_VALUES",
+      "training_occurrences": 2,
+      "ranges": [
+        {
+          "path": [
+            "candidate",
+            "claims",
+            0,
+            "about_time",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 116,
+          "char_end": 119
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            0,
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 220,
+          "char_end": 223
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            0,
+            "modality",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 270,
+          "char_end": 273
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            0,
+            "polarity",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 336,
+          "char_end": 339
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            0,
+            "predicate",
+            "surface"
+          ],
+          "kind": "claim_value",
+          "char_start": 422,
+          "char_end": 427
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            0,
+            "subject",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 495,
+          "char_end": 497
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            0,
+            "text"
+          ],
+          "kind": "claim_value",
+          "char_start": 527,
+          "char_end": 532
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            1,
+            "about_time",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 626,
+          "char_end": 629
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            1,
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 728,
+          "char_end": 731
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            1,
+            "modality",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 778,
+          "char_end": 781
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            1,
+            "polarity",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 844,
+          "char_end": 847
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            1,
+            "predicate",
+            "surface"
+          ],
+          "kind": "claim_value",
+          "char_start": 928,
+          "char_end": 937
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            1,
+            "subject",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 1005,
+          "char_end": 1007
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            1,
+            "text"
+          ],
+          "kind": "claim_value",
+          "char_start": 1037,
+          "char_end": 1046
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            2,
+            "about_time",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 1140,
+          "char_end": 1143
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            2,
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 1241,
+          "char_end": 1244
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            2,
+            "modality",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 1291,
+          "char_end": 1294
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            2,
+            "polarity",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 1357,
+          "char_end": 1360
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            2,
+            "predicate",
+            "surface"
+          ],
+          "kind": "claim_value",
+          "char_start": 1440,
+          "char_end": 1445
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            2,
+            "subject",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 1513,
+          "char_end": 1515
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            2,
+            "text"
+          ],
+          "kind": "claim_value",
+          "char_start": 1545,
+          "char_end": 1550
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            3,
+            "about_time",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 1644,
+          "char_end": 1647
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            3,
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 1755,
+          "char_end": 1758
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            3,
+            "modality",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 1805,
+          "char_end": 1808
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            3,
+            "polarity",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 1871,
+          "char_end": 1874
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            3,
+            "predicate",
+            "surface"
+          ],
+          "kind": "claim_value",
+          "char_start": 1964,
+          "char_end": 1976
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            3,
+            "subject",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 2044,
+          "char_end": 2046
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            3,
+            "text"
+          ],
+          "kind": "claim_value",
+          "char_start": 2076,
+          "char_end": 2088
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            4,
+            "about_time",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 2182,
+          "char_end": 2185
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            4,
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 2291,
+          "char_end": 2294
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            4,
+            "modality",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 2341,
+          "char_end": 2344
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            4,
+            "polarity",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 2407,
+          "char_end": 2410
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            4,
+            "predicate",
+            "surface"
+          ],
+          "kind": "claim_value",
+          "char_start": 2498,
+          "char_end": 2509
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            4,
+            "subject",
+            "evidence_indexes"
+          ],
+          "kind": "claim_value",
+          "char_start": 2577,
+          "char_end": 2579
+        },
+        {
+          "path": [
+            "candidate",
+            "claims",
+            4,
+            "text"
+          ],
+          "kind": "claim_value",
+          "char_start": 2609,
+          "char_end": 2620
+        },
+        {
+          "path": [
+            "candidate",
+            "relations"
+          ],
+          "kind": "complete_daily_value",
+          "char_start": 2690,
+          "char_end": 3555
+        },
+        {
+          "path": [
+            "candidate",
+            "surface_proposal"
+          ],
+          "kind": "complete_daily_value",
+          "char_start": 3640,
+          "char_end": 3995
+        },
+        {
+          "path": [
+            "evidence"
+          ],
+          "kind": "evidence_table",
+          "char_start": 4035,
+          "char_end": 4972,
+          "value_sha256": "4e8a07dadb5c6157a4594b4304c953160386ac046ba5e39776507e8e068b6832",
+          "evidence_row_count": 8
+        }
+      ],
+      "range_count": 38,
+      "selected_characters": 2311,
+      "teacher_characters": 4973,
+      "character_ranges_verified": true,
+      "bpe_token_positions_verified": false
+    }
+  ],
+  "bpe_token_positions_verified": false,
+  "product_accepted": false
+}

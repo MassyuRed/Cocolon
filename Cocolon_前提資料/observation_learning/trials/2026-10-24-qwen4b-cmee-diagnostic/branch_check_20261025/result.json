@@ -1,0 +1,913 @@
+{
+  "status": "DIAGNOSTIC_COMPLETE_NOT_QUALITY_ACCEPTED",
+  "training_updates": 0,
+  "optimizer_created": false,
+  "generated_responses": 0,
+  "forward_calls": 3,
+  "forward_attempts": 3,
+  "pod_lifecycle_operations": 0,
+  "baseline_raw_sha256": "670aa754f8ef3f6347a5b72353ab7686111630e8c8f1db0eaa9198a4fd40dd61",
+  "seed": 20261024,
+  "max_seconds": 900,
+  "source_commit": "4ad759792b8cfd820f44d72b233eb853a354ecb7",
+  "script_sha256": "d4e3f727789db942c15bb9a8e81cd7372e290794365db05b3cc3be6cc34a3e97",
+  "input_prompt_changed": false,
+  "interpretation": "Known FIT diagnostic only; forced scores are not generated responses or CMEE acceptance.",
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "gpu": "NVIDIA RTX A4500",
+  "free_before": 20818427904,
+  "total_memory": 21018640384,
+  "prompt_tokens": 5018,
+  "first_differing_output_token": 1116,
+  "shared_prefix_chars": 4220,
+  "first_differing_raw_character": 4225,
+  "shared_prefix_tail": "vised\"],\"section\":\"update_note\",\"update_refs\":[0,1,2]}],\"observation\":\"友人に手順を教わり、一緒に椅子を直したのですね。\",\"reception\":\"捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れる",
+  "actual_reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになったのですね。",
+  "teacher_reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+  "raw_matches_teacher_except_reception": true,
+  "teacher_token_id": 207727,
+  "actual_token_id": 198697,
+  "teacher_token_text": "ようになって",
+  "actual_token_text": "ようになった",
+  "adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "5a29d4b81a00f975c62a6d21864c41e321ab29901e20c4731118cf57662bd713",
+    "adapter_model.safetensors": "a8baf0d310283fd0500e86887e64723e4734693ac48b7f2ddfad7cc07e6a3ea6"
+  },
+  "adapter_tensors": [
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.6853506565093994
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.4401382505893707
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.681950569152832
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.3.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.15724985301494598
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7159507274627686
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.5031983852386475
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7034642696380615
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.7.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.17498980462551117
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.709928274154663
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.5350974202156067
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.698126196861267
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.11.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.18574102222919464
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7401771545410156
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.5648701190948486
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7112112045288086
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.15.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.20019538700580597
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.744900107383728
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.6420961022377014
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.745057225227356
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.19.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.22937922179698944
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7502431869506836
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.6970856785774231
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7528672218322754
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.23.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.26345670223236084
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7623255252838135
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.7126755714416504
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7696765661239624
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.27.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.25718382000923157
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.q_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.7680256366729736
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.q_proj.lora_B.default.weight",
+      "shape": [
+        8192,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.7470721006393433
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.v_proj.lora_A.default.weight",
+      "shape": [
+        8,
+        2560
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 1.785261631011963
+    },
+    {
+      "name": "base_model.model.model.language_model.layers.31.self_attn.v_proj.lora_B.default.weight",
+      "shape": [
+        1024,
+        8
+      ],
+      "dtype": "torch.float32",
+      "finite": true,
+      "norm": 0.2885581851005554
+    }
+  ],
+  "trainable_parameters": 0,
+  "branch": {
+    "teacher": {
+      "id": 207727,
+      "text": "ようになって",
+      "logit": 16.125,
+      "log_probability": -1.4382736682891846,
+      "probability": 0.237337127327919,
+      "rank": 2
+    },
+    "actual": {
+      "id": 198697,
+      "text": "ようになった",
+      "logit": 16.875,
+      "log_probability": -0.6882736682891846,
+      "probability": 0.5024427175521851,
+      "rank": 1
+    },
+    "top10": [
+      {
+        "id": 198697,
+        "text": "ようになった",
+        "logit": 16.875,
+        "log_probability": -0.6882736682891846,
+        "probability": 0.5024427175521851,
+        "rank": 1
+      },
+      {
+        "id": 207727,
+        "text": "ようになって",
+        "logit": 16.125,
+        "log_probability": -1.4382736682891846,
+        "probability": 0.237337127327919,
+        "rank": 2
+      },
+      {
+        "id": 209962,
+        "text": "ようになる",
+        "logit": 14.6875,
+        "log_probability": -2.8757736682891846,
+        "probability": 0.0563725121319294,
+        "rank": 3
+      },
+      {
+        "id": 148564,
+        "text": "よう",
+        "logit": 14.5625,
+        "log_probability": -3.0007736682891846,
+        "probability": 0.04974856227636337,
+        "rank": 4
+      },
+      {
+        "id": 148408,
+        "text": "こと",
+        "logit": 13.875,
+        "log_probability": -3.6882736682891846,
+        "probability": 0.025015151128172874,
+        "rank": 5
+      },
+      {
+        "id": 155362,
+        "text": "になった",
+        "logit": 13.0,
+        "log_probability": -4.5632734298706055,
+        "probability": 0.010427867993712425,
+        "rank": 6
+      },
+      {
+        "id": 150579,
+        "text": "ように",
+        "logit": 12.5625,
+        "log_probability": -5.0007734298706055,
+        "probability": 0.006732738111168146,
+        "rank": 7
+      },
+      {
+        "id": 1495,
+        "text": " again",
+        "logit": 12.5,
+        "log_probability": -5.0632734298706055,
+        "probability": 0.00632482161745429,
+        "rank": 8
+      },
+      {
+        "id": 153253,
+        "text": "になって",
+        "logit": 12.375,
+        "log_probability": -5.1882734298706055,
+        "probability": 0.005581635516136885,
+        "rank": 9
+      },
+      {
+        "id": 96473,
+        "text": "又",
+        "logit": 12.25,
+        "log_probability": -5.3132734298706055,
+        "probability": 0.004925776273012161,
+        "rank": 10
+      }
+    ],
+    "recomputed_argmax_matches_recorded": true,
+    "top1_top2_logit_margin": 0.75,
+    "numerical_limit": "Full-prefix BF16/SDPA use_cache=False recomputation; original generation used cache."
+  },
+  "forced_reception_scores": [
+    {
+      "name": "recorded_actual",
+      "tokens": 22,
+      "mean_nll": 0.08600839972496033,
+      "sum_nll": 1.8921847343444824,
+      "suffix_tokens": 4,
+      "suffix_mean_nll": 0.3561941385269165,
+      "suffix_sum_nll": 1.424776554107666,
+      "boundary_crossing": false,
+      "canonical_prefix_through_reception_matches_recorded": true,
+      "canonical_full_text_ids_match_recorded": false,
+      "token_details": [
+        {
+          "id": 198290,
+          "text": "捨て",
+          "offsets": [
+            4180,
+            4182
+          ],
+          "nll": 0.038439322263002396
+        },
+        {
+          "id": 160670,
+          "text": "ずに",
+          "offsets": [
+            4182,
+            4184
+          ],
+          "nll": 0.000303818320389837
+        },
+        {
+          "id": 51025,
+          "text": "また",
+          "offsets": [
+            4184,
+            4186
+          ],
+          "nll": 0.024070879444479942
+        },
+        {
+          "id": 181145,
+          "text": "使える",
+          "offsets": [
+            4186,
+            4189
+          ],
+          "nll": 0.002500861417502165
+        },
+        {
+          "id": 198697,
+          "text": "ようになった",
+          "offsets": [
+            4189,
+            4195
+          ],
+          "nll": 0.11835137009620667
+        },
+        {
+          "id": 149287,
+          "text": "ことが",
+          "offsets": [
+            4195,
+            4198
+          ],
+          "nll": 0.043504856526851654
+        },
+        {
+          "id": 5205,
+          "text": "、",
+          "offsets": [
+            4198,
+            4199
+          ],
+          "nll": 0.003409408265724778
+        },
+        {
+          "id": 167616,
+          "text": "うれ",
+          "offsets": [
+            4199,
+            4201
+          ],
+          "nll": 0.04615655541419983
+        },
+        {
+          "id": 185730,
+          "text": "しかった",
+          "offsets": [
+            4201,
+            4205
+          ],
+          "nll": 0.005234109237790108
+        },
+        {
+          "id": 15303,
+          "text": "の",
+          "offsets": [
+            4205,
+            4206
+          ],
+          "nll": 0.07096390426158905
+        },
+        {
+          "id": 170641,
+          "text": "ですね",
+          "offsets": [
+            4206,
+            4209
+          ],
+          "nll": 0.0176650770008564
+        },
+        {
+          "id": 1710,
+          "text": "。",
+          "offsets": [
+            4209,
+            4210
+          ],
+          "nll": 0.0001245659514097497
+        },
+        {
+          "id": 51025,
+          "text": "また",
+          "offsets": [
+            4210,
+            4212
+          ],
+          "nll": 0.005845001433044672
+        },
+        {
+          "id": 55407,
+          "text": "その",
+          "offsets": [
+            4212,
+            4214
+          ],
+          "nll": 0.03966234251856804
+        },
+        {
+          "id": 114746,
+          "text": "椅子",
+          "offsets": [
+            4214,
+            4216
+          ],
+          "nll": 0.005469595547765493
+        },
+        {
+          "id": 19054,
+          "text": "に",
+          "offsets": [
+            4216,
+            4217
+          ],
+          "nll": 0.030917184427380562
+        },
+        {
+          "id": 96730,
+          "text": "座",
+          "offsets": [
+            4217,
+            4218
+          ],
+          "nll": 0.005302769131958485
+        },
+        {
+          "id": 149063,
+          "text": "れる",
+          "offsets": [
+            4218,
+            4220
+          ],
+          "nll": 0.009486714377999306
+        },
+        {
+          "id": 198697,
+          "text": "ようになった",
+          "offsets": [
+            4220,
+            4226
+          ],
+          "nll": 0.6882736682891846
+        },
+        {
+          "id": 15303,
+          "text": "の",
+          "offsets": [
+            4226,
+            4227
+          ],
+          "nll": 0.1668860763311386
+        },
+        {
+          "id": 170641,
+          "text": "ですね",
+          "offsets": [
+            4227,
+            4230
+          ],
+          "nll": 0.5696099996566772
+        },
+        {
+          "id": 1710,
+          "text": "。",
+          "offsets": [
+            4230,
+            4231
+          ],
+          "nll": 6.794906312279636e-06
+        }
+      ]
+    },
+    {
+      "name": "teacher_counterfactual",
+      "tokens": 24,
+      "mean_nll": 0.09130503982305527,
+      "sum_nll": 2.1913208961486816,
+      "suffix_tokens": 6,
+      "suffix_mean_nll": 0.28731876611709595,
+      "suffix_sum_nll": 1.7239125967025757,
+      "boundary_crossing": false,
+      "canonical_prefix_through_reception_matches_recorded": null,
+      "canonical_full_text_ids_match_recorded": null,
+      "token_details": [
+        {
+          "id": 198290,
+          "text": "捨て",
+          "offsets": [
+            4180,
+            4182
+          ],
+          "nll": 0.038439322263002396
+        },
+        {
+          "id": 160670,
+          "text": "ずに",
+          "offsets": [
+            4182,
+            4184
+          ],
+          "nll": 0.000303818320389837
+        },
+        {
+          "id": 51025,
+          "text": "また",
+          "offsets": [
+            4184,
+            4186
+          ],
+          "nll": 0.024070879444479942
+        },
+        {
+          "id": 181145,
+          "text": "使える",
+          "offsets": [
+            4186,
+            4189
+          ],
+          "nll": 0.002500861417502165
+        },
+        {
+          "id": 198697,
+          "text": "ようになった",
+          "offsets": [
+            4189,
+            4195
+          ],
+          "nll": 0.11835137009620667
+        },
+        {
+          "id": 149287,
+          "text": "ことが",
+          "offsets": [
+            4195,
+            4198
+          ],
+          "nll": 0.043504856526851654
+        },
+        {
+          "id": 5205,
+          "text": "、",
+          "offsets": [
+            4198,
+            4199
+          ],
+          "nll": 0.003409408265724778
+        },
+        {
+          "id": 167616,
+          "text": "うれ",
+          "offsets": [
+            4199,
+            4201
+          ],
+          "nll": 0.04615655541419983
+        },
+        {
+          "id": 185730,
+          "text": "しかった",
+          "offsets": [
+            4201,
+            4205
+          ],
+          "nll": 0.005234109237790108
+        },
+        {
+          "id": 15303,
+          "text": "の",
+          "offsets": [
+            4205,
+            4206
+          ],
+          "nll": 0.07096390426158905
+        },
+        {
+          "id": 170641,
+          "text": "ですね",
+          "offsets": [
+            4206,
+            4209
+          ],
+          "nll": 0.0176650770008564
+        },
+        {
+          "id": 1710,
+          "text": "。",
+          "offsets": [
+            4209,
+            4210
+          ],
+          "nll": 0.0001245659514097497
+        },
+        {
+          "id": 51025,
+          "text": "また",
+          "offsets": [
+            4210,
+            4212
+          ],
+          "nll": 0.005845001433044672
+        },
+        {
+          "id": 55407,
+          "text": "その",
+          "offsets": [
+            4212,
+            4214
+          ],
+          "nll": 0.03966234251856804
+        },
+        {
+          "id": 114746,
+          "text": "椅子",
+          "offsets": [
+            4214,
+            4216
+          ],
+          "nll": 0.005469595547765493
+        },
+        {
+          "id": 19054,
+          "text": "に",
+          "offsets": [
+            4216,
+            4217
+          ],
+          "nll": 0.030917184427380562
+        },
+        {
+          "id": 96730,
+          "text": "座",
+          "offsets": [
+            4217,
+            4218
+          ],
+          "nll": 0.005302769131958485
+        },
+        {
+          "id": 149063,
+          "text": "れる",
+          "offsets": [
+            4218,
+            4220
+          ],
+          "nll": 0.009486714377999306
+        },
+        {
+          "id": 207727,
+          "text": "ようになって",
+          "offsets": [
+            4220,
+            4226
+          ],
+          "nll": 1.4382736682891846
+        },
+        {
+          "id": 5205,
+          "text": "、",
+          "offsets": [
+            4226,
+            4227
+          ],
+          "nll": 0.013932470232248306
+        },
+        {
+          "id": 54977,
+          "text": "よ",
+          "offsets": [
+            4227,
+            4228
+          ],
+          "nll": 0.1994258612394333
+        },
+        {
+          "id": 156697,
+          "text": "かったです",
+          "offsets": [
+            4228,
+            4233
+          ],
+          "nll": 0.04662429541349411
+        },
+        {
+          "id": 149172,
+          "text": "ね",
+          "offsets": [
+            4233,
+            4234
+          ],
+          "nll": 0.025636164471507072
+        },
+        {
+          "id": 1710,
+          "text": "。",
+          "offsets": [
+            4234,
+            4235
+          ],
+          "nll": 2.0146166207268834e-05
+        }
+      ]
+    }
+  ],
+  "adapter_files_unchanged": true,
+  "baseline_unchanged": true,
+  "peak_allocated_gib": 9.875100135803223,
+  "peak_reserved_gib": 10.630859375,
+  "seconds": 13.145198253914714
+}

@@ -5,7 +5,6 @@ import {
   Keyboard,
   KeyboardAvoidingView,
   Platform,
-  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -14,6 +13,7 @@ import {
   View,
   useWindowDimensions,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import CocolonBackButton from "../components/CocolonBackButton";
 import { useTheme } from "../theme/ThemeContext";
@@ -374,7 +374,7 @@ export default function ProfileCreateScreen({ onBack }) {
   const totalQuestions = Number(meta?.total_questions ?? 5) || 5;
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView edges={["left", "right"]} style={styles.container}>
       <StatusBar
         barStyle={isDark ? "light-content" : "dark-content"}
         backgroundColor={colors.BG_SILVER}
@@ -396,11 +396,11 @@ export default function ProfileCreateScreen({ onBack }) {
         >
           {/* ヘッダー */}
           <View style={styles.panelHeader}>
-            <CocolonBackButton onPress={onBack} style={{ width: 72 }} />
+            <CocolonBackButton onPress={onBack} style={{ width: 44 }} />
 
             <Text style={styles.panelTitle}>ProfileCreate</Text>
 
-            <View style={{ width: 72 }} />
+
           </View>
 
           {/* 説明 */}
@@ -423,7 +423,7 @@ export default function ProfileCreateScreen({ onBack }) {
 
           {/* 質問リスト */}
           {loading ? (
-            <ActivityIndicator style={{ marginTop: 16 }} />
+            <ActivityIndicator color={colors.TEXT_SUBTLE} style={{ marginTop: 16 }} />
           ) : error ? (
             <Text style={styles.errorText}>{error}</Text>
           ) : questions.length === 0 ? (
@@ -457,7 +457,7 @@ export default function ProfileCreateScreen({ onBack }) {
                           <Ionicons
                             name="checkmark-circle-outline"
                             size={14}
-                            color={colors.ACCENT_TEXT}
+                            color={colors.ON_SURFACE_TONAL}
                             style={{ marginRight: 4 }}
                           />
                           <Text style={[styles.qStatusText, styles.qStatusTextAnswered]}>
@@ -465,7 +465,7 @@ export default function ProfileCreateScreen({ onBack }) {
                           </Text>
                         </View>
                       ) : (
-                        <View style={[styles.qStatusPill, { opacity: 0.7 }]}>
+                        <View style={styles.qStatusPill}>
                           <Ionicons
                             name="ellipse-outline"
                             size={14}
@@ -526,7 +526,7 @@ export default function ProfileCreateScreen({ onBack }) {
                           }}
                           style={[styles.input, { minWidth: 0, height: inputHeight }]}
                           placeholder={placeholder}
-                          placeholderTextColor={colors.TEXT_ON_LIGHT}
+                          placeholderTextColor={colors.TEXT_SUBTLE}
                           multiline
                           scrollEnabled
                           editable={!saving && q.can_edit}
@@ -583,7 +583,7 @@ export default function ProfileCreateScreen({ onBack }) {
                           <View style={styles.preferenceTextWrap}>
                             <Text style={styles.preferenceTitle}>シークレットメモ</Text>
                             <Text style={styles.preferenceDesc}>
-                              オンにするとピースに表示されません。{"\n"}分析レポートには反映されます。
+                              {introSecretToggleNote}
                             </Text>
                           </View>
                         </View>
@@ -591,18 +591,7 @@ export default function ProfileCreateScreen({ onBack }) {
                           value={isSecret}
                           onValueChange={(v) => setSecretValue(q.id, v)}
                           disabled={secretDisabled}
-                          trackColor={{
-                            false: "#D1D5DB",
-                            true: colors.GOLD_BUTTON,
-                          }}
-                          thumbColor={
-                            Platform.OS === "android"
-                              ? isSecret
-                                ? "#FFFFFF"
-                                : "#F9FAFB"
-                              : undefined
-                          }
-                          ios_backgroundColor="#D1D5DB"
+                          containerStyle={{ alignSelf: "flex-end" }}
                           accessibilityLabel="シークレットメモを切り替える"
                         />
                       </View>
@@ -625,10 +614,10 @@ export default function ProfileCreateScreen({ onBack }) {
                 <Ionicons
                   name="save-outline"
                   size={18}
-                  color="#FFFFFF"
+                  color={!canSave ? colors.TEXT_SUBTLE : colors.ACCENT_TEXT}
                   style={{ marginRight: 6 }}
                 />
-                <Text style={styles.goldButtonText}>保存する</Text>
+                <Text style={[styles.goldButtonText, { color: !canSave ? colors.TEXT_SUBTLE : colors.ACCENT_TEXT }]}>保存する</Text>
               </View>
             </CocolonButton>
 
@@ -647,213 +636,211 @@ function createStyles(COLORS, ui) {
 
   return StyleSheet.create(applyTypographyTokens({
     // ベース
-    container: { flex: 1, backgroundColor: COLORS.PANEL_BG },
+    container: {
+      flex: 1,
+      backgroundColor: COLORS.BG_SILVER,
+    },
     body: { flex: 1 },
     bodyContent: {
       paddingTop: 16,
       alignItems: "stretch",
-      paddingHorizontal: 18,
+      paddingHorizontal: 16,
       paddingBottom: 32,
+      flexGrow: 1,
+      width: "100%",
+      maxWidth: ui?.layout?.maxButtonWidth ?? 520,
+      alignSelf: "center",
     },
 
     // メインパネル
     panel: {
-      width: "94%",
-      minHeight: PANEL_MIN_HEIGHT,
-      backgroundColor: COLORS.PANEL_BG,
-      borderRadius: 26,
-      borderWidth: 2,
-      borderColor: COLORS.BORDER_GOLD,
-      paddingHorizontal: 18,
-      paddingVertical: 20,
+      width: "100%",
+      backgroundColor: COLORS.FIELD_BG,
+      borderRadius: ui?.radius?.card ?? 24,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
       shadowColor: "#000",
-      shadowOpacity: 0.24,
-      shadowRadius: 26,
-      shadowOffset: { width: 0, height: 16 },
-      elevation: 12,
+      shadowOpacity: 0,
+      shadowRadius: 0,
+      elevation: 0,
     },
 
     panelHeader: {
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-between",
-      marginBottom: 12,
+      flexDirection: "column",
+      alignItems: "stretch",
+      justifyContent: "flex-start",
+      marginBottom: 24,
+      gap: 8,
     },
     panelTitle: {
-      fontSize: font.title ?? 20,
-      fontWeight: "800",
-      color: COLORS.TITLE_GOLD,
-      letterSpacing: 0.8,
+      color: COLORS.TEXT_ON_LIGHT,
+      letterSpacing: 0,
+      flexShrink: 1,
+      minWidth: 0,
     },
 
     backPill: {
       flexDirection: "row",
       alignItems: "center",
       paddingHorizontal: 12,
-      paddingVertical: 6,
-      borderRadius: 999,
+      paddingVertical: 10,
+      borderRadius: ui?.radius?.button ?? 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
+      minHeight: 44,
     },
     backText: {
       marginLeft: 3,
-      fontSize: font.sectionLabel ?? 12,
-      fontWeight: "700",
-      color: text.sectionLabel ?? text.primary ?? COLORS.TEXT_ON_LIGHT,
+      color: COLORS.TEXT_ON_LIGHT,
     },
 
     introCard: {
-      borderRadius: 18,
+      borderRadius: ui?.radius?.card ?? 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 10,
-      marginBottom: 10,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
+      marginBottom: 24,
     },
     introTitle: {
-      fontSize: 13,
-      fontWeight: "800",
       color: COLORS.TEXT_ON_LIGHT,
-      marginBottom: 4,
+      marginBottom: 12,
     },
     introText: {
-      fontSize: 10,
-      lineHeight: 18,
       color: COLORS.TEXT_ON_LIGHT,
     },
     progressRow: {
-      marginTop: 8,
+      marginTop: 16,
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
+      flexWrap: "wrap",
+      gap: 8,
     },
     progressText: {
-      fontSize: font.sectionLabel ?? 12,
-      fontWeight: "800",
-      color: text.sectionLabel ?? text.primary ?? COLORS.TEXT_ON_LIGHT,
+      color: COLORS.TEXT_SUBTLE,
     },
     progressSubText: {
-      fontSize: 12,
-      color: COLORS.TEXT_ON_LIGHT,
-      opacity: 0.85,
+      color: COLORS.TEXT_SUBTLE,
     },
 
     pageTabsRow: {
       marginTop: 10,
       flexDirection: "row",
       alignItems: "center",
-      justifyContent: "center",
+      justifyContent: "flex-start",
       flexWrap: "wrap",
+      gap: 8,
     },
     pageTab: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
       paddingHorizontal: 12,
-      height: 32,
       borderRadius: 999,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
-      marginRight: 6,
-      marginBottom: 6,
+      marginRight: 0,
+      marginBottom: 0,
+      minHeight: 44,
+      paddingVertical: 10,
+      maxWidth: "100%",
     },
     pageTabActive: {
-      backgroundColor: COLORS.GOLD_BUTTON,
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      borderColor: COLORS.ON_SURFACE_TONAL,
     },
     pageTabLocked: {
-      opacity: 0.6,
+      backgroundColor: COLORS.FIELD_BG,
+      borderColor: COLORS.CARD_BORDER,
     },
     pageTabText: {
-      fontSize: 12,
-      fontWeight: "800",
       color: COLORS.TEXT_ON_LIGHT,
+      flexShrink: 1,
     },
     pageTabTextActive: {
-      color: COLORS.ACCENT_TEXT,
+      color: COLORS.ON_SURFACE_TONAL,
     },
 
     qBlock: {
-      marginBottom: 14,
-      padding: 12,
-      borderRadius: 18,
+      marginBottom: 16,
+      padding: 16,
+      borderRadius: ui?.radius?.card ?? 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
+      backgroundColor: COLORS.FIELD_BG,
     },
     qHeaderRow: {
       flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-between",
-      marginBottom: 6,
+      alignItems: "flex-start",
+      justifyContent: "flex-start",
+      marginBottom: 12,
+      flexWrap: "wrap",
+      gap: 8,
     },
     qLabel: {
-      fontSize: font.sectionLabel ?? 12,
-      fontWeight: "800",
-      color: text.sectionLabel ?? text.primary ?? COLORS.TEXT_ON_LIGHT,
+      color: COLORS.TEXT_SUBTLE,
     },
     qStatusPill: {
       flexDirection: "row",
-      alignItems: "center",
+      alignItems: "flex-start",
       paddingHorizontal: 10,
       paddingVertical: 6,
       borderRadius: 999,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
+      maxWidth: "100%",
     },
     qStatusPillAnswered: {
-      backgroundColor: COLORS.GOLD_BUTTON,
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      borderColor: COLORS.SURFACE_TONAL,
     },
     qStatusText: {
-      fontSize: 11,
-      fontWeight: "700",
-      color: COLORS.TEXT_ON_LIGHT,
+      color: COLORS.TEXT_SUBTLE,
+      flexShrink: 1,
     },
     qStatusTextAnswered: {
-      color: COLORS.ACCENT_TEXT,
+      color: COLORS.ON_SURFACE_TONAL,
     },
     qText: {
-      fontSize: font.body ?? 14,
-      lineHeight: 20,
-      fontWeight: "700",
-      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
-      marginBottom: 6,
+      color: COLORS.TEXT_ON_LIGHT,
+      marginBottom: 12,
     },
 
     inputCard: {
       flexDirection: "row",
       alignItems: "flex-start",
       backgroundColor: COLORS.FIELD_BG,
-      borderRadius: 18,
+      borderRadius: 16,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       paddingHorizontal: 12,
       paddingVertical: 10,
       shadowColor: "#000",
-      shadowOpacity: 0.08,
-      shadowRadius: 10,
-      shadowOffset: { width: 0, height: 4 },
-      elevation: 4,
+      shadowOpacity: 0,
+      shadowRadius: 0,
+      elevation: 0,
     },
     inputPreviewCard: {
       flexDirection: "row",
       alignItems: "center",
       backgroundColor: COLORS.FIELD_BG,
-      borderRadius: 18,
+      borderRadius: 16,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       paddingHorizontal: 12,
       paddingVertical: 10,
       shadowColor: "#000",
-      shadowOpacity: 0.08,
-      shadowRadius: 10,
-      shadowOffset: { width: 0, height: 4 },
-      elevation: 4,
+      shadowOpacity: 0,
+      shadowRadius: 0,
+      elevation: 0,
+      minHeight: 52,
     },
     inputIcon: {
       marginTop: 4,
@@ -861,32 +848,30 @@ function createStyles(COLORS, ui) {
     },
     input: {
       flex: 1,
-      fontSize: font.body ?? 14,
-      color: text.primary ?? COLORS.TEXT_ON_LIGHT,
+      color: COLORS.TEXT_ON_LIGHT,
       textAlignVertical: "top",
+      minWidth: 0,
     },
     previewText: {
       flex: 1,
-      fontSize: 13,
       color: COLORS.TEXT_ON_LIGHT,
+      minWidth: 0,
     },
     previewPlaceholder: {
-      opacity: 0.65,
+      color: COLORS.TEXT_SUBTLE,
     },
 
     lockedCard: {
       marginTop: 10,
-      borderRadius: 18,
+      borderRadius: 16,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 10,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
     },
     lockedText: {
-      fontSize: 11,
-      lineHeight: 16,
-      color: COLORS.TEXT_ON_LIGHT,
+      color: COLORS.TEXT_SUBTLE,
       marginBottom: 10,
     },
     lockedBtn: {
@@ -894,17 +879,19 @@ function createStyles(COLORS, ui) {
       flexDirection: "row",
       alignItems: "center",
       paddingHorizontal: 12,
-      paddingVertical: 8,
+      paddingVertical: 10,
       borderRadius: 999,
       borderWidth: 1,
-      borderColor: COLORS.GOLD_BUTTON_BORDER,
-      backgroundColor: COLORS.GOLD_BUTTON,
+      borderColor: COLORS.SURFACE_TONAL,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      minHeight: 44,
+      maxWidth: "100%",
     },
     lockedBtnText: {
       marginLeft: 6,
-      fontSize: 12,
-      fontWeight: "800",
-      color: "#FFFFFF",
+      color: COLORS.ON_SURFACE_TONAL,
+      flexShrink: 1,
+      textAlign: "center",
     },
 
     /**
@@ -912,25 +899,27 @@ function createStyles(COLORS, ui) {
      * - InputScreen の「シークレットメモ」と同じ見た目
      */
     preferenceCard: {
-      marginTop: 10,
-      borderRadius: 14,
+      marginTop: 12,
+      borderRadius: 16,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
       overflow: "hidden",
     },
     preferenceRow: {
-      flexDirection: "row",
-      alignItems: "center",
+      flexDirection: "column",
+      alignItems: "stretch",
       justifyContent: "space-between",
       paddingHorizontal: 12,
-      paddingVertical: 10,
+      paddingVertical: 16,
+      gap: 12,
     },
     preferenceLeft: {
       flexDirection: "row",
       alignItems: "flex-start",
-      flex: 1,
-      paddingRight: 12,
+      paddingRight: 0,
+      alignSelf: "stretch",
+      minWidth: 0,
     },
     preferenceIcon: {
       marginTop: 2,
@@ -938,21 +927,18 @@ function createStyles(COLORS, ui) {
     },
     preferenceTextWrap: {
       flex: 1,
+      minWidth: 0,
     },
     preferenceTitle: {
-      fontSize: 13,
-      fontWeight: "700",
       color: COLORS.TEXT_ON_LIGHT,
     },
     preferenceDesc: {
-      marginTop: 2,
-      fontSize: font.description ?? 9,
-      lineHeight: 15,
-      color: text.description ?? COLORS.TEXT_ON_LIGHT,
+      marginTop: 4,
+      color: COLORS.TEXT_SUBTLE,
     },
 
     actions: {
-      marginTop: 6,
+      marginTop: 8,
       alignItems: "stretch",
     },
 
@@ -960,32 +946,36 @@ function createStyles(COLORS, ui) {
       width: "100%",
       paddingVertical: 12,
       paddingHorizontal: 28,
-      borderRadius: 999,
+      borderRadius: ui?.radius?.button ?? 24,
       borderWidth: 1,
       borderColor: COLORS.GOLD_BUTTON_BORDER,
       backgroundColor: COLORS.GOLD_BUTTON,
       alignItems: "center",
       justifyContent: "center",
       shadowColor: "#000",
-      shadowOpacity: 0.22,
-      shadowRadius: 14,
-      shadowOffset: { width: 0, height: 6 },
-      elevation: 8,
+      shadowOpacity: 0,
+      shadowRadius: 0,
+      elevation: 0,
       marginTop: 6,
+      minHeight: 52,
+      maxWidth: ui?.layout?.maxButtonWidth ?? 520,
+      alignSelf: "center",
     },
     goldButtonDisabled: {
-      opacity: 0.5,
-      shadowOpacity: 0.05,
+      shadowOpacity: 0,
+      backgroundColor: COLORS.FIELD_BG,
+      borderColor: COLORS.CARD_BORDER,
     },
     goldButtonText: {
-      color: "#FFFFFF",
-      fontWeight: "700",
-      fontSize: 15,
+      color: COLORS.ACCENT_TEXT,
+      flexShrink: 1,
+      textAlign: "center",
     },
     btnRow: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "center",
+      maxWidth: "100%",
     },
 
     ghostButton: {
@@ -993,36 +983,32 @@ function createStyles(COLORS, ui) {
       width: "100%",
       paddingVertical: 12,
       paddingHorizontal: 22,
-      borderRadius: 999,
+      borderRadius: ui?.radius?.button ?? 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.FIELD_BG,
       alignItems: "center",
       justifyContent: "center",
+      minHeight: 52,
     },
     ghostButtonText: {
-      fontSize: 13,
-      fontWeight: "700",
       color: COLORS.TEXT_ON_LIGHT,
+      flexShrink: 1,
+      textAlign: "center",
     },
 
     successText: {
       marginTop: 12,
-      fontSize: 12,
-      lineHeight: 18,
       color: COLORS.TEXT_ON_LIGHT,
     },
 
     errorText: {
       marginTop: 12,
-      color: "#B91C1C",
-      fontSize: 12,
-      lineHeight: 18,
+      color: COLORS.ERROR,
     },
     emptyText: {
       marginTop: 12,
-      fontSize: 12,
-      color: COLORS.TEXT_ON_LIGHT,
+      color: COLORS.TEXT_SUBTLE,
     },
-  }, ui));
+  }, ui, {"panelTitle":"screenTitle","backText":"button","introTitle":"sectionTitle","introText":"body","progressText":"description","progressSubText":"description","pageTabText":"button","qLabel":"meta","qStatusText":"meta","qText":"body","input":"input","previewText":"body","lockedText":"description","lockedBtnText":"button","preferenceTitle":"body","preferenceDesc":"description","goldButtonText":"button","ghostButtonText":"button","successText":"body","errorText":"description","emptyText":"description"}));
 }

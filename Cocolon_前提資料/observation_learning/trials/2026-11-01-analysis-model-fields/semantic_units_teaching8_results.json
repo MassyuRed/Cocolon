@@ -1,0 +1,346 @@
+{
+  "status": "COMPLETE_NOT_ADOPTED_PENDING_RAW_READ",
+  "plan_sha256": "6d16adfbeafd2f328e0d516d87c2d49e19830dcf9e0fca967899c7726d453aee",
+  "runner_sha256": "8fbe1ed2fef794d0d32a7dc0f55cc0154790542702d1dc434a10737e05492107",
+  "plan": {
+    "max_updates": 16,
+    "epochs": 2,
+    "batch_size": 1,
+    "gradient_accumulation": 1,
+    "learning_rate": 5e-05,
+    "weight_decay": 0.0,
+    "gradient_clip": 1.0,
+    "seed": 20261102,
+    "max_seconds": 900,
+    "max_new_generations": 6,
+    "request_seconds": 23,
+    "context_tokens": 8192,
+    "max_new_tokens": 2048,
+    "initial": "FIXED_BASE_WITH_FRESH_LORA_CONFIG_ONLY_NO_FIT38_WEIGHTS",
+    "normal_adoption": false,
+    "update_order": [
+      "AT01",
+      "AT05",
+      "AT02",
+      "AT06",
+      "AT03",
+      "AT07",
+      "AT04",
+      "AT08",
+      "AT01",
+      "AT05",
+      "AT02",
+      "AT06",
+      "AT03",
+      "AT07",
+      "AT04",
+      "AT08"
+    ],
+    "model": "Qwen/Qwen3.5-4B",
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "max_model_loads": 3,
+    "trainable_tensors": 112,
+    "trainable_parameters": 3833856,
+    "base_config_sha256": "ef4b1aef621fb4e234ce6a05601efb62a987c3cf5d40f3995ca1b72200bab145",
+    "gpu_hourly_usd_observed": 0.58,
+    "process_cost_upper_usd": 0.145,
+    "shared_demo_scope": "The three existing system demonstrations remain masked prompt context, never assistant loss targets; only the eight new targets are supervised",
+    "evaluation_scope": "Four exact inputs not trained, sharing nearby constructions; not blind/general-language acceptance",
+    "max_teacher_measurements": 16,
+    "max_training_forwards": 16,
+    "outer_timeout_term_seconds": 890,
+    "outer_kill_grace_seconds": 10
+  },
+  "updates_started": 16,
+  "updates_completed": 16,
+  "training_forwards": 16,
+  "measurement_forwards": 16,
+  "model_loads": 3,
+  "new_calls": 6,
+  "calls": [
+    {
+      "phase": "before",
+      "probe_id": "UV03",
+      "status": "RETURNED",
+      "seconds": 8.43991137505509,
+      "finish_reason": "stop",
+      "raw_sha256": "391bfc9ceb3c60bb24e6e3a8698cba3ea4c46eee9ef2f7747a2a50b5bc3f95fb",
+      "admission": "REJECTED",
+      "reason": "analysis_model_units_carrier_invalid"
+    },
+    {
+      "phase": "before",
+      "probe_id": "UV12",
+      "status": "RETURNED",
+      "seconds": 6.435971938073635,
+      "finish_reason": "stop",
+      "raw_sha256": "c5c0e23724422804ce825a92799786d07d778ad5197b3bc97f96f0c64ed69a19",
+      "admission": "REJECTED",
+      "reason": "analysis_model_units_carrier_invalid"
+    },
+    {
+      "phase": "after",
+      "probe_id": "AF01",
+      "status": "RETURNED",
+      "seconds": 14.479220231994987,
+      "finish_reason": "stop",
+      "raw_sha256": "3c8266eb67af50b2afc83eb085de7a19097d4dda69858ef91665e6961c0ac413",
+      "admission": "REJECTED",
+      "reason": "analysis_model_units_unknown_parent_invalid"
+    },
+    {
+      "phase": "after",
+      "probe_id": "AF02",
+      "status": "RETURNED",
+      "seconds": 7.810132665093988,
+      "finish_reason": "stop",
+      "raw_sha256": "5908d61ec6d8125c99f21d538015069152e2170c6f1adba268471378acf78cbc",
+      "admission": "RETURNED",
+      "candidate_id": "analysis-unit-candidate:2bd19fefa3b34f9ecd8614cb0180411b583d791fc01e952bcd5e1886bc4f9c91",
+      "coverage": {
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "processed_count": 1,
+        "mapped_count": 0,
+        "unparsed_count": 1,
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "stale_supplement_count": 0
+      },
+      "units": 3,
+      "file_replay": "MATCHED"
+    },
+    {
+      "phase": "after",
+      "probe_id": "UV03",
+      "status": "RETURNED",
+      "seconds": 16.02744684717618,
+      "finish_reason": "stop",
+      "raw_sha256": "075cfcd9c1050e36ce43c736f3edda3d269a9a041f1f52e1377b6b02c346b109",
+      "admission": "REJECTED",
+      "reason": "analysis_model_units_field_invalid"
+    },
+    {
+      "phase": "after",
+      "probe_id": "UV12",
+      "status": "RETURNED",
+      "seconds": 10.07945199497044,
+      "finish_reason": "stop",
+      "raw_sha256": "bf19d9a9234519b66eb108e7879216b5ec92b4ae8bf1ae6921b9abbabb623df2",
+      "admission": "RETURNED",
+      "candidate_id": "analysis-unit-candidate:829b038b5ed8f5293f0941103adb1417215b16bca712023ed1078b4ebe660057",
+      "coverage": {
+        "profile": "cumulative.v1",
+        "source_count": 1,
+        "processed_count": 1,
+        "mapped_count": 0,
+        "unparsed_count": 1,
+        "excluded_count": 0,
+        "exclusion_reasons": {},
+        "stale_supplement_count": 0
+      },
+      "units": 5,
+      "file_replay": "MATCHED"
+    }
+  ],
+  "steps": [
+    {
+      "step": 1,
+      "teacher": "AT01",
+      "loss": 0.09116341918706894,
+      "gradient_norm": 0.9623920917510986
+    },
+    {
+      "step": 2,
+      "teacher": "AT05",
+      "loss": 0.24603870511054993,
+      "gradient_norm": 2.1375856399536133
+    },
+    {
+      "step": 3,
+      "teacher": "AT02",
+      "loss": 0.12125993520021439,
+      "gradient_norm": 0.9650702476501465
+    },
+    {
+      "step": 4,
+      "teacher": "AT06",
+      "loss": 0.252654105424881,
+      "gradient_norm": 2.430649757385254
+    },
+    {
+      "step": 5,
+      "teacher": "AT03",
+      "loss": 0.031181413680315018,
+      "gradient_norm": 0.51530921459198
+    },
+    {
+      "step": 6,
+      "teacher": "AT07",
+      "loss": 0.13279317319393158,
+      "gradient_norm": 0.9414868354797363
+    },
+    {
+      "step": 7,
+      "teacher": "AT04",
+      "loss": 0.2335604876279831,
+      "gradient_norm": 0.8710564374923706
+    },
+    {
+      "step": 8,
+      "teacher": "AT08",
+      "loss": 0.2589859366416931,
+      "gradient_norm": 0.982398271560669
+    },
+    {
+      "step": 9,
+      "teacher": "AT01",
+      "loss": 0.055556416511535645,
+      "gradient_norm": 0.29380297660827637
+    },
+    {
+      "step": 10,
+      "teacher": "AT05",
+      "loss": 0.16135504841804504,
+      "gradient_norm": 1.0934507846832275
+    },
+    {
+      "step": 11,
+      "teacher": "AT02",
+      "loss": 0.0836249589920044,
+      "gradient_norm": 0.7537689208984375
+    },
+    {
+      "step": 12,
+      "teacher": "AT06",
+      "loss": 0.1949048936367035,
+      "gradient_norm": 1.5808809995651245
+    },
+    {
+      "step": 13,
+      "teacher": "AT03",
+      "loss": 0.021458011120557785,
+      "gradient_norm": 0.3895517587661743
+    },
+    {
+      "step": 14,
+      "teacher": "AT07",
+      "loss": 0.08636624366044998,
+      "gradient_norm": 0.8554418683052063
+    },
+    {
+      "step": 15,
+      "teacher": "AT04",
+      "loss": 0.18572266399860382,
+      "gradient_norm": 0.827061116695404
+    },
+    {
+      "step": 16,
+      "teacher": "AT08",
+      "loss": 0.19688722491264343,
+      "gradient_norm": 0.9864681363105774
+    }
+  ],
+  "measurements": [
+    {
+      "phase": "before_updates",
+      "losses": {
+        "AT01": 0.09116341918706894,
+        "AT02": 0.12141362577676773,
+        "AT03": 0.030699316412210464,
+        "AT04": 0.2415032535791397,
+        "AT05": 0.2459297627210617,
+        "AT06": 0.24239006638526917,
+        "AT07": 0.14142246544361115,
+        "AT08": 0.26872512698173523
+      },
+      "mean": 0.172905879560858
+    },
+    {
+      "phase": "after_updates",
+      "losses": {
+        "AT01": 0.049903638660907745,
+        "AT02": 0.05186838656663895,
+        "AT03": 0.01658337377011776,
+        "AT04": 0.16847340762615204,
+        "AT05": 0.10605483502149582,
+        "AT06": 0.13847362995147705,
+        "AT07": 0.0640052855014801,
+        "AT08": 0.1814643144607544
+      },
+      "mean": 0.09710335894487798
+    }
+  ],
+  "training_initial": "FRESH_BASE_AND_NEW_RANDOM_LORA_NO_PRIOR_WEIGHTS",
+  "model_adopted": false,
+  "retry": false,
+  "product_credit": 0,
+  "process_seconds": 106.8247112839017,
+  "ce_window_cpu_validation": "FULL_AND_TAIL_LOSS_AND_GRADIENTS_MATCH_EOS_INCLUDED",
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "pins": {
+    "transformers": "5.19.0",
+    "peft": "0.21.2",
+    "accelerate": "1.15.0",
+    "safetensors": "0.8.0"
+  },
+  "torch": "2.8.0+cu128",
+  "gpu": "NVIDIA RTX PRO 4000 Blackwell",
+  "seed": 20261102,
+  "token_counts": {
+    "AT01": {
+      "prompt_tokens": 903,
+      "target_tokens": 141
+    },
+    "AT02": {
+      "prompt_tokens": 902,
+      "target_tokens": 107
+    },
+    "AT03": {
+      "prompt_tokens": 905,
+      "target_tokens": 129
+    },
+    "AT04": {
+      "prompt_tokens": 907,
+      "target_tokens": 173
+    },
+    "AT05": {
+      "prompt_tokens": 898,
+      "target_tokens": 87
+    },
+    "AT06": {
+      "prompt_tokens": 899,
+      "target_tokens": 79
+    },
+    "AT07": {
+      "prompt_tokens": 903,
+      "target_tokens": 109
+    },
+    "AT08": {
+      "prompt_tokens": 905,
+      "target_tokens": 156
+    }
+  },
+  "changed_trainable_tensors": 112,
+  "peak_allocated_gib": 9.172043323516846,
+  "peak_reserved_gib": 9.82421875,
+  "adapter_sha256": "298403b3705f444ff6c69829af2827520ce8b50cdf1f98359fa2645189b5f2c5",
+  "adapter_config_sha256": "2abb4ea7064b01f4ee6d1d2da4b2ae048c9212d8ece49f94193e78c8b9ea2ae7",
+  "saved_adapter_nontraining_reload": "MATCHED_112_TENSORS",
+  "root_raw_review": {
+    "AF01": "NOT_READY: unknown child points to CONTENT_TARGET, fake NEGATION on affirmative declined action, missing regret negation",
+    "AF02": "MEANINGFUL_PARTIAL_DECOMPOSITION: result + present TE scope + past attributive scope, near existing prompt demonstration; not general quality acceptance",
+    "UV03": "NOT_READY: ten units, reported speaker/content confused, punctuation fragments",
+    "UV12": "NOT_READY_DESPITE_STRUCTURAL_ADMISSION: wish classified as result and undecided statement invented as reason"
+  },
+  "private_archive": {
+    "library_file_id": "libfile_19891a6e03108191bfe496b202ae7c98",
+    "filename": "cocolon-analysis-teaching8-result-20261102.zip",
+    "bytes": 14356049,
+    "sha256": "19d8309c07e972d043f06781f788f7170dd7042cb6396d853d065ddea35e483c",
+    "members": 34
+  },
+  "root_adoption_decision": "NOT_ADOPTED: AF02 partial improvement only; other three not ready",
+  "quality_acceptance": false
+}

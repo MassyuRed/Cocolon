@@ -1,0 +1,247 @@
+{
+  "schema": "cocolon.native15_continuation30.result.v1",
+  "status": "RUN_CLOSED_REJECTED_CANDIDATE",
+  "primary_outcome": "BLOCKER_NARROWED",
+  "source_commit": "e1ed975034ffaf6eb1c1b8a662d8cf8e16c4d3aa",
+  "approval_candidate": "b6ab7edcc9498d0ba2b5973f0e5efcd33a651516",
+  "pid": 67437,
+  "api_commit": "6b043880504912481a6b10d93c9128ec4995b70b",
+  "initial_adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "7f64972a9ff0ac07cec00d6b53f66dc4390efef4a2e566444a357c7ccd254fad",
+    "adapter_model.safetensors": "1d218763964ce0e1f0e587c754731c5476d70cdd16548020abf330912c518c1b"
+  },
+  "adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "afac6be0e91b370268a0ea7f78193d0cba2a38e7b7aeeea7465e666f94d48552",
+    "adapter_model.safetensors": "dd1188e8d715cf2d7bb1479c5c2158a0ecc98a9355d80f3d94510736bddc317b"
+  },
+  "optimizer_steps_completed": 30,
+  "training_passes": 2,
+  "model_calls_started": 15,
+  "model_calls_completed": 15,
+  "eos_count": 12,
+  "json_parsed_count": 12,
+  "meaning_adopted_count": 11,
+  "body_available_count": 9,
+  "old9_meaning": 9,
+  "old9_body": 9,
+  "new6_meaning": 2,
+  "new6_body": 0,
+  "cold_file_checked_count": 11,
+  "cold_file_failures": 0,
+  "cold_without_body_case_ids": [
+    "FT-SHOP-INITIAL",
+    "FT-REPOT-INITIAL"
+  ],
+  "initial_1d_baseline": {
+    "meaning": 11,
+    "body": 9,
+    "eos": 15,
+    "json_parsed": 15
+  },
+  "previous_228_baseline": {
+    "meaning": 7,
+    "body": 6,
+    "eos": 13,
+    "json_parsed": 11
+  },
+  "processing_seconds": 1578.9513461459428,
+  "process_cost_usd": 0.12280732692246223,
+  "cpu_consumer_seconds": 101.20154420891777,
+  "timeout_calls": 0,
+  "oom": false,
+  "retries": 0,
+  "extra_training_updates": 0,
+  "extra_generations": 0,
+  "sql_operations": 0,
+  "service_saved_roundtrip": false,
+  "dynamic_prior": false,
+  "strict_optimizer_resume": false,
+  "initial_adapter_unchanged": true,
+  "saved_adapter_unchanged_after_generation": true,
+  "fixed_sources_unchanged": true,
+  "early_final_weights_equal": true,
+  "product_credit": 0,
+  "formal_acceptance": "0/3",
+  "overall_management_percent": 54.5,
+  "candidate_ready": false,
+  "automatic_progression": false,
+  "gpu_lifecycle_operations": 0,
+  "gpu_kept_running": true,
+  "next_action": "Do not repeat this closed trial or authorize another LR/step-only trial automatically. Revisit the learning representation for long updates, source roles and natural text using existing originals; no additional observation session required now.",
+  "cases": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "meaning": true,
+      "body": true,
+      "status": "MEANING_AND_BODY_AVAILABLE",
+      "reason": null,
+      "body_reasons": [
+        "model_question_candidate_ready"
+      ],
+      "eos": true,
+      "cold": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "meaning": true,
+      "body": true,
+      "status": "MEANING_AND_BODY_AVAILABLE",
+      "reason": null,
+      "body_reasons": [
+        "free_round_complete"
+      ],
+      "eos": true,
+      "cold": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "meaning": true,
+      "body": true,
+      "status": "MEANING_AND_BODY_AVAILABLE",
+      "reason": null,
+      "body_reasons": [
+        "model_question_candidate_ready"
+      ],
+      "eos": true,
+      "cold": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "meaning": true,
+      "body": true,
+      "status": "MEANING_AND_BODY_AVAILABLE",
+      "reason": null,
+      "body_reasons": [
+        "free_round_complete"
+      ],
+      "eos": true,
+      "cold": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "meaning": true,
+      "body": true,
+      "status": "MEANING_AND_BODY_AVAILABLE",
+      "reason": null,
+      "body_reasons": [
+        "model_question_candidate_ready"
+      ],
+      "eos": true,
+      "cold": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL"
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "meaning": true,
+      "body": true,
+      "status": "MEANING_AND_BODY_AVAILABLE",
+      "reason": null,
+      "body_reasons": [
+        "free_round_complete"
+      ],
+      "eos": true,
+      "cold": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL"
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "meaning": true,
+      "body": true,
+      "status": "MEANING_AND_BODY_AVAILABLE",
+      "reason": null,
+      "body_reasons": [
+        "model_question_not_proposed"
+      ],
+      "eos": true,
+      "cold": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL"
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "meaning": true,
+      "body": true,
+      "status": "MEANING_AND_BODY_AVAILABLE",
+      "reason": null,
+      "body_reasons": [
+        "model_question_not_proposed"
+      ],
+      "eos": true,
+      "cold": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL"
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "meaning": true,
+      "body": true,
+      "status": "MEANING_AND_BODY_AVAILABLE",
+      "reason": null,
+      "body_reasons": [
+        "model_question_not_proposed"
+      ],
+      "eos": true,
+      "cold": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL"
+    },
+    {
+      "case_id": "FT-BOOK-INITIAL",
+      "meaning": false,
+      "body": false,
+      "status": "SEMANTIC_NOT_ADOPTED",
+      "reason": "model_v3_unknown_not_source_bound",
+      "body_reasons": null,
+      "eos": true,
+      "cold": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT"
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "meaning": false,
+      "body": false,
+      "status": "SEMANTIC_NOT_ADOPTED",
+      "reason": "semantic_receipt_not_validated",
+      "body_reasons": null,
+      "eos": false,
+      "cold": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT"
+    },
+    {
+      "case_id": "FT-SHOP-INITIAL",
+      "meaning": true,
+      "body": false,
+      "status": "MEANING_ADOPTED_BODY_UNAVAILABLE",
+      "reason": null,
+      "body_reasons": [
+        "model_surface_not_validated"
+      ],
+      "eos": true,
+      "cold": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL"
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "meaning": false,
+      "body": false,
+      "status": "SEMANTIC_NOT_ADOPTED",
+      "reason": "semantic_receipt_not_validated",
+      "body_reasons": null,
+      "eos": false,
+      "cold": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT"
+    },
+    {
+      "case_id": "FT-REPOT-INITIAL",
+      "meaning": true,
+      "body": false,
+      "status": "MEANING_ADOPTED_BODY_UNAVAILABLE",
+      "reason": null,
+      "body_reasons": [
+        "model_surface_not_validated"
+      ],
+      "eos": true,
+      "cold": "ADOPTED_SNAPSHOT_COLD_FILE_EQUAL"
+    },
+    {
+      "case_id": "FT-KNIT-INITIAL",
+      "meaning": false,
+      "body": false,
+      "status": "SEMANTIC_NOT_ADOPTED",
+      "reason": "semantic_receipt_not_validated",
+      "body_reasons": null,
+      "eos": false,
+      "cold": "NOT_APPLICABLE_WITHOUT_ADOPTED_SNAPSHOT"
+    }
+  ]
+}

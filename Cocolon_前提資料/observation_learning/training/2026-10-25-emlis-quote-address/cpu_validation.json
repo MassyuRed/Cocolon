@@ -1,0 +1,53 @@
+{
+  "scope": "Explicit offline quote-format source/receipt/body/storage CPU validation; synthetic providers, no actual model/GPU/production DB",
+  "api_commit": "4002b4577838d1ed6671278a19585b61e7ccd10e",
+  "unique_tests_passed": 197,
+  "new_model_calls": 0,
+  "new_training_updates": 0,
+  "runs": [
+    {
+      "selection": "existing preparation/model_source/daily/model_proposal plus initial quote tests",
+      "passed": 195,
+      "failed": 0,
+      "warnings": 1,
+      "seconds": 25.88
+    },
+    {
+      "selection": "quote tests after adding initial-meaning interruption cases",
+      "passed": 32,
+      "failed": 2,
+      "warnings": 1,
+      "seconds": 12.75,
+      "failure": "Test incorrectly treated initial meaning as answer-update DTO meaning_updated. Actual saved meaning existed; production unchanged."
+    },
+    {
+      "selection": "three selected quote SQL cases after test expectation correction",
+      "passed": 3,
+      "failed": 0,
+      "deselected": 31,
+      "warnings": 1,
+      "seconds": 11.47
+    }
+  ],
+  "counting": "195 original unique tests plus2new interruption variants; repeated cases not added.",
+  "synthetic_teacher_connection": {
+    "meaning_count": 9,
+    "body_count": 9,
+    "model_calls": 0,
+    "raw_repaired": false,
+    "native_packet_unchanged": true,
+    "legacy_chair_rows_byte_equal": 6
+  },
+  "runtime": {
+    "python": "3.12.14",
+    "pytest": "8.4.1",
+    "pydantic": "2.11.7",
+    "fastapi": "0.140.0",
+    "httpx": "0.28.1",
+    "pglite": "0.5.8",
+    "installation": false
+  },
+  "review": "Separate-context read-only review found no blocker; not independent Pro/Ultra or human product acceptance",
+  "product_accepted": false,
+  "automatic_progression": false
+}

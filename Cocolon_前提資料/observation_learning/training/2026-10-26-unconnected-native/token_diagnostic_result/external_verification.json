@@ -1,0 +1,33 @@
+{
+  "schema": "cocolon.token_diagnostic.external_verification.v1",
+  "archive": {
+    "file": "diagnostic_evidence_20261027.zip",
+    "bytes": 1032831,
+    "sha256": "d2b94c69157c0976e6835f3e571d3b271979649ad66cec7519c500ddc29b7fae",
+    "git_blob_sha1": "80c9c0b155b399f77761ec40a31570259a6dd2ce",
+    "payloads": 44,
+    "members": 45,
+    "crc_ok": true,
+    "all_payload_size_sha256_match": true,
+    "all_extracted_payload_bytes_match": true
+  },
+  "all_112_tensors_exact": true,
+  "all_parameters_no_grad_and_no_gradients": true,
+  "source_base_metadata_adapter_payload_hashes_unchanged": true,
+  "base_whole_shards_rehashed": false,
+  "no_adapter_weights_in_this_archive": true,
+  "adapter_ownership": "unchanged109c saved in expanded30_result / expanded15_recovery_result prior permanent archive",
+  "post_run_jupyter_readback": {
+    "worker_pid": 171619,
+    "worker_present": false,
+    "gpu_name": "NVIDIA RTX A5000",
+    "gpu_memory_used_mib": 1,
+    "gpu_memory_total_mib": 24564,
+    "gpu_kept_running": true,
+    "gpu_lifecycle_operations": 0
+  },
+  "model_reexecution_for_analysis": false,
+  "root_independent_aggregation_verified": true,
+  "read_only_assistant_reviews": 2,
+  "formal_human_acceptance": false
+}

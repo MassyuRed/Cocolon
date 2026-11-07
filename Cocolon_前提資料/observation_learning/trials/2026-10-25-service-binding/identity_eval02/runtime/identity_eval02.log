@@ -1,0 +1,12 @@
+Loading weights:   0%|          | 0/723 [00:00<?, ?it/s]Loading weights:   3%|▎         | 25/723 [00:00<00:03, 229.77it/s]Loading weights:   9%|▉         | 64/723 [00:00<00:02, 305.32it/s]Loading weights:  14%|█▎        | 98/723 [00:00<00:01, 318.82it/s]Loading weights:  19%|█▊        | 134/723 [00:00<00:01, 331.21it/s]Loading weights:  24%|██▍       | 172/723 [00:00<00:01, 344.59it/s]Loading weights:  29%|██▊       | 207/723 [00:00<00:01, 337.21it/s]Loading weights:  34%|███▍      | 248/723 [00:00<00:01, 347.33it/s]Loading weights:  40%|███▉      | 288/723 [00:00<00:01, 359.84it/s]Loading weights:  45%|████▍     | 325/723 [00:00<00:01, 360.31it/s]Loading weights:  50%|█████     | 363/723 [00:01<00:00, 361.33it/s]Loading weights:  56%|█████▌    | 406/723 [00:01<00:00, 377.61it/s]Loading weights:  72%|███████▏  | 518/723 [00:01<00:00, 594.59it/s]Loading weights:  99%|█████████▉| 718/723 [00:01<00:00, 1008.87it/s]Loading weights: 100%|██████████| 723/723 [00:01<00:00, 530.94it/s] 
+MODEL_RELOADED_INFERENCE_ONLY
+MODEL_CALL_STARTED initial
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `fused_recurrent_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+MODEL_CALL_COMPLETED initial stop
+MODEL_CALL_STARTED correction
+MODEL_CALL_COMPLETED correction stop
+{"status": "KNOWN_REAL_MODEL_OFFLINE_SERVICE_SQL_ROUNDTRIP_COMPLETE_NOT_PRODUCT_ACCEPTED", "model_calls_started": 2, "model_calls_completed": 2, "service_saved_roundtrip": true, "seconds": 210.9396560722962}
+ARCHIVE_SHA256 4ab744398967b6e98b484e7bd76a1556e204b3161646a079441c73c583b87f58

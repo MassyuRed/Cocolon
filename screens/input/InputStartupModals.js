@@ -1,5 +1,7 @@
+import { MODAL_ORIENTATIONS } from "../../ui/uiTokens";
 import React from "react";
-import { Modal, Text, View } from "react-native";
+import { Modal, ScrollView, Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import CocolonButton from "../../components/CocolonButton";
@@ -70,9 +72,11 @@ export default function InputStartupModals({
         transparent
         animationType="fade"
         onRequestClose={() => {}}
+        supportedOrientations={MODAL_ORIENTATIONS}
       >
-        <View style={styles.draftRestoreBackdrop}>
+        <SafeAreaView edges={["top", "bottom", "left", "right"]} style={styles.draftRestoreBackdrop}>
           <View style={styles.draftRestoreCard}>
+            <ScrollView style={{ flexShrink: 1 }}>
             <View style={styles.draftRestoreBadgeRow}>
               <View style={styles.draftRestoreBadge}>
                 <Ionicons
@@ -112,6 +116,7 @@ export default function InputStartupModals({
               </Text>
             </View>
 
+            </ScrollView>
             <View style={styles.draftRestoreActionColumn}>
               <CocolonButton
                 variant="primary"
@@ -131,7 +136,7 @@ export default function InputStartupModals({
               </View>
             </View>
           </View>
-        </View>
+        </SafeAreaView>
       </Modal>
     </>
   );

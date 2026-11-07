@@ -1,0 +1,211 @@
+{
+  "status": "CPU_TRAIN_INFER_ALIGNMENT_READ_COMPLETE",
+  "cases": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "changed_owner_paths": [
+        "prior_adopted_interpretation.meaning_packet.a",
+        "prior_adopted_interpretation.meaning_packet.q",
+        "prior_adopted_interpretation.meaning_packet.c.claims",
+        "prior_adopted_interpretation.meaning_packet.c.relations",
+        "output_spec.output_types"
+      ],
+      "exact_changed_paths": [
+        "output_spec.output_types",
+        "prior_adopted_interpretation.meaning_packet.a",
+        "prior_adopted_interpretation.meaning_packet.c.claims[0]",
+        "prior_adopted_interpretation.meaning_packet.c.claims[1]",
+        "prior_adopted_interpretation.meaning_packet.c.claims[2]",
+        "prior_adopted_interpretation.meaning_packet.c.claims[3]",
+        "prior_adopted_interpretation.meaning_packet.c.relations[0]",
+        "prior_adopted_interpretation.meaning_packet.c.relations[1]",
+        "prior_adopted_interpretation.meaning_packet.q[0]",
+        "prior_adopted_interpretation.meaning_packet.q[1]",
+        "prior_adopted_interpretation.meaning_packet.q[2]",
+        "prior_adopted_interpretation.meaning_packet.q[3]",
+        "prior_adopted_interpretation.meaning_packet.q[4]",
+        "prior_adopted_interpretation.meaning_packet.q[5]"
+      ],
+      "system_unchanged": true,
+      "assistant_teacher_unchanged": true,
+      "inference_matches_derived_eval": true,
+      "actual_training_prompt_tokens": 4295,
+      "derived_inference_prompt_tokens": 4152,
+      "all_teacher_tokens_and_eos_supervised_in_saved_encoding": true,
+      "supervised_tokens": 2148,
+      "scheduled_updates": 2,
+      "teacher_claim_count": 10,
+      "teacher_update_count": 7,
+      "teacher_aliases": [
+        "s0",
+        "s1",
+        "p0"
+      ],
+      "teacher_p0_declared": true,
+      "raw_first_claim_list_count": 1,
+      "raw_claim_rows_all_ten_cells": true,
+      "raw_c_complete_members": 4,
+      "raw_root_closed": false,
+      "raw_c_closed": false,
+      "raw_last_incomplete_c_field": "relations",
+      "raw_full_sha256": "3a3297af05b9f5986d54fca5a8068aa77c09b00cdbb8cc6bf9aa6636531a34c5",
+      "actual_finish_reason": "length",
+      "no_gold_values_injected_no_raw_repair": true
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "changed_owner_paths": [
+        "prior_adopted_interpretation.meaning_packet.a",
+        "prior_adopted_interpretation.meaning_packet.q",
+        "prior_adopted_interpretation.meaning_packet.c.claims",
+        "prior_adopted_interpretation.meaning_packet.c.relations",
+        "output_spec.output_types"
+      ],
+      "exact_changed_paths": [
+        "output_spec.output_types",
+        "prior_adopted_interpretation.meaning_packet.a",
+        "prior_adopted_interpretation.meaning_packet.c.claims[0]",
+        "prior_adopted_interpretation.meaning_packet.c.claims[1]",
+        "prior_adopted_interpretation.meaning_packet.c.claims[2]",
+        "prior_adopted_interpretation.meaning_packet.c.claims[3]",
+        "prior_adopted_interpretation.meaning_packet.c.relations[0]",
+        "prior_adopted_interpretation.meaning_packet.c.relations[1]",
+        "prior_adopted_interpretation.meaning_packet.q[0]",
+        "prior_adopted_interpretation.meaning_packet.q[1]",
+        "prior_adopted_interpretation.meaning_packet.q[2]",
+        "prior_adopted_interpretation.meaning_packet.q[3]",
+        "prior_adopted_interpretation.meaning_packet.q[4]",
+        "prior_adopted_interpretation.meaning_packet.q[5]"
+      ],
+      "system_unchanged": true,
+      "assistant_teacher_unchanged": true,
+      "inference_matches_derived_eval": true,
+      "actual_training_prompt_tokens": 4447,
+      "derived_inference_prompt_tokens": 4304,
+      "all_teacher_tokens_and_eos_supervised_in_saved_encoding": true,
+      "supervised_tokens": 2424,
+      "scheduled_updates": 2,
+      "teacher_claim_count": 11,
+      "teacher_update_count": 8,
+      "teacher_aliases": [
+        "s0",
+        "s1",
+        "p0"
+      ],
+      "teacher_p0_declared": true,
+      "raw_first_claim_list_count": 12,
+      "raw_claim_rows_all_ten_cells": true,
+      "raw_c_complete_members": 1,
+      "raw_root_closed": false,
+      "raw_c_closed": false,
+      "raw_last_incomplete_c_field": "conflicts",
+      "raw_full_sha256": "bb976fdea2ec3fd1c204d76d08b1bed329b78eda15c2a6a398c576528e4d90e0",
+      "actual_finish_reason": "length",
+      "no_gold_values_injected_no_raw_repair": true
+    }
+  ],
+  "old9": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "entire_row_unchanged": true,
+      "target_root_type": "dict",
+      "scheduled_updates": 1
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "entire_row_unchanged": true,
+      "target_root_type": "dict",
+      "scheduled_updates": 1
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "entire_row_unchanged": true,
+      "target_root_type": "dict",
+      "scheduled_updates": 1
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "entire_row_unchanged": true,
+      "target_root_type": "dict",
+      "scheduled_updates": 1
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "entire_row_unchanged": true,
+      "target_root_type": "dict",
+      "scheduled_updates": 1
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "entire_row_unchanged": true,
+      "target_root_type": "dict",
+      "scheduled_updates": 1
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "entire_row_unchanged": true,
+      "target_root_type": "dict",
+      "scheduled_updates": 1
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "entire_row_unchanged": true,
+      "target_root_type": "dict",
+      "scheduled_updates": 1
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "entire_row_unchanged": true,
+      "target_root_type": "dict",
+      "scheduled_updates": 1
+    }
+  ],
+  "input_sha256_before": {
+    "/workspace/cocolon_rehearsal13_cpu_20261029/train_messages11.jsonl": "1401ee1144b820bbedbbcf1740133ca7d4330231f0d04732692820723bccff3b",
+    "/workspace/cocolon_rehearsal13_cpu_20261029/eval_inputs11.json": "6eaa2acd66f359da1d0e77bdb48c1eb483138dbcc50cb30ce7673b6da499b4ea",
+    "/workspace/cocolon_rehearsal13_cpu_20261029/prepared_cpu.json.gz": "ddf81a26f67e98fff901cc78e405f06919ab9cbe4ad6cbc49908a6b8cf616165",
+    "/workspace/cocolon_prior_rows2_cpu_20261029/train_messages11.jsonl": "ef2d70877eb55c9191a2600581e74bd3d51f316473655efc154b7c389cf5485e",
+    "/workspace/cocolon_prior_rows2_cpu_20261029/eval_inputs11.json": "8f32141212419628092c69e43dcf3a267651c8b95b20f1ad7e98e064cb41a820"
+  },
+  "training_update_order": [
+    "FT-BOOK-AFTER-ANSWER",
+    "TRAIN-SERVICE-CHAIR-01-INITIAL",
+    "FT-SHOP-AFTER-ANSWER",
+    "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+    "TRAIN-SERVICE-CHAIR-02-INITIAL",
+    "FT-BOOK-AFTER-ANSWER",
+    "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+    "TRAIN-SERVICE-CHAIR-03-INITIAL",
+    "FT-SHOP-AFTER-ANSWER",
+    "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+    "TRAIN-DAILY-CALM-01-INITIAL",
+    "TRAIN-DAILY-CALM-02-INITIAL",
+    "TRAIN-DAILY-CALM-03-INITIAL"
+  ],
+  "seconds": 0.08173696300946176,
+  "input_sha256_after": {
+    "/workspace/cocolon_rehearsal13_cpu_20261029/train_messages11.jsonl": "1401ee1144b820bbedbbcf1740133ca7d4330231f0d04732692820723bccff3b",
+    "/workspace/cocolon_rehearsal13_cpu_20261029/eval_inputs11.json": "6eaa2acd66f359da1d0e77bdb48c1eb483138dbcc50cb30ce7673b6da499b4ea",
+    "/workspace/cocolon_rehearsal13_cpu_20261029/prepared_cpu.json.gz": "ddf81a26f67e98fff901cc78e405f06919ab9cbe4ad6cbc49908a6b8cf616165",
+    "/workspace/cocolon_prior_rows2_cpu_20261029/train_messages11.jsonl": "ef2d70877eb55c9191a2600581e74bd3d51f316473655efc154b7c389cf5485e",
+    "/workspace/cocolon_prior_rows2_cpu_20261029/eval_inputs11.json": "8f32141212419628092c69e43dcf3a267651c8b95b20f1ad7e98e064cb41a820"
+  },
+  "model_loads": 0,
+  "model_forwards": 0,
+  "training_updates": 0,
+  "generations": 0,
+  "new_cmee_calls": 0,
+  "outcome": "NO_NEW_DETERMINISTIC_PREPROCESSING_BUG_FOUND; INTENTIONAL_PROMPT_CHANGE_CONFIRMED; FIELD_MISROUTING_UNRESOLVED",
+  "limitations": [
+    "cached encoding inspected; tokenizer/model not rerun",
+    "format mixture and prompt differences are not causal proof",
+    "previous TOKEN_LIMIT receipts and 0/2 unchanged",
+    "does not authorize another paid trial"
+  ],
+  "product_credit": 0,
+  "candidate_ready": false,
+  "automatic_progression": false,
+  "adapter_sha256": "114466411f36f0eef7a2dceaec7f5190544ac8545eb6b2f6a3d0446b70f90b66",
+  "gpu_read_only": "NVIDIA RTX A5000, 24564 MiB, 1 MiB, 0 %",
+  "source_sha256": "1de54c5ccd15f622590ab1d242f376e711d7e5fdcc769b5a908f63b9437dc2ce"
+}

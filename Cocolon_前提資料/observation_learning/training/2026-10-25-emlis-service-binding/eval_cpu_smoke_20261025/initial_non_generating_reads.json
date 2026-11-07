@@ -1,0 +1,118 @@
+{
+  "get": {
+    "schema_version": "cocolon.emlis_thread.application.v1",
+    "thread_id": "d39a7358-0322-4456-b556-3dcc2bdfb3a9",
+    "revision": 5,
+    "state": "AWAITING_ANSWER",
+    "original": {
+      "id": "301f49f8-6be5-4848-9c24-5442544eddf8",
+      "created_at": "2026-10-25T06:37:17",
+      "memo": "全部一人で直せたことが、うれしかった。",
+      "memo_action": "ぐらついていた椅子を修理して、また座れるようになった。"
+    },
+    "timeline": [
+      {
+        "event_id": "390f200f-fb79-42cd-b9da-22b693825e9b",
+        "kind": "OBSERVATION",
+        "recorded_at": "2026-10-24T23:41:08.496-08:00",
+        "round_index": 0,
+        "text": "見えたこと：\nぐらついていた椅子を直し、また座れるようになったのですね。\n\nEmlisから：\n全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "stage": "INITIAL",
+        "is_current": true
+      },
+      {
+        "event_id": "4d1ee814-6fe0-465c-89d3-181c311a4a24",
+        "kind": "QUESTION",
+        "recorded_at": "2026-10-24T23:41:08.497-08:00",
+        "round_index": 1,
+        "question_id": "emlis-question-d4ab97bbde0a63ee440a0304de440de43faedfc46ab5ebaf5b59df0ff41eb4b3",
+        "text": "「全部一人で直せたこと」がなぜ嬉しかったのですか？"
+      }
+    ],
+    "can_write": false,
+    "pending_question": {
+      "event_id": "4d1ee814-6fe0-465c-89d3-181c311a4a24",
+      "kind": "QUESTION",
+      "recorded_at": "2026-10-24T23:41:08.497-08:00",
+      "round_index": 1,
+      "question_id": "emlis-question-d4ab97bbde0a63ee440a0304de440de43faedfc46ab5ebaf5b59df0ff41eb4b3",
+      "text": "「全部一人で直せたこと」がなぜ嬉しかったのですか？"
+    },
+    "current_observation": {
+      "event_id": "390f200f-fb79-42cd-b9da-22b693825e9b",
+      "text": "見えたこと：\nぐらついていた椅子を直し、また座れるようになったのですね。\n\nEmlisから：\n全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。"
+    },
+    "body_state": "PRE_QUESTION",
+    "answer_saved": false,
+    "answer_assessment": "NOT_APPLICABLE",
+    "meaning_updated": false,
+    "failure_code": null,
+    "operation_id": "e118c032-16e6-49f3-ae0f-21ec0901883f",
+    "attempt_id": "60ad3865-e340-48c9-90b2-a4694fbf7b79",
+    "requested_attempt_id": null,
+    "can_retry": false,
+    "can_continue": false,
+    "issued_count": 1,
+    "question_limit": 1,
+    "started_question_limit": 1,
+    "processing_deadline_at": null
+  },
+  "start": {
+    "schema_version": "cocolon.emlis_thread.application.v1",
+    "thread_id": "d39a7358-0322-4456-b556-3dcc2bdfb3a9",
+    "revision": 5,
+    "state": "AWAITING_ANSWER",
+    "original": {
+      "id": "301f49f8-6be5-4848-9c24-5442544eddf8",
+      "created_at": "2026-10-25T06:37:17",
+      "memo": "全部一人で直せたことが、うれしかった。",
+      "memo_action": "ぐらついていた椅子を修理して、また座れるようになった。"
+    },
+    "timeline": [
+      {
+        "event_id": "390f200f-fb79-42cd-b9da-22b693825e9b",
+        "kind": "OBSERVATION",
+        "recorded_at": "2026-10-24T23:41:08.496-08:00",
+        "round_index": 0,
+        "text": "見えたこと：\nぐらついていた椅子を直し、また座れるようになったのですね。\n\nEmlisから：\n全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "stage": "INITIAL",
+        "is_current": true
+      },
+      {
+        "event_id": "4d1ee814-6fe0-465c-89d3-181c311a4a24",
+        "kind": "QUESTION",
+        "recorded_at": "2026-10-24T23:41:08.497-08:00",
+        "round_index": 1,
+        "question_id": "emlis-question-d4ab97bbde0a63ee440a0304de440de43faedfc46ab5ebaf5b59df0ff41eb4b3",
+        "text": "「全部一人で直せたこと」がなぜ嬉しかったのですか？"
+      }
+    ],
+    "can_write": false,
+    "pending_question": {
+      "event_id": "4d1ee814-6fe0-465c-89d3-181c311a4a24",
+      "kind": "QUESTION",
+      "recorded_at": "2026-10-24T23:41:08.497-08:00",
+      "round_index": 1,
+      "question_id": "emlis-question-d4ab97bbde0a63ee440a0304de440de43faedfc46ab5ebaf5b59df0ff41eb4b3",
+      "text": "「全部一人で直せたこと」がなぜ嬉しかったのですか？"
+    },
+    "current_observation": {
+      "event_id": "390f200f-fb79-42cd-b9da-22b693825e9b",
+      "text": "見えたこと：\nぐらついていた椅子を直し、また座れるようになったのですね。\n\nEmlisから：\n全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。"
+    },
+    "body_state": "PRE_QUESTION",
+    "answer_saved": false,
+    "answer_assessment": "NOT_APPLICABLE",
+    "meaning_updated": false,
+    "failure_code": null,
+    "operation_id": "e118c032-16e6-49f3-ae0f-21ec0901883f",
+    "attempt_id": "60ad3865-e340-48c9-90b2-a4694fbf7b79",
+    "requested_attempt_id": null,
+    "can_retry": false,
+    "can_continue": false,
+    "issued_count": 1,
+    "question_limit": 1,
+    "started_question_limit": 1,
+    "processing_deadline_at": null
+  }
+}

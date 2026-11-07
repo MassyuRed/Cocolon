@@ -15,7 +15,6 @@ export default function InputActionArea({
   setSendEmotionNotification,
   handlePreviewPiece,
   canPreviewPiece,
-  piecePreviewLoading,
   handleOk,
   canSubmit,
   submitting,
@@ -51,7 +50,6 @@ export default function InputActionArea({
               registerInputInteraction?.();
               setSendEmotionNotification(!v);
             }}
-            trackColor={{ false: "#D1D5DB", true: colors.GOLD_BUTTON }}
             thumbColor={
               Platform.OS === "android"
                 ? doNotSendEmotionNotification
@@ -59,24 +57,22 @@ export default function InputActionArea({
                   : "#F9FAFB"
                 : undefined
             }
-            ios_backgroundColor="#D1D5DB"
             disabled={isTutorialMode}
             accessibilityLabel="感情通知を送らない設定を切り替える"
           />
         </View>
       </View>
 
-      <View ref={pieceButtonRef} collapsable={false} style={styles.buttonWrapper}>
+      {isTutorialMode ? <View ref={pieceButtonRef} collapsable={false} style={styles.buttonWrapper}>
         <CocolonButton
           variant="secondary"
           onPress={handlePreviewPiece}
           disabled={!canPreviewPiece}
-          loading={piecePreviewLoading}
           accessibilityLabel="ピースを生成する"
         >
           ピースを生成する
         </CocolonButton>
-      </View>
+      </View> : null}
 
       <View ref={okButtonRef} collapsable={false} style={styles.buttonWrapper}>
         <CocolonButton

@@ -1,0 +1,339 @@
+{
+  "schema_version": "cocolon.analysis_actor_ownership_balanced48_summary.v1",
+  "status": "REVIEWED_NOT_ADOPTED",
+  "api_commit": "4d744e36a093aac3ad157a448f06ef6be2be59cb",
+  "runner_commit": "13471a029860920d4e612eb82f6d2eb1aaf2eaa8",
+  "jupyter_root": "/workspace/analysis-actor-ownership-balanced48-20261105",
+  "initial_weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59",
+  "initial_config_sha256": "006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9",
+  "source20_sha256": "bab10642bb2e2ddd5817d0abdf5d6a80ad378f7cd541dceec1948b1c6cf48a8f",
+  "old20_exact": true,
+  "additional_frozen_teachers": [
+    "AT21",
+    "RU01"
+  ],
+  "curriculum": {
+    "omitted6_each": 4,
+    "explicit6_each": 2,
+    "N8_each": 1,
+    "anchors2_each": 2,
+    "shuffle_seed": 20261111
+  },
+  "planned": {
+    "updates": 48,
+    "teachers": 22,
+    "nll_forwards": 44,
+    "reused_before": 14,
+    "new_stops": 14,
+    "model_loads": 2,
+    "max_seconds": 1200
+  },
+  "normal_adoption": false,
+  "next_training_initial_adoption": false,
+  "restart_completed_or_partial_root": false,
+  "actual": {
+    "api_commit": "4d744e36a093aac3ad157a448f06ef6be2be59cb",
+    "profile": "selected_material.v7",
+    "seed": 20261111,
+    "learning_rate": 1e-05,
+    "initial_weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59",
+    "initial_config_sha256": "006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9",
+    "original_pack_sha256": "30afde6a0735aac0b5f23e737b2b80c72e7dd65ba0cdbe4bc791886473f4bbf1",
+    "teachers": 22,
+    "updates": 48,
+    "nll_forwards": 44,
+    "nll_means": [
+      {
+        "phase": "before",
+        "mean": 0.06756198260220779,
+        "teacher_count": 22
+      },
+      {
+        "phase": "after",
+        "mean": 0.005653172848145583,
+        "teacher_count": 22
+      }
+    ],
+    "new_generation": 14,
+    "new_stops": 14,
+    "model_loads": 2,
+    "reused_before": 14,
+    "seconds": 1052.8794144196436,
+    "stages": [
+      {
+        "exit": 0,
+        "phase": "train"
+      },
+      {
+        "exit": 0,
+        "phase": "after"
+      }
+    ],
+    "max_seconds": 1200,
+    "weights_sha256": "6c879a887e3188f4fa2b6e1df573c8648febaac1661dd874f385d72d1edbd6c9",
+    "config_sha256": "1deacb44b87cd363b94fd85fe7f86d5ee671ffe10f6d248405783ecaf45509db",
+    "peak_allocated_gib": 10.880995273590088,
+    "peak_reserved_gib": 11.966796875,
+    "initial_unchanged": true,
+    "old_pack_unchanged": true,
+    "gpu_after_process": "2 MiB, 0 %",
+    "fresh_optimizer": true,
+    "objective": "unchanged plain full-assistant CE",
+    "counts_not_general_semantic_accuracy": true
+  },
+  "comparisons": {
+    "cases": 14,
+    "before": {
+      "UNSUPPORTED": 8,
+      "REJECTED": 2,
+      "SAVED": 4
+    },
+    "after": {
+      "SAVED": 9,
+      "UNSUPPORTED": 5
+    },
+    "diagnostic_only": {
+      "cases": 12,
+      "before": {
+        "UNSUPPORTED": 7,
+        "REJECTED": 1,
+        "SAVED": 4
+      },
+      "after": {
+        "SAVED": 7,
+        "UNSUPPORTED": 5
+      },
+      "gains": [
+        "AE01",
+        "AE03",
+        "OP03_v7"
+      ],
+      "not_blind": true
+    },
+    "training_seen": {
+      "cases": 2,
+      "before": {
+        "UNSUPPORTED": 1,
+        "REJECTED": 1
+      },
+      "after": {
+        "SAVED": 2
+      },
+      "gains": [
+        "OT03",
+        "OT06"
+      ]
+    },
+    "candidate_before": {
+      "PRESERVED": 12,
+      "REJECTED": 2
+    },
+    "candidate_after": {
+      "PRESERVED": 14
+    },
+    "raw_unchanged": 6,
+    "raw_changed": 8,
+    "old_saved_graph_text_coverage_retained": [
+      "AE05",
+      "AP07_v7",
+      "AP08_v7",
+      "OP02_v7"
+    ],
+    "after_candidate_replays": 14,
+    "observed_saved_after": 9,
+    "after_observed_saved_reads_match": 9
+  },
+  "meaningful_gains": [
+    {
+      "id": "AE01",
+      "scope": "known_nearby_diagnostic",
+      "finding": "False actor 僕 removed; complete target 僕の感想 retained; source-proved UNSPECIFIED action saved."
+    },
+    {
+      "id": "AE03",
+      "scope": "known_nearby_diagnostic",
+      "finding": "Ambiguous bare 私 replaced by unique 私は; source-proved SELF action saved with target 私の本."
+    },
+    {
+      "id": "OP03_v7",
+      "scope": "known_nearby_diagnostic",
+      "finding": "False actor 私 removed; full target 私の考え retained; UNSPECIFIED action saved."
+    },
+    {
+      "id": "OT03",
+      "scope": "training_seen",
+      "finding": "Exact teacher JSON: no actor qualifier, target 僕の住所; UNSPECIFIED action saved. Training-seen reproduction only."
+    },
+    {
+      "id": "OT06",
+      "scope": "training_seen",
+      "finding": "Exact teacher JSON: unique 僕は and target 僕の住所; source-proved SELF action saved. Training-seen reproduction only."
+    }
+  ],
+  "unresolved_and_regressions": [
+    {
+      "id": "AE02",
+      "classification": "UNRESOLVED_ERROR_UNCHANGED",
+      "finding": "Exact matched-pair raw unchanged: false actor 私 in an omitted-subject possessive negative. NEGATION remains correct; no map admitted."
+    },
+    {
+      "id": "AE04",
+      "classification": "CANDIDATE_ANNOTATION_REGRESSION",
+      "finding": "Correct actor qualifier 父 omitted. Whole source root still includes father; no SELF promotion or map. Qualifier omission is a lost annotation, not a schema violation."
+    },
+    {
+      "id": "AE06",
+      "classification": "CORRECT_ROLE_CANDIDATE_TYPED_SCOPE_UNSUPPORTED",
+      "finding": "ROLE and actor 僕 unchanged. の担当は is outside the current typed の役割は / を担当した witness; unsupported map is not evidence of wrong ROLE reading."
+    },
+    {
+      "id": "OP07_v7",
+      "classification": "CANDIDATE_SCOPE_REGRESSION_REMAINS",
+      "finding": "Written ので reason/marker and ATTENTION wish remain. Whole finite action/context incorrectly becomes CONTENT_TARGET, retaining CE20 regression. Comparative preference changes wrong WRITTEN_REASON to wrong ATTRIBUTIVE_CONTENT; neither is correct. No map."
+    },
+    {
+      "id": "OP08_v7",
+      "classification": "UNRESOLVED_GENERAL_READING_UNCHANGED",
+      "finding": "Raw unchanged: unfinished 決まらず selected as independent ACTION and 自分 ownership still proposed as actor. Unvalidated candidates do not establish choice criteria, personality or map."
+    }
+  ],
+  "raw_review": {
+    "before14_and_after14_read": true,
+    "raw_unchanged": 6,
+    "raw_changed": 8,
+    "full_responses_not_in_public_summary": true
+  },
+  "preservation": {
+    "old_saved_ids": [
+      "AE05",
+      "AP07_v7",
+      "AP08_v7",
+      "OP02_v7"
+    ],
+    "graph_text_coverage_equal": true,
+    "safe_projection_difference": "new artifact projection_of only",
+    "after_candidate_non_generating_replays": 14,
+    "after_observed_current_monthly_readonly_matches": 9,
+    "matched_pair_isolated_mock_rpc": true,
+    "matched_pair_real_supabase_or_device_success": false
+  },
+  "artifact_hashes": {
+    "pack.json": "ea55b497c13fc23c41d993590904b070a893b8b4aca5d20e99b289d376d686af",
+    "encoded.json": "72cfad52a861642eaccc1a802084f1349dde492234ef6d9d5f3dd9677d4567cf",
+    "report.json": "a5dd7ace479a85782ea5c246177e20995099a548c00ee1dcb62d97fdc32621ba",
+    "train/report.json": "0a979ea974c9a40007831753e0fd8da82ddb08c36f333bdc28415f2f3d29fe03",
+    "after.json": "8e83d40afe615d9f3b8a61d8390f952e19bda90993030c9ce813fc31a67eddeb",
+    "reused_before.json": "76d890ac66ffe2b492ac38f45b85de31e6bf4dd3c3bcbe8b1d947343fa20903a",
+    "manifest.json": "b94df54d6bd6ad3807d12f4b714ffe7c918b71ee500fd7c7acc485db318a753b"
+  },
+  "limitations": [
+    "Known nearby diagnostics, not independent held-out general accuracy.",
+    "Five added matched-pair maps comprise three diagnostic gains and two training-seen fits.",
+    "Curriculum additions, dose and order changed together; no matched-dose control or single-cause attribution.",
+    "Teacher NLL covers the 22 training teachers and does not establish general semantic quality.",
+    "Candidate readability, correct saved replay and product semantic correctness are different claims.",
+    "Four fresh HTTPS generations are wiring/storage smoke tests on different synthetic snapshots, not additions to the 14 matched-pair quality denominator.",
+    "The matched-pair AE02 failure remains despite a separate-snapshot VH03 success."
+  ],
+  "cold_replay": {
+    "status": "COMPLETE",
+    "responses": 28,
+    "seconds": 3.421149388886988,
+    "new_generation": 0,
+    "model_loads": 0,
+    "model_calls_started": 0,
+    "request_response_and_candidate_map_content_identical": true,
+    "observed_maps": 13,
+    "before_maps": 4,
+    "after_maps": 9,
+    "normalized_wire_comparison": true
+  },
+  "weight_audit": {
+    "tensors": 112,
+    "parameters": 3833856,
+    "changed_tensors": 112,
+    "all_finite": true,
+    "cpu_only": true,
+    "new_generation": 0,
+    "model_loads": 0
+  },
+  "separate_https_smoke": {
+    "status": "COMPLETE",
+    "api_commit": "db311746144f03935f860fc2b827845573ff8742",
+    "separate_from_training_api_commit": true,
+    "model_loads": 1,
+    "new_generation": 4,
+    "new_stops": 4,
+    "new_training": 0,
+    "seconds": 36.4116005115211,
+    "saved": 3,
+    "unsupported": 1,
+    "rejected": 0,
+    "authentication": "synthetic",
+    "database": "isolated PostgreSQL WASM",
+    "network": "real loopback HTTPS, temporary per-client trusted CA",
+    "bind_address": "127.0.0.1",
+    "tls_certificate_required": true,
+    "tls_hostname_checked": true,
+    "untrusted_ca_rejected_before_generation": true,
+    "application_factory_default_unchanged": true,
+    "isolated_factory_override": true,
+    "explicit_transport_prompt_version": "selected_material.v7",
+    "production_effect": false,
+    "matched_pair_quality_evaluation": false,
+    "new_synthetic_snapshots": true,
+    "caution": "VH03 uses the same phrase as AE02 on a different snapshot/messages context. Its successful omitted-actor NEG map is evidence of context sensitivity, not a matched-pair AE02 fix. VH02 omits the actor qualifier but literal 私は plus the unchanged complete source proof establishes SELF. VH04 father remains unsupported.",
+    "cases": [
+      {
+        "id": "VH01",
+        "status": "SAVED",
+        "saved_read_match": true,
+        "concurrent_callers": 3,
+        "model_calls": 1
+      },
+      {
+        "id": "VH02",
+        "status": "SAVED",
+        "saved_read_match": true,
+        "concurrent_callers": 3,
+        "model_calls": 1
+      },
+      {
+        "id": "VH03",
+        "status": "SAVED",
+        "saved_read_match": true,
+        "concurrent_callers": 3,
+        "model_calls": 1
+      },
+      {
+        "id": "VH04",
+        "status": "UNSUPPORTED",
+        "saved_read_match": null,
+        "concurrent_callers": 3,
+        "model_calls": 1
+      }
+    ]
+  },
+  "private_evidence_link": "https://chatgpt.com/library?file_id=libfile_78de85117ab48191ba102c0c2f42ccec&account_id=personal",
+  "source_summary_origin": {
+    "repository": "MassyuRed/Cocolon",
+    "path": "Cocolon_前提資料/observation_learning/trials/2026-11-01-analysis-model-fields/actor_ownership_balanced48_results.json",
+    "blob_sha": "159b2c03641b58aa51ebd958e7a4849e1c11226f",
+    "prior_status": "RUNNING_NOT_ADOPTED"
+  },
+  "next_bounded_proposal": {
+    "status": "PROPOSED_NOT_EXECUTED",
+    "scope": "CPU-only independent actor/ownership/polarity contrast audit",
+    "design": "One new fixed object/verb across omitted actor, explicit SELF and explicit OTHER, each positive/negative; preserve old22; validate exact quotes, unique actor spans, negation, source-bound save/reload and tokenizer alignment.",
+    "initial_adapter": null,
+    "update_order": null,
+    "new_generation": 0,
+    "new_training": 0
+  },
+  "private_archive": {
+    "filename": "Cocolon_Analysis_ActorOwnership_Balanced48_HTTPS_20261105.zip",
+    "version": 0,
+    "bytes": 15030496,
+    "sha256": "75b216473288c2d49360350562212b3dba89f0a11f07395c2313dfec2ec7f2d9"
+  }
+}

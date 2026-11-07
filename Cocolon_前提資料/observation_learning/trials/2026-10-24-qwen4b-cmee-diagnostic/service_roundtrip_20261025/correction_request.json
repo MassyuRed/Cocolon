@@ -1,0 +1,123 @@
+{
+  "request_id": "emlis-6b6716a2-d4c1-4be2-b5d2-8fa7459c59a6",
+  "current_input_bundle": {
+    "thought_text": "全部一人で直せたことが、うれしかった。",
+    "action_text": "ぐらついていた椅子を修理して、また座れるようになった。",
+    "emotions": [
+      {
+        "type": "喜び",
+        "strength": "medium",
+        "source_field": "emotion_details"
+      }
+    ],
+    "emotion_strength_summary": {
+      "primary_type": "喜び",
+      "primary_strength": "medium",
+      "strongest_type": "喜び",
+      "strongest_strength": "medium",
+      "max_strength_score": 2,
+      "has_strong": false,
+      "strength_counts": [
+        [
+          "medium",
+          1
+        ]
+      ]
+    },
+    "categories": [
+      "生活"
+    ],
+    "selected_at": "2026-10-25T07:05:38.547000+00:00",
+    "source_record_id": "63059d93-b5e4-4b7d-beb3-78ce485b0229",
+    "is_secret": false,
+    "selection_seed": "",
+    "schema_version": "emlis.current_input_bundle.v1",
+    "raw_current_input": {
+      "id": "63059d93-b5e4-4b7d-beb3-78ce485b0229",
+      "memo": "全部一人で直せたことが、うれしかった。",
+      "category": [
+        "生活"
+      ],
+      "emotions": [
+        "喜び"
+      ],
+      "created_at": "2026-10-25T07:05:38.547000+00:00",
+      "memo_action": "ぐらついていた椅子を修理して、また座れるようになった。",
+      "emotion_details": [
+        {
+          "type": "喜び",
+          "strength": "medium"
+        }
+      ]
+    }
+  },
+  "expected_source_record_id": "63059d93-b5e4-4b7d-beb3-78ce485b0229",
+  "core_id": "emlis_ai",
+  "product_job": "OBSERVE_AND_CLARIFY",
+  "execution_mode": "OFFLINE_CANDIDATE",
+  "emlis_thread": {
+    "thread_id": "6b6716a2-d4c1-4be2-b5d2-8fa7459c59a6",
+    "original_source_ref": "src-a0b894ad83bdbe6472358b38",
+    "answers": [
+      {
+        "answer_id": "e2f46f9b-5eab-4461-ac91-c002bd761e76",
+        "thread_id": "6b6716a2-d4c1-4be2-b5d2-8fa7459c59a6",
+        "question_id": "emlis-question-08ca286a19799de5f336f6fd1bd5ecff168852ac7b2ddddba41db08620456bc4",
+        "round_index": 1,
+        "original_source_ref": "src-a0b894ad83bdbe6472358b38",
+        "answer_text_private": "さっき「全部一人で」と書いたのは訂正します。途中で友人に手順を教えてもらって、一緒に直しました。\n\nうれしかったのも、一人でできたからではなく、捨てずにまた使えるようになったからです。",
+        "recorded_at": "2026-10-25T07:06:55.740000+00:00",
+        "authored_at": "2026-10-25T07:06:55.738181+00:00",
+        "source_version": "cocolon.cmee.supplemental_answer.v1",
+        "source_role": "SUPPLEMENTAL_ANSWER"
+      }
+    ],
+    "admitted_history": [],
+    "current_round": 1,
+    "capability_snapshot": "FREE_Q1",
+    "question_control_context": {
+      "pending_question": {
+        "question_id": "emlis-question-08ca286a19799de5f336f6fd1bd5ecff168852ac7b2ddddba41db08620456bc4",
+        "parent_request_id": "emlis-6b6716a2-d4c1-4be2-b5d2-8fa7459c59a6",
+        "thread_id": "6b6716a2-d4c1-4be2-b5d2-8fa7459c59a6",
+        "original_source_ref": "src-a0b894ad83bdbe6472358b38",
+        "decision": {
+          "disposition": "ASK",
+          "target_ref": "emlis-target-200dfd9f430d654cf510dd85c16d3163042e860932f30c59c5ee98e3daf897a7",
+          "target_kind": "PERSONAL_JOY_SIGNIFICANCE",
+          "supporting_evidence_refs": [
+            "model-question-evidence-40b0cb9015ef1433287c8cc4a93c062aa26e89b27953747a6efcb994227ffe73",
+            "model-question-evidence-016b644cc3eb5e37fb0accdfd706d163d143730315c75be8c7117fce0ea19a6a"
+          ],
+          "missing_dimension": "personal_joy_significance",
+          "affected_meaning_refs": [
+            "joy_object",
+            "joy"
+          ],
+          "affected_reception_refs": [
+            "joy_object",
+            "joy"
+          ],
+          "asked_target_refs": [],
+          "decision_reason": "source_bound_joy_personal_significance_missing"
+        },
+        "prompt_private": "「全部一人で直せたこと」がなぜ嬉しかったのですか？",
+        "skip_allowed": true,
+        "answer_limit": 1,
+        "answer_source_role": "SUPPLEMENTAL_ANSWER",
+        "schema_version": "cocolon.cmee.emlis_clarification.v1"
+      },
+      "asked_target_refs": [
+        "emlis-target-200dfd9f430d654cf510dd85c16d3163042e860932f30c59c5ee98e3daf897a7"
+      ],
+      "issued_count": 1,
+      "stop": false,
+      "issued_questions": [],
+      "question_limit": 1
+    },
+    "prepared_meaning_checkpoint_ref": null,
+    "schema_version": "cocolon.cmee.emlis_thread.v1",
+    "rejected_frame_keys": [],
+    "frame_feedback_sources": []
+  }
+}

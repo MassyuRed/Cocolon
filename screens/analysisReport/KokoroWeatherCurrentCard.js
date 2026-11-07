@@ -75,142 +75,123 @@ function createStyles(colors, ui) {
     applyTypographyTokens(
       {
         card: {
-          borderWidth: 1,
-          borderColor: colors.CARD_BORDER,
-          borderRadius: 18,
-          backgroundColor: colors.PANEL_BG || colors.FIELD_BG,
-          paddingHorizontal: 16,
-          paddingVertical: 14,
-          marginBottom: 14,
-          ...ui?.shadow?.float,
-        },
+      borderRadius: 24,
+      backgroundColor: colors.PANEL_BG,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
+      marginBottom: 16,
+      width: '100%',
+      maxWidth: 640,
+      alignSelf: 'center',
+    },
         headerRow: {
           flexDirection: "row",
           alignItems: "center",
           justifyContent: "space-between",
         },
         titleWrap: {
-          flexDirection: "row",
-          alignItems: "center",
-          flexShrink: 1,
-        },
+      flexDirection: "row",
+      alignItems: "center",
+      flexShrink: 1,
+      minWidth: 0,
+      flex: 1,
+    },
         title: {
-          fontSize: 14,
-          fontWeight: "900",
-          color: colors.TITLE_GOLD || text.primary || colors.TEXT_ON_LIGHT,
-          marginLeft: 6,
-        },
+      color: colors.TEXT_ON_LIGHT,
+      marginLeft: 6,
+      flexShrink: 1,
+      minWidth: 0,
+    },
         periodText: {
-          fontSize: 11,
-          lineHeight: 16,
-          color: text.description ?? colors.TEXT_SUBTLE,
-          marginTop: 2,
-        },
+      color: text.description ?? colors.TEXT_SUBTLE,
+      marginTop: 2,
+    },
         mainRow: {
-          flexDirection: "row",
-          alignItems: "center",
-          marginTop: 12,
-        },
+      flexDirection: "row",
+      alignItems: 'center',
+      marginTop: 10,
+    },
         iconBox: {
-          width: 64,
-          height: 64,
-          borderRadius: 18,
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: colors.FIELD_BG || "rgba(255,255,255,0.7)",
-          borderWidth: 1,
-          borderColor: colors.CARD_BORDER,
-          marginRight: 12,
-        },
+      width: 48,
+      height: 48,
+      borderRadius: 16,
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: colors.SURFACE_TONAL,
+      marginRight: 10,
+      flexShrink: 0,
+    },
         weatherTextWrap: {
           flex: 1,
           minWidth: 0,
         },
         weatherLabel: {
-          fontSize: 20,
-          lineHeight: 28,
-          fontWeight: "900",
-          color: text.primary ?? colors.TEXT_ON_LIGHT,
-        },
+      color: colors.TEXT_ON_LIGHT,
+    },
         metaRow: {
-          flexDirection: "row",
-          alignItems: "center",
-          flexWrap: "wrap",
-          marginTop: 6,
-          gap: 8,
-        },
+      flexDirection: "row",
+      alignItems: "center",
+      flexWrap: "wrap",
+      marginTop: 10,
+      gap: 8,
+    },
         metaPill: {
-          flexDirection: "row",
-          alignItems: "center",
-          borderRadius: 999,
-          borderWidth: 1,
-          borderColor: colors.CARD_BORDER,
-          paddingHorizontal: 9,
-          paddingVertical: 4,
-          backgroundColor: colors.FIELD_BG,
-        },
+      flexDirection: "row",
+      alignItems: "center",
+      maxWidth: '100%',
+      flexShrink: 1,
+    },
         metaText: {
-          fontSize: 12,
-          lineHeight: 16,
-          fontWeight: "800",
-          color: text.primary ?? colors.TEXT_ON_LIGHT,
-          marginLeft: 4,
-        },
+      color: text.primary ?? colors.TEXT_ON_LIGHT,
+      marginLeft: 4,
+      flexShrink: 1,
+      minWidth: 0,
+    },
         memoBox: {
-          borderWidth: 1,
-          borderColor: colors.CARD_BORDER,
-          backgroundColor: colors.FIELD_BG,
-          borderRadius: 14,
-          paddingHorizontal: 12,
-          paddingVertical: 10,
-          marginTop: 12,
-        },
+      borderTopWidth: 1,
+      borderTopColor: colors.CARD_BORDER,
+      paddingTop: 10,
+      marginTop: 12,
+    },
         memoLabelRow: {
-          flexDirection: "row",
-          alignItems: "center",
-        },
+      flexDirection: "row",
+      alignItems: 'flex-start',
+    },
         memoLabel: {
-          fontSize: 12,
-          lineHeight: 16,
-          fontWeight: "900",
-          color: colors.TITLE_GOLD || text.primary || colors.TEXT_ON_LIGHT,
-          marginLeft: 5,
-        },
+      color: text.description ?? colors.TEXT_SUBTLE,
+      marginLeft: 5,
+      flexShrink: 1,
+    },
         memoDetail: {
-          marginTop: 5,
-          fontSize: 12,
-          lineHeight: 18,
-          color: text.description ?? colors.TEXT_SUBTLE,
-        },
+      marginTop: 6,
+      color: text.primary ?? colors.TEXT_ON_LIGHT,
+    },
         emptyTitle: {
-          marginTop: 10,
-          fontSize: 17,
-          lineHeight: 24,
-          fontWeight: "900",
-          color: text.primary ?? colors.TEXT_ON_LIGHT,
-        },
+      marginTop: 10,
+      color: text.primary ?? colors.TEXT_ON_LIGHT,
+    },
         emptyBody: {
-          marginTop: 6,
-          fontSize: 12,
-          lineHeight: 18,
-          color: text.description ?? colors.TEXT_SUBTLE,
-        },
-        action: {
-          alignSelf: "flex-start",
-          flexDirection: "row",
-          alignItems: "center",
-          marginTop: 10,
-          paddingVertical: 6,
-        },
+      marginTop: 6,
+      color: text.description ?? colors.TEXT_SUBTLE,
+    },
+        actionContainer: {
+      alignSelf: "flex-start",
+      marginTop: 10,
+      maxWidth: '100%',
+    },
+    action: {
+      flexDirection: "row",
+      alignItems: 'center',
+      paddingVertical: 10,
+      minHeight: 44,
+    },
         actionText: {
-          fontSize: 13,
-          lineHeight: 18,
-          fontWeight: "900",
-          color: colors.TEXT_ON_LIGHT,
-          marginRight: 4,
-        },
+      color: colors.TITLE_GOLD,
+      marginRight: 4,
+      flexShrink: 1,
+    },
       },
-      ui
+      ui, {"title":"description","periodText":"meta","weatherLabel":"sectionTitle","metaText":"description","memoLabel":"description","memoDetail":"body","emptyTitle":"sectionTitle","emptyBody":"description","actionText":"button"}
     )
   );
 }
@@ -245,12 +226,13 @@ export default function KokoroWeatherCurrentCard({ currentWeather, onOpenPreviou
         </Text>
         {canOpenPrevious ? (
           <CocolonPressable
+            containerStyle={styles.actionContainer}
             style={styles.action}
             onPress={onOpenPrevious}
             accessibilityLabel={emptyActionLabel}
           >
             <Text style={styles.actionText}>{emptyActionLabel}</Text>
-            <Ionicons name="chevron-forward" size={15} color={colors.TEXT_ON_LIGHT} />
+            <Ionicons name="chevron-forward" size={15} color={colors.TITLE_GOLD} />
           </CocolonPressable>
         ) : null}
       </View>
@@ -279,31 +261,31 @@ export default function KokoroWeatherCurrentCard({ currentWeather, onOpenPreviou
 
       <View style={styles.mainRow}>
         <View style={styles.iconBox}>
-          <Ionicons name={weather.icon} size={34} color={colors.TITLE_GOLD} />
+          <Ionicons name={weather.icon} size={28} color={colors.TITLE_GOLD} />
         </View>
         <View style={styles.weatherTextWrap}>
           <Text style={styles.weatherLabel}>{weather.label}</Text>
-          <View style={styles.metaRow}>
-            {temperatureDisplay ? (
-              <View style={styles.metaPill}>
-                <Ionicons name="thermometer-outline" size={13} color={colors.TEXT_ON_LIGHT} />
-                <Text style={styles.metaText}>こころ温度 {temperatureDisplay}</Text>
-              </View>
-            ) : null}
-            {dominantEmotionText ? (
-              <View style={styles.metaPill}>
-                <Ionicons name="ellipse-outline" size={12} color={colors.TEXT_ON_LIGHT} />
-                <Text style={styles.metaText}>{dominantEmotionText}</Text>
-              </View>
-            ) : null}
-            {fluctuationLabel ? (
-              <View style={styles.metaPill}>
-                <Ionicons name="pulse-outline" size={13} color={colors.TEXT_ON_LIGHT} />
-                <Text style={styles.metaText}>{fluctuationLabel}</Text>
-              </View>
-            ) : null}
-          </View>
         </View>
+      </View>
+      <View style={styles.metaRow}>
+        {temperatureDisplay ? (
+          <View style={styles.metaPill}>
+            <Ionicons name="thermometer-outline" size={13} color={colors.TEXT_ON_LIGHT} />
+            <Text style={styles.metaText}>こころ温度 {temperatureDisplay}</Text>
+          </View>
+        ) : null}
+        {dominantEmotionText ? (
+          <View style={styles.metaPill}>
+            <Ionicons name="ellipse-outline" size={12} color={colors.TEXT_ON_LIGHT} />
+            <Text style={styles.metaText}>{dominantEmotionText}</Text>
+          </View>
+        ) : null}
+        {fluctuationLabel ? (
+          <View style={styles.metaPill}>
+            <Ionicons name="pulse-outline" size={13} color={colors.TEXT_ON_LIGHT} />
+            <Text style={styles.metaText}>{fluctuationLabel}</Text>
+          </View>
+        ) : null}
       </View>
 
       {memoVisible ? (
@@ -318,3 +300,4 @@ export default function KokoroWeatherCurrentCard({ currentWeather, onOpenPreviou
     </View>
   );
 }
+

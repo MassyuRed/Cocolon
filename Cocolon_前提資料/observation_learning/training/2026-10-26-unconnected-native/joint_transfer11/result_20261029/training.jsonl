@@ -1,0 +1,11 @@
+{"step": 1, "id": "TRAIN-SERVICE-CHAIR-01-INITIAL", "loss": 0.0011326810345053673, "gradient_norm": 0.06870357692241669, "target_tokens": 1331, "loss_type": "full_assistant_ce_including_eos"}
+{"step": 2, "id": "AUX-A-FT-BOOK-AFTER-ANSWER", "loss": 0.017152808606624603, "gradient_norm": 0.34071213006973267, "target_tokens": 2312, "loss_type": "full_assistant_ce_including_eos"}
+{"step": 3, "id": "AUX-B-FT-BOOK-AFTER-ANSWER", "loss": 0.19571910798549652, "gradient_norm": 1.6819489002227783, "target_tokens": 607, "loss_type": "full_assistant_ce_including_eos"}
+{"step": 4, "id": "FT-BOOK-AFTER-ANSWER", "loss": 0.07188675552606583, "gradient_norm": 0.7005938291549683, "target_tokens": 2913, "loss_type": "full_assistant_ce_including_eos"}
+{"step": 5, "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION", "loss": 0.0027353977784514427, "gradient_norm": 0.4462457597255707, "target_tokens": 2228, "loss_type": "full_assistant_ce_including_eos"}
+{"step": 6, "id": "AUX-A-FT-SHOP-AFTER-ANSWER", "loss": 0.030480431392788887, "gradient_norm": 0.2942042946815491, "target_tokens": 2527, "loss_type": "full_assistant_ce_including_eos"}
+{"step": 7, "id": "AUX-B-FT-SHOP-AFTER-ANSWER", "loss": 0.3031356930732727, "gradient_norm": 1.8775849342346191, "target_tokens": 717, "loss_type": "full_assistant_ce_including_eos"}
+{"step": 8, "id": "FT-SHOP-AFTER-ANSWER", "loss": 0.10763687640428543, "gradient_norm": 0.7845247387886047, "target_tokens": 3238, "loss_type": "full_assistant_ce_including_eos"}
+{"step": 9, "id": "TRAIN-DAILY-CALM-01-INITIAL", "loss": 0.001628178870305419, "gradient_norm": 0.2333521544933319, "target_tokens": 1585, "loss_type": "full_assistant_ce_including_eos"}
+{"step": 10, "id": "FT-BOOK-AFTER-ANSWER", "loss": 0.04529564827680588, "gradient_norm": 0.396938294172287, "target_tokens": 2913, "loss_type": "full_assistant_ce_including_eos"}
+{"step": 11, "id": "FT-SHOP-AFTER-ANSWER", "loss": 0.08704866468906403, "gradient_norm": 0.6011492609977722, "target_tokens": 3238, "loss_type": "full_assistant_ce_including_eos"}

@@ -1,0 +1,115 @@
+{
+  "status": "RAW_COMPLETE_PENDING_CMEE_AND_CONTENT_REVIEW",
+  "plan": {
+    "status": "MASH_EXPLICITLY_APPROVED_ONCE",
+    "purpose": "Test only model-facing prior syntax alignment on the saved rehearsal13 weights; no training",
+    "cpu_report_sha256": "13e6c81ba43616d47922c82e5f897842a933714ec7a17a7993f44841296c81ad",
+    "eval_inputs_sha256": "8f32141212419628092c69e43dcf3a267651c8b95b20f1ad7e98e064cb41a820",
+    "prepare_source_sha256": "2f9e0e2e2ebcadf5bc5cfd90504ac8ba6067cf4d0d4936381cfd2334cf432474",
+    "runner_sha256": "0dc460a4207716a5773cc52b3974ba37fe93fc65495cd5b43216fd74de8aa802",
+    "model": "Qwen/Qwen3.5-4B",
+    "base_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "adapter_sha256": "114466411f36f0eef7a2dceaec7f5190544ac8545eb6b2f6a3d0446b70f90b66",
+    "adapter_files_sha256": {
+      "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+      "adapter_config.json": "db3ed15f287924089bdcdc4b057f93f3173df8026bcf3aaaaf65557916bef519",
+      "adapter_model.safetensors": "114466411f36f0eef7a2dceaec7f5190544ac8545eb6b2f6a3d0446b70f90b66"
+    },
+    "adapter_current_status": "NOT_ADOPTED; retained historical offline diagnostic weights with old9 FIT9/9 and full2 0/2",
+    "pod_id": "vgkm402msgroiu",
+    "gpu": "NVIDIA RTX A5000",
+    "max_model_loads": 1,
+    "max_generations": 2,
+    "max_updates": 0,
+    "max_process_seconds": 600,
+    "parent_timeout_seconds": 590,
+    "parent_kill_after_seconds": 10,
+    "max_processing_proration_usd": 0.047,
+    "rate_usd_per_hour": 0.28,
+    "rate_basis": "Previously observed same-Pod rate; no live management query",
+    "excluded_costs": [
+      "preparation",
+      "parent-external CMEE CPU",
+      "recovery",
+      "holding",
+      "storage",
+      "network",
+      "tax"
+    ],
+    "evaluation_order": [
+      "FT-BOOK-AFTER-ANSWER",
+      "FT-SHOP-AFTER-ANSWER"
+    ],
+    "output_token_caps": [
+      3712,
+      3584
+    ],
+    "per_call_seconds": 180,
+    "context_tokens": 8192,
+    "baseline": "Historical rehearsal13: BOOK INVALID_FORMAT/EOS2371; SHOP TOKEN_LIMIT/cap3584; full2 meaning/body0/2. Do not regenerate baseline.",
+    "success": "Both actual raw meaning and person body adopted, original receipt replay and every formed snapshot cold full outcome identical, root reads both raw and all formed prose. No human/product admission.",
+    "stop": "One run only; timeout, missing outcome or failure closes not adopted. No retry, raw repair, fallback, validation relaxation, extra training/generation or next run.",
+    "old9": "Inputs and weights unchanged; old9 is not regenerated and historical FIT9/9 is not counted as a new result.",
+    "product_credit": 0,
+    "candidate_ready": false,
+    "automatic_progression": false,
+    "approval": {
+      "by": "Mash",
+      "statement": "進めていいよ。",
+      "proposal_commit": "5c21326cf80be2c04c9ece3b9474bb0105a7532f",
+      "scope": "追加学習なし・保存済み11446641でBOOK/SHOP各1生成→既存CMEE・成立snapshot保存再読、最大600秒・処理按分$0.047、準備/親外CPU/回収/保持等別、retry/次runなし",
+      "date_jst": "2026-10-29"
+    }
+  },
+  "source_commit": "943ee425ef7796b92ed9ee56f71fbb241ea2e45f",
+  "started_unix": 1793267624.0486112,
+  "model_loads_started": 1,
+  "model_loads_completed": 1,
+  "optimizer_steps_completed": 0,
+  "training_forwards_completed": 0,
+  "model_calls_started": 2,
+  "model_calls_completed": 2,
+  "calls": [
+    {
+      "phase": "before",
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "path": "before_FT-BOOK-AFTER-ANSWER.jsonl",
+      "raw_sha256": "7a1a106680694c2d80d69cd6dac95c9b22c38b20d11e8d874747592d714e0a9a",
+      "adapter_sha256": "114466411f36f0eef7a2dceaec7f5190544ac8545eb6b2f6a3d0446b70f90b66",
+      "eos_reached": false,
+      "output_tokens": 3712,
+      "seconds": 160.8119205919793,
+      "timeout_triggered": false
+    },
+    {
+      "phase": "before",
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "path": "before_FT-SHOP-AFTER-ANSWER.jsonl",
+      "raw_sha256": "cbb8b1684244a743f94140013af4306473bf20be6eb3ff40cb8cf4d8e5c5da7e",
+      "adapter_sha256": "114466411f36f0eef7a2dceaec7f5190544ac8545eb6b2f6a3d0446b70f90b66",
+      "eos_reached": false,
+      "output_tokens": 3584,
+      "seconds": 154.15425634896383,
+      "timeout_triggered": false
+    }
+  ],
+  "retry": false,
+  "automatic_progression": false,
+  "product_credit": 0,
+  "elapsed_seconds": 326.24169676890597,
+  "gpu": {
+    "name": "NVIDIA RTX A5000",
+    "free_bytes": 25062342656,
+    "total_bytes": 25285623808,
+    "torch": "2.8.0+cu128",
+    "cuda_build": "12.8",
+    "bf16_supported": true
+  },
+  "adapter_unchanged": true,
+  "peak_allocated_bytes": 10353072128,
+  "peak_reserved_bytes": 11475615744,
+  "post_release_allocated_bytes": 8519680,
+  "frozen_inputs_unchanged": true,
+  "processing_seconds": 326.24169293697923,
+  "process_cost_usd": 0.02537435389509839
+}

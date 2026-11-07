@@ -1,5 +1,5 @@
 export const HIDDEN_SCREENS = new Set([]);
-export const MAIN_TAB_ROUTES = new Set(["Input", "Analysis", "Piece", "RankingTop", "Settings"]);
+export const MAIN_TAB_ROUTES = new Set(["Input", "Analysis", "Piece", "Settings"]);
 
 export const SELF_STRUCTURE_LATEST_STATUS_POLL_MS = 20 * 1000;
 export const SELF_STRUCTURE_BANNER_AUTO_HIDE_MS = 4500;

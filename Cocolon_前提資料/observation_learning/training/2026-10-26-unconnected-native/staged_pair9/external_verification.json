@@ -1,0 +1,23 @@
+{
+  "status": "VERIFIED",
+  "archive_bytes": 16150601,
+  "archive_sha256": "25251908388caf414868f30867862c5288ff2c2606fdfbe0c2ee959f3c35b7bf",
+  "payloads": 152,
+  "members": 153,
+  "all_crc_hash_size_exact": true,
+  "all_cpu_original_bytes_exact": true,
+  "all_source5_bytes_exact": true,
+  "all_api_sources_exact": true,
+  "early_book_exact": true,
+  "tensors": 112,
+  "parameters": 3833856,
+  "all_f32_finite": true,
+  "initial_reload_names_shapes_exact": true,
+  "adapter_sha256": "2dfd7dbd2613aca8682601a140c1bbcc82e0b22de052dece60c6a60ad1a1cea4",
+  "all9_training_order_finite_gradients_exact": true,
+  "initial_284f_and_sources_unchanged": true,
+  "gpu_and_consumer_exit_code": 0,
+  "post_release_allocated_bytes_recorded": 17039360,
+  "sql_operations": 0,
+  "saved_tensor_names_shapes_match_loaded_reports": true
+}

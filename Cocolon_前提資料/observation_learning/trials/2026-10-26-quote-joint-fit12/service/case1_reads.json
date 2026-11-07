@@ -1,0 +1,89 @@
+{
+  "get": {
+    "schema_version": "cocolon.emlis_thread.application.v1",
+    "thread_id": "2133a222-48fb-4f78-bb63-f8172c4293fa",
+    "revision": 5,
+    "state": "COMPLETED",
+    "original": {
+      "id": "12260b53-42ce-421e-bb5f-399b78f8d603",
+      "created_at": "2026-10-25T11:13:24.871248",
+      "memo": "あったかいもの食べたら、ちょっと落ち着いた。",
+      "memo_action": "帰ってから、うどんを作って食べた。"
+    },
+    "timeline": [
+      {
+        "event_id": "51dfe94b-6533-47ba-844e-44efad71d8b6",
+        "kind": "OBSERVATION",
+        "recorded_at": "2026-10-25T22:56:35.036+00:00",
+        "round_index": 0,
+        "text": "見えたこと：\n帰ってから、うどんを作って食べたのですね。\n\nEmlisから：\nあったかいものを食べて、少し落ち着けてよかったです。",
+        "stage": "INITIAL",
+        "is_current": true
+      }
+    ],
+    "can_write": false,
+    "pending_question": null,
+    "current_observation": {
+      "event_id": "51dfe94b-6533-47ba-844e-44efad71d8b6",
+      "text": "見えたこと：\n帰ってから、うどんを作って食べたのですね。\n\nEmlisから：\nあったかいものを食べて、少し落ち着けてよかったです。"
+    },
+    "body_state": "FINAL",
+    "answer_saved": false,
+    "answer_assessment": "NOT_APPLICABLE",
+    "meaning_updated": false,
+    "failure_code": null,
+    "operation_id": "1c3045e6-5445-49ea-ac58-033b4a9d3714",
+    "attempt_id": "80b4597e-fa82-43f6-8eff-acc66926ab3d",
+    "requested_attempt_id": null,
+    "can_retry": false,
+    "can_continue": false,
+    "issued_count": 0,
+    "question_limit": 1,
+    "started_question_limit": 1,
+    "processing_deadline_at": null
+  },
+  "start": {
+    "schema_version": "cocolon.emlis_thread.application.v1",
+    "thread_id": "2133a222-48fb-4f78-bb63-f8172c4293fa",
+    "revision": 5,
+    "state": "COMPLETED",
+    "original": {
+      "id": "12260b53-42ce-421e-bb5f-399b78f8d603",
+      "created_at": "2026-10-25T11:13:24.871248",
+      "memo": "あったかいもの食べたら、ちょっと落ち着いた。",
+      "memo_action": "帰ってから、うどんを作って食べた。"
+    },
+    "timeline": [
+      {
+        "event_id": "51dfe94b-6533-47ba-844e-44efad71d8b6",
+        "kind": "OBSERVATION",
+        "recorded_at": "2026-10-25T22:56:35.036+00:00",
+        "round_index": 0,
+        "text": "見えたこと：\n帰ってから、うどんを作って食べたのですね。\n\nEmlisから：\nあったかいものを食べて、少し落ち着けてよかったです。",
+        "stage": "INITIAL",
+        "is_current": true
+      }
+    ],
+    "can_write": false,
+    "pending_question": null,
+    "current_observation": {
+      "event_id": "51dfe94b-6533-47ba-844e-44efad71d8b6",
+      "text": "見えたこと：\n帰ってから、うどんを作って食べたのですね。\n\nEmlisから：\nあったかいものを食べて、少し落ち着けてよかったです。"
+    },
+    "body_state": "FINAL",
+    "answer_saved": false,
+    "answer_assessment": "NOT_APPLICABLE",
+    "meaning_updated": false,
+    "failure_code": null,
+    "operation_id": "1c3045e6-5445-49ea-ac58-033b4a9d3714",
+    "attempt_id": "80b4597e-fa82-43f6-8eff-acc66926ab3d",
+    "requested_attempt_id": null,
+    "can_retry": false,
+    "can_continue": false,
+    "issued_count": 0,
+    "question_limit": 1,
+    "started_question_limit": 1,
+    "processing_deadline_at": null
+  },
+  "persisted_thread_events_unchanged": true
+}

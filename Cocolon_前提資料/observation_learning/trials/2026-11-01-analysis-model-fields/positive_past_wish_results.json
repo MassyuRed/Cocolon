@@ -1,0 +1,167 @@
+{
+  "schema_version": "analysis_positive_past_wish_results.v1",
+  "work_date": "2026-11-07",
+  "status": "LOCAL_RECOVERY_WITH_INTERMEDIATE_LOSS_NOT_ADOPTED",
+  "api_commit": "91f3e67b8daff5b66dabb7b2a7875dc191a72831",
+  "runner_commit": "22934ca3f24c71198eb6396ff8c407e0e1cc36b5",
+  "profile": "selected_material.v13",
+  "comparator": "v13 inherits v11 plus one independent synthetic positive-past example; unsuccessful v12 guidance excluded before execution. Same a2e, source, user message and free-string shape mask. Known fixtures, not blind general-quality evaluation.",
+  "initial_weights_sha256": "a2e62bca49ccccc5eb1d91254cd7f536d2cae0329ef7f80e5ee37208d335eb59",
+  "initial_config_sha256": "006ebf7bef859264b3778126f4a0f6512e1b2a7e6049b09dfcf0d56603ede3a9",
+  "new_prompt_examples": 1,
+  "new_training_teachers": 0,
+  "evaluation_to_teacher_conversions": 0,
+  "new_generation": 19,
+  "model_loads": 1,
+  "training_updates": 0,
+  "generation_retries": 0,
+  "seconds": 169.69736406300217,
+  "max_input_tokens": 4855,
+  "before": {
+    "requests": 14,
+    "generated": 14,
+    "mapped": 20,
+    "nodes": 34,
+    "unparsed_in_generated": 1,
+    "rejected": 0
+  },
+  "after": {
+    "requests": 14,
+    "generated": 14,
+    "mapped": 21,
+    "nodes": 36,
+    "unparsed_in_generated": 0,
+    "rejected": 0
+  },
+  "local_recovery": {
+    "request": "HC01",
+    "retained_prior_nodes": 4,
+    "newly_typed_nodes": 2,
+    "mapped_before": 2,
+    "mapped_after": 3,
+    "unparsed_before": 1,
+    "unparsed_after": 0,
+    "edges": 0,
+    "note": "Both roots existed in the baseline raw. Removing a false past-wish modifier admitted the previously unsupported whole record. Past fact and positive past wish are separately evidenced; no causal link."
+  },
+  "retained_typed_graph_counts_text_projection_requests": [
+    "HC02",
+    "HC03",
+    "HC04",
+    "HC05",
+    "HC06",
+    "HC07",
+    "HC08",
+    "HC09",
+    "HC10",
+    "AE05",
+    "AP07_v7",
+    "AP08_v7",
+    "OP02_v7"
+  ],
+  "raw_byte_identity_known_requests": [
+    "HC02",
+    "HC03",
+    "HC04",
+    "HC06",
+    "HC07",
+    "HC08",
+    "HC09",
+    "HC10",
+    "AP07_v7",
+    "AP08_v7",
+    "OP02_v7"
+  ],
+  "intermediate_losses": {
+    "scope": "CONTENT_TARGET children only; complete root quotes, typed arguments/evidence retained",
+    "counts_by_request": {
+      "HC01": 2,
+      "HC05": 2,
+      "AE05": 1
+    },
+    "total": 5
+  },
+  "controls": {
+    "count": 5,
+    "raw_and_json_and_typed_exact": 5,
+    "typed": 1,
+    "unsupported": 4,
+    "note": "Omitted actor, other actor, embedded wish and current incomplete action scope remain unsupported. WC04 had no baseline WRITTEN_MODIFIER and cannot prove valid-modifier preservation."
+  },
+  "evidence_checks": 170,
+  "evidence_check_scope": "field, unit, qualifier and typed-node references; independent review also checks observed-order edge evidence",
+  "saved_candidate_non_generation_reload": 19,
+  "response_replays": 19,
+  "live_db_or_current_monthly_rpc": 0,
+  "v12_rejected": {
+    "api_commit": "aa5b60390ee869048eafe73814a9567a41ba8e41",
+    "new_generation": 24,
+    "model_loads": 1,
+    "training_updates": 0,
+    "seconds": 187.82016548793763,
+    "before": {
+      "requests": 14,
+      "generated": 14,
+      "mapped": 20,
+      "nodes": 34,
+      "unparsed_in_generated": 1,
+      "rejected": 0
+    },
+    "after": {
+      "requests": 14,
+      "generated": 13,
+      "mapped": 19,
+      "nodes": 33,
+      "unparsed_in_generated": 1,
+      "rejected": 1
+    },
+    "HC01": "Raw byte-identical; invalid past-wish modifier persists.",
+    "OP02": "Invented SELF; strict reader rejected the whole request.",
+    "controls_raw_exact": 5,
+    "response_replays": 24
+  },
+  "turn_totals": {
+    "new_generation": 43,
+    "model_loads": 2,
+    "training_updates": 0,
+    "seconds": 357.5175295509398,
+    "generation_retries": 0
+  },
+  "tests": {
+    "v12_jupyter_passed": 160,
+    "v13_jupyter_passed": 172,
+    "jupyter_subtests_each": 11,
+    "v13_ci_run": 42303432367,
+    "v13_ci_conclusion": "success",
+    "generation_saved_passed": 2604,
+    "generation_saved_skipped": 1,
+    "generation_saved_subtests": 12059,
+    "shared_owner_passed": 1,
+    "cumulative_q3_job_passed": 302,
+    "cumulative_subtests": 2,
+    "sql_source_records": 201,
+    "sql_monthly_references": 15
+  },
+  "private_bundle": {
+    "filename": "Cocolon_Analysis_PositivePastWish_20261107.zip",
+    "bytes": 4914143,
+    "members": 188,
+    "sha256": "6c3b54444ec0ae63521462751c85e314fc035f9787d36815975d456a9ad076ff",
+    "url": "https://chatgpt.com/library?file_id=libfile_fde3_f-a519aa1597588191a9ab4b4547e29f85_2f7470f963808191aaebf050935e72de&account_id=personal",
+    "library_file_id": "libfile_fde3_f-a519aa1597588191a9ab4b4547e29f85_2f7470f963808191aaebf050935e72de"
+  },
+  "gpu_after": "2 MiB, 0%; compute apps empty",
+  "normal_adoption": false,
+  "deployed": false,
+  "db_writes": 0,
+  "structure_map_delta": "NONE",
+  "primary_outcome": "TECHNICAL_CREDIT",
+  "human_product_acceptance": false,
+  "limits": [
+    "Known diagnostics and controls, not heldout/general quality evidence.",
+    "Intermediate units are not all preserved: five CONTENT_TARGET children disappeared.",
+    "The v13 source and results remain opt-in research only.",
+    "Omitted-actor wish support is a proposed finite-consumer extension, not implemented."
+  ],
+  "next_work": "次は原入力memoの単一完全希望について、主体未確定の表示と別recordを同一人物へ集約しない条件を、取得済みWC02 rawのCPU比較で検証する案。現SELF限定の拡張であり未実装。補足・複文・他者・埋込希望は対象外。本人基準・暗黙役割・判断／選択・記録間意味・全量処理・IF/Saved・実DB／端末は未完。"
+}

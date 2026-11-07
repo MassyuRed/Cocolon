@@ -1,0 +1,194 @@
+{
+  "schema": "cocolon.emlis_4b_repaired_a4500_cmee_summary.v1",
+  "cmee_api_commit": "1dabc4f196ae283264bf5e364e117a5d571af6a7",
+  "new_model_calls": 0,
+  "database_operations": 0,
+  "product_accepted": false,
+  "automatic_progression": false,
+  "before": {
+    "scope": "Fixed-source, independent teacher-family fit cases. The correction uses its saved native prior; it is not a dynamic roundtrip from the actual initial model output, a service persistence test, a real GPU thread roundtrip, a user-device test, or product acceptance.",
+    "run_id": "20261025-011309-9f0c8622",
+    "source_raw_sha256": "ba8f43fe8c67d4ebbe6b69340bec02868933ad5e4cb91a116e344b7d57ef6078",
+    "expected_adapter_revision": null,
+    "meaning_adopted_count": 0,
+    "body_available_count": 0,
+    "unsupported_count": 6,
+    "missing_fit_cases": [],
+    "full_consumer_report_sha256": "314729a5e68be637cc13558d8e277ceeda2ed0e410335197a25a9fa531dd5012",
+    "cases": [
+      {
+        "case_id": "FIT-FT-CHAIR-INITIAL",
+        "status": "CANDIDATE_NOT_ELIGIBLE",
+        "reason_code": "INVALID_EVIDENCE",
+        "messages_match": true,
+        "identity_matches": true,
+        "adoption": "NOT_ADOPTED",
+        "decision": null,
+        "counted_as_semantic_success": null
+      },
+      {
+        "case_id": "FIT-FT-CHAIR-AFTER-CORRECTION",
+        "status": "CANDIDATE_NOT_ELIGIBLE",
+        "reason_code": "INVALID_EVIDENCE",
+        "messages_match": true,
+        "identity_matches": true,
+        "adoption": "NOT_ADOPTED",
+        "decision": null,
+        "counted_as_semantic_success": null
+      },
+      {
+        "case_id": "EFREE-E01",
+        "status": "UNSUPPORTED_NOT_EVALUATED",
+        "reason_code": "outside_chair_native_profile",
+        "messages_match": null,
+        "identity_matches": null,
+        "adoption": null,
+        "decision": null,
+        "counted_as_semantic_success": false
+      },
+      {
+        "case_id": "EFREE-E02",
+        "status": "UNSUPPORTED_NOT_EVALUATED",
+        "reason_code": "outside_chair_native_profile",
+        "messages_match": null,
+        "identity_matches": null,
+        "adoption": null,
+        "decision": null,
+        "counted_as_semantic_success": false
+      },
+      {
+        "case_id": "EFREE-E03",
+        "status": "UNSUPPORTED_NOT_EVALUATED",
+        "reason_code": "outside_chair_native_profile",
+        "messages_match": null,
+        "identity_matches": null,
+        "adoption": null,
+        "decision": null,
+        "counted_as_semantic_success": false
+      },
+      {
+        "case_id": "EFREE-E04",
+        "status": "UNSUPPORTED_NOT_EVALUATED",
+        "reason_code": "outside_chair_native_profile",
+        "messages_match": null,
+        "identity_matches": null,
+        "adoption": null,
+        "decision": null,
+        "counted_as_semantic_success": false
+      },
+      {
+        "case_id": "EFREE-E05",
+        "status": "UNSUPPORTED_NOT_EVALUATED",
+        "reason_code": "outside_chair_native_profile",
+        "messages_match": null,
+        "identity_matches": null,
+        "adoption": null,
+        "decision": null,
+        "counted_as_semantic_success": false
+      },
+      {
+        "case_id": "EFREE-E06",
+        "status": "UNSUPPORTED_NOT_EVALUATED",
+        "reason_code": "outside_chair_native_profile",
+        "messages_match": null,
+        "identity_matches": null,
+        "adoption": null,
+        "decision": null,
+        "counted_as_semantic_success": false
+      }
+    ]
+  },
+  "after": {
+    "scope": "Fixed-source, independent teacher-family fit cases. The correction uses its saved native prior; it is not a dynamic roundtrip from the actual initial model output, a service persistence test, a real GPU thread roundtrip, a user-device test, or product acceptance.",
+    "run_id": "20261025-011309-9f0c8622",
+    "source_raw_sha256": "1456ab7e4a4ef774816e15d1be4162584ecc1ea695b29f9998fe0dbb29092caa",
+    "expected_adapter_revision": "0bdac5e90c79f20129de9a765ac7ee7c59714f3102bc68a2f4aff363c7dd3b78",
+    "meaning_adopted_count": 0,
+    "body_available_count": 0,
+    "unsupported_count": 6,
+    "missing_fit_cases": [],
+    "full_consumer_report_sha256": "8d2ee547fdcbb38351ffbd47e3dbb580e14a0422699f1cf63e7d302dc223e5e8",
+    "cases": [
+      {
+        "case_id": "FIT-FT-CHAIR-INITIAL",
+        "status": "SEMANTIC_NOT_ADOPTED",
+        "reason_code": "semantic_shape_invalid",
+        "messages_match": true,
+        "identity_matches": true,
+        "adoption": "NOT_ADOPTED",
+        "decision": "REJECT",
+        "counted_as_semantic_success": null
+      },
+      {
+        "case_id": "FIT-FT-CHAIR-AFTER-CORRECTION",
+        "status": "CANDIDATE_NOT_ELIGIBLE",
+        "reason_code": "INVALID_EVIDENCE",
+        "messages_match": true,
+        "identity_matches": true,
+        "adoption": "NOT_ADOPTED",
+        "decision": null,
+        "counted_as_semantic_success": null
+      },
+      {
+        "case_id": "EFREE-E01",
+        "status": "UNSUPPORTED_NOT_EVALUATED",
+        "reason_code": "outside_chair_native_profile",
+        "messages_match": null,
+        "identity_matches": null,
+        "adoption": null,
+        "decision": null,
+        "counted_as_semantic_success": false
+      },
+      {
+        "case_id": "EFREE-E02",
+        "status": "UNSUPPORTED_NOT_EVALUATED",
+        "reason_code": "outside_chair_native_profile",
+        "messages_match": null,
+        "identity_matches": null,
+        "adoption": null,
+        "decision": null,
+        "counted_as_semantic_success": false
+      },
+      {
+        "case_id": "EFREE-E03",
+        "status": "UNSUPPORTED_NOT_EVALUATED",
+        "reason_code": "outside_chair_native_profile",
+        "messages_match": null,
+        "identity_matches": null,
+        "adoption": null,
+        "decision": null,
+        "counted_as_semantic_success": false
+      },
+      {
+        "case_id": "EFREE-E04",
+        "status": "UNSUPPORTED_NOT_EVALUATED",
+        "reason_code": "outside_chair_native_profile",
+        "messages_match": null,
+        "identity_matches": null,
+        "adoption": null,
+        "decision": null,
+        "counted_as_semantic_success": false
+      },
+      {
+        "case_id": "EFREE-E05",
+        "status": "UNSUPPORTED_NOT_EVALUATED",
+        "reason_code": "outside_chair_native_profile",
+        "messages_match": null,
+        "identity_matches": null,
+        "adoption": null,
+        "decision": null,
+        "counted_as_semantic_success": false
+      },
+      {
+        "case_id": "EFREE-E06",
+        "status": "UNSUPPORTED_NOT_EVALUATED",
+        "reason_code": "outside_chair_native_profile",
+        "messages_match": null,
+        "identity_matches": null,
+        "adoption": null,
+        "decision": null,
+        "counted_as_semantic_success": false
+      }
+    ]
+  }
+}

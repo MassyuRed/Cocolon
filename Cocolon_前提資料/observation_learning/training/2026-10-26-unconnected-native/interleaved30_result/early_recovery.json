@@ -1,0 +1,17 @@
+{
+  "archive_bytes": 3468010,
+  "archive_sha256": "2c473316c39788cc043281811c1f532fc18d5f162ac816e30fbbc942c68246a5",
+  "members": 16,
+  "manifest_verified": 15,
+  "finite_tensors": 32,
+  "adapter_sha256": "1d218763964ce0e1f0e587c754731c5476d70cdd16548020abf330912c518c1b",
+  "source_commit": "e107b09535bfcf656cb97100a7434c66ca2c3740",
+  "saved_stage": "saved_before_reload",
+  "optimizer_steps": 30,
+  "actual30_log_verified": true,
+  "new_before": 0,
+  "model_calls_completed": 0,
+  "seconds": 399.5916080500465,
+  "library_file_id": "libfile_5ecbab80168481919b1e4965fd7660fe",
+  "library_version": 0
+}

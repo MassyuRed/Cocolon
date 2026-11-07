@@ -1,0 +1,118 @@
+{
+  "all9_gate": false,
+  "meaning_count": 8,
+  "body_count": 8,
+  "cases": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "meaning": true,
+      "body": true,
+      "updates": 0,
+      "question": true,
+      "eos": true,
+      "parse_error": null,
+      "body_state": "PRE_QUESTION",
+      "status": "MEANING_AND_BODY_AVAILABLE",
+      "gate": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "meaning": true,
+      "body": true,
+      "updates": 3,
+      "question": false,
+      "eos": true,
+      "parse_error": null,
+      "body_state": "REFINED",
+      "status": "MEANING_AND_BODY_AVAILABLE",
+      "gate": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "meaning": true,
+      "body": true,
+      "updates": 0,
+      "question": true,
+      "eos": true,
+      "parse_error": null,
+      "body_state": "PRE_QUESTION",
+      "status": "MEANING_AND_BODY_AVAILABLE",
+      "gate": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "meaning": true,
+      "body": true,
+      "updates": 3,
+      "question": false,
+      "eos": true,
+      "parse_error": null,
+      "body_state": "REFINED",
+      "status": "MEANING_AND_BODY_AVAILABLE",
+      "gate": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "meaning": true,
+      "body": true,
+      "updates": 0,
+      "question": true,
+      "eos": true,
+      "parse_error": null,
+      "body_state": "PRE_QUESTION",
+      "status": "MEANING_AND_BODY_AVAILABLE",
+      "gate": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "meaning": true,
+      "body": true,
+      "updates": 3,
+      "question": false,
+      "eos": true,
+      "parse_error": null,
+      "body_state": "REFINED",
+      "status": "MEANING_AND_BODY_AVAILABLE",
+      "gate": true
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "meaning": true,
+      "body": true,
+      "updates": 0,
+      "question": false,
+      "eos": true,
+      "parse_error": null,
+      "body_state": "FINAL",
+      "status": "MEANING_AND_BODY_AVAILABLE",
+      "gate": true
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "meaning": false,
+      "body": false,
+      "updates": 0,
+      "question": false,
+      "eos": true,
+      "parse_error": null,
+      "body_state": null,
+      "status": "SEMANTIC_NOT_ADOPTED",
+      "gate": false
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "meaning": true,
+      "body": true,
+      "updates": 0,
+      "question": false,
+      "eos": true,
+      "parse_error": null,
+      "body_state": "FINAL",
+      "status": "MEANING_AND_BODY_AVAILABLE",
+      "gate": true
+    }
+  ],
+  "conditional_model_calls": 0,
+  "conditional_sql_calls": 0,
+  "eval_plan_created": false
+}

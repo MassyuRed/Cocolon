@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import {
-  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -10,7 +9,7 @@ import {
 } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { CommonActions } from "@react-navigation/native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
 import CocolonButton from "../components/CocolonButton";
 import TutorialOverlay, {
@@ -38,7 +37,6 @@ const HOME_TAB_RESET_ROUTES = [
   "Input",
   "Analysis",
   "Piece",
-  "RankingTop",
   "Settings",
 ];
 
@@ -222,7 +220,7 @@ export default function TutorialFlowScreen({ navigation }) {
           mode: "info",
           title: "その他の機能",
           message:
-            "感情入力に慣れてきたら、通知やランキングも少しずつ見てみてください。\n\n自分のペースで、Emlisの機能を広げていけます。",
+            "感情入力に慣れてきたら、通知や共鳴履歴も少しずつ見てみてください。\n\n自分のペースで、Emlisの機能を広げていけます。",
           nextLabel: "終了へ",
           onNext: () => {
             setTutorialStep(STEP_FINISH);
@@ -294,7 +292,7 @@ export default function TutorialFlowScreen({ navigation }) {
   const shouldShowFinalSections = tutorialStep >= STEP_CONNECTION;
 
   return (
-    <SafeAreaView ref={screenRootRef} collapsable={false} style={styles.container}>
+    <SafeAreaView edges={["left", "right", "bottom"]} ref={screenRootRef} collapsable={false} style={styles.container}>
       <StatusBar
         barStyle={isDark ? "light-content" : "dark-content"}
         backgroundColor={colors.BG_SILVER}
@@ -468,108 +466,95 @@ function createStyles(COLORS, ui) {
   return StyleSheet.create(applyTypographyTokens({
     container: {
       flex: 1,
-      backgroundColor: COLORS.PANEL_BG,
+      backgroundColor: COLORS.BG_SILVER,
     },
     scrollContent: {
       paddingTop: 16,
       paddingBottom: 32,
-      paddingHorizontal: 18,
+      paddingHorizontal: 20,
       alignItems: "stretch",
+      width: '100%',
+      maxWidth: 680,
+      alignSelf: 'center',
     },
     screenTitle: {
-      fontSize: 24,
-      lineHeight: 32,
-      fontWeight: "900",
-      color: COLORS.TITLE_GOLD,
-      textAlign: "center",
-      marginBottom: 16,
+      color: COLORS.TEXT_ON_LIGHT,
+      textAlign: 'left',
+      marginBottom: 20,
     },
     card: {
-      borderRadius: 18,
+      borderRadius: 24,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.FIELD_BG,
-      paddingHorizontal: 16,
-      paddingVertical: 16,
-      marginBottom: 14,
+      backgroundColor: COLORS.PANEL_BG,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
+      marginBottom: 16,
       shadowColor: "#000",
-      shadowOpacity: 0.08,
-      shadowRadius: 8,
+      shadowOpacity: 0,
+      shadowRadius: 0,
       shadowOffset: { width: 0, height: 4 },
-      elevation: 3,
+      elevation: 0,
     },
     cardHeaderRow: {
       flexDirection: "row",
-      alignItems: "center",
-      marginBottom: 8,
+      alignItems: 'flex-start',
+      marginBottom: 12,
     },
     cardIcon: {
       marginRight: 8,
     },
     cardTitle: {
       flex: 1,
-      fontSize: 17,
-      lineHeight: 24,
-      fontWeight: "900",
       color: COLORS.TEXT_ON_LIGHT,
+      minWidth: 0,
+      flexShrink: 1,
     },
     cardLead: {
-      fontSize: 14,
-      lineHeight: 22,
-      fontWeight: "600",
       color: COLORS.TEXT_ON_LIGHT,
-      marginBottom: 6,
+      marginBottom: 8,
     },
     connectionRow: {
       borderTopWidth: 1,
       borderTopColor: COLORS.CARD_BORDER,
-      paddingTop: 12,
-      marginTop: 12,
+      paddingTop: 16,
+      marginTop: 16,
     },
     connectionRowFirst: {
       marginTop: 10,
     },
     connectionTitle: {
-      fontSize: 15,
-      lineHeight: 22,
-      fontWeight: "900",
-      color: COLORS.TITLE_GOLD,
-      marginBottom: 4,
+      color: COLORS.TEXT_ON_LIGHT,
+      marginBottom: 8,
     },
     connectionText: {
-      fontSize: 13,
-      lineHeight: 20,
-      fontWeight: "600",
       color: COLORS.TEXT_ON_LIGHT,
     },
     connectionExample: {
       ...text.caption,
-      marginTop: 4,
+      marginTop: 8,
       color: text.description ?? COLORS.TEXT_SUBTLE,
     },
     flowchartRoot: {
       marginTop: 12,
     },
     flowSourceCard: {
-      borderRadius: 14,
-      borderWidth: 1.5,
-      borderColor: COLORS.BORDER_GOLD,
-      backgroundColor: COLORS.PANEL_BG,
-      paddingHorizontal: 14,
-      paddingVertical: 12,
+      borderRadius: 16,
+      borderWidth: 1,
+      borderColor: COLORS.CARD_BORDER,
+      backgroundColor: COLORS.SURFACE_TONAL,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
       alignItems: "center",
     },
     flowSourceTitle: {
-      fontSize: 16,
-      lineHeight: 23,
-      fontWeight: "900",
-      color: COLORS.TITLE_GOLD,
+      color: COLORS.ON_SURFACE_TONAL,
       textAlign: "center",
     },
     flowSourceCaption: {
       ...text.caption,
-      marginTop: 2,
-      color: text.description ?? COLORS.TEXT_SUBTLE,
+      marginTop: 8,
+      color: COLORS.ON_SURFACE_TONAL,
       textAlign: "center",
     },
     flowConnectorWrap: {
@@ -580,32 +565,27 @@ function createStyles(COLORS, ui) {
       width: 2,
       height: 18,
       borderRadius: 1,
-      backgroundColor: COLORS.BORDER_GOLD,
-      opacity: 0.85,
+      backgroundColor: COLORS.TITLE_GOLD,
     },
     flowConnectorArrow: {
-      fontSize: 13,
-      lineHeight: 16,
-      fontWeight: "900",
       color: COLORS.TITLE_GOLD,
       marginTop: -1,
       marginBottom: 4,
     },
     flowConnectorPill: {
-      borderRadius: 13,
+      borderRadius: 16,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
+      backgroundColor: COLORS.SURFACE_TONAL,
       paddingHorizontal: 12,
-      paddingVertical: 5,
+      paddingVertical: 8,
       alignSelf: "center",
+      maxWidth: '100%',
     },
     flowConnectorLabel: {
-      fontSize: 12,
-      lineHeight: 17,
-      fontWeight: "900",
-      color: COLORS.TITLE_GOLD,
+      color: COLORS.ON_SURFACE_TONAL,
       textAlign: "center",
+      flexShrink: 1,
     },
     flowNodeRows: {
       marginTop: 2,
@@ -613,8 +593,8 @@ function createStyles(COLORS, ui) {
     flowNodeRow: {
       flexDirection: "row",
       alignItems: "center",
-      minHeight: 62,
-      marginBottom: 10,
+      minHeight: 72,
+      marginBottom: 12,
     },
     flowNodeRowLast: {
       marginBottom: 0,
@@ -632,14 +612,13 @@ function createStyles(COLORS, ui) {
       bottom: -10,
       width: 2,
       borderRadius: 1,
-      backgroundColor: COLORS.BORDER_GOLD,
-      opacity: 0.85,
+      backgroundColor: COLORS.TITLE_GOLD,
     },
     flowBranchVerticalLineFirst: {
-      top: 22,
+      top: '50%',
     },
     flowBranchVerticalLineLast: {
-      bottom: 22,
+      bottom: '50%',
     },
     flowBranchDot: {
       width: 8,
@@ -652,57 +631,45 @@ function createStyles(COLORS, ui) {
       width: 14,
       height: 2,
       borderRadius: 1,
-      backgroundColor: COLORS.BORDER_GOLD,
-      opacity: 0.85,
+      backgroundColor: COLORS.TITLE_GOLD,
       marginRight: 6,
     },
     flowNodeCard: {
       flex: 1,
-      borderRadius: 13,
+      borderRadius: 16,
       borderWidth: 1,
       borderColor: COLORS.CARD_BORDER,
-      backgroundColor: COLORS.PANEL_BG,
-      paddingHorizontal: 12,
-      paddingVertical: 10,
+      backgroundColor: COLORS.FIELD_BG,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
+      minWidth: 0,
     },
     flowNodeLabel: {
-      fontSize: 12,
-      lineHeight: 17,
-      fontWeight: "800",
-      color: COLORS.TITLE_GOLD,
-      marginBottom: 2,
+      color: COLORS.TEXT_SUBTLE,
+      marginBottom: 4,
     },
     flowNodeTitle: {
-      fontSize: 15,
-      lineHeight: 21,
-      fontWeight: "900",
       color: COLORS.TEXT_ON_LIGHT,
     },
     finishCard: {
-      borderRadius: 18,
+      borderRadius: 24,
       borderWidth: 1,
-      borderColor: COLORS.BORDER_GOLD,
+      borderColor: COLORS.CARD_BORDER,
       backgroundColor: COLORS.PANEL_BG,
-      paddingHorizontal: 16,
-      paddingVertical: 18,
-      marginTop: 2,
-      marginBottom: 20,
+      paddingHorizontal: 20,
+      paddingVertical: 20,
+      marginTop: 8,
+      marginBottom: 24,
     },
     finishTitle: {
-      fontSize: 17,
-      lineHeight: 24,
-      fontWeight: "900",
       color: COLORS.TEXT_ON_LIGHT,
       marginBottom: 8,
       textAlign: "center",
     },
     finishBody: {
-      fontSize: 14,
-      lineHeight: 22,
-      fontWeight: "600",
       color: COLORS.TEXT_ON_LIGHT,
-      marginBottom: 14,
+      marginBottom: 16,
       textAlign: "center",
     },
-  }, ui));
+  }, ui, {"screenTitle":"screenTitle","cardTitle":"sectionTitle","cardLead":"body","connectionTitle":"sectionTitle","connectionText":"body","connectionExample":"description","flowSourceTitle":"sectionTitle","flowSourceCaption":"description","flowConnectorArrow":"meta","flowConnectorLabel":"description","flowNodeLabel":"description","flowNodeTitle":"button","finishTitle":"modalTitle","finishBody":"body"}));
 }

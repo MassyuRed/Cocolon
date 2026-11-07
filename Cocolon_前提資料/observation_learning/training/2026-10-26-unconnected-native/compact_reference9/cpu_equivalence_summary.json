@@ -1,0 +1,172 @@
+{
+  "kind": "CPU_TEACHER_SYNTHETIC_NOT_MODEL_QUALITY",
+  "source_commit": "664ce89431d31090e26869b3ef66dd687713275d",
+  "api_commit": "7b9ee073de03940ba71587297d8600b2b6094dd1",
+  "actual_cpu_seconds": 51.926155245047994,
+  "all15_prompts_unchanged": true,
+  "other13_original_line_bytes_exact": true,
+  "changed_teachers": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "before_bytes": 11160,
+      "after_bytes": 9787,
+      "native_candidate_and_evidence_exact": true,
+      "inverse_packet_exact": true,
+      "all_native_ids_literals_prose_order_unchanged": true,
+      "renaming": {
+        "quote_names": {
+          "q_late_return": "q0",
+          "q_apologize": "q1",
+          "q_reassurance_received": "q2",
+          "q_remaining_concern": "q3",
+          "q_action_link": "q4",
+          "q_memo_link": "q5",
+          "q_self_statement": "q6",
+          "q_late_awareness": "q7",
+          "q_no_contact": "q8",
+          "q_extra_9": "q9",
+          "q_returned": "q10",
+          "q_counterfactual": "q11",
+          "q_continuing_concern": "q12",
+          "q_statement_concession": "q13",
+          "q_awareness_time": "q14",
+          "q_returned_concession": "q15",
+          "q_concern_content": "q16"
+        },
+        "update_names": {
+          "u_add_missing_explanation": "u0",
+          "u_add_missing_explanation_2": "u1",
+          "u_add_missing_explanation_3": "u2",
+          "u_add_missing_explanation_4": "u3",
+          "u_add_missing_explanation_5": "u4",
+          "u_add_missing_explanation_6": "u5",
+          "u_invalidate_gap_missing_explanation": "u6"
+        }
+      }
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "before_bytes": 12659,
+      "after_bytes": 11276,
+      "native_candidate_and_evidence_exact": true,
+      "inverse_packet_exact": true,
+      "all_native_ids_literals_prose_order_unchanged": true,
+      "renaming": {
+        "quote_names": {
+          "q_opening_known": "q0",
+          "q_celebration_sent": "q1",
+          "q_joy": "q2",
+          "q_felt_left_behind": "q3",
+          "q_action_link": "q4",
+          "q_memo_link": "q5",
+          "q_shared_talk": "q6",
+          "q_no_joint_preparation": "q7",
+          "q_extra_8": "q8",
+          "q_no_promise": "q9",
+          "q_perceived_realization": "q10",
+          "q_extra_11": "q11",
+          "q_answer_joy": "q12",
+          "q_felt_distance": "q13",
+          "q_answer_sadness": "q14",
+          "q_past_reference": "q15",
+          "q_answer_concession": "q16",
+          "q_distance_link": "q17"
+        },
+        "update_names": {
+          "u_add_missing_explanation": "u0",
+          "u_add_missing_explanation_2": "u1",
+          "u_add_missing_explanation_3": "u2",
+          "u_add_missing_explanation_4": "u3",
+          "u_add_missing_explanation_5": "u4",
+          "u_add_missing_explanation_6": "u5",
+          "u_add_missing_explanation_7": "u6",
+          "u_invalidate_gap_missing_explanation": "u7"
+        }
+      }
+    }
+  ],
+  "actual_target_tokens": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "prompt_tokens": 4387,
+      "original_target_tokens": 2913,
+      "derived_target_tokens": 2724,
+      "full_tokens": 7111,
+      "max_new_tokens": 3712,
+      "full_input_ids_sha256": "52a398fa507e2bd4077b3e9135ea7a6a7d06bc2bc2649d8f395974b2af93c457",
+      "prompt_unchanged": true,
+      "full_target_and_eos_supervised": true
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "prompt_tokens": 4539,
+      "original_target_tokens": 3238,
+      "derived_target_tokens": 3013,
+      "full_tokens": 7552,
+      "max_new_tokens": 3584,
+      "full_input_ids_sha256": "c1ef22fbdb1227cc326d517c61b40dd19f3e6c5f2462287163feea4feb7e7dbc",
+      "prompt_unchanged": true,
+      "full_target_and_eos_supervised": true
+    }
+  ],
+  "receivers": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "original_status": "GENERATED",
+      "compact_status": "GENERATED",
+      "native_candidate_and_evidence_exact": true,
+      "snapshot_all_fields_except_receipt_exact": true,
+      "snapshot_ref": "semantic-74a0eebb9fabcdd7cfa993abc7584addf6c69d86fdba90fd88d1961776929eb0",
+      "proposal_ref": "model-proposal-f1d0c5ad6b328d9233091a565583011934f448403ca79d59f00b095df2ee3de7",
+      "full_model_outcome_cross_equal": false,
+      "different_field": "meaning_checkpoint.semantic_snapshot.receipt only",
+      "body_and_question_exact": true,
+      "each_original_and_compact_receipt_rederived_exact": true,
+      "each_own_cold_full_outcome_exact": true
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "original_status": "GENERATED",
+      "compact_status": "GENERATED",
+      "native_candidate_and_evidence_exact": true,
+      "snapshot_all_fields_except_receipt_exact": true,
+      "snapshot_ref": "semantic-5e5ac52cff8938c3e81bef8c0c2d3994cbf0ca402ada5852a5e48f709ce3bfde",
+      "proposal_ref": "model-proposal-d784e8fd156953acb28288782428aad17d6545a91bd813273fcce2d754a2b8a4",
+      "full_model_outcome_cross_equal": false,
+      "different_field": "meaning_checkpoint.semantic_snapshot.receipt only",
+      "body_and_question_exact": true,
+      "each_original_and_compact_receipt_rederived_exact": true,
+      "each_own_cold_full_outcome_exact": true
+    }
+  ],
+  "cold_processes": [
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "variant": "original",
+      "process_id": 399400,
+      "status": "COLD_FULL_OUTCOME_IDENTICAL"
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "variant": "compact",
+      "process_id": 399576,
+      "status": "COLD_FULL_OUTCOME_IDENTICAL"
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "variant": "original",
+      "process_id": 399705,
+      "status": "COLD_FULL_OUTCOME_IDENTICAL"
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "variant": "compact",
+      "process_id": 399837,
+      "status": "COLD_FULL_OUTCOME_IDENTICAL"
+    }
+  ],
+  "model_loads": 0,
+  "generations": 0,
+  "product_credit": 0,
+  "full_original_equivalence_sha256": "a5190bc352da6e887b344738b2982fc5ad48f0f076322e6437358a47a1257be9"
+}

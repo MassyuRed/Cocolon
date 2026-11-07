@@ -1,0 +1,29 @@
+{
+  "source_commit": "d6f8febd8f90e2f60df2936aa7c0d270b3afa7ab",
+  "api_commit": "32dc3b3137ddc0a4401d2d1d045123f7da17683a",
+  "model_calls": 2,
+  "adopted": 0,
+  "body_available": 0,
+  "cases": [
+    {
+      "case_id": "FIT-FT-CHAIR-INITIAL",
+      "status": "CANDIDATE_NOT_ELIGIBLE",
+      "reason_code": "INVALID_EVIDENCE",
+      "messages_match": true,
+      "identity_matches": true,
+      "adoption": "NOT_ADOPTED",
+      "body": null,
+      "question": null
+    },
+    {
+      "case_id": "FIT-FT-CHAIR-AFTER-CORRECTION",
+      "status": "CANDIDATE_NOT_ELIGIBLE",
+      "reason_code": "TOKEN_LIMIT",
+      "messages_match": true,
+      "identity_matches": true,
+      "adoption": "NOT_ADOPTED",
+      "body": null,
+      "question": null
+    }
+  ]
+}

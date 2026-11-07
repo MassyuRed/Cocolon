@@ -1,0 +1,723 @@
+{
+  "schema": "cocolon_emlis_free_sft_pilot_proposal.v1",
+  "status": "EXECUTION_COMPLETE_NOT_QUALITY_ACCEPTED",
+  "prepared_at": "2026-10-24 JST",
+  "author": "Karen / Codex Work Mode",
+  "scope": {
+    "core": "EmlisAI",
+    "tier": "free",
+    "source": "current original + same-thread answer only",
+    "history": false,
+    "frame": false,
+    "question_budget_total": 1,
+    "after_answer_question_remaining": 0,
+    "cmee_integration": false
+  },
+  "dataset": {
+    "teacher_rows": 9,
+    "teacher_families": 6,
+    "with_question": 3,
+    "question_null": 6,
+    "initial_rows": 6,
+    "after_one_answer_rows": 3,
+    "original18_unchanged": true,
+    "teaching5_unchanged": true,
+    "withdrawn_session_excluded": "OBS-20261024-002",
+    "source_commit": "d57fe2205cfa74d018b2a33a1e4e74ca6837310d",
+    "note": "既存素材を使う別の完成応答案9件。原18行と合計して独立27教材と数えない。2補充の感情選択・カテゴリは今回の作者設定。",
+    "initial_with_question": 3,
+    "initial_question_null": 3,
+    "origin_counts": {
+      "KAREN_EDIT_OF_EXISTING_RECORD": 7,
+      "KAREN_NEW_FICTITIOUS_SUPPLEMENT": 2
+    }
+  },
+  "evaluation": {
+    "new_case_count": 6,
+    "new_family_count": 6,
+    "input_file": "eval_inputs.jsonl",
+    "review_file": "eval_review.jsonl",
+    "training_use": false,
+    "author_has_read": true,
+    "blind_final_evaluation": false,
+    "existing20fixtures_unchanged": true,
+    "limits": "限定Freeの比較用。Plus/Premium/Piece/Analysis/IFの品質や統計的な一般化を証明しない。"
+  },
+  "base_model": {
+    "model": "Qwen/Qwen3.5-9B",
+    "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+    "root_architecture": "Qwen3_5ForConditionalGeneration",
+    "text_only_request": true,
+    "thinking": false
+  },
+  "method_proposal": {
+    "method": "PEFT LoRA",
+    "base_dtype": "bfloat16",
+    "rank": 8,
+    "alpha": 16,
+    "bias": "none",
+    "batch_size": 1,
+    "gradient_checkpointing": true,
+    "use_cache": false,
+    "max_epochs": 1,
+    "loss": "final assistant completion only",
+    "training_target": "exact 16 text self_attn q_proj/v_proj modules at layers 3,7,11,15,19,23,27,31; all other base weights frozen",
+    "save": "adapter only",
+    "status": "IMPLEMENTED_GPU_NOT_VALIDATED",
+    "learning_rate": 0.0001,
+    "weight_decay": 0,
+    "dropout": 0,
+    "steps": 9,
+    "max_context_tokens": 2048,
+    "silent_truncation": false
+  },
+  "unresolved_before_gpu": [],
+  "comparison": {
+    "pre_and_post_same_input": true,
+    "temperature": 0,
+    "train_on_eval": false,
+    "save_raw_outputs_separately": true,
+    "semantic_review": "evaluate all 6 actual responses for groundedness, source revision, unknown/time/actor and human reception; no JSON-only PASS",
+    "generation_engine": "Transformers same before/after",
+    "do_sample": false,
+    "max_new_tokens": 1024
+  },
+  "decision": {
+    "positive_signal": "複数の学習外題材で根拠外の理由・主体反転・訂正の復活が減り、自然な受け取りが悪化しない。",
+    "insufficient": "学習した題材の再現だけ、JSON形だけ、定型語の増加だけでは改善判定しない。",
+    "no_signal": "改善が見えなくても9件・1回の結果だけで追加学習全体の不可能を断定しない。追加実行・予算拡張を自動で行わない。"
+  },
+  "gpu_started": true,
+  "fine_tuning_performed": true,
+  "cmee_integration_performed": false,
+  "automatic_progression": false,
+  "primary_sources": [
+    "https://huggingface.co/Qwen/Qwen3.5-9B/blob/c202236235762e1c871ad0ccb60c8ee5ba337b9a/config.json",
+    "https://huggingface.co/docs/transformers/en/model_doc/qwen3_5",
+    "https://huggingface.co/docs/peft/en/package_reference/lora",
+    "https://huggingface.co/Qwen/Qwen3.5-9B/blob/c202236235762e1c871ad0ccb60c8ee5ba337b9a/chat_template.jinja",
+    "https://huggingface.co/Qwen/Qwen3.5-9B/blob/c202236235762e1c871ad0ccb60c8ee5ba337b9a/model.safetensors.index.json"
+  ],
+  "execution": {
+    "entry": "runpod.sh",
+    "runner": "run_pilot.py",
+    "source": "fixed Git commit from COCOLON_SOURCE_COMMIT",
+    "prepare": "separate venv reusing unchanged existing Torch/CUDA; hashes/imports/config/index/tokenizer/label checks only; no model weights or GPU inference/training",
+    "run": "same 6 baseline -> 9 training steps -> same 6 after",
+    "direct_pins": {
+      "transformers": "5.19.0",
+      "peft": "0.21.2",
+      "accelerate": "1.15.0",
+      "safetensors": "0.8.0"
+    },
+    "timeout_seconds": 3600,
+    "kill_after_seconds": 30,
+    "timeout_scope": "run process only; preparation and Pod billing excluded",
+    "automatically_stops_pod": false,
+    "pod_stop_owner": "Mash via Runpod console after success/failure/timeout",
+    "result": "/workspace/cocolon_emlis_free_20261024/latest_results.json",
+    "local_verification": "prior syntax/data/loss/venv checks plus actual Transformers 5.19.0 and fixed Qwen tokenizer: 3 regression tests pass (9 train and 6 eval), no Torch/model weights/GPU",
+    "runpod_prepare_performed": true,
+    "gpu_execution_validated": true,
+    "runpod_prepare_completed": true,
+    "fixed_runpod_prepare_retried": true,
+    "tokenization_contract": {
+      "return_dict": false,
+      "return_tensors": null,
+      "truncation": false,
+      "enable_thinking": false,
+      "required_shape": "nonempty flat list[int]",
+      "prefix_assertion_preserved": true
+    },
+    "validation_scope": "Mash-uploaded result verified against fixed runner/data: complete one 9-step A40 pilot and 6+6 generations; no independent GPU rerun or adapter reload"
+  },
+  "latest_prepare_attempt": {
+    "source_commit": "84c784daa86842ee7007a4c03d061dab41211f84",
+    "source_log": "Mash-uploaded terminal text 20261023-225306",
+    "source_log_sha256": "ede6ced95f6a35519d5e0e0081f692010577f733c6c111eba7878b0481ca7b72",
+    "status": "FAILED_BEFORE_INFERENCE_OR_TRAINING",
+    "torch": "2.8.0+cu128",
+    "cuda_build": "12.8",
+    "direct_dependency_installation": "succeeded",
+    "failed_at": "encode_training first example prefix check",
+    "exception": "ValueError: prompt/fullのtoken prefix不一致。学習は開始しません",
+    "cause": "Transformers 5.19.0 apply_chat_template defaults return_dict=True; BatchEncoding incorrectly treated as flat token IDs",
+    "hf_token_warning_is_not_this_failure": true,
+    "prior_vllm_required": false
+  },
+  "local_tokenization_validation": {
+    "transformers": "5.19.0",
+    "tokenizers": "0.23.3",
+    "model": "Qwen/Qwen3.5-9B",
+    "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+    "training": [
+      {
+        "id": "FT-UDON-INITIAL",
+        "total": 495,
+        "prompt": 428,
+        "loss_tokens": 67
+      },
+      {
+        "id": "FT-BOOK-INITIAL",
+        "total": 531,
+        "prompt": 425,
+        "loss_tokens": 106
+      },
+      {
+        "id": "FT-BOOK-AFTER-ANSWER",
+        "total": 710,
+        "prompt": 552,
+        "loss_tokens": 158
+      },
+      {
+        "id": "FT-CHAIR-INITIAL",
+        "total": 536,
+        "prompt": 423,
+        "loss_tokens": 113
+      },
+      {
+        "id": "FT-CHAIR-AFTER-CORRECTION",
+        "total": 699,
+        "prompt": 558,
+        "loss_tokens": 141
+      },
+      {
+        "id": "FT-SHOP-INITIAL",
+        "total": 572,
+        "prompt": 442,
+        "loss_tokens": 130
+      },
+      {
+        "id": "FT-SHOP-AFTER-ANSWER",
+        "total": 785,
+        "prompt": 613,
+        "loss_tokens": 172
+      },
+      {
+        "id": "FT-REPOT-INITIAL",
+        "total": 510,
+        "prompt": 424,
+        "loss_tokens": 86
+      },
+      {
+        "id": "FT-KNIT-INITIAL",
+        "total": 553,
+        "prompt": 437,
+        "loss_tokens": 116
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "EFREE-E01",
+        "prompt": 430,
+        "output_limit": 1024
+      },
+      {
+        "id": "EFREE-E02",
+        "prompt": 441,
+        "output_limit": 1024
+      },
+      {
+        "id": "EFREE-E03",
+        "prompt": 436,
+        "output_limit": 1024
+      },
+      {
+        "id": "EFREE-E04",
+        "prompt": 540,
+        "output_limit": 1024
+      },
+      {
+        "id": "EFREE-E05",
+        "prompt": 444,
+        "output_limit": 1024
+      },
+      {
+        "id": "EFREE-E06",
+        "prompt": 421,
+        "output_limit": 1024
+      }
+    ],
+    "regression_tests": 3,
+    "failures": 0,
+    "seconds": 7.291,
+    "checks": [
+      "old BatchEncoding miscomparison reproduced; underlying IDs prefix matches",
+      "all 9: final assistant JSON + end token only; prompt labels -100",
+      "all 6: flat input IDs and prompt+1024 <=2048"
+    ],
+    "model_weights_loaded": false,
+    "gpu_used": false
+  },
+  "latest_result": {
+    "source_commit": "d53f9ef0a906624acaeb519f8c4c6eb153e60e51",
+    "artifact": "../../trials/2026-10-24-qwen9b-free-lora/pilot_results.json",
+    "readme": "../../trials/2026-10-24-qwen9b-free-lora/README.md",
+    "sha256": "5fb61702d4c5b9e4f1317088b3ef91de53041168fa3313f14086d0c67f09ceb9",
+    "bytes": 48910,
+    "executed_by": "Mash on Runpod A40",
+    "status": "EXECUTION_COMPLETE_NOT_QUALITY_ACCEPTED",
+    "training_steps": 9,
+    "before": 6,
+    "after": 6,
+    "elapsed_seconds": 72.53313755989075,
+    "peak_torch_allocated_gib": 19.939082622528076,
+    "adapter_hashes_reported": {
+      "README.md": "b24b74667d1eb9c991047b4507c329613ae38707f4450446a94217081af69e96",
+      "adapter_model.safetensors": "1115f50162c6f8b67bc162f4e7667b653821229a4a959b21abfdc6ac34a0a6bf",
+      "adapter_config.json": "f133d0336298bb13d1a415abdf230783a072b9ae60deb9e127bc6f5dd55be3da"
+    },
+    "adapter_files_received": false,
+    "adapter_reload_verified": false,
+    "pod_stop_confirmed": false,
+    "total_cost_verified": false
+  },
+  "remaining_after_pilot": [
+    "全6場面の内部本文診断で十分な品質改善は確認できない。商品採用・正式Product Read・P6統合・他core評価は未成立。",
+    "JSON解析成功0/12だが、promptにJSON形式の明示がない。次の有料実行前に指示と検査の整合を具体化する。",
+    "初回adapter未回収を維持。別runの重み本体は受領・内部値とhashを照合し、Runpod診断の再loadを確認済み。今回Pod Stop・総課金は未確認。観測品質・一般化・商品採用は未成立。追加実行は自動で行わない。"
+  ],
+  "semantic_review": {
+    "reviewer": "Karen internal full-text review, not Mash Product Read",
+    "overall": "NO_SUFFICIENT_OVERALL_QUALITY_IMPROVEMENT_DEMONSTRATED",
+    "cases": [
+      {
+        "case_id": "EFREE-E01",
+        "judgment": "WORSE_OR_UNRESOLVED",
+        "before": "拍手を他者の肯定へ昇格し、喜びの有無を内面の喜び／達成感の正体へずらした。",
+        "after": "『承認された』を断定。問いが本人の喜びの有無から『評価か礼儀か』という根拠のない二択へ逸れる。",
+        "retained": "最後まで話した事実と拍手は保持。"
+      },
+      {
+        "case_id": "EFREE-E02",
+        "judgment": "WORSE_OR_UNRESOLVED",
+        "before": "『間に合ったため引き返した』と順序・理由を逆転し、『ベランダに取り込み』と場所関係も不正確。疲労理由を使ってはいないが、その明示否定を省いた。",
+        "after": "同じ順序・場所関係の誤りが残り、『雨に濡れる不安』という本人未記載の感情を追加。",
+        "retained": "洗濯物の取り込みと平穏、問いなしは保持。"
+      },
+      {
+        "case_id": "EFREE-E03",
+        "judgment": "WORSE_OR_UNRESOLVED",
+        "before": "本人が先生へ説明した主体と、言語化できた喜びは保持。ただし『特に印象に残る理由』を作って問う。",
+        "after": "主体は保持するが、『共有できた温かみ』や未記載の他参加者との交流・楽しさへ問いを広げる。",
+        "retained": "説明主体の反転は前後ともない。"
+      },
+      {
+        "case_id": "EFREE-E04",
+        "judgment": "BASELINE_ALREADY_RETAINS_CORRECTION_NO_CLEAR_GAIN",
+        "before": "重複だけ削除・残したい写真の保持、探しやすさ・すっきり、訂正と問いなしを保持。",
+        "after": "訂正と問いなしは保持するが、『残したい写真は保持』の明示が落ちる。",
+        "retained": "全部削除を現在事実として復活させていない。"
+      },
+      {
+        "case_id": "EFREE-E05",
+        "judgment": "PARTIAL_GAIN_WITH_UNRESOLVED_OMISSION",
+        "before": "昨日申し込み／今日の迷いはあるが、昨日うれしかったことと今も出たい気持ちの明示が落ちる。",
+        "after": "今の出たい気持ちは明瞭。ただし昨日の喜びはなお欠落。問いは理由から決断期限へ変わる。",
+        "retained": "参加／取消をモデルが確定してはいない。"
+      },
+      {
+        "case_id": "EFREE-E06",
+        "judgment": "LOCAL_GAIN_RECEPTION_STILL_GENERIC",
+        "before": "洗って干したことを『乾燥が完了』へ昇格。受け取りは『平穏な日常の一コマ』の定型。",
+        "after": "『洗って干した』へ戻り、乾燥完了の補完は解消。受け取りの定型は同じ。",
+        "retained": "前後とも問いを強制せず、人格評価はしていない。"
+      }
+    ],
+    "json_parse_before": 0,
+    "json_parse_after": 0,
+    "format_issue": "output fields specified but JSON-only instruction absent; no response_format enforcement; do not claim explicit JSON instruction was violated"
+  },
+  "next_diagnostic": {
+    "status": "COMPLETED_ON_SEPARATE_RECREATED_RUN",
+    "script": "diagnose_learning.py",
+    "purpose": "paired fit on existing 9 teachers before altering data or training",
+    "reference_sha256": "5fb61702d4c5b9e4f1317088b3ef91de53041168fa3313f14086d0c67f09ceb9",
+    "require_saved_adapter_sha256": true,
+    "source_runner_sha256": "c0491131cb6fcccadcb94e25d618acd95bcff9b6eeb875403b2d9723ccc613e4",
+    "new_training": false,
+    "prompt_changed": false,
+    "json_instruction_changed": false,
+    "model_changed": false,
+    "nll_forward_passes": 18,
+    "generation_requests": 18,
+    "training_target_used_in_generation": false,
+    "local_cache_only": true,
+    "new_dependencies": false,
+    "timeout_seconds": 900,
+    "kill_after_seconds": 30,
+    "automatically_stops_pod": false,
+    "result": "/workspace/cocolon_emlis_free_20261024/latest_diagnosis.json",
+    "local_checks": "syntax, 9 target-free prompts, weighted-NLL and invalid values, missing/tampered adapter rejection, saved-run matching, real-tokenizer context max1637/2048",
+    "gpu_validated": true,
+    "limits": "training-example fit only; NLL alone is not semantic quality, generalization or product acceptance; no automatic retraining",
+    "latest_attempt": {
+      "source_commit": "67d4186608302d9694ca92122d2617af2028cddd",
+      "source_log": "Mash-uploaded terminal text 20261023-231911",
+      "source_log_sha256": "009757985a3423986acb0d09ecfed1c9bf48b56d6b6365047755a6e31df8cfdc",
+      "source_log_bytes": 1479,
+      "error": "curl: (23) Failure writing output to destination; /workspace/cocolon_emlis_free_20261024/diagnose_learning.py: No such file or directory",
+      "diagnostic_started": false,
+      "inference_started": false,
+      "cause_confirmed": "destination parent directory is absent or unavailable in the current Pod",
+      "data_loss_confirmed": false,
+      "adapter_missing_confirmed": false,
+      "next": "read-only listing, mount/disk and bounded saved-artifact search before mkdir/install/retraining"
+    },
+    "storage_readback": {
+      "source_log": "Mash-uploaded terminal text 20261023-232323",
+      "source_log_sha256": "ad8a4cd6b75f5c20830583a8a900974a1fd99db449516ab954c6706b91329815",
+      "source_log_bytes": 1840,
+      "workspace_listing": "total 0",
+      "workspace_df": {
+        "filesystem": "overlay",
+        "size": "50G",
+        "used": "16M",
+        "available": "50G",
+        "mounted_on": "/"
+      },
+      "bounded_artifact_search_results": 0,
+      "diagnostic_started": false,
+      "previous_training_pod_identity_verified": false,
+      "data_loss_confirmed": false,
+      "next": "Recreated-run adapter, results and diagnosis received and checked; Stop can be performed. No further paid run automatically.",
+      "initial_training_storage_persistence_was_verified": false,
+      "official_sources": [
+        "https://docs.runpod.io/pods/storage/types",
+        "https://docs.runpod.io/pods/manage-pods"
+      ],
+      "current_pod_newly_created_user_confirmed": true,
+      "current_pod_stop_user_confirmed": true,
+      "prior_storage_loss_inferred": false
+    },
+    "pod_list_observation": {
+      "source": "Mash screenshot 2026-10-24 082757 and explicit message",
+      "current_new_pod": "noble_magenta_moth",
+      "initial_m1_pod_confirmed": "eastern_silver_sheep",
+      "initial_m1_equals_training_pod_confirmed": false,
+      "training_pod_candidate": "novel_silver_hamster",
+      "training_pod_identity_confirmed": false,
+      "all_six_displayed_as_stopped": true
+    },
+    "latest_workspace_screenshot": {
+      "source": "Mash Jupyter screenshot 2633 and message 残ってない",
+      "workspace_visible_files": 0,
+      "pod_identity_visible": false,
+      "original_training_pod_confirmed": false,
+      "original_data_loss_confirmed": false
+    },
+    "original_run_status": "BLOCKED_ORIGINAL_ADAPTER_UNAVAILABLE",
+    "latest_completed_reference_sha256": "24e4f0dc7e9e2ed03115bf0dd960849fd96ce6432c850f2adad03b01c49620b5",
+    "validation_scope": "Mash-uploaded explicit separate-run completion, same nine NLL and 9+9 generations, adapter hash and loaded norm matched received weight file; no independent local GPU execution",
+    "received_result": "../../trials/2026-10-24-qwen9b-free-lora/recreated-run/diagnosis_results.json"
+  },
+  "recreation_fallback": {
+    "status": "RECREATION_DIAGNOSIS_EXPORT_RECEIVED_NOT_QUALITY_ACCEPTED",
+    "entry": "recreate_pilot.sh",
+    "exporter": "export_checkpoint.py",
+    "recipe_commit": "d53f9ef0a906624acaeb519f8c4c6eb153e60e51",
+    "recipe_changed": false,
+    "teacher_rows": 9,
+    "epochs": 1,
+    "steps": 9,
+    "new_training_proposed": true,
+    "new_training_performed": true,
+    "new_run_distinct_from_original": true,
+    "original_weights_recovered": false,
+    "bitwise_reproduction_guaranteed": false,
+    "automatic_execution": false,
+    "original_result_unchanged": true,
+    "diagnosis": "explicit reference-result selects this separate run after recipe and adapter hash validation",
+    "backup": "adapter and results archived before diagnosis; archive refreshed on EXIT; download plus checksum verification before Stop",
+    "result_archive": "/workspace/cocolon_emlis_free_20261024/cocolon_recreated_checkpoint.tar.gz",
+    "exclude_from_export": [
+      "base model",
+      "cache",
+      "venv",
+      "credentials"
+    ],
+    "timeout_seconds": 1800,
+    "kill_after_seconds": 30,
+    "timeout_scope": "run only; foreground inner timers remain in outer process group; prepare, manual download and whole Pod billing excluded",
+    "automatically_stops_pod": false,
+    "repeat_guard": "saved result/adapter or attempt marker blocks run; atomic internal execution marker blocks direct repeats",
+    "local_validation": "syntax; separate-run recipe/hash selection; archive/checksum round trip and rejection paths; CPU stub diagnosis failure and duplicate guards; shortened outer timeout kills nested training/diagnostic child in ~1.1 seconds with readable archive",
+    "initial_timeout_stub_failed": true,
+    "timeout_stub_fix": "inner timeout foreground; both child stages rechecked",
+    "gpu_validated": true,
+    "limits": "Recreated-run training-example fit only. No original-weight restoration, generalization, product acceptance or automatic training expansion.",
+    "verification_scope": "received Mash Runpod execution and exported files; no Karen GPU rerun",
+    "archive_received": true,
+    "archive_sha256": "6a7b4fe0dbcc29cfcb858d9dd68f6fd5a65e1ebc5e8911bc63c2920f39a89b3d",
+    "archive_bytes": 4217463,
+    "export_file_hashes_verified": 33,
+    "adapter_files_received": true,
+    "pod_stop_confirmed": false,
+    "total_cost_verified": false
+  },
+  "latest_recreated_result": {
+    "readme": "../../trials/2026-10-24-qwen9b-free-lora/recreated-run/README.md",
+    "pilot": {
+      "bytes": 48751,
+      "sha256": "24e4f0dc7e9e2ed03115bf0dd960849fd96ce6432c850f2adad03b01c49620b5",
+      "status": "EXECUTION_COMPLETE_NOT_QUALITY_ACCEPTED",
+      "training_steps": 9,
+      "before": 6,
+      "after": 6,
+      "seconds": 73.80006289482117
+    },
+    "diagnosis": {
+      "bytes": 83973,
+      "sha256": "907ebb138e34cb7f958fa0249e3449cfcf6b75a15c33e4aaa0b6c49f35f17edf",
+      "status": "DIAGNOSTIC_COMPLETE_NOT_QUALITY_ACCEPTED",
+      "teacher_count": 9,
+      "teacher_tokens": 1089,
+      "teacher_completions_excluded_from_generation": true,
+      "before_weighted_nll": 1.8150625453288671,
+      "after_weighted_nll": 1.657143720034835,
+      "reduction_percent": 8.70046190421605,
+      "nll_pairs": [
+        {
+          "id": "FT-UDON-INITIAL",
+          "tokens": 67,
+          "before": 1.0017378330230713,
+          "after": 0.7905309200286865
+        },
+        {
+          "id": "FT-BOOK-INITIAL",
+          "tokens": 106,
+          "before": 1.7706255912780762,
+          "after": 1.6316614151000977
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER",
+          "tokens": 158,
+          "before": 2.031500816345215,
+          "after": 1.9413193464279175
+        },
+        {
+          "id": "FT-CHAIR-INITIAL",
+          "tokens": 113,
+          "before": 1.73739492893219,
+          "after": 1.5157406330108643
+        },
+        {
+          "id": "FT-CHAIR-AFTER-CORRECTION",
+          "tokens": 141,
+          "before": 1.5763933658599854,
+          "after": 1.3963851928710938
+        },
+        {
+          "id": "FT-SHOP-INITIAL",
+          "tokens": 130,
+          "before": 2.036282777786255,
+          "after": 1.89751136302948
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER",
+          "tokens": 172,
+          "before": 2.404301166534424,
+          "after": 2.2409636974334717
+        },
+        {
+          "id": "FT-REPOT-INITIAL",
+          "tokens": 86,
+          "before": 1.3348088264465332,
+          "after": 1.1654740571975708
+        },
+        {
+          "id": "FT-KNIT-INITIAL",
+          "tokens": 116,
+          "before": 1.630827784538269,
+          "after": 1.4780807495117188
+        }
+      ],
+      "all_nine_nll_decreased": true,
+      "generation_changed": 8,
+      "json_parsed_before": 0,
+      "json_parsed_after": 0,
+      "seconds": 105.6572482585907,
+      "adapter_files_unchanged": true
+    },
+    "adapter": {
+      "files_received": true,
+      "sha256": {
+        "README.md": "b24b74667d1eb9c991047b4507c329613ae38707f4450446a94217081af69e96",
+        "adapter_model.safetensors": "159b2c3f87ff189ab18c84dfd5ed56e95a39846f068dca2f8236958ed8f7986e",
+        "adapter_config.json": "e726a3406e7704e7eaa58a12be952754deedd2ba4dce88b45eff1f5a22b85c3c"
+      },
+      "bytes": 4461168,
+      "tensor_count": 32,
+      "trainable_parameter_count_in_pilot": 1114112,
+      "tensor_values_finite": true,
+      "all_tensors_nonzero": true,
+      "reported_loaded_norms_match_received_weights": true,
+      "runpod_reload_verified_from_received_output": true,
+      "independent_local_gpu_reload_performed": false
+    },
+    "original_weights_recovered": false,
+    "semantic_review": "TEACHER_NLL_DECREASED_BUT_OBSERVATION_BEHAVIOR_NOT_ESTABLISHED"
+  },
+  "next_training_amount_comparison": {
+    "status": "ON_HOLD_PENDING_CANDIDATE_ECONOMICS_COMPARISON",
+    "proposed_by": "Karen in response to Mash asking どうするの",
+    "purpose": "test same-teacher response fit before adding teachers; insufficient training amount is not yet established",
+    "start": "same pinned base, one new uninterrupted training trajectory",
+    "checkpoints_epochs": [
+      1,
+      4,
+      16
+    ],
+    "checkpoints_steps": [
+      9,
+      36,
+      144
+    ],
+    "max_epochs": 16,
+    "max_steps": 144,
+    "teacher_rows": 9,
+    "comparison_cases": 6,
+    "training_data_changed": false,
+    "prompt_changed": false,
+    "learning_rate_changed": false,
+    "lora_targets_changed": false,
+    "existing_adapter_resume": false,
+    "reason": "received adapter has no optimizer state; compare amounts within the same new training trajectory",
+    "evaluation": "same teacher NLL + actual 9 teacher replies + fixed 6 comparison replies at base and each checkpoint; not NLL-only or exact-text acceptance",
+    "primary_semantic_failures": [
+      "unsupported missing reply or promise/exclusion in shop",
+      "friend-intent forced choice instead of person's concern",
+      "collaboration/achievement added as joy reason after chair correction"
+    ],
+    "time_limit_seconds": 1800,
+    "kill_after_seconds": 30,
+    "time_limit_scope": "run only; prepare/download and whole Pod billing excluded",
+    "stop_on": [
+      "nonfinite loss",
+      "OOM",
+      "144 cumulative optimizer steps",
+      "run timeout"
+    ],
+    "automatic_extension": false,
+    "automatic_retry": false,
+    "automatically_stops_pod": false,
+    "save": "adapter and raw at each checkpoint; update archive; download archive plus checksum before manual Stop",
+    "same_run_only_comparison": true,
+    "existing_nine_are_not_mash_gold": true,
+    "comparison_six_are_not_blind_final_eval": true,
+    "new_mash_observation_requested": false,
+    "runner_implemented": false,
+    "gpu_started": false,
+    "training_performed": false,
+    "limits": "If fitted teachers improve but comparison cases do not, examine transfer/data coverage; if teacher behavior does not improve by limit, stop this repetition recipe and reconsider method. No proof of optimal epochs, generalization or product quality.",
+    "hold_reason": "Selection is not adoption. Establish own-trained-model serving economics and compare candidates under proposed680/1480 before further9B-specific repetitive training."
+  },
+  "next_selection_priority": {
+    "status": "FIXED_PRODUCTION_COSTING_SCENARIO_NO_GO_AT_REFERENCE_PERFORMANCE",
+    "proposed_monthly_prices_jpy": {
+      "plus": 680,
+      "premium": 1480
+    },
+    "prices_applied": false,
+    "product_quotas_changed": false,
+    "prior_980_1980_were_user_upper_bounds_not_break_even_floor": true,
+    "own_lora_serving_cost_measured": false,
+    "public_base_api_price_applies_to_own_lora": false,
+    "candidates": [
+      "Qwen3.5-9B",
+      "Qwen3.5-4B"
+    ],
+    "comparison": [
+      "three-core quality and source retention",
+      "answer correction and optional question",
+      "latency and throughput",
+      "total serving cost including all Free requests",
+      "cold start and idle storage"
+    ],
+    "reuse_existing_results": true,
+    "paid_execution_started": true,
+    "illustrative_a40_month": {
+      "usd_per_hour": 0.59,
+      "hours": 720,
+      "assumed_jpy_per_usd": 160,
+      "gpu_only_jpy": 67968,
+      "not_current_fx_quote": true,
+      "not_required_9b_deployment": true
+    },
+    "sources": [
+      "https://www.runpod.io/pricing",
+      "https://docs.runpod.io/serverless/pricing"
+    ],
+    "smaller_model_guarantees_profit": false,
+    "next_step": "Verify a concrete serving arrangement against the explicit4.46 billed GPU seconds per nominal generation budget at the fixed workload. Unmeasured200TPS batch sensitivity is not production proof. Keep further training and price/quota changes on hold.",
+    "comparison_pack": "../../model_selection/2026-10-24-9b-4b-comparison/README.md",
+    "fixed_case_count": 6,
+    "maximum_generations": 12,
+    "fine_tuning_in_next_probe": false,
+    "new_gpu_execution_started": true,
+    "runner_implemented": true,
+    "cpu_checks_passed": 6,
+    "script_timeout_seconds": 1800,
+    "kill_after_seconds": 30,
+    "automatically_stops_pod": false,
+    "cost_envelope_is_illustrative_not_measured_profit": true,
+    "constraints_not_measured": [
+      "production throughput",
+      "serverless cold start/idle",
+      "long-history Analysis",
+      "Premium frame and three questions",
+      "own LoRA serving costs"
+    ],
+    "gpu_execution_operator": "Mash; received A40 output",
+    "completed_generations": 12,
+    "received_result": "../../trials/2026-10-24-qwen4b-9b-comparison/selection_results.json",
+    "received_result_sha256": "4f8aba44aca3612c66494ec5a77e92be2018d10a181fe1809c8994730e4f1386",
+    "nine_b_quality_advantage_demonstrated": false,
+    "recommended_priority_candidate": "Qwen3.5-4B, not adopted",
+    "both_models_product_quality_accepted": false,
+    "formal_product_read_performed": false,
+    "pod_stop_confirmed": false,
+    "additional_training_started": false,
+    "teacher_coverage_review": {
+      "total": 9,
+      "emlis_free": 9,
+      "piece": 0,
+      "analysis": 0,
+      "shop_direction_and_direct_reception_already_present": true,
+      "teacher_changed": false
+    },
+    "karen_new_gpu_executions_in_receipt_analysis": 0,
+    "price_feasibility_verified": false,
+    "illustrative_paid50_free950_all_ai_storage_budget_jpy": 10809.45,
+    "illustrative_monthly_nominal_generations": 78980,
+    "illustrative_max_average_cost_jpy_per_nominal_generation": 0.13686318745827483,
+    "illustrative_always_on_a40_within_paid50_budget": false,
+    "teacher_preparation_priority": "ON_HOLD_BEHIND_SERVING_COST_VALIDATION",
+    "correction_owner": "Karen recommendation in response to Mash's price-decision challenge; not a new model/price/quota adoption",
+    "production_costing_report": "../../model_selection/2026-10-24-production-economics/README.md",
+    "production_costing_inputs": "../../model_selection/2026-10-24-production-economics/inputs.json",
+    "production_costing_completed": true,
+    "production_serving_cost_measured": false,
+    "fixed_reference_scenario": {
+      "paid_users": 50,
+      "free_users": 950,
+      "monthly_generations": 78980,
+      "input_tokens": 309800000,
+      "output_tokens": 53702000,
+      "route": "Flex24GB min0 max4 concurrency1",
+      "output_tps_reference_assumption": 25,
+      "prefill_tps_unmeasured": 1000,
+      "cold_fraction_unmeasured": 0.1,
+      "model_load_seconds_unmeasured": 30,
+      "shared_fixed_jpy": 11000,
+      "monthly_cost_jpy": 95094.38,
+      "receipts_planning_jpy": 27261.82,
+      "balance_before_payroll_ads_training_jpy": -67832.56,
+      "decision": "NO_GO_FOR_THIS_SCENARIO_NOT_GENERAL_PRICE_IMPOSSIBILITY"
+    },
+    "allowable_average_billed_gpu_seconds_per_generation_at_flex24": 4.4629300258,
+    "same_gpu_same_work_same_performance_same_4b_9b_cost": true,
+    "code_checks_passed": 6,
+    "new_paid_execution_for_costing": false
+  }
+}

@@ -1,0 +1,12 @@
+{"step": 1, "target_visit": 1, "loss_scope": "RECEPTION_VALUE_ONLY", "id": "TRAIN-DAILY-CALM-01-INITIAL", "loss": 0.2783232629299164, "gradient_norm": 5.885929584503174}
+{"step": 2, "target_visit": 1, "loss_scope": "ASSISTANT_JSON_PLUS_EOS", "id": "TRAIN-SERVICE-CHAIR-01-INITIAL", "loss": 0.001275302260182798, "gradient_norm": 0.9752949476242065}
+{"step": 3, "target_visit": 1, "loss_scope": "RECEPTION_VALUE_ONLY", "id": "TRAIN-DAILY-CALM-02-INITIAL", "loss": 0.1521916538476944, "gradient_norm": 3.8730597496032715}
+{"step": 4, "target_visit": 1, "loss_scope": "ASSISTANT_JSON_PLUS_EOS", "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION", "loss": 0.0010573507752269506, "gradient_norm": 0.13313086330890656}
+{"step": 5, "target_visit": 1, "loss_scope": "RECEPTION_VALUE_ONLY", "id": "TRAIN-DAILY-CALM-03-INITIAL", "loss": 0.08082812279462814, "gradient_norm": 2.2557830810546875}
+{"step": 6, "target_visit": 1, "loss_scope": "ASSISTANT_JSON_PLUS_EOS", "id": "TRAIN-SERVICE-CHAIR-02-INITIAL", "loss": 0.0012216621544212103, "gradient_norm": 0.15449072420597076}
+{"step": 7, "target_visit": 2, "loss_scope": "RECEPTION_VALUE_ONLY", "id": "TRAIN-DAILY-CALM-01-INITIAL", "loss": 0.03832859918475151, "gradient_norm": 1.1687933206558228}
+{"step": 8, "target_visit": 1, "loss_scope": "ASSISTANT_JSON_PLUS_EOS", "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION", "loss": 0.000802081311121583, "gradient_norm": 0.13333339989185333}
+{"step": 9, "target_visit": 2, "loss_scope": "RECEPTION_VALUE_ONLY", "id": "TRAIN-DAILY-CALM-02-INITIAL", "loss": 0.02203178219497204, "gradient_norm": 0.6385617852210999}
+{"step": 10, "target_visit": 1, "loss_scope": "ASSISTANT_JSON_PLUS_EOS", "id": "TRAIN-SERVICE-CHAIR-03-INITIAL", "loss": 0.0014757075114175677, "gradient_norm": 0.1580900102853775}
+{"step": 11, "target_visit": 2, "loss_scope": "RECEPTION_VALUE_ONLY", "id": "TRAIN-DAILY-CALM-03-INITIAL", "loss": 0.010978767648339272, "gradient_norm": 0.315935879945755}
+{"step": 12, "target_visit": 1, "loss_scope": "ASSISTANT_JSON_PLUS_EOS", "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION", "loss": 0.0016441395273432136, "gradient_norm": 1.9694457054138184}

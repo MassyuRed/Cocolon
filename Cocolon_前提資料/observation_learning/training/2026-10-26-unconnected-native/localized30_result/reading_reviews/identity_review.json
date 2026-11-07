@@ -1,0 +1,464 @@
+{
+  "reviewer": "localized_identity_review",
+  "mode": "READ_ONLY_SOURCE_MODEL_GPU; SCRATCH_REPORT_ONLY",
+  "source_commit": "d54ea1db19ab8fb3c3a57fc07b5a20566f245591",
+  "api_commit": "a4b91b4788b2fb29483a4c77869c91b36402ae9f",
+  "wrapper_attempts": 2,
+  "preexec_rejections": 1,
+  "actual_model_runs": 1,
+  "model_retries": 0,
+  "checks": {
+    "manifest_82_payload_size_and_sha256": true,
+    "archive_crc_and_83_members": true,
+    "ordered_30_steps": true,
+    "each_teacher_twice": true,
+    "finite_losses_and_positive_finite_gradients": true,
+    "local_token_exposures_396": true,
+    "copied_cpu_bound_payload_hashes": true,
+    "saved_adapter_3file_sha256": true,
+    "saved112_f32_3833856_finite": true,
+    "initial_stats_equal_previous109c_reload": true,
+    "reload112_scope": true,
+    "actual_two_loads_completed": true,
+    "raw15_identity_usage_hash_and_cap": true,
+    "old9_full_raw_text_and_teacher_packet_equal": true,
+    "old9_actual_meaning_and_body9": true,
+    "cold11_separate_unique_processes_and_full_outcomes_equal": true,
+    "diagnosis_bound_to_final_run_hash": true,
+    "executed_runner_loss_consumer_unchanged_from_prepared": true,
+    "repot_semantics_and_evidence_equal_teacher_excluding_surface": true,
+    "knit_all_four_quote_differences_only_final_period": true,
+    "preexec_zero_model_rejection_is_retained": true
+  },
+  "all_checks_true": true,
+  "archive": {
+    "bytes": 15171902,
+    "sha256": "d77f865ef019c6cd69988733ac4dcb13b808292157660057497590b1c7ad6a20",
+    "payloads": 82,
+    "members": 83
+  },
+  "training": {
+    "updates": 30,
+    "local_token_exposures": 396,
+    "changed_tensors_reported": 112,
+    "changed_norms_between_initial_and_reloaded": 112,
+    "strict_optimizer_resume": false
+  },
+  "saved_adapter": {
+    "sha256": "937233a0d2f89425bf42abf971f4e37662bb2db8c6fddaf3fe5884349e1d95bd",
+    "f32_tensors": 112,
+    "parameters": 3833856,
+    "finite": true
+  },
+  "processing_seconds": 1524.4009482470574,
+  "process_cost_usd": 0.11856451819699337,
+  "raw_eos_count": 15,
+  "strict_json_count": 14,
+  "meaning_count": 11,
+  "body_count": 9,
+  "old9": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "eos": true,
+      "strict_json": true,
+      "output_tokens": 1332,
+      "raw_text_equal_old109c": true,
+      "parsed_packet_equal_teacher": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "cmee_reason_code": null
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "eos": true,
+      "strict_json": true,
+      "output_tokens": 2229,
+      "raw_text_equal_old109c": true,
+      "parsed_packet_equal_teacher": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "cmee_reason_code": null
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "eos": true,
+      "strict_json": true,
+      "output_tokens": 1332,
+      "raw_text_equal_old109c": true,
+      "parsed_packet_equal_teacher": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "cmee_reason_code": null
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "eos": true,
+      "strict_json": true,
+      "output_tokens": 2232,
+      "raw_text_equal_old109c": true,
+      "parsed_packet_equal_teacher": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "cmee_reason_code": null
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "eos": true,
+      "strict_json": true,
+      "output_tokens": 1322,
+      "raw_text_equal_old109c": true,
+      "parsed_packet_equal_teacher": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "cmee_reason_code": null
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "eos": true,
+      "strict_json": true,
+      "output_tokens": 2238,
+      "raw_text_equal_old109c": true,
+      "parsed_packet_equal_teacher": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "cmee_reason_code": null
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "eos": true,
+      "strict_json": true,
+      "output_tokens": 1586,
+      "raw_text_equal_old109c": true,
+      "parsed_packet_equal_teacher": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "cmee_reason_code": null
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "eos": true,
+      "strict_json": true,
+      "output_tokens": 1560,
+      "raw_text_equal_old109c": true,
+      "parsed_packet_equal_teacher": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "cmee_reason_code": null
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "eos": true,
+      "strict_json": true,
+      "output_tokens": 1599,
+      "raw_text_equal_old109c": true,
+      "parsed_packet_equal_teacher": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "cmee_reason_code": null
+    }
+  ],
+  "all_case_metrics": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "eos": true,
+      "strict_json": true,
+      "output_tokens": 1332,
+      "raw_text_equal_old109c": true,
+      "parsed_packet_equal_teacher": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "cmee_reason_code": null
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "eos": true,
+      "strict_json": true,
+      "output_tokens": 2229,
+      "raw_text_equal_old109c": true,
+      "parsed_packet_equal_teacher": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "cmee_reason_code": null
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "eos": true,
+      "strict_json": true,
+      "output_tokens": 1332,
+      "raw_text_equal_old109c": true,
+      "parsed_packet_equal_teacher": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "cmee_reason_code": null
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "eos": true,
+      "strict_json": true,
+      "output_tokens": 2232,
+      "raw_text_equal_old109c": true,
+      "parsed_packet_equal_teacher": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "cmee_reason_code": null
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "eos": true,
+      "strict_json": true,
+      "output_tokens": 1322,
+      "raw_text_equal_old109c": true,
+      "parsed_packet_equal_teacher": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "cmee_reason_code": null
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "eos": true,
+      "strict_json": true,
+      "output_tokens": 2238,
+      "raw_text_equal_old109c": true,
+      "parsed_packet_equal_teacher": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "cmee_reason_code": null
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "eos": true,
+      "strict_json": true,
+      "output_tokens": 1586,
+      "raw_text_equal_old109c": true,
+      "parsed_packet_equal_teacher": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "cmee_reason_code": null
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "eos": true,
+      "strict_json": true,
+      "output_tokens": 1560,
+      "raw_text_equal_old109c": true,
+      "parsed_packet_equal_teacher": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "cmee_reason_code": null
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "eos": true,
+      "strict_json": true,
+      "output_tokens": 1599,
+      "raw_text_equal_old109c": true,
+      "parsed_packet_equal_teacher": true,
+      "meaning_adopted": true,
+      "body_available": true,
+      "cmee_reason_code": null
+    },
+    {
+      "case_id": "FT-BOOK-INITIAL",
+      "eos": true,
+      "strict_json": true,
+      "output_tokens": 1055,
+      "raw_text_equal_old109c": false,
+      "parsed_packet_equal_teacher": false,
+      "meaning_adopted": false,
+      "body_available": false,
+      "cmee_reason_code": "model_v3_unknown_not_source_bound"
+    },
+    {
+      "case_id": "FT-BOOK-AFTER-ANSWER",
+      "eos": true,
+      "strict_json": false,
+      "output_tokens": 2638,
+      "raw_text_equal_old109c": false,
+      "parsed_packet_equal_teacher": false,
+      "meaning_adopted": false,
+      "body_available": false,
+      "cmee_reason_code": "semantic_receipt_not_validated"
+    },
+    {
+      "case_id": "FT-SHOP-INITIAL",
+      "eos": true,
+      "strict_json": true,
+      "output_tokens": 1095,
+      "raw_text_equal_old109c": false,
+      "parsed_packet_equal_teacher": false,
+      "meaning_adopted": true,
+      "body_available": false,
+      "cmee_reason_code": null
+    },
+    {
+      "case_id": "FT-SHOP-AFTER-ANSWER",
+      "eos": true,
+      "strict_json": true,
+      "output_tokens": 2717,
+      "raw_text_equal_old109c": false,
+      "parsed_packet_equal_teacher": false,
+      "meaning_adopted": false,
+      "body_available": false,
+      "cmee_reason_code": "semantic_receipt_not_validated"
+    },
+    {
+      "case_id": "FT-REPOT-INITIAL",
+      "eos": true,
+      "strict_json": true,
+      "output_tokens": 962,
+      "raw_text_equal_old109c": false,
+      "parsed_packet_equal_teacher": false,
+      "meaning_adopted": true,
+      "body_available": false,
+      "cmee_reason_code": null
+    },
+    {
+      "case_id": "FT-KNIT-INITIAL",
+      "eos": true,
+      "strict_json": true,
+      "output_tokens": 991,
+      "raw_text_equal_old109c": false,
+      "parsed_packet_equal_teacher": false,
+      "meaning_adopted": false,
+      "body_available": false,
+      "cmee_reason_code": "model_evidence_out_of_scope"
+    }
+  ],
+  "cold_cases": [
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "process_id": 203597,
+      "full_outcome_equal": true,
+      "body_available": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "process_id": 203646,
+      "full_outcome_equal": true,
+      "body_available": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "process_id": 203679,
+      "full_outcome_equal": true,
+      "body_available": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "process_id": 203730,
+      "full_outcome_equal": true,
+      "body_available": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "process_id": 203779,
+      "full_outcome_equal": true,
+      "body_available": true
+    },
+    {
+      "case_id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "process_id": 203831,
+      "full_outcome_equal": true,
+      "body_available": true
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "process_id": 203881,
+      "full_outcome_equal": true,
+      "body_available": true
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "process_id": 203929,
+      "full_outcome_equal": true,
+      "body_available": true
+    },
+    {
+      "case_id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "process_id": 203966,
+      "full_outcome_equal": true,
+      "body_available": true
+    },
+    {
+      "case_id": "FT-SHOP-INITIAL",
+      "process_id": 204017,
+      "full_outcome_equal": true,
+      "body_available": false
+    },
+    {
+      "case_id": "FT-REPOT-INITIAL",
+      "process_id": 204067,
+      "full_outcome_equal": true,
+      "body_available": false
+    }
+  ],
+  "cold_body_available_count": 9,
+  "cold_body_unavailable_count": 2,
+  "repot": {
+    "raw_observation": "叔父に植え替えの手順を説明し、最後まで聞けてよかったです。",
+    "raw_reception": "やり方が分かって、安心できよかったです。",
+    "meaning_adopted": true,
+    "body_available": false,
+    "actual_body_reason_codes": [
+      "model_surface_not_validated"
+    ],
+    "findings": [
+      "聞かせた changed to 聞けて, but 叔父に…説明し still reverses explainer/recipient role.",
+      "Reception 安心できよかった omits て and is unnatural.",
+      "Correct semantic packet and bindings do not establish correct visible body."
+    ]
+  },
+  "knit": {
+    "eos": true,
+    "output_tokens": 991,
+    "unknown_id": "knit-unknown-01",
+    "unknown_id_ascii64_legal": true,
+    "observation_equals_reception": true,
+    "surface": {
+      "bindings": [
+        {
+          "claim_refs": [
+            "unravelled",
+            "burden",
+            "sadness",
+            "stated_unknown"
+          ],
+          "relation_refs": [],
+          "section": "observation"
+        },
+        {
+          "claim_refs": [
+            "unravelled",
+            "burden",
+            "sadness",
+            "stated_unknown"
+          ],
+          "relation_refs": [],
+          "section": "reception"
+        }
+      ],
+      "observation": "今日、編みかけの見本をほどいたのですね。ほどくのが面倒だったと聞けて、少し安心しました。さみしさも少しあったと、その気持ちも受け取ります。二つがどうつながるかは、自分でも分からないと、その不明さを保持します。",
+      "reception": "今日、編みかけの見本をほどいたのですね。ほどくのが面倒だったと聞けて、少し安心しました。さみしさも少しあったと、その気持ちも受け取ります。二つがどうつながるかは、自分でも分からないと、その不明さを保持します。",
+      "update_note": null
+    },
+    "meaning_adopted": false,
+    "body_available": false,
+    "actual_rejection_reason": "model_evidence_out_of_scope",
+    "quote_scope_evidence": "all four new evidence quotes append final 。 to teacher roles; fixed reader emlis_semantic_admission.py@a4b91b4 L1222-1230 requires every evidence object to equal an allowed role/link anchor",
+    "findings": [
+      "Long digit repetition is absent and EOS is reached; this is termination/ID change only.",
+      "The two body sections repeat the same complete paragraph.",
+      "Observation includes 少し安心しました and processing-like 不明さを保持します; this does not match the teacher voice or independent section binding.",
+      "Both sections bind all four claims, instead of teacher observation3/reception3.",
+      "No repaired raw or secondary adoption was executed."
+    ]
+  },
+  "scope_limits": [
+    "Known15 teacher FIT, language families only six; old9 are chair/daily two families repeated across service identities.",
+    "Initial109c unchanged and no-grad/exact-value reload are runtime assertions bound to the unchanged runner; this local review independently verifies the saved112 binary and compares initial stats with previous109c metadata, not a new model load.",
+    "Cold11 includes two body-unavailable outcomes (SHOP initial and REPOT).",
+    "No service SQL/dynamic prior/unknown generalization/device/product acceptance is established.",
+    "Prompt change and local loss are combined, so improvement/decline cannot be uniquely assigned to either."
+  ],
+  "conclusion": "One actual model run completed technically, but meaning11/body9/new6body0 is unchanged from109c; new937233a0 is not a normally accepted candidate. Keep frozen109c and all raw evidence; do not auto-progress training."
+}

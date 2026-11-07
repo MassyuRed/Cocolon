@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { applyTypographyTokens } from "../../ui/applyTypographyTokens";
-import { DARK_GRAY_DESC } from "../../ui/uiTokens";
+import { DARK_GRAY_DESC, makeUiTokens } from "../../ui/uiTokens";
 import WatashiMapOverviewCard from "./WatashiMapOverviewCard";
 import RoleSwitchList from "./RoleSwitchList";
 import RoutePatternCard from "./RoutePatternCard";
@@ -19,15 +19,17 @@ import {
 const EMPTY_WATASHI_MAP_TITLE = "まだ地図にできる観測が少なめです";
 
 function buildPalette(colors, isDark) {
-  const readableDescription = isDark ? colors?.TEXT_SUBTLE : DARK_GRAY_DESC;
+  const readableDescription = colors?.TEXT_SUBTLE || DARK_GRAY_DESC;
   return {
-    cardBg: colors?.PANEL_BG || (isDark ? "#111827" : "#FFFFFF"),
+    cardBg: colors?.FIELD_BG || (isDark ? "#111827" : "#FFFFFF"),
     mutedBg: colors?.BG_SILVER || (isDark ? "#1F2937" : "#F9FAFB"),
-    softBg: isDark ? "rgba(212,175,55,0.12)" : "#FFFBEB",
+    softBg: colors?.SURFACE_TONAL || colors?.PANEL_BG,
+    onSoftBg: colors?.ON_SURFACE_TONAL || colors?.TEXT_ON_LIGHT,
     border: colors?.CARD_BORDER || (isDark ? "#374151" : "#E5E7EB"),
     text: colors?.TEXT_ON_LIGHT || (isDark ? "#F9FAFB" : "#111827"),
     subtle: readableDescription || (isDark ? "#9CA3AF" : DARK_GRAY_DESC),
-    accent: colors?.GOLD_BUTTON || "#D4AF37",
+    accent: colors?.TITLE_GOLD || "#800020",
+    buttonBg: colors?.GOLD_BUTTON || "#5A1020",
     accentBorder: colors?.GOLD_BUTTON_BORDER || "#C9A227",
     accentText: colors?.ACCENT_TEXT || (isDark ? "#111827" : "#111827"),
   };
@@ -66,9 +68,11 @@ export default function WatashiMapRenderer({
   colors,
   isDark = false,
   onUpgradePress,
+  showPlanNotice = true,
 }) {
   const palette = useMemo(() => buildPalette(colors, isDark), [colors, isDark]);
-  const localStyles = useMemo(() => createStyles(palette), [palette]);
+  const ui = useMemo(() => makeUiTokens(colors || {}, isDark ? 'dark' : 'default'), [colors, isDark]);
+  const localStyles = useMemo(() => createStyles(palette, ui), [palette, ui]);
   const payload = useMemo(
     () => normalizeWatashiMapPayload(contentJson, { contentText, reportMode, viewerTier, periodLabel }),
     [contentJson, contentText, reportMode, viewerTier, periodLabel]
@@ -115,205 +119,256 @@ export default function WatashiMapRenderer({
         <UnknownAreaCard unknownAreas={payload.unknown_areas || payload.unknownAreas} localStyles={localStyles} />
       ) : null}
 
-      {shouldShowLock ? (
+      {showPlanNotice && shouldShowLock ? (
         <LockedSectionCard payload={payload} localStyles={localStyles} onUpgradePress={onUpgradePress} />
       ) : null}
     </View>
   );
 }
 
-function createStyles(palette) {
+function createStyles(palette, ui) {
   return StyleSheet.create(applyTypographyTokens({
-    root: { marginBottom: 12 },
+    root: {
+      marginBottom: 16,
+      width: '100%',
+      maxWidth: 640,
+      alignSelf: 'center',
+    },
     badgeRow: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
-      marginHorizontal: 12,
-      marginBottom: 8,
+      marginHorizontal: 0,
+      marginBottom: 12,
+      flexWrap: 'wrap',
+      gap: 8,
     },
     badgeText: {
-      fontSize: 12,
-      fontWeight: "900",
       color: palette.accent,
-      letterSpacing: 0.4,
+      letterSpacing: 0,
     },
     modeBadge: {
       overflow: "hidden",
       borderRadius: 999,
       borderWidth: 1,
       borderColor: palette.border,
-      paddingHorizontal: 8,
-      paddingVertical: 3,
-      fontSize: 10,
-      fontWeight: "800",
+      paddingHorizontal: 10,
+      paddingVertical: 6,
       color: palette.subtle,
       backgroundColor: palette.mutedBg,
     },
     card: {
-      marginHorizontal: 12,
-      marginBottom: 12,
+      marginHorizontal: 0,
+      marginBottom: 16,
       borderWidth: 1,
       borderColor: palette.border,
-      borderRadius: 16,
+      borderRadius: 24,
       backgroundColor: palette.cardBg,
-      padding: 14,
+      padding: 20,
     },
     overviewCard: {
-      borderColor: palette.accentBorder,
+      borderColor: palette.border,
     },
-    sectionHeader: { marginBottom: 10 },
+    sectionHeader: {
+      marginBottom: 12,
+    },
     sectionTitle: {
-      fontSize: 17,
-      lineHeight: 22,
-      fontWeight: "900",
       color: palette.text,
-      letterSpacing: 0.2,
+      letterSpacing: 0,
     },
     sectionSubtitle: {
-      marginTop: 3,
-      fontSize: 12,
-      lineHeight: 17,
+      marginTop: 6,
       color: palette.subtle,
-      fontWeight: "600",
     },
     explainText: {
-      fontSize: 13,
-      lineHeight: 20,
-      color: palette.subtle,
-      marginBottom: 10,
+      color: palette.text,
+      marginBottom: 16,
     },
     summaryText: {
-      fontSize: 15,
-      lineHeight: 22,
-      fontWeight: "800",
       color: palette.text,
-      marginBottom: 10,
+      marginBottom: 16,
     },
     bodyText: {
-      fontSize: 13,
-      lineHeight: 20,
-      color: palette.subtle,
-      marginBottom: 10,
+      color: palette.text,
+      marginBottom: 16,
     },
     infoPanel: {
-      borderRadius: 14,
+      borderRadius: 16,
       backgroundColor: palette.mutedBg,
-      padding: 10,
+      padding: 16,
     },
     infoRow: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      alignItems: "flex-start",
-      paddingVertical: 5,
+      flexDirection: 'column',
+      justifyContent: 'flex-start',
+      alignItems: 'stretch',
+      paddingVertical: 8,
+      gap: 6,
     },
     infoLabel: {
-      width: 118,
-      fontSize: 11,
-      lineHeight: 17,
       color: palette.subtle,
-      fontWeight: "800",
     },
     infoValue: {
-      flex: 1,
-      fontSize: 12,
-      lineHeight: 18,
       color: palette.text,
-      fontWeight: "800",
-      textAlign: "right",
+      textAlign: 'left',
+      alignSelf: 'stretch',
     },
     roleSwitchCard: {
-      borderRadius: 14,
+      borderRadius: 16,
       borderWidth: 1,
       borderColor: palette.border,
       backgroundColor: palette.mutedBg,
-      padding: 12,
-      marginTop: 8,
+      padding: 16,
+      marginTop: 12,
     },
     roleSwitchTopRow: {
       flexDirection: "row",
       justifyContent: "space-between",
       alignItems: "center",
-      marginBottom: 8,
+      marginBottom: 12,
+      flexWrap: 'wrap',
+      gap: 8,
     },
     contextChip: {
       alignSelf: "flex-start",
       borderRadius: 999,
       backgroundColor: palette.softBg,
       borderWidth: 1,
-      borderColor: palette.accentBorder,
-      paddingHorizontal: 9,
-      paddingVertical: 4,
+      borderColor: palette.border,
+      paddingHorizontal: 12,
+      paddingVertical: 6,
+      maxWidth: '100%',
     },
-    contextChipText: { fontSize: 11, fontWeight: "900", color: palette.text },
+    contextChipText: {
+      color: palette.onSoftBg,
+      flexShrink: 1,
+    },
     dotsText: { fontSize: 13, fontWeight: "900", color: palette.accent },
     roleSwitchTitle: {
-      fontSize: 15,
-      lineHeight: 21,
-      fontWeight: "900",
       color: palette.text,
-      marginBottom: 4,
+      marginBottom: 8,
     },
-    roleSwitchBody: { fontSize: 13, lineHeight: 19, color: palette.text, fontWeight: "600" },
-    roleSwitchPreview: { marginTop: 6, fontSize: 12, lineHeight: 18, color: palette.subtle },
-    safeNote: { marginTop: 8, fontSize: 11, lineHeight: 16, color: palette.subtle, fontWeight: "600" },
+    roleSwitchBody: {
+      color: palette.text,
+    },
+    roleSwitchPreview: {
+      marginTop: 10,
+      color: palette.subtle,
+    },
+    safeNote: {
+      marginTop: 12,
+      color: palette.subtle,
+    },
     routeCard: {
-      borderRadius: 14,
+      borderRadius: 16,
       backgroundColor: palette.mutedBg,
-      padding: 12,
-      marginTop: 8,
+      padding: 16,
+      marginTop: 12,
     },
-    routeTitle: { fontSize: 14, lineHeight: 20, fontWeight: "900", color: palette.text, marginBottom: 10 },
+    routeTitle: {
+      color: palette.text,
+      marginBottom: 12,
+    },
     routeStepRow: { flexDirection: "row", alignItems: "stretch" },
-    routeStepMarkerColumn: { width: 20, alignItems: "center" },
+    routeStepMarkerColumn: {
+      width: 24,
+      alignItems: "center",
+    },
     routeStepDot: { width: 8, height: 8, borderRadius: 4, backgroundColor: palette.accent, marginTop: 5 },
     routeStepLine: { width: 1, flex: 1, backgroundColor: palette.border, marginTop: 2, marginBottom: 2 },
-    routeStepTextColumn: { flex: 1, paddingBottom: 10 },
-    routeStepLabel: { fontSize: 11, lineHeight: 15, fontWeight: "900", color: palette.subtle },
-    routeStepText: { fontSize: 13, lineHeight: 19, fontWeight: "700", color: palette.text, marginTop: 1 },
-    crossroadCard: {
-      borderRadius: 14,
-      backgroundColor: palette.mutedBg,
-      padding: 12,
-      marginTop: 8,
-    },
-    crossroadContext: { fontSize: 14, lineHeight: 20, fontWeight: "900", color: palette.text, marginBottom: 8 },
-    axisRow: { flexDirection: "row", marginHorizontal: -3 },
-    axisBlock: {
+    routeStepTextColumn: {
       flex: 1,
-      marginHorizontal: 3,
+      paddingBottom: 16,
+      minWidth: 0,
+    },
+    routeStepLabel: {
+      color: palette.subtle,
+    },
+    routeStepText: {
+      color: palette.text,
+      marginTop: 6,
+    },
+    crossroadCard: {
+      borderRadius: 16,
+      backgroundColor: palette.mutedBg,
+      padding: 16,
+      marginTop: 12,
+    },
+    crossroadContext: {
+      color: palette.text,
+      marginBottom: 12,
+    },
+    axisRow: {
+      flexDirection: 'column',
+      marginHorizontal: 0,
+      gap: 8,
+    },
+    axisBlock: {
+      marginHorizontal: 0,
       borderWidth: 1,
       borderColor: palette.border,
-      borderRadius: 12,
-      padding: 8,
+      borderRadius: 16,
+      padding: 12,
       backgroundColor: palette.cardBg,
+      alignSelf: 'stretch',
     },
-    axisLabel: { fontSize: 10, lineHeight: 14, color: palette.subtle, fontWeight: "900", marginBottom: 4 },
-    axisValue: { fontSize: 12, lineHeight: 17, color: palette.text, fontWeight: "800" },
-    crossroadNote: { marginTop: 9, fontSize: 12, lineHeight: 18, color: palette.subtle },
+    axisLabel: {
+      color: palette.subtle,
+      marginBottom: 6,
+    },
+    axisValue: {
+      color: palette.text,
+    },
+    crossroadNote: {
+      marginTop: 12,
+      color: palette.subtle,
+    },
     unknownCard: {
-      borderRadius: 14,
+      borderRadius: 16,
       borderWidth: 1,
       borderColor: palette.border,
       backgroundColor: palette.mutedBg,
-      padding: 12,
-      marginTop: 8,
+      padding: 16,
+      marginTop: 12,
     },
-    unknownTitle: { fontSize: 14, lineHeight: 20, fontWeight: "900", color: palette.text, marginBottom: 4 },
-    unknownReason: { fontSize: 12, lineHeight: 18, color: palette.subtle },
-    unknownHint: { marginTop: 6, fontSize: 12, lineHeight: 18, color: palette.text, fontWeight: "700" },
-    lockCard: { backgroundColor: palette.softBg, borderColor: palette.accentBorder },
-    lockTitle: { fontSize: 15, lineHeight: 21, fontWeight: "900", color: palette.text, marginBottom: 6 },
-    lockBody: { fontSize: 13, lineHeight: 19, fontWeight: "800", color: palette.text },
-    lockSubText: { marginTop: 6, fontSize: 12, lineHeight: 18, color: palette.subtle },
+    unknownTitle: {
+      color: palette.text,
+      marginBottom: 8,
+    },
+    unknownReason: {
+      color: palette.subtle,
+    },
+    unknownHint: {
+      marginTop: 10,
+      color: palette.text,
+    },
+    lockCard: {
+      backgroundColor: palette.softBg,
+      borderColor: palette.border,
+    },
+    lockTitle: {
+      color: palette.text,
+      marginBottom: 8,
+    },
+    lockBody: {
+      color: palette.text,
+    },
+    lockSubText: {
+      marginTop: 10,
+      color: palette.subtle,
+    },
     lockButton: {
       alignSelf: "flex-start",
-      marginTop: 10,
-      borderRadius: 999,
-      backgroundColor: palette.accent,
-      paddingHorizontal: 14,
-      paddingVertical: 8,
+      marginTop: 16,
+      borderRadius: 24,
+      backgroundColor: palette.buttonBg,
+      paddingHorizontal: 16,
+      paddingVertical: 12,
+      minHeight: 44,
+      justifyContent: 'center',
     },
-    lockButtonText: { color: palette.accentText, fontSize: 12, fontWeight: "900" },
-  }));
+    lockButtonText: {
+      color: palette.accentText,
+      textAlign: 'center',
+    },
+  }, ui, {"badgeText":"meta","modeBadge":"meta","sectionTitle":"sectionTitle","sectionSubtitle":"description","explainText":"body","summaryText":"body","bodyText":"body","infoLabel":"description","infoValue":"body","contextChipText":"description","roleSwitchTitle":"sectionTitle","roleSwitchBody":"body","roleSwitchPreview":"body","safeNote":"description","routeTitle":"sectionTitle","routeStepLabel":"description","routeStepText":"body","crossroadContext":"sectionTitle","axisLabel":"description","axisValue":"body","crossroadNote":"body","unknownTitle":"sectionTitle","unknownReason":"body","unknownHint":"description","lockTitle":"sectionTitle","lockBody":"body","lockSubText":"description","lockButtonText":"button"}));
 }
