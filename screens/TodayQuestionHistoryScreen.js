@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ActivityIndicator,
   Alert,
@@ -15,6 +15,7 @@ import {
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import { useAuth } from "../AuthContext";
 import { useTheme } from "../theme/ThemeContext";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
@@ -32,6 +33,8 @@ import {
 const HISTORY_PAGE_LIMIT = 60;
 
 export default function TodayQuestionHistoryScreen({ onBack }) {
+  const { user, authOwnerGeneration } = useAuth();
+  const ownerRequestRef = useRef(null);
   const { colors, themeName } = useTheme();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const { isFeatureEnabled } = useAppRuntime();
@@ -67,7 +70,27 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
   );
   const showHistoryRetentionLabel = !subscriptionLoading && !!historyRetentionLabel;
 
+  useEffect(() => {
+    const controller = new AbortController();
+    ownerRequestRef.current = { expectedUserId: user?.id, signal: controller.signal };
+    setItems([]);
+    setSavingId(null);
+    setExpandedId(null);
+    setEditState({});
+    setFreeTextContentHeights({});
+    setLoadError(null);
+    setLoadingMore(false);
+    setHasMore(false);
+    setNextOffset(null);
+    return () => controller.abort();
+  }, [user?.id, authOwnerGeneration]);
+
   const load = useCallback(async ({ append = false, offset = 0 } = {}) => {
+    const request = ownerRequestRef.current;
+    if (!user?.id || request?.expectedUserId !== user.id || request.signal.aborted) {
+      setLoading(false);
+      return;
+    }
     setLoadError(null);
     if (!todayQuestionHistoryEnabled) {
       setItems([]);
@@ -84,7 +107,8 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
       const json = await getTodayQuestionHistory({
         limit: HISTORY_PAGE_LIMIT,
         offset,
-      });
+      }, request);
+      if (request.signal.aborted) return;
       const rows = Array.isArray(json?.items) ? json.items : [];
       setItems((prev) => {
         if (!append) return rows;
@@ -109,6 +133,7 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
             : null,
       );
     } catch (e) {
+      if (request.signal.aborted || e?.name === "AccountChangedError") return;
       console.warn("TodayQuestionHistoryScreen: load failed", e);
       setLoadError({ append, offset });
       if (!append) {
@@ -117,10 +142,12 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
         setNextOffset(null);
       }
     } finally {
-      if (append) setLoadingMore(false);
-      else setLoading(false);
+      if (!request.signal.aborted) {
+        if (append) setLoadingMore(false);
+        else setLoading(false);
+      }
     }
-  }, [todayQuestionHistoryEnabled]);
+  }, [todayQuestionHistoryEnabled, user?.id, authOwnerGeneration]);
 
   useEffect(() => {
     load({ append: false, offset: 0 });
@@ -206,22 +233,27 @@ export default function TodayQuestionHistoryScreen({ onBack }) {
         };
       }
 
+      const request = ownerRequestRef.current;
+      if (!user?.id || request?.expectedUserId !== user.id || request.signal.aborted) return;
       setSavingId(answerId);
       try {
-        await patchTodayQuestionAnswer(answerId, payload);
+        await patchTodayQuestionAnswer(answerId, payload, request);
+        if (request.signal.aborted) return;
         await load({ append: false, offset: 0 });
+        if (request.signal.aborted) return;
         Alert.alert(
           "今日の問い",
           "回答を更新しました。",
         );
       } catch (e) {
+        if (request.signal.aborted || e?.name === "AccountChangedError") return;
         console.warn("TodayQuestionHistoryScreen: patch failed", e);
         Alert.alert("今日の問い", String(e?.message || "更新に失敗しました。"));
       } finally {
-        setSavingId(null);
+        if (!request.signal.aborted) setSavingId(null);
       }
     },
-    [editState, isPaid, load],
+    [editState, isPaid, load, user?.id],
   );
 
   const loadMore = useCallback(async () => {

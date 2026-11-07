@@ -3940,3 +3940,15 @@ HC01／02が退行し、HC03／10はraw同一の重複key拒否を継続。HC04�
 | Cocolon/tests/piece-v2-{contracts,owner-history,initial-save-modal,preview-display}.test.js | 新旧権利・Free popup／無変更・paid選択・保存再読・既存回復の継承 |
 
 新production fileは0。本文・共有意味型・source・保存枠・公開範囲・研究4B採用は不変。STRUCTURE_MAP_DELTA_PRESENT（既存画像設定とowner互換の限定拡張）。配置・build・実機は未実施。詳細ownerはPiece current02／visual recipe §6／UI §29／第10回§12。
+
+
+## 2026-11-07 — Analysis／Pieceの全残件再点検の責務差分
+
+- Analysis `intent_compiler.py`：元memoだけに閉じた既存の有限読み取りをmemo_actionにも適用。元欄・envelope・座標・根拠IDを維持。shared helperの欄選択はAnalysis明示opt-inで、既定Emlisを拡張しない。他者の後置報告主体の断片を本人へ誤帰属させない。新しい一般文法・一般意味品質の完成ではない。
+- `astor_material_snapshots.py`：期間／global素材のidentityに二欄・感情配列・各強度・カテゴリの内容署名を含める（v2）。id／記録日時／秘匿だけでは本文変更を検出できなかった点を修復。元本文をmetadataへ追加保存せずhash化する。
+- `analysis_engine_adapter.py`／`kokoro_weather_service.py`／`api_analysis_reports.py`：旧details=[]でもemotionsを中強度で読む既存fallbackを維持。非空detailsの各強度を優先し、自己理解は通常感情へ混ぜない。
+- `emotion_structure_engine/weekly.py`／`astor_worker.py`：同時選択の配列順を時間変化としない。同一時刻の複数感情／複数入力は順序不明で区切り、跨いだ切替り／motifを作らない。全選択・強度の量集計は保持する。
+- `api_analysis_reports.py`：重複created_at filter（下限・上限）をlistのまま透過し、末尾へ誤配置されたsnapshot hash成功読取を本関数へ戻す。旧reportの自己出力を根拠扱いする検査は別途点検中で、今回の3修復だけで旧report全体を正当化しない。
+- Piece：本文はユーザーの二欄原文のみ。9場面・各感情強度を保持したまま非表示選択情報を本文へ自動追記しない11/1決定を維持。`PieceLibraryScreen.js` の共鳴・既読／読取と遅延確認を開始本人へ束縛。旧公開読取のvisibility不明を公開許可扱いする処理、公開metricの非原子加算・公開ID別名の互換は修復中。
+
+既存currentのsource_guard一致時再利用、月次当時版の不変性を維持する。compiler修正だけで同じ保存currentを再解析したとは説明しない。実入力・実機の分析確認は未了。全試験成功／一般品質完成を宣言せず、第10回§15と各core current mapで具体範囲を引き継ぐ。

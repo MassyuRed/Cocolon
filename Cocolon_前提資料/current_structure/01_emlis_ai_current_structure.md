@@ -1996,3 +1996,10 @@ API1296eaeaを指定配置済み（dep-dbjafelg1s2s73f6mah0/02:46:53 UTC Live）
 
 
 11/1後続§39：STRUCTURE_MAP_DELTA_NONE。変更ownerは既存components/piece/PiecePreviewModal.jsと既存test2。Modal専用Providerを設け、header/scroll/footerを同じ安全領域内に保つ。新route/renderer/意味/API/DB/依存の変更なし。一般入力へのPiece生成は有限作者の対応不足を残し、表示修復を生成完成へ数えない。
+
+
+## 2026-11-07 — 入力契約の全体再点検による修復
+
+`natural_reply.py::_material` は元入力・有料履歴の9場面配列を落としていたため保持へ修復。promptへ二欄・複数場面・各感情強度・自己理解・記録時点の契約を明記。過去の学習fixtureや重みを遡及して全入力対応済みとは評価しない。旧context／world modelのdetails空配列fallbackと、同率最強感情の不確定保持も修復するが、現在natural通常callerでないため通常品質へ換算しない。原記録fallback UIは二欄のラベルを修復し、実React／実screenの旧stubを実選択契約で検証。
+
+旧Q1／Q3の問い・回答・訂正機構は保持。適格な過去Q3本人回答／訂正をnatural材料に渡すsource接続と、新natural自身の任意問い・回答後更新の未接続を区別する。新naturalはFINAL／COMPLETEDである。旧checkpointから新規Engine.generateする試験と、保存artifactの非生成GETも混同しない。全体再点検・結果・残件は第10回§15。候補でありLive／配布・新4B生成／学習・一般品質合格ではない。

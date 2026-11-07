@@ -1128,7 +1128,7 @@ function nexusEntryHarness(options = {}) {
       if (name.endsWith('/tutorialScenarioData')) return { TUTORIAL_TOTAL_STEPS: 16 };
       if (name.endsWith('/TutorialOverlay')) return { __esModule: true, default: 'TutorialOverlay',
         syncTutorialSpotlightTarget: async () => null, waitForTutorialFrames: async () => {} };
-      if (/\/(NexusHeader|nexusRouteModel|nexusNormalize|nexusHistoryModel)$/.test(name)) {
+      if (/\/(NexusHeader|nexusRouteModel|nexusNormalize|nexusHistoryModel|useOwnerRequestScope)$/.test(name)) {
         return load(path.resolve(path.dirname(file), name + '.js'));
       }
       return { __esModule: true, default: name.split('/').pop() };
@@ -1138,7 +1138,7 @@ function nexusEntryHarness(options = {}) {
         module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.React } });
     assert.equal((compiled.diagnostics || []).filter(d => d.category === ts.DiagnosticCategory.Error).length, 0);
     vm.runInNewContext(compiled.outputText, { require: dependency, module, exports: module.exports,
-      console: { warn: noop }, setTimeout: () => 1, clearTimeout: noop }, { filename: file });
+      console: { warn: noop }, setTimeout: () => 1, clearTimeout: noop, AbortController }, { filename: file });
     modules.set(file, module.exports); return module.exports;
   }
   const Screen = load(path.join(ROOT, 'screens/NexusScreen.js')).default;

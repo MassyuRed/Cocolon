@@ -4740,3 +4740,15 @@ entitlement、public route、DB schema、RN ownerではありません。
 `mashos-api/ai/services/ai_inference/app.py` / `mashos-api/ai/services/ai_inference/emlis_ai_reply_service.py`からRecovery familyへのimportはなく、Recovery artifactを
 Cycle001 accepted、production connected、public response追加と読みません。current technical
 checkpointの詳細は07 / Planへ委譲し、本資料ではbackend support上の非接続境界だけを保持します。
+
+
+## 2026-11-07 — Account／購読／共通操作の全残件再点検
+
+- Account profile／visibility／follow hooks、SettingsOther削除確認、SettingsAppSettings通知関連の連続更新は開始owner／auth世代と既存expectedUserId・signalを渡す。古いAlert／awaitの続きで新本人の設定・削除へ進まない。profile APIを正本とし、遅れた冗長auth.updateUserの表示名書込を除去する（新規登録metadataは維持）。
+- `iapService.js`／`useAccountSubscription.js`／`SubscriptionSelectScreen.js`：購入・復元とproviderの遅い返答を本人へ束縛。旧ownerの結果で新ownerのPOST／取引finishを行わず、完了cacheもowner別。
+- API `subscription_projection.py`：検証済み購入に本人hintがある場合、認証本人と不一致なら既存409 conflictでclaim／entitlement書込前に停止。hint無しの旧購入は既存claim本人照合を維持する。
+- `subscription_live_console_check.py`：両tier商品の不足を診断readyへ反映。Androidは実購入productと各tierの実購入base plan自身がACTIVEかを検査し、認識だけの旧plan不在／INACTIVEは許容。他productのACTIVEで代替しない。販売設定は変えない。
+- RN `iapRuntimeCatalog.js`／API `subscription_bootstrap_store.py` の月30／無制限の文言は「生成回数」ではなく既存quotaの「保存できる数」へ修復。価格・SKU・権利・上限値は維持。
+- API `api_follow_graph.py`：非公開profile照合の例外を公開扱いに落とさず、既存エラーとして書込前に停止する。
+
+新規回帰：`account-settings-owner-race.test.js`、`iap-owner-race.test.js`、`private-history-owner-race.test.js`、API `test_subscription_purchase_owner_hint.py`、`test_subscription_live_console_readiness.py`、`test_follow_private_visibility_failure.py`。隔離合成検証と実ストア購入／本人削除／通知／配布を区別する。現在の合否・反映先は第10回§15へ。

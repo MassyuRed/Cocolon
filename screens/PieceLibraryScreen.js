@@ -19,8 +19,7 @@ import { useNavigation } from "@react-navigation/native";
 import { SafeAreaProvider, SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { useTheme } from "../theme/ThemeContext";
-import { supabase } from "../lib/supabase";
-import { getCurrentUserId } from "../lib/user";
+import { useAuth } from "../AuthContext";
 import { apiGet, apiFetch, API_BASE_URL } from "../lib/apiClient";
 import { FOLLOW_WIRE, PIECE_WIRE, buildFollowListPath } from "../lib/compat/legacyWireContracts";
 import {
@@ -95,6 +94,14 @@ function formatMetricCount(value) {
 // navigation の state を再帰的に探索して、指定 routeName が存在するか確認
 export default function PieceLibraryScreen({ route, onOpenSubscription, onTabUnreadChange } = {}) {
   const { colors, themeName } = useTheme();
+  const { user, authOwnerGeneration } = useAuth();
+  const ownerRequestRef = useRef(null);
+  useEffect(() => {
+    const controller = new AbortController();
+    const request = { expectedUserId: user?.id, signal: controller.signal };
+    ownerRequestRef.current = request;
+    return () => controller.abort();
+  }, [user?.id, authOwnerGeneration]);
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const navigation = useNavigation();
@@ -191,6 +198,7 @@ export default function PieceLibraryScreen({ route, onOpenSubscription, onTabUnr
 
   // Tab reselect helper: used to ignore async results after a "reset to main"
   const resetSeqRef = useRef(0);
+  const listRequestSeqRef = useRef(0);
   const handledOpenQInstanceIdRef = useRef("");
 
   // Prefetch freshness
@@ -644,6 +652,7 @@ export default function PieceLibraryScreen({ route, onOpenSubscription, onTabUnr
 // ---------------------------------------------------------
 const resetToMain = useCallback(() => {
   resetSeqRef.current += 1;
+  listRequestSeqRef.current += 1;
 
   // close modal-like UIs
   setPickerVisible(false);
@@ -689,24 +698,19 @@ useEffect(() => {
 
   // route params が変わった場合も追従（例：他画面から viewedUserId で遷移）
   useEffect(() => {
+    resetSeqRef.current += 1;
+    listRequestSeqRef.current += 1;
     setActiveViewedUserId(initialViewedUserId ? String(initialViewedUserId) : null);
+    setSelected(null);
+    setQnaItems([]);
+    setDetailLoading(false);
+    setDetailLoadingId(null);
   }, [initialViewedUserId]);
 
   // viewer user id を取得（Piece表示名 / フォロー一覧取得に利用）
   useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      try {
-        const id = await getCurrentUserId();
-        if (!cancelled) setViewerUserId(id ? String(id) : null);
-      } catch {
-        if (!cancelled) setViewerUserId(null);
-      }
-    })();
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+    setViewerUserId(user?.id ? String(user.id) : null);
+  }, [user?.id]);
 
   // 「Piece：ユーザー名」表示用
   useEffect(() => {
@@ -789,27 +793,8 @@ useEffect(() => {
     );
   };
 
-  async function getAuthContext() {
-    let userId = viewerUserId ? String(viewerUserId) : null;
-    let accessToken = null;
-    try {
-      if (!userId) {
-        userId = await getCurrentUserId();
-      }
-    } catch (e) {
-      console.warn("PieceLibraryScreen: failed to resolve userId", e);
-    }
-    try {
-      const { data: sessionData } = await supabase.auth.getSession();
-      accessToken = sessionData?.session?.access_token ?? null;
-    } catch (e) {
-      console.warn("PieceLibraryScreen: failed to resolve auth session", e);
-    }
-    return { userId, accessToken };
-  }
-
   const refreshPieceUnread = useCallback(
-    async (providedAccessToken = null) => {
+    async () => {
       if (isTutorialMode) {
         try {
           setUnread("Piece", "piecesNew", false);
@@ -825,26 +810,12 @@ useEffect(() => {
         }
         return false;
       }
+      const ownerRequest = ownerRequestRef.current;
+      if (!user?.id || ownerRequest?.expectedUserId !== user.id || ownerRequest.signal.aborted) return false;
 
       try {
-        let accessToken = providedAccessToken;
-        if (!accessToken) {
-          const { data: sessionData } = await supabase.auth.getSession();
-          accessToken = sessionData?.session?.access_token ?? null;
-        }
-        if (!accessToken) {
-          setUnread("Piece", "piecesNew", false);
-                    try {
-            if (typeof onTabUnreadChange === "function") {
-              onTabUnreadChange(false);
-            }
-          } catch {
-            // noop
-          }
-          return false;
-        }
-
-        const json = await getNexusPiecesUnreadStatus();
+        const json = await getNexusPiecesUnreadStatus(ownerRequest);
+        if (ownerRequest.signal.aborted) return false;
         const hasUnread =
           typeof json?.has_unread === "boolean"
             ? json.has_unread
@@ -866,6 +837,7 @@ useEffect(() => {
         }
         return !!hasUnread;
       } catch {
+        if (ownerRequest.signal.aborted) return false;
         try {
           setUnread("Piece", "piecesNew", false);
                   } catch {
@@ -881,7 +853,7 @@ useEffect(() => {
         return false;
       }
     },
-    [isTutorialMode, onTabUnreadChange, setUnread]
+    [isTutorialMode, onTabUnreadChange, setUnread, user?.id, authOwnerGeneration]
   );
 
   // Piece Home の Piece NEW は screen-local 集計ではなく
@@ -906,6 +878,8 @@ useEffect(() => {
   }, [navigation, refreshPieceUnread]);
 
   const loadFollowingUsers = useCallback(async () => {
+    const ownerRequest = ownerRequestRef.current;
+    if (!isTutorialMode && (!user?.id || ownerRequest?.expectedUserId !== user.id || ownerRequest.signal.aborted)) return;
     setFollowingLoading(true);
     setFollowingError("");
 
@@ -916,16 +890,10 @@ useEffect(() => {
     }
 
     try {
-      const myUserId = await getCurrentUserId().catch(() => null);
-      if (!myUserId) {
-        setFollowingUsers([]);
-        setFollowingError("ログインが必要です");
-        return;
-      }
-
       const json = await apiGet(
-        buildFollowListPath({ targetUserId: myUserId, tab: "following", limit: 1000 })
+        buildFollowListPath({ targetUserId: ownerRequest.expectedUserId, tab: "following", limit: 1000 }), ownerRequest
       );
+      if (ownerRequest.signal.aborted) return;
 
       const rows = Array.isArray(json?.rows) ? json.rows : [];
       const uniq = [];
@@ -940,12 +908,13 @@ useEffect(() => {
 
       setFollowingUsers(uniq);
     } catch (e) {
+      if (ownerRequest.signal.aborted) return;
       setFollowingError(String(e?.message || e));
       setFollowingUsers([]);
     } finally {
-      setFollowingLoading(false);
+      if (!ownerRequest.signal.aborted) setFollowingLoading(false);
     }
-  }, [isTutorialMode, tutorialFollowingUsers]);
+  }, [isTutorialMode, tutorialFollowingUsers, user?.id]);
 
   const openUserPicker = useCallback(async () => {
     tutorialPickUserScrollYRef.current = 0;
@@ -955,17 +924,19 @@ useEffect(() => {
       return;
     }
 
-    const myUserId = await getCurrentUserId().catch(() => null);
-    if (!myUserId) {
+    const ownerRequest = ownerRequestRef.current;
+    if (!user?.id || ownerRequest?.expectedUserId !== user.id || ownerRequest.signal.aborted) {
       Alert.alert("ログインが必要です", "ログイン後にご利用ください。");
       return;
     }
 
     setUserPickerVisible(true);
     await loadFollowingUsers();
-  }, [isTutorialMode, loadFollowingUsers]);
+  }, [isTutorialMode, loadFollowingUsers, user?.id]);
 
   const selectTargetUser = useCallback((nextUserId) => {
+    resetSeqRef.current += 1;
+    listRequestSeqRef.current += 1;
     const uid = nextUserId ? String(nextUserId) : null;
     setActiveViewedUserId(uid);
     setUserPickerVisible(false);
@@ -975,6 +946,9 @@ useEffect(() => {
     setQnaItems([]);
     setListMeta(null);
     setListError("");
+    setListLoading(false);
+    setDetailLoading(false);
+    setDetailLoadingId(null);
   }, []);
 
   const resolveTargetUserId = useCallback(
@@ -997,6 +971,11 @@ useEffect(() => {
 
   const loadQnaList = useCallback(
     async (mode, opts) => {
+      const sequence = ++listRequestSeqRef.current;
+      const ownerRequest = ownerRequestRef.current;
+      if (!isTutorialMode && (!user?.id || ownerRequest?.expectedUserId !== user.id || ownerRequest.signal.aborted)) return;
+      const isCurrent = () => sequence === listRequestSeqRef.current &&
+        (isTutorialMode || !ownerRequest.signal.aborted);
       const silent = !!opts?.silent;
       if (!silent) {
         setListLoading(true);
@@ -1005,6 +984,7 @@ useEffect(() => {
       try {
         if (isTutorialMode) {
           const targetUserId = await resolveTargetUserId(TUTORIAL_SELF_USER_ID);
+          if (!isCurrent()) return;
           const items = getTutorialSortedItems(targetUserId, mode);
           setQnaItems(items);
           setListMeta({
@@ -1014,14 +994,11 @@ useEffect(() => {
           return;
         }
 
-        const { userId, accessToken } = await getAuthContext();
-        if (!accessToken) {
-          Alert.alert("ログインが必要です", "ログイン後にご利用ください。");
-          return;
-        }
-
+        const userId = ownerRequest.expectedUserId;
         const targetUserId = await resolveTargetUserId(userId);
-        const json = await getNexusPiecesAsQnaList(buildListParams(targetUserId, mode));
+        if (!isCurrent()) return;
+        const json = await getNexusPiecesAsQnaList(buildListParams(targetUserId, mode), ownerRequest);
+        if (!isCurrent()) return;
 
         const items = Array.isArray(json?.items) ? json.items : [];
         const meta = json?.meta || null;
@@ -1045,9 +1022,10 @@ useEffect(() => {
           // noop
         }
       } catch (e) {
+        if (!isCurrent()) return;
         setListError(String(e?.message || e));
       } finally {
-        setListLoading(false);
+        if (isCurrent()) setListLoading(false);
       }
     },
     [
@@ -1056,6 +1034,7 @@ useEffect(() => {
       resolveTargetUserId,
       getTutorialSortedItems,
       setPrefetch,
+      user?.id,
     ]
   );
 
@@ -1158,6 +1137,8 @@ useEffect(() => {
     async (item) => {
       if (!item?.q_instance_id) return;
       if (detailLoading) return;
+      const ownerRequest = ownerRequestRef.current;
+      if (!isTutorialMode && (!user?.id || ownerRequest?.expectedUserId !== user.id || ownerRequest.signal.aborted)) return;
       const resetSeq = resetSeqRef.current;
       const qInstanceId = String(item.q_instance_id);
       const shouldRefreshUnread = !!item?.is_new;
@@ -1196,17 +1177,12 @@ useEffect(() => {
           return;
         }
 
-        const { accessToken } = await getAuthContext();
-        if (!accessToken) {
-          Alert.alert("ログインが必要です", "ログイン後にご利用ください。");
-          return;
-        }
-
         const json = await getNexusPieceDetailQna(qInstanceId, {
+          ...ownerRequest,
           markViewed: true,
         });
 
-        if (resetSeq !== resetSeqRef.current) return;
+        if (resetSeq !== resetSeqRef.current || ownerRequest.signal.aborted) return;
 
         const nextSelected = {
           ...(json && typeof json === "object" ? json : {}),
@@ -1231,10 +1207,13 @@ useEffect(() => {
           Promise.resolve(refreshPieceUnread()).catch(() => null);
         }
       } catch (e) {
+        if (resetSeq !== resetSeqRef.current || (!isTutorialMode && ownerRequest.signal.aborted)) return;
         Alert.alert("読み込みに失敗しました", buildErrorMessage(e));
       } finally {
-        setDetailLoading(false);
-        setDetailLoadingId(null);
+        if (resetSeq === resetSeqRef.current && (isTutorialMode || !ownerRequest.signal.aborted)) {
+          setDetailLoading(false);
+          setDetailLoadingId(null);
+        }
       }
     },
     [
@@ -1243,6 +1222,7 @@ useEffect(() => {
       isTutorialMode,
       refreshPieceUnread,
       updateTutorialPiece,
+      user?.id,
     ]
   );
 
@@ -1303,6 +1283,8 @@ useEffect(() => {
 
   const handleResonancePress = useCallback(async () => {
     if (!selected?.q_instance_id) return;
+    const ownerRequest = ownerRequestRef.current;
+    if (!isTutorialMode && (!user?.id || ownerRequest?.expectedUserId !== user.id || ownerRequest.signal.aborted)) return;
 
     const already = !!(selected?.is_resonated ?? selected?.resonated);
     const qidNow = String(selected.q_instance_id);
@@ -1318,6 +1300,7 @@ useEffect(() => {
             style: "destructive",
             onPress: () => {
               (async () => {
+                if (!isTutorialMode && ownerRequest.signal.aborted) return;
                 setResonanceDeleting(true);
                 setResonanceSubmitError("");
                 try {
@@ -1362,17 +1345,11 @@ useEffect(() => {
                     return;
                   }
 
-                  const { accessToken } = await getAuthContext();
-                  if (!accessToken) {
-                    Alert.alert("ログインが必要です", "ログイン後にご利用ください。");
-                    return;
-                  }
-
                   const res = await apiFetch(PIECE_RESONANCE_DELETE_ENDPOINT, {
+                    ...ownerRequest,
                     method: "POST",
                     headers: {
                       "Content-Type": "application/json",
-                      Authorization: `Bearer ${accessToken}`,
                     },
                     body: JSON.stringify({
                       q_instance_id: qidNow,
@@ -1381,6 +1358,7 @@ useEffect(() => {
                   });
 
                   const json = await res.json().catch(() => ({}));
+                  if (ownerRequest.signal.aborted) return;
                   if (!res.ok) {
                     const msg = json?.detail || json?.message || `HTTP ${res.status}`;
                     throw new Error(String(msg));
@@ -1416,10 +1394,11 @@ useEffect(() => {
                     })
                   );
                 } catch (e) {
+                  if (!isTutorialMode && ownerRequest.signal.aborted) return;
                   setResonanceSubmitError(buildErrorMessage(e));
                   Alert.alert("解除に失敗しました", buildErrorMessage(e));
                 } finally {
-                  setResonanceDeleting(false);
+                  if (isTutorialMode || !ownerRequest.signal.aborted) setResonanceDeleting(false);
                 }
               })();
             },
@@ -1479,17 +1458,11 @@ useEffect(() => {
         return;
       }
 
-      const { accessToken } = await getAuthContext();
-      if (!accessToken) {
-        Alert.alert("ログインが必要です", "ログイン後にご利用ください。");
-        return;
-      }
-
       const res = await apiFetch(PIECE_RESONANCE_SUBMIT_ENDPOINT, {
+        ...ownerRequest,
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify({
           q_instance_id: qidNow,
@@ -1500,6 +1473,7 @@ useEffect(() => {
       });
 
       const json = await res.json().catch(() => ({}));
+      if (ownerRequest.signal.aborted) return;
       if (!res.ok) {
         const msg = json?.detail || json?.message || `HTTP ${res.status}`;
         throw new Error(String(msg));
@@ -1541,15 +1515,18 @@ useEffect(() => {
         })
       );
     } catch (e) {
+      if (!isTutorialMode && ownerRequest.signal.aborted) return;
       setResonanceSubmitError(buildErrorMessage(e));
       Alert.alert("共鳴に失敗しました", buildErrorMessage(e));
     } finally {
-      setResonanceSubmitting(false);
+      if (isTutorialMode || !ownerRequest.signal.aborted) setResonanceSubmitting(false);
     }
-  }, [isTutorialMode, selected, updateTutorialPiece]);
+  }, [isTutorialMode, selected, updateTutorialPiece, user?.id]);
 
   const submitResonance = useCallback(async () => {
     if (!selected?.q_instance_id) return;
+    const ownerRequest = ownerRequestRef.current;
+    if (!isTutorialMode && (!user?.id || ownerRequest?.expectedUserId !== user.id || ownerRequest.signal.aborted)) return;
 
     const already = !!(selected?.is_resonated ?? selected?.resonated);
     if (already) {
@@ -1616,17 +1593,11 @@ useEffect(() => {
         return;
       }
 
-      const { userId, accessToken } = await getAuthContext();
-      if (!accessToken) {
-        Alert.alert("ログインが必要です", "ログイン後にご利用ください。");
-        return;
-      }
-
       const res = await apiFetch(PIECE_RESONANCE_SUBMIT_ENDPOINT, {
+        ...ownerRequest,
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify({
           q_instance_id: String(selected.q_instance_id),
@@ -1637,6 +1608,7 @@ useEffect(() => {
       });
 
       const json = await res.json().catch(() => ({}));
+      if (ownerRequest.signal.aborted) return;
       if (!res.ok) {
         const msg = json?.detail || json?.message || `HTTP ${res.status}`;
         throw new Error(String(msg));
@@ -1681,9 +1653,10 @@ useEffect(() => {
       closeResonanceModal();
       Alert.alert("送信しました", "響きを記録しました。");
     } catch (e) {
+      if (!isTutorialMode && ownerRequest.signal.aborted) return;
       setResonanceSubmitError(buildErrorMessage(e));
     } finally {
-      setResonanceSubmitting(false);
+      if (isTutorialMode || !ownerRequest.signal.aborted) setResonanceSubmitting(false);
     }
   }, [
     isTutorialMode,
@@ -1692,10 +1665,13 @@ useEffect(() => {
     resonanceMemo,
     closeResonanceModal,
     updateTutorialPiece,
+    user?.id,
   ]);
 
   const confirmDeleteResonance = useCallback(() => {
     if (!selected?.q_instance_id) return;
+    const ownerRequest = ownerRequestRef.current;
+    if (!isTutorialMode && (!user?.id || ownerRequest?.expectedUserId !== user.id || ownerRequest.signal.aborted)) return;
 
     const beforeResonated = !!(selected?.is_resonated ?? selected?.resonated);
     if (!beforeResonated) {
@@ -1781,22 +1757,17 @@ useEffect(() => {
           style: "destructive",
           onPress: () => {
             (async () => {
+              if (ownerRequest.signal.aborted) return;
               setResonanceDeleting(true);
               setResonanceSubmitError("");
               try {
-                const { accessToken } = await getAuthContext();
-                if (!accessToken) {
-                  Alert.alert("ログインが必要です", "ログイン後にご利用ください。");
-                  return;
-                }
-
                 const qidNow = String(selected.q_instance_id);
 
                 const res = await apiFetch(PIECE_RESONANCE_DELETE_ENDPOINT, {
+                  ...ownerRequest,
                   method: "POST",
                   headers: {
                     "Content-Type": "application/json",
-                    Authorization: `Bearer ${accessToken}`,
                   },
                   body: JSON.stringify({
                     q_instance_id: qidNow,
@@ -1805,6 +1776,7 @@ useEffect(() => {
                 });
 
                 const json = await res.json().catch(() => ({}));
+                if (ownerRequest.signal.aborted) return;
                 if (!res.ok) {
                   const msg = json?.detail || json?.message || `HTTP ${res.status}`;
                   throw new Error(String(msg));
@@ -1844,16 +1816,17 @@ useEffect(() => {
                 closeResonanceModal();
                 Alert.alert("解除しました", "共鳴を解除しました。");
               } catch (e) {
+                if (ownerRequest.signal.aborted) return;
                 setResonanceSubmitError(buildErrorMessage(e));
               } finally {
-                setResonanceDeleting(false);
+                if (!ownerRequest.signal.aborted) setResonanceDeleting(false);
               }
             })();
           },
         },
       ]
     );
-  }, [isTutorialMode, selected, closeResonanceModal, updateTutorialPiece]);
+  }, [isTutorialMode, selected, closeResonanceModal, updateTutorialPiece, user?.id]);
 
   const isDark = themeName === "dark";
 

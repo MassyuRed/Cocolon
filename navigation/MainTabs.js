@@ -7,6 +7,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { useAuth } from "../AuthContext";
+import { useOwnerRequestScope } from "../hooks/useOwnerRequestScope";
 import { useUnread } from "../UnreadContext";
 import { useSubscription } from "../SubscriptionContext";
 import { useTutorial } from "../TutorialContext";
@@ -160,7 +161,7 @@ export default function MainTabs() {
   } = useUnread();
 
   const { isPaid, loading: subscriptionLoading, tier, subscriptionBootstrapLoaded, subscriptionBootstrapLoading } = useSubscription();
-  const { session, recoveryMode } = useAuth();
+  const { session, recoveryMode, authOwnerGeneration } = useAuth();
   const {
     isTutorialMode,
     tutorialFlagsLoaded,
@@ -192,6 +193,7 @@ export default function MainTabs() {
   const [initialInputOwner, setInitialInputOwner] = useState(null);
   const [startupComplete, setStartupComplete] = useState(false);
   const currentOwner = session?.user?.id || null;
+  const { scope: ownerRequest, isCurrent: isOwnerCurrent } = useOwnerRequestScope(currentOwner, authOwnerGeneration);
   const [pieceSaveScope, setPieceSaveScope] = useState(() => ({ owner: currentOwner,
     recovery: createPieceSaveRecovery(currentOwner) }));
   if (pieceSaveScope.owner !== currentOwner) {
@@ -336,6 +338,7 @@ export default function MainTabs() {
   }, [getFeatureUnread]);
 
   const applyAnalysisUnreadPatch = React.useCallback((patch, options = {}) => {
+    if (!isOwnerCurrent(ownerRequest)) return;
     const preserveTruthyKeys = options?.preserveTruthyKeys === true;
     const targetKeys = Array.isArray(options?.keys) && options.keys.length > 0
       ? options.keys
@@ -367,7 +370,7 @@ export default function MainTabs() {
     }
 
     return next;
-  }, [setUnreadGroup]);
+  }, [setUnreadGroup, ownerRequest, isOwnerCurrent]);
 
   const extractAnalysisUnreadFromStartupSnapshot = React.useCallback((payload) => {
     if (!payload || typeof payload !== "object" || Array.isArray(payload)) return null;
@@ -444,52 +447,46 @@ export default function MainTabs() {
   const screenPrefetchTimerRef = React.useRef(null);
 
   const pingActivityLogin = React.useCallback(async () => {
+    if (!isOwnerCurrent(ownerRequest)) return;
     try {
       const now = Date.now();
       const last = Number(__lastActivityLoginPingAtRef.current || 0) || 0;
       if (now - last < 10 * 1000) return;
       __lastActivityLoginPingAtRef.current = now;
-      const { data: sessionData } = await supabase.auth.getSession();
-      const accessToken = sessionData?.session?.access_token ?? null;
-      if (!accessToken) return;
       const url = `${API_BASE_URL}/activity/login`;
       const res = await apiFetch(url, {
         method: "POST",
-        auth: false,
-        headers: { Authorization: `Bearer ${accessToken}` },
+        ...ownerRequest.options,
       });
       if (!res.ok) {}
     } catch {}
-  }, []);
+  }, [ownerRequest, isOwnerCurrent]);
 
   const refreshPieceUnreadBadge = React.useCallback(async () => {
+    if (!isOwnerCurrent(ownerRequest)) return;
     try {
       if (isTutorialMode) {
         setUnread("Piece", "piecesNew", false);
         
         return;
       }
-      const json = await apiGet(PIECE_WIRE.routes.publicUnreadStatus);
+      const json = await apiGet(PIECE_WIRE.routes.publicUnreadStatus, ownerRequest.options);
+      if (!isOwnerCurrent(ownerRequest)) return;
       const hasUnread = typeof json?.has_unread === "boolean" ? json.has_unread : typeof json?.hasUnread === "boolean" ? json.hasUnread : false;
       setUnread("Piece", "piecesNew", !!hasUnread);
     } catch {
+      if (!isOwnerCurrent(ownerRequest)) return;
       setUnread("Piece", "piecesNew", false);
     }
-  }, [isTutorialMode, setUnread]);
+  }, [isTutorialMode, setUnread, ownerRequest, isOwnerCurrent]);
 
   const getAnalysisSelfStructureLatestSeenStorageKey = React.useCallback(async () => {
-    try {
-      const { data } = await supabase.auth.getSession();
-      const userId = String(data?.session?.user?.id || "").trim();
-      return userId
-        ? `${ANALYSIS_SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY}:${userId}`
-        : ANALYSIS_SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY;
-    } catch {
-      return ANALYSIS_SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY;
-    }
-  }, []);
+    return isOwnerCurrent(ownerRequest)
+      ? `${ANALYSIS_SELF_STRUCTURE_LATEST_SEEN_VERSION_KEY}:${ownerRequest.owner}` : null;
+  }, [ownerRequest, isOwnerCurrent]);
 
   const fetchAnalysisReportReadIdSet = React.useCallback(async (reportIds) => {
+    if (!isOwnerCurrent(ownerRequest)) return new Set();
     const ids = Array.from(
       new Set(
         (Array.isArray(reportIds) ? reportIds : [])
@@ -506,7 +503,9 @@ export default function MainTabs() {
       const query = chunk
         .map((id) => `report_ids=${encodeURIComponent(id)}`)
         .join("&");
-      const json = await apiGet(`/report-reads/status?${query}`);
+      if (!isOwnerCurrent(ownerRequest)) return new Set();
+      const json = await apiGet(`/report-reads/status?${query}`, ownerRequest.options);
+      if (!isOwnerCurrent(ownerRequest)) return new Set();
       const readIds = Array.isArray(json?.read_ids) ? json.read_ids : [];
       readIds.forEach((id) => {
         const normalized = String(id || "").trim();
@@ -514,16 +513,18 @@ export default function MainTabs() {
       });
     }
     return readSet;
-  }, []);
+  }, [ownerRequest, isOwnerCurrent]);
 
   const fetchAnalysisSelfStructureLatestUnread = React.useCallback(async () => {
-    if (!isPaid) return false;
+    if (!isPaid || !isOwnerCurrent(ownerRequest)) return false;
 
     const storageKey = await getAnalysisSelfStructureLatestSeenStorageKey();
+    if (!storageKey || !isOwnerCurrent(ownerRequest)) return false;
     const [statusJson, seenVersionKey] = await Promise.all([
-      apiGet(SELF_STRUCTURE_WIRE.routes.latestStatus),
+      apiGet(SELF_STRUCTURE_WIRE.routes.latestStatus, ownerRequest.options),
       AsyncStorage.getItem(storageKey),
     ]);
+    if (!isOwnerCurrent(ownerRequest)) return false;
 
     const versionKey = String(statusJson?.version_key || "").trim();
     const hasVisibleContent = !!statusJson?.has_visible_content;
@@ -531,14 +532,15 @@ export default function MainTabs() {
 
     if (!versionKey || !hasVisibleContent) return false;
     return versionKey !== seenKey;
-  }, [getAnalysisSelfStructureLatestSeenStorageKey, isPaid]);
+  }, [getAnalysisSelfStructureLatestSeenStorageKey, isPaid, ownerRequest, isOwnerCurrent]);
 
   const fetchAnalysisSelfStructureHistoryUnread = React.useCallback(async () => {
-    if (!isPaid) return false;
+    if (!isPaid || !isOwnerCurrent(ownerRequest)) return false;
 
     const historyJson = await apiGet(
-      buildSelfStructureReportHistoryPath({ reportType: "monthly", limit: ANALYSIS_SELF_STRUCTURE_HISTORY_FETCH_LIMIT, offset: 0 })
+      buildSelfStructureReportHistoryPath({ reportType: "monthly", limit: ANALYSIS_SELF_STRUCTURE_HISTORY_FETCH_LIMIT, offset: 0 }), ownerRequest.options
     );
+    if (!isOwnerCurrent(ownerRequest)) return false;
     const items = Array.isArray(historyJson?.items) ? historyJson.items : [];
     const ids = items
       .map((item) => String(item?.id || "").trim())
@@ -548,7 +550,7 @@ export default function MainTabs() {
 
     const readSet = await fetchAnalysisReportReadIdSet(ids);
     return ids.some((id) => !readSet.has(id));
-  }, [fetchAnalysisReportReadIdSet, isPaid]);
+  }, [fetchAnalysisReportReadIdSet, isPaid, ownerRequest, isOwnerCurrent]);
 
   const clearAnalysisStartupWarmupTimer = React.useCallback(() => {
     try {
@@ -560,6 +562,7 @@ export default function MainTabs() {
   }, []);
 
   const refreshAnalysisReportsUnreadBadge = React.useCallback(async (options = {}) => {
+    if (!isOwnerCurrent(ownerRequest)) return;
     const preserveTruthyKeys = options?.preserveTruthyKeys === true;
     if (!preserveTruthyKeys) {
       analysisStartupWarmupSeqRef.current += 1;
@@ -567,7 +570,7 @@ export default function MainTabs() {
     }
 
     const refreshSeq = ++analysisUnreadRefreshSeqRef.current;
-    const isStale = () => refreshSeq !== analysisUnreadRefreshSeqRef.current;
+    const isStale = () => !isOwnerCurrent(ownerRequest) || refreshSeq !== analysisUnreadRefreshSeqRef.current;
     const canResolveSelfStructureUnread = !subscriptionLoading;
 
     const applyBaseUnread = (unread) => {
@@ -614,7 +617,7 @@ export default function MainTabs() {
       : Promise.resolve(false);
 
     try {
-      const json = await apiGet(`${ANALYSIS_WIRE.routes.reportsUnreadStatus}?${baseQuery}`);
+      const json = await apiGet(`${ANALYSIS_WIRE.routes.reportsUnreadStatus}?${baseQuery}`, ownerRequest.options);
       const unread = json?.unread_by_type || {};
       applyBaseUnread(unread);
     } catch (e) {
@@ -632,9 +635,11 @@ export default function MainTabs() {
     applyAnalysisUnreadPatch,
     fetchAnalysisSelfStructureLatestUnread,
     fetchAnalysisSelfStructureHistoryUnread,
+    ownerRequest, isOwnerCurrent,
   ]);
 
   const fetchAndApplyStartupSnapshot = React.useCallback(async ({ forceRefresh = false, source = "startup", applyIf, preserveTruthyKeys = false } = {}) => {
+    if (!isOwnerCurrent(ownerRequest)) return null;
     const params = new URLSearchParams();
     if (forceRefresh) {
       params.set("force_refresh", "true");
@@ -649,7 +654,8 @@ export default function MainTabs() {
 
     const query = params.toString();
     const path = query ? `/app/startup?${query}` : "/app/startup";
-    const json = await apiGet(path);
+    const json = await apiGet(path, ownerRequest.options);
+    if (!isOwnerCurrent(ownerRequest)) return null;
 
     if (typeof applyIf === "function") {
       try {
@@ -681,9 +687,11 @@ export default function MainTabs() {
     applyStartupSnapshot,
     extractAnalysisUnreadFromStartupSnapshot,
     stripAnalysisUnreadFromStartupSnapshot,
+    ownerRequest, isOwnerCurrent,
   ]);
 
   const revalidateAnalysisUnreadFromStartup = React.useCallback(async ({ source = ANALYSIS_WIRE.startupSource.startup, applyIf } = {}) => {
+    if (!isOwnerCurrent(ownerRequest)) return;
     try {
       await fetchAndApplyStartupSnapshot({
         forceRefresh: true,
@@ -695,6 +703,7 @@ export default function MainTabs() {
       console.warn("MainTabs: failed to hydrate Analysis unread from startup snapshot", e);
     }
 
+    if (!isOwnerCurrent(ownerRequest)) return;
     if (typeof applyIf === "function") {
       try {
         if (!applyIf()) return;
@@ -708,9 +717,10 @@ export default function MainTabs() {
     } catch (e) {
       console.warn("MainTabs: failed to refresh Analysis unread badges on startup", e);
     }
-  }, [fetchAndApplyStartupSnapshot, refreshAnalysisReportsUnreadBadge]);
+  }, [fetchAndApplyStartupSnapshot, refreshAnalysisReportsUnreadBadge, ownerRequest, isOwnerCurrent]);
 
   const warmAnalysisUnreadAtStartup = React.useCallback(async ({ force = false, sourcePrefix = ANALYSIS_WIRE.startupSource.startup } = {}) => {
+    if (!isOwnerCurrent(ownerRequest)) return;
     try {
       const now = Date.now();
       const last = Number(analysisStartupWarmupLastRunAtRef.current || 0) || 0;
@@ -720,7 +730,7 @@ export default function MainTabs() {
       clearAnalysisStartupWarmupTimer();
 
       const warmupSeq = ++analysisStartupWarmupSeqRef.current;
-      const isWarmupStale = () => warmupSeq !== analysisStartupWarmupSeqRef.current;
+      const isWarmupStale = () => !isOwnerCurrent(ownerRequest) || warmupSeq !== analysisStartupWarmupSeqRef.current;
       const applyIfCurrent = () => !isWarmupStale();
       if (!force) {
         try {
@@ -765,32 +775,37 @@ export default function MainTabs() {
     clearAnalysisStartupWarmupTimer,
     fetchAndApplyStartupSnapshot,
     revalidateAnalysisUnreadFromStartup,
+    ownerRequest, isOwnerCurrent,
   ]);
 
   const refreshEmotionLogUnreadState = React.useCallback(async () => {
+    if (!isOwnerCurrent(ownerRequest)) return null;
     try {
-      const json = await apiGet("/emotion-log/unread-status");
+      const json = await apiGet("/emotion-log/unread-status", ownerRequest.options);
+      if (!isOwnerCurrent(ownerRequest)) return null;
       const nextFeed = !!json?.feed_unread;
       const nextRequests = !!json?.requests_unread;
       setUnread("EmotionLog", "feed", nextFeed);
       setUnread("EmotionLog", "requests", nextRequests);
       return { feed: nextFeed, requests: nextRequests };
     } catch (e) {
+      if (!isOwnerCurrent(ownerRequest)) return null;
       console.warn("MainTabs: failed to refresh EmotionLog unread state", e);
       setUnread("EmotionLog", "feed", false);
       setUnread("EmotionLog", "requests", false);
       return null;
     }
-  }, [setUnread]);
+  }, [setUnread, ownerRequest, isOwnerCurrent]);
 
   const markEmotionLogFeedRead = React.useCallback(async (lastSeenCreatedAt = null) => {
+    if (!isOwnerCurrent(ownerRequest)) return;
     try {
       const body = lastSeenCreatedAt ? { last_seen_created_at: lastSeenCreatedAt } : {};
-      await apiPost("/emotion-log/unread/read-feed", body);
+      await apiPost("/emotion-log/unread/read-feed", body, ownerRequest.options);
     } catch (e) {
       console.warn("MainTabs: failed to mark EmotionLog feed read", e);
     }
-  }, []);
+  }, [ownerRequest, isOwnerCurrent]);
 
   const PREFETCH_MAX_AGE_MS = 2 * 60 * 1000;
   const __lastScreenPrefetchAtRef = React.useRef(0);
@@ -803,15 +818,17 @@ export default function MainTabs() {
   }, []);
 
   const prefetchEmotionLogFeed = React.useCallback(async () => {
+    if (!isOwnerCurrent(ownerRequest)) return;
     try {
-      const userId = await resolveCurrentUserId();
+      const userId = ownerRequest.owner;
       if (!userId) return;
       try {
         const fresh = getPrefetchEntryFresh?.("EmotionLog", "feed", PREFETCH_MAX_AGE_MS);
         if (fresh?.value?.userId && String(fresh.value.userId) === String(userId)) return;
       } catch {}
 
-      const json = await apiGet("/emotion-log/feed");
+      const json = await apiGet("/emotion-log/feed", ownerRequest.options);
+      if (!isOwnerCurrent(ownerRequest)) return;
       const rows = Array.isArray(json?.items) ? json.items : Array.isArray(json?.data) ? json.data : Array.isArray(json) ? json : [];
       const mapped = rows.map((row) => ({
         id: row?.id,
@@ -822,23 +839,21 @@ export default function MainTabs() {
       }));
       try { setPrefetch("EmotionLog", "feed", { userId, items: mapped }); } catch {}
     } catch {}
-  }, [formatTimeLabel, getPrefetchEntryFresh, setPrefetch]);
+  }, [formatTimeLabel, getPrefetchEntryFresh, setPrefetch, ownerRequest, isOwnerCurrent]);
 
   const prefetchPieceScreenData = React.useCallback(async () => {
+    if (!isOwnerCurrent(ownerRequest)) return;
     try {
-      const userId = await resolveCurrentUserId();
-      const { data: sessionData } = await supabase.auth.getSession();
-      const accessToken = sessionData?.session?.access_token ?? null;
-      if (!userId || !accessToken) return;
-      const headers = { "Content-Type": "application/json", Authorization: `Bearer ${accessToken}` };
+      const userId = ownerRequest.owner;
 
       try {
         const fresh = getPrefetchEntryFresh?.("Piece", "recoUsers", PREFETCH_MAX_AGE_MS);
         const isFresh = !!fresh?.value?.userId && String(fresh.value.userId) === String(userId);
         if (!isFresh) {
           const url = `${API_BASE_URL}${PIECE_WIRE.routes.recommendUsers}?limit=20`;
-          const res = await apiFetch(url, { method: "GET", auth: false, headers });
+          const res = await apiFetch(url, { method: "GET", ...ownerRequest.options });
           const json = await res.json().catch(() => null);
+          if (!isOwnerCurrent(ownerRequest)) return;
           if (res.ok) {
             const users = Array.isArray(json?.users)
               ? json.users
@@ -855,6 +870,7 @@ export default function MainTabs() {
       } catch {}
 
       try {
+        if (!isOwnerCurrent(ownerRequest)) return;
         const cacheKey = `qnaList:${userId}:newest`;
         const fresh = getPrefetchEntryFresh?.("Piece", cacheKey, PREFETCH_MAX_AGE_MS);
         const isFresh = !!fresh?.value?.targetUserId && String(fresh.value.targetUserId) === String(userId);
@@ -863,16 +879,18 @@ export default function MainTabs() {
             targetUserId: userId,
             mode: "newest",
             limit: 100,
-          });
+          }, ownerRequest.options);
+          if (!isOwnerCurrent(ownerRequest)) return;
           const items = Array.isArray(json?.items) ? json.items : [];
           const meta = json?.meta && typeof json.meta === "object" ? json.meta : null;
           setPrefetch("Piece", cacheKey, { userId, targetUserId: userId, mode: "newest", items, meta });
         }
       } catch {}
     } catch {}
-  }, [getPrefetchEntryFresh, setPrefetch]);
+  }, [getPrefetchEntryFresh, setPrefetch, ownerRequest, isOwnerCurrent]);
 
   const runAllScreenPrefetch = React.useCallback(async () => {
+    if (!isOwnerCurrent(ownerRequest)) return;
     try {
       const now = Date.now();
       const last = Number(__lastScreenPrefetchAtRef.current || 0) || 0;
@@ -880,12 +898,14 @@ export default function MainTabs() {
       __lastScreenPrefetchAtRef.current = now;
       const tasks = [prefetchEmotionLogFeed, prefetchPieceScreenData];
       for (const fn of tasks) {
+        if (!isOwnerCurrent(ownerRequest)) return;
         try { await fn(); } catch {}
       }
     } catch {}
-  }, [prefetchEmotionLogFeed, prefetchPieceScreenData]);
+  }, [prefetchEmotionLogFeed, prefetchPieceScreenData, ownerRequest, isOwnerCurrent]);
 
   const runAllUnreadPrefetch = React.useCallback((opts = {}) => {
+    if (!isOwnerCurrent(ownerRequest)) return;
     const includeScreenPrefetch = opts?.includeScreenPrefetch !== false;
     try { pingActivityLogin(); } catch {}
 
@@ -923,6 +943,7 @@ export default function MainTabs() {
     refreshPieceUnreadBadge,
     warmAnalysisUnreadAtStartup,
     runAllScreenPrefetch,
+    ownerRequest, isOwnerCurrent,
   ]);
 
   const clearSelfStructureBannerTimer = React.useCallback(() => {
@@ -1019,9 +1040,10 @@ export default function MainTabs() {
   }, [hideSelfStructureBanner, isPaid, subscriptionLoading]);
 
   const refreshSelfStructureLatestStatus = React.useCallback(async () => {
-    if (subscriptionLoading || !isPaid || !isAppActive) return;
+    if (subscriptionLoading || !isPaid || !isAppActive || !isOwnerCurrent(ownerRequest)) return;
     try {
-      const json = await apiGet(SELF_STRUCTURE_WIRE.routes.latestStatus);
+      const json = await apiGet(SELF_STRUCTURE_WIRE.routes.latestStatus, ownerRequest.options);
+      if (!isOwnerCurrent(ownerRequest)) return;
       const nextVersionKey = String(json?.version_key || "").trim() || null;
       const hasVisibleContent = !!json?.has_visible_content;
       const reportMode = String(json?.saved_report_mode || "").trim().toLowerCase() === "deep" ? "deep" : "standard";
@@ -1035,7 +1057,7 @@ export default function MainTabs() {
         if (nextVersionKey && hasVisibleContent) showSelfStructureBanner(reportMode);
       }
     } catch {}
-  }, [isAppActive, isPaid, showSelfStructureBanner, subscriptionLoading]);
+  }, [isAppActive, isPaid, showSelfStructureBanner, subscriptionLoading, ownerRequest, isOwnerCurrent]);
 
   useEffect(() => {
     if (subscriptionLoading || !isPaid || !isAppActive) return undefined;

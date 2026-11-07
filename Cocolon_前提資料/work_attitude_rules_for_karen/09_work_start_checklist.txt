@@ -1,6 +1,6 @@
 # Cocolon作業開始チェックリスト
 
-revision_date: 2026-10-22
+revision_date: 2026-11-07
 normative_status: CURRENT_EXECUTION_GATE
 status: CURRENT_EFFECTIVE
 effective_when: NECESSITY_PRODUCT_DIRECTNESS_AND_MINIMUM_SAFETY_BOUNDARY_REMOTE_POSTVERIFIED
@@ -101,6 +101,14 @@ authority、Receipt、checker、controller、scanner、carrierまたはledgerを
 - [ ] Cycle001作業の場合だけ、fresh `08` / Current Closure Routeのevidence pointerから必要なactual source / contract / protected test / latest Receiptだけを確認した。
 - [ ] 指定predecessor、local materialization、未push overlayを分離した。
 - [ ] Cycle001作業の場合だけ、`07`はmilestone history、Planはroute / evidence mapであり、daily current next action ownerとして読んでいない。
+
+## C1. 全体確認と、作業前の入力契約照合
+
+- [ ] CURRENT_RULES R2.1の11/7最新指示を適用し、全file所在／byte一致、本文・画像／UIの確認、全仕様の理解、稼働・受入れを別の確認として扱った。今回の全体再点検・是正自体を全確認前作業禁止にしていない。
+- [ ] 当該操作の全入力項目・選択肢・複数／排他・範囲・既定／固定・保存先・権利・後続利用を、商品正本とcurrentな実コードで照合した。
+- [ ] 感情入力ではrule07の実機サンプル契約から、9カテゴリと選択集合、通常感情ごとの強度（平穏を含む）、自己理解単独、memo／memo_action二欄、secretと通知の別を確認した。
+- [ ] サンプル／検証の対象と未確認を明示し、提示入力票と実行packetの値を対応付けた。未指定の強度・空欄・カテゴリ等をfixture既定で補って、同じ実機条件とみなしていない。
+- [ ] 全file確認の進捗だけで商品理解完了とせず、今の判断に必要な仕様の不足が残る場合は、その断定・依頼・全完了claimを出さない。
 
 ## D. authority / effect
 

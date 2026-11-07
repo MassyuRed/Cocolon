@@ -1733,15 +1733,16 @@ test('AccountScreen keeps profile, follow, visibility, subscription, and ID sear
 
   assertIncludes(accountProfileHook, [
     'export function useAccountProfile',
-    'apiGet("/account/profile/me")',
+    'apiGet("/account/profile/me", request)',
     '/account/display-name/availability',
     'apiPatch("/account/profile/me"',
-    'supabase.auth.updateUser',
+    'expectedUserId: user?.id',
     'Share.share({ message: code })',
     'https://emlis.app/u/${code}',
     'readShareCode',
     'readConnectCode',
   ], 'useAccountProfile.js');
+  assert.doesNotMatch(accountProfileHook, /supabase\.auth\.updateUser\(/, 'profile edits must not retarget a current-session metadata write');
 
   assertIncludes(accountFollowHook, [
     'export function useAccountFollowState',

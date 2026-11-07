@@ -184,8 +184,14 @@ export default function EmlisThreadModal({ thread, colors, navigation, userId = 
           {!dto?.current_observation && <View style={s.content}>
           {dto?.original ? <View style={[s.section, { borderColor: colors.CARD_BORDER }]}>
             <Text style={[s.description, textStyle]}>元の記録 · {dateLabel(dto.original.created_at)}</Text>
-            {!!dto.original.memo && <Text selectable style={[s.body, textStyle]}>{dto.original.memo}</Text>}
-            {!!dto.original.memo_action && <Text selectable style={[s.body, textStyle]}>{dto.original.memo_action}</Text>}
+            {!!dto.original.memo && <View style={s.originalField}>
+              <Text style={[s.label, textStyle]}>考えたこと・感じたこと</Text>
+              <Text selectable style={[s.body, textStyle]}>{dto.original.memo}</Text>
+            </View>}
+            {!!dto.original.memo_action && <View style={s.originalField}>
+              <Text style={[s.label, textStyle]}>出来事・行動</Text>
+              <Text selectable style={[s.body, textStyle]}>{dto.original.memo_action}</Text>
+            </View>}
           </View> : null}
           {history.map(event => <View key={event.event_id} style={[s.section, { borderColor: colors.CARD_BORDER }]}>
             <Text style={[s.label, textStyle]}>{event.kind === "QUESTION" ? `Emlisからの質問${event.round_index ? ` · ${event.round_index}問目` : ""}`
@@ -208,7 +214,7 @@ const s = StyleSheet.create({
   card: { width: "100%", maxWidth: 520, maxHeight: "100%", flexShrink: 1, borderWidth: 1, borderRadius: 24, padding: 20, gap: 14 },
   title: { fontSize: 22, lineHeight: 30, fontWeight: "600" }, content: { gap: 20, paddingBottom: 16 },
   section: { gap: 8, padding: 16, borderWidth: 1, borderRadius: 16 }, label: { fontSize: 14, lineHeight: 22, fontWeight: "600" },
-  description: { fontSize: 14, lineHeight: 22, fontWeight: "400" },
+  description: { fontSize: 14, lineHeight: 22, fontWeight: "400" }, originalField: { gap: 8 },
   body: { fontSize: 16, lineHeight: 27, fontWeight: "400" }, input: { minHeight: 100, maxHeight: 200, borderWidth: 1, borderRadius: 16, padding: 16, fontSize: 16, lineHeight: 27, fontWeight: "400" },
 });
 

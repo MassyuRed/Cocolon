@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Alert, StyleSheet, Text, View } from "react-native";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
@@ -250,7 +250,8 @@ function SettingSwitchRow({
 
 export default function SettingsAppSettingsScreen({ navigation }) {
   const { colors, themeName, setThemeName } = useTheme();
-  const { user, authLoading } = useAuth();
+  const { user, authLoading, authOwnerGeneration } = useAuth();
+  const ownerRequestRef = useRef(null);
   const { ui } = useAnalysisMenuStyles();
   const localStyles = useMemo(() => createLocalStyles(colors, ui), [colors, ui]);
   const fallbackTimezone = useMemo(
@@ -291,7 +292,16 @@ export default function SettingsAppSettingsScreen({ navigation }) {
   ];
 
   useEffect(() => {
+    const controller = new AbortController();
+    ownerRequestRef.current = { expectedUserId: user?.id, signal: controller.signal };
+    setLocalProcessing(false);
+    setNotificationReadFailures({});
+    return () => controller.abort();
+  }, [user?.id, authOwnerGeneration]);
+
+  useEffect(() => {
     let cancelled = false;
+    const request = ownerRequestRef.current;
 
     const loadPushEnabled = async () => {
       setNotificationReadFailures(previous => ({ ...previous, push: null }));
@@ -305,7 +315,7 @@ export default function SettingsAppSettingsScreen({ navigation }) {
 
       setPushLoading(true);
       try {
-        const json = await apiGet("/account/profile/me");
+        const json = await apiGet("/account/profile/me", request);
         const enabled = json?.push_enabled;
         if (!cancelled) setPushEnabled(enabled !== false);
       } catch (error) {
@@ -321,10 +331,11 @@ export default function SettingsAppSettingsScreen({ navigation }) {
     return () => {
       cancelled = true;
     };
-  }, [user?.id]);
+  }, [user?.id, authOwnerGeneration]);
 
   useEffect(() => {
     let cancelled = false;
+    const request = ownerRequestRef.current;
 
     const loadTodayQuestion = async () => {
       setNotificationReadFailures(previous => ({ ...previous, question: null }));
@@ -342,7 +353,7 @@ export default function SettingsAppSettingsScreen({ navigation }) {
       try {
         const json = await getTodayQuestionSettings({
           timezone_name: fallbackTimezone,
-        });
+        }, request);
         const settings = json?.settings ?? json ?? {};
         if (!cancelled) {
           setTodayQuestionNotificationEnabled(settings?.notification_enabled !== false);
@@ -366,10 +377,11 @@ export default function SettingsAppSettingsScreen({ navigation }) {
     return () => {
       cancelled = true;
     };
-  }, [fallbackTimezone, user?.id]);
+  }, [fallbackTimezone, user?.id, authOwnerGeneration]);
 
   useEffect(() => {
     let cancelled = false;
+    const request = ownerRequestRef.current;
 
     const loadReportDistribution = async () => {
       setNotificationReadFailures(previous => ({ ...previous, report: null }));
@@ -387,7 +399,7 @@ export default function SettingsAppSettingsScreen({ navigation }) {
       try {
         const json = await getReportDistributionSettings({
           timezone_name: fallbackTimezone,
-        });
+        }, request);
         const settings = json?.settings ?? json ?? {};
         if (!cancelled) {
           setReportDistributionNotificationEnabled(settings?.notification_enabled !== false);
@@ -411,10 +423,11 @@ export default function SettingsAppSettingsScreen({ navigation }) {
     return () => {
       cancelled = true;
     };
-  }, [fallbackTimezone, user?.id]);
+  }, [fallbackTimezone, user?.id, authOwnerGeneration]);
 
   useEffect(() => {
     let cancelled = false;
+    const request = ownerRequestRef.current;
 
     const loadEmotionNotification = async () => {
       setNotificationReadFailures(previous => ({ ...previous, emotion: null }));
@@ -428,7 +441,7 @@ export default function SettingsAppSettingsScreen({ navigation }) {
 
       setEmotionNotificationLoading(true);
       try {
-        const json = await apiGet("/emotion-notifications/settings");
+        const json = await apiGet("/emotion-notifications/settings", request);
         if (!cancelled) {
           setEmotionNotificationEnabled(resolveEmotionNotificationEnabled(json));
         }
@@ -447,16 +460,16 @@ export default function SettingsAppSettingsScreen({ navigation }) {
     return () => {
       cancelled = true;
     };
-  }, [user?.id]);
+  }, [user?.id, authOwnerGeneration]);
 
   const toggleSection = (nextKey) => {
     setExpandedSection((current) => (current === nextKey ? null : nextKey));
   };
 
-  const persistEmotionNotificationEnabled = async (next) => {
+  const persistEmotionNotificationEnabled = async (next, request) => {
     await apiPost(
       `/emotion-notifications/settings/${encodeURIComponent(EMOTION_NOTIFICATION_GLOBAL_OWNER_ID)}`,
-      { is_enabled: !!next }
+      { is_enabled: !!next }, request
     );
   };
 
@@ -468,6 +481,8 @@ export default function SettingsAppSettingsScreen({ navigation }) {
       return;
     }
 
+    const request = ownerRequestRef.current;
+    if (request?.expectedUserId !== user.id || request.signal.aborted) return;
     const nextEnabled = !!next;
     const previous = {
       pushEnabled,
@@ -485,7 +500,8 @@ export default function SettingsAppSettingsScreen({ navigation }) {
 
     setLocalProcessing(true);
     try {
-      await apiPatch("/account/profile/me", { push_enabled: nextEnabled });
+      await apiPatch("/account/profile/me", { push_enabled: nextEnabled }, request);
+      if (request.signal.aborted) return;
 
       if (!nextEnabled) {
         const results = await Promise.allSettled([
@@ -493,15 +509,16 @@ export default function SettingsAppSettingsScreen({ navigation }) {
             notification_enabled: false,
             delivery_time_local: String(todayQuestionDeliveryTime || "18:00"),
             timezone_name: String(todayQuestionTimezone || fallbackTimezone),
-          }),
+          }, request),
           patchReportDistributionSettings({
             notification_enabled: false,
             delivery_time_local: String(reportDistributionDeliveryTime || "00:00"),
             timezone_name: String(reportDistributionTimezone || fallbackTimezone),
-          }),
-          persistEmotionNotificationEnabled(false),
+          }, request),
+          persistEmotionNotificationEnabled(false, request),
         ]);
 
+        if (request.signal.aborted) return;
         const failed = results.find((result) => result.status === "rejected");
         if (failed) {
           console.warn(
@@ -515,6 +532,7 @@ export default function SettingsAppSettingsScreen({ navigation }) {
         }
       }
     } catch (error) {
+      if (request.signal.aborted || error?.name === "AccountChangedError") return;
       console.warn("SettingsAppSettingsScreen: update push_enabled failed", error);
       setPushEnabled(previous.pushEnabled);
       setTodayQuestionNotificationEnabled(previous.todayQuestionNotificationEnabled);
@@ -522,7 +540,7 @@ export default function SettingsAppSettingsScreen({ navigation }) {
       setEmotionNotificationEnabled(previous.emotionNotificationEnabled);
       Alert.alert("通知設定の更新に失敗しました", String(error?.message || error));
     } finally {
-      setLocalProcessing(false);
+      if (!request.signal.aborted) setLocalProcessing(false);
     }
   };
 
@@ -534,6 +552,8 @@ export default function SettingsAppSettingsScreen({ navigation }) {
       return;
     }
 
+    const request = ownerRequestRef.current;
+    if (request?.expectedUserId !== user.id || request.signal.aborted) return;
     const previous = todayQuestionNotificationEnabled;
     setTodayQuestionNotificationEnabled(next);
 
@@ -543,13 +563,14 @@ export default function SettingsAppSettingsScreen({ navigation }) {
         notification_enabled: !!next,
         delivery_time_local: String(todayQuestionDeliveryTime || "18:00"),
         timezone_name: String(todayQuestionTimezone || fallbackTimezone),
-      });
+      }, request);
     } catch (error) {
+      if (request.signal.aborted || error?.name === "AccountChangedError") return;
       console.warn("SettingsAppSettingsScreen: update today question failed", error);
       setTodayQuestionNotificationEnabled(previous);
       Alert.alert("今日の問い通知", String(error?.message || "通知設定の更新に失敗しました。"));
     } finally {
-      setLocalProcessing(false);
+      if (!request.signal.aborted) setLocalProcessing(false);
     }
   };
 
@@ -561,6 +582,8 @@ export default function SettingsAppSettingsScreen({ navigation }) {
       return;
     }
 
+    const request = ownerRequestRef.current;
+    if (request?.expectedUserId !== user.id || request.signal.aborted) return;
     const previous = reportDistributionNotificationEnabled;
     setReportDistributionNotificationEnabled(next);
 
@@ -570,13 +593,14 @@ export default function SettingsAppSettingsScreen({ navigation }) {
         notification_enabled: !!next,
         delivery_time_local: String(reportDistributionDeliveryTime || "00:00"),
         timezone_name: String(reportDistributionTimezone || fallbackTimezone),
-      });
+      }, request);
     } catch (error) {
+      if (request.signal.aborted || error?.name === "AccountChangedError") return;
       console.warn("SettingsAppSettingsScreen: update report distribution failed", error);
       setReportDistributionNotificationEnabled(previous);
       Alert.alert("レポート配布通知", String(error?.message || "通知設定の更新に失敗しました。"));
     } finally {
-      setLocalProcessing(false);
+      if (!request.signal.aborted) setLocalProcessing(false);
     }
   };
 
@@ -588,18 +612,21 @@ export default function SettingsAppSettingsScreen({ navigation }) {
       return;
     }
 
+    const request = ownerRequestRef.current;
+    if (request?.expectedUserId !== user.id || request.signal.aborted) return;
     const previous = emotionNotificationEnabled;
     setEmotionNotificationEnabled(next);
 
     setLocalProcessing(true);
     try {
-      await persistEmotionNotificationEnabled(next);
+      await persistEmotionNotificationEnabled(next, request);
     } catch (error) {
+      if (request.signal.aborted || error?.name === "AccountChangedError") return;
       console.warn("SettingsAppSettingsScreen: update emotion notification failed", error);
       setEmotionNotificationEnabled(previous);
       Alert.alert("感情通知", String(error?.message || "通知設定の更新に失敗しました。"));
     } finally {
-      setLocalProcessing(false);
+      if (!request.signal.aborted) setLocalProcessing(false);
     }
   };
 

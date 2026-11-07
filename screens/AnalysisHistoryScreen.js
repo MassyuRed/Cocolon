@@ -277,7 +277,7 @@ export default function AnalysisHistoryScreen({ onBack, navigation }) {
     // Always show secret mode in the condition bar (structural)
     parts.push(
       secretFilter === "public"
-        ? "公開のみ"
+        ? "通常のみ"
         : secretFilter === "secret"
         ? "Secretのみ"
         : "すべて"
@@ -704,7 +704,7 @@ export default function AnalysisHistoryScreen({ onBack, navigation }) {
                 },
               ]}
             >
-              公開のみ
+              通常のみ
             </Text>
           </TouchableOpacity>
 

@@ -1,4 +1,4 @@
-> **11/7・分析の最新（第9回§243）：原入力の唯一memoにある単一の過去拒否を既存行動／非行動へ接続。断った／断らなかった、明記対象のは／を、主体UNSPECIFIED・過去・元カテゴリを保持し、対象名詞の日付を拒否日へ変換しない。保存済み19応答のJupyter同raw旧新比較で1件だけ未対応→1nodeへ回復、他18のgraph・件数・文章図と全19の入力／raw／候補保存内容は同一。前後各19の非生成候補再読、関連630 PASS＋133subtests、最終CI全工程success。モデル生成／load／学習／実DB0。通常未採用・本番未配置、一般の役割／判断基準／記録間読解と対象子5減少は残件。** [全結果](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-original-refusal-20261107)／[本文なし集計](refusal_results.json)。
+> **11/7・分析の最新（第9回§243）：原入力の唯一memoにある単一の過去拒否を既存行動／非行動へ接続。断った／断らなかった、明記対象のは／を、主体UNSPECIFIED・過去・元カテゴリを保持し、対象名詞の日付を拒否日へ変換しない。保存済み19応答のJupyter同raw旧新比較で1件だけ未対応→1nodeへ回復、他18のgraph・件数・文章図と全19の入力／raw／候補保存内容は同一。前後各19の非生成候補再読、関連630 PASS＋133subtests、最終CI全工程success。モデル生成／load／学習／実DB0。研究4Bは通常未採用。後続11/7のAPI5065730e配置で有限compilerの限定修正は反映済みだが、current再利用・実効生成mode・本人実機の条件は[第10回§13](../../../weekly_reviews/Cocolon_Weekly_Review_20261107.md#piece-ui-live-and-ios-build-20261107)を参照。一般の役割／判断基準／記録間読解と対象子5減少は残件。** [全結果](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-original-refusal-20261107)／[本文なし集計](refusal_results.json)。
 
 > **11/6・最新§238：既存23／v10の一回試行は23更新・NLL20・14stop・2load、747.8081569029018秒（外側750.5726890042424秒／exit0）で終了し、GPU cleanupを確認。HC01／02が退行しHC生成8→6、全14生成12→10・mapped16→12のため、新b8d096候補は不採用、元a2eを維持。4拒否は同objectの重複keyでありJSON文法自体はvalid。HC01は欠落・別欄混入・誤kindもあり、区切り修復では解決しない。HC04–09と既知control4は意味を保持。** [全結果・原本・次のCPU区切り](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-existing23-v10-bounded-20261106)／[本文なし集計](existing23_v10_trial_results.json)。NLL低下を品質改善へ換算せず、同23を反復しない。STRUCTURE_MAP_DELTA_NONE（研究比較のみ）。
 
@@ -2457,3 +2457,14 @@ HC10の原入力2欄＋補足1欄が2record／4nodeへ回復。旧13はraw末尾
 [omitted_wish_saved_trial.py](omitted_wish_saved_trial.py)は§241の19応答を旧新APIでCPU再消費する。0load／0新生成／0学習／0DB、旧19全結果一致、新版はWC02だけUNSPECIFIED／past wish1nodeへ回復。他18のtyped graph/count/text/図、19raw/request/source/candidate保存stateを保持。前後各19候補の非生成再読、171根拠照合。Jupyter関連515 PASS＋26subtests／最終CI全工程success。初回5fixture失敗も保全した。
 
 適用範囲は原入力memo唯一・単一完全plain希望・を格対象・既存9動詞4形。補足SELF限定、他者／複文／埋込等は維持。別recordを同じ主体の反復にせず、文章図に主体未確定・過去の当時を表示する。前回の対象子5減少は今回も未修復、本番／実DB／端末・モデル採用未実施。[実結果・原本・次の作業](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-omitted-wish-20261107)／[本文なし集計](omitted_wish_results.json)。WC04は「断る」の語彙・対象句・対象主題はの3箇所が既存証明外とCPU確認済みで、未対応のまま。次はその一文の根拠を落とさず既存行動／非行動へ渡す最小の原入力専用範囲を固め、同rawで実装比較する。主体・理由・当日実行を補わない。暗黙役割・本人基準・判断／選択・記録間意味、全量処理・IF/Saved・実DB／端末、通常重み採用と前回の対象子5減少は残件。
+
+<a id="analysis-input-dimension-audit-scope-20261107"></a>
+## 11/7 — 入力次元の監査範囲と、既存研究の限定credit
+
+Mashの全残件再点検指示に伴い、observation_learning配下のJSON／JSONL 2268fileを一回の形式検索で確認した（parse失敗0、通常入力frameのliteralを含む301file）。これはJSON構造と入力項目の所在を探す確認で、2268fileの全本文意味読解、全教材の品質監査または全仕様理解の完了ではない。ネストしたmessages等で同じsourceが重複するため、出現数を独立した教材・生成・検証件数へ数えない。
+
+`semantic_units_unknown58_plan.json`、`semantic_units_other62_plan.json`、`semantic_units_parent56_plan.json`、`semantic_units_scope56_plan.json`等の既存研究には、category=仕事、emotions=平穏、emotion_details空を共通にした入力frameが多い。memo_actionが空のframeも多いが、一部には二欄や欄交換を使った限定試験がある。`test_analysis_cumulative.source_snapshot`の201記録も、件数・全期間・保存／プラン等を調べる既知文の反復であり、201種類の自然入力や全入力次元を確かめた証拠ではない。元教師・raw・plan・受領bytes／hashは保持し、既定値の後付けで過去の検証条件を変更しない。
+
+これらの限定的な意味境界・保持・保存・予算計画の実結果は継承する。一方、9カテゴリ全体、通常5感情の各強度（平穏を含む）、複数感情／カテゴリ、自己理解単独、思考／行動二欄、通知／secretの通常入力契約まで網羅したとはいえない。本READMEと各weeklyに既にある一般品質未達・通常未採用の記録を維持し、研究subsetの成功を全カテゴリ対応、一般分析品質、実機成功、研究4B通常採用へ広げない。実機用の当初5サンプルの失効と具体対策は[第10回§14](../../../weekly_reviews/Cocolon_Weekly_Review_20261107.md#device-confirmation-and-analysis-samples-20261107)、修復結果は後続節を参照する。
+
+形式検索の誤検出も区別した。例えば`astor_material_snapshots._emotion_row_to_self_structure_item`のcategory先頭値だけを見て、複数カテゴリや行動欄の消失と断定しない。同じviewはcategories全体とtext_primary／text_secondaryを持ち、現observed有効時のworkerは累積経路へ分岐する。単語・field名の一致を実害や通常経路の不具合へ直結させず、実際のcallerと保存／表示の責務を照合する。

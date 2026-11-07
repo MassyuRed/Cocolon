@@ -13,6 +13,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import { useTheme } from "../theme/ThemeContext";
+import { useAuth } from "../AuthContext";
+import { useOwnerRequestScope } from "../hooks/useOwnerRequestScope";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import CocolonBackButton from "../components/CocolonBackButton";
@@ -64,6 +66,8 @@ function formatNoticeDateTimeLabel(value) {
 }
 
 export default function NoticeHistoryScreen({ navigation, route }) {
+  const { user, authOwnerGeneration } = useAuth();
+  const { scope: ownerRequest, isCurrent: isOwnerCurrent } = useOwnerRequestScope(user?.id, authOwnerGeneration);
   const { colors, themeName } = useTheme();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
@@ -79,6 +83,8 @@ export default function NoticeHistoryScreen({ navigation, route }) {
   const [expandedId, setExpandedId] = useState(null);
   const [unreadCount, setUnreadCount] = useState(0);
   const handledOpenKeyRef = useRef("");
+  const loadSequenceRef = useRef(0);
+  useEffect(() => { setLoadingMore(false); }, [ownerRequest]);
 
   const requestedOpenId = String(route?.params?.open_notice_id || "").trim();
   const requestedOpenAt = String(route?.params?.open_notice_at || "").trim();
@@ -98,6 +104,9 @@ export default function NoticeHistoryScreen({ navigation, route }) {
   }, []);
 
   const load = useCallback(async ({ append = false, offset = 0 } = {}) => {
+    if (!isOwnerCurrent(ownerRequest)) return;
+    const sequence = ++loadSequenceRef.current;
+    const isFresh = () => isOwnerCurrent(ownerRequest) && sequence === loadSequenceRef.current;
     setLoadError(null);
     if (append) setLoadingMore(true);
     else setLoading(true);
@@ -105,7 +114,8 @@ export default function NoticeHistoryScreen({ navigation, route }) {
       const json = await getNoticesHistory({
         limit: HISTORY_PAGE_LIMIT,
         offset,
-      });
+      }, ownerRequest.options);
+      if (!isFresh()) return;
       const rows = Array.isArray(json?.items) ? json.items : [];
       setItems((prev) => mergeRows(prev, rows, append));
       setHasMore(Boolean(json?.has_more));
@@ -118,13 +128,15 @@ export default function NoticeHistoryScreen({ navigation, route }) {
       );
       setUnreadCount(Math.max(0, Number(json?.unread_count) || 0));
     } catch (e) {
+      if (!isFresh()) return;
       console.warn("NoticeHistoryScreen: load failed", e);
       setLoadError(append ? "more" : "initial");
     } finally {
+      if (!isFresh()) return;
       if (append) setLoadingMore(false);
       else setLoading(false);
     }
-  }, [mergeRows]);
+  }, [mergeRows, ownerRequest, isOwnerCurrent]);
 
   useEffect(() => {
     load({ append: false, offset: 0 });
@@ -164,6 +176,7 @@ export default function NoticeHistoryScreen({ navigation, route }) {
   }, []);
 
   const markReadForIds = useCallback(async (noticeIds) => {
+    if (!isOwnerCurrent(ownerRequest)) return;
     const ids = (noticeIds || []).map((value) => String(value || "").trim()).filter(Boolean);
     if (!ids.length) return;
 
@@ -177,18 +190,19 @@ export default function NoticeHistoryScreen({ navigation, route }) {
 
     const fallbackUnreadCount = Math.max(0, unreadCount - targetUnreadIds.length);
     const readAt = new Date().toISOString();
-    markReadLocally(targetUnreadIds, readAt);
-    setUnreadCount(fallbackUnreadCount);
-
     try {
-      const res = await markNoticesRead({ notice_ids: targetUnreadIds });
+      const res = await markNoticesRead({ notice_ids: targetUnreadIds }, ownerRequest.options);
+      if (!isOwnerCurrent(ownerRequest)) return;
+      markReadLocally(targetUnreadIds, readAt);
+      setUnreadCount(fallbackUnreadCount);
       if (typeof res?.unread_count === "number") {
         setUnreadCount(Math.max(0, Number(res.unread_count) || 0));
       }
     } catch (e) {
+      if (!isOwnerCurrent(ownerRequest)) return;
       console.warn("NoticeHistoryScreen: mark read failed", e);
     }
-  }, [items, markReadLocally, unreadCount]);
+  }, [items, markReadLocally, unreadCount, ownerRequest, isOwnerCurrent]);
 
   useEffect(() => {
     if (!requestedOpenId || !requestedOpenKey) return;
@@ -204,6 +218,7 @@ export default function NoticeHistoryScreen({ navigation, route }) {
   }, [items, markReadForIds, requestedOpenId, requestedOpenKey]);
 
   const handleToggleItem = useCallback((item) => {
+    if (!isOwnerCurrent(ownerRequest)) return;
     const noticeId = String(item?.notice_id || "").trim();
     if (!noticeId) return;
     setExpandedId((prev) => {
@@ -213,9 +228,10 @@ export default function NoticeHistoryScreen({ navigation, route }) {
       }
       return next;
     });
-  }, [markReadForIds]);
+  }, [markReadForIds, ownerRequest, isOwnerCurrent]);
 
   const openInternalRoute = useCallback((routeName, params = {}) => {
+    if (!isOwnerCurrent(ownerRequest)) return false;
     const safeRouteName = String(routeName || "").trim();
     if (!safeRouteName) return false;
     try {
@@ -232,21 +248,23 @@ export default function NoticeHistoryScreen({ navigation, route }) {
       // noop
     }
     return false;
-  }, [navigation]);
+  }, [navigation, ownerRequest, isOwnerCurrent]);
 
   const handlePressAction = useCallback(async (item, action) => {
-    if (!action) return;
+    if (!action || !isOwnerCurrent(ownerRequest)) return;
 
     if (!item?.is_read && item?.notice_id) {
       await markReadForIds([String(item.notice_id)]);
     }
 
+    if (!isOwnerCurrent(ownerRequest)) return;
     try {
       await openNoticeAction(action, { openInternalRoute });
     } catch (e) {
+      if (!isOwnerCurrent(ownerRequest)) return;
       Alert.alert("お知らせ", String(e?.message || "リンクを開けませんでした。"));
     }
-  }, [markReadForIds, openInternalRoute]);
+  }, [markReadForIds, openInternalRoute, ownerRequest, isOwnerCurrent]);
 
   const loadMore = useCallback(async () => {
     if (loading || loadingMore || !hasMore || nextOffset == null) return;

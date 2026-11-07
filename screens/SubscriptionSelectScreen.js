@@ -566,7 +566,7 @@ export default function SubscriptionSelectScreen({ navigation }) {
         return;
       }
 
-      await syncPurchaseToSubscriptionTier(targetPurchase);
+      await syncPurchaseToSubscriptionTier(targetPurchase, { expectedUserId: sessionData?.session?.user?.id });
       await refreshScreenState({ force: true });
 
       Alert.alert("復元が完了しました", "ご購入内容を復元しました。");
@@ -649,7 +649,7 @@ export default function SubscriptionSelectScreen({ navigation }) {
         updateRes,
         purchaseInitiated,
         listenerCompletionPending,
-      } = await requestSubscriptionForPlan("plus");
+      } = await requestSubscriptionForPlan("plus", { expectedUserId: sessionData?.session?.user?.id });
 
       if (!p && purchaseInitiated) {
         Alert.alert(
@@ -769,7 +769,7 @@ export default function SubscriptionSelectScreen({ navigation }) {
         listenerCompletionPending,
       } = await requestSubscriptionForPlan(
         "premium",
-        Platform.OS === "android" && tier === "plus" ? { fromPlan: "plus" } : {}
+        { expectedUserId: sessionData?.session?.user?.id, ...(Platform.OS === "android" && tier === "plus" ? { fromPlan: "plus" } : {}) }
       );
 
       const actionLabel = tier === "plus" ? "プラン変更" : "お申し込み";

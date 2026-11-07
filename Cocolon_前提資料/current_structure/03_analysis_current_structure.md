@@ -1443,3 +1443,14 @@ API91f3e67の研究v13はv11＋独立肯定過去希望例1つ。失敗v12説明
 原入力ORIGINAL_INPUTの唯一非空memo・単一完全節、を格対象・既存9動詞plain4形だけをsource compilerとmodel証明が同じ境界で採る。supplement callerはallow_omitted既定FalseでSELF限定。別recordのUNSPECIFIEDはevidence occurrence単位を保ち、本人反復へまとめない。唯一realizerが文章・図へ未確定主体／当時を表示する。独立SELF回答との併存は同record/count1と別根拠を保持する。
 
 今回の新4B生成・学習は0、旧19のcandidate/rawを改変しない。新しい商品owner／型／作者／公開契約を作らず、詳細設計04の原入力専用§242と元補足§235を分離。通常重みは未採用、本番／実DB／端末確認は未実施。前回の対象子5減少・一般本人基準の読み取りを解決したとは扱わない。
+
+
+## 2026-11-07 — 全残件再点検：二欄の同等な意味読取と感情・素材identity
+
+通常finite `intent_compiler.py` はmemoで受理する既存表現をmemo_actionでは落としていた。元欄・原文・根拠座標を維持して既存有限構文を両欄へ適用し、後置された他者の報告話者を本人と誤読しない。shared helperはAnalysis明示opt-inで既定Emlis／旧private profileを拡張しない。1,495原文の限定対照はmemo受理675、両欄表示差50→0。これは限定corpusであり全日本語理解ではない。明示SELFの全拒否構文等の既存未対応は未対応のまま残す。
+
+旧期間／global素材hashをv2へ更新し、二欄・場面・感情・各強度等の内容変更も検知する。通常累積の元7field固定・owner／tier／source_guard契約は別途保持。details=[]の旧記録fallbackと、同時選択を時系列切替りへ誤変換する処理を修復。下限・上限filterの透過とsnapshot hash読取も修復する。旧report自己出力の循環検査は点検中で、この修復だけで旧本文全体が根拠付いたとは扱わない。
+
+通常Analysis関連7fileは750 PASS／1 SKIP、その同一SKIPの隔離SQLを別実行で成功（新10＋SQL1＝11 PASS／SKIP0）。有限compiler変更後も同source保存currentは再利用される。研究重みの通常採用、本人の強制再解析、月次当時版の上書き、実機内容確認は行っていない。正確な結果・既存失敗・候補反映は第10回§15へ。情報量を減らす仕様変更やUIの先行再設計はしない。
+
+二欄修復の最終4pathを独立担当がdiff・新10件実行で照合し、sharedの既定quote早期returnと入力object identityも維持。広域旧期待の残287件は変更前sharedでも同一集合で失敗（新規失敗nodeid0）、13SQL省略は別実行13成功、旧checkpoint SQL2とu355現行102も成功。全品質合格とはしない。

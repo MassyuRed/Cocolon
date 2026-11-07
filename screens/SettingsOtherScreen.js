@@ -177,9 +177,9 @@ export default function SettingsOtherScreen({ navigation }) {
 
     setLocalProcessing(true);
     try {
-      await apiPost("/account/delete", {});
+      await apiPost("/account/delete", {}, { expectedUserId: userId });
       await clearDeletedAccountLocalState(userId);
-      await signOut({ skipPushTokenClear: true, rethrow: true });
+      await signOut({ skipPushTokenClear: true, rethrow: true, expectedUserId: userId });
     } catch (error) {
       console.error("SettingsOtherScreen: delete account failed", error);
       Alert.alert(

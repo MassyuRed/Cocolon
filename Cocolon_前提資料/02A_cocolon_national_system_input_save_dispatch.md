@@ -2336,3 +2336,23 @@ Q3の全変更ownerと本文確認した影響先は[current structure / EmlisAI
 Q1・Q2・Q3のコード実装を完了として記録し、次はQ4の実装統合、対象集合の初回/質問/回答後本文の確認と修正、旧client/保存版互換、公開用mode・単一生成ownerの接続準備、保存済み訂正を消さない停止・復旧のコードと検証へ進む。古いcandidate91単独修正ループやProduct Read PASS待ちへ戻さない。
 
 実DB適用、端末・実課金の環境確認、Mashの正式商品判断、merge/deploy/公開切替は、API `ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md`へ分離した未実施作業。これらが未実施という理由だけでQ3/Q4のコード作業を停止しない。機械成功・華恋の本文確認・Mashの商品合格・公開を相互に代用しない。
+
+
+## 2026-11-07 — 入力契約の再照合と出力・検証への適用
+
+正本のUI選択値は `screens/input/inputOptions.js`、送信条件・二欄・draftは `screens/InputScreen.js` と `lib/inputDraftStorage.js`。APIの原保存・三coreへ渡る元7fieldと突き合わせる。入力票や試験stubで項目を省かない。
+
+| UI／保存 | 現行契約 |
+|---|---|
+| 場面 `category` | 生活・仕事・趣味・人間関係・恋愛・健康・学習・価値観・人生の9種。複数可、送信時1件以上。カテゴリは文脈であり、役割・原因・性格の証拠へ置換しない |
+| 感情 `emotions`／`emotion_details` | 喜び・悲しみ・怒り・不安・平穏の複数可。**各選択感情**にweak／medium／strong（弱／中／強）、初期medium。平穏にも強度あり |
+| 自己理解 | 通常5感情と排他の単独選択。強度UIなし。保存時mediumは互換値で、感情強度として解釈しない |
+| `memo` | 「考えたこと・感じたこと」の原文 |
+| `memo_action` | 「出来事・行動」の原文。欄名だけで実行済みと決めず本文の主体・否定・時点を読む |
+| 空欄と送信 | 二欄の一方は空でもよい。両方空では送信不可、場面も選べず両方を空にすると場面選択を解除する。本文＋感情／自己理解＋場面が必要 |
+| 通知／秘匿 | 「感情通知を送らない」は `send_emotion_notification` の反転。本文公開設定ではない。現新規入力の `is_secret=false` は固定、自己理解の通知はserverが抑止 |
+| draft／履歴 | 本人別48時間draftに二欄・各配列を保存。履歴に原文編集UIはなく、Emlis本人回答／訂正は別source |
+
+`EmlisThreadModal.js` の原記録fallbackは二欄名を付けて混同を修復。`tests/piece-v2-input-screen.test.js` は偽self_insight／value／数値強度stubをやめ、実選択モジュール・実screenのpayload、全9場面・全15強度組・複数／排他・両／片／空欄・本人別draftを検証。`tests/emlis-thread.test.js` は実React表示で二欄名と原文byte保持を検証する。ガイドも同じ実選択定数と照合。確認範囲・実行結果・未実機は第10回§15へ。
+
+修正版11件の実値は第10回§15.7と `tests/fixtures/cocolon-input-contract-samples-20261107.json`。実screen照合12追加で入力suite78成功、API側同一byte票と13検査で正規化・insert・元7field・累積compilerを確認。全件理解・実機成功とは区別する。

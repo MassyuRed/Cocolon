@@ -104,6 +104,8 @@ function load(relative, mocks = {}, dev = true) {
   const module = { exports: {} };
   Function('require', 'module', 'exports', '__DEV__', transformed)(name => {
     if (Object.hasOwn(mocks, name)) return mocks[name];
+    if (name === '../../ui/uiTokens') return load('ui/uiTokens.js');
+    if (name === 'react-native-safe-area-context') return { SafeAreaView: 'SafeAreaView', useSafeAreaInsets: () => ({ top: 0, bottom: 0, left: 0, right: 0 }) };
     return require(name);
   }, module, module.exports, dev);
   return module.exports;
@@ -290,6 +292,122 @@ test('refinement failure shows old observation as historical and retry only when
   await act(async () => root.update(React.createElement(Modal, { thread: { ...thread, dto: { ...failed, can_retry: false } }, colors: {} })));
   assert.equal(root.root.findAllByType('Button').filter(b => b.props.children === '本文を再試行する').length, 0);
   await act(async () => root.unmount());
+});
+
+test('original record fallback keeps thought and action labels paired with their exact source text', async () => {
+  const native = Object.fromEntries(['ActivityIndicator','KeyboardAvoidingView','Modal','ScrollView','Text','TextInput','View'].map(x => [x,x]));
+  Object.assign(native, { Platform: { OS: 'ios' }, StyleSheet: { create: x => x } });
+  const { default: Modal } = load('screens/input/EmlisThreadModal.js', {
+    'react-native': native,
+    'react-native-safe-area-context': { SafeAreaView: 'SafeAreaView' },
+    '../../components/CocolonButton': props => React.createElement('Button', props, props.children),
+  });
+  const thought = ' 迷いは残っています。\nまだ決めていません。 ';
+  const action = '昨日、相談しました。\n今日は返事を送りませんでした。';
+  const labels = ['考えたこと・感じたこと', '出来事・行動'];
+  for (const original of [
+    { memo: thought, memo_action: action },
+    { memo: thought, memo_action: '' },
+    { memo: '', memo_action: action },
+    { memo: '', memo_action: '' },
+  ]) {
+    const before = JSON.stringify(original);
+    const dto = { state: 'NOT_CREATED', original: { id: 'input', ...original }, timeline: [], can_write: false };
+    const originalBeforeRender = JSON.stringify(dto.original);
+    const thread = { visible: true, dto, draft: '', close() {} };
+    let root;
+    await act(async () => { root = Renderer.create(React.createElement(Modal, { thread, colors: {} })); });
+    const texts = root.root.findAllByType('Text');
+    for (const [field, label] of [['memo', labels[0]], ['memo_action', labels[1]]]) {
+      const matchingLabels = texts.filter(node => node.props.children === label);
+      assert.equal(matchingLabels.length, original[field] ? 1 : 0);
+      if (!original[field]) continue;
+      const body = texts.find(node => node.props.children === original[field]);
+      assert.ok(body, `${field} must keep its exact original value`);
+      assert.equal(body.props.selectable, true);
+      assert.equal(matchingLabels[0].parent, body.parent, `${field} must stay paired with its own label`);
+      assert.deepEqual(body.parent.findAllByType('Text').map(node => node.props.children), [label, original[field]]);
+    }
+    assert.equal(JSON.stringify(original), before);
+    assert.equal(JSON.stringify(dto.original), originalBeforeRender);
+    await act(async () => root.update(React.createElement(Modal, {
+      thread: { ...thread, dto: { ...dto, state: 'COMPLETED', current_observation: { text: '保存済みの応答' } } }, colors: {},
+    })));
+    assert.equal(root.root.findAllByType('Text').filter(node => labels.includes(node.props.children)).length, 0,
+      'normal response keeps the existing response-only display');
+    await act(async () => root.unmount());
+  }
+});
+
+test('real input sections expose all nine scenes, fifteen emotion strengths and distinct text controls', async t => {
+  const native = { Text: 'Text', TextInput: 'TextInput', View: 'View',
+    useWindowDimensions: () => ({ width: 390, fontScale: 1 }),
+    StyleSheet: { flatten: value => Object.assign({}, ...[value].flat().filter(Boolean)) } };
+  const options = load('screens/input/inputOptions.js');
+  const common = { 'react-native': native, 'react-native-vector-icons/Ionicons': 'Icon',
+    '../../components/CocolonPressable': 'Pressable', './inputOptions': options };
+  const Emotion = load('screens/input/InputEmotionSection.js', common).default;
+  const Category = load('screens/input/InputCategorySection.js', common).default;
+  const Memo = load('screens/input/InputMemoSection.js', {
+    ...common, './inputLayoutModel': load('screens/input/inputLayoutModel.js'),
+  }).default;
+  const emotions = ['喜び', '悲しみ', '怒り', '不安', '平穏'];
+  const categories = ['生活', '仕事', '趣味', '人間関係', '恋愛', '健康', '学習', '価値観', '人生'];
+  const changedStrengths = [], toggledCategories = [];
+  let root;
+  t.after(async () => { if (root) await act(async () => root.unmount()); });
+  const emotionProps = { selectedEmotions: emotions.map(type => ({ type, strength: 'medium' })),
+    isSelfInsightSelected: false, toggleEmotion() {}, changeStrength: (...args) => changedStrengths.push(args),
+    strengthRowRefs: { current: {} }, styles: {}, colors: {} };
+  await act(async () => { root = Renderer.create(React.createElement(Emotion, emotionProps)); });
+  for (const emotion of emotions) {
+    assert.equal(root.root.findByProps({ accessibilityLabel: emotion }).props.disabled, false);
+    for (const [strength, label] of [['weak', '弱'], ['medium', '中'], ['strong', '強']]) {
+      const button = root.root.findByProps({ accessibilityLabel: `${emotion}の強さ：${label}` });
+      assert.equal(button.props.accessibilityState.selected, strength === 'medium');
+      await act(async () => button.props.onPress());
+    }
+  }
+  assert.deepEqual(changedStrengths, emotions.flatMap(emotion =>
+    ['weak', 'medium', 'strong'].map(strength => [emotion, strength])));
+  await act(async () => root.update(React.createElement(Emotion, { ...emotionProps,
+    selectedEmotions: [{ type: '自己理解', strength: 'medium' }], isSelfInsightSelected: true })));
+  assert.equal(root.root.findAllByType('Pressable').filter(node => /の強さ：/.test(node.props.accessibilityLabel)).length, 0);
+  assert.equal(root.root.findByProps({ accessibilityLabel: '自己理解' }).props.accessibilityState.selected, true);
+  for (const emotion of emotions) assert.equal(root.root.findByProps({ accessibilityLabel: emotion }).props.disabled, true);
+
+  const categoryProps = { hasMemoInput: true, hasSelectedCategories: true, selectedCategories: categories,
+    toggleCategory: value => toggledCategories.push(value), styles: {} };
+  await act(async () => root.update(React.createElement(Category, categoryProps)));
+  assert.deepEqual(root.root.findAllByType('Pressable').map(node => node.props.accessibilityLabel),
+    categories.map(category => `${category}カテゴリを選択する`));
+  for (const category of categories) {
+    const button = root.root.findByProps({ accessibilityLabel: `${category}カテゴリを選択する` });
+    assert.equal(button.props.disabled, false);
+    assert.equal(button.props.accessibilityState.selected, true);
+    await act(async () => button.props.onPress());
+  }
+  assert.deepEqual(toggledCategories, categories);
+  await act(async () => root.update(React.createElement(Category, { ...categoryProps, hasMemoInput: false })));
+  assert.ok(root.root.findAllByType('Pressable').every(node => node.props.disabled));
+
+  const writes = [];
+  const thought = ' 考えました。\nまだ決めていません。 ', action = '声をかけました。\n返事は送りませんでした。';
+  const memoProps = { memo: thought, memoAction: action, setMemo: value => writes.push(['memo', value]),
+    setMemoAction: value => writes.push(['memo_action', value]), inputMaxHeight: 520,
+    memoInputRef: { current: null }, memoActionInputRef: { current: null },
+    lastFocusTargetRef: { current: null }, memoFocusedRef: { current: false }, focusedFieldRef: { current: null },
+    setActiveField() {}, scheduleScrollToFocusedInput() {}, updateMemoInputVisibleHeight() {}, styles: {}, colors: {} };
+  await act(async () => root.update(React.createElement(Memo, { ...memoProps, activeField: 'memo' })));
+  const thoughtInput = root.root.findByProps({ accessibilityLabel: '考えたこと・感じたこと' });
+  assert.equal(thoughtInput.type, 'TextInput'); assert.equal(thoughtInput.props.defaultValue, thought);
+  await act(async () => thoughtInput.props.onChangeText(thought));
+  assert.equal(root.root.findByProps({ accessibilityLabel: '出来事・行動を入力する' }).type, 'Pressable');
+  await act(async () => root.update(React.createElement(Memo, { ...memoProps, activeField: 'memoAction' })));
+  const actionInput = root.root.findByProps({ accessibilityLabel: '出来事・行動' });
+  assert.equal(actionInput.type, 'TextInput'); assert.equal(actionInput.props.defaultValue, action);
+  await act(async () => actionInput.props.onChangeText(action));
+  assert.deepEqual(writes, [['memo', thought], ['memo_action', action]]);
 });
 
 test('dedicated API drops source-bearing error bodies and keeps auth on', async () => {
@@ -479,7 +597,7 @@ for (const configuredBase of [null, 'https://emlis-development.invalid///']) {
       'react-native': native, 'react-native-vector-icons/Ionicons': 'Icon',
       '../components/CocolonBackButton': () => null, '../lib/supabase': auth,
       '../theme/ThemeContext': { useTheme: () => ({ themeName: 'light', colors: {} }) },
-      '../ui/uiTokens': { makeUiTokens: () => ({}) }, '../ui/applyTypographyTokens': { applyTypographyTokens: x => x },
+      '../ui/uiTokens': load('ui/uiTokens.js'), '../ui/applyTypographyTokens': { applyTypographyTokens: x => x },
       '../SubscriptionContext': { useSubscription: () => ({ tier: 'premium', loading: false }) },
       '../lib/apiClient': client, '../lib/historyRetentionLabel': { getHistoryRetentionLabel: () => '' },
       '../AuthContext': { useAuth: () => ({ session }) }, './input/useEmlisThread': threadHook,

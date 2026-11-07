@@ -1,5 +1,5 @@
 import { SafeAreaView } from "react-native-safe-area-context";
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
@@ -15,7 +15,7 @@ import { useTheme } from "../theme/ThemeContext";
 import { useSubscription } from "../SubscriptionContext";
 import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
-import { supabase } from "../lib/supabase";
+import { useAuth } from "../AuthContext";
 import { getHistoryRetentionLabel } from "../lib/historyRetentionLabel";
 import CocolonBackButton from "../components/CocolonBackButton";
 import CocolonPressable from "../components/CocolonPressable";
@@ -71,6 +71,10 @@ function resolvePieceLibraryRouteName(navigation) {
 }
 
 export default function ResonanceHistoryListScreen({ navigation }) {
+  const { user, authOwnerGeneration } = useAuth();
+  const ownerKey = `${user?.id || ""}:${authOwnerGeneration}`;
+  const latestOwnerKeyRef = useRef(ownerKey);
+  latestOwnerKeyRef.current = ownerKey;
   const { colors, themeName } = useTheme();
   const { tier: subscriptionTier, loading: subscriptionLoading } = useSubscription();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
@@ -93,7 +97,18 @@ export default function ResonanceHistoryListScreen({ navigation }) {
 
   const abortRef = useRef(null);
 
+  useEffect(() => {
+    setItems([]);
+    setHasMore(true);
+    setErrorText("");
+    setLoading(true);
+    setRefreshing(false);
+    setLoadingMore(false);
+    return () => abortRef.current?.abort?.();
+  }, [ownerKey]);
+
   const fetchPage = useCallback(async ({ nextOrder, nextOffset, append }) => {
+    if (!user?.id || latestOwnerKeyRef.current !== ownerKey) return;
     const resolvedOrder = String(nextOrder || "newest").toLowerCase();
     const resolvedOffset = Math.max(0, Number(nextOffset || 0) || 0);
 
@@ -105,26 +120,18 @@ export default function ResonanceHistoryListScreen({ navigation }) {
     const controller = new AbortController();
     abortRef.current = controller;
 
-    const { data: sessionData } = await supabase.auth.getSession();
-    const accessToken = sessionData?.session?.access_token ?? null;
-    if (!accessToken) {
-      throw new Error("ログイン情報が取得できませんでした。");
-    }
-
     const url = `${RESONANCE_PIECES_ENDPOINT}?order=${encodeURIComponent(
       resolvedOrder
     )}&limit=${PAGE_LIMIT}&offset=${resolvedOffset}`;
 
     const res = await apiFetch(url, {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
-      },
+      expectedUserId: user.id,
       signal: controller.signal,
     });
 
     const json = await res.json().catch(() => null);
+    if (controller.signal.aborted || abortRef.current !== controller || latestOwnerKeyRef.current !== ownerKey) return;
     if (!res.ok) {
       const detail = json?.detail ? String(json.detail) : null;
       throw new Error(detail || "履歴の取得に失敗しました。");
@@ -146,7 +153,7 @@ export default function ResonanceHistoryListScreen({ navigation }) {
 
     setHasMore(nextItems.length >= PAGE_LIMIT);
     setErrorText("");
-  }, []);
+  }, [user?.id, ownerKey]);
 
   const fetchInitial = useCallback(async (nextOrder = order) => {
     setLoading(true);
@@ -155,18 +162,18 @@ export default function ResonanceHistoryListScreen({ navigation }) {
     try {
       await fetchPage({ nextOrder, nextOffset: 0, append: false });
     } finally {
-      setLoading(false);
+      if (latestOwnerKeyRef.current === ownerKey) setLoading(false);
     }
-  }, [fetchPage, order]);
+  }, [fetchPage, order, ownerKey]);
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
     try {
       await fetchInitial(order);
     } finally {
-      setRefreshing(false);
+      if (latestOwnerKeyRef.current === ownerKey) setRefreshing(false);
     }
-  }, [fetchInitial, order]);
+  }, [fetchInitial, order, ownerKey]);
 
   const loadMore = useCallback(async () => {
     if (loading || refreshing || loadingMore || !hasMore) return;
@@ -175,16 +182,18 @@ export default function ResonanceHistoryListScreen({ navigation }) {
       const nextOffset = (items?.length || 0) || 0;
       await fetchPage({ nextOrder: order, nextOffset, append: true });
     } catch (e) {
+      if (latestOwnerKeyRef.current !== ownerKey || e?.name === "AbortError" || e?.name === "AccountChangedError") return;
       setErrorText(String(e?.message || e || "読み込みに失敗しました。"));
       setHasMore(false);
     } finally {
-      setLoadingMore(false);
+      if (latestOwnerKeyRef.current === ownerKey) setLoadingMore(false);
     }
-  }, [fetchPage, hasMore, items?.length, loading, loadingMore, order, refreshing]);
+  }, [fetchPage, hasMore, items?.length, loading, loadingMore, order, refreshing, ownerKey]);
 
   useFocusEffect(
     useCallback(() => {
       fetchInitial(order).catch((e) => {
+        if (latestOwnerKeyRef.current !== ownerKey || e?.name === "AbortError" || e?.name === "AccountChangedError") return;
         setErrorText(String(e?.message || e || "読み込みに失敗しました。"));
         setLoading(false);
       });
@@ -196,7 +205,7 @@ export default function ResonanceHistoryListScreen({ navigation }) {
           // noop
         }
       };
-    }, [fetchInitial, order])
+    }, [fetchInitial, order, ownerKey])
   );
 
   const setOrderAndReload = useCallback(async (next) => {
@@ -206,9 +215,10 @@ export default function ResonanceHistoryListScreen({ navigation }) {
     try {
       await fetchInitial(value);
     } catch (e) {
+      if (latestOwnerKeyRef.current !== ownerKey || e?.name === "AbortError" || e?.name === "AccountChangedError") return;
       setErrorText(String(e?.message || e || "読み込みに失敗しました。"));
     }
-  }, [fetchInitial, order]);
+  }, [fetchInitial, order, ownerKey]);
 
   const openPieceDetail = useCallback((item) => {
     const routeName = resolvePieceLibraryRouteName(navigation);

@@ -3699,3 +3699,12 @@ OSへ渡す前に確認が途切れた操作と、OSへ渡した後の結果不�
 API候補は5065730ead6fc97a47a03858d0707bbf3e1c568c、本番liveは2c259f0e。配色SQLと新receipt SQLは本番未適用、receipt readinessは無効のまま。次はSQL→API指定配置→必要確認→一回のまとめbuild・実機。分析は通常finiteの限定改善をAPI配置で反映し、研究4Bを自動採用しない。保存済みcurrentの再利用と月次当時版を区別する。
 
 詳細な新プラン正本は [visual recipe §6](../../Cocolon_Piece/pce5_visual_recipe_export/Piece_Visual_Recipe_Contract_20260808.md#6-plan-matrix)、全結果・未確認・次操作は [第10回§12](../weekly_reviews/Cocolon_Weekly_Review_20261107.md#piece-ui-prebuild-preparation-20261107)。STRUCTURE_MAP_DELTA_PRESENT（既存画像設定権利・対応交渉・owner互換の限定拡張）。今回のcode候補を本番・build・実機受入れへ換算しない。
+
+
+## 2026-11-07 — 全残件再点検：原入力全次元と本人操作・旧公開互換
+
+現Piece関連96file（RN41／API46／SQL9、計42,010行）を全文照合。9場面の単独／全複数、通常5感情各3強度／自己理解、二欄の配置を組み合わせた320合成入力で、元7field・座標・選択／強度の保持と、本文へのmetadata自動追記0を確認。本文は二欄原文だけという11/1決定を維持し、一般日本語理解の合格にはしない。
+
+`PieceLibraryScreen.js` は共鳴POSTだけでなく既読副作用のあるdetail GET／一覧・未読等も開始owner・auth世代・signalへ束縛し、古い選択・応答の混入を防ぐ。旧recommendのprofile照合が失敗／不正の場合を公開許可へ変換しない。旧公開metricのread-modify-write競合と公開ID別名を、既存table／本人照合・旧alias互換を保って修復中。新table・公開機能の有効化・既存反応の一括移行はしない。
+
+全API Piece試験のCPU再検査は11,516 PASS／161 FAIL／ERROR・SKIP0、native17 deselected。161は後続の本文仕様（反復一人称の省略、短い完成文の非padding、後続文法、過去形保持）と旧期待の不一致として個別分離。期待改変・skip／xfailは0で、全成功とは報告しない。native・実DB・実機の成功へ換算しない。追加修復の検証・反映、既存失敗の詳細は第10回§15へ。iOS7501とMashの大ボタン／Piece今回確認は保持し、この後の修復全体を実機確認済みとはしない。

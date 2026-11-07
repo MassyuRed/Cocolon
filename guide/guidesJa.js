@@ -1,4 +1,5 @@
 import { guideTermsJa } from "./termsJa";
+import { CATEGORY_OPTIONS } from "../screens/input/inputOptions";
 
 export function normalizeGuideScreenId(raw) {
   const source = String(raw || "").trim();
@@ -64,8 +65,9 @@ export const guidesJa = Object.freeze({
     "items": [
       "「考えたこと・感じたこと」（思考内容）には、考えていること・感じたこと・出来事への解釈を書きます。",
       "「出来事・行動」（行動内容）には、実際に起きた出来事・自分がしたこと・その結果を書きます。",
-      "感情は複数選択できます。[[term:self_insight_mode|自己理解]] は他の感情と同時に選ばず、単体で使います。",
-      "入力内容に近い [[term:content_category|内容カテゴリ]] を1つ以上選びます。"
+      "感情は、喜び・悲しみ・怒り・不安・平穏から複数選択できます。選んだ感情ごとに、強さを弱・中・強から選びます。",
+      "[[term:self_insight_mode|自己理解]] は他の感情と同時に選ばず、単体で使います。自己理解には強さを選ぶ操作はありません。",
+      `[[term:content_category|内容カテゴリ]] は${CATEGORY_OPTIONS.join("・")}の${CATEGORY_OPTIONS.length}種類です。入力内容に近いものを1つ以上選び、複数選択もできます。`
     ]
   },
   {
@@ -77,6 +79,7 @@ export const guidesJa = Object.freeze({
     "items": [
       "「この内容でOK」で入力を保存します。応答が用意されると「Emlisからの応答」が開きます。",
       "入力履歴から過去の記録を開き、保存済みの [[term:emlis_reply|Emlisの応答]] を読み返せます。応答が用意できない場合も、保存された入力は残ります。",
+      "入力履歴の「通常のみ」「Secretのみ」は自分が保存した記録の絞り込みです。本文を他のユーザーへ公開する設定や、感情通知の送信設定とは別です。",
       "「[[term:emotion_notifications|感情通知を送らない]]」をオンにすると、その入力はフォロー中ユーザーへ通知されません。"
     ]
   },
@@ -257,7 +260,7 @@ export const guidesJa = Object.freeze({
       {
         type: "note",
         text:
-          "自分の入力を共有したくないときは、Home 側の [[term:emotion_notifications|感情通知を送らない]] を使って調整できます。",
+          "その入力の感情通知を送りたくないときは、Home 側の [[term:emotion_notifications|感情通知を送らない]] を使って調整できます。",
       },
     ],
   },

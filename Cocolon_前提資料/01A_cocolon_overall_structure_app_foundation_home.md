@@ -6110,3 +6110,20 @@ API overlay2source＋新testは保存原本へ同梱し、通常repoへ採用し
 STRUCTURE_MAP_DELTA_NONE。新しいowner・route・API・DB・描画版はなく、既存scopeの本人照合と疑問判定の共用、保存入力GET後の明示作成の束縛を修復した。実結果と検証範囲は[週次レビュー§167](weekly_reviews/Cocolon_Weekly_Review_20261031.md#piece-object-particle-pause-20261104)へ。
 
 作成モーダル・本人履歴・CMEE本文判定の既存ファイルと新経路の接続は[Piece現行構造](current_structure/02_piece_current_structure.md#piece-format-language-export-20261104)を参照。本番配置・DB移行前の候補。
+
+
+## 2026-11-07 — 全残件再点検：入力・Emlis材料と本人の操作寿命
+
+入力の全9場面／5感情各3強度／自己理解排他／二欄／空欄・通知・draft契約は02A末尾に記載。原recordを固定した後も、入力票・自然応答材料・分析・表示・試験へ適用する。
+
+- `screens/input/EmlisThreadModal.js`：fallback原記録を「考えたこと・感じたこと」「出来事・行動」と区別。原文は変更しない。
+- `natural_reply.py`：元材料と有料履歴から落ちていた `category` 配列を保持。既存promptへ二欄／9場面／各強度／自己理解／記録日時の意味を明記。モデル品質合格・新任意問い接続ではない。
+- `emlis_ai_context_service.py`／`emlis_ai_world_model_service.py`：旧details空配列の通常感情fallback。最強感情が同率なら代表と変化を確定しない。現在naturalの通常callerではなく、これだけで通常返答改善とは説明しない。
+- `lib/apiClient.js`：認証待機中に中止されたrequestをfetch直前でも拒否。同じownerが戻る場合とAbortControllerなしも対象。
+- `AuthContext.js`／`lib/api/account/profileApi.js`／`lib/pushToken.js`／`TutorialContext.js`：開始owner・auth世代・Abortにより古いprofile／push／tutorial操作を別本人へ送らず、遅い初期sessionとlogoutで新sessionを壊さない。
+- `hooks/useOwnerRequestScope.js`：画面の開始owner・auth世代・foreground寿命を既存 `expectedUserId`／`signal` へ結ぶ小さい共通hook。新たな認証手段ではない。MainTabs／FollowList／Nexus／Notice等の遅延callback・応答を同じ本人へ束縛し、一覧選択の世代も別に照合する。
+- `guide/guidesJa.js`／`guide/termsJa.js`：入力9場面・各強度・二欄と通知／通常表示filterを実仕様へ同期。法的規約の意味・公開設定を新設しない。
+
+新規遅延回帰は `tests/api-client-cancellation.test.js`、`account-profile-owner-race.test.js`、`tutorial-owner-race.test.js`、`private-history-owner-race.test.js` 等。具体的な合否と変更pathは第10回§15。source候補とLive／build／本人確認は分ける。
+
+修正版11件の実値は第10回§15.7と `tests/fixtures/cocolon-input-contract-samples-20261107.json`。実screen照合12追加で入力suite78成功、API側同一byte票と13検査で正規化・insert・元7field・累積compilerを確認。全件理解・実機成功とは区別する。

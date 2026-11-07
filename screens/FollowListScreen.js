@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   ActivityIndicator,
   FlatList,
@@ -18,6 +18,7 @@ import { makeUiTokens } from "../ui/uiTokens";
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { supabase } from "../lib/supabase";
 import { useAuth } from "../AuthContext";
+import { useOwnerRequestScope } from "../hooks/useOwnerRequestScope";
 import { useUnread } from "../UnreadContext";
 import { apiFetch, apiPost } from "../lib/apiClient";
 import { CONNECT_WIRE, EMOTION_NOTIFICATION_WIRE, FOLLOW_WIRE, buildFollowListPath, buildFollowRequestsPath, buildFollowStatsPath, readEmotionNotificationOwnerId, readRelatedConnectCode } from "../lib/compat/legacyWireContracts";
@@ -151,7 +152,8 @@ export default function FollowListScreen({ navigation, route }) {
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
 
-  const { user } = useAuth();
+  const { user, authOwnerGeneration } = useAuth();
+  const { scope: ownerRequest, isCurrent: isOwnerCurrent } = useOwnerRequestScope(user?.id, authOwnerGeneration);
   const { getFeatureUnread, setUnread } = useUnread();
 
   const viewedUserId =
@@ -174,6 +176,24 @@ export default function FollowListScreen({ navigation, route }) {
 
   const isDark = themeName === "dark";
   const isSelfList = !!user && String(viewedUserId || "") === String(user.id);
+  const selectionRef = useRef(null);
+  if (!selectionRef.current || selectionRef.current.owner !== ownerRequest ||
+      selectionRef.current.target !== viewedUserId || selectionRef.current.tab !== tab) {
+    selectionRef.current = { owner: ownerRequest, target: viewedUserId, tab };
+  }
+  const selection = selectionRef.current;
+  const listRequestSeq = useRef(0);
+  const notificationRequestSeq = useRef(0);
+  const countRequestSeq = useRef(0);
+  const countScopeRef = useRef(null);
+  if (!countScopeRef.current || countScopeRef.current.owner !== ownerRequest || countScopeRef.current.target !== viewedUserId) {
+    countScopeRef.current = { owner: ownerRequest, target: viewedUserId };
+  }
+  const countScope = countScopeRef.current;
+  useEffect(() => {
+    setRequestActionLoadingId(null);
+    setEmotionNotifBusyId(null);
+  }, [ownerRequest]);
   const requestsUnread = isSelfList && !!getFeatureUnread("EmotionLog", "requests");
 
   const visibleTabs = useMemo(
@@ -208,14 +228,14 @@ export default function FollowListScreen({ navigation, route }) {
   }, [isSelfList, tab]);
 
   useEffect(() => {
-    if (!isSelfList || tab !== TAB_REQUESTS) return;
+    if (!isSelfList || tab !== TAB_REQUESTS || !isOwnerCurrent(ownerRequest)) return;
 
     let cancelled = false;
 
     (async () => {
       try {
-        await apiPost(FOLLOW_WIRE.routes.requestsRead, {});
-        if (!cancelled) {
+        await apiPost(FOLLOW_WIRE.routes.requestsRead, {}, ownerRequest.options);
+        if (!cancelled && isOwnerCurrent(ownerRequest)) {
           setUnread("EmotionLog", "requests", false);
         }
       } catch (e) {
@@ -226,10 +246,13 @@ export default function FollowListScreen({ navigation, route }) {
     return () => {
       cancelled = true;
     };
-  }, [isSelfList, setUnread, tab]);
+  }, [isSelfList, setUnread, tab, ownerRequest, isOwnerCurrent]);
 
   const refreshCounts = useCallback(async () => {
-    if (!viewedUserId) return;
+    if (!viewedUserId || !isOwnerCurrent(ownerRequest)) return;
+    const sequence = ++countRequestSeq.current;
+    const isFresh = () => isOwnerCurrent(ownerRequest) && countScopeRef.current === countScope &&
+      countRequestSeq.current === sequence;
 
     setCountLoading(true);
     try {
@@ -238,6 +261,7 @@ export default function FollowListScreen({ navigation, route }) {
       try {
         const { data: sessionData } = await supabase.auth.getSession();
         accessToken = sessionData?.session?.access_token ?? null;
+        if (!isFresh()) return;
       } catch {
         accessToken = null;
       }
@@ -245,6 +269,7 @@ export default function FollowListScreen({ navigation, route }) {
       const res = await apiFetch(
         buildFollowStatsPath(viewedUserId),
         {
+          ...ownerRequest.options,
           method: "GET",
           headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
         }
@@ -255,6 +280,7 @@ export default function FollowListScreen({ navigation, route }) {
       }
 
       const json = await res.json().catch(() => ({}));
+      if (!isFresh()) return;
       const followingCnt = Number(json?.following_count);
       const followerCnt = Number(json?.follower_count);
 
@@ -270,7 +296,8 @@ export default function FollowListScreen({ navigation, route }) {
           const rres = await apiFetch(
             buildFollowRequestsPath("incoming", { limit: 300 }),
             {
-              method: "GET",
+              ...ownerRequest.options,
+          method: "GET",
               headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
             }
           );
@@ -279,9 +306,9 @@ export default function FollowListScreen({ navigation, route }) {
             const rjson = await rres.json().catch(() => ({}));
             const reqs = Array.isArray(rjson?.requests) ? rjson.requests : [];
             const total = Number(rjson?.total_items);
-            setRequestCount(Number.isFinite(total) ? total : reqs.length);
+            if (isFresh()) setRequestCount(Number.isFinite(total) ? total : reqs.length);
           } else {
-            setRequestCount(0);
+            if (isFresh()) setRequestCount(0);
           }
         } catch {
           // no-op
@@ -291,7 +318,8 @@ export default function FollowListScreen({ navigation, route }) {
           const ores = await apiFetch(
             buildFollowRequestsPath("outgoing", { limit: 300 }),
             {
-              method: "GET",
+              ...ownerRequest.options,
+          method: "GET",
               headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
             }
           );
@@ -300,26 +328,29 @@ export default function FollowListScreen({ navigation, route }) {
             const ojson = await ores.json().catch(() => ({}));
             const oreqs = Array.isArray(ojson?.requests) ? ojson.requests : [];
             const ototal = Number(ojson?.total_items);
-            setRequestedCount(Number.isFinite(ototal) ? ototal : oreqs.length);
+            if (isFresh()) setRequestedCount(Number.isFinite(ototal) ? ototal : oreqs.length);
           } else {
-            setRequestedCount(0);
+            if (isFresh()) setRequestedCount(0);
           }
         } catch {
-          setRequestedCount(0);
+          if (isFresh()) setRequestedCount(0);
         }
       } else {
-        setRequestCount(0);
-        setRequestedCount(0);
+        if (isFresh()) setRequestCount(0);
+        if (isFresh()) setRequestedCount(0);
       }
     } catch (e) {
       // no-op（一覧取得でエラー表示するため）
     } finally {
-      setCountLoading(false);
+      if (isFresh()) setCountLoading(false);
     }
-  }, [viewedUserId, user, isSelfList]);
+  }, [viewedUserId, user, isSelfList, ownerRequest, isOwnerCurrent, countScope]);
 
   const loadList = useCallback(async () => {
-    if (!viewedUserId) return;
+    if (!viewedUserId || !isOwnerCurrent(ownerRequest)) return;
+    const sequence = ++listRequestSeq.current;
+    const isFresh = () => isOwnerCurrent(ownerRequest) && selectionRef.current === selection &&
+      listRequestSeq.current === sequence;
 
     setLoading(true);
     setErrorText("");
@@ -330,10 +361,12 @@ export default function FollowListScreen({ navigation, route }) {
       try {
         const { data: sessionData } = await supabase.auth.getSession();
         accessToken = sessionData?.session?.access_token ?? null;
+        if (!isOwnerCurrent(ownerRequest)) return;
       } catch {
         accessToken = null;
       }
 
+      if (!isFresh()) return;
       // 「承認待ち」タブは自分の一覧のみ表示する（他ユーザーの申請は見られない）
       if ((tab === TAB_REQUESTS || tab === TAB_REQUESTED) && !isSelfList) {
         setRows([]);
@@ -356,7 +389,8 @@ export default function FollowListScreen({ navigation, route }) {
         const ores = await apiFetch(
           buildFollowRequestsPath("outgoing", { limit: 300 }),
           {
-            method: "GET",
+            ...ownerRequest.options,
+          method: "GET",
             headers: { Authorization: `Bearer ${accessToken}` },
           }
         );
@@ -373,6 +407,7 @@ export default function FollowListScreen({ navigation, route }) {
         }
 
         const ojson = await ores.json().catch(() => ({}));
+        if (!isFresh()) return;
         const reqs = Array.isArray(ojson?.requests) ? ojson.requests : [];
         const total = Number(ojson?.total_items);
         setRequestedCount(Number.isFinite(total) ? total : reqs.length);
@@ -405,7 +440,8 @@ export default function FollowListScreen({ navigation, route }) {
           : buildFollowListPath({ targetUserId: viewedUserId, tab });
 
       const res = await apiFetch(url, {
-        method: "GET",
+        ...ownerRequest.options,
+          method: "GET",
         headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
       });
 
@@ -421,6 +457,7 @@ export default function FollowListScreen({ navigation, route }) {
       }
 
       const json = await res.json().catch(() => ({}));
+      if (!isFresh()) return;
 
       if (tab === TAB_REQUESTS) {
         const reqs = Array.isArray(json?.requests) ? json.requests : [];
@@ -449,24 +486,29 @@ export default function FollowListScreen({ navigation, route }) {
         setRows(list);
       }
     } catch (e) {
+      if (!isFresh()) return;
       console.warn("FollowListScreen loadList error:", e);
       setRows([]);
       setErrorText(String(e?.message || e));
     } finally {
-      setLoading(false);
+      if (isFresh()) setLoading(false);
     }
-  }, [tab, viewedUserId, user, isSelfList]);
+  }, [tab, viewedUserId, user, isSelfList, ownerRequest, isOwnerCurrent, selection]);
 
   useEffect(() => {
     refreshCounts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [viewedUserId]);
+  }, [viewedUserId, ownerRequest]);
 
   useEffect(() => {
     loadList();
   }, [loadList]);
 
   const loadEmotionNotificationSettings = useCallback(async () => {
+    if (!isOwnerCurrent(ownerRequest)) return;
+    const sequence = ++notificationRequestSeq.current;
+    const isFresh = () => isOwnerCurrent(ownerRequest) && selectionRef.current === selection &&
+      notificationRequestSeq.current === sequence;
     if (!user || !isSelfList || tab !== TAB_FOLLOWING) {
       setEmotionNotifMap({});
       setEmotionNotifLoading(false);
@@ -479,6 +521,7 @@ export default function FollowListScreen({ navigation, route }) {
       try {
         const { data: sessionData } = await supabase.auth.getSession();
         accessToken = sessionData?.session?.access_token ?? null;
+        if (!isOwnerCurrent(ownerRequest)) return;
       } catch {
         accessToken = null;
       }
@@ -488,7 +531,8 @@ export default function FollowListScreen({ navigation, route }) {
       }
 
       const res = await apiFetch(EMOTION_NOTIFICATION_SETTINGS_ENDPOINT, {
-        method: "GET",
+        ...ownerRequest.options,
+          method: "GET",
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
@@ -506,14 +550,16 @@ export default function FollowListScreen({ navigation, route }) {
       }
 
       const json = await res.json().catch(() => ({}));
+      if (!isFresh()) return;
       setEmotionNotifMap(extractEmotionNotificationMap(json));
     } catch (e) {
+      if (!isFresh()) return;
       console.warn("FollowListScreen loadEmotionNotificationSettings error:", e);
       setEmotionNotifMap({});
     } finally {
-      setEmotionNotifLoading(false);
+      if (isFresh()) setEmotionNotifLoading(false);
     }
-  }, [user, isSelfList, tab]);
+  }, [user, isSelfList, tab, ownerRequest, isOwnerCurrent, selection]);
 
   useEffect(() => {
     loadEmotionNotificationSettings();
@@ -530,7 +576,7 @@ export default function FollowListScreen({ navigation, route }) {
     if (!targetId) return;
 
     // 自分のフォロー/フォロワー一覧のみ解除できる（他ユーザーの一覧は閲覧のみ）
-    if (!user || !isSelfList) return;
+    if (!user || !isSelfList || !isOwnerCurrent(ownerRequest)) return;
 
     try {
       setErrorText("");
@@ -541,6 +587,7 @@ export default function FollowListScreen({ navigation, route }) {
         try {
           const { data: sessionData } = await supabase.auth.getSession();
           accessToken = sessionData?.session?.access_token ?? null;
+        if (!isOwnerCurrent(ownerRequest)) return;
         } catch {
           accessToken = null;
         }
@@ -550,6 +597,7 @@ export default function FollowListScreen({ navigation, route }) {
         }
 
         const res = await apiFetch(FOLLOW_WIRE.routes.delete, {
+          ...ownerRequest.options,
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -575,6 +623,7 @@ export default function FollowListScreen({ navigation, route }) {
         try {
           const { data: sessionData } = await supabase.auth.getSession();
           accessToken = sessionData?.session?.access_token ?? null;
+        if (!isOwnerCurrent(ownerRequest)) return;
         } catch {
           accessToken = null;
         }
@@ -584,6 +633,7 @@ export default function FollowListScreen({ navigation, route }) {
         }
 
         const res = await apiFetch(FOLLOW_WIRE.routes.removeFollower, {
+          ...ownerRequest.options,
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -604,11 +654,13 @@ export default function FollowListScreen({ navigation, route }) {
         }
       }
 
+      if (!isOwnerCurrent(ownerRequest) || selectionRef.current !== selection) return;
       setRows((prev) =>
         prev.filter((r) => String(r?.id || "") !== String(targetId))
       );
       refreshCounts();
     } catch (e) {
+      if (!isOwnerCurrent(ownerRequest)) return;
       console.warn("removeFollowLink error:", e);
       setErrorText(String(e?.message || e));
     }
@@ -619,7 +671,7 @@ export default function FollowListScreen({ navigation, route }) {
     if (!reqId) return;
 
     // 自分の承認待ち一覧のみ操作できる
-    if (!user || !isSelfList) return;
+    if (!user || !isSelfList || !isOwnerCurrent(ownerRequest)) return;
 
     if (requestActionLoadingId) return;
 
@@ -632,6 +684,7 @@ export default function FollowListScreen({ navigation, route }) {
       try {
         const { data: sessionData } = await supabase.auth.getSession();
         accessToken = sessionData?.session?.access_token ?? null;
+        if (!isOwnerCurrent(ownerRequest)) return;
       } catch {
         accessToken = null;
       }
@@ -646,7 +699,8 @@ export default function FollowListScreen({ navigation, route }) {
           : FOLLOW_WIRE.routes.rejectRequest;
 
       const res = await apiFetch(endpoint, {
-        method: "POST",
+        ...ownerRequest.options,
+          method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
@@ -665,6 +719,7 @@ export default function FollowListScreen({ navigation, route }) {
         throw new Error(msg);
       }
 
+      if (!isOwnerCurrent(ownerRequest) || selectionRef.current !== selection) return;
       // 一覧から除去
       setRows((prev) =>
         prev.filter((r) => String(r?._follow_request_id || "") !== String(reqId))
@@ -677,10 +732,11 @@ export default function FollowListScreen({ navigation, route }) {
 
       refreshCounts();
     } catch (e) {
+      if (!isOwnerCurrent(ownerRequest)) return;
       console.warn("actOnFollowRequest error:", e);
       setErrorText(String(e?.message || e));
     } finally {
-      setRequestActionLoadingId(null);
+      if (isOwnerCurrent(ownerRequest)) setRequestActionLoadingId(null);
     }
   };
 
@@ -691,7 +747,7 @@ export default function FollowListScreen({ navigation, route }) {
     if (!tgt) return;
 
     // 自分の「申請中」一覧のみ操作できる
-    if (!user || !isSelfList) return;
+    if (!user || !isSelfList || !isOwnerCurrent(ownerRequest)) return;
 
     if (requestActionLoadingId) return;
 
@@ -704,6 +760,7 @@ export default function FollowListScreen({ navigation, route }) {
       try {
         const { data: sessionData } = await supabase.auth.getSession();
         accessToken = sessionData?.session?.access_token ?? null;
+        if (!isOwnerCurrent(ownerRequest)) return;
       } catch {
         accessToken = null;
       }
@@ -713,7 +770,8 @@ export default function FollowListScreen({ navigation, route }) {
       }
 
       const res = await apiFetch(FOLLOW_WIRE.routes.cancelRequest, {
-        method: "POST",
+        ...ownerRequest.options,
+          method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${accessToken}`,
@@ -732,6 +790,7 @@ export default function FollowListScreen({ navigation, route }) {
         throw new Error(msg);
       }
 
+      if (!isOwnerCurrent(ownerRequest) || selectionRef.current !== selection) return;
       // 一覧から除去
       setRows((prev) => prev.filter((r) => String(r?.id || "") !== String(tgt)));
       setRequestedCount((prev) => {
@@ -742,17 +801,18 @@ export default function FollowListScreen({ navigation, route }) {
 
       refreshCounts();
     } catch (e) {
+      if (!isOwnerCurrent(ownerRequest)) return;
       console.warn("cancelOutgoingFollowRequest error:", e);
       setErrorText(String(e?.message || e));
     } finally {
-      setRequestActionLoadingId(null);
+      if (isOwnerCurrent(ownerRequest)) setRequestActionLoadingId(null);
     }
   };
 
   const toggleEmotionNotification = async (targetUserId) => {
     const ownerUserId = String(targetUserId || "").trim();
     if (!ownerUserId) return;
-    if (!user || !isSelfList || tab !== TAB_FOLLOWING) return;
+    if (!user || !isSelfList || tab !== TAB_FOLLOWING || !isOwnerCurrent(ownerRequest)) return;
     if (emotionNotifBusyId) return;
 
     const currentEnabled = emotionNotifMap?.[ownerUserId] !== false;
@@ -768,6 +828,7 @@ export default function FollowListScreen({ navigation, route }) {
       try {
         const { data: sessionData } = await supabase.auth.getSession();
         accessToken = sessionData?.session?.access_token ?? null;
+        if (!isOwnerCurrent(ownerRequest)) return;
       } catch {
         accessToken = null;
       }
@@ -779,6 +840,7 @@ export default function FollowListScreen({ navigation, route }) {
       const res = await apiFetch(
         `${EMOTION_NOTIFICATION_SETTINGS_ENDPOINT}/${encodeURIComponent(ownerUserId)}`,
         {
+          ...ownerRequest.options,
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -799,11 +861,12 @@ export default function FollowListScreen({ navigation, route }) {
         throw new Error(msg);
       }
     } catch (e) {
+      if (!isOwnerCurrent(ownerRequest)) return;
       console.warn("toggleEmotionNotification error:", e);
       setEmotionNotifMap((prev) => ({ ...(prev || {}), [ownerUserId]: currentEnabled }));
       setErrorText(String(e?.message || e));
     } finally {
-      setEmotionNotifBusyId(null);
+      if (isOwnerCurrent(ownerRequest)) setEmotionNotifBusyId(null);
     }
   };
 

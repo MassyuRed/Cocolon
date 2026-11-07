@@ -26,6 +26,11 @@ const compiled = ts.transpileModule(source, { fileName: 'InputScreen.tsx',
   reportDiagnostics: true, compilerOptions: { target: ts.ScriptTarget.ES2022,
     module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.React, esModuleInterop: false } });
 assert.equal((compiled.diagnostics || []).filter(d => d.category === ts.DiagnosticCategory.Error).length, 0);
+const inputOptionsModule = { exports: {} };
+vm.runInNewContext(ts.transpileModule(fs.readFileSync(path.join(ROOT, 'screens/input/inputOptions.js'), 'utf8'), {
+  compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS },
+}).outputText, { module: inputOptionsModule, exports: inputOptionsModule.exports });
+const inputOptions = inputOptionsModule.exports;
 function pieceFixture(send) {
   const file = path.join(__dirname, 'piece-v2-saved-input-host.test.js');
   const prefix = fs.readFileSync(file, 'utf8').split('for (const pre of [false, true]) test(')[0];
@@ -125,9 +130,9 @@ function harness(options = {}) {
     if (name === '../lib/compat/legacyWireContracts') return { EMOTION_NOTIFICATION_WIRE: { submitField: 'send_emotion_notification' } };
     if (name === '../tutorial/tutorialScenarioData') return { getTutorialEmlisReplyText: () => 'TUTORIAL_ONLY',
       TUTORIAL_EMLIS_REPLY: { meta: {} }, TUTORIAL_INPUT_SAMPLE: { memo: 'TUTORIAL_INPUT', memoAction: '',
-        emotions: [{ type: 'self_insight', strength: 1 }], categories: ['value'] },
+        emotions: [{ type: '自己理解', strength: 'medium' }], categories: ['価値観'] },
       TUTORIAL_PIECE_PREVIEW: { preview_id: 'tutorial-preview', reflection_text: 'TUTORIAL_ONLY' } };
-    if (name === './input/inputOptions') return { SELF_INSIGHT: 'self_insight', INPUT_TUTORIAL_STEP_START: 2, INPUT_TUTORIAL_STEP_END: 7 };
+    if (name === './input/inputOptions') return inputOptions;
     if (name === './input/inputDraftModel') return { normalizeInputDraftData: x => x };
     if (name === './input/inputFeedbackModel') return { buildInputFeedbackEmotionMeta: () => ({}) };
     if (name === './input/inputFeedbackObservationDiagnostics') return { logEmlisObservationFrontendDiagnostic: noop };
@@ -192,8 +197,8 @@ function harness(options = {}) {
   }
   function fill(text = 'PRIVATE_INPUT_BODY') {
     find('InputMemoSection').props.setMemo(text); render();
-    if (!find('InputEmotionSection').props.selectedEmotions.length) find('InputEmotionSection').props.toggleEmotion('self_insight');
-    render(); find('InputCategorySection').props.toggleCategory('value'); render();
+    if (!find('InputEmotionSection').props.selectedEmotions.length) find('InputEmotionSection').props.toggleEmotion('自己理解');
+    render(); find('InputCategorySection').props.toggleCategory('価値観'); render();
   }
   const finishObservation = () => {
     find('InputFeedbackReplyModal')?.props.onClose();
@@ -212,6 +217,223 @@ function harness(options = {}) {
 async function saved(options = {}) {
   const h = harness(options); h.fill(); await h.submit(); h.render(); h.finishObservation(); return h;
 }
+
+const INPUT_CATEGORIES = ['生活', '仕事', '趣味', '人間関係', '恋愛', '健康', '学習', '価値観', '人生'];
+const INPUT_EMOTIONS = ['喜び', '悲しみ', '怒り', '不安', '平穏'];
+
+test('input harness uses the actual nine categories, five emotions and three string strengths', () => {
+  assert.deepEqual(clone(inputOptions.CATEGORY_OPTIONS), INPUT_CATEGORIES);
+  assert.deepEqual(clone(inputOptions.EMOTION_ROWS.flat()), [...INPUT_EMOTIONS, '自己理解']);
+  assert.equal(inputOptions.SELF_INSIGHT, '自己理解');
+  assert.deepEqual(Array.from(inputOptions.VALID_STRENGTHS), ['weak', 'medium', 'strong']);
+});
+
+test('owner-scoped draft save and reload retain both fields, all scene selections and per-emotion string strengths', async () => {
+  const storage = new Map();
+  const module = { exports: {} };
+  const output = ts.transpileModule(fs.readFileSync(path.join(ROOT, 'screens/input/inputDraftModel.js'), 'utf8'), {
+    compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS, esModuleInterop: false },
+  }).outputText;
+  vm.runInNewContext(output, { module, exports: module.exports, require: name => {
+    if (name === './inputOptions') return inputOptions;
+    if (name === '@react-native-async-storage/async-storage') return { default: {
+      getItem: async key => storage.get(key) ?? null,
+      setItem: async (key, value) => storage.set(key, value),
+      removeItem: async key => storage.delete(key),
+    } };
+    assert.fail(`unexpected draft dependency: ${name}`);
+  } });
+  const model = module.exports;
+  for (const strength of ['weak', 'medium', 'strong']) {
+    const data = {
+      memo: ' 本人が考えたこと。\nまだ答えは出ていません。 ',
+      memoAction: '話を聞きました。\nその後は行動しませんでした。',
+      selectedEmotions: INPUT_EMOTIONS.map(type => ({ type, strength })),
+      selectedCategories: INPUT_CATEGORIES, isSecret: false, sendEmotionNotification: false,
+    };
+    await model.saveInputDraft(OWNER, data);
+    const wire = JSON.parse(storage.get(model.buildInputDraftStorageKey(OWNER)));
+    assert.deepEqual(wire.data, data);
+    assert.equal(wire.userId, OWNER);
+    assert.deepEqual(clone((await model.loadInputDraft(OWNER)).data), data);
+    assert.equal(await model.loadInputDraft('different-owner'), null);
+  }
+  for (const strength of [0, 1, 2, 3, '0', '', null, undefined]) {
+    assert.deepEqual(clone(model.normalizeDraftEmotionEntry({ type: '平穏', strength })), { type: '平穏', strength: 'medium' },
+      'legacy numeric or missing strength is a medium default, never a selectable zero or a strong value');
+  }
+  const legacy = model.normalizeInputDraftData({ memo: '旧入力', memoAction: '旧行動', isSecret: true });
+  assert.equal(legacy.isSecret, false);
+  await model.clearInputDraft(OWNER);
+  assert.equal(await model.loadInputDraft(OWNER), null);
+});
+
+for (const emotion of INPUT_EMOTIONS) for (const strength of ['weak', 'medium', 'strong']) {
+  test(`normal input preserves ${emotion}/${strength} and both original fields in the actual submit payload`, async () => {
+    const h = harness({ enabled: false });
+    const thought = ' 相談するか、まだ迷っています。\n今は決めません。 ';
+    const action = '昨日は手紙を書きました。\n今日は送りませんでした。';
+    h.find('InputMemoSection').props.setMemo(thought);
+    h.find('InputMemoSection').props.setMemoAction(action); h.render();
+    h.find('InputEmotionSection').props.toggleEmotion(emotion); h.render();
+    assert.deepEqual(clone(h.find('InputEmotionSection').props.selectedEmotions), [{ type: emotion, strength: 'medium' }]);
+    h.find('InputEmotionSection').props.changeStrength(emotion, strength); h.render();
+    for (const category of ['生活', '人間関係', '価値観']) {
+      h.find('InputCategorySection').props.toggleCategory(category); h.render();
+    }
+    assert.equal(h.find('InputActionArea').props.canSubmit, true);
+    await h.submit();
+    assert.equal(h.submits.length, 1);
+    const { created_at, ...payload } = h.submits[0].payload;
+    assert.ok(Number.isFinite(Date.parse(created_at)));
+    assert.deepEqual(payload, {
+      emotions: [{ type: emotion, strength }], memo: thought, memo_action: action,
+      category: ['生活', '人間関係', '価値観'], is_secret: false, send_emotion_notification: true,
+    });
+    assert.equal(h.submits[0].options.expectedUserId, OWNER);
+    h.dispose();
+  });
+}
+
+test('normal input retains every selected category and the independent strength of multiple emotions', async () => {
+  const h = harness({ enabled: false });
+  h.find('InputMemoSection').props.setMemo('同じ場面で、いくつもの気持ちがありました。'); h.render();
+  const selected = [
+    { type: '喜び', strength: 'weak' }, { type: '悲しみ', strength: 'medium' },
+    { type: '怒り', strength: 'strong' }, { type: '不安', strength: 'weak' },
+    { type: '平穏', strength: 'strong' },
+  ];
+  for (const { type, strength } of selected) {
+    h.find('InputEmotionSection').props.toggleEmotion(type); h.render();
+    h.find('InputEmotionSection').props.changeStrength(type, strength); h.render();
+  }
+  for (const category of INPUT_CATEGORIES) {
+    h.find('InputCategorySection').props.toggleCategory(category); h.render();
+  }
+  h.find('InputActionArea').props.setSendEmotionNotification(false); h.render();
+  await h.submit();
+  assert.equal(h.submits.length, 1);
+  assert.deepEqual(h.submits[0].payload.emotions, selected);
+  assert.deepEqual(h.submits[0].payload.category, INPUT_CATEGORIES);
+  assert.equal(h.submits[0].payload.send_emotion_notification, false);
+  assert.equal(h.submits[0].payload.is_secret, false);
+  assert.equal(Object.hasOwn(h.submits[0].payload, 'memo_action'), false);
+  h.dispose();
+});
+
+test('self insight replaces ordinary emotions, remains exclusive and submits the medium wire value', async () => {
+  const h = harness({ enabled: false });
+  h.find('InputMemoSection').props.setMemo('自分が大切にしたいことを考えました。'); h.render();
+  for (const emotion of ['喜び', '不安']) {
+    h.find('InputEmotionSection').props.toggleEmotion(emotion); h.render();
+  }
+  h.find('InputEmotionSection').props.toggleEmotion('自己理解'); h.render();
+  assert.equal(h.find('InputEmotionSection').props.isSelfInsightSelected, true);
+  for (const emotion of INPUT_EMOTIONS) {
+    h.find('InputEmotionSection').props.toggleEmotion(emotion); h.render();
+  }
+  assert.deepEqual(clone(h.find('InputEmotionSection').props.selectedEmotions), [{ type: '自己理解', strength: 'medium' }]);
+  h.find('InputEmotionSection').props.toggleEmotion('自己理解'); h.render();
+  assert.equal(h.find('InputEmotionSection').props.isSelfInsightSelected, false);
+  assert.equal(h.find('InputEmotionSection').props.selectedEmotions.length, 0);
+  h.find('InputEmotionSection').props.toggleEmotion('自己理解'); h.render();
+  h.find('InputCategorySection').props.toggleCategory('人生'); h.render();
+  await h.submit();
+  assert.deepEqual(h.submits[0].payload.emotions, [{ type: '自己理解', strength: 'medium' }]);
+  assert.deepEqual(h.submits[0].payload.category, ['人生']);
+  h.dispose();
+});
+
+for (const [memo, action] of [
+  ['考えだけを残します。\nまだ行動していません。', ''],
+  ['', '窓を開けました。\nその後は何もしませんでした。'],
+]) test(`normal input permits the ${memo ? 'thought' : 'action'} field alone without moving it to the other field`, async () => {
+  const h = harness({ enabled: false });
+  h.find('InputMemoSection').props.setMemo(memo);
+  h.find('InputMemoSection').props.setMemoAction(action); h.render();
+  h.find('InputEmotionSection').props.toggleEmotion('平穏'); h.render();
+  h.find('InputCategorySection').props.toggleCategory('生活'); h.render();
+  assert.equal(h.find('InputActionArea').props.canSubmit, true);
+  await h.submit();
+  assert.equal(h.submits.length, 1);
+  assert.equal(h.submits[0].payload.memo, memo);
+  assert.equal(h.submits[0].payload.memo_action, action || undefined);
+  assert.equal(Object.hasOwn(h.submits[0].payload, 'memoAction'), false);
+  h.dispose();
+});
+
+test('empty input cannot select categories or submit and clearing both fields removes the scene selection', async () => {
+  const h = harness({ enabled: false });
+  h.find('InputCategorySection').props.toggleCategory('健康'); h.render();
+  assert.deepEqual(clone(h.find('InputCategorySection').props.selectedCategories), []);
+  h.find('InputEmotionSection').props.toggleEmotion('平穏'); h.render();
+  await h.submit(); assert.equal(h.submits.length, 0);
+  h.find('InputMemoSection').props.setMemo(' \n\t');
+  h.find('InputMemoSection').props.setMemoAction('　\n'); h.render();
+  assert.equal(h.find('InputActionArea').props.canSubmit, false);
+  h.find('InputCategorySection').props.toggleCategory('健康'); h.render();
+  assert.deepEqual(clone(h.find('InputCategorySection').props.selectedCategories), []);
+  h.find('InputMemoSection').props.setMemoAction('散歩しました。'); h.render();
+  assert.equal(h.find('InputActionArea').props.canSubmit, false, 'a category is still required');
+  h.find('InputCategorySection').props.toggleCategory('健康'); h.render();
+  assert.equal(h.find('InputActionArea').props.canSubmit, true);
+  h.find('InputEmotionSection').props.toggleEmotion('平穏'); h.render();
+  assert.equal(h.find('InputActionArea').props.canSubmit, false, 'an emotion is still required');
+  h.find('InputEmotionSection').props.toggleEmotion('平穏'); h.render();
+  h.find('InputMemoSection').props.setMemoAction(''); h.render();
+  assert.deepEqual(clone(h.find('InputCategorySection').props.selectedCategories), []);
+  assert.equal(h.find('InputActionArea').props.canSubmit, false);
+  await h.submit(); assert.equal(h.submits.length, 0);
+  h.dispose();
+});
+
+const completeSamples = JSON.parse(fs.readFileSync(path.join(__dirname,
+  'fixtures/cocolon-input-contract-samples-20261107.json'), 'utf8'));
+test('the replacement sample sheet covers all categories, strengths, self insight and two input fields', () => {
+  assert.equal(completeSamples.synthetic, true);
+  assert.equal(completeSamples.cases.length, 11);
+  const categories = new Set(completeSamples.cases.flatMap(item => item.category));
+  assert.deepEqual([...categories].sort(), [...INPUT_CATEGORIES].sort());
+  const pairs = new Set(completeSamples.cases.flatMap(item => item.emotion_details)
+    .filter(item => item.type !== '自己理解').map(item => `${item.type}:${item.strength}`));
+  assert.deepEqual([...pairs].sort(), INPUT_EMOTIONS.flatMap(type =>
+    ['weak', 'medium', 'strong'].map(strength => `${type}:${strength}`)).sort());
+  assert.ok(completeSamples.cases.some(item => item.memo && !item.memo_action));
+  assert.ok(completeSamples.cases.some(item => !item.memo && item.memo_action));
+  assert.ok(completeSamples.cases.some(item => item.memo && item.memo_action));
+  assert.ok(completeSamples.cases.some(item => item.category.length > 1));
+});
+for (const sample of completeSamples.cases) test(`replacement sample ${sample.case_id} matches the actual screen submit payload`, async () => {
+  const h = harness({ enabled: false });
+  h.find('InputMemoSection').props.setMemo(sample.memo);
+  h.find('InputMemoSection').props.setMemoAction(sample.memo_action); h.render();
+  for (const { type, strength } of sample.emotion_details) {
+    h.find('InputEmotionSection').props.toggleEmotion(type); h.render();
+    if (type !== '自己理解') {
+      h.find('InputEmotionSection').props.changeStrength(type, strength); h.render();
+    } else {
+      assert.equal(sample.self_insight_strength_ui, null);
+      assert.deepEqual(clone(h.find('InputEmotionSection').props.selectedEmotions),
+        [{ type: '自己理解', strength: 'medium' }]);
+    }
+  }
+  for (const category of sample.category) {
+    h.find('InputCategorySection').props.toggleCategory(category); h.render();
+  }
+  h.find('InputActionArea').props.setSendEmotionNotification(sample.send_emotion_notification); h.render();
+  assert.equal(h.find('InputActionArea').props.canSubmit, true);
+  await h.submit();
+  assert.equal(h.submits.length, 1);
+  const { created_at, ...payload } = h.submits[0].payload;
+  assert.ok(Number.isFinite(Date.parse(created_at)));
+  assert.deepEqual(payload, { memo: sample.memo,
+    ...(sample.memo_action ? { memo_action: sample.memo_action } : {}),
+    emotions: sample.emotion_details, category: sample.category,
+    send_emotion_notification: sample.send_emotion_notification, is_secret: sample.is_secret });
+  assert.equal(h.submits[0].options.expectedUserId, OWNER);
+  h.dispose();
+});
+
 test('InputScreen supplies the explicit renderer predicate to the existing saved-input host without issuing IO', async () => {
   const admission = () => false;
   const h = await saved({ rendererAdmission: admission });
