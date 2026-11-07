@@ -36,7 +36,9 @@
 
 更新日：2026-11-01 JST（最新差分：Mashの説明に基づき工程を訂正。11/1はリリース機構・配布・運用・初回接続、11/2〜11/6は華恋がGPU/サーバー側で品質改善。実機は初回と最終確認に絞り、品質試行ごとのRNビルドは行わない。品質以外を先に整え、公開日まで育てた品質を反映できる状態を目指す）。全Cocolon作業の必読原本。
 
-> **最新報告会：[第9回・2026-10-31、10/31〜11/7](weekly_reviews/Cocolon_Weekly_Review_20261031.md)。開催中。** [§3のMashの方針・既決仕様](weekly_reviews/Cocolon_Weekly_Review_20261031.md#confirmed-directions)、[§4の華恋の商品案](weekly_reviews/Cocolon_Weekly_Review_20261031.md#release-product-proposal)、[§11の合意最低線と週間基準計画](weekly_reviews/Cocolon_Weekly_Review_20261031.md#weekly-tasks-20261031)、[§7の未決・会議進行](weekly_reviews/Cocolon_Weekly_Review_20261031.md#meeting-agenda-and-open-items)を区別する。Emlisは人間的応答のみの表示へ変更し、意図的短文化・1〜2文固定はしない。観測ラインは分析へ活かす。Free当回入力のみ／Plus過去本人入力も照合は既決仕様の再確認で、通常4Bでの意味ある履歴応答は未完成。わたしマップは全蓄積の構造・ルートと月ごとの当時snapshot、現在との見比べが構想。28日・最新100だけ・最新1枚は華恋の判断・撤回案で、Mashの構想ではない。下表の期間実装と新目標を混同しない。
+> **最新報告会：[第10回・2026-11-07、11/7〜11/14](weekly_reviews/Cocolon_Weekly_Review_20261107.md)。開催中。** まず10/31報告会後〜11/7の作業と成果を報告。EmlisとPieceの本人端末一巡、累積・月次機構の反映、分析／Pieceの限定改善、7401の送信成功と未確認を分けて記録した。全体評価・次週計画・会議終了は未討議で、機能状態・商品受入れをこの記録だけで変更しない。
+
+> **前回の方針・既決仕様：[第9回・10/31〜11/7](weekly_reviews/Cocolon_Weekly_Review_20261031.md)。** [§3のMashの方針・既決仕様](weekly_reviews/Cocolon_Weekly_Review_20261031.md#confirmed-directions)、[§4の華恋の商品案](weekly_reviews/Cocolon_Weekly_Review_20261031.md#release-product-proposal)、[§11の合意最低線と週間基準計画](weekly_reviews/Cocolon_Weekly_Review_20261031.md#weekly-tasks-20261031)、[§7の未決・会議進行](weekly_reviews/Cocolon_Weekly_Review_20261031.md#meeting-agenda-and-open-items)を区別する。Emlisは人間的応答のみの表示へ変更し、意図的短文化・1〜2文固定はしない。観測ラインは分析へ活かす。Free当回入力のみ／Plus過去本人入力も照合は既決仕様の再確認で、通常4Bでの意味ある履歴応答は未完成。わたしマップは全蓄積の構造・ルートと月ごとの当時snapshot、現在との見比べが構想。28日・最新100だけ・最新1枚は華恋の判断・撤回案で、Mashの構想ではない。下表の期間実装と新目標を混同しない。
 
 **初版Emlisの最低線は合意済み：** Mashは§10の例に「俺が求めるのもこのライン」と明示し、その水準を目指した改善案と1週間のタスク記載を指示した。[第9回§11](weekly_reviews/Cocolon_Weekly_Review_20261031.md#weekly-tasks-20261031)が現在の基準計画。意味・主体・否定・時点を保ち、不明やない事情を確定せず、自然な返事を返す。短い受け取り・一度の言い換えも認め、高度観測の深さ・毎回の新発見・助言・質問を初版必須にしない。本人宛応答と分析材料を分け、通常実機接続・保存再読・Plusの具体的履歴応答を主成果とする。例文を固定テンプレ・凍結テストへ採用せず、文数固定もしない。最低線の合意と、実4Bの合格・実機成功・商品受入れは別。Plusの既決差とAnalysisの累積／月次構想は保持する。
 
@@ -236,7 +238,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | 範囲 | 詳細原本・現物 |
 |---|---|
 | 全体構想・設計 | `cocolon_thought_material_for_karen.md`、`01_cocolon_overall_structure.md`と分冊01A／01B／01C、`02_cocolon_national_system.md`、`current_structure/00_three_core_and_cmee_read_first.md`と01〜04 |
-| 最新判断・配置記録 | [第9回・10/31〜11/7](weekly_reviews/Cocolon_Weekly_Review_20261031.md)が最新の方針整理・開催中の報告会。[第8回・10/24〜10/31](weekly_reviews/Cocolon_Weekly_Review_20261024.md)は終了記録・実行履歴。方針・承認・配置の原記録は`weekly_reviews/Cocolon_Weekly_Review_20261017.md`（10/20観測学習、最新AL等）とAPI `ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md`へ戻る。会議記録は仕様・実装事実の代用ではない |
+| 最新判断・配置記録 | 最新報告会は[第10回・11/7〜11/14](weekly_reviews/Cocolon_Weekly_Review_20261107.md)・開催中、議題1の今週実績を報告済み。[第9回・10/31〜11/7](weekly_reviews/Cocolon_Weekly_Review_20261031.md)の方針・実行履歴を継承。[第8回・10/24〜10/31](weekly_reviews/Cocolon_Weekly_Review_20261024.md)は終了記録・実行履歴。方針・承認・配置の原記録は`weekly_reviews/Cocolon_Weekly_Review_20261017.md`（10/20観測学習、最新AL等）とAPI `ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md`へ戻る。会議記録は仕様・実装事実の代用ではない |
 | Emlis・CMEE実物 | API `cocolon_meaning_experience_engine/engine.py`、`emlis_thread_service.py`とthread source／question／answer_update／surface、RN `InputScreen`・`useEmlisThread`・`EmlisThreadModal`。API path prefixは`ai/services/ai_inference/` |
 | AI試験 | `observation_learning/trials/2026-10-21-qwen27-demo/README.md`と8出力JSON。`fine_tuning_performed=false`、`cmee_integration_performed=false` |
 | Analysis実物 | API `astor_material_snapshots.py`、`analysis_observed_service.py`、`watashi_map_service.py`、`kokoro_weather_service.py`、RN `WatashiMapV2Renderer`・access policy。設計04 §10 IF／§11 Saved、schema05 §7・9.6 |
