@@ -1308,3 +1308,12 @@ TestFlight build77/7701（source27cc48b、run42360257959/job128366936050）は�
 Supabaseは本文/個人IDを取得せず件数/文字数/重複数のみ集計。最大履歴765件、本文あり712件、本文107498文字、distinct本文組712の実在を確認。現16384文脈/262144byte提供口で全保存履歴を一回生成できたとはしない。直近へ無断で切り詰めず、全履歴への分割/蓄積方式は具体的な残件。根拠・所有者・source guardを保った読解品質、長履歴、実Render→GPU、本人実機を未完のまま残す。今回の到達点はCore接続コードの実配置と新UI upload、到達していないのは実機で妥当な新4B分析を返すこと。semantic_map_connection_outcome_20261107.jsonへ現在地を固定した。
 
 重み保全の最終確認：24/80/120有効更新のadapter_model.safetensorsと各config、固定base/版/原本commitを示すmanifestの7member/42,734,454byteを保管物version1へ保存。ZIP CRCと全3重みSHAを実照合し、archive SHAはa7081da470d85364497f924199b0e416031db98d21e9aa0f08a914864392478a。optimizer/RNGは含まず、厳密途中再開を保証しない。コード/教材/実出力はGitHub44f30624の同trialを正本にし、重み保管物へ重複しない。推論serverと通常model設定は未起動/未変更、Podは保存した重みを保持しており停止操作は行っていない。
+
+
+### 同日続行：Mash再指示による実機優先への修正と接続準備
+
+内容の全修正を実機確認の先行条件に置いたroot判断をMashが明示的に拒否。現在の最優先は提示済みの関係図・自然文・項目/線の詳細を実機へ通して読むこと。7701 source27cc48bの実sourceに必要な描画・全文/詳細Modalがあり、新semantic.v1/v3を受け取れば追加buildなしで表示できることを再照合した。旧v2は分類node・unknownの列挙と改行連結であり、提示した分析例の自然文や図を返していない。
+
+新学習を追加せず、既存Pod f1lle4xwq3wjln・固定base851bf6e・保存120更新ecbdd0d1/config4389a598を既存tracked serverの--analysis-serviceで起動。offline環境不足の初回失敗を修正し、モデルID cocolon-qwen3.5-4b-analysis-semantic-120u、出力4096・文脈16384・一生成210秒で常時提供を開始した。local healthz200/status ok、専用8888 bridgeへ既存model bearerで空JSONを送り、upstream400/request_invalid・Set-Cookieなしを実確認。これは接続口とserverへの到達検査で、生成・保存・実機の成功ではない。Pod reset/再借換え/Jupyter再起動は行っていない。
+
+Render srv-d4ppfpm3jp1c73952bj0の環境キーのみを確認し、他設定を保持する5項目merge（development、self_hosted.semantic.v1、既存Runpod専用endpoint、model ID、専用model API鍵）を試みたが、自動承認審査が『鍵をRenderへ渡し外部model endpointを設定することへの明示承認不足』として拒否した。環境値は未変更、deployも追加0。browserや別経路での迂回は行わない。次の一操作は、この専用API鍵をRenderへ登録し既存Runpodへの通常接続設定を反映することへの明示承認。その後、d63647a8へ当該環境を適用してRender→4B→CMEE→v3保存/取得を実確認し、7701で図・文章・詳細を確認する。内容品質合格を新しい先行Gateとして戻さない。
