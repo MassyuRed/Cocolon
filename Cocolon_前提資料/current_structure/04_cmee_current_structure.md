@@ -1,3 +1,5 @@
+> 2026-11-08接続修復：naturalの受口は既存の本人材料・安全性・source/context/revision/CAS検査、OPERATION receipt、OBSERVATION保存／再読を使用する。生成本文を本人sourceへ昇格しない。分析semantic-120uとnatural base-851bf6eを専用鍵・条件別に同4B提供へ接続し、実GPU合成の分析3node/2edgeと自然文受理を確認。自然文初回2件、分析先行の待機後1件も完了。これは稼働接続の限定確認であり、意味品質全般・全入力・正式受入れの成立ではない。API497f7008、RN6fdea583、8001内部Testing。最新weekly notification-settings-emlis-repair-20261108へ。
+
 > **2026-11-02最新：other62の68更新/28生成＋追加学習0の診断12生成を完了、通常未採用。** 同じ主体/動詞も元文脈でscopeが変わり、主体名単独の説明は支持せず。全270＋66原本/112重み保全、全保存応答非生成再読済み。次の参加否定/肯定/名詞対象×2文脈SC6はCPU表現/実file再読/実tokenizerまで（モデル0/次GPU未固定）。[全結果/原本/次の実装順](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-actor-predicate-result-20261102)。HQ03主体qualifier/CQ04少し/HQ04理由も残件。STRUCTURE_MAP_DELTA_NONE、通常map/本番/DB/RN不変。完了runを再起動しない。
 
 > 10/28最新差分：named出力型/参照提示修復・CPU351成功、9更新/112再読込/2生成を終了。平坦rootと回答source帰属へ前進も意味/本文0/2・新41c9不採用。末尾の最新結果・全機能00/weekly§90を参照。

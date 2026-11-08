@@ -36,8 +36,12 @@ script構文・初期／期間／時間帯／欠測日／前月31日／keyboard�
 
 採用後の実装は `AnalysisContentFirstScreen` → `KokoroWeatherTimeline` → `useKokoroWeather` → 認証済み `GET /analysis/kokoro-weather`。当日・週・月を本人の保存済み通常感情から直接集計し、保存reportの生成を待たない。API候補[8739cd80](https://github.com/MassyuRed/mashos-api/commit/8739cd8040d177ee140b0ecd4afef7c8930b77f9)、RN候補4483f6d4を保存。既存の秘密入力除外、履歴の閲覧範囲を保持する。表示案のHTML・編集元は比較用原本として変更しない。詳細と検証は[分析構造](../../current_structure/03_analysis_current_structure.md#kokoro-weather-live-20261108)。この実装候補の作成時点では本番反映・署名build・本人実機は未実施だった。その後API8739cd80と7901を反映し、Mashの概ね指示どおりとの表示報告を受領。後続の改名と不具合修正は同file末尾の候補へ分ける。
 
-## 11/8 表示名をこころグラフへ変更する候補
+## 11/8 表示名をこころグラフへ変更（8001）
 
-7901表示はMashが概ね指示どおりと報告。その後「こころグラフ」を採用し、メイングラフ右上の天気印を削除、タブは棒グラフ印へ変更する指示を受領。今日の円＋4時間帯、週／月の日別100%棒と選択内訳・配色・欠測表現は維持する。旧保存名は表示時だけ変換し、履歴のmetadata-onlyと既読処理修復を候補へまとめた。署名buildは他の作業後にまとめるため起動していない。
+7901表示はMashが概ね指示どおりと報告。その後「こころグラフ」を採用し、メイングラフ右上の天気印を削除、タブは棒グラフ印へ変更する指示を受領。今日の円＋4時間帯、週／月の日別100%棒と選択内訳・配色・欠測表現は維持する。旧保存名は表示時だけ変換し、履歴のmetadata-onlyと既読処理修復をまとめた。他の作業後に、設定配置・Emlis接続修復と統合したRN6fdea583をrun#80で一回buildし、8001を既存内部グループでTestingまで確認。API497f7008もLive。今回変更分の本人実機確認はまだ受領していない。
 
 採用時 `20261108-kokoro-weather.html`／`.source.html` は旧名を含む比較原本として変更しない。保存済み元案と今回候補、7901の実機報告を混同しない。詳細は既存の分析構造・最新weeklyの `kokoro-graph-history-read-20261108` 節を参照。
+
+## 11/8 設定プレビュー配置の反映（8001）
+
+元比較HTMLと編集元は改変しない。通常設定入口は、既存配色のまま右上Account／見出しと説明／実プランカード／アプリ設定2行／契約3行／その他3行／既存legal linksへ並べ直した。通知設定・IAP復元／管理・削除の既存controllerを共用し、デモ状態を実データへ混ぜない。[現行設計](material-ui-design.md#9-設定)、[反映・検証記録](../../weekly_reviews/Cocolon_Weekly_Review_20261107.md#notification-settings-emlis-repair-20261108)。8001内部Testing、本人実機の配置確認は未受領。

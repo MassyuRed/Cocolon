@@ -1,3 +1,5 @@
+> 2026-11-08追加反映：先行こころグラフ／履歴metadata読取／既読cache修復を含むAPI497f7008がLive。更新担当と通知2cronも同版。共有4Bは分析予算・JSON制約・120u adapterを保持し、natural専用鍵の要求だけ順番待ちする。分析3node/2edge・全2入力mappedの実GPU合成確認後、待機した観測応答も完了。RN6fdea583の統合run#80は全19step成功、8001内部Testing。map通知の本人不達はglobal OFFの送信前除外、cron候補DB timeoutとは別。
+
 > **11/7・通常4Bによる意味読解と関係図の修復候補：** 原典の役割＝自己／他者世界の座標と対象の定義を、担当構文へ狭めていた問題を是正。新API `analysis_semantic_map.py`、既存model source／累積ensure、v3公開型／private根拠、RN `SemanticWatashiMap.js`／`semanticMapContract.js`を実装。自己の位置・対象の意味・選択と出力を記録間で読み、関係図→詳細→根拠へ渡す。既存原入力／辞書／月次保存・旧v2を維持。隔離実SQLでは新CHECK migration後に保存／根拠／非生成再読が成立。実4B／配置／新build／本人実機は未成立、新Pod認証待ち。局所検査を品質合格へ換算しない。[現物と残差](../weekly_reviews/Cocolon_Weekly_Review_20261107.md#analysis-semantic-map-repair-20261107)。
 
 > **11/7・実機確認準備：** Mashの提案により、まず同日5件の架空入力で現在の分析画面を確認する。固定の最低件数／日数はなく、通常compilerのCPU確認ではartifact生成・mapped4／unparsed5。全文理解や実機成功ではない。旧テストアカウントの認証操作0、本人入力は未実施。手順と5原文は[第10回§14](../weekly_reviews/Cocolon_Weekly_Review_20261107.md#device-confirmation-and-analysis-samples-20261107)。STRUCTURE_MAP_DELTA_NONE。

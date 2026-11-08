@@ -1501,3 +1501,15 @@ Emlis actual：response profile natural_reply.v1、endpointは旧6i2aa1nj683s8y�
 source試験：API HTTP／pending／候補retry／bridge61件pass。RN設定layout・owner・入力・thread144件pass、追加pending marker2件もpass。Metro bundle単独検査はローカル依存不足のため対象から外し、最終iOS buildで確認する。自然文SQLは53件pass、実GPU接続は実行中。API source `5d2afbfc33181f9071c9efd7ea2e995812924093`を保存・全11path blob照合済み。新配布・実反映・本人端末は未完。
 
 共有GPUの追加修復source：`497f7008fec8935885d09d2e430499892189b5bb`。naturalだけ最大210秒のlock待ち＋生成23秒、HTTP240／bridge245／thread270秒。分析の既存予算・JSON制約・nonblockingを保持。RNは同attemptの最初のprocessing_deadline_atだけで最大270秒まで自動GETを継続し、背景復帰・後続deadline変更で延長しない。GETは生成しない。API115件pass（実SQL53含む）、RN対象46件pass＋入力pending2件／既存関連102件pass。旧source5d2の実GPU2件は2.177秒／2.032秒で自然文検査pass（合成入力、品質全般の受入れではない）。新source共有待機の実GPU検証と実API反映・内部buildは進行中。
+
+実反映（UTC）：API dep-dbo1059srm7s73amavf0は06:02:56.872Z、worker dep-dbo10njl550s738er070は06:03:01.923Z、today-question-push dep-dbo129k9v7es73e0ql60は06:06:04.133Z、report-distribution-push dep-dbo12qu417fc73f0aglgは06:07:10.022Zに497f7008 Live。API最終CI42452255181／128643783066全step成功。cronは通常のManual Buildがmainを直接再buildする操作だったため、today側で旧2d2f06dを一回再build（同旧版、dep-dbo10tjl550s738erdv0）した事実を保持。その後、2cronの参照branchを検証済みAPI作業branchへ変更、auto deploy Offを確認して手動反映。反映後の実行logは下段の06:10結果を確認し、空候補の成功を通知到着へ換算しない。
+
+共有GPU source497f7008／PID21217はhealth200。分析先行後のnatural要求は57.022秒、合計57.646秒で完了。分析は3node/2edge、source2／mapped2、CMEE受理。naturalも原入力のみの合成文を受理。追加学習・新GPU・新adapter採用・設定料金変更なし。元の自然文baseと分析120uのidentityを維持。
+
+統合iOS run42452923002／#80 attempt1は06:00:07Zに一回開始、対象RN6fdea583。先行こころグラフ・履歴既読・今回設定／待機を全て含む。最新RNcontracts128644800995／phase6はsuccess。別の既存Piece native V4は20中19failで、128632034317 baselineと失敗19名称・順序が同一。legacy97／V946／main129／bitmap44はpass。canvas128644801183は4tests中1fail／PIECE_NATIVE_MEASUREMENT_UNAVAILABLE。今回の3件に伴うrenderer変更はなく、描画検証は未修復として保持。Archive／Upload／Apple配布の最終結果は下段。
+
+反映後の定期実行：06:10:43.934Z report-distribution-pushはstatus ok／processed0／sent0／errors0、06:10:47.981Z today-question-pushはstatus ok／scanned0／sent0。両方が新497f7008 Live後の実行であり、タイムアウトなしの候補読取と正常終了を確認。対象0件なのでFCM送信・端末到着の証拠ではない。API `/healthz` status ok、`/app/bootstrap` emlis_threads_enabled=trueも確認。
+
+統合配布完了：iOS#80／attempt1／RN6fdea583は06:18:09Zにsuccess（19step全成功）。Archive、写真目的文、IPA、TestFlight Uploadを確認。Appleで1.0（8001）、build UUID bdff935e-689f-47c9-9eb4-edb895311745を照合し、前版と同じOS内暗号化のみの申告を適用。既存の内部グループ「Emlis テスト版配布」のBuildsで8001／Testing／Expires in90days／iOSを確認。外部配布・App Store公開は行っていない。配布画面の撮影はPage.captureScreenshot timeoutで失敗し、画像保存／添付は0。UIのTesting確認と撮影成功を混同しない。App Store Connectの該当グループとGitHub build結果のタブを残した。
+
+今回の完了範囲：先行こころグラフ改名・天気印撤去・履歴metadata取得・既読修復、通知候補の通信再試行、設定の既存preview配置、Emlisの旧Pod／read_onlyからの接続修復・pending最小wire・GPU順番待ち・保存期限に沿うGET表示確認を反映し、8001を内部配布。前提資料00・01C・Emlis／分析／CMEE map・Material設計・UI READMEを更新。元preview HTML／sourceは保持。本人通知global OFFは無断変更していないため、受信確認では設定の「全ての通知」をONにする必要がある。当時の不達原因は確定、実FCM配送／端末到着は未確認。実機の今回レイアウト・保存後応答、一般の応答品質受入れ、既存Piece native描画の残件を完了へ換算しない。

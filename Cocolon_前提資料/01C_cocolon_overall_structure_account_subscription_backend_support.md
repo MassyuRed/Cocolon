@@ -156,9 +156,11 @@ revision_date: "2026-08-02"
 - このファイルを直接参照するファイル:
   - `Cocolon/navigation/SettingsStackNavigator.js` — import
 - 修正時に必ず同時確認するファイル:
-  - `Cocolon/App.js`
-  - `Cocolon/screens/MyModelMenuCommon.js`
-  - `Cocolon/screens/MyWebMenuCommon.js`
+  - `Cocolon/navigation/SettingsStackNavigator.js`
+  - `Cocolon/screens/AnalysisMenuCommon.js`
+  - `Cocolon/screens/SettingsAppSettingsScreen.js`
+  - `Cocolon/screens/SettingsOtherScreen.js`
+  - `Cocolon/screens/SubscriptionSelectScreen.js`
 - 修正対象になりうる変更:
   - account screen, ProfileCreate, settings, subscription UI
 

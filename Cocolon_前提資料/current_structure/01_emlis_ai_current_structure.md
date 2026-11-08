@@ -1,4 +1,4 @@
-> 2026-11-08の接続修復候補：Render actualはnatural_reply.v1のまま旧停止Pod、thread mode read_only。保存応答pending markerの最終submit脱落を修復し、RNにGETのみの「応答を確認する」を追加。既存分析用4Bを一回loadし、自然文では6701既接続のbase identity、分析では120u adapterを専用鍵別に使用する共有提供候補を用意。分析の予算・JSON制約は維持、自然文後のadapter再有効化と勾配OFFをfinallyで復元。実配置・本人端末確認はこの段階では未完。最新weeklyのnotification-settings-emlis-repair-20261108を参照。
+> 2026-11-08接続修復：API497f7008と共有providerが稼働。旧Pod／read_onlyから現在のf1lle4xwq3wjln＋activeへ復旧。natural_reply.v1は6701接続時と同じbase-851bf6e、分析は120u adapterを同load／同lockで使い分け、自然文後のadapter／勾配OFFをfinallyで復元。naturalのみ待機210＋生成23、HTTP240／bridge245／thread270。submitは保存済み空本文pendingだけ最小metaで返し、RNは最初の保存期限・最大270秒までGETで確認、エラー時は「応答を確認する」でGET回復。原入力・本人権利・CAS・保存／再読・GET非生成を保持。実GPU合成2件2.177／2.032秒、分析先行の共有待機は57.022秒で応答完了し、分析もCMEE受理。API115件とRN関連検証pass。run#80全19step成功、8001内部Testing。本人端末・一般品質の受入れは未確認。
 
 > 11/1最新はweekly第9回§39。6801の応答UIをMashが確認。Piece preview422と時計への重なりを受領し、既存modalの安全領域/案内文を修復。候補/配布/本人確認を区別する。
 
