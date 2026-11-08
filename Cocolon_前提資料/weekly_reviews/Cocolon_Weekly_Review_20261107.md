@@ -1386,7 +1386,7 @@ Renderの既存deploy dep-dbnh12lg1s2s73cma8o0／API4ba011c6のlive継続を読�
 
 
 <a id="analysis-detail-context-speed-20261108"></a>
-### 11/8続行：実機画像の詳細確認とカテゴリ／感情列挙の非表示
+### 11/8続行：実機詳細の列挙非表示と、入力保存後の先行更新
 
 Mashの6枚の実機画像で、7701の関係図・全体の読み・3項目の詳細が開くことを確認した。線詳細の個別画像・意味品質の受入れは確認していない。画像や本人本文を公開repositoryへ複製しない。Mashから、詳細に灰色で出るカテゴリ／感情選択の列挙を非表示にする指示と、読み込み短縮の要望を受領した。
 
@@ -1406,4 +1406,20 @@ Mashの6枚の実機画像で、7701の関係図・全体の読み・3項目の�
 
 FLA0.6はTriton3.4にGluon extraがなく隔離importで失敗し未使用。0.5のtensor比較はBF16許容誤差内でも最終token一致を保証しなかった。通常提供を再loadして候補を実測したが上記理由で外し、最後は元のTorch計算＋529f6817のprovider PID20854、/healthz HTTP200、PYTHONPATHのfast targetなしを確認。旧globalモデル環境pin・保存重み・鍵・8000入口／bridgeとRender既存設定は維持した。単発checkerの初期dependency不足／旧GPU cloneと教材packetの版ずれは生成前assertで停止し、別targetの既存API依存＋529f6817固定cloneと正しいteacher planへそろえてから生成した。
 
-通常7701の表示はload(false)からensure=trueで、force=trueを付けるのは『分析を更新』だけ。同owner／同source guardの保存v3は既存IDを再利用し、4B／CMEE再生成と新artifact挿入を行わない。今回この経路の製品変更はない。新規の本人生成要求・本人データ書込・学習・新Podレンタル・Render配置／設定変更・署名buildは0、架空の新生成2件とprovider再loadを実施した。UIはCocolon ec49d981へ保存済み、次の統合buildに含める。
+上記速度計測の時点では、通常7701の表示はload(false)からensure=trueで、force=trueを付けるのは『分析を更新』だけ。同owner／同source guardの保存v3は既存IDを再利用し、4B／CMEE再生成と新artifact挿入を行わない。速度計測だけではこの取得経路を変更していない。新規の本人生成要求・本人データ書込・学習・新Podレンタル・Render配置／設定変更・署名buildは0、架空の新生成2件とprovider再loadを実施した。UIはCocolon ec49d981へ保存済み、次の統合buildに含める。
+
+Mashから、入力保存後に分析を先に進め、わたしマップを開く際は保存済み結果を表示する案を受領。画面取得と約171秒の生成を切り離す既存経路へ実装した。生成時間自体を短縮したという変更ではない。
+
+| 既存経路の変更点 | 実装・局所検証した挙動 |
+|---|---|
+| 入力保存後 | 既存background処理の先頭でcurrent metadata／source guardを読み、必要時だけ `myprofile_latest_refresh_v1` を既定20秒で予約。通知やASTOR ingestの完了を先に待たず、入力応答は生成を待たない |
+| 同本人の追加入力 | 同jobへまとめ、running中はpayload／microsecondsのupdated_atを更新してdirtyを保持。workerが変更を検出して再予約する。queuedのattemptsは保ち、完了／失敗後の新予約だけ0へ戻す |
+| 最新表示 | 新RNだけ `background=true` を明示して保存currentを取得。guard無効の旧mapは返さず更新中表示。通常latestのbackground未指定は既存7701の同期互換を保つ |
+| 更新の検出 | queued／runningの間だけ、focusedかつapp active時に3秒ごと既存statusを読取。statusは予約／生成せず、版／可視性の変更後は非生成latestで取り直す。画面離脱・背景移行・owner変更で旧処理を失効 |
+| 既存保護 | 元材料・意味／引用検査・全期間source guard・削除失効・owner・月次当時保存を保持。新queue/table、Renderサービス、モデル、依存、DB migrationを追加しない |
+
+このcheckpointはAPI／RNの実装・局所検証済み、API／worker未反映、RN build未実施。UI25 PASS。API統合は隔離環境で308 PASS／20 SKIP／1 deselected・4 subtests PASS、51.36秒、既存警告1。SKIPは既存PG19＋環境SQL1。追加caseの別実行18 PASS（API2を含む）、保存後処理12 PASS、queue9 PASS／4 subtests PASSは重複集合があるため加算しない。修正版APIは09a3f714へ9対象fileをGitHub保存・全bytes読戻し一致。既存Analysis CI42427888976は実行中で、成功とはまだ扱わない。通常APIは4ba011c6で今回source前、既存workerは旧2d2f06dかつ分析5設定が未継承。RenderのGoogle再認証後に読取確認し、API queue=true、workerの既存4環境キーには分析5設定がないことを確認した。再認証成功を設定反映・配置成功へ変換せず、今回の環境値保存・配置は0。既存workerに専用分析鍵を登録して接続設定を引き継ぎ、APIとworkerを同じ指定commitへ配置する実操作は最後にMashへ確認する。承認後にserver保存後更新を実確認し、次の統合RN buildへ進む。配置／worker生成の成功や新RN実機の短縮を先取りしない。
+
+独立reviewで、保存read成功後のqueue障害が初回表示まで503にしていた点を修復した。予約／job状態の取得だけが失敗した場合は認可済み保存内容をHTTP200・refresh_status=failedで返す。保存read／source guard失敗は従来どおり拒否し、取消しを成功へ変えない。ASGIで保存内容維持とguard409を追加確認した。既存CIに保存後処理の検証も含め、async pluginと既存対象pathだけを追加する。
+
+灰色列挙非表示はec49d981の修正を継承する。server配備後は旧7701も入力保存後の先行生成結果を再利用できる。一方、画面のbackground表示とstatus pollは次の統合build後であり、現7701を新RN経路へ自動で置き換えたとはしない。今回のDB DML／DDL、Render環境値保存／配置、新GPU生成、署名buildは0。意味品質や内容の全修正を先行条件に戻さず、待ち時間の確認をこの配線変更と保存済み表示の実測へつなぐ。STRUCTURE_MAP_DELTA_PRESENT（既存保存→予約→worker→readの接続変更）。

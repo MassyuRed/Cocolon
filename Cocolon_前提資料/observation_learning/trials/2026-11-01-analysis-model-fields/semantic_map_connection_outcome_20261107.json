@@ -70,7 +70,7 @@
     "render_settings_merge": "APPLIED_AFTER_EXPLICIT_MASH_APPROVAL",
     "production_env_changed": true,
     "deploy_started": true,
-    "next_action": "Next integrated build includes hidden category/emotion context; continue reducing initial/update generation latency without changing input, coverage or semantic quality. Existing saved same-owner/source maps are reused on normal display.",
+    "next_action": "Request action-time approval to register the dedicated analysis key/settings on the existing worker and deploy API/worker at the exact prepared commit. After approval, verify server post-save refresh, then include background display/poll and hidden context in the next integrated RN build. No runtime change or new build has occurred yet.",
     "deploy_live": true,
     "initial_live_commit": "d63647a816a9f4024aee16bade7735f1b9700e9c",
     "initial_deploy": "dep-dbnglopsrm7s739cqcsg",
@@ -452,6 +452,115 @@
       "kernel_target_installation_isolated": true,
       "model_venv_dependency_pins_unchanged": true,
       "quality_acceptance_unchanged": true
+    },
+    "background_refresh_20261108": {
+      "status": "IMPLEMENTED_LOCALLY_VALIDATED_PENDING_WORKER_SETTINGS_AND_API_WORKER_DEPLOY_APPROVAL_RN_NOT_BUILT",
+      "user_requested_behavior": "Begin analysis after saving input and display the saved map when opening the screen",
+      "generation_duration_reduced_by_this_change": false,
+      "prior_synthetic_generation_seconds": 171.34955875994638,
+      "input_save_path": {
+        "owner": "api_emotion_submit._post_submit_background_async",
+        "reserve_before_notification_and_ingest": true,
+        "current_guard_metadata_check": true,
+        "existing_job_type": "myprofile_latest_refresh_v1",
+        "debounce_seconds_default": 20,
+        "same_owner_job_coalescing": true,
+        "running_updates_mark_dirty_with_microsecond_updated_at": true,
+        "queued_retry_budget_preserved": true,
+        "terminal_new_request_attempts_reset": true,
+        "generation_in_worker_not_submit_response": true,
+        "reservation_failure_does_not_fail_saved_input": true
+      },
+      "api": {
+        "latest_background_opt_in": true,
+        "background_default": false,
+        "old_7701_synchronous_default_preserved": true,
+        "background_saved_read_only": true,
+        "guard_invalid_old_map_hidden": true,
+        "existing_status_read_enqueues_or_generates": false,
+        "refresh_status_values": [
+          "queued",
+          "running",
+          "failed",
+          null
+        ],
+        "queue_error_preserves_authorized_saved_map": true,
+        "source_guard_read_failure_still_rejected": true
+      },
+      "rn": {
+        "latest_background_opt_in": true,
+        "read_timeout_ms": 15000,
+        "poll_interval_ms": 3000,
+        "poll_only_while_queued_or_running": true,
+        "poll_only_focused_and_app_active": true,
+        "version_or_visibility_change_reads_without_generation": true,
+        "owner_change_invalidates_old_requests": true,
+        "build_started": false,
+        "device_verified": false,
+        "local_tests_passed": 25
+      },
+      "boundaries": {
+        "source_and_quote_admission_preserved": true,
+        "owner_and_deleted_source_guard_preserved": true,
+        "monthly_historical_artifacts_preserved": true,
+        "new_render_services": 0,
+        "new_queue_or_tables": 0,
+        "new_schema_migrations": 0,
+        "new_model_or_training": 0,
+        "private_source_or_output_exported": false
+      },
+      "validation": {
+        "api_local_validation_passed": true,
+        "api_integrated": {
+          "passed": 308,
+          "skipped": 20,
+          "deselected": 1,
+          "subtests_passed": 4,
+          "seconds": 51.36,
+          "warnings": 1,
+          "sql_scope": "actual_isolated_SQL deselected; external PostgreSQL environment cases skipped",
+          "skip_scope": {
+            "existing_pg": 19,
+            "environment_sql": 1
+          }
+        },
+        "separate_overlapping_executions": {
+          "new_cases_passed": 18,
+          "new_cases_include_api": 2,
+          "post_submit_passed": 12,
+          "queue_passed": 9,
+          "queue_subtests_passed": 4
+        },
+        "overlapping_test_sets_summed": false,
+        "production_background_execution_verified": false,
+        "ci": {
+          "run_id": 42427888976,
+          "source_commit": "09a3f7142dcc011c315617589df845b344b15e82",
+          "status": "in_progress",
+          "conclusion": null
+        }
+      },
+      "runtime_checkpoint": {
+        "api_live_commit": "4ba011c6a72b56cbeb7505a3a6ee7c9f849d7467",
+        "api_new_source_deployed": false,
+        "worker_live_commit_prefix": "2d2f06d",
+        "worker_analysis_five_settings_inherited": false,
+        "worker_new_source_deployed": false,
+        "render_google_reauthentication_completed": true,
+        "render_configuration_and_deploy_result": "NOT_PERFORMED_PENDING_ACTION_TIME_APPROVAL",
+        "api_queue_enabled": true,
+        "worker_existing_environment_key_count": 4,
+        "render_environment_saves_this_unit": 0,
+        "render_deploys_this_unit": 0,
+        "new_gpu_generations_this_unit": 0,
+        "db_dml_or_ddl_this_unit": 0,
+        "new_builds_this_unit": 0
+      },
+      "structure_map_delta": "PRESENT_EXISTING_SAVE_QUEUE_WORKER_READ_CONNECTION",
+      "old_7701_server_precompute_benefit_after_deploy": true,
+      "new_background_display_poll_requires_rn_build": true,
+      "api_source_commit": "09a3f7142dcc011c315617589df845b344b15e82",
+      "api_source_remote_readback_files": 9
     }
   }
 }

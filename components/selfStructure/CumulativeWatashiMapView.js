@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { ActivityIndicator, Modal, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, AppState, Modal, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useIsFocused } from '@react-navigation/native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useAuth } from '../../AuthContext';
 import { useSubscription } from '../../SubscriptionContext';
@@ -15,9 +16,24 @@ import CocolonBackButton from '../CocolonBackButton';
 
 const dateLabel = value => value ? new Date(value).toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' }) : '';
 const monthLabel = value => value ? `${value.slice(0, 4)}年${Number(value.slice(5, 7))}月` : '';
+const REFRESH_POLL_MS = 3000;
+const pendingRefresh = value => value === 'queued' || value === 'running';
+function readRefreshStatus(data) {
+  const value = data?.refresh_status;
+  if (value == null || ['queued', 'running', 'failed'].includes(value)) return value || null;
+  throw new Error('analysis_refresh_status_invalid');
+}
+const temporarilyUnavailable = error => {
+  const status = Number(error?.status);
+  return (Number.isInteger(status) && status >= 500 && status <= 599)
+    || error?.name === 'TimeoutError'
+    || (error?.name === 'TypeError' && /network|fetch/i.test(String(error?.message || '')));
+};
 export default function CumulativeWatashiMapView({ reportId = null, month = null, onBack, onLatestSeenVersion, embedded = false, hideHeader = false }) {
   const { session } = useAuth();
   const { tier, loading: planLoading } = useSubscription();
+  const focused = useIsFocused();
+  const [appActive, setAppActive] = useState(!['background', 'inactive'].includes(AppState.currentState));
   const { colors, themeName } = useTheme();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => makeStyles(colors, ui), [colors, ui]);
@@ -33,68 +49,123 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
   const [evidence, setEvidence] = useState(null);
   const [compare, setCompare] = useState(false);
   const [about, setAbout] = useState(false);
+  const stateRef = useRef(state);
+  stateRef.current = state;
+  const compareRef = useRef(compare);
+  compareRef.current = compare;
   const ink = colors?.TEXT_ON_LIGHT || '#17212b';
   const paper = colors?.BG_SILVER || '#fff';
 
-  const load = useCallback(async (withCurrent = false, force = false) => {
+  const load = useCallback(async (withCurrent = false, force = false, readOnly = false) => {
     const seq = ++request.current;
     evidenceRequest.current += 1;
-    setState({ key, loading: true });
+    setState(previous => previous.key === key ? { ...previous, loading: true, error: null, refreshError: false } : { key, loading: true });
     setEvidence(null);
     if (!owner) { setState({ key, error: 'ログインしてから、もう一度開いてください。' }); return; }
     const active = () => currentKey.current === key && request.current === seq;
     try {
-      let row, now = null, comparisonFailed = false;
+      let row, now = null, comparisonFailed = false, refreshStatus = null;
       if (reportId) {
         const data = await apiGet(buildSelfStructureReportDetailPath(reportId, month), {
-          expectedUserId: owner, headers: { 'X-Watashi-Map-Renderer': 'semantic.v1' }, timeoutMs: 240000 });
+          expectedUserId: owner, headers: { 'X-Watashi-Map-Renderer': 'semantic.v1' }, timeoutMs: 15000 });
         if (!active()) return;
         row = checkedMapRow(data?.item);
         if (row.id !== reportId || (month && row.snapshot_month !== month)) throw new Error('analysis_month_mismatch');
       } else {
-        const data = await apiGet(`${SELF_STRUCTURE_WIRE.routes.latest}?ensure=true${force ? '&force=true' : ''}`, {
-          expectedUserId: owner, headers: { 'X-Watashi-Map-Renderer': 'semantic.v1' }, timeoutMs: 240000 });
+        const data = await apiGet(`${SELF_STRUCTURE_WIRE.routes.latest}?${readOnly ? 'ensure=false&background=true' : `ensure=true&background=true${force ? '&force=true' : ''}`}`, {
+          expectedUserId: owner, headers: { 'X-Watashi-Map-Renderer': 'semantic.v1' }, timeoutMs: 15000 });
         if (!active()) return;
         row = checkedCurrentResult(data);
+        refreshStatus = readRefreshStatus(data);
         if (!row) {
-          if (active()) setState({ key, empty: true, insufficient: data.reason === 'insufficient_input', coverage: data?.map_context });
+          if (active()) setState({ key, empty: true, insufficient: data.reason === 'insufficient_input', coverage: data?.map_context, refreshStatus });
           return;
         }
       }
       if (withCurrent && reportId) {
         try {
-          const data = await apiGet(`${SELF_STRUCTURE_WIRE.routes.latest}?ensure=true`, {
-            expectedUserId: owner, headers: { 'X-Watashi-Map-Renderer': 'semantic.v1' }, timeoutMs: 240000 });
+          const data = await apiGet(`${SELF_STRUCTURE_WIRE.routes.latest}?${readOnly ? 'ensure=false&background=true' : 'ensure=true&background=true'}`, {
+            expectedUserId: owner, headers: { 'X-Watashi-Map-Renderer': 'semantic.v1' }, timeoutMs: 15000 });
           if (!active()) return;
           now = checkedCurrentResult(data);
+          refreshStatus = readRefreshStatus(data);
         } catch (error) {
           if (!active()) return;
-          const status = Number(error?.status);
-          const temporarilyUnavailable = (Number.isInteger(status) && status >= 500 && status <= 599)
-            || error?.name === 'TimeoutError'
-            || (error?.name === 'TypeError' && /network|fetch/i.test(String(error?.message || '')));
-          if (!temporarilyUnavailable) throw error;
+          if (!temporarilyUnavailable(error)) throw error;
           comparisonFailed = true;
         }
       }
       if (active()) {
-        setState({ key, row, now, comparisonUnavailable: withCurrent && !now, comparisonFailed });
+        setState({ key, row, now, comparisonUnavailable: withCurrent && !now, comparisonFailed, refreshStatus });
       }
-    } catch {
-      if (active()) setState({ key, error: 'マップを取得できませんでした。通信状況や現在の閲覧範囲を確認して、再取得してください。' });
+    } catch (error) {
+      if (active()) setState(previous => previous.key === key && previous.row && temporarilyUnavailable(error)
+        ? { ...previous, loading: false, refreshStatus: null, refreshError: true }
+        : { key, error: 'マップを取得できませんでした。通信状況や現在の閲覧範囲を確認して、再取得してください。' });
     }
   }, [key, owner, reportId, month]);
 
   useEffect(() => {
+    const listener = AppState.addEventListener('change', next => setAppActive(next === 'active'));
+    return () => listener.remove();
+  }, []);
+
+  useEffect(() => {
+    compareRef.current = false;
     setCompare(false);
     setAbout(false);
     setEvidence(null);
-    if (!planLoading) load(false);
-    return () => { request.current += 1; evidenceRequest.current += 1; };
-  }, [load, planLoading]);
+  }, [key]);
 
   useEffect(() => {
-    if (state.key !== key || !state.row || planLoading) return;
+    setEvidence(null);
+    if (!planLoading && focused && appActive) load(compareRef.current);
+    return () => { request.current += 1; evidenceRequest.current += 1; };
+  }, [load, planLoading, focused, appActive]);
+
+  useEffect(() => {
+    if (!focused || !appActive || planLoading || state.key !== key || state.loading
+        || (reportId && !compare) || !pendingRefresh(state.refreshStatus)) return undefined;
+    const seq = request.current;
+    let disposed = false, timer;
+    const active = () => !disposed && currentKey.current === key && request.current === seq;
+    const schedule = () => { timer = setTimeout(poll, REFRESH_POLL_MS); };
+    const poll = async () => {
+      try {
+        const data = await apiGet(SELF_STRUCTURE_WIRE.routes.latestStatus, { expectedUserId: owner, timeoutMs: 15000 });
+        if (!active()) return;
+        if (data?.status !== 'ok' || typeof data.has_visible_content !== 'boolean'
+            || (data.version_key != null && typeof data.version_key !== 'string')) throw new Error('analysis_refresh_status_invalid');
+        const refreshStatus = readRefreshStatus(data);
+        const displayed = reportId ? stateRef.current.now : stateRef.current.row;
+        const version = displayed?.content_json?.watashiMap?.projection_of || null;
+        if ((data.version_key || null) !== version || (!!displayed !== data.has_visible_content)) {
+          await load(compareRef.current, false, true);
+          return;
+        }
+        if (stateRef.current.refreshStatus !== refreshStatus || stateRef.current.refreshError) {
+          setState(previous => previous.key === key ? { ...previous, refreshStatus, refreshError: false } : previous);
+        }
+        if (pendingRefresh(refreshStatus)) schedule();
+      } catch (error) {
+        if (!active()) return;
+        if (!temporarilyUnavailable(error)) {
+          request.current += 1;
+          evidenceRequest.current += 1;
+          setEvidence(null);
+          setState({ key, error: 'マップを取得できませんでした。通信状況や現在の閲覧範囲を確認して、再取得してください。' });
+          return;
+        }
+        setState(previous => previous.key === key ? { ...previous, refreshError: true } : previous);
+        schedule();
+      }
+    };
+    schedule();
+    return () => { disposed = true; clearTimeout(timer); };
+  }, [focused, appActive, planLoading, state.key, state.loading, state.refreshStatus, key, owner, reportId, compare, load]);
+
+  useEffect(() => {
+    if (state.key !== key || !state.row || planLoading || !focused || !appActive) return;
     if (reportId) {
       apiPost('/report-reads/mark', { report_id: state.row.id,
         report_table: 'analysis_observed_artifacts', report_scope: 'myprofile' },
@@ -102,7 +173,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
     } else if (typeof seenCallback.current === 'function') {
       try { Promise.resolve(seenCallback.current(state.row.content_json.watashiMap.projection_of)).catch(() => {}); } catch {}
     }
-  }, [state, key, reportId, owner, planLoading]);
+  }, [state.key, state.row, key, reportId, owner, planLoading, focused, appActive]);
 
   const showEvidence = useCallback(async (row, nodeRef) => {
     const seq = ++evidenceRequest.current;
@@ -150,11 +221,17 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
     </View> : null}
     <Body {...(embedded ? { style: [styles.body, styles.embeddedBody] } : { contentContainerStyle: styles.body })}>
       {!visible || state.loading ? <View style={{ gap: 12 }}>
-        <ActivityIndicator color={colors.TITLE_GOLD} accessibilityLabel="記録を読み取っています" />
-        <Text style={[styles.meta, { color: ink }]}>記録を読み取り、つながりを整理しています。</Text>
+        <ActivityIndicator color={colors.TITLE_GOLD} accessibilityLabel="保存したマップを取得しています" />
+        <Text style={[styles.meta, { color: ink }]}>保存したマップを取得しています。</Text>
       </View> : null}
+      {visible && pendingRefresh(state.refreshStatus) ? <Text style={[styles.meta, { color: ink }]} accessibilityLiveRegion="polite">
+        わたしマップを更新中です。{state.row ? '保存したマップを先に表示しています。' : '更新が終わると表示されます。'}
+      </Text> : null}
+      {visible && (state.refreshStatus === 'failed' || state.refreshError) ? <Text style={styles.error} accessibilityRole="alert">
+        更新結果を取得できませんでした。再取得で確認できます。
+      </Text> : null}
       {visible && state.error ? <Text style={styles.error} accessibilityRole="alert">{state.error}</Text> : null}
-      {visible && state.empty ? <><Text style={[styles.bodyText, { color: ink }]}>{state.insufficient ? '今回の記録から、表示できる分析を作成できませんでした。' : '現在表示できるわたしマップはありません。'}</Text>{about ? coverage(state.coverage) : null}</> : null}
+      {visible && state.empty && !pendingRefresh(state.refreshStatus) ? <><Text style={[styles.bodyText, { color: ink }]}>{state.insufficient ? '今回の記録から、表示できる分析を作成できませんでした。' : '現在表示できるわたしマップはありません。'}</Text>{about ? coverage(state.coverage) : null}</> : null}
       {visible && state.row ? <>
         {reportId ? <Text style={[styles.meta, { color: ink }]}>{monthLabel(month)}に保存した当時のマップ</Text> : null}
         {reportId ? <CocolonButton variant="secondary" onPress={() => { setCompare(!compare); load(!compare); }}
@@ -162,7 +239,7 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
         {compare ? <Text style={[styles.sectionTitle, { color: ink }]}>当時：{monthLabel(month)}</Text> : null}
         {renderMap(state.row)}
         {compare && state.now ? <><Text style={[styles.sectionTitle, { color: ink }]}>現在</Text>{renderMap(state.now)}</> : null}
-        {compare && state.comparisonUnavailable ? <Text style={[styles.bodyText, { color: ink }]} accessibilityRole={state.comparisonFailed ? 'alert' : undefined}>
+        {compare && state.comparisonUnavailable && !pendingRefresh(state.refreshStatus) ? <Text style={[styles.bodyText, { color: ink }]} accessibilityRole={state.comparisonFailed ? 'alert' : undefined}>
           {state.comparisonFailed
             ? '現在のマップを取得できませんでした。当時のマップは保存されています。再取得で確認できます。'
             : '現在のマップはまだ表示できません。当時のマップは保存されています。'}
@@ -170,9 +247,9 @@ export default function CumulativeWatashiMapView({ reportId = null, month = null
       </> : null}
       {visible && (state.row || state.empty) ? <CocolonButton variant="secondary" onPress={() => setAbout(!about)} title={about ? '分析について閉じる' : '分析について'} /> : null}
       {visible && about ? <Text style={[styles.meta, { color: ink }]}>{getWatashiMapHistoryRetentionLabel(tier)}</Text> : null}
-      {visible && !state.loading ? <CocolonButton variant="secondary"
-        onPress={() => load(compare, !!state.row && !reportId)}
-        title={state.row && !reportId ? '分析を更新' : '再取得'} /> : null}
+      {visible && !state.loading && !pendingRefresh(state.refreshStatus) ? <CocolonButton variant="secondary"
+        onPress={() => load(compare, !reportId && (!!state.row || state.refreshStatus === 'failed'))}
+        title={!reportId && (state.row || state.refreshStatus === 'failed') ? '分析を更新' : '再取得'} /> : null}
     </Body>
     <Modal visible={!!evidence && evidence.key === key} transparent animationType="fade" onRequestClose={closeEvidence} supportedOrientations={MODAL_ORIENTATIONS}>
       <SafeAreaProvider><SafeAreaView edges={['top', 'bottom', 'left', 'right']} style={styles.overlay}><View style={styles.dialog}>

@@ -22,8 +22,9 @@ function deferred() { let resolve,reject; const promise=new Promise((r,j)=>{reso
 function button(render,label) { return render.root.findAllByType('TouchableOpacity').find(n=>n.findAllByType('Text').some(t=>String(t.props.children).includes(label))); }
 function harness(get) {
   const auth={session:{user:{id:owner}}}, plan={tier:'free',loading:false}, calls=[];
-  const modules=new Map();
-  const native={View:'View',Text:'Text',ScrollView:'ScrollView',TouchableOpacity:'TouchableOpacity',ActivityIndicator:'ActivityIndicator',SafeAreaView:'SafeAreaView',
+  const modules=new Map(), focus={value:true}, appListeners=new Set();
+  const appState={currentState:'active',addEventListener:(event,listener)=>{appListeners.add(listener);return {remove:()=>appListeners.delete(listener)};}};
+  const native={AppState:appState,View:'View',Text:'Text',ScrollView:'ScrollView',TouchableOpacity:'TouchableOpacity',ActivityIndicator:'ActivityIndicator',SafeAreaView:'SafeAreaView',
     Modal: props=>props.visible ? React.createElement('ModalContent',props,props.children) : null,
     FlatList: props=>React.createElement('FlatList',props,props.data.map(item=>React.createElement(React.Fragment,{key:props.keyExtractor(item)},props.renderItem({item})))),
     StyleSheet:{create:x=>x},Alert:{alert(){}},NativeModules:{},Linking:{},Share:{},RefreshControl:'RefreshControl'};
@@ -37,6 +38,7 @@ function harness(get) {
     const req=name=>{
       if(name==='react')return React;
       if(name==='react-native')return native;
+      if(name==='@react-navigation/native')return {useIsFocused:()=>focus.value};
       if(name==='react-native-svg')return {__esModule:true,default:'Svg',Path:'Path'};
       if(name==='react-native-safe-area-context')return {SafeAreaView:'SafeAreaView',SafeAreaProvider:'SafeAreaProvider'};
       if(name.includes('react-native-vector-icons'))return ()=>null;
@@ -56,7 +58,7 @@ function harness(get) {
     };
     Function('require','module','exports',code)(req,m,m.exports);return m.exports;
   }
-  return {auth,plan,calls,load};
+  return {auth,plan,calls,load,focus,setAppState:next=>{appState.currentState=next;for(const listener of appListeners)listener(next);}};
 }
 
 test('cumulative admission binds profile, counts, artifact id and projection',()=>{
@@ -238,7 +240,8 @@ test('semantic renderer is negotiated with owner binding and processing metadata
   assert(!JSON.stringify(view.toJSON()).includes('根拠として結び付いた記録'));
   const latestCall=h.calls.find(c=>c[1].includes('/latest?ensure=true'));
   assert.equal(latestCall[2].headers['X-Watashi-Map-Renderer'],'semantic.v1');
-  assert.equal(latestCall[2].timeoutMs,240000);
+  assert.equal(latestCall[2].timeoutMs,15000);
+  assert(latestCall[1].includes('background=true'));
   assert.equal(latestCall[2].expectedUserId,owner);
   await act(async()=>button(view,'分析について').props.onPress());
   const about=JSON.stringify(view.toJSON());
@@ -259,8 +262,116 @@ test('current analysis is forced only by the explicit update action, with the au
   assert(!updates()[0][1].includes('force=true'),'opening a saved map must not acquire a paid model update');
   await act(async()=>button(view,'分析を更新').props.onPress());
   assert.equal(updates().length,2);
-  assert(updates()[1][1].endsWith('?ensure=true&force=true'));
+  assert(updates()[1][1].endsWith('?ensure=true&background=true&force=true'));
   assert.equal(updates()[1][2].expectedUserId,owner);
   assert.equal(updates()[1][2].headers['X-Watashi-Map-Renderer'],'semantic.v1');
+  await act(async()=>view.unmount());
+});
+
+test('a queued update displays the saved map immediately and rereads only the completed saved version',async t=>{
+  t.mock.timers.enable({apis:['setTimeout']});
+  const next=copy(projection);next.projection_of='artifact:00000000000000000000000000000066@1';next.nodes[0].visible_label='BACKGROUND_COMPLETED_MAP';
+  let checks=0;
+  const h=harness(async url=>url.endsWith('/latest/status')
+    ? {status:'ok',version_key:++checks===1?projection.projection_of:next.projection_of,has_visible_content:true,refresh_status:checks===1?'running':null}
+    : url.endsWith('?ensure=false&background=true')?latest(next):{...latest(),refresh_status:'queued'});
+  const Screen=h.load('components/selfStructure/CumulativeWatashiMapView.js').default;let view;
+  await act(async()=>{view=Renderer.create(React.createElement(Screen));});
+  assert(JSON.stringify(view.toJSON()).includes(projection.nodes[0].visible_label));
+  assert(JSON.stringify(view.toJSON()).includes('保存したマップを先に表示しています。'));
+  assert.equal(view.root.findAllByType('ActivityIndicator').length,0);
+  assert.equal(h.calls.filter(c=>c[1].includes('ensure=true')).length,1);
+  assert(h.calls.find(c=>c[1].includes('ensure=true'))[1].includes('background=true'));
+  await act(async()=>{t.mock.timers.tick(3000);});
+  assert.equal(checks,1);assert(!JSON.stringify(view.toJSON()).includes('BACKGROUND_COMPLETED_MAP'));
+  await act(async()=>{t.mock.timers.tick(3000);});
+  assert(JSON.stringify(view.toJSON()).includes('BACKGROUND_COMPLETED_MAP'));
+  assert(!JSON.stringify(view.toJSON()).includes('わたしマップを更新中です。'));
+  assert.equal(h.calls.filter(c=>c[1].includes('ensure=true')).length,1,'polling must never start another model job');
+  assert.equal(h.calls.filter(c=>c[1].endsWith('?ensure=false&background=true')).length,1);
+  assert(h.calls.every(c=>c[2].expectedUserId===owner));
+  await act(async()=>view.unmount());
+});
+
+test('an empty queued map waits without a blank-result error and offers explicit retry after failure',async t=>{
+  t.mock.timers.enable({apis:['setTimeout']});
+  const empty={...latest(),report_id:null,has_visible_content:false,meta:null,content_text:null,map_context:null,refresh_status:'queued'};
+  const h=harness(async url=>url.endsWith('/latest/status')?{status:'ok',version_key:null,has_visible_content:false,refresh_status:'failed'}:empty);
+  const Screen=h.load('components/selfStructure/CumulativeWatashiMapView.js').default;let view;
+  await act(async()=>{view=Renderer.create(React.createElement(Screen));});
+  assert(JSON.stringify(view.toJSON()).includes('更新が終わると表示されます。'));
+  assert(!JSON.stringify(view.toJSON()).includes('現在表示できるわたしマップはありません。'));
+  await act(async()=>{t.mock.timers.tick(3000);});
+  assert(JSON.stringify(view.toJSON()).includes('更新結果を取得できませんでした。'));
+  assert(button(view,'分析を更新'));
+  await act(async()=>button(view,'分析を更新').props.onPress());
+  assert(h.calls.at(-1)[1].endsWith('?ensure=true&background=true&force=true'));
+  await act(async()=>view.unmount());
+});
+
+test('refresh polling stops off-screen and in the background and checks saved state again on return',async t=>{
+  t.mock.timers.enable({apis:['setTimeout']});
+  const h=harness(async url=>url.endsWith('/latest/status')
+    ?{status:'ok',version_key:projection.projection_of,has_visible_content:true,refresh_status:'running'}
+    :{...latest(),refresh_status:'running'});
+  const Screen=h.load('components/selfStructure/CumulativeWatashiMapView.js').default;let view;
+  await act(async()=>{view=Renderer.create(React.createElement(Screen));});
+  await act(async()=>h.setAppState('background'));
+  const before=h.calls.length;
+  await act(async()=>{t.mock.timers.tick(9000);});
+  assert.equal(h.calls.length,before);
+  await act(async()=>h.setAppState('active'));
+  assert.equal(h.calls.length,before+1,'returning foreground must revalidate the saved map');
+  h.focus.value=false;
+  await act(async()=>view.update(React.createElement(Screen)));
+  const blurred=h.calls.length;
+  await act(async()=>{t.mock.timers.tick(9000);});
+  assert.equal(h.calls.length,blurred);
+  h.focus.value=true;
+  await act(async()=>view.update(React.createElement(Screen)));
+  assert.equal(h.calls.length,blurred+1);
+  await act(async()=>view.unmount());
+});
+
+test('an old owner status response cannot replace the next owner map or report its failure',async t=>{
+  t.mock.timers.enable({apis:['setTimeout']});
+  const pending=deferred(),nextOwner='00000000-0000-0000-0000-000000000002';
+  const next=copy(projection);next.projection_of='artifact:00000000000000000000000000000066@1';next.nodes[0].visible_label='NEXT_OWNER_SAVED_MAP';
+  const h=harness(async(url,opts)=>url.endsWith('/latest/status')?pending.promise
+    :opts.expectedUserId===nextOwner?latest(next):{...latest(),refresh_status:'running'});
+  const Screen=h.load('components/selfStructure/CumulativeWatashiMapView.js').default;let view;
+  await act(async()=>{view=Renderer.create(React.createElement(Screen));});
+  await act(async()=>{t.mock.timers.tick(3000);});
+  h.auth.session.user.id=nextOwner;
+  await act(async()=>view.update(React.createElement(Screen)));
+  await act(async()=>pending.resolve({status:'ok',version_key:projection.projection_of,has_visible_content:true,refresh_status:'failed'}));
+  const body=JSON.stringify(view.toJSON());
+  assert(body.includes('NEXT_OWNER_SAVED_MAP'));
+  assert(!body.includes('更新結果を取得できませんでした。'));
+  assert(!body.includes(projection.nodes[0].visible_label));
+  await act(async()=>view.unmount());
+});
+
+test('an invalidated saved map clears immediately and keeps polling until its background replacement is saved',async t=>{
+  t.mock.timers.enable({apis:['setTimeout']});
+  const empty={...latest(),report_id:null,has_visible_content:false,meta:null,content_text:null,map_context:null,refresh_status:'running'};
+  const next=copy(projection);next.projection_of='artifact:00000000000000000000000000000066@1';next.nodes[0].visible_label='SAVED_AFTER_INVALIDATION';
+  let checks=0,reads=0;
+  const h=harness(async url=>url.endsWith('/latest/status')
+    ?++checks===1?{status:'ok',version_key:null,has_visible_content:false,refresh_status:'running'}
+      :{status:'ok',version_key:next.projection_of,has_visible_content:true,refresh_status:null}
+    :url.endsWith('?ensure=false&background=true')?++reads===1?empty:latest(next):{...latest(),refresh_status:'running'});
+  const Screen=h.load('components/selfStructure/CumulativeWatashiMapView.js').default;let view;
+  await act(async()=>{view=Renderer.create(React.createElement(Screen));});
+  assert(JSON.stringify(view.toJSON()).includes(projection.nodes[0].visible_label));
+  await act(async()=>{t.mock.timers.tick(3000);});
+  assert.equal(view.root.findAllByProps({testID:'watashi-map-v2'}).length,0);
+  assert(JSON.stringify(view.toJSON()).includes('更新が終わると表示されます。'));
+  assert.equal(reads,1);
+  await act(async()=>{t.mock.timers.tick(3000);});
+  assert.equal(checks,2);assert.equal(reads,2);
+  assert(JSON.stringify(view.toJSON()).includes('SAVED_AFTER_INVALIDATION'));
+  assert(!JSON.stringify(view.toJSON()).includes('わたしマップを更新中です。'));
+  assert.equal(h.calls.filter(c=>c[1].includes('ensure=true')).length,1,'replacement polling cannot enqueue another job');
   await act(async()=>view.unmount());
 });
