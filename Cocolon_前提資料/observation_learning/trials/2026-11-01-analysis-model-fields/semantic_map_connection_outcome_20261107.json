@@ -70,7 +70,7 @@
     "render_settings_merge": "APPLIED_AFTER_EXPLICIT_MASH_APPROVAL",
     "production_env_changed": true,
     "deploy_started": true,
-    "next_action": "API and existing worker are deployed and connected. Monitor the single integrated RN build42430220604 (expected7801) to its terminal result. Apple console inspection was user-aborted; no further Apple actions. Upload, Apple processing, internal distribution and device result remain separate. Observe natural saved-input background generation and actual-device saved display without requiring all semantic-quality repairs first.",
+    "next_action": "API and existing worker are deployed and connected. The single integrated RN build42430220604 (7801) succeeded through TestFlight upload. Apple console inspection was user-aborted; no further Apple actions taken. Apple processing, existing internal-group distribution and device result are unverified. Observe natural saved-input background generation and actual-device saved display without requiring all semantic-quality repairs first.",
     "deploy_live": true,
     "initial_live_commit": "d63647a816a9f4024aee16bade7735f1b9700e9c",
     "initial_deploy": "dep-dbnglopsrm7s739cqcsg",
@@ -454,7 +454,7 @@
       "quality_acceptance_unchanged": true
     },
     "background_refresh_20261108": {
-      "status": "DEPLOYED_SERVER_VERIFIED_INTEGRATED_RN_BUILD_IN_PROGRESS",
+      "status": "DEPLOYED_SERVER_VERIFIED_INTEGRATED_RN_TESTFLIGHT_UPLOAD_SUCCEEDED",
       "user_requested_behavior": "Begin analysis after saving input and display the saved map when opening the screen",
       "generation_duration_reduced_by_this_change": false,
       "prior_synthetic_generation_seconds": 171.34955875994638,
@@ -506,11 +506,20 @@
           "source_commit": "861082d0e22f695d3aeee06f76924bcd6fcbe1c0",
           "app_source_matches": "4e776e2f76281b5ce55a5da547ba3f315d82ec93",
           "expected_build_number": 7801,
-          "status": "in_progress",
-          "upload_verified": false,
+          "status": "completed",
+          "upload_verified": true,
           "apple_processing_verified": false,
           "existing_internal_group_testing_verified": false,
-          "apple_console_inspection": "User aborted read-only inspection; no further Apple actions"
+          "apple_console_inspection": "User aborted read-only inspection; no further Apple actions",
+          "conclusion": "success",
+          "all_steps_success": 19,
+          "upload_completed_at_utc": "2026-11-08T00:45:56Z",
+          "job_completed_at_utc": "2026-11-08T00:46:03Z",
+          "new_dispatch_or_rerun_after_initial": 0,
+          "build_number_source": "Pinned workflow expression: run78*100+attempt1",
+          "build_number_log_verified": false,
+          "build_number_apple_verified": false,
+          "job_log_read_limit": "Dedicated log tool transport closed; alternate fetch job/logs endpoint unsupported; no further retries"
         }
       },
       "boundaries": {
@@ -673,7 +682,17 @@
           "generation_requested": false
         },
         "artificial_jobs_enqueued": 0,
-        "new_actual_input_background_generation_observed": false
+        "new_actual_input_background_generation_observed": false,
+        "after_testflight_upload_job_aggregate": {
+          "done": 944,
+          "queued": 0,
+          "running": 0,
+          "failed": 0,
+          "latest_updated_at": "2026-11-07T06:14:36Z",
+          "latest_finished_at": "2026-11-07T06:14:36Z",
+          "changed_since_predeployment": false,
+          "body_or_identity_exported": false
+        }
       }
     }
   }
