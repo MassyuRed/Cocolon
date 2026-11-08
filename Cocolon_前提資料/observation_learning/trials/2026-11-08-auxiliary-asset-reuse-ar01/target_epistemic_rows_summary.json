@@ -1,0 +1,127 @@
+{
+  "schema": "ar01.target_epistemic_rows.actual_summary.v1",
+  "date_jst": "2026-11-09",
+  "status": "ROWS_MODEL_REJECTED_NATIVE_SOURCE_TO_BODY_EXERCISED_ROLE_DIRECTION_UNRESOLVED",
+  "primary_outcome": "BLOCKER_NARROWED",
+  "api_source_commit_unchanged": "c6555fd5b81cd4ecda1bafdec60aa311c9e7feea",
+  "inputs": 4,
+  "new_fictional_source_rows": 0,
+  "normal8_material_and_source_refs_exact_prior": true,
+  "fresh_model_calls": 8,
+  "baseline_calls_this_execution": 0,
+  "reused_prior_actual_baseline_bodies": 4,
+  "model_meaning_calls": 4,
+  "model_meaning_receipt_statuses": {
+    "INVALID_FORMAT": 4
+  },
+  "model_meaning_admitted": 0,
+  "model_meaning_authored_bodies": 0,
+  "native_source_readings": 4,
+  "native_target_statuses": 7,
+  "native_state_counts": {
+    "NOT_RECORDED": 6,
+    "UNDECIDED": 1
+  },
+  "native_packet_is_model_raw": false,
+  "native_provider": "CMEE_NATIVE_FINITE_WRITTEN_STATE",
+  "native_model_revision_usage": null,
+  "native_stop_is_adapter_completion_not_model_finish": true,
+  "independent_native_semantic_confirmation": false,
+  "native_candidate_body_calls": 4,
+  "all_actual_model_http200_stop": true,
+  "model_rows_seconds": 13.755983743118122,
+  "native_body_seconds": 8.656390697928146,
+  "cumulative_comparison_processing_seconds": 22.41237778123468,
+  "max_model_calls": 8,
+  "max_comparison_processing_seconds": 240,
+  "source_proof_did_not_repair_model_raw": true,
+  "wording_rewrites": 0,
+  "provider_retries": 0,
+  "training_updates": 0,
+  "new_model_loads": 0,
+  "actual_tokenizer_max_input_tokens": 1058,
+  "truncation": false,
+  "tests_passed": 434,
+  "test_seconds": 18.21,
+  "warnings": 1,
+  "native_normal_adoption": false,
+  "normal_product_quality_accepted": false,
+  "quality": {
+    "all4sources_4rowraw_4native_snapshots_8beforeafter_bodies_read_by_root_and_independent": true,
+    "normal_adoption": false,
+    "role_reversal_ids": [
+      "NI",
+      "TRANSFER06"
+    ],
+    "limited_differences": [
+      "NI metadata/time recital removed",
+      "TRANSFER06 unwritten no longer becomes undecided"
+    ],
+    "preserved_control": "EXPLICIT_SELF request/undecided/weak anxiety retained",
+    "KARA_caveat": "Selected calm is slightly broadened to receptive stance",
+    "unrequested_questions": 0,
+    "blind_generalization": false,
+    "Mash_formal_acceptance": false
+  },
+  "sql": {
+    "replayed_prior_baseline_bodies": 4,
+    "new_native_bodies": 4,
+    "all8_saved_and_reopened": true,
+    "same_and_new_service_GET_equal": true,
+    "source_and_GET_thread_events_unchanged": true,
+    "GET_provider_reader_engine_prepare_semantic_calls": 0,
+    "real_database_requests": 0,
+    "new_generations": 0,
+    "retries": 0,
+    "wording_rewrites": 0,
+    "native_same_source_raw_re_admissions": 4,
+    "sql_semantic_packet_and_meaning_equal_except_identity": true,
+    "native_payloads_exact_capture": 1,
+    "native_payloads_different_only_in_target_refs": 3,
+    "baseline_payloads_exact_capture": 4,
+    "source_refs_equal_capture": 2,
+    "user_id_SQL_projection_differences": 6,
+    "source_projection_not_modified": true,
+    "semantic_snapshot_not_persisted_as_normal_thread_checkpoint": true
+  },
+  "reader": {
+    "saved_reports": 8,
+    "verdicts": {
+      "UNASSESSED": 8
+    },
+    "total_segments": 18,
+    "checked_segments": 0,
+    "full_reply_semantic_coverage": false
+  },
+  "shared_server_pid": 26784,
+  "shared_PID_serving_source_Analysis_weights_unchanged": true,
+  "health_http_status": 200,
+  "source_identity": {
+    "base_commit": "c6555fd5b81cd4ecda1bafdec60aa311c9e7feea",
+    "source_sha256": {
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply.py": "b01f06d10786b0e685135a436a297382807f6f4719cc27e1aa6904cb8403b76b",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply_epistemic.py": "2e6930bfb1e4db196a95031a3fbdd8ddc2f71399d0c002f212cd89eb30d4d5c4",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py": "d541736a4b46286ac214b8f5c71e624e538417ee5f2dd54c7d61b60c45a19f39",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/model_candidate_source.py": "2e3baf1f8275bb6345b23991ffeaf522ca4f7729d15540837a4f73267f5f30d0",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/preparation.py": "176f645055174dae5253f26394a3b3e6ea5fdb4ff4a2d802c4e3424619eab120"
+    },
+    "preimage_git_blobs": {
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply.py": "26cb04f4c8dfb21397694eff91e52ed6cbe3d392",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply_epistemic.py": null,
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py": "c27fab189fa4a3a19bd8ad6dcb0f281726bb5c61",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/model_candidate_source.py": "18a4d08af70eff6c8f525204087327e02539dd60",
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/preparation.py": "ea54b58484ba7b966b408ee74b31bc3118b2ca69"
+    },
+    "patch_sha256": "2e2d08cb08713058751bd982475c1bc7e2901833f9409f729225d242d52470f9",
+    "tests_passed": 434,
+    "test_seconds": 18.21,
+    "warnings": 1,
+    "normal_adoption": false,
+    "scope": "Explicit offline free initial finite written target states; native source derivation is not model meaning or independent semantics"
+  },
+  "ordinary_API_Render_real_DB_RN_build_changes": 0,
+  "structure_map_delta": "NONE: unadopted research patch only; no active application owner/profile/wire/persistence change",
+  "next": "Preserve requester versus asked-person direction from source-bound target meaning into existing single natural author; do not resume free-JSON/row prompt-only loops or claim native source-derived candidates as model interpretations.",
+  "AR01_complete": false,
+  "all_necessary_asset_reuse_complete": false
+}

@@ -2017,3 +2017,23 @@ API source c6555fd5・通常OFF・採用false、Render配置／実DB／RN／buil
 [全結果・原本・次作業](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/target_epistemic_review.md)／[本文なし集計](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/target_epistemic_summary.json)／[研究source patch](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/target_epistemic_source_candidate.patch)。全private入力／18raw／2版messagesとpatch／失敗・受領／root・独立全文読解／SQL／testを58member・208879bytesで保全、保存後identity／version／size再読確認。patchはfresh c655 Git blob preimageから再構成・別root適用で最終source一致。
 
 学習／新load／provider retry／共有server再起動0、同PID26784・source f95fc7ce・Analysis重み不変、health200。API source c6555fd5・通常OFF・採用false、Render配置／実Supabase／RN/build／通常model設定変更0。STRUCTURE_MAP_DELTA_NONE（研究patch保全のみでactive owner／module／型／wire／保存責務追加なし）。Primary outcomeはBLOCKER_NARROWED。次は既存意味候補契約・符号化部品で原欄→対象句→状態根拠の選択を成立させ、現意味採用→単一作者へ通す改修。今回の自由JSON指示周回、raw修補、意味gold注入で代替しない。AR-01・AR-02〜08・全資産活用・端末／正式受入れは未完了。AR-02は一般AR-01完成の全面待ちにしないが今回未着手。
+
+
+<a id="auxiliary-target-epistemic-rows-native-20261109"></a>
+## 31. 補助経路活用AR-01 — 行形式の実意味候補は拒否、native明記状態から4本文を比較
+
+2026-11-09 JST。§30を継承。旧named／fixed-rowの資格・schemaを広げず、strict JSON／cell型／alias／quote位置照合の部品を回収し、明示研究formatでモデルの責務を欄・対象引用・根拠文引用・状態・originの5セルへ絞った。全原欄を提示し、readerの正解対象／状態／件数をgeneratorへ渡さない。誤欄検索、target切直し、欠row／状態の補完は0。独立source reviewもこの境界を確認。
+
+同じ架空4入力で意味候補4call、全HTTP200／stop・13.755983743118122秒、全INVALID_FORMAT、モデル意味採用0・モデル採用由来本文0。裸識別子・未定義値・cell欠落だけでなく全文target・根拠欠落・依頼からの未決定追加があり、引用符修補だけでは意味も成立しない。同じ形式指示の追加周回を止めた。
+
+別比較として、同じ既存有限原文readerを全4sourceへ適用し、明記された7対象状態（未記載6＋未決定1）を既存候補受領→snapshot再開→現単一natural作者へ通して4実本文を取得、全HTTP200／stop・8.656390697928146秒。native packetはモデル出力ではなく、provider CMEE_NATIVE_FINITE_WRITTEN_STATE／model・revision・usage null、stopはadapter完了標識。derive／validatorは同witnessなので独立意味判定やモデル採用成功にはしない。入力別正解表・新語彙規則・評価gold追加0、拒否時の通常fallback接続0。
+
+root・独立担当が4原入力全項目、row4raw、native4snapshot、前後8本文を全文比較。NIはメタ列挙が減るが頼まれた人→誰に頼まれたかへ反転し、既知依頼者を未記載化。TRANSFER06は未記載→未決定を除いた一方、頼まれた人→頼んだ人へ反転。KARAは基本意味を保持するが選択平穏から受容態度へ少し読み足し、EXPLICIT_SELFは本人への依頼・未決定・弱い不安を保持。全4に確認質問混入なし。通常不採用、商品品質合格・blind一般化・本人正式受入れへ拡張しない。
+
+新規モデルcallは計8、比較process累計22.412378秒（転送／CPU／読解待ちを除く）、max8call／240秒内。基準4本文は前回actual18の実rawを再利用し新基準生成0、元8入力の通常材料・SYSTEM・source ref全一致。実tokenizer最大1058input・切詰めなし。最終sourceで434 PASS・18.21秒・既存warning1、427件の行形式版からnative helper追加後に再検証し合算加点しない。
+
+旧基準4＋新native4実本文は既存prepare／provider／service＋隔離PGliteで全FINAL保存・同／新service非生成GET一致。native候補4は同rawを既存SQL投影へ再受領・再採用しpacket／意味値不変、metadata由来の参照だけ再導出。基準payload4一致、新native payload1一致／target_refだけ異なる3は元実captureと別に保持し、変更後payloadで実生成済みとは主張しない。source refs計2一致／架空user_idのSQL投影差6、既存projectionの変更0。語句書換え／新生成／実DB要求／retry0、GET provider／reader／Engine／prepare／意味採用・受領0、USER source／GET thread/events不変。pure snapshot再開とprivate保全を通常threadのmeaning checkpoint永続化とはしない。reader8report全未判定、18節checked0・全文coverage=false。
+
+[全結果・原本・次作業](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/target_epistemic_rows_review.md)／[本文なし集計](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/target_epistemic_rows_summary.json)／[研究source patch](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/target_epistemic_rows_source_candidate.patch)。全private入力・messages・旧4基準raw・新8raw・native候補／snapshot・root／独立読解・SQL・test／runnerを同artifact version1へ保全（47member／204839bytes、準備version0保持）。patch5sourceはc655のGit blob preimageへ適用し最終source bytes一致を確認。
+
+学習／新load／provider retry／server再起動0、同PID26784／serving source／Analysis adapter/config不変・health200。API source c6555fd5、Render配置／実Supabase／RN/build／通常model設定変更0。STRUCTURE_MAP_DELTA_NONE（通常不採用の研究差分保全のみ）、primary BLOCKER_NARROWED・新商品品質credit0。次は既存meaning ownerで依頼者／受け手の能動・受動方向を別命題として保持し、対象付きの認識状態とともに現単一作者へ渡す改修。自由JSON／row指示周回、raw修補、native候補をモデル成功へ換算する方法へ戻らない。AR-01・AR-02〜08・必要全資産活用・本人端末／正式受入れ未完了、AR-02は一般AR-01完成の全面待ちにしないが今回未着手。

@@ -4,7 +4,7 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-09 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR01_IN_PROGRESS_REQUEST_ROLEFRAME_NOT_ADOPTED
+status: AR01_IN_PROGRESS_NATIVE_STATE_REPLY_ROLE_DIRECTION_UNRESOLVED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
@@ -396,20 +396,21 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 ### 11.2 現在の進行欄
 
-| 項目 | 2026-11-09 AR-01対象別状態の研究接続・18実生成、意味候補不採用 |
+| 項目 | 2026-11-09 AR-01行候補拒否・native明記状態から4実本文、役割方向が残件 |
 |---|---|
-| 継承と目的 | §29の32実比較後、未記載→未決定の実測誤読へ直接対応。承認済み架空16から原文不変の8を選び、既存意味採用→現単一作者の接点を研究実装 |
-| 実装と再利用 | native preparation／strict raw receipt／旧ledger節境界・引用mask／既存semantic ownerとModelCandidateSourceを利用。新補助は明記対象句と3状態の有限照合、snapshot再開・研究投影。一般的な依頼イベント／主体参照解決ではない |
-| 局所検証 | 最終sourceで368 PASS・17.46秒・既存warning1。任意対象、状態区別、原欄／根拠、source改変・snapshot再検証、normal default、既存application／SQL。合成packet成功を実意味採用へ換算しない |
-| 実行 | 基準8本文＋control4本文＋初回意味4＋flat記述後意味2＝18実生成、全HTTP200／stop。累計比較処理83.681762秒、実tokenizer最大680input・切詰めなし。max20call／240秒内、同じrequestの重複生成0 |
-| 採否 | 初回4はINVALID_FORMAT、flat2はINVALID_EVIDENCE。root形は改善したが原欄／対象／状態根拠とcoreが不成立。実意味採用0・新意味validatorへ通る実候補0・対象候補本文0。全8source／12本文／6意味rawをroot・独立担当が全文確認、通常不採用 |
-| 途中停止 | CPU preflightのsemantic owner欠落後、遅延wire import不足で9実応答取得時停止。旧failure／9raw保全、同rawの0生成再受領で補完し未取得7だけ続行。9件再生成0、失敗履歴の成功上書き0 |
-| 保存再読 | 実本文12だけ既存prepare／provider／service＋隔離PGliteで全FINAL保存、同／新service GET一致。語句書換え／実DB要求0、GET provider／reader／Engine／prepare／意味採用・受領0。未生成対象4本文を埋めない |
-| 原本とreader | 全12capture payload一致、source参照1一致／架空user_idの既存SQL投影差11は両ref保持。実semantic再束縛0。12report全未判定、23節checked0・全文coverage=false |
-| 提供と保全 | 学習／新load／provider retry／server再起動0。同PID26784／source／Analysis重み不変・health200。全private原本・失敗・2版patch・読解・SQLを58member／208879bytesで保存後identity/version/sizeを再読確認。総請求額未測定 |
-| 次の同一商品単位 | 既存意味候補契約・符号化部品で原欄→対象句→根拠節の選択を成立させ、現在の意味採用→単一作者へ通す。今回の自由JSON指示だけの比較反復、raw修補・意味gold注入はしない |
-| 再開記録 | weekly第10回§30、[実結果と範囲](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/target_epistemic_review.md)／[集計](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/target_epistemic_summary.json) |
-| 通常と残件 | API c6555fd5・通常OFF・採用false、配置／実DB／RN/build0。研究patch保全のみでSTRUCTURE_MAP_DELTA_NONE。primary BLOCKER_NARROWED・新商品品質credit0。AR-01・AR-02〜08・全資産活用・端末／正式受入れは未完了。AR-02は一般AR-01完成の全面待ちにしないが今回未着手 |
+| 継承と目的 | §30の形式／対象束縛失敗を継承。旧named／fixed-rowの資格を緩めず、strict JSON・cell型・alias・quote位置検査を回収し、欄／対象／根拠／状態／originの5セル研究形式を実装 |
+| 実モデル候補 | 同じ架空4入力で4意味生成、全HTTP200／stop・13.755984秒、全INVALID_FORMAT・モデル意味採用0・モデル採用由来本文0。裸識別子／欠けたcellに加え全文targetや根拠欠落があり、raw修補はしない |
+| 別比較のnative接続 | 同じ既存有限readerで4sourceから7明記状態をderiveし、現受領→snapshot再開→現単一作者へ接続。provider CMEE_NATIVE_FINITE_WRITTEN_STATE、model/revision/usage null、stopはadapter完了標識。モデルraw／独立意味確認ではない |
+| 実本文と採否 | native4本文を全HTTP200／stop・8.656391秒で取得。未記載→未決定追加は消えたがNI／TRANSFER06は頼まれた人→依頼者へ反転し既知依頼者を未記載化。KARAは受容態度の読み足し留意、EXPLICIT_SELFは意味保持。通常不採用 |
+| 実行の上限 | 新call8・累計比較処理22.412378秒、max8／240秒内。基準は前回actual18の4実本文を再利用・新基準生成0。元8sourceの通常材料／SYSTEM／refは全不変、実tokenizer最大1058input・切詰めなし |
+| 局所検証と読解 | 最終434 PASS・18.21秒・既存warning1。root・独立担当が4原入力の全項目／row4raw／native4snapshot7状態／前後8本文を全文確認。モデル候補採用成功・商品合格へ換算しない |
+| 保存再読 | 旧基準4＋新native4本文が全FINAL保存・同／新service GET一致、語句書換え／実DB要求／再生成0。GET provider／reader／Engine／prepare／意味採用・受領0、USER source／GET thread/events不変 |
+| SQL投影と限定 | native4は同rawを既存SQL投影へ再受領・再採用、packet／意味値不変で参照を再導出。本文payload1一致／target_refだけ異なる3は別recordに保持し、その変更後payloadで実生成済みとはしない。source refs合計2一致／投影差6。通常meaning checkpoint永続化は未実証 |
+| reader | 保存8report全未判定、18節checked0・全文coverage=false。保存・native内部整合・短い言換えを一般意味品質へ換算しない |
+| 提供と保全 | 学習／新load／retry／server再起動0。同PID26784／source／Analysis重み不変・health200。全原本・2版差分・読解・SQL等を同artifactのversion1へ保全、47member／204839bytes。総請求額未測定 |
+| 次の同一商品単位 | 既存meaning ownerで依頼者／頼まれた人の能動・受動方向を別命題として保持し、対象付き認識状態とともに現単一作者へ渡す。自由JSON／row指示周回、raw修補、native→モデル成功の換算はしない |
+| 再開記録 | weekly第10回§31、[全結果と範囲](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/target_epistemic_rows_review.md)／[集計](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/target_epistemic_rows_summary.json) |
+| 通常と残件 | API c6555fd5・通常採用false、配置／実DB／RN/build0。研究patch保全のみでSTRUCTURE_MAP_DELTA_NONE。primary BLOCKER_NARROWED・新商品品質credit0。AR-01・AR-02〜08・必要全資産活用・端末／正式受入れ未完了。AR-02は一般AR-01完成の全面待ちにしないが今回未着手 |
 
 以後はこの表と各能力の対応行を現在状態へ置換更新し、詳細な実行事実は既存trial／weeklyへ置く。新しいhandoff系列・全件hash Gateを作らない。中断時も、成果物と未実行を既存保存先へ残し、同じ未完商品単位から続ける。
 
