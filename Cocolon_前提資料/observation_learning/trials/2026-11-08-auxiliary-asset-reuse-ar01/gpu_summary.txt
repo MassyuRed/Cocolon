@@ -1,0 +1,15 @@
+AR-01 auxiliary asset reuse comparison
+
+
+18 fictional inputs; 66 recorded model generations across baseline and three candidates.
+All recorded requests returned HTTP 200 with stop.
+Training updates: 0. New model loads: 0. Provider retries: 0.
+Existing analysis adapter weights/config: unchanged.
+Existing natural profile: cocolon-qwen35-4b-base-851bf6e
+Final health: HTTP 200.
+
+
+Quality: mixed. Incorrect owner/intent and unreturned-reply errors remain.
+Candidate generation hints: NOT adopted for normal operation.
+Scoped comparison reader: implemented; not full semantic acceptance.
+

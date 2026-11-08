@@ -1815,3 +1815,35 @@ Cocolon1beb4818／API497f7008の前提と規則・地図・最新weekly・Karen-
 確認版：Cocolon PR30 `89a9594dbeb91668436f82b48832025bab49a0e1`、API PR3 `497f7008fec8935885d09d2e430499892189b5bb`。全体現在地・現規則／恒久incident・全体設計と地図の関連責務・最新weekly・現sourceを照合。Karen-Diaryは固定版全50fileを分担全文確認、構造知識と商品仕様を区別した。旧32系列／Disposition／活用案／確認済みsymbolへ戻ったが、全旧helperの全行意味精査・巨大旧migration06全文・全画像目視まで完了したとはしない。必要原本は各商品単位で確認する。
 
 今回の変更は本設計と全体現在地・CMEE map・詳細設計入口・本議事録の導線のみ。文書内のID網羅・参照path・状態／契約の整合を確認し、GitHub保存内容を読戻し照合する。**製品source／prompt／重み／API／DB／RN／Render／GPU生成／学習／build／正式受入れの新変更0。STRUCTURE_MAP_DELTA_NONE：製品runtime構造を変えず、回収・改修・商品接続の設計と再開先を保存した。**
+
+
+<a id="auxiliary-asset-reuse-ar01-20261108"></a>
+## 21. 補助経路活用AR-01：実装、66実生成、通常補助の採用判断
+
+Mashの「補助経路の活用作業を進めて」を受け、§20の設計を実作業へ進めた。[全入力・実messages・本文・直接読解・source identity・検証範囲](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/README.md)を既存trial系列へ保存する。
+
+### 21.1 実装と現在の適用範囲
+
+API候補 **a98c6e59cc9ab0d3e1691a969736651c2bf6a88f**。既存Ledgerの原文分割／座標、quote mask、Analysisの有限動詞活用を回収して、明記役割と自由文の限定比較を追加。現在のadmission／Safety／本人・プラン／版／receipt／CASを保持し、受領した1本文に対するprivate reportを既存OBSERVATION artifactへ保存する。公開DTO・本人source・分析材料へ混ぜず、全文意味coverage=false、未判定・比較器バグ・sourceエラーを区別する。本文自動補正・追加生成・retryなし、保存GETは同本文の非生成再読。旧5段packet／3本文へ戻していない。
+
+生成時の役割補助も実装・改修したが、実4Bで悪化を確認し**通常未採用**。通常 `prepare_natural_reply` は元prompt／全材料のままとし、研究明示 `use_meaning_support=True` だけで実験できる。件数とUTF8上限に入らなければ補助だけを省略し、原文は切らない。最終CPU版で原文「本人」と記録者の衝突、過去希望の当回化を修正し、生成補助をCURRENTに限定した。最終CPU版の新4B生成・通常採用は未実施。コード追加を実出力の一般改善へ換算しない。
+
+### 21.2 実モデルの結果
+
+新しい架空12件＋役割対照6件。変更前12、候補v1の12、別題材変更前6、候補v2の18、候補v3の18、計**66実生成・HTTP合計105.283931秒**。全66 HTTP200/stopだが品質合格件数ではない。各入力に二欄・実在カテゴリ・各感情strengthを指定し、自己理解・同時感情を含む。全組合せ網羅とはしない。私的旧評価原文を教師へ移していない。
+
+全実本文を原文と照合。v1は呼称と未記載の認識経路が悪化し不採用。v2は局所改善2／維持11／悪化5、v3は局所改善2／維持11／悪化4／曖昧さの残る部分修復1。通常採用0。乱暴な「お前」の解消等はあるが、本人の独白化、返却意向の変更、未記載の役割を誤って失効する問題が残った。行為者反転を直した実例には加算しない。補助なし10件は元本文と完全一致し、未返信の肯否反転等も残る。独立評価はAIによる直接読解であり、Mashの正式受入れではない。
+
+保存66本文を現readerで非生成再比較し、未判定61・範囲内非衝突5・衝突0、一節照合5件。重大な全体誤りの検出を実証しておらず、非衝突も全文意味品質合格にしない。読める範囲と読めない範囲が実返答上で明確になった段階。
+
+追加学習0、新model load0、provider retry0。各実行前後のAnalysis adapter weight/config hash一致と同server PIDを検証し、最後も自然base／元Analysisの重み不変・health200。通常提供の重み・設定を変更していない。全レンタル時間・請求額は未測定。
+
+### 21.3 検証・反映・残件
+
+意味75＋budget10＋application57＝142 PASS、既存provider/Safety26 PASS、計168。さらに、変更前の実4B18本文を現SQL/RPCへ保存し、providerとreaderを禁止した別serviceで同本文を取得する18件もPASS。合計186局所検証（新生成0・実Supabase書込0）。旧Pydantic非推奨警告1件。PGliteで既存SQL/RPCと同本文保存再読・権利・版・競合等を確認し、実Supabase適用や本人端末の成功へ読み替えない。既存CIの同工程へ新2suiteを追加。API全7pathをGitHub読戻し一致、候補commitの変更path一致を確認した。最初の24生成はCocolon b7796467で先行保存・全内容読戻し一致。
+
+CI最終結果は下段に追記する。Render配置、実DB書込、RN／build、公開設定変更、本人実機確認、正式受入れは今回0。**STRUCTURE_MAP_DELTA_PRESENT：候補sourceの有限比較ownerとprivate artifact fieldを追加。配置は未実施。**
+
+**次はAR-01を継続する。** EM-01a/bの6境界と準備済み語順／二欄8教材、元の生成・学習ownerを引き継ぎ、役割・本人宛・独立述語・認識／留保・時点を同時に保つ実出力を改善する。今回使用した評価を教師へ移さず、reader拡張だけや同じprompt周回を完了にしない。原本・実messages・残差を保持して、別題材で修復と既成功を読む。AR-01全体、AR-02〜08、全必要資産の回収は未完了。「補助経路の活用作業を進めて」で本位置から継続する。
+
+CI確認（2026-11-08T10:45Z）：API a98c6e59 の[Piece SQL run42472059575](https://github.com/MassyuRed/mashos-api/actions/runs/42472059575)はsuccess。[Analysis observed content run42472059536](https://github.com/MassyuRed/mashos-api/actions/runs/42472059536)は進行中で、Analysis生成・保存検証を通過しshared owner identityへ進んでいる。進行中を成功に換算しない。

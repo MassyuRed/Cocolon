@@ -1,3 +1,5 @@
+> 11/8 補助経路活用AR-01：有限役割reader／自由文との三値比較をAPI候補a98c6e59へ実接続し、private保存・非生成再読を含む関連168件の局所検証。新架空18入力・66実生成を比較し、生成補助は一部改善と悪化が併存して通常未採用。通常の元prompt／材料を維持し、補助は研究明示opt-inに限定。実保存66本文のreader照合は一節5件・未判定61で、一般意味品質やAR-01完了とはしない。Render／DB／RN／build変更0。 [weekly§21](../weekly_reviews/Cocolon_Weekly_Review_20261107.md#auxiliary-asset-reuse-ar01-20261108)／[全結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/README.md)。
+
 > **2026-11-08 補助経路の活用：** [全必要資産の回収・改修・商品接続 詳細設計](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md)を保存。現在の原文根拠・Piece／Analysis接続は継承し、旧32系列／D01–D51／8層の必要能力を現natural・三中核へ利用する。設計保存時の新実装は未開始、次はAR-01。継続指示 **「補助経路の活用作業を進めて」** は同設計の最新進行欄から実作業へ戻る。旧5段packet・固定文型・旧checker/controllerの全面復活を意味しない。
 
 > 2026-11-08接続修復：naturalの受口は既存の本人材料・安全性・source/context/revision/CAS検査、OPERATION receipt、OBSERVATION保存／再読を使用する。生成本文を本人sourceへ昇格しない。分析semantic-120uとnatural base-851bf6eを専用鍵・条件別に同4B提供へ接続し、実GPU合成の分析3node/2edgeと自然文受理を確認。自然文初回2件、分析先行の待機後1件も完了。これは稼働接続の限定確認であり、意味品質全般・全入力・正式受入れの成立ではない。API497f7008、RN6fdea583、8001内部Testing。最新weekly notification-settings-emlis-repair-20261108へ。
@@ -1994,3 +1996,17 @@ Mashの明示承認により、[補助経路活用の設計](../designs/cmee/Coc
 現naturalは既存admission／source Safety／保存を使うが、旧意味更新・本文逆検査全体は通らない。新設計の意味比較三値とcoverage、未判定／sourceエラーの区別、問いの別QUESTION接続、分析材料と比較reportの区別は未実装の設計である。現API／DB／RN／model／稼働・三中核作者を変更した事実にはしない。
 
 次はAR-01。同じ原情報の前後返答を改善し、既成功・別題材・保存再読を保つ。設計書や検査の件数だけでは活用完了にしない。**STRUCTURE_MAP_DELTA_NONE：今回の変更は設計と再開導線であり、製品runtime構造は不変。**
+
+
+<a id="auxiliary-asset-reuse-ar01-20261108"></a>
+## 2026-11-08 AR-01：natural自由文の有限比較ownerを回収
+
+STRUCTURE_MAP_DELTA_PRESENT（API候補 `a98c6e59`、配置未実施）。既存source/Safety／権利／版／receipt/CASの内側で、受領した自由文の限定読取とprivate report保存を追加した。現naturalを旧5段／3本文へ戻していない。
+
+| owner | 今回の責務と境界 |
+|---|---|
+| `cocolon_meaning_experience_engine/natural_reply_meaning.py`（新） | Ledger分割・quote mask・既存9動詞活用を再利用。明記格／役割、限定肯否・有限時点等を独立読取し、三値とcoverageを返す。未読別節・引用／条件／留保・多義・反射代名詞・別イベントを事実化しない。一般日本語semantic certificateではない |
+| `natural_reply.py`（既存） | 原材料を保持。通常生成の補助はOFF。研究明示opt-inだけ上限付きCURRENT補助。WRITTENとSELFを区別、履歴原文を消さず過去希望を当回hintへしない |
+| `emlis_thread_service.py::_process_natural`（既存） | 受領後1回だけ比較し `OBSERVATION.artifact.meaning_comparison` へprivate保存。source/reply hashと範囲を持ち、公開DTO／Analysis材料とは分離。sourceエラー伝播、比較器バグは未判定。reportによる本文拒否・改作・再生成はしない。保存GETは再比較しない |
+
+実モデル66本文の非生成比較は未判定61・範囲内非衝突5・衝突0。5も一節に限定し全文品質へ昇格しない。生成補助v1〜v3の通常採用は0、最終CPU修正版の新4B確認も未実施。旧Piece／AnalysisのCMEE接続を維持し、今回のsource追加を全D01–D51実装済みへ拡張しない。実結果・168件の局所検証・残件はtrialに記録。AR-01継続、AR-02〜08未開始。

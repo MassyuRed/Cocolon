@@ -1,3 +1,5 @@
+> 11/8 補助経路活用AR-01：有限役割reader／自由文との三値比較をAPI候補a98c6e59へ実接続し、private保存・非生成再読を含む関連168件の局所検証。新架空18入力・66実生成を比較し、生成補助は一部改善と悪化が併存して通常未採用。通常の元prompt／材料を維持し、補助は研究明示opt-inに限定。実保存66本文のreader照合は一節5件・未判定61で、一般意味品質やAR-01完了とはしない。Render／DB／RN／build変更0。 [weekly§21](../weekly_reviews/Cocolon_Weekly_Review_20261107.md#auxiliary-asset-reuse-ar01-20261108)／[原入力と全実本文](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/README.md)。STRUCTURE_MAP_DELTA_PRESENT（候補sourceの有限比較ownerとprivate保存field）。
+
 > 11/8品質続行の最新：[weekly§19](../weekly_reviews/Cocolon_Weekly_Review_20261107.md#emlis-scope-retention-20261108)／[全110生成・保存72＋新36・次8教材](../observation_learning/trials/2026-11-08-emlis-scope-retention/README.md)。認識・感情所有・現在否定等は部分改善。一方役割反転と文法が残り通常未採用、元提供に復元済み。fresh108予定は72で中止し、保存72からfresh optimizer36を別実施。次8件はCPU準備のみ。責務・通常sourceは不変、STRUCTURE_MAP_DELTA_NONE。
 
 > 11/8品質実比較の最新：[weekly§18](../weekly_reviews/Cocolon_Weekly_Review_20261107.md#emlis-quality-actual-20261108)／[120応答・新SFT72の全結果](../observation_learning/trials/2026-11-08-emlis-recipient-quality/README.md)。新候補は本人宛化等に部分改善、認識／留保／主語等が残り通常未採用。元の通常提供へ復元済み。責務・通常sourceは不変、STRUCTURE_MAP_DELTA_NONE。
@@ -2016,3 +2018,11 @@ API1296eaeaを指定配置済み（dep-dbjafelg1s2s73f6mah0/02:46:53 UTC Live）
 natural元入力／履歴の全category配列、二欄・全9場面・各感情強度・自己理解と時点の契約を材料へ保持する。既存Q3本人補足材料と新natural自身の問い／回答後更新の未接続を区別する。shared GP修復はAnalysisの明示opt-inで、Emlis側の既定境界を広げない。current Q1 owner証拠fixtureは当該GPの実source／ASTへ更新し、歴史IM03は保持した。広域旧287の変更前同集合という比較を、全本文の品質合格とは扱わない。新モデル／学習・研究4B通常採用0。
 
 この追記より前の候補／未配置／点検中の記述は当時の履歴。最新source・全CIの実結果・配置と配布・未確認は[第10回§15.10](../weekly_reviews/Cocolon_Weekly_Review_20261107.md#input-contract-repair-final-20261107)を参照する。7,817blob一致を全意味読了とせず、一般意味品質・保存currentの本人再解析・月次当時版の保持・実環境受入れをそれぞれ区別する。
+
+
+<a id="auxiliary-asset-reuse-ar01-20261108"></a>
+## 11/8 AR-01：現naturalの有限比較を接続した候補
+
+API `a98c6e59`。`natural_reply_meaning.py` が既存原文分割／引用外判定／Analysis有限動詞を回収し、明記役割と最終自由文を別読取する。`emlis_thread_service.py::_process_natural` は1call受領後にprivate `artifact.meaning_comparison` を保存し、公開DTOや分析sourceへ出さない。旧保存互換・同本文GET・NOT_GENERATEDを維持し、追加生成・本文補正は0。CHECKER_ERRORとsource不正を分ける。実自由文の全般読取は未達で、非衝突は一節の検査範囲だけを表す。
+
+`natural_reply.py::prepare_natural_reply` は通常 `use_meaning_support=False` で元prompt／materialを維持。研究明示時だけ原文無切断・件数／UTF8上限付きのCURRENT補助を作れる。最終CPU版はWRITTENの「本人」と記録者を分離、過去意向の当回化を避ける。新4Bでの最終CPU版確認・通常適用は未実施。66実生成のv1/v2/v3は悪化も残り不採用。詳細・実本文・残件は上記trialの唯一ownerへ。AR-01／EM-01a/bは継続中。候補sourceの接続であり、本番・本人実機への新反映ではない。
