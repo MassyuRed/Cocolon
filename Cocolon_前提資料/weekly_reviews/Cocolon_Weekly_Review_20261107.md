@@ -1453,6 +1453,8 @@ Mashは「特に問題なさそうだから、その方針で進めて」と採�
 
 API初版66cf4aa3／CI補正後8739cd80、RN候補4483f6d4。API対象72 PASS、RN3file113 PASS。最初のAPI検証は新pagination fixtureの最終cursor期待値誤り1件で修正、次のregistry検証は疎checkoutの既存doc未取得1件で原本を取得。RN広範囲の未取得原本7pathを復元し、既に変わっているmap完了通知の静的期待文言1か所を同期して、最終対象はFAIL・SKIP0。独立reviewの外側Pressable等幅、親子期間同期、31日目盛り、非JSON障害分類も修復した。
 
-[経路・ファイル・検証の詳細](../current_structure/03_analysis_current_structure.md#kokoro-weather-live-20261108)。STRUCTURE_MAP_DELTA_PRESENT。新DB／依存／GPUなし。GitHub保存と対象検証は候補の証拠で、本番反映・署名build・本人端末確認は未実施。前段の完了通知の資格共有・API／worker反映の個別承認待ちを維持し、今回の画面案採用から承認済みに読み替えない。
+[経路・ファイル・検証の詳細](../current_structure/03_analysis_current_structure.md#kokoro-weather-live-20261108)。STRUCTURE_MAP_DELTA_PRESENT。新DB／製品依存／GPUなし。GitHub保存と対象検証は候補の証拠で、本番反映・署名build・本人端末確認は未実施。前段の完了通知の資格共有・API／worker反映の個別承認待ちを維持し、今回の画面案採用から承認済みに読み替えない。
 
-CI追補：API初版42440204647は既存生成2875 PASS・12236 subtests後、新工程が70 PASS／全app登録の2検査失敗。CIの依存集合を限定したimportで既存 `import jwt` の不足を再現し、既存PyJWTを許可すると解消。8739cd80では検証環境だけPyJWT2.13.0追加とstderr可視化を行い、短いweather検査を先へ移動。製品source差分なし、local72 PASS。最終CI42441166743は確認中。初版Piece SQL42440204697全37step成功、RN4483の新weatherを含むjob128608358722／phase6 CI42440451122は成功。RN同run42440451146のiOS metricsは既存V4の19失敗が前128590034681と名称・順序同一で、今回のweather変更による追加失敗なし。
+CI追補：API初版42440204647は既存生成2875 PASS・12236 subtests後、新工程が70 PASS／全app登録の2検査失敗。CIの依存集合を限定したimportで既存 `import jwt` の不足を再現し、既存PyJWTを許可すると解消。8739cd80では検証環境だけPyJWT2.13.0追加とstderr可視化を行い、短いweather検査を先へ移動。製品source差分なし、local72 PASS。最終CI42441166743は12:20:48 JSTに全18step success。remote live72 PASS、生成保存2875 PASS／12236subtests、累積397 PASS／21subtests、SQL201原本・15月参照／owner・rank・不変再読・削除passed、最終facts407 PASS／738subtests。初版Piece SQL42440204697全37step成功、RN4483の新weatherを含むjob128608358722／phase6 CI42440451122は成功。RN同run42440451146のiOS metricsは既存V4の19失敗が前128590034681と名称・順序同一で、今回のweather変更による追加失敗なし。
+
+primary outcome＝TECHNICAL_CREDIT。製品sourceはAPI8739cd80／RN4483f6d4で確定。後続docs-onlyでは製品sourceを変えない。実機への反映は、前段通知を含むAPI／worker配置と既存Firebase通知資格のworker登録、統合TestFlight内部配布の個別承認後。本人データの今日／週／月への同一件数・重みの反映と実機表示速度は反映後の確認事項。
