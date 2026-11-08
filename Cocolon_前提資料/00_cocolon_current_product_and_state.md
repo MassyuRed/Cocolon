@@ -1,3 +1,5 @@
+> 11/8 Emlis品質実作業：[第10回§18](weekly_reviews/Cocolon_Weekly_Review_20261107.md#emlis-quality-actual-20261108)。120実生成・24教師72更新と保存再読まで実施。新候補の本人宛化・基礎意味保持に部分改善がある一方、認識／留保／所有者・否定述語等が残り通常未採用。元の分析120u＋Emlis自然baseを復元・health200。次の品質差分6境界を記録。
+
 > 11/8品質残件の具体化：[第10回§17](weekly_reviews/Cocolon_Weekly_Review_20261107.md#three-core-quality-backlog-20261108)。Emlisの意味保持・自然さ・履歴／問いと更新、Pieceの一般本文・単独伝達・refined／採用画像、分析の本人基準・記録間関係・全量／訂正・図と根拠・IF／Savedを、作業内容と完了条件へ詳細化。既存品質項目と接続・本人確認済みの成果を継承し、品質以外の公開残件は保持して今回の作業へ混ぜない。計画記録であり、製品実装・品質向上済み・新しい公開条件の認定ではない。
 
 > 11/8最新作業：通知・設定・EmlisAI接続を修復。API／更新担当／通知2cronは `497f7008fec8935885d09d2e430499892189b5bb` Live。観測用の旧Pod／read_onlyを現在Pod＋activeへ変更し、専用鍵は継承。本人map通知はglobal OFFで送信除外されており、設定は無断変更しない。先行こころグラフを含むRN `6fdea583d2ed53fafa0d78b1fc0b701c7a461641` の統合iOS run#80（42452923002）は全19step success、1.0（8001）を既存内部グループ「Emlis テスト版配布」でTesting確認。本人端末の通知到着・設定配置・今回Emlis新応答の確認は未実施。[今回記録](weekly_reviews/Cocolon_Weekly_Review_20261107.md#notification-settings-emlis-repair-20261108)。

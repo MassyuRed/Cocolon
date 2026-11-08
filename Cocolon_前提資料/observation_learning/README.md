@@ -1,3 +1,5 @@
+> **11/8最新・Emlisの品質残件を実行：** [current interfaceの対照SFT72と全120応答](trials/2026-11-08-emlis-recipient-quality/README.md)。本人宛化・基礎意味保持は部分改善、認識と事実／留保／感情所有／否定述語等が残り新候補は通常未採用。元のAnalysis120u＋自然baseへ復元済み。旧不採用重みの継承や旧24教師の周回追加を次の既定作業にせず、差分6境界を具体化する。
+
 # Mashの観測技術を継承するための記録
 
 **最新の直接作業（10/31）：** [第9回§30](../weekly_reviews/Cocolon_Weekly_Review_20261031.md#hedge4-actual-20261031)／[自然返答実行記録](training/2026-10-31-natural-reply-preference/README.md)。新2pairだけ4更新・保存freshreload112一致・全34EOSを完了。本人宛化等を維持したが、NR03の明示否定反転が再発し、H02因果補完/T10文法不成立等で6e1c不採用。旧5重み/config不変、新NR25/26は使用済み。次は追加学習を止め、否定の同義書換え2種×2保存候補の新4生成を行う診断案（未実行）。原文2出力は原本再利用。独立新規品質評価/教師ではない。実emotion submit/Auth/端末/新HTTP-SQL未確認。商品0・正式0/3・54.50％、STRUCTURE_MAP_DELTA_NONE。追加観測会不要。以下の10/30段落は旧CMEE方式の履歴。
