@@ -1988,3 +1988,16 @@ source→bindings接点の準備であり、receive_candidate／prepare_model_sn
 既使用12＋架空新4の同16×OFF／ON＝32call・最大240秒を凍結。対象材料5だけ変化、対照11と全16の通常OFF／原文参照は不変。messages最大4771bytes、実tokenizer未実行。既存Jupyter到達後、比較ZIP uploadが自動承認レビューで「private比較payloadの送信先・内容の明示承認不足」として拒否され、転送・実生成・学習／load／retry・提供変更0。間接転送も行わない。次は準備した架空比較入力・messages・研究source／runnerの既存Jupyter宛転送承認後の実比較と全文読解・実raw保存である。
 
 [実装・範囲・保全・再開点](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/native_request_bindings_review.md)／[集計](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/native_request_bindings_summary.json)。source-only研究patchは正しいc655 Git blob preimageから再構築一致、privateに全入力・messages・native/model refs・新test／runnerを保全。API c6555fd5・通常採用false・配置／実DB／RN／build変更0。STRUCTURE_MAP_DELTA_NONE（研究差分保管のみ）、限定TECHNICAL_CREDIT・商品品質credit0。AR-01・AR-02〜08・全資産活用・本人端末／正式受入れは未完了。
+
+<a id="auxiliary-native-request-bindings-actual32-20261109"></a>
+## 29. 補助経路活用AR-01 — 転送承認後に32実比較、31保存・1質問拒否、通常不採用
+
+2026-11-09 JST。Mashが準備済み架空16入力・比較材料・研究コードの既存Runpod Jupyter宛転送と、最大32応答／比較240秒を明示承認。前段と同じZIPのhashを照合して転送・新作業rootへ展開し、CPU実tokenizer前処理後、既存warm提供で同16×通常OFF／研究ONを一回比較した。32全HTTP200／stop、loop53.200080秒、最大998input token・切詰めなし。対象5だけmessages／本文変化、11対照は両方byte一致、全16の通常OFF材料・原文・参照不変。学習／新load／retry0、同PID26784・server source／Analysis adapter/config不変・health200、実GPUはRTX4000 Ada／20475MiB。総請求額は未測定。
+
+root・独立担当が全16sourceと32本文を全文比較。NIで未記載を未決定へ変える誤読が残り、NEW01は明記承諾と本人宛化を保持しながら不要な質問を新出。TRANSFER06の未決定断定除去、NEW04の自然な言換え等の限定改善はあるが通常不採用。不変11の引用・承諾人物・受動希望・意向・感情／動機の既存誤読も残る。短い正常受取りを省略だけで失敗にせず、開発比較をblind一般化や正式受入れへしない。
+
+全32実rawを別phase／現provider・実prepare・既存service＋隔離PGliteへ一回再生。baseline16＋candidate15＝31FINAL保存・同／新service GET一致、NEW01の質問入りcandidate1は既存provider拒否・本文不保存・retry不可のまま同／新service再読一致。outer strip後本文hash一致、語句書換え0、USER／GET thread/events不変、GET provider／reader／Engine／prepare0、実DB／新生成0。source参照12一致・架空user_idのSQL投影差20は両実参照を保持。reader31reportは30未判定／1有限範囲内非衝突、61節checked1・全文coverage=false。前段292CPU PASSは同source SHAの継承で今回再実行加算なし。
+
+[全結果・原本・次作業](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/native_request_bindings_review.md)／[本文なし集計](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/native_request_bindings_summary.json)。Pod ZIP32,422bytesのCRCと9member全hash一致、privateに全入力／messages／32raw／読解／SQL／tokenizer／native-model refsを保全。転送blockerは解消し当該32call完了、再起動しない。次は有限の補助投影だけを意味採用の完成とせず、既存model意味採用で未記載／不明と未決定を別対象命題へ束縛し、現natural単一作者へ保持する接続へ進む。同prompt／役割ラベル／旧教師周回を繰り返さない。
+
+API source c6555fd5・通常OFF・採用false、Render配置／実DB／RN／build0。STRUCTURE_MAP_DELTA_NONE（研究patchはactiveへ不採用）、primary outcomeはBLOCKER_NARROWED・新商品品質credit0。AR-01／AR-02〜08・必要全資産活用・本人端末／正式受入れは未完了。AR-02は一般AR-01完成の全面待ちにしないが今回未着手。

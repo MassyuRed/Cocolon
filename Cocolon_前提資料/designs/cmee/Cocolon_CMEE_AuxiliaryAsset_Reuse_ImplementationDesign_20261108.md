@@ -396,19 +396,19 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 ### 11.2 現在の進行欄
 
-| 項目 | 2026-11-09 AR-01 native依頼対象bindingsの接点準備 |
+| 項目 | 2026-11-09 AR-01 native依頼対象候補の32実比較完了・通常不採用 |
 |---|---|
-| 継承 | §27の24実比較は不採用の履歴として保持。必要全資産回収・現natural単一作者・通常source／Safety／保存を維持 |
-| 今回の実装 | preparationのnative sourceと既存finite witnessを既存semantic ownerへ接続。依頼者／受け手／承諾を同一claim内の別target_refに分離して研究作者入力へ投影。省略と承諾未確定を節単位へ限定 |
-| 正確な範囲 | source→bindings接点の準備。receive_candidate／prepare_model_snapshot／_model_meaning_packetの汎用意味採用改修・4B束縛成功・意味品質改善は未実証 |
-| CPU検証 | 292 PASS＝既存250＋新20＋preparation22、18.02秒、既存warning1。新20で二欄／ref分離／別節承諾／引用等の除外／通常OFFを確認 |
-| 保存再読 | 合成本文1件を実service＋隔離PGlite保存し同／新serviceで非生成GET一致。新しい実4B本文の保存検証ではない |
-| 比較準備 | 既使用12＋架空新4の16×OFF／ON＝32call、最大240秒。対象材料5変化／対照11不変、通常OFF・原文参照は全16不変。実tokenizer・実call0 |
-| 中断理由 | 既存Jupyterには到達。比較ZIP uploadが自動承認レビューで送信内容／送信先の明示承認不足として拒否。転送・別経路回避・稼働変更0 |
-| 保全 | 公開source2pathの研究patch、privateに全入力・messages・native/model ref対応・新tests・runnerを保存。正しいc655 Git blob preimageからpatch適用・両candidate SHA一致 |
-| 次の同一商品単位 | 当該架空比較payloadとsource差分／runnerの既存Jupyter宛転送承認後、実tokenizer・32call比較・全文読解・同実raw保存へ。準備を品質改善へしない |
-| 再開記録 | weekly第10回§28、[実装・未実行・再開点](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/native_request_bindings_review.md)／[集計](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/native_request_bindings_summary.json) |
-| 通常と残件 | API c6555fd5・通常OFF不変、通常採用false。研究patchのみでSTRUCTURE_MAP_DELTA_NONE。AR-01・AR-02〜08・全資産活用・端末／正式受入れは未完了。AR-02は一般AR-01完成待ちにはしないが今回未着手 |
+| 継承と承認 | 前段292局所検証・source→bindings接点・研究patchを継承。Mashが同架空16入力／比較材料／研究コードの既存Jupyter宛転送と32応答／240秒を明示承認、転送blocker解消 |
+| 実行 | 同16×OFF／ON＝32実返答、全HTTP200／stop、loop53.200080秒。実tokenizer最大998input・切詰めなし。対象5だけmessages／本文変化、11対照はbyte不変 |
+| 採否 | root・独立担当が全16source／32本文を全文読解。NIで未記載→未決定が残り、NEW01で不要な確認質問を新出。TRANSFER06等の限定改善はあるが通常不採用 |
+| 改修の範囲 | source→bindings→研究作者入力の接点。receive_candidate／prepare_model_snapshot／_model_meaning_packetの汎用意味採用・一般的な対象束縛・商品品質改善全体は未実証 |
+| 保存再読 | 同32rawを別phase／現provider・実prepare・既存service・隔離PGliteへ。31FINAL保存／同・新service GET本文一致、質問入り1件は既存guard拒否・不保存・retry不可 |
+| 原本とreader | 語句書換え0、USER／GET events不変、GET provider／reader／Engine／prepare0。参照12一致／架空user_id投影差20は両実参照保持。31reportは30未判定＋1範囲内非衝突、61節checked1・全文coverage=false |
+| 提供 | 学習／新load／retry0、同PID26784／server source／Analysis重み不変、health200。RTX4000 Ada／20475MiB。総請求額は未測定 |
+| 保全と検証 | Pod原ZIPのCRC・9member bytes/hash一致、privateに全入力／messages／32raw／両全文読解／SQL／tokenizer／ref対応を保存。前段292PASSは継承、今回再試験加算なし |
+| 次の同一商品単位 | 未記載・明示不明と未決定の対象を既存model意味採用で別命題へ束縛し、現作者へ保持する接続。完了32call／同prompt・役割ラベル／教師周回を繰り返さない |
+| 再開記録 | weekly第10回§29、[実結果・範囲・再開点](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/native_request_bindings_review.md)／[集計](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/native_request_bindings_summary.json) |
+| 通常と残件 | API c6555fd5・通常OFF・採用false、配置／実DB／RN／build0。研究patch不採用でSTRUCTURE_MAP_DELTA_NONE。AR-01・AR-02〜08・全資産活用・端末／正式受入れは未完了。AR-02は全面AR-01完成待ちにしないが今回未着手 |
 
 以後はこの表と各能力の対応行を現在状態へ置換更新し、詳細な実行事実は既存trial／weeklyへ置く。新しいhandoff系列・全件hash Gateを作らない。中断時も、成果物と未実行を既存保存先へ残し、同じ未完商品単位から続ける。
 
