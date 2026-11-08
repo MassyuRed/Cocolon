@@ -1977,3 +1977,14 @@ root・独立担当が全12sourceと24本文を全文読解。依頼があった
 不採用source2pathを既存trialの研究patchとして保全し、c655のfresh preimageから適用・実candidate SHA一致を確認。テスト差分には旧架空開発入力が含まれるためprivateへ分離。全private原本・24raw・読解・SQLは永続保全、Pod出力ZIPのCRCと13member全hash一致。API sourceはc6555fd5のまま、Render配置／実Supabase／RN/build／通常model設定変更0。STRUCTURE_MAP_DELTA_NONE（拒否した研究patch保管のみでactive作者・型・wire・保存責務の追加なし）。
 
 [全結果と次の既存改修先](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/request_roleframe_review.md)／[集計](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/request_roleframe_summary.json)。次は役割ラベル追加や同学習周回を止め、preparation／emlis_semantic_admissionの意味採用→現natural単一作者の接続で、依頼者・受け手・承諾を別claim/refとして保持する責務を改修する。旧bindingsの限定grammarや固定三欄rendererは丸ごと採用しない。AR-01・AR-02〜08・全資産活用・通常意味品質・本人端末／正式受入れは未完了。AR-02はAR-01一般品質完成を待つ前提にしないが、今回の着手を主張しない。
+
+<a id="auxiliary-native-request-bindings-prepared-20261109"></a>
+## 28. 補助経路活用AR-01 — native依頼対象の接点を準備、実4B比較は転送承認待ち
+
+2026-11-09 JST。§27を継承し、preparationのnative source identityと既存finite readerを既存semantic owner内のpure関数へ接続。依頼者・受け手・承諾を別target_refへ分離し、現natural単一作者への研究opt-in投影を準備。受け手は節内省略、承諾は依頼節だけでは未確定として、別節／欄の承諾や明記人物を否定しない。旧固定renderer／新parser／第二作者／controller追加0。
+
+source→bindings接点の準備であり、receive_candidate／prepare_model_snapshot／_model_meaning_packetの汎用意味採用改修、4Bの対象束縛成功や意味品質改善は未実証。独立レビューもこの範囲を確認。292 PASS（既存250＋新20＋preparation22）・18.02秒・既存warning1。合成本文1件の隔離SQL保存・同／新service非生成GET一致。実4B本文の新保存検証ではない。
+
+既使用12＋架空新4の同16×OFF／ON＝32call・最大240秒を凍結。対象材料5だけ変化、対照11と全16の通常OFF／原文参照は不変。messages最大4771bytes、実tokenizer未実行。既存Jupyter到達後、比較ZIP uploadが自動承認レビューで「private比較payloadの送信先・内容の明示承認不足」として拒否され、転送・実生成・学習／load／retry・提供変更0。間接転送も行わない。次は準備した架空比較入力・messages・研究source／runnerの既存Jupyter宛転送承認後の実比較と全文読解・実raw保存である。
+
+[実装・範囲・保全・再開点](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/native_request_bindings_review.md)／[集計](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/native_request_bindings_summary.json)。source-only研究patchは正しいc655 Git blob preimageから再構築一致、privateに全入力・messages・native/model refs・新test／runnerを保全。API c6555fd5・通常採用false・配置／実DB／RN／build変更0。STRUCTURE_MAP_DELTA_NONE（研究差分保管のみ）、限定TECHNICAL_CREDIT・商品品質credit0。AR-01・AR-02〜08・全資産活用・本人端末／正式受入れは未完了。
