@@ -1,3 +1,5 @@
+> 11/8 補助経路活用AR-01続行：新8単独16更新と旧36＋新8の低LR混合44更新を、同じ元dbから別々に実施。新120生成・保存再読87件／length拒否1件を確認。混合で一部退行を抑えたが、役割・主体・認識時点の誤りが残り全候補通常不採用。元提供を復元・health200。次は残る意味誤読を旧meaning obligations／body inverse／候補比較の必要部品で修復し、同じ学習を周回しない。今回の商品source・配置・実DB／RN／build変更0、STRUCTURE_MAP_DELTA_NONE。AR-01は継続中。 [全結果と再開点](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/learning_replay_review.md)。
+
 > 11/8 補助経路活用AR-01：有限役割reader／自由文との三値比較をAPI候補a98c6e59へ実接続し、private保存・非生成再読を含む関連168件の局所検証。新架空18入力・66実生成を比較し、生成補助は一部改善と悪化が併存して通常未採用。通常の元prompt／材料を維持し、補助は研究明示opt-inに限定。実保存66本文のreader照合は一節5件・未判定61で、一般意味品質やAR-01完了とはしない。Render／DB／RN／build変更0。 [weekly§21](../weekly_reviews/Cocolon_Weekly_Review_20261107.md#auxiliary-asset-reuse-ar01-20261108)／[全結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/README.md)。
 
 > **2026-11-08 補助経路の活用：** [全必要資産の回収・改修・商品接続 詳細設計](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md)を保存。現在の原文根拠・Piece／Analysis接続は継承し、旧32系列／D01–D51／8層の必要能力を現natural・三中核へ利用する。設計保存時の新実装は未開始、次はAR-01。継続指示 **「補助経路の活用作業を進めて」** は同設計の最新進行欄から実作業へ戻る。旧5段packet・固定文型・旧checker/controllerの全面復活を意味しない。

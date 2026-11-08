@@ -1849,3 +1849,25 @@ CI最終結果は下段に追記する。Render配置、実DB書込、RN／build
 CI確認（2026-11-08T10:45Z）：API a98c6e59 の[Piece SQL run42472059575](https://github.com/MassyuRed/mashos-api/actions/runs/42472059575)はsuccess。[Analysis observed content run42472059536](https://github.com/MassyuRed/mashos-api/actions/runs/42472059536)は進行中で、Analysis生成・保存検証を通過しshared owner identityへ進んでいる。進行中を成功に換算しない。
 
 CI最終確認（2026-11-08T10:51:24Z）：固定API a98c6e59 のAnalysis observed content run42472059536は全工程successで終了。新meaning／budget2suiteを含む既存保存・累積・report等の検証工程も成功。Piece SQL run42472059575もsuccess。上記進行中の記録は経緯として保持し、現状態は両CI成功。配置・実DB適用・本人実機確認はこのCI終了でも未実施のまま。
+
+
+<a id="auxiliary-asset-reuse-learning-replay-20261108"></a>
+## 22. 補助経路活用AR-01続行 — 実学習120応答・保持比較・通常不採用
+
+Mashの続行指示を受け、準備済み語順／二欄8教材を実学習まで進めた。[実行・全本文読解の要約・保存再読・reader限界・次の修復](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/learning_replay_review.md)／[本文なし全実行集計](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/learning_replay_summary.json)。旧§19の「8教材CPU準備のみ」は当時の記録で、現状態は本節。
+
+旧原文分割・座標／有限役割、batch・版差分・失敗軸・実本文読解の責務を、既存の4B学習・CMEE保存へ適用。APIはa98c不変、通常prompt／材料に生成補助を追加せず、旧統制controllerや固定三本文を再起動していない。
+
+元db研究候補から新8だけ16更新（LR5e-5、8／16保存）を行い、before34＋step8 34＋step16 18＝86生成。学習15.485607秒、85stop／ROLE02反復length419tokens・23.033886秒で中止。予定102の残り16は未実行。教師内の役割修復と、別題材の役割／所有者／本人宛退行を分け、8／16とも通常不採用にした。原8不変、V07/08の新コピーだけ明示否定を保持した。
+
+次に、同じ元dbから別のfresh optimizerで旧36＋新8を各1回44更新（LR1e-5）。旧36原本は不変、replay新コピーのT09だけ条件文を明示否定へ整合。前回before34は全record／messages／source参照一致で再利用し、afterだけ34生成。全112保存値のfresh reload後34stop、121.170592秒／学習43.177452秒で完了。全26は既使用の開発対照であり、新たな未知一般化の証拠ではない。16＋44は同じ候補への連続60更新ではない。
+
+rootが全120実本文を原文照合し、独立担当も新8・教師診断・既存18を分担して全文確認。混合で先の被支援者反転・本人非関与破損・同文反復は回復した一方、役割方向・予告認識／発生済み事実、未記載主体、不適切呼称等が残り通常不採用。NLL低下やstop数を意味合格へしない。率／混合／更新数／順序を同時に変えたため、各要因単独の因果効果は未特定。
+
+実provider class＋既存_process_natural＋隔離PGlite SQLへrawを一回だけ渡し、初回61 FINAL保存・同／別service GET一致／1lengthは契約拒否・本文未保存・retry不可、混合26は全保存再読一致。教師診断は対象外、初回未生成16は未生成のまま。モデルmessagesは全88評価captureで一致、new8の初回24／混合8はcaptureのuser_idが通常SQL parent projectionで省略されるため両source参照を保存・各再計算し、同一参照とは偽らない。外側stripは通常providerの既存契約、語句変更／再生成／外部通信／実DB操作0。
+
+87 FINALのprivate比較reportは未判定85・範囲内非衝突2・衝突0、照合節2、全文coverageは全てfalse。重大な誤読を自動選別できるとせず、部分非衝突に未判定の節が残ることも保持する。
+
+全raw／tokens／messages・assistant-only mask・初期db／8／16／44重み・全組112finiteF32／保存値一致・8版メモリ生成・16／44版fresh reload一致・全独立判断・失敗・復元原本を非公開保全済み。両試行とも同launchの元提供・source／Analysis重みを復元しhealth200、通常の自然baseは維持。新GPUレンタル0、全レンタル時間と請求額は未測定。Render／実DB／RN／build／通常設定変更0、今回の商品source差分0、STRUCTURE_MAP_DELTA_NONE。前回a98cの構造追加は前節の履歴どおり。
+
+次はAR-01の役割方向・未記載主体・予告認識を、旧教師の一要素変異と旧meaning obligations／body inverse／候補比較の必要部品で切分け、実本文の修復まで接続する。同じ失敗8／16／44runと同じpromptを自動再周回せず、評価の教師化をしない。readerだけの完成や新しい統制経路を先行条件に戻さない。AR-01全体・AR-02〜08・全必要資産の活用・本人端末／正式受入れは未完了。
