@@ -33,8 +33,8 @@
   "production_model_environment_changed": true,
   "gpu_reasoning_text_exported": false,
   "api_core_commit": "1cd4ada6c076cd72f3710a8412f7dabce855e09c",
-  "api_live_commit": "4ba011c6a72b56cbeb7505a3a6ee7c9f849d7467",
-  "render_deploy": "dep-dbnh12lg1s2s73cma8o0",
+  "api_live_commit": "09a3f7142dcc011c315617589df845b344b15e82",
+  "render_deploy": "dep-dbnrusbl550s7381luu0",
   "testflight": {
     "build": 7701,
     "run": 42360257959,
@@ -70,7 +70,7 @@
     "render_settings_merge": "APPLIED_AFTER_EXPLICIT_MASH_APPROVAL",
     "production_env_changed": true,
     "deploy_started": true,
-    "next_action": "Request action-time approval to register the dedicated analysis key/settings on the existing worker and deploy API/worker at the exact prepared commit. After approval, verify server post-save refresh, then include background display/poll and hidden context in the next integrated RN build. No runtime change or new build has occurred yet.",
+    "next_action": "API and existing worker are deployed and connected. Next integrated RN build must include source4e776e2f, then observe natural saved-input background generation and actual-device immediate saved display. Do not require all semantic-quality repairs first.",
     "deploy_live": true,
     "initial_live_commit": "d63647a816a9f4024aee16bade7735f1b9700e9c",
     "initial_deploy": "dep-dbnglopsrm7s739cqcsg",
@@ -454,7 +454,7 @@
       "quality_acceptance_unchanged": true
     },
     "background_refresh_20261108": {
-      "status": "IMPLEMENTED_LOCALLY_VALIDATED_PENDING_WORKER_SETTINGS_AND_API_WORKER_DEPLOY_APPROVAL_RN_NOT_BUILT",
+      "status": "DEPLOYED_API_AND_WORKER_CONNECTION_VERIFIED_RN_NOT_BUILT",
       "user_requested_behavior": "Begin analysis after saving input and display the saved map when opening the screen",
       "generation_duration_reduced_by_this_change": false,
       "prior_synthetic_generation_seconds": 171.34955875994638,
@@ -497,7 +497,8 @@
         "owner_change_invalidates_old_requests": true,
         "build_started": false,
         "device_verified": false,
-        "local_tests_passed": 25
+        "local_tests_passed": 25,
+        "source_commit": "4e776e2f76281b5ce55a5da547ba3f315d82ec93"
       },
       "boundaries": {
         "source_and_quote_admission_preserved": true,
@@ -536,31 +537,131 @@
         "ci": {
           "run_id": 42427888976,
           "source_commit": "09a3f7142dcc011c315617589df845b344b15e82",
-          "status": "in_progress",
-          "conclusion": null
+          "status": "completed",
+          "conclusion": "success",
+          "last_observed_step": 11,
+          "all_steps_success": 17,
+          "job_finished_at_utc": "2026-11-08T00:15:24Z"
         }
       },
       "runtime_checkpoint": {
-        "api_live_commit": "4ba011c6a72b56cbeb7505a3a6ee7c9f849d7467",
-        "api_new_source_deployed": false,
-        "worker_live_commit_prefix": "2d2f06d",
-        "worker_analysis_five_settings_inherited": false,
-        "worker_new_source_deployed": false,
+        "api_live_commit": "09a3f7142dcc011c315617589df845b344b15e82",
+        "api_new_source_deployed": true,
+        "worker_live_commit_prefix": "09a3f714",
+        "worker_analysis_five_settings_inherited": true,
+        "worker_new_source_deployed": true,
         "render_google_reauthentication_completed": true,
-        "render_configuration_and_deploy_result": "NOT_PERFORMED_PENDING_ACTION_TIME_APPROVAL",
+        "render_configuration_and_deploy_result": "LIVE_BOTH_EXACT_APPROVED_COMMIT",
         "api_queue_enabled": true,
         "worker_existing_environment_key_count": 4,
-        "render_environment_saves_this_unit": 0,
-        "render_deploys_this_unit": 0,
+        "render_environment_saves_this_unit": 1,
+        "render_deploys_this_unit": 2,
         "new_gpu_generations_this_unit": 0,
         "db_dml_or_ddl_this_unit": 0,
-        "new_builds_this_unit": 0
+        "new_builds_this_unit": 0,
+        "approval_received": true,
+        "approval_scope": "Register dedicated analysis key and connection settings on existing mashos-astor-worker; deploy tested API and worker revision only after CI passes",
+        "worker_analysis_five_settings_registered": true,
+        "worker_settings_saved_without_deploy": true,
+        "worker_environment_key_count_after_save": 9,
+        "secret_value_readback_skipped": "Clipboard copy rejected by automatic review as unnecessary; verify key presence and runtime connection without extracting values",
+        "worker_running_process_has_new_settings": false,
+        "settings_verification": "Key presence after Save only; secret values not re-extracted; runtime connection probe pending deployment",
+        "clipboard_secret_recopy_review": "Rejected as unnecessary; stopped without alternate extraction",
+        "api_deploy": "dep-dbnrusbl550s7381luu0",
+        "api_live_at_utc": "2026-11-08T00:18:16.270779Z",
+        "worker_deploy": "dep-dbnruoou01pc73dj04c0",
+        "worker_live_at_utc": "2026-11-08T00:17:31.083451Z",
+        "auto_deploy_api": false,
+        "auto_deploy_worker": false,
+        "worker_refresh_job_consumed_type_present": true,
+        "worker_startup_at_utc": "2026-11-08T00:17:43.204572449Z",
+        "app_error_logs_in_fetched_deploy_window": {
+          "api": 0,
+          "worker": 0
+        }
       },
       "structure_map_delta": "PRESENT_EXISTING_SAVE_QUEUE_WORKER_READ_CONNECTION",
       "old_7701_server_precompute_benefit_after_deploy": true,
       "new_background_display_poll_requires_rn_build": true,
       "api_source_commit": "09a3f7142dcc011c315617589df845b344b15e82",
-      "api_source_remote_readback_files": 9
+      "api_source_remote_readback_files": 9,
+      "predeploy_readonly_aggregate": {
+        "body_or_identity_exported": false,
+        "job_type": "myprofile_latest_refresh_v1",
+        "job_total": 944,
+        "job_done": 944,
+        "job_queued": 0,
+        "job_running": 0,
+        "job_failed": 0,
+        "max_attempts": 481,
+        "latest_finished_at_utc": "2026-11-07T06:14:36Z",
+        "max_attempts_scope": "Legacy predeployment history, not the new retry-budget behavior",
+        "cumulative_artifacts": [
+          {
+            "wire_kind": "watashi.map.v2",
+            "count": 1,
+            "latest_generated_at_utc": "2026-11-07T06:14:11.591862Z"
+          },
+          {
+            "wire_kind": "watashi.map.v3",
+            "count": 1,
+            "latest_generated_at_utc": "2026-11-07T22:38:42.206545Z"
+          }
+        ],
+        "synthetic_person_record_or_verification_job_added": false,
+        "user_jwt_or_impersonation_generated": false
+      },
+      "runtime_verification": {
+        "probe": "worker_analysis_connection_and_api_auth",
+        "generation_requested": false,
+        "user_authentication_impersonated": false,
+        "database_write_requested": false,
+        "runtime_commit": "09a3f7142dcc011c315617589df845b344b15e82",
+        "analysis_settings_present": true,
+        "semantic_mode_active": true,
+        "expected_model_selected": true,
+        "authenticated_empty_payload_http": 400,
+        "provider_set_cookie": false,
+        "api_health_http": 200,
+        "unauthenticated_http": {
+          "/self-structure/latest?ensure=true&background=true": 401,
+          "/self-structure/latest?ensure=false&background=true": 401,
+          "/self-structure/latest/status": 401
+        },
+        "queue_database_http": 200,
+        "stage": "verified"
+      },
+      "verification_environment_corrections": {
+        "local_direct_http": "DNS lookup failed before connection; verified from running worker instead",
+        "public_openapi": "404 with existing openapi_url=None; initial probe KeyError corrected without product change",
+        "secret_clipboard_readback": "Rejected by auto-review as unnecessary; stopped; presence and authenticated runtime connection verified without extracting values"
+      },
+      "database_readback": {
+        "refresh_jobs": {
+          "done": 944,
+          "queued": 0,
+          "running": 0,
+          "failed": 0,
+          "max_historical_attempts": 481,
+          "latest_finished_at": "2026-11-07T06:14:36Z",
+          "before_after_unchanged": true
+        },
+        "artifacts": {
+          "v2": 1,
+          "v3": 1,
+          "v2_latest_generated_at": "2026-11-07T06:14:11.591862Z",
+          "v3_latest_generated_at": "2026-11-07T22:38:42.206545Z",
+          "before_after_unchanged": true
+        },
+        "guarded_metadata_read": {
+          "stored_owner_groups": 1,
+          "currently_visible_owner_groups": 1,
+          "generation_requested": false
+        },
+        "artificial_jobs_enqueued": 0,
+        "new_actual_input_background_generation_observed": false
+      }
     }
   }
 }

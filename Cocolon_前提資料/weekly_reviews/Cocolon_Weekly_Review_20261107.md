@@ -1418,8 +1418,14 @@ Mashから、入力保存後に分析を先に進め、わたしマップを開�
 | 更新の検出 | queued／runningの間だけ、focusedかつapp active時に3秒ごと既存statusを読取。statusは予約／生成せず、版／可視性の変更後は非生成latestで取り直す。画面離脱・背景移行・owner変更で旧処理を失効 |
 | 既存保護 | 元材料・意味／引用検査・全期間source guard・削除失効・owner・月次当時保存を保持。新queue/table、Renderサービス、モデル、依存、DB migrationを追加しない |
 
-このcheckpointはAPI／RNの実装・局所検証済み、API／worker未反映、RN build未実施。UI25 PASS。API統合は隔離環境で308 PASS／20 SKIP／1 deselected・4 subtests PASS、51.36秒、既存警告1。SKIPは既存PG19＋環境SQL1。追加caseの別実行18 PASS（API2を含む）、保存後処理12 PASS、queue9 PASS／4 subtests PASSは重複集合があるため加算しない。修正版APIは09a3f714へ9対象fileをGitHub保存・全bytes読戻し一致。既存Analysis CI42427888976は実行中で、成功とはまだ扱わない。通常APIは4ba011c6で今回source前、既存workerは旧2d2f06dかつ分析5設定が未継承。RenderのGoogle再認証後に読取確認し、API queue=true、workerの既存4環境キーには分析5設定がないことを確認した。再認証成功を設定反映・配置成功へ変換せず、今回の環境値保存・配置は0。既存workerに専用分析鍵を登録して接続設定を引き継ぎ、APIとworkerを同じ指定commitへ配置する実操作は最後にMashへ確認する。承認後にserver保存後更新を実確認し、次の統合RN buildへ進む。配置／worker生成の成功や新RN実機の短縮を先取りしない。
+Mash承認後、既存workerへ専用分析鍵を含む5設定をSave onlyで追加し9キー存在を確認、その後CI成功を待ってAPI／workerを同じ09a3f714へ指定配置した。CI42427888976は全17step成功、job完了9:15:24 JST。worker dep-dbnruoou01pc73dj04c0は9:17:31 JST、API dep-dbnrusbl550s7381luu0は9:18:16 JSTにLive、両autoDeploy OFFを読戻し確認。workerの新instance起動ログでmyprofile_latest_refresh_v1を受持ち、poll1秒／maintenance60秒を確認した。配置開始以後の取得範囲ではAPI／workerともapp errorログ0件（他jobの既存failed件数を分析job成功へ置換しない）。
+
+worker Shellのgit head09a3・分析5設定存在・semantic mode／保存120更新4B指定を確認。専用鍵は値を抽出せず認証要求に使用し、空JSONへの上流400・Set-Cookieなしを確認した。生成・新しい本人sourceの送信は0。API health200、未認証のlatest?ensure=true&background=true、latest?ensure=false&background=true、latest/status各401、queue DB読取200も同じ実行環境で確認した。鍵値をClipboardへ再コピーする確認は自動審査が不要として拒否したため中止し、この存在＋実接続の確認へ切替えた。実値や本人本文は資料へ複製しない。ローカル作業環境の直接HTTPはDNSで接続前終了、workerからの最終確認へ切替えた。初期scriptは公開OpenAPI404で停止したが、既存piece_v2_runtime_controlはopenapi_url=Noneであり、検証scriptの仮定だけを修正した。製品sourceの追加修正／設定の緩和は0。
+
+UI25 PASS、API局所308 PASS／20 SKIP／1 deselected・4subtests PASS（51.36秒、既存警告1）を保持。局所SKIPは既存PG19＋環境SQL1で、後続の遠隔CIは月次・source削除の隔離SQLを含めて全工程成功した。追加18／保存後12／queue9の別実行は重複のため加算しない。API09a3の9対象fileとRN4e776e2fをGitHub保存・全bytes読戻し一致。新RNの署名buildは今回まだ起動していない。
 
 独立reviewで、保存read成功後のqueue障害が初回表示まで503にしていた点を修復した。予約／job状態の取得だけが失敗した場合は認可済み保存内容をHTTP200・refresh_status=failedで返す。保存read／source guard失敗は従来どおり拒否し、取消しを成功へ変えない。ASGIで保存内容維持とguard409を追加確認した。既存CIに保存後処理の検証も含め、async pluginと既存対象pathだけを追加する。
 
-灰色列挙非表示はec49d981の修正を継承する。server配備後は旧7701も入力保存後の先行生成結果を再利用できる。一方、画面のbackground表示とstatus pollは次の統合build後であり、現7701を新RN経路へ自動で置き換えたとはしない。今回のDB DML／DDL、Render環境値保存／配置、新GPU生成、署名buildは0。意味品質や内容の全修正を先行条件に戻さず、待ち時間の確認をこの配線変更と保存済み表示の実測へつなぐ。STRUCTURE_MAP_DELTA_PRESENT（既存保存→予約→worker→readの接続変更）。
+灰色列挙非表示はec49d981の修正を継承する。server側は反映済みで、旧7701も入力保存後の先行生成が完了していれば保存結果を再利用できる。新RNのbackground表示とstatus pollは次の統合build後であり、現7701のUIが既に変わったとはしない。今回DB DML／DDL、新GPU生成、署名buildは0、worker環境保存1／API・worker指定配置2。意味品質や内容の全修正を先行条件に戻さず、次はまとめたRN反映と自然な本人入力での先行更新・表示時間を確認する。STRUCTURE_MAP_DELTA_PRESENT（既存保存→予約→worker→readの接続変更）。
+
+配置前後の本文／IDなしDB集計は、myprofile_latest_refresh_v1が944件すべてdone、queued／running／failed0、最大attempts481、最終finished_at2026-11-07T06:14:36Zで不変。cumulative v2=1（最新2026-11-07T06:14:11.591862Z）、v3=1（最新2026-11-07T22:38:42.206545Z）と生成日時も不変。既存owner1組のguard付きmetadata readで表示可能1組を確認した。DB内の非生成再読であり、本人認証済HTTPや配置後の新生成の証明へ換算しない。検証用jobや架空本人記録を追加せず、本人新入力・JWT生成・なりすましも0。既存jobがすべて完了済みのため、配置後の新しい保存入力に対する先行生成はまだ未観測である。
