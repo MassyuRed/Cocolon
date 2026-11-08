@@ -1508,10 +1508,14 @@ API／既存workerはMash承認後に09a3f714へ反映済み。CI42427888976は�
 
 新RN4e776e2fと同じアプリsourceを持つ861082d0で、灰色列挙非表示とbackground表示／pollを一回の統合iOS buildへまとめた。run42430220604／#78 attempt1（7801）は9:32:33 JST開始、Archive・写真目的文検査・IPA・Uploadを含む全19step成功。Uploadは9:45:56 JST、jobは9:46:03 JST終了。7801は固定workflowのrun78×100＋attempt1から導出した番号で、該当ログは取得接続エラー／代替endpoint非対応のため未照合。Apple側の実番号も未確認。Apple処理／内部配布／本人表示は未確認。Apple管理画面の読取操作がユーザーにより中断されたため、それ以降のApple操作を停止した。既存7701もserver先行生成が完了していれば保存結果を再利用できる。局所UI25 PASS、API308 PASS／20 SKIP／1 deselected・4subtests PASS（51.36秒、既存警告1）と、後続の遠隔CI成功を混同しない。前後DB集計はlatest-refresh944件すべてdone・queued/running/failed0・日時不変、cumulative v2=1/v3=1・生成日時不変。既存owner1組のguard付きmetadata再読で表示可能1組、本人原文／IDの出力なし。検証用job・本人新入力・JWT生成・なりすまし・DB DML/DDL・新GPU生成・学習・新サービスは0。Renderは環境設定保存1・指定配置2。後続の本人追加入力で保存起点jobの完了（再試行込み約399.67秒、最終試行約133.87秒）と実7801の非生成取得HTTP200／466ms、Mashの表示到達を確認した。灰色一覧非表示の実機受入れは未確認で、生成自体の171.3496秒という架空単発計測は変更しない。STRUCTURE_MAP_DELTA_PRESENT（既存保存→予約→worker→readの接続変更）。
 
-### 2026-11-08 — 更新完了通知（局所検証済み、CI進行中・未配置）
+### 2026-11-08 — 更新完了通知（対象検証と最終API CI成功、反映承認待ち）
 
 Mashから、更新完了時にアプリ内と通知許可時のアプリ終了中pushで「わたしマップが更新されました」と知らせる要望を受領。新しいcurrent artifactのcommitとguard付き保存再読後だけ、既存send_fcm_push_v1を本人／artifactごとの一回予約として追加する。only-if-absentの原子的insertは既存queued/running/done/failedを更新しない。失敗・空・保存再利用・単なる月次captureでは新予約しない。送信前に本人・recipient・現在guard付きmetadataを再照合し、現push_enabled／token解決を保持する。固定文とroute metadataだけで分析本文を送らない。予約障害は保存成功を失敗へ変えないbest-effortであり、外部配送exactly-once保証や新outboxではない。新kindはpriority60で同workerの次の長い分析予約より先に送信する。
 
 RNは既存MainTabsのmap status確認とbannerを全プランへ接続し、foreground pushをguard再確認のhintにする。pollとpushの同版表示を抑制し、cold/warm tapは新kindのrecipientと現在本人を照合して既存openSelfReportLatestから現在の累積mapを開く。個人の完了をglobal NoticeHistoryへ登録しない。workerにFCM設定／secret files／linked groupがなく、APIに既存FCM設定とfirebase_service_account.jsonがあることをUIで名称のみ確認。資格の閲覧・複製・設定保存・新版配置はまだ行っていない。新table／依存／サービスなし。STRUCTURE_MAP_DELTA_PRESENT（既存map保存→通知queue→送信／本人端末導線）。
 
-通知API候補は59934faf（前段8c5ce5eeから旧7801の誤Piece遷移を避けるscreen=Analysisを追加）。新RNでは新kindを明示してmapへ直接開き、旧版では既存Analysis入口へ戻す。既存CI42434201873を実行中。局所API375 PASS／21 SKIP／1 deselected・21subtests、互換追補の対象25 PASS。RNは通知関連70 PASSとstartup／Root owner対象2 PASS。広めの既存3file118件試行は107 PASS／11環境失敗（未checkout featuresまたは既存Metro不足）であり、全成功へ変換しない。新規依存installなし。独立reviewで、guard無効の空status後に同じ版が再visibleとなるだけで誤bannerする経路を修復。初期空→初生成の通知を維持し、旧valid版復帰は通知しない。背景中の遅延応答は版／通知を消費せず、復帰後に再確認する。
+通知API候補は59934faf（前段8c5ce5eeから旧7801の誤Piece遷移を避けるscreen=Analysisを追加）。新RNでは新kindを明示してmapへ直接開き、旧版では既存Analysis入口へ戻す。既存CI42434201873は全17step成功、10:41:01 JSTにjob完了（月次・source削除失効の隔離SQLを含む）。局所API375 PASS／21 SKIP／1 deselected・21subtests、互換追補の対象25 PASS。RNは通知関連70 PASSとstartup／Root owner対象2 PASS。広めの既存3file118件試行は107 PASS／11環境失敗（未checkout featuresまたは既存Metro不足）であり、全成功へ変換しない。新規依存installなし。独立reviewで、guard無効の空status後に同じ版が再visibleとなるだけで誤bannerする経路を修復。初期空→初生成の通知を維持し、旧valid版復帰は通知しない。背景中の遅延応答は版／通知を消費せず、復帰後に再確認する。
+
+RN候補e2d7a7aはphase6 CI成功、既存Piece CIはRN contractsを含む5job成功・既知V4 iOS metricsの1job失敗。通知変更前4e776e2fの直近run42428022739と失敗19名称・順序が完全一致し、native／recipe／checker／依存差分0。通知の新退行や全製品greenへ換算せず、既知Piece残件の修復を今回通知の先行条件に追加しない。
+
+実装／局所検証／最終API CIは完了し、既存通知資格のworker登録・通知API／worker配置・対応RNの統合TestFlight署名build／既存内部配布の個別承認待ち。通知版の現live反映・実pushはまだ行っていない。

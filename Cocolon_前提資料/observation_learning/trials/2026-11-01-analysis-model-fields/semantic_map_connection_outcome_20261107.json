@@ -70,7 +70,7 @@
     "render_settings_merge": "APPLIED_AFTER_EXPLICIT_MASH_APPROVAL",
     "production_env_changed": true,
     "deploy_started": true,
-    "next_action": "Saved-input background generation and actual7801 saved read/display are now observed. Complete and validate requested completion notifications using existing in-app banner and FCM queue, then obtain approval for copying the existing API FCM settings/secret file to the worker and deploying the tested notification revision. Apple console inspection remains user-aborted; no further Apple actions. Keep gray-context device confirmation and semantic acceptance separate; do not require all content repairs first.",
+    "next_action": "Obtain approval for registering existing API FCM_PUSH_ENABLED/FCM_SERVICE_ACCOUNT_FILE and firebase_service_account.json on existing mashos-astor-worker, deploying exact API59934faf to API/worker, and one integrated RN build from e2d7a7a app source through existing internal TestFlight distribution. Notification target tests and API final CI passed; unrelated inherited Piece V4 native19 failures match predecessor names/order. Current live remains09a3f714. Do not send fake update notifications or require all semantic repairs first.",
     "deploy_live": true,
     "initial_live_commit": "d63647a816a9f4024aee16bade7735f1b9700e9c",
     "initial_deploy": "dep-dbnglopsrm7s739cqcsg",
@@ -714,7 +714,7 @@
       }
     },
     "completion_notifications_20261108": {
-      "status": "IMPLEMENTED_LOCAL_VALIDATION_PASSED_CI_IN_PROGRESS_NOT_DEPLOYED",
+      "status": "API_CI_AND_RN_TARGETS_PASSED_AWAITING_PRODUCTION_APPROVAL",
       "text": "わたしマップが更新されました",
       "event_type": "watashi_map_updated",
       "new_artifact_only": true,
@@ -733,12 +733,16 @@
       "api_existing_fcm_configuration_and_secret_file_present": true,
       "credential_values_read_or_copied": false,
       "production_deployed": false,
-      "rn_built": false,
       "api_source_commit": "59934faf4aaf7052a7a139b8679ae9c244b1fb7c",
       "api_ci": {
         "run_id": 42434201873,
-        "status": "in_progress",
-        "conclusion": null
+        "job_id": 128589421043,
+        "source_commit": "59934faf4aaf7052a7a139b8679ae9c244b1fb7c",
+        "status": "completed",
+        "conclusion": "success",
+        "all_steps_success": 17,
+        "job_completed_at_utc": "2026-11-08T01:41:01Z",
+        "isolated_monthly_and_source_deletion_sql_passed": true
       },
       "legacy_client_screen_fallback": "Analysis",
       "api_local": {
@@ -776,7 +780,43 @@
         "Register existing API FCM settings and firebase_service_account.json on existing worker",
         "Deploy CI-passed notification revision to API and worker",
         "Build integrated RN notification revision once"
-      ]
+      ],
+      "rn_source_commit": "e2d7a7a15d42a098c8df24544f032ffe095d7f09",
+      "rn_ci": {
+        "phase6": {
+          "run_id": 42434396397,
+          "status": "completed",
+          "conclusion": "success"
+        },
+        "piece": {
+          "run_id": 42434396442,
+          "status": "completed",
+          "conclusion": "failure",
+          "successful_jobs": 5,
+          "failed_jobs": 1,
+          "rn_contract_job_success": true,
+          "failed_job_id": 128590034681,
+          "failure_scope": "Existing V4 native iOS checks: total20/pass1/fail19",
+          "comparison_baseline_run_id": 42428022739,
+          "comparison_baseline_source": "4e776e2f76281b5ce55a5da547ba3f315d82ec93",
+          "comparison_baseline_job_id": 128570429086,
+          "failed_names_and_order_identical": true,
+          "native_recipe_checker_dependency_changes": 0
+        }
+      },
+      "existing_generic_push_queue_readonly_aggregate": {
+        "done": 179,
+        "failed": 23,
+        "queued": 0,
+        "running": 0,
+        "old_failed_requeued": false,
+        "done_status_is_not_delivery_receipt": true
+      },
+      "rn_testflight_build_started": false,
+      "api_source_remote_unique_files_verified": 5,
+      "rn_source_test_and_status_files_verified": 11,
+      "approval_received": false,
+      "approval_reason": "Existing Rule18 section11.3 excludes new credential sharing to a worker and production deployment from standing delegation; ask once for the concrete tested revision and integrated TestFlight distribution scope"
     }
   }
 }
