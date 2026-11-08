@@ -16,14 +16,14 @@ import {
 import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 
 const ANALYSIS_TABS = [
-  { key: "emotion", label: "こころ天気" },
+  { key: "emotion", label: "こころグラフ" },
   { key: "self", label: "わたしマップ" },
 ];
 
 const EMOTION_REPORT_TABS = [
-  { key: "daily", label: "こころ天気（日）" },
-  { key: "weekly", label: "こころ天気（週）" },
-  { key: "monthly", label: "こころ天気（月）" },
+  { key: "daily", label: "こころグラフ（日）" },
+  { key: "weekly", label: "こころグラフ（週）" },
+  { key: "monthly", label: "こころグラフ（月）" },
 ];
 
 function safeParseTutorialContentJson(raw) {
@@ -313,7 +313,7 @@ export default function AnalysisContentFirstScreen({
   );
   const effectiveHomeSummariesLoading = isTutorialMode ? false : homeSummariesLoading;
   const currentEmotionHistoryLabel =
-    EMOTION_REPORT_TABS.find((tab) => tab.key === activeEmotionReportType)?.label || "こころ天気（日）";
+    EMOTION_REPORT_TABS.find((tab) => tab.key === activeEmotionReportType)?.label || "こころグラフ（日）";
 
   const handleOpenCurrentEmotionHistory = () => {
     if (activeEmotionReportType === "weekly") {
@@ -403,7 +403,7 @@ export default function AnalysisContentFirstScreen({
           renderTab({
             tabKey: tab.key,
             label: tab.label,
-            icon: tab.key === "emotion" ? "partly-sunny-outline" : "git-network-outline",
+            icon: tab.key === "emotion" ? "bar-chart-outline" : "git-network-outline",
             active: activeAnalysisTab === tab.key,
             badgeVisible: tab.key === "emotion" ? unreadEmotion : unreadSelfStructure,
             onPress: () => setActiveAnalysisTab(tab.key),

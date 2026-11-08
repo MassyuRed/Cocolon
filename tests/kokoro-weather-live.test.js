@@ -93,7 +93,9 @@ test('today uses actual API fixture, weighted donut and time-band records; week/
   assert.match(h.calls[0].url, /\/analysis\/kokoro-weather\?period=today$/);
   assert.equal(h.calls[0].options.expectedUserId, 'A');
   assert.ok(h.calls[0].options.signal instanceof AbortSignal);
-  assert.match(h.text(), /今日の天気/);
+  assert.match(h.text(), /今日の感情/);
+  assert.equal(h.root.root.findAllByType("Icon").filter(node => node.props.name === "partly-sunny-outline").length, 0);
+  assert.ok(h.root.root.findAllByType("Icon").some(node => node.props.name === "chevron-back"));
   assert.match(h.text(), /6件の入力/);
   assert.match(h.text(), /41%/);
   await h.press('朝、6:00–12:00、2件');
@@ -180,10 +182,10 @@ test('month remains synchronized with its history link after opening and closing
   const h = await mount(t, { parent: true });
   await h.press('月');
   await h.press('わたしマップ');
-  await h.press('こころ天気');
+  await h.press('こころグラフ');
   assert.match(h.calls.at(-1).url, /period=month/);
-  assert.match(h.text(), /この月のこころ天気/);
-  await h.press('こころ天気（月）の履歴を見る');
+  assert.match(h.text(), /この月のこころグラフ/);
+  await h.press('こころグラフ（月）の履歴を見る');
   assert.equal(h.events.at(-1), 'monthly-history');
 });
 

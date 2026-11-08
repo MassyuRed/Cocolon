@@ -15,6 +15,7 @@ name: Piece RN preview and owner contracts
       - screens/analysisReport/KokoroWeatherTimeline.js
       - lib/compat/legacyWireContracts.js
       - tests/kokoro-weather-live.test.js
+      - tests/analysis-report-history.test.js
       - tests/fixtures/kokoro-weather-live-v1.json
       - screens/input/InputPieceActionArea.js
       - screens/InputScreen.js
@@ -118,6 +119,7 @@ jobs:
           tests/private-history-owner-race.test.js
           tests/social-owner-request-race.test.js
           tests/kokoro-weather-live.test.js
+          tests/analysis-report-history.test.js
           tests/piece-v2-resonance-owner-binding.test.js
           tests/analysis-semantic-map.test.js
 

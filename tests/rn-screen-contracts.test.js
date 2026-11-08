@@ -1260,9 +1260,9 @@ test('AnalysisScreen keeps report history, self-structure, today-question histor
     'export function isAnalysisReportType',
     'export function formatLatestUpdateLabel',
     'export function isAnalysisMenuRoute',
-    'daily: "こころ天気（日）"',
-    'weekly: "こころ天気（週）"',
-    'monthly: "こころ天気（月）"',
+    'daily: "こころグラフ（日）"',
+    'weekly: "こころグラフ（週）"',
+    'monthly: "こころグラフ（月）"',
   ], 'analysisRouteModel.js');
 
   assertIncludes(analysisRouteState, [
@@ -1306,28 +1306,28 @@ test('AnalysisScreen keeps report history, self-structure, today-question histor
 
   assertIncludes(analysisContentFirst, [
     'KokoroWeatherTimeline',
-    'こころ天気',
+    'こころグラフ',
     'isKokoroWeatherReportRecord',
     'handleOpenCurrentEmotionHistory',
-    'こころ天気（日）',
-    'こころ天気（週）',
-    'こころ天気（月）',
+    'こころグラフ（日）',
+    'こころグラフ（週）',
+    'こころグラフ（月）',
   ], 'AnalysisContentFirstScreen.js current weather card guard');
 
   assertIncludes(kokoroWeatherCurrentCard, [
     'export default function KokoroWeatherCurrentCard',
     '今日はまだ観測がありません',
-    '前回のこころ天気を見る',
+    '前回のこころグラフを見る',
     '観測メモあり',
     'こころ温度',
   ], 'KokoroWeatherCurrentCard.js split guard');
 
   assertIncludes(analysisEmotion, [
-    '感情分析のこころ天気を選んでください。',
-    'こころ天気（日）',
-    'こころ天気（週）',
-    'こころ天気（月）',
-    '過去のこころ天気を振り返ります',
+    '感情分析のこころグラフを選んでください。',
+    'こころグラフ（日）',
+    'こころグラフ（週）',
+    'こころグラフ（月）',
+    '過去のこころグラフを振り返ります',
   ], 'AnalysisEmotionScreen.js Phase 5 copy guard');
 
   assertIncludes(kokoroWeatherForecastStrip, [
@@ -1345,8 +1345,8 @@ test('AnalysisScreen keeps report history, self-structure, today-question histor
     'export default function KokoroWeatherDetailModal',
     'Modal',
     'showsHorizontalScrollIndicator={false}',
-    '時間帯別こころ天気',
-    'こころ天気詳細を閉じる',
+    '時間帯別こころグラフ',
+    'こころグラフ詳細を閉じる',
   ], 'KokoroWeatherDetailModal.js split guard');
 
   assertIncludes(kokoroWeatherFormatters, [
@@ -1366,13 +1366,13 @@ test('AnalysisScreen keeps report history, self-structure, today-question histor
     'buildAnalysisReportDetailPath',
     'fetchKokoroWeatherReportDetail',
     'extractReadyItems(json).filter(isKokoroWeatherReportRecord)',
-    'このこころ天気は現在の表示対象外です。',
+    'このこころグラフは現在の表示対象外です。',
   ], 'AnalysisReportHistoryScreen.js kokoro weather fail-closed guard');
 
   assertIncludes(analysisReportViewer, [
     'isKokoroWeatherDisplayTarget',
-    'このこころ天気は現在の表示対象外です',
-    'こころ天気として成立していない旧レポートは表示しません。',
+    'このこころグラフは現在の表示対象外です',
+    'こころグラフとして成立していない旧レポートは表示しません。',
     '!isKokoroWeatherDisplayTarget || reportType !== "weekly"',
   ], 'AnalysisReportViewerScreen.js kokoro weather fail-closed guard');
 
@@ -1680,7 +1680,7 @@ test('Tutorial screens keep the current guided flow count and generated fixture 
     'TUTORIAL_WATASHI_MAP',
     'TUTORIAL_WATASHI_MAP_PREVIEW',
     'Emlisからの返答',
-    'こころ天気',
+    'こころグラフ',
     'わたしマップ',
     'ピース',
     '4つの形で受け取れます',
@@ -2795,17 +2795,17 @@ test('Kokoro weather Phase 6 QA keeps current card, report strip, modal, and for
   assertIncludes(currentCard, [
     'status === "no_observation"',
     '今日はまだ観測がありません',
-    '前回のこころ天気を見る',
+    '前回のこころグラフを見る',
     'replace(/℃/g, "°")',
     '今日0:00から現在までの入力をもとに、こころの状態を観測します。',
   ], 'KokoroWeatherCurrentCard.js no-observation and degree display contract');
 
   assertIncludes(forecastStrip, [
     'export default function KokoroWeatherForecastStrip',
-    'こころ天気図',
+    'こころグラフ',
     '最高',
     '最低',
-    '対象をタップすると、時間帯別のこころ天気を横にスクロールして確認できます。',
+    '対象をタップすると、時間帯別のこころグラフを横にスクロールして確認できます。',
     '<ScrollView horizontal showsHorizontalScrollIndicator={false}>',
     'disabled={isDisabled}',
     '観測少なめ',
@@ -2815,17 +2815,17 @@ test('Kokoro weather Phase 6 QA keeps current card, report strip, modal, and for
     'export default function KokoroWeatherDetailModal',
     '<Modal visible={!!visible} transparent animationType="slide" onRequestClose={onClose} supportedOrientations={MODAL_ORIENTATIONS}>',
     'onPress={onClose}',
-    'accessibilityLabel="こころ天気の詳細を閉じる"',
-    '時間帯別こころ天気',
+    'accessibilityLabel="こころグラフの詳細を閉じる"',
+    '時間帯別こころグラフ',
     '<ScrollView horizontal showsHorizontalScrollIndicator={false}>',
-    '時間帯別のこころ天気はまだありません。',
+    '時間帯別のこころグラフはまだありません。',
   ], 'KokoroWeatherDetailModal.js modal and horizontal bucket contract');
 
   assertIncludes(formatters, [
     'export const KOKORO_WEATHER_VERSION = "kokoro.weather.v1";',
-    'daily: "こころ天気（日）"',
-    'weekly: "こころ天気（週）"',
-    'monthly: "こころ天気（月）"',
+    'daily: "こころグラフ（日）"',
+    'weekly: "こころグラフ（週）"',
+    'monthly: "こころグラフ（月）"',
     'text.endsWith("°")',
     'replace(/℃/g, "°")',
     'weather.status === "no_observation"',
@@ -2865,23 +2865,23 @@ test('Kokoro weather Phase 6 QA keeps scope on emotion analysis and preserves pl
     'KokoroWeatherTimeline',
     'isKokoroWeatherReportRecord',
     'handleOpenCurrentEmotionHistory',
-    '{ key: "daily", label: "こころ天気（日）" }',
-    '{ key: "weekly", label: "こころ天気（週）" }',
-    '{ key: "monthly", label: "こころ天気（月）" }',
+    '{ key: "daily", label: "こころグラフ（日）" }',
+    '{ key: "weekly", label: "こころグラフ（週）" }',
+    '{ key: "monthly", label: "こころグラフ（月）" }',
   ], 'AnalysisContentFirstScreen.js top UI and tab label contract');
 
   assertIncludes(emotionMenu, [
-    'こころ天気（日）',
-    'こころ天気（週）',
-    'こころ天気（月）',
-    '最新のこころ天気（日/週/月）を確認します',
-    '過去のこころ天気を振り返ります',
+    'こころグラフ（日）',
+    'こころグラフ（週）',
+    'こころグラフ（月）',
+    '最新のこころグラフ（日/週/月）を確認します',
+    '過去のこころグラフを振り返ります',
   ], 'AnalysisEmotionScreen.js kokoro weather copy contract');
 
   assertIncludes(history, [
-    'こころ天気（日）',
-    'こころ天気（週）',
-    'こころ天気（月）',
+    'こころグラフ（日）',
+    'こころグラフ（週）',
+    'こころグラフ（月）',
     'Freeプランの',
     'canViewAnalysisFullText',
   ], 'AnalysisReportHistoryScreen.js history and plan boundary contract');
@@ -2896,20 +2896,20 @@ test('Kokoro weather Phase 6 QA keeps scope on emotion analysis and preserves pl
   ], 'analysisReportAccessPolicy.js keeps existing Free/Plus/Premium boundaries');
 
   assertIncludes(guide, [
-    'こころ天気（日）・こころ天気（週）・こころ天気（月）',
-    '今日の天気',
+    'こころグラフ（日）・こころグラフ（週）・こころグラフ（月）',
+    '今日の感情',
     '現在のマップは、蓄積した入力全体を対象に全プラン共通で表示します。解析できていない範囲がある場合は、件数を案内します。',
   ], 'guide/guidesJa.js preserves emotion-only kokoro weather and self-analysis copy');
 
   assertIncludes(terms, [
-    'こころ天気',
-    '感情入力をもとに、こころ天気（日/週/月）を見る分析です。',
-    '感情入力をもとに、こころ天気（日/週/月）を見る分析です。',
+    'こころグラフ',
+    '感情入力をもとに、こころグラフ（日/週/月）を見る分析です。',
+    '感情入力をもとに、こころグラフ（日/週/月）を見る分析です。',
   ], 'guide/termsJa.js kokoro weather terms contract');
 
   assertIncludes(tutorialData, [
-    'こころ天気',
-    'こころ天気（日/週/月）',
+    'こころグラフ',
+    'こころグラフ（日/週/月）',
   ], 'tutorialScenarioData.js kokoro weather tutorial labels');
 
   assertIncludes(tutorialFixtures, [
@@ -2927,10 +2927,10 @@ test('Kokoro weather Phase 6 QA keeps scope on emotion analysis and preserves pl
   ].join('\n');
 
   assertNotIncludes(selfStructureFiles, [
-    'こころ天気（日）',
-    'こころ天気（週）',
-    'こころ天気（月）',
-    '今日の天気',
+    'こころグラフ（日）',
+    'こころグラフ（週）',
+    'こころグラフ（月）',
+    '今日の感情',
   ], 'Self Structure surfaces must not be kokoro-weatherized');
 });
 

@@ -8,7 +8,7 @@ import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 /**
  * AnalysisCrossLinkSection
  * --------------------
- * Analysis（こころ天気レポート）→ Piece / わたしマップへの交差リンク用UI。
+ * Analysis（こころグラフレポート）→ Piece / わたしマップへの交差リンク用UI。
  *
  * v0.1（Step 4）:
  * ・週報 / 月報の末尾に「わたしマップの深掘り候補」を提示
@@ -64,7 +64,7 @@ function topic(id, title, blurb, suggestedQuestion) {
 }
 
 /**
- * こころ天気（週/月）→ わたしマップの「深掘り候補トピック」を生成
+ * こころグラフ（週/月）→ わたしマップの「深掘り候補トピック」を生成
  * ※ 初期は静的ルールベースでOK（動的/生成AIは後回し）
  */
 export function buildSelfStructureTopics({ reportType = "weekly", metrics }) {
@@ -307,7 +307,7 @@ export default function AnalysisCrossLinkSection({
       <View style={styles.header}>
         <Text style={styles.title}>【わたしマップの深掘り候補】</Text>
         <Text style={styles.sub}>
-          {label}のこころ天気から、わたしマップやピースで触れると良さそうな論点
+          {label}のこころグラフから、わたしマップやピースで触れると良さそうな論点
         </Text>
       </View>
 

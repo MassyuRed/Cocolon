@@ -4002,3 +4002,17 @@ API `ai/tools/analysis_jupyter_bridge.py`／`ai/tests/test_analysis_jupyter_brid
 ### 2026-11-07 関係mapのCMEE本体統合と稼働差分
 
 Analysisの4B候補は、API側別作者から既存Engine/semantic_admission/intent_compiler/observed_route_realizerへ移管した。可視意味と根拠が同居する一つのGraphから図・本文・privateを導き、公開v3/immutable保存/旧端末互換を維持。API d63647a8はRender live/healthz200、TestFlight7701は署名・upload成功。4B通常有効化/本人実機分析は未成立で、モデル品質と長履歴対応が残る。詳細current ownerはAnalysis/CMEE構造mapと最新weekly§16。
+
+## 11/8 こころグラフ候補 — 履歴read／既読owner
+
+通常表示の既存live経路・集計を維持し、Mash採用名「こころグラフ」と右上天気マーク撤去を候補へ反映。ファイル移動やwire改名は行わない。
+
+| owner | 役割 |
+|---|---|
+| `screens/AnalysisReportHistoryScreen.js`／`lib/compat/legacyWireContracts.js` | metadata-only一覧、選択detail再認可、owner・load世代で後着を抑止。初回／追加ページの確認済みreadを統合 |
+| `screens/AnalysisScreen.js`／`screens/analysis/useAnalysisUnreadBadges.js` | 表示後mark一回と成功確認後revision。Viewerへmark担当済みを伝える |
+| `screens/AnalysisReportViewerScreen.js`／`screens/analysisReport/kokoroWeatherFormatters.js` | 二重mark抑止、旧保存の名称を表示だけ変換。本文は先頭生成見出しだけ変換 |
+| `tests/analysis-report-history.test.js` | 実React9件。metadata／detail分離、read・page・owner競合、旧名変換を検査 |
+| API `response_microcache.py`／`ai/tests/test_analysis_report_kokoro_weather.py` | 無効化後の旧inflight再cacheを防ぎ、ASGI既読mark競合で確認 |
+
+表示・guide・tutorial・購読・新規report／配布copyも同期。実配置8739cd80／配布7901、今回候補の未build／未配置と実機残件は[最新構造](current_structure/03_analysis_current_structure.md#kokoro-graph-history-read-20261108)へ分ける。

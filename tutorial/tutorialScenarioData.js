@@ -347,7 +347,7 @@ export const TUTORIAL_INTRO_FLOWCHART = Object.freeze({
     }),
     Object.freeze({
       label: "あとで振り返る",
-      title: "こころ天気",
+      title: "こころグラフ",
     }),
     Object.freeze({
       label: "自分の動き方を見る",
@@ -368,10 +368,10 @@ export const TUTORIAL_CONNECTION_ROWS = Object.freeze([
     example: "返答は、あとから同じ内容を読み返せます。",
   }),
   Object.freeze({
-    title: "こころ天気",
+    title: "こころグラフ",
     description:
-      "入力が続くと、こころ天気（日/週/月）として振り返れます。",
-    example: "自分の気持ちの流れを、天気のようにあとから見返せます。",
+      "入力が続くと、こころグラフ（日/週/月）として振り返れます。",
+    example: "自分の気持ちの流れを、グラフであとから見返せます。",
   }),
   Object.freeze({
     title: "わたしマップ",

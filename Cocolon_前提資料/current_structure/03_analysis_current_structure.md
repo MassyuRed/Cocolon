@@ -1563,3 +1563,25 @@ workerへAPI既存のsecret file `firebase_service_account.json` をSave onlyで
 配置後HTTPはhealthz200/status ok、app/bootstrap200、未認証weatherのtoday／week／month各401、latest/status401、latest?ensure=false&force=false&background=true401の7条件成功。認証済み本人の集計値・端末応答速度の証明ではない。新DB DML／DDL、モデル生成、新Pod／サービス／依存は0。
 
 GitHub UIのbuild完了と番号設定ログ `GITHUB_RUN_NUMBER=79`／`GITHUB_RUN_ATTEMPT=1`／`BUILD_NUMBER=7901`、Archive／photo-purpose検査／Export IPA工程、Uploadログ `No errors uploading archive`／`UPLOAD SUCCEEDED with no errors` を照合。署名build起動は一回のみでrerunなし。Mashのログイン完了後、Appleで実1.0（7901）を照合。Missing Complianceに対し、前回7601からpackage.json／lock／iosに変更がないことをgit diffで確認し、従来どおりOS提供の通信暗号化に対応する「None of the algorithms mentioned above」を保存。dialog消失と7901のReady to Submitを確認し、既存内部group「Emlis テスト版配布」のBuildsで1.0（7901）Testing／Expires in 90 daysを照合した。既存groupへの自動登録を確認したもので、groupやtesterの追加、外部配布、App Store公開、契約同意、追加buildは0。こころ天気の本人新入力反映、grey一覧の非表示、map更新完了後の通知受信／tapは引き続き実機未確認。既存プレビュー2fileは変更していない。STRUCTURE_MAP_DELTA_NONE（今回の追加は配置状態の更新で、前段の経路実装を変更しない）。
+
+<a id="kokoro-graph-history-read-20261108"></a>
+### 同日・こころグラフへの改名／履歴と既読修復（ビルド準備まで）
+
+Mashは7901の表示が概ね指示どおりと報告し、天気要素がほぼないため「こころグラフ」を採用、右上の天気マーク撤去・履歴の遅さ・未読が既読にならない問題の修正を指示。署名buildは他の変更とまとめるため今回は起動しない。これは今回候補の実機受入れや通知配送の確認ではない。本人はサンプル入力後の通知待ちと報告している。
+
+| owner / path | 今回の変更 |
+|---|---|
+| `AnalysisContentFirstScreen`／`KokoroWeatherTimeline` | こころグラフ、今日／この日の感情・週／月のこころグラフへ改名。右上partly-sunnyを撤去、タブはbar-chart。円・棒・5色・時間帯・集計は維持 |
+| `AnalysisReportHistoryScreen`／wire builder | 一覧はinclude_body=false、version aliasで表示対象を維持。選択詳細だけ再認可して取得、遷移前のmark待ちと一覧再取得fallbackを撤去。scope／load世代でowner・期間・ページ・既読の後着を排除 |
+| `AnalysisScreen`／`useAnalysisUnreadBadges`／Viewer | 親が遷移後に一回だけmark、Viewerの重複markを抑止。APIのmatching report_id／marked=true確認後だけread revisionを更新、表示中履歴の古いstatusを再読・失効。失敗を既読扱いしない |
+| `kokoroWeatherFormatters` | 旧保存titleは表示時だけ改名。本文は先頭の生成見出しだけ変換し、本文中の旧語・保存原本を変えない。詳細／PDFも同じ変換を使用 |
+| API `response_microcache.py` | invalidate exact／prefixで実行中futureをcancelせずdetach。現在futureと同一のproducerだけcacheへ保存し、既読前の未読計算が後からcacheを上書きする競合を修復 |
+| guide／terms／tutorial／購読案内、API既存タイトル・配布copy | 表示名を同期。生成済tutorial fixture・採用時HTML2file、内部kokoro/weatherキー・route・schema・期間値・DBは維持 |
+
+履歴のsource確認では、従来limit50・include_body既定trueでmetadata候補を最大200件ずつ走査後、表示50件の全文も取得し、tap時に改めてdetailを取得していた。今回は不要な全文取得を外す。追加ページの先頭からの候補走査自体は既存のままで、実機速度の改善率は未計測。一覧は旧版でも既読status完了前に描画できるため、既読照会が一覧描画そのものを必ず止めていたとはしない。詳細前のmark待ちと最大3回の重複を解消した。
+
+未読の全原因は未断定。確定したcache競合と、RNの旧status後着・追加ページの既読消失を修復。期間入口badgeは既存どおり各期間の最新1件を判定し、古い履歴だけ読んだ場合に最新未読まで消さない。既読化前から待つ旧GETの返値そのものは書き換えず、RN世代検査と組み合わせる。owner認証／期間制限／公開状態／kokoro version判定、detail時の再認可は維持する。
+
+API候補a305b33346b4a90b68f8d92893a7099b31c4d92a。局所7suite73 PASS（新ASGI競合1件を含む、既存deprecation警告2）。新検査は旧未読計算開始→本人mark成功→新GET既読→旧計算完了→cacheも既読維持、別owner cache不変を検査。RNは新history9＋既存weather7＋screen36＝52 PASS。metadataのみの初期表示、tap詳細、旧名表示変換、owner／期間／既読revisionの後着、初回status保留中の追加page既読保持、server確認後だけのmark成功を実Reactで検査。最初のRN1失敗はテストがunmount済みTestInstanceからpropsを読む誤りで、古いhandlerを先に保存するfixture修復後に成功。追加広域の初回は136 PASS／TypeScript compiler不足による1file loader失敗。既存CIと同じ固定TypeScript5.2.2を一時test環境だけへ追加後、同5fileを再検査して141 PASS／FAIL・SKIP0。商品依存／lock変更なし。既存の署名build前検証CIへ新testを加え、遠隔CI結果は後続確認へ記録する。
+
+独立reviewで指摘された追加page既読の上書きと保存済み本文先頭の旧名を修復し再確認。STRUCTURE_MAP_DELTA_PRESENT（履歴readと既読ownerの整理）。新table／schema／製品依存／サービス／GPU生成／本番設定／Render配置／署名build／Uploadは0。API／worker live8739cd80とTestFlight7901は維持。今回版の配置、実機速度、未読マークの実機解消、通知受信／tapは未確認であり、他の修正とまとめた次回build・反映後の確認事項とする。

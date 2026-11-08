@@ -50,7 +50,7 @@ import { PieRingChart } from "./analysisReport/AnalysisReportCharts";
 import AnalysisReportUpgradeCard from "./analysisReport/AnalysisReportUpgradeCard";
 import KokoroWeatherForecastStrip from "./analysisReport/KokoroWeatherForecastStrip";
 import KokoroWeatherDetailModal from "./analysisReport/KokoroWeatherDetailModal";
-import { isKokoroWeatherReportRecord } from "./analysisReport/kokoroWeatherFormatters";
+import { formatKokoroGraphText, formatKokoroGraphTitle, isKokoroWeatherReportRecord } from "./analysisReport/kokoroWeatherFormatters";
 
 /**
  * AnalysisReportViewerScreen
@@ -71,6 +71,7 @@ export default function AnalysisReportViewerScreen({
   hideHeader = false,
   disableActions = false,
   onMarkedRead,
+  markReadOnOpen = true,
 }) {
   // 🎨 theme
   const { themeName, colors } = useTheme();
@@ -107,7 +108,7 @@ export default function AnalysisReportViewerScreen({
     (async () => {
       try {
         const reportId = report?.id;
-        if (!reportId || cancelled || !isKokoroWeatherDisplayTarget) return;
+        if (!reportId || cancelled || !isKokoroWeatherDisplayTarget || !markReadOnOpen || disableActions) return;
 
         await apiPost("/report-reads/mark", {
           report_id: String(reportId),
@@ -127,12 +128,12 @@ export default function AnalysisReportViewerScreen({
     return () => {
       cancelled = true;
     };
-  }, [isKokoroWeatherDisplayTarget, onMarkedRead, report?.id]);
+  }, [isKokoroWeatherDisplayTarget, onMarkedRead, report?.id, markReadOnOpen, disableActions]);
 
 
   const themed = {};
 
-  const title = report?.title || "Report";
+  const title = formatKokoroGraphTitle(report?.title);
   const reportType = report?.report_type || "";
 
   const contentText = report?.content_text || "";
@@ -221,10 +222,10 @@ export default function AnalysisReportViewerScreen({
 
     if (canViewDeepText) {
       const parts = [stdText, deepText].filter((part) => typeof part === "string" && part.trim());
-      return parts.length > 0 ? parts.join("\n\n") : legacy;
+      return formatKokoroGraphText(parts.length > 0 ? parts.join("\n\n") : legacy);
     }
-    if (canViewStandardText) return stdText || legacy;
-    return legacy;
+    if (canViewStandardText) return formatKokoroGraphText(stdText || legacy);
+    return formatKokoroGraphText(legacy);
   }, [canViewDeepText, canViewStandardText, contentJson, contentText, standardReport, deepReport]);
 
   // ===== Monthly chart data (stored in content_json.metrics.weeks) =====
@@ -543,10 +544,10 @@ const deepPatternSectionTitle = useMemo(() => {
   const unavailableContent = (
     <View style={[styles.unavailableCard, themed.chartCard]}>
       <Text style={[styles.unavailableTitle, themed.chartTitle]}>
-        このこころ天気は現在の表示対象外です
+        このこころグラフは現在の表示対象外です
       </Text>
       <Text style={[styles.unavailableText, themed.empty]}>
-        こころ天気として成立していない旧レポートは表示しません。
+        こころグラフとして成立していない旧レポートは表示しません。
       </Text>
       {!disableActions && typeof onBack === "function" ? (
         <TouchableOpacity

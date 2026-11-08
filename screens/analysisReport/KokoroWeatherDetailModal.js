@@ -1,7 +1,7 @@
 import React, { useMemo } from "react";
 import { Modal, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-// Phase 4: 時間帯別こころ天気を横スクロールで確認する詳細Modal。
+// Phase 4: 時間帯別こころグラフを横スクロールで確認する詳細Modal。
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
@@ -179,7 +179,7 @@ export default function KokoroWeatherDetailModal({ visible, item, detail, report
   return (
     <Modal visible={!!visible} transparent animationType="slide" onRequestClose={onClose} supportedOrientations={MODAL_ORIENTATIONS}>
       <SafeAreaProvider><SafeAreaView edges={["top", "bottom", "left", "right"]} style={styles.backdrop}>
-      <TouchableOpacity style={StyleSheet.absoluteFillObject} activeOpacity={1} onPress={onClose} accessibilityLabel="こころ天気の詳細を閉じる" accessibilityRole="button" />
+      <TouchableOpacity style={StyleSheet.absoluteFillObject} activeOpacity={1} onPress={onClose} accessibilityLabel="こころグラフの詳細を閉じる" accessibilityRole="button" />
         <View style={styles.sheet}>
           <View style={styles.handle} />
           <View style={styles.headerRow}>
@@ -187,9 +187,9 @@ export default function KokoroWeatherDetailModal({ visible, item, detail, report
             <TouchableOpacity
               style={styles.closeButton}
               onPress={onClose}
-              accessibilityLabel="こころ天気の詳細を閉じる"
+              accessibilityLabel="こころグラフの詳細を閉じる"
               accessibilityRole="button"
-              // こころ天気詳細を閉じる
+              // こころグラフ詳細を閉じる
             >
               <Ionicons name="close" size={20} color={colors.TEXT_ON_LIGHT} />
             </TouchableOpacity>
@@ -199,7 +199,7 @@ export default function KokoroWeatherDetailModal({ visible, item, detail, report
           <View style={styles.summaryCard}>
             <View style={styles.summaryTop}>
               <Ionicons name={normalized?.iconName || "ellipse-outline"} size={24} color={colors.TITLE_GOLD} />
-              <Text style={styles.weatherText}>{normalized?.weatherLabel || "こころ天気"}</Text>
+              <Text style={styles.weatherText}>{normalized?.weatherLabel || "こころグラフ"}</Text>
             </View>
             <Text style={styles.tempText}>こころ温度 {normalized?.temperatureDisplay || normalized?.temperatureHighDisplay || "—"}</Text>
             {dominant || shareText ? <Text style={styles.metaText}>中心に見えた気持ち: {dominant || shareText}</Text> : null}
@@ -211,7 +211,7 @@ export default function KokoroWeatherDetailModal({ visible, item, detail, report
             ) : null}
           </View>
 
-          <Text style={styles.sectionTitle}>時間帯別こころ天気</Text>
+          <Text style={styles.sectionTitle}>時間帯別こころグラフ</Text>
           {buckets.length > 0 ? (
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               {buckets.map((bucket, idx) => {
@@ -233,7 +233,7 @@ export default function KokoroWeatherDetailModal({ visible, item, detail, report
               })}
             </ScrollView>
           ) : (
-            <Text style={styles.emptyText}>時間帯別のこころ天気はまだありません。</Text>
+            <Text style={styles.emptyText}>時間帯別のこころグラフはまだありません。</Text>
           )}
           </ScrollView>
         </View>

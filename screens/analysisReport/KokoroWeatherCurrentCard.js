@@ -204,16 +204,16 @@ export default function KokoroWeatherCurrentCard({ currentWeather, onOpenPreviou
   if (!isRenderableCurrentWeather(currentWeather)) return null;
 
   const status = asString(currentWeather.status).toLowerCase();
-  const label = asString(currentWeather.label, "今のこころ天気");
+  const label = asString(currentWeather.label, "今のこころグラフ");
   const previousAvailable = Boolean(currentWeather.previous_available);
   const canOpenPrevious = previousAvailable && typeof onOpenPrevious === "function";
 
   if (status === "no_observation") {
     const emptyTitle = asString(currentWeather.empty_title, "今日はまだ観測がありません");
-    const emptyActionLabel = asString(currentWeather.empty_action_label, "前回のこころ天気を見る");
+    const emptyActionLabel = asString(currentWeather.empty_action_label, "前回のこころグラフを見る");
 
     return (
-      <View style={styles.card} accessibilityLabel="今のこころ天気">
+      <View style={styles.card} accessibilityLabel="今のこころグラフ">
         <View style={styles.headerRow}>
           <View style={styles.titleWrap}>
             <Ionicons name="time-outline" size={17} color={colors.TITLE_GOLD} />
@@ -250,7 +250,7 @@ export default function KokoroWeatherCurrentCard({ currentWeather, onOpenPreviou
   const memoDetail = asString(observationMemo.detail);
 
   return (
-    <View style={styles.card} accessibilityLabel="今のこころ天気">
+    <View style={styles.card} accessibilityLabel="今のこころグラフ">
       <View style={styles.headerRow}>
         <View style={styles.titleWrap}>
           <Ionicons name="time-outline" size={17} color={colors.TITLE_GOLD} />

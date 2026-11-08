@@ -796,4 +796,10 @@ Mashが保存済みの表示案を採用し、修正作業を明示指示。今�
 
 新しい通常表示は `AnalysisContentFirstScreen` → `KokoroWeatherTimeline` → `useKokoroWeather` → `/analysis/kokoro-weather`。本人の通常5感情を弱1／中2／強3で集計し、自己理解だけの記録は件数にも含めない。入力後のタブ復帰・アプリ前面復帰・JST日付更新で再取得。保存reportの取得や分析モデルを待たない。履歴の保存report／課金条件、わたしマップ、チュートリアルは維持した。
 
-API候補8739cd80、RN候補4483f6d4。API対象72 PASS、RN対象113 PASS、独立reviewで外側Pressableの等幅配置・親子の期間同期・31日目盛りを修復した。プレビュー原本は比較用にそのまま保持。本番反映・署名build・実機の描画／本人入力での確認は未実行。[詳細](../../current_structure/03_analysis_current_structure.md#kokoro-weather-live-20261108)。
+API候補8739cd80、RN候補4483f6d4。API対象72 PASS、RN対象113 PASS、独立reviewで外側Pressableの等幅配置・親子の期間同期・31日目盛りを修復した。プレビュー原本は比較用にそのまま保持。その後API8739cd80／7901を反映し、Mashの概ね指示どおりとの表示報告を受領。後続の改名・履歴／既読修復候補は未build／未配置。[詳細](../../current_structure/03_analysis_current_structure.md#kokoro-weather-live-20261108)。
+
+## 11/8 表示名をこころグラフへ変更する候補
+
+7901表示はMashが概ね指示どおりと報告。その後「こころグラフ」を採用し、メイングラフ右上の天気印を削除、タブは棒グラフ印へ変更する指示を受領。今日の円＋4時間帯、週／月の日別100%棒と選択内訳・配色・欠測表現は維持する。旧保存名は表示時だけ変換し、履歴のmetadata-onlyと既読処理修復を候補へまとめた。署名buildは他の作業後にまとめるため起動していない。
+
+採用時 `20261108-kokoro-weather.html`／`.source.html` は旧名を含む比較原本として変更しない。保存済み元案と今回候補、7901の実機報告を混同しない。詳細は既存の分析構造・最新weeklyの `kokoro-graph-history-read-20261108` 節を参照。

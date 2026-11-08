@@ -135,6 +135,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
     refreshUnreadBadges,
     markSelfStructureLatestSeen,
     markReportRead,
+    reportReadRevision,
   } = useAnalysisUnreadBadges({
     isPaid,
     subscriptionLoading,
@@ -353,11 +354,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
       setSelectedReport(report || null);
       setReportViewBackRoute(backRoute);
       setRoute("reportView");
-      try {
-        await markReportRead(report);
-      } finally {
-        refreshUnreadBadges();
-      }
+      if (await markReportRead(report)) refreshUnreadBadges();
     },
     [markReportRead, refreshUnreadBadges]
   );
@@ -490,6 +487,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
       ) : route === "reportHistory" ? (
         <AnalysisReportHistoryScreen
           reportType={reportType}
+          reportReadRevision={reportReadRevision}
           onBack={() => {
             setRoute(reportHistoryBackRoute);
             refreshUnreadBadges();
@@ -502,6 +500,7 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
       ) : route === "reportView" ? (
         <AnalysisReportViewerScreen
           report={selectedReport}
+          markReadOnOpen={false}
           onBack={() => {
             setRoute(reportViewBackRoute);
             refreshUnreadBadges();
@@ -758,7 +757,7 @@ function AnalysisHome({
                   </Text>
                 </View>
                 <Text style={styles.dashboardSummaryHint}>
-                  詳しい流れはこころ天気（週）で確認できます。
+                  詳しい流れはこころグラフ（週）で確認できます。
                 </Text>
               </>
             ) : (
@@ -778,7 +777,7 @@ function AnalysisHome({
                     color={colors.TEXT_ON_LIGHT}
                     style={{ marginRight: 6 }}
                   />
-                  <Text style={[styles.goldButtonText, { color: colors.TEXT_ON_LIGHT }]}>こころ天気（週）を見る</Text>
+                  <Text style={[styles.goldButtonText, { color: colors.TEXT_ON_LIGHT }]}>こころグラフ（週）を見る</Text>
                 </View>
               </CocolonButton>
               <UnreadBadge
@@ -793,7 +792,7 @@ function AnalysisHome({
         <View style={styles.section}>
           <View ref={tutorialRefs?.dailyRef} collapsable={false} style={styles.dashboardButtonsCard}>
             <View style={styles.dashboardCardTitleRow}>
-              <Text style={styles.dashboardCardTitle}>最新のこころ天気（日）</Text>
+              <Text style={styles.dashboardCardTitle}>最新のこころグラフ（日）</Text>
               <UnreadBadge
                 visible={unreadDaily}
                 style={styles.dashboardUnreadBadge}
@@ -808,7 +807,7 @@ function AnalysisHome({
                   color={colors.TEXT_ON_LIGHT}
                   style={{ marginRight: 6 }}
                 />
-                <Text style={[styles.goldButtonText, { color: colors.TEXT_ON_LIGHT }]}>こころ天気（日）を開く</Text>
+                <Text style={[styles.goldButtonText, { color: colors.TEXT_ON_LIGHT }]}>こころグラフ（日）を開く</Text>
               </View>
             </CocolonButton>
           </View>
@@ -819,10 +818,10 @@ function AnalysisHome({
             <CocolonPressable
               style={styles.dashboardInfoCard}
               onPress={onOpenMonthly}
-              accessibilityLabel="こころ天気（月）を開く"
+              accessibilityLabel="こころグラフ（月）を開く"
             >
             <View style={styles.dashboardCardTitleRow}>
-              <Text style={styles.dashboardCardTitle}>こころ天気（月）</Text>
+              <Text style={styles.dashboardCardTitle}>こころグラフ（月）</Text>
               <View style={styles.dashboardCardRight}>
                 <UnreadBadge
                   visible={unreadMonthly}

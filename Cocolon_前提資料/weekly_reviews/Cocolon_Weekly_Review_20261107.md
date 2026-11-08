@@ -1469,3 +1469,16 @@ Render環境変数更新ツールが旧main配置を自動開始した操作事�
 配置後はhealthz／bootstrap200、未認証weather3期間・latest status・非生成latestの5条件401、計7条件を確認。本人認証での集計と実機応答速度は未確認。新DB／サービス／依存／GPU生成は0。通知／weather製品sourceは前段から変更せず、保存プレビュー原本も変更なし。
 
 RN製品source4483f6d4を含むdocs-only head0fd692dcでiOS buildを一回起動。run42443182743／#79 attempt1／job128616547210は12:43:41 JSTに成功。GitHub UIで実ログBUILD_NUMBER=7901とUpload成功を照合し、署名／Archive／IPAを通過。AppleログインをMashへ引き継いだ後、ログイン完了の連絡を受けて再開。実1.0（7901）／build37980ed0-011d-40f5-b9c9-f3b8217a2b9eを照合した。Missing Complianceは7601から依存・ios変更0を確認し、従来のOS提供暗号化だけに対応する情報を保存。dialog消失・Ready to Submitの後、既存内部group「Emlis テスト版配布」のBuildsで7901 Testing／90日を実確認。groupへ自動登録済みで追加操作なし。App Store公開、外部group／tester追加、契約同意、rerunなし。本人新入力の今日／週／月反映、灰色一覧非表示、map更新後のアプリ内／閉じた時の通知受信とtapは実機未確認として残す。ここまでのprimary outcomeはTECHNICAL_CREDITで、端末受入れや実配送成功を完了へ変換しない。
+
+<a id="kokoro-graph-history-read-20261108"></a>
+### 同日・こころグラフ採用、履歴負荷と既読表示の修正候補
+
+Mashより7901のこころ天気表示は概ね指示どおりとの報告を受領。天気要素の少なさから名称を「こころグラフ」に決定し、右上天気マークの削除、履歴が重い問題、未読が既読にならない問題の修正を指示。ビルドは他の変更後にまとめるため今回起動しない。本人は通知サンプル入力後の受信待ちで、通知の成功報告ではない。
+
+表示名を通常画面・履歴・詳細・guide／tutorial／購読copyとAPIの新規title／配布文へ同期。旧保存titleは表示時に変換し、本文は先頭の生成見出しだけ変える。比較用プレビュー2htmlと生成済tutorialfixture、保存本文とDBを変更せず、内部route／weatherキーも維持。メイングラフ右上の天気印だけを除き、タブは棒グラフ印へ変更する。
+
+履歴では一覧50件の全文取得が不要だったため既存include_body=falseを明示し、選択した1件の詳細再認可を維持。既読保存がHistory／親／Viewerで最大3回実行されていたため、親が画面遷移後に1回だけ実施する。matching server確認後だけrevisionを進め、古いstatus／page／owner応答を失効。初回statusより2ページ目が先に返る場合の既読消失も統合処理で修復した。APIはcache無効化後も旧計算が残り、未読値を再cacheできた競合を修復。既存の最新1件badge判定や本人境界を一括既読へ置き換えない。
+
+API候補a305b333、局所7suite73 PASS。RNは新history9＋weather7＋screen36＝52 PASS。旧名先頭変換と本文保持、metadata／detail分離、owner・期間・既読の競合、server失敗で既読化しない条件を検査した。広域の初回は136 PASS／TypeScript loader不足1file失敗。既存固定TypeScript5.2.2を一時test環境だけへ追加し、同5fileを再検査して141 PASS／FAIL・SKIP0。商品依存／lock変更なし。初期の新fixture1失敗はunmount後のTestInstanceアクセスを修正して解消。APIのASGI mark競合は旧結果が後着しても既読cacheと別ownerを保つ。独立reviewの指摘を修復し再読確認。詳細は[分析構造](../current_structure/03_analysis_current_structure.md#kokoro-graph-history-read-20261108)。
+
+primary outcome＝TECHNICAL_CREDIT。修正版のGitHub保存・CI確認まで進め、今回のRender配置／設定変更／DB／GPU生成／署名build／Uploadは0。実機の速度短縮・未読解消、今回改名の端末表示、通知受信／tapは次回のまとめ反映後に確認する。現live8739cd80／7901を今回候補へ更新済みとはしない。

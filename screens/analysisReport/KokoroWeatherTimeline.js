@@ -65,7 +65,7 @@ export default function KokoroWeatherTimeline({ colors, ui, refreshRevision = 0,
   const items = period === "today" ? data?.time_buckets || [] : data?.items || [];
   const selected = items.find(item => (item.key || item.date) === selection) || [...items].reverse().find(item => item.status !== "future" && item.status !== "outside_history");
   const selectedIndex = items.indexOf(selected);
-  const periodTitle = period === "today" ? (anchor ? "この日の天気" : "今日の天気") : period === "week" ? "この週のこころ天気" : "この月のこころ天気";
+  const periodTitle = period === "today" ? (anchor ? "この日の感情" : "今日の感情") : period === "week" ? "この週のこころグラフ" : "この月のこころグラフ";
   const range = data ? (period === "month" ? `${data.start_date.slice(0, 4)}年${Number(data.start_date.slice(5, 7))}月` : `${data.start_date.slice(0, 4)}年 ${shortDate(data.start_date)}${period === "week" ? `–${shortDate(data.end_date)}` : ""}`) : "";
   return <View style={styles.root}>
     <View style={styles.periodRow}>
@@ -84,11 +84,11 @@ export default function KokoroWeatherTimeline({ colors, ui, refreshRevision = 0,
       </View> : null}
     </View>
     {loading ? <View style={styles.card}><ActivityIndicator color={colors.TITLE_GOLD} /><Text style={styles.note}>感情の記録を読み込んでいます</Text></View> : error ?
-      <View style={styles.card}><Text style={styles.body}>こころ天気を読み込めませんでした。</Text><CocolonPressable onPress={retry} style={styles.retry} accessibilityRole="button"><Text style={styles.link}>もう一度読み込む</Text></CocolonPressable></View> : data ? <>
+      <View style={styles.card}><Text style={styles.body}>こころグラフを読み込めませんでした。</Text><CocolonPressable onPress={retry} style={styles.retry} accessibilityRole="button"><Text style={styles.link}>もう一度読み込む</Text></CocolonPressable></View> : data ? <>
         <View style={styles.card}>
           <View style={styles.heading}><View style={styles.headingText}><Text style={styles.meta}>{periodTitle}</Text>
             <Text style={styles.title}>{data.summary.input_count ? `${data.summary.input_count}件の入力から見える気持ち` : "感情の記録はまだありません"}</Text></View>
-            <Ionicons name="partly-sunny-outline" size={30} color={colors.TITLE_GOLD} /></View>
+          </View>
           {period === "today" ? <View style={styles.composition}><WeatherRing item={data.summary} colors={colors} styles={styles} /><Legend item={data.summary} styles={styles} /></View> :
             <><Text style={styles.note}>{data.summary.recorded_days}日分の記録</Text><Legend styles={styles} />
               <View style={styles.plot} accessibilityLabel="日ごとの感情の割合">

@@ -206,7 +206,7 @@ export default function KokoroWeatherForecastStrip({
     <View style={styles.card}>
       <View style={styles.titleRow}>
         <Ionicons name={summary.iconName || "partly-sunny-outline"} size={18} color={colors.TITLE_GOLD} />
-        <Text style={styles.title}>こころ天気図</Text>
+        <Text style={styles.title}>こころグラフ</Text>
         <Text style={styles.periodLabel}>{getKokoroWeatherReportLabel(effectiveReportType)}</Text>
         {weather?.periodLabel ? <Text style={styles.periodLabel}>{weather.periodLabel}</Text> : null}
       </View>
@@ -221,7 +221,7 @@ export default function KokoroWeatherForecastStrip({
 
       {items.length > 0 ? (
         <>
-          <Text style={styles.helperText}>対象をタップすると、時間帯別のこころ天気を横にスクロールして確認できます。</Text>
+          <Text style={styles.helperText}>対象をタップすると、時間帯別のこころグラフを横にスクロールして確認できます。</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {items.map((item, idx) => {
               const dominant = formatDominantEmotion(item.dominantEmotion);
@@ -233,7 +233,7 @@ export default function KokoroWeatherForecastStrip({
                   containerStyle={styles.itemContainer}
                   onPress={() => handleSelect(item)}
                   disabled={isDisabled}
-                  accessibilityLabel={`${item.label || "対象"}のこころ天気詳細を開く`}
+                  accessibilityLabel={`${item.label || "対象"}のこころグラフ詳細を開く`}
                 >
                   <View style={[styles.item, isDisabled && styles.itemDisabled]}>
                     <Text style={styles.itemLabel}>{item.label}</Text>
@@ -262,7 +262,7 @@ export default function KokoroWeatherForecastStrip({
           </ScrollView>
         </>
       ) : (
-        <Text style={styles.emptyText}>この期間のこころ天気はまだ表示できません。</Text>
+        <Text style={styles.emptyText}>この期間のこころグラフはまだ表示できません。</Text>
       )}
     </View>
   );

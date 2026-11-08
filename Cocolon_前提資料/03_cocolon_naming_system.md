@@ -881,3 +881,14 @@ history-line support sectionを診断名・人格分類名・未来予測名へ�
 backend / test / evidence / authority lineageを表すinternal名です。visible product名、public
 API route / response key、DB physical name、RN表示名、Nodeやproviderのavailability claimでは
 ありません。これらを理由に既存public contractをrenameまたは追加しません。
+
+# 2026-11-08 現在の表示名 — こころグラフ
+
+Mashが「こころグラフ」を明示採用。以前のこころ天気は採用当時・7901配布時の表示名として保持し、今回RN候補の通常画面・履歴・詳細・guide／tutorial・配布／購読copyへ新名を使用する。今日／この日の感情、週／月のこころグラフとして感情の推移を示し、通常グラフ右上の天気マークを撤去する。わたしマップの名前は維持。
+
+| 表示名 | 維持する互換キー／route | 境界 |
+|---|---|---|
+| こころグラフ | `/analysis/kokoro-weather`、`kokoro.weather.live.v1` | 今日・週・月の通常原入力集計。名称変更のためにwireを改名しない |
+| こころグラフ（日／週／月） | `daily`／`weekly`／`monthly`、`content_json.kokoroWeather`、既存version alias | 保存履歴の表示名。旧保存titleと先頭生成見出しだけ表示変換し、保存データ／本文中の語を一括置換しない |
+
+採用時preview／編集元HTML2fileと生成済tutorialfixtureは比較原本として不変。今回候補は未build／未配置で、7901の旧名が既に変わったとはしない。詳細は[分析構造](current_structure/03_analysis_current_structure.md#kokoro-graph-history-read-20261108)。
