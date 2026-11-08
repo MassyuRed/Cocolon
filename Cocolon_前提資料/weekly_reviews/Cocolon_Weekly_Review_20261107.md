@@ -1926,3 +1926,6 @@ captureのoriginalにはuser_idがあり、通常SQL parent-source projectionは
 全原本・全判断・実messages・旧教材・修正前後SQL再生・両sourceを非公開保全。STRUCTURE_MAP_DELTA_NONE（既存natural受領owner内の限定修正、新path／型／作者／wire／DB／保存責務なし）。全体現在地と設計§11.2を更新し、全体設計図／file地図／current mapは新owner追加不要と確認。今回Render配置／実DB／RN／build／通常model設定変更0。AR-01全体・AR-02〜08・全資産活用・本人端末／正式受入れは未完了。
 
 次は追加promptの同周回を止め、評価6sourceとは別の既存教師sourceから人物・語り手・感情時点・理由の対応を保つ対照を回収し、既存学習ownerの単一候補比較へつなぐ。質問拒否を実本文修復の代用にしない。CIは下記の最終確認を正本とする。
+
+
+CI最終確認（2026-11-08T22:49:47.000+09:00）：固定API c6555fd5の[Piece SQL run42485547144](https://github.com/MassyuRed/mashos-api/actions/runs/42485547144)と[Analysis observed content run42485547296](https://github.com/MassyuRed/mashos-api/actions/runs/42485547296)は、いずれも全工程successで終了。生成・保存・shared owner・累積／Q3・report等の既存検証を保持した。同24rawの局所再生と通常不採用の判定は上記どおり。CI成功でも配置・実DB・本人端末・一般意味品質の受入れは未実施。API2pathと資料6pathの全内容・変更pathをGitHub読戻しで照合済み。

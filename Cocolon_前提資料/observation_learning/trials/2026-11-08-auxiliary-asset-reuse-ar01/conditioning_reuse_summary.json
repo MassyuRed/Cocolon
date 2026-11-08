@@ -27,5 +27,24 @@
   "general_meaning_quality_accepted": false,
   "structure_map_delta": "NONE",
   "structure_map_reason": "bounded validation change inside existing natural reply owner; no new path, type, author, wire, persistence owner or lifecycle",
-  "ci_status": "IN_PROGRESS"
+  "ci_status": "SUCCESS",
+  "ci_runs": [
+    {
+      "id": 42485547144,
+      "name": "Piece B2-B/B3/B4/B5 isolated PostgreSQL",
+      "commit": "c6555fd5b81cd4ecda1bafdec60aa311c9e7feea",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/MassyuRed/mashos-api/actions/runs/42485547144"
+    },
+    {
+      "id": 42485547296,
+      "name": "Analysis observed content",
+      "commit": "c6555fd5b81cd4ecda1bafdec60aa311c9e7feea",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/MassyuRed/mashos-api/actions/runs/42485547296"
+    }
+  ],
+  "ci_verified_jst": "2026-11-08T22:49:47.000+09:00"
 }
