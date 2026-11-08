@@ -1520,8 +1520,22 @@ RN候補e2d7a7aはphase6 CI成功、既存Piece CIはRN contractsを含む5job�
 
 実装／局所検証／最終API CIは完了し、既存通知資格のworker登録・通知API／worker配置・対応RNの統合TestFlight署名build／既存内部配布の個別承認待ち。通知版の現live反映・実pushはまだ行っていない。
 
-### 2026-11-08 — こころ天気は感情推移の表示へ（表示案のみ）
+<a id="kokoro-weather-live-20261108"></a>
+### 2026-11-08 — 採用済みこころ天気を通常入力へ接続（実装候補）
 
-Mashの最新要望：基本を「今日の天気」にして、その日の感情状況を円グラフと時間別の変化で示し、週／月へ切替。目的は選択した感情の推移と短い結果説明で、原因・性格の意味分析や助言を足さない。現current_weatherはJST当日原入力を直接集計するが、時間帯itemsは通常home-summaryへ未接続。日／週／月は保存report経路、月は最大4週itemsで、日別表示には追加接続が必要。実機不反映の直接原因は未特定。
+Mashが表示案に問題なしと判断し、その方針で実装を明示指示。[プレビュー](../designs/ui/previews/20261108-kokoro-weather.html)と[編集元](../designs/ui/previews/20261108-kokoro-weather.source.html)は変更せず比較原本として保持する。
 
-華恋案は全体の円グラフ＋4時間帯の小円グラフ、週と月の日別100%積み上げ棒、選んだ日／時間の内訳。強さの重みと複数感情を保持し、自己理解は感情集計へ混ぜない。欠測を平穏や0点で補わず、未来は表示しない。default配色を保持した架空データの[表示案](../designs/ui/previews/20261108-kokoro-weather.html)と[編集元](../designs/ui/previews/20261108-kokoro-weather.source.html)を保存した。これは提案であり製品source・DTO・DB・API・本番配置の変更0、STRUCTURE_MAP_DELTA_NONE。UI承認や一般意味品質の受入れに換算せず、わたしマップの前段の通知反映承認待ちも維持する。
+| owner / file | 今回の役割 |
+|---|---|
+| `screens/AnalysisContentFirstScreen.js` | 通常のemotion表示をライブ推移へ置換。今日／週／月と履歴リンクの期間を親子で同期。先頭の旧CurrentCardを撤去。保存report・tutorial・mapは維持 |
+| `screens/analysis/useKokoroWeather.js` | 認証owner／世代・前面／focus・期間の世代を検査して取得。入力後のfocus／foregroundとJST日跨ぎで再読。別owner・古い期間・不正payloadを表示しない |
+| `screens/analysisReport/KokoroWeatherTimeline.js` | 今日の円＋4時間帯／入力時刻と感情・強さ、週7日／月日別100%棒、選択内訳。月は現在なら今日まで・過去なら末日まで。共通5色、説明は集計結果だけ |
+| `lib/compat/legacyWireContracts.js` | 現行 `/analysis/kokoro-weather` read経路 |
+| API `api_analysis_reads.py` | 認証本人だけを集計対象にし、既存tier・history retentionを再利用。no-store。期間不正422／閲覧範囲外403／取得障害503 |
+| API `kokoro_weather_service.py` | 同じemotions原入力からJST today／Monday week／calendar monthを直接集計。id＋日時keysetで空pageまで読み、短いserver capでも全量取得。page失敗は部分成功にしない |
+
+通常5感情、強さ弱1／中2／強3、複数選択の各感情加算を保持。通常感情がある行だけinput_countへ数え、自己理解だけの行は除外。秘密入力は既存と同じfalseのみ。memo・他者・生成AI本文をpayloadへ出さない。欠測・未来・閲覧範囲外は0点／平穏にせず、割合は最大剰余で合計100%。既存閲覧範囲は実sourceどおりFree＝JST当月＋前月、Plus＝rolling365日、Premium＝全期間。境界は期間をclampして部分表示を案内する。
+
+API候補[66cf4aa3](https://github.com/MassyuRed/mashos-api/commit/66cf4aa3e70e145359d9d7864f6f2b6b278394af)、同じ変更単位のRN候補。対象API7suite72 PASS（新live15例を含む）、RN3file113 PASS（新live7例、既存screen36／owner70）。合成入力→認証API→today／week／month、追加保存と削除後の再読、JST・閏月・31日・履歴境界、>1000件＋短page・異常page、RNの期間／owner／世代／前面競合を検証。独立reviewの等幅Pressable配置、親子の期間同期、月目盛り、非JSON障害の422誤分類を修復。既存静的copy検査1か所は既に変更済みの通知文言へ同期した。新規DB／依存／GPU処理なし。STRUCTURE_MAP_DELTA_PRESENT。
+
+これはsourceと合成検証の進捗で、稼働API反映・TestFlight署名build・実機描画・本人の新入力反映の成功ではない。前段の通知資格共有／worker反映も承認待ちのまま維持。次はCI確認後、承認された反映範囲でAPIとまとめbuildを実機へ届け、本人の新規感情が当日・週・月へ同じ件数／重みで現れることを確認する。

@@ -7,7 +7,7 @@ import { ScreenUnreadBadge } from "../components/UnreadBadge";
 import AnalysisReportViewerScreen from "./AnalysisReportViewerScreen";
 import SelfStructureReportGenerateScreen from "./SelfStructureReportGenerateScreen";
 import WatashiMapRenderer from "../components/selfStructure/WatashiMapRenderer";
-import KokoroWeatherCurrentCard from "./analysisReport/KokoroWeatherCurrentCard";
+import KokoroWeatherTimeline from "./analysisReport/KokoroWeatherTimeline";
 import { isKokoroWeatherReportRecord } from "./analysisReport/kokoroWeatherFormatters";
 import {
   AnalysisMenuScroll,
@@ -249,7 +249,6 @@ export default function AnalysisContentFirstScreen({
   tutorialRefs,
   emotionUpdateLabel,
   selfStructureUpdateLabel,
-  currentWeather = null,
   unreadEmotion = false,
   unreadSelfStructure = false,
   unreadDaily = false,
@@ -315,18 +314,6 @@ export default function AnalysisContentFirstScreen({
   const effectiveHomeSummariesLoading = isTutorialMode ? false : homeSummariesLoading;
   const currentEmotionHistoryLabel =
     EMOTION_REPORT_TABS.find((tab) => tab.key === activeEmotionReportType)?.label || "こころ天気（日）";
-
-  const handleOpenPreviousKokoroWeather = () => {
-    if (typeof onOpenCurrentWeatherPrevious === "function") {
-      onOpenCurrentWeatherPrevious();
-      return;
-    }
-    setActiveAnalysisTab("emotion");
-    setActiveEmotionReportType("daily");
-    if (!isKokoroWeatherReportRecord(effectiveLatestReports?.daily)) {
-      onOpenDailyHistory?.();
-    }
-  };
 
   const handleOpenCurrentEmotionHistory = () => {
     if (activeEmotionReportType === "weekly") {
@@ -411,15 +398,6 @@ export default function AnalysisContentFirstScreen({
         </View>
       </View>
 
-      {!isTutorialMode && currentWeather ? (
-        <KokoroWeatherCurrentCard
-          currentWeather={currentWeather}
-          colors={colors}
-          ui={ui}
-          onOpenPrevious={handleOpenPreviousKokoroWeather}
-        />
-      ) : null}
-
       <View style={localStyles.tabBar}>
         {ANALYSIS_TABS.map((tab) =>
           renderTab({
@@ -436,6 +414,15 @@ export default function AnalysisContentFirstScreen({
 
       {activeAnalysisTab === "emotion" ? (
         <>
+          {!isTutorialMode ? (
+            <KokoroWeatherTimeline
+              colors={colors}
+              ui={ui}
+              period={{ daily: "today", weekly: "week", monthly: "month" }[activeEmotionReportType]}
+              onPeriodChange={(period) => setActiveEmotionReportType({ today: "daily", week: "weekly", month: "monthly" }[period])}
+            />
+          ) : (
+          <>
           <View style={localStyles.periodRow}>
             <View style={localStyles.secondaryTabBar}>
               {EMOTION_REPORT_TABS.map((tab) =>
@@ -479,6 +466,9 @@ export default function AnalysisContentFirstScreen({
               </View>
             )}
           </View>
+
+          </>
+          )}
 
           {!isTutorialMode ? (
           <CocolonPressable

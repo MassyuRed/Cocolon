@@ -1300,17 +1300,15 @@ test('AnalysisScreen keeps report history, self-structure, today-question histor
   ], 'useAnalysisReportActions.js');
 
   assertIncludes(analysis, [
-    'currentWeather={entryMeta.currentWeather}',
     'consumeAnalysisHomeSummaryDirty',
     'refreshCurrentWeatherSummary',
   ], 'AnalysisScreen.js current weather prop');
 
   assertIncludes(analysisContentFirst, [
-    'KokoroWeatherCurrentCard',
+    'KokoroWeatherTimeline',
     'こころ天気',
-    'currentWeather',
     'isKokoroWeatherReportRecord',
-    'handleOpenPreviousKokoroWeather',
+    'handleOpenCurrentEmotionHistory',
     'こころ天気（日）',
     'こころ天気（週）',
     'こころ天気（月）',
@@ -2864,10 +2862,9 @@ test('Kokoro weather Phase 6 QA keeps scope on emotion analysis and preserves pl
   const tutorialFixtures = read('tutorial/generated/tutorialFixtures.generated.json');
 
   assertIncludes(contentFirst, [
-    'KokoroWeatherCurrentCard',
-    'currentWeather',
+    'KokoroWeatherTimeline',
     'isKokoroWeatherReportRecord',
-    'handleOpenPreviousKokoroWeather',
+    'handleOpenCurrentEmotionHistory',
     '{ key: "daily", label: "こころ天気（日）" }',
     '{ key: "weekly", label: "こころ天気（週）" }',
     '{ key: "monthly", label: "こころ天気（月）" }',
@@ -2900,7 +2897,7 @@ test('Kokoro weather Phase 6 QA keeps scope on emotion analysis and preserves pl
 
   assertIncludes(guide, [
     'こころ天気（日）・こころ天気（週）・こころ天気（月）',
-    '今のこころ天気',
+    '今日の天気',
     '現在のマップは、蓄積した入力全体を対象に全プラン共通で表示します。解析できていない範囲がある場合は、件数を案内します。',
   ], 'guide/guidesJa.js preserves emotion-only kokoro weather and self-analysis copy');
 
@@ -2933,7 +2930,7 @@ test('Kokoro weather Phase 6 QA keeps scope on emotion analysis and preserves pl
     'こころ天気（日）',
     'こころ天気（週）',
     'こころ天気（月）',
-    '今のこころ天気',
+    '今日の天気',
   ], 'Self Structure surfaces must not be kokoro-weatherized');
 });
 
@@ -3161,7 +3158,7 @@ test('Watashi Map Phase 6 copy, tutorial fixture, and QA guardrails stay aligned
   ], 'Tutorial flow and Nexus handoff explain four tutorial experiences');
 
   assertIncludes(todayQuestionHistory + mainTabs + crossLink, [
-    '今のわたしマップが更新されました',
+    'わたしマップが更新されました',
     '回答を更新しました。',
     '過去の回答を確認・編集できます。',
     '【わたしマップの深掘り候補】',

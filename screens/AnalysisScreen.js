@@ -607,7 +607,6 @@ export default function AnalysisScreen({ onOpenPieceDeepDive, navigation, onRefr
             todayCount={entryMeta.todayCount}
             weekCount={entryMeta.weekCount}
             monthCount={entryMeta.monthCount}
-            currentWeather={entryMeta.currentWeather}
             unreadEmotion={emotionAnalysisUnread}
             unreadSelfStructure={selfStructureUnread}
             unreadDaily={unreadResolved ? unreadByType.daily : prefetchedUnreadByType.daily}

@@ -9,6 +9,13 @@ name: Piece RN preview and owner contracts
       - features/piece/**
       - components/piece/**
       - components/selfStructure/**
+      - screens/AnalysisScreen.js
+      - screens/AnalysisContentFirstScreen.js
+      - screens/analysis/useKokoroWeather.js
+      - screens/analysisReport/KokoroWeatherTimeline.js
+      - lib/compat/legacyWireContracts.js
+      - tests/kokoro-weather-live.test.js
+      - tests/fixtures/kokoro-weather-live-v1.json
       - screens/input/InputPieceActionArea.js
       - screens/InputScreen.js
       - screens/PieceOwnerHistoryScreen.js
@@ -110,6 +117,7 @@ jobs:
           tests/iap-owner-race.test.js
           tests/private-history-owner-race.test.js
           tests/social-owner-request-race.test.js
+          tests/kokoro-weather-live.test.js
           tests/piece-v2-resonance-owner-binding.test.js
           tests/analysis-semantic-map.test.js
 
