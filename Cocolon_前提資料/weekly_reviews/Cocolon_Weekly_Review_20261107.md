@@ -1871,3 +1871,44 @@ rootが全120実本文を原文照合し、独立担当も新8・教師診断・
 全raw／tokens／messages・assistant-only mask・初期db／8／16／44重み・全組112finiteF32／保存値一致・8版メモリ生成・16／44版fresh reload一致・全独立判断・失敗・復元原本を非公開保全済み。両試行とも同launchの元提供・source／Analysis重みを復元しhealth200、通常の自然baseは維持。新GPUレンタル0、全レンタル時間と請求額は未測定。Render／実DB／RN／build／通常設定変更0、今回の商品source差分0、STRUCTURE_MAP_DELTA_NONE。前回a98cの構造追加は前節の履歴どおり。
 
 次はAR-01の役割方向・未記載主体・予告認識を、旧教師の一要素変異と旧meaning obligations／body inverse／候補比較の必要部品で切分け、実本文の修復まで接続する。同じ失敗8／16／44runと同じpromptを自動再周回せず、評価の教師化をしない。readerだけの完成や新しい統制経路を先行条件に戻さない。AR-01全体・AR-02〜08・全必要資産の活用・本人端末／正式受入れは未完了。
+
+
+<a id="auxiliary-asset-reuse-finite-focus-cognition-20261108"></a>
+## 23. 補助経路活用AR-01続行 — 有限役割・認識補助の実装と実32比較
+
+前回§22で残った役割方向・未記載主体・予告認識を、同じ学習周回ではなく旧meaning obligations／body inverseの必要責務から切り分けた。旧semantic inventoryの明記格・役割束縛、認識と内容の境界、最終自由文の独立比較を現在のnatural ownerへ適合する。旧parserの本人既定・未来達成写像・固定三本文を直接流用せず、補助の存在を意味証明や新作者にしない。[既存AR-01 trial](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/README.md)と[詳細設計§11.2](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#112-現在の進行欄)へ集約する。
+
+### 23.1 候補sourceと検証
+
+API **e14d4fec18394e5257508f3e92100f9cc1bf536e**、8変更path。natural_reply_meaning.pyは有限な明記格・焦点構文を読み、通常の有限witnessと、新しい焦点／認識範囲だけのgeneration_witnessesを分ける。新natural_reply_cognition.pyは認識行為・記載された時点・埋込み内容・認識前の記載をそれぞれ元範囲へ束縛する。省略された認識者、内容の発生・未発生、別sourceの訂正を補完しない。引用・複数の認識・条件・更新等の未対応を一般読解済みにしない。
+
+natural_reply.pyの研究明示opt-inだけが補助を使い、通常use_meaning_support=Falseと元材料・SYSTEMを維持する。原文を切らず、入らない補助だけ省く。私的比較の全文coverage=false、未判定、既存保存／GET非生成再読、本人sourceとAI候補の区別を維持する。旧a98cのprivate report保存経路は継承し、新しい通常作者・provider fallback・自動再生成を追加していない。
+
+meaning111＋cognition47＋budget21＋application58＝**237 PASS**。applicationは隔離PGliteを使用。e14の[Actions42480572923](https://github.com/MassyuRed/mashos-api/actions/runs/42480572923)／[Actions42480572924](https://github.com/MassyuRed/mashos-api/actions/runs/42480572924)はsuccess。通常不変・有限境界・private保存等の検証であり、一般日本語理解・実Supabase・本人端末の受入れではない。
+
+### 23.2 実32生成と不採用
+
+架空development controlsのbaseline16＋構造補助16＝**32実生成・49.554327秒**。全HTTP200／stop。既使用教材・一要素変異からの開発比較であり、unseen blind評価や全入力網羅ではない。学習0、新model load0、retry0。提供PID・元server source・Analysis weight/configの前後一致とhealth200を確認し、通常の自然base／提供構成を変更していない。
+
+構造補助には人物ラベルを返答の登場人物へ混入する問題、日や認識／内容時点の誤りの残存、話し方の劣化があり、**通常採用不可**。補助が正しい範囲情報を持つこと、全stop、CPU／CI成功を実本文の意味品質合格へ換算しない。私的原入力・実messages・応答本文・詳細判断は公開資料へ転載しない。
+
+### 23.3 追加6構成・現在の適用範囲
+
+原文表記を保つ補助表現と専用SYSTEMを同時に変える私的prototypeを6構成で比較し、全6 HTTP200／stop、9.090524642029777秒で完了した。学習0、新model load0、retry0、同提供PID／元server source・Analysis重み不変・health200。これはe14の構造補助と別のjoint-encoding試験で、補助表現またはSYSTEM単独の因果効果を特定していない。e14公開sourceは構造補助の研究opt-inのまま、このprototypeは未反映。入力は架空development controls・診断入力で、未知blind評価へ変えない。
+
+rootが全6実本文を確認し、別担当も同じ6source×3phaseの18本文を独立照合した。診断V02ではbaselineの役割反転を明確に局所修復し、診断V01ではstructured版の本人役割の誤継承を局所改善した。一方E01では記録者混入が残り、原文外の因果追加による悪化も確認した。E02の短く正しい一度の言換えは、それ自体を失敗に数えない。E03／04は役割方向を保っていても、物語調の説明や記載のない期間／時点へ感情を結び付ける展開を残す。
+
+平穏の選択自体は元sourceにあり、感情が未明示であるとする判定は誤りだった。問題は選択感情の存在ではなく、原文が指定していない期間／時点へそれを結合したことである。この区別を維持し、明示された感情や正しい短文まで排除しない。局所修復を認めた上で通常採用は見送り、6中の品質PASS率・一般意味品質の合格は出さない。私的原入力・実messages・応答本文は公開資料へ転載しない。
+
+Render通常APIは497f7008のままでe14候補は未配置。今回のRender／実DB／RN／build／通常モデル設定変更0。**STRUCTURE_MAP_DELTA_PRESENT：候補source内の有限焦点役割・認識範囲helperと研究補助選択の責務差分。** 全体file地図01A、current Emlis／CMEE map、現在地と設計§11.2へ同期する。全補助資産活用・AR-01全体・通常意味品質・本人実機／正式受入れは未完了。
+
+
+### 23.4 実32本文の隔離保存・非生成再読
+
+実32を既存service／隔離SQLへ一回だけ渡し、全32 FINAL保存→同service GET→新service GETの本文一致を確認した。GETのprovider／reader／engine再実行0、private reportは公開DTOへ出さず、analysis NOT_GENERATEDを保持。baseline16は通常のuse_meaning_support=False、candidate16だけ研究contextで実helperをTrueにし、全32のcaptured messagesとmaterialが実受口のものと一致した。研究context終了後は通常関数へ復元し、通常source・提供構成を変更していない。
+
+captureのoriginalにはuser_idがあり、通常SQL parent-source projectionはそれを省くため、全32でcaptureとSQLのsource参照は異なる。両参照をprivate原本へ保持し、それぞれ現sourceから再計算した。messages／material一致を別source参照の同一性へ読み替えず、source参照を偽装しない。実Supabase／本人端末の検証ではなく、実DB操作・再生成・自動retryは0。保存成功を意味品質合格へ数えない。原文表記補助の私的prototype6はfile captureまででSQL保存を実施していない。
+
+保存32のprivate reportは範囲内非衝突4／未判定28／衝突0。全52節のparsed5／checked4／未照合48で、全文coverageは全32 falseを維持する。parsedの1節も照合先が確定しなければ意味合格にしない。認識helperはsource側の認識行為と内容の範囲を補助へ保持するもので、自由文の認識一般を比較できた実証ではない。部分非衝突・保存成功を通常品質合格へ換算しない。
+
+次は、今回確定した人物参照の混入、原文外の因果、選択感情と未記載の期間／時点の結合、本人宛の語り口を現natural ownerで修復し、成立した役割方向と正しい短い言換えを保持する。前回の単独16／混合44更新や同じpromptを再周回せず、必要な旧資産部品を実本文修復へつなぐ。評価の教師化とreaderだけの完成にしない。

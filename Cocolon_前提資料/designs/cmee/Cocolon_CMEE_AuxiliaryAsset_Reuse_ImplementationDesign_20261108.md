@@ -4,7 +4,7 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-08 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR01_IN_PROGRESS_LEARNING_REPLAY_TESTED_CANDIDATES_NOT_ADOPTED
+status: AR01_IN_PROGRESS_FINITE_FOCUS_COGNITION_RESEARCH_NOT_ADOPTED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
@@ -327,7 +327,7 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 
 | ID | 実施内容・既存残件 | 具体的な完了確認 | 依存／状態 |
 |---|---|---|---|
-| AR-01 | 現naturalの主体・所有者・否定・時点・留保を、旧失敗・意味比較・共通原因分析で改善。EM-01a/b | 現6境界と正常な短文／省略で、同入力の誤読を解消または明確に減らし、自然さ・別題材・既成功・保存再読を保持。検出増加／無出力だけでは完了しない | 着手。有限比較／private保存を候補sourceへ実装。66生成の補助比較に続き新120応答と単独16／混合44更新を実施。役割等の残差で全候補通常未採用、実出力の修復は継続中 |
+| AR-01 | 現naturalの主体・所有者・否定・時点・留保を、旧失敗・意味比較・共通原因分析で改善。EM-01a/b | 現6境界と正常な短文／省略で、同入力の誤読を解消または明確に減らし、自然さ・別題材・既成功・保存再読を保持。検出増加／無出力だけでは完了しない | 着手。有限比較／private保存を継承し、e14d4fecで焦点役割と認識／内容の別範囲を実装。237局所検証・2 CI成功。追加32生成の構造補助と私的prototype6生成は通常不採用。実出力の修復は継続中 |
 | AR-02 | 現naturalの任意問い・回答・訂正・撤回・frameの一往復。EM-02a/b、03b | 一点確認／skip／終了／本人続行、対象だけ更新、撤回後の残存意味、同版再読、プラン境界 | AR-01の全一般品質完成待ちにはしない。未開始 |
 | AR-03 | 適格履歴の意味ある利用。EM-03a/b | 同一／別場面・変化・無関係・訂正前を区別し、適切な履歴が今回へ効く。失効材料を使わない | 現related_contextを継承。未開始 |
 | AR-04 | Piece一般本文・単独伝達・refined・画像整合。PC-01a/b/c、02等 | 元の意味と条件を保持し、単独で伝わる作品、適格補足の差、同じ採用画像の保存再読 | AR-01から必要な共通部を利用。独立して並行可能。未開始 |
@@ -396,16 +396,20 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 ### 11.2 現在の進行欄
 
-| 項目 | 2026-11-08 AR-01続行後の現在位置 |
+| 項目 | 2026-11-08 AR-01有限役割・認識補助の現在位置 |
 |---|---|
-| 方針 | 必要な全能力・資産を回収し、必要なら大幅改修して使うことをMashが承認 |
-| 設計と既存接続 | 旧32系列／D01–D51／現ownerを照合。原文根拠・Piece／Analysis接続は継承 |
-| 実装 | API候補a98cへ有限比較／private report保存、168局所検証＋旧実18本文SQL再読。通常prompt／材料は維持し生成補助は研究opt-inのみ |
-| 今回の実学習 | 元dbから別々に新8単独16更新・旧36＋新8の低LR混合44更新。新120応答、87保存非生成再読／1length拒否。初回残り16は未生成。全raw／112重み／masks／読解保全 |
-| 実結果と採否 | 単独版は退行・反復停止。混合は一部退行抑制も役割方向／主体補完／予告認識等が残り全候補通常不採用。87保存reportは未判定85／部分非衝突2、一般意味判定には未達 |
-| 次の一作業 | **AR-01継続：S02A/B・V01/02、D05A/B・V05/06、所有者教材の一要素変異で誤読箇所を切り分け、旧meaning obligations／body inverse／候補比較の必要部品を現自由文へ適合し、実本文を修復する。同じ8／16／44学習周回・評価の教師化・reader完成だけの完了にしない** |
-| 再開記録 | weekly第10回§22、[続行の全120応答・SQL・採否](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/learning_replay_review.md)、前回66比較、非公開の初期／保存重みと全原本 |
-| 通常提供と残件 | 同launch／元source・Analysis重みを復元・health200。今回の配置／実DB／RN／build変更0、STRUCTURE_MAP_DELTA_NONE。全6境界・通常稼働／本人実機／正式受入れ、AR-02〜08、全必要資産活用は未完了 |
+| 方針・継承 | 必要な全能力・資産を回収・必要規模で改修するMash承認を継続。旧32系列／D01–D51と現ownerを対応させ、原文根拠・Piece／Analysis接続を維持 |
+| 今回の実装 | API候補e14d4fec。明記格／有限な焦点構文を現在の役割読取りへ追加し、新natural_reply_cognition.pyで認識行為と内容・時点を別source範囲として保持。旧semantic inventory／body inverseの責務を適合し、旧parserのSELF既定・未来達成への写像・固定本文は流用しない |
+| 接続・適用範囲 | natural_reply_meaning.pyの候補証拠と研究用generation_witnesses、natural_reply.pyの明示opt-inへ接続。原入力・既存admission／Safety／権利・保存／GET ownerは保持。通常use_meaning_support=False、全文意味coverage=false。候補source差分はSTRUCTURE_MAP_DELTA_PRESENT |
+| 実装検証 | meaning111＋cognition47＋budget21＋application58＝237 PASS。applicationは隔離PGliteを使用。同e14のActions42480572923／42480572924はsuccess。CPU／CI成功を実本文品質へ換算しない |
+| 実モデル32 | 架空development controlsのbaseline16＋構造補助16、計32生成・49.554327秒、全HTTP200／stop。補助ラベルの人物への混入、日／認識時点、話し方の残差があり構造補助は通常不採用。学習0・新load0・retry0、同提供PID／元source・Analysis重み不変・health200 |
+| 追加6構成 | 追加の原文表記補助6構成は私的prototypeで完了し、全HTTP200／stop・9.090525秒。同6sourceの3版18本文を独立照合し、役割反転・本人誤継承の局所修復を確認。ただし記録者混入・原文外因果・本人宛の語り口／感情と時点の結合等が残り通常不採用。短く正しい一度の言換えは失敗に数えない。補助表現と専用SYSTEMの同時変更で、単独要因の効果とは断定しない。e14 sourceへこのprototypeは反映していない。 既使用の開発対照であり未知blind評価・一般品質率へ換算しない。学習／新load／retry0、同PID／元source・Analysis重み不変・health200 |
+| 今回の保存検証 | 実32全FINALを隔離SQLへ保存し、同／別service GETの本文一致、GET provider／reader／engine再実行0、private report非公開・analysis NOT_GENERATED。baseline16は通常False、candidate16は研究contextの実helper True。captured messages／materialは全32一致。captureのuser_idがSQL projectionから省かれるため全32のsource参照は異なり、両参照をprivate保持・各再計算。私的prototype6のSQLは未実施。実DB操作0、意味合格とはしない |
+| 今回のreader範囲 | 保存32reportは範囲内非衝突4／未判定28／衝突0。全52節のparsed5／checked4／未照合48、全文coverageは全32 false。認識helperはsource補助の範囲分離であり、自由文の認識一般比較済みではない。保存・部分非衝突を意味品質合格へ変換しない |
+| 過去結果 | 初回66生成・単独16／混合44更新の新120応答と、87保存非生成再読／1length拒否は前回記録として保全。8／16／44重みの通常不採用を維持し、同試行を再周回しない |
+| 次の一作業 | **AR-01継続：今回確定した、記録者・登場人物・モデル自身の参照混入、原文外の因果、感情と未記載の期間／時点の結合、本人宛の語り口を現natural ownerで修復する。短く正しい一度の言換えは許容し、成立した役割方向を保持する。局所修復だけの通常採用、同じ学習周回、評価の教師化、readerだけの完成、旧統制経路の再稼働にしない** |
+| 再開記録 | weekly第10回§23、[既存AR-01 trial](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/README.md)、本欄、current Emlis／CMEE mapと01A今回差分。私的本文・実messages・原本は非公開保存先 |
+| 通常提供と残件 | Render通常API497f7008にe14は未配置。通常prompt／材料・提供構成／重みを維持し、今回Render／実DB／RN／build変更0。全6境界・通常稼働／本人実機／正式受入れ、AR-02〜08、全必要資産活用は未完了 |
 
 以後はこの表と各能力の対応行を現在状態へ置換更新し、詳細な実行事実は既存trial／weeklyへ置く。新しいhandoff系列・全件hash Gateを作らない。中断時も、成果物と未実行を既存保存先へ残し、同じ未完商品単位から続ける。
 
@@ -595,4 +599,4 @@ API `497f7008fec8935885d09d2e430499892189b5bb`で、以下のsource抜粋とsymb
 - 旧32系列監査の確認blobは`d056dba48c65acb55198b24b021924360171ded0`、[PostG2再利用監査](../../audits/emlis_ai/Cocolon_Cycle001_PostG2_SystemArchitecture_Reusability_Audit_20260814.md)は`8f44b842bd5314b75d5e3fe33c14ec16bd46e7f3`。全体ファイル地図の件数・所在確認と、全blobの意味読解・全画像目視は区別する。
 - 巨大な旧migration詳細06の全文と全symbolの意味監査は完了していない。本文取得できた上位設計・Disposition・現map・現sourceを根拠に本書を設計し、各実装単位で必要原本を確認する。未取得を「存在しない」「移管不要」「全文理解済み」にしない。
 - 本書は自由文の一般意味検査、通常追加model reader、全三中核の意味品質、実費・待ち時間の改善を実証していない。sourceの正規化／引用一致、表の完全性、文書保存をその代用にしない。
-- 今回の構造差分は、回収・改修・商品接続の設計と再開導線だけ。製品の現在の作者・API・DB・RN・provider・稼働設定を変えていない。新しい発売条件、料金、quota、独立した承認／統制systemは追加しない。
+- **最初の設計保存時点**の構造差分は、回収・改修・商品接続の設計と再開導線だけで、その時点では製品の作者・API・DB・RN・provider・稼働設定を変えていなかった。その後のAR-01ではa98c／e14の候補source変更、研究opt-inの実生成比較、private保存・再読へ進んでいる。現在の実装・適用範囲・不採用と残件は[§11.2](#112-現在の進行欄)と最新weekly／既存AR-01 trialを参照する。新しい発売条件、料金、quota、独立した承認／統制systemは追加しない。

@@ -6134,3 +6134,30 @@ STRUCTURE_MAP_DELTA_NONE。新しいowner・route・API・DB・描画版はな�
 入力・本人寿命の追加修復は固定RN56e65b1aから一回の署名buildへまとめ、実1.0（7601）の既存内部グループTestingまで確認した。後続e330は資料／CI／隔離test lockだけでアプリsource差分0。実screenとAPIで同一byteの11入力票を検証し、全9場面・各強度・二欄・排他・通知の契約を省略しない。端末での全修復受入れや一般分析品質とは区別する。
 
 この追記より前の候補／未配置／点検中の記述は当時の履歴。最新source・全CIの実結果・配置と配布・未確認は[第10回§15.10](weekly_reviews/Cocolon_Weekly_Review_20261107.md#input-contract-repair-final-20261107)を参照する。7,817blob一致を全意味読了とせず、一般意味品質・保存currentの本人再解析・月次当時版の保持・実環境受入れをそれぞれ区別する。
+
+
+<a id="auxiliary-asset-reuse-finite-focus-cognition-files-20261108"></a>
+## 2026-11-08 — 補助経路活用AR-01：有限役割・認識補助のfile差分
+
+既存の[本人宛通常応答・保存再読](#2026-10-31-本人宛通常応答保存再読のfile地図)へ接続する候補source差分。API **e14d4fec18394e5257508f3e92100f9cc1bf536e** の8pathで、旧semantic inventory／body inverseの役割・認識範囲と独立比較の責務を現在のnaturalへ適合する。旧parserをそのまま呼び戻さず、本人の既定補完・未来達成写像・固定本文を継承しない。
+
+| 既存／新path（mashos-api） | 今回の責務 |
+|---|---|
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply_meaning.py` | 明記格と有限な焦点構文を役割へ読み、比較用witnessと研究生成用の焦点／認識witnessを分離。原文座標・未判定・全文coverage=falseを保持 |
+| 新`ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply_cognition.py` | 認識行為・記載された認識時点・埋込み内容・認識前の記載を別の元source範囲として保持。省略認識者・発生事実・他source訂正の判断をしない |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply.py` | 元原文・SYSTEMを保持した明示研究opt-inの補助受口。通常use_meaning_support=False、件数／bytes内に入らない補助だけ省く |
+| `ai/tests/test_emlis_natural_reply_meaning_reuse.py` | 有限焦点の役割・原文座標・比較境界と未対応を確認 |
+| 新`ai/tests/test_emlis_natural_reply_cognition.py` | 認識／内容の範囲分離、時点・順序・未対応構文の境界を確認 |
+| `ai/tests/test_emlis_natural_reply_meaning_budget.py` | 研究補助の範囲・上限・原文非切詰めと通常不変を確認 |
+| `ai/tests/test_emlis_natural_reply_application.py` | 既存service／隔離PGlite保存・非生成再読・公開DTOとの分離を確認 |
+| `.github/workflows/analysis-observed-content.yml` | 既存検証工程へ新cognition suiteを接続。新しい実行controllerや品質Gateは追加しない |
+
+既存emlis_thread_service.py／store／providerが本人材料の資格、1回の受領、private artifact保存とGET非生成再読を担当する配置は維持する。これらをe14の新規変更fileへ数えず、今回DB・RN・通常作者・endpoint・依存・提供構成を追加していない。
+
+237局所PASS（meaning111／cognition47／budget21／application58、隔離PGlite）と、同commitのActions42480572923／42480572924 successを確認。baseline16＋構造補助16の架空32実生成は49.554327秒・全HTTP200／stop、学習／新load／retry0・同PID／元source・Analysis重み不変・health200。人物・時点・話し方の残差で構造補助は通常不採用。追加の原文表記補助6構成は私的prototypeで完了し、全HTTP200／stop・9.090525秒。同6sourceの3版18本文を独立照合し、役割反転と本人役割の誤継承の局所修復を確認した。一方、記録者混入・原文外因果・本人宛の語り口や感情と未記載時点の結合が残り通常不採用。短く正しい一度の言換えをそれだけで失敗にしない。補助表現と専用SYSTEMの同時変更で、単独要因の効果とは断定しない。e14 sourceへこのprototypeは反映していない。 CPU／CI・stop数を一般意味品質や全資産回収完了へ換算しない。
+
+実32本文の隔離SQLでは全32 FINAL保存・同／別service GET一致、GET provider／reader／engine再実行0、private report非公開・analysis NOT_GENERATED。baseline16は通常False、candidate16だけ研究contextの実helper Trueでcaptured messages／material一致を確認した。capture originalのuser_idを通常SQL projectionが省くため全32のsource参照は異なり、両参照をprivate保持・再計算する。私的prototype6はSQL未実施。実DB0、保存成功を意味合格にしない。保存32reportは範囲内非衝突4／未判定28／衝突0、52節のparsed5／checked4／未照合48、全文coverage全32 false。認識helperはsource補助で、自由文の認識一般比較済みとはしない。
+
+感情選択そのものは元sourceに存在し、未明示感情とする誤判定を引き継がない。次は人物参照、原文外因果、未記載の期間／時点への感情結合と本人宛の語り口を修復し、役割方向と正しい短文を保持する。
+
+STRUCTURE_MAP_DELTA_PRESENT（候補sourceの有限読取・認識helper・研究補助選択）。Render通常API497f7008へe14は未配置、通常naturalは補助なしを維持し、今回Render／実DB／RN／build変更0。現在の結果と未確認は[最新weekly§23](weekly_reviews/Cocolon_Weekly_Review_20261107.md#auxiliary-asset-reuse-finite-focus-cognition-20261108)、[Emlis構造](current_structure/01_emlis_ai_current_structure.md)、[CMEE構造](current_structure/04_cmee_current_structure.md)、[既存AR-01 trial](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/README.md)へ戻る。旧設計・全地図を再生成する作業へ置換しない。
