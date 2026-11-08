@@ -1,5 +1,7 @@
 # CMEE V1 詳細設計 — Read First
 
+> **2026-11-08 補助経路の活用作業：** [全必要資産の回収・改修・商品接続 詳細設計](../Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md)を追加。旧32系列／D01–D51／原8層の能力を、現在のCMEEと三中核へ使うための改修・実装・検証順の正本。各coreの商品仕様を置換しない。**「補助経路の活用作業を進めて」** は同設計§11の最初の未完商品単位を進める指示で、初回はAR-01。新実装・通常意味検査の採用は未開始。以下の日付付き旧設計・固定形式を、現naturalの追加必須条件へ戻さない。全体現在地とfresh原本を先に確認する。
+
 > 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabledで意味・実本文一往復と必要回帰の確認済みで、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存 `CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` のQ1節、正本 `02_emlis_v1a_detailed_design.md` の「2026-09-10 Q1」、`05_json_schema_and_versioning.md` の「Emlis thread v1 profile」です。
 
 

@@ -1787,3 +1787,31 @@ fresh72は学習68.627秒／child163.826秒、保存72＋新36は学習34.771秒
 原ZIP4個をbyte不変で含むprivate保管物 `Cocolon_EmlisAI_ScopeRetention_20261108.zip`（114,110,100bytes／SHA256 d8cc88b207b87c7e2ef880684a659c5518003a62e9f9f3c42274d24bf4122def）へ全文・教示・実messages／encoded／mask・step・全途中重み・保存reload・中止事実・元提供復元・root判断・CPU教材8件を回収した。旧120生成は別保管。私的旧評価原文は公開GitHubへ全転載しない。
 
 Cocolon1beb4818／API497f7008の前提と規則・地図・最新weekly・Karen-Diary確認を継承し、fresh baseline／恒久incident／観測学習目的を全文確認。§17末尾の確認範囲の限界は維持。今回、新候補通常採用0、通常prompt／API／DB／RN／Render変更0、新build0、Pod Stop/restart/delete0。EM-01a/b継続、履歴理解・問い・補足訂正・本人frame・分析引渡しの品質は未完了。**STRUCTURE_MAP_DELTA_NONE：商品責務・通常経路・公開契約は不変。**
+
+
+<a id="auxiliary-asset-reuse-design-20261108"></a>
+## 20. 補助経路の活用 — 必要な全資産の詳細設計をGitHub保存
+
+### 20.1 Mashの決定
+
+2026-11-08、Mashは、華恋が必要と判断する補助経路の能力・資産を、改修規模に制限を置かず、使えるようにして最大限活用することを承認した。最初に例示した数項目だけを対象にせず、必要なものすべてを回収する。今回の依頼は詳細設計とGitHub保存、後日の指示方法の明確化である。
+
+### 20.2 保存した設計と対象
+
+[CMEE 補助経路の活用作業 詳細設計](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md)を追加した。旧32系列＋横断X01、D01–D51、PostG2原8層・追加活用案を照合し、各能力の処置・既存source／symbol／tests・現owner・具体的効果・完了証拠・重複／退役境界を対応付けた。51行は46責務／資産＋5判断／不足であり、51個の独立moduleとは扱わない。
+
+意味・unknown・選択、候補比較・多様性／分布、positive変異・共通原因・版差分、教材／評価、根拠・source役割、訂正・撤回・履歴、自然文逆検査、Piece本文／画像、Analysis graph／全文／IF・Saved、外殻内の有用なpure比較・再現・計測を含む。旧統制経路全体の再稼働にはしない。
+
+現在の自由文へ適合する三値比較とcoverage、sourceエラー／未判定／比較器不具合の区別、受領済みcandidateからの非生成再開、問いの別QUESTION／既存state接続、分析材料artifactと比較reportの分離、現在の権利・保存・月次・唯一作者、具体的な変更位置と検証を設計した。旧5段packet／固定文型へ戻さず、未判定を誤り／意味合格へ変換しない。
+
+### 20.3 継続指示と次作業
+
+**「補助経路の活用作業を進めて」** を本設計の継続指示として固定する。同設計§11の進行欄とfresh実装を確認し、最初の未完商品単位の実装・実出力改善・必要検証・GitHub反映へ進む。今回保存時点のnextは **AR-01：現naturalの主体・所有者・否定・時点・留保等を旧失敗／意味比較で改善し、同入力前後・別題材・既成功・保存再読を確認する**。既存EM-01a/bと準備済み語順／二欄8教材を継承し、同じ棚卸し／設計だけを繰り返さない。
+
+後続はAR-02回答／訂正、03履歴、04Piece、05分析、06横断材料と長履歴、07IF等、08通常適用の確認。新承認Gate・全三中核同時完成待ち・新発売条件ではない。各能力を現在の商品結果へ実適用するまで継続し、文書保存を活用完了へしない。
+
+### 20.4 確認範囲と今回の効果
+
+確認版：Cocolon PR30 `89a9594dbeb91668436f82b48832025bab49a0e1`、API PR3 `497f7008fec8935885d09d2e430499892189b5bb`。全体現在地・現規則／恒久incident・全体設計と地図の関連責務・最新weekly・現sourceを照合。Karen-Diaryは固定版全50fileを分担全文確認、構造知識と商品仕様を区別した。旧32系列／Disposition／活用案／確認済みsymbolへ戻ったが、全旧helperの全行意味精査・巨大旧migration06全文・全画像目視まで完了したとはしない。必要原本は各商品単位で確認する。
+
+今回の変更は本設計と全体現在地・CMEE map・詳細設計入口・本議事録の導線のみ。文書内のID網羅・参照path・状態／契約の整合を確認し、GitHub保存内容を読戻し照合する。**製品source／prompt／重み／API／DB／RN／Render／GPU生成／学習／build／正式受入れの新変更0。STRUCTURE_MAP_DELTA_NONE：製品runtime構造を変えず、回収・改修・商品接続の設計と再開先を保存した。**

@@ -1,3 +1,5 @@
+> **11/8・補助経路の活用方針を詳細設計へ保存。** Mashは必要な全能力・資産を、必要な規模で回収・改修して使うことを承認。[補助経路活用の詳細設計](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md)に、旧32系列＋横断X01、移管表D01–D51、原8層・追加案、現source／symbol、実装・検証・完了条件を対応付けた。これは設計保存で、新しい製品実装・学習・稼働変更は未開始。今後 **「補助経路の活用作業を進めて」** は同設計§11の最初の未完商品単位を実装・実出力改善・必要検証まで進める指示。初回はAR-01（現naturalの主体・否定・時点・留保等の意味保持）。旧巨大統制経路の再稼働や資料追加だけの作業へ戻さない。[今回の決定と確認範囲](weekly_reviews/Cocolon_Weekly_Review_20261107.md#auxiliary-asset-reuse-design-20261108)。
+
 > 11/8 Emlis品質の続行：[第10回§19](weekly_reviews/Cocolon_Weekly_Review_20261107.md#emlis-scope-retention-20261108)。新110生成、認識等の6対12教師を追加した36教師のfresh72と、保存72重みへの新optimizer36更新を実施。fresh108予定試行は72で再現条件が一致せず追加更新前に中止。感情所有・現在否定等は改善したが、同僚／本人の役割反転と文法不成立が残り全候補通常未採用。元のAnalysis120u＋自然baseへ復元・health200。次の語順／二欄変化8教材はCPU準備のみで未学習。
 
 > 11/8 Emlis品質実作業：[第10回§18](weekly_reviews/Cocolon_Weekly_Review_20261107.md#emlis-quality-actual-20261108)。120実生成・24教師72更新と保存再読まで実施。新候補の本人宛化・基礎意味保持に部分改善がある一方、認識／留保／所有者・否定述語等が残り通常未採用。元の分析120u＋Emlis自然baseを復元・health200。次の品質差分6境界を記録。

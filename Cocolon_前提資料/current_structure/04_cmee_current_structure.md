@@ -1,3 +1,5 @@
+> **2026-11-08 補助経路の活用：** [全必要資産の回収・改修・商品接続 詳細設計](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md)を保存。現在の原文根拠・Piece／Analysis接続は継承し、旧32系列／D01–D51／8層の必要能力を現natural・三中核へ利用する。設計保存時の新実装は未開始、次はAR-01。継続指示 **「補助経路の活用作業を進めて」** は同設計の最新進行欄から実作業へ戻る。旧5段packet・固定文型・旧checker/controllerの全面復活を意味しない。
+
 > 2026-11-08接続修復：naturalの受口は既存の本人材料・安全性・source/context/revision/CAS検査、OPERATION receipt、OBSERVATION保存／再読を使用する。生成本文を本人sourceへ昇格しない。分析semantic-120uとnatural base-851bf6eを専用鍵・条件別に同4B提供へ接続し、実GPU合成の分析3node/2edgeと自然文受理を確認。自然文初回2件、分析先行の待機後1件も完了。これは稼働接続の限定確認であり、意味品質全般・全入力・正式受入れの成立ではない。API497f7008、RN6fdea583、8001内部Testing。最新weekly notification-settings-emlis-repair-20261108へ。
 
 > **2026-11-02最新：other62の68更新/28生成＋追加学習0の診断12生成を完了、通常未採用。** 同じ主体/動詞も元文脈でscopeが変わり、主体名単独の説明は支持せず。全270＋66原本/112重み保全、全保存応答非生成再読済み。次の参加否定/肯定/名詞対象×2文脈SC6はCPU表現/実file再読/実tokenizerまで（モデル0/次GPU未固定）。[全結果/原本/次の実装順](../observation_learning/trials/2026-11-01-analysis-model-fields/README.md#analysis-actor-predicate-result-20261102)。HQ03主体qualifier/CQ04少し/HQ04理由も残件。STRUCTURE_MAP_DELTA_NONE、通常map/本番/DB/RN不変。完了runを再起動しない。
@@ -1983,3 +1985,12 @@ API86d19b6d、STRUCTURE_MAP_DELTA_PRESENT。通常の累積mapは不変。新ana
 API1cd4ada6/d63647a8で、従来application側だった4B関係mapの作者を既存CMEE ownerへ移した。Engine.generateがAnalysisSemanticMapInputをexact型dispatchし、semantic_admissionが元request/snapshotから再prepare・応答結合・引用を検査、intent_compilerが可視本文/根拠同居のAnalysisSemanticMapGraphを構築、observed_route_realizerだけが図/本文/privateを導く。application analysis_semantic_map.pyに別作者は残さない。旧有限ROLE/ACTION判定や他coreの生成方式は変更しない。
 
 公開v3/private envelope v1と既存immutable保存/RPCを維持し、private graph commitmentへ可視意味も含めた。新65 PASS、13入力messages/ref・9教師出力の互換を確認。Q1 shared stampは実値一致で変更不要。Renderコード配置はlive/healthz200だが、4Bの通常生成設定は未変更。実モデルの全件正しい意味・外部生成・本人端末表示を、構造統合の成功へ合算しない。現結果と残件はAnalysis current map末尾と最新weekly§16へ。
+
+
+## 2026-11-08 — 補助経路の全必要資産を現在のCMEEへ生かす詳細設計
+
+Mashの明示承認により、[補助経路活用の設計](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md)を、回収対象・改修方法・現owner・実装順・完了条件・再開位置の正本として追加した。原32系列＋X01、D01–D51、原8層と追加活用案を照合し、教材・共通原因・候補比較／選択・分布／版差分・原文／訂正／履歴・自然文の独立比較・Piece／Analysisへの適用を含める。外殻内部の有用な比較・計測・再現部品も個別回収し、不要な運用連鎖は復活させない。
+
+現naturalは既存admission／source Safety／保存を使うが、旧意味更新・本文逆検査全体は通らない。新設計の意味比較三値とcoverage、未判定／sourceエラーの区別、問いの別QUESTION接続、分析材料と比較reportの区別は未実装の設計である。現API／DB／RN／model／稼働・三中核作者を変更した事実にはしない。
+
+次はAR-01。同じ原情報の前後返答を改善し、既成功・別題材・保存再読を保つ。設計書や検査の件数だけでは活用完了にしない。**STRUCTURE_MAP_DELTA_NONE：今回の変更は設計と再開導線であり、製品runtime構造は不変。**
