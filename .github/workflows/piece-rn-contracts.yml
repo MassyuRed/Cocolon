@@ -17,6 +17,7 @@ name: Piece RN preview and owner contracts
       - tests/kokoro-weather-live.test.js
       - tests/analysis-report-history.test.js
       - tests/settings-home-layout.test.js
+      - tests/emlis-thread.test.js
       - tests/fixtures/kokoro-weather-live-v1.json
       - screens/input/InputPieceActionArea.js
       - screens/InputScreen.js
@@ -111,11 +112,12 @@ jobs:
         env:
           NODE_PATH: ${{ runner.temp }}/piece-react-tests/node_modules:${{ runner.temp }}/piece-node-tests/node_modules
         run: >-
-          node --test
+          node --test --test-skip-pattern="RN bundle embeds only public API URLs"
           tests/api-client-cancellation.test.js
           tests/account-profile-owner-race.test.js
           tests/account-settings-owner-race.test.js
           tests/settings-home-layout.test.js
+          tests/emlis-thread.test.js
           tests/tutorial-owner-race.test.js
           tests/iap-owner-race.test.js
           tests/private-history-owner-race.test.js

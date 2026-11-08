@@ -1147,3 +1147,19 @@ for (const waitFor of ['focus', 'runtime']) test(`Piece creation on the original
   assert.equal(calls.length, 1, 'focus, runtime and owner returns never create again');
   await act(async () => root.unmount());
 });
+
+test('GPU queue follows the first saved absolute deadline without extending it on background or later reads', async t => {
+  t.mock.timers.enable({ apis: ['setTimeout','Date'], now:1000 });
+  let gets=0;
+  const running={state:'INITIALIZING',original:{id:'input'},attempt_id:'same',timeline:[],can_write:true,
+    processing_deadline_at:new Date(261000).toISOString()};
+  const h=await mountPollingReader(t,{get:async()=>{gets++;return {...running,processing_deadline_at:new Date(gets===1?261000:9999999).toISOString()};}});
+  await act(async()=>h.value.open('input'));
+  await act(async()=>t.mock.timers.tick(40000));
+  assert.equal(gets,2,'the saved GPU queue remains readable beyond 35 seconds');
+  await h.appState('background');
+  await act(async()=>t.mock.timers.tick(220000));
+  await h.appState('active');
+  await act(async()=>t.mock.timers.tick(1000));
+  assert.equal(gets,2,'background and changed server timestamps cannot renew the first deadline');
+});

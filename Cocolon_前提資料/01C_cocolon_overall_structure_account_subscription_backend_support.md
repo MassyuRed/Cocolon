@@ -83,7 +83,7 @@ revision_date: "2026-08-02"
 - repo: `Cocolon`
 - system: `account / subscription surface`
 - 現行状態: `active`
-- 役割: RN screen module. Current system: account / subscription surface.
+- 役割: テーマ／通知の単独・embedded表示とowner付き保存。
 - 直接関係ファイル:
   - `Cocolon/AuthContext.js` — import
   - `Cocolon/components/CocolonPressable.js` — import
@@ -96,6 +96,7 @@ revision_date: "2026-08-02"
   - `mashos-api/ai/services/ai_inference/api_account_lifecycle.py` — endpoint /account/profile/me
   - `mashos-api/ai/services/ai_inference/api_friends.py` — endpoint /emotion-notifications/settings
 - このファイルを直接参照するファイル:
+  - `Cocolon/screens/SettingsScreen.js` — 既存controller共有
   - `Cocolon/App.js` — import
 - 修正時に必ず同時確認するファイル:
   - `Cocolon/App.js`
@@ -116,7 +117,7 @@ revision_date: "2026-08-02"
 - repo: `Cocolon`
 - system: `account / subscription surface`
 - 現行状態: `active`
-- 役割: RN screen module. Current system: account / subscription surface.
+- 役割: tutorial／logout／二段deleteの単独・embedded表示。
 - 直接関係ファイル:
   - `Cocolon/AppRuntimeContext.js` — import
   - `Cocolon/AuthContext.js` — import
@@ -127,6 +128,7 @@ revision_date: "2026-08-02"
   - `Cocolon/screens/MyWebMenuCommon.js` — import
   - `mashos-api/ai/services/ai_inference/api_account_lifecycle.py` — endpoint /account/delete
 - このファイルを直接参照するファイル:
+  - `Cocolon/screens/SettingsScreen.js` — 既存controller共有
   - `Cocolon/App.js` — import
 - 修正時に必ず同時確認するファイル:
   - `Cocolon/App.js`
@@ -145,12 +147,14 @@ revision_date: "2026-08-02"
 - repo: `Cocolon`
 - system: `account / subscription surface`
 - 現行状態: `active`
-- 役割: RN screen module. Current system: account / subscription surface.
+- 役割: 既存アプリ設定・その他と契約renderSettingsを集約する設定home。
 - 直接関係ファイル:
-  - `Cocolon/screens/MyModelMenuCommon.js` — import
-  - `Cocolon/screens/MyWebMenuCommon.js` — import
+  - `Cocolon/screens/AnalysisMenuCommon.js` — import
+  - `Cocolon/screens/SettingsAppSettingsScreen.js` — embedded
+  - `Cocolon/screens/SettingsOtherScreen.js` — embedded
+  - `Cocolon/screens/SubscriptionSelectScreen.js` — renderSettings
 - このファイルを直接参照するファイル:
-  - `Cocolon/App.js` — import
+  - `Cocolon/navigation/SettingsStackNavigator.js` — import
 - 修正時に必ず同時確認するファイル:
   - `Cocolon/App.js`
   - `Cocolon/screens/MyModelMenuCommon.js`
@@ -162,7 +166,7 @@ revision_date: "2026-08-02"
 - repo: `Cocolon`
 - system: `account / subscription surface`
 - 現行状態: `active`
-- 役割: RN screen module. Current system: account / subscription surface.
+- 役割: 契約画面と設定homeが同じ実plan／復元・管理handlerを共有。
 - 直接関係ファイル:
   - `Cocolon/AppRuntimeContext.js` — import
   - `Cocolon/SubscriptionContext.js` — import
@@ -175,6 +179,7 @@ revision_date: "2026-08-02"
   - `Cocolon/ui/applyTypographyTokens.js` — import
   - `Cocolon/ui/uiTokens.js` — import
 - このファイルを直接参照するファイル:
+  - `Cocolon/screens/SettingsScreen.js` — 既存controller共有
   - `Cocolon/App.js` — import
 - 修正時に必ず同時確認するファイル:
   - `Cocolon/App.js`
@@ -4759,3 +4764,5 @@ checkpointの詳細は07 / Planへ委譲し、本資料ではbackend support上�
 本人切替／auth世代・遅延操作・購入開始／復元・private履歴・通知等の修復をRN56e65b1aへまとめ、7601の内部Testingまで確認した。API側の購入hint／Console診断・profile失敗時の扱いは5993以後の候補へ保持。価格／SKU／実販売設定は変更していない。旧Piece公開の2原子関数は実DBへ適用し、既存4table／RLS／service権限と関数定義・ACLを照合した。新table・V2公開の有効化・データ一括移行0。
 
 この追記より前の候補／未配置／点検中の記述は当時の履歴。最新source・全CIの実結果・配置と配布・未確認は[第10回§15.10](weekly_reviews/Cocolon_Weekly_Review_20261107.md#input-contract-repair-final-20261107)を参照する。7,817blob一致を全意味読了とせず、一般意味品質・保存currentの本人再解析・月次当時版の保持・実環境受入れをそれぞれ区別する。
+
+11/8設定差分：GlobalFrameLayout.headerRightSlotをMainTabsがSettings入口時だけ渡し、既存Accountへ進む。元HTML previewは保持。

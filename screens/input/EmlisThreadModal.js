@@ -72,23 +72,30 @@ export default function EmlisThreadModal({ thread, colors, navigation, userId = 
     const inputId = dto?.original?.id;
     if (!inputId) return;
     if (!polling.current || polling.current.inputId !== inputId) {
-      polling.current = { inputId, startedAt: Date.now(), attemptId: null, stopped: false };
+      const startedAt = Date.now();
+      polling.current = { inputId, startedAt, deadlineAt: startedAt + 35000,
+        serverDeadlineBound: false, attemptId: null, stopped: false };
     }
     const budget = polling.current;
     if (dto.attempt_id) {
       if (budget.attemptId && budget.attemptId !== dto.attempt_id) budget.stopped = true;
       budget.attemptId = dto.attempt_id;
     }
+    const serverDeadline = Date.parse(dto.processing_deadline_at || "");
+    if (!budget.serverDeadlineBound && dto.attempt_id && Number.isFinite(serverDeadline)) {
+      if (serverDeadline > budget.startedAt) budget.deadlineAt = Math.max(budget.deadlineAt, Math.min(serverDeadline, budget.startedAt + 270000));
+      budget.serverDeadlineBound = true;
+    }
     if (error || uncertain || thread.rejected || dto.can_write === false) budget.stopped = true;
     const pending = (dto.state === "NOT_CREATED" && thread.waitForInitial)
       || ["INITIALIZING", "REFINING"].includes(dto.state);
-    if (pending && Date.now() - budget.startedAt >= 35000) {
+    if (pending && Date.now() >= budget.deadlineAt) {
       if (!readStopped) setReadStopped(true);
       return;
     }
     if (!pending || budget.stopped || appState !== "active" || busy || thread.pendingAction) return;
     const timer = setTimeout(() => {
-      if (Date.now() - budget.startedAt >= 35000) setReadStopped(true);
+      if (Date.now() >= budget.deadlineAt) setReadStopped(true);
       else if (AppState?.currentState === "active" && !budget.stopped) thread.refresh();
     }, 1000);
     // Do not abort the hook's shared controller: it may own an answer POST.

@@ -1499,3 +1499,5 @@ Emlis actual：response profile natural_reply.v1、endpointは旧6i2aa1nj683s8y�
 設定配置：Global Emlis見出し右のアカウント、現在プランcard、アプリ設定2行、サブスク3行、その他3行、下部規約・privacy・support。既存バーガンディ／アイボリー、実プラン／価格を使用。既存通知・IAP復元／管理・2段階削除handlerを再利用し、認証待ちからrestore busyを立てて別plan画面への同時遷移を抑止。元preview原本は改変しない。
 
 source試験：API HTTP／pending／候補retry／bridge61件pass。RN設定layout・owner・入力・thread144件pass、追加pending marker2件もpass。Metro bundle単独検査はローカル依存不足のため対象から外し、最終iOS buildで確認する。自然文SQLは53件pass、実GPU接続は実行中。API source `5d2afbfc33181f9071c9efd7ea2e995812924093`を保存・全11path blob照合済み。新配布・実反映・本人端末は未完。
+
+共有GPUの追加修復source：`497f7008fec8935885d09d2e430499892189b5bb`。naturalだけ最大210秒のlock待ち＋生成23秒、HTTP240／bridge245／thread270秒。分析の既存予算・JSON制約・nonblockingを保持。RNは同attemptの最初のprocessing_deadline_atだけで最大270秒まで自動GETを継続し、背景復帰・後続deadline変更で延長しない。GETは生成しない。API115件pass（実SQL53含む）、RN対象46件pass＋入力pending2件／既存関連102件pass。旧source5d2の実GPU2件は2.177秒／2.032秒で自然文検査pass（合成入力、品質全般の受入れではない）。新source共有待機の実GPU検証と実API反映・内部buildは進行中。
