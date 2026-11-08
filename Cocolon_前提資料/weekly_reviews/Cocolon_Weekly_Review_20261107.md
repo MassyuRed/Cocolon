@@ -1482,3 +1482,7 @@ Mashより7901のこころ天気表示は概ね指示どおりとの報告を受
 API候補a305b333、局所7suite73 PASS。RNは新history9＋weather7＋screen36＝52 PASS。旧名先頭変換と本文保持、metadata／detail分離、owner・期間・既読の競合、server失敗で既読化しない条件を検査した。広域の初回は136 PASS／TypeScript loader不足1file失敗。既存固定TypeScript5.2.2を一時test環境だけへ追加し、同5fileを再検査して141 PASS／FAIL・SKIP0。商品依存／lock変更なし。初期の新fixture1失敗はunmount後のTestInstanceアクセスを修正して解消。APIのASGI mark競合は旧結果が後着しても既読cacheと別ownerを保つ。独立reviewの指摘を修復し再読確認。詳細は[分析構造](../current_structure/03_analysis_current_structure.md#kokoro-graph-history-read-20261108)。
 
 primary outcome＝TECHNICAL_CREDIT。修正版のGitHub保存・CI確認まで進め、今回のRender配置／設定変更／DB／GPU生成／署名build／Uploadは0。実機の速度短縮・未読解消、今回改名の端末表示、通知受信／tapは次回のまとめ反映後に確認する。現live8739cd80／7901を今回候補へ更新済みとはしない。
+
+検証・GitHub保存の最終追補：APIa305b333のAnalysis CI42448071805／job128631146307は14:00:51 JSTに全18工程success、Piece SQL42448071758／job128631146242は13:49:48 JSTに全37工程success。RN2518f9faは新history9を含むRNcontracts128632034420とphase6 42448361265が成功、Android source／exportとexport Podsも成功。別Piece native V4は前版と同じ19名称・順序の失敗を保持し、canvas128632034326は記録時点で実描画中・終端未確認。既存別経路を修正済みや全CI greenとしない。
+
+局所RNは対象52＋関連141＝193 PASS、API73 PASS。Cocolon31path／API10pathのremote全bytes・変更path・各source headを照合済み。後続はこの結果だけを既存資料へ反映し、製品sourceは2518f9fa／a305b333から変更しない。署名build／Upload／本番反映0で、他の変更後にまとめるMash指示を維持。通知の既存workerログ一回読取では指定範囲の対象job記録0件、配送の成否は未確認として残す。
