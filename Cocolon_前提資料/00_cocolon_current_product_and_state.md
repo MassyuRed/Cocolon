@@ -1,3 +1,5 @@
+> 11/9 AR-01続行：既存36架空教師を回収し、原sourceを保った本人宛表現7件だけの変更候補を準備。36更新・既存34入力比較の独立実行前確認まで成立。候補ZIPの外部送信が自動承認審査で拒否され、新学習・新生成・SQL再生は0。具体的ZIPの同Podへの送信承認待ちで、通常提供は維持。[準備内容と再開点](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/addressee36_preparation_review.md)。
+
 > 11/8 AR-01続行：関係指示・簡潔化の補助有無・既存別教師3組の提示で同6sourceから24実4B応答を比較。全HTTP200／stop、loop37.146571秒、学習／新load／retry0。4版とも人物・感情時点・語り手等の残差で通常不採用。一方、疑問符なしの確認質問2件が初回保存を通る抜けをAPI候補c6555fd5で修復し、旧引用範囲readerを既存validate_reply内へ再利用。250局所PASS、同24rawは旧24保存→新22保存／2拒否、受理22本文不変・非生成GET・retry不可。通常prompt／材料・提供は不変、今回配置／実DB／RN／build0。STRUCTURE_MAP_DELTA_NONE。意味品質全体・AR-01・全資産活用は継続中。[結果と再開点](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/conditioning_reuse_review.md)。
 
 > 11/8 補助経路活用AR-01続行：新8単独16更新と旧36＋新8の低LR混合44更新を、同じ元dbから別々に実施。新120生成・保存再読87件／length拒否1件を確認。混合で一部退行を抑えたが、役割・主体・認識時点の誤りが残り全候補通常不採用。元提供を復元・health200。次は残る意味誤読を旧meaning obligations／body inverse／候補比較の必要部品で修復し、同じ学習を周回しない。今回の商品source・配置・実DB／RN／build変更0、STRUCTURE_MAP_DELTA_NONE。AR-01は継続中。 [全結果と再開点](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/learning_replay_review.md)。

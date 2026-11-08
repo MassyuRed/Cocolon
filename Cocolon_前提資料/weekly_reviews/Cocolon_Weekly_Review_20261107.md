@@ -1929,3 +1929,17 @@ captureのoriginalにはuser_idがあり、通常SQL parent-source projectionは
 
 
 CI最終確認（2026-11-08T22:49:47.000+09:00）：固定API c6555fd5の[Piece SQL run42485547144](https://github.com/MassyuRed/mashos-api/actions/runs/42485547144)と[Analysis observed content run42485547296](https://github.com/MassyuRed/mashos-api/actions/runs/42485547296)は、いずれも全工程successで終了。生成・保存・shared owner・累積／Q3・report等の既存検証を保持した。同24rawの局所再生と通常不採用の判定は上記どおり。CI成功でも配置・実DB・本人端末・一般意味品質の受入れは未実施。API2pathと資料6pathの全内容・変更pathをGitHub読戻しで照合済み。
+
+
+<a id="auxiliary-addressee36-prepared-20261109"></a>
+## 25. 補助経路活用AR-01 — 本人宛教師を回収、36件の単一候補を準備
+
+2026-11-09 JST。前回§24の次作業として旧36架空教師を全件確認し、書き手を返答相手へ明示するtargetが0件だったことから、意味上正しい「ご自身」6件／主語省略1件だけ表現変更する仮説を具体化した。原36source・metadata・SYSTEM/user・参照と他29targetは不変。評価6source／24出力／判断を教師化しない。S02A/Bと診断V01/V02の意味近接、前回ICL教材の露出、emotion時点の統制pair不足は保持する。
+
+一候補は既存db3242から36件各1回・LR1e-5・fresh optimizer、既存assistant-only SFT／学習90秒・trial300秒／after34生成を上限とする。旧before34は原bytes再利用で新生成に数えない。V8を今回学習から除外し、全34のid/group/messages/source参照を固定した。独立担当が原36と全変更7件、保持29件、eval26不変、Python3file構文と既存wrapperの復元境界を照合した。旧44との比較はV8除外も交絡し、二人称表現だけの効果とは主張できない。14件への削減案は偏り／保持縮小を避けて未実行とし、候補を増やさない。
+
+既存Jupyterへ到達し、PID24179／元server source f95fc7ce／health200、実GPUがRTX4000 Ada Generation・20475MiBであることを読取確認。記憶上のA5000へ置換しない。新CPU tokenizer preflight・GPU更新・生成・load・pause／復元・SQL再生は全て0。今回API source・配置・実DB・RN・build・通常model設定変更0。
+
+候補ZIP（コード4本＋架空7表現差分、17,074bytes／SHA256 2eed5fa59a68b4dd67cceff2f968cccf2cdeea18bd3c5dfec787ef2f06dafb9b）の同Podへのuploadが自動承認審査で拒否された。全5memberに実ユーザー入力・認証値・生成結果・重みがないことを確認したが、再審査でもpayloadと送信先の明示承認が必要とされた。**未送信・未学習。別経路で同じpayloadを渡す回避なし。** 具体的ZIPをMash指定Pod f1lle4xwq3wjlnへ送る承認後、同候補のpreflight→学習／全34読解→26の既存provider＋隔離SQL保存再読→Pod外回収へ進む。
+
+[準備内容・限界・再開点](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/addressee36_preparation_review.md)／[本文なし集計](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/addressee36_preparation_summary.json)。privateに候補コード・教材由来・準備pack・旧before34・独立確認を保存。**STRUCTURE_MAP_DELTA_NONE**（研究用教師表現と候補準備のみで作者・型・wire・保存責務の追加なし）。AR-01・AR-02〜08・全資産活用・通常品質・本人端末／正式受入れは未完了。
