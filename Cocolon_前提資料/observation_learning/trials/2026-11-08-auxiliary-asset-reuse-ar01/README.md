@@ -1,3 +1,5 @@
+> 11/8 AR-01続行：別命題・感情時点の指示、簡潔化、既存別教師3組の提示で24実応答を比較し4版とも通常不採用。疑問符なしの確認質問2件が初回保存を通る抜けをc6555fd5で修復。250局所PASS、同24rawの隔離SQLは旧24保存→新22保存／2拒否、受理22本文不変・非生成GETを確認。通常生成設定・本番配置は不変、AR-01継続中。[全結果と次作業](conditioning_reuse_review.md)／[集計](conditioning_reuse_summary.json)。
+
 > 11/8 AR-01続行：有限な焦点役割と認識／内容の別範囲をe14d4fecへ実装。237検査・2 CI成功。新38実応答は局所修復と退行が混在し、生成補助は通常不採用。32本文は隔離SQL保存・同／新service非生成再読まで確認。全文意味品質と全資産活用は未完了。[今回の実装・読解・残差](focus_cognition_reuse_review.md)／[集計](focus_cognition_reuse_summary.json)。
 
 > 11/8 AR-01続行：準備済み8教材を実学習し、単独16更新・低LR混合44更新を別々に元dbから比較。新120応答（119stop／1length）、保存再読87件とlength拒否1件を確認。混合で一部退行を抑えたが、役割方向・未記載主体・予告認識等が残り全候補通常不採用。元提供を復元・health200。次は旧meaning obligations／body inverse／候補比較を使って残る意味誤読を修復し、同じ学習周回へ戻さない。 [全結果](learning_replay_review.md)／[集計](learning_replay_summary.json)。AR-01は継続中。

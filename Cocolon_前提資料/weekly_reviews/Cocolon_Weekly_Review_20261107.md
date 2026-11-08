@@ -1912,3 +1912,17 @@ captureのoriginalにはuser_idがあり、通常SQL parent-source projectionは
 保存32のprivate reportは範囲内非衝突4／未判定28／衝突0。全52節のparsed5／checked4／未照合48で、全文coverageは全32 falseを維持する。parsedの1節も照合先が確定しなければ意味合格にしない。認識helperはsource側の認識行為と内容の範囲を補助へ保持するもので、自由文の認識一般を比較できた実証ではない。部分非衝突・保存成功を通常品質合格へ換算しない。
 
 次は、今回確定した人物参照の混入、原文外の因果、選択感情と未記載の期間／時点の結合、本人宛の語り口を現natural ownerで修復し、成立した役割方向と正しい短い言換えを保持する。前回の単独16／混合44更新や同じpromptを再周回せず、必要な旧資産部品を実本文修復へつなぐ。評価の教師化とreaderだけの完成にしない。
+
+
+<a id="auxiliary-asset-reuse-conditioning24-question-boundary-20261108"></a>
+## 24. 補助経路活用AR-01 — 旧教材の文脈内利用・実24比較と質問保存抜けの修復
+
+同じ6開発sourceで、関係指示追加6／簡潔SYSTEMの補助有無12／既存別教師3組の提示6＝24実4B応答を比較した。旧候補比較・共通原因・教材分離の責務を現在の自由文へ適用。全HTTP200／stop、loop37.146571秒、HTTP36.958948秒、学習／新load／retry0、同PID／元source・Analysis重み不変・health200。4版とも人物・関係・感情時点・語り手等の残差で通常不採用。評価sourceや出力を教師化せず、未知一般化／品質率を出さない。[全結果と次作業](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/conditioning_reuse_review.md)／[本文なし集計](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/conditioning_reuse_summary.json)。
+
+実24で疑問符なしの確認質問2件が旧validatorを通り、隔離SQLで保存される不具合を確認した。API [c6555fd5](https://github.com/MassyuRed/mashos-api/commit/c6555fd5b81cd4ecda1bafdec60aa311c9e7feea)で旧_top_level_textを既存validate_replyへ再利用し、有限なtop-level質問語尾を保存前に拒否する。引用中の発話を保護、一般質問意図の完全判定ではない。変更2path、旧237＋新13＝250局所PASS、既存Pydantic警告1件。通常SYSTEM／材料・provider回数は不変。
+
+同24raw／messagesを実provider＋既存service＋隔離PGliteへ再生し、旧24 FINAL→新22 FINAL／2拒否。受理22本文hash不変、拒否artifact／receipt0・can_retry=false、全24の同／新service GETはprovider／reader／Engine再実行0。USER sourceとSQL event不変、capture／SQL projectionのsource参照差を両原本から再計算して保持。新生成・実HTTP・実DB・retry0。新保存22の有限reportは未判定19／範囲内非衝突3、全文coverage全件falseで、保存・拒否を意味合格へ換算しない。
+
+全原本・全判断・実messages・旧教材・修正前後SQL再生・両sourceを非公開保全。STRUCTURE_MAP_DELTA_NONE（既存natural受領owner内の限定修正、新path／型／作者／wire／DB／保存責務なし）。全体現在地と設計§11.2を更新し、全体設計図／file地図／current mapは新owner追加不要と確認。今回Render配置／実DB／RN／build／通常model設定変更0。AR-01全体・AR-02〜08・全資産活用・本人端末／正式受入れは未完了。
+
+次は追加promptの同周回を止め、評価6sourceとは別の既存教師sourceから人物・語り手・感情時点・理由の対応を保つ対照を回収し、既存学習ownerの単一候補比較へつなぐ。質問拒否を実本文修復の代用にしない。CIは下記の最終確認を正本とする。
