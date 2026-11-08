@@ -1428,6 +1428,14 @@ UI25 PASS、API局所308 PASS／20 SKIP／1 deselected・4subtests PASS（51.36�
 
 灰色列挙非表示はec49d981の修正を継承する。server側は反映済みで、旧7701も入力保存後の先行生成が完了していれば保存結果を再利用できる。新RNのbackground表示とstatus pollは統合build7801のTestFlight送信まで成功し、現7701のUIが既に変わったとはしない。今回DB DML／DDL、新GPU生成は0、署名build起動1、worker環境保存1／API・worker指定配置2。意味品質や内容の全修正を先行条件に戻さず、次はまとめたRN反映と自然な本人入力での先行更新・表示時間を確認する。STRUCTURE_MAP_DELTA_PRESENT（既存保存→予約→worker→readの接続変更）。
 
-配置前後の本文／IDなしDB集計は、myprofile_latest_refresh_v1が944件すべてdone、queued／running／failed0、最大attempts481、最終finished_at2026-11-07T06:14:36Zで不変。cumulative v2=1（最新2026-11-07T06:14:11.591862Z）、v3=1（最新2026-11-07T22:38:42.206545Z）と生成日時も不変。既存owner1組のguard付きmetadata readで表示可能1組を確認した。DB内の非生成再読であり、本人認証済HTTPや配置後の新生成の証明へ換算しない。検証用jobや架空本人記録を追加せず、本人新入力・JWT生成・なりすましも0。既存jobがすべて完了済みのため、配置後の新しい保存入力に対する先行生成はまだ未観測である。
+配置前後の本文／IDなしDB集計は、myprofile_latest_refresh_v1が944件すべてdone、queued／running／failed0、最大attempts481、最終finished_at2026-11-07T06:14:36Zで不変。cumulative v2=1（最新2026-11-07T06:14:11.591862Z）、v3=1（最新2026-11-07T22:38:42.206545Z）と生成日時も不変。既存owner1組のguard付きmetadata readで表示可能1組を確認した。DB内の非生成再読であり、本人認証済HTTPや配置後の新生成の証明へ換算しない。検証用jobや架空本人記録を追加せず、本人新入力・JWT生成・なりすましも0。この配置直後の集計時点では新保存入力の先行生成は未観測だった。後続の本人追加入力の実結果は同節末尾に更新した。
 
-送信完了後にも本文／IDなしの同job集計を一回再読し、944件すべてdone・queued/running/failed0、最終updated/finished2026-11-07T06:14:36Zで不変を確認した。配置後の自然な本人入力による先行生成は引き続き未観測である。新たなdispatch／rerunは0、署名buildは同じ一件だけ。
+送信完了後にも本文／IDなしの同job集計を一回再読し、944件すべてdone・queued/running/failed0、最終updated/finished2026-11-07T06:14:36Zで不変を確認した。この送信完了直後の集計では先行生成は未観測だったが、後続の追加入力で同節末尾の実結果へ到達した。新たなdispatch／rerunは0、署名buildは同じ一件だけ。
+
+11/8の本人追加入力後、保存起点のmyprofile_latest_refresh_v1がattempts2／doneで完了。要求時刻から約399.67秒、最終試行約133.87秒。workerのstatus okと新generated_at、実7801のstatus変化後の非生成latest HTTP200／466msを確認し、Mashの表示到達報告と照合した。個人ID・IP・token・本人本文は公開記録へ複製しない。この結果は先行更新・保存済み取得の実確認で、灰色一覧の実機非表示や意味品質の受入れまで認定しない。
+
+Mashの追加要望として、正常な新map保存後に固定文「わたしマップが更新されました」を既存in-app bannerと通知許可時pushで知らせる接続を実装し、局所検証を通過。globalのお知らせcatalogは個人通知へ流用しない。新kindは本人／保存版別の既存queue一回予約、送信前guard、push_enabledを保持し、tapは現mapへ接続する。workerにはFCM資格設定とsecret fileが無く、APIには既存firebase_service_account.jsonとFCM設定があることを名称のみ確認した。既存通知設定のworker登録を含む反映は未実施、現live09a3f714を維持。新table／依存／サービス／実pushは0。
+
+通知候補のAPI source59934fafをGitHubへ反映、既存CI42434201873進行中。局所8fileは375 PASS／21 SKIP／1 deselected・21subtests（91.82秒、既存警告1）。SKIPはQ2_PGLITE_MODULE未設定のcumulative_model_source19／semantic_integration1／model_fields1、Q3 real SQLを1件明示deselect。最終screen=Analysis互換追補後の対象25 PASS＋21subtestsを確認し、重複件数は加算しない。新規保存だけの予約／原子的同版重複／commit・guard失敗／通知OFF／他本人・古い版の送信拒否／保存成功を壊さない予約障害を確認。RNは通知関連70 PASS（新10）、startup／Root ownerの選択2 PASS。関連3file全体の先行試行118件は107 PASS／11環境失敗（未checkout featuresまたは既存Metro不足）で、全JS成功やnative成功とはしない。独立reviewで同じ旧版の再visibleを新更新と誤認する経路を発見し修復、背景中の遅延応答も消費しない。固定RNFirebase23.7.0のforeground既定Noneと現native overrideなしを照合、native変更なし。
+
+次の反映範囲は、API既存のFCM_PUSH_ENABLED／FCM_SERVICE_ACCOUNT_FILEとfirebase_service_account.jsonを既存mashos-astor-workerへ登録し、CI通過通知版をAPI／workerへ指定配置、対応RNを一回の統合buildへまとめること。本番配置と通知資格のworker登録は既存Rule18 §11.3のstanding delegation外なので、具体的な候補を用意した上でMashの個別承認を得る。資格値の閲覧・複製・設定保存・新build・新版配置・実pushはまだ0。

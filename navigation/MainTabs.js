@@ -5,6 +5,7 @@ import { StackActions } from "@react-navigation/native";
 import { createBottomTabNavigator, BottomTabBar } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import messaging from "@react-native-firebase/messaging";
 
 import { useAuth } from "../AuthContext";
 import { useOwnerRequestScope } from "../hooks/useOwnerRequestScope";
@@ -176,6 +177,9 @@ export default function MainTabs() {
   const selfStructureBannerHideTimerRef = useRef(null);
   const selfStructureLatestVersionRef = useRef(null);
   const selfStructureLatestInitializedRef = useRef(false);
+  const selfStructureStatusSequenceRef = useRef(0);
+  const selfStructurePushVersionRef = useRef(null);
+  const selfStructureNotifiedVersionRef = useRef(null);
   const analysisUnreadRefreshSeqRef = useRef(0);
   const analysisUnreadStateRef = useRef({
     daily: false,
@@ -958,7 +962,9 @@ export default function MainTabs() {
     setSelfStructureBanner((prev) => (prev.visible ? { ...prev, visible: false } : prev));
   }, [clearSelfStructureBannerTimer]);
 
-  const showSelfStructureBanner = React.useCallback((reportMode = "standard") => {
+  const showSelfStructureBanner = React.useCallback((reportMode = "standard", versionKey) => {
+    if (!versionKey || selfStructureNotifiedVersionRef.current === versionKey) return;
+    selfStructureNotifiedVersionRef.current = versionKey;
     clearSelfStructureBannerTimer();
     setSelfStructureBanner({ visible: true, reportMode: reportMode === "deep" ? "deep" : "standard" });
     selfStructureBannerHideTimerRef.current = setTimeout(() => {
@@ -1032,35 +1038,55 @@ export default function MainTabs() {
   }, [isPaid, subscriptionLoading, warmAnalysisUnreadAtStartup]);
 
   useEffect(() => {
-    if (subscriptionLoading) return;
-    if (isPaid) return;
     hideSelfStructureBanner();
     selfStructureLatestInitializedRef.current = false;
     selfStructureLatestVersionRef.current = null;
-  }, [hideSelfStructureBanner, isPaid, subscriptionLoading]);
+    selfStructurePushVersionRef.current = null;
+    selfStructureNotifiedVersionRef.current = null;
+    selfStructureStatusSequenceRef.current += 1;
+  }, [hideSelfStructureBanner, currentOwner, authOwnerGeneration]);
 
   const refreshSelfStructureLatestStatus = React.useCallback(async () => {
-    if (subscriptionLoading || !isPaid || !isAppActive || !isOwnerCurrent(ownerRequest)) return;
+    if (!isAppActive || !isOwnerCurrent(ownerRequest)) return;
+    const sequence = ++selfStructureStatusSequenceRef.current;
     try {
       const json = await apiGet(SELF_STRUCTURE_WIRE.routes.latestStatus, ownerRequest.options);
-      if (!isOwnerCurrent(ownerRequest)) return;
-      const nextVersionKey = String(json?.version_key || "").trim() || null;
-      const hasVisibleContent = !!json?.has_visible_content;
+      if (!isOwnerCurrent(ownerRequest) || AppState.currentState !== "active"
+        || sequence !== selfStructureStatusSequenceRef.current) return;
+      const hasVisibleContent = json?.has_visible_content === true;
+      const nextVersionKey = hasVisibleContent ? String(json?.version_key || "").trim() || null : null;
       const reportMode = String(json?.saved_report_mode || "").trim().toLowerCase() === "deep" ? "deep" : "standard";
-      if (!selfStructureLatestInitializedRef.current) {
-        selfStructureLatestInitializedRef.current = true;
-        selfStructureLatestVersionRef.current = nextVersionKey;
-        return;
-      }
-      if ((selfStructureLatestVersionRef.current || null) !== nextVersionKey) {
-        selfStructureLatestVersionRef.current = nextVersionKey;
-        if (nextVersionKey && hasVisibleContent) showSelfStructureBanner(reportMode);
+      const initialized = selfStructureLatestInitializedRef.current;
+      const changed = (selfStructureLatestVersionRef.current || null) !== nextVersionKey;
+      const pushMatches = !!nextVersionKey && selfStructurePushVersionRef.current === nextVersionKey;
+      selfStructureLatestInitializedRef.current = true;
+      if (nextVersionKey) selfStructureLatestVersionRef.current = nextVersionKey;
+      if (pushMatches) selfStructurePushVersionRef.current = null;
+      if (nextVersionKey && hasVisibleContent && ((initialized && changed) || pushMatches)) {
+        showSelfStructureBanner(reportMode, nextVersionKey);
       }
     } catch {}
-  }, [isAppActive, isPaid, showSelfStructureBanner, subscriptionLoading, ownerRequest, isOwnerCurrent]);
+  }, [isAppActive, showSelfStructureBanner, ownerRequest, isOwnerCurrent]);
 
   useEffect(() => {
-    if (subscriptionLoading || !isPaid || !isAppActive) return undefined;
+    if (!isAppActive || !ownerRequest.owner) return undefined;
+    try {
+      return messaging().onMessage((remoteMessage) => {
+        const data = remoteMessage?.data || {};
+        if (!isOwnerCurrent(ownerRequest) || AppState.currentState !== "active"
+          || data.type !== "watashi_map_updated" || data.user_id !== ownerRequest.owner) return;
+        const versionKey = String(data.version_key || "").trim();
+        if (!versionKey) return;
+        selfStructurePushVersionRef.current = versionKey;
+        refreshSelfStructureLatestStatus().catch(() => null);
+      });
+    } catch {
+      return undefined; // The existing status check also works without push permission.
+    }
+  }, [isAppActive, ownerRequest, isOwnerCurrent, refreshSelfStructureLatestStatus]);
+
+  useEffect(() => {
+    if (!isAppActive) return undefined;
     let intervalId = null;
     const tick = () => { refreshSelfStructureLatestStatus().catch(() => null); };
     tick();
@@ -1068,7 +1094,7 @@ export default function MainTabs() {
     return () => {
       try { if (intervalId) clearInterval(intervalId); } catch {}
     };
-  }, [isAppActive, isPaid, refreshSelfStructureLatestStatus, subscriptionLoading]);
+  }, [isAppActive, refreshSelfStructureLatestStatus]);
 
   useEffect(() => {
     runAllUnreadPrefetch();
@@ -1127,7 +1153,7 @@ export default function MainTabs() {
       <Ionicons name="notifications-outline" size={18} color={colors.TITLE_GOLD} style={{ marginRight: 10 }} />
       <View style={{ flex: 1 }}>
         <Text style={{ color: colors.TEXT_ON_LIGHT, fontSize: 13, fontWeight: "700" }}>
-          今のわたしマップが更新されました
+          わたしマップが更新されました
         </Text>
       </View>
       <Ionicons name="chevron-forward" size={18} color={colors.TEXT_SUBTLE} />

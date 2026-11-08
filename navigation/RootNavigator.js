@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { View } from "react-native";
 
 import { useAuth } from "../AuthContext";
@@ -8,14 +8,19 @@ import { useTutorial } from "../TutorialContext";
 import { startIapPurchaseObserver, stopIapPurchaseObserver } from "../lib/iap/iapService";
 import { startPushTokenSync, syncPushTokenOnce } from "../lib/pushToken";
 import { captureClientError } from "../lib/monitoring";
-import { tryOpenRouteIfPending } from "./navigationRef";
+import { setNotificationNavigationOwner, tryOpenRouteIfPending } from "./navigationRef";
 import AppStartupLoadingView from "../runtime/AppStartupLoadingView";
 import MainTabs from "./MainTabs";
 
 export default function RootNavigator() {
-  const { session, initializing, recoveryMode } = useAuth();
+  const { session, initializing, recoveryMode, authOwnerGeneration } = useAuth();
   const { subscriptionBootstrapLoaded } = useSubscription();
   const { tutorialResetToken } = useTutorial();
+
+  useLayoutEffect(() => {
+    setNotificationNavigationOwner(session?.user?.id, !initializing && !recoveryMode);
+    return () => setNotificationNavigationOwner(null, false);
+  }, [initializing, recoveryMode, session?.user?.id, authOwnerGeneration]);
 
   useEffect(() => {
     if (!session || recoveryMode || !subscriptionBootstrapLoaded) {

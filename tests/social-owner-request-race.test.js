@@ -15,7 +15,7 @@ const tick = async () => { for (let i = 0; i < 30; i++) await Promise.resolve();
 async function harness(t, file, initialTab = 'following', options = {}) {
   const control = { owner: 'A', generation: 0, session: { user: { id: 'A' }, access_token: 'synthetic-A' },
     authGate: null, holdRead: null, failWrite: false, ...options };
-  const calls = [], events = [], alerts = [], routes = [], timers = [], listeners = new Set(), modules = new Map();
+  const calls = [], events = [], alerts = [], routes = [], timers = [], listeners = new Set(), pushListeners = new Set(), modules = new Map();
   const noop = () => {};
   const tutorialPieces = [];
   const native = Object.fromEntries(['ActivityIndicator', 'KeyboardAvoidingView', 'Modal', 'ScrollView', 'StatusBar',
@@ -43,6 +43,7 @@ async function harness(t, file, initialTab = 'following', options = {}) {
   function defaultBody(url, options) {
     if (options.method !== 'GET') return { unread_count: 0, resonated: true, resonances: 1 };
     const p = new URL(url).pathname;
+    if (p === '/self-structure/latest/status') return control.mapStatus || { version_key: null, has_visible_content: false };
     if (p === '/notices/history') return { items: [notice], unread_count: 1 };
     if (p === '/follow/list') return { rows: [{ id: 'C', display_name: 'C-name' }, { id: 'D', display_name: 'D-name' }] };
     if (p === '/follow/stats') return { following_count: 2, follower_count: 0 };
@@ -79,6 +80,9 @@ async function harness(t, file, initialTab = 'following', options = {}) {
       if (name === 'react-native-vector-icons/Ionicons') return 'Icon';
       if (name === 'react-native-safe-area-context') return { SafeAreaView: 'SafeAreaView', useSafeAreaInsets: () => ({ top: 0, bottom: 0, left: 0, right: 0 }) };
       if (name === '@react-native-async-storage/async-storage') return { getItem: async () => null };
+      if (name === '@react-native-firebase/messaging') return () => ({ onMessage: listener => {
+        pushListeners.add(listener); return () => pushListeners.delete(listener);
+      } });
       if (name === '@react-navigation/native') return { StackActions: { popToTop: noop } };
       if (name === '@react-navigation/bottom-tabs') return { createBottomTabNavigator: () => ({
         Navigator: props => React.createElement('Navigator', props, props.children),
@@ -99,6 +103,8 @@ async function harness(t, file, initialTab = 'following', options = {}) {
       if (target === 'lib/user.js') return { getCurrentUserId: async () => control.owner };
       if (target === 'lib/monitoring.js') return { captureApiError: noop };
       if (target === 'navigation/navigationRef.js') return { navigationRef: { isReady: () => false }, buildAnalysisRootNavigationParams: value => value };
+      if (target === 'components/GlobalFrameLayout.js') return { __esModule: true, FRAME_BORDER_WIDTH: 0,
+        default: props => React.createElement('GlobalFrameLayout', props, props.headerBottomSlot, props.children) };
       if (target === 'lib/noticeActionRuntime.js') return { getNoticeButtonActions: () => [{ label: 'リンクを開く' }],
         openNoticeAction: async (_action, { openInternalRoute }) => openInternalRoute('Account') };
       if (target === 'components/TutorialOverlay.js') return { __esModule: true, default: 'TutorialOverlay',
@@ -135,6 +141,16 @@ async function harness(t, file, initialTab = 'following', options = {}) {
     async resolve(call, body) { await act(async () => { call.resolve(body); await tick(); }); },
     async fireTimers() { const pending = timers.filter(entry => entry.active && entry.ms < 10000);
       await act(async () => { for (const entry of pending) { entry.active = false; entry.callback(); } await tick(); }); },
+    async pollMapStatus() { await act(async () => {
+      for (const entry of timers.filter(item => item.active && item.ms === 20000)) entry.callback();
+      await tick();
+    }); },
+    async push(data) { await act(async () => {
+      for (const listener of [...pushListeners]) listener({ data }); await tick();
+    }); },
+    pushListeners,
+    bannerCount: () => root.root.findAllByType('Text').filter(node => node.props.children === 'わたしマップが更新されました').length,
+    bannerTimers: () => timers.filter(entry => entry.ms === 4500).length,
     mutations: () => calls.filter(call => call.options.method !== 'GET'),
   };
   await h.flush(); return h;
@@ -363,4 +379,182 @@ test('same-owner MainTabs feed read retains its displayed timestamp', async t =>
   const reads = h.mutations().filter(call => call.path === '/emotion-log/unread/read-feed');
   assert.equal(reads.length, 1); assert.equal(reads[0].owner, 'A');
   assert.deepEqual(JSON.parse(reads[0].options.body), { last_seen_created_at: '2026-11-07T00:00:00Z' });
+});
+
+const mapStatusPath = '/self-structure/latest/status';
+const mapPush = (user = 'A', version = 'map-new') => ({ type: 'watashi_map_updated', user_id: user,
+  version_key: version, report_id: 'synthetic-report', target: 'watashi_map' });
+
+test('Free map completion shows the existing in-app banner without FCM and one version is not announced twice', async t => {
+  const h = await harness(t, 'navigation/MainTabs.js', 'following', {
+    mapStatus: { version_key: 'map-old', has_visible_content: true },
+  });
+  assert.equal(h.bannerCount(), 0, 'mounting an existing map is not a new completion');
+  h.control.mapStatus = { version_key: 'map-new', has_visible_content: true };
+  await h.pollMapStatus();
+  assert.equal(h.bannerCount(), 1);
+  assert.equal(h.bannerTimers(), 1);
+  await h.push(mapPush());
+  await h.pollMapStatus();
+  assert.equal(h.bannerTimers(), 1, 'FCM and polling the same saved version share the notification');
+  await h.fireTimers();
+  assert.equal(h.bannerCount(), 0);
+  await h.push(mapPush());
+  assert.equal(h.bannerCount(), 0, 'a duplicate FCM delivery does not show the dismissed banner again');
+});
+
+test('a queued empty initial status is announced when the first visible map completes', async t => {
+  const h = await harness(t, 'navigation/MainTabs.js', 'following', {
+    mapStatus: { version_key: null, has_visible_content: false, refresh_status: 'queued' },
+  });
+  assert.equal(h.bannerCount(), 0);
+  h.control.mapStatus = { version_key: 'map-new', has_visible_content: true, refresh_status: null };
+  await h.pollMapStatus();
+  assert.equal(h.bannerCount(), 1);
+});
+
+test('restoring source validity for the same saved map is not a new completion', async t => {
+  const h = await harness(t, 'navigation/MainTabs.js', 'following', {
+    mapStatus: { version_key: 'map-old', has_visible_content: true },
+  });
+  h.control.mapStatus = { version_key: null, has_visible_content: false, refresh_status: 'queued' };
+  await h.pollMapStatus();
+  h.control.mapStatus = { version_key: 'map-old', has_visible_content: true };
+  await h.pollMapStatus();
+  assert.equal(h.bannerTimers(), 0);
+  assert.equal(h.bannerCount(), 0);
+});
+
+test('foreground completion FCM is only a hint and requires a matching visible current version', async t => {
+  const h = await harness(t, 'navigation/MainTabs.js', 'following', {
+    mapStatus: { version_key: 'map-old', has_visible_content: true },
+  });
+  await h.push(mapPush('A', 'obsolete-version'));
+  assert.equal(h.bannerCount(), 0);
+  h.control.mapStatus = { version_key: 'map-new', has_visible_content: false, refresh_status: 'running' };
+  await h.push(mapPush());
+  assert.equal(h.bannerCount(), 0, 'a notification cannot make a source-invalid map visible');
+  h.control.mapStatus = { version_key: 'map-new', has_visible_content: true };
+  await h.push(mapPush());
+  assert.equal(h.bannerCount(), 1);
+});
+
+test('a matching foreground completion is shown before any successful status baseline and an older read cannot rewind it', async t => {
+  const h = await harness(t, 'navigation/MainTabs.js', 'following', { holdRead: call => call.path === mapStatusPath });
+  const first = h.calls.find(call => call.path === mapStatusPath && call.resolve);
+  assert.ok(first);
+  await h.push(mapPush());
+  const current = h.calls.findLast(call => call.path === mapStatusPath && call.resolve);
+  assert.notEqual(current, first);
+  await h.resolve(current, { version_key: 'map-new', has_visible_content: true });
+  assert.equal(h.bannerCount(), 1);
+  await h.resolve(first, { version_key: 'map-old', has_visible_content: true });
+  assert.equal(h.bannerTimers(), 1);
+});
+
+test('map FCM and a pending status response cannot cross account changes or the background boundary', async t => {
+  const h = await harness(t, 'navigation/MainTabs.js', 'following', {
+    mapStatus: { version_key: 'map-old', has_visible_content: true },
+  });
+  const before = h.calls.length;
+  await h.push(mapPush('B'));
+  assert.equal(h.calls.length, before, 'another owner FCM starts no status request');
+  const retainedListener = [...h.pushListeners][0];
+  h.control.holdRead = call => call.path === mapStatusPath;
+  await h.push(mapPush());
+  const old = h.calls.findLast(call => call.path === mapStatusPath && call.resolve);
+  h.control.holdRead = null;
+  await h.switchTo('B');
+  await h.resolve(old, { version_key: 'map-new', has_visible_content: true });
+  assert.equal(h.bannerCount(), 0);
+  const afterSwitch = h.calls.length;
+  await act(async () => { retainedListener({ data: mapPush() }); await tick(); });
+  assert.equal(h.calls.length, afterSwitch, 'retained A listener is retired after owner change');
+  await h.background('background');
+  const beforeBackgroundPush = h.calls.length;
+  await h.push(mapPush('B'));
+  assert.equal(h.calls.length, beforeBackgroundPush);
+  assert.equal(h.bannerCount(), 0);
+});
+
+test('a status response received in the background does not consume the foreground completion', async t => {
+  const h = await harness(t, 'navigation/MainTabs.js', 'following', {
+    mapStatus: { version_key: 'map-old', has_visible_content: true },
+  });
+  h.control.holdRead = call => call.path === mapStatusPath;
+  await h.push(mapPush());
+  const pending = h.calls.findLast(call => call.path === mapStatusPath && call.resolve);
+  await h.background('background');
+  await h.resolve(pending, { version_key: 'map-new', has_visible_content: true });
+  assert.equal(h.bannerTimers(), 0);
+  h.control.holdRead = null;
+  h.control.mapStatus = { version_key: 'map-new', has_visible_content: true };
+  await h.background('active');
+  assert.equal(h.bannerCount(), 1, 'resuming still announces the current visible version');
+});
+
+function notificationNavigationHarness() {
+  const routes = [], modules = new Map();
+  let ready = false;
+  const ref = { isReady: () => ready, getRootState: () => ({ routes: [{ name: 'Analysis' }, { name: 'Input' }, { name: 'Piece' }] }),
+    navigate: (...args) => routes.push(args) };
+  function load(relative) {
+    if (modules.has(relative)) return modules.get(relative);
+    const filename = path.join(ROOT, relative);
+    const code = babel.transformSync(fs.readFileSync(filename, 'utf8'), { filename, babelrc: false, configFile: false,
+      plugins: [require.resolve('@babel/plugin-transform-modules-commonjs')] }).code;
+    const module = { exports: {} };
+    Function('require', 'module', 'exports', code)(name => {
+      if (name === '@react-navigation/native') return { createNavigationContainerRef: () => ref };
+      if (name.endsWith('legacyWireContracts')) return { ANALYSIS_WIRE: { routes: { reportType: 'analysis' } } };
+      if (name.startsWith('.')) return load(path.relative(ROOT, path.resolve(path.dirname(filename), name)) + '.js');
+      throw new Error('unexpected navigation dependency: ' + name);
+    }, module, module.exports);
+    modules.set(relative, module.exports); return module.exports;
+  }
+  return { routes, nav: load('navigation/navigationRef.js'), routing: load('navigation/notificationRouting.js'),
+    ready: value => { ready = value; } };
+}
+
+test('cold map notification waits for the restored same owner and opens the current map viewer', () => {
+  const h = notificationNavigationHarness();
+  h.routing.requestOpenRouteFromNotification({ data: mapPush() });
+  h.ready(true); h.nav.tryOpenRouteIfPending();
+  assert.equal(h.routes.length, 0, 'navigation readiness is not authentication readiness');
+  h.nav.setNotificationNavigationOwner('A', true);
+  assert.equal(h.routes.length, 1);
+  assert.equal(h.routes[0][0], 'Analysis');
+  assert.equal(h.routes[0][1].screen, 'Analysis');
+  assert.equal(h.routes[0][1].params.openSelfReportLatest, true);
+  h.nav.tryOpenRouteIfPending(); assert.equal(h.routes.length, 1);
+});
+
+test('signed-out, switched-owner and superseded-generation pending map taps never open a later account', () => {
+  for (const nextOwner of [null, 'B']) {
+    const h = notificationNavigationHarness();
+    h.routing.requestOpenRouteFromNotification({ data: mapPush() });
+    h.nav.setNotificationNavigationOwner(nextOwner, true);
+    h.ready(true); h.nav.setNotificationNavigationOwner('A', true);
+    assert.equal(h.routes.length, 0);
+  }
+  const h = notificationNavigationHarness();
+  h.nav.setNotificationNavigationOwner('A', true);
+  h.routing.requestOpenRouteFromNotification({ data: mapPush() });
+  h.nav.setNotificationNavigationOwner(null, false); // Root cleanup on logout, recovery or owner-generation change.
+  h.routing.requestOpenRouteFromNotification({ data: mapPush() });
+  h.ready(true); h.nav.setNotificationNavigationOwner('A', true);
+  assert.equal(h.routes.length, 0);
+});
+
+test('warm map taps require their owner while existing question and report notification routes are unchanged', () => {
+  const h = notificationNavigationHarness(); h.ready(true); h.nav.setNotificationNavigationOwner('B', true);
+  h.routing.requestOpenRouteFromNotification({ data: mapPush() });
+  assert.equal(h.routes.length, 0);
+  h.routing.requestOpenRouteFromNotification({ data: mapPush('B') });
+  assert.equal(h.routes.length, 1);
+  h.nav.setNotificationNavigationOwner(null, true);
+  h.routing.requestOpenRouteFromNotification({ data: { type: 'today_question' } });
+  assert.equal(h.routes.at(-1)[0], 'Input');
+  h.routing.requestOpenRouteFromNotification({ data: { type: 'report_distribution' } });
+  assert.equal(h.routes.at(-1)[1].params.openDistributionHome, true);
 });

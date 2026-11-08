@@ -62,6 +62,7 @@ test('startup covers the mounted home until subscription I/O and home/draft sett
     '@react-navigation/native':{StackActions:{popToTop:no}},
     '@react-navigation/bottom-tabs':{createBottomTabNavigator:()=>({Navigator,Screen}),BottomTabBar:()=>null},
     '@react-native-async-storage/async-storage':{getItem:forever,setItem:forever},
+    '@react-native-firebase/messaging':()=>({onMessage:()=>no}),
     '../AuthContext':{useAuth:()=>({session:{user:{id:owner}}})},'../UnreadContext':{useUnread:()=>unread},
     '../SubscriptionContext':{useSubscription:()=>subscription},'../TutorialContext':{useTutorial:()=>tutorial},
     '../theme/ThemeContext':{useTheme:()=>theme},'../lib/supabase':{supabase:{auth:{getUser:forever,getSession:forever}}},

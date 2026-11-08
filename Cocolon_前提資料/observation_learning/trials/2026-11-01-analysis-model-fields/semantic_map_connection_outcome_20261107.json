@@ -70,7 +70,7 @@
     "render_settings_merge": "APPLIED_AFTER_EXPLICIT_MASH_APPROVAL",
     "production_env_changed": true,
     "deploy_started": true,
-    "next_action": "API and existing worker are deployed and connected. The single integrated RN build42430220604 (7801) succeeded through TestFlight upload. Apple console inspection was user-aborted; no further Apple actions taken. Apple processing, existing internal-group distribution and device result are unverified. Observe natural saved-input background generation and actual-device saved display without requiring all semantic-quality repairs first.",
+    "next_action": "Saved-input background generation and actual7801 saved read/display are now observed. Complete and validate requested completion notifications using existing in-app banner and FCM queue, then obtain approval for copying the existing API FCM settings/secret file to the worker and deploying the tested notification revision. Apple console inspection remains user-aborted; no further Apple actions. Keep gray-context device confirmation and semantic acceptance separate; do not require all content repairs first.",
     "deploy_live": true,
     "initial_live_commit": "d63647a816a9f4024aee16bade7735f1b9700e9c",
     "initial_deploy": "dep-dbnglopsrm7s739cqcsg",
@@ -454,7 +454,7 @@
       "quality_acceptance_unchanged": true
     },
     "background_refresh_20261108": {
-      "status": "DEPLOYED_SERVER_VERIFIED_INTEGRATED_RN_TESTFLIGHT_UPLOAD_SUCCEEDED",
+      "status": "DEPLOYED_BACKGROUND_UPDATE_AND_DEVICE_SAVED_READ_VERIFIED",
       "user_requested_behavior": "Begin analysis after saving input and display the saved map when opening the screen",
       "generation_duration_reduced_by_this_change": false,
       "prior_synthetic_generation_seconds": 171.34955875994638,
@@ -519,8 +519,11 @@
           "build_number_source": "Pinned workflow expression: run78*100+attempt1",
           "build_number_log_verified": false,
           "build_number_apple_verified": false,
-          "job_log_read_limit": "Dedicated log tool transport closed; alternate fetch job/logs endpoint unsupported; no further retries"
-        }
+          "job_log_read_limit": "Dedicated log tool transport closed; alternate fetch job/logs endpoint unsupported; no further retries",
+          "device_request_build_number_verified": "7801"
+        },
+        "device_background_read_verified": true,
+        "observed_device_build": "7801 request user-agent"
       },
       "boundaries": {
         "source_and_quote_admission_preserved": true,
@@ -555,7 +558,7 @@
           "queue_subtests_passed": 4
         },
         "overlapping_test_sets_summed": false,
-        "production_background_execution_verified": false,
+        "production_background_execution_verified": true,
         "ci": {
           "run_id": 42427888976,
           "source_commit": "09a3f7142dcc011c315617589df845b344b15e82",
@@ -682,7 +685,7 @@
           "generation_requested": false
         },
         "artificial_jobs_enqueued": 0,
-        "new_actual_input_background_generation_observed": false,
+        "new_actual_input_background_generation_observed": true,
         "after_testflight_upload_job_aggregate": {
           "done": 944,
           "queued": 0,
@@ -693,7 +696,87 @@
           "changed_since_predeployment": false,
           "body_or_identity_exported": false
         }
+      },
+      "new_input_runtime_observation": {
+        "trigger": "emotion_submit",
+        "status": "done",
+        "attempts": 2,
+        "requested_to_job_done_seconds": 399.668905,
+        "final_attempt_seconds": 133.868022,
+        "worker_result_status": "ok",
+        "new_generated_at_present": true,
+        "device_build": "7801",
+        "post_completion_saved_read_http": 200,
+        "post_completion_saved_read_ms": 466,
+        "device_display_report_received": true,
+        "gray_context_hidden_device_verified": false,
+        "source_content_or_identifiers_published": false
       }
+    },
+    "completion_notifications_20261108": {
+      "status": "IMPLEMENTED_LOCAL_VALIDATION_PASSED_CI_IN_PROGRESS_NOT_DEPLOYED",
+      "text": "わたしマップが更新されました",
+      "event_type": "watashi_map_updated",
+      "new_artifact_only": true,
+      "in_app": "existing MainTabs status/banner and guarded foreground FCM hint",
+      "push": "existing send_fcm_push_v1 queue and push_enabled/token resolution",
+      "recipient_and_current_artifact_guard": true,
+      "atomic_reservation_only_if_absent": true,
+      "external_delivery_exactly_once_guaranteed": false,
+      "push_reservation_best_effort": true,
+      "push_priority": 60,
+      "new_tables": 0,
+      "new_dependencies": 0,
+      "new_render_services": 0,
+      "production_push_sent": false,
+      "worker_fcm_configuration_present": false,
+      "api_existing_fcm_configuration_and_secret_file_present": true,
+      "credential_values_read_or_copied": false,
+      "production_deployed": false,
+      "rn_built": false,
+      "api_source_commit": "59934faf4aaf7052a7a139b8679ae9c244b1fb7c",
+      "api_ci": {
+        "run_id": 42434201873,
+        "status": "in_progress",
+        "conclusion": null
+      },
+      "legacy_client_screen_fallback": "Analysis",
+      "api_local": {
+        "passed": 375,
+        "skipped": 21,
+        "deselected": 1,
+        "subtests_passed": 21,
+        "seconds": 91.82,
+        "warnings": 1,
+        "skip_scope": "Q2_PGLITE_MODULE absent: cumulative_model_source19, semantic_integration1, model_fields1",
+        "deselected_scope": "real Q3 saved answers SQL1",
+        "final_compatibility_target_passed": 25,
+        "final_compatibility_subtests_passed": 21,
+        "overlapping_sets_summed": false
+      },
+      "rn_local": {
+        "notification_tests_passed": 70,
+        "new_notification_cases": 10,
+        "selected_startup_owner_tests_passed": 2,
+        "broader_attempt": {
+          "total": 118,
+          "passed": 107,
+          "environment_failed": 11,
+          "failure_scope": "Missing sparse checkout features or existing Metro dependency; no new install"
+        },
+        "native_foreground_configuration_change": false,
+        "guard_hidden_same_version_return_does_not_notify": true,
+        "initial_empty_to_new_map_notifies": true,
+        "background_late_response_does_not_consume_version": true,
+        "cold_warm_owner_boundary_checked": true,
+        "poll_push_same_version_deduplicated": true
+      },
+      "independent_review_passed": true,
+      "production_effects_pending_approval": [
+        "Register existing API FCM settings and firebase_service_account.json on existing worker",
+        "Deploy CI-passed notification revision to API and worker",
+        "Build integrated RN notification revision once"
+      ]
     }
   }
 }

@@ -540,7 +540,7 @@ test('account changes remount private tab state; old hook callbacks cannot mutat
     '../TutorialContext':{useTutorial:()=>({tutorialResetToken:0})},'./MainTabs':Tabs,
     '../lib/iap/iapService':{startIapPurchaseObserver:async()=>{},stopIapPurchaseObserver:()=>{}},
     '../lib/pushToken':{syncPushTokenOnce:async()=>{},startPushTokenSync:()=>()=>{}},
-    '../lib/monitoring':{captureClientError:()=>{}},'./navigationRef':{tryOpenRouteIfPending:()=>{}},
+    '../lib/monitoring':{captureClientError:()=>{}},'./navigationRef':{tryOpenRouteIfPending:()=>{},setNotificationNavigationOwner:()=>{}},
   });
   let root;await act(async()=>{root=Renderer.create(React.createElement(Root));});assert.equal(root.root.findByType('Tabs').props.privateDraft,'private-A-1');
   session={user:{id:'B'}};await act(async()=>root.update(React.createElement(Root)));assert.equal(root.root.findByType('Tabs').props.privateDraft,'private-B-2');
