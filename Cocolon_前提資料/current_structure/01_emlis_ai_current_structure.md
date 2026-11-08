@@ -1,3 +1,5 @@
+> 11/8品質続行の最新：[weekly§19](../weekly_reviews/Cocolon_Weekly_Review_20261107.md#emlis-scope-retention-20261108)／[全110生成・保存72＋新36・次8教材](../observation_learning/trials/2026-11-08-emlis-scope-retention/README.md)。認識・感情所有・現在否定等は部分改善。一方役割反転と文法が残り通常未採用、元提供に復元済み。fresh108予定は72で中止し、保存72からfresh optimizer36を別実施。次8件はCPU準備のみ。責務・通常sourceは不変、STRUCTURE_MAP_DELTA_NONE。
+
 > 11/8品質実比較の最新：[weekly§18](../weekly_reviews/Cocolon_Weekly_Review_20261107.md#emlis-quality-actual-20261108)／[120応答・新SFT72の全結果](../observation_learning/trials/2026-11-08-emlis-recipient-quality/README.md)。新候補は本人宛化等に部分改善、認識／留保／主語等が残り通常未採用。元の通常提供へ復元済み。責務・通常sourceは不変、STRUCTURE_MAP_DELTA_NONE。
 
 > 2026-11-08接続修復：API497f7008と共有providerが稼働。旧Pod／read_onlyから現在のf1lle4xwq3wjln＋activeへ復旧。natural_reply.v1は6701接続時と同じbase-851bf6e、分析は120u adapterを同load／同lockで使い分け、自然文後のadapter／勾配OFFをfinallyで復元。naturalのみ待機210＋生成23、HTTP240／bridge245／thread270。submitは保存済み空本文pendingだけ最小metaで返し、RNは最初の保存期限・最大270秒までGETで確認、エラー時は「応答を確認する」でGET回復。原入力・本人権利・CAS・保存／再読・GET非生成を保持。実GPU合成2件2.177／2.032秒、分析先行の共有待機は57.022秒で応答完了し、分析もCMEE受理。API115件とRN関連検証pass。run#80全19step成功、8001内部Testing。本人端末・一般品質の受入れは未確認。
