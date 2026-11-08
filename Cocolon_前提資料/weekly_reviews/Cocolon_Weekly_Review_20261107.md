@@ -2001,3 +2001,19 @@ root・独立担当が全16sourceと32本文を全文比較。NIで未記載を�
 [全結果・原本・次作業](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/native_request_bindings_review.md)／[本文なし集計](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/native_request_bindings_summary.json)。Pod ZIP32,422bytesのCRCと9member全hash一致、privateに全入力／messages／32raw／読解／SQL／tokenizer／native-model refsを保全。転送blockerは解消し当該32call完了、再起動しない。次は有限の補助投影だけを意味採用の完成とせず、既存model意味採用で未記載／不明と未決定を別対象命題へ束縛し、現natural単一作者へ保持する接続へ進む。同prompt／役割ラベル／旧教師周回を繰り返さない。
 
 API source c6555fd5・通常OFF・採用false、Render配置／実DB／RN／build0。STRUCTURE_MAP_DELTA_NONE（研究patchはactiveへ不採用）、primary outcomeはBLOCKER_NARROWED・新商品品質credit0。AR-01／AR-02〜08・必要全資産活用・本人端末／正式受入れは未完了。AR-02は一般AR-01完成の全面待ちにしないが今回未着手。
+
+
+<a id="auxiliary-target-epistemic-actual18-20261109"></a>
+## 30. 補助経路活用AR-01 — 対象別状態の意味採用を研究実装、18実生成で候補不採用
+
+2026-11-09 JST。§29の未記載→未決定誤読を継承。旧ledger節境界・引用mask、native preparation／strict receipt、既存semantic owner／ModelCandidateSourceを使い、明記された対象句とNOT_RECORDED／UNDECIDED／NOT_KNOWNを別参照・根拠文で検査し、採用snapshotを再検証して現在の単一自然文作者へ渡す研究profileを実装した。一般的な主体／依頼イベントの参照解決ではない。独立指摘の裸topic主体混同、疑問符、改行継続は今回の有限scopeから除外して検証した。最終368 PASS・17.46秒・既存warning1、通常default／原source材料を維持。実候補の成功を合成検証で代替しない。
+
+承認済み架空16から原文・選択・日時・参照不変の8を使用。基準8本文＋control4本文＋初回意味4＋flat記述後の意味2＝18 unique実生成、全HTTP200／stop。3比較process累計83.68176182289608秒（転送・CPU梱包復旧・読解待ちを除く）、実tokenizer最大680input・切詰めなし、max20call／240秒内。CPU preflightでsemantic owner不足を生成前に検出・補完し、次の遅延wire import不足で9実応答取得後21.600969秒で停止。元failure／9rawを保全し、同rawの0生成受領で依存を補完して未取得7だけ続行。9件再生成0、失敗記録上書き0。その後、root階層・ASCII ID・fieldpathの出力形式だけを修正して残4call枠の2意味候補＋採用時のみ最大2本文を比較し、2意味候補で終了した。
+
+初回4は入力wrapper echo／根拠階層不正等でINVALID_FORMAT。flat2はroot／ASCII IDが改善するがcoreへ原文を入れ、原欄・target・statementの対応が不成立でINVALID_EVIDENCE。全6はreceipt層拒否、新意味validatorへ実候補が通る成功0、意味採用0、対象候補本文0。root・独立担当は全8source／12実本文／6意味rawを全文確認。control4はmessages／本文byte不変だが、同僚訂正の承諾対象を本人へ移す誤り等は残る。TRANSFER06基準は未記載を未決定へ変換し、NI基準は選択値・時刻を列挙する台帳的返答。短い正常受取りを省略だけで失敗にしない。通常不採用、blind一般化／本人正式受入れ／新商品品質credit0。同prompt追加生成は停止。
+
+12実本文（基準8＋control4）を現prepare／provider／service＋隔離PGliteへ一回再生し、全12FINAL保存・同／新service非生成GET一致。capture payload全一致、既存outer strip後本文hash一致・語句書換え0、USER source／GET thread/events不変。GET provider／reader／Engine／prepareに加え新意味採用・受領も0、実DB要求／新生成／retry0。source参照1一致・架空user_idの既存SQL投影差11は両ref保持。実semantic再束縛成功0、対象4候補本文は未生成のまま。reader12report全未判定、23節checked0・全文coverage=false。保存を意味品質へ換算しない。
+
+[全結果・原本・次作業](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/target_epistemic_review.md)／[本文なし集計](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/target_epistemic_summary.json)／[研究source patch](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/target_epistemic_source_candidate.patch)。全private入力／18raw／2版messagesとpatch／失敗・受領／root・独立全文読解／SQL／testを58member・208879bytesで保全、保存後identity／version／size再読確認。patchはfresh c655 Git blob preimageから再構成・別root適用で最終source一致。
+
+学習／新load／provider retry／共有server再起動0、同PID26784・source f95fc7ce・Analysis重み不変、health200。API source c6555fd5・通常OFF・採用false、Render配置／実Supabase／RN/build／通常model設定変更0。STRUCTURE_MAP_DELTA_NONE（研究patch保全のみでactive owner／module／型／wire／保存責務追加なし）。Primary outcomeはBLOCKER_NARROWED。次は既存意味候補契約・符号化部品で原欄→対象句→状態根拠の選択を成立させ、現意味採用→単一作者へ通す改修。今回の自由JSON指示周回、raw修補、意味gold注入で代替しない。AR-01・AR-02〜08・全資産活用・端末／正式受入れは未完了。AR-02は一般AR-01完成の全面待ちにしないが今回未着手。

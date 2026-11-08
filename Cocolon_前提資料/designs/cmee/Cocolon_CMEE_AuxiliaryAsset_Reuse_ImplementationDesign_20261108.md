@@ -396,19 +396,20 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 ### 11.2 現在の進行欄
 
-| 項目 | 2026-11-09 AR-01 native依頼対象候補の32実比較完了・通常不採用 |
+| 項目 | 2026-11-09 AR-01対象別状態の研究接続・18実生成、意味候補不採用 |
 |---|---|
-| 継承と承認 | 前段292局所検証・source→bindings接点・研究patchを継承。Mashが同架空16入力／比較材料／研究コードの既存Jupyter宛転送と32応答／240秒を明示承認、転送blocker解消 |
-| 実行 | 同16×OFF／ON＝32実返答、全HTTP200／stop、loop53.200080秒。実tokenizer最大998input・切詰めなし。対象5だけmessages／本文変化、11対照はbyte不変 |
-| 採否 | root・独立担当が全16source／32本文を全文読解。NIで未記載→未決定が残り、NEW01で不要な確認質問を新出。TRANSFER06等の限定改善はあるが通常不採用 |
-| 改修の範囲 | source→bindings→研究作者入力の接点。receive_candidate／prepare_model_snapshot／_model_meaning_packetの汎用意味採用・一般的な対象束縛・商品品質改善全体は未実証 |
-| 保存再読 | 同32rawを別phase／現provider・実prepare・既存service・隔離PGliteへ。31FINAL保存／同・新service GET本文一致、質問入り1件は既存guard拒否・不保存・retry不可 |
-| 原本とreader | 語句書換え0、USER／GET events不変、GET provider／reader／Engine／prepare0。参照12一致／架空user_id投影差20は両実参照保持。31reportは30未判定＋1範囲内非衝突、61節checked1・全文coverage=false |
-| 提供 | 学習／新load／retry0、同PID26784／server source／Analysis重み不変、health200。RTX4000 Ada／20475MiB。総請求額は未測定 |
-| 保全と検証 | Pod原ZIPのCRC・9member bytes/hash一致、privateに全入力／messages／32raw／両全文読解／SQL／tokenizer／ref対応を保存。前段292PASSは継承、今回再試験加算なし |
-| 次の同一商品単位 | 未記載・明示不明と未決定の対象を既存model意味採用で別命題へ束縛し、現作者へ保持する接続。完了32call／同prompt・役割ラベル／教師周回を繰り返さない |
-| 再開記録 | weekly第10回§29、[実結果・範囲・再開点](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/native_request_bindings_review.md)／[集計](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/native_request_bindings_summary.json) |
-| 通常と残件 | API c6555fd5・通常OFF・採用false、配置／実DB／RN／build0。研究patch不採用でSTRUCTURE_MAP_DELTA_NONE。AR-01・AR-02〜08・全資産活用・端末／正式受入れは未完了。AR-02は全面AR-01完成待ちにしないが今回未着手 |
+| 継承と目的 | §29の32実比較後、未記載→未決定の実測誤読へ直接対応。承認済み架空16から原文不変の8を選び、既存意味採用→現単一作者の接点を研究実装 |
+| 実装と再利用 | native preparation／strict raw receipt／旧ledger節境界・引用mask／既存semantic ownerとModelCandidateSourceを利用。新補助は明記対象句と3状態の有限照合、snapshot再開・研究投影。一般的な依頼イベント／主体参照解決ではない |
+| 局所検証 | 最終sourceで368 PASS・17.46秒・既存warning1。任意対象、状態区別、原欄／根拠、source改変・snapshot再検証、normal default、既存application／SQL。合成packet成功を実意味採用へ換算しない |
+| 実行 | 基準8本文＋control4本文＋初回意味4＋flat記述後意味2＝18実生成、全HTTP200／stop。累計比較処理83.681762秒、実tokenizer最大680input・切詰めなし。max20call／240秒内、同じrequestの重複生成0 |
+| 採否 | 初回4はINVALID_FORMAT、flat2はINVALID_EVIDENCE。root形は改善したが原欄／対象／状態根拠とcoreが不成立。実意味採用0・新意味validatorへ通る実候補0・対象候補本文0。全8source／12本文／6意味rawをroot・独立担当が全文確認、通常不採用 |
+| 途中停止 | CPU preflightのsemantic owner欠落後、遅延wire import不足で9実応答取得時停止。旧failure／9raw保全、同rawの0生成再受領で補完し未取得7だけ続行。9件再生成0、失敗履歴の成功上書き0 |
+| 保存再読 | 実本文12だけ既存prepare／provider／service＋隔離PGliteで全FINAL保存、同／新service GET一致。語句書換え／実DB要求0、GET provider／reader／Engine／prepare／意味採用・受領0。未生成対象4本文を埋めない |
+| 原本とreader | 全12capture payload一致、source参照1一致／架空user_idの既存SQL投影差11は両ref保持。実semantic再束縛0。12report全未判定、23節checked0・全文coverage=false |
+| 提供と保全 | 学習／新load／provider retry／server再起動0。同PID26784／source／Analysis重み不変・health200。全private原本・失敗・2版patch・読解・SQLを58member／208879bytesで保存後identity/version/sizeを再読確認。総請求額未測定 |
+| 次の同一商品単位 | 既存意味候補契約・符号化部品で原欄→対象句→根拠節の選択を成立させ、現在の意味採用→単一作者へ通す。今回の自由JSON指示だけの比較反復、raw修補・意味gold注入はしない |
+| 再開記録 | weekly第10回§30、[実結果と範囲](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/target_epistemic_review.md)／[集計](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/target_epistemic_summary.json) |
+| 通常と残件 | API c6555fd5・通常OFF・採用false、配置／実DB／RN/build0。研究patch保全のみでSTRUCTURE_MAP_DELTA_NONE。primary BLOCKER_NARROWED・新商品品質credit0。AR-01・AR-02〜08・全資産活用・端末／正式受入れは未完了。AR-02は一般AR-01完成の全面待ちにしないが今回未着手 |
 
 以後はこの表と各能力の対応行を現在状態へ置換更新し、詳細な実行事実は既存trial／weeklyへ置く。新しいhandoff系列・全件hash Gateを作らない。中断時も、成果物と未実行を既存保存先へ残し、同じ未完商品単位から続ける。
 
