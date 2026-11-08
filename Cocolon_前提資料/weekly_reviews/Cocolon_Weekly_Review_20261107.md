@@ -1434,7 +1434,7 @@ UI25 PASS、API局所308 PASS／20 SKIP／1 deselected・4subtests PASS（51.36�
 
 11/8の本人追加入力後、保存起点のmyprofile_latest_refresh_v1がattempts2／doneで完了。要求時刻から約399.67秒、最終試行約133.87秒。workerのstatus okと新generated_at、実7801のstatus変化後の非生成latest HTTP200／466msを確認し、Mashの表示到達報告と照合した。個人ID・IP・token・本人本文は公開記録へ複製しない。この結果は先行更新・保存済み取得の実確認で、灰色一覧の実機非表示や意味品質の受入れまで認定しない。
 
-Mashの追加要望として、正常な新map保存後に固定文「わたしマップが更新されました」を既存in-app bannerと通知許可時pushで知らせる接続を実装し、局所検証を通過。globalのお知らせcatalogは個人通知へ流用しない。新kindは本人／保存版別の既存queue一回予約、送信前guard、push_enabledを保持し、tapは現mapへ接続する。workerにはFCM資格設定とsecret fileが無く、APIには既存firebase_service_account.jsonとFCM設定があることを名称のみ確認した。既存通知設定のworker登録を含む反映は未実施、現live09a3f714を維持。新table／依存／サービス／実pushは0。
+Mashの追加要望として、正常な新map保存後に固定文「わたしマップが更新されました」を既存in-app bannerと通知許可時pushで知らせる接続を実装し、局所検証を通過。globalのお知らせcatalogは個人通知へ流用しない。新kindは本人／保存版別の既存queue一回予約、送信前guard、push_enabledを保持し、tapは現mapへ接続する。workerにはFCM資格設定とsecret fileが無く、APIには既存firebase_service_account.jsonとFCM設定があることを名称のみ確認した。この対象検証時点では既存通知設定のworker登録を含む反映は未実施、live09a3f714を維持していた。後続の個別承認と同日配置追補で8739cd80へ反映済み。新table／依存／サービス／実pushは0。
 
 通知候補のAPI source59934fafをGitHubへ反映、既存CI42434201873は全17step success、10:41:01 JSTにjob128589421043完了。局所8fileは375 PASS／21 SKIP／1 deselected・21subtests（91.82秒、既存警告1）。SKIPはQ2_PGLITE_MODULE未設定のcumulative_model_source19／semantic_integration1／model_fields1、Q3 real SQLを1件明示deselect。最終screen=Analysis互換追補後の対象25 PASS＋21subtestsを確認し、重複件数は加算しない。新規保存だけの予約／原子的同版重複／commit・guard失敗／通知OFF／他本人・古い版の送信拒否／保存成功を壊さない予約障害を確認。RNは通知関連70 PASS（新10）、startup／Root ownerの選択2 PASS。関連3file全体の先行試行118件は107 PASS／11環境失敗（未checkout featuresまたは既存Metro不足）で、全JS成功やnative成功とはしない。独立reviewで同じ旧版の再visibleを新更新と誤認する経路を発見し修復、背景中の遅延応答も消費しない。固定RNFirebase23.7.0のforeground既定Noneと現native overrideなしを照合、native変更なし。
 
@@ -1442,7 +1442,7 @@ Mashの追加要望として、正常な新map保存後に固定文「わたし�
 
 RN source e2d7a7aのphase6-contract-guards42434396397はsuccess。Piece RN preview and owner contracts42434396442は6job中5success、RN contractsもsuccessだがiOS TextKit/CoreText metricsの既知V4だけfailure（20件中1 PASS／19 FAIL）。通知変更前4e776e2fの直近42428022739／job128570429086と、今回job128590034681の失敗19名称・順序が完全一致。native／recipe／checker／依存の差分0であり、新しい通知退行や全製品greenと呼ばない。この既知残件を通知実装の先行修復条件へ戻さない。既存FCM queueは本文／IDなし集計でdone179／failed23／queued0／running0。doneを実配送成功とせず、旧failedを再予約する操作もしていない。
 
-最終API59934fafのCI42434201873／job128589421043は全17step success、月次・immutable read・source削除失効SQLと最終facts検査も成功。旧8c5ce5eeはscreen互換追補前の履歴で、反映対象は59934fafへ固定する。RN候補はe2d7a7a、後続の資料だけ更新ではアプリsourceを変えない。実装・対象検証・原本のGitHub保存は完了、残るFCM資格共有・両service配置・RN統合TestFlight署名build／既存内部配布について具体的な候補でMashへ確認する。旧資格の値の再コピー確認や新しい鍵生成、外部group／tester追加／App Store公開は含めない。
+最終API59934fafのCI42434201873／job128589421043は全17step success、月次・immutable read・source削除失効SQLと最終facts検査も成功。旧8c5ce5eeはscreen互換追補前の履歴で、反映対象は59934fafへ固定する。RN候補はe2d7a7a、後続の資料だけ更新ではアプリsourceを変えない。実装・対象検証・原本のGitHub保存は完了し、この時点ではFCM資格共有・両service配置・RN統合TestFlight署名build／既存内部配布を具体的な候補でMashへ確認した。その後の承認と実行結果は同日配置追補へ更新。旧資格の値の再コピー確認や新しい鍵生成、外部group／tester追加／App Store公開は含めない。
 
 <a id="kokoro-weather-preview-20261108"></a>
 ### 11/8 — こころ天気の表示案採用と通常入力への接続候補
@@ -1453,10 +1453,19 @@ Mashは「特に問題なさそうだから、その方針で進めて」と採�
 
 API初版66cf4aa3／CI補正後8739cd80、RN候補4483f6d4。API対象72 PASS、RN3file113 PASS。最初のAPI検証は新pagination fixtureの最終cursor期待値誤り1件で修正、次のregistry検証は疎checkoutの既存doc未取得1件で原本を取得。RN広範囲の未取得原本7pathを復元し、既に変わっているmap完了通知の静的期待文言1か所を同期して、最終対象はFAIL・SKIP0。独立reviewの外側Pressable等幅、親子期間同期、31日目盛り、非JSON障害分類も修復した。
 
-[経路・ファイル・検証の詳細](../current_structure/03_analysis_current_structure.md#kokoro-weather-live-20261108)。STRUCTURE_MAP_DELTA_PRESENT。新DB／製品依存／GPUなし。GitHub保存と対象検証は候補の証拠で、本番反映・署名build・本人端末確認は未実施。前段の完了通知の資格共有・API／worker反映の個別承認待ちを維持し、今回の画面案採用から承認済みに読み替えない。
+[経路・ファイル・検証の詳細](../current_structure/03_analysis_current_structure.md#kokoro-weather-live-20261108)。STRUCTURE_MAP_DELTA_PRESENT。新DB／製品依存／GPUなし。GitHub保存と対象検証は実装候補の証拠。この段階では反映未実施だったが、後続のMash個別承認と同節末尾の実配置／7901 Uploadへ到達した。本人端末確認は未実施で、画面案採用と本番反映の承認を混同しない。
 
 CI追補：API初版42440204647は既存生成2875 PASS・12236 subtests後、新工程が70 PASS／全app登録の2検査失敗。CIの依存集合を限定したimportで既存 `import jwt` の不足を再現し、既存PyJWTを許可すると解消。8739cd80では検証環境だけPyJWT2.13.0追加とstderr可視化を行い、短いweather検査を先へ移動。製品source差分なし、local72 PASS。最終CI42441166743は12:20:48 JSTに全18step success。remote live72 PASS、生成保存2875 PASS／12236subtests、累積397 PASS／21subtests、SQL201原本・15月参照／owner・rank・不変再読・削除passed、最終facts407 PASS／738subtests。初版Piece SQL42440204697全37step成功、RN4483の新weatherを含むjob128608358722／phase6 CI42440451122は成功。RN同run42440451146のiOS metricsは既存V4の19失敗が前128590034681と名称・順序同一で、今回のweather変更による追加失敗なし。
 
-primary outcome＝TECHNICAL_CREDIT。製品sourceはAPI8739cd80／RN4483f6d4で確定。後続docs-onlyでは製品sourceを変えない。実機への反映は、前段通知を含むAPI／worker配置と既存Firebase通知資格のworker登録、統合TestFlight内部配布の個別承認後。本人データの今日／週／月への同一件数・重みの反映と実機表示速度は反映後の確認事項。
+primary outcome＝TECHNICAL_CREDIT。製品sourceはAPI8739cd80／RN4483f6d4で確定。後続docs-onlyでは製品sourceを変えない。その後、Mashから前段通知を含むAPI／worker配置と既存Firebase通知資格のworker登録、統合TestFlight内部配布の個別承認を受領。実配置／Uploadは下記追補へ更新。本人データの今日／週／月への同一件数・重みの反映と実機表示速度は未確認。
 
 後着のRN別検査：同runのPiece iOS canvas job128608358692は実描画stepでexit65、4test中1件 `testWholeCanvasWithRealReactNative` が失敗。V4 native文字計測の `PIECE_NATIVE_MEASUREMENT_UNAVAILABLE` とcanvas不成立を記録し、根本原因は未確定。基準e2d7a7a→4483f6d4でPiece／native／専用test host／依存lock等40blobは同一、専用Piece entryを起動し通常app・こころ天気は読み込まない。基準job128590034464の実描画工程はskipであり、「同じ既知失敗」や「過去の実描画成功」には換算しない。今回のweather対象CI成功とこの別経路の未解消を分け、RN全体greenとは報告しない。native側の修復・再実行・本番操作は行っていない。
+### 同日・通知を含む版の反映承認と実配置
+
+Mashの「進めていいよ」を受け、既存workerへAPIと同じfirebase_service_account.jsonとFCM_PUSH_ENABLED／FCM_SERVICE_ACCOUNT_FILEを登録。資格値は保存資料へ複製しない。API／workerを最終CI成功版8739cd80へ指定配置し、worker12:45:44 JST dep-dbnv086417fc73er03e0、API12:48:40 JST dep-dbnv1g3l550s7389kr8gでLive。双方autoDeploy OFFを再読。workerのgit版・FCM有効・資格ファイル存在／読取可・認証module importを実環境の読取probeで照合し、実効19job種に更新と送信が含まれることを起動ログで確認。実通知は送っていない。
+
+Render環境変数更新ツールが旧main配置を自動開始した操作事故があり、worker旧main2d2f06da／dep-dbnuuq3rjlhs739uvq90が03:42:19.439039Z〜03:45:44.846964Zの約3分25秒Liveとなった。取消し前に切替わったため、直ちに承認版の指定配置で復帰しMashへ報告。APIはその間09a3f714を維持。当該期間の取得全ログにjob処理・実warning／error／exceptionなし、queue ready0／delayed0／running0／failed172／stale0は一定。復帰後も同集計だったが、観測外を含む影響なしの保証にはしない。旧failed172を今回の障害へ読み替えず再予約・DB修復なし。[詳しい配置記録](../current_structure/03_analysis_current_structure.md#kokoro-weather-live-20261108)。
+
+配置後はhealthz／bootstrap200、未認証weather3期間・latest status・非生成latestの5条件401、計7条件を確認。本人認証での集計と実機応答速度は未確認。新DB／サービス／依存／GPU生成は0。通知／weather製品sourceは前段から変更せず、保存プレビュー原本も変更なし。
+
+RN製品source4483f6d4を含むdocs-only head0fd692dcでiOS buildを一回起動。run42443182743／#79 attempt1／job128616547210は12:43:41 JSTに成功。GitHub UIで実ログBUILD_NUMBER=7901とUpload成功を照合し、署名／Archive／IPAを通過。Apple側はログイン画面でアカウント情報エラーとなり、ログイン操作をMashへ引き継ぐ。Apple処理・実登録番号・既存内部group「Emlis テスト版配布」でTestingは未確認。App Store公開、外部group／tester追加、rerunなし。内部配布後は本人新入力の今日／週／月反映、灰色一覧非表示、map更新後のアプリ内／閉じた時の通知受信とtapを確認する。ここまでのprimary outcomeはTECHNICAL_CREDITで、端末受入れや実配送成功を完了へ変換しない。

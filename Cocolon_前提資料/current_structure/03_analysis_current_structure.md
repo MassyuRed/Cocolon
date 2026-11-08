@@ -1508,20 +1508,20 @@ API／既存workerはMash承認後に09a3f714へ反映済み。CI42427888976は�
 
 新RN4e776e2fと同じアプリsourceを持つ861082d0で、灰色列挙非表示とbackground表示／pollを一回の統合iOS buildへまとめた。run42430220604／#78 attempt1（7801）は9:32:33 JST開始、Archive・写真目的文検査・IPA・Uploadを含む全19step成功。Uploadは9:45:56 JST、jobは9:46:03 JST終了。7801は固定workflowのrun78×100＋attempt1から導出した番号で、該当ログは取得接続エラー／代替endpoint非対応のため未照合。Apple側の実番号も未確認。Apple処理／内部配布／本人表示は未確認。Apple管理画面の読取操作がユーザーにより中断されたため、それ以降のApple操作を停止した。既存7701もserver先行生成が完了していれば保存結果を再利用できる。局所UI25 PASS、API308 PASS／20 SKIP／1 deselected・4subtests PASS（51.36秒、既存警告1）と、後続の遠隔CI成功を混同しない。前後DB集計はlatest-refresh944件すべてdone・queued/running/failed0・日時不変、cumulative v2=1/v3=1・生成日時不変。既存owner1組のguard付きmetadata再読で表示可能1組、本人原文／IDの出力なし。検証用job・本人新入力・JWT生成・なりすまし・DB DML/DDL・新GPU生成・学習・新サービスは0。Renderは環境設定保存1・指定配置2。後続の本人追加入力で保存起点jobの完了（再試行込み約399.67秒、最終試行約133.87秒）と実7801の非生成取得HTTP200／466ms、Mashの表示到達を確認した。灰色一覧非表示の実機受入れは未確認で、生成自体の171.3496秒という架空単発計測は変更しない。STRUCTURE_MAP_DELTA_PRESENT（既存保存→予約→worker→readの接続変更）。
 
-### 2026-11-08 — 更新完了通知（対象検証と最終API CI成功、反映承認待ち）
+### 2026-11-08 — 更新完了通知（対象検証・API配置済み、実配送未確認）
 
 Mashから、更新完了時にアプリ内と通知許可時のアプリ終了中pushで「わたしマップが更新されました」と知らせる要望を受領。新しいcurrent artifactのcommitとguard付き保存再読後だけ、既存send_fcm_push_v1を本人／artifactごとの一回予約として追加する。only-if-absentの原子的insertは既存queued/running/done/failedを更新しない。失敗・空・保存再利用・単なる月次captureでは新予約しない。送信前に本人・recipient・現在guard付きmetadataを再照合し、現push_enabled／token解決を保持する。固定文とroute metadataだけで分析本文を送らない。予約障害は保存成功を失敗へ変えないbest-effortであり、外部配送exactly-once保証や新outboxではない。新kindはpriority60で同workerの次の長い分析予約より先に送信する。
 
-RNは既存MainTabsのmap status確認とbannerを全プランへ接続し、foreground pushをguard再確認のhintにする。pollとpushの同版表示を抑制し、cold/warm tapは新kindのrecipientと現在本人を照合して既存openSelfReportLatestから現在の累積mapを開く。個人の完了をglobal NoticeHistoryへ登録しない。workerにFCM設定／secret files／linked groupがなく、APIに既存FCM設定とfirebase_service_account.jsonがあることをUIで名称のみ確認。資格の閲覧・複製・設定保存・新版配置はまだ行っていない。新table／依存／サービスなし。STRUCTURE_MAP_DELTA_PRESENT（既存map保存→通知queue→送信／本人端末導線）。
+RNは既存MainTabsのmap status確認とbannerを全プランへ接続し、foreground pushをguard再確認のhintにする。pollとpushの同版表示を抑制し、cold/warm tapは新kindのrecipientと現在本人を照合して既存openSelfReportLatestから現在の累積mapを開く。個人の完了をglobal NoticeHistoryへ登録しない。対象検証時点ではworkerにFCM設定／secret files／linked groupがなく、APIに既存FCM設定とfirebase_service_account.jsonがあることを名称のみ確認した。その後の個別承認によりworkerへの登録と両service配置を実施済み。値を資料へ複製せず、実結果は次節の配置記録へ更新した。新table／依存／サービスなし。STRUCTURE_MAP_DELTA_PRESENT（既存map保存→通知queue→送信／本人端末導線）。
 
 通知API候補は59934faf（前段8c5ce5eeから旧7801の誤Piece遷移を避けるscreen=Analysisを追加）。新RNでは新kindを明示してmapへ直接開き、旧版では既存Analysis入口へ戻す。既存CI42434201873は全17step成功、10:41:01 JSTにjob完了（月次・source削除失効の隔離SQLを含む）。局所API375 PASS／21 SKIP／1 deselected・21subtests、互換追補の対象25 PASS。RNは通知関連70 PASSとstartup／Root owner対象2 PASS。広めの既存3file118件試行は107 PASS／11環境失敗（未checkout featuresまたは既存Metro不足）であり、全成功へ変換しない。新規依存installなし。独立reviewで、guard無効の空status後に同じ版が再visibleとなるだけで誤bannerする経路を修復。初期空→初生成の通知を維持し、旧valid版復帰は通知しない。背景中の遅延応答は版／通知を消費せず、復帰後に再確認する。
 
 RN候補e2d7a7aはphase6 CI成功、既存Piece CIはRN contractsを含む5job成功・既知V4 iOS metricsの1job失敗。通知変更前4e776e2fの直近run42428022739と失敗19名称・順序が完全一致し、native／recipe／checker／依存差分0。通知の新退行や全製品greenへ換算せず、既知Piece残件の修復を今回通知の先行条件に追加しない。
 
-実装／局所検証／最終API CIは完了し、既存通知資格のworker登録・通知API／worker配置・対応RNの統合TestFlight署名build／既存内部配布の個別承認待ち。通知版の現live反映・実pushはまだ行っていない。
+実装／局所検証／最終API CIは完了。後続のMash個別承認を受け、既存通知資格のworker登録とAPI／worker配置、対応RN7901の統合署名build／Uploadまで実施済み。Apple内部配布の確認と実pushは未実施。詳細は次節の同日配置記録を参照する。
 
 <a id="kokoro-weather-live-20261108"></a>
-### 2026-11-08 — 採用済みこころ天気を通常入力へ接続（実装候補）
+### 2026-11-08 — 採用済みこころ天気を通常入力へ接続（API配置済み・7901 Upload成功）
 
 Mashが表示案に問題なしと判断し、その方針で実装を明示指示。[プレビュー](../designs/ui/previews/20261108-kokoro-weather.html)と[編集元](../designs/ui/previews/20261108-kokoro-weather.source.html)は変更せず比較原本として保持する。
 
@@ -1538,10 +1538,28 @@ Mashが表示案に問題なしと判断し、その方針で実装を明示指�
 
 API初版66cf4aa3から検証環境だけを補正した最終候補[8739cd80](https://github.com/MassyuRed/mashos-api/commit/8739cd8040d177ee140b0ecd4afef7c8930b77f9)、RN候補[4483f6d4](https://github.com/MassyuRed/Cocolon/commit/4483f6d450c53f4ee911b543bbc3a7c8a86e0ee3)。対象API7suite72 PASS（新live15例を含む）、RN3file113 PASS（新live7例、既存screen36／owner70）。合成入力→認証API→today／week／month、追加保存と削除後の再読、JST・閏月・31日・履歴境界、>1000件＋短page・異常page、RNの期間／owner／世代／前面競合を検証。独立reviewの等幅Pressable配置、親子の期間同期、月目盛り、非JSON障害の422誤分類を修復。既存静的copy検査1か所は既に変更済みの通知文言へ同期した。新規DB／製品依存／GPU処理なし。STRUCTURE_MAP_DELTA_PRESENT。
 
-これはsourceと合成検証の進捗で、稼働API反映・TestFlight署名build・実機描画・本人の新入力反映の成功ではない。前段の通知資格共有／worker反映も承認待ちのまま維持。次はCI確認後、承認された反映範囲でAPIとまとめbuildを実機へ届け、本人の新規感情が当日・週・月へ同じ件数／重みで現れることを確認する。
+Mashが通知修正を含むAPI／更新担当への反映、既存Firebase通知設定のworker登録、TestFlight内部配布を個別承認した。下記のサーバー配置と7901のUploadまで実施済み。Apple側の処理／既存内部配布と本人端末の確認は未完了。本人の新規感情が当日・週・月へ同じ件数／重みで現れることと、map正常更新後の通知を次の実機確認とする。
 
 CI記録：初版API42440204647は生成保存2875 PASS／12236 subtests成功後、追加工程で70 PASS／全app登録2件失敗。子process stderrが隠れていた。実行環境の依存集合を限定した同じapp importで、既存subscription verifierの `import jwt` 不足を再現し、既存PyJWTを許可すると成功することを確認。8739cd80はCIだけへPyJWT2.13.0を加え、子process失敗時にstderrを出し、短いweather検査を先行した。製品source／依存・成功条件の弱化なし。最終local72 PASS。最終CI42441166743は12:20:48 JSTに全18step success。remote live72 PASS、生成保存2875 PASS／12236subtests、累積397 PASS／21subtests、SQL201原本／15月参照とowner・rank・不変再読・削除すべてpassed、結果・全入力・旧データ407 PASS／738subtests。初版のPiece isolated SQL42440204697は全37step成功。RN4483f6d4のCI42440451146はRN contracts／新weatherを含むjob128608358722とphase6 CI42440451122が成功。iOS metricsのV4失敗19は直前128590034681と名称・順序が完全一致、他groupは同じ成功で、新weatherによる退行へ混同しない。
 
-今回のprimary outcomeはTECHNICAL_CREDIT。source／対象CI／資料保存の完了であり、本人データを用いた実機の表示速度・内容受入れと本番反映はこれから。反映対象はAPI8739cd80とRN4483f6d4の製品source（後続docs-only commitでは製品source不変）。前段の通知実装を含み、既存Firebase通知資格のworker登録・API／worker配置・統合TestFlight内部配布は個別承認後に行う。
+今回のprimary outcomeはTECHNICAL_CREDIT。source／対象CI／サーバー反映／7901 Uploadまで完了し、本人データを用いた表示速度・内容受入れと通知の実配送は未確認。反映版はAPI8739cd80とRN4483f6d4の製品source（署名build head0fd692dcおよび後続資料更新はdocs-only）。既存Firebase通知資格のworker登録とAPI／worker配置は下記実記録へ更新した。
 
 後着のRN別検査：同runのPiece iOS canvas job128608358692は実描画stepでexit65、4test中1件 `testWholeCanvasWithRealReactNative` が失敗。V4 native文字計測の `PIECE_NATIVE_MEASUREMENT_UNAVAILABLE` とcanvas不成立を記録し、根本原因は未確定。基準e2d7a7a→4483f6d4でPiece／native／専用test host／依存lock等40blobは同一、専用Piece entryを起動し通常app・こころ天気は読み込まない。基準job128590034464の実描画工程はskipであり、「同じ既知失敗」や「過去の実描画成功」には換算しない。今回のweather対象CI成功とこの別経路の未解消を分け、RN全体greenとは報告しない。native側の修復・再実行・本番操作は行っていない。
+### 同日・個別承認後の配置／通知設定／7901配布進捗
+
+Mashの「進めていいよ」を受け、最終API CI成功版8739cd8040d177ee140b0ecd4afef7c8930b77f9へ両serviceを指定配置した。mainの最新を反映対象にせず、両autoDeploy=noを配置後に再読した。
+
+| 対象 | 実結果（2026-11-08 JST） | 根拠 |
+|---|---|---|
+| mashos-astor-worker | 12:45:44 Live、承認版8739cd80 | dep-dbnv086417fc73er03e0、03:45:44.846964Z |
+| mashos-api | 12:48:40 Live、同8739cd80 | dep-dbnv1g3l550s7389kr8g、03:48:40.215283Z |
+| iOS署名／Upload | build7901、12:43:41 job成功 | [run42443182743](https://github.com/MassyuRed/Cocolon/actions/runs/42443182743)／#79 attempt1／job128616547210、head0fd692dc03ae369be611c1f9833aa5012fd26e63 |
+| Apple内部配布 | 未確認、ログイン操作をMashへ引継ぎ | Appleログイン画面のアカウント情報エラー。既存「Emlis テスト版配布」groupの7901／Testingは未読 |
+
+workerへAPI既存のsecret file `firebase_service_account.json` をSave onlyで登録し、2変数 `FCM_PUSH_ENABLED=true`、`FCM_SERVICE_ACCOUNT_FILE=/etc/secrets/firebase_service_account.json` を追加。元9キーを維持し新規2キー、資格値は資料／repo／local fileへ出していない。実行中worker Shellの読取probeはgit8739cd80、FCM有効、資格ファイル存在／読取可、google.oauth2.service_account importの全条件true。token発行・実送信・本人生成は実施しない。既存ASTOR_WORKER_JOB_TYPESの3種とprofileを変更せず、起動ログの実効19種にmyprofile_latest_refresh_v1／send_fcm_push_v1が含まれることを確認した。
+
+**配置事故：** Render環境変数更新ツールがautoDeploy OFFでも旧main2d2f06dad0d373373cdac63e10734385eefb53caのdeployを自動開始した。UI取消しが成立する前にdep-dbnuuq3rjlhs739uvq90がLiveとなり、03:42:19.439039Z〜03:45:44.846964Z（約3分25.4秒）旧mainのworkerが動いた。APIはその間09a3f714のまま。直ちに承認版SHAをUIで明示し上記workerへ復帰。Mashへ操作事故として報告した。取得した当該期間の全ログ（hasMore=false）にjob_done／job_failed／unknown_job_type・実warning／error／exceptionは0、queue集計はready0／delayed0／running0／failed172／stale0で一定。承認版起動後も同集計で実エラー0を確認した。これは観測範囲の事実であり、影響なしの保証ではない。既存failed172を今回発生扱いせず、再予約・DB修復は行わない。
+
+配置後HTTPはhealthz200/status ok、app/bootstrap200、未認証weatherのtoday／week／month各401、latest/status401、latest?ensure=false&force=false&background=true401の7条件成功。認証済み本人の集計値・端末応答速度の証明ではない。新DB DML／DDL、モデル生成、新Pod／サービス／依存は0。
+
+GitHub UIのbuild完了と番号設定ログ `GITHUB_RUN_NUMBER=79`／`GITHUB_RUN_ATTEMPT=1`／`BUILD_NUMBER=7901`、Archive／photo-purpose検査／Export IPA工程、Uploadログ `No errors uploading archive`／`UPLOAD SUCCEEDED with no errors` を照合。署名build起動は一回のみでrerunなし。Apple側の実登録番号・処理状態・内部group確認は未完了、App Store公開／外部group／tester追加は行わない。こころ天気の本人新入力反映、grey一覧の非表示、map更新完了後の通知受信／tapは内部配布後に確認する。既存プレビュー2fileは変更していない。STRUCTURE_MAP_DELTA_NONE（今回の追加は配置状態の更新で、前段の経路実装を変更しない）。
