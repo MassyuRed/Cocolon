@@ -1451,6 +1451,8 @@ Mashは「特に問題なさそうだから、その方針で進めて」と採�
 
 通常入口を `KokoroWeatherTimeline`／`useKokoroWeather` → 認証済み `GET /analysis/kokoro-weather` へ接続。保存reportやモデル生成を待たず、本人の通常5感情をJSTの今日／月曜始まりの週／暦月で直接集計する。弱1／中2／強3、複数感情、秘密入力の既存除外を保持。自己理解だけの行は件数にも含めない。欠測・未来・閲覧範囲外を区別し、今月は今日まで、過去月は末日まで。過去期間の閲覧範囲は既存Free当月＋前月／Plus rolling365日／Premium全期間を再利用する。
 
-API候補66cf4aa3、同変更単位のRN候補。API対象72 PASS、RN3file113 PASS。最初のAPI検証は新pagination fixtureの最終cursor期待値誤り1件で修正、次のregistry検証は疎checkoutの既存doc未取得1件で原本を取得。RN広範囲の未取得原本7pathを復元し、既に変わっているmap完了通知の静的期待文言1か所を同期して、最終対象はFAIL・SKIP0。独立reviewの外側Pressable等幅、親子期間同期、31日目盛り、非JSON障害分類も修復した。
+API初版66cf4aa3／CI補正後8739cd80、RN候補4483f6d4。API対象72 PASS、RN3file113 PASS。最初のAPI検証は新pagination fixtureの最終cursor期待値誤り1件で修正、次のregistry検証は疎checkoutの既存doc未取得1件で原本を取得。RN広範囲の未取得原本7pathを復元し、既に変わっているmap完了通知の静的期待文言1か所を同期して、最終対象はFAIL・SKIP0。独立reviewの外側Pressable等幅、親子期間同期、31日目盛り、非JSON障害分類も修復した。
 
 [経路・ファイル・検証の詳細](../current_structure/03_analysis_current_structure.md#kokoro-weather-live-20261108)。STRUCTURE_MAP_DELTA_PRESENT。新DB／依存／GPUなし。GitHub保存と対象検証は候補の証拠で、本番反映・署名build・本人端末確認は未実施。前段の完了通知の資格共有・API／worker反映の個別承認待ちを維持し、今回の画面案採用から承認済みに読み替えない。
+
+CI追補：API初版42440204647は既存生成2875 PASS・12236 subtests後、新工程が70 PASS／全app登録の2検査失敗。CIの依存集合を限定したimportで既存 `import jwt` の不足を再現し、既存PyJWTを許可すると解消。8739cd80では検証環境だけPyJWT2.13.0追加とstderr可視化を行い、短いweather検査を先へ移動。製品source差分なし、local72 PASS。最終CI42441166743は確認中。初版Piece SQL42440204697全37step成功、RN4483の新weatherを含むjob128608358722／phase6 CI42440451122は成功。RN同run42440451146のiOS metricsは既存V4の19失敗が前128590034681と名称・順序同一で、今回のweather変更による追加失敗なし。

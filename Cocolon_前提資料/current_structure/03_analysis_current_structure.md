@@ -1536,6 +1536,8 @@ Mashが表示案に問題なしと判断し、その方針で実装を明示指�
 
 通常5感情、強さ弱1／中2／強3、複数選択の各感情加算を保持。通常感情がある行だけinput_countへ数え、自己理解だけの行は除外。秘密入力は既存と同じfalseのみ。memo・他者・生成AI本文をpayloadへ出さない。欠測・未来・閲覧範囲外は0点／平穏にせず、割合は最大剰余で合計100%。既存閲覧範囲は実sourceどおりFree＝JST当月＋前月、Plus＝rolling365日、Premium＝全期間。境界は期間をclampして部分表示を案内する。
 
-API候補[66cf4aa3](https://github.com/MassyuRed/mashos-api/commit/66cf4aa3e70e145359d9d7864f6f2b6b278394af)、同じ変更単位のRN候補。対象API7suite72 PASS（新live15例を含む）、RN3file113 PASS（新live7例、既存screen36／owner70）。合成入力→認証API→today／week／month、追加保存と削除後の再読、JST・閏月・31日・履歴境界、>1000件＋短page・異常page、RNの期間／owner／世代／前面競合を検証。独立reviewの等幅Pressable配置、親子の期間同期、月目盛り、非JSON障害の422誤分類を修復。既存静的copy検査1か所は既に変更済みの通知文言へ同期した。新規DB／依存／GPU処理なし。STRUCTURE_MAP_DELTA_PRESENT。
+API初版66cf4aa3から検証環境だけを補正した最終候補[8739cd80](https://github.com/MassyuRed/mashos-api/commit/8739cd8040d177ee140b0ecd4afef7c8930b77f9)、RN候補[4483f6d4](https://github.com/MassyuRed/Cocolon/commit/4483f6d450c53f4ee911b543bbc3a7c8a86e0ee3)。対象API7suite72 PASS（新live15例を含む）、RN3file113 PASS（新live7例、既存screen36／owner70）。合成入力→認証API→today／week／month、追加保存と削除後の再読、JST・閏月・31日・履歴境界、>1000件＋短page・異常page、RNの期間／owner／世代／前面競合を検証。独立reviewの等幅Pressable配置、親子の期間同期、月目盛り、非JSON障害の422誤分類を修復。既存静的copy検査1か所は既に変更済みの通知文言へ同期した。新規DB／依存／GPU処理なし。STRUCTURE_MAP_DELTA_PRESENT。
 
 これはsourceと合成検証の進捗で、稼働API反映・TestFlight署名build・実機描画・本人の新入力反映の成功ではない。前段の通知資格共有／worker反映も承認待ちのまま維持。次はCI確認後、承認された反映範囲でAPIとまとめbuildを実機へ届け、本人の新規感情が当日・週・月へ同じ件数／重みで現れることを確認する。
+
+CI記録：初版API42440204647は生成保存2875 PASS／12236 subtests成功後、追加工程で70 PASS／全app登録2件失敗。子process stderrが隠れていた。実行環境の依存集合を限定した同じapp importで、既存subscription verifierの `import jwt` 不足を再現し、既存PyJWTを許可すると成功することを確認。8739cd80はCIだけへPyJWT2.13.0を加え、子process失敗時にstderrを出し、短いweather検査を先行した。製品source／依存・成功条件の弱化なし。最終local72 PASS。新CI42441166743を確認中。初版のPiece isolated SQL42440204697は全37step成功。RN4483f6d4のCI42440451146はRN contracts／新weatherを含むjob128608358722とphase6 CI42440451122が成功。iOS metricsのV4失敗19は直前128590034681と名称・順序が完全一致、他groupは同じ成功で、新weatherによる退行へ混同しない。

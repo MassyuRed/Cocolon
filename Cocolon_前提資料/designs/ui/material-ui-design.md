@@ -796,4 +796,4 @@ Mashが保存済みの表示案を採用し、修正作業を明示指示。今�
 
 新しい通常表示は `AnalysisContentFirstScreen` → `KokoroWeatherTimeline` → `useKokoroWeather` → `/analysis/kokoro-weather`。本人の通常5感情を弱1／中2／強3で集計し、自己理解だけの記録は件数にも含めない。入力後のタブ復帰・アプリ前面復帰・JST日付更新で再取得。保存reportの取得や分析モデルを待たない。履歴の保存report／課金条件、わたしマップ、チュートリアルは維持した。
 
-API候補66cf4aa3、同変更単位のRN候補。API対象72 PASS、RN対象113 PASS、独立reviewで外側Pressableの等幅配置・親子の期間同期・31日目盛りを修復した。プレビュー原本は比較用にそのまま保持。本番反映・署名build・実機の描画／本人入力での確認は未実行。[詳細](../../current_structure/03_analysis_current_structure.md#kokoro-weather-live-20261108)。
+API候補8739cd80、RN候補4483f6d4。API対象72 PASS、RN対象113 PASS、独立reviewで外側Pressableの等幅配置・親子の期間同期・31日目盛りを修復した。プレビュー原本は比較用にそのまま保持。本番反映・署名build・実機の描画／本人入力での確認は未実行。[詳細](../../current_structure/03_analysis_current_structure.md#kokoro-weather-live-20261108)。
