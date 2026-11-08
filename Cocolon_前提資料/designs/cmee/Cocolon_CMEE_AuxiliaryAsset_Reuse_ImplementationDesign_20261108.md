@@ -396,19 +396,20 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 ### 11.2 現在の進行欄
 
-| 項目 | 2026-11-09 AR-01本人宛教師の回収・単一候補準備 |
+| 項目 | 2026-11-09 AR-01本人宛表現の実学習・全34比較 |
 |---|---|
-| 方針・継承 | 必要な全能力・資産を回収・現商品へ改修する承認、旧32系列／D01–D51と既存naturalの単一作者を維持。追加prompt周回から既存教師の具体的差分へ進めた |
-| 今回の回収 | 旧36架空教師を確認。明示的な二人称targetは0件。意味上正しいご自身／主語省略7targetだけ本人宛を明示する仮説へ変更し、36source・metadata・SYSTEM/userと残29target不変 |
-| 単一候補 | 固定db3242初期adapter、既存assistant-only SFT、36件各1回／LR1e-5／新optimizer。V8は学習外。学習90秒・trial300秒／34生成上限、既存pause/restoreを継承。まだ未実行 |
-| 準備検証 | 独立担当が全36sourceと7targetを原文照合、eval26不変・旧before34のid/group/messages/source参照一致、Python3file構文有効。実tokenizer preflightは未実行 |
-| 比較限界 | 旧44との差にはV8除外も含み、代名詞だけの因果効果でない。既使用development34、S02と診断の意味近傍性を保持。emotion時点とmetadataのみの同一event統制pairは不足、未知一般化なし |
-| 実環境の読取 | 既存PodのPID24179／元serverSHA f95fc7ce不変・health200。実GPUはRTX4000 Ada Generation／20475MiB。読み取りだけで新load・pause・復元なし |
-| 実行の現在地 | 候補ZIPはコード4本＋架空7表現差分、17,074bytes。実ユーザー入力・認証値・生成結果・重みなしを確認したが外部uploadが2回自動審査拒否。未送信、今回新更新／生成／SQL0 |
-| 次の同一作業 | 具体的ZIPをMash指定の同Podへ送信する明示承認後、実CPU preflight→同候補の有界学習・34本文読解→26評価の隔離SQL保存再読→重みと原本回収。別経路で拒否を回避せず、他候補／新方式へ変えない |
-| 再開記録 | weekly第10回§25、[今回の準備とblocker](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/addressee36_preparation_review.md)／[集計](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/addressee36_preparation_summary.json)。privateに候補・全由来・旧before34・独立review保全 |
-| 過去結果 | c6555fd5の有限質問修復・250局所PASS・2CI成功は前回§24の実績。前回24実生成／4版不採用、旧66・120・38等の原本と採否は不変。今回の新実行数へ足さない |
-| 通常提供と残件 | API source／Render／実DB／RN／build／通常model設定変更0。研究用教師表現と準備のみでSTRUCTURE_MAP_DELTA_NONE。全6境界の意味品質、AR-01／AR-02〜08／全資産活用／本人端末・正式受入れは未完了 |
+| 方針・継承 | 必要な全能力・資産を回収・現商品へ改修する承認、旧32系列／D01–D51、既存naturalの単一作者・通常source／Safety／保存を維持 |
+| 承認と差分 | 前回の具体的ZIP送信承認待ちはMash明示承認で解消。同一ZIPを既存Podへ送信・SHA一致。旧36架空教師の原source／metadata／SYSTEM/user不変、本人宛target7表現だけ変更、他29target不変 |
+| 実行 | 固定db3242から既存SFTで36件各1回／36更新・LR1e-5・新optimizer。学習34.935889秒／全trial105.476390秒。2load、112有限F32／3,833,856params保存・fresh reload一致。新weight6b3df8c9 |
+| 実比較 | 旧before34は原bytes再利用。新34＝診断8＋既使用評価26、全stop／生成43.406543秒。全source／messages／参照一致・truncationなし。19本文不変／15変化、未知一般化ではない |
+| 全文読解・採否 | root・独立担当が全34source/before/afterを読了。不要な挨拶や未記載の気づき除去等の局所前進があるが、旧役割反転・不適切呼称・文法不成立、新たな私語り手・感情対象変更・助言化が残り通常不採用。短い正しい受取り／省略だけで失敗にしない |
+| 保存再読 | 同26評価rawだけ現c655実provider＋既存service＋隔離PGliteへ一回再生。全26 FINAL保存・同／新service GET一致。本文は既存outer strip後hash一致・語句書換え0、USER source／GET events不変、GET再生成／retry0 |
+| reader実範囲 | 保存reportは25未判定／1範囲内非衝突、33節中checked1・未照合32、全件全文coverage=false。保存やNLL低下を意味品質へ換算しない |
+| 元提供と回収 | 旧PID24179→26784、元server source／Analysis重み／起動条件へ復元、health200。Pod外ZIPのCRC／1790member原hash一致、両adapter112tensor有限F32を独立CPU確認。private全原本・全読解・SQL結果・重み保全 |
+| 比較限界 | 36更新候補全体の比較。旧44との差にはV8除外も含み7表現の単独因果効果は未特定。S02と診断は意味近傍、感情時点／metadataのみの同一event統制pairは不足。評価source／失敗rawの教師化0 |
+| 次の同一商品単位 | AR-01継続。受け手反転と語り手／感情対象の対応を、既存教師一要素対照・旧meaning obligations／body inverseから切り分け、現naturalの単一本文修復へ。今回36・旧16／44や同promptを単純再周回せず、新checker owner／新観測会を先行条件にしない |
+| 再開記録 | weekly第10回§26、[全実結果](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/addressee36_execution_review.md)／[本文なし集計](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/addressee36_execution_summary.json)。前回の準備／送信拒否は履歴として保持 |
+| 通常提供と残件 | 商品API source／Render配置／実DB／RN／build／通常model設定変更0。研究候補の実行のみでSTRUCTURE_MAP_DELTA_NONE。AR-01／AR-02〜08／全資産活用／通常意味品質／本人端末・正式受入れは未完了 |
 
 以後はこの表と各能力の対応行を現在状態へ置換更新し、詳細な実行事実は既存trial／weeklyへ置く。新しいhandoff系列・全件hash Gateを作らない。中断時も、成果物と未実行を既存保存先へ残し、同じ未完商品単位から続ける。
 

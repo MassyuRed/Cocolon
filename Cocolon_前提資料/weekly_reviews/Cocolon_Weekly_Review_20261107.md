@@ -1934,6 +1934,8 @@ CI最終確認（2026-11-08T22:49:47.000+09:00）：固定API c6555fd5の[Piece 
 <a id="auxiliary-addressee36-prepared-20261109"></a>
 ## 25. 補助経路活用AR-01 — 本人宛教師を回収、36件の単一候補を準備
 
+> 本節は準備時点の履歴。後続のMash明示承認で送信・学習・比較を実施済みです。承認待ちは解消し、現在の実結果は§26を参照します。
+
 2026-11-09 JST。前回§24の次作業として旧36架空教師を全件確認し、書き手を返答相手へ明示するtargetが0件だったことから、意味上正しい「ご自身」6件／主語省略1件だけ表現変更する仮説を具体化した。原36source・metadata・SYSTEM/user・参照と他29targetは不変。評価6source／24出力／判断を教師化しない。S02A/Bと診断V01/V02の意味近接、前回ICL教材の露出、emotion時点の統制pair不足は保持する。
 
 一候補は既存db3242から36件各1回・LR1e-5・fresh optimizer、既存assistant-only SFT／学習90秒・trial300秒／after34生成を上限とする。旧before34は原bytes再利用で新生成に数えない。V8を今回学習から除外し、全34のid/group/messages/source参照を固定した。独立担当が原36と全変更7件、保持29件、eval26不変、Python3file構文と既存wrapperの復元境界を照合した。旧44との比較はV8除外も交絡し、二人称表現だけの効果とは主張できない。14件への削減案は偏り／保持縮小を避けて未実行とし、候補を増やさない。
@@ -1943,3 +1945,19 @@ CI最終確認（2026-11-08T22:49:47.000+09:00）：固定API c6555fd5の[Piece 
 候補ZIP（コード4本＋架空7表現差分、17,074bytes／SHA256 2eed5fa59a68b4dd67cceff2f968cccf2cdeea18bd3c5dfec787ef2f06dafb9b）の同Podへのuploadが自動承認審査で拒否された。全5memberに実ユーザー入力・認証値・生成結果・重みがないことを確認したが、再審査でもpayloadと送信先の明示承認が必要とされた。**未送信・未学習。別経路で同じpayloadを渡す回避なし。** 具体的ZIPをMash指定Pod f1lle4xwq3wjlnへ送る承認後、同候補のpreflight→学習／全34読解→26の既存provider＋隔離SQL保存再読→Pod外回収へ進む。
 
 [準備内容・限界・再開点](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/addressee36_preparation_review.md)／[本文なし集計](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/addressee36_preparation_summary.json)。privateに候補コード・教材由来・準備pack・旧before34・独立確認を保存。**STRUCTURE_MAP_DELTA_NONE**（研究用教師表現と候補準備のみで作者・型・wire・保存責務の追加なし）。AR-01・AR-02〜08・全資産活用・通常品質・本人端末／正式受入れは未完了。
+
+
+<a id="auxiliary-addressee36-actual-20261109"></a>
+## 26. 補助経路活用AR-01 — 承認後の単一36更新・34実比較と保存再読
+
+2026-11-09 JST。Mashが§25の具体的ZIP・送信先・学習比較を明示承認し、同SHAのコード4本＋架空7表現差分を同Podへ送信した。実tokenizer CPU preflightで原36source／SYSTEM/user・比較34参照一致、truncationなし・教師最大720tokenを確認。固定db3242から旧36各1回・LR1e-5・fresh optimizerで36更新。学習34.935889秒／全trial105.476390秒（元提供復元・保持等別）、保存後34新生成・全stop／43.406543秒、retry0。旧before34は原bytes再利用で今回の新生成へ足さない。
+
+新6b3df8c9／config65bade7bは112有限F32／3,833,856params・全112変更。保存後fresh base／非学習reloadの全値一致、Pod外でも型・要素数・有限性を実確認。peak allocated9,623,211,520／reserved9,814,671,360bytes。元提供を止めた単一trialの値で、同時学習の容量証明ではない。2loadで上限300秒内、追加周回・別候補0。
+
+rootと独立担当が全34source／before／afterを全文比較し、19不変／15変化。未記載の気づき除去、generic挨拶除去、事前認識＋現在後悔の受取りに限定前進があった。一方ROLE02の不適切呼称、TRANSFER06の受け手反転、V05文法不成立は継続。新たにTRANSFER05の一人称語り手、TRANSFER02の本人意向の助言化、TRANSFER03の喜び対象ずれがあり、**候補は通常不採用**。短いこと・全事実を再掲しないことだけで失敗にしない。平均教師NLL0.458350→0.367495やstop数を意味品質へ換算しない。旧44との比較にはV8除外もあり、7表現単独の因果効果や未知一般化を主張しない。
+
+同26評価rawだけ現c655実provider＋既存service＋隔離PGlite0.5.8へ再生し、全26 FINAL保存・同／新service GET一致。既存outer strip後本文hash一致・語句書換え0、USER sourceとGET thread／events不変、GET provider／reader／Engine0、retry0。capture／SQL参照18一致、user_id投影差8は両参照保存・各再計算。診断8は再生対象外。保存readerは25未判定／1範囲内非衝突、33節中checked1・未照合32、全文coverage=falseで意味合格を示さない。元capture sourceを保持し、1722 source/SQLのうち現c655に1719一致・差3を区別し、別copyへ現natural3fileをoverlay、通常prepareの実messages一致を全26確認した。pytest suiteを新実行したとはしない。
+
+元server source f95fc7ce・Analysis重み・argv/env/cwdを保持し、旧PID24179→26784で復元、health200を再確認。Pod出力ZIP40,215,710bytes／SHA030d356ac3f953ca0ffea4922be0115ed5581e9fa0c928a7ed48e88c5d73a5b9を回収し、CRCと1790member全原bytes/hash一致。privateに全教師／messages／before-after／全34読解／両重み／SQL結果を永続保全。商品API source・Render配置・実Supabase・RN/build・通常model設定変更0。**STRUCTURE_MAP_DELTA_NONE**（研究候補の実行のみ、新作者・型・wire・保存責務なし）。
+
+[全結果と次作業](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/addressee36_execution_review.md)／[本文なし集計](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/addressee36_execution_summary.json)。次は受け手反転と語り手／感情対象の対応を、既存教師一要素対照・旧meaning obligations／body inverseの必要部品で切り分け、現naturalの単一本文修復へ接続する。評価source・失敗rawの教師化、今回36／旧16・44や同promptの単純周回、reader完成だけの代替を行わない。AR-01・AR-02〜08・全資産活用・通常意味品質・本人端末／正式受入れは未完了。
