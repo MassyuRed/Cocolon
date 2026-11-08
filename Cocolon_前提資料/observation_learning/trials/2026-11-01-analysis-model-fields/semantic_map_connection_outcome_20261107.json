@@ -70,7 +70,7 @@
     "render_settings_merge": "APPLIED_AFTER_EXPLICIT_MASH_APPROVAL",
     "production_env_changed": true,
     "deploy_started": true,
-    "next_action": "API and existing worker are deployed and connected. Next integrated RN build must include source4e776e2f, then observe natural saved-input background generation and actual-device immediate saved display. Do not require all semantic-quality repairs first.",
+    "next_action": "API and existing worker are deployed and connected. Monitor the single integrated RN build42430220604 (expected7801) to its terminal result. Apple console inspection was user-aborted; no further Apple actions. Upload, Apple processing, internal distribution and device result remain separate. Observe natural saved-input background generation and actual-device saved display without requiring all semantic-quality repairs first.",
     "deploy_live": true,
     "initial_live_commit": "d63647a816a9f4024aee16bade7735f1b9700e9c",
     "initial_deploy": "dep-dbnglopsrm7s739cqcsg",
@@ -454,7 +454,7 @@
       "quality_acceptance_unchanged": true
     },
     "background_refresh_20261108": {
-      "status": "DEPLOYED_API_AND_WORKER_CONNECTION_VERIFIED_RN_NOT_BUILT",
+      "status": "DEPLOYED_SERVER_VERIFIED_INTEGRATED_RN_BUILD_IN_PROGRESS",
       "user_requested_behavior": "Begin analysis after saving input and display the saved map when opening the screen",
       "generation_duration_reduced_by_this_change": false,
       "prior_synthetic_generation_seconds": 171.34955875994638,
@@ -495,10 +495,23 @@
         "poll_only_focused_and_app_active": true,
         "version_or_visibility_change_reads_without_generation": true,
         "owner_change_invalidates_old_requests": true,
-        "build_started": false,
+        "build_started": true,
         "device_verified": false,
         "local_tests_passed": 25,
-        "source_commit": "4e776e2f76281b5ce55a5da547ba3f315d82ec93"
+        "source_commit": "4e776e2f76281b5ce55a5da547ba3f315d82ec93",
+        "integrated_build": {
+          "github_run_id": 42430220604,
+          "run_number": 78,
+          "run_attempt": 1,
+          "source_commit": "861082d0e22f695d3aeee06f76924bcd6fcbe1c0",
+          "app_source_matches": "4e776e2f76281b5ce55a5da547ba3f315d82ec93",
+          "expected_build_number": 7801,
+          "status": "in_progress",
+          "upload_verified": false,
+          "apple_processing_verified": false,
+          "existing_internal_group_testing_verified": false,
+          "apple_console_inspection": "User aborted read-only inspection; no further Apple actions"
+        }
       },
       "boundaries": {
         "source_and_quote_admission_preserved": true,
@@ -539,7 +552,7 @@
           "source_commit": "09a3f7142dcc011c315617589df845b344b15e82",
           "status": "completed",
           "conclusion": "success",
-          "last_observed_step": 11,
+          "last_observed_step": 17,
           "all_steps_success": 17,
           "job_finished_at_utc": "2026-11-08T00:15:24Z"
         }
@@ -558,15 +571,15 @@
         "render_deploys_this_unit": 2,
         "new_gpu_generations_this_unit": 0,
         "db_dml_or_ddl_this_unit": 0,
-        "new_builds_this_unit": 0,
+        "new_builds_this_unit": 1,
         "approval_received": true,
         "approval_scope": "Register dedicated analysis key and connection settings on existing mashos-astor-worker; deploy tested API and worker revision only after CI passes",
         "worker_analysis_five_settings_registered": true,
         "worker_settings_saved_without_deploy": true,
         "worker_environment_key_count_after_save": 9,
         "secret_value_readback_skipped": "Clipboard copy rejected by automatic review as unnecessary; verify key presence and runtime connection without extracting values",
-        "worker_running_process_has_new_settings": false,
-        "settings_verification": "Key presence after Save only; secret values not re-extracted; runtime connection probe pending deployment",
+        "worker_running_process_has_new_settings": true,
+        "settings_verification": "New worker runtime confirmed all five settings present and expected semantic mode/model selected; authenticated empty payload returned400 without generation; no secret value extraction",
         "clipboard_secret_recopy_review": "Rejected as unnecessary; stopped without alternate extraction",
         "api_deploy": "dep-dbnrusbl550s7381luu0",
         "api_live_at_utc": "2026-11-08T00:18:16.270779Z",
