@@ -1961,3 +1961,19 @@ rootと独立担当が全34source／before／afterを全文比較し、19不変�
 元server source f95fc7ce・Analysis重み・argv/env/cwdを保持し、旧PID24179→26784で復元、health200を再確認。Pod出力ZIP40,215,710bytes／SHA030d356ac3f953ca0ffea4922be0115ed5581e9fa0c928a7ed48e88c5d73a5b9を回収し、CRCと1790member全原bytes/hash一致。privateに全教師／messages／before-after／全34読解／両重み／SQL結果を永続保全。商品API source・Render配置・実Supabase・RN/build・通常model設定変更0。**STRUCTURE_MAP_DELTA_NONE**（研究候補の実行のみ、新作者・型・wire・保存責務なし）。
 
 [全結果と次作業](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/addressee36_execution_review.md)／[本文なし集計](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/addressee36_execution_summary.json)。次は受け手反転と語り手／感情対象の対応を、既存教師一要素対照・旧meaning obligations／body inverseの必要部品で切り分け、現naturalの単一本文修復へ接続する。評価source・失敗rawの教師化、今回36／旧16・44や同promptの単純周回、reader完成だけの代替を行わない。AR-01・AR-02〜08・全資産活用・通常意味品質・本人端末／正式受入れは未完了。
+
+
+<a id="auxiliary-request-roleframe-20261109"></a>
+## 27. 補助経路活用AR-01 — 依頼役割の限定候補を24実比較、通常不採用
+
+2026-11-09 JST。§26の受け手反転を継承し、既存finite witnessの肯定・過去・事実の受動依頼、CURRENT、受け手UNSTATEDだけを、依頼した人／依頼を受けた人として研究補助へ投影する候補を実装した。原source・参照・SYSTEM・通常OFF不変、新parser／作者／controller／型なし。旧v3も同種の役割補助で失敗しており、その近傍仮説であることを明記する。
+
+架空新6＋既使用対照6の同12×OFF／候補ONで24実4B新返答、全HTTP200／stop、45.165514秒。対象3組のみmessages／本文変化、非対象9組は両方byte一致。tokenizer最大1118input、truncationなし。学習／新load／retry／pause・復元0、同PID26784・server source f95fc7ce・Analysis weight/config不変、health200。CPUはmeaning126／cognition47／budget23／application71＝267 PASS、17.09秒、既存warning1、PGlite0.5.8。
+
+root・独立担当が全12sourceと24本文を全文読解。依頼があったことの否認、明記された依頼者の未記載化、受け手と承諾のunknown対象ずれ、選択感情と語り手の曖昧さが残り、候補は通常不採用。対照9不変にも既存の人物・受動希望・意向の確定化等の誤読がある。正しい短い受取りを省略だけで失敗化しない。新6は二欄完全一致で旧教材／評価と重ならないが既知の意味近傍で、blind一般化・Mash正式受入れではない。
+
+同24rawを現provider＋既存service＋隔離SQLへ別phaseで一回再生し、全24 FINAL保存・同／新service GET一致。実prepareを呼びcapture payload全24一致、既存outer strip後本文hash一致・語句書換え0、USER／GET events不変、GET provider／reader／Engine0。実DB要求・新生成／retry0。readerは24全未判定、50節checked0・全文coverage=false。参照12一致とuser_id投影差12を区別し、保存を意味受入れへ換算しない。
+
+不採用source2pathを既存trialの研究patchとして保全し、c655のfresh preimageから適用・実candidate SHA一致を確認。テスト差分には旧架空開発入力が含まれるためprivateへ分離。全private原本・24raw・読解・SQLは永続保全、Pod出力ZIPのCRCと13member全hash一致。API sourceはc6555fd5のまま、Render配置／実Supabase／RN/build／通常model設定変更0。STRUCTURE_MAP_DELTA_NONE（拒否した研究patch保管のみでactive作者・型・wire・保存責務の追加なし）。
+
+[全結果と次の既存改修先](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/request_roleframe_review.md)／[集計](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/request_roleframe_summary.json)。次は役割ラベル追加や同学習周回を止め、preparation／emlis_semantic_admissionの意味採用→現natural単一作者の接続で、依頼者・受け手・承諾を別claim/refとして保持する責務を改修する。旧bindingsの限定grammarや固定三欄rendererは丸ごと採用しない。AR-01・AR-02〜08・全資産活用・通常意味品質・本人端末／正式受入れは未完了。AR-02はAR-01一般品質完成を待つ前提にしないが、今回の着手を主張しない。

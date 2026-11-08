@@ -1,10 +1,10 @@
 ---
 doc_id: cocolon.cmee.auxiliary_asset_reuse.implementation_design.20261108
 title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修・商品接続 詳細設計"
-revision_date: "2026-11-08 JST"
+revision_date: "2026-11-09 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR01_IN_PROGRESS_CONDITIONING_NOT_ADOPTED_QUESTION_ENDINGS_REPAIRED
+status: AR01_IN_PROGRESS_REQUEST_ROLEFRAME_NOT_ADOPTED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
@@ -396,20 +396,20 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 ### 11.2 現在の進行欄
 
-| 項目 | 2026-11-09 AR-01本人宛表現の実学習・全34比較 |
+| 項目 | 2026-11-09 AR-01依頼役割・未記載受け手の24実比較 |
 |---|---|
-| 方針・継承 | 必要な全能力・資産を回収・現商品へ改修する承認、旧32系列／D01–D51、既存naturalの単一作者・通常source／Safety／保存を維持 |
-| 承認と差分 | 前回の具体的ZIP送信承認待ちはMash明示承認で解消。同一ZIPを既存Podへ送信・SHA一致。旧36架空教師の原source／metadata／SYSTEM/user不変、本人宛target7表現だけ変更、他29target不変 |
-| 実行 | 固定db3242から既存SFTで36件各1回／36更新・LR1e-5・新optimizer。学習34.935889秒／全trial105.476390秒。2load、112有限F32／3,833,856params保存・fresh reload一致。新weight6b3df8c9 |
-| 実比較 | 旧before34は原bytes再利用。新34＝診断8＋既使用評価26、全stop／生成43.406543秒。全source／messages／参照一致・truncationなし。19本文不変／15変化、未知一般化ではない |
-| 全文読解・採否 | root・独立担当が全34source/before/afterを読了。不要な挨拶や未記載の気づき除去等の局所前進があるが、旧役割反転・不適切呼称・文法不成立、新たな私語り手・感情対象変更・助言化が残り通常不採用。短い正しい受取り／省略だけで失敗にしない |
-| 保存再読 | 同26評価rawだけ現c655実provider＋既存service＋隔離PGliteへ一回再生。全26 FINAL保存・同／新service GET一致。本文は既存outer strip後hash一致・語句書換え0、USER source／GET events不変、GET再生成／retry0 |
-| reader実範囲 | 保存reportは25未判定／1範囲内非衝突、33節中checked1・未照合32、全件全文coverage=false。保存やNLL低下を意味品質へ換算しない |
-| 元提供と回収 | 旧PID24179→26784、元server source／Analysis重み／起動条件へ復元、health200。Pod外ZIPのCRC／1790member原hash一致、両adapter112tensor有限F32を独立CPU確認。private全原本・全読解・SQL結果・重み保全 |
-| 比較限界 | 36更新候補全体の比較。旧44との差にはV8除外も含み7表現の単独因果効果は未特定。S02と診断は意味近傍、感情時点／metadataのみの同一event統制pairは不足。評価source／失敗rawの教師化0 |
-| 次の同一商品単位 | AR-01継続。受け手反転と語り手／感情対象の対応を、既存教師一要素対照・旧meaning obligations／body inverseから切り分け、現naturalの単一本文修復へ。今回36・旧16／44や同promptを単純再周回せず、新checker owner／新観測会を先行条件にしない |
-| 再開記録 | weekly第10回§26、[全実結果](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/addressee36_execution_review.md)／[本文なし集計](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/addressee36_execution_summary.json)。前回の準備／送信拒否は履歴として保持 |
-| 通常提供と残件 | 商品API source／Render配置／実DB／RN／build／通常model設定変更0。研究候補の実行のみでSTRUCTURE_MAP_DELTA_NONE。AR-01／AR-02〜08／全資産活用／通常意味品質／本人端末・正式受入れは未完了 |
+| 方針・継承 | 必要な全能力・資産を回収・現商品へ改修する承認、旧32系列／D01–D51、既存natural単一作者・通常source／Safety／保存を維持。§26の承認済み学習実結果は履歴継承 |
+| 今回の改修 | 現finite readerの肯定・過去・事実の受動依頼、CURRENT、受け手UNSTATEDだけを依頼者／受け手として研究補助へ投影。原source／参照／SYSTEM／通常OFF不変。旧v3失敗に近い限定仮説で新能力の完成ではない |
+| 実行 | 架空新6＋既使用6、同12×OFF／候補ON＝24新生成、全HTTP200／stop、45.165514秒。実tokenizer最大1118input、truncationなし。対象3messages／本文変化、9組byte不変。学習／新load／retry／pause・復元0 |
+| 全文読解・採否 | root・独立担当が全12source／24本文読了。依頼成立の否認、明記依頼者の未記載化、受け手と承諾のunknown対象ずれ等で通常不採用。対照不変も意味合格ではない。新6は既知意味近傍でblind一般化ではない |
+| CPU検証 | meaning126／cognition47／budget23／application71＝267 PASS、17.09秒、既存warning1。局所検証を意味品質へ換算しない |
+| 保存再読 | 全24実rawだけ現provider＋既存service＋隔離PGliteへ一回再生、FINAL保存・同／新service GET一致。outer strip後hash一致、語句書換え0、USER／GETイベント不変、GET provider／reader／Engine0 |
+| reader実範囲 | 全24未判定、50節checked0、全文coverage=false。capture／SQL参照12一致・user_id投影差12は両参照を保持し再計算。保存を意味受入れにしない |
+| 提供と回収 | 同PID26784・server f95fc7ce・Analysis weight/config不変、health200。Pod出力ZIP50,238bytes／全13member原hash一致、private全source/messages/raw／読解／SQL保全。新重みなし |
+| 不採用差分 | source2pathは既存trialの研究patchへ保存、c655preimage→実candidate SHAの適用一致。架空開発入力を含むテスト差分はprivate分離。APIへ適用しない |
+| 次の同一商品単位 | preparation／emlis_semantic_admissionの意味採用→現natural単一作者へ戻す。依頼者・受け手・承諾を別claim/refで保持する責務を旧bindings等から改修。別の役割ラベル追加、同学習周回、旧固定renderer再稼働を次作業にしない |
+| 再開記録 | weekly第10回§27、[全実結果・具体的改修先](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/request_roleframe_review.md)／[本文なし集計](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/request_roleframe_summary.json) |
+| 通常提供と残件 | API sourceはc6555fd5のまま。配置／実DB／RN／build／通常model設定0、拒否した研究patchのみでSTRUCTURE_MAP_DELTA_NONE。AR-01／AR-02〜08／全資産活用／通常品質／端末・正式受入れ未完了。AR-02は一般AR-01品質完成を待つ前提にしないが今回未着手 |
 
 以後はこの表と各能力の対応行を現在状態へ置換更新し、詳細な実行事実は既存trial／weeklyへ置く。新しいhandoff系列・全件hash Gateを作らない。中断時も、成果物と未実行を既存保存先へ残し、同じ未完商品単位から続ける。
 
