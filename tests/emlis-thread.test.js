@@ -88,10 +88,12 @@ test('pending reader stops automatic GET after an error and retains manual saved
   assert.equal(gets, 2);
   await act(async () => t.mock.timers.tick(10000));
   assert.equal(gets, 2);
-  await act(async () => h.value.refresh());
+  const check = h.root.root.findAllByType('Button').find(x => x.props.children === '応答を確認する');
+  assert.ok(check && !check.props.disabled);
+  await act(async () => check.props.onPress());
   assert.equal(gets, 3);
   await act(async () => t.mock.timers.tick(1000));
-  assert.equal(gets, 3);
+  assert.equal(gets, 4);
 });
 
 function load(relative, mocks = {}, dev = true) {

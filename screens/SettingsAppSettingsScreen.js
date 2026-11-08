@@ -248,7 +248,7 @@ function SettingSwitchRow({
   );
 }
 
-export default function SettingsAppSettingsScreen({ navigation }) {
+export default function SettingsAppSettingsScreen({ navigation, embedded = false }) {
   const { colors, themeName, setThemeName } = useTheme();
   const { user, authLoading, authOwnerGeneration } = useAuth();
   const ownerRequestRef = useRef(null);
@@ -630,9 +630,10 @@ export default function SettingsAppSettingsScreen({ navigation }) {
     }
   };
 
+  const Container = embedded ? View : AnalysisMenuScroll;
   return (
-    <AnalysisMenuScroll>
-      <AnalysisSubHeader title="アプリ設定" onBack={() => navigation.goBack()} />
+    <Container>
+      {!embedded ? <AnalysisSubHeader title="アプリ設定" onBack={() => navigation.goBack()} /> : null}
 
       <SettingSectionRow
         icon="color-palette-outline"
@@ -710,7 +711,7 @@ export default function SettingsAppSettingsScreen({ navigation }) {
           ) : null}
         </View>
       ) : null}
-    </AnalysisMenuScroll>
+    </Container>
   );
 }
 

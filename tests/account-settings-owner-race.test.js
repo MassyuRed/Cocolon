@@ -58,7 +58,7 @@ function harness(file, exportName, args = {}) {
   let source = read(file);
   if (exportName.startsWith('Settings')) {
     source = source.slice(source.indexOf('export default function ' + exportName));
-    source = source.slice(0, source.indexOf('  return (\n    <AnalysisMenuScroll>')) +
+    source = source.slice(0, source.indexOf('  const Container = embedded ? View : AnalysisMenuScroll;')) +
       (exportName === 'SettingsAppSettingsScreen' ? 'return {updatePushEnabled,updateTodayQuestionNotificationEnabled,updateReportDistributionNotificationEnabled,updateEmotionNotificationEnabled};\n}' : 'return {handleDeleteAccount,executeDeleteAccount};\n}');
   }
   const Component = Function(...Object.keys(bindings), strip(source) + '\nreturn ' + exportName + ';')(...Object.values(bindings));

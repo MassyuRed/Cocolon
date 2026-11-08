@@ -360,7 +360,7 @@ function PlanCard({
   );
 }
 
-export default function SubscriptionSelectScreen({ navigation }) {
+export default function SubscriptionSelectScreen({ navigation, renderSettings }) {
   const { colors, themeName } = useTheme();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
@@ -526,16 +526,14 @@ export default function SubscriptionSelectScreen({ navigation }) {
   const onRestorePurchases = useCallback(async () => {
     if (actionBusy) return;
 
-    const { data: sessionData } = await supabase.auth.getSession();
-    const accessToken = sessionData?.session?.access_token ?? null;
-    if (!accessToken) {
-      Alert.alert("ログインが必要です", "購入内容の復元にはログインが必要です。");
-      return;
-    }
-
     setRestoreLoading(true);
-
     try {
+      const { data: sessionData } = await supabase.auth.getSession();
+      const accessToken = sessionData?.session?.access_token ?? null;
+      if (!accessToken) {
+        Alert.alert("ログインが必要です", "購入内容の復元にはログインが必要です。");
+        return;
+      }
       const purchases = await restoreAvailablePurchases();
 
       if (!Array.isArray(purchases) || purchases.length === 0) {
@@ -821,6 +819,17 @@ export default function SubscriptionSelectScreen({ navigation }) {
 
   const plusFeatures = asStringArray(plusPlan?.features, []);
   const premiumFeatures = asStringArray(premiumPlan?.features, []);
+
+  if (typeof renderSettings === "function") {
+    return renderSettings({
+      loading, tier, currentLabel,
+      currentPriceLabel: loading ? "" : tier === "plus" ? plusPriceLabel : tier === "premium" ? premiumPriceLabel : "無料",
+      actionBusy, restoreLoading,
+      restoreEnabled: policy?.restore_enabled !== false,
+      manageEnabled: !loading && tier !== "free" && policy?.manage_enabled !== false,
+      onRestorePurchases, onOpenManageSubscription, openExternalPage, links,
+    });
+  }
 
   return (
     <SafeAreaView edges={["left", "right"]} style={styles.safeArea}>

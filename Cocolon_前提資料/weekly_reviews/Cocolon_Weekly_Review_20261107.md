@@ -1486,3 +1486,16 @@ primary outcome＝TECHNICAL_CREDIT。修正版のGitHub保存・CI確認まで�
 検証・GitHub保存の最終追補：APIa305b333のAnalysis CI42448071805／job128631146307は14:00:51 JSTに全18工程success、Piece SQL42448071758／job128631146242は13:49:48 JSTに全37工程success。RN2518f9faは新history9を含むRNcontracts128632034420とphase6 42448361265が成功、Android source／exportとexport Podsも成功。別Piece native V4は前版と同じ19名称・順序の失敗を保持し、canvas128632034326は記録時点で実描画中・終端未確認。既存別経路を修正済みや全CI greenとしない。
 
 局所RNは対象52＋関連141＝193 PASS、API73 PASS。Cocolon31path／API10pathのremote全bytes・変更path・各source headを照合済み。後続はこの結果だけを既存資料へ反映し、製品sourceは2518f9fa／a305b333から変更しない。署名build／Upload／本番反映0で、他の変更後にまとめるMash指示を維持。通知の既存workerログ一回読取では指定範囲の対象job記録0件、配送の成否は未確認として残す。
+
+<a id="notification-settings-emlis-repair-20261108"></a>
+## 通知・設定・EmlisAI接続修復（11/8、統合build前のsource段階）
+
+Mashの指示：先行こころグラフ修正と、通知不達／設定プレビュー配置／EmlisAIの4B接続を全て修正してから一回の統合build・内部配布へ進める。新GPUレンタル・学習・新adapter採用は行わない。
+
+実原因：map更新は04:27:31Z完了、push jobも完了したが、本人プロフィールpush_enabled=false・端末tokenありのため送信前に除外。本人通知設定は勝手にONへ変えない。Renderメールのtoday-question-push／report-distribution-push exit1は04:35〜41Zの候補DB読取ReadTimeoutで、mapの除外理由とは別。cronは旧main2d2f06dを実行中。候補GETだけ最大3要求へ限定し、送信・書込・全バッチは再試行しない。
+
+Emlis actual：response profile natural_reply.v1、endpointは旧6i2aa1nj683s8y、thread mode read_only。分析の新Pod接続は観測応答へ継承されていなかった。既存の4B base自然文profileと分析120u adapterを同load／同lockで専用鍵別に提供する候補、submit最終整形で空本文pending markerのみ返す修正、RN GET手動確認を用意。本文passedゲート・GET非生成・所有者境界を維持。試験providerと実GPU／実DB／実端末は区別する。
+
+設定配置：Global Emlis見出し右のアカウント、現在プランcard、アプリ設定2行、サブスク3行、その他3行、下部規約・privacy・support。既存バーガンディ／アイボリー、実プラン／価格を使用。既存通知・IAP復元／管理・2段階削除handlerを再利用し、認証待ちからrestore busyを立てて別plan画面への同時遷移を抑止。元preview原本は改変しない。
+
+source試験：API HTTP／pending／候補retry／bridge61件pass。RN設定layout・owner・入力・thread144件pass、追加pending marker2件もpass。Metro bundle単独検査はローカル依存不足のため対象から外し、最終iOS buildで確認する。自然文SQLは53件pass、実GPU接続は実行中。API source `5d2afbfc33181f9071c9efd7ea2e995812924093`を保存・全11path blob照合済み。新配布・実反映・本人端末は未完。

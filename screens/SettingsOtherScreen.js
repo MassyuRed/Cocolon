@@ -72,7 +72,7 @@ function SettingActionRow({ title, description, icon, onPress, disabled, destruc
   );
 }
 
-export default function SettingsOtherScreen({ navigation }) {
+export default function SettingsOtherScreen({ navigation, embedded = false }) {
   const { signOut, authLoading, user } = useAuth();
   const { startTutorial, setTutorialStep } = useTutorial();
   const { setUnread } = useUnread();
@@ -236,14 +236,15 @@ export default function SettingsOtherScreen({ navigation }) {
     );
   };
 
+  const Container = embedded ? View : AnalysisMenuScroll;
   return (
-    <AnalysisMenuScroll>
-      <AnalysisSubHeader title="その他" onBack={() => navigation.goBack()} />
+    <Container>
+      {!embedded ? <AnalysisSubHeader title="その他" onBack={() => navigation.goBack()} /> : null}
 
       <View style={localStyles.group}>
         <SettingActionRow
           title="チュートリアルを再体験する"
-          description="入力や記録はそのままです"
+          description={embedded ? undefined : "入力や記録はそのままです"}
           icon="book-outline"
           disabled={isBusy}
           onPress={openTutorialRestart}
@@ -259,7 +260,7 @@ export default function SettingsOtherScreen({ navigation }) {
           title="アカウント削除"
           icon="person-remove-outline"
           description={
-            accountDeleteEnabled
+            embedded && accountDeleteEnabled ? undefined : accountDeleteEnabled
               ? "アカウント情報と全入力を削除します"
               : "現在、この機能は一時的に利用できません"
           }
@@ -270,6 +271,6 @@ export default function SettingsOtherScreen({ navigation }) {
         />
       </View>
       {localProcessing ? <Text style={localStyles.helperText} accessibilityLiveRegion="polite">処理しています…</Text> : null}
-    </AnalysisMenuScroll>
+    </Container>
   );
 }

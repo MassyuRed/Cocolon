@@ -44,7 +44,7 @@ function harness(options = {}) {
     threadVisible: false, threadBusy: false, threadMode: false,
     result: { id: INPUT, input_feedback: { comment_text: 'PRIVATE_EMLIS_BODY', emlis_ai: {} } },
     ...options };
-  const submits = [], notices = [], logs = [], threadIds = [], legacyCalls = [], tutorialSeeds = [], listeners = new Map();
+  const submits = [], notices = [], logs = [], threadOptions = [], threadIds = [], legacyCalls = [], tutorialSeeds = [], listeners = new Map();
   let entropyCalls = 0, writes = 0, mounted = false, cursor = 0, dirty = false, tree;
   const hooks = [], effects = [];
   const noop = () => {};
@@ -152,7 +152,7 @@ function harness(options = {}) {
     } };
     if (name === './input/useEmlisThread') return { useEmlisThread: () => ({ visible: control.threadVisible,
       busy: control.threadBusy, close: () => { control.threadVisible = false; control.threadBusy = false; },
-      open: async id => { threadIds.push(id); if (control.threadOpen) return control.threadOpen(id);
+      open: async (id, options) => { threadIds.push(id); threadOptions.push(clone(options)); if (control.threadOpen) return control.threadOpen(id);
         control.threadVisible = control.threadMode; return control.threadMode; } }) };
     if (name === './input/InputPieceActionArea') return { __esModule: true, default: Host };
     if (name === '../features/piece/pieceRenderer') return {
@@ -205,7 +205,7 @@ function harness(options = {}) {
     find('EmlisThreadModal')?.props.thread.close(); render();
   };
   render();
-  return { control, u, ref: f.ref, submits, notices, logs, threadIds, legacyCalls, tutorialSeeds, render, find, fill, finishObservation,
+  return { control, u, ref: f.ref, submits, notices, logs, threadIds, threadOptions, legacyCalls, tutorialSeeds, render, find, fill, finishObservation,
     navigation, slot: () => find(Host), entry: () => nodes(tree).find(n => n.props.testID === 'piece-saved-input-entry'),
     submit: () => find('InputActionArea').props.handleOk(),
     entropyCalls: () => entropyCalls, writes: () => writes,
@@ -737,3 +737,14 @@ for (const [name, change] of Object.entries(leaveTutorialSelection)) {
     assert.equal(h.legacyCalls.length, 0); h.dispose();
   });
 }
+
+for (const pending of [false, true]) test(`saved input forwards async pending marker to the GET reader (${pending})`, async () => {
+  const h = harness({ threadMode: true, result: { id: INPUT, input_feedback: pending ? {
+    comment_text: '', emlis_ai: { observation_status: 'unavailable', rejection_reasons: ['thread_reply_pending'] }
+  } : null } });
+  h.fill(); await h.submit(); h.render();
+  assert.equal(h.threadOptions.length, 1);
+  assert.equal(h.threadOptions[0].showNotCreated, pending);
+  assert.equal(h.threadOptions[0].waitForInitial, pending);
+  h.dispose();
+});

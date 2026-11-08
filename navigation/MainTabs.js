@@ -1160,10 +1160,18 @@ export default function MainTabs() {
     </TouchableOpacity>
   ) : null;
 
+  const settingsAccountAvatar = activeRouteName === "Settings" && activeLeafName === "Settings" ? (
+    <TouchableOpacity accessibilityRole="button" accessibilityLabel="アカウントを開く"
+      onPress={() => { if (navigationRef.isReady()) navigationRef.navigate("Settings", { screen: "Account" }); }}
+      style={{ width: 44, height: 44, borderRadius: 22, alignItems: "center", justifyContent: "center", backgroundColor: colors.FIELD_BG }}>
+      <Ionicons name="person-outline" size={19} color={colors.TITLE_GOLD} />
+    </TouchableOpacity>
+  ) : null;
+
   return (
     <View style={{ flex: 1 }}>
     <View style={{ flex: 1 }} accessibilityElementsHidden={!appStartupReady} importantForAccessibility={appStartupReady ? "auto" : "no-hide-descendants"}>
-    <GlobalFrameLayout frameEnabled={frameEnabled} headerBottomSlot={selfStructureBannerHud}>
+    <GlobalFrameLayout frameEnabled={frameEnabled} headerBottomSlot={selfStructureBannerHud} headerRightSlot={settingsAccountAvatar}>
       <Tab.Navigator
         backBehavior="history"
         initialRouteName="Input"
