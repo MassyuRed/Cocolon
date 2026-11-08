@@ -1847,3 +1847,5 @@ CI最終結果は下段に追記する。Render配置、実DB書込、RN／build
 **次はAR-01を継続する。** EM-01a/bの6境界と準備済み語順／二欄8教材、元の生成・学習ownerを引き継ぎ、役割・本人宛・独立述語・認識／留保・時点を同時に保つ実出力を改善する。今回使用した評価を教師へ移さず、reader拡張だけや同じprompt周回を完了にしない。原本・実messages・残差を保持して、別題材で修復と既成功を読む。AR-01全体、AR-02〜08、全必要資産の回収は未完了。「補助経路の活用作業を進めて」で本位置から継続する。
 
 CI確認（2026-11-08T10:45Z）：API a98c6e59 の[Piece SQL run42472059575](https://github.com/MassyuRed/mashos-api/actions/runs/42472059575)はsuccess。[Analysis observed content run42472059536](https://github.com/MassyuRed/mashos-api/actions/runs/42472059536)は進行中で、Analysis生成・保存検証を通過しshared owner identityへ進んでいる。進行中を成功に換算しない。
+
+CI最終確認（2026-11-08T10:51:24Z）：固定API a98c6e59 のAnalysis observed content run42472059536は全工程successで終了。新meaning／budget2suiteを含む既存保存・累積・report等の検証工程も成功。Piece SQL run42472059575もsuccess。上記進行中の記録は経緯として保持し、現状態は両CI成功。配置・実DB適用・本人実機確認はこのCI終了でも未実施のまま。
