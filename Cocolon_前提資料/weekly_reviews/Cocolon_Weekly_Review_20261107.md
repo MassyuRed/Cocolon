@@ -1443,3 +1443,14 @@ Mashの追加要望として、正常な新map保存後に固定文「わたし�
 RN source e2d7a7aのphase6-contract-guards42434396397はsuccess。Piece RN preview and owner contracts42434396442は6job中5success、RN contractsもsuccessだがiOS TextKit/CoreText metricsの既知V4だけfailure（20件中1 PASS／19 FAIL）。通知変更前4e776e2fの直近42428022739／job128570429086と、今回job128590034681の失敗19名称・順序が完全一致。native／recipe／checker／依存の差分0であり、新しい通知退行や全製品greenと呼ばない。この既知残件を通知実装の先行修復条件へ戻さない。既存FCM queueは本文／IDなし集計でdone179／failed23／queued0／running0。doneを実配送成功とせず、旧failedを再予約する操作もしていない。
 
 最終API59934fafのCI42434201873／job128589421043は全17step success、月次・immutable read・source削除失効SQLと最終facts検査も成功。旧8c5ce5eeはscreen互換追補前の履歴で、反映対象は59934fafへ固定する。RN候補はe2d7a7a、後続の資料だけ更新ではアプリsourceを変えない。実装・対象検証・原本のGitHub保存は完了、残るFCM資格共有・両service配置・RN統合TestFlight署名build／既存内部配布について具体的な候補でMashへ確認する。旧資格の値の再コピー確認や新しい鍵生成、外部group／tester追加／App Store公開は含めない。
+
+<a id="kokoro-weather-preview-20261108"></a>
+### 11/8 — こころ天気の目的確認と今日／週／月の画面案
+
+Mashは、当日の入力反映が実感できないことと、実機が添付Material参考案の円グラフ表示になっていない点を指摘。「今の天気」→「今日の天気」を基本とし、日内／週／月に本人入力の感情推移を天気予報風に見返す。文章は結果説明だけ、原因・性格分析は不要。週／月の図方式は華恋へ委ねた。
+
+現sourceにはJST当日の通常5感情を強さ1/2/3で直接集計するhome-summary.current_weatherがある。ただ時間別itemsは主画面未接続、日週月は保存report、月は最大4週itemsで、通常入力を同じ基準の今日／週／月へそろえる接続は未完成。source照合だけで実機不反映の直接原因を断定しない。
+
+表示案は今日の円グラフ＋4時間帯の小円グラフ／各入力時刻、週と月は日別100%積み上げ棒と選択日の内訳。月は今月の今日まで、前月は31日まで、欠測は空欄で未来を補完しない。割合へ感情の強さを反映し、自己理解は除外。配色は#F6F1E8／#5A1020／#800020。架空データで今日6入力・割合24/0/6/29/41%、週28／月32入力の切替を確認した。source構文、期間・時間帯・欠測・前月・keyboard操作とplot幅240/260/300/340をDOM模擬実行で確認し、独立reviewの目盛り端寄せ／枠幅を修復した。cloud browserのfile://表示はpolicy拒否で中止、他経路へ迂回せず描画確認済みとはしない。
+
+既存designs/ui/previewsにHTMLと編集元、同UI owner・全体現在地・本構造へ保存。表示案の採用・実装・本番反映・本人実機確認は未実施。アプリsource／API／DB／Render／GPU／署名build変更0。前段の通知配置承認待ちを、Mashの「ありがとう。次」で承認済みに変えず維持する。

@@ -1519,3 +1519,9 @@ RNは既存MainTabsのmap status確認とbannerを全プランへ接続し、for
 RN候補e2d7a7aはphase6 CI成功、既存Piece CIはRN contractsを含む5job成功・既知V4 iOS metricsの1job失敗。通知変更前4e776e2fの直近run42428022739と失敗19名称・順序が完全一致し、native／recipe／checker／依存差分0。通知の新退行や全製品greenへ換算せず、既知Piece残件の修復を今回通知の先行条件に追加しない。
 
 実装／局所検証／最終API CIは完了し、既存通知資格のworker登録・通知API／worker配置・対応RNの統合TestFlight署名build／既存内部配布の個別承認待ち。通知版の現live反映・実pushはまだ行っていない。
+
+### 2026-11-08 — こころ天気は感情推移の表示へ（表示案のみ）
+
+Mashの最新要望：基本を「今日の天気」にして、その日の感情状況を円グラフと時間別の変化で示し、週／月へ切替。目的は選択した感情の推移と短い結果説明で、原因・性格の意味分析や助言を足さない。現current_weatherはJST当日原入力を直接集計するが、時間帯itemsは通常home-summaryへ未接続。日／週／月は保存report経路、月は最大4週itemsで、日別表示には追加接続が必要。実機不反映の直接原因は未特定。
+
+華恋案は全体の円グラフ＋4時間帯の小円グラフ、週と月の日別100%積み上げ棒、選んだ日／時間の内訳。強さの重みと複数感情を保持し、自己理解は感情集計へ混ぜない。欠測を平穏や0点で補わず、未来は表示しない。default配色を保持した架空データの[表示案](../designs/ui/previews/20261108-kokoro-weather.html)と[編集元](../designs/ui/previews/20261108-kokoro-weather.source.html)を保存した。これは提案であり製品source・DTO・DB・API・本番配置の変更0、STRUCTURE_MAP_DELTA_NONE。UI承認や一般意味品質の受入れに換算せず、わたしマップの前段の通知反映承認待ちも維持する。
