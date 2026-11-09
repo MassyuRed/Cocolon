@@ -58,6 +58,7 @@ name: Piece RN preview and owner contracts
       - tests/fixtures/piece-b9-wrap-oracle.json
       - tests/native/piece-ios-react-shim.h
       - tests/native/piece-text-metrics-ios.mm
+      - tests/native/piece-ar04-adopted-native.json
       - tests/native/piece-rn-canvas-*
       - tests/native/run-piece-rn-canvas-ios.sh
       - package.json
@@ -207,6 +208,7 @@ jobs:
           TEST_DIR="$RUNNER_TEMP/piece-ios-source/native-unit"
           APP_DIR="$TEST_DIR/PieceNativeMetrics.app"
           mkdir -p "$TEST_DIR/include/React" "$APP_DIR"
+          cp tests/native/piece-ar04-adopted-native.json "$APP_DIR/"
           for header in RCTBridgeModule RCTBridge RCTUIManager RCTUIManagerUtils RCTTextView; do
             printf '#import "piece-ios-react-shim.h"\n' > "$TEST_DIR/include/React/$header.h"
           done
@@ -270,6 +272,10 @@ jobs:
           PIECE_NATIVE_LAUNCH_STATUS=$?
           set -e
           printf 'HOST_STAGE simctl_launch_end status=%s\n' "$PIECE_NATIVE_LAUNCH_STATUS"
+          APP_CONTAINER="$(xcrun simctl get_app_container "$DEVICE" com.cocolon.piece-native-metrics data 2>/dev/null || true)"
+          if [ -n "$APP_CONTAINER" ] && [ -d "$APP_CONTAINER/Documents/piece-ar04-native" ]; then
+            cp -R "$APP_CONTAINER/Documents/piece-ar04-native" "$TEST_DIR/ar04"
+          fi
           python3 - "$TEST_DIR/native-metrics.log" "$PIECE_NATIVE_LAUNCH_STATUS" <<'PY_RESULT'
           import pathlib, sys
           lines = pathlib.Path(sys.argv[1]).read_text(errors='replace').splitlines()
@@ -279,18 +285,30 @@ jobs:
           legacy_summaries = [line for line in lines if line.startswith('LEGACY_NATIVE_CHECKS=')]
           v9 = [line for line in lines if line.startswith('V9_NATIVE_CHECKS=')]
           v4 = [line for line in lines if line.startswith('V4_NATIVE_CHECKS=')]
+          ar04 = [line for line in lines if line.startswith('AR04_BITMAP_CHECKS=')]
           old_v3 = [line for line in lines if line.startswith('V3_NATIVE_CHECKS=')]
           unexecuted_v3 = [line for line in lines if line.startswith('UNEXECUTED_V3_NATIVE_CHECKS=')]
           passed = [line[5:] for line in lines if line.startswith('PASS ')]
+          ar04_passed = [name for name in passed if name.startswith('ar04_bitmap_')]
+          passed = [name for name in passed if not name.startswith('ar04_bitmap_')]
           if (int(sys.argv[2]) != 0 or summaries != [expected] or legacy_summaries != [legacy]
                   or v9 != ['V9_NATIVE_CHECKS=46 PASS=46 FAIL=0 SKIP=0 EXPECTED=46']
                   or v4 != ['V4_NATIVE_CHECKS=20 PASS=20 FAIL=0 SKIP=0 EXPECTED=20']
+                  or ar04 != ['AR04_BITMAP_CHECKS=4 PASS=4 FAIL=0 SKIP=0']
+                  or len(ar04_passed) != 4 or len(set(ar04_passed)) != 4
                   or old_v3 != []
                   or unexecuted_v3 != ['UNEXECUTED_V3_NATIVE_CHECKS=20 PRIOR_RUN=39565918631 PRIOR_FAIL=10']
                   or len(passed) != 195 or len(set(passed)) != 195
                   or any(line.startswith('FAIL ') for line in lines)):
               raise SystemExit('Native metrics did not finish the unchanged175 and newV4_20 with195 unique PASS; oldV3_20 is explicitly unexecuted')
           PY_RESULT
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: piece-ar04-native-bitmap
+          path: ${{ runner.temp }}/piece-ios-source/native-unit/ar04
+          if-no-files-found: error
+          retention-days: 7
 
   piece-ios-rn-canvas:
     if: github.repository == 'MassyuRed/Cocolon'

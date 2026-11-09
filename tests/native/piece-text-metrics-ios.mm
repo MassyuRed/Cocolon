@@ -1537,6 +1537,94 @@ static BOOL runBitmapChecks(PieceTextMetrics *module,RCTBridge *bridge) {
   return bitmapFailures==0;
 }
 
+// One recorded fictional AR-04 artifact through the SAME adopted bitmap
+// operation. Fixed rows are test inputs, not RN/B9 wrapping acceptance; the
+// transparent glyph layer does not include the Card's themed background.
+static BOOL runAR04BitmapPairChecks(PieceTextMetrics *module, RCTBridge *bridge) {
+  printf("STAGE ar04_bitmap_pair_begin\n");
+  __block NSUInteger checks=0, failures=0;
+  void (^record)(NSString *,BOOL)=^(NSString *name,BOOL pass){
+    checks++;if(!pass)failures++;printf("%s ar04_bitmap_%s\n",pass?"PASS":"FAIL",name.UTF8String);fflush(stdout);
+  };
+  NSString *path=[NSBundle.mainBundle pathForResource:@"piece-ar04-adopted-native" ofType:@"json"];
+  NSData *fixtureBytes=path?[NSData dataWithContentsOfFile:path]:nil;
+  NSDictionary *fixture=fixtureBytes?[NSJSONSerialization JSONObjectWithData:fixtureBytes options:0 error:nil]:nil;
+  NSDictionary *preview=fixture[@"preview"],*detail=fixture[@"detail"];
+  NSArray *rows=fixture[@"native_rows"],*blocks=detail[@"content_payload"][@"body_blocks"];
+  BOOL identity=[fixture[@"schema_version"]isEqual:@"piece.ar04_native_bitmap_pair_fixture.v1"] &&
+    [rows isKindOfClass:NSArray.class]&&rows.count==3&&blocks.count==1&&
+    [[rows componentsJoinedByString:@""]isEqual:detail[@"piece_text"]]&&[blocks[0]isEqual:detail[@"piece_text"]];
+  for(NSString *field in @[@"format_type",@"piece_text",@"piece_text_hash",@"content_payload",@"content_payload_hash",@"visual_recipe",@"visual_recipe_hash",@"renderer_version"])
+    identity=identity&&preview[field]&&[preview[field]isEqual:detail[field]];
+  NSDictionary *recipe=detail[@"visual_recipe"];
+  identity=identity&&[detail[@"format_type"]isEqual:@"short_essay"]&&[detail[@"renderer_version"]isEqual:@"piece.rn_bitmap_renderer.ios.v2"]&&
+    [recipe[@"aspect_ratio"]isEqual:@"4:5"]&&[recipe[@"theme"][@"theme_id"]isEqual:@"soft_paper"]&&
+    [recipe[@"branding"][@"branding_mode"]isEqual:@"required_small"]&&[recipe[@"font_style"][@"font_style_id"]isEqual:@"system_readable"];
+  record(@"source_and_recipe_identity",identity);
+  UIWindow *window=[[UIWindow alloc]initWithFrame:UIScreen.mainScreen.bounds];window.rootViewController=[UIViewController new];[window makeKeyAndVisible];
+  UIView *parent=window.rootViewController.view;
+  NSString *directory=[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES).firstObject stringByAppendingPathComponent:@"piece-ar04-native"];
+  BOOL directoryReady=[NSFileManager.defaultManager createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:nil];
+  NSMutableArray *images=[NSMutableArray new],*pngs=[NSMutableArray new];
+  NSArray *variants=@[@"preview",@"saved"];
+  for(NSUInteger variant=0;variant<2;variant++){@autoreleasepool{
+    NSDictionary *artifact=variant?detail:preview;
+    PieceBitmapCanvasView *host=[[PieceBitmapCanvasView alloc]initWithFrame:CGRectMake(0,0,1080,1350)];[parent addSubview:host];
+    NSMutableDictionary *registry=[NSMutableDictionary dictionaryWithObject:host forKey:@2];
+    NSMutableArray *sources=[NSMutableArray new],*requestRows=[NSMutableArray new];
+    if(identity){
+      // Reconstruct each variant independently, after proving every fixed
+      // row is a contiguous source substring and the full body is unchanged.
+      NSString *text=artifact[@"piece_text"];NSUInteger offset=0;
+      for(NSUInteger index=0;index<4;index++){
+        BOOL brand=index==3;NSString *part=brand?@"Emlis":rows[index];
+        if(!brand){if(offset+part.length>text.length||![[text substringWithRange:NSMakeRange(offset,part.length)]isEqual:part])identity=NO;offset+=part.length;}
+        NSNumber *tag=@(index==0?1:index+2);CGFloat font=brand?28:48;
+        RCTTextView *source=makeView(part,font);source.fixtureRequiresRealWindow=YES;[parent addSubview:source];
+        source.frame=CGRectMake(0,0,1080,140);source.fixtureContentFrame=CGRectMake(brand?0:96,0,888,140);
+        // soft_paper's existing body/branding colors, checked against the
+        // actual palette by the paired JS fixture test.
+        UIColor *color=brand?[UIColor colorWithRed:128.0/255 green:0 blue:32.0/255 alpha:1]:[UIColor colorWithRed:17.0/255 green:24.0/255 blue:39.0/255 alpha:1];
+        [source.fixtureStorage addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0,part.length)];
+        NSLayoutManager *layout=source.fixtureStorage.layoutManagers.firstObject;NSTextContainer *container=layout.textContainers.firstObject;
+        container.size=source.fixtureContentFrame.size;[layout ensureLayoutForTextContainer:container];
+        double width=[layout usedRectForTextContainer:container].size.width;
+        registry[tag]=source;[sources addObject:source];
+        [requestRows addObject:@{@"tag":tag,@"text":part,@"font_size":@(font),@"width":@1080,@"height":@140,@"line_width":@(width),@"gap_after":@0,@"kind":brand?@"branding":@"body"}];
+      }
+      identity=identity&&offset==text.length;
+    }
+    host.bitmapBinding=[@"ar04-recorded-"stringByAppendingString:variants[variant]];
+    NSDictionary *request=@{@"version":@"piece.native_bitmap_canvas.v1",@"profile":@"piece.rn_bitmap_preview.prototype.v1",@"canvas_tag":@2,
+      @"preview_key":artifact[@"piece_text_hash"]?:@"missing",@"binding_token":host.bitmapBinding,@"expires_at_ms":@(NSDate.date.timeIntervalSince1970*1000+8000),@"remaining_ms":@8000,
+      @"width":@1080,@"height":@1350,@"margin":@96,@"branding_zone":@72,@"content_width":@888,@"content_height":@1086,
+      @"line_height":@75,@"total_height":@225,@"alignment":@"left",@"branding_mode":recipe[@"branding"][@"branding_mode"]?:@"missing",@"rows":requestRows};
+    bridge.uiManager.registry=registry;NSString *code=nil;
+    NSDictionary *reply=identity?bitmapCall(module,request,&code):nil;
+    CGImageRef image=(__bridge CGImageRef)host.bitmapImage;
+    CFDataRef data=image?CGDataProviderCopyData(CGImageGetDataProvider(image)):NULL;
+    NSData *pixels=data?CFBridgingRelease(data):nil;
+    NSData *png=image?UIImagePNGRepresentation([UIImage imageWithCGImage:image]):nil;
+    BOOL saved=directoryReady&&png&&[png writeToFile:[directory stringByAppendingPathComponent:[variants[variant]stringByAppendingString:@".png"]]atomically:YES];
+    BOOL valid=identity&&code==nil&&[reply[@"checked"]isEqual:@YES]&&[reply[@"overflow"]isEqual:@NO]&&[reply[@"rows"]count]==4&&
+      host.layer.contents==host.bitmapImage&&image&&CGImageGetWidth(image)==1080&&CGImageGetHeight(image)==1350&&pixels.length==1080*1350*4&&saved;
+    record([variants[variant]stringByAppendingString:@"_owned_canvas"],valid);
+    if(pixels)[images addObject:pixels];if(png)[pngs addObject:png];
+    [host clearBitmap];for(RCTTextView *source in sources)[source removeFromSuperview];[host removeFromSuperview];
+  }}
+  BOOL same=images.count==2&&pngs.count==2&&[images[0]isEqualToData:images[1]]&&[pngs[0]isEqualToData:pngs[1]];
+  NSDictionary *report=@{@"source_case_id":fixture[@"source_case_id"]?:@"missing",@"variant":fixture[@"variant"]?:@"missing",@"tier":fixture[@"tier"]?:@"missing",
+    @"piece_text_hash":detail[@"piece_text_hash"]?:@"missing",@"content_payload_hash":detail[@"content_payload_hash"]?:@"missing",@"visual_recipe_hash":detail[@"visual_recipe_hash"]?:@"missing",
+    @"renderer_version":detail[@"renderer_version"]?:@"missing",@"checks":@(checks+1),@"failures":@(failures+(same?0:1)),@"preview_saved_rgba_and_png_equal":@(same),
+    @"scope":fixture[@"scope"]?:@"missing"};
+  NSData *reportBytes=[NSJSONSerialization dataWithJSONObject:report options:NSJSONWritingPrettyPrinted error:nil];
+  BOOL reportSaved=directoryReady&&reportBytes&&[reportBytes writeToFile:[directory stringByAppendingPathComponent:@"result.json"]atomically:YES];
+  record(@"preview_saved_rgba_and_png_equal",same&&reportSaved);
+  window.hidden=YES;
+  printf("AR04_BITMAP_CHECKS=%lu PASS=%lu FAIL=%lu SKIP=0\n",(unsigned long)checks,(unsigned long)(checks-failures),(unsigned long)failures);
+  return checks==4&&failures==0;
+}
+
 static int runNativeMetricsChecks(void) {
   @autoreleasepool {
     printf("iOS native metrics source test; synthetic RN boundary; real UIKit/TextKit/CoreText\n");
@@ -1781,6 +1869,7 @@ static int runNativeMetricsChecks(void) {
       (unsigned long)(checks-failures), (unsigned long)failures);
     runV5Checks(module, bridge);
     BOOL v9Passed = runV9Checks(module, bridge);
+    BOOL ar04Passed = runAR04BitmapPairChecks(module, bridge);
     NSString *profile=NSProcessInfo.processInfo.environment[@"PIECE_NATIVE_CONTAINMENT_PROFILE"];
     BOOL candidatePassed=NO;
     if ([profile isEqual:@"output-grid-v4"]) {
@@ -1794,7 +1883,7 @@ static int runNativeMetricsChecks(void) {
     printf("NATIVE_CHECKS=%lu PASS=%lu FAIL=%lu SKIP=0\n", (unsigned long)checks,
       (unsigned long)(checks-failures), (unsigned long)failures);
     BOOL bitmapPassed=runBitmapChecks(module,bridge);
-    return failures || !v9Passed || !candidatePassed || !bitmapPassed ? 1 : 0;
+    return failures || !v9Passed || !candidatePassed || !bitmapPassed || !ar04Passed ? 1 : 0;
   }
 }
 

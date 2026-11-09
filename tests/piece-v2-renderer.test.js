@@ -13,6 +13,46 @@ const copy = value => JSON.parse(JSON.stringify(value));
 const canonical = value => Array.isArray(value) ? value.map(canonical) : value && typeof value === 'object'
   ? Object.fromEntries(Object.keys(value).sort().map(k => [k, canonical(value[k])])) : value;
 const hash = value => crypto.createHash('sha256').update(value).digest('hex');
+
+// Recorded fictional AR-04 output: actual SQL preview/detail canonical fields,
+// synthetic public preview envelope only. Native pixels are checked separately
+// by the existing UIKit metrics host, not by this native-double JS suite.
+test('AR04 actual 4B preview and saved detail preserve the same adopted bitmap input', async () => {
+  const fixture = require('./native/piece-ar04-adopted-native.json');
+  const { preview, detail } = fixture;
+  const fields = ['format_type', 'piece_text', 'piece_text_hash', 'content_payload',
+    'content_payload_hash', 'visual_recipe', 'visual_recipe_hash', 'renderer_version'];
+  for (const field of fields) assert.deepEqual(preview[field], detail[field], field);
+  assert.equal(fixture.native_rows.join(''), detail.piece_text);
+  assert.equal(hash(detail.piece_text), detail.piece_text_hash);
+  assert.equal(hash(JSON.stringify(canonical(detail.content_payload))), detail.content_payload_hash);
+  assert.equal(hash(JSON.stringify(canonical(detail.visual_recipe))), detail.visual_recipe_hash);
+  const packet = sample(detail.format_type);
+  packet.quota = { ...packet.quota, subscription_tier: 'free', save_limit: 5, saved_count: 2, remaining_count: 3 };
+  packet.plan_capabilities = { format_selection: 'fixed', theme_ids: ['soft_paper'], aspect_ratios: ['4:5'], branding_modes: ['required_small'] };
+  for (const field of fields) packet[field] = copy(preview[field]);
+  // Service-level preview lacks the existing HTTP envelope. Reuse that test
+  // envelope without replacing any recorded body, recipe, hash or renderer.
+  for (const field of ['preview_id', 'preview_revision', 'row_version', 'expires_at', 'eligible_formats']) packet[field] = copy(preview[field]);
+  const h = bitmapHarness(value => value, { packet, version: detail.renderer_version });
+  const drawing = h.input(), saved = h.preparePieceNativeSavedDisplay(detail);
+  assert.ok(drawing); assert.ok(saved);
+  const withoutKey = input => { const value = copy(input); delete value.key; return value; };
+  assert.deepEqual(withoutKey(drawing), withoutKey(saved));
+  assert.deepEqual(copy(h.preparePieceNativeCard({ savedRecord: detail, exportCanvas: true })), copy(saved));
+  assert.equal(drawing.rendererVersion, 'piece.rn_bitmap_renderer.ios.v2');
+  assert.equal(drawing.brandingText, 'Emlis');
+  assert.equal(drawing.colors.text, '#111827');
+  assert.equal(drawing.colors.branding, '#800020');
+  assert.deepEqual(copy(drawing.blocks), detail.content_payload.body_blocks);
+  await finishBitmap(h);
+  assert.equal(h.card.state.measurement.phase, 'native_checked');
+  const rows = h.bitmapCalls[0].rows;
+  assert.equal(rows.filter(row => row.kind === 'body').map(row => row.text).join(''), detail.piece_text);
+  assert.equal(rows.at(-1).text, 'Emlis');
+  assert.equal(h.fit().isCurrent(packet, h.token), true);
+  h.card.componentWillUnmount();
+});
 function sample(format = 'short_essay', ratio = '4:5', theme = 'soft_paper', brand = 'required_subtle') {
   const prefix = fs.readFileSync(path.join(__dirname, 'piece-v2-preview-display.test.js'), 'utf8').split('function deferredPieceResponse')[0];
   const context = vm.createContext({ require, __dirname });
