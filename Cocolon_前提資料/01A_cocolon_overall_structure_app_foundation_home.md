@@ -6282,3 +6282,18 @@ API `1ed4ca27da71ddca510d1ad035b1f0fd7703b1ab`の7path、続行`cfd3d60d476a1e6f
 | `.github/workflows/piece-b2b-isolated-postgres.yml` | 既存model検証へ新THEN testを追加 |
 
 編集plan併記案のschema／prompt／service／新testは実比較で本文差0のため通常採用せず撤回。実結果・資格訂正・残件は[既存trial](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-eligible-refined-4b-20261109)。
+
+### 2026-11-09 AR-04 生成制約のPiece接続（APIa08c003c）
+
+既存共有serverのdecoder能力をPiece専用private要求へ接続。新service／selector／公開DTO／DB列／RN pathはない。6path。
+
+| Path | 今回の差分 |
+|---|---|
+| `ai/tools/serve_emlis_natural_reply.py` | 既存LMFEのexact欄＋補足先行mask。自然Emlis／Analysisは旧呼出し・応答を維持 |
+| `ai/services/ai_inference/piece_model_source.py` | private candidate_format要求と実適用markerの一致を必須化、旧server無視を拒否 |
+| `ai/tests/test_piece_model_server_constraints.py` | 新37件。実pinned parser／HTTP／serving closure／順序とEOS、onegenerate・budget互換 |
+| `ai/tests/test_piece_model_source.py` | request marker・欠落／別型／別値／旧server拒否、raw無修補・単発維持 |
+| `ai/tests/piece_v2/test_b05_piece_model_saved_pipeline.py` | 合成固定responseのみ新markerを明示、旧録画へ自動付与しない |
+| `.github/workflows/piece-b2b-isolated-postgres.yml` | 既存pinned GPU parser依存をCPU検証へ導入し新testを実行、Render依存不変 |
+
+最終GPU提供source SHA256 5e3d43637ab8c8c541c1e56a74401c5d6d17dcedcdc5aa187448055cb2a3bcd3。実比較・保存再読・限界は[既存trial](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-ordered-decoder-20261109)。

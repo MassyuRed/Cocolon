@@ -329,4 +329,25 @@ API `5c042ed5107d15aef43ff6149279c796d5c45808`、8path。既存`emlis_answer_upd
 
 原本：`Cocolon_CMEE_AR04_EligibleRefined4B_20261109.private.json`。全8送信messages／exact raw／finish／source資格probe／正規Q2状態／保存再読／拒否時DB・quota不変／不採用編集案と原本digestを同梱。新材料は開発用架空値でblindではなく、Mash正式受入れとは別。
 
-[Piece CI42580879839](https://github.com/MassyuRed/mashos-api/actions/runs/42580879839)は全工程success、job129039028812のmodel9fileは399 PASS／既存warning1／25.00秒。Analysis CI42580879705は確認時点で実行中。
+[Piece CI42580879839](https://github.com/MassyuRed/mashos-api/actions/runs/42580879839)は全工程success、job129039028812のmodel9fileは399 PASS／既存warning1／25.00秒。[Analysis CI42580879705](https://github.com/MassyuRed/mashos-api/actions/runs/42580879705)も後続確認で全工程success。
+
+<a id="piece-ordered-decoder-20261109"></a>
+## 11/9 既存decoder制約と補足先行の生成順をPieceへ再利用
+
+API `a08c003c50919db33076dfc66e1a582e5488c354`、6path。既存Analysis servingのLMFE817f944／TokenizerData／prefix token maskをPiece専用の明示private `candidate_format=piece.field_slots.v1`へ再利用。field_slotsから必須1〜3key集合・追加key禁止・非空の自由stringを導き、Pieceだけ本人補足→元欄global index順を生成中に固定する。原文enum・旧作者正文・欄別追加推論・prompt追加・受領後のsplit／修補／fallbackはない。公開canonical本文は従来のpartition順へ戻し、PreparedRequest／全source／legacy receiver／保存後0生成を保持する。
+
+新providerは実適用markerの一致を必須とし、旧serverの要求無視・marker欠落をPROVIDER_ERRORで拒否する。marker無しの通常Emlis／Analysisの引数形と応答bytesは維持。Pieceは既存natural鍵・同base、2048token／8192context／既存23秒推論枠・queueを用い、model.generateは各HTTP一回。LMFE未初期化なら生成前拒否。共有model/adapter/認証値/起動引数は保持し、GPU提供コードを同重みで2回差替えた。最終PID31933／source SHA256 `5e3d43637ab8c8c541c1e56a74401c5d6d17dcedcdc5aa187448055cb2a3bcd3`、health正常。APIのRender配置・selector有効化は行っていないため、アプリ通常提供の反映完了ではない。
+
+実12call＝旧契約baseline2＋順不同mask4＋補足先行mask6、全HTTP200／stop。baselineの同PAST／NOW rawは前回と完全一致。順不同maskは4/4必須欄を出したが、元NOWはmemo内混入＋回答重複が残り、隔離SQLで3planとも保存前拒否・quota0。既存field-order制御で補足を先に生成すると、同NOWの本文を原入力・回答へ正しく分離できた。最終6例（refined4／normal2）は全て意味保持し、同じ実rawを新しい等価な合成sourceへ厳密再bindして6×3plan＝18件のpreview→save→再送／新service非生成再読に成功。refined12件は見た目変更後も同本文。本文・recipe等は保存版を維持、各quota1、原入力／Emlis不変。実GPUのoriginal PreparedRequest IDを実DBへ保存した証明ではなく、隔離PGlite・合成Auth／HTTPで既存通常ownerを通した確認である。
+
+形式を満たす値の意味まではdecoderが保証しない。欄内混入、否定・時点・程度・他者・追加等は現在のreceiver／CMEE／S7で引き続き独立拒否する。今回の同6例は開発材料でblind一般化ではない。本文の語は原文維持で、一般文章の整形品質改善やMash正式受入れへ換算しない。旧不適格NEW_REFINEDを通常保存成功へ戻さない。
+
+最終19file637 PASS／51.89秒・既存warning1、FAIL／SKIP0。既存GPU用の固定parser依存だけをCIのCPU検証にも使い、Render依存は増やさない。中間630／独立138等は加算しない。生成loopは18.335122秒＋18.901216秒、起動は各約19.015秒、model load／提供再起動各2、学習／自動retry0、usage／revision／総請求unknown。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT・正式商品品質credit0。一般再構成・広い材料／欄混合の残差、API本番／RN統合／同版native画像／本人端末、他ARは残件。
+
+比較の因果：同じ旧2messages・source bytes・重みで、baselineのPAST成功／NOW欄欠落が完全再現した。第一変更は生成時のexact key制約だけで、NOWの欄は揃うが値の混入が残った。第二変更は同じschemaの生成順だけを補足先行へ固定し、同NOWの混入・回答重複を解消した。新否定／程度例とnormal二欄／焦点例も意味を保持。raw objectのkey順が変わっても、公開本文・保存本文の元→回答順は維持した。表示品質を原文コピーから一般作品へ改善した比較ではない。
+
+旧録画responseはmarkerを自動追加しないため、新providerでは旧契約として拒否される。今回のdecoder実適用証拠は、新serverのmarker付きHTTP response／exact rawと対応sourceだけに限定。既存保存済み本文やlegacy CandidateReceiptを再生成・再判定へ戻さない。
+
+原本：`Cocolon_CMEE_AR04_OrderedDecoder4B_20261109.private.json`。全12request／raw、旧比較、入力資格、段階別SQL再読／拒否、同重み差替え情報・最終source digestと検証を収録。最終sourceはAPI commitへ参照し、Git管理の製品コードを別保存の正本へ複製しない。
+
+[Piece CI42584857085](https://github.com/MassyuRed/mashos-api/actions/runs/42584857085)は全工程success、job129052116528のmodel10fileは442 PASS／既存warning1／42.13秒。新parserは実pinned依存でskipせず実行。Analysis CI42584857044は確認時点で実行中。

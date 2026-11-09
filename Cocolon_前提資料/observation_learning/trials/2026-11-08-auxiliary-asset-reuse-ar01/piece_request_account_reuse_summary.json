@@ -689,6 +689,118 @@
       },
       "analysis": {
         "run": 42580879705,
+        "status": "completed",
+        "conclusion": "success"
+      }
+    }
+  },
+  "piece_ordered_decoder_20261109": {
+    "api": "a08c003c50919db33076dfc66e1a582e5488c354",
+    "parent": "5c042ed5107d15aef43ff6149279c796d5c45808",
+    "unique_api_paths": 6,
+    "structure_delta": "STRUCTURE_MAP_DELTA_PRESENT",
+    "formal_product_quality_credit": 0,
+    "reuse": [
+      "existing pinned LMFE TokenizerData/JsonSchemaParser/prefix token mask",
+      "existing strict JSON field-order config",
+      "existing source slots and independent CMEE/S7",
+      "existing ordinary save/replay owners"
+    ],
+    "contract": {
+      "candidate_format": "piece.field_slots.v1",
+      "application_marker_required": true,
+      "legacy_response_marker_auto_added": false,
+      "one_generate_per_http": true,
+      "prompt_changed": false,
+      "prepared_changed": false,
+      "original_enum": false,
+      "raw_repair": false,
+      "after_save_generation": 0,
+      "render_dependency_changed": false
+    },
+    "actual": {
+      "model_calls": 12,
+      "baseline_calls": 2,
+      "unordered_calls": 4,
+      "ordered_calls": 6,
+      "all_http_200_stop": true,
+      "baseline_raw_equals_previous": true,
+      "unordered_format_complete": 4,
+      "unordered_meaning_preserved": 3,
+      "ordered_format_complete": 6,
+      "ordered_meaning_preserved": 6,
+      "new_now_case_recovered": true,
+      "blind_generalization": false,
+      "prose_reconstruction_quality_improvement": false,
+      "usage": null,
+      "revision": null,
+      "bill": null,
+      "loops_seconds": [
+        18.335122416960075,
+        18.901216208934784
+      ]
+    },
+    "saved": {
+      "unordered_saved_cases": 9,
+      "unordered_rejected_cases": 3,
+      "ordered_saved_cases": 18,
+      "ordered_sources": 6,
+      "tiers": 3,
+      "identity": "recorded actual raw strictly rebound to fresh equivalent synthetic source identities",
+      "database": "isolated PGlite",
+      "auth": "synthetic",
+      "gpu_original_request_saved_live": false,
+      "quota_each": 1,
+      "original_and_emlis_unchanged": true
+    },
+    "tests": {
+      "selected_files": 19,
+      "passed": 637,
+      "failed": 0,
+      "skipped": 0,
+      "warning": 1,
+      "seconds": 51.89,
+      "intermediate_not_added": true
+    },
+    "runtime": {
+      "server_restarts": 2,
+      "model_loads": 2,
+      "training": 0,
+      "retries": 0,
+      "boot_seconds": [
+        19.01549852010794,
+        19.015081077814102
+      ],
+      "pid": 31933,
+      "server_sha256": "5e3d43637ab8c8c541c1e56a74401c5d6d17dcedcdc5aa187448055cb2a3bcd3",
+      "health": true,
+      "adapter_identity_preserved": true,
+      "credentials_preserved": true,
+      "render_deploy": 0,
+      "selector_enable": 0,
+      "live_db_mutations": 0,
+      "rn": 0,
+      "build": 0,
+      "distribution": 0
+    },
+    "evidence_filename": "Cocolon_CMEE_AR04_OrderedDecoder4B_20261109.private.json",
+    "next": [
+      "general prose reconstruction preserving meaning",
+      "broader field/source mixture cases",
+      "Render API/selector, integrated RN, same bitmap and device remain separate"
+    ],
+    "ci": {
+      "piece": {
+        "run": 42584857085,
+        "job": 129052116528,
+        "status": "completed",
+        "conclusion": "success",
+        "model_files": 10,
+        "model_pass": 442,
+        "model_seconds": 42.13
+      },
+      "analysis": {
+        "run": 42584857044,
         "status": "in_progress",
         "conclusion": null
       }
