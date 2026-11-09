@@ -4,7 +4,7 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-09 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR01_IN_PROGRESS_NATIVE_STATE_REPLY_ROLE_DIRECTION_UNRESOLVED
+status: AR01_IN_PROGRESS_ROLE_AND_PRIORITY_REPLY_REALIZATION_UNRESOLVED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
@@ -396,21 +396,21 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 ### 11.2 現在の進行欄
 
-| 項目 | 2026-11-09 AR-01行候補拒否・native明記状態から4実本文、役割方向が残件 |
+| 項目 | 2026-11-09 AR-01役割結合＋本文優先度から8実本文、方向反転が継続 |
 |---|---|
-| 継承と目的 | §30の形式／対象束縛失敗を継承。旧named／fixed-rowの資格を緩めず、strict JSON・cell型・alias・quote位置検査を回収し、欄／対象／根拠／状態／originの5セル研究形式を実装 |
-| 実モデル候補 | 同じ架空4入力で4意味生成、全HTTP200／stop・13.755984秒、全INVALID_FORMAT・モデル意味採用0・モデル採用由来本文0。裸識別子／欠けたcellに加え全文targetや根拠欠落があり、raw修補はしない |
-| 別比較のnative接続 | 同じ既存有限readerで4sourceから7明記状態をderiveし、現受領→snapshot再開→現単一作者へ接続。provider CMEE_NATIVE_FINITE_WRITTEN_STATE、model/revision/usage null、stopはadapter完了標識。モデルraw／独立意味確認ではない |
-| 実本文と採否 | native4本文を全HTTP200／stop・8.656391秒で取得。未記載→未決定追加は消えたがNI／TRANSFER06は頼まれた人→依頼者へ反転し既知依頼者を未記載化。KARAは受容態度の読み足し留意、EXPLICIT_SELFは意味保持。通常不採用 |
-| 実行の上限 | 新call8・累計比較処理22.412378秒、max8／240秒内。基準は前回actual18の4実本文を再利用・新基準生成0。元8sourceの通常材料／SYSTEM／refは全不変、実tokenizer最大1058input・切詰めなし |
-| 局所検証と読解 | 最終434 PASS・18.21秒・既存warning1。root・独立担当が4原入力の全項目／row4raw／native4snapshot7状態／前後8本文を全文確認。モデル候補採用成功・商品合格へ換算しない |
-| 保存再読 | 旧基準4＋新native4本文が全FINAL保存・同／新service GET一致、語句書換え／実DB要求／再生成0。GET provider／reader／Engine／prepare／意味採用・受領0、USER source／GET thread/events不変 |
-| SQL投影と限定 | native4は同rawを既存SQL投影へ再受領・再採用、packet／意味値不変で参照を再導出。本文payload1一致／target_refだけ異なる3は別recordに保持し、その変更後payloadで実生成済みとはしない。source refs合計2一致／投影差6。通常meaning checkpoint永続化は未実証 |
-| reader | 保存8report全未判定、18節checked0・全文coverage=false。保存・native内部整合・短い言換えを一般意味品質へ換算しない |
-| 提供と保全 | 学習／新load／retry／server再起動0。同PID26784／source／Analysis重み不変・health200。全原本・2版差分・読解・SQL等を同artifactのversion1へ保全、47member／204839bytes。総請求額未測定 |
-| 次の同一商品単位 | 既存meaning ownerで依頼者／頼まれた人の能動・受動方向を別命題として保持し、対象付き認識状態とともに現単一作者へ渡す。自由JSON／row指示周回、raw修補、native→モデル成功の換算はしない |
-| 再開記録 | weekly第10回§31、[全結果と範囲](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/target_epistemic_rows_review.md)／[集計](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/target_epistemic_rows_summary.json) |
-| 通常と残件 | API c6555fd5・通常採用false、配置／実DB／RN/build0。研究patch保全のみでSTRUCTURE_MAP_DELTA_NONE。primary BLOCKER_NARROWED・新商品品質credit0。AR-01・AR-02〜08・必要全資産活用・端末／正式受入れ未完了。AR-02は一般AR-01完成の全面待ちにしないが今回未着手 |
+| 回収と改修 | 旧finite `_clauses/_FORMS/_participant`で正過去依頼のrequester／asked_personを別slot化。同一eventと対象状態を結合。旧content_selectionから意味不変・別ref-planの表示選択責務を回収し、NOT_RECORDED=context_onlyは現natural向け研究policyとして区別 |
+| 意味と限定 | 4sourceの7状態・4event・受け手束縛3。省略はUNSTATED、単一event・全節被覆。複数依頼／未読節／曖昧関係節／未対応target／既知slot矛盾はHOLD。旧status snapshotは不変、role再開で全意味を原文から再導出 |
+| nativeの資格 | provider CMEE_NATIVE_FINITE_WRITTEN_STATE、model/revision/usage null、stopはadapter標識。モデルraw／意味採用／独立一般意味判定ではない。同4snapshotを2phaseで使用 |
+| 実生成 | role4本文7.037912秒＋priority4本文7.434972秒、計8／累積時計14.472886秒、上限8／240秒内。全HTTP200／stop。前回native4実本文を基準再利用、新基準生成0 |
+| 実本文と採否 | NIは受け手未記載→依頼者未記載の反転が両版で継続。TRANSFER06は役割反転＋未記載→未決定、両版の本文byte同一。KARAは意味保持・priority版は反復増。SELFは未決定保持、priority版は一人称的感情再述で語り手留意。通常不採用 |
+| 表示選択の境界 | 全原文／状態／roleを保持し、参照と優先度のみ別plan。context_onlyでも推測禁止、foreground全件再掲義務なし。plan＋SYSTEMを同時変更し単独因果は未分離。対象への言及自体でなく実際の反転を失敗理由とする |
+| 検証と読解 | 最終491 PASS／22.24秒・既存warning1。元8通常messages/ref不変・旧4status snapshot不変・priority falseのrole4messages不変。各93source、実tokenizer最大1247／1212input・切詰めなし。root／独立担当が4source・旧4／新8本文等を全文確認 |
+| 保存再読 | 新8実本文が全FINAL保存・同／新service GET一致。既存外側空白除去以外の本文修補／実DB要求／再生成0。GET provider／reader／Engine／prepare／意味採用・受領0、USER source／thread/events不変 |
+| SQL投影と限定 | 同rawを既存SQL投影へ再受領・role意味再導出。新8payloadは2一致／target_refだけ異なる6を別保全し、その変更後payloadで実生成済みとはしない。pure/private role snapshotを通常meaning checkpoint永続化へ換算しない。reader8は一般意味未判定・全文coverage=false |
+| 提供・保全 | 学習／新load／retry／server再起動0。同PID26784／source／Analysis重み不変・health200。role最初の梱包漏れは生成0のCPU事前検査で検出・依存補完し失敗logも保全。private同artifact準備v0→結果v1、総請求額未測定 |
+| 次の同一商品単位 | 意味材料が正しく届いても完成rawで崩れる境界へ限定。同種label／SYSTEM追加周回を終了し、既存meaning→現作者の依頼方向・対象状態・語り手の自然文実現を改修。能受動／明記省略／状態対照、成功control、別題材評価。容量／学習等の原因は未断定 |
+| 再開記録 | weekly第10回§32、[全結果・範囲・次作業](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/request_role_binding_review.md)／[本文なし集計](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/request_role_binding_summary.json) |
+| 通常と残件 | API作業source c6555fd5・通常採用false、配置／実DB／RN/build0。研究patch保全のみSTRUCTURE_MAP_DELTA_NONE。primary BLOCKER_NARROWED・新商品品質credit0。AR-01〜08・必要全資産活用・端末／正式受入れ未完了、AR-02の全面待ちは設けないが今回未着手 |
 
 以後はこの表と各能力の対応行を現在状態へ置換更新し、詳細な実行事実は既存trial／weeklyへ置く。新しいhandoff系列・全件hash Gateを作らない。中断時も、成果物と未実行を既存保存先へ残し、同じ未完商品単位から続ける。
 
@@ -601,3 +601,4 @@ API `497f7008fec8935885d09d2e430499892189b5bb`で、以下のsource抜粋とsymb
 - 巨大な旧migration詳細06の全文と全symbolの意味監査は完了していない。本文取得できた上位設計・Disposition・現map・現sourceを根拠に本書を設計し、各実装単位で必要原本を確認する。未取得を「存在しない」「移管不要」「全文理解済み」にしない。
 - 本書は自由文の一般意味検査、通常追加model reader、全三中核の意味品質、実費・待ち時間の改善を実証していない。sourceの正規化／引用一致、表の完全性、文書保存をその代用にしない。
 - **最初の設計保存時点**の構造差分は、回収・改修・商品接続の設計と再開導線だけで、その時点では製品の作者・API・DB・RN・provider・稼働設定を変えていなかった。その後のAR-01ではa98c／e14の候補source変更、研究opt-inの実生成比較、private保存・再読へ進んでいる。現在の実装・適用範囲・不採用と残件は[§11.2](#112-現在の進行欄)と最新weekly／既存AR-01 trialを参照する。新しい発売条件、料金、quota、独立した承認／統制systemは追加しない。
+

@@ -1,4 +1,4 @@
-> 11/9 AR-01続行：旧符号化部品を使った5セル行形式を研究実装したが、実モデル意味候補4件は全形式拒否・採用0。別比較でCMEE有限原文reader由来の4snapshot／7対象状態を現単一作者へ渡し、4実本文を取得。計8新生成・累計比較22.412378秒、実tokenizer最大1058input。未記載→未決定の追加は除けたが、NI／TRANSFER06で頼まれた人→依頼者への方向反転が残り通常不採用。native候補はモデルrawでも独立意味判定でもない。最終434局所PASS、旧基準4＋新4本文を隔離SQL保存・同／新service非生成再読。native4の同raw再採用を確認、metadata投影で3payloadのtarget_refが異なることを区別。学習／新load／retry0、同PID／source／Analysis重み不変・health200。API c6555fd5・配置／実DB／RN不変、AR-01継続中。次は依頼者／受け手の能動・受動方向を意味から本文まで保持する改修。[実結果・範囲・次作業](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/target_epistemic_rows_review.md)。
+> 11/9 AR-01続行：既存finite readerから依頼者／頼まれた人の別slotを導出し、7対象状態・4event・受け手束縛3を現単一作者へ接続。role4＋意味を保持した表示優先度variant4の計8実本文を取得（比較14.472885秒、実tokenizer最大1247）。NI／TRANSFER06の役割反転が残り、TRANSFER06は未記載→未決定も再発、通常不採用。role／状態の正しい実送信後〜完成rawの境界へ故障を限定し、同種label／SYSTEM追加周回を終了。最終491局所PASS、新8本文は隔離SQL保存・同／新service非生成再読。nativeはモデルraw／独立意味判定ではなく、pure snapshotを通常checkpoint永続化へ換算しない。metadata投影によるtarget_ref差6も保持。学習／新load／retry0、API作業source c6555fd5・配置／実DB／RN不変。次は依頼方向・対象状態・語り手の自然文実現の改修。[実結果・限定・再開先](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/request_role_binding_review.md)。
 
 > 11/8 AR-01続行：関係指示・簡潔化の補助有無・既存別教師3組の提示で同6sourceから24実4B応答を比較。全HTTP200／stop、loop37.146571秒、学習／新load／retry0。4版とも人物・感情時点・語り手等の残差で通常不採用。一方、疑問符なしの確認質問2件が初回保存を通る抜けをAPI候補c6555fd5で修復し、旧引用範囲readerを既存validate_reply内へ再利用。250局所PASS、同24rawは旧24保存→新22保存／2拒否、受理22本文不変・非生成GET・retry不可。通常prompt／材料・提供は不変、今回配置／実DB／RN／build0。STRUCTURE_MAP_DELTA_NONE。意味品質全体・AR-01・全資産活用は継続中。[結果と再開点](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/conditioning_reuse_review.md)。
 
@@ -340,3 +340,4 @@ API65e7fa0bは既存testへの実TLS証明書検査だけ。runner09346d3f/SHA22
 API入口は合成認証/ASGI、モデルだけ実HTTPS socket、DBは隔離SQL。一般品質/暗黙役割や選択/本人基準/記録間意味・IF/Saved/観測会、採用重み/外部の常時提供/本番有効化/DB/端末/配置は残件。v6 opt-in・通常未採用を維持する。
 
 [全結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-actual-https-sql-20261105)。
+

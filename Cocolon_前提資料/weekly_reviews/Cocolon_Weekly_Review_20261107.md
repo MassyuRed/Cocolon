@@ -1928,7 +1928,7 @@ captureのoriginalにはuser_idがあり、通常SQL parent-source projectionは
 次は追加promptの同周回を止め、評価6sourceとは別の既存教師sourceから人物・語り手・感情時点・理由の対応を保つ対照を回収し、既存学習ownerの単一候補比較へつなぐ。質問拒否を実本文修復の代用にしない。CIは下記の最終確認を正本とする。
 
 
-CI最終確認（2026-11-08T22:49:47.000+09:00）：固定API c6555fd5の[Piece SQL run42485547144](https://github.com/MassyuRed/mashos-api/actions/runs/42485547144)と[Analysis observed content run42485547296](https://github.com/MassyuRed/mashos-api/actions/runs/42485547296)は、いずれも全工程successで終了。生成・保存・shared owner・累積／Q3・report等の既存検証を保持した。同24rawの局所再生と通常不採用の判定は上記どおり。CI成功でも配置・実DB・本人端末・一般意味品質の受入れは未実施。API2pathと資料6pathの全内容・変更pathをGitHub読戻しで照合済み。
+CI最終確認（2026-11-08T22:49:47.000+09:00）：固定API作業source c6555fd5の[Piece SQL run42485547144](https://github.com/MassyuRed/mashos-api/actions/runs/42485547144)と[Analysis observed content run42485547296](https://github.com/MassyuRed/mashos-api/actions/runs/42485547296)は、いずれも全工程successで終了。生成・保存・shared owner・累積／Q3・report等の既存検証を保持した。同24rawの局所再生と通常不採用の判定は上記どおり。CI成功でも配置・実DB・本人端末・一般意味品質の受入れは未実施。API2pathと資料6pathの全内容・変更pathをGitHub読戻しで照合済み。
 
 
 <a id="auxiliary-addressee36-prepared-20261109"></a>
@@ -1987,7 +1987,7 @@ source→bindings接点の準備であり、receive_candidate／prepare_model_sn
 
 既使用12＋架空新4の同16×OFF／ON＝32call・最大240秒を凍結。対象材料5だけ変化、対照11と全16の通常OFF／原文参照は不変。messages最大4771bytes、実tokenizer未実行。既存Jupyter到達後、比較ZIP uploadが自動承認レビューで「private比較payloadの送信先・内容の明示承認不足」として拒否され、転送・実生成・学習／load／retry・提供変更0。間接転送も行わない。次は準備した架空比較入力・messages・研究source／runnerの既存Jupyter宛転送承認後の実比較と全文読解・実raw保存である。
 
-[実装・範囲・保全・再開点](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/native_request_bindings_review.md)／[集計](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/native_request_bindings_summary.json)。source-only研究patchは正しいc655 Git blob preimageから再構築一致、privateに全入力・messages・native/model refs・新test／runnerを保全。API c6555fd5・通常採用false・配置／実DB／RN／build変更0。STRUCTURE_MAP_DELTA_NONE（研究差分保管のみ）、限定TECHNICAL_CREDIT・商品品質credit0。AR-01・AR-02〜08・全資産活用・本人端末／正式受入れは未完了。
+[実装・範囲・保全・再開点](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/native_request_bindings_review.md)／[集計](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/native_request_bindings_summary.json)。source-only研究patchは正しいc655 Git blob preimageから再構築一致、privateに全入力・messages・native/model refs・新test／runnerを保全。API作業source c6555fd5・通常採用false・配置／実DB／RN／build変更0。STRUCTURE_MAP_DELTA_NONE（研究差分保管のみ）、限定TECHNICAL_CREDIT・商品品質credit0。AR-01・AR-02〜08・全資産活用・本人端末／正式受入れは未完了。
 
 <a id="auxiliary-native-request-bindings-actual32-20261109"></a>
 ## 29. 補助経路活用AR-01 — 転送承認後に32実比較、31保存・1質問拒否、通常不採用
@@ -2037,3 +2037,22 @@ root・独立担当が4原入力全項目、row4raw、native4snapshot、前後8�
 [全結果・原本・次作業](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/target_epistemic_rows_review.md)／[本文なし集計](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/target_epistemic_rows_summary.json)／[研究source patch](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/target_epistemic_rows_source_candidate.patch)。全private入力・messages・旧4基準raw・新8raw・native候補／snapshot・root／独立読解・SQL・test／runnerを同artifact version1へ保全（47member／204839bytes、準備version0保持）。patch5sourceはc655のGit blob preimageへ適用し最終source bytes一致を確認。
 
 学習／新load／provider retry／server再起動0、同PID26784／serving source／Analysis adapter/config不変・health200。API source c6555fd5、Render配置／実Supabase／RN/build／通常model設定変更0。STRUCTURE_MAP_DELTA_NONE（通常不採用の研究差分保全のみ）、primary BLOCKER_NARROWED・新商品品質credit0。次は既存meaning ownerで依頼者／受け手の能動・受動方向を別命題として保持し、対象付きの認識状態とともに現単一作者へ渡す改修。自由JSON／row指示周回、raw修補、native候補をモデル成功へ換算する方法へ戻らない。AR-01・AR-02〜08・必要全資産活用・本人端末／正式受入れ未完了、AR-02は一般AR-01完成の全面待ちにしないが今回未着手。
+
+
+## 32. 補助経路活用AR-01 — 依頼役割結合と本文優先度を実比較、通常不採用
+
+2026-11-09 JST。§31の依頼方向残件を継承。既存finite readerの能動／受動・格の責務を使い、依頼者と頼まれた人を別slotとし、同eventの対象付き状態へ接続。4sourceの7状態・4依頼event・受け手束縛3を導出。省略人物はUNSTATED、複数依頼／未読節／曖昧関係節／未対応target／既知slot矛盾はHOLD。旧status snapshot不変、版付きrole snapshot再開時に原文から全roleを再導出する。native由来でありモデルraw／独立意味判定／モデル意味採用ではない。
+
+role4実本文を取得後、旧content_selectionの「意味inventoryを保ち別ref-planで表示優先度を選ぶ」責務を回収して同4入力を追加比較。NOT_RECORDED=context_onlyは旧required unknown policyそのものではなく、現natural向け研究改修。全原文／role／状態は不変、context_onlyでも推測禁止を維持。planと専用SYSTEMを同時変更したため単独因果を主張しない。
+
+root／独立担当が全4source項目、各snapshot、旧native基準4＋新role4＋新priority4本文を全文読解。NIは既知依頼者を未記載化する反転が両版で継続。TRANSFER06は受け手→依頼者へ反転し、未記載→未決定も再発、role／priority本文byte同一。KARAは基本意味保持だがpriority版は依頼説明反復。SELFは本人依頼・未決定を保持し、priority版の一人称的感情再述は語り手に留意。全8に確認質問なし。適切な省略・短い言換えは正常、context_onlyへの言及自体を失敗とはしない。通常不採用・新商品品質credit0。
+
+実生成はrole4call／7.037911800900474秒＋priority4call／7.434972285991535秒。計8、累積時計14.472885576775298秒、8call／240秒内。各HTTP200／stop、実tokenizer最大1247／1212input、切詰めなし、各93sourceを固定。元8入力の通常messages/ref、旧4status snapshot、priority falseのrole4messages不変。role段483局所PASS後、最終sourceは491 PASS／22.24秒・既存warning1。role最初のCPU事前検査はreader依存の梱包漏れを生成0で検出し、既存未改変file＋manifestを補完後に実生成。失敗logも原本保全。
+
+新8実本文は既存prepare／provider／service＋隔離PGliteで全FINAL保存・同／新service非生成GET一致。外側空白除去以外の本文修補／新生成／実DB要求0。GET provider／reader／Engine／prepare／意味採用・受領0、USER source／GET thread/events不変。各phaseの同rawは既存SQL投影へ再受領・意味再導出。payload2一致／target_refだけ異なる6を元captureと別に保持し、変更後payloadで実生成済みとはしない。pure/private snapshotを通常checkpoint永続化へ換算しない。reader全8は一般意味未判定・全文coverage=false。
+
+[全結果・限定・次作業](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/request_role_binding_review.md)／[本文なし集計](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/request_role_binding_summary.json)／[研究source patch](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/request_role_binding_source_candidate.patch)。全private原本・旧4／新8raw・2phase manifest・役割意味・比較全文・SQL・tests／runnerを同artifactの準備v0→結果v1へ保全。patch5sourceはAPI c655の確認済みGit blob preimageへ適用し最終bytes一致。
+
+意味材料が正しく実送信されても完成rawで崩れる境界に故障を限定。SQL／再読／UI由来ではない一方、容量／学習／metadataの読まれ方等の原因は未確定。同種label／SYSTEM周回は終了し、既存meaningと現作者の依頼方向・対象状態・語り手の自然文実現を改修する。能動受動・明記省略・未記載未決定の原文対照、成功control、別題材評価を使い、失敗rawを採用教師へ自動変換しない。
+
+学習／新load／provider retry／server再起動0、同PID26784／source／Analysis adapter/config不変・health200。総請求額は未測定。API作業source c6555fd5・通常採用false、Render配置／実Supabase／RN/build／model設定変更0。STRUCTURE_MAP_DELTA_NONE（研究patch保全のみ）、primary BLOCKER_NARROWED。AR-01〜08・必要全資産活用・本人端末／正式受入れ未完了。AR-02を一般AR-01完成の全面待ちにはしないが今回未着手。
