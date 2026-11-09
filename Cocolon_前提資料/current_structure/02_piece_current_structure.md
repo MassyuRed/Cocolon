@@ -3737,3 +3737,20 @@ RN4a103688（親26c4453e）。共用EmlisThreadModalは、COMPLETED／REFINED・
 画面遷移のsavedInputは従来3項目、選択時だけsupplementalAnswerIdentityを加える。原文／回答本文／Emlis返事は渡さない。既存clientはexact queryと同じrefined／回答IDの七項目応答を照合し、hostは選択IDも世代へ含める。再確認／再試行／期限切れ再作成で同じ回答を保持、本人／入力／選択／runtime／背景化の旧応答と遅延dismissを遮断する。以前の保存が不明なら元のpreview／save keyの確認を優先し、新選択へ読み替えない。新controller／cache／公開DTO／DB／CMEE意味・作者の変更なし。
 
 実Q2保存材料A/Cの同一DTO／source_refで、親の作成導線0→新2、React＋合成Auth／HTTPでGET→POST→本文指紋確認。本文／payloadはSQL保存物、画像設定は初回previewのrecipeと一致。Cの変更後配色・保存／native画像を今回RN経由で再実行した証明ではない。最終15suite1512 PASS／18.645681秒・FAIL／SKIP0。既存CIと同じMetro bundle検査1件は対象外。[RN CI42558430844](https://github.com/MassyuRed/Cocolon/actions/runs/42558430844)は同じ4a103688で実行中、成功未確定。APIca4140abのPiece42554294246／Analysis42554294252は両success。RN未build・API／SQL未配置、同版bitmap・本人端末・一般本文品質／AR-01反転・全資産活用は未完了。[実結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-rn-selected-reuse-20261109)。STRUCTURE_MAP_DELTA_PRESENT（既存共用UI／client／hostの選択接続）。
+
+<a id="piece-model-candidate-connection-20261109"></a>
+## 2026-11-09 — AR-04 Pieceの4B候補を既存CMEE・保存へ接続
+
+API `95e1b5d6c6d68b17fadaae3c982ebaa87eed1d79`、設計先行差分`b2d33ace47a09fc070759775f9bf008cb74a1781`。通常／明示選択refinedの保存sourceを`PIECE_MODEL_BODY`へfreezeし、専用promptのstrict `body_blocks`候補を受領、既存Engineのsemantic_input→CMEE本文意味保持→B8→author-free Safety→B9→通常preview／saveへ接続した。新`PieceModelInputV1`はprivateで、既存PreparedRequest／CandidateReceiptを再利用する。モデルにplan・format・権利・Safetyを決めさせない。
+
+初期modelはshort_essay単独、既存有限source／plan資格と全文保持を確認できる範囲に限る。旧作者との完全一致をmodel armだけ除き、格・voice・否定・時点・留保・感情所有・追加／欠落を検査する。既知の常体／丁寧体差、独立SELF節順、閉じたSELF省略を許容する。実名抽象化・参照・scopeは既存S7を迂回しない。未知書換えは採用しない。一般自由文を4Bへ全面委譲した実装ではなく、AR-01反転・一般再構成は残る。
+
+既存共有4B natural/base経路をPiece専用promptで使い、Analysis adapterや旧Q&A composerを使わない。`PIECE_MODEL_SOURCE=shared_4b.v1`明示選択、default/offは既存作者を保持。provider失敗時の有限作者fallback・自動retryはない。期限240秒／2048token／送信64KiB／受信256KiB。RNはpreview POSTのみ250秒にし、source GET／再読／PATCH・owner切替／cancel境界を維持した。
+
+同processで重なる同owner/key/request/source/runtimeだけ取得を共有し、SQL ACK待機中まで一時receipt leaseを保持する。別指紋は競合、各callerのsource／tier／runtimeを再検証し、cancel済みcallerへlate結果を返さない。全caller cancelなら取得をcancelする。SQLが保存の正本であり、他process間のexactly-onceや永続予約を主張しない。保存後の再読、visual変更、save再送は4B／旧作者を呼ばない。公開wire／DB列／recipe／本文版は変更なし。
+
+CPUの対象17suiteは854 PASS、追加有限scope＋独立変異＋並行処理は70 PASS（集合重複を合算しない）、provider／runtime再確認70 PASS、Safety互換8 PASS。RN6suite490 PASS。normal3planでは旧作者と異なる本文「私は同僚に資料の確認を頼んだ。」が既存隔離SQL保存・再読まで固定され、実Q2 A/C保存補足も別sourceのままmodel receipt→visual変更→保存／再読へ通った。各モデルtransportは初回1回、quota消費1、原入力／Emlis thread/eventsは不変。ここまでのprovider応答は合成固定値で、実4Bの呼出し実績と分ける。
+
+途中のmodel保存5失敗はSavedOriginalの属性名接続を修正して全5成功。広い再検査のnative DB192 setup errorはlocal PostgreSQL未設定による対象選択ミスで、nonnative集合へ修正した。eligibleからshort_essay単独を許容するSafety互換1件を明示変更し、旧有限writerの全3format保持と本文変異拒否を検査した。既知の旧161失敗、前回native V4の同19失敗、live migration／配置／統合配布／同版native画像・本人端末の未完了を今回成功へ含めない。GPU実測結果は直下の実測欄に追記する。
+
+STRUCTURE_MAP_DELTA_PRESENT。詳細設計は補助経路活用設計§7.1、全file対応は01A末尾。

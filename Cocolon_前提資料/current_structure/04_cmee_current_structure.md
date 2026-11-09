@@ -2034,3 +2034,10 @@ RN4a103688（親26c4453e）。共用EmlisThreadModalは、COMPLETED／REFINED・
 画面遷移のsavedInputは従来3項目、選択時だけsupplementalAnswerIdentityを加える。原文／回答本文／Emlis返事は渡さない。既存clientはexact queryと同じrefined／回答IDの七項目応答を照合し、hostは選択IDも世代へ含める。再確認／再試行／期限切れ再作成で同じ回答を保持、本人／入力／選択／runtime／背景化の旧応答と遅延dismissを遮断する。以前の保存が不明なら元のpreview／save keyの確認を優先し、新選択へ読み替えない。新controller／cache／公開DTO／DB／CMEE意味・作者の変更なし。
 
 実Q2保存材料A/Cの同一DTO／source_refで、親の作成導線0→新2、React＋合成Auth／HTTPでGET→POST→本文指紋確認。本文／payloadはSQL保存物、画像設定は初回previewのrecipeと一致。Cの変更後配色・保存／native画像を今回RN経由で再実行した証明ではない。最終15suite1512 PASS／18.645681秒・FAIL／SKIP0。既存CIと同じMetro bundle検査1件は対象外。[RN CI42558430844](https://github.com/MassyuRed/Cocolon/actions/runs/42558430844)は同じ4a103688で実行中、成功未確定。APIca4140abのPiece42554294246／Analysis42554294252は両success。RN未build・API／SQL未配置、同版bitmap・本人端末・一般本文品質／AR-01反転・全資産活用は未完了。[実結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-rn-selected-reuse-20261109)。STRUCTURE_MAP_DELTA_PRESENT（既存共用UI／client／hostの選択接続）。
+
+<a id="piece-model-candidate-connection-20261109"></a>
+## 2026-11-09 — Pieceモデル候補armを既存Engineへ接続
+
+API `95e1b5d6c6d68b17fadaae3c982ebaa87eed1d79`。`PieceModelInputV1`だけを既存Piece semantic seamでdispatchし、source-only準備／strict候補受領／source-plan-receipt再bind／author-free全文意味保持から既存Artifactを確定する。旧P4受口とmodel未選択時の作者等値を維持し、モデル候補の採否だけを別armにする。格・voice、否定、時点、留保とsource partitionを検査、未知書換え・失敗時は不採用。既存有限source資格は残るため一般入力対応の完了ではない。本文rawやmodel metadataを公開wire／DBへ追加しない。provider・preview・保存・再読と初回一時共有の責務はPiece ownerへ保持した。STRUCTURE_MAP_DELTA_PRESENT。
+
+検証・実測と限定は[Piece結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-candidate-connection-20261109)。既存Emlis／Analysisのモデル生成方式・保存形式は変更しない。live反映や一般品質合格は今回のコード成功から推定しない。

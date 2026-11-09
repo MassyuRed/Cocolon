@@ -70,6 +70,7 @@ for (const pre of [false, true]) test(`explicit source GET preserves exact seven
   assert.equal(sent.expectedUserId, OWNER); assert.equal(sent.body, undefined);
   assert.equal(sent.headers['Idempotency-Key'], undefined);
   assert.equal(sent.headers['Cache-Control'], 'no-store');
+  assert.equal(Object.hasOwn(sent, 'timeoutMs'), false);
   assert.equal(Object.keys(result).length, 7);
   value.source_input_id = 'changed-after-response'; assert.equal(result.source_input_id, INPUT);
 });
@@ -151,6 +152,7 @@ test('returned references feed the unchanged controller/preview/display path on 
   await c.start();
   assert.equal(a.calls.length, 2);
   assert.equal(a.calls[1][0], '/emotion/piece/preview');
+  assert.equal(a.calls[1][1].timeoutMs, 250000);
   assert.deepEqual(JSON.parse(a.calls[1][1].body), clone(request));
   const display = a.readPiecePreviewDisplay(c.getView(), NOW);
   assert.equal(display.hashVerified, true); assert.equal(display.preview.piece_text, expected.piece_text);

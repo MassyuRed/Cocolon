@@ -1,3 +1,5 @@
+> **11/9・Piece 4B接続のコード差分：** API `95e1b5d6`で、専用4B文章候補→CMEE意味保持→既存preview／saveを通常／明示refinedへ接続。有限source資格とshort_essay初期範囲を維持し、モデル失敗の旧作者fallbackはない。保存後は0再生成、同key初回は一時共有、RN preview POSTのみ250秒。合成provider＋隔離SQLのnormal3plan／実Q2 A/C保存を確認し、実4B結果は[結果欄](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-candidate-connection-20261109)へ分けて記録。live配置／selector有効化・統合配布・同版native画像／本人端末と一般文章品質は未完了。既存保存・画像化・source分離の資産を継承する。**
+
 > **11/9 Mash明示：Pieceでも4Bを使って処理してよい。** 現行Pieceの通常／refinedはCMEEの有限読取・既存作者で、4Bを呼んでいない。Emlis／Analysis側のモデル接続は全coreへ自動波及しない。次の補助経路AR-04では、既存Piece用の意味候補受口を改修し、4Bの意味整理・文章候補をCMEEの採用／保持検査へ接続する。既存B8は旧作者との完全一致を要求するため、4B本文の単純差替えでは通らない。本人補足の分離、current照合、安全検査、preview／保存再送、同版本文・recipeと画像化は再利用する。今回の新決定の記録であり、Pieceの4B接続実装・新生成・学習・稼働反映は未実施。[今回の確認と方針](weekly_reviews/Cocolon_Weekly_Review_20261107.md#piece-4b-use-direction-20261109)。
 
 > 11/9 AR-04続行：RN4a103688で、表示中の本人補足を明示選択してPieceへ渡す入口を接続。未回答は従来の作成、回答済みは「この回答を含めてピースを作成」。画面遷移はexact回答IDだけ、GET／再確認／再作成も同じ選択を保持し、自動で別回答や元入力へ切り替えない。旧保存結果不明は元の保存確認を優先。同じ実Q2保存材料2例で親の導線0→新2、合成HTTPのGET→POST→指紋確認とSQL保存本文／初回recipe一致。1512関連PASS、Metro1件対象外。JS CI成功、iOS source CIはV4系19失敗で全体未合格。APIca4140abの両CI成功確認、RN未build・API／SQL未live反映・native画像／本人実機は未確認。[全結果・範囲・次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-rn-selected-reuse-20261109)。
@@ -344,4 +346,3 @@ API65e7fa0bは既存testへの実TLS証明書検査だけ。runner09346d3f/SHA22
 API入口は合成認証/ASGI、モデルだけ実HTTPS socket、DBは隔離SQL。一般品質/暗黙役割や選択/本人基準/記録間意味・IF/Saved/観測会、採用重み/外部の常時提供/本番有効化/DB/端末/配置は残件。v6 opt-in・通常未採用を維持する。
 
 [全結果・原本・残件](weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-actual-https-sql-20261105)。
-

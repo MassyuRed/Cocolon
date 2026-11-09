@@ -176,3 +176,18 @@ STRUCTURE_MAP_DELTA_PRESENT：共用応答UI→body-free選択→既存client／
 ### 2026-11-09 Mash明示 — Pieceでも4Bを使う
 
 MashはPieceの4B利用を明示した。現行APIca4140abの通常／refinedは4Bを呼ばず、有限読取と既存作者を使う。次のAR-04は既存Piece semantic_input／候補受領の限定を改修し、4Bの意味整理・文章候補をCMEE／B8の採用・意味保持検査へ接続する。旧作者canonical完全一致のまま4B本文だけを差し込む方法では成立しない。既存の出所分離・本人／current・Safety・preview／save・同版recipe／画像化・RN選択を継承する。今回の確認で新実装／GPU生成／学習／live変更0。詳しい決定と不足は[weekly§39](../../../weekly_reviews/Cocolon_Weekly_Review_20261107.md#piece-4b-use-direction-20261109)と詳細設計§7.1を参照。STRUCTURE_MAP_DELTA_NONE（実装は未変更）。
+
+<a id="piece-model-candidate-connection-20261109"></a>
+## 2026-11-09 — AR-04 Pieceの4B候補を既存CMEE・保存へ接続
+
+API `95e1b5d6c6d68b17fadaae3c982ebaa87eed1d79`、設計先行差分`b2d33ace47a09fc070759775f9bf008cb74a1781`。通常／明示選択refinedの保存sourceを`PIECE_MODEL_BODY`へfreezeし、専用promptのstrict `body_blocks`候補を受領、既存Engineのsemantic_input→CMEE本文意味保持→B8→author-free Safety→B9→通常preview／saveへ接続した。新`PieceModelInputV1`はprivateで、既存PreparedRequest／CandidateReceiptを再利用する。モデルにplan・format・権利・Safetyを決めさせない。
+
+初期modelはshort_essay単独、既存有限source／plan資格と全文保持を確認できる範囲に限る。旧作者との完全一致をmodel armだけ除き、格・voice・否定・時点・留保・感情所有・追加／欠落を検査する。既知の常体／丁寧体差、独立SELF節順、閉じたSELF省略を許容する。実名抽象化・参照・scopeは既存S7を迂回しない。未知書換えは採用しない。一般自由文を4Bへ全面委譲した実装ではなく、AR-01反転・一般再構成は残る。
+
+既存共有4B natural/base経路をPiece専用promptで使い、Analysis adapterや旧Q&A composerを使わない。`PIECE_MODEL_SOURCE=shared_4b.v1`明示選択、default/offは既存作者を保持。provider失敗時の有限作者fallback・自動retryはない。期限240秒／2048token／送信64KiB／受信256KiB。RNはpreview POSTのみ250秒にし、source GET／再読／PATCH・owner切替／cancel境界を維持した。
+
+同processで重なる同owner/key/request/source/runtimeだけ取得を共有し、SQL ACK待機中まで一時receipt leaseを保持する。別指紋は競合、各callerのsource／tier／runtimeを再検証し、cancel済みcallerへlate結果を返さない。全caller cancelなら取得をcancelする。SQLが保存の正本であり、他process間のexactly-onceや永続予約を主張しない。保存後の再読、visual変更、save再送は4B／旧作者を呼ばない。公開wire／DB列／recipe／本文版は変更なし。
+
+CPUの対象17suiteは854 PASS、追加有限scope＋独立変異＋並行処理は70 PASS（集合重複を合算しない）、provider／runtime再確認70 PASS、Safety互換8 PASS。RN6suite490 PASS。normal3planでは旧作者と異なる本文「私は同僚に資料の確認を頼んだ。」が既存隔離SQL保存・再読まで固定され、実Q2 A/C保存補足も別sourceのままmodel receipt→visual変更→保存／再読へ通った。各モデルtransportは初回1回、quota消費1、原入力／Emlis thread/eventsは不変。ここまでのprovider応答は合成固定値で、実4Bの呼出し実績と分ける。
+
+途中のmodel保存5失敗はSavedOriginalの属性名接続を修正して全5成功。広い再検査のnative DB192 setup errorはlocal PostgreSQL未設定による対象選択ミスで、nonnative集合へ修正した。eligibleからshort_essay単独を許容するSafety互換1件を明示変更し、旧有限writerの全3format保持と本文変異拒否を検査した。既知の旧161失敗、前回native V4の同19失敗、live migration／配置／統合配布／同版native画像・本人端末の未完了を今回成功へ含めない。GPU実測結果は直下の実測欄に追記する。

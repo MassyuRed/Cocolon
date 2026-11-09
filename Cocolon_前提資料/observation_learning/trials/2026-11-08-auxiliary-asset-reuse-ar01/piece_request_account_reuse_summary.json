@@ -350,5 +350,31 @@
       "refined_sample_native_bitmap": 0
     },
     "evidence_filename": "Cocolon_CMEE_AR04_RefinedRNSelection_20261109.zip"
+  },
+  "piece_model_candidate_connection_20261109": {
+    "api_commit": "95e1b5d6c6d68b17fadaae3c982ebaa87eed1d79",
+    "design_commit": "b2d33ace47a09fc070759775f9bf008cb74a1781",
+    "selector": "PIECE_MODEL_SOURCE=shared_4b.v1",
+    "default": "off",
+    "normal_saved_plans": [
+      "free",
+      "plus",
+      "premium"
+    ],
+    "real_q2_saved_materials": [
+      "Q2-A",
+      "Q2-C"
+    ],
+    "provider_for_saved_checks": "fixed synthetic HTTP response",
+    "existing_test_run_pass": 854,
+    "additional_scope_independent_concurrency_pass": 70,
+    "additional_counts_overlap": true,
+    "rn_pass": 490,
+    "native_postgres_local_not_configured": true,
+    "model_format": "short_essay",
+    "source_scope": "existing finite Piece source and full preservation, not general Japanese",
+    "public_wire_or_db_schema_changes": false,
+    "live_activated": false,
+    "actual_gpu_result": "record separately in the corresponding trial section"
   }
 }

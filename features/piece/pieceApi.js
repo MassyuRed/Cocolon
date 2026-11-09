@@ -299,6 +299,10 @@ async function requestPieceData(value, options = {}, savedInputId = null, visual
       method: sourceRead ? 'GET' : mutation ? 'PATCH' : 'POST', auth: true, expectedUserId,
       headers: { ...rendererHeaders(), ...(sourceRead || mutation ? { 'Cache-Control': 'no-store' } : { 'Idempotency-Key': idempotencyKey }) },
       body, signal,
+      // Shared 4B may wait for the existing GPU lock before generating. Only
+      // first/replayed POST uses this deadline; ordinary reads/PATCH keep the
+      // API client's default and cancellation still uses the caller's signal.
+      ...(!sourceRead && !mutation ? { timeoutMs: 250000 } : {}),
     });
     checkAbort(signal);
     const result = await response.json();

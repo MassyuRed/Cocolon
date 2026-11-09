@@ -6203,3 +6203,30 @@ RN[4a103688](https://github.com/MassyuRed/Cocolon/commit/4a1036880c51983d3088b31
 | `.github/workflows/piece-rn-contracts.yml` | 既存React工程へ新suiteとmodal変更pathを追加。新workflow／Gateなし |
 
 `PieceCreateScreen.js`／`PieceCreateController.js`／`useEmlisThread.js`／Input・履歴の呼出し元／MainTabsのsaveRecoveryは既存ownerを再利用し変更しない。全UIのrefreshや画面遷移に回答本文を保存しない。最終15suite1512 PASS／18.645681秒・FAIL／SKIP0。既存CIと同じMetro bundle検査1件は対象外。[RN CI42558430844](https://github.com/MassyuRed/Cocolon/actions/runs/42558430844)は同じ4a103688で実行中、成功未確定。[結果・範囲・次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-rn-selected-reuse-20261109)。
+
+<a id="piece-model-candidate-connection-20261109"></a>
+## 2026-11-09 — Piece 4B候補接続の変更file地図
+
+API `95e1b5d6c6d68b17fadaae3c982ebaa87eed1d79`。既存保存source→候補→CMEE→B8／Safety→preview／saveへ接続する。通常保存／rendererの第二作者は作らない。詳細と限定は[observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md](./observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-candidate-connection-20261109)、実装正本は補助経路活用設計§7.1。
+
+| API path | 責務差分 |
+|---|---|
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/preparation_sources.py` | 完全原入力と別回答のmodel材料／block partition、旧prepare ID保持 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_semantic_admission.py` | PieceModelInputV1／prepare／receive／厳密再bind／既存Engine dispatch |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_v1c.py` | 旧作者との一致を課さず、検査済み候補bytesで既存Artifactを確定 |
+| `ai/services/ai_inference/piece_model_source.py` | 専用prompt、共有4B HTTPS単発、設定変更／期限／size／finish検査 |
+| `ai/services/ai_inference/piece_v2_content_policy.py` | 既存有限readerとS7を適合し全block意味保持、実名／参照／scope義務保持 |
+| `ai/services/ai_inference/piece_v2_generation.py` | B8 model_candidate接続とsource／plan／receipt／artifact再bind |
+| `ai/services/ai_inference/piece_v2_safety_review.py` | model本文のauthor-free再検査とshortessay単独互換 |
+| `ai/services/ai_inference/piece_v2_preview_service.py` | 初回取得／同要求一時lease共有／caller別再検証、保存済再読0取得 |
+| `ai/services/ai_inference/api_piece_v2.py` | 取得待ち中のfeature／ttl／renderer／palette変更をRPC前に拒否 |
+| `ai/docs/PUBLIC_API_REGISTRY.md` | private selectorと期限差、公開wire不変 |
+| `.github/workflows/piece-b2b-isolated-postgres.yml` | 既存CIへmodel／変異／並行／隔離保存testsを追加 |
+| `ai/tests/test_piece_model_source.py` | HTTP／設定／size／cancel／finish／normal-refined材料 |
+| `ai/tests/test_piece_model_candidate_independent.py` | 独立42変異・正対照、主体／格／否定／留保／実名／partition |
+| `ai/tests/test_piece_model_finite_scope.py` | 有限scope12、SELF／感情／receipt差替え／fallback拒否 |
+| `ai/tests/piece_v2/test_b05_piece_model_concurrency.py` | 同key共有／cancel／runtime変更／ACK待機16 |
+| `ai/tests/piece_v2/test_b05_piece_model_saved_pipeline.py` | normal3plan＋実Q2 A/Cのmodel receipt→隔離保存／再読 |
+| `ai/tests/piece_v2/db/test_b05_reviewed_preview_issuance.py` | 単独shortessay Safety互換と旧3format／意味変異control |
+
+RNの変更は`features/piece/pieceApi.js`のpreview POST期限のみ250000ms、`tests/piece-v2-source-ref.test.js`でPOSTとGETの期限範囲を確認。既存source GET／PATCH／再読、explicit補足選択、owner変更／cancel・未確定保存回復は継承。DB migration新規0、公開DTO新field0、renderer新規0、依存追加0。設計差分3正本は`b2d33ace`で先に反映。商品00・Piece／CMEE map・weekly§40・trialを今回同単位で更新。STRUCTURE_MAP_DELTA_PRESENT。

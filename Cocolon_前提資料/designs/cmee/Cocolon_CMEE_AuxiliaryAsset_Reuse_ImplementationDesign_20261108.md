@@ -413,6 +413,9 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 ### 11.2 現在の進行欄
 
+2026-11-09 Piece4B接続：§7.1具体設計を先行反映後、API `95e1b5d6c6d68b17fadaae3c982ebaa87eed1d79`でmodel候補→既存CMEE／B8／Safety／通常保存を接続した。RN preview POST期限を250秒へ修正。通常3planと実Q2 A/Cの隔離保存・0再生成再読を確認。初期short_essay／既存有限source資格、default OFF、一般文章・live反映／端末未完了を維持する。[実測・限定・次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-candidate-connection-20261109)。
+
+
 | 項目 | 2026-11-09 AR-01方向反転を継承、AR-04有限対人動作をPiece保存再読へ接続 |
 |---|---|
 | 回収と改修 | 旧finite `_clauses/_FORMS/_participant`で正過去依頼のrequester／asked_personを別slot化。同一eventと対象状態を結合。旧content_selectionから意味不変・別ref-planの表示選択責務を回収し、NOT_RECORDED=context_onlyは現natural向け研究policyとして区別 |
@@ -624,4 +627,3 @@ API `497f7008fec8935885d09d2e430499892189b5bb`で、以下のsource抜粋とsymb
 - 巨大な旧migration詳細06の全文と全symbolの意味監査は完了していない。本文取得できた上位設計・Disposition・現map・現sourceを根拠に本書を設計し、各実装単位で必要原本を確認する。未取得を「存在しない」「移管不要」「全文理解済み」にしない。
 - 本書は自由文の一般意味検査、通常追加model reader、全三中核の意味品質、実費・待ち時間の改善を実証していない。sourceの正規化／引用一致、表の完全性、文書保存をその代用にしない。
 - **最初の設計保存時点**の構造差分は、回収・改修・商品接続の設計と再開導線だけで、その時点では製品の作者・API・DB・RN・provider・稼働設定を変えていなかった。その後のAR-01ではa98c／e14の候補source変更、研究opt-inの実生成比較、private保存・再読へ進んでいる。現在の実装・適用範囲・不採用と残件は[§11.2](#112-現在の進行欄)と最新weekly／既存AR-01 trialを参照する。新しい発売条件、料金、quota、独立した承認／統制systemは追加しない。
-
