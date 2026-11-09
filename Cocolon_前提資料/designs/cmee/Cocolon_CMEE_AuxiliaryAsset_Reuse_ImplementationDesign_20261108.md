@@ -230,6 +230,20 @@ Analysisの既存source adapter→semantic admission→compiler→唯一realizer
 
 ### 7.1 Piece
 
+#### 2026-11-09 Piece 4B接続の実装差分（今回の実装正本）
+
+Mashの「Pieceでも4Bを使う」指示を通常生成の候補取得へ具体化する。保存済みsourceを確定した後、既存共有4Bのnatural/base経路から文章候補を一度取得し、CMEEが原入力・本人補足と本文を独立に照合してから既存B8→Safety→B9→preview／saveへ渡す。4Bは候補を作る責務、CMEEは採否と確定本文を作る責務を持つ。旧作者との文字列完全一致はmodel候補の採否条件にしない。旧P4 offline受口とmodel未選択時の既存作者は互換用の別armとして保持し、model失敗時に旧作者へ切り替えない。
+
+- private入力は既存`PreparedRequest`、受領は`CandidateReceipt`、接続は`PieceModelInputV1`を使う。原入力7fieldと、本人が明示選択した適格な補足回答を別sourceに保ち、`block_partition`で各本文blockのsource／field対応を固定する。公開request／responseとDB保存列にraw、prompt、token、内部判定を追加しない。
+- `piece_model_source.py`が専用promptと厳密JSON `{"body_blocks":[...]}` を既存`EMLIS_NATURAL_REPLY_*`接続へ送る。旧Q&A composer、180文字切捨て、Emlis二段応答prompt、Analysis専用adapterを使わない。モデルはformat／プラン／権利／Safetyを決定しない。選択は`PIECE_MODEL_SOURCE=shared_4b.v1`、未選択はOFF。設定追加のlive反映やGPU再起動はこのコード更新の実施実績に含めない。
+- 最初のadmissionは`short_essay`一形式と、source／本文を全節読める有限範囲に限る。主体・相手格・voice・述語・否定・時点・条件／留保・感情所有を照合し、既知の丁寧体差・節順・閉じたSELF省略等を許容する。既存S7が原文KEEPを全量確認できるblockはその責務を再利用する。未知の書換え、欠落、追加、読み残しは未判定／不採用。一般自由文の意味同値が成立したとは扱わない。groundingやモデル自己採点だけで採用しない。modelではeligible_formatsをshort_essay単独とし、author-free Safetyも全文意味保持が成立するその制限を許容する。未選択時の既存format候補一覧は変更しない。
+- B8とauthor-free Safetyは同じ完成本文の意味保持境界を確認し、保存済み本文の再読、画像設定変更、save再送では4Bも旧作者も呼ばない。既存owner／current版／補足資格／hash／recipe／SQL fence／quotaを維持する。生成後にもsourceを再検証する。
+- 初回同一owner・idempotency keyの並行処理は既存service内の一時in-flight共有に閉じる。同じrequest／source／runtime設定だけ候補を共有し、異なる指紋は競合にする。各待機者の認証・source・現runtimeを再検証してから保存へ進む。DB予約、永続cache、新controllerを追加しない。cancelした待機者へ結果を返さず、全待機者cancel時は取得を中止する。
+- 共有GPU待ちを含む取得期限240秒、推論上限2048token、context8192、temperature0、非stream、thinking無効、送信64KiB／受信256KiBまで。既存shared lockの待ちと推論時間を区別する。RNの初回preview POSTのみ250秒に合わせ、source取得・再読・PATCH等の通常期限は保持する。自動再試行、別モデル／有限作者へのfallbackはしない。
+- 実検証は原入力→raw出力→採否→確定本文→保存／再読をprivateに対応づけ、正常な旧作者と異なる文と、主体／否定／留保／版の変異を確認する。既存有限Q2材料、合成provider、実4B、隔離SQL、native画像、本人端末の実績を分けて記録する。モデルrevision／usageが実応答に無い場合はunknownとし、推定で埋めない。
+
+以下の従来記録でいう「現行／次」は上記実装前の状態を表す。今回の実装結果・接続の有無・未反映は§11とcurrent structureへ差分更新する。
+
 **2026-11-09 Mash明示：Pieceでも4Bを使って処理する。** 現行通常／refinedのB8は4Bを呼ばず、CMEEの有限読取・plan・既存作者とcanonical完全一致検査を通る。既存Emlis／Analysisの4B接続を、そのままPiece接続済みとは扱わない。次のAR-04は、既存Piece semantic_input／prepare_piece／候補受領・保存再読の必要部分を改修し、4Bの意味整理・文章候補をCMEEの採用／意味保持検査へ渡す接続へ進める。現在のoffline受口は限定構文中心でrefined未対応、B8は旧作者との完全一致を要求するため、4B本文を差し込むだけでは成立しない。本人補足の分離、owner／版／current資格、Safety、preview／save再送、同版本文・recipe・画像化とRN選択は継承する。有限規則・検査の必要部分を改修して使い、全再実装へ戻さない。今回の方針確認時点でPiece4B実装・GPU生成・学習・live反映0。
 
 
@@ -237,7 +251,7 @@ Analysisの既存source adapter→semantic admission→compiler→唯一realizer
 
 本人の核・背景・条件・否定・引用主体を保ち、人物名の抽象化で命題を変えない。原文KEEPを機械的成功へ数えるだけで終わらせず、その作品だけで伝わるか読む。通常感情／自己理解、片欄／両欄、original／適格refinedを扱う。補足を使った場合は元と補足を別sourceとし、生成物をsourceに戻さない。
 
-文章と画像は、採用されたcanonical本文・同版recipe・同一bitmapの対応を確認する。文字欠け、順序、留保の脱落、誤った本文への画像差替えを見逃さない。画像内ブランド、配色・比率・ロゴ権利、保存／再読／写真保存の成立資産を継承する。文字整形のため4Bを必須にせず、有効な用途を比較した上で判断する。Android等の未成立部分を今回成功へ含めない。
+文章と画像は、採用されたcanonical本文・同版recipe・同一bitmapの対応を確認する。文字欠け、順序、留保の脱落、誤った本文への画像差替えを見逃さない。画像内ブランド、配色・比率・ロゴ権利、保存／再読／写真保存の成立資産を継承する。今回の承認済み4B候補経路をこの既存境界へ接続する。Android等の未成立部分を今回成功へ含めない。
 
 ### 7.2 Analysis
 
@@ -352,7 +366,7 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 | natural本文 | `cocolon_meaning_experience_engine/natural_reply.py`、`emlis_thread_service.py` | 形式と意味を分離し、実証済み比較を保存前へ。現声・provider契約・受領再開を維持 |
 | sourceと更新 | `source_kernel.py`、`emlis_thread_source.py`、`emlis_thread_history.py`、`emlis_answer_update.py`、thread store | 有効本人source／根拠／権利・訂正の既存ownerを再利用。重複作者を追加しない |
 | 旧意味・文章・逆検査 | `emlis_ai_grounded_observation_plan.py`、`emlis_ai_grounded_sentence_surface.py`、`emlis_ai_grounded_human_reception.py`、`emlis_ai_grounded_observation_gate.py`、CMEE `emlis_stage1_*` | 能力・supported reader・変異vectorを抽出。旧文型依存は現naturalへ強制しない |
-| Piece | `piece_source.py`、`piece_v1c.py`、`piece_v2_generation.py`、既存source adapter／保存／renderer | 既存作者と独立意味検査を改修。画像・権利・保存を別作者へ移さない |
+| Piece | `piece_source.py`、`piece_semantic_admission.py`、`preparation_sources.py`、`piece_v1c.py`、`piece_model_source.py`、`piece_v2_generation.py`、既存preview／Safety／source adapter／保存／renderer、RN `features/piece/pieceApi.js` | §7.1の4B候補→CMEE意味保持→既存B8／保存へ接続。画像・権利・保存を別作者へ移さない |
 | Analysis | `cores/analysis/{source_adapter,semantic_admission,intent_compiler,observed_route_realizer}.py`、累積／semantic_map service | source→Engine→graph→同図／本文を継承。IF等は既存専用責務に限定 |
 | 教材・評価 | 既存`observation_learning/`、API `ai/tests/fixtures/emlis_nls_v3/`、既存生成比較runner | 原本・用途・学習露出を保ったまま現比較へ。独立運用systemを新設しない |
 
@@ -555,7 +569,7 @@ S01–S32を全て判定し、X01は原監査同様に横断実装として扱�
 | 原8層/提案 | 回収/改造する内容 | 今回の現product接続・評価 |
 |---|---|---|
 | L1 Semantic Evidence / Authority | 原文・本人/他者・述語項・条件/対比・否定/時点・認識/不明・関係のgrounded candidate、競合解釈 | 既存Sを材料正本にN/P/Aの意味保持検査と採用候補へ。生成本文やcategory名を本人事実へしない |
-| L2 Plan-Owned Surface | 選ばれた意味が実際に出力へ現れる責務・sole author・後付けspliceの失敗知識 | 現4B自由文を保つ。旧二段/行数/phrase grammarを新packetへ偽装して強制しない。P/Aは現唯一作者を使う |
+| L2 Plan-Owned Surface | 選ばれた意味が実際に出力へ現れる責務・sole author・後付けspliceの失敗知識 | 現4B自由文を保つ。旧二段/行数/phrase grammarを新packetへ偽装して強制しない。Pは§7.1の4B候補をCMEEが採否確定し、旧作者との文字列一致を要求しない。Aは現compiler／realizerを使う |
 | L3 Causal Failure Localization | failure axes→共通原因仮説→実source owner→修復範囲→反例/controls→actual before-after | 単なる問題コード集計から修正までつなぐ。current100コードは人の注釈検証であり自動原因発見済みとはしない |
 | L4 Causal RED/GREEN | 意味要素を一つ変え、意図した可視箇所が変わり他が保たれるpositive/metamorphic試験 | 値参照/例外/台帳の一致を本文実現成功の代用にしない。主体・対象・否定述語・時点・認識・unknown・関係方向の変異 |
 | L5 Human Product Read | 意味・自然さ・本人宛・関係の読みやすさ・不要反復・伝わり方、machineとの分離 | 現最低線へ適合。長さ/深さ/二段/比率を固定せず、短い受取り・一度の言換えも許容 |

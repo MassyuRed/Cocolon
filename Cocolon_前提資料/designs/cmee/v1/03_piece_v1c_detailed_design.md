@@ -1,5 +1,7 @@
 # CMEE V1-C — Piece Semantic Visual Artifact 詳細設計
 
+> 2026-11-09 current差分：本書の初期future／NOT_IMPLEMENTED表示は初版設計の履歴である。現Pieceの実装・稼働・未完了は`../../../current_structure/02_piece_current_structure.md`を優先する。Mash指示の4B候補接続は`../Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md` §7.1に具体化した。既存source／plan／本文／recipe／保存の所有は維持し、model選択時だけ4B候補をCMEEが独立に採否確定する。旧作者との文字列完全一致はこのmodel armへ課さない。未判定の一般文章を採用へ昇格しない。公開schema／DB列／renderer変更を伴わない。
+
 - document id: `cocolon.cmee.v1c.piece_semantic_visual_artifact.detailed_design`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
 - runtime state: `NOT_IMPLEMENTED`

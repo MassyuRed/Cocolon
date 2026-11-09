@@ -10,6 +10,8 @@
 
 # CMEE V1 — JSON Schema / Identity / Versioning 詳細設計
 
+> 2026-11-09 Piece 4B接続のprivate差分：既存`PreparedRequest`と`CandidateReceipt`を再利用し、`PieceModelInputV1(prepared, receipt)`で候補をCMEEへ渡す。新task `PIECE_MODEL_BODY`の`control.block_partition`はsource／field順を固定し、モデルのstrict出力は`body_blocks`だけとする。本文採否はsource／plan／receiptの再bindと独立意味保持検査で決める。公開Piece v2 wire、保存列、content／recipe schemaと版は維持する。raw／model metadataはprivateであり、候補受領だけでは採用にならない。実装正本は補助経路活用設計§7.1、実ファイルは`preparation_sources.py`／`piece_semantic_admission.py`／`piece_model_source.py`。
+
 > 2026-10-17 u315：追加回答後の未変更理由付き満足を保持する限定資格はMash承認済み。最新責務差分は末尾u315、実装・検証結果は正本06／API handoff u315を参照。未配置・商品NOT_CLEAR。
 
 > 2026-09-11 Q3現在地：添付修正版Technical Design v1.2に従い、Q2のコード実装完了からQ3へ進めた。Plusの適格本人履歴、Premiumの本人続行による最大3問と確認・修正・否定できる解釈フレーム、限定条件のLayer3を保存・API・RNまで実装した。Q3のコード実装は完了し、次の実装単位はQ4の統合・実本文確認・互換性・公開接続準備。実DB適用、端末・実課金確認、Mashの正式商品判断、公開操作は別作業として未実施。default OFF、商品NOT_CLEAR、Draft/open/unmergedを維持する。以下の旧Q1/Q2段落・Product Read待ちの順序は当時の履歴であり、Q3/Q4のコード進行を止める現行条件ではない。現在の進行ownerは本系列の`06_implementation_order_migration_and_verification.md`末尾Q3節とAPI既存handoff末尾Q3節。
