@@ -248,7 +248,7 @@ RN `5ae90a658d1823e37039420165db428f26d6730c`のrun42563870309はJS job128985994
 
 最終対象7fileは299 PASS／18.44秒、FAIL／SKIP0、既存Pydantic warning1。新評価単体164＋新保存6を含み、別実行の件数を重複加算しない。既存model source／独立変異／有限scope／並行処理／保存を同集合で確認した。広めの既存評価テストでは19失敗を検出し、変更前の親`piece_v2_content_policy.py`をoverlayした同じ環境でも全19件を再現。参照評価16、短文非padding／自己連続参照／scope各1で、今回未修復・期待変更／skip化0。過去のnative V4同19失敗とは別集合。全Piece試験の成功とは報告しない。
 
-[Piece CI42569189244](https://github.com/MassyuRed/mashos-api/actions/runs/42569189244)は同じAPI41b5df88で全工程success。model stepは299 PASS／既存warning1／26.93秒。Analysis CI42569189246は本記録時点で実行中、成功未確定。
+[Piece CI42569189244](https://github.com/MassyuRed/mashos-api/actions/runs/42569189244)は同じAPI41b5df88で全工程success。model stepは299 PASS／既存warning1／26.93秒。[Analysis CI42569189246](https://github.com/MassyuRed/mashos-api/actions/runs/42569189246)も全工程successを確認。
 
 新file2と既存source1／workflow1の計4pathだけをAPIへ反映、remote bytes／commit親／変更集合／PR3 headを読戻し確認。既存CIのmodel試験stepへ2fileを追加し、新job／Gateを作らない。STRUCTURE_MAP_DELTA_PRESENT。RN・SQL schema・公開registry・設定・料金・quota・提供modelは不変。
 

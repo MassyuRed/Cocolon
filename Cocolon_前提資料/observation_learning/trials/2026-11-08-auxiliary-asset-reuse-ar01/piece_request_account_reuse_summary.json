@@ -490,7 +490,8 @@
       },
       "analysis": {
         "run": 42569189246,
-        "status_at_document_write": "in_progress"
+        "status": "completed",
+        "conclusion": "success"
       }
     }
   }
