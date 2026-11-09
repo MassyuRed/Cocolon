@@ -318,16 +318,36 @@
     "rn_ci": {
       "run": 42558430844,
       "status": "in_progress",
-      "conclusion": null
+      "conclusion": null,
+      "jobs": {
+        "javascript": "success",
+        "android_source": "success",
+        "android_export": "success",
+        "ios_source": "failure",
+        "ios_v4": {
+          "pass": 1,
+          "fail": 19
+        },
+        "ios_native": {
+          "pass": 129,
+          "fail": 0
+        },
+        "ios_bitmap": {
+          "pass": 44,
+          "fail": 0
+        },
+        "ios_refined_sample_bitmap": "not_run",
+        "remaining_jobs": "in_progress"
+      }
     },
     "formal_product_quality_credit": 0,
     "runtime": {
       "deploy": 0,
       "live_db_requests": 0,
       "gpu_calls": 0,
-      "native_bitmap": 0,
       "signed_build": 0,
-      "distribution": 0
+      "distribution": 0,
+      "refined_sample_native_bitmap": 0
     },
     "evidence_filename": "Cocolon_CMEE_AR04_RefinedRNSelection_20261109.zip"
   }
