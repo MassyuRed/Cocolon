@@ -2381,3 +2381,6 @@ JS181 PASS／17.35秒。新iOS [run42621869347](https://github.com/MassyuRed/Coc
 初回比較runner236.043835秒／HTTP177.152686秒、次のfit runner370.302342秒（trainer内部209.85秒／外側211.284314秒、HTTP120.858869秒）。実GPU RTX4000 Ada、総保持時間・総請求／通常原価は未測定。元提供PID35902へ復元し、health正常、元source・既存Analysis重み・認証値・起動引数・旧c496重み不変、自然Emlis／Analysisの前後非空response bytes一致。新e924は通常未採用、selector OFF。本番Render配置、実DB、signed build／配布、本人端末0。限定TECHNICAL_CREDIT・正式商品品質credit0／正式受入れ0/3。STRUCTURE_MAP_DELTA_PRESENT。
 
 新e924候補と完了48更新を繰り返さず、語り手が異なる動作の肯否・評価の時点・留保対象の保持を、既存の対照教材と保持教材の配分から改善する。模型作りの名詞形対応外はモデル失敗と分けてsource側へ残す。新候補の通常採用・本番／本人端末反映へ自動進行しない。AR-01の役割反転と他ARの新規活用は継続残件。
+
+
+**最終helper CI追補：** API651f1f38の[Piece CI42628030176](https://github.com/MassyuRed/mashos-api/actions/runs/42628030176)はcompleted／success、job129196776112のmodel17fileは894 PASS／59.08秒・既存warning1。[Analysis CI42628030209](https://github.com/MassyuRed/mashos-api/actions/runs/42628030209)もcompleted／success。追加helperの新3保存検査を含む最終headの結果で、先行891・対象14と重複加算しない。e924の意味退行・通常未採用と旧V4のRN別試験失敗は不変。

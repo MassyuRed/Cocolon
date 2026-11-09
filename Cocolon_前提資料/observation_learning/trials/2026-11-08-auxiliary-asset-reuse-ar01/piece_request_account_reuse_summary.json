@@ -1580,7 +1580,16 @@
       "analysis_ci": 42624362467,
       "product_source_ci": "success",
       "new_adjusted_saved_tests": 3,
-      "overlap_not_summed": true
+      "overlap_not_summed": true,
+      "final_helper_ci": {
+        "head": "651f1f38239d588898266bdf425fe2f02654ff2a",
+        "piece_run": 42628030176,
+        "model_job": 129196776112,
+        "model_pass": 894,
+        "model_seconds": 59.08,
+        "analysis_run": 42628030209,
+        "both_workflows": "completed/success"
+      }
     },
     "full_card": {
       "run": 42621869347,
