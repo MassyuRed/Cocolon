@@ -230,6 +230,8 @@ Analysisの既存source adapter→semantic admission→compiler→唯一realizer
 
 ### 7.1 Piece
 
+**11/9続行・一般文章整形とPiece専用LoRA候補：** 既存共有servingへ明示optionalのPiece専用adapterを追加する候補で、`piece.field_slots.v1` profileだけに使用する。自然Emlisはbase、Analysisは既存default adapterを維持し、Piece利用後は元adapterへ戻す。復元失敗時は提供を止め、別adapterでAnalysisを返さない。新`ai/tools/training/train_piece_model_adapter.py`は既存assistant-only CE処理を再利用し、固定24行、最大48update／480秒、既存構造configだけからfresh LoRAを作る。旧Analysis学習済tensorの初期値転用や重み結合はしない。 既存のwish／名詞参照、copula、同じ原prefixの有限未決定表現の読取をmodel armへ限定再利用し、追加生成なしで学習後の同6rawを旧2採用→新5採用へ接続した。主体・相手・欄・scope・否定・時点・程度・留保を保ち、未決定prefixの変更や追加を許可しない。 元の独立CMEE／S7とnative経路の拒否条件を保持し、既存未対応の評価対象「は」を「が」へ読み替えて採用しない。保存済みの同一実rawを修補・再生成せず、旧新readerの採否差と隔離保存を別記する。 原SYSTEMと全sourceを維持し、24新作架空教材と既使用6development比較を分離する。追加SYSTEM案は未採用。 結果・通常採否・残件は本書§11.2と既存trialへ戻す。
+
 #### 2026-11-09 Piece 4B接続の実装差分（今回の実装正本）
 
 Mashの「Pieceでも4Bを使う」指示を通常生成の候補取得へ具体化する。保存済みsourceを確定した後、既存共有4Bのnatural/base経路から文章候補を一度取得し、CMEEが原入力・本人補足と本文を独立に照合してから既存B8→Safety→B9→preview／saveへ渡す。4Bは候補を作る責務、CMEEは採否と確定本文を作る責務を持つ。旧作者との文字列完全一致はmodel候補の採否条件にしない。旧P4 offline受口とmodel未選択時の既存作者は互換用の別armとして保持し、model失敗時に旧作者へ切り替えない。
@@ -359,13 +361,13 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 | AR-01 | 現naturalの主体・所有者・否定・時点・留保を、旧失敗・意味比較・共通原因分析で改善。EM-01a/b | 現6境界と正常な短文／省略で、同入力の誤読を解消または明確に減らし、自然さ・別題材・既成功・保存再読を保持。検出増加／無出力だけでは完了しない | 継続中。新24実生成の4版は通常不採用。c6555fd5で疑問符なしの確認質問の保存抜けを修復、250局所PASS。同24rawは旧24保存→新22保存／2拒否、受理本文不変。全体の意味修復は未完 |
 | AR-02 | 現naturalの任意問い・回答・訂正・撤回・frameの一往復。EM-02a/b、03b | 一点確認／skip／終了／本人続行、対象だけ更新、撤回後の残存意味、同版再読、プラン境界 | AR-01の全一般品質完成待ちにはしない。未開始 |
 | AR-03 | 適格履歴の意味ある利用。EM-03a/b | 同一／別場面・変化・無関係・訂正前を区別し、適切な履歴が今回へ効く。失効材料を使わない | 現related_contextを継承。未開始 |
-| AR-04 | Piece一般本文・単独伝達・refined・画像整合。PC-01a/b/c、02等 | 元の意味と条件を保持し、単独で伝わる作品、適格補足の差、同じ採用画像の保存再読 | APIcfd3d60d。既存明示候補codec→欄名付きraw→CMEE、既存FOCUS原表面保持へ接続。旧6材料の受理1→新6、通常5本文×3plan隔離保存・再読。一般再構成・新refined SQL／live／同版画像・実機は残件 |
+| AR-04 | Piece一般本文・単独伝達・refined・画像整合。PC-01a/b/c、02等 | 元の意味と条件を保持し、単独で伝わる作品、適格補足の差、同じ採用画像の保存再読 | APIad417b07。新作架空24行をfresh Piece LoRAへ一回48更新。学習後の既使用6rawは全て変化し、同じrawのCMEE採用は旧reader2→限定改修後5となった。適格refined4再利用＋新normal4も8採用。隔離SQLでは13本文×3plan＝39保存と保存後の0生成再読が成立し、別1本文×3plan＝3件は保存前に拒否した。 Piece専用候補重みは通常未採用（candidate_normal_adoption=false）。GPUは元base／既存Analysis提供へ復元済み。限定TECHNICAL_CREDITで、正式商品品質credit0・正式受入れ0/3は維持する。 通常selectorはOFF。Render配置・RN／build・実DB・native同版画像／本人端末の新規確認は0。対象助詞「は」の意味保持、本人の語り口、さらに広い文章・欄混合・画像整合は残件で、他ARも未完了。 |
 | AR-05 | 分析の本人基準・役割／選択・記録間関係。AN-03a/b/c、04 | 原記録→意味→図／全文→両端根拠の対応、再出現／変化／不明の正しさ | 現Engine統合・保存済み成果を継承。並行可能。未開始 |
 | AR-06 | Emlis観測材料、訂正・削除・権利、長い蓄積と月次。EM-04/05、AN-02/06/08/10 | 本人sourceから材料を渡し、失効・分割範囲・当時版を保持。生成本文を本人事実にしない | AR-02/03/05の該当能力を利用。未開始 |
 | AR-07 | IF／Saved等の商品固有の残る意味保持責務。既存AN／PC残件 | 仮想・本人選択意向・観測を分離し、成立した経路で出力と保存を確認 | 既存商品の実装条件に従う。無断延期・新発売条件化をしない。未開始 |
 | AR-08 | 実証できた共通能力の通常適用と全体確認。EM-05/06/07等 | 採用版の意味保持・自然さ・権利・中断復帰・保存再読・実際の待ち時間／費用。未採用範囲は理由と残差を保持 | 各単位で通常採用可能。全core一括切替を強制しない。未開始 |
 
-現在の次作業は **AR-01**。全旧ファイルの再棚卸し完了、新checker完成、共通schema全面完成、旧100件全合格、追加観測会、署名buildを開始の前提に追加しない。旧資産確認と実装は同じ商品単位内で必要な原本へ戻る。
+現在は **AR-04の一般文章整形**を継続する。AR-01の方向反転等は未解決のまま別残件として保持する。全旧ファイルの再棚卸し完了、新checker完成、共通schema全面完成、旧100件全合格、追加観測会、署名buildを開始の前提に追加しない。旧資産確認と実装は同じ商品単位内で必要な原本へ戻る。
 
 既存の品質作業・新教師8件・保存重みの継続点を使う。GPUに現実の接続障害がある場合、取得できた事実、未実行の生成、回収済み原本、次の同一単位を記録し、CPUの合成成功を実モデル改善へ換算しない。接続復旧や既存の別core実装を必要範囲で進め、無関係な補助機構開発へ変えない。
 
@@ -425,7 +427,7 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 ### 11.2 現在の進行欄
 
-2026-11-09現在：API `a08c003c50919db33076dfc66e1a582e5488c354`、6path。既存Analysis servingのLMFE817f944／TokenizerData／prefix token maskをPiece専用の明示private `candidate_format=piece.field_slots.v1`へ再利用。field_slotsから必須1〜3key集合・追加key禁止・非空の自由stringを導き、Pieceだけ本人補足→元欄global index順を生成中に固定する。原文enum・旧作者正文・欄別追加推論・prompt追加・受領後のsplit／修補／fallbackはない。公開canonical本文は従来のpartition順へ戻し、PreparedRequest／全source／legacy receiver／保存後0生成を保持する。 新providerは実適用markerの一致を必須とし、旧serverの要求無視・marker欠落をPROVIDER_ERRORで拒否する。marker無しの通常Emlis／Analysisの引数形と応答bytesは維持。Pieceは既存natural鍵・同base、2048token／8192context／既存23秒推論枠・queueを用い、model.generateは各HTTP一回。LMFE未初期化なら生成前拒否。共有model/adapter/認証値/起動引数は保持し、GPU提供コードを同重みで2回差替えた。最終PID31933／source SHA256 `5e3d43637ab8c8c541c1e56a74401c5d6d17dcedcdc5aa187448055cb2a3bcd3`、health正常。APIのRender配置・selector有効化は行っていないため、アプリ通常提供の反映完了ではない。 実12call＝旧契約baseline2＋順不同mask4＋補足先行mask6、全HTTP200／stop。baselineの同PAST／NOW rawは前回と完全一致。順不同maskは4/4必須欄を出したが、元NOWはmemo内混入＋回答重複が残り、隔離SQLで3planとも保存前拒否・quota0。既存field-order制御で補足を先に生成すると、同NOWの本文を原入力・回答へ正しく分離できた。最終6例（refined4／normal2）は全て意味保持し、同じ実rawを新しい等価な合成sourceへ厳密再bindして6×3plan＝18件のpreview→save→再送／新service非生成再読に成功。refined12件は見た目変更後も同本文。本文・recipe等は保存版を維持、各quota1、原入力／Emlis不変。実GPUのoriginal PreparedRequest IDを実DBへ保存した証明ではなく、隔離PGlite・合成Auth／HTTPで既存通常ownerを通した確認である。 形式を満たす値の意味まではdecoderが保証しない。欄内混入、否定・時点・程度・他者・追加等は現在のreceiver／CMEE／S7で引き続き独立拒否する。今回の同6例は開発材料でblind一般化ではない。本文の語は原文維持で、一般文章の整形品質改善やMash正式受入れへ換算しない。旧不適格NEW_REFINEDを通常保存成功へ戻さない。 最終19file637 PASS／51.89秒・既存warning1、FAIL／SKIP0。既存GPU用の固定parser依存だけをCIのCPU検証にも使い、Render依存は増やさない。中間630／独立138等は加算しない。生成loopは18.335122秒＋18.901216秒、起動は各約19.015秒、model load／提供再起動各2、学習／自動retry0、usage／revision／総請求unknown。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT・正式商品品質credit0。一般再構成・広い材料／欄混合の残差、API本番／RN統合／同版native画像／本人端末、他ARは残件。 [全結果・次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-ordered-decoder-20261109)。
+2026-11-09現在：API `ad417b07f9bb9f4ebae8478c4db682d6ba82c564`。新作架空24行をfresh Piece LoRAへ一回48更新。学習後の既使用6rawは全て変化し、同じrawのCMEE採用は旧reader2→限定改修後5となった。適格refined4再利用＋新normal4も8採用。隔離SQLでは13本文×3plan＝39保存と保存後の0生成再読が成立し、別1本文×3plan＝3件は保存前に拒否した。 Piece専用候補重みは通常未採用（candidate_normal_adoption=false）。GPUは元base／既存Analysis提供へ復元済み。限定TECHNICAL_CREDITで、正式商品品質credit0・正式受入れ0/3は維持する。 通常selectorはOFF。Render配置・RN／build・実DB・native同版画像／本人端末の新規確認は0。対象助詞「は」の意味保持、本人の語り口、さらに広い文章・欄混合・画像整合は残件で、他ARも未完了。 次は対象助詞「は」と本人の語り口の残差を、広い意味保持・単独伝達の品質と既存保存／画像接続の中で改善する。同じ教師やSYSTEMの追加周回へ自動進行しない。 [全結果・次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-prose-learning-20261109)。
 
 
 2026-11-09 Piece4B接続：§7.1具体設計を先行反映後、API `95e1b5d6c6d68b17fadaae3c982ebaa87eed1d79`でmodel候補→既存CMEE／B8／Safety／通常保存を接続した。RN preview POST期限を250秒へ修正。通常3planと実Q2 A/Cの隔離保存・0再生成再読を確認。初期short_essay／既存有限source資格、default OFF、一般文章・live反映／端末未完了を維持する。[実測・限定・次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-candidate-connection-20261109)。
@@ -445,14 +447,14 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | 提供・保全 | 学習／新load／retry／server再起動0。同PID26784／source／Analysis重み不変・health200。role最初の梱包漏れは生成0のCPU事前検査で検出・依存補完し失敗logも保全。private同artifact準備v0→結果v1、総請求額未測定 |
 | 次の同一商品単位 | 意味材料が正しく届いても完成rawで崩れる境界へ限定。同種label／SYSTEM追加周回を終了し、既存meaning→現作者の依頼方向・対象状態・語り手の自然文実現を改修。能受動／明記省略／状態対照、成功control、別題材評価。容量／学習等の原因は未断定 |
 | 再開記録 | weekly第10回§32、[全結果・範囲・次作業](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/request_role_binding_review.md)／[本文なし集計](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/request_role_binding_summary.json) |
-| AR-01通常と残件 | AR-01通常不採用・役割反転未解決。今回のAPI差分はAR-04のみ（最終a08c003c）、AR-01研究patchの通常採用なし。Render配置／実DB／RN／build0、AR-02は今回未着手。全必要資産活用・端末／正式受入れ未完了 |
+| AR-01通常と残件 | AR-01通常不採用・役割反転未解決。最新API ad417b07の実装差分はAR-04のみで、AR-01研究patchの通常採用なし。Render配置／実DB／RN／build0、AR-02は今回未着手。全必要資産活用・端末／正式受入れ未完了 |
 | AR-04回収・改修 | 既存natural_reply_meaningのfinite節／活用／格／人役読取＋Pieceガードを、piece_source._finite_self_person_action_account→piece_v1cの既存KEEPへ接続。許可述語は頼む／相談する／伝える、明示SELF・肯否過去・相手1／を対象1・句点。曖昧な伝える「に」受動は拒否を維持。新命題・作者・理解／承諾の推測なし |
 | AR-04実本文 | 先行の有限対人動作8は全件不可→生成。時点・SELF6表記・能受動・否定・丁寧体・二欄留保を保持。前回12の生成10はmeaning／plan／artifact／candidate／recipe／serialized hash全同一、拒否2維持。開発作例でblind一般化ではない。前回依頼の新規5は履歴保持、今回の欄名付き比較へ再加算しない |
 | AR-04検証・再読 | 先行有限対人動作の3351 PASS／27.94秒・既存warning1・FAIL／skip0、保存9caseで3plan確認。原本SQL11＋既存helper等3のbytes一致。新旧20を実service／既存review＋PGliteへ通し18保存／2拒否、本文等8fieldの3段同一・保存行／詳細の12field同一、初回後は作者／compiler／Engine／review禁止・同key消費各1。原入力／Emlis不変。合成Auth／先行provider／SQLcallbackであり実DB／native画像／ASGI成功ではない |
-| AR-04反映・残件 | APIa08c003c・6path、19file637 PASS。GPU同重み2差替え・最終health正常。最終6実本文×3planの隔離保存／再読18/18。API／selector／RN未反映・一般再構成／広い材料／同版画像／本人端末は残件 |
+| AR-04反映・残件 | APIad417b07。新作架空24行をfresh Piece LoRAへ一回48更新。学習後の既使用6rawは全て変化し、同じrawのCMEE採用は旧reader2→限定改修後5となった。適格refined4再利用＋新normal4も8採用。隔離SQLでは13本文×3plan＝39保存と保存後の0生成再読が成立し、別1本文×3plan＝3件は保存前に拒否した。 Piece専用候補重みは通常未採用（candidate_normal_adoption=false）。GPUは元base／既存Analysis提供へ復元済み。限定TECHNICAL_CREDITで、正式商品品質credit0・正式受入れ0/3は維持する。 通常selectorはOFF。Render配置・RN／build・実DB・native同版画像／本人端末の新規確認は0。対象助詞「は」の意味保持、本人の語り口、さらに広い文章・欄混合・画像整合は残件で、他ARも未完了。 |
 | AR-04現在のrefined | APIca4140abの通常server保存を継承。RN4a103688で表示した第一本人回答の明示選択→exact回答query→七項目refined POSTへ接続。元／補足は別source。旧保存結果不明は元保存要求を優先。同じ実Q2材料の親導線0→新2、本文指紋とSQL保存本文／初回recipe一致。1512関連PASS・Metro1件対象外。未build／未live反映／native未確認 |
-| AR-04現在の4B本文読取 | FOCUS／評価／THENの既存意味読取を保持。a08c003cで既存LMFEを明示Piece生成へ接続、必須欄＋補足先行をtoken maskで固定。形式と意味は別検査、旧serverのmarker欠落は拒否。元NOWの欠落／混入を実比較で修復、本文語は原文維持 |
-| AR-04再開記録 | [実結果・次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-ordered-decoder-20261109)。次は一般文章の意味を保つ再構成と広い材料での欄混合確認。同じprompt追加周回・原文enum・旧作者修補はしない。live API／統合配布／同版画像／本人端末、他ARと正式受入れの残件を保持 |
+| AR-04現在の4B本文読取 | FOCUS／評価／THEN・欄完全性／補足先行・原文／二欄／source資格を継承。明示optionalのPiece専用adapter候補と24架空教材を追加し、原SYSTEMは維持。意味は引き続きCMEE／S7が独立採否し、未知の自由文同値へ一般化しない |
+| AR-04再開記録 | [全結果・次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-prose-learning-20261109)。 次は対象助詞「は」と本人の語り口の残差を、広い意味保持・単独伝達の品質と既存保存／画像接続の中で改善する。同じ教師やSYSTEMの追加周回へ自動進行しない。 他AR・通常提供／画像／端末・正式受入れの残件を保持 |
 
 以後はこの表と各能力の対応行を現在状態へ置換更新し、詳細な実行事実は既存trial／weeklyへ置く。新しいhandoff系列・全件hash Gateを作らない。中断時も、成果物と未実行を既存保存先へ残し、同じ未完商品単位から続ける。
 

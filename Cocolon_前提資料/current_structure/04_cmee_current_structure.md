@@ -2076,14 +2076,15 @@ API `5c042ed5107d15aef43ff6149279c796d5c45808`、8path。既存`emlis_answer_upd
 最終16file559 PASS／46.06秒・既存warning1、FAIL／SKIP0。9file model CI対象は新THEN testを追加。中間／独立集合は重複加算しない。既知の旧評価19失敗と別のnative V4同19失敗は未修復。配置／live DB／RN／build／配布・native画像／本人端末確認0、TECHNICAL_CREDIT・正式商品品質credit0。次は一般文章の再構成と、NOW補足のslot結合を起こす生成側の修正。 [実測・原本・次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-eligible-refined-4b-20261109)。
 
 <a id="piece-ordered-decoder-20261109"></a>
-## 2026-11-09 — AR-04 既存生成制約・補足先行の欄順をPieceへ接続
+旧decoder接続の実測は[当時の記録](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-ordered-decoder-20261109)へ。現在地は次節。
 
-API `a08c003c50919db33076dfc66e1a582e5488c354`、6path。既存Analysis servingのLMFE817f944／TokenizerData／prefix token maskをPiece専用の明示private `candidate_format=piece.field_slots.v1`へ再利用。field_slotsから必須1〜3key集合・追加key禁止・非空の自由stringを導き、Pieceだけ本人補足→元欄global index順を生成中に固定する。原文enum・旧作者正文・欄別追加推論・prompt追加・受領後のsplit／修補／fallbackはない。公開canonical本文は従来のpartition順へ戻し、PreparedRequest／全source／legacy receiver／保存後0生成を保持する。
+<a id="piece-prose-learning-20261109"></a>
+## 2026-11-09 — AR-04 一般文章整形・Piece専用学習候補
 
-新providerは実適用markerの一致を必須とし、旧serverの要求無視・marker欠落をPROVIDER_ERRORで拒否する。marker無しの通常Emlis／Analysisの引数形と応答bytesは維持。Pieceは既存natural鍵・同base、2048token／8192context／既存23秒推論枠・queueを用い、model.generateは各HTTP一回。LMFE未初期化なら生成前拒否。共有model/adapter/認証値/起動引数は保持し、GPU提供コードを同重みで2回差替えた。最終PID31933／source SHA256 `5e3d43637ab8c8c541c1e56a74401c5d6d17dcedcdc5aa187448055cb2a3bcd3`、health正常。APIのRender配置・selector有効化は行っていないため、アプリ通常提供の反映完了ではない。
+API `ad417b07f9bb9f4ebae8478c4db682d6ba82c564`。新作架空24行をfresh Piece LoRAへ一回48更新。学習後の既使用6rawは全て変化し、同じrawのCMEE採用は旧reader2→限定改修後5となった。適格refined4再利用＋新normal4も8採用。隔離SQLでは13本文×3plan＝39保存と保存後の0生成再読が成立し、別1本文×3plan＝3件は保存前に拒否した。 Piece専用候補重みは通常未採用（candidate_normal_adoption=false）。GPUは元base／既存Analysis提供へ復元済み。限定TECHNICAL_CREDITで、正式商品品質credit0・正式受入れ0/3は維持する。 通常selectorはOFF。Render配置・RN／build・実DB・native同版画像／本人端末の新規確認は0。対象助詞「は」の意味保持、本人の語り口、さらに広い文章・欄混合・画像整合は残件で、他ARも未完了。 次は対象助詞「は」と本人の語り口の残差を、広い意味保持・単独伝達の品質と既存保存／画像接続の中で改善する。同じ教師やSYSTEMの追加周回へ自動進行しない。
 
-実12call＝旧契約baseline2＋順不同mask4＋補足先行mask6、全HTTP200／stop。baselineの同PAST／NOW rawは前回と完全一致。順不同maskは4/4必須欄を出したが、元NOWはmemo内混入＋回答重複が残り、隔離SQLで3planとも保存前拒否・quota0。既存field-order制御で補足を先に生成すると、同NOWの本文を原入力・回答へ正しく分離できた。最終6例（refined4／normal2）は全て意味保持し、同じ実rawを新しい等価な合成sourceへ厳密再bindして6×3plan＝18件のpreview→save→再送／新service非生成再読に成功。refined12件は見た目変更後も同本文。本文・recipe等は保存版を維持、各quota1、原入力／Emlis不変。実GPUのoriginal PreparedRequest IDを実DBへ保存した証明ではなく、隔離PGlite・合成Auth／HTTPで既存通常ownerを通した確認である。
+既存共有servingへ明示optionalのPiece専用adapterを追加する候補で、`piece.field_slots.v1` profileだけに使用する。自然Emlisはbase、Analysisは既存default adapterを維持し、Piece利用後は元adapterへ戻す。復元失敗時は提供を止め、別adapterでAnalysisを返さない。新`ai/tools/training/train_piece_model_adapter.py`は既存assistant-only CE処理を再利用し、固定24行、最大48update／480秒、既存構造configだけからfresh LoRAを作る。旧Analysis学習済tensorの初期値転用や重み結合はしない。 既存のwish／名詞参照、copula、同じ原prefixの有限未決定表現の読取をmodel armへ限定再利用し、追加生成なしで学習後の同6rawを旧2採用→新5採用へ接続した。主体・相手・欄・scope・否定・時点・程度・留保を保ち、未決定prefixの変更や追加を許可しない。 元の独立CMEE／S7とnative経路の拒否条件を保持し、既存未対応の評価対象「は」を「が」へ読み替えて採用しない。保存済みの同一実rawを修補・再生成せず、旧新readerの採否差と隔離保存を別記する。
 
-形式を満たす値の意味まではdecoderが保証しない。欄内混入、否定・時点・程度・他者・追加等は現在のreceiver／CMEE／S7で引き続き独立拒否する。今回の同6例は開発材料でblind一般化ではない。本文の語は原文維持で、一般文章の整形品質改善やMash正式受入れへ換算しない。旧不適格NEW_REFINEDを通常保存成功へ戻さない。
+通常selectorはOFF、Render配置・RN変更／build・実DB反映は行っていない。source資格・二欄・原入力／補足・raw受領・CMEE/S7・保存後非生成の境界を保持する。CPU採用、学習loss、実生成、隔離保存、通常提供、同版native画像／本人端末、正式商品受入れを分ける。
 
-最終19file637 PASS／51.89秒・既存warning1、FAIL／SKIP0。既存GPU用の固定parser依存だけをCIのCPU検証にも使い、Render依存は増やさない。中間630／独立138等は加算しない。生成loopは18.335122秒＋18.901216秒、起動は各約19.015秒、model load／提供再起動各2、学習／自動retry0、usage／revision／総請求unknown。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT・正式商品品質credit0。一般再構成・広い材料／欄混合の残差、API本番／RN統合／同版native画像／本人端末、他ARは残件。 [全結果・次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-ordered-decoder-20261109)。
+[実結果・範囲・次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-prose-learning-20261109)。

@@ -801,9 +801,248 @@
       },
       "analysis": {
         "run": 42584857044,
-        "status": "in_progress",
-        "conclusion": null
+        "status": "completed",
+        "conclusion": "success"
       }
     }
+  },
+  "piece_prose_learning_20261109": {
+    "parent_api": "a08c003c50919db33076dfc66e1a582e5488c354",
+    "unique_api_paths": 7,
+    "normal_adoption": false,
+    "formal_product_acceptance": "0/3 unchanged",
+    "training": {
+      "runs": 1,
+      "rows": 24,
+      "updates": 48,
+      "measurement_forwards": 4,
+      "model_generations": 0,
+      "trainer_seconds": 144.809,
+      "trainer_seconds_scope": "includes CPU/model load/save/reload, not pure update time",
+      "parent_process_seconds": 146.3172302118037,
+      "initial": "FRESH_BASE_NEW_RANDOM_LORA_CONFIG_ONLY",
+      "old_adapter_weights_read": false,
+      "model": "Qwen/Qwen3.5-4B",
+      "base_revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "pins": {
+        "transformers": "5.19.0",
+        "peft": "0.21.2",
+        "accelerate": "1.15.0",
+        "safetensors": "0.8.0"
+      },
+      "learning_rate": 0.0001,
+      "seed": 20261109,
+      "max_seconds": 480,
+      "tensor_count": 112,
+      "parameter_count": 3833856,
+      "saved_reload_tensor_identity": true,
+      "weights_sha256": "831c6b086d26cdb3e98ab0663fa6b621de11703a90a1c50b645d1ed778406aa5",
+      "config_sha256": "0deaeaaa3ca7b7c824fe40e36c99213095a1456e3c7055189dd945312f72fafc",
+      "runner_sha256": "394ad062430d9f64a19a50ee98b0ab174bb21bbd66de41e550836cd9a796707f",
+      "checkpoint24_weights_sha256": "27afc4e8ea8670eca4c2285e6286eb0980533606ced6b08514210baa35821021",
+      "optimizer_and_rng_saved": false,
+      "strict_midrun_resume_claimed": false,
+      "measurements": [
+        {
+          "phase": "before",
+          "losses": {
+            "PCEDIT01": 0.3758980631828308,
+            "PCEDIT32": 0.39522045850753784
+          }
+        },
+        {
+          "phase": "after",
+          "losses": {
+            "PCEDIT01": 0.00212076841853559,
+            "PCEDIT32": 0.0032819437328726053
+          }
+        }
+      ],
+      "peak_allocated_gib": 9.435314178466797,
+      "peak_reserved_gib": 9.66015625
+    },
+    "actual": {
+      "total_http_calls": 32,
+      "all_http_200_stop": true,
+      "piece_calls": 26,
+      "control_calls": 6,
+      "baseline_calls": 6,
+      "positive_system_calls": 6,
+      "pretrain_stopped_trial_control_calls": 2,
+      "successful_trial_calls": 10,
+      "additional_calls": 8,
+      "after_learning_six_raw_changed": 6,
+      "same_six_raw_old_reader_admitted": 2,
+      "same_six_raw_new_reader_admitted": 5,
+      "remaining_unproven_target_particle_ha_rejected": 1,
+      "raw_repair": false,
+      "extra_generation_for_reader_fix": 0,
+      "wide_cases": 8,
+      "wide_refined_previously_used": 4,
+      "wide_refined_raw_equals_previous_bytes": 4,
+      "wide_new_normal": 4,
+      "wide_new_normal_raw_changed": 4,
+      "wide_admitted": 8,
+      "wide_new_normal_voice_residual": "BOKU rewritten to WATASHI",
+      "wide_generation_loop_seconds": 33.08166945702396,
+      "comparison_blind_generalization": false,
+      "positive_system_adopted": false,
+      "original_system_kept": true,
+      "further_learning_after_trial": 0,
+      "natural_analysis_before_after_http_200_stop": true,
+      "natural_analysis_response_bytes_equal": true
+    },
+    "saved_sql": {
+      "tiers": 3,
+      "attempts": 42,
+      "saved": 39,
+      "rejected": 3,
+      "main_six_saved": 15,
+      "main_six_rejected": 3,
+      "wide_saved": 24,
+      "old_reader_history_saved": 6,
+      "old_reader_history_rejected": 12,
+      "old_reader_history_not_added_to_final_counts": true,
+      "refined_visual_change_cases": 12,
+      "normal_success_cases": 27,
+      "normal_new_visual_change_checked": false,
+      "success_original_and_emlis_unchanged_cases": 39,
+      "rejection_record_and_quota_unchanged_cases": 3,
+      "rejection_end_source_emlis_unchanged_asserted": false,
+      "quota_each_success": 1,
+      "regeneration_after_save": 0,
+      "database": "isolated PGlite",
+      "auth": "synthetic",
+      "identity": "recorded actual raw strictly rebound to fresh equivalent synthetic source ids and datetimes",
+      "gpu_original_request_identity_saved_live": false,
+      "saved_distinct_body_cases": 13,
+      "rejected_distinct_body_cases": 1,
+      "total_source_cases": 14
+    },
+    "tests": {
+      "targeted": {
+        "files": 18,
+        "passed": 807,
+        "failed": 0,
+        "skipped": 0,
+        "warnings": 1,
+        "seconds": 47.64
+      },
+      "broader": {
+        "files": 20,
+        "passed": 904,
+        "failed": 52,
+        "seconds": 47.1,
+        "full_suite_success": false
+      },
+      "known_failures_same_head": {
+        "broader_two_files": 52,
+        "other_legacy": 10,
+        "distinct_unfixed_total": 62,
+        "rerun_failures_not_added": true
+      }
+    },
+    "runtime": {
+      "pretrain_failure_updates": 0,
+      "pretrain_failure_reason": "immediate NVML retained exited owned pid",
+      "first_restored_pid": 32700,
+      "owned_exited_pid_wait_max_seconds": 6,
+      "owned_exited_pid_actual_wait_seconds": 1,
+      "unknown_process_rejection_preserved": true,
+      "successful_candidate_pid": 33185,
+      "successful_restored_pid": 33210,
+      "wide_candidate_pid": 33442,
+      "final_restored_pid": 33466,
+      "final_health": true,
+      "server_model_loads": 5,
+      "trainer_model_loads": 2,
+      "total_model_loads": 7,
+      "candidate_server_sha256": "a8fdfbe1bd510a6e21177b60a379ed10d2a8789019274bbb260fd040f52601ef",
+      "restored_source_sha256": "5e3d43637ab8c8c541c1e56a74401c5d6d17dcedcdc5aa187448055cb2a3bcd3",
+      "source_and_old_analysis_weights_unchanged": true,
+      "credentials_and_args_preserved": true,
+      "candidate_boot_seconds": 17.01570955105126,
+      "successful_restore_boot_seconds": 16.026077292859554,
+      "wide_candidate_boot_seconds": 16.015624491032213,
+      "wide_restore_boot_seconds": 17.01456118095666,
+      "render_deploy": 0,
+      "selector_enabled": false,
+      "rn": 0,
+      "build": 0,
+      "live_db": 0,
+      "native_device": 0,
+      "total_bill": null,
+      "production_cost": null
+    },
+    "ci": {
+      "previous_analysis": {
+        "run": 42584857044,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      "piece": {
+        "run": 42595376623,
+        "status": "completed",
+        "conclusion": "success",
+        "job": 129086617212,
+        "model_tests_passed": 528,
+        "model_tests_seconds": 43.21
+      },
+      "analysis": {
+        "run": 42595376578,
+        "status": "completed",
+        "conclusion": "success",
+        "job": 129086617232
+      }
+    },
+    "raw_result_sha256": {
+      "learning": "15f1bc34de3d1ccf40f45f284532b4325c24f2cf176bc4590ea7b96ab97f9002",
+      "wide": "49dfd842175869950928e74a552d5e8ea758006870d7bd71bbbb4c41017e0f81"
+    },
+    "limits": [
+      "target particle HA unproved and rejected",
+      "BOKU to WATASHI voice residual",
+      "comparison six are development-known",
+      "refined four are previously used",
+      "general Japanese quality not accepted",
+      "Render/default selector/RN/live DB/native unchanged",
+      "other AR pending"
+    ],
+    "next": [
+      "target HA and voice fidelity",
+      "broader meaning-preserving prose",
+      "existing save/image/integration boundaries"
+    ],
+    "api": "ad417b07f9bb9f4ebae8478c4db682d6ba82c564",
+    "api_paths": [
+      ".github/workflows/piece-b2b-isolated-postgres.yml",
+      "ai/services/ai_inference/piece_v2_content_policy.py",
+      "ai/tests/test_piece_model_adapter_training.py",
+      "ai/tests/test_piece_model_prose_register.py",
+      "ai/tests/test_piece_model_server_constraints.py",
+      "ai/tools/serve_emlis_natural_reply.py",
+      "ai/tools/training/train_piece_model_adapter.py"
+    ],
+    "evidence_filename": "Cocolon_CMEE_AR04_PieceProseLearning4B_20261109.zip",
+    "preparation": {
+      "fictional_rows": 24,
+      "original_fields": 30,
+      "two_field_rows": 6,
+      "name_to_written_role_rows": 2,
+      "excluded_unsupported_drafts": 8,
+      "data_sha256": "aef506e89efe41f4be4659dc929fcda3c71a492ac45de958cb8c681ec0356b77",
+      "old_surface_forbidden_cpu_generated": 24,
+      "original_system": true,
+      "initial_actual_calls": 12,
+      "initial_unchanged_raw": 12,
+      "baseline_generated": 4,
+      "positive_system_generated": 4,
+      "positive_system_adopted": false,
+      "training_probe_source_exact_overlap": 0,
+      "training_probe_target_exact_overlap": 0,
+      "comparison_blind": false
+    },
+    "structure_delta": "STRUCTURE_MAP_DELTA_PRESENT",
+    "formal_product_quality_credit": 0
   }
 }

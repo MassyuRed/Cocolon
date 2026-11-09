@@ -2244,4 +2244,25 @@ API `a08c003c50919db33076dfc66e1a582e5488c354`、6path。既存Analysis serving�
 
 最終19file637 PASS／51.89秒・既存warning1、FAIL／SKIP0。既存GPU用の固定parser依存だけをCIのCPU検証にも使い、Render依存は増やさない。中間630／独立138等は加算しない。生成loopは18.335122秒＋18.901216秒、起動は各約19.015秒、model load／提供再起動各2、学習／自動retry0、usage／revision／総請求unknown。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT・正式商品品質credit0。一般再構成・広い材料／欄混合の残差、API本番／RN統合／同版native画像／本人端末、他ARは残件。 [実比較・原本・次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-ordered-decoder-20261109)。
 
-[Piece CI42584857085](https://github.com/MassyuRed/mashos-api/actions/runs/42584857085)は全工程success、job129052116528のmodel10fileは442 PASS／既存warning1／42.13秒。新parserは実pinned依存でskipせず実行。Analysis CI42584857044は確認時点で実行中。
+[Piece CI42584857085](https://github.com/MassyuRed/mashos-api/actions/runs/42584857085)は全工程success、job129052116528のmodel10fileは442 PASS／既存warning1／42.13秒。新parserは実pinned依存でskipせず実行。[Analysis CI42584857044](https://github.com/MassyuRed/mashos-api/actions/runs/42584857044)も後続確認でcompleted／success。
+
+<a id="piece-prose-learning-20261109"></a>
+## 45. 補助経路活用AR-04 — 一般文章整形・Piece専用LoRA候補
+
+API `ad417b07f9bb9f4ebae8478c4db682d6ba82c564`。新作架空24行をfresh Piece LoRAへ一回48更新。学習後の既使用6rawは全て変化し、同じrawのCMEE採用は旧reader2→限定改修後5となった。適格refined4再利用＋新normal4も8採用。隔離SQLでは13本文×3plan＝39保存と保存後の0生成再読が成立し、別1本文×3plan＝3件は保存前に拒否した。
+
+先行の原SYSTEM6callと文章整形SYSTEM6callは全12本文が原文コピーで、各6件中4件だけCMEE採用。追加SYSTEM案は整形改善がなく未採用とした。比較6件は学習へ入れていないが、既使用のdevelopment材料でありblind評価ではない。別に新作した架空24source／24targetはnormal保存7field、二欄6件・30slot、名前から明記役割への抽象化2件を含む。原SYSTEMを保ち、全24targetを旧作者4関数禁止でCPU採用確認した。未対応初稿8件は学習rowsから除外し、parserを緩めていない。データSHA256は`aef506e89efe41f4be4659dc929fcda3c71a492ac45de958cb8c681ec0356b77`。
+
+最終関連18fileは807 PASS／47.64秒・既存warning1、FAIL／SKIP0。広範20fileは904 PASS／52 FAIL／47.10秒で全suite成功ではない。同じhead・同じ2fileの既存52失敗と照合済みで、再実行分を重複加算しない。別のlegacy10失敗も同じheadで確認済みのため、識別した未修復失敗は合計62件。
+
+学習後6rawの通常3plan検証は5本文×3＝15保存／1本文×3＝3拒否、追加8raw×3＝24保存。合算は保存13本文＋拒否1本文の計14材料・42試行・39保存／3拒否で、旧reader時代の6保存／12拒否を上乗せしない。refined12件だけ画像設定変更後の同本文も検証し、normal27件には今回の新しい画像設定変更検証を主張しない。成功39件は原入力／Emlis不変、保存版本文・recipe等と非生成再読・quota各1を確認。拒否3件は新record／quota不変の確認で、終了時source／Emlis不変の追加assertはしていない。
+
+保存は記録済み実rawを等価な新しい合成source ID／日時へ厳密再bindした隔離PGlite・合成Authによる既存通常owner検証。GPU生成時のoriginal PreparedRequest IDを実live DBへ保存した証明ではない。raw修補・保存後のモデル／旧作者再生成は0。
+
+前回Analysis CI42584857044はcompleted／successを後続確認済み。今回Piece CI42595376623／Analysis CI42595376578はいずれもcompleted／success。Pieceのmodel検査12fileは528 PASS／43.21秒で、ローカル807件と加算しない。
+
+初回試行は学習前に、終了直後の自分の旧PIDがNVMLへ残ったことで停止し、学習更新は0。元提供32700を復元してhealth正常を確認した。回復は終了確認済みの同PIDだけ最大6秒待つ限定処理で、実際の残留待ち1秒、未知processの拒否は維持した。成功試行は候補33185で比較し、元提供33210へ復元。追加8比較は候補33442で行い、最終は元提供33466へ復元してhealth正常。元serving source・旧Analysis重み・認証値・起動引数は不変。自然Emlis／Analysisの前後controlは双方HTTP200／stop、response bytes完全一致を確認した。model loadは計7（serving5＋trainer2）。trainer時間・起動時間・推論時間・GPU保持／保存／通信／総請求額を混同せず、総請求額と提供原価は未測定。
+
+Piece専用候補重みは通常未採用（candidate_normal_adoption=false）。GPUは元base／既存Analysis提供へ復元済み。限定TECHNICAL_CREDITで、正式商品品質credit0・正式受入れ0/3は維持する。 通常selectorはOFF。Render配置・RN／build・実DB・native同版画像／本人端末の新規確認は0。対象助詞「は」の意味保持、本人の語り口、さらに広い文章・欄混合・画像整合は残件で、他ARも未完了。 次は対象助詞「は」と本人の語り口の残差を、広い意味保持・単独伝達の品質と既存保存／画像接続の中で改善する。同じ教師やSYSTEMの追加周回へ自動進行しない。
+
+[実本文比較・原本・限定](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-prose-learning-20261109)。

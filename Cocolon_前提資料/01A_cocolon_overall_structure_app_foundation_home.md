@@ -6297,3 +6297,24 @@ API `1ed4ca27da71ddca510d1ad035b1f0fd7703b1ab`の7path、続行`cfd3d60d476a1e6f
 | `.github/workflows/piece-b2b-isolated-postgres.yml` | 既存pinned GPU parser依存をCPU検証へ導入し新testを実行、Render依存不変 |
 
 最終GPU提供source SHA256 5e3d43637ab8c8c541c1e56a74401c5d6d17dcedcdc5aa187448055cb2a3bcd3。実比較・保存再読・限界は[既存trial](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-ordered-decoder-20261109)。
+
+<a id="piece-prose-learning-20261109"></a>
+## 2026-11-09 — AR-04 一般文章整形・Piece専用adapterのfile地図
+
+API `ad417b07f9bb9f4ebae8478c4db682d6ba82c564`。既存ownerのPiece明示profileに閉じる差分。STRUCTURE_MAP_DELTA_PRESENT。
+
+| mashos-api path | 責務差分 |
+|---|---|
+| `ai/tools/serve_emlis_natural_reply.py` | 明示optionalの独立Piece adapterをPiece profileだけへ適用し、natural base／Analysis defaultを保持。実adapter revisionを返し、利用後復元・復元失敗時停止を実装。 |
+| `ai/tools/training/train_piece_model_adapter.py` | 既存assistant-only CEを再利用するfresh config-only LoRA。架空24行、最大48update／480秒、全targetとEOS・保存非学習reloadを固定。 |
+| `ai/services/ai_inference/piece_v2_content_policy.py` | 既存wish・名詞参照・copula・有限未決定の表現差をmodel本文の独立読取へ再利用。同じ実rawの全量照合を保ち、未知の評価対象「は」は拒否。 |
+| `ai/tests/test_piece_model_server_constraints.py` | Piece専用adapter適用／default復元・自然Emlis／Analysis不変、設定不正と復元失敗時停止を既存serving検証へ追加。 |
+| `ai/tests/test_piece_model_adapter_training.py` | 固定24行・scope／上限・assistant-only CE／終端・fresh初期値と保存reloadの限定学習契約を確認。 |
+| `ai/tests/test_piece_model_prose_register.py` | wish・copula・同じprefixの未決定文の同値と変異拒否、source／scope／視点／原文の保護を確認。 |
+| `.github/workflows/piece-b2b-isolated-postgres.yml` | 既存path triggerとmodel検証stepへtraining／register testを追加。新workflow／job・Render依存の追加なし。 |
+
+既存共有servingへ明示optionalのPiece専用adapterを追加する候補で、`piece.field_slots.v1` profileだけに使用する。自然Emlisはbase、Analysisは既存default adapterを維持し、Piece利用後は元adapterへ戻す。復元失敗時は提供を止め、別adapterでAnalysisを返さない。新`ai/tools/training/train_piece_model_adapter.py`は既存assistant-only CE処理を再利用し、固定24行、最大48update／480秒、既存構造configだけからfresh LoRAを作る。旧Analysis学習済tensorの初期値転用や重み結合はしない。 既存のwish／名詞参照、copula、同じ原prefixの有限未決定表現の読取をmodel armへ限定再利用し、追加生成なしで学習後の同6rawを旧2採用→新5採用へ接続した。主体・相手・欄・scope・否定・時点・程度・留保を保ち、未決定prefixの変更や追加を許可しない。 元の独立CMEE／S7とnative経路の拒否条件を保持し、既存未対応の評価対象「は」を「が」へ読み替えて採用しない。保存済みの同一実rawを修補・再生成せず、旧新readerの採否差と隔離保存を別記する。
+
+新作架空24行をfresh Piece LoRAへ一回48更新。学習後の既使用6rawは全て変化し、同じrawのCMEE採用は旧reader2→限定改修後5となった。適格refined4再利用＋新normal4も8採用。隔離SQLでは13本文×3plan＝39保存と保存後の0生成再読が成立し、別1本文×3plan＝3件は保存前に拒否した。 Piece専用候補重みは通常未採用（candidate_normal_adoption=false）。GPUは元base／既存Analysis提供へ復元済み。限定TECHNICAL_CREDITで、正式商品品質credit0・正式受入れ0/3は維持する。 通常selectorはOFF、Render配置・RN変更／build・実DB反映は行っていない。source資格・二欄・原入力／補足・raw受領・CMEE/S7・保存後非生成の境界を保持する。CPU採用、学習loss、実生成、隔離保存、通常提供、同版native画像／本人端末、正式商品受入れを分ける。
+
+[実測・未採用・残件](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-prose-learning-20261109)。

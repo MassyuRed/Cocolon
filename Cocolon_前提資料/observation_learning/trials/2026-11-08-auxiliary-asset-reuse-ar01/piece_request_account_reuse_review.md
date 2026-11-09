@@ -350,4 +350,47 @@ API `a08c003c50919db33076dfc66e1a582e5488c354`、6path。既存Analysis serving�
 
 原本：`Cocolon_CMEE_AR04_OrderedDecoder4B_20261109.private.json`。全12request／raw、旧比較、入力資格、段階別SQL再読／拒否、同重み差替え情報・最終source digestと検証を収録。最終sourceはAPI commitへ参照し、Git管理の製品コードを別保存の正本へ複製しない。
 
-[Piece CI42584857085](https://github.com/MassyuRed/mashos-api/actions/runs/42584857085)は全工程success、job129052116528のmodel10fileは442 PASS／既存warning1／42.13秒。新parserは実pinned依存でskipせず実行。Analysis CI42584857044は確認時点で実行中。
+[Piece CI42584857085](https://github.com/MassyuRed/mashos-api/actions/runs/42584857085)は全工程success、job129052116528のmodel10fileは442 PASS／既存warning1／42.13秒。新parserは実pinned依存でskipせず実行。[Analysis CI42584857044](https://github.com/MassyuRed/mashos-api/actions/runs/42584857044)も後続確認でcompleted／success。
+
+<a id="piece-prose-learning-20261109"></a>
+## 11/9 一般文章整形・Piece専用LoRA候補の実比較
+
+API `ad417b07f9bb9f4ebae8478c4db682d6ba82c564`。新作架空24行をfresh Piece LoRAへ一回48更新。学習後の既使用6rawは全て変化し、同じrawのCMEE採用は旧reader2→限定改修後5となった。適格refined4再利用＋新normal4も8採用。隔離SQLでは13本文×3plan＝39保存と保存後の0生成再読が成立し、別1本文×3plan＝3件は保存前に拒否した。
+
+### 先行比較と教材の分離
+
+先行の原SYSTEM6callと文章整形SYSTEM6callは全12本文が原文コピーで、各6件中4件だけCMEE採用。追加SYSTEM案は整形改善がなく未採用とした。比較6件は学習へ入れていないが、既使用のdevelopment材料でありblind評価ではない。別に新作した架空24source／24targetはnormal保存7field、二欄6件・30slot、名前から明記役割への抽象化2件を含む。原SYSTEMを保ち、全24targetを旧作者4関数禁止でCPU採用確認した。未対応初稿8件は学習rowsから除外し、parserを緩めていない。データSHA256は`aef506e89efe41f4be4659dc929fcda3c71a492ac45de958cb8c681ec0356b77`。
+
+### 回収した学習・提供責務
+
+既存共有servingへ明示optionalのPiece専用adapterを追加する候補で、`piece.field_slots.v1` profileだけに使用する。自然Emlisはbase、Analysisは既存default adapterを維持し、Piece利用後は元adapterへ戻す。復元失敗時は提供を止め、別adapterでAnalysisを返さない。新`ai/tools/training/train_piece_model_adapter.py`は既存assistant-only CE処理を再利用し、固定24行、最大48update／480秒、既存構造configだけからfresh LoRAを作る。旧Analysis学習済tensorの初期値転用や重み結合はしない。 既存のwish／名詞参照、copula、同じ原prefixの有限未決定表現の読取をmodel armへ限定再利用し、追加生成なしで学習後の同6rawを旧2採用→新5採用へ接続した。主体・相手・欄・scope・否定・時点・程度・留保を保ち、未決定prefixの変更や追加を許可しない。 元の独立CMEE／S7とnative経路の拒否条件を保持し、既存未対応の評価対象「は」を「が」へ読み替えて採用しない。保存済みの同一実rawを修補・再生成せず、旧新readerの採否差と隔離保存を別記する。
+
+### 実学習・実本文の結果
+
+架空24行をconfigだけから作る新LoRAへ1回48update、測定NLL forward4回、学習中の本文生成0で完了した。trainer全工程は144.809秒（CPU処理・model load／保存reloadを含み、純update時間ではない）、外側process146.3172302118037秒。旧Analysisの学習済tensorは読まず、固定base revision851bf6e・既存pinsを保持。112tensor／3,833,856parameterの候補重み831c6b086d26cdb3e98ab0663fa6b621de11703a90a1c50b645d1ed778406aa5を保存し、非学習reload一致を確認した。24update checkpointも保全し、optimizer／RNGは未保存で厳密な途中再開物ではない。
+
+学習に入れていない既使用6development本文は全rawが変化した。旧CMEEでは2採用／4拒否だったが、追加生成をせず同rawへ既存のwish／参照・copula／未決定文の表現差読取を接続すると5採用／1拒否へ進んだ。残る本人評価の対象助詞「は」は同値未証明のため採用しない。追加8callは既存適格Q2 refined4＋新架空normal4で、8件全て採用。refined4のrawは旧記録とbyte一致し、相対時点／現在／否定／程度と別欄を保持。新normal4は全rawが変わったが、「僕」→「私」の語り口の残差がある。追加学習・追加SYSTEMの採用はなく、原SYSTEMを保持した。
+
+今回のHTTPは計32call＝基準6＋追加SYSTEM6＋学習前停止試行のcontrol2＋成功試行10＋追加8。Piece26／自然Emlis・Analysis control6で、全HTTP200／stop。比較6件は既使用、追加4refinedも既使用であり、未知一般言語のblind成功率ではない。学習lossや受理数から一般文章品質・正式受入れを認定しない。
+
+### 保存再読・検証
+
+最終関連18fileは807 PASS／47.64秒・既存warning1、FAIL／SKIP0。広範20fileは904 PASS／52 FAIL／47.10秒で全suite成功ではない。同じhead・同じ2fileの既存52失敗と照合済みで、再実行分を重複加算しない。別のlegacy10失敗も同じheadで確認済みのため、識別した未修復失敗は合計62件。
+
+学習後6rawの通常3plan検証は5本文×3＝15保存／1本文×3＝3拒否、追加8raw×3＝24保存。合算は保存13本文＋拒否1本文の計14材料・42試行・39保存／3拒否で、旧reader時代の6保存／12拒否を上乗せしない。refined12件だけ画像設定変更後の同本文も検証し、normal27件には今回の新しい画像設定変更検証を主張しない。成功39件は原入力／Emlis不変、保存版本文・recipe等と非生成再読・quota各1を確認。拒否3件は新record／quota不変の確認で、終了時source／Emlis不変の追加assertはしていない。
+
+保存は記録済み実rawを等価な新しい合成source ID／日時へ厳密再bindした隔離PGlite・合成Authによる既存通常owner検証。GPU生成時のoriginal PreparedRequest IDを実live DBへ保存した証明ではない。raw修補・保存後のモデル／旧作者再生成は0。
+
+前回Analysis CI42584857044はcompleted／successを後続確認済み。今回Piece CI42595376623／Analysis CI42595376578はいずれもcompleted／success。Pieceのmodel検査12fileは528 PASS／43.21秒で、ローカル807件と加算しない。
+
+### 稼働の復元・採否・残件
+
+初回試行は学習前に、終了直後の自分の旧PIDがNVMLへ残ったことで停止し、学習更新は0。元提供32700を復元してhealth正常を確認した。回復は終了確認済みの同PIDだけ最大6秒待つ限定処理で、実際の残留待ち1秒、未知processの拒否は維持した。成功試行は候補33185で比較し、元提供33210へ復元。追加8比較は候補33442で行い、最終は元提供33466へ復元してhealth正常。元serving source・旧Analysis重み・認証値・起動引数は不変。自然Emlis／Analysisの前後controlは双方HTTP200／stop、response bytes完全一致を確認した。model loadは計7（serving5＋trainer2）。trainer時間・起動時間・推論時間・GPU保持／保存／通信／総請求額を混同せず、総請求額と提供原価は未測定。
+
+Piece専用候補重みは通常未採用（candidate_normal_adoption=false）。GPUは元base／既存Analysis提供へ復元済み。限定TECHNICAL_CREDITで、正式商品品質credit0・正式受入れ0/3は維持する。
+
+通常selectorはOFF、Render配置・RN変更／build・実DB反映は行っていない。source資格・二欄・原入力／補足・raw受領・CMEE/S7・保存後非生成の境界を保持する。CPU採用、学習loss、実生成、隔離保存、通常提供、同版native画像／本人端末、正式商品受入れを分ける。
+
+通常selectorはOFF。Render配置・RN／build・実DB・native同版画像／本人端末の新規確認は0。対象助詞「は」の意味保持、本人の語り口、さらに広い文章・欄混合・画像整合は残件で、他ARも未完了。
+
+private原本：`Cocolon_CMEE_AR04_PieceProseLearning4B_20261109.zip`。次は対象助詞「は」と本人の語り口の残差を、広い意味保持・単独伝達の品質と既存保存／画像接続の中で改善する。同じ教師やSYSTEMの追加周回へ自動進行しない。
