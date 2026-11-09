@@ -415,7 +415,8 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | AR-04実本文 | 今回独立8は全件不可→生成。時点・SELF6表記・能受動・否定・丁寧体・二欄留保を保持。前回12の生成10はmeaning／plan／artifact／candidate／recipe／serialized hash全同一、拒否2維持。開発作例でblind一般化ではない。前回依頼の新規5は履歴保持、今回増分へ再加算しない |
 | AR-04検証・再読 | 最終3351 PASS／27.94秒・既存warning1・FAIL／skip0、保存9caseで3plan確認。原本SQL11＋既存helper等3のbytes一致。新旧20を実service／既存review＋PGliteへ通し18保存／2拒否、本文等8fieldの3段同一・保存行／詳細の12field同一、初回後は作者／compiler／Engine／review禁止・同key消費各1。原入力／Emlis不変。合成Auth／先行provider／SQLcallbackであり実DB／native画像／ASGI成功ではない |
 | AR-04反映・残件 | API作業source f3b5e93e、既存source2／既存test1／新test1、全bytes／変更集合／head読戻し。配置／実DB／RN／GPU生成0。通常serviceの隔離保存まで確認したが、一般本文・refined・native同版画像／通常稼働・実機・正式受入れ未完了。正式商品品質credit0 |
-| AR-04再開記録 | weekly第10回§34、[全結果・範囲](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md)。次は既存正本に沿うrefinedの原入力／適格本人補足の別source接続不足を進める。原文連結へ短絡しない。AR-01意味候補／本文役割反転は未解決、AR-01〜08・全必要資産活用は継続中 |
+| AR-04現在のrefined | 原入力とopt-in exact1のADD補足を別envelope／元根拠のまま既存作者へ。private短文エッセイ8生成・file保存非生成再読、旧新28のmeaning／plan／artifact同一。saved資格は実Q2＋隔離SQLで検証、実Q2→Piece本文の成功は0。API1e76599f、181対象PASS／広い161旧失敗保持、配置0 |
+| AR-04再開記録 | [実結果・限定・次作業](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-separate-sources-20261109)。実Q2で採用された完全SELF補足の作品資格→通常refined source-ref／review／preview／save／同版画像へ進む。未解決のADD化・原文連結は禁止、AR-01反転は未解決 |
 
 以後はこの表と各能力の対応行を現在状態へ置換更新し、詳細な実行事実は既存trial／weeklyへ置く。新しいhandoff系列・全件hash Gateを作らない。中断時も、成果物と未実行を既存保存先へ残し、同じ未完商品単位から続ける。
 

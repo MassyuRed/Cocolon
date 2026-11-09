@@ -549,3 +549,12 @@ Mashの「具体案の範囲で→進めていいよ」を受領。上のP4案�
 最終対象7file **339 passed／FAIL0／SKIP0、38.78秒、既存warning1、34 subtestsは加算しない**。新P4／P1／旧Piece4file／既存Emlis snapshotを含み、全suite・CI・本人実機合格ではない。初回の新test構文ミス、誤ったUNSUPPORTED標本、Q2 module環境変数不足、review修復はtrial記録へ残した。旧期待やhistorical fixtureは変更0。
 
 実本文は原文と同一の二段落。これは意味採用→本文→同一private再読の限定到達で、自然な新文章・一般理解・商品品質改善の証明ではない。全結果と型field・原packetは[実結果JSON](../../../observation_learning/trials/2026-10-23-current-four/piece_semantic_snapshot_results.json)。実モデル／推論／DB／Render／公開API/DTO／RN／preview／保存quota／fit／export／merge/deploy0。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT、product_credit=0／PRODUCT_NOT_CLEAR／正式0/3／candidate_ready=false／automatic_progression=false。P5 Analysis、通常接続、自由paraphrase、画像商品品質は残件。
+
+
+## 2026-11-09実装差分 — private refinedの別source適合
+
+既決の原入力／適格本人補足分離をAPI1e76599fで限定実装。通常B8のoriginal-onlyは保持し、明示offline PieceGenerationRequest.sourceがPieceRefinedSourceSnapshotの時だけ新private経路へ入る。原入力は旧snapshot／意味を不変で保ち、補足は既存freeze_supplemental_answerのreal envelope・field／scalar／UTF8根拠へ結ぶ。各partitionは既存planと唯一作者・author-free保持検査を通し、原入力block→補足blockのshort_essayを作る。自由な原文連結・Emlis本文の流用・新作者ではない。
+
+保存adapterは明示opt-in・指定第一ANSWER exact1・同本人／原入力・current prefix・INITIAL→質問→回答→RESOLVED ADD→REFINED→正常終了を検証する。訂正／撤回・未解決・superseded/affected dependency・後続round・他人や古いstateは対象外。源泉を跨ぐ指示語・関係推論・一般の意味融合・quote/declarationをこのsliceで認可しない。pure構築は認証を代替せず、保存資格の真正な対応／権利／現行性は既存adapterのfresh読取責務。
+
+新5private型とprivate file形式はschema05追補を参照。独立架空8作品・private保存非生成再読、旧新28の意味／plan／本文一致、181対象成功を確認。広い161既存失敗と実Q2→作品未成立を保持する。通常refined source-ref／review／preview／save／同版画像／実機は未接続。[実結果・範囲・次作業](../../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-separate-sources-20261109)。

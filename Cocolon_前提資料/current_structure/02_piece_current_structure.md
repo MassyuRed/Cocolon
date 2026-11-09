@@ -3717,3 +3717,13 @@ API候補は5065730ead6fc97a47a03858d0707bbf3e1c568c、本番liveは2c259f0e。�
 旧公開source／canonical／aliasの許可と原子更新をAPI6385606a以後の候補へ保存した。実DBにはmetrics_atomic→reaction_aliasの順で適用、実登録版20261107045211／20261107045213。2関数原文・SECURITY INVOKER・search_path・service_roleのみのアプリ実行権と既存4tableのRLS／既存CRUDを照合。個人row取得／DML／一括移行／新table／V2 public有効化0。API30c7の既存PostgreSQL16 CI42340598228は全step成功し、新独立接続9、入力材料等108、B12 native46の実成功を確認。RNの入力／Piece／owner回帰21suiteは1547 PASS、Linux CIでも1380＋167 PASS／skip0。iOS7601は既存内部グループTestingだが、今回追加修復の本人一巡受入れは未確認。旧未採用V4単体19失敗／Canvas stage83は未解消で、通常bitmap v1/v2の結果へ混ぜない。
 
 この追記より前の候補／未配置／点検中の記述は当時の履歴。最新source・全CIの実結果・配置と配布・未確認は[第10回§15.10](../weekly_reviews/Cocolon_Weekly_Review_20261107.md#input-contract-repair-final-20261107)を参照する。7,817blob一致を全意味読了とせず、一般意味品質・保存currentの本人再解析・月次当時版の保持・実環境受入れをそれぞれ区別する。
+
+
+<a id="piece-refined-separate-sources-20261109"></a>
+## 2026-11-09 — AR-04 private refinedの出所分離
+
+実装API1e76599f。既存PieceSavedSourceAdapterにopt-in exact1の保存ADD回答取得／fresh再検証を追加。新CMEE `piece_refined.py`は元originalとSUPPLEMENTAL_ANSWERを別envelope／元根拠のまま既存作者・保持検査へ渡し、private短文エッセイを保存非生成再読する。原入力に補足を連結せず、Emlis生成物は使わない。question event IDと論理question IDは別で、保存adapterが対応を検証する。
+
+独立架空8作品／private再読8、旧新28入力のmeaning・plan・artifact同一、181対象PASS。広い161失敗は親版でも同じ161、全suite成功ではない。実Q2の保存ADD取得・再検証は隔離SQLで成功したが、実Q2→作品の成功は未成立。新private入力は完全SELFのADD願望・評価を限定実証し、訂正／撤回・source跨ぎ照応・一般再構成／quote・declarationは未対応。合成controlの成功と実Emlis意味採用を混同しない。
+
+通常`piece_v2_source_ref_http`／preview／review／save／SQL・RNはoriginal-onlyのまま。通常refined保存・同じrecipe／bitmap・実機・稼働は次の残件。新5private型と8file責務は[全file差分](../01A_cocolon_overall_structure_app_foundation_home.md#piece-refined-separated-files-20261109)、実本文／失敗／次作業は[既存trial](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-separate-sources-20261109)。STRUCTURE_MAP_DELTA_PRESENT、配置／実DB／GPU／RN／build0。

@@ -88,11 +88,64 @@
     "piece_status": "completed",
     "piece_conclusion": "success",
     "analysis": 42545974764,
-    "analysis_status": "in_progress",
-    "analysis_conclusion": null
+    "analysis_status": "completed",
+    "analysis_conclusion": "success"
   },
   "evidence_filename": "Cocolon_CMEE_AR04_PersonActionSavedReuse_20261109.zip",
   "structure_delta": "PRESENT_EXISTING_QUALIFICATION_EXPANDED_NEW_TEST_ONLY",
   "primary_outcome": "TECHNICAL_CREDIT_WITH_NEW_VISIBLE_BODY_CANDIDATES",
-  "formal_product_credit": 0
+  "formal_product_credit": 0,
+  "refined_separate_sources": {
+    "schema": "ar04.refined_separate_sources.actual.v1",
+    "date": "2026-11-09 JST",
+    "pure_refined_generated": 8,
+    "private_file_reread": 8,
+    "original_regression_cases": 28,
+    "original_regression_exact": true,
+    "prior_success": 18,
+    "seconds": 0.08555159699972137,
+    "model_calls": 0,
+    "real_db_requests": 0,
+    "live_preview_connected": false,
+    "real_q2_to_piece_generated": 0,
+    "limitations": [
+      "Fictional development examples",
+      "Original and ADD answer independently authored; no cross-source inference",
+      "Saved retrieval real Q2 is separately verified; no real-Q2-to-Piece successful product chain",
+      "Private file read, not Piece save/RPC/quota/recipe/native proof"
+    ],
+    "api_base": "f3b5e93e837a01c726ea9d0ca1caa4c39f396add",
+    "api_commit": "1e76599f8aeaae967589b9f80669c622f3e0e01a",
+    "focused_tests": {
+      "passed": 181,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 19.13
+    },
+    "broad_tests": {
+      "passed": 6475,
+      "failed": 161,
+      "seconds": 57.77,
+      "all_failed_reproduced_at_baseline": true,
+      "baseline_failed": 161,
+      "new_failed_ids": 0
+    },
+    "independent_mutations_rejected": 12,
+    "private_reread_checks": 1,
+    "real_q2_three_probe": {
+      "resolved_add": 1,
+      "unresolved": 2,
+      "refined_handoff_admitted": 1,
+      "piece_generated": 0
+    },
+    "ci": {
+      "piece": 42549029993,
+      "piece_status": "completed",
+      "piece_conclusion": "success",
+      "analysis": 42549030023,
+      "analysis_status": "in_progress",
+      "analysis_conclusion": null
+    },
+    "evidence_filename": "Cocolon_CMEE_AR04_RefinedSeparateSources_20261109.zip"
+  }
 }

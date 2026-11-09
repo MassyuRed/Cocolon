@@ -2090,3 +2090,17 @@ primary TECHNICAL_CREDIT、正式商品品質credit0。AR-04は今回の有限�
 API [f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)へ既存source2／既存test1／新test1のexact4を反映し、全bytes・親／tree・変更集合・head読戻し一致。既存[Piece42545974787](https://github.com/MassyuRed/mashos-api/actions/runs/42545974787)／[Analysis42545974764](https://github.com/MassyuRed/mashos-api/actions/runs/42545974764)は同じf3b5e93eでPiece completed／success、Analysis実行中。[全結果・限定・再開先](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md)。private全原本・前後・保存再読・読解・失敗・source identityをCocolon_CMEE_AR04_PersonActionSavedReuse_20261109.zipへ保全（19member／80956bytes）。STRUCTURE_MAP_DELTA_PRESENTは既存有限資格拡張・helper名同期・新test地図だけ、新保存配線／owner／controllerなし。
 
 新GPU生成／学習／load／server変更・再起動／Render配置／実DB／RN／build0。AR-01反転未解決・通常不採用、AR-04一般本文・refined・native同版画像／通常稼働・実機・正式受入れ未完了。次は保存可能な今回能力を保ち、既存Piece正本に従ってrefinedの原入力／適格本人補足を別sourceとして接続する不足へ進む。原入力への補足連結で接続済みにしない。AR-01〜08・必要全資産活用は継続中、正式商品品質credit0。
+
+
+<a id="piece-refined-separate-sources-20261109"></a>
+## 35. 補助経路活用AR-04 — 原入力／本人補足の分離をprivate作品へ接続
+
+2026-11-09 JST。前回§34を継承し、既存Q2の保存資格・ADD・supplemental metadata frame／根拠とPiece唯一作者を回収。明示opt-in・同じ本人・exact1回答・解決済みADD・currentなREFINED／正常終了をread-only検証し、private CMEEで原入力と補足を別envelopeのまま作品化する。訂正／撤回／未解決・source跨ぎ指示語・一般意味融合・quote／declarationは未対応。通常source-ref／preview／review／save・DB／RNは今回接続しない。
+
+独立架空8作品をroot／独立担当が全文読み、本人・方向・否定・時点・条件を保持。全8はprivate JSON保存→Engine／source reader／compiler／作者禁止の非生成再読で同artifact、CPU部分0.085551597秒。旧20＋独立原8の計28はmeaning／plan／artifactまで親f3b5e93eと完全一致（旧成功18／拒否2）。これは一般単独伝達品質や通常保存・同版画像の完成ではない。
+
+181対象PASS／19.13秒／FAIL・SKIP0・既存warning1。広い検査は6475 PASS／161 FAILで、全161失敗IDを親版へ戻すと同じ161失敗。既存minimum等の未解消を保持し全suite成功としない。再hash済み本文等12変異は全拒否。初回serializerのtuple拒否4件はprivate JSON変換へ直し、canonical契約を緩めず最終検証した。
+
+既存Q2 CMEE＋隔離SQLで実保存ADD回答の取得・fresh再検証とthread/events不変を確認。一方、追加CPU3試行は1件が実ADD／取得成功後に作品資格未成立、2件が既存の時点未解決で拒否。完全SQL snapshot未保存のため同じ実handoffの最終版生成を成功扱いしない。実Q2→refined Piece本文成功0を維持し、合成の成功controlと区別する。
+
+API[1e76599f](https://github.com/MassyuRed/mashos-api/commit/1e76599f8aeaae967589b9f80669c622f3e0e01a)へsource5／test2／既存CI1のexact8を反映、全bytes・親／変更集合を読戻し一致。[全結果と再開先](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-separate-sources-20261109)。今回のPiece CI42549029993はcompleted/success、Analysis42549030023は実行中。private原本ZIPはCocolon_CMEE_AR04_RefinedSeparateSources_20261109.zip。STRUCTURE_MAP_DELTA_PRESENTは既存adapterとCMEE内のprivate出所分離・型／計画だけ。配置／実DB／GPU／学習／RN／build0、正式品質credit0、AR-01反転とAR-04通常refined保存／同版画像・全資産活用は未完。次は実保存ADD補足の作品資格を修復し、既存通常配線へ進む。

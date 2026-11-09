@@ -3391,3 +3391,18 @@ private clause=Trueのcompiler/validator/保存ID/本文図は従来role-onlyの
 JSON/保存契約：元selected_material.v4 request/response/messages/raw hashをそのまま使用する。source record/versionを再束縛せず、通常row/private evidenceと保存読取版は既存のまま。RD01の表示0→1は保存スキーマ追加ではない。model kind不一致3件はcommit0。read/current/monthlyで生成しない。
 
 [API5fd61b3f](https://github.com/MassyuRed/mashos-api/commit/5fd61b3fe43d0e7ddb255f34678b85cc19b7e15a)、[全結果/未対応/次工程](../../../weekly_reviews/Cocolon_Weekly_Review_20261031.md#analysis-role-decision-result-20261105)。CI全step success、一般品質/正式受入れの根拠にはしない。
+
+
+## 2026-11-09 — AR-04 private refinedの型と保存版
+
+API1e76599fのprivate型のみ。既存公開source_ref／API／DTO／DB schema・frozen shared logical registryは変更しない。
+
+| 型 | ownerと必要情報 |
+|---|---|
+| PieceSavedRefinedHandoff | 既存saved source adapter。本人保存original、独立SupplementalAnswerSource、thread/revision、body-free current lineage。opt-in取得とfresh再検証が必要 |
+| PieceRefinedSourceSnapshot | CMEE piece_refined。original、supplemental、同本人、question event/result identity、別commitment、明示opt-in、ADD操作。pure constructorは認証ではない |
+| PieceSupplementalMeaning | 既存PieceSourceMeaningのprivate派生。実FrozenSupplementalAnswerを保持し、原文scalar座標とmetadata frameのUTF8座標を分離。意味source roleはSUPPLEMENTAL_ANSWER |
+| PieceRefinedMeaning | 分離した2meaningとsource_ref。graphを一つへ混ぜず、field根拠を各sourceへ戻す |
+| PieceRefinedPlan | 2partitionの既存plan、順序／役割、short_essay限定。source跨ぎの関係を作らない |
+
+`piece.refined_private_saved.v1`はprivate file再読用のsource／plan／同じPieceArtifactを持つJSON。既存canonical JSONへ渡す前にprivate dataclassのtupleをarray化する。再読はtrusted storeのexpected SHAに対応するexact bytesからartifactを復元し、source parser／意味採用／compiler／作者／Engine／modelを呼ばない。通常RPCの意味checkpoint・保存preview／record・quota／画像版・認証権利を、このfile形式から成立させない。旧original／旧P4保存形式は変更0。[実証・限定](../../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-separate-sources-20261109)。

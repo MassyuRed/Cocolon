@@ -6163,3 +6163,22 @@ STRUCTURE_MAP_DELTA_NONE。新しいowner・route・API・DB・描画版はな�
 感情選択そのものは元sourceに存在し、未明示感情とする誤判定を引き継がない。次は人物参照、原文外因果、未記載の期間／時点への感情結合と本人宛の語り口を修復し、役割方向と正しい短文を保持する。
 
 STRUCTURE_MAP_DELTA_PRESENT（候補sourceの有限読取・認識helper・研究補助選択）。Render通常API497f7008へe14は未配置、通常naturalは補助なしを維持し、今回Render／実DB／RN／build変更0。現在の結果と未確認は[最新weekly§23](weekly_reviews/Cocolon_Weekly_Review_20261107.md#auxiliary-asset-reuse-finite-focus-cognition-20261108)、[Emlis構造](current_structure/01_emlis_ai_current_structure.md)、[CMEE構造](current_structure/04_cmee_current_structure.md)、[既存AR-01 trial](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/README.md)へ戻る。旧設計・全地図を再生成する作業へ置換しない。
+
+
+<a id="piece-refined-separated-files-20261109"></a>
+## 2026-11-09 — AR-04 refinedの原入力／本人補足を分けるprivate接続
+
+API1e76599fの新規private型はPieceRefinedSourceSnapshot／PieceSupplementalMeaning／PieceRefinedMeaning／PieceRefinedPlanとPieceSavedRefinedHandoffの5型。公開DTO／DB／RNの型ではない。原入力の既存型・serialized意味は不変。STRUCTURE_MAP_DELTA_PRESENT。
+
+| path（mashos-api） | 責務・境界 |
+|---|---|
+| `ai/services/ai_inference/piece_v2_source_adapter.py` | 既存本人・保存期間・current生成検査を使う明示opt-inのrefined読取／fresh再検証。exact1第一回答、RESOLVED ADD、元と補足の別commitment。通常original手渡し・公開source-refは不変 |
+| 新`ai/services/ai_inference/cocolon_meaning_experience_engine/piece_refined.py` | 原入力／補足を別envelopeに保持し、既存parserを補足fieldへ適合・実frame根拠へ再束縛。既存唯一作者による2partitionの短文エッセイと保持検査、private file保存／非生成再読。source跨ぎ意味融合・認証・通常preview発行のownerではない |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py` | 原入力／metadata frameのtext field座標を分けるprivate helperと補足根拠の再導出。原入力の意味・identityを維持 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_v1c.py` | 既存Engine callableから明示private refined入力を選び、既存作者のfield textアクセスを使用。新しい文章templateを作らない |
+| `ai/services/ai_inference/piece_v2_content_policy.py` | actual補足envelope／field座標を保った既存author-free本文保持検査。public Safety・readyを発行しない |
+| 新`ai/tests/test_cmee_piece_refined_sources.py` | separate source→既存作者→private保存非生成再読、改変・関係追加・肯否／方向反転等の拒否 |
+| 新`ai/tests/piece_v2/test_b05a_piece_refined_source_handoff.py` | 合成control境界と、既存Q2 CMEE＋隔離SQLの実保存ADD取得、fresh再検証・原入力／thread不変 |
+| `.github/workflows/analysis-observed-content.yml` | 既存PGlite工程へ新2suiteを追加。新controller／承認Gateなし |
+
+実装と本文／保存の範囲・失敗は[AR-04実結果](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-separate-sources-20261109)。181対象PASS、独立架空8本文のprivate保存再読、旧新28のmeaning／plan／artifact同一を確認。広範囲の161失敗は親版も同じ161で、未解消。実Q2保存からのrefined取得は成功、実Q2→Piece本文は未成立。通常preview／review／save／recipe・native画像／端末・配置は未完了。補足を原入力へ連結したことにはしない。

@@ -2014,3 +2014,13 @@ STRUCTURE_MAP_DELTA_PRESENT（API候補 `a98c6e59`、配置未実施）。既存
 | `emlis_thread_service.py::_process_natural`（既存） | 受領後1回だけ比較し `OBSERVATION.artifact.meaning_comparison` へprivate保存。source/reply hashと範囲を持ち、公開DTO／Analysis材料とは分離。sourceエラー伝播、比較器バグは未判定。reportによる本文拒否・改作・再生成はしない。保存GETは再比較しない |
 
 実モデル66本文の非生成比較は未判定61・範囲内非衝突5・衝突0。5も一節に限定し全文品質へ昇格しない。生成補助v1〜v3の通常採用は0、最終CPU修正版の新4B確認も未実施。旧Piece／AnalysisのCMEE接続を維持し、今回のsource追加を全D01–D51実装済みへ拡張しない。実結果・168件の局所検証・残件はtrialに記録。AR-01継続、AR-02〜08未開始。
+
+
+<a id="piece-refined-separate-sources-20261109"></a>
+## 2026-11-09 — Pieceの補足frameをCMEE既存作者へ適合
+
+実装API1e76599f。既存PieceSavedSourceAdapterにopt-in exact1の保存ADD回答取得／fresh再検証を追加。新CMEE `piece_refined.py`は元originalとSUPPLEMENTAL_ANSWERを別envelope／元根拠のまま既存作者・保持検査へ渡し、private短文エッセイを保存非生成再読する。原入力に補足を連結せず、Emlis生成物は使わない。question event IDと論理question IDは別で、保存adapterが対応を検証する。
+
+独立架空8作品／private再読8、旧新28入力のmeaning・plan・artifact同一、181対象PASS。広い161失敗は親版でも同じ161、全suite成功ではない。実Q2の保存ADD取得・再検証は隔離SQLで成功したが、実Q2→作品の成功は未成立。新private入力は完全SELFのADD願望・評価を限定実証し、訂正／撤回・source跨ぎ照応・一般再構成／quote・declarationは未対応。合成controlの成功と実Emlis意味採用を混同しない。
+
+通常`piece_v2_source_ref_http`／preview／review／save／SQL・RNはoriginal-onlyのまま。通常refined保存・同じrecipe／bitmap・実機・稼働は次の残件。新5private型と8file責務は[全file差分](../01A_cocolon_overall_structure_app_foundation_home.md#piece-refined-separated-files-20261109)、実本文／失敗／次作業は[既存trial](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-separate-sources-20261109)。STRUCTURE_MAP_DELTA_PRESENT、配置／実DB／GPU／RN／build0。
