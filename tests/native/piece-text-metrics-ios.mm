@@ -1594,7 +1594,7 @@ static BOOL runAR04BitmapPairChecks(PieceTextMetrics *module, RCTBridge *bridge)
       }
       identity=identity&&offset==text.length;
     }
-    host.bitmapBinding=[@"ar04-recorded-"stringByAppendingString:variants[variant]];
+    host.bitmapBinding=[@"ar04-recorded-" stringByAppendingString:variants[variant]];
     NSDictionary *request=@{@"version":@"piece.native_bitmap_canvas.v1",@"profile":@"piece.rn_bitmap_preview.prototype.v1",@"canvas_tag":@2,
       @"preview_key":artifact[@"piece_text_hash"]?:@"missing",@"binding_token":host.bitmapBinding,@"expires_at_ms":@(NSDate.date.timeIntervalSince1970*1000+8000),@"remaining_ms":@8000,
       @"width":@1080,@"height":@1350,@"margin":@96,@"branding_zone":@72,@"content_width":@888,@"content_height":@1086,
