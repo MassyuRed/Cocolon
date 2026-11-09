@@ -6166,21 +6166,24 @@ STRUCTURE_MAP_DELTA_PRESENT（候補sourceの有限読取・認識helper・研�
 
 
 <a id="piece-refined-separated-files-20261109"></a>
-## 2026-11-09 — AR-04 refinedの原入力／本人補足を分けるprivate接続
+## 2026-11-09 — AR-04 refinedの別sourceから通常サーバー保存まで
 
-APIfc7dc299（前版1e76599f）で継承するprivate型はPieceRefinedSourceSnapshot／PieceSupplementalMeaning／PieceRefinedMeaning／PieceRefinedPlanとPieceSavedRefinedHandoffの5型。公開DTO／DB／RNの型ではない。原入力の既存型・serialized意味は不変。STRUCTURE_MAP_DELTA_PRESENT。
+APIca4140ab。既存5private型／private保存v1と唯一作者を継承し、既存七項目DTOとDB schemaのままstageを接続。STRUCTURE_MAP_DELTA_PRESENT。下表は今回のexact13変更pathと既存責務。live反映／RN／画像／端末は未成立。
 
 | path（mashos-api） | 責務・境界 |
 |---|---|
-| `ai/services/ai_inference/piece_v2_source_adapter.py` | 既存本人・保存期間・current生成検査を使う明示opt-inのrefined読取／fresh再検証。exact1第一回答、RESOLVED ADD、元と補足の別commitment。通常original手渡し・公開source-refは不変 |
-| 新`ai/services/ai_inference/cocolon_meaning_experience_engine/piece_refined.py` | 原入力／補足を別envelopeに保持し、既存parserを補足fieldへ適合・実frame根拠へ再束縛。既存唯一作者による2partitionの短文エッセイと保持検査、private file保存／非生成再読。source跨ぎ意味融合・認証・通常preview発行のownerではない |
-| `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py` | 原入力／metadata frameのtext field座標を分けるprivate helperと補足根拠の再導出。原入力の意味・identityを維持 |
-| `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_v1c.py` | 既存Engine callableから明示private refined入力を選び、既存作者のfield textアクセスを使用。新しい文章templateを作らない |
-| `ai/services/ai_inference/piece_v2_content_policy.py` | actual補足envelope／field座標を保った既存author-free本文保持検査。public Safety・readyを発行しない |
-| 新`ai/tests/test_cmee_piece_refined_sources.py` | separate source→既存作者→private保存非生成再読、改変・関係追加・肯否／方向反転等の拒否 |
-| 新`ai/tests/piece_v2/test_b05a_piece_refined_source_handoff.py` | 合成control境界と、既存Q2 CMEE＋隔離SQLの実保存ADD取得、fresh再検証・原入力／thread不変 |
-| `.github/workflows/analysis-observed-content.yml` | 既存PGlite工程へ新2suiteを追加。新controller／承認Gateなし |
+| `ai/services/ai_inference/piece_v2_source_adapter.py` | 明示exact回答のsource-ref取得＋fresh再検証、private bindingを検証した既存canonical lineage投影。原入力／補足を分離 |
+| `ai/services/ai_inference/piece_v2_source_ref_http.py` | 既設transportでexact1回答identity queryを明示選択。queryなしoriginal維持、本文／owner／stage／重複／未知query拒否 |
+| `ai/services/ai_inference/piece_v2_preview_service.py` | stage別取得／再認可／投影、既存生成・発行・再起動再読・visual変更。保存再読で作者を呼ばない |
+| `ai/services/ai_inference/piece_v2_safety_review.py` | 2source別scan、既存meaning／planとauthor-free保持検査、short_essayのみ。新作者なし |
+| `ai/services/ai_inference/piece_v2_save_service.py` | 保存前の選択source／current canonical lineage照合。既存保存済み同key再送は非生成・同消費 |
+| `supabase/migrations/20261109024943_piece_refined_source_fence.sql` | 既存issue／visual／save3関数だけsource fence適合。実ANSWER frame hash、current ADD lineageとfinish。ACL／RLS／schema／quota不変、未live適用 |
+| `ai/services/ai_inference/api_contract_registry.py` | 既設source-ref同contractのquery説明を同期 |
+| `ai/docs/PUBLIC_API_REGISTRY.md` | exact query／七項目応答／再認可の説明、登録変更なし |
+| `ai/tests/piece_v2/test_b05c_refined_source_ref_projection.py` | exact7参照、別commitment、opt-in／競合／canonical DB投影 |
+| `ai/tests/piece_v2/test_b05_refined_preview_services.py` | 合成保存controlでservice／Safety／HTTP、本文差替え・再hash等拒否 |
+| `ai/tests/piece_v2/test_b05_refined_preview_saved_pipeline.py` | 実有限Q2＋隔離SQLから既存作者／review／preview／visual／save／owner再読。合成Auth、native画像なし |
+| `ai/tests/piece_v2/test_b05_refined_source_fence_sql.py` | real ADDの3RPC、19変異×3、frame byte、既存original／natural、権限保持。native並行lock検証ではない |
+| `.github/workflows/analysis-observed-content.yml` | 既存PGlite工程へ新4suiteを追加。新workflow／controllerなし |
 
-最新7file差分は既存piece_refined（有限補足感情資格・既存作者の再利用関数）、piece_v1c（補足KEEP資格）、piece_v2_generation（同2source→plan→canonical artifactのB8照合）、既存saved handoff test（実Q2＋SQL3構成）、新test_cmee_piece_refined_feeling_accounts／piece_v2/test_b08_refined_engine_result_bindingと既存CI。新型・作者・公開DTO・DB・RNは追加しない。前版の全file責務表は継承する。
-
-実Q2保存ADD2件の同材料比較で本文0→2、B8候補／recipe／合成layout・private非生成再読を確認。旧28原入力と旧refined8保存bytesは同一、707対象成功。通常refined source-ref／review／preview／save・native画像／実機／配置は次の未完了。[結果・採取identityの限定・次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-q2-feeling-reuse-20261109)。STRUCTURE_MAP_DELTA_PRESENT（既存ownerの有限資格と手渡し）。
+変更しない既存owner：CMEE `piece_refined.py`（2partition意味／計画／唯一作者とprivate非生成再読）、`piece_v1c.py`／`piece_source.py`（原入力意味・本文作者）、`piece_v2_generation.py`（canonical B8照合）、`piece_v2_store.py`（既存RPCと保存契約）、owner service（同じ保存本文／recipe再読）。今回の本文意味能力追加は0で、前回の実ADD2本文を通常保存へ接続した。[全結果・残件](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-normal-saved-reuse-20261109)。

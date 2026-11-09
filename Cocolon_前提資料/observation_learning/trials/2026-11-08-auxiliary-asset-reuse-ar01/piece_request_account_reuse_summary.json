@@ -208,5 +208,55 @@
       "fc7dc299ebea2a0b0064afdd1909f22ae0f0b1f4"
     ],
     "nested_self_false_admission_fixed": 2
+  },
+  "refined_normal_saved_reuse": {
+    "date_jst": "2026-11-09",
+    "api_commit": "ca4140ab1fee8be8da55cefcee1b72011e85354e",
+    "parent": "fc7dc299ebea2a0b0064afdd1909f22ae0f0b1f4",
+    "source_ref_fields": 7,
+    "db_lineage_fields": [
+      8,
+      5,
+      7
+    ],
+    "same_saved_source_preview": {
+      "parent_prepared": 0,
+      "candidate_prepared": 2,
+      "q2_calls": 0,
+      "provider_calls": 0
+    },
+    "actual_q2_isolated_saved": 2,
+    "quota_each": 1,
+    "source_unchanged": true,
+    "emlis_unchanged": true,
+    "visual_service": {
+      "cases": 1,
+      "revision": [
+        1,
+        2
+      ],
+      "expiry_unchanged": true,
+      "text_unchanged": true,
+      "selected_recipe_saved": true
+    },
+    "coverage": "最終関連3813 PASS／107.77秒＋新SQL適用後の通常保存3planが3 PASS／3.17秒、重複除外計3816成功・FAIL／SKIP0（native11件明示除外、既存warning237）",
+    "api_paths": 13,
+    "production_application": false,
+    "formal_product_quality_credit": 0,
+    "remaining": [
+      "RN explicit supplemental answer selection",
+      "live API and migration application",
+      "same native bitmap and device",
+      "general semantic reconstruction",
+      "AR01 role inversion"
+    ],
+    "evidence_filename": "Cocolon_CMEE_AR04_RefinedNormalSavedReuse_20261109.zip",
+    "runtime": {
+      "deploy": 0,
+      "live_db_requests": 0,
+      "gpu_calls": 0,
+      "rn": 0,
+      "build": 0
+    }
   }
 }

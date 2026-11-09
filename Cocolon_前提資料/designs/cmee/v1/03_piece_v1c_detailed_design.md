@@ -565,3 +565,11 @@ Mashの「具体案の範囲で→進めていいよ」を受領。上のP4案�
 APIfc7dc299。実SUPPLEMENTAL_ANSWERで明示SELFの完全な有限感情述語を、既存_FEELING／_NOW／_written_feeling_expressionからKEEP資格へ回収する。原入力の選択感情やsaved原入力資格を借用しない。既存generate_piece_candidateもexact private refined型を受け、expected意味／plan／唯一作者のcanonical artifactを再導出照合してauthor-free検査する。通常refined source-ref／review／preview／saveの許可や公開DTO変更ではない。
 
 同じ実Q2保存2材料の親0→新2本文、B8 payload/hash・既存recipeと合成layout・private非生成再読を確認。旧28＋旧refined8は完全同一、707対象成功。採取中Piece sourceの混在はclean固定親版の保存再読で比較し直し、採取時失敗を固定親版に加点しない。新型／保存版0、一般意味融合と通常保存・同一native画像は残件。[全結果](../../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-q2-feeling-reuse-20261109)。
+
+## 2026-11-09続行 — refined通常サーバー保存への適合
+
+APIca4140ab。既決の出所分離と補足資格を、既存七項目source_ref／preview／Safety／saveへ接続。GETでexact supplemental_answer_identityを明示した場合だけ補足を取得し、通常queryなしはoriginal-onlyを維持。本文や適格flagは受け取らない。private handoffを検証して既存canonical DB lineageへ投影し、回答の独立commitmentを保持する。既存record／payload／recipe／private fileの版・schema／RLS・quotaは追加変更しない。
+
+Safetyは原入力と補足のfieldを別scanし、2partitionの既存meaning／planとauthor-free本文保持検査を行う。新しい作者／意味融合・訂正／撤回資格はない。既存3RPCのsource fenceはcurrentな回答frame指紋・question／ADD checkpoint／結果／成功finishへ対応し、original／natural枝、権限・search_pathと保存済み同key再送の順序は維持。preview再読・visual変更・save再送・owner再読で本文を再生成しない。
+
+実Q2 A/Cを隔離SQLで保存再読、Cは本文不変の見た目変更後recipeを同版保存。最終関連3813 PASS／107.77秒＋新SQL適用後の通常保存3planが3 PASS／3.17秒、重複除外計3816成功・FAIL／SKIP0（native11件明示除外、既存warning237）。実Auth／PostgREST、native lock／画像、RNの選択UI、live反映／本人実機は未成立。[実結果・残件](../../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-normal-saved-reuse-20261109)。

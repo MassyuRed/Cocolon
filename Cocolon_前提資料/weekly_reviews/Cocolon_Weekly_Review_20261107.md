@@ -2120,3 +2120,16 @@ API[1e76599f](https://github.com/MassyuRed/mashos-api/commit/1e76599f8aeaae96758
 API[fc7dc299](https://github.com/MassyuRed/mashos-api/commit/fc7dc299ebea2a0b0064afdd1909f22ae0f0b1f4)へ既存source3／既存test1／新test2／既存CI1の7pathを反映し、全bytes／変更集合を再取得一致。[全結果・限定・次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-q2-feeling-reuse-20261109)。前段72cc4f5fのPiece42551259870はcompleted/success、最終fc7dc299のAnalysis42551959891は実行中。前回Analysis42549030023は全step成功確認。原本ZIPはCocolon_CMEE_AR04_RefinedQ2FeelingReuse_20261109.zip。
 
 STRUCTURE_MAP_DELTA_PRESENTは既存補足資格・B8手渡し／検査だけ、型／wire／DB／RN／配置／build／GPU／学習0、正式品質credit0。次は明示opt-in・別補足commitment・current guardを既存通常source-ref／review／preview／saveへ同版で接続し、同じ採用画像と実機確認へ進む。AR-01反転・一般本文再構成・全資産活用は未完。
+
+<a id="piece-refined-normal-saved-reuse-20261109"></a>
+## 37. 補助経路活用AR-04 — 本人補足を既存通常サーバー保存へ
+
+2026-11-09 JST。§36の2source本文能力を継承し、明示exact回答の既存七項目source-ref／Safety／preview／visual変更／saveへ接続。private bindingから既存canonical DB lineageへ投影し、原入力／補足の別commitmentを維持する。既存3RPCのsource fenceを実回答frame指紋・current ADD／結果／成功finishへ適合。original／natural、ACL／RLS／schema／quota・保存済み再送順序を維持した。
+
+実有限Q2＋隔離SQLの2例はreviewed preview→保存→非生成owner再読、消費各1、原入力／Emlis不変。Cは本文生成禁止でquiet_nightへ見た目を変えrevision2／期限不変、選択後recipeを同版保存。clean親との同snapshot比較はpreview0→2、本文／payloadはSQL保存物と一致。root／独立担当が全文読解し、元の過去否定とAの過去寂しさ／Cの現在喜びを保持。意味能力の新規2件へ重複加点しない。
+
+最終関連3813 PASS／107.77秒＋新SQL適用後の通常保存3planが3 PASS／3.17秒、重複除外計3816成功・FAIL／SKIP0（native11件明示除外、既存warning237）。既存11native caseはlocal専用DB情報未設定で実行前停止、最終local検査は明示除外。広い161既存失敗・新native lock／画像未実証を維持。SQL負例のテスト橋例外処理と無効active fixtureを訂正し、製品制約を緩めず失敗logを保存した。
+
+API[ca4140ab](https://github.com/MassyuRed/mashos-api/commit/ca4140ab1fee8be8da55cefcee1b72011e85354e)のexact13pathを全bytes／変更集合／親／head読戻し確認。同じca4140abの[Piece42554294246](https://github.com/MassyuRed/mashos-api/actions/runs/42554294246)／[Analysis42554294252](https://github.com/MassyuRed/mashos-api/actions/runs/42554294252)は実行中（成功未確定）。[全結果・限定・次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-normal-saved-reuse-20261109)。原本ZIPはCocolon_CMEE_AR04_RefinedNormalSavedReuse_20261109.zip。
+
+STRUCTURE_MAP_DELTA_PRESENT（既存通常保存へのstage接続）、配置／live DB／GPU／学習／RN／build0、正式品質credit0。RNの明示補足選択UIと通常反映、同じnative画像・本人端末、一般再構成・AR-01反転・全資産活用は未完了。

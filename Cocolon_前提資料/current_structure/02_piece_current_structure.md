@@ -3720,10 +3720,12 @@ API候補は5065730ead6fc97a47a03858d0707bbf3e1c568c、本番liveは2c259f0e。�
 
 
 <a id="piece-refined-separate-sources-20261109"></a>
-## 2026-11-09 — AR-04 補足の有限感情文を既存B8へ
+## 2026-11-09 — AR-04 refinedを通常サーバーの保存経路へ
 
-APIfc7dc299（前版1e76599f）。原入力／本人補足の別envelope・根拠・同本人／opt-in・解決済みADD資格を継承。既存answerの_FEELING／_NOWとPieceの_written_feeling_expressionを、補足自身の明示SELF述語全文へ限定適合し、選択感情を借用せず既存KEEP作者へ渡す。省略／他者・推測／伝聞／未知形容詞・未解決／訂正／撤回は新許可しない。
+APIca4140ab（親fc7dc299）。本人がexact ANSWERを明示選択した場合だけ、既存adapterの第一回答／RESOLVED ADD／current REFINED資格を使う。原入力と補足の別envelope・根拠・commitmentを保ち、既存source-ref七項目、review／preview／restart／visual変更／saveへ接続。質問文・Emlis本文をsourceへ足さず、訂正／撤回・未解決・一般意味融合は許可しない。
 
-実Q2 CMEE＋隔離SQLで保存された2ADDを、clean親版と最終候補で同一source／commitmentのまま0生成再読し、作品は0→2。実保存材料を作品化する再比較でQ2・provider呼出し0。既存B8候補口へ新private型を通し、source／plan／canonical本文の再束縛とauthor-free検査、既存recipe／合成layout、private保存非生成再読を確認した。旧28入力と旧refined8保存bytesは完全同一、707対象PASS。一般単独伝達品質／高度な意味融合の完成ではない。
+private handoffのraw原入力commitment／prefix／refined bindingを検証した後、既存DBのexact8 top／5 source／7 observation項目へ投影する。新schemaや型は追加しない。SQL migrationは既存3関数のsource fenceだけをstage別に修正し、保存回答の実frame指紋／current question・ADD checkpoint・結果・成功finishを照合。元のoriginal／natural検査・権限／search_path／RLS・quota・保存済み再送の順序を維持する。
 
-新private型／保存版は前版の5型／v1を継承し追加0。通常source-ref HTTP／review／preview／save／SQL・RNはoriginal-onlyのまま。次はopt-in・別補足commitment・current guardを同じ通常保存境界へ渡す不足を実装し、同じ採用native画像と端末で確認する。既知の161旧失敗とAR-01反転は残件。配置／実DB／GPU／RN／build0。新7fileの差分は[全file地図](../01A_cocolon_overall_structure_app_foundation_home.md#piece-refined-separated-files-20261109)、実結果・採取中source混在の限定は[trial](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-q2-feeling-reuse-20261109)。STRUCTURE_MAP_DELTA_PRESENT（既存資格・候補手渡し／検査）。
+実Q2のA/Cを隔離SQLで通常preview→保存→owner再読。消費各1、原入力／thread／events不変。Cは本文生成禁止で見た目を変更しrevision2、期限不変、選択後recipeを保存再読した。同じ保存snapshotのclean親版はpreview資格拒否2、新版は2発行準備成功、本文／payloadはSQL保存物と一致。最終関連3813 PASS／107.77秒＋新SQL適用後の通常保存3planが3 PASS／3.17秒、重複除外計3816成功・FAIL／SKIP0（native11件明示除外、既存warning237）。新しいnative lock／RLS／画像品質や実Auth／PostgRESTの実証ではない。
+
+RNの明示補足選択UI、API／migrationのlive反映、同じnative画像と本人端末、一般本文再構成・正式受入れは残る。既知161旧失敗とAR-01反転も未解決。配置／実DB／GPU／RN／build0、正式商品品質credit0。STRUCTURE_MAP_DELTA_PRESENT（既存通常保存経路へのstage接続）。[全結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-normal-saved-reuse-20261109)／[全file地図](../01A_cocolon_overall_structure_app_foundation_home.md#piece-refined-separated-files-20261109)。

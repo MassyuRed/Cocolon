@@ -111,3 +111,36 @@ STRUCTURE_MAP_DELTA_PRESENT：既存保存adapterのread-only補足資格と、C
 API[fc7dc299](https://github.com/MassyuRed/mashos-api/commit/fc7dc299ebea2a0b0064afdd1909f22ae0f0b1f4)のexact7を全bytes／親／変更集合で読戻し一致。前段72cc4f5fの[Piece42551259870](https://github.com/MassyuRed/mashos-api/actions/runs/42551259870)はcompleted/success。最終fc7dc299の[Analysis42551959891](https://github.com/MassyuRed/mashos-api/actions/runs/42551959891)は実行中で、成功扱いしない。前回Analysis42549030023は全step successを確認した。private原本はCocolon_CMEE_AR04_RefinedQ2FeelingReuse_20261109.zip。
 
 STRUCTURE_MAP_DELTA_PRESENTは既存Piece ownerの補足有限資格とB8手渡し／検査の拡張だけ。新型／新wire／DB／RN／通常設定／配置／build／GPU／学習0。primary TECHNICAL_CREDIT、正式商品品質credit0。次は明示opt-in・別supplement commitment・current guardを既存通常source-ref／review／preview／saveと同じ版で束縛する不足へ進み、同じ採用画像／実機を確認する。通常資格を飛ばした発行・未解決のADD化・補足原文のoriginal連結はしない。AR-01役割反転・AR-04一般再構成・全資産活用は継続中。
+
+<a id="refined-normal-saved-reuse-20261109"></a>
+## AR-04続行：別sourceのrefinedを通常サーバー保存へ接続
+
+2026-11-09 JST。親APIfc7dc299／資料591ea49eから継承。今回APIca4140abのexact13pathで、前回の有限補足本文を既存通常source-ref／Safety／preview／saveへ接続した。新モデル・作者・意味能力・UIは追加しない。
+
+### 本人選択と既存保存境界
+
+既設GETにexact1のsupplemental_answer_identity queryを指定した時だけ、同じ本人・第一回答exact1・RESOLVED ADD・current REFINEDの保存資格を検証し、同じ七項目参照を返す。queryなしoriginalは維持、回答本文／owner／tier／stage／適格flag・重複／未知queryは拒否する。後続preview要求のrefined stage＋exact回答指定が明示選択であり、最新回答を自動選択しない。
+
+private handoffの全bindingを検証して既存DB exact8top／5source／7observationへ投影。元と補足のcommitmentは別に保持する。既存previewのprepare／review／issue／restart／visual変更と初回saveを同じstageへ束縛。Safetyは2sourceの別scanと既存meaning／plan／author-free本文検査を行い、作者を再実行しない。保存済みowner再読と保存同key再送は既存成果物だけを使う。
+
+SQL migration20261109024943は、既存issue／visual／saveの3source fenceだけを適合した。実ANSWERのmetadata frameとUTF8本文長から指紋／envelope refを再計算し、current question・ADD checkpoint・観測・成功finishを照合する。元のoriginal／natural・Q3履歴検証、signature／ACL／search_path／RLS／schema／quota、保存済み再送をsource再検査より先に返す順序は維持。固定CLI3.0.0のlocal migration newで作成し、live適用なし。
+
+### 同じ保存材料の前後と実サービス一巡
+
+実有限Q2 start／answerを各case1回、計2start／2answerで、外部provider／GPU0でA/Cの解決済みADDを採取した。AuthとRPC envelopeは合成、意味採用／保存は既存CMEEと隔離PGlite0.5.8。原入力／全thread／events／前後DTOをprivate保存した。同じsnapshotと七項目参照をclean親fc7dc299と新版で0Q2／0provider再読比較し、親はpreview資格拒否2（生成入口0）、新版はprepare2成功。元／補足commitment・source ref・snapshot SHAは同一、本文／payloadは実SQL保存物と一致する。
+
+Aは元の過去否定と本人の過去の寂しさ、Cは元の過去否定と『今』の喜びを別blockで保持。root／独立担当が原入力・補足・完成全文を読み、原因・相手意図・選択感情の追加がないことを確認した。既存の2本文の保存接続であり、新たな2本文品質改善・一般単独伝達や意味融合の完成へ重複加点しない。
+
+2件とも既存Piece service→実review→preview RPC→保存RPC→owner detail。Aは初回recipe、Cは生成入口／Engine／作者禁止下で実visual serviceを呼びquiet_nightへrevision1→2、期限不変、本文／payload4field同一。Cの再reviewは必要な既存安全検査として2回、本文生成入口は1回のまま。fresh serviceのpreview再読と、保存／同key再送／detail2回は作者／Engine／compiler／reviewer禁止下で同一保存成果物。消費各1、原入力とEmlis thread／events不変。描画材料の一致をnative bitmap／写真／共有へ換算しない。
+
+### 検証と修正した測定
+
+最終関連3813 PASS／107.77秒＋新SQL適用後の通常保存3planが3 PASS／3.17秒、重複除外計3816成功・FAIL／SKIP0（native11件明示除外、既存warning237）。新SQL suiteは19変異×3操作の原子的拒否、byte escaping、既存pre-question／natural3plan、権限catalogを検証する。既存11native caseはローカル専用DB URL未設定のため実行前guardで停止し、最終local検査では明示除外。新しいnative並行lock／RLSの実証はない。前回の広い161既存失敗も未解消として継承し、全suite成功としない。
+
+初回SQL負例では期待したPIECE_CONFLICT後のテスト橋RESET ROLEが失敗し連鎖終了した。新test内のSQL subtransactionで実RPC例外を捕捉する方法へ訂正した。次の失敗はactive_attemptだけを変えた無効fixtureが既存DB制約に拒否されたため、整合したREFINING状態へ直し全UPDATEの成功をassertした。製品guard／schemaを緩めず、初期logを保全した。独立reviewが見つけたruntime_profile NULL判定漏れはIS NOT TRUE相当のfail-closed条件へ修正し負例を追加した。
+
+### 反映・限定・次
+
+API[ca4140ab](https://github.com/MassyuRed/mashos-api/commit/ca4140ab1fee8be8da55cefcee1b72011e85354e)へexact13path、全remote bytes／変更集合／親／headを再取得確認。同じca4140abの[Piece42554294246](https://github.com/MassyuRed/mashos-api/actions/runs/42554294246)／[Analysis42554294252](https://github.com/MassyuRed/mashos-api/actions/runs/42554294252)は実行中（成功未確定）。全private材料・比較script・失敗log・最終検査はCocolon_CMEE_AR04_RefinedNormalSavedReuse_20261109.zipへ保全。
+
+STRUCTURE_MAP_DELTA_PRESENT：既存通常owner間のstage接続と既存SQL3関数のsource fence。新controller／workflow／型／schema／料金／権利なし。配置／live DB／GPU／学習／RN／build0、正式商品品質credit0。次はRNの明示補足選択UI、通常API／migration反映、同じ採用native画像・本人端末を確認する。AR-01反転・一般本文再構成・全必要資産活用は未完了。

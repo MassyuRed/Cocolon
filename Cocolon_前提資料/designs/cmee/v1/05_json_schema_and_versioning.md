@@ -3409,3 +3409,11 @@ API1e76599fのprivate型のみ。既存公開source_ref／API／DTO／DB schema�
 
 
 2026-11-09続行APIfc7dc299では、上記5private型・piece.refined_private_saved.v1を変更せず、補足の有限感情KEEPと既存B8候補のsource／plan／canonical artifact照合へ接続した。候補は既存OFFLINE_NOT_ACCEPTED／record_effect0／quota_effect0。recipe／合成layoutの一致を通常preview・record・native画像の保存へ換算しない。通常refinedのsource-ref／review／SQL保存境界は未接続。
+
+## 2026-11-09続行 — refined通常サーバー保存への適合
+
+APIca4140ab。既決の出所分離と補足資格を、既存七項目source_ref／preview／Safety／saveへ接続。GETでexact supplemental_answer_identityを明示した場合だけ補足を取得し、通常queryなしはoriginal-onlyを維持。本文や適格flagは受け取らない。private handoffを検証して既存canonical DB lineageへ投影し、回答の独立commitmentを保持する。既存record／payload／recipe／private fileの版・schema／RLS・quotaは追加変更しない。
+
+Safetyは原入力と補足のfieldを別scanし、2partitionの既存meaning／planとauthor-free本文保持検査を行う。新しい作者／意味融合・訂正／撤回資格はない。既存3RPCのsource fenceはcurrentな回答frame指紋・question／ADD checkpoint／結果／成功finishへ対応し、original／natural枝、権限・search_pathと保存済み同key再送の順序は維持。preview再読・visual変更・save再送・owner再読で本文を再生成しない。
+
+実Q2 A/Cを隔離SQLで保存再読、Cは本文不変の見た目変更後recipeを同版保存。最終関連3813 PASS／107.77秒＋新SQL適用後の通常保存3planが3 PASS／3.17秒、重複除外計3816成功・FAIL／SKIP0（native11件明示除外、既存warning237）。実Auth／PostgREST、native lock／画像、RNの選択UI、live反映／本人実機は未成立。[実結果・残件](../../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-normal-saved-reuse-20261109)。
