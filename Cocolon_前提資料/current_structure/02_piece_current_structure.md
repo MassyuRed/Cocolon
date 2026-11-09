@@ -3792,12 +3792,15 @@ API `5c042ed5107d15aef43ff6149279c796d5c45808`、8path。既存`emlis_answer_upd
 旧decoder接続の実測は[当時の記録](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-ordered-decoder-20261109)へ。現在地は次節。
 
 <a id="piece-prose-learning-20261109"></a>
-## 2026-11-09 — AR-04 一般文章整形・Piece専用学習候補
+前回のPiece専用LoRA比較は完了履歴として[既存trial](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-prose-learning-20261109)へ。現在地は次節。
 
-API `ad417b07f9bb9f4ebae8478c4db682d6ba82c564`。新作架空24行をfresh Piece LoRAへ一回48更新。学習後の既使用6rawは全て変化し、同じrawのCMEE採用は旧reader2→限定改修後5となった。適格refined4再利用＋新normal4も8採用。隔離SQLでは13本文×3plan＝39保存と保存後の0生成再読が成立し、別1本文×3plan＝3件は保存前に拒否した。 Piece専用候補重みは通常未採用（candidate_normal_adoption=false）。GPUは元base／既存Analysis提供へ復元済み。限定TECHNICAL_CREDITで、正式商品品質credit0・正式受入れ0/3は維持する。 通常selectorはOFF。Render配置・RN／build・実DB・native同版画像／本人端末の新規確認は0。対象助詞「は」の意味保持、本人の語り口、さらに広い文章・欄混合・画像整合は残件で、他ARも未完了。 次は対象助詞「は」と本人の語り口の残差を、広い意味保持・単独伝達の品質と既存保存／画像接続の中で改善する。同じ教師やSYSTEMの追加周回へ自動進行しない。
+<a id="piece-narrator-evaluation-20261109"></a>
+## 2026-11-09 — AR-04 本人一人称・評価対象の保持
 
-既存共有servingへ明示optionalのPiece専用adapterを追加する候補で、`piece.field_slots.v1` profileだけに使用する。自然Emlisはbase、Analysisは既存default adapterを維持し、Piece利用後は元adapterへ戻す。復元失敗時は提供を止め、別adapterでAnalysisを返さない。新`ai/tools/training/train_piece_model_adapter.py`は既存assistant-only CE処理を再利用し、固定24行、最大48update／480秒、既存構造configだけからfresh LoRAを作る。旧Analysis学習済tensorの初期値転用や重み結合はしない。 既存のwish／名詞参照、copula、同じ原prefixの有限未決定表現の読取をmodel armへ限定再利用し、追加生成なしで学習後の同6rawを旧2採用→新5採用へ接続した。主体・相手・欄・scope・否定・時点・程度・留保を保ち、未決定prefixの変更や追加を許可しない。 元の独立CMEE／S7とnative経路の拒否条件を保持し、既存未対応の評価対象「は」を「が」へ読み替えて採用しない。保存済みの同一実rawを修補・再生成せず、旧新readerの採否差と隔離保存を別記する。
+API `3c4e25e2fc7e52082324dfb9fd86645980188bd2`。本人の一人称表記を意味上のSELFと別に比較するよう修正。先行SYSTEM追加2指示は品質不足で完全撤回した。新作の均衡24行をfresh LoRAへ一回48更新すると、一人称6表記の保持は2/6→6/6。新22rawのCMEE採用は限定読取の再利用で16→20、旧22rawは同readerで16採用。最終132件の隔離SQL比較は旧48保存／18拒否、新60保存／6拒否、保存後0生成を確認した。 新Piece候補は通常未採用、通常selectorはOFF。GPUは元base／既存Analysis提供へ復元済み。限定TECHNICAL_CREDITで、正式商品品質credit0・正式受入れ0/3を維持する。 評価述語の欠落と氏名残存の2件、より広い材料での意味保持・本人の語り・公開時の役割表現、同版画像／通常統合・本人端末は残件。他ARも未完了で、今回の局所比較から一般品質成立へ広げない。 次は本人視点・評価述語と名前抽象化の残差を既存の意味保持／商品経路で改善し、広い材料・同版画像／通常統合を確認する。同じ教材の追加周回や候補の通常採用へ自動進行しない。
 
-通常selectorはOFF、Render配置・RN変更／build・実DB反映は行っていない。source資格・二欄・原入力／補足・raw受領・CMEE/S7・保存後非生成の境界を保持する。CPU採用、学習loss、実生成、隔離保存、通常提供、同版native画像／本人端末、正式商品受入れを分ける。
+変更は既存private model reader・その一人称検証・既存workflowを起点とする。`piece_model_source.SYSTEM_MESSAGE`の追加2指示は比較で不採用となったため完全撤回し、元ad417と同じSYSTEMを維持する。private model readerは意味上のactor=SELFを維持したまま、各欄に書かれた一人称を別の比較要素として保持する。同一欄の既に成立した本人継続でだけ、その直前の本人表記を省略読取へ用い、別欄からの本人表記借用・raw補修はしない。評価対象「は」の受理文法は拡張しない。公開型・DB・source資格・原入力／補足・S7／native経路の既存保護境界は変えない。 既存FOCUS文法が認定する原語順と終端copula組、およびnativeで成立済みの明記した同本人の隣接自己評価の主語省略を、model private読取へ限定接続した。native既定の意味保持契約は不変である。参照先・全scope・本人視点・元一人称・評価base／程度／肯否／時点／留保を独立照合し、先頭省略・にとって脱落・別field・OTHER・異なる本人表記・肯否変更等は拒否する。既存evaluation-reuse testの同作者省略を常時拒否する1期待だけを、このnative由来の正期待へ整合させた。同じ新22rawは16→20採用、旧22rawは最終readerでも16採用。未知の語義や意味欠落を許可する差分ではない。
 
-[実結果・範囲・次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-prose-learning-20261109)。
+前回の48更新・32HTTP・39保存は完了履歴として保持し、本単位へ再計上しない。先行SYSTEM比較は学習0、後続の均衡教示による新学習は別段階の実測として数える。serving／trainerコード変更は0。source・raw・採否・保存再読と、通常採用・Render／selector・RN／build・実DB・native画像／本人端末・正式受入れを分ける。
+
+[実結果・範囲・次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-narrator-evaluation-20261109)。

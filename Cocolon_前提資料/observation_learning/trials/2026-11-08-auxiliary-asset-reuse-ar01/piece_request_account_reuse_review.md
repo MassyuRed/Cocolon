@@ -394,3 +394,44 @@ Piece専用候補重みは通常未採用（candidate_normal_adoption=false）�
 通常selectorはOFF。Render配置・RN／build・実DB・native同版画像／本人端末の新規確認は0。対象助詞「は」の意味保持、本人の語り口、さらに広い文章・欄混合・画像整合は残件で、他ARも未完了。
 
 private原本：`Cocolon_CMEE_AR04_PieceProseLearning4B_20261109.zip`。次は対象助詞「は」と本人の語り口の残差を、広い意味保持・単独伝達の品質と既存保存／画像接続の中で改善する。同じ教師やSYSTEMの追加周回へ自動進行しない。
+
+<a id="piece-narrator-evaluation-20261109"></a>
+## 11/9 本人の一人称・焦点評価の同一source比較
+
+API `3c4e25e2fc7e52082324dfb9fd86645980188bd2`、親`ad417b07f9bb9f4ebae8478c4db682d6ba82c564`。本人の一人称表記を意味上のSELFと別に比較するよう修正。先行SYSTEM追加2指示は品質不足で完全撤回した。新作の均衡24行をfresh LoRAへ一回48更新すると、一人称6表記の保持は2/6→6/6。新22rawのCMEE採用は限定読取の再利用で16→20、旧22rawは同readerで16採用。最終132件の隔離SQL比較は旧48保存／18拒否、新60保存／6拒否、保存後0生成を確認した。
+
+### 今回のsourceと変更責務
+
+先行の一人称6・本人評価4・回帰2の12sourceは、保存候補831cの旧／改訂SYSTEMを対にした24callで比較した。両variantのUSER・Prepared ID／private JSONは同一で、期待targetや診断候補はwireへ送っていない。追加2指示は品質不足が残って未採用となり、SYSTEM変更を完全撤回した。次の教示は、旧24行・失敗raw・既使用比較例の転用を避けて独立新作した架空24行。私／わたし／僕／ぼく／俺／おれが各4、評価焦点12／有限10／明記役割の匿名化焦点2、二欄6で、各欄の本人表記・評価対象「が」・同じ肯否／時点／程度／留保を保持する。元の24行が全て「私」の教示だった事実と、今回失敗の単独原因が証明されたという主張は分ける。prefitで匿名化能力の保持2行を追加調整し、v1のbytesを残してv2を凍結した。最終教材SHA256は`05a7b0e6b454c176b2bb92d23af729793312cdd3badd3cdccba541a4d459a4eb`。全24を旧作者4関数禁止のCPUで採用確認し、既存trainerのconfig-only fresh LoRA・最大48update／480秒を使う。旧831cを新しい学習の初期値にはせず、元ad417のSYSTEMで比較する。実比較前の関連19fileは965 PASS／46.55秒・既存warning1、FAIL／SKIP0。前回識別した既存62失敗は今回の修復・再検証へ換算しない。
+
+変更は既存private model reader・その一人称検証・既存workflowを起点とする。`piece_model_source.SYSTEM_MESSAGE`の追加2指示は比較で不採用となったため完全撤回し、元ad417と同じSYSTEMを維持する。private model readerは意味上のactor=SELFを維持したまま、各欄に書かれた一人称を別の比較要素として保持する。同一欄の既に成立した本人継続でだけ、その直前の本人表記を省略読取へ用い、別欄からの本人表記借用・raw補修はしない。評価対象「は」の受理文法は拡張しない。公開型・DB・source資格・原入力／補足・S7／native経路の既存保護境界は変えない。 既存FOCUS文法が認定する原語順と終端copula組、およびnativeで成立済みの明記した同本人の隣接自己評価の主語省略を、model private読取へ限定接続した。native既定の意味保持契約は不変である。参照先・全scope・本人視点・元一人称・評価base／程度／肯否／時点／留保を独立照合し、先頭省略・にとって脱落・別field・OTHER・異なる本人表記・肯否変更等は拒否する。既存evaluation-reuse testの同作者省略を常時拒否する1期待だけを、このnative由来の正期待へ整合させた。同じ新22rawは16→20採用、旧22rawは最終readerでも16採用。未知の語義や意味欠落を許可する差分ではない。
+
+### 実本文の比較
+
+先行の保存候補831cに対する12source×原／改訂SYSTEMの24callは全HTTP200／stop。追加2指示は「俺／おれ」には改善が見られたが、他の表記置換や評価対象「は」の残存が続き、視点例で重要な評価述語の欠落も発生したため、SYSTEM案全体を不採用・完全撤回した。原ad417のSYSTEMとsource USERをそのまま用いる。
+
+次に、独立新作した架空24行をconfigだけから作るfresh LoRAへ一回48update、測定NLL forward4回で学習。trainer138.625秒（CPU処理・load／保存reloadを含む）、外側process139.96489604515955秒。旧831cの学習済tensorを初期値に使っていない。112tensor／3,833,856parameterの保存重みaffb6981ce5381b9006850c9b14859f27a4fe4cfecf09f6ef60dc4d5d417f297は非学習reloadで一致。24update checkpointも保全したがoptimizer／RNGは未保存で、厳密な途中再開物とはしない。
+
+原SYSTEMの同22比較で、一人称6表記保持は旧2/6→新6/6。新22rawの初版reader採用16/22から、既存FOCUS文法の原語順・終端copula組と、nativeで成立済みの同本人隣接自己評価の省略を独立読取へ再利用して20/22へ進んだ。旧831cの22rawは同じ最終readerで16/22。最終の新拒否2は、本人評価述語「重要」の欠落1と、明記役割への抽象化が必要な氏名の残存1であり、検査を緩めて採用しない。rootによる22本文の独立事前読解では、この意味欠落1と公開role契約不成立1を他20と区別した。開発既使用・保持比較を含むため、20/22をblind一般日本語の品質率や正式受入れへ換算しない。reader修復後の追加学習・追加model call・raw修補は0。
+
+### 保存再読・検証
+
+最終関連19fileは1013 PASS／48.75秒、既存warning1、FAIL／SKIP0。前回識別した62失敗の全件修復・今回の再検証は0で、この限定1013件と混ぜない。
+
+最終SQLは旧22＋新22の各3plan、計132試行。旧16本文×3＝48保存／6本文×3＝18拒否、新20本文×3＝60保存／2本文×3＝6拒否。成功108件は元source／Emlis不変・quota各1・同／新serviceの非生成再読を確認。拒否24件は新record／quota不変を確認し、拒否終端のsource／Emlis不変assertは追加していない。visual変更後の同本文検証はrefinedの両版4件×3plan＝24件だけで、normal84件には新たなvisual変更実績を主張しない。
+
+b884初版の132試行（両版各48保存／18拒否）と、先行prompt比較の72試行（39保存／33拒否）は別履歴として保持し、最終132へ合算しない。prompt比較の成功は13 case-variant組×3planで、8source・異なるbody集合9に対応する。保存は記録済み実rawを等価な新しい合成source ID／日時へ厳密再bindし、隔離PGlite・合成Authで既存通常ownerを通した確認。GPU生成時のoriginal PreparedRequest IDを実live DBへ保存した証明ではなく、保存後のモデル／旧作者再生成は0。
+
+初commit b88414fbのCI2件（42601622970／42601623026）はcompleted／successを原本で確認済み。最終API3c4e25e2のPiece CI42604240503はcompleted／success、job129115977098のmodel13fileは734 PASS／35.60秒。Analysis CI42604240560／job129115976923もcompleted／success。両workflowとも全工程successを確認し、CIとローカル件数は重複加算しない。
+
+### 稼働の復元・採否・次
+
+本単位全体の新HTTPは先行SYSTEM比較24＋新fit比較26＝50件で、全HTTP200／stop。新fitの実HTTPは新Piece22＋自然Emlis／Analysisの前後control4＝26件、全HTTP200／stop。各HTTP所要時間の合計は126.870092703728秒（Piece89.2693047595676秒／control37.6007879441604秒）で、学習・起動・GPU保持全体の時間や費用とは別。候補起動17.014931249897927秒、元提供復元16.019003021065146秒。最終は元PID34407へ復元しhealth正常、元serving source・旧Analysis重み・認証値・起動引数は不変。自然Emlis／Analysis controlは双方、非空response bytesが前後完全一致。serving／trainerコードの追加変更はなく、SYSTEM追加2指示も完全撤回。新候補の通常採用・selector有効化・Render配置・RN／build・実DB・native／本人端末の新規反映は0。総請求額と通常提供原価は未測定。
+
+新Piece候補は通常未採用、通常selectorはOFF。GPUは元base／既存Analysis提供へ復元済み。限定TECHNICAL_CREDITで、正式商品品質credit0・正式受入れ0/3を維持する。
+
+前回の48更新・32HTTP・39保存は完了履歴として保持し、本単位へ再計上しない。先行SYSTEM比較は学習0、後続の均衡教示による新学習は別段階の実測として数える。serving／trainerコード変更は0。source・raw・採否・保存再読と、通常採用・Render／selector・RN／build・実DB・native画像／本人端末・正式受入れを分ける。
+
+評価述語の欠落と氏名残存の2件、より広い材料での意味保持・本人の語り・公開時の役割表現、同版画像／通常統合・本人端末は残件。他ARも未完了で、今回の局所比較から一般品質成立へ広げない。
+
+private原本：`Cocolon_CMEE_AR04_NarratorAndEvaluation4B_20261109.zip`。次は本人視点・評価述語と名前抽象化の残差を既存の意味保持／商品経路で改善し、広い材料・同版画像／通常統合を確認する。同じ教材の追加周回や候補の通常採用へ自動進行しない。

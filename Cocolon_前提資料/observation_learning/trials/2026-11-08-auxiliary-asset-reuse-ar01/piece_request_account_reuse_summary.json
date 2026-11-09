@@ -1044,5 +1044,301 @@
     },
     "structure_delta": "STRUCTURE_MAP_DELTA_PRESENT",
     "formal_product_quality_credit": 0
+  },
+  "piece_narrator_evaluation_20261109": {
+    "initial_api": "b88414fb339c556789950c278e4e550ba86c7e96",
+    "final_api": "3c4e25e2fc7e52082324dfb9fd86645980188bd2",
+    "commit_path_counts": {
+      "initial": 3,
+      "followup": 3,
+      "cumulative": 5
+    },
+    "system_instructions_trial": {
+      "calls": 24,
+      "all_http200_stop": true,
+      "variants": [
+        "original",
+        "two_instruction_revision"
+      ],
+      "revised_system_adopted": false,
+      "revised_system_completely_reverted": true,
+      "teacher_failure_raw_reuse": false,
+      "old_candidate_voice_only_ore_improvement": true,
+      "important_predicate_loss_observed": true
+    },
+    "training": {
+      "runs": 1,
+      "rows": 24,
+      "updates": 48,
+      "measurement_forwards": 4,
+      "generation_during_training": 0,
+      "trainer_seconds": 138.625,
+      "trainer_seconds_scope": "CPU/load/save/reload included, not pure update time",
+      "subprocess_seconds": 139.96489604515955,
+      "initial": "FRESH_BASE_NEW_RANDOM_LORA_CONFIG_ONLY",
+      "old_adapter_weights_read": false,
+      "model": "Qwen/Qwen3.5-4B",
+      "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+      "pins": {
+        "transformers": "5.19.0",
+        "peft": "0.21.2",
+        "accelerate": "1.15.0",
+        "safetensors": "0.8.0"
+      },
+      "learning_rate": 0.0001,
+      "seed": 20261109,
+      "weights_sha256": "affb6981ce5381b9006850c9b14859f27a4fe4cfecf09f6ef60dc4d5d417f297",
+      "config_sha256": "295e692720852936937fffc1d48b07d94dbcec075ad00c30b77ff10fb4cbcae7",
+      "runner_sha256": "394ad062430d9f64a19a50ee98b0ab174bb21bbd66de41e550836cd9a796707f",
+      "tensor_count": 112,
+      "parameter_count": 3833856,
+      "saved_reload_tensor_identity": true,
+      "checkpoint24_weights_sha256": "1629081e370904f85a2f4ef697d4e5e743292f504c580480865ada2d2535f664",
+      "optimizer_and_rng_saved": false,
+      "strict_midrun_resume_claimed": false,
+      "measurements": [
+        {
+          "phase": "before",
+          "losses": {
+            "BALANCED01": 0.7396137118339539,
+            "BALANCED24": 0.34669461846351624
+          }
+        },
+        {
+          "phase": "after",
+          "losses": {
+            "BALANCED01": 0.00168462039437145,
+            "BALANCED24": 0.002435292350128293
+          }
+        }
+      ],
+      "peak_allocated_gib": 9.47382926940918,
+      "peak_reserved_gib": 9.71875
+    },
+    "actual": {
+      "original_system_kept": true,
+      "new_piece_calls": 22,
+      "control_calls": 4,
+      "all_http200_stop": true,
+      "source_narrator_six_old_preserved": 2,
+      "source_narrator_six_new_preserved": 6,
+      "initial_reader_new_admitted": 16,
+      "final_reader_new_admitted": 20,
+      "final_reader_old_admitted": 16,
+      "compared_sources": 22,
+      "raw_unchanged_during_reader_fix": true,
+      "extra_training_after_fit": 0,
+      "extra_model_calls_for_reader_fix": 0,
+      "true_new_rejections": [
+        "TARGET_VIEWPOINT: important evaluation predicate missing",
+        "PROSE_NAMED_REFERENCE: required written-role abstraction missing and proper name retained"
+      ],
+      "human_read_body_count": 22,
+      "blind_generalization": false,
+      "human_visible_meaning_preserved_body_count": 21,
+      "human_contract_admissible_body_count": 20,
+      "whole_unit_new_http_calls": 50,
+      "new_fit_http_calls": 26,
+      "prior_system_comparison_new_http_calls": 24
+    },
+    "final_saved_sql": {
+      "source_cases_per_variant": 22,
+      "variants": 2,
+      "tiers": 3,
+      "attempts": 132,
+      "old_saved_body_cases": 16,
+      "old_rejected_body_cases": 6,
+      "new_saved_body_cases": 20,
+      "new_rejected_body_cases": 2,
+      "old_saved": 48,
+      "old_rejected": 18,
+      "new_saved": 60,
+      "new_rejected": 6,
+      "total_saved": 108,
+      "total_rejected": 24,
+      "success_source_emlis_unchanged": 108,
+      "success_quota_each": 1,
+      "saved_same_new_service_regeneration": 0,
+      "rejection_record_quota_unchanged": 24,
+      "rejection_end_source_emlis_unchanged_asserted": false,
+      "refined_visual_change_checked": 24,
+      "normal_success_cases": 84,
+      "normal_new_visual_change_checked": false,
+      "raw_repair": false,
+      "database": "isolated PGlite",
+      "auth": "synthetic",
+      "identity": "recorded exact raw strictly rebound to fresh equivalent synthetic source ids/datetimes",
+      "gpu_original_request_identity_saved_live": false
+    },
+    "separate_history_not_added": {
+      "initial_b884_sql": {
+        "attempts": 132,
+        "old_saved": 48,
+        "old_rejected": 18,
+        "new_saved": 48,
+        "new_rejected": 18
+      },
+      "paired_prompt_sql": {
+        "attempts": 72,
+        "saved": 39,
+        "rejected": 33,
+        "successful_case_variant_sets": 13,
+        "source_cases_with_saved_variants": 8,
+        "distinct_saved_body_sets": 9
+      },
+      "previous_unit_complete": true,
+      "previous_48_updates_32_http_39_saved_added": false
+    },
+    "tests": {
+      "final_targeted": {
+        "files": 19,
+        "passed": 1013,
+        "failed": 0,
+        "skipped": 0,
+        "warnings": 1,
+        "seconds": 48.75
+      },
+      "old_distinct_failures": 62,
+      "old_failures_retested_this_unit": false,
+      "old_failures_repaired_this_unit": false
+    },
+    "runtime": {
+      "original_pid": 33912,
+      "candidate_pid": 34200,
+      "final_restored_pid": 34407,
+      "health": true,
+      "candidate_boot_seconds": 17.014931249897927,
+      "restore_boot_seconds": 16.019003021065146,
+      "piece_http_seconds_sum": 89.2693047595676,
+      "control_http_seconds_sum": 37.6007879441604,
+      "all_http_seconds_sum": 126.870092703728,
+      "natural_analysis_controls_http200_stop": true,
+      "natural_analysis_nonempty_response_bytes_equal": true,
+      "original_source_unchanged": true,
+      "old_analysis_adapter_unchanged": true,
+      "credentials_and_original_args_preserved": true,
+      "serving_code_change": 0,
+      "trainer_code_change": 0,
+      "normal_adoption": false,
+      "selector_enabled": false,
+      "render_deploy": 0,
+      "rn": 0,
+      "build": 0,
+      "live_db": 0,
+      "native_device": 0,
+      "total_bill": null,
+      "production_cost": null,
+      "new_saved_weights_hash_verified": true
+    },
+    "ci": {
+      "initial_b884_jobs": [
+        {
+          "run": 42601622970,
+          "job": 129107241637,
+          "conclusion": "success"
+        },
+        {
+          "run": 42601623026,
+          "job": 129107241588,
+          "conclusion": "success"
+        }
+      ],
+      "final_piece": {
+        "run": 42604240503,
+        "job": 129115977098,
+        "status": "completed",
+        "conclusion": "success",
+        "model_files": 13,
+        "model_passed": 734,
+        "model_seconds": 35.6
+      },
+      "final_analysis": {
+        "run": 42604240560,
+        "job": 129115976923,
+        "status": "completed",
+        "conclusion": "success"
+      }
+    },
+    "raw_evidence_sha256": {
+      "balanced_download/result.private.json": "a8567ba5f42b802a0b13a08db69b5267c27cf3f8d4980804eb5e3b5337cf91b0",
+      "balanced_register_review/raw_review.private.json": "badb7da6c520964735feb7dec539ddce938f61f302cc7892008dbe1bd8d01fee",
+      "balanced_register_review/voice.saved_replay.private.json": "77f3df0d2f8d3e2b0fd2761c2da7ee739095bfcbc056c7fb6cf9ae8fb30d1119",
+      "balanced_review/raw_review.private.json": "ca857d2998e20be75ce36bc001f192c16dda45260ee89dedc6cc7b661d61369f",
+      "balanced_review/voice.saved_replay.private.json": "f7e56d3b242fd46aead465ffdf3dd144f2e0231590d6789e8a4144dded842c81",
+      "voice.raw_review.private.json": "115126217c787a0a97c792659a403db2fb2071c30e67a62a90a1bc8a66056979",
+      "voice.saved_replay.private.json": "79fdab42b7806adc97540a7e22636b58fdb1dcf33a8979f52de5ece7258c903f",
+      "initial_ci_proof.private.json": "252bb21750f36ab034d54e2d0eebc340555c504382a79bef94d7eeaeca33abfc"
+    },
+    "limits": [
+      "missing important evaluation predicate",
+      "unabstracted proper name",
+      "development-known retained comparisons not blind general-quality rate",
+      "normal candidate not adopted",
+      "current selector OFF and original GPU restored",
+      "other AR pending"
+    ],
+    "api": "3c4e25e2fc7e52082324dfb9fd86645980188bd2",
+    "parent_api": "ad417b07f9bb9f4ebae8478c4db682d6ba82c564",
+    "document_parent": "0e7a40cedcad26d6617ef14cf6dc7743e1e232cf",
+    "api_paths": [
+      ".github/workflows/piece-b2b-isolated-postgres.yml",
+      "ai/services/ai_inference/piece_v2_content_policy.py",
+      "ai/tests/test_piece_model_evaluation_reuse.py",
+      "ai/tests/test_piece_model_narrator_voice.py",
+      "ai/tests/test_piece_model_prose_register.py"
+    ],
+    "preparation": {
+      "prior_candidate_comparison_source_count": 12,
+      "paired_variants": 2,
+      "prior_candidate_paired_calls": 24,
+      "system_revision_adopted": false,
+      "voice_cases": 6,
+      "evaluation_cases": 4,
+      "regression_cases": 2,
+      "user_messages_identical": true,
+      "prepared_identity_unchanged": true,
+      "targets_in_wire": false,
+      "serving_code_change": 0,
+      "trainer_code_change": 0,
+      "balanced_new_fictional_rows": 24,
+      "balanced_narrator_counts": {
+        "私": 4,
+        "わたし": 4,
+        "僕": 4,
+        "ぼく": 4,
+        "俺": 4,
+        "おれ": 4
+      },
+      "balanced_family_counts": {
+        "evaluation": 12,
+        "finite": 10,
+        "named_role_focal": 2
+      },
+      "balanced_two_field_rows": 6,
+      "balanced_cpu_admitted": 24,
+      "balanced_data_sha256": "05a7b0e6b454c176b2bb92d23af729793312cdd3badd3cdccba541a4d459a4eb",
+      "balanced_v1_bytes_preserved": true,
+      "old_model_failure_raw_used_as_teacher": false,
+      "original_ad417_system": true,
+      "fresh_training_config_only": true,
+      "training_updates_limit": 48,
+      "training_seconds_limit": 480,
+      "pre_runtime_cpu_tests": {
+        "files": 19,
+        "passed": 965,
+        "failed": 0,
+        "skipped": 0,
+        "warnings": 1,
+        "seconds": 46.55
+      },
+      "previous_known_failures": 62,
+      "previous_known_failures_retested": false,
+      "prior_paired_candidate_weights_sha256": "831c6b086d26cdb3e98ab0663fa6b621de11703a90a1c50b645d1ed778406aa5"
+    },
+    "previous_unit_complete_not_repeated": true,
+    "previous_unit_counts_added": false,
+    "evidence_filename": "Cocolon_CMEE_AR04_NarratorAndEvaluation4B_20261109.zip",
+    "structure_delta": "STRUCTURE_MAP_DELTA_PRESENT",
+    "formal_product_quality_credit": 0
   }
 }

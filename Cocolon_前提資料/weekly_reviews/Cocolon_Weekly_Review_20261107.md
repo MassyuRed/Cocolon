@@ -2266,3 +2266,22 @@ API `ad417b07f9bb9f4ebae8478c4db682d6ba82c564`。新作架空24行をfresh Piece
 Piece専用候補重みは通常未採用（candidate_normal_adoption=false）。GPUは元base／既存Analysis提供へ復元済み。限定TECHNICAL_CREDITで、正式商品品質credit0・正式受入れ0/3は維持する。 通常selectorはOFF。Render配置・RN／build・実DB・native同版画像／本人端末の新規確認は0。対象助詞「は」の意味保持、本人の語り口、さらに広い文章・欄混合・画像整合は残件で、他ARも未完了。 次は対象助詞「は」と本人の語り口の残差を、広い意味保持・単独伝達の品質と既存保存／画像接続の中で改善する。同じ教師やSYSTEMの追加周回へ自動進行しない。
 
 [実本文比較・原本・限定](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-prose-learning-20261109)。
+
+<a id="piece-narrator-evaluation-20261109"></a>
+## 46. 補助経路活用AR-04 — 本人の一人称・焦点評価を同一sourceで比較
+
+API `3c4e25e2fc7e52082324dfb9fd86645980188bd2`。本人の一人称表記を意味上のSELFと別に比較するよう修正。先行SYSTEM追加2指示は品質不足で完全撤回した。新作の均衡24行をfresh LoRAへ一回48更新すると、一人称6表記の保持は2/6→6/6。新22rawのCMEE採用は限定読取の再利用で16→20、旧22rawは同readerで16採用。最終132件の隔離SQL比較は旧48保存／18拒否、新60保存／6拒否、保存後0生成を確認した。
+
+最終関連19fileは1013 PASS／48.75秒、既存warning1、FAIL／SKIP0。前回識別した62失敗の全件修復・今回の再検証は0で、この限定1013件と混ぜない。
+
+最終SQLは旧22＋新22の各3plan、計132試行。旧16本文×3＝48保存／6本文×3＝18拒否、新20本文×3＝60保存／2本文×3＝6拒否。成功108件は元source／Emlis不変・quota各1・同／新serviceの非生成再読を確認。拒否24件は新record／quota不変を確認し、拒否終端のsource／Emlis不変assertは追加していない。visual変更後の同本文検証はrefinedの両版4件×3plan＝24件だけで、normal84件には新たなvisual変更実績を主張しない。
+
+b884初版の132試行（両版各48保存／18拒否）と、先行prompt比較の72試行（39保存／33拒否）は別履歴として保持し、最終132へ合算しない。prompt比較の成功は13 case-variant組×3planで、8source・異なるbody集合9に対応する。保存は記録済み実rawを等価な新しい合成source ID／日時へ厳密再bindし、隔離PGlite・合成Authで既存通常ownerを通した確認。GPU生成時のoriginal PreparedRequest IDを実live DBへ保存した証明ではなく、保存後のモデル／旧作者再生成は0。
+
+初commit b88414fbのCI2件（42601622970／42601623026）はcompleted／successを原本で確認済み。最終API3c4e25e2のPiece CI42604240503はcompleted／success、job129115977098のmodel13fileは734 PASS／35.60秒。Analysis CI42604240560／job129115976923もcompleted／success。両workflowとも全工程successを確認し、CIとローカル件数は重複加算しない。
+
+本単位全体の新HTTPは先行SYSTEM比較24＋新fit比較26＝50件で、全HTTP200／stop。新fitの実HTTPは新Piece22＋自然Emlis／Analysisの前後control4＝26件、全HTTP200／stop。各HTTP所要時間の合計は126.870092703728秒（Piece89.2693047595676秒／control37.6007879441604秒）で、学習・起動・GPU保持全体の時間や費用とは別。候補起動17.014931249897927秒、元提供復元16.019003021065146秒。最終は元PID34407へ復元しhealth正常、元serving source・旧Analysis重み・認証値・起動引数は不変。自然Emlis／Analysis controlは双方、非空response bytesが前後完全一致。serving／trainerコードの追加変更はなく、SYSTEM追加2指示も完全撤回。新候補の通常採用・selector有効化・Render配置・RN／build・実DB・native／本人端末の新規反映は0。総請求額と通常提供原価は未測定。
+
+新Piece候補は通常未採用、通常selectorはOFF。GPUは元base／既存Analysis提供へ復元済み。限定TECHNICAL_CREDITで、正式商品品質credit0・正式受入れ0/3を維持する。 評価述語の欠落と氏名残存の2件、より広い材料での意味保持・本人の語り・公開時の役割表現、同版画像／通常統合・本人端末は残件。他ARも未完了で、今回の局所比較から一般品質成立へ広げない。 次は本人視点・評価述語と名前抽象化の残差を既存の意味保持／商品経路で改善し、広い材料・同版画像／通常統合を確認する。同じ教材の追加周回や候補の通常採用へ自動進行しない。
+
+[source分離・実本文・原本・限定](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-narrator-evaluation-20261109)。

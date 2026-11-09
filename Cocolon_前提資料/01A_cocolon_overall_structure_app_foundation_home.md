@@ -6318,3 +6318,22 @@ API `ad417b07f9bb9f4ebae8478c4db682d6ba82c564`。既存ownerのPiece明示profil
 新作架空24行をfresh Piece LoRAへ一回48更新。学習後の既使用6rawは全て変化し、同じrawのCMEE採用は旧reader2→限定改修後5となった。適格refined4再利用＋新normal4も8採用。隔離SQLでは13本文×3plan＝39保存と保存後の0生成再読が成立し、別1本文×3plan＝3件は保存前に拒否した。 Piece専用候補重みは通常未採用（candidate_normal_adoption=false）。GPUは元base／既存Analysis提供へ復元済み。限定TECHNICAL_CREDITで、正式商品品質credit0・正式受入れ0/3は維持する。 通常selectorはOFF、Render配置・RN変更／build・実DB反映は行っていない。source資格・二欄・原入力／補足・raw受領・CMEE/S7・保存後非生成の境界を保持する。CPU採用、学習loss、実生成、隔離保存、通常提供、同版native画像／本人端末、正式商品受入れを分ける。
 
 [実測・未採用・残件](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-prose-learning-20261109)。
+
+<a id="piece-narrator-evaluation-20261109"></a>
+## 2026-11-09 — AR-04 本人一人称・評価対象のfile地図
+
+API `3c4e25e2fc7e52082324dfb9fd86645980188bd2`。親API `ad417b07f9bb9f4ebae8478c4db682d6ba82c564`からexact5path。STRUCTURE_MAP_DELTA_PRESENT。
+
+| mashos-api path | 責務差分 |
+|---|---|
+| `ai/services/ai_inference/piece_v2_content_policy.py` | 意味上のSELFと書かれた一人称を別比較し、同欄の本人継続へ省略を束縛。既存FOCUSの原語順・終端copula組とnativeの隣接自己評価の省略を全文の独立読取へ再利用。 |
+| `ai/tests/test_piece_model_narrator_voice.py` | 6本人表記とその置換・先頭省略・別欄／別人借用、感情／評価／焦点／有限動作における語り口保持と変異拒否を確認。 |
+| `ai/tests/test_piece_model_prose_register.py` | 同じ実rawの既知焦点語順・copula／registerと隣接自己評価の省略、scope・参照・視点・肯否等の保持／拒否を追加確認。 |
+| `ai/tests/test_piece_model_evaluation_reuse.py` | test名と同作者隣接評価省略の1期待をnative由来の正期待へ整合。先頭・にとって・別field・OTHER・異self・肯否等の拒否は維持。 |
+| `.github/workflows/piece-b2b-isolated-postgres.yml` | 既存path trigger／model検証へnarrator testを追加。新workflow／job・依存・通常生成SYSTEMの変更なし。 |
+
+変更は既存private model reader・その一人称検証・既存workflowを起点とする。`piece_model_source.SYSTEM_MESSAGE`の追加2指示は比較で不採用となったため完全撤回し、元ad417と同じSYSTEMを維持する。private model readerは意味上のactor=SELFを維持したまま、各欄に書かれた一人称を別の比較要素として保持する。同一欄の既に成立した本人継続でだけ、その直前の本人表記を省略読取へ用い、別欄からの本人表記借用・raw補修はしない。評価対象「は」の受理文法は拡張しない。公開型・DB・source資格・原入力／補足・S7／native経路の既存保護境界は変えない。 既存FOCUS文法が認定する原語順と終端copula組、およびnativeで成立済みの明記した同本人の隣接自己評価の主語省略を、model private読取へ限定接続した。native既定の意味保持契約は不変である。参照先・全scope・本人視点・元一人称・評価base／程度／肯否／時点／留保を独立照合し、先頭省略・にとって脱落・別field・OTHER・異なる本人表記・肯否変更等は拒否する。既存evaluation-reuse testの同作者省略を常時拒否する1期待だけを、このnative由来の正期待へ整合させた。同じ新22rawは16→20採用、旧22rawは最終readerでも16採用。未知の語義や意味欠落を許可する差分ではない。
+
+本人の一人称表記を意味上のSELFと別に比較するよう修正。先行SYSTEM追加2指示は品質不足で完全撤回した。新作の均衡24行をfresh LoRAへ一回48更新すると、一人称6表記の保持は2/6→6/6。新22rawのCMEE採用は限定読取の再利用で16→20、旧22rawは同readerで16採用。最終132件の隔離SQL比較は旧48保存／18拒否、新60保存／6拒否、保存後0生成を確認した。 新Piece候補は通常未採用、通常selectorはOFF。GPUは元base／既存Analysis提供へ復元済み。限定TECHNICAL_CREDITで、正式商品品質credit0・正式受入れ0/3を維持する。
+
+[実測・限定・次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-narrator-evaluation-20261109)。
