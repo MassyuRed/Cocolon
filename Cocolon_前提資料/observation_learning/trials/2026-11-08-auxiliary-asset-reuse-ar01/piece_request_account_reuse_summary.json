@@ -1386,5 +1386,136 @@
     "formal_product_acceptance": 0,
     "structure_delta": "STRUCTURE_MAP_DELTA_PRESENT",
     "next": "written name to source-proved role; wider material and same-version image/normal integration"
+  },
+  "role_learning_coordination_20261109": {
+    "api_commit": "858b6b499948856acad3ab2835e6a2a92683d146",
+    "api_parent": "674b5225f841a7dd1d41cbbd88395d2acebb3e42",
+    "training": {
+      "rows": 24,
+      "updates": 48,
+      "runs": 1,
+      "initial": "FRESH_BASE_NEW_RANDOM_LORA_CONFIG_ONLY",
+      "old_adapter_tensor_initialization": false,
+      "teacher_sha256": "48a0e07dbc86fad73758af33c3bafaa2edf302f8b33d5b83099ef5b960977e05",
+      "weights_sha256": "c4962e5cea9e8ae2418c4373aebdc4c9d783ad8f504cbd4c6e38eb0f166a3870",
+      "saved_reload_tensor_identity": true,
+      "outer_seconds": 182.129612,
+      "trainer_seconds": 180.67,
+      "checkpoint24": true,
+      "optimizer_rng_saved": false
+    },
+    "actual": {
+      "compared_sources": 22,
+      "baseline_reused": 16,
+      "baseline_new_calls": 6,
+      "candidate_new_calls": 22,
+      "control_calls": 4,
+      "all_32_http200_stop": true,
+      "named_role_cases": 8,
+      "named_role_cases_abstracted": 8,
+      "baseline_admitted": 14,
+      "candidate_before_reader_fix": 21,
+      "candidate_final": 22,
+      "raw_changed_for_reader_fix": false,
+      "extra_model_calls_for_reader_fix": 0,
+      "independent_before_reader_report_retained": true,
+      "blind_generalization": false,
+      "independent_final_read": {
+        "meaning_preserved": 22,
+        "narrator_forms": 6,
+        "named_role_abstractions": 8,
+        "generic_voice_ore_diagnostic_null": true,
+        "formal_product_acceptance": false
+      }
+    },
+    "reader": {
+      "scope": "single field, explicit SELF, exactly two active past actions, one comma, same narrator continuation",
+      "additional_adversarial_tests": 90,
+      "source_default_changed": false,
+      "body_repair": false,
+      "shared_reader_changed": false
+    },
+    "final_sql": {
+      "attempts": 132,
+      "tiers": 3,
+      "baseline_saved": 42,
+      "baseline_rejected": 24,
+      "candidate_saved": 66,
+      "candidate_rejected": 0,
+      "total_saved": 108,
+      "total_rejected": 24,
+      "saved_source_emlis_raw_unchanged": 108,
+      "saved_quota_each": 1,
+      "saved_reload_model_calls": 0,
+      "prior_63_saved_3_rejected_separate": true,
+      "database": "isolated PGlite",
+      "auth": "synthetic",
+      "raw_strict_rebind": "fresh equivalent source identities/datetimes",
+      "gpu_original_identity_saved_live": false
+    },
+    "regression": {
+      "local_files": 16,
+      "local_pass": 846,
+      "seconds": 41.44,
+      "warnings": 1,
+      "fail": 0,
+      "skip": 0,
+      "known_62_failures_fixed_or_retested": false
+    },
+    "ci": {
+      "piece": {
+        "run": 42616420220,
+        "conclusion": "success",
+        "model_pass": 846,
+        "seconds": 52.05
+      },
+      "analysis": {
+        "run": 42616420098,
+        "conclusion": "success"
+      }
+    },
+    "native": {
+      "initial_commit": "a81a11899b44948b5ea8a289972422b4b3627996",
+      "one_space_compile_fix": "9f7b264c26656a573c76192e3bfa82c392f0c49c",
+      "run": 42617505962,
+      "job": 129160957167,
+      "job_conclusion": "failure",
+      "new_ar04_pass": 4,
+      "new_ar04_fail": 0,
+      "existing_bitmap_pass": 44,
+      "existing_v4_pass": 1,
+      "existing_v4_fail": 19,
+      "same_prior_v4_failure_names_order": true,
+      "js_pass": 180,
+      "js_seconds": 16.15,
+      "artifact": 13673496848,
+      "png_rgba_identity": true,
+      "result_json_saved": true,
+      "png_visually_inspected": false,
+      "scope": "transparent glyph layer, fixed three contiguous body rows plus Emlis, canonical recorded preview/detail, product RN unchanged",
+      "full_card": false,
+      "rn_actual_wrap": false,
+      "device": false
+    },
+    "runtime": {
+      "final_restored_pid": 35290,
+      "health": true,
+      "emlis_analysis_control_bytes_equal": true,
+      "original_serving_analysis_keys_argv_old_weights_unchanged": true,
+      "runner_seconds": 401.429803,
+      "http_seconds": 162.521405,
+      "total_bill_unknown": true
+    },
+    "adoption": {
+      "candidate_normal_adoption": false,
+      "selector": "OFF",
+      "render_deploy": false,
+      "live_db": false,
+      "signed_build_distribution": false,
+      "user_device": false,
+      "formal_product_credit": 0,
+      "formal_acceptance": "0/3"
+    },
+    "next": "新c496候補の同22材料・66保存の完了runを繰り返さず、より広い未学習材料と適格refinedの意味保持・単独伝達、全面Card／RN実描画と同版保存画像、通常統合・本人端末へ進める。新重みや通常selectorを自動採用しない。AR-01の役割反転とAR-02／03／05／06／07／08の新規活用は継続残件。"
   }
 }

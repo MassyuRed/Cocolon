@@ -451,3 +451,43 @@ private原本：`Cocolon_CMEE_AR04_NarratorAndEvaluation4B_20261109.zip`。次�
 実行準備の初版は任意argvの扱いで生成前停止、次版は元提供コードにPiece専用adapter引数がないため起動不成立となった。後者はPiece0call・自然Emlis／Analysisの前後control計4callを記録し、元PID34934へ復元、両control bytes一致・health正常。既成功の提供コードa8fdf…を明示し`--help`を停止前に確認した最終版ではPiece32＋前後control4＝36HTTPが全200／stop。元PID35034へ復元し、元source／旧Analysis重み／認証値／起動引数不変、両control bytes一致・health正常を確認した。追加学習0、固定affb重み不変。最終HTTP所要合計158.949548秒は起動・保持・総請求と別で、総請求／通常原価は未測定。失敗準備を成功分へ混ぜず、raw／修正前後scriptをprivate原本へ残す。
 
 次は未解消の氏名抽象化と、広い材料・同版画像／通常統合。今回だけで新重みや通常selectorを有効化しない。AR-01反転と他AR、本人端末・正式受入れは継続残件。
+
+
+<a id="piece-role-learning-coordination-20261109"></a>
+## 2026-11-09 AR-04 明記役割の学習・連用接続・同版文字bitmap
+
+**11/9・AR-04最新：** API `858b6b499948856acad3ab2835e6a2a92683d146`。原文の評価・留保を生成条件へ渡す前段674bを継承し、新作架空24行をfresh Piece LoRAで一回48更新。旧重みaffbとの同22材料比較で、氏名残存8例が明記役割へ置換され、限定CMEE採用は14→21。残る自然な過去2動作の連用接続を、旧body inverseの本人継続責務と既存finite readerを利用して独立照合できるようにし、同じrawのまま22採用へ到達した。隔離SQLは旧42保存／24拒否→新66保存／0拒否、保存後0再生成。関連16file846 PASS、Piece／Analysis CI成功。同版本文の透明文字bitmapは新4／既存44ともPASS、旧V4同19失敗は継続。新c496重みは通常未採用、selector OFF、GPU元提供へ復元済み。本番・本人端末・全面画像の確認、広い材料とrefined、AR-01反転・他ARは未完了。
+
+API [858b6b49](https://github.com/MassyuRed/mashos-api/commit/858b6b499948856acad3ab2835e6a2a92683d146)（parent674b）と、RN検証 [a81a1189](https://github.com/MassyuRed/Cocolon/commit/a81a11899b44948b5ea8a289972422b4b3627996)／構文修復 [9f7b264c](https://github.com/MassyuRed/Cocolon/commit/9f7b264c26656a573c76192e3bfa82c392f0c49c)。通常稼働の採用ではなく、AR-04の開発候補である。
+
+### 生成結果と学習範囲
+前段§47は固定affbで生成条件を比較し、評価・留保欠落3を修復した。今回の教材はそこから独立に新作した架空24行（明記役割12／本人評価6／有限動作6、一人称6表記各4、二欄3）。旧教材24、既使用比較source、失敗raw／比較期待正文を学習へ流用しない。既存configだけを用いたfresh LoRA一回48更新で、旧学習tensorを初期値へ読まない。教師SHA256は48a0e07dbc86fad73758af33c3bafaa2edf302f8b33d5b83099ef5b960977e05、新重みはc4962e5cea9e8ae2418c4373aebdc4c9d783ad8f504cbd4c6e38eb0f166a3870。112 tensor／3,833,856 parameterの保存再load一致。24更新checkpointも保全したがoptimizer／RNG未保存のため厳密な途中resumeとはしない。教材file内の未実行metadataは準備時点で、実行実績の正本はfit/reportとresultである。
+
+原SYSTEM、同じ原requestと生成条件を使い、前段の16 baselineは全messages・重み／結果由来の一致を検証して再利用、未学習の役割対照6だけ旧重みで新生成した。新重みは全22を生成。新HTTPはPiece28（旧6＋新22）と自然Emlis／Analysis前後control4の計32、全HTTP200／stop。比較22は既使用16＋新役割6で、独立なblind一般品質評価ではない。別の曖昧役割2はCPU source段階で拒否し、GPU22の分母へ足さない。
+
+新旧44本文を原文と全文比較すると、以前の氏名残存2と追加6の全8例が、原文で明記された役割へ抽象化された。主体／対象／参照／希望／否定／不明・未決定を変えず、本文が同じ11組・変わった11組を分けて記録した。新候補は最初21/22採用、残る1件は、同じ本人の肯定過去と否定過去を連用形でつないだ本文をreaderが未対応としていた。先行独立readの21/22という機械採否は履歴に残し、最終reader22/22へ上書きしない。
+
+### 旧読取責務の必要部分を既存Pieceへ接続
+新しい作者やraw修補ではなく、既存piece_v2_content_policyのmodel本文読取へ、旧body inverseの同本人継続と既存finite活用／格読取を移した。単一ledger欄・一つの読点・二つの完全な能動動作に限定し、冒頭は六表記の明示SELF、前半の「伝え／相談し／頼み」を肯定過去として独立読取し、後半の肯否は後半だけに束縛する。後半の同じ本人の表記／省略、相手の「に」・対象の「を」・述語・時点を全節で照合する。source既定／共有readerは変更しない。日付／条件／留保／希望／伝聞／受動／非過去／他者／別本人表記／追加節／別欄・補足の借用は拒否を維持する。
+
+新規90反例を含む最終関連16file846 PASS／41.44秒、既存warning1、FAIL／SKIP0。原raw・意味閾値・source資格・公開DTO・DB・SYSTEM・学習・モデルcallを追加せず、同じ44rawを再照合すると旧14/22、新22/22。既知62失敗の全件修復・再実行は今回行っていない。Piece CI42616420220は全工程success、model群846 PASS／52.05秒。Analysis CI42616420098もcompleted／success。局所とCIを重複加算しない。
+
+### 保存・非生成再読
+最終は22source×旧新2×3planの132試行。旧14本文×3＝42保存／8本文×3＝24拒否、新22本文×3＝66保存／0拒否。成功108件は本文／raw／recipe等・原入力／Emlis不変、quota各1、同／新serviceによる非生成再読を確認。旧readerでの新63保存／3拒否は別履歴に保全し、最終132へ加算しない。記録済み実rawを等価な新しい合成source ID／日時へ厳密再bindした隔離PGlite・合成Authの通常owner検証であり、GPUのoriginal PreparedRequest identityを実Supabaseへ保存した実績ではない。モデル／旧作者の再生成0。今回normalの新たなvisual変更全件成功とはしない。
+
+### 同版透明文字bitmapの限定確認
+採用済TARGET_VIEWPOINTの実隔離SQL preview／保存detailからcanonical本文・recipe・3hash・renderer版をそのままfixtureへ移した。これはaffbとc496の両方で本文・recipe・payloadが同一であり、今回の新22候補の同版例としても使用できる。JSのHTTP envelopeだけ合成し、既存rendererのpreview／保存／export入力、Emlis文字、palette、fit/current保護を180 PASS／16.15秒で確認。製品RNコードは変更していない。
+
+iOS追加methodは既存renderBitmapCanvasへ、固定の連続3行＋Emlisを渡し、previewと保存版を独立描画してRGBA／PNG一致とresult.json保存を確認した。RN [CI42617505962](https://github.com/MassyuRed/Cocolon/actions/runs/42617505962)のiOS source job129160957167は、新AR04_BITMAP_CHECKS=4 PASS=4／既存BITMAP_NATIVE_CHECKS=44 PASS=44／NATIVE129 PASS／V9 46 PASS。一方V4は1 PASS／19 FAILで、前回の失敗名・順序と一致し、job全体はfailureを維持した。追加4を理由に全体GREENと呼ばない。artifact [piece-ar04-native-bitmap](https://github.com/MassyuRed/Cocolon/actions/runs/42617505962/artifacts/13673496848)（82,768bytes、SHA256 fff0986e676fa39a00ceabbf964684fb257b3074adadbafc7e1a8db8d08ad65a）を保存済み。初回a81のiOS compileは追加methodの空白不足1箇所で失敗し、9f7の1文字修正後にcompile成功した。
+
+これは文字層だけで、テーマ背景込みの全面Card、RN/B9実wrap、実機写真保存、liveの保存RPC確認へ広げない。成果物PNGの視認は未実施。別jobのRN実描画は進行中のため今回の成立実績に含めない。旧V4の修復をこの単位で完了したとはしない。
+
+### 提供の復元・未採用・次
+trainer内部180.67秒／外側182.129612秒、学習を含む全runner401.429803秒、HTTP合計162.521405秒はそれぞれ範囲が異なり、GPU保持全体・総請求／通常原価は未測定。実GPUはRTX4000 Ada。trainerの既存--helpが成功SystemExitでもexit1となる初版preflightで、学習／生成／停止前に中断した。v2は既知help終了のexact stderr・必要flagの成立だけを明示識別し、実学習のexit0要求は維持、製品trainer修正はしていない。提供source a8fdf…／trainer394ad…はGitの既存版のまま。
+
+最終は元PID35290へ復元、health正常、元serving source／既存Analysis重み／認証値／起動引数／旧affb重みは不変。自然Emlis／Analysisの前後非空response bytesは両方一致。候補の通常採用false、通常selector OFF。本番Render配置、実DB、signed build／配布、本人端末反映は未実施。限定TECHNICAL_CREDITで、正式商品品質credit0・正式受入れ0/3を維持する。STRUCTURE_MAP_DELTA_PRESENT。
+
+新c496候補の同22材料・66保存の完了runを繰り返さず、より広い未学習材料と適格refinedの意味保持・単独伝達、全面Card／RN実描画と同版保存画像、通常統合・本人端末へ進める。新重みや通常selectorを自動採用しない。AR-01の役割反転とAR-02／03／05／06／07／08の新規活用は継続残件。
+
+
+最終44rawの追加独立全文確認でも、新22例の意味保持・一人称6表記と8氏名の明記役割化を確認した。VOICE_OREの汎用actual_private_meaning診断はnullのままであり、限定completed-body readerの成功を一般parser対応とは扱わない。先行21/22のJSONは履歴として不変、最終readerの補足だけを別private原本へ保存した。

@@ -6353,3 +6353,15 @@ API `3c4e25e2fc7e52082324dfb9fd86645980188bd2`。親API `ad417b07f9bb9f4ebae8478
 | API `.github/workflows/piece-b2b-isolated-postgres.yml` | 既存model検査へ新2testを追加 |
 
 公開DTO／DB／RNの追加pathなし。新test2pathを上記地図へ追加し、全repositoryの全blob意味監査は主張しない。関連15file756 PASS、STRUCTURE_MAP_DELTA_PRESENT。
+
+
+<a id="piece-role-learning-coordination-20261109"></a>
+## 2026-11-09 AR-04 明記役割学習・本人の過去2動作・同版文字bitmap
+
+**11/9・AR-04最新：** API `858b6b499948856acad3ab2835e6a2a92683d146`。原文の評価・留保を生成条件へ渡す前段674bを継承し、新作架空24行をfresh Piece LoRAで一回48更新。旧重みaffbとの同22材料比較で、氏名残存8例が明記役割へ置換され、限定CMEE採用は14→21。残る自然な過去2動作の連用接続を、旧body inverseの本人継続責務と既存finite readerを利用して独立照合できるようにし、同じrawのまま22採用へ到達した。隔離SQLは旧42保存／24拒否→新66保存／0拒否、保存後0再生成。関連16file846 PASS、Piece／Analysis CI成功。同版本文の透明文字bitmapは新4／既存44ともPASS、旧V4同19失敗は継続。新c496重みは通常未採用、selector OFF、GPU元提供へ復元済み。本番・本人端末・全面画像の確認、広い材料とrefined、AR-01反転・他ARは未完了。
+
+API既存 `ai/services/ai_inference/piece_v2_content_policy.py` のmodel完成本文armを限定改修、新 `ai/tests/test_piece_model_coordinated_actions.py`（90反例）と既存 `.github/workflows/piece-b2b-isolated-postgres.yml` を更新。source側／共有reader／公開型／DB／作者の追加なし。原文のframe・公開役割から4Bへの生成条件はparent674bの `piece_model_source.py`／`piece_v2_preview_service.py` と新2testを継承する。
+
+RNは検証用4path：`tests/native/piece-ar04-adopted-native.json`（新規、実隔離保存版と同一）、`tests/native/piece-text-metrics-ios.mm`、`tests/piece-v2-renderer.test.js`、`.github/workflows/piece-rn-contracts.yml`。製品renderer変更なし。preview／保存／exportの入力と3hash・Emlis文字・paletteはJS180 PASS、固定3行の透明文字bitmapは新4／既存44 PASS。旧V4の19失敗を保ち、RN CI全体GREENではない。全面Card／RN実wrap／本人端末の確認ではない。
+
+STRUCTURE_MAP_DELTA_PRESENT。現在の読解範囲・実モデル／隔離SQLの区別・失敗履歴・通常未採用・次は既存trialの `piece-role-learning-coordination-20261109` 節とweekly§48を参照。新c496候補の同22材料・66保存の完了runを繰り返さず、より広い未学習材料と適格refinedの意味保持・単独伝達、全面Card／RN実描画と同版保存画像、通常統合・本人端末へ進める。新重みや通常selectorを自動採用しない。AR-01の役割反転とAR-02／03／05／06／07／08の新規活用は継続残件。
