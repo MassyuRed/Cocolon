@@ -2030,3 +2030,7 @@ natural元入力／履歴の全category配列、二欄・全9場面・各感情�
 API `a98c6e59`。`natural_reply_meaning.py` が既存原文分割／引用外判定／Analysis有限動詞を回収し、明記役割と最終自由文を別読取する。`emlis_thread_service.py::_process_natural` は1call受領後にprivate `artifact.meaning_comparison` を保存し、公開DTOや分析sourceへ出さない。旧保存互換・同本文GET・NOT_GENERATEDを維持し、追加生成・本文補正は0。CHECKER_ERRORとsource不正を分ける。実自由文の全般読取は未達で、非衝突は一節の検査範囲だけを表す。
 
 `natural_reply.py::prepare_natural_reply` は通常 `use_meaning_support=False` で元prompt／materialを維持。研究明示時だけ原文無切断・件数／UTF8上限付きのCURRENT補助を作れる。最終CPU版はWRITTENの「本人」と記録者を分離、過去意向の当回化を避ける。新4Bでの最終CPU版確認・通常適用は未実施。66実生成のv1/v2/v3は悪化も残り不採用。詳細・実本文・残件は上記trialの唯一ownerへ。AR-01／EM-01a/bは継続中。候補sourceの接続であり、本番・本人実機への新反映ではない。
+
+## 2026-11-09 — 共用応答画面からPieceへ本人補足を明示選択
+
+RN4a103688で既存EmlisThreadModal内のPiece入口だけを拡張。表示した第一本人回答を選んだ場合に限り、本文なしのsavedInputへexact回答IDを追加して既存Piece画面へ渡す。未回答の従来入口、Emlis本文・問い／回答更新・hook／DTO／保存処理は不変。ADDの最終資格はPiece側serverが判定する。新しいEmlisの意味能力／naturalの問い接続とはしない。COMPLETED／REFINED等の表示条件、本人変更・背景化・古い操作・遅延dismissを確認。詳しい責務・検証・未build／実機未確認は[Piece map](02_piece_current_structure.md)末尾と[今回結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-rn-selected-reuse-20261109)。STRUCTURE_MAP_DELTA_PRESENT（共用画面内の既存Piece入口のみ）。

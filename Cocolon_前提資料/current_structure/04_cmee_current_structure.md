@@ -2025,4 +2025,12 @@ private handoffのraw原入力commitment／prefix／refined bindingを検証し�
 
 実Q2のA/Cを隔離SQLで通常preview→保存→owner再読。消費各1、原入力／thread／events不変。Cは本文生成禁止で見た目を変更しrevision2、期限不変、選択後recipeを保存再読した。同じ保存snapshotのclean親版はpreview資格拒否2、新版は2発行準備成功、本文／payloadはSQL保存物と一致。最終関連3813 PASS／107.77秒＋新SQL適用後の通常保存3planが3 PASS／3.17秒、重複除外計3816成功・FAIL／SKIP0（native11件明示除外、既存warning237）。新しいnative lock／RLS／画像品質や実Auth／PostgRESTの実証ではない。
 
-RNの明示補足選択UI、API／migrationのlive反映、同じnative画像と本人端末、一般本文再構成・正式受入れは残る。既知161旧失敗とAR-01反転も未解決。配置／実DB／GPU／RN／build0、正式商品品質credit0。STRUCTURE_MAP_DELTA_PRESENT（既存通常保存経路へのstage接続）。[全結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-normal-saved-reuse-20261109)／[全file地図](../01A_cocolon_overall_structure_app_foundation_home.md#piece-refined-separated-files-20261109)。
+RNの明示補足選択UIは下記4a103688でsource接続。API／migrationのlive反映、RN統合配布、同じnative画像と本人端末、一般本文再構成・正式受入れは残る。既知161旧失敗とAR-01反転も未解決。配置／実DB／GPU／署名build／配布0、正式商品品質credit0。STRUCTURE_MAP_DELTA_PRESENT（既存通常保存経路へのstage接続）。[全結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-normal-saved-reuse-20261109)／[全file地図](../01A_cocolon_overall_structure_app_foundation_home.md#piece-refined-separated-files-20261109)。
+
+### 2026-11-09続行 — 本人が選んだ補足をRNから渡す
+
+RN4a103688（親26c4453e）。共用EmlisThreadModalは、COMPLETED／REFINED・RESOLVED／meaning_updated、第一QUESTION／ANSWER各1、currentなround1観測の対応がある時だけ、表示した本人回答に「この回答を含めてピースを作成」を提示する。DTOにADD操作は無いため、この判定を最終資格とせず既存server GETで再検証する。未回答の従来CTAは維持し、回答済みのoriginal-onlyは既存serverで対象外のため自動fallbackにしない。
+
+画面遷移のsavedInputは従来3項目、選択時だけsupplementalAnswerIdentityを加える。原文／回答本文／Emlis返事は渡さない。既存clientはexact queryと同じrefined／回答IDの七項目応答を照合し、hostは選択IDも世代へ含める。再確認／再試行／期限切れ再作成で同じ回答を保持、本人／入力／選択／runtime／背景化の旧応答と遅延dismissを遮断する。以前の保存が不明なら元のpreview／save keyの確認を優先し、新選択へ読み替えない。新controller／cache／公開DTO／DB／CMEE意味・作者の変更なし。
+
+実Q2保存材料A/Cの同一DTO／source_refで、親の作成導線0→新2、React＋合成Auth／HTTPでGET→POST→本文指紋確認。本文／payloadはSQL保存物、画像設定は初回previewのrecipeと一致。Cの変更後配色・保存／native画像を今回RN経由で再実行した証明ではない。最終15suite1512 PASS／18.645681秒・FAIL／SKIP0。既存CIと同じMetro bundle検査1件は対象外。[RN CI42558430844](https://github.com/MassyuRed/Cocolon/actions/runs/42558430844)は同じ4a103688で実行中、成功未確定。APIca4140abのPiece42554294246／Analysis42554294252は両success。RN未build・API／SQL未配置、同版bitmap・本人端末・一般本文品質／AR-01反転・全資産活用は未完了。[実結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-rn-selected-reuse-20261109)。STRUCTURE_MAP_DELTA_PRESENT（既存共用UI／client／hostの選択接続）。

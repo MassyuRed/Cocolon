@@ -258,5 +258,77 @@
       "rn": 0,
       "build": 0
     }
+  },
+  "refined_rn_selected_reuse": {
+    "date_jst": "2026-11-09",
+    "rn_commit": "4a1036880c51983d3088b3132f6ad4b6f48abc1e",
+    "rn_parent": "26c4453e8cd10a53a880c9ca3180eea25d61c634",
+    "api_unchanged": "ca4140ab1fee8be8da55cefcee1b72011e85354e",
+    "changed_paths": 7,
+    "source_ref_fields": 7,
+    "saved_input_original_fields": 3,
+    "saved_input_selected_fields": 4,
+    "same_captured_q2": {
+      "cases": 2,
+      "parent_routes": 0,
+      "candidate_routes": 2,
+      "hash_verified": 2,
+      "sql_saved_body_exact": true,
+      "initial_recipe_exact": true,
+      "transport": "synthetic HTTP/Auth/native; actual React and JS owners; existing API projection",
+      "new_q2_calls": 0,
+      "provider_calls": 0,
+      "live_db_calls": 0,
+      "new_save_calls": 0
+    },
+    "tests": {
+      "selected_pass": 1512,
+      "seconds": 18.645681,
+      "fail": 0,
+      "skip": 0,
+      "metro_bundle_explicitly_excluded": 1,
+      "new_modal": 45,
+      "client_host_new_and_old": 135
+    },
+    "preserved": [
+      "unanswered original action",
+      "exact selected answer on retry/recheck/restart",
+      "owner/source/runtime/background fences",
+      "previous uncertain save exact request/key"
+    ],
+    "remaining": [
+      "live API and migration application",
+      "RN integrated build and distribution",
+      "same native bitmap and device",
+      "general semantic reconstruction",
+      "AR01 role inversion"
+    ],
+    "api_ci": {
+      "piece": {
+        "run": 42554294246,
+        "status": "completed",
+        "conclusion": "success"
+      },
+      "analysis": {
+        "run": 42554294252,
+        "status": "completed",
+        "conclusion": "success"
+      }
+    },
+    "rn_ci": {
+      "run": 42558430844,
+      "status": "in_progress",
+      "conclusion": null
+    },
+    "formal_product_quality_credit": 0,
+    "runtime": {
+      "deploy": 0,
+      "live_db_requests": 0,
+      "gpu_calls": 0,
+      "native_bitmap": 0,
+      "signed_build": 0,
+      "distribution": 0
+    },
+    "evidence_filename": "Cocolon_CMEE_AR04_RefinedRNSelection_20261109.zip"
   }
 }

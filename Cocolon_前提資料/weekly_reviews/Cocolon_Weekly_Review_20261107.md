@@ -2133,3 +2133,14 @@ STRUCTURE_MAP_DELTA_PRESENTは既存補足資格・B8手渡し／検査だけ、
 API[ca4140ab](https://github.com/MassyuRed/mashos-api/commit/ca4140ab1fee8be8da55cefcee1b72011e85354e)のexact13pathを全bytes／変更集合／親／head読戻し確認。同じca4140abの[Piece42554294246](https://github.com/MassyuRed/mashos-api/actions/runs/42554294246)／[Analysis42554294252](https://github.com/MassyuRed/mashos-api/actions/runs/42554294252)は実行中（成功未確定）。[全結果・限定・次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-normal-saved-reuse-20261109)。原本ZIPはCocolon_CMEE_AR04_RefinedNormalSavedReuse_20261109.zip。
 
 STRUCTURE_MAP_DELTA_PRESENT（既存通常保存へのstage接続）、配置／live DB／GPU／学習／RN／build0、正式品質credit0。RNの明示補足選択UIと通常反映、同じnative画像・本人端末、一般再構成・AR-01反転・全資産活用は未完了。
+
+<a id="piece-refined-rn-selected-reuse-20261109"></a>
+## 38. 補助経路活用AR-04 — 本人補足の明示選択をRNへ接続
+
+2026-11-09 JST。RN[4a103688](https://github.com/MassyuRed/Cocolon/commit/4a1036880c51983d3088b3132f6ad4b6f48abc1e)へsource3／既存test2／新test1／既存CI1のexact7pathを反映し、全bytes・親／変更集合／headを読戻し一致。共用応答画面で表示した第一本人回答を「この回答を含めてピースを作成」で明示選択し、本文なしのexact回答IDだけを既存Pieceへ渡す。UIの解決済み表示をADD資格とせず、server GET／preview／saveで再検証する。
+
+同じ実Q2保存A/C材料の親導線0→新2、React＋合成HTTPのGET→POST→指紋確認まで到達。本文／payloadはSQL保存物、recipeは初回previewと一致。Cの変更後配色・新保存・native画像を今回アプリで再確認したとはしない。未回答の従来操作、同選択retry／再確認／再作成、本人／source／背景・遅延dismiss境界、旧保存結果不明の元要求確認を保持する。
+
+最終15suite1512 PASS／18.645681秒・FAIL／SKIP0。既存CIと同じMetro bundle検査1件は対象外。最終selected検査のFAIL／SKIP0と、Metro1件の明示対象外を区別する。初回のVM Array比較はtest helperのcopyへ訂正。前回APIca4140abのPiece／Analysis両CIはsuccess確認、[RN CI42558430844](https://github.com/MassyuRed/Cocolon/actions/runs/42558430844)は同じ4a103688で実行中、成功未確定。[全結果・残件](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-rn-selected-reuse-20261109)。原本ZIPはCocolon_CMEE_AR04_RefinedRNSelection_20261109.zip。
+
+STRUCTURE_MAP_DELTA_PRESENT（既存UI／client／hostの本人選択）、API／SQL／意味能力変更0、配置／live DB／GPU／学習／native画像／署名build／配布0、正式品質credit0。次は通常API／migration反映と対応RNの統合配布、同じ画像・本人端末。一般再構成・AR-01反転・全資産活用は未完了。

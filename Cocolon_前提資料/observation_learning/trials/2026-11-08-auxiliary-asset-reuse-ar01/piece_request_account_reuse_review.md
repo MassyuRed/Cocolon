@@ -144,3 +144,30 @@ Aは元の過去否定と本人の過去の寂しさ、Cは元の過去否定と
 API[ca4140ab](https://github.com/MassyuRed/mashos-api/commit/ca4140ab1fee8be8da55cefcee1b72011e85354e)へexact13path、全remote bytes／変更集合／親／headを再取得確認。同じca4140abの[Piece42554294246](https://github.com/MassyuRed/mashos-api/actions/runs/42554294246)／[Analysis42554294252](https://github.com/MassyuRed/mashos-api/actions/runs/42554294252)は実行中（成功未確定）。全private材料・比較script・失敗log・最終検査はCocolon_CMEE_AR04_RefinedNormalSavedReuse_20261109.zipへ保全。
 
 STRUCTURE_MAP_DELTA_PRESENT：既存通常owner間のstage接続と既存SQL3関数のsource fence。新controller／workflow／型／schema／料金／権利なし。配置／live DB／GPU／学習／RN／build0、正式商品品質credit0。次はRNの明示補足選択UI、通常API／migration反映、同じ採用native画像・本人端末を確認する。AR-01反転・一般本文再構成・全必要資産活用は未完了。
+
+<a id="refined-rn-selected-reuse-20261109"></a>
+## AR-04続行：表示した本人補足の明示選択をRNへ接続
+
+2026-11-09 JST。APIca4140abと資料26c4453eを継承し、RN[4a103688](https://github.com/MassyuRed/Cocolon/commit/4a1036880c51983d3088b3132f6ad4b6f48abc1e)のexact7pathへ反映。前回APIのPiece42554294246／Analysis42554294252は両completed／successを確認した。API／SQL／本文意味能力の変更は今回0。
+
+### 本人が何を選ぶか
+
+共用EmlisThreadModalで、current観測がREFINED／round1でCOMPLETED、RESOLVED／meaning_updated、第一QUESTIONとANSWER各1の対応がある場合、本人の回答を別blockで示し「元の記録と、この回答を使います。」と「この回答を含めてピースを作成」を表示する。未回答の従来「ピースの作成」と通常2操作を維持する。回答済みで元入力だけを使う経路は既存serverで不適格であり、選択や確定拒否の代替にしない。DTOにADD操作が無いため、UIのhintだけをADDの証明へ変換しない。
+
+tap時の表示回答event_idを捕捉し、savedInputは従来savedInputId／expectedUserId／idempotencyKeyに、選択時だけsupplementalAnswerIdentityを加える。本文／Emlis返事／質問文は持たず、iOS modal dismiss後の同本人・画面・source、背景化／再開・runtime変化を確認して既存PieceCreateへ渡す。古いrender操作が新しいDTOの回答を勝手に選ばない。
+
+既存pieceApiはexact選択ID query、同じrefined／回答IDの七項目だけを受理し、既存POSTへ渡す。hostは回答IDも既存stampに含め、再試行・明示再確認・期限切れ再作成も同じIDを保持する。別回答・queryなしoriginalへの自動fallback／自動生成なし。旧ownerやsource／selection ABAの遅い結果を遮断する。以前の保存結果が不明なら、元preview／savekeyの同じ確認を優先し、新選択で上書きしない。新controller／永続cache／DTO／DB版は追加しない。
+
+### 同じ保存材料でアプリ側の差を確認
+
+前回の実有限Q2＋隔離SQL A/C原本をそのまま用い、全capture SHA／同じcompleted DTOとsource_refを固定した。clean親26c4453eでは回答済み作成はdisabled／導線0、新版は実Reactで表示回答を選び各1route、同じ回答IDのGET→POST→既存controller／本文指紋確認まで2件成功。API応答は前回service成果物を既存公開mapperとquota／capabilities projectorで投影した合成HTTP、Auth／nativeはdoubleであり、新HTTP実接続やDB保存の成功ではない。quota表示のcount0は前回の新規架空ownerの保存前条件。
+
+本文／payload4fieldは元SQL保存detailと一致し、recipe／hashは初回previewと一致。Cの後から選んだquiet_nightの同版保存は前回server検証の資産として保持し、今回アプリ経由で再検証したとはしない。初回recipeと変更後recipeを混同した進捗文は、その場で訂正した。root／独立担当が原入力・補足・完成本文を再確認し、元の過去否定とAの過去寂しさ／Cの現在喜び、非因果・選択感情非流用を保持。新本文品質の増分は0、今回の差は利用入口である。
+
+### 検証と反映
+
+最終15suite1512 PASS／18.645681秒・FAIL／SKIP0。既存CIと同じMetro bundle検査1件は対象外。新UI45件、client／hostの新旧135件を含み、重複実行は加算しない。標準の限定React環境にMetroが無いため、既存CI同様にbundle検査1件をtest-skip-patternで対象外とした。初回のclient host1失敗はVM由来Arrayのprototypeを直接比較したtestの誤りで、既存copy helperへ直し製品sourceを変えず最終検証した。初回logと依存不足logはprivate記録へ保全。前回API native11対象外・既存161失敗、RN native V4既存19失敗は今回解消したとしない。
+
+コード7fileは全remote bytes／親／変更集合／head読戻し一致。既存Piece CIへmodal path／新testを追加し、新workflowは作らない。[RN CI42558430844](https://github.com/MassyuRed/Cocolon/actions/runs/42558430844)は同じ4a103688で実行中、成功未確定。製品source3／既存test2／新test1／既存CI1だけで、共用hook・Input／履歴caller・PieceCreateScreen／Controller／MainTabs recoveryを再実装しない。
+
+STRUCTURE_MAP_DELTA_PRESENT：共用応答UI→body-free選択→既存client／host。配置／live DB／GPU／学習／native bitmap／署名build／TestFlight0、正式品質credit0。原本ZIPはCocolon_CMEE_AR04_RefinedRNSelection_20261109.zip。次はAPI／migrationの通常反映と対応RNの統合配布、同じ採用画像・本人端末を確認する。一般本文再構成・AR-01反転・全必要資産活用は未完了。

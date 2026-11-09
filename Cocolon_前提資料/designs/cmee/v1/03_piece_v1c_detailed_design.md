@@ -573,3 +573,9 @@ APIca4140ab。既決の出所分離と補足資格を、既存七項目source_re
 Safetyは原入力と補足のfieldを別scanし、2partitionの既存meaning／planとauthor-free本文保持検査を行う。新しい作者／意味融合・訂正／撤回資格はない。既存3RPCのsource fenceはcurrentな回答frame指紋・question／ADD checkpoint／結果／成功finishへ対応し、original／natural枝、権限・search_pathと保存済み同key再送の順序は維持。preview再読・visual変更・save再送・owner再読で本文を再生成しない。
 
 実Q2 A/Cを隔離SQLで保存再読、Cは本文不変の見た目変更後recipeを同版保存。最終関連3813 PASS／107.77秒＋新SQL適用後の通常保存3planが3 PASS／3.17秒、重複除外計3816成功・FAIL／SKIP0（native11件明示除外、既存warning237）。実Auth／PostgREST、native lock／画像、RNの選択UI、live反映／本人実機は未成立。[実結果・残件](../../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-normal-saved-reuse-20261109)。
+
+## 2026-11-09続行 — RNから本人補足を明示選択（4a103688）
+
+表示中の第一本人ANSWERを「この回答を含めてピースを作成」で選び、既存body-free savedInputの3項目へ選択時だけsupplementalAnswerIdentityを追加する。これはnavigation／host bindingであり新しい公開source_ref schemaではない。serverの七項目参照／record／payload／recipeの版は不変。本文・質問文・Emlis返事をrouteやhoststampへ入れない。未回答の既存入口とqueryなしGETは維持し、回答済みoriginal-onlyを成功fallbackにしない。
+
+DTOのCOMPLETED／REFINED／RESOLVED等は選択候補のhint。ADDとcurrent資格の最終検証はserver GET／preview／saveが行う。clientは選択したexact回答queryと同じrefined応答だけを受理。再試行・明示再確認・期限切れ再作成も同じID、旧保存結果不明は元preview／savekeyの確認を優先する。意味型・唯一作者・保存schema・RLS／quota変更0。最終15suite1512 PASS／18.645681秒・FAIL／SKIP0。既存CIと同じMetro bundle検査1件は対象外。実Q2保存材料2例のReact／合成HTTP比較で本文／payloadは保存物と一致、recipeは初回preview一致。変更後配色／native画像・新保存・本人実機は今回未検証。[全結果](../../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-rn-selected-reuse-20261109)。

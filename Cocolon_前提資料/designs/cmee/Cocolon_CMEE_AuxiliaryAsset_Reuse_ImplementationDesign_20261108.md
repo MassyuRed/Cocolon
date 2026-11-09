@@ -330,7 +330,7 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 | AR-01 | 現naturalの主体・所有者・否定・時点・留保を、旧失敗・意味比較・共通原因分析で改善。EM-01a/b | 現6境界と正常な短文／省略で、同入力の誤読を解消または明確に減らし、自然さ・別題材・既成功・保存再読を保持。検出増加／無出力だけでは完了しない | 継続中。新24実生成の4版は通常不採用。c6555fd5で疑問符なしの確認質問の保存抜けを修復、250局所PASS。同24rawは旧24保存→新22保存／2拒否、受理本文不変。全体の意味修復は未完 |
 | AR-02 | 現naturalの任意問い・回答・訂正・撤回・frameの一往復。EM-02a/b、03b | 一点確認／skip／終了／本人続行、対象だけ更新、撤回後の残存意味、同版再読、プラン境界 | AR-01の全一般品質完成待ちにはしない。未開始 |
 | AR-03 | 適格履歴の意味ある利用。EM-03a/b | 同一／別場面・変化・無関係・訂正前を区別し、適切な履歴が今回へ効く。失効材料を使わない | 現related_contextを継承。未開始 |
-| AR-04 | Piece一般本文・単独伝達・refined・画像整合。PC-01a/b/c、02等 | 元の意味と条件を保持し、単独で伝わる作品、適格補足の差、同じ採用画像の保存再読 | 独立並行継続。有限対人動作18作品の通常保存を継承し、明示選択した解決済みADDを別sourceで通常サーバー保存へ接続。実Q2＋隔離SQLで2作品を保存・非生成再読。一般本文・RN補足選択・live反映・native同版画像／実機は未完了 |
+| AR-04 | Piece一般本文・単独伝達・refined・画像整合。PC-01a/b/c、02等 | 元の意味と条件を保持し、単独で伝わる作品、適格補足の差、同じ採用画像の保存再読 | 独立並行継続。有限対人動作18作品の通常保存を継承し、明示選択した解決済みADDを別sourceで通常サーバー保存へ接続。実Q2＋隔離SQLで2作品を保存・非生成再読。RN4a103688で明示本人補足選択と既存clientを接続。一般本文・live反映／RN配布・native同版画像／実機は未完了 |
 | AR-05 | 分析の本人基準・役割／選択・記録間関係。AN-03a/b/c、04 | 原記録→意味→図／全文→両端根拠の対応、再出現／変化／不明の正しさ | 現Engine統合・保存済み成果を継承。並行可能。未開始 |
 | AR-06 | Emlis観測材料、訂正・削除・権利、長い蓄積と月次。EM-04/05、AN-02/06/08/10 | 本人sourceから材料を渡し、失効・分割範囲・当時版を保持。生成本文を本人事実にしない | AR-02/03/05の該当能力を利用。未開始 |
 | AR-07 | IF／Saved等の商品固有の残る意味保持責務。既存AN／PC残件 | 仮想・本人選択意向・観測を分離し、成立した経路で出力と保存を確認 | 既存商品の実装条件に従う。無断延期・新発売条件化をしない。未開始 |
@@ -415,8 +415,8 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | AR-04実本文 | 今回独立8は全件不可→生成。時点・SELF6表記・能受動・否定・丁寧体・二欄留保を保持。前回12の生成10はmeaning／plan／artifact／candidate／recipe／serialized hash全同一、拒否2維持。開発作例でblind一般化ではない。前回依頼の新規5は履歴保持、今回増分へ再加算しない |
 | AR-04検証・再読 | 最終3351 PASS／27.94秒・既存warning1・FAIL／skip0、保存9caseで3plan確認。原本SQL11＋既存helper等3のbytes一致。新旧20を実service／既存review＋PGliteへ通し18保存／2拒否、本文等8fieldの3段同一・保存行／詳細の12field同一、初回後は作者／compiler／Engine／review禁止・同key消費各1。原入力／Emlis不変。合成Auth／先行provider／SQLcallbackであり実DB／native画像／ASGI成功ではない |
 | AR-04反映・残件 | API作業source f3b5e93e、既存source2／既存test1／新test1、全bytes／変更集合／head読戻し。配置／実DB／RN／GPU生成0。通常serviceの隔離保存まで確認したが、一般本文・refined・native同版画像／通常稼働・実機・正式受入れ未完了。正式商品品質credit0 |
-| AR-04現在のrefined | APIca4140ab。前回実ADD2本文の意味能力を維持し、明示exact回答のsource-ref／review／preview／visual変更／saveへ別sourceで接続。実Q2＋隔離SQLで2作品保存・非生成再読／消費各1／原入力・Emlis不変、Cは選択後recipeを同版保存。既存schema／RLS／quota不変。最終関連3813 PASS／107.77秒＋新SQL適用後の通常保存3planが3 PASS／3.17秒、重複除外計3816成功・FAIL／SKIP0（native11件明示除外、既存warning237） |
-| AR-04再開記録 | [実結果・限定・次作業](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-normal-saved-reuse-20261109)。次はRNの明示補足選択UIと通常反映、同じnative画像・本人端末を確認。隔離保存をlive稼働へ換算しない。AR-01反転・一般本文再構成と全必要資産活用は未完了 |
+| AR-04現在のrefined | APIca4140abの通常server保存を継承。RN4a103688で表示した第一本人回答の明示選択→exact回答query→七項目refined POSTへ接続。元／補足は別source。旧保存結果不明は元保存要求を優先。同じ実Q2材料の親導線0→新2、本文指紋とSQL保存本文／初回recipe一致。1512関連PASS・Metro1件対象外。未build／未live反映／native未確認 |
+| AR-04再開記録 | [結果・限定・次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-rn-selected-reuse-20261109)。次は通常API／migration反映と対応RNの統合配布、同じ採用native画像・本人端末を確認。合成HTTP／React／隔離SQLをlive稼働へ換算しない。一般再構成・AR-01反転・全必要資産活用は未完了 |
 
 以後はこの表と各能力の対応行を現在状態へ置換更新し、詳細な実行事実は既存trial／weeklyへ置く。新しいhandoff系列・全件hash Gateを作らない。中断時も、成果物と未実行を既存保存先へ残し、同じ未完商品単位から続ける。
 

@@ -6187,3 +6187,19 @@ APIca4140ab。既存5private型／private保存v1と唯一作者を継承し、�
 | `.github/workflows/analysis-observed-content.yml` | 既存PGlite工程へ新4suiteを追加。新workflow／controllerなし |
 
 変更しない既存owner：CMEE `piece_refined.py`（2partition意味／計画／唯一作者とprivate非生成再読）、`piece_v1c.py`／`piece_source.py`（原入力意味・本文作者）、`piece_v2_generation.py`（canonical B8照合）、`piece_v2_store.py`（既存RPCと保存契約）、owner service（同じ保存本文／recipe再読）。今回の本文意味能力追加は0で、前回の実ADD2本文を通常保存へ接続した。[全結果・残件](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-normal-saved-reuse-20261109)。
+
+### 2026-11-09続行 — RN本人補足選択のexact7変更path
+
+RN[4a103688](https://github.com/MassyuRed/Cocolon/commit/4a1036880c51983d3088b3132f6ad4b6f48abc1e)、親26c4453e。上記APIca4140abの13pathは不変。新production file／controller／型／DB schema／本文作者なし、STRUCTURE_MAP_DELTA_PRESENT。
+
+| path（Cocolon） | 責務・境界 |
+|---|---|
+| `screens/input/EmlisThreadModal.js` | 第一本人回答を別blockで表示し明示CTA。DTOのcurrent観測／解決状態を照合、exact回答IDだけを捕捉。本人／source／runtime／背景化／dismiss境界 |
+| `features/piece/pieceApi.js` | 既存七項目refined要求、選択ID queryと同じ回答／stageの応答だけを受理。queryなしoriginalは維持 |
+| `screens/input/InputPieceActionArea.js` | 既存savedInputに任意の回答ID1項目。stamp／GET／再確認／再作成へ同じ選択を保持、旧保存結果確認は元要求を優先 |
+| `tests/emlis-piece-refined-choice.test.js` | 新45件。表示／選択／不適格hint／古い操作／本人・背景・遅延dismiss、既存original入口 |
+| `tests/piece-v2-source-ref.test.js` | 選択GET／exact七項目／不正ID・応答・認証前後と既存POSTの検査 |
+| `tests/piece-v2-saved-input-host.test.js` | GET→POST、同選択retry／再確認／再作成、旧応答失効と以前の結果不明saveの同要求確認 |
+| `.github/workflows/piece-rn-contracts.yml` | 既存React工程へ新suiteとmodal変更pathを追加。新workflow／Gateなし |
+
+`PieceCreateScreen.js`／`PieceCreateController.js`／`useEmlisThread.js`／Input・履歴の呼出し元／MainTabsのsaveRecoveryは既存ownerを再利用し変更しない。全UIのrefreshや画面遷移に回答本文を保存しない。最終15suite1512 PASS／18.645681秒・FAIL／SKIP0。既存CIと同じMetro bundle検査1件は対象外。[RN CI42558430844](https://github.com/MassyuRed/Cocolon/actions/runs/42558430844)は同じ4a103688で実行中、成功未確定。[結果・範囲・次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-rn-selected-reuse-20261109)。
