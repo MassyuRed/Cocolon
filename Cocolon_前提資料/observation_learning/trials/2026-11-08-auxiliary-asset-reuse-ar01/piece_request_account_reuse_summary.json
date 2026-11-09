@@ -1985,5 +1985,218 @@
     "formal_product_credit": 0,
     "formal_acceptance": "0/3",
     "next": "初回8c4c15baの退行を理由に通常採用せず、保存済みの原出力・48更新を繰り返さない。保持配分を改めた第二24行（過去6／未決定2／原入力6／本人補足6／役割4）はCPU検査済みで、既存Runpod Jupyterへ架空教材・評価wire・runnerを渡す操作の明示確認待ち。転送が成立した場合だけ、既存trainerのfresh一回48更新、同26候補＋control4の30 HTTPと156隔離SQLへ進む。これは未実施の次作業で、成功を保証せず、第三の学習・自動再試行へ進まない。模型作りのsource資格外、一般再構成・同版画像／通常統合・本人端末、AR-01反転と他ARの残件を維持する。"
+  },
+  "approved_balanced_temporal_learning_20261110": {
+    "schema": "cocolon.cmee.ar04.approved_balanced_temporal_learning.v1",
+    "date": "2026-11-10 JST",
+    "api_commit": "39e315845629622f2bb4d3dd3a7e9d53cf5569fd",
+    "docs_base": "1b42036882ed234f53d424be20dd8bf13a3a3874",
+    "structure_delta": "NONE_PRODUCT_SOURCE_CONNECTION_AND_RESTORED_NORMAL_SETTINGS_UNCHANGED",
+    "product_source_changes": 0,
+    "approval": {
+      "explicit_user_approval": true,
+      "destination": "existing Runpod f1lle4xwq3wjln",
+      "payload": "exact fictional24 teachers +same26 evaluation wire +runner",
+      "payload_sha256": "9db635e71e1d9cb0f6b35508a1fdcef641b557a069e25046da4295a320ecfc43",
+      "max_updates": 48,
+      "max_training_seconds": 480,
+      "prior_rejection_and_unexecuted_state_retained_as_history": true,
+      "actual_upload_after_approval": true
+    },
+    "teaching": {
+      "data_sha256": "dfb73805876dc866141d3c53668695279e91f8ca44c46c852205db6ebc4692cd",
+      "rows": 24,
+      "past_value": 6,
+      "undecided": 2,
+      "previous_original_scope": 6,
+      "previous_refined_scope": 6,
+      "previous_role": 4,
+      "source_prepared_target_preserved": 24,
+      "row_objects_exact": 21,
+      "current39_authoring_constraints_only_rebound": [
+        "SCOPEFIT03",
+        "SCOPEFIT04",
+        "SCOPEFIT05"
+      ],
+      "narrator_counts": [
+        5,
+        5,
+        4,
+        4,
+        3,
+        3
+      ],
+      "cpu_targets_admitted": 24,
+      "rejected_mutations": 14,
+      "independent_full_read": true,
+      "new_evaluation_sources_or_failed_raw_targets": 0,
+      "typed_refined_teaching_not_live_qualification": true
+    },
+    "evaluation": {
+      "cases": 26,
+      "retained18": 18,
+      "same_initially_independent8": 8,
+      "new_unseen_evaluation_cases_this_run": 0,
+      "lexically_disjoint": false,
+      "partial_phrase_overlap_unchanged": true,
+      "generalization_claim": false
+    },
+    "fit": {
+      "updates": 48,
+      "training_rows": 24,
+      "training_initial": "FRESH_BASE_NEW_RANDOM_LORA_CONFIG_ONLY",
+      "old_adapter_weights_read": false,
+      "inside_trainer_seconds": 217.72,
+      "outside_trainer_seconds": 219.18312096502632,
+      "weights_sha256": "5b1de6c95569444e3711ab5a3d307d480a5c99ffe3c7e7b6224a42455b3e33d0",
+      "config_sha256": "a55b777188953f08f9baffde9c89bf3f7bd57861e3df164fee017a63a5bfb68f",
+      "saved_reload_tensor_identity": true,
+      "checkpoint_updates": [
+        24
+      ],
+      "optimizer_and_rng_saved": false,
+      "normal_adoption": false,
+      "separate_from_initial_fresh48_not_continuous96": true
+    },
+    "actual": {
+      "http_calls": 30,
+      "baseline_http_calls": 0,
+      "candidate_http_calls": 26,
+      "control_http_calls": 4,
+      "reused_baselines": 26,
+      "represented_comparison_outputs": 52,
+      "all_http_200_stop": true,
+      "meaning_by_cohort": {
+        "all26": {
+          "baseline": {
+            "UNAVAILABLE": 5,
+            "GENERATED": 21
+          },
+          "candidate": {
+            "GENERATED": 24,
+            "UNAVAILABLE": 2
+          }
+        },
+        "retained18": {
+          "baseline": {
+            "UNAVAILABLE": 3,
+            "GENERATED": 15
+          },
+          "candidate": {
+            "GENERATED": 16,
+            "UNAVAILABLE": 2
+          }
+        },
+        "heldout8": {
+          "baseline": {
+            "UNAVAILABLE": 2,
+            "GENERATED": 6
+          },
+          "candidate": {
+            "GENERATED": 8
+          }
+        }
+      },
+      "retained_initial_regression_cases_restored": [
+        "FRESH07",
+        "FRESH13",
+        "FRESH14"
+      ],
+      "prior_four_repairs_retained": [
+        "FRESH01",
+        "ROLEHELD01",
+        "TEMPHELD01",
+        "TEMPHELD03"
+      ],
+      "body_pairs_changed": 7,
+      "body_pairs_identical": 19,
+      "new_cmee_refusal": [
+        "FRESH12"
+      ],
+      "new_cmee_refusal_is_proven_semantic_regression": false,
+      "source_unavailable": [
+        "FRESH03"
+      ],
+      "demonstrable_new_semantic_regressions": 0
+    },
+    "refusal_classification": {
+      "FRESH12": {
+        "machine": "piece_model_meaning_unassessed_or_changed",
+        "visible_meaning_loss_confirmed": false,
+        "subject_ga_can_be_legitimate": true,
+        "reader_boundary_and_comma_naturalness_separate": true,
+        "not_counted_as_admitted": true,
+        "next_owner": "existing qualified FOCUS / model-direct S7; source-qualified model-only reading gap and comma naturalness",
+        "reader_fix_or_source_broadening_implemented": false
+      },
+      "FRESH03": {
+        "source_qualification_unavailable": true,
+        "not_counted_as_model_semantic_error": true
+      }
+    },
+    "saved_sql": {
+      "trials": 156,
+      "saved_sql": {
+        "baseline": {
+          "REJECTED_BEFORE_PREVIEW": 15,
+          "SAVED_REPLAYED": 63
+        },
+        "candidate": {
+          "SAVED_REPLAYED": 72,
+          "REJECTED_BEFORE_PREVIEW": 6
+        }
+      },
+      "no_postsave_generation": true,
+      "actual_model_calls_in_this_script": 0,
+      "engine": "PGlite 0.5.8",
+      "tiers": [
+        "free",
+        "plus",
+        "premium"
+      ],
+      "saved_before": 63,
+      "saved_after": 72,
+      "rejected_before": 15,
+      "rejected_after": 6,
+      "quota_per_saved": 1,
+      "refused_record_quota_delta": 0,
+      "original_emlis_unchanged": true,
+      "identity_scope": "exact recorded raw rebound to equivalent fresh synthetic IDs/datetime; isolated SQL, not GPU-original identity live Supabase",
+      "previous_trial156_not_added_to_final": true
+    },
+    "runtime": {
+      "original_pid": 37504,
+      "restored_same_arguments_new_pid": 40494,
+      "health": true,
+      "emlis_analysis_control_raw_equal": true,
+      "source_analysis_keys_argv_old_e924_unchanged": true,
+      "runner_seconds": 405.00029515801,
+      "http_seconds": 147.534705,
+      "boot_seconds_total": 32.030024,
+      "total_gpu_holding_cost": "UNKNOWN",
+      "selector": "OFF"
+    },
+    "validation": {
+      "prior_api_tests_passed": 940,
+      "prior_piece_ci_success": true,
+      "new_pytest_runs": 0,
+      "new_ci_runs": 0,
+      "product_tests_not_inferred_from_fit_or_saved_sql": true,
+      "independent_full52_read_complete": true,
+      "independent_sql_check_complete": true
+    },
+    "limits": [
+      "Same previously used26 cases; no new blind generalization",
+      "One newly unassessed wish sentence is not proven semantic loss; reader and visible comma naturalness remain separate",
+      "Model-building nominal source remains unsupported",
+      "General prose, same-version new native image/ordinary integration/device acceptance incomplete",
+      "No further training, normal adoption or deployment automatically activated",
+      "AR01 and other AR units remain incomplete"
+    ],
+    "evidence_filename": "Cocolon_CMEE_AR04_BalancedTemporalScope_Learning4B_20261110.zip",
+    "primary_outcome": "LIMITED_TECHNICAL_CREDIT",
+    "formal_product_credit": 0,
+    "formal_acceptance": "0/3",
+    "next": "承認された第二配分の48更新・同26比較・156隔離SQLは完了し、自動再実行や第三の追加学習は行わない。保存済み5b1de6c9候補と全52本文を継承し、既存のqualified FOCUS／S7 ownerで、source資格を満たす希望文の正当な主語「が」を現readerが未判定にする境界と、読点を含む表現の自然さを別に解消する。model側の限定読取が次の検討範囲であり、source資格拡張や修正はまだ実装していない。意味保持と未判定を同一視せず、広い材料の意味・単独伝達、同版本文／画像・通常統合・本人端末へ進める。模型作りのsource資格外、AR-01の役割反転と他ARの残件を維持し、通常採用・本番反映へ自動進行しない。"
   }
 }

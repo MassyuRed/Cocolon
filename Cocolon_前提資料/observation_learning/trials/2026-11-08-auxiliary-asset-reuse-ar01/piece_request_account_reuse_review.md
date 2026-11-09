@@ -612,3 +612,40 @@ JS181 PASS／17.35秒。新iOS [run42621869347](https://github.com/MassyuRed/Coc
 初回のraw／48更新／156SQLと、第二配分の未実行教材・CPU検査・拒否事実は別原本としてprivate `Cocolon_CMEE_AR04_TemporalReservation_Learning4B_20261109.zip`へ保存する。API39e31584の前回940 PASSとPiece CI成功は継承、今回製品source変更0のため新pytest／CIは実行していない。署名build／配布・今回native画像／本人端末、本番Render／実DB、通常採用は0。前回の全面画像1作品と旧V4別試験失敗を継承する。STRUCTURE_MAP_DELTA_NONE（製品source・接続責務・復元後の通常設定に差分なし）。限定TECHNICAL_CREDIT、正式商品品質credit0・正式受入れ0/3。
 
 初回8c4c15baの退行を理由に通常採用せず、保存済みの原出力・48更新を繰り返さない。保持配分を改めた第二24行（過去6／未決定2／原入力6／本人補足6／役割4）はCPU検査済みで、既存Runpod Jupyterへ架空教材・評価wire・runnerを渡す操作の明示確認待ち。転送が成立した場合だけ、既存trainerのfresh一回48更新、同26候補＋control4の30 HTTPと156隔離SQLへ進む。これは未実施の次作業で、成功を保証せず、第三の学習・自動再試行へ進まない。模型作りのsource資格外、一般再構成・同版画像／通常統合・本人端末、AR-01反転と他ARの残件を維持する。
+
+<a id="piece-approved-balanced-temporal-learning-20261110"></a>
+## 2026-11-10 明示承認後の保持配分学習 — 初回退行の修復とreader未判定
+
+**11/10・AR-04最新：** Mashの同一Runpod・架空24教材／26評価／runner転送と最大48更新・480秒の明示承認後、保持配分を含むfresh一回48更新を完了。旧e924基準の同26は21→新5b1de6c9の24採用、旧18は15→16・同8は6→8。初回の本人表記・本人補足2例の退行を修復し、過去／留保の4修復も保持。既成功の希望文1例は現readerが未判定で、本文確認では意味損失を確認せず、source資格外1例と分けて残す。隔離SQL156は旧63保存／15拒否、新72保存／6拒否、保存後0生成。開始時37504の元提供を同引数の新40494へ復元、healthとEmlis／Analysis前後control一致。API39e31584・製品source不変、新重み通常未採用／selector OFF、一般品質・同版画像／通常統合・本人端末・AR全体は未完了。
+
+前回[§51相当の記録](#piece-temporal-reservation-learning-20261109)の自動承認reviewによる拒否・当時の未実施・初回8c4c15baの実結果は履歴として保持する。今回の開始点はAPI `39e315845629622f2bb4d3dd3a7e9d53cf5569fd`／資料`1b42036882ed234f53d424be20dd8bf13a3a3874`。Mashは2026-11-10、既存Runpod `f1lle4xwq3wjln`へ架空教材24・同26評価wire・実行スクリプトを送り、最大48更新・480秒の再学習と比較を行うことを明示承認した。同一payload SHA256 `9db635e71e1d9cb0f6b35508a1fdcef641b557a069e25046da4295a320ecfc43`で承認後に一回実行し、前回拒否を無かったことにしたり別の回避経路へ置換したりしていない。
+
+### 教材・既使用評価と実行の範囲
+
+前回CPU準備済みの第二dataset `dfb73805876dc866141d3c53668695279e91f8ca44c46c852205db6ebc4692cd`をそのまま使用。過去評価6・未決定2・旧SCOPEFIT原入力6／本人補足6・ROLEFIT4の計24行で、新しい評価sourceや失敗rawをtargetへ追加していない。source／PreparedRequest／target24一致、row object完全一致21、SCOPEFIT03／04／05だけcurrent39のauthoring_constraintsをrebindした3行という事前の由来を保持する。六一人称分類は5／5／4／4／3／3。全24target採用・14変異拒否と独立確認はCPU教示検査であり、typed refined資格を実Q2／SQL成功の代用にしない。
+
+同8は初回に教材本文を見ずに作った事実を保つが、今回は既使用の同8であり新しい未見評価とは呼ばない。TIMEFIT01とTEMPHELD08の部分phrase共有も不変で`lexically_disjoint=false`。同26基準は保存e924の全messages／request／revision／rawを照合して再利用し、新基準生成0。
+
+既存trainer／serving source・SYSTEM・source資格・独立採否検査は不変。旧e924／初回8c4 tensorを読まず、fresh configから一回48更新、trainer exit0。内部217.72秒／外側219.183121秒、保存非学習reload一致。新weight SHA256 `5b1de6c95569444e3711ab5a3d307d480a5c99ffe3c7e7b6224a42455b3e33d0`、config SHA256 `a55b777188953f08f9baffde9c89bf3f7bd57861e3df164fee017a63a5bfb68f`。24更新checkpointは保存したがoptimizer／RNG未保存で厳密途中resumeではない。前回初回の48更新と今回の48更新は別のfresh学習であり、継続96更新や同一教材の周回成功へ換算しない。
+
+### 同26本文の採否と、意味保持・未判定の区別
+
+新26候補＋前後control4の実30 HTTPは全200／stop。基準26を再利用した比較は52 Piece応答で、記録済み基準を新規推論へ加算しない。全26の採用は旧e92421→新24、内訳は旧18が15→16・同8が6→8。過去評価／未決定対象の4修復を保持し、初回8c4で退行した受動文の本人表記1例と原入力／回答の分離2例は修復された。本文7組変化／19組同一。全52本文の独立再確認と独立SQL検査も完了し、実証された新しい意味退行は0、現CMEEの新規拒否1として区別した。
+
+今回の拒否2例のうち、模型作り1例は既存source資格外のまま。もう1例は、旧成功の希望文が「主語が＋読点」を含む表現へ変わり、現readerで未判定となった。本文確認ではactor／対象／希望・否定等の意味損失を確認しておらず、正当な主語「が」を意味誤りとは扱わない。読点による語りのやや読みにくい点と、現readerの読取範囲は別の残件である。CMEEの新規拒否1を、新しい意味退行1へ自動換算したり、反対に検査を緩めて25採用へ数えたりしない。
+
+これは同じ既使用26材料の局所結果であり、一般文章品質・自然さ・未知材料への一般化・正式Product Readの成立ではない。新5b1de6c9は通常未採用、selector OFFを維持する。
+
+### 156隔離SQL・保存後の非生成再読
+
+同26×旧新2×Free／Plus／Premium＝156試行は、旧63保存／15拒否、新72保存／6拒否。成功135は本文・recipe等の保存版一致、quota各1、原入力／Emlis不変、保存後model／旧作者0生成の同／新service再読。拒否21は新record・quota不変を確認した。実rawを無修正で等価な新しい合成source ID／日時へ厳密再bindしたPGlite・合成Auth／SQL callbackの既存通常owner検証であり、実Supabase・GPU原PreparedRequest identityの保存成立ではない。
+
+前回の初回156は旧63／新66保存、今回156は旧63／新72保存の別比較で、前回・今回を最終分母へ上乗せしない。初回raw／重み／保存記録は上書きせず保持した。
+
+### 復元・現在地・次
+
+runner405.000295秒、HTTP147.534705秒、候補起動／元提供復元計32.030024秒。実GPU RTX4000 Ada。開始時PID37504の元提供を同引数の新PID40494へ復元し、health正常、自然Emlis／Analysis前後response bytes一致、元serving source・既存Analysis重み・認証値・起動引数・旧e924不変。総保持・総請求／通常原価は未測定。
+
+承認・同一payload／data／wire、実48更新・新重み・全52比較・156SQL・復元をprivate `Cocolon_CMEE_AR04_BalancedTemporalScope_Learning4B_20261110.zip`へ保存する。製品source／接続はAPI39e31584のままで新pytest／CI0、前回940 PASSとPiece CI成功は継承記録。通常採用・本番Render／実DB／RN／署名build／配布・今回native画像／本人端末は0。前回同版全面画像1作品と旧V4別試験失敗も継承する。STRUCTURE_MAP_DELTA_NONE（製品source・接続責務・復元後の通常設定不変）、限定TECHNICAL_CREDIT、正式商品品質credit0・正式受入れ0/3。
+
+承認された第二配分の48更新・同26比較・156隔離SQLは完了し、自動再実行や第三の追加学習は行わない。保存済み5b1de6c9候補と全52本文を継承し、既存のqualified FOCUS／S7 ownerで、source資格を満たす希望文の正当な主語「が」を現readerが未判定にする境界と、読点を含む表現の自然さを別に解消する。model側の限定読取が次の検討範囲であり、source資格拡張や修正はまだ実装していない。意味保持と未判定を同一視せず、広い材料の意味・単独伝達、同版本文／画像・通常統合・本人端末へ進める。模型作りのsource資格外、AR-01の役割反転と他ARの残件を維持し、通常採用・本番反映へ自動進行しない。
