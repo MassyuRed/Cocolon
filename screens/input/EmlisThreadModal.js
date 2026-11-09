@@ -31,6 +31,43 @@ function dateLabel(value) {
   return Number.isNaN(date.getTime()) ? "" : date.toLocaleString("ja-JP");
 }
 
+const savedIdentity = value => typeof value === "string"
+  && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(value)
+  && value !== "00000000-0000-0000-0000-000000000000";
+
+// This is a visible choice, not proof of the private ADD checkpoint. The source
+// request must still revalidate this exact saved answer on the server.
+export function selectedPieceSupplementalAnswer(dto) {
+  if (!savedIdentity(dto?.original?.id) || dto.state !== "COMPLETED" || dto.body_state !== "REFINED"
+      || dto.answer_saved !== true || dto.answer_assessment !== "RESOLVED" || dto.meaning_updated !== true
+      || !savedIdentity(dto.current_observation?.event_id) || dto.issued_count !== 1 || dto.pending_question || dto.can_continue
+      || dto.can_retry || dto.failure_code || !Array.isArray(dto.timeline)) return null;
+  const answers = dto.timeline.filter(event => event?.kind === "ANSWER");
+  const questions = dto.timeline.filter(event => event?.kind === "QUESTION");
+  const current = dto.timeline.filter(event => event?.kind === "OBSERVATION" && event.is_current === true);
+  if (answers.length !== 1 || questions.length !== 1 || current.length !== 1
+      || current[0].event_id !== dto.current_observation.event_id || current[0].stage !== "REFINED"
+      || current[0].round_index !== 1) return null;
+  const answer = answers[0], question = questions[0];
+  if (answer.round_index !== 1 || question.round_index !== 1 || !savedIdentity(answer.event_id)
+      || typeof answer.text !== "string" || !answer.text.trim()
+      || typeof question.question_id !== "string" || !question.question_id
+      || answer.question_id !== question.question_id) return null;
+  return answer;
+}
+
+function originalPieceSource(dto) {
+  return !!dto?.current_observation && !dto.answer_saved && savedIdentity(dto.original?.id)
+    && ["FINAL", "PRE_QUESTION"].includes(dto.body_state)
+    && !(dto.timeline || []).some(event => event?.kind === "ANSWER");
+}
+
+function pieceSourceStamp(dto) {
+  if (!originalPieceSource(dto) && !selectedPieceSupplementalAnswer(dto)) return null;
+  return JSON.stringify([dto.thread_id, dto.revision, dto.original.id, dto.body_state,
+    dto.current_observation.event_id, selectedPieceSupplementalAnswer(dto)?.event_id || null]);
+}
+
 function FrameEditor({ frame, thread, textStyle, borderColor }) {
   const [editing, setEditing] = useState(false);
   const [value, setValue] = useState(frame.correction_text || "");
@@ -102,6 +139,8 @@ export default function EmlisThreadModal({ thread, colors, navigation, userId = 
     return () => clearTimeout(timer);
   }, [thread.visible, thread.waitForInitial, dto, busy, error, uncertain, thread.rejected, thread.pendingAction, appState, thread.refresh, readStopped]);
   useEffect(() => { if (thread.visible) pendingPiece.current = null; }, [thread.visible, dto?.original?.id]);
+  useEffect(() => { pendingPiece.current = null; }, [userId, navigation, pieceEnabled]);
+  useEffect(() => { if (appState && appState !== "active") pendingPiece.current = null; }, [appState]);
   const readOnly = dto?.can_write === false;
   const blocked = readOnly || thread.rejected;
   const history = (dto?.timeline || []).filter(event =>
@@ -110,9 +149,7 @@ export default function EmlisThreadModal({ thread, colors, navigation, userId = 
 
   const canCreatePiece = value => !!value && value.pieceEnabled === true && !!value.userId &&
     typeof value.navigation?.getParent?.()?.navigate === "function" && value.navigation?.isFocused?.() !== false && value.thread.visible &&
-    !!value.thread.dto?.current_observation && !value.thread.dto.answer_saved &&
-    ["FINAL", "PRE_QUESTION"].includes(value.thread.dto.body_state) &&
-    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(value.thread.dto.original?.id || "") &&
+    (originalPieceSource(value.thread.dto) || !!selectedPieceSupplementalAnswer(value.thread.dto)) &&
     !value.thread.busy && !value.thread.error && !value.thread.uncertain &&
     !value.thread.rejected && !value.thread.pendingAction;
   const openPiece = () => {
@@ -120,7 +157,9 @@ export default function EmlisThreadModal({ thread, colors, navigation, userId = 
     pendingPiece.current = null;
     const current = live.current;
     if (!request || !current || current.thread.visible || current.navigation?.isFocused?.() === false || request.owner !== current.userId ||
-        request.navigation !== current.navigation || current.pieceEnabled !== true) return;
+        request.navigation !== current.navigation || current.pieceEnabled !== true ||
+        (AppState?.currentState && AppState.currentState !== "active") ||
+        (current.thread.dto && request.sourceStamp !== pieceSourceStamp(current.thread.dto))) return;
     try {
       current.navigation.getParent().navigate("Piece", {
         screen: "PieceCreate", params: { savedInput: request.savedInput }, initial: false,
@@ -133,9 +172,11 @@ export default function EmlisThreadModal({ thread, colors, navigation, userId = 
     try {
       const bytes = new Uint8Array(16);
       globalThis.crypto.getRandomValues(bytes);
+      const supplementalAnswer = selectedPieceSupplementalAnswer(dto);
       const savedInput = Object.freeze({ savedInputId: dto.original.id, expectedUserId: current.userId,
-        idempotencyKey: "piece-preview-" + Array.from(bytes, v => v.toString(16).padStart(2, "0")).join("") });
-      pendingPiece.current = { savedInput, owner: current.userId, navigation: current.navigation };
+        idempotencyKey: "piece-preview-" + Array.from(bytes, v => v.toString(16).padStart(2, "0")).join(""),
+        ...(supplementalAnswer ? { supplementalAnswerIdentity: supplementalAnswer.event_id } : {}) });
+      pendingPiece.current = { savedInput, owner: current.userId, navigation: current.navigation, sourceStamp: pieceSourceStamp(dto) };
       current.thread.close();
       // iOS must finish dismissing this native modal before Piece opens its own.
     } catch {
@@ -148,6 +189,7 @@ export default function EmlisThreadModal({ thread, colors, navigation, userId = 
   }, [thread.visible]);
   const status = error || (readStopped && ["NOT_CREATED", "INITIALIZING", "REFINING"].includes(dto?.state)
     ? "応答の準備が続いています。「応答を確認する」から保存状態を確認できます。" : threadStatus(dto));
+  const supplementalAnswer = selectedPieceSupplementalAnswer(dto);
 
   return <Modal visible={thread.visible} transparent animationType={Platform.OS === "ios" ? "fade" : "none"}
     onRequestClose={thread.close} onDismiss={openPiece} supportedOrientations={MODAL_ORIENTATIONS}>
@@ -213,7 +255,12 @@ export default function EmlisThreadModal({ thread, colors, navigation, userId = 
             <Text selectable style={[s.body, textStyle]}>{event.text}</Text>
           </View>)}
           </View>}
-        <CocolonButton disabled={!canCreatePiece(live.current)} onPress={createPiece}>ピースの作成</CocolonButton>
+        {supplementalAnswer && <View style={[s.section, { borderColor: colors.CARD_BORDER }]}>
+          <Text style={[s.label, textStyle]}>ピースに含めるあなたの回答</Text>
+          <Text selectable style={[s.body, textStyle]}>{supplementalAnswer.text}</Text>
+          <Text style={[s.description, textStyle]}>元の記録と、この回答を使います。</Text>
+        </View>}
+        <CocolonButton disabled={!canCreatePiece(live.current)} onPress={createPiece}>{supplementalAnswer ? "この回答を含めてピースを作成" : "ピースの作成"}</CocolonButton>
         <CocolonButton variant="secondary" onPress={thread.close} accessibilityLabel="Emlisからの応答を閉じる">閉じる</CocolonButton>
         </ScrollView>
       </View>

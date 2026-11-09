@@ -10,19 +10,21 @@ const crypto = require('node:crypto');
 const OWNER = '10000000-0000-4000-8000-000000000001';
 const INPUT = '20000000-0000-4000-8000-000000000002';
 const OTHER = '20000000-0000-4000-8000-000000000099';
+const ANSWER = '40000000-0000-4000-8000-000000000004';
+const OTHER_ANSWER = '40000000-0000-4000-8000-000000000005';
 const KEY = 'synthetic-saved-input-key';
 const tick = () => new Promise(resolve => setImmediate(resolve));
 const copy = value => JSON.parse(JSON.stringify(value));
 const packet = (value, status = 200) => ({ status, json: async () => value });
-function ref(id = INPUT, pre = false) {
+function ref(id = INPUT, pre = false, answer = null) {
   return { source_input_id: id, source_input_version: 'emlis.current_input_bundle.v1',
     source_input_bundle_commitment: 'sha256:' + 'a'.repeat(64),
-    emlis_observation_stage: pre ? 'pre_question_observation' : 'normal_observation',
+    emlis_observation_stage: answer !== null ? 'refined_observation' : pre ? 'pre_question_observation' : 'normal_observation',
     emlis_observation_result_identity: 'synthetic-observation',
-    question_need_decision_identity: pre ? 'synthetic-question' : null,
-    supplemental_answer_identity: null };
+    question_need_decision_identity: pre || answer !== null ? 'synthetic-question' : null,
+    supplemental_answer_identity: answer };
 }
-function fixture({ send, enabled = true, currentState = 'active', pre = false, admitSave = false, saveEnabled = false } = {}) {
+function fixture({ send, enabled = true, currentState = 'active', pre = false, admitSave = false, saveEnabled = false, selectedAnswer } = {}) {
   const file = path.join(__dirname, 'piece-v2-preview-display.test.js');
   const source = fs.readFileSync(file, 'utf8').split('const receivedView =')[0];
   const context = vm.createContext({ require, __dirname, AbortController, setImmediate });
@@ -30,9 +32,10 @@ function fixture({ send, enabled = true, currentState = 'active', pre = false, a
   const f = context.fixtures;
   const expected = copy(f.response());
   const u = f.previewUiHarness({ currentState, admitSave, send: send || (async (_url, options) =>
-    packet(options.method === 'GET' ? ref(INPUT, pre) : expected)) });
+    packet(options.method === 'GET' ? ref(INPUT, pre, selectedAnswer === undefined ? null : selectedAnswer) : expected)) });
   let allowed = enabled, saveAllowed = saveEnabled, refreshes = 0;
-  u.host.props = { savedInput: { savedInputId: INPUT, expectedUserId: OWNER, idempotencyKey: KEY } };
+  u.host.props = { savedInput: { savedInputId: INPUT, expectedUserId: OWNER, idempotencyKey: KEY,
+    ...(selectedAnswer === undefined ? {} : { supplementalAnswerIdentity: selectedAnswer }) } };
   const runtime = () => ({ runtime: { loaded: true, loading: false, error: null },
     isFeatureEnabled: (name, fallback) => {
       assert.ok(['piece_v2_preview_enabled', 'piece_v2_save_enabled'].includes(name));
@@ -704,5 +707,173 @@ test('same-runtime save-only flag changes preserve received preview, source read
   u.publish(true); u.host.componentDidUpdate();
   assert.equal(u.body(), undefined); assert.deepEqual(u.names(), ['保存入力を確認']);
   assert.equal(u.calls.length, 2);
+  u.host.componentWillUnmount();
+});
+
+test('chosen saved answer carries the exact identity through separate GET and preview actions', async () => {
+  const u = fixture({ selectedAnswer: ANSWER });
+  u.mount(); assert.equal(u.calls.length, 0);
+  await resolver(u); assert.equal(u.calls.length, 1);
+  assert.equal(u.calls[0][0], `/emotion/piece/source-ref/${INPUT}?supplemental_answer_identity=${ANSWER}`);
+  assert.equal(u.host.sourcePhase, 'ready');
+  u.host.start(); u.host.start(); await tick();
+  assert.equal(u.calls.length, 2);
+  const request = JSON.parse(u.calls[1][1].body);
+  assert.deepEqual(request.source_ref, ref(INPUT, true, ANSWER));
+  assert.equal(request.source_ref.supplemental_answer_identity, ANSWER);
+  assert.equal(u.body().children.join(''), u.expected.piece_text);
+  u.host.componentWillUnmount();
+});
+
+for (const answer of [null, undefined, '', 'latest', OTHER_ANSWER.replaceAll('-', ''),
+  '00000000-0000-0000-0000-000000000000']) test(`invalid explicit saved answer ${String(answer)} cannot fall back to original`, async () => {
+  const u = fixture();
+  u.host.props.savedInput.supplementalAnswerIdentity = answer;
+  u.mount(); await resolver(u); u.host.start(); await tick();
+  assert.equal(u.calls.length, 0); assert.equal(u.body(), undefined);
+  u.host.componentWillUnmount();
+});
+
+test('answer text and unapproved fields cannot be carried beside a saved selection', async () => {
+  const u = fixture({ selectedAnswer: ANSWER });
+  u.host.props.savedInput.answerText = 'PRIVATE saved answer text';
+  u.mount(); await resolver(u); u.host.start(); await tick();
+  assert.equal(u.calls.length, 0); assert.equal(u.tree(), null);
+  u.host.componentWillUnmount();
+});
+
+for (const boundary of ['answer', 'owner', 'runtime', 'background', 'answer-roundtrip']) {
+  test(`chosen answer ${boundary} change fences the pending source response`, async () => {
+    const seed = fixture(), pending = seed.deferred();
+    const u = fixture({ selectedAnswer: ANSWER, send: () => pending.promise });
+    u.mount(); const resolving = resolver(u); await tick();
+    await resolver(u); assert.equal(u.calls.length, 1, 'reentrant source press shares its active attempt');
+    const initial = { ...u.host.props.savedInput };
+    if (boundary === 'owner') u.host.props.savedInput = { ...initial, expectedUserId: OTHER };
+    else if (boundary === 'runtime') u.publish(true);
+    else if (boundary === 'background') u.background('inactive');
+    else u.host.props.savedInput = { ...initial, supplementalAnswerIdentity: OTHER_ANSWER, idempotencyKey: 'answer-B-explicit-key' };
+    if (boundary !== 'background') u.host.componentDidUpdate();
+    if (boundary === 'answer-roundtrip') { u.host.props.savedInput = initial; u.host.componentDidUpdate(); }
+    pending.resolve(packet(ref(INPUT, true, ANSWER))); await resolving;
+    assert.equal(u.calls.length, 1); assert.equal(u.body(), undefined); assert.notEqual(u.host.sourcePhase, 'ready');
+    if (boundary === 'background') { u.background('active'); await tick(); assert.equal(u.calls.length, 1); }
+    u.host.componentWillUnmount();
+  });
+}
+
+test('a stale chosen answer is rejected without an original GET or preview POST', async () => {
+  const u = fixture({ selectedAnswer: ANSWER, send: async () => packet({ code: 'PIECE_SOURCE_NOT_ELIGIBLE' }, 422) });
+  u.mount(); await u.host.createFromSavedInput();
+  await resolver(u); u.host.start(); u.host.retry(); await tick();
+  assert.equal(u.calls.length, 1); assert.equal(u.calls[0][1].method, 'GET');
+  assert.ok(u.calls[0][0].endsWith('supplemental_answer_identity=' + ANSWER));
+  assert.equal(u.host.sourceCode, 'PIECE_SOURCE_NOT_ELIGIBLE'); assert.equal(u.body(), undefined);
+  u.host.componentWillUnmount();
+});
+
+test('selected source timeout and unknown preview outcome retry only their captured identity', async () => {
+  const seed = fixture(); let gets = 0, posts = 0;
+  const u = fixture({ selectedAnswer: ANSWER, send: async (_url, options) => {
+    if (options.method === 'GET') { if (++gets === 1) throw Error('PRIVATE'); return packet(ref(INPUT, true, ANSWER)); }
+    if (++posts === 1) throw Error('PRIVATE');
+    return packet(seed.expected);
+  } });
+  u.mount(); await resolver(u); await resolver(u); assert.equal(gets, 2);
+  u.host.start(); await tick(); u.host.retry(); await tick();
+  assert.equal(gets, 2); assert.equal(posts, 2);
+  assert.ok(u.calls.slice(0, 2).every(([url]) => url.endsWith('supplemental_answer_identity=' + ANSWER)));
+  assert.equal(u.calls[2][1].body, u.calls[3][1].body);
+  assert.equal(u.calls[2][1].headers['Idempotency-Key'], u.calls[3][1].headers['Idempotency-Key']);
+  assert.equal(JSON.parse(u.calls[3][1].body).source_ref.supplemental_answer_identity, ANSWER);
+  assert.doesNotMatch(JSON.stringify(u.tree()), /PRIVATE/);
+  u.host.componentWillUnmount();
+});
+
+test('different selected answer cannot reuse an already submitted preview key', async () => {
+  const seed = fixture();
+  const u = fixture({ selectedAnswer: ANSWER, send: async (url, options) => packet(options.method === 'GET'
+    ? ref(INPUT, true, url.endsWith(OTHER_ANSWER) ? OTHER_ANSWER : ANSWER) : seed.expected) });
+  u.mount(); await resolver(u); u.host.start(); await tick();
+  u.host.props.savedInput = { ...u.host.props.savedInput, supplementalAnswerIdentity: OTHER_ANSWER };
+  assert.equal(u.tree(), null); u.host.componentDidUpdate();
+  await resolver(u); u.host.start(); await tick();
+  assert.equal(u.calls.filter(([, options]) => options.method === 'POST').length, 1);
+  assert.equal(u.host.controller.getView().phase, 'unavailable');
+  u.host.props.savedInput = { ...u.host.props.savedInput, idempotencyKey: 'explicit-answer-B-key' };
+  u.host.componentDidUpdate(); await resolver(u); u.host.start(); await tick();
+  assert.equal(u.calls.filter(([, options]) => options.method === 'POST').length, 2);
+  assert.equal(JSON.parse(u.calls.at(-1)[1].body).source_ref.supplemental_answer_identity, OTHER_ANSWER);
+  u.host.componentWillUnmount();
+});
+
+test('fresh chosen-answer route first confirms an older original save without reclassifying it', async () => {
+  const seed = fixture(), recovery = stackRecovery(); let saves = 0;
+  const send = async (url, options) => {
+    if (options.method === 'GET') return packet(ref(INPUT, true, url.includes('supplemental_answer_identity=') ? ANSWER : null));
+    if (!url.endsWith('/save')) return packet(seed.expected);
+    if (++saves === 1) throw Error('lost original save acknowledgement');
+    return packet(seed.saveReceipt({ idempotency_replayed: true }));
+  };
+  const original = fixture({ send, admitSave: true, saveEnabled: true });
+  original.host.props = { ...original.host.props, saveRecovery: recovery };
+  original.mount(); await resolver(original); original.host.start(); await tick(); await original.startSave();
+  const entry = recovery.find(OWNER, INPUT);
+  assert.equal(entry.operation.request.source_ref.supplemental_answer_identity, null);
+  original.host.componentWillUnmount();
+  const chosen = fixture({ send, selectedAnswer: ANSWER, admitSave: true, saveEnabled: true });
+  chosen.host.props = { ...chosen.host.props, saveRecovery: recovery, creationMode: true,
+    savedInput: { ...chosen.host.props.savedInput, idempotencyKey: 'new-chosen-answer-key' } };
+  chosen.mount(); await chosen.host.createFromSavedInput(); await tick();
+  assert.equal(chosen.calls.length, 0); assert.equal(chosen.body(), undefined);
+  assert.ok(chosen.names().includes('同じ保存要求で結果を確認'));
+  assert.equal(recovery.find(OWNER, INPUT), entry);
+  chosen.host.retry(); await tick();
+  assert.equal(chosen.calls.length, 1); assert.equal(chosen.calls[0][0], '/emotion/piece/save');
+  assert.equal(chosen.calls[0][1].body, original.calls[2][1].body);
+  assert.equal(chosen.calls[0][1].headers['Idempotency-Key'], original.calls[2][1].headers['Idempotency-Key']);
+  assert.equal(recovery.find(OWNER, INPUT), undefined);
+  chosen.host.componentWillUnmount();
+  const later = fixture({ send, selectedAnswer: ANSWER, admitSave: true, saveEnabled: true });
+  later.host.props = { ...later.host.props, saveRecovery: recovery, creationMode: true,
+    savedInput: { ...later.host.props.savedInput, idempotencyKey: 'later-explicit-chosen-answer-key' } };
+  later.mount(); await later.host.createFromSavedInput(); await tick();
+  assert.deepEqual(copy(later.calls.map(([, options]) => options.method)), ['GET', 'POST']);
+  assert.ok(later.calls[0][0].endsWith('supplemental_answer_identity=' + ANSWER));
+  later.host.componentWillUnmount();
+});
+
+test('explicit selected-source recheck retains the answer and uses a fresh preview key', async () => {
+  const seed = fixture(); let gets = 0, posts = 0;
+  const u = fixture({ selectedAnswer: ANSWER, send: async (_url, options) => {
+    if (options.method === 'GET') { gets++; return packet(ref(INPUT, true, ANSWER)); }
+    return ++posts === 1 ? packet({ code: 'PIECE_CONFLICT' }, 409) : packet(seed.expected);
+  } });
+  u.mount(); await resolver(u); u.host.start(); await tick();
+  const token = u.host.controller.getView().sourceRefreshToken;
+  assert.ok(token); await u.host.refreshSavedInput(token);
+  assert.equal(gets, 2); assert.equal(posts, 1, 'source recheck does not automatically issue a replacement');
+  u.host.start(); await tick(); assert.equal(posts, 2);
+  assert.ok(u.calls.filter(([, options]) => options.method === 'GET')
+    .every(([url]) => url.endsWith('supplemental_answer_identity=' + ANSWER)));
+  const sent = u.calls.filter(([, options]) => options.method === 'POST');
+  assert.equal(JSON.parse(sent[1][1].body).source_ref.supplemental_answer_identity, ANSWER);
+  assert.notEqual(sent[0][1].headers['Idempotency-Key'], sent[1][1].headers['Idempotency-Key']);
+  u.host.componentWillUnmount();
+});
+
+test('expired selected preview restarts with the same source and a new key without another GET', async () => {
+  const seed = fixture(); let gets = 0, posts = 0;
+  const u = fixture({ selectedAnswer: ANSWER, send: async (_url, options) => {
+    if (options.method === 'GET') { gets++; return packet(ref(INPUT, true, ANSWER)); }
+    return ++posts === 1 ? packet({ code: 'PIECE_PREVIEW_EXPIRED' }, 409) : packet(seed.expected);
+  } });
+  u.mount(); await resolver(u); u.host.start(); await tick();
+  const token = u.host.controller.getView().previewRestartToken;
+  assert.ok(token); u.host.restartExpired(token); await tick();
+  assert.equal(gets, 1); assert.equal(posts, 2);
+  assert.equal(u.calls[1][1].body, u.calls[2][1].body);
+  assert.notEqual(u.calls[1][1].headers['Idempotency-Key'], u.calls[2][1].headers['Idempotency-Key']);
+  assert.equal(JSON.parse(u.calls[2][1].body).source_ref.supplemental_answer_identity, ANSWER);
   u.host.componentWillUnmount();
 });

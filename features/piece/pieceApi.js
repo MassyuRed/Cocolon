@@ -103,9 +103,13 @@ function requestBody(value) {
         .every(key => source[key] === null || text(source[key]))) {
     reject('PIECE_REQUEST_INVALID');
   }
+  const originalSource = source.supplemental_answer_identity === null && (
+    source.emlis_observation_stage === 'normal_observation' && source.question_need_decision_identity === null ||
+    source.emlis_observation_stage === 'pre_question_observation' && text(source.question_need_decision_identity));
+  const refinedSource = source.emlis_observation_stage === 'refined_observation' &&
+    text(source.question_need_decision_identity) && pieceUuid(source.supplemental_answer_identity);
   if (source.source_input_version !== 'emlis.current_input_bundle.v1' ||
-      !['normal_observation', 'pre_question_observation'].includes(source.emlis_observation_stage) ||
-      source.supplemental_answer_identity !== null) reject('PIECE_SOURCE_NOT_ELIGIBLE');
+      !(originalSource || refinedSource)) reject('PIECE_SOURCE_NOT_ELIGIBLE');
   if (snapshot.requested_format !== null && !FORMATS.includes(snapshot.requested_format)) {
     reject('PIECE_FORMAT_NOT_ELIGIBLE');
   }
@@ -269,6 +273,10 @@ async function requestPieceData(value, options = {}, savedInputId = null, visual
     signal = options.signal;
     checkAbort(signal);
     const sourceRead = savedInputId !== null;
+    const selectedAnswer = sourceRead && Object.prototype.hasOwnProperty.call(options, 'supplementalAnswerIdentity')
+      ? options.supplementalAnswerIdentity : null;
+    if (sourceRead && Object.prototype.hasOwnProperty.call(options, 'supplementalAnswerIdentity') &&
+        !pieceUuid(selectedAnswer)) reject('PIECE_REQUEST_INVALID');
     if (sourceRead && (typeof savedInputId !== 'string' ||
         !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(savedInputId) ||
         savedInputId === '00000000-0000-0000-0000-000000000000')) reject('PIECE_REQUEST_INVALID');
@@ -284,7 +292,8 @@ async function requestPieceData(value, options = {}, savedInputId = null, visual
         !/^[\x21-\x7e](?:[\x20-\x7e]*[\x21-\x7e])?$/.test(idempotencyKey))) reject('PIECE_REQUEST_INVALID');
     await requireSession(expectedUserId);
     checkAbort(signal);
-    const endpoint = sourceRead ? `/emotion/piece/source-ref/${encodeURIComponent(savedInputId)}` :
+    const endpoint = sourceRead ? `/emotion/piece/source-ref/${encodeURIComponent(savedInputId)}` +
+      (selectedAnswer === null ? '' : `?supplemental_answer_identity=${encodeURIComponent(selectedAnswer)}`) :
       mutation ? `${PATH}/${mutation.preview_id}` : PATH;
     const response = await apiFetch(endpoint, {
       method: sourceRead ? 'GET' : mutation ? 'PATCH' : 'POST', auth: true, expectedUserId,
@@ -310,9 +319,11 @@ async function requestPieceData(value, options = {}, savedInputId = null, visual
         visual_selection: { theme_id: null, aspect_ratio: null, branding_mode: null } })); }
       catch { reject('PIECE_TEMPORARILY_UNAVAILABLE'); }
       const ref = request.source_ref;
-      if (ref.source_input_id !== savedInputId ||
-          (ref.emlis_observation_stage === 'normal_observation' ? ref.question_need_decision_identity !== null
-            : !text(ref.question_need_decision_identity))) reject('PIECE_TEMPORARILY_UNAVAILABLE');
+      if (ref.source_input_id !== savedInputId || (selectedAnswer === null
+        ? ref.supplemental_answer_identity !== null || !['normal_observation', 'pre_question_observation'].includes(ref.emlis_observation_stage)
+        : ref.emlis_observation_stage !== 'refined_observation' || ref.supplemental_answer_identity !== selectedAnswer)) {
+        reject('PIECE_TEMPORARILY_UNAVAILABLE');
+      }
       return freeze(ref);
     }
     const preview = previewSnapshot(result);
@@ -441,7 +452,7 @@ export async function requestPiecePreviewCancellation(value, options = {}) {
   }
 }
 
-/** Unregistered PCE-9C transport. No existing screen calls it yet.
+/** Saved-source transport. An optional exact answer is an explicit selection.
  * A source read is an explicit GET, not generation, saved-state authority,
  * feature activation or permission to reuse Emlis/Analysis text.
  */

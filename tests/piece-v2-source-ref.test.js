@@ -8,6 +8,8 @@ const path = require('node:path');
 const vm = require('node:vm');
 const OWNER = '10000000-0000-4000-8000-000000000001';
 const INPUT = '20000000-0000-4000-8000-000000000002';
+const ANSWER = '30000000-0000-4000-8000-000000000003';
+const OTHER_ANSWER = '30000000-0000-4000-8000-000000000004';
 const NOW = Date.parse('2026-10-08T10:00:00Z');
 const clone = value => JSON.parse(JSON.stringify(value));
 const tick = () => new Promise(resolve => setImmediate(resolve));
@@ -19,6 +21,8 @@ function reference(pre = false) {
     question_need_decision_identity: pre ? 'synthetic-question' : null,
     supplemental_answer_identity: null };
 }
+const refinedReference = (answer = ANSWER) => ({ ...reference(true),
+  emlis_observation_stage: 'refined_observation', supplemental_answer_identity: answer });
 function load({ send, session } = {}) {
   const calls = [], sessions = [];
   const context = vm.createContext({ AbortController, Date,
@@ -153,4 +157,88 @@ test('returned references feed the unchanged controller/preview/display path on 
   assert.deepEqual(clone(display.preview.content_payload), expected.content_payload);
   assert.equal(display.canSave, false); assert.equal(display.canExport, false);
   c.dispose();
+});
+
+test('an exact chosen answer is carried from GET to the existing preview POST', async () => {
+  const expected = previewFixture();
+  const a = load({ send: async (_url, sent) => ({ status: 200,
+    json: async () => sent.method === 'GET' ? refinedReference() : expected }) });
+  const source_ref = await a.requestPieceSourceRef(INPUT, opts({ supplementalAnswerIdentity: ANSWER }));
+  assert.equal(a.calls[0][0], `/emotion/piece/source-ref/${INPUT}?supplemental_answer_identity=${ANSWER}`);
+  assert.equal(a.calls[0][1].body, undefined);
+  assert.deepEqual(clone(source_ref), refinedReference());
+  assert.equal(Object.keys(source_ref).length, 7);
+  const request = { source_ref, requested_format: null,
+    visual_selection: { theme_id: null, aspect_ratio: null, branding_mode: null } };
+  await a.requestPiecePreview(request, opts({ idempotencyKey: 'explicit-refined-preview' }));
+  assert.equal(a.calls.length, 2);
+  assert.deepEqual(JSON.parse(a.calls[1][1].body), clone(request));
+  assert.equal(a.calls[1][0], '/emotion/piece/preview');
+  assert.equal(a.calls[1][1].headers['Idempotency-Key'], 'explicit-refined-preview');
+});
+
+for (const selected of [null, undefined, '', 'latest', 1, {},
+  '00000000-0000-0000-0000-000000000000', ANSWER.replaceAll('-', '')]) {
+  test(`an invalid explicit answer ${String(selected)} cannot become an original read`, async () => {
+    const a = load();
+    await assert.rejects(a.requestPieceSourceRef(INPUT, opts({ supplementalAnswerIdentity: selected })), closed('PIECE_REQUEST_INVALID'));
+    assert.equal(a.calls.length, 0); assert.equal(a.sessions.length, 0);
+  });
+}
+test('an uppercase answer UUID is rejected before IO', async () => {
+  const a = load();
+  await assert.rejects(a.requestPieceSourceRef(INPUT, opts({ supplementalAnswerIdentity: 'ABCDEFAB-0000-4000-8000-000000000003' })), closed('PIECE_REQUEST_INVALID'));
+  assert.equal(a.calls.length, 0);
+});
+
+for (const returned of [reference(), reference(true), refinedReference(OTHER_ANSWER),
+  { ...refinedReference(), question_need_decision_identity: null },
+  { ...refinedReference(), raw_answer: 'PRIVATE' }]) {
+  test('a selected read never adopts an original, different answer or partial source', async () => {
+    const a = load({ send: async () => ({ status: 200, json: async () => returned }) });
+    await assert.rejects(a.requestPieceSourceRef(INPUT, opts({ supplementalAnswerIdentity: ANSWER })), closed('PIECE_TEMPORARILY_UNAVAILABLE'));
+    assert.equal(a.calls.length, 1);
+    assert.equal(a.calls[0][1].method, 'GET');
+    assert.match(a.calls[0][0], /supplemental_answer_identity=/);
+  });
+}
+
+test('queryless original request cannot adopt an unsolicited refined response', async () => {
+  const a = load({ send: async () => ({ status: 200, json: async () => refinedReference() }) });
+  await assert.rejects(a.requestPieceSourceRef(INPUT, opts()), closed('PIECE_TEMPORARILY_UNAVAILABLE'));
+  assert.equal(a.calls[0][0], '/emotion/piece/source-ref/' + INPUT);
+});
+
+test('the chosen answer is captured before Auth and remains unchanged by caller mutation', async () => {
+  const options = opts({ supplementalAnswerIdentity: ANSWER });
+  const a = load({ session: async (_owner, n) => {
+    if (n === 1) options.supplementalAnswerIdentity = OTHER_ANSWER;
+    return 'synthetic-session';
+  }, send: async () => ({ status: 200, json: async () => refinedReference() }) });
+  const result = await a.requestPieceSourceRef(INPUT, options);
+  assert.equal(result.supplemental_answer_identity, ANSWER);
+  assert.ok(a.calls[0][0].endsWith('supplemental_answer_identity=' + ANSWER));
+});
+
+test('a rejected chosen answer has no queryless or latest-answer fallback', async () => {
+  const a = load({ send: async () => ({ status: 422, json: async () => ({ code: 'PIECE_SOURCE_NOT_ELIGIBLE' }) }) });
+  for (let n = 0; n < 2; n++) {
+    await assert.rejects(a.requestPieceSourceRef(INPUT, opts({ supplementalAnswerIdentity: ANSWER })), closed('PIECE_SOURCE_NOT_ELIGIBLE'));
+  }
+  await tick(); assert.equal(a.calls.length, 2);
+  assert.ok(a.calls.every(([url, sent]) => url.endsWith('supplemental_answer_identity=' + ANSWER) && sent.method === 'GET'));
+});
+
+for (const value of [
+  { ...refinedReference(), supplemental_answer_identity: null },
+  { ...refinedReference(), question_need_decision_identity: null },
+  { ...reference(), supplemental_answer_identity: ANSWER },
+  { ...reference(true), supplemental_answer_identity: ANSWER },
+  { ...reference(), question_need_decision_identity: 'incoherent' },
+]) test('preview request requires a coherent original or selected refined source', async () => {
+  const a = load();
+  await assert.rejects(a.requestPiecePreview({ source_ref: value, requested_format: null,
+    visual_selection: { theme_id: null, aspect_ratio: null, branding_mode: null } },
+  opts({ idempotencyKey: 'explicit-refined-preview' })), closed('PIECE_SOURCE_NOT_ELIGIBLE'));
+  assert.equal(a.calls.length, 0); assert.equal(a.sessions.length, 0);
 });

@@ -41,9 +41,10 @@ function contextStamp(value) {
 // decision. Do not retain arbitrary parent props, an input body or a token.
 function savedInputStamp(props) {
   const value = props.savedInput;
+  const selectedAnswer = value && Object.prototype.hasOwnProperty.call(value, 'supplementalAnswerIdentity');
   if (Object.prototype.hasOwnProperty.call(props, 'context') || !value ||
       typeof value !== 'object' || Array.isArray(value) ||
-      Object.keys(value).length !== 3 ||
+      Object.keys(value).length !== (selectedAnswer ? 4 : 3) ||
       !['savedInputId', 'expectedUserId', 'idempotencyKey'].every(key =>
         Object.prototype.hasOwnProperty.call(value, key))) return null;
   const { savedInputId, expectedUserId, idempotencyKey } = value;
@@ -54,7 +55,11 @@ function savedInputStamp(props) {
       /[\uD800-\uDFFF]/u.test(expectedUserId) ||
       typeof idempotencyKey !== 'string' ||
       !/^[\x21-\x7e](?:[\x20-\x7e]*[\x21-\x7e])?$/.test(idempotencyKey)) return null;
-  return JSON.stringify([savedInputId, expectedUserId, idempotencyKey]);
+  if (selectedAnswer && (typeof value.supplementalAnswerIdentity !== 'string' ||
+      !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(value.supplementalAnswerIdentity) ||
+      value.supplementalAnswerIdentity === '00000000-0000-0000-0000-000000000000')) return null;
+  return JSON.stringify([savedInputId, expectedUserId, idempotencyKey,
+    ...(selectedAnswer ? [value.supplementalAnswerIdentity] : [])]);
 }
 
 export default class InputPieceActionArea extends React.Component {
@@ -306,7 +311,7 @@ export default class InputPieceActionArea extends React.Component {
     const view = this.controller.getView();
     if (view.previewRestartToken || ['cancel', 'save'].includes(view.retryKind)) return;
     // Capture the exact saved ID, owner and future POST key before any await.
-    const [savedInputId, expectedUserId, originalKey] = JSON.parse(this.boundStamp.slice(6));
+    const [savedInputId, expectedUserId, originalKey, supplementalAnswerIdentity] = JSON.parse(this.boundStamp.slice(6));
     const idempotencyKey = this.sourceIdempotencyKey || originalKey;
     let abort;
     try { abort = new AbortController(); }
@@ -323,7 +328,8 @@ export default class InputPieceActionArea extends React.Component {
     this.changed();
     if (this.sourceAttempt !== attempt || !this.isCurrent()) return;
     try {
-      const source_ref = await requestPieceSourceRef(savedInputId, { expectedUserId, signal: abort.signal });
+      const source_ref = await requestPieceSourceRef(savedInputId, { expectedUserId, signal: abort.signal,
+        ...(supplementalAnswerIdentity === undefined ? {} : { supplementalAnswerIdentity }) });
       if (this.sourceAttempt !== attempt || !this.isCurrent()) return;
       const prepared = preparePiecePreviewRequest({ source_ref, requested_format: null,
         visual_selection: { theme_id: null, aspect_ratio: null, branding_mode: null } },

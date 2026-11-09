@@ -18,6 +18,8 @@ name: Piece RN preview and owner contracts
       - tests/analysis-report-history.test.js
       - tests/settings-home-layout.test.js
       - tests/emlis-thread.test.js
+      - tests/emlis-piece-refined-choice.test.js
+      - screens/input/EmlisThreadModal.js
       - tests/fixtures/kokoro-weather-live-v1.json
       - screens/input/InputPieceActionArea.js
       - screens/InputScreen.js
@@ -118,6 +120,7 @@ jobs:
           tests/account-settings-owner-race.test.js
           tests/settings-home-layout.test.js
           tests/emlis-thread.test.js
+          tests/emlis-piece-refined-choice.test.js
           tests/tutorial-owner-race.test.js
           tests/iap-owner-race.test.js
           tests/private-history-owner-race.test.js
