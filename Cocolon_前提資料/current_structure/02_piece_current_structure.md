@@ -3765,3 +3765,12 @@ API最終41fc2987（製品95e1b5d6、追記はnative fake seamのみ）、Piece 
 API `41b5df885c7f6b8a66223d5954cdd09cd7c94cc8`。`piece_v2_content_policy._piece_model_evaluation`が、既存`cocolon_meaning_experience_engine.piece_source._personal_evaluation_shapes`から明示SELFの評価構文・対象・base・程度・肯否・時点・留保を読み、既存model本文の同値比較へ渡す。既存source／plan資格を保持し、評価主体省略や参照・条件／時点scopeを新規許可しない。外側全文とframeのspeaker／predicate／target spanを照合し、追加された条件／理由を内側評価の一致で捨てる抜けを修復した。未知書換えは従来通り不採用。通常prompt・候補作者・公開DTO／DB列・renderer・保存ownerは変更しない。
 
 新規架空6材料で同じ実rawの採用は親3/6→新5/6。全rawは原文の語を保持し、編集指示の別6callも本文全同一だったため指示案は不採用。文章整形品質の向上や一般理解の実績にしない。二欄を一blockへ結合した1件は両版で拒否。採用5本文×3planの保存は合成sourceへ再bindした隔離SQLで、実4Bのoriginal request identityを実DBへ保存した証明ではない。対象7file299 PASS、旧評価19失敗は親の同sourceをoverlayして再現。STRUCTURE_MAP_DELTA_PRESENT（既存Piece意味保持の読取責務拡張）。一般再構成・live反映・同版native画像／本人端末は未完了。[実結果・限界・次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-evaluation-reuse-20261109)。
+
+<a id="piece-model-field-slots-20261109"></a>
+## 2026-11-09 — AR-04 欄名付き候補と既存FOCUS原表面の保持
+
+API `1ed4ca27da71ddca510d1ad035b1f0fd7703b1ab`→`cfd3d60d476a1e6f7fbff16b86897f9614504cd3`。`preparation_sources.piece_model_field_slots`が既存partitionから`memo_0`／`memo_action_1`／`answer_text_private_1`等を決め、exact scalar原文・出所を送信viewへ直結する。原入力7fields・別本人補足・PreparedRequest bytes／IDは不変。`piece_model_source`は単発でfield_blocks objectを要求し、専用receiverが明示`candidate_format=piece.field_slots.v1`でexact key集合を確認、serverのpartition順へ投影する。rawは保持し、slot名を本文へ足さず、key順・ラベル一致で意味を認定しない。旧format=Noneは旧array専用で旧receipt bytesを維持、自動判定／fallbackなし。
+
+model本文のFOCUS読取は既存`piece_v2_generation._FOCUS`全文を再利用し、SELF／predicate全文／object全文を照合する。名前・参照・scopeは既存S7を迂回しない。旧作者を呼ぶ／旧S7や旧offline checkpointを緩める変更はない。公開DTO／DB・renderer・RN・Emlis／Analysis方式は不変。STRUCTURE_MAP_DELTA_PRESENT。
+
+同6架空材料で旧CMEE受理1→新6。通常5実本文×3planは合成sourceへ厳密再bindした隔離SQLで保存・非生成再読。新refined1件はCMEE受理までで、その通常SQL保存は未検証。旧offline refined serializerは旧作者の語順を要求してこのmodel artifactを拒否し、model保存の正本へ転用していない。対象8file368 PASS、原文語の保持を一般文章品質の改善へ換算しない。残件と全実測は[既存trial](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-field-slots-20261109)。

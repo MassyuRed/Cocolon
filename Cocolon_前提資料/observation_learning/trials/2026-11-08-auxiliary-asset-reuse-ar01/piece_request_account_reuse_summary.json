@@ -494,5 +494,105 @@
         "conclusion": "success"
       }
     }
+  },
+  "piece_model_field_slots_20261109": {
+    "api_first": "1ed4ca27da71ddca510d1ad035b1f0fd7703b1ab",
+    "api_final": "cfd3d60d476a1e6f7fbff16b86897f9614504cd3",
+    "parent": "41b5df885c7f6b8a66223d5954cdd09cd7c94cc8",
+    "unique_api_paths": 9,
+    "structure_delta": "STRUCTURE_MAP_DELTA_PRESENT",
+    "primary_outcome": "TECHNICAL_CREDIT",
+    "formal_product_quality_credit": 0,
+    "candidate_format": "piece.field_slots.v1",
+    "legacy_none_receipt_bytes_preserved": true,
+    "prepared_bytes_and_id_unchanged": true,
+    "new_format_fallback": false,
+    "raw_repair_or_split": false,
+    "reuse": [
+      "existing explicit candidate_format projection",
+      "source field/scalar/role binding",
+      "existing complete FOCUS reader"
+    ],
+    "actual": {
+      "sources": 6,
+      "new_fictional_sources": 4,
+      "previous_fictional_sources": 2,
+      "blind_generalization": false,
+      "literal_only_calls": 6,
+      "literal_only_adopted": false,
+      "field_slots_calls": 6,
+      "all_http_200_stop": true,
+      "old_admitted": 1,
+      "slot_stage_admitted": 5,
+      "after_focal_admitted": 6,
+      "multi_block_old_separated": 0,
+      "multi_block_new_separated": 5,
+      "slots_loop_seconds": 13.356559952022508,
+      "usage": null,
+      "revision": null,
+      "bill": null,
+      "writing_quality_improvement_claim": false,
+      "source_words_preserved": true,
+      "new_inference_for_focal_fix": 0,
+      "baseline_old_calls": 4,
+      "first_comparison_calls": 10,
+      "first_comparison_loop_seconds": 16.2677730738651
+    },
+    "saved": {
+      "normal_actual_raw_bodies": 5,
+      "tiers": 3,
+      "cases": 15,
+      "database": "isolated PGlite",
+      "identity": "exact recorded raw rebound to equivalent synthetic owner/input/time",
+      "saved_generations": 0,
+      "new_refined_actual_sql_verified": false,
+      "legacy_offline_refined_serializer_is_model_save_contract": false,
+      "synthetic_focal_sql_tiers": 3
+    },
+    "tests": {
+      "selected_files": 8,
+      "pass": 368,
+      "fail": 0,
+      "skip": 0,
+      "warning": 1,
+      "seconds": 18.74,
+      "new_codec": 33,
+      "new_focal": 33,
+      "new_focal_saved": 3,
+      "intermediate_runs_not_added": true,
+      "old_evaluation_failures_unrepaired": 19,
+      "old_native_v4_failures_are_separate": true
+    },
+    "runtime": {
+      "model_calls": 16,
+      "training": 0,
+      "new_load": 0,
+      "server_restart": 0,
+      "automatic_retry": 0,
+      "deploy": 0,
+      "live_db_mutations": 0,
+      "rn_changes": 0,
+      "signed_build": 0,
+      "distribution": 0
+    },
+    "next": [
+      "general prose reconstruction quality",
+      "new eligible refined actual raw through ordinary SQL save",
+      "live/integrated build/same image/device tasks remain separate"
+    ],
+    "evidence_filename": "Cocolon_CMEE_AR04_FieldSlots4B_20261109.private.json",
+    "ci": {
+      "piece": {
+        "run": 42575709183,
+        "job": 129022832103,
+        "conclusion": "success",
+        "model_pass": 368,
+        "model_seconds": 26.87
+      },
+      "analysis": {
+        "run": 42575709081,
+        "status_at_checkpoint": "in_progress"
+      }
+    }
   }
 }

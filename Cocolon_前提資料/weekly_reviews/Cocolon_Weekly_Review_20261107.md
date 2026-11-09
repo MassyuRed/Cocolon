@@ -2202,3 +2202,16 @@ API `41b5df885c7f6b8a66223d5954cdd09cd7c94cc8`。既存Pieceの本人評価reade
 [Piece CI42569189244](https://github.com/MassyuRed/mashos-api/actions/runs/42569189244)は全工程success、model step299 PASS／26.93秒。[Analysis CI42569189246](https://github.com/MassyuRed/mashos-api/actions/runs/42569189246)も全工程success。
 
 本番配置・selector有効化・SQL変更・署名build／配布0。詳細設計§7.1／11.2、商品00、Piece／CMEE map、01Aの4path地図、既存trial／本文なしsummaryを差分更新。次は一般文章の意味を保つ再構成と二欄分離を保持する生成。同じ編集指示を繰り返す周回は終了し、AR-01反転・全必要資産活用・live／同版画像／本人端末の残件を保持。[実本文の判定・検証範囲・再開点](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-evaluation-reuse-20261109)。
+
+<a id="piece-model-field-slots-20261109"></a>
+## 42. 補助経路活用AR-04 — 欄名付き候補・既存焦点読取を再利用
+
+API `1ed4ca27da71ddca510d1ad035b1f0fd7703b1ab`→`cfd3d60d476a1e6f7fbff16b86897f9614504cd3`、重複除外9path。既存candidate_format→canonical変換をPiece専用receiverへ適合し、field名付きrawをserverのpartition順へ照合・投影する。元source／七項目・PreparedRequest・raw・単発取得を保持し、新旧formatの自動判定／fallback、事後split・修補なし。正しい原焦点形を旧作者語順しか認めない誤拒否は既存_FOCUS全文読取でmodel armだけ補完し、名前・参照・scopeのS7は保持した。
+
+新規架空4＋前回架空2の同6材料で、旧形式のCMEE受理1→最終6/6、複数block5例は旧0→新5分離。全16call HTTP200／stop、第一比較10call（旧4＋literal併記6）16.267773秒では併記案に効果なく不採用、欄名付き6call13.356560秒。原文語を保持した出力で、一般文章整形の品質向上・blind一般化の認定ではない。新load／学習／restart／自動retry0。
+
+通常5実本文×3planを合成sourceへ再bindして隔離SQL保存・非生成再読、quota各1・原入力／Emlis不変。合成focal本文3plan保存も確認。新架空refinedはCMEE受理までで、その通常SQL保存は未検証。旧offline refined serializerは旧作者語順を要求して拒否し、model保存契約へ転用しない。最終対象8file368 PASS／18.74秒・既存warning1、旧評価19失敗と別のnative V4同19失敗は未修復。TECHNICAL_CREDIT、正式商品品質credit0。
+
+詳細設計・商品00・Piece／CMEE map・01A地図・既存trial／本文なしsummaryを差分更新。本番／SQL変更・RN／署名build／配布・同版画像／実機確認0。次は一般文章の再構成品質と新しい適格refined実rawの通常SQL保存。AR-01反転・他AR・live／同版画像／本人端末も残件。[全結果・再開点](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-field-slots-20261109)。
+
+CI確定分：[Piece42575709183](https://github.com/MassyuRed/mashos-api/actions/runs/42575709183)は全工程success、model step368 PASS／既存warning1／26.87秒。Analysis42575709081はcheckpoint記録時点で実行中、成功未確定。

@@ -259,3 +259,55 @@ RenderのAPIはautoDeploy OFF、既存live commit`497f7008fec8935885d09d2e430499
 次は、一般文章の意味を保つ再構成と二欄のsource分離を保持する生成へ進む。既存readerを一般理解の代役へ広げず、読取不足と実modelの出力不足を分けて修正する。AR-01方向反転、AR-02以後、既存migration／API反映、RN統合配布・同版画像／本人端末、正式受入れは未完了。同じ成功数の再検証・同種編集指示の周回だけを次の作業にしない。
 
 私的原本は`Cocolon_CMEE_AR04_Evaluation4B_20261109.private.json`。公開側は本節と本文なしsummaryを既存trialへ置き、新handoff系列や追加運用基盤は作らない。
+
+<a id="piece-model-field-slots-20261109"></a>
+## 2026-11-09続行 — 欄名付きprivate候補と既存FOCUS読取の再利用
+
+API `1ed4ca27da71ddca510d1ad035b1f0fd7703b1ab`（親41b5df88）で7path、その後`cfd3d60d476a1e6f7fbff16b86897f9614504cd3`で3path、重複除外9path。主成果TECHNICAL_CREDIT、正式商品品質credit0。補助経路全体・AR-04の完了ではない。新しいservice／作者／public DTO／DB schemaを作らず、既存の明示candidate_formatによる変換責務をPieceへ適合した。
+
+### 故障箇所・不採用案・回収した能力
+
+前回TWOFIELDの元partitionは正しく、4Bが二欄を一つのarray文字列へ結合していた。最初に各partition項目へexact literal／source_roleを併記し、現warm4Bで旧4＋併記6の計10callを比較したが、全5複数block材料の結合が残った。単欄controlは保持、refinedの末尾句点だけの差があり、分離の改善はなかった。局所314 PASSでも採用理由にせず、その案はprivate保全後に製品sourceから撤回した。同種SYSTEM追加の周回をしていない。
+
+稼働中PID26784のserving sourceはrepo `ai/tools/serve_emlis_natural_reply.py`と同じSHA `f95fc7ce13ce197916b753b7cebb3946243225a0139d40e528908d62e27b2371`。actual自然profileはadapterを無効化したbaseのtokenizer→model.generateへ通り、本文を自動コピーする処理ではないことをread-onlyで確認した。server source／設定／process／重みは変更していない。
+
+既存`preparation.receive_candidate(candidate_format=...)`の形式変換と旧receipt互換の方式を、Piece専用receiverへ再利用。新providerだけ`piece.field_slots.v1`を明示し、field_blocksのkey集合をserver由来のslotとexact照合、モデルkey順ではなく元partition順でcanonical body_blocksへ投影する。名前はfield＋global indexから固定、元のsource ID／role／scalar範囲を保持する。全source／七項目は削らず、PreparedRequest bytes／IDは不変。raw_outputは元の文字列のまま保持する。これはcodecの決定的投影で、受信後の文章split・修補・生成ではない。
+
+旧format=Noneは旧body_blocksだけ、新formatはfield_blocksだけを受理し、形式の自動判定／旧形式fallbackをしない。重複・過不足・未知slot・非文字列／空／改行・不正Unicodeを拒否。slotが揃っても値の入替／連結／追加命題は既存CMEEが拒否する。canonical候補の存在やslot名一致を意味採用へ昇格させない。
+
+### 同材料の実4B結果
+
+最終6材料は、新規架空4と前回架空2。前回2の旧rawを再利用し、新4は旧形式を今回各1call。これとliteral案6callの計10callが第一比較、欄名付き形式は同6材料へ各1call。新6は既使用開発比較であり、blind／未知一般化の実績ではない。source／prepared IDsを対応付け、別promptの実績へ旧rawを付け替えていない。
+
+| 材料ID | 旧形式のCMEE | 欄名付きraw | FOCUS補完後のCMEE |
+|---|---|---|---|
+| TWOFIELD（前回材料） | partition拒否 | 二欄を分離、留保と相談過去を保持 | GENERATED |
+| MODAL（前回control） | GENERATED | 単欄、否定・過去・留保持続 | GENERATED |
+| NEW_FIELDS | partition拒否 | 二欄を分離、受動否定過去を保持 | GENERATED |
+| NEW_PAST | partition拒否 | 二欄を分離、苦手過去・依頼否定過去を保持 | GENERATED |
+| NEW_LINES | partition拒否 | memo別2行＋行動の3本文を分離 | GENERATED |
+| NEW_REFINED | partition拒否 | 原入力と本人回答を別slotへ | GENERATED |
+
+欄名付き形式だけの中間段階では5/6受理、NEW_REFINEDは意味未判定だった。原因は第1slotの正しい原焦点形を、旧S7が旧作者の直述語順だけへ制限していたこと。既存`piece_v2_generation._FOCUS`全文をmodel readerへ接続し、SELF／predicate全文／object全文を保持して比較した。任意の原文一致を許可せず、実名・参照・scopeは従来どおりS7へ戻す。独立点検でもsource資格が成立する名前／名詞参照／条件scopeの3例を用い、迂回拒否を確認した。新生成0で同じ6rawを再受領し、最終1→6/6受理となった。
+
+実16callは全HTTP200／stop。第一10call16.267773秒、欄名付き6call13.356560秒、計29.624333秒の要求loop時計。欄名付き個別は1.494390〜2.784156秒。総レンタル時間／請求・usage／revisionは未測定／unknown。新load／学習／自動retry／追加model reader／server restart0。全本文の語は原文を維持している。欄の分離と誤拒否の解消を、一般文章の再構成品質の向上へ換算しない。出力形式と送信viewを同時に変更し、slot名だけの単独因果は分離していない。
+
+準備段階で通常の過去感情＋現在感情二欄1件が既存source資格外と判明し、0callで別の適格材料へ変更した。draftを保全し、最終6を無選別の一般入力評価とは扱わない。質問文／Karen-Diary／本人原文の送信0、全材料は架空である。
+
+### 保存・再読・互換・限界
+
+通常5実本文×Free／Plus／Premiumの15組を、同じ架空文を持つ合成owner／入力ID／時点へ厳密再bindした既存PGlite隔離SQLで保存・非生成再読。実responseのrawは無修正、provider初回1、作者／review／preview各1、save再送でもquota各1、保存後は作者／Engine／compiler／reviewを禁止して再読。行／detail12fieldと本文・recipe一致、原入力／Emlis thread／events不変。元のGPU要求IDの実DB保存やlive Auth／PostgRESTの実証ではない。合成focal原表面3planの通常保存・非生成再読も追加した。
+
+NEW_REFINEDの新架空実rawはCMEE受理まで。**その材料の通常SQL preview／saveは未検証。** 診断で旧offline `serialize_refined_piece`へ渡すと、旧作者語順を要求する旧S7が拒否した。この旧checkpointをmodel保存の正本へ転用・緩和しておらず、この結果を通常SQL保存の成功／失敗へ換算しない。既存Q2-A/Cの新slot形式での通常保存は合成固定providerの回帰として成功し、新架空実rawの保存とは別の実績である。
+
+最終対象8fileは368 PASS／18.74秒・FAIL／SKIP0、既存Pydantic warning1。旧299に新codec33・FOCUS33・保存3を加えた集合で、途中332／365／他の重複実行を合算しない。初回test helperのEngine引数と、JSON key順を元partition順として扱った合成provider接続を修正したが、期待する意味・本文・保存条件を弱めていない。前回親source overlayでも再現した旧評価19失敗、既知native V4同19失敗は別集合で未修復、今回再実行していない。全Piece試験の成功ではない。
+
+private resultはJupyter editorで観測したmetadata／rawをclipboardから取得し、localと同じrequestを対応付けて16 request SHAを照合、全JSON SHAもterminal表示と一致（第一`dbd95eb73d522e5084e8b99d8bbd8a2676f0d9d5754a4cce3b9d15e2b0fb2fb7`、欄名付き`a41ac238691d4133e5a85e86714b2e3020b55f8354895197a0fff086fb0b8067`）。download成功とは主張しない。保全は`Cocolon_CMEE_AR04_FieldSlots4B_20261109.private.json`。公開側にはraw本文を追加しない。
+
+### 現在地と次
+
+本番配置／selector有効化・SQL schema変更・RN／署名build・配布・native画像／本人端末確認0。既存通常保存・原入力／本人補足の分離・同版本文とrecipeを継承。STRUCTURE_MAP_DELTA_PRESENT、正式商品品質credit0。
+
+次は一般文章の意味を保つ再構成品質と、新しい適格refined実rawの通常SQL保存確認。今回修復した欄名付き受口と焦点読返しを土台にする。元原文がそのまま使える短文へ無理な言換えを強制せず、長い文の整理・単独伝達を実本文で比較する。AR-01方向反転、他AR、live API／migration・RN統合配布・同版画像／本人端末、正式受入れの残件も保持する。
+
+CI確定分：[Piece42575709183](https://github.com/MassyuRed/mashos-api/actions/runs/42575709183)は全工程success、model step368 PASS／既存warning1／26.87秒。Analysis42575709081はcheckpoint記録時点で実行中、成功未確定。

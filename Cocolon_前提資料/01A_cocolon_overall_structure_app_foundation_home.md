@@ -6246,3 +6246,22 @@ API `41b5df885c7f6b8a66223d5954cdd09cd7c94cc8`、親`41fc29870c42feef8c992159fff
 | `.github/workflows/piece-b2b-isolated-postgres.yml` | 既存path trigger／model試験stepへ上記2fileを追加。新job／workflowなし |
 
 既存`cocolon_meaning_experience_engine/piece_source.py`／source・admission・作者・provider・SQL・RNは今回不変。対象7file299 PASSと実4B12callの範囲、親でも再現する旧評価19失敗、再bind保存の限定は[既存trial](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-evaluation-reuse-20261109)へ。旧native V4の19失敗とは別集合で、今回はnative／署名build／配布を行っていない。
+
+<a id="piece-model-field-slots-20261109"></a>
+## 2026-11-09 — AR-04 欄名付き候補・既存焦点読取のfile地図
+
+API `1ed4ca27da71ddca510d1ad035b1f0fd7703b1ab`の7path、続行`cfd3d60d476a1e6f7fbff16b86897f9614504cd3`の3path、重複除外9path。既存の明示candidate_format→canonical投影、原文scalar・source role、FOCUS読取をPieceのmodel armへ適合する。作者／公開wire／DB／RNを増やさない。STRUCTURE_MAP_DELTA_PRESENT。
+
+| mashos-api path | 責務差分 |
+|---|---|
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/preparation_sources.py` | 既存partition→固定slot名・exact literal／source role。source資格の代行やsource変更をしない |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_semantic_admission.py` | 明示piece.field_slots.v1受領・slot完全性・raw保持・canonical投影・format付き再受領一致。旧None互換 |
+| `ai/services/ai_inference/piece_model_source.py` | 全sourceを保持した送信viewと欄名付き出力要求。単発取得、期限／size／cancelとselector境界は保持 |
+| `ai/services/ai_inference/piece_v2_content_policy.py` | 既存_FOCUS全文をmodel本文読取へ再利用。既知自己焦点の原表面保持、名前／参照／scopeのS7保持 |
+| `ai/tests/test_piece_model_source.py` | 合成HTTPのprivate wireを新formatへ適合、source／raw／単発・metadataの検査を保持 |
+| `ai/tests/test_piece_model_field_slots.py` | 新66例。slot過不足・重複・値入替／結合・format改竄・Unicode／CRLF・旧互換、FOCUS正24／refined1／変異8 |
+| `ai/tests/piece_v2/test_b05_piece_model_saved_pipeline.py` | 合成応答のwireだけ欄名付きへ。既存SQL保存／非生成再読の意味・期待を維持 |
+| `ai/tests/piece_v2/test_b05_piece_model_evaluation_pipeline.py` | 旧焦点原表面を強制変換せず通常3planで保存・再読する合成3例 |
+| `.github/workflows/piece-b2b-isolated-postgres.yml` | 既存path trigger／model stepへ新slot testを追加。新workflow／jobなし |
+
+対象8file368 PASS、実16callの内訳、不採用literal案、旧1→新6の限定、通常15組の合成再bind保存、新refinedの通常SQL未検証、旧offline checkpointとの区別は[既存trial](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-field-slots-20261109)。全Piece／一般意味品質・本番・画像・本人端末の合格ではない。
