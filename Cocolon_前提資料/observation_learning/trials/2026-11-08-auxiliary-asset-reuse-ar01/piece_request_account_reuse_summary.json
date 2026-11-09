@@ -1517,5 +1517,105 @@
       "formal_acceptance": "0/3"
     },
     "next": "新c496候補の同22材料・66保存の完了runを繰り返さず、より広い未学習材料と適格refinedの意味保持・単独伝達、全面Card／RN実描画と同版保存画像、通常統合・本人端末へ進める。新重みや通常selectorを自動採用しない。AR-01の役割反転とAR-02／03／05／06／07／08の新規活用は継続残件。"
+  },
+  "mixed_source_scope_learning_full_card_20261109": {
+    "api_final": "651f1f38239d588898266bdf425fe2f02654ff2a",
+    "api_product_change": "ba18d9c4af872282753112581d523f4ad15a85e9",
+    "rn": "1b360adc2ffc56b67f221916de2df4d7905e11f9",
+    "wide16": {
+      "normal": 12,
+      "actual_q2_refined": 4,
+      "new_gpu_piece_calls": 32,
+      "control_calls": 4,
+      "initial_saved_each": 27,
+      "final_saved_each": 33,
+      "final_refused_each": 15,
+      "raw_repair": 0,
+      "source_scope_case": "FRESH03"
+    },
+    "scope_learning": {
+      "new_teachers": 12,
+      "retained_teachers": 12,
+      "updates": 48,
+      "fresh_config": true,
+      "old_tensors_initialization": false,
+      "representative_narrator_rows_each": 4,
+      "weights_sha256": "e924556edec8973746e69cfcad945665e178dec222bb9b0ecc1994de5cc12f49",
+      "baseline18_reused": true,
+      "new_piece_calls": 18,
+      "new_control_calls": 4,
+      "baseline_admitted": 13,
+      "new_admitted": 14,
+      "observed_repairs": 3,
+      "new_raw_semantic_refusals": 3,
+      "source_scope_refusal": 1
+    },
+    "final_sql108": {
+      "counts": {
+        "baseline": {
+          "SAVED_REPLAYED": 39,
+          "REJECTED_BEFORE_PREVIEW": 15
+        },
+        "candidate": {
+          "REJECTED_BEFORE_PREVIEW": 12,
+          "SAVED_REPLAYED": 42
+        }
+      },
+      "successes": 81,
+      "refusals": 27,
+      "saved_source_emlis_raw_unchanged": 81,
+      "quota_each": 1,
+      "after_save_generation": 0,
+      "identity": "strictly rebound recorded raw to equivalent fresh synthetic source ids/datetimes; isolated PGlite/synthetic Auth",
+      "gpu_original_identity_saved_live": false,
+      "initial_helper_ready_failure_separate": true
+    },
+    "regression": {
+      "local_model_pass": 891,
+      "local_seconds": 45.59,
+      "new_mixed_tests": 45,
+      "piece_ci": 42624362614,
+      "ci_model_pass": 891,
+      "ci_seconds": 52.53,
+      "analysis_ci": 42624362467,
+      "product_source_ci": "success",
+      "new_adjusted_saved_tests": 3,
+      "overlap_not_summed": true
+    },
+    "full_card": {
+      "run": 42621869347,
+      "job": 129175784216,
+      "artifact": 13677638893,
+      "admitted": 19,
+      "export": 15,
+      "added_preview_saved": 2,
+      "added_export": 1,
+      "added_cases_pass": true,
+      "all_test_count": 4,
+      "failed_test_count": 1,
+      "failed_test": "old testWholeCanvasWithRealReactNative",
+      "old_v4_failed_assertions": 59,
+      "job_overall": "failure",
+      "new_ios_source_job": "cancelled",
+      "dimensions": [
+        1080,
+        1350
+      ],
+      "preview_saved_viewshot_png_rgba_identical": true,
+      "visually_inspected": true,
+      "e924_all18_images": false
+    },
+    "runtime": {
+      "restored_pid": 35902,
+      "health": true,
+      "emlis_analysis_control_raw_equal": true,
+      "source_analysis_keys_argv_unchanged": true,
+      "candidate_normal_adoption": false,
+      "selector": "OFF",
+      "render_live_db_signed_build_device": false
+    },
+    "formal_product_credit": 0,
+    "formal_acceptance": "0/3",
+    "next": "新e924候補と完了48更新を繰り返さず、語り手が異なる動作の肯否・評価の時点・留保対象の保持を、既存の対照教材と保持教材の配分から改善する。模型作りの名詞形対応外はモデル失敗と分けてsource側へ残す。新候補の通常採用・本番／本人端末反映へ自動進行しない。AR-01の役割反転と他ARの新規活用は継続残件。"
   }
 }

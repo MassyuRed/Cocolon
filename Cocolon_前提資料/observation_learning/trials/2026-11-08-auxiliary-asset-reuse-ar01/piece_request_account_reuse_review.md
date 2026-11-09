@@ -491,3 +491,43 @@ trainer内部180.67秒／外側182.129612秒、学習を含む全runner401.42980
 
 
 最終44rawの追加独立全文確認でも、新22例の意味保持・一人称6表記と8氏名の明記役割化を確認した。VOICE_OREの汎用actual_private_meaning診断はnullのままであり、限定completed-body readerの成功を一般parser対応とは扱わない。先行21/22のJSONは履歴として不変、最終readerの補足だけを別private原本へ保存した。
+
+
+<a id="piece-mixed-source-scope-learning-full-card-20261109"></a>
+## 2026-11-09 混在本文・欄と補足の学習・全面画像
+
+**11/9・AR-04最新：** API `651f1f38`。原文KEEPの文と別欄の既知有限動作の語尾編集を、全partの既存S7を保ったまま併用できるよう修復。追加16材料の同rawは各版9→11例保存可能、旧新とも33保存／15拒否。次に独立新12＋旧役割12の24教材でfresh一回48更新し、c496基準18材料は13→新e924の14採用、隔離SQLは旧39保存／15拒否→新42保存／12拒否、保存後0再生成。新3例の一人称／役割化を修復した一方、過去・否定・留保対象の3rawは拒否を維持し、新重みは通常未採用・selector OFF。既存採用1例の全面Card／保存PNG／view-shotは1080×1350で全byte同一・目視確認。旧V4別試験は失敗継続。元GPU提供PID35902へ復元、healthと前後control一致。本番・本人端末・一般品質・AR全体完了ではない。
+
+API [ba18d9c4](https://github.com/MassyuRed/mashos-api/commit/ba18d9c4af872282753112581d523f4ad15a85e9) と最終helper [当該反映](https://github.com/MassyuRed/mashos-api/commit/651f1f38239d588898266bdf425fe2f02654ff2a)。RN [1b360adc](https://github.com/MassyuRed/Cocolon/commit/1b360adc2ffc56b67f221916de2df4d7905e11f9)。
+
+### 新材料・本人補足と、正しい混在本文の拒否修復
+新規架空通常12＋実Q2から保存資格を取得した本人補足4の16材料を、同SYSTEM／source由来生成条件、既存affbとc496で各一回比較。新32 Piece＋自然Emlis／Analysis前後4の計36 HTTPは全200／stop。親原入力・感情／各強さ・カテゴリ・二欄・明示選択した第一回答を保持。refined4は実Emlis serviceのASK→ANSWER→REFINED／RESOLVED→MATERIAL_UPDATE全ADD→exact回答handoff→通常model preparationから取得し、typed fixtureを通常保存資格へ代用しない。二欄のある1例では元2欄と補足の3slotを保持する。private FullRecordDBは既存fixtureのexact一INSERTだけを全入力値へ投影し、後続ownerを変えない。
+
+初回は両版9/16保存可能、隔離SQL96は各27保存／21拒否。新c496の明記役割化2改善と、別欄／補足の一人称欠落2退行が相殺した。未読を一般意味誤りへ数えず、模型作りの語形は既存source資格外と判別した。
+
+正しいFRESH12／15の拒否は、原文のまま残す文があるとpart全体がS7へ戻り、別欄の既知有限動作までliteral KEEPを要求していたことが原因。既存validate_source_meaning_preservationの_model_register=True／KEEP分岐に、同じ既存finite readerの完全key比較を再利用した。単一・明示SELF・頼む／相談する／伝える・能動・事実過去・日付なしに限定し、相手／に・から／対象／肯否／時点／一人称を全比較。該当nodeの評価・scope・名参照依存を迂回せず、source anchorが名前変換を必要とするnodeも新例外へ入れない。他fieldの参照は全partの旧S7に残す。source／planの切出し、raw修補、作者呼出し、通常nativeのliteral条件変更はない。
+
+45新検査を含む17file891 PASS／45.59秒、既存warning1・FAIL／SKIP0。Piece CI42624362614は全工程success、model891 PASS／52.53秒。Analysis CI42624362467もcompleted／success。新helperの保存検査は後段に記録し、既存891と重複加算しない。既知62失敗の全件修復・再実行ではない。
+
+同じ32rawを隔離PGlite・合成Authの通常ownerへ厳密再bindすると、最終96は両版各33保存／15拒否、計66保存／30拒否。12試行（F12／15両版×3plan）だけ拒否→保存に変わった。成功66はraw／本文／source／Emlis不変、quota各1、保存後の同／新service非生成再読。refined成功は見た目変更後も同本文・保存版recipe一致。前段96や初版結果を最終96へ上乗せしない。GPU原PreparedRequest identityを実Supabaseへ保存した実績ではない。
+
+### 一人称・役割修復の一回学習と、残った意味退行
+独立新作12（元欄6／本人補足6）＋既存役割教師の先頭12を完全保持した24行。6一人称は代表語り手の行分類で各4、混在行の全出現数とは違う。今回16評価source・失敗raw・期待正文を教材へ流用しない。初稿のCPU path参照誤りと、未対応の感情語形は生成・学習前に修正し、最終24 targetを旧作者4関数禁止でCPU採用確認した。source資格を広げて通したのではない。
+
+教材SHA256 d0840255cfa972f62bcb96a50edacb5cdd359de547b4de088c8a04da906bb233、wire a570f4812fad95b35022752ca3790cea84c80f192aedeefda67d52283012c6d3。既存trainer／servingコードを変更せず、fresh config一回48更新。学習初期値へ旧学習tensorを読まない。new weights e924556edec8973746e69cfcad945665e178dec222bb9b0ecc1994de5cc12f49、112tensor／3,833,856parameterの保存非学習reload一致。24更新checkpointも保存したがoptimizer／RNG未保存で厳密途中resumeではない。
+
+c496の前16＋既成功2（役割抽象化／連用過去）の18基準は、messages／request hash／response bytes／重みrevisionの一致を照合して再利用、新基準生成0。新候補18＋自然Emlis／Analysis前後4の22 HTTPは全200／stop。新旧36本文を全文確認し、13組変化／5組同一。一人称の欄先頭、補足先頭、補足内の氏名→原文明記の役割の3例は修復。一方、評価の過去→現在、異なる一人称の第二動作の否定→肯定、未決定対象の書換えが新rawにあり、3件を拒否。異なる一人称を戻しただけでは意味成功としない。ほか15本文は限定sourceとの意味対応を読めるが、そのうち模型作りの1例はsource資格外。正式Product Read／一般品質／通常採用へ換算しない。
+
+同じsource18×旧新2×3plan＝最終108試行。旧13本文×3＝39保存／5×3＝15拒否、新14本文×3＝42保存／4×3＝12拒否、計81保存／27拒否。初回16だけではc49611→新13、別の既成功2は2→1。分母と退行を隠して総合改善とは呼ばない。記録済raw一回の供給後、保存・再送・再読の新model／旧作者生成0。成功81はsource／Emlis／raw・保存版本文／recipe等不変、quota各1。拒否27は新record／quota不変。初回helperがreadyだけを固定期待し、名前を役割へ変えた正しい既存adjusted状態で止まった途中結果は別履歴に保持。製品の安全状態を変更せず、helperへexpected_safety_stateの既定ready／明示adjustedを追加し、3planの名前付き本人補足でpreview→見た目変更→save→非生成再読を新3件確認した。旧fixtureの期待は保持する。初回partial／単発診断を最終108へ加算しない。helperの旧external_model_provider=0はfixture由来で、実際の記録済raw供給は各試行1回（model_material_and_raw）である。
+
+### 既存同版1作品の全面Card・保存・export
+記録済TARGET_VIEWPOINT（affb／c496で同じ本文・recipe・3hash）を既存PieceVisualCard／B9／native bitmap／view-shotへ追加。合成HTTP envelopeと将来preview期限だけを試験用に投影し、canonical本文・recipe・3hash・ios.v2は不変。旧baseline／bitmap／Android fixtureと、追加を除いたadmitted17／export14の値・順序は完全一致。製品RN変更0。
+
+JS181 PASS／17.35秒。新iOS [run42621869347](https://github.com/MassyuRed/Cocolon/actions/runs/42621869347)／job129175784216はcompile成功。admitted19（追加preview／saved2）、export15（追加1）、bitmap groupの3testに失敗なし。全4testの失敗1は旧testWholeCanvasWithRealReactNativeのみで、59assert全て同test内。旧iOS metrics V4同19失敗も未修復であり、RN CI全体GREENではない。iOS source jobの今回cancelledを新4成功へ換算しない。
+
+[artifact13677638893](https://github.com/MassyuRed/Cocolon/actions/runs/42621869347/artifacts/13677638893) SHA256947d766cfa45cd4bbf03271c5a60f39c143a71aa58b759f7f3fa9cbfd655bcd5を回収し、追加3PNGとnative JSONを保存。preview／saved／実view-shotの1080×1350 RGBAとPNG bytesは全同一（PNG SHA8611807b66f932d82cd28a948c0bb8fd574473be8dd5c5d7fa3d4d650c4915c9）。根拠本文・Emlis表記が全て見えること、欠けがないことを華恋が目視確認した。これは実RNと既存描画の同版1作品で、今回e924全18作品の画像や本人端末の成立ではない。
+
+### 提供・未採用・次
+初回比較runner236.043835秒／HTTP177.152686秒、次のfit runner370.302342秒（trainer内部209.85秒／外側211.284314秒、HTTP120.858869秒）。実GPU RTX4000 Ada、総保持時間・総請求／通常原価は未測定。元提供PID35902へ復元し、health正常、元source・既存Analysis重み・認証値・起動引数・旧c496重み不変、自然Emlis／Analysisの前後非空response bytes一致。新e924は通常未採用、selector OFF。本番Render配置、実DB、signed build／配布、本人端末0。限定TECHNICAL_CREDIT・正式商品品質credit0／正式受入れ0/3。STRUCTURE_MAP_DELTA_PRESENT。
+
+新e924候補と完了48更新を繰り返さず、語り手が異なる動作の肯否・評価の時点・留保対象の保持を、既存の対照教材と保持教材の配分から改善する。模型作りの名詞形対応外はモデル失敗と分けてsource側へ残す。新候補の通常採用・本番／本人端末反映へ自動進行しない。AR-01の役割反転と他ARの新規活用は継続残件。

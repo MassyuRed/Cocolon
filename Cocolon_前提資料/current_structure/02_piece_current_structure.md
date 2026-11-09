@@ -3824,3 +3824,15 @@ API既存 `ai/services/ai_inference/piece_v2_content_policy.py` のmodel完成�
 RNは検証用4path：`tests/native/piece-ar04-adopted-native.json`（新規、実隔離保存版と同一）、`tests/native/piece-text-metrics-ios.mm`、`tests/piece-v2-renderer.test.js`、`.github/workflows/piece-rn-contracts.yml`。製品renderer変更なし。preview／保存／exportの入力と3hash・Emlis文字・paletteはJS180 PASS、固定3行の透明文字bitmapは新4／既存44 PASS。旧V4の19失敗を保ち、RN CI全体GREENではない。全面Card／RN実wrap／本人端末の確認ではない。
 
 STRUCTURE_MAP_DELTA_PRESENT。現在の読解範囲・実モデル／隔離SQLの区別・失敗履歴・通常未採用・次は既存trialの `piece-role-learning-coordination-20261109` 節とweekly§48を参照。新c496候補の同22材料・66保存の完了runを繰り返さず、より広い未学習材料と適格refinedの意味保持・単独伝達、全面Card／RN実描画と同版保存画像、通常統合・本人端末へ進める。新重みや通常selectorを自動採用しない。AR-01の役割反転とAR-02／03／05／06／07／08の新規活用は継続残件。
+
+
+<a id="piece-mixed-source-scope-learning-full-card-20261109"></a>
+## 2026-11-09 AR-04 混在本文・欄／補足と全面Card
+
+**11/9・AR-04最新：** API `651f1f38`。原文KEEPの文と別欄の既知有限動作の語尾編集を、全partの既存S7を保ったまま併用できるよう修復。追加16材料の同rawは各版9→11例保存可能、旧新とも33保存／15拒否。次に独立新12＋旧役割12の24教材でfresh一回48更新し、c496基準18材料は13→新e924の14採用、隔離SQLは旧39保存／15拒否→新42保存／12拒否、保存後0再生成。新3例の一人称／役割化を修復した一方、過去・否定・留保対象の3rawは拒否を維持し、新重みは通常未採用・selector OFF。既存採用1例の全面Card／保存PNG／view-shotは1080×1350で全byte同一・目視確認。旧V4別試験は失敗継続。元GPU提供PID35902へ復元、healthと前後control一致。本番・本人端末・一般品質・AR全体完了ではない。
+
+API既存 `piece_v2_content_policy.py::validate_source_meaning_preservation` 内のmodel専用KEEP比較へ既存finite keyを限定再利用、新 `ai/tests/test_piece_model_mixed_keep_register.py`（45）、既存model workflowへ追加。S7全part・source／plan／fieldを保持し通常nativeのliteral契約は変更しない。既存refined SQL helperへexpected_safety_state既定ready／明示adjustedと、3planの名前役割化保存検査を追加。新作者・公開型・DB・provider追加なし。
+
+RN検証3path：`tests/native/piece-rn-canvas-fixtures.cjs`／`tests/native/piece-rn-canvas-ios.m`／`tests/piece-v2-renderer.test.js`。前回の実保存 `piece-ar04-adopted-native.json` を同版全面Card・保存PNG・view-shotへ追加し、v1/Cocolonの旧期待を維持して新v2/Emlisを検査。製品RN不変。
+
+STRUCTURE_MAP_DELTA_PRESENT。新e924候補と完了48更新を繰り返さず、語り手が異なる動作の肯否・評価の時点・留保対象の保持を、既存の対照教材と保持教材の配分から改善する。模型作りの名詞形対応外はモデル失敗と分けてsource側へ残す。新候補の通常採用・本番／本人端末反映へ自動進行しない。AR-01の役割反転と他ARの新規活用は継続残件。 詳細はweekly§49と既存trialの同anchor。
