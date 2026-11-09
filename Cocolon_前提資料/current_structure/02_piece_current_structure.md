@@ -3754,3 +3754,7 @@ CPUの対象17suiteは854 PASS、追加有限scope＋独立変異＋並行処理
 途中のmodel保存5失敗はSavedOriginalの属性名接続を修正して全5成功。広い再検査のnative DB192 setup errorはlocal PostgreSQL未設定による対象選択ミスで、nonnative集合へ修正した。eligibleからshort_essay単独を許容するSafety互換1件を明示変更し、旧有限writerの全3format保持と本文変異拒否を検査した。既知の旧161失敗、前回native V4の同19失敗、live migration／配置／統合配布／同版native画像・本人端末の未完了を今回成功へ含めない。GPU実測結果は直下の実測欄に追記する。
 
 STRUCTURE_MAP_DELTA_PRESENT。詳細設計は補助経路活用設計§7.1、全file対応は01A末尾。
+
+### 2026-11-09 Piece4B実測・反映の追記
+
+API最終41fc2987（製品95e1b5d6、追記はnative fake seamのみ）、Piece CI42564013293全成功・新model129 PASS。実4Bは新規架空2件、無感情modeは資格拒否、現行自己理解modeはEngine／B8／fake handoff Safety受理。実本文は原文維持、一般品質／実保存／Render HTTPS疎通のcreditへ合算しない。RN5ae90a65のJS成功、同19native V4失敗が継続。実測・原因訂正・次は[trial](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-actual-fictional-20261109)。

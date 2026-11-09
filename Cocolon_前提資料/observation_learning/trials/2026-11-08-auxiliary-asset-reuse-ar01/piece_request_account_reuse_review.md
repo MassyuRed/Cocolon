@@ -191,3 +191,23 @@ API `95e1b5d6c6d68b17fadaae3c982ebaa87eed1d79`、設計先行差分`b2d33ace47a0
 CPUの対象17suiteは854 PASS、追加有限scope＋独立変異＋並行処理は70 PASS（集合重複を合算しない）、provider／runtime再確認70 PASS、Safety互換8 PASS。RN6suite490 PASS。normal3planでは旧作者と異なる本文「私は同僚に資料の確認を頼んだ。」が既存隔離SQL保存・再読まで固定され、実Q2 A/C保存補足も別sourceのままmodel receipt→visual変更→保存／再読へ通った。各モデルtransportは初回1回、quota消費1、原入力／Emlis thread/eventsは不変。ここまでのprovider応答は合成固定値で、実4Bの呼出し実績と分ける。
 
 途中のmodel保存5失敗はSavedOriginalの属性名接続を修正して全5成功。広い再検査のnative DB192 setup errorはlocal PostgreSQL未設定による対象選択ミスで、nonnative集合へ修正した。eligibleからshort_essay単独を許容するSafety互換1件を明示変更し、旧有限writerの全3format保持と本文変異拒否を検査した。既知の旧161失敗、前回native V4の同19失敗、live migration／配置／統合配布／同版native画像・本人端末の未完了を今回成功へ含めない。GPU実測結果は直下の実測欄に追記する。
+
+<a id="piece-model-actual-fictional-20261109"></a>
+### 実4Bの実測、CI最終結果、今回の到達点
+
+既存warm4B natural/base profileへ、完全新規の架空原入力だけを2件送った。既存保存Q2／過去bundleは送信0。両方HTTP200／finish=stop、model aliasは`cocolon-qwen35-4b-base-851bf6e`。PID26784とserving source SHA f95fc7ce…は前後一致、新load・学習・server変更／再起動・停止0。actual HTTP request／response／rawをprivateに保持し、prompt messagesをlocal準備と全量照合した。実呼出しは既存loopback natural profileへの診断bridgeで、Render→GPU HTTPS本番疎通の実績ではない。usage／revisionは実応答に無くunknown。
+
+| 新規架空材料 | 4B生成時間 | 本文とCMEEの結果 |
+|---|---:|---|
+| 感情選択なし、依頼文をmemoへ | 1.235734秒 | 原文維持。Engine／B8は既存account資格外として拒否、Safety未到達 |
+| 自己理解単独＋medium、同依頼文をmemoへ | 1.293048秒 | 原文維持。厳密source／receipt再bind後にEngine GENERATED、B8生成、fake handoffのauthor-free Safety ready |
+
+両方の実本文は「私は同僚に資料の確認を頼みました。」だった。第二材料の原入力7fieldsは実際の自己理解選択仕様に合わせた完全架空値であり、第一材料を後から自己理解へ書き換えて同じ候補の出所を偽装していない。別UUID／別準備ID／別model callとして保持した。当初、第一の拒否を欄制約と誤認したが、原因は感情選択なしのmode前提と再確認・訂正した。memo／memo_actionのどちらも自己理解modeなら既存資格を通る。モデル出力の意味変化や欄による拒否と混同しない。
+
+この実GPU結果は候補取得→CMEE／B8／Safetyの接続確認までで、保存SQL／本人認証はfake handoffで代替していない。保存・visual変更・再送・再読の実装接続は前節の合成provider＋隔離SQL5件で別に検証した。実4B本文は原文と同じため、文章品質の改善・一般自由文の対応を今回の成功へ数えない。
+
+API final head `41fc29870c42feef8c992159fff90558f86d67e4`は製品`95e1b5d6`からnative test seamだけを修正した。初回run42563477378/job128984792000は対象file30 failed／106 passed、旧fakeが`require_current` keyと`_model_input=None`を受け付けなかった。意味期待やSQL検査を緩めずfake2種を更新し、同型B10 fakeも更新した。再run42564013293/job128986439658は全step success、当該native136 PASS、新model5suite129 PASSを含む。API変更累計18fileで、追加pathは`ai/tests/piece_v2/db/test_b10_preview_application_native.py`。
+
+RN `5ae90a658d1823e37039420165db428f26d6730c`のrun42563870309はJS job128985994991 success、Android source／export、export pods、iOS RN canvasもsuccess。iOS source job128985995073はV4 1PASS／19FAIL。前回job128969267491と19件のfailure名・順序が完全一致し、4a103688→5ae90a65の非前提資料差分はpieceApi.js／source-ref testの2fileだけでnative input／job bodyは不変。既存native129／bitmap44も成功した。同19再現の確認に限り、画像受入れ／一般無退行とは扱わない。
+
+次は通常の日本語への意味対応幅と作品としての表現を改善する。既存source／plan資格と全文意味保持を保った今回の初期範囲から進め、未知書換えを合格扱いしない。live配置・selector有効化・migration適用、統合配布、同版native画像と本人端末、既存161失敗／V4同19失敗・AR-01反転は残件。既存のsource分離／保存／権利／recipe／画像化を継承する。証拠ZIP：`Cocolon_CMEE_AR04_Piece4B_Connection_20261109.zip`。

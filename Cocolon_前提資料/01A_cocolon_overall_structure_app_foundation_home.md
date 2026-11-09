@@ -6230,3 +6230,5 @@ API `95e1b5d6c6d68b17fadaae3c982ebaa87eed1d79`。既存保存source→候補→C
 | `ai/tests/piece_v2/db/test_b05_reviewed_preview_issuance.py` | 単独shortessay Safety互換と旧3format／意味変異control |
 
 RNの変更は`features/piece/pieceApi.js`のpreview POST期限のみ250000ms、`tests/piece-v2-source-ref.test.js`でPOSTとGETの期限範囲を確認。既存source GET／PATCH／再読、explicit補足選択、owner変更／cancel・未確定保存回復は継承。DB migration新規0、公開DTO新field0、renderer新規0、依存追加0。設計差分3正本は`b2d33ace`で先に反映。商品00・Piece／CMEE map・weekly§40・trialを今回同単位で更新。STRUCTURE_MAP_DELTA_PRESENT。
+
+実測追記：製品95e1b5d6後のAPI41fc2987はnative test fakeの2種を新しいprivate call shapeへ適合しただけで、意味／SQL期待は維持。追加fileは`ai/tests/piece_v2/db/test_b10_preview_application_native.py`（明示_model_input=None受口）、累計API18path。再CI42564013293全成功、新model129 PASS。実4B2件とRN同19native失敗は[trial](./observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-actual-fictional-20261109)へ。native入力とjob bodyは4a103688から不変、画像品質受入れは未完。

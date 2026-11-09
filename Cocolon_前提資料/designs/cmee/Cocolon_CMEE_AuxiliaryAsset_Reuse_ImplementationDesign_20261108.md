@@ -413,6 +413,9 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 ### 11.2 現在の進行欄
 
+実測追記：既存warm4Bへ新規架空2call、現行自己理解modeの1候補がCMEE／B8／fake handoff Safetyを通過。無感情modeの1件は資格外で拒否。rawは原文維持で、品質改善・一般自由文・本番HTTPS／実保存の実績とは分ける。API41fc2987 CI全success／new129、RN5ae90a65 JS成功／既存V4同19fail継続。[実測と訂正](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-actual-fictional-20261109)。
+
+
 2026-11-09 Piece4B接続：§7.1具体設計を先行反映後、API `95e1b5d6c6d68b17fadaae3c982ebaa87eed1d79`でmodel候補→既存CMEE／B8／Safety／通常保存を接続した。RN preview POST期限を250秒へ修正。通常3planと実Q2 A/Cの隔離保存・0再生成再読を確認。初期short_essay／既存有限source資格、default OFF、一般文章・live反映／端末未完了を維持する。[実測・限定・次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-candidate-connection-20261109)。
 
 

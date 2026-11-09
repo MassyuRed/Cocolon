@@ -2041,3 +2041,7 @@ RN4a103688（親26c4453e）。共用EmlisThreadModalは、COMPLETED／REFINED・
 API `95e1b5d6c6d68b17fadaae3c982ebaa87eed1d79`。`PieceModelInputV1`だけを既存Piece semantic seamでdispatchし、source-only準備／strict候補受領／source-plan-receipt再bind／author-free全文意味保持から既存Artifactを確定する。旧P4受口とmodel未選択時の作者等値を維持し、モデル候補の採否だけを別armにする。格・voice、否定、時点、留保とsource partitionを検査、未知書換え・失敗時は不採用。既存有限source資格は残るため一般入力対応の完了ではない。本文rawやmodel metadataを公開wire／DBへ追加しない。provider・preview・保存・再読と初回一時共有の責務はPiece ownerへ保持した。STRUCTURE_MAP_DELTA_PRESENT。
 
 検証・実測と限定は[Piece結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-candidate-connection-20261109)。既存Emlis／Analysisのモデル生成方式・保存形式は変更しない。live反映や一般品質合格は今回のコード成功から推定しない。
+
+### 2026-11-09 Piece4B実測・反映の追記
+
+API最終41fc2987（製品95e1b5d6、追記はnative fake seamのみ）、Piece CI42564013293全成功・新model129 PASS。実4Bは新規架空2件、無感情modeは資格拒否、現行自己理解modeはEngine／B8／fake handoff Safety受理。実本文は原文維持、一般品質／実保存／Render HTTPS疎通のcreditへ合算しない。RN5ae90a65のJS成功、同19native V4失敗が継続。実測・原因訂正・次は[trial](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-actual-fictional-20261109)。

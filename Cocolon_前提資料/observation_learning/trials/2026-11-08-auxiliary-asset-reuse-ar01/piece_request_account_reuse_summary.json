@@ -375,6 +375,46 @@
     "source_scope": "existing finite Piece source and full preservation, not general Japanese",
     "public_wire_or_db_schema_changes": false,
     "live_activated": false,
-    "actual_gpu_result": "record separately in the corresponding trial section"
+    "actual_gpu_result": {
+      "new_fictional_calls": 2,
+      "prior_saved_sources_sent": 0,
+      "first": {
+        "elapsed_seconds": 1.2357338520232588,
+        "mode": "no emotion selection",
+        "engine": "UNAVAILABLE",
+        "safety": "not_reached"
+      },
+      "second": {
+        "elapsed_seconds": 1.2930483419913799,
+        "mode": "current self-insight",
+        "engine": "GENERATED",
+        "b8": "generated",
+        "safety": "ready (fake handoff)"
+      },
+      "body_changed": false,
+      "quality_improvement_claim": false,
+      "usage": null,
+      "revision": null,
+      "transport": "existing loopback natural profile manual bridge, not deployed HTTPS",
+      "new_load_or_training": false,
+      "pid_and_serving_source_unchanged": true
+    },
+    "final_api_commit": "41fc29870c42feef8c992159fff90558f86d67e4",
+    "rn_commit": "5ae90a658d1823e37039420165db428f26d6730c",
+    "api_ci": {
+      "run": 42564013293,
+      "job": 128986439658,
+      "conclusion": "success",
+      "new_model_pass": 129
+    },
+    "first_ci": {
+      "run": 42563477378,
+      "target_failed": 30,
+      "target_passed": 106,
+      "reason": "old test fake private kwargs"
+    },
+    "rn_js_job": 128985994991,
+    "rn_native_v4_job": 128985995073,
+    "rn_same_ordered_prior_failures": 19
   }
 }
