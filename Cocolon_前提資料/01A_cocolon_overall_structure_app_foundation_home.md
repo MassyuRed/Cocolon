@@ -6082,7 +6082,7 @@ API overlay2source＋新testは保存原本へ同梱し、通常repoへ採用し
 | 追加ファイル | 責務と接続 |
 |---|---|
 | mashos-api `ai/tests/test_cmee_piece_finite_request_reuse.py` | 11/9 AR-04。明示本人の過去依頼をKEEPへ通す肯否・能受動・6本人表記・欄・留保・mode／tier境界、正規化後の人称拒否、独立改変拒否、隔離SQL保存元読取を検証。相談・伝達の有限境界も検証。新保存一巡testと既存Piece近傍6suiteを含み3351 PASS。 |
-| mashos-api `ai/tests/test_cmee_piece_request_saved_pipeline.py` | 新規。実source adapter／CMEE／既存review→preview RPC→save RPC→owner detailを原本migrationの隔離PGliteで検証。初回後に作者／compiler／Engine／reviewを禁止し、同key再送と本文・recipe等12field、保存消費各1を照合。3plan×3動詞の9case。Auth／先行Emlis provider／PostgREST envelopeは合成で、実機・native描画の検証ではない。 |
+| mashos-api `ai/tests/test_cmee_piece_request_saved_pipeline.py` | 新規。実source adapter／CMEE／既存review→preview RPC→save RPC→owner detailを原本migrationの隔離PGliteで検証。初回後に作者／compiler／Engine／reviewを禁止し、同key再送と保存行／詳細の本文・recipe等12field、保存消費各1を照合。3plan×3動詞の9case。既存Q2_PGLITE_MODULE（PGlite0.5.8）を必須として実行する。Auth／先行Emlis provider／PostgREST envelopeは合成で、実機・native描画の検証ではない。 |
 | Cocolon `features/piece/pieceExportPngProfile.js` | `pieceExport.js` が対応iOSで呼ぶPNGメタデータ検査。寸法と明示sRGBを照合する。 |
 | Cocolon `tests/piece-v2-export-png-profile.test.js` | 正常、異なる寸法・色設定、切り詰めを検証する。 |
 | mashos-api `ai/services/ai_inference/piece_v2_export_receipt_service.py` | 本人専用の書き出し記録POSTから、本文を含まない要求を検証し、記録のRPCへ渡す。 |

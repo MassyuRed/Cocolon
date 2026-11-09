@@ -52,7 +52,9 @@
     "emlis_provider": "synthetic",
     "postgrest": "SQL callbacks",
     "asgi_requests": 0,
-    "concurrent_native_lock_claim": false
+    "concurrent_native_lock_claim": false,
+    "artifact_fields_same_boundary": "persisted_row_to_owner_detail",
+    "preview_artifact_fields_same": 8
   },
   "regression": {
     "passed": 3351,

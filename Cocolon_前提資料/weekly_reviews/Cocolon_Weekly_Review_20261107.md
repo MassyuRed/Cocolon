@@ -2083,7 +2083,7 @@ primary TECHNICAL_CREDIT、正式商品品質credit0。AR-04は今回の有限�
 
 既存Q3Database／PGlite0.5.8へ原本Q2／Q3／relatedcontext・Piece M1～M4／visualchange／quotaread／naturalcontext／paletteを適用。実行SQL11＋既存helper等3はfresh e8b7のblob bytes全一致。各原7fieldをSQLへ保存し、先行Emlisは合成providerを既存serviceで成功completionへ保存した。そこから実PieceSavedSourceAdapter→実CMEE作者→固定既存review_prepared_original→preview RPC→save service／RPC→owner detailへ全20を通し、Freeで18保存・2拒否、最終2.221914秒。18本文／payloadはpure結果と一致。SQL UUID／日時投影とpure source identityは別に保全。
 
-18全件で本文／payload／3hash／recipe／rendererと4contract版の計12fieldをpreview→保存行→detailで照合。初回後は候補生成入口・Engine／作者／compiler・review禁止でpreviewのfresh-service同key再読→明示save→同keysave再送→detail再読まで成立。保存消費各1・再送追加0、拒否2のPiece／quota件数差0を読戻し確認、原入力とPiece開始後のEmlis thread／events不変。生成入口1callを内部binding再実現まで1回とは言わない。Auth・先行Emlis provider・PostgREST envelopeは合成／SQLcallback、service-role BYPASSRLSの隔離構成。ASGI／実Auth／本番DB／native並行lock・RLS／bitmap／fit／PNG／写真・共有／本人端末の成功ではない。
+18全件で本文／payload／3hash／recipe／renderer等8fieldをpreview→保存行→detailで照合し、4contract版を含む計12fieldは保存行→detailで照合。初回後は候補生成入口・Engine／作者／compiler・review禁止でpreviewのfresh-service同key再読→明示save→同keysave再送→detail再読まで成立。保存消費各1・再送追加0、拒否2のPiece／quota件数差0を読戻し確認、原入力とPiece開始後のEmlis thread／events不変。生成入口1callを内部binding再実現まで1回とは言わない。Auth・先行Emlis provider・PostgREST envelopeは合成／SQLcallback、service-role BYPASSRLSの隔離構成。ASGI／実Auth／本番DB／native並行lock・RLS／bitmap／fit／PNG／写真・共有／本人端末の成功ではない。
 
 最終sourceの関連8fileは3351 PASS／27.94秒・既存warning1・FAIL／SKIP0、9caseで依頼／相談／伝達×3planの保存一巡。初期testの伝える「に」受動の過剰期待は既存拒否へ訂正し製品sourceを緩めない。初期の未存在Engine symbol、scriptの未存在candidate hashキーとtier format差の誤比較は検証側を訂正し失敗logを保持、反復を加算しない。
 

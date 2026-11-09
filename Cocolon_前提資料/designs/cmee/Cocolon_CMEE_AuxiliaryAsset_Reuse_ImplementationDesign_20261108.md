@@ -413,7 +413,7 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | AR-01通常と残件 | AR-01通常不採用・役割反転未解決。API作業sourceはf3b5e93e（下記AR-04差分のみ追加）、配置／実DB／RN/build0。AR-01研究patchの通常採用なし、AR-02は今回未着手。全必要資産活用・端末／正式受入れ未完了 |
 | AR-04回収・改修 | 既存natural_reply_meaningのfinite節／活用／格／人役読取＋Pieceガードを、piece_source._finite_self_person_action_account→piece_v1cの既存KEEPへ接続。許可述語は頼む／相談する／伝える、明示SELF・肯否過去・相手1／を対象1・句点。曖昧な伝える「に」受動は拒否を維持。新命題・作者・理解／承諾の推測なし |
 | AR-04実本文 | 今回独立8は全件不可→生成。時点・SELF6表記・能受動・否定・丁寧体・二欄留保を保持。前回12の生成10はmeaning／plan／artifact／candidate／recipe／serialized hash全同一、拒否2維持。開発作例でblind一般化ではない。前回依頼の新規5は履歴保持、今回増分へ再加算しない |
-| AR-04検証・再読 | 最終3351 PASS／27.94秒・既存warning1・FAIL／skip0、保存9caseで3plan確認。原本SQL11＋既存helper等3のbytes一致。新旧20を実service／既存review＋PGliteへ通し18保存／2拒否、12field同一、初回後は作者／compiler／Engine／review禁止・同key消費各1。原入力／Emlis不変。合成Auth／先行provider／SQLcallbackであり実DB／native画像／ASGI成功ではない |
+| AR-04検証・再読 | 最終3351 PASS／27.94秒・既存warning1・FAIL／skip0、保存9caseで3plan確認。原本SQL11＋既存helper等3のbytes一致。新旧20を実service／既存review＋PGliteへ通し18保存／2拒否、本文等8fieldの3段同一・保存行／詳細の12field同一、初回後は作者／compiler／Engine／review禁止・同key消費各1。原入力／Emlis不変。合成Auth／先行provider／SQLcallbackであり実DB／native画像／ASGI成功ではない |
 | AR-04反映・残件 | API作業source f3b5e93e、既存source2／既存test1／新test1、全bytes／変更集合／head読戻し。配置／実DB／RN／GPU生成0。通常serviceの隔離保存まで確認したが、一般本文・refined・native同版画像／通常稼働・実機・正式受入れ未完了。正式商品品質credit0 |
 | AR-04再開記録 | weekly第10回§34、[全結果・範囲](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md)。次は既存正本に沿うrefinedの原入力／適格本人補足の別source接続不足を進める。原文連結へ短絡しない。AR-01意味候補／本文役割反転は未解決、AR-01〜08・全必要資産活用は継続中 |
 
