@@ -2091,3 +2091,11 @@ API `3c4e25e2fc7e52082324dfb9fd86645980188bd2`。本人の一人称表記を意�
 前回の48更新・32HTTP・39保存は完了履歴として保持し、本単位へ再計上しない。先行SYSTEM比較は学習0、後続の均衡教示による新学習は別段階の実測として数える。serving／trainerコード変更は0。source・raw・採否・保存再読と、通常採用・Render／selector・RN／build・実DB・native画像／本人端末・正式受入れを分ける。
 
 [実結果・範囲・次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-narrator-evaluation-20261109)。
+
+
+<a id="piece-source-authoring-constraints-20261109"></a>
+## AR-04 既存source意味を作者の生成条件へ回収
+
+**11/9・AR-04続行（`674b5225f841a7dd1d41cbbd88395d2acebb3e42`）：** 既存の本人評価frame・公開役割bindingを、原requestとPreparedRequestの再導出一致を確認したうえで欄別の生成条件へ投影し、設定された4B候補取得へ接続した。原文・SYSTEM・本文の採否検査は保持し、期待正文の注入・生成後修補・追加推論はない。固定affb重みの16材料（前回失敗2＋一人称6対照＋新規架空8）を各2条件で実生成し、同じCMEEの採用は11→14。評価述語欠落2と二欄の「まだ」欠落1を修復、一人称6対照は本文byte同一。氏名残存2は拒否を維持。隔離SQL96試行は旧33保存／15拒否、新42保存／6拒否、保存後0生成。新重み・通常selectorは未採用／OFF、GPUは元base／既存Analysisへ復元しhealth・前後control一致。一般品質・氏名抽象化・同版画像／通常統合・本人端末、AR-01反転と他ARは未完了。
+
+既存source meaning／役割alias／本人評価の責務を生成前にも使い、完成本文は従来のCMEE／S7で独立検査する。新作者・controller・共通公開schemaは作らない。関連756 PASS、STRUCTURE_MAP_DELTA_PRESENT。

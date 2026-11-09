@@ -6337,3 +6337,19 @@ API `3c4e25e2fc7e52082324dfb9fd86645980188bd2`。親API `ad417b07f9bb9f4ebae8478
 本人の一人称表記を意味上のSELFと別に比較するよう修正。先行SYSTEM追加2指示は品質不足で完全撤回した。新作の均衡24行をfresh LoRAへ一回48更新すると、一人称6表記の保持は2/6→6/6。新22rawのCMEE採用は限定読取の再利用で16→20、旧22rawは同readerで16採用。最終132件の隔離SQL比較は旧48保存／18拒否、新60保存／6拒否、保存後0生成を確認した。 新Piece候補は通常未採用、通常selectorはOFF。GPUは元base／既存Analysis提供へ復元済み。限定TECHNICAL_CREDITで、正式商品品質credit0・正式受入れ0/3を維持する。
 
 [実測・限定・次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-narrator-evaluation-20261109)。
+
+
+<a id="piece-source-authoring-constraints-20261109"></a>
+## AR-04 原文由来の生成条件 — 5pathの地図差分
+
+**11/9・AR-04続行（`674b5225f841a7dd1d41cbbd88395d2acebb3e42`）：** 既存の本人評価frame・公開役割bindingを、原requestとPreparedRequestの再導出一致を確認したうえで欄別の生成条件へ投影し、設定された4B候補取得へ接続した。原文・SYSTEM・本文の採否検査は保持し、期待正文の注入・生成後修補・追加推論はない。固定affb重みの16材料（前回失敗2＋一人称6対照＋新規架空8）を各2条件で実生成し、同じCMEEの採用は11→14。評価述語欠落2と二欄の「まだ」欠落1を修復、一人称6対照は本文byte同一。氏名残存2は拒否を維持。隔離SQL96試行は旧33保存／15拒否、新42保存／6拒否、保存後0生成。新重み・通常selectorは未採用／OFF、GPUは元base／既存Analysisへ復元しhealth・前後control一致。一般品質・氏名抽象化・同版画像／通常統合・本人端末、AR-01反転と他ARは未完了。
+
+| Repository/path | 現責務 |
+|---|---|
+| API `ai/services/ai_inference/piece_model_source.py` | 再導出一致したsource requestから既存評価／公開役割を欄別投影し、設定済み4Bへ渡す |
+| API `ai/services/ai_inference/piece_v2_preview_service.py` | trusted requestと準備を直接／共有初回取得へ渡す。保存後再読は取得前return |
+| API `ai/tests/test_piece_model_authoring_constraints.py`（新規） | 元／補足・欄・位置・改変・曖昧性の条件投影 |
+| API `ai/tests/test_piece_model_authoring_application.py`（新規） | 設定provider・既定OFF・custom callback・同key共有・3plan SQL保存再読 |
+| API `.github/workflows/piece-b2b-isolated-postgres.yml` | 既存model検査へ新2testを追加 |
+
+公開DTO／DB／RNの追加pathなし。新test2pathを上記地図へ追加し、全repositoryの全blob意味監査は主張しない。関連15file756 PASS、STRUCTURE_MAP_DELTA_PRESENT。

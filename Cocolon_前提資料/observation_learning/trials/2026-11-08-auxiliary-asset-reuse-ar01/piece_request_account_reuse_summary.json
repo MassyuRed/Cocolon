@@ -685,7 +685,7 @@
         "conclusion": "success",
         "model_files": 9,
         "model_pass": 399,
-        "model_seconds": 25.0
+        "model_seconds": 25
       },
       "analysis": {
         "run": 42580879705,
@@ -1340,5 +1340,51 @@
     "evidence_filename": "Cocolon_CMEE_AR04_NarratorAndEvaluation4B_20261109.zip",
     "structure_delta": "STRUCTURE_MAP_DELTA_PRESENT",
     "formal_product_quality_credit": 0
+  },
+  "source_authoring_constraints_20261109": {
+    "api": "674b5225f841a7dd1d41cbbd88395d2acebb3e42",
+    "parent_api": "3c4e25e2fc7e52082324dfb9fd86645980188bd2",
+    "new_source_conditions": true,
+    "system_changed": false,
+    "source_or_raw_rewritten": false,
+    "fixed_weights": "affb6981ce5381b9006850c9b14859f27a4fe4cfecf09f6ef60dc4d5d417f297",
+    "materials": 16,
+    "previous_residuals": 2,
+    "narrator_controls": 6,
+    "new_fictional_sources": 8,
+    "piece_http": 32,
+    "final_control_http": 4,
+    "preparation_failure_control_http": 4,
+    "accepted_before": 11,
+    "accepted_after": 14,
+    "visible_repairs": 3,
+    "narrator_controls_byte_equal": 6,
+    "names_still_refused": 2,
+    "isolated_sql_attempts": 96,
+    "before_saved": 33,
+    "before_refused": 15,
+    "after_saved": 42,
+    "after_refused": 6,
+    "saved_regeneration": 0,
+    "tests": {
+      "files": 15,
+      "passed": 756,
+      "failed": 0,
+      "skipped": 0,
+      "warning": 1,
+      "seconds": 41.77
+    },
+    "new_training_updates": 0,
+    "source_and_raw_preserved": true,
+    "ordinary_selector": "OFF",
+    "weights_normally_adopted": false,
+    "live_db": 0,
+    "render_deploy": 0,
+    "rn_build": 0,
+    "native_image": 0,
+    "device": 0,
+    "formal_product_acceptance": 0,
+    "structure_delta": "STRUCTURE_MAP_DELTA_PRESENT",
+    "next": "written name to source-proved role; wider material and same-version image/normal integration"
   }
 }

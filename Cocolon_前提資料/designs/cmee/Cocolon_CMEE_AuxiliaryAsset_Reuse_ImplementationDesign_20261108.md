@@ -4,11 +4,11 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-09 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR01_UNRESOLVED_AR04_FINITE_PERSON_ACTION_SAVED_SQL_VERIFIED
+status: AR01_UNRESOLVED_AR04_SOURCE_GUIDANCE_SQL_VERIFIED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: AR-01
+current_next: AR-04
 runtime_effect_of_this_document: 0
 ---
 
@@ -230,6 +230,8 @@ Analysisの既存source adapter→semantic admission→compiler→唯一realizer
 
 ### 7.1 Piece
 
+**11/9・原文から成立した生成条件の回収：** 原requestと再導出したPreparedRequestの完全一致を確認し、既存本人評価frame・公開役割bindingをsource／欄／scalar位置を保持したprivate `control.authoring_constraints`へ投影する。原文・SYSTEM・期待正文・採否検査は変更せず、sourceの意味条件だけを作者へ渡す。設定された4B providerに限って通常preview／共有初回取得へ接続し、未対応は条件を捏造しない。独自callback、同key共有、保存後非生成再読、selector既定OFFは維持する。実効果・限界は§11と既存trialへ記録する。
+
 **11/9続行・本人の一人称と評価対象の伝達：** 変更は既存private model reader・その一人称検証・既存workflowを起点とする。`piece_model_source.SYSTEM_MESSAGE`の追加2指示は比較で不採用となったため完全撤回し、元ad417と同じSYSTEMを維持する。private model readerは意味上のactor=SELFを維持したまま、各欄に書かれた一人称を別の比較要素として保持する。同一欄の既に成立した本人継続でだけ、その直前の本人表記を省略読取へ用い、別欄からの本人表記借用・raw補修はしない。評価対象「は」の受理文法は拡張しない。公開型・DB・source資格・原入力／補足・S7／native経路の既存保護境界は変えない。 既存FOCUS文法が認定する原語順と終端copula組、およびnativeで成立済みの明記した同本人の隣接自己評価の主語省略を、model private読取へ限定接続した。native既定の意味保持契約は不変である。参照先・全scope・本人視点・元一人称・評価base／程度／肯否／時点／留保を独立照合し、先頭省略・にとって脱落・別field・OTHER・異なる本人表記・肯否変更等は拒否する。既存evaluation-reuse testの同作者省略を常時拒否する1期待だけを、このnative由来の正期待へ整合させた。同じ新22rawは16→20採用、旧22rawは最終readerでも16採用。未知の語義や意味欠落を許可する差分ではない。
 
 #### 2026-11-09 Piece 4B接続の実装差分（今回の実装正本）
@@ -361,7 +363,7 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 | AR-01 | 現naturalの主体・所有者・否定・時点・留保を、旧失敗・意味比較・共通原因分析で改善。EM-01a/b | 現6境界と正常な短文／省略で、同入力の誤読を解消または明確に減らし、自然さ・別題材・既成功・保存再読を保持。検出増加／無出力だけでは完了しない | 継続中。新24実生成の4版は通常不採用。c6555fd5で疑問符なしの確認質問の保存抜けを修復、250局所PASS。同24rawは旧24保存→新22保存／2拒否、受理本文不変。全体の意味修復は未完 |
 | AR-02 | 現naturalの任意問い・回答・訂正・撤回・frameの一往復。EM-02a/b、03b | 一点確認／skip／終了／本人続行、対象だけ更新、撤回後の残存意味、同版再読、プラン境界 | AR-01の全一般品質完成待ちにはしない。未開始 |
 | AR-03 | 適格履歴の意味ある利用。EM-03a/b | 同一／別場面・変化・無関係・訂正前を区別し、適切な履歴が今回へ効く。失効材料を使わない | 現related_contextを継承。未開始 |
-| AR-04 | Piece一般本文・単独伝達・refined・画像整合。PC-01a/b/c、02等 | 元の意味と条件・本人の一人称を保持し、単独で伝わる作品、適格補足の差、同じ採用画像の保存再読 | API3c4e25e2。本人の一人称表記を意味上のSELFと別に比較するよう修正。先行SYSTEM追加2指示は品質不足で完全撤回した。新作の均衡24行をfresh LoRAへ一回48更新すると、一人称6表記の保持は2/6→6/6。新22rawのCMEE採用は限定読取の再利用で16→20、旧22rawは同readerで16採用。最終132件の隔離SQL比較は旧48保存／18拒否、新60保存／6拒否、保存後0生成を確認した。 新Piece候補は通常未採用、通常selectorはOFF。GPUは元base／既存Analysis提供へ復元済み。限定TECHNICAL_CREDITで、正式商品品質credit0・正式受入れ0/3を維持する。 評価述語の欠落と氏名残存の2件、より広い材料での意味保持・本人の語り・公開時の役割表現、同版画像／通常統合・本人端末は残件。他ARも未完了で、今回の局所比較から一般品質成立へ広げない。 |
+| AR-04 | Piece一般本文・単独伝達・refined・画像整合。PC-01a/b/c、02等 | 元の意味と条件・本人の一人称を保持し、単独で伝わる作品、適格補足の差、同じ採用画像の保存再読 | 原文由来の生成条件を設定済み4B経路へ接続。固定affbで16材料を対比較し採用11→14、隔離SQLは旧33保存／15拒否→新42保存／6拒否、保存後0生成。氏名残存2は拒否。通常selector OFF、新候補通常未採用、画像／本番・端末は未完了 |
 | AR-05 | 分析の本人基準・役割／選択・記録間関係。AN-03a/b/c、04 | 原記録→意味→図／全文→両端根拠の対応、再出現／変化／不明の正しさ | 現Engine統合・保存済み成果を継承。並行可能。未開始 |
 | AR-06 | Emlis観測材料、訂正・削除・権利、長い蓄積と月次。EM-04/05、AN-02/06/08/10 | 本人sourceから材料を渡し、失効・分割範囲・当時版を保持。生成本文を本人事実にしない | AR-02/03/05の該当能力を利用。未開始 |
 | AR-07 | IF／Saved等の商品固有の残る意味保持責務。既存AN／PC残件 | 仮想・本人選択意向・観測を分離し、成立した経路で出力と保存を確認 | 既存商品の実装条件に従う。無断延期・新発売条件化をしない。未開始 |
@@ -426,6 +428,9 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 設計、実装、局所検証、実モデル、通常稼働、実DB／端末、正式受入れを分けて記録する。華恋の全文確認は、明白な不足をMashへ戻さない事前確認であり、本人の正式受入れを代行しない。
 
 ### 11.2 現在の進行欄
+
+**11/9・AR-04続行（`674b5225f841a7dd1d41cbbd88395d2acebb3e42`）：** 既存の本人評価frame・公開役割bindingを、原requestとPreparedRequestの再導出一致を確認したうえで欄別の生成条件へ投影し、設定された4B候補取得へ接続した。原文・SYSTEM・本文の採否検査は保持し、期待正文の注入・生成後修補・追加推論はない。固定affb重みの16材料（前回失敗2＋一人称6対照＋新規架空8）を各2条件で実生成し、同じCMEEの採用は11→14。評価述語欠落2と二欄の「まだ」欠落1を修復、一人称6対照は本文byte同一。氏名残存2は拒否を維持。隔離SQL96試行は旧33保存／15拒否、新42保存／6拒否、保存後0生成。新重み・通常selectorは未採用／OFF、GPUは元base／既存Analysisへ復元しhealth・前後control一致。一般品質・氏名抽象化・同版画像／通常統合・本人端末、AR-01反転と他ARは未完了。 関連15file756 PASS、既存warning1、FAIL／SKIP0。
+
 
 2026-11-09現在：API `3c4e25e2fc7e52082324dfb9fd86645980188bd2`。本人の一人称表記を意味上のSELFと別に比較するよう修正。先行SYSTEM追加2指示は品質不足で完全撤回した。新作の均衡24行をfresh LoRAへ一回48更新すると、一人称6表記の保持は2/6→6/6。新22rawのCMEE採用は限定読取の再利用で16→20、旧22rawは同readerで16採用。最終132件の隔離SQL比較は旧48保存／18拒否、新60保存／6拒否、保存後0生成を確認した。 新Piece候補は通常未採用、通常selectorはOFF。GPUは元base／既存Analysis提供へ復元済み。限定TECHNICAL_CREDITで、正式商品品質credit0・正式受入れ0/3を維持する。 評価述語の欠落と氏名残存の2件、より広い材料での意味保持・本人の語り・公開時の役割表現、同版画像／通常統合・本人端末は残件。他ARも未完了で、今回の局所比較から一般品質成立へ広げない。 次は本人視点・評価述語と名前抽象化の残差を既存の意味保持／商品経路で改善し、広い材料・同版画像／通常統合を確認する。同じ教材の追加周回や候補の通常採用へ自動進行しない。 [全結果・次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-narrator-evaluation-20261109)。
 

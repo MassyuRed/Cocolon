@@ -2285,3 +2285,19 @@ b884初版の132試行（両版各48保存／18拒否）と、先行prompt比較
 新Piece候補は通常未採用、通常selectorはOFF。GPUは元base／既存Analysis提供へ復元済み。限定TECHNICAL_CREDITで、正式商品品質credit0・正式受入れ0/3を維持する。 評価述語の欠落と氏名残存の2件、より広い材料での意味保持・本人の語り・公開時の役割表現、同版画像／通常統合・本人端末は残件。他ARも未完了で、今回の局所比較から一般品質成立へ広げない。 次は本人視点・評価述語と名前抽象化の残差を既存の意味保持／商品経路で改善し、広い材料・同版画像／通常統合を確認する。同じ教材の追加周回や候補の通常採用へ自動進行しない。
 
 [source分離・実本文・原本・限定](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-narrator-evaluation-20261109)。
+
+
+<a id="piece-source-authoring-constraints-20261109"></a>
+## 47. 補助経路活用AR-04 — 原文の評価・留保を4Bの生成条件へ接続
+
+**11/9・AR-04続行（`674b5225f841a7dd1d41cbbd88395d2acebb3e42`）：** 既存の本人評価frame・公開役割bindingを、原requestとPreparedRequestの再導出一致を確認したうえで欄別の生成条件へ投影し、設定された4B候補取得へ接続した。原文・SYSTEM・本文の採否検査は保持し、期待正文の注入・生成後修補・追加推論はない。固定affb重みの16材料（前回失敗2＋一人称6対照＋新規架空8）を各2条件で実生成し、同じCMEEの採用は11→14。評価述語欠落2と二欄の「まだ」欠落1を修復、一人称6対照は本文byte同一。氏名残存2は拒否を維持。隔離SQL96試行は旧33保存／15拒否、新42保存／6拒否、保存後0生成。新重み・通常selectorは未採用／OFF、GPUは元base／既存Analysisへ復元しhealth・前後control一致。一般品質・氏名抽象化・同版画像／通常統合・本人端末、AR-01反転と他ARは未完了。
+
+原requestを再導出したPreparedRequestとの一致で束縛し、既存`piece_model_source_plan`の本人評価・公開役割を欄・source・scalar位置ごとに投影する。設定済みapplication providerだけに渡し、独自callbackの単引数、同key初回共有、保存済み非生成再読を維持する。対象5path・関連15file756 PASS／41.77秒、既存warning1、FAIL／SKIP0。新2file22 PASSはこの756の部分集合で合算しない。既知62失敗の全件修復・再検証は今回行っていない。
+
+32本文は16材料×2条件であり独立32題材ではない。原SYSTEM・固定affb重み・原request・原文を揃え、追加条件以外を変えず比較した。新規架空8は未学習比較材料だが、全体16には既使用8を含むため一般品質率・正式受入れへ換算しない。旧6一人称対照はbyte同一。本文変化5組のうち意味修復3・正常な終止差1・氏名残存の別表現1を全文確認し、他11組は同一だった。氏名残存は元の失敗と新題材の各1で、両方拒否した。
+
+隔離PGlite・合成Authで、記録済み各rawを新しい等価source ID／日時へ厳密再bindした96試行。旧11本文×3＝33保存／5本文×3＝15拒否、新14本文×3＝42保存／2本文×3＝6拒否。保存75はquota各1、原source／Emlis不変・同／新service非生成再読を確認。GPU時のoriginal PreparedRequestを実Supabaseへ保存した証明ではない。今回の通常例は新たなvisual変更／native PNG成功を主張しない。
+
+実行準備の初版は任意argvの扱いで生成前停止、次版は元提供コードにPiece専用adapter引数がないため起動不成立となった。後者はPiece0call・自然Emlis／Analysisの前後control計4callを記録し、元PID34934へ復元、両control bytes一致・health正常。既成功の提供コードa8fdf…を明示し`--help`を停止前に確認した最終版ではPiece32＋前後control4＝36HTTPが全200／stop。元PID35034へ復元し、元source／旧Analysis重み／認証値／起動引数不変、両control bytes一致・health正常を確認した。追加学習0、固定affb重み不変。最終HTTP所要合計158.949548秒は起動・保持・総請求と別で、総請求／通常原価は未測定。失敗準備を成功分へ混ぜず、raw／修正前後scriptをprivate原本へ残す。
+
+次は未解消の氏名抽象化と、広い材料・同版画像／通常統合。今回だけで新重みや通常selectorを有効化しない。AR-01反転と他AR、本人端末・正式受入れは継続残件。
