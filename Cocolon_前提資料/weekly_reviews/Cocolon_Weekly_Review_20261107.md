@@ -2399,3 +2399,20 @@ JS181 PASS／17.35秒。新iOS [run42621869347](https://github.com/MassyuRed/Coc
 最終17file940 PASS／47.98秒・既存warning1、FAIL／SKIP0。最終headのPiece CI42635458286はcompleted／success（2026-11-09T14:35:18Z）、job129222298597のmodel17fileも940 PASS／35.39秒・既存warning1。Analysisは最終headの変更pathでは起動対象外で、同headの成功は主張しない。二試行HTTP実時間202.872029秒＋81.705099秒、起動／復元計約67.068222秒、総保持・請求／通常原価は未測定。元提供PID36489へ復元しhealthと自然Emlis／Analysis前後response bytes一致。e924重み・元source／Analysis／keys／argv不変。
 
 [全実結果・由来・残件](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-finite-action-source-conditions-20261109)、private原本`Cocolon_CMEE_AR04_FiniteAction_SourceConditions_20261109.zip`。通常未採用・selector OFF、Render／実DB／RN／signed build／配布／今回native画像／本人端末0。前回の同版全面画像1作品と旧V4失敗は継承。限定TECHNICAL_CREDIT、正式商品品質credit0・正式受入れ0/3。今回の全文有限動作条件と保存結果を継承し、評価の過去時点・未決定対象・混在文章の意味保持を改善する。同じ条件追加の周回や保存e924の完了48更新を再実行せず、教示と意味単位の不足へ戻る。模型作りの名詞形対応外はmodel誤生成と分けてsource側へ残す。一般再構成・同版画像／通常統合・本人端末、新候補の通常採用は未完了。AR-01の役割反転と他ARの新規活用も継続残件。
+
+<a id="piece-temporal-reservation-learning-20261109"></a>
+## 51. 補助経路活用AR-04 — 時点・留保の48更新と保持退行、第二配分はCPUまで
+
+**11/9開始・AR-04最新：** API39e31584は不変。時点対照と未決定対象の新18行＋保持6行でfresh一回48更新し、同26材料は21→新8c4c15baの22採用。ただし既使用18は15→14、新8は6→8。過去評価・留保対象の4例を修復した一方、受動文の本人表記と本人補足2例が退行し、新重みは通常不採用。隔離SQL156は旧63保存／15拒否、新66保存／12拒否、保存後0生成。開始時PID36489の元提供を同引数の新PID37504へ復元、healthとEmlis／Analysis前後control一致。保持配分を変えた第二24行はCPU準備・検査までで、Runpod転送が自動承認reviewで拒否されGPU未実施。製品source・接続変更0、selector OFF、一般品質・本人端末・AR全体は未完了。
+
+新18行は過去6／非過去6の6対照組と未決定6、旧ROLEFIT07–12の6を保持した24行で、六一人称は各4行。全24targetのCPU採用・旧作者禁止・独立全文確認と18反例拒否後、既存trainerのfresh configから一回48更新した。旧e924 tensorを学習初期値へ読まず、内部195.231秒／外側197.151217秒、保存非学習reload一致。optimizer／RNG未保存で厳密途中resumeではない。
+
+旧18基準は全messages／request／revisionが一致する記録を再利用し、新8基準＋新26候補＋control4の38 HTTPは全200／stop。全26は21→22、内訳の旧18は15→14・新8は6→8を分ける。時点／留保の4修復と、受動文の本人表記・本人補足slot混入／重複の3退行があり、新8c4c15baは通常不採用。新8は教材本文を見ずに作成したが部分phrase共有がありlexically_disjoint=false、第二配分からは既使用の同8で一般化を主張しない。
+
+最終156隔離SQLは旧63保存15拒否／新66保存12拒否、成功129の本文・recipe等／quota各1／原入力・Emlis不変、保存後同／新service0生成再読、拒否27のrecord・quota不変を確認。実Supabase・GPU原PreparedRequest identity保存の実績ではない。開始時36489の元提供を同引数の新37504へ復元しhealth・Emlis／Analysis前後response bytes一致、元source／Analysis／keys／argv／e924不変。runner443.439517秒・HTTP187.502366秒、総保持／総請求・通常原価は未測定。
+
+退行を受け、過去6＋未決定2＋旧SCOPEFIT原入力6／補足6＋ROLEFIT4の第二24行をCPUで準備。全source／PreparedRequest／target24一致、row完全一致21・current39条件だけrebind3、六一人称分類5／5／4／4／3／3。全24target採用・14変異拒否と独立確認まで完了。配分が単独原因と証明されたとはしない。
+
+既存Runpod Jupyterへ架空教材24行・同26評価wire・runnerを送るuploadは自動承認reviewで拒否され、架空由来の再確認後も転送は成立しなかった。以後の回避・追加試行は行わず、第二fit／候補生成／SQLは未実施。次のfresh48更新・30 HTTP・156 SQLは明示確認待ちの計画で、新しい第二重みはない。
+
+[全結果・残差・未実施](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-temporal-reservation-learning-20261109)、private原本`Cocolon_CMEE_AR04_TemporalReservation_Learning4B_20261109.zip`。API39e31584の前回940 PASS／Piece CI成功を継承、今回source変更0・新pytest／CI0。本番／実DB／RN／build／配布／native画像／本人端末・通常採用0。STRUCTURE_MAP_DELTA_NONE（製品source・接続・復元後の通常設定不変）、限定TECHNICAL_CREDIT、正式商品品質credit0・正式受入れ0/3。初回8c4c15baの退行を理由に通常採用せず、保存済みの原出力・48更新を繰り返さない。保持配分を改めた第二24行（過去6／未決定2／原入力6／本人補足6／役割4）はCPU検査済みで、既存Runpod Jupyterへ架空教材・評価wire・runnerを渡す操作の明示確認待ち。転送が成立した場合だけ、既存trainerのfresh一回48更新、同26候補＋control4の30 HTTPと156隔離SQLへ進む。これは未実施の次作業で、成功を保証せず、第三の学習・自動再試行へ進まない。模型作りのsource資格外、一般再構成・同版画像／通常統合・本人端末、AR-01反転と他ARの残件を維持する。

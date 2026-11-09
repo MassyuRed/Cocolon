@@ -1762,5 +1762,228 @@
     "formal_product_credit": 0,
     "formal_acceptance": "0/3",
     "next": "今回の全文有限動作条件と保存結果を継承し、評価の過去時点・未決定対象・混在文章の意味保持を改善する。同じ条件追加の周回や保存e924の完了48更新を再実行せず、教示と意味単位の不足へ戻る。模型作りの名詞形対応外はmodel誤生成と分けてsource側へ残す。一般再構成・同版画像／通常統合・本人端末、新候補の通常採用は未完了。AR-01の役割反転と他ARの新規活用も継続残件。"
+  },
+  "temporal_reservation_learning_20261109": {
+    "schema": "cocolon.cmee.ar04.temporal_reservation_learning.v1",
+    "started_date": "2026-11-09 JST",
+    "completed_and_collected": "2026-11-10 early JST; actual timestamps retained privately",
+    "api_commit": "39e315845629622f2bb4d3dd3a7e9d53cf5569fd",
+    "docs_base": "e3cbc88af3eb795460686e46585d5f316ca42d89",
+    "product_source_changes": 0,
+    "structure_delta": "NONE_PRODUCT_SOURCE_CONNECTION_AND_RESTORED_NORMAL_SETTINGS_UNCHANGED",
+    "initial_teaching": {
+      "data_sha256": "e0d00a21e5a164ebd7c8ca081c24701828a3c80d44fa890f8db072efd19510bc",
+      "rows": 24,
+      "new_rows": 18,
+      "new_past_rows": 6,
+      "new_nonpast_rows": 6,
+      "new_undecided_rows": 6,
+      "retained_ROLEFIT07_12": 6,
+      "narrator_counts": [
+        4,
+        4,
+        4,
+        4,
+        4,
+        4
+      ],
+      "cpu_targets_admitted": 24,
+      "rejected_mutations": 18,
+      "old_authors_forbidden": true,
+      "independent_full_read": true,
+      "memo_only": true
+    },
+    "evaluation": {
+      "retained_cases": 18,
+      "initial_new_cases": 8,
+      "full_source_overlap": false,
+      "lexically_disjoint": false,
+      "partial_phrase_overlap": {
+        "teaching": "TIMEFIT01",
+        "evaluation": "TEMPHELD08",
+        "complete_sources_and_constructions_differ": true
+      },
+      "new8_created_without_teaching_body": true,
+      "new8_unseen_in_second_trial": false,
+      "generalization_claim": false
+    },
+    "initial_fit": {
+      "updates": 48,
+      "training_initial": "FRESH_BASE_NEW_RANDOM_LORA_CONFIG_ONLY",
+      "old_adapter_weights_read": false,
+      "training_rows": 24,
+      "inside_trainer_seconds": 195.231,
+      "outside_trainer_seconds": 197.1512165288441,
+      "weights_sha256": "8c4c15bab800a2b4c640b584343f5498a6fc9b7322dd0992961e3f2e2e97fdda",
+      "saved_reload_tensor_identity": true,
+      "checkpoint_updates": [
+        24
+      ],
+      "optimizer_and_rng_saved": false,
+      "normal_adoption": false
+    },
+    "actual": {
+      "http_calls": 38,
+      "new_piece_calls": 34,
+      "new_baselines": 8,
+      "candidates": 26,
+      "controls": 4,
+      "reused_baselines": 18,
+      "represented_comparison_outputs": 52,
+      "all_http_200_stop": true,
+      "meaning_by_cohort": {
+        "all26": {
+          "baseline": {
+            "UNAVAILABLE": 5,
+            "GENERATED": 21
+          },
+          "candidate": {
+            "GENERATED": 22,
+            "UNAVAILABLE": 4
+          }
+        },
+        "retained18": {
+          "baseline": {
+            "UNAVAILABLE": 3,
+            "GENERATED": 15
+          },
+          "candidate": {
+            "GENERATED": 14,
+            "UNAVAILABLE": 4
+          }
+        },
+        "heldout8": {
+          "baseline": {
+            "UNAVAILABLE": 2,
+            "GENERATED": 6
+          },
+          "candidate": {
+            "GENERATED": 8
+          }
+        }
+      },
+      "gain_cases": [
+        "FRESH01",
+        "ROLEHELD01",
+        "TEMPHELD01",
+        "TEMPHELD03"
+      ],
+      "regression_cases": [
+        "FRESH07",
+        "FRESH13",
+        "FRESH14"
+      ],
+      "model_body_changed_pairs": 17,
+      "model_body_identical_pairs": 9,
+      "source_unavailable_remains": [
+        "FRESH03"
+      ]
+    },
+    "saved_sql": {
+      "trials": 156,
+      "saved_sql": {
+        "baseline": {
+          "REJECTED_BEFORE_PREVIEW": 15,
+          "SAVED_REPLAYED": 63
+        },
+        "candidate": {
+          "SAVED_REPLAYED": 66,
+          "REJECTED_BEFORE_PREVIEW": 12
+        }
+      },
+      "no_postsave_generation": true,
+      "actual_model_calls_in_this_script": 0,
+      "engine": "PGlite 0.5.8",
+      "tiers": [
+        "free",
+        "plus",
+        "premium"
+      ],
+      "quota_per_saved": 1,
+      "refused_record_quota_delta": 0,
+      "original_emlis_unchanged": true,
+      "identity_scope": "recorded raw strictly rebound to equivalent fresh synthetic IDs/datetime; isolated SQL, not GPU-original identity live Supabase"
+    },
+    "runtime": {
+      "original_pid": 36489,
+      "restored_same_arguments_new_pid": 37504,
+      "health": true,
+      "emlis_analysis_control_raw_equal": true,
+      "source_analysis_keys_argv_old_e924_unchanged": true,
+      "runner_seconds": 443.43951740814373,
+      "http_seconds": 187.502366,
+      "boot_seconds_total": 49.052457,
+      "total_gpu_holding_cost": "UNKNOWN",
+      "selector": "OFF"
+    },
+    "balanced_cpu_preparation": {
+      "data_sha256": "dfb73805876dc866141d3c53668695279e91f8ca44c46c852205db6ebc4692cd",
+      "rows": 24,
+      "first_trial_past_rows": 6,
+      "first_trial_reservation_rows": 2,
+      "previous_original_scope_rows": 6,
+      "previous_refined_scope_rows": 6,
+      "previous_role_rows": 4,
+      "source_prepared_target_preserved": 24,
+      "row_objects_exact": 21,
+      "current39_authoring_constraints_rebound": [
+        "SCOPEFIT03",
+        "SCOPEFIT04",
+        "SCOPEFIT05"
+      ],
+      "narrator_counts": [
+        5,
+        5,
+        4,
+        4,
+        3,
+        3
+      ],
+      "cpu_targets_admitted": 24,
+      "rejected_mutations": 14,
+      "independent_full_read": true,
+      "typed_refined_teaching_not_live_qualification": true,
+      "new_evaluation_sources_or_failed_raw_targets": 0,
+      "planned_fresh_updates": 48,
+      "planned_http_calls": 30,
+      "planned_comparison_outputs": 52,
+      "planned_sql_trials": 156,
+      "actual_uploads": 0,
+      "actual_training_updates": 0,
+      "actual_model_calls": 0,
+      "actual_sql_trials": 0,
+      "new_weights_exist": false
+    },
+    "transfer_boundary": {
+      "destination": "existing Runpod Jupyter",
+      "payload": "runner + fictional24 teaching + same26 evaluation wire only",
+      "automatic_approval_review": "REJECTED_PRIVATE_EVALUATION_EXTERNAL_TRANSFER",
+      "fictional_provenance_rechecked": true,
+      "transfer_executed": false,
+      "pending": "Explicit destination and payload confirmation",
+      "review_rejections": 2,
+      "same_payload_retry_after_audit": 1,
+      "attempts_after_second_rejection": 0,
+      "workaround": false
+    },
+    "validation": {
+      "prior_api_tests_passed": 940,
+      "prior_piece_ci_success": true,
+      "new_pytest_runs": 0,
+      "new_ci_runs": 0,
+      "dataset_cpu_checks_are_not_product_tests": true
+    },
+    "limits": [
+      "Initial fit repairs four cases but regresses three retained cases; normal candidate not adopted",
+      "Second balanced fit/30 HTTP/156 SQL not executed after automatic approval rejection",
+      "Model-building nominal source remains unsupported",
+      "General prose, new same-version native images, ordinary integration and device acceptance incomplete",
+      "AR01 role inversion and other AR units incomplete"
+    ],
+    "evidence_filename": "Cocolon_CMEE_AR04_TemporalReservation_Learning4B_20261109.zip",
+    "primary_outcome": "LIMITED_TECHNICAL_CREDIT",
+    "formal_product_credit": 0,
+    "formal_acceptance": "0/3",
+    "next": "初回8c4c15baの退行を理由に通常採用せず、保存済みの原出力・48更新を繰り返さない。保持配分を改めた第二24行（過去6／未決定2／原入力6／本人補足6／役割4）はCPU検査済みで、既存Runpod Jupyterへ架空教材・評価wire・runnerを渡す操作の明示確認待ち。転送が成立した場合だけ、既存trainerのfresh一回48更新、同26候補＋control4の30 HTTPと156隔離SQLへ進む。これは未実施の次作業で、成功を保証せず、第三の学習・自動再試行へ進まない。模型作りのsource資格外、一般再構成・同版画像／通常統合・本人端末、AR-01反転と他ARの残件を維持する。"
   }
 }

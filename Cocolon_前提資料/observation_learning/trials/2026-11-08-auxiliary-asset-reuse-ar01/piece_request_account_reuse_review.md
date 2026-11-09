@@ -571,3 +571,44 @@ JS181 PASS／17.35秒。新iOS [run42621869347](https://github.com/MassyuRed/Coc
 実行済みwire／raw／保存再読／両途中失敗と最終の由来はprivate `Cocolon_CMEE_AR04_FiniteAction_SourceConditions_20261109.zip`へ保存する。新重みの通常採用、selector有効化、本番Render／実DB／RN／署名build／配布、今回のnative画像／本人端末確認は0。前回同版全面画像1作品の成功と旧V4別試験失敗は継承し、今回の新規画像成功へ換算しない。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT、正式商品品質credit0・正式受入れ0/3。
 
 今回の全文有限動作条件と保存結果を継承し、評価の過去時点・未決定対象・混在文章の意味保持を改善する。同じ条件追加の周回や保存e924の完了48更新を再実行せず、教示と意味単位の不足へ戻る。模型作りの名詞形対応外はmodel誤生成と分けてsource側へ残す。一般再構成・同版画像／通常統合・本人端末、新候補の通常採用は未完了。AR-01の役割反転と他ARの新規活用も継続残件。
+
+<a id="piece-temporal-reservation-learning-20261109"></a>
+## 2026-11-09開始 時点・未決定対象の一回学習 — 局所修復と保持退行
+
+**11/9開始・AR-04最新：** API39e31584は不変。時点対照と未決定対象の新18行＋保持6行でfresh一回48更新し、同26材料は21→新8c4c15baの22採用。ただし既使用18は15→14、新8は6→8。過去評価・留保対象の4例を修復した一方、受動文の本人表記と本人補足2例が退行し、新重みは通常不採用。隔離SQL156は旧63保存／15拒否、新66保存／12拒否、保存後0生成。開始時PID36489の元提供を同引数の新PID37504へ復元、healthとEmlis／Analysis前後control一致。保持配分を変えた第二24行はCPU準備・検査までで、Runpod転送が自動承認reviewで拒否されGPU未実施。製品source・接続変更0、selector OFF、一般品質・本人端末・AR全体は未完了。
+
+開始点はAPI `39e315845629622f2bb4d3dd3a7e9d53cf5569fd`／前提資料`e3cbc88af3eb795460686e46585d5f316ca42d89`。前回の[全文有限動作の生成条件](#piece-finite-action-source-conditions-20261109)を継承し、旧rawを教師化せず、残った時点・留保対象を対照教材から唯一の4B作者へ教える。製品source・接続・SYSTEM・採否検査と通常selectorは変更しない。11/9に開始した作業として記録し、収録原本の実行終了・回収は11/10未明に跨る。
+
+### 教材・評価と事前確認
+
+独立新作18行は本人評価の過去6／非過去6（6組の時点対照）と、明記役割・希望・評価・未決定対象を持つ6行。旧ROLEFIT07–12の6行を保持し、計24行、私／わたし／僕／ぼく／俺／おれの代表分類は各4行。dataset SHA256は`e0d00a21e5a164ebd7c8ca081c24701828a3c80d44fa890f8db072efd19510bc`。全24targetのCPU採用、旧作者4関数呼出し禁止と独立の全文確認、時点／未決定対象を変えた18反例の拒否を確認した。前回評価18sourceや失敗rawを新targetへ流用しない。
+
+新8評価は別担当が教材本文を見ずに作成し、後で全sourceの非重複を確認した。ただしTIMEFIT01とTEMPHELD08には一部の句が共通し、全文source・構文・対象時点は異なるが`lexically_disjoint=false`である。語彙独立や広い一般化を主張しない。第二配分から見ると同8は初回で既使用であり、新たな未見8評価にはしない。
+
+### 初回の実学習・本文と保持退行
+
+既存trainer／serving sourceを変更せず、fresh configから新LoRAを一回48更新。旧e924 tensorを学習初期値へ読まず、trainer exit0、内部195.231秒／外側197.151217秒、保存非学習reload一致を確認した。24更新checkpointも保存したがoptimizer／RNG未保存で厳密途中resumeではない。新weight SHA256は`8c4c15bab800a2b4c640b584343f5498a6fc9b7322dd0992961e3f2e2e97fdda`。
+
+基準は同18の旧e924 rawを全messages／PreparedRequest／revisionが一致する記録から再利用し、新8基準を実生成。新候補26＋前後control4を合わせて新38 HTTP、全200／stop。比較は同26×旧新2＝52 Piece応答であり、記録再利用18を新規HTTPへ加算しない。
+
+全26の採用21→22に対し、既使用18は15→14、新8は6→8。旧2例の過去評価／未決定対象と、新8内の過去肯定／否定評価2例を修復した。一方、既成功の受動文で本人表記が欠け、本人補足2例では元／回答slotの混入・結合重複が生じ、新たな拒否3例が残った。模型作り1例は既存source資格外を維持する。本文17組変化／9組同一。4改善と3退行の総計だけで一般改善と呼ばず、8c4c15baは通常不採用・selector OFFとする。
+
+### 初回の隔離保存・再読と復元
+
+同26×旧新2×Free／Plus／Premium＝156試行は、旧63保存／15拒否、新66保存／12拒否。成功129は保存版本文・recipe等一致、quota各1、原入力／Emlis不変、保存後model／旧作者0生成の同／新service再読。拒否27は新record・quota不変を確認した。記録済みrawを等価な新しい合成source ID／日時へ厳密再bindしたPGlite・合成Auth／SQL callbackの既存通常owner検証で、実Supabase・GPU原PreparedRequest identity保存の成立ではない。
+
+初回runner443.439517秒、HTTP187.502366秒、旧候補／新候補／元提供復元の起動計49.052457秒。実GPU RTX4000 Ada。開始時PID36489の元提供を同引数の新PID37504へ復元し、health正常、自然Emlis／Analysis前後response bytes一致、元serving source・既存Analysis重み・認証値・起動引数・旧e924不変を確認。GPU総保持・総請求・通常原価は未測定。
+
+### 第二配分のCPU準備と、未実施の転送／GPU
+
+初回の全24教師がmemo一欄で、受動／本人補足の保持が退行した実結果を受け、同じ教材の再実行ではなく、既存保持教材の配分を変えた24行をCPUで準備した。教師配分が単独原因と証明されたとはしない。初回の過去評価6・未決定2に、前回SCOPEFITの原入力6／本人補足6とROLEFIT07–10の4を合わせる。source／PreparedRequest／targetは24/24同一、row object完全一致は21/24。SCOPEFIT03／04／05だけcurrent39のauthoring_constraintsをrebindした。新しい評価sourceや失敗rawをtargetへ追加しない。語り手分類は5／5／4／4／3／3で、初回の各4行と区別する。typed refined教示資格は実Q2／SQL資格・商品品質の代用ではない。
+
+第二dataset SHA256は`dfb73805876dc866141d3c53668695279e91f8ca44c46c852205db6ebc4692cd`。全24targetのCPU採用と、時点6／元回答slot混入6／未決定対象2の14反例拒否、独立の原文／target確認まで完了した。
+
+既存Runpod Jupyterへrunner・架空教材24行・同26評価wireだけを渡すZIPのuploadは、自動承認reviewによりprivate評価の外部転送として拒否された。架空由来の再確認後も拒否され、実転送・第二学習・第二候補生成・第二SQLは0。これ以降の転送回避・追加試行は行わず、送信先と3fileの内容を明示した確認待ちとする。次のfresh48更新／新候補26＋control4の30 HTTP／156 SQLは計画であり実績ではない。新しい第二重みは存在せず、通常提供は復元済みPID37504のまま。
+
+### 現在地と次
+
+初回のraw／48更新／156SQLと、第二配分の未実行教材・CPU検査・拒否事実は別原本としてprivate `Cocolon_CMEE_AR04_TemporalReservation_Learning4B_20261109.zip`へ保存する。API39e31584の前回940 PASSとPiece CI成功は継承、今回製品source変更0のため新pytest／CIは実行していない。署名build／配布・今回native画像／本人端末、本番Render／実DB、通常採用は0。前回の全面画像1作品と旧V4別試験失敗を継承する。STRUCTURE_MAP_DELTA_NONE（製品source・接続責務・復元後の通常設定に差分なし）。限定TECHNICAL_CREDIT、正式商品品質credit0・正式受入れ0/3。
+
+初回8c4c15baの退行を理由に通常採用せず、保存済みの原出力・48更新を繰り返さない。保持配分を改めた第二24行（過去6／未決定2／原入力6／本人補足6／役割4）はCPU検査済みで、既存Runpod Jupyterへ架空教材・評価wire・runnerを渡す操作の明示確認待ち。転送が成立した場合だけ、既存trainerのfresh一回48更新、同26候補＋control4の30 HTTPと156隔離SQLへ進む。これは未実施の次作業で、成功を保証せず、第三の学習・自動再試行へ進まない。模型作りのsource資格外、一般再構成・同版画像／通常統合・本人端末、AR-01反転と他ARの残件を維持する。
