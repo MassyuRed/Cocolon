@@ -166,7 +166,7 @@ tap時の表示回答event_idを捕捉し、savedInputは従来savedInputId／ex
 
 ### 検証と反映
 
-最終15suite1512 PASS／18.645681秒・FAIL／SKIP0。既存CIと同じMetro bundle検査1件は対象外。新UI45件、client／hostの新旧135件を含み、重複実行は加算しない。標準の限定React環境にMetroが無いため、既存CI同様にbundle検査1件をtest-skip-patternで対象外とした。初回のclient host1失敗はVM由来Arrayのprototypeを直接比較したtestの誤りで、既存copy helperへ直し製品sourceを変えず最終検証した。初回logと依存不足logはprivate記録へ保全。前回API native11対象外・既存161失敗、RN native V4既存19失敗は今回解消したとしない。
+最終15suite1512 PASS／18.645681秒・FAIL／SKIP0。既存CIと同じMetro bundle検査1件は対象外。新UI45件、client／hostの新旧135件を含み、重複実行は加算しない。標準の限定React環境にMetroが無いため、既存CI同様にbundle検査1件をtest-skip-patternで対象外とした。初回のclient host1失敗はVM由来Arrayのprototypeを直接比較したtestの誤りで、既存copy helperへ直し製品sourceを変えず最終検証した。初回VM比較logはprivate記録へ保全。Metro不足の初回実行は会話内tool outputのみでraw log未保管、最終検査では明示対象外。前回API native11対象外・既存161失敗、RN native V4既存19失敗は今回解消したとしない。
 
 コード7fileは全remote bytes／親／変更集合／head読戻し一致。既存Piece CIへmodal path／新testを追加し、新workflowは作らない。[RN CI42558430844](https://github.com/MassyuRed/Cocolon/actions/runs/42558430844)は同じ4a103688で実行中、成功未確定。製品source3／既存test2／新test1／既存CI1だけで、共用hook・Input／履歴caller・PieceCreateScreen／Controller／MainTabs recoveryを再実装しない。
 
