@@ -2431,3 +2431,14 @@ JS181 PASS／17.35秒。新iOS [run42621869347](https://github.com/MassyuRed/Coc
 156隔離SQLは旧63保存15拒否／新72保存6拒否、成功135の本文・recipe等／quota各1・原入力／Emlis不変、保存後同／新service0生成再読、拒否21のrecord・quota不変を確認。実Supabase／GPU原identity保存の証明ではない。初回156との回数合算はしない。runner405.000295秒・HTTP147.534705秒、候補起動／復元計32.030024秒、総保持／総請求・通常原価は未測定。開始時37504の元提供を同引数の新40494へ復元、healthとEmlis／Analysis前後response bytes一致、元source／Analysis／keys／argv／e924不変。
 
 [全実結果・未判定と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-approved-balanced-temporal-learning-20261110)、private原本`Cocolon_CMEE_AR04_BalancedTemporalScope_Learning4B_20261110.zip`。API39・製品source／接続は不変、新pytest／CI0、前回940 PASSとPiece CI成功は継承。本番／実DB／RN／build／配布／今回native画像／本人端末・通常採用0。STRUCTURE_MAP_DELTA_NONE、限定TECHNICAL_CREDIT、正式商品品質credit0・正式受入れ0/3。承認された第二配分の48更新・同26比較・156隔離SQLは完了し、自動再実行や第三の追加学習は行わない。保存済み5b1de6c9候補と全52本文を継承し、既存のqualified FOCUS／S7 ownerで、source資格を満たす希望文の正当な主語「が」を現readerが未判定にする境界と、読点を含む表現の自然さを別に解消する。model側の限定読取が次の検討範囲であり、source資格拡張や修正はまだ実装していない。意味保持と未判定を同一視せず、広い材料の意味・単独伝達、同版本文／画像・通常統合・本人端末へ進める。模型作りのsource資格外、AR-01の役割反転と他ARの残件を維持し、通常採用・本番反映へ自動進行しない。
+
+<a id="piece-qualified-focal-ga-reader-20261110"></a>
+## 53. 補助経路AR-04 — 保存rawの明示主語「が」を既存S7へ限定接続
+
+**11/10・AR-04最新：** 保存済み5b1de6c9の同26rawを追加生成なしで再受領し、CMEE採用24→25。source資格済みFOCALの非過去・推量／外側scopeなしの希望文だけ、明示SELF「が」の直接語順を既存S7のmodel専用比較へ接続した。旧24本文はbyte一致、source資格外1例は不変。新78隔離SQLは75保存／3拒否（比較元は記録済み72／6）、保存後0生成。追加学習・重み変更0。「が、」の読点によるやや不自然な強調は未修復で、文章品質改善とは分ける。通常重み未採用／selector OFF、広い文章品質・同版画像／通常統合・本人端末・AR全体は未完了。
+
+API `c9e9938981c88e811bde1970725dc3dc35b2ae26`は既存S7 policy／既存prose testの2pathだけ。資格済みFOCAL・非過去・modal／scopeなし・既知wishの肯否と文体組に限定し、完全な主体／対象／述語・同欄参照／留保・公開役割を照合する。source／共有readerの文法、prompt／raw、native既定は不変。FRESH12だけの未判定を解消、FRESH03は同理由で拒否。root・独立担当が26source／rawと補足4を全文確認、旧24本文byte同一、CPU9変異拒否。読点の自然さを修復したとは扱わない。
+
+今回実施したSQLは新候補26×3planの78だけで75保存／3拒否。旧記録78の72／6と比較し、今回156実行へ加算しない。FRESH12の3planだけ新規保存へ到達し、quota各1・保存後同／新service0生成再読と拒否record／quota不変、原入力／Emlis不変を確認。実DB／本人端末の証明ではない。焦点145 PASS／4.87秒、最終17file996 PASS／72.40秒・既存warning1、Piece CI42709594596／Analysis CI42709594021は全工程success、Piece model17file996 PASS／58.98秒。
+
+追加生成／学習／GPU実行0、通常重み未採用／selector OFF。本番／実DB／RN／build／今回画像／本人端末0、旧§52の学習48・実30 HTTP・156SQLと復元は履歴保持。STRUCTURE_MAP_DELTA_NONE（既存owner内比較条件のみ、入口／責務／公開・保存契約不変）、限定TECHNICAL_CREDIT・正式商品品質credit0・正式受入れ0/3。[全結果・範囲・次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-qualified-focal-ga-reader-20261110)。次は、保存候補を継承し、本人の語り・読点等の自然さと単独伝達を含むモデル本文の品質を、広い材料の本文比較で改善する。同配分の第三学習や通常採用へ自動進行しない。source資格外の模型作り、同版画像／通常統合・本人端末、AR-01の役割反転と他ARの残件は保持する。

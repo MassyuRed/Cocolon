@@ -649,3 +649,20 @@ runner405.000295秒、HTTP147.534705秒、候補起動／元提供復元計32.03
 承認・同一payload／data／wire、実48更新・新重み・全52比較・156SQL・復元をprivate `Cocolon_CMEE_AR04_BalancedTemporalScope_Learning4B_20261110.zip`へ保存する。製品source／接続はAPI39e31584のままで新pytest／CI0、前回940 PASSとPiece CI成功は継承記録。通常採用・本番Render／実DB／RN／署名build／配布・今回native画像／本人端末は0。前回同版全面画像1作品と旧V4別試験失敗も継承する。STRUCTURE_MAP_DELTA_NONE（製品source・接続責務・復元後の通常設定不変）、限定TECHNICAL_CREDIT、正式商品品質credit0・正式受入れ0/3。
 
 承認された第二配分の48更新・同26比較・156隔離SQLは完了し、自動再実行や第三の追加学習は行わない。保存済み5b1de6c9候補と全52本文を継承し、既存のqualified FOCUS／S7 ownerで、source資格を満たす希望文の正当な主語「が」を現readerが未判定にする境界と、読点を含む表現の自然さを別に解消する。model側の限定読取が次の検討範囲であり、source資格拡張や修正はまだ実装していない。意味保持と未判定を同一視せず、広い材料の意味・単独伝達、同版本文／画像・通常統合・本人端末へ進める。模型作りのsource資格外、AR-01の役割反転と他ARの残件を維持し、通常採用・本番反映へ自動進行しない。
+
+<a id="piece-qualified-focal-ga-reader-20261110"></a>
+## 2026-11-10 既存S7のmodel比較へ、source資格済みwishの明示主語「が」を接続
+
+**11/10・AR-04最新：** 保存済み5b1de6c9の同26rawを追加生成なしで再受領し、CMEE採用24→25。source資格済みFOCALの非過去・推量／外側scopeなしの希望文だけ、明示SELF「が」の直接語順を既存S7のmodel専用比較へ接続した。旧24本文はbyte一致、source資格外1例は不変。新78隔離SQLは75保存／3拒否（比較元は記録済み72／6）、保存後0生成。追加学習・重み変更0。「が、」の読点によるやや不自然な強調は未修復で、文章品質改善とは分ける。通常重み未採用／selector OFF、広い文章品質・同版画像／通常統合・本人端末・AR全体は未完了。
+
+前節の48更新・実30 HTTP・156SQL・元提供40494への復元は履歴として保持する。今回は保存済み5b1de6c9の26応答を無修正で再利用し、追加推論／学習／新load／GPU実行0。API `c9e9938981c88e811bde1970725dc3dc35b2ae26`の差分は既存`ai/services/ai_inference/piece_v2_content_policy.py`と既存`ai/tests/test_piece_model_prose_register.py`の2pathだけである。
+
+既存source資格済みの`SOURCE_FOCAL_TO_FIRST_PERSON`について、過去述語・modal・外側scopeがなく、既存の他動詞有限集合に肯否wishと敬体／常体の組がある場合だけ、S7 model専用fallbackで明示SELF「が」＋任意の単一読点＋対象・wishの全文を照合する。source／共有readerの文法、生成prompt／条件、raw、native既定は不変。sourceで「は」と書いた直接文・未資格の「が」直接文、過去／推量／状態・scope付き焦点構文へ広げず、主体字面・対象／肯否／時点・同欄参照・留保・公開役割を保持する。
+
+同26rawの再受領は旧24採用／2拒否→新25／1。変わったのはFRESH12のreader未判定だけで、本人・対象・希望・隣接する好み・別欄の相談の過去否定を保持した同じ本文を採用する。旧24の本文byteは全一致、FRESH03のsource資格外`evaluation_target_not_self_contained`は理由も不変。全26source／rawと本人補足4をroot・独立担当が全文確認し、CPU9変異を拒否した。「が」は正当な主語である一方、読点による単独の強調のやや不自然さは同rawに残り、新たなモデル本文改善や一般意味精度の成立とはしない。
+
+新SQLは同26候補×3planの78試行だけを実施し、75保存／3拒否。比較元の72保存／6拒否は前回記録済みの同78で、今回156実行とは数えない。FRESH12の3planだけが新たに保存へ到達し、旧24の保存本文は不変。成功のquota各1・保存後0生成の同／新service再読、拒否のrecord／quota不変、原入力／Emlis不変を確認。等価な合成ID／日時へ厳密rebindしたPGlite・合成Auth／SQL callbackであり、実Supabase／GPU原identity保存・端末成功ではない。
+
+焦点145 PASS／4.87秒、同17fileの最終996 PASS／72.40秒・既存warning1（新56検査）。準備時のPYTHONPATH不足はcollection中のimport error・test本体実行0として履歴保持し、環境変数修正後に上記検証を完了した。Piece CI42709594596／Analysis CI42709594021は全工程success、Piece model17file996 PASS／58.98秒。新旧raw・SQL・独立読解のprivate原本は`Cocolon_CMEE_AR04_FocalSelfGa_ReaderReplay_20261110.zip`。既存重みZIPは別保管し、本ZIPへ重複収録せず、旧48更新／比較156の原本を上書きしない。通常重み未採用／selector OFF、本番配置・実DB・RN／build・今回画像／本人端末0。STRUCTURE_MAP_DELTA_NONE（既存owner内の比較条件とtestのみ、入口・責務・source意味型・API／保存契約不変）、限定TECHNICAL_CREDIT、正式商品品質credit0・正式受入れ0/3。
+
+次は、保存候補を継承し、本人の語り・読点等の自然さと単独伝達を含むモデル本文の品質を、広い材料の本文比較で改善する。同配分の第三学習や通常採用へ自動進行しない。source資格外の模型作り、同版画像／通常統合・本人端末、AR-01の役割反転と他ARの残件は保持する。
