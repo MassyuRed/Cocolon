@@ -6232,3 +6232,17 @@ API `95e1b5d6c6d68b17fadaae3c982ebaa87eed1d79`。既存保存source→候補→C
 RNの変更は`features/piece/pieceApi.js`のpreview POST期限のみ250000ms、`tests/piece-v2-source-ref.test.js`でPOSTとGETの期限範囲を確認。既存source GET／PATCH／再読、explicit補足選択、owner変更／cancel・未確定保存回復は継承。DB migration新規0、公開DTO新field0、renderer新規0、依存追加0。設計差分3正本は`b2d33ace`で先に反映。商品00・Piece／CMEE map・weekly§40・trialを今回同単位で更新。STRUCTURE_MAP_DELTA_PRESENT。
 
 実測追記：製品95e1b5d6後のAPI41fc2987はnative test fakeの2種を新しいprivate call shapeへ適合しただけで、意味／SQL期待は維持。追加fileは`ai/tests/piece_v2/db/test_b10_preview_application_native.py`（明示_model_input=None受口）、累計API18path。再CI42564013293全成功、新model129 PASS。実4B2件とRN同19native失敗は[trial](./observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-actual-fictional-20261109)へ。native入力とjob bodyは4a103688から不変、画像品質受入れは未完。
+
+<a id="piece-model-evaluation-reuse-20261109"></a>
+## 2026-11-09 — AR-04 本人評価の既存読取をPieceモデル本文へ接続するfile地図
+
+API `41b5df885c7f6b8a66223d5954cdd09cd7c94cc8`、親`41fc29870c42feef8c992159fff90558f86d67e4`。D03／D07／D21の独立読取・意味保持責務を、Pieceの既存readerから再利用。STRUCTURE_MAP_DELTA_PRESENT。新しい作者・controller・public DTO・DB schemaは追加しない。
+
+| mashos-api path | 責務差分 |
+|---|---|
+| `ai/services/ai_inference/piece_v2_content_policy.py` | 既存`_personal_evaluation_shapes`をmodel本文の自己評価同値へ接続。視点・対象・程度・肯否・時点／留保、全文spanとscopeを照合 |
+| `ai/tests/test_piece_model_evaluation_reuse.py` | 正常常体／丁寧体と明示SELF倒置、主体／対象／程度／肯否／時点／留保・条件理由追加・部分読取・欄境界等164件 |
+| `ai/tests/piece_v2/test_b05_piece_model_evaluation_pipeline.py` | 既存service／reviewと隔離SQLで合成本文2例×3planの保存・非生成再読6件 |
+| `.github/workflows/piece-b2b-isolated-postgres.yml` | 既存path trigger／model試験stepへ上記2fileを追加。新job／workflowなし |
+
+既存`cocolon_meaning_experience_engine/piece_source.py`／source・admission・作者・provider・SQL・RNは今回不変。対象7file299 PASSと実4B12callの範囲、親でも再現する旧評価19失敗、再bind保存の限定は[既存trial](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-evaluation-reuse-20261109)へ。旧native V4の19失敗とは別集合で、今回はnative／署名build／配布を行っていない。

@@ -416,5 +416,82 @@
     "rn_js_job": 128985994991,
     "rn_native_v4_job": 128985995073,
     "rn_same_ordered_prior_failures": 19
+  },
+  "piece_model_evaluation_reuse_20261109": {
+    "api_commit": "41b5df885c7f6b8a66223d5954cdd09cd7c94cc8",
+    "api_parent": "41fc29870c42feef8c992159fff90558f86d67e4",
+    "structure_delta": "STRUCTURE_MAP_DELTA_PRESENT",
+    "primary_outcome": "TECHNICAL_CREDIT",
+    "formal_product_quality_credit": 0,
+    "reuse": "existing personal evaluation shapes in Piece model semantic preservation",
+    "scope": "explicit SELF; existing six evaluation bases, degree, polarity, temporal scope, commitment; full outer spans",
+    "actual": {
+      "fictional_sources": 6,
+      "current_prompt_calls": 6,
+      "editorial_variant_calls": 6,
+      "old_admitted": 3,
+      "new_admitted": 5,
+      "partition_rejected": 1,
+      "variant_bodies_all_equal": true,
+      "variant_adopted": false,
+      "writing_quality_improvement_claim": false,
+      "baseline_loop_seconds": 8.392148936865851,
+      "variant_loop_seconds": 8.564711779123172,
+      "usage": null,
+      "revision": null,
+      "bill": null,
+      "transport": "existing warm 4B loopback natural/base; not deployed HTTPS"
+    },
+    "saved": {
+      "actual_raw_bodies": 5,
+      "tiers": 3,
+      "cases": 15,
+      "source_identity": "rebound to equivalent synthetic SQL fixture; not original live model request identity",
+      "database": "isolated PGlite",
+      "saved_replay_generations": 0,
+      "quota_per_key": 1
+    },
+    "regression": {
+      "selected_files": 7,
+      "pass": 299,
+      "fail": 0,
+      "skip": 0,
+      "warning": 1,
+      "new_evaluation_unit_cases": 164,
+      "new_pipeline_cases": 6,
+      "old_evaluation_failures_reproduced_on_parent": 19,
+      "native_v4_prior_failures_are_separate": true,
+      "parent_comparison": "parent content-policy source overlay, not a clean whole-parent checkout"
+    },
+    "runtime": {
+      "deployment": 0,
+      "live_db_mutations": 0,
+      "new_load": 0,
+      "training": 0,
+      "restart": 0,
+      "new_reader_model_calls": 0,
+      "rn_changes": 0,
+      "signed_build": 0,
+      "distribution": 0
+    },
+    "next": [
+      "general meaning-preserving prose reconstruction",
+      "preserve two-field source partition in generation",
+      "live application and same-version image/device work remain separate"
+    ],
+    "evidence_filename": "Cocolon_CMEE_AR04_Evaluation4B_20261109.private.json",
+    "ci": {
+      "piece": {
+        "run": 42569189244,
+        "job": 129002367170,
+        "conclusion": "success",
+        "model_pass": 299,
+        "model_seconds": 26.93
+      },
+      "analysis": {
+        "run": 42569189246,
+        "status_at_document_write": "in_progress"
+      }
+    }
   }
 }

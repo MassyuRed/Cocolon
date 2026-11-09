@@ -2189,3 +2189,16 @@ API final head `41fc29870c42feef8c992159fff90558f86d67e4`は製品`95e1b5d6`か�
 RN `5ae90a658d1823e37039420165db428f26d6730c`のrun42563870309はJS job128985994991 success、Android source／export、export pods、iOS RN canvasもsuccess。iOS source job128985995073はV4 1PASS／19FAIL。前回job128969267491と19件のfailure名・順序が完全一致し、4a103688→5ae90a65の非前提資料差分はpieceApi.js／source-ref testの2fileだけでnative input／job bodyは不変。既存native129／bitmap44も成功した。同19再現の確認に限り、画像受入れ／一般無退行とは扱わない。
 
 次は通常の日本語への意味対応幅と作品としての表現を改善する。既存source／plan資格と全文意味保持を保った今回の初期範囲から進め、未知書換えを合格扱いしない。live配置・selector有効化・migration適用、統合配布、同版native画像と本人端末、既存161失敗／V4同19失敗・AR-01反転は残件。既存のsource分離／保存／権利／recipe／画像化を継承する。証拠ZIP：`Cocolon_CMEE_AR04_Piece4B_Connection_20261109.zip`。
+
+<a id="piece-model-evaluation-reuse-20261109"></a>
+## 41. 補助経路活用AR-04 — 既存本人評価readerを4B本文へ接続
+
+API `41b5df885c7f6b8a66223d5954cdd09cd7c94cc8`。既存Pieceの本人評価readerをmodel本文意味保持へ再利用し、価値観／好みの視点・対象・程度・肯否・時点／留保を比較する。既存source資格、参照・scope、本人補足の分離を維持。独立点検で見つけた条件／理由の外側追加を内側評価だけで見落とす抜けも修復した。作者／通常prompt／公開DTO／DB／RNは今回不変。
+
+新規架空6材料を既存warm4Bへ送信し、同じrawで親3/6→新5/6を採用。価値観2件の誤拒否を解消したが、rawは原文の語を維持し、編集指示の別6callも全本文同一だったため指示案は不採用。二欄結合1件は両版拒否。計12callのloop時計16.956861秒、HTTP200／stop。usage／revision／請求unknown、学習／新load／restart0。
+
+採用5本文×3planを合成sourceへ厳密再bindした隔離SQLで保存・非生成再読。実GPU原要求identityの実DB保存、Render HTTPS、native画像の実績とは分ける。最終対象7file299 PASS／既存warning1・FAIL／SKIP0。広域で見つけた旧評価19失敗は親の同sourceをoverlayして再現し未修復、過去のnative V4同19失敗とは別集合。TECHNICAL_CREDIT、正式商品品質credit0。
+
+[Piece CI42569189244](https://github.com/MassyuRed/mashos-api/actions/runs/42569189244)は全工程success、model step299 PASS／26.93秒。Analysis CI42569189246は記録時点で実行中。
+
+本番配置・selector有効化・SQL変更・署名build／配布0。詳細設計§7.1／11.2、商品00、Piece／CMEE map、01Aの4path地図、既存trial／本文なしsummaryを差分更新。次は一般文章の意味を保つ再構成と二欄分離を保持する生成。同じ編集指示を繰り返す周回は終了し、AR-01反転・全必要資産活用・live／同版画像／本人端末の残件を保持。[実本文の判定・検証範囲・再開点](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-evaluation-reuse-20261109)。

@@ -211,3 +211,51 @@ API final head `41fc29870c42feef8c992159fff90558f86d67e4`は製品`95e1b5d6`か�
 RN `5ae90a658d1823e37039420165db428f26d6730c`のrun42563870309はJS job128985994991 success、Android source／export、export pods、iOS RN canvasもsuccess。iOS source job128985995073はV4 1PASS／19FAIL。前回job128969267491と19件のfailure名・順序が完全一致し、4a103688→5ae90a65の非前提資料差分はpieceApi.js／source-ref testの2fileだけでnative input／job bodyは不変。既存native129／bitmap44も成功した。同19再現の確認に限り、画像受入れ／一般無退行とは扱わない。
 
 次は通常の日本語への意味対応幅と作品としての表現を改善する。既存source／plan資格と全文意味保持を保った今回の初期範囲から進め、未知書換えを合格扱いしない。live配置・selector有効化・migration適用、統合配布、同版native画像と本人端末、既存161失敗／V4同19失敗・AR-01反転は残件。既存のsource分離／保存／権利／recipe／画像化を継承する。証拠ZIP：`Cocolon_CMEE_AR04_Piece4B_Connection_20261109.zip`。
+
+<a id="piece-model-evaluation-reuse-20261109"></a>
+## 2026-11-09続行 — 既存の本人評価readerをPieceの4B本文意味保持へ再利用
+
+**現在の差分：** API `41b5df885c7f6b8a66223d5954cdd09cd7c94cc8`（親`41fc29870c42feef8c992159fff90558f86d67e4`）。同じ実4B出力6件を比較して、採用3件→5件。追加の2件は正しい価値観本文の誤拒否解消であり、文章品質・一般日本語理解の改善認定ではない。主成果TECHNICAL_CREDIT、正式商品品質credit0。AR-04・全補助資産の活用は継続中。
+
+### 回収した能力と実装境界
+
+既存`cocolon_meaning_experience_engine.piece_source._personal_evaluation_shapes`の本人評価読取を`piece_v2_content_policy._piece_model_evaluation`へ接続。大切／大事／重要／必要／好き／苦手の既知base、明示SELF、評価構文・正確な対象、程度、肯否、現在／過去、留保を比較する。丁寧／常体差と同じ明示視点での倒置を扱う。評価の主体省略を追加せず、既存source／plan資格、named／reference／scopeのS7検査、各fieldのpartitionと命題数を保持する。新model reader呼出し・後付け文章修復・fallback・通常prompt変更はない。
+
+独立点検で、条件／理由等の外側文を付けても内側評価だけが一致して通る抜けを発見し修復した。`_SCOPED_EXPRESSION`／`_TEMPORAL_EVALUATION`の既存範囲除外に加え、読取frameのspeaker／predicate／target spanが外側全文matchと完全に対応することを確認する。正しい過去・否定・留保をそのまま保つ対照も確認。一般構文の読取完了や、未知文法への拡大は主張しない。
+
+### 実4Bの同材料比較
+
+新規架空6材料を、既存warm4Bのnatural/base loopback HTTPへ現Piece promptで送信。続いて同じ6材料に編集指示を足した研究版を一度だけ比較した。新規材料の私的原文／messages／request／raw／receipt対応はprivate JSONに保存、Karen-Diary・既存保存Q2・本人原文の送信0。
+
+| 材料ID | 親CMEE | 新CMEE | 実本文の読解 |
+|---|---|---|---|
+| VALUE | 未判定・不採用 | 採用 | 原文の価値観を維持。既存評価読取の未接続が誤拒否の原因 |
+| MODAL | 採用 | 採用 | 否定・過去・留保の保持、原文の語を維持 |
+| PREFERENCE | 採用 | 採用 | 苦手の過去・好きの現在を保持、原文の語を維持 |
+| DEGREE | 未判定・不採用 | 採用 | 程度を含む価値観を保持。今回の読取接続で誤拒否解消 |
+| TWOFIELD | 拒否 | 拒否 | 二欄を一blockに結合。source partitionを緩めず不採用 |
+| CONTROL | 採用 | 採用 | 既成功の本人→同僚への依頼を保持、原文の語を維持 |
+
+全12callはHTTP200／finish=stop。現prompt6callのloop実測8.392149秒、編集版6call8.564712秒、合計16.956861秒。これは生成要求loopの累積時計でありGPU総レンタル時間・請求ではない。model aliasは`cocolon-qwen35-4b-base-851bf6e`、usage／revisionは応答に無くunknown。PID26784／serving source SHA `f95fc7ce13ce197916b753b7cebb3946243225a0139d40e528908d62e27b2371`は前後一致。学習・新load・再起動・自動retry・追加model reader0。
+
+編集版と現版の各本文は全6件同一で、編集指示案は採用していない。同じ指示追加の周回を終了する。短文の原文維持を悪化と断定しないが、今回の試行には文章の再構成品質が上がった実績はない。二欄結合の問題も残る。Render→GPU HTTPS経路の実測ではない。
+
+ブラウザのdownload通知はtimeoutしたため、Jupyter editorで観測した応答metadataとlocal同一requestを対応づけ、request SHAを12件すべて照合してprivate原本JSONを復元した。復元後の全JSON SHAはterminal表示と一致（現版`022bd67dfafaf26560554e1c36b4a7706ea73c87991a7bf963f5f2d794ccbcd2`、編集版`949a6a6005bb32c617b8fc6699fa452bf33c8fd2d08e905837acc286389cda95`）。download成功とは記録しない。初回のsource SHA手入力不一致は送信前assertで止まりcall0、修正後に各版6callだけ実行した。
+
+### 保存・再読と検証範囲
+
+採用5実本文を、同じ架空文を持つ**合成owner／入力ID／時点へ厳密再bind**し、既存source／prepare／receiptとreview→preview→saveへ接続。Free／Plus／Premiumの15組を既存PGlite隔離SQLで保存・再読した。preview初回の作者／review各1、同key保存再送でもquota各1、保存後は作者／Engine／review／compilerを禁止して同／新serviceから非生成再読、保存行と詳細12field一致、原入力／Emlis thread／events不変。実4Bの原要求IDをそのまま実DBへ保存した証明でも、ライブAuth／PostgREST・画像描画の実績でもない。元のrequest identityに対する旧新比較は前表で別に行った。
+
+最終対象7fileは299 PASS／18.44秒、FAIL／SKIP0、既存Pydantic warning1。新評価単体164＋新保存6を含み、別実行の件数を重複加算しない。既存model source／独立変異／有限scope／並行処理／保存を同集合で確認した。広めの既存評価テストでは19失敗を検出し、変更前の親`piece_v2_content_policy.py`をoverlayした同じ環境でも全19件を再現。参照評価16、短文非padding／自己連続参照／scope各1で、今回未修復・期待変更／skip化0。過去のnative V4同19失敗とは別集合。全Piece試験の成功とは報告しない。
+
+[Piece CI42569189244](https://github.com/MassyuRed/mashos-api/actions/runs/42569189244)は同じAPI41b5df88で全工程success。model stepは299 PASS／既存warning1／26.93秒。Analysis CI42569189246は本記録時点で実行中、成功未確定。
+
+新file2と既存source1／workflow1の計4pathだけをAPIへ反映、remote bytes／commit親／変更集合／PR3 headを読戻し確認。既存CIのmodel試験stepへ2fileを追加し、新job／Gateを作らない。STRUCTURE_MAP_DELTA_PRESENT。RN・SQL schema・公開registry・設定・料金・quota・提供modelは不変。
+
+### 稼働と次の同一商品作業
+
+RenderのAPIはautoDeploy OFF、既存live commit`497f7008fec8935885d09d2e430499892189b5bb`を継続。Supabaseは読み取りによる既存3関数signature確認だけで、schema／個人row／DML変更0。今回の本番反映・selector有効化・署名build・配布・native画像／本人端末確認0。
+
+次は、一般文章の意味を保つ再構成と二欄のsource分離を保持する生成へ進む。既存readerを一般理解の代役へ広げず、読取不足と実modelの出力不足を分けて修正する。AR-01方向反転、AR-02以後、既存migration／API反映、RN統合配布・同版画像／本人端末、正式受入れは未完了。同じ成功数の再検証・同種編集指示の周回だけを次の作業にしない。
+
+私的原本は`Cocolon_CMEE_AR04_Evaluation4B_20261109.private.json`。公開側は本節と本文なしsummaryを既存trialへ置き、新handoff系列や追加運用基盤は作らない。
