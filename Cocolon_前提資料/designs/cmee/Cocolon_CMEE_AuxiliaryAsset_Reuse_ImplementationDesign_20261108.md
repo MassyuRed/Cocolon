@@ -4,7 +4,7 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-09 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR01_IN_PROGRESS_ROLE_AND_PRIORITY_REPLY_REALIZATION_UNRESOLVED
+status: AR01_UNRESOLVED_AR04_FINITE_REQUEST_ACCOUNT_IMPLEMENTED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
@@ -330,7 +330,7 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 | AR-01 | 現naturalの主体・所有者・否定・時点・留保を、旧失敗・意味比較・共通原因分析で改善。EM-01a/b | 現6境界と正常な短文／省略で、同入力の誤読を解消または明確に減らし、自然さ・別題材・既成功・保存再読を保持。検出増加／無出力だけでは完了しない | 継続中。新24実生成の4版は通常不採用。c6555fd5で疑問符なしの確認質問の保存抜けを修復、250局所PASS。同24rawは旧24保存→新22保存／2拒否、受理本文不変。全体の意味修復は未完 |
 | AR-02 | 現naturalの任意問い・回答・訂正・撤回・frameの一往復。EM-02a/b、03b | 一点確認／skip／終了／本人続行、対象だけ更新、撤回後の残存意味、同版再読、プラン境界 | AR-01の全一般品質完成待ちにはしない。未開始 |
 | AR-03 | 適格履歴の意味ある利用。EM-03a/b | 同一／別場面・変化・無関係・訂正前を区別し、適切な履歴が今回へ効く。失効材料を使わない | 現related_contextを継承。未開始 |
-| AR-04 | Piece一般本文・単独伝達・refined・画像整合。PC-01a/b/c、02等 | 元の意味と条件を保持し、単独で伝わる作品、適格補足の差、同じ採用画像の保存再読 | AR-01から必要な共通部を利用。独立して並行可能。未開始 |
+| AR-04 | Piece一般本文・単独伝達・refined・画像整合。PC-01a/b/c、02等 | 元の意味と条件を保持し、単独で伝わる作品、適格補足の差、同じ採用画像の保存再読 | 独立並行着手。11/9に有限な明示本人の過去依頼を旧役割reader→既存KEEPへ接続し、新規5本文を確認。一般本文・refined・同版画像／通常保存・実機は未完了 |
 | AR-05 | 分析の本人基準・役割／選択・記録間関係。AN-03a/b/c、04 | 原記録→意味→図／全文→両端根拠の対応、再出現／変化／不明の正しさ | 現Engine統合・保存済み成果を継承。並行可能。未開始 |
 | AR-06 | Emlis観測材料、訂正・削除・権利、長い蓄積と月次。EM-04/05、AN-02/06/08/10 | 本人sourceから材料を渡し、失効・分割範囲・当時版を保持。生成本文を本人事実にしない | AR-02/03/05の該当能力を利用。未開始 |
 | AR-07 | IF／Saved等の商品固有の残る意味保持責務。既存AN／PC残件 | 仮想・本人選択意向・観測を分離し、成立した経路で出力と保存を確認 | 既存商品の実装条件に従う。無断延期・新発売条件化をしない。未開始 |
@@ -396,7 +396,7 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 ### 11.2 現在の進行欄
 
-| 項目 | 2026-11-09 AR-01役割結合＋本文優先度から8実本文、方向反転が継続 |
+| 項目 | 2026-11-09 AR-01方向反転を継承、AR-04有限依頼文をPiece本文へ接続 |
 |---|---|
 | 回収と改修 | 旧finite `_clauses/_FORMS/_participant`で正過去依頼のrequester／asked_personを別slot化。同一eventと対象状態を結合。旧content_selectionから意味不変・別ref-planの表示選択責務を回収し、NOT_RECORDED=context_onlyは現natural向け研究policyとして区別 |
 | 意味と限定 | 4sourceの7状態・4event・受け手束縛3。省略はUNSTATED、単一event・全節被覆。複数依頼／未読節／曖昧関係節／未対応target／既知slot矛盾はHOLD。旧status snapshotは不変、role再開で全意味を原文から再導出 |
@@ -410,7 +410,12 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | 提供・保全 | 学習／新load／retry／server再起動0。同PID26784／source／Analysis重み不変・health200。role最初の梱包漏れは生成0のCPU事前検査で検出・依存補完し失敗logも保全。private同artifact準備v0→結果v1、総請求額未測定 |
 | 次の同一商品単位 | 意味材料が正しく届いても完成rawで崩れる境界へ限定。同種label／SYSTEM追加周回を終了し、既存meaning→現作者の依頼方向・対象状態・語り手の自然文実現を改修。能受動／明記省略／状態対照、成功control、別題材評価。容量／学習等の原因は未断定 |
 | 再開記録 | weekly第10回§32、[全結果・範囲・次作業](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/request_role_binding_review.md)／[本文なし集計](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/request_role_binding_summary.json) |
-| 通常と残件 | API作業source c6555fd5・通常採用false、配置／実DB／RN/build0。研究patch保全のみSTRUCTURE_MAP_DELTA_NONE。primary BLOCKER_NARROWED・新商品品質credit0。AR-01〜08・必要全資産活用・端末／正式受入れ未完了、AR-02の全面待ちは設けないが今回未着手 |
+| AR-01通常と残件 | AR-01通常不採用・役割反転未解決。API作業sourceはe8b7e46c（下記AR-04差分のみ追加）、配置／実DB／RN/build0。AR-01研究patchの通常採用なし、AR-02は今回未着手。全必要資産活用・端末／正式受入れ未完了 |
+| AR-04回収・改修 | 既存natural_reply_meaningのfinite節／活用／格／人物読取＋Piece既存ガードを、piece_source._finite_self_request_account→piece_v1c保存complete-accountへ接続。明示SELF・頼む肯否過去・能受動・明記相手1／を対象1・句点。旧KEEP／唯一作者／独立保持検査を継承 |
+| AR-04実本文 | 独立作成8は1→6生成、新規5。本人6表記・否定過去・能受動・二欄留保を保持。本人省略／人物疑問の拒否2維持。既存4controlを含む旧成功5のmeaning／plan／本文／recipe／hash全同一。開発用作例でblind一般化ではない |
+| AR-04検証・再読 | 最終3218 PASS／23.95秒・既存warning1・skip0。隔離SQL12→10pure同一candidate／拒否2・原入力不変・Piece保存／quota書込0。private成果物10を作者／compiler／Engine禁止で再読。実native画像／実Auth／実DB／通常Piece保存の成立へ換算しない |
+| AR-04反映・残件 | API作業source e8b7e46c、既存source2＋新test1を反映・全bytes／変更集合／head読戻し一致。今回配置／実DB／RN／GPU生成0。一般本文・refined・同版画像／通常保存・実機・正式受入れ未完了。primary TECHNICAL_CREDIT、正式商品品質credit0 |
+| AR-04再開記録 | weekly第10回§33、[全結果・範囲](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md)。AR-01の一般意味候補／本文役割反転は未解決、AR-01〜08・全必要資産活用は継続中 |
 
 以後はこの表と各能力の対応行を現在状態へ置換更新し、詳細な実行事実は既存trial／weeklyへ置く。新しいhandoff系列・全件hash Gateを作らない。中断時も、成果物と未実行を既存保存先へ残し、同じ未完商品単位から続ける。
 

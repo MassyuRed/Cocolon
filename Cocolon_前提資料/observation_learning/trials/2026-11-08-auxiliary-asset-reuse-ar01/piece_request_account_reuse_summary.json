@@ -1,0 +1,76 @@
+{
+  "schema": "cocolon.cmee.ar04.finite_request_reuse.v1",
+  "date_jst": "2026-11-09",
+  "api_base": "c6555fd5b81cd4ecda1bafdec60aa311c9e7feea",
+  "api_candidate": "e8b7e46c70269a40317fe2ec6ee8362c4086e619",
+  "scope": "SAVED_SELF_REQUEST_PAST_FINITE_ACCOUNT_TO_EXISTING_PIECE_KEEP",
+  "reused_assets": [
+    "natural_reply_meaning._clauses/_FORMS/_arguments/_participant/_focus_participant",
+    "Piece existing question/scope/uncertainty guards",
+    "Piece KEEP_COMPLETE_SOURCE_CONTEXT sole author and independent preservation"
+  ],
+  "source_changes": 2,
+  "new_test_files": 1,
+  "independent_records": 8,
+  "existing_controls": 4,
+  "independent_before_generated": 1,
+  "independent_after_generated": 6,
+  "new_availability": 5,
+  "independent_refusal_controls_unchanged": 2,
+  "total_before_generated": 5,
+  "total_after_generated": 10,
+  "old_success_components_exact": 5,
+  "original_records_unchanged": 12,
+  "generated_model_calls": 0,
+  "gpu_training_updates": 0,
+  "new_model_loads": 0,
+  "provider_calls": 0,
+  "local_validation": {
+    "passed": 3218,
+    "warnings": 1,
+    "seconds": 23.95,
+    "skipped": 0,
+    "original_test_material_blobs_exact": 9
+  },
+  "sql_original_read": {
+    "inputs": 12,
+    "generated": 10,
+    "unavailable": 2,
+    "all_generated_candidates_exact": true,
+    "input_changes": 0,
+    "piece_saves": 0,
+    "quota_writes": 0,
+    "real_database_requests": 0
+  },
+  "private_serialized_reopen": {
+    "artifacts": 10,
+    "compiler_calls": 0,
+    "author_calls": 0,
+    "engine_calls": 0
+  },
+  "image_or_native_renderer_executions": 0,
+  "rn_builds": 0,
+  "render_deployments": 0,
+  "production_database_changes": 0,
+  "production_deployment_verified": false,
+  "formal_product_acceptance": false,
+  "product_credit": 0,
+  "primary": "TECHNICAL_CREDIT",
+  "ar01": "UNRESOLVED_NOT_ADOPTED",
+  "ar04": "FINITE_REQUEST_SUBSET_IMPLEMENTED_OVERALL_INCOMPLETE",
+  "structure_map_delta": "PRESENT_EXISTING_PIECE_OWNER_QUALIFICATION_AND_REUSE_DEPENDENCY",
+  "ci_at_recording": [
+    {
+      "id": 42543151792,
+      "name": "Analysis observed content",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "id": 42543151704,
+      "name": "Piece B2-B/B3/B4/B5 isolated PostgreSQL",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ]
+}

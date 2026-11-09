@@ -2056,3 +2056,19 @@ root／独立担当が全4source項目、各snapshot、旧native基準4＋新rol
 意味材料が正しく実送信されても完成rawで崩れる境界に故障を限定。SQL／再読／UI由来ではない一方、容量／学習／metadataの読まれ方等の原因は未確定。同種label／SYSTEM周回は終了し、既存meaningと現作者の依頼方向・対象状態・語り手の自然文実現を改修する。能動受動・明記省略・未記載未決定の原文対照、成功control、別題材評価を使い、失敗rawを採用教師へ自動変換しない。
 
 学習／新load／provider retry／server再起動0、同PID26784／source／Analysis adapter/config不変・health200。総請求額は未測定。API作業source c6555fd5・通常採用false、Render配置／実Supabase／RN/build／model設定変更0。STRUCTURE_MAP_DELTA_NONE（研究patch保全のみ）、primary BLOCKER_NARROWED。AR-01〜08・必要全資産活用・本人端末／正式受入れ未完了。AR-02を一般AR-01完成の全面待ちにはしないが今回未着手。
+
+## 33. 補助経路活用AR-04 — 役割読取をPieceの完成文へ回収、新規5本文を確認
+
+2026-11-09 JST。AR-01の役割label／SYSTEM追加周回終了を継承。固定候補集合の比較を検討したが、既存共有serverの実sourceはtemperature0以外を拒否しdo_sample=False固定で、同一greedyの追加周回を生成前に止めた。モデルcall／学習／新load／server変更・再起動0。AR-01の意味候補／完成本文の役割反転は未解決・通常不採用のまま。
+
+詳細設計§7.1／§9で独立並行可能なAR-04へ着手。自己理解の保存原入力で、明示本人が相手と対象を述べた過去の依頼文もcomplete-account資格不足で拒否されることを確認。既存natural_reply_meaningのfinite節／活用／格／人役読取と、Piece既存の疑問・scopeガードを、piece_source._finite_self_request_account→piece_v1cの保存complete-account判定へ接続した。明示SELF・頼む肯否過去・能受動・相手1／を対象1・句点に限定。正規化後のSELF6／指示代名詞／人物疑問／未証明人名は新資格から除外。既存KEEP・唯一作者・独立保持検査を使い、本文修補・新作者・語尾だけの許可拡大はない。
+
+独立担当が別の既存人役／対象で架空8recordを作り、root既存control4を追加。同一入力の前後は独立8で1→6生成、新規availability5、本人省略／人物疑問の拒否2維持。通常感情の既存1成功とroot control4はmeaning／plan／artifact／candidate／recipe／serialized hash全同一。root／独立担当が全12原入力と前後全文を読み、追加5本文の役割・否定・過去・語調・二欄と留保保持を確認。原本JSON／envelope／scalar・UTF8根拠／本文hashも整合。コードを見た開発用作例であり、blind評価・一般言語率・正式受入れとはしない。
+
+最終のsourceとGit原本bytesに合わせた既存test materialsで、新test＋近傍6suiteは3218 PASS／23.95秒・既存warning1・skip0。初期collectionはlocalに欠けた既存helper／ledgerを復元して解消。新testで旧wish／短い留保を拒否するとした誤った期待は既存KEEP互換へ訂正し、製品sourceを変えて迎合しない。反復を合格数へ加算しない。新SQL2を含み、役割／受動／否定／欠落／追加を再hashしても独立保持検査は拒否する。
+
+隔離PGliteの既存原入力RPC→PieceSavedSourceAdapterへ全12を通し、10candidateはpure結果と一致、拒否2・原入力不変。SQL用UUID／日時投影は元case identityと別に保持。Piece保存／quota／Emlis thread/event書込・実DB要求0。private serialized成果物10は別processでcompiler／作者／Engine／model禁止のまま保存plan／本文／recipeを再読した。実Auth／実Supabase／通常Piece保存・native bitmap／写真保存／共有・本人端末の成立へ換算しない。
+
+API [e8b7e46c](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)へ既存source2＋新test1を反映し、全file bytes・変更集合・fresh headを読戻し一致。公開API／DTO／DB／RN／権利・quotaの変更0、配置／GPU生成0。Piece既存CI42543151704はsuccess、Analysis共有回帰CI42543151792は記録時進行中。[全結果・限定・次作業](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md)／[本文なし集計](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_summary.json)。private全原本／比較／SQL／再読を15member・42242bytesで保全。STRUCTURE_MAP_DELTA_PRESENTは既存Piece ownerの有限資格と再利用依存の追記に限定、新owner／独立controllerなし。
+
+primary TECHNICAL_CREDIT、正式商品品質credit0。AR-04は今回の有限文法だけ実装・局所確認済みで、一般本文再構成・refined・通常保存／同版画像・実機は未完了。AR-01〜08・必要全資産活用は継続中。次は限定対応を通常保存・同一採用画像まで確認し、AR-01未解決と並行して作品能力を回収する。
