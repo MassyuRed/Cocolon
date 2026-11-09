@@ -547,7 +547,9 @@
       "saved_generations": 0,
       "new_refined_actual_sql_verified": false,
       "legacy_offline_refined_serializer_is_model_save_contract": false,
-      "synthetic_focal_sql_tiers": 3
+      "synthetic_focal_sql_tiers": 3,
+      "old_new_refined_ordinary_source_eligible": false,
+      "qualification_correction": "typed Engine fixture only; no eligible current QUESTION/answer temporal grounding; corrected by next unit"
     },
     "tests": {
       "selected_files": 8,
@@ -577,7 +579,7 @@
     },
     "next": [
       "general prose reconstruction quality",
-      "new eligible refined actual raw through ordinary SQL save",
+      "new eligible refined actual raw verification follows in next unit",
       "live/integrated build/same image/device tasks remain separate"
     ],
     "evidence_filename": "Cocolon_CMEE_AR04_FieldSlots4B_20261109.private.json",
@@ -593,6 +595,102 @@
         "run": 42575709081,
         "status": "completed",
         "conclusion": "success"
+      }
+    }
+  },
+  "piece_eligible_refined_4b_20261109": {
+    "api": "5c042ed5107d15aef43ff6149279c796d5c45808",
+    "parent": "cfd3d60d476a1e6f7fbff16b86897f9614504cd3",
+    "unique_api_paths": 8,
+    "structure_delta": "STRUCTURE_MAP_DELTA_PRESENT",
+    "primary_outcome": "TECHNICAL_CREDIT",
+    "formal_product_quality_credit": 0,
+    "reuse": [
+      "existing answer THEN and FEELING grammar",
+      "existing supplemental evidence/native KEEP",
+      "existing model whole-text temporal comparison",
+      "existing real Q2 saved source and normal Piece SQL owners"
+    ],
+    "qualification_correction": {
+      "old_fixture_engine_admitted": true,
+      "old_fixture_ordinary_saved_eligible": false,
+      "ordinary_question": false,
+      "answer_time_unresolved": true,
+      "new_material_does_not_close_old_fixture": true
+    },
+    "actual": {
+      "model_calls": 8,
+      "all_http_200_stop": true,
+      "editorial_plan_comparison_calls": 6,
+      "editorial_pairs": 3,
+      "editorial_pairs_changed": 0,
+      "editorial_adopted": false,
+      "editorial_source_changes_reverted": true,
+      "refined_calls": 2,
+      "refined_separate_slots": 1,
+      "refined_missing_answer_slot": 1,
+      "editorial_loop_seconds": 11.137207848019898,
+      "refined_loop_seconds": 4.013211801880971,
+      "writing_quality_improvement_claim": false,
+      "blind_generalization": false,
+      "usage": null,
+      "revision": null,
+      "bill": null
+    },
+    "saved": {
+      "fixed_provider_cases": 6,
+      "actual_raw_saved_cases": 3,
+      "actual_raw_rejected_before_preview_cases": 3,
+      "tiers": 3,
+      "success_quota_each": 1,
+      "rejection_new_record_count": 0,
+      "rejection_quota_count": 0,
+      "database": "isolated PGlite",
+      "auth": "synthetic",
+      "identity": "actual raw strictly rebound to fresh equivalent synthetic source identities",
+      "gpu_original_request_identity_saved_live": false,
+      "raw_repair_or_retry": false,
+      "regeneration_after_save": 0
+    },
+    "tests": {
+      "selected_files": 16,
+      "passed": 559,
+      "failed": 0,
+      "skipped": 0,
+      "warnings": 1,
+      "seconds": 46.06,
+      "intermediate_not_added": true
+    },
+    "runtime": {
+      "training": 0,
+      "new_load": 0,
+      "server_restart": 0,
+      "automatic_retry": 0,
+      "deploy": 0,
+      "live_db_mutations": 0,
+      "rn_changes": 0,
+      "build": 0,
+      "distribution": 0
+    },
+    "evidence_filename": "Cocolon_CMEE_AR04_EligibleRefined4B_20261109.private.json",
+    "next": [
+      "general prose reconstruction",
+      "fix generation-side NOW source merging without prompt-only loops",
+      "live/integrated build/same image/device remain separate"
+    ],
+    "ci": {
+      "piece": {
+        "run": 42580879839,
+        "job": 129039028812,
+        "conclusion": "success",
+        "model_files": 9,
+        "model_pass": 399,
+        "model_seconds": 25.0
+      },
+      "analysis": {
+        "run": 42580879705,
+        "status": "in_progress",
+        "conclusion": null
       }
     }
   }

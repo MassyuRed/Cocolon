@@ -298,7 +298,7 @@ API `1ed4ca27da71ddca510d1ad035b1f0fd7703b1ab`（親41b5df88）で7path、その
 
 通常5実本文×Free／Plus／Premiumの15組を、同じ架空文を持つ合成owner／入力ID／時点へ厳密再bindした既存PGlite隔離SQLで保存・非生成再読。実responseのrawは無修正、provider初回1、作者／review／preview各1、save再送でもquota各1、保存後は作者／Engine／compiler／reviewを禁止して再読。行／detail12fieldと本文・recipe一致、原入力／Emlis thread／events不変。元のGPU要求IDの実DB保存やlive Auth／PostgRESTの実証ではない。合成focal原表面3planの通常保存・非生成再読も追加した。
 
-NEW_REFINEDの新架空実rawはCMEE受理まで。**その材料の通常SQL preview／saveは未検証。** 診断で旧offline `serialize_refined_piece`へ渡すと、旧作者語順を要求する旧S7が拒否した。この旧checkpointをmodel保存の正本へ転用・緩和しておらず、この結果を通常SQL保存の成功／失敗へ換算しない。既存Q2-A/Cの新slot形式での通常保存は合成固定providerの回帰として成功し、新架空実rawの保存とは別の実績である。
+NEW_REFINEDの新架空実rawはtyped Engine fixtureでのCMEE受理まで。**11/9後続訂正：この材料自体は現通常QUESTION／回答時点の条件を満たさず、通常SQL保存に適格なrefined sourceではない。** 診断で旧offline `serialize_refined_piece`へ渡すと、旧作者語順を要求する旧S7が拒否した。この旧checkpointをmodel保存の正本へ転用・緩和しておらず、この結果を通常SQL保存の成功／失敗へ換算しない。既存Q2-A/Cの新slot形式での通常保存は合成固定providerの回帰として成功し、新架空実rawの保存とは別の実績である。
 
 最終対象8fileは368 PASS／18.74秒・FAIL／SKIP0、既存Pydantic warning1。旧299に新codec33・FOCUS33・保存3を加えた集合で、途中332／365／他の重複実行を合算しない。初回test helperのEngine引数と、JSON key順を元partition順として扱った合成provider接続を修正したが、期待する意味・本文・保存条件を弱めていない。前回親source overlayでも再現した旧評価19失敗、既知native V4同19失敗は別集合で未修復、今回再実行していない。全Piece試験の成功ではない。
 
@@ -311,3 +311,22 @@ private resultはJupyter editorで観測したmetadata／rawをclipboardから�
 次は一般文章の意味を保つ再構成品質と、新しい適格refined実rawの通常SQL保存確認。今回修復した欄名付き受口と焦点読返しを土台にする。元原文がそのまま使える短文へ無理な言換えを強制せず、長い文の整理・単独伝達を実本文で比較する。AR-01方向反転、他AR、live API／migration・RN統合配布・同版画像／本人端末、正式受入れの残件も保持する。
 
 CI確定分：[Piece42575709183](https://github.com/MassyuRed/mashos-api/actions/runs/42575709183)は全工程success、model step368 PASS／既存warning1／26.87秒。[Analysis42575709081](https://github.com/MassyuRed/mashos-api/actions/runs/42575709081)も全工程successを確認。
+
+<a id="piece-eligible-refined-4b-20261109"></a>
+## 11/9 正規本人補足・相対時点を既存4B本文／保存へ接続
+
+API `5c042ed5107d15aef43ff6149279c796d5c45808`、8path。既存`emlis_answer_update._THEN/_FEELING`の時点・感情文法をPieceの本人補足へ再利用した。完全明示SELF感情の「その時」等を原文・根拠に残し、参照例外は認定済み補足の時点prefix内だけ。原入力の資格、他の指示語、他者や不明な感情を拡張しない。完成本文ではTHEN prefix全文も照合し、NOW化・削除・別時点・は／も・肯否・時制・程度変更を拒否する。公開DTO／DB／取得回数／Emlis・Analysis ownerは不変。STRUCTURE_MAP_DELTA_PRESENT。
+
+新架空「誘われたのに、嬉しくなかった。」を実Emlis serviceのQUESTION→回答→RESOLVED・MATERIAL_UPDATE全ADD→exact回答選択へ通した。合成固定providerではPAST／NOW×3planの通常preview・visual変更・SQL save・非生成再読が6/6成功。別に既存warm4Bへ同2材料を単発生成し、PASTは元／回答を別slotで保持、NOWは回答をmemoへ結合し回答slotを欠落した。実rawを無修補で新しい等価な合成sourceへ厳密再bindし、PASTは3plan保存・再送・再読成功、NOWは3planともpreview前拒否・保存行／quota増加0。実GPUの同じPreparedRequest identityを実DBへ保存した証明ではなく、隔離PGlite・合成Auth／HTTPの通常owner接続である。
+
+前回NEW_REFINEDはtyped Engine fixtureのCMEE受理だけで、通常保存に適格なsourceではなかった。原焦点希望から現EmlisはQUESTIONを出さず、回答希望にも現時点根拠がない。前回の「通常SQL未検証」という分類を訂正し、今回の別材料の成功を旧材料の保存成功へ換算しない。旧offline serializerを通常model保存の正本へ転用しない。
+
+既存native編集planをprivate入力へ添える案も3新架空例×旧／新の6実callで比較したが、本文は全3組同一。整形改善0のためoptional schema／service／prompt変更を通常コードから撤回し、未採用patchとrawだけをprivate原本へ保全した。同種prompt追加の反復は行わない。今回計8call、全HTTP200／stop、比較loop11.137208秒＋補足loop4.013212秒、usage／revision／請求unknown、学習／新load／restart／retry0。一般文章の再構成品質は未改善。
+
+最終16file559 PASS／46.06秒・既存warning1、FAIL／SKIP0。9file model CI対象は新THEN testを追加。中間／独立集合は重複加算しない。既知の旧評価19失敗と別のnative V4同19失敗は未修復。配置／live DB／RN／build／配布・native画像／本人端末確認0、TECHNICAL_CREDIT・正式商品品質credit0。次は一般文章の再構成と、NOW補足のslot結合を起こす生成側の修正。
+
+実raw2件はPAST2.238746秒／NOW1.772286秒。PASTはsource本文と回答本文を各1slotへ保持し、その本文をpreview→見た目変更→save／同key再送→新service detailまで固定した。NOW rawの回答slot不足は専用receiverでINVALID_FORMAT、通常serviceはPIECE_TEMPORARILY_UNAVAILABLEとして拒否。各3planの記録済みraw照合を確認し、recorded file不足時の合成応答への切替を保存証拠に混ぜない。
+
+原本：`Cocolon_CMEE_AR04_EligibleRefined4B_20261109.private.json`。全8送信messages／exact raw／finish／source資格probe／正規Q2状態／保存再読／拒否時DB・quota不変／不採用編集案と原本digestを同梱。新材料は開発用架空値でblindではなく、Mash正式受入れとは別。
+
+[Piece CI42580879839](https://github.com/MassyuRed/mashos-api/actions/runs/42580879839)は全工程success、job129039028812のmodel9fileは399 PASS／既存warning1／25.00秒。Analysis CI42580879705は確認時点で実行中。

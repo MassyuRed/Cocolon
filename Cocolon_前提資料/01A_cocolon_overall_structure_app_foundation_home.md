@@ -6265,3 +6265,20 @@ API `1ed4ca27da71ddca510d1ad035b1f0fd7703b1ab`の7path、続行`cfd3d60d476a1e6f
 | `.github/workflows/piece-b2b-isolated-postgres.yml` | 既存path trigger／model stepへ新slot testを追加。新workflow／jobなし |
 
 対象8file368 PASS、実16callの内訳、不採用literal案、旧1→新6の限定、通常15組の合成再bind保存、新refinedの通常SQL未検証、旧offline checkpointとの区別は[既存trial](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-field-slots-20261109)。全Piece／一般意味品質・本番・画像・本人端末の合格ではない。
+
+### 2026-11-09 AR-04 本人補足のTHEN接続（API5c042ed5）
+
+既存ownerの改修で、原入力のsource資格／SQL／公開API／RNの追加はない。8pathの差分は次のとおり。
+
+| Path | 今回の責務 |
+|---|---|
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_refined.py` | 既存_THEN／_FEELINGで完全SELF補足の相対時点を原文保持。認定prefix範囲だけを導出 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_v1c.py` | 認定済みsupplemental時点prefix内だけ参照例外、既存KEEPへ接続 |
+| `ai/services/ai_inference/piece_v2_content_policy.py` | 完成本文のTHEN全文を独立比較、時点脱落／NOW化等を拒否 |
+| `ai/tests/test_cmee_piece_supplemental_then_feeling.py` | 新25件、原文／evidence・native／model・時点変異・資格拡大なし |
+| `ai/tests/piece_v2/test_b05_refined_preview_saved_pipeline.py` | 既存正規Q2／保存helperの原文・tier引数化、既存期待を維持 |
+| `ai/tests/piece_v2/test_b05_piece_model_saved_pipeline.py` | 新INVITEのPAST／NOW×3plan通常SQL回帰、provider実数counter |
+| `ai/tests/test_piece_model_field_slots.py` | 旧NEW_REFINEDをtyped Engine限定fixtureと名称／説明訂正 |
+| `.github/workflows/piece-b2b-isolated-postgres.yml` | 既存model検証へ新THEN testを追加 |
+
+編集plan併記案のschema／prompt／service／新testは実比較で本文差0のため通常採用せず撤回。実結果・資格訂正・残件は[既存trial](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-eligible-refined-4b-20261109)。

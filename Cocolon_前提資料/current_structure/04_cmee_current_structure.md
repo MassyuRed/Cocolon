@@ -2060,4 +2060,17 @@ API `1ed4ca27da71ddca510d1ad035b1f0fd7703b1ab`→`cfd3d60d476a1e6f7fbff16b86897f
 
 model本文のFOCUS読取は既存`piece_v2_generation._FOCUS`全文を再利用し、SELF／predicate全文／object全文を照合する。名前・参照・scopeは既存S7を迂回しない。旧作者を呼ぶ／旧S7や旧offline checkpointを緩める変更はない。公開DTO／DB・renderer・RN・Emlis／Analysis方式は不変。STRUCTURE_MAP_DELTA_PRESENT。
 
-同6架空材料で旧CMEE受理1→新6。通常5実本文×3planは合成sourceへ厳密再bindした隔離SQLで保存・非生成再読。新refined1件はCMEE受理までで、その通常SQL保存は未検証。旧offline refined serializerは旧作者の語順を要求してこのmodel artifactを拒否し、model保存の正本へ転用していない。対象8file368 PASS、原文語の保持を一般文章品質の改善へ換算しない。残件と全実測は[既存trial](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-field-slots-20261109)。
+同6架空材料で旧CMEE受理1→新6。通常5実本文×3planは合成sourceへ厳密再bindした隔離SQLで保存・非生成再読。前回NEW_REFINEDはtyped Engine fixtureのCMEE受理までで、通常保存のQUESTION／時点条件を満たさないsourceだったと後続確認で訂正した。旧offline refined serializerは旧作者の語順を要求してこのmodel artifactを拒否し、model保存の正本へ転用していない。対象8file368 PASS、原文語の保持を一般文章品質の改善へ換算しない。残件と全実測は[既存trial](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-field-slots-20261109)。
+
+<a id="piece-eligible-refined-4b-20261109"></a>
+## 2026-11-09 — AR-04 正規本人補足のTHEN読取と実4B保存
+
+API `5c042ed5107d15aef43ff6149279c796d5c45808`、8path。既存`emlis_answer_update._THEN/_FEELING`の時点・感情文法をPieceの本人補足へ再利用した。完全明示SELF感情の「その時」等を原文・根拠に残し、参照例外は認定済み補足の時点prefix内だけ。原入力の資格、他の指示語、他者や不明な感情を拡張しない。完成本文ではTHEN prefix全文も照合し、NOW化・削除・別時点・は／も・肯否・時制・程度変更を拒否する。公開DTO／DB／取得回数／Emlis・Analysis ownerは不変。STRUCTURE_MAP_DELTA_PRESENT。
+
+新架空「誘われたのに、嬉しくなかった。」を実Emlis serviceのQUESTION→回答→RESOLVED・MATERIAL_UPDATE全ADD→exact回答選択へ通した。合成固定providerではPAST／NOW×3planの通常preview・visual変更・SQL save・非生成再読が6/6成功。別に既存warm4Bへ同2材料を単発生成し、PASTは元／回答を別slotで保持、NOWは回答をmemoへ結合し回答slotを欠落した。実rawを無修補で新しい等価な合成sourceへ厳密再bindし、PASTは3plan保存・再送・再読成功、NOWは3planともpreview前拒否・保存行／quota増加0。実GPUの同じPreparedRequest identityを実DBへ保存した証明ではなく、隔離PGlite・合成Auth／HTTPの通常owner接続である。
+
+前回NEW_REFINEDはtyped Engine fixtureのCMEE受理だけで、通常保存に適格なsourceではなかった。原焦点希望から現EmlisはQUESTIONを出さず、回答希望にも現時点根拠がない。前回の「通常SQL未検証」という分類を訂正し、今回の別材料の成功を旧材料の保存成功へ換算しない。旧offline serializerを通常model保存の正本へ転用しない。
+
+既存native編集planをprivate入力へ添える案も3新架空例×旧／新の6実callで比較したが、本文は全3組同一。整形改善0のためoptional schema／service／prompt変更を通常コードから撤回し、未採用patchとrawだけをprivate原本へ保全した。同種prompt追加の反復は行わない。今回計8call、全HTTP200／stop、比較loop11.137208秒＋補足loop4.013212秒、usage／revision／請求unknown、学習／新load／restart／retry0。一般文章の再構成品質は未改善。
+
+最終16file559 PASS／46.06秒・既存warning1、FAIL／SKIP0。9file model CI対象は新THEN testを追加。中間／独立集合は重複加算しない。既知の旧評価19失敗と別のnative V4同19失敗は未修復。配置／live DB／RN／build／配布・native画像／本人端末確認0、TECHNICAL_CREDIT・正式商品品質credit0。次は一般文章の再構成と、NOW補足のslot結合を起こす生成側の修正。 [実測・原本・次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-eligible-refined-4b-20261109)。
