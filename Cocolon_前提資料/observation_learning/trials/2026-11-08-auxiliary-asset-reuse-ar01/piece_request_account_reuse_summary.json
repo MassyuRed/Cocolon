@@ -1626,5 +1626,141 @@
     "formal_product_credit": 0,
     "formal_acceptance": "0/3",
     "next": "新e924候補と完了48更新を繰り返さず、語り手が異なる動作の肯否・評価の時点・留保対象の保持を、既存の対照教材と保持教材の配分から改善する。模型作りの名詞形対応外はモデル失敗と分けてsource側へ残す。新候補の通常採用・本番／本人端末反映へ自動進行しない。AR-01の役割反転と他ARの新規活用は継続残件。"
+  },
+  "finite_action_source_conditions_20261109": {
+    "schema": "cocolon.cmee.ar04.whole_source_finite_action_conditions.v1",
+    "date": "2026-11-09 JST",
+    "api_base": "651f1f38239d588898266bdf425fe2f02654ff2a",
+    "api_commit": "39e315845629622f2bb4d3dd3a7e9d53cf5569fd",
+    "scope": "COMPLETE_FINITE_ACTION_SOURCE_PART_ACTIVE_FIELDS_ONLY",
+    "source_qualification_widened": false,
+    "system_message_changed": false,
+    "candidate_validators_changed": false,
+    "expected_body_injected": false,
+    "raw_repair": false,
+    "training_updates": 0,
+    "reused_capabilities": [
+      "piece_source._finite_self_person_action_account",
+      "natural_reply_meaning._clauses",
+      "natural_reply_meaning._FORMS",
+      "natural_reply_meaning._arguments"
+    ],
+    "private_condition": "required_actions",
+    "passive_field_projection": false,
+    "mixed_evaluation_feeling_opaque_reservation_part_projection": false,
+    "undecided_condition_attempt_withdrawn": true,
+    "policy_restored_to_api_base": true,
+    "actual": {
+      "source_cases": 18,
+      "represented_piece_outputs": 36,
+      "cumulative_http_calls": 53,
+      "cumulative_piece_calls": 45,
+      "cumulative_control_calls": 8,
+      "actual_http_calls_by_trial": [
+        40,
+        13
+      ],
+      "final_additional_http_calls": 0,
+      "final_raw_exact_message_reuse": 36,
+      "candidate_raw_origins": {
+        "first_trial_baseline": 13,
+        "second_trial_candidate": 5
+      },
+      "before_generated": 14,
+      "after_generated": 15,
+      "changed_body_pairs": 2,
+      "identical_body_pairs": 16,
+      "old_success_regressions": 0,
+      "novel_heldout_claim": false
+    },
+    "discarded_attempts": {
+      "actions_plus_undecided": {
+        "generated_before": 14,
+        "generated_after": 14,
+        "negation_fixed": 1,
+        "passive_past_regression": 1,
+        "reservation_target_changed": true
+      },
+      "active_field_only": {
+        "mixed_evaluation_omission": 1,
+        "adopted": false
+      }
+    },
+    "saved_sql": {
+      "engine": "PGlite 0.5.8",
+      "trials": 108,
+      "tiers": [
+        "free",
+        "plus",
+        "premium"
+      ],
+      "baseline": {
+        "saved": 42,
+        "rejected": 12
+      },
+      "candidate": {
+        "saved": 45,
+        "rejected": 9
+      },
+      "postsave_generation_calls": 0,
+      "quota_per_saved": 1,
+      "refused_record_quota_delta": 0,
+      "original_emlis_unchanged": true,
+      "same_and_new_service_reread": true,
+      "identity_scope": "exact recorded raw rebound to equivalent fresh synthetic source IDs/datetime; isolated SQL, not original GPU identity live Supabase",
+      "intermediate_trials_added_to_final": false
+    },
+    "regression": {
+      "test_files": 17,
+      "passed": 940,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 47.98,
+      "existing_warnings": 1,
+      "intermediate_counts_added": false
+    },
+    "ci": {
+      "api_commit": "39e315845629622f2bb4d3dd3a7e9d53cf5569fd",
+      "piece_run_id": 42635458286,
+      "piece_job_id": 129222298597,
+      "piece_status": "completed",
+      "piece_conclusion": "success",
+      "analysis_final_head_run": null,
+      "analysis_reason": "Final source/test paths did not trigger Analysis workflow; no final-head success claimed.",
+      "piece_completed_at": "2026-11-09T14:35:18Z",
+      "piece_model_passed": 940,
+      "piece_model_seconds": 35.39
+    },
+    "runtime": {
+      "restored_pid": 36489,
+      "health": true,
+      "emlis_analysis_control_raw_equal": true,
+      "source_analysis_keys_argv_unchanged": true,
+      "weights_sha256": "e924556edec8973746e69cfcad945665e178dec222bb9b0ecc1994de5cc12f49",
+      "weights_unchanged": true,
+      "candidate_normal_adoption": false,
+      "selector": "OFF",
+      "http_seconds_by_trial": [
+        202.872029,
+        81.705099
+      ],
+      "model_boot_and_restore_seconds_total": 67.068222,
+      "total_gpu_holding_cost": "UNKNOWN",
+      "render_live_db_rn_signed_build_device_changes": 0
+    },
+    "remaining": [
+      "past evaluation changed to nonpast",
+      "undecided target rewrite",
+      "model-building nominal source unsupported",
+      "general prose reconstruction",
+      "same-version new image and ordinary integration/device verification",
+      "AR01 direction inversion and other AR units"
+    ],
+    "evidence_filename": "Cocolon_CMEE_AR04_FiniteAction_SourceConditions_20261109.zip",
+    "structure_delta": "PRESENT_EXISTING_PRIVATE_AUTHORING_CONDITION",
+    "primary_outcome": "LIMITED_TECHNICAL_CREDIT",
+    "formal_product_credit": 0,
+    "formal_acceptance": "0/3",
+    "next": "今回の全文有限動作条件と保存結果を継承し、評価の過去時点・未決定対象・混在文章の意味保持を改善する。同じ条件追加の周回や保存e924の完了48更新を再実行せず、教示と意味単位の不足へ戻る。模型作りの名詞形対応外はmodel誤生成と分けてsource側へ残す。一般再構成・同版画像／通常統合・本人端末、新候補の通常採用は未完了。AR-01の役割反転と他ARの新規活用も継続残件。"
   }
 }

@@ -534,3 +534,40 @@ JS181 PASS／17.35秒。新iOS [run42621869347](https://github.com/MassyuRed/Coc
 
 
 **最終helper CI追補：** API651f1f38の[Piece CI42628030176](https://github.com/MassyuRed/mashos-api/actions/runs/42628030176)はcompleted／success、job129196776112のmodel17fileは894 PASS／59.08秒・既存warning1。[Analysis CI42628030209](https://github.com/MassyuRed/mashos-api/actions/runs/42628030209)もcompleted／success。追加helperの新3保存検査を含む最終headの結果で、先行891・対象14と重複加算しない。e924の意味退行・通常未採用と旧V4のRN別試験失敗は不変。
+
+<a id="piece-finite-action-source-conditions-20261109"></a>
+## 2026-11-09 全文有限動作の生成条件 — 否定保持と実比較
+
+**11/9・AR-04最新：** API `39e31584`。既存の有限節／活用／格読取を、全文が既知動作であるsource partの生成条件へ接続。異なる一人称が続く二動作の第二否定を修復し、固定e924の同18材料は14→15採用。最終隔離SQL108は旧42保存／12拒否、新45保存／9拒否、保存後0再生成。途中の受動時点・別欄評価の退行を避け、受動欄／混在partは元条件を維持する。評価の過去時点・未決定対象の2rawと、模型作りのsource資格外は残る。新学習0・重み不変・通常未採用／selector OFF。GPU元提供PID36489へ復元、healthとEmlis／Analysis前後control一致。本番・本人端末・一般品質・AR全体完了ではない。
+
+実装は[API 39e31584](https://github.com/MassyuRed/mashos-api/commit/39e315845629622f2bb4d3dd3a7e9d53cf5569fd)。前回の[混在本文・欄／補足と全面Card](#piece-mixed-source-scope-learning-full-card-20261109)を継承し、重みを追加学習せず、sourceから確定した動作の意味を唯一の4B作者へ渡す改修を行った。正式受入れ0/3・商品品質credit0を維持する。
+
+### 回収した責務と最終の適用範囲
+
+`piece_model_source._source_action_constraint`は、既存`piece_source._finite_self_person_action_account`の全文資格と`natural_reply_meaning._clauses/_FORMS/_arguments`の一意な完全節読取を再利用する。各source partの全sentenceが既知の明示SELF・頼む／相談する／伝えるの事実過去として成立した場合だけ、欄別`control.authoring_constraints.field_slots.<key>.required_actions`へ本人表記、原文活用形／述語、肯否、時点、事実性、voice、相対日、格と相手／対象、scalar範囲を渡す。受動文を含むfieldでは全動作条件を追加せず、同partの別fieldは独立させる。評価・感情・opaque文・未決定を含む混在partは従前の送信内容を保持し、既存の名前・評価条件も失わない。原requestからのPreparedRequest再導出一致、原入力7fieldと本人補足の分離、SYSTEM、条件なし既定送信bytes、独立採否／S7、保存後非生成再読、公開DTO／DB、selector既定OFFは維持する。期待正文、生成後修補、新しい受理文法、別作者は追加しない。
+
+変更は既存API `piece_model_source.py`と既存`test_piece_model_authoring_constraints.py`。途中で抽出した未決定helperと生成条件は撤回し、`piece_v2_content_policy.py`は開始版651f1f38と同一である。原文・source資格・作者・採否閾値を緩めず、原文から成立する条件の生成側接続だけを変更した。
+
+### 二つの実試行と、不採用部分の撤回
+
+前回の18sourceをexact PreparedRequest／原入力7項目／本人補足へ復元し、未学習の新規評価集合や新教師とは呼ばない。最初は固定e924の旧条件／動作＋未決定条件を18組36 Piece生成、前後control4の計40 HTTPで比較した。異なる一人称の第二動作の否定は修復したが、受動の過去→現在が生じ、未決定対象の書換えも残り、CMEE採用は14→14だった。全18組を3planへ通した隔離SQL108も旧42保存／12拒否、新42保存／12拒否で、改善と退行を相殺して成功にしない。
+
+次に未決定投影を撤回し、受動fieldの動作条件を抑止。送信内容が変わる9要求だけを追加生成し、前後control4と合わせて13 HTTPを実行した。否定修復は保ったが、別欄の評価述語欠落が新たに生じ、当該中間scopeも採用しなかった。最終は全sentenceを既知動作として読めるsource partだけへ動作条件を渡す。混在partへ一部の動作条件だけを追加しない一般の適用条件であり、case名・rawの合否・期待正文による分岐はない。
+
+最終送信を現sourceから再導出すると、全18基準は第一試行の旧条件、候補13は同じ旧条件、候補5は第二試行の実送信内容と完全一致した。request body／messages／request hash、e924 revision、response bytes／rawを照合してその実出力を無修正で再利用した。最終scopeでの追加HTTP／load／学習は0。二試行累計は53 HTTP＝45 Piece＋8 controlであり、最終の36 Piece比較表現やSQL回数を新規推論数へ加算しない。
+
+### 最終本文・保存と残差
+
+同18sourceの最終比較は14→15採用。第二動作の否定反転1例が修復され、同じ一人称が続く別例の主語省略は既存の独立readerが同一主体として確認した。本文2組変化／16組同一、旧成功14例の拒否退行0。過去評価の現在化と未決定対象の書換えは引き続き拒否し、模型作りの名詞形は既存source資格外として区別する。限られた既使用材料の比較であり、一般文章品質・学習効果・新規held-outへの一般化ではない。
+
+最終36応答×Free／Plus／Premium＝108試行は、旧42保存／12拒否、新45保存／9拒否。成功87は本文／recipe等の保存版一致、quota各1、save再送と同／新serviceの非生成再読、原入力・Emlis不変を確認。拒否21は新record・quota不変。記録済みrawの初回供給後にmodel／旧作者の再生成を行わない。最終108は途中の各SQL比較と別結果であり、回数を上乗せしない。保存は等価な新しい合成source ID／日時へ厳密再bindしたPGlite・合成Auth／SQL callbackの既存通常owner検証で、GPU原PreparedRequest identityを実Supabaseへ保存した実績ではない。
+
+最終17fileは940 PASS／47.98秒・既存warning1、FAIL／SKIP0。中間933／932や局所集合を加算しない。最終API headのPiece CI42635458286はcompleted／success（2026-11-09T14:35:18Z）。job129222298597のmodel17fileも940 PASS／35.39秒・既存warning1で、全工程が成功した。Analysisは最終headの変更pathでは起動対象外であり、同headのCI成功は主張しない。
+
+### 提供の復元・記録と次
+
+二試行のHTTP実時間合計は202.872029秒＋81.705099秒、候補起動／元提供復元の計4読込は約67.068222秒。GPU総保持時間、保存・通信、総請求額と通常提供原価は未測定。最終PID36489で元base／既存Analysis提供へ復元しhealth正常、前後の自然Emlis／Analysis response bytes一致。元serving source・既存Analysis重み・認証値・起動引数・e924重みを保持する。
+
+実行済みwire／raw／保存再読／両途中失敗と最終の由来はprivate `Cocolon_CMEE_AR04_FiniteAction_SourceConditions_20261109.zip`へ保存する。新重みの通常採用、selector有効化、本番Render／実DB／RN／署名build／配布、今回のnative画像／本人端末確認は0。前回同版全面画像1作品の成功と旧V4別試験失敗は継承し、今回の新規画像成功へ換算しない。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT、正式商品品質credit0・正式受入れ0/3。
+
+今回の全文有限動作条件と保存結果を継承し、評価の過去時点・未決定対象・混在文章の意味保持を改善する。同じ条件追加の周回や保存e924の完了48更新を再実行せず、教示と意味単位の不足へ戻る。模型作りの名詞形対応外はmodel誤生成と分けてsource側へ残す。一般再構成・同版画像／通常統合・本人端末、新候補の通常採用は未完了。AR-01の役割反転と他ARの新規活用も継続残件。

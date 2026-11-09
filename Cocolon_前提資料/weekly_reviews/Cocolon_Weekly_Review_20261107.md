@@ -2384,3 +2384,18 @@ JS181 PASS／17.35秒。新iOS [run42621869347](https://github.com/MassyuRed/Coc
 
 
 **最終helper CI追補：** API651f1f38の[Piece CI42628030176](https://github.com/MassyuRed/mashos-api/actions/runs/42628030176)はcompleted／success、job129196776112のmodel17fileは894 PASS／59.08秒・既存warning1。[Analysis CI42628030209](https://github.com/MassyuRed/mashos-api/actions/runs/42628030209)もcompleted／success。追加helperの新3保存検査を含む最終headの結果で、先行891・対象14と重複加算しない。e924の意味退行・通常未採用と旧V4のRN別試験失敗は不変。
+
+<a id="piece-finite-action-source-conditions-20261109"></a>
+## 50. 補助経路活用AR-04 — 全文有限動作の生成条件と否定保持
+
+**11/9・AR-04最新：** API `39e31584`。既存の有限節／活用／格読取を、全文が既知動作であるsource partの生成条件へ接続。異なる一人称が続く二動作の第二否定を修復し、固定e924の同18材料は14→15採用。最終隔離SQL108は旧42保存／12拒否、新45保存／9拒否、保存後0再生成。途中の受動時点・別欄評価の退行を避け、受動欄／混在partは元条件を維持する。評価の過去時点・未決定対象の2rawと、模型作りのsource資格外は残る。新学習0・重み不変・通常未採用／selector OFF。GPU元提供PID36489へ復元、healthとEmlis／Analysis前後control一致。本番・本人端末・一般品質・AR全体完了ではない。
+
+[API 39e31584](https://github.com/MassyuRed/mashos-api/commit/39e315845629622f2bb4d3dd3a7e9d53cf5569fd)は、旧有限動作readerを生成条件へ再利用する既存2fileの差分。source partの全sentenceを既知動作として読める場合だけ動作条件を渡し、受動fieldと評価・感情・opaque・未決定が混在するpartは元条件を保持する。既存評価／名前条件、原入力7field／本人補足の分離、SYSTEM・既定送信bytes・独立採否／S7・保存後非生成再読を維持し、期待正文・raw修補・新文法・新作者はない。途中の未決定helper抽出／投影は全撤回した。
+
+最初の同18組36 Piece＋前後control4は、否定修復と受動時点退行が相殺して14→14。次の変更9要求＋control4は別欄評価の欠落があり、その混在scopeも不採用。最終scopeのwireは実取得済みの要求と完全一致するため、基準18／候補13は第一試行旧条件、候補5は第二試行からraw・revision・全messages／request hashを検証して再利用した。最終追加HTTP0、累計53 HTTP＝45 Piece＋8 control、学習0。最終比較の36 Piece表現や中間SQL回数を新規推論・最終分母へ加算しない。
+
+最終同18は14→15採用、本文2組変化／16同一、既成功拒否退行0。原文の異なる一人称の第二動作の否定を保持し、過去評価の現在化と未決定対象の書換えは引き続き拒否、模型作りはsource資格外。最終108の隔離SQLは旧42保存12拒否／新45保存9拒否、成功87の本文・recipe・quota各1・原入力／Emlis不変、保存後同／新service再生成0を確認。実Supabase・GPU原identity保存ではない。
+
+最終17file940 PASS／47.98秒・既存warning1、FAIL／SKIP0。最終headのPiece CI42635458286はcompleted／success（2026-11-09T14:35:18Z）、job129222298597のmodel17fileも940 PASS／35.39秒・既存warning1。Analysisは最終headの変更pathでは起動対象外で、同headの成功は主張しない。二試行HTTP実時間202.872029秒＋81.705099秒、起動／復元計約67.068222秒、総保持・請求／通常原価は未測定。元提供PID36489へ復元しhealthと自然Emlis／Analysis前後response bytes一致。e924重み・元source／Analysis／keys／argv不変。
+
+[全実結果・由来・残件](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-finite-action-source-conditions-20261109)、private原本`Cocolon_CMEE_AR04_FiniteAction_SourceConditions_20261109.zip`。通常未採用・selector OFF、Render／実DB／RN／signed build／配布／今回native画像／本人端末0。前回の同版全面画像1作品と旧V4失敗は継承。限定TECHNICAL_CREDIT、正式商品品質credit0・正式受入れ0/3。今回の全文有限動作条件と保存結果を継承し、評価の過去時点・未決定対象・混在文章の意味保持を改善する。同じ条件追加の周回や保存e924の完了48更新を再実行せず、教示と意味単位の不足へ戻る。模型作りの名詞形対応外はmodel誤生成と分けてsource側へ残す。一般再構成・同版画像／通常統合・本人端末、新候補の通常採用は未完了。AR-01の役割反転と他ARの新規活用も継続残件。

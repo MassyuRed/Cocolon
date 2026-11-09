@@ -6377,3 +6377,21 @@ API既存 `piece_v2_content_policy.py::validate_source_meaning_preservation` 内
 RN検証3path：`tests/native/piece-rn-canvas-fixtures.cjs`／`tests/native/piece-rn-canvas-ios.m`／`tests/piece-v2-renderer.test.js`。前回の実保存 `piece-ar04-adopted-native.json` を同版全面Card・保存PNG・view-shotへ追加し、v1/Cocolonの旧期待を維持して新v2/Emlisを検査。製品RN不変。
 
 STRUCTURE_MAP_DELTA_PRESENT。新e924候補と完了48更新を繰り返さず、語り手が異なる動作の肯否・評価の時点・留保対象の保持を、既存の対照教材と保持教材の配分から改善する。模型作りの名詞形対応外はモデル失敗と分けてsource側へ残す。新候補の通常採用・本番／本人端末反映へ自動進行しない。AR-01の役割反転と他ARの新規活用は継続残件。 詳細はweekly§49と既存trialの同anchor。
+
+<a id="piece-finite-action-source-conditions-20261109"></a>
+## 2026-11-09 AR-04 全文有限動作の生成条件 — 全file地図差分
+
+**11/9・AR-04最新：** API `39e31584`。既存の有限節／活用／格読取を、全文が既知動作であるsource partの生成条件へ接続。異なる一人称が続く二動作の第二否定を修復し、固定e924の同18材料は14→15採用。最終隔離SQL108は旧42保存／12拒否、新45保存／9拒否、保存後0再生成。途中の受動時点・別欄評価の退行を避け、受動欄／混在partは元条件を維持する。評価の過去時点・未決定対象の2rawと、模型作りのsource資格外は残る。新学習0・重み不変・通常未採用／selector OFF。GPU元提供PID36489へ復元、healthとEmlis／Analysis前後control一致。本番・本人端末・一般品質・AR全体完了ではない。
+
+`piece_model_source._source_action_constraint`は、既存`piece_source._finite_self_person_action_account`の全文資格と`natural_reply_meaning._clauses/_FORMS/_arguments`の一意な完全節読取を再利用する。各source partの全sentenceが既知の明示SELF・頼む／相談する／伝えるの事実過去として成立した場合だけ、欄別`control.authoring_constraints.field_slots.<key>.required_actions`へ本人表記、原文活用形／述語、肯否、時点、事実性、voice、相対日、格と相手／対象、scalar範囲を渡す。受動文を含むfieldでは全動作条件を追加せず、同partの別fieldは独立させる。評価・感情・opaque文・未決定を含む混在partは従前の送信内容を保持し、既存の名前・評価条件も失わない。原requestからのPreparedRequest再導出一致、原入力7fieldと本人補足の分離、SYSTEM、条件なし既定送信bytes、独立採否／S7、保存後非生成再読、公開DTO／DB、selector既定OFFは維持する。期待正文、生成後修補、新しい受理文法、別作者は追加しない。
+
+| Repository/path | 今回の現責務 |
+|---|---|
+| API `ai/services/ai_inference/piece_model_source.py` | 原request／PreparedRequest一致と全source partの完全有限動作被覆を確認し、受動fieldを除く欄へ動作条件を投影。混在partの旧送信内容を維持 |
+| API `ai/tests/test_piece_model_authoring_constraints.py` | 六一人称・動作ごとの肯否、完全節／欄境界、受動field抑止、混在partで旧条件保持、source改変拒否を確認 |
+
+開始版651f1f38に対する最終製品差分は上記既存2pathだけ。途中の`piece_v2_content_policy.py` helper抽出は撤回し同版へ復元、採否検査・公開型・DB・RN・新作者は不変。最終17file940 PASS／47.98秒・既存warning1。最終Piece CI42635458286はcompleted／success（2026-11-09T14:35:18Z）、model17file940 PASS／35.39秒・既存warning1。Analysisは最終headの変更pathでは起動対象外。STRUCTURE_MAP_DELTA_PRESENT。新規fileの追加や全repository意味監査ではない。
+
+最終の同18材料・108隔離SQLと、累計53 HTTP／最終追加0 HTTPの由来、途中不採用・残差は[実結果](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-finite-action-source-conditions-20261109)とweekly§50へ戻る。
+
+今回の全文有限動作条件と保存結果を継承し、評価の過去時点・未決定対象・混在文章の意味保持を改善する。同じ条件追加の周回や保存e924の完了48更新を再実行せず、教示と意味単位の不足へ戻る。模型作りの名詞形対応外はmodel誤生成と分けてsource側へ残す。一般再構成・同版画像／通常統合・本人端末、新候補の通常採用は未完了。AR-01の役割反転と他ARの新規活用も継続残件。
