@@ -61,16 +61,20 @@
   "structure_map_delta": "PRESENT_EXISTING_PIECE_OWNER_QUALIFICATION_AND_REUSE_DEPENDENCY",
   "ci_at_recording": [
     {
-      "id": 42543151792,
-      "name": "Analysis observed content",
-      "status": "in_progress",
-      "conclusion": null
-    },
-    {
       "id": 42543151704,
       "name": "Piece B2-B/B3/B4/B5 isolated PostgreSQL",
       "status": "completed",
-      "conclusion": "success"
+      "conclusion": "success",
+      "head_sha": "e8b7e46c70269a40317fe2ec6ee8362c4086e619",
+      "html_url": "https://github.com/MassyuRed/mashos-api/actions/runs/42543151704"
+    },
+    {
+      "id": 42543151792,
+      "name": "Analysis observed content",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "e8b7e46c70269a40317fe2ec6ee8362c4086e619",
+      "html_url": "https://github.com/MassyuRed/mashos-api/actions/runs/42543151792"
     }
   ]
 }

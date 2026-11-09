@@ -40,6 +40,8 @@ rootと独立担当が全12原入力・前後全文・plan／完成候補を読�
 
 APIの変更集合は既存source2＋新test1のみ。公開route／request／response／DB schema／権利／quota／RNは変更しない。新owner・controller・別作者・raw修補なし。STRUCTURE_MAP_DELTA_PRESENTは、既存Piece ownerの有限資格と共通reader再利用依存の追記という限定。
 
+GitHub既存の[Piece CI](https://github.com/MassyuRed/mashos-api/actions/runs/42543151704)と[Analysis共有回帰CI](https://github.com/MassyuRed/mashos-api/actions/runs/42543151792)は同じe8b7e46cでcompleted／success。Analysisは全19step成功を確認した。配置／実DB／実機の成功へ換算しない。
+
 ## AR-01と全体の残件
 
 AR-01の意味材料→本文での役割反転は未解決、既存候補は通常不採用のまま。今回、同一messagesからの固定候補集合比較を検討したが、既存サーバーはtemperature0以外を拒否しdo_sample=False固定と実sourceで確認した。同一greedy生成を繰り返す試行は実行せず、model call・学習・新load・再起動0。候補比較能力を廃止せず、現提供条件と区別する。
