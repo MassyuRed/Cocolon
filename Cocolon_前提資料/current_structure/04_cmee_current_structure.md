@@ -2017,10 +2017,10 @@ STRUCTURE_MAP_DELTA_PRESENT（API候補 `a98c6e59`、配置未実施）。既存
 
 
 <a id="piece-refined-separate-sources-20261109"></a>
-## 2026-11-09 — Pieceの補足frameをCMEE既存作者へ適合
+## 2026-11-09 — AR-04 補足の有限感情文を既存B8へ
 
-実装API1e76599f。既存PieceSavedSourceAdapterにopt-in exact1の保存ADD回答取得／fresh再検証を追加。新CMEE `piece_refined.py`は元originalとSUPPLEMENTAL_ANSWERを別envelope／元根拠のまま既存作者・保持検査へ渡し、private短文エッセイを保存非生成再読する。原入力に補足を連結せず、Emlis生成物は使わない。question event IDと論理question IDは別で、保存adapterが対応を検証する。
+APIfc7dc299（前版1e76599f）。原入力／本人補足の別envelope・根拠・同本人／opt-in・解決済みADD資格を継承。既存answerの_FEELING／_NOWとPieceの_written_feeling_expressionを、補足自身の明示SELF述語全文へ限定適合し、選択感情を借用せず既存KEEP作者へ渡す。省略／他者・推測／伝聞／未知形容詞・未解決／訂正／撤回は新許可しない。
 
-独立架空8作品／private再読8、旧新28入力のmeaning・plan・artifact同一、181対象PASS。広い161失敗は親版でも同じ161、全suite成功ではない。実Q2の保存ADD取得・再検証は隔離SQLで成功したが、実Q2→作品の成功は未成立。新private入力は完全SELFのADD願望・評価を限定実証し、訂正／撤回・source跨ぎ照応・一般再構成／quote・declarationは未対応。合成controlの成功と実Emlis意味採用を混同しない。
+実Q2 CMEE＋隔離SQLで保存された2ADDを、clean親版と最終候補で同一source／commitmentのまま0生成再読し、作品は0→2。実保存材料を作品化する再比較でQ2・provider呼出し0。既存B8候補口へ新private型を通し、source／plan／canonical本文の再束縛とauthor-free検査、既存recipe／合成layout、private保存非生成再読を確認した。旧28入力と旧refined8保存bytesは完全同一、707対象PASS。一般単独伝達品質／高度な意味融合の完成ではない。
 
-通常`piece_v2_source_ref_http`／preview／review／save／SQL・RNはoriginal-onlyのまま。通常refined保存・同じrecipe／bitmap・実機・稼働は次の残件。新5private型と8file責務は[全file差分](../01A_cocolon_overall_structure_app_foundation_home.md#piece-refined-separated-files-20261109)、実本文／失敗／次作業は[既存trial](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-separate-sources-20261109)。STRUCTURE_MAP_DELTA_PRESENT、配置／実DB／GPU／RN／build0。
+新private型／保存版は前版の5型／v1を継承し追加0。通常source-ref HTTP／review／preview／save／SQL・RNはoriginal-onlyのまま。次はopt-in・別補足commitment・current guardを同じ通常保存境界へ渡す不足を実装し、同じ採用native画像と端末で確認する。既知の161旧失敗とAR-01反転は残件。配置／実DB／GPU／RN／build0。新7fileの差分は[全file地図](../01A_cocolon_overall_structure_app_foundation_home.md#piece-refined-separated-files-20261109)、実結果・採取中source混在の限定は[trial](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-q2-feeling-reuse-20261109)。STRUCTURE_MAP_DELTA_PRESENT（既存資格・候補手渡し／検査）。

@@ -3406,3 +3406,6 @@ API1e76599fのprivate型のみ。既存公開source_ref／API／DTO／DB schema�
 | PieceRefinedPlan | 2partitionの既存plan、順序／役割、short_essay限定。source跨ぎの関係を作らない |
 
 `piece.refined_private_saved.v1`はprivate file再読用のsource／plan／同じPieceArtifactを持つJSON。既存canonical JSONへ渡す前にprivate dataclassのtupleをarray化する。再読はtrusted storeのexpected SHAに対応するexact bytesからartifactを復元し、source parser／意味採用／compiler／作者／Engine／modelを呼ばない。通常RPCの意味checkpoint・保存preview／record・quota／画像版・認証権利を、このfile形式から成立させない。旧original／旧P4保存形式は変更0。[実証・限定](../../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-separate-sources-20261109)。
+
+
+2026-11-09続行APIfc7dc299では、上記5private型・piece.refined_private_saved.v1を変更せず、補足の有限感情KEEPと既存B8候補のsource／plan／canonical artifact照合へ接続した。候補は既存OFFLINE_NOT_ACCEPTED／record_effect0／quota_effect0。recipe／合成layoutの一致を通常preview・record・native画像の保存へ換算しない。通常refinedのsource-ref／review／SQL保存境界は未接続。

@@ -77,3 +77,37 @@ AR-04の一般本文再構成・別sourceのrefined、対応候補の通常稼�
 STRUCTURE_MAP_DELTA_PRESENT：既存保存adapterのread-only補足資格と、CMEE内private多source入力／計画・保存形式、既存作者のfield text座標アクセスを追加。通常preview／HTTP／source_ref／review／save／SQL/RLS・RN・画像版・権利・料金・quotaは変更0。配置／実DB／build／GPU／学習0。primary TECHNICAL_CREDIT、正式商品品質credit0、AR-01役割反転・AR-04一般本文／refined通常保存と同版画像・全資産活用は継続中。
 
 次は今回の出所分離を保持し、実Q2で採用された完全SELF補足から現作者が作品資格を成立させる不足を局所修復する。その後、既存source_ref／review／preview／save／同版画像へrefinedを通す。補足を原入力へ連結する、未解決をADD扱いする、private保存を通常保存と呼ぶ方法へ戻らない。
+
+
+<a id="refined-q2-feeling-reuse-20261109"></a>
+## AR-04続行：実保存ADDの感情文をrefinedの既存候補口へ接続
+
+2026-11-09 JST。親API1e76599f／資料2900c36fから、上記の実Q2→作品未成立を継承した。新APIfc7dc299（source3／test3／既存CI1の7path）で、補足自身に完全な明示SELFがある有限感情文を、既存KEEP dutyと唯一作者へ接続した。
+
+### 回収と変更
+
+既存emlis_answer_update._FEELINGの語彙・肯否／時制／degree・_NOWと、Piece既存_written_feeling_expressionを再利用する。単なる「かった」等の文末許可ではなく、明示SELFの後にある述語全文を有限文法で照合する。対象は実SUPPLEMENTAL_ANSWER型のみで、原入力の選択感情・saved JSON資格を補足へ借用しない。全補足節が成立する時だけKEEPへ進み、省略主体・他者・伝聞／推測・疑問・未知形容詞・未対応混在は引き続き拒否する。現在の明示prefixは原文のまま保持し、記録時刻から感情時点を作らない。共有文法ownerの改変、新しい作者／本文template・宣言適格・新private型／保存版の追加は0。
+
+既存piece_v2_generation.generate_piece_candidateがprivateのPieceRefinedSourceSnapshotも受け取り、Engine結果を同じ2sourceから再導出したmeaning／plan／canonical artifactへ再束縛するようにした。既存のsource/plan/artifact差替え拒否を保持し、同義の別表記でも唯一作者のcanonical出力へ勝手に置換しない。refinedの既存作者呼出しはpure関数へ整理してこの照合でも使い、新作者を増やしていない。最後に既存author-free保持検査も行う。公開request、HTTP source-ref、preview発行、review資格、SQL／save／quotaは変更しない。
+
+### 実保存2件の同一材料比較
+
+既存Q2 service＋CMEE＋PGlite0.5.8で、同じ過去原入力に対し、互いに別threadの補足A/Cを2件だけ採取した。Aは同じ元の機会の別感情、Cは明記された現在の感情で、元の過去否定を上書きしない。実checkpointは双方RESOLVED／MATERIAL_UPDATE／ADD、A=ORIGINAL_OCCASION、C=ANSWER_TIME、未解決／supersessionなし。QUESTION／ANSWER／元7field／thread／全events／context／tier／now・DTO・frozen handoff全bytesをprivate保存した。Auth／PostgRESTは合成seam／SQL callbackであり、実Authや本番DBではない。実Q2の意味採用自体を成功注入していない。
+
+採取中にPiece sourceが編集中だったため、採取時Piece結果を固定親版の比較へ使わない。raw採取物とmixed source identityの注意を保持し、別のcleanな親1e76599f checkoutと最終候補で、同じ全保存snapshotをread-only再取得した。この再比較ではQ2生成・provider呼出し0、原入力・thread/eventsは不変、snapshot SHA・別commitment・投影source identityは全て前後一致。
+
+親は2件ともexpression_meaning_not_admitted／本文0、新版は2件とも本文生成。rootと独立担当が全原入力・本人補足・本文を比較し、元の過去否定、Aの併存感情、Cの明示現在を保持し、原因・人物意図・承諾／解決を補っていない。選択されている別感情も追加していない。Cの文体には硬さが残るため、一般単独伝達品質の完成とはしない。
+
+両件は新core→既存B8候補口で同じcontent payload／本文hash、既存recipe検証と合成metric layoutで全2blockの文字列復元が一致。private fileへ同じartifact／sourceと候補＋recipeを保存し、Engine／source reader／compiler／作者／answer freeze禁止の再読でも同一。最終CPU replay2件・candidate照合・recipe／合成layout／private再読の部分は0.130193517秒。native font／fit／bitmap／PNG／通常preview・Piece record・quota／写真・共有・本人端末の成功ではない。
+
+### 保持確認・反映・次
+
+親1e76599fと新版で旧28原入力のmeaning／plan／artifact／candidateが完全一致。旧refined8も新生成結果のprivate保存bytesが旧保存bytesに一致し、生成を禁止した旧版fileの再読も同artifact。過去の18通常保存と旧品質残件を消さない。
+
+最終確認で既存_FEELINGのoptional subject枠に二重SELFが入る抜け2件を検出した。parse-only viewでそのsubject枠を既に占有し、実sourceを変えず述語だけを照合するよう修正。二重SELF2件は生成→拒否となり、正常8／実保存2／旧作品を保持した。初版72cc4f5fと後続fc7dc299のユニーク変更集合は7pathで、final head全7bytesを読戻し一致。
+
+最終11fileの関連検証は707 PASS／35.33秒、FAIL/SKIP0・既存warning1。新しい独立感情24／B8置換11と、実Q2＋SQLの3構成（旧省略回答の取得だけ1、完全SELFの作品化2）を含む。異なるsuite／反復を加算しない。全source/plan／再hashした本文・肯否／時点／degree・欠落の拒否、本文の同義表記差替え、owner不一致、保存非生成を検証した。既知の広範囲161失敗は前回の親版再現として引き継ぎ、今回は再実行・修復をしていない。
+
+API[fc7dc299](https://github.com/MassyuRed/mashos-api/commit/fc7dc299ebea2a0b0064afdd1909f22ae0f0b1f4)のexact7を全bytes／親／変更集合で読戻し一致。前段72cc4f5fの[Piece42551259870](https://github.com/MassyuRed/mashos-api/actions/runs/42551259870)はcompleted/success。最終fc7dc299の[Analysis42551959891](https://github.com/MassyuRed/mashos-api/actions/runs/42551959891)は実行中で、成功扱いしない。前回Analysis42549030023は全step successを確認した。private原本はCocolon_CMEE_AR04_RefinedQ2FeelingReuse_20261109.zip。
+
+STRUCTURE_MAP_DELTA_PRESENTは既存Piece ownerの補足有限資格とB8手渡し／検査の拡張だけ。新型／新wire／DB／RN／通常設定／配置／build／GPU／学習0。primary TECHNICAL_CREDIT、正式商品品質credit0。次は明示opt-in・別supplement commitment・current guardを既存通常source-ref／review／preview／saveと同じ版で束縛する不足へ進み、同じ採用画像／実機を確認する。通常資格を飛ばした発行・未解決のADD化・補足原文のoriginal連結はしない。AR-01役割反転・AR-04一般再構成・全資産活用は継続中。

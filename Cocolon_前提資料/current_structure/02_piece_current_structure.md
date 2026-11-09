@@ -2454,7 +2454,7 @@ UI/Auth/APIの全体結合や本文生成品質は対象外。画像は合成本
 
 `5c501d9eaed60257b202de418c936a1f7acb3bf6` はworkflowと既存runner scriptの2pathだけを変更した。build-for-testingを先に完了し、simulator起動後に同じscheme／configuration／destination／derivedDataPathでtest-without-buildingを実行する。通常iOS buildの直近成功run `38041653252` と同じmacos-26へ合わせ、job上限を45分にした。メモリ／CPU競合が確定原因だとは主張せず、simulatorと初回buildの同時実行を除く。描画の8秒期限、5ケースの入力・判定基準、製品sourceは不変。
 
-[run38370566662](https://github.com/MassyuRed/Cocolon/actions/runs/38370566662)の実RN job `115206230614` は08:42:07 UTCにbuild前のPodfile.lock完全照合で停止した。完了ログの差分は66個のSPEC CHECKSUMS値のみで、PODS／DEPENDENCIES／EXTERNAL SOURCES／PODFILE CHECKSUM／COCOAPODSの差分はない。環境要因は未特定で、製品依存を更新したりlock検証を緩和したりしない。XCTest／5ケースJSON／PNGは未実行・未取得。
+[run38370766662](https://github.com/MassyuRed/Cocolon/actions/runs/38370766662)の実RN job `115206230614` は08:42:07 UTCにbuild前のPodfile.lock完全照合で停止した。完了ログの差分は66個のSPEC CHECKSUMS値のみで、PODS／DEPENDENCIES／EXTERNAL SOURCES／PODFILE CHECKSUM／COCOAPODSの差分はない。環境要因は未特定で、製品依存を更新したりlock検証を緩和したりしない。XCTest／5ケースJSON／PNGは未実行・未取得。
 
 `5c685b4b658f5e08ed78039ea3ecd68761582e79` の変更は実RN jobのrunnerをmacos-15へ戻す1行だけ。初回にlock完全一致を確認した環境を使い、build先行・45分・8秒描画期限・fixture／判定・lock完全照合を保持する。3source commitのremote全文・blob・変更path・親headを確認済み。同環境read-only補助reviewに追加の重大懸念はなく、独立Pro正式reviewとはしない。
 
@@ -2746,7 +2746,7 @@ source015dda53／run38485611654のnative再実行job115604411027は74判定中72
 
 source69f9f2cdのsuffix方式は、同native blobのf782ac64／run38488895460／native再実行job115610828443で74判定中66 PASS／8 FAIL／SKIP0でした。元からのspaces・「あ」420と、今回追加のLatin／Hebrew／Arabic／bidi混在／段落属性で全行bit不一致があり、直接suffix whitespace比較も失敗しました。初回2jobのview_init停止と、この実際の不一致を区別します。全bitsとprofileは入口§69.1です。
 
-不採用source69f9f2cdの実RN run38488415449／job115607570509は5ケース成功。420文字5,806.998ms、36pt・18行、最終inspectionとPNGまで完了しました。他4件は920.549／481.021／680.611／319.225ms。artifact11860684136のdigest、5件JSON・native text・寸法と5枚PNGを華恋が確認しました（詳細・identityは入口§69.2）。数値一致条件を満たさないため、この描画成功を現行製品の420文字解消へ換算しません。製品処理は§65.19で復元しました。
+不採用source69f9f2cdの実RN run38488415449／job115607570709は5ケース成功。420文字5,806.998ms、36pt・18行、最終inspectionとPNGまで完了しました。他4件は920.549／481.021／680.611／319.225ms。artifact11860684136のdigest、5件JSON・native text・寸法と5枚PNGを華恋が確認しました（詳細・identityは入口§69.2）。数値一致条件を満たさないため、この描画成功を現行製品の420文字解消へ換算しません。製品処理は§65.19で復元しました。
 
 ### 65.18 書き出し初期整理失敗後の明示再試行
 
@@ -2801,9 +2801,9 @@ source検査はlocal14ファイル833 PASS／FAIL0／SKIP0。modalに含まれ�
 
 このwrite unitで構造mapを更新。全体設計01・全file地図01A–Cと最新weekly10/17を確認済みです。通常初回保存・同owner再表示・P-W2画像保存／共有・P-W3物理実機受入れは未完了。default OFF、Draft/open/unmerged、DB/env/deploy/署名/配布/main merge効果0。再開は入口§73と本節、manifest next_groupを使います。
 
-### 65.21.1 source90cbd705の実測確定と次の境界
+### 65.21.1 source90cbd707の実測確定と次の境界
 
-source90cbd705／[run39177257042](https://github.com/MassyuRed/Cocolon/actions/runs/39177257042) はJS790 PASS、native69 PASS（全行5double bit比較を含む）、Android source compileと既存guard5workflow成功。export Pods／Android compileはscope skipです。実RNは420文字timeoutでfailure／exit65でした。
+source90cbd707／[run39177257042](https://github.com/MassyuRed/Cocolon/actions/runs/39177257042) はJS790 PASS、native69 PASS（全行5double bit比較を含む）、Android source compileと既存guard5workflow成功。export Pods／Android compileはscope skipです。実RNは420文字timeoutでfailure／exit65でした。
 
 essay／quote／declarationの3preview fixtureはnative_checkedとなり、実mountしたCardのhandleが現在preview/tokenを受理し別tokenを拒否。saved essayもnative_checkedですがhandleは不在です。Card単体を直接mountする実RN harnessの証拠であり、Modal／host／InputScreen経由の通常保存操作は未確認です。Card→Modal→hostの接続は既存JS source検査で確認。全5件canSave／canExport=falseを保持します。
 
@@ -3053,7 +3053,7 @@ source `bac29a1d9bf9879cb7d12de79d7d124c892257fb`／tree `3c18da98792c5ffeed78a2
 
 実RN job118490626609はsuccess、baseline5／補足3／raw3の全11report・11PNGを取得しました。Arabicは72pt・200.255958ms、混在420は36pt18行・5533.207459ms、あ420は36pt17行・3399.713625ms。全11本文・報告値の包含・元8秒、preview7の同token fit／wrong-token拒否は成立。saved v3・rawの権限境界と全CardのcanSave／canExport=falseを維持します。全本文・行数・B9探索を保持した一方、v9のrow縦配置は変わり、v8とPNG byte同一はsaved／raw spacesの2枚だけです。両420を速度改善とは表現しません。
 
-Arabicのplaced offscreen alphaはcanvas[374,601,705,676]、最終layer PNG本文は[374,600,706,676]です。後者もstrict view／logical rowに入りますが、端の1pixel差の原因は未特定。現oracleのexact一致対象はwire対raw offscreenで、最終PNGとのexact一致は検証していません。fixed scale1の限定結果であり、全physical条件・通常保存の受入れではありません。
+Arabicのplaced offscreen alphaはcanvas[374,601,707,676]、最終layer PNG本文は[374,600,706,676]です。後者もstrict view／logical rowに入りますが、端の1pixel差の原因は未特定。現oracleのexact一致対象はwire対raw offscreenで、最終PNGとのexact一致は検証していません。fixed scale1の限定結果であり、全physical条件・通常保存の受入れではありません。
 
 全native検査未達のSTOPにより、v9未採用・承認済み限定単位終了です。結果更新は既存資料4pathだけ、source/test/workflowの追加変更・再実行0。次の最小修復案は同関数内で16成分を直接比較してtranslationだけを許し、外部2関数への依存を除くこと（未適用）。これと旧129＋新46の計175件完走、PNG境界差の品質確認は残件です。正式admission／同採用版saved再表示／InputScreen正式supplier／通常保存→同owner再表示も未完了。完全report・hash・各時刻・停止判断は入口81.4〜81.6とmanifest v91のios_preview_v9_20261020へ同期します。
 
@@ -3071,7 +3071,7 @@ source972205c858ecfd3ab36f83e078c4d6c2c6a13ee7の6path全文読戻しとrun39392
 
 全体CIはcancelledです。native175件はmain／PASS／summaryの観測0で全件未検証。bootstatus Finished後、10分取消境界付近にsimctl -308 server diedがあり、installとlaunchのどちらで止まったか、エラーが原因か終了の結果かは未確定です。旧リンク不整合は解消しましたが、旧v8のbudget原因まで解明したことにはしません。
 
-Arabicではdirect placed[374,601,705,676]に対し、同Text layer単独placedと完成PNGは[374,600,706,676]です。zero-phase localでも同方向の差が再現し、差がText layer描画経路ですでに発生することを確認しました。scale3／linearを観測しても個別因果は未分離で、opacity0の製品placed時点のbacking有効性も未確認です。このfixtureは実view／論理行／本文余白内ですが、全入力のstrict包含保証や正式採用は未成立です。
+Arabicではdirect placed[374,601,707,676]に対し、同Text layer単独placedと完成PNGは[374,600,706,676]です。zero-phase localでも同方向の差が再現し、差がText layer描画経路ですでに発生することを確認しました。scale3／linearを観測しても個別因果は未分離で、opacity0の製品placed時点のbacking有効性も未確認です。このfixtureは実view／論理行／本文余白内ですが、全入力のstrict包含保証や正式採用は未成立です。
 
 現在の最初の未完了は、既存native workflowのinstall／launch到達点の区別と175件完走、および既存placed ownerでの実layer包含保証です。具体的な未適用案は入口§82.5、lossless証拠はmanifest v93のios_preview_v9_link_repair_20261020へ固定しました。InputScreenのisSaveAdmitted供給、採用版saved再表示、通常初回保存→同owner GET／履歴は引き続き残っています。新route／DTO／admission／設定／DB apply／main mergeは0、結果反映は既存4資料のみ、STRUCTURE_MAP_DELTA_NONEです。
 
@@ -3720,10 +3720,10 @@ API候補は5065730ead6fc97a47a03858d0707bbf3e1c568c、本番liveは2c259f0e。�
 
 
 <a id="piece-refined-separate-sources-20261109"></a>
-## 2026-11-09 — AR-04 private refinedの出所分離
+## 2026-11-09 — AR-04 補足の有限感情文を既存B8へ
 
-実装API1e76599f。既存PieceSavedSourceAdapterにopt-in exact1の保存ADD回答取得／fresh再検証を追加。新CMEE `piece_refined.py`は元originalとSUPPLEMENTAL_ANSWERを別envelope／元根拠のまま既存作者・保持検査へ渡し、private短文エッセイを保存非生成再読する。原入力に補足を連結せず、Emlis生成物は使わない。question event IDと論理question IDは別で、保存adapterが対応を検証する。
+APIfc7dc299（前版1e76599f）。原入力／本人補足の別envelope・根拠・同本人／opt-in・解決済みADD資格を継承。既存answerの_FEELING／_NOWとPieceの_written_feeling_expressionを、補足自身の明示SELF述語全文へ限定適合し、選択感情を借用せず既存KEEP作者へ渡す。省略／他者・推測／伝聞／未知形容詞・未解決／訂正／撤回は新許可しない。
 
-独立架空8作品／private再読8、旧新28入力のmeaning・plan・artifact同一、181対象PASS。広い161失敗は親版でも同じ161、全suite成功ではない。実Q2の保存ADD取得・再検証は隔離SQLで成功したが、実Q2→作品の成功は未成立。新private入力は完全SELFのADD願望・評価を限定実証し、訂正／撤回・source跨ぎ照応・一般再構成／quote・declarationは未対応。合成controlの成功と実Emlis意味採用を混同しない。
+実Q2 CMEE＋隔離SQLで保存された2ADDを、clean親版と最終候補で同一source／commitmentのまま0生成再読し、作品は0→2。実保存材料を作品化する再比較でQ2・provider呼出し0。既存B8候補口へ新private型を通し、source／plan／canonical本文の再束縛とauthor-free検査、既存recipe／合成layout、private保存非生成再読を確認した。旧28入力と旧refined8保存bytesは完全同一、707対象PASS。一般単独伝達品質／高度な意味融合の完成ではない。
 
-通常`piece_v2_source_ref_http`／preview／review／save／SQL・RNはoriginal-onlyのまま。通常refined保存・同じrecipe／bitmap・実機・稼働は次の残件。新5private型と8file責務は[全file差分](../01A_cocolon_overall_structure_app_foundation_home.md#piece-refined-separated-files-20261109)、実本文／失敗／次作業は[既存trial](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-separate-sources-20261109)。STRUCTURE_MAP_DELTA_PRESENT、配置／実DB／GPU／RN／build0。
+新private型／保存版は前版の5型／v1を継承し追加0。通常source-ref HTTP／review／preview／save／SQL・RNはoriginal-onlyのまま。次はopt-in・別補足commitment・current guardを同じ通常保存境界へ渡す不足を実装し、同じ採用native画像と端末で確認する。既知の161旧失敗とAR-01反転は残件。配置／実DB／GPU／RN／build0。新7fileの差分は[全file地図](../01A_cocolon_overall_structure_app_foundation_home.md#piece-refined-separated-files-20261109)、実結果・採取中source混在の限定は[trial](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-q2-feeling-reuse-20261109)。STRUCTURE_MAP_DELTA_PRESENT（既存資格・候補手渡し／検査）。

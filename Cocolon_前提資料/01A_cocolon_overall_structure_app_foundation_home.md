@@ -6168,7 +6168,7 @@ STRUCTURE_MAP_DELTA_PRESENT（候補sourceの有限読取・認識helper・研�
 <a id="piece-refined-separated-files-20261109"></a>
 ## 2026-11-09 — AR-04 refinedの原入力／本人補足を分けるprivate接続
 
-API1e76599fの新規private型はPieceRefinedSourceSnapshot／PieceSupplementalMeaning／PieceRefinedMeaning／PieceRefinedPlanとPieceSavedRefinedHandoffの5型。公開DTO／DB／RNの型ではない。原入力の既存型・serialized意味は不変。STRUCTURE_MAP_DELTA_PRESENT。
+APIfc7dc299（前版1e76599f）で継承するprivate型はPieceRefinedSourceSnapshot／PieceSupplementalMeaning／PieceRefinedMeaning／PieceRefinedPlanとPieceSavedRefinedHandoffの5型。公開DTO／DB／RNの型ではない。原入力の既存型・serialized意味は不変。STRUCTURE_MAP_DELTA_PRESENT。
 
 | path（mashos-api） | 責務・境界 |
 |---|---|
@@ -6181,4 +6181,6 @@ API1e76599fの新規private型はPieceRefinedSourceSnapshot／PieceSupplementalM
 | 新`ai/tests/piece_v2/test_b05a_piece_refined_source_handoff.py` | 合成control境界と、既存Q2 CMEE＋隔離SQLの実保存ADD取得、fresh再検証・原入力／thread不変 |
 | `.github/workflows/analysis-observed-content.yml` | 既存PGlite工程へ新2suiteを追加。新controller／承認Gateなし |
 
-実装と本文／保存の範囲・失敗は[AR-04実結果](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-separate-sources-20261109)。181対象PASS、独立架空8本文のprivate保存再読、旧新28のmeaning／plan／artifact同一を確認。広範囲の161失敗は親版も同じ161で、未解消。実Q2保存からのrefined取得は成功、実Q2→Piece本文は未成立。通常preview／review／save／recipe・native画像／端末・配置は未完了。補足を原入力へ連結したことにはしない。
+最新7file差分は既存piece_refined（有限補足感情資格・既存作者の再利用関数）、piece_v1c（補足KEEP資格）、piece_v2_generation（同2source→plan→canonical artifactのB8照合）、既存saved handoff test（実Q2＋SQL3構成）、新test_cmee_piece_refined_feeling_accounts／piece_v2/test_b08_refined_engine_result_bindingと既存CI。新型・作者・公開DTO・DB・RNは追加しない。前版の全file責務表は継承する。
+
+実Q2保存ADD2件の同材料比較で本文0→2、B8候補／recipe／合成layout・private非生成再読を確認。旧28原入力と旧refined8保存bytesは同一、707対象成功。通常refined source-ref／review／preview／save・native画像／実機／配置は次の未完了。[結果・採取identityの限定・次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-q2-feeling-reuse-20261109)。STRUCTURE_MAP_DELTA_PRESENT（既存ownerの有限資格と手渡し）。

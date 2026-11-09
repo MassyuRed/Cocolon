@@ -410,13 +410,13 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | 提供・保全 | 学習／新load／retry／server再起動0。同PID26784／source／Analysis重み不変・health200。role最初の梱包漏れは生成0のCPU事前検査で検出・依存補完し失敗logも保全。private同artifact準備v0→結果v1、総請求額未測定 |
 | 次の同一商品単位 | 意味材料が正しく届いても完成rawで崩れる境界へ限定。同種label／SYSTEM追加周回を終了し、既存meaning→現作者の依頼方向・対象状態・語り手の自然文実現を改修。能受動／明記省略／状態対照、成功control、別題材評価。容量／学習等の原因は未断定 |
 | 再開記録 | weekly第10回§32、[全結果・範囲・次作業](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/request_role_binding_review.md)／[本文なし集計](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/request_role_binding_summary.json) |
-| AR-01通常と残件 | AR-01通常不採用・役割反転未解決。API作業sourceはf3b5e93e（下記AR-04差分のみ追加）、配置／実DB／RN/build0。AR-01研究patchの通常採用なし、AR-02は今回未着手。全必要資産活用・端末／正式受入れ未完了 |
+| AR-01通常と残件 | AR-01通常不採用・役割反転未解決。API作業sourceはfc7dc299（下記AR-04差分のみ追加）、配置／実DB／RN/build0。AR-01研究patchの通常採用なし、AR-02は今回未着手。全必要資産活用・端末／正式受入れ未完了 |
 | AR-04回収・改修 | 既存natural_reply_meaningのfinite節／活用／格／人役読取＋Pieceガードを、piece_source._finite_self_person_action_account→piece_v1cの既存KEEPへ接続。許可述語は頼む／相談する／伝える、明示SELF・肯否過去・相手1／を対象1・句点。曖昧な伝える「に」受動は拒否を維持。新命題・作者・理解／承諾の推測なし |
 | AR-04実本文 | 今回独立8は全件不可→生成。時点・SELF6表記・能受動・否定・丁寧体・二欄留保を保持。前回12の生成10はmeaning／plan／artifact／candidate／recipe／serialized hash全同一、拒否2維持。開発作例でblind一般化ではない。前回依頼の新規5は履歴保持、今回増分へ再加算しない |
 | AR-04検証・再読 | 最終3351 PASS／27.94秒・既存warning1・FAIL／skip0、保存9caseで3plan確認。原本SQL11＋既存helper等3のbytes一致。新旧20を実service／既存review＋PGliteへ通し18保存／2拒否、本文等8fieldの3段同一・保存行／詳細の12field同一、初回後は作者／compiler／Engine／review禁止・同key消費各1。原入力／Emlis不変。合成Auth／先行provider／SQLcallbackであり実DB／native画像／ASGI成功ではない |
 | AR-04反映・残件 | API作業source f3b5e93e、既存source2／既存test1／新test1、全bytes／変更集合／head読戻し。配置／実DB／RN／GPU生成0。通常serviceの隔離保存まで確認したが、一般本文・refined・native同版画像／通常稼働・実機・正式受入れ未完了。正式商品品質credit0 |
-| AR-04現在のrefined | 原入力とopt-in exact1のADD補足を別envelope／元根拠のまま既存作者へ。private短文エッセイ8生成・file保存非生成再読、旧新28のmeaning／plan／artifact同一。saved資格は実Q2＋隔離SQLで検証、実Q2→Piece本文の成功は0。API1e76599f、181対象PASS／広い161旧失敗保持、配置0 |
-| AR-04再開記録 | [実結果・限定・次作業](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-separate-sources-20261109)。実Q2で採用された完全SELF補足の作品資格→通常refined source-ref／review／preview／save／同版画像へ進む。未解決のADD化・原文連結は禁止、AR-01反転は未解決 |
+| AR-04現在のrefined | 実Q2の解決済みADD2件を同保存snapshotで親0→新版2本文へ。既存finite感情文法を補足自身の明示SELFへ再利用し、当時／現在・肯否・degreeを保持。B8候補のsource／plan／canonical本文照合、既存recipe／合成layoutとprivate保存再読が一致。旧28＋旧refined8完全同一、707対象PASS。APIfc7dc299・未配置 |
+| AR-04再開記録 | [実結果・限定・次作業](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-q2-feeling-reuse-20261109)。次は明示opt-in・別補足commitmentとcurrent guardを通常source-ref／review／preview／saveへ同版で接続し、同じ採用画像・実機を確認。private B8／recipeを通常発行・保存へ換算しない。AR-01反転・一般再構成は未解決 |
 
 以後はこの表と各能力の対応行を現在状態へ置換更新し、詳細な実行事実は既存trial／weeklyへ置く。新しいhandoff系列・全件hash Gateを作らない。中断時も、成果物と未実行を既存保存先へ残し、同じ未完商品単位から続ける。
 

@@ -558,3 +558,10 @@ Mashの「具体案の範囲で→進めていいよ」を受領。上のP4案�
 保存adapterは明示opt-in・指定第一ANSWER exact1・同本人／原入力・current prefix・INITIAL→質問→回答→RESOLVED ADD→REFINED→正常終了を検証する。訂正／撤回・未解決・superseded/affected dependency・後続round・他人や古いstateは対象外。源泉を跨ぐ指示語・関係推論・一般の意味融合・quote/declarationをこのsliceで認可しない。pure構築は認証を代替せず、保存資格の真正な対応／権利／現行性は既存adapterのfresh読取責務。
 
 新5private型とprivate file形式はschema05追補を参照。独立架空8作品・private保存非生成再読、旧新28の意味／plan／本文一致、181対象成功を確認。広い161既存失敗と実Q2→作品未成立を保持する。通常refined source-ref／review／preview／save／同版画像／実機は未接続。[実結果・範囲・次作業](../../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-separate-sources-20261109)。
+
+
+### 2026-11-09続行 — 実保存補足の感情KEEPとB8候補
+
+APIfc7dc299。実SUPPLEMENTAL_ANSWERで明示SELFの完全な有限感情述語を、既存_FEELING／_NOW／_written_feeling_expressionからKEEP資格へ回収する。原入力の選択感情やsaved原入力資格を借用しない。既存generate_piece_candidateもexact private refined型を受け、expected意味／plan／唯一作者のcanonical artifactを再導出照合してauthor-free検査する。通常refined source-ref／review／preview／saveの許可や公開DTO変更ではない。
+
+同じ実Q2保存2材料の親0→新2本文、B8 payload/hash・既存recipeと合成layout・private非生成再読を確認。旧28＋旧refined8は完全同一、707対象成功。採取中Piece sourceの混在はclean固定親版の保存再読で比較し直し、採取時失敗を固定親版に加点しない。新型／保存版0、一般意味融合と通常保存・同一native画像は残件。[全結果](../../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-q2-feeling-reuse-20261109)。

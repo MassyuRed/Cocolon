@@ -1860,7 +1860,7 @@ Mashの続行指示を受け、準備済み語順／二欄8教材を実学習ま
 
 元db研究候補から新8だけ16更新（LR5e-5、8／16保存）を行い、before34＋step8 34＋step16 18＝86生成。学習15.485607秒、85stop／ROLE02反復length419tokens・23.033886秒で中止。予定102の残り16は未実行。教師内の役割修復と、別題材の役割／所有者／本人宛退行を分け、8／16とも通常不採用にした。原8不変、V07/08の新コピーだけ明示否定を保持した。
 
-次に、同じ元dbから別のfresh optimizerで旧36＋新8を各1回44更新（LR1e-5）。旧36原本は不変、replay新コピーのT09だけ条件文を明示否定へ整合。前回before34は全record／messages／source参照一致で再利用し、afterだけ34生成。全112保存値のfresh reload後34stop、121.170592秒／学習43.177452秒で完了。全26は既使用の開発対照であり、新たな未知一般化の証拠ではない。16＋44は同じ候補への連続60更新ではない。
+次に、同じ元dbから別のfresh optimizerで旧36＋新8を各1回44更新（LR1e-5）。旧36原本は不変、replay新コピーのT09だけ条件文を明示否定へ整合。前回before34は全record／messages／source参照一致で再利用し、afterだけ34生成。全112保存値のfresh reload後34stop、121.170792秒／学習43.177452秒で完了。全26は既使用の開発対照であり、新たな未知一般化の証拠ではない。16＋44は同じ候補への連続60更新ではない。
 
 rootが全120実本文を原文照合し、独立担当も新8・教師診断・既存18を分担して全文確認。混合で先の被支援者反転・本人非関与破損・同文反復は回復した一方、役割方向・予告認識／発生済み事実、未記載主体、不適切呼称等が残り通常不採用。NLL低下やstop数を意味合格へしない。率／混合／更新数／順序を同時に変えたため、各要因単独の因果効果は未特定。
 
@@ -2104,3 +2104,19 @@ API [f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726
 既存Q2 CMEE＋隔離SQLで実保存ADD回答の取得・fresh再検証とthread/events不変を確認。一方、追加CPU3試行は1件が実ADD／取得成功後に作品資格未成立、2件が既存の時点未解決で拒否。完全SQL snapshot未保存のため同じ実handoffの最終版生成を成功扱いしない。実Q2→refined Piece本文成功0を維持し、合成の成功controlと区別する。
 
 API[1e76599f](https://github.com/MassyuRed/mashos-api/commit/1e76599f8aeaae967589b9f80669c622f3e0e01a)へsource5／test2／既存CI1のexact8を反映、全bytes・親／変更集合を読戻し一致。[全結果と再開先](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-separate-sources-20261109)。今回のPiece CI42549029993はcompleted/success、Analysis42549030023は実行中。private原本ZIPはCocolon_CMEE_AR04_RefinedSeparateSources_20261109.zip。STRUCTURE_MAP_DELTA_PRESENTは既存adapterとCMEE内のprivate出所分離・型／計画だけ。配置／実DB／GPU／学習／RN／build0、正式品質credit0、AR-01反転とAR-04通常refined保存／同版画像・全資産活用は未完。次は実保存ADD補足の作品資格を修復し、既存通常配線へ進む。
+
+
+<a id="piece-refined-q2-feeling-reuse-20261109"></a>
+## 36. 補助経路活用AR-04 — 実Q2保存補足から作品・既存候補／recipeへ
+
+2026-11-09 JST。§35の実Q2→作品未成立を継承。既存answer有限感情文法と明示SELFを、実SUPPLEMENTAL_ANSWERだけのKEEP資格へ適合し、選択感情を借用せず当時／現在・肯否・degreeを保持。既存B8候補口でも別source／plan／canonical本文の差替え照合とauthor-free検査を通す。新作者／型／保存版はない。
+
+既存Q2 CMEE＋隔離SQLで2件の解決済みADDを取得し、全保存snapshotと生成物をprivate確保。採取中Piece sourceは編集中だったため、採取時のPiece失敗を親版証拠とせず、clean親1e76599fと最終候補で同じ保存材料を0Q2生成・0providerで再読比較した。元の過去否定と矛盾しない別感情A／現在明示Cで、双方同source identity／commitmentのまま本文0→2生成。原入力／thread／events不変。
+
+新2本文は既存B8候補・recipeで同payload／hashを保ち、合成layoutで全文復元、private保存→作者等禁止再読で同artifact。最終CPU replay部分0.130193517秒。Authは合成、実Q2意味採用と保存は既存service／CMEE＋PGlite、再比較は保存snapshotのread-only store seam。通常preview／save RPC・quota・native bitmap／写真／共有／実機と区別する。root／独立担当が全文読解し、因果・相手意図・原選択感情の追加なし。文体の硬さ・一般単独伝達品質は残る。
+
+707対象PASS／35.33秒・FAIL/SKIP0・既存warning1。旧28原入力のmeaning／plan／artifact／candidate、旧refined8の保存bytes・非生成再読も親と同一。前回の広い161既存失敗は引継ぎ、今回は再実行・修復なし。実3構成のSQL回帰と新感情24／B8置換11を含み、反復を件数へ足さない。
+
+API[fc7dc299](https://github.com/MassyuRed/mashos-api/commit/fc7dc299ebea2a0b0064afdd1909f22ae0f0b1f4)へ既存source3／既存test1／新test2／既存CI1の7pathを反映し、全bytes／変更集合を再取得一致。[全結果・限定・次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-q2-feeling-reuse-20261109)。前段72cc4f5fのPiece42551259870はcompleted/success、最終fc7dc299のAnalysis42551959891は実行中。前回Analysis42549030023は全step成功確認。原本ZIPはCocolon_CMEE_AR04_RefinedQ2FeelingReuse_20261109.zip。
+
+STRUCTURE_MAP_DELTA_PRESENTは既存補足資格・B8手渡し／検査だけ、型／wire／DB／RN／配置／build／GPU／学習0、正式品質credit0。次は明示opt-in・別補足commitment・current guardを既存通常source-ref／review／preview／saveへ同版で接続し、同じ採用画像と実機確認へ進む。AR-01反転・一般本文再構成・全資産活用は未完。

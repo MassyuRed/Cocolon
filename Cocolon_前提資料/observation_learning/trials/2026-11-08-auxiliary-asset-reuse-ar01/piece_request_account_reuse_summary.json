@@ -143,9 +143,70 @@
       "piece_status": "completed",
       "piece_conclusion": "success",
       "analysis": 42549030023,
+      "analysis_status": "completed",
+      "analysis_conclusion": "success"
+    },
+    "evidence_filename": "Cocolon_CMEE_AR04_RefinedSeparateSources_20261109.zip"
+  },
+  "refined_saved_feeling_reuse": {
+    "schema": "ar04.refined_q2_feeling_reuse.actual.v1",
+    "date": "2026-11-09 JST",
+    "api_base": "1e76599f8aeaae967589b9f80669c622f3e0e01a",
+    "actual_q2_captured_cases": 2,
+    "pinned_same_material_before_generated": 0,
+    "after_generated": 2,
+    "after_private_file_rereads": 2,
+    "after_b8_candidate_recipe_equal": 2,
+    "after_synthetic_layout_equal": 2,
+    "native_device_verified": false,
+    "replay_q2_calls": 0,
+    "replay_provider_calls": 0,
+    "original_28_exact": true,
+    "old_refined_8_saved_bytes_exact": true,
+    "focused_tests": {
+      "passed": 707,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 35.33,
+      "existing_warnings": 1
+    },
+    "capture_piece_identity_mixed": true,
+    "pinned_baseline_replayed": true,
+    "actual_replay_seconds": 0.13019351699767867,
+    "previous_analysis_ci": {
+      "id": 42549030023,
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "remaining": [
+      "normal refined source_ref/review/preview/save",
+      "same native bitmap and device",
+      "general semantic reconstruction",
+      "AR01 role inversion unresolved"
+    ],
+    "runtime": {
+      "deploy": 0,
+      "live_db_requests": 0,
+      "gpu_calls": 0,
+      "rn": 0,
+      "build": 0
+    },
+    "api_commit": "fc7dc299ebea2a0b0064afdd1909f22ae0f0b1f4",
+    "ci": {
+      "piece": 42551259870,
+      "piece_head": "72cc4f5f385fcfa4655d68f54f2a8a6e13d3c31b",
+      "piece_status": "completed",
+      "piece_conclusion": "success",
+      "analysis": 42551959891,
+      "analysis_head": "fc7dc299ebea2a0b0064afdd1909f22ae0f0b1f4",
       "analysis_status": "in_progress",
       "analysis_conclusion": null
     },
-    "evidence_filename": "Cocolon_CMEE_AR04_RefinedSeparateSources_20261109.zip"
+    "evidence_filename": "Cocolon_CMEE_AR04_RefinedQ2FeelingReuse_20261109.zip",
+    "api_commits": [
+      "72cc4f5f385fcfa4655d68f54f2a8a6e13d3c31b",
+      "fc7dc299ebea2a0b0064afdd1909f22ae0f0b1f4"
+    ],
+    "nested_self_false_admission_fixed": 2
   }
 }
