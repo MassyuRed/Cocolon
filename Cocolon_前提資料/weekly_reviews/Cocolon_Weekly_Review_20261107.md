@@ -2214,4 +2214,4 @@ API `1ed4ca27da71ddca510d1ad035b1f0fd7703b1ab`→`cfd3d60d476a1e6f7fbff16b86897f
 
 詳細設計・商品00・Piece／CMEE map・01A地図・既存trial／本文なしsummaryを差分更新。本番／SQL変更・RN／署名build／配布・同版画像／実機確認0。次は一般文章の再構成品質と新しい適格refined実rawの通常SQL保存。AR-01反転・他AR・live／同版画像／本人端末も残件。[全結果・再開点](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-field-slots-20261109)。
 
-CI確定分：[Piece42575709183](https://github.com/MassyuRed/mashos-api/actions/runs/42575709183)は全工程success、model step368 PASS／既存warning1／26.87秒。Analysis42575709081はcheckpoint記録時点で実行中、成功未確定。
+CI確定分：[Piece42575709183](https://github.com/MassyuRed/mashos-api/actions/runs/42575709183)は全工程success、model step368 PASS／既存warning1／26.87秒。[Analysis42575709081](https://github.com/MassyuRed/mashos-api/actions/runs/42575709081)も全工程successを確認。

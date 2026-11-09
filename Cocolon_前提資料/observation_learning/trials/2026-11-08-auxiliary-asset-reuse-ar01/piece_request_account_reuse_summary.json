@@ -591,7 +591,8 @@
       },
       "analysis": {
         "run": 42575709081,
-        "status_at_checkpoint": "in_progress"
+        "status": "completed",
+        "conclusion": "success"
       }
     }
   }

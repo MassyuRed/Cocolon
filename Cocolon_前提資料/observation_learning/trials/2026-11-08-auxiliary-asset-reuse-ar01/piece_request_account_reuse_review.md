@@ -310,4 +310,4 @@ private resultはJupyter editorで観測したmetadata／rawをclipboardから�
 
 次は一般文章の意味を保つ再構成品質と、新しい適格refined実rawの通常SQL保存確認。今回修復した欄名付き受口と焦点読返しを土台にする。元原文がそのまま使える短文へ無理な言換えを強制せず、長い文の整理・単独伝達を実本文で比較する。AR-01方向反転、他AR、live API／migration・RN統合配布・同版画像／本人端末、正式受入れの残件も保持する。
 
-CI確定分：[Piece42575709183](https://github.com/MassyuRed/mashos-api/actions/runs/42575709183)は全工程success、model step368 PASS／既存warning1／26.87秒。Analysis42575709081はcheckpoint記録時点で実行中、成功未確定。
+CI確定分：[Piece42575709183](https://github.com/MassyuRed/mashos-api/actions/runs/42575709183)は全工程success、model step368 PASS／既存warning1／26.87秒。[Analysis42575709081](https://github.com/MassyuRed/mashos-api/actions/runs/42575709081)も全工程successを確認。
