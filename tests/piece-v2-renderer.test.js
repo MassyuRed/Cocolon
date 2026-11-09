@@ -17,6 +17,25 @@ const hash = value => crypto.createHash('sha256').update(value).digest('hex');
 // Recorded fictional AR-04 output: actual SQL preview/detail canonical fields,
 // synthetic public preview envelope only. Native pixels are checked separately
 // by the existing UIKit metrics host, not by this native-double JS suite.
+test('AR04 full Card fixtures retain recorded canonical preview, saved and export values', () => {
+  const recorded = require('./native/piece-ar04-adopted-native.json');
+  const fixtures = require('./native/piece-rn-canvas-fixtures.cjs');
+  const preview = fixtures.admitted.find(c => c.name === 'admitted_preview_ar04_recorded_viewpoint');
+  const saved = fixtures.admitted.find(c => c.name === 'admitted_saved_ar04_recorded_viewpoint');
+  const exported = fixtures.export.find(c => c.name === 'export_saved_ar04_recorded_viewpoint');
+  assert.equal(fixtures.admitted.length, 19);
+  assert.equal(fixtures.export.length, 15);
+  assert.equal(preview.props.display.preview.expires_at, '2099-12-31T23:59:59Z');
+  for (const field of ['format_type', 'piece_text', 'piece_text_hash', 'content_payload',
+    'content_payload_hash', 'visual_recipe', 'visual_recipe_hash', 'renderer_version']) {
+    assert.deepEqual(preview.props.display.preview[field], recorded.preview[field], field);
+    assert.deepEqual(saved.props.savedRecord[field], recorded.detail[field], field);
+    assert.deepEqual(exported.props.savedRecord[field], recorded.detail[field], field);
+  }
+  assert.deepEqual(saved.props.savedRecord, recorded.detail);
+  assert.deepEqual(exported.props.savedRecord, recorded.detail);
+  assert.equal(exported.props.exportCanvas, true);
+});
 test('AR04 actual 4B preview and saved detail preserve the same adopted bitmap input', async () => {
   const fixture = require('./native/piece-ar04-adopted-native.json');
   const { preview, detail } = fixture;

@@ -794,9 +794,10 @@ RCT_EXPORT_METHOD(captureBitmap:(nonnull NSNumber *)tag report:(NSDictionary *)r
       [meta[@"version"]isEqual:@"piece.native_bitmap_canvas.v1"] && [meta[@"checked"]boolValue] && ![meta[@"overflow"]boolValue] &&
       canvas.bounds.size.width==1080 && canvas.bounds.size.height==[raw[@"height"]doubleValue] &&
       texts.count==rows.count+([raw[@"branding"]boolValue]?1:0) && texts.count==inspection.count;
+    NSString *expectedBrand=[raw[@"renderer_version"]isEqual:@"piece.rn_bitmap_renderer.ios.v2"]?@"Emlis":@"Cocolon";
     for(NSUInteger i=0;i<texts.count;i++) {
       RCTTextView *view=texts[i];NSString *text=view.cocolonPieceTextStorage.string?:@"";[strings addObject:text];
-      valid=valid&&[text isEqual:(i<rows.count?rows[i]:@"Cocolon")]&&i<inspection.count&&[inspection[i][@"tag"]isEqual:view.reactTag];
+      valid=valid&&[text isEqual:(i<rows.count?rows[i]:expectedBrand)]&&i<inspection.count&&[inspection[i][@"tag"]isEqual:view.reactTag];
     }
     report[@"native_texts"]=strings;report[@"native_canvas_valid"]=@(valid);
     if(valid) {
@@ -1213,12 +1214,13 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
     RCTRootView *root=[[RCTRootView alloc]initWithBridge:bridge moduleName:@"PieceCanvasCases" initialProperties:@{@"pieceGroup":@"admitted"}];
     UIWindow *window=[[[UIApplication sharedApplication]delegate]window];window.rootViewController.view=root;[window makeKeyAndVisible];
     [self waitForExpectations:@[done] timeout:90];XCTAssertNil(self.resultModule.reportPersistenceError);
-    NSArray *bases=@[@"essay_paragraphs",@"quote_unicode",@"declaration_no_brand",@"essay_max420",@"suffix_latin_ligature",@"suffix_arabic",@"suffix_max420_a",@"containment_branding_opacity08"];
+    NSArray *bases=@[@"essay_paragraphs",@"quote_unicode",@"declaration_no_brand",@"essay_max420",@"suffix_latin_ligature",@"suffix_arabic",@"suffix_max420_a",@"containment_branding_opacity08",@"ar04_recorded_viewpoint"];
     NSMutableArray *names=[NSMutableArray new];for(NSString *base in bases){[names addObject:[@"admitted_preview_"stringByAppendingString:base]];[names addObject:[@"admitted_saved_"stringByAppendingString:base]];}[names addObject:@"admitted_host_crop_trap"];
-    XCTAssertEqual(self.resultModule.reports.count,17);XCTAssertEqualObjects([self.resultModule.reports valueForKey:@"name"],names);
+    XCTAssertEqual(self.resultModule.reports.count,19);XCTAssertEqualObjects([self.resultModule.reports valueForKey:@"name"],names);
     for(NSDictionary *report in self.resultModule.reports){
       BOOL saved=[report[@"evidence_set"]isEqual:@"admitted_saved"],trap=[report[@"evidence_set"]isEqual:@"admitted_host_trap"];
-      XCTAssertEqualObjects(report[@"renderer_version"],@"piece.rn_bitmap_renderer.ios.v1");
+      BOOL ar04=[report[@"name"]hasSuffix:@"ar04_recorded_viewpoint"];
+      XCTAssertEqualObjects(report[@"renderer_version"],ar04?@"piece.rn_bitmap_renderer.ios.v2":@"piece.rn_bitmap_renderer.ios.v1");
       XCTAssertEqualObjects(report[@"candidate_profile"],@"piece.rn_bitmap_preview.prototype.v1");
       XCTAssertLessThan([report[@"elapsed_ms"]doubleValue],8000,@"%@",report);
       XCTAssertEqualObjects(report[@"state_can_save"],@NO);XCTAssertEqualObjects(report[@"state_can_export"],@NO);
@@ -1227,13 +1229,13 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
       XCTAssertEqualObjects(report[@"phase"],@"native_checked",@"%@",report);XCTAssertEqualObjects(report[@"body_preserved"],@YES);
       XCTAssertEqualObjects(report[@"native_canvas_valid"],@YES);XCTAssertEqualObjects(report[@"bitmap_all_cells_equal"],@YES);XCTAssertEqualObjects(report[@"capture_error"],@NO);
       XCTAssertEqualObjects(report[@"bitmap_canvas"][@"version"],@"piece.native_bitmap_canvas.v1");XCTAssertEqualObjects(report[@"bitmap_canvas"][@"checked"],@YES);
-      NSMutableArray *expected=[report[@"rows"]mutableCopy];if([report[@"branding"]boolValue])[expected addObject:@"Cocolon"];XCTAssertEqualObjects(report[@"native_texts"],expected);
+      NSMutableArray *expected=[report[@"rows"]mutableCopy];if([report[@"branding"]boolValue])[expected addObject:ar04?@"Emlis":@"Cocolon"];XCTAssertEqualObjects(report[@"native_texts"],expected);
       XCTAssertEqualObjects(report[@"save_fit_current"],saved?@NO:@YES);XCTAssertEqualObjects(report[@"save_fit_wrong_token_current"],@NO);
       XCTAssertEqualObjects(report[@"save_fit_handle_keys"],saved?@[]:@[@"isCurrent"]);
       if([report[@"name"]isEqual:@"admitted_saved_essay_paragraphs"]){XCTAssertEqualObjects(report[@"saved_retained_after_deadline"],@YES);XCTAssertGreaterThan([report[@"retained_deadline_elapsed_ms"]doubleValue],8000);}
       for(NSString *key in @[@"png",@"natural_reference_png"]){NSString *filename=report[key];XCTAssertNotNil(filename);if(filename)XCTAssertNotNil([UIImage imageWithContentsOfFile:[PieceEvidenceDirectory()stringByAppendingPathComponent:filename]]);}
     }
-    for(NSUInteger i=0;i<16 && i+1<self.resultModule.reports.count;i+=2){NSDictionary *preview=self.resultModule.reports[i],*saved=self.resultModule.reports[i+1];
+    for(NSUInteger i=0;i<18 && i+1<self.resultModule.reports.count;i+=2){NSDictionary *preview=self.resultModule.reports[i],*saved=self.resultModule.reports[i+1];
       for(NSString *key in @[@"blocks",@"rows",@"font_size",@"width",@"height",@"branding_mode"])XCTAssertEqualObjects(preview[key],saved[key]);
       if(preview[@"png"]&&saved[@"png"]){NSData *a=[NSData dataWithContentsOfFile:[PieceEvidenceDirectory()stringByAppendingPathComponent:preview[@"png"]]],*b=[NSData dataWithContentsOfFile:[PieceEvidenceDirectory()stringByAppendingPathComponent:saved[@"png"]]];XCTAssertEqualObjects(a,b);}
     }
@@ -1248,8 +1250,8 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
     RCTRootView *root=[[RCTRootView alloc]initWithBridge:bridge moduleName:@"PieceCanvasCases" initialProperties:@{@"pieceGroup":@"export"}];
     UIWindow *window=[[[UIApplication sharedApplication]delegate]window];window.rootViewController.view=root;[window makeKeyAndVisible];
     [self waitForExpectations:@[done]timeout:90];XCTAssertNil(self.resultModule.reportPersistenceError);
-    NSArray *names=@[@"export_saved_essay_paragraphs",@"export_saved_quote_unicode",@"export_saved_declaration_no_brand",@"export_saved_essay_max420",@"export_saved_suffix_latin_ligature",@"export_saved_suffix_arabic",@"export_saved_suffix_max420_a",@"export_saved_containment_branding_opacity08",@"export_reject_clear",@"export_reject_removed",@"export_reject_token",@"export_reject_binding",@"export_reject_multiple",@"export_reject_during"];
-    XCTAssertEqual(self.resultModule.reports.count,14);XCTAssertEqualObjects([self.resultModule.reports valueForKey:@"name"],names);
+    NSArray *names=@[@"export_saved_essay_paragraphs",@"export_saved_quote_unicode",@"export_saved_declaration_no_brand",@"export_saved_essay_max420",@"export_saved_suffix_latin_ligature",@"export_saved_suffix_arabic",@"export_saved_suffix_max420_a",@"export_saved_containment_branding_opacity08",@"export_saved_ar04_recorded_viewpoint",@"export_reject_clear",@"export_reject_removed",@"export_reject_token",@"export_reject_binding",@"export_reject_multiple",@"export_reject_during"];
+    XCTAssertEqual(self.resultModule.reports.count,15);XCTAssertEqualObjects([self.resultModule.reports valueForKey:@"name"],names);
     for(NSDictionary *report in self.resultModule.reports){
       XCTAssertEqualObjects(report[@"export_target_current"],@YES);XCTAssertLessThan([report[@"elapsed_ms"]doubleValue],8000);
       XCTAssertEqualObjects(report[@"save_fit_current"],@NO);XCTAssertEqualObjects(report[@"save_fit_handle_keys"],@[]);
