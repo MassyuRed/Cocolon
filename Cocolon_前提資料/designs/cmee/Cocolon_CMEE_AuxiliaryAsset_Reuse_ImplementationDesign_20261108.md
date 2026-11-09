@@ -230,6 +230,9 @@ Analysisの既存source adapter→semantic admission→compiler→唯一realizer
 
 ### 7.1 Piece
 
+**2026-11-09 Mash明示：Pieceでも4Bを使って処理する。** 現行通常／refinedのB8は4Bを呼ばず、CMEEの有限読取・plan・既存作者とcanonical完全一致検査を通る。既存Emlis／Analysisの4B接続を、そのままPiece接続済みとは扱わない。次のAR-04は、既存Piece semantic_input／prepare_piece／候補受領・保存再読の必要部分を改修し、4Bの意味整理・文章候補をCMEEの採用／意味保持検査へ渡す接続へ進める。現在のoffline受口は限定構文中心でrefined未対応、B8は旧作者との完全一致を要求するため、4B本文を差し込むだけでは成立しない。本人補足の分離、owner／版／current資格、Safety、preview／save再送、同版本文・recipe・画像化とRN選択は継承する。有限規則・検査の必要部分を改修して使い、全再実装へ戻さない。今回の方針確認時点でPiece4B実装・GPU生成・学習・live反映0。
+
+
 `piece_source.py::build_piece_source_meaning`、`piece_v1c.py`の既存plan／唯一作者、`piece_v2_generation.py::generate_piece_candidate`と独立`validate_source_meaning_preservation`を改修の起点にする。旧意味ブロック・語彙／scope・参照先の知識から、一般本文の対応幅と単独伝達を改善する。
 
 本人の核・背景・条件・否定・引用主体を保ち、人物名の抽象化で命題を変えない。原文KEEPを機械的成功へ数えるだけで終わらせず、その作品だけで伝わるか読む。通常感情／自己理解、片欄／両欄、original／適格refinedを扱う。補足を使った場合は元と補足を別sourceとし、生成物をsourceに戻さない。
@@ -416,7 +419,7 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | AR-04検証・再読 | 最終3351 PASS／27.94秒・既存warning1・FAIL／skip0、保存9caseで3plan確認。原本SQL11＋既存helper等3のbytes一致。新旧20を実service／既存review＋PGliteへ通し18保存／2拒否、本文等8fieldの3段同一・保存行／詳細の12field同一、初回後は作者／compiler／Engine／review禁止・同key消費各1。原入力／Emlis不変。合成Auth／先行provider／SQLcallbackであり実DB／native画像／ASGI成功ではない |
 | AR-04反映・残件 | API作業source f3b5e93e、既存source2／既存test1／新test1、全bytes／変更集合／head読戻し。配置／実DB／RN／GPU生成0。通常serviceの隔離保存まで確認したが、一般本文・refined・native同版画像／通常稼働・実機・正式受入れ未完了。正式商品品質credit0 |
 | AR-04現在のrefined | APIca4140abの通常server保存を継承。RN4a103688で表示した第一本人回答の明示選択→exact回答query→七項目refined POSTへ接続。元／補足は別source。旧保存結果不明は元保存要求を優先。同じ実Q2材料の親導線0→新2、本文指紋とSQL保存本文／初回recipe一致。1512関連PASS・Metro1件対象外。未build／未live反映／native未確認 |
-| AR-04再開記録 | [結果・限定・次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-rn-selected-reuse-20261109)。次は通常API／migration反映と対応RNの統合配布、同じ採用native画像・本人端末を確認。合成HTTP／React／隔離SQLをlive稼働へ換算しない。一般再構成・AR-01反転・全必要資産活用は未完了 |
+| AR-04再開記録 | [結果・限定・次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-rn-selected-reuse-20261109)。次はMashが明示したPiece4Bの意味整理・文章候補を既存CMEE／B8へ接続する。既存API／migration反映・RN統合配布・同版native画像／本人端末の残件も保持。合成HTTP／React／隔離SQLをlive稼働へ換算しない。一般再構成・AR-01反転・全必要資産活用は未完了 |
 
 以後はこの表と各能力の対応行を現在状態へ置換更新し、詳細な実行事実は既存trial／weeklyへ置く。新しいhandoff系列・全件hash Gateを作らない。中断時も、成果物と未実行を既存保存先へ残し、同じ未完商品単位から続ける。
 

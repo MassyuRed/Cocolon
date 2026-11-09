@@ -171,3 +171,8 @@ tap時の表示回答event_idを捕捉し、savedInputは従来savedInputId／ex
 コード7fileは全remote bytes／親／変更集合／head読戻し一致。既存Piece CIへmodal path／新testを追加し、新workflowは作らない。[RN CI42558430844](https://github.com/MassyuRed/Cocolon/actions/runs/42558430844)は同じ4a103688で実行中、成功未確定。同じRN4a103688のCIはJavaScript・Android source／export工程がsuccess、iOS source工程はV4 20件中1成功／19失敗（native129・bitmap44は成功）。refined2例の端末画像確認とは別で、CI全体成功ではない。製品source3／既存test2／新test1／既存CI1だけで、共用hook・Input／履歴caller・PieceCreateScreen／Controller／MainTabs recoveryを再実装しない。
 
 STRUCTURE_MAP_DELTA_PRESENT：共用応答UI→body-free選択→既存client／host。配置／live DB／GPU／学習／署名build／TestFlight0、今回2例のrefined native bitmapは未確認、正式品質credit0。原本ZIPはCocolon_CMEE_AR04_RefinedRNSelection_20261109.zip。次はAPI／migrationの通常反映と対応RNの統合配布、同じ採用画像・本人端末を確認する。一般本文再構成・AR-01反転・全必要資産活用は未完了。
+
+
+### 2026-11-09 Mash明示 — Pieceでも4Bを使う
+
+MashはPieceの4B利用を明示した。現行APIca4140abの通常／refinedは4Bを呼ばず、有限読取と既存作者を使う。次のAR-04は既存Piece semantic_input／候補受領の限定を改修し、4Bの意味整理・文章候補をCMEE／B8の採用・意味保持検査へ接続する。旧作者canonical完全一致のまま4B本文だけを差し込む方法では成立しない。既存の出所分離・本人／current・Safety・preview／save・同版recipe／画像化・RN選択を継承する。今回の確認で新実装／GPU生成／学習／live変更0。詳しい決定と不足は[weekly§39](../../../weekly_reviews/Cocolon_Weekly_Review_20261107.md#piece-4b-use-direction-20261109)と詳細設計§7.1を参照。STRUCTURE_MAP_DELTA_NONE（実装は未変更）。

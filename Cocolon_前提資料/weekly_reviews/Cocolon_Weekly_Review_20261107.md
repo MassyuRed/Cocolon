@@ -2144,3 +2144,13 @@ STRUCTURE_MAP_DELTA_PRESENT（既存通常保存へのstage接続）、配置／
 最終15suite1512 PASS／18.645681秒・FAIL／SKIP0。既存CIと同じMetro bundle検査1件は対象外。最終selected検査のFAIL／SKIP0と、Metro1件の明示対象外を区別する。初回のVM Array比較はtest helperのcopyへ訂正。前回APIca4140abのPiece／Analysis両CIはsuccess確認、[RN CI42558430844](https://github.com/MassyuRed/Cocolon/actions/runs/42558430844)は同じ4a103688で実行中、成功未確定。同じRN4a103688のCIはJavaScript・Android source／export工程がsuccess、iOS source工程はV4 20件中1成功／19失敗（native129・bitmap44は成功）。refined2例の端末画像確認とは別で、CI全体成功ではない。[全結果・残件](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-rn-selected-reuse-20261109)。原本ZIPはCocolon_CMEE_AR04_RefinedRNSelection_20261109.zip。
 
 STRUCTURE_MAP_DELTA_PRESENT（既存UI／client／hostの本人選択）、API／SQL／意味能力変更0、配置／live DB／GPU／学習／署名build／配布0、今回2例のrefined native画像は未確認、正式品質credit0。次は通常API／migration反映と対応RNの統合配布、同じ画像・本人端末。一般再構成・AR-01反転・全資産活用は未完了。
+
+
+<a id="piece-4b-use-direction-20261109"></a>
+## 39. Pieceで4Bを使う方針と既存資産の継承
+
+2026-11-09 JST。Mashが「4B使って処理していいよ」と明示し、現在のPieceの4B利用、CMEEとの接続、これまでの構築が無駄になるかを確認した。現物APIca4140abで通常／refinedともgenerate_piece_candidate→Engine.generate（semantic_inputなし）→有限読取／plan／既存作者、4B呼出しなしを確認。Emlis／Analysisにはモデル接続経路があるが、core別の配線でありPieceへ自動適用されない。
+
+既存Piece semantic_input／prepare_piece／候補受領・保存再読は再利用資産だが、現在は限定構文中心のprivate受口で、通常接続／一般本文／refinedの4B接続は未成立。B8の旧作者canonical完全一致を残して4B本文だけ差し込む方法では採用されない。次のAR-04は4Bの意味整理・文章候補を既存CMEEの採用／意味保持検査とB8へ接続する改修へ進める。
+
+これまでの原入力／本人補足分離、本人・版・current照合、Safety、preview・保存再送、本文とrecipeの同版管理、画像化とRNの明示選択は継承する。一般文章品質はまだ成立しておらず、4Bを使えば自動で合格するとも言わない。今回の確認はfresh両head／設計／実sourceと独立読取で、コード・GPU生成・追加学習・live変更0。STRUCTURE_MAP_DELTA_NONE（今回実装変更なし）。本方針を詳細設計§7.1と全体現在地へ同期し、旧資産の破棄や全再実装を採用しない。
