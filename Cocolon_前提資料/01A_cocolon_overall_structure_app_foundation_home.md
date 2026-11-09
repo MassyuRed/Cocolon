@@ -1,3 +1,5 @@
+> **11/10・AR-04変更file地図：** 活動名source資格と実比較した候補文体一文の累積5pathは[本file末尾](#piece-activity-source-natural-narrator-20261110)。STRUCTURE_MAP_DELTA_PRESENT、通常重み未採用。
+
 > 11/4のPiece作成・本文・書き出し候補は、末尾の[ファイル差分](#piece-format-language-export-files-20261104)と週次レビュー§141を参照。
 
 > **11/1・7101本人確認済み（第9回§43）：** RN7464f858のiOS #71/run41283646380/job124780456306は署名Archive・写真目的文検査・IPA・TestFlight Uploadの全工程success。Mashが7101を反映し、今回依頼した修正の完了を確認した。起動待ち、Home全体行動削除、Ranking撤去、設定以外のガイド同期、新PieceのEmlisロゴを含む。こころ天気は今/日週月/履歴/未読/通知/tutorialを従来どおり維持。API3407402/dep-dbjebcflk1mc7390mnr0は07:11:03 UTC Live、health/bootstrap200・private5ON/public3OFF。API製品同一blobのd43cabcd native PostgreSQL CI41283815884は全step成功。RNの旧V4 metrics19失敗とlegacy canvas13reportは残る。依頼UIの本人確認を、全製品の品質/正式商品受入れへ広げない。GPU再起動0。
@@ -6395,3 +6397,23 @@ STRUCTURE_MAP_DELTA_PRESENT。新e924候補と完了48更新を繰り返さず�
 最終の同18材料・108隔離SQLと、累計53 HTTP／最終追加0 HTTPの由来、途中不採用・残差は[実結果](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-finite-action-source-conditions-20261109)とweekly§50へ戻る。
 
 今回の全文有限動作条件と保存結果を継承し、評価の過去時点・未決定対象・混在文章の意味保持を改善する。同じ条件追加の周回や保存e924の完了48更新を再実行せず、教示と意味単位の不足へ戻る。模型作りの名詞形対応外はmodel誤生成と分けてsource側へ残す。一般再構成・同版画像／通常統合・本人端末、新候補の通常採用は未完了。AR-01の役割反転と他ARの新規活用も継続残件。
+
+
+<a id="piece-activity-source-natural-narrator-20261110"></a>
+## 2026-11-10 AR-04 — 活動名sourceと候補文体の変更file地図
+
+API `625b4704027abd52749222196b990edd3d4373e4`＋`c70671a85a985c75a04f7c0ee35519e5ae4547d9`。既存5pathだけで、新entrypoint／型／DB／RN／provider・共有contractはない。
+
+| API既存path | 今回の責務・差分 |
+|---|---|
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py` | `_personal_evaluation_shapes`の既存bare本人評価targetへ限定活動名を追加。全target・意味frame・原文／根拠を保持し行動へ昇格しない。 |
+| `ai/services/ai_inference/piece_model_source.py` | 既存SYSTEM末尾へ実比較した自然な本人語りの共通一文。未採用候補の指示だけを継承し、本文修補・新作者を作らない。 |
+| `ai/tests/piece_v2/test_b08_piece_bare_finite_evaluation.py` | 活動名・構文・本人6表記・曖昧／未知／有限節／対象境界の新37例。旧短文の失敗期待を変更しない。 |
+| `ai/tests/test_piece_model_evaluation_reuse.py` | 活動名評価4例の同意味受領と対象／本人／肯否／時点／程度／留保の変異拒否。 |
+| `.github/workflows/piece-b2b-isolated-postgres.yml` | 上記既存source評価testのpathを追跡し、新37例を既存model17工程へ追加。従来対象の削減なし。 |
+
+既存`piece_source._personal_evaluation_shapes`のbare自己評価（`は`／`にとって`）だけへ、既存`_SIMPLE_NOUN`で全文照合できる漢字／カタカナstem＋「作り」の活動名を限定追加。stem中の何／誰、空stem、助詞・有限節・参照・内部空白・引用・曖昧なが焦点は新armへ入れない。対象名詞句全体・本人表記・評価base／程度／肯否／時点／留保・原文／根拠座標を保持し、「模型を作った」等の実行済み行動には変換しない。共有の名詞文法・公開型／DB・独立CMEE／S7・原入力と本人補足・保存後非生成の責務は維持する。
+
+STRUCTURE_MAP_DELTA_PRESENTはsource target資格の限定拡張による。役割判断／保存／意味検査Gateの新設ではなく、CMEE共有mapの責務／契約は不変。現normal送信25例は実比較と完全一致、FRESH03の新source生成条件付きUSERは実4B未確認。最終model17fileは1000 PASS／87.28秒・既存warning1、新活動名37 PASS／2.70秒。合計1037はこの二つの非重複集合だけで、旧2file再確認309 PASS／1 FAILを加算しない。既存`test_short_bare_input_is_not_padded_to_satisfy_a_format`は、短い「僕は絵が好き。」を拒否する旧期待に対し本文を生成して失敗する。開始c9の同source関数へ戻した実testも同じ失敗で、期待変更・skip／xfailは行わず既存残件へ記録した。最終API c70671a8のPiece CI42721103246は全39step success（model1000 PASS／57.25秒、活動名37 PASS／2.28秒）。source625b470のAnalysis CI42720193625は全19step success。最終promptのみのpathはAnalysis起動対象外であり、最終API同headのAnalysis成功とは呼ばない。
+
+[実結果・通常不採用と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-activity-source-natural-narrator-20261110)。

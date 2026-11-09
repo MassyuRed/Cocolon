@@ -2442,3 +2442,27 @@ API `c9e9938981c88e811bde1970725dc3dc35b2ae26`は既存S7 policy／既存prose t
 今回実施したSQLは新候補26×3planの78だけで75保存／3拒否。旧記録78の72／6と比較し、今回156実行へ加算しない。FRESH12の3planだけ新規保存へ到達し、quota各1・保存後同／新service0生成再読と拒否record／quota不変、原入力／Emlis不変を確認。実DB／本人端末の証明ではない。焦点145 PASS／4.87秒、最終17file996 PASS／72.40秒・既存warning1、Piece CI42709594596／Analysis CI42709594021は全工程success、Piece model17file996 PASS／58.98秒。
 
 追加生成／学習／GPU実行0、通常重み未採用／selector OFF。本番／実DB／RN／build／今回画像／本人端末0、旧§52の学習48・実30 HTTP・156SQLと復元は履歴保持。STRUCTURE_MAP_DELTA_NONE（既存owner内比較条件のみ、入口／責務／公開・保存契約不変）、限定TECHNICAL_CREDIT・正式商品品質credit0・正式受入れ0/3。[全結果・範囲・次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-qualified-focal-ga-reader-20261110)。次は、保存候補を継承し、本人の語り・読点等の自然さと単独伝達を含むモデル本文の品質を、広い材料の本文比較で改善する。同配分の第三学習や通常採用へ自動進行しない。source資格外の模型作り、同版画像／通常統合・本人端末、AR-01の役割反転と他ARの残件は保持する。
+
+
+<a id="piece-activity-source-natural-narrator-20261110"></a>
+## 54. 補助経路AR-04 — 活動名のsource資格と固定重みの自然な本人語り
+
+**11/10・AR-04最新：** API625b470で、既存自己評価の対象資格へ漢字／カタカナstem＋「作り」の活動名を限定接続。同じ保存5b1の26rawは25→26採用、新78隔離SQLは78保存／0拒否。固定重み・同26USERへ文体指示一文だけを加えた実4B比較ではFRESH12の不自然な「おれが、」が原焦点語順へ戻り、意味保持のまま自然さを局所改善。他25rawは同一、新26採用／新78保存。指示一文を既存候補promptへ反映した最終APIはc70671a8。現送信との完全一致は25例、FRESH03の新source条件付きUSERは実4B未確認。追加学習0・通常重み未採用／selector OFF、一般文章品質・同版画像／通常統合・本人端末・AR全体は未完了。
+
+API `625b4704027abd52749222196b990edd3d4373e4`（活動名source／対応test／workflowの4path）と `c70671a85a985c75a04f7c0ee35519e5ae4547d9`（既存候補promptの1path）の累積5path。既存`piece_source._personal_evaluation_shapes`のbare自己評価（`は`／`にとって`）だけへ、既存`_SIMPLE_NOUN`で全文照合できる漢字／カタカナstem＋「作り」の活動名を限定追加。stem中の何／誰、空stem、助詞・有限節・参照・内部空白・引用・曖昧なが焦点は新armへ入れない。対象名詞句全体・本人表記・評価base／程度／肯否／時点／留保・原文／根拠座標を保持し、「模型を作った」等の実行済み行動には変換しない。共有の名詞文法・公開型／DB・独立CMEE／S7・原入力と本人補足・保存後非生成の責務は維持する。
+
+同一の保存済み26rawを無修補・追加生成0で再受領し、25採用／1拒否→26採用／0拒否。FRESH03だけが資格と保存へ到達し、旧25本文と全26の受領bodyは不変。新78隔離SQLは旧記録75保存／3拒否→78保存／0拒否、FRESH03の3planだけ差がある。意味を変えた独立CPU9変異は全拒否。これはsource資格の修復でありモデル本文の自然さ改善ではない。
+
+次に、固定5b1・同26USERの実比較でFRESH12だけが変化した。「おれが、短い詩を書く時間を選びたい。その時間が好きだ。」→「おれが選びたいのは、短い詩を書く時間だ。その時間が好きだ。」となり、本人表記・願望・対象とその評価、別欄の否定過去を保持。既に意味保持で採用されていた本文の局所的な自然さ改善であり、意味保持率の改善とは呼ばない。他25rawは全byte一致。新CMEE26採用／0拒否、新78隔離SQLも78保存／0拒否。source比較78と文体比較78は別実行、比較元は各旧記録78であり、今回新SQL合計156へ旧記録を再加算しない。全成功でraw／本文／recipe・quota各1・原入力／Emlis不変、保存後同／新service0生成再読。実Supabase／GPU原identity保存ではない。
+
+`piece_model_source.SYSTEM_MESSAGE`末尾へ「一人称の表記と意味は保ち、助詞と読点を自然な本人の語りに整え、主語直後の不要な読点や原文にない強調を加えないでください。」の共通一文を追加。期待正文・assistant例・raw修補・追加学習はない。固定5b1／config・旧26USERを凍結した一回の実比較で、新26＋前後control4の30 HTTPは全200／stop。runner全工程183.370781秒、元提供PID40494→同args／env／cwd／keysの41313へ復元、health200・Emlis／Analysis前後response bytes一致、Analysis／旧e924／新5b1の重み・GPU serving source／凍結wireは不変。送信待ちの長時間失敗はrunner全工程183.370781秒に含めず、通常原価・総請求は未測定。
+
+実比較は全26の旧USERを固定した診断である。現在のcandidate SYSTEMとは全26一致し、現在のsourceから導出したUSERとも25例がbyte一致する。FRESH03だけは今回source資格が成立して評価条件が追加され、旧USERでの実生成／意味検査／保存は確認したが、新USERによる実4B生成は未確認。診断再受領の26／保存78を通常アプリ経路の成立へ換算しない。selector OFF／5b1通常重み未採用を維持する。
+
+最終model17fileは1000 PASS／87.28秒・既存warning1、新活動名37 PASS／2.70秒。合計1037はこの二つの非重複集合だけで、旧2file再確認309 PASS／1 FAILを加算しない。既存`test_short_bare_input_is_not_padded_to_satisfy_a_format`は、短い「僕は絵が好き。」を拒否する旧期待に対し本文を生成して失敗する。開始c9の同source関数へ戻した実testも同じ失敗で、期待変更・skip／xfailは行わず既存残件へ記録した。最終API c70671a8のPiece CI42721103246は全39step success（model1000 PASS／57.25秒、活動名37 PASS／2.28秒）。source625b470のAnalysis CI42720193625は全19step success。最終promptのみのpathはAnalysis起動対象外であり、最終API同headのAnalysis成功とは呼ばない。
+
+STRUCTURE_MAP_DELTA_PRESENT（既存source target admissionの受理境界を拡張）。新owner・共有contract／役割判断／保存／意味検査Gateは作らず、Piece map／01Aの既存ownerへ反映。本番／実DB／RN／signed build／今回native画像／本人端末・通常重み採用0。限定TECHNICAL_CREDIT、正式商品品質credit0・正式受入れ0/3を維持。private原本`Cocolon_CMEE_AR04_ActivitySource_NaturalNarrator_20261110.zip`、旧5b1重みは前回保存原本を参照し重複保存しない。
+
+次は、新資格FRESH03を含む現在の生成条件と候補本文の一致を通常経路で確認し、意味保持済み候補の同版画像・保存再読へ接続する。FRESH07の常体／丁寧体混在等は一般文章品質の残件として保持する。今回の一文比較を周回せず、第三学習・重み通常採用へ自動進行しない。AR-01の役割反転と他ARの残件も継続する。
+
+[全実結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-activity-source-natural-narrator-20261110)。
