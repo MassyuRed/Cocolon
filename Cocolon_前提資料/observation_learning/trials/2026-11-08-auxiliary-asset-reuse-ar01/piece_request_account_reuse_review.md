@@ -1,51 +1,39 @@
-# AR-04 — 既存の役割読取をPieceの完成文へ回収
+# AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-2026-11-09 JST。補助経路活用の詳細設計§7.1／§9に従い、AR-01の全一般品質完成を待たず、独立して進められるAR-04へ着手した。**自己理解で保存した、明示本人による「頼んだ／頼まれた」の過去記録を、原文の意味を保ったPiece本文へ接続した。** API作業source [e8b7e46c](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)。配置・実機・画像生成の完了ではない。
+2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
-## 実不足と改修
+## 改修と意味の境界
 
-元source c6555fd5では、本人・相手・対象が書かれた完成文でも、自己理解モードのcomplete-account資格がなくexpression_meaning_not_admittedになっていた。通常の感情選択で既に生成できる場合とは区別する。
+piece_source._finite_self_person_action_account（旧名_finite_self_request_account）は、既存natural_reply_meaningの有限節／活用／格／人役読取を使う。今回の正の差分は許可述語を「頼む／相談する／伝える」へ限定拡張したことだけ。共通reader自体、意味型、作者、公開DTO・DB・RN・権利・quotaを変更しない。piece_v1cの既存KEEP_COMPLETE_SOURCE_CONTEXTへ接続し、原文の時点・主体・相手・能受動・否定・語調・二欄と留保を維持する。相談から助言・承諾・解決、伝達から理解や受領を創作しない。
 
-既存CMEEのnatural_reply_meaningにある有限節・活用・格・人物読取を、Pieceのpiece_source._finite_self_request_accountへ回収した。Piece固有の疑問・条件・伝聞・不確実修飾ガードも通し、piece_v1cの保存原入力complete-account判定へ接続する。新しい作者や本文文型は作らず、既存KEEP_COMPLETE_SOURCE_CONTEXT→唯一作者→独立した原文保持検査を使う。
+全文を読めた単一節、明示SELF、肯否過去のfact、既存人役の相手1と「を」対象1、句点という前回条件を維持。能動は「に」、受動は既存readerで一意に読める格だけ。特に「伝えられた」の「に」受動は可能表現との曖昧さを既存readerが拒否し、迂回しない。省略人物・代名詞・人物疑問・未証明人名・非過去・引用／条件／伝聞・未知文法へ広げず、宣言適格を足さない。
 
-今回の新資格は、全文を読めた単一節、明示SELF、頼むの肯定／否定過去、能動／受動、書かれた相手1と「を」対象1、句点付きに限定。能動の相手は「に」、受動は「に／から」。相手は既存人役語彙で確認できる範囲とし、正規化後のSELF6表記・指示代名詞、疑問人物、未証明の人名は新資格へ入れない。省略人物、非過去、未知述語、引用／条件／伝聞、句点なし／感嘆符をこの枝で新たに許可しない。
+## 同一20入力の前後と全文読解
 
-語尾だけを許可したり、役割を推測したり、依頼から承諾や意図を足したりしない。原文・肯否・受動態・語調・二欄・段落・留保をKEEPし、宣言形式へ昇格させない。旧wish／既存短い留保の資格も変更していない。
+独立担当が相談／伝達の能受動×肯否、SELF6表記、書かれた時点、丁寧語、二欄留保を含む架空8recordを作成。前回12recordは全7fieldをそのまま再利用した。新8は全て不可→生成、旧10成功はmeaning／plan／artifact／candidate／recipe／serialized hashまで同一、旧2拒否も同reason。合計10→18生成で、18を新規改善とは数えない。新作例は開発用でありblind一般化評価ではない。
 
-## 同一入力の前後
+root／独立担当が全20原入力と前後全文を読んだ。相談の送り手・受け手、伝達の方向、未実行、過去、昨日／今朝／先日、二欄の未決定は全て書かれたまま。新8の本文は原文KEEPであり、一般的な本文再構成の完成とはしない。83実行sourceの変更は当該2pathだけ。
 
-実装用の同僚／司書／配達員とは別の人役・対象で、独立担当が新規架空8recordを作成した。本人6表記、能動／受動、肯定／否定、丁寧体、二欄と留保、拒否controlを含む。コードを見た開発用作例であり、blind評価や一般言語の成功率ではない。
+## 実サービスから保存済み作品まで
 
-| 対象 | 前→後 | 全文確認の結果 |
-|---|---|---|
-| 独立01 | 生成不可→生成 | 本人から先生への依頼、肯定・過去を保持 |
-| 独立02 | 生成→同一 | 不安と看護師からの依頼を両欄順で保持。既存成功の保持であり新規増分ではない |
-| 独立03 | 生成不可→生成 | 先輩へ頼まなかった否定・過去を保持 |
-| 独立04 | 生成不可→生成 | 店長から頼まれなかった受動・否定を保持 |
-| 独立05 | 生成不可→生成 | 未決定の留保と大工への否定過去を、別欄の順序どおり保持 |
-| 独立06 | 生成不可→生成 | 後輩からの依頼の受動・丁寧否定過去を保持 |
-| 独立07／08 | 生成不可→生成不可 | 本人省略／人物疑問の拒否を維持 |
-| 既存control4 | 生成→同一 | 従来の行動・価値・literal希望を保持 |
+既存Q3Database（PGlite0.5.8）にQ2／Q3／related-contextとPiece M1～M4・visual-change／quota-read／natural-context／paletteの原本SQLを適用した。実行SQL11と既存helper／test3はfresh e8b7のblob bytesに全一致。legacy表・roles・認証は架空。先行Emlisは合成providerを既存serviceへ渡して成功completionを保存し、本文をPiece素材へ流用しない。
 
-独立8は1→6生成、新規availabilityは5。既存control4を含む全12では5→10生成、拒否2維持。旧成功5はmeaning／plan／artifact／candidate／visual recipe／serialized hashまで同一。全12の原本を変えていない。
+全20を実PieceSavedSourceAdapter→PiecePreviewService.issue_original→実review_prepared_original→piece_issue_preview_v2→PieceSaveService→piece_save_v2→PieceOwnerService.detailへ通した。Free比較で18保存／2拒否、最終process2.221914秒。本文／payloadはFreeのpure結果と一致。SQL用UUID・日時表現は別投影として保全し、pureとのsource identity同一を主張しない。
 
-rootと独立担当が全12原入力・前後全文・plan／完成候補を読んだ。追加5本文は全て原文KEEPで、役割反転・否定脱落・承諾や感情の創作はない。原本JSON／envelope hash／全文範囲／field内scalar・global UTF8根拠／本文hashの整合も確認した。原文KEEPの対応範囲改善であり、一般的な文章再構成や新しい観測価値を獲得したとはしない。
+18全件でpreview→保存行→detailの本文／body_blocks、3hash、format、recipe、rendererと4contract版の計12fieldを照合。初回後は生成入口・CMEE Engine／作者／compiler・reviewを禁止し、fresh serviceのpreview再読、save同key再送、detail再読を実行した。各作品の保存消費は1、明示再送は同じconsumption、拒否2はPiece／quota件数差0。原入力とPiece開始後のEmlis thread／eventsは不変。候補生成入口の1callを、内部の既存binding再実現まで含む作者処理1回と表現しない。
 
-## 既存経路での確認
+Auth・先行Emlis provider・PostgREST envelopeは合成／SQL callback、service-roleはBYPASSRLSのテスト構成。実Auth／実PostgREST／ASGI・本番DB・native並行lock／RLSの新実証ではない。同じrenderer文字列と描画材料の受渡しを、実bitmap・fit・文字欠け・同一PNG・写真保存／共有へ換算しない。
 
-- 最終の同一sourceで、新test＋Piece近傍6suiteは **3218 PASS／23.95秒、既存warning1、skip0**。9つの既存test／helper／ledgerはGit原本bytesへ合わせた。反復を合格件数へ加算しない。新SQL2case、主体／否定／受動／欠落／追加のrehashed改変拒否、作者／compiler禁止下の独立保持検査を含む。
-- 既存隔離PGlite・emlis_thread_read→PieceSavedSourceAdapterへ全12を通し、10candidateがpure結果と一致、拒否2維持、原入力不変。SQL用のUUID投影と日時の既存表現を別に保ち、評価recordのidentityを実DBの本人recordと混同しない。Piece保存・quota更新・Emlis thread/event書込・実DB要求0。
-- serialized private成果物10を別processで開き、保存plan／本文／recipeの対応を再確認。compiler／作者／Engine／modelを禁止したまま独立保持検査を通した。source資格は保存原本から再導出する。これはprivate artifact再読であり、通常Piece record保存・画像再表示の成功ではない。
-- 画像recipeの本文形式／hash対応は確認したが、実native renderer・bitmap・写真保存・共有・本人端末は今回未実行。旧7001／7101等の本人確認済み資産は保持する。
+## 検証、修正した測定、反映
 
-APIの変更集合は既存source2＋新test1のみ。公開route／request／response／DB schema／権利／quota／RNは変更しない。新owner・controller・別作者・raw修補なし。STRUCTURE_MAP_DELTA_PRESENTは、既存Piece ownerの有限資格と共通reader再利用依存の追記という限定。
+最終sourceで既存test拡張＋新保存一巡test＋Piece近傍6suiteは**3351 PASS／27.94秒、既存warning1、FAIL／SKIP0**。9caseで依頼／相談／伝達×3planの保存一巡を確認。初期のtest期待は曖昧な「伝える＋に」受動も通ると誤っていたため、既存拒否を維持して「から」の正例と「に」の拒否例へ訂正した。製品readerを緩めて成功化していない。最初の未存在Engine symbol指定、比較scriptのcandidate hashキー不存在とtierによる適格format差の誤比較は検査側を訂正し、failure logを保持した。途中成功や反復を最終件数へ加算しない。
 
-GitHub既存の[Piece CI](https://github.com/MassyuRed/mashos-api/actions/runs/42543151704)と[Analysis共有回帰CI](https://github.com/MassyuRed/mashos-api/actions/runs/42543151792)は同じe8b7e46cでcompleted／success。Analysisは全19step成功を確認した。配置／実DB／実機の成功へ換算しない。
+APIは既存source2／既存test1／新test1のexact4pathのみ。全remote bytes・差分集合・親／tree・headを読戻し確認。既存CIは[Piece42545974787](https://github.com/MassyuRed/mashos-api/actions/runs/42545974787)／[Analysis42545974764](https://github.com/MassyuRed/mashos-api/actions/runs/42545974764)、同じf3b5e93eでPieceはcompleted／success、Analysisは実行中。新workflow／手動rerunは追加しない。
 
-## AR-01と全体の残件
+## 継承と次作業
 
-AR-01の意味材料→本文での役割反転は未解決、既存候補は通常不採用のまま。今回、同一messagesからの固定候補集合比較を検討したが、既存サーバーはtemperature0以外を拒否しdo_sample=False固定と実sourceで確認した。同一greedy生成を繰り返す試行は実行せず、model call・学習・新load・再起動0。候補比較能力を廃止せず、現提供条件と区別する。
+前回の依頼新規5本文・旧成功5不変・3218局所PASS・両CI成功はe8b7の完了履歴として保持。今回の8本文増分と18保存を重複計上しない。AR-01の役割反転／対象状態・現作者の問題は未解決、研究候補通常不採用を維持。新model call／学習／load／server変更・再起動／配置／実DB／RN／build0。
 
-AR-04は今回の限定文法だけ実装・局所確認済み。一般本文の再構成、別sourceとしてのrefined、通常保存・同版画像・実機・正式受入れは未完了。AR-01〜08と必要全資産活用は継続中。primary TECHNICAL_CREDIT、正式商品品質credit0。次はこの限定対応を通常の保存・同一採用画像まで確認し、AR-01の未解決と並行して残る作品能力を回収する。
+AR-04の一般本文再構成・別sourceのrefined、対応候補の通常稼働とnative同版画像・実機・正式受入れは未完了。次はこの保存可能な本文能力を維持し、既存Piece正本に沿ってrefinedの原入力／本人補足を別sourceとして扱う不足へ進む。適格補足をoriginalへ連結する短絡はしない。AR-01〜08・全必要資産活用は継続中、正式商品品質credit0。
 
-[本文なし集計](piece_request_account_reuse_summary.json)。全private原入力・前後成果物・読解・SQL・再読・実行source identityはCocolon_CMEE_AR04_RequestAccountReuse_20261109.zipへ保全済み（15member／42242bytes）。Git反映済みsourceの重複backupは含めない。
+[本文なし集計](piece_request_account_reuse_summary.json)。全private原入力・前後本文・保存行／再読・root／独立読解・失敗log・source identityはCocolon_CMEE_AR04_PersonActionSavedReuse_20261109.zipへ保全済み（19member／80956bytes、全CRC・member hash一致）。Git反映済み製品source／testの重複backupは含めない。

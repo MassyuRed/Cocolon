@@ -2072,3 +2072,21 @@ root／独立担当が全4source項目、各snapshot、旧native基準4＋新rol
 API [e8b7e46c](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)へ既存source2＋新test1を反映し、全file bytes・変更集合・fresh headを読戻し一致。公開API／DTO／DB／RN／権利・quotaの変更0、配置／GPU生成0。既存[Piece CI42543151704](https://github.com/MassyuRed/mashos-api/actions/runs/42543151704)と[Analysis共有回帰CI42543151792](https://github.com/MassyuRed/mashos-api/actions/runs/42543151792)は、同じe8b7e46cでcompleted／success。Analysis job128922343707の全19step成功（生成保存再読・shared owner・累積/Q3/job・月次rank／削除SQL・report factsを含む）を確認した。[全結果・限定・次作業](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md)／[本文なし集計](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_summary.json)。private全原本／比較／SQL／再読を15member・42242bytesで保全。STRUCTURE_MAP_DELTA_PRESENTは既存Piece ownerの有限資格と再利用依存の追記に限定、新owner／独立controllerなし。
 
 primary TECHNICAL_CREDIT、正式商品品質credit0。AR-04は今回の有限文法だけ実装・局所確認済みで、一般本文再構成・refined・通常保存／同版画像・実機は未完了。AR-01〜08・必要全資産活用は継続中。次は限定対応を通常保存・同一採用画像まで確認し、AR-01未解決と並行して作品能力を回収する。
+
+
+<a id="person-action-saved-pipeline-20261109"></a>
+## 34. 補助経路活用AR-04 — 相談・伝達へ回収し、新8本文と18作品の保存再読を確認
+
+2026-11-09 JST。§33の依頼新規5本文を継承。保存の既存配線は新設せず、旧finite役割readerを「相談する／伝える」の完全な明示SELF過去文へ限定再利用する。新helper名は_finite_self_person_action_account、正の差分は許可lemma exact3化のみ。曖昧な伝える「に」受動は既存readerが拒否し、能動から／人物省略・未証明人名・非過去／引用・条件・伝聞は新受理しない。相談から助言・承諾・解決、伝達から理解を補わない。既存KEEP・唯一作者・独立保持検査を通し、新意味型／作者／DTO／DB／RNなし。
+
+独立作成8と前回全7field不変12をpure同一source前後比較し、10→18生成、今回新規8、旧成功10のmeaning／plan／artifact／candidate／recipe／serialized hash全同一、旧2拒否も同reason維持。root／独立担当が全20原入力・前後全文を読み、時点・人物・方向・否定・丁寧体・別欄留保の保持を確認。開発作例でblind一般化ではない。前回5本文を今回8へ重複加算しない。
+
+既存Q3Database／PGlite0.5.8へ原本Q2／Q3／relatedcontext・Piece M1～M4／visualchange／quotaread／naturalcontext／paletteを適用。実行SQL11＋既存helper等3はfresh e8b7のblob bytes全一致。各原7fieldをSQLへ保存し、先行Emlisは合成providerを既存serviceで成功completionへ保存した。そこから実PieceSavedSourceAdapter→実CMEE作者→固定既存review_prepared_original→preview RPC→save service／RPC→owner detailへ全20を通し、Freeで18保存・2拒否、最終2.221914秒。18本文／payloadはpure結果と一致。SQL UUID／日時投影とpure source identityは別に保全。
+
+18全件で本文／payload／3hash／recipe／rendererと4contract版の計12fieldをpreview→保存行→detailで照合。初回後は候補生成入口・Engine／作者／compiler・review禁止でpreviewのfresh-service同key再読→明示save→同keysave再送→detail再読まで成立。保存消費各1・再送追加0、拒否2のPiece／quota件数差0を読戻し確認、原入力とPiece開始後のEmlis thread／events不変。生成入口1callを内部binding再実現まで1回とは言わない。Auth・先行Emlis provider・PostgREST envelopeは合成／SQLcallback、service-role BYPASSRLSの隔離構成。ASGI／実Auth／本番DB／native並行lock・RLS／bitmap／fit／PNG／写真・共有／本人端末の成功ではない。
+
+最終sourceの関連8fileは3351 PASS／27.94秒・既存warning1・FAIL／SKIP0、9caseで依頼／相談／伝達×3planの保存一巡。初期testの伝える「に」受動の過剰期待は既存拒否へ訂正し製品sourceを緩めない。初期の未存在Engine symbol、scriptの未存在candidate hashキーとtier format差の誤比較は検証側を訂正し失敗logを保持、反復を加算しない。
+
+API [f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)へ既存source2／既存test1／新test1のexact4を反映し、全bytes・親／tree・変更集合・head読戻し一致。既存[Piece42545974787](https://github.com/MassyuRed/mashos-api/actions/runs/42545974787)／[Analysis42545974764](https://github.com/MassyuRed/mashos-api/actions/runs/42545974764)は同じf3b5e93eでPiece completed／success、Analysis実行中。[全結果・限定・再開先](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md)。private全原本・前後・保存再読・読解・失敗・source identityをCocolon_CMEE_AR04_PersonActionSavedReuse_20261109.zipへ保全（19member／80956bytes）。STRUCTURE_MAP_DELTA_PRESENTは既存有限資格拡張・helper名同期・新test地図だけ、新保存配線／owner／controllerなし。
+
+新GPU生成／学習／load／server変更・再起動／Render配置／実DB／RN／build0。AR-01反転未解決・通常不採用、AR-04一般本文・refined・native同版画像／通常稼働・実機・正式受入れ未完了。次は保存可能な今回能力を保ち、既存Piece正本に従ってrefinedの原入力／適格本人補足を別sourceとして接続する不足へ進む。原入力への補足連結で接続済みにしない。AR-01〜08・必要全資産活用は継続中、正式商品品質credit0。

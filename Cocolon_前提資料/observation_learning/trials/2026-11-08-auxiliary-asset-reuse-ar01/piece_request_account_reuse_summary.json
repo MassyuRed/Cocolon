@@ -1,80 +1,96 @@
 {
-  "schema": "cocolon.cmee.ar04.finite_request_reuse.v1",
-  "date_jst": "2026-11-09",
-  "api_base": "c6555fd5b81cd4ecda1bafdec60aa311c9e7feea",
-  "api_candidate": "e8b7e46c70269a40317fe2ec6ee8362c4086e619",
-  "scope": "SAVED_SELF_REQUEST_PAST_FINITE_ACCOUNT_TO_EXISTING_PIECE_KEEP",
-  "reused_assets": [
-    "natural_reply_meaning._clauses/_FORMS/_arguments/_participant/_focus_participant",
-    "Piece existing question/scope/uncertainty guards",
-    "Piece KEEP_COMPLETE_SOURCE_CONTEXT sole author and independent preservation"
-  ],
-  "source_changes": 2,
-  "new_test_files": 1,
-  "independent_records": 8,
-  "existing_controls": 4,
-  "independent_before_generated": 1,
-  "independent_after_generated": 6,
-  "new_availability": 5,
-  "independent_refusal_controls_unchanged": 2,
-  "total_before_generated": 5,
-  "total_after_generated": 10,
-  "old_success_components_exact": 5,
-  "original_records_unchanged": 12,
-  "generated_model_calls": 0,
-  "gpu_training_updates": 0,
-  "new_model_loads": 0,
-  "provider_calls": 0,
-  "local_validation": {
-    "passed": 3218,
-    "warnings": 1,
-    "seconds": 23.95,
+  "schema": "cocolon.cmee.ar04.person_action_saved_reuse.v1",
+  "date": "2026-11-09 JST",
+  "api_base": "e8b7e46c70269a40317fe2ec6ee8362c4086e619",
+  "api_commit": "f3b5e93e837a01c726ea9d0ca1caa4c39f396add",
+  "previous": {
+    "api_commit": "e8b7e46c70269a40317fe2ec6ee8362c4086e619",
+    "new_request_bodies": 5,
+    "scope": "finite_request_pure_and_original_read"
+  },
+  "current_scope": "FINITE_EXPLICIT_SELF_PAST_REQUEST_CONSULTATION_COMMUNICATION_KEEP",
+  "change": {
+    "source_files": 2,
+    "existing_test_modified": 1,
+    "new_test": 1,
+    "shared_reader_changed": false,
+    "new_author": false,
+    "new_dto": false,
+    "new_schema": false
+  },
+  "actual": {
+    "new_independent_records": 8,
+    "previous_exact_records": 12,
+    "before_generated": 10,
+    "after_generated": 18,
+    "new_body_availability": 8,
+    "old_success_exact": 10,
+    "refusals_unchanged": 2,
+    "model_calls": 0
+  },
+  "saved_sql": {
+    "engine": "PGlite 0.5.8",
+    "case_plan": "free",
+    "saved": 18,
+    "refused": 2,
+    "seconds": 2.221914477999235,
+    "artifact_fields_same": 12,
+    "quota_per_saved": 1,
+    "replay_extra_quota": 0,
+    "refused_piece_and_quota_delta": 0,
+    "original_unchanged": true,
+    "emlis_state_after_start_unchanged": true,
+    "preview_entry_calls_per_saved": 1,
+    "preview_review_calls_per_saved": 1,
+    "preview_insert_rpc_per_saved": 1,
+    "save_rpc_per_saved": 2,
+    "save_calls_are_explicit": true,
+    "replay_generation_calls": 0,
+    "review_is_actual_bounded_owner": true,
+    "source_adapter_is_actual": true,
+    "auth": "synthetic",
+    "emlis_provider": "synthetic",
+    "postgrest": "SQL callbacks",
+    "asgi_requests": 0,
+    "concurrent_native_lock_claim": false
+  },
+  "regression": {
+    "passed": 3351,
+    "failed": 0,
     "skipped": 0,
-    "original_test_material_blobs_exact": 9
+    "seconds": 27.94,
+    "existing_warnings": 1,
+    "plan_cases": 9,
+    "repeated_runs_not_added": true
   },
-  "sql_original_read": {
-    "inputs": 12,
-    "generated": 10,
-    "unavailable": 2,
-    "all_generated_candidates_exact": true,
-    "input_changes": 0,
-    "piece_saves": 0,
-    "quota_writes": 0,
-    "real_database_requests": 0
+  "limits": [
+    "Only explicit self, one written known person role, one written を object, full single clause and past fact; lemma exact3",
+    "Ambiguous 伝える ni-passive remains refused; no general potential/passive resolution",
+    "No inferred acceptance, advice, understanding, solution, actor or event time",
+    "New examples are development examples, not blind generalization",
+    "SQL UUID/time projection is separate from pure source identity",
+    "Renderer string and same recipe are not native pixels, fit, PNG, photo or sharing proof",
+    "AR01 role inversions unresolved and research variants unadopted",
+    "Refined, general prose, runtime adoption, real Auth/PostgREST/DB, devices and formal acceptance incomplete"
+  ],
+  "runtime": {
+    "deployment": 0,
+    "real_database_requests": 0,
+    "rn_changes": 0,
+    "builds": 0,
+    "gpu_generation": 0,
+    "server_restart": 0
   },
-  "private_serialized_reopen": {
-    "artifacts": 10,
-    "compiler_calls": 0,
-    "author_calls": 0,
-    "engine_calls": 0
+  "ci": {
+    "piece": 42545974787,
+    "piece_status": "completed",
+    "piece_conclusion": "success",
+    "analysis": 42545974764,
+    "analysis_status": "in_progress",
+    "analysis_conclusion": null
   },
-  "image_or_native_renderer_executions": 0,
-  "rn_builds": 0,
-  "render_deployments": 0,
-  "production_database_changes": 0,
-  "production_deployment_verified": false,
-  "formal_product_acceptance": false,
-  "product_credit": 0,
-  "primary": "TECHNICAL_CREDIT",
-  "ar01": "UNRESOLVED_NOT_ADOPTED",
-  "ar04": "FINITE_REQUEST_SUBSET_IMPLEMENTED_OVERALL_INCOMPLETE",
-  "structure_map_delta": "PRESENT_EXISTING_PIECE_OWNER_QUALIFICATION_AND_REUSE_DEPENDENCY",
-  "ci_at_recording": [
-    {
-      "id": 42543151704,
-      "name": "Piece B2-B/B3/B4/B5 isolated PostgreSQL",
-      "status": "completed",
-      "conclusion": "success",
-      "head_sha": "e8b7e46c70269a40317fe2ec6ee8362c4086e619",
-      "html_url": "https://github.com/MassyuRed/mashos-api/actions/runs/42543151704"
-    },
-    {
-      "id": 42543151792,
-      "name": "Analysis observed content",
-      "status": "completed",
-      "conclusion": "success",
-      "head_sha": "e8b7e46c70269a40317fe2ec6ee8362c4086e619",
-      "html_url": "https://github.com/MassyuRed/mashos-api/actions/runs/42543151792"
-    }
-  ]
+  "evidence_filename": "Cocolon_CMEE_AR04_PersonActionSavedReuse_20261109.zip",
+  "structure_delta": "PRESENT_EXISTING_QUALIFICATION_EXPANDED_NEW_TEST_ONLY",
+  "primary_outcome": "TECHNICAL_CREDIT_WITH_NEW_VISIBLE_BODY_CANDIDATES",
+  "formal_product_credit": 0
 }
