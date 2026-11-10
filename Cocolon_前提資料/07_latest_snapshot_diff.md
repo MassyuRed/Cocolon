@@ -1,4 +1,4 @@
-> **11/10・AR-04最新：** 焦点語順を保つ生成条件の候補1baa7977をAPI別branch `agent/piece-focal-order-candidate-20261110`へ保存。既存の資格済み無scope焦点構文から、原文／本人・述語・対象と範囲を同欄の既存条件へ投影し、語順変換に伴う反復を減らす案。関連1158 PASS＋追加operator4 PASS、旧53rawの判定／本文不変。通常API作業正本は0c6ad819のまま。実4B比較用の架空4入力＋実行コードのRunpod送信は自動承認審査で拒否され、upload／新生成／GPU切替0・品質改善未確認。 [比較準備・未実行と再開点](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-order-preparation-20261110)。
+> **11/10・AR-04最新：** 承認済みの焦点語順条件を同c634で実比較（架空4入力×前後＝8応答、control4、115.70秒）したが、反復修復0/3・元焦点語順の実現0/4。各版CMEE3/4、FOCAL02の格不成立は両版停止。候補1baa7977は不採用、通常API正本0c6ad819と元提供を維持。隔離保存は24試行＝18保存・非生成再読／6事前拒否。 [実比較結果・不採用と次の作業](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-order-actual-20261110)。
 
 > **2026-11-10・補助経路AR-04（第10回§53）：** 既存S7のmodel専用比較へ、source資格済み非過去wishの明示SELF「が」直接語順を限定接続。保存5b1de6c9の同26rawは0生成で24→25採用、旧24本文不変・source資格外1維持。新78隔離SQLは75保存／3拒否、比較元は旧記録72／6。17file996 PASS／既存warning1、追加学習0、読点の自然さは未修復・通常重み未採用。API `c9e9938981c88e811bde1970725dc3dc35b2ae26`、Piece CI42709594596／Analysis CI42709594021は全工程success、Piece model17file996 PASS／58.98秒。STRUCTURE_MAP_DELTA_NONE（既存owner内比較条件のみ、入口／責務／公開・保存契約不変）。[実結果・次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-qualified-focal-ga-reader-20261110)。
 
@@ -41827,3 +41827,13 @@ STRUCTURE_MAP_DELTA_NONE（既存S7内のmodel比較のみ）。[原本・全結
 STRUCTURE_MAP_DELTA_PRESENT_CANDIDATE_ONLY（既存private生成条件境界のみ、通常正本未反映）。[候補・全結果と再開点](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-order-preparation-20261110)。
 
 次は、保存した13,753byteの比較用ZIP（架空新2＋既使用2・比較コード）を既存Runpod f1lle4xwq3wjlnへ送信し、同c634のbefore4／after4と既存提供の前後control4、計最大12HTTP・600秒／復元枠120秒で一回比較する。現在はこの送信・実行への明示承認待ちであり、uploadも生成も再試行していない。原文／raw修補、SYSTEM変更、学習／新レンタル／通常採用／live／実DB／buildは0。修飾付き評価・引用のsource資格外3、一般品質・通常統合／本人端末と他ARは引き続き未完。
+
+
+<a id="piece-focal-order-actual-20261110"></a>
+## 11/10 AR-04 — 実比較完了・焦点条件候補は不採用
+
+承認済みの焦点語順条件を同c634で実比較（架空4入力×前後＝8応答、control4、115.70秒）したが、反復修復0/3・元焦点語順の実現0/4。各版CMEE3/4、FOCAL02の格不成立は両版停止。候補1baa7977は不採用、通常API正本0c6ad819と元提供を維持。隔離保存は24試行＝18保存・非生成再読／6事前拒否。
+
+原提供の復帰と通常／分析control前後一致。追加学習／新weights／retry0。STRUCTURE_MAP_DELTA_NONE_FOR_NORMAL、通常branch／selector／live／実DB／buildの変更0。[全結果と次の作業](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-order-actual-20261110)。
+
+次は既存private保存先から、c634を作った原24教材のsource／messages／target・既存trainer・48更新記録を取得し、焦点構文・活動を含む名詞化対象・格・否定／時点／留保・述語重複の被覆を全24行で監査する。現在のcheckpointにはこの原24教材とfit trainerがなく、被覆件数・原因・次のfit行数はまだ不明。今回の評価4入力を教師へ流用せず、別題材の自然な焦点語順／成立する直接語順を教える最小の学習候補へ戻す。今回の条件追加だけでは改善しなかった事実を保持し、prompt一般や学習原因全体へは断定しない。反復目的のS7緩和や不正raw修補は行わない。修飾・引用のsource資格外3、一般品質、通常統合・本人端末、他ARは未完。

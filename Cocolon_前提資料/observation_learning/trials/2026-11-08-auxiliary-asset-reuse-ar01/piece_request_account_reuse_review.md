@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/10・AR-04最新：** 固定c634・追加学習0で新しい架空8入力を確認し、source資格5／資格外3を分離。資格5＋既使用対照2の実4B7応答を無修補で再受領し、API209b4a27の既存S7 model比較で、完全な本人表記・対象を保つ「たいです／たい」と未決定の場所等の文体差を限定接続、CMEE4→6採用／7。新規5は2→4採用、対照2と旧46本文は不変。新隔離SQL21は18保存／3拒否、保存後0生成。17file1082 PASS／既存warning1。反復表現、理由文1の未判定、source資格外3は残る。元GPU提供46144へ復元・health／前後control一致、c634通常未採用／selector OFF・正式0/3。 [今回実結果](#piece-general-prose-register-20261110)。
+> **11/10・AR-04最新：** API0c6ad819の理由／文体修正（旧7応答7採用・旧46本文不変）を維持。今回、焦点語順条件候補1baa7977を承認済みの同c634比較4入力×前後で確認したが、反復修復0/3・焦点語順実現0/4で不採用。各版CMEE3/4、保存24試行は18保存・6事前拒否。115.70秒で元提供復帰・通常／分析control前後一致。追加学習0・通常経路変更0。 [実結果・次の作業](#piece-focal-order-actual-20261110)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -899,3 +899,26 @@ API変更は`ai/services/ai_inference/piece_v2_content_policy.py`と`ai/tests/te
 既存Jupyterへ到達し、元提供PID46144・GPU8882MiB・health200をread-onlyで確認した。新比較ファイル13,753byteのupload操作を自動承認審査が「internal code/test metadataを外部Runpodへ送るpayload／destinationへの明示承認不足」として拒否した。別経路の貼付や間接実行で回避せず、upload／モデル切替／新生成は未実施。payloadは架空4入力と比較runnerの2memberだけで、本人入力やcredential値は含まない。SHA256 `647fe53b567d782f3d67d774cb261be3df04a85e0cce7d680395fd0e1a6a5b6e`、候補source／before原本／bounded復元条件を保持する。原本・入力・再開点はprivate `Cocolon_CMEE_AR04_FocalOrder_Prepared_20261110.zip`へ保存。新しい実4B結果・自然さの改善は未確認で、PREPARATION_ONLY。
 
 次は、保存した13,753byteの比較用ZIP（架空新2＋既使用2・比較コード）を既存Runpod f1lle4xwq3wjlnへ送信し、同c634のbefore4／after4と既存提供の前後control4、計最大12HTTP・600秒／復元枠120秒で一回比較する。現在はこの送信・実行への明示承認待ちであり、uploadも生成も再試行していない。原文／raw修補、SYSTEM変更、学習／新レンタル／通常採用／live／実DB／buildは0。修飾付き評価・引用のsource資格外3、一般品質・通常統合／本人端末と他ARは引き続き未完。
+
+
+<a id="piece-focal-order-actual-20261110"></a>
+## 11/10 AR-04 — 承認後の同4B焦点語順比較・候補不採用
+
+承認済みの焦点語順条件を同c634で実比較（架空4入力×前後＝8応答、control4、115.70秒）したが、反復修復0/3・元焦点語順の実現0/4。各版CMEE3/4、FOCAL02の格不成立は両版停止。候補1baa7977は不採用、通常API正本0c6ad819と元提供を維持。隔離保存は24試行＝18保存・非生成再読／6事前拒否。
+
+前節の送信待ちは、Mashの「進めていいよ」により解消。13,753byteの凍結ZIP（SHA256 `647fe53b567d782f3d67d774cb261be3df04a85e0cce7d680395fd0e1a6a5b6e`）を既存Runpodへ送信し、既存c634だけで一回実行した。新2入力と既使用2入力でbefore4／after4、元提供前後control4＝12HTTP、1回Piece load、115.696114秒。追加学習0・新weights0・retry0、SYSTEM/source/slots不変。全8messagesは凍結wireとCPU再構築に一致。元args/env/cwd・credentials・analysis adapter・各旧weightsは保持され、通常と分析controlのrawは前後完全一致、元提供復帰とhealthを確認。
+
+| 入力 | before → after | 実評価 |
+|---|---|---|
+| GENERAL03 | 本文同一 | 「写真を選ぶ時間を選びたい」が残存、両版GENERATED |
+| FRESH02 | 本文同一 | 「友人と木の実を選ぶ時間を選びたい」が残存、両版GENERATED |
+| FOCAL01（新） | ぼくは → ぼくが、反復は同じ | 元の焦点語順には戻らず、両版GENERATED |
+| FOCAL02（新） | 「時間に大切にしたいと考える」→「時間に大切にしたい」 | 対象格不成立は残存、両版UNAVAILABLE |
+
+8rawを全読し、本人／対象主要語・好み・FOCAL02の過去否定・未決定事項を照合した。FOCAL02は「と考える」が消えても正常本文とは扱わず、CMEEの`piece_model_meaning_unassessed_or_changed`による停止を維持した。反復3件の修復0/3、SOURCE_FOCAL_ORDER実現0/4、各版3/4の判定。GENERATED6件を自然さPASSへ換算しない。この生成条件候補の採用根拠は得られず、通常APIbranchは0c6ad819、候補は別branch1baa7977へ記録のみ。source実装／reader／保存型／DB／RN／通常selector／Renderの今回変更0。
+
+isolated PGliteでbefore12／after12（各4入力×3plan）を実consumerへ通した。各版9保存・非生成再読と3事前拒否、合計24試行＝18保存と6事前拒否で、raw/原文保持・前条件／後条件のmessages一致・保存本文・quota一回・拒否時記録quota不変を確認。旧作者は禁止、本文修補なし。実Supabase／本人Auth／実機検証ではない。前回の旧53／SQL18＋選択再確認3と今回の24を重複加算しない。新source変更なしにつき前回1158＋追加4と既存CI成功は履歴であり、今回新CI／新テスト成功数とはしない。
+
+元焦点語順は既存S7で受理できるため、この反復を理由にreaderを緩めない。原因として証明したのは「この同c634・この条件追加では改善しなかった」範囲のみ。教師やmodel全体の原因断定は未実施。原本・実行／復元・全raw・SQL・再開点は既存private証拠ZIPの更新版へ保持。
+
+次は既存private保存先から、c634を作った原24教材のsource／messages／target・既存trainer・48更新記録を取得し、焦点構文・活動を含む名詞化対象・格・否定／時点／留保・述語重複の被覆を全24行で監査する。現在のcheckpointにはこの原24教材とfit trainerがなく、被覆件数・原因・次のfit行数はまだ不明。今回の評価4入力を教師へ流用せず、別題材の自然な焦点語順／成立する直接語順を教える最小の学習候補へ戻す。今回の条件追加だけでは改善しなかった事実を保持し、prompt一般や学習原因全体へは断定しない。反復目的のS7緩和や不正raw修補は行わない。修飾・引用のsource資格外3、一般品質、通常統合・本人端末、他ARは未完。

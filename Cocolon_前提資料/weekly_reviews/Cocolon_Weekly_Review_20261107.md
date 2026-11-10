@@ -2553,3 +2553,13 @@ API209b4a27で完全本人文と未決定の場所等を既存model比較へ限�
 原本／欄／補足を保持した既存private生成条件の候補で、実出力の改善は未確認。旧53rawの判定・本文を維持、通常隔離SQL18保存＋補足の選択再確認3保存。初回補足1失敗は保持し、製品コード／期限は変更していない。候補sourceは別branch1baa7977、通常正本0c6ad819、通常selector OFF。 [候補・検証と未実行の正本](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-order-preparation-20261110)。
 
 次は、保存した13,753byteの比較用ZIP（架空新2＋既使用2・比較コード）を既存Runpod f1lle4xwq3wjlnへ送信し、同c634のbefore4／after4と既存提供の前後control4、計最大12HTTP・600秒／復元枠120秒で一回比較する。現在はこの送信・実行への明示承認待ちであり、uploadも生成も再試行していない。原文／raw修補、SYSTEM変更、学習／新レンタル／通常採用／live／実DB／buildは0。修飾付き評価・引用のsource資格外3、一般品質・通常統合／本人端末と他ARは引き続き未完。
+
+
+<a id="piece-focal-order-actual-20261110"></a>
+## 63. 補助経路AR-04 — 焦点語順の実比較完了・候補不採用
+
+承認済みの焦点語順条件を同c634で実比較（架空4入力×前後＝8応答、control4、115.70秒）したが、反復修復0/3・元焦点語順の実現0/4。各版CMEE3/4、FOCAL02の格不成立は両版停止。候補1baa7977は不採用、通常API正本0c6ad819と元提供を維持。隔離保存は24試行＝18保存・非生成再読／6事前拒否。
+
+送信待ちは承認により解消。学習／新weights／retry0、原args/env/cwdの元提供復帰と通常／分析controlのraw完全一致を確認。本文の改善は認めず、形式・保存成功を品質改善へ昇格しない。通常正本0c6ad819、別候補1baa7977は不採用。[全8rawの比較・保存24と次の作業](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-order-actual-20261110)。
+
+次は既存private保存先から、c634を作った原24教材のsource／messages／target・既存trainer・48更新記録を取得し、焦点構文・活動を含む名詞化対象・格・否定／時点／留保・述語重複の被覆を全24行で監査する。現在のcheckpointにはこの原24教材とfit trainerがなく、被覆件数・原因・次のfit行数はまだ不明。今回の評価4入力を教師へ流用せず、別題材の自然な焦点語順／成立する直接語順を教える最小の学習候補へ戻す。今回の条件追加だけでは改善しなかった事実を保持し、prompt一般や学習原因全体へは断定しない。反復目的のS7緩和や不正raw修補は行わない。修飾・引用のsource資格外3、一般品質、通常統合・本人端末、他ARは未完。

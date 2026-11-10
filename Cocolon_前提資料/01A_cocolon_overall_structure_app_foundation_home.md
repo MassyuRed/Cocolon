@@ -1,4 +1,4 @@
-> **11/10・AR-04最新：** 焦点語順を保つ生成条件の候補1baa7977をAPI別branch `agent/piece-focal-order-candidate-20261110`へ保存。既存の資格済み無scope焦点構文から、原文／本人・述語・対象と範囲を同欄の既存条件へ投影し、語順変換に伴う反復を減らす案。関連1158 PASS＋追加operator4 PASS、旧53rawの判定／本文不変。通常API作業正本は0c6ad819のまま。実4B比較用の架空4入力＋実行コードのRunpod送信は自動承認審査で拒否され、upload／新生成／GPU切替0・品質改善未確認。 [比較準備・未実行と再開点](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-order-preparation-20261110)。
+> **11/10・AR-04最新：** 承認済みの焦点語順条件を同c634で実比較（架空4入力×前後＝8応答、control4、115.70秒）したが、反復修復0/3・元焦点語順の実現0/4。各版CMEE3/4、FOCAL02の格不成立は両版停止。候補1baa7977は不採用、通常API正本0c6ad819と元提供を維持。隔離保存は24試行＝18保存・非生成再読／6事前拒否。 [実比較結果・不採用と次の作業](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-order-actual-20261110)。
 
 > 11/4のPiece作成・本文・書き出し候補は、末尾の[ファイル差分](#piece-format-language-export-files-20261104)と週次レビュー§141を参照。
 
@@ -6524,3 +6524,11 @@ STRUCTURE_MAP_DELTA_NONE。既存比較内の修復でowner／入口／公開・
 焦点語順を保つ生成条件の候補1baa7977をAPI別branch `agent/piece-focal-order-candidate-20261110`へ保存。既存の資格済み無scope焦点構文から、原文／本人・述語・対象と範囲を同欄の既存条件へ投影し、語順変換に伴う反復を減らす案。関連1158 PASS＋追加operator4 PASS、旧53rawの判定／本文不変。通常API作業正本は0c6ad819のまま。実4B比較用の架空4入力＋実行コードのRunpod送信は自動承認審査で拒否され、upload／新生成／GPU切替0・品質改善未確認。
 
 STRUCTURE_MAP_DELTA_PRESENT_CANDIDATE_ONLY、owner／公開／保存追加0。通常作業正本へは未反映。[詳細](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-order-preparation-20261110)。
+
+
+<a id="piece-focal-order-actual-20261110"></a>
+## 11/10 AR-04 file地図差分 — 焦点条件候補を不採用
+
+承認済みの焦点語順条件を同c634で実比較（架空4入力×前後＝8応答、control4、115.70秒）したが、反復修復0/3・元焦点語順の実現0/4。各版CMEE3/4、FOCAL02の格不成立は両版停止。候補1baa7977は不採用、通常API正本0c6ad819と元提供を維持。隔離保存は24試行＝18保存・非生成再読／6事前拒否。
+
+候補の2path（`piece_model_source.py`／`test_piece_model_authoring_constraints.py`）は別branch1baa7977で保存した検討結果。通常API正本0c6ad819へ反映しないため、通常構造の差分は0（STRUCTURE_MAP_DELTA_NONE_FOR_NORMAL）。既存owner／private境界／公開DTO／保存型／DB／RNと全file地図は維持。[実結果と次の作業](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-order-actual-20261110)。

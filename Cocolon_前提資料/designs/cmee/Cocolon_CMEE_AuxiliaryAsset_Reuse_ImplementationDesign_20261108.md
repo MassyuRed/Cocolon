@@ -481,16 +481,16 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | AR-04回収・改修 | 既存natural_reply_meaningのfinite節／活用／格／人役読取＋Pieceガードを、piece_source._finite_self_person_action_account→piece_v1cの既存KEEPへ接続。許可述語は頼む／相談する／伝える、明示SELF・肯否過去・相手1／を対象1・句点。曖昧な伝える「に」受動は拒否を維持。新命題・作者・理解／承諾の推測なし |
 | AR-04実本文 | 先行の有限対人動作8は全件不可→生成。時点・SELF6表記・能受動・否定・丁寧体・二欄留保を保持。前回12の生成10はmeaning／plan／artifact／candidate／recipe／serialized hash全同一、拒否2維持。開発作例でblind一般化ではない。前回依頼の新規5は履歴保持、今回の欄名付き比較へ再加算しない |
 | AR-04検証・再読 | 先行有限対人動作の3351 PASS／27.94秒・既存warning1・FAIL／skip0、保存9caseで3plan確認。原本SQL11＋既存helper等3のbytes一致。新旧20を実service／既存review＋PGliteへ通し18保存／2拒否、本文等8fieldの3段同一・保存行／詳細の12field同一、初回後は作者／compiler／Engine／review禁止・同key消費各1。原入力／Emlis不変。合成Auth／先行provider／SQLcallbackであり実DB／native画像／ASGI成功ではない |
-| AR-04反映・残件 | 焦点語順を保つ生成条件の候補1baa7977をAPI別branch `agent/piece-focal-order-candidate-20261110`へ保存。既存の資格済み無scope焦点構文から、原文／本人・述語・対象と範囲を同欄の既存条件へ投影し、語順変換に伴う反復を減らす案。関連1158 PASS＋追加operator4 PASS、旧53rawの判定／本文不変。通常API作業正本は0c6ad819のまま。実4B比較用の架空4入力＋実行コードのRunpod送信は自動承認審査で拒否され、upload／新生成／GPU切替0・品質改善未確認。 |
+| AR-04反映・残件 | 承認済みの焦点語順条件を同c634で実比較（架空4入力×前後＝8応答、control4、115.70秒）したが、反復修復0/3・元焦点語順の実現0/4。各版CMEE3/4、FOCAL02の格不成立は両版停止。候補1baa7977は不採用、通常API正本0c6ad819と元提供を維持。隔離保存は24試行＝18保存・非生成再読／6事前拒否。 |
 | AR-04現在のrefined | APIca4140abの通常server保存を継承。RN4a103688で表示した第一本人回答の明示選択→exact回答query→七項目refined POSTへ接続。元／補足は別source。旧保存結果不明は元保存要求を優先。同じ実Q2材料の親導線0→新2、本文指紋とSQL保存本文／初回recipe一致。1512関連PASS・Metro1件対象外。未build／未live反映／native未確認 この旧Q2二例は継承時点の記録。前回の実Q2四例と名前役割化adjusted三planの結果を継承し、今回の同4補足は最終18比較の保持対照として確認。 |
 | AR-04現在の4B本文読取 | 既存source資格・欄完全性／本人補足分離・一人称表記・評価／留保・S7／独立CMEEと保存責務を継承。API1ce24b8cは既存MeaningWitnessのsubject／agent／counterpartとsource_literalを、当該source part全体が既知有限動作で完全被覆される受動含有fieldへ投影する。同fieldの各動作へ固有の役割・NEG／PAST／voice／source/spanを保ち、active-only／非有限混在と今回の既存refined4のwireは不変。期待正文・raw修補・source文法や採否条件の緩和はない。同c634の46材料は44→46採用、H03／B2だけ意味修復・他44raw一致。c634通常未採用／selector OFF。同版画像4作品を確認、一般品質／通常統合／本人端末は未確認。 model専用S7比較はAPI209b4a27で完全本人文／未決定対象の敬体差へ限定接続し、新5＋対照2の同rawを4→6採用。source／raw不変、一般比較器ではない。 後続API0c6ad819は資格済みopaque理由KEEPの完全字面を保ち、同本人省略／肯定copulaだけ照合。同7rawは6→7採用・旧46本文不変、source資格5／3不変。理由一般の型付き読解・source文法拡張は0。 |
-| AR-04再開記録 | 次は、保存した13,753byteの比較用ZIP（架空新2＋既使用2・比較コード）を既存Runpod f1lle4xwq3wjlnへ送信し、同c634のbefore4／after4と既存提供の前後control4、計最大12HTTP・600秒／復元枠120秒で一回比較する。現在はこの送信・実行への明示承認待ちであり、uploadも生成も再試行していない。原文／raw修補、SYSTEM変更、学習／新レンタル／通常採用／live／実DB／buildは0。修飾付き評価・引用のsource資格外3、一般品質・通常統合／本人端末と他ARは引き続き未完。 [候補と再開点](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-order-preparation-20261110) |
+| AR-04再開記録 | 次は既存private保存先から、c634を作った原24教材のsource／messages／target・既存trainer・48更新記録を取得し、焦点構文・活動を含む名詞化対象・格・否定／時点／留保・述語重複の被覆を全24行で監査する。現在のcheckpointにはこの原24教材とfit trainerがなく、被覆件数・原因・次のfit行数はまだ不明。今回の評価4入力を教師へ流用せず、別題材の自然な焦点語順／成立する直接語順を教える最小の学習候補へ戻す。今回の条件追加だけでは改善しなかった事実を保持し、prompt一般や学習原因全体へは断定しない。反復目的のS7緩和や不正raw修補は行わない。修飾・引用のsource資格外3、一般品質、通常統合・本人端末、他ARは未完。 [実比較・次の一単位](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-order-actual-20261110) |
 
 以後はこの表と各能力の対応行を現在状態へ置換更新し、詳細な実行事実は既存trial／weeklyへ置く。新しいhandoff系列・全件hash Gateを作らない。中断時も、成果物と未実行を既存保存先へ残し、同じ未完商品単位から続ける。
 
 ## 12. 今後の指示と再開方法
 
-**11/10の現在の再開点：** 次は、保存した13,753byteの比較用ZIP（架空新2＋既使用2・比較コード）を既存Runpod f1lle4xwq3wjlnへ送信し、同c634のbefore4／after4と既存提供の前後control4、計最大12HTTP・600秒／復元枠120秒で一回比較する。現在はこの送信・実行への明示承認待ちであり、uploadも生成も再試行していない。原文／raw修補、SYSTEM変更、学習／新レンタル／通常採用／live／実DB／buildは0。修飾付き評価・引用のsource資格外3、一般品質・通常統合／本人端末と他ARは引き続き未完。
+**11/10の現在の再開点：** 次は既存private保存先から、c634を作った原24教材のsource／messages／target・既存trainer・48更新記録を取得し、焦点構文・活動を含む名詞化対象・格・否定／時点／留保・述語重複の被覆を全24行で監査する。現在のcheckpointにはこの原24教材とfit trainerがなく、被覆件数・原因・次のfit行数はまだ不明。今回の評価4入力を教師へ流用せず、別題材の自然な焦点語順／成立する直接語順を教える最小の学習候補へ戻す。今回の条件追加だけでは改善しなかった事実を保持し、prompt一般や学習原因全体へは断定しない。反復目的のS7緩和や不正raw修補は行わない。修飾・引用のsource資格外3、一般品質、通常統合・本人端末、他ARは未完。
 
 推奨指示は **「補助経路の活用作業を進めて」**。
 
@@ -707,3 +707,13 @@ STRUCTURE_MAP_DELTA_NONE（既存S7内のmodel比較のみ）。[原本・全結
 STRUCTURE_MAP_DELTA_PRESENT_CANDIDATE_ONLY（既存private生成条件境界のみ、通常正本未反映）。[候補・全結果と再開点](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-order-preparation-20261110)。
 
 次は、保存した13,753byteの比較用ZIP（架空新2＋既使用2・比較コード）を既存Runpod f1lle4xwq3wjlnへ送信し、同c634のbefore4／after4と既存提供の前後control4、計最大12HTTP・600秒／復元枠120秒で一回比較する。現在はこの送信・実行への明示承認待ちであり、uploadも生成も再試行していない。原文／raw修補、SYSTEM変更、学習／新レンタル／通常採用／live／実DB／buildは0。修飾付き評価・引用のsource資格外3、一般品質・通常統合／本人端末と他ARは引き続き未完。
+
+
+<a id="piece-focal-order-actual-20261110"></a>
+## 11/10 AR-04 — 実比較完了・焦点条件候補は不採用
+
+承認済みの焦点語順条件を同c634で実比較（架空4入力×前後＝8応答、control4、115.70秒）したが、反復修復0/3・元焦点語順の実現0/4。各版CMEE3/4、FOCAL02の格不成立は両版停止。候補1baa7977は不採用、通常API正本0c6ad819と元提供を維持。隔離保存は24試行＝18保存・非生成再読／6事前拒否。
+
+原提供の復帰と通常／分析control前後一致。追加学習／新weights／retry0。STRUCTURE_MAP_DELTA_NONE_FOR_NORMAL、通常branch／selector／live／実DB／buildの変更0。[全結果と次の作業](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-order-actual-20261110)。
+
+次は既存private保存先から、c634を作った原24教材のsource／messages／target・既存trainer・48更新記録を取得し、焦点構文・活動を含む名詞化対象・格・否定／時点／留保・述語重複の被覆を全24行で監査する。現在のcheckpointにはこの原24教材とfit trainerがなく、被覆件数・原因・次のfit行数はまだ不明。今回の評価4入力を教師へ流用せず、別題材の自然な焦点語順／成立する直接語順を教える最小の学習候補へ戻す。今回の条件追加だけでは改善しなかった事実を保持し、prompt一般や学習原因全体へは断定しない。反復目的のS7緩和や不正raw修補は行わない。修飾・引用のsource資格外3、一般品質、通常統合・本人端末、他ARは未完。
