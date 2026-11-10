@@ -1,4 +1,4 @@
-> **11/11・AR-04最新：** APIa4bbe636で、既資格の理由／条件／譲歩付き本人希望の原順・全字面を保つ文体比較を修復。固定CPU新3の同じ常体候補は0→3採用、原文対照3・意味変異33拒否を維持し、3plan計9保存／非生成再読。原7項目・prepared／messages・source意味／根拠／planは前後一致、前回の実5本文も0生成で維持。新80成功、関連39fileの重複除外5812件は5809 PASS／既存3 FAIL。両CI成功。新3の実4Bは未取得、13,619byte比較packetは未送信。f6dae研究候補・通常selector OFF、本番未反映。 [文体比較・検証と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scoped-self-register-20261111)。
+> **11/11・AR-04最新：** 承認済み新3＋保持2を保存f6daeで一回・追加学習0の実4B確認。同じ実5rawを旧c34／現a4で比較し、採用2→5（新3の文体差0→3回復、保持2不変）。source意味・plan・prepared／messagesは両版一致、全5の3plan計15保存・非生成再読成功。9HTTP・96.028秒で元提供args／env／cwdを復元、通常／Analysis前後response一致・health200。新3は末尾「です」除去だけを保持し、旧model生成baselineや一般作文改善率はない。APIa4bbe636・f6dae研究候補、通常selector OFF、本番未反映。 [実4B比較・保存と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scoped-self-register-actual-20261111)。
 
 > **11/10・AR-04最新：** 引用内stopを持つ新4件＋保持GENERAL07の現builder送信messagesを固定し、13,140byte・2memberの無学習比較packetを準備。構文compile／CRC／member照合は成功、実モデル生成・送信・提供停止0。非環境の稼働確認はhealth200。起動環境全体の読取りは認証情報を含み得るとして自動承認審査に拒否され、未実行。新packet送信と、完全復元に必要な環境内再利用の具体承認待ち。API5816f2d0／f6dae研究候補・通常selector OFF・本番未反映を維持。 [具体packet・確認範囲・再開点](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quote-stop-inference-prepared-20261110)。
 
@@ -504,3 +504,14 @@ APIa4bbe636で、既資格の理由／条件／譲歩付き本人希望の原順
 次はSCOPED-REGISTER-RAIN／NEGATIVE／QUOTEDの新3と、前回SCOPE-QUOTE-REASON／QUOTE-RUNの保持2を、保存f6daeで一回・追加学習0の実4B比較へ通す。各source7項目・prepared ID／JSON・現builder messagesを固定し、保持2は前回全requestとexact、新3には旧model生成baselineがない。凍結13,619byte／2member、SHA256 `63f90d0a3512a17355aa2a145f04a7cb5decc04fe0924e241031efe94a608693`。候補5＋通常／Analysis前後control4の最大9HTTP、Piece1load、学習／新weights／retry0、復元込み600秒／復元予約120秒。新packetの送信と、認証情報を含み得る起動環境全体の同Pod内一時読取・復元再利用は今回の具体承認後に限る。前回の一回承認は消費済みで再利用せず、現在は新送信／新GPU実行／新環境読取0。前回の実5／15保存／101.508秒復元は完了として継承する。
 
 詳細：[文体比較・実証範囲・残差](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scoped-self-register-20261111)。
+
+<a id="piece-scoped-self-register-actual-20261111"></a>
+## 11/11 AR-04 — 理由付き本人希望の実4B採用回復・保存と復元
+
+承認済み新3＋保持2を保存f6daeで一回・追加学習0の実4B確認。同じ実5rawを旧c34／現a4で比較し、採用2→5（新3の文体差0→3回復、保持2不変）。source意味・plan・prepared／messagesは両版一致、全5の3plan計15保存・非生成再読成功。9HTTP・96.028秒で元提供args／env／cwdを復元、通常／Analysis前後response一致・health200。新3は末尾「です」除去だけを保持し、旧model生成baselineや一般作文改善率はない。APIa4bbe636・f6dae研究候補、通常selector OFF、本番未反映。
+
+新3は末尾「です」の除去だけの実本文で、理由・本人・否定希望・引用を保持。保持2は前回全request／raw／responseと一致した。source意味／根拠／plan／prepared／messagesは旧c34と現a4で一致し、同じrawだけの読取差を確認。新3の旧model生成baselineや一般作文改善率はない。今回はsource／test／CI変更0、STRUCTURE_MAP_DELTA_NONE。既存3失敗・同版画像／通常統合／実機等は残る。
+
+次は、既資格のliteral扱い「休みたい／読みたい」が原順のまま止まる残差を、既存source／scope／本人全文の保持とnative／canonical互換を維持して最小修復する。理由付き好みの文体差、前置canonical側の文体差、引用／理由一般、広い文章、新f6daeの旧53全生成回帰、同版画像／通常統合／本人端末、既存無引用3失敗と他ARは未完。今回の新3実4B・保持2照合・15保存・96.028秒復元は完了として継承し、この9HTTPを再実行しない。今回の具体一回承認は消費済み。新しいfit／GPU比較／通常モデル採用／selector有効化／Render／live DB／RN／buildを自動実行しない。
+
+詳細：[実原本・15保存・限界](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scoped-self-register-actual-20261111)。

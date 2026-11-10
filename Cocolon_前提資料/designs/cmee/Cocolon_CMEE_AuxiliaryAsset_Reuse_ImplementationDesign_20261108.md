@@ -12,7 +12,7 @@ current_next: AR-04
 runtime_effect_of_this_document: 0
 ---
 
-> **11/11・AR-04最新：** APIa4bbe636で、既資格の理由／条件／譲歩付き本人希望の原順・全字面を保つ文体比較を修復。固定CPU新3の同じ常体候補は0→3採用、原文対照3・意味変異33拒否を維持し、3plan計9保存／非生成再読。原7項目・prepared／messages・source意味／根拠／planは前後一致、前回の実5本文も0生成で維持。新80成功、関連39fileの重複除外5812件は5809 PASS／既存3 FAIL。両CI成功。新3の実4Bは未取得、13,619byte比較packetは未送信。f6dae研究候補・通常selector OFF、本番未反映。 [文体比較・検証と次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scoped-self-register-20261111)。
+> **11/11・AR-04最新：** 承認済み新3＋保持2を保存f6daeで一回・追加学習0の実4B確認。同じ実5rawを旧c34／現a4で比較し、採用2→5（新3の文体差0→3回復、保持2不変）。source意味・plan・prepared／messagesは両版一致、全5の3plan計15保存・非生成再読成功。9HTTP・96.028秒で元提供args／env／cwdを復元、通常／Analysis前後response一致・health200。新3は末尾「です」除去だけを保持し、旧model生成baselineや一般作文改善率はない。APIa4bbe636・f6dae研究候補、通常selector OFF、本番未反映。 [実4B比較・保存と次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scoped-self-register-actual-20261111)。
 
 > **11/10・AR-04最新：** 引用内stopを持つ新4件＋保持GENERAL07の現builder送信messagesを固定し、13,140byte・2memberの無学習比較packetを準備。構文compile／CRC／member照合は成功、実モデル生成・送信・提供停止0。非環境の稼働確認はhealth200。起動環境全体の読取りは認証情報を含み得るとして自動承認審査に拒否され、未実行。新packet送信と、完全復元に必要な環境内再利用の具体承認待ち。API5816f2d0／f6dae研究候補・通常selector OFF・本番未反映を維持。 [具体packet・確認範囲・再開点](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quote-stop-inference-prepared-20261110)。
 
@@ -380,13 +380,13 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 | AR-01 | 現naturalの主体・所有者・否定・時点・留保を、旧失敗・意味比較・共通原因分析で改善。EM-01a/b | 現6境界と正常な短文／省略で、同入力の誤読を解消または明確に減らし、自然さ・別題材・既成功・保存再読を保持。検出増加／無出力だけでは完了しない | 継続中。新24実生成の4版は通常不採用。c6555fd5で疑問符なしの確認質問の保存抜けを修復、250局所PASS。同24rawは旧24保存→新22保存／2拒否、受理本文不変。全体の意味修復は未完 |
 | AR-02 | 現naturalの任意問い・回答・訂正・撤回・frameの一往復。EM-02a/b、03b | 一点確認／skip／終了／本人続行、対象だけ更新、撤回後の残存意味、同版再読、プラン境界 | AR-01の全一般品質完成待ちにはしない。未開始 |
 | AR-03 | 適格履歴の意味ある利用。EM-03a/b | 同一／別場面・変化・無関係・訂正前を区別し、適切な履歴が今回へ効く。失効材料を使わない | 現related_contextを継承。未開始 |
-| AR-04 | Piece一般本文・単独伝達・refined・画像整合 | 原文の意味・一人称・本人補足と同版画像／保存を保持 | APIa4bbe636で、既資格の理由／条件／譲歩付き本人希望の原順・全字面を保つ文体比較を修復。固定CPU新3の同じ常体候補は0→3採用、原文対照3・意味変異33拒否を維持し、3plan計9保存／非生成再読。原7項目・prepared／messages・source意味／根拠／planは前後一致、前回の実5本文も0生成で維持。新80成功、関連39fileの重複除外5812件は5809 PASS／既存3 FAIL。両CI成功。新3の実4Bは未取得、13,619byte比較packetは未送信。f6dae研究候補・通常selector OFF、本番未反映。 |
+| AR-04 | Piece一般本文・単独伝達・refined・画像整合 | 原文の意味・一人称・本人補足と同版画像／保存を保持 | 承認済み新3＋保持2を保存f6daeで一回・追加学習0の実4B確認。同じ実5rawを旧c34／現a4で比較し、採用2→5（新3の文体差0→3回復、保持2不変）。source意味・plan・prepared／messagesは両版一致、全5の3plan計15保存・非生成再読成功。9HTTP・96.028秒で元提供args／env／cwdを復元、通常／Analysis前後response一致・health200。新3は末尾「です」除去だけを保持し、旧model生成baselineや一般作文改善率はない。APIa4bbe636・f6dae研究候補、通常selector OFF、本番未反映。 |
 | AR-05 | 分析の本人基準・役割／選択・記録間関係。AN-03a/b/c、04 | 原記録→意味→図／全文→両端根拠の対応、再出現／変化／不明の正しさ | 現Engine統合・保存済み成果を継承。並行可能。未開始 |
 | AR-06 | Emlis観測材料、訂正・削除・権利、長い蓄積と月次。EM-04/05、AN-02/06/08/10 | 本人sourceから材料を渡し、失効・分割範囲・当時版を保持。生成本文を本人事実にしない | AR-02/03/05の該当能力を利用。未開始 |
 | AR-07 | IF／Saved等の商品固有の残る意味保持責務。既存AN／PC残件 | 仮想・本人選択意向・観測を分離し、成立した経路で出力と保存を確認 | 既存商品の実装条件に従う。無断延期・新発売条件化をしない。未開始 |
 | AR-08 | 実証できた共通能力の通常適用と全体確認。EM-05/06/07等 | 採用版の意味保持・自然さ・権利・中断復帰・保存再読・実際の待ち時間／費用。未採用範囲は理由と残差を保持 | 各単位で通常採用可能。全core一括切替を強制しない。未開始 |
 
-現在は **AR-04の意味保持・単独伝達**を継続する。 次はSCOPED-REGISTER-RAIN／NEGATIVE／QUOTEDの新3と、前回SCOPE-QUOTE-REASON／QUOTE-RUNの保持2を、保存f6daeで一回・追加学習0の実4B比較へ通す。各source7項目・prepared ID／JSON・現builder messagesを固定し、保持2は前回全requestとexact、新3には旧model生成baselineがない。凍結13,619byte／2member、SHA256 `63f90d0a3512a17355aa2a145f04a7cb5decc04fe0924e241031efe94a608693`。候補5＋通常／Analysis前後control4の最大9HTTP、Piece1load、学習／新weights／retry0、復元込み600秒／復元予約120秒。新packetの送信と、認証情報を含み得る起動環境全体の同Pod内一時読取・復元再利用は今回の具体承認後に限る。前回の一回承認は消費済みで再利用せず、現在は新送信／新GPU実行／新環境読取0。前回の実5／15保存／101.508秒復元は完了として継承する。
+現在は **AR-04の意味保持・単独伝達**を継続する。 次は、既資格のliteral扱い「休みたい／読みたい」が原順のまま止まる残差を、既存source／scope／本人全文の保持とnative／canonical互換を維持して最小修復する。理由付き好みの文体差、前置canonical側の文体差、引用／理由一般、広い文章、新f6daeの旧53全生成回帰、同版画像／通常統合／本人端末、既存無引用3失敗と他ARは未完。今回の新3実4B・保持2照合・15保存・96.028秒復元は完了として継承し、この9HTTPを再実行しない。今回の具体一回承認は消費済み。新しいfit／GPU比較／通常モデル採用／selector有効化／Render／live DB／RN／buildを自動実行しない。
 
 既存の品質作業・新教師8件・保存重みの継続点を使う。GPUに現実の接続障害がある場合、取得できた事実、未実行の生成、回収済み原本、次の同一単位を記録し、CPUの合成成功を実モデル改善へ換算しない。接続復旧や既存の別core実装を必要範囲で進め、無関係な補助機構開発へ変えない。
 
@@ -934,3 +934,31 @@ APIa4bbe636のPiece CI42913703031／job130170577459／39step、Analysis CI429137
 原本・固定CPU前後・9保存・実5維持・新一回比較準備と再開点は非公開 `Cocolon_CMEE_AR04_ScopedWish_Register_20261111.zip` へ保持。実装・検査2pathは [実装commit](https://github.com/MassyuRed/mashos-api/commit/a4bbe6369575d4c5edd82dc38f0a00f74d2985d4)を参照する。
 
 次はSCOPED-REGISTER-RAIN／NEGATIVE／QUOTEDの新3と、前回SCOPE-QUOTE-REASON／QUOTE-RUNの保持2を、保存f6daeで一回・追加学習0の実4B比較へ通す。各source7項目・prepared ID／JSON・現builder messagesを固定し、保持2は前回全requestとexact、新3には旧model生成baselineがない。凍結13,619byte／2member、SHA256 `63f90d0a3512a17355aa2a145f04a7cb5decc04fe0924e241031efe94a608693`。候補5＋通常／Analysis前後control4の最大9HTTP、Piece1load、学習／新weights／retry0、復元込み600秒／復元予約120秒。新packetの送信と、認証情報を含み得る起動環境全体の同Pod内一時読取・復元再利用は今回の具体承認後に限る。前回の一回承認は消費済みで再利用せず、現在は新送信／新GPU実行／新環境読取0。前回の実5／15保存／101.508秒復元は完了として継承する。
+
+<a id="piece-scoped-self-register-actual-20261111"></a>
+## 11/11 AR-04 — 理由付き本人希望の実4B採用回復・保存と復元
+
+承認済み新3＋保持2を保存f6daeで一回・追加学習0の実4B確認。同じ実5rawを旧c34／現a4で比較し、採用2→5（新3の文体差0→3回復、保持2不変）。source意味・plan・prepared／messagesは両版一致、全5の3plan計15保存・非生成再読成功。9HTTP・96.028秒で元提供args／env／cwdを復元、通常／Analysis前後response一致・health200。新3は末尾「です」除去だけを保持し、旧model生成baselineや一般作文改善率はない。APIa4bbe636・f6dae研究候補、通常selector OFF、本番未反映。
+
+
+Mashの新3＋保持2・起動環境の同Pod内一時読取／復元再利用・追加学習なし復元込み最大10分一回への明示承認後、固定13,619byte／2member packetを既存Pod f1lle4xwq3wjlnへ送り実行した。SHA256 `63f90d0a3512a17355aa2a145f04a7cb5decc04fe0924e241031efe94a608693`、全member／runner／wireは凍結時と一致。候補5＋通常／Analysis前後control4の9HTTP、Piece1load、学習／新weights／retry／SYSTEM／生成条件変更0。元提供停止前に現cacheの固定tokenizerで全5の入力＋2048生成予約が8192以内を確認し、最大入力1708token。新3に期待正文・固定CPU本文・旧rawを送っていない。
+
+全処理96.027656秒で元base／既存Analysis提供へ復元した。元PID61979→復元PID62196、args／全env／cwdと既知認証値の一致、元source／Analysis adapter／保存Piece重みの前後不変を確認。通常／Analysis前後のrequestと全responseは各完全一致、health正常、独立localhost health HTTP200。全起動環境は同Pod内で完全復元に再利用し、全envのserializeは行わない。既知二つのAPIkey値が回収原本へ混入した場合に回収を止める既存runnerを維持した。完了済み前回101.508秒の比較は再実行していない。
+
+| 実入力 | 同じ実rawの旧c34→現a4採否 | 実本文で保持したこと |
+|---|---|---|
+| SCOPED-REGISTER-RAIN | 未判定→採用 | 雨の継続と本人の在宅希望。末尾「です」だけを除去 |
+| SCOPED-REGISTER-NEGATIVE | 未判定→採用 | 余裕がないという理由と、地域の活動へ加わりたくない否定希望を両方保持 |
+| SCOPED-REGISTER-QUOTED | 未判定→採用 | 友人の引用内一人称・発言全文と、引用外の本人の在宅希望を分離保持 |
+| SCOPE-QUOTE-REASON | 採用→採用 | 前回の全request／raw／response／revision／usageと完全一致 |
+| QUOTE-RUN | 採用→採用 | 前回の全request／raw／response／revision／usageと完全一致 |
+
+実原本rawを修補せず受領し、旧c34 policyを独立local processへ読込み、現a4と同じsource／意味／plan／prepared ID・JSON／全messagesで比較した。採用は2/5→5/5、新3だけ0/3→3/3回復、観測した既成功退行0。これは同じ新実rawのreader比較であり、旧モデルと新モデルの生成前後比較ではない。新3に旧model生成baselineはなく、保持2は既露出で新規holdoutではない。旧作者fallbackを禁止したまま、現receipt→CMEE／S7と、Free／Plus／Premiumの実保存consumerへ全5×3planの15試行を通し、15保存・同／新service非生成再読、原入力／Emlis不変・quota各1、保存後0生成を確認した。保存consumerでは合成owner／UUID／現在日時への等価内容投影を用い、元GPU要求identityやlive Supabase／本人Authの往復と混同しない。
+
+華恋と独立担当が全5原7項目・実raw・本文全文を読んだ。新3は元の末尾「です」だけを外した自然な常体で、理由・本人表記・全対象・希望／否定・引用の字面と話者を保持した。友人の場所や待つ対象、本人の感情／行動の完了、相手意図は補っていない。保持2も前回全文一致、二重「ので」の文体の重さや引用の二重感嘆符を原文どおり保つ。一般的な編集能力・広い自然文品質・正式Product Read／本人受入れの成功へ拡張しない。
+
+本回のlocal reviewは初回で成功し、harness修正／商品source／test／workflow変更0、新モデル呼出し0。前回の固定CPU3／9保存、新80成功、39file重複除外5809 PASS／既存3 FAIL、APIa4のPiece CI42913703031／job130170577459／39stepとAnalysis CI42913702987／job130170577645／19stepのattempt1全successは、それぞれ前回の条件付き証拠として保持。今回の15保存で既存3失敗が解消したとはせず、新pytest／CI再実行0。STRUCTURE_MAP_DELTA_NONE（今回は実結果のみ、既存model比較ownerの責務／入口／型／保存schemaは追加しない）。primaryは限定TECHNICAL_CREDIT、商品品質credit／正式受入れは追加しない。
+
+実原本ZIP SHA256 `22c4cf62dfd4a34f059d4d634d99fb713feca665c5ffbe829d2977a685fbdc1b`、result SHA256 `3ca6a40e7cfbd3311d125bea6c8a2bc039b1b56d5d3c918d29a286729efb7cc8`。原本・実5全文・旧policy比較・15保存・独立読取・再開点は同じ既存ファイルへ更新して保持：[原本と再開点](https://chatgpt.com/library?file_id=libfile_fde3_f-6b65ee3d3ec08191ae61912a6c50b719_2f7470f963808191aaebf050935e72de&account_id=personal)。
+
+次は、既資格のliteral扱い「休みたい／読みたい」が原順のまま止まる残差を、既存source／scope／本人全文の保持とnative／canonical互換を維持して最小修復する。理由付き好みの文体差、前置canonical側の文体差、引用／理由一般、広い文章、新f6daeの旧53全生成回帰、同版画像／通常統合／本人端末、既存無引用3失敗と他ARは未完。今回の新3実4B・保持2照合・15保存・96.028秒復元は完了として継承し、この9HTTPを再実行しない。今回の具体一回承認は消費済み。新しいfit／GPU比較／通常モデル採用／selector有効化／Render／live DB／RN／buildを自動実行しない。
