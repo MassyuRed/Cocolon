@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/10現在：** 一回のfresh48更新で文末混在3と受動表現1を局所修復、同34のCMEE32→33。新SQL126は117保存／9拒否、受動否定1誤りは未解決・拒否維持。新c634通常未採用／新重みnative未確認。[今回実結果](#piece-register-coverage-learning-result-20261110)。
+> **11/10現在：** 文順だけの一回fresh48更新は完了したが比較打切り・全実験失敗、37／38候補取得・B2 after欠測。paired37のCMEE36→35、H03未修復・A2過去消失の退行1、改善0。新SQL123は114保存／9拒否・保存後0生成。新8044不採用・c634研究基準保持。[今回実結果](#piece-negative-passive-order-result-20261110)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -742,3 +742,30 @@ REGISTER_HELD03は原文の「依頼を受けなかった」という受動否�
 製品source／SYSTEM／reader／保存責務・公開API／DB／RNに新差分0、今回の新pytest／CI0。API4da69cde／RN4424976bとその前回CI・旧native残件は継承情報で、新c634の検証結果へ移さない。前回5b1のFRESH03同版本文PNG4一致は保持するが、**新c634重みでのnative画像／本人端末確認は未実施**。新重み通常採用・selector有効化・本番反映・追加署名配布0、一般品質・正式受入れ0/3・AR全体は未完了。STRUCTURE_MAP_DELTA_NONE、限定TECHNICAL_CREDIT。
 
 次のAR-04は、REGISTER_HELD03に残る「頼まれなかった」という受動否定を能動否定へ変える生成を、既存4B作者の自然文実現側で改善する。本人が依頼を受けた側であることと、その依頼の非発生、原文の相手／対象・過去・本人表記を保持し、同入力前後・能受動／肯否の別題材・今回の成功対照を既存CMEE／保存再読まで比較する。今回の2教師・48更新・完了比較を繰り返さず、原因や次の改修方法を未検証のまま断定しない。CMEE緩和・raw修補・SYSTEM指示周回・追加学習／通常採用の自動実行はしない。新c634候補の同版画像・通常統合／本人端末・一般品質、旧native失敗、AR-01反転と他ARも残件として保持する。
+
+
+<a id="piece-negative-passive-order-result-20261110"></a>
+## 2026-11-10 否定受動の文順だけの一回比較 — 全実験失敗・候補不採用
+
+前回c634の限定改善（§56と上の実結果）は保持した。今回は既存24教師中23行の全object／埋込み文字列byte、全訓練SYSTEM、行順・六一人称人数・語彙・原ID／日時等・trainer／scope／seed20261109／LR1e−4を維持し、ROLEFIT10の同じ2文をsource／target双方で反転した。否定受動を第一文へ移す一変数のgeneration側介入で、既知失敗rawや新評価正文を教師化していない。新評価は**別題材2件×2文順の4variant**で、独立4題ではない。source資格・PreparedRequest／現行messagesは既存ownerから再導出し、推論wireへの期待正文・raw混入は0。
+
+既存設定からfresh LoRA48更新は完了（外側215.702734秒／内部214.105秒、保存後非学習reloadのtensor一致）。新重み80444161017ec36d76b863cb8877b34c64dc4c77d0b151f98fd1f008b412589c、config32e5aef6e96926aea4221f57986a1a5744736d547ae171876ecd069c1f19bab9。旧c634／5b1／e924重みは初期値に読まず、optimizer／RNG未保存のため途中resumeではない。**全比較は未完了**で、復元120秒を確保した作業枠480秒の次呼出し残時間条件work_time_limitにより、最後のORDER_HELD_B2候補前に打切り、実験全体はLEARNING_COMPARISON_FAILED_NOT_ADOPTED。B2 afterは欠測であり、拒否・一致・成功へ補完しない。実起動一回・追加fit／生成／時間延長0。
+
+実HTTP45＝新基準4＋新候補37＋自然Emlis／Analysis前後control4、うち新Piece41。既知34のc634基準は完全同じ現行request／revisionを再資格化した記録を再利用し、新生成へ数えない。38source・補足4と取得済before38／after37の75rawをrootと独立担当が全文確認した。同じ37組では35rawがbyte一致し、FRESH12の語順変化は意味保持の言換えだけで品質改善へ加算しない。REGISTER_HELD03の受動否定→能動の逆転は前後とも未修復。ORDER_HELD_A2は受動を保っても過去否定を非過去へ変え、**意味退行1件**となった。B2の基準にも能受動逆転があり、afterの効果は未観測。今回の意味改善は0で、文順が唯一の原因とも一般品質成立とも証明しない。
+
+| 同じ材料の比較範囲 | c634基準 | 新8044候補 |
+|---|---|---|
+| paired37 | 36採用／1拒否 | 35採用／2拒否 |
+| 内・既知34 | 33採用／1拒否 | 33採用／1拒否 |
+| 内・取得できた新3variant | 3採用／0拒否 | 2採用／1拒否 |
+| B2（paired37の外） | 1拒否 | 欠測・採否なし |
+
+全基準38は36採用／2拒否、候補は取得37のみ35採用／2拒否で、異なる分母を全38完了の比較へ見せない。H03と退行A2は既存CMEEで拒否し、reader／意味保持条件を緩めない。
+
+新隔離SQL123＝新4基準×3planの12（9保存／3拒否）＋取得37候補×3planの111（105保存／6拒否）、計114保存／9拒否。旧34基準のSQL102（99保存／3拒否）は再資格化のみ・再実行0、新123へ加算しない。保存成功は本文／recipe等・quota各1・原入力／Emlis不変、保存後の同／新service再読は0生成。拒否はrecord／quota不変。実rawは無修正で等価な新しい合成ID／日時へ再bindしたPGlite・合成Auth／SQL callbackで、live Supabaseや実アプリAuth一往復／本人端末の確認ではない。
+
+元のbase／既存Analysis提供をPID43443へ同args／env／cwd／keysで復元、healthと前後controlのresponse bytes一致。全工程485.889660秒で復元込み600秒内、学習は300秒内。旧重み／元source／Analysis adapter・凍結data／wireは不変。費用・総保持／請求は未測定。取得原本ZIPのSHA256は41c9290ec3039b39e7973c597f49b65c32244aa11d1d74d507b0d38948cfa6b5、[保存した原本](https://chatgpt.com/library?file_id=libfile_fde3_f-3fb5b0f38dbc819199c6d6736a2cb652_2f7470f963808191aaebf050935e72de&account_id=personal)へ戻れる。
+
+製品source／SYSTEM／authoring hint／reader／保存責務・公開API／DB／RN変更0、今回新pytest／CI0、STRUCTURE_MAP_DELTA_NONE。API4da69cde／RN4424976bと前回のCI・旧native残件を継承する。新8044は通常・次初期値へ不採用、c634も通常未採用の研究基準として保持、selector OFF・本番反映／署名配布0。新8044／c634のnative画像・本人端末は未確認で、旧5b1 FRESH03画像一致を転用しない。今回の商品品質改善／正式商品creditは0、一般品質・正式受入れ0/3・AR全体は未完了。
+
+次のAR-04は、通常未採用のc634研究基準を保持し、既存4B作者で依頼の受け手・否定・過去を同時に保つ自然文実現の改修設計へ進む。REGISTER_HELD03とB2基準に残る受動否定→能動への逆転、A2の過去→非過去退行を対象に、相手／対象・本人表記・別欄と既成功文を保持する。文順だけの一回fitは不採用で閉じ、同fit反復・時間延長・欠測補完／追加生成・8044の次初期値／通常採用を自動実行しない。CMEE緩和・raw修補・SYSTEM指示周回は行わない。一般品質・採用候補の同版画像／通常統合・本人端末、旧native失敗、AR-01反転と他ARは残件として保持する。

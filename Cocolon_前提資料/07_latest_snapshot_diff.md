@@ -1,4 +1,4 @@
-> **11/10・AR-04最新：** 原24教師の2行だけを置換した一回のfresh48更新で、同34材料のCMEE採用32→33。FRESH07を含む3作品の文末混在と、新1作品の受動表現を修復、既知25rawは不変。新SQL126は117保存／9拒否、保存後0生成。受動否定→能動への意味逆転1例は前後とも拒否維持。新c63446候補は通常未採用／selector OFF、新重みでのnative画像・本人端末は未確認。製品source／SYSTEM／CMEE変更0、一般品質・正式0/3・AR全体は未完了。 STRUCTURE_MAP_DELTA_NONE。[全実結果](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-register-coverage-learning-result-20261110)。
+> **11/10・AR-04最新：** ROLEFIT10の文順だけを変えたfresh48更新は完了したが、比較を残時間条件で打切り、全実験FAILED_NOT_ADOPTED。候補37／38取得・B2 after欠測。同じ37組のCMEE36→35、H03未修復・A2の過去消失が退行1、改善0。新SQL123は114保存／9拒否、保存後0生成。新8044は不採用、c634研究基準を保持し通常selector OFF。製品source／SYSTEM／CMEE変更0、一般品質・新重み同版画像／本人端末・正式0/3は未完了。 STRUCTURE_MAP_DELTA_NONE。[全実結果](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-negative-passive-order-result-20261110)。
 
 > **2026-11-10・補助経路AR-04（第10回§53）：** 既存S7のmodel専用比較へ、source資格済み非過去wishの明示SELF「が」直接語順を限定接続。保存5b1de6c9の同26rawは0生成で24→25採用、旧24本文不変・source資格外1維持。新78隔離SQLは75保存／3拒否、比較元は旧記録72／6。17file996 PASS／既存warning1、追加学習0、読点の自然さは未修復・通常重み未採用。API `c9e9938981c88e811bde1970725dc3dc35b2ae26`、Piece CI42709594596／Analysis CI42709594021は全工程success、Piece model17file996 PASS／58.98秒。STRUCTURE_MAP_DELTA_NONE（既存owner内比較条件のみ、入口／責務／公開・保存契約不変）。[実結果・次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-qualified-focal-ga-reader-20261110)。
 
@@ -41779,3 +41779,9 @@ Mashの明示指示により[00_cocolon_current_product_and_state.md](00_cocolon
 ## 2026-11-10 — AR-04 2教材置換の一回48更新、34本文と新SQL126
 
 原24行の22行を保持したfresh48更新で、新c634候補は文末混在3・受動表現1を局所修復。同34のCMEE32→33、既知25raw不変。受動否定→能動の未解決1例は拒否維持。実46HTTP（新基準8＋候補34＋control4）、旧基準26は記録再利用。新SQL126＝24基準＋102候補は117保存／9拒否、旧78再実行0、保存後0生成。全工程482.039299秒・元提供42764へ復元・health／前後control一致。製品source／prompt／reader差分0・新pytest／CI0、STRUCTURE_MAP_DELTA_NONE。新重み通常未採用／selector OFF・新c634native画像／本人端末未確認、費用未測定・正式0/3。次は受動否定の意味保持を既存4B作者で改善し、raw補修／CMEE緩和・追加fit自動実行へ進まない。 [全実結果](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-register-coverage-learning-result-20261110)。
+
+
+<a id="piece-negative-passive-order-result-20261110"></a>
+## 2026-11-10 — AR-04 否定受動の文順だけの比較失敗、候補37取得／1欠測
+
+23教師を完全保持しROLEFIT10の2文順だけを変えたfresh48更新は完了したが、候補比較の残時間条件work_time_limitでB2前に打切り、全実験FAILED_NOT_ADOPTED。取得37候補のpaired37はCMEE36→35、35raw一致・FRESH12の言換えのみ・A2過去消失退行1、H03未修復・改善0。B2 after欠測は補完しない。実45HTTP（新基準4＋候補37＋control4）、新SQL123は114保存／9拒否・保存後0生成、旧102は再資格化だけで再実行0。全工程485.889660秒、元提供43443へ復元・health／前後control一致。新8044不採用・c634研究基準保持／通常selector OFF、製品source／SYSTEM／CMEE差分0・新pytest／CI0、STRUCTURE_MAP_DELTA_NONE。新重み同版画像／本人端末・一般品質・正式0/3未完了。次はc634基準から受動方向と過去否定を同時保持する作者改修設計へ進み、同fit／時間延長／欠測補完を自動実行しない。 [全実結果](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-negative-passive-order-result-20261110)。

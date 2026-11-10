@@ -1,4 +1,4 @@
-> **11/10・補助経路AR-04最新：** 一回のfresh24行／48更新で文末混在3と受動表現1を局所修復、CMEE32→33／34。新SQL126は117保存／9拒否、受動否定の1誤りは拒否維持。新c634候補は通常未採用・新重みnative画像未確認。[今回実結果](#piece-register-coverage-learning-result-20261110)。
+> **11/10・補助経路AR-04最新：** 文順だけのfresh48更新は完了したが比較打切り・全実験失敗。候補37／38、B2 after欠測。paired37のCMEE36→35、H03未修復・A2過去消失の退行1で新8044不採用。新SQL123は114保存／9拒否・保存後0生成。c634研究基準保持、新重み画像／本人端末未確認。[今回実結果](#piece-negative-passive-order-result-20261110)。
 
 > **11/7最新・DB／API反映、統合iOSビルド・送信成功：** Free初期2色／Plus・Premium12色、両比率・ロゴ有無を選ぶ権利を、配色migration actual20261107020543（CHECK validated）とAPI5065730eへ反映。Render dep-dbn8h2jl550s73efmcngは11:12:02 JST Live、health/bootstrap200・private5ON/public3OFF・本人境界7smoke期待どおり。対応RN e0ec6d6aのrun42328190568／#75 attempt1は11:14:01 JST開始、11:28:26 JSTに全19step成功。Archive・写真目的文検査・IPA・Upload成功。Apple側の1.0（7501）を照合し、既存内部グループ「Emlis テスト版配布」でTestingを確認。後続にMashから大ボタン・Piece関係の今回修正の実機確認を受領（第10回§14）。分析の実機確認は未実施。旧clientのcapabilitiesと履歴互換、保存recipe／hashを維持。DML／RLS・画像本文・保存枠・公開範囲は変更なし。[準備§12と実反映§13](../weekly_reviews/Cocolon_Weekly_Review_20261107.md#piece-ui-live-and-ios-build-20261107)。
 
@@ -3890,3 +3890,13 @@ STRUCTURE_MAP_DELTA_NONE。通常重み未採用／selector OFF、追加学習�
 実HTTP46、新SQL126は117保存／9拒否、旧基準78は再資格化のみ・再実行0。保存本文／recipe・quota各1・原入力／Emlis不変、保存後0生成。全工程482.039299秒、元提供42764へ復元・health／前後control一致。合成Auth／等価合成IDの隔離SQLでありliveアプリ一往復ではない。新c634は通常未採用／selector OFF。前回の旧5b1 FRESH03画像一致を、新c634のnative画像確認へ変換しない。今回新重みの画像／本人端末・一般品質／正式0/3は未完了。製品source差分・新pytest／CI0、STRUCTURE_MAP_DELTA_NONE。
 
 次のAR-04は、REGISTER_HELD03に残る「頼まれなかった」という受動否定を能動否定へ変える生成を、既存4B作者の自然文実現側で改善する。本人が依頼を受けた側であることと、その依頼の非発生、原文の相手／対象・過去・本人表記を保持し、同入力前後・能受動／肯否の別題材・今回の成功対照を既存CMEE／保存再読まで比較する。今回の2教師・48更新・完了比較を繰り返さず、原因や次の改修方法を未検証のまま断定しない。CMEE緩和・raw修補・SYSTEM指示周回・追加学習／通常採用の自動実行はしない。新c634候補の同版画像・通常統合／本人端末・一般品質、旧native失敗、AR-01反転と他ARも残件として保持する。 [全実結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-register-coverage-learning-result-20261110)。
+
+
+<a id="piece-negative-passive-order-result-20261110"></a>
+## 2026-11-10 否定受動の文順だけの候補比較 — 全実験失敗
+
+既存24行中23行・訓練SYSTEMとtrainer／scopeを保持し、ROLEFIT10のsource／target各2文順だけを反転したfresh48更新。fitは完了、比較は残時間条件で候補37／38取得の後に打切り、B2 after欠測・全実験FAILED_NOT_ADOPTED。paired37のCMEE36→35、35raw不変、FRESH12の言換えのみは品質改善へ加算せず、H03の能受動逆転未修復・A2過去消失の退行1で新8044不採用。
+
+実45HTTP、新SQL123＝114保存／9拒否、旧102再実行0。本文／recipe等・quota各1・原入力／Emlis不変、保存後0生成。隔離合成SQLでlive Auth／DB／本人端末ではない。全工程485.889660秒、元提供43443へ復元・health／前後control一致。製品source／SYSTEM／reader・保存契約追加変更0、新pytest／CI0、STRUCTURE_MAP_DELTA_NONE。c634研究基準を保持し通常selector OFF、新8044／c634画像・本人端末未確認。前回の5b1画像一致を新重みへ移さない。
+
+次のAR-04は、通常未採用のc634研究基準を保持し、既存4B作者で依頼の受け手・否定・過去を同時に保つ自然文実現の改修設計へ進む。REGISTER_HELD03とB2基準に残る受動否定→能動への逆転、A2の過去→非過去退行を対象に、相手／対象・本人表記・別欄と既成功文を保持する。文順だけの一回fitは不採用で閉じ、同fit反復・時間延長・欠測補完／追加生成・8044の次初期値／通常採用を自動実行しない。CMEE緩和・raw修補・SYSTEM指示周回は行わない。一般品質・採用候補の同版画像／通常統合・本人端末、旧native失敗、AR-01反転と他ARは残件として保持する。 [全実結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-negative-passive-order-result-20261110)。

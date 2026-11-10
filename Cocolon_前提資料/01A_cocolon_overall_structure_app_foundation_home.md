@@ -1,4 +1,4 @@
-> **11/10・AR-04全file地図差分：** 既存trainer／4B作者／意味・保存ownerを不変再利用し、一回の24行／48更新・実比較・隔離保存再読へ使用。製品source変更0、STRUCTURE_MAP_DELTA_NONE。[今回の再利用箇所](#piece-register-coverage-learning-result-20261110)。
+> **11/10・AR-04全file地図差分：** 既存trainer／4B作者／意味・保存ownerを不変再利用した文順のみの候補比較は全実験失敗・新8044不採用。製品source変更0、STRUCTURE_MAP_DELTA_NONE。[今回の再利用箇所](#piece-negative-passive-order-result-20261110)。
 
 > 11/4のPiece作成・本文・書き出し候補は、末尾の[ファイル差分](#piece-format-language-export-files-20261104)と週次レビュー§141を参照。
 
@@ -6452,3 +6452,11 @@ API fce72bcc＋4da69cdeとRN4424976bは以下の検証9pathのみ。製品source
 | 既存preview／save／owner service・PGlite検証 | 新42応答×3planの126試行、117保存／9拒否。旧26応答の78は再資格化だけで再実行0。本文／recipe等とquotaを保持、保存後0生成。 |
 
 文末混在3・受動表現1を局所修復し、単文style変化1を品質改善へ数えない。新c634通常未採用／selector OFF・新重みnative画像／本人端末は未実施。新pytest／CI0、旧5b1画像・前回のAPI／RN CIとは別の候補比較である。 [実分母・由来・残差と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-register-coverage-learning-result-20261110)。
+
+
+<a id="piece-negative-passive-order-result-20261110"></a>
+## 2026-11-10 AR-04 文順だけの候補比較 — 既存ownerと部分実結果
+
+製品source／共有contract／入口・責務の追加変更0、STRUCTURE_MAP_DELTA_NONE。前回API4da69cde／RN4424976bとownerを継承する。既存 `train_piece_model_adapter.py` のfresh24行／48更新を、ROLEFIT10のsource／target文順だけの介入へ再利用。`piece_model_source.py` は現行messages／推論SYSTEMを不変、既存CMEEの意味照合とpreview／save／owner serviceを、取得37候補と新123隔離SQLへ接続した。新shared checker・作者fallback・raw修補・意味条件の緩和はない。
+
+全実験は残時間条件で失敗、候補37／38・B2 after欠測。paired37のCMEE36→35、A2過去消失の退行1・H03未修復・改善0で新8044不採用。新SQL114保存／9拒否、旧102は再資格化だけで再実行0、保存後0生成。c634研究基準保持・通常selector OFF、新重み同版画像／本人端末は未確認。既存責務を増やした地図差分ではなく、同ownerの有限候補失敗記録である。 [実分母・根拠・次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-negative-passive-order-result-20261110)。

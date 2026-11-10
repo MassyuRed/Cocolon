@@ -2486,3 +2486,15 @@ STRUCTURE_MAP_DELTA_NONE、限定TECHNICAL_CREDIT・正式受入れ0/3。学習�
 実46 HTTP＝新基準8＋新候補34＋control4、追加基準26は生成せず記録を再利用。新SQL126は基準24の18保存／6拒否＋候補102の99保存／3拒否＝117保存／9拒否、旧78は再資格化のみ・再実行0。本文／recipe／quota各1・原入力／Emlis不変、保存後0生成。合成Auth／等価合成IDの隔離PGliteでlive DB／本人端末ではない。学習外側214.108663秒・全工程482.039299秒、元提供42764へ復元・health／前後control一致。UI2件目起動はdir guard拒否、完了fitは一回48更新。
 
 製品source／prompt／CMEE変更0・今回新pytest／CI0、STRUCTURE_MAP_DELTA_NONE。新c634は通常未採用／selector OFF、新重みのnative画像・本人端末は未実施。旧5b1のFRESH03画像一致を新候補へ移さない。費用未測定、一般品質／正式0/3・他ARは未完了。次のAR-04は、REGISTER_HELD03に残る「頼まれなかった」という受動否定を能動否定へ変える生成を、既存4B作者の自然文実現側で改善する。本人が依頼を受けた側であることと、その依頼の非発生、原文の相手／対象・過去・本人表記を保持し、同入力前後・能受動／肯否の別題材・今回の成功対照を既存CMEE／保存再読まで比較する。今回の2教師・48更新・完了比較を繰り返さず、原因や次の改修方法を未検証のまま断定しない。CMEE緩和・raw修補・SYSTEM指示周回・追加学習／通常採用の自動実行はしない。新c634候補の同版画像・通常統合／本人端末・一般品質、旧native失敗、AR-01反転と他ARも残件として保持する。 [全実結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-register-coverage-learning-result-20261110)。
+
+
+<a id="piece-negative-passive-order-result-20261110"></a>
+## 57. 補助経路AR-04 — 否定受動の文順比較は打切り・新候補不採用
+
+§56のc634有限改善を保持し、24教師中23行を完全保持したままROLEFIT10のsource／target各2文の順序だけを反転、同設定からfresh48更新した。fitは完了したが、復元120秒を確保した作業枠480秒の残時間条件work_time_limitにより最後のB2候補前で打切り。全実験FAILED_NOT_ADOPTED、候補37／38取得・B2 after欠測であり、欠測を拒否や成功へ補完しない。
+
+38source／補足4／取得75rawをrootと独立担当が全文確認。同じ37組のCMEEは36採用／1拒否→35採用／2拒否、既知34は33／1→33／1。35raw一致、FRESH12の言換えは意味保持のみで改善加算0、H03は能受動逆転未修復、A2は過去→非過去の意味退行1。新4は2題材×2順序で、B2基準にも逆転があるが候補効果は未観測。文順だけの介入で改善は得られず、一般原因は未証明。
+
+実HTTP45＝新基準4＋候補37＋control4、新Piece41。既知34基準はc634の同request記録再利用。新SQL123＝新基準12の9保存／3拒否＋候補111の105保存／6拒否＝114保存／9拒否、旧102は再資格化のみ・再実行0。本文／recipe等・quota各1・原入力／Emlis不変、保存後0生成。合成Auth／等価合成IDの隔離PGliteでlive DB／本人端末ではない。学習外側215.702734秒・全工程485.889660秒、元提供43443へ復元・health／前後control一致。
+
+新8044は通常・次初期値不採用、c634研究基準保持・通常selector OFF。製品source／SYSTEM／CMEE変更0・今回新pytest／CI0、STRUCTURE_MAP_DELTA_NONE。新8044／c634の同版画像・本人端末未確認、費用未測定・商品品質改善0・正式0/3。次のAR-04は、通常未採用のc634研究基準を保持し、既存4B作者で依頼の受け手・否定・過去を同時に保つ自然文実現の改修設計へ進む。REGISTER_HELD03とB2基準に残る受動否定→能動への逆転、A2の過去→非過去退行を対象に、相手／対象・本人表記・別欄と既成功文を保持する。文順だけの一回fitは不採用で閉じ、同fit反復・時間延長・欠測補完／追加生成・8044の次初期値／通常採用を自動実行しない。CMEE緩和・raw修補・SYSTEM指示周回は行わない。一般品質・採用候補の同版画像／通常統合・本人端末、旧native失敗、AR-01反転と他ARは残件として保持する。 [全実結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-negative-passive-order-result-20261110)。
