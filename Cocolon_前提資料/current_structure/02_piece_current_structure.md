@@ -1,4 +1,4 @@
-> **11/10・AR-04最新：** 希望3targetの語順だけを変える一回48更新を完了。同16入力の比較で旧反復3＋新反復3を全修復、格不成立1も修復し、CMEE15→16/16。保持8に観測した意味退行0。隔離SQL96は旧45保存／3拒否・新48保存、保存後0生成。全403.40秒で元提供復元・通常／分析control raw前後一致。新f6dae重みと全原本を保存、通常API0c6／selector OFF・本番未反映を維持。 [一回比較の実結果・残件](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-target-learning-result-20261110)。
+> **11/10・AR-04最新：** API4f343deで、既存の名詞句readerを本人の「は」好み評価へ限定再利用し、修飾付き対象「一人の食事」「静かな朝食」を全体のまま接続。元8sourceの資格は5→7、引用1は拒否維持。保存済み実4B69照合行のmessages／採否／本文を0生成で維持。新2の独立CPU作文は3plan計6保存・再読、保存済みf6dae16応答は別に48保存・再読。新2の実4B応答は未取得。通常モデル／selector OFF・本番未反映を維持。 [今回の修正・実確認と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-modified-preference-reader-20261110)。
 
 > **11/7最新・DB／API反映、統合iOSビルド・送信成功：** Free初期2色／Plus・Premium12色、両比率・ロゴ有無を選ぶ権利を、配色migration actual20261107020543（CHECK validated）とAPI5065730eへ反映。Render dep-dbn8h2jl550s73efmcngは11:12:02 JST Live、health/bootstrap200・private5ON/public3OFF・本人境界7smoke期待どおり。対応RN e0ec6d6aのrun42328190568／#75 attempt1は11:14:01 JST開始、11:28:26 JSTに全19step成功。Archive・写真目的文検査・IPA・Upload成功。Apple側の1.0（7501）を照合し、既存内部グループ「Emlis テスト版配布」でTestingを確認。後続にMashから大ボタン・Piece関係の今回修正の実機確認を受領（第10回§14）。分析の実機確認は未実施。旧clientのcapabilitiesと履歴互換、保存recipe／hashを維持。DML／RLS・画像本文・保存枠・公開範囲は変更なし。[準備§12と実反映§13](../weekly_reviews/Cocolon_Weekly_Review_20261107.md#piece-ui-live-and-ios-build-20261107)。
 
@@ -3978,3 +3978,15 @@ c634の原24教材・元trainer・実48更新・保存weightsを回収照合。�
 旧作者・期待正文注入・raw修補・意味検査変更なし。新f6daeは研究候補、商品source差分0・STRUCTURE_MAP_DELTA_NONE。[全実結果・限界と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-target-learning-result-20261110)。
 
 次は今回f6daeを保存した研究比較候補として保持し、残るsource資格外3（修飾付き対象・引用）を既存reader／意味型から必要最小の読取へ接続する。原文の対象全体、誰の引用か、肯否・時点・留保を保つ正負例と、広い本人文章での全量source資格・自然な本文・保存再読を確認する。新f6daeで旧53全件の回帰や一般品質、同版画像／通常統合・本人端末は未確認。完了した3target／48更新・24HTTP比較を再実行せず、1baa条件追加も不採用のまま。通常採用／selector有効化／live／実DB／buildの自動実行0。
+
+
+<a id="piece-modified-preference-reader-20261110"></a>
+## 11/10 AR-04 — 修飾付き好み対象を既存readerへ限定接続
+
+API4f343deで、既存の名詞句readerを本人の「は」好み評価へ限定再利用し、修飾付き対象「一人の食事」「静かな朝食」を全体のまま接続。元8sourceの資格は5→7、引用1は拒否維持。保存済み実4B69照合行のmessages／採否／本文を0生成で維持。新2の独立CPU作文は3plan計6保存・再読、保存済みf6dae16応答は別に48保存・再読。新2の実4B応答は未取得。通常モデル／selector OFF・本番未反映を維持。
+
+STRUCTURE_MAP_DELTA_PRESENT：既存source資格とmodel専用S7の接続範囲を変更。`ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py`の`_modified_preference_nominal`は既存`emlis_ai_grounded_observation_plan._WISH_OBJECT_NOMINAL_SOURCE`を再利用し、字面を限定した「静かな」を加え、完全targetを既存`personal_evaluations`へ渡す。`ai/services/ai_inference/piece_v2_content_policy.py`の既存`same_evaluation`／S7内で、明示時間文脈付きの本人「は」好み評価だけを内側の既存typed keyで比較する。新owner／公開DTO／DB・保存schema／API入口／RN追加0。共用`_SIMPLE_NOUN`、他のfocal／価値／動作構文、native既定比較、旧作者fallbackは変更しない。
+
+最終20file1367 PASS／FAIL・skip0、既存warning1。新規81件はsource36＋model45、修正した旧短文期待1件を含むfocused82 PASS。API4f343deのPiece／Analysis CIはattempt1で全成功。Piece run42784359892／job129721787981は全39step成功（model17file1174 PASS、境界選択78 PASS／420 deselected）。Analysis run42784359662／job129721783644は全19step成功。対象head一致、追加実行／rerun0。 [実確認と残件](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-modified-preference-reader-20261110)。
+
+次は引用GENERAL07について、旧引用境界readerと既存人物／評価意味型を照合し、友人の発言・本人の経験と気持ちを分離して原文全体を保持する最小接続を進める。今回資格化したGENERAL01／08の実4B本文と、広い本人文章の意味保持・自然な語りは未確認。前回f6daeは研究候補のまま保持し、完了した48更新／24HTTP比較を再実行しない。引用一般・新f6daeで旧53全件の生成回帰・一般品質・同版画像／通常統合／本人端末は未完。今回の69行再照合は異なる保存済みcohortの照合で、新f6daeによる69生成ではない。1baa条件追加は不採用、通常モデル採用／selector有効化／live／実DB／buildの自動実行0。
