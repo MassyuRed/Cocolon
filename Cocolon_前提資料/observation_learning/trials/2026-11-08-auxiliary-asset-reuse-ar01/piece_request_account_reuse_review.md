@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/10・AR-04最新：** 直近API d7442335の引用KEEP接続・元8source資格8/8、独立CPU3の9保存／再読と5176 PASS／両CI成功を継承。次の実4B確認は新3＋保持対照2、通常／分析前後control4の計9HTTP・学習0・復元込み600秒で準備した。13577byteの架空入力／既存runner流用ZIPは送信時の自動承認審査で拒否され、今回のpayload／宛先の明示確認待ち。今回upload・新生成・学習・提供停止0、通常採用／selector／本番変更なし。 [実行準備・送信停止と次](#piece-model3-inference-prepared-20261110)。
+> **11/10・AR-04最新：** API2ec79ad0で時点付き本人「は」好み評価の同本人省略を既存S7継続へ接続。明示承認後、保存f6daeで新3＋保持2の実4B本文を1回・学習0で確認。GENERAL01の自然な2文目省略が旧比較で保留されたため、同block・隣接・同じ本人表記の既存条件だけを再利用し、5/5採用・3plan計15保存／非生成再読。保持2の前回request／raw／revisionと凍結69照合行の採否／本文／messagesは不変。9HTTP・97.268秒で元提供復元／health／前後control一致。f6dae研究候補・通常selector OFF、本番未反映。 [実4B新3・保存と次](#piece-model3-inference-result-20261110)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -1062,3 +1062,37 @@ Jupyterへ到達し、読み取りで元PID49665、args／env／cwdの既知hash
 STRUCTURE_MAP_DELTA_NONE：今回は既存runnerとwireの準備・接続の読取だけで、アプリのsource／test／owner／公開DTO／API／保存schema／DB／RNを変えていない。新pytest／CIは0、前回の5176 PASSと両CIは前回の実績のまま。CPUでの入力再構築、syntax、manifest／CRCの一致を実4B応答や商品品質creditへ換算しない。今回のoutcomeは準備・停止記録であり、正式受入れ0/3・他AR残件は維持。
 
 次は今回の13577byte packetを既存Runpodへ送ることと、一回だけの無学習9HTTP確認についてMashの明示確認を得てから実行する。新3はGENERAL01／07／08、保持2はFOCAL02／REGISTER_HELD02。全600秒・復元予約120秒、再試行0、Piece load1。今回の送信拒否を別形式／別経路で迂回せず、旧4入力run／旧48更新runの承認を再使用しない。新3の実4B本文は未取得。引用一般・新f6daeで旧53全件の生成回帰・広い一般文章・同版画像／通常統合／本人端末は未完。新規GPU／依存／通常採用／selector有効化／Render／live DB／RN／buildの自動実行0。
+
+
+<a id="piece-model3-inference-result-20261110"></a>
+## 11/10 AR-04 — 新3の実4Bを確認し、時点内の同本人省略を既存S7へ接続
+
+API2ec79ad0で時点付き本人「は」好み評価の同本人省略を既存S7継続へ接続。明示承認後、保存f6daeで新3＋保持2の実4B本文を1回・学習0で確認。GENERAL01の自然な2文目省略が旧比較で保留されたため、同block・隣接・同じ本人表記の既存条件だけを再利用し、5/5採用・3plan計15保存／非生成再読。保持2の前回request／raw／revisionと凍結69照合行の採否／本文／messagesは不変。9HTTP・97.268秒で元提供復元／health／前後control一致。f6dae研究候補・通常selector OFF、本番未反映。
+
+STRUCTURE_MAP_DELTA_PRESENT：既存のモデル本文比較境界だけの変更。`ai/services/ai_inference/piece_v2_content_policy.py::validate_source_meaning_preservation` のSOURCE_EXPLICIT_TIME_CONTEXT分岐で、PERSONAL_PREFERENCEかつconstruction=はの既存絞込みを保ち、計算済みsame_authorによるoptional_prefixを既存same_evaluationへ渡す。新しい語り手推論やsource受理armを作らず、原time外側の全文anchor・全対象・肯否／時点／程度／留保・にとってを維持。商品source1path、`ai/tests/test_piece_model_temporal_self_omission.py` 新規29件、`ai/tests/test_piece_model_prose_register.py` の旧省略negativeをpositiveへ整合、`.github/workflows/piece-b2b-isolated-postgres.yml` の既存実行step／path filterへ新testを追加。新意味型／公開DTO／保存schema／DB／API入口／RN／作者／checkerなし。
+
+前段§68の13577byte ZIP送信停止に対し、Mashが今回の具体的な既存Runpod宛送信と「追加学習なし・復元込み最大10分・1回」を明示承認した。packetのbytes／SHA256／2memberを変えず、送信先でCRC・runner／wire hashを確認して一回起動した。旧4入力／48更新の承認を再利用した実行ではなく、今回の新承認に対応する。過去の送信停止は履歴として残し、現在を承認待ち／未送信／未取得とはしない。
+
+| 実行・結果 | 今回の事実 |
+|---|---|
+| packet | 13577byte、SHA256 `8497aff8ee4c8512d269093bdc06461d1e5dbfca3075dccf851f2968b161624e`。runnerと現行SYSTEM／USER wireのみ、CPU正文・assistant targetなし |
+| 保存重み | f6dae、追加学習0／新重み0／Piece load1／retry0。通常採用なし |
+| 実呼出し | 新GENERAL01／07／08と既使用保持FOCAL02／REGISTER_HELD02の5Piece＋Emlis／Analysis前後control4＝9HTTP、全200／stop |
+| 時間・復元 | 全97.268043秒、600秒上限／120秒復元予約内。元PID49665→復元54405、args／env／cwd／credentials保持、health true、元source／Analysis adapter／保存各adapter hash不変 |
+| 前後対照 | Emlis／Analysisのrawはそれぞれ前後完全一致。提供復元の挙動確認であり、両coreの意味品質合格とはしない |
+| 保持2 | 前回f6dae同messagesのrequest／raw／response／revision exact。学習教材や未知holdoutとして新規加算しない |
+| CMEEと保存 | 修正前4/5採用、12保存／3保留。修正後は同じ無修補の5rawが5/5採用、free／plus／premium各5で15保存・同／新service非生成再読 |
+
+9件は`/v1/chat/completions`のモデル要求数で、起動／復元時のhealth GETは別。97.268043秒はremote実行と原本梱包までで、ブラウザ送受信を含む総作業時間やアプリ／Render経由の体感速度ではない。usageは全nullのまま記録する。
+
+GENERAL01実本文は「以前は、私は一人の食事が苦手だった。今は、一人の食事が好きだ。」。一人の食事を食事へ短縮せず、過去の苦手／現在の好みと本人を保持している。2文目の「私は」省略は自然な継続だが、旧S7の時間scope分岐だけが既存optional_prefixを渡さず、明示topicを毎回要求していた。最小1引数差分で既存same_authorを利用する。最初の本人省略、別一人称への統一、欄／改行越え、間にKEEPを挟む継続、時点の削除／交換、対象・肯否・過去・程度・留保の変更、にとっての省略は認めない。原文・prepared ID／JSON・送信messages・rawを変更せず、本文作者や追加parserは作っていない。
+
+GENERAL07実本文はprimary quote「」も含めて原文全文一致。友人の発言／本人の気持ち、くれた、急がなくても、過ごせる、嬉しかったを保持するwhole literal KEEPであり、引用の一般的意味読取や言換えは証明しない。GENERAL08は「俺は静かな朝食が好きだ。」で、俺と修飾対象全体を保った常体化。保持2も前回の焦点順序・過去否定／未決定と、わたし・能動否定／受動肯定を維持。rootと独立担当が全rawを読み、この5件に重大な意味変化や不自然な述語反復を認めなかった。
+
+隔離PGliteではsource／Emlisが不変、raw／本文／recipeを保持し、quota各1、保存後生成0を確認。live Supabase・本人Auth・実機画像の検証ではない。修正前の保留3と保存12を修正後15に加算して成功件数を膨らませない。凍結c634一般7＋役割等46＋f6dae16＝69照合行も0新推論で再照合し、既存messages／採否／reason／receipt／本文が完全一致。これは再利用を含む台帳で、69独立入力・新69生成・f6daeで旧53全生成とはしない。
+
+関連32file5205 PASS、FAIL／skip0、既存warning1。新しい本人継続境界29件を含む。 API2ec79ad0のPiece／Analysis CIは対象head一致・attempt1で全成功。Piece run42809225286／job129806123954は全39step成功（model主要1255 PASS、境界選択78 PASS／420 deselected）。Analysis run42809225253／job129806123443は全19step成功。追加実行／rerun0。 旧testの「2文目だけ本人省略」をnegativeからpositiveへ移し、先頭省略や意味／境界改変negativeは維持した。初回広域はこの旧negativeの1 FAIL／5204 PASSで、期待を整合した最終回帰は上記の通り。原始の修正前比較・SQL結果と、修正後の同一raw比較・保存結果を別々に保持する。実GPU原本archive34602byte、SHA256 `260a16dc4ae54cf127bc0c925b17c93a8a2d32de94c86aa32bd743cc1bb155e4`。元のPrepared artifactへ今回承認・実行／復元・5raw・前後比較・SQL・実装検証と再開点を追記し、同一file identityの版を更新する。リポジトリsourceはGitHubの固定commitを正とする。
+
+今回の実行はNVIDIA RTX4000 Ada Generation上の既存レンタル内。現単価は未再照会、新規レンタル／tier／支払操作0で、稼働保持料金や請求額を0と断定しない。Render／live DB／通常selector／RN／build変更0、正式受入れ0/3と他AR未完を維持する。
+
+次は広い文章での反復・理由／引用などの残件を、既存資産を再利用して進める。今回の新3の実4B・同版保存は完了したため未取得へ戻さない。新3に旧c634のbaselineはなく、f6daeの改善率／学習効果や一般品質の合格に換算しない。引用一般の言換え・複数／多重・内部stop／CR/LF・引用内認識名、新f6daeによる旧53全件の生成回帰、同版画像／通常統合／本人端末は未完。完了済み今回9HTTP／前回48更新は再実行しない。通常採用／selector有効化／Render／live DB／RN／buildの自動変更0。
