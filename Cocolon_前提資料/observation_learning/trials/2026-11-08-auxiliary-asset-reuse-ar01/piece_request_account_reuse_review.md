@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/10・AR-04最新：** API4f343deで、既存の名詞句readerを本人の「は」好み評価へ限定再利用し、修飾付き対象「一人の食事」「静かな朝食」を全体のまま接続。元8sourceの資格は5→7、引用1は拒否維持。保存済み実4B69照合行のmessages／採否／本文を0生成で維持。新2の独立CPU作文は3plan計6保存・再読、保存済みf6dae16応答は別に48保存・再読。新2の実4B応答は未取得。通常モデル／selector OFF・本番未反映を維持。 [今回の修正・実確認と次](#piece-modified-preference-reader-20261110)。
+> **11/10・AR-04最新：** APId7442335で旧引用境界readerをPieceの原sourceへ限定接続。GENERAL07の引用・発言者・くれた・否定条件・可能形・過去感情を既存KEEPで全量保持し、元8sourceの資格7→8。引用内の既存scanner認識名は話者をまたぐ役割誤継承を防ぐため拒否、引用外の既存公開役割は維持。保存済み実4B69照合行のmessages／採否／本文を0生成で維持。直近残件3の独立CPU作文を3plan計9保存・再読。新3の実4B応答は未取得。f6dae研究候補／通常selector OFF・本番未反映を維持。 [限定引用・検証と次](#piece-single-quote-context-reader-20261110)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -1008,3 +1008,29 @@ model専用の時間評価比較は、外側の時点表記・「は／も」・
 実装はAPI `4f343de1599ffd183cd32ef81213f1c5dc7c1aa2` の6path：上記商品2path、新規検査を加えたfinite nominal testとmodel prose register test、既決短文の期待整合test、同検査を選択する既存Piece workflow。通常branchへGitHub反映し、fresh取得bytesを照合した。今回の追加GPU／学習／新モデル出力／Render配置／live DB／RN／build・配布変更0。f6dae重みと前回の復元記録は前回artifactを保持し、今回のCPU／保存原本と69行の凍結入力・raw・全検証logは別private `Cocolon_CMEE_AR04_ModifiedPreference_ReaderReuse_20261110.zip` に保存した。正式受入れ0/3・他AR未完は維持。
 
 次は引用GENERAL07について、旧引用境界readerと既存人物／評価意味型を照合し、友人の発言・本人の経験と気持ちを分離して原文全体を保持する最小接続を進める。今回資格化したGENERAL01／08の実4B本文と、広い本人文章の意味保持・自然な語りは未確認。前回f6daeは研究候補のまま保持し、完了した48更新／24HTTP比較を再実行しない。引用一般・新f6daeで旧53全件の生成回帰・一般品質・同版画像／通常統合／本人端末は未完。今回の69行再照合は異なる保存済みcohortの照合で、新f6daeによる69生成ではない。1baa条件追加は不採用、通常モデル採用／selector有効化／live／実DB／buildの自動実行0。
+
+
+<a id="piece-single-quote-context-reader-20261110"></a>
+## 11/10 AR-04 — 一組のliteral引用を旧境界readerから既存KEEPへ接続
+
+APId7442335で旧引用境界readerをPieceの原sourceへ限定接続。GENERAL07の引用・発言者・くれた・否定条件・可能形・過去感情を既存KEEPで全量保持し、元8sourceの資格7→8。引用内の既存scanner認識名は話者をまたぐ役割誤継承を防ぐため拒否、引用外の既存公開役割は維持。保存済み実4B69照合行のmessages／採否／本文を0生成で維持。直近残件3の独立CPU作文を3plan計9保存・再読。新3の実4B応答は未取得。f6dae研究候補／通常selector OFF・本番未反映を維持。
+
+STRUCTURE_MAP_DELTA_PRESENT：既存source受理境界の変更。`ai/services/ai_inference/piece_v2_generation.py::_sentences`から、既存`emlis_ai_grounded_sentence_surface._body_primary_quote_spans`を再利用する。一組の非empty「」と既存stopで完結する引用外lineだけを通し、内部stop文字`。！？!?`・CR/LF、空／不整合／複数／多重・別quote種は未対応。`ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py::_role_bindings`では、既存name scanと引用spanの重なりを確認し、引用内の人名をglobal aliasへ渡さない。既存plan／KEEP作者／S7 literal比較・Safety・保存consumerを変更せず利用。新意味型／公開DTO／保存schema／DB／API入口／RN／作者／checker追加0。
+
+GENERAL07の原文は`友人が「ゆっくりでいいよ」と言ってくれた。私は急がなくても一緒に過ごせることが嬉しかった。`。引用内の発言と、外側の友人が述べたこと・本人の気持ちは別のまま保持する。過ごせるを過ごせたへ、急がなくてもを急いだのでへ変換せず、受取人や因果・現在の評価を補わない。
+
+停止点は意味型の欠如より前にある`_sentences`の引用一律拒否だった。内部の既存stopとCR/LFを引き続き拒否すれば既存splitterをそのまま使えるため、offset maskや別splitterを作らない。一組の整合した非empty primary quoteだけへ限定し、引用後の同lineが既存stopで終わることを要求する。原文・sentence順を変えず、原文に一致するscalar／UTF-8座標を保持する。句内の読点・絵文字はliteralのまま保持し、全Unicode引用や全Unicode改行への一般対応とはしない。
+
+原GENERAL07は保存選択の喜び／strongを持つ完全accountとして、既存の選択文脈と終端条件から両nodeのKEEPへ到達する。新たな発話・感情・関係意味型やplan受理armは追加していない。入力選択を文章内の意味へ捏造せず、同原文を選択なし／自己理解へ差替えた別材料は従来資格を越えて通さない。引用内の「私は…選びたい」も本人の希望型へ昇格させない。
+
+公開役割の既存global aliasを引用内へ適用すると、同僚の発話内の「私の友人の佐藤さん」が語り手本人の関係として外側の佐藤さんへ漏れる反例がある。逆向きの引用外binding→引用内同名も同じ問題になる。既存`_piece_name_mentions`が認識する名前とquote spanの重なりだけを既存binding ownerで確認し、`public_identity_is_material`として保留する。名前を無条件に削除・別役割化せず、引用外だけの「友人の佐藤さん」は従来の友人へ置換できる。一般の名前認識・引用話者解決が完成したという意味ではない。
+
+元8sourceの原7項目・prepared JSON／IDを保持した資格は7→8／8。保存済み実4B応答のc634一般7＋受動等46＋f6dae16＝69照合行は、原messages／raw／採否／reason／receipt／本文が前回記録と完全一致。再利用入力を含む台帳であり、69独立入力・新69生成・新f6daeによる旧53生成回帰へ換算しない。
+
+直近残件GENERAL01／08の文体差2と、GENERAL07の原文保持1を独立CPU作文fixtureとしてCMEEへ受領し、旧作者を禁止したまま3plan計9の隔離PGlite保存・同／新service非生成再読を確認した。原入力／Emlis・本文／recipe・quota各1、保存後0生成。合成responseの200は既存保存consumer用fixtureで、実HTTPやモデル応答ではない。新3の実4B生成／学習は0。今回69照合を行ったが、前回実4B48保存を再実行・再加算していない。元source／現messagesだけの新3packet（期待正文なし）を準備し、未送信のまま保存する。
+
+最終関連31file5176 PASS／FAIL・skip0、既存warning1。新quote52件と既存境界等を含む補正focused125 PASS。 quoteの改変／発言者・くれた・条件否定・可能形・過去感情の変更を拒否し、引用内外names・欄／段落・既存Safetyも確認した。最初のfocusedは改行3caseのtest fixture block分割誤りでFAIL、正しい分割へ整合して原logを保持。最初の広域は5170 PASS／5 FAILで、引用の無句点line3の拒否reasonを元の引用拒否へ保持するよう範囲を閉じた。既存の一組closed quote負例1は今回意図した保持対象なので、旧負例を内部句点という未対応境界へ改め、元の同sourceは新正例で別話者の発言を別fieldのまま保持することを確認。残るnamed-owner負例1は修正前4f343deでも同じFAILで、既存named_role_ownerの正例と全く同じ原文だった。未束縛ownerという元の意図に合うよう「友人の」を除いたfixtureへ整合し、非quote製品挙動は変更していない。SQL最初の試行は既存PGlite依存先の環境変数未設定でDB準備前に技術中断し、0保存。環境を既存runtimeへ揃えて9件を完了、失敗logも残した。APId7442335のPiece／Analysis CIは対象head一致・attempt1で全成功。Piece run42799640908／job129773578374は全39step成功（model主要1226 PASS、境界選択78 PASS／420 deselected）。Analysis run42799640715／job129773579066は全19step成功。追加実行／rerun0。
+
+実装はAPI `d7442335ea0b32aaccee505df7b8f9fcb6c38f1a` の商品2path＋既存test3path。既存branchへ反映しfresh bytesを照合した。今回新GPU／学習／実モデル応答／Render配置／live DB／RN／build・配布変更0。通常重みとselectorは継承し、正式受入れ0/3・他ARの未完は維持。今回のsource8判定・CPU3と保存9・凍結69原本・全log・次の未送信入力はprivate `Cocolon_CMEE_AR04_QuotedContext_ReaderReuse_20261110.zip` へ保存した。前回weights／GPU実行原本は前回artifactを保持する。
+
+次はsource資格化したGENERAL01／07／08の新しい実4B応答を確認し、完全対象・本人表記・時点／肯否・引用と外側の発言者／感情・自然な本文・同版保存を照合する。同3の原7項目・prepared identity・現行builderの送信messagesはprivateに準備済みだが未送信。CPU作文の採用を実モデル改善と呼ばない。引用一般の言い換え、引用内の名前・複数／多重・内部stop／CR/LF、広い一般文章、新f6daeで旧53全件の生成回帰、同版画像／通常統合／本人端末は未完。完了済み48更新／24HTTP比較を再実行せず、1baa条件追加も不採用。通常採用／selector有効化／live／実DB／buildの自動実行0。

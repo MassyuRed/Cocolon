@@ -1,4 +1,4 @@
-> **11/10・AR-04最新：** API4f343deで、既存の名詞句readerを本人の「は」好み評価へ限定再利用し、修飾付き対象「一人の食事」「静かな朝食」を全体のまま接続。元8sourceの資格は5→7、引用1は拒否維持。保存済み実4B69照合行のmessages／採否／本文を0生成で維持。新2の独立CPU作文は3plan計6保存・再読、保存済みf6dae16応答は別に48保存・再読。新2の実4B応答は未取得。通常モデル／selector OFF・本番未反映を維持。 [今回の修正・実確認と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-modified-preference-reader-20261110)。
+> **11/10・AR-04最新：** APId7442335で旧引用境界readerをPieceの原sourceへ限定接続。GENERAL07の引用・発言者・くれた・否定条件・可能形・過去感情を既存KEEPで全量保持し、元8sourceの資格7→8。引用内の既存scanner認識名は話者をまたぐ役割誤継承を防ぐため拒否、引用外の既存公開役割は維持。保存済み実4B69照合行のmessages／採否／本文を0生成で維持。直近残件3の独立CPU作文を3plan計9保存・再読。新3の実4B応答は未取得。f6dae研究候補／通常selector OFF・本番未反映を維持。 [限定引用・検証と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-single-quote-context-reader-20261110)。
 
 > **11/7最新・DB／API反映、統合iOSビルド・送信成功：** Free初期2色／Plus・Premium12色、両比率・ロゴ有無を選ぶ権利を、配色migration actual20261107020543（CHECK validated）とAPI5065730eへ反映。Render dep-dbn8h2jl550s73efmcngは11:12:02 JST Live、health/bootstrap200・private5ON/public3OFF・本人境界7smoke期待どおり。対応RN e0ec6d6aのrun42328190568／#75 attempt1は11:14:01 JST開始、11:28:26 JSTに全19step成功。Archive・写真目的文検査・IPA・Upload成功。Apple側の1.0（7501）を照合し、既存内部グループ「Emlis テスト版配布」でTestingを確認。後続にMashから大ボタン・Piece関係の今回修正の実機確認を受領（第10回§14）。分析の実機確認は未実施。旧clientのcapabilitiesと履歴互換、保存recipe／hashを維持。DML／RLS・画像本文・保存枠・公開範囲は変更なし。[準備§12と実反映§13](../weekly_reviews/Cocolon_Weekly_Review_20261107.md#piece-ui-live-and-ios-build-20261107)。
 
@@ -3990,3 +3990,15 @@ STRUCTURE_MAP_DELTA_PRESENT：既存source資格とmodel専用S7の接続範囲�
 最終20file1367 PASS／FAIL・skip0、既存warning1。新規81件はsource36＋model45、修正した旧短文期待1件を含むfocused82 PASS。API4f343deのPiece／Analysis CIはattempt1で全成功。Piece run42784359892／job129721787981は全39step成功（model17file1174 PASS、境界選択78 PASS／420 deselected）。Analysis run42784359662／job129721783644は全19step成功。対象head一致、追加実行／rerun0。 [実確認と残件](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-modified-preference-reader-20261110)。
 
 次は引用GENERAL07について、旧引用境界readerと既存人物／評価意味型を照合し、友人の発言・本人の経験と気持ちを分離して原文全体を保持する最小接続を進める。今回資格化したGENERAL01／08の実4B本文と、広い本人文章の意味保持・自然な語りは未確認。前回f6daeは研究候補のまま保持し、完了した48更新／24HTTP比較を再実行しない。引用一般・新f6daeで旧53全件の生成回帰・一般品質・同版画像／通常統合／本人端末は未完。今回の69行再照合は異なる保存済みcohortの照合で、新f6daeによる69生成ではない。1baa条件追加は不採用、通常モデル採用／selector有効化／live／実DB／buildの自動実行0。
+
+
+<a id="piece-single-quote-context-reader-20261110"></a>
+## 11/10 AR-04 — 一組の引用を既存literal経路へ接続
+
+APId7442335で旧引用境界readerをPieceの原sourceへ限定接続。GENERAL07の引用・発言者・くれた・否定条件・可能形・過去感情を既存KEEPで全量保持し、元8sourceの資格7→8。引用内の既存scanner認識名は話者をまたぐ役割誤継承を防ぐため拒否、引用外の既存公開役割は維持。保存済み実4B69照合行のmessages／採否／本文を0生成で維持。直近残件3の独立CPU作文を3plan計9保存・再読。新3の実4B応答は未取得。f6dae研究候補／通常selector OFF・本番未反映を維持。
+
+STRUCTURE_MAP_DELTA_PRESENT：既存source受理境界の変更。`ai/services/ai_inference/piece_v2_generation.py::_sentences`から、既存`emlis_ai_grounded_sentence_surface._body_primary_quote_spans`を再利用する。一組の非empty「」と既存stopで完結する引用外lineだけを通し、内部stop文字`。！？!?`・CR/LF、空／不整合／複数／多重・別quote種は未対応。`ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py::_role_bindings`では、既存name scanと引用spanの重なりを確認し、引用内の人名をglobal aliasへ渡さない。既存plan／KEEP作者／S7 literal比較・Safety・保存consumerを変更せず利用。新意味型／公開DTO／保存schema／DB／API入口／RN／作者／checker追加0。
+
+最終関連31file5176 PASS／FAIL・skip0、既存warning1。新quote52件と既存境界等を含む補正focused125 PASS。APId7442335のPiece／Analysis CIは対象head一致・attempt1で全成功。Piece run42799640908／job129773578374は全39step成功（model主要1226 PASS、境界選択78 PASS／420 deselected）。Analysis run42799640715／job129773579066は全19step成功。追加実行／rerun0。 [全結果と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-single-quote-context-reader-20261110)。
+
+次はsource資格化したGENERAL01／07／08の新しい実4B応答を確認し、完全対象・本人表記・時点／肯否・引用と外側の発言者／感情・自然な本文・同版保存を照合する。同3の原7項目・prepared identity・現行builderの送信messagesはprivateに準備済みだが未送信。CPU作文の採用を実モデル改善と呼ばない。引用一般の言い換え、引用内の名前・複数／多重・内部stop／CR/LF、広い一般文章、新f6daeで旧53全件の生成回帰、同版画像／通常統合／本人端末は未完。完了済み48更新／24HTTP比較を再実行せず、1baa条件追加も不採用。通常採用／selector有効化／live／実DB／buildの自動実行0。
