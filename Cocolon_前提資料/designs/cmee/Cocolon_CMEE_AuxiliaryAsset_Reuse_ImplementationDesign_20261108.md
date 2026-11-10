@@ -12,7 +12,7 @@ current_next: AR-04
 runtime_effect_of_this_document: 0
 ---
 
-> **11/10・AR-04最新：** Mashの具体承認後、保存f6daeで新4＋保持1を一回・学習0で実確認。新4中3件＋保持1を採用、QUOTE-RUNは引用内強調の句点化と外側本人表記省略で不採用を維持。3plan計15試行は12保存／非生成再読・3事前拒否。9HTTP・108.873秒で元提供のargs／env／cwdを復元し、healthと通常／分析の前後control完全一致。API5816f2d0・f6dae研究候補／通常selector OFF、本番未反映。 [実本文・保存・復元と次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quote-stop-inference-result-20261110)。
+> **11/10・AR-04最新：** APIa67fb6f2で、既存KEEPの引用範囲を欄別4B生成条件へ投影する候補を反映。引用内の全字面・句読点／強調と同欄の引用外本人表記を保持する条件を渡す。SYSTEM・既定messages・source資格・S7は不変。関連32file5287 PASS、保存済み実5の4採用／1拒否と既存69行の採否／本文／messagesを維持。新4B効果は未確認、13,723byteの比較packetは未送信・未実行。f6dae研究候補・通常selector OFF・本番未反映。 [引用条件・検証と次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quote-context-conditions-20261110)。
 
 > **11/10・AR-04最新：** 引用内stopを持つ新4件＋保持GENERAL07の現builder送信messagesを固定し、13,140byte・2memberの無学習比較packetを準備。構文compile／CRC／member照合は成功、実モデル生成・送信・提供停止0。非環境の稼働確認はhealth200。起動環境全体の読取りは認証情報を含み得るとして自動承認審査に拒否され、未実行。新packet送信と、完全復元に必要な環境内再利用の具体承認待ち。API5816f2d0／f6dae研究候補・通常selector OFF・本番未反映を維持。 [具体packet・確認範囲・再開点](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quote-stop-inference-prepared-20261110)。
 
@@ -380,13 +380,13 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 | AR-01 | 現naturalの主体・所有者・否定・時点・留保を、旧失敗・意味比較・共通原因分析で改善。EM-01a/b | 現6境界と正常な短文／省略で、同入力の誤読を解消または明確に減らし、自然さ・別題材・既成功・保存再読を保持。検出増加／無出力だけでは完了しない | 継続中。新24実生成の4版は通常不採用。c6555fd5で疑問符なしの確認質問の保存抜けを修復、250局所PASS。同24rawは旧24保存→新22保存／2拒否、受理本文不変。全体の意味修復は未完 |
 | AR-02 | 現naturalの任意問い・回答・訂正・撤回・frameの一往復。EM-02a/b、03b | 一点確認／skip／終了／本人続行、対象だけ更新、撤回後の残存意味、同版再読、プラン境界 | AR-01の全一般品質完成待ちにはしない。未開始 |
 | AR-03 | 適格履歴の意味ある利用。EM-03a/b | 同一／別場面・変化・無関係・訂正前を区別し、適切な履歴が今回へ効く。失効材料を使わない | 現related_contextを継承。未開始 |
-| AR-04 | Piece一般本文・単独伝達・refined・画像整合 | 原文の意味・一人称・本人補足と同版画像／保存を保持 | Mashの具体承認後、保存f6daeで新4＋保持1を一回・学習0で実確認。新4中3件＋保持1を採用、QUOTE-RUNは引用内強調の句点化と外側本人表記省略で不採用を維持。3plan計15試行は12保存／非生成再読・3事前拒否。9HTTP・108.873秒で元提供のargs／env／cwdを復元し、healthと通常／分析の前後control完全一致。API5816f2d0・f6dae研究候補／通常selector OFF、本番未反映。 |
+| AR-04 | Piece一般本文・単独伝達・refined・画像整合 | 原文の意味・一人称・本人補足と同版画像／保存を保持 | APIa67fb6f2で、既存KEEPの引用範囲を欄別4B生成条件へ投影する候補を反映。引用内の全字面・句読点／強調と同欄の引用外本人表記を保持する条件を渡す。SYSTEM・既定messages・source資格・S7は不変。関連32file5287 PASS、保存済み実5の4採用／1拒否と既存69行の採否／本文／messagesを維持。新4B効果は未確認、13,723byteの比較packetは未送信・未実行。f6dae研究候補・通常selector OFF・本番未反映。 |
 | AR-05 | 分析の本人基準・役割／選択・記録間関係。AN-03a/b/c、04 | 原記録→意味→図／全文→両端根拠の対応、再出現／変化／不明の正しさ | 現Engine統合・保存済み成果を継承。並行可能。未開始 |
 | AR-06 | Emlis観測材料、訂正・削除・権利、長い蓄積と月次。EM-04/05、AN-02/06/08/10 | 本人sourceから材料を渡し、失効・分割範囲・当時版を保持。生成本文を本人事実にしない | AR-02/03/05の該当能力を利用。未開始 |
 | AR-07 | IF／Saved等の商品固有の残る意味保持責務。既存AN／PC残件 | 仮想・本人選択意向・観測を分離し、成立した経路で出力と保存を確認 | 既存商品の実装条件に従う。無断延期・新発売条件化をしない。未開始 |
 | AR-08 | 実証できた共通能力の通常適用と全体確認。EM-05/06/07等 | 採用版の意味保持・自然さ・権利・中断復帰・保存再読・実際の待ち時間／費用。未採用範囲は理由と残差を保持 | 各単位で通常採用可能。全core一括切替を強制しない。未開始 |
 
-現在は **AR-04の引用実4B・保存の確認まで完了**。 次は引用内の句読点・強調を平文化する生成側の残差を、既存引用reader・欄別生成条件と原教材の対応から切り分ける。今回の不採用rawを通すS7緩和・原文／raw修補、同じ9HTTPや完了済み48更新の再実行はしない。新4実4Bの取得と同版保存確認は完了として引き継ぐ。引用一般の言換え・複数／多重・引用内CR/LF／認識名、理由一般の型付き読取、広い一般文章品質・同版画像／通常統合／本人端末、AR-01と他ARは未完。通常採用／selector有効化／Render／live DB／RN／buildの自動変更0。
+現在は **AR-04の意味保持・単独伝達**を継続する。 次は変更した欄別条件で、既取得5入力（問題QUOTE-RUN1＋保持4）を同じf6daeで一回・学習0で比較する。前回の同5rawを旧条件baselineとして再利用し、旧条件の追加生成は0。新packet13,723byte／2member、SHA256 `f5a7989570d95dc2b3d9dcacf65f6bc1978eeab7be80fef383dbe62a7a240cde`。5候補＋通常／Analysis前後control4の最大9HTTP、Piece1load、再試行0、復元込み600秒／復元予約120秒。既存Pod f1lle4xwq3wjlnへ新packet送信と、元提供を同じ状態へ戻すための起動環境全体（認証情報を含み得る）の同Pod内一時読取・再利用は今回の具体確認後に行う。前回の消費済み一回承認へ遡及させず、今回は送信／新生成／停止／起動環境読取0。引用だけ直っても本人省略が残れば採用へ格上げせず、同じS7・全本文読取・3plan保存再読で判定する。広い引用／理由の型付き読取・一般品質・同版画像／通常統合／本人端末と他ARは未完。通常採用／selector有効化／Render／live DB／RN／buildの自動変更0。
 
 既存の品質作業・新教師8件・保存重みの継続点を使う。GPUに現実の接続障害がある場合、取得できた事実、未実行の生成、回収済み原本、次の同一単位を記録し、CPUの合成成功を実モデル改善へ換算しない。接続復旧や既存の別core実装を必要範囲で進め、無関係な補助機構開発へ変えない。
 
@@ -833,3 +833,17 @@ rootと独立担当が全5原文・rawを全読。4採用本文は原文の字�
 同じ無修補rawを既存保存consumerへ厳密再bindし、Free／Plus／Premiumの15試行で12保存・同／新serviceの非生成再読、3拒否時のrecord／quota不変を確認。保存は元GPU入力ID／時刻と別の同内容synthetic ID／日時を使う隔離SQLであり、live Supabaseや元GPU identityの通常永続化ではない。原入力／Emlis不変・保存後0生成、旧作者fallback禁止・current builder一致・frozen raw／input不変を確認。STRUCTURE_MAP_DELTA_NONE、商品source／source文法／S7／DB／RN／renderer／通常選択変更0。今回新pytest／CI実行0、API5816f2d0の前回5263 PASS・両CI成功を継承する。凍結69と前回新3の完了creditは継承し、今回新規69生成・再照合とはしない。
 
 次は引用内の句読点・強調を平文化する生成側の残差を、既存引用reader・欄別生成条件と原教材の対応から切り分ける。今回の不採用rawを通すS7緩和・原文／raw修補、同じ9HTTPや完了済み48更新の再実行はしない。新4実4Bの取得と同版保存確認は完了として引き継ぐ。引用一般の言換え・複数／多重・引用内CR/LF／認識名、理由一般の型付き読取、広い一般文章品質・同版画像／通常統合／本人端末、AR-01と他ARは未完。通常採用／selector有効化／Render／live DB／RN／buildの自動変更0。
+
+
+<a id="piece-quote-context-conditions-20261110"></a>
+## 11/10 AR-04 — 引用の字面保持を生成側へ渡す候補
+
+APIa67fb6f2で、既存KEEPの引用範囲を欄別4B生成条件へ投影する候補を反映。引用内の全字面・句読点／強調と同欄の引用外本人表記を保持する条件を渡す。SYSTEM・既定messages・source資格・S7は不変。関連32file5287 PASS、保存済み実5の4採用／1拒否と既存69行の採否／本文／messagesを維持。新4B効果は未確認、13,723byteの比較packetは未送信・未実行。f6dae研究候補・通常selector OFF・本番未反映。
+
+STRUCTURE_MAP_DELTA_PRESENT_CANDIDATE_ONLY：既存`ai/services/ai_inference/piece_model_source.py::_authoring_constraints`が、資格済みsource planの`KEEP_COMPLETE_SOURCE_CONTEXT` dutyと既存`emlis_ai_grounded_sentence_surface._body_primary_quote_spans`を再利用する。part別planに対応する元引用のかぎ括弧込みliteralとfield内scalar範囲を、明示opt-in時だけ既存欄条件の`literal_quotes`へ投影。引用のある欄だけに`quote_context_instruction`を付け、引用内文字／記号数と同欄のliteral内の引用外一人称表記を保つ。原文／PreparedRequest／ID／SYSTEMは不変、別欄／段落／原入力と補足を混ぜない。新しいreader・意味型・作者・checker・公開DTO／保存schema・DB・API入口・RN・rendererは追加せず、S7や不正rawの修補は行わない。
+
+変更は商品1pathと既存test2path（`ai/tests/test_piece_model_authoring_constraints.py`、`ai/tests/test_piece_model_authoring_application.py`）だけ。関連32file5287 PASS、FAIL／error／skip0、既存warning1。新24件は引用のexact字面／field座標、非引用／既定OFF不変、段落とrefinedのpart別plan、公開役割、資格外引用の拒否、configured MockTransportへの1取得伝達、句点化・強調削減・本人省略・話者／感情変異の拒否を確認する。初回focused137 PASSは最終回帰と重複するため加算しない。保存済み実5rawの採否と本文は4採用／1拒否を維持し、元の69照合行も採否／本文／messagesを0生成で維持。新5送信候補は原7項目・prepared ID／JSON・SYSTEM／field_slotsを維持し、引用条件だけが追加される。今回の新しい実モデル本文・同版画像／端末検証・live DBは0。
+
+APIa67fb6f2の[Piece CI42826604954](https://github.com/MassyuRed/mashos-api/actions/runs/42826604954)は対象head一致・attempt1で全工程success。job129865467629／39stepを確認。追加run／rerun0。今回の変更pathでAnalysis workflowの新runはなく、Analysis・通常配置の新成功は主張しない。
+
+次は変更した欄別条件で、既取得5入力（問題QUOTE-RUN1＋保持4）を同じf6daeで一回・学習0で比較する。前回の同5rawを旧条件baselineとして再利用し、旧条件の追加生成は0。新packet13,723byte／2member、SHA256 `f5a7989570d95dc2b3d9dcacf65f6bc1978eeab7be80fef383dbe62a7a240cde`。5候補＋通常／Analysis前後control4の最大9HTTP、Piece1load、再試行0、復元込み600秒／復元予約120秒。既存Pod f1lle4xwq3wjlnへ新packet送信と、元提供を同じ状態へ戻すための起動環境全体（認証情報を含み得る）の同Pod内一時読取・再利用は今回の具体確認後に行う。前回の消費済み一回承認へ遡及させず、今回は送信／新生成／停止／起動環境読取0。引用だけ直っても本人省略が残れば採用へ格上げせず、同じS7・全本文読取・3plan保存再読で判定する。広い引用／理由の型付き読取・一般品質・同版画像／通常統合／本人端末と他ARは未完。通常採用／selector有効化／Render／live DB／RN／buildの自動変更0。

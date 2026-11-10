@@ -41943,3 +41943,17 @@ rootと独立担当が全5原文・rawを全読。4採用本文は原文の字�
 同じ無修補rawを既存保存consumerへ厳密再bindし、Free／Plus／Premiumの15試行で12保存・同／新serviceの非生成再読、3拒否時のrecord／quota不変を確認。保存は元GPU入力ID／時刻と別の同内容synthetic ID／日時を使う隔離SQLであり、live Supabaseや元GPU identityの通常永続化ではない。原入力／Emlis不変・保存後0生成、旧作者fallback禁止・current builder一致・frozen raw／input不変を確認。STRUCTURE_MAP_DELTA_NONE、商品source／source文法／S7／DB／RN／renderer／通常選択変更0。今回新pytest／CI実行0、API5816f2d0の前回5263 PASS・両CI成功を継承する。凍結69と前回新3の完了creditは継承し、今回新規69生成・再照合とはしない。
 
 次は引用内の句読点・強調を平文化する生成側の残差を、既存引用reader・欄別生成条件と原教材の対応から切り分ける。今回の不採用rawを通すS7緩和・原文／raw修補、同じ9HTTPや完了済み48更新の再実行はしない。新4実4Bの取得と同版保存確認は完了として引き継ぐ。引用一般の言換え・複数／多重・引用内CR/LF／認識名、理由一般の型付き読取、広い一般文章品質・同版画像／通常統合／本人端末、AR-01と他ARは未完。通常採用／selector有効化／Render／live DB／RN／buildの自動変更0。
+
+
+<a id="piece-quote-context-conditions-20261110"></a>
+## 11/10 AR-04 — 引用の字面保持を生成側へ渡す候補
+
+APIa67fb6f2で、既存KEEPの引用範囲を欄別4B生成条件へ投影する候補を反映。引用内の全字面・句読点／強調と同欄の引用外本人表記を保持する条件を渡す。SYSTEM・既定messages・source資格・S7は不変。関連32file5287 PASS、保存済み実5の4採用／1拒否と既存69行の採否／本文／messagesを維持。新4B効果は未確認、13,723byteの比較packetは未送信・未実行。f6dae研究候補・通常selector OFF・本番未反映。
+
+STRUCTURE_MAP_DELTA_PRESENT_CANDIDATE_ONLY：既存`ai/services/ai_inference/piece_model_source.py::_authoring_constraints`が、資格済みsource planの`KEEP_COMPLETE_SOURCE_CONTEXT` dutyと既存`emlis_ai_grounded_sentence_surface._body_primary_quote_spans`を再利用する。part別planに対応する元引用のかぎ括弧込みliteralとfield内scalar範囲を、明示opt-in時だけ既存欄条件の`literal_quotes`へ投影。引用のある欄だけに`quote_context_instruction`を付け、引用内文字／記号数と同欄のliteral内の引用外一人称表記を保つ。原文／PreparedRequest／ID／SYSTEMは不変、別欄／段落／原入力と補足を混ぜない。新しいreader・意味型・作者・checker・公開DTO／保存schema・DB・API入口・RN・rendererは追加せず、S7や不正rawの修補は行わない。
+
+変更は商品1pathと既存test2path（`ai/tests/test_piece_model_authoring_constraints.py`、`ai/tests/test_piece_model_authoring_application.py`）だけ。関連32file5287 PASS、FAIL／error／skip0、既存warning1。新24件は引用のexact字面／field座標、非引用／既定OFF不変、段落とrefinedのpart別plan、公開役割、資格外引用の拒否、configured MockTransportへの1取得伝達、句点化・強調削減・本人省略・話者／感情変異の拒否を確認する。初回focused137 PASSは最終回帰と重複するため加算しない。保存済み実5rawの採否と本文は4採用／1拒否を維持し、元の69照合行も採否／本文／messagesを0生成で維持。新5送信候補は原7項目・prepared ID／JSON・SYSTEM／field_slotsを維持し、引用条件だけが追加される。今回の新しい実モデル本文・同版画像／端末検証・live DBは0。
+
+APIa67fb6f2の[Piece CI42826604954](https://github.com/MassyuRed/mashos-api/actions/runs/42826604954)は対象head一致・attempt1で全工程success。job129865467629／39stepを確認。追加run／rerun0。今回の変更pathでAnalysis workflowの新runはなく、Analysis・通常配置の新成功は主張しない。
+
+次は変更した欄別条件で、既取得5入力（問題QUOTE-RUN1＋保持4）を同じf6daeで一回・学習0で比較する。前回の同5rawを旧条件baselineとして再利用し、旧条件の追加生成は0。新packet13,723byte／2member、SHA256 `f5a7989570d95dc2b3d9dcacf65f6bc1978eeab7be80fef383dbe62a7a240cde`。5候補＋通常／Analysis前後control4の最大9HTTP、Piece1load、再試行0、復元込み600秒／復元予約120秒。既存Pod f1lle4xwq3wjlnへ新packet送信と、元提供を同じ状態へ戻すための起動環境全体（認証情報を含み得る）の同Pod内一時読取・再利用は今回の具体確認後に行う。前回の消費済み一回承認へ遡及させず、今回は送信／新生成／停止／起動環境読取0。引用だけ直っても本人省略が残れば採用へ格上げせず、同じS7・全本文読取・3plan保存再読で判定する。広い引用／理由の型付き読取・一般品質・同版画像／通常統合／本人端末と他ARは未完。通常採用／selector有効化／Render／live DB／RN／buildの自動変更0。
