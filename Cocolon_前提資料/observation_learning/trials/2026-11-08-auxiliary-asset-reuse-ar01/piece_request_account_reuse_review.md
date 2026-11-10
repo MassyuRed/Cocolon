@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/10現在：** 文順だけの一回fresh48更新は完了したが比較打切り・全実験失敗、37／38候補取得・B2 after欠測。paired37のCMEE36→35、H03未修復・A2過去消失の退行1、改善0。新SQL123は114保存／9拒否・保存後0生成。新8044不採用・c634研究基準保持。[今回実結果](#piece-negative-passive-order-result-20261110)。
+> **11/10現在：** API1ce24b8cで有限source由来の原文／役割条件を投影し、同c634の受動否定2件を修復、CMEE44→46／46・他44raw一致。新SQL162全保存・保存後0生成。c634通常未採用／selector OFF、一般品質・同版画像／本人端末未確認。[今回実結果](#piece-passive-role-conditions-result-20261110)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -769,3 +769,33 @@ REGISTER_HELD03は原文の「依頼を受けなかった」という受動否�
 製品source／SYSTEM／authoring hint／reader／保存責務・公開API／DB／RN変更0、今回新pytest／CI0、STRUCTURE_MAP_DELTA_NONE。API4da69cde／RN4424976bと前回のCI・旧native残件を継承する。新8044は通常・次初期値へ不採用、c634も通常未採用の研究基準として保持、selector OFF・本番反映／署名配布0。新8044／c634のnative画像・本人端末は未確認で、旧5b1 FRESH03画像一致を転用しない。今回の商品品質改善／正式商品creditは0、一般品質・正式受入れ0/3・AR全体は未完了。
 
 次のAR-04は、通常未採用のc634研究基準を保持し、既存4B作者で依頼の受け手・否定・過去を同時に保つ自然文実現の改修設計へ進む。REGISTER_HELD03とB2基準に残る受動否定→能動への逆転、A2の過去→非過去退行を対象に、相手／対象・本人表記・別欄と既成功文を保持する。文順だけの一回fitは不採用で閉じ、同fit反復・時間延長・欠測補完／追加生成・8044の次初期値／通常採用を自動実行しない。CMEE緩和・raw修補・SYSTEM指示周回は行わない。一般品質・採用候補の同版画像／通常統合・本人端末、旧native失敗、AR-01反転と他ARは残件として保持する。
+
+
+<a id="piece-passive-role-conditions-result-20261110"></a>
+## 2026-11-10 固定c634・source由来の受動役割条件 — 2件の意味修復、他44本文保持
+
+[API 1ce24b8c](https://github.com/MassyuRed/mashos-api/commit/1ce24b8c59e852faf4b0f3748cca7cbd07a1ebf1)の3pathを保存・保持した。既存piece_model_sourceのprivate生成条件へ、source資格が既に成立したMeaningWitnessのsubject／agent／counterpartと、同じ完全原文source_literalを投影する。当該source part全体が既知の有限動作で完全被覆され、そのfieldに受動がある場合だけ、各動作の本人表記・相手／対象・肯否・過去・voiceとsource／field／scalar範囲へ束縛する。active-only・非有限混在は旧wire、曖昧受動への動作条件追加拒否、原request／PreparedRequest再導出一致を保持する。SYSTEM／既存instruction、source文法・独立CMEE／S7・public DTO／保存契約・RNは変更していない。効果の対象は**原文再掲とrolesの条件bundle全体**であり、rolesだけの因果と断定しない。
+
+新評価は独立架空8題（6一人称と3述語の肯否6組＋二欄1＋有限受動／自己評価混在part1）、全てnormal。新refined作例は作らず、既存FRESH13〜16の4件を継承した。CPU targetは作者準備資料でモデル出力ではなく、推論wireに期待正文／target／rawを入れない。全46のmessagesは19変更／27完全不変で、投影35eventを原sourceのwitnessへ独立照合した。
+
+実比較は同じc63446a23123abb67fc83963002c8b79b80fc9bed5b61100cac9982abf17234eを一度loadし、新8の旧条件before、全46の新条件after、自然Emlis／Analysis前後control4の**58 HTTP／新Piece54、学習0**。旧38のbeforeは同じ旧builder・全request／revisionを再資格化した保存応答を再利用し、新生成へ数えない。rootと独立担当が全46原入力・補足4・before46／after46の92rawを全文確認した。
+
+| 範囲 | 旧source条件 | 新source条件 |
+|---|---|---|
+| 全46 | 44採用／2拒否 | 46採用／0拒否 |
+| 内・既知38 | 36採用／2拒否 | 38採用／0拒否 |
+| 内・新8 | 8採用／0拒否 | 8採用／0拒否 |
+
+変化はREGISTER_HELD03／ORDER_HELD_B2の2rawだけで、本人が「依頼しなかった」という誤った能動否定から「依頼を受けなかった」という原文どおりの受動否定へ戻った。相手／対象・過去・一人称と別の能動節を保持し、依頼の実在・本人の拒否／承諾や対象作業の実行は補わない。ほか44rawはbyte一致で、新8の否定・過去・役割方向・各本人表記・二欄分離と、混在新08の過去の好みも保持した。新たな意味退行は観測していない。A2はc634の旧新双方で正しい過去のまま同一で、前回8044の非過去退行からの修復へ数えない。**8044のB2 after欠測は旧試行のまま残り、今回の別c634比較で補完しない。**
+
+新隔離SQLは新8before×3plan＝24と新46after×3plan＝138の**計162、全162保存／0拒否**。旧38beforeのSQL114（108保存／6拒否）は再資格化のみ・再実行0、新162へ加算しない。全保存の本文／recipe／hash／rendererは選択preview＝保存行＝detail、原入力・Emlis／raw不変、quota各1・保存再送一致、保存後の同／新service再読は0生成。等価な合成ID／日時へ無修正rawを再bindしたPGlite・合成Auth／SQL callbackであり、live Supabaseや本人Auth／端末一往復の確認ではない。
+
+初回起動はtokenizer返却型の仮定が合わず、5.424490秒・HTTP0／Piece load0／元停止0で技術中断した。元args／env／cwdとhealthは保持した。key未初期化によるcredentials検査falseと未copy SERVERのFileNotFoundは未評価として残し、credential／source変化や復元失敗へ読み替えない。旧ROOT／ZIP／runnerを保持し、実servingと同じreturn_dict／tensor APIへ直した別namespaceを、旧原本exactSHAとzero-effectを確認して一回実行した。自動retry／追加学習／欠測補完は0。
+
+補正後は元PIDと固定hashを確認し、cache4変数だけを引き継いで固定revision・local_files_onlyのtokenizerで全92入力を停止前に計測。最大2343入力tokens＋予約2048≤8192、最大request8299bytesで条件内。実比較の全工程317.279043秒、元base／既存AnalysisをPID44511へ同args／env／cwd／keysで復元、healthと前後controlのresponse bytes一致。c634／旧5b1／e924と元source・Analysis adapterは不変。初回中断と実比較の時間を混ぜず、通常原価／総保持／請求は未測定とする。
+
+局所対象114 PASSと、別集合の関連17file1046 PASS／既存warning1を記録し、加算しない。初回refined作例の資格外2・SQL環境不足3、追加newline slotの誤期待1、広い検証の初回collection 1error／0tests（import設定不足）は原logに保持し、source文法を緩めず資料／既存環境／期待slotを整合した。[Piece CI42748647756](https://github.com/MassyuRed/mashos-api/actions/runs/42748647756)は全工程success（job129606715349／head1ce24b8c、03:24:22Z完了）。旧headのAnalysis CI・RN4424976bの旧native履歴は今回のCI／画像確認へ移さない。
+
+STRUCTURE_MAP_DELTA_PRESENT（既存ownerのprivate生成条件境界のみ、新owner・公開／保存契約追加0）。この有限実装を保持するが、c634の通常採用・selector有効化・live配置／DB変更／署名build／本人端末操作0。新c634本文の同版画像・通常統合・一般品質／正式受入れ0/3は未完了、旧5b1 FRESH03画像一致を転用しない。限定TECHNICAL_CREDIT・正式商品credit0。[今回の検証原本](https://chatgpt.com/library?file_id=libfile_fde3_f-ee1bb198b4508191be390c8efa175b0d_2f7470f963808191aaebf050935e72de&account_id=personal)。
+
+次のAR-04は、今回確認した有限意味条件と同一本文／recipeを保ち、preview／保存・画像の同版整合と、別材料での自然さ・単独伝達／一般本文品質を既存商品経路で確認する。c634は通常未採用の研究基準、selector OFFを維持し、通常重み採用・live配置／本人端末／署名buildへ自動進行しない。全量source資格、混在partの旧条件、本人表記・欄／補足分離、独立CMEE／保存責務を維持する。旧8044の失敗とB2欠測は閉じた履歴であり補完のため再起動しない。一般品質・正式0/3、AR-01反転と他ARは未完了として保持する。

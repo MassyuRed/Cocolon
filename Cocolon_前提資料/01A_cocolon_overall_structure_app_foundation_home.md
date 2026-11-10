@@ -1,4 +1,4 @@
-> **11/10・AR-04全file地図差分：** 既存trainer／4B作者／意味・保存ownerを不変再利用した文順のみの候補比較は全実験失敗・新8044不採用。製品source変更0、STRUCTURE_MAP_DELTA_NONE。[今回の再利用箇所](#piece-negative-passive-order-result-20261110)。
+> **11/10・AR-04全file地図差分：** API1ce24b8cの既存生成owner1＋検証2pathで、全量資格済み受動fieldへ原文／役割条件を投影。STRUCTURE_MAP_DELTA_PRESENT（private入力境界のみ、新owner／公開・保存契約追加0）。[今回の変更箇所](#piece-passive-role-conditions-result-20261110)。
 
 > 11/4のPiece作成・本文・書き出し候補は、末尾の[ファイル差分](#piece-format-language-export-files-20261104)と週次レビュー§141を参照。
 
@@ -6460,3 +6460,17 @@ API fce72bcc＋4da69cdeとRN4424976bは以下の検証9pathのみ。製品source
 製品source／共有contract／入口・責務の追加変更0、STRUCTURE_MAP_DELTA_NONE。前回API4da69cde／RN4424976bとownerを継承する。既存 `train_piece_model_adapter.py` のfresh24行／48更新を、ROLEFIT10のsource／target文順だけの介入へ再利用。`piece_model_source.py` は現行messages／推論SYSTEMを不変、既存CMEEの意味照合とpreview／save／owner serviceを、取得37候補と新123隔離SQLへ接続した。新shared checker・作者fallback・raw修補・意味条件の緩和はない。
 
 全実験は残時間条件で失敗、候補37／38・B2 after欠測。paired37のCMEE36→35、A2過去消失の退行1・H03未修復・改善0で新8044不採用。新SQL114保存／9拒否、旧102は再資格化だけで再実行0、保存後0生成。c634研究基準保持・通常selector OFF、新重み同版画像／本人端末は未確認。既存責務を増やした地図差分ではなく、同ownerの有限候補失敗記録である。 [実分母・根拠・次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-negative-passive-order-result-20261110)。
+
+
+<a id="piece-passive-role-conditions-result-20261110"></a>
+## 2026-11-10 AR-04 source由来の受動役割条件 — 既存3pathの地図差分
+
+API1ce24b8cの全変更は次の3path。STRUCTURE_MAP_DELTA_PRESENTは既存private生成条件の適用境界を変えた意味で、新owner／service／public DTO／DB／RN／保存契約追加0。
+
+| path | 今回の責務差分・保持 |
+|---|---|
+| API `ai/services/ai_inference/piece_model_source.py` | 既存source資格／PreparedRequest再導出から、全量有限被覆が成立する受動fieldの各動作へsource_literalとsemantic_roles（subject／agent／counterpart）を投影。NEG／PAST／voice／相手対象／本人表記・source/field/spanを保持。active-only／非有限混在のwire・SYSTEM／独立CMEE／source文法は不変。 |
+| API `ai/tests/test_piece_model_authoring_constraints.py` | 六一人称・能受動／肯否・両順序・field内範囲／改行・別欄／本人補足・曖昧／混在拒否の境界を検証。source文法を広げず旧wireを保持。 |
+| API `ai/tests/test_piece_model_authoring_application.py` | 設定済みsourceから実transport用messagesを検証し、正しい受動過去だけを独立CMEEへ通し、能動反転・非過去・肯定変化を拒否する。 |
+
+同c634の46材料は44→46採用、H03／B2だけ意味修復・他44raw同一、新SQL162全保存・保存後0生成。[Piece CI42748647756](https://github.com/MassyuRed/mashos-api/actions/runs/42748647756)は全工程success（job129606715349／head1ce24b8c、03:24:22Z完了）。c634通常未採用／selector OFF・live0、一般品質／同版画像／本人端末未確認。 [実分母・根拠・次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-passive-role-conditions-result-20261110)。

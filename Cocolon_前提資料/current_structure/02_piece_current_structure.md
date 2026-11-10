@@ -1,4 +1,4 @@
-> **11/10・補助経路AR-04最新：** 文順だけのfresh48更新は完了したが比較打切り・全実験失敗。候補37／38、B2 after欠測。paired37のCMEE36→35、H03未修復・A2過去消失の退行1で新8044不採用。新SQL123は114保存／9拒否・保存後0生成。c634研究基準保持、新重み画像／本人端末未確認。[今回実結果](#piece-negative-passive-order-result-20261110)。
+> **11/10・補助経路AR-04最新：** API1ce24b8cのsource由来条件で、同c634の受動否定2件を修復、CMEE44→46／46・他44raw一致。新SQL162全保存・保存後0生成。private生成条件境界のみ拡張し、新owner／source文法／独立CMEE変更0。c634通常未採用・同版画像／本人端末未確認。[今回実結果](#piece-passive-role-conditions-result-20261110)。
 
 > **11/7最新・DB／API反映、統合iOSビルド・送信成功：** Free初期2色／Plus・Premium12色、両比率・ロゴ有無を選ぶ権利を、配色migration actual20261107020543（CHECK validated）とAPI5065730eへ反映。Render dep-dbn8h2jl550s73efmcngは11:12:02 JST Live、health/bootstrap200・private5ON/public3OFF・本人境界7smoke期待どおり。対応RN e0ec6d6aのrun42328190568／#75 attempt1は11:14:01 JST開始、11:28:26 JSTに全19step成功。Archive・写真目的文検査・IPA・Upload成功。Apple側の1.0（7501）を照合し、既存内部グループ「Emlis テスト版配布」でTestingを確認。後続にMashから大ボタン・Piece関係の今回修正の実機確認を受領（第10回§14）。分析の実機確認は未実施。旧clientのcapabilitiesと履歴互換、保存recipe／hashを維持。DML／RLS・画像本文・保存枠・公開範囲は変更なし。[準備§12と実反映§13](../weekly_reviews/Cocolon_Weekly_Review_20261107.md#piece-ui-live-and-ios-build-20261107)。
 
@@ -3900,3 +3900,13 @@ STRUCTURE_MAP_DELTA_NONE。通常重み未採用／selector OFF、追加学習�
 実45HTTP、新SQL123＝114保存／9拒否、旧102再実行0。本文／recipe等・quota各1・原入力／Emlis不変、保存後0生成。隔離合成SQLでlive Auth／DB／本人端末ではない。全工程485.889660秒、元提供43443へ復元・health／前後control一致。製品source／SYSTEM／reader・保存契約追加変更0、新pytest／CI0、STRUCTURE_MAP_DELTA_NONE。c634研究基準を保持し通常selector OFF、新8044／c634画像・本人端末未確認。前回の5b1画像一致を新重みへ移さない。
 
 次のAR-04は、通常未採用のc634研究基準を保持し、既存4B作者で依頼の受け手・否定・過去を同時に保つ自然文実現の改修設計へ進む。REGISTER_HELD03とB2基準に残る受動否定→能動への逆転、A2の過去→非過去退行を対象に、相手／対象・本人表記・別欄と既成功文を保持する。文順だけの一回fitは不採用で閉じ、同fit反復・時間延長・欠測補完／追加生成・8044の次初期値／通常採用を自動実行しない。CMEE緩和・raw修補・SYSTEM指示周回は行わない。一般品質・採用候補の同版画像／通常統合・本人端末、旧native失敗、AR-01反転と他ARは残件として保持する。 [全実結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-negative-passive-order-result-20261110)。
+
+
+<a id="piece-passive-role-conditions-result-20261110"></a>
+## 2026-11-10 受動fieldのsource役割条件 — 本文2件修復と同版保存
+
+API1ce24b8cのpiece_model_sourceで、既存finite意味witnessの役割・肯否・過去とsource_literalを、当該source part全体が完全被覆された受動含有fieldへ投影する。同fieldの各eventを別のsource／scalar範囲へ束縛し、active-only・非有限混在、曖昧受動への動作条件追加拒否、独立CMEE／S7・保存責務を保持。新source文法・期待正文・別作者／raw修補・SYSTEM変更はない。
+
+固定c634・46材料のCMEE44→46、H03／B2の受動否定だけを修復、他44raw同一。新SQL162全保存・選択preview＝保存行＝detailの本文／recipe等一致、quota各1・原入力／Emlis不変、保存後0生成。旧114は再実行0、合成Auth／等価合成IDの隔離PGliteでlive確認ではない。実58 HTTP／学習0・317.279043秒、元提供44511へ復元・health／前後control一致。[Piece CI42748647756](https://github.com/MassyuRed/mashos-api/actions/runs/42748647756)は全工程success（job129606715349／head1ce24b8c、03:24:22Z完了）。STRUCTURE_MAP_DELTA_PRESENT（private生成入力の境界拡張のみ、新owner／公開・保存契約追加0）。c634通常未採用／selector OFF、同版画像／本人端末未確認、旧5b1画像と8044欠測は別履歴として保持する。
+
+次のAR-04は、今回確認した有限意味条件と同一本文／recipeを保ち、preview／保存・画像の同版整合と、別材料での自然さ・単独伝達／一般本文品質を既存商品経路で確認する。c634は通常未採用の研究基準、selector OFFを維持し、通常重み採用・live配置／本人端末／署名buildへ自動進行しない。全量source資格、混在partの旧条件、本人表記・欄／補足分離、独立CMEE／保存責務を維持する。旧8044の失敗とB2欠測は閉じた履歴であり補完のため再起動しない。一般品質・正式0/3、AR-01反転と他ARは未完了として保持する。 [全実結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-passive-role-conditions-result-20261110)。

@@ -2498,3 +2498,13 @@ STRUCTURE_MAP_DELTA_NONE、限定TECHNICAL_CREDIT・正式受入れ0/3。学習�
 実HTTP45＝新基準4＋候補37＋control4、新Piece41。既知34基準はc634の同request記録再利用。新SQL123＝新基準12の9保存／3拒否＋候補111の105保存／6拒否＝114保存／9拒否、旧102は再資格化のみ・再実行0。本文／recipe等・quota各1・原入力／Emlis不変、保存後0生成。合成Auth／等価合成IDの隔離PGliteでlive DB／本人端末ではない。学習外側215.702734秒・全工程485.889660秒、元提供43443へ復元・health／前後control一致。
 
 新8044は通常・次初期値不採用、c634研究基準保持・通常selector OFF。製品source／SYSTEM／CMEE変更0・今回新pytest／CI0、STRUCTURE_MAP_DELTA_NONE。新8044／c634の同版画像・本人端末未確認、費用未測定・商品品質改善0・正式0/3。次のAR-04は、通常未採用のc634研究基準を保持し、既存4B作者で依頼の受け手・否定・過去を同時に保つ自然文実現の改修設計へ進む。REGISTER_HELD03とB2基準に残る受動否定→能動への逆転、A2の過去→非過去退行を対象に、相手／対象・本人表記・別欄と既成功文を保持する。文順だけの一回fitは不採用で閉じ、同fit反復・時間延長・欠測補完／追加生成・8044の次初期値／通常採用を自動実行しない。CMEE緩和・raw修補・SYSTEM指示周回は行わない。一般品質・採用候補の同版画像／通常統合・本人端末、旧native失敗、AR-01反転と他ARは残件として保持する。 [全実結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-negative-passive-order-result-20261110)。
+
+
+<a id="piece-passive-role-conditions-result-20261110"></a>
+## 58. 補助経路AR-04 — 既存source役割条件で受動否定2件を修復
+
+API1ce24b8cの既存生成owner1＋検証2pathを保持。全量資格済み受動fieldへ原文source_literalと既存MeaningWitnessの役割・肯否・過去を束縛し、同c634重みの全46材料は44採用／2拒否→46／0。H03／B2の受動否定2件を修復、他44rawはbyte一致。新8は8→8で全て保持、root／独立担当が全46source・補足4・92rawを全文確認。A2はc634前後同一で8044退行修復creditにせず、旧8044のB2欠測も保持する。条件の効果は原文再掲＋rolesのbundle全体で、一般因果／品質成立ではない。
+
+実58 HTTP＝新8before＋全46after＋control4、新Piece54・同c634の1load・学習0、旧38beforeは保存応答を再資格化した再利用。新SQL162（before24＋after138）は全保存・0拒否、旧114（108保存／6拒否）は再資格化のみ・再実行0。選択preview／保存行／detailの本文・recipe等一致、quota各1・原入力／Emlis不変・保存後0生成。合成Auth／等価合成IDの隔離SQLでlive DB／本人端末ではない。
+
+初回はtokenizer型の技術中断5.424490秒・HTTP0／元停止0、原本を保持して実serving APIに合わせた別namespaceで一回比較した。実比較317.279043秒・入力最大2343tokens＋2048≤8192、元提供44511へ復元・health／前後control一致。局所114と別集合17file1046 PASSを加算せず記録。[Piece CI42748647756](https://github.com/MassyuRed/mashos-api/actions/runs/42748647756)は全工程success（job129606715349／head1ce24b8c、03:24:22Z完了）。STRUCTURE_MAP_DELTA_PRESENT（private条件境界のみ、新owner／公開・保存契約追加0）、source文法／SYSTEM／独立CMEE不変。c634通常未採用／selector OFF・live0、費用未測定・一般品質／同版画像／本人端末・正式0/3未完了。次のAR-04は、今回確認した有限意味条件と同一本文／recipeを保ち、preview／保存・画像の同版整合と、別材料での自然さ・単独伝達／一般本文品質を既存商品経路で確認する。c634は通常未採用の研究基準、selector OFFを維持し、通常重み採用・live配置／本人端末／署名buildへ自動進行しない。全量source資格、混在partの旧条件、本人表記・欄／補足分離、独立CMEE／保存責務を維持する。旧8044の失敗とB2欠測は閉じた履歴であり補完のため再起動しない。一般品質・正式0/3、AR-01反転と他ARは未完了として保持する。 [全実結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-passive-role-conditions-result-20261110)。

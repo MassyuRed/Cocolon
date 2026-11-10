@@ -1,4 +1,4 @@
-> **11/10・AR-04最新：** ROLEFIT10の文順だけを変えたfresh48更新は完了したが、比較を残時間条件で打切り、全実験FAILED_NOT_ADOPTED。候補37／38取得・B2 after欠測。同じ37組のCMEE36→35、H03未修復・A2の過去消失が退行1、改善0。新SQL123は114保存／9拒否、保存後0生成。新8044は不採用、c634研究基準を保持し通常selector OFF。製品source／SYSTEM／CMEE変更0、一般品質・新重み同版画像／本人端末・正式0/3は未完了。 STRUCTURE_MAP_DELTA_NONE。[全実結果](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-negative-passive-order-result-20261110)。
+> **11/10・AR-04最新：** API1ce24b8cのprivate生成条件改修を保持。同じc634重みで受動否定2件の役割逆転を修復し、同46材料のCMEE44→46、他44rawはbyte一致。新SQL162すべて保存・保存後0生成。原文・SYSTEM・source文法／独立CMEE・保存契約は不変。c634通常未採用／selector OFF・live0、一般品質・同版画像／本人端末・正式0/3は未完了。 STRUCTURE_MAP_DELTA_PRESENT（既存ownerのprivate生成条件境界のみ）。[全実結果](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-passive-role-conditions-result-20261110)。
 
 > **2026-11-10・補助経路AR-04（第10回§53）：** 既存S7のmodel専用比較へ、source資格済み非過去wishの明示SELF「が」直接語順を限定接続。保存5b1de6c9の同26rawは0生成で24→25採用、旧24本文不変・source資格外1維持。新78隔離SQLは75保存／3拒否、比較元は旧記録72／6。17file996 PASS／既存warning1、追加学習0、読点の自然さは未修復・通常重み未採用。API `c9e9938981c88e811bde1970725dc3dc35b2ae26`、Piece CI42709594596／Analysis CI42709594021は全工程success、Piece model17file996 PASS／58.98秒。STRUCTURE_MAP_DELTA_NONE（既存owner内比較条件のみ、入口／責務／公開・保存契約不変）。[実結果・次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-qualified-focal-ga-reader-20261110)。
 
@@ -41785,3 +41785,9 @@ Mashの明示指示により[00_cocolon_current_product_and_state.md](00_cocolon
 ## 2026-11-10 — AR-04 否定受動の文順だけの比較失敗、候補37取得／1欠測
 
 23教師を完全保持しROLEFIT10の2文順だけを変えたfresh48更新は完了したが、候補比較の残時間条件work_time_limitでB2前に打切り、全実験FAILED_NOT_ADOPTED。取得37候補のpaired37はCMEE36→35、35raw一致・FRESH12の言換えのみ・A2過去消失退行1、H03未修復・改善0。B2 after欠測は補完しない。実45HTTP（新基準4＋候補37＋control4）、新SQL123は114保存／9拒否・保存後0生成、旧102は再資格化だけで再実行0。全工程485.889660秒、元提供43443へ復元・health／前後control一致。新8044不採用・c634研究基準保持／通常selector OFF、製品source／SYSTEM／CMEE差分0・新pytest／CI0、STRUCTURE_MAP_DELTA_NONE。新重み同版画像／本人端末・一般品質・正式0/3未完了。次はc634基準から受動方向と過去否定を同時保持する作者改修設計へ進み、同fit／時間延長／欠測補完を自動実行しない。 [全実結果](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-negative-passive-order-result-20261110)。
+
+
+<a id="piece-passive-role-conditions-result-20261110"></a>
+## 2026-11-10 — AR-04 固定c634のsource役割条件で2件修復、46材料を保持
+
+API1ce24b8cは既存private生成条件へ全量資格済み受動fieldの原文／役割を投影。同c634の46材料はCMEE44→46、H03／B2の受動否定2件を修復し他44raw byte一致、新8は8→8。実58HTTP／新Piece54／1load／学習0、旧38before応答再利用。新SQL162全保存・保存後0生成、旧114再実行0。実比較317.279043秒、元提供44511へ復元・health／前後control一致。別の初回tokenizer技術中断はHTTP0・元停止0のまま原本保持。[Piece CI42748647756](https://github.com/MassyuRed/mashos-api/actions/runs/42748647756)は全工程success（job129606715349／head1ce24b8c、03:24:22Z完了）。STRUCTURE_MAP_DELTA_PRESENT（既存ownerのprivate条件境界のみ、新owner／公開・保存契約追加0）。c634通常未採用・selector OFF、live／同版画像／本人端末／一般品質・正式0/3未完了、旧8044失敗／B2欠測は補完しない。 [全実結果](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-passive-role-conditions-result-20261110)。
