@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/10・AR-04最新：** APId7442335で旧引用境界readerをPieceの原sourceへ限定接続。GENERAL07の引用・発言者・くれた・否定条件・可能形・過去感情を既存KEEPで全量保持し、元8sourceの資格7→8。引用内の既存scanner認識名は話者をまたぐ役割誤継承を防ぐため拒否、引用外の既存公開役割は維持。保存済み実4B69照合行のmessages／採否／本文を0生成で維持。直近残件3の独立CPU作文を3plan計9保存・再読。新3の実4B応答は未取得。f6dae研究候補／通常selector OFF・本番未反映を維持。 [限定引用・検証と次](#piece-single-quote-context-reader-20261110)。
+> **11/10・AR-04最新：** 直近API d7442335の引用KEEP接続・元8source資格8/8、独立CPU3の9保存／再読と5176 PASS／両CI成功を継承。次の実4B確認は新3＋保持対照2、通常／分析前後control4の計9HTTP・学習0・復元込み600秒で準備した。13577byteの架空入力／既存runner流用ZIPは送信時の自動承認審査で拒否され、今回のpayload／宛先の明示確認待ち。今回upload・新生成・学習・提供停止0、通常採用／selector／本番変更なし。 [実行準備・送信停止と次](#piece-model3-inference-prepared-20261110)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -1034,3 +1034,31 @@ GENERAL07の原文は`友人が「ゆっくりでいいよ」と言ってくれ�
 実装はAPI `d7442335ea0b32aaccee505df7b8f9fcb6c38f1a` の商品2path＋既存test3path。既存branchへ反映しfresh bytesを照合した。今回新GPU／学習／実モデル応答／Render配置／live DB／RN／build・配布変更0。通常重みとselectorは継承し、正式受入れ0/3・他ARの未完は維持。今回のsource8判定・CPU3と保存9・凍結69原本・全log・次の未送信入力はprivate `Cocolon_CMEE_AR04_QuotedContext_ReaderReuse_20261110.zip` へ保存した。前回weights／GPU実行原本は前回artifactを保持する。
 
 次はsource資格化したGENERAL01／07／08の新しい実4B応答を確認し、完全対象・本人表記・時点／肯否・引用と外側の発言者／感情・自然な本文・同版保存を照合する。同3の原7項目・prepared identity・現行builderの送信messagesはprivateに準備済みだが未送信。CPU作文の採用を実モデル改善と呼ばない。引用一般の言い換え、引用内の名前・複数／多重・内部stop／CR/LF、広い一般文章、新f6daeで旧53全件の生成回帰、同版画像／通常統合／本人端末は未完。完了済み48更新／24HTTP比較を再実行せず、1baa条件追加も不採用。通常採用／selector有効化／live／実DB／buildの自動実行0。
+
+
+<a id="piece-model3-inference-prepared-20261110"></a>
+## 11/10 AR-04 — 新3入力の無学習評価を準備、送信の自動承認審査で停止
+
+直近API d7442335の引用KEEP接続・元8source資格8/8、独立CPU3の9保存／再読と5176 PASS／両CI成功を継承。次の実4B確認は新3＋保持対照2、通常／分析前後control4の計9HTTP・学習0・復元込み600秒で準備した。13577byteの架空入力／既存runner流用ZIPは送信時の自動承認審査で拒否され、今回のpayload／宛先の明示確認待ち。今回upload・新生成・学習・提供停止0、通常採用／selector／本番変更なし。
+
+現指示「補助経路の活用作業を続けて」と設計§8.3／§12の再開点から、既存環境内の新しいbounded test/runtimeとして入力と実行手順を準備した。旧の一回承認を再活性化する判断ではない。通常の改修・比較を毎回再承認へ戻す一般ruleも新設していない。一方、今回の具体的なfile uploadは自動承認審査で拒否されたため、外部送信・実行を止めて明示確認へ戻した。
+
+| 送る予定の内容 | 固定した範囲 |
+|---|---|
+| 新3 | GENERAL01（食事の過去／現在）、GENERAL07（友人の引用と本人の過去感情）、GENERAL08（俺・静かな朝食）の現行SYSTEM／USERだけ |
+| 既使用の保持2 | FOCAL02とREGISTER_HELD02の前回f6dae同messages。前回rawはCPU照合側に保持し、GPU wireへ正解を入れない |
+| 実行 | 既存の学習なしrunnerからcall／固定tokenizer／stop・restore／controls／archiveを流用。5Piece＋前後4control、計9HTTP・Piece load1・学習0・retry0 |
+| 時間 | 復元込み600秒、作業480秒、復元予約120秒。新しいGPUのレンタル・料金契約操作なし |
+| 送信ZIP | 13577byte、SHA256 `8497aff8ee4c8512d269093bdc06461d1e5dbfca3075dccf851f2968b161624e`、runnerとwireの2member |
+| wire | 33303byte、SHA256 `da4c594730bba8e78f344ddbfe0b9d1fb2a6dd79b677e44cc7f589d4e8d3c55c`。全5messagesを現builderとexact再照合 |
+| runner | 27563byte、SHA256 `80783924b02d143d67e55f1caef01c1408247e0ca4f22beb1b57b9b4345b777d`。syntax／CRC／実bytesを確認、実行0 |
+
+元5入力・prepared identity・送信messagesと新3／保持2の意味をroot・独立担当が読み、CPU正文／assistant targetの注入がないことを確認した。旧48更新runnerやtrainer／教師は送らない。今回は新3の初回f6dae評価と既使用2の同版再現対照であり、旧c634の新3 baselineや学習効果の前後比較とはしない。
+
+Jupyterへ到達し、読み取りで元PID49665、args／env／cwdの既知hash、元serving source5e3…、保存f6dae weights／config9e8…が一致し、health true、確認範囲のGPU compute processは元server PID49665の1件・使用率0%と確認した。現物GPUはNVIDIA RTX 4000 Ada Generation。鍵の値は画面へ出力せず、保存記録にも含めていない。Runpod consoleはログイン画面で、現在の単価は再照会していない。新規レンタル・tier変更・支払操作はなく、按分時間と総請求・稼働保持料金は同じとしない。最初の読み取りCLIは改行の入力形式でshell syntax errorとなったが、単一行の読み取りへ直し、GPU load／提供停止／新推論は0のまま。
+
+新trial用directoryは作成したが、file chooserによるZIP送信時に自動承認審査が拒否した。理由は「内部runner codeとprivate project由来のtest metadataをRunpodへ送る新payloadと宛先について明示承認がなく、以前の承認は前のrunに限定されていた」というもの。拒否後の再upload、inline送信、別format／経路による迂回、モデル取得・学習・元提供停止は全て0。原本・exact packet・未実行と再開点をprivate `Cocolon_CMEE_AR04_Model3_Inference_Prepared_20261110.zip` に保存する。
+
+STRUCTURE_MAP_DELTA_NONE：今回は既存runnerとwireの準備・接続の読取だけで、アプリのsource／test／owner／公開DTO／API／保存schema／DB／RNを変えていない。新pytest／CIは0、前回の5176 PASSと両CIは前回の実績のまま。CPUでの入力再構築、syntax、manifest／CRCの一致を実4B応答や商品品質creditへ換算しない。今回のoutcomeは準備・停止記録であり、正式受入れ0/3・他AR残件は維持。
+
+次は今回の13577byte packetを既存Runpodへ送ることと、一回だけの無学習9HTTP確認についてMashの明示確認を得てから実行する。新3はGENERAL01／07／08、保持2はFOCAL02／REGISTER_HELD02。全600秒・復元予約120秒、再試行0、Piece load1。今回の送信拒否を別形式／別経路で迂回せず、旧4入力run／旧48更新runの承認を再使用しない。新3の実4B本文は未取得。引用一般・新f6daeで旧53全件の生成回帰・広い一般文章・同版画像／通常統合／本人端末は未完。新規GPU／依存／通常採用／selector有効化／Render／live DB／RN／buildの自動実行0。

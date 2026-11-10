@@ -2603,3 +2603,13 @@ APId7442335で旧引用境界readerをPieceの原sourceへ限定接続。GENERAL
 最終関連31file5176 PASS／FAIL・skip0、既存warning1。新quote52件と既存境界等を含む補正focused125 PASS。APId7442335のPiece／Analysis CIは対象head一致・attempt1で全成功。Piece run42799640908／job129773578374は全39step成功（model主要1226 PASS、境界選択78 PASS／420 deselected）。Analysis run42799640715／job129773579066は全19step成功。追加実行／rerun0。 新3は独立CPU作文、今回GPU／新model応答0。[全結果と未対応範囲](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-single-quote-context-reader-20261110)。
 
 次はsource資格化したGENERAL01／07／08の新しい実4B応答を確認し、完全対象・本人表記・時点／肯否・引用と外側の発言者／感情・自然な本文・同版保存を照合する。同3の原7項目・prepared identity・現行builderの送信messagesはprivateに準備済みだが未送信。CPU作文の採用を実モデル改善と呼ばない。引用一般の言い換え、引用内の名前・複数／多重・内部stop／CR/LF、広い一般文章、新f6daeで旧53全件の生成回帰、同版画像／通常統合／本人端末は未完。完了済み48更新／24HTTP比較を再実行せず、1baa条件追加も不採用。通常採用／selector有効化／live／実DB／buildの自動実行0。
+
+
+<a id="piece-model3-inference-prepared-20261110"></a>
+## 68. 補助経路AR-04 — 新3の無学習比較を準備、送信の自動審査で停止
+
+直近API d7442335の引用KEEP接続・元8source資格8/8、独立CPU3の9保存／再読と5176 PASS／両CI成功を継承。次の実4B確認は新3＋保持対照2、通常／分析前後control4の計9HTTP・学習0・復元込み600秒で準備した。13577byteの架空入力／既存runner流用ZIPは送信時の自動承認審査で拒否され、今回のpayload／宛先の明示確認待ち。今回upload・新生成・学習・提供停止0、通常採用／selector／本番変更なし。
+
+架空wireと既存no-training runnerだけの13577byte ZIPを準備。uploadは新payload／宛先への明示承認不足として自動承認審査が拒否し、迂回せず停止。新GPU取得・学習・提供停止0。STRUCTURE_MAP_DELTA_NONE、新pytest／CI0。[具体内容と未実行](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model3-inference-prepared-20261110)。
+
+次は今回の13577byte packetを既存Runpodへ送ることと、一回だけの無学習9HTTP確認についてMashの明示確認を得てから実行する。新3はGENERAL01／07／08、保持2はFOCAL02／REGISTER_HELD02。全600秒・復元予約120秒、再試行0、Piece load1。今回の送信拒否を別形式／別経路で迂回せず、旧4入力run／旧48更新runの承認を再使用しない。新3の実4B本文は未取得。引用一般・新f6daeで旧53全件の生成回帰・広い一般文章・同版画像／通常統合／本人端末は未完。新規GPU／依存／通常採用／selector有効化／Render／live DB／RN／buildの自動実行0。
