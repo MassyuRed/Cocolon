@@ -3910,3 +3910,11 @@ API1ce24b8cのpiece_model_sourceで、既存finite意味witnessの役割・肯�
 固定c634・46材料のCMEE44→46、H03／B2の受動否定だけを修復、他44raw同一。新SQL162全保存・選択preview＝保存行＝detailの本文／recipe等一致、quota各1・原入力／Emlis不変、保存後0生成。旧114は再実行0、合成Auth／等価合成IDの隔離PGliteでlive確認ではない。実58 HTTP／学習0・317.279043秒、元提供44511へ復元・health／前後control一致。[Piece CI42748647756](https://github.com/MassyuRed/mashos-api/actions/runs/42748647756)は全工程success（job129606715349／head1ce24b8c、03:24:22Z完了）。STRUCTURE_MAP_DELTA_PRESENT（private生成入力の境界拡張のみ、新owner／公開・保存契約追加0）。c634通常未採用／selector OFF、同版画像／本人端末未確認、旧5b1画像と8044欠測は別履歴として保持する。
 
 次のAR-04は、今回確認した有限意味条件と同一本文／recipeを保ち、preview／保存・画像の同版整合と、別材料での自然さ・単独伝達／一般本文品質を既存商品経路で確認する。c634は通常未採用の研究基準、selector OFFを維持し、通常重み採用・live配置／本人端末／署名buildへ自動進行しない。全量source資格、混在partの旧条件、本人表記・欄／補足分離、独立CMEE／保存責務を維持する。旧8044の失敗とB2欠測は閉じた履歴であり補完のため再起動しない。一般品質・正式0/3、AR-01反転と他ARは未完了として保持する。 [全実結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-passive-role-conditions-result-20261110)。
+
+## 2026-11-10 c634同版native画像の有限確認
+
+**11/10・AR-04最新：** API1ce24b8cの受動役割条件とc634の46件採用・新SQL162保存を継承。RN54113b85の実React Native／iOS simulatorで、修復2件・混在1件・refined1件の4作品について、preview／saved／export Card／view-shotの各4枚・計16PNGが作品ごとにbyte／RGBA一致。文字・否定・段落・Emlisロゴの欠けを目視で認めなかった。初回FRESH15 preview欠測はtest fixtureのFreeテーマ一覧不足を修復、初回既存15枚も最終とbyte一致。canvasは3method成功／旧WholeCanvas1失敗、ios-sourceのV4 19失敗を保持し、全CI成功とはしない。c634通常未採用／selector OFF・live0、一般品質・通常統合／本人端末・正式0/3は未完了。
+
+既存canonical→visual_recipe→PieceVisualCard→保存表示／exportの責務は不変。通常3作品とrefined FRESH15の選択済みrevision2だけを、隔離SQL原本から既存native hostへ接続した。初回palette不備の修正はtest fixtureとtestのみ、製品renderer変更0、STRUCTURE_MAP_DELTA_NONE。実画像4作品を再目視し、16PNGの作品内一致を再確認。旧実Q2の別refined・全46作品・通常統合／本人端末は今回の成功へ含めない。[実結果・全CI失敗の範囲](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-c634-native-same-version-20261110)。
+
+次のAR-04は、同版画像を確認した4作品と保存済み46本文・有限意味条件を継承し、別材料での自然さ・単独伝達／一般本文品質を既存商品経路で確認・改善する。4作品の画像一致を全46作品や一般品質へ広げず、通常統合／本人端末・残るnative検査失敗は別の未完了として保持する。c634は通常未採用の研究基準、selector OFFを維持し、通常重み採用・live配置／本人端末／署名buildへ自動進行しない。全量source資格、混在partの旧条件、本人表記・欄／補足分離、独立CMEE／保存責務を維持する。旧8044の失敗とB2欠測は閉じた履歴であり補完のため再起動しない。同じfitやSYSTEM指示の周回、欠測補完の追加生成は行わない。一般品質・正式0/3、AR-01反転と他ARは未完了として保持する。

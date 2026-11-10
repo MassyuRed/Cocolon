@@ -799,3 +799,32 @@ REGISTER_HELD03は原文の「依頼を受けなかった」という受動否�
 STRUCTURE_MAP_DELTA_PRESENT（既存ownerのprivate生成条件境界のみ、新owner・公開／保存契約追加0）。この有限実装を保持するが、c634の通常採用・selector有効化・live配置／DB変更／署名build／本人端末操作0。新c634本文の同版画像・通常統合・一般品質／正式受入れ0/3は未完了、旧5b1 FRESH03画像一致を転用しない。限定TECHNICAL_CREDIT・正式商品credit0。[今回の検証原本](https://chatgpt.com/library?file_id=libfile_fde3_f-ee1bb198b4508191be390c8efa175b0d_2f7470f963808191aaebf050935e72de&account_id=personal)。
 
 次のAR-04は、今回確認した有限意味条件と同一本文／recipeを保ち、preview／保存・画像の同版整合と、別材料での自然さ・単独伝達／一般本文品質を既存商品経路で確認する。c634は通常未採用の研究基準、selector OFFを維持し、通常重み採用・live配置／本人端末／署名buildへ自動進行しない。全量source資格、混在partの旧条件、本人表記・欄／補足分離、独立CMEE／保存責務を維持する。旧8044の失敗とB2欠測は閉じた履歴であり補完のため再起動しない。一般品質・正式0/3、AR-01反転と他ARは未完了として保持する。
+
+
+<a id="piece-c634-native-same-version-20261110"></a>
+## 2026-11-10 c634同版本文・recipeのnative画像 — 中断した結果保存を再開
+
+前セッションの結果保存中断から再開し、GitHubの実装・2回のActions実行・保存済みprivate SQL原本を再取得して照合した。会話全文や未保存scratchの完全取得はできておらず、「前会話を全て取得した」「未確認がない」とはしない。再取得した証拠の範囲で、未反映だった本結果を既存7資料へ保存する。原本の再読・画像比較であり、今回の新推論・学習・SQL再実行・native CI再実行は0。
+
+### 実装・原本対応
+
+RN [74993fef](https://github.com/MassyuRed/Cocolon/commit/74993fef0fa523045e482114f374af96d33f1421)で、既存native fixture組立・iOS host・renderer testと架空4作品fixtureの計4pathを更新した。後続[54113b85](https://github.com/MassyuRed/Cocolon/commit/54113b85e717ba1c435d15b8d17fd62cbb7b91ad)は同じfixture組立とrenderer testの2pathだけ。Freeの選択済みquiet_nightプレビューへ、許可済みsoft_paperとquiet_nightの両方を宣言する。選択recipe・本文・権利・製品rendererは変更せず、不完全なテーマ一覧が拒否される既存境界も維持した。累積変更は4path、新しい製品owner・公開／保存契約追加0、STRUCTURE_MAP_DELTA_NONE。
+
+fixtureはAPI1ce24b8c・c634の隔離SQL原本 `e94869805892e8fc4de2f68d2728a5997681dcb56b9c95eda6f0804e9aaf738a` から、REGISTER_HELD03／ORDER_HELD_B2／PASSIVE_HELD08／FRESH15のcandidate-Freeを無修補で抽出した。最初の3件は通常preview、FRESH15は明示画像変更後のselected_preview（revision2／quiet_night）を使う。4件ともdetailは保存原本と一致する。GPU原identityのlive保存、実ユーザー情報、通常アプリAuth／実Supabase一往復ではない。
+
+### 実画像・初回失敗・最終結果
+
+初回[run42751118726](https://github.com/MassyuRed/Cocolon/actions/runs/42751118726)／head74993fef／canvas job129614717426／artifact13734238100は4method中2成功・2失敗。WholeCanvasのissue summary59件と、FRESH15 preview不成立由来18件があった。FRESH15 saved／export Card／view-shotの3枚は取得済み、previewだけが欠測だった。これは本文の欠落やGPU生成失敗ではなく、test fixtureのFreeテーマ一覧が不完全だったためのpreview admission失敗である。
+
+修正後[run42754406573](https://github.com/MassyuRed/Cocolon/actions/runs/42754406573)／head54113b85／canvas job129625319761／artifact13736105050ではadmitted bitmap methodが成功し、4method中3成功・WholeCanvas1失敗。各作品のpreview／saved／export Card／view-shotの4枚、計16PNGは全て1080×1350で、作品ごとにPNG bytes・RGBAが完全一致した。初回に存在した15枚も最終の同名15枚と全byte一致し、初回欠測を過去成功へ改算しない。4作品の12report（admitted8＋export4）は全てnative_checked、body_preserved／native_canvas_valid、font48、overflowなし・全row no_missing_observed。全report数admitted29／bitmap12／export20を、新4作品の数や固有test数へ加算しない。
+
+rootが4作品を実画像として再目視し、受動否定・能動否定・過去の好み、refinedの原欄／補足の段落、全文とEmlisロゴが見え、欠けや順序違いを認めなかった。画像一致はこの4作品だけの有限確認であり、語りの自然さや全46作品、全refined、本人端末の商品受入れの成立ではない。
+
+WholeCanvas59件は初回／最終でmethod・source位置・添付dump前assert文の順序署名が一致した。時刻等を含むdump全文は不一致であり、原因解消・全native合格とはしない。両runのios-sourceはV4検査19件が失敗し、今回はsimulator起動障害ではない。最終rn-contractsは1429 PASSと別command291 PASS、いずれもFAIL／SKIP0で合算しない。Android-sourceとexport-pods／export-androidはsuccessだが、export両jobには変更対象外のnative工程skipがあり、Android実描画や写真保存の新成功へ広げない。
+
+### 保存・境界・再開点
+
+初回／最終のZIP・report・XCResult・log、4作品fixture、既存PassiveRole原本、今回の比較と確認範囲を[private継続bundle](https://chatgpt.com/library?file_id=libfile_fde3_f-6ad1ac51f3b081919e6c1a9b04316af1_2f7470f963808191aaebf050935e72de&account_id=personal)へ保存した（ZIP SHA256 `48d116984c5a7f953a1d0360168d1d86a2e55a5f7e8a3dfa3fbf2ad118ed92d4`）。失敗原本を上書きしない。API・GPU serving・source文法・SYSTEM・独立CMEE・DB・課金・製品RNの変更0、署名build／配布／本人端末確認0。c634通常未採用、selector OFF、本番反映0、限定TECHNICAL_CREDIT・正式商品credit0／正式受入れ0/3を維持する。
+
+次のAR-04は、同版画像を確認した4作品と保存済み46本文・有限意味条件を継承し、別材料での自然さ・単独伝達／一般本文品質を既存商品経路で確認・改善する。4作品の画像一致を全46作品や一般品質へ広げず、通常統合／本人端末・残るnative検査失敗は別の未完了として保持する。c634は通常未採用の研究基準、selector OFFを維持し、通常重み採用・live配置／本人端末／署名buildへ自動進行しない。全量source資格、混在partの旧条件、本人表記・欄／補足分離、独立CMEE／保存責務を維持する。旧8044の失敗とB2欠測は閉じた履歴であり補完のため再起動しない。同じfitやSYSTEM指示の周回、欠測補完の追加生成は行わない。一般品質・正式0/3、AR-01反転と他ARは未完了として保持する。
+

@@ -2508,3 +2508,15 @@ API1ce24b8cの既存生成owner1＋検証2pathを保持。全量資格済み受�
 実58 HTTP＝新8before＋全46after＋control4、新Piece54・同c634の1load・学習0、旧38beforeは保存応答を再資格化した再利用。新SQL162（before24＋after138）は全保存・0拒否、旧114（108保存／6拒否）は再資格化のみ・再実行0。選択preview／保存行／detailの本文・recipe等一致、quota各1・原入力／Emlis不変・保存後0生成。合成Auth／等価合成IDの隔離SQLでlive DB／本人端末ではない。
 
 初回はtokenizer型の技術中断5.424490秒・HTTP0／元停止0、原本を保持して実serving APIに合わせた別namespaceで一回比較した。実比較317.279043秒・入力最大2343tokens＋2048≤8192、元提供44511へ復元・health／前後control一致。局所114と別集合17file1046 PASSを加算せず記録。[Piece CI42748647756](https://github.com/MassyuRed/mashos-api/actions/runs/42748647756)は全工程success（job129606715349／head1ce24b8c、03:24:22Z完了）。STRUCTURE_MAP_DELTA_PRESENT（private条件境界のみ、新owner／公開・保存契約追加0）、source文法／SYSTEM／独立CMEE不変。c634通常未採用／selector OFF・live0、費用未測定・一般品質／同版画像／本人端末・正式0/3未完了。次のAR-04は、今回確認した有限意味条件と同一本文／recipeを保ち、preview／保存・画像の同版整合と、別材料での自然さ・単独伝達／一般本文品質を既存商品経路で確認する。c634は通常未採用の研究基準、selector OFFを維持し、通常重み採用・live配置／本人端末／署名buildへ自動進行しない。全量source資格、混在partの旧条件、本人表記・欄／補足分離、独立CMEE／保存責務を維持する。旧8044の失敗とB2欠測は閉じた履歴であり補完のため再起動しない。一般品質・正式0/3、AR-01反転と他ARは未完了として保持する。 [全実結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-passive-role-conditions-result-20261110)。
+
+
+<a id="piece-c634-native-same-version-20261110"></a>
+## 59. 補助経路AR-04 — c634同版4作品のnative画像と未保存結果の復元
+
+**11/10・AR-04最新：** API1ce24b8cの受動役割条件とc634の46件採用・新SQL162保存を継承。RN54113b85の実React Native／iOS simulatorで、修復2件・混在1件・refined1件の4作品について、preview／saved／export Card／view-shotの各4枚・計16PNGが作品ごとにbyte／RGBA一致。文字・否定・段落・Emlisロゴの欠けを目視で認めなかった。初回FRESH15 preview欠測はtest fixtureのFreeテーマ一覧不足を修復、初回既存15枚も最終とbyte一致。canvasは3method成功／旧WholeCanvas1失敗、ios-sourceのV4 19失敗を保持し、全CI成功とはしない。c634通常未採用／selector OFF・live0、一般品質・通常統合／本人端末・正式0/3は未完了。
+
+初回run42751118726のFRESH15 previewはtest fixtureのFree palette不足で欠測、54113b85が既存2pathで完全な許可paletteを宣言した。最終run42754406573で4作品各preview／saved／export Card／view-shot＝16PNGが作品内byte／RGBA一致、初回既存15枚も最終同名と一致した。4作品をrootが再目視し、文字／否定・過去／段落／Emlisロゴの欠けを認めなかった。新規推論・学習・SQL／CI再実行0。4作品12reportはnative_checked／body_preserved／native_canvas_validでoverflowなし。
+
+全CI成功ではない。canvas最終3method成功／旧WholeCanvas1失敗（59 summary、初回とのmethod／位置／assert順序署名一致、dump全文は不一致）。両runのios-sourceはV4 19失敗で、今回は起動障害ではない。最終rn-contractsは1429 PASSと別command291 PASS（合算しない）。Android-source／export-pods／export-android successには変更対象外工程skipを含み、新Android実描画・実写真保存へ加算しない。
+
+前セッションの7資料結果保存中断から、GitHub実装・Actions2原本とprivate SQL原本を再取得して復元した。過去会話全文・未保存scratchの完全取得は未確認。初回失敗／旧8044 B2欠測を保持。STRUCTURE_MAP_DELTA_NONE、製品source／API／DB／renderer変更0、通常重み未採用／selector OFF／live0／署名配布0・正式0/3。次のAR-04は、同版画像を確認した4作品と保存済み46本文・有限意味条件を継承し、別材料での自然さ・単独伝達／一般本文品質を既存商品経路で確認・改善する。4作品の画像一致を全46作品や一般品質へ広げず、通常統合／本人端末・残るnative検査失敗は別の未完了として保持する。c634は通常未採用の研究基準、selector OFFを維持し、通常重み採用・live配置／本人端末／署名buildへ自動進行しない。全量source資格、混在partの旧条件、本人表記・欄／補足分離、独立CMEE／保存責務を維持する。旧8044の失敗とB2欠測は閉じた履歴であり補完のため再起動しない。同じfitやSYSTEM指示の周回、欠測補完の追加生成は行わない。一般品質・正式0/3、AR-01反転と他ARは未完了として保持する。 [全結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-c634-native-same-version-20261110)。

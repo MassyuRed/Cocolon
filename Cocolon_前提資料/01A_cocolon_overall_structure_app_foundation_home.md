@@ -6474,3 +6474,14 @@ API1ce24b8cの全変更は次の3path。STRUCTURE_MAP_DELTA_PRESENTは既存priv
 | API `ai/tests/test_piece_model_authoring_application.py` | 設定済みsourceから実transport用messagesを検証し、正しい受動過去だけを独立CMEEへ通し、能動反転・非過去・肯定変化を拒否する。 |
 
 同c634の46材料は44→46採用、H03／B2だけ意味修復・他44raw同一、新SQL162全保存・保存後0生成。[Piece CI42748647756](https://github.com/MassyuRed/mashos-api/actions/runs/42748647756)は全工程success（job129606715349／head1ce24b8c、03:24:22Z完了）。c634通常未採用／selector OFF・live0、一般品質／同版画像／本人端末未確認。 [実分母・根拠・次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-passive-role-conditions-result-20261110)。
+
+## 2026-11-10 AR-04 c634同版画像のnative検証地図
+
+**11/10・AR-04最新：** API1ce24b8cの受動役割条件とc634の46件採用・新SQL162保存を継承。RN54113b85の実React Native／iOS simulatorで、修復2件・混在1件・refined1件の4作品について、preview／saved／export Card／view-shotの各4枚・計16PNGが作品ごとにbyte／RGBA一致。文字・否定・段落・Emlisロゴの欠けを目視で認めなかった。初回FRESH15 preview欠測はtest fixtureのFreeテーマ一覧不足を修復、初回既存15枚も最終とbyte一致。canvasは3method成功／旧WholeCanvas1失敗、ios-sourceのV4 19失敗を保持し、全CI成功とはしない。c634通常未採用／selector OFF・live0、一般品質・通常統合／本人端末・正式0/3は未完了。
+
+- `tests/native/piece-rn-canvas-passive-role.json`: 記録済みc634の架空4作品、通常3とrefined1の選択済みpreview／保存detailを束縛する。隔離SQL原本hashを保持。
+- `tests/native/piece-rn-canvas-fixtures.cjs`: 上記4作品を既存admitted／export fixtureへ接続する。後続54113b85はFRESH15のFree許可paletteだけを完全宣言。
+- `tests/native/piece-rn-canvas-ios.m`: 既存実RN hostの比較で上記fixtureを検証する。
+- `tests/piece-v2-renderer.test.js`: preview／保存版の同一本文・recipeと、不完全paletteの拒否を検証する。
+
+累積は上記4path、製品source／renderer・公開契約・DB・作者・保存責務追加0、STRUCTURE_MAP_DELTA_NONE。[native結果・失敗と範囲](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-c634-native-same-version-20261110)。

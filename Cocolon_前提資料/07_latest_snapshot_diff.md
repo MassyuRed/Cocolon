@@ -41791,3 +41791,9 @@ Mashの明示指示により[00_cocolon_current_product_and_state.md](00_cocolon
 ## 2026-11-10 — AR-04 固定c634のsource役割条件で2件修復、46材料を保持
 
 API1ce24b8cは既存private生成条件へ全量資格済み受動fieldの原文／役割を投影。同c634の46材料はCMEE44→46、H03／B2の受動否定2件を修復し他44raw byte一致、新8は8→8。実58HTTP／新Piece54／1load／学習0、旧38before応答再利用。新SQL162全保存・保存後0生成、旧114再実行0。実比較317.279043秒、元提供44511へ復元・health／前後control一致。別の初回tokenizer技術中断はHTTP0・元停止0のまま原本保持。[Piece CI42748647756](https://github.com/MassyuRed/mashos-api/actions/runs/42748647756)は全工程success（job129606715349／head1ce24b8c、03:24:22Z完了）。STRUCTURE_MAP_DELTA_PRESENT（既存ownerのprivate条件境界のみ、新owner／公開・保存契約追加0）。c634通常未採用・selector OFF、live／同版画像／本人端末／一般品質・正式0/3未完了、旧8044失敗／B2欠測は補完しない。 [全実結果](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-passive-role-conditions-result-20261110)。
+
+# 2026-11-10 AR-04 c634同版本文／recipeのnative画像と中断保存の再開
+
+**11/10・AR-04最新：** API1ce24b8cの受動役割条件とc634の46件採用・新SQL162保存を継承。RN54113b85の実React Native／iOS simulatorで、修復2件・混在1件・refined1件の4作品について、preview／saved／export Card／view-shotの各4枚・計16PNGが作品ごとにbyte／RGBA一致。文字・否定・段落・Emlisロゴの欠けを目視で認めなかった。初回FRESH15 preview欠測はtest fixtureのFreeテーマ一覧不足を修復、初回既存15枚も最終とbyte一致。canvasは3method成功／旧WholeCanvas1失敗、ios-sourceのV4 19失敗を保持し、全CI成功とはしない。c634通常未採用／selector OFF・live0、一般品質・通常統合／本人端末・正式0/3は未完了。
+
+RN74993fef→54113b85、初回run42751118726／最終run42754406573を再取得。4作品×4画像＝16PNGの作品内byte／RGBA一致と、初回存在15枚の最終同名一致を再確認。初回preview欠測と旧WholeCanvas59 summary／ios-source V4 19失敗を保持し、全CI成功にしない。今回の新推論・学習・SQL／native CI再実行0。前セッションの7資料への結果保存は未反映だったため、既存ownerに復元保存する。会話全文・未保存scratchの完全継承は未確認で、GitHub・private保存原本と再取得証拠の範囲を継承した。[全結果・残件・次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-c634-native-same-version-20261110)。
