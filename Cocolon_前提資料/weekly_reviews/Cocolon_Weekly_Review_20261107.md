@@ -2466,3 +2466,13 @@ STRUCTURE_MAP_DELTA_PRESENT（既存source target admissionの受理境界を拡
 次は、新資格FRESH03を含む現在の生成条件と候補本文の一致を通常経路で確認し、意味保持済み候補の同版画像・保存再読へ接続する。FRESH07の常体／丁寧体混在等は一般文章品質の残件として保持する。今回の一文比較を周回せず、第三学習・重み通常採用へ自動進行しない。AR-01の役割反転と他ARの残件も継続する。
 
 [全実結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-activity-source-natural-narrator-20261110)。
+
+
+<a id="piece-current-wire-register-native-20261110"></a>
+## 55. 補助経路AR-04 — 現行FRESH03確認、文末案不採用と同版画像検証
+
+FRESH03の現行SYSTEM／新source条件付きUSERを実4Bへ一回送り、既存の正しい本人本文・CMEE採用・3plan保存再読を確認した。別の文末統一指示は同26rawが全一致で効果0、FRESH07の混在も残り不採用。既存SYSTEM／製品sourceは不変。実31 HTTP＝新Piece27＋control4、runner187.4602546秒、41729へ元提供を復元しhealth／前後control一致。現行FRESH03のSQL3＋文末案SQL78＝新81保存、quota各1・保存後0生成。現行builderの条件一致を確認したdirect HTTPと、合成Auth／等価合成IDの隔離PGliteであり、live DB／本人端末ではない。
+
+API fce72bccで旧1期待、後続4da69cdeで近傍旧3期待を、決定済み1..420文字・短文水増しなしへ整合した。累積は既存4test＋workflowの5pathで製品source不変。前段関連1142 PASS（活動名37を含む）と現行選択41 PASSを別集合として保持。全4testfileは384 PASS／2 FAILで、残る過去参照のSELF表記／modal採否の2期待はfceでも同一失敗、今回変更しない。RN4424976bは現行FRESH03保存preview／detailのnative fixtureを既存4testpathへ接続、旧fixture／legacy入力を保持。関連1428 PASS（renderer183を含む）。API CI [42725970549](https://github.com/MassyuRed/mashos-api/actions/runs/42725970549)はfce版の全39工程success（model1000＋選択38）、最終API4da69cdeのCI42727546907も全39工程success（model1000＋選択41）。Analysisは同headの変更path対象外で未実行。native CI [42726292049](https://github.com/MassyuRed/Cocolon/actions/runs/42726292049)の現行FRESH03同版PNG4はbyte／RGBA一致・全文／ロゴを目視確認。canvasは4method中3 PASS／旧WholeCanvas1 FAIL（issue summary59件のmethod名／順は前回基準に一致、今回stdoutのfailure event101件と前回の件数一致は未確認）、ios-sourceはsimctl起動障害cancelled。全CI成功・通常統合・本人端末の成立ではない。
+
+STRUCTURE_MAP_DELTA_NONE、限定TECHNICAL_CREDIT・正式受入れ0/3。学習／通常重み採用／selector有効化／本番反映／署名配布／本人端末確認0。一般品質・FRESH07混在・AR-01反転と他ARは未完了。次のAR-04は、受動依頼と能動否定が同欄にあるFRESH07型の文末混在を、既存4B作者の自然文実現で改善する単位へ進む。保存5b1の原教師24行は全文確認済みでtargetは全て常体、明示受動依頼の丁寧体→常体と同欄の能動否定を組み合わせた例はなかった。この限定された教材被覆と実raw・既存の活用／同義表現知識から生成側の改修箇所を選び、同source前後・別題材・既成功対照を既存CMEE／保存再読まで確認する。原因・学習要否は未確定で、SYSTEM指示周回・生成後補修・第三学習／通常重み採用を自動実行しない。通常統合／本人端末・一般品質、旧canvas失敗／ios-source起動障害、AR-01反転と他ARも残件として保持する。 [実結果・範囲](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-current-wire-register-native-20261110)。

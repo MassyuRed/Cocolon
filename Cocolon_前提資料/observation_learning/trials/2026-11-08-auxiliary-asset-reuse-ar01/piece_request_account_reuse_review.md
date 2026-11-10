@@ -1,5 +1,7 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
+> **11/10現在：** FRESH03現行wireの実4B・CMEE・隔離保存再読を確認。文末統一案は全26raw不変で不採用。同版native PNG4のbyte／RGBA一致を確認。canvas全体の旧WholeCanvas失敗継続・ios-source起動障害は保持。[今回の実結果](#piece-current-wire-register-native-20261110)。
+
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
 ## 改修と意味の境界
@@ -688,3 +690,23 @@ API `625b4704027abd52749222196b990edd3d4373e4`（活動名source／対応test／
 STRUCTURE_MAP_DELTA_PRESENT（既存source target admissionの受理境界を拡張）。新owner・共有contract／役割判断／保存／意味検査Gateは作らず、Piece map／01Aの既存ownerへ反映。本番／実DB／RN／signed build／今回native画像／本人端末・通常重み採用0。限定TECHNICAL_CREDIT、正式商品品質credit0・正式受入れ0/3を維持。private原本`Cocolon_CMEE_AR04_ActivitySource_NaturalNarrator_20261110.zip`、旧5b1重みは前回保存原本を参照し重複保存しない。
 
 次は、新資格FRESH03を含む現在の生成条件と候補本文の一致を通常経路で確認し、意味保持済み候補の同版画像・保存再読へ接続する。FRESH07の常体／丁寧体混在等は一般文章品質の残件として保持する。今回の一文比較を周回せず、第三学習・重み通常採用へ自動進行しない。AR-01の役割反転と他ARの残件も継続する。
+
+
+<a id="piece-current-wire-register-native-20261110"></a>
+## 2026-11-10 現行FRESH03の実4B確認・文末統一案不採用と同版native検証
+
+FRESH03の新source条件付きUSERという前回の未確認1件を、API c70671a8の現行builderから再導出し、既存5b1重みへ一回送った。SYSTEM／USER、原入力7field、source／PreparedRequestは保存packetと一致し、実rawは既存の正しい本人本文と同一、CMEE採用へ到達した。元の留保・活動名評価を保持し、新しい意味修復や一般品質向上とは数えない。接続検証用のdirect HTTPであり、通常アプリのlive Auth／DB／本人端末の一往復ではない。
+
+別に、FRESH07の常体／丁寧体混在を対象に共通一文「文末の丁寧さは、同じ作品内で一貫させてください。」だけをSYSTEMへ加えて同26材料を比較した。現行基準は前回の完全同一request25応答＋今回のFRESH03一応答を再利用し、新26rawは全26ともbyte一致、CMEEは基準26／新26採用。原文26・補足4・対応する52本文のroot／独立読解でも新たな意味欠落は観測せず、FRESH07の混在も残った。効果0のため追加文は不採用、既存SYSTEM／製品sourceを変更しない。前回の読点指示によるFRESH12の改善を再計上せず、同じ指示追加を周回しない。 FRESH07の現行wireは既存方針により受動fieldの動作条件を追加していないが、それを文体混在の原因と断定しない。既存finite readerは意味を保つ常体／丁寧体の両方を既に読めるため、本文生成の文末実現を次の対象とし、reader範囲を広げる作業へ置換しない。 さらに、保存済みBalancedTemporalScope原本の24教師（保持16＋既使用trial8）をsource／targetとも全文確認し、data hashと実48更新・5b1重みの既存実行記録を照合した。target24は全て常体で、受動の原文context6は既に常体のopaque文。明示SELFの依頼／相談／伝達の受動丁寧体→常体、あるいは同欄のその受動と能動否定の組合せは0行だった。これは今回確認した24行の被覆不足であり、文体混在の原因や追加学習の必要性を証明しない。FRESH07を未知評価のまま教師へ流用せず、既使用評価として保持する。
+
+実HTTPは31（新Piece27＝現行FRESH03一回＋文末案26、前後control4）、全200／stop。runner187.4602546秒、元提供PID41313から同args／env／cwd／keysの41729へ復元し、health・自然Emlis／Analysis前後controlのresponse bytes一致。5b1／旧e924／Analysis重みとserving sourceは不変。追加学習0・再試行0、総保持／請求と通常原価は未測定。
+
+隔離SQLは現行FRESH03の3plan保存再読＋文末案26×3planの78、合計新81試行を全保存。本文／recipe等・quota各1・原入力／Emlis不変、保存後の同／新service再読は0生成。これは等価な新しい合成ID／日時へ実rawを無修正で再bindしたPGlite・合成Auth／SQL callbackの実績であり、GPU原identityのlive Supabase保存ではない。前回78や準備時の旧FRESH01応答smoke3を81へ加算しない。
+
+API [fce72bcc](https://github.com/MassyuRed/mashos-api/commit/fce72bcc8aa7a920a4a0ebc33148330d0017bd9b)は既存testとworkflowの2pathのみ。旧24文字下限を前提に短文を拒否していた1期待を、11/1決定済みのsource-scaled short_essay（1..420文字・水増しなし）へ整合した。source原文・確定短文・format／非declarationを確認し、製品source、受理文法、意味検査を変えない。活動名37を含む関連1142 PASS（37を別加算しない）。追加で観測した近傍旧3期待も[4da69cde](https://github.com/MassyuRed/mashos-api/commit/4da69cde721c57bc2236bdd27d7a31068655e806)で同じ仕様へ整合した。差分は既存3testとworkflow、fceからの累積は既存5pathのみ。現行workflow選択41 PASS、全4testfileは384 PASS／2 FAILで、残る過去参照のSELF表記とmodal採否の2期待は修正前fceでも同一失敗を確認して変更しない。選択41を全4file384へ加算しない。API CI [42725970549](https://github.com/MassyuRed/mashos-api/actions/runs/42725970549)は全39工程success（model1000＋選択38）。最終API4da69cdeのCI [42727546907](https://github.com/MassyuRed/mashos-api/actions/runs/42727546907)／job129536945856も全39工程success（model1000 PASS／55.03秒・既存warning1、選択41 PASS／2.58秒・345 deselected）。同headのAnalysis CIは変更path対象外で未実行。
+
+RN [4424976b](https://github.com/MassyuRed/Cocolon/commit/4424976b521c0fd592608aa50adc1646ef1102e6)は既存native／renderer検証の4pathだけ。現行FRESH03のfree保存preview／detailを同版fixtureへ渡し、旧AR-04 fixtureと全legacy入力を保持する。本文・recipe・hash・ios.v2 rendererは記録値のままで、test時計へのpreview有効期限と既存合成HTTP envelopeだけを投影する。関連1428 PASSはrenderer183を含む集合で、183を別加算しない。native CI [42726292049](https://github.com/MassyuRed/Cocolon/actions/runs/42726292049)のcanvas job129532645232で、現行FRESH03のpreview／saved／export Card／view-shot PNG4を取得し、全て1080×1350、PNG byteとRGBAが一致した（PNG SHA-256 `1febd617629294acf3f76678a3b29e223c03039bc26a24addcb1b5fe7edb9940`）。本文2文とEmlisロゴはnative_textsとも一致、font48・本文3行＋ロゴ、no_missing_observed／overflowなし。rootが実PNGを目視し全文とロゴの可読・欠けなしを確認した。preview／saved／exportの406.81／308.82／281.72msは隔離iOS host内の各単発描画で、通常アプリの待ち時間ではない。admitted21／export16のreportを取得した一方、canvas全体は4test method中3 PASS／1 FAIL。admitted・bitmap・exportの3methodは成功し、既存`testWholeCanvasWithRealReactNative`が失敗した。XCResult issue summary59件のmethod名／順は前回基準に一致する一方、今回stdoutのfailure eventは101件で、前回の101件は未回収のためevent件数一致を主張しない。59をassertion件数とは扱わない。全体CIを成功と扱わない。ios-source job129532645021はcompile後のsimctl launchでNSMachError −308（ipc/mig server died）となりcancelled。この別jobではnative／bitmap／AR-04結果を取得できておらず、旧V4の19失敗を今回の再現として数えない。今回画像確認は保存済み架空同作品・同版recipeを使う隔離iOS RN hostの有限実績で、live Auth／DB・通常統合・本人端末・一般画像品質の成立ではない。
+
+STRUCTURE_MAP_DELTA_NONE（今回の製品責務・source文法・API／DB／rendererは不変、testのみ）。限定TECHNICAL_CREDIT、正式商品品質credit0・正式受入れ0/3。追加学習・新重み採用・通常selector有効化・本番反映・署名配布・本人端末確認0。一般文章品質、FRESH07混在、通常統合、AR-01役割反転と他ARの残件を維持する。
+
+次のAR-04は、受動依頼と能動否定が同欄にあるFRESH07型の文末混在を、既存4B作者の自然文実現で改善する単位へ進む。保存5b1の原教師24行は全文確認済みでtargetは全て常体、明示受動依頼の丁寧体→常体と同欄の能動否定を組み合わせた例はなかった。この限定された教材被覆と実raw・既存の活用／同義表現知識から生成側の改修箇所を選び、同source前後・別題材・既成功対照を既存CMEE／保存再読まで確認する。原因・学習要否は未確定で、SYSTEM指示周回・生成後補修・第三学習／通常重み採用を自動実行しない。通常統合／本人端末・一般品質、旧canvas失敗／ios-source起動障害、AR-01反転と他ARも残件として保持する。

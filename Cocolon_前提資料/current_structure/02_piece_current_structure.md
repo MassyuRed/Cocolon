@@ -1,4 +1,4 @@
-> **11/10・補助経路AR-04最新：** 活動名source資格と候補promptの一文を既存ownerへ接続。保存26rawは25→26採用、固定5b1の文体比較ではFRESH12だけ自然さ改善・他25raw不変。通常重み未採用／selector OFF。[今回の境界と実結果](#piece-activity-source-natural-narrator-20261110)。
+> **11/10・補助経路AR-04最新：** FRESH03の現行wire実4B→CMEE→隔離保存再読を確認。文末統一指示は26raw不変で不採用。native同版PNG4はbyte／RGBA一致、canvas全体は旧WholeCanvasの失敗継続・ios-sourceはsimctl障害cancelled。通常重み未採用／selector OFF。[実結果・範囲](#piece-current-wire-register-native-20261110)。
 
 > **11/7最新・DB／API反映、統合iOSビルド・送信成功：** Free初期2色／Plus・Premium12色、両比率・ロゴ有無を選ぶ権利を、配色migration actual20261107020543（CHECK validated）とAPI5065730eへ反映。Render dep-dbn8h2jl550s73efmcngは11:12:02 JST Live、health/bootstrap200・private5ON/public3OFF・本人境界7smoke期待どおり。対応RN e0ec6d6aのrun42328190568／#75 attempt1は11:14:01 JST開始、11:28:26 JSTに全19step成功。Archive・写真目的文検査・IPA・Upload成功。Apple側の1.0（7501）を照合し、既存内部グループ「Emlis テスト版配布」でTestingを確認。後続にMashから大ボタン・Piece関係の今回修正の実機確認を受領（第10回§14）。分析の実機確認は未実施。旧clientのcapabilitiesと履歴互換、保存recipe／hashを維持。DML／RLS・画像本文・保存枠・公開範囲は変更なし。[準備§12と実反映§13](../weekly_reviews/Cocolon_Weekly_Review_20261107.md#piece-ui-live-and-ios-build-20261107)。
 
@@ -3870,3 +3870,13 @@ STRUCTURE_MAP_DELTA_PRESENT。新e924候補と完了48更新を繰り返さず�
 STRUCTURE_MAP_DELTA_PRESENT。API625b470＋c70671a8の累積5pathは01Aの同anchorへ。source再受領26／SQL78と新文体raw26／SQL78を分離し、未実施の一般文章・native画像・本人端末へ拡張しない。最終model17fileは1000 PASS／87.28秒・既存warning1、新活動名37 PASS／2.70秒。合計1037はこの二つの非重複集合だけで、旧2file再確認309 PASS／1 FAILを加算しない。既存`test_short_bare_input_is_not_padded_to_satisfy_a_format`は、短い「僕は絵が好き。」を拒否する旧期待に対し本文を生成して失敗する。開始c9の同source関数へ戻した実testも同じ失敗で、期待変更・skip／xfailは行わず既存残件へ記録した。最終API c70671a8のPiece CI42721103246は全39step success（model1000 PASS／57.25秒、活動名37 PASS／2.28秒）。source625b470のAnalysis CI42720193625は全19step success。最終promptのみのpathはAnalysis起動対象外であり、最終API同headのAnalysis成功とは呼ばない。
 
 [実結果・次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-activity-source-natural-narrator-20261110)。次は、新資格FRESH03を含む現在の生成条件と候補本文の一致を通常経路で確認し、意味保持済み候補の同版画像・保存再読へ接続する。FRESH07の常体／丁寧体混在等は一般文章品質の残件として保持する。今回の一文比較を周回せず、第三学習・重み通常採用へ自動進行しない。AR-01の役割反転と他ARの残件も継続する。
+
+
+<a id="piece-current-wire-register-native-20261110"></a>
+## 2026-11-10 現行FRESH03と同版本文／native検証
+
+FRESH03の残っていた現行USERを実4B一回で確認し、既存の正しい本人本文とCMEE採用を保持、free／plus／premiumで隔離保存再読した。通常のsource／PreparedRequest／messages builderを使用したがtransportはdirect HTTP、保存は合成Auth／等価合成IDのPGliteであり、live統合ではない。別の文末統一一文は同26rawが全一致で効果なし、不採用。既存SYSTEM、有限読取、採否、保存後非生成の責務は不変。実31HTTP（Piece27＋control4）・187.4602546秒、元提供41729へ復元・health／前後control一致。新SQL3＋78＝81全保存、quota各1・原入力／Emlis不変・保存後0生成。
+
+API fce72bccの旧短文1期待と後続4da69cdeの近傍3期待を、既決1..420文字・水増しなしへ整合。累積は既存4test＋workflowの5pathのみ。前段関連1142 PASSと現行選択41 PASSは別集合。全4file384 PASS／2 FAILで、残る過去参照のSELF表記／modal採否2期待は修正前fceでも同一失敗を確認し変更しない。RN4424976bのnative fixture／host／renderer test4pathへ同じ現行FRESH03保存preview／detailを接続し、旧fixture／legacy入力を保持。local1428 PASSはrenderer183を含む。fce版API CI42725970549は全39工程success、最終API4da69cdeのCI42727546907も全39工程success（model1000＋選択41）。Analysisは同headの変更path対象外で未実行。native CI42726292049の現行FRESH03 preview／saved／export Card／view-shot PNG4は1080×1350、byte／RGBA一致。本文2文・Emlisロゴを目視し、欠け／overflowなしを同作品の範囲で確認。canvas全体は旧WholeCanvasの失敗継続、ios-sourceはsimctl障害cancelled。製品renderer修正・全native合格・本人端末確認へ換算しない。
+
+STRUCTURE_MAP_DELTA_NONE。通常重み未採用／selector OFF、追加学習・本番反映・署名配布・本人端末0、正式0/3。次のAR-04は、受動依頼と能動否定が同欄にあるFRESH07型の文末混在を、既存4B作者の自然文実現で改善する単位へ進む。保存5b1の原教師24行は全文確認済みでtargetは全て常体、明示受動依頼の丁寧体→常体と同欄の能動否定を組み合わせた例はなかった。この限定された教材被覆と実raw・既存の活用／同義表現知識から生成側の改修箇所を選び、同source前後・別題材・既成功対照を既存CMEE／保存再読まで確認する。原因・学習要否は未確定で、SYSTEM指示周回・生成後補修・第三学習／通常重み採用を自動実行しない。通常統合／本人端末・一般品質、旧canvas失敗／ios-source起動障害、AR-01反転と他ARも残件として保持する。 [実結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-current-wire-register-native-20261110)。

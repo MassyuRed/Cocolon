@@ -1,4 +1,4 @@
-> **11/10・AR-04変更file地図：** 活動名source資格と実比較した候補文体一文の累積5pathは[本file末尾](#piece-activity-source-natural-narrator-20261110)。STRUCTURE_MAP_DELTA_PRESENT、通常重み未採用。
+> **11/10・AR-04変更file地図：** API短文test整合累積5pathとRN同版画像検証4pathを追加記録。製品source／責務は不変でSTRUCTURE_MAP_DELTA_NONE。現行FRESH03の同版PNG4は一致、canvas全体の旧WholeCanvas失敗継続とios-source起動障害は保持。[今回の9path](#piece-current-wire-register-native-20261110)。
 
 > 11/4のPiece作成・本文・書き出し候補は、末尾の[ファイル差分](#piece-format-language-export-files-20261104)と週次レビュー§141を参照。
 
@@ -6417,3 +6417,23 @@ API `625b4704027abd52749222196b990edd3d4373e4`＋`c70671a85a985c75a04f7c0ee35519
 STRUCTURE_MAP_DELTA_PRESENTはsource target資格の限定拡張による。役割判断／保存／意味検査Gateの新設ではなく、CMEE共有mapの責務／契約は不変。現normal送信25例は実比較と完全一致、FRESH03の新source生成条件付きUSERは実4B未確認。最終model17fileは1000 PASS／87.28秒・既存warning1、新活動名37 PASS／2.70秒。合計1037はこの二つの非重複集合だけで、旧2file再確認309 PASS／1 FAILを加算しない。既存`test_short_bare_input_is_not_padded_to_satisfy_a_format`は、短い「僕は絵が好き。」を拒否する旧期待に対し本文を生成して失敗する。開始c9の同source関数へ戻した実testも同じ失敗で、期待変更・skip／xfailは行わず既存残件へ記録した。最終API c70671a8のPiece CI42721103246は全39step success（model1000 PASS／57.25秒、活動名37 PASS／2.28秒）。source625b470のAnalysis CI42720193625は全19step success。最終promptのみのpathはAnalysis起動対象外であり、最終API同headのAnalysis成功とは呼ばない。
 
 [実結果・通常不採用と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-activity-source-natural-narrator-20261110)。
+
+
+<a id="piece-current-wire-register-native-20261110"></a>
+## 2026-11-10 AR-04 — 現行wire保存結果と既存native検証のfile地図
+
+API fce72bcc＋4da69cdeとRN4424976bは以下の検証9pathのみ。製品source／生成prompt／source文法／API／DB／描画責務を変更せず、STRUCTURE_MAP_DELTA_NONE。現行FRESH03実4B→CMEE→隔離SQL3と文末案26のSQL78を確認したが、文末案は全raw不変で不採用。
+
+| Repository/path | 今回の差分・保持境界 |
+|---|---|
+| API `ai/tests/piece_v2/test_b08_piece_bare_finite_evaluation.py` | 旧24文字下限を前提にした短文拒否期待1件を、決定済みsource-scaled1..420・水増しなしの実本文／format／原source保持へ整合。製品source変更なし。 |
+| API `ai/tests/piece_v2/test_b08_piece_personal_evaluation.py` | 近傍の短い好みの拒否期待を、原文／短文保持・非declarationの既決仕様へ整合。 |
+| API `ai/tests/piece_v2/test_b08_piece_past_transitive_expression.py` | 短い過去表現の下限期待だけを整合。別の過去参照SELF表記／modal採否2期待は失敗を保持し変更しない。 |
+| API `ai/tests/piece_v2/test_b08_piece_finite_nominal_argument.py` | 短い好みの下限期待を整合し、nominal対象の原文保持を確認。 |
+| API `.github/workflows/piece-b2b-isolated-postgres.yml` | 元の活動名対象と旧短文1期待へ、近傍3期待を追加。既存集合を削減せず、現行選択41を実行。 |
+| RN `tests/native/piece-rn-canvas-current-wire.json` | 現行FRESH03実rawから隔離保存されたfree preview／detailの同版本文・recipe・hashをnative入力へ接続。合成由来を明記。 |
+| RN `tests/native/piece-rn-canvas-fixtures.cjs` | 旧AR-04 fixtureと全legacy入力を維持し、新記録のpreview／saved／export caseを追加。test時計の期限と既存合成HTTP envelopeだけを投影。 |
+| RN `tests/native/piece-rn-canvas-ios.m` | 既存native hostへ同作品の期待本文行を追加。製品rendererは変更しない。 |
+| RN `tests/piece-v2-renderer.test.js` | 旧新fixtureの同版本文／recipe／hashとpreview・saved・export入力を検証。JS doubleと実pixelを区別。 |
+
+前段local API1142 PASS（活動名37を含む）、現行選択41 PASSと全4file384 PASS／既存2 FAILは別集合。2失敗は修正前fceでも再現する過去参照のSELF表記／modal採否で変更しない。RN1428 PASS（renderer183を含む）。fce版API CI42725970549は全39工程success、最終API4da69cdeのCI42727546907も全39工程success（model1000＋選択41）。Analysisは同headの変更path対象外で未実行。native CI42726292049の現行FRESH03同版PNG4はbyte／RGBA一致。canvas全体は旧WholeCanvasの失敗継続、ios-sourceはsimctl障害cancelled。通常重み未採用／selector OFF・一般品質・本人端末・正式0/3は未完了。 [実結果と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-current-wire-register-native-20261110)。

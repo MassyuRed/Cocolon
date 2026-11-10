@@ -4,7 +4,7 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-10 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR01_UNRESOLVED_AR04_ACTIVITY_SOURCE_STYLE_PROMPT_UNADOPTED
+status: AR01_UNRESOLVED_AR04_CURRENT_WIRE_AND_FINITE_NATIVE_IMAGE_VERIFIED_UNADOPTED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
@@ -369,13 +369,13 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 | AR-01 | 現naturalの主体・所有者・否定・時点・留保を、旧失敗・意味比較・共通原因分析で改善。EM-01a/b | 現6境界と正常な短文／省略で、同入力の誤読を解消または明確に減らし、自然さ・別題材・既成功・保存再読を保持。検出増加／無出力だけでは完了しない | 継続中。新24実生成の4版は通常不採用。c6555fd5で疑問符なしの確認質問の保存抜けを修復、250局所PASS。同24rawは旧24保存→新22保存／2拒否、受理本文不変。全体の意味修復は未完 |
 | AR-02 | 現naturalの任意問い・回答・訂正・撤回・frameの一往復。EM-02a/b、03b | 一点確認／skip／終了／本人続行、対象だけ更新、撤回後の残存意味、同版再読、プラン境界 | AR-01の全一般品質完成待ちにはしない。未開始 |
 | AR-03 | 適格履歴の意味ある利用。EM-03a/b | 同一／別場面・変化・無関係・訂正前を区別し、適切な履歴が今回へ効く。失効材料を使わない | 現related_contextを継承。未開始 |
-| AR-04 | Piece一般本文・単独伝達・refined・画像整合 | 原文の意味・一人称・本人補足と同版画像／保存を保持 | **11/10・AR-04最新：** API625b470で、既存自己評価の対象資格へ漢字／カタカナstem＋「作り」の活動名を限定接続。同じ保存5b1の26rawは25→26採用、新78隔離SQLは78保存／0拒否。固定重み・同26USERへ文体指示一文だけを加えた実4B比較ではFRESH12の不自然な「おれが、」が原焦点語順へ戻り、意味保持のまま自然さを局所改善。他25rawは同一、新26採用／新78保存。指示一文を既存候補promptへ反映した最終APIはc70671a8。現送信との完全一致は25例、FRESH03の新source条件付きUSERは実4B未確認。追加学習0・通常重み未採用／selector OFF、一般文章品質・同版画像／通常統合・本人端末・AR全体は未完了。|
+| AR-04 | Piece一般本文・単独伝達・refined・画像整合 | 原文の意味・一人称・本人補足と同版画像／保存を保持 | **11/10・AR-04最新：** FRESH03の現行wire実4B→CMEE→3plan保存再読と、同版本文のiOS隔離host画像を確認。preview／saved／export Card／view-shotのPNG4は1080×1350でbyte・RGBA一致、本文・Emlisロゴの欠けなしを目視確認した。文末統一案は26raw全一致で不採用、製品source／SYSTEM不変。API4da69cdeは既決短文仕様へのtest整合のみ、CI42727546907全39工程success（model1000＋選択41）。RN4424976bのcanvasは旧WholeCanvasの失敗で全体failure、ios-sourceはsimctl障害cancelled。局所画像確認を全CI／通常統合／本人端末成立へ広げず、重み未採用／selector OFF・正式0/3を維持。|
 | AR-05 | 分析の本人基準・役割／選択・記録間関係。AN-03a/b/c、04 | 原記録→意味→図／全文→両端根拠の対応、再出現／変化／不明の正しさ | 現Engine統合・保存済み成果を継承。並行可能。未開始 |
 | AR-06 | Emlis観測材料、訂正・削除・権利、長い蓄積と月次。EM-04/05、AN-02/06/08/10 | 本人sourceから材料を渡し、失効・分割範囲・当時版を保持。生成本文を本人事実にしない | AR-02/03/05の該当能力を利用。未開始 |
 | AR-07 | IF／Saved等の商品固有の残る意味保持責務。既存AN／PC残件 | 仮想・本人選択意向・観測を分離し、成立した経路で出力と保存を確認 | 既存商品の実装条件に従う。無断延期・新発売条件化をしない。未開始 |
 | AR-08 | 実証できた共通能力の通常適用と全体確認。EM-05/06/07等 | 採用版の意味保持・自然さ・権利・中断復帰・保存再読・実際の待ち時間／費用。未採用範囲は理由と残差を保持 | 各単位で通常採用可能。全core一括切替を強制しない。未開始 |
 
-現在は **AR-04の意味保持・単独伝達**を継続する。次は、新資格FRESH03を含む現在の生成条件と候補本文の一致を通常経路で確認し、意味保持済み候補の同版画像・保存再読へ接続する。FRESH07の常体／丁寧体混在等は一般文章品質の残件として保持する。今回の一文比較を周回せず、第三学習・重み通常採用へ自動進行しない。AR-01の役割反転と他ARの残件も継続する。 全旧ファイルの再棚卸し完了、新checker完成、共通schema全面完成、旧100件全合格、追加観測会、署名buildを開始の前提に追加しない。旧資産確認と実装は同じ商品単位内で必要な原本へ戻る。
+現在は **AR-04の意味保持・単独伝達**を継続する。次のAR-04は、受動依頼と能動否定が同欄にあるFRESH07型の文末混在を、既存4B作者の自然文実現で改善する単位へ進む。保存5b1の原教師24行は全文確認済みでtargetは全て常体、明示受動依頼の丁寧体→常体と同欄の能動否定を組み合わせた例はなかった。この限定された教材被覆と実raw・既存の活用／同義表現知識から生成側の改修箇所を選び、同source前後・別題材・既成功対照を既存CMEE／保存再読まで確認する。原因・学習要否は未確定で、SYSTEM指示周回・生成後補修・第三学習／通常重み採用を自動実行しない。通常統合／本人端末・一般品質、旧canvas失敗／ios-source起動障害、AR-01反転と他ARも残件として保持する。 全旧ファイルの再棚卸し完了、新checker完成、共通schema全面完成、旧100件全合格、追加観測会、署名buildを開始の前提に追加しない。旧資産確認と実装は同じ商品単位内で必要な原本へ戻る。
 
 既存の品質作業・新教師8件・保存重みの継続点を使う。GPUに現実の接続障害がある場合、取得できた事実、未実行の生成、回収済み原本、次の同一単位を記録し、CPUの合成成功を実モデル改善へ換算しない。接続復旧や既存の別core実装を必要範囲で進め、無関係な補助機構開発へ変えない。
 
@@ -435,13 +435,13 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 ### 11.2 現在の進行欄
 
-**11/10・AR-04最新：** API625b470で、既存自己評価の対象資格へ漢字／カタカナstem＋「作り」の活動名を限定接続。同じ保存5b1の26rawは25→26採用、新78隔離SQLは78保存／0拒否。固定重み・同26USERへ文体指示一文だけを加えた実4B比較ではFRESH12の不自然な「おれが、」が原焦点語順へ戻り、意味保持のまま自然さを局所改善。他25rawは同一、新26採用／新78保存。指示一文を既存候補promptへ反映した最終APIはc70671a8。現送信との完全一致は25例、FRESH03の新source条件付きUSERは実4B未確認。追加学習0・通常重み未採用／selector OFF、一般文章品質・同版画像／通常統合・本人端末・AR全体は未完了。
+**11/10・AR-04最新：** FRESH03の現行wire実4B→CMEE→3plan保存再読と、同版本文のiOS隔離host画像を確認。preview／saved／export Card／view-shotのPNG4は1080×1350でbyte・RGBA一致、本文・Emlisロゴの欠けなしを目視確認した。文末統一案は26raw全一致で不採用、製品source／SYSTEM不変。API4da69cdeは既決短文仕様へのtest整合のみ、CI42727546907全39工程success（model1000＋選択41）。RN4424976bのcanvasは旧WholeCanvasの失敗で全体failure、ios-sourceはsimctl障害cancelled。局所画像確認を全CI／通常統合／本人端末成立へ広げず、重み未採用／selector OFF・正式0/3を維持。
 
-`piece_model_source.SYSTEM_MESSAGE`末尾へ「一人称の表記と意味は保ち、助詞と読点を自然な本人の語りに整え、主語直後の不要な読点や原文にない強調を加えないでください。」の共通一文を追加。期待正文・assistant例・raw修補・追加学習はない。固定5b1／config・旧26USERを凍結した一回の実比較で、新26＋前後control4の30 HTTPは全200／stop。runner全工程183.370781秒、元提供PID40494→同args／env／cwd／keysの41313へ復元、health200・Emlis／Analysis前後response bytes一致、Analysis／旧e924／新5b1の重み・GPU serving source／凍結wireは不変。送信待ちの長時間失敗はrunner全工程183.370781秒に含めず、通常原価・総請求は未測定。
+**前回の履歴（活動名／読点比較）：** `piece_model_source.SYSTEM_MESSAGE`末尾へ「一人称の表記と意味は保ち、助詞と読点を自然な本人の語りに整え、主語直後の不要な読点や原文にない強調を加えないでください。」の共通一文を追加。期待正文・assistant例・raw修補・追加学習はない。固定5b1／config・旧26USERを凍結した一回の実比較で、新26＋前後control4の30 HTTPは全200／stop。runner全工程183.370781秒、元提供PID40494→同args／env／cwd／keysの41313へ復元、health200・Emlis／Analysis前後response bytes一致、Analysis／旧e924／新5b1の重み・GPU serving source／凍結wireは不変。送信待ちの長時間失敗はrunner全工程183.370781秒に含めず、通常原価・総請求は未測定。
 
-実比較は全26の旧USERを固定した診断である。現在のcandidate SYSTEMとは全26一致し、現在のsourceから導出したUSERとも25例がbyte一致する。FRESH03だけは今回source資格が成立して評価条件が追加され、旧USERでの実生成／意味検査／保存は確認したが、新USERによる実4B生成は未確認。診断再受領の26／保存78を通常アプリ経路の成立へ換算しない。selector OFF／5b1通常重み未採用を維持する。
+前回の旧USER固定診断で残ったFRESH03の不一致は、今回、現行builderの全SYSTEM／USERを送る実4B一回で確認した。新しい文末統一指示は別比較で26rawが全一致となり不採用。現行生成条件の確認と、direct HTTP・合成Auth／等価合成IDへ再bindした隔離SQLの限界は[今回実結果](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-current-wire-register-native-20261110)へ分離する。selector OFF／5b1通常重み未採用を維持する。
 
-今回の構造差分は`STRUCTURE_MAP_DELTA_PRESENT`。既存`piece_source._personal_evaluation_shapes`のbare自己評価（`は`／`にとって`）だけへ、既存`_SIMPLE_NOUN`で全文照合できる漢字／カタカナstem＋「作り」の活動名を限定追加。stem中の何／誰、空stem、助詞・有限節・参照・内部空白・引用・曖昧なが焦点は新armへ入れない。対象名詞句全体・本人表記・評価base／程度／肯否／時点／留保・原文／根拠座標を保持し、「模型を作った」等の実行済み行動には変換しない。共有の名詞文法・公開型／DB・独立CMEE／S7・原入力と本人補足・保存後非生成の責務は維持する。 Piece map／全ファイル地図01Aへ既存ownerの受理境界差分を反映する。
+前回の活動名資格拡張の構造差分は`STRUCTURE_MAP_DELTA_PRESENT`。今回の実応答確認・test整合は`STRUCTURE_MAP_DELTA_NONE`。既存`piece_source._personal_evaluation_shapes`のbare自己評価（`は`／`にとって`）だけへ、既存`_SIMPLE_NOUN`で全文照合できる漢字／カタカナstem＋「作り」の活動名を限定追加。stem中の何／誰、空stem、助詞・有限節・参照・内部空白・引用・曖昧なが焦点は新armへ入れない。対象名詞句全体・本人表記・評価base／程度／肯否／時点／留保・原文／根拠座標を保持し、「模型を作った」等の実行済み行動には変換しない。共有の名詞文法・公開型／DB・独立CMEE／S7・原入力と本人補足・保存後非生成の責務は維持する。 Piece map／全ファイル地図01Aへ既存ownerの受理境界差分を反映する。
 
 以下の日付付き経過は各時点の履歴。現在のAR-04結論は直上と下表へ置換する。
 
@@ -468,20 +468,20 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | 提供・保全 | 学習／新load／retry／server再起動0。同PID26784／source／Analysis重み不変・health200。role最初の梱包漏れは生成0のCPU事前検査で検出・依存補完し失敗logも保全。private同artifact準備v0→結果v1、総請求額未測定 |
 | 次の同一商品単位 | 意味材料が正しく届いても完成rawで崩れる境界へ限定。同種label／SYSTEM追加周回を終了し、既存meaning→現作者の依頼方向・対象状態・語り手の自然文実現を改修。能受動／明記省略／状態対照、成功control、別題材評価。容量／学習等の原因は未断定 |
 | 再開記録 | weekly第10回§32、[全結果・範囲・次作業](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/request_role_binding_review.md)／[本文なし集計](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/request_role_binding_summary.json) |
-| AR-01通常と残件 | AR-01通常不採用・役割反転未解決。最新API 651f1f38の今回実装差分はAR-04のみで、AR-01研究patchの通常採用なし。Render配置／実DB／RN／build0、他AR残件は維持 |
+| AR-01通常と残件 | AR-01通常不採用・役割反転未解決。先行API 651f1f38のAR-04差分とAR-01研究patchの通常不採用を継承。今回のfce72bcc／4da69cdeはtest整合のみで、AR-01通常採用なし。Render配置／実DB／RN／build0、他AR残件は維持 |
 | AR-04回収・改修 | 既存natural_reply_meaningのfinite節／活用／格／人役読取＋Pieceガードを、piece_source._finite_self_person_action_account→piece_v1cの既存KEEPへ接続。許可述語は頼む／相談する／伝える、明示SELF・肯否過去・相手1／を対象1・句点。曖昧な伝える「に」受動は拒否を維持。新命題・作者・理解／承諾の推測なし |
 | AR-04実本文 | 先行の有限対人動作8は全件不可→生成。時点・SELF6表記・能受動・否定・丁寧体・二欄留保を保持。前回12の生成10はmeaning／plan／artifact／candidate／recipe／serialized hash全同一、拒否2維持。開発作例でblind一般化ではない。前回依頼の新規5は履歴保持、今回の欄名付き比較へ再加算しない |
 | AR-04検証・再読 | 先行有限対人動作の3351 PASS／27.94秒・既存warning1・FAIL／skip0、保存9caseで3plan確認。原本SQL11＋既存helper等3のbytes一致。新旧20を実service／既存review＋PGliteへ通し18保存／2拒否、本文等8fieldの3段同一・保存行／詳細の12field同一、初回後は作者／compiler／Engine／review禁止・同key消費各1。原入力／Emlis不変。合成Auth／先行provider／SQLcallbackであり実DB／native画像／ASGI成功ではない |
-| AR-04反映・残件 | **11/10・AR-04最新：** API625b470で、既存自己評価の対象資格へ漢字／カタカナstem＋「作り」の活動名を限定接続。同じ保存5b1の26rawは25→26採用、新78隔離SQLは78保存／0拒否。固定重み・同26USERへ文体指示一文だけを加えた実4B比較ではFRESH12の不自然な「おれが、」が原焦点語順へ戻り、意味保持のまま自然さを局所改善。他25rawは同一、新26採用／新78保存。指示一文を既存候補promptへ反映した最終APIはc70671a8。現送信との完全一致は25例、FRESH03の新source条件付きUSERは実4B未確認。追加学習0・通常重み未採用／selector OFF、一般文章品質・同版画像／通常統合・本人端末・AR全体は未完了。|
+| AR-04反映・残件 | **11/10・AR-04最新：** FRESH03の現行wire実4B→CMEE→3plan保存再読と、同版本文のiOS隔離host画像を確認。preview／saved／export Card／view-shotのPNG4は1080×1350でbyte・RGBA一致、本文・Emlisロゴの欠けなしを目視確認した。文末統一案は26raw全一致で不採用、製品source／SYSTEM不変。API4da69cdeは既決短文仕様へのtest整合のみ、CI42727546907全39工程success（model1000＋選択41）。RN4424976bのcanvasは旧WholeCanvasの失敗で全体failure、ios-sourceはsimctl障害cancelled。局所画像確認を全CI／通常統合／本人端末成立へ広げず、重み未採用／selector OFF・正式0/3を維持。|
 | AR-04現在のrefined | APIca4140abの通常server保存を継承。RN4a103688で表示した第一本人回答の明示選択→exact回答query→七項目refined POSTへ接続。元／補足は別source。旧保存結果不明は元保存要求を優先。同じ実Q2材料の親導線0→新2、本文指紋とSQL保存本文／初回recipe一致。1512関連PASS・Metro1件対象外。未build／未live反映／native未確認 この旧Q2二例は継承時点の記録。前回の実Q2四例と名前役割化adjusted三planの結果を継承し、今回の同4補足は最終18比較の保持対照として確認。 |
-| AR-04現在の4B本文読取 | 既存source資格・欄完全性／補足先行・FOCUS／評価／THEN・CMEE／S7を継承。意味上のSELFと、各欄に書かれた一人称表記を別比較し、本人継続の省略は同欄の成立済み表記だけへ束縛。SYSTEM追加2指示は撤回し、対象「は」の一般受理や原文改変は追加しない。均衡教材は独立新作でありsource資格を広げない 明示SELFの同欄2能動過去・一つの読点の連用接続を限定追加し、各動作の相手／対象／述語／時点／肯否・本人表記を独立照合。source側／共有既定reader・条件／受動／別欄の拒否は維持する。 前段ではS7 model専用KEEPへsame_finite_model_contextを接続。該当nodeの名前／参照／scopeを迂回せず、明示SELF・既知3述語・単一能動事実過去の既存keyを完全照合する。通常native不変・source／plan切出しなし。 生成条件は現piece_model_sourceで全source partの有限動作被覆を必要とし、受動field／混在partは従前の条件を維持する。 11/10の前段は既存qualified FOCALの非過去・modal／scopeなしのwishに限り、既知の肯否wish・文体組と完全一致する明示SELF「が」直接語順をS7 model専用fallbackへ接続。主体・対象・述語・参照・留保・欄の照合を保持し、共有reader／source文法／prompt／raw・native既定を変えない前段に続き、今回はbare評価対象の活動名資格と既存候補promptの共通一文を上記範囲で追加。raw／独立検査／保存責務・通常selectorは維持する。 |
-| AR-04再開記録 | 次は、新資格FRESH03を含む現在の生成条件と候補本文の一致を通常経路で確認し、意味保持済み候補の同版画像・保存再読へ接続する。FRESH07の常体／丁寧体混在等は一般文章品質の残件として保持する。今回の一文比較を周回せず、第三学習・重み通常採用へ自動進行しない。AR-01の役割反転と他ARの残件も継続する。 [実結果](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-activity-source-natural-narrator-20261110) |
+| AR-04現在の4B本文読取 | 既存source資格・欄完全性／補足先行・FOCUS／評価／THEN・CMEE／S7を継承。意味上のSELFと、各欄に書かれた一人称表記を別比較し、本人継続の省略は同欄の成立済み表記だけへ束縛。SYSTEM追加2指示は撤回し、対象「は」の一般受理や原文改変は追加しない。均衡教材は独立新作でありsource資格を広げない 明示SELFの同欄2能動過去・一つの読点の連用接続を限定追加し、各動作の相手／対象／述語／時点／肯否・本人表記を独立照合。source側／共有既定reader・条件／受動／別欄の拒否は維持する。 前段ではS7 model専用KEEPへsame_finite_model_contextを接続。該当nodeの名前／参照／scopeを迂回せず、明示SELF・既知3述語・単一能動事実過去の既存keyを完全照合する。通常native不変・source／plan切出しなし。 生成条件は現piece_model_sourceで全source partの有限動作被覆を必要とし、受動field／混在partは従前の条件を維持する。 11/10の前段は既存qualified FOCALの非過去・modal／scopeなしのwishに限り、既知の肯否wish・文体組と完全一致する明示SELF「が」直接語順をS7 model専用fallbackへ接続。主体・対象・述語・参照・留保・欄の照合を保持し、共有reader／source文法／prompt／raw・native既定を変えない前段に続くbare評価対象の活動名資格と読点等の既存共通一文は前回の採用済み差分。今回はsource文法／prompt／raw／独立検査／保存責務・通常selectorを変えず、文末統一の追加一文も効果なしで不採用。 |
+| AR-04再開記録 | 次のAR-04は、受動依頼と能動否定が同欄にあるFRESH07型の文末混在を、既存4B作者の自然文実現で改善する単位へ進む。保存5b1の原教師24行は全文確認済みでtargetは全て常体、明示受動依頼の丁寧体→常体と同欄の能動否定を組み合わせた例はなかった。この限定された教材被覆と実raw・既存の活用／同義表現知識から生成側の改修箇所を選び、同source前後・別題材・既成功対照を既存CMEE／保存再読まで確認する。原因・学習要否は未確定で、SYSTEM指示周回・生成後補修・第三学習／通常重み採用を自動実行しない。通常統合／本人端末・一般品質、旧canvas失敗／ios-source起動障害、AR-01反転と他ARも残件として保持する。 [今回実結果](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-current-wire-register-native-20261110) |
 
 以後はこの表と各能力の対応行を現在状態へ置換更新し、詳細な実行事実は既存trial／weeklyへ置く。新しいhandoff系列・全件hash Gateを作らない。中断時も、成果物と未実行を既存保存先へ残し、同じ未完商品単位から続ける。
 
 ## 12. 今後の指示と再開方法
 
-**11/10の現在の再開点：** 次は、新資格FRESH03を含む現在の生成条件と候補本文の一致を通常経路で確認し、意味保持済み候補の同版画像・保存再読へ接続する。FRESH07の常体／丁寧体混在等は一般文章品質の残件として保持する。今回の一文比較を周回せず、第三学習・重み通常採用へ自動進行しない。AR-01の役割反転と他ARの残件も継続する。
+**11/10の現在の再開点：** 次のAR-04は、受動依頼と能動否定が同欄にあるFRESH07型の文末混在を、既存4B作者の自然文実現で改善する単位へ進む。保存5b1の原教師24行は全文確認済みでtargetは全て常体、明示受動依頼の丁寧体→常体と同欄の能動否定を組み合わせた例はなかった。この限定された教材被覆と実raw・既存の活用／同義表現知識から生成側の改修箇所を選び、同source前後・別題材・既成功対照を既存CMEE／保存再読まで確認する。原因・学習要否は未確定で、SYSTEM指示周回・生成後補修・第三学習／通常重み採用を自動実行しない。通常統合／本人端末・一般品質、旧canvas失敗／ios-source起動障害、AR-01反転と他ARも残件として保持する。
 
 推奨指示は **「補助経路の活用作業を進めて」**。
 
