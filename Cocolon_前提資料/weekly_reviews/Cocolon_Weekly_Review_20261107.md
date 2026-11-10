@@ -1,6 +1,6 @@
 # 第10回 Cocolon週末報告会 — 2026-11-07（終了）
 
-> **11/11・AR-04最新：** APIc34b820bの引用外scope修復を、明示承認された新2＋保持3の実4Bで一回確認。5/5採用、3plan計15保存・非生成再読、保持3の全request／raw／response完全一致。9HTTP・学習／retry0、101.508秒で元提供のargs／env／cwdを復元し、通常／Analysis前後response一致・health200。新2に旧モデル生成baselineはなく、原文保持の確認を一般作文品質の改善率へ換算しない。既存3失敗・同版画像／通常統合／本人端末は残件。f6dae研究候補・通常selector OFF、本番未反映。 [実結果・保存と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quoted-outer-scope-actual-20261111)。
+> **11/11・AR-04最新：** APIa4bbe636で、既資格の理由／条件／譲歩付き本人希望の原順・全字面を保つ文体比較を修復。固定CPU新3の同じ常体候補は0→3採用、原文対照3・意味変異33拒否を維持し、3plan計9保存／非生成再読。原7項目・prepared／messages・source意味／根拠／planは前後一致、前回の実5本文も0生成で維持。新80成功、関連39fileの重複除外5812件は5809 PASS／既存3 FAIL。両CI成功。新3の実4Bは未取得、13,619byte比較packetは未送信。f6dae研究候補・通常selector OFF、本番未反映。 [文体比較・検証と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scoped-self-register-20261111)。
 
 記録日：2026年11月7日（日本時間）  
 対象週：**2026年11月7日〜11月14日**  
@@ -2754,3 +2754,25 @@ current APIの6対象blobと送信messagesを照合し、実rawを修補せず�
 非公開実原本ZIP SHA256 `415d4210cec837e07f8dc634149a2a7e39e743cf76657c9ca36b0e9807466ec0`、result SHA256 `a1b625e2188e8b6557b9ea07a43887778b25ff4a1393245dacdc0d247bb5ad51`。原本・実5全文・隔離15・独立読取・再開点は同じ既存ファイルを更新して保持する：[原本と再開点](https://chatgpt.com/library?file_id=libfile_fde3_f-673fcfecced481919979fee3a71efe51_2f7470f963808191aaebf050935e72de&account_id=personal)。
 
 次は引用・理由の一般読取、非transitive希望の文体差と広い一般文章を、既存source／意味型／欄別生成条件と保存済み実本文から進める。今回の新2実4B・保持3照合・15保存再読は完了として継承し、この9HTTPを再実行しない。新2の旧model baseline、広い一般品質、新f6daeの旧53全生成回帰、同版画像／通常統合／本人端末、既存無引用3失敗、AR-01と他ARは未完。新しいGPU実行・追加学習・通常採用・selector有効化・Render／live DB／RN／buildを今回の承認から自動実行しない。
+
+<a id="piece-scoped-self-register-20261111"></a>
+## 77. 補助経路AR-04 — 理由付き本人希望の文体比較を既存S7へ接続
+
+APIa4bbe636で、既資格の理由／条件／譲歩付き本人希望の原順・全字面を保つ文体比較を修復。固定CPU新3の同じ常体候補は0→3採用、原文対照3・意味変異33拒否を維持し、3plan計9保存／非生成再読。原7項目・prepared／messages・source意味／根拠／planは前後一致、前回の実5本文も0生成で維持。新80成功、関連39fileの重複除外5812件は5809 PASS／既存3 FAIL。両CI成功。新3の実4Bは未取得、13,619byte比較packetは未送信。f6dae研究候補・通常selector OFF、本番未反映。
+
+
+現物で、既にsource資格とSOURCE_EXPLICIT_REASONのある本人希望は原文なら採用されても、「です」を外しただけの自然な候補がmodel専用S7で未判定になることを固定CPUで確認した。既存 `piece_v2_content_policy.py::validate_source_meaning_preservation` 内の比較だけを修復した。既存patternが失敗し、`_model_register`・scope存在・`topic_kind == 'wish'`の全条件が成立する場合に限り、元文のsource_startからexpression_startまでを引用・接続詞・区切り・横空白込みでanchorする。候補側のmatch終端から末尾までの全量を、既存 `same_literal_self_register(expression, suffix)` へ渡す。本人や対象・述語・肯否・時点・留保・終端は変えず、既存の任意「です」比較を再利用する。原prefix保持のため、旧canonical読点と異なる元の区切り／空白は、文体差のない原文保持でも採用可能になる。区切りの正規化や任意語の許可ではない。
+
+既存pattern成功時、既存canonical語順、native比較、source資格／意味型／作者／WISH_END／SYSTEM／生成条件／公開DTO／DB／保存schema／RN／renderer／通常selectorは変えない。明示本人を落とす候補、外側理由や接続詞の変更、引用内一人称・全字面の変更、希望を否定・過去・実行済み・留保へ変える候補、末尾の強調変更や文追加は拒否する。モデル本文の修補・期待正文の送信・旧作者fallbackは行わない。literal扱いの「休みたい／読みたい」の原順問題、理由付き好みの文体差、前置canonical側の新しい文体差は今回へまとめず残す。
+
+独立固定CPU新3は、雨と家で過ごす希望、余裕と加わりたくない希望、友人の引用と外側の本人希望。旧c34 policyでは原文3採用／常体候補0採用、新版は原文3採用／同じ常体候補3採用。意味変異33は両版全拒否、全7項目・prepared ID／JSON・全messages・source node／scope／根拠／planはcanonical bytesとhashで前後一致。native既定は原文3を通し、文体差3を従来どおり拒否する。旧作者を禁止したままFree／Plus／Premiumの隔離9保存・同／新service非生成再読、原入力／Emlis不変・quota各1を確認した。SQLは合成owner／UUID／現在日時への等価投影で、純粋CPU prepared identityやlive Supabase／本人Authの実証ではない。新4B応答や一般文章の品質改善率には換算しない。
+
+新test80件は全成功。関連39fileの初回5812件は5778 PASS／34 FAILで、内30は復旧環境の既存pinned LMFE不在、1は新testが既存未対応のscope付き補足回答を適格と期待した材料誤り、3は前回からの無引用negative期待だった。LMFEは既存指定commit817f944のlocal test依存を復元し、補足testは既存対応の独立した本人好み回答へ直した。商品文法や補足資格は広げていない。不足依存fileと修正fixtureの57件だけを再確認し全成功。論理IDごとの最新結果で重複除外すると5809 PASS／既存3 FAIL、error／skip0。初回の新75成功を最終新80へ加算しない。既存warning1を保持、現local runtimeのpydantic2.13.4は旧lockやCIの同一環境とは主張しない。独立CPU比較scriptのtuple/list形式比較による初回停止はcanonical bytes比較に直し、履歴を原本へ残した。
+
+前回の実4B5は全rawと原7項目・prepared／現messagesのまま再受領し、採否・reason・全文を維持、追加生成0。既存69照合行は前回のまま保持し、新69生成や今回は未取得の全文再監査へ換算しない。新3の実4B結果・一般品質・同版画像／通常統合／本人端末、既存無引用3失敗と他ARは未完。今回のprimaryは限定TECHNICAL_CREDIT、正式商品受入れ／Product Read／商品品質creditは追加しない。STRUCTURE_MAP_DELTA_NONE（既存model比較owner内だけで、新path／型／入口／保存責務なし）。
+
+APIa4bbe636のPiece CI42913703031／job130170577459／39step、Analysis CI42913702987／job130170577645／19stepは対象head一致・attempt1で全工程success。追加run／rerun0。両CI成功をlocal既存3失敗の解消とはしない。
+
+原本・固定CPU前後・9保存・実5維持・新一回比較準備と再開点は非公開 `Cocolon_CMEE_AR04_ScopedWish_Register_20261111.zip` へ保持。実装・検査2pathは [実装commit](https://github.com/MassyuRed/mashos-api/commit/a4bbe6369575d4c5edd82dc38f0a00f74d2985d4)を参照する。
+
+次はSCOPED-REGISTER-RAIN／NEGATIVE／QUOTEDの新3と、前回SCOPE-QUOTE-REASON／QUOTE-RUNの保持2を、保存f6daeで一回・追加学習0の実4B比較へ通す。各source7項目・prepared ID／JSON・現builder messagesを固定し、保持2は前回全requestとexact、新3には旧model生成baselineがない。凍結13,619byte／2member、SHA256 `63f90d0a3512a17355aa2a145f04a7cb5decc04fe0924e241031efe94a608693`。候補5＋通常／Analysis前後control4の最大9HTTP、Piece1load、学習／新weights／retry0、復元込み600秒／復元予約120秒。新packetの送信と、認証情報を含み得る起動環境全体の同Pod内一時読取・復元再利用は今回の具体承認後に限る。前回の一回承認は消費済みで再利用せず、現在は新送信／新GPU実行／新環境読取0。前回の実5／15保存／101.508秒復元は完了として継承する。
