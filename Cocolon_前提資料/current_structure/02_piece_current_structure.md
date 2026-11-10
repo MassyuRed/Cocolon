@@ -1,4 +1,4 @@
-> **11/10・AR-04最新：** 承認済みの引用条件比較を同f6daeで一回・学習0で実行。前回失敗したQUOTE-RUNは引用の強調と引用外の本人表記を両方保持し、不採用→採用へ回復。保持4のraw／全responseは完全一致、全5採用・3plan計15保存／非生成再読。9HTTP・102.873秒で元提供のargs／env／cwdを復元し、healthと通常／Analysisの前後response完全一致。APIa67fb6f2／f6dae研究候補・通常selector OFF、本番未反映。 [実比較・15保存・復元と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quote-context-actual-result-20261110)。
+> **11/10・AR-04最新：** APIc34b820bで、引用内の接続詞・一人称を外側の理由／希望へ誤束縛する読取を修復。引用外の既存scope境界だけを原文上へ束縛し、既存scoped dutyの前提内引用にも生成条件を渡す。固定CPU新2は1件の資格拒否を回復し、1件の誤った引用内scopeを外側へ訂正、3plan計6保存／非生成再読。新46を含む39file5729 PASS／既存3 FAIL、親a67でも同3失敗。前回実5と既存69行の採否／本文／messagesは不変。新2の実4Bは未取得、13,703byte比較packet未送信。f6dae研究候補・通常selector OFF、本番未反映。 [読取修復・検証と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quoted-outer-scope-reader-20261110)。
 
 > **11/10・AR-04最新：** API2ec79ad0で時点付き本人「は」好み評価の同本人省略を既存S7継続へ接続。明示承認後、保存f6daeで新3＋保持2の実4B本文を1回・学習0で確認。GENERAL01の自然な2文目省略が旧比較で保留されたため、同block・隣接・同じ本人表記の既存条件だけを再利用し、5/5採用・3plan計15保存／非生成再読。保持2の前回request／raw／revisionと凍結69照合行の採否／本文／messagesは不変。9HTTP・97.268秒で元提供復元／health／前後control一致。f6dae研究候補・通常selector OFF、本番未反映。 [実4B新3・保存と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model3-inference-result-20261110)。
 
@@ -4065,3 +4065,19 @@ rootと独立担当が全5原文・旧新10本文を全読。引用の話者・�
 無修補の新5rawを既存consumerへ厳密再bindした隔離SQLはFree／Plus／Premium計15/15保存・同／新serviceで非生成再読。保存後生成0、原入力／Emlis不変、旧作者fallback禁止を確認。GPU側元ID／日時と別の同内容synthetic ID／日時を使う隔離検証であり、live Supabase／実Auth／実端末／native画像の確認ではない。STRUCTURE_MAP_DELTA_NONE（既存a67fb6f2の生成条件の実比較のみ）。今回の商品source／source文法／S7／DB／RN／renderer／通常selector差分0。新pytest／CI実行0、前回a67fb6f2の5287 PASSとPiece CI42826604954／39step全成功を継承。凍結69は前回照合済みとして継承し、今回新規生成／再照合とはしない。
 
 次は引用を含む理由・希望の読取を、既存意味型・引用境界・欄別条件から必要最小で進める。今回の対象5の実4B取得・強調／本人表記回復・同版保存15は完了として引き継ぐ。引用一般の言換え／複数・多重／引用内CRLF／認識名、理由一般の型付き読取、広い一般文章・新f6daeの旧53全生成回帰、同版画像／通常統合／本人端末、AR-01と他ARは未完。今回9HTTPと完了済み48更新を再実行せず、新しいfitやGPU比較を自動選定しない。通常モデル採用／selector有効化／Render／live DB／RN／buildの自動変更0。
+
+
+<a id="piece-quoted-outer-scope-reader-20261110"></a>
+## 11/10 AR-04 — 引用外の理由・本人表記だけを既存scopeへ束縛
+
+APIc34b820bで、引用内の接続詞・一人称を外側の理由／希望へ誤束縛する読取を修復。引用外の既存scope境界だけを原文上へ束縛し、既存scoped dutyの前提内引用にも生成条件を渡す。固定CPU新2は1件の資格拒否を回復し、1件の誤った引用内scopeを外側へ訂正、3plan計6保存／非生成再読。新46を含む39file5729 PASS／既存3 FAIL、親a67でも同3失敗。前回実5と既存69行の採否／本文／messagesは不変。新2の実4Bは未取得、13,703byte比較packet未送信。f6dae研究候補・通常selector OFF、本番未反映。
+
+STRUCTURE_MAP_DELTA_PRESENT：既存`cocolon_meaning_experience_engine/piece_source.py`の`_scoped_expression_match`は、引用がなければ旧`_SCOPED_EXPRESSION.fullmatch`をそのまま返す。引用時は既存`_body_primary_quote_spans`と既存`_SCOPE_RELATIONS`から引用外の接続詞位置を選び、元patternの前提長だけをその位置へ制約して原文上でfullmatchし、一意な外側境界へ束縛する。元の非empty前提を保つためposition>0を必須とし、各group・scalar／UTF-8根拠を元文字列のまま保持。引用外のSELF言及だけを既存同本人検査へ渡す。`piece_v1c.py`と`piece_v2_content_policy.py`の既存読取・S7再導出も同ownerへ揃える。`piece_model_source.py`は既存`literal_quotes`を、資格済みscoped dutyの前提範囲内にある引用へだけ追加投影。引用者の一人称・理由・希望を外側本人へ昇格しない。新意味型／公開DTO／DB／保存schema／作者／checker・通常selectorは追加しない。
+
+固定CPU新2の比較では、引用内に本人表記があるため旧資格拒否された例は新資格成立→同じ原文本文で既存CMEE採用。引用内外に理由がある例は旧scopeが引用内部で切れていたものを、外側の発言全体＋接続詞と外側の本人の希望へ訂正し、全文を保持して採用。明示原入力7項目の保存consumerを通した新2×3planの6保存・同／新serviceの非生成再読、原入力／Emlis不変・quota各1を確認。ここでの本文は独立固定CPU材料で、実4Bの品質改善とは呼ばない。原文／PreparedRequest・欄／段落／元と補足・話者と引用literal・否定／希望／時点の既存境界、quote／declarationへの切出し禁止を保つ。
+
+最終39file5732件は5729 PASS／3 FAIL、error／skip0、既存warning1。新46件は全成功し、引用内外の接続詞／SELF、focal／評価、scope根拠、別欄／refined、空前提拒否、変異拒否と6保存を含む。追加で広く確認した旧scope2fileでは、無引用の時点付きfocal・本人concession付きfocal・理由付き本人価値の3つの旧negative期待が失敗。a67 exact overlayの同2fileも100 PASS／同じ3 FAILで、失敗IDが全一致した。今回この既存3件の期待値や無引用契約を変更せず、5729 PASSだけで全GREENとはしない。初回新test45 PASSと最終46、親100 PASSは重複・別条件のため加算しない。独立reviewで見つかった空前提受理の候補不具合はposition>0で修正し、新negativeを含む最終回帰で確認。前回実4B5行と既存69照合行の採否／全文／messagesを追加生成0で維持した。
+
+APIc34b820bの[Piece CI42835666538](https://github.com/MassyuRed/mashos-api/actions/runs/42835666538)と[Analysis CI42835666566](https://github.com/MassyuRed/mashos-api/actions/runs/42835666566)は対象head一致・attempt1で全工程success。Piece job129897056145／39step、Analysis job129897056096／19stepを確認。追加run／rerun0。両CI成功を、別に広げたlocal39fileの既存3失敗の解消とは呼ばない。通常配置を行うworkflowではない。
+
+次は新2（SCOPE-QUOTE-SELF／REASON）＋保持3（QUOTE-RUN／PARAGRAPH／GENERAL07）の実4B本文と、同じ5のCMEE採否・3plan保存再読を一回・学習0で確認する。原7項目・prepared ID／JSON・現builder送信messagesを固定。保持3は前回case objectと全messagesがexactで、新2に旧モデル生成baselineはない。13,703byte／2memberの架空入力と既存runner流用ZIP、SHA256 `78a97b3546c754be3b54fa7ad813859c4056ce1e67122eb4ba9d40e6a9d83ac1`は未送信／未実行。候補5＋通常／Analysis前後control4の最大9HTTP、Piece1load、学習／新weights／retry0、復元込み600秒／復元予約120秒。新packet送信と認証情報を含み得る起動環境全体の同Pod内一時読取・復元再利用は今回の具体確認後に行い、消費済み前回承認を再利用しない。前回の5採用／15保存／102.873秒復元は完了として継承。一般理由／引用・非transitive希望の文体差／広い文章、新f6daeの旧53生成回帰、同版画像／通常統合／本人端末、既存3失敗と他ARは未完。新GPU／追加学習／通常採用／Render／live DB／RN／buildの自動実行0。
