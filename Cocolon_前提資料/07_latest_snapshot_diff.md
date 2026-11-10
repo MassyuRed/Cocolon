@@ -1,4 +1,4 @@
-> **11/10・AR-04最新：** API1ce24b8cのprivate生成条件改修を保持。同じc634重みで受動否定2件の役割逆転を修復し、同46材料のCMEE44→46、他44rawはbyte一致。新SQL162すべて保存・保存後0生成。原文・SYSTEM・source文法／独立CMEE・保存契約は不変。c634通常未採用／selector OFF・live0、一般品質・同版画像／本人端末・正式0/3は未完了。 STRUCTURE_MAP_DELTA_PRESENT（既存ownerのprivate生成条件境界のみ）。[全実結果](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-passive-role-conditions-result-20261110)。
+> **11/10・AR-04最新：** 固定c634・追加学習0で新しい架空8入力を確認し、source資格5／資格外3を分離。資格5＋既使用対照2の実4B7応答を無修補で再受領し、API209b4a27の既存S7 model比較で、完全な本人表記・対象を保つ「たいです／たい」と未決定の場所等の文体差を限定接続、CMEE4→6採用／7。新規5は2→4採用、対照2と旧46本文は不変。新隔離SQL21は18保存／3拒否、保存後0生成。17file1082 PASS／既存warning1。反復表現、理由文1の未判定、source資格外3は残る。元GPU提供46144へ復元・health／前後control一致、c634通常未採用／selector OFF・正式0/3。 [今回の実結果・範囲・次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-general-prose-register-20261110)。
 
 > **2026-11-10・補助経路AR-04（第10回§53）：** 既存S7のmodel専用比較へ、source資格済み非過去wishの明示SELF「が」直接語順を限定接続。保存5b1de6c9の同26rawは0生成で24→25採用、旧24本文不変・source資格外1維持。新78隔離SQLは75保存／3拒否、比較元は旧記録72／6。17file996 PASS／既存warning1、追加学習0、読点の自然さは未修復・通常重み未採用。API `c9e9938981c88e811bde1970725dc3dc35b2ae26`、Piece CI42709594596／Analysis CI42709594021は全工程success、Piece model17file996 PASS／58.98秒。STRUCTURE_MAP_DELTA_NONE（既存owner内比較条件のみ、入口／責務／公開・保存契約不変）。[実結果・次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-qualified-focal-ga-reader-20261110)。
 
@@ -41797,3 +41797,13 @@ API1ce24b8cは既存private生成条件へ全量資格済み受動fieldの原文
 **11/10・AR-04最新：** API1ce24b8cの受動役割条件とc634の46件採用・新SQL162保存を継承。RN54113b85の実React Native／iOS simulatorで、修復2件・混在1件・refined1件の4作品について、preview／saved／export Card／view-shotの各4枚・計16PNGが作品ごとにbyte／RGBA一致。文字・否定・段落・Emlisロゴの欠けを目視で認めなかった。初回FRESH15 preview欠測はtest fixtureのFreeテーマ一覧不足を修復、初回既存15枚も最終とbyte一致。canvasは3method成功／旧WholeCanvas1失敗、ios-sourceのV4 19失敗を保持し、全CI成功とはしない。c634通常未採用／selector OFF・live0、一般品質・通常統合／本人端末・正式0/3は未完了。
 
 RN74993fef→54113b85、初回run42751118726／最終run42754406573を再取得。4作品×4画像＝16PNGの作品内byte／RGBA一致と、初回存在15枚の最終同名一致を再確認。初回preview欠測と旧WholeCanvas59 summary／ios-source V4 19失敗を保持し、全CI成功にしない。今回の新推論・学習・SQL／native CI再実行0。前セッションの7資料への結果保存は未反映だったため、既存ownerに復元保存する。会話全文・未保存scratchの完全継承は未確認で、GitHub・private保存原本と再取得証拠の範囲を継承した。[全結果・残件・次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-c634-native-same-version-20261110)。
+
+
+<a id="piece-general-prose-register-20261110"></a>
+## 2026-11-10 AR-04 — 一般文の現4B診断と完全本人文／未決定対象の既存比較
+
+**11/10・AR-04最新：** 固定c634・追加学習0で新しい架空8入力を確認し、source資格5／資格外3を分離。資格5＋既使用対照2の実4B7応答を無修補で再受領し、API209b4a27の既存S7 model比較で、完全な本人表記・対象を保つ「たいです／たい」と未決定の場所等の文体差を限定接続、CMEE4→6採用／7。新規5は2→4採用、対照2と旧46本文は不変。新隔離SQL21は18保存／3拒否、保存後0生成。17file1082 PASS／既存warning1。反復表現、理由文1の未判定、source資格外3は残る。元GPU提供46144へ復元・health／前後control一致、c634通常未採用／selector OFF・正式0/3。
+
+API209b4a27の既存policy／testの2path、STRUCTURE_MAP_DELTA_NONE。source資格外3を4B未送信、実7は新5＋既使用対照2。意味保持と未判定を区別し、モデル語り改善・一般品質へ読み替えない。SQL21は18保存／3拒否で保存後0生成。新36を含む関連1082 PASS、旧46rawの再受領は全判定／本文一致・生成0。[正本と再開点](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-general-prose-register-20261110)。
+
+次のAR-04は、保存済みc634の新5応答・対照2と旧46、今回のsource資格外3・CMEE未判定1を引き継ぎ、理由・修飾を含む一般文の読取不足と「選ぶ時間を選びたい」の不自然な反復を別の原因として改善する。未判定を意味改変と呼ばず、source／rawの書換えや本人への質問で解析不足を埋めない。同版画像の確認は前回4作品だけで、今回の新5入力（候補本文）へ転用しない。通常統合／本人端末、WholeCanvas／V4の既存失敗、一般品質・AR-01反転と他ARは未完了。c634は通常未採用・selector OFFを維持し、追加fit／通常採用／live配置／署名buildへ自動進行しない。

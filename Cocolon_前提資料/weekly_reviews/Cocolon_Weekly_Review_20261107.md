@@ -2520,3 +2520,16 @@ API1ce24b8cの既存生成owner1＋検証2pathを保持。全量資格済み受�
 全CI成功ではない。canvas最終3method成功／旧WholeCanvas1失敗（59 summary、初回とのmethod／位置／assert順序署名一致、dump全文は不一致）。両runのios-sourceはV4 19失敗で、今回は起動障害ではない。最終rn-contractsは1429 PASSと別command291 PASS（合算しない）。Android-source／export-pods／export-android successには変更対象外工程skipを含み、新Android実描画・実写真保存へ加算しない。
 
 前セッションの7資料結果保存中断から、GitHub実装・Actions2原本とprivate SQL原本を再取得して復元した。過去会話全文・未保存scratchの完全取得は未確認。初回失敗／旧8044 B2欠測を保持。STRUCTURE_MAP_DELTA_NONE、製品source／API／DB／renderer変更0、通常重み未採用／selector OFF／live0／署名配布0・正式0/3。次のAR-04は、同版画像を確認した4作品と保存済み46本文・有限意味条件を継承し、別材料での自然さ・単独伝達／一般本文品質を既存商品経路で確認・改善する。4作品の画像一致を全46作品や一般品質へ広げず、通常統合／本人端末・残るnative検査失敗は別の未完了として保持する。c634は通常未採用の研究基準、selector OFFを維持し、通常重み採用・live配置／本人端末／署名buildへ自動進行しない。全量source資格、混在partの旧条件、本人表記・欄／補足分離、独立CMEE／保存責務を維持する。旧8044の失敗とB2欠測は閉じた履歴であり補完のため再起動しない。同じfitやSYSTEM指示の周回、欠測補完の追加生成は行わない。一般品質・正式0/3、AR-01反転と他ARは未完了として保持する。 [全結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-c634-native-same-version-20261110)。
+
+
+<a id="piece-general-prose-register-20261110"></a>
+## 60. 補助経路AR-04 — 一般文の固定4B確認と既存S7の未判定2件
+
+**11/10・AR-04最新：** 固定c634・追加学習0で新しい架空8入力を確認し、source資格5／資格外3を分離。資格5＋既使用対照2の実4B7応答を無修補で再受領し、API209b4a27の既存S7 model比較で、完全な本人表記・対象を保つ「たいです／たい」と未決定の場所等の文体差を限定接続、CMEE4→6採用／7。新規5は2→4採用、対照2と旧46本文は不変。新隔離SQL21は18保存／3拒否、保存後0生成。17file1082 PASS／既存warning1。反復表現、理由文1の未判定、source資格外3は残る。元GPU提供46144へ復元・health／前後control一致、c634通常未採用／selector OFF・正式0/3。
+
+API209b4a27で完全本人文と未決定の場所等を既存model比較へ限定接続。原文／4B raw／重み／source資格を変えず、GENERAL03／05の正しい文が止まる境界を修復した。新8sourceのうち資格外3は生成せず、残る理由文1は意味改変とせず未判定を維持。実4B7＋前後control4の11 HTTP・112.177095秒、追加学習0。元servingを46144へ復元し、healthと前後natural／Analysis bytes一致。新SQL21は18保存／3拒否・保存後0生成、旧46rawも追加生成0で全判定／本文一致。焦点181／関連17file1082 PASSを重複加算しない。初回のtest期待4失敗と環境26errorは原本保持、最終検証成功。CI結果は[正本](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-general-prose-register-20261110)に追記する。STRUCTURE_MAP_DELTA_NONE、c634通常未採用／selector OFF・正式0/3。[全結果・範囲・次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-general-prose-register-20261110)。
+
+次のAR-04は、保存済みc634の新5応答・対照2と旧46、今回のsource資格外3・CMEE未判定1を引き継ぎ、理由・修飾を含む一般文の読取不足と「選ぶ時間を選びたい」の不自然な反復を別の原因として改善する。未判定を意味改変と呼ばず、source／rawの書換えや本人への質問で解析不足を埋めない。同版画像の確認は前回4作品だけで、今回の新5入力（候補本文）へ転用しない。通常統合／本人端末、WholeCanvas／V4の既存失敗、一般品質・AR-01反転と他ARは未完了。c634は通常未採用・selector OFFを維持し、追加fit／通常採用／live配置／署名buildへ自動進行しない。
+
+
+遠隔CIはAPI209b4a27の[Piece42764012309](https://github.com/MassyuRed/mashos-api/actions/runs/42764012309)と[Analysis42764012103](https://github.com/MassyuRed/mashos-api/actions/runs/42764012103)が両方全工程success。Piece job129656124969のmodel17fileも1082 PASS／36.75秒・既存warning1。Analysis job129656121482も各stepの完了と成功を確認した。通常配置を行うworkflowではない。

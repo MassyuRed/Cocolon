@@ -1,4 +1,4 @@
-> **11/10・AR-04全file地図差分：** API1ce24b8cの既存生成owner1＋検証2pathで、全量資格済み受動fieldへ原文／役割条件を投影。STRUCTURE_MAP_DELTA_PRESENT（private入力境界のみ、新owner／公開・保存契約追加0）。[今回の変更箇所](#piece-passive-role-conditions-result-20261110)。
+> **11/10・AR-04最新：** 固定c634・追加学習0で新しい架空8入力を確認し、source資格5／資格外3を分離。資格5＋既使用対照2の実4B7応答を無修補で再受領し、API209b4a27の既存S7 model比較で、完全な本人表記・対象を保つ「たいです／たい」と未決定の場所等の文体差を限定接続、CMEE4→6採用／7。新規5は2→4採用、対照2と旧46本文は不変。新隔離SQL21は18保存／3拒否、保存後0生成。17file1082 PASS／既存warning1。反復表現、理由文1の未判定、source資格外3は残る。元GPU提供46144へ復元・health／前後control一致、c634通常未採用／selector OFF・正式0/3。 [今回の実結果・範囲・次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-general-prose-register-20261110)。
 
 > 11/4のPiece作成・本文・書き出し候補は、末尾の[ファイル差分](#piece-format-language-export-files-20261104)と週次レビュー§141を参照。
 
@@ -6485,3 +6485,16 @@ API1ce24b8cの全変更は次の3path。STRUCTURE_MAP_DELTA_PRESENTは既存priv
 - `tests/piece-v2-renderer.test.js`: preview／保存版の同一本文・recipeと、不完全paletteの拒否を検証する。
 
 累積は上記4path、製品source／renderer・公開契約・DB・作者・保存責務追加0、STRUCTURE_MAP_DELTA_NONE。[native結果・失敗と範囲](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-c634-native-same-version-20261110)。
+
+
+<a id="piece-general-prose-register-20261110"></a>
+## 11/10 AR-04全file地図差分 — 既存S7内の完全対象／本人文の文体照合
+
+| API既存path | 今回の責務差分 |
+|---|---|
+| `ai/services/ai_inference/piece_v2_content_policy.py` | model専用比較でsource資格済みのliteral本人文と未決定対象全量をanchor保持し、既知敬体差だけ照合。scope整合検査と終端を保持。native既定不変 |
+| `ai/tests/test_piece_model_prose_register.py` | 本人6表記／肯否・対象／時点／留保・scope偽装・終端の36検査を追加 |
+
+API209b4a27、累積入口／owner／公開DTO／保存型／DB／RN／workflow追加0、STRUCTURE_MAP_DELTA_NONE。**11/10・AR-04最新：** 固定c634・追加学習0で新しい架空8入力を確認し、source資格5／資格外3を分離。資格5＋既使用対照2の実4B7応答を無修補で再受領し、API209b4a27の既存S7 model比較で、完全な本人表記・対象を保つ「たいです／たい」と未決定の場所等の文体差を限定接続、CMEE4→6採用／7。新規5は2→4採用、対照2と旧46本文は不変。新隔離SQL21は18保存／3拒否、保存後0生成。17file1082 PASS／既存warning1。反復表現、理由文1の未判定、source資格外3は残る。元GPU提供46144へ復元・health／前後control一致、c634通常未採用／selector OFF・正式0/3。
+
+[原本・全結果](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-general-prose-register-20261110)。次のAR-04は、保存済みc634の新5応答・対照2と旧46、今回のsource資格外3・CMEE未判定1を引き継ぎ、理由・修飾を含む一般文の読取不足と「選ぶ時間を選びたい」の不自然な反復を別の原因として改善する。未判定を意味改変と呼ばず、source／rawの書換えや本人への質問で解析不足を埋めない。同版画像の確認は前回4作品だけで、今回の新5入力（候補本文）へ転用しない。通常統合／本人端末、WholeCanvas／V4の既存失敗、一般品質・AR-01反転と他ARは未完了。c634は通常未採用・selector OFFを維持し、追加fit／通常採用／live配置／署名buildへ自動進行しない。

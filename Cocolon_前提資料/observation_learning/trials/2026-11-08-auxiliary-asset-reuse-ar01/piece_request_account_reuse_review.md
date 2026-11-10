@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/10現在：** API1ce24b8cで有限source由来の原文／役割条件を投影し、同c634の受動否定2件を修復、CMEE44→46／46・他44raw一致。新SQL162全保存・保存後0生成。c634通常未採用／selector OFF、一般品質・同版画像／本人端末未確認。[今回実結果](#piece-passive-role-conditions-result-20261110)。
+> **11/10・AR-04最新：** 固定c634・追加学習0で新しい架空8入力を確認し、source資格5／資格外3を分離。資格5＋既使用対照2の実4B7応答を無修補で再受領し、API209b4a27の既存S7 model比較で、完全な本人表記・対象を保つ「たいです／たい」と未決定の場所等の文体差を限定接続、CMEE4→6採用／7。新規5は2→4採用、対照2と旧46本文は不変。新隔離SQL21は18保存／3拒否、保存後0生成。17file1082 PASS／既存warning1。反復表現、理由文1の未判定、source資格外3は残る。元GPU提供46144へ復元・health／前後control一致、c634通常未採用／selector OFF・正式0/3。 [今回実結果](#piece-general-prose-register-20261110)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -828,3 +828,40 @@ WholeCanvas59件は初回／最終でmethod・source位置・添付dump前assert
 
 次のAR-04は、同版画像を確認した4作品と保存済み46本文・有限意味条件を継承し、別材料での自然さ・単独伝達／一般本文品質を既存商品経路で確認・改善する。4作品の画像一致を全46作品や一般品質へ広げず、通常統合／本人端末・残るnative検査失敗は別の未完了として保持する。c634は通常未採用の研究基準、selector OFFを維持し、通常重み採用・live配置／本人端末／署名buildへ自動進行しない。全量source資格、混在partの旧条件、本人表記・欄／補足分離、独立CMEE／保存責務を維持する。旧8044の失敗とB2欠測は閉じた履歴であり補完のため再起動しない。同じfitやSYSTEM指示の周回、欠測補完の追加生成は行わない。一般品質・正式0/3、AR-01反転と他ARは未完了として保持する。
 
+
+
+<a id="piece-general-prose-register-20261110"></a>
+## 2026-11-10 一般文の固定4B確認と既存S7文体比較の不足2件
+
+**11/10・AR-04最新：** 固定c634・追加学習0で新しい架空8入力を確認し、source資格5／資格外3を分離。資格5＋既使用対照2の実4B7応答を無修補で再受領し、API209b4a27の既存S7 model比較で、完全な本人表記・対象を保つ「たいです／たい」と未決定の場所等の文体差を限定接続、CMEE4→6採用／7。新規5は2→4採用、対照2と旧46本文は不変。新隔離SQL21は18保存／3拒否、保存後0生成。17file1082 PASS／既存warning1。反復表現、理由文1の未判定、source資格外3は残る。元GPU提供46144へ復元・health／前後control一致、c634通常未採用／selector OFF・正式0/3。
+
+### 原入力・実モデルの確認範囲
+
+新規は全て華恋作成の架空8入力で、教師行・追加学習・重み変更は0。自己理解の強度はUIのmedium固定へ整合し、初回準備の無効な強度2件を製品のsource拒否へ数えない。最終8のうち5が既存source資格を満たした。残る3は、同一対象の過去／現在比較と「静かな朝食」の修飾を含む評価2件がevaluation_target_not_self_contained、引用を含む1件がquoted_discourse_not_yet_supportedで、実4Bへ送らず残す。語彙・文法・題材の一般分布を代表する8件ではない。
+
+同じ保存c634を1loadし、新5＋既使用FRESH02／FRESH15の対照2を現USER／SYSTEM／slotsで一回生成。前後のnatural／Analysis各2controlを含め11 HTTPが全200／stop、追加retry0・学習0・新weights0。全工程112.177095秒、最大入力2343＋予約2048≤8192。7原文・補足・全rawをrootと独立読取担当が確認し、新5の意味改変は確認しなかったが、意味保持とCMEE未判定を区別する。GENERAL03とFRESH02の「選ぶ時間を選びたい」という反復は残り、GENERAL02は原文自体の不自然さも含むため、全てをモデル起因にしない。別欄間に原文にない因果・対比を付け足さない。
+
+### 既存ownerの限定修正
+
+[API 209b4a27](https://github.com/MassyuRed/mashos-api/commit/209b4a275cc964697bf012aa70c0ff323ebfe66f)は既存piece_v2_content_policy.pyと既存test_piece_model_prose_register.pyの2pathだけ。全量source資格・source文法・SYSTEM／USER・model重み・既存作者・独立CMEE／公開／保存契約は変更しない。
+
+- 既存_literal_self_accountが資格を持つ完全な本人文を、明示本人表記・対象・否定／時点・終端ごとanchor化し、末尾の「です」の有無だけ比較する。様態の「みたい」を希望と断定せず、本人省略・別人化・対象差替え・否定反転・過去化・推量／伝聞・理由や事実の追加を許さない。
+- sourceにある「まだ、…かは／…場所は」等の未決定対象を全量保持し、既存の非過去否定「決めていません／決めていない」だけを照合する。「場所→日」「は→も」「まだ」の削除、決定済み・過去・推量へ変えた文章は拒否する。
+- 既存scopeとoperationの一致検査は新armより先に行う。本人表記は既存の同幅終端viewで取得し、句点／！／!の同一終端を保持する。native既定のliteral契約は変更しない。
+
+同じ7rawのCMEEは4採用／3未判定→6採用／1未判定。GENERAL03の場所に関する未決定とGENERAL05の完全本人希望だけが新たに保存可能となった。新5だけでは2→4採用、対照2は前回c634のresponse bytesと完全一致で品質増分へ数えない。GENERAL02の理由＋評価は現planがopaque KEEPで、その非字面一致を一般解釈へ広げず未判定のまま残す。独立読取で意味改変を確認していない例を、モデルの意味誤りとは記録しない。
+
+### 保存・回帰・復元
+
+今回の隔離SQLは7×3plan＝21だけで、18保存／3拒否。保存18はpreview＝選択＝保存row＝detailの本文／recipe／hash／renderer、quota各1、原入力／Emlis／raw不変、同／新service再読0生成を確認。拒否3はrecord／quota不変。等価な架空ID／日時へ同rawを再bindするPGlite試験であり、実Supabase・GPU原identity・本人Auth／端末の確認ではない。旧SQLや旧162を今回へ加算しない。最終の終端view修正後にも同7rawの判定／本文を再確認した。SQLで通った7ケースは全て元の句点で、この修正による意味条件の変化はない。
+
+焦点181 PASS／4.77秒、最終関連17file1082 PASS／70.22秒・既存warning1、重複加算しない。新36は本人6表記・肯否、対象／時点／留保・追加文、未決定対象、scope偽装・終端保持の検査を含む。初回の追加test4件は既存文法の語順に合わない期待、広い試験26errorはQ2_PGLITE_MODULE未指定で、期待と既存環境を直した原logを保持し、製品文法を緩めて通していない。旧c634の46記録rawも新model／SQL呼出0で現USERを再導出し、同判定46採用・本文／reason／receiptが全て元台帳と一致した。
+
+開始時44511の元servingを同args／env／cwd／keysで46144へ復元し、healthと前後natural／Analysis controlのresponse bytes一致、元source／Analysis adapter・c634／5b1／e924重み不変を確認。通常原価・総保持／総請求は未測定。原GPU ZIP SHA256は3f87fd69e40c1a1807244cc1ddecbb1793266d7d8d45dd28e2feb6cbcce5566b、wireは0b41d3f77663daa9bda56909dac24e76cde20b3df648237d3f1e50adb4ab7f0d。準備・実raw・初回失敗・最終試験・SQL・独立読取と再開点は[同一検証bundle](https://chatgpt.com/library?file_id=libfile_fde3_f-03fc4538c0ac81919d3542b9f676228e_2f7470f963808191aaebf050935e72de&account_id=personal)へ保存する。
+
+STRUCTURE_MAP_DELTA_NONE（既存owner内のmodel専用比較だけ、入口・責務・公開／保存契約不変）。限定TECHNICAL_CREDIT、正式商品品質credit0・正式受入れ0/3。c634通常未採用・selector OFF、本番／実DB／RN／native画像／署名build／本人端末の今回変更0。前回4作品16PNG一致とWholeCanvas／V4失敗はその版の結果として継承する。
+
+次のAR-04は、保存済みc634の新5応答・対照2と旧46、今回のsource資格外3・CMEE未判定1を引き継ぎ、理由・修飾を含む一般文の読取不足と「選ぶ時間を選びたい」の不自然な反復を別の原因として改善する。未判定を意味改変と呼ばず、source／rawの書換えや本人への質問で解析不足を埋めない。同版画像の確認は前回4作品だけで、今回の新5入力（候補本文）へ転用しない。通常統合／本人端末、WholeCanvas／V4の既存失敗、一般品質・AR-01反転と他ARは未完了。c634は通常未採用・selector OFFを維持し、追加fit／通常採用／live配置／署名buildへ自動進行しない。
+
+
+遠隔CIはAPI209b4a27の[Piece42764012309](https://github.com/MassyuRed/mashos-api/actions/runs/42764012309)と[Analysis42764012103](https://github.com/MassyuRed/mashos-api/actions/runs/42764012103)が両方全工程success。Piece job129656124969のmodel17fileも1082 PASS／36.75秒・既存warning1。Analysis job129656121482も各stepの完了と成功を確認した。通常配置を行うworkflowではない。
