@@ -1,4 +1,4 @@
-> **11/10・AR-04最新：** APIc34b820bで、引用内の接続詞・一人称を外側の理由／希望へ誤束縛する読取を修復。引用外の既存scope境界だけを原文上へ束縛し、既存scoped dutyの前提内引用にも生成条件を渡す。固定CPU新2は1件の資格拒否を回復し、1件の誤った引用内scopeを外側へ訂正、3plan計6保存／非生成再読。新46を含む39file5729 PASS／既存3 FAIL、親a67でも同3失敗。前回実5と既存69行の採否／本文／messagesは不変。新2の実4Bは未取得、13,703byte比較packet未送信。f6dae研究候補・通常selector OFF、本番未反映。 [読取修復・検証と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quoted-outer-scope-reader-20261110)。
+> **11/11・AR-04最新：** APIc34b820bの引用外scope修復を、明示承認された新2＋保持3の実4Bで一回確認。5/5採用、3plan計15保存・非生成再読、保持3の全request／raw／response完全一致。9HTTP・学習／retry0、101.508秒で元提供のargs／env／cwdを復元し、通常／Analysis前後response一致・health200。新2に旧モデル生成baselineはなく、原文保持の確認を一般作文品質の改善率へ換算しない。既存3失敗・同版画像／通常統合／本人端末は残件。f6dae研究候補・通常selector OFF、本番未反映。 [実結果・保存と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quoted-outer-scope-actual-20261111)。
 
 > **11/10・AR-04最新：** API2ec79ad0で時点付き本人「は」好み評価の同本人省略を既存S7継続へ接続。明示承認後、保存f6daeで新3＋保持2の実4B本文を1回・学習0で確認。GENERAL01の自然な2文目省略が旧比較で保留されたため、同block・隣接・同じ本人表記の既存条件だけを再利用し、5/5採用・3plan計15保存／非生成再読。保持2の前回request／raw／revisionと凍結69照合行の採否／本文／messagesは不変。9HTTP・97.268秒で元提供復元／health／前後control一致。f6dae研究候補・通常selector OFF、本番未反映。 [実4B新3・保存と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model3-inference-result-20261110)。
 
@@ -6655,3 +6655,14 @@ APIc34b820bの[Piece CI42835666538](https://github.com/MassyuRed/mashos-api/acti
 次は新2（SCOPE-QUOTE-SELF／REASON）＋保持3（QUOTE-RUN／PARAGRAPH／GENERAL07）の実4B本文と、同じ5のCMEE採否・3plan保存再読を一回・学習0で確認する。原7項目・prepared ID／JSON・現builder送信messagesを固定。保持3は前回case objectと全messagesがexactで、新2に旧モデル生成baselineはない。13,703byte／2memberの架空入力と既存runner流用ZIP、SHA256 `78a97b3546c754be3b54fa7ad813859c4056ce1e67122eb4ba9d40e6a9d83ac1`は未送信／未実行。候補5＋通常／Analysis前後control4の最大9HTTP、Piece1load、学習／新weights／retry0、復元込み600秒／復元予約120秒。新packet送信と認証情報を含み得る起動環境全体の同Pod内一時読取・復元再利用は今回の具体確認後に行い、消費済み前回承認を再利用しない。前回の5採用／15保存／102.873秒復元は完了として継承。一般理由／引用・非transitive希望の文体差／広い文章、新f6daeの旧53生成回帰、同版画像／通常統合／本人端末、既存3失敗と他ARは未完。新GPU／追加学習／通常採用／Render／live DB／RN／buildの自動実行0。
 
 全ファイル地図差分：既存`ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py`／`piece_v1c.py`、`ai/services/ai_inference/piece_v2_content_policy.py`／`piece_model_source.py`の責務内修復。新規`ai/tests/test_piece_quoted_scope_binding.py`がsource根拠・モデル本文比較・欄／補足・既存保存consumerの検証ownerで、既存`.github/workflows/piece-b2b-isolated-postgres.yml`の同じPiece model検証stepとpath filterへ追加。新しいAPI入口／DTO／DB／RN／renderer／作者はない。
+
+<a id="piece-quoted-outer-scope-actual-20261111"></a>
+## 11/11 AR-04 — 引用外scopeの実4B本文・保存再読
+
+APIc34b820bの引用外scope修復を、明示承認された新2＋保持3の実4Bで一回確認。5/5採用、3plan計15保存・非生成再読、保持3の全request／raw／response完全一致。9HTTP・学習／retry0、101.508秒で元提供のargs／env／cwdを復元し、通常／Analysis前後response一致・health200。新2に旧モデル生成baselineはなく、原文保持の確認を一般作文品質の改善率へ換算しない。既存3失敗・同版画像／通常統合／本人端末は残件。f6dae研究候補・通常selector OFF、本番未反映。
+
+新2は引用内の話者・理由と外側の本人希望を全量保持。華恋と独立担当が全5本文を読み、意味の追加／退行は見られないが、全slot原文保持のため一般作文品質の改善とはしない。新2の旧model比較はなく、保持3は既露出。今回商品source／test／CI変更0、STRUCTURE_MAP_DELTA_NONE。c34読取修復の責務差分と既存3失敗は前節の履歴を維持する。
+
+次は引用・理由の一般読取、非transitive希望の文体差と広い一般文章を、既存source／意味型／欄別生成条件と保存済み実本文から進める。今回の新2実4B・保持3照合・15保存再読は完了として継承し、この9HTTPを再実行しない。新2の旧model baseline、広い一般品質、新f6daeの旧53全生成回帰、同版画像／通常統合／本人端末、既存無引用3失敗、AR-01と他ARは未完。新しいGPU実行・追加学習・通常採用・selector有効化・Render／live DB／RN／buildを今回の承認から自動実行しない。
+
+詳細：[実原本・15保存・限界](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quoted-outer-scope-actual-20261111)。

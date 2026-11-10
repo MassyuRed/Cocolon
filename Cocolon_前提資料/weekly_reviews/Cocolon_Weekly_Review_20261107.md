@@ -1,5 +1,7 @@
 # 第10回 Cocolon週末報告会 — 2026-11-07（終了）
 
+> **11/11・AR-04最新：** APIc34b820bの引用外scope修復を、明示承認された新2＋保持3の実4Bで一回確認。5/5採用、3plan計15保存・非生成再読、保持3の全request／raw／response完全一致。9HTTP・学習／retry0、101.508秒で元提供のargs／env／cwdを復元し、通常／Analysis前後response一致・health200。新2に旧モデル生成baselineはなく、原文保持の確認を一般作文品質の改善率へ換算しない。既存3失敗・同版画像／通常統合／本人端末は残件。f6dae研究候補・通常selector OFF、本番未反映。 [実結果・保存と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quoted-outer-scope-actual-20261111)。
+
 記録日：2026年11月7日（日本時間）  
 対象週：**2026年11月7日〜11月14日**  
 今回の実績報告対象：**10/31の第9回報告会後〜11/7の確認時点**  
@@ -2724,3 +2726,31 @@ STRUCTURE_MAP_DELTA_PRESENT：既存`cocolon_meaning_experience_engine/piece_sou
 APIc34b820bの[Piece CI42835666538](https://github.com/MassyuRed/mashos-api/actions/runs/42835666538)と[Analysis CI42835666566](https://github.com/MassyuRed/mashos-api/actions/runs/42835666566)は対象head一致・attempt1で全工程success。Piece job129897056145／39step、Analysis job129897056096／19stepを確認。追加run／rerun0。両CI成功を、別に広げたlocal39fileの既存3失敗の解消とは呼ばない。通常配置を行うworkflowではない。
 
 次は新2（SCOPE-QUOTE-SELF／REASON）＋保持3（QUOTE-RUN／PARAGRAPH／GENERAL07）の実4B本文と、同じ5のCMEE採否・3plan保存再読を一回・学習0で確認する。原7項目・prepared ID／JSON・現builder送信messagesを固定。保持3は前回case objectと全messagesがexactで、新2に旧モデル生成baselineはない。13,703byte／2memberの架空入力と既存runner流用ZIP、SHA256 `78a97b3546c754be3b54fa7ad813859c4056ce1e67122eb4ba9d40e6a9d83ac1`は未送信／未実行。候補5＋通常／Analysis前後control4の最大9HTTP、Piece1load、学習／新weights／retry0、復元込み600秒／復元予約120秒。新packet送信と認証情報を含み得る起動環境全体の同Pod内一時読取・復元再利用は今回の具体確認後に行い、消費済み前回承認を再利用しない。前回の5採用／15保存／102.873秒復元は完了として継承。一般理由／引用・非transitive希望の文体差／広い文章、新f6daeの旧53生成回帰、同版画像／通常統合／本人端末、既存3失敗と他ARは未完。新GPU／追加学習／通常採用／Render／live DB／RN／buildの自動実行0。
+
+<a id="piece-quoted-outer-scope-actual-20261111"></a>
+## 76. 補助経路AR-04 — 引用外scopeの実4B本文・保存再読と元提供復元
+
+APIc34b820bの引用外scope修復を、明示承認された新2＋保持3の実4Bで一回確認。5/5採用、3plan計15保存・非生成再読、保持3の全request／raw／response完全一致。9HTTP・学習／retry0、101.508秒で元提供のargs／env／cwdを復元し、通常／Analysis前後response一致・health200。新2に旧モデル生成baselineはなく、原文保持の確認を一般作文品質の改善率へ換算しない。既存3失敗・同版画像／通常統合／本人端末は残件。f6dae研究候補・通常selector OFF、本番未反映。
+
+
+Mashの今回の明示承認後、固定13,703byte／2member・SHA256 `78a97b3546c754be3b54fa7ad813859c4056ce1e67122eb4ba9d40e6a9d83ac1`を既存Pod f1lle4xwq3wjlnへ送り、一回だけ実行した。架空新2＋既露出保持3、候補5と通常／Analysis前後control4の9HTTP、Piece1load、追加学習／新weights／retry／SYSTEM変更0。起動環境全体は元提供の完全復元のため同Pod内で一時読取・再利用し、起動環境の全内容・認証値を原本ZIPやGitHubへ出していない。送信packetとrunnerの名前は11/10の凍結時点を維持し、実行日は11/11 JST。
+
+全処理101.508068秒で元base／既存Analysis提供へ復元した。元PID58638→復元PID61979。args／env／cwdと認証値、元source・Analysis adapter・保存Piece重みの前後一致を確認。通常／Analysisの前後requestと全responseはそれぞれ完全一致し、health正常・独立したlocalhost health HTTP200。最大600秒の承認内で、完了済み前回102.873秒の試行を再実行したものではない。新2の入力token1588／1608、保持3は1708／1849／1556、各2048生成予約込み8192以内。
+
+| 実入力 | 今回の結果 | 全文で確認したこと |
+|---|---|---|
+| SCOPE-QUOTE-SELF | CMEE採用・3plan保存再読 | 引用内の一人称を友人の発言内へ保持し、外側の本人の読書希望と分離 |
+| SCOPE-QUOTE-REASON | CMEE採用・3plan保存再読 | 引用内の理由／休みたいを外側へ移さず、発言全体＋外側の理由と本人の読書希望へ束縛 |
+| QUOTE-RUN | CMEE採用・3plan保存再読 | 前回の全request／raw／responseと完全一致、引用の強調・本人表記を保持 |
+| QUOTE-PARAGRAPH | CMEE採用・3plan保存再読 | 前回の全request／raw／responseと完全一致、引用と外側段落を保持 |
+| GENERAL07 | CMEE採用・3plan保存再読 | 前回の全request／raw／responseと完全一致、引用・否定条件・可能形・過去感情を保持 |
+
+current APIの6対象blobと送信messagesを照合し、実rawを修補せず既存receipt→CMEE／S7へ通した。旧作者fallbackを禁止したまま全5 GENERATED／拒否0。隔離SQLの3plan15試行は15保存、同／新service再読は保存本文一致・0再生成、原入力／Emlis不変・quota各1。保存consumerだけに合成owner／ID／日時を使う等価fixtureで、live Supabase／Authや元GPU要求identityそのものの検証ではない。新しい一回用reviewは現公開repo内の既存保存helperを直接利用し、商品source／test／workflowは変更していない。
+
+華恋と独立担当が5原入力と実本文を全文読取。話者・時点・否定・希望・引用の字面を保持し、未記載の出来事／気持ち／相手意図の追加は見られなかった。一方、全5は各slotの原文を保持した出力であり、一般文章の編集・単独伝達品質の改善を証明しない。新REASONの二重「ので」の重さも原文のまま残る。新2には旧model生成baselineがないためモデル前後改善率は算出しない。保持3は前回露出済みで新規holdoutではない。正式Product Read・本人受入れ・商品品質creditは追加しない。
+
+前回c34の新46成功、local39file5729 PASS／既存3 FAILと同親a67の3失敗再現、Piece／Analysis CI成功は前回の条件付き証拠として保持。今回source変更がないため全suite／CIを再実行せず、15保存の成功を既存3失敗の解消へ読み替えない。STRUCTURE_MAP_DELTA_NONE（今回は実結果だけ。前回c34読取修復のPRESENTは履歴として維持）。DB／公開DTO／保存schema／RN／renderer／通常selectorの責務は変わらない。
+
+非公開実原本ZIP SHA256 `415d4210cec837e07f8dc634149a2a7e39e743cf76657c9ca36b0e9807466ec0`、result SHA256 `a1b625e2188e8b6557b9ea07a43887778b25ff4a1393245dacdc0d247bb5ad51`。原本・実5全文・隔離15・独立読取・再開点は同じ既存ファイルを更新して保持する：[原本と再開点](https://chatgpt.com/library?file_id=libfile_fde3_f-673fcfecced481919979fee3a71efe51_2f7470f963808191aaebf050935e72de&account_id=personal)。
+
+次は引用・理由の一般読取、非transitive希望の文体差と広い一般文章を、既存source／意味型／欄別生成条件と保存済み実本文から進める。今回の新2実4B・保持3照合・15保存再読は完了として継承し、この9HTTPを再実行しない。新2の旧model baseline、広い一般品質、新f6daeの旧53全生成回帰、同版画像／通常統合／本人端末、既存無引用3失敗、AR-01と他ARは未完。新しいGPU実行・追加学習・通常採用・selector有効化・Render／live DB／RN／buildを今回の承認から自動実行しない。
