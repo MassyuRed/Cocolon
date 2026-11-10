@@ -1,3 +1,5 @@
+> **11/10・AR-04最新：** 引用内stopを持つ新4件＋保持GENERAL07の現builder送信messagesを固定し、13,140byte・2memberの無学習比較packetを準備。構文compile／CRC／member照合は成功、実モデル生成・送信・提供停止0。非環境の稼働確認はhealth200。起動環境全体の読取りは認証情報を含み得るとして自動承認審査に拒否され、未実行。新packet送信と、完全復元に必要な環境内再利用の具体承認待ち。API5816f2d0／f6dae研究候補・通常selector OFF・本番未反映を維持。 [具体packet・確認範囲・再開点](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quote-stop-inference-prepared-20261110)。
+
 > **11/10・AR-04最新：** API5816f2d0で既存の引用対応文分割をPiece source／S7へ再利用し、一組の「」内の句点・疑問符・感嘆符を完全なKEEPとして保持。固定CPU4例は受付不可→採用、3plan計12保存／非生成再読。凍結実4B69照合行と、別照合した直近5応答の採否／本文／messagesは不変。Unicode空白の既存互換も保持。追加GPU生成／学習0、f6dae研究候補・通常selector OFF、本番未反映。 [引用内stopの実装・検証と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quote-internal-stops-20261110)。
 
 > **11/10・AR-04最新：** API2ec79ad0で時点付き本人「は」好み評価の同本人省略を既存S7継続へ接続。明示承認後、保存f6daeで新3＋保持2の実4B本文を1回・学習0で確認。GENERAL01の自然な2文目省略が旧比較で保留されたため、同block・隣接・同じ本人表記の既存条件だけを再利用し、5/5採用・3plan計15保存／非生成再読。保持2の前回request／raw／revisionと凍結69照合行の採否／本文／messagesは不変。9HTTP・97.268秒で元提供復元／health／前後control一致。f6dae研究候補・通常selector OFF、本番未反映。 [実4B新3・保存と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model3-inference-result-20261110)。
@@ -391,3 +393,17 @@ STRUCTURE_MAP_DELTA_PRESENT：既存source受理とS7の文境界だけを拡張
 API5816f2d0の[Piece CI42813970927](https://github.com/MassyuRed/mashos-api/actions/runs/42813970927)と[Analysis CI42813971055](https://github.com/MassyuRed/mashos-api/actions/runs/42813971055)は、対象head一致・attempt1で全工程success。Piece job129822209000／39step、Analysis job129822209316／19stepを確認。追加run／rerun0。通常配置を行うworkflowではない。
 
 次は、今回資格化した引用内stopを持つ新4例の実4B本文と、引用を含む理由・希望の自然な実現を確認する。新4＋保持1のcurrent builder送信材料はprivateに準備済みだが、未送信・実行runner未準備。今回の固定CPU本文を実4B品質改善へ換算しない。一組引用の字面保持は確認したが、引用一般の言換え・複数／多重・引用内CR/LF・引用内認識名、理由一般の型付き意味理解、広い一般文章、新f6daeによる旧53全件の生成回帰、同版画像／通常統合／本人端末は未完。前回の新3実4B／15保存と9HTTP・48更新は完了済みとして継承し、再実行しない。通常採用／selector有効化／Render／live DB／RN／buildの自動変更0。
+
+
+<a id="piece-quote-stop-inference-prepared-20261110"></a>
+## 11/10 AR-04 — 引用新4＋保持1の具体packetと未実行範囲
+
+引用内stopを持つ新4件＋保持GENERAL07の現builder送信messagesを固定し、13,140byte・2memberの無学習比較packetを準備。構文compile／CRC／member照合は成功、実モデル生成・送信・提供停止0。非環境の稼働確認はhealth200。起動環境全体の読取りは認証情報を含み得るとして自動承認審査に拒否され、未実行。新packet送信と、完全復元に必要な環境内再利用の具体承認待ち。API5816f2d0／f6dae研究候補・通常selector OFF・本番未反映を維持。
+
+新4の原入力7項目は前回固定CPUのFree保存原本と一致。全5のprepared identity／private JSONと現builder messagesは再導出一致、保持GENERAL07は前回の実request／raw／f6dae revisionとも一致。新4は再構成ownerによりsource_refがCPU送信時と異なるため、CPU時のwire完全同一とは呼ばない。期待正文・raw修補を送信材料に加えない。実行は新4＋保持1と通常／分析前後control4の最大9HTTP、学習0・retry0・Piece load1、全600秒／復元枠120秒。停止前に既存cacheの実tokenizerで入力＋2048≦8192を確認し、不一致は提供停止前に拒否する。
+
+STRUCTURE_MAP_DELTA_NONE。今回はprivate実行準備だけで、商品API／source文法／S7／DB／RN／renderer／通常選択／依存・新GPUの変更0。今回の新pytest／CI実行0、API5816f2d0の前回5263 PASS／両CI成功を継承する。環境全体の読取り・hash確認を、別形式／別経路／runner内で承認なしに代行しない。非環境のPID／args／cwd／source・保存重みだけを確認し、environment hashは前回baselineでありfresh確認済みとはしない。元environment完全一致を守れる既存supervisorは確認できず、変数名を選別して同等復元済みとする代替は不採用。
+
+runnerは起動時の明示ack引数がなければdir作成・process読取前に終了するが、その引数自体はユーザー承認の証拠ではない。確認対象は、この13,140byte packetの既存Runpodへの送信と、同Runpod内で元提供を完全復元するための起動環境全体（既存認証情報を含み得る）の一時読取／コピー・再利用、および一回の無学習比較。環境値を意図的に表示・file／networkへ直列化する処理はない。子serving logを保全するため、既存2API鍵scanを任意の全設定の非漏出証明へ拡張しない。承認後もfresh preflightが元PID／args／cwd／source・weights／env baselineの不一致を検出すれば停止前に終了し、別の材料や反復へ自動進行しない。
+
+次はこの具体的な送信・起動環境再利用・一回実行の承認を得てから進む。今回の新4実4B本文は未取得。実行後は完走／復元と別に、保持GENERAL07の旧raw／revision一致、全5本文の意味・自然さ、CMEE採否と3planの保存・非生成再読を確認する。引用一般の言換え／複数／多重／引用内CR/LF／認識名、理由一般の型付き理解、広い一般品質・同版画像／通常統合／本人端末、AR-01と他ARは未完。前回9HTTPと48更新を再実行しない。
