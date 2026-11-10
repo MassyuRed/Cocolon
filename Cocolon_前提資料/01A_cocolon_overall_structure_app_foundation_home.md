@@ -1,4 +1,4 @@
-> **11/10・AR-04最新：** 固定c634の保存済み7rawを追加生成0で再受領し、理由・本人評価を丸ごと保持する既存S7のmodel専用KEEP比較をAPI0c6ad819で限定修復。GENERAL02は未判定→採用となり同7件は6→7採用、旧46の判定／本文と全8入力のsource資格5／資格外3は不変。新隔離SQL21は全保存・保存後0生成、関連17file1129 PASS／既存warning1。原文／raw・source文法・通常selectorは不変、追加学習・GPU操作・live／実DB／build0。反復、引用／修飾等のsource資格外3、一般品質・通常統合／本人端末・正式0/3は残る。 [実結果・範囲・次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-literal-reason-register-20261110)。
+> **11/10・AR-04最新：** 焦点語順を保つ生成条件の候補1baa7977をAPI別branch `agent/piece-focal-order-candidate-20261110`へ保存。既存の資格済み無scope焦点構文から、原文／本人・述語・対象と範囲を同欄の既存条件へ投影し、語順変換に伴う反復を減らす案。関連1158 PASS＋追加operator4 PASS、旧53rawの判定／本文不変。通常API作業正本は0c6ad819のまま。実4B比較用の架空4入力＋実行コードのRunpod送信は自動承認審査で拒否され、upload／新生成／GPU切替0・品質改善未確認。 [比較準備・未実行と再開点](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-order-preparation-20261110)。
 
 > 11/4のPiece作成・本文・書き出し候補は、末尾の[ファイル差分](#piece-format-language-export-files-20261104)と週次レビュー§141を参照。
 
@@ -6511,3 +6511,16 @@ API209b4a27、累積入口／owner／公開DTO／保存型／DB／RN／workflow�
 固定c634の保存済み7rawを追加生成0で再受領し、理由・本人評価を丸ごと保持する既存S7のmodel専用KEEP比較をAPI0c6ad819で限定修復。GENERAL02は未判定→採用となり同7件は6→7採用、旧46の判定／本文と全8入力のsource資格5／資格外3は不変。新隔離SQL21は全保存・保存後0生成、関連17file1129 PASS／既存warning1。原文／raw・source文法・通常selectorは不変、追加学習・GPU操作・live／実DB／build0。反復、引用／修飾等のsource資格外3、一般品質・通常統合／本人端末・正式0/3は残る。
 
 STRUCTURE_MAP_DELTA_NONE。既存比較内の修復でowner／入口／公開・保存contract変更0。詳細は[結果正本](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-literal-reason-register-20261110)。
+
+
+<a id="piece-focal-order-preparation-20261110"></a>
+## 11/10 AR-04候補file地図 — 元の焦点語順を生成条件へ
+
+| API候補path | 候補責務差分 |
+|---|---|
+| `ai/services/ai_inference/piece_model_source.py` | 既存source資格済み無scope焦点文の完全原文／本人・述語・対象と範囲を、同欄の既存private条件へ投影 |
+| `ai/tests/test_piece_model_authoring_constraints.py` | 本人6表記・既知predicate、元の述語／演算子・氏名と欄・補足／scope分離の33検査 |
+
+焦点語順を保つ生成条件の候補1baa7977をAPI別branch `agent/piece-focal-order-candidate-20261110`へ保存。既存の資格済み無scope焦点構文から、原文／本人・述語・対象と範囲を同欄の既存条件へ投影し、語順変換に伴う反復を減らす案。関連1158 PASS＋追加operator4 PASS、旧53rawの判定／本文不変。通常API作業正本は0c6ad819のまま。実4B比較用の架空4入力＋実行コードのRunpod送信は自動承認審査で拒否され、upload／新生成／GPU切替0・品質改善未確認。
+
+STRUCTURE_MAP_DELTA_PRESENT_CANDIDATE_ONLY、owner／公開／保存追加0。通常作業正本へは未反映。[詳細](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-order-preparation-20261110)。

@@ -881,3 +881,21 @@ STRUCTURE_MAP_DELTA_NONE（既存owner内のmodel専用比較だけ、入口・�
 API変更は`ai/services/ai_inference/piece_v2_content_policy.py`と`ai/tests/test_piece_model_prose_register.py`の2pathのみ。STRUCTURE_MAP_DELTA_NONE（既存model専用比較内部、owner／入口／公開DTO／保存型／DB／RN追加0）。旧native S7既定は厳密保持、source資格・SYSTEM／messages・4B／raw・独立Safety／保存責務を変えない。限定TECHNICAL_CREDIT、商品品質全般・AR-04全体完了・正式受入れへは昇格しない。原本と再開点はprivate `Cocolon_CMEE_AR04_LiteralReason_RegisterReplay_20261110.zip`、前回original bundleも内包し、追加GPU／学習・通常採用は0。
 
 次のAR-04は、保存済みc634の同7応答と旧46、source資格外3を引き継ぐ。今回のopaque KEEP比較は、完全な同一理由前提／ので／対象／評価語・強調／終端を保持し、肯定非過去の「です／だ」と同一文の同表記本人省略だけを扱う。理由一般の型付き意味理解・否定／過去／推量の拡張とはしない。残る「選ぶ時間を選びたい」の反復、修飾付き評価対象と引用の資格不足を別原因として既存商品ownerで改善する。source／rawの書換えや質問で解析不足を埋めず、通常採用／追加fit／live／署名buildへ自動進行しない。同版画像は前回4作品だけで今回7件への転用不可。
+
+
+<a id="piece-focal-order-preparation-20261110"></a>
+## 11/10 AR-04 — 焦点語順による反復対策候補・実比較前
+
+焦点語順を保つ生成条件の候補1baa7977をAPI別branch `agent/piece-focal-order-candidate-20261110`へ保存。既存の資格済み無scope焦点構文から、原文／本人・述語・対象と範囲を同欄の既存条件へ投影し、語順変換に伴う反復を減らす案。関連1158 PASS＋追加operator4 PASS、旧53rawの判定／本文不変。通常API作業正本は0c6ad819のまま。実4B比較用の架空4入力＋実行コードのRunpod送信は自動承認審査で拒否され、upload／新生成／GPU切替0・品質改善未確認。
+
+保存済みGENERAL03／FRESH02の反復は、対象にある選択述語を直接語順へもう一度付ける形で現れている。元の焦点語順は既存S7のmodel用比較で既に受理でき、readerを変更する必要はなかった。D17／D35の反復評価とD20／D21の意味・scope保持を分け、既存plan duty `SOURCE_FOCAL_TO_FIRST_PERSON`の完全な無scope文だけを、元の同欄へ`required_focal_forms`として投影した。既存の述語の肯否／時点／留保を保持し、希望以外を希望へ変えない条件に修正。期待正文・旧作者出力の注入はなく、氏名は既存named_peopleのpublic_roleに従う。scoped／evaluation／directと、補足の別sourceは独立に保持する。
+
+候補の変更は`piece_model_source.py`と`test_piece_model_authoring_constraints.py`の2path。通常API作業branchは0c6ad819を保持し、候補branchだけを1baa7977とした。構造差分は候補の既存private入力境界のみ（STRUCTURE_MAP_DELTA_PRESENT_CANDIDATE_ONLY、新owner／公開DTO／保存型／DB／RN追加0）。通常selector OFF、source資格／SYSTEM／独立CMEE／保存責務／重みは不変。今回の変更を実反復修復、商品品質PASS、通常採用へ昇格しない。
+
+候補条件を架空4source（前回GENERAL03／FRESH02＋新FOCAL01／FOCAL02）で凍結し、before／afterのsources・field slotsとSYSTEM一致、変化が焦点条件だけであることを確認した。前回7中の非focal5wireも一致。関連17file1158 PASS／72.32秒・既存warning1、追加4operatorを含む焦点33 PASS（103 deselected）。初回新テストの未対応predicateを選んだ6失敗と不在slotへの期待1失敗、SQL用環境変数未指定3errorは原本保持し、既存source資格・条件を緩めず検証材料／環境を是正した。
+
+旧53rawは判定・本文不変。今回の隔離SQLは通常6入力×3planの18保存後、補足の先行Emlis初回保存がthread_conflictで止まった。Piece処理前であり、当時のSQL詳細がないため期限超過とは断定しない。同じ補足1入力×3planだけを新しい負荷なし隔離DBで再確認し、3保存・非生成再読に成功した。前の18を再実行・重複加算せず、今回成功18＋再確認3、初回失敗1を分けて保持する。製品／lease／SQLの修正は0。実Supabase／本人Auth／端末ではない。
+
+既存Jupyterへ到達し、元提供PID46144・GPU8882MiB・health200をread-onlyで確認した。新比較ファイル13,753byteのupload操作を自動承認審査が「internal code/test metadataを外部Runpodへ送るpayload／destinationへの明示承認不足」として拒否した。別経路の貼付や間接実行で回避せず、upload／モデル切替／新生成は未実施。payloadは架空4入力と比較runnerの2memberだけで、本人入力やcredential値は含まない。SHA256 `647fe53b567d782f3d67d774cb261be3df04a85e0cce7d680395fd0e1a6a5b6e`、候補source／before原本／bounded復元条件を保持する。原本・入力・再開点はprivate `Cocolon_CMEE_AR04_FocalOrder_Prepared_20261110.zip`へ保存。新しい実4B結果・自然さの改善は未確認で、PREPARATION_ONLY。
+
+次は、保存した13,753byteの比較用ZIP（架空新2＋既使用2・比較コード）を既存Runpod f1lle4xwq3wjlnへ送信し、同c634のbefore4／after4と既存提供の前後control4、計最大12HTTP・600秒／復元枠120秒で一回比較する。現在はこの送信・実行への明示承認待ちであり、uploadも生成も再試行していない。原文／raw修補、SYSTEM変更、学習／新レンタル／通常採用／live／実DB／buildは0。修飾付き評価・引用のsource資格外3、一般品質・通常統合／本人端末と他ARは引き続き未完。

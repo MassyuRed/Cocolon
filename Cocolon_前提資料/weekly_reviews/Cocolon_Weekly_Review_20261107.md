@@ -2543,3 +2543,13 @@ API209b4a27で完全本人文と未決定の場所等を既存model比較へ限�
 既存S7でopaque KEEPの完全な理由・対象・本人を保つ字面照合を追加。型付き理由一般理解や新しいsource資格の追加ではない。新47を含む関連1129 PASSと、新隔離SQL21全保存／保存後0生成を確認。初回testの自己理解既定値の混入による21失敗は平穏weakへ揃えて是正し、失敗原本も保存。STRUCTURE_MAP_DELTA_NONE。対象は既存policy／test2path、今回GPU／Render／実DB／RN／build操作0。[正本・全結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-literal-reason-register-20261110)。
 
 次のAR-04は、保存済みc634の同7応答と旧46、source資格外3を引き継ぐ。今回のopaque KEEP比較は、完全な同一理由前提／ので／対象／評価語・強調／終端を保持し、肯定非過去の「です／だ」と同一文の同表記本人省略だけを扱う。理由一般の型付き意味理解・否定／過去／推量の拡張とはしない。残る「選ぶ時間を選びたい」の反復、修飾付き評価対象と引用の資格不足を別原因として既存商品ownerで改善する。source／rawの書換えや質問で解析不足を埋めず、通常採用／追加fit／live／署名buildへ自動進行しない。同版画像は前回4作品だけで今回7件への転用不可。
+
+
+<a id="piece-focal-order-preparation-20261110"></a>
+## 62. 補助経路AR-04 — 焦点語順の反復対策候補と実比較の送信待ち
+
+焦点語順を保つ生成条件の候補1baa7977をAPI別branch `agent/piece-focal-order-candidate-20261110`へ保存。既存の資格済み無scope焦点構文から、原文／本人・述語・対象と範囲を同欄の既存条件へ投影し、語順変換に伴う反復を減らす案。関連1158 PASS＋追加operator4 PASS、旧53rawの判定／本文不変。通常API作業正本は0c6ad819のまま。実4B比較用の架空4入力＋実行コードのRunpod送信は自動承認審査で拒否され、upload／新生成／GPU切替0・品質改善未確認。
+
+原本／欄／補足を保持した既存private生成条件の候補で、実出力の改善は未確認。旧53rawの判定・本文を維持、通常隔離SQL18保存＋補足の選択再確認3保存。初回補足1失敗は保持し、製品コード／期限は変更していない。候補sourceは別branch1baa7977、通常正本0c6ad819、通常selector OFF。 [候補・検証と未実行の正本](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-order-preparation-20261110)。
+
+次は、保存した13,753byteの比較用ZIP（架空新2＋既使用2・比較コード）を既存Runpod f1lle4xwq3wjlnへ送信し、同c634のbefore4／after4と既存提供の前後control4、計最大12HTTP・600秒／復元枠120秒で一回比較する。現在はこの送信・実行への明示承認待ちであり、uploadも生成も再試行していない。原文／raw修補、SYSTEM変更、学習／新レンタル／通常採用／live／実DB／buildは0。修飾付き評価・引用のsource資格外3、一般品質・通常統合／本人端末と他ARは引き続き未完。
