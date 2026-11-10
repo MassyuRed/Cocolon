@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/11・AR-04最新：** API48bb559aで、既資格literal本人文章「休みたい／読みたい」の原順・全文保持を既存model文体比較へ接続。固定CPU新3は同じ候補0→3採用、意味変異26拒否、前回実5の採否／本文／意味／plan／prepared／messages不変、3plan計9保存・非生成再読。専用548成功、関連39fileは5910 PASS／既存3 FAIL。独立CPU404例では退行0・意味変異33拒否、native／canonical不変。新3実4Bは未取得、13,684byte比較packetは未送信・今回の具体承認待ち。f6dae研究候補・通常selector OFF、本番未反映。 [literal原順比較・検証と次](#piece-literal-scoped-register-20261111)。
+> **11/11・AR-04最新：** 承認済み13,684byte・新3＋保持2のrunnerを一回起動したが、親launcherが稼働用venvではなくsystem Pythonを使ったため、transformers import前の事前確認でModuleNotFoundError、0.088435秒で失敗終了。モデルHTTP／Piece load／学習／提供停止／復元操作は0。元PID62196・args／env／cwd一致、runner health正常と独立health200を確認。新3本文・今回のCMEE採否／保存は未取得。既存稼働Pythonでtransformers／torchの所在を確認し、同じpacketを変えず起動指定だけ直す一回案を準備。再実行は未承認・未実行。API48bb559a・通常selector OFF・本番未反映。 [事前確認失敗・起動修正案](piece_request_account_reuse_review.md#piece-literal-scoped-register-preflight-failed-20261111)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -1304,3 +1304,24 @@ STRUCTURE_MAP_DELTA_NONE：既存model S7内の本文比較だけで、責務／
 原本・固定CPU前後・9保存・実5維持・独立検証・新一回比較準備と再開点：[原本と再開点](https://chatgpt.com/library?file_id=libfile_fde3_f-d3542cffcaa08191844d949658a44bd1_2f7470f963808191aaebf050935e72de&account_id=personal)。
 
 次は、この新3（REST-REASON／READ-CONDITION／READ-QUOTED）＋保持2（SCOPE-QUOTE-REASON／QUOTE-RUN）を、保存f6daeで一回・追加学習0の実4B比較へ通す。固定13,684byte／2member、SHA256 `2ed594826530120ff502019b2f3a4e49b39ea894546e9dbc1baffb00fd51d82d`。候補5＋通常／Analysis前後control4の最大9HTTP、Piece1load、学習／新weights／retry0、復元込み600秒／復元予約120秒。新packet送信と、認証情報を含み得る起動環境全体の同Pod内一時読取・復元再利用は今回の具体承認後に限る。前回の一回承認は消費済みで再利用せず、新送信／新GPU実行／新環境読取0。PID62196は前回復元時の履歴値で、現在の再確認値ではない。前回の実5／15保存／96.028秒復元は完了として継承し、旧runnerを再実行しない。
+
+
+<a id="piece-literal-scoped-register-preflight-failed-20261111"></a>
+## 11/11 AR-04 — 一回事前確認の失敗と既存Python指定の修正案
+
+承認済み13,684byte・新3＋保持2のrunnerを一回起動したが、親launcherが稼働用venvではなくsystem Pythonを使ったため、transformers import前の事前確認でModuleNotFoundError、0.088435秒で失敗終了。モデルHTTP／Piece load／学習／提供停止／復元操作は0。元PID62196・args／env／cwd一致、runner health正常と独立health200を確認。新3本文・今回のCMEE採否／保存は未取得。既存稼働Pythonでtransformers／torchの所在を確認し、同じpacketを変えず起動指定だけ直す一回案を準備。再実行は未承認・未実行。API48bb559a・通常selector OFF・本番未反映。
+
+
+今回の13684byte packetはCRC・全member・runner／wireのSHAを照合して既存Podへ送信した。初回の複数行terminal入力は改行が崩れshellの未確定入力となり、Python／runnerは実行されなかった。別の空terminalで一行base64 envelopeへ直して、一度だけrunnerを起動した。launcher PID62310。これはGPU runnerのretryではないが、UI入力構築の不備として記録する。
+
+実際の一回runnerは原processと全起動環境を読み、既存hashのargs／env／cwd一致まで到達した。その後の `from transformers import AutoTokenizer` に進む際、親launcherが `/usr/bin/python3` を選んでいたためModuleNotFoundErrorで停止した。華恋の起動指定ミスであり、4B本文品質・CMEE意味判定の失敗ではない。read-only診断ではsystem Pythonのtransformersが不在、稼働processのargv[0]は `/workspace/cocolon_venv/bin/python`、同Pythonのfind_specでtransformers／torchが所在することを確認した。新規install・依存変更・tokenizer／モデルloadは行っていない。
+
+実原本はFAILED／preflight／ModuleNotFoundError、全0.088434677秒、HTTP0／Piece load0／学習0／retry0／提供停止0／復元試行0。token数確認はSTARTED／空集合で未完。args／env／cwd一致とhealth=trueを保持し、独立read-only localhost health HTTP200・元PIDfile62196も確認した。`original_restored=false`・`credentials_preserved=false`は後段のcredential変数初期化／復元検査が未到達であるため、そのまま保持し、credential変更や停止後の復元失敗とは読まない。`identity_check_error_type=FileNotFoundError`も、事前確認後に作る予定の凍結server copyが未作成のまま後段identity確認へ進んだ記録であり、successへ消去しない。全envの値dumpは回収原本に含めず、全環境は同Pod内のメモリに留めた。APIkeyを含む可能性のある全環境を読んだeffect自体は0へ戻さない。
+
+失敗原本ZIPは1744byte、SHA256 `4fe9c1c6c1daba0eede03dadc481ef8c547bee023fd11cef7ec8e693cc03b156`。result SHA256 `9f3accb1b39ff3a30bc4cc50cf6997bcc4553b53184b5b4ba389bd44934f22f0`。原本CRC・runner／wire hash・空callsと停止前失敗をoffline監査した。今回は新しい実4B本文・同rawの旧／新CMEE比較・15保存／再読を得ていない。前回までのCPU新3採用／9保存・実5維持・5910 PASS／既存3 FAIL・両CI成功は、各前回の条件付き証拠として継承し、今回の結果へ再加算しない。
+
+修正案はprivateな一回launcherだけを、既存の稼働Pythonへ明示固定する。find_spec・実行中argv[0]の一致・packet/member/hash・未使用rootを確認してから同じ凍結runnerを一回だけ起動する。launcherのfresh-approval引数なしの早期停止と構文をlocalで確認済み。新しいchecker／service／dependency／学習／本文修補／source grammar変更／API／DB／RN／workflow変更は0、STRUCTURE_MAP_DELTA_NONE。現失敗rootの削除・書換えや、closed一回承認の再利用を行わない。CURRENT_RULES R3.6とRule18のsingle-use／retry境界に従い、新しい起動には具体承認が必要である。
+
+原本・診断・次の具体launcher：[原本と再開点](https://chatgpt.com/library?file_id=libfile_fde3_f-d3542cffcaa08191844d949658a44bd1_2f7470f963808191aaebf050935e72de&account_id=personal)。
+
+次は、同じ新3＋保持2・同じ13,684byte packet（SHA256 `2ed594826530120ff502019b2f3a4e49b39ea894546e9dbc1baffb00fd51d82d`）を、既存稼働用 `/workspace/cocolon_venv/bin/python`で起動する一回修正案の具体承認後に進める。新root `/workspace/ar04-literal-scoped-register-pythonfix-20261111`を使い、今回の失敗root／原本は変更しない。新しいlauncherだけを送って同Pod上の既存packetを再利用し、runner／wire／原入力／prepared／messages／SYSTEM／生成条件は変更しない。候補5＋通常／Analysis前後control4の最大9HTTP、Piece1load、追加学習／新weights／retry0、復元込み600秒設定・復元予約120秒。認証情報を含み得る全起動環境の同Pod内一時読取・復元再利用も次の一回承認へ含め、今回の承認を再利用しない。
