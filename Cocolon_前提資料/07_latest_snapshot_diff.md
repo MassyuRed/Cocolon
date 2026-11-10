@@ -1,4 +1,4 @@
-> **11/10・AR-04最新：** 承認済みの焦点語順条件を同c634で実比較（架空4入力×前後＝8応答、control4、115.70秒）したが、反復修復0/3・元焦点語順の実現0/4。各版CMEE3/4、FOCAL02の格不成立は両版停止。候補1baa7977は不採用、通常API正本0c6ad819と元提供を維持。隔離保存は24試行＝18保存・非生成再読／6事前拒否。 [実比較結果・不採用と次の作業](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-order-actual-20261110)。
+> **11/10・AR-04最新：** c634の原24教材・元trainer・実48更新・保存weightsを回収照合。焦点source13行は全て直接語順targetで、元語順target0／同述語反復0／大切にしたい0を確認。希望3行のtargetだけを自然な元焦点語順へ変え、全source/messages・他21行を保持した学習比較候補を準備。CPU同意味3／誤意味拒否7・別題材評価4の資格確認済み。新GPU学習／生成／upload0、効果未確認。通常API0c6ad819と1baa不採用を維持。 [原24監査・target3候補と再開点](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-target-teachers-20261110)。
 
 > **2026-11-10・補助経路AR-04（第10回§53）：** 既存S7のmodel専用比較へ、source資格済み非過去wishの明示SELF「が」直接語順を限定接続。保存5b1de6c9の同26rawは0生成で24→25採用、旧24本文不変・source資格外1維持。新78隔離SQLは75保存／3拒否、比較元は旧記録72／6。17file996 PASS／既存warning1、追加学習0、読点の自然さは未修復・通常重み未採用。API `c9e9938981c88e811bde1970725dc3dc35b2ae26`、Piece CI42709594596／Analysis CI42709594021は全工程success、Piece model17file996 PASS／58.98秒。STRUCTURE_MAP_DELTA_NONE（既存owner内比較条件のみ、入口／責務／公開・保存契約不変）。[実結果・次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-qualified-focal-ga-reader-20261110)。
 
@@ -41837,3 +41837,13 @@ STRUCTURE_MAP_DELTA_PRESENT_CANDIDATE_ONLY（既存private生成条件境界の�
 原提供の復帰と通常／分析control前後一致。追加学習／新weights／retry0。STRUCTURE_MAP_DELTA_NONE_FOR_NORMAL、通常branch／selector／live／実DB／buildの変更0。[全結果と次の作業](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-order-actual-20261110)。
 
 次は既存private保存先から、c634を作った原24教材のsource／messages／target・既存trainer・48更新記録を取得し、焦点構文・活動を含む名詞化対象・格・否定／時点／留保・述語重複の被覆を全24行で監査する。現在のcheckpointにはこの原24教材とfit trainerがなく、被覆件数・原因・次のfit行数はまだ不明。今回の評価4入力を教師へ流用せず、別題材の自然な焦点語順／成立する直接語順を教える最小の学習候補へ戻す。今回の条件追加だけでは改善しなかった事実を保持し、prompt一般や学習原因全体へは断定しない。反復目的のS7緩和や不正raw修補は行わない。修飾・引用のsource資格外3、一般品質、通常統合・本人端末、他ARは未完。
+
+
+<a id="piece-focal-target-teachers-20261110"></a>
+## 11/10 AR-04 — 原24教材監査と希望3targetの最小比較候補
+
+c634の原24教材・元trainer・実48更新・保存weightsを回収照合。焦点source13行は全て直接語順targetで、元語順target0／同述語反復0／大切にしたい0を確認。希望3行のtargetだけを自然な元焦点語順へ変え、全source/messages・他21行を保持した学習比較候補を準備。CPU同意味3／誤意味拒否7・別題材評価4の資格確認済み。新GPU学習／生成／upload0、効果未確認。通常API0c6ad819と1baa不採用を維持。
+
+通常商品source・owner／公開／保存／DB／RN差分0、STRUCTURE_MAP_DELTA_NONE。今回のCPU資格確認・準備を自然さ改善へ換算しない。[原本・候補・再開点](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-target-teachers-20261110)。
+
+次は凍結39792byteの3member ZIP（原24のtarget3だけ変更・架空評価16・一回実行コード）を既存Runpodへ送信し、元trainerのfresh base/config・24行48更新で一回比較する段階。全24の訓練SYSTEM／USERと原入力・他21object、seed20261109／LR1e-4／scopeは不変。新評価4基準＋候補16＋元提供前後control4の最大24HTTP、学習300秒／全600秒・復元120秒、旧c634基準12はexact wire/revisionを確認した原本再利用。前回の4入力・学習0の完了runを再使用せず、今回の具体ファイル送信・学習実行を確認してから進む。通常採用／selector／live／実DB／build0。

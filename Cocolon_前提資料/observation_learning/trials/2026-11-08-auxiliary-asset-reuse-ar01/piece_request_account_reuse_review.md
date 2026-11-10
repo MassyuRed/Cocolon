@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/10・AR-04最新：** API0c6ad819の理由／文体修正（旧7応答7採用・旧46本文不変）を維持。今回、焦点語順条件候補1baa7977を承認済みの同c634比較4入力×前後で確認したが、反復修復0/3・焦点語順実現0/4で不採用。各版CMEE3/4、保存24試行は18保存・6事前拒否。115.70秒で元提供復帰・通常／分析control前後一致。追加学習0・通常経路変更0。 [実結果・次の作業](#piece-focal-order-actual-20261110)。
+> **11/10・AR-04最新：** c634の原24教材・元trainer・実48更新・保存weightsを回収照合。焦点source13行は全て直接語順targetで、元語順target0／同述語反復0／大切にしたい0を確認。希望3行のtargetだけを自然な元焦点語順へ変え、全source/messages・他21行を保持した学習比較候補を準備。CPU同意味3／誤意味拒否7・別題材評価4の資格確認済み。新GPU学習／生成／upload0、効果未確認。通常API0c6ad819と1baa不採用を維持。 [原24監査・target3候補と再開点](#piece-focal-target-teachers-20261110)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -922,3 +922,31 @@ isolated PGliteでbefore12／after12（各4入力×3plan）を実consumerへ通�
 元焦点語順は既存S7で受理できるため、この反復を理由にreaderを緩めない。原因として証明したのは「この同c634・この条件追加では改善しなかった」範囲のみ。教師やmodel全体の原因断定は未実施。原本・実行／復元・全raw・SQL・再開点は既存private証拠ZIPの更新版へ保持。
 
 次は既存private保存先から、c634を作った原24教材のsource／messages／target・既存trainer・48更新記録を取得し、焦点構文・活動を含む名詞化対象・格・否定／時点／留保・述語重複の被覆を全24行で監査する。現在のcheckpointにはこの原24教材とfit trainerがなく、被覆件数・原因・次のfit行数はまだ不明。今回の評価4入力を教師へ流用せず、別題材の自然な焦点語順／成立する直接語順を教える最小の学習候補へ戻す。今回の条件追加だけでは改善しなかった事実を保持し、prompt一般や学習原因全体へは断定しない。反復目的のS7緩和や不正raw修補は行わない。修飾・引用のsource資格外3、一般品質、通常統合・本人端末、他ARは未完。
+
+
+<a id="piece-focal-target-teachers-20261110"></a>
+## 11/10 AR-04 — c634原24教材を回収、希望3targetだけの比較候補
+
+c634の原24教材・元trainer・実48更新・保存weightsを回収照合。焦点source13行は全て直接語順targetで、元語順target0／同述語反復0／大切にしたい0を確認。希望3行のtargetだけを自然な元焦点語順へ変え、全source/messages・他21行を保持した学習比較候補を準備。CPU同意味3／誤意味拒否7・別題材評価4の資格確認済み。新GPU学習／生成／upload0、効果未確認。通常API0c6ad819と1baa不採用を維持。
+
+原本は`Cocolon_CMEE_AR04_RegisterRealization_Learning4B_20261110.zip` version2（SHA256 `5ace3202e462da30c5ac3cf353f8b4ace15cc0b9dcbcb371e7663bc2993483d8`）。register dataとGPU frozen dataの実bytes／SHA1e15a00f一致、全24 IDの同順2周・48step、trainer394ad062、scope4389a598、fit report／execution／resultを照合した。元ZIP中のadapter実bytes15351792byteを再hashしc63446a2、config1674byteをd8eefb6dへ一致。前回の手元checkpoint未所持という不足は解消した。旧Runpod fitの再実行ではなく保存原本の再読で、新学習・新生成は0。
+
+| 原24の被覆 | 確認結果 |
+|---|---|
+| 希望焦点source | 3：SCOPEFIT01／RESERVEFIT01／RESERVEFIT02、全て肯定非過去の選びたい |
+| 評価焦点source | 10：過去評価6、既存評価4 |
+| 元焦点語順のtarget | 0/13、全て直接語順へ変換 |
+| 活動を含む時間対象 | 13、対象全体は保持 |
+| 対象内と主節の同述語反復 | 0、今回の反復失敗正文を教えていたわけではない |
+| 大切にしたい／否定希望・過去希望・推量希望 | 各0 |
+| 未決定 | 2：日と参加するか、過去評価6は肯定4／否定2 |
+
+rootと独立担当が全24source/messages/targetを読了。明確な意味反転・FOCAL02型の格不成立は見つけず、語順の一方向偏りと未被覆を事実として記録する。これだけで反復原因や学習の効果を証明しない。最小介入は希望3のassistant_target／target_field_blocksだけを元の自然な焦点順に変更するもの。全原入力・全24SYSTEM/USER・順序・人数・他21object・役割修復09/10を保持する。3教師の対象内動詞は観察する／比べる／聞くで、同述語反復教師は追加しない。
+
+通常API0c6の既存prepare→受領→CMEE／S7で3新targetを無修補受理し、希望→実行済み3・好み否定2・未決定→決定2の7変異を拒否。旧作者は明示禁止。新しい別題材4（反復型3／非反復1、名前役割化と過去否定の好みを含む）の可能本文もCPU資格確認したが、教師・GPU wireへ期待本文を入れていない。旧焦点4＋既成功8＋新4＝16評価で、旧12の元送信messages／c634 revision／生成設定をexact照合。新4と全評価の教材混入0。1baaのrequired_focal_formsは通常wireへ含めない。
+
+既存trainerのfresh base＋新規LoRA/configだけを再利用し、旧adapterを初期値へ読まない。旧24/48と同SYSTEM/seed/LRを保つ一変数比較で、optimizer/RNG再開ではない。通常と分析の元提供PID48418・health200・args/env/cwd hash一致をUI read-only確認。runnerはtokenizerのcached固定版で24train／16推論の全contextを元提供停止前に確認し、所有外GPUや不一致で停止する。学習・候補のrelease errorが元提供の独立復元検査を省略せず、errorがあるrunはCOMPLETEにしない。runnerとZIPの独立reviewは完了、packet SHA256 `8dcf3a2335ed2142171b170e5bd5d4c3369f679a3aab49c9cbb871bfe12c1b8c`。今回upload／GPU学習・生成は未実施。
+
+実行後は新旧同16の意味・本文と保存再読を比較し、3既失敗への転移・新反復3・非反復対照・既成功8を分けて読む。FOCAL02は未教示predicateの広がりprobeで、正しい意味保持と語法が成立するまでは拒否維持。旧53全件の新重み回帰や一般品質とは呼ばない。商品source／reader／公開／保存／DB／RN変更0、STRUCTURE_MAP_DELTA_NONE、正式受入れ等は不変。原本・候補・全照合・実行前状態は`Cocolon_CMEE_AR04_FocalTarget_Learning4B_20261110.zip`へ保存。
+
+次は凍結39792byteの3member ZIP（原24のtarget3だけ変更・架空評価16・一回実行コード）を既存Runpodへ送信し、元trainerのfresh base/config・24行48更新で一回比較する段階。全24の訓練SYSTEM／USERと原入力・他21object、seed20261109／LR1e-4／scopeは不変。新評価4基準＋候補16＋元提供前後control4の最大24HTTP、学習300秒／全600秒・復元120秒、旧c634基準12はexact wire/revisionを確認した原本再利用。前回の4入力・学習0の完了runを再使用せず、今回の具体ファイル送信・学習実行を確認してから進む。通常採用／selector／live／実DB／build0。
