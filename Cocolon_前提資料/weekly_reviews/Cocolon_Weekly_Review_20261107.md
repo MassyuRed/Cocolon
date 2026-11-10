@@ -2476,3 +2476,13 @@ FRESH03の現行SYSTEM／新source条件付きUSERを実4Bへ一回送り、既�
 API fce72bccで旧1期待、後続4da69cdeで近傍旧3期待を、決定済み1..420文字・短文水増しなしへ整合した。累積は既存4test＋workflowの5pathで製品source不変。前段関連1142 PASS（活動名37を含む）と現行選択41 PASSを別集合として保持。全4testfileは384 PASS／2 FAILで、残る過去参照のSELF表記／modal採否の2期待はfceでも同一失敗、今回変更しない。RN4424976bは現行FRESH03保存preview／detailのnative fixtureを既存4testpathへ接続、旧fixture／legacy入力を保持。関連1428 PASS（renderer183を含む）。API CI [42725970549](https://github.com/MassyuRed/mashos-api/actions/runs/42725970549)はfce版の全39工程success（model1000＋選択38）、最終API4da69cdeのCI42727546907も全39工程success（model1000＋選択41）。Analysisは同headの変更path対象外で未実行。native CI [42726292049](https://github.com/MassyuRed/Cocolon/actions/runs/42726292049)の現行FRESH03同版PNG4はbyte／RGBA一致・全文／ロゴを目視確認。canvasは4method中3 PASS／旧WholeCanvas1 FAIL（issue summary59件のmethod名／順は前回基準に一致、今回stdoutのfailure event101件と前回の件数一致は未確認）、ios-sourceはsimctl起動障害cancelled。全CI成功・通常統合・本人端末の成立ではない。
 
 STRUCTURE_MAP_DELTA_NONE、限定TECHNICAL_CREDIT・正式受入れ0/3。学習／通常重み採用／selector有効化／本番反映／署名配布／本人端末確認0。一般品質・FRESH07混在・AR-01反転と他ARは未完了。次のAR-04は、受動依頼と能動否定が同欄にあるFRESH07型の文末混在を、既存4B作者の自然文実現で改善する単位へ進む。保存5b1の原教師24行は全文確認済みでtargetは全て常体、明示受動依頼の丁寧体→常体と同欄の能動否定を組み合わせた例はなかった。この限定された教材被覆と実raw・既存の活用／同義表現知識から生成側の改修箇所を選び、同source前後・別題材・既成功対照を既存CMEE／保存再読まで確認する。原因・学習要否は未確定で、SYSTEM指示周回・生成後補修・第三学習／通常重み採用を自動実行しない。通常統合／本人端末・一般品質、旧canvas失敗／ios-source起動障害、AR-01反転と他ARも残件として保持する。 [実結果・範囲](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-current-wire-register-native-20261110)。
+
+
+<a id="piece-register-coverage-learning-result-20261110"></a>
+## 56. 補助経路AR-04 — 2教材置換の一回48更新と残る受動否定
+
+原24行の22行を保持し独立架空2行だけを置換、同設定からfresh48更新した新c634候補で、同34材料のCMEE採用32→33。既知26は26→26、新8は6→7。文末混在3作品と使役受動の誤り1作品を局所修復し、単文1作品のstyle変化は品質改善へ加算しない。変化5raw／不変29、既知25raw不変。受動否定→能動の意味逆転1例は前後とも未修復で、既存CMEEが拒否を維持した。全34source／前後68本文をroot・独立担当が全文確認。
+
+実46 HTTP＝新基準8＋新候補34＋control4、追加基準26は生成せず記録を再利用。新SQL126は基準24の18保存／6拒否＋候補102の99保存／3拒否＝117保存／9拒否、旧78は再資格化のみ・再実行0。本文／recipe／quota各1・原入力／Emlis不変、保存後0生成。合成Auth／等価合成IDの隔離PGliteでlive DB／本人端末ではない。学習外側214.108663秒・全工程482.039299秒、元提供42764へ復元・health／前後control一致。UI2件目起動はdir guard拒否、完了fitは一回48更新。
+
+製品source／prompt／CMEE変更0・今回新pytest／CI0、STRUCTURE_MAP_DELTA_NONE。新c634は通常未採用／selector OFF、新重みのnative画像・本人端末は未実施。旧5b1のFRESH03画像一致を新候補へ移さない。費用未測定、一般品質／正式0/3・他ARは未完了。次のAR-04は、REGISTER_HELD03に残る「頼まれなかった」という受動否定を能動否定へ変える生成を、既存4B作者の自然文実現側で改善する。本人が依頼を受けた側であることと、その依頼の非発生、原文の相手／対象・過去・本人表記を保持し、同入力前後・能受動／肯否の別題材・今回の成功対照を既存CMEE／保存再読まで比較する。今回の2教師・48更新・完了比較を繰り返さず、原因や次の改修方法を未検証のまま断定しない。CMEE緩和・raw修補・SYSTEM指示周回・追加学習／通常採用の自動実行はしない。新c634候補の同版画像・通常統合／本人端末・一般品質、旧native失敗、AR-01反転と他ARも残件として保持する。 [全実結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-register-coverage-learning-result-20261110)。

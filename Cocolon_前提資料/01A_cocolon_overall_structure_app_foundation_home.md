@@ -1,4 +1,4 @@
-> **11/10・AR-04変更file地図：** API短文test整合累積5pathとRN同版画像検証4pathを追加記録。製品source／責務は不変でSTRUCTURE_MAP_DELTA_NONE。現行FRESH03の同版PNG4は一致、canvas全体の旧WholeCanvas失敗継続とios-source起動障害は保持。[今回の9path](#piece-current-wire-register-native-20261110)。
+> **11/10・AR-04全file地図差分：** 既存trainer／4B作者／意味・保存ownerを不変再利用し、一回の24行／48更新・実比較・隔離保存再読へ使用。製品source変更0、STRUCTURE_MAP_DELTA_NONE。[今回の再利用箇所](#piece-register-coverage-learning-result-20261110)。
 
 > 11/4のPiece作成・本文・書き出し候補は、末尾の[ファイル差分](#piece-format-language-export-files-20261104)と週次レビュー§141を参照。
 
@@ -6437,3 +6437,18 @@ API fce72bcc＋4da69cdeとRN4424976bは以下の検証9pathのみ。製品source
 | RN `tests/piece-v2-renderer.test.js` | 旧新fixtureの同版本文／recipe／hashとpreview・saved・export入力を検証。JS doubleと実pixelを区別。 |
 
 前段local API1142 PASS（活動名37を含む）、現行選択41 PASSと全4file384 PASS／既存2 FAILは別集合。2失敗は修正前fceでも再現する過去参照のSELF表記／modal採否で変更しない。RN1428 PASS（renderer183を含む）。fce版API CI42725970549は全39工程success、最終API4da69cdeのCI42727546907も全39工程success（model1000＋選択41）。Analysisは同headの変更path対象外で未実行。native CI42726292049の現行FRESH03同版PNG4はbyte／RGBA一致。canvas全体は旧WholeCanvasの失敗継続、ios-sourceはsimctl障害cancelled。通常重み未採用／selector OFF・一般品質・本人端末・正式0/3は未完了。 [実結果と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-current-wire-register-native-20261110)。
+
+
+<a id="piece-register-coverage-learning-result-20261110"></a>
+## 2026-11-10 AR-04 一回48更新比較 — 既存owner再利用の全file地図差分
+
+今回の製品source／共有contract／入口・責務の追加変更は0、STRUCTURE_MAP_DELTA_NONE。API4da69cde／RN4424976bは前回の版を保持し、既存4B作者を改修する候補教材・重み・実比較をprivate原本へ保存する。
+
+| 既存path／owner | 今回の実利用・保持した境界 |
+|---|---|
+| API `ai/tools/training/train_piece_model_adapter.py` | 既存exact24行・fresh config・assistant-only loss・seed／LR／scopeを不変再利用し、一回48更新。原22行を保持し独立2行を置換。元5b1重みの途中resumeではない。 |
+| API `piece_model_source.py`／既存4B serving | 現行SYSTEM／USERと同request bodyを固定した旧新比較。追加SYSTEM指示・生成後修補・旧作者fallback・通常selector変更なし。 |
+| 既存CMEE `piece_semantic_admission`／`piece_v2_content_policy.py` | raw無修正で原source／PreparedRequestを照合し、全34で32→33採用。受動否定の未解決1例は前後とも拒否。受理文法を変更しない。 |
+| 既存preview／save／owner service・PGlite検証 | 新42応答×3planの126試行、117保存／9拒否。旧26応答の78は再資格化だけで再実行0。本文／recipe等とquotaを保持、保存後0生成。 |
+
+文末混在3・受動表現1を局所修復し、単文style変化1を品質改善へ数えない。新c634通常未採用／selector OFF・新重みnative画像／本人端末は未実施。新pytest／CI0、旧5b1画像・前回のAPI／RN CIとは別の候補比較である。 [実分母・由来・残差と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-register-coverage-learning-result-20261110)。

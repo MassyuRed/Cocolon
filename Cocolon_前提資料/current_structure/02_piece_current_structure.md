@@ -1,4 +1,4 @@
-> **11/10・補助経路AR-04最新：** FRESH03の現行wire実4B→CMEE→隔離保存再読を確認。文末統一指示は26raw不変で不採用。native同版PNG4はbyte／RGBA一致、canvas全体は旧WholeCanvasの失敗継続・ios-sourceはsimctl障害cancelled。通常重み未採用／selector OFF。[実結果・範囲](#piece-current-wire-register-native-20261110)。
+> **11/10・補助経路AR-04最新：** 一回のfresh24行／48更新で文末混在3と受動表現1を局所修復、CMEE32→33／34。新SQL126は117保存／9拒否、受動否定の1誤りは拒否維持。新c634候補は通常未採用・新重みnative画像未確認。[今回実結果](#piece-register-coverage-learning-result-20261110)。
 
 > **11/7最新・DB／API反映、統合iOSビルド・送信成功：** Free初期2色／Plus・Premium12色、両比率・ロゴ有無を選ぶ権利を、配色migration actual20261107020543（CHECK validated）とAPI5065730eへ反映。Render dep-dbn8h2jl550s73efmcngは11:12:02 JST Live、health/bootstrap200・private5ON/public3OFF・本人境界7smoke期待どおり。対応RN e0ec6d6aのrun42328190568／#75 attempt1は11:14:01 JST開始、11:28:26 JSTに全19step成功。Archive・写真目的文検査・IPA・Upload成功。Apple側の1.0（7501）を照合し、既存内部グループ「Emlis テスト版配布」でTestingを確認。後続にMashから大ボタン・Piece関係の今回修正の実機確認を受領（第10回§14）。分析の実機確認は未実施。旧clientのcapabilitiesと履歴互換、保存recipe／hashを維持。DML／RLS・画像本文・保存枠・公開範囲は変更なし。[準備§12と実反映§13](../weekly_reviews/Cocolon_Weekly_Review_20261107.md#piece-ui-live-and-ios-build-20261107)。
 
@@ -3880,3 +3880,13 @@ FRESH03の残っていた現行USERを実4B一回で確認し、既存の正し�
 API fce72bccの旧短文1期待と後続4da69cdeの近傍3期待を、既決1..420文字・水増しなしへ整合。累積は既存4test＋workflowの5pathのみ。前段関連1142 PASSと現行選択41 PASSは別集合。全4file384 PASS／2 FAILで、残る過去参照のSELF表記／modal採否2期待は修正前fceでも同一失敗を確認し変更しない。RN4424976bのnative fixture／host／renderer test4pathへ同じ現行FRESH03保存preview／detailを接続し、旧fixture／legacy入力を保持。local1428 PASSはrenderer183を含む。fce版API CI42725970549は全39工程success、最終API4da69cdeのCI42727546907も全39工程success（model1000＋選択41）。Analysisは同headの変更path対象外で未実行。native CI42726292049の現行FRESH03 preview／saved／export Card／view-shot PNG4は1080×1350、byte／RGBA一致。本文2文・Emlisロゴを目視し、欠け／overflowなしを同作品の範囲で確認。canvas全体は旧WholeCanvasの失敗継続、ios-sourceはsimctl障害cancelled。製品renderer修正・全native合格・本人端末確認へ換算しない。
 
 STRUCTURE_MAP_DELTA_NONE。通常重み未採用／selector OFF、追加学習・本番反映・署名配布・本人端末0、正式0/3。次のAR-04は、受動依頼と能動否定が同欄にあるFRESH07型の文末混在を、既存4B作者の自然文実現で改善する単位へ進む。保存5b1の原教師24行は全文確認済みでtargetは全て常体、明示受動依頼の丁寧体→常体と同欄の能動否定を組み合わせた例はなかった。この限定された教材被覆と実raw・既存の活用／同義表現知識から生成側の改修箇所を選び、同source前後・別題材・既成功対照を既存CMEE／保存再読まで確認する。原因・学習要否は未確定で、SYSTEM指示周回・生成後補修・第三学習／通常重み採用を自動実行しない。通常統合／本人端末・一般品質、旧canvas失敗／ios-source起動障害、AR-01反転と他ARも残件として保持する。 [実結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-current-wire-register-native-20261110)。
+
+
+<a id="piece-register-coverage-learning-result-20261110"></a>
+## 2026-11-10 既存4B作者の文末実現 — 2教材置換と同34比較
+
+既存trainer／scope／SYSTEMを維持したfresh24行・48更新の一回比較で、既存作者からの実rawが5組変化した。文末混在3と受動表現1の修復を確認、単文1の常体化だけは品質改善へ加算しない。全34のCMEEは32→33、既知25rawを含む他29はbyte一致。受動否定を能動へ変える1例は残り、独立読解でも意味不一致、既存CMEEの拒否を維持する。source／readerを広げず、新作者・raw修補・fallbackはない。
+
+実HTTP46、新SQL126は117保存／9拒否、旧基準78は再資格化のみ・再実行0。保存本文／recipe・quota各1・原入力／Emlis不変、保存後0生成。全工程482.039299秒、元提供42764へ復元・health／前後control一致。合成Auth／等価合成IDの隔離SQLでありliveアプリ一往復ではない。新c634は通常未採用／selector OFF。前回の旧5b1 FRESH03画像一致を、新c634のnative画像確認へ変換しない。今回新重みの画像／本人端末・一般品質／正式0/3は未完了。製品source差分・新pytest／CI0、STRUCTURE_MAP_DELTA_NONE。
+
+次のAR-04は、REGISTER_HELD03に残る「頼まれなかった」という受動否定を能動否定へ変える生成を、既存4B作者の自然文実現側で改善する。本人が依頼を受けた側であることと、その依頼の非発生、原文の相手／対象・過去・本人表記を保持し、同入力前後・能受動／肯否の別題材・今回の成功対照を既存CMEE／保存再読まで比較する。今回の2教師・48更新・完了比較を繰り返さず、原因や次の改修方法を未検証のまま断定しない。CMEE緩和・raw修補・SYSTEM指示周回・追加学習／通常採用の自動実行はしない。新c634候補の同版画像・通常統合／本人端末・一般品質、旧native失敗、AR-01反転と他ARも残件として保持する。 [全実結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-register-coverage-learning-result-20261110)。
