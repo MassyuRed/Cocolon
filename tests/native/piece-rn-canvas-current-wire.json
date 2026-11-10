@@ -1,0 +1,121 @@
+{
+  "schema_version": "piece.ar04_native_bitmap_pair_fixture.v1",
+  "source_case_id": "FRESH03",
+  "variant": "current",
+  "tier": "free",
+  "origin": "Recorded fictional 4B response with exact current application messages, isolated SQL preview/save/detail replay; no live user data.",
+  "scope": "Same canonical body and recipe through actual RN PieceVisualCard/B9 full Card, preview/saved PNG equality and view-shot export. SQL identity is strictly rebound synthetic data; not original GPU identity, live Supabase or owner device proof.",
+  "model_revision": "piece-lora:5b1de6c95569444e3711ab5a3d307d480a5c99ffe3c7e7b6224a42455b3e33d0",
+  "prompt_scope": "EXACT_CURRENT_APPLICATION_MESSAGES",
+  "recorded_sql_source_sha256": "3ba00dde894f728dd735acd2f492015f79bc62d9f39f10b4742d76c0598f91b1",
+  "preview": {
+    "content_payload": {
+      "body_blocks": [
+        "僕にとって、机の高さを確かめることが大事かもしれない。僕は模型作りが苦手だ。"
+      ],
+      "format_type": "short_essay",
+      "language": "ja",
+      "meaning_contract_version": "piece.content_meaning.v1",
+      "safety_contract_version": "piece.public_safety_transformation.v1",
+      "schema_version": "piece.content_payload.v1",
+      "title": null
+    },
+    "content_payload_hash": "048a7445df669256b4e75897830800f8c6f8475ef7692969cee141bc0f43d479",
+    "eligible_formats": [
+      "short_essay"
+    ],
+    "expires_at": "2026-11-10T09:17:24.712+09:00",
+    "format_type": "short_essay",
+    "idempotency_replayed": false,
+    "piece_text": "僕にとって、机の高さを確かめることが大事かもしれない。僕は模型作りが苦手だ。",
+    "piece_text_hash": "04ced83c46cb3750f937d959acb9add08b4d26738d481aeae3eb8ac5a6b27d05",
+    "preview_id": "669cfd3d-f242-b839-d2b2-f20c1457991e",
+    "preview_revision": 1,
+    "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+    "row_version": 1,
+    "safety_state": "ready",
+    "visibility_scope": "private",
+    "visual_recipe": {
+      "aspect_ratio": "4:5",
+      "branding": {
+        "branding_mark_id": "cocolon_text_mark",
+        "branding_mark_version": 1,
+        "branding_mode": "required_small"
+      },
+      "font_style": {
+        "font_style_id": "system_readable",
+        "font_style_version": 1
+      },
+      "format_type": "short_essay",
+      "language": "ja",
+      "layout_policy_version": "piece.long_text_layout.v1",
+      "template": {
+        "template_id": "essay_frame",
+        "template_version": 1
+      },
+      "theme": {
+        "theme_id": "soft_paper",
+        "theme_version": 1
+      },
+      "visual_catalog_version": "piece.visual_catalog.v1",
+      "visual_recipe_version": "piece.visual_recipe.v1"
+    },
+    "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924"
+  },
+  "detail": {
+    "api_contract_version": "piece.api.v2",
+    "piece_contract_version": "piece.record.v2",
+    "export_contract_version": "piece.export_contract.v1",
+    "render_interface_version": "piece.render_interface.v1",
+    "render_reproducibility_version": "piece.render_reproducibility.v1",
+    "format_type": "short_essay",
+    "piece_text": "僕にとって、机の高さを確かめることが大事かもしれない。僕は模型作りが苦手だ。",
+    "piece_text_hash": "04ced83c46cb3750f937d959acb9add08b4d26738d481aeae3eb8ac5a6b27d05",
+    "content_payload": {
+      "body_blocks": [
+        "僕にとって、机の高さを確かめることが大事かもしれない。僕は模型作りが苦手だ。"
+      ],
+      "format_type": "short_essay",
+      "language": "ja",
+      "meaning_contract_version": "piece.content_meaning.v1",
+      "safety_contract_version": "piece.public_safety_transformation.v1",
+      "schema_version": "piece.content_payload.v1",
+      "title": null
+    },
+    "content_payload_hash": "048a7445df669256b4e75897830800f8c6f8475ef7692969cee141bc0f43d479",
+    "visual_recipe": {
+      "aspect_ratio": "4:5",
+      "branding": {
+        "branding_mark_id": "cocolon_text_mark",
+        "branding_mark_version": 1,
+        "branding_mode": "required_small"
+      },
+      "font_style": {
+        "font_style_id": "system_readable",
+        "font_style_version": 1
+      },
+      "format_type": "short_essay",
+      "language": "ja",
+      "layout_policy_version": "piece.long_text_layout.v1",
+      "template": {
+        "template_id": "essay_frame",
+        "template_version": 1
+      },
+      "theme": {
+        "theme_id": "soft_paper",
+        "theme_version": 1
+      },
+      "visual_catalog_version": "piece.visual_catalog.v1",
+      "visual_recipe_version": "piece.visual_recipe.v1"
+    },
+    "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
+    "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+    "piece_id": "669cfd3d-f242-b839-d2b2-f20c1457991e",
+    "public_id": "piece:669cfd3d-f242-b839-d2b2-f20c1457991e",
+    "lifecycle_status": "saved",
+    "visibility_scope": "private",
+    "row_version": 2,
+    "saved_at": "2026-11-10T09:07:24.764+09:00",
+    "content_status": "ready"
+  }
+}
