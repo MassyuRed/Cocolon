@@ -481,16 +481,16 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | AR-04回収・改修 | 既存natural_reply_meaningのfinite節／活用／格／人役読取＋Pieceガードを、piece_source._finite_self_person_action_account→piece_v1cの既存KEEPへ接続。許可述語は頼む／相談する／伝える、明示SELF・肯否過去・相手1／を対象1・句点。曖昧な伝える「に」受動は拒否を維持。新命題・作者・理解／承諾の推測なし |
 | AR-04実本文 | 先行の有限対人動作8は全件不可→生成。時点・SELF6表記・能受動・否定・丁寧体・二欄留保を保持。前回12の生成10はmeaning／plan／artifact／candidate／recipe／serialized hash全同一、拒否2維持。開発作例でblind一般化ではない。前回依頼の新規5は履歴保持、今回の欄名付き比較へ再加算しない |
 | AR-04検証・再読 | 先行有限対人動作の3351 PASS／27.94秒・既存warning1・FAIL／skip0、保存9caseで3plan確認。原本SQL11＋既存helper等3のbytes一致。新旧20を実service／既存review＋PGliteへ通し18保存／2拒否、本文等8fieldの3段同一・保存行／詳細の12field同一、初回後は作者／compiler／Engine／review禁止・同key消費各1。原入力／Emlis不変。合成Auth／先行provider／SQLcallbackであり実DB／native画像／ASGI成功ではない |
-| AR-04反映・残件 | **11/10・AR-04最新：** 固定c634・追加学習0で新しい架空8入力を確認し、source資格5／資格外3を分離。資格5＋既使用対照2の実4B7応答を無修補で再受領し、API209b4a27の既存S7 model比較で、完全な本人表記・対象を保つ「たいです／たい」と未決定の場所等の文体差を限定接続、CMEE4→6採用／7。新規5は2→4採用、対照2と旧46本文は不変。新隔離SQL21は18保存／3拒否、保存後0生成。17file1082 PASS／既存warning1。反復表現、理由文1の未判定、source資格外3は残る。元GPU提供46144へ復元・health／前後control一致、c634通常未採用／selector OFF・正式0/3。 |
+| AR-04反映・残件 | 固定c634の保存済み7rawを追加生成0で再受領し、理由・本人評価を丸ごと保持する既存S7のmodel専用KEEP比較をAPI0c6ad819で限定修復。GENERAL02は未判定→採用となり同7件は6→7採用、旧46の判定／本文と全8入力のsource資格5／資格外3は不変。新隔離SQL21は全保存・保存後0生成、関連17file1129 PASS／既存warning1。原文／raw・source文法・通常selectorは不変、追加学習・GPU操作・live／実DB／build0。反復、引用／修飾等のsource資格外3、一般品質・通常統合／本人端末・正式0/3は残る。 |
 | AR-04現在のrefined | APIca4140abの通常server保存を継承。RN4a103688で表示した第一本人回答の明示選択→exact回答query→七項目refined POSTへ接続。元／補足は別source。旧保存結果不明は元保存要求を優先。同じ実Q2材料の親導線0→新2、本文指紋とSQL保存本文／初回recipe一致。1512関連PASS・Metro1件対象外。未build／未live反映／native未確認 この旧Q2二例は継承時点の記録。前回の実Q2四例と名前役割化adjusted三planの結果を継承し、今回の同4補足は最終18比較の保持対照として確認。 |
-| AR-04現在の4B本文読取 | 既存source資格・欄完全性／本人補足分離・一人称表記・評価／留保・S7／独立CMEEと保存責務を継承。API1ce24b8cは既存MeaningWitnessのsubject／agent／counterpartとsource_literalを、当該source part全体が既知有限動作で完全被覆される受動含有fieldへ投影する。同fieldの各動作へ固有の役割・NEG／PAST／voice／source/spanを保ち、active-only／非有限混在と今回の既存refined4のwireは不変。期待正文・raw修補・source文法や採否条件の緩和はない。同c634の46材料は44→46採用、H03／B2だけ意味修復・他44raw一致。c634通常未採用／selector OFF。同版画像4作品を確認、一般品質／通常統合／本人端末は未確認。 model専用S7比較はAPI209b4a27で完全本人文／未決定対象の敬体差へ限定接続し、新5＋対照2の同rawを4→6採用。source／raw不変、一般比較器ではない。 |
-| AR-04再開記録 | 次のAR-04は、保存済みc634の新5応答・対照2と旧46、今回のsource資格外3・CMEE未判定1を引き継ぎ、理由・修飾を含む一般文の読取不足と「選ぶ時間を選びたい」の不自然な反復を別の原因として改善する。未判定を意味改変と呼ばず、source／rawの書換えや本人への質問で解析不足を埋めない。同版画像の確認は前回4作品だけで、今回の新5入力（候補本文）へ転用しない。通常統合／本人端末、WholeCanvas／V4の既存失敗、一般品質・AR-01反転と他ARは未完了。c634は通常未採用・selector OFFを維持し、追加fit／通常採用／live配置／署名buildへ自動進行しない。 [今回実結果](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-general-prose-register-20261110) |
+| AR-04現在の4B本文読取 | 既存source資格・欄完全性／本人補足分離・一人称表記・評価／留保・S7／独立CMEEと保存責務を継承。API1ce24b8cは既存MeaningWitnessのsubject／agent／counterpartとsource_literalを、当該source part全体が既知有限動作で完全被覆される受動含有fieldへ投影する。同fieldの各動作へ固有の役割・NEG／PAST／voice／source/spanを保ち、active-only／非有限混在と今回の既存refined4のwireは不変。期待正文・raw修補・source文法や採否条件の緩和はない。同c634の46材料は44→46採用、H03／B2だけ意味修復・他44raw一致。c634通常未採用／selector OFF。同版画像4作品を確認、一般品質／通常統合／本人端末は未確認。 model専用S7比較はAPI209b4a27で完全本人文／未決定対象の敬体差へ限定接続し、新5＋対照2の同rawを4→6採用。source／raw不変、一般比較器ではない。 後続API0c6ad819は資格済みopaque理由KEEPの完全字面を保ち、同本人省略／肯定copulaだけ照合。同7rawは6→7採用・旧46本文不変、source資格5／3不変。理由一般の型付き読解・source文法拡張は0。 |
+| AR-04再開記録 | 次のAR-04は、保存済みc634の同7応答と旧46、source資格外3を引き継ぐ。今回のopaque KEEP比較は、完全な同一理由前提／ので／対象／評価語・強調／終端を保持し、肯定非過去の「です／だ」と同一文の同表記本人省略だけを扱う。理由一般の型付き意味理解・否定／過去／推量の拡張とはしない。残る「選ぶ時間を選びたい」の反復、修飾付き評価対象と引用の資格不足を別原因として既存商品ownerで改善する。source／rawの書換えや質問で解析不足を埋めず、通常採用／追加fit／live／署名buildへ自動進行しない。同版画像は前回4作品だけで今回7件への転用不可。 [今回実結果](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-literal-reason-register-20261110) |
 
 以後はこの表と各能力の対応行を現在状態へ置換更新し、詳細な実行事実は既存trial／weeklyへ置く。新しいhandoff系列・全件hash Gateを作らない。中断時も、成果物と未実行を既存保存先へ残し、同じ未完商品単位から続ける。
 
 ## 12. 今後の指示と再開方法
 
-**11/10の現在の再開点：** 次のAR-04は、保存済みc634の新5応答・対照2と旧46、今回のsource資格外3・CMEE未判定1を引き継ぎ、理由・修飾を含む一般文の読取不足と「選ぶ時間を選びたい」の不自然な反復を別の原因として改善する。未判定を意味改変と呼ばず、source／rawの書換えや本人への質問で解析不足を埋めない。同版画像の確認は前回4作品だけで、今回の新5入力（候補本文）へ転用しない。通常統合／本人端末、WholeCanvas／V4の既存失敗、一般品質・AR-01反転と他ARは未完了。c634は通常未採用・selector OFFを維持し、追加fit／通常採用／live配置／署名buildへ自動進行しない。
+**11/10の現在の再開点：** 次のAR-04は、保存済みc634の同7応答と旧46、source資格外3を引き継ぐ。今回のopaque KEEP比較は、完全な同一理由前提／ので／対象／評価語・強調／終端を保持し、肯定非過去の「です／だ」と同一文の同表記本人省略だけを扱う。理由一般の型付き意味理解・否定／過去／推量の拡張とはしない。残る「選ぶ時間を選びたい」の反復、修飾付き評価対象と引用の資格不足を別原因として既存商品ownerで改善する。source／rawの書換えや質問で解析不足を埋めず、通常採用／追加fit／live／署名buildへ自動進行しない。同版画像は前回4作品だけで今回7件への転用不可。
 
 推奨指示は **「補助経路の活用作業を進めて」**。
 
@@ -687,3 +687,13 @@ API `497f7008fec8935885d09d2e430499892189b5bb`で、以下のsource抜粋とsymb
 新規架空8をsource資格5／資格外3へ分離し、既存c634を1load・学習0で新5＋対照2を生成。現実装の読み取れない構造を、生成誤りや本人への追加質問へ転嫁しない。今回のAPI209b4a27は既存policy／testの2pathだけで、意味保持を緩めず、完全なsource対象／本人文に対する既知敬体差の比較を追加した。STRUCTURE_MAP_DELTA_NONE（既存owner内条件のみ）。quote・修飾source3／opaque理由文1と、選択述語の反復は未解消。旧資産の主体／対象／肯否／時点／unknown保持・変異拒否・独立全文読取・既存保存非生成再読を今回の本文／rawへ適用した。新schema／checker systemや通常生成回数は追加しない。[実装・原本・範囲の正本](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-general-prose-register-20261110)。
 
 次のAR-04は、保存済みc634の新5応答・対照2と旧46、今回のsource資格外3・CMEE未判定1を引き継ぎ、理由・修飾を含む一般文の読取不足と「選ぶ時間を選びたい」の不自然な反復を別の原因として改善する。未判定を意味改変と呼ばず、source／rawの書換えや本人への質問で解析不足を埋めない。同版画像の確認は前回4作品だけで、今回の新5入力（候補本文）へ転用しない。通常統合／本人端末、WholeCanvas／V4の既存失敗、一般品質・AR-01反転と他ARは未完了。c634は通常未採用・selector OFFを維持し、追加fit／通常採用／live配置／署名buildへ自動進行しない。
+
+
+<a id="piece-literal-reason-register-20261110"></a>
+## 11/10 AR-04 — 理由KEEPの完全字面と既知copulaの照合
+
+固定c634の保存済み7rawを追加生成0で再受領し、理由・本人評価を丸ごと保持する既存S7のmodel専用KEEP比較をAPI0c6ad819で限定修復。GENERAL02は未判定→採用となり同7件は6→7採用、旧46の判定／本文と全8入力のsource資格5／資格外3は不変。新隔離SQL21は全保存・保存後0生成、関連17file1129 PASS／既存warning1。原文／raw・source文法・通常selectorは不変、追加学習・GPU操作・live／実DB／build0。反復、引用／修飾等のsource資格外3、一般品質・通常統合／本人端末・正式0/3は残る。
+
+STRUCTURE_MAP_DELTA_NONE（既存S7内のmodel比較のみ）。[原本・全結果](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-literal-reason-register-20261110)。
+
+次のAR-04は、保存済みc634の同7応答と旧46、source資格外3を引き継ぐ。今回のopaque KEEP比較は、完全な同一理由前提／ので／対象／評価語・強調／終端を保持し、肯定非過去の「です／だ」と同一文の同表記本人省略だけを扱う。理由一般の型付き意味理解・否定／過去／推量の拡張とはしない。残る「選ぶ時間を選びたい」の反復、修飾付き評価対象と引用の資格不足を別原因として既存商品ownerで改善する。source／rawの書換えや質問で解析不足を埋めず、通常採用／追加fit／live／署名buildへ自動進行しない。同版画像は前回4作品だけで今回7件への転用不可。

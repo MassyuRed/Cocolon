@@ -865,3 +865,19 @@ STRUCTURE_MAP_DELTA_NONE（既存owner内のmodel専用比較だけ、入口・�
 
 
 遠隔CIはAPI209b4a27の[Piece42764012309](https://github.com/MassyuRed/mashos-api/actions/runs/42764012309)と[Analysis42764012103](https://github.com/MassyuRed/mashos-api/actions/runs/42764012103)が両方全工程success。Piece job129656124969のmodel17fileも1082 PASS／36.75秒・既存warning1。Analysis job129656121482も各stepの完了と成功を確認した。通常配置を行うworkflowではない。
+
+
+<a id="piece-literal-reason-register-20261110"></a>
+## 11/10 AR-04 — 保存済み理由文のopaque KEEP・既知文体差を照合
+
+固定c634の保存済み7rawを追加生成0で再受領し、理由・本人評価を丸ごと保持する既存S7のmodel専用KEEP比較をAPI0c6ad819で限定修復。GENERAL02は未判定→採用となり同7件は6→7採用、旧46の判定／本文と全8入力のsource資格5／資格外3は不変。新隔離SQL21は全保存・保存後0生成、関連17file1129 PASS／既存warning1。原文／raw・source文法・通常selectorは不変、追加学習・GPU操作・live／実DB／build0。反復、引用／修飾等のsource資格外3、一般品質・通常統合／本人端末・正式0/3は残る。
+
+前回GENERAL02は理由付き本人評価のsource自体を資格済みopaque KEEPとして持つが、型付きevaluation／scopeには入らず、「私は…ので、私は…が大切です」から同文中の本人省略と「だ」への変化を判定できなかった。意味改変と断定せず、D07／D20／D21の独立本文照合責務を既存S7内で再利用した。完全な理由前提、ので、separator、修飾付き対象、評価語／強調、終端を原文anchorで保持し、既存の同表記本人証明を満たす時だけ省略を許す。競合主題・他人称・参照・別欄の本人借用、理由／対象／述語／肯否／時点／推量／終端の変更は拒否する。一般文の自由な言換え比較器ではない。
+
+原本7件の再受領は保存済み実HTTP/rawだけで実施し、新しい4B呼出しは0。新規5件の採用は4→5、既使用対照2を含む7件は6→7。既存他6件と旧46件の判定・本文は同一、wireとprepared sourceも同一。全8入力の5資格／3資格外の理由も一致。新しい隔離SQL21試行は7件×Free／Plus／Premiumで全保存。前回21試行18保存／3拒否は比較記録として保持し、今回の21へ合算しない。既存serviceのpreview／保存・同／新service再読で本文・recipe／hash・原sourceとEmlis不変、同key枠消費1・保存後0生成。合成Auth／隔離PGliteであり、実Supabase・本人端末の成功ではない。
+
+新47検査を追加し焦点228 PASS、関連17file1129 PASS／76.74秒・既存Pydantic警告1。初回は新testが自己理解の既定metadataを借用して21件source資格不足となった。前回原本の平穏weakへ揃えた後の結果と分け、初回21FAIL／207PASS原本を保持する。製品source文法の修正・失敗隠蔽や旧検査の緩和は0。subagentは読取と設計／差分reviewのみ、rootが実装・検証・反映を担当。
+
+API変更は`ai/services/ai_inference/piece_v2_content_policy.py`と`ai/tests/test_piece_model_prose_register.py`の2pathのみ。STRUCTURE_MAP_DELTA_NONE（既存model専用比較内部、owner／入口／公開DTO／保存型／DB／RN追加0）。旧native S7既定は厳密保持、source資格・SYSTEM／messages・4B／raw・独立Safety／保存責務を変えない。限定TECHNICAL_CREDIT、商品品質全般・AR-04全体完了・正式受入れへは昇格しない。原本と再開点はprivate `Cocolon_CMEE_AR04_LiteralReason_RegisterReplay_20261110.zip`、前回original bundleも内包し、追加GPU／学習・通常採用は0。
+
+次のAR-04は、保存済みc634の同7応答と旧46、source資格外3を引き継ぐ。今回のopaque KEEP比較は、完全な同一理由前提／ので／対象／評価語・強調／終端を保持し、肯定非過去の「です／だ」と同一文の同表記本人省略だけを扱う。理由一般の型付き意味理解・否定／過去／推量の拡張とはしない。残る「選ぶ時間を選びたい」の反復、修飾付き評価対象と引用の資格不足を別原因として既存商品ownerで改善する。source／rawの書換えや質問で解析不足を埋めず、通常採用／追加fit／live／署名buildへ自動進行しない。同版画像は前回4作品だけで今回7件への転用不可。

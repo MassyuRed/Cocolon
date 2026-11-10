@@ -2533,3 +2533,13 @@ API209b4a27で完全本人文と未決定の場所等を既存model比較へ限�
 
 
 遠隔CIはAPI209b4a27の[Piece42764012309](https://github.com/MassyuRed/mashos-api/actions/runs/42764012309)と[Analysis42764012103](https://github.com/MassyuRed/mashos-api/actions/runs/42764012103)が両方全工程success。Piece job129656124969のmodel17fileも1082 PASS／36.75秒・既存warning1。Analysis job129656121482も各stepの完了と成功を確認した。通常配置を行うworkflowではない。
+
+
+<a id="piece-literal-reason-register-20261110"></a>
+## 61. 補助経路AR-04 — 保存済み理由付き本人評価の未判定を修復
+
+固定c634の保存済み7rawを追加生成0で再受領し、理由・本人評価を丸ごと保持する既存S7のmodel専用KEEP比較をAPI0c6ad819で限定修復。GENERAL02は未判定→採用となり同7件は6→7採用、旧46の判定／本文と全8入力のsource資格5／資格外3は不変。新隔離SQL21は全保存・保存後0生成、関連17file1129 PASS／既存warning1。原文／raw・source文法・通常selectorは不変、追加学習・GPU操作・live／実DB／build0。反復、引用／修飾等のsource資格外3、一般品質・通常統合／本人端末・正式0/3は残る。
+
+既存S7でopaque KEEPの完全な理由・対象・本人を保つ字面照合を追加。型付き理由一般理解や新しいsource資格の追加ではない。新47を含む関連1129 PASSと、新隔離SQL21全保存／保存後0生成を確認。初回testの自己理解既定値の混入による21失敗は平穏weakへ揃えて是正し、失敗原本も保存。STRUCTURE_MAP_DELTA_NONE。対象は既存policy／test2path、今回GPU／Render／実DB／RN／build操作0。[正本・全結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-literal-reason-register-20261110)。
+
+次のAR-04は、保存済みc634の同7応答と旧46、source資格外3を引き継ぐ。今回のopaque KEEP比較は、完全な同一理由前提／ので／対象／評価語・強調／終端を保持し、肯定非過去の「です／だ」と同一文の同表記本人省略だけを扱う。理由一般の型付き意味理解・否定／過去／推量の拡張とはしない。残る「選ぶ時間を選びたい」の反復、修飾付き評価対象と引用の資格不足を別原因として既存商品ownerで改善する。source／rawの書換えや質問で解析不足を埋めず、通常採用／追加fit／live／署名buildへ自動進行しない。同版画像は前回4作品だけで今回7件への転用不可。
