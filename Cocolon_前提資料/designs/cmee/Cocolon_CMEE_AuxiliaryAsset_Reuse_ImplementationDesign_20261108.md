@@ -12,6 +12,8 @@ current_next: AR-04
 runtime_effect_of_this_document: 0
 ---
 
+> **11/10・AR-04最新：** Mashの具体承認後、保存f6daeで新4＋保持1を一回・学習0で実確認。新4中3件＋保持1を採用、QUOTE-RUNは引用内強調の句点化と外側本人表記省略で不採用を維持。3plan計15試行は12保存／非生成再読・3事前拒否。9HTTP・108.873秒で元提供のargs／env／cwdを復元し、healthと通常／分析の前後control完全一致。API5816f2d0・f6dae研究候補／通常selector OFF、本番未反映。 [実本文・保存・復元と次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quote-stop-inference-result-20261110)。
+
 > **11/10・AR-04最新：** 引用内stopを持つ新4件＋保持GENERAL07の現builder送信messagesを固定し、13,140byte・2memberの無学習比較packetを準備。構文compile／CRC／member照合は成功、実モデル生成・送信・提供停止0。非環境の稼働確認はhealth200。起動環境全体の読取りは認証情報を含み得るとして自動承認審査に拒否され、未実行。新packet送信と、完全復元に必要な環境内再利用の具体承認待ち。API5816f2d0／f6dae研究候補・通常selector OFF・本番未反映を維持。 [具体packet・確認範囲・再開点](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quote-stop-inference-prepared-20261110)。
 
 > **11/10・AR-04最新：** API5816f2d0で既存の引用対応文分割をPiece source／S7へ再利用し、一組の「」内の句点・疑問符・感嘆符を完全なKEEPとして保持。固定CPU4例は受付不可→採用、3plan計12保存／非生成再読。凍結実4B69照合行と、別照合した直近5応答の採否／本文／messagesは不変。Unicode空白の既存互換も保持。追加GPU生成／学習0、f6dae研究候補・通常selector OFF、本番未反映。 [引用内stopの実装・検証と次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quote-internal-stops-20261110)。
@@ -378,13 +380,13 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 | AR-01 | 現naturalの主体・所有者・否定・時点・留保を、旧失敗・意味比較・共通原因分析で改善。EM-01a/b | 現6境界と正常な短文／省略で、同入力の誤読を解消または明確に減らし、自然さ・別題材・既成功・保存再読を保持。検出増加／無出力だけでは完了しない | 継続中。新24実生成の4版は通常不採用。c6555fd5で疑問符なしの確認質問の保存抜けを修復、250局所PASS。同24rawは旧24保存→新22保存／2拒否、受理本文不変。全体の意味修復は未完 |
 | AR-02 | 現naturalの任意問い・回答・訂正・撤回・frameの一往復。EM-02a/b、03b | 一点確認／skip／終了／本人続行、対象だけ更新、撤回後の残存意味、同版再読、プラン境界 | AR-01の全一般品質完成待ちにはしない。未開始 |
 | AR-03 | 適格履歴の意味ある利用。EM-03a/b | 同一／別場面・変化・無関係・訂正前を区別し、適切な履歴が今回へ効く。失効材料を使わない | 現related_contextを継承。未開始 |
-| AR-04 | Piece一般本文・単独伝達・refined・画像整合 | 原文の意味・一人称・本人補足と同版画像／保存を保持 | 引用内stopを持つ新4件＋保持GENERAL07の現builder送信messagesを固定し、13,140byte・2memberの無学習比較packetを準備。構文compile／CRC／member照合は成功、実モデル生成・送信・提供停止0。非環境の稼働確認はhealth200。起動環境全体の読取りは認証情報を含み得るとして自動承認審査に拒否され、未実行。新packet送信と、完全復元に必要な環境内再利用の具体承認待ち。API5816f2d0／f6dae研究候補・通常selector OFF・本番未反映を維持。 |
+| AR-04 | Piece一般本文・単独伝達・refined・画像整合 | 原文の意味・一人称・本人補足と同版画像／保存を保持 | Mashの具体承認後、保存f6daeで新4＋保持1を一回・学習0で実確認。新4中3件＋保持1を採用、QUOTE-RUNは引用内強調の句点化と外側本人表記省略で不採用を維持。3plan計15試行は12保存／非生成再読・3事前拒否。9HTTP・108.873秒で元提供のargs／env／cwdを復元し、healthと通常／分析の前後control完全一致。API5816f2d0・f6dae研究候補／通常selector OFF、本番未反映。 |
 | AR-05 | 分析の本人基準・役割／選択・記録間関係。AN-03a/b/c、04 | 原記録→意味→図／全文→両端根拠の対応、再出現／変化／不明の正しさ | 現Engine統合・保存済み成果を継承。並行可能。未開始 |
 | AR-06 | Emlis観測材料、訂正・削除・権利、長い蓄積と月次。EM-04/05、AN-02/06/08/10 | 本人sourceから材料を渡し、失効・分割範囲・当時版を保持。生成本文を本人事実にしない | AR-02/03/05の該当能力を利用。未開始 |
 | AR-07 | IF／Saved等の商品固有の残る意味保持責務。既存AN／PC残件 | 仮想・本人選択意向・観測を分離し、成立した経路で出力と保存を確認 | 既存商品の実装条件に従う。無断延期・新発売条件化をしない。未開始 |
 | AR-08 | 実証できた共通能力の通常適用と全体確認。EM-05/06/07等 | 採用版の意味保持・自然さ・権利・中断復帰・保存再読・実際の待ち時間／費用。未採用範囲は理由と残差を保持 | 各単位で通常採用可能。全core一括切替を強制しない。未開始 |
 
-現在は **AR-04の実4B引用確認の準備**まで。 次はこの具体的な送信・起動環境再利用・一回実行の承認を得てから進む。今回の新4実4B本文は未取得。実行後は完走／復元と別に、保持GENERAL07の旧raw／revision一致、全5本文の意味・自然さ、CMEE採否と3planの保存・非生成再読を確認する。引用一般の言換え／複数／多重／引用内CR/LF／認識名、理由一般の型付き理解、広い一般品質・同版画像／通常統合／本人端末、AR-01と他ARは未完。前回9HTTPと48更新を再実行しない。
+現在は **AR-04の引用実4B・保存の確認まで完了**。 次は引用内の句読点・強調を平文化する生成側の残差を、既存引用reader・欄別生成条件と原教材の対応から切り分ける。今回の不採用rawを通すS7緩和・原文／raw修補、同じ9HTTPや完了済み48更新の再実行はしない。新4実4Bの取得と同版保存確認は完了として引き継ぐ。引用一般の言換え・複数／多重・引用内CR/LF／認識名、理由一般の型付き読取、広い一般文章品質・同版画像／通常統合／本人端末、AR-01と他ARは未完。通常採用／selector有効化／Render／live DB／RN／buildの自動変更0。
 
 既存の品質作業・新教師8件・保存重みの継続点を使う。GPUに現実の接続障害がある場合、取得できた事実、未実行の生成、回収済み原本、次の同一単位を記録し、CPUの合成成功を実モデル改善へ換算しない。接続復旧や既存の別core実装を必要範囲で進め、無関係な補助機構開発へ変えない。
 
@@ -809,3 +811,25 @@ STRUCTURE_MAP_DELTA_NONE。今回はprivate実行準備だけで、商品API／s
 runnerは起動時の明示ack引数がなければdir作成・process読取前に終了するが、その引数自体はユーザー承認の証拠ではない。確認対象は、この13,140byte packetの既存Runpodへの送信と、同Runpod内で元提供を完全復元するための起動環境全体（既存認証情報を含み得る）の一時読取／コピー・再利用、および一回の無学習比較。環境値を意図的に表示・file／networkへ直列化する処理はない。子serving logを保全するため、既存2API鍵scanを任意の全設定の非漏出証明へ拡張しない。承認後もfresh preflightが元PID／args／cwd／source・weights／env baselineの不一致を検出すれば停止前に終了し、別の材料や反復へ自動進行しない。
 
 次はこの具体的な送信・起動環境再利用・一回実行の承認を得てから進む。今回の新4実4B本文は未取得。実行後は完走／復元と別に、保持GENERAL07の旧raw／revision一致、全5本文の意味・自然さ、CMEE採否と3planの保存・非生成再読を確認する。引用一般の言換え／複数／多重／引用内CR/LF／認識名、理由一般の型付き理解、広い一般品質・同版画像／通常統合／本人端末、AR-01と他ARは未完。前回9HTTPと48更新を再実行しない。
+
+
+<a id="piece-quote-stop-inference-result-20261110"></a>
+## 11/10 AR-04 — 新4実4B・12保存／3拒否・元提供復元
+
+Mashの具体承認後、保存f6daeで新4＋保持1を一回・学習0で実確認。新4中3件＋保持1を採用、QUOTE-RUNは引用内強調の句点化と外側本人表記省略で不採用を維持。3plan計15試行は12保存／非生成再読・3事前拒否。9HTTP・108.873秒で元提供のargs／env／cwdを復元し、healthと通常／分析の前後control完全一致。API5816f2d0・f6dae研究候補／通常selector OFF、本番未反映。
+
+凍結13,140byteの架空入力／既存runnerを承認範囲どおり既存Runpodへ送信。新4＋保持GENERAL07の全5requestが凍結messagesと現builderへ一致し、HTTP200／stop。既存tokenizerで最大1562入力token＋2048を停止前に確認。Piece一回load、追加学習／新weights／retry0。元提供への復元後、起動引数・全environment・cwd・既存credentialsの維持、health200、前後natural／Analysisの全response bytes一致を確認。新しい起動環境読取の未承認状態は今回の明示承認により解消し、このpacketの一回実行だけに適用。他payload／再実行や恒久許可へ拡張しない。
+
+| 実入力 | 本文・採否 | 確認した範囲 |
+|---|---|---|
+| QUOTE-STOP | 採用 | 引用内句点・発言者・外側の否定条件／可能形・過去感情を保持 |
+| QUOTE-QUESTION | 採用 | 引用内疑問符と外側の本人経験・感情を保持 |
+| QUOTE-RUN | 不採用 | 引用内の二重感嘆符を句点へ変更し、外側の明示一人称を省略 |
+| QUOTE-PARAGRAPH | 採用 | 引用段落と本人の感情段落を別slotのまま保持 |
+| GENERAL07 | 保持・採用 | 前回のrequest／raw／全response／revision／usageと完全一致 |
+
+rootと独立担当が全5原文・rawを全読。4採用本文は原文の字面維持であり、一般文章の新しい編集品質改善とは呼ばない。QUOTE-RUNは文法上自然だが、引用の強調を変えており既存KEEPへは採用できない。外側本人省略だけから感情所有の友人への反転を認定せず、S7を緩めたりrawを修補しない。新4には旧モデル生成baselineがなく、学習改善率は出さない。
+
+同じ無修補rawを既存保存consumerへ厳密再bindし、Free／Plus／Premiumの15試行で12保存・同／新serviceの非生成再読、3拒否時のrecord／quota不変を確認。保存は元GPU入力ID／時刻と別の同内容synthetic ID／日時を使う隔離SQLであり、live Supabaseや元GPU identityの通常永続化ではない。原入力／Emlis不変・保存後0生成、旧作者fallback禁止・current builder一致・frozen raw／input不変を確認。STRUCTURE_MAP_DELTA_NONE、商品source／source文法／S7／DB／RN／renderer／通常選択変更0。今回新pytest／CI実行0、API5816f2d0の前回5263 PASS・両CI成功を継承する。凍結69と前回新3の完了creditは継承し、今回新規69生成・再照合とはしない。
+
+次は引用内の句読点・強調を平文化する生成側の残差を、既存引用reader・欄別生成条件と原教材の対応から切り分ける。今回の不採用rawを通すS7緩和・原文／raw修補、同じ9HTTPや完了済み48更新の再実行はしない。新4実4Bの取得と同版保存確認は完了として引き継ぐ。引用一般の言換え・複数／多重・引用内CR/LF／認識名、理由一般の型付き読取、広い一般文章品質・同版画像／通常統合／本人端末、AR-01と他ARは未完。通常採用／selector有効化／Render／live DB／RN／buildの自動変更0。
