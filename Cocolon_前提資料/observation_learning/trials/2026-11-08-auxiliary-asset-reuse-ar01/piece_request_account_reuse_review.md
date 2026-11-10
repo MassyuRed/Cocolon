@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/10・AR-04最新：** c634の原24教材・元trainer・実48更新・保存weightsを回収照合。焦点source13行は全て直接語順targetで、元語順target0／同述語反復0／大切にしたい0を確認。希望3行のtargetだけを自然な元焦点語順へ変え、全source/messages・他21行を保持した学習比較候補を準備。CPU同意味3／誤意味拒否7・別題材評価4の資格確認済み。新GPU学習／生成／upload0、効果未確認。通常API0c6ad819と1baa不採用を維持。 [原24監査・target3候補と再開点](#piece-focal-target-teachers-20261110)。
+> **11/10・AR-04最新：** 希望3targetの語順だけを変える一回48更新を完了。同16入力の比較で旧反復3＋新反復3を全修復、格不成立1も修復し、CMEE15→16/16。保持8に観測した意味退行0。隔離SQL96は旧45保存／3拒否・新48保存、保存後0生成。全403.40秒で元提供復元・通常／分析control raw前後一致。新f6dae重みと全原本を保存、通常API0c6／selector OFF・本番未反映を維持。 [一回比較の実結果・残件](#piece-focal-target-learning-result-20261110)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -950,3 +950,31 @@ rootと独立担当が全24source/messages/targetを読了。明確な意味反�
 実行後は新旧同16の意味・本文と保存再読を比較し、3既失敗への転移・新反復3・非反復対照・既成功8を分けて読む。FOCAL02は未教示predicateの広がりprobeで、正しい意味保持と語法が成立するまでは拒否維持。旧53全件の新重み回帰や一般品質とは呼ばない。商品source／reader／公開／保存／DB／RN変更0、STRUCTURE_MAP_DELTA_NONE、正式受入れ等は不変。原本・候補・全照合・実行前状態は`Cocolon_CMEE_AR04_FocalTarget_Learning4B_20261110.zip`へ保存。
 
 次は凍結39792byteの3member ZIP（原24のtarget3だけ変更・架空評価16・一回実行コード）を既存Runpodへ送信し、元trainerのfresh base/config・24行48更新で一回比較する段階。全24の訓練SYSTEM／USERと原入力・他21object、seed20261109／LR1e-4／scopeは不変。新評価4基準＋候補16＋元提供前後control4の最大24HTTP、学習300秒／全600秒・復元120秒、旧c634基準12はexact wire/revisionを確認した原本再利用。前回の4入力・学習0の完了runを再使用せず、今回の具体ファイル送信・学習実行を確認してから進む。通常採用／selector／live／実DB／build0。
+
+
+<a id="piece-focal-target-learning-result-20261110"></a>
+## 11/10 AR-04 — target語順3行だけの一回48更新、反復6件と格1件を修復
+
+希望3targetの語順だけを変える一回48更新を完了。同16入力の比較で旧反復3＋新反復3を全修復、格不成立1も修復し、CMEE15→16/16。保持8に観測した意味退行0。隔離SQL96は旧45保存／3拒否・新48保存、保存後0生成。全403.40秒で元提供復元・通常／分析control raw前後一致。新f6dae重みと全原本を保存、通常API0c6／selector OFF・本番未反映を維持。
+
+Mashの明示承認により、39792byte／SHA256 `8dcf3a2335ed2142171b170e5bd5d4c3369f679a3aab49c9cbb871bfe12c1b8c` の既存packetを既存Runpodへ送信し、一回だけ実行した。旧24の全source／SYSTEM／USER／行順／人数、他21row objectを維持し、SCOPEFIT01／RESERVEFIT01／02のassistant target語順だけを変更。元trainer・fresh config/base・seed20261109／LR1e-4・24行同順2周は同じ。旧adapter weightsを初期値へ読まず、実48更新、保存後の別fresh baseへの非学習reloadでtensor一致。途中resumeではなくoptimizer／RNG未保存。新weights `f6dae2bbfe737ee9dbbf5419c6e450fbd9e11fe420ed831a26a6cb05c4267a03`、config `9e8aa8d25c746a7529f0a72db8b880c220ad29b7d4ec78fcd6f70572870e5f53`。finalとcheckpoint24は各112 F32 tensor／3,833,856params、全値finiteで、実bytes・実行記録・data/wire/trainer/runnerのhash結合を独立再照合した。
+
+実HTTP24は新4基準＋新16候補の20Pieceと通常／分析前後control4、全200／stop。旧12基準は既存c634の完全同messages／revision／生成条件を確認した原本再利用で、新生成へ加算しない。全16 sourceと前後32本文をroot・独立担当が全読した。
+
+| 比較群 | 実本文の結果 |
+|---|---|
+| 旧反復3：GENERAL03／FRESH02／FOCAL01 | 元の自然な焦点語順へ変わり反復3/3修復。本人・完全対象・好み・未決定を保持 |
+| 新反復3：TARGETORDER_HELD01／02／04 | 反復3/3修復。友人の役割化、過去否定の好み、日／場所／行為の未決定を保持 |
+| FOCAL02・未教示predicateのprobe | 対象格不成立と余分な思考動詞が消え、元の焦点語順を実現。過去否定の好み／継続未決定を保持しCMEE拒否→採用 |
+| 新非反復対照HELD03／既成功TEMPHELD04 | 元の焦点語順へ。内容を変えず、反復修復数へ加算しない |
+| 他の保持7 | 6本文byte同一、FRESH03のみ同一段落の本人主語を自然に省略。留保・対象・苦手評価は保持 |
+
+焦点対象9件は元語順0→9/9。既成功8全体に今回観測した意味退行0、raw同一は6/8。FRESH03の省略を本人変更へ読み替えず、同段落の本人にとってという主語と後続評価の接続で全読した。これは小さいselected16での局所的な文章改善。新4は独立した別題材だが文法／述語を共有する転移評価で、一般文章の無作為評価ではない。FOCAL02に直接の大切にしたい教師を追加せず改善した事実は記録するが、同predicate全体の完成や原因一般の証明へ拡張しない。
+
+既存の通常API0c6・同CMEE／S7を変更せず、旧15採用／1拒否→新16採用／0拒否。raw・入力・生成messagesを修補していない。isolated PGliteの実consumerへ旧16×3plan=48試行（45保存・非生成再読／3事前拒否）と新16×3plan=48試行（48保存・非生成再読）を通し、計96試行＝93保存／3旧拒否。原入力／Emlis・本文／recipe・quota各1と拒否時記録quota不変、同／新service再読0生成、旧作者禁止を確認。原wireの完全再構築とSQLでの等価synthetic ID/日時への再bindを区別し、live Supabase／本人Auth／実機の往復へ換算しない。
+
+学習外側213.808473秒／内部212.532秒は300秒内、回収用archive作成まで全403.401043秒は600秒内。復元120秒を確保し、retry／追加fit／欠測補完0。元PID48418から49665へ同args/env/cwd/credentialsで提供を復元し、health・通常Emlis／Analysisのcontrol raw前後完全一致を再確認。旧c634／5b1／e924／Analysis weightsとsource不変、cleanup／復元errorなし。archive20member／28453072byte／SHA256 `4f6a19417007fda5ea34e1b782468a78c1f7ea550c0dccb6c7477ca584a0b60f` はCRC・展開全bytes照合済み。総保持／請求・通常原価は未測定。
+
+新f6daeを次の広い比較に使える研究候補として、weights/checkpoint24／config／全raw／SQL／復元記録を既存private `Cocolon_CMEE_AR04_FocalTarget_Learning4B_20261110.zip` の同一identityへ保存した。旧c634と旧比較原本も保持する。通常モデル採用・selector有効化・Render／実DB／RN／build／配布の変更0、商品source／reader／公開／保存型差分0、STRUCTURE_MAP_DELTA_NONE。製品source追加変更なしのため今回新pytest／CI0。前回既存test／CI成功は履歴のまま、新重みの一般品質・同版画像・本人端末を証明しない。正式受入れ0/3と他ARの未完は維持。
+
+次は今回f6daeを保存した研究比較候補として保持し、残るsource資格外3（修飾付き対象・引用）を既存reader／意味型から必要最小の読取へ接続する。原文の対象全体、誰の引用か、肯否・時点・留保を保つ正負例と、広い本人文章での全量source資格・自然な本文・保存再読を確認する。新f6daeで旧53全件の回帰や一般品質、同版画像／通常統合・本人端末は未確認。完了した3target／48更新・24HTTP比較を再実行せず、1baa条件追加も不採用のまま。通常採用／selector有効化／live／実DB／buildの自動実行0。

@@ -2573,3 +2573,13 @@ c634の原24教材・元trainer・実48更新・保存weightsを回収照合。�
 原24／trainer／48step／c634保存重み実bytesの結合を照合し、前回の原本未所持を解消。3targetはroot・独立全読と既存CMEEで意味保持を確認した。新4評価と旧焦点4／既成功8を分離し、今回の候補に対する実4B効果は未確認。[原本監査・候補・具体的比較](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-target-teachers-20261110)。
 
 次は凍結39792byteの3member ZIP（原24のtarget3だけ変更・架空評価16・一回実行コード）を既存Runpodへ送信し、元trainerのfresh base/config・24行48更新で一回比較する段階。全24の訓練SYSTEM／USERと原入力・他21object、seed20261109／LR1e-4／scopeは不変。新評価4基準＋候補16＋元提供前後control4の最大24HTTP、学習300秒／全600秒・復元120秒、旧c634基準12はexact wire/revisionを確認した原本再利用。前回の4入力・学習0の完了runを再使用せず、今回の具体ファイル送信・学習実行を確認してから進む。通常採用／selector／live／実DB／build0。
+
+
+<a id="piece-focal-target-learning-result-20261110"></a>
+## 65. 補助経路AR-04 — target3だけの48更新で反復6件を修復
+
+希望3targetの語順だけを変える一回48更新を完了。同16入力の比較で旧反復3＋新反復3を全修復、格不成立1も修復し、CMEE15→16/16。保持8に観測した意味退行0。隔離SQL96は旧45保存／3拒否・新48保存、保存後0生成。全403.40秒で元提供復元・通常／分析control raw前後一致。新f6dae重みと全原本を保存、通常API0c6／selector OFF・本番未反映を維持。
+
+承認済み一回を全403.401秒で完了。3teacher target以外を保持したfresh24／48で新f6dae、全16組32本文をroot・独立全読。新旧の既存CMEEと実consumer保存比較まで完了し、期待正文注入・raw補修・意味検査変更なし。正式な一般品質や通常統合は未確認。[実本文差分・保存96・復元と限界](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-target-learning-result-20261110)。
+
+次は今回f6daeを保存した研究比較候補として保持し、残るsource資格外3（修飾付き対象・引用）を既存reader／意味型から必要最小の読取へ接続する。原文の対象全体、誰の引用か、肯否・時点・留保を保つ正負例と、広い本人文章での全量source資格・自然な本文・保存再読を確認する。新f6daeで旧53全件の回帰や一般品質、同版画像／通常統合・本人端末は未確認。完了した3target／48更新・24HTTP比較を再実行せず、1baa条件追加も不採用のまま。通常採用／selector有効化／live／実DB／buildの自動実行0。

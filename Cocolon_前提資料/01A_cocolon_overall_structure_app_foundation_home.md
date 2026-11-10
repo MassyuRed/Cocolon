@@ -1,4 +1,4 @@
-> **11/10・AR-04最新：** c634の原24教材・元trainer・実48更新・保存weightsを回収照合。焦点source13行は全て直接語順targetで、元語順target0／同述語反復0／大切にしたい0を確認。希望3行のtargetだけを自然な元焦点語順へ変え、全source/messages・他21行を保持した学習比較候補を準備。CPU同意味3／誤意味拒否7・別題材評価4の資格確認済み。新GPU学習／生成／upload0、効果未確認。通常API0c6ad819と1baa不採用を維持。 [原24監査・target3候補と再開点](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-target-teachers-20261110)。
+> **11/10・AR-04最新：** 希望3targetの語順だけを変える一回48更新を完了。同16入力の比較で旧反復3＋新反復3を全修復、格不成立1も修復し、CMEE15→16/16。保持8に観測した意味退行0。隔離SQL96は旧45保存／3拒否・新48保存、保存後0生成。全403.40秒で元提供復元・通常／分析control raw前後一致。新f6dae重みと全原本を保存、通常API0c6／selector OFF・本番未反映を維持。 [一回比較の実結果・残件](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-target-learning-result-20261110)。
 
 > 11/4のPiece作成・本文・書き出し候補は、末尾の[ファイル差分](#piece-format-language-export-files-20261104)と週次レビュー§141を参照。
 
@@ -6540,3 +6540,11 @@ STRUCTURE_MAP_DELTA_PRESENT_CANDIDATE_ONLY、owner／公開／保存追加0。�
 c634の原24教材・元trainer・実48更新・保存weightsを回収照合。焦点source13行は全て直接語順targetで、元語順target0／同述語反復0／大切にしたい0を確認。希望3行のtargetだけを自然な元焦点語順へ変え、全source/messages・他21行を保持した学習比較候補を準備。CPU同意味3／誤意味拒否7・別題材評価4の資格確認済み。新GPU学習／生成／upload0、効果未確認。通常API0c6ad819と1baa不採用を維持。
 
 通常API0c6、既存の`ai/tools/training/train_piece_model_adapter.py`の24行/48更新recipeと、`piece_model_source.py`の通常入力、CMEE／S7 consumer、既存保存／描画を再利用する。候補はprivate教材・一回実行packetだけで通常file追加／変更0。1baa別branchの2pathは不採用の履歴を維持し、STRUCTURE_MAP_DELTA_NONE。[原24監査と次の比較](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-target-teachers-20261110)。
+
+
+<a id="piece-focal-target-learning-result-20261110"></a>
+## 11/10 AR-04 — 元trainer／consumerを再利用、通常file地図不変
+
+希望3targetの語順だけを変える一回48更新を完了。同16入力の比較で旧反復3＋新反復3を全修復、格不成立1も修復し、CMEE15→16/16。保持8に観測した意味退行0。隔離SQL96は旧45保存／3拒否・新48保存、保存後0生成。全403.40秒で元提供復元・通常／分析control raw前後一致。新f6dae重みと全原本を保存、通常API0c6／selector OFF・本番未反映を維持。
+
+既存`ai/tools/training/train_piece_model_adapter.py`のfresh24／48、`piece_model_source.py`の通常wire、CMEE／S7・通常／refined保存再読を再利用。新f6daeはprivate研究artifactで、通常owner／入口／API／保存型／DB／RNの追加・変更0、STRUCTURE_MAP_DELTA_NONE。1baa別branchは引き続き不採用。[全実結果](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-target-learning-result-20261110)。
