@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/11・AR-04最新：** 承認済み新3＋保持2を保存f6daeで一回・追加学習0の実4B確認。同じ実5rawを旧c34／現a4で比較し、採用2→5（新3の文体差0→3回復、保持2不変）。source意味・plan・prepared／messagesは両版一致、全5の3plan計15保存・非生成再読成功。9HTTP・96.028秒で元提供args／env／cwdを復元、通常／Analysis前後response一致・health200。新3は末尾「です」除去だけを保持し、旧model生成baselineや一般作文改善率はない。APIa4bbe636・f6dae研究候補、通常selector OFF、本番未反映。 [実4B比較・保存と次](piece_request_account_reuse_review.md#piece-scoped-self-register-actual-20261111)。
+> **11/11・AR-04最新：** API48bb559aで、既資格literal本人文章「休みたい／読みたい」の原順・全文保持を既存model文体比較へ接続。固定CPU新3は同じ候補0→3採用、意味変異26拒否、前回実5の採否／本文／意味／plan／prepared／messages不変、3plan計9保存・非生成再読。専用548成功、関連39fileは5910 PASS／既存3 FAIL。独立CPU404例では退行0・意味変異33拒否、native／canonical不変。新3実4Bは未取得、13,684byte比較packetは未送信・今回の具体承認待ち。f6dae研究候補・通常selector OFF、本番未反映。 [literal原順比較・検証と次](#piece-literal-scoped-register-20261111)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -1281,3 +1281,26 @@ Mashの新3＋保持2・起動環境の同Pod内一時読取／復元再利用�
 実原本ZIP SHA256 `22c4cf62dfd4a34f059d4d634d99fb713feca665c5ffbe829d2977a685fbdc1b`、result SHA256 `3ca6a40e7cfbd3311d125bea6c8a2bc039b1b56d5d3c918d29a286729efb7cc8`。原本・実5全文・旧policy比較・15保存・独立読取・再開点は同じ既存ファイルへ更新して保持：[原本と再開点](https://chatgpt.com/library?file_id=libfile_fde3_f-6b65ee3d3ec08191ae61912a6c50b719_2f7470f963808191aaebf050935e72de&account_id=personal)。
 
 次は、既資格のliteral扱い「休みたい／読みたい」が原順のまま止まる残差を、既存source／scope／本人全文の保持とnative／canonical互換を維持して最小修復する。理由付き好みの文体差、前置canonical側の文体差、引用／理由一般、広い文章、新f6daeの旧53全生成回帰、同版画像／通常統合／本人端末、既存無引用3失敗と他ARは未完。今回の新3実4B・保持2照合・15保存・96.028秒復元は完了として継承し、この9HTTPを再実行しない。今回の具体一回承認は消費済み。新しいfit／GPU比較／通常モデル採用／selector有効化／Render／live DB／RN／buildを自動実行しない。
+
+
+<a id="piece-literal-scoped-register-20261111"></a>
+## 11/11 AR-04 — literal本人文章の原順・文体比較と次の一回準備
+
+API48bb559aで、既資格literal本人文章「休みたい／読みたい」の原順・全文保持を既存model文体比較へ接続。固定CPU新3は同じ候補0→3採用、意味変異26拒否、前回実5の採否／本文／意味／plan／prepared／messages不変、3plan計9保存・非生成再読。専用548成功、関連39fileは5910 PASS／既存3 FAIL。独立CPU404例では退行0・意味変異33拒否、native／canonical不変。新3実4Bは未取得、13,684byte比較packetは未送信・今回の具体承認待ち。f6dae研究候補・通常selector OFF、本番未反映。
+
+
+既存source資格済みでSOURCE_SCOPED_EXPRESSION_TO_FIRST_PERSONを持つliteral本人文章は、既存の前置canonicalでは採用できても、原文順のままの全文や末尾「です」だけを変更した候補がmodel専用S7で未判定になっていた。今回の修正は `ai/services/ai_inference/piece_v2_content_policy.py::validate_source_meaning_preservation` の既存fallback exact1だけ。従来patternが失敗し、model比較とscopeが成立する場合、既存wishに加えliteralも `same_literal_self_register` へ渡す。原文のsource_startからexpression_startまでを元引用・接続詞・区切り・横空白込みでanchorし、候補の残り全文を明示本人付きの既存literal比較で検査する。新しい意味解析、願望分類、文法、作者、checkerは追加しない。比喩「氷みたい」等も既資格literalのまま扱い、願望・宣言適格へ昇格しない。
+
+本人・対象・述語・肯否・時点・留保・引用の全字面・終端を変えず、既存の任意「です」比較だけを再利用する。強調付きliteralで次文の本人省略を新たに許さないよう、既存literal_emphasis後のprevious_author=Noneを維持。旧pattern成功時、前置canonical語順、native比較、元入力と補足／field／段落の境界、source／意味／plan／SYSTEM／生成条件／公開DTO／DB／保存schema／RN／renderer／通常selectorは不変。rawやsourceの修補、期待正文の注入、旧作者fallbackは行わない。
+
+独立固定CPU新3の同じ候補は0/3→3/3採用、本人・理由／条件・否定・過去・実行済み・引用話者／全字面・終端・文追加を変える26候補は拒否。各原7項目・source意味／根拠／plan・PreparedRequest ID／JSON・builder全messagesは前後一致。前回取得済み実4B5本文は追加生成なしで同じrawから採用され、採否／全文／prepared／messages／意味／planが前後一致。新3×Free／Plus／Premiumの9保存・同／新service非生成再読、原入力／Emlis不変・quota各1・保存後0生成を確認した。保存consumerは合成owner／UUID／現在日時への等価内容投影であり、live Supabase／本人Authの確認ではない。
+
+既存専用testへ101例を加え548成功。旧test1件のmodel原順拒否期待は今回の修復対象なので採用へ更新し、同じtestでnative原順拒否・従来canonical native採用を明示維持した。関連39file重複除外5913件は5910 PASS／既存3 FAIL。失敗は前回と同じ無引用scopeの2 focal／1 evaluationで、新しい失敗0。独立担当の別CPU404例では同じ候補の採用144→371・回復227・退行0、意味変異33拒否、native／canonical snapshot不変。これらのCPU集合・既露出実5の再読を、一般文章編集品質・新3実4B・正式Product Read／本人受入れへ拡張しない。
+
+STRUCTURE_MAP_DELTA_NONE：既存model S7内の本文比較だけで、責務／入口／型／保存schemaの追加なし。商品source1・既存test1のみを実装commitへ反映し、全対象blob全文・changed-path集合・最新branch headを照合済み。新GPU・学習・通常モデル採用・selector有効化・Render／live DB／RN／buildは0。理由付き好み・前置canonicalの新しい文体差、引用／理由一般、広い文章、f6dae旧53全生成回帰、同版画像／通常統合／本人端末、既存3失敗と他ARは未完。primaryは限定TECHNICAL_CREDIT、商品品質credit／正式受入れは追加しない。
+
+[実装commit](https://github.com/MassyuRed/mashos-api/commit/48bb559a7211b00be265cfac6383369637210776)。API48bb559aのPiece CI42920579306／job130194087981はattempt1・全39step成功、Analysis CI42920579301／job130194087748はattempt1・全19step成功。両方とも同じtriggering commitを検査し、workflow変更・rerunは0。CI成功を、localに残る既存3失敗の解消や商品品質／本番反映へ換算しない。
+
+原本・固定CPU前後・9保存・実5維持・独立検証・新一回比較準備と再開点：[原本と再開点](https://chatgpt.com/library?file_id=libfile_fde3_f-d3542cffcaa08191844d949658a44bd1_2f7470f963808191aaebf050935e72de&account_id=personal)。
+
+次は、この新3（REST-REASON／READ-CONDITION／READ-QUOTED）＋保持2（SCOPE-QUOTE-REASON／QUOTE-RUN）を、保存f6daeで一回・追加学習0の実4B比較へ通す。固定13,684byte／2member、SHA256 `2ed594826530120ff502019b2f3a4e49b39ea894546e9dbc1baffb00fd51d82d`。候補5＋通常／Analysis前後control4の最大9HTTP、Piece1load、学習／新weights／retry0、復元込み600秒／復元予約120秒。新packet送信と、認証情報を含み得る起動環境全体の同Pod内一時読取・復元再利用は今回の具体承認後に限る。前回の一回承認は消費済みで再利用せず、新送信／新GPU実行／新環境読取0。PID62196は前回復元時の履歴値で、現在の再確認値ではない。前回の実5／15保存／96.028秒復元は完了として継承し、旧runnerを再実行しない。
