@@ -130,6 +130,7 @@ for (const original of bitmapCases.filter(c => c.evidence_set === 'bitmap_previe
 const ar04Fixtures = [
   ['ar04_recorded_viewpoint', require('./piece-ar04-adopted-native.json')],
   ['ar04_current_wire_activity', require('./piece-rn-canvas-current-wire.json')],
+  ...require('./piece-rn-canvas-passive-role.json').cases.map(c => [c.native_case_name, c]),
 ];
 for (const [baseName, ar04] of ar04Fixtures) {
   const ar04Preview = JSON.parse(JSON.stringify(context.makePreview(ar04.preview.format_type)));
@@ -141,7 +142,7 @@ for (const [baseName, ar04] of ar04Fixtures) {
   ar04Preview.expires_at = '2099-12-31T23:59:59Z';
   ar04Preview.quota = { ...ar04Preview.quota, subscription_tier: 'free', save_limit: 5,
     saved_count: 2, remaining_count: 3 };
-  ar04Preview.plan_capabilities = { format_selection: 'fixed', theme_ids: ['soft_paper'],
+  ar04Preview.plan_capabilities = { format_selection: 'fixed', theme_ids: [ar04.preview.visual_recipe.theme.theme_id],
     aspect_ratios: ['4:5'], branding_modes: ['required_small'] };
   admittedCases.push(
     { name: `admitted_preview_${baseName}`, evidence_set: 'admitted_preview',

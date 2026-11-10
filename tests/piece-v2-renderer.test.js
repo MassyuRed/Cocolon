@@ -28,8 +28,8 @@ for (const [filename, baseName] of ar04Recordings) {
     const preview = fixtures.admitted.find(c => c.name === `admitted_preview_${baseName}`);
     const saved = fixtures.admitted.find(c => c.name === `admitted_saved_${baseName}`);
     const exported = fixtures.export.find(c => c.name === `export_saved_${baseName}`);
-    assert.equal(fixtures.admitted.length, 21);
-    assert.equal(fixtures.export.length, 16);
+  assert.equal(fixtures.admitted.length, 29);
+  assert.equal(fixtures.export.length, 20);
     assert.equal(preview.props.display.preview.expires_at, '2099-12-31T23:59:59Z');
     for (const field of ['format_type', 'piece_text', 'piece_text_hash', 'content_payload',
       'content_payload_hash', 'visual_recipe', 'visual_recipe_hash', 'renderer_version']) {
