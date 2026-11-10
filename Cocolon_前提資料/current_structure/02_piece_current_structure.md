@@ -1,3 +1,5 @@
+> **11/10・AR-04最新：** API5816f2d0で既存の引用対応文分割をPiece source／S7へ再利用し、一組の「」内の句点・疑問符・感嘆符を完全なKEEPとして保持。固定CPU4例は受付不可→採用、3plan計12保存／非生成再読。凍結実4B69照合行と、別照合した直近5応答の採否／本文／messagesは不変。Unicode空白の既存互換も保持。追加GPU生成／学習0、f6dae研究候補・通常selector OFF、本番未反映。 [引用内stopの実装・検証と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quote-internal-stops-20261110)。
+
 > **11/10・AR-04最新：** API2ec79ad0で時点付き本人「は」好み評価の同本人省略を既存S7継続へ接続。明示承認後、保存f6daeで新3＋保持2の実4B本文を1回・学習0で確認。GENERAL01の自然な2文目省略が旧比較で保留されたため、同block・隣接・同じ本人表記の既存条件だけを再利用し、5/5採用・3plan計15保存／非生成再読。保持2の前回request／raw／revisionと凍結69照合行の採否／本文／messagesは不変。9HTTP・97.268秒で元提供復元／health／前後control一致。f6dae研究候補・通常selector OFF、本番未反映。 [実4B新3・保存と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model3-inference-result-20261110)。
 
 > **11/7最新・DB／API反映、統合iOSビルド・送信成功：** Free初期2色／Plus・Premium12色、両比率・ロゴ有無を選ぶ権利を、配色migration actual20261107020543（CHECK validated）とAPI5065730eへ反映。Render dep-dbn8h2jl550s73efmcngは11:12:02 JST Live、health/bootstrap200・private5ON/public3OFF・本人境界7smoke期待どおり。対応RN e0ec6d6aのrun42328190568／#75 attempt1は11:14:01 JST開始、11:28:26 JSTに全19step成功。Archive・写真目的文検査・IPA・Upload成功。Apple側の1.0（7501）を照合し、既存内部グループ「Emlis テスト版配布」でTestingを確認。後続にMashから大ボタン・Piece関係の今回修正の実機確認を受領（第10回§14）。分析の実機確認は未実施。旧clientのcapabilitiesと履歴互換、保存recipe／hashを維持。DML／RLS・画像本文・保存枠・公開範囲は変更なし。[準備§12と実反映§13](../weekly_reviews/Cocolon_Weekly_Review_20261107.md#piece-ui-live-and-ios-build-20261107)。
@@ -4014,3 +4016,17 @@ STRUCTURE_MAP_DELTA_PRESENT：既存のモデル本文比較境界だけの変�
 関連32file5205 PASS、FAIL／skip0、既存warning1。新しい本人継続境界29件を含む。API2ec79ad0のPiece／Analysis CIは対象head一致・attempt1で全成功。Piece run42809225286／job129806123954は全39step成功（model主要1255 PASS、境界選択78 PASS／420 deselected）。Analysis run42809225253／job129806123443は全19step成功。追加実行／rerun0。 [全結果と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model3-inference-result-20261110)。
 
 次は広い文章での反復・理由／引用などの残件を、既存資産を再利用して進める。今回の新3の実4B・同版保存は完了したため未取得へ戻さない。新3に旧c634のbaselineはなく、f6daeの改善率／学習効果や一般品質の合格に換算しない。引用一般の言換え・複数／多重・内部stop／CR/LF・引用内認識名、新f6daeによる旧53全件の生成回帰、同版画像／通常統合／本人端末は未完。完了済み今回9HTTP／前回48更新は再実行しない。通常採用／selector有効化／Render／live DB／RN／buildの自動変更0。
+
+
+<a id="piece-quote-internal-stops-20261110"></a>
+## 11/10 AR-04 — 引用対応文分割をsource／S7へ再利用
+
+API5816f2d0で既存の引用対応文分割をPiece source／S7へ再利用し、一組の「」内の句点・疑問符・感嘆符を完全なKEEPとして保持。固定CPU4例は受付不可→採用、3plan計12保存／非生成再読。凍結実4B69照合行と、別照合した直近5応答の採否／本文／messagesは不変。Unicode空白の既存互換も保持。追加GPU生成／学習0、f6dae研究候補・通常selector OFF、本番未反映。
+
+STRUCTURE_MAP_DELTA_PRESENT：既存source受理とS7の文境界だけを拡張。`ai/services/ai_inference/piece_v2_generation.py::_sentences`と`ai/services/ai_inference/piece_v2_content_policy.py::validate_source_meaning_preservation`が、既存`emlis_ai_grounded_sentence_surface._body_sentence_spans`を呼ぶ。引用内stopを外側文の境界にせず、元の全文slice・引用者／外側の感情・欄／段落・scalar／UTF-8根拠を維持し、S7は全block被覆・node数・literal KEEP照合を続ける。既存helper／Emlis本体・名前binding・意味型・公開DTO／保存schema／DB／API入口／RN／SYSTEM・通常selectorは変更しない。一組の非empty「」・引用外完全文に限定し、420字とraw stop上限6、引用内CR/LF・複数／多重・別quote種・認識名の拒否を保つ。Unicode空白U+00A0／U+2002／U+2003は候補側もcursorからspan終端までを保持し、正規化で消さない。
+
+最終関連32file5263 PASS、FAIL／error／skip0、既存warning1。固定CPU4例は親2ecで全拒否→全採用、3plan計12保存／非生成再読・原入力／Emlis不変。凍結実4B69行と直近5応答の採否／本文／messagesを追加生成0で維持。最終focused393、別source／空白2file2421は同検証の重複を含むため加算しない。初回の旧拒否期待3失敗のlog／XMLを保持。独立reviewで見つかったUnicode空白退行と、補正testのblock期待・環境不足の経過も記録し、最終検証で成功を確認。新規実4B応答／学習／GPU操作／本番変更0。
+
+API5816f2d0の[Piece CI42813970927](https://github.com/MassyuRed/mashos-api/actions/runs/42813970927)と[Analysis CI42813971055](https://github.com/MassyuRed/mashos-api/actions/runs/42813971055)は、対象head一致・attempt1で全工程success。Piece job129822209000／39step、Analysis job129822209316／19stepを確認。追加run／rerun0。通常配置を行うworkflowではない。
+
+次は、今回資格化した引用内stopを持つ新4例の実4B本文と、引用を含む理由・希望の自然な実現を確認する。新4＋保持1のcurrent builder送信材料はprivateに準備済みだが、未送信・実行runner未準備。今回の固定CPU本文を実4B品質改善へ換算しない。一組引用の字面保持は確認したが、引用一般の言換え・複数／多重・引用内CR/LF・引用内認識名、理由一般の型付き意味理解、広い一般文章、新f6daeによる旧53全件の生成回帰、同版画像／通常統合／本人端末は未完。前回の新3実4B／15保存と9HTTP・48更新は完了済みとして継承し、再実行しない。通常採用／selector有効化／Render／live DB／RN／buildの自動変更0。

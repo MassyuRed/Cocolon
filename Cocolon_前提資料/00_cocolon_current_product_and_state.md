@@ -1,3 +1,5 @@
+> **11/10・AR-04最新：** API5816f2d0で既存の引用対応文分割をPiece source／S7へ再利用し、一組の「」内の句点・疑問符・感嘆符を完全なKEEPとして保持。固定CPU4例は受付不可→採用、3plan計12保存／非生成再読。凍結実4B69照合行と、別照合した直近5応答の採否／本文／messagesは不変。Unicode空白の既存互換も保持。追加GPU生成／学習0、f6dae研究候補・通常selector OFF、本番未反映。 [引用内stopの実装・検証と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quote-internal-stops-20261110)。
+
 > **11/10・AR-04最新：** API2ec79ad0で時点付き本人「は」好み評価の同本人省略を既存S7継続へ接続。明示承認後、保存f6daeで新3＋保持2の実4B本文を1回・学習0で確認。GENERAL01の自然な2文目省略が旧比較で保留されたため、同block・隣接・同じ本人表記の既存条件だけを再利用し、5/5採用・3plan計15保存／非生成再読。保持2の前回request／raw／revisionと凍結69照合行の採否／本文／messagesは不変。9HTTP・97.268秒で元提供復元／health／前後control一致。f6dae研究候補・通常selector OFF、本番未反映。 [実4B新3・保存と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model3-inference-result-20261110)。
 
 > **11/9・AR-04続行（`674b5225f841a7dd1d41cbbd88395d2acebb3e42`）：** 既存の本人評価frame・公開役割bindingを、原requestとPreparedRequestの再導出一致を確認したうえで欄別の生成条件へ投影し、設定された4B候補取得へ接続した。原文・SYSTEM・本文の採否検査は保持し、期待正文の注入・生成後修補・追加推論はない。固定affb重みの16材料（前回失敗2＋一人称6対照＋新規架空8）を各2条件で実生成し、同じCMEEの採用は11→14。評価述語欠落2と二欄の「まだ」欠落1を修復、一人称6対照は本文byte同一。氏名残存2は拒否を維持。隔離SQL96試行は旧33保存／15拒否、新42保存／6拒否、保存後0生成。新重み・通常selectorは未採用／OFF、GPUは元base／既存Analysisへ復元しhealth・前後control一致。一般品質・氏名抽象化・同版画像／通常統合・本人端末、AR-01反転と他ARは未完了。
@@ -375,3 +377,17 @@ API入口は合成認証/ASGI、モデルだけ実HTTPS socket、DBは隔離SQL�
 原提供の復帰と通常／分析control前後一致。追加学習／新weights／retry0。STRUCTURE_MAP_DELTA_NONE_FOR_NORMAL、通常branch／selector／live／実DB／buildの変更0。[全結果と次の作業](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-focal-order-actual-20261110)。
 
 次は既存private保存先から、c634を作った原24教材のsource／messages／target・既存trainer・48更新記録を取得し、焦点構文・活動を含む名詞化対象・格・否定／時点／留保・述語重複の被覆を全24行で監査する。現在のcheckpointにはこの原24教材とfit trainerがなく、被覆件数・原因・次のfit行数はまだ不明。今回の評価4入力を教師へ流用せず、別題材の自然な焦点語順／成立する直接語順を教える最小の学習候補へ戻す。今回の条件追加だけでは改善しなかった事実を保持し、prompt一般や学習原因全体へは断定しない。反復目的のS7緩和や不正raw修補は行わない。修飾・引用のsource資格外3、一般品質、通常統合・本人端末、他ARは未完。
+
+
+<a id="piece-quote-internal-stops-20261110"></a>
+## 11/10 AR-04 — 引用対応文分割をsource／S7へ再利用
+
+API5816f2d0で既存の引用対応文分割をPiece source／S7へ再利用し、一組の「」内の句点・疑問符・感嘆符を完全なKEEPとして保持。固定CPU4例は受付不可→採用、3plan計12保存／非生成再読。凍結実4B69照合行と、別照合した直近5応答の採否／本文／messagesは不変。Unicode空白の既存互換も保持。追加GPU生成／学習0、f6dae研究候補・通常selector OFF、本番未反映。
+
+STRUCTURE_MAP_DELTA_PRESENT：既存source受理とS7の文境界だけを拡張。`ai/services/ai_inference/piece_v2_generation.py::_sentences`と`ai/services/ai_inference/piece_v2_content_policy.py::validate_source_meaning_preservation`が、既存`emlis_ai_grounded_sentence_surface._body_sentence_spans`を呼ぶ。引用内stopを外側文の境界にせず、元の全文slice・引用者／外側の感情・欄／段落・scalar／UTF-8根拠を維持し、S7は全block被覆・node数・literal KEEP照合を続ける。既存helper／Emlis本体・名前binding・意味型・公開DTO／保存schema／DB／API入口／RN／SYSTEM・通常selectorは変更しない。一組の非empty「」・引用外完全文に限定し、420字とraw stop上限6、引用内CR/LF・複数／多重・別quote種・認識名の拒否を保つ。Unicode空白U+00A0／U+2002／U+2003は候補側もcursorからspan終端までを保持し、正規化で消さない。
+
+最終関連32file5263 PASS、FAIL／error／skip0、既存warning1。固定CPU4例は親2ecで全拒否→全採用、3plan計12保存／非生成再読・原入力／Emlis不変。凍結実4B69行と直近5応答の採否／本文／messagesを追加生成0で維持。最終focused393、別source／空白2file2421は同検証の重複を含むため加算しない。初回の旧拒否期待3失敗のlog／XMLを保持。独立reviewで見つかったUnicode空白退行と、補正testのblock期待・環境不足の経過も記録し、最終検証で成功を確認。新規実4B応答／学習／GPU操作／本番変更0。
+
+API5816f2d0の[Piece CI42813970927](https://github.com/MassyuRed/mashos-api/actions/runs/42813970927)と[Analysis CI42813971055](https://github.com/MassyuRed/mashos-api/actions/runs/42813971055)は、対象head一致・attempt1で全工程success。Piece job129822209000／39step、Analysis job129822209316／19stepを確認。追加run／rerun0。通常配置を行うworkflowではない。
+
+次は、今回資格化した引用内stopを持つ新4例の実4B本文と、引用を含む理由・希望の自然な実現を確認する。新4＋保持1のcurrent builder送信材料はprivateに準備済みだが、未送信・実行runner未準備。今回の固定CPU本文を実4B品質改善へ換算しない。一組引用の字面保持は確認したが、引用一般の言換え・複数／多重・引用内CR/LF・引用内認識名、理由一般の型付き意味理解、広い一般文章、新f6daeによる旧53全件の生成回帰、同版画像／通常統合／本人端末は未完。前回の新3実4B／15保存と9HTTP・48更新は完了済みとして継承し、再実行しない。通常採用／selector有効化／Render／live DB／RN／buildの自動変更0。
