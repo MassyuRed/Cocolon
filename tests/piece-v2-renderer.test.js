@@ -81,6 +81,28 @@ for (const [filename, baseName] of ar04Recordings) {
     h.card.componentWillUnmount();
   });
 }
+test('AR04 selected quiet-night fixture declares the complete Free palette for preview admission', () => {
+  const fixtures = require('./native/piece-rn-canvas-fixtures.cjs');
+  const recorded = require('./native/piece-rn-canvas-passive-role.json').cases
+    .find(c => c.source_case_id === 'FRESH15');
+  const fixture = fixtures.admitted.find(c => c.name === 'admitted_preview_ar04_passive_fresh15');
+  const packet = copy(fixture.props.display.preview);
+  assert.deepEqual(packet.plan_capabilities.theme_ids, ['soft_paper', 'quiet_night']);
+  assert.equal(packet.preview_revision, 2);
+  assert.deepEqual(packet.visual_recipe, recorded.preview.visual_recipe);
+  const h = bitmapHarness(value => value, { packet, version: recorded.detail.renderer_version });
+  try {
+    const preview = h.preparePieceNativePreview(fixture.props.display);
+    const saved = h.preparePieceNativeSavedDisplay(recorded.detail);
+    assert.ok(preview); assert.ok(saved);
+    const withoutKey = value => { const result = copy(value); delete result.key; return result; };
+    assert.deepEqual(withoutKey(preview), withoutKey(saved));
+    assert.deepEqual(copy(preview.blocks), recorded.detail.content_payload.body_blocks);
+    const incomplete = copy(fixture.props.display);
+    incomplete.preview.plan_capabilities.theme_ids = ['quiet_night'];
+    assert.equal(h.preparePieceNativePreview(incomplete), null);
+  } finally { h.card.componentWillUnmount(); }
+});
 function sample(format = 'short_essay', ratio = '4:5', theme = 'soft_paper', brand = 'required_subtle') {
   const prefix = fs.readFileSync(path.join(__dirname, 'piece-v2-preview-display.test.js'), 'utf8').split('function deferredPieceResponse')[0];
   const context = vm.createContext({ require, __dirname });

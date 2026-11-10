@@ -142,7 +142,7 @@ for (const [baseName, ar04] of ar04Fixtures) {
   ar04Preview.expires_at = '2099-12-31T23:59:59Z';
   ar04Preview.quota = { ...ar04Preview.quota, subscription_tier: 'free', save_limit: 5,
     saved_count: 2, remaining_count: 3 };
-  ar04Preview.plan_capabilities = { format_selection: 'fixed', theme_ids: [ar04.preview.visual_recipe.theme.theme_id],
+  ar04Preview.plan_capabilities = { format_selection: 'fixed', theme_ids: ar04.preview.visual_recipe.theme.theme_id === 'quiet_night' ? ['soft_paper', 'quiet_night'] : ['soft_paper'],
     aspect_ratios: ['4:5'], branding_modes: ['required_small'] };
   admittedCases.push(
     { name: `admitted_preview_${baseName}`, evidence_set: 'admitted_preview',
