@@ -2367,3 +2367,33 @@ JSは1434＋291＝1725 PASS、FAIL／CANCEL／SKIP0。Android bridge・exportラ
 次は正常controlのnatural描画とreference再構成が同等にならない点を、既存V4比較owner内で検証し、必要な修正を判断する。support-mapping候補は明示的な未採用実験として扱い、同等性や元recipe保持を検証せず製品修復へ昇格しない。今回のstandalone stage／fault到達とRN geometry観測は確認済みとして継承し、同じ未観測の説明へ戻さない。normal control不成立をfault検査成功へ変換せず、source旧V4とWholeと現ios.v2の共有範囲を分ける。通常host／Photos／本人端末・正式受入れ／通常採用は未確認。通常selector OFF・AR-04未完を維持する。GPU／学習／SQL／実Auth／外部HTTP／Render設定／署名build／配布0。
 
 STRUCTURE_MAP_DELTA_NONE：既存native test／trace責務内の診断追加で、製品owner／route／DTO／DB／作者／controller／renderer／計測責務のtopologyは不変。新しい管理票・Gate・承認段階は追加しない。
+
+
+<a id="piece-v4-clipped-reference-probe-20261111"></a>
+## 11/11 AR-04 — clipped referenceのsupport対応を隔離standaloneで比較（実行中）
+
+直前の3a817a5d／実行記録d4ac6877をfresh取得・hash／CRC／全member checksumで照合し、前回のsource／RN終端と保存完了を確認して再開した。前回の73実4B、243 SQL、静的6／transition4の再実行には戻さない。fresh全体現在地を全文確認し、詳細設計§9／§11が指定する正常controlのnatural描画とreference再構成の同等性を次の一単位とした。
+
+### 検証する仮説と維持する境界
+
+前回の19正常controlは、整数scale2／3でもstage83の厳密logical1占有比較で不成立だった。第二のclipped referenceだけを公開view.boundsのq格子で所有割当し、そのboundsへpresentationする候補を比較する。expanded Bの独立paint／投影／filter、比較extent、alpha>0各cellの厳密predicate、paint2回、元期限、共有32MiB／4096辺／4Mi面積・解放条件は保持する。新cx0／cy0／cx1／cy1へ既存同様の有限性・絶対値2^52検査を同じpreflight内で補い、candidate SHA256は661c73cdf73d8b1a31c6f626eced7e2f5e4c69b937092bfe1a713704279d8594となった。
+
+これはclipped画像のsupport-mappingを変える明示的な未採用実験で、元recipeと等価な修復として扱わない。所有q-supportの逆写像Bqと公開bounds Bが一致するのは各辺がq格子へ整列する時だけ。例えばS3／height75.5／ty226.5ではBqがy=-1/6／height75と2/3となり、Bへ全画像を配置すると微小な縮小が生じる。既存standaloneの高さ76／41・整数CTM、および配置側の±fractional phaseだけでは、このnatural backing小数寸法の差を検証できない。成功しても整数対照と既存faultの範囲へ限定する。
+
+### 実装と一回の実行
+
+研究ref [agent/piece-v4-clipped-reference-probe-20261111](https://github.com/MassyuRed/Cocolon/tree/agent/piece-v4-clipped-reference-probe-20261111) は[候補f4aa5de081ebb40ec4f57752571a18bf37af1443](https://github.com/MassyuRed/Cocolon/commit/f4aa5de081ebb40ec4f57752571a18bf37af1443)へ直接作成し、baseline pushを省いた。既存通常作業refの.mm581dfd38／pin／契約・selectorは変更していない。新ref3pathだけで、.mm内は既存PieceNativeAndLayerV4Ink、runnerはcandidate pinと診断field、workflowは研究refのsource-only指定を変更した。
+
+source job本文は195unique PASS・V4_20／AR04／bitmapの元条件、10分job／90秒host／各8秒を含め原本とbyte一致。他5jobは元作業ref限定の条件で研究ref上はskipとなり、通常CI全体やRN Wholeの成功へ換算しない。別の既存Phase6等の自動workflowは、このPiece source-only集計と分ける。新workflow／常設checker／別作者／製品selectorは追加しない。
+
+TLS診断のnative_extent／paint_ctmはexpanded Bという従来の意味を保ち、clipped_reference_extent／clipped_reference_paint_ctmを別fieldへ記録する。same-call identity、104marker／逆投影と1024byte上限を保持し、mapへNOT_ADOPTED／fractional_backing_equivalence=NOT_PROVENを明示した。正しいlocal投影はsource661c73cd→instrumented e63a02aaa19357724538054aaacae1a4e6116b5a2ad7f7cc1ac792f387f2ae12。旧準備段階のmapは今回の証拠へ使わない。
+
+独立担当が原本／candidate／workflowの差分を照合し、1回の隔離比較を妨げる所見なし。shell syntax／embedded Python compile／104markerのlocal確認も成功したが、実native compile／runtimeの成功とはしない。GitHubの3path全byte読戻しとchanged-path setを確認してから研究refを作成し、既存[run43029546742](https://github.com/MassyuRed/Cocolon/actions/runs/43029546742)が自動起動した。manual dispatch／rerun0、今回はsource job1実行／他5skip。現在実行中で、結果・正常control／fault別stage・artifactを回収して本節を置換更新する。
+
+### 継承した完了と現在の残件
+
+通常作業refの前回source99fba／run43021553284はcompleted failure、旧V4_1成功／19失敗、RN6methods／Wholeのみ59assertion／43署名。JS1725・現bitmap44・AR04_4・native129・v9_46、静的6＋transition4と同版本文／PNG保持は前回の完了として継承する。今回の研究runでRN／model73／transitionを再検証したと数えない。
+
+次は同runの終端・19正常control／fault到達／元全assertionを確認する。候補の成否から原因仮説を判定し、未確認の小数寸法・frozen recipe同等性・通常採用へ広げない。現在の通常selector OFF、旧V4／Whole、通常host／Photos／本人端末・正式受入れ、AR-04全体は未完。GPU／学習／SQL／実Auth／製品外部HTTP／Render反映／署名build／配布0。PRIMARY_OUTCOMEは実測後に確定する。
+
+STRUCTURE_MAP_DELTA_NONE：研究refの既存比較関数・test診断内の候補比較で、通常作業側の製品owner／route／DTO／DB／作者／renderer責務は変更0。新しい管理票・Gate・承認段階を追加しない。

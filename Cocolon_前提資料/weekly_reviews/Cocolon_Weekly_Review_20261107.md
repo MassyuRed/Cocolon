@@ -1,6 +1,6 @@
 # 第10回 Cocolon週末報告会 — 2026-11-07（終了）
 
-> **11/11・AR-04最新：** standalone V4の56callを実測し、19正常controlすべてlogical1占有比較stage83で不成立と確定。source旧V4は1成功／19失敗、RNはWholeのみ59assertion失敗（前回のelapsed1消失、新規0）。長文legacy5615.856ms／bitmap5984.875ms、geometry同期時間も回収したが速度改善の因果は未証明。transition4＋静的6は今回も元8秒内・canonical／PNG保持。JS1725成功、source99fba3bf／PieceRN43021553284はfailure。通常selector OFF・AR-04未完。 [共通controlとgeometry待ち時間の実診断](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-344a-native-control-diagnostics-20261111)。
+> **11/11・AR-04最新：** 前回99fba/run43021553284で19正常controlがstage83へ収束すると実測済み。今回はclipped referenceの公開bounds対応候補661c73cdを、隔離ref f4aa5de0／standalone限定run43029546742で1回比較中。既存195判定・V4_20・bitmap44・元期限／予算は保持、他5jobは明示skip。整数controlの仮説検証で、小数寸法の同等性・通常採用は未証明。通常作業refの製品.mm/pin・selector OFFを保持し、AR-04未完。 [clipped referenceの隔離比較](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-v4-clipped-reference-probe-20261111)。
 
 記録日：2026年11月7日（日本時間）  
 対象週：**2026年11月7日〜11月14日**  
