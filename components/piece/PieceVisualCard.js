@@ -56,10 +56,22 @@ export default class PieceVisualCard extends React.Component {
         this.state.measurement.phase !== 'native_checked' || this.bitmapNode !== old.node ||
         preparePieceNativeCard(this.props)?.key !== old.key)) this.clearBitmapArtifact();
   };
-  setBitmapNode = node => {
-    if (this.bitmapNode === node) return;
+  bitmapRefFor = binding => {
+    if (this.bitmapRef?.binding === binding) return this.bitmapRef.callback;
+    const callback = node => {
+      if (this.active && this.state.binding === binding) this.setBitmapNode(node, binding);
+    };
+    this.bitmapRef = { binding, callback };
+    return callback;
+  };
+  setBitmapNode = (node, binding = this.state.binding) => {
+    if (this.state.binding !== binding || this.bitmapNode === node && this.bitmapNodeBinding === binding) return;
     const old = this.bitmapNode; this.bitmapNode = node;
-    if (old) { this.clearBitmapArtifact(); this.invalidatePlacement(); }
+    const oldBinding = this.bitmapNodeBinding; this.bitmapNodeBinding = node ? binding : null;
+    if (old) {
+      this.clearBitmapArtifact();
+      if (oldBinding === binding) this.invalidatePlacement();
+    }
   };
   bitmapInvalidated = event => {
     const value = event?.nativeEvent, snapshot = this.state.measurement;
@@ -696,7 +708,7 @@ export default class PieceVisualCard extends React.Component {
         element(View, { style: { position: 'absolute', left: input.margin / 2, top: input.margin / 2,
           right: input.margin / 2, bottom: input.margin / 2, backgroundColor: input.colors.surface,
           borderColor: input.colors.border, borderWidth: 2 } }),
-        bitmap && BitmapCanvas ? element(BitmapCanvas, { testID: 'piece-bitmap-canvas', ref: this.setBitmapNode,
+        bitmap && BitmapCanvas ? element(BitmapCanvas, { testID: 'piece-bitmap-canvas', ref: this.bitmapRefFor(this.state.binding),
           bitmapBinding: this.bitmapBindingFor(measurement.generation), onBitmapInvalidated: this.bitmapInvalidated,
           collapsable: false, accessible: false, pointerEvents: 'none',
           style: { position: 'absolute', left: 0, top: 0, width: input.width, height: input.height },

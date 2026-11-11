@@ -75,12 +75,171 @@ for (const [filename, baseName] of ar04Recordings) {
     await finishBitmap(h);
     assert.equal(h.card.state.measurement.phase, 'native_checked');
     const rows = h.bitmapCalls[0].rows;
-    assert.equal(rows.filter(row => row.kind === 'body').map(row => row.text).join(''), detail.piece_text);
+    assert.deepEqual(rows.filter(row => row.kind === 'body').map(row => row.text),
+      h.card.state.measurement.plan.groups.flat());
+    assert.equal(h.card.state.measurement.plan.groups.map(group => group.join('')).join('\n\n'), detail.piece_text);
     assert.equal(rows.at(-1).text, 'Emlis');
     assert.equal(h.fit().isCurrent(packet, h.token), true);
     h.card.componentWillUnmount();
   });
 }
+// Real fictional 344a SQL outputs. Only the existing synthetic HTTP envelope
+// supplies quota/capabilities; recorded body/recipe/hash/renderer values stay
+// untouched. These native doubles establish JS flow, not native pixel fit.
+const ar04Multiblock = require('./fixtures/piece-ar04-344a-multiblock.json');
+const ar04CanonicalFields = ['format_type', 'piece_text', 'piece_text_hash', 'content_payload',
+  'content_payload_hash', 'visual_recipe', 'visual_recipe_hash', 'renderer_version'];
+function ar04RecordedPacket(recorded, tier) {
+  assert.equal(tier, 'premium');
+  const packet = sample(recorded.format_type);
+  packet.quota = { ...packet.quota, subscription_tier: tier, save_limit: null, remaining_count: null };
+  packet.plan_capabilities = { format_selection: 'eligible_choice', theme_ids: ['soft_paper', 'quiet_night'],
+    aspect_ratios: ['4:5', '9:16'], branding_modes: ['required_subtle', 'off'] };
+  for (const field of [...ar04CanonicalFields, 'preview_id', 'preview_revision', 'row_version',
+    'expires_at', 'eligible_formats', 'visibility_scope']) packet[field] = copy(recorded[field]);
+  packet.content_status = recorded.safety_state;
+  return packet;
+}
+function ar04CheckParagraphs(h, call, expected) {
+  const groups = copy(h.card.state.measurement.plan.groups);
+  assert.deepEqual(groups.map(rows => rows.join('')), expected.content_payload.body_blocks);
+  assert.equal(groups.map(rows => rows.join('')).join('\n\n'), expected.piece_text);
+  const rows = call.rows.filter(row => row.kind === 'body');
+  assert.deepEqual(copy(rows.map(row => row.text)), groups.flat());
+  let cursor = 0;
+  groups.forEach((group, index) => group.forEach((_, row) => {
+    assert.equal(rows[cursor++].gap_after, row === group.length - 1 && index < groups.length - 1
+      ? h.card.state.measurement.plan.gap : 0);
+  }));
+  assert.equal(rows.length, cursor);
+}
+for (const recorded of ar04Multiblock.cases) {
+  test(`AR04 344a ${recorded.source_case_id} recorded multiblock preview saved and export retain exact artifacts`, async () => {
+    const selected = recorded.selected_preview || recorded.preview, detail = recorded.detail;
+    assert.equal(detail.content_payload.body_blocks.length, recorded.expected_block_count);
+    for (const field of ar04CanonicalFields) assert.deepEqual(selected[field], detail[field], field);
+    for (const value of [recorded.preview, selected, detail]) {
+      assert.equal(value.content_payload.body_blocks.join('\n\n'), value.piece_text);
+      assert.equal(hash(value.piece_text), value.piece_text_hash);
+      assert.equal(hash(JSON.stringify(canonical(value.content_payload))), value.content_payload_hash);
+      assert.equal(hash(JSON.stringify(canonical(value.visual_recipe))), value.visual_recipe_hash);
+    }
+    const packet = ar04RecordedPacket(selected, recorded.tier);
+    const h = bitmapHarness(value => value, { packet, version: detail.renderer_version });
+    const withoutKey = value => { const result = copy(value); delete result.key; return result; };
+    try {
+      const saved = h.preparePieceNativeSavedDisplay(detail);
+      assert.ok(h.input()); assert.ok(saved);
+      assert.deepEqual(withoutKey(h.input()), withoutKey(saved));
+      assert.deepEqual(copy(h.preparePieceNativeCard({ savedRecord: detail, exportCanvas: true })), copy(saved));
+      await finishBitmap(h);
+      assert.equal(h.card.state.measurement.phase, 'native_checked');
+      ar04CheckParagraphs(h, h.bitmapCalls.at(-1), detail);
+      assert.equal(h.fit().isCurrent(packet, h.token), true);
+      assert.equal(h.card.getCaptureTarget(), null, 'a preview is never the export canvas');
+      const exported = rawHarness(copy(detail), undefined, true, undefined, NOW, true);
+      const calls = [];
+      exported.context.NativeModules.PieceTextMetrics.renderBitmapCanvas = async request => {
+        calls.push(request); return bitmapReply(request);
+      };
+      exported.context.NativeModules.PieceTextMetrics.releaseBitmapCanvas = () => {};
+      try {
+        await finishBitmap(exported);
+        assert.equal(exported.card.state.measurement.phase, 'native_checked');
+        ar04CheckParagraphs(exported, calls.at(-1), detail);
+        const target = exported.card.getCaptureTarget();
+        assert.ok(target); assert.equal(target.isCurrent(), true);
+        assert.equal(target.key, saved.key);
+        assert.equal(target.bitmapToken, exported.card.bitmapArtifact.token);
+        assert.equal(target.bitmapBinding, exported.card.inspection.bindingToken);
+        assert.equal(exported.card.saveFit, null, 'saved rendering does not create preview save authority');
+        exported.card.componentWillUnmount();
+        assert.equal(target.isCurrent(), false);
+      } finally { exported.card.componentWillUnmount(); }
+    } finally { h.card.componentWillUnmount(); }
+  });
+  if (recorded.selected_preview) test(`AR04 344a ${recorded.source_case_id} recorded visual change revokes the old fit without changing paragraphs`, async () => {
+    const original = ar04RecordedPacket(recorded.preview, recorded.tier);
+    const selected = ar04RecordedPacket(recorded.selected_preview, recorded.tier);
+    for (const field of ['piece_text', 'piece_text_hash', 'content_payload', 'content_payload_hash'])
+      assert.deepEqual(original[field], selected[field], field);
+    assert.notEqual(original.visual_recipe_hash, selected.visual_recipe_hash);
+    assert.equal(selected.preview_revision, original.preview_revision + 1);
+    const h = bitmapHarness(value => value, { packet: original, version: original.renderer_version });
+    try {
+      await finishBitmap(h); const oldFit = h.fit(), oldKey = h.input().key, oldToken = h.token;
+      assert.equal(oldFit.isCurrent(original, oldToken), true);
+      h.replace(selected); const selectedToken = Object.freeze({}); h.bind(selectedToken);
+      assert.notEqual(h.input().key, oldKey);
+      assert.equal(oldFit.isCurrent(original, oldToken), false);
+      assert.equal(oldFit.isCurrent(selected, selectedToken), false);
+      assert.equal(h.fit(), undefined);
+      h.render();
+      assert.equal(h.card.state.measurement.phase, 'planning', h.card.state.measurement.reason);
+      await finishBitmap(h);
+      assert.equal(h.fit().isCurrent(selected, selectedToken), true);
+      assert.equal(oldFit.isCurrent(selected, selectedToken), false);
+      ar04CheckParagraphs(h, h.bitmapCalls.at(-1), recorded.detail);
+      assert.equal(h.bitmapReleases.length > 0, true);
+    } finally { h.card.componentWillUnmount(); }
+  });
+}
+test('AR04 344a bitmap refs retain identical nodes and reject current-binding node loss or replacement', async () => {
+  const recorded = ar04Multiblock.cases.find(value => value.source_case_id === 'B53-051');
+  for (const replacement of [null, { tag: 10003 }]) {
+    const packet = ar04RecordedPacket(recorded.preview, recorded.tier);
+    const h = bitmapHarness(value => value, { packet, version: packet.renderer_version });
+    try {
+      await finishBitmap(h); const fit = h.fit(), node = h.card.bitmapNode;
+      const callback = h.card.bitmapRefFor(h.card.state.binding);
+      assert.equal(callback, h.card.bitmapRefFor(h.card.state.binding));
+      callback(node);
+      assert.equal(h.card.state.measurement.phase, 'native_checked');
+      assert.equal(fit.isCurrent(packet, h.token), true);
+      callback(replacement);
+      assert.equal(h.card.state.measurement.phase, 'unavailable');
+      assert.equal(fit.isCurrent(packet, h.token), false);
+      assert.equal(h.card.bitmapArtifact, null);
+      callback(node);
+      assert.equal(fit.isCurrent(packet, h.token), false, 'reattaching the old node cannot revive its proof');
+    } finally { h.card.componentWillUnmount(); }
+  }
+});
+test('AR04 344a bitmap refs ignore stale callbacks and old fits across recorded visual A B A changes', async () => {
+  const recorded = ar04Multiblock.cases.find(value => value.source_case_id === 'B53-007');
+  const original = ar04RecordedPacket(recorded.preview, recorded.tier);
+  const selected = ar04RecordedPacket(recorded.selected_preview, recorded.tier);
+  const h = bitmapHarness(value => value, { packet: original, version: original.renderer_version });
+  try {
+    await finishBitmap(h);
+    const first = { binding: h.card.state.binding, callback: h.card.bitmapRefFor(h.card.state.binding),
+      node: h.card.bitmapNode, fit: h.fit(), token: h.token };
+    for (const [packet, token] of [[selected, Object.freeze({})], [original, first.token]]) {
+      const old = { binding: h.card.state.binding, callback: h.card.bitmapRefFor(h.card.state.binding),
+        node: h.card.bitmapNode, fit: h.fit(), token: h.card.props.display.visualToken };
+      h.replace(packet); h.bind(token);
+      assert.notEqual(h.card.state.binding, first.binding);
+      old.callback(null); // React detaches the old keyed subtree before attaching the new one.
+      h.render(); const current = h.card.bitmapNode;
+      assert.notEqual(current, old.node);
+      for (const stale of [old, first]) {
+        stale.callback(stale.node); stale.callback(null);
+        h.card.setBitmapNode(stale.node, stale.binding);
+      }
+      assert.equal(h.card.bitmapNode, current);
+      assert.equal(h.card.state.measurement.phase, 'planning');
+      assert.equal(first.fit.isCurrent(original, first.token), false);
+      assert.equal(old.fit.isCurrent(packet, token), false);
+      await finishBitmap(h);
+      assert.equal(h.fit().isCurrent(packet, token), true);
+      assert.equal(first.fit.isCurrent(original, first.token), false);
+    }
+    const callback = h.card.bitmapRefFor(h.card.state.binding), node = h.card.bitmapNode, fit = h.fit();
+    h.card.componentWillUnmount(); callback(node);
+    assert.equal(fit.isCurrent(original, first.token), false);
+    assert.equal(h.card.bitmapArtifact, null);
+  } finally { h.card.componentWillUnmount(); }
+});
 test('AR04 selected quiet-night fixture declares the complete Free palette for preview admission', () => {
   const fixtures = require('./native/piece-rn-canvas-fixtures.cjs');
   const recorded = require('./native/piece-rn-canvas-passive-role.json').cases
