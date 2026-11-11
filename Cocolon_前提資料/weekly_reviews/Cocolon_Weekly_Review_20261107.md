@@ -1,6 +1,6 @@
 # 第10回 Cocolon週末報告会 — 2026-11-07（終了）
 
-> **11/11・AR-04最新：** API74dff9a7の前提指示を実4Bの同じ8入力で一回確認し、全8raw／全responseが前回と一致、可視品質改善0。失敗1は「予定が重なっている」→「重なった」のまま拒否。同系6は5採用／1拒否、引用保持2採用。21隔離保存・非生成再読／3保存前拒否、追加学習・retry0、復元込み107.324秒。元args／環境／cwd・source／adapter保持、通常／Analysis前後全response一致、独立health200／PID66367一致。保存済みf6dae実24教材を回収・照合し、今回の継続前提＋完了動作の直接対0、同型の誤教師0を確認。ただし原因／新学習必要性は未確定。追加prompt試行は止め、次は評価8と分離した教材補完案へ。通常selector OFF・AR-04未完。 [指示比較の実測・教材24・次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scope-prefix-actual-20261111)。
+> **11/11・AR-04最新：** 評価8と分離した架空の対照教材12件（6対）を補完案として作成。外側の進行形／過去形だけを変え、内側の本人・相手・対象・肯否・過去動作を固定。既存24行を変更せず36行案へ結合。新12件は現source/S7のCPU確認で受理、外側表現・肯否・相手を変えた36候補は拒否。旧24件は再実行していない。評価原文・評価出力との完全一致0。モデル／GPU／SQL／追加学習0、学習要否は未決定。直前の実4Bは同系5/6＋引用2採用のまま、前提の進行形を過去形へ変えた1失敗が残る。通常selector OFF・AR-04未完。 [教材補完案・範囲と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scope-teacher-complement-20261111)。
 
 記録日：2026年11月7日（日本時間）  
 対象週：**2026年11月7日〜11月14日**  
@@ -2947,7 +2947,7 @@ NO_STRUCTURE_MAP_DELTA：既存build_piece_model_messagesの指示文だけと�
 
 
 <a id="piece-scope-prefix-actual-20261111"></a>
-## 11/11 AR-04 — 指示明確化の実比較は改善なし・実24教材を回収
+## 11/11 AR-04 — 指示明確化の実比較は改善なし・実24教材を回収（直前の実測・回収記録）
 
 API74dff9a7の前提指示を実4Bの同じ8入力で一回確認し、全8raw／全responseが前回と一致、可視品質改善0。失敗1は「予定が重なっている」→「重なった」のまま拒否。同系6は5採用／1拒否、引用保持2採用。21隔離保存・非生成再読／3保存前拒否、追加学習・retry0、復元込み107.324秒。元args／環境／cwd・source／adapter保持、通常／Analysis前後全response一致、独立health200／PID66367一致。保存済みf6dae実24教材を回収・照合し、今回の継続前提＋完了動作の直接対0、同型の誤教師0を確認。ただし原因／新学習必要性は未確定。追加prompt試行は止め、次は評価8と分離した教材補完案へ。通常selector OFF・AR-04未完。
 
@@ -2956,3 +2956,15 @@ API74dff9a7のPiece CI42963237980（39step、attempt1・success）を完了と�
 次は、回収済みf6daeの実24教材で未カバーだった「ので／けれど／けれども」の外側継続前提＋内側完了動作について、既存教材・生成読取ownerを再利用した最小の教材補完案を作る。現在の評価8を教師へ移さず、独立した語彙・場面で対照を用意して既存source/S7で意味・肯否・時制・相を確認する段階とし、追加学習の必要性・実施はまだ決定しない。同じprompt追記、source／期待値／raw修補、S7緩和、別作者／経路／Gate追加は行わない。今回18,068byte送信・全環境同Pod一時読取／復元再利用・一回実行の承認は完了・消費済み。次のGPU／fit／新weights／再試行は未準備・未承認で自動実行0。通常採用／selector有効化／Render／live DB／RN／build／配布0。 この1例の時制・相変異、今回family全6成立、広い文章編集品質、本人前置形・長文、同版画像／通常統合／本人端末、既存無引用3失敗、AR-01／他ARは未完。
 
 NO_STRUCTURE_MAP_DELTA：今回は実行・読取・private教材回収・状態更新だけでsource／test／公開型／route／DB／作者／controllerに変更なし。primary BLOCKER_NARROWED、可視品質改善0・human acceptance追加0。 [実測・教材範囲と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scope-prefix-actual-20261111)。
+
+
+<a id="piece-scope-teacher-complement-20261111"></a>
+## 11/11 AR-04 — 独立12件の教材補完案・既存24件保持
+
+評価8と分離した架空の対照教材12件（6対）を補完案として作成。外側の進行形／過去形だけを変え、内側の本人・相手・対象・肯否・過去動作を固定。既存24行を変更せず36行案へ結合。新12件は現source/S7のCPU確認で受理、外側表現・肯否・相手を変えた36候補は拒否。旧24件は再実行していない。評価原文・評価出力との完全一致0。モデル／GPU／SQL／追加学習0、学習要否は未決定。直前の実4Bは同系5/6＋引用2採用のまま、前提の進行形を過去形へ変えた1失敗が残る。通常selector OFF・AR-04未完。
+
+API74dff9a7は変更なし。既存Piece CI42963237980（39step、attempt1・success）を継承し、今回source/test変更・新CI・dispatch・rerun0。
+
+次は、独立12＋保持24の36行補完案を前提に、既存作者で未解消の前提変異へ対処する実モデル試験が必要か、必要なら比較対象・保持評価・上限を具体化する。教材とS7の整合確認を実4Bの改善や追加学習の必要性へ読み替えない。評価8は教師から除外し、同じprompt追記、source／期待値／raw修補、S7緩和、別作者／経路／Gate追加は行わない。前回18,068byte送信・全環境同Pod一時読取／復元再利用の一回は完了・消費済み。新GPU／fit／新weights／再試行の実行準備・承認はなく自動実行0。通常採用／Render／live DB／RN／build／配布0。
+
+NO_STRUCTURE_MAP_DELTA：今回の教材補完案とCPU確認は既存source／意味／準備／受領／S7を再利用し、新公開型・route・DB・作者・controller・Gateを追加していない。商品上の可視改善は未測定・human acceptance追加0、AR-04の未完を維持する。 [教材補完案・確認範囲と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scope-teacher-complement-20261111)。
