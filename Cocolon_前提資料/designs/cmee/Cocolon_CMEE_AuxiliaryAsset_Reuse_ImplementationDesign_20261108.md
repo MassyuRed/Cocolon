@@ -490,19 +490,19 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | 次の同一商品単位 | 意味材料が正しく届いても完成rawで崩れる境界へ限定。同種label／SYSTEM追加周回を終了し、既存meaning→現作者の依頼方向・対象状態・語り手の自然文実現を改修。能受動／明記省略／状態対照、成功control、別題材評価。容量／学習等の原因は未断定 |
 | 再開記録 | weekly第10回§32、[全結果・範囲・次作業](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/request_role_binding_review.md)／[本文なし集計](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/request_role_binding_summary.json) |
 | AR-01通常と残件 | AR-01通常不採用・役割反転未解決。先行API 651f1f38のAR-04差分とAR-01研究patchの通常不採用を継承。今回のfce72bcc／4da69cdeはtest整合のみで、AR-01通常採用なし。Render配置／実DB／RN／build0、他AR残件は維持 |
-| AR-04回収・改修 | API9b1の既存trainerで元baseからfresh36/72を一回実行しa1df候補を保存。旧24全row保持、新12のfit SYSTEMだけ歴史的training SYSTEMへ統一、proposal原本不変。scope/seed/LR/assistant-only loss/保存再読込保持、旧adapter重みからの継続なし。source/test追加変更0 |
-| AR-04実本文 | 実16のうち「予定が重なっているので、僕は友人に予定を相談した。」が旧「重なった」から回復。他15rawは旧f6daeとbyte同一、全requestは旧比較と同一。primary8/8＋保持8/8が既存意味判定を通過し、source/期待値/raw修補0。rootと独立読取が全本文を確認、今回範囲の意味退行なし |
-| AR-04検証・再読 | 全36教材/16評価を停止前にcached tokenizerで切詰めなし検証。入力最大2343、生成予約2048込み4391/8192以内。fit72更新319.087秒・保存tensor再読込一致、新16/全20HTTP stop。全16×3plan48隔離SQL保存・同/新service非生成再読成功、採用各quota1、保存後再生成0、原入力/Emlis不変。旧65全回帰や新pytestは再実行しない。API9b1b7bb8のCPU trainer28成功と既存Piece CI42969704329/job130355058089・attempt1・全39step successは準備時の完了として継承。今回source/test変更0、新CI/dispatch/rerun0。 |
-| AR-04反映・残件 | 承認済み36件/72更新のfresh候補a1dfを一回作成し、残っていた「予定が重なっている」→「重なった」の前提変異1件が回復。既存8＋保持8の実16は全件意味採用、他15rawは旧f6daeとbyte同一。48隔離保存・非生成再読成功。20HTTP・復元込み464.290秒、元args/env/cwd・source/Analysis・旧weights保持、通常/Analysis前後全response一致、独立health200/PID67361一致。fit319.087秒、retry0。新重みは検証用・通常selector OFF。今回16の限定改善であり、旧65全体・実機・一般品質・AR-04完了ではない。 |
-| AR-04現在のrefined | 既存回答選択/exact query/七項目POSTと元/補足別sourceを継承。今回保持B53-007/020の原文過去/補足現在orその時過去は混ざらず、旧raw同一・2×3plan6隔離保存再読。元QUAL idを変えずevaluation_labelで対応。refined全般/未確認49での保持・実機は未完 |
-| AR-04現在の4B本文読取 | 新a1dfの実16を原文/旧実測と全件読取。前提進行形1件回復、他15は同文。役割/対象/能受動/肯否、引用の内外話者/理由/！！、本人意向/感情/少し、僕/ぼく・俺/おれを保持。短文として読める範囲で、広い自然さ・作品品質改善や通常採用には拡張しない |
-| AR-04再開記録 | 次は保存済み新a1df候補について、旧65固有要求のうち今回とcurrent messagesが一致する16を除いた未確認49要求を既存wireから比較対象として具体化し、広い本文・欄混合・refinedの退行を先に確認する。今回完了した36/72学習・16生成を繰り返さず、追加fitへ自動進行しない。承認済み55,014byte送信・全環境同Pod内一時読取/復元再利用の一回は完了・消費済み。新GPU試行・通常採用・selector有効化・Render・live DB・RN・build・配布は未承認/未実行として区別する。 [承認一回の実結果と未確認範囲](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scope-complement-fit-actual-20261111) |
+| AR-04回収・改修 | API8a0192の既存trainerで旧36教師を不変保持し、独立12を加えたfresh48/96を一回完了。新候補344aを保存し、48更新checkpoint・最終adapterとfresh base再読込のtensor一致を確認。旧adapter重みからの継続なし、推論prompt/source/S7変更0、source/test追加変更0。 |
+| AR-04実本文 | 新候補344aの実61/73は現CMEE/S7で全件採用。051の「僕は農作業が好きだ。」→「僕は農作業が好きだった。」だけが回復、他60rawは旧a1dfとbyte同一。「予定が重なっているので、僕は友人に予定を相談した。」も保持。新独立8は旧新とも正しく改善件数へ加算しない。source/期待値/raw修補0。 |
+| AR-04検証・再読 | 停止前に48教師/73評価をcached tokenizer/source importで確認。fit96更新409.35秒、基準8＋候補61＋通常/Analysis前後対照4＝73HTTPは全200/stop。全69採用artifact×3plan＝207隔離保存/同・新service非生成再読（基準24/候補183）、採用各quota1・保存後生成0・原入力/Emlis不変。重要25全取得、候補残12は期限で未実行。API8aのCPU31/既存Piece CI42981017545成功は準備時の完了として継承し、新CI/dispatch/rerun0。 |
+| AR-04反映・残件 | 全体786.511秒/900秒上限・retry0で元提供PID68559→70649へ復元。元args/env/cwd・source/Analysis・旧重み保持、通常/Analysis前後全response一致、独立health200/PID70649一致・alive。新344aは検証用、通常採用/selectorはOFF。新候補で既存65中53＋新8を確認済み、既存12未確認を旧a1df結果で充当しない。広い文章・同版画像/通常統合/本人端末とAR-04完了・商品受入れは未成立。 |
+| AR-04現在のrefined | 既存回答選択/exact query/七項目POSTと原入力・補足別sourceを継承。実取得B53-007/020/019/021の4要求は旧a1dfとraw同一で、元と補足の現在/過去・語り手を保持。候補4×3plan＝12隔離保存/非生成再読は候補183保存の内数。refined全般・通常実機の完成とはしない。 |
+| AR-04現在の4B本文読取 | 担当二名が実61件すべての原文・旧新本文と実raw/requestの対応を読取。051の過去好みを回復し、他60rawは同一、前回の継続前提・役割/対象/能受動/肯否・留保・引用の内外話者/字面・一人称・補足分離を保持。有限短文の取得範囲で追加変異は見当たらなかったが、一般文章編集・創造性・共有価値・正式受入れへ拡張しない。 |
+| AR-04再開記録 | 次は保存344aと凍結73の未実行12だけの追加学習0比較を準備済み。送信19,870byte、候補12＋対照4の最大16HTTP、復元120秒込み600秒・retry0。未送信/未実行、新しいGPU一回の具体承認は未取得。完了した49比較・96更新・候補61を反復せず、900秒一回承認を流用しない。通常採用/selector/Render/live DB/RN/build/配布へ自動進行0。 [実61・207保存と残12の次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-preference48-actual61-20261111) |
 
 以後はこの表と各能力の対応行を現在状態へ置換更新し、詳細な実行事実は既存trial／weeklyへ置く。新しいhandoff系列・全件hash Gateを作らない。中断時も、成果物と未実行を既存保存先へ残し、同じ未完商品単位から続ける。
 
 ## 12. 今後の指示と再開方法
 
-**11/11の現在の再開点：** 次は保存済み新a1df候補について、旧65固有要求のうち今回とcurrent messagesが一致する16を除いた未確認49要求を既存wireから比較対象として具体化し、広い本文・欄混合・refinedの退行を先に確認する。今回完了した36/72学習・16生成を繰り返さず、追加fitへ自動進行しない。承認済み55,014byte送信・全環境同Pod内一時読取/復元再利用の一回は完了・消費済み。新GPU試行・通常採用・selector有効化・Render・live DB・RN・build・配布は未承認/未実行として区別する。
+**11/11の現在の再開点：** 保存344aの候補61/73を実確認し、051の過去好み回復・他60raw同一・前回の継続前提保持と207隔離保存/非生成再読を確認済み。次は凍結73の未実行12だけを同じ保存344aで確認する追加学習0比較。送信19,870byte、候補12＋通常/Analysis前後対照4の最大16HTTP、復元120秒込み600秒、retry0のpacketを準備済みで、未送信・未実行。新しいGPU一回の具体承認は未取得、完了した900秒一回承認を流用しない。完了済み49比較・96更新・候補61の反復、source/raw/期待値修補、S7緩和、通常採用/selector、Render/live DB/RN/build/配布へ自動進行しない。
 
 推奨指示は **「補助経路の活用作業を進めて」**。
 
