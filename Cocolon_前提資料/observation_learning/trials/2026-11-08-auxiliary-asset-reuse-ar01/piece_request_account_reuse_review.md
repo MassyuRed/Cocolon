@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/11・AR-04最新：** 承認済み48件/96更新のfresh候補344aを一回作成し、051の「好きだ」→「好きだった」を回復。候補61/73は全件CMEE/S7採用、旧60raw同一、前回の継続前提回復も保持。新8は旧新とも正しく改善件数へ加算しない。重要25は全取得、期限で残12は未実行/未確認。基準8＋候補61＋対照4の73HTTP、fit409.35秒・復元込み786.511秒/上限900秒、retry0。207隔離保存・非生成再読、元提供PID70649へ復元し前後対照一致・独立health200/PID一致。新重みは検証用・通常selector OFF・AR-04未完。 [実61・過去好み回復・207保存と未確認12](piece_request_account_reuse_review.md#piece-preference48-actual61-20261111)。
+> **11/11・AR-04最新：** 別の明示承認後、保存344aの残12だけを追加学習0で確認。全12がCMEE/S7採用・旧a1dfとraw同一、今回36隔離保存/非生成再読。16HTTP・124.290秒/上限600秒・retry0で元提供PID71802へ復元し、前後対照一致・独立health200/PID一致。先61を再生成/再保存せず、同重み・凍結messagesの2run和集合で73/73（既存65＋新8）全採用、未確認0。旧比72raw同一/051の時制回復1、継続前提回復も保持。累積候補219保存＋旧基準24＝243保存で、今回の新保存は36だけ。通常selector OFF・一般品質/AR-04完了/商品受入れは未成立。 [残12完了・2run和集合73と累積保存](piece_request_account_reuse_review.md#piece-remaining12-actual73-complete-20261111)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -2060,6 +2060,40 @@ fitは409.35秒、48行/各2回・96更新を完了。48更新checkpointと最�
 
 result SHA256 `46ac01f609fdad20b588665ea9625fcaca16f9247a8e24b9407ac06e64512824`。新adapter/checkpoint・48/96 report・実基準8/候補61・復元確認・207保存・独立本文読取は、既存[実行記録と新候補](https://chatgpt.com/library?file_id=libfile_fde3_f-4c94ce3b6e248191be29ef93f6b8dfb8_2f7470f963808191aaebf050935e72de&account_id=personal)へ同じidentityで保存する。API8a0192b622c0ce76cde39062e9476f7c814e6e99のsource/testは今回変更0、CPU31/既存CI42981017545の成功は準備時の完了として継承し、新CI/dispatch/rerun0。
 
-次は保存済み344aと凍結73のうち未実行12だけについて、追加学習0の比較packetを準備済み。元73から未実行12をそのまま抜き出し、完了61との交差0、原入力7項目/source/prepared/messages・旧a1df実基準を保持した。圧縮packet17,600byte＋launcher2,270byte＝送信19,870byte、候補12＋通常/Analysis前後対照4＝最大16HTTP、復元120秒込み全体600秒、retry0。元提供PID70649・保存344a/configと元source/Analysis/旧重みを停止前に照合し、全環境は同Pod内の一時読取・元提供復元再利用だけに使う。新しいroot・承認引数を必須とし、既存完了rootを再利用しない。構文/CRC/member hash/無承認引数guardだけをローカル確認し、送信・環境読取・GPU生成は未実行。今回完了した96更新・基準8・候補61・73HTTPを反復しない。新しいGPU一回の具体承認は未取得であり、今回の900秒一回承認を流用しない。通常採用/selector、Render、live DB、RN/build/配布へ自動進行しない。
+**残12の準備時点の記録（後続の別承認一回で完了）：** 保存済み344aと凍結73のうち当時未実行だった12だけについて、追加学習0の比較packetを準備済み。元73から未実行12をそのまま抜き出し、完了61との交差0、原入力7項目/source/prepared/messages・旧a1df実基準を保持した。圧縮packet17,600byte＋launcher2,270byte＝送信19,870byte、候補12＋通常/Analysis前後対照4＝最大16HTTP、復元120秒込み全体600秒、retry0。元提供PID70649・保存344a/configと元source/Analysis/旧重みを停止前に照合し、全環境は同Pod内の一時読取・元提供復元再利用だけに使う。新しいroot・承認引数を必須とし、既存完了rootを再利用しない。構文/CRC/member hash/無承認引数guardだけをローカル確認し、送信・環境読取・GPU生成は未実行。今回完了した96更新・基準8・候補61・73HTTPを反復しない。新しいGPU一回の具体承認は未取得であり、今回の900秒一回承認を流用しない。通常採用/selector、Render、live DB、RN/build/配布へ自動進行しない。
 
 NO_STRUCTURE_MAP_DELTA：source/test/公開型/route/DB/作者/controller/Gateの所有者・契約は不変。検証候補の051一件回復は確認したが、12未確認と広い品質残件を保持し、AR-04完了・正式商品credit/human acceptance追加は0。primary TECHNICAL_CREDIT。
+
+
+<a id="piece-remaining12-actual73-complete-20261111"></a>
+## 11/11 AR-04 — 残12の無学習比較完了・同344aの2run和集合73と累積243保存
+
+残12の新しい一回へのMashの明示承認後、既に準備した19,870byteを送り、保存344aだけを使って追加学習0・新重み0で比較した。今回の候補12は全件CMEE/S7採用、全12rawが保存a1df基準とbyte同一。前回61を再生成・再SQL保存せず、同じ344a重み/configと凍結messagesの、交差しない61＋12の和集合を73/73へ閉じた。既存65＋新独立8に未確認はなく、この有限集合では全候補が採用された。一回で73候補を生成した記録ではない。
+
+### 今回の一回・復元と範囲
+
+候補12＋通常/Analysis前後対照4＝16HTTPは全200/stop、追加学習・新weights・retryは0。全体124.28994340985082秒で600秒以内、復元予約120秒を保持した。新しいroot/承認引数で一回だけ実行し、完了した900秒の学習比較承認を流用しなかった。今回の19,870byte送信・同Pod内起動環境の一時読取/元提供復元再利用の承認も、この一回で完了・消費済み。
+
+停止前に12messagesをcached tokenizerで確認し、最大1946入力token＋生成予約2048＝3994/8192、切詰めなし。原入力7項目/source/prepared/messages・SYSTEM・生成条件・旧a1df基準は変更せず、期待正文やCPU正文をwireへ入れていない。元提供PID70649→候補344a→元提供71802へ復元。元args/env/cwd・資格値・source/Analysis・344a/configを含む旧adapterを保持し、通常/Analysis前後全response一致を確認。復元後の別read-only確認でもhealth200・pidfile/期待PID71802一致・process aliveを確認し、追加model callは0。環境値や認証headerを外へ回収していない。
+
+### 残12の全文読取と、73への統合
+
+今回の12は、B53-045〜050の能受動/否定と相手・対象、canonical-condition/reason/plainの条件・継続理由と希望、focus-reason/value-condition/past-concessionの焦点・程度・内外の時点を含む。root・担当・独立担当が、各原文・保存a1df・新344a本文を全文対照し、新しい意味変化は見当たらなかった。全12は旧rawと同一で、新たな文章品質改善の件数へ加算しない。今回12には引用/refined sourceはなく、それらは前61での確認を継承する。
+
+同344aの2run和集合は既存65/65＋新独立8/8、候補73/73採用・未確認0。全73のcurrent requestが凍結73と一致し、旧a1df基準比72raw同一/051の過去好み回復1を確認。前回の「予定が重なっているので、僕は友人に予定を相談した。」の継続前提保持も、前61の記録から継承する。新8は旧新とも正しかったため、8件の改善や未知の一般化成功へ換算しない。今回の12を以前の61や051の再生成として数えない。
+
+### 新36保存と、累積243の区別
+
+実rawを無修補受領し、12すべてが現CMEEで採用、採用artifactを既存S7でも確認。今回12×3planの36を既存隔離PGliteへ新規保存し、同/新serviceの非生成再読一致を確認した。原source/Emlis不変、採用各quota1、保存後生成0、旧作者fallback0を維持する。
+
+候補保存は前回183＋今回36＝累積219。前回の基準8×3plan＝24も含めると累積243保存で、今回新しく243件保存したのではない。前61の183保存と基準24は実行済み記録を再利用し、再SQL実行0。live Supabase/実Auth/native画像/本人端末の成立へ拡張しない。CPU/SQL読取はprimary Python3.12.14、Node24.22.1、PGlite0.5.8で、旧runtimeの再認定ではない。
+
+### 記録と次の未確認範囲
+
+今回result SHA256 `e375f4f2555c7582691a4f84597487f35fb7da817569ddb7a36c5b83042fd543`、継承した前61のresult SHA256 `46ac01f609fdad20b588665ea9625fcaca16f9247a8e24b9407ac06e64512824`。新重みは作らず、保存weights SHA256 `344a9defd0c890982d9718805d8b630b5d48719475c998aa9a57ed6df6bfc337`を保持。両run・原raw・独立本文読取・新36/累積SQL対応は既存[実行記録と新候補](https://chatgpt.com/library?file_id=libfile_fde3_f-4c94ce3b6e248191be29ef93f6b8dfb8_2f7470f963808191aaebf050935e72de&account_id=personal)へ同じidentityで保存する。
+
+API8a0192b622c0ce76cde39062e9476f7c814e6e99のsource/test変更0、新CI/dispatch/rerun0。既存CPU31/CI42981017545成功は準備時の完了として継承する。残12の取得不足は解消したが、一般の独立入力品質・通常Piece/refined・同版画像/保存・本人端末・正式受入れは別の未完了範囲。73の有限確認をAR-04全体の完了や商品合格へ読み替えない。
+
+次は通常Piece/refinedと同版画像・保存再読の未確認を、現在の詳細設計と実ファイルから具体化する。今回と前回の完了runを反復せず、73取得完了だけで通常採用/selector、Render/live DB/RN/build/配布へ自動進行しない。追加GPU/fitや新しい承認要求packetは自動作成しない。
+
+NO_STRUCTURE_MAP_DELTA：source/test/公開型/route/DB/作者/controller/Gateの所有者と契約は不変。今回の新12に可視本文差はなく、確認不足を閉じた限定TECHNICAL_CREDIT。通常採用・正式商品credit/human acceptance追加0、AR-04未完を維持する。

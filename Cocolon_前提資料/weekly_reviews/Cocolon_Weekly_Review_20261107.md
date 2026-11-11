@@ -1,6 +1,6 @@
 # 第10回 Cocolon週末報告会 — 2026-11-07（終了）
 
-> **11/11・AR-04最新：** 承認済み48件/96更新のfresh候補344aを一回作成し、051の「好きだ」→「好きだった」を回復。候補61/73は全件CMEE/S7採用、旧60raw同一、前回の継続前提回復も保持。新8は旧新とも正しく改善件数へ加算しない。重要25は全取得、期限で残12は未実行/未確認。基準8＋候補61＋対照4の73HTTP、fit409.35秒・復元込み786.511秒/上限900秒、retry0。207隔離保存・非生成再読、元提供PID70649へ復元し前後対照一致・独立health200/PID一致。新重みは検証用・通常selector OFF・AR-04未完。 [実61・過去好み回復・207保存と未確認12](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-preference48-actual61-20261111)。
+> **11/11・AR-04最新：** 別の明示承認後、保存344aの残12だけを追加学習0で確認。全12がCMEE/S7採用・旧a1dfとraw同一、今回36隔離保存/非生成再読。16HTTP・124.290秒/上限600秒・retry0で元提供PID71802へ復元し、前後対照一致・独立health200/PID一致。先61を再生成/再保存せず、同重み・凍結messagesの2run和集合で73/73（既存65＋新8）全採用、未確認0。旧比72raw同一/051の時制回復1、継続前提回復も保持。累積候補219保存＋旧基準24＝243保存で、今回の新保存は36だけ。通常selector OFF・一般品質/AR-04完了/商品受入れは未成立。 [残12完了・2run和集合73と累積保存](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-remaining12-actual73-complete-20261111)。
 
 記録日：2026年11月7日（日本時間）  
 対象週：**2026年11月7日〜11月14日**  
