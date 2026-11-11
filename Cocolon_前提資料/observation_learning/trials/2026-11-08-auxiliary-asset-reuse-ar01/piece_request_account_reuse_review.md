@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/11・AR-04最新：** 保存344aの実SQLから通常051の2段落・refined007の3段落の公開DTOを既存RN bitmapHarnessへ接続し、007の配色変更後の正規remountがnative_placement_unstableで止まる製品不具合を再現。f8a3c474でCardのnode参照をbinding所有へ束縛し、旧fitの失効と同binding異常の拒否を維持して新generationの再描画を修復。ローカルJSはAR04新5＋旧5＝10成功、関連旧22＋新5＝27成功（重複集合で合算しない）。既存Piece RN CIはpush自動一回の[run42992952404](https://github.com/MassyuRed/Cocolon/actions/runs/42992952404)/head f8a3c474でoverall failure。JSはNode24.22.2/TS5.2.2で1434＋291＝1725 PASS、追加5件も成功。Android bridge/iOS sourceの実compileは成功、export 2jobは変更対象判定success・compile対象外skip。iOS sourceの旧V4 19 failure名は完全一致だが、RN canvasは旧4method/1failure→新4method/2failuresとなり、既存max420にmeasurement_timeout 8233.993msを新観測。原因切分け未完。保存73/累積243は継承のみ、追加GPU/SQL0。新2作品のnative pixel/Photos/本人端末・正式受入れ、実73とconfigured wrapperの結合、Q2資格外の自然補足は未確認。通常selector OFF・AR-04未完。 [実DTO接続・配色再描画修復と残件](piece_request_account_reuse_review.md#piece-344a-recorded-dto-bitmap-binding-repair-20261111)。
+> **11/11・AR-04最新：** 保存344a二作品のpreview/saved/export計6描画が元8秒内・同版PNG一致、configured録画3件もsource_request/S7/Free保存再読を確認。8760067bのv5割当変更後、max420は6164.722msで通過し旧成功画像と一致。ただし別run比較で速度改善の因果は未証明。既存Piece RN [run43001857335](https://github.com/MassyuRed/Cocolon/actions/runs/43001857335)はoverall failureで、旧V4 19/WholeCanvas失敗は残存。旧73/243再実行0、通常selector OFF・AR-04未完。 [録画3件・v5割当とnative6の現在地](piece_request_account_reuse_review.md#piece-344a-configured3-native6-weighted-candidates-20261111)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -2149,3 +2149,66 @@ API8a0192、保存344a、2run和集合73/73と候補219/旧基準込243保存は
 今回のRED/GREEN・独立読取・公開DTO対応とsource反映記録は[実行記録](https://chatgpt.com/library?file_id=libfile_fde3_f-1c8bfcc14d98819194c2be053b797ee5_2f7470f963808191aaebf050935e72de&account_id=personal)へ保存済み。source codeの正本はGitHubとし、新しいprivate記録へ旧73/48学習artifactのidentityを置換しない。
 
 既存Cardのref/node/generation/capture責務内の修正で、新owner/route/DTO/DB/作者/controller/Gateは追加しない。製品Card変更はあり、「製品renderer変更0」「純test追加」とは記録しない。限定TECHNICAL_CREDIT、human acceptance追加0・AR-04未完。
+
+
+<a id="piece-344a-configured3-native6-weighted-candidates-20261111"></a>
+## 11/11 AR-04 — configured録画3件の保存再読とnative v5割当・新6描画の接続
+
+前回のmax420 timeoutと公開DTO二作品のnative未配線を、既存owner内で直接進めた。Cocolon source commitは[8760067bfa651c72cf320f71ae9c2b92847d915b](https://github.com/MassyuRed/Cocolon/commit/8760067bfa651c72cf320f71ae9c2b92847d915b)、親98ec41fd。native計測1path＋既存harness4pathのexact5を反映し、全文/blob、changed paths、postheadを確認済み。API8a0192・保存344a・通常selector OFFは保持する。
+
+### configured wrapperへ録画3件を通した範囲
+
+API8a0192の既存configured helperを使い、B53-051、ACTION-REASON-CONSULT、Q2 refined B53-007の保存済み344a応答をHTTP mockで無修補再生した。current DBで確定したsource、owner、source_ref、PreparedRequestから実wrapperが作るsource_request/messagesを完全照合し、source idとcommitmentを無視しない。既存CMEE/S7で採用後、Freeの隔離PGliteへ各1件を新規保存し、同/新service再読・同じsave再送を確認。各quota1、保存後model0、原source/Emlis不変。今回の新保存3は別の録画結合検証で、旧73生成/累積243保存の再実行は0。
+
+最終成功は3件で、local MockTransport入場は成功3＋007 harness失敗2＝計5、応答返却は4、007再実行2。初回007はこのsourceでauthoring_constraintsが必須という誤ったassertにより返却前失敗、二回目はJSON key順を本文順に使ったharness誤りでpreview後・save前に失敗した。既存block_partition順へ直した三回目に成功し、DB0→saved1/quota1を直接監査した。失敗時保存0はsave前のcontrol-flow証拠であり、失敗直後の独立DB snapshotは保持していない。失敗・harness訂正を製品不具合やモデル改善とは扱わず、retry0とも記録しない。051の過去好みを失う旧rawの別対照は、同じcurrent sourceへ明示bindingしてS7で拒否され、正しいhashだけでは採用されないことも確認した（この対照の追加HTTP/SQL/model0）。
+
+current DBのid/日時/commitment等は旧GPU要求と異なるため、現在wrapper要求と旧GPU要求のidentity同一はfalse（JSON差分は051/継続前提/007で15/11/23path）。これは現在sourceに束縛した録画応答のアプリ結合確認であり、同じ要求を実4Bへ新送信した一体証明ではない。外部HTTP/GPU/live DB/通常selector切替は0。refined007は既存Q2の適格回答/RESOLVED ADD/currentを使い、原入力と補足を別sourceへ保つ。任意のnatural回答を補足へ自由接続した検証ではなく、このrefinedには有限authoring_constraintsが無いまま既存source bindingと独立S7を通る。runtimeはPython3.12.14/pytest8.4.1・Node24.22.1/PGlite0.5.8。portable化の最終版はcompile/import/原本byte照合だけで、再SQLは行っていない。
+
+### native v5の複数suffix割当を最小変更
+
+旧runの12fixture全体遅延・Card非経由rawも遅延という観測だけでは、Cardと実行負荷等の因果を分離できない。その未確定を維持し、既存`PieceTextMetrics.mm`のexploration/v5・4worker・複数suffixだけを、元job順の連続区間へUTF16長で均衡割当する。元range/order・rowJobs・pointwise属性・cache代表・collision検証・worker別CoreText所有・serial queue/max4・queue待ち込み期限は保持し、1suffix/single worker/legacy v3/v4は元strideを維持する。
+
+max420の静的モデルは88410 rows/11381 jobs/28 suffixでtypesetter setup数112→31、job全量を各1回被覆。repeated420の1suffixは各worker105 jobs/4 setupを保持する。112→31は静的割当数で、速度改善を実測した値ではない。UTF16長は実costの近似であり、後述の既存v5 oracle/実native結果と、最適化が原因で速くなったという証明は分ける。
+
+### 保存344a二作品の新model73 group6
+
+通常051の2段落、refined007のselected quiet_night/revision2の3段落を、各preview/saved/exportで計6ケースへ接続した。canonical rendererは`piece.rn_bitmap_renderer.ios.v2`のまま、製品layoutによる内部prototypeへの写像を使い、fixtureの版を書き換えない。記録済みcanonical8項目と3hash・本文/recipeを維持し、test用Premium外枠/preview期限だけは明示projection。source7/lineage/prepared/raw/prompt/authを新fixture/reportへ追加しない。
+
+旧legacy13/bitmap12/admitted29/export20はgenerated JSONのbytesと件数を保持し、新model73 groupだけ6を追加。元8000ms・本文/段落/Emlis/native bitmap/cell比較・preview/saved/export canonical/layout/PNG一致と、既存offscreen1080px/view-shot比較を再利用する。PNG欠落時のNSNull二次crashをguardするが、欠落assertionはFAILのまま。これは選択済み版の静的6ケースで、同mount中のsoft_paper→quiet_night変更をnativeで試すものではない。
+
+| path | 今回の差分 |
+| --- | --- |
+| `ios/tempCocolon/PieceTextMetrics.mm` | 既存v5複数suffix jobのworker割当だけを変更。 |
+| `tests/native/piece-rn-canvas-fixtures.cjs` | 実公開DTO二作品のmodel73 group6を生成し、旧4groupを保持。 |
+| `tests/native/run-piece-rn-canvas-ios.sh` | reviewed native全文のpinを更新し、新groupを既存実行へ接続。 |
+| `tests/native/piece-rn-canvas-entry.js` | model73 saved/exportと既存capture経路を使用。exportだけ既存1080px offscreen branchへ接続。 |
+| `tests/native/piece-rn-canvas-ios.m` | 新groupの同版本文/bitmap/PNGと欠落失敗を検査。旧比較・分母は保持。 |
+
+ローカルでfactory Node check、bash -n、旧4group bytes、新6 canonical/3hash/native pin・既存lexical projectionは成功。entryは既存JSXを含むためstandalone Node parse対象外で、Metro/native compileと実描画は続く既存CIで確認した。独立担当は5path全文と隣接する所有/失効/期限・oracleを読み、blockingな静的所見なし。独立担当の別native実行は0で、画素の成立は静的reviewではなく回収した実CI artifactに基づく。
+
+### 実CIと未完了
+
+既存Piece RN [run43001857335](https://github.com/MassyuRed/Cocolon/actions/runs/43001857335) attempt1/head8760067bはoverall failure。JSはNode24.22.2/TS5.2.2で1434＋291＝1725 PASS、FAIL/CANCEL/SKIP0、前回AR04追加5件も成功。Android bridge/iOS sourceの実compile成功。export Pods/Androidはjob successだが依存guardによるinstall/compile対象外skip。iOS sourceは既存v5 32 PASS/BITS22行一致・旧V4 19名一致でfailure。RN canvasは5method/1failure（旧WholeCanvasのみ）で、新model73/既存Bitmap methodにfailureはない。WholeCanvasのstructured59件/固有43署名の出現数は前runと一致。push自動起動、manual dispatch/rerun0、別Phase6自動workflowも起動。
+
+source job `130459676054` はcompile成功、metricsで旧V4の1 PASS/19 FAILを維持してfailure。前run42992952404とPASS名180/FAIL名19は順序まで同一、新failure0。既存v5の全range suffix oracle・worker所有・属性・cache budget・reject/exception・元期限を含む32検査は全PASS、V5 BITS22行も完全一致。legacy97とv5 32はnative129の内数で、97＋32＋129とは合算しない。v9 46/旧AR04 4/bitmap44も全PASSだが、新model73六描画とは別集合。mixed420の3074→1994msは旧v3 benchmarkであり、v5の速度効果には用いない。
+
+RN canvas job `130459675982` は前runの4method/2failures（Bitmap/WholeCanvas）から、今回は新groupを含む5method/1failure（WholeCanvasのみ）。単一structured testFailureSummaries集合ではWholeCanvas59件/固有43 assertion×case署名の出現数が完全一致し、新only/removed0。前回118という値はouter/inner重複印字込みで118個の独立assertionを意味しない。quiet logに成功method名の列挙はなく、5実行/Wholeのみ失敗とsourceから成功methodを対応付け、新6個別値は次のartifactで確認した。
+
+artifact `13847119907` は74,964,076byte、SHA256 `0c49f4f46635f3c3ef711943087f846eaa93adad19576cd56e51ee5519545c68`でdigest一致を確認して回収。model73-resultsの新6すべてがnative_checked、capture_error0/native_canvas_valid true/bitmap_all_cells_equal1、canonical8/3hashは記録値と独立再計算一致。各作品のpreview/saved/export PNG bytesは完全同一で、export2件も既存captureRef/所有cache/file/全RGBA比較を通過した。
+
+| 保存344a作品 | preview ms | saved ms | export ms |
+| --- | ---: | ---: | ---: |
+| 通常B53-051・2段落 | 562.718 | 396.267 | 377.147 |
+| refined B53-007・3段落 | 567.418 | 370.358 | 382.815 |
+
+rootが二作品の1080×1350 PNGを目視し、全本文・2/3段落・footer Emlis・配色に欠けを認めなかった。同一bytesの各preview/saved/exportまでの限定確認で、商品品質のhuman acceptanceではない。
+
+既存max420/repeated420は旧bitmap12groupのprototype.v1 stress fixtureであり、新model73のcanonical ios.v2二作品6件とは別集合である。max420も6164.722166msで元8000ms内を通過し、font36・rows/groups/blocksが旧成功時と同じ。repeated420は3796.116167msで通過した。max420のPNG bytesと全RGBAは旧成功run42754406573と完全一致し、SHA256 `37c12a3a6f94f80de95d1f36c1346cce35f4057c319bc9deeb981e72359bb7b6`・1080×1350を保持。旧成功4063.756459→前run timeout8233.992959→今回6164.722166msは別runの観測で、環境/機械差が混ざるため、v5最適化の因果的速度改善は未証明のまま。
+
+前runの新Bitmap failureは今回には観測されず、新model73もfailure0だったが、source旧V4/旧WholeCanvasが残りCI全体はfailure。元8秒と旧group13/12/29/20を維持して得た限定native/同版画像確認であり、署名/配布、Photos/本人端末、一般文章品質、正式admission/通常採用、AR-04全体完了は成立していない。
+
+今回の[実行記録](https://chatgpt.com/library?file_id=libfile_fde3_f-a243962958108191818a684ca870946d_2f7470f963808191aaebf050935e72de&account_id=personal)は同identityでcheckpointからnative終端結果へ差分更新する。source codeの正本はGitHubに置き、private記録へ正本コード全文を複製しない。前回RN binding/旧73/48学習artifactリンクは各過去記録に保持する。
+
+次は同mountの配色変更で旧native fit/captureが失効し新描画へ進むことを、既存経路で確認する。Photos/本人端末・正式受入れと通常採用は未確認、旧V4/WholeCanvasの残件も保持する。
+
+STRUCTURE_MAP_DELTA_NONE：既存v5計測owner内部のjob割当と既存native test harness内接続のみで、product owner/route/DTO/DB/作者/controller/Gateの責務・topologyは不変。新しい管理票や承認段階は追加しない。

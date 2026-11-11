@@ -4,7 +4,7 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-11 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR01_UNRESOLVED_AR04_SAVED344A_BITMAP_BINDING_LOCAL_JS_VERIFIED_NATIVE_MAX420_TIMEOUT_UNRESOLVED_UNADOPTED
+status: AR01_UNRESOLVED_AR04_CONFIGURED_RECORDED3_AND_MODEL73_NATIVE6_VERIFIED_V5_MAX420_WITHIN8S_CAUSAL_SPEEDUP_UNPROVEN_OLD_V4_WHOLE_FAILURES_UNADOPTED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
@@ -12,7 +12,7 @@ current_next: AR-04
 runtime_effect_of_this_document: 0
 ---
 
-> **11/11・AR-04最新：** 保存344aの実SQLから通常051の2段落・refined007の3段落の公開DTOを既存RN bitmapHarnessへ接続し、007の配色変更後の正規remountがnative_placement_unstableで止まる製品不具合を再現。f8a3c474でCardのnode参照をbinding所有へ束縛し、旧fitの失効と同binding異常の拒否を維持して新generationの再描画を修復。ローカルJSはAR04新5＋旧5＝10成功、関連旧22＋新5＝27成功（重複集合で合算しない）。既存Piece RN CIはpush自動一回の[run42992952404](https://github.com/MassyuRed/Cocolon/actions/runs/42992952404)/head f8a3c474でoverall failure。JSはNode24.22.2/TS5.2.2で1434＋291＝1725 PASS、追加5件も成功。Android bridge/iOS sourceの実compileは成功、export 2jobは変更対象判定success・compile対象外skip。iOS sourceの旧V4 19 failure名は完全一致だが、RN canvasは旧4method/1failure→新4method/2failuresとなり、既存max420にmeasurement_timeout 8233.993msを新観測。原因切分け未完。保存73/累積243は継承のみ、追加GPU/SQL0。新2作品のnative pixel/Photos/本人端末・正式受入れ、実73とconfigured wrapperの結合、Q2資格外の自然補足は未確認。通常selector OFF・AR-04未完。 [実DTO接続・配色再描画修復と残件](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-344a-recorded-dto-bitmap-binding-repair-20261111)。
+> **11/11・AR-04最新：** 保存344a二作品のpreview/saved/export計6描画が元8秒内・同版PNG一致、configured録画3件もsource_request/S7/Free保存再読を確認。8760067bのv5割当変更後、max420は6164.722msで通過し旧成功画像と一致。ただし別run比較で速度改善の因果は未証明。既存Piece RN [run43001857335](https://github.com/MassyuRed/Cocolon/actions/runs/43001857335)はoverall failureで、旧V4 19/WholeCanvas失敗は残存。旧73/243再実行0、通常selector OFF・AR-04未完。 [録画3件・v5割当とnative6の現在地](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-344a-configured3-native6-weighted-candidates-20261111)。
 
 > **11/10・AR-04最新：** 引用内stopを持つ新4件＋保持GENERAL07の現builder送信messagesを固定し、13,140byte・2memberの無学習比較packetを準備。構文compile／CRC／member照合は成功、実モデル生成・送信・提供停止0。非環境の稼働確認はhealth200。起動環境全体の読取りは認証情報を含み得るとして自動承認審査に拒否され、未実行。新packet送信と、完全復元に必要な環境内再利用の具体承認待ち。API5816f2d0／f6dae研究候補・通常selector OFF・本番未反映を維持。 [具体packet・確認範囲・再開点](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quote-stop-inference-prepared-20261110)。
 
@@ -380,13 +380,13 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 | AR-01 | 現naturalの主体・所有者・否定・時点・留保を、旧失敗・意味比較・共通原因分析で改善。EM-01a/b | 現6境界と正常な短文／省略で、同入力の誤読を解消または明確に減らし、自然さ・別題材・既成功・保存再読を保持。検出増加／無出力だけでは完了しない | 継続中。新24実生成の4版は通常不採用。c6555fd5で疑問符なしの確認質問の保存抜けを修復、250局所PASS。同24rawは旧24保存→新22保存／2拒否、受理本文不変。全体の意味修復は未完 |
 | AR-02 | 現naturalの任意問い・回答・訂正・撤回・frameの一往復。EM-02a/b、03b | 一点確認／skip／終了／本人続行、対象だけ更新、撤回後の残存意味、同版再読、プラン境界 | AR-01の全一般品質完成待ちにはしない。未開始 |
 | AR-03 | 適格履歴の意味ある利用。EM-03a/b | 同一／別場面・変化・無関係・訂正前を区別し、適切な履歴が今回へ効く。失効材料を使わない | 現related_contextを継承。未開始 |
-| AR-04 | Piece一般本文・単独伝達・refined・画像整合 | 原文の意味・一人称・本人補足と同版画像／保存を保持 | 保存344aの通常051/補足007の公開DTOを既存RN JSへ接続し、Card bindingの正規remount停止をf8a3c474で修正。局所新5/旧5の10・関連27、CI JS1725は成功。既存CI overall failure、RN canvas旧1→新2 method failureでmax420のmeasurement_timeout 8233.993msを新観測、原因未確定。73/243は継承のみ、追加GPU/SQL0。通常selector OFF、新2作品native pixel/Photos/本人端末・正式受入れとAR-04全体は未完。 |
+| AR-04 | Piece一般本文・単独伝達・refined・画像整合 | 原文の意味・一人称・本人補足と同版画像／保存を保持 | configured録画3件のsource binding/S7/Free別保存再読と、8760067b/model73二作品native6の元8秒内・同版PNGを確認。max4206164.722msも旧成功画素と一致、速度因果は未証明。CIは旧V4 19/署名一致Whole残存でoverall failure。旧73/243再実行・実4B再生成0、通常selector OFF。同mount配色変更/Photos/端末/正式受入れとAR-04全体は未完。 |
 | AR-05 | 分析の本人基準・役割／選択・記録間関係。AN-03a/b/c、04 | 原記録→意味→図／全文→両端根拠の対応、再出現／変化／不明の正しさ | 現Engine統合・保存済み成果を継承。並行可能。未開始 |
 | AR-06 | Emlis観測材料、訂正・削除・権利、長い蓄積と月次。EM-04/05、AN-02/06/08/10 | 本人sourceから材料を渡し、失効・分割範囲・当時版を保持。生成本文を本人事実にしない | AR-02/03/05の該当能力を利用。未開始 |
 | AR-07 | IF／Saved等の商品固有の残る意味保持責務。既存AN／PC残件 | 仮想・本人選択意向・観測を分離し、成立した経路で出力と保存を確認 | 既存商品の実装条件に従う。無断延期・新発売条件化をしない。未開始 |
 | AR-08 | 実証できた共通能力の通常適用と全体確認。EM-05/06/07等 | 採用版の意味保持・自然さ・権利・中断復帰・保存再読・実際の待ち時間／費用。未採用範囲は理由と残差を保持 | 各単位で通常採用可能。全core一括切替を強制しない。未開始 |
 
-現在は **AR-04の意味保持・単独伝達**を継続する。保存344aの通常051/補足007の公開DTO二作品を既存RN bitmapHarnessへ通し、007配色変更後の正規remountを停止していたCardのnode参照をbinding所有へ修正した。新generationの再planningを許し、旧fit/同binding異常の失効を維持。source f8a3c474反映済み、ローカルAR04 10/関連27成功は重複集合。既存Piece RN CIはpush自動一回の[run42992952404](https://github.com/MassyuRed/Cocolon/actions/runs/42992952404)/head f8a3c474でoverall failure。JSはNode24.22.2/TS5.2.2で1434＋291＝1725 PASS、追加5件も成功。Android bridge/iOS sourceの実compileは成功、export 2jobは変更対象判定success・compile対象外skip。iOS sourceの旧V4 19 failure名は完全一致だが、RN canvasは旧4method/1failure→新4method/2failuresとなり、既存max420にmeasurement_timeout 8233.993msを新観測。原因切分け未完。73/累積243は再実行していない。次は、max420のnative候補計測が遅くなった原因と、current344a二作品のnative画像・同版保存/再読の未確認を、現sourceと既存検証経路から詰める。前回GPU個別一回の承認は完了・消費済み。通常採用/selector有効化は未実施、本人端末/正式受入れも未確認。
+現在は **AR-04の意味保持・単独伝達**を継続する。API8a0192のconfigured wrapperへ保存344a録画3応答をcurrent DB source bindingで通し、独立S7/Free別保存3と非生成再読を確認。8760067bの実nativeで二作品preview/saved/export計6は元8秒内・canonical8/3hash/作品内PNG一致、export2全RGBA一致。max420は6164.722msで8秒内・旧成功画素と一致したが、別run比較で速度改善の因果は未証明。既存Piece RN [run43001857335](https://github.com/MassyuRed/Cocolon/actions/runs/43001857335)はoverall failureで、旧V4 19/WholeCanvas失敗は残存。旧73/243再実行・追加GPU0。次は同mountの配色変更で旧native fit/captureが失効し新描画へ進むことを、既存経路で確認する。Photos/本人端末・正式受入れと通常採用は未確認、旧V4/WholeCanvasの残件も保持する。
 
 既存の品質作業・新教師8件・保存重みの継続点を使う。GPUに現実の接続障害がある場合、取得できた事実、未実行の生成、回収済み原本、次の同一単位を記録し、CPUの合成成功を実モデル改善へ換算しない。接続復旧や既存の別core実装を必要範囲で進め、無関係な補助機構開発へ変えない。
 
@@ -490,19 +490,19 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | 次の同一商品単位 | 意味材料が正しく届いても完成rawで崩れる境界へ限定。同種label／SYSTEM追加周回を終了し、既存meaning→現作者の依頼方向・対象状態・語り手の自然文実現を改修。能受動／明記省略／状態対照、成功control、別題材評価。容量／学習等の原因は未断定 |
 | 再開記録 | weekly第10回§32、[全結果・範囲・次作業](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/request_role_binding_review.md)／[本文なし集計](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/request_role_binding_summary.json) |
 | AR-01通常と残件 | AR-01通常不採用・役割反転未解決。先行API 651f1f38のAR-04差分とAR-01研究patchの通常不採用を継承。今回のfce72bcc／4da69cdeはtest整合のみで、AR-01通常採用なし。Render配置／実DB／RN／build0、他AR残件は維持 |
-| AR-04回収・改修 | Cocolon f8a3c474のCard/test/新公開DTO fixture 3path。保存344aの通常051・refined007を既存bitmapHarnessへ投影し、配色変更後の正規remountが新measurementを失効させる不具合をbinding所有のref/nodeで修正。API8a0192/344a/source/S7は不変、追加model/GPU/SQL0。 |
-| AR-04実本文 | 同344aの2run和集合73/73（既存65＋新独立8）は現CMEE/S7で全件採用、未確認0。旧a1df比72raw同一/051の過去好み回復1、前回の継続前提回復も保持。今回残12は全raw旧基準同一、新8も旧新とも正しく改善件数へ加算しない。source/期待値/raw修補0。 |
-| AR-04検証・再読 | 修正前は同じ007新検査がnative_placement_unstableで1 FAIL。修正後Node24.22.1/TS runtime不使用、AR04新5＋旧5＝10 PASS、関連旧22＋新5＝27 PASS（重複・合算しない）。実SQL由来2/3段落・3hashとpreview/saved/export入力を確認。既存73本文/候補219・基準込243保存は継承のみ。既存Piece RN CIはpush自動一回の[run42992952404](https://github.com/MassyuRed/Cocolon/actions/runs/42992952404)/head f8a3c474でoverall failure。JSはNode24.22.2/TS5.2.2で1434＋291＝1725 PASS、追加5件も成功。Android bridge/iOS sourceの実compileは成功、export 2jobは変更対象判定success・compile対象外skip。iOS sourceの旧V4 19 failure名は完全一致だが、RN canvasは旧4method/1failure→新4method/2failuresとなり、既存max420にmeasurement_timeout 8233.993msを新観測。原因切分け未完。 |
-| AR-04反映・残件 | source f8a3c474のbinding修正はローカル27/CI JS1725成功。既存CI overall failureで、iOS source旧V4 19失敗名は一致、RN canvasは旧1→新2 method failureとなり既存max420にmeasurement_timeout 8233.993msを新観測、原因切分け未完。native/workflow/旧fixture/counter変更0でも既存simulator buildは実行済み。新2作品native fixture未配線、pixel/Photos/端末/正式受入れとAR-04全体は未完、通常selector OFF。 |
-| AR-04現在のrefined | 既存Q2資格・回答選択/exact query/七項目POSTと原入力/補足別sourceを継承。既存実SQLの007は原2＋補足1の3段落で、本文/recipe/hashを変えず公開DTOからRN JSへ到達し、記録済み配色変更後の新planning/fitと旧fit失効を確認。新refined生成/再SQL0。任意の自然source補足、refined全般・native/通常端末完成とはしない。 |
-| AR-04現在の4B本文読取 | 前61は担当二名、今回残12はroot/担当/独立担当が各原文・旧新本文とraw/requestを全文対照。今回12に新意味変化は見当たらず、能受動/肯否/相手・対象/条件・理由・譲歩/程度/内外時点・希望・本人表記を保持。和集合73は旧比72raw同一/051のみ回復。一般文章編集・創造性・共有価値・正式受入れへ拡張しない。 |
-| AR-04再開記録 | 保存344aの73/73と累積243保存は完了済みとして継承。今回公開DTO二作品のRN JS接続とCard binding修正は反映済み、ローカル10/関連27成功。次は、max420のnative候補計測が遅くなった原因と、current344a二作品のnative画像・同版保存/再読の未確認を、現sourceと既存検証経路から詰める。前回GPU個別一回の承認は完了・消費済み。通常採用/selector有効化は未実施、本人端末/正式受入れも未確認。 |
+| AR-04回収・改修 | Cocolon8760067bのnative1＋既存harness4pathを反映。v5/4worker/複数suffixだけ元job順をUTF16長で均衡割当し、1suffix/single worker/v3/v4と8秒を保持。model73通常051/補足007のpreview/saved/export計6を既存nativeへ接続。API8a0192 source変更0。 |
+| AR-04実本文 | 保存344aの2run和集合73/73（既存65＋新8）は継承、旧a1df比72raw同一/051過去好み回復1・継続前提保持。今回は051/継続前提/007の旧録画3応答を無修補再生し、新実4B生成・品質改善件数は0。旧73の再生成0。 |
+| AR-04検証・再読 | configured録画3件はcurrent DB source_request/messages/commitmentを完全照合しCMEE/S7採用、Free別保存3/非生成再読・各quota1・保存後model0。Mock入場5/返却4・007再実行2、旧243再保存0。実native新6は全native_checked/同版PNG一致、export2も全RGBA一致。max4206164.722ms/repeated4203796.116msは元8秒内、v5 32/BITS22一致。112→31は静的setup数で速度因果は未証明。既存Piece RN [run43001857335](https://github.com/MassyuRed/Cocolon/actions/runs/43001857335)はoverall failureで、旧V4 19/WholeCanvas失敗は残存。 |
+| AR-04反映・残件 | source8760067b exact5を全文/blob/changed paths/posthead確認・独立review済み。CI43001857335は新6同版native画像/既存Bitmapを確認したが、旧V4 19/署名一致のWholeCanvasが残存しoverall failure。新6画像・録画3保存再読をpendingへ戻さず、同mount native配色変更/Photos/端末/正式受入れ・通常selector OFFとAR-04未完を保持。 |
+| AR-04現在のrefined | 既存Q2資格と原入力/補足別sourceを保持。録画007はconfigured wrapper→独立S7/Free隔離保存再読成功、旧GPU要求identity同一はfalse。selected quiet_night/revision2の3段落はnative preview/saved/export全8秒内・canonical/3hash/PNG bytes一致、export全RGBA一致。任意natural補足/同mount native配色変更/Photos/本人端末完成とはしない。 |
+| AR-04現在の4B本文読取 | 前回73本文の読取結果を継承（先61は担当二名、残12はroot/担当/独立担当）。今回は記録済み3応答の無修補再生で新model本文0、一般文章編集・創造性・共有価値・正式受入れの新評価へ拡張しない。source_request/meaning/S7の録画結合とnative計測/画素確認を分ける。 |
+| AR-04再開記録 | 保存344a73/73・累積243保存は継承し再実行0。configured録画3件の別保存再読とsource8760067b/native6の同版preview/saved/exportを確認済み。次は同mountの配色変更で旧native fit/captureが失効し新描画へ進むことを、既存経路で確認する。Photos/本人端末・正式受入れと通常採用は未確認、旧V4/WholeCanvasの残件も保持する。 |
 
 以後はこの表と各能力の対応行を現在状態へ置換更新し、詳細な実行事実は既存trial／weeklyへ置く。新しいhandoff系列・全件hash Gateを作らない。中断時も、成果物と未実行を既存保存先へ残し、同じ未完商品単位から続ける。
 
 ## 12. 今後の指示と再開方法
 
-**11/11の現在の再開点：** 保存344aの実SQL由来二作品（通常051の2段落・refined007の3段落）を公開DTOから既存RN JSへ接続。f8a3c474で配色変更後の正規remountを停止していたCard binding参照を修正し、旧fit/同binding異常の拒否を維持してローカルAR04 10/関連27成功（重複）。既存Piece RN CIはpush自動一回の[run42992952404](https://github.com/MassyuRed/Cocolon/actions/runs/42992952404)/head f8a3c474でoverall failure。JSはNode24.22.2/TS5.2.2で1434＋291＝1725 PASS、追加5件も成功。Android bridge/iOS sourceの実compileは成功、export 2jobは変更対象判定success・compile対象外skip。iOS sourceの旧V4 19 failure名は完全一致だが、RN canvasは旧4method/1failure→新4method/2failuresとなり、既存max420にmeasurement_timeout 8233.993msを新観測。原因切分け未完。73/243は継承のみ、追加GPU/SQL0。次は、max420のnative候補計測が遅くなった原因と、current344a二作品のnative画像・同版保存/再読の未確認を、現sourceと既存検証経路から詰める。前回GPU個別一回の承認は完了・消費済み。通常採用/selector有効化は未実施、本人端末/正式受入れも未確認。
+**11/11の現在の再開点：** configured録画3件のsource binding/S7/Free別保存再読と、8760067b/model73 native6の同版PNG/元8秒内を確認済み。max420も6164.722msで通過・旧成功画素と一致し、速度因果は未証明。元8秒/旧group13/12/29/20は維持。既存Piece RN [run43001857335](https://github.com/MassyuRed/Cocolon/actions/runs/43001857335)はoverall failureで、旧V4 19/WholeCanvas失敗は残存。旧73/243再実行・新GPU0。次は同mountの配色変更で旧native fit/captureが失効し新描画へ進むことを、既存経路で確認する。Photos/本人端末・正式受入れと通常採用は未確認、旧V4/WholeCanvasの残件も保持する。
 
 推奨指示は **「補助経路の活用作業を進めて」**。
 
