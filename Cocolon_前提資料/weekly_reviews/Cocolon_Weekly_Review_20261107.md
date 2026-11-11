@@ -1,6 +1,6 @@
 # 第10回 Cocolon週末報告会 — 2026-11-07（終了）
 
-> **11/12・AR-04最新：** 研究3646a285／source8c5eのrun43100979745は成功。clipのq支持をCqへ逆写像し、boundsへ伸縮せず配置する候補で、実RN由来高さのstandalone3形状×8対照=24/24（48call、非整列3／clip差2）を確認。途中clip/bounds変更6件は到達1／stage73で拒否、元195・別AR04_4／bitmap44も成功。初回runのstdout欠落は観測fileの先行保存で解消。通常.mm581/pinは不変・未採用、selector OFF・AR-04未完。次は同候補のactual RN自然描画／local／placed／元期限・PNGを既存harnessで照合する。 [実結果・座標対応と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-v4-inverse-clip-support-20261112)。
+> **11/12・AR-04最新：** 研究ca7e2502／source8c5eのactual RN probe run43106065561を開始、結果未判定。前回standalone24/24を継承し、既存Whole1methodの元13条件・元期待値/8秒を保持する。追加は同callbackの公開bounds/観測bounds・clip・CTMだけで、描画本体/pinは不変。他5methodとstandalone24は今回未実行。通常.mm581/pin・selector OFF、候補未採用・AR-04未完。次はrun終端・13結果・同call Cq対応・完成PNGを回収して判定する。 [実アプリ経路probeと再開点](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-v4-inverse-clip-actual-rn-20261112)。
 
 記録日：2026年11月7日（日本時間）  
 対象週：**2026年11月7日〜11月14日**  

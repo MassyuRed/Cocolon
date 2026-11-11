@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/12・AR-04最新：** 研究3646a285／source8c5eのrun43100979745は成功。clipのq支持をCqへ逆写像し、boundsへ伸縮せず配置する候補で、実RN由来高さのstandalone3形状×8対照=24/24（48call、非整列3／clip差2）を確認。途中clip/bounds変更6件は到達1／stage73で拒否、元195・別AR04_4／bitmap44も成功。初回runのstdout欠落は観測fileの先行保存で解消。通常.mm581/pinは不変・未採用、selector OFF・AR-04未完。次は同候補のactual RN自然描画／local／placed／元期限・PNGを既存harnessで照合する。 [実結果・座標対応と次](piece_request_account_reuse_review.md#piece-v4-inverse-clip-support-20261112)。
+> **11/12・AR-04最新：** 研究ca7e2502／source8c5eのactual RN probe run43106065561を開始、結果未判定。前回standalone24/24を継承し、既存Whole1methodの元13条件・元期待値/8秒を保持する。追加は同callbackの公開bounds/観測bounds・clip・CTMだけで、描画本体/pinは不変。他5methodとstandalone24は今回未実行。通常.mm581/pin・selector OFF、候補未採用・AR-04未完。次はrun終端・13結果・同call Cq対応・完成PNGを回収して判定する。 [実アプリ経路probeと再開点](piece_request_account_reuse_review.md#piece-v4-inverse-clip-actual-rn-20261112)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -2491,3 +2491,21 @@ PRIMARY_OUTCOME=TECHNICAL_CREDIT。Cq support候補の3非整列形状と同等�
 
 通常作業.mm581／runner pin／selector OFF、前回RN Whole59assertion/43署名・通常host／Photos／本人端末・正式受入れ、AR-01役割反転と他AR残件は継承。旧73生成／243 SQL／静的6／transition4へ戻らず、この小数対照の完了も次回再実行の前提にしない。GPU／学習／SQL／実Auth／製品外部HTTP／Render配置／署名build／配布0。STRUCTURE_MAP_DELTA_NONE：通常製品owner／公開型／route／DB／作者／renderer責務の変更0、研究用の既存4pathと観測保存だけで、新常設checker／Gate／管理票を追加しない。
 
+
+
+<a id="piece-v4-inverse-clip-actual-rn-20261112"></a>
+## 11/12 AR-04 — 同じCq sourceをactual RNの元13条件へ通す（実行中）
+
+前回3646a285／run43100979745の3小数形状24/24・48callの完了と、通常e9bacc35の反映／自動CI全成功を確認して再開した。fresh全体現在地・全体/対象map・最新weekly・詳細設計§11/12・現作業rule/恒久incidentを確認し、既存の次単位であるactual RNを実行する。
+
+[研究candidateca7e2502](https://github.com/MassyuRed/Cocolon/commit/ca7e2502de3b9ec19b64361607bef2c6f4685ec0)は3646の子、変更は既存3pathだけ。RN harnessの同期V4 callbackへpublic_bounds/observed_bounds/observed_clip/observed_ctmの数値9行を追加。旧全文へ逆投影一致、assertion/fixture/paint/inspect/結果は変更0。runnerのxcodebuild selector1行で既存testWholeCanvasWithRealReactNativeだけを選び、元13条件・全assertion/順序/8秒を保持。他5methodは明示UNEXECUTEDで前回完了を継承する。既存workflowを新研究refのRN-only1jobへ指定し、既存artifactへ104診断mapを加えた。新workflow/常設checkerは追加しない。
+
+sourceは8c5e9a37954cf013f6d0e28e72070b24498e6087998effc46d3266d33aed7e4bのまま。localでbash syntax/YAML parse、既存instrumenterの実導出104marker/late73/投影を確認し、instrumented SHA2c908ff2f4dd92e5aa0ea9dc8bc5e1ad6e6578b82b2111135a33acb8ce09b40fが前回と一致。localのUIKit compile成功ではない。GitHub4file全byte読戻しと変更3path集合、独立reviewを確認して研究refをcandidateへ直接作成した。
+
+[run43106065561](https://github.com/MassyuRed/Cocolon/actions/runs/43106065561)は実行中・未判定。RNjob130809587684、他5job skipped。job45分、元8秒と既知4Mi/32MiB等の拒否を保持し、manual rerun/dispatch0、署名/配布/selector/通常採用は変更0。通常refの製品.mm581/pinは不変。
+
+比較用の通常99fba／run43021553284 artifact13855899825（79,803,050byte）を取得し、ZIP SHA2560cd9a07da0daa73c57c387dbdfafb839c93ad18473457cd2128e46d4294d670cと全CRCを確認。安全なrelative path/link検査後に既存evidenceを取り出した。これは前回の結果の回収で、新しい描画成功やmodel生成には数えない。
+
+この記録は処理中断時の再開点。既に起動した同runを新しく起動し直さず、終端/既存artifactを回収して13入力/条件の同一性、同callのpublicbounds/CTM/clip/Cq/phase、local/placed、厳密占有比較/token/fit/元8秒と完成PNGを照合する。failureは元期待値のまま記録し、部分成功をWhole/通常採用へ変換しない。完了済み24対照・73生成/243SQL・static6/transition4には戻らない。
+
+STRUCTURE_MAP_DELTA_NONE：通常製品owner/route/型/DB/作者/renderer責務は変更0、研究testの観測と実行範囲だけ。GPU/学習/SQL/実Auth/Render配置/署名build/配布0。
