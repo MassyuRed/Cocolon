@@ -1,4 +1,4 @@
-> **11/11・AR-04最新：** API400912d8で、既存finite対人動作読取を明示理由／譲歩のscope・生成条件・S7へ接続。nativeは原文KEEP／非宣言を維持し、内側の能動事実過去だけ同じ意味の敬常体を比較する。固定CPU新6は0→6採用（2mode計0→12）、3plan18保存／非生成再読。保存済み実4B59要求のsource意味／plan／prepared／messages／採否／本文は不変。新71・既存関連1479成功。新6の実model rawは未取得、追加GPU／学習0。約18KBの新6＋保持2比較は未送信／未実行・具体承認待ち。f6dae研究候補・通常selector OFF・AR-04未完。 API400912d8のPiece CI42958167751はattempt1・success、Analysis CI42958167864はattempt1・success。追加run／rerun要求0。 [理由／譲歩付き完了動作・実装と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scoped-finite-action-20261111)。
+> **11/11・AR-04最新：** API400912d8の新6＋保持2を保存f6daeで承認済み一回実行。Piece8／12HTTP、追加学習・retry0、復元込み106.495秒。元args／全環境／cwdと既存source・adapter不変、通常／Analysis前後の全response一致、独立health200／PID一致。新6は5採用・1拒否、保持2は採用かつ前回全response一致。採用計7×3plan21保存・非生成再読、不採用1×3plan3保存前拒否。残る1は外側の「重なっている」→「重なった」の時制・相の変異。実raw／期待値の修補0、通常selector OFF・AR-04未完。 [実8・復元・採否と保存](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scoped-finite-action-actual-20261111)。
 
 > **11/10・AR-04最新：** API2ec79ad0で時点付き本人「は」好み評価の同本人省略を既存S7継続へ接続。明示承認後、保存f6daeで新3＋保持2の実4B本文を1回・学習0で確認。GENERAL01の自然な2文目省略が旧比較で保留されたため、同block・隣接・同じ本人表記の既存条件だけを再利用し、5/5採用・3plan計15保存／非生成再読。保持2の前回request／raw／revisionと凍結69照合行の採否／本文／messagesは不変。9HTTP・97.268秒で元提供復元／health／前後control一致。f6dae研究候補・通常selector OFF、本番未反映。 [実4B新3・保存と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model3-inference-result-20261110)。
 
@@ -6795,7 +6795,7 @@ API8329a828のPiece CI42943673831／job130271199367は全39工程、Analysis CI4
 
 
 <a id="piece-scoped-finite-action-20261111"></a>
-## 11/11 AR-04 — 理由／譲歩付き完了動作を接続
+## 11/11 AR-04 — 理由／譲歩付き完了動作を接続（実行前の記録・後続実測で更新済み）
 
 API400912d8で、既存finite対人動作読取を明示理由／譲歩のscope・生成条件・S7へ接続。nativeは原文KEEP／非宣言を維持し、内側の能動事実過去だけ同じ意味の敬常体を比較する。固定CPU新6は0→6採用（2mode計0→12）、3plan18保存／非生成再読。保存済み実4B59要求のsource意味／plan／prepared／messages／採否／本文は不変。新71・既存関連1479成功。新6の実model rawは未取得、追加GPU／学習0。約18KBの新6＋保持2比較は未送信／未実行・具体承認待ち。f6dae研究候補・通常selector OFF・AR-04未完。
 
@@ -6806,3 +6806,15 @@ API400912d8のPiece CI42958167751はattempt1・success、Analysis CI42958167864�
 STRUCTURE_MAP_DELTA_PRESENT：既存source資格・scope／model比較・欄別生成条件を拡張。新公開型／route／DB／作者／controllerなし。 [原因・同一候補・保存・実model未実施範囲](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scoped-finite-action-20261111)。
 
 ファイル地図差分：既存`piece_source.py::_scoped_finite_self_person_action/_expression_scopes`、`piece_v1c.py::compile_piece_artifact_plan`、`piece_v2_content_policy.py`のS7 KEEP model比較、`piece_model_source.py::_authoring_constraints`を更新。新`ai/tests/test_piece_model_scoped_action.py`と既存`.github/workflows/piece-b2b-isolated-postgres.yml`のpath/run2行を追加。原source／PreparedRequestと公開API・DBの所有者は維持する。
+
+
+<a id="piece-scoped-finite-action-actual-20261111"></a>
+## 11/11 AR-04 — 完了動作の実8・復元と残る前提変異
+
+API400912d8の新6＋保持2を保存f6daeで承認済み一回実行。Piece8／12HTTP、追加学習・retry0、復元込み106.495秒。元args／全環境／cwdと既存source・adapter不変、通常／Analysis前後の全response一致、独立health200／PID一致。新6は5採用・1拒否、保持2は採用かつ前回全response一致。採用計7×3plan21保存・非生成再読、不採用1×3plan3保存前拒否。残る1は外側の「重なっている」→「重なった」の時制・相の変異。実raw／期待値の修補0、通常selector OFF・AR-04未完。
+
+既存API400912d8のPiece CI42958167751／Analysis CI42958167864は両方attempt1・successの完了結果を継承。今回API source変更0・CI追加run／rerun0。
+
+次は、ACTION-REASON-CONSULTで外側の継続状態が過去事象へ変わった実rawを起点に、既存source_scope生成条件が前提全量の保持を4Bへ伝える接続を点検し、既存ownerの因果箇所だけを修正する。source全文や期待値を出力へ寄せず、S7の不採用を緩めず、新しい作者・別経路・Gateを増やさない。今回の17,929byte送信・全環境同Pod一時読取／復元再利用・一回承認は完了して消費済み。自動GPU再試行／追加学習／新weights／通常採用／selector有効化／Render／live DB／RN／build／配布0。次のGPU比較は未準備・未承認で、自動反復しない。 新familyの全6成立、広い文章編集品質、本人前置形、長文、同版画像／通常統合／本人端末、既存無引用3失敗、AR-01／他ARは未完。
+
+NO_STRUCTURE_MAP_DELTA：今回の実行・読取・保存でsource owner／公開型／route／DB／作者／controllerの変更なし。API400912d8の既存ファイル地図と責務境界を継承し、実測現在地・残件だけを更新。限定TECHNICAL_CREDIT、human acceptance追加0。 [実8の詳細と残る前提変異](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scoped-finite-action-actual-20261111)。

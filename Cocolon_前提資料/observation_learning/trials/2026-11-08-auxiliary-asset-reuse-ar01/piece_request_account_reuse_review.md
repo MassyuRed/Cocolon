@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/11・AR-04最新：** API400912d8で、既存finite対人動作読取を明示理由／譲歩のscope・生成条件・S7へ接続。nativeは原文KEEP／非宣言を維持し、内側の能動事実過去だけ同じ意味の敬常体を比較する。固定CPU新6は0→6採用（2mode計0→12）、3plan18保存／非生成再読。保存済み実4B59要求のsource意味／plan／prepared／messages／採否／本文は不変。新71・既存関連1479成功。新6の実model rawは未取得、追加GPU／学習0。約18KBの新6＋保持2比較は未送信／未実行・具体承認待ち。f6dae研究候補・通常selector OFF・AR-04未完。 API400912d8のPiece CI42958167751はattempt1・success、Analysis CI42958167864はattempt1・success。追加run／rerun要求0。 [理由／譲歩付き完了動作・実装と次](piece_request_account_reuse_review.md#piece-scoped-finite-action-20261111)。
+> **11/11・AR-04最新：** API400912d8の新6＋保持2を保存f6daeで承認済み一回実行。Piece8／12HTTP、追加学習・retry0、復元込み106.495秒。元args／全環境／cwdと既存source・adapter不変、通常／Analysis前後の全response一致、独立health200／PID一致。新6は5採用・1拒否、保持2は採用かつ前回全response一致。採用計7×3plan21保存・非生成再読、不採用1×3plan3保存前拒否。残る1は外側の「重なっている」→「重なった」の時制・相の変異。実raw／期待値の修補0、通常selector OFF・AR-04未完。 [実8・復元・採否と保存](piece_request_account_reuse_review.md#piece-scoped-finite-action-actual-20261111)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -1620,7 +1620,7 @@ result SHA256 `bc8bc6f694aef4b3d362d65d9590ab61e522ebc49484a0e69943666f36682e6f`
 
 
 <a id="piece-scoped-finite-action-20261111"></a>
-## 11/11 AR-04 — 理由／譲歩と完了動作の読取を一体化
+## 11/11 AR-04 — 理由／譲歩と完了動作の読取を一体化（実行前の記録・後続実測で更新済み）
 
 **API400912d8で、既存finite対人動作読取を明示理由／譲歩のscope・生成条件・S7へ接続。nativeは原文KEEP／非宣言を維持し、内側の能動事実過去だけ同じ意味の敬常体を比較する。固定CPU新6は0→6採用（2mode計0→12）、3plan18保存／非生成再読。保存済み実4B59要求のsource意味／plan／prepared／messages／採否／本文は不変。新71・既存関連1479成功。新6の実model rawは未取得、追加GPU／学習0。約18KBの新6＋保持2比較は未送信／未実行・具体承認待ち。f6dae研究候補・通常selector OFF・AR-04未完。**
 
@@ -1659,3 +1659,39 @@ result SHA256 `bc8bc6f694aef4b3d362d65d9590ab61e522ebc49484a0e69943666f36682e6f`
 packet SHA256 `9ae9f4d4f6b0721a330242efac04143f67cb107b23b9ac9e28060aa00cea1453`、launcher SHA256 `bbfc143a4e143417780c65890f262fd93a57b53a556f782511152a0d87a1e6aa`、wire SHA256 `0c98ab022b323a8be1858954836d00b4f7625f6adb7de0312a6917b3ab36c202`。新root`/workspace/ar04-scoped-finite-action-20261111`、稼働用`/workspace/cocolon_venv/bin/python`、固定f6dae。保持2の全case／messages／生成設定は前回と同一。初回準備のinventory key不一致・旧API literalを送信前に修正し、原本hash／所見を保存。最終35静的／データ項目は成立、ZIP／CRC／member／hash・compile、helpers AST不変、承認なしguardの停止を確認。launcherはcompileだけで、Pod／環境読取／送信／新model呼出0。期限設定は外部watchdogの無条件保証ではなく、残時間や元identity不一致なら中断し復元する。
 
 新6の実4B本文・採否・保存確認は未実施。広い文章編集品質や本人受入れの成立ではない。受動、引用／名前／外側SELF／複数operatorを含む完了動作、条件・日時の新接続、本人前置形の実raw、長い文章と広い編集品質、同版画像／通常統合／本人端末、既存無引用3失敗とAR-01／他ARは未完。 元入力・固定CPU／実59比較・18保存・局所所見・未実行packetを[Cocolon_CMEE_AR04_ScopedFiniteAction_20261111.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-63b6c6f54c88819199c687bec9796d68_2f7470f963808191aaebf050935e72de&account_id=personal)へ保存。GitHub同期のrepository本体・依存・重みは重複保存しない。
+
+
+<a id="piece-scoped-finite-action-actual-20261111"></a>
+## 11/11 AR-04 — 完了動作の実8・復元と残る前提変異
+
+API400912d8の新6＋保持2を保存f6daeで承認済み一回実行。Piece8／12HTTP、追加学習・retry0、復元込み106.495秒。元args／全環境／cwdと既存source・adapter不変、通常／Analysis前後の全response一致、独立health200／PID一致。新6は5採用・1拒否、保持2は採用かつ前回全response一致。採用計7×3plan21保存・非生成再読、不採用1×3plan3保存前拒否。残る1は外側の「重なっている」→「重なった」の時制・相の変異。実raw／期待値の修補0、通常selector OFF・AR-04未完。
+
+### 承認した一回と復元
+
+Mashの「実行していい、進めろ」で、新6＋保持2の17,929byte（packet15,480＋launcher2,449）送信、認証情報を含み得る起動環境全体の同Pod内一時読取・復元再利用、追加学習0・復元枠込み600秒／予約120秒の一回を承認し、消費済み。既存稼働用Python、固定f6dae、同一packet／launcher／runner／wireで実行した。最大入力1,708token、生成予約込み最大3,756／8,192を元提供停止前に確認。全12HTTPは200・stop、Pieceは一回load・8候補。
+
+所要106.4954333929345秒（証拠保全込み）。元PID64834→Piece65701→元提供復元65745。元args／全環境／cwd、元source／Analysis adapter、f6dae・5b1・e924の重み／configは不変。通常／Analysisの前後全response一致。runner外の独立healthz200／pidfile65745一致／process aliveも確認した。環境の値・認証値は回収せず、同Pod内の復元にだけ再利用。通常採用OFF、費用上限や新レンタル・追加学習への拡大なし。
+
+既存Terminal6に残る未完了入力へのCtrl+Cは自動審査で拒否され未実施。中断を回避する別の新規Terminalを開き、元端末へ入力せず実行した。新規端末のhash確認は貼付反映が遅れ、後続pressSequentiallyがtimeoutして未実行部分文字を残したため、その新規端末自身の未実行入力だけCtrl+Uで消去。remoteのpacket／launcher hash一致後に一回起動を確認。モデル再試行は0。回収commandのlocal記録作成にはrootの文字列SyntaxErrorが1回あり、Podでの生成や復元に影響せず、既存原本の回収を行った。
+
+### 無修補rawの採否と保存
+
+| cohort | 実測採否 | 保存・非生成再読 |
+|---|---|---|
+| 新6・理由／譲歩付き完了動作 | 5採用、1不採用 | 採用5×3plan15保存、不採用1×3plan3保存前拒否 |
+| 保持2・理由付き引用／引用記号 | 2採用。request／raw／全response／usage等は前回と完全一致 | 2×3plan6保存 |
+| 合計8 | 7採用、1不採用 | 21保存／3保存前拒否 |
+
+ACTION-REASON-CONSULTでは、入力の外側「予定が重なっているので」を実rawが「予定が重なったので」へ変更した。相談を済ませた内側の過去は正しいが、外側の現在継続状態を過去の出来事へ変えるためS7が拒否する。この1件を成功に加算しない。原文・期待値・生成rawを変更せず、保存前の3拒否まで確認した。残る5件は外側全量、SELF／相手／対象／格・能動・肯否・過去を保持した敬常体変更で採用。
+
+全8実本文をrootと独立read-only補助が読み、保持2の引用内外話者・理由入れ子・本人意向・感情・「！！」を確認。限定7本文に新動機や根拠ない書足し／定型フォロー追加は見られないが、「予定を相談した」の硬さや元文の譲歩関係の弱さは残る。文末変換の限定成功であり、一般文章編集・商品完成・Mash本人のhuman Product Read／acceptanceを成立させない。
+
+offline一回wrapperは現在sourceから元7項目、prepared ID/JSON、全送信messages、request生成設定を再構築しraw／response一致を確認。新6のsource意味／planも固定CPU時と同じ。採用7は既存S7を再確認し、既存隔離PGlite・合成ID/Authを用いて3plan21保存・同／新service非生成再読。不採用1は各planでpreview前拒否、旧作者fallback禁止、保存後生成0・原入力／Emlis不変。live Supabase／実Auth／画像／本人端末ではない。直前のCPU6／18保存・新71／関連1479成功と、旧実59の不変比較は前回完了として保持し、今回新しい件数へ足さない。旧59のnative byte比較は引き続き未測定。
+
+result SHA256 `df0c536245baf1c09ea4a48d2759a0e73bfe936b6f25e4d089617dc94e669e06`、実evidence39,283byte／SHA256 `26e52e4b07bf400e59ea0bb1d397f10f38aaa276ca84339d3ab9eed297e9499e`、回収collection56,026byte／SHA256 `a85a37ec26021217963daf192c08f7d6cce5661ea478427cc21d65f2d70b0777`。承認消費・復元・実raw・21保存／3拒否・独立読取を既存[Cocolon_CMEE_AR04_ScopedFiniteAction_20261111.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-63b6c6f54c88819199c687bec9796d68_2f7470f963808191aaebf050935e72de&account_id=personal)へ差分保存。GitHub同期のrepository本体／依存／重みは重複保存しない。
+
+既存API400912d8のPiece CI42958167751／Analysis CI42958167864は両方attempt1・successの完了結果を継承。今回API source変更0・CI追加run／rerun0。
+
+次は、ACTION-REASON-CONSULTで外側の継続状態が過去事象へ変わった実rawを起点に、既存source_scope生成条件が前提全量の保持を4Bへ伝える接続を点検し、既存ownerの因果箇所だけを修正する。source全文や期待値を出力へ寄せず、S7の不採用を緩めず、新しい作者・別経路・Gateを増やさない。今回の17,929byte送信・全環境同Pod一時読取／復元再利用・一回承認は完了して消費済み。自動GPU再試行／追加学習／新weights／通常採用／selector有効化／Render／live DB／RN／build／配布0。次のGPU比較は未準備・未承認で、自動反復しない。 新familyの全6成立、広い文章編集品質、本人前置形、長文、同版画像／通常統合／本人端末、既存無引用3失敗、AR-01／他ARは未完。
+
+NO_STRUCTURE_MAP_DELTA：今回の実行・読取・保存でsource owner／公開型／route／DB／作者／controllerの変更なし。API400912d8の既存ファイル地図と責務境界を継承し、実測現在地・残件だけを更新。限定TECHNICAL_CREDIT、human acceptance追加0。 [実8の詳細と残る前提変異](piece_request_account_reuse_review.md#piece-scoped-finite-action-actual-20261111)。

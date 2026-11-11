@@ -1,6 +1,6 @@
 # 第10回 Cocolon週末報告会 — 2026-11-07（終了）
 
-> **11/11・AR-04最新：** API400912d8で、既存finite対人動作読取を明示理由／譲歩のscope・生成条件・S7へ接続。nativeは原文KEEP／非宣言を維持し、内側の能動事実過去だけ同じ意味の敬常体を比較する。固定CPU新6は0→6採用（2mode計0→12）、3plan18保存／非生成再読。保存済み実4B59要求のsource意味／plan／prepared／messages／採否／本文は不変。新71・既存関連1479成功。新6の実model rawは未取得、追加GPU／学習0。約18KBの新6＋保持2比較は未送信／未実行・具体承認待ち。f6dae研究候補・通常selector OFF・AR-04未完。 API400912d8のPiece CI42958167751はattempt1・success、Analysis CI42958167864はattempt1・success。追加run／rerun要求0。 [理由／譲歩付き完了動作・実装と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scoped-finite-action-20261111)。
+> **11/11・AR-04最新：** API400912d8の新6＋保持2を保存f6daeで承認済み一回実行。Piece8／12HTTP、追加学習・retry0、復元込み106.495秒。元args／全環境／cwdと既存source・adapter不変、通常／Analysis前後の全response一致、独立health200／PID一致。新6は5採用・1拒否、保持2は採用かつ前回全response一致。採用計7×3plan21保存・非生成再読、不採用1×3plan3保存前拒否。残る1は外側の「重なっている」→「重なった」の時制・相の変異。実raw／期待値の修補0、通常selector OFF・AR-04未完。 [実8・復元・採否と保存](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scoped-finite-action-actual-20261111)。
 
 記録日：2026年11月7日（日本時間）  
 対象週：**2026年11月7日〜11月14日**  
@@ -2909,7 +2909,7 @@ API8329a828のPiece CI42943673831／job130271199367は全39工程、Analysis CI4
 
 
 <a id="piece-scoped-finite-action-20261111"></a>
-## 11/11 AR-04 — 理由／譲歩付き完了動作を接続
+## 11/11 AR-04 — 理由／譲歩付き完了動作を接続（実行前の記録・後続実測で更新済み）
 
 API400912d8で、既存finite対人動作読取を明示理由／譲歩のscope・生成条件・S7へ接続。nativeは原文KEEP／非宣言を維持し、内側の能動事実過去だけ同じ意味の敬常体を比較する。固定CPU新6は0→6採用（2mode計0→12）、3plan18保存／非生成再読。保存済み実4B59要求のsource意味／plan／prepared／messages／採否／本文は不変。新71・既存関連1479成功。新6の実model rawは未取得、追加GPU／学習0。約18KBの新6＋保持2比較は未送信／未実行・具体承認待ち。f6dae研究候補・通常selector OFF・AR-04未完。
 
@@ -2918,3 +2918,15 @@ API400912d8のPiece CI42958167751はattempt1・success、Analysis CI42958167864�
 次は、この新6（理由／譲歩付き能動事実過去）＋保持2（SCOPE-QUOTE-REASON／QUOTE-RUN）を、保存f6dae・既存稼働用Pythonで一回・追加学習0の実4B確認へ通す。合計17,929byte（packet15,480＋launcher2,449）、8候補＋通常／Analysis前後control4の最大12 chat HTTP、Piece1load・retry／新weights0、復元枠込み600秒の期限設定／復元予約120秒。新packet／launcher送信と、認証情報を含み得る全起動環境の同Pod内一時読取・復元再利用は、この新材料の具体承認後に限る。64834は前回復元時のPIDで現在のfresh確認値ではない。前回の43候補／47HTTP・265.692秒復元・51要求153保存は完了で、消費済み一回承認を再利用しない。新fit／通常採用／selector有効化／Render／live DB／RN／buildの自動実行0。 受動、引用／名前／外側SELF／複数operatorを含む完了動作、条件・日時の新接続、本人前置形の実raw、長い文章と広い編集品質、同版画像／通常統合／本人端末、既存無引用3失敗とAR-01／他ARは未完。
 
 STRUCTURE_MAP_DELTA_PRESENT：既存source資格・scope／model比較・欄別生成条件を拡張。新公開型／route／DB／作者／controllerなし。 [原因・同一候補・保存・実model未実施範囲](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scoped-finite-action-20261111)。
+
+
+<a id="piece-scoped-finite-action-actual-20261111"></a>
+## 11/11 AR-04 — 完了動作の実8・復元と残る前提変異
+
+API400912d8の新6＋保持2を保存f6daeで承認済み一回実行。Piece8／12HTTP、追加学習・retry0、復元込み106.495秒。元args／全環境／cwdと既存source・adapter不変、通常／Analysis前後の全response一致、独立health200／PID一致。新6は5採用・1拒否、保持2は採用かつ前回全response一致。採用計7×3plan21保存・非生成再読、不採用1×3plan3保存前拒否。残る1は外側の「重なっている」→「重なった」の時制・相の変異。実raw／期待値の修補0、通常selector OFF・AR-04未完。
+
+既存API400912d8のPiece CI42958167751／Analysis CI42958167864は両方attempt1・successの完了結果を継承。今回API source変更0・CI追加run／rerun0。
+
+次は、ACTION-REASON-CONSULTで外側の継続状態が過去事象へ変わった実rawを起点に、既存source_scope生成条件が前提全量の保持を4Bへ伝える接続を点検し、既存ownerの因果箇所だけを修正する。source全文や期待値を出力へ寄せず、S7の不採用を緩めず、新しい作者・別経路・Gateを増やさない。今回の17,929byte送信・全環境同Pod一時読取／復元再利用・一回承認は完了して消費済み。自動GPU再試行／追加学習／新weights／通常採用／selector有効化／Render／live DB／RN／build／配布0。次のGPU比較は未準備・未承認で、自動反復しない。 新familyの全6成立、広い文章編集品質、本人前置形、長文、同版画像／通常統合／本人端末、既存無引用3失敗、AR-01／他ARは未完。
+
+NO_STRUCTURE_MAP_DELTA：今回の実行・読取・保存でsource owner／公開型／route／DB／作者／controllerの変更なし。API400912d8の既存ファイル地図と責務境界を継承し、実測現在地・残件だけを更新。限定TECHNICAL_CREDIT、human acceptance追加0。 [実8の詳細と残る前提変異](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scoped-finite-action-actual-20261111)。
