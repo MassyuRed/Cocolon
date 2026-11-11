@@ -1,6 +1,6 @@
 # 第10回 Cocolon週末報告会 — 2026-11-07（終了）
 
-> **11/11・AR-04最新：** 隔離候補661c73cd／f4aa5de0のstandalone run43029546742が成功。旧V4の1成功／19失敗→候補20成功、19正常controlは全result20／stage0、元195判定・別AR04_4／bitmap44も成功した。他5jobはskip、通常作業.mm581/pinは未変更・未採用。実RNにはq非整列の小数寸法があり、公開boundsへ全画像を伸縮する候補の同等性は未証明。次は観測clipのq支持と逆写像extent/originを保つ案を検証する。通常selector OFF・AR-04未完。 [隔離比較の実結果と小数境界](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-v4-clipped-reference-probe-20261111)。
+> **11/12・AR-04最新：** 研究3646a285／source8c5eのrun43100979745は成功。clipのq支持をCqへ逆写像し、boundsへ伸縮せず配置する候補で、実RN由来高さのstandalone3形状×8対照=24/24（48call、非整列3／clip差2）を確認。途中clip/bounds変更6件は到達1／stage73で拒否、元195・別AR04_4／bitmap44も成功。初回runのstdout欠落は観測fileの先行保存で解消。通常.mm581/pinは不変・未採用、selector OFF・AR-04未完。次は同候補のactual RN自然描画／local／placed／元期限・PNGを既存harnessで照合する。 [実結果・座標対応と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-v4-inverse-clip-support-20261112)。
 
 記録日：2026年11月7日（日本時間）  
 対象週：**2026年11月7日〜11月14日**  
@@ -3012,3 +3012,11 @@ NO_STRUCTURE_MAP_DELTA：source/test/公開型/route/DB/作者/controller/Gate�
 今回の候補49/全53HTTPは完了し、前回16と合わせて既存65固有要求を実確認済み。051の原文/旧新rawに明示された過去→現在の変更を、source資格外やreaderだけの不具合へ読み替えず、通常採用は保留する。CPU照合で051の過去はsource/wireともPASTと確認し、故障を送信後の文章化へ限定。既存36に直接の肯定過去好み教師はないが、原因や追加学習の必要性とは断定しない。次は評価051を教師へ移さず、独立した時制/肯否/欄配置の対照を具体化し、前回回復も保つ最小修正へ戻す。追加fit/GPU/retry、source/raw修補、S7緩和、通常採用/selector、Render、live DB、RN/build/配布は自動実行しない。
 
 NO_STRUCTURE_MAP_DELTA：source/test/公開型/route/DB/作者/controller/Gateは不変。実行と保存は成立したが、候補の全品質改善・AR-04完了・商品受入れは未成立。 [実49・時制退行・144保存と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-a1df-remaining49-actual-20261111)。
+
+
+<a id="piece-v4-inverse-clip-support-20261112"></a>
+## 11/12 AR-04 — 小数寸法のclip支持・逆写像配置の隔離比較
+
+研究3646a285／source8c5eのrun43100979745は成功。clipのq支持をCqへ逆写像し、boundsへ伸縮せず配置する候補で、実RN由来高さのstandalone3形状×8対照=24/24（48call、非整列3／clip差2）を確認。途中clip/bounds変更6件は到達1／stage73で拒否、元195・別AR04_4／bitmap44も成功。初回runのstdout欠落は観測fileの先行保存で解消。通常.mm581/pinは不変・未採用、selector OFF・AR-04未完。次は同候補のactual RN自然描画／local／placed／元期限・PNGを既存harnessで照合する。
+
+研究4pathの候補実装と観測保存をGitHubへ保持した。通常作業側の製品.mm581／pin／公開型・route・DB・作者・renderer責務は変更0（STRUCTURE_MAP_DELTA_NONE）。既存ファイル地図の責務は継承する。候補の詳細・初回記録欠落と保存修復・数値は[既存trial](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-v4-inverse-clip-support-20261112)を参照。

@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/11・AR-04最新：** 実007の親loading/unmount→B再描画と、別の同Card回帰を実native2mode/4frame・元8秒内で確認。旧fit失効、preview capture常時null、3段落/配色/PNGを保持。source83fcd89b/PieceRN43012230881はrun結論cancelled、RN jobはWholeのみfailure（59/43→60/44、elapsed assertion1増）。source metrics出力0で今回oracle未確認。recorded3/native6等の完了を継承し、通常selector OFF・AR-04未完。 [配色変更のactual親flow・別component回帰と現在地](piece_request_account_reuse_review.md#piece-344a-native-visual-transition-20261111)。
+> **11/12・AR-04最新：** 研究3646a285／source8c5eのrun43100979745は成功。clipのq支持をCqへ逆写像し、boundsへ伸縮せず配置する候補で、実RN由来高さのstandalone3形状×8対照=24/24（48call、非整列3／clip差2）を確認。途中clip/bounds変更6件は到達1／stage73で拒否、元195・別AR04_4／bitmap44も成功。初回runのstdout欠落は観測fileの先行保存で解消。通常.mm581/pinは不変・未採用、selector OFF・AR-04未完。次は同候補のactual RN自然描画／local／placed／元期限・PNGを既存harnessで照合する。 [実結果・座標対応と次](piece_request_account_reuse_review.md#piece-v4-inverse-clip-support-20261112)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -2435,3 +2435,59 @@ tag503ではbounds由来q上辺は-226.0000305…→floor-227だが、観測clip
 今回の研究runと整数control／faultの確認は完了。次は観測clipのq支持を逆写像extent／originで保持する案と、実RN由来の非整列対照を具体化する。今回の公開bounds全体へ伸縮する候補を、小数寸法・frozen recipe同等性・通常採用へ広げない。現在の通常selector OFF、旧V4／Whole、通常host／Photos／本人端末・正式受入れ、AR-04全体は未完。GPU／学習／SQL／実Auth／製品外部HTTP／Render反映／署名build／配布0。PRIMARY_OUTCOMEは限定的TECHNICAL_CREDITである。
 
 STRUCTURE_MAP_DELTA_NONE：研究refの既存比較関数・test診断内の候補比較で、通常作業側の製品owner／route／DTO／DB／作者／renderer責務は変更0。新しい管理票・Gate・承認段階を追加しない。
+
+
+<a id="piece-v4-inverse-clip-support-20261112"></a>
+## 11/12 AR-04 — 観測clip支持を逆写像で配置・小数3形状24対照の成功
+
+2026-11-12 JST。通常作業6f26aa8bと前回研究f4aa5de0／run43029546742を継承し、詳細設計§11の次単位である観測clipのq支持と逆写像extent/originを保持する未採用案を実装した。前回73実4B、243 SQL、静的6／transition4を再実行しない。作業実行環境が利用不可のため、今回の実装・検証はGitHub原本の直接操作・全文読戻し・V8静的検査と既存CIで行った。local clang／shell／Python実行の成功とはしない。
+
+研究sourceは8c5e9a37954cf013f6d0e28e72070b24498e6087998effc46d3266d33aed7e4b。C=観測clip∩公開boundsをq=(Sx+tx,Sy−ty)へ写し、floor/ceilの整数支持を所有して逆写像Cqを求める。reference layerはorigin0/Cq.size、比較contextはphase+Cq.origin−logicalExtent.originへ配置し、Cq全画像を公開boundsへ伸縮しない。Cqをphaseだけ移した範囲が従来のlogicalExtentへ収まらない場合は拒否し、extent拡大／別paintへ逃げない。expanded B、alpha>0の全cell厳密比較、expanded／comparison edge拒否、paint2回、元8秒／90秒host／10分job、共有32MiB／4096辺／4Mi面積と解放を保持した。観測gridの同一性・公開bounds・clip交差がexpanded paint後に変われば、検証済みgridだけを読みstage73で拒否する。
+
+既存4pathの研究差分は.mmの既存比較関数、runnerのpin／観測field／104marker内のlate-stage名、既存workflowの研究ref source-only指定、既存standalone harnessの独立24件である。旧harnessは追加groupと最終呼出hookを逆投影すると原本136,016文字に一致し、旧195条件も維持した。通常作業側.mm581dfd3864cb5f88457c8cd3e54aa7e6e360e7dcca8c4b58491697c5eb7dbfd4／pin／selectorは変更0。
+
+新3形状は、前回実RNで観測された高さ75.33332824707031／75.33334350585938／40.3333740234375をUIKit/TextKitで自然描画する。幅888、本文font48／branding28、scale3、固定文字Cocolon、public content frame origin0というstandalone対照であり、React／Paper／Yoga／B9や全実RCTTextView属性の再現ではない。正常CTM／clipを期待値へ書き換えない。各形状のlocal／placed／one_use／snapshot stable_mask／allocation fault／extent-edge fault／expanded中clip変更／expanded中bounds変更の8対照、計24件・48inspectを元195とは別に数える。各負対照は先に正常control成立を要求し、allocation／edgeは到達1回、expanded中の2変更は到達1回かつmapのstage73を要求する。3形状すべてq非整列、少なくとも1形状でCとboundsの差が自然に得られなければcoverage不足として拒否する。
+
+最初の[研究9ff3cde9](https://github.com/MassyuRed/Cocolon/commit/9ff3cde9744c00c26d0e8976483d0a091cb397ae)／[run43099324656](https://github.com/MassyuRed/Cocolon/actions/runs/43099324656)はcompleted/failure（attempt1）。source compile、元195unique PASS・V4_20・別AR04_4／bitmap44は完了したが、新出力は16PASS、body-low JSON1行完全／body-high1行が3,275文字で途中欠落、branding／24summaryは確認できなかった。simctl launch statusは0であり、alarm／renderer失敗やbranding未実行とは断定しない。harnessは全形状を評価してから出力する構造なので、出力欠落分を24成功へ補完することもしない。
+
+記録不足を受け、[3646a285](https://github.com/MassyuRed/Cocolon/commit/3646a2858bf4571a856509372480a01a446fdc52)で観測の保存だけを修正した。全records／calls／24判定を既存Documents/piece-ar04-native/fractional-reference.jsonへ先にatomic保存し、保存・直列化失敗はhost失敗にする。workflowは終了値0と元195条件を保ち、完全な保存fileから3形状／24固有対照・48call・自然geometry／正常control／fault到達を照合した後、host側Pythonから記録を出す。修正はharnessとworkflowの2pathで、source8c5e／pin／map・全評価条件・期限は不変。旧runを再ラベルしない。GitHub上の4path全文読戻しとchanged-path setを確認し、研究refだけをCASで進める。これは観測修正後の新commitでの一回の検証で、同じcommitのmanual rerun／dispatchは行わない。
+
+### 完全な観測保存と実結果
+
+修正後[研究3646a285](https://github.com/MassyuRed/Cocolon/commit/3646a2858bf4571a856509372480a01a446fdc52)の[run43100979745](https://github.com/MassyuRed/Cocolon/actions/runs/43100979745)はcompleted/success（attempt1）、sourcejob130792079483 success・他5job skipped。started_at21:11:52Z→updated_at21:16:31Z、workflow wall time279秒。今回は初回の記録不成立runと、観測修正commitのrunの2回を正確に残し、renderer候補1回成功として旧runを消さない。manual dispatch／同commit rerun0。別Phase6 workflowは独立したCIとして扱う。
+
+| 検査集合 | 修正後結果 |
+| --- | --- |
+| 元profile195（native129＋v9_46＋V4_20） | 195 unique PASS、FAIL0 |
+| 別AR04固定bitmap | 4 PASS |
+| 別bitmap | 44 unique PASS |
+| 新小数形状×8対照 | 24 unique PASS、FAIL/SKIP0 |
+| 新自然geometry | 3/3 q非整列、2/3で観測clip∩boundsとboundsが相違 |
+| 新inspect | 48/48 identity/main_thread一致、成功30／拒否18 |
+
+native129はlegacy97＋v5_32を含み、129を別に再加算しない。元profile195とAR04_4の199固有名は初回・前回研究の同一集合を維持し、新24もその内訳へ混ぜない。旧V4の56callはidentity/main_thread56/56、19正常controlすべてresult20/stage0。新48callのstage分布は0×30／18×3／59×3／63×3／73×6／86×3。成功30はすべてavailable=true・first_mismatch_present=falseの厳密logical1占有比較を成立させた。拒否18はすべてPIECE_NATIVE_MEASUREMENT_UNAVAILABLE。各shapeの一度消費86、stable_mask59、allocation63（到達1）、extent-edge18（到達1）、途中clip/bounds73（それぞれ変更到達1）を確認した。
+
+同callで得た公開geometryとCqは次のとおり。qのfloor/ceilに許容差を追加せず、natural backing寸法の読取り・推定もしていない。
+
+| standalone形状 | bounds高さ | observed ty（S3） | Cとbounds | Cq.origin.y | Cq.height |
+| --- | ---: | ---: | --- | ---: | ---: |
+| body_height_low | 75.33332824707031 | 225.99998474121094 | 一致 | -0.000005086263020833333 | 75.33333333333333 |
+| body_height_high | 75.33334350585938 | 226.00003051757812 | 相違あり | 0.000010172526041666666 | 75.33333333333333 |
+| branding_height_high | 40.3333740234375 | 121.0001220703125 | 相違あり | 0.000040690104166666664 | 40.333333333333336 |
+
+高いbodyとbrandingではclip支持由来の所有行数は226／121で、bounds全体からの227／122へ広げず、Cqの小さなorigin差を保持して配置した。低いbodyもCqの負の微小originを保った。これは宣言したCq配置と3形状のlogical1占有一致の証拠であり、native backing全画素／任意属性／frozen recipeの一般同等性を証明しない。
+
+診断mapはsource8c5e→instrumented2c908ff2f4dd92e5aa0ea9dc8bc5e1ad6e6578b82b2111135a33acb8ce09b40f、104marker・late_clip_stability73を維持。atomic観測fileのCI報告SHA256はbe16c0a1c474b6067a05ce4f4baff4f52f73b77bde34cb798264842837b3acec。3完全geometry行をrootと独立担当が解析して48call／24結果を照合した。artifact13892566779は84,912byte、CI報告ZIP SHA256は1300d1fe22835127d5a45f27929ad8b4d3696779a9b9f655e861f9d7980fcd98。今回はbinary artifactのlocal download／unzip／CRC照合は行っていない。完全な数値観測は[既存trial内のJSON](native_inverse_clip_support_20261112.public.json)へ保存する。
+
+固定preview/savedのPNG SHA256は共に2e7f7e58e3ea6a7348bbeb459f5671f92967513aec99fbbcec4991c1baaa5b8dで前回と一致し、resultのPNG/RGBA等価もtrue。これはCq helperを通らないios.v2固定透明glyph層の回帰証拠であり、Cqのactual RN fidelity／B9行選択／配色全体／保存RPC／Photosの成功に換算しない。
+
+### 完了範囲と次
+
+PRIMARY_OUTCOME=TECHNICAL_CREDIT。Cq support候補の3非整列形状と同等性比較・既存fault／新late安定性・完全観測保存の一単位が完了した。PRODUCT_CREDIT／通常CI全体／RN Whole／frozen recipe一般同等性／通常採用credit0。旧runの記録途中欠落は記録修正後に解消したが、旧run自体はfailureとして保持する。
+
+次は同source／pinを既存actual RN harnessの元13条件へ一回通す準備を行う。実Textのnatural snapshotのpublicbounds／CTM／clip／Cq／phaseを同callに対応づけ、local／placed・厳密占有比較・token／fit・元8秒・完成PNGを照合する。公開boundsは同callの既存観測へ加え、opaque backingには触れない。既知の4Mi拒否や旧期待値を保持し、部分成功をWhole・通常採用へ換算しない。
+
+以前の83fcd89b／取消run43012230881のRN jobではWhole60assertion/44署名（legacy essay_max420のelapsed失敗1増）を観測した。後続の通常99fba／run43021553284では59/43へ戻り、追加elapsed1は再現しなかった。今回はどちらも再実行しておらず、後続59/43を現在の再現結果として継承する一方、性能の原因解消・改善の証明はない。
+
+通常作業.mm581／runner pin／selector OFF、前回RN Whole59assertion/43署名・通常host／Photos／本人端末・正式受入れ、AR-01役割反転と他AR残件は継承。旧73生成／243 SQL／静的6／transition4へ戻らず、この小数対照の完了も次回再実行の前提にしない。GPU／学習／SQL／実Auth／製品外部HTTP／Render配置／署名build／配布0。STRUCTURE_MAP_DELTA_NONE：通常製品owner／公開型／route／DB／作者／renderer責務の変更0、研究用の既存4pathと観測保存だけで、新常設checker／Gate／管理票を追加しない。
+
