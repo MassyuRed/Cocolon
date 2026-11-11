@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/11・AR-04最新：** 具体承認後、保存f6daeで未取得41要求＋保持2を一回・学習0で実4B確認。43候補／47HTTP・265.692秒で元提供へ復元、args／全env／cwd・通常／Analysis前後全response一致、独立healthz200／PID一致。既存10を戻した全51要求（旧53照合行）は51採用・3plan計153保存／非生成再読。保持2は前回全応答と同一。原source／prepared／messages・raw不変。全51本文のroot／独立読取で明確な新意味変異は見られず、一人称反復等の文章上の残差は保持。旧53回帰の未取得は0。f6dae研究候補・通常selector OFF・AR-04未完。 [実旧53比較・153保存と次](piece_request_account_reuse_review.md#piece-breadth53-current4b-actual-20261111)。
+> **11/11・AR-04最新：** API400912d8で、既存finite対人動作読取を明示理由／譲歩のscope・生成条件・S7へ接続。nativeは原文KEEP／非宣言を維持し、内側の能動事実過去だけ同じ意味の敬常体を比較する。固定CPU新6は0→6採用（2mode計0→12）、3plan18保存／非生成再読。保存済み実4B59要求のsource意味／plan／prepared／messages／採否／本文は不変。新71・既存関連1479成功。新6の実model rawは未取得、追加GPU／学習0。約18KBの新6＋保持2比較は未送信／未実行・具体承認待ち。f6dae研究候補・通常selector OFF・AR-04未完。 API400912d8のPiece CI42958167751はattempt1・success、Analysis CI42958167864はattempt1・success。追加run／rerun要求0。 [理由／譲歩付き完了動作・実装と次](piece_request_account_reuse_review.md#piece-scoped-finite-action-20261111)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -1617,3 +1617,45 @@ result SHA256 `bc8bc6f694aef4b3d362d65d9590ab61e522ebc49484a0e69943666f36682e6f`
 ### 完了の継承と次
 
 次は今回未被覆の理由／譲歩付き完了動作・引用・長い文章の読取と文章化を、元教材・保存済み実本文と既存のfinite動作／source scopeから切り分ける。理由／譲歩付き完了動作は全文KEEPに留まるCPU例があるが、このfamilyの現f6dae実失敗は未確認で、追加学習を選ぶ根拠にはしない。今回の旧53全生成回帰・実43候補・153保存・265.692秒提供復元は完了として継承し、完了runを再実行しない。今回の具体一回承認は消費済み。新GPU／fit／SYSTEM周回・通常採用／selector有効化／Render／live DB／RN／buildを自動実行しない。 本人前置形そのものの実raw、理由／引用と完了動作の一般読取、広い編集品質、同版画像／通常統合／本人端末、既存無引用3失敗とAR-01／他ARは未完。
+
+
+<a id="piece-scoped-finite-action-20261111"></a>
+## 11/11 AR-04 — 理由／譲歩と完了動作の読取を一体化
+
+**API400912d8で、既存finite対人動作読取を明示理由／譲歩のscope・生成条件・S7へ接続。nativeは原文KEEP／非宣言を維持し、内側の能動事実過去だけ同じ意味の敬常体を比較する。固定CPU新6は0→6採用（2mode計0→12）、3plan18保存／非生成再読。保存済み実4B59要求のsource意味／plan／prepared／messages／採否／本文は不変。新71・既存関連1479成功。新6の実model rawは未取得、追加GPU／学習0。約18KBの新6＋保持2比較は未送信／未実行・具体承認待ち。f6dae研究候補・通常selector OFF・AR-04未完。**
+
+### 原因と回収した既存能力
+
+旧8329では、明示理由／譲歩の後にある完了した対人動作は全文KEEPに留まり、既存の内側finite読取がscope・生成条件・model比較へ接続していなかった。新6×自己理解／平穏の固定CPU常体候補は全12不採用。これはsource／比較のCPU残差で、現f6daeが新familyを誤生成した実測ではない。
+
+`piece_source._scoped_finite_self_person_action`は既存`PieceExpressionScope`と`natural_reply_meaning._clauses/_FORMS/_arguments`を再利用する。ので／けれど／けれども、単一operator／読点、明示SELF、相手1・対象1の頼む／相談する／伝える、能動・事実過去だけを全文資格化。自己理解／既存選択modeの有効性は維持し、少なくとも一つの新scopeを含む全sentenceがこのscope又は完全finite対人動作のときだけ新資格を認める。既存actions／literal／reservationのcomplete判定へ新scopeを流さず、既存CONSULT混在の受理も撤回しない。条件なら／曖昧から・のに／日時・引用／名前／外側SELF／複数operator／受動は新armの対象外。
+
+新scopeでも`compile_piece_artifact_plan`のdutyはKEEP、完了動作をintent／宣言へ昇格しない。nativeは原文全文・段落・非宣言を保持。`validate_piece_model_preservation`から既存S7のKEEP/model比較へ入り、外側prefix全byteと内側述語直前までのSELF・助詞・相手／対象・格順を固定し、残る述語を既存full finite keyで比較する。原文の前提や接続語・順序・引用話者を推定で変えず、新scopeをSCOPED dutyへ偽造したdirect S7入力も拒否する。一般のfinite Counterへscopeを平坦化しない。
+
+`piece_model_source`は内側動作のsource_literal／field-local範囲と、source_scopeの前提全量・relation／marker・全文範囲を同一source/fieldで一体投影。part内に未読の文があればpartialなrequired_actionsを渡さない。原7項目、PreparedRequest ID/JSON、SYSTEM、条件なし既定送信、既存の名前／評価／引用条件、本人補足分離は保持。期待正文やCPU候補はモデルへ渡さない。公開DTO／DB／API入口・selector既定OFFは変更なし。
+
+### 実装前後と検証の範囲
+
+| 対象 | 今回の結果 |
+|---|---|
+| 新6固定CPU常体候補 | 同一本文0→6採用、自己理解／平穏2mode計0→12。実モデル生成ではない |
+| native | 平穏6の既存status／全文／KEEP不変。自己理解6は新資格で原文全文KEEP。新scopeのgraph kind/idは意図した差分、原7項目／preparedは不変 |
+| 保存済み実4B59 | 直前51＋その前8を追加生成なしで再受領し、source意味／plan／prepared／全messages／採否／本文が完全一致。旧59のSQL再実行0 |
+| 新6保存 | 固定CPU6×Free／Plus／Premiumの18保存・同／新service非生成再読。原入力・Emlis不変、quota各1、保存後生成0、旧作者fallback禁止 |
+| source/test | 新71成功、既存関連1479成功。独立reviewの意味／表層変異19、名前3、混在資格5、根拠改変7等は拒否 |
+
+既存関連7file初回の1477成功／SQL2setup失敗はrootがQ2_PGLITE_MODULEを指定しなかったためで、既存module／primary Nodeを明示し当該2を再確認して成功。失敗logを保存し、依存install／製品変更は行っていない。新test小選択の旧CONSULT受理／旧REQUEST拒否のfixture取り違え5期待も、実preimageのREQUESTへ揃えて訂正した。旧/新10例のsource-plan比較でCONSULT混在5受理・REQUEST混在5拒否を確認し、既存受理を撤回していない。
+
+公開前の局所reviewでは、新資格の旧literal/reservationへの混在流入、ひらがな役割名をraw保持した候補の迂回、新finite scopeのSCOPED duty偽造を検出。新tuple分離、既存hiragana名前owner＋public anchor一致、S7のKEEP固定という因果箇所だけを修正し、所見と拒否回復を保持した。別系統の作者・新Gateは作らない。
+
+旧59の前回native byte比較は記録がなく未測定で、今回のnative契約成立だけを確認。18保存は既存の合成ID／owner／現在日時へ投影する隔離PGlite SQLで、live Supabase／実Auth／画像／本人端末ではない。前回43候補・265.692秒復元と51要求153保存は完了として継承し、新しい保存成功へ加算しない。API400912d8のPiece CI42958167751はattempt1・success、Analysis CI42958167864はattempt1・success。追加run／rerun要求0。
+
+### 変更ファイルと次の一回案
+
+[API400912d8](https://github.com/MassyuRed/mashos-api/commit/400912d89f86d92fb5fbf0696ab03ae5d290ad2c)の既存source4owner（piece_source／piece_v1c／piece_model_source／piece_v2_content_policy）、新`ai/tests/test_piece_model_scoped_action.py`、既存Piece CIのpath／run指定2行を反映し、全6fileのblob／本文と変更path setをfresh照合。STRUCTURE_MAP_DELTA_PRESENT（既存source資格・scope／比較・生成条件の責務拡張）。新公開型／route／DB／作者／controllerなし。限定TECHNICAL_CREDIT、商品品質credit0・正式受入れ追加0・AR-04未完。
+
+次は、この新6（理由／譲歩付き能動事実過去）＋保持2（SCOPE-QUOTE-REASON／QUOTE-RUN）を、保存f6dae・既存稼働用Pythonで一回・追加学習0の実4B確認へ通す。合計17,929byte（packet15,480＋launcher2,449）、8候補＋通常／Analysis前後control4の最大12 chat HTTP、Piece1load・retry／新weights0、復元枠込み600秒の期限設定／復元予約120秒。新packet／launcher送信と、認証情報を含み得る全起動環境の同Pod内一時読取・復元再利用は、この新材料の具体承認後に限る。64834は前回復元時のPIDで現在のfresh確認値ではない。前回の43候補／47HTTP・265.692秒復元・51要求153保存は完了で、消費済み一回承認を再利用しない。新fit／通常採用／selector有効化／Render／live DB／RN／buildの自動実行0。
+
+packet SHA256 `9ae9f4d4f6b0721a330242efac04143f67cb107b23b9ac9e28060aa00cea1453`、launcher SHA256 `bbfc143a4e143417780c65890f262fd93a57b53a556f782511152a0d87a1e6aa`、wire SHA256 `0c98ab022b323a8be1858954836d00b4f7625f6adb7de0312a6917b3ab36c202`。新root`/workspace/ar04-scoped-finite-action-20261111`、稼働用`/workspace/cocolon_venv/bin/python`、固定f6dae。保持2の全case／messages／生成設定は前回と同一。初回準備のinventory key不一致・旧API literalを送信前に修正し、原本hash／所見を保存。最終35静的／データ項目は成立、ZIP／CRC／member／hash・compile、helpers AST不変、承認なしguardの停止を確認。launcherはcompileだけで、Pod／環境読取／送信／新model呼出0。期限設定は外部watchdogの無条件保証ではなく、残時間や元identity不一致なら中断し復元する。
+
+新6の実4B本文・採否・保存確認は未実施。広い文章編集品質や本人受入れの成立ではない。受動、引用／名前／外側SELF／複数operatorを含む完了動作、条件・日時の新接続、本人前置形の実raw、長い文章と広い編集品質、同版画像／通常統合／本人端末、既存無引用3失敗とAR-01／他ARは未完。 元入力・固定CPU／実59比較・18保存・局所所見・未実行packetを[Cocolon_CMEE_AR04_ScopedFiniteAction_20261111.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-63b6c6f54c88819199c687bec9796d68_2f7470f963808191aaebf050935e72de&account_id=personal)へ保存。GitHub同期のrepository本体・依存・重みは重複保存しない。
