@@ -4,7 +4,7 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-11 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR01_UNRESOLVED_AR04_CLIPPED_REFERENCE_SUPPORT_PROBE_RUNNING_UNADOPTED
+status: AR01_UNRESOLVED_AR04_ALIGNED_REFERENCE_CONTROLS20_VERIFIED_FRACTIONAL_PENDING_UNADOPTED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
@@ -12,7 +12,7 @@ current_next: AR-04
 runtime_effect_of_this_document: 0
 ---
 
-> **11/11・AR-04最新：** 前回99fba/run43021553284で19正常controlがstage83へ収束すると実測済み。今回はclipped referenceの公開bounds対応候補661c73cdを、隔離ref f4aa5de0／standalone限定run43029546742で1回比較中。既存195判定・V4_20・bitmap44・元期限／予算は保持、他5jobは明示skip。整数controlの仮説検証で、小数寸法の同等性・通常採用は未証明。通常作業refの製品.mm/pin・selector OFFを保持し、AR-04未完。 [clipped referenceの隔離比較](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-v4-clipped-reference-probe-20261111)。
+> **11/11・AR-04最新：** 隔離候補661c73cd／f4aa5de0のstandalone run43029546742が成功。旧V4の1成功／19失敗→候補20成功、19正常controlは全result20／stage0、元195判定・別AR04_4／bitmap44も成功した。他5jobはskip、通常作業.mm581/pinは未変更・未採用。実RNにはq非整列の小数寸法があり、公開boundsへ全画像を伸縮する候補の同等性は未証明。次は観測clipのq支持と逆写像extent/originを保つ案を検証する。通常selector OFF・AR-04未完。 [隔離比較の実結果と小数境界](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-v4-clipped-reference-probe-20261111)。
 
 > **11/10・AR-04最新：** 引用内stopを持つ新4件＋保持GENERAL07の現builder送信messagesを固定し、13,140byte・2memberの無学習比較packetを準備。構文compile／CRC／member照合は成功、実モデル生成・送信・提供停止0。非環境の稼働確認はhealth200。起動環境全体の読取りは認証情報を含み得るとして自動承認審査に拒否され、未実行。新packet送信と、完全復元に必要な環境内再利用の具体承認待ち。API5816f2d0／f6dae研究候補・通常selector OFF・本番未反映を維持。 [具体packet・確認範囲・再開点](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quote-stop-inference-prepared-20261110)。
 
@@ -380,13 +380,13 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 | AR-01 | 現naturalの主体・所有者・否定・時点・留保を、旧失敗・意味比較・共通原因分析で改善。EM-01a/b | 現6境界と正常な短文／省略で、同入力の誤読を解消または明確に減らし、自然さ・別題材・既成功・保存再読を保持。検出増加／無出力だけでは完了しない | 継続中。新24実生成の4版は通常不採用。c6555fd5で疑問符なしの確認質問の保存抜けを修復、250局所PASS。同24rawは旧24保存→新22保存／2拒否、受理本文不変。全体の意味修復は未完 |
 | AR-02 | 現naturalの任意問い・回答・訂正・撤回・frameの一往復。EM-02a/b、03b | 一点確認／skip／終了／本人続行、対象だけ更新、撤回後の残存意味、同版再読、プラン境界 | AR-01の全一般品質完成待ちにはしない。未開始 |
 | AR-03 | 適格履歴の意味ある利用。EM-03a/b | 同一／別場面・変化・無関係・訂正前を区別し、適切な履歴が今回へ効く。失効材料を使わない | 現related_contextを継承。未開始 |
-| AR-04 | Piece一般本文・単独伝達・refined・画像整合 | 原文の意味・一人称・本人補足と同版画像／保存を保持 | 前回99fbaで19正常controlのstage83を実測、sourceV4_1/19・RN Whole59/43を維持。今回は別ref f4aa5de0のclipped support候補をsource-only run43029546742で比較中。他5job skip、整数対照の限定実験で通常未採用。通常selector OFF、通常host/Photos/端末/正式受入れとAR-04全体未完。 |
+| AR-04 | Piece一般本文・単独伝達・refined・画像整合 | 原文の意味・一人称・本人補足と同版画像／保存を保持 | 研究f4aa/run43029546742の整数standaloneは旧V4_1/19→20/0、19正常control全result20/stage0、既存195/別4/44も成功。他5job skip・通常.mm581未変更/未採用。実RNのq非整列境界が残るため、次は観測clipのq支持と逆写像extent/originを保持する案を検証する。通常selector OFF・AR-04未完。 |
 | AR-05 | 分析の本人基準・役割／選択・記録間関係。AN-03a/b/c、04 | 原記録→意味→図／全文→両端根拠の対応、再出現／変化／不明の正しさ | 現Engine統合・保存済み成果を継承。並行可能。未開始 |
 | AR-06 | Emlis観測材料、訂正・削除・権利、長い蓄積と月次。EM-04/05、AN-02/06/08/10 | 本人sourceから材料を渡し、失効・分割範囲・当時版を保持。生成本文を本人事実にしない | AR-02/03/05の該当能力を利用。未開始 |
 | AR-07 | IF／Saved等の商品固有の残る意味保持責務。既存AN／PC残件 | 仮想・本人選択意向・観測を分離し、成立した経路で出力と保存を確認 | 既存商品の実装条件に従う。無断延期・新発売条件化をしない。未開始 |
 | AR-08 | 実証できた共通能力の通常適用と全体確認。EM-05/06/07等 | 採用版の意味保持・自然さ・権利・中断復帰・保存再読・実際の待ち時間／費用。未採用範囲は理由と残差を保持 | 各単位で通常採用可能。全core一括切替を強制しない。未開始 |
 
-現在は **AR-04の意味保持・単独伝達**を継続する。前回99fba/run43021553284で19正常controlがstage83へ収束すると実測済み。今回はclipped referenceの公開bounds対応候補661c73cdを、隔離ref f4aa5de0／standalone限定run43029546742で1回比較中。既存195判定・V4_20・bitmap44・元期限／予算は保持、他5jobは明示skip。整数controlの仮説検証で、小数寸法の同等性・通常採用は未証明。通常作業refの製品.mm/pin・selector OFFを保持し、AR-04未完。 次はこの1回の正常control／fault・全assertionを回収し、仮説を判定する。詳細は[隔離比較](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-v4-clipped-reference-probe-20261111)。
+現在は **AR-04の意味保持・単独伝達**を継続する。隔離候補661c73cd／f4aa5de0のstandalone run43029546742が成功。旧V4の1成功／19失敗→候補20成功、19正常controlは全result20／stage0、元195判定・別AR04_4／bitmap44も成功した。他5jobはskip、通常作業.mm581/pinは未変更・未採用。実RNにはq非整列の小数寸法があり、公開boundsへ全画像を伸縮する候補の同等性は未証明。次は観測clipのq支持と逆写像extent/originを保つ案を検証する。通常selector OFF・AR-04未完。 研究整数対照と既存faultの限定TECHNICAL_CREDITであり、通常CI／RN Whole／商品・採用credit0。詳細は[実結果](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-v4-clipped-reference-probe-20261111)。
 
 既存の品質作業・新教師8件・保存重みの継続点を使う。GPUに現実の接続障害がある場合、取得できた事実、未実行の生成、回収済み原本、次の同一単位を記録し、CPUの合成成功を実モデル改善へ換算しない。接続復旧や既存の別core実装を必要範囲で進め、無関係な補助機構開発へ変えない。
 
@@ -446,7 +446,7 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 ### 11.2 現在の進行欄
 
-**11/11・現在の再開先：** 前回99fba/run43021553284で19正常controlがstage83へ収束すると実測済み。今回はclipped referenceの公開bounds対応候補661c73cdを、隔離ref f4aa5de0／standalone限定run43029546742で1回比較中。既存195判定・V4_20・bitmap44・元期限／予算は保持、他5jobは明示skip。整数controlの仮説検証で、小数寸法の同等性・通常採用は未証明。通常作業refの製品.mm/pin・selector OFFを保持し、AR-04未完。
+**11/11・現在の再開先：** 隔離候補661c73cd／f4aa5de0のstandalone run43029546742が成功。旧V4の1成功／19失敗→候補20成功、19正常controlは全result20／stage0、元195判定・別AR04_4／bitmap44も成功した。他5jobはskip、通常作業.mm581/pinは未変更・未採用。実RNにはq非整列の小数寸法があり、公開boundsへ全画像を伸縮する候補の同等性は未証明。次は観測clipのq支持と逆写像extent/originを保つ案を検証する。通常selector OFF・AR-04未完。
 
 **11/11・36件/72更新時点の履歴：** 承認済み36件/72更新のfresh候補a1dfを一回作成し、残っていた「予定が重なっている」→「重なった」の前提変異1件が回復。既存8＋保持8の実16は全件意味採用、他15rawは旧f6daeとbyte同一。48隔離保存・非生成再読成功。20HTTP・復元込み464.290秒、元args/env/cwd・source/Analysis・旧weights保持、通常/Analysis前後全response一致、独立health200/PID67361一致。fit319.087秒、retry0。新重みは検証用・通常selector OFF。今回16の限定改善であり、旧65全体・実機・一般品質・AR-04完了ではない。 API9b1b7bb8のCPU trainer28成功と既存Piece CI42969704329/job130355058089・attempt1・全39step successは準備時の完了として継承。今回source/test変更0、新CI/dispatch/rerun0。
 
@@ -494,11 +494,11 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | AR-01通常と残件 | AR-01通常不採用・役割反転未解決。先行API 651f1f38のAR-04差分とAR-01研究patchの通常不採用を継承。今回のfce72bcc／4da69cdeはtest整合のみで、AR-01通常採用なし。Render配置／実DB／RN／build0、他AR残件は維持 |
 | AR-04回収・改修 | 通常作業99fbaの既存4testpath診断を継承。今回の別研究ref f4aa5de0は既存native比較関数のclipped support、runnerのpin/診断field、workflowのsource-only指定の3pathだけ。通常作業refの製品.mm581dfd38/pinは不変。 |
 | AR-04実本文 | 保存344aの2run和集合73/73・旧比72raw同一/051時制回復1・継続前提保持、configured録画3件を継承。今回の仮説比較に新本文/実4B生成/SQL再保存は0。 |
-| AR-04検証・再読 | 前回run43021553284はJS1725、source native129/v9_46/AR04_4/bitmap44成功・旧V4_1/19、RN Whole59assertion43署名のみfailure。静的6/transition4の元8秒/canonical/PNG保持を確認済み。今回run43029546742は同じ195条件のstandaloneのみ比較中、他5job skip。 |
-| AR-04反映・残件 | 現行の配色親flow/同Card回帰・非生成保存再読の成果を維持。前回source56call/19controlはstage83へ収束し、allocation/edge faultの別stage到達も確認済み。今回はsupport仮説を別refで実測する段階で、通常V4/Whole修復・小数寸法同等性・通常host/Photos/端末/正式受入れ未完。 |
+| AR-04検証・再読 | 研究f4aa source-only run43029546742が成功。56call/19正常controlを回復し、V4_20/元195unique PASS・別AR04_4/bitmap44を保持、allocation/edge等のfault到達/拒否も確認。固定bitmap2PNG/RGBA/result意味値は基準一致。通常RN/JS/Android/Podsは今回skipで前回成功・Whole59/43を継承する。 |
+| AR-04反映・残件 | 研究refの整数対照とfault保持は確認済み。通常作業.mm/pinは581のまま、旧V4/Wholeと通常host/Photos/端末/正式受入れは未完。前回実RNにq非整列の公開bounds/clip差があり、現在のcandidateを通常採用せず、観測clipのq支持と逆写像対応を保持する案へ進む。 |
 | AR-04現在のrefined | 007のQ2資格/原入力補足分離・recorded wrapper/S7/Free保存再読を継承。前回静的6/transition4は3段落/Emlis/配色/canonical8/3hash/PNGを保持。今回新refined生成/SQL/通常capture許可変更0。 |
 | AR-04現在の4B本文読取 | 前回73本文読取・configured録画3の無修補再生を継承。今回のnative support候補比較でmodel生成/学習は0。一般文章品質・任意natural補足・正式受入れを追加で成立させたとはしない。 |
-| AR-04再開記録 | 直前3a817a5d/実行記録checksumを照合し、前回のsource/RN終端・保存完了から再開。研究ref f4aa5de0/run43029546742の1回の正常control/fault/全assertionを回収して仮説を判定する。現行.mm/pin/通常selector OFFを保持し、小数寸法・frozen recipe同等性・通常採用は未確認。 |
+| AR-04再開記録 | 直前3a/記録checksumから再開し、研究f4aa/run43029546742の1回を完了。整数正常control19回復・既存fault保持の限定TECHNICAL_CREDIT。次は実RN由来の小数非整列対照と、clip支持の逆写像extent/originを保つ案を具体化する。通常採用/通常CI/RN Whole/商品credit0、selector OFF・AR-04未完。 |
 
 以後はこの表と各能力の対応行を現在状態へ置換更新し、詳細な実行事実は既存trial／weeklyへ置く。新しいhandoff系列・全件hash Gateを作らない。中断時も、成果物と未実行を既存保存先へ残し、同じ未完商品単位から続ける。
 

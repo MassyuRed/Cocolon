@@ -2370,7 +2370,7 @@ STRUCTURE_MAP_DELTA_NONE：既存native test／trace責務内の診断追加で�
 
 
 <a id="piece-v4-clipped-reference-probe-20261111"></a>
-## 11/11 AR-04 — clipped referenceのsupport対応を隔離standaloneで比較（実行中）
+## 11/11 AR-04 — clipped referenceの整数対照回復・実RN小数境界は未採用
 
 直前の3a817a5d／実行記録d4ac6877をfresh取得・hash／CRC／全member checksumで照合し、前回のsource／RN終端と保存完了を確認して再開した。前回の73実4B、243 SQL、静的6／transition4の再実行には戻さない。fresh全体現在地を全文確認し、詳細設計§9／§11が指定する正常controlのnatural描画とreference再構成の同等性を次の一単位とした。
 
@@ -2388,12 +2388,50 @@ source job本文は195unique PASS・V4_20／AR04／bitmapの元条件、10分job
 
 TLS診断のnative_extent／paint_ctmはexpanded Bという従来の意味を保ち、clipped_reference_extent／clipped_reference_paint_ctmを別fieldへ記録する。same-call identity、104marker／逆投影と1024byte上限を保持し、mapへNOT_ADOPTED／fractional_backing_equivalence=NOT_PROVENを明示した。正しいlocal投影はsource661c73cd→instrumented e63a02aaa19357724538054aaacae1a4e6116b5a2ad7f7cc1ac792f387f2ae12。旧準備段階のmapは今回の証拠へ使わない。
 
-独立担当が原本／candidate／workflowの差分を照合し、1回の隔離比較を妨げる所見なし。shell syntax／embedded Python compile／104markerのlocal確認も成功したが、実native compile／runtimeの成功とはしない。GitHubの3path全byte読戻しとchanged-path setを確認してから研究refを作成し、既存[run43029546742](https://github.com/MassyuRed/Cocolon/actions/runs/43029546742)が自動起動した。manual dispatch／rerun0、今回はsource job1実行／他5skip。現在実行中で、結果・正常control／fault別stage・artifactを回収して本節を置換更新する。
+独立担当が原本／candidate／workflowの差分を照合し、1回の隔離比較を妨げる所見なし。shell syntax／embedded Python compile／104markerのlocal確認も成功したが、実native compile／runtimeの成功とはしない。GitHubの3path全byte読戻しとchanged-path setを確認してから研究refを作成し、既存[run43029546742](https://github.com/MassyuRed/Cocolon/actions/runs/43029546742)が自動起動した。manual dispatch／rerun0、今回はsource job1実行／他5skip。同runは下記の終端・正常control／fault別stage・artifactまで回収済みである。
+
+### 一回の実結果と限定credit
+
+研究[run43029546742](https://github.com/MassyuRed/Cocolon/actions/runs/43029546742)はcompleted／conclusion success、source job130552767743がsuccess、他5jobはすべてskippedだった。run_started_at13:29:14Z→updated_at13:35:49Zのworkflow wall timeは395秒（JST22:29:14〜22:35:49）。manual dispatch／rerun0・候補のnative実行1回で完了した。通常CI全体・RN Wholeを再実行した結果ではない。
+
+| 元の検査集合 | 基準99fba | 隔離候補f4aa |
+| --- | --- | --- |
+| 旧V4 20case | 1 PASS／19 FAIL | 20 PASS／0 FAIL |
+| 正常control 19call | 全result0／stage83 | 全result20／stage0 |
+| profile195（native129＋v9_46＋V4_20） | 同一条件で19 FAIL | 195 unique PASS |
+| 別AR04固定bitmap | 4 PASS | 4 PASS |
+| 別bitmap | 44 PASS | 44 unique PASS |
+
+native129にはlegacy97＋v5_32を含み、別129を再加算しない。199個のassertion-name集合（profile195＋AR04_4）は基準のPASS／FAIL合計と同じで、基準180 PASS／19 FAIL→候補199 PASS／0 FAIL。入力・期待値・件数・strict predicate・元期限を変えて通した結果ではない。runner image version20261103.629／20261104.0514.1、Apple clang17.0.0、Xcode16.4/build16F6も両logで一致した。
+
+same-call診断は56call／20case、tag／font／stage identity56/56、main_thread56/56、診断error0。first_failure_stageの分布（0は失敗なし）は0×40、18×2、58×3、59×2、61×4、62×1、63×1、86×2、89×1だった。allocation_faultはstage63/reached1、extent_edge_faultはstage18/reached1を保持。正常controlが成立したうえで、一度消費・snapshot変更／属性・版間token・nil／dirty／scale／unsupported・資源・空白・期限の既存拒否と、controlled native clip trapの元assertionも通った。旧19caseを除外したり、不一致cellを閾値で許したりしていない。
+
+今回artifact13858749177は82768byte、SHA25685972a737aa51801edf621cf69f937ab33c5221c35e2cf5e0bc97bded8d01012をCRCと共に照合した。固定TARGET_VIEWPOINTのpreview／savedは1080×1350、PNG bytes／全RGBA／result.jsonの意味値が基準artifactと一致し、PNG SHA256は両方2e7f7e58e3ea6a7348bbeb459f5671f92967513aec99fbbcec4991c1baaa5b8d。これは固定行の透明bitmap字形層であり、通常RN/B9行選択／theme／保存RPC／Photos／本人端末は今回実行しない。
+
+PRIMARY_OUTCOME=TECHNICAL_CREDIT、範囲は未採用候補の整数寸法control回復と既存fault保持のみ。PRODUCT_CREDIT／通常CI／RN Whole／小数寸法同等性／通常採用creditは0。通常作業refの旧V4_1/19・Whole59/43はこの実験で置き換えない。
+
+### 実RNの非整列境界と次に保持すべき対応
+
+小数寸法の不足は仮定だけではない。前回99fba／run43021553284のV4 essay_paragraphs boundary ordinal1は、source_clip=[0,0,1080,75.33332824707031]、observedCTM=[3,0,0,-3,0,225.99998474121094]を記録している。V4 stage83前の既存guardでbounds.origin==0を認めているため、公開bounds上辺のq値が非整数になることは確認できる。ただし、このV4 recordから全bounds寸法を直接読んだとはしない。
+
+同runの別case saved_essay_canvas／prototype.v3は、自然drawRectの公開bounds／CTM／clipを直接記録している。これはV4 caseとの混同を避けて扱う。
+
+| 別v3の直接記録 | bounds高さ | observed ty（S3） | この候補で計算するowned行数 |
+| --- | ---: | ---: | ---: |
+| body/tag497 | 75.33332824707031 | 225.99998474121094 | 226 |
+| body/tag503 | 75.33334350585938 | 226.00003051757812 | 227 |
+| Cocolon/tag529 | 40.3333740234375 | 121.0001220703125 | 122 |
+
+tag503ではbounds由来q上辺は-226.0000305…→floor-227だが、観測clipのq上辺は-226。候補の逆q支持はy=-0.3333231608…／height75と2/3となり、これを公開bounds y0／height75.3333435へ全画像配置すると、同じ座標対応ではない。opaque natural backing寸法は読み取らず推定もしていない。今回の整数高さ76／41の成功や、配置側±fractional phaseの成功だけでこの差を省略しない。
+
+次はC=観測clip∩boundsのq支持を所有し、その逆写像extent Cqとoriginで比較canvasへ置く案を、同じ既存owner内で具体化する。Cq全画像をboundsへ伸縮させず、透明paddingの位置、expanded B、厳密占有比較、edge拒否、元期限・予算を保持する。実RN由来の非整列対照を含めた同等性は未検証で、修復済みの通常rendererへ昇格しない。旧Wholeの4Mi面積上限等と、通常host／Photos／本人端末・正式受入れも別の未完了として保持する。
+
+今回の[実行記録](https://chatgpt.com/library?file_id=libfile_fde3_f-6b9fb69e59508191aac22cf65f516829_2f7470f963808191aaebf050935e72de&account_id=personal)へ、研究run原log／56call・独立比較／正しい104map／固定bitmap artifact／実RNの公開geometryと計算を保存した。正本codeは研究Git ref、通常作業の正本.mm581は不変である。
 
 ### 継承した完了と現在の残件
 
 通常作業refの前回source99fba／run43021553284はcompleted failure、旧V4_1成功／19失敗、RN6methods／Wholeのみ59assertion／43署名。JS1725・現bitmap44・AR04_4・native129・v9_46、静的6＋transition4と同版本文／PNG保持は前回の完了として継承する。今回の研究runでRN／model73／transitionを再検証したと数えない。
 
-次は同runの終端・19正常control／fault到達／元全assertionを確認する。候補の成否から原因仮説を判定し、未確認の小数寸法・frozen recipe同等性・通常採用へ広げない。現在の通常selector OFF、旧V4／Whole、通常host／Photos／本人端末・正式受入れ、AR-04全体は未完。GPU／学習／SQL／実Auth／製品外部HTTP／Render反映／署名build／配布0。PRIMARY_OUTCOMEは実測後に確定する。
+今回の研究runと整数control／faultの確認は完了。次は観測clipのq支持を逆写像extent／originで保持する案と、実RN由来の非整列対照を具体化する。今回の公開bounds全体へ伸縮する候補を、小数寸法・frozen recipe同等性・通常採用へ広げない。現在の通常selector OFF、旧V4／Whole、通常host／Photos／本人端末・正式受入れ、AR-04全体は未完。GPU／学習／SQL／実Auth／製品外部HTTP／Render反映／署名build／配布0。PRIMARY_OUTCOMEは限定的TECHNICAL_CREDITである。
 
 STRUCTURE_MAP_DELTA_NONE：研究refの既存比較関数・test診断内の候補比較で、通常作業側の製品owner／route／DTO／DB／作者／renderer責務は変更0。新しい管理票・Gate・承認段階を追加しない。
