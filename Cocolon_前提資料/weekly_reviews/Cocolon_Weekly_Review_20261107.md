@@ -1,6 +1,6 @@
 # 第10回 Cocolon週末報告会 — 2026-11-07（終了）
 
-> **11/11・AR-04最新：** API8329a828で、既資格の本人評価を元の焦点語順のまま敬体／常体比較へ接続。固定CPU新3は0→3採用、3plan計9保存・非生成再読。原7項目／source意味／plan／prepared／messages・native全結果と前回実4B5件は維持。新71全成功、関連39fileは6192成功／既存同3失敗。独立27例で退行0。新GPU生成・学習0、f6dae研究候補・通常selector OFF・本番未反映。 [元の評価焦点・範囲と再開点](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-evaluation-focal-register-20261111)。
+> **11/11・AR-04最新：** API8329a828の本人前置3＋元評価焦点3＋保持2を、具体承認後に保存f6daeで一回・学習0の実4B確認。同じ8rawの旧eb9→現8329採用は6→8、元焦点2だけ回復、保持2の全request／raw／response不変。全8×3planの24保存・非生成再読。12HTTP・103.914秒で元提供args／env／cwdを復元し、通常／Analysis前後response一致・独立health200。Piece／Analysis両CI成功。本人前置3の実rawは前提先行で、その本人前置形自体は未実証。f6dae研究候補・通常selector OFF、本番未反映。 [実8応答・24保存・完了と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-combined-register-actual-20261111)。
 
 記録日：2026年11月7日（日本時間）  
 対象週：**2026年11月7日〜11月14日**  
@@ -2873,6 +2873,16 @@ API8329a828で、既資格の本人評価を元の焦点語順のまま敬体／
 
 次は未実行の本人前置3＋評価焦点3と保持2の計8材料を、一回の実4B比較へまとめて通す。送信候補17,151byte（packet14,702＋launcher2,449）・最大12HTTP・Piece1load・学習／retry0、復元枠を含む600秒の期限設定／復元予約120秒。既存Podへの新packet送信と、認証情報を含み得る全起動環境の同Pod内一時読取・復元再利用は今回の具体承認後に限る。旧実行の一回承認は完了済みで再利用しない。
 
-API8329a828のPiece CI42943673831はattempt1・success確認済み。Analysis CI42943673837はattempt1実行中、終端未確認。 前セッションのAPIeb9cdacdは、Piece CI42936880945全39工程／Analysis CI42936880940全19工程がattempt1・success。反映済みsource3と資料7の全blob／本文をfresh照合し、中断時に未保存だったprivate比較原本を保全した。
+API8329a828のPiece CI42943673831／job130271199367は全39工程、Analysis CI42943673837／job130271199286は全19工程、双方attempt1・successをfresh確認。追加run／rerun0。 前セッションのAPIeb9cdacdは、Piece CI42936880945全39工程／Analysis CI42936880940全19工程がattempt1・success。反映済みsource3と資料7の全blob／本文をfresh照合し、中断時に未保存だったprivate比較原本を保全した。
 
 [原因・同一候補・保存・未実行範囲](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-evaluation-focal-register-20261111)。
+
+
+<a id="piece-combined-register-actual-20261111"></a>
+## 86. 11/11 AR-04 — 実8応答・24保存と提供復元
+
+API8329a828の本人前置3＋元評価焦点3＋保持2を、具体承認後に保存f6daeで一回・学習0の実4B確認。同じ8rawの旧eb9→現8329採用は6→8、元焦点2だけ回復、保持2の全request／raw／response不変。全8×3planの24保存・非生成再読。12HTTP・103.914秒で元提供args／env／cwdを復元し、通常／Analysis前後response一致・独立health200。Piece／Analysis両CI成功。本人前置3の実rawは前提先行で、その本人前置形自体は未実証。f6dae研究候補・通常selector OFF、本番未反映。
+
+次は一般文章の自然さ・反復・引用／理由等の残差を、元教材・保存済み実本文と既存source／生成条件から切り分ける。今回の8実応答・24保存・103.914秒復元は完了し、この12HTTPと過去の完了済みrunを再実行しない。今回の一回承認は消費済み。新fit／GPU比較を自動選定せず、通常モデル採用／selector有効化／Render／live DB／RN／buildは自動実行しない。
+
+API8329a828のPiece CI42943673831／job130271199367は全39工程、Analysis CI42943673837／job130271199286は全19工程、双方attempt1・successをfresh確認。追加run／rerun0。 [実原本・意味比較・保存・限界](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-combined-register-actual-20261111)。

@@ -1488,7 +1488,7 @@ private原本は[Cocolon_CMEE_AR04_CanonicalFronted_Register_20261111.zip](https
 
 新3×Free／Plus／Premiumの9保存、同／新serviceの非生成再読、原入力／Emlis不変・quota各1・保存後0取得を確認。固定HTTP provider・合成本人認証・隔離PGlite SQLで、live Supabase／実Auth／native画像／本人端末ではない。全raw無修補、旧作者禁止。最初の広範囲commandはjunitxml指定組立て誤りで0test・exit4となったため失敗を原記録へ保存し、修正後の6195件だけ集計した。
 
-商品変更は既存policy1とtest2（prose register／evaluation saved pipeline）。新module／意味型／作者／source／public DTO／DB／RN／renderer／依存／通常selector／本番変更0。STRUCTURE_MAP_DELTA_NONE（既存model比較への原語順register再利用）。限定TECHNICAL_CREDIT、商品品質credit0・AR-04未完。API8329a828のPiece CI42943673831はattempt1・success確認済み。Analysis CI42943673837はattempt1実行中、終端未確認。
+商品変更は既存policy1とtest2（prose register／evaluation saved pipeline）。新module／意味型／作者／source／public DTO／DB／RN／renderer／依存／通常selector／本番変更0。STRUCTURE_MAP_DELTA_NONE（既存model比較への原語順register再利用）。限定TECHNICAL_CREDIT、商品品質credit0・AR-04未完。API8329a828のPiece CI42943673831／job130271199367は全39工程、Analysis CI42943673837／job130271199286は全19工程、双方attempt1・successをfresh確認。追加run／rerun0。
 
 ### 新しい一回比較の具体準備・未実行範囲
 
@@ -1499,3 +1499,41 @@ private原本は[Cocolon_CMEE_AR04_CanonicalFronted_Register_20261111.zip](https
 本人前置と元焦点の新実4B、引用／理由一般、広い文章、新f6daeの旧53全生成回帰、同版画像／通常統合／本人端末、既存3失敗とAR-01／他ARは未完。通常採用／selector有効化／Render／live DB／RN／buildの自動実行0。
 
 今回のprivate比較原本・全3本文・9保存・検証・独立review・未実行packet／launcherは [Cocolon_CMEE_AR04_FocalEvaluation_Register_20261111.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-e8e181daa3ac8191bd54b81d3ca7257f_2f7470f963808191aaebf050935e72de&account_id=personal) に保存。repository本体・依存・既存重みは重複保存しない。
+
+
+<a id="piece-combined-register-actual-20261111"></a>
+## 11/11 AR-04 — 承認済み新6＋保持2の実4B比較・24保存と復元
+
+API8329a828の本人前置3＋元評価焦点3＋保持2を、具体承認後に保存f6daeで一回・学習0の実4B確認。同じ8rawの旧eb9→現8329採用は6→8、元焦点2だけ回復、保持2の全request／raw／response不変。全8×3planの24保存・非生成再読。12HTTP・103.914秒で元提供args／env／cwdを復元し、通常／Analysis前後response一致・独立health200。Piece／Analysis両CI成功。本人前置3の実rawは前提先行で、その本人前置形自体は未実証。f6dae研究候補・通常selector OFF、本番未反映。
+
+### 承認どおり一回実行・復元
+
+Mashの「実行していい、進めろ。」を、凍結packet14,702byte＋launcher2,449byte＝17,151byteの新6＋保持2の一回実行へ結び付けた。承認済み起動環境全体の同Pod内一時読取・復元再利用を行い、環境値を意図的に表示・file／networkへ直列化しない従来手順を維持。別Pod／新GPU／追加学習／新重み／retry0。既存稼働Pythonから新rootを一回起動し、旧完了root・旧一回承認を再利用していない。
+
+f6dae1load、候補8＋通常／Analysis前後control4の実12HTTP、全200／stop。停止前の既存cache tokenizerでは最大1708入力token＋生成予約2048≦8192。全600秒／復元予約120秒の期限設定内で103.914163秒。元提供PID63491→復元PID64078、args／全env／cwd一致をrunnerが確認し、通常／Analysisの全前後response bytes一致。別のhealth取得HTTP200とpidfile一致も確認。検査対象のsource／adapter／config／weights不変、通常採用はOFF。8件の成否だけで一般可用性・常時運用・復元保証へ広げない。
+
+### 同じ実rawの旧eb9→現8329比較
+
+| 実入力群 | 旧eb9→現8329 | 実際の文章と確認範囲 |
+|---|---|---|
+| canonical-condition／reason／plain | 3採用→3採用 | 最初2は末尾です除去、1は字面同一。前提先行の原順だったため、本人前置＋文体差の組合せ自体の実4B検証にはならない |
+| focus-reason | 拒否→採用 | 元の評価焦点語順・理由・本人・全対象を保持したです→だ |
+| focus-value-condition | 採用→採用 | 既存canonicalの対象が形を選び、条件・僕にとって・全対象／価値を保持 |
+| focus-past-concession | 拒否→採用 | 元焦点語順と外側けれど、内側少し／苦手だったを保持し、最終ですだけだへ |
+| SCOPE-QUOTE-REASON／QUOTE-RUN | 2採用→2採用 | 前回全case／request／raw／response／format／revision／usageと完全一致。引用内と外側SELF、発言方向と！！数を保持 |
+
+8新rawを修補せず、旧eb9 policyだけを別processへ読み、現8329と同じ原7項目・意味全量／plan・prepared ID／JSON・builder messagesで照合。採用6→8で元焦点2のみ回復、native全結果も一致・観測した採用退行0。新6には旧モデル生成baselineがなく、保持2は既露出。前置原順に関する未出力の組合せを合格とせず、今回実8にmodal形がないことも対象外として記録する。
+
+rootと独立担当が原7項目・全8raw／本文を全読。今回範囲の本人／引用話者の反転、理由／条件／譲歩や内側過去・程度の欠落、原文外の行動・感情・原因・意図の追加は見られない。本文は字面保持・文体差中心で、単独伝達の広い編集能力や一般意味品質の改善率・正式Product Read／人間受入れの合格ではない。保持理由例の二重のでの重さも残る。
+
+### 保存再読・コード／CIの状態
+
+同じ無修補raw8を既存provider receipt→CMEE／S7→Safety→preview／saveへ束縛し、Free／Plus／Premiumの24試行すべて保存・同／新serviceの非生成再読。原入力／Emlis不変、quota各1、保存後の取得／生成0、旧作者fallback禁止。既存の合成owner／ID／現在日時へ内容を投影する隔離PGlite SQLであり、GPU側の元identityそのものやlive Supabase／実Auth／native画像／本人端末の成功ではない。offline確認は初回成功・harness修正0。
+
+API8329a828のPiece CI42943673831／job130271199367は全39工程、Analysis CI42943673837／job130271199286は全19工程、双方attempt1・successをfresh確認。追加run／rerun0。 今回の商品source／test／workflow変更0、API側の新しいpytest／CI実行要求0。前回の新71成功・関連6192成功／既存同3失敗を継承し、24保存で既存3失敗が解消したとはしない。STRUCTURE_MAP_DELTA_NONE（同じ既存ownerへの実生成・保存確認のみ）。限定TECHNICAL_CREDIT、商品品質credit0・正式受入れ追加0・AR-04未完。
+
+原本evidence ZIP37,341byte／SHA256 `bce97bed792f5231fd835760d1d11c706a322575430f640075de1f3ea57c6187`、result SHA256 `907629805b547ab42b39e0a8bca49cced6a92a709c1a3c2653a0863bcd708c76`。独立health・launcher／launch・completionを含む回収collection39,938byte／SHA256 `502f63404a629899571446e991d890dec93b29ee2decf66aacf7a5f15d18c73a`。全8本文・旧policy比較・24保存・独立読取・今回承認と消費を、既存[Cocolon_CMEE_AR04_FocalEvaluation_Register_20261111.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-e8e181daa3ac8191bd54b81d3ca7257f_2f7470f963808191aaebf050935e72de&account_id=personal)へ差分保存する。既存repository本体・依存・重みの重複保存はしない。
+
+### 次の作業と未完了
+
+次は一般文章の自然さ・反復・引用／理由等の残差を、元教材・保存済み実本文と既存source／生成条件から切り分ける。今回の8実応答・24保存・103.914秒復元は完了し、この12HTTPと過去の完了済みrunを再実行しない。今回の一回承認は消費済み。新fit／GPU比較を自動選定せず、通常モデル採用／selector有効化／Render／live DB／RN／buildは自動実行しない。 本人前置形の実raw、引用／理由一般・修飾の読取、広い文章、新f6daeの旧53全生成回帰、同版画像／通常統合／本人端末、既存無引用3失敗とAR-01／他ARを残す。今回の前提先行rawを理由に同じ8入力へSYSTEM・labelを追加して周回しない。
