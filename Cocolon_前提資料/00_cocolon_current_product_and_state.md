@@ -1,4 +1,4 @@
-> **11/11・AR-04最新：** 具体承認後、保存f6dae・稼働用Pythonで新3＋保持2を一回・学習0の実4B比較。同じ実5rawの採用は旧48の2→現5fの5、評価文体の新3だけ0→3回復。保持2の全request／raw／responseは前回と完全一致。source意味／plan／prepared／messages不変、15保存・非生成再読成功。9HTTP・96.967秒で元提供へ復元、args／全env／cwd・通常／Analysis前後全response一致、独立health200。API5f3a8d5aのPiece／Analysis両CI成功も確認。今回はsource／test変更・新CI実行0。f6dae研究候補・通常selector OFF、本番未反映。 [実4B評価文体・保存と復元](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scoped-evaluation-register-actual-20261111)。
+> **11/11・AR-04最新：** APIeb9cdacdで、既資格の本人文章について、既存の本人前置語順と敬体／常体の差を同じmodel専用比較へ接続。固定CPU新3は0→3採用、3plan計9保存・非生成再読。原7項目／source意味／plan／prepared／messagesとnative全結果は前後一致、前回実4B5件も全結果を維持。追加145検査は全成功、関連39fileは重複除外6124件中6121成功・以前と同じ3失敗。新GPU生成・学習0。f6dae研究候補・通常selector OFF・本番未反映。 [本人前置の文体比較・範囲と再開点](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-canonical-fronted-register-20261111)。
 
 > **11/10・AR-04最新：** 引用内stopを持つ新4件＋保持GENERAL07の現builder送信messagesを固定し、13,140byte・2memberの無学習比較packetを準備。構文compile／CRC／member照合は成功、実モデル生成・送信・提供停止0。非環境の稼働確認はhealth200。起動環境全体の読取りは認証情報を含み得るとして自動承認審査に拒否され、未実行。新packet送信と、完全復元に必要な環境内再利用の具体承認待ち。API5816f2d0／f6dae研究候補・通常selector OFF・本番未反映を維持。 [具体packet・確認範囲・再開点](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quote-stop-inference-prepared-20261110)。
 
@@ -565,3 +565,10 @@ API5f3a8d5aで、既資格の理由／条件／譲歩付き本人評価の文体
 次は本人前置canonical側の文体差を、保存済み本文と既存source／scope／比較条件から切り分け、原順での今回回復を退行させず進める。評価の元focal語順、引用／理由一般、広い文章、新f6daeの旧53全生成回帰、同版画像／通常統合／本人端末、既存無引用3失敗と他ARは未完。今回の新3実4B・保持2照合・15保存・96.967秒復元は完了とし、このrunnerを再実行しない。今回の一回承認は消費済み。新しいfit／GPU比較／通常採用／selector有効化／Render／live DB／RN／buildは自動実行しない。
 
 詳細：[実本文・保存・限界](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scoped-evaluation-register-actual-20261111)。
+
+
+## 11/11 AR-04 — 本人前置語順の文体比較を既存S7へ接続
+
+APIeb9cdacdで、既資格の本人文章について、既存の本人前置語順と敬体／常体の差を同じmodel専用比較へ接続。固定CPU新3は0→3採用、3plan計9保存・非生成再読。原7項目／source意味／plan／prepared／messagesとnative全結果は前後一致、前回実4B5件も全結果を維持。追加145検査は全成功、関連39fileは重複除外6124件中6121成功・以前と同じ3失敗。新GPU生成・学習0。f6dae研究候補・通常selector OFF・本番未反映。
+
+本人前置＋文体差の比較修復・固定CPU3件と9保存は完了。次は同じ条件の新規実4B本文での確認と、元focal語順・引用／理由一般などの残差を既存の比較と保存経路で進める。今回、新たなGPU packetの送信・起動・提供停止・起動環境読取・学習・通常採用は行っていない。以前の一回実行は完了済みで再実行しない。広い文章、新f6daeによる旧53全生成回帰、同版画像／通常統合／本人端末、既存3失敗、AR-01と他ARは未完。 [同一材料・保存・限界](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-canonical-fronted-register-20261111)。

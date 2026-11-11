@@ -1416,3 +1416,45 @@ Mashの今回の明示承認に基づき、既存Pod f1lle4xwq3wjlnへ13,983byte
 実原本ZIP34,393byte／SHA256 `dc483520e8dc53c2422943d9295d692b3d2acd992747bd525ee6656c0d933962`、result SHA256 `a508a250feb67b93df846007eee675df57c788f93c32b5b07abfca0a5b8203af`。独立health・launcher・launch記録を含むcollection36,652byte／SHA256 `476b8f0ad183ad0b88123364669c07a2988f3e4c692c3e677f4f5cc477a3a066`。原本・全5本文・旧policy比較・15保存・独立読取・再開点は既存ファイルを差分更新する：[原本と再開点](https://chatgpt.com/library?file_id=libfile_fde3_f-902a320c78ac8191a960a142e570a106_2f7470f963808191aaebf050935e72de&account_id=personal)。
 
 次は本人前置canonical側の文体差を、保存済み本文と既存source／scope／比較条件から切り分け、原順での今回回復を退行させず進める。評価の元focal語順、引用／理由一般、広い文章、新f6daeの旧53全生成回帰、同版画像／通常統合／本人端末、既存無引用3失敗と他ARは未完。今回の新3実4B・保持2照合・15保存・96.967秒復元は完了とし、このrunnerを再実行しない。今回の一回承認は消費済み。新しいfit／GPU比較／通常採用／selector有効化／Render／live DB／RN／buildは自動実行しない。
+
+
+<a id="piece-canonical-fronted-register-20261111"></a>
+## 11/11 AR-04 — 本人前置語順の文体比較を既存S7へ接続
+
+2026-11-11 JST。親API5f3a8d5a／資料487b5790から、§9の本人前置canonical側の文体残差を継承。新API[eb9cdacd](https://github.com/MassyuRed/mashos-api/commit/eb9cdacda336b42610ce5ef267ed6106d03aa931)は既存production1・test2の3pathだけを変更した。
+
+### 原因・回収と変更
+
+既存native比較は「私は、前提、述語」を許す一方、model用の敬体／常体比較は原文の「前提、私は述語」から始まる場合だけに届いていた。既資格の同じ本人・前提・述語でも、二つの既存操作を組み合わせると拒否された。
+
+既存`piece_v2_content_policy.py::validate_source_meaning_preservation`のmodel専用失敗分岐内12行で修復。既存の明示本人prefixと前提全文anchorを一致させ、候補の残り全文を既存`same_literal_self_register`へ渡す。一時的な照合viewだけを作り、raw／本文は編集しない。譲歩・照応の前提先行、強調付きliteralの原順、別欄・段落・補足sourceの本人分離を維持する。「氷みたい」は希望へ再分類しない。
+
+### 同じ固定CPU文章の前後
+
+以下は架空の固定CPU候補で、モデル出力や新しい学習成果ではない。
+
+| 原入力 | 同じ比較候補 | 親5f→今回 |
+|---|---|---|
+| 疲れているなら、私は本を読みたいです。 | 私は、疲れているなら、本を読みたい。 | 拒否→採用 |
+| 雨が続いているので、僕は家で過ごしたいです。 | 僕は、雨が続いているので、家で過ごしたい。 | 拒否→採用 |
+| 時間に余裕があるならば、わたしは休みたい。 | わたしは、時間に余裕があるならば、休みたいです。 | 拒否→採用 |
+
+原7項目・source meaning／plan・prepared／送信予定messages・native生成の全結果は3件とも前後一致。旧作者を禁止したmodel候補の受領・比較だけが0→3になる。既存6本人表記・理由／条件3種・literal3述語・敬常双方向108対照、17意味変異、譲歩・強調・段落・欄／補足と引用／照応を既存test内へ追加した。
+
+### 保存・既実4Bと回帰
+
+新3×Free／Plus／Premiumの9件を、既存provider receipt→CMEE／B8→Safety→preview／save→同／新service再読へ通した。本文・recipeと保存版を保持し、原入力／Emlis不変、quota各1、保存後の生成／再review0。固定HTTP provider・合成本人認証・隔離PGlite SQLであり、live Supabase／本人Auth／native画像／実機の試験ではない。
+
+前回実4B5件は原rawを変更せず、全prepared／messages一致を確認して親5fと今回へ再受領し、全結果が一致。前回result SHA256は`a508a250feb67b93df846007eee675df57c788f93c32b5b07abfca0a5b8203af`。これは既露出5件の保持確認で、新生成・未知題材・新4B作文品質の成功ではない。
+
+最終の関連39fileは広範囲6122件＋重複しない最終引用／照応2件＝6124件。6121成功・以前と同一IDの3失敗、追加145件は全成功。広範囲は78.46秒／既存warning1。失敗3件は旧scoped focal2・scoped evaluation1のままで、fixtureを変更して成功にしていない。開始時の補助scriptの相対path誤りと0件選択は失敗事実を記録し、試験成功へ加算しない（初回のraw local logは未保持、会話tool出力とprivate事実記録に残す）。独立担当が24意味改変・引用・照応・simile・別欄とmodel限定性を別途確認し、rootも引用／照応の最終2testを実行した。
+
+API全2588tracked blobの現物を親5fのGitHub treeと照合し、変更前の一致を確認した。local Git commitはそのtreeを示すsynthetic snapshotであり、remote5f commitそのものと偽らない。今回3変更blobはGitHub反映後に全文base64 byte一致、親／changed paths／headを確認。source意味／語彙文法／新型／schema／生成条件／SYSTEM／依存／公開contract／DB／RN／通常selectorは変更0。STRUCTURE_MAP_DELTA_NONE（既存model本文比較内の組合せ修復）。
+
+既存CIはAPIeb9cdacd・attempt1でPiece run42936880945／Analysis run42936880940が実行中。新しいworkflow／dispatch／rerunは0、終端成功は未確認。新GPU生成・学習・起動環境読取・提供停止・Render／live DB／RN／buildは0。通常不採用・正式商品品質credit0・AR-04未完了を維持する。
+
+private原本は`Cocolon_CMEE_AR04_CanonicalFronted_Register_20261111.zip`。比較script・前後結果・保存9・検査logと再開情報を保全し、repository本体・依存・既存重みは重複保存しない。
+
+### 再開先
+
+本人前置＋文体差の比較修復・固定CPU3件と9保存は完了。次は同じ条件の新規実4B本文での確認と、元focal語順・引用／理由一般などの残差を既存の比較と保存経路で進める。今回、新たなGPU packetの送信・起動・提供停止・起動環境読取・学習・通常採用は行っていない。以前の一回実行は完了済みで再実行しない。広い文章、新f6daeによる旧53全生成回帰、同版画像／通常統合／本人端末、既存3失敗、AR-01と他ARは未完。
