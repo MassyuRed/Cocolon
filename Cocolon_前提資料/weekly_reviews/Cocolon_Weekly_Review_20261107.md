@@ -1,6 +1,6 @@
 # 第10回 Cocolon週末報告会 — 2026-11-07（終了）
 
-> **11/11・AR-04最新：** API400912d8の新6＋保持2を保存f6daeで承認済み一回実行。Piece8／12HTTP、追加学習・retry0、復元込み106.495秒。元args／全環境／cwdと既存source・adapter不変、通常／Analysis前後の全response一致、独立health200／PID一致。新6は5採用・1拒否、保持2は採用かつ前回全response一致。採用計7×3plan21保存・非生成再読、不採用1×3plan3保存前拒否。残る1は外側の「重なっている」→「重なった」の時制・相の変異。実raw／期待値の修補0、通常selector OFF・AR-04未完。 [実8・復元・採否と保存](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scoped-finite-action-actual-20261111)。
+> **11/11・AR-04最新：** API74dff9a7で既存scoped_action_instructionだけを修正。source_scope.prefix_literalを同じsource・欄の対応動作直前で逐字保持し、外側の継続状態を内側の完了過去へ合わせないと明示。S7・source読取／資格／投影・SYSTEM・原7項目／preparedは不変。実失敗raw1例を既存変異testへ追加し関連242成功。保存済み67行／65固有要求はsource／plan／prepared／旧raw採否／本文不変、指示変更6行だけ・61行messages一致。前回actual5/6＋保持2、21保存／3拒否・106.495秒復元を完了として継承。新指示の実4B品質は未測定、今回GPU／SQL0。失敗1＋同系5＋引用保持2の約18KB比較を準備、未送信／未実行・具体承認待ち。selector OFF・AR-04未完。 API74dff9a7のPiece CI42963237980はattempt1・success。同headで今回起動を確認した対象はPiece。Analysis CI400912d8のsuccessは過去完了として継承し、74dff9a7の実行結果へ読み替えない。追加dispatch／rerun0。 [外側前提の指示修正と次の実比較](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scope-prefix-instruction-20261111)。
 
 記録日：2026年11月7日（日本時間）  
 対象週：**2026年11月7日〜11月14日**  
@@ -2921,7 +2921,7 @@ STRUCTURE_MAP_DELTA_PRESENT：既存source資格・scope／model比較・欄別�
 
 
 <a id="piece-scoped-finite-action-actual-20261111"></a>
-## 11/11 AR-04 — 完了動作の実8・復元と残る前提変異
+## 11/11 AR-04 — 完了動作の実8・復元と残る前提変異（指示修正前の実測記録）
 
 API400912d8の新6＋保持2を保存f6daeで承認済み一回実行。Piece8／12HTTP、追加学習・retry0、復元込み106.495秒。元args／全環境／cwdと既存source・adapter不変、通常／Analysis前後の全response一致、独立health200／PID一致。新6は5採用・1拒否、保持2は採用かつ前回全response一致。採用計7×3plan21保存・非生成再読、不採用1×3plan3保存前拒否。残る1は外側の「重なっている」→「重なった」の時制・相の変異。実raw／期待値の修補0、通常selector OFF・AR-04未完。
 
@@ -2930,3 +2930,17 @@ API400912d8の新6＋保持2を保存f6daeで承認済み一回実行。Piece8�
 次は、ACTION-REASON-CONSULTで外側の継続状態が過去事象へ変わった実rawを起点に、既存source_scope生成条件が前提全量の保持を4Bへ伝える接続を点検し、既存ownerの因果箇所だけを修正する。source全文や期待値を出力へ寄せず、S7の不採用を緩めず、新しい作者・別経路・Gateを増やさない。今回の17,929byte送信・全環境同Pod一時読取／復元再利用・一回承認は完了して消費済み。自動GPU再試行／追加学習／新weights／通常採用／selector有効化／Render／live DB／RN／build／配布0。次のGPU比較は未準備・未承認で、自動反復しない。 新familyの全6成立、広い文章編集品質、本人前置形、長文、同版画像／通常統合／本人端末、既存無引用3失敗、AR-01／他ARは未完。
 
 NO_STRUCTURE_MAP_DELTA：今回の実行・読取・保存でsource owner／公開型／route／DB／作者／controllerの変更なし。API400912d8の既存ファイル地図と責務境界を継承し、実測現在地・残件だけを更新。限定TECHNICAL_CREDIT、human acceptance追加0。 [実8の詳細と残る前提変異](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scoped-finite-action-actual-20261111)。
+
+
+<a id="piece-scope-prefix-instruction-20261111"></a>
+## 11/11 AR-04 — 外側前提と内側過去を分ける生成指示
+
+API74dff9a7で既存scoped_action_instructionだけを修正。source_scope.prefix_literalを同じsource・欄の対応動作直前で逐字保持し、外側の継続状態を内側の完了過去へ合わせないと明示。S7・source読取／資格／投影・SYSTEM・原7項目／preparedは不変。実失敗raw1例を既存変異testへ追加し関連242成功。保存済み67行／65固有要求はsource／plan／prepared／旧raw採否／本文不変、指示変更6行だけ・61行messages一致。前回actual5/6＋保持2、21保存／3拒否・106.495秒復元を完了として継承。新指示の実4B品質は未測定、今回GPU／SQL0。失敗1＋同系5＋引用保持2の約18KB比較を準備、未送信／未実行・具体承認待ち。selector OFF・AR-04未完。
+
+API74dff9a7のPiece CI42963237980はattempt1・success。同headで今回起動を確認した対象はPiece。Analysis CI400912d8のsuccessは過去完了として継承し、74dff9a7の実行結果へ読み替えない。追加dispatch／rerun0。
+
+次は、同じ入力の失敗1例＋同系保持5例＋引用保持2例を、生成指示だけ修正したAPI74dff9a7のmessagesで、保存f6dae・既存稼働用Pythonへ一回通す。新しい架空入力0、原7項目／prepared／SYSTEM／生成設定は同一、引用2の全messagesも同一。合計18,068byte（packet15,631＋launcher2,437）、最大8候補＋通常／Analysis前後4の12HTTP、Piece1load、追加学習／新weights／retry0。復元枠込み600秒／予約120秒。送信と、認証情報を含み得る全起動環境の同Pod内一時読取・復元再利用はこの新一回の具体承認後に限る。PID65745は前回復元時の履歴でfresh確認値ではなく、元identity不一致なら停止前に中断。前回の17,929byte・12HTTP・106.495秒の一回承認は完了・消費済みで再利用しない。通常採用／selector有効化／Render／live DB／RN／build／配布の自動実行0。
+
+外側前提の時制・継続相の実改善、全6成立、広い文章編集品質、本人前置形・長文、同版画像／通常統合／本人端末、既存無引用3失敗、AR-01／他ARは未完。
+
+NO_STRUCTURE_MAP_DELTA：既存build_piece_model_messagesの指示文だけと、既存変異test1例の追加。source owner／scope投影／S7／公開型／route／DB／作者／controllerの責務・ファイル地図は継承。限定TECHNICAL_CREDIT、商品品質delta未測定・human acceptance追加0。 [原因・変更範囲と次の一回](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scope-prefix-instruction-20261111)。
