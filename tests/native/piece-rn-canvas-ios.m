@@ -701,6 +701,9 @@ static NSArray *PieceComponentUnion(NSDictionary *parts) {
 @property(nonatomic, strong) NSError *reportPersistenceError;
 @property(nonatomic, copy) dispatch_block_t completed;
 @property(nonatomic, copy) NSString *reportFilename;
+@property(nonatomic, weak) UIView *transitionOldBitmapHost;
+@property(nonatomic, copy) NSNumber *transitionOldBitmapTag;
+@property(nonatomic, copy) NSString *transitionOldBitmapToken;
 @end
 @implementation PieceCanvasTest
 RCT_EXPORT_MODULE();
@@ -757,6 +760,28 @@ RCT_EXPORT_METHOD(record:(NSDictionary *)report) {
 - (void)collectText:(UIView *)view into:(NSMutableArray *)texts {
   if ([view isKindOfClass:RCTTextView.class]) [texts addObject:view];
   for (UIView *child in view.subviews) [self collectText:child into:texts];
+}
+// Test-only weak observation: never retain a native host or change its paint.
+RCT_EXPORT_METHOD(observeTransitionBitmap:(nonnull NSNumber *)tag token:(NSString *)token stage:(NSString *)stage resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+  [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *manager,NSDictionary<NSNumber *,UIView *> *registry){
+    UIView *host=registry[tag];
+    BOOL current=[host isKindOfClass:NSClassFromString(@"PieceBitmapCanvasView")]&&host.window&&
+      [host bitmapImage]&&host.layer.contents==[host bitmapImage]&&[host bitmapConfigurationCurrent]&&
+      [[host bitmapToken]isEqual:token]&&[[host cocolonPieceCaptureIdentity]isEqual:token];
+    if(!current){reject(@"TEST_TRANSITION_BITMAP",@"Current bitmap unavailable",nil);return;}
+    if([stage isEqual:@"A"]){
+      self.transitionOldBitmapHost=host;self.transitionOldBitmapTag=tag;self.transitionOldBitmapToken=token;
+      resolve(@{@"observed_A":@YES,@"image_present":@YES,@"native_identity_current":@YES});return;
+    }
+    if(![stage isEqual:@"B"]||!self.transitionOldBitmapTag||!self.transitionOldBitmapToken){reject(@"TEST_TRANSITION_BITMAP",@"Missing old observation",nil);return;}
+    UIView *old=self.transitionOldBitmapHost;
+    BOOL cleared=!old||(![old bitmapImage]&&!old.layer.contents&&![old bitmapToken]&&![old cocolonPieceCaptureIdentity]);
+    NSDictionary *result=@{@"observed_A":@YES,@"old_host_released":@(!old),@"old_image_cleared":@(cleared),
+      @"old_host_detached":@(!old||!old.window),@"old_identity_rejected":@(!old||![[old cocolonPieceCaptureIdentity]isEqual:self.transitionOldBitmapToken]),
+      @"new_native_identity_current":@(current),@"new_host_differs":@(host!=old&&![tag isEqual:self.transitionOldBitmapTag])};
+    self.transitionOldBitmapHost=nil;self.transitionOldBitmapTag=nil;self.transitionOldBitmapToken=nil;
+    resolve(result);
+  }];
 }
 RCT_EXPORT_METHOD(cropBitmapHost:(nonnull NSNumber *)tag token:(NSString *)token resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
   [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *manager,NSDictionary<NSNumber *,UIView *> *registry){
@@ -1311,6 +1336,67 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
         NSString *previewPNG=[preview[@"png"]isKindOfClass:NSString.class]?preview[@"png"]:nil,*otherPNG=[other[@"png"]isKindOfClass:NSString.class]?other[@"png"]:nil;
         if(previewPNG&&otherPNG){NSData *a=[NSData dataWithContentsOfFile:[PieceEvidenceDirectory()stringByAppendingPathComponent:previewPNG]],*b=[NSData dataWithContentsOfFile:[PieceEvidenceDirectory()stringByAppendingPathComponent:otherPNG]];XCTAssertEqualObjects(a,b);}
       }
+    }
+  }@finally{[bridge invalidate];}
+}
+
+- (void)testRecordedVisualTransitionParentAndRetainedCardWithRealReactNative {
+  self.resultModule=[PieceCanvasTest new];self.resultModule.reports=[NSMutableArray new];self.resultModule.reportFilename=@"visual-transition-results.json";
+  XCTestExpectation *done=[self expectationWithDescription:@"Recorded007 waiting parent and retained Card transitions"];
+  self.resultModule.completed=^{[done fulfill];};RCTBridge *bridge=[[RCTBridge alloc]initWithDelegate:self launchOptions:nil];
+  @try {
+    RCTRootView *root=[[RCTRootView alloc]initWithBridge:bridge moduleName:@"PieceCanvasCases" initialProperties:@{@"pieceGroup":@"visualTransition"}];
+    UIWindow *window=[[[UIApplication sharedApplication]delegate]window];window.rootViewController.view=root;[window makeKeyAndVisible];
+    [self waitForExpectations:@[done] timeout:90];XCTAssertNil(self.resultModule.reportPersistenceError);
+    NSArray *names=@[@"visual_transition_parent_loading_remount_A",@"visual_transition_parent_loading_remount_B",
+      @"visual_transition_retained_card_regression_A",@"visual_transition_retained_card_regression_B"];
+    XCTAssertEqual(self.resultModule.reports.count,4);XCTAssertEqualObjects([self.resultModule.reports valueForKey:@"name"],names);
+    for(NSDictionary *report in self.resultModule.reports){
+      NSDictionary *t=[report[@"transition"]isKindOfClass:NSDictionary.class]?report[@"transition"]:nil;
+      NSDictionary *artifact=[report[@"recorded_artifact"]isKindOfClass:NSDictionary.class]?report[@"recorded_artifact"]:nil;
+      NSDictionary *bitmap=[report[@"bitmap_canvas"]isKindOfClass:NSDictionary.class]?report[@"bitmap_canvas"]:nil;
+      NSArray *blocks=[report[@"blocks"]isKindOfClass:NSArray.class]?report[@"blocks"]:nil;
+      BOOL second=[t[@"stage"]isEqual:@"B"],parent=[t[@"mode"]isEqual:@"parent_loading_remount"];
+      XCTAssertNotNil(t);XCTAssertNotNil(artifact);XCTAssertEqual(artifact.count,8u);XCTAssertEqual(blocks.count,3u);
+      XCTAssertEqualObjects(report[@"source_case_id"],@"B53-007");XCTAssertEqualObjects(report[@"renderer_version"],@"piece.rn_bitmap_renderer.ios.v2");
+      XCTAssertEqualObjects(report[@"candidate_profile"],@"piece.rn_bitmap_preview.prototype.v1");
+      XCTAssertEqualObjects(artifact[@"renderer_version"],@"piece.rn_bitmap_renderer.ios.v2");
+      XCTAssertEqualObjects(artifact[@"visual_recipe"][@"theme"][@"theme_id"],second?@"quiet_night":@"soft_paper");
+      XCTAssertEqualObjects(t[@"preview_revision"],second?@2:@1);XCTAssertEqualObjects(t[@"row_version"],second?@2:@1);
+      XCTAssertLessThan([report[@"elapsed_ms"]doubleValue],8000,@"%@",report);XCTAssertEqualObjects(t[@"native_clock_span_ms"],@8000);
+      XCTAssertEqualObjects(report[@"phase"],@"native_checked",@"%@",report);XCTAssertEqualObjects(report[@"body_preserved"],@YES);
+      XCTAssertEqualObjects(blocks,artifact[@"content_payload"][@"body_blocks"]);XCTAssertEqualObjects(artifact[@"piece_text"],[blocks componentsJoinedByString:@"\n\n"]);
+      XCTAssertEqualObjects(t[@"capture_target_null"],@YES);XCTAssertNil(report[@"export_capture_uri"]);
+      XCTAssertEqualObjects(report[@"state_can_save"],@NO);XCTAssertEqualObjects(report[@"state_can_export"],@NO);
+      XCTAssertEqualObjects(report[@"native_canvas_valid"],@YES);XCTAssertEqualObjects(report[@"bitmap_all_cells_equal"],@YES);XCTAssertEqualObjects(report[@"capture_error"],@NO);
+      XCTAssertEqualObjects(bitmap[@"version"],@"piece.native_bitmap_canvas.v1");XCTAssertEqualObjects(bitmap[@"checked"],@YES);
+      NSMutableArray *texts=[report[@"rows"]mutableCopy];if([report[@"branding"]boolValue])[texts addObject:@"Emlis"];XCTAssertEqualObjects(report[@"native_texts"],texts);
+      XCTAssertEqualObjects(t[@"fit_current"],@YES);XCTAssertEqualObjects(report[@"save_fit_current"],@YES);
+      if(second){
+        XCTAssertEqualObjects(t[@"same_card_instance"],parent?@NO:@YES);
+        for(NSString *key in @[@"binding_changed",@"generation_changed",@"bitmap_token_changed",@"new_fit_handle",@"old_fit_revoked",@"new_fit_rejects_A",@"old_deadline_not_extended"])XCTAssertEqualObjects(t[key],@YES,@"%@",key);
+        for(NSString *key in @[@"observed_A",@"old_image_cleared",@"old_host_detached",@"old_identity_rejected",@"new_native_identity_current",@"new_host_differs"])XCTAssertEqualObjects(t[@"native_bitmap"][key],@YES,@"%@",key);
+        NSDictionary *transport=t[@"transport"];XCTAssertEqualObjects(transport[@"scope_closed"],@YES);
+        if(parent){
+          XCTAssertEqualObjects(t[@"loading"][@"reader_phase"],@"loading");
+          for(NSString *key in @[@"preview_absent",@"card_absent",@"old_card_unmounted",@"old_fit_revoked",@"unmount_observed"])XCTAssertEqualObjects(t[@"loading"][key],@YES,@"%@",key);
+          XCTAssertEqualObjects(transport[@"session_calls"],@4);XCTAssertEqualObjects(transport[@"session_owners_match"],@YES);XCTAssertEqualObjects(transport[@"patch_pending"],@NO);
+          NSArray *api=transport[@"api"];XCTAssertEqual(api.count,2u);
+          XCTAssertEqualObjects([api valueForKey:@"method"],(@[@"POST",@"PATCH"]));
+        }else{
+          XCTAssertEqualObjects(t[@"controlled_old_callback_injected"],@YES);XCTAssertEqualObjects(t[@"controlled_old_callback_ignored"],@YES);
+          XCTAssertEqualObjects(transport[@"session_calls"],@0);XCTAssertEqual([transport[@"api"]count],0u);XCTAssertEqualObjects(transport[@"not_installed"],@YES);
+        }
+      }else{XCTAssertEqualObjects(t[@"native_bitmap"][@"image_present"],@YES);XCTAssertEqualObjects(t[@"native_bitmap"][@"native_identity_current"],@YES);}
+      for(NSString *key in @[@"png",@"natural_reference_png"]){id filename=report[key];XCTAssertTrue([filename isKindOfClass:NSString.class]);
+        if([filename isKindOfClass:NSString.class])XCTAssertNotNil([UIImage imageWithContentsOfFile:[PieceEvidenceDirectory()stringByAppendingPathComponent:filename]]);}
+    }
+    for(NSUInteger i=0;i<4&&i+1<self.resultModule.reports.count;i+=2){NSDictionary *a=self.resultModule.reports[i],*b=self.resultModule.reports[i+1];
+      NSDictionary *aa=[a[@"recorded_artifact"]isKindOfClass:NSDictionary.class]?a[@"recorded_artifact"]:nil,*ba=[b[@"recorded_artifact"]isKindOfClass:NSDictionary.class]?b[@"recorded_artifact"]:nil;
+      for(NSString *key in @[@"piece_text",@"piece_text_hash",@"content_payload",@"content_payload_hash",@"renderer_version"])XCTAssertEqualObjects(aa[key],ba[key]);
+      XCTAssertNotEqualObjects(aa[@"visual_recipe_hash"],ba[@"visual_recipe_hash"]);XCTAssertNotEqualObjects(a[@"colors"],b[@"colors"]);
+      NSString *ap=[a[@"png"]isKindOfClass:NSString.class]?a[@"png"]:nil,*bp=[b[@"png"]isKindOfClass:NSString.class]?b[@"png"]:nil;
+      if(ap&&bp)XCTAssertNotEqualObjects([NSData dataWithContentsOfFile:[PieceEvidenceDirectory()stringByAppendingPathComponent:ap]],[NSData dataWithContentsOfFile:[PieceEvidenceDirectory()stringByAppendingPathComponent:bp]]);
     }
   }@finally{[bridge invalidate];}
 }

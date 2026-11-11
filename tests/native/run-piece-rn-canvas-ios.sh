@@ -217,9 +217,57 @@ PIECE_RN_CANVAS_PROFILE=output-grid-v4 PIECE_RN_BITMAP_GROUP=1 node tests/native
 PIECE_RN_CANVAS_PROFILE=output-grid-v4 PIECE_RN_ADMITTED_GROUP=1 node tests/native/piece-rn-canvas-fixtures.cjs > tests/native/piece-rn-admitted-fixtures.json
 PIECE_RN_CANVAS_PROFILE=output-grid-v4 PIECE_RN_EXPORT_GROUP=1 node tests/native/piece-rn-canvas-fixtures.cjs > tests/native/piece-rn-export-fixtures.json
 PIECE_RN_CANVAS_PROFILE=output-grid-v4 PIECE_RN_MODEL73_GROUP=1 node tests/native/piece-rn-canvas-fixtures.cjs > tests/native/piece-rn-model73-fixtures.json
+PIECE_RN_CANVAS_PROFILE=output-grid-v4 PIECE_RN_VISUAL_TRANSITION_GROUP=1 node tests/native/piece-rn-canvas-fixtures.cjs > tests/native/piece-rn-visual-transition-fixtures.json
 cat > tests/native/piece-rn-no-transport.js <<'JS'
-export const apiFetch = () => { throw new Error('TRANSPORT_FORBIDDEN_IN_RENDER_TEST'); };
-export const getAccessToken = () => { throw new Error('AUTH_FORBIDDEN_IN_RENDER_TEST'); };
+// Closed test-only transport for the one real-controller visual scenario.
+// No fetch/Auth implementation is imported. All other groups retain refusal.
+let visualScope = null;
+const copy = value => JSON.parse(JSON.stringify(value));
+const canonical = value => Array.isArray(value) ? value.map(canonical) : value && typeof value === 'object'
+  ? Object.fromEntries(Object.keys(value).sort().map(key => [key, canonical(value[key])])) : value;
+const same = (a, b) => JSON.stringify(canonical(a)) === JSON.stringify(canonical(b));
+const forbidden = () => { throw new Error('TRANSPORT_FORBIDDEN_IN_RENDER_TEST'); };
+export function installPieceVisualTransitionTransport(fixture) {
+  if (visualScope || fixture.mode !== 'parent_loading_remount') forbidden();
+  const scope = { fixture, api: [], sessions: [], pending: null, postSignal: null };
+  visualScope = scope;
+  const snapshot = () => ({ api: scope.api.map(copy), session_calls: scope.sessions.length,
+    session_owners_match: scope.sessions.every(owner => owner === scope.fixture.controller_context.expectedUserId),
+    patch_pending: !!scope.pending });
+  return Object.freeze({ snapshot,
+    releasePatch: () => { if (visualScope !== scope || !scope.pending) forbidden();
+      const resolve = scope.pending; scope.pending = null; resolve({ status: 200, json: async () => copy(scope.fixture.preview_b) }); },
+    close: () => { const result = snapshot(); if (visualScope === scope) visualScope = null;
+      scope.pending = null; scope.fixture = null; scope.postSignal = null; scope.api = []; scope.sessions = []; return result; },
+  });
+}
+export async function getAccessToken(expectedUserId) {
+  const scope = visualScope;
+  if (!scope || expectedUserId !== scope.fixture.controller_context.expectedUserId || scope.sessions.length >= 4)
+    throw new Error('AUTH_FORBIDDEN_IN_RENDER_TEST');
+  scope.sessions.push(expectedUserId);
+  return 'synthetic-native-visual-session';
+}
+export async function apiFetch(path, options = {}) {
+  const scope = visualScope;
+  if (!scope || scope.api.length >= 2) forbidden();
+  const fixture = scope.fixture, context = fixture.controller_context, post = scope.api.length === 0;
+  const selection = fixture.preview_b.visual_recipe;
+  const expectedBody = post ? context.request : { expected_preview_revision: fixture.preview_a.preview_revision,
+    visual_selection: { theme_id: selection.theme.theme_id, aspect_ratio: selection.aspect_ratio, branding_mode: selection.branding.branding_mode } };
+  const headers = { 'X-Piece-Renderer': 'piece.rn_bitmap_renderer.ios.v2', 'X-Piece-Palette': '3',
+    ...(post ? { 'Idempotency-Key': context.idempotencyKey } : { 'Cache-Control': 'no-store' }) };
+  let body; try { body = JSON.parse(options.body); } catch { forbidden(); }
+  const expectedKeys = ['method', 'auth', 'expectedUserId', 'headers', 'body', 'signal', ...(post ? ['timeoutMs'] : [])];
+  if (!same(Object.keys(options).sort(), expectedKeys.sort()) || path !== (post ? '/emotion/piece/preview' : `/emotion/piece/preview/${fixture.preview_a.preview_id}`) ||
+      options.method !== (post ? 'POST' : 'PATCH') || options.auth !== true || options.expectedUserId !== context.expectedUserId ||
+      !same(body, expectedBody) || !same(options.headers, headers) || !options.signal || options.signal.aborted !== false ||
+      (post ? options.timeoutMs !== 250000 || scope.sessions.length !== 1 : options.signal === scope.postSignal || scope.sessions.length !== 3)) forbidden();
+  scope.api.push({ path, method: options.method, body: copy(body), headers: copy(options.headers), owner_matches: true,
+    signal_present: true, signal_aborted: false, timeout_ms: options.timeoutMs ?? null });
+  if (post) { scope.postSignal = options.signal; return { status: 200, json: async () => copy(fixture.preview_a) }; }
+  return new Promise(resolve => { scope.pending = resolve; });
+}
 JS
 cat > metro.piece-canvas.config.js <<'JS'
 const path = require('node:path');

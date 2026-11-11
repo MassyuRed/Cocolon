@@ -203,7 +203,31 @@ for (const recorded of require('../fixtures/piece-ar04-344a-multiblock.json').ca
   );
 }
 module.exports.model73 = model73Cases;
+// One recorded A/B pair, exercised as a real waiting parent flow and as a
+// separate retained-Card regression. No third server revision is invented.
+const transitionRecorded = require('../fixtures/piece-ar04-344a-multiblock.json').cases.find(c => c.source_case_id === 'B53-007');
+const transitionB = JSON.parse(JSON.stringify(model73Cases.find(c => c.name === 'model73_preview_ar04_344a_refined_three_blocks').props.display.preview));
+const transitionA = JSON.parse(JSON.stringify(transitionB));
+for (const key of [...model73CanonicalFields, 'preview_id', 'preview_revision', 'row_version',
+  'eligible_formats', 'visibility_scope']) transitionA[key] = JSON.parse(JSON.stringify(transitionRecorded.preview[key]));
+transitionA.content_status = transitionRecorded.preview.safety_state;
+const transitionCases = ['parent_loading_remount', 'retained_card_regression'].map(mode => ({
+  name: `visual_transition_${mode}`, mode, source_case_id: 'B53-007', evidence_set: 'visual_transition', test_profile: 'bitmap-v1',
+  preview_a: JSON.parse(JSON.stringify(transitionA)), preview_b: JSON.parse(JSON.stringify(transitionB)),
+  controller_context: {
+    enabled: true, saveEnabled: false, expectedUserId: '8765147c-ca5f-4dd2-8062-12a51d9e4bb5',
+    idempotencyKey: 'synthetic-visual-controller-007',
+    request: { source_ref: { source_input_id: 'e6618997-2037-4d1b-9cbe-c43ac07ab287',
+      source_input_version: 'emlis.current_input_bundle.v1',
+      source_input_bundle_commitment: 'sha256:de77ecfc93fdb94034941488349cedb8b3b664db83575912297d60e38201ac23',
+      emlis_observation_stage: 'refined_observation', emlis_observation_result_identity: 'b24f7127-19b9-4477-9f16-ce1535815203',
+      question_need_decision_identity: '4d97c8df-c1e6-4482-b299-af0831f0be00', supplemental_answer_identity: 'c7047e9d-5035-4fd8-b506-5dabb429616a' },
+      requested_format: 'short_essay', visual_selection: { theme_id: 'soft_paper', aspect_ratio: '4:5', branding_mode: 'required_subtle' } },
+  },
+}));
+module.exports.visualTransition = transitionCases;
 if (require.main === module) process.stdout.write(JSON.stringify(process.env.PIECE_RN_ANDROID_BITMAP_GROUP === '1' ? androidBitmapCases
+  : process.env.PIECE_RN_VISUAL_TRANSITION_GROUP === '1' ? transitionCases
   : process.env.PIECE_RN_MODEL73_GROUP === '1' ? model73Cases
   : process.env.PIECE_RN_EXPORT_GROUP === '1' ? exportCases : process.env.PIECE_RN_ADMITTED_GROUP === '1' ? admittedCases
     : process.env.PIECE_RN_BITMAP_GROUP === '1' ? bitmapCases : module.exports, null, 2) + '\n');

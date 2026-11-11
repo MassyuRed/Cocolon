@@ -8,6 +8,11 @@ import bitmapFixtures from './piece-rn-bitmap-fixtures.json';
 import admittedFixtures from './piece-rn-admitted-fixtures.json';
 import exportFixtures from './piece-rn-export-fixtures.json';
 import model73Fixtures from './piece-rn-model73-fixtures.json';
+import transitionFixtures from './piece-rn-visual-transition-fixtures.json';
+import PiecePreviewModal from '../../components/piece/PiecePreviewModal';
+import { createPieceCreateController } from '../../features/piece/PieceCreateController';
+import { readPiecePreviewDisplay } from '../../features/piece/piecePreviewModel';
+import { installPieceVisualTransitionTransport } from '../../lib/apiClient';
 import { captureRef, releaseCapture } from 'react-native-view-shot';
 
 // Test-only timing around the unchanged native bridge call. In particular,
@@ -221,6 +226,10 @@ class CanvasCases extends React.Component {
   componentDidMount() { this.startCase(); }
   componentWillUnmount() { clearTimeout(this.timer); }
   startCase = () => {
+    this.resetCaseClock();
+    this.poll();
+  };
+  resetCaseClock = () => {
     this.started = performance.now(); this.originalStartedAt = Date.now(); this.originalExpiresAt = this.originalStartedAt + 8000;
     this.outputGridDeadline = Object.freeze({ profile: OUTPUT_GRID_PROFILE, startedAt: this.originalStartedAt,
       expiresAt: this.originalExpiresAt, monotonicStartedAt: this.started });
@@ -230,7 +239,6 @@ class CanvasCases extends React.Component {
     activeTrace = this.trace;
     this.finishing = false; this.rawOperation = null; this.rawReport = null;
     this.cropApplied = false; this.cropResult = null; this.cropBeforeFit = false;
-    this.poll();
   };
   poll = () => {
     const fixture = this.caseFixtures[this.state.index];
@@ -504,4 +512,186 @@ class CanvasCases extends React.Component {
       {...fixture.props} onSaveFitChange={this.saveFitChanged} /></View>;
   }
 }
-AppRegistry.registerComponent('PieceCanvasCases', () => CanvasCases);
+// Two finite visual-transition scenarios. The parent mode uses the production
+// controller/reader/Modal; the retained mode is explicitly component coverage.
+class VisualTransitionCases extends CanvasCases {
+  constructor(props) {
+    super(props);
+    this.caseFixtures = transitionFixtures.map(fixture => ({ ...fixture, props: { display: null } }));
+    this.baseFinishCase = this.finishCase;
+    this.baseCaptureAndAdvance = this.captureAndAdvance;
+    this.baseAdvanceCase = this.advanceCase;
+    this.startCase = this.startTransitionCase;
+    this.finishCase = this.finishTransitionFrame;
+    this.captureAndAdvance = this.captureTransitionFrame;
+    this.advanceCase = this.advanceTransitionFrame;
+  }
+  componentWillUnmount() { this.cleanTransition(); super.componentWillUnmount(); }
+  observeCardLifecycles = () => {
+    const owner = this, prototype = PieceVisualCard.prototype;
+    this.lifecycleOriginals = ['componentDidMount', 'componentDidUpdate', 'componentWillUnmount'].map(name => {
+      const original = prototype[name];
+      const wrapper = function (...args) {
+        const result = original.apply(this, args);
+        if (owner.scenario && (name === 'componentDidMount' || owner.instances.includes(this))) {
+          if (name === 'componentDidMount') { owner.instances.push(this); owner.card = this; }
+          if (name === 'componentWillUnmount' && owner.card === this) owner.card = null;
+          if (name !== 'componentDidUpdate') owner.events.push({ event: name, instance: owner.instances.indexOf(this), stage: owner.stage });
+        }
+        return result;
+      };
+      prototype[name] = wrapper;
+      return { name, original, wrapper };
+    });
+  };
+  cleanTransition = () => {
+    this.unsubscribe?.(); this.unsubscribe = null;
+    this.controller?.dispose(); this.controller = null;
+    this.transport?.close(); this.transport = null;
+    for (const { name, original, wrapper } of this.lifecycleOriginals || [])
+      if (PieceVisualCard.prototype[name] === wrapper) PieceVisualCard.prototype[name] = original;
+    this.lifecycleOriginals = null;
+  };
+  startTransitionCase = () => {
+    this.scenario = this.caseFixtures[this.state.index]; this.stage = 'A';
+    this.card = null; this.oldFrame = null; this.instances = []; this.events = [];
+    this.loadingCommitSeen = false;
+    this.loadingObservation = null; this.frameObservation = null; this.transportResult = null;
+    this.observeCardLifecycles(); this.resetCaseClock();
+    if (this.scenario.mode === 'parent_loading_remount') {
+      this.transport = installPieceVisualTransitionTransport(this.scenario);
+      this.controller = createPieceCreateController();
+      this.unsubscribe = this.controller.subscribe(this.readControllerDisplay);
+      this.controller.setContext(this.scenario.controller_context);
+      void this.controller.start();
+    } else {
+      this.scenario.props.display = { phase: 'received', preview: this.scenario.preview_a,
+        hashVerified: true, visualToken: Object.freeze({}) };
+      this.forceUpdate();
+    }
+    this.poll();
+  };
+  readControllerDisplay = () => {
+    if (!this.controller || !this.scenario) return;
+    const display = readPiecePreviewDisplay(this.controller.getView());
+    this.scenario.props.display = display;
+    this.forceUpdate(() => {
+      if (this.stage === 'waiting' && display.phase === 'loading')
+        requestAnimationFrame(() => { this.loadingCommitSeen = true; this.releaseAfterLoadingCommit(); });
+    });
+  };
+  releaseAfterLoadingCommit = () => {
+    if (this.stage !== 'waiting' || !this.transport) return;
+    const display = readPiecePreviewDisplay(this.controller.getView()), old = this.oldFrame;
+    if (display.phase !== 'loading' || performance.now() - this.waitStarted >= 8000) {
+      this.loadingObservation = { ...this.loadingObservation, failed_before_B: true, reader_phase: display.phase, wait_ms: performance.now() - this.waitStarted };
+      this.stage = 'B'; this.resetCaseClock(); this.finishing = true; void this.finishTransitionFrame(); return;
+    }
+    if (!this.loadingCommitSeen || !this.transport.snapshot().patch_pending) { this.timer = setTimeout(this.releaseAfterLoadingCommit, 20); return; }
+    this.loadingObservation = { reader_phase: display.phase, preview_absent: display.preview === null,
+      card_absent: this.card === null, old_card_unmounted: old?.card.active === false,
+      old_fit_revoked: !!old?.fit && !old.fit.isCurrent(old.preview, old.visualToken),
+      unmount_observed: this.events.some(event => event.event === 'componentWillUnmount' && event.instance === 0),
+      wait_ms: performance.now() - this.waitStarted };
+    if (!['preview_absent', 'card_absent', 'old_card_unmounted', 'old_fit_revoked', 'unmount_observed']
+      .every(key => this.loadingObservation[key] === true)) {
+      this.timer = setTimeout(this.releaseAfterLoadingCommit, 20); return;
+    }
+    // Release only after the actual loading Modal commit was observed. This
+    // wait is not a native generation or an extension of A's original clock.
+    this.stage = 'B'; this.resetCaseClock(); this.transport.releasePatch(); this.poll();
+  };
+  transitionVisualChange = (selection, identity, visualToken) => this.controller?.changeVisual(selection, identity, visualToken);
+  observeTransitionBitmap = async (card, snapshot, stage) => {
+    const tag = findNodeHandle(card?.bitmapNode), token = snapshot?.bitmapCanvas?.artifactToken;
+    if (!Number.isInteger(tag) || tag <= 0 || typeof token !== 'string') return { observation_failed: true };
+    try { return await NativeModules.PieceCanvasTest.observeTransitionBitmap(tag, token, stage); }
+    catch { return { observation_failed: true }; }
+  };
+  finishTransitionFrame = async () => {
+    const fixture = this.scenario, card = this.card, snapshot = card?.state.measurement;
+    const display = fixture.props.display, fit = this.saveFitHandle;
+    const observation = { mode: fixture.mode, stage: this.stage,
+      preview_revision: display?.preview?.preview_revision, row_version: display?.preview?.row_version,
+      capture_target_null: card?.getCaptureTarget() === null,
+      fit_current: !!fit && fit.isCurrent(display?.preview, display?.visualToken),
+      native_clock_span_ms: card?.deadline ? card.deadline.expiresAt - card.deadline.startedAt : null,
+      events: this.events.map(event => ({ ...event })) };
+    if (this.stage === 'A') {
+      this.oldFrame = { card, fit, preview: display?.preview, visualToken: display?.visualToken,
+        binding: card?.state.binding, generation: snapshot?.generation, bitmapNode: card?.bitmapNode,
+        bitmapToken: snapshot?.bitmapCanvas?.artifactToken, callback: card?.bitmapRef?.callback,
+        deadline: card?.deadline, deadlineExpiresAt: card?.deadline?.expiresAt };
+      observation.native_bitmap = await this.observeTransitionBitmap(card, snapshot, 'A');
+    } else {
+      const old = this.oldFrame;
+      observation.same_card_instance = card === old?.card;
+      observation.binding_changed = !!card?.state.binding && card.state.binding !== old?.binding;
+      observation.generation_changed = !!snapshot?.generation && snapshot.generation !== old?.generation;
+      observation.bitmap_token_changed = typeof snapshot?.bitmapCanvas?.artifactToken === 'string' &&
+        !!old?.bitmapToken && snapshot.bitmapCanvas.artifactToken !== old.bitmapToken;
+      observation.new_fit_handle = !!fit && fit !== old?.fit;
+      observation.old_fit_revoked = !!old?.fit && !old.fit.isCurrent(old.preview, old.visualToken) && !old.fit.isCurrent(display?.preview, display?.visualToken);
+      observation.new_fit_rejects_A = !!fit && !fit.isCurrent(old?.preview, old?.visualToken);
+      observation.old_deadline_not_extended = !!old?.deadline && old.deadline.expiresAt === old.deadlineExpiresAt && card?.deadline !== old.deadline;
+      observation.loading = this.loadingObservation;
+      if (fixture.mode === 'retained_card_regression') {
+        observation.controlled_old_callback_injected = false;
+        observation.controlled_old_callback_ignored = false;
+      }
+      if (fixture.mode === 'retained_card_regression' && card && fit && old?.fit && typeof old.callback === 'function') {
+        const before = { node: card.bitmapNode, state: card.state.measurement, artifact: card.bitmapArtifact, fit };
+        // Controlled late callback injection, not an independently observed
+        // late native event. It must not revive A or invalidate ready B.
+        old.callback(null); old.callback(old.bitmapNode);
+        observation.controlled_old_callback_injected = true;
+        observation.controlled_old_callback_ignored = card.bitmapNode === before.node && card.state.measurement === before.state &&
+          card.bitmapArtifact === before.artifact && this.saveFitHandle === before.fit && fit.isCurrent(display.preview, display.visualToken) &&
+          !old.fit.isCurrent(old.preview, old.visualToken);
+      }
+      observation.native_bitmap = await this.observeTransitionBitmap(card, snapshot, 'B');
+      this.transportResult = this.transport ? { ...this.transport.close(), scope_closed: true }
+        : { api: [], session_calls: 0, scope_closed: true, not_installed: true };
+      this.transport = null;
+      observation.transport = this.transportResult;
+    }
+    this.frameObservation = observation;
+    await this.baseFinishCase();
+  };
+  captureTransitionFrame = (report, node) => {
+    const preview = this.scenario.props.display?.preview;
+    return this.baseCaptureAndAdvance({ ...report, name: `${this.scenario.name}_${this.stage}`,
+      transition: this.frameObservation, source_case_id: this.scenario.source_case_id,
+      recorded_artifact: preview ? Object.fromEntries(['format_type', 'piece_text', 'piece_text_hash', 'content_payload',
+        'content_payload_hash', 'visual_recipe', 'visual_recipe_hash', 'renderer_version'].map(key => [key, preview[key]])) : null }, node);
+  };
+  advanceTransitionFrame = () => {
+    if (this.stage === 'A') {
+      clearTimeout(this.timer); this.finishing = true;
+      if (this.scenario.mode === 'parent_loading_remount') {
+        this.stage = 'waiting'; this.waitStarted = performance.now();
+        const display = this.scenario.props.display, b = this.scenario.preview_b;
+        void this.transitionVisualChange({ theme_id: b.visual_recipe.theme.theme_id, aspect_ratio: b.visual_recipe.aspect_ratio,
+          branding_mode: b.visual_recipe.branding.branding_mode }, { preview_id: display.preview.preview_id,
+          preview_revision: display.preview.preview_revision, visual_recipe_hash: display.preview.visual_recipe_hash }, display.visualToken);
+        this.timer = setTimeout(this.releaseAfterLoadingCommit, 20);
+      } else {
+        this.stage = 'B'; this.resetCaseClock();
+        this.scenario.props.display = { phase: 'received', preview: this.scenario.preview_b, hashVerified: true, visualToken: Object.freeze({}) };
+        this.forceUpdate(this.poll);
+      }
+      return;
+    }
+    this.cleanTransition(); this.scenario = null; this.baseAdvanceCase();
+  };
+  render() {
+    const fixture = this.caseFixtures[this.state.index];
+    if (this.scenario !== fixture) return <View />;
+    if (fixture.mode === 'parent_loading_remount') return <PiecePreviewModal visible display={fixture.props.display}
+      onVisualChange={this.transitionVisualChange} onSaveFitChange={this.saveFitChanged} />;
+    return <View style={{ width: 360 }}><PieceVisualCard key={fixture.name} display={fixture.props.display}
+      onSaveFitChange={this.saveFitChanged} /></View>;
+  }
+}
+AppRegistry.registerComponent('PieceCanvasCases', () => props => props.pieceGroup === 'visualTransition'
+  ? <VisualTransitionCases {...props} /> : <CanvasCases {...props} />);
