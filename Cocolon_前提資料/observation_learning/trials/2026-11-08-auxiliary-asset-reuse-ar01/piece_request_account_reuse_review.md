@@ -2291,7 +2291,7 @@ STRUCTURE_MAP_DELTA_NONE：製品のowner/route/DTO/DB/作者/controller/native�
 
 
 <a id="piece-344a-native-control-diagnostics-20261111"></a>
-## 11/11 AR-04 — 共通controlとgeometry待ち時間の実診断（source完了・RN実行中）
+## 11/11 AR-04 — 共通controlとgeometry待ち時間の実診断（同runの実診断完了）
 
 ### 前回結果から確定した範囲
 
@@ -2312,7 +2312,7 @@ legacy essay_max420の4font（48/44/40/36）は各1call、各88410範囲／11381
 
 製品.mm／Card／renderer／API／DB／判定／期限は変更0。診断defineなしの元standalone testは全文byteへ戻せ、既存native sourceのpreimage581dfd38と104-marker投影24b7db4aも一致した。shell syntax、geometry wrapperの引数／return／throw／1call／再接続／旧Card対照はlocal成功。既存renderer suite189件は修正前後とも全PASS、FAIL／SKIP0。独立担当が4pathを原本・差分と照合してblocking所見なし。これは実native compile／実行成功の代替ではない。handler_msには小さな観測overheadを含み、診断処理も元deadline内のため、別runの時間差を速度改善の因果へ換算しない。
 
-source [99fba3bf5ffc09d65a27cde65e98100a39871dbe](https://github.com/MassyuRed/Cocolon/commit/99fba3bf5ffc09d65a27cde65e98100a39871dbe)は4pathのみ、GitHub全byte読戻し一致。既存[Piece RN run43021553284](https://github.com/MassyuRed/Cocolon/actions/runs/43021553284)がpushで自動起動した。manual dispatch／rerun0。standaloneは下記結果まで完了。RN画面検証は実行中で、今回geometry traceは未回収である。
+source [99fba3bf5ffc09d65a27cde65e98100a39871dbe](https://github.com/MassyuRed/Cocolon/commit/99fba3bf5ffc09d65a27cde65e98100a39871dbe)は4pathのみ、GitHub全byte読戻し一致。既存[Piece RN run43021553284](https://github.com/MassyuRed/Cocolon/actions/runs/43021553284)がpushで自動起動した。manual dispatch／rerun0。standalone／RN画面検証とも下記終端結果まで完了した。これは診断・回帰確認の完了で、製品修復・AR-04完了ではない。
 
 ### standalone実測結果（同run・今回の完了）
 
@@ -2336,7 +2336,27 @@ V4の19正常controlはすべてstage83／result0／PIECE_NATIVE_MEASUREMENT_UNA
 
 sourceの未観測は今回解消し、旧V4をWholeと同じstage83の比較境界まで切り分けた。占有差の根本修復、旧19fail解消、旧Whole成功、速度改善、商品品質・通常採用は未成立である。
 
-今回の[実行記録](https://chatgpt.com/library?file_id=libfile_fde3_f-ce8714a42dec819186837e3d79ca19d1_2f7470f963808191aaebf050935e72de&account_id=personal)へ、source実log／56call／固定bitmap artifact／local対照を保存した。RN終端回収後は同identityを更新する。正本sourceはGitHub、未採用候補は記録内で明示分離する。
+今回の[実行記録](https://chatgpt.com/library?file_id=libfile_fde3_f-ce8714a42dec819186837e3d79ca19d1_2f7470f963808191aaebf050935e72de&account_id=personal)へ、source実log／56call／固定bitmap artifact／local対照を保存した。RN終端とgeometry traceも同identityへ差分更新した。正本sourceはGitHub、未採用候補は記録内で明示分離する。
+
+### RN画面検証の終端とgeometry実測
+
+同[run43021553284](https://github.com/MassyuRed/Cocolon/actions/runs/43021553284)はcompleted／conclusion failure。RN job130525731707は6methods／1failureで、WholeCanvasだけが失敗した。structured testFailureSummariesを一組だけ比較すると、前回60assertion→今回59assertion、新規0／消失1。消えたのはlegacy essay_max420のelapsed<8000だけで、他59の式／source行／重複数は不変。quiet logだけから5methodの個別PASS行を創作せず、sourceのmethod集合・6/1集計と下記artifact実reportを合わせて確認した。
+
+artifact13855899825は79803050byte、SHA256 0cd9a07da0daa73c57c387dbdfafb839c93ad18473457cd2128e46d4294d670c。CRC／digestを照合し、6JSONgroupと147PNGを回収。旧group件数13／12／29／20、model73 6、transition4を保持し、fixtureの新規追加は0。
+
+| 確認済みgroup | 今回の元8秒内の描画時間 |
+| --- | --- |
+| actual親loading-remount A／B | 1027.967／510.760ms |
+| retained Card回帰 A／B | 427.274／541.953ms |
+| 静的model73 preview／saved／export6 | 338.486〜612.334ms |
+
+計10frameは全native_checked／capture_error0／native_canvas_valid true／bitmap_all_cells_equal1で、各recorded_artifactのcanonical8／3hashとPNG bytes／全RGBAは前回と完全一致。natural referenceの10PNGも前回とbyte一致した。transitionの本文保持とpreview capture常時null等の既存条件を継承し、新しいformal export／save許可へ変換しない。
+
+legacy essay_max420は今回5615.856msで旧native_measurement_unavailableへ戻り、V4 selected19callへ到達。前回のmeasurement_timeout／8157.270msは今回再現しなかった。4font各1call、各88410範囲／11381metrics、行plan・選択metricsは旧runと一致する。今回geometry区間はmeasuring3559.040→geometry5202.922の1643.882ms。planning4＋measuring38の観測callbackがあり、measuringの19indexにlines／box各1回、同期wrapper時間合計258.173ms／最大17.648ms、最初3565.859／最後5146.373msだった。
+
+bitmap stressの別essay_max420は5984.875msでnative_checked、geometry区間1956.398ms、measuring38の同期wrapper合計184.685ms／最大8.861ms。これらはphase別に観測したcallbackで、ticket適格性・実採用の証明ではない。original.measureのsetState updaterは非同期に走り得るため、同期wrapper外にはdeferred JS／React render／native／待機が混在し、差分をnative待ちだけとは断定しない。今回の計測追加・別runnerの5616／5985msを、製品の速度修正や因果的改善へ換算しない。旧V4／Wholeの不成立は継続する。
+
+JSは1434＋291＝1725 PASS、FAIL／CANCEL／SKIP0。Android bridge・exportライブラリ、iOS export Podsの実compileもsuccess。今回はworkflow path変更によって依存guardが実行対象となり、前回の対象外skipをcompile成功へ置換したのではない。Piece RN全体のfailureは維持する。今回source pushによる自動Piece RN1回、manual dispatch／rerun0、製品source変更0。
 
 ### 次の修正候補の限界
 
@@ -2344,6 +2364,6 @@ sourceの未観測は今回解消し、旧V4をWholeと同じstage83の比較境
 
 ### 再開点と未確認
 
-次は同runのRN geometry eventの同期時間を回収する。standalone control／followup別stageとfault到達は今回確認済みとして継承する。normal control不成立をfault検査成功へ変換せず、source旧V4とWholeと現ios.v2の共有範囲を分ける。通常host／Photos／本人端末・正式受入れ／通常採用は未確認。通常selector OFF・AR-04未完を維持する。GPU／学習／SQL／実Auth／外部HTTP／Render設定／署名build／配布0。
+次は正常controlのnatural描画とreference再構成が同等にならない点を、既存V4比較owner内で検証し、必要な修正を判断する。support-mapping候補は明示的な未採用実験として扱い、同等性や元recipe保持を検証せず製品修復へ昇格しない。今回のstandalone stage／fault到達とRN geometry観測は確認済みとして継承し、同じ未観測の説明へ戻さない。normal control不成立をfault検査成功へ変換せず、source旧V4とWholeと現ios.v2の共有範囲を分ける。通常host／Photos／本人端末・正式受入れ／通常採用は未確認。通常selector OFF・AR-04未完を維持する。GPU／学習／SQL／実Auth／外部HTTP／Render設定／署名build／配布0。
 
 STRUCTURE_MAP_DELTA_NONE：既存native test／trace責務内の診断追加で、製品owner／route／DTO／DB／作者／controller／renderer／計測責務のtopologyは不変。新しい管理票・Gate・承認段階は追加しない。

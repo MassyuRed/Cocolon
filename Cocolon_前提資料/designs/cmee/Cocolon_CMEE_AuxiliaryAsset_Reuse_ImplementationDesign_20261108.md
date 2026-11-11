@@ -386,7 +386,7 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 | AR-07 | IF／Saved等の商品固有の残る意味保持責務。既存AN／PC残件 | 仮想・本人選択意向・観測を分離し、成立した経路で出力と保存を確認 | 既存商品の実装条件に従う。無断延期・新発売条件化をしない。未開始 |
 | AR-08 | 実証できた共通能力の通常適用と全体確認。EM-05/06/07等 | 採用版の意味保持・自然さ・権利・中断復帰・保存再読・実際の待ち時間／費用。未採用範囲は理由と残差を保持 | 各単位で通常採用可能。全core一括切替を強制しない。未開始 |
 
-現在は **AR-04の意味保持・単独伝達**を継続する。既存104-marker診断をstandaloneへ再利用し、V4の56call／19正常controlを実測。19controlすべてlogical1占有比較stage83で不成立、allocation／edge faultは別stage63／18へ到達。今回legacy97・native129・v9_46・AR04_4・bitmap44は成功、旧V4は1成功／19失敗。source99fba3bf／PieceRN43021553284のRN画面検証は実行中。通常selector OFF・AR-04未完。 詳細は[今回診断](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-344a-native-control-diagnostics-20261111)。
+現在は **AR-04の意味保持・単独伝達**を継続する。standalone V4の56callを実測し、19正常controlすべてlogical1占有比較stage83で不成立と確定。source旧V4は1成功／19失敗、RNはWholeのみ59assertion失敗（前回のelapsed1消失、新規0）。長文legacy5615.856ms／bitmap5984.875ms、geometry同期時間も回収したが速度改善の因果は未証明。transition4＋静的6は今回も元8秒内・canonical／PNG保持。JS1725成功、source99fba3bf／PieceRN43021553284はfailure。通常selector OFF・AR-04未完。 次は正常controlのnatural描画とreference再構成の同等性を既存V4 owner内で検証する。support-mapping候補は静的のみ・未採用。詳細は[今回診断](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-344a-native-control-diagnostics-20261111)。
 
 既存の品質作業・新教師8件・保存重みの継続点を使う。GPUに現実の接続障害がある場合、取得できた事実、未実行の生成、回収済み原本、次の同一単位を記録し、CPUの合成成功を実モデル改善へ換算しない。接続復旧や既存の別core実装を必要範囲で進め、無関係な補助機構開発へ変えない。
 
@@ -446,7 +446,7 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 ### 11.2 現在の進行欄
 
-**11/11・現在の再開先：** 既存104-marker診断をstandaloneへ再利用し、V4の56call／19正常controlを実測。19controlすべてlogical1占有比較stage83で不成立、allocation／edge faultは別stage63／18へ到達。今回legacy97・native129・v9_46・AR04_4・bitmap44は成功、旧V4は1成功／19失敗。source99fba3bf／PieceRN43021553284のRN画面検証は実行中。通常selector OFF・AR-04未完。 [実診断](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-344a-native-control-diagnostics-20261111)。
+**11/11・現在の再開先：** standalone V4の56callを実測し、19正常controlすべてlogical1占有比較stage83で不成立と確定。source旧V4は1成功／19失敗、RNはWholeのみ59assertion失敗（前回のelapsed1消失、新規0）。長文legacy5615.856ms／bitmap5984.875ms、geometry同期時間も回収したが速度改善の因果は未証明。transition4＋静的6は今回も元8秒内・canonical／PNG保持。JS1725成功、source99fba3bf／PieceRN43021553284はfailure。通常selector OFF・AR-04未完。 [実診断・次の修正範囲](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-344a-native-control-diagnostics-20261111)。
 
 **11/11・36件/72更新時点の履歴：** 承認済み36件/72更新のfresh候補a1dfを一回作成し、残っていた「予定が重なっている」→「重なった」の前提変異1件が回復。既存8＋保持8の実16は全件意味採用、他15rawは旧f6daeとbyte同一。48隔離保存・非生成再読成功。20HTTP・復元込み464.290秒、元args/env/cwd・source/Analysis・旧weights保持、通常/Analysis前後全response一致、独立health200/PID67361一致。fit319.087秒、retry0。新重みは検証用・通常selector OFF。今回16の限定改善であり、旧65全体・実機・一般品質・AR-04完了ではない。 API9b1b7bb8のCPU trainer28成功と既存Piece CI42969704329/job130355058089・attempt1・全39step successは準備時の完了として継承。今回source/test変更0、新CI/dispatch/rerun0。
 
