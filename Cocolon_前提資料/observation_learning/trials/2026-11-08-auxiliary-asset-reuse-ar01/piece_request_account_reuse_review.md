@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/11・AR-04最新：** 旧53照合行を51完全一致要求へ集約し、現f6daeで取得済み10要求を再利用。未取得41＋保持確認2の無学習比較を準備した。全69旧rawの現8329採否／本文と、原source／prepared／messagesは不変。送信候補31,961byte・最大43 Piece／47HTTP、復元枠込み600秒設定。新送信／環境読取／モデル呼出0・具体承認待ち。直近実8応答・24保存・103.914秒復元は完了として継承。通常selector OFF・AR-04未完。 [旧53比較の具体案・未実行範囲](piece_request_account_reuse_review.md#piece-breadth53-inference-prepared-20261111)。
+> **11/11・AR-04最新：** 具体承認後、保存f6daeで未取得41要求＋保持2を一回・学習0で実4B確認。43候補／47HTTP・265.692秒で元提供へ復元、args／全env／cwd・通常／Analysis前後全response一致、独立healthz200／PID一致。既存10を戻した全51要求（旧53照合行）は51採用・3plan計153保存／非生成再読。保持2は前回全応答と同一。原source／prepared／messages・raw不変。全51本文のroot／独立読取で明確な新意味変異は見られず、一人称反復等の文章上の残差は保持。旧53回帰の未取得は0。f6dae研究候補・通常selector OFF・AR-04未完。 [実旧53比較・153保存と次](piece_request_account_reuse_review.md#piece-breadth53-current4b-actual-20261111)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -1576,3 +1576,44 @@ packet29,566byte／2member、SHA256 `2d1a3f253287d8af69e6386963df553f980e3b77936
 本人前置形の実raw、引用／理由一般・修飾の読取、広い文章品質、同版画像／通常統合／本人端末、既存無引用3失敗とAR-01／他ARは未完。今回の商品source／test／workflow変更・新pytest／CI要求0、STRUCTURE_MAP_DELTA_NONE。準備や既存rawの再照合を商品改善へ加点せず、商品品質credit0・正式受入れ追加0。前回実8／24保存／103.914秒復元とAPI8329の両CI成功を継承。
 
 private原入力・全raw・資格／再利用対応・固定packet／launcher・独立レビュー・未実行境界を[Cocolon_CMEE_AR04_Breadth53_Prepared_20261111.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-0d0d803a847c8191ad38c13daaee6a2a_2f7470f963808191aaebf050935e72de&account_id=personal)へ保存。repository本体・依存・重みは重複保存しない。
+
+
+<a id="piece-breadth53-current4b-actual-20261111"></a>
+## 11/11 AR-04 — 旧53照合行の現f6dae実生成回帰・153保存
+
+**具体承認後、保存f6daeで未取得41要求＋保持2を一回・学習0で実4B確認。43候補／47HTTP・265.692秒で元提供へ復元、args／全env／cwd・通常／Analysis前後全response一致、独立healthz200／PID一致。既存10を戻した全51要求（旧53照合行）は51採用・3plan計153保存／非生成再読。保持2は前回全応答と同一。原source／prepared／messages・raw不変。全51本文のroot／独立読取で明確な新意味変異は見られず、一人称反復等の文章上の残差は保持。旧53回帰の未取得は0。f6dae研究候補・通常selector OFF・AR-04未完。**
+
+### 今回の一回実行と元提供復元
+
+Mashの「約32KBを既存Runpodへ送り、認証情報を含み得る起動環境全体を同Pod内で一時読取・復元再利用し、追加学習なし・復元枠込み10分の期限設定で1回実行」への明示承認後、固定packet29,566byte＋launcher2,395byteの合計31,961byteを既存Pod f1lle4xwq3wjlnへ送信。packet SHA256 `2d1a3f253287d8af69e6386963df553f980e3b7793672c491a86b9ea0e25affb`、稼働用Python・新root `/workspace/ar04-breadth53-20261111`で一回起動した。元PID64078を今回fresh照合後、未取得41＋保持2の43候補、通常／Analysisの前後control4を含む47 chat HTTPは全200／stop。追加学習・新weights・model retry0、Piece1load。最大入力と生成予約のcontext検査も停止前に成立。
+
+全工程265.69206524593756秒（復元枠込み600秒設定／復元予約120秒内）で元提供PID64834へ復元。元args／認証情報を含み得る全env／cwd・serving source／各adapter重みとconfig不変、通常／Analysis前後の全request／response bytes一致、独立healthz200・pidfile／復元process一致。起動環境の値は同Pod内の復元再利用だけで、回収物に含めない。600秒を無条件の外部watchdog保証へ読み替えない。
+
+回収側の最初の独立read-checkではrootがhealthを`/health`と誤指定して404、次にresult wrapperをexecution本体と誤読してKeyError。既存runnerの`/healthz`と`result.execution`へ訂正して回収し、モデル・source・runnerの再実行／変更は0。これらは265.692秒の一回生成時間へ足した再生成ではなく、後続の原本回収処理の失敗として別保存。旧Terminalの未完了入力を再利用せず今回用Terminalを使用した。
+
+### 51完全一致要求と旧53行の比較
+
+全41新rawを無修補で再受領し、同一full requestで以前取得済みのf6dae10を戻した。全51要求（normal47／refined4、旧参考53行・重複2行）を元7項目・prepared ID／private JSON・source意味／plan・現builder全messagesのまま照合。保持GENERAL03／FRESH02の2要求は前回の全request／raw／response／format／revision／usageと完全一致。欠測0、原入力／本人補足とresponseの改変0、旧作者fallback禁止。
+
+| 比較結果 | 観測範囲 |
+|---|---|
+| 現f6dae | 51／51採用、旧53行対応でも53採用。旧53のrawも現8329で全採用済みなので、採否改善53件とは呼ばない |
+| 旧c634本文との差 | 6完全一致要求・7参考行で差。GENERAL03／FRESH02／ROLEHELD01／TEMPHELD04／TEMPHELD08は原文に近い焦点語順、FRESH03は同一本人の2回目表記を省略。他45要求は同じ本文 |
+| 今回初めて取得した41内の差 | ROLEHELD01／TEMPHELD08の2要求。上記他4差は再利用10内の既存結果で、今回の新規改善へ数えない |
+| 反復 | 旧GENERAL03／FRESH02の「選ぶ時間を選びたい」は既存f6daeで軽減済み。現在の失敗として再計上しない |
+
+rootが51件、独立担当が26＋25件の原7項目・現raw全文／旧raw、refined4の本人補足を全読。今回範囲に明確な主体・相手・能動／受動の反転、肯否・過去・程度・未決定・留保の欠落、欄融合、原文外の理由・解決・感情追加は見られない。人名から明記された関係語への既存限定抽象化は保持した。本文は字面保持・文体差が中心で、広い編集能力・主観的文章美・正式Product Read／Mashの受入れ合格とはしない。動作列の一人称反復、「場所／荷物の到着を相談」の硬さ、訪問先未記載、受動伝達の形の曖昧さ等を原文由来とモデル追加へ分けて残す。
+
+### 製品と同じ比較入口・保存再読
+
+offline確認の初回は4件後・SQL前にB53-005／GENERAL06で中断。確認scriptがS7 fallback関数だけを全入力へ直接強制した誤りで、productionの`realize_piece_model_artifact`は`validate_piece_model_preservation`の完全finite比較を先に通す。実3eventのsource／visible keyは完全一致、役割・否定・時点の意味変異4は拒否。旧script／log／4件partialをそのまま残し、新private scriptのimport／call2箇所だけを製品と同じ入口へ訂正。製品の比較・許可範囲を緩めたりcheckerを取り除いた修復ではない。訂正後は全51が成立し、商品source／test変更・追加GPU0。
+
+同じ無修補51rawを既存provider receipt→CMEE→model意味比較→Safety→preview／saveへ束縛し、Free／Plus／Premiumの153試行が全保存・同／新serviceの非生成再読。原入力／Emlis不変、quota各1、保存後の取得／生成0、旧作者fallback禁止。ID／owner／現在日時を合成値へ投影する既存の隔離PGlite SQLであり、実Auth／live Supabase／native画像／本人端末の成功ではない。既存無引用3失敗をこの153保存で解消したとはしない。
+
+今回の商品source／test／workflow変更・新pytest／CI要求0。API8329のPiece CI42943673831／Analysis CI42943673837の既存successを継承。STRUCTURE_MAP_DELTA_NONE。旧53実生成の限定TECHNICAL_CREDIT、商品品質credit0・正式受入れ追加0・通常selector OFF・AR-04未完。
+
+result SHA256 `bc8bc6f694aef4b3d362d65d9590ab61e522ebc49484a0e69943666f36682e6f`。実evidence90,676byte／SHA256 `f312291a39ce9e6d01656e78373fd03073b0f072784966f55234322d27569491`、回収collection121,742byte／SHA256 `52111ff384aaa29e403309faf41cedc3eda1a5dfa0d89ebc918ceb6521cbc5a4`。実rawと承認消費・復元証拠は既存[Cocolon_CMEE_AR04_Breadth53_Prepared_20261111.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-0d0d803a847c8191ad38c13daaee6a2a_2f7470f963808191aaebf050935e72de&account_id=personal)へ保存済み、同じartifactへ51比較・153保存・独立本文読取を差分保存する。repository本体・依存・重みは重複保存しない。
+
+### 完了の継承と次
+
+次は今回未被覆の理由／譲歩付き完了動作・引用・長い文章の読取と文章化を、元教材・保存済み実本文と既存のfinite動作／source scopeから切り分ける。理由／譲歩付き完了動作は全文KEEPに留まるCPU例があるが、このfamilyの現f6dae実失敗は未確認で、追加学習を選ぶ根拠にはしない。今回の旧53全生成回帰・実43候補・153保存・265.692秒提供復元は完了として継承し、完了runを再実行しない。今回の具体一回承認は消費済み。新GPU／fit／SYSTEM周回・通常採用／selector有効化／Render／live DB／RN／buildを自動実行しない。 本人前置形そのものの実raw、理由／引用と完了動作の一般読取、広い編集品質、同版画像／通常統合／本人端末、既存無引用3失敗とAR-01／他ARは未完。

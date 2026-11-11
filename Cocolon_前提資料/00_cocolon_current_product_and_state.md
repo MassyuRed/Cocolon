@@ -1,4 +1,4 @@
-> **11/11・AR-04最新：** 旧53照合行を51完全一致要求へ集約し、現f6daeで取得済み10要求を再利用。未取得41＋保持確認2の無学習比較を準備した。全69旧rawの現8329採否／本文と、原source／prepared／messagesは不変。送信候補31,961byte・最大43 Piece／47HTTP、復元枠込み600秒設定。新送信／環境読取／モデル呼出0・具体承認待ち。直近実8応答・24保存・103.914秒復元は完了として継承。通常selector OFF・AR-04未完。 [旧53比較の具体案・未実行範囲](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-breadth53-inference-prepared-20261111)。
+> **11/11・AR-04最新：** 具体承認後、保存f6daeで未取得41要求＋保持2を一回・学習0で実4B確認。43候補／47HTTP・265.692秒で元提供へ復元、args／全env／cwd・通常／Analysis前後全response一致、独立healthz200／PID一致。既存10を戻した全51要求（旧53照合行）は51採用・3plan計153保存／非生成再読。保持2は前回全応答と同一。原source／prepared／messages・raw不変。全51本文のroot／独立読取で明確な新意味変異は見られず、一人称反復等の文章上の残差は保持。旧53回帰の未取得は0。f6dae研究候補・通常selector OFF・AR-04未完。 [実旧53比較・153保存と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-breadth53-current4b-actual-20261111)。
 
 > **11/10・AR-04最新：** 引用内stopを持つ新4件＋保持GENERAL07の現builder送信messagesを固定し、13,140byte・2memberの無学習比較packetを準備。構文compile／CRC／member照合は成功、実モデル生成・送信・提供停止0。非環境の稼働確認はhealth200。起動環境全体の読取りは認証情報を含み得るとして自動承認審査に拒否され、未実行。新packet送信と、完全復元に必要な環境内再利用の具体承認待ち。API5816f2d0／f6dae研究候補・通常selector OFF・本番未反映を維持。 [具体packet・確認範囲・再開点](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quote-stop-inference-prepared-20261110)。
 
@@ -605,3 +605,13 @@ API8329a828のPiece CI42943673831／job130271199367は全39工程、Analysis CI4
 次は旧53照合行の未取得41要求＋既存f6dae保持確認2を、保存f6dae・既存稼働用Pythonで一回・追加学習0の実4B比較へ通す案。packet／launcher合計31,961byte、候補最大43＋通常／Analysis前後control4＝最大47HTTP、復元枠込み600秒設定／復元予約120秒。既存Podへの新送信と、認証情報を含み得る全起動環境の同Pod内一時読取・復元再利用は、この新しい43要求案の具体承認後に限る。480秒のwork期限で途中結果を保持して復元へ戻るため、全43完了を保証しない。前回の一回承認は消費済みで、完了済み8応答の12HTTPを再実行しない。新fit／通常採用／selector有効化／Render／live DB／RN／buildの自動実行0。
 
 全ファイル地図／商品ownerの追加変更なし（STRUCTURE_MAP_DELTA_NONE）。今回の商品source／test／新CI要求0。準備を広い文章品質・正式受入れへ加点しない。 [原本・重複除去・具体packet・次の評価](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-breadth53-inference-prepared-20261111)。
+
+
+<a id="piece-breadth53-current4b-actual-20261111"></a>
+## 11/11 AR-04 — 旧53実生成回帰・51採用と153保存
+
+具体承認後、保存f6daeで未取得41要求＋保持2を一回・学習0で実4B確認。43候補／47HTTP・265.692秒で元提供へ復元、args／全env／cwd・通常／Analysis前後全response一致、独立healthz200／PID一致。既存10を戻した全51要求（旧53照合行）は51採用・3plan計153保存／非生成再読。保持2は前回全応答と同一。原source／prepared／messages・raw不変。全51本文のroot／独立読取で明確な新意味変異は見られず、一人称反復等の文章上の残差は保持。旧53回帰の未取得は0。f6dae研究候補・通常selector OFF・AR-04未完。
+
+次は今回未被覆の理由／譲歩付き完了動作・引用・長い文章の読取と文章化を、元教材・保存済み実本文と既存のfinite動作／source scopeから切り分ける。理由／譲歩付き完了動作は全文KEEPに留まるCPU例があるが、このfamilyの現f6dae実失敗は未確認で、追加学習を選ぶ根拠にはしない。今回の旧53全生成回帰・実43候補・153保存・265.692秒提供復元は完了として継承し、完了runを再実行しない。今回の具体一回承認は消費済み。新GPU／fit／SYSTEM周回・通常採用／selector有効化／Render／live DB／RN／buildを自動実行しない。 本人前置形そのものの実raw、理由／引用と完了動作の一般読取、広い編集品質、同版画像／通常統合／本人端末、既存無引用3失敗とAR-01／他ARは未完。
+
+全ファイル地図／商品ownerの追加変更なし（STRUCTURE_MAP_DELTA_NONE）。商品source／test／新CI要求0。広い文章品質・正式受入れへの加点なし。 [実原本・意味比較・保存と限界](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-breadth53-current4b-actual-20261111)。
