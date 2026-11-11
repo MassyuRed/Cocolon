@@ -1,6 +1,6 @@
 # 第10回 Cocolon週末報告会 — 2026-11-07（終了）
 
-> **11/11・AR-04最新：** 保存344a二作品のpreview/saved/export計6描画が元8秒内・同版PNG一致、configured録画3件もsource_request/S7/Free保存再読を確認。8760067bのv5割当変更後、max420は6164.722msで通過し旧成功画像と一致。ただし別run比較で速度改善の因果は未証明。既存Piece RN [run43001857335](https://github.com/MassyuRed/Cocolon/actions/runs/43001857335)はoverall failureで、旧V4 19/WholeCanvas失敗は残存。旧73/243再実行0、通常selector OFF・AR-04未完。 [録画3件・v5割当とnative6の現在地](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-344a-configured3-native6-weighted-candidates-20261111)。
+> **11/11・AR-04最新：** 実007の親loading/unmount→B再描画と、別の同Card回帰を実native2mode/4frame・元8秒内で確認。旧fit失効、preview capture常時null、3段落/配色/PNGを保持。source83fcd89b/PieceRN43012230881はrun結論cancelled、RN jobはWholeのみfailure（59/43→60/44、elapsed assertion1増）。source metrics出力0で今回oracle未確認。recorded3/native6等の完了を継承し、通常selector OFF・AR-04未完。 [配色変更のactual親flow・別component回帰と現在地](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-344a-native-visual-transition-20261111)。
 
 記録日：2026年11月7日（日本時間）  
 対象週：**2026年11月7日〜11月14日**  
