@@ -1,6 +1,6 @@
 # 第10回 Cocolon週末報告会 — 2026-11-07（終了）
 
-> **11/12・AR-04最新：** 研究ca7e2502／source8c5eのactual RN probe run43106065561を開始、結果未判定。前回standalone24/24を継承し、既存Whole1methodの元13条件・元期待値/8秒を保持する。追加は同callbackの公開bounds/観測bounds・clip・CTMだけで、描画本体/pinは不変。他5methodとstandalone24は今回未実行。通常.mm581/pin・selector OFF、候補未採用・AR-04未完。次はrun終端・13結果・同call Cq対応・完成PNGを回収して判定する。 [実アプリ経路probeと再開点](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-v4-inverse-clip-actual-rn-20261112)。
+> **11/12・AR-04最新：** 研究ca7e2502／source8c5eのactual RN run43106065561を1回完了、Whole1methodは14失敗記録で未合格（旧59→14、45消失/新identity0）。13条件の本文/行/plan/寸法を保持し、10V4条件＋旧saved1でPNG11を取得。113call中106（local55/placed51）が非整列boundsのCq逆写像/厳密比較を成立、残7は未測定。初回essay6は自然paint観測欠如stage58、quote1は従来4Mi拒否stage15。通常.mm581/pin/selectorOFF・未採用、AR-04未完。次は失敗tagの既存naturalDraw/sharedPaint観測を同callbackへ対応づけ、初回観測が欠ける箇所を切り分ける。 [実アプリ経路の結果と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-v4-inverse-clip-actual-rn-20261112)。
 
 記録日：2026年11月7日（日本時間）  
 対象週：**2026年11月7日〜11月14日**  

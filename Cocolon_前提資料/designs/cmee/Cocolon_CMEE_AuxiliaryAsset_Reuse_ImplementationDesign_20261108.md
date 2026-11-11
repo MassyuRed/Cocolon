@@ -4,7 +4,7 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-12 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR01_UNRESOLVED_AR04_FRACTIONAL24_VERIFIED_ACTUAL_RN_PROBE_RUNNING_UNADOPTED
+status: AR01_UNRESOLVED_AR04_ACTUAL_RN_PROBE_OBSERVED_UNADOPTED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
@@ -12,7 +12,7 @@ current_next: AR-04
 runtime_effect_of_this_document: 0
 ---
 
-> **11/12・AR-04最新：** 研究ca7e2502／source8c5eのactual RN probe run43106065561を開始、結果未判定。前回standalone24/24を継承し、既存Whole1methodの元13条件・元期待値/8秒を保持する。追加は同callbackの公開bounds/観測bounds・clip・CTMだけで、描画本体/pinは不変。他5methodとstandalone24は今回未実行。通常.mm581/pin・selector OFF、候補未採用・AR-04未完。次はrun終端・13結果・同call Cq対応・完成PNGを回収して判定する。 [実アプリ経路probeと再開点](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-v4-inverse-clip-actual-rn-20261112)。
+> **11/12・AR-04最新：** 研究ca7e2502／source8c5eのactual RN run43106065561を1回完了、Whole1methodは14失敗記録で未合格（旧59→14、45消失/新identity0）。13条件の本文/行/plan/寸法を保持し、10V4条件＋旧saved1でPNG11を取得。113call中106（local55/placed51）が非整列boundsのCq逆写像/厳密比較を成立、残7は未測定。初回essay6は自然paint観測欠如stage58、quote1は従来4Mi拒否stage15。通常.mm581/pin/selectorOFF・未採用、AR-04未完。次は失敗tagの既存naturalDraw/sharedPaint観測を同callbackへ対応づけ、初回観測が欠ける箇所を切り分ける。 [実アプリ経路の結果と次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-v4-inverse-clip-actual-rn-20261112)。
 
 > **11/10・AR-04最新：** 引用内stopを持つ新4件＋保持GENERAL07の現builder送信messagesを固定し、13,140byte・2memberの無学習比較packetを準備。構文compile／CRC／member照合は成功、実モデル生成・送信・提供停止0。非環境の稼働確認はhealth200。起動環境全体の読取りは認証情報を含み得るとして自動承認審査に拒否され、未実行。新packet送信と、完全復元に必要な環境内再利用の具体承認待ち。API5816f2d0／f6dae研究候補・通常selector OFF・本番未反映を維持。 [具体packet・確認範囲・再開点](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quote-stop-inference-prepared-20261110)。
 
@@ -380,13 +380,13 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 | AR-01 | 現naturalの主体・所有者・否定・時点・留保を、旧失敗・意味比較・共通原因分析で改善。EM-01a/b | 現6境界と正常な短文／省略で、同入力の誤読を解消または明確に減らし、自然さ・別題材・既成功・保存再読を保持。検出増加／無出力だけでは完了しない | 継続中。新24実生成の4版は通常不採用。c6555fd5で疑問符なしの確認質問の保存抜けを修復、250局所PASS。同24rawは旧24保存→新22保存／2拒否、受理本文不変。全体の意味修復は未完 |
 | AR-02 | 現naturalの任意問い・回答・訂正・撤回・frameの一往復。EM-02a/b、03b | 一点確認／skip／終了／本人続行、対象だけ更新、撤回後の残存意味、同版再読、プラン境界 | AR-01の全一般品質完成待ちにはしない。未開始 |
 | AR-03 | 適格履歴の意味ある利用。EM-03a/b | 同一／別場面・変化・無関係・訂正前を区別し、適切な履歴が今回へ効く。失効材料を使わない | 現related_contextを継承。未開始 |
-| AR-04 | Piece一般本文・単独伝達・refined・画像整合 | 原文の意味・一人称・本人補足と同版画像／保存を保持 | 研究ca7e2502／source8c5eのactual RN probe run43106065561を開始、結果未判定。前回standalone24/24を継承し、既存Whole1methodの元13条件・元期待値/8秒を保持する。追加は同callbackの公開bounds/観測bounds・clip・CTMだけで、描画本体/pinは不変。他5methodとstandalone24は今回未実行。通常.mm581/pin・selector OFF、候補未採用・AR-04未完。次はrun終端・13結果・同call Cq対応・完成PNGを回収して判定する。 |
+| AR-04 | Piece一般本文・単独伝達・refined・画像整合 | 原文の意味・一人称・本人補足と同版画像／保存を保持 | 研究ca7e2502／source8c5eのactual RN run43106065561を1回完了、Whole1methodは14失敗記録で未合格（旧59→14、45消失/新identity0）。13条件の本文/行/plan/寸法を保持し、10V4条件＋旧saved1でPNG11を取得。113call中106（local55/placed51）が非整列boundsのCq逆写像/厳密比較を成立、残7は未測定。初回essay6は自然paint観測欠如stage58、quote1は従来4Mi拒否stage15。通常.mm581/pin/selectorOFF・未採用、AR-04未完。次は失敗tagの既存naturalDraw/sharedPaint観測を同callbackへ対応づけ、初回観測が欠ける箇所を切り分ける。 |
 | AR-05 | 分析の本人基準・役割／選択・記録間関係。AN-03a/b/c、04 | 原記録→意味→図／全文→両端根拠の対応、再出現／変化／不明の正しさ | 現Engine統合・保存済み成果を継承。並行可能。未開始 |
 | AR-06 | Emlis観測材料、訂正・削除・権利、長い蓄積と月次。EM-04/05、AN-02/06/08/10 | 本人sourceから材料を渡し、失効・分割範囲・当時版を保持。生成本文を本人事実にしない | AR-02/03/05の該当能力を利用。未開始 |
 | AR-07 | IF／Saved等の商品固有の残る意味保持責務。既存AN／PC残件 | 仮想・本人選択意向・観測を分離し、成立した経路で出力と保存を確認 | 既存商品の実装条件に従う。無断延期・新発売条件化をしない。未開始 |
 | AR-08 | 実証できた共通能力の通常適用と全体確認。EM-05/06/07等 | 採用版の意味保持・自然さ・権利・中断復帰・保存再読・実際の待ち時間／費用。未採用範囲は理由と残差を保持 | 各単位で通常採用可能。全core一括切替を強制しない。未開始 |
 
-現在は **AR-04の意味保持・単独伝達**を継続する。研究ca7e2502／source8c5eのactual RN probe run43106065561を開始、結果未判定。前回standalone24/24を継承し、既存Whole1methodの元13条件・元期待値/8秒を保持する。追加は同callbackの公開bounds/観測bounds・clip・CTMだけで、描画本体/pinは不変。他5methodとstandalone24は今回未実行。通常.mm581/pin・selector OFF、候補未採用・AR-04未完。次はrun終端・13結果・同call Cq対応・完成PNGを回収して判定する。 詳細は[実行中の再開点](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-v4-inverse-clip-actual-rn-20261112)。
+現在は **AR-04の意味保持・単独伝達**を継続する。研究ca7e2502／source8c5eのactual RN run43106065561を1回完了、Whole1methodは14失敗記録で未合格（旧59→14、45消失/新identity0）。13条件の本文/行/plan/寸法を保持し、10V4条件＋旧saved1でPNG11を取得。113call中106（local55/placed51）が非整列boundsのCq逆写像/厳密比較を成立、残7は未測定。初回essay6は自然paint観測欠如stage58、quote1は従来4Mi拒否stage15。通常.mm581/pin/selectorOFF・未採用、AR-04未完。次は失敗tagの既存naturalDraw/sharedPaint観測を同callbackへ対応づけ、初回観測が欠ける箇所を切り分ける。 詳細は[実結果](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-v4-inverse-clip-actual-rn-20261112)。
 
 既存の品質作業・新教師8件・保存重みの継続点を使う。GPUに現実の接続障害がある場合、取得できた事実、未実行の生成、回収済み原本、次の同一単位を記録し、CPUの合成成功を実モデル改善へ換算しない。接続復旧や既存の別core実装を必要範囲で進め、無関係な補助機構開発へ変えない。
 
@@ -446,7 +446,7 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 ### 11.2 現在の進行欄
 
-**11/12・現在の再開先：** 研究ca7e2502／source8c5eのactual RN probe run43106065561を開始、結果未判定。前回standalone24/24を継承し、既存Whole1methodの元13条件・元期待値/8秒を保持する。追加は同callbackの公開bounds/観測bounds・clip・CTMだけで、描画本体/pinは不変。他5methodとstandalone24は今回未実行。通常.mm581/pin・selector OFF、候補未採用・AR-04未完。次はrun終端・13結果・同call Cq対応・完成PNGを回収して判定する。
+**11/12・現在の再開先：** 研究ca7e2502／source8c5eのactual RN run43106065561を1回完了、Whole1methodは14失敗記録で未合格（旧59→14、45消失/新identity0）。13条件の本文/行/plan/寸法を保持し、10V4条件＋旧saved1でPNG11を取得。113call中106（local55/placed51）が非整列boundsのCq逆写像/厳密比較を成立、残7は未測定。初回essay6は自然paint観測欠如stage58、quote1は従来4Mi拒否stage15。通常.mm581/pin/selectorOFF・未採用、AR-04未完。次は失敗tagの既存naturalDraw/sharedPaint観測を同callbackへ対応づけ、初回観測が欠ける箇所を切り分ける。
 
 **11/11・36件/72更新時点の履歴：** 承認済み36件/72更新のfresh候補a1dfを一回作成し、残っていた「予定が重なっている」→「重なった」の前提変異1件が回復。既存8＋保持8の実16は全件意味採用、他15rawは旧f6daeとbyte同一。48隔離保存・非生成再読成功。20HTTP・復元込み464.290秒、元args/env/cwd・source/Analysis・旧weights保持、通常/Analysis前後全response一致、独立health200/PID67361一致。fit319.087秒、retry0。新重みは検証用・通常selector OFF。今回16の限定改善であり、旧65全体・実機・一般品質・AR-04完了ではない。 API9b1b7bb8のCPU trainer28成功と既存Piece CI42969704329/job130355058089・attempt1・全39step successは準備時の完了として継承。今回source/test変更0、新CI/dispatch/rerun0。
 
@@ -494,17 +494,17 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | AR-01通常と残件 | AR-01通常不採用・役割反転未解決。先行API 651f1f38のAR-04差分とAR-01研究patchの通常不採用を継承。今回のfce72bcc／4da69cdeはtest整合のみで、AR-01通常採用なし。Render配置／実DB／RN／build0、他AR残件は維持 |
 | AR-04回収・改修 | 研究ca7eは3646から既存3testpathだけ。同call公開geometry9行、Whole既存1methodへのselector1行、既存RN-onlyworkflow/診断mapartifact。source8c/pin不変、通常.mm581/pin不変。 |
 | AR-04実本文 | 保存344aの2run和集合73/73・旧比72raw同一/051時制回復1・継続前提保持、configured録画3件を継承。今回の仮説比較に新本文/実4B生成/SQL再保存は0。 |
-| AR-04検証・再読 | 研究ca7e2502／source8c5eのactual RN probe run43106065561を開始、結果未判定。前回standalone24/24を継承し、既存Whole1methodの元13条件・元期待値/8秒を保持する。追加は同callbackの公開bounds/観測bounds・clip・CTMだけで、描画本体/pinは不変。他5methodとstandalone24は今回未実行。通常.mm581/pin・selector OFF、候補未採用・AR-04未完。次はrun終端・13結果・同call Cq対応・完成PNGを回収して判定する。 |
-| AR-04反映・残件 | actualRN run43106065561実行中・結果未判定。先行standalone24/24は完了継承、通常.mm581/selectorOFF/未採用。run終端・元13同call座標/strict比較/完成PNGを回収する。 |
+| AR-04検証・再読 | 研究ca7e2502／source8c5eのactual RN run43106065561を1回完了、Whole1methodは14失敗記録で未合格（旧59→14、45消失/新identity0）。13条件の本文/行/plan/寸法を保持し、10V4条件＋旧saved1でPNG11を取得。113call中106（local55/placed51）が非整列boundsのCq逆写像/厳密比較を成立、残7は未測定。初回essay6は自然paint観測欠如stage58、quote1は従来4Mi拒否stage15。通常.mm581/pin/selectorOFF・未採用、AR-04未完。次は失敗tagの既存naturalDraw/sharedPaint観測を同callbackへ対応づけ、初回観測が欠ける箇所を切り分ける。 |
+| AR-04反映・残件 | 研究ca7e2502／source8c5eのactual RN run43106065561を1回完了、Whole1methodは14失敗記録で未合格（旧59→14、45消失/新identity0）。13条件の本文/行/plan/寸法を保持し、10V4条件＋旧saved1でPNG11を取得。113call中106（local55/placed51）が非整列boundsのCq逆写像/厳密比較を成立、残7は未測定。初回essay6は自然paint観測欠如stage58、quote1は従来4Mi拒否stage15。通常.mm581/pin/selectorOFF・未採用、AR-04未完。次は失敗tagの既存naturalDraw/sharedPaint観測を同callbackへ対応づけ、初回観測が欠ける箇所を切り分ける。 |
 | AR-04現在のrefined | 007のQ2資格/原入力補足分離・recorded wrapper/S7/Free保存再読を継承。前回静的6/transition4は3段落/Emlis/配色/canonical8/3hash/PNGを保持。今回新refined生成/SQL/通常capture許可変更0。 |
 | AR-04現在の4B本文読取 | 前回73本文読取・configured録画3の無修補再生を継承。今回のnative support候補比較でmodel生成/学習は0。一般文章品質・任意natural補足・正式受入れを追加で成立させたとはしない。 |
-| AR-04再開記録 | 通常e9/前回3646成功から再開。新研究ca7e/run43106065561は起動済み、同runを再実行せず終端/既存artifactを回収。詳細は既存trialのpiece-v4-inverse-clip-actual-rn-20261112。 |
+| AR-04再開記録 | 研究ca7e2502／source8c5eのactual RN run43106065561を1回完了、Whole1methodは14失敗記録で未合格（旧59→14、45消失/新identity0）。13条件の本文/行/plan/寸法を保持し、10V4条件＋旧saved1でPNG11を取得。113call中106（local55/placed51）が非整列boundsのCq逆写像/厳密比較を成立、残7は未測定。初回essay6は自然paint観測欠如stage58、quote1は従来4Mi拒否stage15。通常.mm581/pin/selectorOFF・未採用、AR-04未完。次は失敗tagの既存naturalDraw/sharedPaint観測を同callbackへ対応づけ、初回観測が欠ける箇所を切り分ける。 |
 
 以後はこの表と各能力の対応行を現在状態へ置換更新し、詳細な実行事実は既存trial／weeklyへ置く。新しいhandoff系列・全件hash Gateを作らない。中断時も、成果物と未実行を既存保存先へ残し、同じ未完商品単位から続ける。
 
 ## 12. 今後の指示と再開方法
 
-**11/12の現在の再開点：** 研究ca7e2502／source8c5eのactual RN probe run43106065561を開始、結果未判定。前回standalone24/24を継承し、既存Whole1methodの元13条件・元期待値/8秒を保持する。追加は同callbackの公開bounds/観測bounds・clip・CTMだけで、描画本体/pinは不変。他5methodとstandalone24は今回未実行。通常.mm581/pin・selector OFF、候補未採用・AR-04未完。次はrun終端・13結果・同call Cq対応・完成PNGを回収して判定する。 前回24/48・73実4B/243SQL/static6/transition4は完了として継承する。Wholeの先行60/44→後続99f59/43、追加elapsed非再現・原因未証明を保持する。
+**11/12の現在の再開点：** 研究ca7e2502／source8c5eのactual RN run43106065561を1回完了、Whole1methodは14失敗記録で未合格（旧59→14、45消失/新identity0）。13条件の本文/行/plan/寸法を保持し、10V4条件＋旧saved1でPNG11を取得。113call中106（local55/placed51）が非整列boundsのCq逆写像/厳密比較を成立、残7は未測定。初回essay6は自然paint観測欠如stage58、quote1は従来4Mi拒否stage15。通常.mm581/pin/selectorOFF・未採用、AR-04未完。次は失敗tagの既存naturalDraw/sharedPaint観測を同callbackへ対応づけ、初回観測が欠ける箇所を切り分ける。 前回standalone24/48・73実4B/243SQL/static6/transition4は完了継承、今回他5methodはUNEXECUTED。
 
 推奨指示は **「補助経路の活用作業を進めて」**。
 
