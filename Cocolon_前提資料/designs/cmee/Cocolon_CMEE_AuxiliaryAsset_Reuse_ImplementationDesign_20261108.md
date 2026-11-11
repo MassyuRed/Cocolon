@@ -12,7 +12,7 @@ current_next: AR-04
 runtime_effect_of_this_document: 0
 ---
 
-> **11/11・AR-04最新：** 保存a1df候補の未確認49要求を具体化。既存67行をcurrent messagesで65要求へ一意化し、実測済み16を除外。現API9b1bで全49のsource／meaning／plan／prepared／messagesと旧rawのCMEE/S7採否・本文一致をCPU確認。通常47／補足2、1slot39／2slot10。送信36,384byte、候補49＋前後対照4・最大53HTTP、学習0・復元枠120秒込み全体600秒・retry0の一回比較を準備。Pod送信・環境読取・GPU・SQLは未実行、今回分の具体承認待ち。a1df実確認は16/65のまま、通常selector OFF・AR-04未完。 [49要求の準備・比較範囲と次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-a1df-remaining49-prepared-20261111)。
+> **11/11・AR-04最新：** 保存a1dfの残49要求を一回・学習0で実生成。53HTTPは全200/stop、復元込み274.959660秒・retry0。現CMEE/S7は48採用/1拒否、144隔離保存・非生成再読/3保存前拒否。47rawは旧f6daeと同一、B53-009は本人再掲のみ、B53-051は「農作業が好きだった」→「好きだ」の時制退行で不採用。前回16と合わせた65要求は64採用/1拒否、62raw同一/3変化。前回の前提回復1件は維持したが別の過去形を失い、通常採用へ進めない。元提供PID68559・引数/環境/作業場所・source/Analysis/旧重み保持、通常/Analysis前後全response一致、独立health200/PID一致。通常selector OFF・AR-04未完。 [実49・時制退行・144保存と次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-a1df-remaining49-actual-20261111)。
 
 > **11/10・AR-04最新：** 引用内stopを持つ新4件＋保持GENERAL07の現builder送信messagesを固定し、13,140byte・2memberの無学習比較packetを準備。構文compile／CRC／member照合は成功、実モデル生成・送信・提供停止0。非環境の稼働確認はhealth200。起動環境全体の読取りは認証情報を含み得るとして自動承認審査に拒否され、未実行。新packet送信と、完全復元に必要な環境内再利用の具体承認待ち。API5816f2d0／f6dae研究候補・通常selector OFF・本番未反映を維持。 [具体packet・確認範囲・再開点](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quote-stop-inference-prepared-20261110)。
 
@@ -1153,10 +1153,20 @@ NO_STRUCTURE_MAP_DELTA：今回source/test/公開型/route/DB/作者/controller/
 
 
 <a id="piece-a1df-remaining49-prepared-20261111"></a>
-## 11/11 AR-04 — 保存a1df候補の残49要求を比較準備（未送信・未実行）
+## 11/11 AR-04 — 保存a1df候補の残49要求を比較準備（実行前の記録・一回完了）
 
 保存a1df候補の未確認49要求を具体化。既存67行をcurrent messagesで65要求へ一意化し、実測済み16を除外。現API9b1bで全49のsource／meaning／plan／prepared／messagesと旧rawのCMEE/S7採否・本文一致をCPU確認。通常47／補足2、1slot39／2slot10。送信36,384byte、候補49＋前後対照4・最大53HTTP、学習0・復元枠120秒込み全体600秒・retry0の一回比較を準備。Pod送信・環境読取・GPU・SQLは未実行、今回分の具体承認待ち。a1df実確認は16/65のまま、通常selector OFF・AR-04未完。
 
 前回の16/65実確認と48保存は完了として継承。今回49の新モデル出力・保存・一般品質は未確認。完了済みの学習・16生成を再実行しない。承認後は保存a1dfによる未確認49だけを一回比較し、無修補受領・全本文の原文対照・採用artifactの既存隔離保存／非生成再読へ進める。通常採用・selector・Render・live DB・RN・build・配布は未実行。
 
 NO_STRUCTURE_MAP_DELTA：source/test/公開型/route/DB/作者/controller/Gateは不変。今回の旧raw照合・実行準備を新候補品質改善やAR-04完了へ数えない。 [49要求の準備・比較範囲と次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-a1df-remaining49-prepared-20261111)。
+
+
+<a id="piece-a1df-remaining49-actual-20261111"></a>
+## 11/11 AR-04 — 残49実比較・過去好み1件退行、通常採用は保留
+
+保存a1dfの残49要求を一回・学習0で実生成。53HTTPは全200/stop、復元込み274.959660秒・retry0。現CMEE/S7は48採用/1拒否、144隔離保存・非生成再読/3保存前拒否。47rawは旧f6daeと同一、B53-009は本人再掲のみ、B53-051は「農作業が好きだった」→「好きだ」の時制退行で不採用。前回16と合わせた65要求は64採用/1拒否、62raw同一/3変化。前回の前提回復1件は維持したが別の過去形を失い、通常採用へ進めない。元提供PID68559・引数/環境/作業場所・source/Analysis/旧重み保持、通常/Analysis前後全response一致、独立health200/PID一致。通常selector OFF・AR-04未完。
+
+今回の候補49/全53HTTPは完了し、前回16と合わせて既存65固有要求を実確認済み。051の原文/旧新rawに明示された過去→現在の変更を、source資格外やreaderだけの不具合へ読み替えず、通常採用は保留する。CPU照合で051の過去はsource/wireともPASTと確認し、故障を送信後の文章化へ限定。既存36に直接の肯定過去好み教師はないが、原因や追加学習の必要性とは断定しない。次は評価051を教師へ移さず、独立した時制/肯否/欄配置の対照を具体化し、前回回復も保つ最小修正へ戻す。追加fit/GPU/retry、source/raw修補、S7緩和、通常採用/selector、Render、live DB、RN/build/配布は自動実行しない。
+
+NO_STRUCTURE_MAP_DELTA：source/test/公開型/route/DB/作者/controller/Gateは不変。実行と保存は成立したが、候補の全品質改善・AR-04完了・商品受入れは未成立。 [実49・時制退行・144保存と次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-a1df-remaining49-actual-20261111)。

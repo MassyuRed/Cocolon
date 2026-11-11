@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/11・AR-04最新：** 保存a1df候補の未確認49要求を具体化。既存67行をcurrent messagesで65要求へ一意化し、実測済み16を除外。現API9b1bで全49のsource／meaning／plan／prepared／messagesと旧rawのCMEE/S7採否・本文一致をCPU確認。通常47／補足2、1slot39／2slot10。送信36,384byte、候補49＋前後対照4・最大53HTTP、学習0・復元枠120秒込み全体600秒・retry0の一回比較を準備。Pod送信・環境読取・GPU・SQLは未実行、今回分の具体承認待ち。a1df実確認は16/65のまま、通常selector OFF・AR-04未完。 [49要求の準備・比較範囲と次](piece_request_account_reuse_review.md#piece-a1df-remaining49-prepared-20261111)。
+> **11/11・AR-04最新：** 保存a1dfの残49要求を一回・学習0で実生成。53HTTPは全200/stop、復元込み274.959660秒・retry0。現CMEE/S7は48採用/1拒否、144隔離保存・非生成再読/3保存前拒否。47rawは旧f6daeと同一、B53-009は本人再掲のみ、B53-051は「農作業が好きだった」→「好きだ」の時制退行で不採用。前回16と合わせた65要求は64採用/1拒否、62raw同一/3変化。前回の前提回復1件は維持したが別の過去形を失い、通常採用へ進めない。元提供PID68559・引数/環境/作業場所・source/Analysis/旧重み保持、通常/Analysis前後全response一致、独立health200/PID一致。通常selector OFF・AR-04未完。 [実49・時制退行・144保存と次](piece_request_account_reuse_review.md#piece-a1df-remaining49-actual-20261111)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -1906,7 +1906,7 @@ NO_STRUCTURE_MAP_DELTA：今回source/test/公開型/route/DB/作者/controller/
 
 
 <a id="piece-a1df-remaining49-prepared-20261111"></a>
-## 11/11 AR-04 — 保存a1df候補の残49要求を比較準備（未送信・未実行）
+## 11/11 AR-04 — 保存a1df候補の残49要求を比較準備（実行前の記録・一回完了）
 
 保存a1df候補の未確認49要求を具体化。既存67行をcurrent messagesで65要求へ一意化し、実測済み16を除外。現API9b1bで全49のsource／meaning／plan／prepared／messagesと旧rawのCMEE/S7採否・本文一致をCPU確認。通常47／補足2、1slot39／2slot10。送信36,384byte、候補49＋前後対照4・最大53HTTP、学習0・復元枠120秒込み全体600秒・retry0の一回比較を準備。Pod送信・環境読取・GPU・SQLは未実行、今回分の具体承認待ち。a1df実確認は16/65のまま、通常selector OFF・AR-04未完。
 
@@ -1931,3 +1931,48 @@ static compile、ZIP CRC／member hash、承認引数なしでは副作用前に
 今回source/test変更0、新CI／dispatch／rerun0。前回a1df実16／65・48保存／464.290秒復元を継承し、残49の新品質・65全体の成立・AR-04完了を未確認のまま保持する。STRUCTURE_MAP_DELTA_NONE。準備・旧raw照合だけの商品品質credit／human acceptance追加0。
 
 [準備データ・比較packetと来歴](https://chatgpt.com/library?file_id=libfile_fde3_f-5e3381a99df48191809a2a8855ff5c80_2f7470f963808191aaebf050935e72de&account_id=personal)。
+
+
+<a id="piece-a1df-remaining49-actual-20261111"></a>
+## 11/11 AR-04 — 残49実比較・過去好み1件退行、通常採用は保留
+
+保存a1dfの残49要求を一回・学習0で実生成。53HTTPは全200/stop、復元込み274.959660秒・retry0。現CMEE/S7は48採用/1拒否、144隔離保存・非生成再読/3保存前拒否。47rawは旧f6daeと同一、B53-009は本人再掲のみ、B53-051は「農作業が好きだった」→「好きだ」の時制退行で不採用。前回16と合わせた65要求は64採用/1拒否、62raw同一/3変化。前回の前提回復1件は維持したが別の過去形を失い、通常採用へ進めない。元提供PID68559・引数/環境/作業場所・source/Analysis/旧重み保持、通常/Analysis前後全response一致、独立health200/PID一致。通常selector OFF・AR-04未完。
+
+### 承認された一回と復元
+
+Mashの「実行していい、進めろ」により、36,384byteの架空入力・比較code送信と、認証情報を含み得る起動環境全体の同Pod内一時読取・復元再利用、49候補＋前後対照4・最大53HTTP・追加学習0・retry0・復元枠込み600秒の一回を実行した。承認は今回分として完了・消費済み。前回36/72学習・16生成を繰り返していない。
+
+launch67881、元提供67361→候補67961→元提供復元68559。49候補/全53HTTPは200/stop、実tokenizer最大入力2209＋予約2048は8192以内。全体274.95966012286954秒、候補load1、学習/新weights/retry0。a1df/config・f6dae/5b1/e924のweights/configとsource/Analysisを保持。元args/env/cwd・資格値を同Pod内だけで復元し、通常/Analysisの前後全responseが一致。独立の非生成health確認でも200、pidfile68559＝復元PID、process aliveを確認した。環境値・認証headerの外部回収0。
+
+### 49本文の比較と採否
+
+| 対象 | 旧f6dae | 保存a1df | 判断 |
+|---|---|---|---|
+| B53-051・memo_action | 僕は農作業が好きだった。 | 僕は農作業が好きだ。 | 原文「好きでした」の過去を現在へ変更。意味退行として拒否 |
+| 同051・memo | 僕は隣人から収穫祭の準備を頼まれなかった。 | 同文 | 否定・受動・相手・対象は維持。別欄の時制退行を相殺しない |
+| B53-009 | 模型作りが苦手だ。 | 僕は模型作りが苦手だ。 | 同block内の本人表記を明示した差。意味保持、今回の自然さ改善creditへはしない |
+| 他47要求 | 既存raw | byte同一 | 採用・本文を維持 |
+
+原文/source/prepared/messagesと生成設定は49件すべて旧要求と一致し、weights revisionだけ候補へ変わった。実raw・source・期待値の修補、生成指示追記、S7緩和、旧作者fallbackは0。current source/planとpreparedを再構成し、全rawを無修補受領、採用48のartifactを既存S7でも明示確認した。
+
+rootと独立担当が全49の原文・旧新本文を読んだ。051は曖昧な未判定ではなく本文に明示された過去→現在の変更であり、sourceを不適格にしたものではない。他48では、依頼・相談・伝達の能受動/否定/順序、欄ごとの本人表記、焦点・留保、程度、未決定、補足019の「今/少し嬉しい」、補足021の「その時/少し寂しかった」を保持した。新しい出来事・因果・意図等の追加は見当たらなかったが、短文整形・近い言換えが中心で、広い自然さ・共有価値・一般品質の合格へ広げない。
+
+前回a1df実16の15raw同一/1前提回復と合算し、current messagesで一意の65要求を実確認済みへ更新。新候補64採用/1拒否、62raw同一/3変化。旧比較も64採用/1拒否であり、回復1と退行1の交換となった。65件の採用数が増えたとは報告せず、AR-04完了・通常採用・商品受入れへ進めない。全65を未知・未学習の一般化試験とは呼ばない。
+
+### 保存・記録・操作時の訂正
+
+Free/Plus/Premiumそれぞれ48を既存隔離PGlite0.5.8へ保存し、同/新service非生成再読が一致、計144保存成功。051は各planとも保存前拒否、計3拒否、record/quotaを追加しない。原入力/Emlis不変、各保存quota1、保存後生成0、補足2件の計6保存は144の内数。外側のPIECE_SOURCE_NOT_ELIGIBLEを元入力自体の資格喪失と解釈しない。live Supabase/実Auth/画像/本人端末の確認ではない。
+
+回収result SHA256 `6384897b4d153bc433fc054c5bd4ce6ff06e6b47bccd1b11039a465d18ab1db7`、実evidence102,154byte/SHA256 `6a55b38e81def67ceb8cca203816ebff1e5ae49a7dc0a17f705f5d03be37515f`。既存private成果物へ実49・復元・144保存/3拒否と全本文読取りを追加保存する。
+
+起動コマンドの文字入力が途中timeoutしたため、未送信文字列を清掃・貼り直して一回Returnを送信した。追加Enterの要求は重複実行リスクとして自動承認審査に拒否され未送信。画面のlaunch67881と実記録で一回だけの実行を確認した。復元後の非生成health/回収commandは二重貼付でPython SyntaxErrorとなりcompile時に停止。既存結果・healthだけの短いcommandへ訂正し独立確認を完了。これらをモデルrunのretryや追加成功へ換算しない。
+
+ローカル確認はprimary Python3.12.14/Node24.22.1・PGlite0.5.8。historical Node22/Python3.12.13での新実行とは呼ばず、正式旧runtimeの再認定もしない。今回source/test変更0、新CI/dispatch/rerun0。既存成功CIは履歴として保持する。
+
+### 次の未完了項目
+
+追加のCPU照合では、051のsource意味がPERSONAL_PREFERENCE/AFFIRMATIVE/PASTであり、実送信したmemo_action_1のrequired_evaluationsにもpredicate_literal「好きでした」・temporal_scope PASTが含まれることを確認した。原文の過去は意味読取から4Bへのwireまで到達しており、source時点の読み落としや指示欠落と呼ばない。既存36教材も独立担当が全source/targetを読み、直接の「好きでした→好きだった」教師は0。過去の価値評価＋現在の好みを教える既存6行のtargetは原文どおりで誤教師ではない。この被覆不足は原因候補にとどまり、追加12の因果・追加fitの必要性を証明しない。
+
+通常採用は保留。保存済み実051の過去好み→現在好みと、回復したACTION-REASON-CONSULTの外側継続前提を両方保持すべき具体的な誤り/正常対照とし、今回確認したsource/wireのPAST保持と既存36教材の被覆差を基に、評価051を教師へ移さず、独立した肯否・現在/過去・単欄/二欄・欄順の対照を既存ownerで具体化し、最小の修正箇所へ戻す。追加12だけが原因、追加学習が必要、という因果を今回の比較から断定しない。同じprompt追記、source/raw/期待値修補、S7緩和、別作者fallbackで隠さない。
+
+今回49生成・53HTTP・36,384byte送信/同Pod内全環境再利用は完了・消費済み。新GPU/fit/retry、通常採用/selector、Render、live DB、RN/build/配布へ自動進行しない。新candidate品質改善や正式商品credit/human acceptance追加は0、STRUCTURE_MAP_DELTA_NONE。
