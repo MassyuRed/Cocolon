@@ -1451,10 +1451,51 @@ Mashの今回の明示承認に基づき、既存Pod f1lle4xwq3wjlnへ13,983byte
 
 API全2588tracked blobの現物を親5fのGitHub treeと照合し、変更前の一致を確認した。local Git commitはそのtreeを示すsynthetic snapshotであり、remote5f commitそのものと偽らない。今回3変更blobはGitHub反映後に全文base64 byte一致、親／changed paths／headを確認。source意味／語彙文法／新型／schema／生成条件／SYSTEM／依存／公開contract／DB／RN／通常selectorは変更0。STRUCTURE_MAP_DELTA_NONE（既存model本文比較内の組合せ修復）。
 
-既存CIはAPIeb9cdacd・attempt1でPiece run42936880945／Analysis run42936880940が実行中。新しいworkflow／dispatch／rerunは0、終端成功は未確認。新GPU生成・学習・起動環境読取・提供停止・Render／live DB／RN／buildは0。通常不採用・正式商品品質credit0・AR-04未完了を維持する。
+前セッションの既存CIはAPIeb9cdacd・attempt1でPiece run42936880945全39工程／Analysis run42936880940全19工程success。再開時に終端をfresh確認。新しいworkflow／dispatch／rerunは0。新GPU生成・学習・起動環境読取・提供停止・Render／live DB／RN／buildは0。通常不採用・正式商品品質credit0・AR-04未完了を維持する。
 
-private原本は`Cocolon_CMEE_AR04_CanonicalFronted_Register_20261111.zip`。比較script・前後結果・保存9・検査logと再開情報を保全し、repository本体・依存・既存重みは重複保存しない。
+private原本は[Cocolon_CMEE_AR04_CanonicalFronted_Register_20261111.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-11d071fd3a74819194daa7885bb88549_2f7470f963808191aaebf050935e72de&account_id=personal)。比較script・前後結果・保存9・検査logと再開情報を保全し、repository本体・依存・既存重みは重複保存しない。
 
 ### 再開先
 
 本人前置＋文体差の比較修復・固定CPU3件と9保存は完了。次は同じ条件の新規実4B本文での確認と、元focal語順・引用／理由一般などの残差を既存の比較と保存経路で進める。今回、新たなGPU packetの送信・起動・提供停止・起動環境読取・学習・通常採用は行っていない。以前の一回実行は完了済みで再実行しない。広い文章、新f6daeによる旧53全生成回帰、同版画像／通常統合／本人端末、既存3失敗、AR-01と他ARは未完。
+
+
+
+<a id="piece-evaluation-focal-register-20261111"></a>
+## 11/11 AR-04 — 評価の元焦点語順の文体差を保持
+
+親APIeb9cdacd／資料5377651eから引き継ぎ。前セッションのAPIeb9cdacdは、Piece CI42936880945全39工程／Analysis CI42936880940全19工程がattempt1・success。反映済みsource3と資料7の全blob／本文をfresh照合し、中断時に未保存だったprivate比較原本を保全した。
+
+### 原因と最小変更
+
+既存sourceは「私が好きなのは、読書の時間です」を評価として資格化していたが、model専用の比較が「私は読書の時間が好きだ」というcanonical形だけに届き、元語順の「〜だ」を拒否していた。API[8329a828](https://github.com/MassyuRed/mashos-api/commit/8329a8289088e379162a50cd30ac7e0f7ff5121a)の`piece_v2_content_policy.py::same_evaluation`内12行で、既存`_EVALUATIVE_FOCUS`と`anchor`を再利用する。資格済み原文の最終copulaまでの全文と終端を一致させ、です／だだけ比較する。外側scope・欄・段落・source採否・意味・plan・prepared／messagesとnative既定比較は変更しない。raw／本文の書換えや旧作者fallbackはない。
+
+旧testの元focal拒否は未実装残差の記録だったため、その1期待を理由付きで変更し、本人視点のない原文の拒否は維持した。保護された受入れ母集団や、source文法を変更して成功にしたものではない。
+
+### 同じ固定CPU候補の前後
+
+| 架空の原入力 | 同じ候補の変更部分 | eb9→今回 |
+|---|---|---|
+| 雨が続いているので、私が好きなのは、読書の時間です。 | 末尾です→だだけ | 拒否→採用 |
+| 余裕があるなら、僕にとって大切なのは、一人で本を読む時間です。 | 末尾です→だだけ | 拒否→採用 |
+| 予定は決まっているけれど、わたしが少し苦手だったのは、朝食の時間です。 | 末尾です→だだけ、内側の過去保持 | 拒否→採用 |
+
+3件とも原7項目・source意味全量／plan・prepared／builder messages・native全結果は前後一致。前回実4B5rawの採否／本文／source投影全結果も一致し、追加生成0。モデルからの新本文ではなく、同じ固定候補を止めない比較修復であり、一般作文品質の改善率・正式受入れへ換算しない。
+
+### 検証と保存
+
+新71testは全成功（model比較62＋SQL9）。関連39fileは6195中6192成功／以前と同一IDの3失敗、error／skip0・既存warning1。focused812は関連検証に包含されるため加算しない。独立27例は新採用回復2／既存採用2保持・意味変異等23拒否・退行0。全27のsource／意味／plan／prepared／messages／native同一を独立processで比較した。個別digest文字列は前processで非出力だったため未回収と明記し、保存時に捏造や再実行はしていない。
+
+新3×Free／Plus／Premiumの9保存、同／新serviceの非生成再読、原入力／Emlis不変・quota各1・保存後0取得を確認。固定HTTP provider・合成本人認証・隔離PGlite SQLで、live Supabase／実Auth／native画像／本人端末ではない。全raw無修補、旧作者禁止。最初の広範囲commandはjunitxml指定組立て誤りで0test・exit4となったため失敗を原記録へ保存し、修正後の6195件だけ集計した。
+
+商品変更は既存policy1とtest2（prose register／evaluation saved pipeline）。新module／意味型／作者／source／public DTO／DB／RN／renderer／依存／通常selector／本番変更0。STRUCTURE_MAP_DELTA_NONE（既存model比較への原語順register再利用）。限定TECHNICAL_CREDIT、商品品質credit0・AR-04未完。API8329a828のPiece CI42943673831／Analysis CI42943673837はattempt1実行中、終端未確認。
+
+### 新しい一回比較の具体準備・未実行範囲
+
+次は未実行の本人前置3＋評価焦点3と保持2の計8材料を、一回の実4B比較へまとめて通す。送信候補17,151byte（packet14,702＋launcher2,449）・最大12HTTP・Piece1load・学習／retry0、復元枠を含む600秒の期限設定／復元予約120秒。既存Podへの新packet送信と、認証情報を含み得る全起動環境の同Pod内一時読取・復元再利用は今回の具体承認後に限る。旧実行の一回承認は完了済みで再利用しない。 packet SHA256 `5ffe8d7625461887fccc3ed64b88b74560aba7f659841f61cfa6994d82e05940`。原7項目・prepared ID／JSON・現builder messagesを全8再導出一致。保持2は前回case全体と一致、期待正文や固定CPU本文はwireへ混入0。runner／launcher compile・ZIP CRC／member一致と、未承認時の実行拒否を確認。従来runnerの復元／環境／control処理を維持し、候補数だけ5→8、HTTP上限9→12とした。PID63491と元env hashは前回復元時の履歴値でfresh確認ではなく、不一致なら停止前に終了する。稼働Python固定・local tokenizerで全入力＋2048≦8192確認後にだけ提供を停止する。
+
+今回、新packet送信・Runpod接続・起動環境読取・提供停止・新GPU生成／学習0。今回承認対象はこの新6＋保持2、一回・復元枠を含む期限設定10分の具体案。以前の一回承認を恒久許可へ拡張しない。実行後も全8rawを同じCMEEへ無修補で比較し、3plan保存・非生成再読を確認する。
+
+本人前置と元焦点の新実4B、引用／理由一般、広い文章、新f6daeの旧53全生成回帰、同版画像／通常統合／本人端末、既存3失敗とAR-01／他ARは未完。通常採用／selector有効化／Render／live DB／RN／buildの自動実行0。
+
+今回のprivate比較原本・全3本文・9保存・検証・独立review・未実行packet／launcherは [Cocolon_CMEE_AR04_FocalEvaluation_Register_20261111.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-e8e181daa3ac8191bd54b81d3ca7257f_2f7470f963808191aaebf050935e72de&account_id=personal) に保存。repository本体・依存・既存重みは重複保存しない。

@@ -1,4 +1,4 @@
-> **11/11・AR-04最新：** APIeb9cdacdで、既資格の本人文章について、既存の本人前置語順と敬体／常体の差を同じmodel専用比較へ接続。固定CPU新3は0→3採用、3plan計9保存・非生成再読。原7項目／source意味／plan／prepared／messagesとnative全結果は前後一致、前回実4B5件も全結果を維持。追加145検査は全成功、関連39fileは重複除外6124件中6121成功・以前と同じ3失敗。新GPU生成・学習0。f6dae研究候補・通常selector OFF・本番未反映。 [本人前置の文体比較・範囲と再開点](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-canonical-fronted-register-20261111)。
+> **11/11・AR-04最新：** API8329a828で、既資格の本人評価を元の焦点語順のまま敬体／常体比較へ接続。固定CPU新3は0→3採用、3plan計9保存・非生成再読。原7項目／source意味／plan／prepared／messages・native全結果と前回実4B5件は維持。新71全成功、関連39fileは6192成功／既存同3失敗。独立27例で退行0。新GPU生成・学習0、f6dae研究候補・通常selector OFF・本番未反映。 [元の評価焦点・範囲と再開点](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-evaluation-focal-register-20261111)。
 
 > **11/10・AR-04最新：** 引用内stopを持つ新4件＋保持GENERAL07の現builder送信messagesを固定し、13,140byte・2memberの無学習比較packetを準備。構文compile／CRC／member照合は成功、実モデル生成・送信・提供停止0。非環境の稼働確認はhealth200。起動環境全体の読取りは認証情報を含み得るとして自動承認審査に拒否され、未実行。新packet送信と、完全復元に必要な環境内再利用の具体承認待ち。API5816f2d0／f6dae研究候補・通常selector OFF・本番未反映を維持。 [具体packet・確認範囲・再開点](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quote-stop-inference-prepared-20261110)。
 
@@ -572,3 +572,16 @@ API5f3a8d5aで、既資格の理由／条件／譲歩付き本人評価の文体
 APIeb9cdacdで、既資格の本人文章について、既存の本人前置語順と敬体／常体の差を同じmodel専用比較へ接続。固定CPU新3は0→3採用、3plan計9保存・非生成再読。原7項目／source意味／plan／prepared／messagesとnative全結果は前後一致、前回実4B5件も全結果を維持。追加145検査は全成功、関連39fileは重複除外6124件中6121成功・以前と同じ3失敗。新GPU生成・学習0。f6dae研究候補・通常selector OFF・本番未反映。
 
 本人前置＋文体差の比較修復・固定CPU3件と9保存は完了。次は同じ条件の新規実4B本文での確認と、元focal語順・引用／理由一般などの残差を既存の比較と保存経路で進める。今回、新たなGPU packetの送信・起動・提供停止・起動環境読取・学習・通常採用は行っていない。以前の一回実行は完了済みで再実行しない。広い文章、新f6daeによる旧53全生成回帰、同版画像／通常統合／本人端末、既存3失敗、AR-01と他ARは未完。 [同一材料・保存・限界](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-canonical-fronted-register-20261111)。
+
+
+
+<a id="piece-evaluation-focal-register-20261111"></a>
+## 11/11 AR-04 — 評価の元焦点語順を保持
+
+API8329a828で、既資格の本人評価を元の焦点語順のまま敬体／常体比較へ接続。固定CPU新3は0→3採用、3plan計9保存・非生成再読。原7項目／source意味／plan／prepared／messages・native全結果と前回実4B5件は維持。新71全成功、関連39fileは6192成功／既存同3失敗。独立27例で退行0。新GPU生成・学習0、f6dae研究候補・通常selector OFF・本番未反映。
+
+次は未実行の本人前置3＋評価焦点3と保持2の計8材料を、一回の実4B比較へまとめて通す。送信候補17,151byte（packet14,702＋launcher2,449）・最大12HTTP・Piece1load・学習／retry0、復元枠を含む600秒の期限設定／復元予約120秒。既存Podへの新packet送信と、認証情報を含み得る全起動環境の同Pod内一時読取・復元再利用は今回の具体承認後に限る。旧実行の一回承認は完了済みで再利用しない。
+
+API8329a828のPiece CI42943673831／Analysis CI42943673837はattempt1実行中、終端未確認。 前セッションのAPIeb9cdacdは、Piece CI42936880945全39工程／Analysis CI42936880940全19工程がattempt1・success。反映済みsource3と資料7の全blob／本文をfresh照合し、中断時に未保存だったprivate比較原本を保全した。
+
+[原因・同一候補・保存・未実行範囲](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-evaluation-focal-register-20261111)。
