@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/11・AR-04最新：** 独立12＋保持24の36件で、新しい候補を元baseから72更新（各2回）だけ学習し、未解消1を含む既存8＋独立保持8の計16件を比較する一回を準備。旧f6dae実測16はcurrent messages／生成設定一致を照合し再利用、最大20HTTP。送信55,014byte、fit最大360秒・候補用105秒先取り・復元120秒を含む全体600秒。API9b1b7bb8の既存trainerを36明示時だけ最大72へ限定拡張し、既定24/48を保持。CPU28成功・既存CI42969704329成功。Pod送信・環境読取・GPU・fitは未実行、新学習を含む実行承認待ち。通常selector OFF・AR-04未完。 [学習比較の準備・範囲と次](piece_request_account_reuse_review.md#piece-scope-complement-fit-prepared-20261111)。
+> **11/11・AR-04最新：** 承認済み36件/72更新のfresh候補a1dfを一回作成し、残っていた「予定が重なっている」→「重なった」の前提変異1件が回復。既存8＋保持8の実16は全件意味採用、他15rawは旧f6daeとbyte同一。48隔離保存・非生成再読成功。20HTTP・復元込み464.290秒、元args/env/cwd・source/Analysis・旧weights保持、通常/Analysis前後全response一致、独立health200/PID67361一致。fit319.087秒、retry0。新重みは検証用・通常selector OFF。今回16の限定改善であり、旧65全体・実機・一般品質・AR-04完了ではない。 [実16・48保存・復元と次](piece_request_account_reuse_review.md#piece-scope-complement-fit-actual-20261111)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -1820,7 +1820,7 @@ NO_STRUCTURE_MAP_DELTA：今回の教材補完案とCPU確認は既存source／�
 
 
 <a id="piece-scope-complement-fit-prepared-20261111"></a>
-## 11/11 AR-04 — 独立補完36件・72更新の比較を準備（未送信・未実行）
+## 11/11 AR-04 — 独立補完36件・72更新の比較を準備（実行前の記録・一回完了）
 
 独立12＋保持24の36件で、新しい候補を元baseから72更新（各2回）だけ学習し、未解消1を含む既存8＋独立保持8の計16件を比較する一回を準備。旧f6dae実測16はcurrent messages／生成設定一致を照合し再利用、最大20HTTP。送信55,014byte、fit最大360秒・候補用105秒先取り・復元120秒を含む全体600秒。API9b1b7bb8の既存trainerを36明示時だけ最大72へ限定拡張し、既定24/48を保持。CPU28成功・既存CI42969704329成功。Pod送信・環境読取・GPU・fitは未実行、新学習を含む実行承認待ち。通常selector OFF・AR-04未完。
 
@@ -1859,3 +1859,47 @@ API9b1b7bb861a8efa359c780895b3d2ed5d8b802dbのsource/test計2pathはremote全文
 次は準備済みの36件/72更新・候補16/最大20HTTP・55,014byte・復元枠込み600秒の一回について、新しい学習と起動環境全体の同Pod内一時読取／復元再利用をMashに確認する。過去の推論一回承認は追加学習なしで完了・消費済みのため、新fitへ流用しない。承認後も元PID/args/env/cwd/source/weightsとcached tokenizerの全36教材・評価16件を停止前確認し、不一致／期限不足は実行を進めず、完了した72更新だけを評価する。新重みの通常採用、selector有効化、Render、live DB、RN、build、配布へ自動進行しない。
 
 NO_STRUCTURE_MAP_DELTA：既存training ownerの限定引数拡張であり、新しい公開型・route・DB・作者・controller・Gateは追加しない。意味読取・準備・生成・受領・S7・保存の担当は不変。学習比較が準備できた段階で、モデル改善・商品品質credit・human acceptance追加は0。 [準備・比較範囲と次](piece_request_account_reuse_review.md#piece-scope-complement-fit-prepared-20261111)。
+
+
+<a id="piece-scope-complement-fit-actual-20261111"></a>
+## 11/11 AR-04 — fresh36/72候補の前提変異1件回復・実16と48保存
+
+承認済み36件/72更新のfresh候補a1dfを一回作成し、残っていた「予定が重なっている」→「重なった」の前提変異1件が回復。既存8＋保持8の実16は全件意味採用、他15rawは旧f6daeとbyte同一。48隔離保存・非生成再読成功。20HTTP・復元込み464.290秒、元args/env/cwd・source/Analysis・旧weights保持、通常/Analysis前後全response一致、独立health200/PID67361一致。fit319.087秒、retry0。新重みは検証用・通常selector OFF。今回16の限定改善であり、旧65全体・実機・一般品質・AR-04完了ではない。
+
+### 承認済み一回の実行と復元
+
+Mashの「実行していい、進めろ」で、55,014byteの架空36教材/16評価/比較code送信、認証情報を含み得る起動環境全体の同Pod内一時読取/復元再利用、学習最大72更新・候補16・復元枠込み600秒・retry0を承認。一回だけ開始し、この同意は消費済み。送信後packet/launcher hash一致を画面確認した。
+
+元提供PID66367→fit67239→候補67289→元提供復元67361。fitは有効349秒上限（最大360、候補用105秒先取り）に対して319.087秒で72更新・36行・2周を完了。36更新checkpoint、最終adapter保存とfresh base再読込でtensor一致を確認。候補重みSHA256 `a1df4a132f6016f6a0d9c4c6b10ffa1c1303909b3e9a1634b52f0721ad89e7ea`、config SHA256 `9a25fcb70f9d25c41ecbfad3f39902a929603dd698005ba75ae865b5a00d30c0`。
+
+全体464.2902382710017秒、Piece16/全20HTTPは200/stop。元args/env/cwd・資格値・元source/Analysis adapter・f6dae/5b1/e924の重み/configを保持し、通常/Analysisの前後全response一致。独立healthz200、pidfile/restore_pid67361一致・process aliveを確認した。全環境の値や認証headerは外へ回収せず、同Pod内の復元だけへ使った。新重み通常採用0。
+
+### 本文の変化と意味保持
+
+| 対象 | 旧f6dae | 新a1df |
+|---|---|---|
+| ACTION-REASON-CONSULT | 予定が重なったので、僕は友人に予定を相談した。 | 予定が重なっているので、僕は友人に予定を相談した。 |
+| 残るprimary7 | 受理済みの同系5＋引用2 | 全7raw byte同一・意味採用維持 |
+| 保持8 | 焦点/留保、補足時点、程度/否定、能受動、欄別/同欄語り手 | 全8raw byte同一・意味採用維持 |
+
+原文の外側継続前提を保持する1件が回復し、内側の本人/相手/対象/肯定/過去動作は保持された。全16の送信request/current messages・生成設定は旧baselineと同じで、新weights revisionだけが候補へ変わる。全response同一とは主張せず、他15のraw byte一致を記録する。source/期待値/raw修補・推論prompt追記・S7緩和は0。
+
+rootと独立read-only担当が全16の原文slot/旧raw/新rawを読んだ。雨の継続、引用2の話者/入れ子理由/！！/本人意向と感情、refined007/020の元入力と補足現在/その時過去、016の少し/過去否定、032/034の能受動と否定、038の僕/ぼく・039の俺/おれが保持され、今回本文に未記載の出来事/因果/意図/助言の追加は見当たらなかった。短文整形として読み通せるが、他15は同文であり広い自然さ/作品品質の新改善とはしない。
+
+### CMEE・保存再読と範囲
+
+現ownerのsource/plan/prepared/messagesを照合し、実rawを無修補受領。全16が意味採用、全採用artifactを既存S7でも確認した。Free/Plus/Premiumそれぞれ16、計48を既存隔離PGliteへ保存し、同/新serviceで非生成再読一致。原入力/Emlis不変、採用各quota1、保存後生成0、旧作者fallback禁止。refined2件の6保存もこの48の内数。live Supabase/実Auth/画像/本人端末ではない。旧24の現S7再受理や旧65全体の新生成を追加していない。
+
+既存67行をcurrent messagesで一意化した65要求と、今回16の完全一致をCPUで照合。新候補で確認した16/65、残る49は未生成・未確認として保持する。全65が未学習であるとは呼ばない。追加12だけの単一因果や学習必要性の証明へ広げず、fresh36/72候補がこの16で示した限定改善として扱う。
+
+### 記録・軽微な回収処理の訂正・再開
+
+result SHA256 `63102d8d7d8f06fc90df1e13faa9ac7dada1d672cd3e33b20a1aa92b7db87618`、実evidence28,478,886byte/SHA256 `cf0592c5737433abffd77f1174e8bfba07517249472e065037253c4c238a7dea`、回収collection28,487,459byte/SHA256 `5dd584f4804a4197ac2da2bdecf1040d17f0e7cbedb375f22c5bfad9bb1e3bd2`。新adapter/checkpoint・実16・72更新report・復元・48保存・独立本文読取を既存[private成果物](https://chatgpt.com/library?file_id=libfile_fde3_f-63b6c6f54c88819199c687bec9796d68_2f7470f963808191aaebf050935e72de&account_id=personal)へ保存する。
+
+元提供復元後の独立health/回収用commandでrootの改行escapeがPython SyntaxErrorとなり、当該commandはcompile時に停止した。chr(10)へ直して同じ既存結果の回収だけを行い、学習/生成/元runのretryは0。回収訂正をモデル失敗や追加モデル成功へ換算しない。
+
+API9b1b7bb8のCPU trainer28成功と既存Piece CI42969704329/job130355058089・attempt1・全39step successは準備時の完了として継承。今回source/test変更0、新CI/dispatch/rerun0。
+
+次は保存済み新a1df候補について、旧65固有要求のうち今回とcurrent messagesが一致する16を除いた未確認49要求を既存wireから比較対象として具体化し、広い本文・欄混合・refinedの退行を先に確認する。今回完了した36/72学習・16生成を繰り返さず、追加fitへ自動進行しない。承認済み55,014byte送信・全環境同Pod内一時読取/復元再利用の一回は完了・消費済み。新GPU試行・通常採用・selector有効化・Render・live DB・RN・build・配布は未承認/未実行として区別する。
+
+NO_STRUCTURE_MAP_DELTA：今回source/test/公開型/route/DB/作者/controller/Gateに変更なし。primary TECHNICAL_CREDIT、検証候補で1件の可視意味保持改善を確認、正式商品credit/human acceptance追加0。 [実16・48保存・復元と次](piece_request_account_reuse_review.md#piece-scope-complement-fit-actual-20261111)。
