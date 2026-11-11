@@ -1260,12 +1260,50 @@ static PieceOutputV4FixtureTextView *outputV4View(NSString *text, CGFloat font, 
   view.fixtureNativeClipTrap = trap;
   return view;
 }
+// Test-only per-call evidence; no result or assertion is replaced.
+#if defined(COCOLON_PIECE_STANDALONE_DIAGNOSTICS)
+@interface PieceTextMetrics (CocolonPieceStandaloneDiagnostics)
+- (NSDictionary *)cocolonPieceDiagnosticState;
+@end
+static NSString *outputV4DiagnosticCase;
+static NSUInteger outputV4DiagnosticOrdinal;
+static BOOL outputV4DiagnosticControl;
+static void outputV4ObserveCall(PieceTextMetrics *module, CGFloat font, NSDictionary *request,
+    NSDictionary *result, NSString *code, NSUInteger faultBefore) {
+  @try {
+    NSDictionary *state=[module cocolonPieceDiagnosticState];
+    NSInteger requestStage=[request[@"stage"] isEqual:@"local"]?1:([request[@"stage"] isEqual:@"placed"]?2:0);
+    BOOL identity=[state[@"enabled"] boolValue] && [state[@"tag"] isEqual:@1] &&
+      [state[@"request_stage"] integerValue]==requestStage && [state[@"font_size"] doubleValue]==font;
+    NSDictionary *record=@{@"schema_version":@"piece.output_v4_call_diagnostic.v1",
+      @"case":outputV4DiagnosticCase?:@"UNSET", @"ordinal":@(++outputV4DiagnosticOrdinal),
+      @"role":outputV4DiagnosticControl?@"control":@"followup", @"stage":request[@"stage"]?:NSNull.null,
+      @"result_count":@(result.count), @"result_version":result[@"version"]?:NSNull.null,
+      @"reject_code":code?:NSNull.null, @"fault_before":@(faultBefore), @"fault_after":@(outputV4FaultReached),
+      @"fault_reached_this_call":@(outputV4FaultReached-faultBefore),
+      @"diagnostic_identity_match":@(identity), @"diagnostic":state?:@{}};
+    NSError *error=nil;
+    NSData *json=[NSJSONSerialization dataWithJSONObject:record options:NSJSONWritingSortedKeys error:&error];
+    if(json && !error)printf("V4_CALL_DIAGNOSTIC %s\n",[[[NSString alloc]initWithData:json encoding:NSUTF8StringEncoding]UTF8String]);
+    else printf("V4_CALL_DIAGNOSTIC_ERROR serialization\n");
+  } @catch (__unused NSException *exception) {
+    printf("V4_CALL_DIAGNOSTIC_ERROR exception\n");
+  }
+}
+#endif
 static NSDictionary *outputV4Call(PieceTextMetrics *module, NSString *text, CGFloat font, NSDictionary *request, NSString **code) {
+#if defined(COCOLON_PIECE_STANDALONE_DIAGNOSTICS)
+  const NSUInteger faultBefore=outputV4FaultReached;
+#endif
   __block NSDictionary *result = nil; __block NSString *error = nil;
   [module inspectSelectedLineV4:@1 text:text fontSize:font request:request resolver:^(id value) {
     if ([value isKindOfClass:NSDictionary.class]) result = value; else error = @"INVALID_RESULT";
   } rejecter:^(NSString *value, __unused NSString *message, __unused NSError *cause) { error = value; }];
-  *code = error ?: (result ? nil : @"TEST_CALLBACK_MISSING"); return result;
+  *code = error ?: (result ? nil : @"TEST_CALLBACK_MISSING");
+#if defined(COCOLON_PIECE_STANDALONE_DIAGNOSTICS)
+  outputV4ObserveCall(module, font, request, result, *code, faultBefore);
+#endif
+  return result;
 }
 static NSUInteger outputV4Checks=0, outputV4Failures=0;
 static void outputV4Check(NSString *name, BOOL pass) {
@@ -1282,6 +1320,9 @@ static BOOL runOutputV4Checks(PieceTextMetrics *module, RCTBridge *bridge) {
     @"branding_opacity08",@"controlled_native_clip_trap",@"nil_contents",@"dirty_display",@"dirty_layout",@"scale_mismatch",@"contents_snapshot_changed",
     @"version_tokens_isolated",@"unsupported_paint",@"resource_integer_bound",@"allocation_fault",@"extent_edge_fault",@"empty_alpha",@"expired_deadline"];
   for (NSString *name in names) { @autoreleasepool {
+#if defined(COCOLON_PIECE_STANDALONE_DIAGNOSTICS)
+    outputV4DiagnosticCase=name;outputV4DiagnosticOrdinal=0;outputV4DiagnosticControl=NO;
+#endif
     NSString *text=[name isEqual:@"empty_alpha"]?@"   ":@"Cocolon", *code=nil;
     if ([name isEqual:@"native_scale3"]) text=@"نحن نؤمن بأن الحوار";
     if ([name isEqual:@"positive_fractional_phase"]) text=@"🇯🇵。違いを大切にして、";
@@ -1297,7 +1338,13 @@ static BOOL runOutputV4Checks(PieceTextMetrics *module, RCTBridge *bridge) {
     BOOL validCase=[@[@"closed20_union_direct_v2_unchanged",@"native_scale2",@"native_scale3",@"positive_fractional_phase",@"negative_fractional_phase",@"one_use",@"branding_opacity08",@"controlled_native_clip_trap"] containsObject:name];
     // A valid control must reach the new path before a fault is imposed.
     NSString *controlCode=nil;
+#if defined(COCOLON_PIECE_STANDALONE_DIAGNOSTICS)
+    outputV4DiagnosticControl=YES;
+#endif
     NSDictionary *control=[name isEqual:@"empty_alpha"]?nil:outputV4Call(module,text,font,req,&controlCode);
+#if defined(COCOLON_PIECE_STANDALONE_DIAGNOSTICS)
+    outputV4DiagnosticControl=NO;
+#endif
     BOOL controlOK=[name isEqual:@"empty_alpha"] || (control.count==20 && controlCode==nil);
     outputV4FaultReached=0;
     if ([name isEqual:@"nil_contents"]) layer.fixtureNilContents=YES;

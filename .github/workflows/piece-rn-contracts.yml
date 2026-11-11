@@ -215,8 +215,9 @@ jobs:
           git rev-parse HEAD
           git hash-object ios/tempCocolon/PieceTextMetrics.mm
           xcodebuild -version
+          PIECE_NATIVE_DIAGNOSTIC_ONLY=1 bash tests/native/run-piece-rn-canvas-ios.sh
           ARCH="$(uname -m)"
-          xcrun clang++ -std=c++20 -fobjc-arc -fblocks -fmodules \
+          xcrun clang++ -std=c++20 -fobjc-arc -fblocks -fmodules -DCOCOLON_PIECE_STANDALONE_DIAGNOSTICS=1 \
             -target "$ARCH-apple-ios15.1-simulator" \
             -isysroot "$(xcrun --sdk iphonesimulator --show-sdk-path)" \
             -I "$TEST_DIR/include" -I tests/native \

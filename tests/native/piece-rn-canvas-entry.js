@@ -220,6 +220,24 @@ class CanvasCases extends React.Component {
   caseFixtures = (this.props.pieceGroup === 'model73' ? model73Fixtures : this.props.pieceGroup === 'export' ? exportFixtures : this.props.pieceGroup === 'admitted' ? admittedFixtures : this.props.pieceGroup === 'bitmap' ? bitmapFixtures : fixtures).map(fixture => fixture.props?.display ? { ...fixture,
     props: { ...fixture.props, display: { ...fixture.props.display, visualToken: Object.freeze({}) } } } : fixture);
   state = { index: 0, rawLeft: 0 };
+  observedGeometryCards = new WeakSet();
+  observeGeometryCard = node => {
+    this.card = node;
+    if (!node || this.observedGeometryCards.has(node)) return;
+    this.observedGeometryCards.add(node);
+    const measure = node.measure;
+    // Observe synchronous event handling separately from native/React layout
+    // waits. Ref detach/reattach must not stack wrappers on the same Card.
+    node.measure = (...args) => {
+      const trace = this.card === node ? this.trace : null;
+      const started = performance.now();
+      const event = trace ? { index: args[1], kind: args[2], phase: node.state.measurement.phase,
+        elapsed_ms: started - this.started } : null;
+      if (event) trace.geometry_events.push(event);
+      try { return measure.apply(node, args); }
+      finally { if (event) event.handler_ms = performance.now() - started; }
+    };
+  };
   saveFitChanged = (next, previous) => {
     if (next || this.saveFitHandle === previous) this.saveFitHandle = next;
   };
@@ -235,7 +253,7 @@ class CanvasCases extends React.Component {
       expiresAt: this.originalExpiresAt, monotonicStartedAt: this.started });
     this.bitmapDeadline = Object.freeze({ profile: BITMAP_PROFILE, startedAt: this.originalStartedAt,
       expiresAt: this.originalExpiresAt, monotonicStartedAt: this.started });
-    this.trace = { candidates: [], adapters: [], plans: [], states: [], selected: [], native_selected_v3: [], native_selected_v4: [] };
+    this.trace = { candidates: [], adapters: [], plans: [], states: [], selected: [], native_selected_v3: [], native_selected_v4: [], geometry_events: [] };
     activeTrace = this.trace;
     this.finishing = false; this.rawOperation = null; this.rawReport = null;
     this.cropApplied = false; this.cropResult = null; this.cropBeforeFit = false;
@@ -508,7 +526,7 @@ class CanvasCases extends React.Component {
         </View>
       </View>
     </View>;
-    return <View style={this.props.pieceGroup==='export'||fixture.evidence_set==='model73_export'?{position:'absolute',left:-10000,top:0,width:1080}:{width:360}}><PieceVisualCard key={fixture.name} ref={node => { this.card = node; }}
+    return <View style={this.props.pieceGroup==='export'||fixture.evidence_set==='model73_export'?{position:'absolute',left:-10000,top:0,width:1080}:{width:360}}><PieceVisualCard key={fixture.name} ref={this.observeGeometryCard}
       {...fixture.props} onSaveFitChange={this.saveFitChanged} /></View>;
   }
 }

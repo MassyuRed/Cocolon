@@ -212,6 +212,12 @@ source.write_text(instrumented)
 Path(sys.argv[1]).write_text(json.dumps(metadata,indent=2)+'\n')
 print('PIECE_V4_DIAGNOSTIC_MAP '+json.dumps(metadata,separators=(',',':')))
 PIECE_DIAGNOSTIC_PY
+# The standalone metrics job reuses this exact104-marker projection, then
+# compiles its existing TextKit fixture. It does not start a React/native build
+# or substitute its control/fault assertions with the diagnostic observation.
+if [ "${PIECE_NATIVE_DIAGNOSTIC_ONLY:-}" = 1 ]; then
+  exit 0
+fi
 PIECE_RN_CANVAS_PROFILE=output-grid-v4 node tests/native/piece-rn-canvas-fixtures.cjs > tests/native/piece-rn-canvas-fixtures.json
 PIECE_RN_CANVAS_PROFILE=output-grid-v4 PIECE_RN_BITMAP_GROUP=1 node tests/native/piece-rn-canvas-fixtures.cjs > tests/native/piece-rn-bitmap-fixtures.json
 PIECE_RN_CANVAS_PROFILE=output-grid-v4 PIECE_RN_ADMITTED_GROUP=1 node tests/native/piece-rn-canvas-fixtures.cjs > tests/native/piece-rn-admitted-fixtures.json
