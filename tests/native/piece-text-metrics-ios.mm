@@ -1625,23 +1625,35 @@ static BOOL runFractionalV4Checks(PieceTextMetrics *module, RCTBridge *bridge) {
     if (allReady && [record[@"clipped_support_differs"] boolValue]) clippedDifferentCount++;
   } }
   BOOL coverage = records.count == 3 && nonalignedCount == 3 && clippedDifferentCount > 0;
+  // Persist before console output: simctl can detach before a large final
+  // stdout write drains. The file is the complete independent observation.
   for (NSMutableDictionary *record in records) {
     for (NSMutableDictionary *outcome in record[@"contrasts"]) {
       BOOL pass = coverage && [record[@"geometry_ready"] boolValue] && [outcome[@"local_conditions_pass"] boolValue];
       outcome[@"pass"] = @(pass); fractionalChecks++; if (!pass) fractionalFailures++;
-      printf("%s %s_%s\n",pass?"FRACTIONAL_PASS":"FRACTIONAL_FAIL",
-        [record[@"case"] UTF8String],[outcome[@"contrast"] UTF8String]);
     }
     record[@"coverage_ready"] = @(coverage);
-    NSError *error = nil; NSData *data = [NSJSONSerialization dataWithJSONObject:record options:NSJSONWritingSortedKeys error:&error];
-    if (data && !error) printf("FRACTIONAL_V4_GEOMETRY %s\n",[[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] UTF8String]);
-    else { printf("FRACTIONAL_V4_GEOMETRY_ERROR serialization\n"); coverage = NO; }
   }
+  NSDictionary *evidence = @{@"schema":@"piece.fractional_reference_probe.v1",
+    @"checks":@(fractionalChecks),@"passes":@(fractionalChecks-fractionalFailures),
+    @"failures":@(fractionalFailures),@"skips":@0,@"expected":@24,
+    @"nonaligned":@(nonalignedCount),@"clipped_different":@(clippedDifferentCount),
+    @"coverage_ready":@(coverage),@"records":records};
+  NSString *directory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,NSUserDomainMask,YES).firstObject
+    stringByAppendingPathComponent:@"piece-ar04-native"];
+  NSError *error = nil;
+  BOOL directoryReady = [NSFileManager.defaultManager createDirectoryAtPath:directory
+    withIntermediateDirectories:YES attributes:nil error:&error];
+  NSData *data = [NSJSONSerialization dataWithJSONObject:evidence options:NSJSONWritingSortedKeys error:&error];
+  BOOL persisted = directoryReady && data && !error &&
+    [data writeToFile:[directory stringByAppendingPathComponent:@"fractional-reference.json"]
+      options:NSDataWritingAtomic error:&error];
+  printf("FRACTIONAL_V4_RECORD_FILE=%s\n",persisted?"WRITTEN":"FAILED");
   printf("FRACTIONAL_V4_CHECKS=%lu PASS=%lu FAIL=%lu SKIP=0 EXPECTED=24 NONALIGNED=%lu CLIPPED_DIFFERENT=%lu\n",
     (unsigned long)fractionalChecks,(unsigned long)(fractionalChecks-fractionalFailures),(unsigned long)fractionalFailures,
     (unsigned long)nonalignedCount,(unsigned long)clippedDifferentCount);
   window.hidden = YES;
-  return coverage && fractionalChecks == 24 && fractionalFailures == 0;
+  return persisted && coverage && fractionalChecks == 24 && fractionalFailures == 0;
 }
 #endif
 
