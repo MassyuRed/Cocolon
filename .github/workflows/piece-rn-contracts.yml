@@ -1,9 +1,9 @@
 # Piece contracts, native metrics and isolated RN simulator rendering; no signing or deployment.
-name: Piece V4 inverse clip RN probe (unadopted)
+name: Piece V4 natural context linkage (unadopted)
 'on':
   push:
     branches:
-      - agent/piece-v4-inverse-clip-rn-probe-20261112
+      - agent/piece-v4-natural-context-link-20261112
     paths:
       - .github/workflows/piece-rn-contracts.yml
       - features/piece/**
@@ -378,7 +378,7 @@ jobs:
           retention-days: 7
 
   piece-ios-rn-canvas:
-    if: github.repository == 'MassyuRed/Cocolon' && github.ref == 'refs/heads/agent/piece-v4-inverse-clip-rn-probe-20261112'
+    if: github.repository == 'MassyuRed/Cocolon' && github.ref == 'refs/heads/agent/piece-v4-natural-context-link-20261112'
     runs-on: macos-15
     timeout-minutes: 45
     steps:

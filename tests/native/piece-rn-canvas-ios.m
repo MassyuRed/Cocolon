@@ -531,6 +531,7 @@ static void PieceDiagnosticNativeV3Call(id module, SEL selector, NSNumber *tag, 
 static PieceSelectedV2Call PieceUnobservedSelectedV4Call;
 static NSMutableArray *PieceNativeV4BoundaryRecords;
 static NSUInteger PieceNativeV4BoundaryOrdinal;
+static NSDictionary *PieceExistingNaturalPaintContexts(RCTTextView *view, NSNumber *tag, NSTextStorage *storage);
 
 static void PieceRecordNativeV4Boundary(id module, NSDictionary *identity,
     NSString *status, id wire, NSString *code, NSString *message) {
@@ -572,6 +573,7 @@ static void PieceRecordNativeV4Boundary(id module, NSDictionary *identity,
         @"frame_match":@(observation&&CGRectEqualToRect([observation[@"frame"]CGRectValue],view.cocolonPieceContentFrame)),
         @"scale_match":@(observation&&[observation[@"scale"]doubleValue]==view.contentScaleFactor)};
       record[@"natural_snapshot"]=snapshot;
+      record[@"existing_natural_paint_contexts"]=PieceExistingNaturalPaintContexts(view,identity[@"tag"],storage);
     }
     NSInteger expectedStage=[identity[@"stage"] isEqual:@"local"]?1:([identity[@"stage"] isEqual:@"placed"]?2:0);
     record[@"diagnostic_identity_match"]=@(state && [state[@"enabled"] boolValue] &&
@@ -644,6 +646,36 @@ static PieceDrawRectCall PieceOriginalDrawRect;
 static BOOL PieceInsideNaturalDraw;
 static NSMutableArray *PiecePaintContexts;
 static NSMutableSet *PiecePaintContextKeys;
+// Read only the existing paint-observer history on the original callback stack.
+// Its keys already deduplicate context records; these are not draw-call counts
+// or proof that a prior paint represents the latest source/attributes.
+static NSDictionary *PieceExistingNaturalPaintContexts(RCTTextView *view, NSNumber *tag, NSTextStorage *storage) {
+  NSString *viewIdentity=[NSString stringWithFormat:@"%p",(__bridge void *)view];
+  NSString *storageIdentity=[NSString stringWithFormat:@"%p",(__bridge void *)storage];
+  BOOL available=NSThread.isMainThread && PiecePaintContexts!=nil && view!=nil && tag!=nil && storage!=nil;
+  NSArray *contexts=available ? [PiecePaintContexts copy] : @[];
+  NSMutableArray *draws=[NSMutableArray new], *shared=[NSMutableArray new], *reference=[NSMutableArray new];
+  for(NSDictionary *sample in contexts){
+    if(![sample[@"tag"] isEqual:tag] || ![sample[@"view_identity"] isEqual:viewIdentity] ||
+        ![sample[@"storage_identity"] isEqual:storageIdentity])continue;
+    if([sample[@"kind"] isEqual:@"natural_drawRect_pre_paint"])[draws addObject:sample];
+    else if([sample[@"kind"] isEqual:@"natural_shared_paint"])[shared addObject:sample];
+    else if([sample[@"kind"] isEqual:@"reference_shared_paint"])[reference addObject:sample];
+  }
+  return @{@"available":@(available),
+    @"match_identity":@{@"tag":tag?:NSNull.null,@"view_identity":viewIdentity,@"storage_identity":storageIdentity},
+    @"current_public_bounds":PieceRect(view.bounds),
+    @"current_content_frame":PieceRect(view.cocolonPieceContentFrame),
+    @"observation_scope":@"existing_records_before_original_callback_return",
+    @"count_semantics":@"deduplicated_existing_context_records_not_draw_invocations",
+    @"collector_omission":@"nil_UIGraphicsGetCurrentContext_returns_without_record",
+    @"zero_count_interpretation":@"no_matching_existing_context_records_not_proof_no_draw",
+    @"natural_drawRect_pre_paint_unique_count":@(draws.count),
+    @"natural_shared_paint_unique_count":@(shared.count),
+    @"reference_shared_paint_unique_count":@(reference.count),
+    @"matching_natural_drawRect_pre_paint":[draws copy],@"matching_natural_shared_paint":[shared copy],
+    @"matching_reference_shared_paint":[reference copy]};
+}
 static void PieceObservePaintContext(RCTTextView *view, NSString *kind) {
   CGContextRef cg=UIGraphicsGetCurrentContext(); if (!cg) return;
   NSString *identity=[NSString stringWithFormat:@"%p",(__bridge void *)view];
