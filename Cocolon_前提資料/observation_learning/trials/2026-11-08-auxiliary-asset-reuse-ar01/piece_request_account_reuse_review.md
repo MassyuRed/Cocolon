@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/11・AR-04最新：** 具体承認後、保存f6dae・稼働用Pythonで新3＋保持2を一回・学習0の実4B比較。同じ実5rawの採用は旧48の2→現5fの5、評価文体の新3だけ0→3回復。保持2の全request／raw／responseは前回と完全一致。source意味／plan／prepared／messages不変、15保存・非生成再読成功。9HTTP・96.967秒で元提供へ復元、args／全env／cwd・通常／Analysis前後全response一致、独立health200。API5f3a8d5aのPiece／Analysis両CI成功も確認。今回はsource／test変更・新CI実行0。f6dae研究候補・通常selector OFF、本番未反映。 [実4B評価文体・保存と復元](piece_request_account_reuse_review.md#piece-scoped-evaluation-register-actual-20261111)。
+> **11/11・AR-04最新：** 旧53照合行を51完全一致要求へ集約し、現f6daeで取得済み10要求を再利用。未取得41＋保持確認2の無学習比較を準備した。全69旧rawの現8329採否／本文と、原source／prepared／messagesは不変。送信候補31,961byte・最大43 Piece／47HTTP、復元枠込み600秒設定。新送信／環境読取／モデル呼出0・具体承認待ち。直近実8応答・24保存・103.914秒復元は完了として継承。通常selector OFF・AR-04未完。 [旧53比較の具体案・未実行範囲](piece_request_account_reuse_review.md#piece-breadth53-inference-prepared-20261111)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -1537,3 +1537,42 @@ API8329a828のPiece CI42943673831／job130271199367は全39工程、Analysis CI4
 ### 次の作業と未完了
 
 次は一般文章の自然さ・反復・引用／理由等の残差を、元教材・保存済み実本文と既存source／生成条件から切り分ける。今回の8実応答・24保存・103.914秒復元は完了し、この12HTTPと過去の完了済みrunを再実行しない。今回の一回承認は消費済み。新fit／GPU比較を自動選定せず、通常モデル採用／selector有効化／Render／live DB／RN／buildは自動実行しない。 本人前置形の実raw、引用／理由一般・修飾の読取、広い文章、新f6daeの旧53全生成回帰、同版画像／通常統合／本人端末、既存無引用3失敗とAR-01／他ARを残す。今回の前提先行rawを理由に同じ8入力へSYSTEM・labelを追加して周回しない。
+
+
+<a id="piece-breadth53-inference-prepared-20261111"></a>
+## 11/11 AR-04 — 旧53照合行の現f6dae比較を準備（未実行）
+
+**旧53照合行を51完全一致要求へ集約し、現f6daeで取得済み10要求を再利用。未取得41＋保持確認2の無学習比較を準備した。全69旧rawの現8329採否／本文と、原source／prepared／messagesは不変。送信候補31,961byte・最大43 Piece／47HTTP、復元枠込み600秒設定。新送信／環境読取／モデル呼出0・具体承認待ち。直近実8応答・24保存・103.914秒復元は完了として継承。通常selector OFF・AR-04未完。**
+
+### 今回の目的と回収した資産
+
+一般本文・単独伝達の現f6daeに対する未確認範囲を、元入力と同じ要求で確認する直接作業。旧c634の反復6件・FOCAL02の格不成立はtarget3修正と48更新によるf6daeで既に修復済みであり、現在の失敗へ戻さない。氏名／GENERAL01・07・08の既知source不足も修復済み。直近8実本文にも新たな意味崩れを認めず、追加学習やSYSTEM追記を先に選ぶ根拠はない。
+
+保存原本Cocolon_CMEE_AR04_ModifiedPreference_ReaderReuse_20261110.zip（version1、libfile_fde3_f-77b40ab73c9c8191b615c66b5f25ad16_2f7470f963808191aaebf050935e72de）の凍結69行を回収。frozen69 SHA256 `22465f5dd6e555d3d6b3558b00cddac8a3274584b692a92331d4f6ec3703019e`。旧53＋現f6dae16の原7項目・refined本人補足／Q2資格、prepared ID／JSON、現在のsource／意味／plan／builder messagesを再構成し、旧作者fallback禁止で同69rawを現API8329へ再受領。全69の採否・reason・receipt・本文と全送信messagesは保存記録のまま。GPU／live DBは使っていない。
+
+| 照合対象 | 数と扱い |
+|---|---|
+| 旧参考行 | 53行、normal48／refined5。独立した新規入力数ではない |
+| 同一要求の集約 | full request SHAで51要求。FRESH02／FRESH15に各1重複行 |
+| 既存f6dae実応答 | 同一要求10を再利用。再生成による確認件数の水増しなし |
+| f6dae未取得 | 41要求。うちrefined3（FRESH13／14／16） |
+| 保持確認 | 既存GENERAL03／FRESH02の2要求を意図的に再取得して一致を確認する計画（未実行） |
+| 新しく著した教材 | 0。全て既露出の架空入力 |
+
+同じcase_idが重みcohortをまたいで重複するため、cohort順のrow IDを保持する。初回offline照合ではこの衝突による誤結合で中断し、行順照合へ修正して全69が一致。原source／rawの修補・製品変更は0。requestの同一性はmessagesだけでなくmodel、temperature0、max_tokens2048、stream false、thinking false、candidate_formatまで比較した。同じ原入力への期待本文・旧rawは送らない。
+
+### 一回案・復元と実行境界
+
+packet29,566byte／2member、SHA256 `2d1a3f253287d8af69e6386963df553f980e3b7793672c491a86b9ea0e25affb`、launcher2,395byte／SHA256 `c9a5bca39220889f153470b9aa2112615802559587ea2ca044fc74572d96a9a4`、合計31,961byte。wire312,745byte／SHA256 `76b65ae7eccbca72383bf1e2b73d64ca338596c82a0e7caac6f3c85fd2e6ee7a`。既存runnerのhelper ASTはcall上限以外不変、元生成条件の一致も停止前に検査。独立静的37項目で不整合なし。構文compile／CRC／member／hash照合成功、承認なしguardでprocess／環境読取の前に停止。launcherはcompileのみ、実起動なし。
+
+次は旧53照合行の未取得41要求＋既存f6dae保持確認2を、保存f6dae・既存稼働用Pythonで一回・追加学習0の実4B比較へ通す案。packet／launcher合計31,961byte、候補最大43＋通常／Analysis前後control4＝最大47HTTP、復元枠込み600秒設定／復元予約120秒。既存Podへの新送信と、認証情報を含み得る全起動環境の同Pod内一時読取・復元再利用は、この新しい43要求案の具体承認後に限る。480秒のwork期限で途中結果を保持して復元へ戻るため、全43完了を保証しない。前回の一回承認は消費済みで、完了済み8応答の12HTTPを再実行しない。新fit／通常採用／selector有効化／Render／live DB／RN／buildの自動実行0。
+
+既存Pod f1lle4xwq3wjln、稼働用`/workspace/cocolon_venv/bin/python`、新root`/workspace/ar04-breadth53-20261111`。PID64078は最後の復元時の履歴で、現在のfresh確認値ではない。Piece1load、追加学習・新weights・retry0。全起動環境は同Pod内だけで一時再利用し、値は回収物／ログへ含めない。元args／env／cwd・serving source・通常／Analysis前後全response・healthを照合する。期限設定は外部watchdogによる無条件終了保証ではなく、時間不足なら取得分を保持して復元を優先する。
+
+### 次の実出力の評価と未完了
+
+実行後は新raw41＋既存f6dae10を51要求へ戻し、旧53行の対応を維持して、主体・所有者・肯否・時点・留保・欄境界・refined本人補足と、反復・単独で伝わる本文を全量比較する。CMEE採用だけを自然な文章品質としない。保持2は前回全request／raw／response等と照合し、実際に受付できた本文を既存保存・非生成再読へ通す。今回この新実出力・保存は未実施。部分取得なら未取得を明示し、自動retryしない。
+
+本人前置形の実raw、引用／理由一般・修飾の読取、広い文章品質、同版画像／通常統合／本人端末、既存無引用3失敗とAR-01／他ARは未完。今回の商品source／test／workflow変更・新pytest／CI要求0、STRUCTURE_MAP_DELTA_NONE。準備や既存rawの再照合を商品改善へ加点せず、商品品質credit0・正式受入れ追加0。前回実8／24保存／103.914秒復元とAPI8329の両CI成功を継承。
+
+private原入力・全raw・資格／再利用対応・固定packet／launcher・独立レビュー・未実行境界を[Cocolon_CMEE_AR04_Breadth53_Prepared_20261111.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-0d0d803a847c8191ad38c13daaee6a2a_2f7470f963808191aaebf050935e72de&account_id=personal)へ保存。repository本体・依存・重みは重複保存しない。

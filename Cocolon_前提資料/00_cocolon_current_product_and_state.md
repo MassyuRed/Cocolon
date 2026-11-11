@@ -1,4 +1,4 @@
-> **11/11・AR-04最新：** API8329a828の本人前置3＋元評価焦点3＋保持2を、具体承認後に保存f6daeで一回・学習0の実4B確認。同じ8rawの旧eb9→現8329採用は6→8、元焦点2だけ回復、保持2の全request／raw／response不変。全8×3planの24保存・非生成再読。12HTTP・103.914秒で元提供args／env／cwdを復元し、通常／Analysis前後response一致・独立health200。Piece／Analysis両CI成功。本人前置3の実rawは前提先行で、その本人前置形自体は未実証。f6dae研究候補・通常selector OFF、本番未反映。 [実8応答・24保存・完了と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-combined-register-actual-20261111)。
+> **11/11・AR-04最新：** 旧53照合行を51完全一致要求へ集約し、現f6daeで取得済み10要求を再利用。未取得41＋保持確認2の無学習比較を準備した。全69旧rawの現8329採否／本文と、原source／prepared／messagesは不変。送信候補31,961byte・最大43 Piece／47HTTP、復元枠込み600秒設定。新送信／環境読取／モデル呼出0・具体承認待ち。直近実8応答・24保存・103.914秒復元は完了として継承。通常selector OFF・AR-04未完。 [旧53比較の具体案・未実行範囲](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-breadth53-inference-prepared-20261111)。
 
 > **11/10・AR-04最新：** 引用内stopを持つ新4件＋保持GENERAL07の現builder送信messagesを固定し、13,140byte・2memberの無学習比較packetを準備。構文compile／CRC／member照合は成功、実モデル生成・送信・提供停止0。非環境の稼働確認はhealth200。起動環境全体の読取りは認証情報を含み得るとして自動承認審査に拒否され、未実行。新packet送信と、完全復元に必要な環境内再利用の具体承認待ち。API5816f2d0／f6dae研究候補・通常selector OFF・本番未反映を維持。 [具体packet・確認範囲・再開点](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quote-stop-inference-prepared-20261110)。
 
@@ -595,3 +595,13 @@ API8329a828の本人前置3＋元評価焦点3＋保持2を、具体承認後に
 次は一般文章の自然さ・反復・引用／理由等の残差を、元教材・保存済み実本文と既存source／生成条件から切り分ける。今回の8実応答・24保存・103.914秒復元は完了し、この12HTTPと過去の完了済みrunを再実行しない。今回の一回承認は消費済み。新fit／GPU比較を自動選定せず、通常モデル採用／selector有効化／Render／live DB／RN／buildは自動実行しない。
 
 API8329a828のPiece CI42943673831／job130271199367は全39工程、Analysis CI42943673837／job130271199286は全19工程、双方attempt1・successをfresh確認。追加run／rerun0。 [実原本・意味比較・保存・限界](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-combined-register-actual-20261111)。
+
+
+<a id="piece-breadth53-inference-prepared-20261111"></a>
+## 11/11 AR-04 — 旧53照合行の現f6dae比較を準備
+
+旧53照合行を51完全一致要求へ集約し、現f6daeで取得済み10要求を再利用。未取得41＋保持確認2の無学習比較を準備した。全69旧rawの現8329採否／本文と、原source／prepared／messagesは不変。送信候補31,961byte・最大43 Piece／47HTTP、復元枠込み600秒設定。新送信／環境読取／モデル呼出0・具体承認待ち。直近実8応答・24保存・103.914秒復元は完了として継承。通常selector OFF・AR-04未完。
+
+次は旧53照合行の未取得41要求＋既存f6dae保持確認2を、保存f6dae・既存稼働用Pythonで一回・追加学習0の実4B比較へ通す案。packet／launcher合計31,961byte、候補最大43＋通常／Analysis前後control4＝最大47HTTP、復元枠込み600秒設定／復元予約120秒。既存Podへの新送信と、認証情報を含み得る全起動環境の同Pod内一時読取・復元再利用は、この新しい43要求案の具体承認後に限る。480秒のwork期限で途中結果を保持して復元へ戻るため、全43完了を保証しない。前回の一回承認は消費済みで、完了済み8応答の12HTTPを再実行しない。新fit／通常採用／selector有効化／Render／live DB／RN／buildの自動実行0。
+
+全ファイル地図／商品ownerの追加変更なし（STRUCTURE_MAP_DELTA_NONE）。今回の商品source／test／新CI要求0。準備を広い文章品質・正式受入れへ加点しない。 [原本・重複除去・具体packet・次の評価](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-breadth53-inference-prepared-20261111)。
