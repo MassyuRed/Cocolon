@@ -1,6 +1,6 @@
 # 第10回 Cocolon週末報告会 — 2026-11-07（終了）
 
-> **11/11・AR-04最新：** 実007の親loading/unmount→B再描画と、別の同Card回帰を実native2mode/4frame・元8秒内で確認。旧fit失効、preview capture常時null、3段落/配色/PNGを保持。source83fcd89b/PieceRN43012230881はrun結論cancelled、RN jobはWholeのみfailure（59/43→60/44、elapsed assertion1増）。source metrics出力0で今回oracle未確認。recorded3/native6等の完了を継承し、通常selector OFF・AR-04未完。 [配色変更のactual親flow・別component回帰と現在地](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-344a-native-visual-transition-20261111)。
+> **11/11・AR-04最新：** 旧Wholeのlogical1占有差と長文8秒超過を切り分けるため、既存104-marker診断をstandalone V4へ再利用し、正常control／後続callごとの停止stage・fault到達を記録。既存RN traceへgeometry event同期時間も追加した。source99fba3bf・PieceRN43021553284は実行中で、今回native結果は未確認。元の判定・8秒・製品source・通常selector OFFを保持し、AR-04未完。 [共通controlとgeometry待ち時間の診断](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-344a-native-control-diagnostics-20261111)。
 
 記録日：2026年11月7日（日本時間）  
 対象週：**2026年11月7日〜11月14日**  

@@ -2288,3 +2288,34 @@ source V4_19の個別stageは未観測で共通control.count20に依存し、今
 次は旧Wholeのlogical1占有差と追加elapsed assertion（legacy essay_max420）、sourceV4のcontrol依存/未観測stageを、現ios.v2との共有範囲を分けて切り分ける。今回の配色transitionは確認済みとして保持し、通常host/Photos/本人端末・正式受入れと通常採用の未確認を残す。
 
 STRUCTURE_MAP_DELTA_NONE：製品のowner/route/DTO/DB/作者/controller/native計測/renderer責務は不変。actual sourceに合わせて既存harness内の主modeとcomponent回帰を分ける差分で、新しい管理票・Gate・製品capture許可を追加しない。
+
+
+<a id="piece-344a-native-control-diagnostics-20261111"></a>
+## 11/11 AR-04 — 共通controlとgeometry待ち時間の実診断（実行中）
+
+### 前回結果から確定した範囲
+
+前回source83fcd89b／run43012230881の新transition4frameと静的model73の6frameは確認済みとして継承する。旧Wholeの60assertion／44署名と、standalone source metrics取消し／今回出力0は未解決である。fresh全体現在地、全体設計01と全file地図01A/B/C、最新weekly冒頭、詳細設計§9/§11から、この残件を今回の一作業に選んだ。System Contextのfresh cacheは未生成のままで、8月のtracked currentを現在の原本として使わない。全tree5892entry／5412blobを確認し、地図と対象原本を読んだ。全blob本文の読了とはしない。
+
+standalone V4の20検査は、空白例を除き各caseの最初に正常control.count==20を要求する。同じ正常controlの不成立は後続のfault検査へ伝播するため、旧19失敗を19種類の独立した保護破綻とは断定できない。RN stage83はnatural layerと再構成reference layerのlogical1各cellに対するalpha>0占有の完全比較である。実reportにはactualのみ／referenceのみの差と、同じedge bounds内の差があり、edge union、閾値緩和、一方向包含では原因を解消できない。layer再構成時のsampling差は仮説であり、確定原因ではない。
+
+legacy essay_max420の4font（48/44/40/36）は各1call、各88410範囲／11381metricで前後同じ。前回6736.355ms→今回8157.270msで、planning→measuringは4461.238→5801.533ms、measuring→geometryは1938.790→2182.920msへ変化。geometry7984.453ms後に期限切れとなり、今回この例のV4 selected callは0だった。候補callは重なり合うためnative各時間を総和しない。bridgeとgeometry両方に時間差があり、重複callや単一の性能原因は未発見である。bitmap stressとcanonical ios.v2は別集合として保持する。
+
+### 既存検証owner内の限定修正
+
+| path | 変更 |
+| --- | --- |
+| tests/native/run-piece-rn-canvas-ios.sh | 既存のexact104-marker／same-call TLS診断を作った直後だけ終了できるstandalone用mode。fixture生成・transport・RN buildへ進まない。 |
+| tests/native/piece-text-metrics-ios.mm | 条件付きV4 call observer。case／呼出順／control・followup／local・placed／result・reject／fault前後・差分／診断identityと停止stageを元call完了後に出力する。 |
+| .github/workflows/piece-rn-contracts.yml | 別のdisposable checkoutで既存injectorを再利用し、同じstandalone fixtureを診断define付きでcompile。元の20検査・195unique PASS・AR04 artifact条件を保持。 |
+| tests/native/piece-rn-canvas-entry.js | 既存traceへgeometry eventのindex／kind／phase／相対時刻／同期handler時間を記録。元measureの引数・receiver・同期1call・return／throwを保持し、WeakSetとCard identityで二重wrap・旧Card混入を防ぐ。 |
+
+製品.mm／Card／renderer／API／DB／判定／期限は変更0。診断defineなしの元standalone testは全文byteへ戻せ、既存native sourceのpreimage581dfd38と104-marker投影24b7db4aも一致した。shell syntax、geometry wrapperの引数／return／throw／1call／再接続／旧Card対照はlocal成功。既存renderer suite189件は修正前後とも全PASS、FAIL／SKIP0。独立担当が4pathを原本・差分と照合してblocking所見なし。これは実native compile／実行成功の代替ではない。handler_msには小さな観測overheadを含み、診断処理も元deadline内のため、別runの時間差を速度改善の因果へ換算しない。
+
+source [99fba3bf5ffc09d65a27cde65e98100a39871dbe](https://github.com/MassyuRed/Cocolon/commit/99fba3bf5ffc09d65a27cde65e98100a39871dbe)は4pathのみ、GitHub全byte読戻し一致。既存[Piece RN run43021553284](https://github.com/MassyuRed/Cocolon/actions/runs/43021553284)がpushで自動起動した。manual dispatch／rerun0。今回の実native結果はまだ未確認で、完了後に本節を置換更新する。
+
+### 再開点と未確認
+
+次は同runのstandalone control／followup別stageとfault到達、RN geometry eventの同期時間を回収する。normal control不成立をfault検査成功へ変換せず、source旧V4とWholeと現ios.v2の共有範囲を分ける。通常host／Photos／本人端末・正式受入れ／通常採用は未確認。通常selector OFF・AR-04未完を維持する。GPU／学習／SQL／実Auth／外部HTTP／Render設定／署名build／配布0。
+
+STRUCTURE_MAP_DELTA_NONE：既存native test／trace責務内の診断追加で、製品owner／route／DTO／DB／作者／controller／renderer／計測責務のtopologyは不変。新しい管理票・Gate・承認段階は追加しない。
