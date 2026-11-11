@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/11・AR-04最新：** 別の明示承認後、保存344aの残12だけを追加学習0で確認。全12がCMEE/S7採用・旧a1dfとraw同一、今回36隔離保存/非生成再読。16HTTP・124.290秒/上限600秒・retry0で元提供PID71802へ復元し、前後対照一致・独立health200/PID一致。先61を再生成/再保存せず、同重み・凍結messagesの2run和集合で73/73（既存65＋新8）全採用、未確認0。旧比72raw同一/051の時制回復1、継続前提回復も保持。累積候補219保存＋旧基準24＝243保存で、今回の新保存は36だけ。通常selector OFF・一般品質/AR-04完了/商品受入れは未成立。 [残12完了・2run和集合73と累積保存](piece_request_account_reuse_review.md#piece-remaining12-actual73-complete-20261111)。
+> **11/11・AR-04最新：** 保存344aの実SQLから通常051の2段落・refined007の3段落の公開DTOを既存RN bitmapHarnessへ接続し、007の配色変更後の正規remountがnative_placement_unstableで止まる製品不具合を再現。f8a3c474でCardのnode参照をbinding所有へ束縛し、旧fitの失効と同binding異常の拒否を維持して新generationの再描画を修復。ローカルJSはAR04新5＋旧5＝10成功、関連旧22＋新5＝27成功（重複集合で合算しない）。既存Piece RN CIはpush自動一回の[run42992952404](https://github.com/MassyuRed/Cocolon/actions/runs/42992952404)/head f8a3c474でoverall failure。JSはNode24.22.2/TS5.2.2で1434＋291＝1725 PASS、追加5件も成功。Android bridge/iOS sourceの実compileは成功、export 2jobは変更対象判定success・compile対象外skip。iOS sourceの旧V4 19 failure名は完全一致だが、RN canvasは旧4method/1failure→新4method/2failuresとなり、既存max420にmeasurement_timeout 8233.993msを新観測。原因切分け未完。保存73/累積243は継承のみ、追加GPU/SQL0。新2作品のnative pixel/Photos/本人端末・正式受入れ、実73とconfigured wrapperの結合、Q2資格外の自然補足は未確認。通常selector OFF・AR-04未完。 [実DTO接続・配色再描画修復と残件](piece_request_account_reuse_review.md#piece-344a-recorded-dto-bitmap-binding-repair-20261111)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -2097,3 +2097,55 @@ API8a0192b622c0ce76cde39062e9476f7c814e6e99のsource/test変更0、新CI/dispatc
 次は通常Piece/refinedと同版画像・保存再読の未確認を、現在の詳細設計と実ファイルから具体化する。今回と前回の完了runを反復せず、73取得完了だけで通常採用/selector、Render/live DB/RN/build/配布へ自動進行しない。追加GPU/fitや新しい承認要求packetは自動作成しない。
 
 NO_STRUCTURE_MAP_DELTA：source/test/公開型/route/DB/作者/controller/Gateの所有者と契約は不変。今回の新12に可視本文差はなく、確認不足を閉じた限定TECHNICAL_CREDIT。通常採用・正式商品credit/human acceptance追加0、AR-04未完を維持する。
+
+
+<a id="piece-344a-recorded-dto-bitmap-binding-repair-20261111"></a>
+## 11/11 AR-04 — 実344a公開DTOの複数段落接続と配色変更後の正規再描画修復
+
+保存344aで既に隔離SQL保存した通常B53-051（2段落）とrefined B53-007（原入力2＋補足1＝3段落）の、公開preview／selected preview／本人detail DTOだけを既存RN bitmapHarnessへ接続した。実SQLからの本文・content_payload・visual_recipe・各hash・renderer版を変更せず使用し、3hashを独立再計算した。plan/quota/capabilityのHTTP外枠だけは明示した合成Premium値を使う。原入力7項目・内部source/lineage/prepared/raw/prompt・認証値をfixtureへ転載していない。既存73本文/243保存を再実行した検証ではなく、今回の追加model/GPU/SQLは0。
+
+### 実際に再現した停止と修正
+
+B53-007の記録済みsoft_paper→quiet_night変更後、新bindingのcanvasが正規remountすると、旧Card.setBitmapNodeはold nodeがあるだけで新measurementまでinvalidateしていた。修正前source blob `ecd10662ad8bb628404847107d5b07faaa3b67f4`に対する同じ新検査は、期待planningに対してunavailable／native_placement_unstableとなり1 FAIL。この停止を製品Cardで修正した。
+
+`bitmapRefFor(binding)`でcallbackの所有bindingを固定し、既にactiveでない旧binding callbackを無視する。nodeにもbindingを記録し、旧bindingから新bindingへの正規置換は旧artifactを解放する一方、新planningを失効させない。同bindingのnode消失/置換は従来どおりunavailableとし、同nodeの再通知はno-opとする。A→B→A、遅いcallback、旧node再attach、unmount後も旧fit/artifactを復活させない。既存のsnapshot/token/node/generation/capture、8秒期限と正式admissionの境界を緩めていない。
+
+### 反映した3pathとローカル検証
+
+source commitは[f8a3c474261ee0862d3d32d82b465ba4cb85e65b](https://github.com/MassyuRed/Cocolon/commit/f8a3c474261ee0862d3d32d82b465ba4cb85e65b)、親はa8e0ece2。3pathの全bytes/blobとchanged pathsを確認済み。
+
+| path | 今回の責務 |
+| --- | --- |
+| `components/piece/PieceVisualCard.js` | bitmap ref/nodeを現在bindingに束縛し、正規再描画と同binding異常の失効を区別する。 |
+| `tests/piece-v2-renderer.test.js` | 実DTOの段落/3hash/preview・saved・export入力、配色変更、旧fit、node消失/置換、stale callback、A→B→A、unmountを既存harnessで確認する。既存段落検査はflatten後本文連結から段落group一致へ整合。 |
+| `tests/fixtures/piece-ar04-344a-multiblock.json` | 実SQL由来の通常051・refined007の公開DTO二作品を固定する。本文/recipe/hashを修補せず、native proofを付与しない。 |
+
+Node24.22.1、TypeScript runtime不使用の既存JS VM/source検査で、追加5＋旧AR04 5＝10 PASS。必要なbitmap lifecycle/product-preview集合も旧22＋追加5＝27 PASS、FAIL/CANCEL/SKIP0。10と27は重複するため37件へ合算せず、全test fileの実行とも呼ばない。native呼出はtest doubleで、これらのnative_checkedやfit/capture整合はJS経路の結果である。独立担当は変更箇所・隣接する失効/fit/capture/非同期guardとfixture/testを読取り、記録されたDTO接続とbinding修正にblockingな静的問題を認めなかった。独立担当による別test実行は0。
+
+### 既存CIと残る受入れ範囲
+
+既存Piece RN CIはpush自動一回の[run42992952404](https://github.com/MassyuRed/Cocolon/actions/runs/42992952404)/head f8a3c474でoverall failure。JSはNode24.22.2/TS5.2.2で1434＋291＝1725 PASS、追加5件も成功。Android bridge/iOS sourceの実compileは成功、export 2jobは変更対象判定success・compile対象外skip。iOS sourceの旧V4 19 failure名は完全一致だが、RN canvasは旧4method/1failure→新4method/2failuresとなり、既存max420にmeasurement_timeout 8233.993msを新観測。原因切分け未完。
+
+JS job `130429991503` の原logでsource suite1434/1434、owner suite291/291、FAIL/CANCEL/SKIP0と新5検査すべての成功を確認した。ローカル10/関連27はこのCI1725と重なる検査であり、CIの外へ加算しない。
+
+Android source job `130429991674` のbridge compile実stepはsuccess。export Android job `130429991627` とexport Pods job `130429992039` はjob結論successだが、依存変更なしのguardによりinstall/compile各stepは対象外skipped、export Podsのartifact出力stepもskipped。二つのexport jobは変更対象判定successであり、新sourceのexport nativeコンパイルやartifact生成成功へ換算しない。
+
+iOS source job `130429991378` はcompile step成功、metrics stepで旧V4_20の1 PASS/19 FAILを維持してfailure。独立担当が旧run `42754406573`/job `129625320017` の実logと比較し、19 failure名は完全一致、新only/旧onlyは0。legacy97/v9_46/旧AR04_4/native129/bitmap44は全PASSで旧結果と一致した。旧AR04_4は今回新2作品のnative検証ではない。既存V4 failureを今回の新故障や修復成功へ振り替えず、source compilation/JS成功と分ける。
+
+iOS RN canvas job `130429991158` はfailure。旧runの4 method/1 failureに対し今回は4 method/2 failuresで、継承するWholeCanvasに加えて`testBitmapCanvasGroupWithRealReactNative`が新しく失敗した。既存`bitmap_essay_max420`が`measurement_timeout`、elapsed 8233.99295900017msで既存8000ms内に完了せず、bitmap_canvasはnull。font候補3/36pxまで進み、planning:3が6624.783ms、measuring:3が7612.149ms、unavailable:3が8182.825msで観測された。後続のbitmap/capture/fit不成立はこの未完了に続く失敗で、今回修正した`native_placement_unstable`と同一原因とはしない。
+
+WholeCanvasの旧/新assertion-case出現数は各118・固有43signatureで一致したが、時刻/アドレス/計測値を含むraw bytes同一とは主張しない。max420の新timeoutは現headで旧runより悪化した観測であり、source変更・実行負荷・別要因の切分けは未完了。局所JS27とCI JS1725成功からnativeの新失敗を打ち消さず、旧失敗だけとも記録しない。今回run attempt1の完了後までterminal failureを確認し、再試行/rerun/dispatch/追加CIは行っていない。
+
+旧新artifactはdigest一致で取得し、抽出した12fixtureは全件が旧比1.58〜2.39倍へ遅延、Cardを経由しないraw Text 3例も1.74〜2.05倍へ遅延していた。max420は旧4063.756459ms→新8233.992959msで、420だけの局所遅延ではないが、source固有影響と実行負荷等の因果切分けは未完了。
+
+Card変更により、既存workflow内のfull iOS simulatorも実行された。native source/workflow/既存native fixtureとcounterは変更0だが、今回CIのnative buildを0とは記録しない。ローカルJS確認時のnative build0と、CIのbuild/実行結果を分ける。signing/配布は行わない。旧V4/WholeCanvasの既存失敗と新max420 timeoutを別に記録し、完全修復完了とはしない。新2作品はnative fixtureへ未配線であり、今回CIはcurrent344a二作品のbitmap pixel proofを確立していない。
+
+API8a0192、保存344a、2run和集合73/73と候補219/旧基準込243保存は継承し、今回再生成/再SQL0。既存SQL direct Shared4B mockはconfigured wrapperのsource_requestを使っておらず、別のconfigured unit成功と連結して実73＋wrapper一体の成立とは呼ばない。refined007は既存のQ2資格・選択回答・原入力と補足別sourceの範囲であり、任意の自然source回答を補足へ自由接続した検証ではない。
+
+今回の可視修正は配色変更後の正規再描画停止の解消で、実画像のpixel/段落配置、Photos、本人端末、一般文章品質・共有価値、正式admission/通常採用やAR-04全体の完了ではない。Render/live DB/selector/実機/配布への反映はない。新native検査group6案はread-only提案のまま、今回実装/追加CIは行わない。
+
+次は、max420のnative候補計測が遅くなった原因と、current344a二作品のnative画像・同版保存/再読の未確認を、現sourceと既存検証経路から詰める。前回GPU個別一回の承認は完了・消費済み。通常採用/selector有効化は未実施、本人端末/正式受入れも未確認。
+
+今回のRED/GREEN・独立読取・公開DTO対応とsource反映記録は[実行記録](https://chatgpt.com/library?file_id=libfile_fde3_f-1c8bfcc14d98819194c2be053b797ee5_2f7470f963808191aaebf050935e72de&account_id=personal)へ保存済み。source codeの正本はGitHubとし、新しいprivate記録へ旧73/48学習artifactのidentityを置換しない。
+
+既存Cardのref/node/generation/capture責務内の修正で、新owner/route/DTO/DB/作者/controller/Gateは追加しない。製品Card変更はあり、「製品renderer変更0」「純test追加」とは記録しない。限定TECHNICAL_CREDIT、human acceptance追加0・AR-04未完。
