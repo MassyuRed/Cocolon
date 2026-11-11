@@ -1,9 +1,9 @@
 # Piece contracts, native metrics and isolated RN simulator rendering; no signing or deployment.
-name: Piece RN preview and owner contracts
+name: Piece V4 inverse clip support experiment (standalone only)
 'on':
   push:
     branches:
-      - agent/three-core-cmee-current-structure-20260815
+      - agent/piece-v4-inverse-clip-support-20261112
     paths:
       - .github/workflows/piece-rn-contracts.yml
       - features/piece/**
@@ -84,7 +84,7 @@ permissions:
   contents: read
 jobs:
   piece-rn-contracts:
-    if: github.repository == 'MassyuRed/Cocolon'
+    if: github.repository == 'MassyuRed/Cocolon' && github.ref == 'refs/heads/agent/three-core-cmee-current-structure-20260815'
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
@@ -132,7 +132,7 @@ jobs:
           tests/analysis-semantic-map.test.js
 
   piece-android-source:
-    if: github.repository == 'MassyuRed/Cocolon'
+    if: github.repository == 'MassyuRed/Cocolon' && github.ref == 'refs/heads/agent/three-core-cmee-current-structure-20260815'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -216,8 +216,16 @@ jobs:
           git hash-object ios/tempCocolon/PieceTextMetrics.mm
           xcodebuild -version
           PIECE_NATIVE_DIAGNOSTIC_ONLY=1 bash tests/native/run-piece-rn-canvas-ios.sh
+          PIECE_LATE_CLIP_STAGE="$(python3 - "$RUNNER_TEMP/piece-rn-canvas/piece-native-diagnostic-map.json" <<'PY_LATE_STAGE'
+          import json, sys
+          stage = json.load(open(sys.argv[1]))['named_stage_map']['late_clip_stability']
+          if type(stage) is not int or not 0 < stage <= 104:
+              raise SystemExit('Missing exact late-clip diagnostic stage')
+          print(stage)
+          PY_LATE_STAGE
+          )"
           ARCH="$(uname -m)"
-          xcrun clang++ -std=c++20 -fobjc-arc -fblocks -fmodules -DCOCOLON_PIECE_STANDALONE_DIAGNOSTICS=1 \
+          xcrun clang++ -std=c++20 -fobjc-arc -fblocks -fmodules -DCOCOLON_PIECE_STANDALONE_DIAGNOSTICS=1 -DCOCOLON_PIECE_FRACTIONAL_REFERENCE_PROBE=1 -DCOCOLON_PIECE_LATE_CLIP_STAGE="$PIECE_LATE_CLIP_STAGE" \
             -target "$ARCH-apple-ios15.1-simulator" \
             -isysroot "$(xcrun --sdk iphonesimulator --show-sdk-path)" \
             -I "$TEST_DIR/include" -I tests/native \
@@ -277,9 +285,17 @@ jobs:
           if [ -n "$APP_CONTAINER" ] && [ -d "$APP_CONTAINER/Documents/piece-ar04-native" ]; then
             cp -R "$APP_CONTAINER/Documents/piece-ar04-native" "$TEST_DIR/ar04"
           fi
-          python3 - "$TEST_DIR/native-metrics.log" "$PIECE_NATIVE_LAUNCH_STATUS" <<'PY_RESULT'
-          import pathlib, sys
+          python3 - "$TEST_DIR/native-metrics.log" "$PIECE_NATIVE_LAUNCH_STATUS" "$TEST_DIR/ar04" <<'PY_RESULT'
+          import pathlib, sys, json, hashlib, re
           lines = pathlib.Path(sys.argv[1]).read_text(errors='replace').splitlines()
+          evidence_dir = pathlib.Path(sys.argv[3])
+          pngs = {name: (evidence_dir / name).read_bytes() for name in ['preview.png', 'saved.png']}
+          fixed = json.loads((evidence_dir / 'result.json').read_text())
+          print('FIXED_BITMAP_EVIDENCE ' + json.dumps({
+              'png_sha256': {name: hashlib.sha256(data).hexdigest() for name, data in pngs.items()},
+              'preview_saved_png_equal': pngs['preview.png'] == pngs['saved.png'],
+              'result': fixed
+          }, sort_keys=True))
           summaries = [line for line in lines if line.startswith('NATIVE_CHECKS=')]
           expected = 'NATIVE_CHECKS=129 PASS=129 FAIL=0 SKIP=0'
           legacy = 'LEGACY_NATIVE_CHECKS=97 PASS=97 FAIL=0 SKIP=0'
@@ -302,6 +318,18 @@ jobs:
                   or len(passed) != 195 or len(set(passed)) != 195
                   or any(line.startswith('FAIL ') for line in lines)):
               raise SystemExit('Native metrics did not finish the unchanged175 and newV4_20 with195 unique PASS; oldV3_20 is explicitly unexecuted')
+          fractional = [line for line in lines if line.startswith('FRACTIONAL_V4_CHECKS=')]
+          pattern = r'FRACTIONAL_V4_CHECKS=24 PASS=24 FAIL=0 SKIP=0 EXPECTED=24 NONALIGNED=3 CLIPPED_DIFFERENT=([1-3])'
+          if len(fractional) != 1 or re.fullmatch(pattern, fractional[0]) is None:
+              raise SystemExit('Fractional checks or natural geometry coverage did not complete')
+          fractional_passed = [line[16:] for line in lines if line.startswith('FRACTIONAL_PASS ')]
+          geometry = [json.loads(line.split(' ', 1)[1]) for line in lines if line.startswith('FRACTIONAL_V4_GEOMETRY ')]
+          if (len(fractional_passed) != 24 or len(set(fractional_passed)) != 24
+                  or len(geometry) != 3
+                  or not all(g.get('geometry_ready') and g.get('nonaligned_bounds') for g in geometry)
+                  or not any(g.get('clipped_support_differs') for g in geometry)
+                  or any(line.startswith(('FRACTIONAL_FAIL ', 'FRACTIONAL_V4_GEOMETRY_ERROR')) for line in lines)):
+              raise SystemExit('Fractional case identities or observations were incomplete')
           PY_RESULT
       - uses: actions/upload-artifact@v4
         if: always()
@@ -312,7 +340,7 @@ jobs:
           retention-days: 7
 
   piece-ios-rn-canvas:
-    if: github.repository == 'MassyuRed/Cocolon'
+    if: github.repository == 'MassyuRed/Cocolon' && github.ref == 'refs/heads/agent/three-core-cmee-current-structure-20260815'
     runs-on: macos-15
     timeout-minutes: 45
     steps:
@@ -354,7 +382,7 @@ jobs:
           retention-days: 7
 
   piece-export-pods:
-    if: github.repository == 'MassyuRed/Cocolon'
+    if: github.repository == 'MassyuRed/Cocolon' && github.ref == 'refs/heads/agent/three-core-cmee-current-structure-20260815'
     runs-on: macos-15
     timeout-minutes: 25
     steps:
@@ -408,7 +436,7 @@ jobs:
           retention-days: 7
 
   piece-export-android:
-    if: github.repository == 'MassyuRed/Cocolon'
+    if: github.repository == 'MassyuRed/Cocolon' && github.ref == 'refs/heads/agent/three-core-cmee-current-structure-20260815'
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:

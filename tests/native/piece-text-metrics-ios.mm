@@ -1440,6 +1440,211 @@ static BOOL runOutputV4Checks(PieceTextMetrics *module, RCTBridge *bridge) {
 }
 
 
+
+// Research-only fractional geometry contrasts. Original native suites/counters
+// above and below are retained; this group has its own prefix and denominator.
+#if defined(COCOLON_PIECE_FRACTIONAL_REFERENCE_PROBE)
+#if !defined(COCOLON_PIECE_STANDALONE_DIAGNOSTICS) || !defined(COCOLON_PIECE_LATE_CLIP_STAGE)
+#error Fractional reference probe requires same-call diagnostics and the mapped late-clip stage
+#endif
+static_assert(COCOLON_PIECE_LATE_CLIP_STAGE > 0, "Late clip stage must be a real mapped failure stage");
+@interface PieceFractionalOutputV4FixtureTextView : PieceOutputV4FixtureTextView
+@property(nonatomic) NSInteger fractionalMutationMode;
+@property(nonatomic) NSUInteger fractionalMutationReached;
+@end
+@implementation PieceFractionalOutputV4FixtureTextView
+- (void)cocolonPiecePaintGlyphRange:(NSRange)glyphs {
+  [super cocolonPiecePaintGlyphRange:glyphs];
+  if (!self.fractionalMutationMode || self.fractionalMutationReached) return;
+  self.fractionalMutationReached++;
+  if (self.fractionalMutationMode == 1) {
+    NSMutableDictionary *changed = [self.fixturePaintObservation mutableCopy];
+    CGRect clip = [changed[@"clip"] CGRectValue];
+    changed[@"clip"] = [NSValue valueWithCGRect:CGRectOffset(clip, 0, 1.0 / 3.0)];
+    self.fixturePaintObservation = [changed copy];
+  } else if (self.fractionalMutationMode == 2) {
+    CGRect bounds = self.bounds; bounds.size.height += 1.0 / 3.0; self.bounds = bounds;
+  }
+}
+@end
+static id fractionalV4Number(double value) { return isfinite(value) ? (id)@(value) : (id)NSNull.null; }
+static NSArray *fractionalV4Rect(CGRect r) {
+  return @[fractionalV4Number(r.origin.x),fractionalV4Number(r.origin.y),
+    fractionalV4Number(r.size.width),fractionalV4Number(r.size.height)];
+}
+static NSArray *fractionalV4QEdges(CGRect r, CGAffineTransform t) {
+  return @[fractionalV4Number(t.a*CGRectGetMinX(r)+t.tx),fractionalV4Number(t.a*CGRectGetMinY(r)-t.ty),
+    fractionalV4Number(t.a*CGRectGetMaxX(r)+t.tx),fractionalV4Number(t.a*CGRectGetMaxY(r)-t.ty)];
+}
+static NSDictionary *fractionalV4Geometry(PieceFractionalOutputV4FixtureTextView *view,
+    NSString *name, CGFloat requestedHeight, CGFloat font, BOOL naturalReady) {
+  NSDictionary *grid = view.fixturePaintObservation;
+  CGRect bounds = view.bounds, clip = [grid[@"clip"] CGRectValue], intersection = CGRectIntersection(bounds, clip);
+  CGAffineTransform t = [grid[@"ctm"] CGAffineTransformValue];
+  NSArray *bq = fractionalV4QEdges(bounds,t), *cq = fractionalV4QEdges(intersection,t);
+  BOOL finiteEdges = YES, nonaligned = NO;
+  for (id value in bq) {
+    if (![value isKindOfClass:NSNumber.class] || fabs([value doubleValue]) > 0x1p52) finiteEdges = NO;
+    else if (floor([value doubleValue]) != [value doubleValue]) nonaligned = YES;
+  }
+  for (id value in cq)
+    if (![value isKindOfClass:NSNumber.class] || fabs([value doubleValue]) > 0x1p52) finiteEdges = NO;
+  BOOL ready = naturalReady && [grid isKindOfClass:NSDictionary.class] &&
+    [grid[@"paint_complete"] isEqual:@YES] && [grid[@"stable_mask"] unsignedLongLongValue] == 0 &&
+    CGRectEqualToRect([grid[@"bounds"] CGRectValue],bounds) && PiecePixelRect(bounds) &&
+    PiecePixelRect(clip) && PiecePixelRect(intersection) && finiteEdges &&
+    t.a == 3 && t.d == -3 && t.b == 0 && t.c == 0 && isfinite(t.tx) && isfinite(t.ty) &&
+    [grid[@"scale"] doubleValue] == 3 && view.contentScaleFactor == 3 && view.layer.contentsScale == 3 &&
+    CGPointEqualToPoint(bounds.origin,CGPointZero) && bounds.size.width == 888 &&
+    bounds.size.height == requestedHeight && CGRectEqualToRect(view.fixtureContentFrame,bounds);
+  return @{@"case":name,@"requested_height":@(requestedHeight),@"font_size":@(font),
+    @"bounds":fractionalV4Rect(bounds),@"observed_ctm":@[fractionalV4Number(t.a),fractionalV4Number(t.b),
+      fractionalV4Number(t.c),fractionalV4Number(t.d),fractionalV4Number(t.tx),fractionalV4Number(t.ty)],
+    @"observed_clip":fractionalV4Rect(clip),@"intersection_clip":fractionalV4Rect(intersection),
+    @"bounds_q_edges":bq,@"clip_q_edges":cq,@"nonaligned_bounds":@(nonaligned),
+    @"clipped_support_differs":@(!CGRectEqualToRect(intersection,bounds)),@"geometry_ready":@(ready)};
+}
+static NSDictionary *fractionalV4Inspect(PieceTextMetrics *module,
+    PieceFractionalOutputV4FixtureTextView *view, CGFloat font, NSDictionary *request,
+    NSString **code, NSMutableArray *calls) {
+  const NSUInteger before = outputV4FaultReached;
+  __block NSDictionary *result = nil; __block NSString *error = nil;
+  [module inspectSelectedLineV4:@1 text:@"Cocolon" fontSize:font request:request resolver:^(id value) {
+    if ([value isKindOfClass:NSDictionary.class]) result = value; else error = @"INVALID_RESULT";
+  } rejecter:^(NSString *value, __unused NSString *message, __unused NSError *cause) { error = value; }];
+  *code = error ?: (result ? nil : @"TEST_CALLBACK_MISSING");
+  NSDictionary *diagnostic = [module cocolonPieceDiagnosticState];
+  NSInteger stage = [request[@"stage"] isEqual:@"local"] ? 1 : ([request[@"stage"] isEqual:@"placed"] ? 2 : 0);
+  BOOL identity = [diagnostic[@"enabled"] boolValue] && [diagnostic[@"main_thread"] boolValue] &&
+    [diagnostic[@"tag"] isEqual:@1] && [diagnostic[@"font_size"] doubleValue] == font &&
+    [diagnostic[@"request_stage"] integerValue] == stage;
+  [calls addObject:@{@"stage":request[@"stage"]?:NSNull.null,@"result_count":@(result.count),
+    @"reject_code":*code?:NSNull.null,@"diagnostic_identity_match":@(identity),
+    @"fault_before":@(before),@"fault_after":@(outputV4FaultReached),
+    @"fault_reached_this_call":@(outputV4FaultReached-before),
+    @"mutation_reached":@(view.fractionalMutationReached),@"diagnostic":diagnostic?:@{}}];
+  return result;
+}
+static BOOL fractionalV4Succeeded(NSDictionary *result, NSString *code, NSDictionary *call) {
+  NSDictionary *d = call[@"diagnostic"], *comparison = d[@"output_grid_comparison"];
+  return !code && result.count == 20 && [result[@"version"] isEqual:@"piece.native_selected_line.v4"] &&
+    [result[@"component_inks"] count] == 3 && [result[@"ink"] isEqual:v3Union(result[@"component_inks"])] &&
+    [result[@"native_raster_scale"] doubleValue] == 3 && [call[@"diagnostic_identity_match"] boolValue] &&
+    [d[@"first_failure_stage"] integerValue] == 0 && [comparison[@"available"] boolValue] &&
+    ![comparison[@"first_mismatch_present"] boolValue];
+}
+static BOOL fractionalV4Rejected(NSDictionary *result, NSString *code, NSDictionary *call) {
+  return !result && [code isEqual:@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE"] &&
+    [call[@"diagnostic_identity_match"] boolValue] &&
+    [call[@"diagnostic"][@"first_failure_stage"] integerValue] > 0;
+}
+static BOOL runFractionalV4Checks(PieceTextMetrics *module, RCTBridge *bridge) {
+  UIWindow *window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+  window.rootViewController = [UIViewController new]; [window makeKeyAndVisible];
+  UIView *canvas = [[UIView alloc] initWithFrame:CGRectMake(0,0,1080,1350)];
+  [window.rootViewController.view addSubview:canvas];
+  NSArray *shapes = @[
+    @{@"name":@"body_height_low",@"height":@75.33332824707031,@"font":@48},
+    @{@"name":@"body_height_high",@"height":@75.33334350585938,@"font":@48},
+    @{@"name":@"branding_height_high",@"height":@40.3333740234375,@"font":@28}];
+  NSArray *contrasts = @[@"local",@"placed",@"one_use",@"snapshot_stable_mask",
+    @"allocation_fault",@"extent_edge_fault",@"during_expanded_clip",@"during_expanded_bounds"];
+  NSMutableArray *records = [NSMutableArray new];
+  NSUInteger nonalignedCount = 0, clippedDifferentCount = 0, fractionalChecks = 0, fractionalFailures = 0;
+  for (NSDictionary *shape in shapes) { @autoreleasepool {
+    NSString *name = shape[@"name"]; CGFloat height = [shape[@"height"] doubleValue], font = [shape[@"font"] doubleValue];
+    NSMutableDictionary *record = nil; NSMutableArray *outcomes = [NSMutableArray new];
+    BOOL allReady = YES, allNonaligned = YES;
+    for (NSString *contrast in contrasts) { @autoreleasepool {
+      PieceFractionalOutputV4FixtureTextView *view = nil; NSMutableArray *calls = [NSMutableArray new];
+      NSDictionary *geometry = nil; BOOL pass = NO; NSString *exceptionName = nil;
+      const int savedBufferFault = v3FixtureBufferFault;
+      @try {
+        RCTTextView *source = v9View(@"Cocolon",font,font==28?40:75,0);
+        view = [[PieceFractionalOutputV4FixtureTextView alloc] initWithFrame:CGRectMake(0,96,888,height)];
+        view.fixtureAttached = YES; view.fixtureRequiresRealWindow = YES; view.fixtureStorage = source.fixtureStorage;
+        view.fixtureContentFrame = CGRectMake(0,0,888,height);
+        view.fixtureStorage.layoutManagers.firstObject.textContainers.firstObject.size = view.fixtureContentFrame.size;
+        view.opaque = NO; view.backgroundColor = UIColor.clearColor;
+        view.fractionalMutationMode = 0; view.fractionalMutationReached = 0;
+        [canvas addSubview:view]; view.contentScaleFactor = 3; view.layer.contentsScale = 3;
+        bridge.uiManager.registry = @{@1:view,@2:canvas};
+        const BOOL ready = v3NaturalReady(view);
+        geometry = fractionalV4Geometry(view,name,height,font,ready);
+        if (!record) record = [geometry mutableCopy];
+        allReady = allReady && [geometry[@"geometry_ready"] boolValue];
+        allNonaligned = allNonaligned && [geometry[@"nonaligned_bounds"] boolValue];
+        NSMutableDictionary *request = [@{@"stage":@"local",@"canvas_tag":@2,
+          @"expires_at_ms":@(NSDate.date.timeIntervalSince1970*1000+8000),@"snapshot_token":NSNull.null} mutableCopy];
+        NSString *code = nil;
+        NSDictionary *control = fractionalV4Inspect(module,view,font,request,&code,calls);
+        BOOL controlOK = fractionalV4Succeeded(control,code,calls.lastObject);
+        pass = [geometry[@"geometry_ready"] boolValue] && [geometry[@"nonaligned_bounds"] boolValue] && controlOK;
+        if ([contrast isEqual:@"placed"] || [contrast isEqual:@"one_use"]) {
+          request[@"stage"] = @"placed"; request[@"snapshot_token"] = control[@"snapshot_token"]?:NSNull.null;
+          NSDictionary *placed = fractionalV4Inspect(module,view,font,request,&code,calls);
+          pass = pass && fractionalV4Succeeded(placed,code,calls.lastObject) &&
+            [placed[@"snapshot_token"] isEqual:control[@"snapshot_token"]];
+          if ([contrast isEqual:@"one_use"]) {
+            NSDictionary *reused = fractionalV4Inspect(module,view,font,request,&code,calls);
+            pass = pass && fractionalV4Rejected(reused,code,calls.lastObject);
+          }
+        } else if (![contrast isEqual:@"local"]) {
+          if ([contrast isEqual:@"snapshot_stable_mask"]) {
+            NSMutableDictionary *broken = [view.fixturePaintObservation mutableCopy]; broken[@"stable_mask"] = @1;
+            view.fixturePaintObservation = [broken copy]; request[@"stage"] = @"placed";
+            request[@"snapshot_token"] = control[@"snapshot_token"]?:NSNull.null;
+          } else if ([contrast isEqual:@"allocation_fault"]) v3FixtureBufferFault = 1;
+          else if ([contrast isEqual:@"extent_edge_fault"]) v3FixtureBufferFault = 2;
+          else if ([contrast isEqual:@"during_expanded_clip"]) view.fractionalMutationMode = 1;
+          else if ([contrast isEqual:@"during_expanded_bounds"]) view.fractionalMutationMode = 2;
+          NSDictionary *rejected = fractionalV4Inspect(module,view,font,request,&code,calls);
+          pass = pass && fractionalV4Rejected(rejected,code,calls.lastObject);
+          if ([contrast isEqual:@"allocation_fault"] || [contrast isEqual:@"extent_edge_fault"])
+            pass = pass && [calls.lastObject[@"fault_reached_this_call"] unsignedIntegerValue] == 1;
+          if ([contrast isEqual:@"during_expanded_clip"] || [contrast isEqual:@"during_expanded_bounds"])
+            pass = pass && view.fractionalMutationReached == 1 &&
+              [calls.lastObject[@"diagnostic"][@"first_failure_stage"] integerValue] == COCOLON_PIECE_LATE_CLIP_STAGE;
+        }
+      } @catch (NSException *exception) {
+        exceptionName = exception.name; pass = NO; allReady = NO;
+      } @finally {
+        v3FixtureBufferFault = savedBufferFault; view.fractionalMutationMode = 0;
+        [view removeFromSuperview]; bridge.uiManager.registry = @{};
+      }
+      if (!geometry) { allReady = NO; allNonaligned = NO; }
+      [outcomes addObject:[@{@"contrast":contrast,@"local_conditions_pass":@(pass),
+        @"geometry":geometry?:@{},@"calls":calls,@"exception":exceptionName?:NSNull.null} mutableCopy]];
+    } }
+    if (!record) record = [@{@"case":name,@"bounds":@[],@"observed_ctm":@[],@"observed_clip":@[],
+      @"intersection_clip":@[],@"bounds_q_edges":@[],@"clip_q_edges":@[],
+      @"clipped_support_differs":@NO} mutableCopy];
+    record[@"geometry_ready"] = @(allReady); record[@"nonaligned_bounds"] = @(allNonaligned);
+    record[@"contrasts"] = outcomes; [records addObject:record];
+    if (allReady && allNonaligned) nonalignedCount++;
+    if (allReady && [record[@"clipped_support_differs"] boolValue]) clippedDifferentCount++;
+  } }
+  BOOL coverage = records.count == 3 && nonalignedCount == 3 && clippedDifferentCount > 0;
+  for (NSMutableDictionary *record in records) {
+    for (NSMutableDictionary *outcome in record[@"contrasts"]) {
+      BOOL pass = coverage && [record[@"geometry_ready"] boolValue] && [outcome[@"local_conditions_pass"] boolValue];
+      outcome[@"pass"] = @(pass); fractionalChecks++; if (!pass) fractionalFailures++;
+      printf("%s %s_%s\n",pass?"FRACTIONAL_PASS":"FRACTIONAL_FAIL",
+        [record[@"case"] UTF8String],[outcome[@"contrast"] UTF8String]);
+    }
+    record[@"coverage_ready"] = @(coverage);
+    NSError *error = nil; NSData *data = [NSJSONSerialization dataWithJSONObject:record options:NSJSONWritingSortedKeys error:&error];
+    if (data && !error) printf("FRACTIONAL_V4_GEOMETRY %s\n",[[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding] UTF8String]);
+    else { printf("FRACTIONAL_V4_GEOMETRY_ERROR serialization\n"); coverage = NO; }
+  }
+  printf("FRACTIONAL_V4_CHECKS=%lu PASS=%lu FAIL=%lu SKIP=0 EXPECTED=24 NONALIGNED=%lu CLIPPED_DIFFERENT=%lu\n",
+    (unsigned long)fractionalChecks,(unsigned long)(fractionalChecks-fractionalFailures),(unsigned long)fractionalFailures,
+    (unsigned long)nonalignedCount,(unsigned long)clippedDifferentCount);
+  window.hidden = YES;
+  return coverage && fractionalChecks == 24 && fractionalFailures == 0;
+}
+#endif
+
 static NSUInteger bitmapChecks=0,bitmapFailures=0;
 static void bitmapCheck(NSString *name, BOOL pass) {
   bitmapChecks++;if(!pass)bitmapFailures++;
@@ -1930,7 +2135,11 @@ static int runNativeMetricsChecks(void) {
     printf("NATIVE_CHECKS=%lu PASS=%lu FAIL=%lu SKIP=0\n", (unsigned long)checks,
       (unsigned long)(checks-failures), (unsigned long)failures);
     BOOL bitmapPassed=runBitmapChecks(module,bridge);
-    return failures || !v9Passed || !candidatePassed || !bitmapPassed || !ar04Passed ? 1 : 0;
+    BOOL fractionalPassed = YES;
+#if defined(COCOLON_PIECE_FRACTIONAL_REFERENCE_PROBE)
+    fractionalPassed = [profile isEqual:@"output-grid-v4"] && runFractionalV4Checks(module,bridge);
+#endif
+    return failures || !v9Passed || !candidatePassed || !bitmapPassed || !ar04Passed || !fractionalPassed ? 1 : 0;
   }
 }
 

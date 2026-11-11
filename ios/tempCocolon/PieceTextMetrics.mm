@@ -731,13 +731,31 @@ static BOOL PieceNativeAndLayerV4Ink(RCTTextView *view, NSDictionary *layerState
       fabs(x0) > 0x1p52 || fabs(y0) > 0x1p52 || fabs(x1) > 0x1p52 || fabs(y1) > 0x1p52) return NO;
   CGRect nativeExtent = CGRectMake((x0 - tx) / scale, (y0 + ty) / scale, (x1 - x0) / scale, (y1 - y0) / scale);
   CGRect logicalExtent = CGRectInset(CGRectIntegral(CGRectOffset(CGRectUnion(view.bounds, nativeExtent), phase.x, phase.y)), -1, -1);
-  size_t nw, nh, nb, lw, lh, lb;
-  if (!PiecePixelRect(nativeExtent) || !PiecePixelRect(logicalExtent) ||
+  // Research-only inverse support: preserve the observed clip's q lattice.
+  // The image is presented at its inverse extent/origin, never stretched to
+  // public bounds. This does not read or recover natural backing dimensions.
+  const CGRect clippedReferenceBounds = view.bounds;
+  const CGRect clippedSourceClip = CGRectIntersection([grid[@"clip"] CGRectValue], clippedReferenceBounds);
+  const double cx0 = floor(CGRectGetMinX(clippedSourceClip) * scale + tx);
+  const double cy0 = floor(CGRectGetMinY(clippedSourceClip) * scale - ty);
+  const double cx1 = ceil(CGRectGetMaxX(clippedSourceClip) * scale + tx);
+  const double cy1 = ceil(CGRectGetMaxY(clippedSourceClip) * scale - ty);
+  const CGRect clippedReferenceExtent = CGRectMake((cx0 - tx) / scale, (cy0 + ty) / scale,
+    (cx1 - cx0) / scale, (cy1 - cy0) / scale);
+  size_t nw, nh, nb, lw, lh, lb, cw, ch, cb;
+  if (!isfinite(cx0) || !isfinite(cy0) || !isfinite(cx1) || !isfinite(cy1) ||
+      fabs(cx0) > 0x1p52 || fabs(cy0) > 0x1p52 || fabs(cx1) > 0x1p52 || fabs(cy1) > 0x1p52 ||
+      !PiecePixelRect(nativeExtent) || !PiecePixelRect(logicalExtent) || !PiecePixelRect(clippedReferenceBounds) ||
+      !PiecePixelRect(clippedSourceClip) || !PiecePixelRect(clippedReferenceExtent) ||
+      !CGRectContainsRect(logicalExtent, CGRectOffset(clippedReferenceExtent, phase.x, phase.y)) ||
       !PieceRasterPlan(CGSizeMake(x1 - x0, y1 - y0), 1, &nw, &nh, &nb) ||
-      !PieceRasterPlan(logicalExtent.size, 1, &lw, &lh, &lb)) return NO;
+      !PieceRasterPlan(logicalExtent.size, 1, &lw, &lh, &lb) ||
+      !PieceRasterPlan(CGSizeMake(cx1 - cx0, cy1 - cy0), 1, &cw, &ch, &cb)) return NO;
   const size_t bitBytes = (lw * lh + 7) / 8;
-  if (nb > PieceContainmentMemoryLimit - lb || nb + lb > PieceContainmentMemoryLimit - bitBytes) return NO;
+  if (nb > PieceContainmentMemoryLimit - lb || nb + lb > PieceContainmentMemoryLimit - bitBytes ||
+      cb > PieceContainmentMemoryLimit - lb || cb + lb > PieceContainmentMemoryLimit - bitBytes) return NO;
   CGAffineTransform paintCTM = CGAffineTransformMake(scale, 0, 0, -scale, tx - x0, (double)nh + y0 + ty);
+  CGAffineTransform clippedPaintCTM = CGAffineTransformMake(scale, 0, 0, -scale, tx - cx0, (double)ch + cy0 + ty);
   PieceOwnedPixels native, clipped;
   if (!withinDeadline() || !native.makeExact(nw, nh, scale, budget, &paintCTM) || !withinDeadline()) return NO;
   UIGraphicsPushContext(native.context);
@@ -765,9 +783,13 @@ static BOOL PieceNativeAndLayerV4Ink(RCTTextView *view, NSDictionary *layerState
     *nativeInk = CGRectUnion(projected, filtered);
     reference.contents = nil; reference = nil;
     CGImageRelease(expandedImage); expandedImage = NULL; native.reset();
-    if (!withinDeadline() || !clipped.makeExact(nw, nh, scale, budget, &paintCTM) || !withinDeadline()) return NO;
-    CGRect sourceClip = CGRectIntersection([grid[@"clip"] CGRectValue], view.bounds);
-    if (!PiecePixelRect(sourceClip)) return NO;
+    if (!withinDeadline() || !clipped.makeExact(cw, ch, scale, budget, &clippedPaintCTM) || !withinDeadline()) return NO;
+    NSDictionary *gridNow = [view cocolonPiecePaintObservation];
+    const CGRect boundsNow = view.bounds;
+    CGRect sourceClip = (gridNow == grid && CGRectEqualToRect(boundsNow, clippedReferenceBounds))
+      ? CGRectIntersection([grid[@"clip"] CGRectValue], boundsNow) : CGRectNull;
+    if (gridNow != grid || !CGRectEqualToRect(boundsNow, clippedReferenceBounds) ||
+        !PiecePixelRect(sourceClip) || !CGRectEqualToRect(sourceClip, clippedSourceClip)) return NO;
     CGContextClipToRect(clipped.context, sourceClip);
     UIGraphicsPushContext(clipped.context);
     @try { [view cocolonPiecePaintGlyphRange:glyphs]; }
@@ -776,13 +798,13 @@ static BOOL PieceNativeAndLayerV4Ink(RCTTextView *view, NSDictionary *layerState
     if (!clippedImage || !budget->reserve(bitBytes)) return NO;
     reservedBits = YES; bits = (UInt8 *)calloc(bitBytes, 1);
     if (!bits) return NO;
-    reference = PieceReferenceLayer(clippedImage, (CGRect){CGPointZero, nativeExtent.size}, view.layer);
+    reference = PieceReferenceLayer(clippedImage, (CGRect){CGPointZero, clippedReferenceExtent.size}, view.layer);
     if (!reference) return NO;
     {
       PieceOwnedPixels compared;
       if (!withinDeadline() || !compared.make(logicalExtent.size, 1, budget) || !withinDeadline()) return NO;
-      CGContextTranslateCTM(compared.context, phase.x + nativeExtent.origin.x - logicalExtent.origin.x,
-        phase.y + nativeExtent.origin.y - logicalExtent.origin.y);
+      CGContextTranslateCTM(compared.context, phase.x + clippedReferenceExtent.origin.x - logicalExtent.origin.x,
+        phase.y + clippedReferenceExtent.origin.y - logicalExtent.origin.y);
       [reference renderInContext:compared.context];
       CGRect comparedCells;
       if (!PieceScanPixels(compared, withinDeadline, YES, &comparedCells)) return NO;

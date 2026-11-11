@@ -17,7 +17,7 @@ import json
 from pathlib import Path
 import re
 
-EXPECTED_SHA256 = "581dfd3864cb5f88457c8cd3e54aa7e6e360e7dcca8c4b58491697c5eb7dbfd4"
+EXPECTED_SHA256 = "8c5e9a37954cf013f6d0e28e72070b24498e6087998effc46d3266d33aed7e4b"
 PREFIX = '''
 // Hosted-test-only scalar diagnostic, injected in this disposable checkout.
 // No wire field, guard expression, return value, clock or paint is changed.
@@ -34,8 +34,8 @@ struct CocolonPieceDiagnosticTLSState {
   unsigned int actualAlpha;
   bool referenceOccupied, naturalContentsFlipped, referenceContentsFlipped;
   bool naturalGeometryFlipped, referenceGeometryFlipped, referenceInterpolate;
-  CGRect referenceCells, actualCells, nativeExtent, logicalExtent, sourceClip;
-  CGAffineTransform observedCTM, paintCTM;
+  CGRect referenceCells, actualCells, nativeExtent, logicalExtent, sourceClip, clippedReferenceExtent;
+  CGAffineTransform observedCTM, paintCTM, clippedReferencePaintCTM;
   CGPoint phase;
   double naturalScale, referenceScale, naturalOpacity, referenceOpacity;
 };
@@ -56,13 +56,15 @@ static inline void CocolonPieceDiagnosticRaster(CGSize size, CGFloat scale, doub
   d.rasterColumns=w; d.rasterRows=h; d.rasterFailures=failures;
 }
 static inline void CocolonPieceDiagnosticReference(CGRect cells, CGRect nativeExtent, CGRect logicalExtent,
-    CGRect sourceClip, CGAffineTransform observedCTM, CGAffineTransform paintCTM, CGPoint phase,
+    CGRect sourceClip, CGAffineTransform observedCTM, CGAffineTransform paintCTM,
+    CGRect clippedReferenceExtent, CGAffineTransform clippedReferencePaintCTM, CGPoint phase,
     CALayer *natural, CALayer *reference, CGImageRef image) {
   auto &d=CocolonPieceDiagnosticTLS;
   if (!d.enabled || d.comparisonAvailable) return;
   d.comparisonAvailable=true; d.referenceCells=cells;
   d.nativeExtent=nativeExtent; d.logicalExtent=logicalExtent; d.sourceClip=sourceClip;
   d.observedCTM=observedCTM; d.paintCTM=paintCTM; d.phase=phase;
+  d.clippedReferenceExtent=clippedReferenceExtent; d.clippedReferencePaintCTM=clippedReferencePaintCTM;
   d.naturalContentsFlipped=[natural contentsAreFlipped];
   d.referenceContentsFlipped=[reference contentsAreFlipped];
   d.naturalGeometryFlipped=natural.geometryFlipped; d.referenceGeometryFlipped=reference.geometryFlipped;
@@ -106,6 +108,8 @@ GETTER = '''
       @"native_extent":@[@(d.nativeExtent.origin.x), @(d.nativeExtent.origin.y), @(d.nativeExtent.size.width), @(d.nativeExtent.size.height)], @"logical_extent":@[@(d.logicalExtent.origin.x), @(d.logicalExtent.origin.y), @(d.logicalExtent.size.width), @(d.logicalExtent.size.height)],
       @"source_clip":@[@(d.sourceClip.origin.x), @(d.sourceClip.origin.y), @(d.sourceClip.size.width), @(d.sourceClip.size.height)], @"phase":@[@(d.phase.x), @(d.phase.y)],
       @"observed_ctm":@[@(d.observedCTM.a), @(d.observedCTM.b), @(d.observedCTM.c), @(d.observedCTM.d), @(d.observedCTM.tx), @(d.observedCTM.ty)], @"paint_ctm":@[@(d.paintCTM.a), @(d.paintCTM.b), @(d.paintCTM.c), @(d.paintCTM.d), @(d.paintCTM.tx), @(d.paintCTM.ty)],
+      @"clipped_reference_extent":@[@(d.clippedReferenceExtent.origin.x), @(d.clippedReferenceExtent.origin.y), @(d.clippedReferenceExtent.size.width), @(d.clippedReferenceExtent.size.height)],
+      @"clipped_reference_paint_ctm":@[@(d.clippedReferencePaintCTM.a), @(d.clippedReferencePaintCTM.b), @(d.clippedReferencePaintCTM.c), @(d.clippedReferencePaintCTM.d), @(d.clippedReferencePaintCTM.tx), @(d.clippedReferencePaintCTM.ty)],
       @"natural_contents_are_flipped":@(d.naturalContentsFlipped),
       @"reference_contents_are_flipped":@(d.referenceContentsFlipped),
       @"natural_geometry_flipped":@(d.naturalGeometryFlipped),
@@ -164,7 +168,7 @@ def build(original):
     reference_anchor='      if (!PieceScanPixels(compared, withinDeadline, YES, &comparedCells)) return NO;\n'
     assert original.count(reference_anchor)==1, 'Unexpected V4 reference scan identity'
     reference_position=original.index(reference_anchor)+len(reference_anchor)
-    reference_observer='      CocolonPieceDiagnosticReference(comparedCells, nativeExtent, logicalExtent, sourceClip, observed, paintCTM, phase, view.layer, reference, clippedImage);\n'
+    reference_observer='      CocolonPieceDiagnosticReference(comparedCells, nativeExtent, logicalExtent, sourceClip, observed, paintCTM, clippedReferenceExtent, clippedPaintCTM, phase, view.layer, reference, clippedImage);\n'
     edits.append((reference_position,reference_position,reference_observer))
     instrumented=original
     for start,end,replacement in sorted(edits,reverse=True):
@@ -203,7 +207,7 @@ def build(original):
     declaration='// Read-only accessors added by the pinned RN patch; no KVC/private-ivar read.\n'
     assert instrumented.count(declaration)==1
     instrumented=instrumented.replace(declaration,PREFIX+'\n'+declaration,1)
-    return instrumented, {'preimage_sha256':EXPECTED_SHA256,'instrumented_sha256':hashlib.sha256(instrumented.encode()).hexdigest(),'markers':stages,'marker_count':len(stages),'tls_resets':3,'same_call_raster_observers':1,'same_call_v4_reference_observers':1,'first_v4_mismatch_observers':1,'scalar_tls_max_bytes':1024,'inspection_versions':[3,4],'postimage_is_test_instrumentation_only':True,'unchanged_original_lexical_projection':True}
+    return instrumented, {'preimage_sha256':EXPECTED_SHA256,'instrumented_sha256':hashlib.sha256(instrumented.encode()).hexdigest(),'markers':stages,'marker_count':len(stages),'named_stage_map':{'late_clip_stability':next(item['stage'] for item in stages if item['offset']==original.index('return NO;',original.index('if (gridNow != grid'))) },'tls_resets':3,'reference_mapping_experiment':{'adoption':'NOT_ADOPTED','mapping':'observed_clip_inverse_extent_origin','baseline_sha256':'581dfd3864cb5f88457c8cd3e54aa7e6e360e7dcca8c4b58491697c5eb7dbfd4','native_extent_field':'expanded_B','paint_ctm_field':'expanded_B','clipped_reference_fields':'inverse_q_support_extent_and_paint_ctm','fractional_backing_equivalence':'NOT_PROVEN'},'same_call_raster_observers':1,'same_call_v4_reference_observers':1,'first_v4_mismatch_observers':1,'scalar_tls_max_bytes':1024,'inspection_versions':[3,4],'postimage_is_test_instrumentation_only':True,'unchanged_original_lexical_projection':True}
 
 
 source=Path('ios/tempCocolon/PieceTextMetrics.mm')
