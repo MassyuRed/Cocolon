@@ -4,7 +4,7 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-11 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR01_UNRESOLVED_AR04_SCOPE_PREFIX_INSTRUCTION_FIXED_REPLAY_COMPLETE_INFERENCE_PREPARED_UNADOPTED
+status: AR01_UNRESOLVED_AR04_PREFIX_INSTRUCTION_ACTUAL_NO_IMPROVEMENT_TEACHER_COVERAGE_REVIEWED_UNADOPTED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
@@ -12,7 +12,7 @@ current_next: AR-04
 runtime_effect_of_this_document: 0
 ---
 
-> **11/11・AR-04最新：** API74dff9a7で既存scoped_action_instructionだけを修正。source_scope.prefix_literalを同じsource・欄の対応動作直前で逐字保持し、外側の継続状態を内側の完了過去へ合わせないと明示。S7・source読取／資格／投影・SYSTEM・原7項目／preparedは不変。実失敗raw1例を既存変異testへ追加し関連242成功。保存済み67行／65固有要求はsource／plan／prepared／旧raw採否／本文不変、指示変更6行だけ・61行messages一致。前回actual5/6＋保持2、21保存／3拒否・106.495秒復元を完了として継承。新指示の実4B品質は未測定、今回GPU／SQL0。失敗1＋同系5＋引用保持2の約18KB比較を準備、未送信／未実行・具体承認待ち。selector OFF・AR-04未完。 API74dff9a7のPiece CI42963237980はattempt1・success。同headで今回起動を確認した対象はPiece。Analysis CI400912d8のsuccessは過去完了として継承し、74dff9a7の実行結果へ読み替えない。追加dispatch／rerun0。 [外側前提の指示修正と次の実比較](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scope-prefix-instruction-20261111)。
+> **11/11・AR-04最新：** API74dff9a7の前提指示を実4Bの同じ8入力で一回確認し、全8raw／全responseが前回と一致、可視品質改善0。失敗1は「予定が重なっている」→「重なった」のまま拒否。同系6は5採用／1拒否、引用保持2採用。21隔離保存・非生成再読／3保存前拒否、追加学習・retry0、復元込み107.324秒。元args／環境／cwd・source／adapter保持、通常／Analysis前後全response一致、独立health200／PID66367一致。保存済みf6dae実24教材を回収・照合し、今回の継続前提＋完了動作の直接対0、同型の誤教師0を確認。ただし原因／新学習必要性は未確定。追加prompt試行は止め、次は評価8と分離した教材補完案へ。通常selector OFF・AR-04未完。 [指示比較の実測・教材24・次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scope-prefix-actual-20261111)。
 
 > **11/10・AR-04最新：** 引用内stopを持つ新4件＋保持GENERAL07の現builder送信messagesを固定し、13,140byte・2memberの無学習比較packetを準備。構文compile／CRC／member照合は成功、実モデル生成・送信・提供停止0。非環境の稼働確認はhealth200。起動環境全体の読取りは認証情報を含み得るとして自動承認審査に拒否され、未実行。新packet送信と、完全復元に必要な環境内再利用の具体承認待ち。API5816f2d0／f6dae研究候補・通常selector OFF・本番未反映を維持。 [具体packet・確認範囲・再開点](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quote-stop-inference-prepared-20261110)。
 
@@ -380,13 +380,13 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 | AR-01 | 現naturalの主体・所有者・否定・時点・留保を、旧失敗・意味比較・共通原因分析で改善。EM-01a/b | 現6境界と正常な短文／省略で、同入力の誤読を解消または明確に減らし、自然さ・別題材・既成功・保存再読を保持。検出増加／無出力だけでは完了しない | 継続中。新24実生成の4版は通常不採用。c6555fd5で疑問符なしの確認質問の保存抜けを修復、250局所PASS。同24rawは旧24保存→新22保存／2拒否、受理本文不変。全体の意味修復は未完 |
 | AR-02 | 現naturalの任意問い・回答・訂正・撤回・frameの一往復。EM-02a/b、03b | 一点確認／skip／終了／本人続行、対象だけ更新、撤回後の残存意味、同版再読、プラン境界 | AR-01の全一般品質完成待ちにはしない。未開始 |
 | AR-03 | 適格履歴の意味ある利用。EM-03a/b | 同一／別場面・変化・無関係・訂正前を区別し、適切な履歴が今回へ効く。失効材料を使わない | 現related_contextを継承。未開始 |
-| AR-04 | Piece一般本文・単独伝達・refined・画像整合 | 原文の意味・一人称・本人補足と同版画像／保存を保持 | API74dff9a7で既存scoped_action_instructionだけを修正。source_scope.prefix_literalを同じsource・欄の対応動作直前で逐字保持し、外側の継続状態を内側の完了過去へ合わせないと明示。S7・source読取／資格／投影・SYSTEM・原7項目／preparedは不変。実失敗raw1例を既存変異testへ追加し関連242成功。保存済み67行／65固有要求はsource／plan／prepared／旧raw採否／本文不変、指示変更6行だけ・61行messages一致。前回actual5/6＋保持2、21保存／3拒否・106.495秒復元を完了として継承。新指示の実4B品質は未測定、今回GPU／SQL0。失敗1＋同系5＋引用保持2の約18KB比較を準備、未送信／未実行・具体承認待ち。selector OFF・AR-04未完。 |
+| AR-04 | Piece一般本文・単独伝達・refined・画像整合 | 原文の意味・一人称・本人補足と同版画像／保存を保持 | API74dff9a7の前提指示を実4Bの同じ8入力で一回確認し、全8raw／全responseが前回と一致、可視品質改善0。失敗1は「予定が重なっている」→「重なった」のまま拒否。同系6は5採用／1拒否、引用保持2採用。21隔離保存・非生成再読／3保存前拒否、追加学習・retry0、復元込み107.324秒。元args／環境／cwd・source／adapter保持、通常／Analysis前後全response一致、独立health200／PID66367一致。保存済みf6dae実24教材を回収・照合し、今回の継続前提＋完了動作の直接対0、同型の誤教師0を確認。ただし原因／新学習必要性は未確定。追加prompt試行は止め、次は評価8と分離した教材補完案へ。通常selector OFF・AR-04未完。 |
 | AR-05 | 分析の本人基準・役割／選択・記録間関係。AN-03a/b/c、04 | 原記録→意味→図／全文→両端根拠の対応、再出現／変化／不明の正しさ | 現Engine統合・保存済み成果を継承。並行可能。未開始 |
 | AR-06 | Emlis観測材料、訂正・削除・権利、長い蓄積と月次。EM-04/05、AN-02/06/08/10 | 本人sourceから材料を渡し、失効・分割範囲・当時版を保持。生成本文を本人事実にしない | AR-02/03/05の該当能力を利用。未開始 |
 | AR-07 | IF／Saved等の商品固有の残る意味保持責務。既存AN／PC残件 | 仮想・本人選択意向・観測を分離し、成立した経路で出力と保存を確認 | 既存商品の実装条件に従う。無断延期・新発売条件化をしない。未開始 |
 | AR-08 | 実証できた共通能力の通常適用と全体確認。EM-05/06/07等 | 採用版の意味保持・自然さ・権利・中断復帰・保存再読・実際の待ち時間／費用。未採用範囲は理由と残差を保持 | 各単位で通常採用可能。全core一括切替を強制しない。未開始 |
 
-現在は **AR-04の意味保持・単独伝達**を継続する。 次は、同じ入力の失敗1例＋同系保持5例＋引用保持2例を、生成指示だけ修正したAPI74dff9a7のmessagesで、保存f6dae・既存稼働用Pythonへ一回通す。新しい架空入力0、原7項目／prepared／SYSTEM／生成設定は同一、引用2の全messagesも同一。合計18,068byte（packet15,631＋launcher2,437）、最大8候補＋通常／Analysis前後4の12HTTP、Piece1load、追加学習／新weights／retry0。復元枠込み600秒／予約120秒。送信と、認証情報を含み得る全起動環境の同Pod内一時読取・復元再利用はこの新一回の具体承認後に限る。PID65745は前回復元時の履歴でfresh確認値ではなく、元identity不一致なら停止前に中断。前回の17,929byte・12HTTP・106.495秒の一回承認は完了・消費済みで再利用しない。通常採用／selector有効化／Render／live DB／RN／build／配布の自動実行0。
+現在は **AR-04の意味保持・単独伝達**を継続する。 次は、回収済みf6daeの実24教材で未カバーだった「ので／けれど／けれども」の外側継続前提＋内側完了動作について、既存教材・生成読取ownerを再利用した最小の教材補完案を作る。現在の評価8を教師へ移さず、独立した語彙・場面で対照を用意して既存source/S7で意味・肯否・時制・相を確認する段階とし、追加学習の必要性・実施はまだ決定しない。同じprompt追記、source／期待値／raw修補、S7緩和、別作者／経路／Gate追加は行わない。今回18,068byte送信・全環境同Pod一時読取／復元再利用・一回実行の承認は完了・消費済み。次のGPU／fit／新weights／再試行は未準備・未承認で自動実行0。通常採用／selector有効化／Render／live DB／RN／build／配布0。
 
 既存の品質作業・新教師8件・保存重みの継続点を使う。GPUに現実の接続障害がある場合、取得できた事実、未実行の生成、回収済み原本、次の同一単位を記録し、CPUの合成成功を実モデル改善へ換算しない。接続復旧や既存の別core実装を必要範囲で進め、無関係な補助機構開発へ変えない。
 
@@ -446,7 +446,7 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 ### 11.2 現在の進行欄
 
-**11/11の現在結果：** API74dff9a7で既存scoped_action_instructionだけを修正。source_scope.prefix_literalを同じsource・欄の対応動作直前で逐字保持し、外側の継続状態を内側の完了過去へ合わせないと明示。S7・source読取／資格／投影・SYSTEM・原7項目／preparedは不変。実失敗raw1例を既存変異testへ追加し関連242成功。保存済み67行／65固有要求はsource／plan／prepared／旧raw採否／本文不変、指示変更6行だけ・61行messages一致。前回actual5/6＋保持2、21保存／3拒否・106.495秒復元を完了として継承。新指示の実4B品質は未測定、今回GPU／SQL0。失敗1＋同系5＋引用保持2の約18KB比較を準備、未送信／未実行・具体承認待ち。selector OFF・AR-04未完。 API74dff9a7のPiece CI42963237980はattempt1・success。同headで今回起動を確認した対象はPiece。Analysis CI400912d8のsuccessは過去完了として継承し、74dff9a7の実行結果へ読み替えない。追加dispatch／rerun0。
+**11/11の現在結果：** API74dff9a7の前提指示を実4Bの同じ8入力で一回確認し、全8raw／全responseが前回と一致、可視品質改善0。失敗1は「予定が重なっている」→「重なった」のまま拒否。同系6は5採用／1拒否、引用保持2採用。21隔離保存・非生成再読／3保存前拒否、追加学習・retry0、復元込み107.324秒。元args／環境／cwd・source／adapter保持、通常／Analysis前後全response一致、独立health200／PID66367一致。保存済みf6dae実24教材を回収・照合し、今回の継続前提＋完了動作の直接対0、同型の誤教師0を確認。ただし原因／新学習必要性は未確定。追加prompt試行は止め、次は評価8と分離した教材補完案へ。通常selector OFF・AR-04未完。 API74dff9a7のPiece CI42963237980（39step、attempt1・success）を完了として継承。今回source/test変更0・新CI／dispatch／rerun0。Analysis400912d8の過去successを74dの実行へ読み替えない。
 
 **11/10の履歴：** API2ec79ad0で時点付き本人「は」好み評価の同本人省略を既存S7継続へ接続。明示承認後、保存f6daeで新3＋保持2の実4B本文を1回・学習0で確認。GENERAL01の自然な2文目省略が旧比較で保留されたため、同block・隣接・同じ本人表記の既存条件だけを再利用し、5/5採用・3plan計15保存／非生成再読。保持2の前回request／raw／revisionと凍結69照合行の採否／本文／messagesは不変。9HTTP・97.268秒で元提供復元／health／前後control一致。f6dae研究候補・通常selector OFF、本番未反映。 [今回の限定と根拠](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model3-inference-result-20261110)。
 
@@ -490,19 +490,19 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | 次の同一商品単位 | 意味材料が正しく届いても完成rawで崩れる境界へ限定。同種label／SYSTEM追加周回を終了し、既存meaning→現作者の依頼方向・対象状態・語り手の自然文実現を改修。能受動／明記省略／状態対照、成功control、別題材評価。容量／学習等の原因は未断定 |
 | 再開記録 | weekly第10回§32、[全結果・範囲・次作業](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/request_role_binding_review.md)／[本文なし集計](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/request_role_binding_summary.json) |
 | AR-01通常と残件 | AR-01通常不採用・役割反転未解決。先行API 651f1f38のAR-04差分とAR-01研究patchの通常不採用を継承。今回のfce72bcc／4da69cdeはtest整合のみで、AR-01通常採用なし。Render配置／実DB／RN／build0、他AR残件は維持 |
-| AR-04回収・改修 | API74dff9a7の既存piece_model_source.py::build_piece_model_messagesでscoped_action_instruction文字列だけを修正。既存prefix_literalの逐字保持・同source同欄同動作の対応位置・外側継続状態と内側過去の分離を明示。read/projection/plan/資格/S7/SYSTEM変更0、別field／型／作者／経路／Gate0。既存MUTATIONSに実失敗raw1tupleだけ追加、正例の期待本文不変 |
-| AR-04実本文 | 新指示のactual raw0・改善未測定。直前API400912d8で新6の5採用／1外側時制変異拒否、引用保持2は前回と全response一致。今回その生rawは全て無修補で同じ採否／本文を保持し、失敗1を成功へ読み替えない。次の同じ8入力のうち6指示だけ変更する |
-| AR-04検証・再読 | 関連既存3file242成功。既存実67行＝65unique要求で全source意味／plan／原7項目／prepared／旧raw採否／本文不変、6instruction変更・61messages完全一致。行66採用／1拒否、unique64採用／1拒否で新しいモデル品質creditなし。今回SQL再実行0。直前21隔離保存／3保存前拒否を完了として継承。旧59native byte前回比較は未測定のまま。API74dff9a7のPiece CI42963237980はattempt1・success。同headで今回起動を確認した対象はPiece。Analysis CI400912d8のsuccessは過去完了として継承し、74dff9a7の実行結果へ読み替えない。追加dispatch／rerun0。 |
-| AR-04反映・残件 | API74dff9a7で既存scoped_action_instructionだけを修正。source_scope.prefix_literalを同じsource・欄の対応動作直前で逐字保持し、外側の継続状態を内側の完了過去へ合わせないと明示。S7・source読取／資格／投影・SYSTEM・原7項目／preparedは不変。実失敗raw1例を既存変異testへ追加し関連242成功。保存済み67行／65固有要求はsource／plan／prepared／旧raw採否／本文不変、指示変更6行だけ・61行messages一致。前回actual5/6＋保持2、21保存／3拒否・106.495秒復元を完了として継承。新指示の実4B品質は未測定、今回GPU／SQL0。失敗1＋同系5＋引用保持2の約18KB比較を準備、未送信／未実行・具体承認待ち。selector OFF・AR-04未完。 |
-| AR-04現在のrefined | 既存APIca4140ab／RN4a103688の回答選択・exact query・七項目POSTと元／補足別source束縛を継承。今回の65固有要求内refined4もsource／plan／prepared／全messages／旧採否／本文不変。指示の同source同欄限定を既存refined回帰testで確認。今回SQL／RN／build／live／本人端末0、前回refined4×3plan12保存は完了として保持 |
-| AR-04現在の4B本文読取 | 最後の実4BはAPI400912d8の8本文、うち外側「重なっている」→「重なった」1拒否。残り7は外側全量・SELF／相手対象・肯否過去・引用内外話者／入れ子／意向／感情／記号を保持した限定結果。新指示は未実行。「予定を相談した」等の硬さ・元文の譲歩の弱さ、一般編集品質、人間受入れは未解消 |
-| AR-04再開記録 | 次は、同じ入力の失敗1例＋同系保持5例＋引用保持2例を、生成指示だけ修正したAPI74dff9a7のmessagesで、保存f6dae・既存稼働用Pythonへ一回通す。新しい架空入力0、原7項目／prepared／SYSTEM／生成設定は同一、引用2の全messagesも同一。合計18,068byte（packet15,631＋launcher2,437）、最大8候補＋通常／Analysis前後4の12HTTP、Piece1load、追加学習／新weights／retry0。復元枠込み600秒／予約120秒。送信と、認証情報を含み得る全起動環境の同Pod内一時読取・復元再利用はこの新一回の具体承認後に限る。PID65745は前回復元時の履歴でfresh確認値ではなく、元identity不一致なら停止前に中断。前回の17,929byte・12HTTP・106.495秒の一回承認は完了・消費済みで再利用しない。通常採用／selector有効化／Render／live DB／RN／build／配布の自動実行0。 外側前提の時制・継続相の実改善、全6成立、広い文章編集品質、本人前置形・長文、同版画像／通常統合／本人端末、既存無引用3失敗、AR-01／他ARは未完。 [指示差分・旧raw保持・次の同8](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scope-prefix-instruction-20261111) |
+| AR-04回収・改修 | API74dff9a7の既存prefix_literal指示明確化を実比較したが出力改善0。指示6は送信requestと一致・入力token各60増で到達確認、全8raw／全response同一。f6daeの元実24教師を既存private保存物から回収し、実frozen＝outer準備・fit data hash・f6dae weightsの一致まで照合。教材の今回形の被覆0を確認、原因や新fit要否は未確定。新source/test/型/作者/Gate0 |
+| AR-04実本文 | 同じ6の5採用／1拒否を維持し、新指示での改善0。ACTION-REASON-CONSULTは「予定が重なっているので」→「予定が重なったので」が残り、source/S7を変えず不採用。残る5と引用保持2は前回の本文・raw・全responseと同一。「雨が続いている」は保持されているため継続相全般の障害へ広げない |
+| AR-04検証・再読 | 今回実8は原7項目／prepared／current送信messages／source planと一致、無修補。採用7×3plan21隔離SQL保存・同／新service非生成再読、不採用1×3plan3保存前拒否。quota採用各1、保存後生成0、原入力/Emlis不変、旧作者fallback禁止。前回21／3へ累計加算しない。旧67行／65要求CPU比較、242成功は過去完了として保持し、今回再実行0。API74dff9a7のPiece CI42963237980（39step、attempt1・success）を完了として継承。今回source/test変更0・新CI／dispatch／rerun0。Analysis400912d8の過去successを74dの実行へ読み替えない。 |
+| AR-04反映・残件 | API74dff9a7の前提指示を実4Bの同じ8入力で一回確認し、全8raw／全responseが前回と一致、可視品質改善0。失敗1は「予定が重なっている」→「重なった」のまま拒否。同系6は5採用／1拒否、引用保持2採用。21隔離保存・非生成再読／3保存前拒否、追加学習・retry0、復元込み107.324秒。元args／環境／cwd・source／adapter保持、通常／Analysis前後全response一致、独立health200／PID66367一致。保存済みf6dae実24教材を回収・照合し、今回の継続前提＋完了動作の直接対0、同型の誤教師0を確認。ただし原因／新学習必要性は未確定。追加prompt試行は止め、次は評価8と分離した教材補完案へ。通常selector OFF・AR-04未完。 |
+| AR-04現在のrefined | 既存APIca4140ab／RN4a103688の回答選択・exact query・七項目POSTと元／補足別source束縛を継承。今回実8はnormalだけ、refined新生成／新SQL0。教材24内ののに付き受動＋否定感情6と別回答の今／その時の区別を読取。直前65固有内refined4のsource／plan／prepared／全messages／旧採否／本文保持と、以前refined4×3plan12保存は完了として継承 |
+| AR-04現在の4B本文読取 | 新指示比較でも全8が前回と同じ。外側継続→過去1拒否、他5と引用2は限定的意味保持。raw修補／source差替え／期待値変更0、語彙の硬さ・譲歩の弱さは残る。可視品質改善0、primary BLOCKER_NARROWED。実教師24の被覆不足だけからbase知識欠如・原因・追加学習の必要性を推定しない |
+| AR-04再開記録 | 次は、回収済みf6daeの実24教材で未カバーだった「ので／けれど／けれども」の外側継続前提＋内側完了動作について、既存教材・生成読取ownerを再利用した最小の教材補完案を作る。現在の評価8を教師へ移さず、独立した語彙・場面で対照を用意して既存source/S7で意味・肯否・時制・相を確認する段階とし、追加学習の必要性・実施はまだ決定しない。同じprompt追記、source／期待値／raw修補、S7緩和、別作者／経路／Gate追加は行わない。今回18,068byte送信・全環境同Pod一時読取／復元再利用・一回実行の承認は完了・消費済み。次のGPU／fit／新weights／再試行は未準備・未承認で自動実行0。通常採用／selector有効化／Render／live DB／RN／build／配布0。 この1例の時制・相変異、今回family全6成立、広い文章編集品質、本人前置形・長文、同版画像／通常統合／本人端末、既存無引用3失敗、AR-01／他ARは未完。 [実比較失敗を保持し教材範囲を確認](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scope-prefix-actual-20261111) |
 
 以後はこの表と各能力の対応行を現在状態へ置換更新し、詳細な実行事実は既存trial／weeklyへ置く。新しいhandoff系列・全件hash Gateを作らない。中断時も、成果物と未実行を既存保存先へ残し、同じ未完商品単位から続ける。
 
 ## 12. 今後の指示と再開方法
 
-**11/11の現在の再開点：** 次は、同じ入力の失敗1例＋同系保持5例＋引用保持2例を、生成指示だけ修正したAPI74dff9a7のmessagesで、保存f6dae・既存稼働用Pythonへ一回通す。新しい架空入力0、原7項目／prepared／SYSTEM／生成設定は同一、引用2の全messagesも同一。合計18,068byte（packet15,631＋launcher2,437）、最大8候補＋通常／Analysis前後4の12HTTP、Piece1load、追加学習／新weights／retry0。復元枠込み600秒／予約120秒。送信と、認証情報を含み得る全起動環境の同Pod内一時読取・復元再利用はこの新一回の具体承認後に限る。PID65745は前回復元時の履歴でfresh確認値ではなく、元identity不一致なら停止前に中断。前回の17,929byte・12HTTP・106.495秒の一回承認は完了・消費済みで再利用しない。通常採用／selector有効化／Render／live DB／RN／build／配布の自動実行0。
+**11/11の現在の再開点：** 次は、回収済みf6daeの実24教材で未カバーだった「ので／けれど／けれども」の外側継続前提＋内側完了動作について、既存教材・生成読取ownerを再利用した最小の教材補完案を作る。現在の評価8を教師へ移さず、独立した語彙・場面で対照を用意して既存source/S7で意味・肯否・時制・相を確認する段階とし、追加学習の必要性・実施はまだ決定しない。同じprompt追記、source／期待値／raw修補、S7緩和、別作者／経路／Gate追加は行わない。今回18,068byte送信・全環境同Pod一時読取／復元再利用・一回実行の承認は完了・消費済み。次のGPU／fit／新weights／再試行は未準備・未承認で自動実行0。通常採用／selector有効化／Render／live DB／RN／build／配布0。
 
 推奨指示は **「補助経路の活用作業を進めて」**。
 
@@ -1091,7 +1091,7 @@ NO_STRUCTURE_MAP_DELTA：今回の実行・読取・保存でsource owner／公�
 
 
 <a id="piece-scope-prefix-instruction-20261111"></a>
-## 11/11 AR-04 — 外側前提と内側過去を分ける生成指示
+## 11/11 AR-04 — 外側前提と内側過去を分ける生成指示（実行前の記録・比較完了）
 
 API74dff9a7で既存scoped_action_instructionだけを修正。source_scope.prefix_literalを同じsource・欄の対応動作直前で逐字保持し、外側の継続状態を内側の完了過去へ合わせないと明示。S7・source読取／資格／投影・SYSTEM・原7項目／preparedは不変。実失敗raw1例を既存変異testへ追加し関連242成功。保存済み67行／65固有要求はsource／plan／prepared／旧raw採否／本文不変、指示変更6行だけ・61行messages一致。前回actual5/6＋保持2、21保存／3拒否・106.495秒復元を完了として継承。新指示の実4B品質は未測定、今回GPU／SQL0。失敗1＋同系5＋引用保持2の約18KB比較を準備、未送信／未実行・具体承認待ち。selector OFF・AR-04未完。
 
@@ -1102,3 +1102,15 @@ API74dff9a7のPiece CI42963237980はattempt1・success。同headで今回起動�
 外側前提の時制・継続相の実改善、全6成立、広い文章編集品質、本人前置形・長文、同版画像／通常統合／本人端末、既存無引用3失敗、AR-01／他ARは未完。
 
 NO_STRUCTURE_MAP_DELTA：既存build_piece_model_messagesの指示文だけと、既存変異test1例の追加。source owner／scope投影／S7／公開型／route／DB／作者／controllerの責務・ファイル地図は継承。限定TECHNICAL_CREDIT、商品品質delta未測定・human acceptance追加0。 [原因・変更範囲と次の一回](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scope-prefix-instruction-20261111)。
+
+
+<a id="piece-scope-prefix-actual-20261111"></a>
+## 11/11 AR-04 — 指示明確化の実比較は改善なし・実24教材を回収
+
+API74dff9a7の前提指示を実4Bの同じ8入力で一回確認し、全8raw／全responseが前回と一致、可視品質改善0。失敗1は「予定が重なっている」→「重なった」のまま拒否。同系6は5採用／1拒否、引用保持2採用。21隔離保存・非生成再読／3保存前拒否、追加学習・retry0、復元込み107.324秒。元args／環境／cwd・source／adapter保持、通常／Analysis前後全response一致、独立health200／PID66367一致。保存済みf6dae実24教材を回収・照合し、今回の継続前提＋完了動作の直接対0、同型の誤教師0を確認。ただし原因／新学習必要性は未確定。追加prompt試行は止め、次は評価8と分離した教材補完案へ。通常selector OFF・AR-04未完。
+
+API74dff9a7のPiece CI42963237980（39step、attempt1・success）を完了として継承。今回source/test変更0・新CI／dispatch／rerun0。Analysis400912d8の過去successを74dの実行へ読み替えない。
+
+次は、回収済みf6daeの実24教材で未カバーだった「ので／けれど／けれども」の外側継続前提＋内側完了動作について、既存教材・生成読取ownerを再利用した最小の教材補完案を作る。現在の評価8を教師へ移さず、独立した語彙・場面で対照を用意して既存source/S7で意味・肯否・時制・相を確認する段階とし、追加学習の必要性・実施はまだ決定しない。同じprompt追記、source／期待値／raw修補、S7緩和、別作者／経路／Gate追加は行わない。今回18,068byte送信・全環境同Pod一時読取／復元再利用・一回実行の承認は完了・消費済み。次のGPU／fit／新weights／再試行は未準備・未承認で自動実行0。通常採用／selector有効化／Render／live DB／RN／build／配布0。 この1例の時制・相変異、今回family全6成立、広い文章編集品質、本人前置形・長文、同版画像／通常統合／本人端末、既存無引用3失敗、AR-01／他ARは未完。
+
+NO_STRUCTURE_MAP_DELTA：今回は実行・読取・private教材回収・状態更新だけでsource／test／公開型／route／DB／作者／controllerに変更なし。primary BLOCKER_NARROWED、可視品質改善0・human acceptance追加0。 [実測・教材範囲と次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scope-prefix-actual-20261111)。

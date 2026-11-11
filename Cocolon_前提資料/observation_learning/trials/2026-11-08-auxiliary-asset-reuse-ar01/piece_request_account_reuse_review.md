@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/11・AR-04最新：** API74dff9a7で既存scoped_action_instructionだけを修正。source_scope.prefix_literalを同じsource・欄の対応動作直前で逐字保持し、外側の継続状態を内側の完了過去へ合わせないと明示。S7・source読取／資格／投影・SYSTEM・原7項目／preparedは不変。実失敗raw1例を既存変異testへ追加し関連242成功。保存済み67行／65固有要求はsource／plan／prepared／旧raw採否／本文不変、指示変更6行だけ・61行messages一致。前回actual5/6＋保持2、21保存／3拒否・106.495秒復元を完了として継承。新指示の実4B品質は未測定、今回GPU／SQL0。失敗1＋同系5＋引用保持2の約18KB比較を準備、未送信／未実行・具体承認待ち。selector OFF・AR-04未完。 API74dff9a7のPiece CI42963237980はattempt1・success。同headで今回起動を確認した対象はPiece。Analysis CI400912d8のsuccessは過去完了として継承し、74dff9a7の実行結果へ読み替えない。追加dispatch／rerun0。 [外側前提の指示修正と次の実比較](piece_request_account_reuse_review.md#piece-scope-prefix-instruction-20261111)。
+> **11/11・AR-04最新：** API74dff9a7の前提指示を実4Bの同じ8入力で一回確認し、全8raw／全responseが前回と一致、可視品質改善0。失敗1は「予定が重なっている」→「重なった」のまま拒否。同系6は5採用／1拒否、引用保持2採用。21隔離保存・非生成再読／3保存前拒否、追加学習・retry0、復元込み107.324秒。元args／環境／cwd・source／adapter保持、通常／Analysis前後全response一致、独立health200／PID66367一致。保存済みf6dae実24教材を回収・照合し、今回の継続前提＋完了動作の直接対0、同型の誤教師0を確認。ただし原因／新学習必要性は未確定。追加prompt試行は止め、次は評価8と分離した教材補完案へ。通常selector OFF・AR-04未完。 [指示比較の実測・教材24・次](piece_request_account_reuse_review.md#piece-scope-prefix-actual-20261111)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -1698,7 +1698,7 @@ NO_STRUCTURE_MAP_DELTA：今回の実行・読取・保存でsource owner／公�
 
 
 <a id="piece-scope-prefix-instruction-20261111"></a>
-## 11/11 AR-04 — 外側前提と内側過去を分ける生成指示
+## 11/11 AR-04 — 外側前提と内側過去を分ける生成指示（実行前の記録・比較完了）
 
 API74dff9a7で既存scoped_action_instructionだけを修正。source_scope.prefix_literalを同じsource・欄の対応動作直前で逐字保持し、外側の継続状態を内側の完了過去へ合わせないと明示。S7・source読取／資格／投影・SYSTEM・原7項目／preparedは不変。実失敗raw1例を既存変異testへ追加し関連242成功。保存済み67行／65固有要求はsource／plan／prepared／旧raw採否／本文不変、指示変更6行だけ・61行messages一致。前回actual5/6＋保持2、21保存／3拒否・106.495秒復元を完了として継承。新指示の実4B品質は未測定、今回GPU／SQL0。失敗1＋同系5＋引用保持2の約18KB比較を準備、未送信／未実行・具体承認待ち。selector OFF・AR-04未完。
 
@@ -1736,3 +1736,43 @@ API74dff9a7のPiece CI42963237980はattempt1・success。同headで今回起動�
 外側前提の時制・継続相の実改善、全6成立、広い文章編集品質、本人前置形・長文、同版画像／通常統合／本人端末、既存無引用3失敗、AR-01／他ARは未完。
 
 NO_STRUCTURE_MAP_DELTA：既存build_piece_model_messagesの指示文だけと、既存変異test1例の追加。source owner／scope投影／S7／公開型／route／DB／作者／controllerの責務・ファイル地図は継承。限定TECHNICAL_CREDIT、商品品質delta未測定・human acceptance追加0。 [原因・変更範囲と次の一回](piece_request_account_reuse_review.md#piece-scope-prefix-instruction-20261111)。
+
+
+<a id="piece-scope-prefix-actual-20261111"></a>
+## 11/11 AR-04 — 指示明確化の実比較は改善なし・実24教材を回収
+
+API74dff9a7の前提指示を実4Bの同じ8入力で一回確認し、全8raw／全responseが前回と一致、可視品質改善0。失敗1は「予定が重なっている」→「重なった」のまま拒否。同系6は5採用／1拒否、引用保持2採用。21隔離保存・非生成再読／3保存前拒否、追加学習・retry0、復元込み107.324秒。元args／環境／cwd・source／adapter保持、通常／Analysis前後全response一致、独立health200／PID66367一致。保存済みf6dae実24教材を回収・照合し、今回の継続前提＋完了動作の直接対0、同型の誤教師0を確認。ただし原因／新学習必要性は未確定。追加prompt試行は止め、次は評価8と分離した教材補完案へ。通常selector OFF・AR-04未完。
+
+### 承認済み一回の実測と復元
+
+Mashの「実行していい、進めろ」で、失敗1＋同系5＋引用保持2の18,068byte（packet15,631＋launcher2,437）、認証情報を含み得る起動環境全体の同Pod内一時読取・復元再利用、追加学習0・復元枠込み600秒／予約120秒の一回を承認・消費した。今回専用Terminalでremote packet／launcher hash一致後、既存稼働用Pythonで一回だけ開始。
+
+所要107.32375380094163秒、Piece8／全12HTTPは200・stop。PID65745→Piece66323→元提供復元66367。元args／全環境／cwd、元source／Analysis adapter、f6dae／5b1／e924重みとconfigは不変。通常／Analysis前後全response一致、独立healthz200／pidfile66367一致・process aliveを確認。認証値や全環境の値は外へ回収せず同Pod内の復元だけに使った。学習／新weights／retry0、通常採用OFF。
+
+### 指示が届いても残った失敗
+
+修正6の実requestはpreparedから作ったcurrent messagesと同一、旧requestからの差分もscoped_action_instructionだけ。入力tokenは各60増え、最大1,734／生成予約込み最大3,782で8,192以内を元提供停止前に確認。にもかかわらず全8raw／全response／usageが前回と同一で、ACTION-REASON-CONSULTは「予定が重なっているので」を「予定が重なったので」へ変えたままだった。この対象で指示明確化だけによる可視改善は0。指示が未送信だった結果や、6例が新たに成功した結果とは記録しない。
+
+| 対象 | 実採否と比較 | 今回の保存 |
+|---|---|---|
+| 失敗1・同系5 | 5採用／1拒否、全6のraw・全responseは前回同一 | 採用5×3plan15保存、不採用1×3plan3保存前拒否 |
+| 引用保持2 | 2採用。requestも全responseも前回同一 | 2×3plan6保存 |
+| 全8 | 7採用／1拒否、改善0 | 21保存／3保存前拒否 |
+
+rootと独立read-only補助が8本文全件を読み、他5の前提・SELF／相手対象・能動・肯否・過去と、引用2の話者／入れ子理由／本人意向／感情／記号は保持された。雨の「続いている」はそのままであり、継続相全般を過去へ変える障害とは一般化できない。回収済みserving sourceの限定読取ではmessages全量をtokenizerへ渡し、slot出力schemaはfree stringの形式制約であり、同箇所に時制強制処理はない。これをモデル全体の原因確定とは扱わない。
+
+offline一回の現owner byte確認・無修補受領・既存S7比較の後、採用7×3plan21隔離PGlite保存・同／新service非生成再読を確認。不採用1は3planでpreview前拒否、旧作者fallback禁止、元入力/Emlis不変、quota採用各1、保存後生成0。live Supabase／実Auth／画像／本人端末ではない。source/testは変更せず、旧67行／65要求や242testを再実行して件数を増やしていない。
+
+result SHA256 `558f3e1c873fb535937a18359cecee733cd1aabe8c10e5a6e2fa02af650758f7`、実evidence39,674byte／SHA256 `1bd100f3e19e1cb79f4a7bf8860e53694bb1a14e76d4300663d09a7468901b5f`、回収collection56,718byte／SHA256 `a181db27fcf6bf4e25b36c9ee078f953e903cef0ba3d7bda5c671d7332d25537`。失敗を含む原本・21保存／3拒否・復元・比較と本文読取は既存[Cocolon_CMEE_AR04_ScopedFiniteAction_20261111.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-63b6c6f54c88819199c687bec9796d68_2f7470f963808191aaebf050935e72de&account_id=personal)へ保存した。
+
+### 既存f6dae教材の回収・限定読取
+
+保存済み[Cocolon_CMEE_AR04_FocalTarget_Learning4B_20261110.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-6d0f303cb04c81918856d25316298a44_2f7470f963808191aaebf050935e72de&account_id=personal) version4を正確なファイル名で回収。全体30,917,160byte／SHA256 `bb7e4b8eedee76075b120fbbe77a72e3075159c4dc748f91025fc193a4970de3`。そのnested実行evidence SHA256 `4f6a19417007fda5ea34e1b782468a78c1f7ea550c0dccb6c7477ca584a0b60f`内の`frozen_data.private.json`はouter準備teacherとbyte同一で、SHA256 `5e99eb126b7e01a2dbc5a37e7d747795f5f2791ace0f75fcf8eab7ee404adc6c`はfit reportのdata_sha256とも一致した。reportの重みは現f6daeと同一、当時はFRESH_BASE_NEW_RANDOM_LORA_CONFIG_ONLY／旧adapter重み読取false、24行48更新である。今回再学習していない。
+
+実24教師・source/target各34slotをrootと独立補助で読んだ。この範囲に「ので／けれど／けれども」を持つsource/targetは0件、「ている／でいる／重な」の文字列も0件で、今回の外側継続前提＋完了動作を直接示す教師は0、同型の継続→過去の誤教師も見つからなかった。「のに」6件は受動過去経験＋過去否定感情と別source回答で、今回familyと異なる。この24の被覆限界であり、base pretrainingや他の全教材に知識がないこと、失敗原因、追加fit必要性を証明しない。教師31MB全体や重みは既存保存物に保持し重複保存せず、参照identityと限定pair読取を今回のprivate auditへ保存する。
+
+API74dff9a7のPiece CI42963237980（39step、attempt1・success）を完了として継承。今回source/test変更0・新CI／dispatch／rerun0。Analysis400912d8の過去successを74dの実行へ読み替えない。
+
+次は、回収済みf6daeの実24教材で未カバーだった「ので／けれど／けれども」の外側継続前提＋内側完了動作について、既存教材・生成読取ownerを再利用した最小の教材補完案を作る。現在の評価8を教師へ移さず、独立した語彙・場面で対照を用意して既存source/S7で意味・肯否・時制・相を確認する段階とし、追加学習の必要性・実施はまだ決定しない。同じprompt追記、source／期待値／raw修補、S7緩和、別作者／経路／Gate追加は行わない。今回18,068byte送信・全環境同Pod一時読取／復元再利用・一回実行の承認は完了・消費済み。次のGPU／fit／新weights／再試行は未準備・未承認で自動実行0。通常採用／selector有効化／Render／live DB／RN／build／配布0。 この1例の時制・相変異、今回family全6成立、広い文章編集品質、本人前置形・長文、同版画像／通常統合／本人端末、既存無引用3失敗、AR-01／他ARは未完。
+
+NO_STRUCTURE_MAP_DELTA：今回は実行・読取・private教材回収・状態更新だけでsource／test／公開型／route／DB／作者／controllerに変更なし。primary BLOCKER_NARROWED、可視品質改善0・human acceptance追加0。 [実測・教材範囲と次](piece_request_account_reuse_review.md#piece-scope-prefix-actual-20261111)。
