@@ -1,4 +1,4 @@
-> **11/11・AR-04最新：** API5f3a8d5aで、既資格の理由／条件／譲歩付き本人評価の文体比較を既存S7へ接続。固定CPU新3の同じ常体候補は0→3採用、意味変異41拒否・前回実5本文を追加生成0で保持し、3plan計9保存／非生成再読。source資格／意味／根拠／plan／prepared／messages・native既存比較は維持。新66成功、関連39file5979件は5976 PASS／既存3 FAIL、Piece CI成功・Analysis CI実行中。新3実4Bは未取得。13,983byte比較packet＋2,505byte launcherを稼働用Python指定で準備したが、未送信／未実行。f6dae研究候補・通常selector OFF、本番未反映。 [評価文体の修復・次の一回準備](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scoped-evaluation-register-prepared-20261111)。
+> **11/11・AR-04最新：** 具体承認後、保存f6dae・稼働用Pythonで新3＋保持2を一回・学習0の実4B比較。同じ実5rawの採用は旧48の2→現5fの5、評価文体の新3だけ0→3回復。保持2の全request／raw／responseは前回と完全一致。source意味／plan／prepared／messages不変、15保存・非生成再読成功。9HTTP・96.967秒で元提供へ復元、args／全env／cwd・通常／Analysis前後全response一致、独立health200。API5f3a8d5aのPiece／Analysis両CI成功も確認。今回はsource／test変更・新CI実行0。f6dae研究候補・通常selector OFF、本番未反映。 [実4B評価文体・保存と復元](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scoped-evaluation-register-actual-20261111)。
 
 > **2026-11-10・補助経路AR-04（第10回§53）：** 既存S7のmodel専用比較へ、source資格済み非過去wishの明示SELF「が」直接語順を限定接続。保存5b1de6c9の同26rawは0生成で24→25採用、旧24本文不変・source資格外1維持。新78隔離SQLは75保存／3拒否、比較元は旧記録72／6。17file996 PASS／既存warning1、追加学習0、読点の自然さは未修復・通常重み未採用。API `c9e9938981c88e811bde1970725dc3dc35b2ae26`、Piece CI42709594596／Analysis CI42709594021は全工程success、Piece model17file996 PASS／58.98秒。STRUCTURE_MAP_DELTA_NONE（既存owner内比較条件のみ、入口／責務／公開・保存契約不変）。[実結果・次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-qualified-focal-ga-reader-20261110)。
 
@@ -42112,3 +42112,13 @@ API5f3a8d5aで、既資格の理由／条件／譲歩付き本人評価の文体
 次は新3（PREFERENCE-REASON／VALUE-CONDITION／PREFERENCE-QUOTED-CONCESSION）＋保持2（SCOPE-QUOTE-REASON／QUOTE-RUN）を、保存f6dae・既存稼働用Pythonで一回・追加学習0の実4B比較へ通す。合計16,488byte（packet13,983＋launcher2,505）、packet SHA256 `52ccec341c8aa437a30a4e4afca826559c9c0d6004a50152367d592f9f7f7fb6`。候補5＋通常／Analysis前後control4の最大9HTTP、Piece1load、学習／新weights／retry0、復元込み600秒／復元予約120秒。新packet／launcher送信と、認証情報を含み得る起動環境全体の同Pod内一時読取・復元再利用は、この新3の具体承認後に行う。前回承認は完了済みで再利用せず、新送信／GPU実行／環境読取0。前回実5／15保存／97.008秒復元は完了として継承する。前置canonical／元focal語順の文体差、引用／理由一般、広い文章、新f6daeの旧53生成回帰、同版画像／通常統合／本人端末、既存3失敗と他ARは未完。新fit／通常採用／selector有効化／Render／live DB／RN／buildの自動実行0。
 
 詳細：[修復・検証・未実行範囲](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scoped-evaluation-register-prepared-20261111)。
+
+
+<a id="piece-scoped-evaluation-register-actual-20261111"></a>
+## 11/11 AR-04 — 評価文体の実4B採用回復・15保存と復元
+
+具体承認後、保存f6dae・稼働用Pythonで新3＋保持2を一回・学習0の実4B比較。同じ実5rawの採用は旧48の2→現5fの5、評価文体の新3だけ0→3回復。保持2の全request／raw／responseは前回と完全一致。source意味／plan／prepared／messages不変、15保存・非生成再読成功。9HTTP・96.967秒で元提供へ復元、args／全env／cwd・通常／Analysis前後全response一致、独立health200。API5f3a8d5aのPiece／Analysis両CI成功も確認。今回はsource／test変更・新CI実行0。f6dae研究候補・通常selector OFF、本番未反映。
+
+次は本人前置canonical側の文体差を、保存済み本文と既存source／scope／比較条件から切り分け、原順での今回回復を退行させず進める。評価の元focal語順、引用／理由一般、広い文章、新f6daeの旧53全生成回帰、同版画像／通常統合／本人端末、既存無引用3失敗と他ARは未完。今回の新3実4B・保持2照合・15保存・96.967秒復元は完了とし、このrunnerを再実行しない。今回の一回承認は消費済み。新しいfit／GPU比較／通常採用／selector有効化／Render／live DB／RN／buildは自動実行しない。
+
+詳細：[実本文・保存・限界](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scoped-evaluation-register-actual-20261111)。

@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/11・AR-04最新：** API5f3a8d5aで、既資格の理由／条件／譲歩付き本人評価の文体比較を既存S7へ接続。固定CPU新3の同じ常体候補は0→3採用、意味変異41拒否・前回実5本文を追加生成0で保持し、3plan計9保存／非生成再読。source資格／意味／根拠／plan／prepared／messages・native既存比較は維持。新66成功、関連39file5979件は5976 PASS／既存3 FAIL、Piece CI成功・Analysis CI実行中。新3実4Bは未取得。13,983byte比較packet＋2,505byte launcherを稼働用Python指定で準備したが、未送信／未実行。f6dae研究候補・通常selector OFF、本番未反映。 [評価文体の修復・次の一回準備](piece_request_account_reuse_review.md#piece-scoped-evaluation-register-prepared-20261111)。
+> **11/11・AR-04最新：** 具体承認後、保存f6dae・稼働用Pythonで新3＋保持2を一回・学習0の実4B比較。同じ実5rawの採用は旧48の2→現5fの5、評価文体の新3だけ0→3回復。保持2の全request／raw／responseは前回と完全一致。source意味／plan／prepared／messages不変、15保存・非生成再読成功。9HTTP・96.967秒で元提供へ復元、args／全env／cwd・通常／Analysis前後全response一致、独立health200。API5f3a8d5aのPiece／Analysis両CI成功も確認。今回はsource／test変更・新CI実行0。f6dae研究候補・通常selector OFF、本番未反映。 [実4B評価文体・保存と復元](piece_request_account_reuse_review.md#piece-scoped-evaluation-register-actual-20261111)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -1385,3 +1385,34 @@ API5f3a8d5aで、既資格の理由／条件／譲歩付き本人評価の文体
 primaryは限定TECHNICAL_CREDIT。固定CPUの採用回復を、実4Bの作文品質・正式Product Read・人間受入れ・一般意味品質の成功へ換算しない。全bodyとsourceを読んだ範囲では、文体だけの差を保持し新しい行動・原因・感情を足していない。前回の実5本文・97.008秒復元の一回承認を今回へ流用しない。
 
 次は新3（PREFERENCE-REASON／VALUE-CONDITION／PREFERENCE-QUOTED-CONCESSION）＋保持2（SCOPE-QUOTE-REASON／QUOTE-RUN）を、保存f6dae・既存稼働用Pythonで一回・追加学習0の実4B比較へ通す。合計16,488byte（packet13,983＋launcher2,505）、packet SHA256 `52ccec341c8aa437a30a4e4afca826559c9c0d6004a50152367d592f9f7f7fb6`。候補5＋通常／Analysis前後control4の最大9HTTP、Piece1load、学習／新weights／retry0、復元込み600秒／復元予約120秒。新packet／launcher送信と、認証情報を含み得る起動環境全体の同Pod内一時読取・復元再利用は、この新3の具体承認後に行う。前回承認は完了済みで再利用せず、新送信／GPU実行／環境読取0。前回実5／15保存／97.008秒復元は完了として継承する。前置canonical／元focal語順の文体差、引用／理由一般、広い文章、新f6daeの旧53生成回帰、同版画像／通常統合／本人端末、既存3失敗と他ARは未完。新fit／通常採用／selector有効化／Render／live DB／RN／buildの自動実行0。
+
+
+<a id="piece-scoped-evaluation-register-actual-20261111"></a>
+## 11/11 AR-04 — 評価文体の実4B採用回復・15保存と復元
+
+具体承認後、保存f6dae・稼働用Pythonで新3＋保持2を一回・学習0の実4B比較。同じ実5rawの採用は旧48の2→現5fの5、評価文体の新3だけ0→3回復。保持2の全request／raw／responseは前回と完全一致。source意味／plan／prepared／messages不変、15保存・非生成再読成功。9HTTP・96.967秒で元提供へ復元、args／全env／cwd・通常／Analysis前後全response一致、独立health200。API5f3a8d5aのPiece／Analysis両CI成功も確認。今回はsource／test変更・新CI実行0。f6dae研究候補・通常selector OFF、本番未反映。
+
+
+Mashの今回の明示承認に基づき、既存Pod f1lle4xwq3wjlnへ13,983byteの2member packetと2,505byte launcher（合計16,488byte）を送信した。旧launcherを上書きせず、同じ承認済みbytesをlaunch_scoped_evaluation_once.pyの名前で置いた。packet SHA256 `52ccec341c8aa437a30a4e4afca826559c9c0d6004a50152367d592f9f7f7fb6`、launcher SHA256 `1be93c21af2c94016466892c30281fe89be02ee08ec451c8e05f342e49b73f69`。既存 `/workspace/cocolon_venv/bin/python` と新root `/workspace/ar04-scoped-evaluation-register-20261111` で一回起動、runnerPID63375。最初のUI反映が遅れたため、再起動せずread-only launch記録で同じPIDを確認した。重複実行0。原文／prepared／messages／SYSTEM／生成条件／凍結memberは変更せず、install／学習／新weights／retry0。
+
+既存cacheの固定tokenizerで全5の入力＋2048生成予約が8192以内、最大入力1708tokenを元提供停止前に確認した。候補5＋通常／Analysis前後control4の9HTTP、Piece1load。全96.966785363秒で完了・元提供復元、元PID62888→63491。args／全env／cwd・既知認証値、元source・Analysis adapter・保存Piece重みの前後一致と、通常／Analysisの前後request／全response完全一致を確認した。独立localhost health HTTP200・PIDfile63491も確認。全環境は同Pod内メモリで復元へ一時再利用し、環境値dumpを外へ出さない。既存runnerの二つの既知APIkey値の原本混入検査は維持し、あらゆるsecretの検査済みへは広げない。
+
+| 実入力 | 同じ実rawの旧48→現5f採否 | 保持した意味 |
+|---|---|---|
+| PREFERENCE-REASON | 未判定→採用 | 理由、明示本人、全対象・好み。末尾です→だだけ |
+| VALUE-CONDITION | 未判定→採用 | なら条件、明示僕にとっての視点、資料を読む時間の全対象・価値。末尾です→だだけ |
+| PREFERENCE-QUOTED-CONCESSION | 未判定→採用 | 他者引用内の私と苦手、外側おれ・けれど・好みを分離保持。末尾です→だだけ |
+| SCOPE-QUOTE-REASON | 採用→採用 | 前回の全request／raw／全response／format／revision／usageと完全一致 |
+| QUOTE-RUN | 採用→採用 | 前回の全request／raw／全response／format／revision／usageと完全一致 |
+
+回収した実rawを修補せず、旧48 policyだけを別local processで読み、現5fと同じ原7項目・source意味全量／根拠／plan・prepared ID／JSON・builder全messagesで比較した。採用2/5→5/5、新3だけ0/3→3/3回復、観測した既成功退行0。native比較も別記録し、新しいsource資格や評価解釈を追加していない。新3に旧model生成baselineはなく、保持2は既露出で新規holdoutではない。これは同じrawのreader修復の確認であり、model生成自体の前後品質比較ではない。
+
+旧作者fallbackを禁止し、receipt→CMEE／S7から全5×Free／Plus／Premiumの15試行を実保存consumerへ通した。15保存・同／新service非生成再読、原入力／Emlis不変・quota各1・保存後0生成。合成owner／UUID／現在日時への等価内容投影であり、GPU要求identityそのもの、live Supabase／本人Authの確認とは分ける。offline reviewは初回成功、harness修正・新model呼出し0。
+
+華恋と独立担当が全5の原7項目・実raw・本文を全文読んだ。新3は「です→だ」だけで、本人／対象／理由／条件／譲歩／引用と話者を全量保持し、未記載の行動完了・感情・相手意図を足していない。異なる対象間の譲歩や因果の妥当性を新たに説明したものではなく、原文の関係を保持した範囲。二重のでの重さは保持2に残る。これを広い文章編集能力・一般意味品質・正式Product Read／人間受入れの成功へ換算しない。
+
+前回5fのPiece CI run42929986338／job130225988850全39stepに加え、前回資料時点では実行中だったAnalysis CI run42929986309／job130225989232がattempt1・全19step成功で終わったことをfresh確認した。今回は商品source／test／workflow変更0、新pytest／CI実行0。前回の関連39file5976 PASS／既存3 FAIL、新66成功の条件付き証拠は保持し、今回の15保存で既存3失敗が解消したとはしない。STRUCTURE_MAP_DELTA_NONE（実結果だけ、既存owner・入口・型・保存schemaの追加なし）。primaryは限定TECHNICAL_CREDIT、商品品質credit／正式受入れの追加なし。
+
+実原本ZIP34,393byte／SHA256 `dc483520e8dc53c2422943d9295d692b3d2acd992747bd525ee6656c0d933962`、result SHA256 `a508a250feb67b93df846007eee675df57c788f93c32b5b07abfca0a5b8203af`。独立health・launcher・launch記録を含むcollection36,652byte／SHA256 `476b8f0ad183ad0b88123364669c07a2988f3e4c692c3e677f4f5cc477a3a066`。原本・全5本文・旧policy比較・15保存・独立読取・再開点は既存ファイルを差分更新する：[原本と再開点](https://chatgpt.com/library?file_id=libfile_fde3_f-902a320c78ac8191a960a142e570a106_2f7470f963808191aaebf050935e72de&account_id=personal)。
+
+次は本人前置canonical側の文体差を、保存済み本文と既存source／scope／比較条件から切り分け、原順での今回回復を退行させず進める。評価の元focal語順、引用／理由一般、広い文章、新f6daeの旧53全生成回帰、同版画像／通常統合／本人端末、既存無引用3失敗と他ARは未完。今回の新3実4B・保持2照合・15保存・96.967秒復元は完了とし、このrunnerを再実行しない。今回の一回承認は消費済み。新しいfit／GPU比較／通常採用／selector有効化／Render／live DB／RN／buildは自動実行しない。
