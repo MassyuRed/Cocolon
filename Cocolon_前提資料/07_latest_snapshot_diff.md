@@ -1,4 +1,4 @@
-> **11/11・AR-04最新：** 承認済み13,684byte・新3＋保持2のrunnerを一回起動したが、親launcherが稼働用venvではなくsystem Pythonを使ったため、transformers import前の事前確認でModuleNotFoundError、0.088435秒で失敗終了。モデルHTTP／Piece load／学習／提供停止／復元操作は0。元PID62196・args／env／cwd一致、runner health正常と独立health200を確認。新3本文・今回のCMEE採否／保存は未取得。既存稼働Pythonでtransformers／torchの所在を確認し、同じpacketを変えず起動指定だけ直す一回案を準備。再実行は未承認・未実行。API48bb559a・通常selector OFF・本番未反映。 [事前確認失敗・起動修正案](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-literal-scoped-register-preflight-failed-20261111)。
+> **11/11・AR-04最新：** 別の具体承認後、既存稼働Pythonから同じ新3＋保持2を保存f6daeで一回・追加学習0の実4B確認。同じ実5rawの採用は旧a4の2→現48の5（literal原順の新3だけ0→3回復、保持2の全request／raw／response不変）。意味／plan／prepared／messagesは前後一致、全5×3planの15保存・非生成再読成功。9HTTP・97.008秒で元提供へ復元、args／env／cwd・通常／Analysis前後全response一致、独立health200。先行のsystem Python失敗は閉じた原本として保持。API48bb559a・f6dae研究候補・通常selector OFF、本番未反映。 [実4B比較・15保存と復元](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-literal-scoped-register-actual-20261111)。
 
 > **2026-11-10・補助経路AR-04（第10回§53）：** 既存S7のmodel専用比較へ、source資格済み非過去wishの明示SELF「が」直接語順を限定接続。保存5b1de6c9の同26rawは0生成で24→25採用、旧24本文不変・source資格外1維持。新78隔離SQLは75保存／3拒否、比較元は旧記録72／6。17file996 PASS／既存warning1、追加学習0、読点の自然さは未修復・通常重み未採用。API `c9e9938981c88e811bde1970725dc3dc35b2ae26`、Piece CI42709594596／Analysis CI42709594021は全工程success、Piece model17file996 PASS／58.98秒。STRUCTURE_MAP_DELTA_NONE（既存owner内比較条件のみ、入口／責務／公開・保存契約不変）。[実結果・次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-qualified-focal-ga-reader-20261110)。
 
@@ -42092,3 +42092,13 @@ API48bb559aで、既資格literal本人文章「休みたい／読みたい」�
 次は、同じ新3＋保持2・同じ13,684byte packet（SHA256 `2ed594826530120ff502019b2f3a4e49b39ea894546e9dbc1baffb00fd51d82d`）を、既存稼働用 `/workspace/cocolon_venv/bin/python`で起動する一回修正案の具体承認後に進める。新root `/workspace/ar04-literal-scoped-register-pythonfix-20261111`を使い、今回の失敗root／原本は変更しない。新しいlauncherだけを送って同Pod上の既存packetを再利用し、runner／wire／原入力／prepared／messages／SYSTEM／生成条件は変更しない。候補5＋通常／Analysis前後control4の最大9HTTP、Piece1load、追加学習／新weights／retry0、復元込み600秒設定・復元予約120秒。認証情報を含み得る全起動環境の同Pod内一時読取・復元再利用も次の一回承認へ含め、今回の承認を再利用しない。
 
 詳細：[事前確認失敗・起動修正案](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-literal-scoped-register-preflight-failed-20261111)。
+
+
+<a id="piece-literal-scoped-register-actual-20261111"></a>
+## 11/11 AR-04 — 稼働用Pythonでの実4B比較・15保存と復元
+
+別の具体承認後、既存稼働Pythonから同じ新3＋保持2を保存f6daeで一回・追加学習0の実4B確認。同じ実5rawの採用は旧a4の2→現48の5（literal原順の新3だけ0→3回復、保持2の全request／raw／response不変）。意味／plan／prepared／messagesは前後一致、全5×3planの15保存・非生成再読成功。9HTTP・97.008秒で元提供へ復元、args／env／cwd・通常／Analysis前後全response一致、独立health200。先行のsystem Python失敗は閉じた原本として保持。API48bb559a・f6dae研究候補・通常selector OFF、本番未反映。
+
+次は、既存の理由付き好み／評価文の原順・文体差の残差へ戻り、source資格・外側scope・本人全文とnative／canonical互換を維持して原因を確認する。前置canonicalの文体差、引用／理由一般、広い文章、新f6daeの旧53全生成回帰、同版画像／通常統合／本人端末、既存無引用3失敗と他ARも未完。今回の新3実4B・保持2照合・15保存・97.008秒復元は完了とし、このrunnerを再実行しない。今回の一回承認も消費済み。新しいfit／GPU比較／通常モデル採用／selector有効化／Render／live DB／RN／buildは自動実行しない。
+
+詳細：[実4B本文・保存・限界](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-literal-scoped-register-actual-20261111)。
