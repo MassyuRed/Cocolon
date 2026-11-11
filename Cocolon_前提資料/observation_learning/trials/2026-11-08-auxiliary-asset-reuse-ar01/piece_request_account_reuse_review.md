@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/12・AR-04最新：** 研究ca7e2502／source8c5eのactual RN run43106065561を1回完了、Whole1methodは14失敗記録で未合格（旧59→14、45消失/新identity0）。13条件の本文/行/plan/寸法を保持し、10V4条件＋旧saved1でPNG11を取得。113call中106（local55/placed51）が非整列boundsのCq逆写像/厳密比較を成立、残7は未測定。初回essay6は自然paint観測欠如stage58、quote1は従来4Mi拒否stage15。通常.mm581/pin/selectorOFF・未採用、AR-04未完。次は失敗tagの既存naturalDraw/sharedPaint観測を同callbackへ対応づけ、初回観測が欠ける箇所を切り分ける。 [実アプリ経路の結果と次](piece_request_account_reuse_review.md#piece-v4-inverse-clip-actual-rn-20261112)。
+> **11/12・AR-04最新：** 研究07ea24cc（source8c5e不変）のrun43118077795を開始、結果未判定。同V4 callbackへ既存naturalDraw/shared/referenceの履歴をtag/view/storageで対応づけ、現在bounds/content frameと別記録する。32行の観測追加だけで、collector/描画/inspect/元13/8秒/閾値は不変。履歴件数はdraw回数・最新paint成立の証明ではなく、0件も未描画の証明にしない。通常.mm581/pin/selector OFF・未採用、AR-04未完。次はこのrun終端と同call記録を回収し、初回stage58の自然観測欠如を切り分ける。 [既存natural観測の接続と現在地](piece_request_account_reuse_review.md#piece-v4-natural-context-link-20261112)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -2548,4 +2548,21 @@ structured failuresはroot issuesだけを数え、action配下の同じ配列�
 今回の[実行記録](https://chatgpt.com/library?file_id=libfile_fde3_f-62e9680577888191bc63eac3baf511e0_2f7470f963808191aaebf050935e72de&account_id=personal)はCocolon_CMEE_AR04_InverseClip_ActualRN_20261112.zip、1,706,521byte/SHA9e6f5e4932a21cc358943ee1b5de121ec2ea32a212b8ccec8564ad8c7e9735f0、29memberの全CRCを検査済み。今回と基準Wholeの実出力/PNG・raw/JSON/log・失敗/画像/同callの独立照合だけを保持し、Git管理code/文書・他5methodの出力を複製しない。数値正本は同trial内のpublic JSON、source正本は研究Git refである。
 
 PRIMARY_OUTCOME=限定TECHNICAL_CREDIT。Cq候補のactual RNでの小数配置/厳密比較106と11PNGの回収を完了したが、Whole全成功・通常採用・商品/本人受入れcredit0。通常製品.mm581/pin/selector OFF、旧保存互換・frozen recipe・通常host/Photos/本人端末は未確認を維持し、AR-04および他AR残件は未完。GPU/学習/SQL/実Auth/Render配置/署名build/配布0。STRUCTURE_MAP_DELTA_NONE：通常製品owner/route/型/DB/作者/renderer責務は変更0、既存研究3testpathの観測/実行範囲だけ。
+
+
+
+<a id="piece-v4-natural-context-link-20261112"></a>
+## 11/12 AR-04 — 既存natural paint履歴を同callbackへ接続（実行中）
+
+通常29a4f1f6／研究ca7e・run43106065561の完了と、前回13条件・113call/106厳密比較/未測定7・Whole14失敗記録を継承して再開した。前回source/画像/数値を再生成せず、freshな全体現在地・全体/対象map・最新weekly・詳細設計§11–12、current規則と恒久incidentから、初回6stage58の既存観測対応づけを次の一単位とした。stage58では自然paint observationがnil、期限は残っており、stable-mask不一致や未描画そのものとは未確定である。
+
+[研究07ea24cc](https://github.com/MassyuRed/Cocolon/commit/07ea24cccd380ef3cc740883b0152fdbab1b343e)はca7の子で、既存test2pathだけを変更した。RN harnessにforward宣言＋同V4 callbackのfield1＋readonly helperを計32行追加。既存PiecePaintContextsをtag/view_identity/storage_identityで抽出し、natural_drawRect_pre_paint/natural_shared_paint/reference_shared_paintの配列と重複除去済み件数、現在public bounds/content frameを返す。collector本体・観測の生成・描画・inspect・元結果は変更0。追加を逆投影するとfresh ca7全文へ一致、元6method/全assertion/既存natural_snapshotは不変。履歴は過去geometry/属性を含み得るため、現在geometryと別に照合し、最新paint成立やdraw回数へ換算しない。nil current CGContextは元collectorで記録されず、0件をdraw未実行の証明にしない。
+
+既存workflowのname/ref/RNjob指定だけを研究新refへ接続。runnerは既存Whole1method/元13条件だけを実行する同一bytesで、他5method・standalone24/48・model73/243SQL・static6/transition4は今回未実行。source8c5e9a37954cf013f6d0e28e72070b24498e6087998effc46d3266d33aed7e4b/pin、通常製品.mm581/pin/selector OFFを保持。local bash syntax/YAML parse/source hash、harness逆投影、独立静的review、GitHub4path全byte読戻しと変更2path集合を確認した。localのUIKit compile/runtime成功ではない。
+
+[run43118077795](https://github.com/MassyuRed/Cocolon/actions/runs/43118077795)は起動済み・結果未判定、RNjob130851139571、他5job skipped。job45分・元8秒と既知4Mi拒否を保持、manual dispatch/rerun0。中断時も同runを起動し直さず終端/既存artifactへ戻る。原13の本文/行/plan/寸法/期待値とsame-call identity、追加履歴の原記録一致/現在geometryとの関係を照合し、欠如理由を観測以上に断定しない。強制draw/layout/flush・追加inspect・期限延長や別method先行による事前描画を行わない。
+
+今回のreadonly静的調査では、logical canvasはnative_checkedまでopacity0、geometry完了/onLayout/onTextLayoutと既存2rAFは自然draw完了の保証ではないと確認した。後続caseも同条件で成功しており、opacity単独を欠如原因とはしない。Finishはbeforeがあればmask不一致でも辞書を残すため、present0をstable mismatchでは説明しない。new helperはその二枝を見分けるための既存記録の接続で、通常描画の修復・採用ではない。
+
+STRUCTURE_MAP_DELTA_NONE：通常製品owner/公開型/route/DB/作者/renderer責務の変更0、既存研究testのreadonly観測とworkflow接続だけ。GPU/学習/SQL/実Auth/Render配置/署名build/配布0。
 
