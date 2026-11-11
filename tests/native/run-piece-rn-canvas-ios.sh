@@ -17,7 +17,7 @@ import json
 from pathlib import Path
 import re
 
-EXPECTED_SHA256 = "1de446725c9d6145033da1fb4ca285fdc7abd80e28ab57f54d4b39c0eb874b9a"
+EXPECTED_SHA256 = "581dfd3864cb5f88457c8cd3e54aa7e6e360e7dcca8c4b58491697c5eb7dbfd4"
 PREFIX = '''
 // Hosted-test-only scalar diagnostic, injected in this disposable checkout.
 // No wire field, guard expression, return value, clock or paint is changed.
@@ -216,6 +216,7 @@ PIECE_RN_CANVAS_PROFILE=output-grid-v4 node tests/native/piece-rn-canvas-fixture
 PIECE_RN_CANVAS_PROFILE=output-grid-v4 PIECE_RN_BITMAP_GROUP=1 node tests/native/piece-rn-canvas-fixtures.cjs > tests/native/piece-rn-bitmap-fixtures.json
 PIECE_RN_CANVAS_PROFILE=output-grid-v4 PIECE_RN_ADMITTED_GROUP=1 node tests/native/piece-rn-canvas-fixtures.cjs > tests/native/piece-rn-admitted-fixtures.json
 PIECE_RN_CANVAS_PROFILE=output-grid-v4 PIECE_RN_EXPORT_GROUP=1 node tests/native/piece-rn-canvas-fixtures.cjs > tests/native/piece-rn-export-fixtures.json
+PIECE_RN_CANVAS_PROFILE=output-grid-v4 PIECE_RN_MODEL73_GROUP=1 node tests/native/piece-rn-canvas-fixtures.cjs > tests/native/piece-rn-model73-fixtures.json
 cat > tests/native/piece-rn-no-transport.js <<'JS'
 export const apiFetch = () => { throw new Error('TRANSPORT_FORBIDDEN_IN_RENDER_TEST'); };
 export const getAccessToken = () => { throw new Error('AUTH_FORBIDDEN_IN_RENDER_TEST'); };

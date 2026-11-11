@@ -7,6 +7,7 @@ import fixtures from './piece-rn-canvas-fixtures.json';
 import bitmapFixtures from './piece-rn-bitmap-fixtures.json';
 import admittedFixtures from './piece-rn-admitted-fixtures.json';
 import exportFixtures from './piece-rn-export-fixtures.json';
+import model73Fixtures from './piece-rn-model73-fixtures.json';
 import { captureRef, releaseCapture } from 'react-native-view-shot';
 
 // Test-only timing around the unchanged native bridge call. In particular,
@@ -211,7 +212,7 @@ renderer.inspectPieceSelectedLineV4 = async (...args) => {
 };
 
 class CanvasCases extends React.Component {
-  caseFixtures = (this.props.pieceGroup === 'export' ? exportFixtures : this.props.pieceGroup === 'admitted' ? admittedFixtures : this.props.pieceGroup === 'bitmap' ? bitmapFixtures : fixtures).map(fixture => fixture.props?.display ? { ...fixture,
+  caseFixtures = (this.props.pieceGroup === 'model73' ? model73Fixtures : this.props.pieceGroup === 'export' ? exportFixtures : this.props.pieceGroup === 'admitted' ? admittedFixtures : this.props.pieceGroup === 'bitmap' ? bitmapFixtures : fixtures).map(fixture => fixture.props?.display ? { ...fixture,
     props: { ...fixture.props, display: { ...fixture.props.display, visualToken: Object.freeze({}) } } } : fixture);
   state = { index: 0, rawLeft: 0 };
   saveFitChanged = (next, previous) => {
@@ -298,6 +299,10 @@ class CanvasCases extends React.Component {
       save_fit_current: saveFitCurrent, save_fit_wrong_token_current: saveFitWrongTokenCurrent,
       save_fit_handle_keys: fit ? Object.keys(fit) : [],
       body_preserved: !!m?.plan && m.plan.groups.every((rows, index) => rows.join('') === input.blocks[index]),
+      ...(fixture.evidence_set.startsWith('model73_') ? { source_case_id: fixture.source_case_id,
+        recorded_artifact: Object.fromEntries(['format_type', 'piece_text', 'piece_text_hash', 'content_payload',
+          'content_payload_hash', 'visual_recipe', 'visual_recipe_hash', 'renderer_version'].map(key =>
+          [key, (display?.preview || fixture.props.savedRecord)[key]])) } : {}),
       ...(input?.candidateProfile === BITMAP_PROFILE ? { bitmap_canvas: m?.bitmapCanvas ?? null, colors: input.colors,
         branding_mode: input.brandingMode, crop_result: this.cropResult, crop_before_fit: this.cropBeforeFit } : {}),
     };
@@ -312,7 +317,7 @@ class CanvasCases extends React.Component {
           card.deadline === deadline && deadline.handle === null && !card.saveFit && !this.saveFitHandle;
       } else report.retention_error = 'missing_original_deadline';
     }
-    if (fixture.evidence_set === 'export_saved' || fixture.evidence_set === 'export_trap') {
+    if (fixture.evidence_set === 'export_saved' || fixture.evidence_set === 'export_trap' || fixture.evidence_set === 'model73_export') {
       const target=card?.getCaptureTarget();let uri=null;
       report.export_target_current=target?.isCurrent()===true;report.export_rejected=false;
       try {
@@ -495,7 +500,7 @@ class CanvasCases extends React.Component {
         </View>
       </View>
     </View>;
-    return <View style={this.props.pieceGroup==='export'?{position:'absolute',left:-10000,top:0,width:1080}:{width:360}}><PieceVisualCard key={fixture.name} ref={node => { this.card = node; }}
+    return <View style={this.props.pieceGroup==='export'||fixture.evidence_set==='model73_export'?{position:'absolute',left:-10000,top:0,width:1080}:{width:360}}><PieceVisualCard key={fixture.name} ref={node => { this.card = node; }}
       {...fixture.props} onSaveFitChange={this.saveFitChanged} /></View>;
   }
 }

@@ -174,6 +174,36 @@ const androidBitmapCases = bitmapCases.filter(c => c.evidence_set === 'bitmap_pr
   return fixture;
 });
 module.exports.androidBitmap = androidBitmapCases;
+// The recorded 344a multiblock works form their own native denominator. Keep
+// the production ios.v2 renderer and every canonical artifact field; only the
+// synthetic Premium HTTP envelope and preview expiry are projected here.
+const model73CanonicalFields = ['format_type', 'piece_text', 'piece_text_hash', 'content_payload',
+  'content_payload_hash', 'visual_recipe', 'visual_recipe_hash', 'renderer_version'];
+const model73Cases = [];
+for (const recorded of require('../fixtures/piece-ar04-344a-multiblock.json').cases) {
+  const selected = recorded.selected_preview || recorded.preview;
+  const preview = JSON.parse(JSON.stringify(context.makePreview(selected.format_type)));
+  for (const key of [...model73CanonicalFields, 'preview_id', 'preview_revision', 'row_version',
+    'eligible_formats', 'visibility_scope']) preview[key] = JSON.parse(JSON.stringify(selected[key]));
+  preview.expires_at = '2099-12-31T23:59:59Z';
+  preview.content_status = selected.safety_state;
+  preview.quota = { ...preview.quota, subscription_tier: 'premium', save_limit: null, remaining_count: null };
+  preview.plan_capabilities = { format_selection: 'eligible_choice', theme_ids: ['soft_paper', 'quiet_night'],
+    aspect_ratios: ['4:5', '9:16'], branding_modes: ['required_subtle', 'off'] };
+  model73Cases.push(
+    { name: `model73_preview_${recorded.native_case_name}`, evidence_set: 'model73_preview',
+      test_profile: 'bitmap-v1', source_case_id: recorded.source_case_id,
+      props: { display: { phase: 'received', preview, hashVerified: true } } },
+    { name: `model73_saved_${recorded.native_case_name}`, evidence_set: 'model73_saved',
+      test_profile: 'bitmap-v1', source_case_id: recorded.source_case_id,
+      props: { savedRecord: JSON.parse(JSON.stringify(recorded.detail)) } },
+    { name: `model73_export_${recorded.native_case_name}`, evidence_set: 'model73_export',
+      test_profile: 'bitmap-v1', source_case_id: recorded.source_case_id,
+      props: { savedRecord: JSON.parse(JSON.stringify(recorded.detail)), exportCanvas: true } },
+  );
+}
+module.exports.model73 = model73Cases;
 if (require.main === module) process.stdout.write(JSON.stringify(process.env.PIECE_RN_ANDROID_BITMAP_GROUP === '1' ? androidBitmapCases
+  : process.env.PIECE_RN_MODEL73_GROUP === '1' ? model73Cases
   : process.env.PIECE_RN_EXPORT_GROUP === '1' ? exportCases : process.env.PIECE_RN_ADMITTED_GROUP === '1' ? admittedCases
     : process.env.PIECE_RN_BITMAP_GROUP === '1' ? bitmapCases : module.exports, null, 2) + '\n');

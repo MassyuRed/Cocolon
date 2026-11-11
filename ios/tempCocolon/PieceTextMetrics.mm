@@ -1061,6 +1061,33 @@ RCT_EXPORT_METHOD(measureExplorationCandidates:(nonnull NSNumber *)tag text:(NSS
           // disjoint metrics. dispatch_apply joins before any buffer is released.
           MetricJob *jobData = jobs.data();
           const NSUInteger jobCount = jobs.size(), workers = jobCount < 256 ? 1 : 4;
+          // v5 jobs are appended in nondecreasing suffix-start order. Keep
+          // each worker's interval contiguous so only interval boundaries
+          // duplicate a suffix typesetter. Balance the shaped UTF-16 lengths,
+          // not the start value or the number of distinct suffixes.
+          // One suffix cannot reduce typesetter work; retain its balanced
+          // strided line calls, as for every legacy v3/v4 candidate call.
+          std::vector<NSUInteger> explorationCuts;
+          if (exploration && workers > 1 && jobData[0].range.location != jobData[jobCount - 1].range.location) {
+            uint64_t totalWeight = 0;
+            for (const MetricJob &job : jobs) totalWeight += job.range.length;
+            explorationCuts.resize(workers + 1);
+            explorationCuts[0] = 0; explorationCuts[workers] = jobCount;
+            NSUInteger cursor = 0;
+            uint64_t consumed = 0;
+            for (NSUInteger worker = 1; worker < workers; worker++) {
+              if (NSProcessInfo.processInfo.systemUptime >= deadline) { unavailable(); return; }
+              const uint64_t target = totalWeight * worker / workers;
+              const NSUInteger minimum = explorationCuts[worker - 1] + 1;
+              const NSUInteger maximum = jobCount - (workers - worker);
+              while (cursor < maximum && (consumed < target || cursor < minimum)) {
+                consumed += jobData[cursor].range.length;
+                cursor++;
+              }
+              explorationCuts[worker] = cursor;
+            }
+          }
+          const NSUInteger *cutData = explorationCuts.empty() ? nullptr : explorationCuts.data();
           // A single complete attribute class proves uniform pointwise
           // attributes. Build the same immutable substring directly instead
           // of slicing attributed runs.
@@ -1098,7 +1125,10 @@ RCT_EXPORT_METHOD(measureExplorationCandidates:(nonnull NSNumber *)tag text:(NSS
               NSAttributedString *nativeSnapshot = uniformAttributes ? nil : nativeSnapshots[worker];
               NSMutableAttributedString *part = nil;
               NSRange previous = NSMakeRange(NSNotFound, 0);
-              for (NSUInteger index = worker; index < jobCount; index += workers) {
+              const NSUInteger begin = cutData ? cutData[worker] : worker;
+              const NSUInteger end = cutData ? cutData[worker + 1] : jobCount;
+              const NSUInteger step = cutData ? 1 : workers;
+              for (NSUInteger index = begin; index < end; index += step) {
                 @autoreleasepool {
                   if (failure->load(std::memory_order_relaxed)) return;
                   if (NSProcessInfo.processInfo.systemUptime >= deadline) { failure->store(true, std::memory_order_relaxed); return; }
