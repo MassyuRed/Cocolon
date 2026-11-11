@@ -1,6 +1,6 @@
 # 第10回 Cocolon週末報告会 — 2026-11-07（終了）
 
-> **11/11・AR-04最新：** 旧Wholeのlogical1占有差と長文8秒超過を切り分けるため、既存104-marker診断をstandalone V4へ再利用し、正常control／後続callごとの停止stage・fault到達を記録。既存RN traceへgeometry event同期時間も追加した。source99fba3bf・PieceRN43021553284は実行中で、今回native結果は未確認。元の判定・8秒・製品source・通常selector OFFを保持し、AR-04未完。 [共通controlとgeometry待ち時間の診断](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-344a-native-control-diagnostics-20261111)。
+> **11/11・AR-04最新：** 既存104-marker診断をstandaloneへ再利用し、V4の56call／19正常controlを実測。19controlすべてlogical1占有比較stage83で不成立、allocation／edge faultは別stage63／18へ到達。今回legacy97・native129・v9_46・AR04_4・bitmap44は成功、旧V4は1成功／19失敗。source99fba3bf／PieceRN43021553284のRN画面検証は実行中。通常selector OFF・AR-04未完。 [共通controlとgeometry待ち時間の診断](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-344a-native-control-diagnostics-20261111)。
 
 記録日：2026年11月7日（日本時間）  
 対象週：**2026年11月7日〜11月14日**  

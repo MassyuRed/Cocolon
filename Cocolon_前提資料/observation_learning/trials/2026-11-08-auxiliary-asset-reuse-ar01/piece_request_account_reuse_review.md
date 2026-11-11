@@ -2291,7 +2291,7 @@ STRUCTURE_MAP_DELTA_NONE：製品のowner/route/DTO/DB/作者/controller/native�
 
 
 <a id="piece-344a-native-control-diagnostics-20261111"></a>
-## 11/11 AR-04 — 共通controlとgeometry待ち時間の実診断（実行中）
+## 11/11 AR-04 — 共通controlとgeometry待ち時間の実診断（source完了・RN実行中）
 
 ### 前回結果から確定した範囲
 
@@ -2312,10 +2312,38 @@ legacy essay_max420の4font（48/44/40/36）は各1call、各88410範囲／11381
 
 製品.mm／Card／renderer／API／DB／判定／期限は変更0。診断defineなしの元standalone testは全文byteへ戻せ、既存native sourceのpreimage581dfd38と104-marker投影24b7db4aも一致した。shell syntax、geometry wrapperの引数／return／throw／1call／再接続／旧Card対照はlocal成功。既存renderer suite189件は修正前後とも全PASS、FAIL／SKIP0。独立担当が4pathを原本・差分と照合してblocking所見なし。これは実native compile／実行成功の代替ではない。handler_msには小さな観測overheadを含み、診断処理も元deadline内のため、別runの時間差を速度改善の因果へ換算しない。
 
-source [99fba3bf5ffc09d65a27cde65e98100a39871dbe](https://github.com/MassyuRed/Cocolon/commit/99fba3bf5ffc09d65a27cde65e98100a39871dbe)は4pathのみ、GitHub全byte読戻し一致。既存[Piece RN run43021553284](https://github.com/MassyuRed/Cocolon/actions/runs/43021553284)がpushで自動起動した。manual dispatch／rerun0。今回の実native結果はまだ未確認で、完了後に本節を置換更新する。
+source [99fba3bf5ffc09d65a27cde65e98100a39871dbe](https://github.com/MassyuRed/Cocolon/commit/99fba3bf5ffc09d65a27cde65e98100a39871dbe)は4pathのみ、GitHub全byte読戻し一致。既存[Piece RN run43021553284](https://github.com/MassyuRed/Cocolon/actions/runs/43021553284)がpushで自動起動した。manual dispatch／rerun0。standaloneは下記結果まで完了。RN画面検証は実行中で、今回geometry traceは未回収である。
+
+### standalone実測結果（同run・今回の完了）
+
+source job130525731331はcompile成功後、standaloneの全suite終端を出力し、旧V4の19失敗によりfailureとなった。前回cancelled／出力0に対し、今回は56call／20caseの同call診断を回収できた。
+
+| 集合 | 今回結果 |
+| --- | --- |
+| Legacy | 97 PASS／0 FAIL |
+| v5 | native129の内訳32 PASS（legacy97と合算し129。別129を加算しない） |
+| v9 | 46 PASS／0 FAIL |
+| AR04固定bitmap | 4 PASS／0 FAIL |
+| native統合summary | 129 PASS／0 FAIL |
+| bitmap | 44 PASS／0 FAIL |
+| 旧V4 | 1 PASS／19 FAIL（20件） |
+
+V4の19正常controlはすべてstage83／result0／PIECE_NATIVE_MEASUREMENT_UNAVAILABLEで、naturalのalpha0に対しreference占有ありのlogical1各cell差だった。56/56でtag・font・request stageのidentity一致／main_thread=true、診断error0。全callの最初の停止stageは83×32、86×15、61×4、58×2、63×1、18×2だった。placedのstage86はlocalでsnapshot tokenを作れない下流であり、正常placed成功を確認した結果ではない。
+
+一方、allocation_fault followupはfault0→1／stage63、extent_edge_faultはfault0→1／stage18へ実到達した。nil/dirty/scale等のfollowupも58／61等へ分かれた。これはfault分岐到達の観測で、正常control不成立の19caseをPASSへ読み替えない。単純な片側上下反転とも断定できず、natural/referenceのcontentsAreFlippedは双方true、geometryFlippedは双方falseだった。整数scale2/3でもcontrolは不一致で、RNの小数高さ丸めだけを唯一の原因にはできない。
+
+今回AR04 artifact13856280162（82768byte、SHA256 c15355eb0f992519b5eb680287152796e0492070bbba78cc3f70179165467e1d）をCRC／digest一致で取得。固定TARGET_VIEWPOINTのpreview／savedは1080×1350、PNG bytes／全RGBA一致、SHA256 2e7f7e58e3ea6a7348bbeb459f5671f92967513aec99fbbcec4991c1baaa5b8d。rootが画像を確認した。これは同じ固定行・透明bitmap字形layerの描画で、RN/B9の行選択・theme背景・保存RPC／本人端末の証明ではない。
+
+sourceの未観測は今回解消し、旧V4をWholeと同じstage83の比較境界まで切り分けた。占有差の根本修復、旧19fail解消、旧Whole成功、速度改善、商品品質・通常採用は未成立である。
+
+今回の[実行記録](https://chatgpt.com/library?file_id=libfile_fde3_f-ce8714a42dec819186837e3d79ca19d1_2f7470f963808191aaebf050935e72de&account_id=personal)へ、source実log／56call／固定bitmap artifact／local対照を保存した。RN終端回収後は同identityを更新する。正本sourceはGitHub、未採用候補は記録内で明示分離する。
+
+### 次の修正候補の限界
+
+第二のclipped referenceだけを公開view.boundsへ対応させるsupport-mapping候補を静的に用意した。expanded B・strict占有比較・paint回数・期限・budget／fault条件は保持する一方、clipped画像のpresentation extentを変える明示的な実験であり、旧recipeと同等の修復済み実装とは扱わない。候補のcompile／native実行／通常採用は0。別runの追加・再試行も0で、結果を見ずに製品.mmやpinへ反映しない。
 
 ### 再開点と未確認
 
-次は同runのstandalone control／followup別stageとfault到達、RN geometry eventの同期時間を回収する。normal control不成立をfault検査成功へ変換せず、source旧V4とWholeと現ios.v2の共有範囲を分ける。通常host／Photos／本人端末・正式受入れ／通常採用は未確認。通常selector OFF・AR-04未完を維持する。GPU／学習／SQL／実Auth／外部HTTP／Render設定／署名build／配布0。
+次は同runのRN geometry eventの同期時間を回収する。standalone control／followup別stageとfault到達は今回確認済みとして継承する。normal control不成立をfault検査成功へ変換せず、source旧V4とWholeと現ios.v2の共有範囲を分ける。通常host／Photos／本人端末・正式受入れ／通常採用は未確認。通常selector OFF・AR-04未完を維持する。GPU／学習／SQL／実Auth／外部HTTP／Render設定／署名build／配布0。
 
 STRUCTURE_MAP_DELTA_NONE：既存native test／trace責務内の診断追加で、製品owner／route／DTO／DB／作者／controller／renderer／計測責務のtopologyは不変。新しい管理票・Gate・承認段階は追加しない。
