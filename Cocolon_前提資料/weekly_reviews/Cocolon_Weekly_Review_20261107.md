@@ -1,6 +1,6 @@
 # 第10回 Cocolon週末報告会 — 2026-11-07（終了）
 
-> **11/11・AR-04最新：** 評価8と分離した架空の対照教材12件（6対）を補完案として作成。外側の進行形／過去形だけを変え、内側の本人・相手・対象・肯否・過去動作を固定。既存24行を変更せず36行案へ結合。新12件は現source/S7のCPU確認で受理、外側表現・肯否・相手を変えた36候補は拒否。旧24件は再実行していない。評価原文・評価出力との完全一致0。モデル／GPU／SQL／追加学習0、学習要否は未決定。直前の実4Bは同系5/6＋引用2採用のまま、前提の進行形を過去形へ変えた1失敗が残る。通常selector OFF・AR-04未完。 [教材補完案・範囲と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scope-teacher-complement-20261111)。
+> **11/11・AR-04最新：** 独立12＋保持24の36件で、新しい候補を元baseから72更新（各2回）だけ学習し、未解消1を含む既存8＋独立保持8の計16件を比較する一回を準備。旧f6dae実測16はcurrent messages／生成設定一致を照合し再利用、最大20HTTP。送信55,014byte、fit最大360秒・候補用105秒先取り・復元120秒を含む全体600秒。API9b1b7bb8の既存trainerを36明示時だけ最大72へ限定拡張し、既定24/48を保持。CPU28成功・既存CI42969704329成功。Pod送信・環境読取・GPU・fitは未実行、新学習を含む実行承認待ち。通常selector OFF・AR-04未完。 [学習比較の準備・範囲と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scope-complement-fit-prepared-20261111)。
 
 記録日：2026年11月7日（日本時間）  
 対象週：**2026年11月7日〜11月14日**  
@@ -2959,7 +2959,7 @@ NO_STRUCTURE_MAP_DELTA：今回は実行・読取・private教材回収・状態
 
 
 <a id="piece-scope-teacher-complement-20261111"></a>
-## 11/11 AR-04 — 独立12件の教材補完案・既存24件保持
+## 11/11 AR-04 — 独立12件の教材補完案・既存24件保持（補完案確認の完了記録）
 
 評価8と分離した架空の対照教材12件（6対）を補完案として作成。外側の進行形／過去形だけを変え、内側の本人・相手・対象・肯否・過去動作を固定。既存24行を変更せず36行案へ結合。新12件は現source/S7のCPU確認で受理、外側表現・肯否・相手を変えた36候補は拒否。旧24件は再実行していない。評価原文・評価出力との完全一致0。モデル／GPU／SQL／追加学習0、学習要否は未決定。直前の実4Bは同系5/6＋引用2採用のまま、前提の進行形を過去形へ変えた1失敗が残る。通常selector OFF・AR-04未完。
 
@@ -2968,3 +2968,15 @@ API74dff9a7は変更なし。既存Piece CI42963237980（39step、attempt1・suc
 次は、独立12＋保持24の36行補完案を前提に、既存作者で未解消の前提変異へ対処する実モデル試験が必要か、必要なら比較対象・保持評価・上限を具体化する。教材とS7の整合確認を実4Bの改善や追加学習の必要性へ読み替えない。評価8は教師から除外し、同じprompt追記、source／期待値／raw修補、S7緩和、別作者／経路／Gate追加は行わない。前回18,068byte送信・全環境同Pod一時読取／復元再利用の一回は完了・消費済み。新GPU／fit／新weights／再試行の実行準備・承認はなく自動実行0。通常採用／Render／live DB／RN／build／配布0。
 
 NO_STRUCTURE_MAP_DELTA：今回の教材補完案とCPU確認は既存source／意味／準備／受領／S7を再利用し、新公開型・route・DB・作者・controller・Gateを追加していない。商品上の可視改善は未測定・human acceptance追加0、AR-04の未完を維持する。 [教材補完案・確認範囲と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scope-teacher-complement-20261111)。
+
+
+<a id="piece-scope-complement-fit-prepared-20261111"></a>
+## 11/11 AR-04 — 独立補完36件・72更新の比較を準備（未送信・未実行）
+
+独立12＋保持24の36件で、新しい候補を元baseから72更新（各2回）だけ学習し、未解消1を含む既存8＋独立保持8の計16件を比較する一回を準備。旧f6dae実測16はcurrent messages／生成設定一致を照合し再利用、最大20HTTP。送信55,014byte、fit最大360秒・候補用105秒先取り・復元120秒を含む全体600秒。API9b1b7bb8の既存trainerを36明示時だけ最大72へ限定拡張し、既定24/48を保持。CPU28成功・既存CI42969704329成功。Pod送信・環境読取・GPU・fitは未実行、新学習を含む実行承認待ち。通常selector OFF・AR-04未完。
+
+API9b1b7bb861a8efa359c780895b3d2ed5d8b802dbのsource/test計2pathはremote全文・blob・変更path・head一致を確認。CPU trainer28成功（既存warning1）、既存Piece CI42969704329／job130355058089・attempt1・全39step success。追加dispatch/rerun0。
+
+次は準備済みの36件/72更新・候補16/最大20HTTP・55,014byte・復元枠込み600秒の一回について、新しい学習と起動環境全体の同Pod内一時読取／復元再利用をMashに確認する。過去の推論一回承認は追加学習なしで完了・消費済みのため、新fitへ流用しない。承認後も元PID/args/env/cwd/source/weightsとcached tokenizerの全36教材・評価16件を停止前確認し、不一致／期限不足は実行を進めず、完了した72更新だけを評価する。新重みの通常採用、selector有効化、Render、live DB、RN、build、配布へ自動進行しない。
+
+NO_STRUCTURE_MAP_DELTA：既存training ownerの限定引数拡張であり、新しい公開型・route・DB・作者・controller・Gateは追加しない。意味読取・準備・生成・受領・S7・保存の担当は不変。学習比較が準備できた段階で、モデル改善・商品品質credit・human acceptance追加は0。 [準備・比較範囲と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scope-complement-fit-prepared-20261111)。
