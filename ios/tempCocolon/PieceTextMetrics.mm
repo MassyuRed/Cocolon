@@ -731,13 +731,27 @@ static BOOL PieceNativeAndLayerV4Ink(RCTTextView *view, NSDictionary *layerState
       fabs(x0) > 0x1p52 || fabs(y0) > 0x1p52 || fabs(x1) > 0x1p52 || fabs(y1) > 0x1p52) return NO;
   CGRect nativeExtent = CGRectMake((x0 - tx) / scale, (y0 + ty) / scale, (x1 - x0) / scale, (y1 - y0) / scale);
   CGRect logicalExtent = CGRectInset(CGRectIntegral(CGRectOffset(CGRectUnion(view.bounds, nativeExtent), phase.x, phase.y)), -1, -1);
-  size_t nw, nh, nb, lw, lh, lb;
-  if (!PiecePixelRect(nativeExtent) || !PiecePixelRect(logicalExtent) ||
+  // Experimental clipped-reference support model: allocate on the observed
+  // CTM lattice over public view bounds, then declare those bounds as its
+  // presentation extent. This does not read or recover natural backing size.
+  // The expanded nonclipped B raster and its projection remain independent.
+  const CGRect clippedReferenceBounds = view.bounds;
+  const double cx0 = floor(CGRectGetMinX(clippedReferenceBounds) * scale + tx);
+  const double cy0 = floor(CGRectGetMinY(clippedReferenceBounds) * scale - ty);
+  const double cx1 = ceil(CGRectGetMaxX(clippedReferenceBounds) * scale + tx);
+  const double cy1 = ceil(CGRectGetMaxY(clippedReferenceBounds) * scale - ty);
+  size_t nw, nh, nb, lw, lh, lb, cw, ch, cb;
+  if (!isfinite(cx0) || !isfinite(cy0) || !isfinite(cx1) || !isfinite(cy1) ||
+      fabs(cx0) > 0x1p52 || fabs(cy0) > 0x1p52 || fabs(cx1) > 0x1p52 || fabs(cy1) > 0x1p52 ||
+      !PiecePixelRect(nativeExtent) || !PiecePixelRect(logicalExtent) || !PiecePixelRect(clippedReferenceBounds) ||
       !PieceRasterPlan(CGSizeMake(x1 - x0, y1 - y0), 1, &nw, &nh, &nb) ||
-      !PieceRasterPlan(logicalExtent.size, 1, &lw, &lh, &lb)) return NO;
+      !PieceRasterPlan(logicalExtent.size, 1, &lw, &lh, &lb) ||
+      !PieceRasterPlan(CGSizeMake(cx1 - cx0, cy1 - cy0), 1, &cw, &ch, &cb)) return NO;
   const size_t bitBytes = (lw * lh + 7) / 8;
-  if (nb > PieceContainmentMemoryLimit - lb || nb + lb > PieceContainmentMemoryLimit - bitBytes) return NO;
+  if (nb > PieceContainmentMemoryLimit - lb || nb + lb > PieceContainmentMemoryLimit - bitBytes ||
+      cb > PieceContainmentMemoryLimit - lb || cb + lb > PieceContainmentMemoryLimit - bitBytes) return NO;
   CGAffineTransform paintCTM = CGAffineTransformMake(scale, 0, 0, -scale, tx - x0, (double)nh + y0 + ty);
+  CGAffineTransform clippedPaintCTM = CGAffineTransformMake(scale, 0, 0, -scale, tx - cx0, (double)ch + cy0 + ty);
   PieceOwnedPixels native, clipped;
   if (!withinDeadline() || !native.makeExact(nw, nh, scale, budget, &paintCTM) || !withinDeadline()) return NO;
   UIGraphicsPushContext(native.context);
@@ -765,7 +779,7 @@ static BOOL PieceNativeAndLayerV4Ink(RCTTextView *view, NSDictionary *layerState
     *nativeInk = CGRectUnion(projected, filtered);
     reference.contents = nil; reference = nil;
     CGImageRelease(expandedImage); expandedImage = NULL; native.reset();
-    if (!withinDeadline() || !clipped.makeExact(nw, nh, scale, budget, &paintCTM) || !withinDeadline()) return NO;
+    if (!withinDeadline() || !clipped.makeExact(cw, ch, scale, budget, &clippedPaintCTM) || !withinDeadline()) return NO;
     CGRect sourceClip = CGRectIntersection([grid[@"clip"] CGRectValue], view.bounds);
     if (!PiecePixelRect(sourceClip)) return NO;
     CGContextClipToRect(clipped.context, sourceClip);
@@ -776,13 +790,13 @@ static BOOL PieceNativeAndLayerV4Ink(RCTTextView *view, NSDictionary *layerState
     if (!clippedImage || !budget->reserve(bitBytes)) return NO;
     reservedBits = YES; bits = (UInt8 *)calloc(bitBytes, 1);
     if (!bits) return NO;
-    reference = PieceReferenceLayer(clippedImage, (CGRect){CGPointZero, nativeExtent.size}, view.layer);
+    reference = PieceReferenceLayer(clippedImage, clippedReferenceBounds, view.layer);
     if (!reference) return NO;
     {
       PieceOwnedPixels compared;
       if (!withinDeadline() || !compared.make(logicalExtent.size, 1, budget) || !withinDeadline()) return NO;
-      CGContextTranslateCTM(compared.context, phase.x + nativeExtent.origin.x - logicalExtent.origin.x,
-        phase.y + nativeExtent.origin.y - logicalExtent.origin.y);
+      CGContextTranslateCTM(compared.context, phase.x - logicalExtent.origin.x,
+        phase.y - logicalExtent.origin.y);
       [reference renderInContext:compared.context];
       CGRect comparedCells;
       if (!PieceScanPixels(compared, withinDeadline, YES, &comparedCells)) return NO;

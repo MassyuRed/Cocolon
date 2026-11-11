@@ -1,9 +1,9 @@
 # Piece contracts, native metrics and isolated RN simulator rendering; no signing or deployment.
-name: Piece RN preview and owner contracts
+name: Piece V4 clipped reference experiment (standalone only)
 'on':
   push:
     branches:
-      - agent/three-core-cmee-current-structure-20260815
+      - agent/piece-v4-clipped-reference-probe-20261111
     paths:
       - .github/workflows/piece-rn-contracts.yml
       - features/piece/**
@@ -84,7 +84,7 @@ permissions:
   contents: read
 jobs:
   piece-rn-contracts:
-    if: github.repository == 'MassyuRed/Cocolon'
+    if: github.repository == 'MassyuRed/Cocolon' && github.ref == 'refs/heads/agent/three-core-cmee-current-structure-20260815'
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
@@ -132,7 +132,7 @@ jobs:
           tests/analysis-semantic-map.test.js
 
   piece-android-source:
-    if: github.repository == 'MassyuRed/Cocolon'
+    if: github.repository == 'MassyuRed/Cocolon' && github.ref == 'refs/heads/agent/three-core-cmee-current-structure-20260815'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -312,7 +312,7 @@ jobs:
           retention-days: 7
 
   piece-ios-rn-canvas:
-    if: github.repository == 'MassyuRed/Cocolon'
+    if: github.repository == 'MassyuRed/Cocolon' && github.ref == 'refs/heads/agent/three-core-cmee-current-structure-20260815'
     runs-on: macos-15
     timeout-minutes: 45
     steps:
@@ -354,7 +354,7 @@ jobs:
           retention-days: 7
 
   piece-export-pods:
-    if: github.repository == 'MassyuRed/Cocolon'
+    if: github.repository == 'MassyuRed/Cocolon' && github.ref == 'refs/heads/agent/three-core-cmee-current-structure-20260815'
     runs-on: macos-15
     timeout-minutes: 25
     steps:
@@ -408,7 +408,7 @@ jobs:
           retention-days: 7
 
   piece-export-android:
-    if: github.repository == 'MassyuRed/Cocolon'
+    if: github.repository == 'MassyuRed/Cocolon' && github.ref == 'refs/heads/agent/three-core-cmee-current-structure-20260815'
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
