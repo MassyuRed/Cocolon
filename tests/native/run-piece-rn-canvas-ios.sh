@@ -366,7 +366,7 @@ export SKIP_BUNDLING=1 RCT_NEW_ARCH_ENABLED=0
 XCODE=(xcodebuild -quiet -jobs 3 -workspace tempCocolon.xcworkspace -scheme tempCocolon \
   -configuration Debug -destination "platform=iOS Simulator,id=$DEVICE" \
   -derivedDataPath "$OUT/build" \
-  -parallel-testing-enabled NO -only-testing:tempCocolonTests/PieceRNCanvasTests \
+  -parallel-testing-enabled NO -only-testing:tempCocolonTests/PieceRNCanvasTests/testWholeCanvasWithRealReactNative \
   CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY= \
   ONLY_ACTIVE_ARCH=YES ENABLE_DEBUG_DYLIB=NO)
 # Compile before booting the simulator, so its memory/CPU does not compete

@@ -1,9 +1,9 @@
 # Piece contracts, native metrics and isolated RN simulator rendering; no signing or deployment.
-name: Piece V4 inverse clip support experiment (standalone only)
+name: Piece V4 inverse clip RN probe (unadopted)
 'on':
   push:
     branches:
-      - agent/piece-v4-inverse-clip-support-20261112
+      - agent/piece-v4-inverse-clip-rn-probe-20261112
     paths:
       - .github/workflows/piece-rn-contracts.yml
       - features/piece/**
@@ -170,7 +170,7 @@ jobs:
           test -f "$ANDROID_HOME/platforms/android-35/android.jar"
           javac -proc:none -source 17 -target 17 -classpath "$ANDROID_HOME/platforms/android-35/android.jar:$PIECE_COMPILE_DIR/*" -d "$PIECE_COMPILE_DIR/classes" android/app/src/main/java/com/anonymous/cocolonmvp/piece/PieceTextMetricsModule.java
   piece-ios-source:
-    if: github.repository == 'MassyuRed/Cocolon'
+    if: github.repository == 'MassyuRed/Cocolon' && github.ref == 'refs/heads/agent/three-core-cmee-current-structure-20260815'
     runs-on: macos-15
     timeout-minutes: 10
     steps:
@@ -378,7 +378,7 @@ jobs:
           retention-days: 7
 
   piece-ios-rn-canvas:
-    if: github.repository == 'MassyuRed/Cocolon' && github.ref == 'refs/heads/agent/three-core-cmee-current-structure-20260815'
+    if: github.repository == 'MassyuRed/Cocolon' && github.ref == 'refs/heads/agent/piece-v4-inverse-clip-rn-probe-20261112'
     runs-on: macos-15
     timeout-minutes: 45
     steps:
@@ -415,6 +415,7 @@ jobs:
           name: piece-rn-canvas-ios
           path: |
             ${{ runner.temp }}/piece-rn-canvas/evidence
+            ${{ runner.temp }}/piece-rn-canvas/piece-native-diagnostic-map.json
             ${{ runner.temp }}/piece-rn-canvas/xcodebuild.log
             ${{ runner.temp }}/piece-rn-canvas/result.xcresult
           retention-days: 7

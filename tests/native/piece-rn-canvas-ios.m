@@ -554,7 +554,16 @@ static void PieceRecordNativeV4Boundary(id module, NSDictionary *identity,
       NSDictionary *observation=[view respondsToSelector:@selector(cocolonPiecePaintObservation)]
         ?[view cocolonPiecePaintObservation]:nil;
       NSTextStorage *storage=view.cocolonPieceTextStorage;
+      // Same original callback stack: report public/observed geometry as
+      // values alongside the existing bound same-call CTM/Cq/phase evidence.
+      // Missing natural observations remain absent, never reconstructed.
+      CGAffineTransform observedCTM=observation ? [observation[@"ctm"] CGAffineTransformValue] : CGAffineTransformIdentity;
       NSDictionary *snapshot=@{@"present":@(observation!=nil),
+        @"public_bounds":PieceRect(view.bounds),
+        @"observed_bounds":observation ? PieceRect([observation[@"bounds"] CGRectValue]) : (id)NSNull.null,
+        @"observed_clip":observation ? PieceRect([observation[@"clip"] CGRectValue]) : (id)NSNull.null,
+        @"observed_ctm":observation ? @[PieceFinite(observedCTM.a),PieceFinite(observedCTM.b),PieceFinite(observedCTM.c),
+          PieceFinite(observedCTM.d),PieceFinite(observedCTM.tx),PieceFinite(observedCTM.ty)] : (id)NSNull.null,
         @"paint_complete":observation[@"paint_complete"]?:@NO,
         @"stable_mask":observation[@"stable_mask"]?:NSNull.null,
         @"storage_matches":@(observation[@"storage"]==storage),
