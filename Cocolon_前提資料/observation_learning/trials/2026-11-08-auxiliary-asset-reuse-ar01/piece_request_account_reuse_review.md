@@ -1488,7 +1488,7 @@ private原本は[Cocolon_CMEE_AR04_CanonicalFronted_Register_20261111.zip](https
 
 新3×Free／Plus／Premiumの9保存、同／新serviceの非生成再読、原入力／Emlis不変・quota各1・保存後0取得を確認。固定HTTP provider・合成本人認証・隔離PGlite SQLで、live Supabase／実Auth／native画像／本人端末ではない。全raw無修補、旧作者禁止。最初の広範囲commandはjunitxml指定組立て誤りで0test・exit4となったため失敗を原記録へ保存し、修正後の6195件だけ集計した。
 
-商品変更は既存policy1とtest2（prose register／evaluation saved pipeline）。新module／意味型／作者／source／public DTO／DB／RN／renderer／依存／通常selector／本番変更0。STRUCTURE_MAP_DELTA_NONE（既存model比較への原語順register再利用）。限定TECHNICAL_CREDIT、商品品質credit0・AR-04未完。API8329a828のPiece CI42943673831／Analysis CI42943673837はattempt1実行中、終端未確認。
+商品変更は既存policy1とtest2（prose register／evaluation saved pipeline）。新module／意味型／作者／source／public DTO／DB／RN／renderer／依存／通常selector／本番変更0。STRUCTURE_MAP_DELTA_NONE（既存model比較への原語順register再利用）。限定TECHNICAL_CREDIT、商品品質credit0・AR-04未完。API8329a828のPiece CI42943673831はattempt1・success確認済み。Analysis CI42943673837はattempt1実行中、終端未確認。
 
 ### 新しい一回比較の具体準備・未実行範囲
 

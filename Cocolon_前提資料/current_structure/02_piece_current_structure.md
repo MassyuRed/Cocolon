@@ -4181,6 +4181,6 @@ API8329a828で、既資格の本人評価を元の焦点語順のまま敬体／
 
 次は未実行の本人前置3＋評価焦点3と保持2の計8材料を、一回の実4B比較へまとめて通す。送信候補17,151byte（packet14,702＋launcher2,449）・最大12HTTP・Piece1load・学習／retry0、復元枠を含む600秒の期限設定／復元予約120秒。既存Podへの新packet送信と、認証情報を含み得る全起動環境の同Pod内一時読取・復元再利用は今回の具体承認後に限る。旧実行の一回承認は完了済みで再利用しない。
 
-API8329a828のPiece CI42943673831／Analysis CI42943673837はattempt1実行中、終端未確認。 前セッションのAPIeb9cdacdは、Piece CI42936880945全39工程／Analysis CI42936880940全19工程がattempt1・success。反映済みsource3と資料7の全blob／本文をfresh照合し、中断時に未保存だったprivate比較原本を保全した。
+API8329a828のPiece CI42943673831はattempt1・success確認済み。Analysis CI42943673837はattempt1実行中、終端未確認。 前セッションのAPIeb9cdacdは、Piece CI42936880945全39工程／Analysis CI42936880940全19工程がattempt1・success。反映済みsource3と資料7の全blob／本文をfresh照合し、中断時に未保存だったprivate比較原本を保全した。
 
 [原因・同一候補・保存・未実行範囲](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-evaluation-focal-register-20261111)。

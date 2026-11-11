@@ -492,7 +492,7 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | AR-01通常と残件 | AR-01通常不採用・役割反転未解決。先行API 651f1f38のAR-04差分とAR-01研究patchの通常不採用を継承。今回のfce72bcc／4da69cdeはtest整合のみで、AR-01通常採用なし。Render配置／実DB／RN／build0、他AR残件は維持 |
 | AR-04回収・改修 | 既存評価focus parser／原文anchorをmodel専用比較へ再利用。元の焦点語順・本人／視点・全対象・程度／否定／時点／留保・外側scopeを保持し、末尾です／だだけ比較。source資格／新型／作者／checkerは追加0 |
 | AR-04実本文 | 今回は固定CPU新3が0→3採用。既存実4B5の全結果を追加生成0で維持。新しいモデル作文品質は未確認 |
-| AR-04検証・再読 | 新71成功、関連6195中6192成功／既存同3失敗。新3×3planの9保存・同／新service非生成再読、保存後0生成。独立27例で意味変異等23拒否・退行0。API8329a828のPiece CI42943673831／Analysis CI42943673837はattempt1実行中、終端未確認。 |
+| AR-04検証・再読 | 新71成功、関連6195中6192成功／既存同3失敗。新3×3planの9保存・同／新service非生成再読、保存後0生成。独立27例で意味変異等23拒否・退行0。API8329a828のPiece CI42943673831はattempt1・success確認済み。Analysis CI42943673837はattempt1実行中、終端未確認。 |
 | AR-04反映・残件 | API8329a828で、既資格の本人評価を元の焦点語順のまま敬体／常体比較へ接続。固定CPU新3は0→3採用、3plan計9保存・非生成再読。原7項目／source意味／plan／prepared／messages・native全結果と前回実4B5件は維持。新71全成功、関連39fileは6192成功／既存同3失敗。独立27例で退行0。新GPU生成・学習0、f6dae研究候補・通常selector OFF・本番未反映。 |
 | AR-04現在のrefined | APIca4140abの通常server保存を継承。RN4a103688で表示した第一本人回答の明示選択→exact回答query→七項目refined POSTへ接続。元／補足は別source。旧保存結果不明は元保存要求を優先。同じ実Q2材料の親導線0→新2、本文指紋とSQL保存本文／初回recipe一致。1512関連PASS・Metro1件対象外。未build／未live反映／native未確認 この旧Q2二例は継承時点の記録。前回の実Q2四例と名前役割化adjusted三planの結果を継承し、今回の同4補足は最終18比較の保持対照として確認。 |
 | AR-04現在の4B本文読取 | 前回実5を同rawで再受領・全結果維持。本人前置3と元評価焦点3の新4B本文は未取得。広い文章／通常統合／画像／本人端末は未確認 |
@@ -1031,6 +1031,6 @@ API8329a828で、既資格の本人評価を元の焦点語順のまま敬体／
 
 次は未実行の本人前置3＋評価焦点3と保持2の計8材料を、一回の実4B比較へまとめて通す。送信候補17,151byte（packet14,702＋launcher2,449）・最大12HTTP・Piece1load・学習／retry0、復元枠を含む600秒の期限設定／復元予約120秒。既存Podへの新packet送信と、認証情報を含み得る全起動環境の同Pod内一時読取・復元再利用は今回の具体承認後に限る。旧実行の一回承認は完了済みで再利用しない。
 
-API8329a828のPiece CI42943673831／Analysis CI42943673837はattempt1実行中、終端未確認。 前セッションのAPIeb9cdacdは、Piece CI42936880945全39工程／Analysis CI42936880940全19工程がattempt1・success。反映済みsource3と資料7の全blob／本文をfresh照合し、中断時に未保存だったprivate比較原本を保全した。
+API8329a828のPiece CI42943673831はattempt1・success確認済み。Analysis CI42943673837はattempt1実行中、終端未確認。 前セッションのAPIeb9cdacdは、Piece CI42936880945全39工程／Analysis CI42936880940全19工程がattempt1・success。反映済みsource3と資料7の全blob／本文をfresh照合し、中断時に未保存だったprivate比較原本を保全した。
 
 [原因・同一候補・保存・未実行範囲](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-evaluation-focal-register-20261111)。
