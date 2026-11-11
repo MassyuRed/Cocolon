@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/11・AR-04最新：** 承認済み36件/72更新のfresh候補a1dfを一回作成し、残っていた「予定が重なっている」→「重なった」の前提変異1件が回復。既存8＋保持8の実16は全件意味採用、他15rawは旧f6daeとbyte同一。48隔離保存・非生成再読成功。20HTTP・復元込み464.290秒、元args/env/cwd・source/Analysis・旧weights保持、通常/Analysis前後全response一致、独立health200/PID67361一致。fit319.087秒、retry0。新重みは検証用・通常selector OFF。今回16の限定改善であり、旧65全体・実機・一般品質・AR-04完了ではない。 [実16・48保存・復元と次](piece_request_account_reuse_review.md#piece-scope-complement-fit-actual-20261111)。
+> **11/11・AR-04最新：** 保存a1df候補の未確認49要求を具体化。既存67行をcurrent messagesで65要求へ一意化し、実測済み16を除外。現API9b1bで全49のsource／meaning／plan／prepared／messagesと旧rawのCMEE/S7採否・本文一致をCPU確認。通常47／補足2、1slot39／2slot10。送信36,384byte、候補49＋前後対照4・最大53HTTP、学習0・復元枠120秒込み全体600秒・retry0の一回比較を準備。Pod送信・環境読取・GPU・SQLは未実行、今回分の具体承認待ち。a1df実確認は16/65のまま、通常selector OFF・AR-04未完。 [49要求の準備・比較範囲と次](piece_request_account_reuse_review.md#piece-a1df-remaining49-prepared-20261111)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -1903,3 +1903,31 @@ API9b1b7bb8のCPU trainer28成功と既存Piece CI42969704329/job130355058089・
 次は保存済み新a1df候補について、旧65固有要求のうち今回とcurrent messagesが一致する16を除いた未確認49要求を既存wireから比較対象として具体化し、広い本文・欄混合・refinedの退行を先に確認する。今回完了した36/72学習・16生成を繰り返さず、追加fitへ自動進行しない。承認済み55,014byte送信・全環境同Pod内一時読取/復元再利用の一回は完了・消費済み。新GPU試行・通常採用・selector有効化・Render・live DB・RN・build・配布は未承認/未実行として区別する。
 
 NO_STRUCTURE_MAP_DELTA：今回source/test/公開型/route/DB/作者/controller/Gateに変更なし。primary TECHNICAL_CREDIT、検証候補で1件の可視意味保持改善を確認、正式商品credit/human acceptance追加0。 [実16・48保存・復元と次](piece_request_account_reuse_review.md#piece-scope-complement-fit-actual-20261111)。
+
+
+<a id="piece-a1df-remaining49-prepared-20261111"></a>
+## 11/11 AR-04 — 保存a1df候補の残49要求を比較準備（未送信・未実行）
+
+保存a1df候補の未確認49要求を具体化。既存67行をcurrent messagesで65要求へ一意化し、実測済み16を除外。現API9b1bで全49のsource／meaning／plan／prepared／messagesと旧rawのCMEE/S7採否・本文一致をCPU確認。通常47／補足2、1slot39／2slot10。送信36,384byte、候補49＋前後対照4・最大53HTTP、学習0・復元枠120秒込み全体600秒・retry0の一回比較を準備。Pod送信・環境読取・GPU・SQLは未実行、今回分の具体承認待ち。a1df実確認は16/65のまま、通常selector OFF・AR-04未完。
+
+### 比較対象と、今回のCPU確認
+
+保存済み67照合行から、current messagesの同一要求を65へ一意化。前回a1df実16と完全一致する要求を除き、残る49を既存wireからそのまま固定した。aliasも全67行の対応表に保持し、原7項目／source／prepared／旧request・response・rawを変更していない。通常47・refined2、1slot39・2slot10。2slotを全て二つの入力欄と呼ばず、refinedの別sourceを区別する。新教材・追加fit・期待本文の作成は0。
+
+fresh API9b1b7bb861a8efa359c780895b3d2ed5d8b802db checkoutで、全49のsource／meaning／plan／prepared／messagesが保存された投影と一致。旧f6daeの実requestは全49で現messages・生成設定と一致し、無修補の旧rawを現受領・CMEE・S7へ通して全49の採否／本文一致を確認した。旧作者fallbackを禁止。これは保存済み旧rawのCPU確認で、新a1dfの49生成や品質確認ではない。通常保存・実DB・SQL・本人端末の成功も追加していない。
+
+### 具体化した一回の範囲
+
+既存Pod f1lle4xwq3wjln上の保存a1df adapterを使い、候補49＋通常/Analysisの前後対照4、最大53HTTP・baseline新生成0・追加学習0・新weights0・Piece load1・retry0。全体600秒、復元枠120秒を予約する。比較packet34,120byte＋launcher2,264byte＝36,384byte。wire SHA256 `f6fddd8793fd4323281707bacae752686f56403fd68676eb868d9897abe2ed5b`、packet SHA256 `b8cd31ebd63486685dea06f4c8454280486025e454a6cac01b6684650d3e4d4a`。旧49の生成所要合計198.831秒は履歴であり、新候補の所要保証ではない。
+
+稼働用Pythonを使い、元提供のPID67361／起動引数・環境・作業場所・source／Analysis・a1df/f6dae/5b1/e924重みとconfigを停止前に照合する。cached tokenizerで全49の入力token＋生成予約2048が8192以内であること、server import・health・占有processを確認。不一致や残時間不足なら元提供を停止せず終了する。認証情報を含み得る起動環境全体は同Pod内の一時読取・復元再利用に限り、環境値・認証headerを外部回収しない。復元後に元args/env/cwd・source/Analysis・重み保持、health、通常/Analysisの前後全response一致を確認する。
+
+static compile、ZIP CRC／member hash、承認引数なしでは副作用前に終了するguardを確認し、独立担当も49要求の分割・旧request一致・runnerを読んだ。Podの現状態・実token数は未確認であり、historical PIDをfresh観測と呼ばない。CPU準備のmetadata不足によるscript errorは訂正したが、source／raw／期待値は変更せず、モデル実行の失敗・retryへ換算しない。
+
+### 次の実行と未実施
+
+前回36/72学習・16生成・55,014byte送信／全環境同Pod内一時読取・復元再利用の一回は完了・消費済み。今回の36,384byte送信と同Pod内環境再利用、49候補のGPU比較は今回分の具体承認前・未実行。承認後はこの一回を実行し、無修補rawの現CMEE/S7受領、全本文の原文対照、採用artifactの既存3plan隔離保存・同/新service非生成再読を続ける。原文／期待値／raw修補、S7緩和、追加学習、通常採用／selector有効化、Render、live DB、RN／build／配布へ拡張しない。
+
+今回source/test変更0、新CI／dispatch／rerun0。前回a1df実16／65・48保存／464.290秒復元を継承し、残49の新品質・65全体の成立・AR-04完了を未確認のまま保持する。STRUCTURE_MAP_DELTA_NONE。準備・旧raw照合だけの商品品質credit／human acceptance追加0。
+
+[準備データ・比較packetと来歴](https://chatgpt.com/library?file_id=libfile_fde3_f-5e3381a99df48191809a2a8855ff5c80_2f7470f963808191aaebf050935e72de&account_id=personal)。

@@ -1,6 +1,6 @@
 # 第10回 Cocolon週末報告会 — 2026-11-07（終了）
 
-> **11/11・AR-04最新：** 承認済み36件/72更新のfresh候補a1dfを一回作成し、残っていた「予定が重なっている」→「重なった」の前提変異1件が回復。既存8＋保持8の実16は全件意味採用、他15rawは旧f6daeとbyte同一。48隔離保存・非生成再読成功。20HTTP・復元込み464.290秒、元args/env/cwd・source/Analysis・旧weights保持、通常/Analysis前後全response一致、独立health200/PID67361一致。fit319.087秒、retry0。新重みは検証用・通常selector OFF。今回16の限定改善であり、旧65全体・実機・一般品質・AR-04完了ではない。 [実16・48保存・復元と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scope-complement-fit-actual-20261111)。
+> **11/11・AR-04最新：** 保存a1df候補の未確認49要求を具体化。既存67行をcurrent messagesで65要求へ一意化し、実測済み16を除外。現API9b1bで全49のsource／meaning／plan／prepared／messagesと旧rawのCMEE/S7採否・本文一致をCPU確認。通常47／補足2、1slot39／2slot10。送信36,384byte、候補49＋前後対照4・最大53HTTP、学習0・復元枠120秒込み全体600秒・retry0の一回比較を準備。Pod送信・環境読取・GPU・SQLは未実行、今回分の具体承認待ち。a1df実確認は16/65のまま、通常selector OFF・AR-04未完。 [49要求の準備・比較範囲と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-a1df-remaining49-prepared-20261111)。
 
 記録日：2026年11月7日（日本時間）  
 対象週：**2026年11月7日〜11月14日**  
@@ -2992,3 +2992,13 @@ API9b1b7bb8のCPU trainer28成功と既存Piece CI42969704329/job130355058089・
 次は保存済み新a1df候補について、旧65固有要求のうち今回とcurrent messagesが一致する16を除いた未確認49要求を既存wireから比較対象として具体化し、広い本文・欄混合・refinedの退行を先に確認する。今回完了した36/72学習・16生成を繰り返さず、追加fitへ自動進行しない。承認済み55,014byte送信・全環境同Pod内一時読取/復元再利用の一回は完了・消費済み。新GPU試行・通常採用・selector有効化・Render・live DB・RN・build・配布は未承認/未実行として区別する。
 
 NO_STRUCTURE_MAP_DELTA：今回source/test/公開型/route/DB/作者/controller/Gateに変更なし。primary TECHNICAL_CREDIT、検証候補で1件の可視意味保持改善を確認、正式商品credit/human acceptance追加0。 [実16・48保存・復元と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-scope-complement-fit-actual-20261111)。
+
+
+<a id="piece-a1df-remaining49-prepared-20261111"></a>
+## 11/11 AR-04 — 保存a1df候補の残49要求を比較準備（未送信・未実行）
+
+保存a1df候補の未確認49要求を具体化。既存67行をcurrent messagesで65要求へ一意化し、実測済み16を除外。現API9b1bで全49のsource／meaning／plan／prepared／messagesと旧rawのCMEE/S7採否・本文一致をCPU確認。通常47／補足2、1slot39／2slot10。送信36,384byte、候補49＋前後対照4・最大53HTTP、学習0・復元枠120秒込み全体600秒・retry0の一回比較を準備。Pod送信・環境読取・GPU・SQLは未実行、今回分の具体承認待ち。a1df実確認は16/65のまま、通常selector OFF・AR-04未完。
+
+前回の16/65実確認と48保存は完了として継承。今回49の新モデル出力・保存・一般品質は未確認。完了済みの学習・16生成を再実行しない。承認後は保存a1dfによる未確認49だけを一回比較し、無修補受領・全本文の原文対照・採用artifactの既存隔離保存／非生成再読へ進める。通常採用・selector・Render・live DB・RN・build・配布は未実行。
+
+NO_STRUCTURE_MAP_DELTA：source/test/公開型/route/DB/作者/controller/Gateは不変。今回の旧raw照合・実行準備を新候補品質改善やAR-04完了へ数えない。 [49要求の準備・比較範囲と次](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-a1df-remaining49-prepared-20261111)。
