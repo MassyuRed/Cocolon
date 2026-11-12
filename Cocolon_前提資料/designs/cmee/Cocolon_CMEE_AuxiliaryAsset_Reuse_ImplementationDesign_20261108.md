@@ -4,11 +4,11 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-12 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: CROSS_CORE_ACTUAL7_COMPLETE_GENERATION_QUALITY_NOT_ACCEPTED
+status: AR03_ACTUAL6_COMPLETE_NORMAL_ADOPTION_WITHHELD
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "AR03 historical-answer research candidate CPU verified; compare prepared six actual outputs only after new bounded approval; normal adoption and other AR remain pending"
+current_next: "Actual6 complete, candidate not adopted; clarify history/current occasion ownership in author material; no automatic generation retry"
 runtime_effect_of_this_document: 0
 ---
 
@@ -541,7 +541,7 @@ Pieceのexported owner／input IDは非UUID、Analysisのguard／as_ofは固定f
 Primary outcomeは`TECHNICAL_CREDIT`、一般生成品質のhuman acceptance／通常採用は0。`STRUCTURE_MAP_DELTA_NONE`（既存質問判定の活用範囲だけを修復しowner/公開contractを追加しない）。三中核の返答・作品・地図の品質未達、二入力訂正、意味ある履歴、適格sourceでのPiece／Analysis SQL保存、他ARと通常反映・端末は残件。新しい承認Gate・共通framework・controller・checkerを追加せず、今回の拒否修復だけを補助経路全体の完了にしない。
 
 <a id="auxiliary-history-answer-meaning-20261112"></a>
-## 9.5 2026-11-12 — 過去の本人回答・撤回を現naturalの研究入力へ移管（実4B未実行）
+## 9.5 2026-11-12 — 過去の本人回答・撤回を現naturalの研究入力へ移管（準備時点の記録・後続6応答完了）
 
 **11/12・AR-03履歴更新の移管候補：** API `eab40e2fce5420d3ee00e8b64d7890b2d776e2a3`。既存owned-historyの全回答再導出と本人回答active／inactive投影を、naturalの研究明示`use_meaning_support=True`へ接続。原入力・全回答・対応する問いは保持し、最新回答が未対応なら過去の解決済みcheckpointへ戻さずUNASSESSED。補助だけを既存5800byte全messages予算へ収め、超過時は原sourceを削らず補助を外す。自然応答系3module117件成功（既存警告1）。通常提供は未変更。架空履歴3組の旧新6応答・45,136byteの一回比較を準備、Pod送信／実4B生成／学習／再試行／提供再起動0。実出力の改善・通常採用・AR-03完了は未成立。
 
@@ -569,6 +569,45 @@ Primary outcomeは`TECHNICAL_CREDIT`、一般生成品質のhuman acceptance／�
 準備原本 `Cocolon_CMEE_AR03_HistoryMeaning_Prepared_20261112.zip`、Library ID `libfile_fde3_f-e61ca84c43ac819183e9e3c7f762275f_2f7470f963808191aaebf050935e72de`、17,406bytes／4members、SHA256 `43c49f7e74290610bd041516f6fd6f23c8d0cf37c64aff511d073ee166b42c81`。Git-backed製品source・認証値・全環境は含まない。実行後は6本文を原文と比較し、意味保持・撤回復活・別時点混同・自然さ・反復を華恋が全件読み、改善が成立した場合だけ通常採用を検討する。不成立時に同じprompt試行を自動反復しない。
 
 STRUCTURE_MAP_DELTA_PRESENT（研究明示時の履歴意味投影に既存ownerを再利用）。商品品質の改善・human acceptance・通常採用は未成立。二入力訂正、一般生成品質、Piece／Analysisの適格SQL保存、live／本人端末、他ARは残件。
+
+<a id="auxiliary-history-answer-actual6-20261112"></a>
+## 9.6 2026-11-12 — 承認された履歴3組の実4B旧新6応答・通常採用を見送り
+
+**11/12・AR-03の実4B比較6応答を完了・通常採用は見送り：** 承認された45,136byteのscriptを既存Podへ送り、架空履歴3組の旧新6応答を一回・17.846694秒で取得。全HTTP200／stop、学習・再試行・提供再起動0、PID73476／health200を前後維持。候補は撤回例の一部未根拠説明を減らしたが復唱中心で、追加回答例では過去だけの「重かった」が今回の気持ちとして読める記録・時点の曖昧さを残した。現parserは4受理／旧2質問拒否、受理4の非生成artifact再読は一致したが意味比較は全UNASSESSED。実Q3 SQL保存／通常採用／本番反映・端末は未実施。API eab40e2の既存2CIは成功。原本を同じ保存IDのversion1へ更新し、次は作者材料の過去／今回の所属を明瞭にする修正へ戻す。AR-03／全補助経路は未完。
+
+### 実行と原本
+
+Mashが§9.5のscript45,136byte・架空3組／旧新6応答・最大420秒・一回、学習／再試行／提供再起動0、既存一鍵の同Pod内認証だけの使用を具体承認した後に実行。送信後にbyte数・SHA256 `70db62ff7e8e4eb3a1080197247f3f6252cbe9d9bc86170706e8f6a03ffa8a28`・結果folder不存在を確認した。Jupyterの端末入力timeoutは実行開始前の操作であり、モデル再試行ではない。新端末で`timeout 420s python3 -u`を一回実行した。
+
+全6要求を既存の`cocolon-qwen35-4b-base-851bf6e`へ送信し、全HTTP200／stop、17.846693731844425秒。前後PID73476／health200を維持。学習・モデル再送・提供停止再起動・重み変更・新規レンタル0。名前を指定した既存自然応答用一鍵だけを同Pod内認証に使い、全環境の読取・鍵の表示／保存／外部転送は0。金銭原価・正確なtoken数は未測定。
+
+同じ保存ID `libfile_fde3_f-e61ca84c43ac819183e9e3c7f762275f_2f7470f963808191aaebf050935e72de` の `Cocolon_CMEE_AR03_HistoryMeaning_Prepared_20261112.zip` をversion1へ更新。準備時の4原本を変更せず、実response6、集約results／summary、現parserとartifact再読結果、root／独立読取所見、offline再生scriptを追加した。45,783bytes／20members、SHA256 `ed72f0e76497019535e044bea464cf373b2fa913109e47e8ce57f53cdd821a72`。集約実resultsのSHA256 `6a457643bd2472382ae71808210ca54731891d3506c81fa69a24150deb895480`。version0の準備時hash／17,406bytesはその版の履歴であり、現version1のサイズと混同しない。認証値・全環境・browser screenshot・Git-backed製品sourceは含めない。
+
+### 本文の全件読取
+
+| 条件 | 旧応答 | 候補応答と判断 |
+|---|---|---|
+| 過去の撤回 | 今回の「嬉しくなかった」を言い換え、不安から言葉の重みへの敏感さ等を補う | 未根拠な敏感さ等は消えた。一方、今回の原文の復唱・記録解説が中心。過去の撤回を正しく活用した本文の証拠ではなく、一般品質の成立にしない |
+| 過去の追加回答 | 今回の引用の直後に「その時…重かったのでしょうか」と質問する | 過去回答だけにある「重かった」を、今回引用の直後の「その時」へ留保付きで接続する。過去の記録への明示的帰属がなく、今回の感情を補った読みになる／少なくとも曖昧。「ようです」だけで時点・sourceの結合は修復されないため通常不採用 |
+| 過去の未対応回答 | 「どのような意味として届いたのでしょうか」と未分離の問いを出す | 「どのような意味として届いたのか、少し気になります」へ変更。本人の「はい」から感情を創作していないが、自然な完了応答・意味ある履歴利用の改善は未成立。この句だけを新しい質問guardの根拠にしない |
+
+rootと別agentが全6本文を各原入力／過去回答と照合した。現在の入力自体にある「嬉しくなかった」は撤回されていない。過去撤回から反対の喜びを作らず、過去の重さを現在の気持ちや意図へ移さないという比較基準を維持した。正式human Product Read、品質合格率、商品受入れへ変換しない。
+
+### 現providerと保存・再読の確認範囲
+
+全6のprepared source prefix／material／messagesと実wire JSONを照合し、現`SelfHostedNaturalReplySource`へ同じ実rawをMockTransportで再生した。追加GPU呼出し0。現parserは4受理、旧追加回答／旧未対応回答の2件は`natural_reply_invalid`で拒否。受理4は同じ`NaturalReply`をlocal artifactへserializeし、現validateによる非生成再読で全文・model・source prefix一致。有限意味比較は4件ともUNASSESSEDで、時点間の感情転用を検査済みとしない。SDKと元runnerはJSON key順が違うため、request JSON一致とwire-byte一致を混同しない。
+
+この確認はQ3の実SQL／RPC保存ではない。今回の6要求に対応する完全なthread／guard snapshotを準備原本へ保存していなかったため、同じsource prefixのSQL保存成功は未成立。別thread／guardへ置換して同一実requestの成功と扱わず、品質未達の候補を通常保存へ進めない。live Auth／DB／Render／本人端末・native確認0。
+
+API source `eab40e2fce5420d3ee00e8b64d7890b2d776e2a3` の既存Piece CI43202945908とAnalysis CI43202946051はsuccess。local117成功は準備時の結果として保持し、追加6生成や新規検証117件とは数えない。今回製品source／testの変更・CI再実行0。
+
+### 次へ残す原因候補と境界
+
+候補の過去意味は正しい過去input_id配下にあるが、再利用されたrecord-local fragmentには`CURRENT_INPUT`、actorには`current_user`が残る。これらは元記録内のsource役割・本人を表す内部値であり、現在時点の根拠ではない。作者側が場面を混ぜた原因候補として記録するが、この一組から単独原因と断定しない。
+
+次は既存作者に渡す過去解釈の記録・場面への所属と、過去／今回の出来事・感情の区別を明瞭にする最小修正へ戻す。原source role／locatorを改竄せず、作者用投影・指示の既存ownerで扱う。新しいchecker、強制拒否器、第二作者、履歴削除、旧controllerは追加しない。同じprompt試行・新GPU／学習・通常採用へ自動進行しない。今回承認の6callは完了・消費済み。
+
+STRUCTURE_MAP_DELTA_NONE（今回の実行・読取・状態更新で製品owner／route／DTO／DB／source責務は変更0。§9.5の研究候補における既存能力移管は継承）。AR-03・二入力訂正・一般応答品質・Piece／Analysisの適格SQL保存・通常接続／端末・全補助経路は未完。
 
 ## 10. 変更箇所と検証
 
