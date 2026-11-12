@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/12・AR-04最新：** 通常host接続の研究784cc142/run43130834276を開始、結果未判定。先行2dddc0a3/run43128036253も結果回収待ち。actual job.capture後のpiece-exportコピーを旧raw-cache限定oracleが読めない静的誤りを、今回groupだけの厳格path/保存receipt ID照合へ修正した。PNG/全RGBA/旧group期待・製品native.mm581/pin/8秒は不変。Free原録画051/007の実host→実fit/明示save→receipt→fresh owner詳細→fresh export/実PNGを確認中。wire投影のexpiry/quota/合成Authは明示、別Premium未使用、V4失敗14→26は未修復・今回は未実行。通常selector OFF・未採用を維持。 [既存natural観測の接続と現在地](piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
+> **11/12・AR-04最新：** 通常host接続の最新研究e6ec231c/run43132656798を開始、結果未判定。初回2dd/run43128036253はnative6frame成立・primary画像3枚が各作品で同byte/RGBAだが、XCTest1method/3issue（saved記録field欠落1＋export参照先2）で失敗、後処理の旧filenameも誤り。784/run43130834276でexport copyの厳格参照を修正、e6ecで既計算のsaved一致fieldと結果filenameを修正した。本文/recipe/3hash/製品native581/pin/8秒・旧7group不変、3runは全て新同1methodだけ。Free録画/明示wire投影・合成Auth、別Premium不使用、selector OFF/未採用、旧V4失敗14→26は継続。 [既存natural観測の接続と現在地](piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -2633,7 +2633,11 @@ actual createFromSavedInput→source GET→preview POSTを使い、Cardのactual
 
 閉local transportは各case5API/前後session10回だけ、異owner/余分call/path/body/header/key/signalを拒否。実Supabase moduleはtest resolverで全操作拒否へ解決し、actual context Providerへ固定runtimeを供給する。通常Auth/AppRuntimeProviderは起動しない。Node一回で正2caseと13拒否系PASS、bash/YAML/新orchestration JS syntaxは成功。旧legacy13/bitmap12/admitted29/export20/model73六/transition二scenario/Android八の生成JSONは全byte不変。local UIKit成功とはしない。GitHub全6fileの全文/blob読戻しと変更集合、独立reviewを確認して研究refへ反映した。
 
-[run43128036253](https://github.com/MassyuRed/Cocolon/actions/runs/43128036253)は起動済み・結果未判定。新testRecordedSavedInputHostSaveOwnerAndExportWithRealReactNativeだけを実行し、旧6method/V4はUNEXECUTED。45分job/各Card元8秒・画素/本文/3hash/owner/版条件は維持、manual dispatch/rerun0。同runの終端と6frame/PNG/actual export/canonical一致を回収する。失敗は成功へ数えず、同じrunを重ねて起動しない。
+[初回run43128036253](https://github.com/MassyuRed/Cocolon/actions/runs/43128036253)はcompleted/failure、source2dddc0a3、job130884994832、attempt1。00:32:35Z→01:00:27Z（wall1672秒）、remote compile成功。新methodだけを14.552802秒実行し、structured root metricsはtestsCount1/failed1、root issue3（actionコピーは加算しない）。同method名3行は3assertion issueであり3回の実行ではない。saved2frameが既計算matchesをcommon recorded_artifact_matches fieldへ書かない不一致が1issue、export2frameの旧raw cache限定によるpixels/file falseが2issue。製品のowner_record_matches=falseではない。collectorのcat旧results.jsonは別の後処理エラーで、xcresulttool JSON追記も途中で止まった。raw xcresult root/testplanを読取解釈して1method/3issueを確認した。
+
+初回6frameは全native_checked/body_preserved/native_canvas_valid/bitmap alpha占有一致/capture_error0、全8秒内（051 preview/saved/export=2005.305/739.449/556.399ms、007=759.700/487.061/642.505ms）。実fit前保存拒否→fit後のactual predicate/現Modal保存→receipt→ID/ownerだけのナビ→fresh owner詳細→fresh export/actual job.captureまでを確認。両ownerの最後のsnapshotは各5API/10session、owner/key保持/complete/closed/clearedが真。
+
+初回12PNGは1080×1350。各作品のprimary preview/saved/export3枚はfile bytes/全RGBA完全一致し、本文2/3段落/Emlis/recipe/3hashを再計算/目視確認した。natural-referenceは装飾なしの別compositionなので全背景RGBAは一致せず、alpha占有比較と全背景比較を混同しない。actual job PNGは初回oracle誤りで未回収、export_pixels_equal/file_saved falseを保持し、その成功には数えない。artifact13905107679は72,802,359byte/SHA256 22c670d16d7138fd9f3c7dbd34d229612ba952053290e563705834a2fb2dd19b、981memberの全CRCを確認して回収した。
 
 ### 実画像copyの参照先を修正した現在の候補
 
@@ -2642,6 +2646,12 @@ actual createFromSavedInput→source GET→preview POSTを使い、Cardのactual
 [修正784cc142](https://github.com/MassyuRed/Cocolon/commit/784cc142954868e82795a344205dda652536a259)は2ddの子、既存entry/native-testの2pathだけ。entryはactual保存receiptを保持してpiece IDを渡す。nativeは今回normal_host_exportだけ、Caches/piece-export直下のlowerhex32 directory・非zero UUID・recipe hash64/ratio・標準化済絶対path・製品と同じfilename/expectedpath完全一致を要求してcopyを受け取る。旧2export groupのraw判定とbytes/PNG/全RGBA比較は原文不変。新methodへ5API/10session・完了/closed/cleared/owner/key保持の期待を追加した。期待値の緩和ではなくactual製品の画像所有位置への検証接続である。
 
 独立static reviewとGitHub2file全byte読戻し/変更集合を確認し、研究refをCASで784cc142へ移した。0740150はreceipt保持修正前のdetached検討版で、branchへ公開/CI実行していない。cancel用の接続操作が提供されていないため先行runは保全し、修正版[run43130834276](https://github.com/MassyuRed/Cocolon/actions/runs/43130834276)もpush自動起動した。両runともattempt1、manual dispatch/同commit rerun0。今回native実行はこの2候補の新同1methodだけで、元8秒・旧6method未実行・product source不変を維持する。現在は修正版の終端/6frame/actual export PNGを回収し、初回結果と区別して判断する。
+
+### saved一致fieldと収集filenameを修正した最終候補
+
+初回の実6frameを確認し、savedではowner_record_matches=trueだがcommon recorded_artifact_matches keyを記録していないharness schema不一致も修正した。新たな意味/許可判定は作らず、同じactual propsと原artifact8項目から既に計算したmatchesをそのfieldへ渡す。runner collect EXITのcat対象は、この新1methodが実際に生成したnormal-host-results.jsonへ一行修正し、元8秒/XCTest/PNGを緩めない。初回の実6report JSONを使うlocal collector検査は、元native exit0/65の両方を保持して正しいJSONを出力し、bash syntaxも成功した。
+
+[最終候補e6ec231c](https://github.com/MassyuRed/Cocolon/commit/e6ec231c74b348fe6d97c68d13603d5cb18de8fc)は784の子、entry1field/runner1filenameの既存2pathだけ。GitHub全文読戻し/変更集合を確認後に研究refへCAS反映し、[run43132656798](https://github.com/MassyuRed/Cocolon/actions/runs/43132656798)をpush自動起動した。現在はこの新同1methodの終端と6frame/actual export PNGを回収する。初回・784・e6ecの結果を区別し、いずれもattempt1/manual dispatch/同commit rerun0。旧6method/V4は各runでUNEXECUTED、product source/pin/8秒不変である。
 
 通常model selector OFF・未採用、live DB/Render/署名build/配布/Photos/本人端末・一般品質/正式0/3・AR-04/他AR残件は未完。今回新model/GPU/SQL/実Auth/外部製品HTTP0。STRUCTURE_MAP_DELTA_NONE：通常product owner/route/公開型/DB責務不変、既存native harnessへtest用1fixtureを接続しただけ。
 
