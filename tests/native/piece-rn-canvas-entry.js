@@ -787,6 +787,7 @@ class NormalHostCases extends CanvasCases {
     this.saveFitHandle = null; this.hostEvents = []; this.preFitSaveBlocked = false; this.hostFailed = false;
     this.exportAsset = null; this.exportFile = null; this.hostLinkage = null;
     this.finalTransport = null; this.navigationObserved = false; this.savedReceipt = null;
+    this.savedNavigationDeferred = false; this.savedNavigationConsumed = false;
     const flags = { piece_v2_preview_enabled: true, piece_v2_save_enabled: true,
       piece_v2_owner_read_enabled: true, piece_v2_export_enabled: true };
     this.runtimeValue = { runtime: Object.freeze({ loaded: true, loading: false, error: null }),
@@ -807,10 +808,14 @@ class NormalHostCases extends CanvasCases {
   };
   navigateSaved = (name, route) => {
     const target = route?.params?.savedPiece, expected = this.scenario;
+    if (!this.savedNavigationDeferred || this.inputHost?.pendingSavedNavigation !== null ||
+        this.inputHost?.state.open !== false) throw new Error('saved_navigation_before_native_dismissal');
     if (name !== 'Piece' || route?.screen !== 'PieceOwnerHistory' || route?.initial !== false ||
         !target || Object.keys(target).sort().join() !== 'expectedUserId,pieceId' ||
         target.pieceId !== expected.save.piece_id || target.expectedUserId !== expected.transport.owner)
       throw new Error('saved_navigation_mismatch');
+    this.savedNavigationConsumed = true;
+    this.hostEvents.push({ event: 'navigate_after_preview_dismiss', stage: this.stage });
     this.navigationObserved = true; this.savedTarget = target; this.card = null; this.forceUpdate();
   };
   findRenderedModal = () => {
@@ -840,6 +845,7 @@ class NormalHostCases extends CanvasCases {
           save_admitted: this.inputHost.isSaveAdmitted(d.preview, d.visualToken), recorded_artifact_matches: matches };
       } else if (this.stage === 'saved') {
         this.hostLinkage = { saved_receipt_matches: this.savedReceiptMatches === true,
+          native_modal_dismissal_awaited: this.savedNavigationDeferred && this.savedNavigationConsumed,
           navigation_body_free: this.navigationObserved === true,
           fresh_owner_read: this.transport.snapshot().api.some(call => call.method === 'GET' &&
             call.path === '/emotion/piece/' + fixture.save.piece_id),
@@ -898,7 +904,13 @@ class NormalHostCases extends CanvasCases {
         const receipt = host.controller.getView().savedReceipt; this.savedReceipt = receipt;
         this.savedReceiptMatches = ['piece_id', 'consumption_id', 'row_version', 'saved_at', 'lifecycle_status', 'visibility_scope']
           .every(key => receipt[key] === this.scenario.save[key]);
-        this.stage = 'saved'; this.resetCaseClock(); host.openSavedPiece(receipt);
+        const closingVisibleModal = host.state.open === true && host.state.modalRetained === true;
+        this.stage = 'saved'; this.resetCaseClock();
+        this.hostEvents.push({ event: 'preview_close_requested', stage: this.stage });
+        host.openSavedPiece(receipt);
+        this.savedNavigationDeferred = closingVisibleModal && this.navigationObserved === false &&
+          host.pendingSavedNavigation?.receipt === receipt;
+        if (!this.savedNavigationDeferred) throw new Error('saved_navigation_did_not_wait_for_native_dismissal');
         await this.waitForHost(() => this.ownerHost?.controller?.getView().phase === 'detail');
         this.poll(); return;
       }

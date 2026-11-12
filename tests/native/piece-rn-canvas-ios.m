@@ -1396,7 +1396,11 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
       XCTAssertEqualObjects(report[@"save_fit_current"],preview?@YES:@NO);XCTAssertEqualObjects(report[@"save_fit_wrong_token_current"],@NO);XCTAssertEqualObjects(report[@"save_fit_handle_keys"],preview?@[@"isCurrent"]:@[]);
       XCTAssertEqualObjects(linkage[@"recorded_artifact_matches"],@YES);
       if(preview){for(NSString *key in @[@"source_ready",@"pre_fit_save_blocked",@"save_admitted"])XCTAssertEqualObjects(linkage[key],@YES,@"%@",key);}
-      if(saved){for(NSString *key in @[@"saved_receipt_matches",@"navigation_body_free",@"fresh_owner_read",@"owner_record_matches"])XCTAssertEqualObjects(linkage[key],@YES,@"%@",key);}
+      if(saved){for(NSString *key in @[@"saved_receipt_matches",@"navigation_body_free",@"fresh_owner_read",@"owner_record_matches",@"native_modal_dismissal_awaited"])XCTAssertEqualObjects(linkage[key],@YES,@"%@",key);
+        NSArray *events=report[@"host_events"];NSUInteger close=[events indexOfObjectPassingTest:^BOOL(NSDictionary *e,NSUInteger i,BOOL *stop){return [e[@"event"]isEqual:@"preview_close_requested"];}];
+        NSUInteger navigate=[events indexOfObjectPassingTest:^BOOL(NSDictionary *e,NSUInteger i,BOOL *stop){return [e[@"event"]isEqual:@"navigate_after_preview_dismiss"];}];
+        NSUInteger mount=[events indexOfObjectPassingTest:^BOOL(NSDictionary *e,NSUInteger i,BOOL *stop){return [e[@"event"]isEqual:@"mount"]&&[e[@"stage"]isEqual:@"saved"];}];
+        XCTAssertNotEqual(close,NSNotFound);XCTAssertNotEqual(navigate,NSNotFound);XCTAssertNotEqual(mount,NSNotFound);XCTAssertLessThan(close,navigate);XCTAssertLessThan(navigate,mount);}
       if(exported){
         for(NSString *key in @[@"fresh_export_read",@"export_target_current",@"actual_job_capture"])XCTAssertEqualObjects(linkage[key],@YES,@"%@",key);
         id sha=linkage[@"export_asset_sha256"];XCTAssertTrue([sha isKindOfClass:NSString.class]);if([sha isKindOfClass:NSString.class])XCTAssertTrue([hex64 evaluateWithObject:sha]);

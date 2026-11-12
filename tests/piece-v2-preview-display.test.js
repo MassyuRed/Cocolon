@@ -66,7 +66,7 @@ const pieceHttp = value => ({ status: 200, json: async () => value });
 // below are test doubles, NOT a React renderer or a device/image acceptance test.
 const modalPath = path.join(__dirname, '../components/piece/PiecePreviewModal.js');
 const hostPath = path.join(__dirname, '../screens/input/InputPieceActionArea.js');
-function previewUiHarness({ send, currentState = 'active', admitSave = false } = {}) {
+function previewUiHarness({ send, currentState = 'active', admitSave = false, platform = 'ios' } = {}) {
   let now = NOW, serial = 0, keySerial = 0;
   const calls = [], timers = new Map(), appListeners = new Set();
   const React = {
@@ -89,7 +89,7 @@ function previewUiHarness({ send, currentState = 'active', admitSave = false } =
     Date: class extends Date { static now() { return now; } },
     Modal: 'Modal', View: 'View', Text: 'Text', ScrollView: 'ScrollView', Button: 'Button', Pressable: 'Pressable',
     ActivityIndicator: 'ActivityIndicator', SafeAreaProvider: 'SafeAreaProvider', SafeAreaView: 'SafeAreaView',
-    NativeModules: {}, Platform: { OS: 'ios' }, findNodeHandle: () => null,
+    NativeModules: {}, Platform: { OS: platform }, findNodeHandle: () => null,
     setTimeout: (callback, delay) => { const id = ++serial; timers.set(id, { callback, at: now + delay }); return id; },
     clearTimeout: id => timers.delete(id),
     apiFetch: async (...args) => { calls.push(args); return send ? send(...args) : pieceHttp(response()); },
@@ -144,6 +144,12 @@ function startSyntheticSave(u) {
   return u.host.controller.savePreview({ preview_id: p.preview_id,
     preview_revision: p.preview_revision, visual_recipe_hash: p.visual_recipe_hash },
   view.visualToken, 'synthetic-explicit-save-key');
+}
+function dismissPiecePreview(u) {
+  const shell = u.nodes(u.tree()).find(node => node.type === 'Modal');
+  assert.equal(shell?.props.visible, false);
+  assert.deepEqual(shell.children, [], 'a closing modal retains no body or child tree');
+  shell.props.onDismiss();
 }
 const receivedView = value => ({ phase: 'received', preview: value, canSave: true, canExport: true, hashVerified: true });
 
@@ -257,6 +263,7 @@ test('closing the native modal drops local text, sends no server DELETE and fenc
   closeButton.props.onPress(); assert.equal(u.calls[0][1].signal.aborted, true);
   d.resolve(pieceHttp(response())); await pieceTick();
   assert.equal(u.host.state.open, false); assert.equal(u.calls.length, 1);
+  dismissPiecePreview(u);
   assert.equal(u.nodes(u.tree()).some(n => n.type === 'Modal'), false);
   u.host.componentWillUnmount();
 });
@@ -868,25 +875,138 @@ for (const kind of ['save', 'cancel']) {
   });
 }
 
-async function savedNavigationFixture() {
+async function savedNavigationFixture(platform = 'ios', savedMode = false) {
   const navigations = []; let canRead = true;
-  const u = previewUiHarness({ admitSave: true, send: async url => pieceHttp(url.endsWith('/save') ? uiSaveReceipt() : response()) });
-  u.host.props = { context: controllerInput({ saveEnabled: true }),
+  const u = previewUiHarness({ platform, admitSave: true, send: async (url, init) => pieceHttp(
+    init.method === 'GET' ? request().source_ref : url.endsWith('/save') ? uiSaveReceipt() : response()) });
+  u.host.props = { ...(savedMode ? { savedInput: { savedInputId: request().source_ref.source_input_id,
+      expectedUserId: OWNER, idempotencyKey: 'saved-navigation-source-key' } } : { context: controllerInput({ saveEnabled: true }) }),
     navigation: { getParent: () => ({ navigate: (...args) => navigations.push(args) }) } };
-  u.host.context = { runtime: {}, isFeatureEnabled: (name, fallback) => name === 'piece_v2_owner_read_enabled' ? canRead : fallback };
-  u.mount(); u.host.start(); await pieceTick(); await startSyntheticSave(u);
+  u.host.context = { runtime: {}, isFeatureEnabled: (name, fallback) => name === 'piece_v2_owner_read_enabled' ? canRead
+    : ['piece_v2_preview_enabled', 'piece_v2_save_enabled'].includes(name) ? true : fallback };
+  u.mount(); if (savedMode) await u.host.resolveSavedInput();
+  u.host.start(); await pieceTick(); await startSyntheticSave(u);
   return { ...u, navigations, allowRead: value => { canRead = value; } };
 }
 test('saved confirmation opens the existing owner screen with only piece ID and expected owner, including after close', async () => {
   const u = await savedNavigationFixture();
   const first = uiButton(u, '保存したPieceを確認'); assert.ok(first);
   first.props.onPress(); assert.equal(u.host.state.open, false);
+  assert.equal(u.navigations.length, 0);
+  dismissPiecePreview(u);
   assert.deepEqual(clone(u.navigations), [['Piece', { screen: 'PieceOwnerHistory', params: {
     savedPiece: { pieceId: response().preview_id, expectedUserId: OWNER },
   }, initial: false }]]);
   assert.equal(u.calls.length, 2, 'navigation does not reread or save in the source host');
   uiButton(u, '保存したPieceを確認').props.onPress(); assert.equal(u.navigations.length, 2);
   assert.equal(u.host.controller.getView().phase, 'saved'); u.host.componentWillUnmount();
+});
+test('saved open waits through a prior ordinary close and consumes one native dismissal only', async () => {
+  const u = await savedNavigationFixture();
+  u.host.close();
+  const closedButton = uiButton(u, '保存したPieceを確認');
+  const dismiss = u.nodes(u.tree()).find(node => node.type === 'Modal').props.onDismiss;
+  closedButton.props.onPress(); closedButton.props.onPress();
+  assert.equal(u.navigations.length, 0);
+  assert.doesNotMatch(JSON.stringify(u.tree()), /piece_text|content_payload|visual_recipe|静かに/);
+  dismiss(); dismiss();
+  assert.equal(u.navigations.length, 1);
+  uiButton(u, '保存したPieceを確認').props.onPress();
+  assert.equal(u.navigations.length, 2, 'an already dismissed outside button opens immediately');
+  u.host.componentWillUnmount();
+});
+test('Android saved open retains its direct handoff without an iOS dismissal callback', async () => {
+  const u = await savedNavigationFixture('android');
+  uiButton(u, '保存したPieceを確認').props.onPress();
+  assert.equal(u.navigations.length, 1); assert.equal(u.host.state.modalRetained, false);
+  assert.equal(u.nodes(u.tree()).some(node => node.type === 'Modal'), false);
+  u.host.componentWillUnmount();
+});
+for (const boundary of ['owner', 'source', 'runtime', 'navigation', 'background', 'owner-read', 'unmount', 'reopen']) {
+  test(`pending saved navigation is discarded across ${boundary}, including a late dismissal`, async () => {
+    const u = await savedNavigationFixture();
+    const props = u.host.props, runtime = u.host.context.runtime;
+    uiButton(u, '保存したPieceを確認').props.onPress();
+    const dismiss = u.nodes(u.tree()).find(node => node.type === 'Modal').props.onDismiss;
+    assert.equal(u.navigations.length, 0);
+    if (boundary === 'owner') u.host.props = { ...props, context: controllerInput({ saveEnabled: true, expectedUserId: 'other-owner' }) };
+    if (boundary === 'source') u.host.props = { ...props, context: controllerInput({ saveEnabled: true, idempotencyKey: 'changed-key' }) };
+    if (boundary === 'runtime') u.host.context = { ...u.host.context, runtime: {} };
+    if (boundary === 'navigation') u.host.props = { ...props, navigation: { getParent: props.navigation.getParent } };
+    if (boundary === 'owner-read') u.allowRead(false);
+    if (['owner', 'source', 'runtime', 'navigation', 'owner-read'].includes(boundary)) {
+      u.host.componentDidUpdate();
+      u.host.props = props; u.host.context = { ...u.host.context, runtime }; u.allowRead(true);
+      u.host.componentDidUpdate();
+    }
+    if (boundary === 'background') { u.background('inactive'); u.background('active'); }
+    if (boundary === 'unmount') u.host.componentWillUnmount();
+    if (boundary === 'reopen') u.host.openPreview();
+    dismiss(); assert.equal(u.navigations.length, 0);
+    if (boundary !== 'unmount') u.host.componentWillUnmount();
+  });
+}
+for (const boundary of ['background', 'runtime', 'save-flag']) {
+  test(`a fresh saved open after abandoned ${boundary} does not wait for an unmounted modal ACK`, async () => {
+    const u = await savedNavigationFixture('ios', true), beforeEpoch = u.host.state.modalEpoch;
+    uiButton(u, '保存したPieceを確認').props.onPress();
+    const oldDismiss = u.nodes(u.tree()).find(node => node.type === 'Modal').props.onDismiss;
+    if (boundary === 'background') { u.background('inactive'); u.background('active'); }
+    if (boundary === 'runtime') {
+      u.host.context = { ...u.host.context, runtime: {} }; u.host.componentDidUpdate();
+    }
+    if (boundary === 'save-flag') {
+      const allowed = u.host.context.isFeatureEnabled;
+      u.host.context = { ...u.host.context, isFeatureEnabled: (name, fallback) => name === 'piece_v2_save_enabled' ? false : allowed(name, fallback) };
+      u.host.componentDidUpdate();
+      u.host.context = { ...u.host.context, isFeatureEnabled: allowed }; u.host.componentDidUpdate();
+    }
+    assert.equal(u.host.controller.getView().phase, 'saved');
+    assert.equal(u.host.state.modalRetained, false);
+    assert.ok(u.host.state.modalEpoch > beforeEpoch);
+    uiButton(u, '保存したPieceを確認').props.onPress();
+    assert.equal(u.navigations.length, 1);
+    assert.equal(u.host.pendingSavedNavigation, null);
+    oldDismiss(); assert.equal(u.navigations.length, 1);
+    u.host.componentWillUnmount();
+  });
+}
+test('an abandoned source presentation cannot hold the next explicit preview or its saved open', async () => {
+  const u = await savedNavigationFixture('ios', true), beforeEpoch = u.host.state.modalEpoch;
+  const oldDismiss = u.nodes(u.tree()).find(node => node.type === 'Modal').props.onDismiss;
+  u.host.props = { ...u.host.props, savedInput: { ...u.host.props.savedInput, idempotencyKey: 'new-source-key' } };
+  u.host.componentDidUpdate();
+  assert.equal(u.host.state.modalRetained, false); assert.ok(u.host.state.modalEpoch > beforeEpoch);
+  assert.equal(u.host.pendingSavedNavigation, null);
+  oldDismiss(); assert.equal(u.navigations.length, 0);
+  assert.equal(u.nodes(u.tree()).some(node => node.type === 'Modal'), false);
+  // A new source still requires the existing explicit GET/preview/save path.
+  await u.host.createFromSavedInput(); await pieceTick(); await startSyntheticSave(u);
+  assert.equal(u.host.controller.getView().phase, 'saved');
+  uiButton(u, '保存したPieceを確認').props.onPress();
+  oldDismiss(); assert.equal(u.navigations.length, 0);
+  dismissPiecePreview(u); assert.equal(u.navigations.length, 1);
+  assert.equal(u.calls.length, 6);
+  u.host.componentWillUnmount();
+});
+test('a hidden controller callback abandons the native presentation without retaining a stale ACK', async () => {
+  const u = await savedNavigationFixture();
+  const epoch = u.host.state.modalEpoch;
+  u.host.controller.setContext({ enabled: false });
+  assert.equal(u.host.state.modalRetained, false); assert.ok(u.host.state.modalEpoch > epoch);
+  assert.equal(u.host.pendingSavedNavigation, null); assert.equal(u.tree(), null);
+  u.host.componentWillUnmount();
+});
+test('a previous presentation dismissal cannot consume a newly queued saved open', async () => {
+  const u = await savedNavigationFixture();
+  uiButton(u, '保存したPieceを確認').props.onPress();
+  const oldDismiss = u.nodes(u.tree()).find(node => node.type === 'Modal').props.onDismiss;
+  u.host.openPreview(); u.host.close();
+  uiButton(u, '保存したPieceを確認').props.onPress();
+  const newDismiss = u.nodes(u.tree()).find(node => node.type === 'Modal').props.onDismiss;
+  oldDismiss(); assert.equal(u.navigations.length, 0);
+  newDismiss(); newDismiss(); assert.equal(u.navigations.length, 1);
+  u.host.componentWillUnmount();
 });
 for (const boundary of ['owner', 'source', 'background', 'owner-read', 'unmount']) {
   test(`old saved-open button cannot navigate after ${boundary}`, async () => {
@@ -912,6 +1032,7 @@ test('saved-open rechecks identity if closing synchronously changes the source c
 });
 test('saved navigation target reaches actual owner detail GET and displays the freshly fetched saved record', async () => {
   const u = await savedNavigationFixture(); uiButton(u, '保存したPieceを確認').props.onPress();
+  dismissPiecePreview(u);
   const source = fs.readFileSync(path.join(__dirname, 'piece-v2-owner-history.test.js'), 'utf8').split('const detailInput =')[0];
   const context = vm.createContext({ require, __dirname, AbortController, setImmediate });
   vm.runInContext(source + '\nglobalThis.ownerHarness = harness;', context);
@@ -947,6 +1068,7 @@ test('actual saved-input binding reaches saved navigation after separate source,
   await u.host.resolveSavedInput(); assert.equal(u.calls.length, 1);
   u.host.start(); await pieceTick(); await startSyntheticSave(u);
   uiButton(u, '保存したPieceを確認').props.onPress();
+  dismissPiecePreview(u);
   assert.deepEqual(clone(navigations), [['Piece', { screen: 'PieceOwnerHistory', params: {
     savedPiece: { pieceId: response().preview_id, expectedUserId: OWNER },
   }, initial: false }]]);
@@ -999,6 +1121,7 @@ for (const refresh of ['preview-off', 'save-off', 'batched-on']) {
     assert.equal(u.calls[2][1].body, u.calls[3][1].body);
     assert.equal(u.calls[3][1].headers['Idempotency-Key'], 'synthetic-explicit-save-key');
     uiButton(u, '保存したPieceを確認').props.onPress();
+    dismissPiecePreview(u);
     const target = u.navigations[0][1].params.savedPiece;
     assert.deepEqual(clone(target), { pieceId: response().preview_id, expectedUserId: OWNER });
 
