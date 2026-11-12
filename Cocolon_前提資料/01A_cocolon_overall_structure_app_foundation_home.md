@@ -1,3 +1,5 @@
+> **11/12・AR-02の問い設定を入力から保存後の応答へ接続：** RN `e6aabd332970b3cf159d5e8a495ecb67aed92f5f`、API `dc6dfad00cccc4345d00508c7851a06e288ddadf`。入力画面に「Emlisからの問いを受け取る」を追加し、初回ON・同じ端末の本人別に前回選択を保持。選択を既存の入力保存時に固定し、新規natural／finite Q3ともOFFでは問いを出さず本文を返す。中断後の開始・保存済みthreadの再読でも選択を保持。新旧RN93件、新API21件を含む63件の隔離検証が成功。通常反映はmigration→API→RNの順で、現時点のlive DB／Render配置／新build・本人端末確認は0。二入力訂正・実4B品質と全補助経路は未完。 [保存・互換・確認範囲](<designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-question-receiving-20261112>)。
+
 > **11/12・三中核への既存能力移管候補：** API `eea4761f7b5009128d497b2b69e1b1d0766ad57d`。現naturalの問い／回答更新、Pieceの内容選択、明示Analysisのsource意味責務・図／本文を既存ownerへ接続。 新規一括53件成功、実隔離SQL・保存後の非生成再読を含む。既存CIへ新検証を追加。新しい実4B比較7要求はuploadの自動承認拒否で未送信・生成0。通常採用／live DB適用／Render配置／本人端末・全補助経路は未完。 [実呼出し・確認範囲・次](<designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#auxiliary-crosscore-transfer-20261112>)。
 
 > **11/12・AR-04最新：** 研究36335452/run43146249187はattempt1・新同1method成功。両作品のpreview/saved/export全6frameで本文/native canvas/alpha/元8秒が成立し、手動ACKなしの閉要求→native ACK後遷移→saved mountと両actual export PNG一致を確認。実検証は研究363のsourceで、同じ製品2/単体2fileを今回通常Draftへ採用する。native harnessは採用せず、新normal headのCI成功は主張しない。既存474PASS（独立18含む）・full JSXも継承。STRUCTURE_MAP_DELTA_PRESENT。native581/guard/renderer/8秒不変、model selector OFF/重み未採用・旧V4失敗14→26は未解決。AR-04一般編集品質/実Auth/API/DB/本人端末・正式0/3/他ARは未完。 [既存natural観測の接続と現在地](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
@@ -2360,6 +2362,8 @@ RN巨大画面分割により、App root と Home(Input) は entry shell + submo
 | `Cocolon/screens/input/inputLayoutModel.js` | memo input height / keyboard-aware layout helper |
 | `Cocolon/screens/input/inputNoticeModel.js` | welcome notice popup判定 |
 | `Cocolon/screens/input/useInputDraftPersistence.js` | 下書き保存・復元・破棄・blur/background保存 |
+| `Cocolon/screens/input/useEmlisQuestionPreference.js` | 本人別の問い受取設定、非同期読込／保存・切替世代と送信時の確定値 |
+| `Cocolon/lib/emlisQuestionPreferenceStorage.js` | 本人別AsyncStorageのload/save/clear。同本人の処理だけを直列化し、削除時も先行保存後に消す |
 | `Cocolon/screens/input/useInputFeedbackModal.js` | Emlis返答modal開閉とtutorial後Analysis遷移 |
 | `Cocolon/screens/input/useInputKeyboardAwareMemo.js` | memo/memoActionの高さ・keyboard inset・focus scroll |
 | `Cocolon/screens/input/InputEmotionSection.js` | 感情選択UI section |
@@ -2407,6 +2411,8 @@ RN巨大画面分割により、App root と Home(Input) は entry shell + submo
 | `Cocolon/screens/input/inputLayoutModel.js` | memo input height / keyboard layout helper |
 | `Cocolon/screens/input/inputNoticeModel.js` | welcome notice判定 |
 | `Cocolon/screens/input/useInputDraftPersistence.js` | 下書き保存・復元・破棄・blur/background保存 |
+| `Cocolon/screens/input/useEmlisQuestionPreference.js` | 本人別の問い受取設定、非同期読込／保存・切替世代と送信時の確定値 |
+| `Cocolon/lib/emlisQuestionPreferenceStorage.js` | 本人別AsyncStorageのload/save/clear。同本人の処理だけを直列化し、削除時も先行保存後に消す |
 | `Cocolon/screens/input/useInputFeedbackModal.js` | Emlis返答modalとtutorial後Analysis遷移 |
 | `Cocolon/screens/input/useInputKeyboardAwareMemo.js` | keyboard inset / memo height / focus scroll |
 | `Cocolon/screens/input/InputEmotionSection.js` | 感情選択UI |

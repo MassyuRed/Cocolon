@@ -1,6 +1,6 @@
-> **11/12・三中核への既存能力移管候補：** API `eea4761f7b5009128d497b2b69e1b1d0766ad57d`。現naturalの既存source-bound問い・本人回答更新・active/inactive claim anchorを現作者へ接続。新Q3 natural policyだけ全plan最大3問。公開の問い設定／前回選択保持・二入力訂正は未実装。 新規一括53件成功、実隔離SQL・保存後の非生成再読を含む。既存CIへ新検証を追加。新しい実4B比較7要求はuploadの自動承認拒否で未送信・生成0。通常採用／live DB適用／Render配置／本人端末・全補助経路は未完。 [実呼出し・確認範囲・次](<../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#auxiliary-crosscore-transfer-20261112>)。
+> **11/12・三中核への既存能力移管候補：** API `eea4761f7b5009128d497b2b69e1b1d0766ad57d`。現naturalの既存source-bound問い・本人回答更新・active/inactive claim anchorを現作者へ接続。新Q3 natural policyだけ全plan最大3問。公開の問い設定／前回選択保持は後続AR-02候補へ接続済み。二入力訂正は未実装。 新規一括53件成功、実隔離SQL・保存後の非生成再読を含む。既存CIへ新検証を追加。新しい実4B比較7要求はuploadの自動承認拒否で未送信・生成0。通常採用／live DB適用／Render配置／本人端末・全補助経路は未完。 [実呼出し・確認範囲・次](<../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#auxiliary-crosscore-transfer-20261112>)。
 
-> **2026-11-12・現在の問い構築目標：** 全plan最大3問、入力画面の受取ON／OFF（初期ON・前回選択保持）。短い受け止め→重要な一点→回答に応じた次問／応答とし、OFF・skip・本人終了・3問到達、十分な理解による0／1／2問終了を区別する。[採用決定と判断例](../designs/cmee/v1/02_emlis_v1a_detailed_design.md#emlis-question-policy-20261112)をAR-02で使う。新仕様は未実装。旧Q1／Q3機構の存在と、現natural自身の問い／回答後更新の未接続を分ける。本文中の旧1／3問・各round全文先行・未実装とする過去記述は当時の設計／実績であり、最新仕様や現接続を上書きしない。
+> **11/12・AR-02の問い設定を入力から保存後の応答へ接続：** RN `e6aabd332970b3cf159d5e8a495ecb67aed92f5f`、API `dc6dfad00cccc4345d00508c7851a06e288ddadf`。入力画面に「Emlisからの問いを受け取る」を追加し、初回ON・同じ端末の本人別に前回選択を保持。選択を既存の入力保存時に固定し、新規natural／finite Q3ともOFFでは問いを出さず本文を返す。中断後の開始・保存済みthreadの再読でも選択を保持。新旧RN93件、新API21件を含む63件の隔離検証が成功。通常反映はmigration→API→RNの順で、現時点のlive DB／Render配置／新build・本人端末確認は0。二入力訂正・実4B品質と全補助経路は未完。 [保存・互換・確認範囲](<../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-question-receiving-20261112>)。
 
 <a id="emlis-interpretation-correction-20261112"></a>
 ## 2026-11-12 採用仕様 — 仮説への本人訂正と現在の未接続範囲
@@ -363,7 +363,7 @@ NLS v3 Step10 public routingは同file内でdisabledであり、Cycle001 candida
 
 全planで元入力1件のthreadにつき最大3問。0／1／2問終了、本人skip／終了、3問到達を正常な終了として区別し、終了時の有効な本人情報で返す。3問到達を十分理解した証拠にはしない。問いは一つずつ、回答に応じて選び直す。
 
-旧Q1／Q3の問い・回答更新機構は存在するが、現natural自身の問い／回答後更新は未接続。新決定をコード／画面／通常提供へ反映済みとは扱わない。接続作業は既存AR-02で行う。
+現naturalのsource-bound問い／回答後更新はAPI eea4761f、公開の初期ON・本人別前回選択保持と入力保存後のOFFはAR-02候補へ接続した。有限ownerに適合しない自由文は通常自然応答を継続し、現一般品質の成立や通常提供・本人端末確認へ換算しない。
 
 問いdecisionとquestion本文はcontrol／derived lineageであり本人sourceではない。本人回答は元入力と別source／版で保持する。ON／OFFや問数の変更から既存の履歴・frame・他coreのsource権利を変更しない。
 
@@ -394,7 +394,7 @@ interpretive frameは本人情報から導く処理境界であり、本人が�
 |---|---|---|
 | TodayQuestion product | CURRENT_ACTUAL / 別product route | ai/services/ai_inference/api_today_question.py、ai/services/ai_inference/today_question_store.py。Emlis内部問いと混同しない |
 | Emlis internal question candidate | DORMANT_OR_PARTIAL | ai/services/ai_inference/emlis_ai_internal_question_service.py、ai/services/ai_inference/emlis_ai_question_dominance_guard.pyは存在するがcurrent reply serviceから未接続 |
-| Emlis observation-and-question system | 旧Q1/Q3機構あり／現natural自身の問い・回答後更新は未接続 | 11/12決定は全plan最大3問、受取ON／OFFと前回選択保持、短い受け止め→問い→回答後応答。新決定は未実装。§2.3と採用決定を参照 |
+| Emlis observation-and-question system | 新Q3 naturalの根拠付き問い・回答更新と、入力画面の問い設定を候補へ接続／通常反映前 | 全plan最大3問は新natural policy。受取ON／OFF・初期ON／本人別前回保持・入力保存時固定を実装。新finite Q3もOFFを尊重し既存上限不変。二入力訂正・一般自由文品質・実4B／本人端末は未完。先頭のAR-02現在地を参照 |
 
 問い関連fileの存在を、問いsystemの商品完成へ変換しない。
 

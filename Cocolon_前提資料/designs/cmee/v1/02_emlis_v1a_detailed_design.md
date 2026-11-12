@@ -44,6 +44,8 @@ Mashとの今回の仕様対話で採用した商品仕様。全プラン最大3
 
 これは決定の記録であり、コード・DB・画面・4B学習・通常提供への反映済みを意味しない。旧Q1／Q3の保存済み応答・回答・実装実績は書き換えず、履歴として保持する。
 
+**11/12の実装現在地：** 新naturalのsource-bound問い／回答更新はAPI eea4761fで候補へ接続した。続くAR-02では入力画面の独立ON／OFF、本人別の前回保持、既存emotion保存時の選択固定と新natural／finite Q3への適用を実装した。旧保存thread・履歴参照・通知設定と分離する。通常提供・新build／本人端末・実4B品質は未確認。具体的なfield／保存・反映順・検証は[補助経路設計§9.3](../Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-question-receiving-20261112)を参照する。
+
 ### 問いの設定・回数・表示順
 
 | 項目 | 今回の決定 |

@@ -8,7 +8,7 @@ status: CROSS_CORE_CAPABILITY_CANDIDATE_IMPLEMENTED_MODEL_VALIDATION_PENDING
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "AR-02 public setting/correction; cross-core actual4B trial awaiting explicit upload approval; other AR dependencies continue"
+current_next: "AR-02 correction and AR-03 history; question receiving setting implemented in candidate; actual4B upload approval and normal application remain pending"
 runtime_effect_of_this_document: 0
 ---
 
@@ -29,7 +29,7 @@ runtime_effect_of_this_document: 0
 
 # CMEE 補助経路の活用作業 — 詳細設計
 
-> **2026-11-12・AR-02の採用仕様：** [Emlis問い・応答の決定](v1/02_emlis_v1a_detailed_design.md#emlis-question-policy-20261112)を§6.1／§9へ反映。全plan最大3問、受取設定は初期ON・前回選択保持、短い受け止め→必要な一点→本人回答後の応答／次問。新仕様のコード・学習・画面・通常提供への反映は未実施。現在のAR-04再開点と実績は変更しない。
+> **2026-11-12・AR-02の採用仕様と実装現在地：** [Emlis問い・応答の決定](v1/02_emlis_v1a_detailed_design.md#emlis-question-policy-20261112)を構築仕様とする。全plan最大3問・source-bound問い／回答更新は§9.2の新natural候補、初期ON・本人別前回保持・入力保存時の受取選択固定は§9.3のAPI／RN候補へ接続した。二入力訂正・一般自由文の問い判断、実4B品質・通常提供／端末は未完。AR-04の既存実績は継承する。
 
 ## 0. 今回の決定と、この設計の責任
 
@@ -219,7 +219,7 @@ private reportを保存する場合の最小情報は、既存`source_prefix_ref
 
 旧解釈、本人の肯定／修正／否定／撤回、新有効意味を比較し、訂正された対象だけ更新する。訂正に含まれない出来事・時点・感情を消さない。訂正の対象が曖昧ならmodelだけで全過去を失効させず、残枠と本人選択の範囲の一点確認／不明保持へ戻す。無効になったsourceからのclaimや問いを現在へ再利用しない。
 
-現naturalは本文内の問い禁止を指示し、`_process_natural`の最後で`COMPLETED`へ固定する。新決定は未接続である。以下は既存event／stateを回収する実装先の整理で、既存`_finish(observation=..., question=...)`を呼ぶだけで新順序やUIが成立したとは扱わない。
+設計採用時のnaturalは初回FINAL／COMPLETEDだったが、§9.2の新Q3 natural policyでは既存source-bound question／answer ownerを現作者へ接続した。公開設定と保存入力への固定は§9.3へ接続した。以下は採用した処理の責務であり、通常反映・一般自由文の問い判断・実4B品質まで成立したとは扱わない。
 
 | 操作・判断 | AR-02で実現する処理 | 既存接続先／状態 |
 |---|---|---|
@@ -230,7 +230,7 @@ private reportを保存する場合の最小情報は、既存`source_prefix_ref
 | skip／本人終了／3問到達 | その時点の有効な本人情報で応答。不明を埋めず、終了理由を区別。skipの言換え再質問・本文に隠す4問目なし | 既存終了処理を適合。旧初回本文を残すだけで新仕様の応答成立とは扱わない |
 | 訂正／撤回 | 既存更新ownerを使い対象sourceと残る意味を確定 | 既存の更新・失効・再読境界を維持 |
 
-有効意味checkpointと自由原文→問い対象のadapter、短い受け止め／回答後応答の保存・DTO・表示、設定保持は未実装事項としてAR-02で既存詳細設計02／schema05／API／RNへ具体化する。旧有限checkpointを全自然応答の必須入力にしない。既に保存されたNaturalReply／QUESTION／ANSWERを壊さず、旧clientでの読取・本人境界・再開を確認する。
+有効意味checkpointと有限source-bound問い、短い受け止め／回答後応答の保存・DTOは§9.2、公開の設定保持は§9.3の候補へ接続した。一般自由文の問い判断と完了後の二入力訂正は引き続きAR-02で扱う。旧有限checkpointを全自然応答の必須入力にしない。既に保存されたNaturalReply／QUESTION／ANSWERを壊さず、旧clientでの読取・本人境界・再開を確認する。
 
 確認材料には0問、1／2問終了、3問、回答で次の焦点が変わる例、OFF／skip／終了、上限時の不明保持、初期ON／前回選択保持を含める。問い文の自然さに加えて、問いを出す必要性・終了判断を確認する。採用決定の架空3問例は華恋作の説明例であり、Mash逐語教師や実4B成功へ換算しない。
 
@@ -413,7 +413,7 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 | ID | 実施内容・既存残件 | 具体的な完了確認 | 依存／状態 |
 |---|---|---|---|
 | AR-01 | 現naturalの主体・所有者・否定・時点・留保を、旧失敗・意味比較・共通原因分析で改善。EM-01a/b | 現6境界と正常な短文／省略で、同入力の誤読を解消または明確に減らし、自然さ・別題材・既成功・保存再読を保持。検出増加／無出力だけでは完了しない | 継続中。新24実生成の4版は通常不採用。c6555fd5で疑問符なしの確認質問の保存抜けを修復、250局所PASS。同24rawは旧24保存→新22保存／2拒否、受理本文不変。全体の意味修復は未完 |
-| AR-02 | 現naturalの任意問い・回答・訂正・撤回・frameと、完了応答後の具体的な本人訂正。11/12採用仕様は§6.1。EM-02a/b、03b | 全plan最大3問、初期ON・前回選択保持、短い受け止め→回答後応答、0／1／2問終了・skip・上限時の不明保持、訂正対象と本人説明の二つの入力、説明不足時の未確定保持、対象だけ更新、撤回後の残存意味、同版再読、既存参照権利 | AR-01の全一般品質完成待ちにはしない。新Q3 naturalのsource-bound問い／回答更新／全plan3問／非生成再読を実装候補へ接続。公開の設定保持・二入力訂正・一般自由文と実4Bは未完 |
+| AR-02 | 現naturalの任意問い・回答・訂正・撤回・frameと、完了応答後の具体的な本人訂正。11/12採用仕様は§6.1。EM-02a/b、03b | 全plan最大3問、初期ON・前回選択保持、短い受け止め→回答後応答、0／1／2問終了・skip・上限時の不明保持、訂正対象と本人説明の二つの入力、説明不足時の未確定保持、対象だけ更新、撤回後の残存意味、同版再読、既存参照権利 | AR-01の全一般品質完成待ちにはしない。新Q3 naturalのsource-bound問い／回答更新／全plan3問／非生成再読を実装候補へ接続。公開の設定保持は§9.3の候補へ接続済み。二入力訂正・一般自由文と実4Bは未完 |
 | AR-03 | 適格履歴の意味ある利用。EM-03a/b | 同一／別場面・変化・無関係・訂正前を区別し、適切な履歴が今回へ効く。失効材料を使わない | 現related_contextと失効材料の再認可を継承。今回の意味利用全体は未完 |
 | AR-04 | Piece一般本文・単独伝達・refined・画像整合 | 原文の意味・一人称・本人補足と同版画像／保存を保持 | API87512ddaで固定実3件の読取拒否を修復し9隔離保存／非生成再読。旧73不変、追加GPU0。先行の通常host画像成功は継承。今回、既存planの内容選択をconfigured取得へ接続。2〜3回答後のPiece補足は未対応。一般編集品質・新本文の同版native画像・通常model採用／実Auth／DB／本人端末は未完。 |
 | AR-05 | 分析の本人基準・役割／選択・記録間関係と、項目・関係線への本人訂正。AN-03a/b/c、04 | 原記録→意味→図／全文→両端根拠の対応、再出現／変化／不明の正しさ、訂正対象と本人説明からの読み直し・再読 | 既存compiler由来のsource dutiesとsource文脈を明示v2へ接続し、図／本文・隔離SQL再読を確認。通常v1保持。実4B・通常採用・本人基準／訂正の全体は未完 |
@@ -453,7 +453,7 @@ Mashの「これまでと同じ禁止」「進め方を決めろ」を受け、A
 
 | 回収する既存責務 | 現在の実呼出しと実装結果 | 成立した範囲／残る範囲 |
 |---|---|---|
-| D26/27・D02/08：本人に確かめる一点、回答・訂正・撤回、出所と不明 | `emlis_thread_service._prepare_natural_question`→既存`original_meaning_plan/question_candidate/prepare_emlis_meaning`。現naturalの短い受け止め→別QUESTION→ANSWER→実checkpoint→回答後応答を接続。新Q3 natural policyだけ全plan最大3問。不要時0問、本人続行、skip/終了、結果不明・中断復帰、同版再読を継承 | 旧有限ownerで根拠付き質問が成立する入力を対象とする。一般自由文を有限checkpointへ強制しない。実SQLと合成単一providerで処理確認。公開の問いON/OFF・前回選択保持、完了後の「どの内容ですか？」「どう違いましたか？」の二つの入力は未実装 |
+| D26/27・D02/08：本人に確かめる一点、回答・訂正・撤回、出所と不明 | `emlis_thread_service._prepare_natural_question`→既存`original_meaning_plan/question_candidate/prepare_emlis_meaning`。現naturalの短い受け止め→別QUESTION→ANSWER→実checkpoint→回答後応答を接続。新Q3 natural policyだけ全plan最大3問。不要時0問、本人続行、skip/終了、結果不明・中断復帰、同版再読を継承 | 旧有限ownerで根拠付き質問が成立する入力を対象とする。一般自由文を有限checkpointへ強制しない。実SQLと合成単一providerで処理確認。公開の問いON/OFF・前回選択保持は後続§9.3で候補へ接続。完了後の「どの内容ですか？」「どう違いましたか？」の二つの入力は未実装 |
 | D27・D07/21：回答で有効になった意味と失効した意味 | `natural_reply.prepare_natural_reply(prepared_meaning=...)`→既存の原文locatorと`final_reception_source_anchor_text`。active/inactiveのclaim anchor、肯否・時点・modality、関係失効・未確定を現作者へ渡す | カテゴリ・感情選択を文章の出来事／反応へ昇格しない。全spanは周辺文脈、typed anchorが当該claim。原入力と本人補足は別。既定FINALの旧wireは保持。実4Bでの自然さ・反映品質は未測定 |
 | D04/10：必要意味・内容選択・参照／scope依存 | `piece_model_source._piece_content_selection`で現Piece planの全required duty、欄／source／scalar範囲、読取group、関係・scopeとcontext_onlyを、既存のconfigured取得へ渡す | source全文・prepared・旧SYSTEM・既存authoring条件は保持。requiredを予算で脱落させず、出力文数や原文丸写しを固定しない。既存Engine/S7の意味採否は独立。実4Bの表現・単独伝達の改善は未測定、selector/重みの通常採用は行っていない |
 | D06/07/08/45・D21：source意味責務、条件比較、図／本文の逆確認 | 既存Analysis observed compilerの完全source読取を、明示`semantic_map.source_duties.v2`の生成材料へ接続。原文全体は一度だけ送り、意味軸とfield/span参照を追加。現在のadmission/compiler/唯一realizerを使用 | 同じ記録に書かれた場面・担当、引用根拠内の時点・希望等を図と同じ本文へ保持。場面を行動の原因／条件と認定しない。唯一対応する完全命題の肯否／時点／modalityだけを独立比較し、一般解釈はUNASSESSED。旧v1既定・保存・月次当時版・IF境界は保持 |
@@ -472,7 +472,34 @@ RN source互換も確認した。`useEmlisThread.js`の続行は`dto.can_continu
 
 準備原本：`Cocolon_CMEE_AuxiliaryTransfer_Prepared_20261112.zip`、Library ID `libfile_fde3_f-934d5411db408191ace1365dfb04eaa6_2f7470f963808191aaebf050935e72de`、68,717bytes、SHA256 `0248a2c80ea56a61685b6a0b4ad4a9328e7228e4073ffac5ff63c5143c2746a7`。script単体SHA256 `38e5ef347e6e8f93c509b871475e18a2ed0e0365496d5d422550b72ba00da3d9`。架空要求・SQL snapshot・既存経路へのreplay手順を含み、認証値とGit-backed製品sourceの複製は含まない。未実行archiveを実生成証拠と呼ばない。
 
-次はこの実4B比較の具体的承認後の実行と、AR-02の公開設定／具体的本人訂正、AR-03の意味ある履歴利用、AR-06/07/08の既存依存に沿う実装を進める。必要な未実装・未接続が残る間は全体継続中。有限ownerの適合範囲と一般品質、実装候補・通常提供・本人受入れを分ける。
+次はこの実4B比較の具体的承認後の実行と、AR-02の具体的本人訂正、AR-03の意味ある履歴利用、AR-06/07/08の既存依存に沿う実装を進める。必要な未実装・未接続が残る間は全体継続中。有限ownerの適合範囲と一般品質、実装候補・通常提供・本人受入れを分ける。
+
+<a id="emlis-question-receiving-20261112"></a>
+### 9.3 2026-11-12 — 問い設定を入力画面・保存入力・新規応答へ接続
+
+API `dc6dfad00cccc4345d00508c7851a06e288ddadf`、RN `e6aabd332970b3cf159d5e8a495ecb67aed92f5f`。採用済みの「Emlisからの問いを受け取る」を既存入力導線へ接続した。旧質問・本人回答・source更新の移管に続くAR-02の実装候補であり、通常反映・実4B品質・本人端末やAR-02全体／補助経路全体の完了ではない。
+
+| 既存owner | 接続した責務 |
+|---|---|
+| `InputActionArea`／`InputScreen` | 感情通知の近くに独立した問いSwitchを追加。初回ON、通常入力で保存確認済みのboolを送信前に固定。tutorialでは永続設定を操作しない |
+| `useEmlisQuestionPreference`／`emlisQuestionPreferenceStorage` | 同じ端末の本人別AsyncStorageキー `cocolon.emlisQuestionPreference.v1:<uid>` へ前回選択を保持。owner変更の世代と同ownerの未完操作を扱い、古い読込・保存が別本人へ混入しない。下書き復元／入力成功resetから独立 |
+| 既存 `POST /emotion/submit`→gateway→`persist_emotion_submission` | 任意の厳密boolean `receive_emlis_questions`（省略true）を既存emotion INSERTへ渡す。入力保存と同時に今回の選択を固定し、thread admission前の中断後も取得できる。新start endpointや自動submit再送保証は追加しない |
+| `emlis_thread_read`→`EmlisThreadService.start` | 新列をprivate snapshot siblingとして読み、新規Q3のprivate dataへ固定。naturalは既存constructor許可とのAND。新finite Q3でもOFFならQUESTION／続行を発行せずFINAL本文を保存し、既存問数上限は変えない |
+| `accountLocalCleanup` | logoutでは本人別選択を保持。account削除では同じ保存queueの先行write後に本人keyを消し、他本人は消さない |
+
+読込・保存が未確認／失敗した間は、仮のONを送信しない。設定破損や読込失敗では再確認・本人による明示選択から保存し直して復旧でき、恒久的に入力不能へ閉じ込めない。送信中の入力はcaptured値のまま扱う。設定を後で変更しても、既存threadのpolicy、保存済み回答、履歴参照権利、感情通知を変更しない。端末間同期・再インストール後の復元は保証していない。
+
+DDLはCLI `migration new` で生成した `20261112092202_emlis_question_receiving_preference.sql`。既存emotionsへboolean NOT NULL DEFAULT trueを追加し、既存read RPCのsource7key・owner／閲覧期間条件・INVOCER・OID／ACLを維持する。設定はoriginal source・意味prefix・model本文材料・公開DTOへ混ぜない。公開API registryとschema05へ任意request fieldを記録し、旧caller省略true、string／number／nullはINSERT前に拒否する。
+
+検証は新規API21件を含む実隔離SQL集合63件成功。ASGIの公開submit→既存gateway／保存→factoryのbackground起動→private read→新natural／finite Q3→保存／非生成再読を確認した。provider本文・Auth／PostgREST transportは合成で、live DB／実4Bではない。INSERT後admission前停止から新ownerで開始したOFF保持、既存threadの後変更非反映、owner／ACL／source分離も含む。追加の既存Q2／natural／submit pending・通知・public meta回帰は、不足した既存辞書／queue sourceを同parentから復元して失敗箇所を再実行し、失敗残件0。集合の重複は加算しない。
+
+RNは新規10件（本物React hooks／storage／設定component・削除処理）と既存InputScreen83件（追加3を含む）を一括し93件成功、fail／skip0。初回／前回値、遅延A→B→A、失敗復旧、削除時の先行保存、OFFと通知の独立、下書き復元／入力成功後の保持、読込中の旧handler抑制、送信中の固定値を確認した。既存CIのReact集合へ新2module、APIの既存隔離集合へ新moduleを追加した。native画面・本人端末の結果ではない。
+
+独立source reviewの指摘2点（finite OFFでPRE_QUESTIONが残る状態不整合、壊れた設定から本人が復旧できない導線）は是正済み。今回の再利用可能な成果は実装・隔離検証の `TECHNICAL_CREDIT`。`STRUCTURE_MAP_DELTA_PRESENT`（入力設定の2ownerと既存保存／read責務）。生成品質・正式商品受入れへ換算しない。
+
+**通常反映順はmigration→API→RN。** 旧APIへ新RNのfieldを先行させるとOFFが無視され得るため、この順序を守る。稼働DB適用・Render配置・build／配布・本人端末確認は実施していない。既存運用feature flagをONへ変更していない。
+
+未完は完了後の二入力訂正、一般自由文を含む問い判断／回答後の実4B品質、AR-03の意味ある履歴、他ARの未接続能力、通常反映・実機。§9.2の7要求scriptは前回の具体的upload承認待ちのまま、新たな実4B生成・送信は0。今回の設定実装を、準備済み比較の実行や品質改善の実証に数えない。
 
 ## 10. 変更箇所と検証
 
@@ -592,7 +619,7 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 ## 12. 今後の指示と再開方法
 
-**11/12・現在の再開点：** §9.2の三中核能力移管をAPI eea4761f7b5009128d497b2b69e1b1d0766ad57dへ反映。新naturalの問い／回答更新・Piece内容選択・明示Analysis source dutiesと図／本文／隔離保存再読を検証済み。新しい実4B比較7要求は自動承認審査のupload拒否により送信・生成0で、具体的承認待ち。公開の問い設定・前回選択保持・二つの入力による完了後訂正、意味ある履歴、蓄積／IF／通常適用・実機等は残る。完了済みの旧73・344a固定3件・native検証を再実行しない。
+**11/12・現在の再開点：** §9.2の三中核能力移管をAPI eea4761f7b5009128d497b2b69e1b1d0766ad57dへ反映。新naturalの問い／回答更新・Piece内容選択・明示Analysis source dutiesと図／本文／隔離保存再読を検証済み。新しい実4B比較7要求は自動承認審査のupload拒否により送信・生成0で、具体的承認待ち。公開の問い設定・前回選択保持は§9.3の候補で実装済み。二つの入力による完了後訂正、意味ある履歴、蓄積／IF／通常適用・実機等は残る。完了済みの旧73・344a固定3件・native検証を再実行しない。
 
 **11/12・先行する通常画像実証の履歴：** 研究36335452/run43146249187はattempt1・新同1method成功。両作品のpreview/saved/export全6frameで本文/native canvas/alpha/元8秒が成立し、手動ACKなしの閉要求→native ACK後遷移→saved mountと両actual export PNG一致を確認。実検証は研究363のsourceで、同じ製品2/単体2fileを今回通常Draftへ採用する。native harnessは採用せず、新normal headのCI成功は主張しない。既存474PASS（独立18含む）・full JSXも継承。STRUCTURE_MAP_DELTA_PRESENT。native581/guard/renderer/8秒不変、model selector OFF/重み未採用・旧V4失敗14→26は未解決。AR-04一般編集品質/実Auth/API/DB/本人端末・正式0/3/他ARは未完。 前回24/48・73実4B/243SQL/static6/transition4は完了として継承し、旧6methodは今回未実行。
 
