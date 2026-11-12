@@ -1,16 +1,18 @@
 ---
 doc_id: cocolon.cmee.auxiliary_asset_reuse.implementation_design.20261108
 title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修・商品接続 詳細設計"
-revision_date: "2026-11-12 JST"
+revision_date: "2026-11-13 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR03_FIT16_PREFLIGHT_FAILED_ALIAS_FIXED_PENDING_NEW_APPROVAL
+status: AR03_FIT16_CONTROL_TIMEOUT_DEADLINE_REPAIR_PENDING_NEW_APPROVAL
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "One approved attempt stopped before calls due to placeholder Analysis model; one argument fixed in separate 23350-byte packet, new one-run approval required, no retry"
+current_next: "Approved 23350-byte attempt ended with pre-stop Analysis TimeoutError; no training or provider stop; 24639-byte 60-second control/deadline and receipt repair prepared, separate one-run approval required, no retry"
 runtime_effect_of_this_document: 0
 ---
+
+> **11/13・AR-03の修正版一回は提供前Analysisの時間切れで終了：** 承認済み23,350byteを一回実行し、33.20332144200802秒でTimeoutError。自然前対照1を取得、続くAnalysis要求の本文・終了理由は未取得。学習／研究前後22／提供停止・再起動0、PID73476／health200維持。既知の同要求36.901秒より短い25秒待受を設定した華恋の準備ミス。一次JSONに基づき、目視誤読のAssertionError説明を訂正。待受60秒・全体600秒内の復元後137秒予約・検査前raw保存に限定修正した24,639byteを準備し、CPU模擬8件成功、未送信／未実行。旧一回を再試行せず、新しい一回の具体承認待ち。前後品質未評価、通常flag OFF・全補助経路未完を維持。 [実原本・修正範囲](#auxiliary-history-fit16-control-timeout-20261113)。
 
 > **11/12・固定実3件の意味読取拒否を修復：** API87512ddaで、既存述語／本人評価／感情／literal-self資産を、型付きoperatorと完全保持spanの独立比較へ回収。保存344aの同じ実raw3件は3拒否→3採用、旧73件の採否・全artifact・prepared／messages／rawは修正前後同一。新GPU・学習0。3plan計9件の隔離SQL保存・非生成再読、本文／recipe／renderer一致とquota各1を確認。Free refinedは元の適格ADD snapshot、Plus／Premiumは同じ全入力・回答から既存ownerでtier別資格を再導出。合成Auth／source・mock HTTP framingであり、実HTTP／live DB／本人端末ではない。新70を含む局所1774と既存SQL56が成功。Piece CI43174913229はattempt1・39step成功、model集合2021に新70を含む（重複加算なし）。生成本文自体は従来の常体化が中心で、一般編集品質・同じ新本文のnative画像・通常採用・AR-04／全補助経路は未完。 [修復・原本・確認範囲](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-general3-operator-review-repair-20261112)。
 
@@ -797,6 +799,42 @@ T8の16更新、研究22＋提供4＝26生成、全体600秒／研究330秒／�
 既存 `Cocolon_CMEE_AR03_HistoryTeaching_Candidates_20261112.zip`／Library `libfile_fde3_f-9e0e8945ad208191a053021e810be6d6_2f7470f963808191aaebf050935e72de` をversion2へ更新。181,214bytes／22members、SHA256 `c5fe1a1970fb65fb4b85f2c5ac525d6546bb1d502b1c81682eaa2cc9809439d4`。version1の旧原本・CPU結果・23,353byte packetを不変保持し、旧READMEも別名保管。失敗原本／事後確認JSON／最小修正版／差分と承認境界を追加。秘密・全環境・browser screenshot・Git-backed製品sourceは含めない。
 
 primary BLOCKER_NARROWED。先行する実tokenizer／mask／長さのcreditは保持し、新GPU・商品credit0。製品source／test／API／DB／RN／Render／Supabase変更0、STRUCTURE_MAP_DELTA_NONE。通常flag OFF、準備12件のRESOLVED補助0、H8未準備、先行実6の場面混同、AR-03・二入力訂正・一般品質・他AR／三中核・live反映／本人端末・正式受入れの未完を維持する。
+
+
+<a id="auxiliary-history-fit16-control-timeout-20261113"></a>
+## 9.12 2026-11-13 — 修正版一回はAnalysis前対照でTimeoutError、待受と保存順序を修正
+
+**11/13・AR-03の修正版一回は提供前Analysisの時間切れで終了：** 承認済み23,350byteを一回実行し、33.20332144200802秒でTimeoutError。自然前対照1を取得、続くAnalysis要求の本文・終了理由は未取得。学習／研究前後22／提供停止・再起動0、PID73476／health200維持。既知の同要求36.901秒より短い25秒待受を設定した華恋の準備ミス。一次JSONに基づき、目視誤読のAssertionError説明を訂正。待受60秒・全体600秒内の復元後137秒予約・検査前raw保存に限定修正した24,639byteを準備し、CPU模擬8件成功、未送信／未実行。旧一回を再試行せず、新しい一回の具体承認待ち。前後品質未評価、通常flag OFF・全補助経路未完を維持。
+
+### 今回の一次原本と、実行しなかった範囲
+
+Mashが§9.11の修正版23,350byte／T8の16更新／前後22応答＋提供前後4／停止復元込み600秒・一回・再試行なしを承認。既存Podへ送信し、size・SHA256 `ef99b2cad3bb79437153d2a73cbcd592188a84ae8f9cf0138cdb27c95dde00f6`・CRC・凍結5file・fresh folderを照合して一回だけ起動した。再試行0。
+
+一次`restoration.json`は `trial_failure_type=TimeoutError`、`elapsed_seconds=33.20332144200802`、`control_calls=1`、`restoration=NO_STOP_NO_RESTART`、`fit_completed=false`、`original_identity_unchanged=true`。事後read-only確認はPID73476／health200。prepause CPUで比較11の長さを確認したが、元提供停止・再起動、新model load、学習16更新、研究前後22応答、候補adapterは0。既存起動環境・2鍵はwrapper順序上同Pod内で読み取り済みで、鍵値・全環境のartifact化や外部転送はない。停止していないため復元成功の実績にはしない。
+
+natural前対照はHTTP200／stopで保存され、続くAnalysisは要求したが応答本文・終了理由・model側の処理完了は未確認。旧`control_calls`は検査通過数であり、全HTTP試行数を1と数えない。Analysisの切断後処理やPod保持料金も0としない。接続／受信のどの段階の時間切れか、Analysisがstop／length／不正JSONだったかは確定できない。
+
+回収した`inspection_results.original.zip`は26,971bytes、SHA256 `2dc7ba23816ec6adb5c5c3c29fe3334beb0ec955b1646bd2310434d8700696ba`。内側`results.zip`は9members／CRC正常、承認済み5fileは全bytes一致。最初に華恋が小さいUIを前のAssertionErrorと誤読して説明し、派生public_summaryにも誤記した。一次JSON回収後にMashへ訂正済み。外側原本の誤記は根拠にせず、原本bytesを残したまま`public_summary.corrected.txt`を一次JSONから導出し、Pod表示も訂正した。
+
+取得natural本文は「先月の妹への散歩の誘い」で原文「妹に朝の散歩へ誘われた」の方向を逆に読ませ、未記載の期待不在も補っている。過去だけの嫌さを今回へ足す誤りは、この一本文では見つけていない。これは前対照一件の読取であり、学習前後22の比較、改善・保持・一般品質の評価は未実施。
+
+### 待受修正と、次の一回の境界
+
+Analysis requestは先行実比較の`analysis_old`（HTTP200／stop、36.901秒）とbody全体が一致。一方、今回の待受25秒は既知所要より短かった。新しい本文の難しさや提供故障とせず、華恋の時間設定の準備ミスとして修正する。旧controlはstatus／JSON／finish検査の後にrawを保存する順序だったため、返却された不合格応答も欠落し得た。今回返却されなかった本文を復元したとは扱わない。
+
+別packet `ar03_history_fit16_control_deadline_prepared_20261113.zip` は24,639bytes／5members、SHA256 `121ad1ed69ba7d8a72ee1da3f9f232343d7bdb06f696b5e97ea584bc84a4d13f`。待受を60秒とし、open＋read全体をSIGALRMで制限してfinallyで解除。全体600秒／研究330秒／学習180秒を維持し、復元後2対照120＋archive12＋余裕5＝137秒を予約。復元health期限はmin(起動から180秒, 全体期限−137秒)で、研究が330秒に達すれば子終了等を引く前でも復元枠は最大133秒。180秒を満額確保したとはしない。
+
+同じcontrol内で送信試行・受信・検査通過を分け、認証値を含まない要求・時刻、受信HTTP状態／raw bytes／hashを検査前に保存する。Timeoutは型と時刻を残す。非stop／不正JSON／HTTP不合格／提供前後本文差は従来どおり失敗で、再送や受入れ緩和はない。教師T8・比較11・全要求body・trainer・generation設定・16更新／前後22＋提供前後4の上限は不変。既存2鍵の同Pod内認証、元argv／全起動環境／cwdを同Pod内メモリに保持して一回復元する範囲と、秘密非保存・非転送を維持する。
+
+既存control closureだけを抽出したCPU模擬8件（stop／nonstop／不正JSON／HTTP201／HTTP503／復元後不一致／open timeout／open＋read合算timeout）が成功。単一試行、受信原本保存、秘密非保存、alarm解除を確認した。独立reviewで時間2項目だけのpack差、trainer bytes・全要求body不変を確認。ネット・GPU・model・提供操作0の検証で、実応答・学習・復元成功を主張しない。
+
+新packetは未送信・未実行。今回の承認は一回・再試行なしで終了しており、新しい具体承認後だけ別fresh folderで実行する。現行flag OFF、新重み未採用。§9.11は当時の失敗・修正履歴として残し、本節を再開位置とする。
+
+### 保存と残件
+
+既存 `Cocolon_CMEE_AR03_HistoryTeaching_Candidates_20261112.zip`／Library `libfile_fde3_f-9e0e8945ad208191a053021e810be6d6_2f7470f963808191aaebf050935e72de` をversion3へ更新。240,791bytes／31members、SHA256 `113d193f3c25d6c002dab39ce5509edb1d1ef555455b9369c4677091b8096083`。従前22members・旧READMEを保持し、今回原本／一次JSON／誤記訂正／未実行修正版／CPU検証を追加。鍵値・全環境・browser screenshot・Git-backed製品sourceは含めない。
+
+primary BLOCKER_NARROWED。教師候補・実tokenizer／mask／長さの既存creditは保持するが、新学習・商品改善credit0。製品source／test／API／DB／RN／Render／Supabase変更0、STRUCTURE_MAP_DELTA_NONE。前後22品質未評価、準備12のRESOLVED補助0、H8未準備、先行場面混同、二入力訂正・AR-03／他AR／三中核／live反映／本人端末・正式受入れは未完。
 
 
 ## 10. 変更箇所と検証
