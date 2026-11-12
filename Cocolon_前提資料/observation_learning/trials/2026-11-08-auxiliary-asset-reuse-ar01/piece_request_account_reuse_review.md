@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/12・AR-04最新：** 研究58b62ffc/run43140845390はattempt1・1method/11issueで失敗。051savedは632.191msで回復、007savedだけ370.357msでnative_candidates_unavailable、他5frame成立・全6frame8秒内・両actual export PNG一致。native6eventはJS同6tag/fontと一致し、すべて元native967行のstage2（class/window/accessor確認、storage/font/worker前）。3条件のどれかは未分離、旧e6ecの原因へ遡及しない。Modal閉完了前の即時owner遷移を現sourceで確認し、既存InputPieceActionArea/PiecePreviewModalのiOS onDismiss後遷移と旧要求取消しを修正中。新source SHA/CI未成立。native581/guard/return/clock/8秒・XCTest期待・Free録画条件を維持、selector OFF/未採用・旧V4失敗14→26・AR-04未完。 [既存natural観測の接続と現在地](piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
+> **11/12・AR-04最新：** 研究36335452/run43146249187はattempt1で実行中。58b62ffcの007saved stage2拒否を受け、既存host/ModalのiOS native dismiss ACK後にowner遷移する候補を公開。空の閉Modal保持・presentation epoch・旧要求取消しを既存部品へ接続し、native harnessは手動ACKなしで閉要求→ACK後遷移→saved mountの順序を確認する。既存5testfileの重複除外474PASS（独立18含む）・full JSX成功、native compile/新6frameは未判定。STRUCTURE_MAP_DELTA_PRESENT_RESEARCH_CANDIDATE_ONLY、通常source未採用。native581/guard/return/clock/8秒・旧期待・Free録画条件を維持、selector OFF・旧V4失敗14→26・AR-04未完。 [既存natural観測の接続と現在地](piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -2704,13 +2704,24 @@ artifact13910467376を回収し、63,988,166byte／SHA256 `9ad955406110db03dc0c4
 
 全6frameの経過は元8000ms以内。nativeの6 rejection eventはJSの同じ6tag/font（1517/1525/1533の48、1495/1499/1505の44）と完全対応し、すべてstage2だった。これは元`ios/tempCocolon/PieceTextMetrics.mm`の967行付近、registryのviewがRCTTextViewか／windowがあるか／cocolonPieceTextStorage accessorがあるか、の3条件を確認するguardである。storage読取・font検査・workerへ入る前に拒否している。どの条件が不成立かは分離しておらず、e6ecにはこのlogがないため、その旧失敗の原因も同じだったと遡及認定しない。
 
-### 通常Modalの閉完了とowner遷移の修正（作業中・未実証）
+### 通常Modalの閉完了とowner遷移の修正36335452（研究候補公開・実native結果待ち）
 
-現sourceではPiecePreviewModalがfullScreen/slideを使い、InputPieceActionArea.openSavedPieceがclose()の直後にnavigateしてroot側のownerをmountする。native dismiss ACKを待たないこの順序は、今回のwindow等のstage2拒否と整合する具体的な競合候補である。ただし、このsource上のhazardと今回の拒否の因果を確定したものではない。
+修正前sourceではPiecePreviewModalがfullScreen/slideを使い、InputPieceActionArea.openSavedPieceがclose()の直後にnavigateしてroot側のownerをmountする。native dismiss ACKを待たないこの順序は、今回のwindow等のstage2拒否と整合する具体的な競合候補である。ただし、このsource上のhazardと今回の拒否の因果を確定したものではない。
 
-既存`screens/input/InputPieceActionArea.js`と`components/piece/PiecePreviewModal.js`だけで、閉じたModalは内容を空にしてonDismissを受けるまで保持し、iOSはACK後にownerへ遷移する修正を進めている。owner/source/runtime変更・background・unmount・reopenで古い要求を取消し、AndroidにはiOS用callback待ちを加えない。native型・guard・renderer・元8秒は不変更、新controller/retry/sleepは作らない。新source SHA・CI・修正後の実native結果はまだ成立しておらず、新runは未開始。次はこの限定修正の検証で因果と再発を確認する。
+[研究363354523fda414b312a405163f93f0d95c7fd0c](https://github.com/MassyuRed/Cocolon/commit/363354523fda414b312a405163f93f0d95c7fd0c)は58b62ffcの子で、既存product2fileと検証4fileの計6path。既存`screens/input/EmlisThreadModal.js`／`components/selfStructure/SemanticWatashiMap.js`のdismiss ACKを使う資産を回収し、`screens/input/InputPieceActionArea.js`が本文なしのpending receipt/遷移identityとpresentation epochを管理、`components/piece/PiecePreviewModal.js`は閉じた同じiOS Modalを内容なし・visible=falseでonDismissまで保持する。新しいpresentation key/epochで旧ACKを除外し、ACK時にreceipt/current owner/source/runtime/navigationを再確認する。background/unmount/reopen/context変更で取消し、放棄したpresentationのretention/epochも解放して、復帰後の新しいsaved-openを止めない。Androidと既にACK済みの閉画面ボタンは直接遷移する。native型・guard・renderer・元8秒は不変更、新controller/retry/sleepは追加しない。
 
-784/e6ecと58b62ffcの原report・PNG比較・native拒否log・回収記録は、同じ既存保存物[Cocolon_CMEE_AR04_NormalHost_SaveExport_20261112.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-abc0a7733fb88191b3ad08e0441bc926_2f7470f963808191aaebf050935e72de&account_id=personal)のversion4へ更新保存済み。61member、2,444,394byte、SHA256 `d29dd7f8f4e0f3303424ab2808e472176bee2af6fbacc4f587d7373f99be2579`。修正中のModal遷移に関する未実行の結果は、この回収済み証拠へ含めない。
+| product source候補 | SHA256 |
+|---|---|
+| `screens/input/InputPieceActionArea.js` | `e0fb5d0a8c7388c61409ecee986468a22f5eea2e1a36b1d960231a9bb572c40e` |
+| `components/piece/PiecePreviewModal.js` | `c48122e3297df57391153254c63bc63f24b2567a9cf7dc8c7e74e7dab832c2d0` |
 
-通常model selector OFF・未採用、live DB/Render/署名build/配布/Photos/本人端末・一般品質/正式0/3・AR-04/他AR残件は未完。今回新model/GPU/SQL/実Auth/外部製品HTTP0。STRUCTURE_MAP_DELTA_NONE：通常product owner/route/公開型/DB責務は不変。既存harnessへのtest用1fixtureと診断2pathの追加結果を保持し、既存product2fileの遷移修正は上記の作業中状態として分ける。
+残る4pathは`tests/piece-v2-preview-display.test.js`、`tests/piece-v2-initial-save-host.test.js`、`tests/native/piece-rn-canvas-entry.js`、`tests/native/piece-rn-canvas-ios.m`。native harnessは手動ACKを注入しない。openSavedPiece直後にpending receipt identityと「まだ遷移なし」を確認し、actual navigate時にはpending=null/open=falseを要求する。`preview_close_requested`→`navigate_after_preview_dismiss`→saved stageのmountを記録し、XCTestでstrict順序とnative_modal_dismissal_awaited=trueを追加確認する。旧6frame/PNG/8秒/guard/製品581/104 stage mapと31診断箇所は維持する。
+
+localは既存5testfileで重複除外474 PASS、fail/skip0。独立reviewの18件はこの474に含まれ、加算しない。TypeScript5.2.2によるproduct/native entryのfull JSX、bash/diff checkも成功。独立reviewで取消し後の新openが止まるliveness blockerを公開前に見つけ、実装を修正した後、両modeのfresh-open再現を独立確認してPASSとした。これは公開前候補の修正で、配布製品のincidentではない。
+
+GitHubの全6fileのbytes/blob・親・変更集合を確認後に研究refへ反映し、[run43146249187](https://github.com/MassyuRed/Cocolon/actions/runs/43146249187)がpush自動起動した。現在in_progress、attempt1。native compile・actual ACK順序・新6frameは未判定で、通常product sourceは`UNADOPTED_PENDING_ACTUAL_NATIVE`。phase6[run43146249174](https://github.com/MassyuRed/Cocolon/actions/runs/43146249174)も別にin_progressであり、同じ1methodの結果へ混ぜない。次はこの一回の実native結果を回収し、Modal競合の因果と修復可否を判断する。
+
+784/e6ecと58b62ffcの原report・PNG比較・native拒否log・回収記録は、同じ既存保存物[Cocolon_CMEE_AR04_NormalHost_SaveExport_20261112.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-abc0a7733fb88191b3ad08e0441bc926_2f7470f963808191aaebf050935e72de&account_id=personal)のversion4へ更新保存済み。61member、2,444,394byte、SHA256 `d29dd7f8f4e0f3303424ab2808e472176bee2af6fbacc4f587d7373f99be2579`。実行中36335452の未取得結果は、この回収済み証拠へ含めない。
+
+通常model selector OFF・未採用、live DB/Render/署名build/配布/Photos/本人端末・一般品質/正式0/3・AR-04/他AR残件は未完。今回新model/GPU/SQL/実Auth/外部製品HTTP0。`STRUCTURE_MAP_DELTA_PRESENT_RESEARCH_CANDIDATE_ONLY`：研究36335452の既存host/Modal間へprivate dismiss ACK連携を追加した。新owner/controller/route/公開API/DB/rendererはなく、通常sourceは未採用。先行58b62ffcまでの診断だけの`STRUCTURE_MAP_DELTA_NONE`は当時の履歴として保持する。
 

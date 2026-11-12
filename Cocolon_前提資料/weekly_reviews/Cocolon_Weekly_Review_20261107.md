@@ -1,6 +1,6 @@
 # 第10回 Cocolon週末報告会 — 2026-11-07（終了）
 
-> **11/12・AR-04最新：** 研究58b62ffc/run43140845390はattempt1・1method/11issueで失敗。051savedは632.191msで回復、007savedだけ370.357msでnative_candidates_unavailable、他5frame成立・全6frame8秒内・両actual export PNG一致。native6eventはJS同6tag/fontと一致し、すべて元native967行のstage2（class/window/accessor確認、storage/font/worker前）。3条件のどれかは未分離、旧e6ecの原因へ遡及しない。Modal閉完了前の即時owner遷移を現sourceで確認し、既存InputPieceActionArea/PiecePreviewModalのiOS onDismiss後遷移と旧要求取消しを修正中。新source SHA/CI未成立。native581/guard/return/clock/8秒・XCTest期待・Free録画条件を維持、selector OFF/未採用・旧V4失敗14→26・AR-04未完。 [既存natural観測の接続と現在地](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
+> **11/12・AR-04最新：** 研究36335452/run43146249187はattempt1で実行中。58b62ffcの007saved stage2拒否を受け、既存host/ModalのiOS native dismiss ACK後にowner遷移する候補を公開。空の閉Modal保持・presentation epoch・旧要求取消しを既存部品へ接続し、native harnessは手動ACKなしで閉要求→ACK後遷移→saved mountの順序を確認する。既存5testfileの重複除外474PASS（独立18含む）・full JSX成功、native compile/新6frameは未判定。STRUCTURE_MAP_DELTA_PRESENT_RESEARCH_CANDIDATE_ONLY、通常source未採用。native581/guard/return/clock/8秒・旧期待・Free録画条件を維持、selector OFF・旧V4失敗14→26・AR-04未完。 [既存natural観測の接続と現在地](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
 
 記録日：2026年11月7日（日本時間）  
 対象週：**2026年11月7日〜11月14日**  
