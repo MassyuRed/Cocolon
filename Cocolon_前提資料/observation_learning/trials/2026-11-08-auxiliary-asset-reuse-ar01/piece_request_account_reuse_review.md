@@ -2859,3 +2859,11 @@ Piece CI [43174913229](https://github.com/MassyuRed/mashos-api/actions/runs/4317
 NO_STRUCTURE_MAP_DELTA：既存model-only意味比較owner内の改修で、source／保存／公開型／route／DB／作者／rendererの責務・全file地図は不変。primary TECHNICAL_CREDITは固定実出力の誤拒否修復と保存再読だけ。生成本文は依然常体化が中心で、一般編集品質改善・同じ新本文のnative画像・通常selector／weights採用・実Auth/API/DB／本人端末／正式受入れ0/3・AR-04／他ARの完了は未成立。補助経路全体の完成へ読み替えない。
 
 Analysis CI [43174913298](https://github.com/MassyuRed/mashos-api/actions/runs/43174913298)／job131036702662もexact head87512dda・attempt1・19stepすべてsuccessを確認。共有ownerを変更した実績や、分析商品の新しい品質合格へ換算しない。
+
+
+<a id="piece-editorial-choices-prepared-20261113"></a>
+## 2026-11-13 — Pieceの具体的編集判断を現作者へ移す候補（未実行）
+
+**11/13・Pieceの既存編集判断を現作者へ移す候補：** API `ec4bd668`で焦点構文・同本人参照継続・評価語順の既存判断をprivate作者材料へ接続。関連5file296 PASS。新optionは既定OFF、現configured取得・SYSTEM・独立S7は不変。既存一般3型はmessages無差分のため再生成しない。架空3型の旧新6要求・14,489byte・最大7分／1回／学習・retry・提供再起動なしの案を準備したが、未承認・未送信・実生成0。一般編集品質・同本文保存／画像・通常採用は未成立。AR-03実4不採用も継承。
+
+原文の匿名化・焦点語順・本人反復までcopyするactual7を根拠に、何を保持するかだけでなく、既存native作者が認めた具体的編集判断を現builderへ回収。期待完成本文や旧finite artifactを渡さず、既存の原文・範囲・別sourceとS7を保持する。general3の原文・base／344a全rawを独立読取し、今回のfocal／継続省略の効果材料ではないことを確認した。比較材料と出所、CPU296の範囲、未実行packet／既存対照の再取得、原本v4・未完条件は[詳細設計§9.20](../../../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-editorial-choices-prepared-20261113)を正本とする。STRUCTURE_MAP_DELTA_NONE：既存private作者入力内だけで公開・保存・rendererの責務は不変。通常採用／正式受入れcredit0、未測定の改善を成果へ換算しない。
