@@ -855,6 +855,25 @@ RCT_EXPORT_METHOD(captureBitmap:(nonnull NSNumber *)tag report:(NSDictionary *)r
         NSString *uri=raw[@"export_capture_uri"],*cache=[NSSearchPathForDirectoriesInDomains(NSCachesDirectory,NSUserDomainMask,YES).firstObject stringByAppendingPathComponent:@"piece-capture"];
         NSString *path=[uri hasPrefix:@"file://"]?[uri substringFromIndex:7]:uri;
         BOOL owned=[path isKindOfClass:NSString.class]&&[[path stringByDeletingLastPathComponent]isEqual:cache]&&[[path lastPathComponent]hasPrefix:@"piece-"]&&[path.pathExtension isEqual:@"png"];
+        // The actual export job has already copied and released its raw
+        // capture. Only this normal-host group reads the surviving owned copy.
+        if([raw[@"evidence_set"]isEqual:@"normal_host_export"]){
+          NSDictionary *artifact=[raw[@"recorded_artifact"]isKindOfClass:NSDictionary.class]?raw[@"recorded_artifact"]:nil;
+          NSDictionary *recipe=[artifact[@"visual_recipe"]isKindOfClass:NSDictionary.class]?artifact[@"visual_recipe"]:nil;
+          NSString *pieceID=raw[@"host_linkage"][@"export_piece_id"],*recipeHash=artifact[@"visual_recipe_hash"],*ratio=recipe[@"aspect_ratio"];
+          BOOL identity=[pieceID isKindOfClass:NSString.class]&&[recipeHash isKindOfClass:NSString.class]&&[ratio isKindOfClass:NSString.class]&&
+            [[NSPredicate predicateWithFormat:@"SELF MATCHES %@",@"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"]evaluateWithObject:pieceID]&&
+            ![pieceID isEqual:@"00000000-0000-0000-0000-000000000000"]&&
+            [[NSPredicate predicateWithFormat:@"SELF MATCHES %@",@"^[0-9a-f]{64}$"]evaluateWithObject:recipeHash]&&[@[@"4:5",@"9:16"]containsObject:ratio];
+          NSString *exportRoot=[[cache stringByDeletingLastPathComponent]stringByAppendingPathComponent:@"piece-export"];
+          NSString *directory=[path isKindOfClass:NSString.class]?[path stringByDeletingLastPathComponent]:nil,*session=directory.lastPathComponent;
+          NSString *filename=identity?[NSString stringWithFormat:@"cocolon-piece_%@_%@_%@.png",[pieceID stringByReplacingOccurrencesOfString:@"-" withString:@""],
+            [recipeHash substringToIndex:12],[ratio stringByReplacingOccurrencesOfString:@":" withString:@"x"]]:nil;
+          owned=identity&&[path isKindOfClass:NSString.class]&&[path isAbsolutePath]&&[path isEqual:[path stringByStandardizingPath]]&&
+            [session isKindOfClass:NSString.class]&&[[NSPredicate predicateWithFormat:@"SELF MATCHES %@",@"^[0-9a-f]{32}$"]evaluateWithObject:session]&&
+            [[directory stringByDeletingLastPathComponent]isEqual:exportRoot]&&[[path lastPathComponent]isEqual:filename]&&
+            [path isEqual:[[exportRoot stringByAppendingPathComponent:session]stringByAppendingPathComponent:filename]];
+        }
         NSData *bytes=owned?[NSData dataWithContentsOfFile:path]:nil;
         UIImage *exportImage=bytes?[UIImage imageWithData:bytes]:nil;
         NSData *expected=PieceExportRGBA(image),*actual=PieceExportRGBA(exportImage);
@@ -1383,6 +1402,10 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
         id sha=linkage[@"export_asset_sha256"];XCTAssertTrue([sha isKindOfClass:NSString.class]);if([sha isKindOfClass:NSString.class])XCTAssertTrue([hex64 evaluateWithObject:sha]);
         XCTAssertEqualObjects(report[@"export_target_current"],@YES);XCTAssertEqualObjects(report[@"export_rejected"],@NO);XCTAssertEqualObjects(report[@"export_target_after"],@YES);
         XCTAssertEqualObjects(report[@"export_pixels_equal"],@YES);XCTAssertEqualObjects(report[@"export_file_saved"],@YES);
+        XCTAssertTrue([linkage[@"export_piece_id"]isKindOfClass:NSString.class]);
+        NSDictionary *transport=[report[@"transport"]isKindOfClass:NSDictionary.class]?report[@"transport"]:nil;XCTAssertNotNil(transport);
+        XCTAssertEqualObjects(transport[@"session_calls"],@10);XCTAssertTrue([transport[@"api"]isKindOfClass:NSArray.class]);XCTAssertEqual([transport[@"api"]count],5u);
+        for(NSString *key in @[@"complete",@"scope_closed",@"cleared",@"before_after_key_intact",@"session_owners_match",@"fixture_headers_intact",@"save_key_generated_valid"])XCTAssertEqualObjects(transport[key],@YES,@"%@",key);
       }
       XCTAssertEqual([report[@"width"]integerValue],1080);XCTAssertEqual([report[@"height"]integerValue],1350);
       for(NSString *key in @[@"png",@"natural_reference_png"]){id filename=report[key];XCTAssertTrue([filename isKindOfClass:NSString.class]);

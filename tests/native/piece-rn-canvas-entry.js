@@ -784,7 +784,7 @@ class NormalHostCases extends CanvasCases {
     this.card = null; this.inputHost = null; this.ownerHost = null; this.savedTarget = null;
     this.saveFitHandle = null; this.hostEvents = []; this.preFitSaveBlocked = false; this.hostFailed = false;
     this.exportAsset = null; this.exportFile = null; this.hostLinkage = null;
-    this.finalTransport = null; this.navigationObserved = false;
+    this.finalTransport = null; this.navigationObserved = false; this.savedReceipt = null;
     const flags = { piece_v2_preview_enabled: true, piece_v2_save_enabled: true,
       piece_v2_owner_read_enabled: true, piece_v2_export_enabled: true };
     this.runtimeValue = { runtime: Object.freeze({ loaded: true, loading: false, error: null }),
@@ -863,7 +863,8 @@ class NormalHostCases extends CanvasCases {
             call.path === '/emotion/piece/' + fixture.save.piece_id + '/export'),
           export_target_current: before && target.isCurrent() === true,
           actual_job_capture: this.exportAsset.nativeStatus === 'not_started',
-          export_asset_sha256: hash, recorded_artifact_matches: matches, saved_row_version: artifact.row_version };
+          export_asset_sha256: hash, export_piece_id: this.savedReceipt?.piece_id,
+          recorded_artifact_matches: matches, saved_row_version: artifact.row_version };
         this.finalTransport = this.transport.close(); this.transport = null;
       }
       await this.baseFinishCase();
@@ -891,7 +892,7 @@ class NormalHostCases extends CanvasCases {
         modal.props.onSave({ preview_id: d.preview.preview_id, preview_revision: d.preview.preview_revision,
           visual_recipe_hash: d.preview.visual_recipe_hash }, d.visualToken);
         await this.waitForHost(() => host.controller.getView().phase === 'saved');
-        const receipt = host.controller.getView().savedReceipt;
+        const receipt = host.controller.getView().savedReceipt; this.savedReceipt = receipt;
         this.savedReceiptMatches = ['piece_id', 'consumption_id', 'row_version', 'saved_at', 'lifecycle_status', 'visibility_scope']
           .every(key => receipt[key] === this.scenario.save[key]);
         this.stage = 'saved'; this.resetCaseClock(); host.openSavedPiece(receipt);
