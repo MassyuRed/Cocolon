@@ -495,6 +495,8 @@ DDLはCLI `migration new` で生成した `20261112092202_emlis_question_receivi
 
 RNは新規10件（本物React hooks／storage／設定component・削除処理）と既存InputScreen83件（追加3を含む）を一括し93件成功、fail／skip0。初回／前回値、遅延A→B→A、失敗復旧、削除時の先行保存、OFFと通知の独立、下書き復元／入力成功後の保持、読込中の旧handler抑制、送信中の固定値を確認した。既存CIのReact集合へ新2module、APIの既存隔離集合へ新moduleを追加した。native画面・本人端末の結果ではない。
 
+GitHub CIの確認：API dc6dfad00のPiece run43192216034/job131094116606はattempt1・39工程success（新21件を含む入力集合171成功）、Analysis run43192216486/job131094117395はattempt1・19工程success。RN e6aabd33のrun43192045940ではJS job131093548943がsuccess（既存source集合1453とReact集合301、fail／skip0）、Android source／exportもsuccess。一方iOS source job131093548878はsimctl起動中のMach error -308／server died後にcancelledとなり、native assertionとartifactは得ていない。構文／patch／plist検査はsuccess。09:43:42 UTC時点でcanvas job131093548998とexport Pods job131093549218は実行中・未判定。追加待機・再実行なし。当該standalone metrics／Piece canvas hostは今回のInputScreen／新hookをimportせず、native／renderer／harness／依存の変更もないため、今回のJS変更による障害とは確認していない。RN workflow全体を成功やnative品質合格として扱わない。
+
 独立source reviewの指摘2点（finite OFFでPRE_QUESTIONが残る状態不整合、壊れた設定から本人が復旧できない導線）は是正済み。今回の再利用可能な成果は実装・隔離検証の `TECHNICAL_CREDIT`。`STRUCTURE_MAP_DELTA_PRESENT`（入力設定の2ownerと既存保存／read責務）。生成品質・正式商品受入れへ換算しない。
 
 **通常反映順はmigration→API→RN。** 旧APIへ新RNのfieldを先行させるとOFFが無視され得るため、この順序を守る。稼働DB適用・Render配置・build／配布・本人端末確認は実施していない。既存運用feature flagをONへ変更していない。
