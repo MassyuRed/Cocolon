@@ -460,7 +460,7 @@ Mashの「これまでと同じ禁止」「進め方を決めろ」を受け、A
 
 追加migration `20261112080628_emlis_natural_bound_questions.sql`は、現在の`20261101010000`のRPCを基礎にする。既存naturalの履歴期間例外とconnected frame条件を保持し、既存threadのpolicy／started limitを不変としたまま、新native-bound policyに限り全plan最大3問を認める。service_role専用・security invoker、owner/source/revision/attemptとtransaction条件を維持した。有効な回答後のREFINEDで終了する場合は同じ保存本文を保持し、追加生成しない。保存直前の履歴削除／編集は同RPCの既存context lockで拒否し、明示的に再操作した時だけ現在の情報でFINALを取得する。稼働DBへは適用していない。
 
-検証：新規4moduleの一括検証は53件成功。別集合の既存natural/Q2/Q3 125、Piece関連235（新13を含む）、Analysis72（新16・実隔離SQL2を含む）は各範囲の結果として保持し、重複加算しない。先行実装2a7acadecのPiece/Analysis CIは両方成功。終了時の追加生成と保存競合を修復した最終eea4761fの同じ2 CIは再検証中。合成Auth/source/providerを含む隔離検証であり、実4B・live Auth/API/DB・本人端末の結果へ換算しない。
+検証：新規4moduleの一括検証は53件成功。別集合の既存natural/Q2/Q3 125、Piece関連235（新13を含む）、Analysis72（新16・実隔離SQL2を含む）は各範囲の結果として保持し、重複加算しない。最終API eea4761fのPiece CI43185991522/job131073156216（39工程）とAnalysis CI43185991451/job131073155937（19工程）は両方success。既存CIに新検証を加えた同headの結果で、実モデルやlive環境の成功ではない。合成Auth/source/providerを含む隔離検証であり、実4B・live Auth/API/DB・本人端末の結果へ換算しない。
 
 RN source互換も確認した。`useEmlisThread.js`の続行は`dto.can_continue`、`EmlisThreadModal.js`の残問表示は`question_limit-issued_count`を使い、RN独自のPremium制限はない。本文とpending questionは既存の別表示で扱う。実機成功ではない。一方、同ModalのPiece補足選択は依然QUESTION/ANSWER各1件を必要とし、原入力Pieceも回答後は対象外のため、2〜3回答後のPiece作成は未対応の残件としてAR-04へ保持する。今回の全plan3問を複数回答からPieceまでの完成へ換算しない。
 
