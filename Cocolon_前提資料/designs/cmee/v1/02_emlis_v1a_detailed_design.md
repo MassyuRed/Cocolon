@@ -1,5 +1,79 @@
 # CMEE V1-A — EmlisAI Observation Vertical 詳細設計
 
+<a id="emlis-question-policy-20261112"></a>
+## 2026-11-12 決定 — 全プラン最大3問・本人が選べる問い・回答後の応答
+
+### 決定の位置づけ
+
+Mashとの今回の仕様対話で採用した商品仕様。全プラン最大3問と、以下の問い要否・終了判断を採用し、記載前の確認で「初期ON」「前回の選択を次回へ保持」も確定した。本節を今後のEmlis応答システム／補助経路AR-02の構築時に参照する。旧Free／Plus最大1問、Premiumだけ最大3問という差、および問い前に完成した全文応答を出す旧順序は、今後の構築目標として本節で置き換える。無制限案は採用しない。
+
+これは決定の記録であり、コード・DB・画面・4B学習・通常提供への反映済みを意味しない。旧Q1／Q3の保存済み応答・回答・実装実績は書き換えず、履歴として保持する。
+
+### 問いの設定・回数・表示順
+
+| 項目 | 今回の決定 |
+|---|---|
+| 回数 | Free／Plus／Premiumすべて、元入力1件に属するthreadで最大3問。一問ずつ進め、0／1／2問での終了も正常。毎回3問を使う目標にはしない。 |
+| 入力画面の設定 | 「感情通知を送らない」の近くに「Emlisからの問いを受け取る」のON／OFFを置く。通知設定とは別の本人選択とする。 |
+| 初期値・保持 | 初めて使うときはON。本人が選んだON／OFFを次回の入力へ保持し、入力画面で変更できる。 |
+| ON | 応答の理解を進める重要な不足がある場合だけ、最大3問の範囲で尋ねる。ONでも問い不要なら直接応答する。 |
+| OFF | 今回の問いを出さず、その入力と既存の許可された材料から応答する。OFFをプラン別の履歴参照権利や保存済み本人補足の取消しにはしない。 |
+| 問いを出すとき | 短く受け止めたうえで、重要な一点を問う。回答を受けて理解を更新し、必要なら次の一問、十分なら応答へ進む。本人は続行・終了を選べる。 |
+| 応答する時点 | 問い不要、十分に分かった、本人のskip／終了、最大3問到達のいずれか。その時点の本人情報で返し、不明を推測で埋めない。 |
+| 表示の目的 | 問い前後の全文応答の変化を比較させることは目的にしない。毎roundで完成した全文応答を出すことを要求しない。短い受け止めを、固定文型・固定文字数や最終応答全体の短文化へ広げない。 |
+
+初期ONは本人の問い受取設定の初期値であり、運用feature flag／公開承認／既存runtimeのON化を意味しない。設定の保存先、アカウント切替・端末間・再インストール時の保持方式と具体的UI配置は実装時に既存ownerへ適合させる。今回、端末間同期等まで成立済みとは扱わない。
+
+### 一問ごとの判断
+
+「まだ知らない情報がある」だけでは尋ねない。「その答えで、本人の話の理解、応答の焦点、選択の受け止め方が実質的に変わるか」を見る。単なる復唱が作れることだけで十分な理解と判定せず、本人の気がかりや選択を理解するうえで重要な不足を扱う。
+
+1. 既に本人が話したことと、まだ分からないことを分ける。未知を性格・動機・他者の意図などの事実へ変換しない。
+2. 取り違えると応答の方向が変わる点、本人の気がかりに直接関係する点、未回答で一点に絞って尋ねられる点を優先する。
+3. 回答のたびに次の問いの必要性を見直す。最初から3問の筋書きを固定せず、既に回答された内容を聞き直さない。
+4. 無関係な背景や、今回の応答に必要のない価値観の起源まで掘り続けない。原入力の読み落とし・生成失敗を本人への問いで埋め合わせない。
+5. 「もう返せる」は本人の全容を解明したという意味ではない。分かっている出来事・気持ち・選択を、重要な箇所の推測補完なしに本人に沿って返せる状態を指す。
+
+### 終了理由を混同しない
+
+| 終了理由 | 応答・追加質問の扱い |
+|---|---|
+| 必要な理解が得られた | 得られた内容を結び付けて応答する。残枠を使い切るための問いは出さない。 |
+| OFF／skip／本人終了 | その時点の有効な本人情報から返す。答えなかったことを性格・動機・否定回答の根拠にしない。skip後に同じ問いを言い換えたり、別の問いへ即差し替えたりしない。 |
+| 最大3問に到達 | 理解が十分になったとは限らない。重要な不明を残したまま、その範囲で返す。本文末尾の「よければ教えてください」等に4問目を隠さず、別threadへの付替えで上限を回避しない。 |
+
+既存の「分からない」・無回答を正常終了として扱う境界は保持する。この決定から、新たな無回答timeoutや自動再質問を追加しない。
+
+元入力と各本人回答・訂正・撤回は既存の別source／版として保持する。生成した質問文・応答本文を本人情報へ昇格しない。料金、既存のプラン別参照範囲、Pieceで本人回答を使う際の明示選択、Analysisの累積対象を今回の問数変更から拡張・縮小しない。
+
+### 判断をすり合わせた架空例
+
+以下は華恋が作成した説明用の入力・回答・問いであり、Mash本人の経験、Mash逐語の応答教師、実4B出力・実機成功ではない。Mashは3問で内容が鮮明になったことを確認し、上記方針を採用した。教材化・学習・評価への投入実績は今回0。
+
+| 元入力項目 | 内容 |
+|---|---|
+| 今の気持ち | 喜び：弱、不安：弱。他の感情・自己理解は未選択。 |
+| どんな場面？ | 仕事のみ |
+| 考えたこと・感じたこと | 役に立てたのは嬉しい。でも、自分の作業が残ったのが気になる。 |
+| 出来事・行動 | 同僚に頼まれて資料を直した。「助かった」と言われた。自分の作業は明日に残った。 |
+| 感情通知を送らない | ON |
+
+短い受け止めは「役に立てた嬉しさも、ご自身の作業への気がかりもあるのですね。」とし、本人が続ける場合の一つの分岐を示した。
+
+| 問い | 架空の本人回答 | 新しく分かること |
+|---|---|---|
+| 「自分の作業が残ったのが気になる」のは、なぜですか？ | 明日の午前中に出す資料なので、間に合うか心配なんです。今日、もう少し進めておきたかったです。 | 気がかりは自分の締切。引き受けた理由は未確認。 |
+| 同僚の資料を手伝うと決めたときは、どんなふうに考えていましたか？ | 前に私が困っていたとき、その同僚が手伝ってくれたので、今度は自分が助けたいと思いました。10分くらいで終わると思ったんですが、実際には修正が多くて。 | 引き受けた本人の意図と作業量の見込み違い。現在の評価は未確認。 |
+| 今振り返って、手伝ったこと自体はどう感じていますか？ | 手伝ってよかったと思っています。ただ、何をどれくらい直すのか、先に確認してから引き受ければよかったです。 | 選択への肯定、締切への心配、本人が見直したい点を分けて応答できる。 |
+
+この回答分岐で「断れない性格」「人を優先する性格」「手伝ったこと自体への後悔」と固定しない。1問目で必要な事情がすべて語られれば1問で終了し、別の理由が語られれば次の問いと応答を変える。
+
+### 構築・確認への接続
+
+AR-02で現naturalへの問い・本人回答・更新を接続する際、この決定を使用する。問いの文章だけでなく、尋ねる必要性・次の焦点・終了判断も扱う。0問、1／2問で十分になる例、3問で鮮明になる例、回答で次の焦点が変わる例、OFF／skip／終了、3問後にも不明が残る例を、元入力・本人回答・実出力を分けて確認する。設定の初期ON・前回選択保持と、保存再読・旧保存互換も既存経路で確認する。
+
+現状は旧Q1／Q3の問い・回答更新機構が存在する一方、現natural自身の任意問い・回答後更新は未接続で、初回はFINAL／COMPLETEDとなる。今回の記載を接続完了・学習済み・実機受入れへ換算しない。待ち時間・費用は実測時に確認し、未測定値や新しい料金・月間quotaを本決定から作らない。
+
 > 2026-10-14 u253：明示評価と独立行動の限定変更を承認に基づき実装中。内部契約差分と品質未達は末尾、検証は06／API handoff u253。
 
 > 2026-09-11 最新Q4残件：複数回答をそれぞれの出来事・時点へ結び付け、既存の受け止めへ保持する実装を検証。最新結果は06/API handoff末尾「複数回答」節。商品NOT_CLEAR、既定OFF。
@@ -225,7 +299,7 @@ V1-A runtime policy:
 | Resolution | Normal observation use |
 |---|---|
 | `UNIQUE` | 必要条件にすぎない。matching `JapaneseAttachmentAdmission`がapproved route contract下で当該owner / witnessをadmitした場合だけrequired dutyへ使用可能 |
-| `AMBIGUOUS` | approved providerless Route A knowledgeと§18 current plan contractではambiguityに依存しないmeaningful limited claim、または各round target exact1のsemantic clarificationだけを候補化できる。thread budgetはFree／Plus 0..1、Premium sequential 0..3。同一product-quality improvement unit内のconstraintであり、別Gateにしない |
+| `AMBIGUOUS` | approved providerless Route A knowledgeと§18 current plan contractではambiguityに依存しないmeaningful limited claim、または各round target exact1のsemantic clarificationだけを候補化できる。thread budgetの構築目標は11/12決定により全plan 0..3（旧実装Free／Plus 0..1と区別）。同一product-quality improvement unit内のconstraintであり、別Gateにしない |
 | `UNRESOLVED` | unresolved部分を言い切らず、limited／plan-budget内の一round一問／unavailable／separate safetyだけを候補化できる。同一product-quality improvement unit内のconstraintであり、別Gateにしない |
 
 parserのone-bestだけで`UNIQUE`にしない。user clarificationはmeaning choiceを追加できるが、parserの過去outputをretroactive truthへしない。
@@ -558,6 +632,8 @@ P6のstructure thinkingはFreeにもLayer 1として返す。構造思考自体�
 
 ### 18.2 Input-history thread
 
+表示順・問い回数の現行構築目標は[2026-11-12決定](#emlis-question-policy-20261112)を優先する。以下の旧Layer別round 0全文応答→問い→全文更新の図は過去の設計／保存資産の説明であり、新しい短い受け止め→問い→回答後応答の表示順を上書きしない。
+
 ```text
 no question:
   original input
@@ -601,13 +677,13 @@ Emlisはcurrent threadのoriginal + supplemental answerを使える。Analysis�
 
 | Plan | source scope | output | question |
 |---|---|---|---:|
-| Free | `CURRENT_THREAD_ONLY`。original + same-thread supplemental | Layer 1 + Layer 2。Layer 3なし | thread 0..1 |
-| Plus | current thread + eligible owned history | Layer 1 + Layer 2 + eligible Layer 3 0..1 | thread 0..1 |
+| Free | `CURRENT_THREAD_ONLY`。original + same-thread supplemental | Layer 1 + Layer 2。Layer 3なし | thread 0..3（11/12決定・実装未反映） |
+| Plus | current thread + eligible owned history | Layer 1 + Layer 2 + eligible Layer 3 0..1 | thread 0..3（11/12決定・実装未反映） |
 | Premium | current thread + eligible owned history + evidence-bound interpretive frame + allowed user-owned cross-core context | Layer 1 + Layer 2 + eligible Layer 3 0..1 | sequential 0..3 |
 
 Freeもthread／artifactを保存する。ただし、別入力の次回Emlis生成sourceとしてpast input、derived user model、cross-core contextを使わない。same-current-thread supplemental answerは有料の過去履歴利用に数えない。
 
-Premiumでは一画面へ三問を一括表示しない。各roundでLayer 1／2を先に返し、重要unknownが残り、本人が続行を選び、budgetが残る場合だけquestion exact1を出す。skip、stop、分からない、無回答はいつでも正常終了である。
+全planで一画面へ三問を一括表示しない。11/12決定では短く受け止めて必要な一点を尋ね、本人回答で次の問い要否を見直す。最大3問、本人のON／OFF・skip／終了と、十分なら0／1／2問で返す判断を優先する。各roundでLayer 1／2の全文を先に表示する旧順序は今後の目標にしない。既存の保存source／版の境界は保持する。
 
 ### 18.4 Premium interpretive frame
 

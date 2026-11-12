@@ -1,3 +1,5 @@
+> **2026-11-12・現在の問い構築目標：** 全plan最大3問、入力画面の受取ON／OFF（初期ON・前回選択保持）。短い受け止め→重要な一点→回答に応じた次問／応答とし、OFF・skip・本人終了・3問到達、十分な理解による0／1／2問終了を区別する。[採用決定と判断例](../designs/cmee/v1/02_emlis_v1a_detailed_design.md#emlis-question-policy-20261112)をAR-02で使う。新仕様は未実装。旧Q1／Q3機構の存在と、現natural自身の問い／回答後更新の未接続を分ける。本文中の旧1／3問・各round全文先行・未実装とする過去記述は当時の設計／実績であり、最新仕様や現接続を上書きしない。
+
 > 11/8 AR-01の有限役割・認識補助：API候補e14d4fecへ明記格／焦点構文と認識・内容の別範囲を接続し、旧semantic inventory／body inverseの必要責務を現自由文へ適合。237局所検証と同commitの2 CI成功。架空development controlsのbaseline16＋構造補助16＝32実生成は49.554327秒・全HTTP200／stopだが、人物・時点・話し方の残差で通常不採用。追加の原文表記補助6構成は私的prototypeで完了し、全HTTP200／stop・9.090525秒。同6sourceの3版18本文を独立照合し、役割反転・本人誤継承の局所修復を確認。ただし記録者混入・原文外因果・本人宛の語り口／感情と時点の結合等が残り通常不採用。短く正しい一度の言換えは失敗に数えない。補助表現と専用SYSTEMの同時変更で、単独要因の効果とは断定しない。e14 sourceへこのprototypeは反映していない。 実32は隔離SQL保存・同／別service GET一致を確認し、captureとSQLのsource参照差は全32の両参照を保持。私的prototype6はSQL未実施。保存32のreportは範囲内非衝突4／未判定28・衝突0、全文coverage全32 false。認識helperはsource補助で、自由文の認識一般比較済みではない。通常use_meaning_support=False、Render通常API497f7008は未変更でe14未配置。STRUCTURE_MAP_DELTA_PRESENT（候補sourceの有限読取／補助選択責務）、全資産活用・AR-01完了とはしない。 [既存AR-01実行記録](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/README.md)。
 
 > 11/8 補助経路活用AR-01続行：新8単独16更新と旧36＋新8の低LR混合44更新を、同じ元dbから別々に実施。新120生成・保存再読87件／length拒否1件を確認。混合で一部退行を抑えたが、役割・主体・認識時点の誤りが残り全候補通常不採用。元提供を復元・health200。次は残る意味誤読を旧meaning obligations／body inverse／候補比較の必要部品で修復し、同じ学習を周回しない。今回の商品source・配置・実DB／RN／build変更0、STRUCTURE_MAP_DELTA_NONE。AR-01は継続中。 [全結果と再開点](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/learning_replay_review.md)。
@@ -344,31 +346,23 @@ NLS v3 Step10 public routingは同file内でdisabledであり、Cycle001 candida
       -> semantic gate
       -> ReplyEnvelope
 
-### 2.3 Future observation and question system
+### 2.3 問い・回答・応答の構築目標（2026-11-12決定）
 
-将来のEmlis問いsystemは、質問だけを返すchat routeではない。
+現在の構築目標は[全プラン最大3問の採用決定](../designs/cmee/v1/02_emlis_v1a_detailed_design.md#emlis-question-policy-20261112)。入力画面の問い受取は初期ON、本人の前回選択を保持する。OFF／問い不要なら有効な材料で応答する。ONかつ重要な不足があるときは短く受け止め、一点を問う。本人回答で理解を更新し、必要なら次問、十分なら応答へ進む。毎roundの完成全文先行や、問い前後の全文比較を目的にしない。
 
-    original input as USER_OWNED_SOURCE
-      -> round 0 Layer 1 + Layer 2
-      -> if important unknown remains and plan budget remains:
-           question exact1
-           -> supplemental answer as a separate USER_OWNED_SOURCE
-           -> refined Layer 1 + Layer 2
-           -> next sequential round only when allowed
-      -> Plus/Premium and eligibility satisfied:
-           Layer 3 0..1
+全planで元入力1件のthreadにつき最大3問。0／1／2問終了、本人skip／終了、3問到達を正常な終了として区別し、終了時の有効な本人情報で返す。3問到達を十分理解した証拠にはしない。問いは一つずつ、回答に応じて選び直す。
 
-observation stage、問い要否decision、visible artifactを分離する。Free／Plusのquestion budgetはthread全体で0..1、Premiumは逐次0..3である。一画面へ複数問を一括表示せず、skip、stop、分からない、無回答を正常終了として扱う。
+旧Q1／Q3の問い・回答更新機構は存在するが、現natural自身の問い／回答後更新は未接続。新決定をコード／画面／通常提供へ反映済みとは扱わない。接続作業は既存AR-02で行う。
 
-問いdecisionとquestion本文はcontrol／derived lineageでありsemantic sourceではない。回答だけがsupplemental sourceとなり、original inputを上書きしない。問いがない場合もoriginal、Layer 1、Layer 2を同じinput-history threadへ順番に保存する。
+問いdecisionとquestion本文はcontrol／derived lineageであり本人sourceではない。本人回答は元入力と別source／版で保持する。ON／OFFや問数の変更から既存の履歴・frame・他coreのsource権利を変更しない。
 
 ### 2.4 Plan別source・artifact contract
 
 | Plan | Allowed user-owned source | Rejected source | Visible target | Question budget |
 |---|---|---|---|---|
-| Free | current threadのoriginalとsame-thread supplemental answers | past input、derived user model、cross-core context | Layer 1、Layer 2。Layer 3なし | thread全体で0..1 |
-| Plus | current threadとeligible owned history | 許可外cross-core derived artifact | Layer 1、Layer 2、条件成立時Layer 3 0..1 | thread全体で0..1 |
-| Premium | current thread、eligible owned history、許可済み本人context | Piece生成本文、Analysis推定／IF、過去Emlis本文 | Layer 1、Layer 2、条件成立時Layer 3 0..1 | sequential 0..3 |
+| Free | current threadのoriginalとsame-thread supplemental answers | past input、derived user model、cross-core context | 旧Layer資産は保持。表示順は§2.3 | thread全体で0..3（新決定・未反映） |
+| Plus | current threadとeligible owned history | 許可外cross-core derived artifact | 旧Layer資産は保持。表示順は§2.3 | thread全体で0..3（新決定・未反映） |
+| Premium | current thread、eligible owned history、許可済み本人context | Piece生成本文、Analysis推定／IF、過去Emlis本文 | 旧Layer資産は保持。表示順は§2.3 | sequential 0..3（新設定・表示順は未反映） |
 
 Premiumの商品contractの中心表現は次のとおり。
 
@@ -389,7 +383,7 @@ interpretive frameは本人情報から導く処理境界であり、本人が�
 |---|---|---|
 | TodayQuestion product | CURRENT_ACTUAL / 別product route | ai/services/ai_inference/api_today_question.py、ai/services/ai_inference/today_question_store.py。Emlis内部問いと混同しない |
 | Emlis internal question candidate | DORMANT_OR_PARTIAL | ai/services/ai_inference/emlis_ai_internal_question_service.py、ai/services/ai_inference/emlis_ai_question_dominance_guard.pyは存在するがcurrent reply serviceから未接続 |
-| Emlis observation-and-question system | DESIGNED_NOT_IMPLEMENTED | observation-first、各roundの問いはexact1、Free／Plus 0..1、Premium sequential 0..3、skip可能、同じthreadでrefined observation |
+| Emlis observation-and-question system | 旧Q1/Q3機構あり／現natural自身の問い・回答後更新は未接続 | 11/12決定は全plan最大3問、受取ON／OFFと前回選択保持、短い受け止め→問い→回答後応答。新決定は未実装。§2.3と採用決定を参照 |
 
 問い関連fileの存在を、問いsystemの商品完成へ変換しない。
 

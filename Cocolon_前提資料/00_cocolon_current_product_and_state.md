@@ -1,3 +1,5 @@
+> **11/12・Emlis問い仕様の決定（実装未反映）：** 全プラン元入力1件につき最大3問。入力画面の「Emlisからの問いを受け取る」は初期ON・前回選択を次回へ保持。短い受け止め→必要な一点の問い→本人回答を受けた応答／次問とし、十分なら0／1／2問でも終了。OFF・skip・本人終了・3問到達時はその時点の有効な本人情報で返す。新しい問い判断と旧Q1/Q3／未接続の現naturalを分け、料金・参照範囲・現AR-04再開点は変更しない。 [決定全文・架空例・AR-02への接続](designs/cmee/v1/02_emlis_v1a_detailed_design.md#emlis-question-policy-20261112)。
+
 > **11/12・AR-04最新：** 研究2dddc0a3の通常host接続run43128036253を開始、結果未判定。Free原録画051/007を異なるownerのまま使い、actual saved-input host→実native fit/明示save→receipt→fresh owner詳細→fresh export/actual job.captureを同じ本文/recipe/3hash/保存rowで確認する新1method。原HTTP録画ではなく実API wire ownerによる明示test投影（expiry/quota/合成Auth）、別Premium native6は不使用。元7group生成bytes・製品native.mm581/pin・8秒不変、V4失敗14→26は未修復で今回は未実行。通常model selector OFF・未採用を維持。 [既存natural観測の接続と現在地](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
 
 > **11/10・AR-04最新：** 引用内stopを持つ新4件＋保持GENERAL07の現builder送信messagesを固定し、13,140byte・2memberの無学習比較packetを準備。構文compile／CRC／member照合は成功、実モデル生成・送信・提供停止0。非環境の稼働確認はhealth200。起動環境全体の読取りは認証情報を含み得るとして自動承認審査に拒否され、未実行。新packet送信と、完全復元に必要な環境内再利用の具体承認待ち。API5816f2d0／f6dae研究候補・通常selector OFF・本番未反映を維持。 [具体packet・確認範囲・再開点](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quote-stop-inference-prepared-20261110)。
@@ -170,7 +172,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | 感情・強さ | 喜び／悲しみ／怒り／不安／平穏と弱中強。自己理解は排他的な特別タグで、強さUIなし・wireはmedium | 自己理解を通常感情の分布・感情通知へ混ぜない。時刻・カテゴリ・所有者とともに扱う |
 | 入力draft・履歴 | 本人別local draftと期限、検索・秘匿・削除、保存済み入力への再入場のコードあり | 回答draft・全中断復帰まで一括保証しない。削除・所有者切替・期限切れ後の派生物利用を別条件として扱う |
 | Emlis初回 | 旧保存profileの二段を維持。新private natural_reply.v1は本人宛応答/通常入力/SQL保存/DTO/RNへsource接続。文数固定なし・分析NOT_GENERATED・旧意味/問い保持 | §21の実HTTPS→隔離Q3保存2件・GET4回/start2回を保持。最新§30は新2組4更新/保存freshreload/34EOS完了、否定反転再発・因果補完等で6e1c不採用。§30時点の否定対照診断4生成案は未実行。最新配分は11/1機構準備、11/2〜11/6サーバー側品質改善（§31）。API744336c0配置/RN6701内部配布済み。実Auth→固定4B→実DB FINAL保存1件→本人同本文再読を§37で確認。過去Q3で保存済みの適格本人回答／訂正をnatural入力材料へ渡すsourceは接続済み。一方、新natural自身はFINAL／COMPLETEDで、新たな任意問い・回答後更新・frame訂正の一往復は未接続。旧Q1／Q3の実装済み経路と分ける。新観測材料生成そのものも未完。PRODUCT_NOT_CLEAR/正式0/3/candidate_ready=false |
-| Emlis任意問い・回答更新 | 問いは実装済み。Free／Plusはthread全体0..1、Premiumは本人続行により逐次0..3。skip・終了・訂正・撤回・再読あり。原入力と補足を別sourceとして束縛 | 問いを出さないENDだけで十分理解したとは判断しない。回答は新規感情入力件数や国家eventへ加算しない。一般入力・回答後本文・本人実機一往復の品質が残る |
+| Emlis任意問い・回答更新 | **11/12決定：全plan 0..3、初期ON・前回選択保持、短い受け止め→問い→回答後応答。** 旧Q1/Q3実装はFree／Plus 0..1・Premium 0..3で、skip・終了・訂正・撤回・再読と別source保存あり | 新決定は実装未反映。現natural自身の問い／回答後更新は未接続。0問終了だけで十分理解したとは判断せず、終了理由を区別する。回答は新規感情入力件数や国家eventへ加算しない。一般品質・本人実機は残件 |
 | Emlis有料拡張 | Free当回のみ。新naturalは全閲覧権利内の本人原入力/回答/訂正からn-gram関連候補をPlus3/Premium6選択し保存guardを固定。新RPCは実DB適用済み。Plus365日権利は維持 | 合成provider/実SQLで検索・保存・失効境界を確認。実4Bの意味ある履歴応答と本人端末は未完。Premium等の販売延期は未採用案 |
 | 配置と本人確認 | 最新APIba0de502/dep-dbjckv5g1s2s73fc6uegは14:16:37 JST Live、read_only設定変更なし。main/autoDeploy OFF維持。最新RN3a8660ba/7001はApple処理通過・内部配布済み | Emlis初回の実Auth→固定4B→DB保存→本人同本文再読は6701/§37で確認、応答popupは6801で本人確認済み。6901の余白位置はMashが問題なしと確認。Piece preview422/生成未完成と§39の表示修復を区別。常時提供/一般品質/追加応答/正式受入れは残る |
 | 27B旧試験（選定除外） | 10/23 Mash決定で27Bを候補から除外。`Qwen3.8-27B-Q4_K_M.gguf`の試験は履歴として保持。10/21、架空相談2題×実演あり／なし×初回／回答後＝8出力の推論試験 | 追加情報の取込みは見られたが、未確認な意味の補完、近い問いの再提示、更新記録の欠落が残る。実演ありの一貫した優位未確認。重みの追加学習0、27BのCMEE統合0、他core適性未検証、製品採用未確定。Pod停止はMash報告受領済み |
@@ -256,11 +258,11 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 | プラン | 仕様・表示上の体験 | 成立状況の限界 |
 |---|---|---|
-| Free | 当回Emlisと任意1問、全期間を対象にした共通の現在map、月次map直近2回閲覧、Piece月5、入力等の一般履歴は当月＋前月 | code・表示と、自然な本人理解の品質は別 |
-| Plus | 適格本人履歴を用いたEmlis、こころ天気の文章／理由、共通の現在map・月次map直近12回閲覧、Piece月30 | 履歴参照と有料差の体感は同義ではない |
-| Premium | 修正できるframeと本人続行の最大3問、長期weather・共通の現在mapと月次map全期間、一般履歴／Piece無制限、設計上のIF・Saved | IF／Saved未実装。旧period版のlight／standard／deepと、新累積map共通の採用方針を混同しない |
+| Free | 当回Emlis。問いは11/12決定で全plan共通最大3問（旧codeは最大1問）、全期間を対象にした共通の現在map、月次map直近2回閲覧、Piece月5、入力等の一般履歴は当月＋前月 | code・表示と、自然な本人理解の品質は別 |
+| Plus | 適格本人履歴を用いたEmlis。問いは11/12決定で最大3問（旧codeは最大1問）、こころ天気の文章／理由、共通の現在map・月次map直近12回閲覧、Piece月30 | 履歴参照と有料差の体感は同義ではない |
+| Premium | 修正できるframeと本人続行の最大3問（11/12決定で全plan共通化。新しい設定・表示順は未反映）、長期weather・共通の現在mapと月次map全期間、一般履歴／Piece無制限、設計上のIF・Saved | IF／Saved未実装。旧period版のlight／standard／deepと、新累積map共通の採用方針を混同しない |
 
-10/31最新：Mashの明示指示でPlus月680円／Premium月1,480円へ変更。RNのcatalog・選択画面・account料金helperとAPI fallbackを同期し、Supabase `subscription_plan_catalog`の`price_label`／`note_lines_json`を対象2行だけ更新・独立再読した。料金・案内と`updated_at`以外のDB列は不変。既存APIはPlus／Premiumの`note_lines`を公開時に空にするため、DB案内の更新を画面表示成功とは扱わない。実ストア請求額・税込区分、本人端末表示は未確認。11/1に公開`/subscription/bootstrap`200で680/1480円を直接確認し、RN6601をUploadしたがApple90683となり、修正後の6701で内部配布/本人起動を確認した。10/23時点の月300円／980円は変更前の記録。Pieceの5/30/無制限は保存数で、新AI生成数の上限ではない。Emlisの1/3問もthread単位であり、月間生成費を制限しない。
+10/31最新：Mashの明示指示でPlus月680円／Premium月1,480円へ変更。RNのcatalog・選択画面・account料金helperとAPI fallbackを同期し、Supabase `subscription_plan_catalog`の`price_label`／`note_lines_json`を対象2行だけ更新・独立再読した。料金・案内と`updated_at`以外のDB列は不変。既存APIはPlus／Premiumの`note_lines`を公開時に空にするため、DB案内の更新を画面表示成功とは扱わない。実ストア請求額・税込区分、本人端末表示は未確認。11/1に公開`/subscription/bootstrap`200で680/1480円を直接確認し、RN6601をUploadしたがApple90683となり、修正後の6701で内部配布/本人起動を確認した。10/23時点の月300円／980円は変更前の記録。Pieceの5/30/無制限は保存数で、新AI生成数の上限ではない。旧Emlisの1／3問、新決定の全plan最大3問はいずれもthread単位であり、月間生成費を制限しない。
 
 **10/23 Mash決定：Plus980円／Premium1,980円が価格の上限（これでも高い）、27Bは候補外。10/24は680円／1,480円を価格候補として検討する。980／1,980は9Bの損益分岐価格ではなく、独自LoRA版の本番原価は未測定。** 旧1,980/3,980円の推奨と27B再試験案を撤回。[小型AI再選定・全core原価](observation_learning/model_selection/2026-10-22-three-core/2026-10-23-small-model-reselection.md)では、Mashの残高利用希望により、Qwen3.5-9BのM1をMashがRunpod A40で実行し、4件の受領原本と全本文を照合済み。画面上のGPU単価は$0.59/h、起動前残高$5.15。受領原本のvLLM0.32.0／BF16／非thinking／context8192／温度0で、要求90.607秒・4805token。インストール・読込・待機を含むGPU総時間・総消費は未確認。Stop完了はMash報告を受領済みで、管理画面の独立確認はしていない。DeepInfra既製APIは比較資料へ残し、Qwen3.5-4Bは当時の別候補から、10/24のMash決定で一度確定した後、10/25に撤回された。10/23の旧比較では980/1,980円を基準とし、Free30/Plus100/Premium150セッション等の利用量でも、以前のDeepInfra既製APIを仮定した月原価は約5.57/37.07/147.28円で、Runpod自己hostの原価ではない。無料者・固定基盤・税相当留保・ストア費を含めて計算した。これらは利用量感度で、商品quota変更・採用・品質合格ではない。独自追加学習版の配備に公開API単価を流用せず、育成費・学習後のhost費用は別確認。旧費用資料は履歴として参照する。
 
