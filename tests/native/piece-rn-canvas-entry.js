@@ -841,7 +841,8 @@ class NormalHostCases extends CanvasCases {
           navigation_body_free: this.navigationObserved === true,
           fresh_owner_read: this.transport.snapshot().api.some(call => call.method === 'GET' &&
             call.path === '/emotion/piece/' + fixture.save.piece_id),
-          owner_record_matches: matches && artifact.row_version === fixture.save.row_version };
+          owner_record_matches: matches && artifact.row_version === fixture.save.row_version,
+          recorded_artifact_matches: matches };
       } else {
         const attempt = this.ownerHost.exportAttempt, target = attempt?.target;
         const before = target?.isCurrent() === true;

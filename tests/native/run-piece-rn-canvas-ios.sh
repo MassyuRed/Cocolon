@@ -472,7 +472,7 @@ collect() {
   container=$(xcrun simctl get_app_container "$DEVICE" org.reactjs.native.example.tempCocolon data 2>/dev/null || true)
   if [ -n "$container" ] && [ -d "$container/Documents/piece-rn-canvas" ]; then
     cp -R "$container/Documents/piece-rn-canvas" "$OUT/evidence"
-    cat "$OUT/evidence/results.json"
+    cat "$OUT/evidence/normal-host-results.json"
   fi
   if [ -d "$OUT/result.xcresult" ]; then
     xcrun xcresulttool get --legacy --path "$OUT/result.xcresult" --format json 2>&1 | tee -a "$OUT/xcodebuild.log" || true
