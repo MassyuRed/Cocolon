@@ -4,11 +4,11 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-12 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR03_HISTORY_TEACHING_CPU_PREPARED_NOT_TRAINING_READY
+status: AR03_TOKENIZER_VERIFIED_FIT16_PREPARED_NOT_EXECUTED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Frozen T8 plus D4 source messages prepared; establish actual tokenizer/template and initial base/LoRA, then reuse encoding primitives; no automatic GPU/fit"
+current_next: "CPU tokenizer/masks verified; bounded fresh-LoRA16 packet prepared, waiting for explicit upload/fit/pause-restoration approval; no automatic execution"
 runtime_effect_of_this_document: 0
 ---
 
@@ -721,6 +721,51 @@ bootstrapの合成応答はライフサイクル用で、teacher targetでも実
 次は凍結したT8＋D4のmessages／source prefix／snapshotを保ち、実cached tokenizer／chat templateと初期base／LoRAの選択を具体化し、既存encode_trainingでassistant-only mask・単一終端・無切詰め・context長を確認する。旧44runner全体や新しい学習基盤・checkerへ置き換えない。その確認前にfit承認を求めず、更新数・比較数・時間枠・実行承認は今回から生成しない。先行実6の承認は消費済みで、新GPU／fit／提供再起動／重み変更／通常採用へ自動進行しない。
 
 primary BLOCKER_NARROWED。STRUCTURE_MAP_DELTA_NONE（製品owner／route／公開型／DB／RN／Safety変更0）。先行実6の品質失敗・通常flag OFF、AR-03・AR-02二入力訂正・一般品質・他AR／三中核・本人端末・正式商品受入れの未完を維持する。
+
+
+
+<a id="auxiliary-history-tokenizer-fit-prepared-20261112"></a>
+## 9.10 2026-11-12 — 実tokenizer・学習範囲を確認、16更新の一回案を準備して承認待ち
+
+**11/12・AR-03の実tokenizer確認を完了、16更新比較案は未実行：** 凍結T8＋D4を既存PodのCPUで5.025885秒、同851bf6eの非thinking templateと既存encoding部品で確認。全12入力・source prefix不変、T8のassistant-only mask／単一終端／無切詰め成立。最大prompt1213・training1238、GPU／model load／学習／提供再起動0、PID73476／health200維持。同じ固定baseからfresh LoRAを作る一回案を23,353byteへ具体化し、T8の16更新＋前後22比較・提供前後4確認を復元込み最大600秒に固定。packet未送信／未実行・個別承認待ち。準備12件のRESOLVED補助0・H8未準備・先行場面混同・通常flag OFFは不変。
+
+### 実CPU確認
+
+既存Podのcached Qwen3_5Tokenizer／固定851bf6e、transformers5.19.0／tokenizers0.23.3／torch2.8.0+cu128を使用した。旧44runner全体を動かさず、未改変の既存encode_trainingとassistant_loss_windowだけを呼び、凍結T8＋D4の12messages／source prefix一致、T8のprompt完全mask・assistant本文＋単一終端・切り詰めなしを確認。最大prompt1213＋生成予約2048＝3261でcontext8192内、最大training1238、教師の学習対象は13～25token。template／tokenizer filesのhashは前後同一。
+
+CPU処理5.02588485297747秒／上限120秒、CUDA未初期化、model load／GPU call／学習／提供再起動0。前後PID73476、health200/200。鍵ファイル・全起動環境を読み取らず、後続の復元対象についてはprocessの非秘密な識別情報と既存adapter hash／GPU使用量を読み取った。元提供・既存重み・通常設定の変更0。
+
+Pod原本48,921bytes／4members／SHA256 `c19816827a0095acb3cd5f3f5ded40c0155d0ee1983990a2bc6a8b4afea5fc31` を回収し、CRC・全12入力・token配列／mask／loss範囲をPod外照合。inputs57,194bytesのSHA256 `85ff5bc3bf3dbf8729b58ae273abf8010201616b53196892452ada913b11d850`。このtechnical creditはtokenizer／mask／長さだけで、4Bのforwardや学習効果・商品品質ではない。
+
+### 初期化と一回比較の具体案
+
+fresh API493の通常naturalはbase_inference_contextでAnalysis adapterを無効にする設計。一方、稼働PodはPiece用の派生serverであり、model aliasやhealthだけでlive source／全base重みをcurrent Gitと同一認定しない。今回の初期候補は、同じ固定base851からfresh LoRAを作る方式とする。旧db／replay44の不採用重みは引き継がない。
+
+既存fit24のr8／alpha16／dropout0、56module／112tensor／3,833,856parameter、assistant-only CEを再利用する。これらは既存実設定で、今回の新adapterを作成済みとはしない。seed42／AdamW／LR1e-5／weight_decay0／clip1は今回の候補で、最適性・改善を保証しない。
+
+| 実行対象 | 固定する件数 |
+|---|---:|
+| 架空T8 | 各2回、16更新だけ |
+| 限定D4＋既露出scoped失敗3 | 前後14生成 |
+| 既使用plain4の保持 | 前後8生成 |
+| 元提供のnatural／Analysis | 停止前各1＋復元後各1、4生成 |
+| 上限 | 研究22＋提供4＝26生成、再試行0 |
+
+plain4は日常の喜び／未入会・未決定／兄と本人の所有／原因不明を扱う。現source ownerから再導出し、旧messages・source prefixと一致。既失敗3のmessagesは前回凍結原本から変更0、教師化0。D4は既存文型からの限定対照で、広い未知評価へ数えない。教師全8件の追加生成は行わず、loss前後は非生成の診断として分離する。
+
+全体600秒を一つの時計で管理し、研究処理を開始から330秒、学習を180秒へ制限。子終了、元提供の一回復元に最大180秒、前後確認とarchive時間を先取りする。停止前にCPU準備・全prompt長・元source／adapter・前確認を終える。停止前の失敗では元提供へ触れず、停止要求後は同じPIDの終了を確認してから、元argv／起動環境／cwdで一度だけ復元。SIGTERM後の一時health200を復元完了とせず、二重起動・候補の通常登録・追加runをしない。
+
+実行時に限り、認証情報を含み得る起動環境全体を同Pod内メモリだけへ一時保持して元提供の復元へ使う。既存natural／Analysisの名前を指定した2鍵を同Pod127.0.0.1の前後確認認証にだけ使用。環境・鍵値のログ／artifact保存・外部転送0、学習子は固定した必要環境のみ。新規レンタル・依存install・本番設定／DB変更0。読み取り時のGPUはRTX4000 Ada／20,475MiB／使用10,886MiB。新学習のVRAM／所要は未測定で、完走を保証しない。
+
+独立code reviewで、fresh reload前のGPU参照残存、SIGTERM後の復元分岐、終了競合による復元漏れを修正した。syntax・件数・凍結入力・同梱hashを確認したが、新runnerのGPU／停止復元runtimeは未実行。実22本文は原文と並べて全読し、過去評価の今回への転送・撤回scope逸脱・「はい」からの補完・本人の受け取りの事実／相手意図化・plainの退行があれば不採用。D04で履歴を無視しただけなら意味ある履歴利用は未成立。loss・EOS・保存reload・UNASSESSEDは意味品質の証明ではない。
+
+### 保存・承認境界と残件
+
+既存 `Cocolon_CMEE_AR03_HistoryTeaching_Candidates_20261112.zip`／Library `libfile_fde3_f-9e0e8945ad208191a053021e810be6d6_2f7470f963808191aaebf050935e72de` をversion1へ更新。127,415bytes／16members／SHA256 `793ed2dda26dbaaaa8e58e843bdb14084d4c1e0ff4166677e729fcf43cdebadf`。version0のsource7membersを原bytesで保持し、旧READMEも別名で保持。CPU原本・所見・source・UIで読んだ復元対象の非秘密な識別情報・未実行の一回packetを追加した。browser screenshot・credential・環境・Git-backed製品sourceは含めない。
+
+送信候補packet `ar03_history_fit16_prepared_20261112.zip` は23,353bytes／5members、SHA256 `0031bd6d17934bfe06f3e9a5b762672c6fcfac275733df5b8823ff19e0dcda6e`。未送信／未実行。追加学習と提供の停止・復元は、消費済みの学習／再起動なし6call承認を超えるため、上の具体scopeでMashの個別承認を待つ。今回の準備からGPU／fitへ自動進行しない。
+
+primary TECHNICAL_CREDITは実tokenizer／mask／入力長の成立に限定。STRUCTURE_MAP_DELTA_NONE。準備12件のRESOLVED補助0、UNASSESSED7／容量省略5、H8未準備、先行実6の場面混同・通常flag OFFを維持。AR-03・二入力訂正・一般品質・他AR／三中核・live反映／本人端末・正式商品受入れは未完。実rawのSQL保存・非生成再読も、今後のGPU比較結果とは別に確認する。
 
 
 ## 10. 変更箇所と検証
