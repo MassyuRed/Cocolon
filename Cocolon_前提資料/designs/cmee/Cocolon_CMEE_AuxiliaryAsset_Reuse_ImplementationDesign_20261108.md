@@ -4,11 +4,11 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-12 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR03_SCOPED_ACTUAL6_COMPLETE_QUALITY_NOT_ACCEPTED
+status: AR03_HISTORY_TEACHING_CPU_PREPARED_NOT_TRAINING_READY
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Scoped actual6 complete, normal adoption withheld; stop prompt-only repetition and inspect existing teaching/learning assets for finite source-paired author work; no automatic GPU/training"
+current_next: "Frozen T8 plus D4 source messages prepared; establish actual tokenizer/template and initial base/LoRA, then reuse encoding primitives; no automatic GPU/fit"
 runtime_effect_of_this_document: 0
 ---
 
@@ -687,6 +687,41 @@ API source／test変更0。準備API493cd728の既存local118成功を保持し�
 実失敗rawは評価証拠として保持し、正しい教師本文やMash逐語教師へ変換しない。教示候補の作成・学習必要性・GPU学習の実施・通常重み採用は別状態であり、今回の結果から追加学習の必要性や実施を確定しない。今回6call承認は完了・消費済み。新GPU／fit／retry／新weights／通常採用・本番反映へ自動進行しない。
 
 STRUCTURE_MAP_DELTA_NONE（実行・読取・保存再読・状態更新で製品owner／public型／route／DB／ファイル責務の変更0）。既存研究候補は保持するが通常flag OFF。AR-03・AR-02二入力訂正・一般応答品質・他中核／他AR・本番／本人端末／正式受入れは未完。
+
+
+<a id="auxiliary-history-teaching-cpu-20261112"></a>
+## 9.9 2026-11-12 — 既存44教師と場面帰属を照合、教示8件・限定対照4件のCPU準備
+
+**11/12・AR-03の既存44教師照合と教示草案をCPU準備：** 実44行は全て当回だけで、過去記録／本人回答／answer_meaningの直接教示0。華恋作成の架空教示8件と限定開発対照4件を、現API493cd728の既存SQL／service／source ownerで実発行問い・回答付き履歴から準備。別題材案8件は問いが発行されず未準備を保持。準備12件の意味補助は7件UNASSESSED／5件容量省略でRESOLVED0、原入力・全回答は保持。学習効果・通常採用の証拠ではない。GPU／model load／学習0、実tokenizer・初期base／LoRAは未確定。先行実6の場面混同・通常不採用を維持し、次は既存encoding部品で今回12件の学習範囲・長さを具体化する。新学習／GPUへ自動進行しない。
+
+### 既存資産と、今回の教示候補
+
+MixedReplay44の実原本を取得し、全44行のsystem／user／assistantを確認した。past_user_records／current_answers／user_frame_feedbackが全て空で、answer_meaningもない。同一記録内の昔／今日、怒りの否定、共存する感想は扱うが、記録をまたぐ本人回答・訂正・撤回の直接教示はこのpackにはない。全既存教材に教示がない、不具合の原因が教材不足、追加学習すれば直る、とは断定しない。
+
+旧runnerはfree・events=[]・補助OFFと旧不採用重みを固定するため丸ごと再実行しない。既存encode_training／teacher_lossのassistant-only、単一終端、無切詰めの部品を再利用候補として確認した。旧44教師・重み・source prefixは変更せず、今回の履歴source identityは現ownerから導出した。
+
+教示T01–T08は全て華恋の架空草案で、Mashの逐語教師・実入力・承認済み正解ではない。過去だけの評価／今回明示の評価、同文の別場面／明示回想、過去の原文反応撤回／今回の同文保持、未対応回答／明示された過去との接続を扱う。T02・T04・T08では使える履歴を使い、全履歴無視を成功へ数えない。譲歩を因果へ変えない本文に修正し、本文としてrootと独立agentが読んだ。過去の原文反応の撤回を、別sourceの選択感情の全撤回へ広げない。
+
+先行する実失敗「褒められた／過去だけ重かった」の3組は既露出の評価証拠として保持し、教師やMash教示へ変換していない。別題材H01–H08は、現serviceが問いを発行しなかったため想定回答付き履歴を準備できず、原案を未準備で保持した。手作りQUESTIONや回答・RESOLVEDの注入は0。D01–D04は既存の過去の誘い／依頼文型を使い、今回の場面・表現を変えた限定開発対照である。教師と語彙・責務が重なるため、完全に独立した未知品質や広い一般化評価とは扱わない。
+
+### 現ownerで成立したCPU範囲と不足
+
+API493cd728の既存Q3隔離SQL/RPC・serviceで、実発行問い→本人役の回答保存→完了履歴→今回問いOFF→hydrate／source admission→ordinaryと研究用materialを導出した。T8＋D4の全12件で、過去入力と全回答、二欄・感情ごとの強度・複数カテゴリ、原文と補助のsource prefix一致を確認。関係する製品6fileと既存fixture2fileのGit blobは同headと一致する。前回以前のsource prefixを新しい入力へ流用していない。
+
+T8の意味補助は4件UNASSESSED・4件が既存5800byte予算による省略。D4は3件UNASSESSED・1件省略で、**準備12件のRESOLVED補助は0**。全原入力・回答は保持し、補助が落ちた入力を短く修補して補助付き成功にしていない。この草案は原履歴を読むための教示であり、active／inactive補助の利用成功・検査精度・学習効果を実証していない。
+
+bootstrapの合成応答はライフサイクル用で、teacher targetでも実4B rawでもなく、モデル入力から除外する。保存snapshotはmaterial導出用で、完全なSQL全表復元原本や、実model rawの保存・非生成再読とは呼ばない。実RN入力・live Auth／Supabase／Render／本人端末・正式受入れも未確認。
+
+草案探索と修正後の最終準備をCPUで実施した。model load／GPU call／学習更新0、tokenizer・template・mask・token長は未確認。製品source／test変更0、先行118成功を今回の新件数へ加算しない。Analysis CI43227044779を同API493cd728のcompleted/successとして再照会、Piece43227044634の先行成功も保持。dispatch／rerun0。
+
+### 保存と次の一作業
+
+新原本 `Cocolon_CMEE_AR03_HistoryTeaching_Candidates_20261112.zip` をLibrary `libfile_fde3_f-9e0e8945ad208191a053021e810be6d6_2f7470f963808191aaebf050935e72de` version0へ保存。41,262bytes／8members、SHA256 `c53eeb21a9aca42b33e22ac9742327de00e205f310ce829fabfc66af9b190e36`。草案全20件、実発行問い・未準備理由・準備済み12messages／snapshot／source prefix、旧44のsource形照合、未改変の既存encoding部品、CPU準備source、関係するGit identityと限界を保持。認証情報・全環境・画像・Git-backed製品sourceを含めない。旧MixedReplay44教師SHA256は `e1872344ce3842c0d59ed13fc82c1ca99a3a83b33514d2d91ac5a9e4d12db2f9`、原本Library v0を不変参照する。
+
+次は凍結したT8＋D4のmessages／source prefix／snapshotを保ち、実cached tokenizer／chat templateと初期base／LoRAの選択を具体化し、既存encode_trainingでassistant-only mask・単一終端・無切詰め・context長を確認する。旧44runner全体や新しい学習基盤・checkerへ置き換えない。その確認前にfit承認を求めず、更新数・比較数・時間枠・実行承認は今回から生成しない。先行実6の承認は消費済みで、新GPU／fit／提供再起動／重み変更／通常採用へ自動進行しない。
+
+primary BLOCKER_NARROWED。STRUCTURE_MAP_DELTA_NONE（製品owner／route／公開型／DB／RN／Safety変更0）。先行実6の品質失敗・通常flag OFF、AR-03・AR-02二入力訂正・一般品質・他AR／三中核・本人端末・正式商品受入れの未完を維持する。
+
 
 ## 10. 変更箇所と検証
 
