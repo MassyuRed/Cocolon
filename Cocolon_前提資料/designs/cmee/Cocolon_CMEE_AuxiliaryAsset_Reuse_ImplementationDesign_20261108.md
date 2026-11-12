@@ -8,7 +8,7 @@ status: CROSS_CORE_ACTUAL7_COMPLETE_GENERATION_QUALITY_NOT_ACCEPTED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Actual7 complete; improve current generation quality and AR-02 correction/AR-03 history; qualified Piece/Analysis SQL and normal adoption remain pending"
+current_next: "AR03 historical-answer research candidate CPU verified; compare prepared six actual outputs only after new bounded approval; normal adoption and other AR remain pending"
 runtime_effect_of_this_document: 0
 ---
 
@@ -539,6 +539,36 @@ Pieceのexported owner／input IDは非UUID、Analysisのguard／as_ofは固定f
 実原本は `Cocolon_CMEE_AuxiliaryTransfer_Actual4B_20261112.zip`、Library ID `libfile_fde3_f-21b9eebf426c81919fcc7b8670d6dbca_2f7470f963808191aaebf050935e72de`、132,723bytes・18members、SHA256 `583ce5b3d64093366424cf84be7bee69922c33eef210f774891feff591de70fe`。実results JSON 65,188bytesのSHA256は`f685b813995712c0fd3dca59aa2d41046fdf0bd3ebf26b086c5cd9be7005b838`。実wire/raw、前後SQL再読、invalid alias replay、独立本文所見、元packetとone-off再生手順を保持。認証値／全環境／Git-backed製品sourceは含めない。元Prepared archiveも実行前の原本として保持する。
 
 Primary outcomeは`TECHNICAL_CREDIT`、一般生成品質のhuman acceptance／通常採用は0。`STRUCTURE_MAP_DELTA_NONE`（既存質問判定の活用範囲だけを修復しowner/公開contractを追加しない）。三中核の返答・作品・地図の品質未達、二入力訂正、意味ある履歴、適格sourceでのPiece／Analysis SQL保存、他ARと通常反映・端末は残件。新しい承認Gate・共通framework・controller・checkerを追加せず、今回の拒否修復だけを補助経路全体の完了にしない。
+
+<a id="auxiliary-history-answer-meaning-20261112"></a>
+## 9.5 2026-11-12 — 過去の本人回答・撤回を現naturalの研究入力へ移管（実4B未実行）
+
+**11/12・AR-03履歴更新の移管候補：** API `eab40e2fce5420d3ee00e8b64d7890b2d776e2a3`。既存owned-historyの全回答再導出と本人回答active／inactive投影を、naturalの研究明示`use_meaning_support=True`へ接続。原入力・全回答・対応する問いは保持し、最新回答が未対応なら過去の解決済みcheckpointへ戻さずUNASSESSED。補助だけを既存5800byte全messages予算へ収め、超過時は原sourceを削らず補助を外す。自然応答系3module117件成功（既存警告1）。通常提供は未変更。架空履歴3組の旧新6応答・45,136byteの一回比較を準備、Pod送信／実4B生成／学習／再試行／提供再起動0。実出力の改善・通常採用・AR-03完了は未成立。
+
+### 回収した能力と維持する境界
+
+`emlis_thread_history.admitted_history_plans`が各適格過去記録の最新の全回答から`prepare_emlis_meaning`を再導出し、RESOLVEDだけを返す既存責務を再利用する。`natural_reply._answer_meaning_material`で同じ過去request／admitted sourceに結び付く原文anchor・位置を取得し、その過去record内の`answer_meaning`へ置く。新しい作者、classifier、checkpoint保存先、公開DTO／route／SQLは追加しない。
+
+同じ`input_id`の当時の意味だけを扱い、現在の性格・意図へ移さない。本人が訂正したclaim／relationだけをinactiveとして扱い、訂正されていない出来事・選択・感情を消さない。未対応の最新回答はrawの全回答とUNASSESSEDを保持し、古い解釈・AI本文・saved meaning checkpointから補わない。原source認可、権利、履歴選択、source guard、Safety、frame feedbackの現責務は不変。
+
+履歴補助と現在source witnessは既存5800byteの全messages予算を共有する。超過時は既存履歴順の後ろから補助だけ外す。元source自体が上限を超える場合も原文を切らず従来入力を維持する。この上限は任意補助の採否で、原source全体の新しい拒否条件ではない。通常serviceは引き続き`use_meaning_support=False`で、今回の候補を通常生成・保存済み本文へ自動採用しない。
+
+### 今回確認したこと
+
+- 旧新とも同じ隔離SQL／RPCで保存した原入力・本人回答を使う。Freeでは履歴0、Plus／Premiumでは同じ適格履歴だけを使用。
+- 新9対照は撤回／更新／未対応×3plan。原入力・全回答・ai_question_contextの完全保持、原文位置、過去保存原本不変、公開DTOへの補助非露出、非生成再読を確認。予算1への強制対照では補助だけ外れ、通常materialへ完全一致。
+- 自然応答系3moduleは117 passed／FAIL0／SKIP0、28.63秒、既存Pydantic非推奨警告1。初回は検証fixtureのsnapshot全体比較が可変`now`／変更済みtierまで含めて失敗し、保存原本・thread・eventsだけの不変検査へ是正した。製品sourceの失敗とは数えない。
+- 独立読取reviewで補助が既存予算を迂回する問題を確認し、上記の予算共有へ修復。最終reviewにblockingなし。これは別modelのProduct Read・正式商品合格ではない。
+
+### 次の具体的な一回比較
+
+架空の撤回／更新／未対応履歴3組で、同じsourceの補助なし／候補ありの6要求。compact messagesは3,961→5,684、3,943→5,766、3,925→4,560bytes。実tokenizer数・実出力・速度・金銭原価は未測定。既存稼働Pod `f1lle4xwq3wjln`の自然応答用model aliasを提供引数から取得し、同Podの127.0.0.1だけに送る。
+
+一回script45,136bytes、SHA256 `70db62ff7e8e4eb3a1080197247f3f6252cbe9d9bc86170706e8f6a03ffa8a28`。最大420秒・6生成・各60秒期限、学習／再試行／提供停止再起動／重み変更0。既存`EMLIS_NATURAL_REPLY_API_KEY`一鍵だけを同Pod内認証へ使い、全環境の読取・鍵値の表示／保存／外部出力はしない。前後healthとPIDを確認し、専用出力folderの再利用を拒否する。前回7callの承認は完了・消費済みで、新しい一回へ流用しない。新しい具体承認前のPod送信／生成は0。
+
+準備原本 `Cocolon_CMEE_AR03_HistoryMeaning_Prepared_20261112.zip`、Library ID `libfile_fde3_f-e61ca84c43ac819183e9e3c7f762275f_2f7470f963808191aaebf050935e72de`、17,406bytes／4members、SHA256 `43c49f7e74290610bd041516f6fd6f23c8d0cf37c64aff511d073ee166b42c81`。Git-backed製品source・認証値・全環境は含まない。実行後は6本文を原文と比較し、意味保持・撤回復活・別時点混同・自然さ・反復を華恋が全件読み、改善が成立した場合だけ通常採用を検討する。不成立時に同じprompt試行を自動反復しない。
+
+STRUCTURE_MAP_DELTA_PRESENT（研究明示時の履歴意味投影に既存ownerを再利用）。商品品質の改善・human acceptance・通常採用は未成立。二入力訂正、一般生成品質、Piece／Analysisの適格SQL保存、live／本人端末、他ARは残件。
 
 ## 10. 変更箇所と検証
 
