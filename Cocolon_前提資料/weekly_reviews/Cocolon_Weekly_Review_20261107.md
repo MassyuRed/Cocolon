@@ -1,6 +1,6 @@
 # 第10回 Cocolon週末報告会 — 2026-11-07（終了）
 
-> **11/12・AR-04最新：** 研究36335452/run43146249187はattempt1で実行中。58b62ffcの007saved stage2拒否を受け、既存host/ModalのiOS native dismiss ACK後にowner遷移する候補を公開。空の閉Modal保持・presentation epoch・旧要求取消しを既存部品へ接続し、native harnessは手動ACKなしで閉要求→ACK後遷移→saved mountの順序を確認する。既存5testfileの重複除外474PASS（独立18含む）・full JSX成功、native compile/新6frameは未判定。STRUCTURE_MAP_DELTA_PRESENT_RESEARCH_CANDIDATE_ONLY、通常source未採用。native581/guard/return/clock/8秒・旧期待・Free録画条件を維持、selector OFF・旧V4失敗14→26・AR-04未完。 [既存natural観測の接続と現在地](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
+> **11/12・AR-04最新：** 研究36335452/run43146249187はattempt1・新同1method成功。両作品のpreview/saved/export全6frameで本文/native canvas/alpha/元8秒が成立し、手動ACKなしの閉要求→native ACK後遷移→saved mountと両actual export PNG一致を確認。実検証は研究363のsourceで、同じ製品2/単体2fileを今回通常Draftへ採用する。native harnessは採用せず、新normal headのCI成功は主張しない。既存474PASS（独立18含む）・full JSXも継承。STRUCTURE_MAP_DELTA_PRESENT。native581/guard/renderer/8秒不変、model selector OFF/重み未採用・旧V4失敗14→26は未解決。AR-04一般編集品質/実Auth/API/DB/本人端末・正式0/3/他ARは未完。 [既存natural観測の接続と現在地](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
 
 記録日：2026年11月7日（日本時間）  
 対象週：**2026年11月7日〜11月14日**  

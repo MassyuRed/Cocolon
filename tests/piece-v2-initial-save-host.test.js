@@ -57,7 +57,7 @@ function unit({ provider = () => true, entropy, saveEnabled = true, mode = 'cont
     setState(value) { this.state = { ...this.state, ...(typeof value === 'function' ? value(this.state) : value) }; }
   }, createElement: (type, props, ...children) => ({ type, props: props || {}, children }) };
   const context = vm.createContext({ React, AppRuntimeContext: {}, View: 'View', Button: 'Button', Text: 'Text',
-    PiecePreviewModal: 'PiecePreviewModal', AbortController,
+    PiecePreviewModal: 'PiecePreviewModal', Platform: { OS: 'ios' }, AbortController,
     AppState: { currentState: 'active', addEventListener: (_name, callback) => {
       appListener = callback; return { remove() {} }; } },
     Alert: { alert: (...args) => alerts.push(args) },

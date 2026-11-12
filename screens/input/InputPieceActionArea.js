@@ -13,7 +13,7 @@
  */
 import React from 'react';
 import { AppRuntimeContext } from '../../AppRuntimeContext';
-import { Alert, AppState, View, Text } from 'react-native';
+import { Alert, AppState, Platform, View, Text } from 'react-native';
 import Button from '../../components/CocolonButton';
 import { createPieceCreateController } from '../../features/piece/PieceCreateController';
 import { PieceApiError, preparePiecePreviewRequest, requestPieceSourceRef } from '../../features/piece/pieceApi';
@@ -67,7 +67,8 @@ export default class InputPieceActionArea extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { revision: 0, open: false };
+    this.state = { revision: 0, open: false, modalRetained: false, modalEpoch: 0 };
+    this.pendingSavedNavigation = null;
     this.mounted = false;
     this.controller = null;
     this.boundStamp = null;
@@ -100,11 +101,13 @@ export default class InputPieceActionArea extends React.Component {
     this.refreshSavedInput = this.refreshSavedInput.bind(this);
     this.createFromSavedInput = this.createFromSavedInput.bind(this);
     this.receiveSaveFit = this.receiveSaveFit.bind(this);
+    this.previewDismissed = this.previewDismissed.bind(this);
   }
 
   componentDidMount() {
     // Create anew on every mount, including development StrictMode remounts.
     this.mounted = true;
+    this.abandonPreviewPresentation();
     this.saveFitHandle = null;
     this.foreground = AppState.currentState === 'active';
     this.boundStamp = null;
@@ -120,6 +123,7 @@ export default class InputPieceActionArea extends React.Component {
       // Props may have changed before componentDidUpdate; an old response must
       // not close or refresh the next account/source's runtime presentation.
       if (!this.isCurrent()) return;
+      this.abandonPreviewPresentation();
       this.setState({ open: false });
       // Existing runtime refresh clears cached Piece flags synchronously. No
       // new resolver, event bus, auth payload, preview retry or legacy fallback.
@@ -131,6 +135,7 @@ export default class InputPieceActionArea extends React.Component {
       if (!this.mounted) return;
       this.foreground = next === 'active';
       if (!this.foreground) {
+        this.abandonPreviewPresentation();
         if (this.savedMode) this.clearSource();
         if (!this.syncSavedOperation(false)) {
           if (this.savedMode) this.controller.setContext({ enabled: false });
@@ -147,9 +152,14 @@ export default class InputPieceActionArea extends React.Component {
     this.setState({ open: false });
   }
 
-  componentDidUpdate() { this.syncContext(); }
+  componentDidUpdate() {
+    if (this.pendingSavedNavigation && !this.savedNavigationCurrent(this.pendingSavedNavigation))
+      this.pendingSavedNavigation = null;
+    this.syncContext();
+  }
 
   componentWillUnmount() {
+    this.pendingSavedNavigation = null;
     this.mounted = false;
     this.saveFitHandle = null;
     this.clearSource();
@@ -211,6 +221,7 @@ export default class InputPieceActionArea extends React.Component {
   }
 
   clearSource() {
+    this.pendingSavedNavigation = null;
     const previous = this.sourceAttempt;
     this.contextSyncToken = Object.freeze({});
     this.sourceAttempt = null;
@@ -234,6 +245,7 @@ export default class InputPieceActionArea extends React.Component {
     if (stamp === this.boundStamp && runtime === this.boundRuntime && savedMode === this.savedMode &&
         sourceStamp === this.boundSavedInputStamp) {
       if (saveEnabled === this.boundSaveEnabled) return;
+      this.abandonPreviewPresentation(true);
       // A save-only flag update must not discard a valid source read or preview.
       // A new runtime publication still takes the normal suspension path below.
       this.contextSyncToken = Object.freeze({});
@@ -247,6 +259,7 @@ export default class InputPieceActionArea extends React.Component {
       this.changed();
       return;
     }
+    this.abandonPreviewPresentation();
     // While the same account/runtime remains current, close only the local
     // preview so the existing controller can reject a changed request with the
     // same key. Disabling here would erase that request/key binding.
@@ -379,6 +392,7 @@ export default class InputPieceActionArea extends React.Component {
     // An unknown POST, PATCH, save or cancellation never reaches this action.
     // Drop the obsolete binding before reading; a different source_ref must
     // never be submitted under the original preview's idempotency key.
+    this.abandonPreviewPresentation();
     this.controller.setContext({ enabled: false });
     if (!this.isCurrent() || this.boundStamp !== stamp || this.boundRuntime !== runtime) return;
     this.clearSource();
@@ -409,6 +423,12 @@ export default class InputPieceActionArea extends React.Component {
     this.expiryTimer = null;
     if (this.isCurrent()) {
       const display = readPiecePreviewDisplay(this.controller.getView());
+      // These are the existing render branches that omit the native Modal.
+      // Release its presentation identity from the controller/source callback,
+      // so a later explicit saved-open never waits for an abandoned ACK.
+      if (display.phase === 'hidden' || this.savedMode && this.sourcePhase !== 'ready' &&
+          !display.previewRestartToken && !['cancel', 'save'].includes(display.retryKind))
+        this.abandonPreviewPresentation();
       if (display.expiresAtMs !== null) {
         const delay = Math.min(2147483647, Math.max(0, display.expiresAtMs - Date.now()));
         this.expiryTimer = setTimeout(() => {
@@ -416,15 +436,32 @@ export default class InputPieceActionArea extends React.Component {
           if (this.mounted && this.foreground) this.controller?.refresh();
         }, delay);
       }
-    }
+    } else this.abandonPreviewPresentation();
     // Do not store a body-bearing view in React state or event callbacks.
     this.setState(previous => ({ revision: previous.revision + 1 }));
+  }
+
+  abandonPreviewPresentation(keepOpen = false) {
+    this.pendingSavedNavigation = null;
+    if (!this.state.open && !this.state.modalRetained) return;
+    // These existing context/background boundaries unmount the native Modal.
+    // Its old ACK cannot release a later outside-button action. A save-only
+    // publication may preserve an open preview as a new presentation.
+    this.setState(previous => ({ open: keepOpen && previous.open,
+      modalRetained: keepOpen && previous.open && Platform?.OS === 'ios',
+      modalEpoch: previous.modalEpoch + 1 }));
+  }
+
+  openPreview() {
+    this.pendingSavedNavigation = null;
+    this.setState(previous => ({ open: true, modalRetained: Platform?.OS === 'ios',
+      modalEpoch: previous.open ? previous.modalEpoch : previous.modalEpoch + 1 }));
   }
 
   start() {
     if (!this.isCurrent() || this.restoreSaveRecovery() || (this.savedMode && this.sourcePhase !== 'ready') ||
         this.controller.getView().phase !== 'idle') return;
-    this.setState({ open: true });
+    this.openPreview();
     void this.controller.start();
   }
 
@@ -433,7 +470,7 @@ export default class InputPieceActionArea extends React.Component {
     const display = readPiecePreviewDisplay(this.controller.getView());
     if (!this.state.open && !['cancel', 'save'].includes(display.retryKind)) return;
     if (display.canRetry) {
-      this.setState({ open: true });
+      this.openPreview();
       void this.controller.retry();
     }
   }
@@ -451,7 +488,7 @@ export default class InputPieceActionArea extends React.Component {
     // A retained expired request already has the saved source reference.
     // The explicit POST reauthenticates and checks that reference again.
     if (this.savedMode) this.sourcePhase = 'ready';
-    this.setState({ open: true });
+    this.openPreview();
     void this.controller.restartExpired(token, key);
   }
 
@@ -550,22 +587,52 @@ export default class InputPieceActionArea extends React.Component {
     } catch { return false; }
   }
 
+  savedNavigationCurrent(pending) {
+    return !!pending && this.isCurrent() && this.canOpenSavedPiece() &&
+      this.controller === pending.controller && this.boundStamp === pending.stamp &&
+      this.boundRuntime === pending.runtime && this.boundSavedInputStamp === pending.sourceStamp &&
+      this.context?.runtime === pending.runtimePublication && this.contextSyncToken === pending.syncToken &&
+      this.props.navigation === pending.navigation && this.controller.getView().phase === 'saved' &&
+      this.controller.getView().savedReceipt === pending.receipt;
+  }
+
+  navigateSavedPiece(pending) {
+    if (!this.savedNavigationCurrent(pending)) return;
+    try { this.props.navigation.getParent().navigate('Piece', {
+      screen: 'PieceOwnerHistory', params: { savedPiece: pending.target }, initial: false,
+    }); } catch { /* The saved receipt remains available for an explicit open. */ }
+  }
+
+  previewDismissed(epoch) {
+    if (!this.mounted || this.state.open || !this.state.modalRetained || this.state.modalEpoch !== epoch) return;
+    const pending = this.pendingSavedNavigation;
+    this.pendingSavedNavigation = null;
+    this.setState({ modalRetained: false });
+    if (pending?.epoch === epoch) this.navigateSavedPiece(pending);
+  }
+
   openSavedPiece(receipt) {
-    if (!this.isCurrent() || !this.canOpenSavedPiece()) return;
-    const view = this.controller.getView();
+    if (this.pendingSavedNavigation || !this.isCurrent() || !this.canOpenSavedPiece()) return;
+    const controller = this.controller, view = controller.getView();
     if (view.phase !== 'saved' || !receipt || view.savedReceipt !== receipt) return;
     const expectedUserId = this.savedMode
       ? JSON.parse(this.boundSavedInputStamp)[1] : this.props.context.expectedUserId;
-    // Navigation carries no preview body, recipe, save key or cached artifact.
-    const target = Object.freeze({ pieceId: receipt.piece_id, expectedUserId });
+    // The full-screen iOS modal must finish dismissing before the owner's
+    // screen mounts. Keep only this body-free handoff; no drawing is retained.
+    const pending = { controller, receipt, stamp: this.boundStamp, runtime: this.boundRuntime,
+      sourceStamp: this.boundSavedInputStamp, runtimePublication: this.context?.runtime,
+      navigation: this.props.navigation, epoch: this.state.modalEpoch,
+      target: Object.freeze({ pieceId: receipt.piece_id, expectedUserId }) };
+    const waitForDismiss = Platform?.OS === 'ios' && this.state.modalRetained === true;
     this.close();
-    if (!this.isCurrent() || !this.canOpenSavedPiece() || this.controller.getView().savedReceipt !== receipt) return;
-    try { this.props.navigation.getParent().navigate('Piece', {
-      screen: 'PieceOwnerHistory', params: { savedPiece: target }, initial: false,
-    }); } catch { /* Saved state remains available for another explicit open. */ }
+    pending.syncToken = this.contextSyncToken;
+    if (!this.savedNavigationCurrent(pending)) return;
+    if (waitForDismiss) this.pendingSavedNavigation = pending;
+    else this.navigateSavedPiece(pending);
   }
 
   close() {
+    this.pendingSavedNavigation = null;
     if (!this.mounted) return;
     this.contextSyncToken = Object.freeze({});
     const stamp = this.boundStamp, runtime = this.boundRuntime;
@@ -593,6 +660,7 @@ export default class InputPieceActionArea extends React.Component {
     const bodyStyle = { ...ui?.typography?.body, color: colors.TEXT_ON_LIGHT };
     const statusStyle = { gap: 12, padding: 20, borderRadius: 24, borderWidth: 1,
       borderColor: colors.CARD_BORDER, backgroundColor: colors.PANEL_BG };
+    const modalEpoch = this.state.modalEpoch;
     const view = this.controller.getView();
     const checked = readPiecePreviewDisplay(view);
     const provider = this.props.isSaveAdmitted, handle = this.saveFitHandle;
@@ -645,7 +713,9 @@ export default class InputPieceActionArea extends React.Component {
       }) : null,
       !this.state.open && onOpenSaved ? element(Button, { title: '保存したPieceを確認',
         accessibilityLabel: '保存したPieceを確認', onPress: onOpenSaved }) : null,
-      element(PiecePreviewModal, { visible: this.state.open, display, onClose: this.close, onOpenSaved,
+      element(PiecePreviewModal, { key: this.state.modalEpoch, visible: this.state.open,
+        retainDismiss: this.state.modalRetained, onDismiss: () => this.previewDismissed(modalEpoch),
+        display, onClose: this.close, onOpenSaved,
         onRetry: this.retry, onRefreshSource: this.savedMode ? this.refreshSavedInput : null,
         onRestartExpired: this.restartExpired, onVisualChange: this.changeVisual, onFormatChange: this.changeFormat, onReturnToFormat: this.returnToFormat, onCancel: this.cancelPreview, onSave,
         onSaveFitChange: this.receiveSaveFit }),

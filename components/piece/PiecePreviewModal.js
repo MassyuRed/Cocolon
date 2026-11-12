@@ -19,10 +19,16 @@ const plans = { free: 'Free', plus: 'Plus', premium: 'Premium' };
 const branding = { required_small: 'あり', required_subtle: 'あり', off: 'なし' };
 const themes = PIECE_THEME_LABELS;
 
-export default function PiecePreviewModal({ visible = false, display, onClose, onRetry, onRefreshSource, onRestartExpired, onVisualChange, onFormatChange, onReturnToFormat, onCancel, onOpenSaved, onSave, onSaveFitChange }) {
+export default function PiecePreviewModal({ visible = false, retainDismiss = false, onDismiss, display, onClose, onRetry, onRefreshSource, onRestartExpired, onVisualChange, onFormatChange, onReturnToFormat, onCancel, onOpenSaved, onSave, onSaveFitChange }) {
   const { colors, themeName } = useTheme();
   const ui = makeUiTokens(colors, themeName);
-  if (visible !== true || !display || display.phase === 'hidden') return null;
+  if (visible !== true || !display || display.phase === 'hidden') {
+    // Keep the same native iOS Modal until its dismissal ACK, with no private
+    // body or child tree after close. The host owns any body-free handoff.
+    return retainDismiss === true ? element(Modal, { supportedOrientations: MODAL_ORIENTATIONS,
+      visible: false, animationType: 'slide', presentationStyle: 'fullScreen',
+      onRequestClose: onClose, onDismiss }) : null;
+  }
   const received = display.phase === 'received' && display.hashVerified === true && display.preview;
   const preview = received ? display.preview : null;
   const selection = preview ? { theme_id: preview.visual_recipe.theme.theme_id,
@@ -155,7 +161,7 @@ export default function PiecePreviewModal({ visible = false, display, onClose, o
   ].filter(Boolean);
   return element(Modal, {
     supportedOrientations: MODAL_ORIENTATIONS,
-    visible: true, animationType: 'slide', presentationStyle: 'fullScreen', onRequestClose: onClose,
+    visible: true, animationType: 'slide', presentationStyle: 'fullScreen', onRequestClose: onClose, onDismiss,
   }, element(SafeAreaProvider, { style: { flex: 1, backgroundColor: colors.BG_SILVER } },
     element(SafeAreaView, { edges: ['top', 'right', 'bottom', 'left'], mode: 'padding',
       style: { flex: 1, backgroundColor: colors.BG_SILVER } },

@@ -1,15 +1,15 @@
-> **11/12・AR-04最新：** 研究36335452/run43146249187はattempt1で実行中。58b62ffcの007saved stage2拒否を受け、既存host/ModalのiOS native dismiss ACK後にowner遷移する候補を公開。空の閉Modal保持・presentation epoch・旧要求取消しを既存部品へ接続し、native harnessは手動ACKなしで閉要求→ACK後遷移→saved mountの順序を確認する。既存5testfileの重複除外474PASS（独立18含む）・full JSX成功、native compile/新6frameは未判定。STRUCTURE_MAP_DELTA_PRESENT_RESEARCH_CANDIDATE_ONLY、通常source未採用。native581/guard/return/clock/8秒・旧期待・Free録画条件を維持、selector OFF・旧V4失敗14→26・AR-04未完。 [既存natural観測の接続と現在地](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
+> **11/12・AR-04最新：** 研究36335452/run43146249187はattempt1・新同1method成功。両作品のpreview/saved/export全6frameで本文/native canvas/alpha/元8秒が成立し、手動ACKなしの閉要求→native ACK後遷移→saved mountと両actual export PNG一致を確認。実検証は研究363のsourceで、同じ製品2/単体2fileを今回通常Draftへ採用する。native harnessは採用せず、新normal headのCI成功は主張しない。既存474PASS（独立18含む）・full JSXも継承。STRUCTURE_MAP_DELTA_PRESENT。native581/guard/renderer/8秒不変、model selector OFF/重み未採用・旧V4失敗14→26は未解決。AR-04一般編集品質/実Auth/API/DB/本人端末・正式0/3/他ARは未完。 [既存natural観測の接続と現在地](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
 
-研究36335452の構造差分は`STRUCTURE_MAP_DELTA_PRESENT_RESEARCH_CANDIDATE_ONLY`。既存EmlisThreadModal/SemanticWatashiMapのdismiss ACK資産を、Pieceの既存2ownerへ適用した研究候補であり、通常product sourceは未採用。研究2dddc0a3の`tests/fixtures/piece-ar04-configured3-host.json`（Free録画051/007の明示wire投影）とnative harness接続は先行実装として継承する。
+`STRUCTURE_MAP_DELTA_PRESENT`：既存EmlisThreadModal/SemanticWatashiMapのdismiss ACK資産をPieceの既存2ownerへ適用し、研究36335452で実native6frame成功を確認した同じ製品2/単体2fileを今回の通常Draft変更単位へ採用する。native harnessは通常側へ採用せず、配置/配布は未実施。研究2dddc0a3の`tests/fixtures/piece-ar04-configured3-host.json`（Free録画051/007の明示wire投影）とnative harness接続は先行検証として継承する。
 
-| 既存path | 研究候補での責務差分 |
+| 既存path | 今回の責務差分・採用範囲 |
 |---|---|
 | `screens/input/InputPieceActionArea.js` | 本文なしのpending receipt/owner遷移identity、presentation epoch、ACK後再確認・失効/再開を所有 |
 | `components/piece/PiecePreviewModal.js` | 閉じた同じiOS Modalを内容なしで保持し、native onDismissをhostへ返す。認可/保存/native fitを所有しない |
 | `tests/piece-v2-preview-display.test.js`、`tests/piece-v2-initial-save-host.test.js` | ACK・旧ACK・owner/source/runtime変更・取消し後の再openを既存経路で確認 |
-| `tests/native/piece-rn-canvas-entry.js`、`tests/native/piece-rn-canvas-ios.m` | 手動ACKなしで閉要求→ACK後遷移→saved mountの順序/boolを実画面の新同1methodへ接続 |
+| `tests/native/piece-rn-canvas-entry.js`、`tests/native/piece-rn-canvas-ios.m` | 研究36335452だけ。手動ACKなしで閉要求→ACK後遷移→saved mountの順序/boolを新同1methodで実証。通常側への採用なし |
 
-公開API/DB/route/native型・renderer・8秒は不変、新controllerなし。全6pathと固定source SHA、未判定CIは上記trialへ戻る。
+公開API/DB/route/native型・renderer・8秒は不変、新controllerなし。全6研究pathと採用4pathの対応、固定source SHA、研究CI成功と新normal head CI非実行の区別は上記trialへ戻る。
 
 > **11/10・AR-04最新：** API2ec79ad0で時点付き本人「は」好み評価の同本人省略を既存S7継続へ接続。明示承認後、保存f6daeで新3＋保持2の実4B本文を1回・学習0で確認。GENERAL01の自然な2文目省略が旧比較で保留されたため、同block・隣接・同じ本人表記の既存条件だけを再利用し、5/5採用・3plan計15保存／非生成再読。保持2の前回request／raw／revisionと凍結69照合行の採否／本文／messagesは不変。9HTTP・97.268秒で元提供復元／health／前後control一致。f6dae研究候補・通常selector OFF、本番未反映。 [実4B新3・保存と次](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model3-inference-result-20261110)。
 
