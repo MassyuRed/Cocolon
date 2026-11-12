@@ -256,6 +256,8 @@ Analysisの既存source adapter→semantic admission→compiler→唯一realizer
 
 ### 7.1 Piece
 
+**11/12・新しい一般材料の実4B確認：** 稼働中base4Bで架空の段落／二欄／適格refinedの3件を一回実生成し、全3が原文維持だった。CMEE／S7・隔離Free保存／再読は成立したが編集改善0、保存344a・live Auth／DB／端末の成功ではない。次は保存候補の同じ独立材料を確認し、実際の本文に現れた問題だけを直す。全file／全仕様の確認は継続中とし、古い状態表だけで全体進捗・終了日・未実装範囲を断定しない。 [実原本と次の比較](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-general3-base-actual-20261112)。
+
 **11/12・動作文に続く同本人評価の省略読取：** 既存private `_piece_model_read_block`の、同block内の明示SELF継続・同じ本人表記を確認済みの分岐で、既存 `_piece_model_evaluation`を再利用する。評価対象「読書が」を汎用subject判定が別の主語として拒否する前に、完全な既存評価文法で読む。不成立なら従来のsubject拒否／feeling・finite処理へ進む。sourceの全節明示SELF資格とsource／本文の全key比較を維持し、一時読取viewをrawや確定本文へ書き戻さない。FOCUSの「が」や価値評価の「にとって」は補完しない。新文法・作者・prompt・S7・公開型／DB／通常selectorの変更はない。合成CPUの誤拒否修復であり、実4Bの品質改善実証ではない。 [実装・検証](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-evaluation-continuity-20261112)。
 
 **11/12・通常画像経路とV4の責務：** `pieceLayout.js`のios.v1/v2はbitmap profileへ写像され、`PieceVisualCard`のfixedRaster→`inspectBitmapDrawing`→`renderBitmapCanvas`を使う。V4 `inspectSelectedLineV4`の自然snapshotはこの通常経路の必須条件ではない。API `_preview_renderer_runtime`のrenderer交渉と`piece_model_source._settings/application_piece_model_source`のmodel選択も別である。bitmapの証拠をV4自然layer/reference logical1 exactの証拠へ換算せず、V4固有の能力は未解決・未採用として残す。共有v5/TextKit/paint/予算と今回V4前の初回timeoutは通常側にも関係し得るため残件とする。

@@ -1,3 +1,5 @@
+> **11/12・AR-04 実4Bの一般材料3件：** 新しい架空の段落・二欄・適格refinedを稼働中のbase4Bで一回取得。3/3 HTTP200/stop、35.283987秒、学習／提供停止／retry0。元request／PreparedRequestへ無修補で結びCMEE3/3・S7・隔離Free保存／本人再読3/3、quota各1。全本文は原文そのままで編集改善0。保存344aを実行した結果や通常稼働／本人端末成功へ換算しない。全file／全仕様の確認は継続中。[実原本・限界・次の比較](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-general3-base-actual-20261112)。
+
 > **11/12・Mashの絶対規則：** 毎回、全てを確認して理解してから作業する。全file・全仕様と現物の接続を作業選定前に確認し、局所source／map／hash／test／古い状態表を全理解へ換算しない。未了は確認・是正中として扱う。規則保存を商品改善へ数えず、実4Bの商品本文の確認・改善を固定CPU成功へ置換しない。[現行規則R2.1](work_attitude_rules_for_karen/CURRENT_RULES.md#all-existing-information-and-files)。
 
 > **11/12・AR-04本文読取：** 同じblock内で明示した同じ本人に続く好み評価の主語省略を、既存評価readerへ接続。固定CPU候補の誤拒否を修復し、本人・欄・時制・肯否・程度・留保の変更拒否を維持。実4Bの新生成・一般品質改善実証や通常配置は未実施、selector OFFを保持。 [今回の検証と再開点](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-evaluation-continuity-20261112)。
@@ -132,7 +134,7 @@
 
 ## 2. 商品全体と、取り落としてはいけない決定
 
-**11/7報告会の最新方針：最初に現在の分析内容・実画面を確認し、その後で改善の必要性・対象・方法を判断する。図中心・部分詳細は候補で、改修必須ではない。分析の文章量・情報量は減らさず充実させ、どう見せるかを工夫する。** 加入価値はPieceカスタマイズ・分析内容の変化・専用テーマ色と、UIの見せ方を軸にし、Emlisの新しいプラン差は主枠へ戻さない。[11/14までの優先順位・詳細タスク](weekly_reviews/Cocolon_Weekly_Review_20261107.md#weekly-priorities-through-20261114)を記録。日別割当なし。現在map全plan共通／月次2・12・全期間は現行実装として保持し、新しい追加内容とtier差は具体化して決める。旧テストアカウントの表示条件を確認し、必要なら専用確認材料を通常経路へ通す。これは報告会時点の方針記録。後続のPiece画像設定・権利のsource候補は§12を優先し、実DB・稼働・配布は今回未変更。
+**11/7報告会の最新方針：最初に現在の分析内容・実画面を確認し、その後で改善の必要性・対象・方法を判断する。図中心・部分詳細は候補で、改修必須ではない。分析の文章量・情報量は減らさず充実させ、どう見せるかを工夫する。** 加入価値はPieceカスタマイズ・分析内容の変化・専用テーマ色と、UIの見せ方を軸にし、Emlisの新しいプラン差は主枠へ戻さない。[11/14までの優先順位・詳細タスク](weekly_reviews/Cocolon_Weekly_Review_20261107.md#weekly-priorities-through-20261114)を記録。日別割当なし。現在map全plan共通／月次2・12・全期間は現行実装として保持し、新しい追加内容とtier差は具体化して決める。旧テストアカウントの表示条件を確認し、必要なら専用確認材料を通常経路へ通す。これは報告会時点の方針記録。後続のPiece画像設定・権利は[第10回§13の実反映記録](weekly_reviews/Cocolon_Weekly_Review_20261107.md#piece-ui-live-and-ios-build-20261107)を参照し、同§12の準備時点とDB・API・7501の後続確認を分ける。
 
 Cocolonは、本人と他者の人間情報を観測できる形として外側へ出し、自己理解・他者理解・発信を支えるサービスである。一回のEmlis応答だけで、アプリ全体の需要・商品価値を完結して評価しない。
 
@@ -189,7 +191,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 ## 5. Analysis — 蓄積を本人の情報へ返す
 
-**11/1採用・API/DB反映／7201内部配布済み（第9回§44）：** 対象は感情原入力の全保存期間と適格な本人補足。現在mapは全plan共通、月次はFree2回/Plus12回/Premium全期間を閲覧。旧28日/100件拒否/期間版を新累積と呼ばない。新source/immutable artifact/月参照/現在guard照合、選択月と現在の並列表示、根拠原入力・補足参照を実装し、local/遠隔CIを通過。月次は当月最初の成功取得を固定、過去未保存月の再分析backfillなし。一般日本語の理解は未完成。通常累積mapの既定はfinite。§196で分析専用設定時の4B HTTP取得を中央ensureへ接続し、通常未設定/未配置のまま。API配置済み、iOS #72/7201はApple処理を通過し既存内部グループでテスト中。Mashが7201の依頼修正を確認。一般分析の内容品質は未確認。§44へ。
+**11/1採用・API/DB反映／7201内部配布済み（第9回§44）：** 対象は感情原入力の全保存期間と適格な本人補足。現在mapは全plan共通、月次はFree2回/Plus12回/Premium全期間を閲覧。旧28日/100件拒否/期間版を新累積と呼ばない。新source/immutable artifact/月参照/現在guard照合、選択月と現在の並列表示、根拠原入力・補足参照を実装し、local/遠隔CIを通過。月次は当月最初の成功取得を固定、過去未保存月の再分析backfillなし。一般日本語の理解は未完成。通常既定finite・専用4B未設定／未配置は当時の記録。11/8にはAPI／worker8739cd80の専用4B接続・保存後の先行更新・7801表示到達が記録されている（本節末と第10回§16の追補）。今回のlive再確認や一般意味品質の合格とは分ける。API配置済み、iOS #72/7201はApple処理を通過し既存内部グループでテスト中。Mashが7201の依頼修正を確認。一般分析の内容品質は未確認。§44へ。
 
 | 機能・構想 | 現在の実装・境界 | 稼働・本人確認・残件 |
 |---|---|---|
@@ -221,7 +223,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | V2有効化・旧経路 | 11/1 API744336c0の明示factoryでpreview/save/owner-read/export/owner-delete各strict pair ON、public-write/public-read/visibility-toggle OFFをLive確認。default app:appはlegacy/OFF | 稼働設定と本人端末の通常保存は別。tutorial/Nexus旧経路とM5の全公開経路廃止は未完 |
 | 本人履歴・詳細・公開範囲 | owner一覧・詳細・公開切替・削除の既存経路。続きの取得が一時失敗した場合は確認済みの一覧と取得位置を保持。200応答の本文受信中に通信が切れた場合も、本人・中断を再確認して同じ位置から明示再試行できる候補を追加。不正JSON・認証や権限の変更では旧一覧を戻さない。詳細取得の一時失敗と通信中のアプリ一時停止・稼働設定読込みでも、同じ本人・画面の選択IDだけを本文なしで保持し、復帰後に明示的に読み直せる。旧ボタンと遅延応答を失効し、自動通信しない。同期abort中に本人が切り替わった場合も旧IDを戻さない。公開範囲変更後の完了案内は最新詳細の取得後に表示する。変更PATCHの応答が不明な場合も選択IDと不明案内だけを保持し、同じPieceの明示GETで現在の公開範囲を確認できる。PATCHは再送せず、未確認の変更を成功扱いしない。削除結果が不明な場合は一時停止中の稼働設定クリア・再読込を越えて本文なしの元の要求とキーを保持し、同じ本人・対象と確定した権限の確認後に明示的に再確認する。本人・対象・確定した読取／削除権限の変更や画面破棄で保持情報を捨てる。privateはownerのみ | 7001の生成済み画像と一覧は本人確認済み。同一record/hashの独立DB照合・Share送信・公開切替・削除の本人確認へ拡張しない |
 | export | 本人詳細から出力可否を判定し、対応端末では画像と保存時点のレシピを再照合する。従来の書き出しもPNGの末尾まで確認してから写真保存・共有へ渡す。画像準備とOSへ渡す直前のexport GET・書き出し記録POSTが確定停止を返す場合は、その停止情報を一時画像の削除失敗でも保持し、画像操作を止めて既存の稼働設定再確認へつなぐ。同じ設定のまま準備を繰り返さず、再許可後も自動再送しない。停止処理の同期abortで本人・対象・無効化・画面破棄が選ばれた場合、旧通知や新しい本人への設定再読を戻さない。背景化後の遅い停止も処理中のまま残さず、OS開始後の完了・結果不明は維持する。検証済みのPiece専用non-base64 file URIの共有は、最終の本人・保存版・canvas照合から同じ同期処理内で既存`NativeModules.RNShare.open`を開始する。固定RNShare wrapper内のAndroid base64判定待ちを挟まず、待機中に失効した画像の遅延共有を防ぐ。両OSの既存option・返値整形、OS開始後の結果不明と一時コピー寿命は保持する。iOSでPNG書込みが失敗した場合は、JSへ渡らないPiece専用の途中ファイルも回収する。対応iOSの書き出し記録はPNG寸法・sRGB・ハッシュを検証し、OSへ渡す前に記録する実装候補。写真保存・共有中の一時停止では本文や画像を破棄し、処理結果だけを本人・Pieceへ結び付けて保持する。画面を離れていなくても、完了・取消を確定できない共有応答は「共有結果を確認できませんでした。」と表示する候補を追加。詳細と画像準備の保存版が異なる場合は旧版での準備を止め、同じPieceの詳細を明示的に読み直し、成功後の別操作で再準備する。画像準備の応答から本文や保存版を自動採用しない。復帰後に同じ保存版を明示的に読み直すと結果を表示し、処理中の重複操作を防ぐ | 書き出し記録の既定は無効。本番DB移行、API有効化、今回の写真保存・外部共有の実機確認は残る。AndroidではiOS用の保存済み画像に端末制限を表示し、本文・履歴・削除は利用できる |
-| 新renderer | iOS piece.rn_bitmap_renderer.ios.v1。同一bitmap表示/書出し、構築/初回採用8秒。新sourceでは完成previewも同画像をsource期限内で保持し、読んでから保存できる。saved保持は維持 | APIはTTL600秒/同rendererでLive。6601のApple90683をAdd/Usage両keyとArchive実物検査で修正。6701はArchive/Apple処理/内部配布/本人起動済み。Pieceの本人描画・保存・再読は未完。Android成立へ拡張しない |
+| 新renderer | iOS piece.rn_bitmap_renderer.ios.v1。同一bitmap表示/書出し、構築/初回採用8秒。新sourceでは完成previewも同画像をsource期限内で保持し、読んでから保存できる。saved保持は維持 | APIはTTL600秒/同rendererでLive。6601のApple90683をAdd/Usage両keyとArchive実物検査で修正。6701のArchive/Apple処理/内部配布/本人起動は当時の記録。後続7001の画像生成・一覧・OS写真保存と、7501の大ボタン・Piece関係の今回修正は本人確認済み。全tier／全状態の保存・再読・共有を網羅した確認ではない。Android成立へ拡張しない |
 | 画像内ブランド | 次候補でios.v2=Emlisを実装。旧ios.v1=Cocolonは保存版どおり保持。新compiled bridgeのみ明示headerでv2を要求し、旧/欠落はv1 | §43の新build指示を受領。recipe内部ID/DB schema不変、owner/保存/bitmap保持/exportの版束縛を維持。7101をMashが反映し依頼修正完了を確認。新規v2画像はEmlis、旧v1保存画像はCocolonを保持 |
 | 最新限定検証 | 新export正常8PNG＋native拒否6。JS979・新native44成功。旧195は176PASS／19FAILを保持 | CI39780623108 attempt1 completed／failure、head`d2e1244…`、10/22 JST21:42:54〜22:07:18。CI全体合格ではない。限定TECHNICAL_CREDITの記録あり、product_credit=0 |
 | c634今回の限定native確認 | 記録済み通常3＋refined1の4作品でpreview／saved／export Card／view-shotの計16PNGが作品内一致。root再目視で文字・否定・過去・段落・Emlisロゴ欠けなし | simulator／合成SQLであり通常統合・全46作品・本人端末の成功ではない。WholeCanvas59 summaryとV4 19失敗を保持。c634通常未採用／selector OFF、一般本文品質・正式0/3未完 |
@@ -237,7 +239,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 | 機能 | 目的・現在の接続 | 未確認・境界 |
 |---|---|---|
-| UI採用方針（11/7候補・11/6配布記録） | **全画面Material、defaultは元のバーガンディ／アイボリー。11/7は共通大ボタンの右下12指定を除去し、共通radius999と局所overrideを修正。Piece設定の新権利とロック案内も準備、今回build未実行。** 実機指摘を受けた配色・構成の修正`b64cfa76`を一回の統合buildへまとめ、iOS7401のTestFlight送信が成功。[結果§28](designs/ui/material-ui-design.md#ui-preview-correction-ios-7401-20261106) | 当時の4画面HTML／sourceを保持。製品21file修正、12入口673 PASS＋最終関連80 PASS、全26file再読込一致。run42176982238／#74 attempt1、16:06:27 JST成功。署名Archive／写真目的文／IPA／Upload・job全19step success、途中群別build／rerun0。Apple処理・内部配布・実機表示と原本一致は未確認。機能／保存／本人／公開／AI不変、built sourceと資料commitを区別 |
+| UI採用方針（11/7候補・11/6配布記録） | **全画面Material、defaultは元のバーガンディ／アイボリー。11/7は共通大ボタンの右下12指定を除去し、共通radius999と局所overrideを修正。Piece設定の新権利とロック案内は後続7501へ反映し、大ボタン・Piece関係の今回修正を本人確認済み（第10回§13–14）。** 実機指摘を受けた配色・構成の修正`b64cfa76`を一回の統合buildへまとめ、iOS7401のTestFlight送信が成功。[結果§28](designs/ui/material-ui-design.md#ui-preview-correction-ios-7401-20261106) | 当時の4画面HTML／sourceを保持。製品21file修正、12入口673 PASS＋最終関連80 PASS、全26file再読込一致。run42176982238／#74 attempt1、16:06:27 JST成功。署名Archive／写真目的文／IPA／Upload・job全19step success、途中群別build／rerun0。7401時点ではApple処理・内部配布・実機表示と原本一致は未確認だった。後続7501のApple処理・内部Testingと今回の大ボタン・Piece修正の本人確認は記録済み。全画面・全状態の原本一致確認は残る。機能／保存／本人／公開／AI不変、built sourceと資料commitを区別 |
 | 起動・認証 | 登録／ログイン／メール確認再送／再設定／復旧。`App.js`→`RootNavigator`→`MainTabs`→Input／Analysis／Piece／Settingsの4 Stack（Ranking入口は撤去済み） | native認証リンク・cold／warm復帰の実成立は別確認。旧巨大App／MyModel画面名から現在を復元しない |
 | 今日の問い・回答履歴 | current／answers／history／PATCH／settingsを接続。日常メモと別に考えを記録し、修正・再読 | Emlis任意問いと別機能。旧自己構造素材との接続を、V2全source採用済みへ拡張しない |
 | 投稿・他者のPiece | 通常`PieceEntryScreen`→`NexusScreen`。本人／フォロー中／特定相手、並替・更新・本人投稿削除。linkPayload時のみ`PieceScreen` | 公開条件と新Piece保存成立は別。旧Q&A投稿と新canonical recordを混同しない |
@@ -260,7 +262,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 ## 8. プランと、次作業を選ぶときの現在地
 
-**以下の表は既存表示・権利・コードの状態で、10/31の構想を上書きする確定新プランではない。** Free当回のみ／Plus過去本人入力も照合は維持。旧表のFreeマップ履歴不可・Plus1年等を、新しい累積／月次構想へ無検討で適用しない。11/1採用：現在mapの内容と対象は全plan共通。月次閲覧はFree2回／Plus12回／Premium全期間、プラン変更だけで保存済みmapは削除しない。料金は最新指示でPlus680円／Premium1,480円に確定し、表示設定とfallbackへ反映（§15、実ストアは未確認）。Free／Plus販売2区分、AI月30／100、Piece新規生成5／30は未採用案。配色12・Free初期2色と加入者比率／ロゴ選択は11/7の明示採用・source候補（実DB・API・端末未反映）へ更新。入力保存・既存成果物再読をAI枠へ従属させず、累積構造を枠で切り捨てない。
+**以下の表は既存表示・権利・コードの状態で、10/31の構想を上書きする確定新プランではない。** Free当回のみ／Plus過去本人入力も照合は維持。旧表のFreeマップ履歴不可・Plus1年等を、新しい累積／月次構想へ無検討で適用しない。11/1採用：現在mapの内容と対象は全plan共通。月次閲覧はFree2回／Plus12回／Premium全期間、プラン変更だけで保存済みmapは削除しない。料金は最新指示でPlus680円／Premium1,480円に確定し、表示設定とfallbackへ反映（§15、実ストアは未確認）。Free／Plus販売2区分、AI月30／100、Piece新規生成5／30は未採用案。配色12・Free初期2色と加入者比率／ロゴ選択は11/7に明示採用。第10回§13には配色DB適用・API指定配置・7501内部Testing、§14には大ボタン・Piece関係の今回修正の本人確認を記録済み。全tier／全状態や現在のlive再確認とは分ける。入力保存・既存成果物再読をAI枠へ従属させず、累積構造を枠で切り捨てない。
 
 | プラン | 仕様・表示上の体験 | 成立状況の限界 |
 |---|---|---|

@@ -3028,3 +3028,11 @@ NO_STRUCTURE_MAP_DELTA：source/test/公開型/route/DB/作者/controller/Gate�
 動作文の後の「読書が好きだ」を別の主語と誤って扱い、既存評価読取へ届かない接続を修復した。同block・同じ本人表記のSELF継続内だけで既存readerを再利用し、時点・肯否・程度・留保・本人・欄の変更拒否を維持。同じ41対象は旧13失敗／28成功→41成功。関連検証の結果と固定候補の3plan保存／非生成再読は[既存trial](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-evaluation-continuity-20261112)へ記録。合成CPUの誤拒否修復で、実4B一般品質の改善実証ではない。
 
 既存製品1／test2fileの変更でSTRUCTURE_MAP_DELTA_NONE。通常host成功は前回完了として継承、model selector OFF・AR-04一般品質／live接続・本人端末／正式受入れは未完。今回GPU／学習／Render配置／live DB／build／配布0。
+
+
+<a id="piece-general3-base-actual-20261112"></a>
+## 11/12 AR-04 — 新一般材料を実4Bで確認、原文維持のままで編集改善なし
+
+全件架空の段落／二欄／別本人補足3件を、稼働中base4Bから35.283987秒・一回で取得。3/3 HTTP200/stop、学習／提供停止／retry0。全field本文が原文そのままで、文章の編集改善は0。元requestへexactに結んだCMEE／S7と、既存隔離Free保存・同一本人再取得は3件成功、quota各1・保存後provider0だった。保存344a、live Auth／DB／本人端末の成功へ換算しない。
+
+毎作業前の全確認・理解を既存R2.1へ絶対規則として明記し、全体現在地の古い分析未接続／Piece未反映行を後続の実績へ整合させた。全file意味読了は未完で、確認・是正を続ける。current GPUの空き9,423MiBではBF16二重loadの余裕を確認できず、保存候補の新3件比較は未実行。詳細・出所・自動審査による旧5件送信拒否と新架空3件への縮小・保存時の非最終停止を[既存trial](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-general3-base-actual-20261112)へ記録。構造変更0・商品品質改善0を維持する。

@@ -2760,3 +2760,29 @@ STRUCTURE_MAP_DELTA_NONE：既存 `piece_v2_content_policy.py::_piece_model_read
 このAPI commitの既存CIは[Analysis 43154204593](https://github.com/MassyuRed/mashos-api/actions/runs/43154204593)と[Piece 43154204654](https://github.com/MassyuRed/mashos-api/actions/runs/43154204654)で追跡する。今回2,248 PASSはローカル結果で、CIの完了成功へ換算しない。
 
 次は保存候補の一般編集品質を既存資料と区別して確認する。今回回復した合成候補の接続と通常画像経路の成功は完了として継承し、追加observerや完了済みGPU比較の再実行へ戻らない。新GPU／学習・Render配置・live SQL・build／配布は今回0。
+
+
+<a id="piece-general3-base-actual-20261112"></a>
+## 2026-11-12 — 新一般材料を稼働中base4Bで実生成、全3原文維持・編集改善なし
+
+Mashの再指示で既存CURRENT_RULES R2.1・入口・出力確認へ「毎回全てを確認して理解してから作業する」を絶対規則として[反映](https://github.com/MassyuRed/Cocolon/commit/dbf72de56adf05b87bba34a839916501387351bf)。規則保存自体は商品品質credit0。全体設計／map／最新weekly／三coreの正本・実経路を照合し、00の分析4B・Piece配色／7501／7001の古い未反映行と存在しない§12参照を後続実績で是正した。mapや単一の状態表、default composition、Renderの一commitだけから全アプリの稼働・全仕様理解へ一般化しない。全file意味読了は未完で、既存設計の全旧checkpoint・全実装consumer・全state／端末を確認済みとはしない。
+
+### 実行対象と出所
+
+全て今回作成した架空材料で、通常段落149字、思考91＋行動77字、refined原行動89＋別本人回答89字の3件。現7field・画面選択肢と照合し、現source／prepare／builderを使った。不適格0。refinedは合成の保存済みADD／RESOLVED snapshotを実readerへ通したもので、実Emlis生成・live Auth／DBとは分ける。保持051／007を含む最初の5件41,177byte送信は自動承認審査が拒否。履歴対照2件を外し、新しい架空3件だけで実ユーザー記録／認証情報がないことを準備scriptの原文literalと照合した26,022byteへ縮小後、送信が許可された。この5件packetの今回の送信・新生成は0。保持2件の過去の実結果は完了資産として保持する。
+
+実送信wire SHA256 `81a212be0c0b8cdb91708223b21294618e049e7fcc6b550f13337e19db894ff1`。current API90822927のSYSTEM／messagesと出所分離を使用し、期待正文・生成後修補を入れない。既存Pod f1lle4xwq3wjlnの共有PID71802、元実行source SHA256 `5e3d43637ab8c8c541c1e56a74401c5d6d17dcedcdc5aa187448055cb2a3bcd3`／natural alias `cocolon-qwen35-4b-base-851bf6e`を確認した。`--piece-adapter`なしなので344aは未load。呼出しに必要な既存natural鍵1つだけを同Pod内のRAMでlocalhost宛に用い、値の表示／保存、全環境の複製・復元、Analysis鍵取得はしない。最初のbasename照合は日時等を含む実ファイル名と不一致で、credential取得・model呼出し0のまま停止。旧executorと同じ実source SHA一致へ照合を直してから一回の3生成を行った。
+
+### 実結果
+
+3要求全てHTTP200／finish_reason stop、35.283986755879596秒。retry・追加学習・提供停止・通常selector変更0。完了後health200、同PID／実argv一致。responseにrevision／usageはなくunknownとし、aliasから実重みhashを創作しない。全3の各field_blocksは元literalと文字・byte同一だった。本人・否定・時点・出所の改変はないが、一般文章の編集改善は0で、Pieceの商品品質合格へ換算しない。
+
+元source/request/PreparedRequest/messages/request SHA/response SHA/rawの対応をexact照合し、旧有限作者呼出しを禁止したCMEEは3/3 GENERATED、追加S7も同3件で成功。既存隔離Free保存helperへ同内容を渡し、保存3・再送／service再作成後の同一本人detail再読3、quota各1、保存後provider0、原入力／Emlis不変を確認した。normal保存fixtureではowner/id/timeを新発行するため、元実requestのCMEE証拠と保存用再bindを区別する。refinedの先行2回は使い捨て集計assertionがJSON key順を本文順と取り違え、preview後・save前で停止した。既存source partition順へ修正した最終一回だけを保存成功へ数え、追加モデル呼出しはない。native／Photos／本人端末やlive保存は今回0。
+
+private実原本は既存保存先の `Cocolon_CMEE_AR04_GeneralParagraph_Actual4B_20261112.zip`。初版68,339byte／14member／CRC成功、SHA256 `c6ccdca2ebcf28a0312646689ffc1fd21702dbecffcdb55ad23322f8f76de737`。原wire・raw・exactCMEE/S7・隔離保存・前回未送信準備を区別して保持する。追補版は80,587byte／18member／CRC成功、SHA256 `1925d0bd0b52345e6641c1883eee0bce13107875d87d0ad66a82ee16f8f1a5c6`。元memberの内容を保持し、GPU容量の観測と未実行の比較草案／実行範囲を追加した。草案は規則の個別承認を代行せず、実行済みへ換算しない。publicへ架空本文であってもprivate packetの全文を複製しない。
+
+### 次の直接比較と未了
+
+保存344a（weights `344a9defd0c890982d9718805d8b630b5d48719475c998aa9a57ed6df6bfc337`／config `24f34137fd7b0aca0366c1a76fb280216d810565e4062974d12dd2096f93d12c`）の同じ新3件は未実行。全73やnativeの再実行へ戻らない。現GPUはRTX4000Ada、total20,475MiB／used10,598／free9,423を観測し、既存BF16 modelを二重loadする余裕は確認できないため追加load0。既存a8fdf loaderは現API908の同じbytesで、Analysisをdefault、344aを別名pieceとして読み `generate(profile=piece)` を呼ぶ。344aをdefaultだけに入れるとbaseへ戻るので、その誤実行をしない。一時停止・原提供復元を伴う次の比較は、既存loaderと復元処理を使う新しい一回用草案（30,220byte／SHA256 `2c109a85f62cb74a46e4b39929750c73fe7d2595820f8395ea8e3f082518c70f`）まで準備し、親／埋込子のcompileと独立全文reviewを完了。新3件＋前後の共有normal／Analysis対照4件、最大7call・追加学習0・復元枠120秒込み600秒・retry0へ限定し、子にはAPI鍵もHTTPserverも持たせない。共有提供の一時停止と認証情報を含み得る元起動環境の同Pod内RAM保持・完全復元は、前回の消費済み一回承認に含め直さず、新しい個別承認前には実行しない。旧残12のroot／packet／承認を再使用せず、今回は草案のupload／環境全読取／停止／344a生成は0。
+
+STRUCTURE_MAP_DELTA_NONE：今回の製品source／公開型／DB／route／作者／renderer変更0。通常／refinedの接続codeと実稼働・端末を分け、base3の原文維持を保存344aの一般編集品質へ換算しない。句読点だけの派生CPU成功も、実文章の改善成果にしない。
