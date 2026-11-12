@@ -1,6 +1,6 @@
 # Cocolon出力前Gate
 
-revision_date: 2026-11-07
+revision_date: 2026-11-12
 normative_status: CURRENT_OUTPUT_GATE
 status: CURRENT_EFFECTIVE
 effective_when: NECESSITY_PRODUCT_DIRECTNESS_AND_MINIMUM_SAFETY_BOUNDARY_REMOTE_POSTVERIFIED
@@ -32,7 +32,8 @@ Piece残件では、2026-10-20 Mash決定のRule18 §0Aを優先し、以下のP
 - [ ] 今回の機能・決定・状態・残件・根拠の差分を、同じ変更単位で置換更新した。差分なしは既存作業記録／PR説明へ理由を一行残した。
 - [ ] 学習済AI＋CMEE接続の既決、Piece、わたしマップともしもルートを落としていない。未実装と未決、codeとlive、本人端末と商品受入れを混同していない。
 
-- [ ] CURRENT_RULES R2.1の最新の全file／全仕様確認要求を、この作業の仕様判断・操作指示・完了報告へ適用した。所在／hash一致を本文意味・全理解と呼ばず、未確認は具体的に残した。
+- [ ] CURRENT_RULES R2.1の11/12絶対規則に従い、毎作業の選定前に全file／全仕様・最新結果・機能間接続を確認して理解した。局所source・map・hash・test・過去要約やagent申告を全理解へ換算せず、古い状態表を現状へ戻していない。未了の場合は確認・是正中とし、未確認に依存した着手・断定・完了を主張していない。
+- [ ] actualな4B商品出力に基づく主線を、固定CPU候補の局所修正・test成功・文書保存へ置換して終えていない。
 
 ## 2. 事実と判断
 

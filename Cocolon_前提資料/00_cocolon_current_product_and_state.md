@@ -1,3 +1,5 @@
+> **11/12・Mashの絶対規則：** 毎回、全てを確認して理解してから作業する。全file・全仕様と現物の接続を作業選定前に確認し、局所source／map／hash／test／古い状態表を全理解へ換算しない。未了は確認・是正中として扱う。規則保存を商品改善へ数えず、実4Bの商品本文の確認・改善を固定CPU成功へ置換しない。[現行規則R2.1](work_attitude_rules_for_karen/CURRENT_RULES.md#all-existing-information-and-files)。
+
 > **11/12・AR-04本文読取：** 同じblock内で明示した同じ本人に続く好み評価の主語省略を、既存評価readerへ接続。固定CPU候補の誤拒否を修復し、本人・欄・時制・肯否・程度・留保の変更拒否を維持。実4Bの新生成・一般品質改善実証や通常配置は未実施、selector OFFを保持。 [今回の検証と再開点](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-evaluation-continuity-20261112)。
 
 > **11/12・Emlis問い仕様の決定（実装未反映）：** 全プラン元入力1件につき最大3問。入力画面の「Emlisからの問いを受け取る」は初期ON・前回選択を次回へ保持。短い受け止め→必要な一点の問い→本人回答を受けた応答／次問とし、十分なら0／1／2問でも終了。OFF・skip・本人終了・3問到達時はその時点の有効な本人情報で返す。新しい問い判断と旧Q1/Q3／未接続の現naturalを分け、料金・参照範囲・現AR-04再開点は変更しない。 [決定全文・架空例・AR-02への接続](designs/cmee/v1/02_emlis_v1a_detailed_design.md#emlis-question-policy-20261112)。
