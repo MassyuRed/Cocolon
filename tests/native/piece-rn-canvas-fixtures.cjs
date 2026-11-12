@@ -226,7 +226,10 @@ const transitionCases = ['parent_loading_remount', 'retained_card_regression'].m
   },
 }));
 module.exports.visualTransition = transitionCases;
-if (require.main === module) process.stdout.write(JSON.stringify(process.env.PIECE_RN_ANDROID_BITMAP_GROUP === '1' ? androidBitmapCases
+const normalHostCases = require('../fixtures/piece-ar04-configured3-host.json').cases;
+module.exports.normalHost = normalHostCases;
+if (require.main === module) process.stdout.write(JSON.stringify(process.env.PIECE_RN_NORMAL_HOST_GROUP === '1' ? normalHostCases
+  : process.env.PIECE_RN_ANDROID_BITMAP_GROUP === '1' ? androidBitmapCases
   : process.env.PIECE_RN_VISUAL_TRANSITION_GROUP === '1' ? transitionCases
   : process.env.PIECE_RN_MODEL73_GROUP === '1' ? model73Cases
   : process.env.PIECE_RN_EXPORT_GROUP === '1' ? exportCases : process.env.PIECE_RN_ADMITTED_GROUP === '1' ? admittedCases

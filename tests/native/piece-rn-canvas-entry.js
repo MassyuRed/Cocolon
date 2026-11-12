@@ -1,4 +1,6 @@
 // Actual React/Paper/Piece component. Only transport/auth and input data are synthetic.
+import 'react-native-get-random-values';
+import 'react-native-url-polyfill/auto';
 import React from 'react';
 import { AppRegistry, View, Text, NativeModules, findNodeHandle } from 'react-native';
 import PieceVisualCard from '../../components/piece/PieceVisualCard';
@@ -9,10 +11,15 @@ import admittedFixtures from './piece-rn-admitted-fixtures.json';
 import exportFixtures from './piece-rn-export-fixtures.json';
 import model73Fixtures from './piece-rn-model73-fixtures.json';
 import transitionFixtures from './piece-rn-visual-transition-fixtures.json';
+import normalHostFixtures from './piece-rn-normal-host-fixtures.json';
+import InputPieceActionArea from '../../screens/input/InputPieceActionArea';
+import { PieceOwnerHistoryHost } from '../../screens/PieceOwnerHistoryScreen';
+import { AppRuntimeContext } from '../../AppRuntimeContext';
+import { Dirs, FileSystem } from 'react-native-file-access';
 import PiecePreviewModal from '../../components/piece/PiecePreviewModal';
 import { createPieceCreateController } from '../../features/piece/PieceCreateController';
 import { readPiecePreviewDisplay } from '../../features/piece/piecePreviewModel';
-import { installPieceVisualTransitionTransport } from '../../lib/apiClient';
+import { installPieceVisualTransitionTransport, installPieceNormalHostTransport } from '../../lib/apiClient';
 import { captureRef, releaseCapture } from 'react-native-view-shot';
 
 // Test-only timing around the unchanged native bridge call. In particular,
@@ -711,5 +718,218 @@ class VisualTransitionCases extends CanvasCases {
       onSaveFitChange={this.saveFitChanged} /></View>;
   }
 }
-AppRegistry.registerComponent('PieceCanvasCases', () => props => props.pieceGroup === 'visualTransition'
-  ? <VisualTransitionCases {...props} /> : <CanvasCases {...props} />);
+
+/** Actual hosts; only runtime/Auth/transport are local test doubles.
+ * Native fit, admission, save, owner read and PNG capture are production code.
+ * The test does not invoke Photos or Share.
+ */
+class NormalHostCases extends CanvasCases {
+  constructor(props) {
+    super(props);
+    this.caseFixtures = normalHostFixtures.map(f => ({ ...f, props: {} }));
+    this.baseFinishCase = this.finishCase;
+    this.baseCaptureAndAdvance = this.captureAndAdvance;
+    this.baseAdvanceCase = this.advanceCase;
+    this.startCase = this.startHostCase;
+    this.finishCase = this.finishHostFrame;
+    this.captureAndAdvance = this.captureHostFrame;
+    this.advanceCase = this.advanceHostFrame;
+  }
+  componentWillUnmount() { this.cleanHostCase(); super.componentWillUnmount(); }
+  waitForHost = async predicate => {
+    const start = performance.now();
+    while (!predicate()) {
+      if (!this.scenario || performance.now() - start >= 8000) throw new Error('host_phase_unavailable');
+      await new Promise(resolve => setTimeout(resolve, 20));
+    }
+  };
+  observeHostCards = () => {
+    const owner = this, prototype = PieceVisualCard.prototype;
+    this.hostLifecycleOriginals = ['componentDidMount', 'componentWillUnmount'].map(name => {
+      const original = prototype[name];
+      const wrapper = function (...args) {
+        const result = original.apply(this, args);
+        if (owner.scenario) {
+          if (name === 'componentDidMount') {
+            owner.card = this; owner.hostEvents.push({ event: 'mount', stage: owner.stage });
+            const d = this.props.display;
+            if (owner.stage === 'preview' && d?.preview && owner.inputHost)
+              owner.preFitSaveBlocked = owner.inputHost.saveFitHandle === null &&
+                owner.inputHost.isSaveAdmitted(d.preview, d.visualToken) === false;
+          } else if (owner.card === this) {
+            owner.card = null; owner.hostEvents.push({ event: 'unmount', stage: owner.stage });
+          }
+        }
+        return result;
+      };
+      prototype[name] = wrapper; return { name, original, wrapper };
+    });
+  };
+  cleanHostCase = () => {
+    this.transport?.close(); this.transport = null;
+    for (const { name, original, wrapper } of this.hostLifecycleOriginals || [])
+      if (PieceVisualCard.prototype[name] === wrapper) PieceVisualCard.prototype[name] = original;
+    this.hostLifecycleOriginals = null;
+  };
+  failHostCase = async error => {
+    if (this.hostFailed) return;
+    this.hostFailed = true; clearTimeout(this.timer);
+    NativeModules.PieceCanvasTest.record({ name: 'normal_host_' + this.stage + '_' + this.scenario?.source_case_id,
+      phase: 'host_integration_failed', error: String(error?.message || 'host_integration_failed').slice(0, 120) });
+    try { await this.exportAsset?.dispose(); } catch { /* Failed test remains failed; confined copy only. */ }
+    this.exportAsset = null; this.cleanHostCase(); NativeModules.PieceCanvasTest.done();
+  };
+  startHostCase = () => {
+    this.scenario = this.caseFixtures[this.state.index]; this.stage = 'preview';
+    this.card = null; this.inputHost = null; this.ownerHost = null; this.savedTarget = null;
+    this.saveFitHandle = null; this.hostEvents = []; this.preFitSaveBlocked = false; this.hostFailed = false;
+    this.exportAsset = null; this.exportFile = null; this.hostLinkage = null;
+    this.finalTransport = null; this.navigationObserved = false;
+    const flags = { piece_v2_preview_enabled: true, piece_v2_save_enabled: true,
+      piece_v2_owner_read_enabled: true, piece_v2_export_enabled: true };
+    this.runtimeValue = { runtime: Object.freeze({ loaded: true, loading: false, error: null }),
+      isFeatureEnabled: name => flags[name] === true, refreshAppRuntime: () => { throw new Error('runtime_refresh_unexpected'); } };
+    this.ownerFlags = { piece_v2_owner_read_enabled: true, piece_v2_export_enabled: true,
+      piece_v2_visibility_toggle_enabled: false, piece_v2_public_write_enabled: false, piece_v2_delete_enabled: false };
+    this.observeHostCards(); this.resetCaseClock();
+    try { this.transport = installPieceNormalHostTransport(this.scenario); }
+    catch (error) { this.failHostCase(error); return; }
+    this.forceUpdate(async () => {
+      try {
+        await this.waitForHost(() => this.inputHost?.controller && this.inputHost.isCurrent());
+        await this.inputHost.createFromSavedInput();
+        await this.waitForHost(() => readPiecePreviewDisplay(this.inputHost.controller.getView()).phase === 'received');
+        this.poll();
+      } catch (error) { this.failHostCase(error); }
+    });
+  };
+  navigateSaved = (name, route) => {
+    const target = route?.params?.savedPiece, expected = this.scenario;
+    if (name !== 'Piece' || route?.screen !== 'PieceOwnerHistory' || route?.initial !== false ||
+        !target || Object.keys(target).sort().join() !== 'expectedUserId,pieceId' ||
+        target.pieceId !== expected.save.piece_id || target.expectedUserId !== expected.transport.owner)
+      throw new Error('saved_navigation_mismatch');
+    this.navigationObserved = true; this.savedTarget = target; this.card = null; this.forceUpdate();
+  };
+  findRenderedModal = () => {
+    const visit = node => {
+      if (Array.isArray(node)) return node.map(visit).find(Boolean);
+      if (!node || typeof node !== 'object') return null;
+      return node.type === PiecePreviewModal ? node : visit(node.props?.children);
+    };
+    return visit(this.inputHost?.render());
+  };
+  finishHostFrame = async () => {
+    try {
+      const fixture = this.scenario, card = this.card, m = card?.state.measurement;
+      fixture.name = 'normal_host_' + this.stage + '_' + fixture.source_case_id;
+      fixture.evidence_set = 'normal_host_' + this.stage; fixture.props = card?.props || {};
+      this.saveFitHandle = this.stage === 'preview' ? this.inputHost?.saveFitHandle : null;
+      const artifact = fixture.props.display?.preview || fixture.props.savedRecord;
+      const expected = this.stage === 'preview' ? fixture.preview : fixture.detail;
+      const keys = ['format_type', 'piece_text', 'piece_text_hash', 'content_payload',
+        'content_payload_hash', 'visual_recipe', 'visual_recipe_hash', 'renderer_version'];
+      const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+      const matches = !!artifact && keys.every(key => same(artifact[key], expected[key]));
+      if (this.stage === 'preview') {
+        const d = readPiecePreviewDisplay(this.inputHost.controller.getView());
+        this.hostLinkage = { source_ready: this.inputHost.sourcePhase === 'ready',
+          pre_fit_save_blocked: this.preFitSaveBlocked,
+          save_admitted: this.inputHost.isSaveAdmitted(d.preview, d.visualToken), recorded_artifact_matches: matches };
+      } else if (this.stage === 'saved') {
+        this.hostLinkage = { saved_receipt_matches: this.savedReceiptMatches === true,
+          navigation_body_free: this.navigationObserved === true,
+          fresh_owner_read: this.transport.snapshot().api.some(call => call.method === 'GET' &&
+            call.path === '/emotion/piece/' + fixture.save.piece_id),
+          owner_record_matches: matches && artifact.row_version === fixture.save.row_version };
+      } else {
+        const attempt = this.ownerHost.exportAttempt, target = attempt?.target;
+        const before = target?.isCurrent() === true;
+        if (m?.phase !== 'native_checked' || !before || !attempt?.job) throw new Error('export_native_target_unavailable');
+        this.exportAsset = await attempt.job.capture(target);
+        const hash = this.exportAsset?.candidate?.asset_sha256;
+        if (typeof hash !== 'string' || !/^[0-9a-f]{64}$/.test(hash)) throw new Error('actual_export_hash_missing');
+        const root = Dirs.CacheDir + '/piece-export', matched = [];
+        const filename = 'cocolon-piece_' + fixture.save.piece_id.replace(/-/g, '') + '_' +
+          fixture.detail.visual_recipe_hash.slice(0, 12) + '_' + fixture.detail.visual_recipe.aspect_ratio.replace(':', 'x') + '.png';
+        for (const dir of await FileSystem.ls(root)) {
+          if (!/^[0-9a-f]{32}$/.test(dir)) continue;
+          const file = root + '/' + dir + '/' + filename;
+          if (await FileSystem.exists(file) && await FileSystem.hash(file, 'SHA-256') === hash) matched.push(file);
+        }
+        if (matched.length !== 1) throw new Error('actual_owned_export_png_not_unique');
+        this.exportFile = matched[0];
+        this.hostLinkage = { fresh_export_read: this.transport.snapshot().api.some(call => call.method === 'GET' &&
+            call.path === '/emotion/piece/' + fixture.save.piece_id + '/export'),
+          export_target_current: before && target.isCurrent() === true,
+          actual_job_capture: this.exportAsset.nativeStatus === 'not_started',
+          export_asset_sha256: hash, recorded_artifact_matches: matches, saved_row_version: artifact.row_version };
+        this.finalTransport = this.transport.close(); this.transport = null;
+      }
+      await this.baseFinishCase();
+    } catch (error) { this.failHostCase(error); }
+  };
+  captureHostFrame = (report, node) => {
+    const props = this.scenario.props, a = props.display?.preview || props.savedRecord;
+    const keys = ['format_type', 'piece_text', 'piece_text_hash', 'content_payload',
+      'content_payload_hash', 'visual_recipe', 'visual_recipe_hash', 'renderer_version'];
+    return this.baseCaptureAndAdvance({ ...report, source_case_id: this.scenario.source_case_id,
+      recorded_artifact: a ? Object.fromEntries(keys.map(key => [key, a[key]])) : null,
+      host_linkage: { ...this.hostLinkage }, projection: this.scenario.projection,
+      host_events: this.hostEvents.map(event => ({ ...event })), transport: this.finalTransport || this.transport.snapshot(),
+      ...(this.stage === 'export' ? { export_capture_uri: this.exportFile,
+        export_target_current: this.hostLinkage.export_target_current, export_target_after: this.hostLinkage.export_target_current,
+        export_rejected: false } : {}) }, node);
+  };
+  advanceHostFrame = async () => {
+    try {
+      clearTimeout(this.timer); this.finishing = true;
+      if (this.stage === 'preview') {
+        const host = this.inputHost, d = readPiecePreviewDisplay(host.controller.getView()), modal = this.findRenderedModal();
+        if (typeof modal?.props.onSave !== 'function' || this.hostLinkage.save_admitted !== true)
+          throw new Error('rendered_save_action_unavailable');
+        modal.props.onSave({ preview_id: d.preview.preview_id, preview_revision: d.preview.preview_revision,
+          visual_recipe_hash: d.preview.visual_recipe_hash }, d.visualToken);
+        await this.waitForHost(() => host.controller.getView().phase === 'saved');
+        const receipt = host.controller.getView().savedReceipt;
+        this.savedReceiptMatches = ['piece_id', 'consumption_id', 'row_version', 'saved_at', 'lifecycle_status', 'visibility_scope']
+          .every(key => receipt[key] === this.scenario.save[key]);
+        this.stage = 'saved'; this.resetCaseClock(); host.openSavedPiece(receipt);
+        await this.waitForHost(() => this.ownerHost?.controller?.getView().phase === 'detail');
+        this.poll(); return;
+      }
+      if (this.stage === 'saved') {
+        const record = this.ownerHost.controller.getView().record;
+        this.stage = 'export'; this.resetCaseClock();
+        await this.ownerHost.prepareExport(record);
+        await this.waitForHost(() => this.ownerHost.exportAttempt?.target?.isCurrent() === true);
+        this.poll(); return;
+      }
+      await this.exportAsset?.dispose(); this.exportAsset = null;
+      const transport = this.finalTransport;
+      if (transport.api.length !== this.scenario.transport.steps.length ||
+          transport.session_calls !== 2 * this.scenario.transport.steps.length || transport.complete !== true ||
+          transport.before_after_key_intact !== true || transport.session_owners_match !== true ||
+          transport.fixture_headers_intact !== true || transport.save_key_generated_valid !== true ||
+          transport.scope_closed !== true || transport.cleared !== true)
+        throw new Error('normal_host_transport_incomplete');
+      this.cleanHostCase(); this.scenario = null; this.savedTarget = null; this.baseAdvanceCase();
+    } catch (error) { this.failHostCase(error); }
+  };
+  render() {
+    const fixture = this.caseFixtures[this.state.index];
+    if (this.scenario !== fixture) return <View />;
+    if (this.savedTarget) return <PieceOwnerHistoryHost ref={node => { this.ownerHost = node; }}
+      owner={fixture.transport.owner} enabled presentationActive runtimePending={false}
+      flags={this.ownerFlags} savedPiece={this.savedTarget} />;
+    const navigation = { getParent: () => ({ navigate: this.navigateSaved }) };
+    return <AppRuntimeContext.Provider value={this.runtimeValue}>
+      <InputPieceActionArea ref={node => { this.inputHost = node; }} savedInput={fixture.saved_input}
+        active creationMode navigation={navigation} isSaveAdmitted={renderer.isPieceBitmapSaveAdmitted} />
+    </AppRuntimeContext.Provider>;
+  }
+}
+
+AppRegistry.registerComponent('PieceCanvasCases', () => props => props.pieceGroup === 'normalHost'
+  ? <NormalHostCases {...props} /> : props.pieceGroup === 'visualTransition'
+    ? <VisualTransitionCases {...props} /> : <CanvasCases {...props} />);
