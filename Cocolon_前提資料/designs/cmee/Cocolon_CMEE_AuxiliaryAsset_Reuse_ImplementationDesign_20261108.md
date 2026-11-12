@@ -4,15 +4,15 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-13 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR03_REBALANCED16_FIT32_PREPARED_PENDING_APPROVAL
+status: AR03_REBALANCED32_NOT_ADOPTED_RESOLVED_HISTORY_HINT_OMISSION_CONFIRMED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Revised history targets plus existing plain assets give 16 CPU-prepared teachers; 26293-byte one-run fit32 packet ready, requires new specific approval, no GPU training executed"
+current_next: "One fit32 completed with original provider restored; candidate not adopted after full-text review; T05/D02 withdrawal resolves but hint exceeds existing budget, specify existing hint handoff without more training or new guards"
 runtime_effect_of_this_document: 0
 ---
 
-> **11/13・AR-03の教材を16件へ改訂、32更新案は実行前：** 前回T8では過去回答だけの内容が必要なtargetは1件。履歴8のSYSTEM／全原文／回答／source prefixを保ちtarget4だけを改訂し、過去限定比較3＋今回明示接続1へ変更。既存plain8を現ownerで結び直し、合計16件を準備。実tokenizerのCPU一回確認は5.587439秒、全16mask・無切詰め、最大prompt1436／training1239、model／GPU／学習／提供再起動0、PID76736／health200維持。26,293byteの新32更新packetを準備し、前後22＋提供前後4・全体600秒／一回／再試行なしの具体承認待ち。未送信・未実行。通常flag OFF、前回候補不採用・一般品質／全補助経路未完を維持。 [改訂内容・次](#auxiliary-history-rebalanced16-fit32-prepared-20261113)。
+> **11/13・AR-03の改訂16教材32更新を一回完走、新候補も通常不採用：** 前後22応答は全stop、提供前後4はHTTP200／stop・response bytes一致。内部235.783163秒、archive閉鎖約236.436507秒はUI観測。元提供はPID77140／health200へ復元、旧source・Analysis adapter不変。112tensorの保存・fresh reload一致と実weightsを回収。質問は消えたが、撤回済み過去感情の復活・根拠薄い内面推測があり、D04の正しい履歴利用も未達。追加CPUでT05／D02は現ownerが撤回対象を失効済みと再導出する一方、補助付き6100／6179byteが既存5800byteを超え、補助が生成材料から省かれることを確認。補助で直る因果は未証明。次は既存補助の受渡しを具体化し、追加学習へ自動進行しない。通常flag OFF、一般品質・全補助経路未完。 [実比較・次](#auxiliary-history-rebalanced32-actual-nonadoption-20261113)。
 
 > **11/12・固定実3件の意味読取拒否を修復：** API87512ddaで、既存述語／本人評価／感情／literal-self資産を、型付きoperatorと完全保持spanの独立比較へ回収。保存344aの同じ実raw3件は3拒否→3採用、旧73件の採否・全artifact・prepared／messages／rawは修正前後同一。新GPU・学習0。3plan計9件の隔離SQL保存・非生成再読、本文／recipe／renderer一致とquota各1を確認。Free refinedは元の適格ADD snapshot、Plus／Premiumは同じ全入力・回答から既存ownerでtier別資格を再導出。合成Auth／source・mock HTTP framingであり、実HTTP／live DB／本人端末ではない。新70を含む局所1774と既存SQL56が成功。Piece CI43174913229はattempt1・39step成功、model集合2021に新70を含む（重複加算なし）。生成本文自体は従来の常体化が中心で、一般編集品質・同じ新本文のnative画像・通常採用・AR-04／全補助経路は未完。 [修復・原本・確認範囲](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-general3-operator-review-repair-20261112)。
 
@@ -923,6 +923,66 @@ target改訂・plain8追加・16→32更新の複合変更であり、結果をt
 既存 `Cocolon_CMEE_AR03_HistoryTeaching_Candidates_20261112.zip`／Library `libfile_fde3_f-9e0e8945ad208191a053021e810be6d6_2f7470f963808191aaebf050935e72de` をversion5へ更新。14,668,391bytes／47members、SHA256 `8ef4b41f848ec9aaa1f270c82959c88fffea1a68c01052408e23b66713d7d0bc`。従前37membersと旧READMEを不変保持し、改訂16の全source／target、source準備、CPU原本、次の具体packetを追加。秘密・全環境・browser screenshot・Git-backed製品sourceは含めない。
 
 次は具体packetの一回承認後、別fresh folderで32更新／前後22＋提供前後4を行い、全本文を原文照合して採否を判断する。現時点では新学習0。通常flag OFF・前回候補不採用、製品source／test／API／DB／RN／Render／Supabase変更0、新guard／SYSTEM追加0。STRUCTURE_MAP_DELTA_NONE。primary BLOCKER_NARROWED、商品品質credit0。全file／全仕様理解の完了や、AR-03／他AR／三中核・一般品質・live反映／本人端末・正式受入れの完成は主張しない。本節を最新再開位置とし、§9.13の不採用を履歴として保持する。
+
+
+<a id="auxiliary-history-rebalanced32-actual-nonadoption-20261113"></a>
+## 9.15 2026-11-13 — 改訂16教材32更新を実行、通常不採用と確定補助の省略位置
+
+**11/13・AR-03の改訂16教材32更新を一回完走、新候補も通常不採用：** 前後22応答は全stop、提供前後4はHTTP200／stop・response bytes一致。内部235.783163秒、archive閉鎖約236.436507秒はUI観測。元提供はPID77140／health200へ復元、旧source・Analysis adapter不変。112tensorの保存・fresh reload一致と実weightsを回収。質問は消えたが、撤回済み過去感情の復活・根拠薄い内面推測があり、D04の正しい履歴利用も未達。追加CPUでT05／D02は現ownerが撤回対象を失効済みと再導出する一方、補助付き6100／6179byteが既存5800byteを超え、補助が生成材料から省かれることを確認。補助で直る因果は未証明。次は既存補助の受渡しを具体化し、追加学習へ自動進行しない。通常flag OFF、一般品質・全補助経路未完。
+
+### 一回の実行・復元・原本回収
+
+Mashが§9.14の26,293byte・架空16教師の32更新・前後22応答＋提供前後4確認・停止復元込み600秒／一回／再試行なしを承認。packet SHA256 `c3c7c1b81271cc5787822469930f468e66155988860f16533044ca90aeb07221`、CRC、凍結5file、新folderを照合し、既存Podの`ar03-rebalanced16-fit32-20261113-once`で一回実行した。再試行・追加生成・本文修補0。
+
+一次restoration.jsonは`RESEARCH_CLOSED_NOT_ADOPTED`、fit_completed=true、control_attempts／control_responses_received／control_calls各4、elapsed_seconds=235.78316273796372。archive閉鎖約236.436507秒は成功時stdoutのUI観測でJSON原本と区別する。600秒以内で完走。元PID76736を停止し、メモリ保持した元argv／起動環境／cwdで一回復元、PID77140／health200を事後確認。旧sourceとAnalysis adapterのhash・提供adapter pathは不変。既存2鍵は同Pod内認証、鍵値・全環境の保存／外部転送0。新候補を提供へ登録していない。
+
+natural／Analysisの前後4確認は全HTTP200／stop、同requestとresponse bytesが前後一致。Analysis所要は前39.6715秒／後38.7457秒。新規レンタル・依存install・deploy・live DB／Render／Supabase／RN変更0。Pod保持料金は0としない。
+
+外側postcheck_results.original.zipは14,311,445bytes、SHA256 `bff6fbd96e96d0e86cb8a00e7e75c8bb407a6e371568fe12fb8e149e67e9df56`。内側results.zipは26members／CRC正常、承認5file全bytes一致。22raw・全32更新・前後4受信原本・messages／source prefix／prompt／生成tokens・実weightsを回収。fit.log／提供log／鍵／全環境／base重み／repositoryは含めない。
+
+### 更新・保存再読と、前回16更新との比較条件
+
+履歴／plain16を交互に2周、step1〜32・全loss有限、学習＋checkpoint保存46.66297569102608秒。前11＋後11の22は全stop。全比較のmessages／source prefixは凍結packと一致し、前後prompt IDsも一致。teacher16の実encodedは先行CPU原本と全値一致。前回fit16のbefore11と今回before11はmessages／prefix／prompt IDs／生成token IDs／本文まで同一。
+
+候補weightsは15,351,792bytes、SHA256 `66491f8ed76ce4279f1f4501e6255d5c3821c96ac00675e05db5738912f96a42`、configはSHA256 `b37b786bbbba69c490090311728a164ddd933796896dd64e7f2a36d19f9d6e37`。実行時に112tensorの更新・保存全値一致・fresh baseへのreload全値一致。CPUでも112個／3,833,856param／F32／全値有限／連続offset／同hashを確認。前回configとの差は同じtarget_modules集合の配列順だけ。optimizer／RNGを含む厳密な途中再開状態の保存ではない。16教師のNLLは全件低下したが、品質合格には使わない。
+
+### 全22本文の読取と、旧16afterからの退行
+
+華恋と独立agentが全11原文・過去回答、新前後22本文、旧16afterを読み比べた。新前後の本文は9組変化／2組不変。新afterが旧16afterと同文なのはknown_updated／花／兄の3組。変化数を改善数とはしない。
+
+| 対照 | 今回の意味・自然さと旧16案との差 |
+|---|---|
+| D01 | 履歴省略で妹への誘いの方向逆転・未記載期待不在は消えるが、正しい履歴利用の実証ではない。「体験会を誘われた」は格が不自然 |
+| D02 | 旧16afterから退行。訂正済み過去の「嬉しくなかった」を事実として復活 |
+| D03 | 旧16afterで消えた内面推測が再発。「自分自身への期待や、その場への関心が低い」という根拠薄い解釈を補う |
+| D04 | 語順変更にとどまり、「全部背負うように感じた」という本人の受け取りを利用せず、今回未記載の嬉しくなさも共通化 |
+| known_withdrawn_scoped | 今回感情は保持するが原文の復唱。過去撤回理解の成功ではない |
+| known_updated_scoped | 旧16afterと同文。「その時」の所属は曖昧なまま、「その言葉」という対象追加も残る |
+| known_unsupported_scoped | 旧16afterの質問は消え、今回の記録だけを返す限定改善。復唱が中心 |
+| retention_T01 | 新前後・旧16afterとも同文。水やり・新しい葉・本人喜びを保持 |
+| retention_T02 | 通う未決定と未入会を実行済みにしないが、未入会の事実を入会未決定へ置換。厳密な同義ではない |
+| retention_T03 | 新前後・旧16afterとも同文。兄の合格と本人喜びを保持 |
+| retention_T06 | 未確定の「嫌なことがあった」が「ようです」から「のですね」へ確定的になる。不明保持未達 |
+
+同22rawを既存API493cd728のvalidate_replyへ無修補で通し、前11／後11が本文形式・問い検査を通過。旧16afterの問い1拒否は消えたが、意味誤りは残るため、CMEE意味合格・採用率11/11とは扱わない。新checker／拒否規則／SYSTEM追記0。今回rawのexact SQL保存・非生成再読、liveサービス／本人端末は未確認。
+
+過去評価の所属・D04の正しい履歴活用は未達で、撤回復活・内面推測の退行もあるため、新66491候補も通常不採用。target4改訂・plain8追加・16→32更新の複合候補で、個々の効果や失敗原因を分離・確定しない。D4は限定開発対照、旧失敗3／plain4は既露出、H8は準備済み0/8、改訂履歴教師8＋D4に載ったRESOLVED補助は0（教師4UNASSESSED／4省略、D4は3UNASSESSED／1省略）。既露出known_withdrawn／known_updated比較にはRESOLVED補助が実際に入っている。広い未知品質へ加算しない。
+
+### 追加CPUで区別できた、撤回の確定と作者材料での省略
+
+T05／D02の凍結snapshotを既存ownerで純CPU再導出すると、admitted_history_plansは各1、checkpointはRESOLVED、更新全体dispositionはMATERIAL_UPDATE、active2／inactive1。失効した原文は各「悲しかった」「嬉しくなかった」。個別WITHDRAW操作と更新全体のMATERIAL_UPDATEは別で、この2例を撤回reader未対応とは扱わない。
+
+既存の根拠付き補助を加えたmessagesは6100／6179byteで、既存5800byteを超える。現prepareでは補助全体が省かれ、raw原文・回答は保持されることと、実送信messagesが凍結sourceと完全一致することを確認した。手書きのclaim／RESOLVEDは使わない。source Gitblobはemlis_thread_history.py `6dcbdf0fe1d7939f1c276f9d3daf19136d9e36dd`、natural_reply.py `182e8da280e8120b8253eb89b3b3d3121afc0470`で現API493cd728と一致。新model／GPU／network／SQL呼出し0、製品変更0。
+
+これは既に確定できた補助が作者へ届かない位置の実確認で、補助を載せれば生成が直ることや、予算省略が学習失敗の原因だったことを証明しない。他のUNASSESSED例の未確定と、この2例の予算省略を一括りにしない。known_updatedではRESOLVED補助が届いていても所属の曖昧さが残るため、省略だけを全失敗の原因とはしない。
+
+### 保存と次の作業
+
+既存 `Cocolon_CMEE_AR03_HistoryTeaching_Candidates_20261112.zip`／Library `libfile_fde3_f-9e0e8945ad208191a053021e810be6d6_2f7470f963808191aaebf050935e72de` をversion7へ更新。28,998,969bytes／54members、SHA256 `d28a5af890aafa14b92249993125e227fb8ead0d8592e7c9fe3ea3c627245e08`。旧47membersとREADMEを不変保持し、新32原本・実weights・CPU検証・全11比較・補助省略の再導出結果を追加。秘密・全環境・browser screenshot・Git-backed製品sourceは含めない。
+
+同じ方式の追加有料学習・同じ重みの追加再生成へ進めない。次は、全原文・全回答・出所・上限を保ち、既存の根拠付き補助の受渡しを具体化する。原文と補助の材料同一性、撤回／有効／未確定の区別を維持し、新guard／SYSTEM追加や手書きclaimで埋めない。新しい実比較は未準備・未実行で、今回一回の承認を流用しない。
+
+通常flag OFF、新66491・旧434a候補とも通常不採用。製品source／test／API／DB／RN／Render／Supabase変更0、STRUCTURE_MAP_DELTA_NONE。primary BLOCKER_NARROWED、商品品質credit0。全file／全仕様理解の完了や、AR-03／他AR／三中核・一般品質・live反映／本人端末・正式受入れは未完。本節を最新再開位置とし、§9.14の実行前記録を履歴として保持する。
 
 
 ## 10. 変更箇所と検証
