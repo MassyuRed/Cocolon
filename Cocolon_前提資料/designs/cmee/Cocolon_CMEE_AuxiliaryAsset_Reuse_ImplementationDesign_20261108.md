@@ -1158,7 +1158,7 @@ ANSWER_TIMEを元の出来事当時と読み替えたり、回答の「今」を
 
 ### CPU確認と限界
 
-関連5file296 PASS、FAIL0。MockTransportによる一取得、rawそのままの既存意味採否、希望→実行済みの拒否、native参照chainと重複時の省略保留、過去／否定／留保、欄・段落・source分離、既定wire不変を確認。初期の現文法外の正例・chain材料誤りは適格な架空材料へ修正し、source grammar／validatorは変更していない。部分checkoutの不足test／fixtureはexact親blobへ復元した。authoring_application統合集合は別の不足依存で未実行、296へ含めない。新CIは取得時点で0run、dispatch／rerun0であり、全suite成功とはしない。
+関連5file296 PASS、FAIL0。MockTransportによる一取得、rawそのままの既存意味採否、希望→実行済みの拒否、native参照chainと重複時の省略保留、過去／否定／留保、欄・段落・source分離、既定wire不変を確認。初期の現文法外の正例・chain材料誤りは適格な架空材料へ修正し、source grammar／validatorは変更していない。部分checkoutの不足test／fixtureはexact親blobへ復元した。authoring_application統合集合は別の不足依存で未実行、296へ含めない。API ec4bd668の自動push CI [43332056239](https://github.com/MassyuRed/mashos-api/actions/runs/43332056239)は現在実行中で未判定。PR限定一覧の0runを全workflow未起動と一般化せず、全suite成功とはしない。追加dispatch／rerun0。
 
 既存一般3型（段落／二欄／refined）は新optionでも全messagesがbyte同一だった。今回の編集能力の対象外であり、同じ3を再生成しない。新しいモデル本文・SQL保存・同版画像・通常採用は0。本文の一般品質改善は未証明。
 
