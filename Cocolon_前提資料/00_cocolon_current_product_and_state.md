@@ -1,3 +1,5 @@
+> **11/12・三中核の実4B比較7件と保存抜け修復：** Mashの具体的承認後、既存Podで7件を一回・98.351秒、全HTTP200/stop。学習・再試行・提供再起動0、PID73476／health200を前後維持。撤回後の既発行問いが本文へ再出力・保存される実抜けをAPI `4183126d00c2ed4238c526cf17f6b28cdbb18dc6`で修復し、同rawの2保存維持／1拒否・非生成再読と関連103件成功を確認。Piece旧新は原2欄の完全コピー・編集改善0、CMEE2拒否。Analysis旧新の図／本文とartifact再読は成立し、新v2の場面引用を保持するが、反復・誤字・関係説明等の品質は未達。Piece／Analysisのexact SQL保存は未実施、通常採用／live反映／端末・全補助経路は未完。 [実原本・前後比較・保存範囲](<designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#auxiliary-crosscore-actual7-20261112>)。
+
 > **11/12・三中核への既存能力移管候補：** API `eea4761f7b5009128d497b2b69e1b1d0766ad57d`。現naturalの問い／回答更新、Pieceの内容選択、明示Analysisのsource意味責務・図／本文を既存ownerへ接続。 新規一括53件成功、実隔離SQL・保存後の非生成再読を含む。既存CIへ新検証を追加。新しい実4B比較7要求はuploadの自動承認拒否で未送信・生成0。通常採用／live DB適用／Render配置／本人端末・全補助経路は未完。 [実呼出し・確認範囲・次](<designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#auxiliary-crosscore-transfer-20261112>)。
 
 > **11/12・補助経路の進め方を変更：** 個別の失敗文を順に直す進行から、既存の意味責務・内容選択・独立逆読取・候補比較・共通原因分析を、現natural／Piece／Analysisへ移管して実出力・保存再読までまとめて進める単位へ変更。AR-01/04/05を並行し、AR-02/03の本人回答・訂正・履歴も一般品質完成待ちにしない。AR-06/07は必要部分が成立次第、AR-08は各単位の通常適用として接続する。新規の補助systemを先に作らず、旧対応表と既存ownerを使う。今回の変更は実施順・作業単位の確定であり、コード・モデル・通常提供・受入れの新規完了実績はない。前回の固定実3件修復／旧73保持／9隔離保存を継承し、全補助経路は未完。[実施方法と完了の扱い](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#91-2026-11-12--局所修正の直列進行から既存能力群の移管と三中核での利用へ変更)。
@@ -185,8 +187,8 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | 通常感情入力 | 思考・解釈`memo`と、出来事・行動・結果`memo_action`を分けて保存。RNはどちらかの本文＋感情選択＋カテゴリ1件以上が送信条件。APIの旧空memo受理とは別 | 原入力保存成功とEmlis本文成功を分ける。保存・履歴・通知・集計への既存接続あり。通常経路の全端末・全失敗復旧は未確認 |
 | 感情・強さ | 喜び／悲しみ／怒り／不安／平穏と弱中強。自己理解は排他的な特別タグで、強さUIなし・wireはmedium | 自己理解を通常感情の分布・感情通知へ混ぜない。時刻・カテゴリ・所有者とともに扱う |
 | 入力draft・履歴 | 本人別local draftと期限、検索・秘匿・削除、保存済み入力への再入場のコードあり | 回答draft・全中断復帰まで一括保証しない。削除・所有者切替・期限切れ後の派生物利用を別条件として扱う |
-| Emlis初回 | 旧保存profileの二段を維持。新private natural_reply.v1は本人宛応答/通常入力/SQL保存/DTO/RNへsource接続。文数固定なし・分析NOT_GENERATED・旧意味/問い保持 | §21の実HTTPS→隔離Q3保存2件・GET4回/start2回を保持。最新§30は新2組4更新/保存freshreload/34EOS完了、否定反転再発・因果補完等で6e1c不採用。§30時点の否定対照診断4生成案は未実行。最新配分は11/1機構準備、11/2〜11/6サーバー側品質改善（§31）。API744336c0配置/RN6701内部配布済み。実Auth→固定4B→実DB FINAL保存1件→本人同本文再読を§37で確認。過去Q3で保存済みの適格本人回答／訂正をnatural入力材料へ渡すsourceは接続済み。一方、新natural自身はFINAL／COMPLETEDで、新たな任意問い・回答後更新・frame訂正の一往復は未接続。旧Q1／Q3の実装済み経路と分ける。新観測材料生成そのものも未完。PRODUCT_NOT_CLEAR/正式0/3/candidate_ready=false |
-| Emlis任意問い・回答更新 | **11/12決定：全plan 0..3、初期ON・前回選択保持、短い受け止め→問い→回答後応答。** 旧Q1/Q3実装はFree／Plus 0..1・Premium 0..3で、skip・終了・訂正・撤回・再読と別source保存あり | 新決定は実装未反映。現natural自身の問い／回答後更新は未接続。0問終了だけで十分理解したとは判断せず、終了理由を区別する。回答は新規感情入力件数や国家eventへ加算しない。一般品質・本人実機は残件 |
+| Emlis初回 | 旧保存profileを維持。新naturalは既存単一作者・source・保存／DTOへ接続し、新Q3候補では短い受け止め／別QUESTION／本人回答後応答を扱う。自由文を有限checkpointへ強制しない。分析材料はNOT_GENERATEDを維持 | 6701での実Auth→固定4B→実DB初回保存／本人同本文再読の実績は継承。11/12の候補実raw3件は現service／隔離SQLへ再生し、初回・回答後2件の保存再読、撤回後の再質問の保存拒否を確認。一般応答品質・有効な撤回後本文・通常反映／本人端末は未完。先頭の実7件と補助設計§9.4を参照。PRODUCT_NOT_CLEAR／正式0/3／candidate_ready=false |
+| Emlis任意問い・回答更新 | **11/12採用：全plan最大3問、初期ON・本人別前回保持、短い受け止め→問い→回答後応答。** 新naturalのsource-bound問い／回答更新と公開設定は候補へ接続済み。既存保存threadは保存policyを維持。新finite Q3もOFFを尊重し旧上限は不変 | 実4B7件中のnatural3件を取得。撤回時の既問再出力を実測し、同rawで誤質問保存→拒否を確認。0問終了を十分理解と同義にせず終了理由を区別し、回答を新規感情入力／国家eventへ加算しない。一般自由文の問い判断・応答品質・通常反映／実機は未完 |
 | Emlis応答後の本人訂正 | **11/12採用：根拠・範囲を示せる仮説と、本人が具体的に訂正できる入口。** 「どの内容ですか？」「どう違いましたか？」を分け、対象と本人説明を必須とする。単なる否定からAIが正しい読みを補わない | 新導線は未実装。旧Q1/Q3の回答による訂正・撤回、Premiumのframe訂正は既存資産だが、現natural完了後の任意本文訂正とは別。[Emlis詳細](designs/cmee/v1/02_emlis_v1a_detailed_design.md#emlis-interpretation-correction-20261112)。訂正時の追加確認と3問の関係・処理方式等は未具体化 |
 | Emlis有料拡張 | Free当回のみ。新naturalは全閲覧権利内の本人原入力/回答/訂正からn-gram関連候補をPlus3/Premium6選択し保存guardを固定。新RPCは実DB適用済み。Plus365日権利は維持 | 合成provider/実SQLで検索・保存・失効境界を確認。実4Bの意味ある履歴応答と本人端末は未完。Premium等の販売延期は未採用案 |
 | 配置と本人確認 | 最新APIba0de502/dep-dbjckv5g1s2s73fc6uegは14:16:37 JST Live、read_only設定変更なし。main/autoDeploy OFF維持。最新RN3a8660ba/7001はApple処理通過・内部配布済み | Emlis初回の実Auth→固定4B→DB保存→本人同本文再読は6701/§37で確認、応答popupは6801で本人確認済み。6901の余白位置はMashが問題なしと確認。Piece preview422/生成未完成と§39の表示修復を区別。常時提供/一般品質/追加応答/正式受入れは残る |
@@ -274,9 +276,9 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 | プラン | 仕様・表示上の体験 | 成立状況の限界 |
 |---|---|---|
-| Free | 当回Emlis。問いは11/12決定で全plan共通最大3問（旧codeは最大1問）、全期間を対象にした共通の現在map、月次map直近2回閲覧、Piece月5、入力等の一般履歴は当月＋前月 | code・表示と、自然な本人理解の品質は別 |
-| Plus | 適格本人履歴を用いたEmlis。問いは11/12決定で最大3問（旧codeは最大1問）、こころ天気の文章／理由、共通の現在map・月次map直近12回閲覧、Piece月30 | 履歴参照と有料差の体感は同義ではない |
-| Premium | 修正できるframeと本人続行の最大3問（11/12決定で全plan共通化。新しい設定・表示順は未反映）、長期weather・共通の現在mapと月次map全期間、一般履歴／Piece無制限、設計上のIF・Saved | IF／Saved未実装。旧period版のlight／standard／deepと、新累積map共通の採用方針を混同しない |
+| Free | 当回Emlis。11/12採用の最大3問と本人別受取設定は新Q3 natural候補へ接続済み（旧保存policy／新finite Q3の既存上限は維持）。全期間を対象にした共通の現在map、月次map直近2回閲覧、Piece月5、入力等の一般履歴は当月＋前月 | 候補code・表示と通常反映／自然な本人理解の品質を分ける |
+| Plus | 適格本人履歴を用いたEmlis。新Q3 natural候補は最大3問・本人別受取設定を接続済み（旧保存／finite上限は維持）。こころ天気の文章／理由、共通の現在map・月次map直近12回閲覧、Piece月30 | 履歴参照と有料差の体感は同義でなく、問いの通常反映・一般品質は未完 |
+| Premium | 既存の修正できるframe、本人続行。新Q3 natural候補では全plan共通最大3問・受取設定／回答後応答を接続済み。長期weather・共通の現在mapと月次map全期間、一般履歴／Piece無制限、設計上のIF・Saved | 完了後の二入力訂正と通常反映／一般品質、IF／Savedは未完。旧period版light／standard／deepと新累積map共通を混同しない |
 
 10/31最新：Mashの明示指示でPlus月680円／Premium月1,480円へ変更。RNのcatalog・選択画面・account料金helperとAPI fallbackを同期し、Supabase `subscription_plan_catalog`の`price_label`／`note_lines_json`を対象2行だけ更新・独立再読した。料金・案内と`updated_at`以外のDB列は不変。既存APIはPlus／Premiumの`note_lines`を公開時に空にするため、DB案内の更新を画面表示成功とは扱わない。実ストア請求額・税込区分、本人端末表示は未確認。11/1に公開`/subscription/bootstrap`200で680/1480円を直接確認し、RN6601をUploadしたがApple90683となり、修正後の6701で内部配布/本人起動を確認した。10/23時点の月300円／980円は変更前の記録。Pieceの5/30/無制限は保存数で、新AI生成数の上限ではない。旧Emlisの1／3問、新決定の全plan最大3問はいずれもthread単位であり、月間生成費を制限しない。
 
