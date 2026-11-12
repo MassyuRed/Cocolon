@@ -4,15 +4,15 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-13 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR03_ACTIVE_EVALUATION_TIME_BINDING_PREPARED_NOT_MODEL_EVALUATED
+status: AR03_ACTIVE_EVALUATION_TIME_ACTUAL4_NOT_ADOPTED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Owned active event/evaluation and temporal binding projected to opt-in history author material; four current-4B requests prepared but not uploaded or executed; prior one-time approval consumed, quality improvement unmeasured"
+current_next: "Actual4 complete; limited shortening but event/answer/current scope and target remain unresolved; candidate not adopted, normal and opt-in defaults OFF; no automatic retry, prompt expansion or training"
 runtime_effect_of_this_document: 0
 ---
 
-> **11/13・AR-03の有効な評価対象・時点を作者へ渡す候補を実装、実4Bは未実行：** API `a0a6746e233b09d8cdfbd94b5d17ee5af9587946`。既存の更新後planが持つ出来事→回答評価の有効な結合と、ORIGINAL_OCCASION／ANSWER_TIME・実source anchor・時点根拠が作者材料から落ちていたため、同じnatural owner内の明示opt-inへ回収。新SYSTEM／guard／学習0、通常・旧研究経路は不変。関連249件成功、旧20snapshotは新flagを含め全要求同一。既存SQLから構築した2組は原文／全回答／prefix／SYSTEMを旧新同一のまま、対象・時点を5762／5796byteで搭載。v1→既存v2圧縮も含む作者材料候補全体の比較で、改善は未証明。38,004byte・旧新4要求・最大5分一回を準備保存したが未送信。前回T05／D02不採用は変えず、通常flag OFF・AR-03／全補助経路は未完。 [修復・検証・次回比較](<#auxiliary-history-active-binding-prepared-20261113>)。
+> **11/13・AR-03の評価対象／時点候補を実4応答で比較、限定的短縮はあるが通常不採用：** 承認38,004byteを既存Podで一回実行し、8.890746秒・全4 HTTP200／stop、PID77140・前後health200を維持。学習／再試行／提供再起動0。ORIGINAL_OCCASION候補は「その時」の所属が曖昧なまま、未記載の「その言葉」へ評価対象を狭めた。ANSWER_TIME候補は不要な原因探索・問い掛けを除き短縮したが、「そして今は」と続け、過去記録への回答時点と今回の別記録を区別できていない。全4は既存形式検査を通るが意味合格ではない。通常support OFF／history-plan opt-in default falseを維持。今回一回の承認は消費済み、新本文SQL保存・live反映／本人端末・AR-03／全補助経路は未完。 [実原本・判定・再開点](<#auxiliary-history-active-binding-actual4-20261113>)。
 
 > **11/12・固定実3件の意味読取拒否を修復：** API87512ddaで、既存述語／本人評価／感情／literal-self資産を、型付きoperatorと完全保持spanの独立比較へ回収。保存344aの同じ実raw3件は3拒否→3採用、旧73件の採否・全artifact・prepared／messages／rawは修正前後同一。新GPU・学習0。3plan計9件の隔離SQL保存・非生成再読、本文／recipe／renderer一致とquota各1を確認。Free refinedは元の適格ADD snapshot、Plus／Premiumは同じ全入力・回答から既存ownerでtier別資格を再導出。合成Auth／source・mock HTTP framingであり、実HTTP／live DB／本人端末ではない。新70を含む局所1774と既存SQL56が成功。Piece CI43174913229はattempt1・39step成功、model集合2021に新70を含む（重複加算なし）。生成本文自体は従来の常体化が中心で、一般編集品質・同じ新本文のnative画像・通常採用・AR-04／全補助経路は未完。 [修復・原本・確認範囲](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-general3-operator-review-repair-20261112)。
 
@@ -1101,6 +1101,48 @@ about_timeとsource anchorを同じものと扱わない。今回ANSWER_TIMEの�
 既存`Cocolon_CMEE_AR03_HistoryTeaching_Candidates_20261112.zip`を同Library IDのversion10へ保存。29,089,093bytes／71members、SHA256 `f8b3d11372aea3b43e97ce4a66b67b5e422b5d5b9af601c62d1954996b9d0986`。旧64membersのREADME以外は不変、旧READMEはREADME.v9.mdに保持し、今回準備6fileを追加。旧重み／全実原本・不採用理由を保持し、秘密・全環境・browser screenshot・Git-backed製品sourceは加えない。
 
 STRUCTURE_MAP_DELTA_NONE：既存natural投影owner内の責務回収で、新owner／新path／公開経路／責任境界を増やしていない。現在地4箇所だけ関連差分更新。実装反映・CPU準備は成立したが、実商品品質の改善・AR-03／他AR／三中核・全補助経路の完了ではない。§9.17の不採用を継承し、本節を最新再開位置とする。
+
+
+<a id="auxiliary-history-active-binding-actual4-20261113"></a>
+## 9.19 2026-11-13 — 有効な評価対象／時点候補の実4応答、短縮はあるが所属未達で通常不採用
+
+### 承認された一回の実行と技術結果
+
+Mashが§9.18の38,004byte／架空2組の旧新4応答、最大5分・一回・学習／再試行／提供再起動なし、既存鍵1つは同Pod内認証だけに使う実行を明示承認。localとPodのscriptサイズ・SHA256 `6a30f9c6a1a6cc0b2bfb389cd10a71dc302bba9112c9261bb0aa6006bdb86577`を照合して一回実行した。
+
+原本summaryのelapsed_seconds=8.890745714074、http_generation_calls=results_recorded=4、全attempt1／HTTP200／finish_reason stop。始終PID77140、前後health200／status ok、retry=training=provider_restart各0。モデルは既存natural alias `cocolon-qwen35-4b-base-851bf6e`で、新しい学習候補のload・model／adapter変更・依存install・新rental・提供停止／再起動は0。既存named natural鍵は127.0.0.1認証だけに使い、鍵・全環境を結果へ保存／外部出力していない。既存Podの保持料金が0という意味ではない。
+
+回収original_results.zipは28,491bytes／7members、SHA256 `5c87a62776baeeb9b4802cb0484f1f270d6ce200986996cff819b3035d16ff3d`、CRC正常。華恋と独立agentが、同梱scriptの承認bytes一致、個別response1〜4と集約rowの一致、全prepared bodyへの同じruntime model指定と実wireの一致、request bytes／hash・全raw response hashを確認した。
+
+| 対照 | before／candidateの実messages UTF-8 byte | 受信 |
+|---|---:|---|
+| original_occasion | 5788／5762 | 両200／stop |
+| answer_time | 5777／5796 | 両200／stop |
+
+各pairのSYSTEM本文は実requestでも同一。raw原文・全回答・問い・選択・出所・prefixは準備どおりで、有効な評価関係とtyped時点根拠は上限内に届いた。ただしv1全文fragment→既存v2共有locatorへの表現変更も含むため、有効関係だけの純粋効果と認定しない。2組は既露出の架空派生対照で、未知事例2題の一般化成功へ加算しない。
+
+### 全4本文を原文・元場面／回答時点／今回と照合した結果
+
+華恋と独立agentが全4実本文を読んだ。両原文に書かれた「嬉しくなかった」の共通性と、過去回答の「重さ」を今回へ足すことを区別した。
+
+| 対照 | 旧から候補への意味・自然さ |
+|---|---|
+| original_occasion | 旧は「その時、褒められたこと自体が『重かった』」と返すが、過去の出来事か今回か本文で明確でない。候補も「その時」の所属を区別せず、「その言葉は『重かった』」と未記載の対象へ評価を狭める。対象／時点の改善は確認できない |
+| answer_time | 旧は回答の「今は重いです」を今回の心境の補強へ結び、「なぜそのような感情が生まれているのか、その重さの正体は何か。」と原因探索・問い掛けを付加。候補はこれを除き一文へ短縮する限定改善があるが、「そして今は重く感じている」と接続し、過去記録への回答時点と今回の別記録を明示的に分けていない |
+
+ANSWER_TIMEを元の出来事当時と読み替えたり、回答の「今」を今回へ無条件に足したりしない。今回の本文は継続／終了や診断を新たに明言はしていないが、必要な対象・時点の所属と、復唱を越えた自然な受け取りは未達。短くなったことを、この意味保持の合格へ変換しない。
+
+同じ4rawを現APIa0a6746eの既存validate_replyへ無修補で照合し、全4が形式通過。旧answer_timeの「〜何か。」という問い掛け断片も通るため、4/4を意味合格・CMEE採用率・保存成功とは扱わない。新guard／拒否rule／SYSTEM追記・本文修補0。今回の新生成本文を商品SQLへ保存・非生成再読する実行、通常enablement、live API／DB／Render／Supabase／RN反映と本人端末確認は未実施。
+
+### 判断・保存・現在の再開点
+
+今回の有効関係／時点候補も通常不採用。不要な問い掛けの除去・短縮という限定的差は記録するが、対象と時点の所属が未達なので採用しない。通常use_meaning_support=False、新use_history_answer_planのdefault falseを維持し、§9.17 locator候補・旧434a／66491学習候補の不採用も継承する。CPUで保持・復元できる意味を実際に渡しても、4B本文がその区別を正しく利用した証明にはならない。型や注釈を追加すれば直る、または学習回数を増やせば直ると原因を確定しない。
+
+今回の一回承認は4要求で消費済み。同じ比較の再試行・追加生成・新prompt／新guard候補の追加・追加学習へ自動進行しない。残る条件は、既存作者経路で出来事への評価対象と元場面／回答時点／今回を分け、不要な問い・未記載対象を補わず自然に返すこと。検出・搭載率・件数だけをこの品質改善へ換算しない。
+
+既存`Cocolon_CMEE_AR03_HistoryTeaching_Candidates_20261112.zip`を同Library IDのversion11へ更新。29,125,000bytes／76members、SHA256 `c3ddaaeac37680a4ef353a7242e3f176d568e40eafdbc9cb569eb4bea9bd9c40`。旧71membersのREADME以外は不変、旧READMEはREADME.v10.mdとして保持し、今回actual原本ZIP・CPU技術照合・全2組4本文の意味review・説明を追加。旧重み／実原本・不採用と準備結果も保持し、秘密・全環境・browser screenshot・Git-backed製品sourceは加えない。
+
+今回の製品source／test／API変更0、API headはa0a6746eのまま。前提資料の現在地4箇所だけを差分更新。STRUCTURE_MAP_DELTA_NONE：新owner／path／公開経路／責任境界は増えていない。primaryは候補NOT_ADOPTED、通常採用・商品受入れcredit0。§9.18の未実行は承認前の履歴として保持し、本節を最新再開位置とする。AR-03／他AR・三中核・全補助経路・一般品質・通常反映・本人受入れは未完。
 
 ## 10. 変更箇所と検証
 
