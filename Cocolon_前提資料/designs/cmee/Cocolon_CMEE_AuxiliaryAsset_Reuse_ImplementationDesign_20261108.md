@@ -562,7 +562,7 @@ Primary outcomeは`TECHNICAL_CREDIT`、一般生成品質のhuman acceptance／�
 
 ### 次の具体的な一回比較
 
-架空の撤回／更新／未対応履歴3組で、同じsourceの補助なし／候補ありの6要求。compact messagesは3,961→5,684、3,943→5,766、3,925→4,560bytes。実tokenizer数・実出力・速度・金銭原価は未測定。既存稼働Pod `f1lle4xwq3wjln`の自然応答用model aliasを提供引数から取得し、同Podの127.0.0.1だけに送る。
+架空の撤回／更新／未対応履歴3組で、同じsourceの補助なし／候補ありの6要求。compact messagesは3,979→5,702、3,961→5,784、3,943→4,578bytes。実tokenizer数・実出力・速度・金銭原価は未測定。既存稼働Pod `f1lle4xwq3wjln`の自然応答用model aliasを提供引数から取得し、同Podの127.0.0.1だけに送る。
 
 一回script45,136bytes、SHA256 `70db62ff7e8e4eb3a1080197247f3f6252cbe9d9bc86170706e8f6a03ffa8a28`。最大420秒・6生成・各60秒期限、学習／再試行／提供停止再起動／重み変更0。既存`EMLIS_NATURAL_REPLY_API_KEY`一鍵だけを同Pod内認証へ使い、全環境の読取・鍵値の表示／保存／外部出力はしない。前後healthとPIDを確認し、専用出力folderの再利用を拒否する。前回7callの承認は完了・消費済みで、新しい一回へ流用しない。新しい具体承認前のPod送信／生成は0。
 
