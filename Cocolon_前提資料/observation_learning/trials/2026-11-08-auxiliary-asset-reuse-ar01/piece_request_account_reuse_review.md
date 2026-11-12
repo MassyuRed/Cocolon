@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/12・AR-04最新：** 研究07ea24ccのrun43118077795はcompile成功／Whole1method失敗。元13条件は不変、root assertion失敗14→26（旧14保持・新12）、初回本文8072.684msでV4前timeout。V4は100call中strict92（local48/placed44）、自然snapshotなし7、面積拒否1。既存履歴の同call対応100件は成立、残9PNGは前回と全byte/画素一致。修復・速度改善・通常採用の証明ではない。通常ios.v2はbitmap分岐でV4自然観測を必須にせず、共通の初回計測timeoutは残件。次は記録済み344a通常051/refined007の原source/messages/rawを再利用し、通常host→実native fit→明示save→receipt→fresh owner→同版exportを一続きに確認する。通常.mm581/pin/selector OFFを維持、AR-04未完。 [既存natural観測の接続と現在地](piece_request_account_reuse_review.md#piece-v4-natural-context-link-20261112)。
+> **11/12・AR-04最新：** 研究2dddc0a3の通常host接続run43128036253を開始、結果未判定。Free原録画051/007を異なるownerのまま使い、actual saved-input host→実native fit/明示save→receipt→fresh owner詳細→fresh export/actual job.captureを同じ本文/recipe/3hash/保存rowで確認する新1method。原HTTP録画ではなく実API wire ownerによる明示test投影（expiry/quota/合成Auth）、別Premium native6は不使用。元7group生成bytes・製品native.mm581/pin・8秒不変、V4失敗14→26は未修復で今回は未実行。通常model selector OFF・未採用を維持。 [既存natural観測の接続と現在地](piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -2611,4 +2611,29 @@ artifact13901638151は93,315,177byte/SHA256 66f4551cff0e92346eea559d62626da2441f
 [実行記録・比較画像](https://chatgpt.com/library?file_id=libfile_fde3_f-c3577a63fb108191a92dc9471e545099_2f7470f963808191aaebf050935e72de&account_id=personal)はCocolon_CMEE_AR04_NaturalContext_Link_20261112.zip、2,851,598byte/SHA256 cc07f1dd1e657a0a759a488c64e150634cbabb716c731f1e9b1ab7c108a3763b、35memberの全CRC/各member hash一致を確認済み。今回と前回のWhole実13JSON/PNG/log/map・独立読取を保持し、Git管理code/文書や他5method出力は複製しない。前回InverseClip ZIPは別単位として維持した。
 
 PRIMARY_OUTCOME=限定TECHNICAL_CREDIT（既存履歴の同callback対応のみ）。描画修復・速度改善・Whole全成功・通常採用・商品受入れcredit0。通常製品.mm581/pin/selector OFF、frozen recipe/旧保存互換を保持、今回live環境変数の再取得/変更は0。GPU/学習/SQL/実Auth/Render配置/署名build/配布0。STRUCTURE_MAP_DELTA_NONE：通常製品owner/公開型/route/DB/作者/renderer責務の変更0。研究2testpathの限定観測を完了し、次は既存通常hostの直接接続へ戻る。
+
+
+
+<a id="piece-normal-host-save-export-20261112"></a>
+## 11/12 AR-04 — 通常saved-input hostから保存・fresh owner・同版exportを接続（実行中）
+
+fresh通常6e28fda4・詳細設計§7.1/11/12、全体現在地/設計/全file地図・最新weekly・current規則と恒久incidentから再開した。前回V4のroot14→26、first essay8072.684ms/V4到達0、stage58の対応履歴0件は未修復として保持し、追加observerや期限緩和の周回へ戻らない。通常ios.v2は既存bitmap経路を使う。今回は通常hostの連続実証を直接進め、旧73生成/243SQL/static6/transition4を再実行しない。
+
+### 原録画と公開wireの区別
+
+既存Cocolon_CMEE_AR04_Configured3_Native6_20261111.zip（SHA256 d70f22613cc6eb84fdd43ee7c1fd0d00bd60bd43ea7b395e19efc58bf01a46d5）のFree B53-051/007を使う。051は通常2段落、007は既存Q2の明示回答/RESOLVED ADD/currentによる3段落。原source7/source_ref/owner/PreparedRequest/messages/rawを全文対応し、request/responseと本文/payload/recipeのhash一致を確認した。二つのowner UUIDは異なり、別sessionのまま保つ。元要求はrequested_format=null、visual選択3項目nullでactual hostと一致する。Free007には配色変更がなく、selected previewは初回と同じ。別のPremium/required_subtle公開DTO・static6とは同一作品へ結合しない。
+
+元previewはservice内部16fieldで、現RN HTTP19fieldではない。fresh API8a0192のactual _preview_public_response/public.update、Free quota/capability、PieceOwnerService.detail/historyと_responseを直接実行し、認証/HTTP/ASGI/SQL/model/GPU0でwire形を投影した。本文/ID/recipe/3hash/保存rowは原録画のまま。元expiryは過去なので、別のtest copyだけ2099へ投影し、quotaは明示0→1のFree fixture stateである。これを新server発行・旧HTTP録画・live quotaとは呼ばない。原録画そのものは書き換えない。現RN saveはprivateと生成save keyを明示するため、旧helperの省略visibility/固定keyとのwire byte同一とはしない。canonical private作品・保存receipt/detailは一致する。exportはactual detail/no-store投影でreceipt ACKを創作せず、Photos/Shareは呼ばない。
+
+### 実装・一回のCI
+
+[研究2dddc0a3](https://github.com/MassyuRed/Cocolon/commit/2dddc0a3c04143e2f774bf9e5d08fb3c63b74901)は通常6e28の子、test6pathだけ。新fixture tests/fixtures/piece-ar04-configured3-host.jsonと既存factoryの新group、既存entryのactual InputPieceActionArea/Modal/Card/owner hostのmount、既存XCTest1method、既存runnerの閉transport/resolver/selector、既存workflowの研究routingを変更した。新controller/workflow/checker/依存は作らず、product source/pinは581dfd3864cb5f88457c8cd3e54aa7e6e360e7dcca8c4b58491697c5eb7dbfd4のまま。
+
+actual createFromSavedInput→source GET→preview POSTを使い、Cardのactual fitとisPieceBitmapSaveAdmittedから現ModalのonSaveを起動する。fit/許可値を注入しない。保存receiptからID/ownerだけで実owner hostを新mountし、通常savedPiece指定の直接detail GETへ進む（history一覧/paginationは今回対象外）。prepareExportはfresh export GET後のactual PieceExportCanvas/targetを使い、actual job.captureが作るowned PNGをcandidate asset SHAで一意に回収し、既存native pixel oracleへ渡す。JSイベントハンドラの明示起動であり、本人touch/実Auth/実API一体の証明ではない。
+
+閉local transportは各case5API/前後session10回だけ、異owner/余分call/path/body/header/key/signalを拒否。実Supabase moduleはtest resolverで全操作拒否へ解決し、actual context Providerへ固定runtimeを供給する。通常Auth/AppRuntimeProviderは起動しない。Node一回で正2caseと13拒否系PASS、bash/YAML/新orchestration JS syntaxは成功。旧legacy13/bitmap12/admitted29/export20/model73六/transition二scenario/Android八の生成JSONは全byte不変。local UIKit成功とはしない。GitHub全6fileの全文/blob読戻しと変更集合、独立reviewを確認して研究refへ反映した。
+
+[run43128036253](https://github.com/MassyuRed/Cocolon/actions/runs/43128036253)は起動済み・結果未判定。新testRecordedSavedInputHostSaveOwnerAndExportWithRealReactNativeだけを実行し、旧6method/V4はUNEXECUTED。45分job/各Card元8秒・画素/本文/3hash/owner/版条件は維持、manual dispatch/rerun0。同runの終端と6frame/PNG/actual export/canonical一致を回収する。失敗は成功へ数えず、同じrunを重ねて起動しない。
+
+通常model selector OFF・未採用、live DB/Render/署名build/配布/Photos/本人端末・一般品質/正式0/3・AR-04/他AR残件は未完。今回新model/GPU/SQL/実Auth/外部製品HTTP0。STRUCTURE_MAP_DELTA_NONE：通常product owner/route/公開型/DB責務不変、既存native harnessへtest用1fixtureを接続しただけ。
 
