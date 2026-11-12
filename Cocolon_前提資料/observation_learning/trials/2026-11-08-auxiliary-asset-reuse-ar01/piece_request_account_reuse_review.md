@@ -1,6 +1,8 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/12・AR-04最新：** 研究36335452/run43146249187はattempt1・新同1method成功。両作品のpreview/saved/export全6frameで本文/native canvas/alpha/元8秒が成立し、手動ACKなしの閉要求→native ACK後遷移→saved mountと両actual export PNG一致を確認。実検証は研究363のsourceで、同じ製品2/単体2fileを今回通常Draftへ採用する。native harnessは採用せず、新normal headのCI成功は主張しない。既存474PASS（独立18含む）・full JSXも継承。STRUCTURE_MAP_DELTA_PRESENT。native581/guard/renderer/8秒不変、model selector OFF/重み未採用・旧V4失敗14→26は未解決。AR-04一般編集品質/実Auth/API/DB/本人端末・正式0/3/他ARは未完。 [既存natural観測の接続と現在地](piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
+> **11/12・保存344aの新3件実行：** 保存344aで同じ新3件を一回実生成し、段落／二欄／適格refinedともstop。候補3＋前後対照4の計7call、追加学習／retry0、復元込み内部116.995875秒・ZIP close後の外側完了観測181.715秒。元提供PID73476へ復元し、引数／環境／作業場所／両認証情報の保持とnormal／Analysis前後response一致を確認。実本文は常体化が中心で、原入力との全体読取では意味変異を見つけていないが、現CMEEは3/3をpiece_model_meaning_unassessed_or_changedで拒否。保存／追加S7／同版画像0、通常採用は保留。全file／全仕様確認と一般編集品質・live接続・本人端末・正式受入れは未完。 [実原本・拒否位置・再開点](piece_request_account_reuse_review.md#piece-general3-344a-actual-20261112)。
+
+> **11/12・先行する通常画像実証の履歴：** 研究36335452/run43146249187はattempt1・新同1method成功。両作品のpreview/saved/export全6frameで本文/native canvas/alpha/元8秒が成立し、手動ACKなしの閉要求→native ACK後遷移→saved mountと両actual export PNG一致を確認。実検証は研究363のsourceで、同じ製品2/単体2fileを今回通常Draftへ採用する。native harnessは採用せず、新normal headのCI成功は主張しない。既存474PASS（独立18含む）・full JSXも継承。STRUCTURE_MAP_DELTA_PRESENT。native581/guard/renderer/8秒不変、model selector OFF/重み未採用・旧V4失敗14→26は未解決。AR-04一般編集品質/実Auth/API/DB/本人端末・正式0/3/他ARは未完。 [既存natural観測の接続と現在地](piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -2781,8 +2783,45 @@ Mashの再指示で既存CURRENT_RULES R2.1・入口・出力確認へ「毎回�
 
 private実原本は既存保存先の `Cocolon_CMEE_AR04_GeneralParagraph_Actual4B_20261112.zip`。初版68,339byte／14member／CRC成功、SHA256 `c6ccdca2ebcf28a0312646689ffc1fd21702dbecffcdb55ad23322f8f76de737`。原wire・raw・exactCMEE/S7・隔離保存・前回未送信準備を区別して保持する。追補版は80,587byte／18member／CRC成功、SHA256 `1925d0bd0b52345e6641c1883eee0bce13107875d87d0ad66a82ee16f8f1a5c6`。元memberの内容を保持し、GPU容量の観測と未実行の比較草案／実行範囲を追加した。草案は規則の個別承認を代行せず、実行済みへ換算しない。publicへ架空本文であってもprivate packetの全文を複製しない。
 
-### 次の直接比較と未了
+### 次の直接比較と未了（承認・実行前時点の履歴）
+
+この準備記録の後、Mashの個別承認を受け、下記[保存344aの一回実結果](#piece-general3-344a-actual-20261112)まで完了した。以下の「未実行／個別承認前／0」は準備時点の履歴で、現在の実行状態ではない。
 
 保存344a（weights `344a9defd0c890982d9718805d8b630b5d48719475c998aa9a57ed6df6bfc337`／config `24f34137fd7b0aca0366c1a76fb280216d810565e4062974d12dd2096f93d12c`）の同じ新3件は未実行。全73やnativeの再実行へ戻らない。現GPUはRTX4000Ada、total20,475MiB／used10,598／free9,423を観測し、既存BF16 modelを二重loadする余裕は確認できないため追加load0。既存a8fdf loaderは現API908の同じbytesで、Analysisをdefault、344aを別名pieceとして読み `generate(profile=piece)` を呼ぶ。344aをdefaultだけに入れるとbaseへ戻るので、その誤実行をしない。一時停止・原提供復元を伴う次の比較は、既存loaderと復元処理を使う新しい一回用草案（30,220byte／SHA256 `2c109a85f62cb74a46e4b39929750c73fe7d2595820f8395ea8e3f082518c70f`）まで準備し、親／埋込子のcompileと独立全文reviewを完了。新3件＋前後の共有normal／Analysis対照4件、最大7call・追加学習0・復元枠120秒込み600秒・retry0へ限定し、子にはAPI鍵もHTTPserverも持たせない。共有提供の一時停止と認証情報を含み得る元起動環境の同Pod内RAM保持・完全復元は、前回の消費済み一回承認に含め直さず、新しい個別承認前には実行しない。旧残12のroot／packet／承認を再使用せず、今回は草案のupload／環境全読取／停止／344a生成は0。
 
 STRUCTURE_MAP_DELTA_NONE：今回の製品source／公開型／DB／route／作者／renderer変更0。通常／refinedの接続codeと実稼働・端末を分け、base3の原文維持を保存344aの一般編集品質へ換算しない。句読点だけの派生CPU成功も、実文章の改善成果にしない。
+
+
+<a id="piece-general3-344a-actual-20261112"></a>
+## 2026-11-12 — 承認済み保存344a新3件を一回実生成、原提供を復元・CMEEは3件拒否
+
+### 実行・復元
+
+Mashが「既存Runpod内だけで起動環境を一時保持し、新3件＋前後確認4件を、復元込み最大10分・追加学習／再試行なしで1回」に明示承認した後、準備済み30,220byte／SHA256 `2c109a85f62cb74a46e4b39929750c73fe7d2595820f8395ea8e3f082518c70f`を変更せず一回実行した。既存Pod、既存NEW3-only wire `81a212be0c0b8cdb91708223b21294618e049e7fcc6b550f13337e19db894ff1`、既存a8fdf moduleを使用。Analysis adapterをdefault、保存344a／config24f34137を別名Pieceとして実loadし、既存generatorの`profile='piece'`から3件を取得した。候補HTTPserver・子へのAPI鍵付与0。HTTP revision／usageはunknownであり、deployされた候補HTTPの証拠へ変えない。
+
+新3件は全stop（11.025786／12.202792／13.353340秒）。前後normal／Analysisの各2件は全HTTP200／stop、requestと全response_utf8は各ペアexact一致。候補3＋前後4＝実7call、training／retry0。元PID71802の解放後に候補を単独loadし、候補解放後、元argv／全環境／cwdでPID73476へ復元した。両認証値保持・health・source／元Analysis／候補weights／config不変をPod内実測で確認。起動環境と秘密値は同Pod RAMだけで扱い、原本資料へserializeしていない。内部116.9958748749923秒は最後の2JSON書込とZIP closeの直前。端末DONE・shell prompt・close済みZIPをUI送信から181.715秒以内に別観測し、600秒以内を確認した。
+
+独立監査はZIP CRC／path／link・7memberの展開byte、草案／wire／ID／messages／実profileとweights、全7試行・前後response一致・原本内copy一致を確認。秘密値を独立に再読取した監査ではなく、env／credential同一性は承認済み草案のPod内実測assertionを根拠とする。実原本ZIPは23,583byte、SHA256 `a4cdf3ef1da8e4c58c4f323b37abdb8ae89ae901cedd7233f08ac3d34eff0210`。
+
+### 全文・現CMEEの採否
+
+原入力と全field出力を直接読み、見える範囲では本人／相手／受動／否定／時点／留保／条件の変異、原入力と適格本人補足の混同は見つからなかった。ただし全3は主に常体化で、一人称反復・読点・話題列挙をほぼ維持。AIによる独立読取所見であり、一般意味同値の証明・広い文章編集品質改善・Mashの正式受入れではない。
+
+API908の元source／request／PreparedRequest／messages／実rawは全3exact一致、無修補・旧有限作者禁止下で再生。**全3がUNAVAILABLE、理由は`piece_model_meaning_unassessed_or_changed`。採用artifact0、新保存0、旧base保存の継承0、追加S7成功0・同版画像0。** 既存base3のCMEE／隔離保存成功は別本文の完了履歴として保持する。
+
+| 実材料 | 無変更validatorで確定した最初の拒否 |
+|---|---|
+| 段落 | ORIGINAL `piece:s2`／KEEP、policy line779。`気がします→気がする`が既存比較範囲外。 |
+| 二欄 | ORIGINAL `piece:s4`／KEEP、line779。`確認しました→確認した`が範囲外。 |
+| refined原入力 | ORIGINAL `piece:s2`／KEEP、line779。`書きました→書いた`が範囲外。 |
+| 同じrefined補足を独立確認 | SUPPLEMENTAL `piece:s1`／SOURCE_FIRST_PERSON_TOPIC、line905。文内部の`嬉しいですが→嬉しいが`が既存末尾register比較の範囲外。 |
+
+whole-block readerはsource／visibleを全partitionで未評価とし、既存S7 native→model-register比較でも拒否した。hash・partition・本人bindingの失敗ではない。既存`相談しました→相談した`の対応を、`確認`／`書く`／`気がする`や内部譲歩・否定の一般証明へ広げない。既存資産に全3の未評価KEEPを安全に受理する保証があるとは確認できていない。製品source・guardの修正、raw補修、別作者・新Gate・新語尾辞書・追加modelは今回0。
+
+### 証拠と再開点
+
+既存の[Cocolon_CMEE_AR04_GeneralParagraph_Actual4B_20261112.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-f30655de312c8191978daec9b93b7008_2f7470f963808191aaebf050935e72de&account_id=personal)をversion2へ更新保存した。145,595byte／34member／CRC成功、SHA256 `9b6b2ec4e5cd019035a7d844d284e1a46f9fda743a5c0d5ef605d86aa894c079`。旧18memberの全byteを保持し、actual_344a配下へ実原本ZIP・展開原本・exactCMEE・拒否trace・独立全文／復元監査を追加。旧next_unexecutedとPREPARED ONLYのREADMEは準備履歴で、今回の追補READMEが実行完了を明示する。
+
+次はこの固定実rawを根拠に、既存意味読取とS7の未対応を全span／条件／否定／時点／出所保全の設計へ戻して是正する。未評価節を単なる一括語尾置換で採用させず、一般編集品質不足も別に扱う。採用成立後の保存・同版画像・通常経路・実Auth／DB／本人端末まで未了。完了73・先行native・今回7callを再実行せず、今回の一回承認は完了・消費済みとして保持する。
+
+STRUCTURE_MAP_DELTA_NONE：今回source／test／公開型／route／DB／作者／renderer変更0、追加CI／dispatch／rerun0。全file意味読了・全仕様理解完了やAR-04／他AR完了を主張しない。実一回の完了と、商品上の未採用・編集品質未達を区別する。

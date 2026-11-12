@@ -1,5 +1,7 @@
 # 第10回 Cocolon週末報告会 — 2026-11-07（終了）
 
+> **11/12・保存344aの新3件実行：** 保存344aで同じ新3件を一回実生成し、段落／二欄／適格refinedともstop。候補3＋前後対照4の計7call、追加学習／retry0、復元込み内部116.995875秒・ZIP close後の外側完了観測181.715秒。元提供PID73476へ復元し、引数／環境／作業場所／両認証情報の保持とnormal／Analysis前後response一致を確認。実本文は常体化が中心で、原入力との全体読取では意味変異を見つけていないが、現CMEEは3/3をpiece_model_meaning_unassessed_or_changedで拒否。保存／追加S7／同版画像0、通常採用は保留。全file／全仕様確認と一般編集品質・live接続・本人端末・正式受入れは未完。 [実原本・拒否位置・再開点](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-general3-344a-actual-20261112)。
+
 > **11/12・通常画像経路の実証：** 研究36335452/run43146249187はattempt1・新同1method成功。両作品のpreview/saved/export全6frameで本文/native canvas/alpha/元8秒が成立し、手動ACKなしの閉要求→native ACK後遷移→saved mountと両actual export PNG一致を確認。実検証は研究363のsourceで、同じ製品2/単体2fileを今回通常Draftへ採用する。native harnessは採用せず、新normal headのCI成功は主張しない。既存474PASS（独立18含む）・full JSXも継承。STRUCTURE_MAP_DELTA_PRESENT。native581/guard/renderer/8秒不変、model selector OFF/重み未採用・旧V4失敗14→26は未解決。AR-04一般編集品質/実Auth/API/DB/本人端末・正式0/3/他ARは未完。 [既存natural観測の接続と現在地](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
 
 記録日：2026年11月7日（日本時間）  
@@ -3035,4 +3037,4 @@ NO_STRUCTURE_MAP_DELTA：source/test/公開型/route/DB/作者/controller/Gate�
 
 全件架空の段落／二欄／別本人補足3件を、稼働中base4Bから35.283987秒・一回で取得。3/3 HTTP200/stop、学習／提供停止／retry0。全field本文が原文そのままで、文章の編集改善は0。元requestへexactに結んだCMEE／S7と、既存隔離Free保存・同一本人再取得は3件成功、quota各1・保存後provider0だった。保存344a、live Auth／DB／本人端末の成功へ換算しない。
 
-毎作業前の全確認・理解を既存R2.1へ絶対規則として明記し、全体現在地の古い分析未接続／Piece未反映行を後続の実績へ整合させた。全file意味読了は未完で、確認・是正を続ける。current GPUの空き9,423MiBではBF16二重loadの余裕を確認できず、保存候補の新3件比較は未実行。詳細・出所・自動審査による旧5件送信拒否と新架空3件への縮小・保存時の非最終停止を[既存trial](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-general3-base-actual-20261112)へ記録。構造変更0・商品品質改善0を維持する。
+毎作業前の全確認・理解を既存R2.1へ絶対規則として明記し、全体現在地の古い分析未接続／Piece未反映行を後続の実績へ整合させた。全file意味読了は未完で、確認・是正を続ける。current GPUの空き9,423MiBではBF16二重loadの余裕を確認できず、このbase確認時点では保存候補の新3件比較は未実行だった。その後の承認済み一回は完了し、生成3／CMEE拒否3／保存0として本書冒頭と既存trialの新記録へ更新した。詳細・出所・自動審査による旧5件送信拒否と新架空3件への縮小・保存時の非最終停止を[既存trial](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-general3-base-actual-20261112)へ記録。構造変更0・商品品質改善0を維持する。
