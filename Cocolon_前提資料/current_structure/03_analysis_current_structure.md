@@ -1,3 +1,5 @@
+> **11/12・三中核への既存能力移管候補：** API `eea4761f7b5009128d497b2b69e1b1d0766ad57d`。明示semantic_map.source_duties.v2に限り、既存observed compilerの意味軸と未評価範囲を生成へ渡し、根拠付きの同記録文脈を図と同じ本文へ残す。通常v1と旧保存は保持。実4B・通常v2採用は未実証。 新規一括53件成功、実隔離SQL・保存後の非生成再読を含む。既存CIへ新検証を追加。新しい実4B比較7要求はuploadの自動承認拒否で未送信・生成0。通常採用／live DB適用／Render配置／本人端末・全補助経路は未完。 [実呼出し・確認範囲・次](<../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#auxiliary-crosscore-transfer-20261112>)。
+
 > **2026-11-12・Mashとの設計合意（未実装）：根拠と対象範囲の分かる仮説を保持し、わたしマップの項目・関係線への本人訂正入口を追加する方針。対象と「何がどう違うか」の本人説明を必須とし、不足をAIで補わない。現機能・未決事項は[同日節](#analysis-interpretation-correction-20261112)へ。**
 
 > 2026-11-08追加反映：先行こころグラフ／履歴metadata読取／既読cache修復を含むAPI497f7008がLive。更新担当と通知2cronも同版。共有4Bは分析予算・JSON制約・120u adapterを保持し、natural専用鍵の要求だけ順番待ちする。分析3node/2edge・全2入力mappedの実GPU合成確認後、待機した観測応答も完了。RN6fdea583の統合run#80は全19step成功、8001内部Testing。map通知の本人不達はglobal OFFの送信前除外、cron候補DB timeoutとは別。

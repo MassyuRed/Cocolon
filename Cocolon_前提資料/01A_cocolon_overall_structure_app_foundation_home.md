@@ -1,3 +1,5 @@
+> **11/12・三中核への既存能力移管候補：** API `eea4761f7b5009128d497b2b69e1b1d0766ad57d`。現naturalの問い／回答更新、Pieceの内容選択、明示Analysisのsource意味責務・図／本文を既存ownerへ接続。 新規一括53件成功、実隔離SQL・保存後の非生成再読を含む。既存CIへ新検証を追加。新しい実4B比較7要求はuploadの自動承認拒否で未送信・生成0。通常採用／live DB適用／Render配置／本人端末・全補助経路は未完。 [実呼出し・確認範囲・次](<designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#auxiliary-crosscore-transfer-20261112>)。
+
 > **11/12・AR-04最新：** 研究36335452/run43146249187はattempt1・新同1method成功。両作品のpreview/saved/export全6frameで本文/native canvas/alpha/元8秒が成立し、手動ACKなしの閉要求→native ACK後遷移→saved mountと両actual export PNG一致を確認。実検証は研究363のsourceで、同じ製品2/単体2fileを今回通常Draftへ採用する。native harnessは採用せず、新normal headのCI成功は主張しない。既存474PASS（独立18含む）・full JSXも継承。STRUCTURE_MAP_DELTA_PRESENT。native581/guard/renderer/8秒不変、model selector OFF/重み未採用・旧V4失敗14→26は未解決。AR-04一般編集品質/実Auth/API/DB/本人端末・正式0/3/他ARは未完。 [既存natural観測の接続と現在地](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
 
 `STRUCTURE_MAP_DELTA_PRESENT`：既存EmlisThreadModal/SemanticWatashiMapのdismiss ACK資産をPieceの既存2ownerへ適用し、研究36335452で実native6frame成功を確認した同じ製品2/単体2fileを今回の通常Draft変更単位へ採用する。native harnessは通常側へ採用せず、配置/配布は未実施。研究2dddc0a3の`tests/fixtures/piece-ar04-configured3-host.json`（Free録画051/007の明示wire投影）とnative harness接続は先行検証として継承する。
@@ -6919,3 +6921,24 @@ NO_STRUCTURE_MAP_DELTA：source/test/公開型/route/DB/作者/controller/Gate�
 研究3646a285／source8c5eのrun43100979745は成功。clipのq支持をCqへ逆写像し、boundsへ伸縮せず配置する候補で、実RN由来高さのstandalone3形状×8対照=24/24（48call、非整列3／clip差2）を確認。途中clip/bounds変更6件は到達1／stage73で拒否、元195・別AR04_4／bitmap44も成功。初回runのstdout欠落は観測fileの先行保存で解消。通常.mm581/pinは不変・未採用、selector OFF・AR-04未完。次は同候補のactual RN自然描画／local／placed／元期限・PNGを既存harnessで照合する。
 
 研究4pathの候補実装と観測保存をGitHubへ保持した。通常作業側の製品.mm581／pin／公開型・route・DB・作者・renderer責務は変更0（STRUCTURE_MAP_DELTA_NONE）。既存ファイル地図の責務は継承する。候補の詳細・初回記録欠落と保存修復・数値は[既存trial](observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-v4-inverse-clip-support-20261112)を参照。
+
+
+## 2026-11-12 — 三中核への補助能力移管のファイル差分
+
+API `eea4761f7b5009128d497b2b69e1b1d0766ad57d`。既存owner内の差分であり、新しい通常作者・共有運用systemは追加しない。
+
+| repository path | 現在の役割／差分 |
+|---|---|
+| `ai/services/ai_inference/emlis_thread_service.py` | 既存QUESTION/ANSWER/checkpointをnaturalへ接続、purpose別の単一取得、保存と非生成再読 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply.py` | 問い前／回答後の作者目的、既存typed anchorからactive/inactive本人意味を投影 |
+| `ai/services/ai_inference/piece_model_source.py` | 現Piece planの内容選択・required/context/関係を既存configured取得へ投影 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | 既存完全source読取から意味責務と根拠文脈、有限な完成物逆照合 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py` | 明示source_duties.v2の準備・同版binding。既定v1保持 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py` | 同じ図／本文、private meaning reviewの保持 |
+| `ai/services/ai_inference/analysis_semantic_map.py`、`analysis_model_source.py`、`analysis_cumulative_service.py` | 明示profileを既存provider/Engine/保存へ渡す。普通のv1は変更しない |
+| `supabase/migrations/20261112080628_emlis_natural_bound_questions.sql` | 現RPCの追加migration。新policyだけ全plan3問、旧policy/limitとnatural履歴/frame条件を保持。live未適用 |
+| `ai/tests/test_emlis_natural_question_application.py`、`test_emlis_natural_reply_response_purpose.py`、`test_piece_model_content_selection.py`、`test_analysis_semantic_source_duties.py` | 新source/purpose/claim/context・同版保存再読の検証。provider/Authは合成を含む |
+| `ai/tests/test_emlis_q3_application.py` | 既存隔離SQL helperへ新migrationを追加 |
+| `.github/workflows/piece-b2b-isolated-postgres.yml`、`analysis-observed-content.yml` | 既存CIへ新検証を追加。新しい実行Gateは作らない |
+
+実4B入力3packetと一回7要求scriptは未実行原本。uploadは自動承認審査で拒否され、GPU生成0・本番変更0。全sourceの意味読了や全仕様完成をこの差分表から主張しない。詳細は上記の詳細設計§9.2。

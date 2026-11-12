@@ -1,3 +1,5 @@
+> **11/12・三中核への既存能力移管候補：** API `eea4761f7b5009128d497b2b69e1b1d0766ad57d`。現naturalの既存source-bound問い・本人回答更新・active/inactive claim anchorを現作者へ接続。新Q3 natural policyだけ全plan最大3問。公開の問い設定／前回選択保持・二入力訂正は未実装。 新規一括53件成功、実隔離SQL・保存後の非生成再読を含む。既存CIへ新検証を追加。新しい実4B比較7要求はuploadの自動承認拒否で未送信・生成0。通常採用／live DB適用／Render配置／本人端末・全補助経路は未完。 [実呼出し・確認範囲・次](<../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#auxiliary-crosscore-transfer-20261112>)。
+
 > **2026-11-12・現在の問い構築目標：** 全plan最大3問、入力画面の受取ON／OFF（初期ON・前回選択保持）。短い受け止め→重要な一点→回答に応じた次問／応答とし、OFF・skip・本人終了・3問到達、十分な理解による0／1／2問終了を区別する。[採用決定と判断例](../designs/cmee/v1/02_emlis_v1a_detailed_design.md#emlis-question-policy-20261112)をAR-02で使う。新仕様は未実装。旧Q1／Q3機構の存在と、現natural自身の問い／回答後更新の未接続を分ける。本文中の旧1／3問・各round全文先行・未実装とする過去記述は当時の設計／実績であり、最新仕様や現接続を上書きしない。
 
 <a id="emlis-interpretation-correction-20261112"></a>

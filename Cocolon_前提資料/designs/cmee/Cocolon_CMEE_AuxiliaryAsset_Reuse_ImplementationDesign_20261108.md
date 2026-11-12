@@ -4,11 +4,11 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-12 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR01_UNRESOLVED_AR04_GENERAL_PROSE_REVIEW_REPAIRED_QUALITY_UNRESOLVED
+status: CROSS_CORE_CAPABILITY_CANDIDATE_IMPLEMENTED_MODEL_VALIDATION_PENDING
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "AR-01/04/05 capability transfer in parallel with AR-02/03; AR-06/07/08 by existing dependencies"
+current_next: "AR-02 public setting/correction; cross-core actual4B trial awaiting explicit upload approval; other AR dependencies continue"
 runtime_effect_of_this_document: 0
 ---
 
@@ -413,10 +413,10 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 | ID | 実施内容・既存残件 | 具体的な完了確認 | 依存／状態 |
 |---|---|---|---|
 | AR-01 | 現naturalの主体・所有者・否定・時点・留保を、旧失敗・意味比較・共通原因分析で改善。EM-01a/b | 現6境界と正常な短文／省略で、同入力の誤読を解消または明確に減らし、自然さ・別題材・既成功・保存再読を保持。検出増加／無出力だけでは完了しない | 継続中。新24実生成の4版は通常不採用。c6555fd5で疑問符なしの確認質問の保存抜けを修復、250局所PASS。同24rawは旧24保存→新22保存／2拒否、受理本文不変。全体の意味修復は未完 |
-| AR-02 | 現naturalの任意問い・回答・訂正・撤回・frameと、完了応答後の具体的な本人訂正。11/12採用仕様は§6.1。EM-02a/b、03b | 全plan最大3問、初期ON・前回選択保持、短い受け止め→回答後応答、0／1／2問終了・skip・上限時の不明保持、訂正対象と本人説明の二つの入力、説明不足時の未確定保持、対象だけ更新、撤回後の残存意味、同版再読、既存参照権利 | AR-01の全一般品質完成待ちにはしない。新仕様を記録済み、実装未開始 |
-| AR-03 | 適格履歴の意味ある利用。EM-03a/b | 同一／別場面・変化・無関係・訂正前を区別し、適切な履歴が今回へ効く。失効材料を使わない | 現related_contextを継承。未開始 |
-| AR-04 | Piece一般本文・単独伝達・refined・画像整合 | 原文の意味・一人称・本人補足と同版画像／保存を保持 | API87512ddaで固定実3件の読取拒否を修復し9隔離保存／非生成再読。旧73不変、追加GPU0。先行の通常host画像成功は継承。一般編集品質・新本文の同版native画像・通常model採用／実Auth／DB／本人端末は未完。 |
-| AR-05 | 分析の本人基準・役割／選択・記録間関係と、項目・関係線への本人訂正。AN-03a/b/c、04 | 原記録→意味→図／全文→両端根拠の対応、再出現／変化／不明の正しさ、訂正対象と本人説明からの読み直し・再読 | 現Engine統合・保存済み成果を継承。並行可能。未開始 |
+| AR-02 | 現naturalの任意問い・回答・訂正・撤回・frameと、完了応答後の具体的な本人訂正。11/12採用仕様は§6.1。EM-02a/b、03b | 全plan最大3問、初期ON・前回選択保持、短い受け止め→回答後応答、0／1／2問終了・skip・上限時の不明保持、訂正対象と本人説明の二つの入力、説明不足時の未確定保持、対象だけ更新、撤回後の残存意味、同版再読、既存参照権利 | AR-01の全一般品質完成待ちにはしない。新Q3 naturalのsource-bound問い／回答更新／全plan3問／非生成再読を実装候補へ接続。公開の設定保持・二入力訂正・一般自由文と実4Bは未完 |
+| AR-03 | 適格履歴の意味ある利用。EM-03a/b | 同一／別場面・変化・無関係・訂正前を区別し、適切な履歴が今回へ効く。失効材料を使わない | 現related_contextと失効材料の再認可を継承。今回の意味利用全体は未完 |
+| AR-04 | Piece一般本文・単独伝達・refined・画像整合 | 原文の意味・一人称・本人補足と同版画像／保存を保持 | API87512ddaで固定実3件の読取拒否を修復し9隔離保存／非生成再読。旧73不変、追加GPU0。先行の通常host画像成功は継承。今回、既存planの内容選択をconfigured取得へ接続。2〜3回答後のPiece補足は未対応。一般編集品質・新本文の同版native画像・通常model採用／実Auth／DB／本人端末は未完。 |
+| AR-05 | 分析の本人基準・役割／選択・記録間関係と、項目・関係線への本人訂正。AN-03a/b/c、04 | 原記録→意味→図／全文→両端根拠の対応、再出現／変化／不明の正しさ、訂正対象と本人説明からの読み直し・再読 | 既存compiler由来のsource dutiesとsource文脈を明示v2へ接続し、図／本文・隔離SQL再読を確認。通常v1保持。実4B・通常採用・本人基準／訂正の全体は未完 |
 | AR-06 | Emlis観測材料、訂正・削除・権利、長い蓄積と月次。EM-04/05、AN-02/06/08/10 | 本人sourceから材料を渡し、失効・分割範囲・当時版を保持。生成本文を本人事実にしない | AR-02/03/05の該当能力を利用。未開始 |
 | AR-07 | IF／Saved等の商品固有の残る意味保持責務。既存AN／PC残件 | 仮想・本人選択意向・観測を分離し、成立した経路で出力と保存を確認 | 既存商品の実装条件に従う。無断延期・新発売条件化をしない。未開始 |
 | AR-08 | 実証できた共通能力の通常適用と全体確認。EM-05/06/07等 | 採用版の意味保持・自然さ・権利・中断復帰・保存再読・実際の待ち時間／費用。未採用範囲は理由と残差を保持 | 各単位で通常採用可能。全core一括切替を強制しない。未開始 |
@@ -445,6 +445,34 @@ Mashの「これまでと同じ禁止」「進め方を決めろ」を受け、A
 代表入力群は現在の入力欄・主体・時点・条件・希望／未実行・引用・補足／履歴等を含め、既存失敗と正常な省略・言換え、既成功、別題材をまとめて比較する。失敗文に合わせた教師追加や有限reader拡張を進行軸にしない。商品全文を読んで、理解・選択・生成・検査のどこで失ったかを分け、生成の不足は現4B生成条件／必要な学習・作者へ戻す。複数候補比較は既存開発runnerを使い、効果・費用の判断なしに通常推論回数を増やさない。
 
 §11の完了条件をそのまま適用する。必要と採用を決めた能力の未実装・未接続・実商品への未適用が残る間は全体未完。局所修復を全体の完了報告や毎回の続行指示待ちの区切りにせず、移管・実出力・保存再読を含む単位で継続する。Mashの正式受入れを代行せず、未実測を完了にしない。
+
+<a id="auxiliary-crosscore-transfer-20261112"></a>
+### 9.2 2026-11-12 — 既存能力を三中核の現在ownerへ移管した実装候補
+
+実装はAPI `eea4761f7b5009128d497b2b69e1b1d0766ad57d`。製品9file、既存RPCの追加migration1、新旧test5、既存workflow2の計17fileを変更した。公開schema・通常のAnalysis v1・既存保存物の非生成再読は保持する。新規4B実呼出し、通常採用、live DB適用、Render配置、本人端末・正式受入れはいずれも0であり、補助経路全体の完了ではない。
+
+| 回収する既存責務 | 現在の実呼出しと実装結果 | 成立した範囲／残る範囲 |
+|---|---|---|
+| D26/27・D02/08：本人に確かめる一点、回答・訂正・撤回、出所と不明 | `emlis_thread_service._prepare_natural_question`→既存`original_meaning_plan/question_candidate/prepare_emlis_meaning`。現naturalの短い受け止め→別QUESTION→ANSWER→実checkpoint→回答後応答を接続。新Q3 natural policyだけ全plan最大3問。不要時0問、本人続行、skip/終了、結果不明・中断復帰、同版再読を継承 | 旧有限ownerで根拠付き質問が成立する入力を対象とする。一般自由文を有限checkpointへ強制しない。実SQLと合成単一providerで処理確認。公開の問いON/OFF・前回選択保持、完了後の「どの内容ですか？」「どう違いましたか？」の二つの入力は未実装 |
+| D27・D07/21：回答で有効になった意味と失効した意味 | `natural_reply.prepare_natural_reply(prepared_meaning=...)`→既存の原文locatorと`final_reception_source_anchor_text`。active/inactiveのclaim anchor、肯否・時点・modality、関係失効・未確定を現作者へ渡す | カテゴリ・感情選択を文章の出来事／反応へ昇格しない。全spanは周辺文脈、typed anchorが当該claim。原入力と本人補足は別。既定FINALの旧wireは保持。実4Bでの自然さ・反映品質は未測定 |
+| D04/10：必要意味・内容選択・参照／scope依存 | `piece_model_source._piece_content_selection`で現Piece planの全required duty、欄／source／scalar範囲、読取group、関係・scopeとcontext_onlyを、既存のconfigured取得へ渡す | source全文・prepared・旧SYSTEM・既存authoring条件は保持。requiredを予算で脱落させず、出力文数や原文丸写しを固定しない。既存Engine/S7の意味採否は独立。実4Bの表現・単独伝達の改善は未測定、selector/重みの通常採用は行っていない |
+| D06/07/08/45・D21：source意味責務、条件比較、図／本文の逆確認 | 既存Analysis observed compilerの完全source読取を、明示`semantic_map.source_duties.v2`の生成材料へ接続。原文全体は一度だけ送り、意味軸とfield/span参照を追加。現在のadmission/compiler/唯一realizerを使用 | 同じ記録に書かれた場面・担当、引用根拠内の時点・希望等を図と同じ本文へ保持。場面を行動の原因／条件と認定しない。唯一対応する完全命題の肯否／時点／modalityだけを独立比較し、一般解釈はUNASSESSED。旧v1既定・保存・月次当時版・IF境界は保持 |
+
+追加migration `20261112080628_emlis_natural_bound_questions.sql`は、現在の`20261101010000`のRPCを基礎にする。既存naturalの履歴期間例外とconnected frame条件を保持し、既存threadのpolicy／started limitを不変としたまま、新native-bound policyに限り全plan最大3問を認める。service_role専用・security invoker、owner/source/revision/attemptとtransaction条件を維持した。有効な回答後のREFINEDで終了する場合は同じ保存本文を保持し、追加生成しない。保存直前の履歴削除／編集は同RPCの既存context lockで拒否し、明示的に再操作した時だけ現在の情報でFINALを取得する。稼働DBへは適用していない。
+
+検証：新規4moduleの一括検証は53件成功。別集合の既存natural/Q2/Q3 125、Piece関連235（新13を含む）、Analysis72（新16・実隔離SQL2を含む）は各範囲の結果として保持し、重複加算しない。先行実装2a7acadecのPiece/Analysis CIは両方成功。終了時の追加生成と保存競合を修復した最終eea4761fの同じ2 CIは再検証中。合成Auth/source/providerを含む隔離検証であり、実4B・live Auth/API/DB・本人端末の結果へ換算しない。
+
+RN source互換も確認した。`useEmlisThread.js`の続行は`dto.can_continue`、`EmlisThreadModal.js`の残問表示は`question_limit-issued_count`を使い、RN独自のPremium制限はない。本文とpending questionは既存の別表示で扱う。実機成功ではない。一方、同ModalのPiece補足選択は依然QUESTION/ANSWER各1件を必要とし、原入力Pieceも回答後は対象外のため、2〜3回答後のPiece作成は未対応の残件としてAR-04へ保持する。今回の全plan3問を複数回答からPieceまでの完成へ換算しない。
+
+#### 実4B比較の具体的な未実行範囲
+
+既存Runpod `f1lle4xwq3wjln`のJupyterへ到達し、既存提供PID73476とlocalhost:8000のhealth200を読取確認した。環境全体の取得、鍵の表示、提供停止・再起動、重み変更は行っていない。3中核の固定した架空要求7件（naturalの問い前／回答後／撤回後3、Piece旧新2、Analysis旧新2）を一回比較する77,300byteのscriptを準備したが、外部uploadは自動承認審査に拒否され、送信・実4B生成は0。拒否理由は、既存の二つのnamed credential fileを同Pod内localhost API認証へ使う処理について、送信先・内容の明示承認がないという判定である。迂回実行はしない。
+
+実行候補は最大540秒、再試行・追加学習・新規レンタル・提供停止／再起動・モデル／重み変更なし。既存鍵は同Pod内認証だけに使い、値／全環境を出力・保存・外部転送しない。source/prompt/rawとactual generationの区別を保ち、受領後に同じ現ownerと隔離SQLへ戻す。token数・context適合も未測定のまま。
+
+準備原本：`Cocolon_CMEE_AuxiliaryTransfer_Prepared_20261112.zip`、Library ID `libfile_fde3_f-934d5411db408191ace1365dfb04eaa6_2f7470f963808191aaebf050935e72de`、68,717bytes、SHA256 `0248a2c80ea56a61685b6a0b4ad4a9328e7228e4073ffac5ff63c5143c2746a7`。script単体SHA256 `38e5ef347e6e8f93c509b871475e18a2ed0e0365496d5d422550b72ba00da3d9`。架空要求・SQL snapshot・既存経路へのreplay手順を含み、認証値とGit-backed製品sourceの複製は含まない。未実行archiveを実生成証拠と呼ばない。
+
+次はこの実4B比較の具体的承認後の実行と、AR-02の公開設定／具体的本人訂正、AR-03の意味ある履歴利用、AR-06/07/08の既存依存に沿う実装を進める。必要な未実装・未接続が残る間は全体継続中。有限ownerの適合範囲と一般品質、実装候補・通常提供・本人受入れを分ける。
 
 ## 10. 変更箇所と検証
 
@@ -501,6 +529,8 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 設計、実装、局所検証、実モデル、通常稼働、実DB／端末、正式受入れを分けて記録する。華恋の全文確認は、明白な不足をMashへ戻さない事前確認であり、本人の正式受入れを代行しない。
 
 ### 11.2 現在の進行欄
+
+現在の候補実装と未実行範囲は[§9.2](#auxiliary-crosscore-transfer-20261112)。以下の個別試行は履歴として継承し、今回の三中核移管を単一のAR-04局所修復へ戻さない。
 
 **11/12・読取拒否修復前の実生成履歴（修復後は先頭更新とAR-04欄）：** 保存344aで同じ新3件を一回実生成し、段落／二欄／適格refinedともstop。候補3＋前後対照4の計7call、追加学習／retry0、復元込み内部116.995875秒・ZIP close後の外側完了観測181.715秒。元提供PID73476へ復元し、引数／環境／作業場所／両認証情報の保持とnormal／Analysis前後response一致を確認。実本文は常体化が中心で、原入力との全体読取では意味変異を見つけていないが、現CMEEは3/3をpiece_model_meaning_unassessed_or_changedで拒否。保存／追加S7／同版画像0、通常採用は保留。全file／全仕様確認と一般編集品質・live接続・本人端末・正式受入れは未完。 [実測と次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-general3-344a-actual-20261112)。
 
@@ -562,7 +592,7 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 ## 12. 今後の指示と再開方法
 
-**11/12・現在の再開点：** §9.1の能力群移管を三中核で並行し、AR-02/03の本人回答・訂正・履歴も進める。保存344a新3件のCMEE読取拒否はAPI87512ddaで修復済み、9隔離保存／非生成再読まで成功しており、保存対象0という以前の記述は履歴である。一般編集品質・新本文の同版native画像・通常model採用／実Auth・DB・本人端末と他ARは未完。完了済みのGPU比較・旧73・native・拒否修復を繰り返さず、必要な既存能力の移管先と実出力の不足を直接実装する。新しい有料実行はその時点の既存許可・予算内で扱い、本文書更新を追加生成・学習の実行実績にしない。
+**11/12・現在の再開点：** §9.2の三中核能力移管をAPI eea4761f7b5009128d497b2b69e1b1d0766ad57dへ反映。新naturalの問い／回答更新・Piece内容選択・明示Analysis source dutiesと図／本文／隔離保存再読を検証済み。新しい実4B比較7要求は自動承認審査のupload拒否により送信・生成0で、具体的承認待ち。公開の問い設定・前回選択保持・二つの入力による完了後訂正、意味ある履歴、蓄積／IF／通常適用・実機等は残る。完了済みの旧73・344a固定3件・native検証を再実行しない。
 
 **11/12・先行する通常画像実証の履歴：** 研究36335452/run43146249187はattempt1・新同1method成功。両作品のpreview/saved/export全6frameで本文/native canvas/alpha/元8秒が成立し、手動ACKなしの閉要求→native ACK後遷移→saved mountと両actual export PNG一致を確認。実検証は研究363のsourceで、同じ製品2/単体2fileを今回通常Draftへ採用する。native harnessは採用せず、新normal headのCI成功は主張しない。既存474PASS（独立18含む）・full JSXも継承。STRUCTURE_MAP_DELTA_PRESENT。native581/guard/renderer/8秒不変、model selector OFF/重み未採用・旧V4失敗14→26は未解決。AR-04一般編集品質/実Auth/API/DB/本人端末・正式0/3/他ARは未完。 前回24/48・73実4B/243SQL/static6/transition4は完了として継承し、旧6methodは今回未実行。
 
