@@ -1,6 +1,6 @@
 # 第10回 Cocolon週末報告会 — 2026-11-07（終了）
 
-> **11/12・AR-04最新：** 研究36335452/run43146249187はattempt1・新同1method成功。両作品のpreview/saved/export全6frameで本文/native canvas/alpha/元8秒が成立し、手動ACKなしの閉要求→native ACK後遷移→saved mountと両actual export PNG一致を確認。実検証は研究363のsourceで、同じ製品2/単体2fileを今回通常Draftへ採用する。native harnessは採用せず、新normal headのCI成功は主張しない。既存474PASS（独立18含む）・full JSXも継承。STRUCTURE_MAP_DELTA_PRESENT。native581/guard/renderer/8秒不変、model selector OFF/重み未採用・旧V4失敗14→26は未解決。AR-04一般編集品質/実Auth/API/DB/本人端末・正式0/3/他ARは未完。 [既存natural観測の接続と現在地](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
+> **11/12・通常画像経路の実証：** 研究36335452/run43146249187はattempt1・新同1method成功。両作品のpreview/saved/export全6frameで本文/native canvas/alpha/元8秒が成立し、手動ACKなしの閉要求→native ACK後遷移→saved mountと両actual export PNG一致を確認。実検証は研究363のsourceで、同じ製品2/単体2fileを今回通常Draftへ採用する。native harnessは採用せず、新normal headのCI成功は主張しない。既存474PASS（独立18含む）・full JSXも継承。STRUCTURE_MAP_DELTA_PRESENT。native581/guard/renderer/8秒不変、model selector OFF/重み未採用・旧V4失敗14→26は未解決。AR-04一般編集品質/実Auth/API/DB/本人端末・正式0/3/他ARは未完。 [既存natural観測の接続と現在地](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
 
 記録日：2026年11月7日（日本時間）  
 対象週：**2026年11月7日〜11月14日**  
@@ -3020,3 +3020,11 @@ NO_STRUCTURE_MAP_DELTA：source/test/公開型/route/DB/作者/controller/Gate�
 研究3646a285／source8c5eのrun43100979745は成功。clipのq支持をCqへ逆写像し、boundsへ伸縮せず配置する候補で、実RN由来高さのstandalone3形状×8対照=24/24（48call、非整列3／clip差2）を確認。途中clip/bounds変更6件は到達1／stage73で拒否、元195・別AR04_4／bitmap44も成功。初回runのstdout欠落は観測fileの先行保存で解消。通常.mm581/pinは不変・未採用、selector OFF・AR-04未完。次は同候補のactual RN自然描画／local／placed／元期限・PNGを既存harnessで照合する。
 
 研究4pathの候補実装と観測保存をGitHubへ保持した。通常作業側の製品.mm581／pin／公開型・route・DB・作者・renderer責務は変更0（STRUCTURE_MAP_DELTA_NONE）。既存ファイル地図の責務は継承する。候補の詳細・初回記録欠落と保存修復・数値は[既存trial](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-v4-inverse-clip-support-20261112)を参照。
+
+
+<a id="piece-model-evaluation-continuity-20261112"></a>
+## 11/12 AR-04 — 同じ本人の評価省略の誤拒否を修復
+
+動作文の後の「読書が好きだ」を別の主語と誤って扱い、既存評価読取へ届かない接続を修復した。同block・同じ本人表記のSELF継続内だけで既存readerを再利用し、時点・肯否・程度・留保・本人・欄の変更拒否を維持。同じ41対象は旧13失敗／28成功→41成功。関連検証の結果と固定候補の3plan保存／非生成再読は[既存trial](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-evaluation-continuity-20261112)へ記録。合成CPUの誤拒否修復で、実4B一般品質の改善実証ではない。
+
+既存製品1／test2fileの変更でSTRUCTURE_MAP_DELTA_NONE。通常host成功は前回完了として継承、model selector OFF・AR-04一般品質／live接続・本人端末／正式受入れは未完。今回GPU／学習／Render配置／live DB／build／配布0。

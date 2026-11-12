@@ -256,6 +256,8 @@ Analysisの既存source adapter→semantic admission→compiler→唯一realizer
 
 ### 7.1 Piece
 
+**11/12・動作文に続く同本人評価の省略読取：** 既存private `_piece_model_read_block`の、同block内の明示SELF継続・同じ本人表記を確認済みの分岐で、既存 `_piece_model_evaluation`を再利用する。評価対象「読書が」を汎用subject判定が別の主語として拒否する前に、完全な既存評価文法で読む。不成立なら従来のsubject拒否／feeling・finite処理へ進む。sourceの全節明示SELF資格とsource／本文の全key比較を維持し、一時読取viewをrawや確定本文へ書き戻さない。FOCUSの「が」や価値評価の「にとって」は補完しない。新文法・作者・prompt・S7・公開型／DB／通常selectorの変更はない。合成CPUの誤拒否修復であり、実4Bの品質改善実証ではない。 [実装・検証](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-evaluation-continuity-20261112)。
+
 **11/12・通常画像経路とV4の責務：** `pieceLayout.js`のios.v1/v2はbitmap profileへ写像され、`PieceVisualCard`のfixedRaster→`inspectBitmapDrawing`→`renderBitmapCanvas`を使う。V4 `inspectSelectedLineV4`の自然snapshotはこの通常経路の必須条件ではない。API `_preview_renderer_runtime`のrenderer交渉と`piece_model_source._settings/application_piece_model_source`のmodel選択も別である。bitmapの証拠をV4自然layer/reference logical1 exactの証拠へ換算せず、V4固有の能力は未解決・未採用として残す。共有v5/TextKit/paint/予算と今回V4前の初回timeoutは通常側にも関係し得るため残件とする。
 
 **11/12・次の直接実証：** 研究36335452/run43146249187はattempt1・新同1method成功。両作品のpreview/saved/export全6frameで本文/native canvas/alpha/元8秒が成立し、手動ACKなしの閉要求→native ACK後遷移→saved mountと両actual export PNG一致を確認。実検証は研究363のsourceで、同じ製品2/単体2fileを今回通常Draftへ採用する。native harnessは採用せず、新normal headのCI成功は主張しない。既存474PASS（独立18含む）・full JSXも継承。STRUCTURE_MAP_DELTA_PRESENT。native581/guard/renderer/8秒不変、model selector OFF/重み未採用・旧V4失敗14→26は未解決。AR-04一般編集品質/実Auth/API/DB/本人端末・正式0/3/他ARは未完。 58b62ffcの失敗は履歴として保持。36335452の実native ACK順序と6frame成功を回収し、同じ製品2/単体2fileを通常Draftへ採用する。次は一般編集品質と同経路の実Auth/API/本人端末を既存要件に沿って確認する。

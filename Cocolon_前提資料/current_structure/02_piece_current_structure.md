@@ -1,4 +1,4 @@
-> **11/12・AR-04最新：** 研究36335452/run43146249187はattempt1・新同1method成功。両作品のpreview/saved/export全6frameで本文/native canvas/alpha/元8秒が成立し、手動ACKなしの閉要求→native ACK後遷移→saved mountと両actual export PNG一致を確認。実検証は研究363のsourceで、同じ製品2/単体2fileを今回通常Draftへ採用する。native harnessは採用せず、新normal headのCI成功は主張しない。既存474PASS（独立18含む）・full JSXも継承。STRUCTURE_MAP_DELTA_PRESENT。native581/guard/renderer/8秒不変、model selector OFF/重み未採用・旧V4失敗14→26は未解決。AR-04一般編集品質/実Auth/API/DB/本人端末・正式0/3/他ARは未完。 [既存natural観測の接続と現在地](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
+> **11/12・通常画像経路の実証：** 研究36335452/run43146249187はattempt1・新同1method成功。両作品のpreview/saved/export全6frameで本文/native canvas/alpha/元8秒が成立し、手動ACKなしの閉要求→native ACK後遷移→saved mountと両actual export PNG一致を確認。実検証は研究363のsourceで、同じ製品2/単体2fileを今回通常Draftへ採用する。native harnessは採用せず、新normal headのCI成功は主張しない。既存474PASS（独立18含む）・full JSXも継承。STRUCTURE_MAP_DELTA_PRESENT。native581/guard/renderer/8秒不変、model selector OFF/重み未採用・旧V4失敗14→26は未解決。AR-04一般編集品質/実Auth/API/DB/本人端末・正式0/3/他ARは未完。 [既存natural観測の接続と現在地](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
 
 private UI連携は`STRUCTURE_MAP_DELTA_PRESENT`。既存`InputPieceActionArea`が本文なしpending/receipt/current owner/source/runtime/navigationとpresentation epochを保持・再確認し、`PiecePreviewModal`は同じ空の閉iOS Modalからnative onDismissを返す。旧EmlisThreadModal/SemanticWatashiMapのACK資産を回収し、新controller/API/DB/rendererは作らない。古いACKや失効した要求は遷移せず、取消し後の新openは進める。Androidと既にACK済みの外部ボタンは直進。研究36335452で実native ACK順序と6frame成功を確認した同じ製品2/単体2fileを通常Draftへ採用する。実検証は研究sourceであり、新normal headのCI、配置/配布、本人端末の確認ではない。
 
@@ -4332,3 +4332,15 @@ NO_STRUCTURE_MAP_DELTA：source/test/公開型/route/DB/作者/controller/Gate�
 研究3646a285／source8c5eのrun43100979745は成功。clipのq支持をCqへ逆写像し、boundsへ伸縮せず配置する候補で、実RN由来高さのstandalone3形状×8対照=24/24（48call、非整列3／clip差2）を確認。途中clip/bounds変更6件は到達1／stage73で拒否、元195・別AR04_4／bitmap44も成功。初回runのstdout欠落は観測fileの先行保存で解消。通常.mm581/pinは不変・未採用、selector OFF・AR-04未完。次は同候補のactual RN自然描画／local／placed／元期限・PNGを既存harnessで照合する。
 
 研究4pathの候補実装と観測保存をGitHubへ保持した。通常作業側の製品.mm581／pin／公開型・route・DB・作者・renderer責務は変更0（STRUCTURE_MAP_DELTA_NONE）。既存ファイル地図の責務は継承する。候補の詳細・初回記録欠落と保存修復・数値は[既存trial](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-v4-inverse-clip-support-20261112)を参照。
+
+
+<a id="piece-model-evaluation-continuity-20261112"></a>
+### 11/12 同本人評価の省略読取・既存ownerの動作差分
+
+| 既存file | 今回の責務・検証 |
+|---|---|
+| `ai/services/ai_inference/piece_v2_content_policy.py` | 同block・同じ本人表記の既存SELF継続内で完全な評価readerを先に試し、評価対象「が」の誤主語判定を避ける。不成立時の従来処理とsource全key比較を維持。 |
+| `ai/tests/test_piece_model_finite_scope.py` | 新29case。本人・欄・段落・補足・視点・対象・全評価operatorをengine全体で対照。 |
+| `ai/tests/piece_v2/test_b05_piece_model_evaluation_pipeline.py` | 修正した固定候補を既存の保存／再送／同一本人service再作成後の再読testへ追加し、3planで確認。 |
+
+STRUCTURE_MAP_DELTA_NONE。新file／owner／公開型／DB／作者／文法／S7の責務変更はない。 [実装・合成CPU検証・限界](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-evaluation-continuity-20261112)。実4B・本番・本人端末の検証へ換算しない。

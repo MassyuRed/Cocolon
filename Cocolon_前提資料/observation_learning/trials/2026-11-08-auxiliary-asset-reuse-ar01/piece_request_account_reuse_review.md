@@ -2742,3 +2742,21 @@ artifact13912178359は949,805byte、SHA256 `6eebedb7ef778b0ba52fc73e66baf5f3f66d
 
 通常model selector OFF・重み未採用、live DB/Render/署名build/配布/Photos/本人端末・一般編集品質/正式0/3・AR-04/他AR残件は未完。旧V4失敗14→26も未解決・未採用のまま。今回新model/GPU/SQL/実Auth/外部製品HTTP0。`STRUCTURE_MAP_DELTA_PRESENT`：既存host/Modal間のprivate dismiss ACK連携を、実検証と同じ製品2/単体2fileで通常Draftへ採用する。新owner/controller/route/公開API/DB/rendererはない。先行58b62ffcまでの診断だけの`STRUCTURE_MAP_DELTA_NONE`と、363の研究採用前境界は当時の履歴として保持する。
 
+
+
+<a id="piece-model-evaluation-continuity-20261112"></a>
+## 2026-11-12 — AR-04 同じ本人の動作文に続く評価省略を既存readerへ接続
+
+前回の通常host画像実証・通常Draft b67021cbの反映を完了として継承し、一般編集品質の有限な誤拒否へ戻った。前提資料・全体設計／全file地図・最新weekly・詳細設計§7.1を確認し、API8a0192を起点とした。今回の[API実装](https://github.com/MassyuRed/mashos-api/commit/90822927f399e89e6ac71d2665e9fd7cd297cd6b)は既存製品1fileと既存test2fileだけを変更する。
+
+固定した架空source「私は友人に予定を相談しました。私は読書が好きです。」に対し、候補「私は友人に予定を相談した。読書が好きだ。」は旧readerで未判定／不採用だった。評価対象の「読書が」を汎用subject判定が先に拒否し、既存評価readerまで届かなかったことをCPU再現で確認した。既に成立した同block・同じ表記のSELF継続内でのみ、既存の完全な評価readerを先に試す。不成立時のsubject／feeling／finite処理とsource全key比較は維持する。raw・source・receipt・確定本文を修補しない。
+
+最終の同じ41対象testへHEAD旧readerを別processのメモリ内で適用した比較は13失敗／28成功、修正後は41成功。新29caseのうち、6本人表記×好み現在／苦手過去の12caseと、程度・否定・過去・留保を併記した1caseが誤拒否から回復した。既存12と新拒否対照16は成功を維持する。別本人表記、OTHER介入、先頭省略、別field／段落／本人補足からの借用、「にとって」脱落、対象・肯否・時点・程度・留保の変更をengine全体で拒否する。OTHER／本人／視点対照は適格な明示controlの採用を先に確認し、source段階の拒否だけを成功に数えない。
+
+関連検証：関連23fileの2,248 unique PASS／失敗・skip 0（今回の41を含むため加算しない）、既存Pydantic警告1。93.44秒。repo固定のLMFE commit／PGlite0.5.8と補助依存をscratchで準備して実行し、先行のcollection／fixture失敗は依存未設定が原因で、準備後に同じ23fileを再実行して全成功を確認した。既存evaluation保存pipelineへ同じ固定候補を追加し、Free／Plus／Premiumの隔離PGliteでpreview→save／再送→同一本人のserviceを作り直したdetail・非生成再読、quota消費1、候補取得1回、原入力／Emlis保存内容の不変を確認する。固定HTTP応答・合成認証・隔離SQLであり、実4B生成・live Auth/API/DB・native画像／本人端末の検証とは分ける。
+
+STRUCTURE_MAP_DELTA_NONE：既存 `piece_v2_content_policy.py::_piece_model_read_block`内の読取接続だけで、新owner／file／route／公開DTO／DB／作者／文法／controllerは追加しない。既存有限source資格・PreparedRequest／receipt・S7・保存境界を維持する。通常model selector OFF・重み未採用、旧V4残件と正式受入れ0/3を保持。今回の合成候補回復を現344aの実73件の新生成や一般意味品質の改善件数へ換算しない。
+
+このAPI commitの既存CIは[Analysis 43154204593](https://github.com/MassyuRed/mashos-api/actions/runs/43154204593)と[Piece 43154204654](https://github.com/MassyuRed/mashos-api/actions/runs/43154204654)で追跡する。今回2,248 PASSはローカル結果で、CIの完了成功へ換算しない。
+
+次は保存候補の一般編集品質を既存資料と区別して確認する。今回回復した合成候補の接続と通常画像経路の成功は完了として継承し、追加observerや完了済みGPU比較の再実行へ戻らない。新GPU／学習・Render配置・live SQL・build／配布は今回0。
