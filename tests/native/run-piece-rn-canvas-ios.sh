@@ -117,6 +117,52 @@ GETTER = '''
 '''
 
 
+def observe_candidate_rejections(instrumented, original):
+    # This asynchronous method crosses UIManager/main/candidate/worker queues.
+    # A per-call atomic owns only the first existing failure site; TLS would
+    # join unrelated requests or lose the worker's cause on the final queue.
+    match = re.search(r'(?m)^- \(void\)measureCandidateSnapshot:\(NSNumber \*\)tag[^;{}]*\n\{', original)
+    assert match, 'Missing candidate snapshot implementation'
+    start = match.start()
+    end = original.index('RCT_EXPORT_METHOD(inspect:', start)
+    method = original[start:end]
+    assert instrumented.count(method) == 1, 'Candidate method changed before observation'
+    markers = []
+    pattern = r'unavailable\(\);|failure->store\(true, std::memory_order_relaxed\);'
+    for occurrence in re.finditer(pattern, method):
+        offset = start + occurrence.start()
+        markers.append({'stage':len(markers)+1, 'offset':offset,
+            'original_line':original.count('\n',0,offset)+1,
+            'kind':'worker_failure' if occurrence.group(0).startswith('failure->') else 'unavailable',
+            'original_expression':occurrence.group(0)})
+    assert markers and len(markers) < 128, 'Missing or unbounded candidate failure map'
+    observed = method
+    for marker in reversed(markers):
+        offset = marker['offset'] - start
+        expression = marker['original_expression']
+        replacement = '(CocolonPieceCandidateDiagnosticMark(%d), %s);' % (marker['stage'], expression[:-1])
+        observed = observed[:offset] + replacement + observed[offset+len(expression):]
+    begin = """
+  const auto CocolonPieceCandidateDiagnosticStage = std::make_shared<std::atomic<int>>(0);
+  void (^CocolonPieceCandidateDiagnosticMark)(int) = ^(int stage) {
+    int unset = 0;
+    CocolonPieceCandidateDiagnosticStage->compare_exchange_strong(unset, stage, std::memory_order_relaxed);
+  };
+"""
+    method_open = match.group(0)[-2:]
+    assert method_open == '\n{'
+    opening = observed.index('{\n') + len('{\n')
+    observed = observed[:opening] + begin + observed[opening:]
+    reject = 'reject(@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE", @"Text measurement unavailable", nil);'
+    diagnostic = 'NSLog(@"PIECE_CANDIDATE_REJECTION tag=%lld font_size=%.17g stage=%d", tag.longLongValue, fontSize, CocolonPieceCandidateDiagnosticStage->load(std::memory_order_relaxed)); '
+    assert observed.count(reject) == 1, 'Unexpected candidate rejection owner'
+    observed = observed.replace(reject, diagnostic + reject, 1)
+    projection = observed.replace(begin, '', 1).replace(diagnostic, '', 1)
+    projection = re.sub(r'\(CocolonPieceCandidateDiagnosticMark\(\d+\), (unavailable\(\)|failure->store\(true, std::memory_order_relaxed\))\);', r'\1;', projection)
+    assert projection == method, 'Candidate observation changed original tokens'
+    return instrumented.replace(method, observed, 1), markers
+
+
 def build(original):
     assert hashlib.sha256(original.encode()).hexdigest() == EXPECTED_SHA256, 'Unexpected product preimage'
     assert 'CocolonPieceDiagnosticTLS' not in original
@@ -203,7 +249,8 @@ def build(original):
     declaration='// Read-only accessors added by the pinned RN patch; no KVC/private-ivar read.\n'
     assert instrumented.count(declaration)==1
     instrumented=instrumented.replace(declaration,PREFIX+'\n'+declaration,1)
-    return instrumented, {'preimage_sha256':EXPECTED_SHA256,'instrumented_sha256':hashlib.sha256(instrumented.encode()).hexdigest(),'markers':stages,'marker_count':len(stages),'tls_resets':3,'same_call_raster_observers':1,'same_call_v4_reference_observers':1,'first_v4_mismatch_observers':1,'scalar_tls_max_bytes':1024,'inspection_versions':[3,4],'postimage_is_test_instrumentation_only':True,'unchanged_original_lexical_projection':True}
+    instrumented, candidate_markers = observe_candidate_rejections(instrumented, original)
+    return instrumented, {'preimage_sha256':EXPECTED_SHA256,'instrumented_sha256':hashlib.sha256(instrumented.encode()).hexdigest(),'markers':stages,'marker_count':len(stages),'tls_resets':3,'same_call_raster_observers':1,'same_call_v4_reference_observers':1,'first_v4_mismatch_observers':1,'scalar_tls_max_bytes':1024,'inspection_versions':[3,4],'candidate_rejection_markers':candidate_markers,'candidate_rejection_marker_count':len(candidate_markers),'candidate_rejection_observation':'per_call_first_stage_atomic_and_scalar_NSLog_only','candidate_method_unchanged_original_lexical_projection':True,'postimage_is_test_instrumentation_only':True,'unchanged_original_lexical_projection':True}
 
 
 source=Path('ios/tempCocolon/PieceTextMetrics.mm')
@@ -477,6 +524,9 @@ collect() {
   if [ -d "$OUT/result.xcresult" ]; then
     xcrun xcresulttool get --legacy --path "$OUT/result.xcresult" --format json 2>&1 | tee -a "$OUT/xcodebuild.log" || true
   fi
+  # Collect only this scalar rejection prefix before the simulator stops.
+  mkdir -p "$OUT/evidence"
+  xcrun simctl spawn "$DEVICE" log show --style json --last 5m --predicate 'eventMessage BEGINSWITH "PIECE_CANDIDATE_REJECTION "' > "$OUT/evidence/candidate-rejections.json" 2> "$OUT/evidence/candidate-rejections.stderr" || true
   xcrun simctl shutdown "$DEVICE" >/dev/null 2>&1 || true
 }
 trap collect EXIT

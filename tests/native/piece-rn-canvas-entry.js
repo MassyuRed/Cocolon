@@ -42,7 +42,8 @@ renderer.measurePieceCandidates = async (...args) => {
       version: value.version ?? null, returned_content_width: value.contentWidth ?? null });
     return value;
   } catch (error) {
-    Object.assign(sample, { status: 'rejected', elapsed_ms: performance.now() - started });
+    Object.assign(sample, { status: 'rejected', elapsed_ms: performance.now() - started,
+      reject_code: error?.code ?? null, reject_message: error?.message ?? null });
     throw error;
   }
 };
@@ -71,7 +72,7 @@ for (const method of ['measureCandidates', 'measureCandidatesForWidth', 'measure
   if (typeof nativeCandidates !== 'function') continue;
   NativeModules.PieceTextMetrics[method] = (...args) => {
     const started = performance.now();
-    const sample = { method, font_size: args[2], utf16_length: args[1].length, content_width: args[3] ?? null, status: 'pending' };
+    const sample = { method, tag: args[0], font_size: args[2], utf16_length: args[1].length, content_width: args[3] ?? null, status: 'pending' };
     activeTrace?.candidates.push(sample);
     return nativeCandidates(...args).then(value => {
       const packedBytes = typeof value.rows_f64le === 'string'
@@ -84,7 +85,8 @@ for (const method of ['measureCandidates', 'measureCandidatesForWidth', 'measure
       console.log('PIECE_RN_CANDIDATES', JSON.stringify(sample));
       return value;
     }, error => {
-      Object.assign(sample, { status: 'rejected', elapsed_ms: performance.now() - started });
+      Object.assign(sample, { status: 'rejected', elapsed_ms: performance.now() - started,
+        reject_code: error?.code ?? null, reject_message: error?.message ?? null });
       console.log('PIECE_RN_CANDIDATES', JSON.stringify(sample));
       throw error;
     });
