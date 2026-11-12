@@ -4,11 +4,11 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-12 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR03_TOKENIZER_VERIFIED_FIT16_PREPARED_NOT_EXECUTED
+status: AR03_FIT16_PREFLIGHT_FAILED_ALIAS_FIXED_PENDING_NEW_APPROVAL
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "CPU tokenizer/masks verified; bounded fresh-LoRA16 packet prepared, waiting for explicit upload/fit/pause-restoration approval; no automatic execution"
+current_next: "One approved attempt stopped before calls due to placeholder Analysis model; one argument fixed in separate 23350-byte packet, new one-run approval required, no retry"
 runtime_effect_of_this_document: 0
 ---
 
@@ -766,6 +766,37 @@ plain4は日常の喜び／未入会・未決定／兄と本人の所有／原�
 送信候補packet `ar03_history_fit16_prepared_20261112.zip` は23,353bytes／5members、SHA256 `0031bd6d17934bfe06f3e9a5b762672c6fcfac275733df5b8823ff19e0dcda6e`。未送信／未実行。追加学習と提供の停止・復元は、消費済みの学習／再起動なし6call承認を超えるため、上の具体scopeでMashの個別承認を待つ。今回の準備からGPU／fitへ自動進行しない。
 
 primary TECHNICAL_CREDITは実tokenizer／mask／入力長の成立に限定。STRUCTURE_MAP_DELTA_NONE。準備12件のRESOLVED補助0、UNASSESSED7／容量省略5、H8未準備、先行実6の場面混同・通常flag OFFを維持。AR-03・二入力訂正・一般品質・他AR／三中核・live反映／本人端末・正式商品受入れは未完。実rawのSQL保存・非生成再読も、今後のGPU比較結果とは別に確認する。
+
+
+
+<a id="auxiliary-history-fit16-preflight-alias-failure-20261112"></a>
+## 9.11 2026-11-12 — 承認済み一回がmodel照合で停止、引数一項目の修正版は新承認待ち
+
+**11/12・AR-03の16更新案は開始前照合で停止、model引数だけを修正：** 承認済み23,353byteを送信・原本照合して一回起動したが、Analysis controlの仮model名が実設定へ結び付いておらずAssertionError。華恋の準備ミスで、学習／研究生成／提供対照／停止・再起動0、鍵・全環境読取0、PID73476／health200維持。失敗原本を回収し、model1項目とpack hashだけを修正した23,350byteの別packetを準備。教師・比較・code・上限は不変、未送信／未実行。旧一回承認では再実行せず、新しい一回の具体承認待ち。品質は未評価、通常flag OFF・全補助経路未完を維持。
+
+### 実行した一回と確認結果
+
+Mashが§9.10の23,353byte・T8の16更新・研究前後22＋提供前後4確認・元提供の停止復元込み最大600秒／一回／再試行なしを承認。既存Podへ送信後、byte数とSHA256 `0031bd6d17934bfe06f3e9a5b762672c6fcfac275733df5b8823ff19e0dcda6e`、CRC、5fileの内容hash、新folder不存在を照合して一回だけ起動した。
+
+実行は `run_and_restore.py` のcontrol model名照合でAssertionErrorとなった。Analysis要求に仮の `observed_provider_alias` が残り、実設定 `cocolon-qwen3.5-4b-analysis-semantic-120u` と不一致。natural modelは一致。華恋が、前の比較scriptが送信直前に実設定から埋めるmodel名を、今回の固定packへ反映し忘れた準備ミスである。modelの理解品質、GPU容量、鍵や提供の障害としない。
+
+read-onlyの事後確認で、PID73476／health200、元source hashと5fileの凍結bytes一致、started marker／fit_started／restoration記録／candidate adapterの全不存在、control artifact0を確認。sourceの処理順も照合し、全環境・鍵ファイル読取、provider control、停止、学習子より前の停止と確認した。学習・研究生成・対照生成・停止／再起動は全て0。今回22本文はなく、改善・保持・意味品質は全て未評価。失敗を復元成功やGPU実行成功へ読み替えない。再試行0。
+
+失敗Pod原本 `failed_attempt.original.zip` は24,119bytes／7members、SHA256 `64aeda1cbfc1ad7d58baeb6b7b0e1bb1733c49fb0302ba2cd6105dd3d546d07d`。回収JSONのexact値を根拠とし、CRC・承認済み5fileのbyte一致をPod外でも確認。旧承認packetと失敗folderは変更しない。正確な処理秒数・原価は未測定で、稼働保持の料金を0とはしない。
+
+### 最小の引数修正と次の一回
+
+別packet `ar03_history_fit16_alias_fixed_prepared_20261112.zip` を準備。23,350bytes／5members、SHA256 `ef99b2cad3bb79437153d2a73cbcd592188a84ae8f9cf0138cdb27c95dde00f6`。変更は `controls[id=analysis].body.model` の一項目を回収した実設定へ結び付けることと、`files.json`内のpack digest更新だけ。実行code2file・READMEはbyte同一、plan・教師T8・比較11・他control・全messages／source prefixは変更0。独立agentもJSON leaf差分1、code bytes、5members／CRC／全digest一致を確認した。
+
+T8の16更新、研究22＋提供4＝26生成、全体600秒／研究330秒／学習180秒、元提供一回復元、既存2鍵の同Pod認証、認証情報を含み得る起動環境を同Pod内メモリだけに一時保持して復元へ使う範囲、通常採用falseは維持する。新method／loss、教材や比較の差替え、追加生成、既存重みの採用へ広げない。
+
+新packetは未送信／未実行。旧承認が一回・再試行なしのため、失敗した一回を自動再実行せず、この具体修正後の新しい一回についてMash承認を待つ。実行時は旧失敗folderと別のfresh folderへ展開する。今回の修正確認は引数不一致までで、新GPU／学習／復元のruntime成立を主張しない。
+
+### 保存と状態
+
+既存 `Cocolon_CMEE_AR03_HistoryTeaching_Candidates_20261112.zip`／Library `libfile_fde3_f-9e0e8945ad208191a053021e810be6d6_2f7470f963808191aaebf050935e72de` をversion2へ更新。181,214bytes／22members、SHA256 `c5fe1a1970fb65fb4b85f2c5ac525d6546bb1d502b1c81682eaa2cc9809439d4`。version1の旧原本・CPU結果・23,353byte packetを不変保持し、旧READMEも別名保管。失敗原本／事後確認JSON／最小修正版／差分と承認境界を追加。秘密・全環境・browser screenshot・Git-backed製品sourceは含めない。
+
+primary BLOCKER_NARROWED。先行する実tokenizer／mask／長さのcreditは保持し、新GPU・商品credit0。製品source／test／API／DB／RN／Render／Supabase変更0、STRUCTURE_MAP_DELTA_NONE。通常flag OFF、準備12件のRESOLVED補助0、H8未準備、先行実6の場面混同、AR-03・二入力訂正・一般品質・他AR／三中核・live反映／本人端末・正式受入れの未完を維持する。
 
 
 ## 10. 変更箇所と検証
