@@ -4,11 +4,11 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-12 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR03_ACTUAL6_COMPLETE_NORMAL_ADOPTION_WITHHELD
+status: AR03_SCOPED_HISTORY_AUTHOR_VIEW_PREPARED_ACTUAL_UNMEASURED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Actual6 complete, candidate not adopted; clarify history/current occasion ownership in author material; no automatic generation retry"
+current_next: "Scoped historical author view CPU/isolated SQL verified; new paired six actual requests prepared, awaiting bounded execution approval; normal adoption pending"
 runtime_effect_of_this_document: 0
 ---
 
@@ -608,6 +608,44 @@ API source `eab40e2fce5420d3ee00e8b64d7890b2d776e2a3` の既存Piece CI432029459
 次は既存作者に渡す過去解釈の記録・場面への所属と、過去／今回の出来事・感情の区別を明瞭にする最小修正へ戻す。原source role／locatorを改竄せず、作者用投影・指示の既存ownerで扱う。新しいchecker、強制拒否器、第二作者、履歴削除、旧controllerは追加しない。同じprompt試行・新GPU／学習・通常採用へ自動進行しない。今回承認の6callは完了・消費済み。
 
 STRUCTURE_MAP_DELTA_NONE（今回の実行・読取・状態更新で製品owner／route／DTO／DB／source責務は変更0。§9.5の研究候補における既存能力移管は継承）。AR-03・二入力訂正・一般応答品質・Piece／Analysisの適格SQL保存・通常接続／端末・全補助経路は未完。
+
+<a id="auxiliary-history-record-scope-prepared-20261112"></a>
+## 9.7 2026-11-12 — 過去の意味を所属記録へ明示する作者用投影・次6応答を準備
+
+**11/12・AR-03の過去記録への所属を作者材料へ明示（比較前候補）：** API `493cd728c542384b8ab00877d7cbac2dbd02b484`。研究明示時の過去answer_meaningを専用私的版へ分け、admittedな過去envelopeからsource_record_idを付与。CURRENT_INPUT／current_userはその過去記録内の呼称と説明し、過去の気持ちを今回へ足さないよう明示。元のrole／actor／locator／active・inactive／原入力・全回答は保持し、通常material・SYSTEMと前回6要求の再現性も維持。関連118件成功、最新第2回答が未対応の際に旧解決済み解釈へ戻らないことも確認。3組×旧新6要求を全thread／guard原本付きで準備し、合成providerで実隔離SQL保存・非生成再読6件成功。前回実6の通常不採用を継承。新実4B・Pod送信0、通常適用・商品改善は未成立。
+
+### 前回の実失敗へ戻した修正
+
+§9.6で過去だけの「重かった」が今回の引用直後へ結び付いたため、作者用の過去意味へ所属recordを明示する。`natural_reply.py`の既存研究分岐内で、意味を`natural_history_answer_meaning.v1`として区別し、`past.original.envelope.source_record_id`を`source_record_id`へ付与する。これは既存admissionで原入力ID／guardとの一致を確認した後の投影で、model・本人入力から所属を受理しない。
+
+元のsource_fragmentsにあるCURRENT_INPUTはその過去記録内の原入力、actorのcurrent_userもその記録者を表すと作者へ説明する。原role／actor／locator／claim／relationを改名・改変せず、activeな過去の気持ちを今回へ足さない。同文の過去と今回が同一出来事か不明であることと、別出来事と断定することを分ける。過去を使う場合は文章上も場面を区別し、inactiveを復活させず、UNASSESSEDは読取未確定のまま保つ。記録日時を出来事日時へ変えない既存SYSTEMも維持する。
+
+旧`natural_answer_meaning.v1`の過去SYSTEMを残し、前回の固定6要求を再現可能にする。今回のcurrent回答の同schema・指示は不変。通常serviceは引き続き`use_meaning_support=False`であり、新しい私的schemaは研究時の作者用投影だけ。公開DTO／RPC／DB／RN／Safety／履歴資格・選択／source prefix／保存済み本文を変えない。任意補助は所属を含む一式で5800byte予算へ従い、超過時に原入力・回答を切らず補助だけ外す。
+
+### 今回の確認
+
+- 最終sourceに対する自然応答系3moduleは118 passed／FAIL0／SKIP0、25.40秒、既存Pydantic非推奨警告1。前回117に新1を加えた集合で、繰り返し実行・subtestを加算しない。新1は解決済み第1回答に続く第2回答が「はい」で未対応となった履歴を実保存し、旧RESOLVEDへ戻らず全2回答＋UNASSESSEDを渡すことを確認。
+- 既存9対照を新しい所属・予算へ更新し、過去IDと今回IDの分離、原入力・全回答・原文位置・inactiveの保持、Free履歴0、公開非露出、予算不足時の完全な通常material fallbackを確認。
+- 前回の保存済み6要求は、SYSTEM／materialの完全一致を維持。次の3組では旧API eab40e2のcanonical blob `b619894bd1976b74508d5ac7fee7a23af767c9cd`を読み込み、通常material／SYSTEM／source prefixが修正前と一致することを確認した。
+- rootと別agentの読取reviewでblockingなし。inactiveの復活禁止と通常SYSTEMの一致assertを補った。通常利用や別model Pro Product Read・商品受入れの成立ではない。
+
+### 保存・再読へつながる次の6要求
+
+前回と同じ本文を使う架空の撤回／追加回答／未対応の3組を、新しい隔離SQLのsource／thread／時刻で具体化し、前回不採用v1と今回のscoped版を一組ずつ比較する。これは前回6要求と同一IDの再送ではない。各組内は同じ原入力・全回答・問い・ID／時刻・guard・source prefixを共有し、差は作者用schema／所属field／対応SYSTEMだけ。前回の保存rawを今回版の実出力へ読み替えない。
+
+currentは問いOFFのFINALとして準備し、過去の問い・本人回答はsourceに残す。AI bootstrap本文はmodel材料に入れない。旧／新messagesは撤回5701／5705、追加回答5784／5788、未対応4578／4582bytesで、全6が既存5800byte以内。
+
+前回欠けていた`before CALL_STARTED`の完全なthread・原入力・全events・履歴guard・所有者の隔離原本を、既存CaptureStore／dump_rowsの方法で保持した。次のrawを現SelfHosted provider→既存service action→同じsourceのSQLへ再生できるよう、6要求の合成providerリハーサルでwire bytes／source prefix一致、実隔離SQL保存と別serviceの非生成再読を確認。ここで使った本文は合成fixtureであり、実4Bや商品品質の成功に数えない。通常serviceの準備に対し研究promptをoffline providerへ明示注入する確認で、研究版の通常採用でもない。
+
+歴史的なactive attemptの解放は隔離fixture内のworker_interrupted遷移だけ。source／event ID、回答、guardを変更せず、既存retry actionが現在のDB時計で新attemptを取得する。live SQLへの遷移・実GPU再試行はない。前回6件について欠けた原本を後付けで生成し、前回のSQL保存成功とすることもしない。
+
+### 実行準備と未実施
+
+一回script50,167bytes、SHA256 `f2e7fe6c88bf870623fe783657af0d2eb935e2251674407aa5b90f4a6672c51a`。既存Pod `f1lle4xwq3wjln`へ旧新6要求、最大420秒／各60秒、追加学習／再試行／提供停止再起動／重み変更0。既存自然応答用一鍵だけを同Podの127.0.0.1認証へ使い、全環境読取・鍵の表示／保存／外部出力0。前後health／PID確認、redirect／proxyなし、専用folderの再利用拒否を維持。Pod送信・新実4B生成0で、新しい具体承認前には実行しない。前回6callの完了承認は流用しない。
+
+準備原本 `Cocolon_CMEE_AR03_HistoryScope_Prepared_20261112.zip`、Library ID `libfile_fde3_f-3cb503c7691c8191b4a2cc3dde580427_2f7470f963808191aaebf050935e72de`、42,476bytes／9members、SHA256 `b19add959a4e8bf7471ab33c1b1b6bf1bb96f4345a90c1729b399e8094b02183`。全frozen rows・request・一回script・合成SQL往復・再生手順を保存し、Git-backed製品source／認証値／実本人入力／browser screenshotは含めない。含まれるfrozen requestを再生する際はbuilderを再実行してIDを作り直さない。
+
+STRUCTURE_MAP_DELTA_PRESENT（既存研究作者投影に所属記録を持つ私的版を追加。新作者／controller／reader／公開型・route／DB・fileは追加0）。旧実6の不採用、通常flag OFF、意味・自然さ・履歴利用の実4B未達、AR-02二入力訂正・他AR／live・本人端末・正式受入れは維持する。CPU／合成SQL成功を可視品質改善へ換算しない。
 
 ## 10. 変更箇所と検証
 
