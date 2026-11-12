@@ -1,3 +1,5 @@
+> **2026-11-12・Mashとの設計合意（未実装）：根拠と対象範囲の分かる仮説を保持し、わたしマップの項目・関係線への本人訂正入口を追加する方針。対象と「何がどう違うか」の本人説明を必須とし、不足をAIで補わない。現機能・未決事項は[同日節](#analysis-interpretation-correction-20261112)へ。**
+
 > 2026-11-08追加反映：先行こころグラフ／履歴metadata読取／既読cache修復を含むAPI497f7008がLive。更新担当と通知2cronも同版。共有4Bは分析予算・JSON制約・120u adapterを保持し、natural専用鍵の要求だけ順番待ちする。分析3node/2edge・全2入力mappedの実GPU合成確認後、待機した観測応答も完了。RN6fdea583の統合run#80は全19step成功、8001内部Testing。map通知の本人不達はglobal OFFの送信前除外、cron候補DB timeoutとは別。
 
 > **11/7・通常4Bによる意味読解と関係図の修復候補：** 原典の役割＝自己／他者世界の座標と対象の定義を、担当構文へ狭めていた問題を是正。新API `analysis_semantic_map.py`、既存model source／累積ensure、v3公開型／private根拠、RN `SemanticWatashiMap.js`／`semanticMapContract.js`を実装。自己の位置・対象の意味・選択と出力を記録間で読み、関係図→詳細→根拠へ渡す。既存原入力／辞書／月次保存・旧v2を維持。隔離実SQLでは新CHECK migration後に保存／根拠／非生成再読が成立。実4B／配置／新build／本人実機は未成立、新Pod認証待ち。局所検査を品質合格へ換算しない。[現物と残差](../weekly_reviews/Cocolon_Weekly_Review_20261107.md#analysis-semantic-map-repair-20261107)。
@@ -1593,3 +1595,27 @@ CI／保存追補：APIa305b33346b4a90b68f8d92893a7099b31c4d92aの[Analysis CI42
 RN製品候補2518f9fad2291e02e9e08d775783c1b097487577の[CI42448361235](https://github.com/MassyuRed/Cocolon/actions/runs/42448361235)は、新history9件を含むRNcontracts job128632034420が全10step success、Android source128632034339／Android export128632034411／export Pods128632034130もsuccess。phase6 CI42448361265／job128632034182は全13step success。別iOS metrics128632034317は既存V4の失敗19名称・順序が前版と完全一致、V4 20件中PASS1／FAIL19、legacy97／V9 46／main129／bitmap44はPASS。canvas128632034326は記録時点で実描画中、終端未確認。今回の変更はPiece／nativeを修復せず、これらを対象RN検査成功へまとめない。署名build・Uploadは起動していない。
 
 Cocolon31pathとAPI10pathを各exact predecessorで反映し、remote bytes／変更path集合／最終source headを全照合した。RN局所は52＋関連141＝193 PASS／FAIL・SKIP0。既存test compilerだけ5.2.2を一時環境へ追加し、商品依存／lockは不変。採用preview2fileと生成済tutorialfixtureも不変。今回候補の本番反映・実機確認は未実施。同作業中の既存workerログ一回読取（04:00Z以後の更新／送信job名の取得範囲）には対象記録0件で、通知未送信と断定せず受信確認待ちを維持する。
+
+
+<a id="analysis-interpretation-correction-20261112"></a>
+## 2026-11-12 — わたしマップの本人訂正入口：方針採用・実装未接続
+
+Mashとの対話で、根拠と対象範囲を示せる仮説は保持し、項目・関係線について本人が読みの違いを伝えられる入口を追加する方針を採用した。曖昧な語尾だけで根拠不足を許さない。詳細は[Analysis設計の同日節](../designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#analysis-interpretation-correction-20261112)、共通原則は[観測・分析の合意](../observation_learning/README.md#observation-calibration-20261112)を参照する。
+
+### 現在あるものと、今回決めたもの
+
+| 区分 | 確認した範囲 |
+|---|---|
+| 現行RN | `components/selfStructure/SemanticWatashiMap.js` は項目・関係線の選択、説明・未確定事項の表示、根拠参照を持つ。`CumulativeWatashiMapView.js` は現在／当時月次の閲覧・比較、分析更新、根拠の原入力／適格補足の表示を持つ。項目・線の読みを訂正する入力・送信の入口はない |
+| 現行API | `api_self_structure.py` の通常map latest/status/monthly ensureと、`api_self_structure_reports.py` のhistory/detail/evidenceに、マップ解釈への本人訂正を受け付ける入口はない。profile閲覧要求のaccept/rejectは解釈への賛否ではない |
+| 既存の訂正資産 | 原入力に束縛した本人補足のREVISE／WITHDRAW等は、元の記述を扱う資産。今回のマップ項目・関係線への本人訂正がUI・保存・将来分析まで接続済みという意味ではない |
+| 今回採用した方針 | 「どの内容ですか？」と「どう違いましたか？」を分け、どの読みの何がどう違うかという対象と本人の説明を必須にする。根拠を見る操作・原入力の編集・分析更新と区別する |
+| 未具体化・未実装 | 訂正のDB／API／UI、対象版への束縛、説明不足の確認、保存・更新と将来分析への反映方式。画面構成や質問数も未決であり、本節で実装済みにはしない |
+
+「違う」だけ、単なるnonnullや文字数の充足を訂正完了としない。不足は未確定にして確認し、AIが本人説明を補完しない。本人が否定した読みは、説明が未確定でも確定した本人特徴として使い続けない。無反応も同意としない。
+
+原記録・AI解釈・本人訂正を分け、本人の現訂正を将来分析へつなぐ方針とする。旧snapshotを遡及書換えせず、既存の削除・権限・保存寿命を維持する。全蓄積を扱う累積mapの対象を、訂正のために任意の数件・数日へ置き換えない。
+
+### 確認根拠と今回の実施範囲
+
+GitHub sourceの確認範囲はCocolon `90735e2ff448e8815796cb5112f318ef10198aa3`、mashos-api `8a0192b622c0ce76cde39062e9476f7c814e6e99`。対応する[項目・線renderer](https://github.com/MassyuRed/Cocolon/blob/90735e2ff448e8815796cb5112f318ef10198aa3/components/selfStructure/SemanticWatashiMap.js)、[累積map画面](https://github.com/MassyuRed/Cocolon/blob/90735e2ff448e8815796cb5112f318ef10198aa3/components/selfStructure/CumulativeWatashiMapView.js)、[通常map API](https://github.com/MassyuRed/mashos-api/blob/8a0192b622c0ce76cde39062e9476f7c814e6e99/ai/services/ai_inference/api_self_structure.py)、[履歴・詳細・根拠API](https://github.com/MassyuRed/mashos-api/blob/8a0192b622c0ce76cde39062e9476f7c814e6e99/ai/services/ai_inference/api_self_structure_reports.py)を読取確認した。今回はLive／実機の再確認ではない。商品source・DB・API・RN変更、GPU生成・学習・配置は行っていない。STRUCTURE_MAP_DELTA_NONE（設計方針と未接続残件の記録）。

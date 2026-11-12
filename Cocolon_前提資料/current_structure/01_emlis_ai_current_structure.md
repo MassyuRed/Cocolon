@@ -1,5 +1,14 @@
 > **2026-11-12・現在の問い構築目標：** 全plan最大3問、入力画面の受取ON／OFF（初期ON・前回選択保持）。短い受け止め→重要な一点→回答に応じた次問／応答とし、OFF・skip・本人終了・3問到達、十分な理解による0／1／2問終了を区別する。[採用決定と判断例](../designs/cmee/v1/02_emlis_v1a_detailed_design.md#emlis-question-policy-20261112)をAR-02で使う。新仕様は未実装。旧Q1／Q3機構の存在と、現natural自身の問い／回答後更新の未接続を分ける。本文中の旧1／3問・各round全文先行・未実装とする過去記述は当時の設計／実績であり、最新仕様や現接続を上書きしない。
 
+<a id="emlis-interpretation-correction-20261112"></a>
+## 2026-11-12 採用仕様 — 仮説への本人訂正と現在の未接続範囲
+
+根拠のある仮説を未確定として提示し、本人が違う内容を説明して訂正できる方針を採用。「どの内容ですか？」「どう違いましたか？」を分けて表示し、対象の特定と本人の訂正説明をともに必須とする。説明の補助文案は「ご自身の考えや、実際の状況を教えてください。」。「違う」だけ、空でない文字列だけで訂正完了にせず、曖昧な内容はモデルが補完しない。訂正がないことだけを理由に仮説を確認済みへ昇格せず、無反応を同意・確認へ変えない。本人による明示的な確認や新しい根拠による見直しとは区別する。否定された仮説を確定した本人特徴として使い続けたり本人確認済みへ戻したりせず、逆の解釈も自動採用しない。
+
+旧Q1／Q3の回答中の訂正・撤回と、Premiumの特定frameに対する確認・修正・不使用は既存資産である。一方、現naturalは初回FINAL／COMPLETEDで、通常応答後に任意の誤解を説明して訂正する入口・反映は未接続。既存FrameEditorを、この新導線の完成とは扱わない。今回の差分は仕様決定の記録であり、コード・保存・配布・実機の成立ではない。
+
+詳細ownerは[採用決定](../designs/cmee/v1/02_emlis_v1a_detailed_design.md#emlis-interpretation-correction-20261112)、共通原則は[観測学習の記録](../observation_learning/README.md#observation-calibration-20261112)。全プラン最大3問・問いON／OFF・初期ON・前回選択保持は維持し、訂正時の追加確認と3問の関係、回数・UI、対象の選択方法、料金差・同期動作は今回確定しない。STRUCTURE_MAP_DELTA_NONE（実装owner／source責務の変更なし。採用仕様と未接続範囲のみ更新）。
+
 > 11/8 AR-01の有限役割・認識補助：API候補e14d4fecへ明記格／焦点構文と認識・内容の別範囲を接続し、旧semantic inventory／body inverseの必要責務を現自由文へ適合。237局所検証と同commitの2 CI成功。架空development controlsのbaseline16＋構造補助16＝32実生成は49.554327秒・全HTTP200／stopだが、人物・時点・話し方の残差で通常不採用。追加の原文表記補助6構成は私的prototypeで完了し、全HTTP200／stop・9.090525秒。同6sourceの3版18本文を独立照合し、役割反転・本人誤継承の局所修復を確認。ただし記録者混入・原文外因果・本人宛の語り口／感情と時点の結合等が残り通常不採用。短く正しい一度の言換えは失敗に数えない。補助表現と専用SYSTEMの同時変更で、単独要因の効果とは断定しない。e14 sourceへこのprototypeは反映していない。 実32は隔離SQL保存・同／別service GET一致を確認し、captureとSQLのsource参照差は全32の両参照を保持。私的prototype6はSQL未実施。保存32のreportは範囲内非衝突4／未判定28・衝突0、全文coverage全32 false。認識helperはsource補助で、自由文の認識一般比較済みではない。通常use_meaning_support=False、Render通常API497f7008は未変更でe14未配置。STRUCTURE_MAP_DELTA_PRESENT（候補sourceの有限読取／補助選択責務）、全資産活用・AR-01完了とはしない。 [既存AR-01実行記録](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/README.md)。
 
 > 11/8 補助経路活用AR-01続行：新8単独16更新と旧36＋新8の低LR混合44更新を、同じ元dbから別々に実施。新120生成・保存再読87件／length拒否1件を確認。混合で一部退行を抑えたが、役割・主体・認識時点の誤りが残り全候補通常不採用。元提供を復元・health200。次は残る意味誤読を旧meaning obligations／body inverse／候補比較の必要部品で修復し、同じ学習を周回しない。今回の商品source・配置・実DB／RN／build変更0、STRUCTURE_MAP_DELTA_NONE。AR-01は継続中。 [全結果と再開点](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/learning_replay_review.md)。
