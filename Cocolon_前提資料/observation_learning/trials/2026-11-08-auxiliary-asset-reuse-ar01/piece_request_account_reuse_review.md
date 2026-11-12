@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/12・AR-04最新：** 研究07ea24cc（source8c5e不変）のrun43118077795を開始、結果未判定。同V4 callbackへ既存naturalDraw/shared/referenceの履歴をtag/view/storageで対応づけ、現在bounds/content frameと別記録する。32行の観測追加だけで、collector/描画/inspect/元13/8秒/閾値は不変。履歴件数はdraw回数・最新paint成立の証明ではなく、0件も未描画の証明にしない。通常.mm581/pin/selector OFF・未採用、AR-04未完。次はこのrun終端と同call記録を回収し、初回stage58の自然観測欠如を切り分ける。 [既存natural観測の接続と現在地](piece_request_account_reuse_review.md#piece-v4-natural-context-link-20261112)。
+> **11/12・AR-04最新：** 研究07ea24ccのrun43118077795はcompile成功／Whole1method失敗。元13条件は不変、root assertion失敗14→26（旧14保持・新12）、初回本文8072.684msでV4前timeout。V4は100call中strict92（local48/placed44）、自然snapshotなし7、面積拒否1。既存履歴の同call対応100件は成立、残9PNGは前回と全byte/画素一致。修復・速度改善・通常採用の証明ではない。通常ios.v2はbitmap分岐でV4自然観測を必須にせず、共通の初回計測timeoutは残件。次は記録済み344a通常051/refined007の原source/messages/rawを再利用し、通常host→実native fit→明示save→receipt→fresh owner→同版exportを一続きに確認する。通常.mm581/pin/selector OFFを維持、AR-04未完。 [既存natural観測の接続と現在地](piece_request_account_reuse_review.md#piece-v4-natural-context-link-20261112)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -2552,17 +2552,63 @@ PRIMARY_OUTCOME=限定TECHNICAL_CREDIT。Cq候補のactual RNでの小数配置/
 
 
 <a id="piece-v4-natural-context-link-20261112"></a>
-## 11/12 AR-04 — 既存natural paint履歴を同callbackへ接続（実行中）
+## 11/12 AR-04 — 既存natural履歴の同call接続を確認・Wholeは14→26失敗
 
-通常29a4f1f6／研究ca7e・run43106065561の完了と、前回13条件・113call/106厳密比較/未測定7・Whole14失敗記録を継承して再開した。前回source/画像/数値を再生成せず、freshな全体現在地・全体/対象map・最新weekly・詳細設計§11–12、current規則と恒久incidentから、初回6stage58の既存観測対応づけを次の一単位とした。stage58では自然paint observationがnil、期限は残っており、stable-mask不一致や未描画そのものとは未確定である。
+### 継承・変更した範囲
 
-[研究07ea24cc](https://github.com/MassyuRed/Cocolon/commit/07ea24cccd380ef3cc740883b0152fdbab1b343e)はca7の子で、既存test2pathだけを変更した。RN harnessにforward宣言＋同V4 callbackのfield1＋readonly helperを計32行追加。既存PiecePaintContextsをtag/view_identity/storage_identityで抽出し、natural_drawRect_pre_paint/natural_shared_paint/reference_shared_paintの配列と重複除去済み件数、現在public bounds/content frameを返す。collector本体・観測の生成・描画・inspect・元結果は変更0。追加を逆投影するとfresh ca7全文へ一致、元6method/全assertion/既存natural_snapshotは不変。履歴は過去geometry/属性を含み得るため、現在geometryと別に照合し、最新paint成立やdraw回数へ換算しない。nil current CGContextは元collectorで記録されず、0件をdraw未実行の証明にしない。
+通常29a4f1f6／研究ca7e・run43106065561の完了（元13条件、113call/strict106/未観測7、root assertion14）を継承した。fresh全体現在地・全体/対象map・最新weekly・詳細設計§11–12・current規則と恒久incidentを確認し、初回stage58へ既存観測を対応づける一単位を実行した。通常f1d51153へ実行中checkpointを先行保存し、同runを二重起動していない。前回standalone24/48・model73/243SQL・static6/transition4は再実行していない。
 
-既存workflowのname/ref/RNjob指定だけを研究新refへ接続。runnerは既存Whole1method/元13条件だけを実行する同一bytesで、他5method・standalone24/48・model73/243SQL・static6/transition4は今回未実行。source8c5e9a37954cf013f6d0e28e72070b24498e6087998effc46d3266d33aed7e4b/pin、通常製品.mm581/pin/selector OFFを保持。local bash syntax/YAML parse/source hash、harness逆投影、独立静的review、GitHub4path全byte読戻しと変更2path集合を確認した。localのUIKit compile/runtime成功ではない。
+[研究07ea24cc](https://github.com/MassyuRed/Cocolon/commit/07ea24cccd380ef3cc740883b0152fdbab1b343e)はca7の子で、既存test2pathだけを変更した。RN harnessへforward宣言＋同V4 callbackのfield1＋readonly helperを32行追加し、既存PiecePaintContextsのtag/view_identity/storage_identityが一致するnatural_drawRect_pre_paint／natural_shared_paint／reference_shared_paintを返す。履歴と現在public bounds/content frameを分離した。collector本体・観測生成・描画・inspect・元結果・全assertion・元13/順序/8秒は変更0。追加32行を除くとfresh ca7全文と一致する。harness SHA256は5ffc884b5e73dedbfc8a7efc848af5949e42ec84678a488ab7518b0141bb053c。
 
-[run43118077795](https://github.com/MassyuRed/Cocolon/actions/runs/43118077795)は起動済み・結果未判定、RNjob130851139571、他5job skipped。job45分・元8秒と既知4Mi拒否を保持、manual dispatch/rerun0。中断時も同runを起動し直さず終端/既存artifactへ戻る。原13の本文/行/plan/寸法/期待値とsame-call identity、追加履歴の原記録一致/現在geometryとの関係を照合し、欠如理由を観測以上に断定しない。強制draw/layout/flush・追加inspect・期限延長や別method先行による事前描画を行わない。
+workflowは研究refのname/routingだけ変更、runnerは同じWhole1method限定のbytesを保持。他5methodは今回UNEXECUTED。native source/pinは8c5e9a37954cf013f6d0e28e72070b24498e6087998effc46d3266d33aed7e4b、instrumented SHA2c908ff2f4dd92e5aa0ea9dc8bc5e1ad6e6578b82b2111135a33acb8ce09b40f／104map／late73は不変。local YAML/bash/source/逆投影・独立静的review、GitHub4path全byte読戻し・変更2path集合を確認した。UIKit compile成功はremote CIの実績としてのみ扱う。
 
-今回のreadonly静的調査では、logical canvasはnative_checkedまでopacity0、geometry完了/onLayout/onTextLayoutと既存2rAFは自然draw完了の保証ではないと確認した。後続caseも同条件で成功しており、opacity単独を欠如原因とはしない。Finishはbeforeがあればmask不一致でも辞書を残すため、present0をstable mismatchでは説明しない。new helperはその二枝を見分けるための既存記録の接続で、通常描画の修復・採用ではない。
+### 一回の終端と悪化を含む実結果
 
-STRUCTURE_MAP_DELTA_NONE：通常製品owner/公開型/route/DB/作者/renderer責務の変更0、既存研究testのreadonly観測とworkflow接続だけ。GPU/学習/SQL/実Auth/Render配置/署名build/配布0。
+[run43118077795](https://github.com/MassyuRed/Cocolon/actions/runs/43118077795)はcompleted/failure（attempt1）、RNjob130851139571 failure、他5job skipped。started_at 2026-11-11T23:12:56Z→updated_at23:52:59Z、workflow wall2403秒。build23:17:08Z→23:28:00Zで成功、test開始23:34:53Z。45分jobと元8秒、面積等の上限を保持し、manual dispatch/rerun0。このCI所要は前回1291秒より長く、アプリの描画時間・通常原価や同callback helperの因果負荷とは分ける。請求額は未測定。
+
+| 比較対象 | 前回ca7e/run43106065561 | 今回07ea/run43118077795 |
+| --- | --- | --- |
+| Whole元13報告・順序・入力contract | 13 | 全13一致 |
+| 候補metadata・plan・選択metrics | 基準 | 全13一致 |
+| root structured assertion failure | 14 | 26＝旧14保持＋新12、消失0 |
+| 実行method | Whole1失敗 | Whole1失敗、他5未実行 |
+| V4同call | 113＝strict106＋stage58×6＋stage15×1 | 100＝strict92＋stage58×7＋stage15×1 |
+| PNG | 11 | 9、対応する同名9は寸法/file SHA/RGBA全一致 |
+| first essay | 5200.029ms／V4 stage58×6 | 8072.684ms／V4到達0・measurement_timeout |
+
+26はActionsInvocationRecordのroot failure summariesだけで、action配下の同じ配列・console再掲は加算していない。全26のassertion sourceは旧sourceの行位置＋32で一致。新12の内訳はessay_paragraphsの元elapsed<8000期待1、declaration_no_brand5、suffix_arabic6。新条件・期待緩和で成功にしていない。
+
+first essayは元8秒を超え、V4 dispatch/boundary/observer callbackへ到達していない。このcaseでhelperは実行されておらず、前回6stage58が今回回復したとは扱わない。時間差・新欠測の原因は未確定で、同callback接続の速度改善/退行原因を断定しない。V4前の共通計測で止まったため、通常bitmap側の初回8秒とも無関係とはしない。
+
+### 同call履歴の成立範囲
+
+100call全てにhelper available=true、同じtag/view/storage identity、配列kind/件数、重複key、現在public boundsの対応を確認した。検出不一致0。返った履歴延べ370件（pre93/shared93/reference184）は全てそのcallの現在bounds/content frameと一致し、異なる過去geometryは今回0。distinct keyはpre49/shared49/reference96で、延べ件数をdraw回数や独立新規観測数へ換算しない。
+
+| 同callの状態 | call数 | pre/shared/referenceの履歴件数 | 自然snapshot |
+| --- | --- | --- | --- |
+| strict stage0 | 92 | 各1/1/2 | present |
+| quote stage15 | 1 | 1/1/0 | present |
+| stage58 | 7 | 0/0/0 | absent |
+
+strict92はlocal48/placed44、小数phase34。Cq/CTMの同callback導出は全92一致し、Cqは公開bounds・expanded Bとも異なる。厳密比較成功92と比較未観測8は分ける。quoteは従前と同じ3481×1285＝4,473,085pxで4Mi=4,194,304を278,781超過、mask256の拒否を保持した。
+
+stage58の7はdeclaration5／Arabic2で、対応する既存記録がないことまでを確認した。nil UIGraphicsGetCurrentContextは元collectorが記録せず、履歴も重複除去されるため、0件はdrawRect未実行の証明ではない。identity/geometry一致も最新属性・BeginPaint受理・Finish非nilの順序証明ではない。reference paintを自然paintへ数えない。自然観測の修復は未成立で、追加observer周回・強制draw/layout/flush・再inspect・期限延長を次の通常商品作業へ置かない。
+
+完成PNG9はV4由来8（raw3/意図したclip-trapを含む）と旧saved prototype.v3が1。全てを通常V4カード9完成と呼ばない。欠測4はessay/quote/declaration/Arabic、前回から新たに欠測したのはdeclaration/Arabic。対応9の前回画像との全byte/画素一致は、追加2の欠測やfirst timeoutを相殺しない。固定fixture/Cocolonロゴの試験で、現Emlisロゴ・全配色・Photos・本人端末の確認へ広げない。
+
+### 通常ios.v2との接続と次の直接作業
+
+fresh通常sourceでは、pieceLayout.jsがios.v1/v2をbitmap profileへ写像し、PieceVisualCardのfixedRaster分岐はinspectBitmapDrawing→renderPieceBitmapCanvas→renderBitmapCanvasを使う。inspectSelectedLineV4／natural snapshotは通常ios.v2の必須gateではない。APIのrenderer header negotiationとPIECE_MODEL_SOURCEの選択も別責務である。通常bitmap成功だけでV4の自然layer/reference logical1 exact同等性を証明したとは扱わず、その能力は未解決・未採用のまま残す。共有v5/TextKit/paint/予算と今回のV4前timeoutは通常経路にも関係し得る残件として保つ。
+
+次は既存の344a通常051／明示refined007の記録済みsource_request/messages/rawを再利用し、通常saved-input host→preview→実native fit→明示save→保存receipt→fresh owner履歴/詳細→同版ios.v2 PNG exportを同じ本文/recipe/3hash/保存版で連続確認する。入口はInputPieceActionArea/PieceCreateController、表示はPiecePreviewModal/PieceVisualCard、保存は既存pieceApi、再取得/書出しはPieceOwnerHistoryHost/pieceExportへ戻る。既存接続の連続実証が不足しているのであり、新controller/checker/Gateや新規73生成・GPU/学習を作る必要はない。
+
+公開344a multiblock fixtureの051/007はPremium・required_subtle（051 soft_paper rev1、007 soft_paper rev1→quiet_night rev2）のpreview/detail DTOで、原入力7field/source_ref/rawを含まない。configured recordingのFree保存3とは別artifactである。原録画のcanonical source/messages/rawを読むところから始め、実際に返るrecipe/3hash/版を追跡する。DTOからsource_ref/rawを捏造せず、Premium native6と別のFree保存3を同一作品の証拠へ継ぎ合わせない。既存syntheticFit/mockPNGテストを実native成功へ加算しない。通常model採用、Photos/本人端末、一般本文品質・正式受入れ0/3、AR-01反転・他ARの残件は未完了を維持する。
+
+### 原記録・結果の保全
+
+artifact13901638151は93,315,177byte/SHA256 66f4551cff0e92346eea559d62626da2441f1c40980586f534508183b08eb1cd。991memberの全CRC・relative path/link境界を確認し、実出力12fileを回収した。results.jsonは1,709,892byte/SHA256 9a13bf3f2e76fa7bcfe7138c3346e3a88014962a9dd8767a11d0334a533311f4。数値正本は[同trialの本文なしJSON](native_natural_context_link_20261112.public.json)、source正本は研究refである。
+
+[実行記録・比較画像](https://chatgpt.com/library?file_id=libfile_fde3_f-c3577a63fb108191a92dc9471e545099_2f7470f963808191aaebf050935e72de&account_id=personal)はCocolon_CMEE_AR04_NaturalContext_Link_20261112.zip、2,851,598byte/SHA256 cc07f1dd1e657a0a759a488c64e150634cbabb716c731f1e9b1ab7c108a3763b、35memberの全CRC/各member hash一致を確認済み。今回と前回のWhole実13JSON/PNG/log/map・独立読取を保持し、Git管理code/文書や他5method出力は複製しない。前回InverseClip ZIPは別単位として維持した。
+
+PRIMARY_OUTCOME=限定TECHNICAL_CREDIT（既存履歴の同callback対応のみ）。描画修復・速度改善・Whole全成功・通常採用・商品受入れcredit0。通常製品.mm581/pin/selector OFF、frozen recipe/旧保存互換を保持、今回live環境変数の再取得/変更は0。GPU/学習/SQL/実Auth/Render配置/署名build/配布0。STRUCTURE_MAP_DELTA_NONE：通常製品owner/公開型/route/DB/作者/renderer責務の変更0。研究2testpathの限定観測を完了し、次は既存通常hostの直接接続へ戻る。
 

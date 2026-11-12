@@ -4,7 +4,7 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-12 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR01_UNRESOLVED_AR04_NATURAL_CONTEXT_LINK_RUNNING_UNADOPTED
+status: AR01_UNRESOLVED_AR04_NATURAL_CONTEXT_LINK_FAILED_UNADOPTED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
@@ -12,7 +12,7 @@ current_next: AR-04
 runtime_effect_of_this_document: 0
 ---
 
-> **11/12・AR-04最新：** 研究07ea24cc（source8c5e不変）のrun43118077795を開始、結果未判定。同V4 callbackへ既存naturalDraw/shared/referenceの履歴をtag/view/storageで対応づけ、現在bounds/content frameと別記録する。32行の観測追加だけで、collector/描画/inspect/元13/8秒/閾値は不変。履歴件数はdraw回数・最新paint成立の証明ではなく、0件も未描画の証明にしない。通常.mm581/pin/selector OFF・未採用、AR-04未完。次はこのrun終端と同call記録を回収し、初回stage58の自然観測欠如を切り分ける。 [既存natural観測の接続と現在地](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-v4-natural-context-link-20261112)。
+> **11/12・AR-04最新：** 研究07ea24ccのrun43118077795はcompile成功／Whole1method失敗。元13条件は不変、root assertion失敗14→26（旧14保持・新12）、初回本文8072.684msでV4前timeout。V4は100call中strict92（local48/placed44）、自然snapshotなし7、面積拒否1。既存履歴の同call対応100件は成立、残9PNGは前回と全byte/画素一致。修復・速度改善・通常採用の証明ではない。通常ios.v2はbitmap分岐でV4自然観測を必須にせず、共通の初回計測timeoutは残件。次は記録済み344a通常051/refined007の原source/messages/rawを再利用し、通常host→実native fit→明示save→receipt→fresh owner→同版exportを一続きに確認する。通常.mm581/pin/selector OFFを維持、AR-04未完。 [既存natural観測の接続と現在地](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-v4-natural-context-link-20261112)。
 
 > **11/10・AR-04最新：** 引用内stopを持つ新4件＋保持GENERAL07の現builder送信messagesを固定し、13,140byte・2memberの無学習比較packetを準備。構文compile／CRC／member照合は成功、実モデル生成・送信・提供停止0。非環境の稼働確認はhealth200。起動環境全体の読取りは認証情報を含み得るとして自動承認審査に拒否され、未実行。新packet送信と、完全復元に必要な環境内再利用の具体承認待ち。API5816f2d0／f6dae研究候補・通常selector OFF・本番未反映を維持。 [具体packet・確認範囲・再開点](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-quote-stop-inference-prepared-20261110)。
 
@@ -239,6 +239,10 @@ Analysisの既存source adapter→semantic admission→compiler→唯一realizer
 
 ### 7.1 Piece
 
+**11/12・通常画像経路とV4の責務：** `pieceLayout.js`のios.v1/v2はbitmap profileへ写像され、`PieceVisualCard`のfixedRaster→`inspectBitmapDrawing`→`renderBitmapCanvas`を使う。V4 `inspectSelectedLineV4`の自然snapshotはこの通常経路の必須条件ではない。API `_preview_renderer_runtime`のrenderer交渉と`piece_model_source._settings/application_piece_model_source`のmodel選択も別である。bitmapの証拠をV4自然layer/reference logical1 exactの証拠へ換算せず、V4固有の能力は未解決・未採用として残す。共有v5/TextKit/paint/予算と今回V4前の初回timeoutは通常側にも関係し得るため残件とする。
+
+**11/12・次の直接実証：** 既存344a通常051／明示refined007のcanonical `source_request/messages/raw`を再利用し、通常saved-input host→preview→実native fit→明示save→保存receipt→fresh owner履歴/詳細→同版ios.v2 PNG exportを本文/recipe/3hash/保存版で連続確認する。公開051/007 DTOはPremium/required_subtleで原入力7field/source_ref/rawを含まず、configured recordingのFree保存3とは別artifact。原録画から実際に返る版を追跡し、DTO由来のsource捏造や別作品の証拠結合、syntheticFit/mockPNGのnative成功換算をしない。接続の既存ownerへ戻り、新controller/checker/Gate・新規73生成/GPU周回を追加しない。
+
 **11/10・API1ce24b8c／全文有限動作の生成条件：** `piece_model_source._source_action_constraint`は、既存`piece_source._finite_self_person_action_account`の全文資格と`natural_reply_meaning._clauses/_FORMS/_arguments`の一意な完全節読取を再利用する。各source partの全sentenceが既知の明示SELF・頼む／相談する／伝えるの事実過去として成立した場合だけ、欄別`control.authoring_constraints.field_slots.<key>.required_actions`へ本人表記、原文活用形／述語、肯否、時点、事実性、voice、相対日、格と相手／対象、scalar範囲を渡す。その適格partの受動文を含むfieldでは、各有限eventへ原文source_literalと既存MeaningWitnessのsubject／agent／counterpartを同じfield／scalar範囲へ追加する。同fieldの能動eventにも固有の役割を対応させ、同partの別fieldは独立させる。役割は否定された述語内の関係であり、依頼の実在、本人の拒否／承諾、対象作業の実行は推論しない。active-only fieldは旧wireを保持する。評価・感情・opaque文・未決定を含む混在partは従前の送信内容を保持し、既存の名前・評価条件も失わない。原requestからのPreparedRequest再導出一致、原入力7fieldと本人の補足の分離、SYSTEM、条件なし既定送信bytes、独立採否／S7、保存後非生成再読、公開DTO／DB、selector既定OFFは維持する。期待正文、生成後修補、新しい受理文法、別作者は追加しない。
 
 **11/9・混在本文と欄／補足の語り手：** 旧S7の全part・source／plan／欄境界と、既存有限本文readerの完全key比較を同じKEEP検査へ接続。明示SELF・単一の既知能動事実過去だけとし、該当nodeの名前・参照・scopeを迂回しない。原文保持のopaque文と、別欄の意味を保った語尾編集を併用する。通常nativeのliteral条件と公開契約は保持。欄先頭／本人補足の語り手と公開役割は独立教材で候補修復し、意味退行を拒否・未採用のまま記録する。
@@ -380,13 +384,13 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 | AR-01 | 現naturalの主体・所有者・否定・時点・留保を、旧失敗・意味比較・共通原因分析で改善。EM-01a/b | 現6境界と正常な短文／省略で、同入力の誤読を解消または明確に減らし、自然さ・別題材・既成功・保存再読を保持。検出増加／無出力だけでは完了しない | 継続中。新24実生成の4版は通常不採用。c6555fd5で疑問符なしの確認質問の保存抜けを修復、250局所PASS。同24rawは旧24保存→新22保存／2拒否、受理本文不変。全体の意味修復は未完 |
 | AR-02 | 現naturalの任意問い・回答・訂正・撤回・frameの一往復。EM-02a/b、03b | 一点確認／skip／終了／本人続行、対象だけ更新、撤回後の残存意味、同版再読、プラン境界 | AR-01の全一般品質完成待ちにはしない。未開始 |
 | AR-03 | 適格履歴の意味ある利用。EM-03a/b | 同一／別場面・変化・無関係・訂正前を区別し、適切な履歴が今回へ効く。失効材料を使わない | 現related_contextを継承。未開始 |
-| AR-04 | Piece一般本文・単独伝達・refined・画像整合 | 原文の意味・一人称・本人補足と同版画像／保存を保持 | 研究07ea24cc（source8c5e不変）のrun43118077795を開始、結果未判定。同V4 callbackへ既存naturalDraw/shared/referenceの履歴をtag/view/storageで対応づけ、現在bounds/content frameと別記録する。32行の観測追加だけで、collector/描画/inspect/元13/8秒/閾値は不変。履歴件数はdraw回数・最新paint成立の証明ではなく、0件も未描画の証明にしない。通常.mm581/pin/selector OFF・未採用、AR-04未完。次はこのrun終端と同call記録を回収し、初回stage58の自然観測欠如を切り分ける。 |
+| AR-04 | Piece一般本文・単独伝達・refined・画像整合 | 原文の意味・一人称・本人補足と同版画像／保存を保持 | 研究07ea24ccのrun43118077795はcompile成功／Whole1method失敗。元13条件は不変、root assertion失敗14→26（旧14保持・新12）、初回本文8072.684msでV4前timeout。V4は100call中strict92（local48/placed44）、自然snapshotなし7、面積拒否1。既存履歴の同call対応100件は成立、残9PNGは前回と全byte/画素一致。修復・速度改善・通常採用の証明ではない。通常ios.v2はbitmap分岐でV4自然観測を必須にせず、共通の初回計測timeoutは残件。次は記録済み344a通常051/refined007の原source/messages/rawを再利用し、通常host→実native fit→明示save→receipt→fresh owner→同版exportを一続きに確認する。通常.mm581/pin/selector OFFを維持、AR-04未完。 |
 | AR-05 | 分析の本人基準・役割／選択・記録間関係。AN-03a/b/c、04 | 原記録→意味→図／全文→両端根拠の対応、再出現／変化／不明の正しさ | 現Engine統合・保存済み成果を継承。並行可能。未開始 |
 | AR-06 | Emlis観測材料、訂正・削除・権利、長い蓄積と月次。EM-04/05、AN-02/06/08/10 | 本人sourceから材料を渡し、失効・分割範囲・当時版を保持。生成本文を本人事実にしない | AR-02/03/05の該当能力を利用。未開始 |
 | AR-07 | IF／Saved等の商品固有の残る意味保持責務。既存AN／PC残件 | 仮想・本人選択意向・観測を分離し、成立した経路で出力と保存を確認 | 既存商品の実装条件に従う。無断延期・新発売条件化をしない。未開始 |
 | AR-08 | 実証できた共通能力の通常適用と全体確認。EM-05/06/07等 | 採用版の意味保持・自然さ・権利・中断復帰・保存再読・実際の待ち時間／費用。未採用範囲は理由と残差を保持 | 各単位で通常採用可能。全core一括切替を強制しない。未開始 |
 
-現在は **AR-04の意味保持・単独伝達**を継続する。研究07ea24cc（source8c5e不変）のrun43118077795を開始、結果未判定。同V4 callbackへ既存naturalDraw/shared/referenceの履歴をtag/view/storageで対応づけ、現在bounds/content frameと別記録する。32行の観測追加だけで、collector/描画/inspect/元13/8秒/閾値は不変。履歴件数はdraw回数・最新paint成立の証明ではなく、0件も未描画の証明にしない。通常.mm581/pin/selector OFF・未採用、AR-04未完。次はこのrun終端と同call記録を回収し、初回stage58の自然観測欠如を切り分ける。 詳細は[実行記録](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-v4-natural-context-link-20261112)。
+現在は **AR-04の意味保持・単独伝達**を継続する。研究07ea24ccのrun43118077795はcompile成功／Whole1method失敗。元13条件は不変、root assertion失敗14→26（旧14保持・新12）、初回本文8072.684msでV4前timeout。V4は100call中strict92（local48/placed44）、自然snapshotなし7、面積拒否1。既存履歴の同call対応100件は成立、残9PNGは前回と全byte/画素一致。修復・速度改善・通常採用の証明ではない。通常ios.v2はbitmap分岐でV4自然観測を必須にせず、共通の初回計測timeoutは残件。次は記録済み344a通常051/refined007の原source/messages/rawを再利用し、通常host→実native fit→明示save→receipt→fresh owner→同版exportを一続きに確認する。通常.mm581/pin/selector OFFを維持、AR-04未完。 詳細は[実行記録](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-v4-natural-context-link-20261112)。
 
 既存の品質作業・新教師8件・保存重みの継続点を使う。GPUに現実の接続障害がある場合、取得できた事実、未実行の生成、回収済み原本、次の同一単位を記録し、CPUの合成成功を実モデル改善へ換算しない。接続復旧や既存の別core実装を必要範囲で進め、無関係な補助機構開発へ変えない。
 
@@ -446,7 +450,7 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 ### 11.2 現在の進行欄
 
-**11/12・現在の再開先：** 研究07ea24cc（source8c5e不変）のrun43118077795を開始、結果未判定。同V4 callbackへ既存naturalDraw/shared/referenceの履歴をtag/view/storageで対応づけ、現在bounds/content frameと別記録する。32行の観測追加だけで、collector/描画/inspect/元13/8秒/閾値は不変。履歴件数はdraw回数・最新paint成立の証明ではなく、0件も未描画の証明にしない。通常.mm581/pin/selector OFF・未採用、AR-04未完。次はこのrun終端と同call記録を回収し、初回stage58の自然観測欠如を切り分ける。
+**11/12・現在の再開先：** 研究07ea24ccのrun43118077795はcompile成功／Whole1method失敗。元13条件は不変、root assertion失敗14→26（旧14保持・新12）、初回本文8072.684msでV4前timeout。V4は100call中strict92（local48/placed44）、自然snapshotなし7、面積拒否1。既存履歴の同call対応100件は成立、残9PNGは前回と全byte/画素一致。修復・速度改善・通常採用の証明ではない。通常ios.v2はbitmap分岐でV4自然観測を必須にせず、共通の初回計測timeoutは残件。次は記録済み344a通常051/refined007の原source/messages/rawを再利用し、通常host→実native fit→明示save→receipt→fresh owner→同版exportを一続きに確認する。通常.mm581/pin/selector OFFを維持、AR-04未完。
 
 **11/11・36件/72更新時点の履歴：** 承認済み36件/72更新のfresh候補a1dfを一回作成し、残っていた「予定が重なっている」→「重なった」の前提変異1件が回復。既存8＋保持8の実16は全件意味採用、他15rawは旧f6daeとbyte同一。48隔離保存・非生成再読成功。20HTTP・復元込み464.290秒、元args/env/cwd・source/Analysis・旧weights保持、通常/Analysis前後全response一致、独立health200/PID67361一致。fit319.087秒、retry0。新重みは検証用・通常selector OFF。今回16の限定改善であり、旧65全体・実機・一般品質・AR-04完了ではない。 API9b1b7bb8のCPU trainer28成功と既存Piece CI42969704329/job130355058089・attempt1・全39step successは準備時の完了として継承。今回source/test変更0、新CI/dispatch/rerun0。
 
@@ -494,17 +498,17 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | AR-01通常と残件 | AR-01通常不採用・役割反転未解決。先行API 651f1f38のAR-04差分とAR-01研究patchの通常不採用を継承。今回のfce72bcc／4da69cdeはtest整合のみで、AR-01通常採用なし。Render配置／実DB／RN／build0、他AR残件は維持 |
 | AR-04回収・改修 | 研究07eaはca7から既存test2pathだけ。既存context履歴を同V4 callbackでtag/view/storage対応し、現在bounds/frameと分離。32行の追加は旧全文へ逆投影一致、collector/paint/inspect/元13/source8c/pin不変、通常.mm581/pin不変。 |
 | AR-04実本文 | 保存344aの2run和集合73/73・旧比72raw同一/051時制回復1・継続前提保持、configured録画3件を継承。今回の仮説比較に新本文/実4B生成/SQL再保存は0。 |
-| AR-04検証・再読 | 研究07ea24cc（source8c5e不変）のrun43118077795を開始、結果未判定。同V4 callbackへ既存naturalDraw/shared/referenceの履歴をtag/view/storageで対応づけ、現在bounds/content frameと別記録する。32行の観測追加だけで、collector/描画/inspect/元13/8秒/閾値は不変。履歴件数はdraw回数・最新paint成立の証明ではなく、0件も未描画の証明にしない。通常.mm581/pin/selector OFF・未採用、AR-04未完。次はこのrun終端と同call記録を回収し、初回stage58の自然観測欠如を切り分ける。 |
-| AR-04反映・残件 | 研究07ea24cc（source8c5e不変）のrun43118077795を開始、結果未判定。同V4 callbackへ既存naturalDraw/shared/referenceの履歴をtag/view/storageで対応づけ、現在bounds/content frameと別記録する。32行の観測追加だけで、collector/描画/inspect/元13/8秒/閾値は不変。履歴件数はdraw回数・最新paint成立の証明ではなく、0件も未描画の証明にしない。通常.mm581/pin/selector OFF・未採用、AR-04未完。次はこのrun終端と同call記録を回収し、初回stage58の自然観測欠如を切り分ける。 |
+| AR-04検証・再読 | 07ea/run43118077795 compile成功／Whole1method失敗、元13不変・root14→26（旧14保持/新12）、first essay8072.684ms/V4前timeout。100callはstrict92・stage58×7・area拒否1。helper対応100/不一致0、9PNGは前回と全byte/RGBA一致。他5method未実行。技術creditは観測接続のみ、描画修復/速度改善は未証明。 |
+| AR-04反映・残件 | 通常.mm581/pin/selector OFF、研究07ea未採用。通常ios.v2 bitmapはV4 natural snapshotを必須にしない。V4固有の自然layer/reference厳密同等性は未解決、共有計測の初回timeout・quote面積拒否と2条件の自然観測欠如、一般本文品質・通常統合/Photos/本人端末・正式0/3/他ARは未完。 |
 | AR-04現在のrefined | 007のQ2資格/原入力補足分離・recorded wrapper/S7/Free保存再読を継承。前回静的6/transition4は3段落/Emlis/配色/canonical8/3hash/PNGを保持。今回新refined生成/SQL/通常capture許可変更0。 |
 | AR-04現在の4B本文読取 | 前回73本文読取・configured録画3の無修補再生を継承。今回のnative support候補比較でmodel生成/学習は0。一般文章品質・任意natural補足・正式受入れを追加で成立させたとはしない。 |
-| AR-04再開記録 | 研究07ea24cc（source8c5e不変）のrun43118077795を開始、結果未判定。同V4 callbackへ既存naturalDraw/shared/referenceの履歴をtag/view/storageで対応づけ、現在bounds/content frameと別記録する。32行の観測追加だけで、collector/描画/inspect/元13/8秒/閾値は不変。履歴件数はdraw回数・最新paint成立の証明ではなく、0件も未描画の証明にしない。通常.mm581/pin/selector OFF・未採用、AR-04未完。次はこのrun終端と同call記録を回収し、初回stage58の自然観測欠如を切り分ける。 |
+| AR-04再開記録 | 既存344a通常051/refined007のcanonical source/messages/rawから、通常host→実native fit→明示save→receipt→fresh owner→同版ios.v2 PNG exportを連続確認。公開Premium DTOと別Free保存3の同一視、source_ref/raw捏造、syntheticFit/mockPNGのnative換算をしない。完了済み73生成/243SQL/static6/transition4と今回runは再実行せず、新管理機構/GPU周回を追加しない。 |
 
 以後はこの表と各能力の対応行を現在状態へ置換更新し、詳細な実行事実は既存trial／weeklyへ置く。新しいhandoff系列・全件hash Gateを作らない。中断時も、成果物と未実行を既存保存先へ残し、同じ未完商品単位から続ける。
 
 ## 12. 今後の指示と再開方法
 
-**11/12の現在の再開点：** 研究07ea24cc（source8c5e不変）のrun43118077795を開始、結果未判定。同V4 callbackへ既存naturalDraw/shared/referenceの履歴をtag/view/storageで対応づけ、現在bounds/content frameと別記録する。32行の観測追加だけで、collector/描画/inspect/元13/8秒/閾値は不変。履歴件数はdraw回数・最新paint成立の証明ではなく、0件も未描画の証明にしない。通常.mm581/pin/selector OFF・未採用、AR-04未完。次はこのrun終端と同call記録を回収し、初回stage58の自然観測欠如を切り分ける。 前回24/48・73実4B/243SQL/static6/transition4は完了として継承し、他5methodは今回未実行。
+**11/12の現在の再開点：** 研究07ea24ccのrun43118077795はcompile成功／Whole1method失敗。元13条件は不変、root assertion失敗14→26（旧14保持・新12）、初回本文8072.684msでV4前timeout。V4は100call中strict92（local48/placed44）、自然snapshotなし7、面積拒否1。既存履歴の同call対応100件は成立、残9PNGは前回と全byte/画素一致。修復・速度改善・通常採用の証明ではない。通常ios.v2はbitmap分岐でV4自然観測を必須にせず、共通の初回計測timeoutは残件。次は記録済み344a通常051/refined007の原source/messages/rawを再利用し、通常host→実native fit→明示save→receipt→fresh owner→同版exportを一続きに確認する。通常.mm581/pin/selector OFFを維持、AR-04未完。 前回24/48・73実4B/243SQL/static6/transition4は完了として継承し、他5methodは今回未実行。
 
 推奨指示は **「補助経路の活用作業を進めて」**。
 

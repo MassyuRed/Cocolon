@@ -1,6 +1,6 @@
 # 第10回 Cocolon週末報告会 — 2026-11-07（終了）
 
-> **11/12・AR-04最新：** 研究07ea24cc（source8c5e不変）のrun43118077795を開始、結果未判定。同V4 callbackへ既存naturalDraw/shared/referenceの履歴をtag/view/storageで対応づけ、現在bounds/content frameと別記録する。32行の観測追加だけで、collector/描画/inspect/元13/8秒/閾値は不変。履歴件数はdraw回数・最新paint成立の証明ではなく、0件も未描画の証明にしない。通常.mm581/pin/selector OFF・未採用、AR-04未完。次はこのrun終端と同call記録を回収し、初回stage58の自然観測欠如を切り分ける。 [既存natural観測の接続と現在地](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-v4-natural-context-link-20261112)。
+> **11/12・AR-04最新：** 研究07ea24ccのrun43118077795はcompile成功／Whole1method失敗。元13条件は不変、root assertion失敗14→26（旧14保持・新12）、初回本文8072.684msでV4前timeout。V4は100call中strict92（local48/placed44）、自然snapshotなし7、面積拒否1。既存履歴の同call対応100件は成立、残9PNGは前回と全byte/画素一致。修復・速度改善・通常採用の証明ではない。通常ios.v2はbitmap分岐でV4自然観測を必須にせず、共通の初回計測timeoutは残件。次は記録済み344a通常051/refined007の原source/messages/rawを再利用し、通常host→実native fit→明示save→receipt→fresh owner→同版exportを一続きに確認する。通常.mm581/pin/selector OFFを維持、AR-04未完。 [既存natural観測の接続と現在地](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-v4-natural-context-link-20261112)。
 
 記録日：2026年11月7日（日本時間）  
 対象週：**2026年11月7日〜11月14日**  
