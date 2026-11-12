@@ -4,15 +4,15 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-13 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR03_REBALANCED32_NOT_ADOPTED_RESOLVED_HISTORY_HINT_OMISSION_CONFIRMED
+status: AR03_HISTORY_LOCATOR_HANDOFF_PREPARED_NOT_MODEL_EVALUATED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "One fit32 completed with original provider restored; candidate not adopted after full-text review; T05/D02 withdrawal resolves but hint exceeds existing budget, specify existing hint handoff without more training or new guards"
+current_next: "Lossless record-local history locators implemented and CPU verified; six current-4B requests prepared but not uploaded or executed, prior one-time approval consumed"
 runtime_effect_of_this_document: 0
 ---
 
-> **11/13・AR-03の改訂16教材32更新を一回完走、新候補も通常不採用：** 前後22応答は全stop、提供前後4はHTTP200／stop・response bytes一致。内部235.783163秒、archive閉鎖約236.436507秒はUI観測。元提供はPID77140／health200へ復元、旧source・Analysis adapter不変。112tensorの保存・fresh reload一致と実weightsを回収。質問は消えたが、撤回済み過去感情の復活・根拠薄い内面推測があり、D04の正しい履歴利用も未達。追加CPUでT05／D02は現ownerが撤回対象を失効済みと再導出する一方、補助付き6100／6179byteが既存5800byteを超え、補助が生成材料から省かれることを確認。補助で直る因果は未証明。次は既存補助の受渡しを具体化し、追加学習へ自動進行しない。通常flag OFF、一般品質・全補助経路未完。 [実比較・次](#auxiliary-history-rebalanced32-actual-nonadoption-20261113)。
+> **11/13・AR-03の確定済み履歴補助の受渡しを修復、実4B比較は未実行：** API `bd4b017a9ba937a0f4c28941e059d290f34a9be4`。5800byte超過時だけ、同じ過去記録の原文／回答ID・scalar範囲を指す共有locatorへ既存補助を投影し、全claim・関係・主体・時点・有効／撤回／未確定を保持。SYSTEM本文・上限・通常flag OFFは不変。関連247件成功、凍結20入力の通常材料／prefix／Safetyは全同一、研究材料が変わるのはT05／D02だけ。6100／6179byteで省略された完全補助を5699／5751byteで搭載し、原文から旧補助へ完全復元。通常採用・生成品質改善は未確認。旧新2組＋同一prompt対照の計6要求、最大7分・一回・学習／再試行／提供再起動なしの49,471byteを準備・保存したが、未送信。前回fit32の一回承認は消費済みで流用しない。 [修復・検証・次回比較](<#auxiliary-history-locator-handoff-prepared-20261113>)。
 
 > **11/12・固定実3件の意味読取拒否を修復：** API87512ddaで、既存述語／本人評価／感情／literal-self資産を、型付きoperatorと完全保持spanの独立比較へ回収。保存344aの同じ実raw3件は3拒否→3採用、旧73件の採否・全artifact・prepared／messages／rawは修正前後同一。新GPU・学習0。3plan計9件の隔離SQL保存・非生成再読、本文／recipe／renderer一致とquota各1を確認。Free refinedは元の適格ADD snapshot、Plus／Premiumは同じ全入力・回答から既存ownerでtier別資格を再導出。合成Auth／source・mock HTTP framingであり、実HTTP／live DB／本人端末ではない。新70を含む局所1774と既存SQL56が成功。Piece CI43174913229はattempt1・39step成功、model集合2021に新70を含む（重複加算なし）。生成本文自体は従来の常体化が中心で、一般編集品質・同じ新本文のnative画像・通常採用・AR-04／全補助経路は未完。 [修復・原本・確認範囲](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-general3-operator-review-repair-20261112)。
 
@@ -984,6 +984,40 @@ T05／D02の凍結snapshotを既存ownerで純CPU再導出すると、admitted_h
 
 通常flag OFF、新66491・旧434a候補とも通常不採用。製品source／test／API／DB／RN／Render／Supabase変更0、STRUCTURE_MAP_DELTA_NONE。primary BLOCKER_NARROWED、商品品質credit0。全file／全仕様理解の完了や、AR-03／他AR／三中核・一般品質・live反映／本人端末・正式受入れは未完。本節を最新再開位置とし、§9.14の実行前記録を履歴として保持する。
 
+
+
+<a id="auxiliary-history-locator-handoff-prepared-20261113"></a>
+## 9.16 2026-11-13 — 確定済み履歴補助を原文locatorで渡す修復、6応答比較は準備済み・未実行
+
+### 目的・変更責務と実装
+
+§9.15で実測したT05／D02の補助全省略を、意味判定の変更や追加学習ではなく、既存natural_replyの作者向け投影内で修復する。今回の未完了条件はEM-02bの撤回後の残存意味保持とEM-03aの妥当な履歴利用へ接続する。latest weeklyは11/7終了版、全体現在地・全体図・全ファイル地図と三中核mapの接続を再確認した。全repositoryの全blobの意味理解完了とはしない。
+
+API `bd4b017a9ba937a0f4c28941e059d290f34a9be4`（親493cd728、変更exact2）はnatural_reply.pyと既存test_emlis_natural_question_application.pyだけ。既存5800byteを超える研究要求で、補助を落とす前にprivate `natural_history_answer_meaning.v2`を試す。重複source_fragmentsを同一source_record_id内の共有表へまとめ、各claim／relationからsource_fragment_refsで参照する。共有表は`original.memo`／`original.memo_action`または`answers.text＋answer_id`とscalar_rangeで、同じ記録に残す完全原文へ束縛する。原source_role・field・span・textへ戻せる。別記録・欄・回答の同じ字面を混ぜない。
+
+claim_anchor・kind・actor・polarity・modality・time_scope、全active／inactive claim、失効relationと両端、assessment／disposition／unresolved_parts、source_record_idを落とさない。本人原文・全回答・問い文脈・順序・ID／時刻・カテゴリ・感情／強度・source prefixは全保持。選択感情をmemoの撤回対象へ巻き込まない。意味の確定は現ownerのまま、手書きclaim／RESOLVED・新guard／checker／controller・新SYSTEM本文0。
+
+既に収まるv1要求はbytes不変。v2を試しても超過する場合は既存どおり補助全体だけを省く。通常use_meaning_support=False、現在回答の投影、Safety・履歴資格・公開API／DB／RN・保存契約・既存5800byte上限は不変。新v2にも既存のscoped-history指示文そのものを選び、原文や指示文を削って空きを作らない。
+
+### 実検証と限界
+
+関連5test fileで247件成功、既存Pydantic deprecation警告1。追加2例は既存SQL／serviceで過去原文→発行問い→本人撤回→今回入力を構築し、locatorを実原文から展開すると現ownerの完全補助と全値一致すること、予算、raw不変、超過fallback、過去保存原本・event非生成再読の不変を確認した。既存updated対照では回答由来のlocatorとexact answer_idも往復一致。最新UNASSESSEDを旧RESOLVEDへ戻さない既存検証も通過。初回は追加testの括弧誤りでcollection停止、修正後53件成功、その後UTF-8比較と回答出所の検証を加えた247件を最終結果とする。重複合算しない。
+
+前回と同じ20凍結snapshot（改訂16教師＋D4）を純CPUで旧493cd728／新候補へ再導出。通常material／source prefix／Safetyは20/20全同一。研究messagesが変わるのはR_T05／D02だけ、残り18は完全同一。旧研究要求4068／4099byteには補助がなく、新5699／5751byteにはv2を搭載。旧完全補助を含めると6100／6179byteだった2例の全意味情報は、保持原文から完全復元できた。model／GPU／network／SQLへの新生成要求0。20は新しい未知例20件ではない。
+
+CPU搭載・可逆性は、4Bがlocator／参照表を理解して意味と自然さを改善した証明ではない。known_updatedは既存v1が届いていても所属誤読が残るため、省略だけを全失敗の原因にしない。新model本文の生成、exact SQL保存・非生成再読、通常採用・live反映／本人端末・商品受入れは未確認。旧434a／66491学習候補の不採用を撤回せず、今回は追加学習へ戻らない。
+
+### 保存済みの次回比較と承認の境界
+
+`locator_handoff_prepared/ar03_history_locator_handoff_20261113_once.py`を49,471bytes、SHA256 `8a2ca9ba54d5a8bf147f85cc331bb98c5dc570f7bc305acde3df3c72890fb444`で固定。入力は既存の架空sourceのみ。T05／D02の旧新4応答と、known_updatedの同一v1 prompt対照2応答、合計6要求。対照の二要求は完全同一で、既存に届く補助の読み誤りも区別する。教師target・新学習済みadapterは送らない。
+
+候補実行は既存の自然文4B提供をそのまま使い、最大420秒・一回・各call最大60秒・max_tokens2048・temperature0。元提供health／PIDを前後照合し、学習・再試行・依存install・model／adapter変更・提供停止／再起動・他providerへのfallbackは0。既存のnatural鍵1つを同Pod内127.0.0.1認証だけに使い、全起動環境読取／鍵の保存・外部出力は行わない。新しい一回用folderは既存時に失敗し、同じpacketを再試行しない。
+
+前回26,293byteの承認は32更新／22＋4確認を完了して消費済み。今回の49,471byte／6要求へ流用せず、未送信・未実行で保留する。実比較前に追加の学習・形式再変更を重ねない。実比較後も全本文を原文／訂正と読み比べ、通常採用や生成改善を形式成功から自動認定しない。
+
+既存`Cocolon_CMEE_AR03_HistoryTeaching_Candidates_20261112.zip`は同Library IDのversion8として保存。29,019,790bytes／59members、SHA256 `0ce5476e35ff2e3c1ec4ec0f7ffc33db952dd5f362b234e4f880c8ba81db68d9`。旧54membersのREADME以外は不変、旧READMEはREADME.v7.mdに退避し、新README・CPU20原本・固定6要求・runner・説明を追加。旧実weights／fit32原本を保持し、credential・全環境・browser screenshot・Git-backed製品sourceを加えない。
+
+STRUCTURE_MAP_DELTA_NONE：既存natural_reply投影ownerの表現修復で、新owner・新path・公開経路・責任境界は増やしていない。現在地mapの関連差分だけを更新。実装反映とCPU受渡し検証は成立したが、商品品質改善・AR-03／全補助経路の完了ではない。本節を最新再開位置とし、§9.15は不採用と実測根拠の履歴として保持する。
 
 ## 10. 変更箇所と検証
 
