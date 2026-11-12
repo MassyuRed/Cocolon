@@ -4,13 +4,16 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-12 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR01_UNRESOLVED_AR04_GENERAL_PROSE_MODEL_REVIEW_UNRESOLVED
+status: AR01_UNRESOLVED_AR04_GENERAL_PROSE_REVIEW_REPAIRED_QUALITY_UNRESOLVED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
 current_next: AR-04
 runtime_effect_of_this_document: 0
 ---
+
+> **11/12・固定実3件の意味読取拒否を修復：** API87512ddaで、既存述語／本人評価／感情／literal-self資産を、型付きoperatorと完全保持spanの独立比較へ回収。保存344aの同じ実raw3件は3拒否→3採用、旧73件の採否・全artifact・prepared／messages／rawは修正前後同一。新GPU・学習0。3plan計9件の隔離SQL保存・非生成再読、本文／recipe／renderer一致とquota各1を確認。Free refinedは元の適格ADD snapshot、Plus／Premiumは同じ全入力・回答から既存ownerでtier別資格を再導出。合成Auth／source・mock HTTP framingであり、実HTTP／live DB／本人端末ではない。新70を含む局所1774と既存SQL56が成功。Piece CI43174913229はattempt1・39step成功、model集合2021に新70を含む（重複加算なし）。生成本文自体は従来の常体化が中心で、一般編集品質・同じ新本文のnative画像・通常採用・AR-04／全補助経路は未完。 [修復・原本・確認範囲](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-general3-operator-review-repair-20261112)。
+
 
 > **11/12・保存344aの新3件実行：** 保存344aで同じ新3件を一回実生成し、段落／二欄／適格refinedともstop。候補3＋前後対照4の計7call、追加学習／retry0、復元込み内部116.995875秒・ZIP close後の外側完了観測181.715秒。元提供PID73476へ復元し、引数／環境／作業場所／両認証情報の保持とnormal／Analysis前後response一致を確認。実本文は常体化が中心で、原入力との全体読取では意味変異を見つけていないが、現CMEEは3/3をpiece_model_meaning_unassessed_or_changedで拒否。保存／追加S7／同版画像0、通常採用は保留。全file／全仕様確認と一般編集品質・live接続・本人端末・正式受入れは未完。 [実原本・拒否位置・再開点](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-general3-344a-actual-20261112)。
 
@@ -412,13 +415,13 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 | AR-01 | 現naturalの主体・所有者・否定・時点・留保を、旧失敗・意味比較・共通原因分析で改善。EM-01a/b | 現6境界と正常な短文／省略で、同入力の誤読を解消または明確に減らし、自然さ・別題材・既成功・保存再読を保持。検出増加／無出力だけでは完了しない | 継続中。新24実生成の4版は通常不採用。c6555fd5で疑問符なしの確認質問の保存抜けを修復、250局所PASS。同24rawは旧24保存→新22保存／2拒否、受理本文不変。全体の意味修復は未完 |
 | AR-02 | 現naturalの任意問い・回答・訂正・撤回・frameと、完了応答後の具体的な本人訂正。11/12採用仕様は§6.1。EM-02a/b、03b | 全plan最大3問、初期ON・前回選択保持、短い受け止め→回答後応答、0／1／2問終了・skip・上限時の不明保持、訂正対象と本人説明の二つの入力、説明不足時の未確定保持、対象だけ更新、撤回後の残存意味、同版再読、既存参照権利 | AR-01の全一般品質完成待ちにはしない。新仕様を記録済み、実装未開始 |
 | AR-03 | 適格履歴の意味ある利用。EM-03a/b | 同一／別場面・変化・無関係・訂正前を区別し、適切な履歴が今回へ効く。失効材料を使わない | 現related_contextを継承。未開始 |
-| AR-04 | Piece一般本文・単独伝達・refined・画像整合 | 原文の意味・一人称・本人補足と同版画像／保存を保持 | 研究36335452/run43146249187はattempt1・新同1method成功。両作品のpreview/saved/export全6frameで本文/native canvas/alpha/元8秒が成立し、手動ACKなしの閉要求→native ACK後遷移→saved mountと両actual export PNG一致を確認。実検証は研究363のsourceで、同じ製品2/単体2fileを今回通常Draftへ採用する。native harnessは採用せず、新normal headのCI成功は主張しない。既存474PASS（独立18含む）・full JSXも継承。STRUCTURE_MAP_DELTA_PRESENT。native581/guard/renderer/8秒不変、model selector OFF/重み未採用・旧V4失敗14→26は未解決。AR-04一般編集品質/実Auth/API/DB/本人端末・正式0/3/他ARは未完。 |
+| AR-04 | Piece一般本文・単独伝達・refined・画像整合 | 原文の意味・一人称・本人補足と同版画像／保存を保持 | API87512ddaで固定実3件の読取拒否を修復し9隔離保存／非生成再読。旧73不変、追加GPU0。先行の通常host画像成功は継承。一般編集品質・新本文の同版native画像・通常model採用／実Auth／DB／本人端末は未完。 |
 | AR-05 | 分析の本人基準・役割／選択・記録間関係と、項目・関係線への本人訂正。AN-03a/b/c、04 | 原記録→意味→図／全文→両端根拠の対応、再出現／変化／不明の正しさ、訂正対象と本人説明からの読み直し・再読 | 現Engine統合・保存済み成果を継承。並行可能。未開始 |
 | AR-06 | Emlis観測材料、訂正・削除・権利、長い蓄積と月次。EM-04/05、AN-02/06/08/10 | 本人sourceから材料を渡し、失効・分割範囲・当時版を保持。生成本文を本人事実にしない | AR-02/03/05の該当能力を利用。未開始 |
 | AR-07 | IF／Saved等の商品固有の残る意味保持責務。既存AN／PC残件 | 仮想・本人選択意向・観測を分離し、成立した経路で出力と保存を確認 | 既存商品の実装条件に従う。無断延期・新発売条件化をしない。未開始 |
 | AR-08 | 実証できた共通能力の通常適用と全体確認。EM-05/06/07等 | 採用版の意味保持・自然さ・権利・中断復帰・保存再読・実際の待ち時間／費用。未採用範囲は理由と残差を保持 | 各単位で通常採用可能。全core一括切替を強制しない。未開始 |
 
-現在は **AR-04の意味保持・単独伝達**を継続する。研究36335452/run43146249187はattempt1・新同1method成功。両作品のpreview/saved/export全6frameで本文/native canvas/alpha/元8秒が成立し、手動ACKなしの閉要求→native ACK後遷移→saved mountと両actual export PNG一致を確認。実検証は研究363のsourceで、同じ製品2/単体2fileを今回通常Draftへ採用する。native harnessは採用せず、新normal headのCI成功は主張しない。既存474PASS（独立18含む）・full JSXも継承。STRUCTURE_MAP_DELTA_PRESENT。native581/guard/renderer/8秒不変、model selector OFF/重み未採用・旧V4失敗14→26は未解決。AR-04一般編集品質/実Auth/API/DB/本人端末・正式0/3/他ARは未完。 詳細は[実行記録](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
+現在は **AR-04の意味保持・単独伝達**を継続する。固定実3件の読取拒否修復・9隔離保存／非生成再読まで完了。生成本文そのものの編集品質は未改善で、新採用本文の同版native画像と通常model適用・本人端末を含む商品結果へ接続する。旧73生成・先行native成功・今回の実7callを繰り返さず、修復済みの比較と保存を再実装しない。詳細は[今回の記録](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-general3-operator-review-repair-20261112)。
 
 既存の品質作業・新教師8件・保存重みの継続点を使う。GPUに現実の接続障害がある場合、取得できた事実、未実行の生成、回収済み原本、次の同一単位を記録し、CPUの合成成功を実モデル改善へ換算しない。接続復旧や既存の別core実装を必要範囲で進め、無関係な補助機構開発へ変えない。
 

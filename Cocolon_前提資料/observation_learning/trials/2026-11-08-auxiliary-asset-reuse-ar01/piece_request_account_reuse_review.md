@@ -1,3 +1,5 @@
+> **11/12・固定実3件の意味読取拒否を修復：** API87512ddaで、既存述語／本人評価／感情／literal-self資産を、型付きoperatorと完全保持spanの独立比較へ回収。保存344aの同じ実raw3件は3拒否→3採用、旧73件の採否・全artifact・prepared／messages／rawは修正前後同一。新GPU・学習0。3plan計9件の隔離SQL保存・非生成再読、本文／recipe／renderer一致とquota各1を確認。Free refinedは元の適格ADD snapshot、Plus／Premiumは同じ全入力・回答から既存ownerでtier別資格を再導出。合成Auth／source・mock HTTP framingであり、実HTTP／live DB／本人端末ではない。新70を含む局所1774と既存SQL56が成功。Piece CI43174913229はattempt1・39step成功、model集合2021に新70を含む（重複加算なし）。生成本文自体は従来の常体化が中心で、一般編集品質・同じ新本文のnative画像・通常採用・AR-04／全補助経路は未完。 [修復・原本・確認範囲](#piece-general3-operator-review-repair-20261112)。
+
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
 > **11/12・保存344aの新3件実行：** 保存344aで同じ新3件を一回実生成し、段落／二欄／適格refinedともstop。候補3＋前後対照4の計7call、追加学習／retry0、復元込み内部116.995875秒・ZIP close後の外側完了観測181.715秒。元提供PID73476へ復元し、引数／環境／作業場所／両認証情報の保持とnormal／Analysis前後response一致を確認。実本文は常体化が中心で、原入力との全体読取では意味変異を見つけていないが、現CMEEは3/3をpiece_model_meaning_unassessed_or_changedで拒否。保存／追加S7／同版画像0、通常採用は保留。全file／全仕様確認と一般編集品質・live接続・本人端末・正式受入れは未完。 [実原本・拒否位置・再開点](piece_request_account_reuse_review.md#piece-general3-344a-actual-20261112)。
@@ -2825,3 +2827,35 @@ whole-block readerはsource／visibleを全partitionで未評価とし、既存S
 次はこの固定実rawを根拠に、既存意味読取とS7の未対応を全span／条件／否定／時点／出所保全の設計へ戻して是正する。未評価節を単なる一括語尾置換で採用させず、一般編集品質不足も別に扱う。採用成立後の保存・同版画像・通常経路・実Auth／DB／本人端末まで未了。完了73・先行native・今回7callを再実行せず、今回の一回承認は完了・消費済みとして保持する。
 
 STRUCTURE_MAP_DELTA_NONE：今回source／test／公開型／route／DB／作者／renderer変更0、追加CI／dispatch／rerun0。全file意味読了・全仕様理解完了やAR-04／他AR完了を主張しない。実一回の完了と、商品上の未採用・編集品質未達を区別する。
+
+
+<a id="piece-general3-operator-review-repair-20261112"></a>
+## 2026-11-12 — 固定実3件のoperator／保持span比較を修復、9隔離保存・旧73不変
+
+### 実装と、変えない意味
+
+[API87512dda543a89be8c0ecd8f74c4d4e9738e1ef0](https://github.com/MassyuRed/mashos-api/commit/87512dda543a89be8c0ecd8f74c4d4e9738e1ef0)の変更は既存製品 `piece_v2_content_policy.py`、新しい同family test `test_piece_model_operator_tree.py`、既存Piece workflowの3path。新しい作者、source資格、公開型／API／DB／renderer／外部依存は追加しない。実担当は現在のWork実行担当、PIECE_WORK_ALLOWED。全体設計01／全file地図・current map・最新weeklyと対象実source／保存ownerを照合したが、全repositoryの意味読了・全仕様理解完了の認定はしない。
+
+旧役割readerの`_FORMS`（Analysisの既存`書く`を含む）、Pieceの漢字動作名文法、本人評価・感情finite、literal-self endingを既存S7のmodel-only比較へ回収した。sourceとvisibleを別々に全文解析し、完全な述語／認識・解釈否定host／有限譲歩と、書換えないliteral spanからなるtreeを比較する。主節のactor等をliteral spanから推定せず、条件・複雑な対象・内側否定は原byte／順序の保持として扱う。認識内容を事実にせず、「断りたいわけではない」を「断りたくない」へ同一化しない。未知のchanged span、複数解釈、引用・括弧内の編集は新armで採用しない。名前抽象化は既存alias ownerを維持。native S7は既定のliteral比較のまま。
+
+独立読取で「好きだが」の「だ」欠落を有限譲歩と誤認する問題を検出し、既存評価grammarの完全finite inflectionを要求して修復した。同じfull Engineで不正例拒否・正常例採用を確認。独立の文字置換6102／連続1–3文字削除1281のtree検査は追加一致0だが、pipeline件数や一般意味合格へ加算しない。
+
+### 同じ実raw・既成功・保存
+
+保存344aの今回取得済み3件を、元request／PreparedRequest／messages／rawを変えずCPU再評価。修正前3 UNAVAILABLE→修正後3 GENERATED、全3で追加S7を確認。旧有限作者4入口は禁止し、raw修補・新provider／GPU／学習callは0。これは11/12完了済み実7callの再生成ではない。従来73実rawも同じ現API sourceで修正前後の別processへ通し、採否・全artifact・prepared ID・messages／raw digestを含むreportが全体一致した。
+
+新規の別題材test70を含むlocal model関連1774 PASS、既存のisolated SQL56 PASS（既存Pydantic warning1）。追加testのcontext文は架空入力の一部と明記し、生成時に補わない。単独source4例の既存資格拒否を維持し、source資格外で拒否される例を意味変異拒否の成功件数へ混ぜない。変異testは正常候補の実採用を先に確認する。
+
+同じ実raw3件をmock HTTP framingへ包み、実CMEE／S7／preview／既存SQL／save／owner再読へ通した最終3plan×3件＝9件は全保存・非生成再読成功。body／payload／recipe／renderer等既存12field一致、source不変、保存回数消費各1、同key再送でも追加消費・追加model取得なし。normalの隔離helperは合成owner／input ID・日時を再束縛し、その他の全入力欄／カテゴリ／感情を保持。refinedのFreeは元の適格な合成ADD snapshotをそのままSQLへ入れ、Plus／Premiumは同じ原入力・回答のtier別資格を既存fixture/admissionから再導出する。Freeの確定prefixのtierだけを変えた状態を適格へ緩めない。Auth／source IOは合成で、direct生成に存在しなかった実HTTP model／revision／usageを新たに報告しない。
+
+最終9件の前にdisposable harnessのkey長、artifact accessor、save adapter、Free snapshotのtier誤再分類を修正した。非最終の部分成功は9件へ加算せず、product guardは変更0。新model call・実DB操作は全段階0。
+
+### GitHubと保存原本
+
+Piece CI [43174913229](https://github.com/MassyuRed/mashos-api/actions/runs/43174913229)／job131036702440はexact head87512dda・attempt1・全39step success。model集合2021 PASSは新70を含み、local1774／SQL56と重複加算しない。本文・test・workflowの全3blob全文とcommit changed pathsをGitHubから読み戻した。Analysis CIの別結果は、それ自体のterminal確認がある範囲だけ後記する。
+
+既存[実原本ZIP](https://chatgpt.com/library?file_id=libfile_fde3_f-f30655de312c8191978daec9b93b7008_2f7470f963808191aaebf050935e72de&account_id=personal)をversion3へ更新。200981byte／46member／CRC成功、SHA256 `0c3a47917b3d5b46cbccae5177162cf0e308a6b45e0685d807dfb7d64a25d0ee`。元34memberの全byteを保持し、今回のexact3／旧73前後／最終9保存／検証summary・再現scriptだけを追加。GitHubの製品codeをZIPへ重複納品しない。
+
+NO_STRUCTURE_MAP_DELTA：既存model-only意味比較owner内の改修で、source／保存／公開型／route／DB／作者／rendererの責務・全file地図は不変。primary TECHNICAL_CREDITは固定実出力の誤拒否修復と保存再読だけ。生成本文は依然常体化が中心で、一般編集品質改善・同じ新本文のnative画像・通常selector／weights採用・実Auth/API/DB／本人端末／正式受入れ0/3・AR-04／他ARの完了は未成立。補助経路全体の完成へ読み替えない。
+
+Analysis CI [43174913298](https://github.com/MassyuRed/mashos-api/actions/runs/43174913298)／job131036702662もexact head87512dda・attempt1・19stepすべてsuccessを確認。共有ownerを変更した実績や、分析商品の新しい品質合格へ換算しない。
