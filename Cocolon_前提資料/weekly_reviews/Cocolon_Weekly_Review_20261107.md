@@ -1,6 +1,6 @@
 # 第10回 Cocolon週末報告会 — 2026-11-07（終了）
 
-> **11/12・AR-04最新：** 通常hostの784/run43130834276は1method/1issue（saved共通field欠落）、e6ec/run43132656798は051savedのnative_candidates_unavailableで1method/11issue。saved本文/owner/receipt一致は真、他5frame成立・全6frame8秒内、両作品actual export PNG一致。前回6/6を今回へ混ぜない。既存native拒否31箇所とJS同callのtag/code/messageだけを観測する研究58b62ffc/run43140845390がattempt1で実行中・結果未判定。製品native581/guard/return/clock/8秒・全XCTest選択/期待・旧group・Free録画/明示wire投影/合成Authを維持、別Premium不使用、selector OFF/未採用・旧V4失敗14→26・AR-04未完。 [既存natural観測の接続と現在地](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
+> **11/12・AR-04最新：** 研究58b62ffc/run43140845390はattempt1・1method/11issueで失敗。051savedは632.191msで回復、007savedだけ370.357msでnative_candidates_unavailable、他5frame成立・全6frame8秒内・両actual export PNG一致。native6eventはJS同6tag/fontと一致し、すべて元native967行のstage2（class/window/accessor確認、storage/font/worker前）。3条件のどれかは未分離、旧e6ecの原因へ遡及しない。Modal閉完了前の即時owner遷移を現sourceで確認し、既存InputPieceActionArea/PiecePreviewModalのiOS onDismiss後遷移と旧要求取消しを修正中。新source SHA/CI未成立。native581/guard/return/clock/8秒・XCTest期待・Free録画条件を維持、selector OFF/未採用・旧V4失敗14→26・AR-04未完。 [既存natural観測の接続と現在地](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
 
 記録日：2026年11月7日（日本時間）  
 対象週：**2026年11月7日〜11月14日**  

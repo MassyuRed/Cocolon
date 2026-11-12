@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/12・AR-04最新：** 通常hostの784/run43130834276は1method/1issue（saved共通field欠落）、e6ec/run43132656798は051savedのnative_candidates_unavailableで1method/11issue。saved本文/owner/receipt一致は真、他5frame成立・全6frame8秒内、両作品actual export PNG一致。前回6/6を今回へ混ぜない。既存native拒否31箇所とJS同callのtag/code/messageだけを観測する研究58b62ffc/run43140845390がattempt1で実行中・結果未判定。製品native581/guard/return/clock/8秒・全XCTest選択/期待・旧group・Free録画/明示wire投影/合成Authを維持、別Premium不使用、selector OFF/未採用・旧V4失敗14→26・AR-04未完。 [既存natural観測の接続と現在地](piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
+> **11/12・AR-04最新：** 研究58b62ffc/run43140845390はattempt1・1method/11issueで失敗。051savedは632.191msで回復、007savedだけ370.357msでnative_candidates_unavailable、他5frame成立・全6frame8秒内・両actual export PNG一致。native6eventはJS同6tag/fontと一致し、すべて元native967行のstage2（class/window/accessor確認、storage/font/worker前）。3条件のどれかは未分離、旧e6ecの原因へ遡及しない。Modal閉完了前の即時owner遷移を現sourceで確認し、既存InputPieceActionArea/PiecePreviewModalのiOS onDismiss後遷移と旧要求取消しを修正中。新source SHA/CI未成立。native581/guard/return/clock/8秒・XCTest期待・Free録画条件を維持、selector OFF/未採用・旧V4失敗14→26・AR-04未完。 [既存natural観測の接続と現在地](piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -2677,9 +2677,9 @@ actual createFromSavedInput→source GET→preview POSTを使い、Cardのactual
 
 export参照先とsaved記録field・結果filenameの修正は確認できたが、e6ecの一巡成功は未成立。保存本文不一致や8秒timeoutへ原因を決めず、既存native rejected分岐と既存JS error fieldへ拒否理由だけを残す最小診断候補へ進めた。native拒否の原因と修復は未確定である。
 
-### 既存拒否分岐の診断候補58b62ffc（実行中・未判定）
+### 既存拒否分岐の診断候補58b62ffc（回収済み・stage2拒否）
 
-[研究58b62ffcf8a69e264d0fb544d653aaa600971208](https://github.com/MassyuRed/Cocolon/commit/58b62ffcf8a69e264d0fb544d653aaa600971208)はe6ecの子、既存`tests/native/run-piece-rn-canvas-ios.sh`と`tests/native/piece-rn-canvas-entry.js`の2pathだけ。公開commitの親・変更集合と両file全文/blobを確認後に研究refへ反映し、pushで[run43140845390](https://github.com/MassyuRed/Cocolon/actions/runs/43140845390)が自動起動した。現在in_progress、attempt1で、full JSX/native compileと新同1methodの結果は未判定。別のphase6[run43140845554](https://github.com/MassyuRed/Cocolon/actions/runs/43140845554)も自動起動したが、この新1methodの検証へ混ぜない。
+[研究58b62ffcf8a69e264d0fb544d653aaa600971208](https://github.com/MassyuRed/Cocolon/commit/58b62ffcf8a69e264d0fb544d653aaa600971208)はe6ecの子、既存`tests/native/run-piece-rn-canvas-ios.sh`と`tests/native/piece-rn-canvas-entry.js`の2pathだけ。公開commitの親・変更集合と両file全文/blobを確認後に研究refへ反映し、pushで[run43140845390](https://github.com/MassyuRed/Cocolon/actions/runs/43140845390)が自動起動した。終端はcompleted/failure、attempt1、新同1methodは12.389664秒・11 root issue。JSX/native compileとinstrumented native log収集は成功したが、007savedの描画不成立を保持する。別のphase6[run43140845554](https://github.com/MassyuRed/Cocolon/actions/runs/43140845554)はsuccessであり、この新1methodの成功へ読み替えない。
 
 runner内で研究用に作るnative sourceの既存31 rejection/worker-failure箇所だけに、callごとに共有atomicへ最初に観測したstageを保持し、tag/font/stageをscalar一行でNSLogへ出す処理を追加した。「最初に観測した」を因果的な最初の故障と認定しない。JSは同じcall tagと既存error code/messageを記録する。製品native581の元の`reject(..., nil)`、guard/return/clock/8000ms、全XCTestの選択・assertionは変更しない。既存104 stage mapをexact保持し、候補methodを厳密に逆投影すると元製品581へ一致する。
 
@@ -2689,9 +2689,28 @@ runner内で研究用に作るnative sourceの既存31 rejection/worker-failure�
 | 既存entry | `3e8a6ae1c2f1182449d983c02a3f7361c710fa0aa8cf504cfb8309abac65a0e4` |
 | runnerが作るinstrumented native source | `d857fe0bd85a7b89508a5325127dc9660ffbd7ac075c8b8a99e603720bdeff52` |
 
-native log取得は最後の5分・今回prefixだけに限定し、既存artifact配下の`evidence/candidate-rejections.json`と`.stderr`へ保存する。記録がなければUNOBSERVEDであり、拒否なし・成功へ読み替えない。local bash、変更JS prefix、逆投影、diff checkと、元native exit0/65×log exit0/42の収集4対照で元exitの保持を確認した。独立static reviewはPASS。これは実native compile・実描画・原因特定の成功ではなく、実行中CIの結果回収が次の作業である。新controller/checker、guard緩和、期限延長、旧group再実行、通常採用は追加していない。
+native log取得は最後の5分・今回prefixだけに限定し、既存artifact配下の`evidence/candidate-rejections.json`と`.stderr`へ保存した。記録がなければUNOBSERVEDであり、拒否なし・成功へ読み替えない。準備時のlocal bash、変更JS prefix、逆投影、diff checkと、元native exit0/65×log exit0/42の収集4対照、独立static reviewのPASSは継承する。今回の実native compile/log収集成功と、描画5/6・未修復を分ける。新controller/checker、guard緩和、期限延長、旧group再実行、通常採用は追加していない。
 
-784/e6ecの原report・PNG比較・回収記録は既存保存物[Cocolon_CMEE_AR04_NormalHost_SaveExport_20261112.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-abc0a7733fb88191b3ad08e0441bc926_2f7470f963808191aaebf050935e72de&account_id=personal)のversion3へ更新済み。43member、1,689,580byte、SHA256 `352cb958e5b0b2a2e7bd55ceaad2e5b10aae97f45554d38c94a074c0c9a85623`。保存済みの失敗結果と、実行中58b62ffcの未取得結果を分ける。
+artifact13910467376を回収し、63,988,166byte／SHA256 `9ad955406110db03dc0c431f3fe1c82f59faf7b27b3275018cf19d107c88d132`、1019memberのCRC・path/linkを確認した。全6frameの原artifact本文/payload/recipeの3hashは再計算一致、両actual exportの保存・全RGBA一致と、存在する5primary PNGの過去版一致を確認。前回e6ecでは失敗した051savedが今回は成立し、別作品007savedが失敗した。異なるrunの成功frameを集めて6/6成立としない。
 
-通常model selector OFF・未採用、live DB/Render/署名build/配布/Photos/本人端末・一般品質/正式0/3・AR-04/他AR残件は未完。今回新model/GPU/SQL/実Auth/外部製品HTTP0。STRUCTURE_MAP_DELTA_NONE：通常product owner/route/公開型/DB責務不変、既存native harnessへtest用1fixtureを接続しただけ。
+| 作品・画面 | 58b62ffcのphase | elapsed ms | 確認結果 |
+|---|---|---:|---|
+| 051 preview | native_checked | 1895.201 | actual fit・保存許可・本文/native canvas成立 |
+| 051 saved | native_checked | 632.191 | fresh owner/receipt/原artifact一致、描画成立 |
+| 051 export | native_checked | 1004.245 | actual job PNG保存・全RGBA一致 |
+| 007 preview | native_checked | 1060.293 | actual fit・保存許可・本文/native canvas成立 |
+| 007 saved | unavailable | 370.357 | native_candidates_unavailable。owner/receipt/原artifact一致は真、画像なし |
+| 007 export | native_checked | 790.347 | actual job PNG保存・全RGBA一致 |
+
+全6frameの経過は元8000ms以内。nativeの6 rejection eventはJSの同じ6tag/font（1517/1525/1533の48、1495/1499/1505の44）と完全対応し、すべてstage2だった。これは元`ios/tempCocolon/PieceTextMetrics.mm`の967行付近、registryのviewがRCTTextViewか／windowがあるか／cocolonPieceTextStorage accessorがあるか、の3条件を確認するguardである。storage読取・font検査・workerへ入る前に拒否している。どの条件が不成立かは分離しておらず、e6ecにはこのlogがないため、その旧失敗の原因も同じだったと遡及認定しない。
+
+### 通常Modalの閉完了とowner遷移の修正（作業中・未実証）
+
+現sourceではPiecePreviewModalがfullScreen/slideを使い、InputPieceActionArea.openSavedPieceがclose()の直後にnavigateしてroot側のownerをmountする。native dismiss ACKを待たないこの順序は、今回のwindow等のstage2拒否と整合する具体的な競合候補である。ただし、このsource上のhazardと今回の拒否の因果を確定したものではない。
+
+既存`screens/input/InputPieceActionArea.js`と`components/piece/PiecePreviewModal.js`だけで、閉じたModalは内容を空にしてonDismissを受けるまで保持し、iOSはACK後にownerへ遷移する修正を進めている。owner/source/runtime変更・background・unmount・reopenで古い要求を取消し、AndroidにはiOS用callback待ちを加えない。native型・guard・renderer・元8秒は不変更、新controller/retry/sleepは作らない。新source SHA・CI・修正後の実native結果はまだ成立しておらず、新runは未開始。次はこの限定修正の検証で因果と再発を確認する。
+
+784/e6ecと58b62ffcの原report・PNG比較・native拒否log・回収記録は、同じ既存保存物[Cocolon_CMEE_AR04_NormalHost_SaveExport_20261112.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-abc0a7733fb88191b3ad08e0441bc926_2f7470f963808191aaebf050935e72de&account_id=personal)のversion4へ更新保存済み。61member、2,444,394byte、SHA256 `d29dd7f8f4e0f3303424ab2808e472176bee2af6fbacc4f587d7373f99be2579`。修正中のModal遷移に関する未実行の結果は、この回収済み証拠へ含めない。
+
+通常model selector OFF・未採用、live DB/Render/署名build/配布/Photos/本人端末・一般品質/正式0/3・AR-04/他AR残件は未完。今回新model/GPU/SQL/実Auth/外部製品HTTP0。STRUCTURE_MAP_DELTA_NONE：通常product owner/route/公開型/DB責務は不変。既存harnessへのtest用1fixtureと診断2pathの追加結果を保持し、既存product2fileの遷移修正は上記の作業中状態として分ける。
 
