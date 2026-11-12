@@ -1,6 +1,6 @@
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
 
-> **11/12・AR-04最新：** 研究2dddc0a3の通常host接続run43128036253を開始、結果未判定。Free原録画051/007を異なるownerのまま使い、actual saved-input host→実native fit/明示save→receipt→fresh owner詳細→fresh export/actual job.captureを同じ本文/recipe/3hash/保存rowで確認する新1method。原HTTP録画ではなく実API wire ownerによる明示test投影（expiry/quota/合成Auth）、別Premium native6は不使用。元7group生成bytes・製品native.mm581/pin・8秒不変、V4失敗14→26は未修復で今回は未実行。通常model selector OFF・未採用を維持。 [既存natural観測の接続と現在地](piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
+> **11/12・AR-04最新：** 通常host接続の研究784cc142/run43130834276を開始、結果未判定。先行2dddc0a3/run43128036253も結果回収待ち。actual job.capture後のpiece-exportコピーを旧raw-cache限定oracleが読めない静的誤りを、今回groupだけの厳格path/保存receipt ID照合へ修正した。PNG/全RGBA/旧group期待・製品native.mm581/pin/8秒は不変。Free原録画051/007の実host→実fit/明示save→receipt→fresh owner詳細→fresh export/実PNGを確認中。wire投影のexpiry/quota/合成Authは明示、別Premium未使用、V4失敗14→26は未修復・今回は未実行。通常selector OFF・未採用を維持。 [既存natural観測の接続と現在地](piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
 
 2026-11-09 JST。詳細設計§7.1／§9に従い、[前回e8b7](https://github.com/MassyuRed/mashos-api/commit/e8b7e46c70269a40317fe2ec6ee8362c4086e619)の有限依頼5本文を継承し、現候補[f3b5e93e](https://github.com/MassyuRed/mashos-api/commit/f3b5e93e837a01c726ea9d0ca1caa4c39f396add)で相談・伝達にも既存の役割読取を回収した。**新8入力は生成不可→原文を保持した本文となり、新旧18作品を既存サービスと隔離SQLで保存・非生成再読した。** 配置・本人端末・native画像の完了ではない。
 
@@ -2625,7 +2625,7 @@ fresh通常6e28fda4・詳細設計§7.1/11/12、全体現在地/設計/全file�
 
 元previewはservice内部16fieldで、現RN HTTP19fieldではない。fresh API8a0192のactual _preview_public_response/public.update、Free quota/capability、PieceOwnerService.detail/historyと_responseを直接実行し、認証/HTTP/ASGI/SQL/model/GPU0でwire形を投影した。本文/ID/recipe/3hash/保存rowは原録画のまま。元expiryは過去なので、別のtest copyだけ2099へ投影し、quotaは明示0→1のFree fixture stateである。これを新server発行・旧HTTP録画・live quotaとは呼ばない。原録画そのものは書き換えない。現RN saveはprivateと生成save keyを明示するため、旧helperの省略visibility/固定keyとのwire byte同一とはしない。canonical private作品・保存receipt/detailは一致する。exportはactual detail/no-store投影でreceipt ACKを創作せず、Photos/Shareは呼ばない。
 
-### 実装・一回のCI
+### 実装・初回CIと検証側参照先の修正
 
 [研究2dddc0a3](https://github.com/MassyuRed/Cocolon/commit/2dddc0a3c04143e2f774bf9e5d08fb3c63b74901)は通常6e28の子、test6pathだけ。新fixture tests/fixtures/piece-ar04-configured3-host.jsonと既存factoryの新group、既存entryのactual InputPieceActionArea/Modal/Card/owner hostのmount、既存XCTest1method、既存runnerの閉transport/resolver/selector、既存workflowの研究routingを変更した。新controller/workflow/checker/依存は作らず、product source/pinは581dfd3864cb5f88457c8cd3e54aa7e6e360e7dcca8c4b58491697c5eb7dbfd4のまま。
 
@@ -2634,6 +2634,14 @@ actual createFromSavedInput→source GET→preview POSTを使い、Cardのactual
 閉local transportは各case5API/前後session10回だけ、異owner/余分call/path/body/header/key/signalを拒否。実Supabase moduleはtest resolverで全操作拒否へ解決し、actual context Providerへ固定runtimeを供給する。通常Auth/AppRuntimeProviderは起動しない。Node一回で正2caseと13拒否系PASS、bash/YAML/新orchestration JS syntaxは成功。旧legacy13/bitmap12/admitted29/export20/model73六/transition二scenario/Android八の生成JSONは全byte不変。local UIKit成功とはしない。GitHub全6fileの全文/blob読戻しと変更集合、独立reviewを確認して研究refへ反映した。
 
 [run43128036253](https://github.com/MassyuRed/Cocolon/actions/runs/43128036253)は起動済み・結果未判定。新testRecordedSavedInputHostSaveOwnerAndExportWithRealReactNativeだけを実行し、旧6method/V4はUNEXECUTED。45分job/各Card元8秒・画素/本文/3hash/owner/版条件は維持、manual dispatch/rerun0。同runの終端と6frame/PNG/actual export/canonical一致を回収する。失敗は成功へ数えず、同じrunを重ねて起動しない。
+
+### 実画像copyの参照先を修正した現在の候補
+
+実行中のsource再読で、actual job.captureはpiece-captureのraw PNGをpiece-export/<hex32>/へコピーしてからrawをreleaseする一方、診断captureBitmapの所有判定は旧piece-captureだけを許可していると確認した。2dddc0a3でnormal_host_export条件だけを既存branchへ加えた時の検証側の誤りであり、製品の保存/画像不具合とはしない。先行run43128036253の終端も別に回収し、旧実行を修正版へ読み替えない。
+
+[修正784cc142](https://github.com/MassyuRed/Cocolon/commit/784cc142954868e82795a344205dda652536a259)は2ddの子、既存entry/native-testの2pathだけ。entryはactual保存receiptを保持してpiece IDを渡す。nativeは今回normal_host_exportだけ、Caches/piece-export直下のlowerhex32 directory・非zero UUID・recipe hash64/ratio・標準化済絶対path・製品と同じfilename/expectedpath完全一致を要求してcopyを受け取る。旧2export groupのraw判定とbytes/PNG/全RGBA比較は原文不変。新methodへ5API/10session・完了/closed/cleared/owner/key保持の期待を追加した。期待値の緩和ではなくactual製品の画像所有位置への検証接続である。
+
+独立static reviewとGitHub2file全byte読戻し/変更集合を確認し、研究refをCASで784cc142へ移した。0740150はreceipt保持修正前のdetached検討版で、branchへ公開/CI実行していない。cancel用の接続操作が提供されていないため先行runは保全し、修正版[run43130834276](https://github.com/MassyuRed/Cocolon/actions/runs/43130834276)もpush自動起動した。両runともattempt1、manual dispatch/同commit rerun0。今回native実行はこの2候補の新同1methodだけで、元8秒・旧6method未実行・product source不変を維持する。現在は修正版の終端/6frame/actual export PNGを回収し、初回結果と区別して判断する。
 
 通常model selector OFF・未採用、live DB/Render/署名build/配布/Photos/本人端末・一般品質/正式0/3・AR-04/他AR残件は未完。今回新model/GPU/SQL/実Auth/外部製品HTTP0。STRUCTURE_MAP_DELTA_NONE：通常product owner/route/公開型/DB責務不変、既存native harnessへtest用1fixtureを接続しただけ。
 

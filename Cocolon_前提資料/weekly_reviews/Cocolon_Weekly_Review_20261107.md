@@ -1,6 +1,6 @@
 # 第10回 Cocolon週末報告会 — 2026-11-07（終了）
 
-> **11/12・AR-04最新：** 研究2dddc0a3の通常host接続run43128036253を開始、結果未判定。Free原録画051/007を異なるownerのまま使い、actual saved-input host→実native fit/明示save→receipt→fresh owner詳細→fresh export/actual job.captureを同じ本文/recipe/3hash/保存rowで確認する新1method。原HTTP録画ではなく実API wire ownerによる明示test投影（expiry/quota/合成Auth）、別Premium native6は不使用。元7group生成bytes・製品native.mm581/pin・8秒不変、V4失敗14→26は未修復で今回は未実行。通常model selector OFF・未採用を維持。 [既存natural観測の接続と現在地](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
+> **11/12・AR-04最新：** 通常host接続の研究784cc142/run43130834276を開始、結果未判定。先行2dddc0a3/run43128036253も結果回収待ち。actual job.capture後のpiece-exportコピーを旧raw-cache限定oracleが読めない静的誤りを、今回groupだけの厳格path/保存receipt ID照合へ修正した。PNG/全RGBA/旧group期待・製品native.mm581/pin/8秒は不変。Free原録画051/007の実host→実fit/明示save→receipt→fresh owner詳細→fresh export/実PNGを確認中。wire投影のexpiry/quota/合成Authは明示、別Premium未使用、V4失敗14→26は未修復・今回は未実行。通常selector OFF・未採用を維持。 [既存natural観測の接続と現在地](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-normal-host-save-export-20261112)。
 
 記録日：2026年11月7日（日本時間）  
 対象週：**2026年11月7日〜11月14日**  
