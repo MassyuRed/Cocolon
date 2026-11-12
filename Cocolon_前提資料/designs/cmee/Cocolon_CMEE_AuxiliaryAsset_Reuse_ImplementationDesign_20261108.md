@@ -4,15 +4,15 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-13 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR03_HISTORY_LOCATOR_ACTUAL6_NOT_ADOPTED
+status: AR03_ACTIVE_EVALUATION_TIME_BINDING_PREPARED_NOT_MODEL_EVALUATED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Actual6 complete; locator candidate not adopted after new question and withdrawn past reaction revival; normal flag OFF, no automatic retry or training; existing author source/update use remains unresolved"
+current_next: "Owned active event/evaluation and temporal binding projected to opt-in history author material; four current-4B requests prepared but not uploaded or executed; prior one-time approval consumed, quality improvement unmeasured"
 runtime_effect_of_this_document: 0
 ---
 
-> **11/13・AR-03の履歴補助locator実比較6応答を一回完走、候補は通常不採用：** 承認49,471byteを既存Podで実行し、12.174544秒・全6 HTTP200／stop、PID77140・前後health200を維持。学習／再試行／提供再起動0。T05は補助が届くと理由質問を追加し、D02は撤回済み過去感情を今回との共通反応として復活。同一v1対照のknown_updatedはrequest／response bytesとも同一で、過去の重さの所属が曖昧。既存形式検査は5/6通過だが意味合格ではない。5699／5751byteでの補助送達と可逆性は確認できたが、応答品質改善は未確認。通常flag OFF、今回一回の承認は消費済み。新本文SQL保存・live反映／本人端末・AR-03／全補助経路は未完。 [実原本・判定・再開点](<#auxiliary-history-locator-handoff-actual6-20261113>)。
+> **11/13・AR-03の有効な評価対象・時点を作者へ渡す候補を実装、実4Bは未実行：** API `a0a6746e233b09d8cdfbd94b5d17ee5af9587946`。既存の更新後planが持つ出来事→回答評価の有効な結合と、ORIGINAL_OCCASION／ANSWER_TIME・実source anchor・時点根拠が作者材料から落ちていたため、同じnatural owner内の明示opt-inへ回収。新SYSTEM／guard／学習0、通常・旧研究経路は不変。関連249件成功、旧20snapshotは新flagを含め全要求同一。既存SQLから構築した2組は原文／全回答／prefix／SYSTEMを旧新同一のまま、対象・時点を5762／5796byteで搭載。v1→既存v2圧縮も含む作者材料候補全体の比較で、改善は未証明。38,004byte・旧新4要求・最大5分一回を準備保存したが未送信。前回T05／D02不採用は変えず、通常flag OFF・AR-03／全補助経路は未完。 [修復・検証・次回比較](<#auxiliary-history-active-binding-prepared-20261113>)。
 
 > **11/12・固定実3件の意味読取拒否を修復：** API87512ddaで、既存述語／本人評価／感情／literal-self資産を、型付きoperatorと完全保持spanの独立比較へ回収。保存344aの同じ実raw3件は3拒否→3採用、旧73件の採否・全artifact・prepared／messages／rawは修正前後同一。新GPU・学習0。3plan計9件の隔離SQL保存・非生成再読、本文／recipe／renderer一致とquota各1を確認。Free refinedは元の適格ADD snapshot、Plus／Premiumは同じ全入力・回答から既存ownerでtier別資格を再導出。合成Auth／source・mock HTTP framingであり、実HTTP／live DB／本人端末ではない。新70を含む局所1774と既存SQL56が成功。Piece CI43174913229はattempt1・39step成功、model集合2021に新70を含む（重複加算なし）。生成本文自体は従来の常体化が中心で、一般編集品質・同じ新本文のnative画像・通常採用・AR-04／全補助経路は未完。 [修復・原本・確認範囲](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-general3-operator-review-repair-20261112)。
 
@@ -1060,6 +1060,47 @@ locator候補は通常不採用。通常use_meaning_support=Falseを維持し、
 既存`Cocolon_CMEE_AR03_HistoryTeaching_Candidates_20261112.zip`を同Library IDのversion9へ更新。29,062,939bytes／64members、SHA256 `8889b8a7fe988e25d44f4c25ccd2603b6f246af72d65abef2f2747929cd647e4`。旧59membersのREADME以外は不変、旧READMEはREADME.v8.mdとして保持し、新actual原本ZIP・CPU技術照合・全3組6本文の意味review・説明を追加。旧実weights／失敗／準備原本も保持する。秘密・全環境・browser screenshot・Git-backed製品sourceは加えていない。
 
 製品source／test／API変更は今回0、API headはbd4b017aのまま。前提資料の現在地4箇所を差分更新。STRUCTURE_MAP_DELTA_NONE：新owner／path／公開経路／責任境界を追加していない。primaryは候補NOT_ADOPTED、商品品質credit0。§9.16の未実行記録は承認前の履歴として保持し、本節を最新再開位置とする。AR-03／他AR・三中核／全補助経路・一般品質・通常反映・本人受入れは未完。
+
+
+<a id="auxiliary-history-active-binding-prepared-20261113"></a>
+## 9.18 2026-11-13 — 有効な評価の対象・時点を現作者へ回収、2組4応答は準備済み・未実行
+
+### 実測後の欠落と、今回の変更範囲
+
+Mashの新しい継続指示を受け、§9.17の全6実本文・不採用と、freshな全体現在地・設計図・ファイル地図・最新11/7 weeklyを照合。本文に新質問を入れたT05は既存validate_replyが拒否済みで、新しい検出ruleは作らない。旧candidate selector／content-selectionの巨大型をそのまま再稼働せず、詳細設計§9.1／§14に従い既存意味ownerから欠けた責務だけを現作者へ戻した。
+
+既存`admitted_history_plans`は`prepare_emlis_meaning→build_updated_grounded_plan`を呼び、訂正／撤回後の有効planを既に返す。一方、従来`_answer_meaning_material`はactive／inactive claimとinactive relationのみを渡し、有効な`evaluation_about_event`と、どの時点への回答かを落としていた。既存planの評価がどの出来事についてかという意味結合は、単なるclaimのtime_scopeとは別である。この欠落を、D02／T05の全失敗原因と確定しない。
+
+API `a0a6746e233b09d8cdfbd94b5d17ee5af9587946`（親bd4b017a、変更exact2）は既存natural_reply.pyと既存question application testだけ。private引数`use_history_answer_plan=False`は既存研究supportと併用する場合だけ有効。historyの有効な評価関係・生存する両端anchor・qualified原文fragmentを、既存更新後planから投影する。exact1のupdate_ref結合がある場合だけ、typed temporal bindingのabout_timeと実anchorを付与し、相対関係／interval／timezoneが非空なら保持する。時点根拠は同じqualified fragment配列内のtime_span_indicesとして保持し、既存v2 locator化後も同じ位置へ対応する。
+
+about_timeとsource anchorを同じものと扱わない。今回ANSWER_TIMEの実owner値もanchorはoriginalであり、about_timeからanswer_idへ手書き補完していない。「今は重い」はその過去記録への回答時点の主張で、今回の別記録へ無条件に足さず、終了したとも推定しない。元の出来事当時・回答時点・今回を分けて実本文を読む。
+
+関係0ならactive_relationsキーを増やさず、既存v1／v2処理を保持する。失効内容・全原文／全回答・出所・問い文脈・順序・ID／時刻・選択・prefixを落とさない。最新UNASSESSEDを旧RESOLVEDへ戻す選択は変えない。新SYSTEM本文・新guard／checker・旧巨大selector・dependency・公開API／DB／RN・通常providerの変更0。5800byteを上げず、なお収まらなければ既存どおり補助だけを省く。通常flag OFF／新opt-in default false。retentionを今回必ず過去へ言及する指示として投影せず、全planや完全なcontent-selection subsystemの移管完了とはしない。
+
+### CPU実検証と、新4要求の意味
+
+関連5test fileで249件成功、既存Pydantic deprecation警告1。追加2例は既存SQL／serviceで原入力→実発行問い→本人回答→今回の別記録を構築し、原文・source prefix・Safety・既存claim／失効／unknownを保持した上で、有効関係とtyped about_time／実anchor／時点のqualified根拠の一致、locator往復、5800byte、SYSTEM同一、超過fallbackを確認した。
+
+旧20凍結snapshotをbd4b017aと新候補で純CPU再導出。通常material／prefix／Safety、旧研究messages、新opt-inを付けたmessagesも全同一。開始時localの古い2fileはfresh bd4原本へ同期し、他229fileはfresh Git blob一致を確認してから実施した。これを全repositoryの全本文・全仕様理解と同一視しない。既存の構造mapと原本・依存を分担確認した範囲を守る。
+
+| 架空の既露出派生対照 | 旧→候補のmessages byte | ownerが持つ意味 |
+|---|---:|---|
+| その時は重かった | 5788→5762 | 過去の「褒められた」→「重かった」、ORIGINAL_OCCASION |
+| 今は重いです | 5777→5796 | 同じ過去イベント→回答時点の「重いです」、ANSWER_TIME／answer_deictic_now |
+
+2組は独立した未知事例2題ではない。旧新で本人の原文・全回答・問い・選択・ID／時刻・prefix・SYSTEM本文を固定し、同じexisting natural 4Bへ渡す作者材料候補全体を比較する。旧v1全文fragmentから候補の既存v2共有locatorへの圧縮も同時に起こるため、有効関係だけの純粋効果とは認定しない。
+
+前回T05／D02は新flagでも要求が同一であり、その質問追加・撤回復活を今回直したとは扱わない。既存readerが回答付き記録を除外することも確認したが、検出・拒否を追加するだけの別修正は行っていない。CPU一致／搭載・249成功は実4Bの理解・自然さ・商品品質改善、通常採用、新生成本文のSQL保存・非生成再読、live反映／本人端末の成功ではない。
+
+### 保存済みpacket・未実行境界と次
+
+`active_binding_prepared/ar03_history_active_binding_20261113_once.py`は38,004bytes、SHA256 `6a30f9c6a1a6cc0b2bfb389cd10a71dc302bba9112c9261bb0aa6006bdb86577`。既存SQLからのsource snapshots、準備4要求、CPU20再導出、実行scope説明を同時保存した。2組のbefore／candidate計4応答、最大300秒・一回・各call最大60秒・max_tokens2048・temperature0。既存natural鍵1つを同Pod内127.0.0.1認証だけに使い、全環境読取／鍵保存・外部出力0。学習・再試行・model／adapter変更・提供停止／再起動・新rental・dependency install・他provider fallback0で、前後health／PIDを記録する。
+
+今回Pod操作／送信／model呼出し0。直近PID77140／health200は§9.17の観測で、現在再観測済みとはしない。前回49,471byte／6要求の一回承認は消費済みで、今回4要求へ流用せず未送信・未実行。実行時は全4本文を、元場面と回答時点・今回への足し込み／未記載の継続終了・自然さ・復唱・質問追加まで読む。意味が変わる候補を流暢さで採用しない。通常採用や追加学習へ自動進行しない。
+
+既存`Cocolon_CMEE_AR03_HistoryTeaching_Candidates_20261112.zip`を同Library IDのversion10へ保存。29,089,093bytes／71members、SHA256 `f8b3d11372aea3b43e97ce4a66b67b5e422b5d5b9af601c62d1954996b9d0986`。旧64membersのREADME以外は不変、旧READMEはREADME.v9.mdに保持し、今回準備6fileを追加。旧重み／全実原本・不採用理由を保持し、秘密・全環境・browser screenshot・Git-backed製品sourceは加えない。
+
+STRUCTURE_MAP_DELTA_NONE：既存natural投影owner内の責務回収で、新owner／新path／公開経路／責任境界を増やしていない。現在地4箇所だけ関連差分更新。実装反映・CPU準備は成立したが、実商品品質の改善・AR-03／他AR／三中核・全補助経路の完了ではない。§9.17の不採用を継承し、本節を最新再開位置とする。
 
 ## 10. 変更箇所と検証
 
