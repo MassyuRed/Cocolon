@@ -139,9 +139,11 @@ function harness(options = {}) {
     if (name === './input/inputNoticeModel') return { isWelcomeNoticePopupCandidate: () => false };
     if (name === './input/useInputKeyboardAwareMemo') return { useInputKeyboardAwareMemo: () => ({
       resetMemoInputHeights: noop, lastFocusTargetRef: ref, focusedFieldRef: ref, memoFocusedRef: ref, keyboardInset: 0 }) };
-    if (name === './input/useInputDraftPersistence') return { useInputDraftPersistence: () => ({
+    if (name === './input/useInputDraftPersistence') return { useInputDraftPersistence: (props) => {
+      control.restoreDraft = props.applyInputDraft;
+      return ({
       setPendingInputDraft: noop, setDraftRestoreModalVisible: noop, clearPersistedInputDraft: clearDraft,
-      draftRestoreModalVisible: control.draftModal === true }) };
+      draftRestoreModalVisible: control.draftModal === true }); } };
     if (name === './input/useInputFeedbackModal') return { useInputFeedbackModal: () => {
       const [visible, setVisible] = React.useState(false);
       const reset = React.useCallback(() => setVisible(false), []);
@@ -154,6 +156,12 @@ function harness(options = {}) {
       busy: control.threadBusy, close: () => { control.threadVisible = false; control.threadBusy = false; },
       open: async (id, options) => { threadIds.push(id); threadOptions.push(clone(options)); if (control.threadOpen) return control.threadOpen(id);
         control.threadVisible = control.threadMode; return control.threadMode; } }) };
+    if (name === './input/useEmlisQuestionPreference') return { useEmlisQuestionPreference: () => ({
+      value: control.receiveQuestions !== false,
+      ready: control.questionPreferenceReady !== false,
+      capture: () => control.questionPreferenceReady === false ? null : control.receiveQuestions !== false,
+      setValue: (value) => { control.receiveQuestions = value; },
+    }) };
     if (name === './input/InputPieceActionArea') return { __esModule: true, default: Host };
     if (name === '../features/piece/pieceRenderer') return {
       isPieceBitmapSaveAdmitted: control.rendererAdmission || (() => false),
@@ -289,6 +297,7 @@ for (const emotion of INPUT_EMOTIONS) for (const strength of ['weak', 'medium', 
     assert.deepEqual(payload, {
       emotions: [{ type: emotion, strength }], memo: thought, memo_action: action,
       category: ['生活', '人間関係', '価値観'], is_secret: false, send_emotion_notification: true,
+      receive_emlis_questions: true,
     });
     assert.equal(h.submits[0].options.expectedUserId, OWNER);
     h.dispose();
@@ -429,7 +438,8 @@ for (const sample of completeSamples.cases) test(`replacement sample ${sample.ca
   assert.deepEqual(payload, { memo: sample.memo,
     ...(sample.memo_action ? { memo_action: sample.memo_action } : {}),
     emotions: sample.emotion_details, category: sample.category,
-    send_emotion_notification: sample.send_emotion_notification, is_secret: sample.is_secret });
+    send_emotion_notification: sample.send_emotion_notification, is_secret: sample.is_secret,
+    receive_emlis_questions: true });
   assert.equal(h.submits[0].options.expectedUserId, OWNER);
   h.dispose();
 });
@@ -746,5 +756,49 @@ for (const pending of [false, true]) test(`saved input forwards async pending ma
   assert.equal(h.threadOptions.length, 1);
   assert.equal(h.threadOptions[0].showNotCreated, pending);
   assert.equal(h.threadOptions[0].waitForInitial, pending);
+  h.dispose();
+});
+
+
+test('question OFF is captured independently from notifications and retained through success and draft restoration', async () => {
+  const h = harness({ receiveQuestions: false });
+  h.fill();
+  h.control.restoreDraft({ selectedEmotions: [{ type: '自己理解', strength: 'medium' }],
+    memo: '復元した原入力', memoAction: '', selectedCategories: ['価値観'], sendEmotionNotification: true,
+    receive_emlis_questions: true });
+  h.render(); await h.submit(); h.render();
+  assert.equal(h.submits[0].payload.receive_emlis_questions, false);
+  assert.equal(h.submits[0].payload.send_emotion_notification, true);
+  assert.equal(h.submits[0].payload.memo, '復元した原入力');
+  assert.equal(h.find('InputActionArea').props.emlisQuestionPreference.value, false);
+  h.finishObservation(); h.fill('次の原入力'); await h.submit();
+  assert.equal(h.submits[1].payload.receive_emlis_questions, false);
+  h.dispose();
+});
+
+test('question preference loading blocks both the submit button and a previously rendered handler', async () => {
+  const h = harness(); h.fill();
+  const oldSubmit = h.find('InputActionArea').props.handleOk;
+  h.control.questionPreferenceReady = false;
+  await oldSubmit();
+  assert.equal(h.submits.length, 0, 'capture checks current readiness even before a rerender');
+  h.render(); assert.equal(h.find('InputActionArea').props.canSubmit, false);
+  await h.submit(); assert.equal(h.submits.length, 0);
+  h.control.questionPreferenceReady = true; h.control.receiveQuestions = false;
+  h.render(); await h.submit();
+  assert.equal(h.submits[0].payload.receive_emlis_questions, false);
+  h.dispose();
+});
+
+test('in-flight emotion request keeps the captured question choice when the next selection changes', async () => {
+  const saved = deferred();
+  const h = harness({ receiveQuestions: false, submit: () => saved.promise }); h.fill();
+  const pending = h.submit(); h.render();
+  assert.equal(h.submits[0].payload.receive_emlis_questions, false);
+  h.control.receiveQuestions = true; h.render();
+  saved.resolve({ id: INPUT, input_feedback: { comment_text: '保存済み応答', emlis_ai: {} } });
+  await pending; h.render();
+  assert.equal(h.submits[0].payload.receive_emlis_questions, false);
+  assert.equal(h.submits.length, 1);
   h.dispose();
 });

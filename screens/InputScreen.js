@@ -19,6 +19,7 @@ import {
 import { useAuth } from "../AuthContext";
 import { submitEmotionInput } from "../lib/api/home/emotionSubmitApi";
 import { useEmlisThread } from "./input/useEmlisThread";
+import { useEmlisQuestionPreference } from "./input/useEmlisQuestionPreference";
 import { useAppRuntime } from "../AppRuntimeContext";
 import EmlisThreadModal from "./input/EmlisThreadModal";
 import { openNoticeAction } from "../lib/noticeActionRuntime";
@@ -161,6 +162,7 @@ export default function InputScreen({ navigation, route, onInitialInputSettled, 
   if (feedbackOwner.current.id !== currentUserId) feedbackOwner.current = { id: currentUserId, epoch: feedbackOwner.current.epoch + 1 };
   useEffect(() => () => { feedbackOwner.current = { id: "", epoch: feedbackOwner.current.epoch + 1 }; }, []);
   const emlisThread = useEmlisThread({ userId: currentUserId, enabled: isFeatureEnabled("emlis_threads_enabled", false) && !isTutorialMode });
+  const emlisQuestionPreference = useEmlisQuestionPreference({ userId: currentUserId, enabled: !isTutorialMode });
   // Piece keeps only a saved ID/key, not the input or Emlis body. A render-time
   // owner/tutorial boundary conceals a previous selection before effect cleanup.
   const pieceInputLifetime = useRef(null);
@@ -642,6 +644,7 @@ const safeInsets = useSafeAreaInsets();
   const hasSelectedCategories = selectedCategories.length > 0;
   const canSubmit =
     !submitting &&
+    (isTutorialMode || emlisQuestionPreference.ready) &&
     hasMemoInput &&
     selectedEmotions.length > 0 &&
     hasSelectedCategories;
@@ -928,7 +931,7 @@ const safeInsets = useSafeAreaInsets();
     });
   };
 
-  const buildEmotionSubmitPayload = useCallback(() => {
+  const buildEmotionSubmitPayload = useCallback((receiveEmlisQuestions) => {
     const emotionDetails = selectedEmotions.map((e) => ({
       type: e.type,
       strength: e.strength,
@@ -940,6 +943,7 @@ const safeInsets = useSafeAreaInsets();
       created_at: new Date().toISOString(),
       is_secret: false,
       [EMOTION_NOTIFICATION_WIRE.submitField]: sendEmotionNotification,
+      receive_emlis_questions: receiveEmlisQuestions,
     };
 
     if (hasMemoInput && selectedCategories.length > 0) {
@@ -1016,6 +1020,8 @@ const safeInsets = useSafeAreaInsets();
     if (requestOwner.id !== currentUserId) return;
     const ownsResponse = () => feedbackOwner.current === requestOwner;
     if (!canSubmit) return;
+    const receiveEmlisQuestions = isTutorialMode ? true : emlisQuestionPreference.capture();
+    if (typeof receiveEmlisQuestions !== "boolean") return;
     const pieceLifetime = pieceInputLifetime.current;
     const pieceTicket = {};
     pieceLifetime.ticket = pieceTicket;
@@ -1031,7 +1037,7 @@ const safeInsets = useSafeAreaInsets();
     setSubmitting(true);
     try {
       // 1) 入力内容を MashOS Emotion Submit API 用のペイロードに変換
-      const payload = buildEmotionSubmitPayload();
+      const payload = buildEmotionSubmitPayload(receiveEmlisQuestions);
       const emotionDetails = Array.isArray(payload?.emotions) ? payload.emotions : [];
       const inputFeedbackEmotionMeta = buildInputFeedbackEmotionMeta(emotionDetails);
 
@@ -1459,6 +1465,7 @@ ${String(error?.message || error)}`
                 isTutorialMode={isTutorialMode}
                 registerInputInteraction={registerInputInteraction}
                 setSendEmotionNotification={setSendEmotionNotification}
+                emlisQuestionPreference={emlisQuestionPreference}
                 handlePreviewPiece={handlePreviewPiece}
                 canPreviewPiece={canPreviewPiece}
                 handleOk={handleOk}

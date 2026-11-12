@@ -13,6 +13,7 @@ export default function InputActionArea({
   isTutorialMode,
   registerInputInteraction,
   setSendEmotionNotification,
+  emlisQuestionPreference,
   handlePreviewPiece,
   canPreviewPiece,
   handleOk,
@@ -62,6 +63,43 @@ export default function InputActionArea({
           />
         </View>
       </View>
+
+      {!isTutorialMode ? (
+        <View style={[styles.preferenceCard, styles.preferenceCardInActionArea]}>
+          <View style={styles.preferenceRow}>
+            <View style={styles.preferenceLeft}>
+              <Ionicons name="chatbubble-outline" size={18} color={colors.TEXT_SUBTLE} style={styles.preferenceIcon} />
+              <View style={styles.preferenceTextWrap}>
+                <Text style={styles.preferenceTitle}>Emlisからの問いを受け取る</Text>
+                <Text style={styles.preferenceDesc}>
+                  必要なときだけ、今回の記録について問いを受け取ります。
+                </Text>
+              </View>
+            </View>
+            <CocolonSwitch
+              value={emlisQuestionPreference?.value === true}
+              onValueChange={(value) => {
+                registerInputInteraction?.();
+                void emlisQuestionPreference?.setValue(value);
+              }}
+              disabled={!emlisQuestionPreference?.canChange || submitting}
+              accessibilityLabel="Emlisからの問いを受け取る"
+            />
+          </View>
+          {emlisQuestionPreference?.error ? (
+            <View>
+              <Text style={styles.preferenceDesc} accessibilityRole="alert">{emlisQuestionPreference.error}</Text>
+              {emlisQuestionPreference.needsSelection ? (
+                <Text style={styles.preferenceDesc}>前回の設定は未確認です。スイッチで選び直すこともできます。</Text>
+              ) : null}
+              <CocolonButton variant="secondary" onPress={emlisQuestionPreference.retry}
+                disabled={submitting} accessibilityLabel="問いの設定を再確認する">
+                再確認する
+              </CocolonButton>
+            </View>
+          ) : null}
+        </View>
+      ) : null}
 
       {isTutorialMode ? <View ref={pieceButtonRef} collapsable={false} style={styles.buttonWrapper}>
         <CocolonButton
