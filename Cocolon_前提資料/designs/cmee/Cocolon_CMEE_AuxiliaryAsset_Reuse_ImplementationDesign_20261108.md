@@ -518,13 +518,15 @@ script SHA256 `38e5ef347e6e8f93c509b871475e18a2ed0e0365496d5d422550b72ba00da3d9`
 | Piece・旧／内容選択追加 | 同じ原2欄の完全コピーで旧新response/本文byte同一。現receipt→Engineは両方piece_model_meaning_unassessed_or_changedでUNAVAILABLE | 新意味変異は見つからないが編集改善0。共通authoring instructionの氏名→public role抽象化も未実行。氏名残存が複合拒否の唯一原因とは断定しない。S7や氏名条件を緩めて通さない |
 | Analysis・v1／source duties v2 | 旧新とも2recordから2node/1edge、図と同本文を生成しartifact serialization／再読が非生成一致。v2の両場面引用とedge文脈注記を保持 | 旧edgeの自宅行動の否定誤記は新rawで消えたが、新側に反復・誤字・記録間関係の説明不足・同じ資料という未根拠identityが残る。node_kind変更を役割理解の成立へ数えず、private visible reviewはUNASSESSEDを保持 |
 
-Piece送信bodyは8,809→12,140bytes、Analysisは6,064→8,333bytes。これは同一一組の実測であり、一般品質・速度優位を示す反復実験ではない。自然応答には修正前model alias `cocolon-qwen3-4b-base-851bf6e` のexportがあったが、承認scriptが提供引数から実alias `cocolon-qwen35-4b-base-851bf6e` を入れた。その他のmessages・source・生成条件は不変。実rawのmodel bindingと実request SHAへ厳密に照合し、元exportのwire bytesが無変更とは主張しない。最初のoffline alias不整合replayは無効記録として隔離し、品質・保存結果から除外した。実モデル7callを増やしていない。
+Piece送信bodyは8,809→12,140bytes、Analysisは6,064→8,333bytes。これは同一一組の実測であり、一般品質・速度優位を示す反復実験ではない。自然応答には修正前model alias `cocolon-qwen3-4b-base-851bf6e` のexportがあったが、承認scriptが提供引数から実alias `cocolon-qwen35-4b-base-851bf6e` を入れた。その他のmessages・source・生成条件は不変。実rawのmodel bindingと実request SHAへ厳密に照合し、元exportのwire bytesが無変更とは主張しない。 Pieceの現SDK replayは実送信scriptとJSON key順だけが異なり、request JSON／messages／全生成値は一致するがwire byte同一ではない。両SHAとfalseのkey-order一致結果をprivate原本へ保持する。Natural／Analysisのreplayは実wire SHAにも一致した。最初のoffline alias不整合replayは無効記録として隔離し、品質・保存結果から除外した。実モデル7callを増やしていない。
 
 #### 実測された問い分離の保存抜けへの最小是正
 
 実modelの過去丁寧形の質問が、既存`_QUESTION_ENDING`の現在形だけの有限範囲を抜けて保存された。API `4183126d00c2ed4238c526cf17f6b28cdbb18dc6`で既存判定へ`ましたか／でしたか`を追加した。既存のquote mask、malformed quote fallback、source／公開wire／DB／RN／作者promptは不変。本文修補・代替文・追加生成はない。
 
 同じ実rawと実wire／sourceを用いた隔離SQLの前後比較で、初回・回答後2件の保存と同本文再読を維持し、撤回後だけ誤質問の新保存を拒否した。matching RECEIVED以降の新OBSERVATION seq・current sourceprefix・DTO eventを検査し、前からある初回観測を成功へ数えていない。現自然系3moduleの関連103件成功、fail／skip0、既存Pydantic warning1。追加8正負対照は実測文・過去丁寧疑問・引用・平叙を含む。独立source reviewと16境界対照にblockingなし。これは既存保存境界の修復で、任意の日本語の質問を完全検査できるという主張ではない。
+
+CI最終結果：修復API4183126dのPiece run43198325424/job131114907252はattempt1・39工程success（既存入力集合179／model集合2034成功、局所103との重複は加算しない）。Analysis run43198325584/job131114907684もattempt1・19工程success。両方とも同じ修復headの結果であり、実modelの追加生成・通常採用・live／端末の成功ではない。
 
 #### 保存・再読のscopeと不成立事項
 
