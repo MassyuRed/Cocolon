@@ -1,16 +1,19 @@
 ---
 doc_id: cocolon.cmee.auxiliary_asset_reuse.implementation_design.20261108
 title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修・商品接続 詳細設計"
-revision_date: "2026-11-13 JST"
+revision_date: "2026-11-14 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR04_LATEST_SELECTED_ADD_AFTER_ROUND2_3_ACTUAL_SAVED_REREAD_COMPLETE_PROSE_IMPROVEMENT_UNPROVEN
+status: AR04_LATEST_SELECTED_ADD_ACTUAL_SAVED_NATIVE6_EXPORT_COMPLETE_PROSE_IMPROVEMENT_UNPROVEN
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Selected latest round2/3 independent ADD reached real Piece model2 and same-checkpoint save/reread2 in 94.076319 seconds; literals retain original plus exactly one latest answer, prose edit delta0 and general prose improvement unproven; next same-version native image/device and broader paragraph/two-field actual prose; no hosted SQL/deploy, prior frame new2 not adopted, selector OFF and single-use approval consumed"
+current_next: "Same saved real4B latest round2/3 works passed native preview/saved/export6 and actual PNG capture; general paragraph/two-field editorial improvement, latest hosted SQL/API/RN and physical device remain unfinished; selector OFF, no new model call or deployment"
 runtime_effect_of_this_document: 0
 ---
+
+> **11/14・取得済み実4B2作品を、同じ保存本文から通常hostのpreview／saved／exportへ接続。iOSシミュレーター6画面成功、最長2.124秒。各作品の3画面PNG全byte一致・実view-shot画素／SHA一致、native dismiss後の保存画面遷移を確認。追加生成／学習／本番変更0。一般整形品質・本人端末は未完、通常selector OFF。** [同版画像・実書出し§9.45](#piece-latest-answer-native6-20261114)。
+
 
 > **11/14・最新一回答のPiece実4B2作品を94.076319秒で取得し、同checkpointで保存・再読2件一致。原入力＋第2/3回答の最新一件を保持し、先行回答の混入なし。実本文は原文と同文のため整形品質改善は未実証。前後4応答・health2GET成功、学習／再試行／再起動0。通常selector OFF、本番・native画像・本人端末は未完。** [実結果・確認範囲§9.44](#piece-latest-later-add-actual-20261114)。
 
@@ -2892,3 +2895,33 @@ Freeの自然終了2回答／3回答後を各1件確認。両件の既存piece.f
 API dbb96acaのPiece CI43435593613とAnalysis CI43435593636はどちらもattempt1 successとなった。既報の431固有Python＋38subtests・47固有RNに今回の保存再演を新test数として加算しない。本作業でsource／SQL／RN／SYSTEM／hint／modelは変更せず、STRUCTURE_MAP_DELTA_NONE。実行と残件の差分だけを現在地・本書・weeklyへ反映する。
 
 主な到達点はTECHNICAL_CREDIT：最新独立ADD一回答が実4Bを通り、同版の候補・保存・再読まで接続した。次の直接未完は同版native画像・実機表示と、長め段落／思考・行動二欄の実本文品質。全回答集合や訂正／撤回を含む作品化、本番SQL適用・Render配置・本人端末・正式受入れは未完を維持する。通常selector OFF、新10b563・§9.38新3・§9.42新2不採用は変更なし。今回の一回分の許可は消費済みで、追加生成・再試行・本番反映に再使用しない。
+
+<a id="piece-latest-answer-native6-20261114"></a>
+## 9.45 2026-11-14 — 同じ実4B最新一回答2作品のnative6画面と実PNG書出し
+
+### 完了した範囲と実装先
+
+§9.44のFree第2/第3回答作品を再生成せず、取得済み保存detailとcanonical8項目をそのまま既存のInputPieceActionArea→PiecePreviewModal→PieceOwnerHistoryScreen→pieceExport／PieceExportCanvas／PieceVisualCardへ通した。現製品Cocolon c936d789をpreimageに、研究[938ac9ac](https://github.com/MassyuRed/Cocolon/commit/938ac9acf816c297b343615e6163fdcaf3cebfd2)で既存24f7ba8bの同じnative normal-host検証を2作品へ適合した。製品source／renderer／native581／8秒／API／SQL／権利・Safetyは変更0。
+
+研究の変更は既存workflowとnative entry／fixture selector／XCTest／shellの5path、新しい架空作品fixture tests/fixtures/piece-ar04-latest-answer-host.jsonの計6pathだけ。公開済みAPI testの架空原入力・回答と同じ作品のDTO投影で、private checkpoint／Q&A全文／raw HTTP／認証値は公開しない。期限だけtest copyを2099へ投影し、Free quotaと5API／10sessionは合成。旧prepared・取得済みraw・保存checkpointは変更しない。
+
+### 一回の結果と保存版との直接照合
+
+[run43488462958](https://github.com/MassyuRed/Cocolon/actions/runs/43488462958)／job132103035828はattempt1 success。実行したXCTestは既存の同1method、2作品×preview／saved／exportの全6画面がnative_checked。最長2123.207292msで元8秒以内、本文／2block／3hash／recipe／rendererを含むcanonical8項目は原保存detailと全6一致した。各作品の3画面PNGは全byte一致し、実view-shot PNGも同canvasの画素とasset SHAが一致した。
+
+- 第2回答作品の実export SHA256：2d9744f7f9c34f074b4ea1f7f8ba3a2efd5249b845ecb920b0e16f598d18f571
+- 第3回答作品の実export SHA256：39b9559c072edd4be73dc93f20daef158d9753d0853649d392bb1d088f3d4e8d
+
+閉要求→native dismissal後の遷移→saved mountが各event index2→3→4で成立。fresh本人詳細／export再読、保存前fit拒否・同版保存許可、capture identityを保持。2作品それぞれの閉local transportは5API／10sessionで完了・消去。rootと独立read-onlyで原保存DTO・PNG bytes／画素・SHA・順序を照合し、両実exportを目視した範囲では文字／否定／最新回答／Emlisロゴの欠け・重なりを見つけなかった。追加のtest・model生成を独立確認として再実行していない。
+
+自然なText参照画像全体とのRGBA一致は全6不成立のまま。実exportと同canvasの一致を自然参照全体の完全一致へ換算しない。旧V4／WholeCanvas失敗や全renderer／全入力／両OSの合格へ広げない。既存phase6契約check43488462836はsuccessだが、広範囲RN／API suiteの新規成功とはしない。
+
+### 本番との差・保存・残件
+
+稼働Supabaseのmigration履歴と対象3関数の定義をread-only照合した。7引数issue／mutate／saveにはnatural_reply.v1 armがある一方、今回のlatest 1..3判定とprior-chain変数はない。旧5引数issueにも今回の処理はない。最新SQLを本番適用した成功は主張せず、SQL変更・user data読取／書込は0。
+
+[同じ実原本](https://chatgpt.com/library?file_id=libfile_fde3_f-b1e9007b37fc8191b9be577a53a22038_2f7470f963808191aaebf050935e72de&account_id=personal)へnative原本／全PNG／report／xcresult／今回研究6file／直接照合結果を追加した。11,600,631byte・106member、SHA256 2678ac145e38dfdc830095637d28bf77b1a13f0d1e338ba2f477c76c3401efb8。前回47memberは旧READMEだけhistoryへbyte不変で保持し、他46は元path／bytes不変。Actions原本artifact14070706738（884,993byte、SHA256 5c7d8360e60d09b3af12f03b5755280dd534fbfc506cbdae9e29865e19738457）も保持した。保存版guardの競合後にfresh原本が同byteであることを再確認し、同identityのversion2へ反映した。2作品の実PNGも個別保存済み。
+
+本作業の追加model取得・GPU・学習・再試行・本番SQL変更・Render配置・配布・Photos／Share・本人端末は0。前回の94.076319秒の一回分は消費済みのまま。STRUCTURE_MAP_DELTA_NONE：既存製品ownerとcontractを維持し、研究検証の対象と実行／保存状態だけの差分。通常selector OFF、新10b563・§9.38新3・§9.42新2の不採用を維持する。
+
+到達点は同版native画像／実PNG書出しの限定TECHNICAL_CREDIT。本文は元から同文であり、一般的な整形品質改善、正式human Product Read、正式商品受入れの追加はない。次の直接残件は、長め段落・思考／行動二欄の実本文編集品質と、最新SQL／API／RNをそろえた通常経路・本人端末の一巡。全回答集合や訂正／撤回を含む作品化、他AR、全補助経路は未完で、画像成功を理由に通常有効化・追加生成・本番反映へ自動進行しない。

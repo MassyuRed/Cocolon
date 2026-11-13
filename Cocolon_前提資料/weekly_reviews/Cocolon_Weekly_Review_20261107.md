@@ -3145,3 +3145,13 @@ API dbb96acaと既存RN Modalを適合し、原入力＋最新の自己完結ADD
 原入力＋第2/3回答の最新一件を保持し、先行回答や合成Emlisの混入なし。両field値は原文と同文で、否定・対比・過去と今の意味を保つ点に明確な問題は見つからなかった。編集差分0なので一般的な整形品質改善は未実証とする。同checkpointで実rawを各1回メモリ内受領し、プレビュー・保存・非生成再読2件が本文／内容／見た目recipeの各hash・renderer版まで一致。quota各1、原入力・thread/events不変、保存再開時のmodel再取得0。隔離SQL・合成Authの結果であり、live DB／native画像／全plan実4B／本人端末の成功ではない。
 
 同じ原本へ実raw・全文照合・保存結果を更新した。API dbb96acaのPiece／Analysis両CIはattempt1 success。今回のsource／SQL／RN変更は0、STRUCTURE_MAP_DELTA_NONE。主な到達点はTECHNICAL_CREDITで、次の直接未完は同版native画像・実機表示と長め段落／二欄の実本文品質。通常selector OFF、過去frame新2／新3と新10b563不採用を維持する。[原本・確認範囲・残件§9.44](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-latest-later-add-actual-20261114)を正本とする。
+
+
+<a id="piece-latest-answer-native6-20261114"></a>
+## 2026-11-14 補助経路AR-04 — 最新一回答の同版native画像・実PNG書出し
+
+取得済み実4Bの第2/3回答作品を再生成せず、研究938ac9ac／run43488462958・attempt1で既存同1XCTestを実行。2作品×preview／saved／exportの6画面が成功、最長2.124秒。原保存detailのcanonical8項目・本文2blockと全6が一致し、各作品の3画面PNG全byte一致・実view-shot画素／SHA一致、native dismiss後の保存画面遷移を確認。両実PNGの目視と独立read-only照合で欠け・重なりは見つからなかった。
+
+研究シミュレーター・合成Auth／閉local transportの結果。自然Text参照全体のRGBA一致は全6不成立、旧V4／WholeCanvas失敗は未解消。本文は原文同文のままで一般整形品質改善は未実証。追加生成／学習／再試行／本番SQL変更／Render配置／配布／Photos／Share／本人端末0、通常selector OFF・正式0/3を維持。稼働DB関数のread-only照合でもlatest2/3資格・prior-chain処理は未反映だった。
+
+実原本の同identityをversion2へ更新し、旧47memberを保持してnative原本・全PNG・report・研究6fileを追加。11,600,631byte／106member、SHA256 2678ac145e38dfdc830095637d28bf77b1a13f0d1e338ba2f477c76c3401efb8。限定TECHNICAL_CREDIT・STRUCTURE_MAP_DELTA_NONE。次は長め段落／二欄の実本文品質と最新SQL／API／RNをそろえた本人端末一巡。 [詳細・原本・限界§9.45](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-latest-answer-native6-20261114)。
