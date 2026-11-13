@@ -2,21 +2,38 @@
   "schema": "piece.recorded_free_normal_host_fixture.v1",
   "cases": [
     {
-      "name": "normal_host_B53-051",
-      "source_case_id": "B53-051",
+      "name": "normal_host_QUALIFIED-PARAGRAPH",
+      "source_case_id": "QUALIFIED-PARAGRAPH",
       "tier": "free",
       "saved_input": {
-        "savedInputId": "76f4e33a-9c4a-4023-b528-4935952deb0b",
-        "expectedUserId": "737138fc-671a-4bcf-adda-35c9811689ba",
+        "savedInputId": "99891e89-139c-45ce-9dde-023b4d3c4354",
+        "expectedUserId": "d545dfb0-04fb-4979-a9e7-e32e8487e5f5",
         "idempotencyKey": "ar04-preview"
       },
       "preview": {
-        "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
-        "piece_text": "僕は隣人から収穫祭の準備を頼まれなかった。\n\n僕は農作業が好きだった。",
-        "row_version": 1,
-        "content_payload_hash": "4cc61687b056721f165366f7a7104c9d9c5869c7884e3007cf720d0d2dcbaa5b",
+        "content_payload": {
+          "body_blocks": [
+            "私は、仕事を進めるとき、すぐに答えを出すことよりも、わからないことを確かめる時間を大切にしたい。急いで返事をすると、自分が本当は何に迷っていたのかを置き去りにしてしまう気がする。私が選びたいのは、静かな場所で本を読む時間だ。私は読書が好きだった。まだ、参加する日は決めていない。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "3c82f55a87bee8244ac3b30b39ec1ed4a9c5c00fd0b2dfe11594dfaa9ea06709",
+        "eligible_formats": [
+          "short_essay"
+        ],
+        "expires_at": "2099-01-01T00:10:00+00:00",
         "format_type": "short_essay",
+        "piece_text": "私は、仕事を進めるとき、すぐに答えを出すことよりも、わからないことを確かめる時間を大切にしたい。急いで返事をすると、自分が本当は何に迷っていたのかを置き去りにしてしまう気がする。私が選びたいのは、静かな場所で本を読む時間だ。私は読書が好きだった。まだ、参加する日は決めていない。",
+        "piece_text_hash": "f5984e80c41eab85b49281fce4d44da614184d4796e206b263bf3e2b9c090461",
+        "preview_id": "c256b793-e506-15f6-5838-c2c1e63d1a7b",
         "preview_revision": 1,
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+        "row_version": 1,
         "visibility_scope": "private",
         "visual_recipe": {
           "aspect_ratio": "4:5",
@@ -43,25 +60,7 @@
           "visual_catalog_version": "piece.visual_catalog.v1",
           "visual_recipe_version": "piece.visual_recipe.v1"
         },
-        "content_payload": {
-          "body_blocks": [
-            "僕は隣人から収穫祭の準備を頼まれなかった。",
-            "僕は農作業が好きだった。"
-          ],
-          "format_type": "short_essay",
-          "language": "ja",
-          "meaning_contract_version": "piece.content_meaning.v1",
-          "safety_contract_version": "piece.public_safety_transformation.v1",
-          "schema_version": "piece.content_payload.v1",
-          "title": null
-        },
-        "piece_text_hash": "53c57aa2fd83fdee45ae6f31e4851e4dacc9e1c5d0415f8beabb93d29d008190",
-        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
-        "expires_at": "2099-01-01T00:10:00+00:00",
-        "preview_id": "67c607b6-bf71-b107-71ca-37ba5c24f653",
-        "eligible_formats": [
-          "short_essay"
-        ],
+        "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
         "api_contract_version": "piece.api.v2",
         "piece_contract_version": "piece.record.v2",
         "content_status": "ready",
@@ -89,27 +88,19 @@
         }
       },
       "save": {
-        "piece_id": "67c607b6-bf71-b107-71ca-37ba5c24f653",
-        "saved_at": "2026-11-11T19:04:35.434+09:00",
-        "row_version": 2,
-        "consumption_id": "ae54b3f5-1d40-4ed2-b31b-8945c3973f88",
+        "consumption_id": "f4f683a5-bc90-404e-92db-f337c9594dbc",
+        "idempotency_replayed": false,
         "lifecycle_status": "saved",
-        "visibility_scope": "private",
-        "idempotency_replayed": false
+        "piece_id": "c256b793-e506-15f6-5838-c2c1e63d1a7b",
+        "row_version": 2,
+        "saved_at": "2026-11-13T10:41:14.456+09:00",
+        "visibility_scope": "private"
       },
       "detail": {
         "api_contract_version": "piece.api.v2",
-        "piece_contract_version": "piece.record.v2",
-        "export_contract_version": "piece.export_contract.v1",
-        "render_interface_version": "piece.render_interface.v1",
-        "render_reproducibility_version": "piece.render_reproducibility.v1",
-        "format_type": "short_essay",
-        "piece_text": "僕は隣人から収穫祭の準備を頼まれなかった。\n\n僕は農作業が好きだった。",
-        "piece_text_hash": "53c57aa2fd83fdee45ae6f31e4851e4dacc9e1c5d0415f8beabb93d29d008190",
         "content_payload": {
           "body_blocks": [
-            "僕は隣人から収穫祭の準備を頼まれなかった。",
-            "僕は農作業が好きだった。"
+            "私は、仕事を進めるとき、すぐに答えを出すことよりも、わからないことを確かめる時間を大切にしたい。急いで返事をすると、自分が本当は何に迷っていたのかを置き去りにしてしまう気がする。私が選びたいのは、静かな場所で本を読む時間だ。私は読書が好きだった。まだ、参加する日は決めていない。"
           ],
           "format_type": "short_essay",
           "language": "ja",
@@ -118,7 +109,22 @@
           "schema_version": "piece.content_payload.v1",
           "title": null
         },
-        "content_payload_hash": "4cc61687b056721f165366f7a7104c9d9c5869c7884e3007cf720d0d2dcbaa5b",
+        "content_payload_hash": "3c82f55a87bee8244ac3b30b39ec1ed4a9c5c00fd0b2dfe11594dfaa9ea06709",
+        "content_status": "ready",
+        "export_contract_version": "piece.export_contract.v1",
+        "format_type": "short_essay",
+        "lifecycle_status": "saved",
+        "piece_contract_version": "piece.record.v2",
+        "piece_id": "c256b793-e506-15f6-5838-c2c1e63d1a7b",
+        "piece_text": "私は、仕事を進めるとき、すぐに答えを出すことよりも、わからないことを確かめる時間を大切にしたい。急いで返事をすると、自分が本当は何に迷っていたのかを置き去りにしてしまう気がする。私が選びたいのは、静かな場所で本を読む時間だ。私は読書が好きだった。まだ、参加する日は決めていない。",
+        "piece_text_hash": "f5984e80c41eab85b49281fce4d44da614184d4796e206b263bf3e2b9c090461",
+        "public_id": "piece:c256b793-e506-15f6-5838-c2c1e63d1a7b",
+        "render_interface_version": "piece.render_interface.v1",
+        "render_reproducibility_version": "piece.render_reproducibility.v1",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+        "row_version": 2,
+        "saved_at": "2026-11-13T10:41:14.456+09:00",
+        "visibility_scope": "private",
         "visual_recipe": {
           "aspect_ratio": "4:5",
           "branding": {
@@ -144,21 +150,13 @@
           "visual_catalog_version": "piece.visual_catalog.v1",
           "visual_recipe_version": "piece.visual_recipe.v1"
         },
-        "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
-        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
-        "piece_id": "67c607b6-bf71-b107-71ca-37ba5c24f653",
-        "public_id": "piece:67c607b6-bf71-b107-71ca-37ba5c24f653",
-        "lifecycle_status": "saved",
-        "visibility_scope": "private",
-        "row_version": 2,
-        "saved_at": "2026-11-11T19:04:35.434+09:00",
-        "content_status": "ready"
+        "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924"
       },
       "transport": {
-        "owner": "737138fc-671a-4bcf-adda-35c9811689ba",
+        "owner": "d545dfb0-04fb-4979-a9e7-e32e8487e5f5",
         "steps": [
           {
-            "path": "/emotion/piece/source-ref/76f4e33a-9c4a-4023-b528-4935952deb0b",
+            "path": "/emotion/piece/source-ref/99891e89-139c-45ce-9dde-023b4d3c4354",
             "method": "GET",
             "headers": {
               "X-Piece-Renderer": "piece.rn_bitmap_renderer.ios.v2",
@@ -167,11 +165,11 @@
             },
             "status": 200,
             "response": {
-              "source_input_id": "76f4e33a-9c4a-4023-b528-4935952deb0b",
+              "source_input_id": "99891e89-139c-45ce-9dde-023b4d3c4354",
               "source_input_version": "emlis.current_input_bundle.v1",
-              "source_input_bundle_commitment": "sha256:9ae393d8b6d14146983cc2e5d55d349fa9fedca56c714c7a53dd1837087c41e2",
+              "source_input_bundle_commitment": "sha256:8f0065308e9b84fedddffd43e5b6fc695cd13cc5fcc1e7f2c005d194863d1c99",
               "emlis_observation_stage": "normal_observation",
-              "emlis_observation_result_identity": "bf972b8a-5019-409d-b1fe-dab08435e462",
+              "emlis_observation_result_identity": "fad51051-ce0e-43b8-af82-f02847e12049",
               "question_need_decision_identity": null,
               "supplemental_answer_identity": null
             }
@@ -186,11 +184,11 @@
             },
             "body": {
               "source_ref": {
-                "source_input_id": "76f4e33a-9c4a-4023-b528-4935952deb0b",
+                "source_input_id": "99891e89-139c-45ce-9dde-023b4d3c4354",
                 "source_input_version": "emlis.current_input_bundle.v1",
-                "source_input_bundle_commitment": "sha256:9ae393d8b6d14146983cc2e5d55d349fa9fedca56c714c7a53dd1837087c41e2",
+                "source_input_bundle_commitment": "sha256:8f0065308e9b84fedddffd43e5b6fc695cd13cc5fcc1e7f2c005d194863d1c99",
                 "emlis_observation_stage": "normal_observation",
-                "emlis_observation_result_identity": "bf972b8a-5019-409d-b1fe-dab08435e462",
+                "emlis_observation_result_identity": "fad51051-ce0e-43b8-af82-f02847e12049",
                 "question_need_decision_identity": null,
                 "supplemental_answer_identity": null
               },
@@ -203,12 +201,29 @@
             },
             "status": 200,
             "response": {
-              "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
-              "piece_text": "僕は隣人から収穫祭の準備を頼まれなかった。\n\n僕は農作業が好きだった。",
-              "row_version": 1,
-              "content_payload_hash": "4cc61687b056721f165366f7a7104c9d9c5869c7884e3007cf720d0d2dcbaa5b",
+              "content_payload": {
+                "body_blocks": [
+                  "私は、仕事を進めるとき、すぐに答えを出すことよりも、わからないことを確かめる時間を大切にしたい。急いで返事をすると、自分が本当は何に迷っていたのかを置き去りにしてしまう気がする。私が選びたいのは、静かな場所で本を読む時間だ。私は読書が好きだった。まだ、参加する日は決めていない。"
+                ],
+                "format_type": "short_essay",
+                "language": "ja",
+                "meaning_contract_version": "piece.content_meaning.v1",
+                "safety_contract_version": "piece.public_safety_transformation.v1",
+                "schema_version": "piece.content_payload.v1",
+                "title": null
+              },
+              "content_payload_hash": "3c82f55a87bee8244ac3b30b39ec1ed4a9c5c00fd0b2dfe11594dfaa9ea06709",
+              "eligible_formats": [
+                "short_essay"
+              ],
+              "expires_at": "2099-01-01T00:10:00+00:00",
               "format_type": "short_essay",
+              "piece_text": "私は、仕事を進めるとき、すぐに答えを出すことよりも、わからないことを確かめる時間を大切にしたい。急いで返事をすると、自分が本当は何に迷っていたのかを置き去りにしてしまう気がする。私が選びたいのは、静かな場所で本を読む時間だ。私は読書が好きだった。まだ、参加する日は決めていない。",
+              "piece_text_hash": "f5984e80c41eab85b49281fce4d44da614184d4796e206b263bf3e2b9c090461",
+              "preview_id": "c256b793-e506-15f6-5838-c2c1e63d1a7b",
               "preview_revision": 1,
+              "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+              "row_version": 1,
               "visibility_scope": "private",
               "visual_recipe": {
                 "aspect_ratio": "4:5",
@@ -235,25 +250,7 @@
                 "visual_catalog_version": "piece.visual_catalog.v1",
                 "visual_recipe_version": "piece.visual_recipe.v1"
               },
-              "content_payload": {
-                "body_blocks": [
-                  "僕は隣人から収穫祭の準備を頼まれなかった。",
-                  "僕は農作業が好きだった。"
-                ],
-                "format_type": "short_essay",
-                "language": "ja",
-                "meaning_contract_version": "piece.content_meaning.v1",
-                "safety_contract_version": "piece.public_safety_transformation.v1",
-                "schema_version": "piece.content_payload.v1",
-                "title": null
-              },
-              "piece_text_hash": "53c57aa2fd83fdee45ae6f31e4851e4dacc9e1c5d0415f8beabb93d29d008190",
-              "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
-              "expires_at": "2099-01-01T00:10:00+00:00",
-              "preview_id": "67c607b6-bf71-b107-71ca-37ba5c24f653",
-              "eligible_formats": [
-                "short_essay"
-              ],
+              "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
               "api_contract_version": "piece.api.v2",
               "piece_contract_version": "piece.record.v2",
               "content_status": "ready",
@@ -291,26 +288,26 @@
             },
             "generatedIdempotencyHeader": true,
             "body": {
-              "preview_id": "67c607b6-bf71-b107-71ca-37ba5c24f653",
+              "preview_id": "c256b793-e506-15f6-5838-c2c1e63d1a7b",
               "expected_preview_revision": 1,
-              "piece_text_hash": "53c57aa2fd83fdee45ae6f31e4851e4dacc9e1c5d0415f8beabb93d29d008190",
-              "content_payload_hash": "4cc61687b056721f165366f7a7104c9d9c5869c7884e3007cf720d0d2dcbaa5b",
+              "piece_text_hash": "f5984e80c41eab85b49281fce4d44da614184d4796e206b263bf3e2b9c090461",
+              "content_payload_hash": "3c82f55a87bee8244ac3b30b39ec1ed4a9c5c00fd0b2dfe11594dfaa9ea06709",
               "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
               "visibility_scope": "private"
             },
             "status": 200,
             "response": {
-              "piece_id": "67c607b6-bf71-b107-71ca-37ba5c24f653",
-              "saved_at": "2026-11-11T19:04:35.434+09:00",
-              "row_version": 2,
-              "consumption_id": "ae54b3f5-1d40-4ed2-b31b-8945c3973f88",
+              "consumption_id": "f4f683a5-bc90-404e-92db-f337c9594dbc",
+              "idempotency_replayed": false,
               "lifecycle_status": "saved",
-              "visibility_scope": "private",
-              "idempotency_replayed": false
+              "piece_id": "c256b793-e506-15f6-5838-c2c1e63d1a7b",
+              "row_version": 2,
+              "saved_at": "2026-11-13T10:41:14.456+09:00",
+              "visibility_scope": "private"
             }
           },
           {
-            "path": "/emotion/piece/67c607b6-bf71-b107-71ca-37ba5c24f653",
+            "path": "/emotion/piece/c256b793-e506-15f6-5838-c2c1e63d1a7b",
             "method": "GET",
             "headers": {
               "Cache-Control": "no-store",
@@ -319,17 +316,9 @@
             "status": 200,
             "response": {
               "api_contract_version": "piece.api.v2",
-              "piece_contract_version": "piece.record.v2",
-              "export_contract_version": "piece.export_contract.v1",
-              "render_interface_version": "piece.render_interface.v1",
-              "render_reproducibility_version": "piece.render_reproducibility.v1",
-              "format_type": "short_essay",
-              "piece_text": "僕は隣人から収穫祭の準備を頼まれなかった。\n\n僕は農作業が好きだった。",
-              "piece_text_hash": "53c57aa2fd83fdee45ae6f31e4851e4dacc9e1c5d0415f8beabb93d29d008190",
               "content_payload": {
                 "body_blocks": [
-                  "僕は隣人から収穫祭の準備を頼まれなかった。",
-                  "僕は農作業が好きだった。"
+                  "私は、仕事を進めるとき、すぐに答えを出すことよりも、わからないことを確かめる時間を大切にしたい。急いで返事をすると、自分が本当は何に迷っていたのかを置き去りにしてしまう気がする。私が選びたいのは、静かな場所で本を読む時間だ。私は読書が好きだった。まだ、参加する日は決めていない。"
                 ],
                 "format_type": "short_essay",
                 "language": "ja",
@@ -338,7 +327,22 @@
                 "schema_version": "piece.content_payload.v1",
                 "title": null
               },
-              "content_payload_hash": "4cc61687b056721f165366f7a7104c9d9c5869c7884e3007cf720d0d2dcbaa5b",
+              "content_payload_hash": "3c82f55a87bee8244ac3b30b39ec1ed4a9c5c00fd0b2dfe11594dfaa9ea06709",
+              "content_status": "ready",
+              "export_contract_version": "piece.export_contract.v1",
+              "format_type": "short_essay",
+              "lifecycle_status": "saved",
+              "piece_contract_version": "piece.record.v2",
+              "piece_id": "c256b793-e506-15f6-5838-c2c1e63d1a7b",
+              "piece_text": "私は、仕事を進めるとき、すぐに答えを出すことよりも、わからないことを確かめる時間を大切にしたい。急いで返事をすると、自分が本当は何に迷っていたのかを置き去りにしてしまう気がする。私が選びたいのは、静かな場所で本を読む時間だ。私は読書が好きだった。まだ、参加する日は決めていない。",
+              "piece_text_hash": "f5984e80c41eab85b49281fce4d44da614184d4796e206b263bf3e2b9c090461",
+              "public_id": "piece:c256b793-e506-15f6-5838-c2c1e63d1a7b",
+              "render_interface_version": "piece.render_interface.v1",
+              "render_reproducibility_version": "piece.render_reproducibility.v1",
+              "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+              "row_version": 2,
+              "saved_at": "2026-11-13T10:41:14.456+09:00",
+              "visibility_scope": "private",
               "visual_recipe": {
                 "aspect_ratio": "4:5",
                 "branding": {
@@ -364,19 +368,11 @@
                 "visual_catalog_version": "piece.visual_catalog.v1",
                 "visual_recipe_version": "piece.visual_recipe.v1"
               },
-              "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
-              "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
-              "piece_id": "67c607b6-bf71-b107-71ca-37ba5c24f653",
-              "public_id": "piece:67c607b6-bf71-b107-71ca-37ba5c24f653",
-              "lifecycle_status": "saved",
-              "visibility_scope": "private",
-              "row_version": 2,
-              "saved_at": "2026-11-11T19:04:35.434+09:00",
-              "content_status": "ready"
+              "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924"
             }
           },
           {
-            "path": "/emotion/piece/67c607b6-bf71-b107-71ca-37ba5c24f653/export",
+            "path": "/emotion/piece/c256b793-e506-15f6-5838-c2c1e63d1a7b/export",
             "method": "GET",
             "headers": {
               "Cache-Control": "no-store",
@@ -386,17 +382,9 @@
             "status": 200,
             "response": {
               "api_contract_version": "piece.api.v2",
-              "piece_contract_version": "piece.record.v2",
-              "export_contract_version": "piece.export_contract.v1",
-              "render_interface_version": "piece.render_interface.v1",
-              "render_reproducibility_version": "piece.render_reproducibility.v1",
-              "format_type": "short_essay",
-              "piece_text": "僕は隣人から収穫祭の準備を頼まれなかった。\n\n僕は農作業が好きだった。",
-              "piece_text_hash": "53c57aa2fd83fdee45ae6f31e4851e4dacc9e1c5d0415f8beabb93d29d008190",
               "content_payload": {
                 "body_blocks": [
-                  "僕は隣人から収穫祭の準備を頼まれなかった。",
-                  "僕は農作業が好きだった。"
+                  "私は、仕事を進めるとき、すぐに答えを出すことよりも、わからないことを確かめる時間を大切にしたい。急いで返事をすると、自分が本当は何に迷っていたのかを置き去りにしてしまう気がする。私が選びたいのは、静かな場所で本を読む時間だ。私は読書が好きだった。まだ、参加する日は決めていない。"
                 ],
                 "format_type": "short_essay",
                 "language": "ja",
@@ -405,7 +393,22 @@
                 "schema_version": "piece.content_payload.v1",
                 "title": null
               },
-              "content_payload_hash": "4cc61687b056721f165366f7a7104c9d9c5869c7884e3007cf720d0d2dcbaa5b",
+              "content_payload_hash": "3c82f55a87bee8244ac3b30b39ec1ed4a9c5c00fd0b2dfe11594dfaa9ea06709",
+              "content_status": "ready",
+              "export_contract_version": "piece.export_contract.v1",
+              "format_type": "short_essay",
+              "lifecycle_status": "saved",
+              "piece_contract_version": "piece.record.v2",
+              "piece_id": "c256b793-e506-15f6-5838-c2c1e63d1a7b",
+              "piece_text": "私は、仕事を進めるとき、すぐに答えを出すことよりも、わからないことを確かめる時間を大切にしたい。急いで返事をすると、自分が本当は何に迷っていたのかを置き去りにしてしまう気がする。私が選びたいのは、静かな場所で本を読む時間だ。私は読書が好きだった。まだ、参加する日は決めていない。",
+              "piece_text_hash": "f5984e80c41eab85b49281fce4d44da614184d4796e206b263bf3e2b9c090461",
+              "public_id": "piece:c256b793-e506-15f6-5838-c2c1e63d1a7b",
+              "render_interface_version": "piece.render_interface.v1",
+              "render_reproducibility_version": "piece.render_reproducibility.v1",
+              "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+              "row_version": 2,
+              "saved_at": "2026-11-13T10:41:14.456+09:00",
+              "visibility_scope": "private",
               "visual_recipe": {
                 "aspect_ratio": "4:5",
                 "branding": {
@@ -431,38 +434,50 @@
                 "visual_catalog_version": "piece.visual_catalog.v1",
                 "visual_recipe_version": "piece.visual_recipe.v1"
               },
-              "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
-              "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
-              "piece_id": "67c607b6-bf71-b107-71ca-37ba5c24f653",
-              "public_id": "piece:67c607b6-bf71-b107-71ca-37ba5c24f653",
-              "lifecycle_status": "saved",
-              "visibility_scope": "private",
-              "row_version": 2,
-              "saved_at": "2026-11-11T19:04:35.434+09:00",
-              "content_status": "ready"
+              "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924"
             },
             "response_headers": {
               "cache-control": "no-store",
-              "content-length": "1861",
+              "content-length": "2490",
               "content-type": "application/json"
             }
           }
         ]
       },
       "projection": {
-        "source": "Configured3_Native6_20261111/Free/B53-051",
-        "api_source_ref": "8a0192b622c0ce76cde39062e9476f7c814e6e99",
-        "projected_record_sha256": "7dbb870f9ea676b91d3899003b32764ca37eb11e7875804850d54f080e63f185",
-        "original_record_sha256": "d320590a216f281080334e447b1c7ff47f83a67daf954b63d2dbda6d6094ddca",
-        "expiry": {
+        "source": "QualifiedSource_Piece344a_20261113/Free/QUALIFIED-PARAGRAPH",
+        "api_source_ref": "d86f1eb2b47cf57b47d16b1779aac61da73d2efa",
+        "native_research_source_ref": "363354523fda414b312a405163f93f0d95c7fd0c",
+        "original_resume_file_sha256": "a7e967ed2afed44a7c06553d660bbc8dcb69515e1f1cdf346036bc235b598eb6",
+        "original_public_preview_sha256": "43c18488576afed3ba6741eeca91a89b5d2b25187eaff4ed122a973e859f47be",
+        "projected_public_preview_sha256": "1003448eb81e1a2d3e0ca6a91e1e9bde47fe7f1f68643e4db72507c236d8a93a",
+        "saved_detail_sha256": "7d2aada2fe3c6f348a2961ed9d2c47f3a02479f4af4b4b56467a7efc7340fb93",
+        "canonical_artifact_sha256": "1dac0d81ac8308bfca200f28d7ab980edc913e421b199b8bdc230d65f23a24cd",
+        "preview_expiry": {
           "scope": "ONLY_TEST_PREVIEW_COPY_CHANGED_ORIGINAL_RECORD_IMMUTABLE",
-          "original_expires_at": "2026-11-11T19:14:35.399+09:00",
+          "original_expires_at": "2026-11-13T10:51:14.41+09:00",
           "projected_expires_at": "2099-01-01T00:10:00+00:00",
-          "reason": "Original preview has expired. Future time permits current native UI exercise; it is not a renewed server issuance or original HTTP recording."
+          "reason": "Recorded preview expires before the research native CI; only this fixture copy uses a future timestamp. No renewed server issuance or original HTTP recording is claimed."
         },
-        "quota": "Explicit fixture state 0 before / 1 after; actual Free quota/capability projection, no live quota read.",
-        "transport": "Closed local test transport, synthetic owner session, actual API wire projection; not original HTTP recording or live API proof.",
-        "save_request": "Current RN explicitly private and generated save key; old helper omitted visibility and used a fixed save key. Canonical private artifact is unchanged.",
+        "quota": {
+          "scope": "EXPLICIT_FREE_TEST_FIXTURE_STATE_NOT_LIVE_QUOTA_READ",
+          "fixture_saved_count_before": 0,
+          "fixture_saved_count_after": 1,
+          "recorded_quota_consumptions": 1,
+          "reason": "The existing API projection is supplied with explicit Free test state; isolated SQL recorded one consumption. No original HTTP quota response or live quota read is claimed."
+        },
+        "transport": {
+          "scope": "CLOSED_LOCAL_TEST_TRANSPORT_WITH_SYNTHETIC_OWNER_SESSION",
+          "reason": "Qualified source-ref, recorded RPC preview and actual saved detail are projected through the existing public wire shape. Five local API steps and synthetic sessions are not live Auth/API/DB proof."
+        },
+        "save_request": {
+          "scope": "CURRENT_RN_PRIVATE_SAVE_WITH_RUNTIME_GENERATED_IDEMPOTENCY_KEY",
+          "reason": "The current host adds explicit private visibility and generates its own save key; the recorded canonical artifact, saved receipt and owner detail remain unchanged."
+        },
+        "export_response": {
+          "scope": "RECORDED_OWNER_DETAIL_PROJECTED_AS_EXISTING_EXPORT_GET_RESPONSE",
+          "reason": "The source bundle records owner detail, not an independent HTTP export response. The same admitted saved artifact and no-store headers feed actual native job capture."
+        },
         "export_receipt_ready": false,
         "photos_or_share_called": false,
         "separate_premium_native6_used": false,
@@ -470,22 +485,39 @@
       }
     },
     {
-      "name": "normal_host_B53-007",
-      "source_case_id": "B53-007",
+      "name": "normal_host_QUALIFIED-TWO-FIELDS",
+      "source_case_id": "QUALIFIED-TWO-FIELDS",
       "tier": "free",
       "saved_input": {
-        "savedInputId": "b86ac02e-23fa-4580-8336-16b54aba9071",
-        "expectedUserId": "b3bc38c4-99c0-456c-b61b-47a3f33b3131",
-        "idempotencyKey": "refined-pipeline-preview",
-        "supplementalAnswerIdentity": "b37e861c-fa80-41dc-9f30-6f76119f912e"
+        "savedInputId": "fbccd0f4-855e-4be0-9a89-203ea0566db7",
+        "expectedUserId": "e9ed9c9f-337f-47c9-9f11-51c3344ab243",
+        "idempotencyKey": "ar04-preview"
       },
       "preview": {
-        "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
-        "piece_text": "誘われたのに、嬉しくなかった。\n\n私は司書に資料の確認を頼んだ。\n\n今は、私は悲しい。",
-        "row_version": 1,
-        "content_payload_hash": "38215fe5f0f3f9b8e7df3cfd81233892f138c990ccc1efa6eb38247c31ccdb6e",
+        "content_payload": {
+          "body_blocks": [
+            "おれが選びたいのは、同僚と展示を見る時間だ。その時間が好きだ。まだ、参加する日は決めていない。",
+            "僕にとって、一人で予定を考える時間が重要だ。僕は読書が好きではなかった。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "8bab96ec80fa74586e1633eca79223c0c7b5a6bb2f181db317057f2380911d71",
+        "eligible_formats": [
+          "short_essay"
+        ],
+        "expires_at": "2099-01-01T00:10:00+00:00",
         "format_type": "short_essay",
+        "piece_text": "おれが選びたいのは、同僚と展示を見る時間だ。その時間が好きだ。まだ、参加する日は決めていない。\n\n僕にとって、一人で予定を考える時間が重要だ。僕は読書が好きではなかった。",
+        "piece_text_hash": "00d87936b321e8acf3f115da3cd35851631d9021e2930e27c5b443ffd0d428f6",
+        "preview_id": "6173b8e4-70f2-a617-ce45-cf65fa7259f2",
         "preview_revision": 1,
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+        "row_version": 1,
         "visibility_scope": "private",
         "visual_recipe": {
           "aspect_ratio": "4:5",
@@ -512,29 +544,10 @@
           "visual_catalog_version": "piece.visual_catalog.v1",
           "visual_recipe_version": "piece.visual_recipe.v1"
         },
-        "content_payload": {
-          "body_blocks": [
-            "誘われたのに、嬉しくなかった。",
-            "私は司書に資料の確認を頼んだ。",
-            "今は、私は悲しい。"
-          ],
-          "format_type": "short_essay",
-          "language": "ja",
-          "meaning_contract_version": "piece.content_meaning.v1",
-          "safety_contract_version": "piece.public_safety_transformation.v1",
-          "schema_version": "piece.content_payload.v1",
-          "title": null
-        },
-        "piece_text_hash": "3809fad2817c9c7f0067238c0f1690f301e6489719858f6f4ad8e4b42f095c01",
-        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
-        "expires_at": "2099-01-01T00:10:00+00:00",
-        "preview_id": "3a34abdc-26c2-323d-aa5d-15051d4bcaf3",
-        "eligible_formats": [
-          "short_essay"
-        ],
+        "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
         "api_contract_version": "piece.api.v2",
         "piece_contract_version": "piece.record.v2",
-        "content_status": "ready",
+        "content_status": "adjusted",
         "quota": {
           "contract_version": "piece.quota_consumption.v1",
           "subscription_tier": "free",
@@ -559,28 +572,20 @@
         }
       },
       "save": {
-        "piece_id": "3a34abdc-26c2-323d-aa5d-15051d4bcaf3",
-        "saved_at": "2026-11-11T19:12:06.21+09:00",
-        "row_version": 2,
-        "consumption_id": "35eafe1e-0bf4-4f93-a8ab-4de90ff77fc6",
+        "consumption_id": "68c084b3-d4b4-4514-a0c1-f662ee887ede",
+        "idempotency_replayed": false,
         "lifecycle_status": "saved",
-        "visibility_scope": "private",
-        "idempotency_replayed": false
+        "piece_id": "6173b8e4-70f2-a617-ce45-cf65fa7259f2",
+        "row_version": 2,
+        "saved_at": "2026-11-13T10:41:14.595+09:00",
+        "visibility_scope": "private"
       },
       "detail": {
         "api_contract_version": "piece.api.v2",
-        "piece_contract_version": "piece.record.v2",
-        "export_contract_version": "piece.export_contract.v1",
-        "render_interface_version": "piece.render_interface.v1",
-        "render_reproducibility_version": "piece.render_reproducibility.v1",
-        "format_type": "short_essay",
-        "piece_text": "誘われたのに、嬉しくなかった。\n\n私は司書に資料の確認を頼んだ。\n\n今は、私は悲しい。",
-        "piece_text_hash": "3809fad2817c9c7f0067238c0f1690f301e6489719858f6f4ad8e4b42f095c01",
         "content_payload": {
           "body_blocks": [
-            "誘われたのに、嬉しくなかった。",
-            "私は司書に資料の確認を頼んだ。",
-            "今は、私は悲しい。"
+            "おれが選びたいのは、同僚と展示を見る時間だ。その時間が好きだ。まだ、参加する日は決めていない。",
+            "僕にとって、一人で予定を考える時間が重要だ。僕は読書が好きではなかった。"
           ],
           "format_type": "short_essay",
           "language": "ja",
@@ -589,7 +594,22 @@
           "schema_version": "piece.content_payload.v1",
           "title": null
         },
-        "content_payload_hash": "38215fe5f0f3f9b8e7df3cfd81233892f138c990ccc1efa6eb38247c31ccdb6e",
+        "content_payload_hash": "8bab96ec80fa74586e1633eca79223c0c7b5a6bb2f181db317057f2380911d71",
+        "content_status": "adjusted",
+        "export_contract_version": "piece.export_contract.v1",
+        "format_type": "short_essay",
+        "lifecycle_status": "saved",
+        "piece_contract_version": "piece.record.v2",
+        "piece_id": "6173b8e4-70f2-a617-ce45-cf65fa7259f2",
+        "piece_text": "おれが選びたいのは、同僚と展示を見る時間だ。その時間が好きだ。まだ、参加する日は決めていない。\n\n僕にとって、一人で予定を考える時間が重要だ。僕は読書が好きではなかった。",
+        "piece_text_hash": "00d87936b321e8acf3f115da3cd35851631d9021e2930e27c5b443ffd0d428f6",
+        "public_id": "piece:6173b8e4-70f2-a617-ce45-cf65fa7259f2",
+        "render_interface_version": "piece.render_interface.v1",
+        "render_reproducibility_version": "piece.render_reproducibility.v1",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+        "row_version": 2,
+        "saved_at": "2026-11-13T10:41:14.595+09:00",
+        "visibility_scope": "private",
         "visual_recipe": {
           "aspect_ratio": "4:5",
           "branding": {
@@ -615,21 +635,13 @@
           "visual_catalog_version": "piece.visual_catalog.v1",
           "visual_recipe_version": "piece.visual_recipe.v1"
         },
-        "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
-        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
-        "piece_id": "3a34abdc-26c2-323d-aa5d-15051d4bcaf3",
-        "public_id": "piece:3a34abdc-26c2-323d-aa5d-15051d4bcaf3",
-        "lifecycle_status": "saved",
-        "visibility_scope": "private",
-        "row_version": 2,
-        "saved_at": "2026-11-11T19:12:06.21+09:00",
-        "content_status": "ready"
+        "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924"
       },
       "transport": {
-        "owner": "b3bc38c4-99c0-456c-b61b-47a3f33b3131",
+        "owner": "e9ed9c9f-337f-47c9-9f11-51c3344ab243",
         "steps": [
           {
-            "path": "/emotion/piece/source-ref/b86ac02e-23fa-4580-8336-16b54aba9071?supplemental_answer_identity=b37e861c-fa80-41dc-9f30-6f76119f912e",
+            "path": "/emotion/piece/source-ref/fbccd0f4-855e-4be0-9a89-203ea0566db7",
             "method": "GET",
             "headers": {
               "X-Piece-Renderer": "piece.rn_bitmap_renderer.ios.v2",
@@ -638,13 +650,13 @@
             },
             "status": 200,
             "response": {
-              "source_input_id": "b86ac02e-23fa-4580-8336-16b54aba9071",
+              "source_input_id": "fbccd0f4-855e-4be0-9a89-203ea0566db7",
               "source_input_version": "emlis.current_input_bundle.v1",
-              "source_input_bundle_commitment": "sha256:5f7b855a8cad88f24b50d65f893273e606aaa1df066b32d1aacc91915f7d9c66",
-              "emlis_observation_stage": "refined_observation",
-              "emlis_observation_result_identity": "e48e1f94-0e99-4828-9d14-64a9a39e5181",
-              "question_need_decision_identity": "e0093568-63cc-4692-a767-8e7d7445f3ce",
-              "supplemental_answer_identity": "b37e861c-fa80-41dc-9f30-6f76119f912e"
+              "source_input_bundle_commitment": "sha256:ffdac5e43de5010e4bf8ded1e8d51230b184c7e788a3c916e611ead08311aabb",
+              "emlis_observation_stage": "normal_observation",
+              "emlis_observation_result_identity": "b09f43ff-973d-47c3-bb5c-b62f08c6c7be",
+              "question_need_decision_identity": null,
+              "supplemental_answer_identity": null
             }
           },
           {
@@ -653,17 +665,17 @@
             "headers": {
               "X-Piece-Renderer": "piece.rn_bitmap_renderer.ios.v2",
               "X-Piece-Palette": "3",
-              "Idempotency-Key": "refined-pipeline-preview"
+              "Idempotency-Key": "ar04-preview"
             },
             "body": {
               "source_ref": {
-                "source_input_id": "b86ac02e-23fa-4580-8336-16b54aba9071",
+                "source_input_id": "fbccd0f4-855e-4be0-9a89-203ea0566db7",
                 "source_input_version": "emlis.current_input_bundle.v1",
-                "source_input_bundle_commitment": "sha256:5f7b855a8cad88f24b50d65f893273e606aaa1df066b32d1aacc91915f7d9c66",
-                "emlis_observation_stage": "refined_observation",
-                "emlis_observation_result_identity": "e48e1f94-0e99-4828-9d14-64a9a39e5181",
-                "question_need_decision_identity": "e0093568-63cc-4692-a767-8e7d7445f3ce",
-                "supplemental_answer_identity": "b37e861c-fa80-41dc-9f30-6f76119f912e"
+                "source_input_bundle_commitment": "sha256:ffdac5e43de5010e4bf8ded1e8d51230b184c7e788a3c916e611ead08311aabb",
+                "emlis_observation_stage": "normal_observation",
+                "emlis_observation_result_identity": "b09f43ff-973d-47c3-bb5c-b62f08c6c7be",
+                "question_need_decision_identity": null,
+                "supplemental_answer_identity": null
               },
               "requested_format": null,
               "visual_selection": {
@@ -674,12 +686,30 @@
             },
             "status": 200,
             "response": {
-              "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
-              "piece_text": "誘われたのに、嬉しくなかった。\n\n私は司書に資料の確認を頼んだ。\n\n今は、私は悲しい。",
-              "row_version": 1,
-              "content_payload_hash": "38215fe5f0f3f9b8e7df3cfd81233892f138c990ccc1efa6eb38247c31ccdb6e",
+              "content_payload": {
+                "body_blocks": [
+                  "おれが選びたいのは、同僚と展示を見る時間だ。その時間が好きだ。まだ、参加する日は決めていない。",
+                  "僕にとって、一人で予定を考える時間が重要だ。僕は読書が好きではなかった。"
+                ],
+                "format_type": "short_essay",
+                "language": "ja",
+                "meaning_contract_version": "piece.content_meaning.v1",
+                "safety_contract_version": "piece.public_safety_transformation.v1",
+                "schema_version": "piece.content_payload.v1",
+                "title": null
+              },
+              "content_payload_hash": "8bab96ec80fa74586e1633eca79223c0c7b5a6bb2f181db317057f2380911d71",
+              "eligible_formats": [
+                "short_essay"
+              ],
+              "expires_at": "2099-01-01T00:10:00+00:00",
               "format_type": "short_essay",
+              "piece_text": "おれが選びたいのは、同僚と展示を見る時間だ。その時間が好きだ。まだ、参加する日は決めていない。\n\n僕にとって、一人で予定を考える時間が重要だ。僕は読書が好きではなかった。",
+              "piece_text_hash": "00d87936b321e8acf3f115da3cd35851631d9021e2930e27c5b443ffd0d428f6",
+              "preview_id": "6173b8e4-70f2-a617-ce45-cf65fa7259f2",
               "preview_revision": 1,
+              "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+              "row_version": 1,
               "visibility_scope": "private",
               "visual_recipe": {
                 "aspect_ratio": "4:5",
@@ -706,29 +736,10 @@
                 "visual_catalog_version": "piece.visual_catalog.v1",
                 "visual_recipe_version": "piece.visual_recipe.v1"
               },
-              "content_payload": {
-                "body_blocks": [
-                  "誘われたのに、嬉しくなかった。",
-                  "私は司書に資料の確認を頼んだ。",
-                  "今は、私は悲しい。"
-                ],
-                "format_type": "short_essay",
-                "language": "ja",
-                "meaning_contract_version": "piece.content_meaning.v1",
-                "safety_contract_version": "piece.public_safety_transformation.v1",
-                "schema_version": "piece.content_payload.v1",
-                "title": null
-              },
-              "piece_text_hash": "3809fad2817c9c7f0067238c0f1690f301e6489719858f6f4ad8e4b42f095c01",
-              "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
-              "expires_at": "2099-01-01T00:10:00+00:00",
-              "preview_id": "3a34abdc-26c2-323d-aa5d-15051d4bcaf3",
-              "eligible_formats": [
-                "short_essay"
-              ],
+              "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
               "api_contract_version": "piece.api.v2",
               "piece_contract_version": "piece.record.v2",
-              "content_status": "ready",
+              "content_status": "adjusted",
               "quota": {
                 "contract_version": "piece.quota_consumption.v1",
                 "subscription_tier": "free",
@@ -763,26 +774,26 @@
             },
             "generatedIdempotencyHeader": true,
             "body": {
-              "preview_id": "3a34abdc-26c2-323d-aa5d-15051d4bcaf3",
+              "preview_id": "6173b8e4-70f2-a617-ce45-cf65fa7259f2",
               "expected_preview_revision": 1,
-              "piece_text_hash": "3809fad2817c9c7f0067238c0f1690f301e6489719858f6f4ad8e4b42f095c01",
-              "content_payload_hash": "38215fe5f0f3f9b8e7df3cfd81233892f138c990ccc1efa6eb38247c31ccdb6e",
+              "piece_text_hash": "00d87936b321e8acf3f115da3cd35851631d9021e2930e27c5b443ffd0d428f6",
+              "content_payload_hash": "8bab96ec80fa74586e1633eca79223c0c7b5a6bb2f181db317057f2380911d71",
               "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
               "visibility_scope": "private"
             },
             "status": 200,
             "response": {
-              "piece_id": "3a34abdc-26c2-323d-aa5d-15051d4bcaf3",
-              "saved_at": "2026-11-11T19:12:06.21+09:00",
-              "row_version": 2,
-              "consumption_id": "35eafe1e-0bf4-4f93-a8ab-4de90ff77fc6",
+              "consumption_id": "68c084b3-d4b4-4514-a0c1-f662ee887ede",
+              "idempotency_replayed": false,
               "lifecycle_status": "saved",
-              "visibility_scope": "private",
-              "idempotency_replayed": false
+              "piece_id": "6173b8e4-70f2-a617-ce45-cf65fa7259f2",
+              "row_version": 2,
+              "saved_at": "2026-11-13T10:41:14.595+09:00",
+              "visibility_scope": "private"
             }
           },
           {
-            "path": "/emotion/piece/3a34abdc-26c2-323d-aa5d-15051d4bcaf3",
+            "path": "/emotion/piece/6173b8e4-70f2-a617-ce45-cf65fa7259f2",
             "method": "GET",
             "headers": {
               "Cache-Control": "no-store",
@@ -791,18 +802,10 @@
             "status": 200,
             "response": {
               "api_contract_version": "piece.api.v2",
-              "piece_contract_version": "piece.record.v2",
-              "export_contract_version": "piece.export_contract.v1",
-              "render_interface_version": "piece.render_interface.v1",
-              "render_reproducibility_version": "piece.render_reproducibility.v1",
-              "format_type": "short_essay",
-              "piece_text": "誘われたのに、嬉しくなかった。\n\n私は司書に資料の確認を頼んだ。\n\n今は、私は悲しい。",
-              "piece_text_hash": "3809fad2817c9c7f0067238c0f1690f301e6489719858f6f4ad8e4b42f095c01",
               "content_payload": {
                 "body_blocks": [
-                  "誘われたのに、嬉しくなかった。",
-                  "私は司書に資料の確認を頼んだ。",
-                  "今は、私は悲しい。"
+                  "おれが選びたいのは、同僚と展示を見る時間だ。その時間が好きだ。まだ、参加する日は決めていない。",
+                  "僕にとって、一人で予定を考える時間が重要だ。僕は読書が好きではなかった。"
                 ],
                 "format_type": "short_essay",
                 "language": "ja",
@@ -811,7 +814,22 @@
                 "schema_version": "piece.content_payload.v1",
                 "title": null
               },
-              "content_payload_hash": "38215fe5f0f3f9b8e7df3cfd81233892f138c990ccc1efa6eb38247c31ccdb6e",
+              "content_payload_hash": "8bab96ec80fa74586e1633eca79223c0c7b5a6bb2f181db317057f2380911d71",
+              "content_status": "adjusted",
+              "export_contract_version": "piece.export_contract.v1",
+              "format_type": "short_essay",
+              "lifecycle_status": "saved",
+              "piece_contract_version": "piece.record.v2",
+              "piece_id": "6173b8e4-70f2-a617-ce45-cf65fa7259f2",
+              "piece_text": "おれが選びたいのは、同僚と展示を見る時間だ。その時間が好きだ。まだ、参加する日は決めていない。\n\n僕にとって、一人で予定を考える時間が重要だ。僕は読書が好きではなかった。",
+              "piece_text_hash": "00d87936b321e8acf3f115da3cd35851631d9021e2930e27c5b443ffd0d428f6",
+              "public_id": "piece:6173b8e4-70f2-a617-ce45-cf65fa7259f2",
+              "render_interface_version": "piece.render_interface.v1",
+              "render_reproducibility_version": "piece.render_reproducibility.v1",
+              "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+              "row_version": 2,
+              "saved_at": "2026-11-13T10:41:14.595+09:00",
+              "visibility_scope": "private",
               "visual_recipe": {
                 "aspect_ratio": "4:5",
                 "branding": {
@@ -837,19 +855,11 @@
                 "visual_catalog_version": "piece.visual_catalog.v1",
                 "visual_recipe_version": "piece.visual_recipe.v1"
               },
-              "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
-              "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
-              "piece_id": "3a34abdc-26c2-323d-aa5d-15051d4bcaf3",
-              "public_id": "piece:3a34abdc-26c2-323d-aa5d-15051d4bcaf3",
-              "lifecycle_status": "saved",
-              "visibility_scope": "private",
-              "row_version": 2,
-              "saved_at": "2026-11-11T19:12:06.21+09:00",
-              "content_status": "ready"
+              "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924"
             }
           },
           {
-            "path": "/emotion/piece/3a34abdc-26c2-323d-aa5d-15051d4bcaf3/export",
+            "path": "/emotion/piece/6173b8e4-70f2-a617-ce45-cf65fa7259f2/export",
             "method": "GET",
             "headers": {
               "Cache-Control": "no-store",
@@ -859,18 +869,10 @@
             "status": 200,
             "response": {
               "api_contract_version": "piece.api.v2",
-              "piece_contract_version": "piece.record.v2",
-              "export_contract_version": "piece.export_contract.v1",
-              "render_interface_version": "piece.render_interface.v1",
-              "render_reproducibility_version": "piece.render_reproducibility.v1",
-              "format_type": "short_essay",
-              "piece_text": "誘われたのに、嬉しくなかった。\n\n私は司書に資料の確認を頼んだ。\n\n今は、私は悲しい。",
-              "piece_text_hash": "3809fad2817c9c7f0067238c0f1690f301e6489719858f6f4ad8e4b42f095c01",
               "content_payload": {
                 "body_blocks": [
-                  "誘われたのに、嬉しくなかった。",
-                  "私は司書に資料の確認を頼んだ。",
-                  "今は、私は悲しい。"
+                  "おれが選びたいのは、同僚と展示を見る時間だ。その時間が好きだ。まだ、参加する日は決めていない。",
+                  "僕にとって、一人で予定を考える時間が重要だ。僕は読書が好きではなかった。"
                 ],
                 "format_type": "short_essay",
                 "language": "ja",
@@ -879,7 +881,325 @@
                 "schema_version": "piece.content_payload.v1",
                 "title": null
               },
-              "content_payload_hash": "38215fe5f0f3f9b8e7df3cfd81233892f138c990ccc1efa6eb38247c31ccdb6e",
+              "content_payload_hash": "8bab96ec80fa74586e1633eca79223c0c7b5a6bb2f181db317057f2380911d71",
+              "content_status": "adjusted",
+              "export_contract_version": "piece.export_contract.v1",
+              "format_type": "short_essay",
+              "lifecycle_status": "saved",
+              "piece_contract_version": "piece.record.v2",
+              "piece_id": "6173b8e4-70f2-a617-ce45-cf65fa7259f2",
+              "piece_text": "おれが選びたいのは、同僚と展示を見る時間だ。その時間が好きだ。まだ、参加する日は決めていない。\n\n僕にとって、一人で予定を考える時間が重要だ。僕は読書が好きではなかった。",
+              "piece_text_hash": "00d87936b321e8acf3f115da3cd35851631d9021e2930e27c5b443ffd0d428f6",
+              "public_id": "piece:6173b8e4-70f2-a617-ce45-cf65fa7259f2",
+              "render_interface_version": "piece.render_interface.v1",
+              "render_reproducibility_version": "piece.render_reproducibility.v1",
+              "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+              "row_version": 2,
+              "saved_at": "2026-11-13T10:41:14.595+09:00",
+              "visibility_scope": "private",
+              "visual_recipe": {
+                "aspect_ratio": "4:5",
+                "branding": {
+                  "branding_mark_id": "cocolon_text_mark",
+                  "branding_mark_version": 1,
+                  "branding_mode": "required_small"
+                },
+                "font_style": {
+                  "font_style_id": "system_readable",
+                  "font_style_version": 1
+                },
+                "format_type": "short_essay",
+                "language": "ja",
+                "layout_policy_version": "piece.long_text_layout.v1",
+                "template": {
+                  "template_id": "essay_frame",
+                  "template_version": 1
+                },
+                "theme": {
+                  "theme_id": "soft_paper",
+                  "theme_version": 1
+                },
+                "visual_catalog_version": "piece.visual_catalog.v1",
+                "visual_recipe_version": "piece.visual_recipe.v1"
+              },
+              "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924"
+            },
+            "response_headers": {
+              "cache-control": "no-store",
+              "content-length": "2164",
+              "content-type": "application/json"
+            }
+          }
+        ]
+      },
+      "projection": {
+        "source": "QualifiedSource_Piece344a_20261113/Free/QUALIFIED-TWO-FIELDS",
+        "api_source_ref": "d86f1eb2b47cf57b47d16b1779aac61da73d2efa",
+        "native_research_source_ref": "363354523fda414b312a405163f93f0d95c7fd0c",
+        "original_resume_file_sha256": "68972d5f7d74c59be44c5110d890dcb86cc0f9b617240a9c3d4a000687307b79",
+        "original_public_preview_sha256": "cb817101552ed2d4fb2154b1986395c3519ef2985094df0350e6009d59404763",
+        "projected_public_preview_sha256": "77ebeab6045e0f112df57496ea26e784f5df317327e80f10d0358ea958b2aecb",
+        "saved_detail_sha256": "0f23aae2eb88ca062a13499b7c1d019ed662644fe8f646efed161a6b91f43dd5",
+        "canonical_artifact_sha256": "abe758400703f5d3e06903b362e38d5f6409f0155517edc7b455d99e984603a5",
+        "preview_expiry": {
+          "scope": "ONLY_TEST_PREVIEW_COPY_CHANGED_ORIGINAL_RECORD_IMMUTABLE",
+          "original_expires_at": "2026-11-13T10:51:14.57+09:00",
+          "projected_expires_at": "2099-01-01T00:10:00+00:00",
+          "reason": "Recorded preview expires before the research native CI; only this fixture copy uses a future timestamp. No renewed server issuance or original HTTP recording is claimed."
+        },
+        "quota": {
+          "scope": "EXPLICIT_FREE_TEST_FIXTURE_STATE_NOT_LIVE_QUOTA_READ",
+          "fixture_saved_count_before": 0,
+          "fixture_saved_count_after": 1,
+          "recorded_quota_consumptions": 1,
+          "reason": "The existing API projection is supplied with explicit Free test state; isolated SQL recorded one consumption. No original HTTP quota response or live quota read is claimed."
+        },
+        "transport": {
+          "scope": "CLOSED_LOCAL_TEST_TRANSPORT_WITH_SYNTHETIC_OWNER_SESSION",
+          "reason": "Qualified source-ref, recorded RPC preview and actual saved detail are projected through the existing public wire shape. Five local API steps and synthetic sessions are not live Auth/API/DB proof."
+        },
+        "save_request": {
+          "scope": "CURRENT_RN_PRIVATE_SAVE_WITH_RUNTIME_GENERATED_IDEMPOTENCY_KEY",
+          "reason": "The current host adds explicit private visibility and generates its own save key; the recorded canonical artifact, saved receipt and owner detail remain unchanged."
+        },
+        "export_response": {
+          "scope": "RECORDED_OWNER_DETAIL_PROJECTED_AS_EXISTING_EXPORT_GET_RESPONSE",
+          "reason": "The source bundle records owner detail, not an independent HTTP export response. The same admitted saved artifact and no-store headers feed actual native job capture."
+        },
+        "export_receipt_ready": false,
+        "photos_or_share_called": false,
+        "separate_premium_native6_used": false,
+        "model_generated_again": false
+      }
+    },
+    {
+      "name": "normal_host_QUALIFIED-REFINED",
+      "source_case_id": "QUALIFIED-REFINED",
+      "tier": "free",
+      "saved_input": {
+        "savedInputId": "8ce4e30b-8b2a-481d-a46d-14e79767c259",
+        "expectedUserId": "edde6a00-1e51-4bfe-85a9-b07bcc6dc850",
+        "idempotencyKey": "refined-pipeline-preview",
+        "supplementalAnswerIdentity": "6ab7f112-706c-4a48-b0cb-67dbfb59cc8b"
+      },
+      "preview": {
+        "content_payload": {
+          "body_blocks": [
+            "上司に褒められたのに、嬉しくなかった。",
+            "その時、私は少し寂しかった。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "fac5a6c08037751615d06e59c888689d35768898c8b153312081670eeffc38fe",
+        "eligible_formats": [
+          "short_essay"
+        ],
+        "expires_at": "2099-01-01T00:10:00+00:00",
+        "format_type": "short_essay",
+        "piece_text": "上司に褒められたのに、嬉しくなかった。\n\nその時、私は少し寂しかった。",
+        "piece_text_hash": "c0d7749aeff75cf3de3eb4d62ac77684ad299e3819c504ebab1e170406f79f63",
+        "preview_id": "2e5758ad-bf00-50f0-2a78-5135c2b9bba3",
+        "preview_revision": 1,
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+        "row_version": 1,
+        "visibility_scope": "private",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_small"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "soft_paper",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
+        "api_contract_version": "piece.api.v2",
+        "piece_contract_version": "piece.record.v2",
+        "content_status": "adjusted",
+        "quota": {
+          "contract_version": "piece.quota_consumption.v1",
+          "subscription_tier": "free",
+          "month_key": "2026-11",
+          "save_limit": 5,
+          "saved_count": 0,
+          "remaining_count": 5,
+          "can_save": true
+        },
+        "plan_capabilities": {
+          "format_selection": "fixed",
+          "theme_ids": [
+            "soft_paper",
+            "quiet_night"
+          ],
+          "aspect_ratios": [
+            "4:5"
+          ],
+          "branding_modes": [
+            "required_small"
+          ]
+        }
+      },
+      "save": {
+        "consumption_id": "bf5d5c76-1bc4-4a0c-ac22-4bd983cf59e7",
+        "idempotency_replayed": false,
+        "lifecycle_status": "saved",
+        "piece_id": "2e5758ad-bf00-50f0-2a78-5135c2b9bba3",
+        "row_version": 2,
+        "saved_at": "2026-11-13T10:41:14.772+09:00",
+        "visibility_scope": "private"
+      },
+      "detail": {
+        "api_contract_version": "piece.api.v2",
+        "content_payload": {
+          "body_blocks": [
+            "上司に褒められたのに、嬉しくなかった。",
+            "その時、私は少し寂しかった。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "fac5a6c08037751615d06e59c888689d35768898c8b153312081670eeffc38fe",
+        "content_status": "adjusted",
+        "export_contract_version": "piece.export_contract.v1",
+        "format_type": "short_essay",
+        "lifecycle_status": "saved",
+        "piece_contract_version": "piece.record.v2",
+        "piece_id": "2e5758ad-bf00-50f0-2a78-5135c2b9bba3",
+        "piece_text": "上司に褒められたのに、嬉しくなかった。\n\nその時、私は少し寂しかった。",
+        "piece_text_hash": "c0d7749aeff75cf3de3eb4d62ac77684ad299e3819c504ebab1e170406f79f63",
+        "public_id": "piece:2e5758ad-bf00-50f0-2a78-5135c2b9bba3",
+        "render_interface_version": "piece.render_interface.v1",
+        "render_reproducibility_version": "piece.render_reproducibility.v1",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+        "row_version": 2,
+        "saved_at": "2026-11-13T10:41:14.772+09:00",
+        "visibility_scope": "private",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_small"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "soft_paper",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924"
+      },
+      "transport": {
+        "owner": "edde6a00-1e51-4bfe-85a9-b07bcc6dc850",
+        "steps": [
+          {
+            "path": "/emotion/piece/source-ref/8ce4e30b-8b2a-481d-a46d-14e79767c259?supplemental_answer_identity=6ab7f112-706c-4a48-b0cb-67dbfb59cc8b",
+            "method": "GET",
+            "headers": {
+              "X-Piece-Renderer": "piece.rn_bitmap_renderer.ios.v2",
+              "X-Piece-Palette": "3",
+              "Cache-Control": "no-store"
+            },
+            "status": 200,
+            "response": {
+              "source_input_id": "8ce4e30b-8b2a-481d-a46d-14e79767c259",
+              "source_input_version": "emlis.current_input_bundle.v1",
+              "source_input_bundle_commitment": "sha256:955f785ce223a72ed2953277b3ac77a3783b5d5f5684f12888caf94f30ca79ee",
+              "emlis_observation_stage": "refined_observation",
+              "emlis_observation_result_identity": "d83c1ca6-5550-46e2-9efe-64ffad10fbda",
+              "question_need_decision_identity": "f6c6fa3e-0efa-4b1e-a835-394888eab4ec",
+              "supplemental_answer_identity": "6ab7f112-706c-4a48-b0cb-67dbfb59cc8b"
+            }
+          },
+          {
+            "path": "/emotion/piece/preview",
+            "method": "POST",
+            "headers": {
+              "X-Piece-Renderer": "piece.rn_bitmap_renderer.ios.v2",
+              "X-Piece-Palette": "3",
+              "Idempotency-Key": "refined-pipeline-preview"
+            },
+            "body": {
+              "source_ref": {
+                "source_input_id": "8ce4e30b-8b2a-481d-a46d-14e79767c259",
+                "source_input_version": "emlis.current_input_bundle.v1",
+                "source_input_bundle_commitment": "sha256:955f785ce223a72ed2953277b3ac77a3783b5d5f5684f12888caf94f30ca79ee",
+                "emlis_observation_stage": "refined_observation",
+                "emlis_observation_result_identity": "d83c1ca6-5550-46e2-9efe-64ffad10fbda",
+                "question_need_decision_identity": "f6c6fa3e-0efa-4b1e-a835-394888eab4ec",
+                "supplemental_answer_identity": "6ab7f112-706c-4a48-b0cb-67dbfb59cc8b"
+              },
+              "requested_format": null,
+              "visual_selection": {
+                "theme_id": null,
+                "aspect_ratio": null,
+                "branding_mode": null
+              }
+            },
+            "status": 200,
+            "response": {
+              "content_payload": {
+                "body_blocks": [
+                  "上司に褒められたのに、嬉しくなかった。",
+                  "その時、私は少し寂しかった。"
+                ],
+                "format_type": "short_essay",
+                "language": "ja",
+                "meaning_contract_version": "piece.content_meaning.v1",
+                "safety_contract_version": "piece.public_safety_transformation.v1",
+                "schema_version": "piece.content_payload.v1",
+                "title": null
+              },
+              "content_payload_hash": "fac5a6c08037751615d06e59c888689d35768898c8b153312081670eeffc38fe",
+              "eligible_formats": [
+                "short_essay"
+              ],
+              "expires_at": "2099-01-01T00:10:00+00:00",
+              "format_type": "short_essay",
+              "piece_text": "上司に褒められたのに、嬉しくなかった。\n\nその時、私は少し寂しかった。",
+              "piece_text_hash": "c0d7749aeff75cf3de3eb4d62ac77684ad299e3819c504ebab1e170406f79f63",
+              "preview_id": "2e5758ad-bf00-50f0-2a78-5135c2b9bba3",
+              "preview_revision": 1,
+              "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+              "row_version": 1,
+              "visibility_scope": "private",
               "visual_recipe": {
                 "aspect_ratio": "4:5",
                 "branding": {
@@ -906,37 +1226,235 @@
                 "visual_recipe_version": "piece.visual_recipe.v1"
               },
               "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
-              "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
-              "piece_id": "3a34abdc-26c2-323d-aa5d-15051d4bcaf3",
-              "public_id": "piece:3a34abdc-26c2-323d-aa5d-15051d4bcaf3",
+              "api_contract_version": "piece.api.v2",
+              "piece_contract_version": "piece.record.v2",
+              "content_status": "adjusted",
+              "quota": {
+                "contract_version": "piece.quota_consumption.v1",
+                "subscription_tier": "free",
+                "month_key": "2026-11",
+                "save_limit": 5,
+                "saved_count": 0,
+                "remaining_count": 5,
+                "can_save": true
+              },
+              "plan_capabilities": {
+                "format_selection": "fixed",
+                "theme_ids": [
+                  "soft_paper",
+                  "quiet_night"
+                ],
+                "aspect_ratios": [
+                  "4:5"
+                ],
+                "branding_modes": [
+                  "required_small"
+                ]
+              }
+            }
+          },
+          {
+            "path": "/emotion/piece/save",
+            "method": "POST",
+            "headers": {
+              "X-Piece-Renderer": "piece.rn_bitmap_renderer.ios.v2",
+              "X-Piece-Palette": "3",
+              "Cache-Control": "no-store"
+            },
+            "generatedIdempotencyHeader": true,
+            "body": {
+              "preview_id": "2e5758ad-bf00-50f0-2a78-5135c2b9bba3",
+              "expected_preview_revision": 1,
+              "piece_text_hash": "c0d7749aeff75cf3de3eb4d62ac77684ad299e3819c504ebab1e170406f79f63",
+              "content_payload_hash": "fac5a6c08037751615d06e59c888689d35768898c8b153312081670eeffc38fe",
+              "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
+              "visibility_scope": "private"
+            },
+            "status": 200,
+            "response": {
+              "consumption_id": "bf5d5c76-1bc4-4a0c-ac22-4bd983cf59e7",
+              "idempotency_replayed": false,
               "lifecycle_status": "saved",
-              "visibility_scope": "private",
+              "piece_id": "2e5758ad-bf00-50f0-2a78-5135c2b9bba3",
               "row_version": 2,
-              "saved_at": "2026-11-11T19:12:06.21+09:00",
-              "content_status": "ready"
+              "saved_at": "2026-11-13T10:41:14.772+09:00",
+              "visibility_scope": "private"
+            }
+          },
+          {
+            "path": "/emotion/piece/2e5758ad-bf00-50f0-2a78-5135c2b9bba3",
+            "method": "GET",
+            "headers": {
+              "Cache-Control": "no-store",
+              "X-Piece-Palette": "3"
+            },
+            "status": 200,
+            "response": {
+              "api_contract_version": "piece.api.v2",
+              "content_payload": {
+                "body_blocks": [
+                  "上司に褒められたのに、嬉しくなかった。",
+                  "その時、私は少し寂しかった。"
+                ],
+                "format_type": "short_essay",
+                "language": "ja",
+                "meaning_contract_version": "piece.content_meaning.v1",
+                "safety_contract_version": "piece.public_safety_transformation.v1",
+                "schema_version": "piece.content_payload.v1",
+                "title": null
+              },
+              "content_payload_hash": "fac5a6c08037751615d06e59c888689d35768898c8b153312081670eeffc38fe",
+              "content_status": "adjusted",
+              "export_contract_version": "piece.export_contract.v1",
+              "format_type": "short_essay",
+              "lifecycle_status": "saved",
+              "piece_contract_version": "piece.record.v2",
+              "piece_id": "2e5758ad-bf00-50f0-2a78-5135c2b9bba3",
+              "piece_text": "上司に褒められたのに、嬉しくなかった。\n\nその時、私は少し寂しかった。",
+              "piece_text_hash": "c0d7749aeff75cf3de3eb4d62ac77684ad299e3819c504ebab1e170406f79f63",
+              "public_id": "piece:2e5758ad-bf00-50f0-2a78-5135c2b9bba3",
+              "render_interface_version": "piece.render_interface.v1",
+              "render_reproducibility_version": "piece.render_reproducibility.v1",
+              "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+              "row_version": 2,
+              "saved_at": "2026-11-13T10:41:14.772+09:00",
+              "visibility_scope": "private",
+              "visual_recipe": {
+                "aspect_ratio": "4:5",
+                "branding": {
+                  "branding_mark_id": "cocolon_text_mark",
+                  "branding_mark_version": 1,
+                  "branding_mode": "required_small"
+                },
+                "font_style": {
+                  "font_style_id": "system_readable",
+                  "font_style_version": 1
+                },
+                "format_type": "short_essay",
+                "language": "ja",
+                "layout_policy_version": "piece.long_text_layout.v1",
+                "template": {
+                  "template_id": "essay_frame",
+                  "template_version": 1
+                },
+                "theme": {
+                  "theme_id": "soft_paper",
+                  "theme_version": 1
+                },
+                "visual_catalog_version": "piece.visual_catalog.v1",
+                "visual_recipe_version": "piece.visual_recipe.v1"
+              },
+              "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924"
+            }
+          },
+          {
+            "path": "/emotion/piece/2e5758ad-bf00-50f0-2a78-5135c2b9bba3/export",
+            "method": "GET",
+            "headers": {
+              "Cache-Control": "no-store",
+              "X-Piece-Palette": "3",
+              "X-Piece-Export-Receipt": "1"
+            },
+            "status": 200,
+            "response": {
+              "api_contract_version": "piece.api.v2",
+              "content_payload": {
+                "body_blocks": [
+                  "上司に褒められたのに、嬉しくなかった。",
+                  "その時、私は少し寂しかった。"
+                ],
+                "format_type": "short_essay",
+                "language": "ja",
+                "meaning_contract_version": "piece.content_meaning.v1",
+                "safety_contract_version": "piece.public_safety_transformation.v1",
+                "schema_version": "piece.content_payload.v1",
+                "title": null
+              },
+              "content_payload_hash": "fac5a6c08037751615d06e59c888689d35768898c8b153312081670eeffc38fe",
+              "content_status": "adjusted",
+              "export_contract_version": "piece.export_contract.v1",
+              "format_type": "short_essay",
+              "lifecycle_status": "saved",
+              "piece_contract_version": "piece.record.v2",
+              "piece_id": "2e5758ad-bf00-50f0-2a78-5135c2b9bba3",
+              "piece_text": "上司に褒められたのに、嬉しくなかった。\n\nその時、私は少し寂しかった。",
+              "piece_text_hash": "c0d7749aeff75cf3de3eb4d62ac77684ad299e3819c504ebab1e170406f79f63",
+              "public_id": "piece:2e5758ad-bf00-50f0-2a78-5135c2b9bba3",
+              "render_interface_version": "piece.render_interface.v1",
+              "render_reproducibility_version": "piece.render_reproducibility.v1",
+              "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+              "row_version": 2,
+              "saved_at": "2026-11-13T10:41:14.772+09:00",
+              "visibility_scope": "private",
+              "visual_recipe": {
+                "aspect_ratio": "4:5",
+                "branding": {
+                  "branding_mark_id": "cocolon_text_mark",
+                  "branding_mark_version": 1,
+                  "branding_mode": "required_small"
+                },
+                "font_style": {
+                  "font_style_id": "system_readable",
+                  "font_style_version": 1
+                },
+                "format_type": "short_essay",
+                "language": "ja",
+                "layout_policy_version": "piece.long_text_layout.v1",
+                "template": {
+                  "template_id": "essay_frame",
+                  "template_version": 1
+                },
+                "theme": {
+                  "theme_id": "soft_paper",
+                  "theme_version": 1
+                },
+                "visual_catalog_version": "piece.visual_catalog.v1",
+                "visual_recipe_version": "piece.visual_recipe.v1"
+              },
+              "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924"
             },
             "response_headers": {
               "cache-control": "no-store",
-              "content-length": "1903",
+              "content-length": "1864",
               "content-type": "application/json"
             }
           }
         ]
       },
       "projection": {
-        "source": "Configured3_Native6_20261111/Free/B53-007",
-        "api_source_ref": "8a0192b622c0ce76cde39062e9476f7c814e6e99",
-        "projected_record_sha256": "16471108a27cb73b9a930a73f9494a430df8927604ed942b1bc06bc279d59a1c",
-        "original_record_sha256": "3facba47183bc84200aa93f396fe43c2af66f66d7d10198cad413d15719a86f8",
-        "expiry": {
+        "source": "QualifiedSource_Piece344a_20261113/Free/QUALIFIED-REFINED",
+        "api_source_ref": "d86f1eb2b47cf57b47d16b1779aac61da73d2efa",
+        "native_research_source_ref": "363354523fda414b312a405163f93f0d95c7fd0c",
+        "original_resume_file_sha256": "e2559d8572ef1856cdf212501fb23ce09322a43a856f1d4981db860f44067277",
+        "original_public_preview_sha256": "af99205f3dcdacbc9a08919fe60b7f19f83f0579479fb6c55a4cb30edde2963f",
+        "projected_public_preview_sha256": "6b957f1c75c4ac599870b86df1dfb28df46cf0f612ee8ebc3838ae9e97383d9c",
+        "saved_detail_sha256": "1720a9d9ce38a9cf2168981a337a997f17d91f659fd7980a383767eff515eaad",
+        "canonical_artifact_sha256": "0ec616f772876fc5e31dc40f46d318b94fd6ea726763ff70c03d19e182b1f833",
+        "preview_expiry": {
           "scope": "ONLY_TEST_PREVIEW_COPY_CHANGED_ORIGINAL_RECORD_IMMUTABLE",
-          "original_expires_at": "2026-11-11T19:22:06.143+09:00",
+          "original_expires_at": "2026-11-13T10:51:14.708+09:00",
           "projected_expires_at": "2099-01-01T00:10:00+00:00",
-          "reason": "Original preview has expired. Future time permits current native UI exercise; it is not a renewed server issuance or original HTTP recording."
+          "reason": "Recorded preview expires before the research native CI; only this fixture copy uses a future timestamp. No renewed server issuance or original HTTP recording is claimed."
         },
-        "quota": "Explicit fixture state 0 before / 1 after; actual Free quota/capability projection, no live quota read.",
-        "transport": "Closed local test transport, synthetic owner session, actual API wire projection; not original HTTP recording or live API proof.",
-        "save_request": "Current RN explicitly private and generated save key; old helper omitted visibility and used a fixed save key. Canonical private artifact is unchanged.",
+        "quota": {
+          "scope": "EXPLICIT_FREE_TEST_FIXTURE_STATE_NOT_LIVE_QUOTA_READ",
+          "fixture_saved_count_before": 0,
+          "fixture_saved_count_after": 1,
+          "recorded_quota_consumptions": 1,
+          "reason": "The existing API projection is supplied with explicit Free test state; isolated SQL recorded one consumption. No original HTTP quota response or live quota read is claimed."
+        },
+        "transport": {
+          "scope": "CLOSED_LOCAL_TEST_TRANSPORT_WITH_SYNTHETIC_OWNER_SESSION",
+          "reason": "Qualified source-ref, recorded RPC preview and actual saved detail are projected through the existing public wire shape. Five local API steps and synthetic sessions are not live Auth/API/DB proof."
+        },
+        "save_request": {
+          "scope": "CURRENT_RN_PRIVATE_SAVE_WITH_RUNTIME_GENERATED_IDEMPOTENCY_KEY",
+          "reason": "The current host adds explicit private visibility and generates its own save key; the recorded canonical artifact, saved receipt and owner detail remain unchanged."
+        },
+        "export_response": {
+          "scope": "RECORDED_OWNER_DETAIL_PROJECTED_AS_EXISTING_EXPORT_GET_RESPONSE",
+          "reason": "The source bundle records owner detail, not an independent HTTP export response. The same admitted saved artifact and no-store headers feed actual native job capture."
+        },
         "export_receipt_ready": false,
         "photos_or_share_called": false,
         "separate_premium_native6_used": false,
