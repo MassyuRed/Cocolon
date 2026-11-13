@@ -1,3 +1,5 @@
+> **11/14・同じ本人の主語を省略する候補3箇所をsourceへ拘束：** API99dbdaabで生成材料とmodel opt-in S7を整合。原七項目／Prepared／SYSTEM・重み不変、旧TRUE材料との違いはeditorial_choices3箇所だけ。関連1,488件（新35）成功。旧実raw2の保存・再読維持と合成省略2の保存を確認したが、新実4B本文は未取得で、反復改善の証拠ではない。通常FALSEの生成messagesは同一、model S7のsource-proven省略受理範囲は広がる。新送付62,086byte・3fileで新2＋前後4対照＋2GET、復元込み600秒・一回・学習／再試行0を準備。前回の一回は消費済み、今回の送付・実行は確認待ち。通常selector OFF・STRUCTURE_MAP_DELTA_NONE。 [詳細§9.51](#piece-topic-editorial2-prepared-20261114)。
+
 ---
 doc_id: cocolon.cmee.auxiliary_asset_reuse.implementation_design.20261108
 title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修・商品接続 詳細設計"
@@ -3094,3 +3096,59 @@ Piece内の有限活用知識として「気づく／できる／考える」の
 [同じ検証資料](https://chatgpt.com/library?file_id=libfile_fde3_f-9bb7f6aceeec8191bafb13d6d3264cc1_2f7470f963808191aaebf050935e72de&account_id=personal)をversion4へ更新した。12,701,876byte／95member、SHA256 `81461434ffbaa5613f7dabc495fe88211738f1d470413a71a5d5ecb9965fa844`。前版76memberを元path／bytesで全保持し、修正後4受領、CI／検証・目視結果、native原ZIP、元PNG2と閲覧用縮小画像等の19memberを追加。native原ZIPのSHA256は `d38475f21ad40186b47b4ba5b5a8aebab0515ba44cccd5bae1d5b294075a0aea` で、GitHub artifact digestと一致する。
 
 STRUCTURE_MAP_DELTA_NONE。既存owner内の有限照合修復で、商品flow・component責任・active path・API／DB／RN・権利・保存lifecycle・意味保持条件は不変。主な到達はTECHNICAL_CREDITで、本文構成・本人反復の改善やhuman Product Readの合格ではない。段落は5文の常体化、二欄は明記氏名の役割化＋常体化という限界を維持する。通常selector OFF、一般編集品質・通常SQL／API／RNの一巡・本人端末、v1指示語と新refined資格、他AR・全補助経路は未完。次は本文反復・構成の改善と最新通常経路／本人端末の一巡であり、同じ保存・診断だけを周回しない。
+
+
+<a id="piece-topic-editorial2-prepared-20261114"></a>
+## 9.51 2026-11-14 — 同一本人の主語省略をsourceへ拘束、実新2比較は準備済み・未取得
+
+### 今回選んだ残件と修正
+
+§9.50の取得済み344a2件の保存・同版native6は完了として保持し、同じ画像・保存診断の周回へ戻らない。残る本人主語の反復について、既存生成材料とS7の編集資格をそろえた。前回もinclude_editorial_choices=Trueであり、単にflagをONにする変更ではない。凍結した二入力では旧候補は0で、今回は段落の4文目・二欄の思考2文目／行動2文目の主語と直後読点だけを候補に追加する。これが生成の反復の唯一の原因だったとは断定しない。
+
+[API99dbdaab](https://github.com/MassyuRed/mashos-api/commit/99dbdaabbacce6cf4926cde6a3fe0c0a926f04e7) の変更は既存製品2・新test1・既存workflow1の4path。元のsource admission・作者・SYSTEM・decoder・重み・原七項目／Prepared／保存前checkpointは変更しない。
+
+| path | 同じowner内の差分 |
+|---|---|
+| ai/services/ai_inference/piece_model_source.py | 既存editorial armにsource_id／role／field_path／topic_scalar_spanを付けたOMIT_REPEATED_SELF_TOPICを投影。scopeの内側literalを省略せず、完成本文・旧raw・期待本文を渡さない |
+| ai/services/ai_inference/piece_v2_content_policy.py | source／plan検証後に有限の本人連続を証明し、直前可視nodeのS7受理後だけ継承。比較用private viewで正確なsource主語を復元し、既存register／operator比較へ戻す。返すraw・本文は変更しない |
+| ai/tests/test_piece_model_source_topic_choices.py | 新35件。六一人称、留保／条件／目的否定／時点・格、役割化との合成、初回主語、unknown KEEPを挟む連鎖、引用／改行・別field／補足sourceの拒否、既定材料維持 |
+| .github/workflows/piece-b2b-isolated-postgres.yml | 既存path filterとpytest列挙へ新35件のfileを追加。新workflow・dependencyは作らない |
+
+有限動作は既存の完全prefix文法が全体を消費できる場合だけ本人を継承する。「気がする」「わけではない」の閉じたhostは明記本人の姿勢だけを証明し、内側のactor／全命題の理解やall_selfを作らない。競合する主題・主体・別本人視点、引用、改行、未知KEEP、別field／refined childを借りない。新しい自己継承は、可視の直前文が受理された後だけ成立する。
+
+通常flag FALSE時の**生成messages**は旧版と同一。新S7はmodel opt-in内で、choices提示OFFでもsourceで証明できる省略candidateを受理し得るため、通常全挙動不変とはしない。native既定のKEEP／作者と通常selector OFFは維持する。未知日本語の意味認定や意味保持条件の解除には広げない。
+
+### 固定材料・回帰・保存境界の確認
+
+同じ保存前checkpointから旧版／新版の材料を導出し、原七項目、Prepared ID／private JSON、SYSTEMが一致することを確認。旧TRUE messagesは前回のwire・取得rawに記録されたmessagesと完全一致。新TRUEとの差は上記3つのeditorial_choices欄だけで、通常FALSE messagesも旧新一致。旧2rawは完全な旧取得messagesと別実行の来歴のまま保持する。
+
+関連12fileの固有1,488件が成功（新35、18.21秒、既存Pydantic警告1）。初回の収集失敗はローカルへ未取得だった既存test moduleを同commitから無変更取得して解消し、protected test／fixtureや商品コードを緩めていない。
+
+旧実raw2は旧材料のまま各1独立checkpoint forkで保存・非生成再読を維持した。別の合成2候補は旧rawコピーからsourceで許されたtopicだけを削除して作り、別forkで同じく保存・再読・canonical8／3hash・quota各1・source／Emlis不変を確認した。これは**合成候補で、新実4B出力でも編集品質改善の証拠でもない**。実rawの補修やmodelへの期待本文注入には使わない。CPU予行のliteral参照先を誤った途中停止は、検証scriptをcontrol.field_slotsへ訂正し、完了済み旧raw1の保存結果を再利用して続けた。商品source・元checkpoint・rawを変更していない。合成Auth／先行Emlis・隔離PGliteで、live保存ではない。
+
+同commitの [Piece run43528009915](https://github.com/MassyuRed/mashos-api/actions/runs/43528009915)／job132238448158 と [Analysis run43528009944](https://github.com/MassyuRed/mashos-api/actions/runs/43528009944)／job132238448230 はともにattempt1・全step success。Pieceログで新35件のfileが実pytest呼出しに含まれ、モデル関連2,311件成功を確認した。局所1,488件と重複を加算せず、manual dispatch／rerun0。
+
+rootと独立read-onlyで製品差分、新旧完全材料の限定差分、source／field／span、旧取得原本、runner／wire／SHA台帳を照合した。独立担当の編集・SQL／model実行は0。別モデルによる正式Product ReadやMashの受入れとは扱わない。
+
+### 新しい一回の実行条件、未実行の境界
+
+| 項目 | 固定した内容 |
+|---|---|
+| 送付先 | 既存Pod f1lle4xwq3wjln、新しい専用ROOT。旧完了ROOT／archiveは再使用しない |
+| 3file | serve_topic_editorial2_once.py 37,518byte、wire_requests.private.json 24,378byte、files.sha256 190byte、合計62,086byte |
+| 新生成 | 保存344a・既存a8fdfbe1 generatorで段落／二欄の新2件だけ。旧344a取得済み2件は固定基準にし、再生成しない |
+| 前後確認 | 対照4POST＋health2GET、全6model呼出／6HTTP上限 |
+| 時間・回数 | 提供一時停止・復元込み600秒、復元120秒先取り、1child／1load、一回、学習／再試行0 |
+| 復元・認証 | 現提供PID95100／start217338131を今回のUIで読取確認。停止直前に再照合し不一致なら停止しない。既存2鍵は同Pod localhost認証だけ、全起動環境は同Pod親RAMで正確な復元だけに使い、保存・出力・外部送信しない |
+
+wire SHA256はd2a731d44df22e16bd9104ded79210e8c4b7ef406002c92c27e4be2281581bee。runnerと親子構文・純粋packet validator、全byte／3SHA、独立差分確認は完了。新wireへ旧raw・期待本文・DB checkpoint／Authを渡さない。同じ架空2入力の再利用であり、すべて新規sourceとは呼ばない。旧と新は別run／別instanceで、messagesもeditorial候補分が異なる。新wireとの一致を旧材料との一致へ読み替えない。
+
+前回59,640byteの一回は完了・消費済みで、今回の新材料による別比較へ流用しない。今回のPod送付・新model出力・提供停止／復元は0、具体的な62,086byte一式の新しい一回の確認待ちである。今回の新送付について自動審査拒否が発生したとは記録しない。§9.48の拒否は過去の別一式の履歴である。
+
+### 原本と次の判断
+
+[Cocolon_CMEE_AR04_SourceTopic_Editorial2_Prepared_20261114.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-cd62a09cf4bc8191b9fc4cb0e29b49b4_2f7470f963808191aaebf050935e72de&account_id=personal) へ新試行の原本を保存した。4,825,131byte／38member、SHA256 `40d2773383a78cce989c2c8831b10fd3cf74f44b336cf112ff7f0a1e6890e408`。新3file・完全材料／差分証明、旧取得原本／wire、同checkpoint、旧実2と合成2を区別した保存結果、回帰／CI／独立確認と途中失敗・受領用scriptを保持する。前回の実原本version4はそのidentity／全byteのまま維持し、今回のPreparedをActualへ読み替えない。GitHub反映済み製品／test codeは同梱しない。
+
+受領処理も準備した。新しい閉鎖後summary・完全復元・前後対照bytes・wire／runner／source／344a同一性が成立した原本だけを受け取り、各新rawを無修補で各1独立checkpointへ保存・非生成再読する。その前後で完全原入力と全文を読み、主語反復の減少だけで条件・留保・否定・時点・役割の変異を見逃さない。反復が残れば改善なしと記録し、同じ入力へのhint追加・再取得へ戻らない。意味を保った採用本文が変われば、同じ保存版を既存native harnessのpreview／saved／exportへ通し、本文・画像・元期限を照合する。本文不変なら完了済みの同じ画像検証を再実行しない。
+
+STRUCTURE_MAP_DELTA_NONE。新しい型・source資格・公開API／route／DB／RN／component配置・作者・checker／controller／Gateの追加はなく、既存の生成材料／S7責務内の限定整合である。全treeと最新の全体設計・7地図・weeklyを確認したが、全fileの意味理解完了や全アプリの受入れを宣言しない。今回の到達は限定TECHNICAL_CREDIT、新実本文の改善・新native画像・通常SQL／API／RN一巡・本人端末・商品品質credit／正式受入れ・AR-04／全補助経路の完了は0／未完を維持する。通常selector OFF、Render／Supabase／重み／RN／build／配布への反映はない。

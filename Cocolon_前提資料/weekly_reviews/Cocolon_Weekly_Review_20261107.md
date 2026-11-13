@@ -3200,3 +3200,13 @@ API1237bc21／最終04153c52。既存model opt-inの有限活用と役割化×op
 研究e098efda／run43518729580・同1XCTestで2作品×preview／saved／exportの6画面成功。段落1／二欄2blockと元保存artifactに一致、各作品の3PNG全byte・実view-shot画素／SHA一致、最長4.556秒で元8秒内。本文・外枠・余白・Emlisを目視し欠け／重なりは見つからなかった。自然Text参照全体のRGBA差は全6に残る。合成session／閉local transportのシミュレーター結果で、live／本人端末／Photos／Shareは未実施。
 
 同じ資料version4へ19memberを追加し旧76をbyte不変で保持。12,701,876byte／95member、SHA256 81461434ffbaa5613f7dabc495fe88211738f1d470413a71a5d5ecb9965fa844。主な到達はTECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_NONE。通常selector OFF・human受入れ追加0、段落の本人反復等の一般編集品質と通常経路／本人端末・他ARは未完。[修正・全結果・原本・限界§9.50](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-coherent2-register-saved-native-20261114)を正本とする。
+
+
+<a id="piece-topic-editorial2-prepared-20261114"></a>
+## 2026-11-14 補助経路AR-04 — 本人主語の省略候補を原文へ拘束、実新2は準備済み
+
+**11/14・同じ本人の主語を省略する候補3箇所をsourceへ拘束：** API99dbdaabで生成材料とmodel opt-in S7を整合。原七項目／Prepared／SYSTEM・重み不変、旧TRUE材料との違いはeditorial_choices3箇所だけ。関連1,488件（新35）成功。旧実raw2の保存・再読維持と合成省略2の保存を確認したが、新実4B本文は未取得で、反復改善の証拠ではない。通常FALSEの生成messagesは同一、model S7のsource-proven省略受理範囲は広がる。新送付62,086byte・3fileで新2＋前後4対照＋2GET、復元込み600秒・一回・学習／再試行0を準備。前回の一回は消費済み、今回の送付・実行は確認待ち。通常selector OFF・STRUCTURE_MAP_DELTA_NONE。
+
+同commitのPiece43528009915／Analysis43528009944はattempt1・全step success。新35件の実呼出しを含むPieceモデル関連2,311件成功、manual rerun0。今回のPod送付／GPU／提供停止・新nativeは0、旧実raw2と合成省略2の保存再読は別の確認として扱う。旧と新は別runで、messagesは候補3箇所分が異なり、前回の具体承認は再利用しない。新しい比較の送付・実行確認待ちである。
+
+[新しい準備原本](https://chatgpt.com/library?file_id=libfile_fde3_f-cd62a09cf4bc8191b9fc4cb0e29b49b4_2f7470f963808191aaebf050935e72de&account_id=personal)、4,825,131byte／38member、SHA256 40d2773383a78cce989c2c8831b10fd3cf74f44b336cf112ff7f0a1e6890e408。前回の実原本version4／95memberは保持。rootと独立read-onlyで全限定差分・3SHA・来歴・新offline受領処理の境界を照合済み。一般編集品質の改善、human受入れ、通常SQL／API／RN一巡・本人端末と全補助経路は未完。[責務・変更全4path・原本・限界・次§9.51](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-topic-editorial2-prepared-20261114)を正本とする。
