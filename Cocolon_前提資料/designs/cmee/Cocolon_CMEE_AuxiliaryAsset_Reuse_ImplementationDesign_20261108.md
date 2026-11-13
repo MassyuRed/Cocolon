@@ -4,15 +4,15 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-13 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR02_CORRECTION_INDEPENDENT16_FIT32_PREPARED_NORMAL_OFF
+status: AR02_CORRECTION16_FIT32_ACTUAL_REJECTED_NORMAL_OFF
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Independent correction8 + original44 retention8, fresh16/32 and17comparisons prepared; explicit new training/pause authority pending, no repeated framing; normal OFF"
+current_next: "Actual fresh16/32 and17 comparisons completed; candidate10b563 rejected for case/recipient-voice and unsupported additions; preserve raw/weights, inspect existing author/teaching/comparison duties; no automatic GPU or fit, normal OFF"
 runtime_effect_of_this_document: 0
 ---
 
-> **11/13・本人訂正の独立教材8＋既存保持8、32更新の研究案を準備：** 実3の出所分離不採用を継承し、既存44／履歴16教材に直接のAI応答訂正形式が0件だった範囲を確認。別場面の訂正8教師と元44の保持8を組み、未学習新4・既知実3・訓練露出済保持8・既知履歴2の17比較を固定した。現行の通常2message／原入力・別訂正sourceを保持し、12件の合成隔離保存・非生成再読、凍結checkpointから新4件の受領再開をCPU確認。モデル品質の証明ではない。送信準備207,620byte、新規31生成＋前後4対照、学習32更新、停止・復元・後対照込み600秒の一回案。未送信・未実行・今回分の学習承認待ち。通常OFF、同じhint/出所表示の反復なし。 [範囲・検証・次](#emlis-correction-independent16-fit32-prepared-20261113)。
+> **11/13・16教材32更新と17比較を一回完了、品質未達で通常不採用：** 承認207,620byteを既存Podで実行し、新規31応答＋前後4対照、全stop、再試行0。復元・対照終了237.196491秒／ZIP close237.885058秒、元提供PID83325→84398へ元args/env/cwdで復元、通常／Analysisの前後全response一致・独立health200。112tensor保存／fresh reload一致と原本・重み回収を確認。先生→妹の格崩れ・本人一人称の貼返しが残り、通常保持T06には未記載の支配状態を付加したため新10b563候補を採用しない。旧3＋新4の同source隔離保存・新service非生成再読は7成功、独立比較7UNASSESSED。通常OFFを維持する。 [実原本・採否・次](#emlis-correction-independent16-fit32-actual-20261113)。
 
 > **11/13・資格固定3件の実4B生成と同じ源泉の保存・再読を完了：** 承認38,631byteを一回実行し、Piece3＋提供前後4確認、学習／retry0、復元込み114.971199秒。元提供PID79715→80025、引数／環境／作業場所／既存2鍵・source／両adapterを保持し、通常／Analysisの前後全response一致を確認。無修補の3rawが既存CMEE／S7を通り、凍結済み同checkpoint・source／prepared／messagesからFree3保存・新service非生成再読、本文／payload／recipe／renderer／hash一致、元source／Emlis不変・quota各1。normal2 rawは前回既知rawと同一で、新たな編集改善やA/Bには加算しない。合成Auth／先行Emlis・隔離PGliteの結果であり、通常option／selector OFF、一般品質・live／本人端末・正式受入れ・全補助経路は未完。画像側test構文1箇所を修正し、研究24f7ba8b／既存CI43350232403は成功。9frameの同版PNGと実書出し一致、最大2.61秒を確認。自然参照画像全体のRGBA一致は未成立で、通常採用へは広げない。 [実原本・同source保存・次](<#piece-qualified-source-actual3-saved-20261113>)。
 
@@ -1599,7 +1599,7 @@ STRUCTURE_MAP_DELTA_PRESENT：既存natural_replyのmessage責務と既存server
 STRUCTURE_MAP_DELTA_NONE：今回は実行/原本回収/本文review/隔離保存/状態更新だけ。既存2製品fileの研究option/責務地図は§9.31から不変。00現在地・01A・Emlis/CMEE mapの状態を同期し、01B/01C/公開DTO/route/DB/RN境界は差分なし。
 
 <a id="emlis-correction-independent16-fit32-prepared-20261113"></a>
-## 9.33 2026-11-13 — 本人訂正の独立8教師・既存保持8、32更新の研究一回を具体化（未実行）
+## 9.33 2026-11-13 — 本人訂正の独立8教師・既存保持8、32更新の研究一回を具体化（実行前記録、後続§9.34で完了）
 
 §9.32の実3不採用から、現行sourceの本人説明到達、既存文章化、逆読取、実教材を照合した。本人説明は現在の通常author材料に届いており、単純なprovider呼出し漏れではない。AI対象指定はcontrol、本人説明は別のInterpretationCorrectionSourceとして保存される。既存answer更新の核は本物のQUESTION/ANSWER/source spanを必要とするため、訂正を架空のANSWERへ置き換えて既存処理を通す修正は行わない。読取報告の対象範囲を広げただけで実4Bの役割・格の品質回復とはしない。
 
@@ -1635,6 +1635,52 @@ runnerの旧HTTP再利用検査は原要求／rawの改変・欠測8種を拒否
 Piece側も別途sourceを照合し、現refinedが単一の実回答ADD／round1だけで、natural profileと複数回答のactive-plan/lineage/SQL fenceは未接続と確認した。最新回答を選ぶ・連結する・架空一回答へ畳む修正はしていない。この調査をPieceの接続完了や今回の研究品質へ加算しない。
 
 STRUCTURE_MAP_DELTA_NONE：今回の変更はprivateな教材・既存一回trainerの限定適応・隔離CPU検証・前提資料の状態更新。公開DTO/route/DB/RN、製品sourceと意味確定／独立比較／保存の責務は不変。全補助経路・自然さ・役割安定・Premium frame/Analysis/Piece伝播、通常採用/live/本人端末・正式受入れは未完。全fileのtree/hash照合と全仕様本文理解を同一視せず、全file意味読了の既存未完を解消したとは報告しない。
+
+<a id="emlis-correction-independent16-fit32-actual-20261113"></a>
+## 9.34 2026-11-13 — fresh16教師32更新・17件比較を完了、本人向けの声と意味保持が未達で通常不採用
+
+§9.33の207,620byteをMashの「進めろ。」の明示承認後に既存Podへ一回送信。Pod側の4ファイルbyte数・SHA256が準備原本と一致し、現API3b727b3f・前提資料8bc3f1aの同headを確認した。初回はJupyterの古い表示で結果反映が止まっていたため画面接続を一回更新し、現PID83325／source5e3d／health200／GPU使用者一致を確認してから実行した。学習や提供停止の再試行ではない。
+
+### 実行・復元と重み原本
+
+cached tokenizer停止前検査は全16教師688〜1149token、17比較prompt最大1380tokenで、出力2048を足して8192枠内。固定source/adapter・元argv/cwd・GPU占有・依存版／既存primitiveを照合後、元natural/Analysis対照2を取得して提供を一時停止。fresh base/r8の16教師を固定順に各2回、正確に32更新。新規前14＋後17＝研究生成31、再利用した元HTTP前3と合わせ比較記録34、全stop。対照は前後4HTTP、全200/stop/attempt1。新規モデル生成は計35、再試行／追加更新0。旧HTTP前3には過去に観測していないtoken IDを作らず、固定tokenizerによる再計算と明記している。旧HTTPと新直接loadの3比較は厳密同process A/Bではない。
+
+学習・checkpointは44.8580334559083秒、全112tensorが変化し、全値有限・F32・3,833,856parameter。保存してからfresh baseへ再loadし全tensor一致。重みSHA256 10b563154c7b05faf7f84264312328611724cf31ff834d9924337761c5513788、config 27e58c46d301a8c647737e683cb636365f217a924b04b1e4dff4d97b66418ebb。全16教師のNLLは低下（平均1.4815368168→1.3254003078）したが、生成品質合格とはしない。実token列からassistant-onlyの連続tail／切断なしを確認し、保持8件では学習時のmasked promptと実生成promptの全token IDも一致した。単純な教材／生成prefix違いを原因とする証拠はない。
+
+元提供を元args/env/cwdで一回復元しPID84398。復元・後対照まで237.1964910151437秒、ZIP closeまで237.8850578442216秒で600秒内。両controlの各前後は生HTTP全bytes一致、独立health200／pidfile・GPU PID一致。元source／Analysis adapter不変、資格情報と全環境は同Pod内だけ、生成子へ鍵を渡さず保存・回収0。通常のnaturalはbaseのまま、new候補を提供へ採用していない。
+
+### 全17本文の原文対照
+
+新評価4、既知実3、訓練露出済保持8、既知履歴2の区別を維持した。15本文が変わり2本文が同一だが、変更数を改善数へ換算しない。逐語教師一致や原入力の全復唱を求めず、役割・時点・未知・本人向けの声をbefore/afterと原材料から読んだ。
+
+| 対象 | 実本文から分かったこと | 判断 |
+|---|---|---|
+| 既知focus_agent | 姉→先生を保持し短縮。旧baseも向きは正しかった | 新たな役割修復には数えない |
+| 既知focus_recipient | 妹が先生を呼び止められた、という格・態崩れが残り、私はその場にいなかった、と本人の一人称を返す | 未解消・不採用理由 |
+| 新役割評価 | 舞台監督→音響スタッフと出演者の伝聞は保持するが、私は現場にいなかったようです、と本人発話を無標識で貼り返す | 役割の保持と宛先の声を分ける。通常応答未達 |
+| 既知knowledge_days | 昨日朝の認識を保ち、今日午後の利用不可も明示 | 限定的な内容保持。旧baseも認識時点は正しかった |
+| 新推測評価 | 原因未確認は維持するが、推測しました／確かめていませんでした、と本人行動の叙述が残る | 原因確定の修復や本人向け自然応答の完成とはしない |
+| 新予定／条件評価 | 花火延期と荷物の経路条件の2本文は前後byte同一 | 今回の改善0。延期されたという語だけで花火の実開催済みとは判定しない |
+| 保持T06 | 元からあった嫌なことがあったという補完に加え、重さが今を支配している、と未提示の状態を付加 | 明確な追加・退行。不採用理由 |
+| 保持T09 | 選択された怒りweakを昨日の怒りへ割り当てる | 前後に共通する未達であり、新規退行とは呼ばない |
+| 保持T04/S06A/S06B・既知撤回履歴 | 後本文がcurrent.memoの全文copyに一致（計4件）。S06Aでは余計な原因探索・助言は消えた | 縮小と本人向け返事を区別し、copyだけで品質回復にしない |
+| その他保持・未確定履歴 | 保持T12の少しへの程度変更は前から存在。S05では主体の保持と新しい文脈づけを別に確認。未確定履歴の不要な探索説明は短縮 | 全17の意味合格・一般品質成立へ拡張しない |
+
+今回の新候補は通常不採用。別sourceの訂正を直接教師へ含めたこと、NLL低下、112tensor変化／再load一致だけでは、誤った格と本人一人称の貼返し、根拠のない状態付加を解消できなかった。原文やrawを修補したり、比較readerを緩めて合格へ換えたりしない。通常OFF、既存server/source/adapterを保持する。
+
+### 原本回収・同source保存と未成立
+
+Podのresults.zip 14,320,864byteを原bytesで回収し、Pod側SHA256 e77d87a8232d0d4a6c9689f02c5f3918f5aa118c8a84da1b9841a04277e1a03cと一致。全34生成／32step／16mask／初期化／保存再load／control4生応答と、候補重み・設定を含む。全memberの破損なしを確認した。wrapperのZIP close後秒数はrestoration.jsonへ再dumpされないため、終了stdout stateを別のpostcheck_result.jsonへ保存して区別した。JSON単体のDownload通知は得られず、同じファイルの原文表示から回収した。provider log／全環境／鍵は回収していない。
+
+実後rawの新訂正4＋旧実3を、凍結済みの同source/ID/時刻/prefix/通常messagesへ束縛し、既存受領event後処理から7件の隔離PGlite保存・新service非生成再読を確認した。更新したのは隔離分岐の期限切れ処理leaseだけで、原入力・本人訂正・対象版は不変。QUESTION/ANSWER追加0、保存・再読時の新モデル呼出し0。7件の独立比較は全UNASSESSED、公開correction_assessmentもUNASSESSED、meaning_updated=falseを維持。不採用原本の保存であり、意味合格・live Supabase/Auth・本番期限切れ再開・本人端末ではない。
+
+今回source/test変更0、追加CI dispatch/rerun0。前回API3b727b3fのlocal187＋server20成功／両CI successは継承であり、今回のGPU品質や保存7件へ加算しない。私的CPU保存helperは回収先のactualディレクトリを読むだけに適応し、承認済みPod送信4ファイルは変更していない。
+
+### 現在の再開位置
+
+この207,620byte・16/32・最大35新規生成の一回は完了し承認消費済み。新10b563重み／実本文／失敗は非公開で永続保全するが通常不採用。次は、保持教材と同じprompt tokenでも本人向けの声にならず、未知を未提示状態へ強めた実本文を、既存natural教材／生成／完成文の独立比較の責務へ戻して不足を絞る。今回の結果だけから教師増量・同じprompt追記・追加fit・再生成を開始しない。学習不足やbase限界を原因と断定せず、実モデル取得と一般品質、source保存、machine比較を分ける。
+
+STRUCTURE_MAP_DELTA_NONE：今回の実行／原本回収／人の全文review／隔離保存／資料状態更新だけ。製品source/公開型/route/DB/RN、作者・意味確定・保存の責務は不変。Premium frame/Analysis/Piece訂正利用、長文・二欄・本人補足の一般品質、通常統合/live/同版画像/本人端末、全補助経路は未完。全tree/hash確認と全仕様意味読了も同一視しない。
 
 ## 10. 変更箇所と検証
 
