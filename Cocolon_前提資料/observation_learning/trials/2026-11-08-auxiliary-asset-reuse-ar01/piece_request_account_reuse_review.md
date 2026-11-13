@@ -2867,3 +2867,11 @@ Analysis CI [43174913298](https://github.com/MassyuRed/mashos-api/actions/runs/4
 **11/13・Pieceの既存編集判断を現作者へ移す候補：** API `ec4bd668`で焦点構文・同本人参照継続・評価語順の既存判断をprivate作者材料へ接続。関連5file296 PASS。新optionは既定OFF、現configured取得・SYSTEM・独立S7は不変。既存一般3型はmessages無差分のため再生成しない。架空3型の旧新6要求・14,489byte・最大7分／1回／学習・retry・提供再起動なしの案を準備したが、未承認・未送信・実生成0。一般編集品質・同本文保存／画像・通常採用は未成立。AR-03実4不採用も継承。
 
 原文の匿名化・焦点語順・本人反復までcopyするactual7を根拠に、何を保持するかだけでなく、既存native作者が認めた具体的編集判断を現builderへ回収。期待完成本文や旧finite artifactを渡さず、既存の原文・範囲・別sourceとS7を保持する。general3の原文・base／344a全rawを独立読取し、今回のfocal／継続省略の効果材料ではないことを確認した。比較材料と出所、CPU296の範囲、未実行packet／既存対照の再取得、原本v4・未完条件は[詳細設計§9.20](../../../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-editorial-choices-prepared-20261113)を正本とする。STRUCTURE_MAP_DELTA_NONE：既存private作者入力内だけで公開・保存・rendererの責務は不変。通常採用／正式受入れcredit0、未測定の改善を成果へ換算しない。
+
+
+<a id="piece-editorial-choices-actual6-20261113"></a>
+## 2026-11-13 — 承認済み実6応答・全3組差分0で候補不採用
+
+**11/13・Piece編集候補の実6応答を完了、全3組で差分0のため不採用：** 承認14,489byteを既存Podで一回実行し52.420284秒、全6 HTTP200／stop／attempt1。PID77140と前後health200を保持、学習・retry・提供再起動0。段落・二欄・refinedの旧新全response／rawは各組完全一致・全欄原文copy、8編集選択の可視効果0。二欄では氏名が残り公開役割化も未達。原本のexact CPU再演は4 GENERATED／二欄2 UNAVAILABLEだが作品品質合格ではない。候補・通常optionはOFF、今回のSQL／native保存0、追加生成・S7緩和・raw補修なし。実原本と不採用理由を保全した。
+
+全6原本と各sourceを独立全文読取。意味反転／対象移動は見つけていないが、具体的編集の効果0と氏名残存のためNOT_ADOPTED。原文copyを件数のためSQL/nativeへ通し直さず、今回は保存未実施0を保持する。API ec4bd668のコードは既定OFFのまま、独立S7・raw・保全条件は変更しない。実行・完全照合・scope・CI成功・原本version5／未完は[詳細設計§9.21](../../../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-editorial-choices-actual6-20261113)へ。準備§9.20の未承認・未実行は当時の履歴。この一回承認は消費済み、同型再試行・prompt/metadata増量・fitへ自動進行しない。STRUCTURE_MAP_DELTA_NONE（今回source/test変更0、実結果の記録のみ）。

@@ -4,13 +4,15 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-13 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR04_EDITORIAL_CHOICES_PREPARED_NOT_MEASURED
+status: AR04_EDITORIAL_ACTUAL6_NOT_ADOPTED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Piece source-bound editorial choices CPU-ready, default OFF; fixed fictional3/before-after6 comparison requires its own approval; no training/retry/restart or normal adoption"
+current_next: "Piece editorial actual6 complete, all pairs unchanged copies, NOT_ADOPTED; retain defaults OFF; close consumed once scope with no automatic retry, prompt/metadata expansion or training"
 runtime_effect_of_this_document: 0
 ---
+
+> **11/13・Piece編集候補の実6応答を完了、全3組で差分0のため不採用：** 承認14,489byteを既存Podで一回実行し52.420284秒、全6 HTTP200／stop／attempt1。PID77140と前後health200を保持、学習・retry・提供再起動0。段落・二欄・refinedの旧新全response／rawは各組完全一致・全欄原文copy、8編集選択の可視効果0。二欄では氏名が残り公開役割化も未達。原本のexact CPU再演は4 GENERATED／二欄2 UNAVAILABLEだが作品品質合格ではない。候補・通常optionはOFF、今回のSQL／native保存0、追加生成・S7緩和・raw補修なし。実原本と不採用理由を保全した。 [実比較・判定](<#piece-editorial-choices-actual6-20261113>)。
 
 > **11/13・Pieceの既存編集判断を現作者へ移す候補：** API `ec4bd668`で焦点構文・同本人参照継続・評価語順の既存判断をprivate作者材料へ接続。関連5file296 PASS。新optionは既定OFF、現configured取得・SYSTEM・独立S7は不変。既存一般3型はmessages無差分のため再生成しない。架空3型の旧新6要求・14,489byte・最大7分／1回／学習・retry・提供再起動なしの案を準備したが、未承認・未送信・実生成0。一般編集品質・同本文保存／画像・通常採用は未成立。AR-03実4不採用も継承。 [候補・固定scope](<#piece-editorial-choices-prepared-20261113>)。
 
@@ -1148,7 +1150,9 @@ ANSWER_TIMEを元の出来事当時と読み替えたり、回答の「今」を
 
 
 <a id="piece-editorial-choices-prepared-20261113"></a>
-## 9.20 2026-11-13 — Pieceの既存編集判断を現作者へ移す候補、3型6要求を準備
+## 9.20 2026-11-13 — Pieceの既存編集判断を現作者へ移す候補、3型6要求を準備（準備履歴）
+
+> 本節は承認前の準備履歴。後続§9.21で新しい一回承認後の実行と不採用まで完了。
 
 週次§6.11と本書§9.1に沿い、AR-03の不採用比較・学習の反復を次の主枠に戻さず、Pieceの本文編集へ進む。Analysisの実表示、AR-02訂正・複数回答のPiece接続等の残件は維持する。今回の候補が広い一般編集品質や全補助経路を完成させたという扱いはしない。
 
@@ -1158,7 +1162,7 @@ ANSWER_TIMEを元の出来事当時と読み替えたり、回答の「今」を
 
 ### CPU確認と限界
 
-関連5file296 PASS、FAIL0。MockTransportによる一取得、rawそのままの既存意味採否、希望→実行済みの拒否、native参照chainと重複時の省略保留、過去／否定／留保、欄・段落・source分離、既定wire不変を確認。初期の現文法外の正例・chain材料誤りは適格な架空材料へ修正し、source grammar／validatorは変更していない。部分checkoutの不足test／fixtureはexact親blobへ復元した。authoring_application統合集合は別の不足依存で未実行、296へ含めない。API ec4bd668の自動push CI [43332056239](https://github.com/MassyuRed/mashos-api/actions/runs/43332056239)は現在実行中で未判定。PR限定一覧の0runを全workflow未起動と一般化せず、全suite成功とはしない。追加dispatch／rerun0。
+関連5file296 PASS、FAIL0。MockTransportによる一取得、rawそのままの既存意味採否、希望→実行済みの拒否、native参照chainと重複時の省略保留、過去／否定／留保、欄・段落・source分離、既定wire不変を確認。初期の現文法外の正例・chain材料誤りは適格な架空材料へ修正し、source grammar／validatorは変更していない。部分checkoutの不足test／fixtureはexact親blobへ復元した。authoring_application統合集合は別の不足依存で未実行、296へ含めない。API ec4bd668の自動push CI [43332056239](https://github.com/MassyuRed/mashos-api/actions/runs/43332056239)は準備記録の確認時点では実行中で未判定（§9.21でsuccess確認）。PR限定一覧の0runを全workflow未起動と一般化せず、全suite成功とはしない。追加dispatch／rerun0。
 
 既存一般3型（段落／二欄／refined）は新optionでも全messagesがbyte同一だった。今回の編集能力の対象外であり、同じ3を再生成しない。新しいモデル本文・SQL保存・同版画像・通常採用は0。本文の一般品質改善は未証明。
 
@@ -1171,6 +1175,45 @@ script `ar04_piece_editorial_choices_20261113_once.py` は14,489byte、SHA256 `d
 前回38,004byte一回の承認は消費済み。この新payload／6要求は具体的承認後に実行する。未実行原本は[既存ZIPの追補version4](https://chatgpt.com/library?file_id=libfile_fde3_f-f30655de312c8191978daec9b93b7008_2f7470f963808191aaebf050935e72de&account_id=personal)へ保存。234,138byte／53member、SHA256 `08e05c42c06cc281579231038fbd02957c3efc9355274242d7fca133c433c4ae`。旧46memberは全byte維持、新7memberは今回の準備・CPU確認・再現scriptだけ。Git-backed製品source・秘密・browser screenshotは同梱しない。
 
 承認後の閉じる単位は、現4Bの全6raw→原文と全文意味／自然さの比較→独立S7→成立した同本文の既存保存・非生成再読／同版画像。原文コピーや単なる常体化のままなら改善採用にしない。追加fit、prompt周回、採否緩和、失敗raw修補へ自動進行しない。STRUCTURE_MAP_DELTA_NONE：既存private作者入力内の既定OFF候補で、新owner／公開route／DTO／DB／保存schema／rendererは増えていない。AR-03不採用と全補助経路未完を維持する。
+
+
+
+<a id="piece-editorial-choices-actual6-20261113"></a>
+## 9.21 2026-11-13 — 承認済みPiece編集候補の実6応答、全3組無差分で不採用
+
+§9.20の準備後、Mashは固定14,489byteを既存Podへ送り、架空の段落・二欄・補足付き3組の旧新6応答を、最大7分・一回、学習・再試行・提供再起動なしで比較し、既存鍵1つを同Pod内認証だけへ使うことを明示承認した。前回38,004byteの消費済み承認を流用せず、この新しい一回を実行した。**今回の承認も実行済み・消費済み。**
+
+### 実行と原本
+
+送信後も14,489byte・SHA256 `d3daf72bc4e9be5f58c492a826003ee1bfdee572a6758663164f22a295c83727`一致を確認。既存base提供に外側`timeout 420s`・内側410秒で一回だけ実行。実測52.42028413480148秒、全6 HTTP200／finish_reason stop／attempt1、前後PID77140・health200／status okを維持した。学習／再試行／提供停止・再起動／重み操作0。実model aliasは`cocolon-qwen35-4b-base-851bf6e`、responseのrevision／usageはunknown。aliasから実重みhashやinput token数・原価を推定しない。
+
+既存natural鍵1つは同Pod内RAMからloopback認証だけへ使用し、値・全環境を原本へ出していない。入力途中のUI不調は未実行を確認して操作方法／terminalを変えたもので、比較の再試行ではない。比較後のZIP作成を含むUI操作がtimeoutになったが、再開時に完了出力・閉じたZIPを確認し、modelやZIP作成を再実行していない。52.42秒は比較scriptの時間で、UI入力・回収の作業時間を含めない。
+
+回収original_results.zipは44,820byte／9member、SHA256 `243b432f1fd20746d2d896e3467b8559edb929781bc52c0a355d73110b4d7431`。CRC／安全なpath、同梱scriptと承認packet、個別response1〜6とaggregate、元request／PreparedRequest／旧新messages／request・response hashesを完全照合。初回のhash assertは画面のhex転記誤りを訂正し、原本bytesを変えていない。
+
+### 全文比較・独立再演
+
+| 型 | 実本文の旧新比較と意味 | 判定 |
+|---|---|---|
+| 段落 | 全response／raw一致・全欄原文copy。条件と「気がする」の留保、読書の過去好み、未決定を保持。焦点語順・反復・話題接続・参加先不明は未改善 | 旧新ともGENERATEDだが編集改善0 |
+| 二欄 | 全response／raw一致・全欄原文copy。おれ／僕、欄、対象参照、価値視点、過去否定を保持。氏名が残り既存公開役割化は未達 | 旧新ともUNAVAILABLE、`piece_model_meaning_unassessed_or_changed` |
+| refined | 全response／raw一致・全欄原文copy。原入力の僕／別補足のわたし、それぞれの参照、否定希望・過去否定を保持。文章構成・反復整理は未改善 | 旧新ともGENERATEDだが編集改善0 |
+
+rootと独立担当が全3source・全6rawを全文照合。新しい意味反転／対象移動は見つけていないが、原文維持やHTTP成功を作品品質へ換算しない。§9.20の8編集選択を届けても今回可視効果0で、氏名残存も解消せず、候補は**NOT_ADOPTED**。3独立未学習holdoutとは呼ばず、既知二欄beforeは完了actual7のpiece_newと同じ要求の対照再取得として記録する。
+
+API ec4bd668の依存9fileをGit blobで照合し、実rawを無修補で既存receipt→Engine/S7へ再演。4 GENERATED／2 UNAVAILABLE、成立artifactは実rawのblocksと一致。full有限artifact作者・外部HTTP・subprocess fallbackを禁止し、既存chooser内の短句重複比較だけを許可。新provider call／SQL0。意味判定は既存範囲の結果で、source copyのGENERATEDを商品合格や通常採用へ昇格しない。
+
+API ec4bd668の自動push [CI43332056239](https://github.com/MassyuRed/mashos-api/actions/runs/43332056239)／job131578906583はexact head・attempt1・39工程すべてsuccess。local296 PASSは準備時の完了として継承、今回新pytest／dispatch／rerun0。CIが通ることと編集効果0を区別する。
+
+### 保存と残件
+
+今回SQL保存・native画像0。原文copyを下流の件数だけのため再保存しない。refinedは合成private sourceでqualified_saved_snapshotがなく、CPU成立をauthenticatedな保存資格へ変換しない。normalの合成ID再束縛や先行general3の9保存・native成功を、今回のartifact保存成功へ転用しない。S7修正・raw修補へ進む根拠もない。
+
+同じ[既存原本ZIP](https://chatgpt.com/library?file_id=libfile_fde3_f-f30655de312c8191978daec9b93b7008_2f7470f963808191aaebf050935e72de&account_id=personal)をversion5へ更新。340,035byte／68member、SHA256 `0d1301827d14da16499e3dd8539f66467409d7f3e2cfff2be3b8d9c1cdece86c`。旧53memberは全byte保持し、実原本ZIP／展開9原本・exact再演／意味review・CI確認・再現script／READMEを追加。秘密・全環境・browser screenshot・Git-backed製品sourceは同梱しない。§9.20の未実行記述は当時の準備履歴として保持する。
+
+今回の製品source／test変更0、APIはec4bd668のまま。既定OFFと通常selectorを維持する。STRUCTURE_MAP_DELTA_NONE：実比較と不採用の記録だけで、新owner／公開route／DTO／DB／保存schema／rendererの責務は変わらない。primaryは候補NOT_ADOPTED、商品品質・正式受入れcredit0。AR-04一般編集品質・採用本文の保存／画像・通常適用、AR-03不採用・他AR・全補助経路は未完。
+
+この比較は閉じる。同じ要求の再試行、注釈・promptの追加周回、学習回数／時間延長、通常有効化は自動実行しない。次は、既存作者の仕事指定・教材と現在の保全材料を照合し、具体的編集判断が本文で実行されない不足を作者側の改修単位へ戻す。metadataが存在すれば能力移管の実商品効果も成立したとは扱わない。
 
 
 ## 10. 変更箇所と検証
