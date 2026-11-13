@@ -3007,8 +3007,44 @@ Mashの「補助経路の活用作業を続けて」で§9.47の停止箇所か�
 
 現提供PID94200／starttime217099821、出力ROOT／ARCHIVE未作成をread-onlyで確認し、新しい空の送付folderだけ作成した。続行指示を同目的・同じ入力／Pod／資格情報用途の作業再開として送付へ進めたが、新3fileのアップロードは自動承認審査で拒否された。理由は「以前の60,358byteの承認は、今回の別の修正runnerとprivate wire／入力fileの外部送付を含まず、具体的な送付承認がない」というものだった。
 
-拒否を回避する別経路／間接実行は行わず、UIでfolderが空のままであることを確認した。今回の送付file0、model／HTTP／停止・復元0、再試行0。修正を実行成功へ換算しない。今回の59,640byte・3fileと限定実行、既存2鍵・元環境の同Pod用途について、Mashの具体的な確認が必要な状態で保持する。既に作った空送付folderは次回fresh確認して使い、once出力ROOT／ARCHIVE未作成を再確認する。
+拒否を回避する別経路／間接実行は行わず、UIでfolderが空のままであることを確認した。今回の送付file0、model／HTTP／停止・復元0、再試行0。修正を実行成功へ換算しない。準備時点は今回の59,640byte・3fileと限定実行、既存2鍵・元環境の同Pod用途の具体確認待ちだった。11/14のMash明示承認を受けた一回の実結果は§9.49へ更新した。既に作った空送付folderは次回fresh確認して使い、once出力ROOT／ARCHIVE未作成を再確認する。
 
 [同じ原本](https://chatgpt.com/library?file_id=libfile_fde3_f-9bb7f6aceeec8191bafb13d6d3264cc1_2f7470f963808191aaebf050935e72de&account_id=personal)をversion2へ更新し、旧44memberを元path／byte不変で保持、remainingの修正処理／同wire／台帳／受領／review／凍結scope／拒否理由／実行引数／READMEの9fileを追加した。9,625,357byte・53member、SHA256 `9661392f52f7fd753888aa7bf526c100c1bda19c0a9cba00acb98984cc9cd683`。private本文や起動環境・鍵はpublic GitHubへ追加していない。
 
 STRUCTURE_MAP_DELTA_NONE。製品source／test／SQL／RN／model／通常selector変更0、新CI0、商品品質credit・human受入れ追加0。前回比較未成立・今回未実行、通常selector OFF、v1指示語／新refined資格、長め段落／二欄本文・通常経路／本人端末・他ARの残件を維持する。
+
+<a id="piece-coherent2-remaining344a-actual-saved1-refused3-20261114"></a>
+## 9.49 2026-11-14 — 未取得344a2件を一回取得・復元、別run4候補は1保存／3拒否
+
+### 承認後の実行・元提供の復元
+
+Mashが§9.48の修正済み59,640byte・3file、未取得344a2＋前後4対照＋health2GET、提供停止・復元込み最大10分、一回・追加学習／再試行なしを具体承認した。前回拒否を別経路で回避せず、この承認後に同じ3fileを送付した。37,156／22,300／184byteと全SHA一致を確認してfresh once ROOTで一回起動した。取得済みbase2は再生成0、旧FAILEDの原本・statusは不変である。
+
+344a2件はともにstop、13.517735147848725秒／9.513709205202758秒。1child／1loadが終了しGPU inventory空を確認して、元提供PID94200／starttime217099821からPID95100／starttime217338131へ復元した。元args／全env／cwd／2鍵、稼働source・Analysis adapter・保存344aとconfigを保持し、通常／Analysis前後4応答のrequest／response全文bytes一致、health2GET200を確認した。新候補2＋対照4＝6生成、HTTPは対照4＋health2＝6。ZIP閉鎖後103.58892917400226秒、学習／再試行0、今回の一回は実行済み・消費済みである。
+
+前回のbase2と新344a2は、同じa8fdfbe1 generator・固定Qwen revision／完全messages／LMFE／greedy／8192・2048を使う別run・各model instance1である。旧runを成功へ変更せず、単一run・同instanceの比較とは呼ばない。今回も既存2鍵は同Pod localhost認証だけ、元環境全体は親RAMの復元だけに使い、保存・出力・外部送信0。
+
+### 全文の読取と、同checkpointへの保存・非生成再読
+
+base2は各fieldが原文literalと同文。344a段落は5文の丁寧体→常体化だけで、構成・本人反復は維持。344a二欄は明記された氏名を同僚へ置換し常体化したが、本人反復は残った。全文照合では、経験／次回希望／未伝達、昨日／一人、留保／未定、条件と目的否定の範囲を変えたり、行動欄の相手を同僚と決めたりした箇所は見つからなかった。役割表現への限定差分と、一般段落編集・自然さの広い改善を分ける。formal human Product Readや商品品質向上の確定ではない。
+
+旧3原本のSHA・旧FAILED、新2のCOMPLETE、両ZIP閉鎖後summary・600秒以内・同source／messages／weightsを照合してから、凍結した元checkpointの4独立forkへ取得済みrawを無修補で各1回受領した。元七項目／prepared ID／完全messagesは一致し、新model取得0だった。
+
+| 候補 | 既存CMEE／保存の実結果 |
+|---|---|
+| base・段落 | Engine GENERATED、preview→private保存→別service非生成再読1件一致。canonical8・3hash・renderer、save／preview replay、quota1、元source／Emlis不変 |
+| base・二欄 | Engine UNAVAILABLE、意味未照合として保存前拒否。氏名は原文のままで、公開役割化せず残す候補を通さない |
+| 344a・段落 | Engine UNAVAILABLE、piece_model_meaning_unassessed_or_changedで保存前拒否 |
+| 344a・二欄 | 同じく意味未照合で保存前拒否 |
+
+拒否3件はPIECE_SOURCE_NOT_ELIGIBLEを返し、source／Piece／quotaを変更しなかった。344a2件は保存・再読未到達で、新native画像0。本文を補修したりS7を緩めたりして通していない。人の全文比較で意味変異を見つけなかったことと、現CMEEが意味保持を認定できなかったことを混同しない。Auth・先行Emlisは合成、DBは隔離PGliteであり、live Auth／PostgREST・本番SQL成功ではない。
+
+### 拒否箇所・残件と原本
+
+既存public-role照合とIMPRESSION_HOSTはそれぞれあるが、同じ文での合成が現S7では未成立だった。さらに、段落・行動の複数の有限述語と、過去動作に付く否定hostの常体化が、既存finite inventory／hostの適用範囲外だった。既存の願望・未定registerは成立する。これは一つの呼出漏れだけではなく、合成の未接続と照合範囲外が併存する。特定語句の追加whitelist、文末一括変換、guard除去、追加hint／学習へ進まない。
+
+body-free診断にsource path／SHA／行、各nodeのfamily・reader/treeとS7の到達、既知のpure call回数と不明分を保存した。商品source／guard／rawは無修正。モデル不良・学習不足とは断定せず、次の直接未完は、既存のpublic-role×operatorの合成と、実際の全対象述語／否定hostについて意味を変えずにregisterを照合すること。局所1文だけを通した結果を作品全体の改善にしない。
+
+[同じ実原本](https://chatgpt.com/library?file_id=libfile_fde3_f-9bb7f6aceeec8191bafb13d6d3264cc1_2f7470f963808191aaebf050935e72de&account_id=personal)をversion3へ更新した。9,859,401byte・76member、SHA256 `065b692d2a865ac374c19250d182c84837b7b4e938c5fd14244fab08c5c2489b`。旧53memberは元path／byte不変で全て保持し、新しい実送付・取得原本／閉鎖後summary、全2raw／対照／health、同checkpoint4受領結果、全文照合・拒否診断と復元画面の23memberを追加。回収原本は60,018byte、SHA256 `5bf0d35f4524b75776731cfdd2d2a6d57f5a4cb835e869a85d7df68e215e3e3e`。元閉鎖ZIPを後から書き換えていない。rootと独立read-only担当が、全原本・来歴・4全文・1保存／3拒否・canonical8／3hash／source不変を照合し、独立担当の再生成・DB再query0だった。
+
+STRUCTURE_MAP_DELTA_NONE。製品source／test／SQL／RN／SYSTEM／hint／重み変更0、新CI0、通常selector OFF。今回の追加実行は承認済み一回だけで、再試行・追加学習・通常採用・本番配置／配布0。344aの保存／画像・広い編集品質、v1指示語・新refined資格、通常SQL／API／RNの一巡・本人端末・他AR・全補助経路は未完、商品品質credit／正式受入れ追加0を維持する。

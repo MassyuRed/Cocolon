@@ -3182,3 +3182,12 @@ complete4を必須とするreceiverを変更／実行せず、今回の実raw保
 新3file59,640byte、候補2＋前後4対照＋health2GET、600秒／復元120秒・一回・fit／retry0を固定。現提供PID94200と空送付folderだけ確認・作成した後、新しいrunner／private wire送付は自動承認審査で拒否された。前回60,358byteの承認は今回の別送付一式を含まないとの理由。回避経路は使わず、file送付／model／停止・復元0を確認。今回の具体的な送付・実行と同Pod内の既存2鍵／復元環境用途の確認待ちである。
 
 同資料version2へ9fileを追加、旧44memberをbyte不変で保持。9,625,357byte／53member、SHA256 9661392f52f7fd753888aa7bf526c100c1bda19c0a9cba00acb98984cc9cd683。STRUCTURE_MAP_DELTA_NONE、通常selector OFF・比較／実本文保存／画像・商品品質改善・正式受入れは未完。 [詳細・原本・拒否理由§9.48](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-coherent2-remaining344a-prepared-blocked-20261114)。
+
+<a id="piece-coherent2-remaining344a-actual-saved1-refused3-20261114"></a>
+## 2026-11-14 補助経路AR-04 — 344a2取得・復元、同source4候補は1保存／3拒否
+
+59,640byteの送付・限定実行をMashが具体承認した後、全3fileのsize／SHAを照合して一回実行。344a2件はstop、1child／1load後にGPU解放・元提供完全復元、前後4応答全文一致・health2GET200、ZIP閉鎖後103.588929秒。新候補2＋対照4＝6生成／6HTTP、fit／retry0。base2は再生成せず旧FAILEDを保持し、別run・各instance1／同source・messages・decoder・予算として比較した。
+
+344a段落は常体化のみ、二欄は明記氏名の役割化＋常体化で本人反復は残る。全文読取では意味変異を見つけていないが、広い編集品質やhuman受入れの合格ではない。同checkpoint4独立forkへ無修補rawを各1回受領し、base段落1件だけ保存・非生成再読・canonical8／3hash／quota1が一致。base二欄と344a両件は意味未照合で保存前拒否、source／Piece／quota不変。344a保存／新画像は0、raw補修・S7緩和0。合成Auth／先行Emlis・隔離SQLの確認で、live／本人端末ではない。
+
+public-role×IMPRESSION_HOSTの既存合成未成立と、有限述語／否定hostの現register照合範囲外を分けて記録。モデル不良・追加学習の必要性とは断定しない。同じ資料version3へ23memberを追加し旧53をbyte不変で保持。9,859,401byte／76member、SHA256 065b692d2a865ac374c19250d182c84837b7b4e938c5fd14244fab08c5c2489b。独立read-onlyでも原本・全4本文・1保存／3拒否を照合済み。今回の許可は消費済み、通常selector OFF・製品変更0・新CI0・STRUCTURE_MAP_DELTA_NONE。次の未完は本文全体の意味を保つ活用照合と通常経路／本人端末。 [詳細・原本・限界§9.49](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-coherent2-remaining344a-actual-saved1-refused3-20261114)。
