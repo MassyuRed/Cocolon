@@ -1,6 +1,6 @@
 ---
 doc_id: cocolon_current_work_rules
-revision_date: 2026-11-12
+revision_date: 2026-11-13
 normative_status: CURRENT_GENERAL_RULE_OWNER
 status: CURRENT_EFFECTIVE
 effective_when: NECESSITY_PRODUCT_DIRECTNESS_AND_MINIMUM_SAFETY_BOUNDARY_REMOTE_POSTVERIFIED
@@ -326,6 +326,11 @@ source reference:
 4. task-specificなcontractとtestは`../05_cocolon_rule_file_index.md`から確認します。
 5. 領域別の非破壊条件は`11_cocolon_area_specific_do_not_break.txt`を確認します。
 6. machine GREENはfrozen machine contractのcredit、Product Readは商品読後品質のcredit、runtime readinessはfresh admitted runtimeのcreditです。いずれも別claimであり、相互変換、合算、推測補完をしません。
+
+正式リリース前の旧版維持（Mash決定・2026-11-13）:
+- Cocolon全体で最新状態が正しく動くことを要件とし、既存利用者との互換性や旧版の再現性のためだけの旧版維持・分岐は不要です。
+- 仕組み上必要な旧版の処理は残せます。この方針を旧コードの一括削除義務やAPI／DBを無条件に変更する許可にはしません。
+- 本文・権限・保存の整合性と保護は維持します。現在の製品方針は`../00_cocolon_current_product_and_state.md`、Pieceの描画上の適用は既存再現性契約§7–8を参照します。
 
 Piece current definition:
 - PieceはQ&Aそのものではない。

@@ -4,7 +4,7 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-13 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR04_QUALIFIED_ACTUAL3_SAVE_NATIVE9_RESEARCH_CONFIRMED_NOT_ADOPTED
+status: AR04_QUALIFIED_ACTUAL3_SAVE_NATIVE9_CONFIRMED_FRAME_ADOPTED_MODEL_OFF
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
@@ -1445,9 +1445,11 @@ Mashは「まだリリースしておらず、アプリを使っている人は�
 
 ### 今回採用する実装と、確認済みの結果
 
-通常開発branchのcomponents/piece/PieceVisualCard.jsだけを、研究0b6d212fc43c0d13bff107940ad551bc0147f5dfの検証済みblob a78b9a6a8595b2d3e90b2efa4e9ee00fa8e182b9へ揃える。borderWidth:2の単一Viewを、同じmargin/2のborder色外矩形と2px内側surface矩形へ分ける。既存12テーマ・本文・文字計測／bitmap・renderer識別子・recipe／3hash・保存／source／権利・8秒guardは維持する。通常の新しいsourceで再描画した画像が最新の背景表現になる。
+通常開発branchのcomponents/piece/PieceVisualCard.jsだけを、研究0b6d212fc43c0d13bff107940ad551bc0147f5dfの検証済みblob a78b9a6a8595b2d3e90b2efa4e9ee00fa8e182b9へ揃えた（通常採用commit85752002098ce0aa31f278e00c591e662a88bbb8）。borderWidth:2の単一Viewを、同じmargin/2のborder色外矩形と2px内側surface矩形へ分ける。既存12テーマ・本文・文字計測／bitmap・renderer識別子・recipe／3hash・保存／source／権利・8秒guardは維持する。通常の新しいsourceで再描画した画像が最新の背景表現になる。
 
 先行のexact同一製品sourceでのnative run43357602783はattempt1・success、3作品9画面の本文／保存8項目／3hash・行割り／配置と各preview／saved／export PNG・実view-shot一致、414.08〜3500.18ms、枠帯除去を確認済み。今回の採用sourceで既存renderer189件は189成功・FAIL／SKIP0。先行runや再確認を合算して件数を増やさず、新通常headのnative／全suite成功へ読み替えない。v3・旧版互換を証明するための追加native runは不要となり、完了した同3作品のGPU／nativeを繰り返さない。
+
+通常採用commit85752002のRN契約CIは1453件＋301件すべて成功、phase6契約checkも成功。iOS source／native canvas自動jobは確認時点で実行中で、完了済み研究9画面と混同しない。
 
 通常branchの既存CIはsource反映に伴う自動起動の結果を確認する。旧V4の既知失敗、自然参照との文字領域のRGBA差、一般編集品質・model selector OFFは継承する。今回の通常source採用はコード上の接続で、署名アプリbuild／TestFlight／本人端末／Render配置／live API・DB適用ではない。追加GPU／学習0。
 
