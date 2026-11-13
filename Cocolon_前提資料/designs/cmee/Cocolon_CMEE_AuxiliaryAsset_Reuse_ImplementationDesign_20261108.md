@@ -8,7 +8,7 @@ status: AR04_QUALIFIED_ACTUAL3_SAVE_NATIVE9_RESEARCH_CONFIRMED_NOT_ADOPTED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Qualified actual3 same-source save and research native9 confirmed; AR02 completed-response two-input correction remains unconnected; keep defaults OFF and do not repeat completed GPU/native work"
+current_next: "Qualified actual3 save/native9 and frame fix proven; latest-only pre-release policy permits current renderer frame adoption; AR02 two-input correction remains unconnected; keep model defaults OFF and do not repeat completed GPU/native work"
 runtime_effect_of_this_document: 0
 ---
 
@@ -1432,6 +1432,26 @@ Node24.22.1で構文成功、既存renderer189件は188成功＋partial checkout
 
 STRUCTURE_MAP_DELTA_NONE：研究の既存背景描画owner内の技法のみで、通常の型／接続／責任／fileを加えない。primary TECHNICAL_CREDITは研究の枠帯修復と同版保存画像の保持に限定。一般作品編集品質／通常source採用／新renderer版接続／live／本人端末／Photos・Share／正式受入れ／全補助経路は未完。AR-02の二入力訂正が次の直接未接続であることも維持する。今回native一回は完了し、完了したGPU／nativeを繰り返さない。追加GPU／学習／DB／Render変更0。
 
+
+
+<a id="piece-latest-only-frame-adoption-20261113"></a>
+## 9.27 2026-11-13 — リリース前は最新だけ動かす方針を採用し、実証済み枠描画を通常sourceへ接続
+
+### Mashの今回の決定と、旧版の扱い
+
+Mashは「まだリリースしておらず、アプリを使っている人はいない」「旧版を使えなくなって困る人はいない」「リリースするまで最新の状態さえ動けばよい」と明示した。旧版を仕組み上動かした方がよい場合は既存部品を使ってよいが、現利用者を守るためだけの旧版維持は不要とする。これは今回受領した運用方針であり、本人データ・権利・source／保存の照合は従来のまま扱う。
+
+この決定は、§9.26で通常採用を止めていた旧作品の見た目維持・bugfix時の新renderer版要求に、正式リリースまでの範囲で優先する。既存の再現性契約§7–8へ同じ境界を反映した。新しい互換systemや旧版維持のためだけのrenderer v3／native capability／header／SQL migrationを追加しない。途中のv3案は原本確認までで取りやめ、API／native／DB source変更・migration作成／適用は0。
+
+### 今回採用する実装と、確認済みの結果
+
+通常開発branchのcomponents/piece/PieceVisualCard.jsだけを、研究0b6d212fc43c0d13bff107940ad551bc0147f5dfの検証済みblob a78b9a6a8595b2d3e90b2efa4e9ee00fa8e182b9へ揃える。borderWidth:2の単一Viewを、同じmargin/2のborder色外矩形と2px内側surface矩形へ分ける。既存12テーマ・本文・文字計測／bitmap・renderer識別子・recipe／3hash・保存／source／権利・8秒guardは維持する。通常の新しいsourceで再描画した画像が最新の背景表現になる。
+
+先行のexact同一製品sourceでのnative run43357602783はattempt1・success、3作品9画面の本文／保存8項目／3hash・行割り／配置と各preview／saved／export PNG・実view-shot一致、414.08〜3500.18ms、枠帯除去を確認済み。今回の採用sourceで既存renderer189件は189成功・FAIL／SKIP0。先行runや再確認を合算して件数を増やさず、新通常headのnative／全suite成功へ読み替えない。v3・旧版互換を証明するための追加native runは不要となり、完了した同3作品のGPU／nativeを繰り返さない。
+
+通常branchの既存CIはsource反映に伴う自動起動の結果を確認する。旧V4の既知失敗、自然参照との文字領域のRGBA差、一般編集品質・model selector OFFは継承する。今回の通常source採用はコード上の接続で、署名アプリbuild／TestFlight／本人端末／Render配置／live API・DB適用ではない。追加GPU／学習0。
+
+STRUCTURE_MAP_DELTA_NONE：既存背景描画ownerの内部実装だけで、新しい型／route／DB／file／責任分界はない。全file地図・Piece mapの既存ownerを継承し、関連する現在地と本設計・再現性契約を同単位で更新する。AR-02の完了応答後の二入力訂正、他ARの品質・通常反映・本人端末と全補助経路は未完。
 
 ## 10. 変更箇所と検証
 

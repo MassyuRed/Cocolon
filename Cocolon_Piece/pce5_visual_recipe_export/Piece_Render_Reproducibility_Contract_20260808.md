@@ -192,6 +192,15 @@ PCE-9E実装時にexact catalog bytesをGitHubへfreezeし、runtimeのallowlist
 
 ## 7. renderer version rule
 
+### 2026-11-13 Mash決定 — 正式リリース前の最新優先
+
+現在は正式リリース前で、利用者はいないとのMashの説明に基づく。正式リリースまでは、最新の作成・保存・表示・書き出しが動くことを優先し、現利用者保護だけを理由とする旧版の実行・見た目維持は要求しない。旧版を動かすことが仕組み上必要または既存部品をそのまま使う方が簡単な場合は、その互換だけ利用できる。
+
+この期間は、現在のrenderer識別子のまま可視bug fixを反映できる。旧版維持だけを目的とした新renderer版・互換分岐・SQL変更は追加しない。本文・原source・権利・保存artifactの照合は維持する。今回のPiece枠帯修正は、同じ現行ios.v2と通常componentへ適用する。
+
+以下のsame-version固定・旧作品の見た目維持は、正式リリース後の保存物について適用する。このリリース前の例外を、公開後の旧利用者の作品へ自動延長しない。
+
+
 renderer versionは次を識別する。
 
 ```text
@@ -214,7 +223,7 @@ same symbolic versionでimplementation behaviorを変更しない。bug fixでvi
 
 ## 8. old version support
 
-saved PieceRecordが存在する限り、そのrecordが参照するrecipe/catalog/layout versionを再export可能にする。
+正式リリース後のsaved PieceRecordが存在する限り、そのrecordが参照するrecipe/catalog/layout versionを再export可能にする。正式リリース前は§7の最新優先を適用する。
 
 allowed strategies:
 
