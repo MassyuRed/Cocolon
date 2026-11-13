@@ -3163,4 +3163,13 @@ API dbb96acaと既存RN Modalを適合し、原入力＋最新の自己完結ADD
 
 指示語を含むv1段落のliteral拒否（unresolved_reference）と、新refined案のQ3資格不成立を保持した。参照先を明記したv2は別の新規sourceであり、v1の修復・意味同等・一般対応へ数えない。最新本人補足は既存actual2／native6の証拠のまま。
 
-送信3file60,358byte、base2＋344a2の4候補と前後4対照・health2GET、同既存generator／messages／decoder／予算、別2instance。提供一時停止・元env同Pod内RAM再利用による復元を含め最大600秒（復元120秒）、一回・fit／retry0を具体化した。2鍵は同Pod localhost認証だけ、全env／鍵の保存・出力・外部送信0。新しい一回の承認前で、Pod送信／model／停止・復元0。閉鎖後final_summary照合から同checkpoint4forkで無修補rawを受領する。通常selector OFF・本番／本人端末未完、STRUCTURE_MAP_DELTA_NONE。 [原本・判定範囲・次§9.46](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-coherent2-base344a-prepared-20261114)。
+送信3file60,358byte、base2＋344a2の4候補と前後4対照・health2GET、同既存generator／messages／decoder／予算、別2instance。提供一時停止・元env同Pod内RAM再利用による復元を含め最大600秒（復元120秒）、一回・fit／retry0を具体化した。2鍵は同Pod localhost認証だけ、全env／鍵の保存・出力・外部送信0。準備時点は新しい一回の承認前で、Pod送信／model／停止・復元0だった。承認一回の実結果は次項へ更新し、未実施の4fork受領を完了へ数えない。通常selector OFF・本番／本人端末未完、STRUCTURE_MAP_DELTA_NONE。 [原本・判定範囲・次§9.46](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-coherent2-base344a-prepared-20261114)。
+
+<a id="piece-coherent2-base344a-stopped-restored-20261114"></a>
+## 2026-11-14 補助経路AR-04 — base2取得後にrunner停止、比較未成立・元提供復元済み
+
+承認60,358byte・3fileの一回を実行。base段落／二欄2件はstopで取得したが、華恋が比較runnerへ追加したGPU割当0byte条件に対し8,519,680byteが残り、2個目のmodelをloadする前に停止した。344a未取得・load1回。既存1child／1load後のprocess終了境界にない条件を追加した華恋の比較用処理が原因で、344a不良や商品意味の拒否とはしない。
+
+候補2＋前後4＝6生成、health2GETを含め6HTTP、学習／retry0。元args／env／cwd／2鍵とsource／adapterを保持してPID94200へ復元。前後4応答全文bytes一致、health2GET200、ZIP閉鎖後101.943354秒。全原本・回数・停止条件・復元は独立read-onlyでも照合した。base2は全fieldが原文同文で編集差分0。比較成功・一般品質改善に数えない。
+
+complete4を必須とするreceiverを変更／実行せず、今回の実raw保存再読／画像／通常採用0、通常selector OFF。資料の同identityをActual version1へ更新し、準備27memberをbyte不変で保持、実原本・閉鎖後summary・全文照合・復元画面を追加した。9,600,453byte／44member、SHA256 2da45d179bc289ea593abaed2afb840e4668337c6aa0a06b428ad831bdc2f0ef。今回の一回は消費済み、追加GPU／再試行は行わない。次の方法は既存process終了境界への最小修正案で、新実行へ自動進行しない。STRUCTURE_MAP_DELTA_NONE、商品品質／正式受入れ追加0。 [詳細・原本・原因・残件§9.47](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-coherent2-base344a-stopped-restored-20261114)。

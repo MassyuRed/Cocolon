@@ -1,4 +1,4 @@
-> **11/14・段落／思考・行動二欄を既存base／Piece344aで比べる新2件を準備、未実行。** 新sourceの全七項目・取得前SQL・完全messagesを固定し、固定CPU本文の2保存・非生成再読成功。指示語のv1段落拒否と新refined資格不成立は未解決として保持し、別の明記段落v2へ混ぜない。送信3file60,358byte、候補4＋前後4対照＋health2GET、2model load、復元込み600秒／一回／学習・retry0の新scope。具体承認前・Pod送信／model0、通常selector OFF。 [原本・限界・次§9.46](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-coherent2-base344a-prepared-20261114)。
+> **11/14・承認一回を実行、base2取得後に比較runnerが停止。344a未取得・比較未成立。** 原文copy2件を取得した後、華恋が追加したGPU割当0byte条件で停止。元提供をargs／env／cwd／2鍵・source／両adapter不変で復元し、前後4応答全文一致・health2GET成功、ZIP閉鎖101.943秒。6生成／6HTTP・学習／retry0、実本文保存／画像／通常採用0。この一回は消費済み、通常selector OFF。 [原本・原因・未完§9.47](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-coherent2-base344a-stopped-restored-20261114)。
 
 > **11/14・取得済み実4B2作品を、同じ保存本文から通常hostのpreview／saved／exportへ接続。iOSシミュレーター6画面成功、最長2.124秒。各作品の3画面PNG全byte一致・実view-shot画素／SHA一致、native dismiss後の保存画面遷移を確認。追加生成／学習／本番変更0。一般整形品質・本人端末は未完、通常selector OFF。** [同版画像・実書出し§9.45](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-latest-answer-native6-20261114)。
 

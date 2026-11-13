@@ -2941,7 +2941,7 @@ API dbb96acaの既存source adapter／prepared／編集選択option／CMEE／S7�
 
 試案も隠さず残した。指示語を含む175字のv1段落は原文そのままでもEngine UNAVAILABLE／unresolved_referenceで拒否され、source／Piece／quota不変。v1へGPUは使わない。v2は参照先を最初から明記した別の新規架空記録として新ID・時刻・checkpoint・messagesから作成し、v1との意味同等・参照解決修復・一般段落対応とは数えない。v1の未対応は残件のまま。新refined試案も現Q3 initialがFINAL／issued0で最新ADD2の資格が成立しなかったため、問いを強制せず取得対象から外した。既存最新回答2作品の証拠へ混ぜない。
 
-### 送信と実行の具体scope、まだ未承認
+### 送信と実行の具体scope、準備時点は未承認
 
 原本は [Cocolon_CMEE_AR04_Coherent2_Base344a_Prepared_20261114.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-9bb7f6aceeec8191bafb13d6d3264cc1_2f7470f963808191aaebf050935e72de&account_id=personal)。9,374,774byte・27member、SHA256 `cc41757709975d2001b71a8617555ec095134f307196a3fa15d5500d766d37bb`。最終source checkpoint、全材料、CPU保存結果、未送信v1の原本／拒否結果、新refined不成立、受領再開処理、限定比較runnerを保持する。public GitHubへ架空source全文・完全messages・private状態を転載しない。
 
@@ -2953,4 +2953,33 @@ API dbb96acaの既存source adapter／prepared／編集選択option／CMEE／S7�
 
 取得後はresultとZIP閉鎖後final_summaryの両原本、600秒以内・全共有field・wire／source／回数／対照を照合してから、元checkpointの4独立forkへ無修補rawを各1回受領する。CMEE／S7拒否はそのまま残し、sourceや本文を補修せず、保存成功だけを品質へ数えない。独立read-onlyでrunner／受領／same-source条件を確認し、親子構文・実packet validatorのpure callも成功。新GPU・HTTP・停止／復元は0で、実行成功を先取りしない。
 
-STRUCTURE_MAP_DELTA_NONE。製品source／test／SQL／RN／SYSTEM／model／selectorの変更0、新CI0。通常selector OFF、過去の不採用候補と本番SQL／API／RN・本人端末の残件を維持する。商品品質credit・human Product Read・正式受入れの追加は0。新しい一回の具体的承認前であり、過去の消費済み許可を再使用せず、Pod送信・実4B生成も0。次の直接作業は承認されたこの同条件比較の実本文読取→既存CMEE／S7→同source保存・再読である。全補助経路の完了は未達のまま。
+STRUCTURE_MAP_DELTA_NONE。製品source／test／SQL／RN／SYSTEM／model／selectorの変更0、新CI0。通常selector OFF、過去の不採用候補と本番SQL／API／RN・本人端末の残件を維持する。商品品質credit・human Product Read・正式受入れの追加は0。準備時点は新しい一回の具体的承認前・Pod送信／実4B生成0だった。11/14のMash明示承認を一回実行した結果は次の§9.47へ更新した。比較は途中停止・元提供復元済みで、この一回分は消費済み。全補助経路の完了は未達のまま。
+
+<a id="piece-coherent2-base344a-stopped-restored-20261114"></a>
+## 9.47 2026-11-14 — base2取得後に比較runnerが停止、344a未取得・元提供復元済み
+
+### 承認された一回の実結果
+
+Mashが§9.46の60,358byte・3file、比較4生成＋前後4対照＋health2GET、提供停止／復元込み最大600秒、一回・追加学習／再試行なしを明示承認した。既存Podの新しい送付folderへ3fileだけをUI送付し、全size／SHA一致を確認して一回起動した。runner／wire／SHA台帳は凍結原本とbyte不変である。
+
+base2件はstopで取得したが、1個目のmodel解放後、2個目をloadする前に比較childがValueErrorで停止した。344aのload／生成は0、model loadは1。候補2＋通常／Analysis前後4＝6生成、対照4POST＋health2GET＝6HTTP、学習／再試行0。前後4POSTは全200／stop、各request／response全文bytes一致、health2GETも200だった。
+
+元提供PID84398／starttime212772776からPID94200／starttime217099821へ、元args／全env／cwd／2鍵を保持して復元した。稼働source、Analysis adapter、保存344aとconfigも不変。child終了後GPU inventoryは空で、復元後healthと前後対照を確認して閉じた。ZIP閉鎖前101.93961339024827秒、閉鎖後101.94335399614647秒で600秒以内。比較statusはFAILED_NOT_ADOPTEDであり、復元成功を比較成功へ換算しない。
+
+### 停止原因と実本文の読取
+
+直接の停止条件は、華恋が比較runnerへ追加した `torch.cuda.memory_allocated() == 0`（凍結runner338行）だった。base2の正常生成後、del／gc／empty_cacheを経てもallocated8,519,680byte、reserved9,078,571,008byteが記録され、0条件を満たさず停止した。既存qualified手順は1child／1load後のprocess終了→親release_child／gpu_releasedを使い、この同child内0byte条件はなかった。今回の比較を妨げたのは華恋の比較用処理であり、344a不良・OOM・source／重み不一致・商品意味の拒否と説明しない。残存tensorの所有元までは記録から特定していない。
+
+base段落は13.2022715350613秒、二欄は9.554401481989771秒。全field値が各原入力literalと完全同文だった。183字段落の経験／次回希望／メモ再読希望／未伝達、二欄の「おれ／僕」・昨日／一人・留保／まだ未定・否定範囲を保持する一方、編集差分0で、二欄には架空氏名も残る。原文copyを一般編集品質改善に数えない。全2rawと原七項目・完全messages／prepared／wireの直接照合と独立read-only読取を行ったが、344aとの比較は未成立である。
+
+既存receiverはcomplete4と比較成功を必須とする。失敗statusを成功へ書き換えず、partial2を通すために条件を緩めず、今回のreceiver／CMEE・S7再演／SQL保存・再読／native画像は0とした。事前CPU2成功や旧344aの結果を、この実2本文の保存や新比較の成功へ加算しない。
+
+### 原本・次の範囲
+
+同じ資料identityを [Cocolon_CMEE_AR04_Coherent2_Base344a_Actual_20261114.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-9bb7f6aceeec8191bafb13d6d3264cc1_2f7470f963808191aaebf050935e72de&account_id=personal) のversion1へ更新した。9,600,453byte・44member、SHA256 `2da45d179bc289ea593abaed2afb840e4668337c6aa0a06b428ad831bdc2f0ef`。準備原本27memberは元path／bytesのまま全て保持し、Actual README、送付・起動記録、UI回収原本、閉鎖前ZIP／閉鎖後final_summary、全raw／controls／health、直接照合と復元確認画面を追加した。回収原本60,335byteのSHA256は `a50730bae01a2789eaffb3decec8b9cfa2d92f464c72cb332e04e4d352ff9b5d`。元ZIPを閉鎖後に書き換えていない。
+
+root／独立担当とも原本同一性・閉鎖前後共有field・全2raw・4対照／2GET・復元・回数を照合した。独立担当のmodel／HTTP／SQL再実行は0。新しいrunner、追加GPU、再試行は実行していない。この一回分の許可は消費済みであり、次の実行へ流用しない。
+
+次の最小修正は、比較modelごとに既存1child／1loadの終了境界へ戻し、process終了とGPU inventory空を確認して次へ進めること。これは実行方法の修正案で、商品source／SYSTEM／hint／decoder／入力／S7の変更や新しい恒久補助systemを要しない。再生成済みbase2の扱いを含む新しいscopeは、具体化・承認なしに自動実行しない。今回は修正案を新しい実行実績へ換算しない。
+
+STRUCTURE_MAP_DELTA_NONE。製品source／test／SQL／RN／model／selector変更0・新CI0、通常selector OFF、商品品質credit／正式受入れの追加0。v1の指示語段落拒否・新refined資格不成立、長め段落／二欄編集、最新SQL／API／RNの通常接続・本人端末、他AR・全補助経路は未完を維持する。
