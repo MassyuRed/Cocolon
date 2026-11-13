@@ -1463,6 +1463,8 @@ STRUCTURE_MAP_DELTA_NONE：既存背景描画ownerの内部実装だけで、新
 
 API f5d2ce59a5625f738bc1b277cff755548556ba98で完了natural応答の二入力訂正を接続した。既存SQL／合成providerで147件成功、RNは既存CIと同じMetro bundle検証除外で47件成功（新4件を含む）。実4Bによる訂正後本文品質・稼働DB／Render・配布／本人端末は未確認。
 
+
+通常CIの追加確認（実装head固定）: API f5d2ce59a5625f738bc1b277cff755548556ba98 の43366400986/job131691713496は全工程success（新訂正検証を既存保存系suiteに含む）。RN 81975f78cc7cd22d593d109586231c5267ac63fc の43366761638/job131692868573は1453件＋305件すべて成功。phase6／既存System Context検証も成功。Analysis43366400970とRN iOS sourceの自動jobは記録時点で実行中であり、全CI成功・実4B品質・live／本人端末成功へ換算しない。
 ### 実装と利用者の一往復
 
 同じ応答Modalで「違うと感じた内容を伝える」を開き、「どの内容ですか？」「どう違いましたか？」を別々の必須欄にする。対象欄は当該応答の抜粋を指定し、同じ文字列が複数箇所なら前後も含める。送信は既存本人・thread revision・current observation event ID・一意なexact部分文字列へ束縛し、別応答・古い版・空欄を受け付けない。本人・入力・表示版変更で旧formを失効させ、backgroundでは送信しない。新しい独立画面や旧client向け分岐は追加しない。
