@@ -3173,3 +3173,12 @@ API dbb96acaと既存RN Modalを適合し、原入力＋最新の自己完結ADD
 候補2＋前後4＝6生成、health2GETを含め6HTTP、学習／retry0。元args／env／cwd／2鍵とsource／adapterを保持してPID94200へ復元。前後4応答全文bytes一致、health2GET200、ZIP閉鎖後101.943354秒。全原本・回数・停止条件・復元は独立read-onlyでも照合した。base2は全fieldが原文同文で編集差分0。比較成功・一般品質改善に数えない。
 
 complete4を必須とするreceiverを変更／実行せず、今回の実raw保存再読／画像／通常採用0、通常selector OFF。資料の同identityをActual version1へ更新し、準備27memberをbyte不変で保持、実原本・閉鎖後summary・全文照合・復元画面を追加した。9,600,453byte／44member、SHA256 2da45d179bc289ea593abaed2afb840e4668337c6aa0a06b428ad831bdc2f0ef。今回の一回は消費済み、追加GPU／再試行は行わない。次の方法は既存process終了境界への最小修正案で、新実行へ自動進行しない。STRUCTURE_MAP_DELTA_NONE、商品品質／正式受入れ追加0。 [詳細・原本・原因・残件§9.47](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-coherent2-base344a-stopped-restored-20261114)。
+
+<a id="piece-coherent2-remaining344a-prepared-blocked-20261114"></a>
+## 2026-11-14 補助経路AR-04 — 未取得344a2件への最小修正、送付は自動審査で拒否・未実行
+
+前回のbase2を再生成せず旧FAILED／原本を保持し、344a2だけの1child／1load→process終了→既存親GPU解放確認→元提供復元へ修正した。前回のallocator0byte条件を除去。同じwire／source／messages／decoder／重み、S7・保存処理を維持する。旧base2と新344a2を別run・各instance1として元checkpoint4forkへ受領する処理も準備した。親子構文／実packet validatorの純粋呼出し・独立read-only差分確認は完了、製品source／test／SQL／RN変更や新test・実model成功ではない。
+
+新3file59,640byte、候補2＋前後4対照＋health2GET、600秒／復元120秒・一回・fit／retry0を固定。現提供PID94200と空送付folderだけ確認・作成した後、新しいrunner／private wire送付は自動承認審査で拒否された。前回60,358byteの承認は今回の別送付一式を含まないとの理由。回避経路は使わず、file送付／model／停止・復元0を確認。今回の具体的な送付・実行と同Pod内の既存2鍵／復元環境用途の確認待ちである。
+
+同資料version2へ9fileを追加、旧44memberをbyte不変で保持。9,625,357byte／53member、SHA256 9661392f52f7fd753888aa7bf526c100c1bda19c0a9cba00acb98984cc9cd683。STRUCTURE_MAP_DELTA_NONE、通常selector OFF・比較／実本文保存／画像・商品品質改善・正式受入れは未完。 [詳細・原本・拒否理由§9.48](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-coherent2-remaining344a-prepared-blocked-20261114)。

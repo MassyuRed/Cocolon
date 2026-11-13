@@ -2983,3 +2983,32 @@ root／独立担当とも原本同一性・閉鎖前後共有field・全2raw・4
 次の最小修正は、比較modelごとに既存1child／1loadの終了境界へ戻し、process終了とGPU inventory空を確認して次へ進めること。これは実行方法の修正案で、商品source／SYSTEM／hint／decoder／入力／S7の変更や新しい恒久補助systemを要しない。再生成済みbase2の扱いを含む新しいscopeは、具体化・承認なしに自動実行しない。今回は修正案を新しい実行実績へ換算しない。
 
 STRUCTURE_MAP_DELTA_NONE。製品source／test／SQL／RN／model／selector変更0・新CI0、通常selector OFF、商品品質credit／正式受入れの追加0。v1の指示語段落拒否・新refined資格不成立、長め段落／二欄編集、最新SQL／API／RNの通常接続・本人端末、他AR・全補助経路は未完を維持する。
+
+<a id="piece-coherent2-remaining344a-prepared-blocked-20261114"></a>
+## 9.48 2026-11-14 — 未取得344a2件への最小修正を完了、送付は自動承認審査で拒否・未実行
+
+### 既存手順へ戻した範囲
+
+Mashの「補助経路の活用作業を続けて」で§9.47の停止箇所から再開した。取得済みbase2原本と旧FAILED／閉鎖後summaryはbyte不変で保持し、再生成しない。未取得344a2件だけを、既存a8fdfbe1 generator・同じ完全messages／LMFE／greedy／2048・8192／保存344aで取得する処理へ最小修正した。
+
+1child／1model loadで2件を取得してchildを終了し、親の既存release_child／gpu_releasedでprocess死亡とGPU inventory空を確認して元提供を復元する。前回追加した同child内のtorch allocator0byte条件とbase生成loopは除去した。商品source／SYSTEM／hint／入力／decoder／重み／S7は変更0、旧実行を再開・成功へ再分類する経路もない。
+
+新受領は旧3原本SHAと旧FAILED／base2を固定照合し、別runの344a2成功原本・両ZIP閉鎖後summary／600秒以内・source／messages／weights一致を確認して、元checkpoint4独立forkへ既存replay_oneで無修補受領する。両runは別process・それぞれinstance1、旧base2再生成0を記録する。既存の作者・CMEE／S7・preview／save／非生成再読を再利用し、新しい恒久systemは作らない。
+
+### 固定した送付と実行scope
+
+送付は実行処理37,156byte、既存とbyte同一のwire22,300byte、SHA台帳184byteの3file、計59,640byteだけ。runner SHA256 `54a69163a77b8e5f3de7b5eac92ca5347f9d8cf03a58aff914867c4f3e17b20b`、wire `89e4d1980a91b6758606c7e67285fb4e930ed3d2051d727e4de71414b3a42f6e`、台帳 `a2a7fcbbdadcede66ef6e613202ac500ed38131a83b704c2fb7074e8aa795b56`。checkpoint／合成Auth／取得済みraw／CPU候補は送らない。
+
+既存Pod f1lle4xwq3wjln、344a新2＋通常／Analysis前後4対照＋health2GET＝最大6生成／6HTTP、model load1。元提供の一時停止・復元とZIP閉鎖後確認込み600秒、復元枠120秒、一回・追加学習／再試行0。既存2鍵は同Pod localhost認証のみ、起動環境全体は同Pod親RAMで復元だけに再利用し、保存・出力・外部送信しない。新しい出力ROOTを使い、前回のclosed ROOTには触れない。
+
+親／childの構文と同じ実packet validatorのpure callは成功。runner37,156byteと受領11,366byte（SHA256 `3918bec830c509dcd2c93224e5566c9d98b66881796f1b43e19ba583bdee1b17`）は独立read-only差分確認も完了した。SQL／モデル／HTTPを新しいtestとして実行した結果ではない。
+
+### 実際に止まった操作と保存先
+
+現提供PID94200／starttime217099821、出力ROOT／ARCHIVE未作成をread-onlyで確認し、新しい空の送付folderだけ作成した。続行指示を同目的・同じ入力／Pod／資格情報用途の作業再開として送付へ進めたが、新3fileのアップロードは自動承認審査で拒否された。理由は「以前の60,358byteの承認は、今回の別の修正runnerとprivate wire／入力fileの外部送付を含まず、具体的な送付承認がない」というものだった。
+
+拒否を回避する別経路／間接実行は行わず、UIでfolderが空のままであることを確認した。今回の送付file0、model／HTTP／停止・復元0、再試行0。修正を実行成功へ換算しない。今回の59,640byte・3fileと限定実行、既存2鍵・元環境の同Pod用途について、Mashの具体的な確認が必要な状態で保持する。既に作った空送付folderは次回fresh確認して使い、once出力ROOT／ARCHIVE未作成を再確認する。
+
+[同じ原本](https://chatgpt.com/library?file_id=libfile_fde3_f-9bb7f6aceeec8191bafb13d6d3264cc1_2f7470f963808191aaebf050935e72de&account_id=personal)をversion2へ更新し、旧44memberを元path／byte不変で保持、remainingの修正処理／同wire／台帳／受領／review／凍結scope／拒否理由／実行引数／READMEの9fileを追加した。9,625,357byte・53member、SHA256 `9661392f52f7fd753888aa7bf526c100c1bda19c0a9cba00acb98984cc9cd683`。private本文や起動環境・鍵はpublic GitHubへ追加していない。
+
+STRUCTURE_MAP_DELTA_NONE。製品source／test／SQL／RN／model／通常selector変更0、新CI0、商品品質credit・human受入れ追加0。前回比較未成立・今回未実行、通常selector OFF、v1指示語／新refined資格、長め段落／二欄本文・通常経路／本人端末・他ARの残件を維持する。
