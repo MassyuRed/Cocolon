@@ -732,6 +732,8 @@ Freeもthread／artifactを保存する。ただし、別入力の次回Emlis生
 
 ### 18.4 Premium interpretive frame
 
+**11/13対象結合の修復：** 本人の確認/不使用/修正に、対象と一意に同定できた元frameのAI解釈contextを結ぶ。記録ID/key/ref一致を要し、反復viewや旧版は未確定のまま本人文を保つ。SYSTEM変更なし・実本文効果は未確認。[実装/比較準備§9.37](../Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-frame-feedback-target-context-prepared-20261113)。
+
 **11/13実装差分：** 既存の根拠付き暫定frameの保存表示・確認/修正/不使用を現naturalへ接続した。本人修正文の次回作者材料への到達を隔離SQL/RN描画で確認。4B応答の品質改善・当回二欄訂正からframeへの伝播は未成立。料金/プランを変えず、当回訂正中は旧frameを表示しない。[範囲と原本§9.36](../Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-natural-owned-premium-frames-20261113)。
 
 > **Premiumでは、ユーザーの蓄積した本人情報から作られた、根拠付き・暫定的・修正可能な「ユーザー固有の解釈フレーム」を使い、ユーザー本人の辞書により近い位置から観測とReceptionを行う。**

@@ -4,16 +4,15 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-13 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR02_AR03_NATURAL_PREMIUM_FRAME_CONNECTED_DRAFT
+status: AR03_FRAME_FEEDBACK_TARGET_BOUND_COMPARISON_PREPARED_NOT_EXECUTED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Owned Premium frames now reach saved natural OBS and person feedback UI; d8f6d137 Piece/Analysis CI both passed attempt1; live API/device and actual reply quality remain; correction-to-frame/cross-core propagation incomplete and normal model selector OFF"
+current_next: "Exact original frame target context wired; frozen old2/new3 plus four controls and two health GETs prepared for one <=300s run; new 83777-byte Pod submission awaits explicit execution approval, no retry/fit/restart; normal model selector OFF"
 runtime_effect_of_this_document: 0
 ---
 
-> **11/13・Premiumの既存「仮の理解」をnaturalへ接続：** 本人の過去入力・実回答に根拠を持つ暫定frameを、現naturalの保存artifactと既存画面へ渡す欠落を修復。確認／修正／不使用を保存し、本人修正文を次の作者材料へ渡す。不使用は次のframe候補から除外する。新16件・既存227件、実隔離SQLの保存DTOを既存RN editorへ渡す3検証が成功。natural本文は固定合成であり、4B本文の品質改善・実機稼働の証明ではない。 [現接続§9.36](#emlis-natural-owned-premium-frames-20261113)。
-
+> **11/13・本人frame判断の対象欠落を修復、実4B比較を準備：** 次の作者材料に確認/不使用/修正のstatusだけが届き、どの仮理解への判断かが落ちていた。Premiumの適格履歴から既存ownerで対象を再導出し、記録ID/frame key/frame refの一意・完全一致と根拠を確認できたものだけAI解釈contextとして添える。後の修正viewや旧版は未確定に残し、本人のstatus/修正文を保持する。新12固有・既存316成功。新3の合成受領保存/新service非生成再読も一致。 [現接続/比較準備§9.37](#emlis-frame-feedback-target-context-prepared-20261113)。
 
 > **11/13・16教材32更新と17比較を一回完了、品質未達で通常不採用：** 承認207,620byteを既存Podで実行し、新規31応答＋前後4対照、全stop、再試行0。復元・対照終了237.196491秒／ZIP close237.885058秒、元提供PID83325→84398へ元args/env/cwdで復元、通常／Analysisの前後全response一致・独立health200。112tensor保存／fresh reload一致と原本・重み回収を確認。先生→妹の格崩れ・本人一人称の貼返しが残り、通常保持T06には未記載の支配状態を付加したため新10b563候補を採用しない。旧3＋新4の同source隔離保存・新service非生成再読は7成功、独立比較7UNASSESSED。通常OFFを維持する。 [実原本・採否・次](#emlis-correction-independent16-fit32-actual-20261113)。
 
@@ -2573,3 +2572,49 @@ Free／Plusにframeを増やさず、新料金・問い数・quota・公開DTO/r
 STRUCTURE_MAP_DELTA_PRESENT：既存source/meaning ownerからnatural OBS保存・既存public frame/本人操作への接続責務をcurrent01/04、01A/01Cと詳細正本§18.4へ記録。新しい製品owner、型、作者、renderer、DB mechanismは追加しない。前回§9.35の実一回答→Pieceと両CI成功は継承する。旧資格固定3実rawはQ2の別ref/別prepared/messagesであり、現naturalの実4B受領成功へ移し替えない。
 
 当該headの両CI初回成功まで確認した。この既存frame接続を通常API反映・本人端末の残件へ引き継ぐ。自然文がframeにより良くなったという判定、新GPU/fit・同じ不採用比較の反復・通常model採用へ自動進行しない。
+
+
+<a id="emlis-frame-feedback-target-context-prepared-20261113"></a>
+## 9.37 2026-11-13 — frameへの本人判断を対象の仮理解へ結合、実4B一回比較を準備
+
+**11/13・本人frame判断の対象欠落を修復、実4B比較を準備：** 次の作者材料に確認/不使用/修正のstatusだけが届き、どの仮理解への判断かが落ちていた。Premiumの適格履歴から既存ownerで対象を再導出し、記録ID/frame key/frame refの一意・完全一致と根拠を確認できたものだけAI解釈contextとして添える。後の修正viewや旧版は未確定に残し、本人のstatus/修正文を保持する。新12固有・既存316成功。新3の合成受領保存/新service非生成再読も一致。 [実装 96c2085a](https://github.com/MassyuRed/mashos-api/commit/96c2085acb6913246f324f2eeddb944fffb9ef05)。API 96c2085aのPiece CI [43411618714](https://github.com/MassyuRed/mashos-api/actions/runs/43411618714)とAnalysis CI [43411618653](https://github.com/MassyuRed/mashos-api/actions/runs/43411618653)は、ともにattempt1で全工程成功。追加dispatch/rerun0。
+
+### 実物で見つかった欠落と最小修復
+
+§9.36の保存原本で、初期DTOに対象trigger/received_meaning/frame key/refがある一方、次作者材料のUSER_FRAME_FEEDBACKにはinput_id/status/correction_text/version/updated_atだけが届いていた。確認と不使用は対象本文なし、修正も旧対象なしで、同じ過去記録の複数frameを区別できなかった。前回の表示保存成功は維持し、この未結合を一般応答品質へ数えない。
+
+既存 `natural_reply.py:_frame_feedback_material` で、Safety採用済みの同じ本人履歴に絞ったコピーだけのfeedback/rejected_keysを空にし、既存 `derive_interpretive_frames` から反応前の元frameを得る。原admitted・本人feedback・source prefixは変更しない。記録ID/key/refが全て一致する一つの候補かつ非空evidenceの場合だけBOUNDとし、本人のUSER_FRAME_FEEDBACKと別roleのAI_INTERPRETATION_CONTEXT/PAST_RECORD_FRAMEを添える。REVISEDの本人文は旧対象文に置き換えず、REJECTEDの対象をactive frameへ戻さない。
+
+`frame-view` をbase refと同一視せず、後の修正表示・改変source・未知/非一意・任意current sourceへの未対応をUNRESOLVEDに残す。keyだけや意味の近さで対象を作らない。反復修正では最新feedback行から以前の本人修正文が失われるため、この修復で完全な版復元ができたとはしない。既存source/権利ownerがfeedback自体を先に除外する場合も維持する。
+
+| 変更file（mashos-api） | 現責務 |
+|---|---|
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply.py` | 既存feedback投影へ正当に同定できた対象controlを結合。対象不明でも元status/本人修正文/versionを保持。SYSTEMの文章と既存message builderのコードは無変更。変わるのは対象contextを含むprivate JSON材料である。 |
+| `ai/tests/test_emlis_frame_feedback_context.py`（新） | 初回3status、後の2反応、旧版/権利/訂正/Safety/任意導出失敗/feedbackなしの12検査。 |
+| 既存Piece/Analysis workflow2本 | 新suiteを既存paths/実行stepへ追加。新workflow/新owner/新authorなし。 |
+
+### 終えたCPU検証と、実生成へ残す範囲
+
+新12固有は分割で全成功（最初9成功/3fixture期待失敗、関連4成功のうちFree1は重複なので合計しない）。変更履歴とPlusは既存ownerがfeedbackを除外すること、過去本文はfeedback変更でCONTEXT_CHANGEDになることにfixtureを合わせた。sourceを緩めていない。既存natural application/frame/question/二欄訂正/意味比較/予算/HTTPの7suiteは316成功・失敗/skip0、54.70秒。
+
+共通の隔離SQL checkpointから3枝を作り、原入力/実ANSWER/源泉ID/本文/サービス制御時計とfeedback時刻を固定した。各SQL event.recorded_atは分岐の実commit時計を保持しており、全event row同一とはしない。比較する作者材料に入るANSWER source payload/時刻/IDは一致する。同じ過去記録内の拒否対象A/Bと本人修正Aを固定し、旧拒否2枝はmessages全byte一致、新3messagesは全て別、全SYSTEM一致を確認した。旧拒否1共有＋旧修正1＋新3で研究生成は5要求とする。
+
+各受領前checkpointはCALL_STARTED保存済/RECEIVEDなし。合成本文で実receipt→既存process→保存→新service GETを3件完了し、原入力/ANSWER/feedback/先行event不変と同本文再読を確認した。拒否A/Bは指定対象だけを除いた2frame、修正Aは本人文へ更新した3frameを保持。モデル生成・raw実効果・独立human評価ではない。
+
+### 準備した一回比較と承認境界
+
+送信対象は3file、合計**83,777byte**。架空材料と既存作者messagesのみで、既存Pod `f1lle4xwq3wjln` の同じ提供へlocalhostで送る。研究は旧2/新3=5生成、normal/Analysisの前後4対照を含めモデルPOST最大9、独立health GET前後2で全HTTP最大11。全体300秒・一回・再試行/学習/提供停止/再起動/重みload/設定変更0。既存PID/starttimeとhealth、対照の生response一致を前後確認し、不一致/期限/形式拒否はFAILED_NO_RETRYへ止める。後確認とcloseに130秒を確保する。
+
+| Podへ置くfile | byte | SHA256 |
+|---|---:|---|
+| `frame_context_http_once.py` | 18,431 | `9dfe86482e3460a6124baa1e8f3c892f457351fbcd6fc3a3d119d64abc907f38` |
+| `wire_requests.private.json` | 65,143 | `6a47b81bdde211a456fdeb93c298d016dd03b3034c3128aa32be9bd21cffd9b8` |
+| `files.json` | 203 | `a7477190ca04b1562030084dc3cf84376842d27a89cf655104595ced1dd1b8bb` |
+
+既存2鍵は同Podの指定2fileから該当項目だけをメモリ内で同Pod認証に使い、保存/表示/回収しない。processの環境/argv全読や復元再利用は不要。送信64KiB/受領256KiB、各研究POSTは23秒まで、health GETは5秒まで。新依存/download/外部serviceなし。実tokenizerはlocal固定cacheがなく未確認であり、byteをtokenへ換算しない。各request bodyは10,318–10,907byteだが、8192context/2048出力予約は既存serverが検査し、拒否時に切断/追加tryしない。
+
+候補runnerのmain/モデルPOST/health GET/Pod送信/GPU/fitは全0。上の具体的な新送信は前回の消費済み一回承認へ含めず、別の実行承認待ち。実行前のread-only独立reviewではblocking所見なし。実生成後は全無修補rawを原入力/過去/本人判断と読み、対象の取り違え・拒否の再利用・逆解釈・時点転移・内部label露出・復唱を確認する。機械保存成功を本文品質へ換算せず、成功しないhint/SYSTEM周回や追加fitへ自動進行しない。
+
+SYSTEMの文章・モデル・作者・公開DTO/API・DB/SQL・RN・料金/問い数/quotaは変更しない。対象contextは本人sourceや有効frameではない。一般応答品質、反復修正時の対象復元、二欄訂正→frame/他core伝播、live/本人端末・正式受入れは未完。通常model selector OFF、新10b563不採用を維持する。
+
+STRUCTURE_MAP_DELTA_PRESENT：既存frame ownerからnatural private作者材料への対象結合をcurrent01/04・01A/01C・詳細正本§18.4へ反映。新しいsource type/public contract/DB機構は追加しない。次はこの凍結5研究要求と前後確認の具体承認後に一回だけ実比較し、同じ新3checkpointの無修補受領保存/非生成再読と本文比較へ戻る。

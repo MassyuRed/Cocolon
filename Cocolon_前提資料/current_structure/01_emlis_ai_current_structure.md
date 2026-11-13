@@ -1,4 +1,4 @@
-> **11/13・Premiumの既存「仮の理解」をnaturalへ接続：** 本人の過去入力・実回答に根拠を持つ暫定frameを、現naturalの保存artifactと既存画面へ渡す欠落を修復。確認／修正／不使用を保存し、本人修正文を次の作者材料へ渡す。不使用は次のframe候補から除外する。新16件・既存227件、実隔離SQLの保存DTOを既存RN editorへ渡す3検証が成功。natural本文は固定合成であり、4B本文の品質改善・実機稼働の証明ではない。 [現在地§9.36](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-natural-owned-premium-frames-20261113)。
+> **11/13・本人frame判断の対象欠落を修復、実4B比較を準備：** 次の作者材料に確認/不使用/修正のstatusだけが届き、どの仮理解への判断かが落ちていた。Premiumの適格履歴から既存ownerで対象を再導出し、記録ID/frame key/frame refの一意・完全一致と根拠を確認できたものだけAI解釈contextとして添える。後の修正viewや旧版は未確定に残し、本人のstatus/修正文を保持する。新12固有・既存316成功。新3の合成受領保存/新service非生成再読も一致。 [現在地§9.37](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-frame-feedback-target-context-prepared-20261113)。
 
 > **11/13・AR-03の評価対象／時点候補を実4応答で比較、限定的短縮はあるが通常不採用：** 承認38,004byteを既存Podで一回実行し、8.890746秒・全4 HTTP200／stop、PID77140・前後health200を維持。学習／再試行／提供再起動0。ORIGINAL_OCCASION候補は「その時」の所属が曖昧なまま、未記載の「その言葉」へ評価対象を狭めた。ANSWER_TIME候補は不要な原因探索・問い掛けを除き短縮したが、「そして今は」と続け、過去記録への回答時点と今回の別記録を区別できていない。全4は既存形式検査を通るが意味合格ではない。通常support OFF／history-plan opt-in default falseを維持。今回一回の承認は消費済み、新本文SQL保存・live反映／本人端末・AR-03／全補助経路は未完。 [実原本・判定・再開点](<../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#auxiliary-history-active-binding-actual4-20261113>)。
 
@@ -2097,3 +2097,13 @@ STRUCTURE_MAP_DELTA_PRESENT。詳細・責務/全71内訳・合成限界・次�
 API d8f6d137のPiece CI [43404500570](https://github.com/MassyuRed/mashos-api/actions/runs/43404500570)とAnalysis CI [43404500574](https://github.com/MassyuRed/mashos-api/actions/runs/43404500574)は、ともにattempt1で全工程成功。手動dispatch/rerun0、live DB/Render/RN build・配布・GPU/学習は0。 Free／Plusにframeを増やさず、新料金・問い数・quota・公開DTO/route・SQL・RN source・prompt・モデルを変更しない。二欄訂正からframeへの意味伝播、Piece／Analysisへの訂正伝播、複数回答Piece、一般応答/編集品質、live／本人端末・正式受入れは未完。新10b563候補不採用と通常model selector OFFを維持する。
 
 STRUCTURE_MAP_DELTA_PRESENT。実装と責務・原本・途中環境失敗・検証限界は[詳細設計§9.36](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-natural-owned-premium-frames-20261113)を正本とする。
+
+
+<a id="emlis-frame-feedback-target-context-prepared-20261113"></a>
+## 2026-11-13 — 本人判断と対象frameのprivate結合を修復
+
+**11/13・本人frame判断の対象欠落を修復、実4B比較を準備：** 次の作者材料に確認/不使用/修正のstatusだけが届き、どの仮理解への判断かが落ちていた。Premiumの適格履歴から既存ownerで対象を再導出し、記録ID/frame key/frame refの一意・完全一致と根拠を確認できたものだけAI解釈contextとして添える。後の修正viewや旧版は未確定に残し、本人のstatus/修正文を保持する。新12固有・既存316成功。新3の合成受領保存/新service非生成再読も一致。 実装はAPI 96c2085a。API 96c2085aのPiece CI [43411618714](https://github.com/MassyuRed/mashos-api/actions/runs/43411618714)とAnalysis CI [43411618653](https://github.com/MassyuRed/mashos-api/actions/runs/43411618653)は、ともにattempt1で全工程成功。追加dispatch/rerun0。
+
+83,777byte/3file、旧2＋新3と前後4model確認＋health2GET、300秒・一回・学習/再試行/再起動0の実比較を準備。未送信/未実行、今回分の承認待ち。SYSTEMの文章・モデル・作者・公開DTO/API・DB/SQL・RN・料金/問い数/quotaは変更しない。対象contextは本人sourceや有効frameではない。一般応答品質、反復修正時の対象復元、二欄訂正→frame/他core伝播、live/本人端末・正式受入れは未完。通常model selector OFF、新10b563不採用を維持する。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存natural_reply.pyの対象投影、新testと既存workflow2本の責務/限界/原本を[詳細設計§9.37](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-frame-feedback-target-context-prepared-20261113)へ集約する。
