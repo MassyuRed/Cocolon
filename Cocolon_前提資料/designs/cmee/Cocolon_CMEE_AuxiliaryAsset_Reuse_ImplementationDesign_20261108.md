@@ -1538,7 +1538,7 @@ API `0985877fb27935ef9510daa93f64a8ec1d1a4ed8`。§9.29の未接続だった訂�
 
 計8応答はHTTP200／stop、model `cocolon-qwen35-4b-base-851bf6e`／PID80025と前後health200を維持。学習・retry・提供再起動0。最初の3組は同じsource prefix／ID／時刻／全原文の厳密対で、hintとその説明だけが差。次2件はfresh ID／時刻を持つため、trial間のbyte同一A/Bではない。初回の誤応答は合成fixture、訂正後8応答だけが実4B。選択カテゴリ・各感情と強度も入力票とSQL／送信材料で一致させた。Auth／HTTP framingは合成、DBは隔離PGliteで、live Supabase／Render／配布・本人端末ではない。
 
-実8本文は今回の独立比較でも全て未判定であり、語尾・複文・引用・時点の自由文逆読取り不足を残す。旧9本文も新しい生成なしで照合し、全てUNASSESSEDのままで一般修復していない。最終sourceの関連3suite167件成功、試行中の広い集合337／339成功と区別する。原入力不変、架空ANSWER／QUESTION追加0、訂正assessmentはUNASSESSEDのまま。全文・hash・凍結要求・5保存と再読・checkpointは[実結果原本](https://chatgpt.com/library?file_id=libfile_fde3_f-c28bb6de53b881919bb8974a4eee1a03_2f7470f963808191aaebf050935e72de&account_id=personal)へ保持した。
+実8本文は今回の独立比較でも全て未判定であり、語尾・複文・引用・時点の自由文逆読取り不足を残す。旧9本文も新しい生成なしで照合し、全てUNASSESSEDのままで一般修復していない。最終sourceの関連3suite167件成功、試行中の広い集合337／339成功と区別する。API0985877fの通常保存系[43379453153](https://github.com/MassyuRed/mashos-api/actions/runs/43379453153)とAnalysis[43379453416](https://github.com/MassyuRed/mashos-api/actions/runs/43379453416)はともにsuccess。原入力不変、架空ANSWER／QUESTION追加0、訂正assessmentはUNASSESSEDのまま。全文・hash・凍結要求・5保存と再読・checkpointは[実結果原本](https://chatgpt.com/library?file_id=libfile_fde3_f-c28bb6de53b881919bb8974a4eee1a03_2f7470f963808191aaebf050935e72de&account_id=personal)へ保持した。
 
 ### 現在の状態と次
 
