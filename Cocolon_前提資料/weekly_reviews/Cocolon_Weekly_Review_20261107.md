@@ -3103,3 +3103,11 @@ STRUCTURE_MAP_DELTA_NONE：今回は実比較・同源泉保存再読・採否�
 **11/13・同じthread内の反復frame判断で表示対象を保持：** API8cba3e0c。本人が見ていた修正文を既存OPERATIONへ保存し、最新判断のkey/ref/version・同じ源泉・根拠が一致する場合だけ次のprivate作者材料へ渡す。旧本人修正文はAI文章と分ける。関連399固有件成功、最終対象22件成功（重複加算なし）。合成provider・隔離SQLの接続確認で、実4B本文の改善ではない。別threadと旧未保存対象は未確定、通常selector OFF・前回新3不採用を維持する。
 
 STRUCTURE_MAP_DELTA_PRESENT。同じ保存threadの対象保持だけを閉じ、別threadと旧未保存対象の復元、実4B本文品質、live／端末は未完。料金・問い数・商品範囲の変更なし。[詳細設計§9.39](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-repeated-frame-target-same-thread-20261113)を正本とする。
+
+
+<a id="emlis-cross-record-frame-target-20261113"></a>
+## 2026-11-13 — 別記録へのframe判断対象・保存依存とPiece資格
+
+**11/13・別記録への反復frame判断対象と失効を接続：** APIb8466c6a。本人が実際に見た対象を、最新判断と一致する一意な操作記録から既存context読取へ渡す。判断元の編集／削除・操作消失時は保存応答を非生成で抑止し、生成中保存とPiece作成／見た目変更／保存も拒否する。受取先での再修正・保存receipt再開を含む495固有件成功（新25）。合成provider・隔離SQLの確認であり、実4B品質・本番SQL／配置・本人端末は未完。
+
+前回8cba3e0cの両CIはattempt1成功済み。今回の新CIとは区別する。STRUCTURE_MAP_DELTA_PRESENT。既存の本人・権利・保存寿命を保ち、B本文を履歴枠へ追加しない。[詳細設計§9.40](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-cross-record-frame-target-20261113)を正本とする。

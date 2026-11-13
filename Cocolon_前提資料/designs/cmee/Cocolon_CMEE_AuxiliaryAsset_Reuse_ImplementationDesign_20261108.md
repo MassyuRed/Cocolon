@@ -4,11 +4,11 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-13 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR03_REPEATED_FRAME_TARGET_SAME_THREAD_CONNECTED_PROSE_UNVERIFIED
+status: AR03_CROSS_RECORD_FRAME_TARGET_CONNECTED_PROSE_UNVERIFIED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Exact repeated frame display retained within the same saved thread; cross-thread target retrieval and model prose adherence remain uncompleted; preserve prior 0/3 rejection, no repeated hint/SYSTEM/fit trials, normal model selector OFF"
+current_next: "Captured repeated frame targets now cross owned records with frozen origin dependencies, saved-read invalidation, receipt replay and Piece source fences; 495 isolated checks pass, no hosted migration or actual4B prose verification; preserve prior 0/3 rejection and normal selector OFF"
 runtime_effect_of_this_document: 0
 ---
 
@@ -2695,3 +2695,44 @@ STRUCTURE_MAP_DELTA_NONE：今回は実比較・同源泉保存再読・採否�
 今回閉じたのは同じ保存thread内の対象保持である。過去AのframeをBで判断した場合、操作targetはB.eventsに保存される。別thread Cが過去Aだけを取得してもBの操作は渡らないため、反復targetは引き続きUNRESOLVEDとする。全threadへ接続済みとしない。跨threadを閉じる場合は、既存本人権利・最新feedbackに一致する操作targetを既存context読取へ渡す変更の範囲を先に確定する。新tableや別の検索systemを先に作らない。
 
 §9.38の拒否／修正不反映3件は不採用のまま、今回の材料保持成功で実本文の採否を変更しない。実4Bの一般応答品質、二欄訂正→frame／Piece／Analysis伝播、複数回答Piece、通常配置・本人端末・正式受入れは未完。追加hint／SYSTEM／fitの同型比較へ戻らず、既存の不採用run・消費済み承認を再使用しない。通常model selector OFFと新10b563不採用を維持する。全仕様・全file本文の意味理解を、この限定修復やtest件数から全完了とは主張しない。
+
+
+<a id="emlis-cross-record-frame-target-20261113"></a>
+## 9.40 2026-11-13 — 別記録への正確なframe判断対象と、その依存元の失効を接続
+
+### 商品経路と変更範囲
+
+§9.39の残件だった、過去AのframeをBで判断した後、別の現在記録Cへ対象を渡す接続を実装した。Bが既存3／6件の選択履歴に入らなくても、本人が見ていた正確な対象だけをCへ渡す。B本文や全イベントを新しい本人履歴へ追加せず、旧未保存の対象を推測復元しない。
+
+[API b8466c6a](https://github.com/MassyuRed/mashos-api/commit/b8466c6acba694d410a89068c0bc5054123e3116)は既存製品1file、既存test3file、既存workflow2file、新migration2fileの計8path。新table／列／公開API・DTO／RN／model／SYSTEM／生成hint／料金／問い数／履歴枠の変更はない。migrationはCLIで作成し、既存invoker functionのsignature・ACL・RLSを維持する。稼働DB適用・Render配置・GPU生成・学習・build・配布は0。コードとSQL案の接続確認であり、実4Bの本文改善ではない。
+
+### 全file地図と責務
+
+| owner | 今回の責務 |
+|---|---|
+| ai/services/ai_inference/emlis_thread_service.py | 自threadとRPC投影の同じ操作IDを重複排除する。異なる複数候補は選別前に未確定。fresh開始／本人回答時にframe_target_dependenciesをprivate dataへ固定し、GET／明示再開時の現依存と照合する。非emptyだけcontext identityを拡張し、旧emptyは完全互換。 |
+| supabase/migrations/20261113120241_emlis_frame_feedback_target_context.sql | 既存related_contextとcommitを更新。最新feedbackに一致する最大2候補の必要payloadとorigin guardだけを返す。Bの同本人・natural/Q3・source snapshot一致・既存閲覧資格を確認する。commitはB原入力／thread／操作をshare lockした後にRPCで再照合し、判断更新前の状態に対して検査する。 |
+| supabase/migrations/20261113120502_piece_frame_target_dependency_fence.sql | 既存Piece issue／visual／saveの3関数へ同じ依存照合を追加。既存一意anchorをpg_get_functiondefで差替え、既存lock／quota／権利条件を維持する。refined用context identityのoptional拡張をPythonと一致させる。 |
+| ai/tests/test_emlis_frame_feedback_context.py | 新18件を含む40件。同本人のA→B→C、履歴枠外のB、受取先での再修正と回答、旧未保存・複数候補・他本人・version不一致、B編集／削除／操作消失、生成中の変更、降格、非生成GETとreceipt再開を確認する。 |
+| ai/tests/piece_v2/test_b05_natural_refined_saved_pipeline.py | 新7件を含む78件。新contextのrefined→Piece候補／保存／同版再読とquota1を確認し、B編集／削除時の3操作の拒否・Piece状態不変を確認する。 |
+| ai/tests/test_emlis_q3_application.py・既存workflow2本 | 隔離DBへ新core migrationを適用。既存CI対象へmigration2pathを追加し、既存test経路を使う。新しいrunner／CI family／手動dispatchは作らない。 |
+
+STRUCTURE_MAP_DELTA_PRESENT。商品現在地、Emlis／Piece／CMEE current maps、全file地図01A/B/C、Emlis詳細18.4、最新weeklyへ同じ責務と限界を反映する。
+
+### 保存・失効・互換
+
+依存はframe key／version／判断元Bの入力ID・原入力digest／操作ID・payload digestの6scalarで、Bの無関係な後続操作やthread revisionだけでは失効させない。作者材料へ渡す対象は最新feedbackのkey/ref/input/version/statusに一致し、Pythonの既存request fingerprint確認とA側の根拠・source guard・Safetyも通った一意な記録だけとする。候補2件の一方を後から選んで依存なしBOUNDにしない。
+
+C生成後にBが編集・削除された場合、または対象操作が失われた場合、保存OBSの表示と再取得資格を抑止する。生成中の変更は保存前に拒否する。受取先C自身で再修正するときは、旧feedbackと旧依存を確認してから最新feedbackを更新し、新操作を保存する。確認済みreceiptは固定context identityで再開し、同じproviderを再取得しない。依存変更後の明示再開も拒否する。
+
+旧empty context identity・公開DTOを維持し、未消費の既存threadへ新targetを黙って付け替えない。新開始／明示更新時に固定する。Piece側にも同じ依存・identityを照合させ、Pythonだけの資格確認をSQL保存へすり抜けさせない。Premiumの履歴は無制限という既存仕様を維持し、有限の期限を新設しない。権利降格時は既存通りframe材料を外す。
+
+### 実検証・途中修正・限界
+
+最終関連集合は219成功＋別のnatural reply周辺276成功＝495固有件、FAIL／SKIP0。新規はframe18＋Piece7＝25件、既存は470件。途中の部分実行・再確認を件数へ上乗せしない。既存Pydantic root_validator非推奨警告は各最終集合で1件。独立read-onlyレビューで、依存照合のupsert順と複数候補選別の隙間を指摘され、同じ単位で修正・回帰を追加した。最終差分に追加の重大欠陥なしを確認した。正式human Product Readではない。
+
+途中のPremium期限切れというtest仮定は既存無制限仕様と不一致のため撤回し、権利降格の回帰へ置き換えた。Piece新fixtureのprovider記録形式の不整合も修正した。これらを製品の意味品質改善やGPU再試行へ換算しない。前回8cba3e0cのPiece CI43420547231／Analysis CI43420547262は両方attempt1で成功済み。今回commitの新CI結果とは分ける。
+
+合成Auth／providerと隔離PGliteでの実SQLの確認であり、live Supabase／PostgREST、実モデル本文、native画像、本人端末、複数接続の実row-lock待機は今回未確認。既存SQLのlockを維持・拡張したことと、今回実lock-waitを検証したことを混同しない。本番へ通す場合はcore migration→Piece migration→APIの適用単位を確認する。今回これらを本番適用したとはしない。
+
+§9.38の実4B新3件不採用、通常selector OFF、新10b563不採用を維持する。次の主な未完は本人判断を優先した実4B本文、二欄訂正→frame／Piece／Analysisの意味伝播、複数回答Piece、通常反映と本人端末である。今回の保存・失効接続を、それらの一般品質・全補助経路完了へ広げない。同じhint／SYSTEM／fit比較や消費済みrunの反復には戻らない。
