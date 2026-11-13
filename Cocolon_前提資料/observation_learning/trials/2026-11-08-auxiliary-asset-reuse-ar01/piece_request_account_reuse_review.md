@@ -1,4 +1,4 @@
-> **11/13・保存資格を生成前に固定し、同じ源泉から保存へ再開する経路を実装：** API `d86f1eb2`のtest helper／既存CIだけを改修。DB終了・復元後もUUID／日時を含む原七項目・thread／events／source_ref・PreparedRequest／messagesを保持し、局所48 PASS、固定CPU応答3件の同source保存・非生成再読／本文・payload・recipe・hash一致を確認。Piece CI43343955206はexact head・attempt1・全39工程成功。前回実3の2/3限定編集改善は継承し、新モデル効果には加算しない。資格ある架空3件／Freeの実4B用38,631byteを固定、未送信・未実行で一回承認待ち。新GPU／学習／通常採用／native画像0。 [実装・資格・未実行範囲](<../../../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-qualified-source-checkpoint-prepared-20261113>)。
+> **11/13・資格固定3件の実4B生成と同じ源泉の保存・再読を完了：** 承認38,631byteを一回実行し、Piece3＋提供前後4確認、学習／retry0、復元込み114.971199秒。元提供PID79715→80025、引数／環境／作業場所／既存2鍵・source／両adapterを保持し、通常／Analysisの前後全response一致を確認。無修補の3rawが既存CMEE／S7を通り、凍結済み同checkpoint・source／prepared／messagesからFree3保存・新service非生成再読、本文／payload／recipe／renderer／hash一致、元source／Emlis不変・quota各1。normal2 rawは前回既知rawと同一で、新たな編集改善やA/Bには加算しない。合成Auth／先行Emlis・隔離PGliteの結果であり、通常option／selector OFF、一般品質・live／本人端末・正式受入れ・全補助経路は未完。同3本文の研究native CI43347803091／source22e96b4cはattempt1実行中で、画像成功はまだ未確認。 [実原本・同source保存・次](<../../../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-qualified-source-actual3-saved-20261113>)。
 
 > **11/12・固定実3件の意味読取拒否を修復：** API87512ddaで、既存述語／本人評価／感情／literal-self資産を、型付きoperatorと完全保持spanの独立比較へ回収。保存344aの同じ実raw3件は3拒否→3採用、旧73件の採否・全artifact・prepared／messages／rawは修正前後同一。新GPU・学習0。3plan計9件の隔離SQL保存・非生成再読、本文／recipe／renderer一致とquota各1を確認。Free refinedは元の適格ADD snapshot、Plus／Premiumは同じ全入力・回答から既存ownerでtier別資格を再導出。合成Auth／source・mock HTTP framingであり、実HTTP／live DB／本人端末ではない。新70を含む局所1774と既存SQL56が成功。Piece CI43174913229はattempt1・39step成功、model集合2021に新70を含む（重複加算なし）。生成本文自体は従来の常体化が中心で、一般編集品質・同じ新本文のnative画像・通常採用・AR-04／全補助経路は未完。 [修復・原本・確認範囲](#piece-general3-operator-review-repair-20261112)。
 
@@ -2917,3 +2917,15 @@ Analysis CI [43174913298](https://github.com/MassyuRed/mashos-api/actions/runs/4
 局所48 PASSと固定CPU材料3保存は実4B効果へ加算しない。API d86f1eb2のCI43343955206/job131618680124はattempt1・全39step success。固定38,631byte／SHA `a5b9ce6d669b7e7f208082527d6a62eaf18380f93a9d1904cc00574f5cf47c03`、候補3＋前後4・停止復元込み600秒・復元枠120秒・学習retry0を準備。未送信・実model0・新しい一回承認待ち。DB／資格token／CPU期待本文は送らず、既存2鍵は同Pod loopback、環境は同Pod親RAM復元だけ。
 
 取得後の同source保存・同版native画像・通常採用は未成立。[詳細設計§9.24](<../../../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-qualified-source-checkpoint-prepared-20261113>)に実装7path・全原本hash・資格・再開・境界を記録。原本ZIP version8は5,198,944byte／104member、SHA256 `4c1cff4bd07b4ad98cd75676c8552f731f619064a947c276f944ff65eec7169a`、旧89member全byte保持。STRUCTURE_MAP_DELTA_NONE_FOR_PRODUCT／FILE_MAP_DELTA_TEST_SUPPORT、全補助経路未完。
+
+
+<a id="piece-qualified-source-actual3-saved-20261113"></a>
+## 11/13 AR-04 — 資格固定の実3件を同source保存・非生成再読へ接続
+
+承認38,631byteの一回は完了・消費済み。候補3＋前後4の7生成、学習／retry0、復元込み114.971199秒。元PID79715→80025、引数／全環境／cwd／既存2鍵・source／両adapter不変、通常／Analysisの前後全response一致を確認。正規資格を先に成立させた同じFree3源泉・checkpoint・prepared／messagesへ無修補で受領し、3/3の既存CMEE／S7採用→preview／save→新serviceのowner非生成再読に到達。元source／Emlis不変、quota各1、本文／payload／recipe／renderer／hash一致。旧rawのsource付替え・S7緩和・有限作者fallback0、保存中の追加モデルcall0。
+
+normal2 rawは既知の前回実rawと一致し、新たな編集改善・未見holdout・因果A/Bには加算しない。段落は主に常体化、二欄は役割化・本人反復省略・評価語順整理、refinedは原入力と実Q2 ADD回答を別blockのまま保持。Auth／先行Emlisは合成、DBは隔離PGlite。既存研究branchの36335452を基に、研究source22e96b4c81481e7d93ba9656a576a6098c6db667で既存fixtureと同一XCTest methodの2fileだけを新3件／9frameへ変更した。本文・source_ref・回答identity・保存receipt／detail・8項目artifactと3hashを保持し、block数は1／2／2。製品・renderer・他method・8秒／90秒guard・閉5API transportは不変。16field内部previewは既存public mapperと明示Free quota／capabilityを使って19fieldへ投影した。テスト用previewの期限だけ2099年へ投影し、原記録や実TTL更新を主張しない。owner detailを既存export応答形へ投影する閉local transport／合成sessionであり、live API／Authや独立HTTP export取得の実証ではない。
+
+[研究native CI43347803091](https://github.com/MassyuRed/Cocolon/actions/runs/43347803091)はsource22e96b4c・attempt1で実行中。画像・PNG一致・実書出し成功はまだ未確認。新renderer／controller／workflow／jobを作らず、既存継続指示とRule18 LEVEL_2の既存設計内test変更として実行した。消費済みGPU一回承認の流用ではなく、追加GPU／再生成0。
+
+STRUCTURE_MAP_DELTA_NONE_FOR_PRODUCT。API d86f1eb2と既存CI43343955206を継承し、今回API source／test・公開型／route／DB／作者／renderer／selector変更0。通常option／selector OFF、一般編集品質・live／本人端末・正式受入れ0/3・AR-04／他AR／全補助経路は未完。[実原本・同source保存・画像の範囲](<../../../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-qualified-source-actual3-saved-20261113>)。

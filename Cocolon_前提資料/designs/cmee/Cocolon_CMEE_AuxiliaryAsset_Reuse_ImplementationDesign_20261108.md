@@ -4,15 +4,15 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-13 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR04_QUALIFIED_SOURCE_CHECKPOINT_IMPLEMENTED_MODEL3_PREPARED
+status: AR04_QUALIFIED_ACTUAL3_SAME_SOURCE_SAVED_NOT_ADOPTED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Initially qualified source checkpoint and same-source CPU save implemented; exact model3 packet prepared, new one-shot approval pending; keep defaults OFF, no automatic learning/retry"
+current_next: "Qualified actual3 saved and owner-reread from the same initial source; continue existing native image route; keep defaults OFF, no further model calls or automatic learning/retry"
 runtime_effect_of_this_document: 0
 ---
 
-> **11/13・保存資格を生成前に固定し、同じ源泉から保存へ再開する経路を実装：** API `d86f1eb2`のtest helper／既存CIだけを改修。DB終了・復元後もUUID／日時を含む原七項目・thread／events／source_ref・PreparedRequest／messagesを保持し、局所48 PASS、固定CPU応答3件の同source保存・非生成再読／本文・payload・recipe・hash一致を確認。Piece CI43343955206はexact head・attempt1・全39工程成功。前回実3の2/3限定編集改善は継承し、新モデル効果には加算しない。資格ある架空3件／Freeの実4B用38,631byteを固定、未送信・未実行で一回承認待ち。新GPU／学習／通常採用／native画像0。 [実装・資格・未実行範囲](<#piece-qualified-source-checkpoint-prepared-20261113>)。
+> **11/13・資格固定3件の実4B生成と同じ源泉の保存・再読を完了：** 承認38,631byteを一回実行し、Piece3＋提供前後4確認、学習／retry0、復元込み114.971199秒。元提供PID79715→80025、引数／環境／作業場所／既存2鍵・source／両adapterを保持し、通常／Analysisの前後全response一致を確認。無修補の3rawが既存CMEE／S7を通り、凍結済み同checkpoint・source／prepared／messagesからFree3保存・新service非生成再読、本文／payload／recipe／renderer／hash一致、元source／Emlis不変・quota各1。normal2 rawは前回既知rawと同一で、新たな編集改善やA/Bには加算しない。合成Auth／先行Emlis・隔離PGliteの結果であり、通常option／selector OFF、一般品質・live／本人端末・正式受入れ・全補助経路は未完。同3本文の研究native CI43347803091／source22e96b4cはattempt1実行中で、画像成功はまだ未確認。 [実原本・同source保存・次](<#piece-qualified-source-actual3-saved-20261113>)。
 
 > **11/13・Piece編集候補の実6応答を完了、全3組で差分0のため不採用：** 承認14,489byteを既存Podで一回実行し52.420284秒、全6 HTTP200／stop／attempt1。PID77140と前後health200を保持、学習・retry・提供再起動0。段落・二欄・refinedの旧新全response／rawは各組完全一致・全欄原文copy、8編集選択の可視効果0。二欄では氏名が残り公開役割化も未達。原本のexact CPU再演は4 GENERATED／二欄2 UNAVAILABLEだが作品品質合格ではない。候補・通常optionはOFF、今回のSQL／native保存0、追加生成・S7緩和・raw補修なし。実原本と不採用理由を保全した。 [実比較・判定](<#piece-editorial-choices-actual6-20261113>)。
 
@@ -1352,6 +1352,51 @@ DB checkpointは4,881,732byte・SHA256 `54723033aee127fd45d1540423f77f0408c55b7e
 [既存原本ZIP](https://chatgpt.com/library?file_id=libfile_fde3_f-f30655de312c8191978daec9b93b7008_2f7470f963808191aaebf050935e72de&account_id=personal)をversion8へ更新。5,198,944byte／104member、SHA256 `4c1cff4bd07b4ad98cd75676c8552f731f619064a947c276f944ff65eec7169a`。旧89memberの全byteを保持し、新規架空資格state／DB checkpoint／凍結wire／予行3保存／review／CI／再開scriptを追加。Git-backed製品・test code、browser screenshot、実ユーザー／実認証情報は追加していない。
 
 STRUCTURE_MAP_DELTA_NONE_FOR_PRODUCT。test支援の新fileとprepare／resume責務は既存01A全file地図／Piece mapへ同単位で記録する。新source／public route／DTO／DB／作者／renderer ownerはない。
+
+<a id="piece-qualified-source-actual3-saved-20261113"></a>
+## 9.25 2026-11-13 — 資格固定3件を実生成し、同じ源泉で保存・非生成再読まで確認
+
+### 承認した一回の実行結果
+
+Mashが§9.24の38,631byteを具体的に承認した後、同じscript／wireを既存Podで一回実行。実Piece3応答＋提供前後4確認＝7生成、追加学習／retry0、最終記録114.97119931690395秒で最大600秒以内。候補childは既存344aを一度loadし、同Podのdirect generator／Piece profileで取得した。候補HTTP server／鍵保持0、HTTP model/revisionは発行していないため偽装しない。
+
+元PID79715から80025へ復元。元引数／全環境／cwd／既存2鍵と元source／Analysis／Pieceのweight・configは不変。通常／Analysisの前後requestと全responseはそれぞれ一致、4確認は200／stop、health正常。起動環境は親RAMで同Pod復元だけに使用し、鍵はproxy／redirectなしlocalhost認証だけに使用した。一回の承認は完了・消費済みで、追加GPU／fit／再試行へ流用しない。
+
+実取得ZIPは28,226byte・SHA256 `9e26013357440480cfa2471b362c2dbdfb432d71bf61a5ee8dd32cf1d0316dba`。Jupyterで記録を閲覧した際の自動checkpointを含む8memberで、正本execution／resultは一致する。途中の目視報告110.97秒は誤読であり、最終原本の114.971199秒へ訂正した。
+
+### 原文との全件照合
+
+| 新case／源泉 | 実本文の観測 | 成立しない主張 |
+|---|---|---|
+| QUALIFIED-PARAGRAPH／normal | 条件・「気がする」・過去の読書好み・参加日未決定を保持。主に常体化 | 一般構成能力や新しい編集改善ではない。原文にない仕事／読書／参加の因果を補わない |
+| QUALIFIED-TWO-FIELDS／normal | 森さんを同僚へ役割化し、同じ本人の反復主題を省略。おれ／僕の欄別表記、評価の「にとって」、読書の過去否定を保持し語順整理 | この限定例から全題材の編集能力へ広げない |
+| QUALIFIED-REFINED／実Q2 ADD | 長谷川さんを上司へ役割化し、「褒められたのに嬉しくなかった」を保持。別回答「その時、私は少し寂しかった」を別blockに保持 | 回答を元の記録へ混ぜず、意図・原因・現在状態を創作しない |
+
+独立担当と華恋が原入力・補足・全rawを照合し、意味逸脱を見つけなかった。normal2のrawは前回の既知rawと文字列一致、messagesは別であり、未見holdout／同入力A/B／metadataの因果効果とは呼ばない。今回新たに成立したのは生成前から固定した正規資格の同source取得と後段接続であり、前回の2/3限定編集を再加算しない。
+
+### 同checkpointからの保存・非生成再読
+
+保存済み4,881,732byteの初期DB checkpointを再開し、全原七項目／UUID／日時・thread／events・source_ref・prepared ID／private_json／messagesを取得時の材料へ完全一致させた。sourceを再seedしたり、前回rawを別sourceへ付け替えたりしていない。refinedは同じ実Q2 ADDの回答identityを使う。
+
+新3rawは無修補で既存CMEE／S7へ受領し、Free3件ともpreview→save／同key再送→新serviceのowner非生成再読へ到達。本文／content payload／visual recipe／rendererと各hashはpreview・保存行・detailで一致し、hashも独立再計算一致。元source／Emlis不変、quota各1。再読時の作者／compile／reviewは既存禁止blockで0、取得後の追加モデルcall0、有限whole-author fallback／S7緩和0。
+
+| case | 保存Piece ID | blocks／保存枠 |
+|---|---|---|
+| QUALIFIED-PARAGRAPH | `c256b793-e506-15f6-5838-c2c1e63d1a7b` | 1／1 |
+| QUALIFIED-TWO-FIELDS | `6173b8e4-70f2-a617-ce45-cf65fa7259f2` | 2／1 |
+| QUALIFIED-REFINED | `2e5758ad-bf00-50f0-2a78-5135c2b9bba3` | 2／1 |
+
+合成Auth／先行Emlis provider・隔離PGliteを使った同source経路であり、live Auth／API／DBや本人端末の成功ではない。refinedのsnapshot差は読取時計だけで、原本／thread／eventsは不変。既存API d86f1eb2とCI43343955206を継承し、今回API製品／test／schema／依存変更0、新API CI／dispatch／rerun0。
+
+### 同じ新本文の画像と継続範囲
+
+既存研究branchの36335452を基に、研究source22e96b4c81481e7d93ba9656a576a6098c6db667で既存fixtureと同一XCTest methodの2fileだけを新3件／9frameへ変更した。本文・source_ref・回答identity・保存receipt／detail・8項目artifactと3hashを保持し、block数は1／2／2。製品・renderer・他method・8秒／90秒guard・閉5API transportは不変。16field内部previewは既存public mapperと明示Free quota／capabilityを使って19fieldへ投影した。テスト用previewの期限だけ2099年へ投影し、原記録や実TTL更新を主張しない。owner detailを既存export応答形へ投影する閉local transport／合成sessionであり、live API／Authや独立HTTP export取得の実証ではない。
+
+[研究native CI43347803091](https://github.com/MassyuRed/Cocolon/actions/runs/43347803091)はsource22e96b4c・attempt1で実行中。画像・PNG一致・実書出し成功はまだ未確認。新renderer／controller／workflow／jobを作らず、既存継続指示とRule18 LEVEL_2の既存設計内test変更として実行した。消費済みGPU一回承認の流用ではなく、追加GPU／再生成0。
+
+実原本・凍結材料・同source保存／再読・独立reviewは[同じ原本ZIP](https://chatgpt.com/library?file_id=libfile_fde3_f-f30655de312c8191978daec9b93b7008_2f7470f963808191aaebf050935e72de&account_id=personal)version9へ保存。5,293,067byte／120member・SHA256 `d1cfff34b2b3e56e02550513c1ca31a2443b5ee30a866694a69e4d1285cb9e5d`。旧104memberの全byteを保持し、実取得・復元記録・3保存／再読・reviewを16member追加した。Git-backed codeとbrowser screenshotは追加していない。
+
+STRUCTURE_MAP_DELTA_NONE_FOR_PRODUCT。既存作者／source owner／公開型／route／DB／renderer／通常selectorに変更なし。一般編集品質・通常採用・live反映／本人端末・正式受入れ0/3・AR-04／他AR／全補助経路は未完。今回の7生成を繰り返さず、同じ新本文の既存画像経路と未解消の三中核品質へ接続する。
 
 ## 10. 変更箇所と検証
 
