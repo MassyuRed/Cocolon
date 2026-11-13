@@ -3155,3 +3155,12 @@ API dbb96acaと既存RN Modalを適合し、原入力＋最新の自己完結ADD
 研究シミュレーター・合成Auth／閉local transportの結果。自然Text参照全体のRGBA一致は全6不成立、旧V4／WholeCanvas失敗は未解消。本文は原文同文のままで一般整形品質改善は未実証。追加生成／学習／再試行／本番SQL変更／Render配置／配布／Photos／Share／本人端末0、通常selector OFF・正式0/3を維持。稼働DB関数のread-only照合でもlatest2/3資格・prior-chain処理は未反映だった。
 
 実原本の同identityをversion2へ更新し、旧47memberを保持してnative原本・全PNG・report・研究6fileを追加。11,600,631byte／106member、SHA256 2678ac145e38dfdc830095637d28bf77b1a13f0d1e338ba2f477c76c3401efb8。限定TECHNICAL_CREDIT・STRUCTURE_MAP_DELTA_NONE。次は長め段落／二欄の実本文品質と最新SQL／API／RNをそろえた本人端末一巡。 [詳細・原本・限界§9.45](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-latest-answer-native6-20261114)。
+
+<a id="piece-coherent2-base344a-prepared-20261114"></a>
+## 2026-11-14 補助経路AR-04 — 既存base／Piece344aによる段落・二欄比較を準備、未実行
+
+前回の最新回答2作品とnative6は再生成せず保持。長め段落／二欄の本文編集を、追加hint／SYSTEM／学習を使わず既存モデル同士で比べる材料を固定した。新しい183字段落と二欄の全七項目、同sourceのSQL checkpoint／prepared／完全messagesを保存し、固定CPU本文の2独立forkでpreview→保存→非生成再読・canonical8／3hash一致、元source／Emlis不変、quota各1を確認した。合成Auth／先行Emlis・隔離PGliteの予行で、実4Bや商品品質改善ではない。
+
+指示語を含むv1段落のliteral拒否（unresolved_reference）と、新refined案のQ3資格不成立を保持した。参照先を明記したv2は別の新規sourceであり、v1の修復・意味同等・一般対応へ数えない。最新本人補足は既存actual2／native6の証拠のまま。
+
+送信3file60,358byte、base2＋344a2の4候補と前後4対照・health2GET、同既存generator／messages／decoder／予算、別2instance。提供一時停止・元env同Pod内RAM再利用による復元を含め最大600秒（復元120秒）、一回・fit／retry0を具体化した。2鍵は同Pod localhost認証だけ、全env／鍵の保存・出力・外部送信0。新しい一回の承認前で、Pod送信／model／停止・復元0。閉鎖後final_summary照合から同checkpoint4forkで無修補rawを受領する。通常selector OFF・本番／本人端末未完、STRUCTURE_MAP_DELTA_NONE。 [原本・判定範囲・次§9.46](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-coherent2-base344a-prepared-20261114)。

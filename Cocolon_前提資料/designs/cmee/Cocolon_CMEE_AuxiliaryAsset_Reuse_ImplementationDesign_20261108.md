@@ -2925,3 +2925,32 @@ API dbb96acaのPiece CI43435593613とAnalysis CI43435593636はどちらもattemp
 本作業の追加model取得・GPU・学習・再試行・本番SQL変更・Render配置・配布・Photos／Share・本人端末は0。前回の94.076319秒の一回分は消費済みのまま。STRUCTURE_MAP_DELTA_NONE：既存製品ownerとcontractを維持し、研究検証の対象と実行／保存状態だけの差分。通常selector OFF、新10b563・§9.38新3・§9.42新2の不採用を維持する。
 
 到達点は同版native画像／実PNG書出しの限定TECHNICAL_CREDIT。本文は元から同文であり、一般的な整形品質改善、正式human Product Read、正式商品受入れの追加はない。次の直接残件は、長め段落・思考／行動二欄の実本文編集品質と、最新SQL／API／RNをそろえた通常経路・本人端末の一巡。全回答集合や訂正／撤回を含む作品化、他AR、全補助経路は未完で、画像成功を理由に通常有効化・追加生成・本番反映へ自動進行しない。
+
+<a id="piece-coherent2-base344a-prepared-20261114"></a>
+## 9.46 2026-11-14 — 段落／思考・行動二欄を既存baseとPiece344aで比べる一回を準備、未実行
+
+### 選んだ未完と既存資産
+
+§9.45の最新一回答2作品・native6は完了済みの証拠として保持し、再生成しない。残る一般本文編集のうち、段落と二欄での表現を直接比較する。既存編集判断の追加だけでは§9.22で全3組差分0だった一方、§9.23の保存344aでは二欄／refinedの本人反復省略・公開役割化等に限定差分があった。追加hint／SYSTEM／教師／fitを繰り返さず、既存baseと保存Piece344aを同じ作者source・完全messages・decoder・予算で比較する材料へ固定した。旧3件の再生成や既知成功の加算はしない。
+
+### 凍結した新2件とCPU予行
+
+API dbb96acaの既存source adapter／prepared／編集選択option／CMEE／S7／preview／save／owner再読を使用。Freeの新しい架空2人について、183字5文の単一主題段落と思考77字／行動47字の二欄を、全七項目・source_ref・Emlis状態／eventsとともにモデル取得前の隔離SQL checkpointへ固定した。別processで復元し、prepared ID／private JSON／完全messages一致を確認した。段落の過去・希望・未伝達、二欄の「おれ／僕」・昨日／まだ・留保と否定範囲を保持する。九カテゴリ／全planの網羅や長文一般の品質率へ広げない。
+
+固定CPU本文だけによる2独立forkでは、既存CMEE／S7からpreview・private保存・別service非生成再読まで2件成功。canonical8項目・3hash・rendererが一致、元source／Emlis不変・quota各1、model再取得0。これは受領・保存経路の予行で、実4B本文編集・native画像・商品品質改善ではない。Authと先行Emlisは合成、DBは隔離PGliteであり、live Auth／PostgRESTの成功でもない。
+
+試案も隠さず残した。指示語を含む175字のv1段落は原文そのままでもEngine UNAVAILABLE／unresolved_referenceで拒否され、source／Piece／quota不変。v1へGPUは使わない。v2は参照先を最初から明記した別の新規架空記録として新ID・時刻・checkpoint・messagesから作成し、v1との意味同等・参照解決修復・一般段落対応とは数えない。v1の未対応は残件のまま。新refined試案も現Q3 initialがFINAL／issued0で最新ADD2の資格が成立しなかったため、問いを強制せず取得対象から外した。既存最新回答2作品の証拠へ混ぜない。
+
+### 送信と実行の具体scope、まだ未承認
+
+原本は [Cocolon_CMEE_AR04_Coherent2_Base344a_Prepared_20261114.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-9bb7f6aceeec8191bafb13d6d3264cc1_2f7470f963808191aaebf050935e72de&account_id=personal)。9,374,774byte・27member、SHA256 `cc41757709975d2001b71a8617555ec095134f307196a3fa15d5500d766d37bb`。最終source checkpoint、全材料、CPU保存結果、未送信v1の原本／拒否結果、新refined不成立、受領再開処理、限定比較runnerを保持する。public GitHubへ架空source全文・完全messages・private状態を転載しない。
+
+送信はrunner37,874byte、wire22,300byte、SHA台帳184byteの3file計60,358byteのみ。runner SHA256 `aab48c97081a5c342cb65b2d279946e872e12d6ef0acb5a6bd3ba41429f32914`、wire SHA256 `89e4d1980a91b6758606c7e67285fb4e930ed3d2051d727e4de71414b3a42f6e`。checkpoint／合成Auth／CPU候補／不成立試案／source一式は送らない。
+
+既存Pod f1lle4xwq3wjlnでbase2＋保存Piece344a2の候補4、通常／Analysisの前後4対照、health2GET。最大8生成・6HTTP、比較は2model instanceを順にloadする。両armとも同じ既存a8fdfbe1 generatorのpiece profile、LMFE、greedy、context8192／output2048・同messages。baseは既存disable_adapter、344aは既存の別Piece adapter選択を使用し、同instanceや現稼働HTTP5e3dと同じ実装の比較とは呼ばない。a8実物の全文とhash、既存の選択分岐を直接確認済みで、parser／schema／作者を追加変更しない。
+
+既存提供を一時停止し、元args／全env／cwdで復元する。ZIP閉鎖後の観測まで最大600秒、復元用120秒、一回・追加学習／再試行0。起動環境全体は同Pod親processのRAMで復元だけに再利用し、保存／出力／外部送信しない。既存2鍵は同Pod localhost認証headerだけ、比較childには渡さない。復元identity一致後にPIDFILEを更新してから後healthを行い、通常／Analysisの前後response全文一致も確認する。実行前のread-onlyではPID84398／starttime212772776・稼働source5e3d・Piece指定なし・保存344a／config一致を観測したが、実行直前の同一性確認を省かない。
+
+取得後はresultとZIP閉鎖後final_summaryの両原本、600秒以内・全共有field・wire／source／回数／対照を照合してから、元checkpointの4独立forkへ無修補rawを各1回受領する。CMEE／S7拒否はそのまま残し、sourceや本文を補修せず、保存成功だけを品質へ数えない。独立read-onlyでrunner／受領／same-source条件を確認し、親子構文・実packet validatorのpure callも成功。新GPU・HTTP・停止／復元は0で、実行成功を先取りしない。
+
+STRUCTURE_MAP_DELTA_NONE。製品source／test／SQL／RN／SYSTEM／model／selectorの変更0、新CI0。通常selector OFF、過去の不採用候補と本番SQL／API／RN・本人端末の残件を維持する。商品品質credit・human Product Read・正式受入れの追加は0。新しい一回の具体的承認前であり、過去の消費済み許可を再使用せず、Pod送信・実4B生成も0。次の直接作業は承認されたこの同条件比較の実本文読取→既存CMEE／S7→同source保存・再読である。全補助経路の完了は未達のまま。
