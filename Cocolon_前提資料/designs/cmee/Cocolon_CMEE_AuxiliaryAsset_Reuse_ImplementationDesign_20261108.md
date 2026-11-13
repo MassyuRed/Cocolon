@@ -8,7 +8,7 @@ status: AR02_AR04_NATURAL_SINGLE_ANSWER_PIECE_CONNECTED_DRAFT_SQL_UNAPPLIED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Natural real single ANSWER now reaches existing Piece source/save/reread in isolated tests; verify f7b44e0e CI, carry DB-to-API deployment and real4B/same-image work separately; fit16 candidate rejected and normal model selector OFF"
+current_next: "Natural real single ANSWER now reaches existing Piece source/save/reread; f7b44e0e Piece and Analysis CI both passed attempt1; DB-to-API deployment and real4B/same-image work remain separate; fit16 candidate rejected and normal model selector OFF"
 runtime_effect_of_this_document: 0
 ---
 
@@ -2487,7 +2487,7 @@ NO_STRUCTURE_MAP_DELTA：source/test/公開型/route/DB/作者/controller/Gate�
 <a id="piece-natural-single-answer-connection-20261113"></a>
 ## 9.35 2026-11-13 — 現naturalの実一回答からPieceへの既存接続を修復
 
-**11/13・現naturalの実一回答をPieceへ渡す接続抜けを修復：** 画面で選べるCOMPLETED/REFINEDの一回答が、旧finite専用のAPI/SQL検査で拒否されていた。原入力と実ANSWERを別sourceのまま既存Pieceへ接続し、3plan×自然終了/本人終了の6経路で生成候補・保存・同一版の非生成再読、quota各1を確認。消費した履歴は新しい7記録で置換せず、改変・削除時は拒否する。新71件は分割実行で全成功、既存248件も成功。提供文とPiece HTTPは合成・DBは隔離PGliteであり、新実4B・live DB・Render・RN/build/本人端末の成功ではない。 実装は[API f7b44e0e](https://github.com/MassyuRed/mashos-api/commit/f7b44e0eb12db168120a0fab5c12e51181db9bfe)へ保存し、変更5pathの全content/SHA・PR3 head一致を確認。記録時点でPiece CI [43400087856](https://github.com/MassyuRed/mashos-api/actions/runs/43400087856)はattempt1成功、Analysis CI [43400087749](https://github.com/MassyuRed/mashos-api/actions/runs/43400087749)はattempt1実行中。実DB未適用。
+**11/13・現naturalの実一回答をPieceへ渡す接続抜けを修復：** 画面で選べるCOMPLETED/REFINEDの一回答が、旧finite専用のAPI/SQL検査で拒否されていた。原入力と実ANSWERを別sourceのまま既存Pieceへ接続し、3plan×自然終了/本人終了の6経路で生成候補・保存・同一版の非生成再読、quota各1を確認。消費した履歴は新しい7記録で置換せず、改変・削除時は拒否する。新71件は分割実行で全成功、既存248件も成功。提供文とPiece HTTPは合成・DBは隔離PGliteであり、新実4B・live DB・Render・RN/build/本人端末の成功ではない。 実装は[API f7b44e0e](https://github.com/MassyuRed/mashos-api/commit/f7b44e0eb12db168120a0fab5c12e51181db9bfe)へ保存し、変更5pathの全content/SHA・PR3 head一致を確認。API f7b44e0eのPiece CI [43400087856](https://github.com/MassyuRed/mashos-api/actions/runs/43400087856)とAnalysis CI [43400087749](https://github.com/MassyuRed/mashos-api/actions/runs/43400087749)は、ともにattempt1で全工程成功。手動dispatch/rerun0、実DB未適用。
 
 前段の実17比較後の読取りでは、全34実本文の独立readerはparsed count0/UNASSESSEDでCHECKER_ERRORではなかった。有限readerの二つの役割witnessや旧typed文章化を、自然文全般の意味理解・本人向けの新作者へ読み替えない。本人説明の呼出し到達と保持8の学習/生成prompt token一致は確認済みだが、宛先の声・格崩れ・付加を解消する単純な未接続箇所は特定していない。今回のPiece接続修復を、その品質問題の解決として数えない。
 

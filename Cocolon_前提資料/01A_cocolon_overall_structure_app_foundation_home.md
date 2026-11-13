@@ -7010,4 +7010,4 @@ STRUCTURE_MAP_DELTA_NONE：実行・原本／新候補重み回収・実本文re
 
 前回§9.34の新10b563候補不採用・通常model selector OFFを維持する。今回の一回答接続と、AI応答への二欄訂正・複数回答・REVISE/WITHDRAWの伝播は別範囲で、後者は未接続。一般的な応答/編集品質、同じ新本文の端末画像/書出し、全補助経路の受入れは未完。GPU・学習・本番SQL適用・Render配置・RN変更・新build/配布は0。
 
-STRUCTURE_MAP_DELTA_PRESENT。詳細・責務/全71内訳・合成限界・次は[詳細設計§9.35](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-natural-single-answer-connection-20261113)を正本とする。記録時点でPiece CI [43400087856](https://github.com/MassyuRed/mashos-api/actions/runs/43400087856)はattempt1成功、Analysis CI [43400087749](https://github.com/MassyuRed/mashos-api/actions/runs/43400087749)はattempt1実行中。実DB未適用。
+STRUCTURE_MAP_DELTA_PRESENT。詳細・責務/全71内訳・合成限界・次は[詳細設計§9.35](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-natural-single-answer-connection-20261113)を正本とする。API f7b44e0eのPiece CI [43400087856](https://github.com/MassyuRed/mashos-api/actions/runs/43400087856)とAnalysis CI [43400087749](https://github.com/MassyuRed/mashos-api/actions/runs/43400087749)は、ともにattempt1で全工程成功。手動dispatch/rerun0、実DB未適用。
