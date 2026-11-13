@@ -1,4 +1,4 @@
-> **11/13・保存Piece作者の実3応答を完了、二欄／補足で限定改善・通常採用は保留：** 承認38,745byteを一回実行し、候補3stop＋提供前後4確認の計7生成、停止・復元・証跡書込込み111.841525秒、学習／retry0。元提供PID79715へ復元し、argv／env／cwd／2鍵・source／両adapterを保持、通常／Analysisの前後全response一致・health正常。二欄は氏名の役割化・本人反復省略・評価語順、補足も各source内の本人反復省略が現れ、段落は常体化だけ。raw無修補の既存S7は3 GENERATED。metadata単独効果・一般構成品質は未証明、通常OFF。比較用非UUID source／refined資格なしのため今回SQL／保存／native画像0。 [実結果・復元・残件](<../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-selected-author-editorial-actual3-20261113>)。
+> **11/13・保存資格を生成前に固定し、同じ源泉から保存へ再開する経路を実装：** API `d86f1eb2`のtest helper／既存CIだけを改修。DB終了・復元後もUUID／日時を含む原七項目・thread／events／source_ref・PreparedRequest／messagesを保持し、局所48 PASS、固定CPU応答3件の同source保存・非生成再読／本文・payload・recipe・hash一致を確認。Piece CI43343955206はexact head・attempt1・全39工程成功。前回実3の2/3限定編集改善は継承し、新モデル効果には加算しない。資格ある架空3件／Freeの実4B用38,631byteを固定、未送信・未実行で一回承認待ち。新GPU／学習／通常採用／native画像0。 [実装・資格・未実行範囲](<../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-qualified-source-checkpoint-prepared-20261113>)。
 
 > **11/13・Piece編集候補の実6応答を完了、全3組で差分0のため不採用：** 承認14,489byteを既存Podで一回実行し52.420284秒、全6 HTTP200／stop／attempt1。PID77140と前後health200を保持、学習・retry・提供再起動0。段落・二欄・refinedの旧新全response／rawは各組完全一致・全欄原文copy、8編集選択の可視効果0。二欄では氏名が残り公開役割化も未達。原本のexact CPU再演は4 GENERATED／二欄2 UNAVAILABLEだが作品品質合格ではない。候補・通常optionはOFF、今回のSQL／native保存0、追加生成・S7緩和・raw補修なし。実原本と不採用理由を保全した。 [実比較・判定](<../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-editorial-choices-actual6-20261113>)。
 
@@ -4354,3 +4354,9 @@ NO_STRUCTURE_MAP_DELTA：source/test/公開型/route/DB/作者/controller/Gate�
 | `ai/tests/piece_v2/test_b05_piece_model_evaluation_pipeline.py` | 修正した固定候補を既存の保存／再送／同一本人service再作成後の再読testへ追加し、3planで確認。 |
 
 STRUCTURE_MAP_DELTA_NONE。新file／owner／公開型／DB／作者／文法／S7の責務変更はない。 [実装・合成CPU検証・限界](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-model-evaluation-continuity-20261112)。実4B・本番・本人端末の検証へ換算しない。
+
+
+<a id="piece-qualified-source-checkpoint-prepared-20261113"></a>
+### 11/13 — 同じ適格sourceからの生成・保存を支えるtest-only責務
+
+API d86f1eb2の既存SQL bridge／Databaseは明示checkpointをdump/loadし、normal/refined helperは取得前prepareと同source finishに分離。新 `ai/tests/piece_v2/test_b05_piece_qualified_checkpoint.py` と既存model保存testが、DBを終了・復元しても七項目・ID／時刻・ADDevent・source_ref・prepared／messagesを保持して保存・非生成再読するCPU責務を確認する。通常owner／公開contract／source資格／S7／rendererは不変。実行前資料と同sourceの実4B取得は[詳細設計§9.24](<../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-qualified-source-checkpoint-prepared-20261113>)。新fileは01Aの既存API model接続表へ追加。STRUCTURE_MAP_DELTA_NONE_FOR_PRODUCT、FILE_MAP_DELTA_TEST_SUPPORT。

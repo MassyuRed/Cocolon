@@ -6251,7 +6251,10 @@ API `95e1b5d6c6d68b17fadaae3c982ebaa87eed1d79`。既存保存source→候補→C
 | `ai/tests/test_piece_model_candidate_independent.py` | 独立42変異・正対照、主体／格／否定／留保／実名／partition |
 | `ai/tests/test_piece_model_finite_scope.py` | 有限scope12、SELF／感情／receipt差替え／fallback拒否 |
 | `ai/tests/piece_v2/test_b05_piece_model_concurrency.py` | 同key共有／cancel／runtime変更／ACK待機16 |
-| `ai/tests/piece_v2/test_b05_piece_model_saved_pipeline.py` | normal3plan＋実Q2 A/Cのmodel receipt→隔離保存／再読 |
+| `ai/tests/piece_v2/test_b05_piece_model_saved_pipeline.py` | normal3plan＋実Q2 A/Cのmodel receipt→隔離保存／再読。11/13 test-only追加：normal資格sourceのcheckpointとApplication材料を保持した同source保存 |
+| `ai/tests/piece_v2/test_b05_piece_qualified_checkpoint.py` | 11/13 test-only追加：資格成立済みADD sourceをDB終了・復元後も同ID／七項目／履歴／prepared／messagesのまま既存保存へ。実GPU／実Auth／nativeの証明はしない |
+| `ai/tests/helpers/emlis_q2_postgres.cjs`／`ai/tests/test_emlis_q2_application.py` | 11/13 test-only差分：既存隔離DBの明示checkpoint dump/load、復元時の再seedなし、通常の新規初期化は維持 |
+| `ai/tests/test_cmee_piece_request_saved_pipeline.py`／`ai/tests/piece_v2/test_b05_refined_preview_saved_pipeline.py` | 11/13 test-only差分：既存normal／Q2 ADD helperのprepare／finish分離。source_refと原本・時刻を取得前に固定し、同DBから再開 |
 | `ai/tests/piece_v2/db/test_b05_reviewed_preview_issuance.py` | 単独shortessay Safety互換と旧3format／意味変異control |
 
 RNの変更は`features/piece/pieceApi.js`のpreview POST期限のみ250000ms、`tests/piece-v2-source-ref.test.js`でPOSTとGETの期限範囲を確認。既存source GET／PATCH／再読、explicit補足選択、owner変更／cancel・未確定保存回復は継承。DB migration新規0、公開DTO新field0、renderer新規0、依存追加0。設計差分3正本は`b2d33ace`で先に反映。商品00・Piece／CMEE map・weekly§40・trialを今回同単位で更新。STRUCTURE_MAP_DELTA_PRESENT。

@@ -1,4 +1,4 @@
-> **11/13・保存Piece作者の実3応答を完了、二欄／補足で限定改善・通常採用は保留：** 承認38,745byteを一回実行し、候補3stop＋提供前後4確認の計7生成、停止・復元・証跡書込込み111.841525秒、学習／retry0。元提供PID79715へ復元し、argv／env／cwd／2鍵・source／両adapterを保持、通常／Analysisの前後全response一致・health正常。二欄は氏名の役割化・本人反復省略・評価語順、補足も各source内の本人反復省略が現れ、段落は常体化だけ。raw無修補の既存S7は3 GENERATED。metadata単独効果・一般構成品質は未証明、通常OFF。比較用非UUID source／refined資格なしのため今回SQL／保存／native画像0。 [実結果・復元・残件](<../../../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-selected-author-editorial-actual3-20261113>)。
+> **11/13・保存資格を生成前に固定し、同じ源泉から保存へ再開する経路を実装：** API `d86f1eb2`のtest helper／既存CIだけを改修。DB終了・復元後もUUID／日時を含む原七項目・thread／events／source_ref・PreparedRequest／messagesを保持し、局所48 PASS、固定CPU応答3件の同source保存・非生成再読／本文・payload・recipe・hash一致を確認。Piece CI43343955206はexact head・attempt1・全39工程成功。前回実3の2/3限定編集改善は継承し、新モデル効果には加算しない。資格ある架空3件／Freeの実4B用38,631byteを固定、未送信・未実行で一回承認待ち。新GPU／学習／通常採用／native画像0。 [実装・資格・未実行範囲](<../../../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-qualified-source-checkpoint-prepared-20261113>)。
 
 > **11/12・固定実3件の意味読取拒否を修復：** API87512ddaで、既存述語／本人評価／感情／literal-self資産を、型付きoperatorと完全保持spanの独立比較へ回収。保存344aの同じ実raw3件は3拒否→3採用、旧73件の採否・全artifact・prepared／messages／rawは修正前後同一。新GPU・学習0。3plan計9件の隔離SQL保存・非生成再読、本文／recipe／renderer一致とquota各1を確認。Free refinedは元の適格ADD snapshot、Plus／Premiumは同じ全入力・回答から既存ownerでtier別資格を再導出。合成Auth／source・mock HTTP framingであり、実HTTP／live DB／本人端末ではない。新70を含む局所1774と既存SQL56が成功。Piece CI43174913229はattempt1・39step成功、model集合2021に新70を含む（重複加算なし）。生成本文自体は従来の常体化が中心で、一般編集品質・同じ新本文のnative画像・通常採用・AR-04／全補助経路は未完。 [修復・原本・確認範囲](#piece-general3-operator-review-repair-20261112)。
 
@@ -2905,3 +2905,15 @@ Analysis CI [43174913298](https://github.com/MassyuRed/mashos-api/actions/runs/4
 同じ[既存原本ZIP](https://chatgpt.com/library?file_id=libfile_fde3_f-f30655de312c8191978daec9b93b7008_2f7470f963808191aaebf050935e72de&account_id=personal)をversion7へ更新。442,137byte／89member、SHA256 `177ccad5e95e9c00d79cfe390d06cf8e66dc6368c08e60519c33b821d43bed7c`。旧74memberの全byteを保持し、actual ZIP／展開7原本・再演script/report・独立全文review・原本照合・保存資格境界・README／承認実行記録を追加。秘密／全環境／browser screenshot／Git-backed製品sourceは追加していない。
 
 [詳細設計§9.23](<../../../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-selected-author-editorial-actual3-20261113>)が実行・判定・再開正本。次は限定的な役割化／本人継続省略を保持した作者改善と、保存資格を持つ原入力からの同版保存・画像を扱う。今回rawの別sourceへの付替え、同型比較／新学習／通常採用へ自動進行しない。
+
+
+<a id="piece-qualified-source-checkpoint-prepared-20261113"></a>
+## 2026-11-13 — 資格成立済み源泉のcheckpointと同本文保存への接続準備
+
+**11/13・保存資格を生成前に固定し、同じ源泉から保存へ再開する経路を実装：** API `d86f1eb2`のtest helper／既存CIだけを改修。DB終了・復元後もUUID／日時を含む原七項目・thread／events／source_ref・PreparedRequest／messagesを保持し、局所48 PASS、固定CPU応答3件の同source保存・非生成再読／本文・payload・recipe・hash一致を確認。Piece CI43343955206はexact head・attempt1・全39工程成功。前回実3の2/3限定編集改善は継承し、新モデル効果には加算しない。資格ある架空3件／Freeの実4B用38,631byteを固定、未送信・未実行で一回承認待ち。新GPU／学習／通常採用／native画像0。
+
+前回実rawの源泉を後から変更せず、SQL七項目・日時・thread/events・source_refを生成前に固定するtest-only経路を実装。normalは保存FINAL、refinedは実Q2質問／回答／ADD／REFINEDのownerから資格を導出し、DBを別processへ復元して同prepared／messagesを確認した。UUIDだけの資格代行・旧raw再bind・製品source／S7／selector／schema変更0。normal2本文は既知材料、段落の自然な焦点保持を不良へ固定して新prompt／fitを周回しない。
+
+局所48 PASSと固定CPU材料3保存は実4B効果へ加算しない。API d86f1eb2のCI43343955206/job131618680124はattempt1・全39step success。固定38,631byte／SHA `a5b9ce6d669b7e7f208082527d6a62eaf18380f93a9d1904cc00574f5cf47c03`、候補3＋前後4・停止復元込み600秒・復元枠120秒・学習retry0を準備。未送信・実model0・新しい一回承認待ち。DB／資格token／CPU期待本文は送らず、既存2鍵は同Pod loopback、環境は同Pod親RAM復元だけ。
+
+取得後の同source保存・同版native画像・通常採用は未成立。[詳細設計§9.24](<../../../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-qualified-source-checkpoint-prepared-20261113>)に実装7path・全原本hash・資格・再開・境界を記録。原本ZIP version8は5,198,944byte／104member、SHA256 `4c1cff4bd07b4ad98cd75676c8552f731f619064a947c276f944ff65eec7169a`、旧89member全byte保持。STRUCTURE_MAP_DELTA_NONE_FOR_PRODUCT／FILE_MAP_DELTA_TEST_SUPPORT、全補助経路未完。

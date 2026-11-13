@@ -4,15 +4,15 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-13 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR04_SELECTED_AUTHOR_ACTUAL3_LIMITED_GAIN_NOT_ADOPTED
+status: AR04_QUALIFIED_SOURCE_CHECKPOINT_IMPLEMENTED_MODEL3_PREPARED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Selected Piece344a actual3 complete/restored; limited editorial gain2, paragraph style-only, same-source save/image unqualified; retain defaults OFF, no automatic retry or learning"
+current_next: "Initially qualified source checkpoint and same-source CPU save implemented; exact model3 packet prepared, new one-shot approval pending; keep defaults OFF, no automatic learning/retry"
 runtime_effect_of_this_document: 0
 ---
 
-> **11/13・保存Piece作者の実3応答を完了、二欄／補足で限定改善・通常採用は保留：** 承認38,745byteを一回実行し、候補3stop＋提供前後4確認の計7生成、停止・復元・証跡書込込み111.841525秒、学習／retry0。元提供PID79715へ復元し、argv／env／cwd／2鍵・source／両adapterを保持、通常／Analysisの前後全response一致・health正常。二欄は氏名の役割化・本人反復省略・評価語順、補足も各source内の本人反復省略が現れ、段落は常体化だけ。raw無修補の既存S7は3 GENERATED。metadata単独効果・一般構成品質は未証明、通常OFF。比較用非UUID source／refined資格なしのため今回SQL／保存／native画像0。 [実結果・復元・残件](<#piece-selected-author-editorial-actual3-20261113>)。
+> **11/13・保存資格を生成前に固定し、同じ源泉から保存へ再開する経路を実装：** API `d86f1eb2`のtest helper／既存CIだけを改修。DB終了・復元後もUUID／日時を含む原七項目・thread／events／source_ref・PreparedRequest／messagesを保持し、局所48 PASS、固定CPU応答3件の同source保存・非生成再読／本文・payload・recipe・hash一致を確認。Piece CI43343955206はexact head・attempt1・全39工程成功。前回実3の2/3限定編集改善は継承し、新モデル効果には加算しない。資格ある架空3件／Freeの実4B用38,631byteを固定、未送信・未実行で一回承認待ち。新GPU／学習／通常採用／native画像0。 [実装・資格・未実行範囲](<#piece-qualified-source-checkpoint-prepared-20261113>)。
 
 > **11/13・Piece編集候補の実6応答を完了、全3組で差分0のため不採用：** 承認14,489byteを既存Podで一回実行し52.420284秒、全6 HTTP200／stop／attempt1。PID77140と前後health200を保持、学習・retry・提供再起動0。段落・二欄・refinedの旧新全response／rawは各組完全一致・全欄原文copy、8編集選択の可視効果0。二欄では氏名が残り公開役割化も未達。原本のexact CPU再演は4 GENERATED／二欄2 UNAVAILABLEだが作品品質合格ではない。候補・通常optionはOFF、今回のSQL／native保存0、追加生成・S7緩和・raw補修なし。実原本と不採用理由を保全した。 [実比較・判定](<#piece-editorial-choices-actual6-20261113>)。
 
@@ -1296,6 +1296,62 @@ API ec4bd668の依存9blobをfresh照合し、exact raw→既存receipt→Engine
 次は今回現れた公開役割化・本人継続省略を保持して、長い段落の構成・焦点編集の未達へ戻す。保存／画像へ通す材料は既存保存元ownerの資格を持つ原入力から確定し、今回rawを別sourceへ付け替えない。同型再比較・SYSTEM／metadata増量・新学習・通常有効化へは自動進行しない。
 
 同じ[既存原本ZIP](https://chatgpt.com/library?file_id=libfile_fde3_f-f30655de312c8191978daec9b93b7008_2f7470f963808191aaebf050935e72de&account_id=personal)をversion7へ更新。442,137byte／89member、SHA256 `177ccad5e95e9c00d79cfe390d06cf8e66dc6368c08e60519c33b821d43bed7c`。旧74memberの全byteを保持し、actual ZIP／展開7原本・再演script/report・独立全文review・原本照合・保存資格境界・README／承認実行記録を追加。秘密／全環境／browser screenshot／Git-backed製品sourceは追加していない。
+
+<a id="piece-qualified-source-checkpoint-prepared-20261113"></a>
+## 9.24 2026-11-13 — 資格成立済み源泉を先に固定し、同sourceの生成・保存をつなぐ準備
+
+### 今回直接扱った不足
+
+製品の保存元→Piece作者→CMEE／S7→preview／save／owner再読は既に接続済み。前回§9.23の実rawを別UUIDや時刻へ付け替えて、同source保存の成功にすることはできない。今回は**新しい架空の保存元を生成前に既存ownerで資格成立させ、その同じDB状態から取得後に再開する検証経路**を実装した。製品の資格検査や作者を増やす修正ではない。
+
+normalは保存済みEmlisのFINAL／成功finishを、refinedは実Q2の質問→明示回答→MATERIAL_UPDATE／ADD→current REFINEDを既存ownerが保存した後にsource_refを導出する。UUIDだけで資格を代行せず、SQLの`emlis_parent_source(e)`が返した七項目全体を最初の原本として固定した。Auth／先行Emlis providerは合成・DBは隔離PGliteであり、live資格の実証とは区別する。
+
+### 実装と検証
+
+API `67757447ddea1a63f74bc71eabee1f43124d47f6`でtest系6file、続く `d86f1eb2b47cf57b47d16b1779aac61da73d2efa`で既存CI1fileへ接続。合計7path、製品source／selector／DB schema／依存／renderer変更0。
+
+| 既存owner・path | 今回の差分 |
+|---|---|
+| `ai/tests/helpers/emlis_q2_postgres.cjs`／`test_emlis_q2_application.py::Database` | pinned PGliteの明示checkpoint dump/load。新規private fileだけへ書き、復元時にDDL／migration／sourceを再seedしない。既定の新規DB動作は維持 |
+| `test_cmee_piece_request_saved_pipeline.py` | `_prepare_saved_request`／`_finish_saved_request`へ分離。SQL七項目・owner/input UUID・時刻・thread/events・source_refを保持し、取得前に完全比較。従来wrapperは維持 |
+| `piece_v2/test_b05_refined_preview_saved_pipeline.py` | 実Q2 ADD由来のprepare／finishへ分離。回答identity／原本／checkpoint/resultを作り直さず同じ資格で再開 |
+| `piece_v2/test_b05_piece_model_saved_pipeline.py` | normalのDB close/reopen→同PreparedRequest／messages→Application source_request→保存・再読。原文／観測identity差替えはprovider前に拒否するCPU test |
+| 新 `piece_v2/test_b05_piece_qualified_checkpoint.py` | refinedの実ADD履歴・別回答・生成材料をDB再開後も保持し、再度Emlis start／answerせず既存保存へ通すCPU test |
+| 既存 `.github/workflows/piece-b2b-isolated-postgres.yml` | 関係helper／新testのpath triggerと既存model試験stepへの追加だけ。新workflow／job／権限／依存なし |
+
+localはnormal/helper集合45 PASS（39.81秒）＋refined／checkpoint集合3 PASS（20.73秒）＝重複なし48 PASS。初回の不足module／migrationはpartial checkoutの原本不足で、exact ec4の原本を取得・blob照合して解消し、製品修正や合格へ算入しない。新しいtest用固定CPU応答を使い、旧actual rawを新sourceへ再bindしていない。独立担当が既存5原本との差と新file全文を確認しblocking0。
+
+最新[Piece CI43343955206](https://github.com/MassyuRed/mashos-api/actions/runs/43343955206)／job131618680124はexact `d86f1eb2`・attempt1・全39工程success。新checkpoint testは既存model commandへ組み込まれた。前段677の自動run／local件数を重複加算せず、manual dispatch／rerun0。全7pathのGitHub readbackとchanged pathsetを確認した。
+
+### 最初から資格が成立した架空3材料・予行
+
+`qualified_pipeline.py --prepare`でFreeの架空3源泉を新規作成し、全Piece record／quota0の時点でDB checkpointを固定。normal2は既知の長段落／二欄本文で、独立未学習holdoutや新題材とは呼ばない。refined1は「上司の長谷川さんに褒められたのに、嬉しくなかった。」＋実Q2 ADD「その時、私は少し寂しかった。」の正規資格を使う。前回の未資格refinedを昇格していない。
+
+DB checkpointは4,881,732byte・SHA256 `54723033aee127fd45d1540423f77f0408c55b7e77fb57b692e28c5c1dfe304b`。別processで復元し、原七項目・UUID／時刻・thread/events・source_ref・prepared ID／private_json／messagesの完全一致を確認した。実モデルcall0。
+
+固定CPU応答の予行では同じ初期checkpointを使って3件すべて保存・新service非生成再読、各quota1、元source／Emlis不変、本文／payload／recipe／renderer／hash一致。これは**CPU固定材料の3保存**であり、実4Bの新本文保存やnative画像ではない。期待CPU本文はGPU packetへ入らない。
+
+### 固定した実4Bの次の一回（未承認・未実行）
+
+| 項目 | 固定範囲 |
+|---|---|
+| 送信物 | `ar04_qualified_source_piece344a_20261113_once.py`、38,631byte、SHA256 `a5b9ce6d669b7e7f208082527d6a62eaf18380f93a9d1904cc00574f5cf47c03` |
+| 材料 | 同じ資格済みsourceからの段落／二欄／refined3要求、Freeのみ。wire34,555byte・SHA256 `20955eb69acc7129aea6eccb14b8b8df7c018e6d5c24ed4ed5901b3ce9a8745a`。新SYSTEM／editorial metadata／教師0 |
+| 取得 | 既存保存Piece344a、候補3＋提供前後4確認＝最大7生成、一回、追加学習／retry0。既存Base6／旧73の再生成やA/Bは行わない |
+| 時間 | 停止・復元込み最大600秒、復元枠120秒。前回復元PID79715と元source／両adapter hash不一致は停止前に終了 |
+| 同Pod境界 | 既存2鍵はproxy／redirectのないlocalhost確認だけ。元argv／env／cwdは同Pod親RAMで同提供復元だけへ使用。候補childは鍵／HTTP server0 |
+| 送らない物 | DB checkpoint／private資格state／合成Auth token／CPU期待本文／元起動環境／秘密。固定messagesと実行codeだけを送る |
+| 取得後 | 全原文・raw独立比較→同checkpoint復元→同source／prepared／messagesを確認した新rawだけを無修補で既存S7／保存・再読へ。拒否時のS7緩和・raw補修・別source付替えなし |
+
+固定script親子ASTと独立static reviewは成功・blocking0。確認は実行成功や提供復元の証明ではない。**未送信・model実行0・一回の具体承認待ち。** 前回38,745byteの実行済み承認は流用しない。
+
+画像は、同じ新rawの正規preview／save／detail DTOが成立してから、既存研究363の通常host harnessへ接続する次の工程。閉local transport／合成session／隔離SQL／研究iOSという範囲と元8秒を保ち、独自rendererを追加しない。新native／実Auth/API/DB／本人端末は未実施。通常option／selector OFF、一般作品品質・正式受入れ・AR-04／他AR／全補助経路は未完。
+
+長段落style-onlyという観測は維持する。ただし今回原文に仕事・読書・参加日の因果や参加先がなく、元の自然な焦点構文や読書の別命題を保つことを即不良とはしない。構成能力は未確認のまま、文脈の橋渡しや焦点変更を必須修正として新SYSTEM／metadata／fitを周回しない。
+
+[既存原本ZIP](https://chatgpt.com/library?file_id=libfile_fde3_f-f30655de312c8191978daec9b93b7008_2f7470f963808191aaebf050935e72de&account_id=personal)をversion8へ更新。5,198,944byte／104member、SHA256 `4c1cff4bd07b4ad98cd75676c8552f731f619064a947c276f944ff65eec7169a`。旧89memberの全byteを保持し、新規架空資格state／DB checkpoint／凍結wire／予行3保存／review／CI／再開scriptを追加。Git-backed製品・test code、browser screenshot、実ユーザー／実認証情報は追加していない。
+
+STRUCTURE_MAP_DELTA_NONE_FOR_PRODUCT。test支援の新fileとprepare／resume責務は既存01A全file地図／Piece mapへ同単位で記録する。新source／public route／DTO／DB／作者／renderer ownerはない。
 
 ## 10. 変更箇所と検証
 
