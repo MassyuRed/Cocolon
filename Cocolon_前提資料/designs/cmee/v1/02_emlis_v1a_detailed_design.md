@@ -732,6 +732,8 @@ Freeもthread／artifactを保存する。ただし、別入力の次回Emlis生
 
 ### 18.4 Premium interpretive frame
 
+**11/13実装差分：** 既存の根拠付き暫定frameの保存表示・確認/修正/不使用を現naturalへ接続した。本人修正文の次回作者材料への到達を隔離SQL/RN描画で確認。4B応答の品質改善・当回二欄訂正からframeへの伝播は未成立。料金/プランを変えず、当回訂正中は旧frameを表示しない。[範囲と原本§9.36](../Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-natural-owned-premium-frames-20261113)。
+
 > **Premiumでは、ユーザーの蓄積した本人情報から作られた、根拠付き・暫定的・修正可能な「ユーザー固有の解釈フレーム」を使い、ユーザー本人の辞書により近い位置から観測とReceptionを行う。**
 
 frameの各要素は本人入力のevidence refへ戻れ、永続的人格／真実／診断ではなく、新しい本人入力と本人訂正で更新できる。current inputをpast modelより優先し、automatic agreement、personality fixation、cause promotionを`0`とする。frame自体をvisible evidenceにせず、visible claimはcurrent inputまたはeligible owned historyへ戻す。

@@ -4,15 +4,16 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-13 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR02_AR04_NATURAL_SINGLE_ANSWER_PIECE_CONNECTED_DRAFT_SQL_UNAPPLIED
+status: AR02_AR03_NATURAL_PREMIUM_FRAME_CONNECTED_DRAFT
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Natural real single ANSWER now reaches existing Piece source/save/reread; f7b44e0e Piece and Analysis CI both passed attempt1; DB-to-API deployment and real4B/same-image work remain separate; fit16 candidate rejected and normal model selector OFF"
+current_next: "Owned Premium frames now reach saved natural OBS and existing feedback UI; verify d8f6d137 CI, carry live API/device work separately; correction-to-frame and broad output quality remain incomplete, normal model selector OFF"
 runtime_effect_of_this_document: 0
 ---
 
-> **11/13・現naturalの実一回答をPieceへ渡す接続抜けを修復：** 画面で選べるCOMPLETED/REFINEDの一回答が、旧finite専用のAPI/SQL検査で拒否されていた。原入力と実ANSWERを別sourceのまま既存Pieceへ接続し、3plan×自然終了/本人終了の6経路で生成候補・保存・同一版の非生成再読、quota各1を確認。消費した履歴は新しい7記録で置換せず、改変・削除時は拒否する。新71件は分割実行で全成功、既存248件も成功。提供文とPiece HTTPは合成・DBは隔離PGliteであり、新実4B・live DB・Render・RN/build/本人端末の成功ではない。 [現接続と確認範囲§9.35](#piece-natural-single-answer-connection-20261113)。
+> **11/13・Premiumの既存「仮の理解」をnaturalへ接続：** 本人の過去入力・実回答に根拠を持つ暫定frameを、現naturalの保存artifactと既存画面へ渡す欠落を修復。確認／修正／不使用を保存し、本人修正文を次の作者材料へ渡す。不使用は次のframe候補から除外する。新16件・既存227件、実隔離SQLの保存DTOを既存RN editorへ渡す3検証が成功。natural本文は固定合成であり、4B本文の品質改善・実機稼働の証明ではない。 [現接続§9.36](#emlis-natural-owned-premium-frames-20261113)。
+
 
 > **11/13・16教材32更新と17比較を一回完了、品質未達で通常不採用：** 承認207,620byteを既存Podで実行し、新規31応答＋前後4対照、全stop、再試行0。復元・対照終了237.196491秒／ZIP close237.885058秒、元提供PID83325→84398へ元args/env/cwdで復元、通常／Analysisの前後全response一致・独立health200。112tensor保存／fresh reload一致と原本・重み回収を確認。先生→妹の格崩れ・本人一人称の貼返しが残り、通常保持T06には未記載の支配状態を付加したため新10b563候補を採用しない。旧3＋新4の同source隔離保存・新service非生成再読は7成功、独立比較7UNASSESSED。通常OFFを維持する。 [実原本・採否・次](#emlis-correction-independent16-fit32-actual-20261113)。
 
@@ -2525,3 +2526,50 @@ SQLは保存鎖と再構成した現context、既存source envelope/hash/ADDを�
 前回§9.34の新10b563候補不採用・通常model selector OFFを維持する。今回の一回答接続と、AI応答への二欄訂正・複数回答・REVISE/WITHDRAWの伝播は別範囲で、後者は未接続。一般的な応答/編集品質、同じ新本文の端末画像/書出し、全補助経路の受入れは未完。GPU・学習・本番SQL適用・Render配置・RN変更・新build/配布は0。
 
 次は当該headの既存CI結果を確認してこの接続を引き継ぐ。通常反映は累積migrationの依存を確認したDB→APIの順で扱い、実4B本文・同じ作品の保存/画像/再読は残件として区別する。旧finite作者や逆読取を自然文へ無条件に移す処置、本人一人称の機械置換、同じfit/hint/比較の自動反復は行わない。全file tree/責務差分の確認を全仕様意味読了の証明に置き換えない。
+
+
+<a id="emlis-natural-owned-premium-frames-20261113"></a>
+## 9.36 2026-11-13 — Premiumの既存frame表示・本人操作を現naturalへ接続
+
+**11/13・Premiumの既存「仮の理解」をnaturalへ接続：** 本人の過去入力・実回答に根拠を持つ暫定frameを、現naturalの保存artifactと既存画面へ渡す欠落を修復。確認／修正／不使用を保存し、本人修正文を次の作者材料へ渡す。不使用は次のframe候補から除外する。新16件・既存227件、実隔離SQLの保存DTOを既存RN editorへ渡す3検証が成功。natural本文は固定合成であり、4B本文の品質改善・実機稼働の証明ではない。 [実装 d8f6d137](https://github.com/MassyuRed/mashos-api/commit/d8f6d137508d5ba6ec7da620d1dea6576d560dee)。API d8f6d137の既存Piece/Analysis CIは初回実行中。live DB/Render/RN build・配布・GPU/学習は0。
+
+### 利用者に起きていた欠落と修復
+
+旧finiteの `emlis_thread_surface.py` は既存 `emlis_thread_history.derive_interpretive_frames` を呼ぶが、現 `_process_natural` のOBS artifactには `interpretive_frames` がなかった。そのためPremiumにも公開DTOは常に空配列で、既存RN FrameEditorの確認・修正・不使用の操作へ到達しなかった。同じ架空条件の修正前はFree/Plusの2検査成功、Premium1検査が空配列で失敗した。
+
+既存Q3 Premiumの適格履歴だけを使い、原入力・実ANSWER→既存意味更新/plan/evidence→暫定frame→同じOBS保存→既存DTO/FrameEditorへ接続した。自然文のAI本文・過去のAI本文・保存済み意味checkpointを本人根拠へ昇格しない。有限ownerがRESOLVEDと読めない最新回答、limitedな履歴、二欄訂正付き履歴は既存ownerに従って除外する。さらにnatural Safetyが今回の作者材料から除外した履歴を、frame経由で戻さない。
+
+| 変更file（mashos-api） | 現責務 |
+|---|---|
+| `ai/services/ai_inference/emlis_thread_service.py` | 新private `_natural_interpretive_frames` がPremium/Q3・当回の二欄訂正なし・Safety採用済み履歴IDの範囲で既存deriveを使用。同じnatural OBSへ非空frameを保存し、当回の二欄訂正があれば旧保存frameも表示しない。 |
+| `ai/tests/test_emlis_natural_frames_application.py`（新） | 隔離SQL上のnatural源泉・frame・本人feedback・次応答材料・非生成再読・失効の16検査。 |
+| 既存 `.github/workflows/piece-b2b-isolated-postgres.yml`／`analysis-observed-content.yml` | 新suiteを既存path/実行stepへ追加。新workflow／新基盤なし。 |
+
+### 保存した表示と本人操作
+
+| 場面 | 保存DTOと既存RN描画で確認したこと |
+|---|---|
+| Premium・初回 | 過去記録の日付と「褒められた」についての「重かった」を、**あなたの言葉からの仮の理解**として表示。今回も同じ受け止めとは決めないという既存説明を維持。 |
+| 確認 | 本人が押した場合だけCONFIRMED。保存だけではnatural providerを呼ばず、次の本人回答後の材料へ同じ本人feedbackを渡す。無反応は確認へ昇格しない。 |
+| 修正 | 本人の「結果だけで判断されたことが気になった。」をそのまま保存・表示し、次の作者材料のUSER_FRAME_FEEDBACKへ渡す。新応答後のframeにも同じ本人修正を保持。 |
+| 不使用 | 直後は「この理解は今後使いません。」を表示し、次の応答後のframeは空配列。履歴原文自体は消さない。 |
+| Free／Plus | frameは空配列。自然応答・問いの既存経路を保つ。 |
+
+確認・修正・不使用は既存 `frame_feedback`、本人/版/frame_ref/context、既存SQL保存を使う。feedback直後のstatus表示を消さず、古いnatural本文は既存CONTEXT_CHANGEDへ抑止する。GETは保存frameを返すだけで再導出・モデル再呼出しをしない。過去の編集/削除・権利降格で旧frameを隠し、当回の二欄訂正では旧frameを再公開しない。この除外は二欄訂正から新frameを作れたという意味ではない。
+
+### 検証・原本と未成立
+
+- 新規16件は分割で固有16成功。初回13成功/3失敗は既存再送DTOの `requested_operation` をfixture期待から落としていたためで、同fieldを照合する期待へ訂正後に当該3成功。product codeを緩めていない。
+- 既存natural application/question/Q3/二欄訂正/natural refined Pieceの5suiteは227成功・skip/失敗0、74.22秒。保存済み意味・旧finite/本人操作の境界を保持。
+- 同じ隔離SQL DTOを既存RNへ読み込み、確認/修正/不使用の9表示段階とFree/Plus非表示を描画treeで照合。関連RN3検証成功、native host/HTTP routingはmockで、本人端末・Bitmap/PNGではない。
+- 一回のprovider取得から保存した本文を保持し、feedback保存/GETの生成0、回答後だけ既存provider一回を確認。SYSTEM・生成材料のfieldやモデルhintは変更していない。
+- private原本は6つの保存DTO/作者材料とRN実描画tree、検証XML/結果を保全する。新公開本文・secret・本番user dataはGitHubへ入れない。
+- 独立read-only reviewでSafety採用履歴の積集合、source/本人回答からの導出、訂正除外、feedback/権利/失効・GET非導出と公開契約不拡張を確認。保存を止める重大所見なし。
+
+一時コピーのRN full suite試行では、コピー先からの相対module解決と既存metro依存の欠落で無関係な検査が停止した。この環境失敗を製品修正へ広げず、今回の実DTO表示と既存frame操作に関係する3検証を明示選択して実行した。全RN suite成功とはしない。
+
+Free／Plusにframeを増やさず、新料金・問い数・quota・公開DTO/route・SQL・RN source・prompt・モデルを変更しない。二欄訂正からframeへの意味伝播、Piece／Analysisへの訂正伝播、複数回答Piece、一般応答/編集品質、live／本人端末・正式受入れは未完。新10b563候補不採用と通常model selector OFFを維持する。
+
+STRUCTURE_MAP_DELTA_PRESENT：既存source/meaning ownerからnatural OBS保存・既存public frame/本人操作への接続責務をcurrent01/04、01A/01Cと詳細正本§18.4へ記録。新しい製品owner、型、作者、renderer、DB mechanismは追加しない。前回§9.35の実一回答→Pieceと両CI成功は継承する。旧資格固定3実rawはQ2の別ref/別prepared/messagesであり、現naturalの実4B受領成功へ移し替えない。
+
+次は当該headの既存CI結果を確認し、この既存frame接続を通常API反映・本人端末の残件へ引き継ぐ。自然文がframeにより良くなったという判定、新GPU/fit・同じ不採用比較の反復・通常model採用へ自動進行しない。
