@@ -3119,3 +3119,11 @@ STRUCTURE_MAP_DELTA_PRESENT。同じ保存threadの対象保持だけを閉じ�
 API b8466c6aのPiece／Analysis両CIはattempt1で成功。再修正／不使用の2分岐を、新しい現在Cの対象未結合old／結合済みnew計4応答へ固定した。同じsource・SYSTEMを使い、oldはtargetを除いた対照であって過去runや旧版全体の再現ではない。送信3file50,496byte、前後4対照＋health2GET込み300秒・一回、学習／再試行／再起動なし。既存2鍵は同Pod内localhost認証のみ。新しい一回分の承認待ちで、送信・実生成は0。
 
 固定合成本文では元checkpointからの保存・別service非生成再読2件が一致、再取得0。これは実本文品質・live保存の成功ではない。回答日時のfixture不整合は新v2で作り直し、実行後の受領はZIP閉鎖後最終summaryも必須にした。STRUCTURE_MAP_DELTA_NONE。§9.38の新3不採用、通常selector OFFと新10b563不採用を維持する。[準備原本・本文の判定・残件は詳細設計§9.41](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-cross-record-frame-target-prepared-20261113)。
+
+
+<a id="emlis-cross-record-frame-target-actual-20261113"></a>
+## 2026-11-13 — 別記録の反復判断対象を実4Bで比較、本文新2は不採用
+
+承認50,496byte・3fileを一回実行。研究4＋前後4は全200/stop/attempt1、health2GETも200、ZIP閉鎖97.762331秒、通常／Analysisの前後全response bytes・PID/starttime一致。学習／再試行／再起動0。新2は、今回の悲しみ欠落・過去と別の今回を結ぶ読み・未記載の自責傾向追加が残り不採用。本人判断への未言及だけをFAILとせず、原文の省略と未記載の意味追加を全文で判定した。
+
+new2を凍結した同checkpointへ実receipt保存・別service非生成再読して2件一致、再取得0、source／既存event／本人feedback不変、修正文frame1／不使用0を保持。これは本文品質の合格でもlive保存でもない。準備と実raw・採否・保存結果は同じ資料へ更新、[詳細設計§9.42](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-cross-record-frame-target-actual-20261113)を正本とする。STRUCTURE_MAP_DELTA_NONE。通常selector OFF、新10b563と前回新3の不採用を維持し、今回の一回分の許可は消費済み。次の未完は、本人の最新判断と過去／今回の範囲を実本文が保つこと。

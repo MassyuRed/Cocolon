@@ -4,13 +4,15 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-13 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR03_CROSS_RECORD_FRAME_TARGET_ACTUAL_COMPARISON_PREPARED_NOT_EXECUTED
+status: AR03_CROSS_RECORD_FRAME_TARGET_ACTUAL_EXECUTED_NEW2_NOT_ADOPTED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "New cross-record revised/rejected target comparison frozen: 3 upload files 50496 bytes, 4 research plus 4 controls plus 2 health, 300 seconds once, new single-use authority pending; CPU receipt replay 2/2, both b8466c6a CI attempt1 success; actual model calls0, preserve prior 0/3 rejection and selector OFF"
+current_next: "Approved 50496-byte comparison completed once in 97.762331 seconds: research4/control4/health2, exact before-after responses and provider identity preserved; actual new2 same-checkpoint save/read pass without reacquisition, prose new2 not adopted due to source omission and past/current meaning transfer; one-shot authority consumed, normal selector OFF and prior rejections retained"
 runtime_effect_of_this_document: 0
 ---
+
+> **11/13・別記録の反復判断対象を実4Bで比較、本文新2は不採用：** 承認50,496byteを一回実行し、研究4＋前後4応答は全200/stop、health2GETも200。ZIP閉鎖まで97.762331秒、通常／Analysis前後全response bytesと同PID/starttimeを維持した。再修正側は今回の悲しみを落として過去へ結合し、不使用側は過去の重さ・戸惑いと未記載の自責傾向を追加した。同じnew2 checkpointで実receipt保存・別service非生成再読2成功、再取得0。保存成功と本文品質は別判定で、通常selector OFFを維持する。 [実原本・採否§9.42](#emlis-cross-record-frame-target-actual-20261113)。
 
 > **11/13・別記録の反復判断対象を実4Bで比べる準備完了、未実行：** 新しいCを使った再修正／不使用の2分岐を、対象未結合・結合済みの計4応答へ固定した。3送信fileは50,496byte、通常／Analysis前後4対照・health2GET込み最大300秒・一回、学習／再試行／再起動なし。固定合成本文の同checkpoint保存・非生成再読は2成功、実4B生成とPod送信は0。新しい一回分の承認待ちで、旧承認を再利用しない。b8466c6aの両CIは初回成功。 [準備原本・意味・限界§9.41](#emlis-cross-record-frame-target-prepared-20261113)。
 
@@ -2776,3 +2778,42 @@ Podへ送るのはrunner／wire／files台帳の3fileだけで、展開後50,496
 前回API b8466c6aの [Piece CI43424124958](https://github.com/MassyuRed/mashos-api/actions/runs/43424124958) と [Analysis CI43424124935](https://github.com/MassyuRed/mashos-api/actions/runs/43424124935) は両方attempt1で成功した。今回の準備で製品source／test／DB/SQL／RN／通常作者／モデル／SYSTEMは変更せず、新CI実行も0。
 
 STRUCTURE_MAP_DELTA_NONE。今回は比較準備・CPU受領再開確認と現在地の差分だけで、§9.40の既存責務地図は変更しない。§9.38新3不採用、通常selector OFF、新10b563不採用を維持する。実4B本文品質、二欄訂正→frame／Piece／Analysisの意味伝播、複数回答Piece、同版画像、live／通常反映／本人端末、正式受入れ、全補助経路完了は未確認・未完である。
+
+
+<a id="emlis-cross-record-frame-target-actual-20261113"></a>
+## 9.42 2026-11-13 — 別記録の反復frame判断対象を実4Bで比較、本文新2は不採用
+
+### 承認された一回と実行結果
+
+Mashが§9.41の50,496byte・3file、対象未結合2＋結合済み2、前後4対照、health2GET、最大5分・一回・学習／再試行／再起動なし、既存2鍵の同Pod内認証利用を明示承認した。既存Podの新しい空フォルダーへ3fileだけをUI送信し、全size／SHAとfile集合一致を確認して一回起動した。以前のrunや承認は再使用していない。
+
+研究4＋前後4の計8POSTは全HTTP200／stop／attempt1、health前後2GETも200。終了記録97.739694秒、ZIP閉鎖97.762331秒で上限300秒以内だった。通常／Analysisの前後responseは全文bytes一致、提供PID84398・starttime212772776を保持した。学習・model load・再起動・停止・retryは0。既存2鍵は指定同Pod fileの指定keyをlocalhost認証にだけ使い、記録・外部送信0。凍結runner／wireのhashは§9.41と完全一致した。
+
+結果ZIPと最終summaryを含むfolder archiveをUIで回収し、原ダウンロードを保持した。summary単体のdownloadイベントはタイムアウトしたためfolder archiveで閉鎖後原本を回収した。この回収操作はmodel生成の再試行ではない。ZIP内の閉鎖前summaryは上書きせず、別fileのfinal_summary.jsonと照合した。終了状態の全field一致、全8raw bytes／SHA／完全要求、前後対照、PID、回数を独立read-onlyでも確認した。
+
+### 全4本文と原入力の直接読取
+
+過去Aと、別の出来事と明記された現在Cの原入力・二欄・感情選択・本人回答・最新判断を全4本文へ直接照合した。oldはtarget contextだけを除いた同源泉の対照で、旧版全体の再現ではない。newは正確な以前の本人修正文が届くが、本文が最新判断と時点範囲を優先したとは認められなかった。
+
+| 比較本文 | 実読取と採否 |
+|---|---|
+| 未結合・再修正 | 今回の悲しみ・弱い不安・意図不明を概ね保持するが、入力の言い換えが中心。対象理解の成立証拠にはしない。 |
+| 結合済み・再修正 | 今回の明示した悲しみが落ち、過去Aの記録と今回の不安を「重なっている」と未根拠で結合する。新本文不採用。最新訂正文への未言及だけをFAIL理由にしない。 |
+| 未結合・不使用 | 今回に書かれていない、褒められたこと自体の重さを付加する。過去の意味を今回へ転用しており不採用。 |
+| 結合済み・不使用 | 過去の戸惑い・重さと今回の感情の繋がりを追加し、未記載の「自分自身を責める傾向」も付加する。新本文不採用。留保語があっても根拠の不足は解消しない。 |
+
+華恋と独立read-only reviewerのpre-screeningでは新2とも不採用で、本文改善の成立は確認できない。対象に触れないだけの応答を成功へ数えず、保存やHTTP成功で採否を変えない。原因を唯一の内部箇所へ断定せず、追加hint／SYSTEM／fitの同型比較や同じ実runの反復へ戻らない。正式human Product Read、human rating、受入PASSではない。
+
+### 同じ取得前checkpointへの実receipt保存・非生成再読
+
+取得したnew2のrawだけを§9.41で凍結した各checkpointの使い捨てforkへ戻した。既存provider contractをMockTransportでメモリ内再演し、既存NATURAL_REPLY_RECEIVED／commit／processで保存した後、別serviceのGETで同本文を再読した。保存2／再読2成功、実modelへの再取得0、外側空白除去以外の本文補修0、QUESTION／ANSWER追加0である。
+
+source・identity・既存eventの全prefix・本人feedbackは保持し、期限だけprocessing_deadline_at一列を延長して前後値を保存した。再修正frameは最新本人文の1件、不使用frameは0件を保持する。両保存artifactのmeaning_comparisonはUNASSESSEDで、本文の正しさを認定しない。独立read-only確認もraw／source／完全messages・先行events・別service GET一致を確認した。SQLの別再実行はしていない。
+
+### 原本・現在地・残件
+
+同じ資料を [Cocolon_CMEE_AR03_CrossRecordFrameTarget_Actual_20261113.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-f0b5317f85b48191a9dd3909b126606c_2f7470f963808191aaebf050935e72de&account_id=personal) へ更新した。14,087,563byte、SHA256 `69b9725c16dc0ebd9240021bc67bdfef7557cf701f70110e74023899f5824ada`、82member。preparedは当時の凍結原本、prepared/actual_saved_newは実2保存再読、actual/rawはHTTP生bytesと閉鎖前／閉鎖後の別summary、actualのdownload ZIPは回収原本である。actual/meaning_review.private.jsonに全4本文と読取、validation.private.jsonに照合範囲、README_Actual.mdに現結果を保存した。公開資料へ全source／本文・資格情報は転載しない。準備時の未実行記載は当時の履歴で、現在は承認一回を実行済み・消費済みである。
+
+STRUCTURE_MAP_DELTA_NONE。製品source／test／SQL／RN／model／SYSTEM／selectorの変更0。API基準はb8466c6a、同commitの両CI初回成功は既知結果として継承し、今回の新CIへ加算しない。terminal primaryはTECHNICAL_CREDIT（限定実行と同源泉保存再読の完了証拠）、product quality creditは0である。
+
+§9.38新3不採用、通常selector OFF、新10b563不採用を維持する。次の直接未完は、本人の最新判断と過去／今回の範囲を実本文が保つこと。二欄訂正からframe／Piece／Analysisへの意味伝播、複数回答Piece、同版画像、live Auth/PostgREST・本番SQL適用・Render配置・本人端末・正式受入れは今回未完／未実行である。全補助経路の完了へ広げず、追加生成に今回の許可を再使用しない。
