@@ -4,7 +4,7 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-13 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR02_CORRECTION_READER_CONNECTED_NORMAL_HINTS_WITHDRAWN
+status: AR02_AI_TARGET_CONTEXT_CANDIDATE_PREPARED_NORMAL_OFF
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
@@ -12,7 +12,7 @@ current_next: "Adapt existing source duties, free-prose inverse reading and auth
 runtime_effect_of_this_document: 0
 ---
 
-> **11/13・AR-02の訂正説明読取を接続、生成hintは通常不採用：** API0985877fで単一の本人説明を別sourceの限定読取り・private本文比較へ接続した。実8応答では一度の文法改善後も通常候補で反転・引用創作が再発し、通常hint接続を撤回。5保存・非生成再読と最終167件成功を意味品質へ換算しない。旧9の一般修復も未達。現在の具体再開位置は[§9.30](#emlis-correction-meaning-reader-20261113)と§12。
+> **11/13・訂正対象AI文の出所分離候補を実装：** API3b727b3fで、保存原本を変えず、生成時だけ旧AI対象文をlocator付きassistant文脈へ分離。本人の原入力・全説明・対象全文・版を保持し、通常はOFF。新HTTP受付候補も明示設定のnatural限定。関連187件＋server20件成功。旧base3件と同sourceの新3生成要求・31,471byte、停止／復元込み最大10分の一回を準備したが未送信・新実4B0。旧原本の隔離3保存／非生成再読は新品質実績ではない。応答品質・通常採用・live／端末は未達。[候補・具体比較・境界](#emlis-ai-target-context-prepared-20261113)。
 
 > **11/13・資格固定3件の実4B生成と同じ源泉の保存・再読を完了：** 承認38,631byteを一回実行し、Piece3＋提供前後4確認、学習／retry0、復元込み114.971199秒。元提供PID79715→80025、引数／環境／作業場所／既存2鍵・source／両adapterを保持し、通常／Analysisの前後全response一致を確認。無修補の3rawが既存CMEE／S7を通り、凍結済み同checkpoint・source／prepared／messagesからFree3保存・新service非生成再読、本文／payload／recipe／renderer／hash一致、元source／Emlis不変・quota各1。normal2 rawは前回既知rawと同一で、新たな編集改善やA/Bには加算しない。合成Auth／先行Emlis・隔離PGliteの結果であり、通常option／selector OFF、一般品質・live／本人端末・正式受入れ・全補助経路は未完。画像側test構文1箇所を修正し、研究24f7ba8b／既存CI43350232403は成功。9frameの同版PNGと実書出し一致、最大2.61秒を確認。自然参照画像全体のRGBA一致は未成立で、通常採用へは広げない。 [実原本・同source保存・次](<#piece-qualified-source-actual3-saved-20261113>)。
 
@@ -1545,6 +1545,29 @@ API `0985877fb27935ef9510daa93f64a8ec1d1a4ed8`。§9.29の未接続だった訂�
 生成hintは既存の明示研究flagだけで、通常のSYSTEM／全材料は補助なしを維持する。今回の接続は限定source読取／private比較の技術範囲であり、訂正後の自然な文章・一般品質・正式受入れは未達。通常候補の失敗を単なる保存成功や一度の改善で覆わず、同じhint追加比較・再生成・学習を周回しない。次は実本文で未対応の語尾・複文・引用を、既存のsource意味責務と完成文の逆読取り／作者へ移す。旧二段表示前提のbody inverseを丸ごと適用せず、役割や時点を正しく渡した後の文章化の誤りも別に直す。
 
 STRUCTURE_MAP_DELTA_PRESENT：既存natural_reply_meaning／natural_reply／emlis_thread_service内の訂正source読取・研究作者材料・private比較の責務を更新。新製品file0、新公開型／route／DB／migration／RN変更0。00現在地、Emlis詳細、Emlis／CMEE map、01A地図を同期し、01CはAPI／DB境界が変わらないため差分なし。Premium本人frame／Analysis／ASTOR／Pieceへの訂正伝播、live／本人端末・他AR／全補助経路は未完。Analysis全plan・全保存期間、Cocolon全仕様のリリース前latest-only方針を保持する。
+
+<a id="emlis-ai-target-context-prepared-20261113"></a>
+## 9.31 2026-11-13 — AI訂正対象と本人説明の生成上の出所分離候補・実3要求の準備
+
+API [3b727b3f6f3b9d9024f2fd0fee2960ad9f936ab9](https://github.com/MassyuRed/mashos-api/commit/3b727b3f6f3b9d9024f2fd0fee2960ad9f936ab9)。§9.30から続行。逆向きになった実応答の冒頭が旧AI対象文と一致する現物と、旧AI文と本人説明を同じuser JSONへ入れる現作者材料を確認した。混入原因の仮説であり、これだけで原因確定や品質回復とはしない。曖昧な訂正から対象文を削除すると何を直すか失うため、全文を保った出所分離を採る候補とした。既存_answer_nucleusの対象指定/controlと本人説明/sourceを分ける責務の移管で、旧二段body parserや新作者は追加しない。
+
+`build_natural_reply_messages`は既存NaturalReplyInput.material_json/source prefixを変更せず、明示研究option時だけtarget_ai_interpretationをassistant contextへ移す。本人の原入力・全説明・記録順・各recordの資格は不変。AI対象の全文とparent/correction/event/field/refを残し、user側には対応locatorを置く。曖昧・複数訂正も文脈を失わせず、意味確定や反対意図を作らない。SYSTEMとoptional hintは増やさず、通常optionはOFF。自由文の推測語尾や進行相を削って比較をCONFLICTへ変える修正は行わない。
+
+現稼働HTTPは2message専用で、そのまま3messageを送ると受付できない。既存serve_emlis_natural_replyに、明示CLI時のnaturalだけ3messageを受ける候補を追加した。AI側と本人側の全locatorが一対一対応するものだけ許し、任意assistant履歴／参照不一致、Analysis/Pieceの3messageを拒否。通常2message、認証・lock・context/output枠・adapter/重みは保持する。server候補は未配置。
+
+関連4suite187 PASS（初回8を内包、既存warning1）と、独立したserver suite20 PASS。新source/test4pathはGitHub全文と変更pathの一致を確認。新GPU0、学習0、通常採用0、live DB／Render／RN変更0。既存8と旧9の意味品質・自由文比較未達を継承する。
+
+### 具体化した一回と、まだ行っていないこと
+
+前回pairedの補助なしbase3（姉→先生、先生→妹、昨日の認識と今日の休館予定）について、同じsource/ID/記録時刻/prefix/全材料・SYSTEM・decodingを固定した。撤回済みhintを持つnormal研究2件の材料へは戻さず、旧base3の要求／応答hashを再利用して旧生成を繰り返さない。新候補3要求とrunnerは計31,471byte。既存Pod f1lle4xwq3wjln、最大600秒・復元120秒先取り、候補3＋元natural/Analysis前後4の最大7生成、追加学習／retry0の一回を準備した。未送信・未実行で、過去の消費済み一回承認は再利用しない。
+
+停止前に元PID80025/source5e3d・args/cwd・既存adapter/両鍵とcached tokenizerの3message/8192枠を確認し、不一致なら中止する。元envは同Pod親RAMだけで保持し、子へ資格情報を渡さない。元提供停止後、元sourceの既存load_generatorをnatural profileで直接3回呼び、元args/env/cwd/鍵で提供を復元して前後4対照を全文照合する。source/重み編集や新server公開は行わない。取得方法は直接generatorへ変わり、再load・限定子環境もあるため、旧HTTPとの同process厳密A/Bや新3message HTTP受付の実GPU成功とは言わない。
+
+### 保存準備と限界
+
+旧隔離checkpointの期限切れと未知結果再取得禁止を確認し、別の隔離分岐で処理deadlineだけを更新した。原入力・説明・訂正ID/時刻/prefix/全材料を一致させ、既知の旧rawを既存受領eventへ入れ、受領後の非生成処理から3保存／新service再読を確認した。未知のGPU結果の再取得、旧source改変、本番の期限切れ再開ではない。新候補の実raw保存や品質改善として加算しない。新結果は無修補で全3本文を原入力と読み比べ、同じsourceの隔離保存・非生成再読を採否と分けて行う。
+
+STRUCTURE_MAP_DELTA_PRESENT：既存natural_replyのmessage責務と既存serverの明示研究受付を更新。新製品file／公開DTO／route／DB／migration／RN追加0。00現在地、01A、Emlis/CMEE mapを同期、01B/01CはPiece/Analysis・account/public DB境界不変のため差分なし。AR-02/全補助経路は未完。Premium frame/Analysis/Pieceの訂正伝播・live/本人端末・正式受入れは未完。
 
 ## 10. 変更箇所と検証
 

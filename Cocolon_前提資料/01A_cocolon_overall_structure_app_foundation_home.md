@@ -6976,3 +6976,15 @@ STRUCTURE_MAP_DELTA_PRESENT／API0985877f。既存3製品fileの責務差分で�
 | `ai/tests/test_emlis_interpretation_correction.py`、`test_emlis_natural_reply_meaning_reuse.py`、`test_emlis_natural_reply_meaning_budget.py` | 説明だけを根拠化、全文座標、複数訂正／後続未読、通常hint OFFとprivate保存・公開分離の検証 |
 
 新8実応答の通常候補も意味未達で不採用。5保存は隔離実績、製品品質合格・live反映／端末成功ではない。[最新実装と再開点§9.30](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-correction-meaning-reader-20261113)。01CはAPI／DB契約不変のため差分なし。
+
+
+## 2026-11-13 差分 — AI訂正対象の生成message出所分離候補
+
+STRUCTURE_MAP_DELTA_PRESENT／API3b727b3f。既存2製品file内の明示研究候補、通常OFF・未配置。新製品file/公開DTO/route/DB/RN追加0。
+
+| path | 既存責務内の差分 |
+|---|---|
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply.py` | build_natural_reply_messagesが保存material/prefixを保持し、旧AI対象全文だけlocator付きassistant文脈へ投影。曖昧/複数/過去を含む全本人説明を保持。通常factory出力は従来同一 |
+| `ai/tools/serve_emlis_natural_reply.py` | 明示CLI+natural認証時のみ、本人側/AI側の完全な参照一致を持つ3message受付候補。既定OFF、Analysis/Piece/任意AI履歴へ拡大しない |
+
+既存tests2fileで関連187＋server20成功。新実4Bは0、旧rawの隔離3保存/再読は新品質実績ではない。[現在の具体比較・境界§9.31](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-ai-target-context-prepared-20261113)。未承認の最大10分/候補3＋元提供前後4/復元一回を準備。通常採用・稼働・本人端末は未完。

@@ -2057,3 +2057,8 @@ RN4a103688で既存EmlisThreadModal内のPiece入口だけを拡張。表示し�
 ## 2026-11-13 — 訂正説明の限定意味読取り接続と通常hint撤回
 
 API0985877f。既存natural_reply_meaningが本人説明のrole／ID／親input／記録時点／field座標を持つwitnessを作り、単一の独立説明だけ既存finite／cognitionへ渡す。AI対象文はreaderへ入れず、複数訂正・不明／未読文脈を確定しない。serviceは訂正時も読めた範囲だけprivate本文比較を行う。公開DTO／DB／RN／QUESTION数・quotaは不変。作者hintは実8応答で安定せず通常接続を撤回、既存研究flagだけ。訂正cognitionの生成投影は研究でも退けた。source接続・5保存／非生成再読・最終167件成功を、一般意味品質へ数えない。[実本文・限界・次§9.30](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-correction-meaning-reader-20261113)。STRUCTURE_MAP_DELTA_PRESENT、新製品file0。Premium frame／Analysis／Piece伝播・live／端末は未完。
+
+
+## 2026-11-13 — AI訂正対象の出所分離候補（通常OFF）
+
+API3b727b3f。既存natural_replyの生成message所有箇所で、AI対象文をlocator付きassistant文脈へ移す明示研究optionを追加。保存material/prefix/原入力/全説明/対象全文は不変。既存serverの3message受付も明示設定natural限定・完全参照束縛で、通常2messageと他profileは保持する。通常OFF・server未配置。187＋20件成功と旧rawの隔離3保存/非生成再読は、新実4Bや品質改善ではない。31,471byte/最大10分/3候補＋前後4/学習retry0の一回を具体化したが未承認・未送信・新生成0。[比較条件と限界§9.31](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-ai-target-context-prepared-20261113)。STRUCTURE_MAP_DELTA_PRESENT、新製品file/公開DTO/route/DB/RN0。一般意味・旧8/9未判定、Premium frame/Analysis/Piece伝播、通常採用/live/本人端末は未完。
