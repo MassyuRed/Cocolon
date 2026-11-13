@@ -1390,7 +1390,8 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
       XCTAssertEqualObjects(report[@"phase"],@"native_checked",@"%@",report);XCTAssertEqualObjects(report[@"body_preserved"],@YES);
       XCTAssertEqualObjects(blocks,artifact[@"content_payload"][@"body_blocks"]);XCTAssertEqualObjects(artifact[@"piece_text"],[blocks componentsJoinedByString:@"\n\n"]);
       NSNumber *expectedBlocks=[report[@"source_case_id"]isKindOfClass:NSString.class]?expectedBlockCounts[report[@"source_case_id"]]:nil;
-      XCTAssertNotNil(expectedBlocks);XCTAssertEqualObjects(report[@"name"],[NSString stringWithFormat:@"%@_%@",report[@"evidence_set"],report[@"source_case_id"]]);
+      NSString *expectedName=[NSString stringWithFormat:@"%@_%@",report[@"evidence_set"],report[@"source_case_id"]];
+      XCTAssertNotNil(expectedBlocks);XCTAssertEqualObjects(report[@"name"],expectedName);
       if(expectedBlocks)XCTAssertEqual(blocks.count,expectedBlocks.unsignedIntegerValue);
       XCTAssertEqualObjects(report[@"state_can_save"],@NO);XCTAssertEqualObjects(report[@"state_can_export"],@NO);
       XCTAssertEqualObjects(report[@"native_canvas_valid"],@YES);XCTAssertEqualObjects(report[@"bitmap_all_cells_equal"],@YES);XCTAssertEqualObjects(report[@"capture_error"],@NO);
