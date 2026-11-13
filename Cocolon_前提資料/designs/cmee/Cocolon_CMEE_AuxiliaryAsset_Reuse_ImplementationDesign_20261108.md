@@ -1408,6 +1408,22 @@ native初回失敗と最小構文修正の独立reviewは同ZIP version10へ追�
 
 STRUCTURE_MAP_DELTA_NONE_FOR_PRODUCT。既存作者／source owner／公開型／route／DB／renderer／通常selectorに変更なし。一般編集品質・通常採用・live反映／本人端末・正式受入れ0/3・AR-04／他AR／全補助経路は未完。今回の7生成を繰り返さず、同じ新本文の既存画像経路と未解消の三中核品質へ接続する。
 
+
+<a id="piece-frame-solid-paint-candidate-20261113"></a>
+## 9.26 2026-11-13 — 同版画像の枠帯を切り分け、既存背景部品の最小修正を検証中
+
+前セッションで待機していた研究native run43350232403は成功済みとfresh再照会し、同3作品の実raw→隔離保存8項目／3hash→9frame→各実view-shot一致を独立再確認した。旧7生成／同nativeを未完として繰り返していない。
+
+画像を改めて読むと、実画像は枠の内側に幅の広い段階状の帯があり、自然参照は2pxの細い単色枠だった。TWO-FIELDSでは本文の垂直位置も参照と異なるため、全RGBA不一致を枠だけの問題と断定しない。実canvasとview-shotはともにrenderInContextで、既存PieceVisualCardのsurface＋borderWidth:2のViewを含む。自然参照はborder色矩形と2px内側surface色矩形を塗る。文字bitmapは透明な文字だけを合成し、今回の帯をV4文字変換の累積とする証拠はない。RN内部の正確なbacking原因は未確定。
+
+研究source [0b6d212f](https://github.com/MassyuRed/Cocolon/commit/0b6d212fc43c0d13bff107940ad551bc0147f5df)で既存components/piece/PieceVisualCard.jsだけを変更。margin/2のborder色外矩形と2px内側のsurface色矩形へ分け、現12テーマの不透明palette・寸法・z順を保持した。本文／計測／bitmap／recipe／renderer版／8秒guard／fixture／native method／依存は不変。通常sourceへの採用とmodel selector有効化は行っていない。
+
+Node24.22.1で構文成功、既存renderer189件は188成功＋partial checkoutのuiTokens不足1失敗後、同ref原本を補完してその1件だけ再確認成功。重複なし最終189成功で、native描画の実証ではない。独立事前reviewで阻害事項なし。[既存native run43357602783](https://github.com/MassyuRed/Cocolon/actions/runs/43357602783)／job131663248153は同3作品9frameを実行中、成否・帯解消・全体RGBAは未確定。phase6 run43357602772成功をnative成功へ混ぜない。
+
+同じ原本ZIPをversion12へ更新し、旧193memberを全bytes保持、候補identity・観測・local結果を3member追加した。196member／10,524,903byte、SHA256 ec861bcd800eab4c1ad98189f651ff455b21e6ea97b367da33dfb09b3a71ca5e。Git-backed source／秘密／browser screenshotは追加しない。
+
+STRUCTURE_MAP_DELTA_NONE：既存背景描画owner内の実装手法だけで、新しい型／接続／責任／fileを加えない。次はこの実描画結果を回収し、旧新の枠画素・本文／hash／PNG／実書出し／元期限を照合する。成功前の通常採用、Android実証、全RGBA一致・商品受入れへ拡げない。AR-02の二入力訂正が次の直接未接続であること、一般Piece品質・通常採用・live／本人端末・全補助経路の未完は維持する。新GPU／学習／DB／Render変更0。
+
 ## 10. 変更箇所と検証
 
 ### 10.1 実装候補の所有箇所
