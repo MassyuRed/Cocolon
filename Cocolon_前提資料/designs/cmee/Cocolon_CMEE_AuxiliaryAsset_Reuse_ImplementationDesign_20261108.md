@@ -4,13 +4,15 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-14 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR04_LATEST_SELECTED_ADD_ACTUAL_SAVED_NATIVE6_EXPORT_COMPLETE_PROSE_IMPROVEMENT_UNPROVEN
+status: AR04_RECORDED344A2_REGISTER_FIXED_SAVED_NATIVE6_EDITORIAL_UNPROVEN
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Same saved real4B latest round2/3 works passed native preview/saved/export6 and actual PNG capture; general paragraph/two-field editorial improvement, latest hosted SQL/API/RN and physical device remain unfinished; selector OFF, no new model call or deployment"
+current_next: "Recorded344a paragraph/two-field false refusals fixed, same raw saved/reread and native6/actual PNG verified; editorial repetition and normal SQL/API/RN physical-device roundtrip remain unfinished, selector OFF"
 runtime_effect_of_this_document: 0
 ---
+
+> **11/14・取得済み344aの段落／二欄2件の誤拒否を修復し、本文無修補で保存・非生成再読・同版native画像へ到達。** API1237bc21／最終04153c52。4原本の同checkpoint再照合は3保存／1拒否、氏名が残るbase二欄は拒否を維持。保存canonical8／3hash・quota各1・原source／Emlis不変、追加model／学習0。研究e098efda・iOSシミュレーター6画面、最長4.556秒、各作品の3PNG全byteと実view-shot画素／SHA一致。局所1,404件と既存CI成功、通常selector OFF。本文反復・一般編集品質、通常経路／本人端末は未完。 [修正・画像・原本・残件§9.50](#piece-coherent2-register-saved-native-20261114)。
 
 > **11/14・取得済み実4B2作品を、同じ保存本文から通常hostのpreview／saved／exportへ接続。iOSシミュレーター6画面成功、最長2.124秒。各作品の3画面PNG全byte一致・実view-shot画素／SHA一致、native dismiss後の保存画面遷移を確認。追加生成／学習／本番変更0。一般整形品質・本人端末は未完、通常selector OFF。** [同版画像・実書出し§9.45](#piece-latest-answer-native6-20261114)。
 
@@ -3048,3 +3050,47 @@ body-free診断にsource path／SHA／行、各nodeのfamily・reader/treeとS7�
 [同じ実原本](https://chatgpt.com/library?file_id=libfile_fde3_f-9bb7f6aceeec8191bafb13d6d3264cc1_2f7470f963808191aaebf050935e72de&account_id=personal)をversion3へ更新した。9,859,401byte・76member、SHA256 `065b692d2a865ac374c19250d182c84837b7b4e938c5fd14244fab08c5c2489b`。旧53memberは元path／byte不変で全て保持し、新しい実送付・取得原本／閉鎖後summary、全2raw／対照／health、同checkpoint4受領結果、全文照合・拒否診断と復元画面の23memberを追加。回収原本は60,018byte、SHA256 `5bf0d35f4524b75776731cfdd2d2a6d57f5a4cb835e869a85d7df68e215e3e3e`。元閉鎖ZIPを後から書き換えていない。rootと独立read-only担当が、全原本・来歴・4全文・1保存／3拒否・canonical8／3hash／source不変を照合し、独立担当の再生成・DB再query0だった。
 
 STRUCTURE_MAP_DELTA_NONE。製品source／test／SQL／RN／SYSTEM／hint／重み変更0、新CI0、通常selector OFF。今回の追加実行は承認済み一回だけで、再試行・追加学習・通常採用・本番配置／配布0。344aの保存／画像・広い編集品質、v1指示語・新refined資格、通常SQL／API／RNの一巡・本人端末・他AR・全補助経路は未完、商品品質credit／正式受入れ追加0を維持する。
+
+<a id="piece-coherent2-register-saved-native-20261114"></a>
+## 9.50 2026-11-14 — 取得済み344a2件の誤拒否を修復、無修補保存・同版native画像
+
+### 修正した範囲
+
+API `1237bc21d391805ae0f02c6757dcd2149b4d7e20` で既存 `piece_v2_content_policy.py` を修復し、`test_piece_model_inflection_composition.py` を追加した。最終head `04153c5244d163aadd741fd3d2f99b93be8e0cd5` は、明示列挙されていた既存Piece CIのpath filterとpytest呼出しへ新86件を接続しただけで、商品sourceの追加差分はない。
+
+Piece内の有限活用知識として「気づく／できる／考える」のlemma・stem・活用型を明記し、過去の肯否と常体／丁寧体を規則から導出する。完成文・case IDの許可リストや一括文末置換ではなく、全literal prefix・lemma・肯否・時制・voice・modalityを比較する。未知語の活用型を推測せず、降りる／降るや未対応の動かす等を混同しない。source資格と共有Emlis／Analysis辞書は不変で、一般日本語の意味判定成立にはしない。
+
+既知の正・事実・過去・能動・非授受の形からte/deを導出し、ている状態のnonpast肯否を独立保持する。「まだ」等のprefixは一字も落とさず、未伝達を完了・単純非行動・過去へ変えない。否定interpretationは内側内容をliteral保持した外側hostとして比較し、動作否定へ平坦化しない。内側命題を解釈したとはしない。
+
+役割化はsource／visibleを別々に解析し、既存S7の検証済みbindingを同じliteral leafへだけ合成する。tag・operator・肯否・時制・一人称・順序・区切りは完全比較。別field／補足の本人や役割を借りず、役割化したsourceを作って再解析しない。native既定のKEEPはliteral、新照合はmodel opt-inだけ。原七項目・raw・完全messages・既存作者・SYSTEM／重み・SQL／RN・通常selectorの変更は0である。
+
+### 同じ取得原本の保存・非生成再読
+
+§9.49の原本・結果を上書きせず、同checkpoint4独立forkへ取得済みrawを各1回、無修補で受領した。旧base取得runのFAILED、別runの344a COMPLETE、各instance1、同source／messages／decoderと取得時対照・復元の来歴は保持する。新model／GPU／学習／提供停止・復元は0で、消費済み一回分の許可を再利用しない。
+
+| 候補 | 修正前 | 修正後 |
+|---|---|---|
+| base・段落 | 保存・非生成再読成功 | 継続成功、前後canonical8同一 |
+| base・二欄 | 保存前拒否 | 氏名残存候補の拒否を維持、行／source／quota不変 |
+| 344a・段落 | 意味未照合で拒否 | GENERATED、private保存・別service非生成再読一致 |
+| 344a・二欄 | 意味未照合で拒否 | GENERATED、役割化adjustedで同じく一致 |
+
+保存3件はpreview／persisted／detailのcanonical8、本文・内容・recipeの3hash、preview／save replay、quota各1、原source／Emlis不変を確認。本文blockは取得rawからの受領値そのままで、修補・保存後生成0。独立read-onlyでも全4raw・来歴・3保存／1拒否と各hashを照合し、独立担当のSQL／model再実行0。合成Auth／先行Emlis・隔離PGliteであり、live Auth／PostgRESTの成功ではない。
+
+### 回帰・同版画像
+
+局所9fileは1,404件成功（新86、11.52秒）。試験材料の補足資格不足とローカルtest module／fixtureの取得漏れは、既存資格・protected test／fixtureを変更せず解消した。新86には六一人称、肯否・時制・aspect・格・voice・留保／条件、役割化×host／有限述語／状態、field／補足入替、未知活用・不正活用・未対応sourceの拒否を含む。
+
+実装修正1237bc21のPiece run43518306318/job132205840641とAnalysis run43518306187/job132205840162はattempt1 success。最終04153c52のPiece run43520902742/job132214595739もattempt1 successで、新testの実呼出しとモデル関連2,276件成功を確認した。これらは重複を含む別実行で、局所件数へ加算しない。
+
+研究 `e098efda01fda68463827a4763a49154af04fc36`、run43518729580/job132207272933、attempt1の既存同1XCTestを使用。保存済み2作品を既存5local API／10合成session確認へ投影し、preview／saved／exportの6画面が成功した。研究変更は検証データと同methodの対象名／block数だけの2fileで、利用する製品本文表示・描画・書出しコードはPR30の現物と同一。原七項目・model raw／完全messages・checkpoint／Authをpublic fixtureへ入れず、非個人の架空カード出力DTOと合成sessionの必要値だけを使った。
+
+全6が保存canonical8・段落1block／二欄2blockと一致。各作品の3PNG全byteが一致し、実view-shotの画素／SHAも一致した。1080×1350・alpha255、最長4556.115959msで既存8秒内。この秒数は画面ごとの描画時間で、依存ビルド／CI全工程ではない。原寸段落と閲覧用縮小の二欄で全文・外枠・余白・Emlisを目視し、欠け・重なりは見つからなかった。原PNGは変更0。独立read-onlyでも同一性と描画記録を照合した。
+
+自然Text参照全体のRGBA一致は全6不成立で、旧描画差を解消したとはしない。元のNSNumber flag 1／0をPythonのis True／is Falseで読んだ局所確認は止まったが、既存XCTestの@YES／@NOと同じ厳密なbool／int 0／1比較へ読取だけを修正した。native原本・判定・再実行は変更0。Photos／Share／本人端末・live API／Auth／DB／配布は未実施である。
+
+### 原本と残件
+
+[同じ検証資料](https://chatgpt.com/library?file_id=libfile_fde3_f-9bb7f6aceeec8191bafb13d6d3264cc1_2f7470f963808191aaebf050935e72de&account_id=personal)をversion4へ更新した。12,701,876byte／95member、SHA256 `81461434ffbaa5613f7dabc495fe88211738f1d470413a71a5d5ecb9965fa844`。前版76memberを元path／bytesで全保持し、修正後4受領、CI／検証・目視結果、native原ZIP、元PNG2と閲覧用縮小画像等の19memberを追加。native原ZIPのSHA256は `d38475f21ad40186b47b4ba5b5a8aebab0515ba44cccd5bae1d5b294075a0aea` で、GitHub artifact digestと一致する。
+
+STRUCTURE_MAP_DELTA_NONE。既存owner内の有限照合修復で、商品flow・component責任・active path・API／DB／RN・権利・保存lifecycle・意味保持条件は不変。主な到達はTECHNICAL_CREDITで、本文構成・本人反復の改善やhuman Product Readの合格ではない。段落は5文の常体化、二欄は明記氏名の役割化＋常体化という限界を維持する。通常selector OFF、一般編集品質・通常SQL／API／RNの一巡・本人端末、v1指示語と新refined資格、他AR・全補助経路は未完。次は本文反復・構成の改善と最新通常経路／本人端末の一巡であり、同じ保存・診断だけを周回しない。
