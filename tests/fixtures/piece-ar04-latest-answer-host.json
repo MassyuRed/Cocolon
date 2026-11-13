@@ -2,20 +2,18 @@
   "schema": "piece.recorded_free_normal_host_fixture.v1",
   "cases": [
     {
-      "name": "normal_host_LATEST-ADD-2",
-      "source_case_id": "LATEST-ADD-2",
+      "name": "normal_host_COHERENT-PARAGRAPH",
+      "source_case_id": "COHERENT-PARAGRAPH",
       "tier": "free",
       "saved_input": {
-        "savedInputId": "ada5a166-bb92-4f28-8775-c3d219a51f7e",
-        "expectedUserId": "e32d52be-4a62-453b-9724-4dbd7a95fc6b",
-        "idempotencyKey": "ar04-latest-preview",
-        "supplementalAnswerIdentity": "001ce2ae-e282-4a1b-9bc8-a61f7ae73abc"
+        "savedInputId": "50d567dc-1d76-4fdb-8718-c58552e8e12c",
+        "expectedUserId": "84540a3f-bd03-475a-9ff8-dd8e8f805f63",
+        "idempotencyKey": "ar04-coherent-preview"
       },
       "preview": {
         "content_payload": {
           "body_blocks": [
-            "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。",
-            "今は、私は怖い。"
+            "私は、会議で考えがまとまらないまま返事をして、後から言いたかったことに気づいた。私は、会議では答えることに気を取られて、自分が何に迷っているのかをうまく言葉にできなかった。私は、次の会議では、すぐに答えを出すよりも、考えを整理する時間を大切にしたい。私は、返事をする前にメモを見返したい。私は、返事の前にメモを見返したいと同僚にはまだ伝えていない。"
           ],
           "format_type": "short_essay",
           "language": "ja",
@@ -24,15 +22,15 @@
           "schema_version": "piece.content_payload.v1",
           "title": null
         },
-        "content_payload_hash": "6cdb73806bac5e79296ee1854c29daba20775f7463fd2f20fd5af4ae672cdc74",
+        "content_payload_hash": "6af72ae0a3c5d3042d22c7993260383d9043fc5690a8aae027ff7936ab53b6b6",
         "eligible_formats": [
           "short_essay"
         ],
         "expires_at": "2099-01-01T00:10:00+00:00",
         "format_type": "short_essay",
-        "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。\n\n今は、私は怖い。",
-        "piece_text_hash": "c4a4d3aad56c0072456bb519258bc17d6a6cea5e66f2a11e30183ce7c1d80704",
-        "preview_id": "9f7d558c-d084-5732-70c7-0ff549b8b8f6",
+        "piece_text": "私は、会議で考えがまとまらないまま返事をして、後から言いたかったことに気づいた。私は、会議では答えることに気を取られて、自分が何に迷っているのかをうまく言葉にできなかった。私は、次の会議では、すぐに答えを出すよりも、考えを整理する時間を大切にしたい。私は、返事をする前にメモを見返したい。私は、返事の前にメモを見返したいと同僚にはまだ伝えていない。",
+        "piece_text_hash": "730a39956128854c0093999d088a16cbe5eb17324a68afbfe8937153c3c03b66",
+        "preview_id": "643c5528-c10c-7e09-4181-21d4b3d6d7d9",
         "preview_revision": 1,
         "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
         "row_version": 1,
@@ -90,27 +88,19 @@
         }
       },
       "save": {
-        "piece_id": "9f7d558c-d084-5732-70c7-0ff549b8b8f6",
-        "saved_at": "2026-11-14T03:45:11.979+09:00",
-        "row_version": 2,
-        "consumption_id": "a90c2884-464e-4149-b3da-6ab43d2122bb",
+        "consumption_id": "db70350d-cb27-4664-9430-80e5c0dab478",
+        "idempotency_replayed": false,
         "lifecycle_status": "saved",
-        "visibility_scope": "private",
-        "idempotency_replayed": false
+        "piece_id": "643c5528-c10c-7e09-4181-21d4b3d6d7d9",
+        "row_version": 2,
+        "saved_at": "2026-11-14T07:16:37.669+09:00",
+        "visibility_scope": "private"
       },
       "detail": {
         "api_contract_version": "piece.api.v2",
-        "piece_contract_version": "piece.record.v2",
-        "export_contract_version": "piece.export_contract.v1",
-        "render_interface_version": "piece.render_interface.v1",
-        "render_reproducibility_version": "piece.render_reproducibility.v1",
-        "format_type": "short_essay",
-        "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。\n\n今は、私は怖い。",
-        "piece_text_hash": "c4a4d3aad56c0072456bb519258bc17d6a6cea5e66f2a11e30183ce7c1d80704",
         "content_payload": {
           "body_blocks": [
-            "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。",
-            "今は、私は怖い。"
+            "私は、会議で考えがまとまらないまま返事をして、後から言いたかったことに気づいた。私は、会議では答えることに気を取られて、自分が何に迷っているのかをうまく言葉にできなかった。私は、次の会議では、すぐに答えを出すよりも、考えを整理する時間を大切にしたい。私は、返事をする前にメモを見返したい。私は、返事の前にメモを見返したいと同僚にはまだ伝えていない。"
           ],
           "format_type": "short_essay",
           "language": "ja",
@@ -119,7 +109,22 @@
           "schema_version": "piece.content_payload.v1",
           "title": null
         },
-        "content_payload_hash": "6cdb73806bac5e79296ee1854c29daba20775f7463fd2f20fd5af4ae672cdc74",
+        "content_payload_hash": "6af72ae0a3c5d3042d22c7993260383d9043fc5690a8aae027ff7936ab53b6b6",
+        "content_status": "ready",
+        "export_contract_version": "piece.export_contract.v1",
+        "format_type": "short_essay",
+        "lifecycle_status": "saved",
+        "piece_contract_version": "piece.record.v2",
+        "piece_id": "643c5528-c10c-7e09-4181-21d4b3d6d7d9",
+        "piece_text": "私は、会議で考えがまとまらないまま返事をして、後から言いたかったことに気づいた。私は、会議では答えることに気を取られて、自分が何に迷っているのかをうまく言葉にできなかった。私は、次の会議では、すぐに答えを出すよりも、考えを整理する時間を大切にしたい。私は、返事をする前にメモを見返したい。私は、返事の前にメモを見返したいと同僚にはまだ伝えていない。",
+        "piece_text_hash": "730a39956128854c0093999d088a16cbe5eb17324a68afbfe8937153c3c03b66",
+        "public_id": "piece:643c5528-c10c-7e09-4181-21d4b3d6d7d9",
+        "render_interface_version": "piece.render_interface.v1",
+        "render_reproducibility_version": "piece.render_reproducibility.v1",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+        "row_version": 2,
+        "saved_at": "2026-11-14T07:16:37.669+09:00",
+        "visibility_scope": "private",
         "visual_recipe": {
           "aspect_ratio": "4:5",
           "branding": {
@@ -145,21 +150,13 @@
           "visual_catalog_version": "piece.visual_catalog.v1",
           "visual_recipe_version": "piece.visual_recipe.v1"
         },
-        "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
-        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
-        "piece_id": "9f7d558c-d084-5732-70c7-0ff549b8b8f6",
-        "public_id": "piece:9f7d558c-d084-5732-70c7-0ff549b8b8f6",
-        "lifecycle_status": "saved",
-        "visibility_scope": "private",
-        "row_version": 2,
-        "saved_at": "2026-11-14T03:45:11.979+09:00",
-        "content_status": "ready"
+        "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924"
       },
       "transport": {
-        "owner": "e32d52be-4a62-453b-9724-4dbd7a95fc6b",
+        "owner": "84540a3f-bd03-475a-9ff8-dd8e8f805f63",
         "steps": [
           {
-            "path": "/emotion/piece/source-ref/ada5a166-bb92-4f28-8775-c3d219a51f7e?supplemental_answer_identity=001ce2ae-e282-4a1b-9bc8-a61f7ae73abc",
+            "path": "/emotion/piece/source-ref/50d567dc-1d76-4fdb-8718-c58552e8e12c",
             "method": "GET",
             "headers": {
               "X-Piece-Renderer": "piece.rn_bitmap_renderer.ios.v2",
@@ -168,13 +165,13 @@
             },
             "status": 200,
             "response": {
-              "source_input_id": "ada5a166-bb92-4f28-8775-c3d219a51f7e",
+              "emlis_observation_result_identity": "c32edb34-ab91-4673-b7c9-24ae4815e93d",
+              "emlis_observation_stage": "normal_observation",
+              "question_need_decision_identity": null,
+              "source_input_bundle_commitment": "sha256:cd5d984e7d487c45f40dc38eb87eafbb87147f8a4f22a7b84f59549fb63132c1",
+              "source_input_id": "50d567dc-1d76-4fdb-8718-c58552e8e12c",
               "source_input_version": "emlis.current_input_bundle.v1",
-              "source_input_bundle_commitment": "sha256:b4f00b2a3274f505ad2450b0fc59aab2bf64983a4dab543758dbf5813e9a3bec",
-              "emlis_observation_stage": "refined_observation",
-              "emlis_observation_result_identity": "615e5730-0393-400a-bc9a-cdc26f7ac19d",
-              "question_need_decision_identity": "8eefb9af-3a31-4b9a-b41f-b66d2ecdfe0c",
-              "supplemental_answer_identity": "001ce2ae-e282-4a1b-9bc8-a61f7ae73abc"
+              "supplemental_answer_identity": null
             }
           },
           {
@@ -183,17 +180,17 @@
             "headers": {
               "X-Piece-Renderer": "piece.rn_bitmap_renderer.ios.v2",
               "X-Piece-Palette": "3",
-              "Idempotency-Key": "ar04-latest-preview"
+              "Idempotency-Key": "ar04-coherent-preview"
             },
             "body": {
               "source_ref": {
-                "source_input_id": "ada5a166-bb92-4f28-8775-c3d219a51f7e",
+                "emlis_observation_result_identity": "c32edb34-ab91-4673-b7c9-24ae4815e93d",
+                "emlis_observation_stage": "normal_observation",
+                "question_need_decision_identity": null,
+                "source_input_bundle_commitment": "sha256:cd5d984e7d487c45f40dc38eb87eafbb87147f8a4f22a7b84f59549fb63132c1",
+                "source_input_id": "50d567dc-1d76-4fdb-8718-c58552e8e12c",
                 "source_input_version": "emlis.current_input_bundle.v1",
-                "source_input_bundle_commitment": "sha256:b4f00b2a3274f505ad2450b0fc59aab2bf64983a4dab543758dbf5813e9a3bec",
-                "emlis_observation_stage": "refined_observation",
-                "emlis_observation_result_identity": "615e5730-0393-400a-bc9a-cdc26f7ac19d",
-                "question_need_decision_identity": "8eefb9af-3a31-4b9a-b41f-b66d2ecdfe0c",
-                "supplemental_answer_identity": "001ce2ae-e282-4a1b-9bc8-a61f7ae73abc"
+                "supplemental_answer_identity": null
               },
               "requested_format": null,
               "visual_selection": {
@@ -206,8 +203,7 @@
             "response": {
               "content_payload": {
                 "body_blocks": [
-                  "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。",
-                  "今は、私は怖い。"
+                  "私は、会議で考えがまとまらないまま返事をして、後から言いたかったことに気づいた。私は、会議では答えることに気を取られて、自分が何に迷っているのかをうまく言葉にできなかった。私は、次の会議では、すぐに答えを出すよりも、考えを整理する時間を大切にしたい。私は、返事をする前にメモを見返したい。私は、返事の前にメモを見返したいと同僚にはまだ伝えていない。"
                 ],
                 "format_type": "short_essay",
                 "language": "ja",
@@ -216,15 +212,15 @@
                 "schema_version": "piece.content_payload.v1",
                 "title": null
               },
-              "content_payload_hash": "6cdb73806bac5e79296ee1854c29daba20775f7463fd2f20fd5af4ae672cdc74",
+              "content_payload_hash": "6af72ae0a3c5d3042d22c7993260383d9043fc5690a8aae027ff7936ab53b6b6",
               "eligible_formats": [
                 "short_essay"
               ],
               "expires_at": "2099-01-01T00:10:00+00:00",
               "format_type": "short_essay",
-              "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。\n\n今は、私は怖い。",
-              "piece_text_hash": "c4a4d3aad56c0072456bb519258bc17d6a6cea5e66f2a11e30183ce7c1d80704",
-              "preview_id": "9f7d558c-d084-5732-70c7-0ff549b8b8f6",
+              "piece_text": "私は、会議で考えがまとまらないまま返事をして、後から言いたかったことに気づいた。私は、会議では答えることに気を取られて、自分が何に迷っているのかをうまく言葉にできなかった。私は、次の会議では、すぐに答えを出すよりも、考えを整理する時間を大切にしたい。私は、返事をする前にメモを見返したい。私は、返事の前にメモを見返したいと同僚にはまだ伝えていない。",
+              "piece_text_hash": "730a39956128854c0093999d088a16cbe5eb17324a68afbfe8937153c3c03b66",
+              "preview_id": "643c5528-c10c-7e09-4181-21d4b3d6d7d9",
               "preview_revision": 1,
               "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
               "row_version": 1,
@@ -292,26 +288,26 @@
             },
             "generatedIdempotencyHeader": true,
             "body": {
-              "preview_id": "9f7d558c-d084-5732-70c7-0ff549b8b8f6",
+              "preview_id": "643c5528-c10c-7e09-4181-21d4b3d6d7d9",
               "expected_preview_revision": 1,
-              "piece_text_hash": "c4a4d3aad56c0072456bb519258bc17d6a6cea5e66f2a11e30183ce7c1d80704",
-              "content_payload_hash": "6cdb73806bac5e79296ee1854c29daba20775f7463fd2f20fd5af4ae672cdc74",
+              "piece_text_hash": "730a39956128854c0093999d088a16cbe5eb17324a68afbfe8937153c3c03b66",
+              "content_payload_hash": "6af72ae0a3c5d3042d22c7993260383d9043fc5690a8aae027ff7936ab53b6b6",
               "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
               "visibility_scope": "private"
             },
             "status": 200,
             "response": {
-              "piece_id": "9f7d558c-d084-5732-70c7-0ff549b8b8f6",
-              "saved_at": "2026-11-14T03:45:11.979+09:00",
-              "row_version": 2,
-              "consumption_id": "a90c2884-464e-4149-b3da-6ab43d2122bb",
+              "consumption_id": "db70350d-cb27-4664-9430-80e5c0dab478",
+              "idempotency_replayed": false,
               "lifecycle_status": "saved",
-              "visibility_scope": "private",
-              "idempotency_replayed": false
+              "piece_id": "643c5528-c10c-7e09-4181-21d4b3d6d7d9",
+              "row_version": 2,
+              "saved_at": "2026-11-14T07:16:37.669+09:00",
+              "visibility_scope": "private"
             }
           },
           {
-            "path": "/emotion/piece/9f7d558c-d084-5732-70c7-0ff549b8b8f6",
+            "path": "/emotion/piece/643c5528-c10c-7e09-4181-21d4b3d6d7d9",
             "method": "GET",
             "headers": {
               "Cache-Control": "no-store",
@@ -320,17 +316,9 @@
             "status": 200,
             "response": {
               "api_contract_version": "piece.api.v2",
-              "piece_contract_version": "piece.record.v2",
-              "export_contract_version": "piece.export_contract.v1",
-              "render_interface_version": "piece.render_interface.v1",
-              "render_reproducibility_version": "piece.render_reproducibility.v1",
-              "format_type": "short_essay",
-              "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。\n\n今は、私は怖い。",
-              "piece_text_hash": "c4a4d3aad56c0072456bb519258bc17d6a6cea5e66f2a11e30183ce7c1d80704",
               "content_payload": {
                 "body_blocks": [
-                  "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。",
-                  "今は、私は怖い。"
+                  "私は、会議で考えがまとまらないまま返事をして、後から言いたかったことに気づいた。私は、会議では答えることに気を取られて、自分が何に迷っているのかをうまく言葉にできなかった。私は、次の会議では、すぐに答えを出すよりも、考えを整理する時間を大切にしたい。私は、返事をする前にメモを見返したい。私は、返事の前にメモを見返したいと同僚にはまだ伝えていない。"
                 ],
                 "format_type": "short_essay",
                 "language": "ja",
@@ -339,7 +327,22 @@
                 "schema_version": "piece.content_payload.v1",
                 "title": null
               },
-              "content_payload_hash": "6cdb73806bac5e79296ee1854c29daba20775f7463fd2f20fd5af4ae672cdc74",
+              "content_payload_hash": "6af72ae0a3c5d3042d22c7993260383d9043fc5690a8aae027ff7936ab53b6b6",
+              "content_status": "ready",
+              "export_contract_version": "piece.export_contract.v1",
+              "format_type": "short_essay",
+              "lifecycle_status": "saved",
+              "piece_contract_version": "piece.record.v2",
+              "piece_id": "643c5528-c10c-7e09-4181-21d4b3d6d7d9",
+              "piece_text": "私は、会議で考えがまとまらないまま返事をして、後から言いたかったことに気づいた。私は、会議では答えることに気を取られて、自分が何に迷っているのかをうまく言葉にできなかった。私は、次の会議では、すぐに答えを出すよりも、考えを整理する時間を大切にしたい。私は、返事をする前にメモを見返したい。私は、返事の前にメモを見返したいと同僚にはまだ伝えていない。",
+              "piece_text_hash": "730a39956128854c0093999d088a16cbe5eb17324a68afbfe8937153c3c03b66",
+              "public_id": "piece:643c5528-c10c-7e09-4181-21d4b3d6d7d9",
+              "render_interface_version": "piece.render_interface.v1",
+              "render_reproducibility_version": "piece.render_reproducibility.v1",
+              "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+              "row_version": 2,
+              "saved_at": "2026-11-14T07:16:37.669+09:00",
+              "visibility_scope": "private",
               "visual_recipe": {
                 "aspect_ratio": "4:5",
                 "branding": {
@@ -365,19 +368,11 @@
                 "visual_catalog_version": "piece.visual_catalog.v1",
                 "visual_recipe_version": "piece.visual_recipe.v1"
               },
-              "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
-              "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
-              "piece_id": "9f7d558c-d084-5732-70c7-0ff549b8b8f6",
-              "public_id": "piece:9f7d558c-d084-5732-70c7-0ff549b8b8f6",
-              "lifecycle_status": "saved",
-              "visibility_scope": "private",
-              "row_version": 2,
-              "saved_at": "2026-11-14T03:45:11.979+09:00",
-              "content_status": "ready"
+              "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924"
             }
           },
           {
-            "path": "/emotion/piece/9f7d558c-d084-5732-70c7-0ff549b8b8f6/export",
+            "path": "/emotion/piece/643c5528-c10c-7e09-4181-21d4b3d6d7d9/export",
             "method": "GET",
             "headers": {
               "Cache-Control": "no-store",
@@ -387,17 +382,9 @@
             "status": 200,
             "response": {
               "api_contract_version": "piece.api.v2",
-              "piece_contract_version": "piece.record.v2",
-              "export_contract_version": "piece.export_contract.v1",
-              "render_interface_version": "piece.render_interface.v1",
-              "render_reproducibility_version": "piece.render_reproducibility.v1",
-              "format_type": "short_essay",
-              "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。\n\n今は、私は怖い。",
-              "piece_text_hash": "c4a4d3aad56c0072456bb519258bc17d6a6cea5e66f2a11e30183ce7c1d80704",
               "content_payload": {
                 "body_blocks": [
-                  "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。",
-                  "今は、私は怖い。"
+                  "私は、会議で考えがまとまらないまま返事をして、後から言いたかったことに気づいた。私は、会議では答えることに気を取られて、自分が何に迷っているのかをうまく言葉にできなかった。私は、次の会議では、すぐに答えを出すよりも、考えを整理する時間を大切にしたい。私は、返事をする前にメモを見返したい。私は、返事の前にメモを見返したいと同僚にはまだ伝えていない。"
                 ],
                 "format_type": "short_essay",
                 "language": "ja",
@@ -406,7 +393,22 @@
                 "schema_version": "piece.content_payload.v1",
                 "title": null
               },
-              "content_payload_hash": "6cdb73806bac5e79296ee1854c29daba20775f7463fd2f20fd5af4ae672cdc74",
+              "content_payload_hash": "6af72ae0a3c5d3042d22c7993260383d9043fc5690a8aae027ff7936ab53b6b6",
+              "content_status": "ready",
+              "export_contract_version": "piece.export_contract.v1",
+              "format_type": "short_essay",
+              "lifecycle_status": "saved",
+              "piece_contract_version": "piece.record.v2",
+              "piece_id": "643c5528-c10c-7e09-4181-21d4b3d6d7d9",
+              "piece_text": "私は、会議で考えがまとまらないまま返事をして、後から言いたかったことに気づいた。私は、会議では答えることに気を取られて、自分が何に迷っているのかをうまく言葉にできなかった。私は、次の会議では、すぐに答えを出すよりも、考えを整理する時間を大切にしたい。私は、返事をする前にメモを見返したい。私は、返事の前にメモを見返したいと同僚にはまだ伝えていない。",
+              "piece_text_hash": "730a39956128854c0093999d088a16cbe5eb17324a68afbfe8937153c3c03b66",
+              "public_id": "piece:643c5528-c10c-7e09-4181-21d4b3d6d7d9",
+              "render_interface_version": "piece.render_interface.v1",
+              "render_reproducibility_version": "piece.render_reproducibility.v1",
+              "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+              "row_version": 2,
+              "saved_at": "2026-11-14T07:16:37.669+09:00",
+              "visibility_scope": "private",
               "visual_recipe": {
                 "aspect_ratio": "4:5",
                 "branding": {
@@ -432,60 +434,48 @@
                 "visual_catalog_version": "piece.visual_catalog.v1",
                 "visual_recipe_version": "piece.visual_recipe.v1"
               },
-              "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
-              "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
-              "piece_id": "9f7d558c-d084-5732-70c7-0ff549b8b8f6",
-              "public_id": "piece:9f7d558c-d084-5732-70c7-0ff549b8b8f6",
-              "lifecycle_status": "saved",
-              "visibility_scope": "private",
-              "row_version": 2,
-              "saved_at": "2026-11-14T03:45:11.979+09:00",
-              "content_status": "ready"
+              "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924"
             },
             "response_headers": {
               "cache-control": "no-store",
-              "content-length": "1864",
+              "content-length": "2490",
               "content-type": "application/json"
             }
           }
         ]
       },
       "projection": {
-        "source": "AR04 latest selected independent ADD / fictional public test source",
-        "api_source_ref": "dbb96aca197b76aa024b4a0ef68ce44e840a444d",
-        "product_source_ref": "c936d789789bc0e93a00f2ec9ddac1aef93b862e",
-        "harness_source_ref": "24f7ba8bbccb14bdbb14bd4ff67754a235e42347",
-        "original_saved_result_sha256": "b25eacc1139ff824eb31da3d7d4b38afdedd1e17b057dee1c6655f432589906c",
-        "saved_detail_sha256": "b3a351f22d9cfcdee4550d3fdf4350b94361b16629ba87077eaedd33b32cba61",
-        "canonical_artifact_sha256": "32dd484575090ced16c468613f8990585413b9a1de91bac874f2c10e0103f49d",
+        "source": "Fictional non-personal recorded card output, native test only",
+        "api_source_ref": "1237bc21d391805ae0f02c6757dcd2149b4d7e20",
+        "product_source_ref": "1edab96ce820cc410e18204099fc832c4a2f6473",
+        "harness_source_ref": "938ac9acf816c297b343615e6163fdcaf3cebfd2",
+        "saved_detail_sha256": "8b7c60c73eeb67d0999fbf47c03ec729ababc862359c6c673fd2cbf9df6a215a",
+        "canonical_artifact_sha256": "a14b153ed7ad4637653a4348c8bd2184edbebe9f596327fa52ee98ac7e36c901",
         "preview_expiry": {
-          "original": "2026-11-14T03:55:11.739+09:00",
+          "original": "2026-11-14T07:26:37.559+09:00",
           "test_only": "2099-01-01T00:10:00+00:00"
         },
-        "quota": "Explicit synthetic Free state, not a live quota read",
-        "transport": "Existing five local API steps and ten synthetic session checks; no Auth/API/DB network",
-        "export_response": "Same admitted owner detail projected through existing export GET wire",
-        "fictional_source_already_public": "ai/tests/piece_v2/test_b05_natural_refined_saved_pipeline.py::_prepare_natural",
-        "selected_latest_answer_round": 2,
+        "quota": "Explicit synthetic Free state; not a live quota read",
+        "transport": "Existing five local API steps / ten synthetic session checks; no network",
+        "private_source_raw_messages_checkpoint_included": false,
         "model_generated_again": false,
         "photos_or_share_called": false
       }
     },
     {
-      "name": "normal_host_LATEST-ADD-3",
-      "source_case_id": "LATEST-ADD-3",
+      "name": "normal_host_COHERENT-TWO-FIELDS",
+      "source_case_id": "COHERENT-TWO-FIELDS",
       "tier": "free",
       "saved_input": {
-        "savedInputId": "9aaeebdf-7e37-4bd0-81f2-2b2aeb139747",
-        "expectedUserId": "afab0042-f02a-4bfe-b972-0cdeb533d931",
-        "idempotencyKey": "ar04-latest-preview",
-        "supplementalAnswerIdentity": "d35bef0e-1851-43f3-a039-27c73afa1b2a"
+        "savedInputId": "d330d721-1e34-46fe-96bc-4268d2a3d2f2",
+        "expectedUserId": "5e0b13ff-fd2e-437a-b56f-225faf55f04c",
+        "idempotencyKey": "ar04-coherent-preview"
       },
       "preview": {
         "content_payload": {
           "body_blocks": [
-            "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。",
-            "今は、私は寂しい。"
+            "おれは、同僚と展示を見る時間が好きだ。おれは、同僚となら、感想を急いでまとめなくても話せる気がする。まだ、次に行く日は決めていない。",
+            "僕は、昨日は一人で予定を考えた。僕は、相手に合わせるために予定を変えたわけではない。"
           ],
           "format_type": "short_essay",
           "language": "ja",
@@ -494,15 +484,15 @@
           "schema_version": "piece.content_payload.v1",
           "title": null
         },
-        "content_payload_hash": "d25ef51125b421e5c36ec5d14996a3e5ea53f4165fed0317a4393d9e72a43739",
+        "content_payload_hash": "02a09dd3576c55752b3cf6d114c202ef5df9295aae74a3ed5b7dc7a0356093f6",
         "eligible_formats": [
           "short_essay"
         ],
         "expires_at": "2099-01-01T00:10:00+00:00",
         "format_type": "short_essay",
-        "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。\n\n今は、私は寂しい。",
-        "piece_text_hash": "6272666bd0f24335c2ab4b271ea637e7ed46a2af1a06be282b781932f8621725",
-        "preview_id": "02f821e4-d405-3e5f-ec57-b96dbe901c1d",
+        "piece_text": "おれは、同僚と展示を見る時間が好きだ。おれは、同僚となら、感想を急いでまとめなくても話せる気がする。まだ、次に行く日は決めていない。\n\n僕は、昨日は一人で予定を考えた。僕は、相手に合わせるために予定を変えたわけではない。",
+        "piece_text_hash": "a24c207a3e80270764e338eb21d77b894e622dffdc6c77acefd35b2b4ebeb77c",
+        "preview_id": "0a18b086-c574-f910-7d33-015774fcf902",
         "preview_revision": 1,
         "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
         "row_version": 1,
@@ -533,7 +523,7 @@
           "visual_recipe_version": "piece.visual_recipe.v1"
         },
         "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
-        "content_status": "ready",
+        "content_status": "adjusted",
         "api_contract_version": "piece.api.v2",
         "piece_contract_version": "piece.record.v2",
         "quota": {
@@ -560,27 +550,20 @@
         }
       },
       "save": {
-        "piece_id": "02f821e4-d405-3e5f-ec57-b96dbe901c1d",
-        "saved_at": "2026-11-14T03:45:14.053+09:00",
-        "row_version": 2,
-        "consumption_id": "016d1bae-1c29-4b01-96ad-05e69481b6e3",
+        "consumption_id": "90d88527-eaf5-4ac7-b3da-33ac0f9749ef",
+        "idempotency_replayed": false,
         "lifecycle_status": "saved",
-        "visibility_scope": "private",
-        "idempotency_replayed": false
+        "piece_id": "0a18b086-c574-f910-7d33-015774fcf902",
+        "row_version": 2,
+        "saved_at": "2026-11-14T07:16:38.801+09:00",
+        "visibility_scope": "private"
       },
       "detail": {
         "api_contract_version": "piece.api.v2",
-        "piece_contract_version": "piece.record.v2",
-        "export_contract_version": "piece.export_contract.v1",
-        "render_interface_version": "piece.render_interface.v1",
-        "render_reproducibility_version": "piece.render_reproducibility.v1",
-        "format_type": "short_essay",
-        "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。\n\n今は、私は寂しい。",
-        "piece_text_hash": "6272666bd0f24335c2ab4b271ea637e7ed46a2af1a06be282b781932f8621725",
         "content_payload": {
           "body_blocks": [
-            "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。",
-            "今は、私は寂しい。"
+            "おれは、同僚と展示を見る時間が好きだ。おれは、同僚となら、感想を急いでまとめなくても話せる気がする。まだ、次に行く日は決めていない。",
+            "僕は、昨日は一人で予定を考えた。僕は、相手に合わせるために予定を変えたわけではない。"
           ],
           "format_type": "short_essay",
           "language": "ja",
@@ -589,7 +572,22 @@
           "schema_version": "piece.content_payload.v1",
           "title": null
         },
-        "content_payload_hash": "d25ef51125b421e5c36ec5d14996a3e5ea53f4165fed0317a4393d9e72a43739",
+        "content_payload_hash": "02a09dd3576c55752b3cf6d114c202ef5df9295aae74a3ed5b7dc7a0356093f6",
+        "content_status": "adjusted",
+        "export_contract_version": "piece.export_contract.v1",
+        "format_type": "short_essay",
+        "lifecycle_status": "saved",
+        "piece_contract_version": "piece.record.v2",
+        "piece_id": "0a18b086-c574-f910-7d33-015774fcf902",
+        "piece_text": "おれは、同僚と展示を見る時間が好きだ。おれは、同僚となら、感想を急いでまとめなくても話せる気がする。まだ、次に行く日は決めていない。\n\n僕は、昨日は一人で予定を考えた。僕は、相手に合わせるために予定を変えたわけではない。",
+        "piece_text_hash": "a24c207a3e80270764e338eb21d77b894e622dffdc6c77acefd35b2b4ebeb77c",
+        "public_id": "piece:0a18b086-c574-f910-7d33-015774fcf902",
+        "render_interface_version": "piece.render_interface.v1",
+        "render_reproducibility_version": "piece.render_reproducibility.v1",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+        "row_version": 2,
+        "saved_at": "2026-11-14T07:16:38.801+09:00",
+        "visibility_scope": "private",
         "visual_recipe": {
           "aspect_ratio": "4:5",
           "branding": {
@@ -615,21 +613,13 @@
           "visual_catalog_version": "piece.visual_catalog.v1",
           "visual_recipe_version": "piece.visual_recipe.v1"
         },
-        "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
-        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
-        "piece_id": "02f821e4-d405-3e5f-ec57-b96dbe901c1d",
-        "public_id": "piece:02f821e4-d405-3e5f-ec57-b96dbe901c1d",
-        "lifecycle_status": "saved",
-        "visibility_scope": "private",
-        "row_version": 2,
-        "saved_at": "2026-11-14T03:45:14.053+09:00",
-        "content_status": "ready"
+        "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924"
       },
       "transport": {
-        "owner": "afab0042-f02a-4bfe-b972-0cdeb533d931",
+        "owner": "5e0b13ff-fd2e-437a-b56f-225faf55f04c",
         "steps": [
           {
-            "path": "/emotion/piece/source-ref/9aaeebdf-7e37-4bd0-81f2-2b2aeb139747?supplemental_answer_identity=d35bef0e-1851-43f3-a039-27c73afa1b2a",
+            "path": "/emotion/piece/source-ref/d330d721-1e34-46fe-96bc-4268d2a3d2f2",
             "method": "GET",
             "headers": {
               "X-Piece-Renderer": "piece.rn_bitmap_renderer.ios.v2",
@@ -638,13 +628,13 @@
             },
             "status": 200,
             "response": {
-              "source_input_id": "9aaeebdf-7e37-4bd0-81f2-2b2aeb139747",
+              "emlis_observation_result_identity": "f808cc94-0aab-4a9a-b1f8-be65622159af",
+              "emlis_observation_stage": "normal_observation",
+              "question_need_decision_identity": null,
+              "source_input_bundle_commitment": "sha256:b6bbd6c9f9e2257bc2350f1a720a4ec5a4b3fe59d410d2323e312dbffc73b4e2",
+              "source_input_id": "d330d721-1e34-46fe-96bc-4268d2a3d2f2",
               "source_input_version": "emlis.current_input_bundle.v1",
-              "source_input_bundle_commitment": "sha256:beaaa7331f677a50ef6f96bb1dc9a9adcd2221d50bf8772a919f19738574497c",
-              "emlis_observation_stage": "refined_observation",
-              "emlis_observation_result_identity": "1d8b8f0e-3f3b-484a-9865-41c3f8b17a2e",
-              "question_need_decision_identity": "e04b7bb8-41b4-4cee-8694-53e6d2a8f173",
-              "supplemental_answer_identity": "d35bef0e-1851-43f3-a039-27c73afa1b2a"
+              "supplemental_answer_identity": null
             }
           },
           {
@@ -653,17 +643,17 @@
             "headers": {
               "X-Piece-Renderer": "piece.rn_bitmap_renderer.ios.v2",
               "X-Piece-Palette": "3",
-              "Idempotency-Key": "ar04-latest-preview"
+              "Idempotency-Key": "ar04-coherent-preview"
             },
             "body": {
               "source_ref": {
-                "source_input_id": "9aaeebdf-7e37-4bd0-81f2-2b2aeb139747",
+                "emlis_observation_result_identity": "f808cc94-0aab-4a9a-b1f8-be65622159af",
+                "emlis_observation_stage": "normal_observation",
+                "question_need_decision_identity": null,
+                "source_input_bundle_commitment": "sha256:b6bbd6c9f9e2257bc2350f1a720a4ec5a4b3fe59d410d2323e312dbffc73b4e2",
+                "source_input_id": "d330d721-1e34-46fe-96bc-4268d2a3d2f2",
                 "source_input_version": "emlis.current_input_bundle.v1",
-                "source_input_bundle_commitment": "sha256:beaaa7331f677a50ef6f96bb1dc9a9adcd2221d50bf8772a919f19738574497c",
-                "emlis_observation_stage": "refined_observation",
-                "emlis_observation_result_identity": "1d8b8f0e-3f3b-484a-9865-41c3f8b17a2e",
-                "question_need_decision_identity": "e04b7bb8-41b4-4cee-8694-53e6d2a8f173",
-                "supplemental_answer_identity": "d35bef0e-1851-43f3-a039-27c73afa1b2a"
+                "supplemental_answer_identity": null
               },
               "requested_format": null,
               "visual_selection": {
@@ -676,8 +666,8 @@
             "response": {
               "content_payload": {
                 "body_blocks": [
-                  "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。",
-                  "今は、私は寂しい。"
+                  "おれは、同僚と展示を見る時間が好きだ。おれは、同僚となら、感想を急いでまとめなくても話せる気がする。まだ、次に行く日は決めていない。",
+                  "僕は、昨日は一人で予定を考えた。僕は、相手に合わせるために予定を変えたわけではない。"
                 ],
                 "format_type": "short_essay",
                 "language": "ja",
@@ -686,15 +676,15 @@
                 "schema_version": "piece.content_payload.v1",
                 "title": null
               },
-              "content_payload_hash": "d25ef51125b421e5c36ec5d14996a3e5ea53f4165fed0317a4393d9e72a43739",
+              "content_payload_hash": "02a09dd3576c55752b3cf6d114c202ef5df9295aae74a3ed5b7dc7a0356093f6",
               "eligible_formats": [
                 "short_essay"
               ],
               "expires_at": "2099-01-01T00:10:00+00:00",
               "format_type": "short_essay",
-              "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。\n\n今は、私は寂しい。",
-              "piece_text_hash": "6272666bd0f24335c2ab4b271ea637e7ed46a2af1a06be282b781932f8621725",
-              "preview_id": "02f821e4-d405-3e5f-ec57-b96dbe901c1d",
+              "piece_text": "おれは、同僚と展示を見る時間が好きだ。おれは、同僚となら、感想を急いでまとめなくても話せる気がする。まだ、次に行く日は決めていない。\n\n僕は、昨日は一人で予定を考えた。僕は、相手に合わせるために予定を変えたわけではない。",
+              "piece_text_hash": "a24c207a3e80270764e338eb21d77b894e622dffdc6c77acefd35b2b4ebeb77c",
+              "preview_id": "0a18b086-c574-f910-7d33-015774fcf902",
               "preview_revision": 1,
               "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
               "row_version": 1,
@@ -725,7 +715,7 @@
                 "visual_recipe_version": "piece.visual_recipe.v1"
               },
               "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
-              "content_status": "ready",
+              "content_status": "adjusted",
               "api_contract_version": "piece.api.v2",
               "piece_contract_version": "piece.record.v2",
               "quota": {
@@ -762,26 +752,26 @@
             },
             "generatedIdempotencyHeader": true,
             "body": {
-              "preview_id": "02f821e4-d405-3e5f-ec57-b96dbe901c1d",
+              "preview_id": "0a18b086-c574-f910-7d33-015774fcf902",
               "expected_preview_revision": 1,
-              "piece_text_hash": "6272666bd0f24335c2ab4b271ea637e7ed46a2af1a06be282b781932f8621725",
-              "content_payload_hash": "d25ef51125b421e5c36ec5d14996a3e5ea53f4165fed0317a4393d9e72a43739",
+              "piece_text_hash": "a24c207a3e80270764e338eb21d77b894e622dffdc6c77acefd35b2b4ebeb77c",
+              "content_payload_hash": "02a09dd3576c55752b3cf6d114c202ef5df9295aae74a3ed5b7dc7a0356093f6",
               "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
               "visibility_scope": "private"
             },
             "status": 200,
             "response": {
-              "piece_id": "02f821e4-d405-3e5f-ec57-b96dbe901c1d",
-              "saved_at": "2026-11-14T03:45:14.053+09:00",
-              "row_version": 2,
-              "consumption_id": "016d1bae-1c29-4b01-96ad-05e69481b6e3",
+              "consumption_id": "90d88527-eaf5-4ac7-b3da-33ac0f9749ef",
+              "idempotency_replayed": false,
               "lifecycle_status": "saved",
-              "visibility_scope": "private",
-              "idempotency_replayed": false
+              "piece_id": "0a18b086-c574-f910-7d33-015774fcf902",
+              "row_version": 2,
+              "saved_at": "2026-11-14T07:16:38.801+09:00",
+              "visibility_scope": "private"
             }
           },
           {
-            "path": "/emotion/piece/02f821e4-d405-3e5f-ec57-b96dbe901c1d",
+            "path": "/emotion/piece/0a18b086-c574-f910-7d33-015774fcf902",
             "method": "GET",
             "headers": {
               "Cache-Control": "no-store",
@@ -790,17 +780,10 @@
             "status": 200,
             "response": {
               "api_contract_version": "piece.api.v2",
-              "piece_contract_version": "piece.record.v2",
-              "export_contract_version": "piece.export_contract.v1",
-              "render_interface_version": "piece.render_interface.v1",
-              "render_reproducibility_version": "piece.render_reproducibility.v1",
-              "format_type": "short_essay",
-              "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。\n\n今は、私は寂しい。",
-              "piece_text_hash": "6272666bd0f24335c2ab4b271ea637e7ed46a2af1a06be282b781932f8621725",
               "content_payload": {
                 "body_blocks": [
-                  "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。",
-                  "今は、私は寂しい。"
+                  "おれは、同僚と展示を見る時間が好きだ。おれは、同僚となら、感想を急いでまとめなくても話せる気がする。まだ、次に行く日は決めていない。",
+                  "僕は、昨日は一人で予定を考えた。僕は、相手に合わせるために予定を変えたわけではない。"
                 ],
                 "format_type": "short_essay",
                 "language": "ja",
@@ -809,7 +792,22 @@
                 "schema_version": "piece.content_payload.v1",
                 "title": null
               },
-              "content_payload_hash": "d25ef51125b421e5c36ec5d14996a3e5ea53f4165fed0317a4393d9e72a43739",
+              "content_payload_hash": "02a09dd3576c55752b3cf6d114c202ef5df9295aae74a3ed5b7dc7a0356093f6",
+              "content_status": "adjusted",
+              "export_contract_version": "piece.export_contract.v1",
+              "format_type": "short_essay",
+              "lifecycle_status": "saved",
+              "piece_contract_version": "piece.record.v2",
+              "piece_id": "0a18b086-c574-f910-7d33-015774fcf902",
+              "piece_text": "おれは、同僚と展示を見る時間が好きだ。おれは、同僚となら、感想を急いでまとめなくても話せる気がする。まだ、次に行く日は決めていない。\n\n僕は、昨日は一人で予定を考えた。僕は、相手に合わせるために予定を変えたわけではない。",
+              "piece_text_hash": "a24c207a3e80270764e338eb21d77b894e622dffdc6c77acefd35b2b4ebeb77c",
+              "public_id": "piece:0a18b086-c574-f910-7d33-015774fcf902",
+              "render_interface_version": "piece.render_interface.v1",
+              "render_reproducibility_version": "piece.render_reproducibility.v1",
+              "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+              "row_version": 2,
+              "saved_at": "2026-11-14T07:16:38.801+09:00",
+              "visibility_scope": "private",
               "visual_recipe": {
                 "aspect_ratio": "4:5",
                 "branding": {
@@ -835,19 +833,11 @@
                 "visual_catalog_version": "piece.visual_catalog.v1",
                 "visual_recipe_version": "piece.visual_recipe.v1"
               },
-              "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
-              "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
-              "piece_id": "02f821e4-d405-3e5f-ec57-b96dbe901c1d",
-              "public_id": "piece:02f821e4-d405-3e5f-ec57-b96dbe901c1d",
-              "lifecycle_status": "saved",
-              "visibility_scope": "private",
-              "row_version": 2,
-              "saved_at": "2026-11-14T03:45:14.053+09:00",
-              "content_status": "ready"
+              "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924"
             }
           },
           {
-            "path": "/emotion/piece/02f821e4-d405-3e5f-ec57-b96dbe901c1d/export",
+            "path": "/emotion/piece/0a18b086-c574-f910-7d33-015774fcf902/export",
             "method": "GET",
             "headers": {
               "Cache-Control": "no-store",
@@ -857,17 +847,10 @@
             "status": 200,
             "response": {
               "api_contract_version": "piece.api.v2",
-              "piece_contract_version": "piece.record.v2",
-              "export_contract_version": "piece.export_contract.v1",
-              "render_interface_version": "piece.render_interface.v1",
-              "render_reproducibility_version": "piece.render_reproducibility.v1",
-              "format_type": "short_essay",
-              "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。\n\n今は、私は寂しい。",
-              "piece_text_hash": "6272666bd0f24335c2ab4b271ea637e7ed46a2af1a06be282b781932f8621725",
               "content_payload": {
                 "body_blocks": [
-                  "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。",
-                  "今は、私は寂しい。"
+                  "おれは、同僚と展示を見る時間が好きだ。おれは、同僚となら、感想を急いでまとめなくても話せる気がする。まだ、次に行く日は決めていない。",
+                  "僕は、昨日は一人で予定を考えた。僕は、相手に合わせるために予定を変えたわけではない。"
                 ],
                 "format_type": "short_essay",
                 "language": "ja",
@@ -876,7 +859,22 @@
                 "schema_version": "piece.content_payload.v1",
                 "title": null
               },
-              "content_payload_hash": "d25ef51125b421e5c36ec5d14996a3e5ea53f4165fed0317a4393d9e72a43739",
+              "content_payload_hash": "02a09dd3576c55752b3cf6d114c202ef5df9295aae74a3ed5b7dc7a0356093f6",
+              "content_status": "adjusted",
+              "export_contract_version": "piece.export_contract.v1",
+              "format_type": "short_essay",
+              "lifecycle_status": "saved",
+              "piece_contract_version": "piece.record.v2",
+              "piece_id": "0a18b086-c574-f910-7d33-015774fcf902",
+              "piece_text": "おれは、同僚と展示を見る時間が好きだ。おれは、同僚となら、感想を急いでまとめなくても話せる気がする。まだ、次に行く日は決めていない。\n\n僕は、昨日は一人で予定を考えた。僕は、相手に合わせるために予定を変えたわけではない。",
+              "piece_text_hash": "a24c207a3e80270764e338eb21d77b894e622dffdc6c77acefd35b2b4ebeb77c",
+              "public_id": "piece:0a18b086-c574-f910-7d33-015774fcf902",
+              "render_interface_version": "piece.render_interface.v1",
+              "render_reproducibility_version": "piece.render_reproducibility.v1",
+              "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+              "row_version": 2,
+              "saved_at": "2026-11-14T07:16:38.801+09:00",
+              "visibility_scope": "private",
               "visual_recipe": {
                 "aspect_ratio": "4:5",
                 "branding": {
@@ -902,41 +900,30 @@
                 "visual_catalog_version": "piece.visual_catalog.v1",
                 "visual_recipe_version": "piece.visual_recipe.v1"
               },
-              "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
-              "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
-              "piece_id": "02f821e4-d405-3e5f-ec57-b96dbe901c1d",
-              "public_id": "piece:02f821e4-d405-3e5f-ec57-b96dbe901c1d",
-              "lifecycle_status": "saved",
-              "visibility_scope": "private",
-              "row_version": 2,
-              "saved_at": "2026-11-14T03:45:14.053+09:00",
-              "content_status": "ready"
+              "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924"
             },
             "response_headers": {
               "cache-control": "no-store",
-              "content-length": "1864",
+              "content-length": "2490",
               "content-type": "application/json"
             }
           }
         ]
       },
       "projection": {
-        "source": "AR04 latest selected independent ADD / fictional public test source",
-        "api_source_ref": "dbb96aca197b76aa024b4a0ef68ce44e840a444d",
-        "product_source_ref": "c936d789789bc0e93a00f2ec9ddac1aef93b862e",
-        "harness_source_ref": "24f7ba8bbccb14bdbb14bd4ff67754a235e42347",
-        "original_saved_result_sha256": "e8ff91b19a92d86db7e7138863d21dc50daa7286f263df9cd263db4e1f1bac9e",
-        "saved_detail_sha256": "44444e453e4eed8efcd326d62b4f81e49c0229b74545f08d444099f3ea63c34d",
-        "canonical_artifact_sha256": "c360ace4b3f0c834f5cbfc6e0075548d99e76483cf4933678303a0c84316843f",
+        "source": "Fictional non-personal recorded card output, native test only",
+        "api_source_ref": "1237bc21d391805ae0f02c6757dcd2149b4d7e20",
+        "product_source_ref": "1edab96ce820cc410e18204099fc832c4a2f6473",
+        "harness_source_ref": "938ac9acf816c297b343615e6163fdcaf3cebfd2",
+        "saved_detail_sha256": "17489f3ea8505100fb75455758be00c6a8a90370f5d308a03f406cda27189986",
+        "canonical_artifact_sha256": "5303c71875ee019040c99f73d8e3307814023c47c8713d65f0e01490783586e9",
         "preview_expiry": {
-          "original": "2026-11-14T03:55:13.674+09:00",
+          "original": "2026-11-14T07:26:38.743+09:00",
           "test_only": "2099-01-01T00:10:00+00:00"
         },
-        "quota": "Explicit synthetic Free state, not a live quota read",
-        "transport": "Existing five local API steps and ten synthetic session checks; no Auth/API/DB network",
-        "export_response": "Same admitted owner detail projected through existing export GET wire",
-        "fictional_source_already_public": "ai/tests/piece_v2/test_b05_natural_refined_saved_pipeline.py::_prepare_natural",
-        "selected_latest_answer_round": 3,
+        "quota": "Explicit synthetic Free state; not a live quota read",
+        "transport": "Existing five local API steps / ten synthetic session checks; no network",
+        "private_source_raw_messages_checkpoint_included": false,
         "model_generated_again": false,
         "photos_or_share_called": false
       }

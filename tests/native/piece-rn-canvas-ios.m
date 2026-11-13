@@ -1367,9 +1367,9 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
     RCTRootView *root=[[RCTRootView alloc]initWithBridge:bridge moduleName:@"PieceCanvasCases" initialProperties:@{@"pieceGroup":@"normalHost"}];
     UIWindow *window=[[[UIApplication sharedApplication]delegate]window];window.rootViewController.view=root;[window makeKeyAndVisible];
     [self waitForExpectations:@[done] timeout:90];XCTAssertNil(self.resultModule.reportPersistenceError);
-    NSArray *names=@[@"normal_host_preview_LATEST-ADD-2",@"normal_host_saved_LATEST-ADD-2",@"normal_host_export_LATEST-ADD-2",
-      @"normal_host_preview_LATEST-ADD-3",@"normal_host_saved_LATEST-ADD-3",@"normal_host_export_LATEST-ADD-3"];
-    NSDictionary *expectedBlockCounts=@{@"LATEST-ADD-2":@2,@"LATEST-ADD-3":@2};
+    NSArray *names=@[@"normal_host_preview_COHERENT-PARAGRAPH",@"normal_host_saved_COHERENT-PARAGRAPH",@"normal_host_export_COHERENT-PARAGRAPH",
+      @"normal_host_preview_COHERENT-TWO-FIELDS",@"normal_host_saved_COHERENT-TWO-FIELDS",@"normal_host_export_COHERENT-TWO-FIELDS"];
+    NSDictionary *expectedBlockCounts=@{@"COHERENT-PARAGRAPH":@1,@"COHERENT-TWO-FIELDS":@2};
     NSArray *canonicalKeys=@[@"format_type",@"piece_text",@"piece_text_hash",@"content_payload",@"content_payload_hash",@"visual_recipe",@"visual_recipe_hash",@"renderer_version"];
     NSArray *hashKeys=@[@"piece_text_hash",@"content_payload_hash",@"visual_recipe_hash"];
     NSPredicate *hex64=[NSPredicate predicateWithFormat:@"SELF MATCHES %@",@"^[0-9a-f]{64}$"];
