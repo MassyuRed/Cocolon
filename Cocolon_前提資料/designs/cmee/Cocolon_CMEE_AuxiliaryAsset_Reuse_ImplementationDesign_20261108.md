@@ -4,13 +4,15 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-13 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR03_CROSS_RECORD_FRAME_TARGET_CONNECTED_PROSE_UNVERIFIED
+status: AR03_CROSS_RECORD_FRAME_TARGET_ACTUAL_COMPARISON_PREPARED_NOT_EXECUTED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Captured repeated frame targets now cross owned records with frozen origin dependencies, saved-read invalidation, receipt replay and Piece source fences; 495 isolated checks pass, no hosted migration or actual4B prose verification; preserve prior 0/3 rejection and normal selector OFF"
+current_next: "New cross-record revised/rejected target comparison frozen: 3 upload files 50496 bytes, 4 research plus 4 controls plus 2 health, 300 seconds once, new single-use authority pending; CPU receipt replay 2/2, both b8466c6a CI attempt1 success; actual model calls0, preserve prior 0/3 rejection and selector OFF"
 runtime_effect_of_this_document: 0
 ---
+
+> **11/13・別記録の反復判断対象を実4Bで比べる準備完了、未実行：** 新しいCを使った再修正／不使用の2分岐を、対象未結合・結合済みの計4応答へ固定した。3送信fileは50,496byte、通常／Analysis前後4対照・health2GET込み最大300秒・一回、学習／再試行／再起動なし。固定合成本文の同checkpoint保存・非生成再読は2成功、実4B生成とPod送信は0。新しい一回分の承認待ちで、旧承認を再利用しない。b8466c6aの両CIは初回成功。 [準備原本・意味・限界§9.41](#emlis-cross-record-frame-target-prepared-20261113)。
 
 > **11/13・frame本人判断の対象結合を実5応答で比較、本文不採用：** 承認83,777byteを一回実行し、旧2＋新3と前後4対照は全200/stop、health前後2GETも200。98.032635秒で完了し、同PID/starttimeと通常／Analysis前後の生response全byte一致を確認。新3は拒否／修正済みmappingを無留保で再使用し、本人判断を優先した本文の達成0/3で不採用。同じ新3checkpointで実receipt保存・新service同本文の非生成再読3/3、再取得0。保存frameの除外／修正は保持した。一般品質・live／端末は未完、通常selector OFF・新10b563不採用を維持する。 [実結果・採否§9.38](#emlis-frame-feedback-target-context-actual-20261113)。
 
@@ -2736,3 +2738,41 @@ C生成後にBが編集・削除された場合、または対象操作が失わ
 合成Auth／providerと隔離PGliteでの実SQLの確認であり、live Supabase／PostgREST、実モデル本文、native画像、本人端末、複数接続の実row-lock待機は今回未確認。既存SQLのlockを維持・拡張したことと、今回実lock-waitを検証したことを混同しない。本番へ通す場合はcore migration→Piece migration→APIの適用単位を確認する。今回これらを本番適用したとはしない。
 
 §9.38の実4B新3件不採用、通常selector OFF、新10b563不採用を維持する。次の主な未完は本人判断を優先した実4B本文、二欄訂正→frame／Piece／Analysisの意味伝播、複数回答Piece、通常反映と本人端末である。今回の保存・失効接続を、それらの一般品質・全補助経路完了へ広げない。同じhint／SYSTEM／fit比較や消費済みrunの反復には戻らない。
+
+
+<a id="emlis-cross-record-frame-target-prepared-20261113"></a>
+## 9.41 2026-11-13 — 別記録の反復frame判断対象を実4Bへ渡す比較を準備、未実行
+
+### 今回固定した商品場面と比較の意味
+
+§9.40のAPI b8466c6aを基準に、過去AのframeをBで修正し、さらに再修正／不使用とした後、別の現在Cで返事を受ける2分岐を固定した。BはCの選択履歴へ入らず、Aだけが履歴に入る。Bを履歴枠へ追加した比較ではない。Cには別の出来事と明記した思考・感情欄と出来事・行動欄を持たせ、過去Aと同じ出来事として原因を移さない。今回は問い受信OFFのFINAL本文で、CのQUESTION／ANSWERは0である。
+
+同じ2分岐から対象未結合old／結合済みnewを各1応答、計4応答とする。oldは同じ採用sourceからtarget_context_jsonだけを除いた対照であり、旧版全体や以前の実4B runの再現ではない。原入力・過去回答・SYSTEMは全4要求で共通で、各old／new対では最新status・本人修正文も同一である。新旧差はBOUND／UNRESOLVEDと正確な旧本人修正文contextだけで、追加hint／SYSTEMは0。§9.38の同じ3応答を再生成する作業ではない。
+
+今回Cの悲しさ・弱い不安・記載された同僚の行動・相手の意図不明を保つこと、最新の修正／不使用を優先して旧修正文を無留保に復活させないことを全文で確認する。過去Aの気持ちや理由をCへ転用しない。対象に触れないだけの本文、内部名や修正文の貼返し、全入力の逐語復唱を対象理解の達成へ数えない。意味保持、自然さ、保存再読、提供前後一致の4観点を分ける。
+
+### 凍結原本と新しい一回分の範囲
+
+準備原本は [Cocolon_CMEE_AR03_CrossRecordFrameTarget_Prepared_20261113.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-f0b5317f85b48191a9dd3909b126606c_2f7470f963808191aaebf050935e72de&account_id=personal)。13,746,795byte、SHA256 `caf177436dd230b76d08e1c7202aad9115c38efcd914ae7e282c575e383ed430`、21member。準備v2の完全materials／messages、同源泉checkpoints、CPU保存再読原本、準備・受領再開script、README、送信ZIPとmanifestを含む。資格情報・実ユーザー本文は含まない。
+
+Podへ送るのはrunner／wire／files台帳の3fileだけで、展開後50,496byte、送信ZIPは11,863byte。runner SHA256は `2ea88990f3755929f43dd1e5a320510accee602fbf62e592ef3d18831563a75a`、wireは `2f2bbb077c37b8008dc1ffb923c4da55b2246a477e86fd81aef8b0ed2695046d`。checkpointsは送らない。
+
+既存Pod f1lle4xwq3wjlnの稼働中localhost提供へ、研究4POST＋通常／Analysis前後4POST＋health前後2GET、最大8生成／10HTTP、ZIP閉鎖まで300秒以内、一回のみとする。学習・model load・再起動・停止・再試行は0。既存2鍵は同Pod内の指定fileの指定keyだけを読み、localhost認証のメモリ内headerに限って使う。起動環境全体の読取・保存や鍵の出力／外部送信はしない。proxy／redirectを使わず、started.jsonで一回性を固定する。研究失敗後は次の研究へ進まず前後確認へ閉じる。前後responseは全bytes、提供はPID／starttimeで一致確認する。
+
+状態はPREPARED_NOT_EXECUTEDで、Pod送信・実model呼出・GPU学習はいずれも0。前回の限定承認は実行済みで消費されており、今回の新しい凍結材料へ読み替えない。新しい一回分の承認待ちとする。
+
+### 同じ取得前状態への保存・非生成再読の準備
+
+2branchともCのCALL_STARTED保存済み／RECEIVED未保存の同checkpointを固定した。固定合成本文で既存receipt／commit／process→別service GETの2保存・再読一致を確認し、source／既存event／本人feedback不変、QUESTION／ANSWER追加0、モデル取得・再取得0だった。再修正は最新修正文のframe1件、不使用は0件を維持する。この2件を495固有testへ加算せず、実4B本文品質やlive保存成功とも扱わない。
+
+実本文取得後はnew2だけを元checkpointの使い捨てforkへ戻す。既存provider contractはraw responseをMockTransportでメモリ内再演するだけで、networkへ接続しない。既存処理と同じ外側空白除去以外は本文を補修せず、無修補raw bytesを別途保持する。期限だけprocessing_deadline_at一列を延長し、その差分を記録する。源泉・根拠・identityは書き換えない。
+
+最終summaryはZIP閉鎖後の原本を別fileとして保持し、ZIP内の閉鎖前summaryを上書きしない。actual保存再開には両原本を必須とし、完了status・ZIP閉鎖を含む300秒以内・前後対照・同PID・回数・request／raw bytes／SHA一致を確認する。ZIP閉鎖後だけ期限超過した結果も受け入れない。
+
+### 独立確認・CIと限界
+
+独立read-only確認で、最初のfixtureの回答日時が原記録より前という不整合を検出した。準備v1を廃案にし、新v2でA→本人回答→B→Cを既存service経由で作成し直した。凍結後の原本時刻を上書きしていない。さらに、actual受入れがZIP閉鎖前状態だけを見る隙間を修正し、別途保持した最終summaryとstateの完全一致を必須にした。最終材料・台帳・時系列・受領再開経路に追加の重大問題なしとの確認を得た。正式human Product Readではない。
+
+前回API b8466c6aの [Piece CI43424124958](https://github.com/MassyuRed/mashos-api/actions/runs/43424124958) と [Analysis CI43424124935](https://github.com/MassyuRed/mashos-api/actions/runs/43424124935) は両方attempt1で成功した。今回の準備で製品source／test／DB/SQL／RN／通常作者／モデル／SYSTEMは変更せず、新CI実行も0。
+
+STRUCTURE_MAP_DELTA_NONE。今回は比較準備・CPU受領再開確認と現在地の差分だけで、§9.40の既存責務地図は変更しない。§9.38新3不採用、通常selector OFF、新10b563不採用を維持する。実4B本文品質、二欄訂正→frame／Piece／Analysisの意味伝播、複数回答Piece、同版画像、live／通常反映／本人端末、正式受入れ、全補助経路完了は未確認・未完である。

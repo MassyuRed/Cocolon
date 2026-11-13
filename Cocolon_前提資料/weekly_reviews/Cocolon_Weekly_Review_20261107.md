@@ -3111,3 +3111,11 @@ STRUCTURE_MAP_DELTA_PRESENT。同じ保存threadの対象保持だけを閉じ�
 **11/13・別記録への反復frame判断対象と失効を接続：** APIb8466c6a。本人が実際に見た対象を、最新判断と一致する一意な操作記録から既存context読取へ渡す。判断元の編集／削除・操作消失時は保存応答を非生成で抑止し、生成中保存とPiece作成／見た目変更／保存も拒否する。受取先での再修正・保存receipt再開を含む495固有件成功（新25）。合成provider・隔離SQLの確認であり、実4B品質・本番SQL／配置・本人端末は未完。
 
 前回8cba3e0cの両CIはattempt1成功済み。今回の新CIとは区別する。STRUCTURE_MAP_DELTA_PRESENT。既存の本人・権利・保存寿命を保ち、B本文を履歴枠へ追加しない。[詳細設計§9.40](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-cross-record-frame-target-20261113)を正本とする。
+
+
+<a id="emlis-cross-record-frame-target-prepared-20261113"></a>
+## 2026-11-13 — 別記録の反復判断対象を実4Bで比べる新材料を準備、未実行
+
+API b8466c6aのPiece／Analysis両CIはattempt1で成功。再修正／不使用の2分岐を、新しい現在Cの対象未結合old／結合済みnew計4応答へ固定した。同じsource・SYSTEMを使い、oldはtargetを除いた対照であって過去runや旧版全体の再現ではない。送信3file50,496byte、前後4対照＋health2GET込み300秒・一回、学習／再試行／再起動なし。既存2鍵は同Pod内localhost認証のみ。新しい一回分の承認待ちで、送信・実生成は0。
+
+固定合成本文では元checkpointからの保存・別service非生成再読2件が一致、再取得0。これは実本文品質・live保存の成功ではない。回答日時のfixture不整合は新v2で作り直し、実行後の受領はZIP閉鎖後最終summaryも必須にした。STRUCTURE_MAP_DELTA_NONE。§9.38の新3不採用、通常selector OFFと新10b563不採用を維持する。[準備原本・本文の判定・残件は詳細設計§9.41](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-cross-record-frame-target-prepared-20261113)。
