@@ -12,7 +12,7 @@ current_next: "Qualified actual3 saved and owner-reread from the same initial so
 runtime_effect_of_this_document: 0
 ---
 
-> **11/13・資格固定3件の実4B生成と同じ源泉の保存・再読を完了：** 承認38,631byteを一回実行し、Piece3＋提供前後4確認、学習／retry0、復元込み114.971199秒。元提供PID79715→80025、引数／環境／作業場所／既存2鍵・source／両adapterを保持し、通常／Analysisの前後全response一致を確認。無修補の3rawが既存CMEE／S7を通り、凍結済み同checkpoint・source／prepared／messagesからFree3保存・新service非生成再読、本文／payload／recipe／renderer／hash一致、元source／Emlis不変・quota各1。normal2 rawは前回既知rawと同一で、新たな編集改善やA/Bには加算しない。合成Auth／先行Emlis・隔離PGliteの結果であり、通常option／selector OFF、一般品質・live／本人端末・正式受入れ・全補助経路は未完。同3本文の研究native CI43347803091／source22e96b4cはattempt1実行中で、画像成功はまだ未確認。 [実原本・同source保存・次](<#piece-qualified-source-actual3-saved-20261113>)。
+> **11/13・資格固定3件の実4B生成と同じ源泉の保存・再読を完了：** 承認38,631byteを一回実行し、Piece3＋提供前後4確認、学習／retry0、復元込み114.971199秒。元提供PID79715→80025、引数／環境／作業場所／既存2鍵・source／両adapterを保持し、通常／Analysisの前後全response一致を確認。無修補の3rawが既存CMEE／S7を通り、凍結済み同checkpoint・source／prepared／messagesからFree3保存・新service非生成再読、本文／payload／recipe／renderer／hash一致、元source／Emlis不変・quota各1。normal2 rawは前回既知rawと同一で、新たな編集改善やA/Bには加算しない。合成Auth／先行Emlis・隔離PGliteの結果であり、通常option／selector OFF、一般品質・live／本人端末・正式受入れ・全補助経路は未完。画像CI初回は追加testの構文ミスでbuild失敗・画像0。構文だけ修正した研究24f7ba8bの既存CI43350232403を実行中。 [実原本・同source保存・次](<#piece-qualified-source-actual3-saved-20261113>)。
 
 > **11/13・Piece編集候補の実6応答を完了、全3組で差分0のため不採用：** 承認14,489byteを既存Podで一回実行し52.420284秒、全6 HTTP200／stop／attempt1。PID77140と前後health200を保持、学習・retry・提供再起動0。段落・二欄・refinedの旧新全response／rawは各組完全一致・全欄原文copy、8編集選択の可視効果0。二欄では氏名が残り公開役割化も未達。原本のexact CPU再演は4 GENERATED／二欄2 UNAVAILABLEだが作品品質合格ではない。候補・通常optionはOFF、今回のSQL／native保存0、追加生成・S7緩和・raw補修なし。実原本と不採用理由を保全した。 [実比較・判定](<#piece-editorial-choices-actual6-20261113>)。
 
@@ -1392,9 +1392,13 @@ Mashが§9.24の38,631byteを具体的に承認した後、同じscript／wire�
 
 既存研究branchの36335452を基に、研究source22e96b4c81481e7d93ba9656a576a6098c6db667で既存fixtureと同一XCTest methodの2fileだけを新3件／9frameへ変更した。本文・source_ref・回答identity・保存receipt／detail・8項目artifactと3hashを保持し、block数は1／2／2。製品・renderer・他method・8秒／90秒guard・閉5API transportは不変。16field内部previewは既存public mapperと明示Free quota／capabilityを使って19fieldへ投影した。テスト用previewの期限だけ2099年へ投影し、原記録や実TTL更新を主張しない。owner detailを既存export応答形へ投影する閉local transport／合成sessionであり、live API／Authや独立HTTP export取得の実証ではない。
 
-[研究native CI43347803091](https://github.com/MassyuRed/Cocolon/actions/runs/43347803091)はsource22e96b4c・attempt1で実行中。画像・PNG一致・実書出し成功はまだ未確認。新renderer／controller／workflow／jobを作らず、既存継続指示とRule18 LEVEL_2の既存設計内test変更として実行した。消費済みGPU一回承認の流用ではなく、追加GPU／再生成0。
+[研究native初回CI43347803091](https://github.com/MassyuRed/Cocolon/actions/runs/43347803091)／source22e96b4c／job131631270210はattempt1・TEST BUILD FAILED／exit65。追加した1393行のXCTAssertEqualObjectsへcommaを含むObjC messageを直入れし、macro引数が分断されたこちらの構文ミスだった。XCTest開始0、9frame／画像／書出し0。phase6の別run43347803088成功をnative成功へ混ぜない。artifact14003561243（26,743byte、SHA256 `3adeef9e56855f7c7cb14264fd34596ff9648619bb5c7e0496c48f14f60aba7b`）と全logを保持した。先の独立静的reviewもこの不具合を見落としており、静的成功をcompile成功にしない。
+
+研究修正source `24f7ba8bbccb14bdbb14bd4ff67754a235e42347` は文字列生成を直前のNSString変数へ分けた旧1行→新2行だけ。fixture／期待値／9報告／block1・2・2／renderer／PNG／8秒・90秒guardは不変。全文差分・独立再確認・GitHub readbackと1path一致を確認した。[修正版の既存native CI43350232403](https://github.com/MassyuRed/Cocolon/actions/runs/43350232403)はattempt1・実行中で、compile／画像成功は未確認。既存継続指示・設計§12・Rule18§11.3の同test目的内の内部修正として実行し、closed single-use helper回復や消費済みPod一回承認は流用しない。新renderer／controller／workflow／job／追加GPU／再生成0。
 
 実原本・凍結材料・同source保存／再読・独立reviewは[同じ原本ZIP](https://chatgpt.com/library?file_id=libfile_fde3_f-f30655de312c8191978daec9b93b7008_2f7470f963808191aaebf050935e72de&account_id=personal)version9へ保存。5,293,067byte／120member・SHA256 `d1cfff34b2b3e56e02550513c1ca31a2443b5ee30a866694a69e4d1285cb9e5d`。旧104memberの全byteを保持し、実取得・復元記録・3保存／再読・reviewを16member追加した。Git-backed codeとbrowser screenshotは追加していない。
+
+native初回失敗と最小構文修正の独立reviewは同ZIP version10へ追加。5,419,078byte／131member、SHA256 `ca5f105015d0a42aa581183842daec3072bb7f1cd4a0966334021d5aebb2c33b`、旧120member全byteを保持。Git-backed native source／fixtureとbrowser screenshotは追加していない。
 
 STRUCTURE_MAP_DELTA_NONE_FOR_PRODUCT。既存作者／source owner／公開型／route／DB／renderer／通常selectorに変更なし。一般編集品質・通常採用・live反映／本人端末・正式受入れ0/3・AR-04／他AR／全補助経路は未完。今回の7生成を繰り返さず、同じ新本文の既存画像経路と未解消の三中核品質へ接続する。
 
