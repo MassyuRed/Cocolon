@@ -3064,6 +3064,6 @@ STRUCTURE_MAP_DELTA_PRESENT。詳細・責務/全71内訳・合成限界・次�
 
 **11/13・Premiumの既存「仮の理解」をnaturalへ接続：** 本人の過去入力・実回答に根拠を持つ暫定frameを、現naturalの保存artifactと既存画面へ渡す欠落を修復。確認／修正／不使用を保存し、本人修正文を次の作者材料へ渡す。不使用は次のframe候補から除外する。新16件・既存227件、実隔離SQLの保存DTOを既存RN editorへ渡す3検証が成功。natural本文は固定合成であり、4B本文の品質改善・実機稼働の証明ではない。 
 
-API d8f6d137の既存Piece/Analysis CIは初回実行中。live DB/Render/RN build・配布・GPU/学習は0。 Free／Plusにframeを増やさず、新料金・問い数・quota・公開DTO/route・SQL・RN source・prompt・モデルを変更しない。二欄訂正からframeへの意味伝播、Piece／Analysisへの訂正伝播、複数回答Piece、一般応答/編集品質、live／本人端末・正式受入れは未完。新10b563候補不採用と通常model selector OFFを維持する。
+API d8f6d137のPiece CI [43404500570](https://github.com/MassyuRed/mashos-api/actions/runs/43404500570)とAnalysis CI [43404500574](https://github.com/MassyuRed/mashos-api/actions/runs/43404500574)は、ともにattempt1で全工程成功。手動dispatch/rerun0、live DB/Render/RN build・配布・GPU/学習は0。 Free／Plusにframeを増やさず、新料金・問い数・quota・公開DTO/route・SQL・RN source・prompt・モデルを変更しない。二欄訂正からframeへの意味伝播、Piece／Analysisへの訂正伝播、複数回答Piece、一般応答/編集品質、live／本人端末・正式受入れは未完。新10b563候補不採用と通常model selector OFFを維持する。
 
 STRUCTURE_MAP_DELTA_PRESENT。実装と責務・原本・途中環境失敗・検証限界は[詳細設計§9.36](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-natural-owned-premium-frames-20261113)を正本とする。

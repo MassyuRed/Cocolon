@@ -8,7 +8,7 @@ status: AR02_AR03_NATURAL_PREMIUM_FRAME_CONNECTED_DRAFT
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Owned Premium frames now reach saved natural OBS and existing feedback UI; verify d8f6d137 CI, carry live API/device work separately; correction-to-frame and broad output quality remain incomplete, normal model selector OFF"
+current_next: "Owned Premium frames now reach saved natural OBS and person feedback UI; d8f6d137 Piece/Analysis CI both passed attempt1; live API/device and actual reply quality remain; correction-to-frame/cross-core propagation incomplete and normal model selector OFF"
 runtime_effect_of_this_document: 0
 ---
 
@@ -2531,7 +2531,7 @@ SQLは保存鎖と再構成した現context、既存source envelope/hash/ADDを�
 <a id="emlis-natural-owned-premium-frames-20261113"></a>
 ## 9.36 2026-11-13 — Premiumの既存frame表示・本人操作を現naturalへ接続
 
-**11/13・Premiumの既存「仮の理解」をnaturalへ接続：** 本人の過去入力・実回答に根拠を持つ暫定frameを、現naturalの保存artifactと既存画面へ渡す欠落を修復。確認／修正／不使用を保存し、本人修正文を次の作者材料へ渡す。不使用は次のframe候補から除外する。新16件・既存227件、実隔離SQLの保存DTOを既存RN editorへ渡す3検証が成功。natural本文は固定合成であり、4B本文の品質改善・実機稼働の証明ではない。 [実装 d8f6d137](https://github.com/MassyuRed/mashos-api/commit/d8f6d137508d5ba6ec7da620d1dea6576d560dee)。API d8f6d137の既存Piece/Analysis CIは初回実行中。live DB/Render/RN build・配布・GPU/学習は0。
+**11/13・Premiumの既存「仮の理解」をnaturalへ接続：** 本人の過去入力・実回答に根拠を持つ暫定frameを、現naturalの保存artifactと既存画面へ渡す欠落を修復。確認／修正／不使用を保存し、本人修正文を次の作者材料へ渡す。不使用は次のframe候補から除外する。新16件・既存227件、実隔離SQLの保存DTOを既存RN editorへ渡す3検証が成功。natural本文は固定合成であり、4B本文の品質改善・実機稼働の証明ではない。 [実装 d8f6d137](https://github.com/MassyuRed/mashos-api/commit/d8f6d137508d5ba6ec7da620d1dea6576d560dee)。API d8f6d137のPiece CI [43404500570](https://github.com/MassyuRed/mashos-api/actions/runs/43404500570)とAnalysis CI [43404500574](https://github.com/MassyuRed/mashos-api/actions/runs/43404500574)は、ともにattempt1で全工程成功。手動dispatch/rerun0、live DB/Render/RN build・配布・GPU/学習は0。
 
 ### 利用者に起きていた欠落と修復
 
@@ -2572,4 +2572,4 @@ Free／Plusにframeを増やさず、新料金・問い数・quota・公開DTO/r
 
 STRUCTURE_MAP_DELTA_PRESENT：既存source/meaning ownerからnatural OBS保存・既存public frame/本人操作への接続責務をcurrent01/04、01A/01Cと詳細正本§18.4へ記録。新しい製品owner、型、作者、renderer、DB mechanismは追加しない。前回§9.35の実一回答→Pieceと両CI成功は継承する。旧資格固定3実rawはQ2の別ref/別prepared/messagesであり、現naturalの実4B受領成功へ移し替えない。
 
-次は当該headの既存CI結果を確認し、この既存frame接続を通常API反映・本人端末の残件へ引き継ぐ。自然文がframeにより良くなったという判定、新GPU/fit・同じ不採用比較の反復・通常model採用へ自動進行しない。
+当該headの両CI初回成功まで確認した。この既存frame接続を通常API反映・本人端末の残件へ引き継ぐ。自然文がframeにより良くなったという判定、新GPU/fit・同じ不採用比較の反復・通常model採用へ自動進行しない。
