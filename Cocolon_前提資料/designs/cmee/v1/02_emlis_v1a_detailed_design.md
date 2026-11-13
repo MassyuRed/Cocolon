@@ -41,7 +41,7 @@ Mashは、根拠のある仮説を示し、本人が違う部分を説明して�
 
 同じ応答画面内に二入力formを置き、対象はcurrent応答event ID・thread revisionと、その本文に一度だけ出現するexact抜粋で指定する。両欄は各2,000文字以内。本人の送信操作で説明を別source保存し、具体説明がある場合は既存natural ownerで読み直した本文を保存する。単なる『違う』等でも異議は保存するが、NEEDS_DETAILのまま旧対象をcurrentへ使わず、追加説明をformで案内する。空欄の指摘・説明追加はAIのQUESTIONではなく、既存3問と受取ON/OFF・入力quotaを変えない。非空欄を意味のRESOLVEDや本人確認済みへ昇格しない。
 
-UI／API／保存・同版再読・履歴へのコード接続は[補助経路§9.28](../Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-post-reply-correction-20261113)。今回のAPI147／RN47成功は合成provider・隔離SQLの確認。実4Bは後続[§9.29](../Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-post-reply-correction-actual4b-20261113)で確認し、同source保存・非生成再読は成立したが、意味保持は未達。生成指示候補を撤回し元実装を維持する。live／端末は未確認。Premium本人フレーム、Analysis／Pieceへの訂正利用は後続の構築対象とし、既存Q1回答やframe feedbackで接続完了を代用しない。新料金・問数・quotaを作らない。
+UI／API／保存・同版再読・履歴へのコード接続は[補助経路§9.28](../Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-post-reply-correction-20261113)。[§9.30](../Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-correction-meaning-reader-20261113)で単一の訂正説明を別sourceの限定読取り／private本文比較へ接続した。AI対象文を根拠にせず、未対応を意味成功や本人確認済みへ昇格しない。実4Bの新8応答と5保存は意味品質未達で、生成hint通常接続は撤回、補助なしの通常SYSTEM／材料を維持する。Premium本人frame／Analysis／Piece伝播、live／端末は未完。新料金・問数・quotaを作らない。
 
 <a id="emlis-question-policy-20261112"></a>
 ## 2026-11-12 決定 — 全プラン最大3問・本人が選べる問い・回答後の応答

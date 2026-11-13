@@ -6962,3 +6962,17 @@ STRUCTURE_MAP_DELTA_PRESENT。既存RN screens/input/EmlisThreadModal.js、useEm
 API既存 api_emlis_thread.py、emlis_thread_service.py、api_contract_registry.py、CMEE emlis_thread_contracts.py／emlis_thread_source.py／emlis_thread_history.py／natural_reply.py／natural_reply_meaning.pyの責務を更新した。新しい製品fileはない。新しいai/tests/test_emlis_interpretation_correction.py、既存test_emlis_q3_application.py、既存CI2本は保存・source・履歴・再送の検証を担当する。新migrationは01Cの同日差分を参照。
 
 提供範囲・実装・検証・残件の正本は[補助経路§9.28](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-post-reply-correction-20261113)。新料金・追加AI問い・live配置・端末確認は0。Premium本人frame／Analysis／Pieceの訂正伝播は後続残件。
+
+
+## 2026-11-13 差分 — 訂正説明の別source意味読取り
+
+STRUCTURE_MAP_DELTA_PRESENT／API0985877f。既存3製品fileの責務差分であり、新製品file／公開型／route／DB／RNは追加しない。
+
+| repository path | 現在の責務差分 |
+|---|---|
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply_meaning.py` | 単一訂正説明の独立読取り、source ID／親／記録時点とscalar／UTF-8範囲。複数／未確定・未読文脈を昇格せず、旧原入力とAI対象を根拠へ戻さない |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply.py` | 研究時の訂正role投影と5800byte内の全原文保持。通常hint接続は実失敗で撤回。訂正cognitionは生成投影しない |
+| `ai/services/ai_inference/emlis_thread_service.py` | 訂正時も既存private完成本文比較へ到達。UNASSESSED／partialを公開成功にせず、receipt再開・非生成再読を維持 |
+| `ai/tests/test_emlis_interpretation_correction.py`、`test_emlis_natural_reply_meaning_reuse.py`、`test_emlis_natural_reply_meaning_budget.py` | 説明だけを根拠化、全文座標、複数訂正／後続未読、通常hint OFFとprivate保存・公開分離の検証 |
+
+新8実応答の通常候補も意味未達で不採用。5保存は隔離実績、製品品質合格・live反映／端末成功ではない。[最新実装と再開点§9.30](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-correction-meaning-reader-20261113)。01CはAPI／DB契約不変のため差分なし。

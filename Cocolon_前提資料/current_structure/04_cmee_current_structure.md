@@ -2160,3 +2160,8 @@ STRUCTURE_MAP_DELTA_PRESENT。新e924候補と完了48更新を繰り返さず�
 - natural_reply：current／pastの本人説明、対象AI解釈を区別し、本人説明のSafetyを確認。同じsourceで通常作者へ渡す。
 - emlis_thread_history／natural_reply_meaning：新訂正を読めない旧有限plan／hint／比較ではRESOLVEDにしない。生成後の訂正意味はUNASSESSED。
 - 既存履歴RPC：当該stageのOPERATIONだけを適格本人履歴へ返す。検索は本人説明のみ。新汎用checker／controller／tableなし。
+
+
+## 2026-11-13 — 訂正説明の限定意味読取り接続と通常hint撤回
+
+API0985877f。既存natural_reply_meaningが本人説明のrole／ID／親input／記録時点／field座標を持つwitnessを作り、単一の独立説明だけ既存finite／cognitionへ渡す。AI対象文はreaderへ入れず、複数訂正・不明／未読文脈を確定しない。serviceは訂正時も読めた範囲だけprivate本文比較を行う。公開DTO／DB／RN／QUESTION数・quotaは不変。作者hintは実8応答で安定せず通常接続を撤回、既存研究flagだけ。訂正cognitionの生成投影は研究でも退けた。source接続・5保存／非生成再読・最終167件成功を、一般意味品質へ数えない。[実本文・限界・次§9.30](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-correction-meaning-reader-20261113)。STRUCTURE_MAP_DELTA_PRESENT、新製品file0。Premium frame／Analysis／Piece伝播・live／端末は未完。
