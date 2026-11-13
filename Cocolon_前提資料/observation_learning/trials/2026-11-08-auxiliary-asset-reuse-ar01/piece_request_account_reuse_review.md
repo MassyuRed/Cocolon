@@ -1,3 +1,5 @@
+> **11/13・稼働PieceはBase利用と原本照合、保存済み作者×現編集3入力を準備：** 稼働旧providerの全文／hashを取得し、PieceがAnalysis adapterを外してBaseを呼ぶと確認。原文copyの強制・事後置換はない。前回実6はBaseへの編集材料追加の不採用結果で、学習済みPiece作者の結果ではない。既存344aは別general3で常体化まで確認済み。今回は同じcandidate messages3だけを既存Piece profileへ渡す未確認の組合せを38,745byteで固定した。候補3＋提供前後4確認、停止・復元込み最大10分／1回、学習・retry0。未送信・環境読取／生成／停止0、今回分の具体承認待ち。Base6再生成・新SYSTEM／metadata・教師追加0、通常OFF。 [確認と未実行範囲](<../../../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-selected-author-editorial-prepared-20261113>)。
+
 > **11/12・固定実3件の意味読取拒否を修復：** API87512ddaで、既存述語／本人評価／感情／literal-self資産を、型付きoperatorと完全保持spanの独立比較へ回収。保存344aの同じ実raw3件は3拒否→3採用、旧73件の採否・全artifact・prepared／messages／rawは修正前後同一。新GPU・学習0。3plan計9件の隔離SQL保存・非生成再読、本文／recipe／renderer一致とquota各1を確認。Free refinedは元の適格ADD snapshot、Plus／Premiumは同じ全入力・回答から既存ownerでtier別資格を再導出。合成Auth／source・mock HTTP framingであり、実HTTP／live DB／本人端末ではない。新70を含む局所1774と既存SQL56が成功。Piece CI43174913229はattempt1・39step成功、model集合2021に新70を含む（重複加算なし）。生成本文自体は従来の常体化が中心で、一般編集品質・同じ新本文のnative画像・通常採用・AR-04／全補助経路は未完。 [修復・原本・確認範囲](#piece-general3-operator-review-repair-20261112)。
 
 # AR-04 — 依頼・相談・伝達の原文保持と保存再読
@@ -2875,3 +2877,17 @@ Analysis CI [43174913298](https://github.com/MassyuRed/mashos-api/actions/runs/4
 **11/13・Piece編集候補の実6応答を完了、全3組で差分0のため不採用：** 承認14,489byteを既存Podで一回実行し52.420284秒、全6 HTTP200／stop／attempt1。PID77140と前後health200を保持、学習・retry・提供再起動0。段落・二欄・refinedの旧新全response／rawは各組完全一致・全欄原文copy、8編集選択の可視効果0。二欄では氏名が残り公開役割化も未達。原本のexact CPU再演は4 GENERATED／二欄2 UNAVAILABLEだが作品品質合格ではない。候補・通常optionはOFF、今回のSQL／native保存0、追加生成・S7緩和・raw補修なし。実原本と不採用理由を保全した。
 
 全6原本と各sourceを独立全文読取。意味反転／対象移動は見つけていないが、具体的編集の効果0と氏名残存のためNOT_ADOPTED。原文copyを件数のためSQL/nativeへ通し直さず、今回は保存未実施0を保持する。API ec4bd668のコードは既定OFFのまま、独立S7・raw・保全条件は変更しない。実行・完全照合・scope・CI成功・原本version5／未完は[詳細設計§9.21](../../../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-editorial-choices-actual6-20261113)へ。準備§9.20の未承認・未実行は当時の履歴。この一回承認は消費済み、同型再試行・prompt/metadata増量・fitへ自動進行しない。STRUCTURE_MAP_DELTA_NONE（今回source/test変更0、実結果の記録のみ）。
+
+
+<a id="piece-selected-author-editorial-prepared-20261113"></a>
+## 2026-11-13 — 稼働Base作者の切り分けと保存344a×現編集3材料の準備（未実行）
+
+**11/13・稼働PieceはBase利用と原本照合、保存済み作者×現編集3入力を準備：** 稼働旧providerの全文／hashを取得し、PieceがAnalysis adapterを外してBaseを呼ぶと確認。原文copyの強制・事後置換はない。前回実6はBaseへの編集材料追加の不採用結果で、学習済みPiece作者の結果ではない。既存344aは別general3で常体化まで確認済み。今回は同じcandidate messages3だけを既存Piece profileへ渡す未確認の組合せを38,745byteで固定した。候補3＋提供前後4確認、停止・復元込み最大10分／1回、学習・retry0。未送信・環境読取／生成／停止0、今回分の具体承認待ち。Base6再生成・新SYSTEM／metadata・教師追加0、通常OFF。
+
+344aは別general3で接続済みで、今回を初接続修復とは呼ばない。今回3messagesは前回Base6候補側と同一で、新SYSTEM・metadata・教師は追加せず、Base6も再生成しない。344aのbeforeは取得しないので8編集選択単独の効果は判定しない。限定焦点表現の保持例はあるが、FRESH03の本人再掲もありf6dae全能力の継承は未成立。copy／常体化だけなら不採用として閉じ、学習や同型再比較へ自動進行しない。
+
+固定scriptのSHA256は `c1d17cc867bd71a1f9e222e51f15944a1c33ac9ae2e37ff16d2a0f6c0c366f43`。親／childの構文・独立static reviewを確認し、既存2鍵のlocalhost通信へproxy・redirectを使わないよう固定。今回の元環境読取・model call・停止・復元は0、製品source/test変更0、通常OFF／raw無修補／S7／保存資格は不変。元提供の停止・認証情報を含み得る環境の同Pod親RAM保持と復元を伴うため、新しい具体的な一回承認を待つ。消費済み実6承認は流用しない。
+
+同じ[既存原本ZIP](https://chatgpt.com/library?file_id=libfile_fde3_f-f30655de312c8191978daec9b93b7008_2f7470f963808191aaebf050935e72de&account_id=personal)をversion6へ更新。369,448byte／74member、SHA256 `92b3af21523c94c3589ae5da01045dc0d643849e0030f85a990ecbc070cd03c2`。旧68memberは全byte保持し、固定実行物・凍結messages・範囲・live読取hash・独立static review・READMEの6fileを追加。秘密／全環境／browser screenshot／Git-backed製品sourceは追加しない。
+
+[詳細設計§9.22](<../../../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-selected-author-editorial-prepared-20261113>)を再開正本とする。STRUCTURE_MAP_DELTA_NONE、商品品質・保存／画像／通常適用・正式受入れ・AR-04／全補助経路の完了credit0。
