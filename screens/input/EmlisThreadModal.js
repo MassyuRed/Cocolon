@@ -43,20 +43,26 @@ const savedIdentity = value => typeof value === "string"
 export function selectedPieceSupplementalAnswer(dto) {
   if (dto?.correction_saved || !savedIdentity(dto?.original?.id) || dto.state !== "COMPLETED" || dto.body_state !== "REFINED"
       || dto.answer_saved !== true || dto.answer_assessment !== "RESOLVED" || dto.meaning_updated !== true
-      || !savedIdentity(dto.current_observation?.event_id) || dto.issued_count !== 1 || dto.pending_question || dto.can_continue
+      || !savedIdentity(dto.current_observation?.event_id) || !Number.isInteger(dto.issued_count)
+      || dto.issued_count < 1 || dto.issued_count > 3 || dto.pending_question || dto.can_continue
       || dto.can_retry || dto.failure_code || !Array.isArray(dto.timeline)) return null;
   const answers = dto.timeline.filter(event => event?.kind === "ANSWER");
   const questions = dto.timeline.filter(event => event?.kind === "QUESTION");
   const current = dto.timeline.filter(event => event?.kind === "OBSERVATION" && event.is_current === true);
-  if (answers.length !== 1 || questions.length !== 1 || current.length !== 1
+  const count = dto.issued_count;
+  if (answers.length !== count || questions.length !== count || current.length !== 1
       || current[0].event_id !== dto.current_observation.event_id || current[0].stage !== "REFINED"
-      || current[0].round_index !== 1) return null;
-  const answer = answers[0], question = questions[0];
-  if (answer.round_index !== 1 || question.round_index !== 1 || !savedIdentity(answer.event_id)
-      || typeof answer.text !== "string" || !answer.text.trim()
-      || typeof question.question_id !== "string" || !question.question_id
-      || answer.question_id !== question.question_id) return null;
-  return answer;
+      || current[0].round_index !== count) return null;
+  for (let index = 0; index < count; index += 1) {
+    const answer = answers[index], question = questions[index];
+    if (answer.round_index !== index + 1 || question.round_index !== index + 1 || !savedIdentity(answer.event_id)
+        || typeof answer.text !== "string" || !answer.text.trim()
+        || typeof question.question_id !== "string" || !question.question_id
+        || answer.question_id !== question.question_id) return null;
+  }
+  if (new Set(answers.map(answer => answer.event_id)).size !== count
+      || new Set(questions.map(question => question.question_id)).size !== count) return null;
+  return answers[count - 1];
 }
 
 function originalPieceSource(dto) {
@@ -295,7 +301,7 @@ export default function EmlisThreadModal({ thread, colors, navigation, userId = 
           </View>)}
           </View>}
         {supplementalAnswer && <View style={[s.section, { borderColor: colors.CARD_BORDER }]}>
-          <Text style={[s.label, textStyle]}>ピースに含めるあなたの回答</Text>
+          <Text style={[s.label, textStyle]}>{`ピースに含めるあなたの回答 · ${supplementalAnswer.round_index}問目`}</Text>
           <Text selectable style={[s.body, textStyle]}>{supplementalAnswer.text}</Text>
           <Text style={[s.description, textStyle]}>元の記録と、この回答を使います。</Text>
         </View>}
@@ -316,4 +322,3 @@ const s = StyleSheet.create({
   description: { fontSize: 14, lineHeight: 22, fontWeight: "400" }, originalField: { gap: 8 },
   body: { fontSize: 16, lineHeight: 27, fontWeight: "400" }, input: { minHeight: 100, maxHeight: 200, borderWidth: 1, borderRadius: 16, padding: 16, fontSize: 16, lineHeight: 27, fontWeight: "400" },
 });
-

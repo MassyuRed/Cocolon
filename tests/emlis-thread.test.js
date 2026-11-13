@@ -90,6 +90,34 @@ test('a late correction response cannot reopen a closed reader or cross accounts
   assert.equal(h.value.dto, null);
 });
 
+for (const rounds of [2, 3]) {
+  test(`later Piece choice displays and selects only the last answer (${rounds})`, async t => {
+    const uuid = n => `10000000-0000-4000-8000-${String(n).padStart(12, '0')}`;
+    const timeline = [];
+    for (let round = 1; round <= rounds; round++) {
+      timeline.push({ kind: 'QUESTION', event_id: uuid(round * 2), question_id: `question-${round}`, round_index: round, text: `質問${round}` });
+      timeline.push({ kind: 'ANSWER', event_id: uuid(round * 2 + 1), question_id: `question-${round}`, round_index: round, text: `回答${round}` });
+    }
+    timeline.push({ kind: 'OBSERVATION', event_id: uuid(20), stage: 'REFINED', round_index: rounds, text: '保存済みの返事', is_current: true });
+    const dto = { schema_version: 'cocolon.emlis_thread.application.v1', thread_id: uuid(30), revision: 20,
+      original: { id: uuid(31), memo: '元の記録' }, state: 'COMPLETED', body_state: 'REFINED',
+      answer_saved: true, answer_assessment: 'RESOLVED', meaning_updated: true, issued_count: rounds,
+      current_observation: { event_id: uuid(20), text: '保存済みの返事' }, timeline };
+    const { selectedPieceSupplementalAnswer } = load('screens/input/EmlisThreadModal.js', {
+      'react-native': { StyleSheet: { create: x => x } }, '../../ui/uiTokens': { MODAL_ORIENTATIONS: [] },
+      '../../components/CocolonButton': 'Button' });
+    assert.equal(selectedPieceSupplementalAnswer(dto), timeline[2 * rounds - 1]);
+    const h = await mountPollingReader(t, { get: async () => dto });
+    await act(async () => h.value.open(dto.original.id));
+    assert.ok(h.root.root.findAllByType('Text').some(x => x.props.children === `ピースに含めるあなたの回答 · ${rounds}問目`));
+    const missingEarlier = { ...dto, timeline: timeline.filter(x => !(x.kind === 'ANSWER' && x.round_index === 1)) };
+    assert.equal(selectedPieceSupplementalAnswer(missingEarlier), null);
+    const duplicate = { ...dto, timeline: timeline.map(x => x.kind === 'ANSWER' ? { ...x, event_id: uuid(3) } : x) };
+    assert.equal(selectedPieceSupplementalAnswer(duplicate), null);
+    assert.equal(selectedPieceSupplementalAnswer({ ...dto, pending_question: { question_id: 'unfinished' } }), null);
+  });
+}
+
 // Natural replies keep the existing saved DTO and read-only hook boundary.
 async function mountPollingReader(t, api, initialUser = 'owner') {
   const native = Object.fromEntries(['ActivityIndicator','KeyboardAvoidingView','Modal','ScrollView','Text','TextInput','View'].map(x => [x,x]));

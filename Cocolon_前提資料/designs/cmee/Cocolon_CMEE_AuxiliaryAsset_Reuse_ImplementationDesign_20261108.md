@@ -4,13 +4,15 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-13 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR03_CROSS_RECORD_FRAME_TARGET_ACTUAL_EXECUTED_NEW2_NOT_ADOPTED
+status: AR04_LATEST_SELECTED_ADD_AFTER_ROUND2_3_CONNECTED_ACTUAL_PREPARED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Approved 50496-byte comparison completed once in 97.762331 seconds: research4/control4/health2, exact before-after responses and provider identity preserved; actual new2 same-checkpoint save/read pass without reacquisition, prose new2 not adopted due to source omission and past/current meaning transfer; one-shot authority consumed, normal selector OFF and prior rejections retained"
+current_next: "Natural round2/3 latest independent ADD selection connected to existing Piece source, preparation, SQL and RN; original plus exactly one selected answer retained, all earlier rounds eligibility only; 431 Python tests and 47 RN tests pass; same-checkpoint actual2 packet 49490 bytes prepared, no upload or model call, new single-use authority pending; prior frame new2 not adopted and normal selector OFF"
 runtime_effect_of_this_document: 0
 ---
+
+> **11/13・第2/3回答後の最新一回答をPieceへ渡す候補：原入力＋画面で明示した最新の自己完結ADD一件を維持し、先行全roundは資格確認だけに使う。API dbb96aca、Python431固有＋38subtests、RN47固有成功。3plan×2自然／2stop／3自然の9保存再読を確認。実4B・本番SQL／配置・実機は未完、通常selector OFF。** [実装・確認範囲・実2準備§9.43](#piece-latest-later-add-selected-20261113)。
 
 > **11/13・別記録の反復判断対象を実4Bで比較、本文新2は不採用：** 承認50,496byteを一回実行し、研究4＋前後4応答は全200/stop、health2GETも200。ZIP閉鎖まで97.762331秒、通常／Analysis前後全response bytesと同PID/starttimeを維持した。再修正側は今回の悲しみを落として過去へ結合し、不使用側は過去の重さ・戸惑いと未記載の自責傾向を追加した。同じnew2 checkpointで実receipt保存・別service非生成再読2成功、再取得0。保存成功と本文品質は別判定で、通常selector OFFを維持する。 [実原本・採否§9.42](#emlis-cross-record-frame-target-actual-20261113)。
 
@@ -2817,3 +2819,48 @@ source・identity・既存eventの全prefix・本人feedbackは保持し、期�
 STRUCTURE_MAP_DELTA_NONE。製品source／test／SQL／RN／model／SYSTEM／selectorの変更0。API基準はb8466c6a、同commitの両CI初回成功は既知結果として継承し、今回の新CIへ加算しない。terminal primaryはTECHNICAL_CREDIT（限定実行と同源泉保存再読の完了証拠）、product quality creditは0である。
 
 §9.38新3不採用、通常selector OFF、新10b563不採用を維持する。次の直接未完は、本人の最新判断と過去／今回の範囲を実本文が保つこと。二欄訂正からframe／Piece／Analysisへの意味伝播、複数回答Piece、同版画像、live Auth/PostgREST・本番SQL適用・Render配置・本人端末・正式受入れは今回未完／未実行である。全補助経路の完了へ広げず、追加生成に今回の許可を再使用しない。
+
+
+<a id="piece-latest-later-add-selected-20261113"></a>
+## 9.43 2026-11-13 — 第2・第3回答後の最新一回答をPieceへ接続、実2作品は準備済み・未実行
+
+### 選択した残件と意味の境界
+
+§9.42の実新2は不採用を維持する。調査で、frameの不使用／修正は元の過去ANSWERの撤回とは別であり、今回の材料には最新判断と正確な対象まで届いていた。過去ANSWERの削除・無効化や、同じ失敗本文への追加hint／SYSTEM比較へ進まない。
+
+本書§9.2に残る「2～3回答後のPiece作成」のうち、既存の商品契約（原入力exact1＋本人が明示選択した補足exact1）へ収まる最新一回答の接続を進めた。全回答を自動取得する作品ではない。自然応答で第2／3回答まで終えた後、画面で最新回答全文と何問目かを表示し、その一回答だけを既存単一IDで選ぶ。先行回答は原入力の意味が変わっていないことを確認する資格に限り、Pieceの意味source・追加partitionへ渡さない。
+
+全roundが解決済みADDで、既存原入力を訂正・撤回していない場合に限定する。REVISE／WITHDRAW・未解決・二入力訂正・自己完結しない回答・未回答の追加QUESTION・skipによるFINAL再生成は今回対象外のまま。現在のnatural経路の2自然終了／2回答後stop／3自然終了を扱い、旧finite複数回答や任意回答集合の作品化へ拡張しない。
+
+### 現ownerへの移管とファイル地図
+
+[API dbb96aca](https://github.com/MassyuRed/mashos-api/commit/dbb96aca197b76aa024b4a0ef68ce44e840a444d)の7pathは、既存製品3・test2・workflow1・新migration1である。RNは既存Modalと既存testの2pathを同じ変更単位で更新する。
+
+| owner | 限定した責務 |
+|---|---|
+| ai/services/ai_inference/piece_v2_source_adapter.py | 旧1回答分岐を保持し、2/3の全Q/A・checkpoint再導出・自然receipt/OBS/finish・続行鎖と時点を確認する。先行roundにもADD以外があれば拒否。最新一回答だけを既存handoffへ入れる。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/piece_refined.py | 既存選択回答型が持つround1..3を許可。自己完結・ADD・訂正語拒否・原入力と一回答の2partition・唯一作者・保存形は維持する。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/preparation_sources.py | 4B材料入口のround1固定も1..3へ限定適合する。元入力＋選択回答、source commitment、JSON形、SYSTEMと内容選択は変えない。 |
+| supabase/migrations/20261113131810_piece_natural_later_add_answer.sql | 既存issue/visual/saveのnatural armだけを拡張し、全roundの資格と最新選択を再照合。元のprofile/thread/history/frame-target locks、ACL/RLS、signature・quota・旧finite armを維持する。新table/列/RPCはない。 |
+| screens/input/EmlisThreadModal.js | 終了した1..3roundのQ/A対応・ID一意・最終OBSを確認して最新回答一件を選ぶ。『ピースに含めるあなたの回答 · N問目』、全文、『元の記録と、この回答を使います』と既存buttonを表示。選択の最終資格はserverが持つ。 |
+| 既存test3fileとPiece workflow | APIのnatural保存testへ正9・prior変異48を追加。既存保存helperの回答counterを実event数と一致させる。既存RN testへ第2/3回答の表示・選択2件を追加し、workflowは新migration pathだけ追加する。 |
+
+単一ANSWER envelopeのcommitment、旧1回答のsource_ref／serialized bytes生成式、公開API／source_ref／lineage形を変えない。新しい意味system、writer、checker、controllerやworkflow familyは作らない。STRUCTURE_MAP_DELTA_PRESENTとしてPiece/CMEE current mapsと全file地図01/01A/01B/01Cへ同じ責務を反映する。
+
+### 検証した結果と限界
+
+最終の非重複集合はPython195＋236＝431成功、別に38subtests。新規は正9＋prior変異48＝57件。最後の137再確認は既存集合の重複で、加算しない。既存Pydantic root_validator非推奨警告が各関連集合で1件、FAIL/SKIP0。RNはrepositoryの既存pin（React/renderer18.3.1・Babel7.25系）で旧45＋新2＝47成功。先行する別version試行を別件数へ加算しない。
+
+9正例は3planそれぞれの2自然終了／2stop／3自然終了で、生成候補・見た目変更（有料）・保存・同一版の非生成再読とquota各1、source／Emlis不変を確認した。prior REVISE・原文改変・prefix・receipt改変・続行欠落・回答source時点不整合は、APIとSQL3操作で拒否しPiece状態を保持する。SQLは既存通り保存関係・envelope・ADDを確認し、Pythonの全言語checkpoint再導出をSQLだけで独立に再実装したとはしない。
+
+独立read-onlyレビューで、回答source.recorded_atの下限を初回finish／対応CONTINUEDへ修正した。authored_atは本人が記した時刻なので同制限を掛けない。最終のsource資格・旧identity互換・表示に追加の重大問題なしを確認した。正式human Product Readではない。
+
+### 同じ保存状態での実4B確認を具体化
+
+準備原本は [Cocolon_CMEE_AR04_LatestAnswer_Piece_Prepared_20261113.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-b1e9007b37fc8191b9be577a53a22038_2f7470f963808191aaebf050935e72de&account_id=personal)。9,572,193byte、SHA256 `3a645dabb9ad8b7c7402c505900a31795adb1b85ce5a0119200edc239283fcd9`、19member。第2/3回答後の自然終了各一件、いずれもFreeの取得前SQL checkpoint・全七項目・Q/A・prepared/messages・source identityを保持する。先行Emlis本文は合成で、Piece意味sourceへ入らない。
+
+送信はrunner・wire・hash台帳の3file49,490byteだけ。既存Podの稼働中4Bへ新2作品＋通常／Analysis前後4応答＋health前後2GET、最大6生成／8HTTP、ZIP閉鎖まで300秒以内、一回、学習／model load／再起動／停止／再試行0とする。既存2鍵は指定同Pod fileの指定keyをlocalhost認証のメモリ内headerにのみ使う。鍵・起動環境全体を保存／出力／外部送信せず、checkpointsもPodへ送らない。SYSTEM／生成hintとモデルを変更しない。前後全response bytes、同PID/starttime、全raw/SHA/完全要求と既存piece.field_slots.v1を確認する。研究失敗後は次研究へ進まず提供後確認だけで閉じる。
+
+同checkpointを閉じて戻す固定CPU preflight2件では、既存4B受領contractをMockTransportで再演し、候補・保存・再読とquota1、source／thread／全events不変を確認した。準備中の要求SHAのJSON順序・合成応答format・trusted source_requestとblock順の機械的不整合を修正して最終一致を確認した。原checkpointと最終送信3fileを固定し、独立read-onlyでも照合済みである。取得後もrawを補修せず、既存partition順で同状態へ保存する。ZIP閉鎖後最終summaryを別原本として必須にし、閉鎖前summaryを上書きしない。
+
+新しい一回分の承認待ちで、Pod送信／実4B呼出は0。前回までの許可は消費済みで再使用しない。実2作品の原入力対照・自然さ・同版保存とnative画像、全planの実4B、live Auth/PostgREST・本番SQL適用・Render配置・本人端末は未実行／未確認。CPU候補や表示単体成功を作品品質改善済みとはしない。通常selector OFF、新10b563・§9.38新3・§9.42新2不採用を維持し、全補助経路の完成へ広げない。全file本文・全仕様の意味理解をこの限定変更やtest件数から全完了とは主張しない。

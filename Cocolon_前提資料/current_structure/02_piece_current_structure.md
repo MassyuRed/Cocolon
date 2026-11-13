@@ -1,3 +1,5 @@
+> **11/13・第2/3回答後の最新一回答をPieceへ渡す候補：原入力＋画面で明示した最新の自己完結ADD一件を維持し、先行全roundは資格確認だけに使う。API dbb96aca、Python431固有＋38subtests、RN47固有成功。3plan×2自然／2stop／3自然の9保存再読を確認。実4B・本番SQL／配置・実機は未完、通常selector OFF。** [範囲・原本・次§9.43](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-latest-later-add-selected-20261113)。
+
 > **11/13・別記録への反復frame判断対象と失効を接続：** APIb8466c6a。本人が実際に見た対象を、最新判断と一致する一意な操作記録から既存context読取へ渡す。判断元の編集／削除・操作消失時は保存応答を非生成で抑止し、生成中保存とPiece作成／見た目変更／保存も拒否する。受取先での再修正・保存receipt再開を含む495固有件成功（新25）。合成provider・隔離SQLの確認であり、実4B品質・本番SQL／配置・本人端末は未完。 [範囲・検証・残件§9.40](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-cross-record-frame-target-20261113)。
 
 > **11/13・現naturalの実一回答をPieceへ渡す接続抜けを修復：** 画面で選べるCOMPLETED/REFINEDの一回答が、旧finite専用のAPI/SQL検査で拒否されていた。原入力と実ANSWERを別sourceのまま既存Pieceへ接続し、3plan×自然終了/本人終了の6経路で生成候補・保存・同一版の非生成再読、quota各1を確認。消費した履歴は新しい7記録で置換せず、改変・削除時は拒否する。新71件は分割実行で全成功、既存248件も成功。提供文とPiece HTTPは合成・DBは隔離PGliteであり、新実4B・live DB・Render・RN/build/本人端末の成功ではない。 [現在地§9.35](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-natural-single-answer-connection-20261113)。

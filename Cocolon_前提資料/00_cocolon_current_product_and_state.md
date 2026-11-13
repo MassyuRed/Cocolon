@@ -1,3 +1,5 @@
+> **11/13・第2/3回答後の最新一回答をPieceへ渡す候補：原入力＋画面で明示した最新の自己完結ADD一件を維持し、先行全roundは資格確認だけに使う。API dbb96aca、Python431固有＋38subtests、RN47固有成功。3plan×2自然／2stop／3自然の9保存再読を確認。実4B・本番SQL／配置・実機は未完、通常selector OFF。** [範囲・原本・次§9.43](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-latest-later-add-selected-20261113)。
+
 > **11/13・別記録の反復判断対象を実4Bで比較、本文新2は不採用：** 承認50,496byteの一回を実行。研究4＋前後4は全200/stop、health2GETも200、ZIP閉鎖97.762331秒。前後全response bytesと同PID/starttimeを維持。新2には今回の悲しみ欠落・過去との結合・未記載の自責傾向追加が残った。同checkpointの実receipt保存・非生成再読2成功、再取得0。通常selector OFFを維持し、一回分の許可は消費済み。 [実原本・採否§9.42](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-cross-record-frame-target-actual-20261113)。
 
 > **11/13・別記録の反復判断対象の実4B比較を準備、未実行：** 新Cの再修正／不使用2分岐を対象未結合・結合済みの4応答へ固定。送信3file50,496byte、前後4対照とhealth2GET込み300秒・一回、学習／再試行／再起動0。固定合成本文で同checkpoint保存・非生成再読2成功、実4B生成・Pod送信0、新しい一回分の承認待ち。b8466c6a両CIは初回成功。本文品質・通常反映は未完。 [原本・限界§9.41](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-cross-record-frame-target-prepared-20261113)。
