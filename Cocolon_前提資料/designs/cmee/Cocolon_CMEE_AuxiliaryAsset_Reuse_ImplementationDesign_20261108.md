@@ -4,15 +4,15 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-13 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR02_AI_TARGET_CONTEXT_ACTUAL3_REJECTED_NORMAL_OFF
+status: AR02_CORRECTION_INDEPENDENT16_FIT32_PREPARED_NORMAL_OFF
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Use saved actual correction failures to inspect existing source/4B realization/inverse duties; actual3 provenance framing rejected; no repeated hint/framing loop, no automatic GPU or training, normal OFF"
+current_next: "Independent correction8 + original44 retention8, fresh16/32 and17comparisons prepared; explicit new training/pause authority pending, no repeated framing; normal OFF"
 runtime_effect_of_this_document: 0
 ---
 
-> **11/13・AI訂正対象の出所分離を実4Bで比較、通常不採用：** 承認31,471byteを一回実行し、候補3＋前後4対照・86.144974秒、学習/retry0。元提供PID80025→83325へargs/env/cwd・source/adapter/両鍵を保持して復元、natural/Analysis前後全文一致・health正常を確認。姉→先生の反転と先生→妹の格・態崩れが残り不採用、認識時点は保持したが旧baseも正しかった。3件の同source隔離SQL保存・新service非生成再読は一致し、意味合格とは区別する。通常OFF・独立比較全3UNASSESSED。新HTTP受付の実GPU/通常採用・live/端末・全補助経路は未完。[実原本・判断と次](#emlis-ai-target-context-actual3-20261113)。
+> **11/13・本人訂正の独立教材8＋既存保持8、32更新の研究案を準備：** 実3の出所分離不採用を継承し、既存44／履歴16教材に直接のAI応答訂正形式が0件だった範囲を確認。別場面の訂正8教師と元44の保持8を組み、未学習新4・既知実3・訓練露出済保持8・既知履歴2の17比較を固定した。現行の通常2message／原入力・別訂正sourceを保持し、12件の合成隔離保存・非生成再読、凍結checkpointから新4件の受領再開をCPU確認。モデル品質の証明ではない。送信準備207,620byte、新規31生成＋前後4対照、学習32更新、停止・復元・後対照込み600秒の一回案。未送信・未実行・今回分の学習承認待ち。通常OFF、同じhint/出所表示の反復なし。 [範囲・検証・次](#emlis-correction-independent16-fit32-prepared-20261113)。
 
 > **11/13・資格固定3件の実4B生成と同じ源泉の保存・再読を完了：** 承認38,631byteを一回実行し、Piece3＋提供前後4確認、学習／retry0、復元込み114.971199秒。元提供PID79715→80025、引数／環境／作業場所／既存2鍵・source／両adapterを保持し、通常／Analysisの前後全response一致を確認。無修補の3rawが既存CMEE／S7を通り、凍結済み同checkpoint・source／prepared／messagesからFree3保存・新service非生成再読、本文／payload／recipe／renderer／hash一致、元source／Emlis不変・quota各1。normal2 rawは前回既知rawと同一で、新たな編集改善やA/Bには加算しない。合成Auth／先行Emlis・隔離PGliteの結果であり、通常option／selector OFF、一般品質・live／本人端末・正式受入れ・全補助経路は未完。画像側test構文1箇所を修正し、研究24f7ba8b／既存CI43350232403は成功。9frameの同版PNGと実書出し一致、最大2.61秒を確認。自然参照画像全体のRGBA一致は未成立で、通常採用へは広げない。 [実原本・同source保存・次](<#piece-qualified-source-actual3-saved-20261113>)。
 
@@ -1594,9 +1594,47 @@ STRUCTURE_MAP_DELTA_PRESENT：既存natural_replyのmessage責務と既存server
 
 ### 現在の状態と次
 
-出所分離候補は通常不採用・既定OFF、server候補も未配置。sourceの役割を正しく分けただけでは今回の自然文の反転/格崩れは解消しなかった。同じSYSTEM/hint/出所表示を加える比較を周回せず、保存済みの実失敗を既存の本人訂正読取・4B文章化・完成文逆読取の責務へ戻し、既存教材/生成結果との対応から不足を絞る。追加学習の必要性や原因を断定せず、今回の一回を次のGPU/fit/retryへ流用しない。新たな学習/比較packetは未準備・未承認。Premium本人frame/Analysis/ASTOR/Pieceへの訂正伝播、一般意味/自然さ・通常採用/live/本人端末・正式受入れ/全補助経路は未完。
+出所分離候補は通常不採用・既定OFF、server候補も未配置。sourceの役割を正しく分けただけでは今回の自然文の反転/格崩れは解消しなかった。同じSYSTEM/hint/出所表示を加える比較を周回せず、保存済みの実失敗を既存の本人訂正読取・4B文章化・完成文逆読取の責務へ戻し、既存教材/生成結果との対応から不足を絞る。追加学習の必要性や原因を断定せず、今回の一回を次のGPU/fit/retryへ流用しない。この実比較終了時点では新たな学習/比較packetは未準備・未承認（後続§9.33で独立教材案を準備）。Premium本人frame/Analysis/ASTOR/Pieceへの訂正伝播、一般意味/自然さ・通常採用/live/本人端末・正式受入れ/全補助経路は未完。
 
 STRUCTURE_MAP_DELTA_NONE：今回は実行/原本回収/本文review/隔離保存/状態更新だけ。既存2製品fileの研究option/責務地図は§9.31から不変。00現在地・01A・Emlis/CMEE mapの状態を同期し、01B/01C/公開DTO/route/DB/RN境界は差分なし。
+
+<a id="emlis-correction-independent16-fit32-prepared-20261113"></a>
+## 9.33 2026-11-13 — 本人訂正の独立8教師・既存保持8、32更新の研究一回を具体化（未実行）
+
+§9.32の実3不採用から、現行sourceの本人説明到達、既存文章化、逆読取、実教材を照合した。本人説明は現在の通常author材料に届いており、単純なprovider呼出し漏れではない。AI対象指定はcontrol、本人説明は別のInterpretationCorrectionSourceとして保存される。既存answer更新の核は本物のQUESTION/ANSWER/source spanを必要とするため、訂正を架空のANSWERへ置き換えて既存処理を通す修正は行わない。読取報告の対象範囲を広げただけで実4Bの役割・格の品質回復とはしない。
+
+回収済みMixedReplay44のprepared_teachers原本（SHA256 e1872344ce3842c0d59ed13fc82c1ca99a3a83b33514d2d91ac5a9e4d12db2f9）とAR03のrebalanced16を照合し、interpretation_corrections／target_ai_interpretation／user_explanationを直接含む教師は双方0と確認した。この2束の直接教師の欠落であり、全学習履歴やbase事前学習に同能力がないこと、追加学習が必須・有効なことの証明ではない。現serverのnaturalはAnalysis adapterを外したbaseを使う。旧AR03の不採用重みを現行学習済みnormalと呼ばず、新候補の初期値にも使わない。
+
+### 固定した教材と比較
+
+Karen作成の架空草案8件を、(1)役割・受身と伝聞の出所、(2)未確認推測と確認済み報告、(3)将来予定の事前認識と出来事後の初回認識、(4)明記条件と未整理の理由、の4対にした。対ごとのtier／category／emotion_detailsは同一。元評価の姉・妹・先生・休館等を教師へ移さず、配送の受け渡し／倉庫設備／断水／工作の別場面を使う。未提示の逐語引用・原因・感情・反対意図・予定の実現を補わず、全入力の復唱や参考文への文字一致を合格条件にしない。Mash承認済みの応答ラベルではない。
+
+元44のT04/T06/T09/T12/S05A/S05B/S06A/S06Bは全messages・prefix・教師本文をbyte同一で保持。新8と交互に並べ、各2回の16教師・32更新とする。既存AR03 fitのassistant-only CE、非切断chat template、単一終端、fixed base/revision/tokenizer、fresh r8 LoRA112tensor、有限loss/gradient、保存とfresh reload全tensor照合を再利用。新optimizer方式・新作者・本番経路は追加しない。
+
+| 比較群 | 件数 | 学習露出と取得 |
+|---|---:|---|
+| 別場面の新訂正評価 | 4 | 今回教師には含めない。学習前後を新規取得 |
+| 既知の実訂正base | 3 | 今回教師には含めない。元HTTP要求／応答のhash一致で前結果を再利用し、後だけ新規取得 |
+| 通常文の保持 | 8 | 教師と同一の既露出入力。保持・忘却の診断であり独立評価ではない。前後新規取得 |
+| 既知の過去回答／撤回scope | 2 | 今回教師には含めない。前後新規取得 |
+
+17件すべてを未見・独立評価とは呼ばない。前新規14＋後新規17＝研究生成31、旧HTTP前結果3を加えて比較記録34。元natural／Analysisの前後対照4を合わせ、新規生成は最大35。旧HTTPと新しい直接load候補にはprocess／取得方法差があり、旧3の比較を厳密同process A/Bとはしない。評価human_reference／review_axesはGPU packから除外。ID／日時を除いた実質材料でも保持8以外の教師・比較重複0を確認した。
+
+### CPUで終えた準備と、まだ行っていないこと
+
+API3b727b3fの実Q3 SQL/RPCとcorrect_interpretationを通し、架空の初回本文を対象に訂正8＋評価4の12要求を固定。原入力・対象版・訂正全文・時刻・source prefixを保持したまま、全12の合成受領保存／新service非生成再読、原入力不変、QUESTION/ANSWER追加0、公開UNASSESSED／meaning_updated=falseを確認した。合成原本24受領であってモデル24応答ではない。外部call・live DB・GPU・学習0。さらに凍結した受領前checkpointから、処理leaseだけを隔離分岐内で更新し、新評価4の合成raw受領後処理／再読を確認した。同手段で、実結果取得後に新4＋旧実3の訂正原本を保存できるよう具体化したが、実候補7保存は未実行。
+
+runnerの旧HTTP再利用検査は原要求／rawの改変・欠測8種を拒否。既存loss/NLL/baseのAST、optimizer更新から保存・fresh reloadまでのsource bytesは旧ownerと一致。wrapperの変更は起動先、停止前pack検査と元提供以外のGPU processがないことの確認のみ。製品source/test変更0、新CI/dispatch/rerun0。前回API3b727b3fの187＋20成功・両CI successを継承し、今回のCPU準備件数へ足さない。
+
+### 具体的な次の一回と境界
+
+送信対象はpack.private.json 178,197byte、fit_correction_once.py 14,810byte、run_and_restore.py 14,331byte、files.json 282byte、計207,620byte。既存Pod f1lle4xwq3wjlnでfresh baseから16教師32更新、新規31研究生成＋元提供前後4対照を最大600秒・一回・再試行なしで行う案。研究枠330秒、学習内上限180秒、残る270秒を復元・後対照へ確保する。後対照137秒を予約するため、研究枠を使い切った場合の元server待受確認枠は最大133秒。各生成23秒×31の最悪値は研究枠を超えるので、完走保証はせず期限優先・未完不採用で復元し、追加retry/fitへ進めない。
+
+送信／同Pod内2既存鍵のcontrol認証と全起動環境の親RAM一時保持・元args/env/cwd復元再利用／学習を含む今回分の具体承認待ち。前回31,471byte・学習なしの承認は完了消費済みで流用しない。元source5e3d、Analysis adapter、provider argv/cwd/identity、同Pod GPU占有とcached tokenizer/全16教師・17評価の8192枠を停止前に確認し、不一致や期限不足では停止・学習へ進めない。cached tokenizerによる実token数はまだ未確認。生成子へ鍵や全環境を渡さず、同Pod内の既存primitiveとcached modelだけを使い、旧source／重みを書き換えない。新候補は検証専用・通常不採用のまま、raw無修補で全17の原文対照を行う。NLL低下／tensor一致／保存成立だけで品質合格にしない。
+
+Piece側も別途sourceを照合し、現refinedが単一の実回答ADD／round1だけで、natural profileと複数回答のactive-plan/lineage/SQL fenceは未接続と確認した。最新回答を選ぶ・連結する・架空一回答へ畳む修正はしていない。この調査をPieceの接続完了や今回の研究品質へ加算しない。
+
+STRUCTURE_MAP_DELTA_NONE：今回の変更はprivateな教材・既存一回trainerの限定適応・隔離CPU検証・前提資料の状態更新。公開DTO/route/DB/RN、製品sourceと意味確定／独立比較／保存の責務は不変。全補助経路・自然さ・役割安定・Premium frame/Analysis/Piece伝播、通常採用/live/本人端末・正式受入れは未完。全fileのtree/hash照合と全仕様本文理解を同一視せず、全file意味読了の既存未完を解消したとは報告しない。
 
 ## 10. 変更箇所と検証
 

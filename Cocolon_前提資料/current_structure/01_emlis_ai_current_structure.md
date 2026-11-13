@@ -2062,3 +2062,10 @@ API0985877f。既存natural_reply_meaningが本人説明のrole／ID／親input�
 ## 2026-11-13 — AI訂正対象の出所分離実3比較・通常不採用
 
 承認31,471byteを一回・86.144974秒で実行。候補3＋元natural/Analysis前後4、全stop/HTTP対照200、学習/retry0。元提供PID80025→83325、args/env/cwd/既存2鍵・source/adapterを保持して復元し、前後全response一致・health正常。姉→先生は反転、先生→妹は格/態崩れが残り不採用。母の創作引用は消え、認識時点は保持したが全品質回復ではない。3件同source/prefix/materialの隔離SQL保存・新service非生成再読は一致、原入力不変・QUESTION/ANSWER追加0。独立比較全3UNASSESSED、意味合格へ換算しない。通常OFF/server未配置、直接generator・再load/限定環境のため厳密同process A/Bや新HTTP受付実GPU成功ではない。[全原文対照と次§9.32](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-ai-target-context-actual3-20261113)。source/test変更0・STRUCTURE_MAP_DELTA_NONE。前回API3b727b3fの187＋20成功/両CI成功を継承。今回承認は消費済み、同じhint/出所表示の反復や追加fitは自動実行しない。一般意味・旧8/9未判定、Premium frame/Analysis/Piece伝播、通常採用/live/本人端末は未完。
+
+
+## 2026-11-13 — 本人訂正の独立16教材・32更新比較を準備
+
+**11/13・本人訂正の独立教材8＋既存保持8、32更新の研究案を準備：** 実3の出所分離不採用を継承し、既存44／履歴16教材に直接のAI応答訂正形式が0件だった範囲を確認。別場面の訂正8教師と元44の保持8を組み、未学習新4・既知実3・訓練露出済保持8・既知履歴2の17比較を固定した。現行の通常2message／原入力・別訂正sourceを保持し、12件の合成隔離保存・非生成再読、凍結checkpointから新4件の受領再開をCPU確認。モデル品質の証明ではない。送信準備207,620byte、新規31生成＋前後4対照、学習32更新、停止・復元・後対照込み600秒の一回案。未送信・未実行・今回分の学習承認待ち。通常OFF、同じhint/出所表示の反復なし。 [詳細設計§9.33](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-correction-independent16-fit32-prepared-20261113)。
+
+STRUCTURE_MAP_DELTA_NONE：private教材／既存trainerの一回適応／CPU確認だけ。製品ownerのpath・source/controlの役割、公開型／route／DB／RNは不変。旧実3の不採用を維持し、新実品質・通常採用・Premium frame/Analysis/Piece伝播・本人端末は未完。

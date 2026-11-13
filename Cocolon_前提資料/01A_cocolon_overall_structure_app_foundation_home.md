@@ -6988,3 +6988,10 @@ STRUCTURE_MAP_DELTA_PRESENT／API3b727b3f。既存2製品file内の明示研究�
 | `ai/tools/serve_emlis_natural_reply.py` | 明示CLI+natural認証時のみ、本人側/AI側の完全な参照一致を持つ3message受付候補。既定OFF、Analysis/Piece/任意AI履歴へ拡大しない |
 
 既存tests2fileで関連187＋server20成功。新実4Bは0、旧rawの隔離3保存/再読は新品質実績ではない。[現在の具体比較・境界§9.31](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-ai-target-context-prepared-20261113)。§9.31で最大10分/候補3＋元提供前後4/復元一回を準備し、後続§9.32で完了。この具体一回は§9.32で実行済み・消費済み、通常不採用。86.144974秒/候補3＋対照4/元提供復元と前後全response一致/3隔離保存再読を確認したが、役割反転・格崩れが残る。今回はsource/test/責務地図変更0、STRUCTURE_MAP_DELTA_NONE。直接generatorの取得で、新3message HTTP実GPU成功・意味合格・live/本人端末成功ではない。
+
+
+## 2026-11-13 — 本人訂正の独立16教材・32更新比較を準備
+
+**11/13・本人訂正の独立教材8＋既存保持8、32更新の研究案を準備：** 実3の出所分離不採用を継承し、既存44／履歴16教材に直接のAI応答訂正形式が0件だった範囲を確認。別場面の訂正8教師と元44の保持8を組み、未学習新4・既知実3・訓練露出済保持8・既知履歴2の17比較を固定した。現行の通常2message／原入力・別訂正sourceを保持し、12件の合成隔離保存・非生成再読、凍結checkpointから新4件の受領再開をCPU確認。モデル品質の証明ではない。送信準備207,620byte、新規31生成＋前後4対照、学習32更新、停止・復元・後対照込み600秒の一回案。未送信・未実行・今回分の学習承認待ち。通常OFF、同じhint/出所表示の反復なし。 [詳細設計§9.33](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-correction-independent16-fit32-prepared-20261113)。
+
+STRUCTURE_MAP_DELTA_NONE：private教材／既存trainerの一回適応／CPU確認だけ。製品ownerのpath・source/controlの役割、公開型／route／DB／RNは不変。旧実3の不採用を維持し、新実品質・通常採用・Premium frame/Analysis/Piece伝播・本人端末は未完。
