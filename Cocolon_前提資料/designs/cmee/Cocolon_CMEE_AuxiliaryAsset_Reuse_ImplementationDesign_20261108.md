@@ -1410,19 +1410,28 @@ STRUCTURE_MAP_DELTA_NONE_FOR_PRODUCT。既存作者／source owner／公開型�
 
 
 <a id="piece-frame-solid-paint-candidate-20261113"></a>
-## 9.26 2026-11-13 — 同版画像の枠帯を切り分け、既存背景部品の最小修正を検証中
+## 9.26 2026-11-13 — 同版画像の枠帯を研究版で解消、旧作品互換のため通常採用は保留
 
 前セッションで待機していた研究native run43350232403は成功済みとfresh再照会し、同3作品の実raw→隔離保存8項目／3hash→9frame→各実view-shot一致を独立再確認した。旧7生成／同nativeを未完として繰り返していない。
 
-画像を改めて読むと、実画像は枠の内側に幅の広い段階状の帯があり、自然参照は2pxの細い単色枠だった。TWO-FIELDSでは本文の垂直位置も参照と異なるため、全RGBA不一致を枠だけの問題と断定しない。実canvasとview-shotはともにrenderInContextで、既存PieceVisualCardのsurface＋borderWidth:2のViewを含む。自然参照はborder色矩形と2px内側surface色矩形を塗る。文字bitmapは透明な文字だけを合成し、今回の帯をV4文字変換の累積とする証拠はない。RN内部の正確なbacking原因は未確定。
+旧実画像の枠内には幅広い段階状の帯があり、自然参照は2pxの細い単色枠だった。原PNGの画素行を再計算すると、本文位置の自然参照との差は0〜1px程度で、大幅な段落移動は確認しない。実canvasとview-shotはともにrenderInContextで、既存PieceVisualCardのsurface＋borderWidth:2のViewを含む。自然参照はborder色矩形と2px内側surface色矩形を塗る。文字bitmapは透明な文字だけを合成し、帯をV4文字変換の累積とする証拠はない。RN内部の正確なbacking原因は未確定。
 
-研究source [0b6d212f](https://github.com/MassyuRed/Cocolon/commit/0b6d212fc43c0d13bff107940ad551bc0147f5df)で既存components/piece/PieceVisualCard.jsだけを変更。margin/2のborder色外矩形と2px内側のsurface色矩形へ分け、現12テーマの不透明palette・寸法・z順を保持した。本文／計測／bitmap／recipe／renderer版／8秒guard／fixture／native method／依存は不変。通常sourceへの採用とmodel selector有効化は行っていない。
+研究source [0b6d212f](https://github.com/MassyuRed/Cocolon/commit/0b6d212fc43c0d13bff107940ad551bc0147f5df)で既存components/piece/PieceVisualCard.jsだけを変更。margin/2のborder色外矩形と2px内側のsurface色矩形へ分け、現12テーマの不透明palette・寸法・z順を保持した。本文／計測／bitmap／recipe／renderer版／8秒guard／fixture／native method／依存は不変。この無条件共通部品の変更は通常sourceへ採用していない。
 
-Node24.22.1で構文成功、既存renderer189件は188成功＋partial checkoutのuiTokens不足1失敗後、同ref原本を補完してその1件だけ再確認成功。重複なし最終189成功で、native描画の実証ではない。独立事前reviewで阻害事項なし。[既存native run43357602783](https://github.com/MassyuRed/Cocolon/actions/runs/43357602783)／job131663248153は同3作品9frameを実行中、成否・帯解消・全体RGBAは未確定。phase6 run43357602772成功をnative成功へ混ぜない。
+Node24.22.1で構文成功、既存renderer189件は188成功＋partial checkoutのuiTokens不足1失敗後、同ref原本を補完しその1件だけ再確認成功。重複なし最終189成功。独立事前reviewで阻害事項なし。[既存native run43357602783](https://github.com/MassyuRed/Cocolon/actions/runs/43357602783)／job131663248153はexact source・attempt1・success、同じ既存1method／3作品9frameを実行。phase6 run43357602772の別successを件数へ混ぜない。
 
-同じ原本ZIPをversion12へ更新し、旧193memberを全bytes保持、候補identity・観測・local結果を3member追加した。196member／10,524,903byte、SHA256 ec861bcd800eab4c1ad98189f651ff455b21e6ea97b367da33dfb09b3a71ca5e。Git-backed source／秘密／browser screenshotは追加しない。
+取得artifact14007444370は2,282,689byte／54member、SHA256 6207e4fd83e1ab1905a183114ef2966b95fe699f91f1a539480a359d5574e810。CRC・全原本を回収し、全9で保存artifact8項目・再計算3hash、本文／block／行分割／字体寸法／配置・inspection座標が旧SQLと一致した。各作品preview／saved／exportのPNGはbyte一致、実view-shotはRGBA一致。閉transport／source・回答・保存identity／native close ACK後遷移は保持し、exportの画像SHAだけが新画像へ変わった。全9は414.08〜3500.18msで元8秒内。旧2.61秒より速いという主張はしない。
 
-STRUCTURE_MAP_DELTA_NONE：既存背景描画owner内の実装手法だけで、新しい型／接続／責任／fileを加えない。次はこの実描画結果を回収し、旧新の枠画素・本文／hash／PNG／実書出し／元期限を照合する。成功前の通常採用、Android実証、全RGBA一致・商品受入れへ拡げない。AR-02の二入力訂正が次の直接未接続であること、一般Piece品質・通常採用・live／本人端末・全補助経路の未完は維持する。新GPU／学習／DB／Render変更0。
+独立画像照合では、各本文ink矩形を2px広げた領域以外の計11,504,562画素における指定palette／自然参照との差は0。旧背景は作品ごと1frameあたり572,227／588,782／601,881画素が相違していた。rootも左右余白strip各100,000画素が旧100,000差→新0差、2px枠／内面の色と3画像の帯除去・欠落／重なりなしを確認した。本文色の画素位置は旧新同一。自然参照との全RGBA差はparagraph87,266／87,265／87,260、二欄各53,538、refined各18,306が残り、すべて上記文字領域内。全画像一致や一般文字renderer解決へ拡げない。この画素診断を新しい受入れGateにはしない。
+
+### 通常採用を保留する具体的な互換境界
+
+[Piece_Render_Reproducibility_Contract_20260808.md §7–8](../../../Cocolon_Piece/pce5_visual_recipe_export/Piece_Render_Reproducibility_Contract_20260808.md#7-renderer-version-rule)は、visual outputが変わるbug fixでrenderer versionを上げ、旧作品の見た目をlatestへ暗黙置換しないと定める。pieceLayoutのsaved読取も保存時のidentity／appearanceを保持する。今回共通枠Viewをそのまま通常へ移すと、ios.v1/v2・旧prototype等も変わるため、通常sourceへ採用しない。研究fixtureのios.v2標識は比較のための既存原本であり、新しい正式renderer版の採用や旧作品上書きの実績ではない。後続の採用は旧版へ元の描画を残し、新しいrenderer版だけへ候補を結ぶ単位が必要。
+
+同じ原本ZIPはversion12で旧193memberを全bytes保持し、候補／実行中checkpointを3member追加済み。今回の成功原本・全54member・rawZIP・run/job/log・root／独立比較をversion13へ追加し、旧196memberも全bytes保持。256member／15,226,461byte、SHA256 148e2f675d04a8223d202305d3ff4692a089fe6facf55d6828963fbd1606bd51。Git-backed source／秘密／browser screenshotは含めない。
+
+STRUCTURE_MAP_DELTA_NONE：研究の既存背景描画owner内の技法のみで、通常の型／接続／責任／fileを加えない。primary TECHNICAL_CREDITは研究の枠帯修復と同版保存画像の保持に限定。一般作品編集品質／通常source採用／新renderer版接続／live／本人端末／Photos・Share／正式受入れ／全補助経路は未完。AR-02の二入力訂正が次の直接未接続であることも維持する。今回native一回は完了し、完了したGPU／nativeを繰り返さない。追加GPU／学習／DB／Render変更0。
+
 
 ## 10. 変更箇所と検証
 
