@@ -1,9 +1,9 @@
 # Piece contracts, native metrics and isolated RN simulator rendering; no signing or deployment.
-name: Piece RN preview and owner contracts
+name: Piece latest answer native save and export
 'on':
   push:
     branches:
-      - agent/three-core-cmee-current-structure-20260815
+      - agent/piece-latest-answer-native-20261114
     paths:
       - .github/workflows/piece-rn-contracts.yml
       - features/piece/**
@@ -18,12 +18,6 @@ name: Piece RN preview and owner contracts
       - tests/analysis-report-history.test.js
       - tests/settings-home-layout.test.js
       - tests/emlis-thread.test.js
-      - tests/emlis-question-preference.test.js
-      - tests/account-local-cleanup.test.js
-      - screens/input/useEmlisQuestionPreference.js
-      - screens/input/InputActionArea.js
-      - lib/emlisQuestionPreferenceStorage.js
-      - lib/accountLocalCleanup.js
       - tests/emlis-piece-refined-choice.test.js
       - screens/input/EmlisThreadModal.js
       - tests/fixtures/kokoro-weather-live-v1.json
@@ -90,7 +84,7 @@ permissions:
   contents: read
 jobs:
   piece-rn-contracts:
-    if: github.repository == 'MassyuRed/Cocolon'
+    if: github.repository == 'MassyuRed/Cocolon' && github.ref == 'refs/heads/agent/three-core-cmee-current-structure-20260815'
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
@@ -127,8 +121,6 @@ jobs:
           tests/account-settings-owner-race.test.js
           tests/settings-home-layout.test.js
           tests/emlis-thread.test.js
-          tests/emlis-question-preference.test.js
-          tests/account-local-cleanup.test.js
           tests/emlis-piece-refined-choice.test.js
           tests/tutorial-owner-race.test.js
           tests/iap-owner-race.test.js
@@ -140,7 +132,7 @@ jobs:
           tests/analysis-semantic-map.test.js
 
   piece-android-source:
-    if: github.repository == 'MassyuRed/Cocolon'
+    if: github.repository == 'MassyuRed/Cocolon' && github.ref == 'refs/heads/agent/three-core-cmee-current-structure-20260815'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -178,7 +170,7 @@ jobs:
           test -f "$ANDROID_HOME/platforms/android-35/android.jar"
           javac -proc:none -source 17 -target 17 -classpath "$ANDROID_HOME/platforms/android-35/android.jar:$PIECE_COMPILE_DIR/*" -d "$PIECE_COMPILE_DIR/classes" android/app/src/main/java/com/anonymous/cocolonmvp/piece/PieceTextMetricsModule.java
   piece-ios-source:
-    if: github.repository == 'MassyuRed/Cocolon'
+    if: github.repository == 'MassyuRed/Cocolon' && github.ref == 'refs/heads/agent/three-core-cmee-current-structure-20260815'
     runs-on: macos-15
     timeout-minutes: 10
     steps:
@@ -320,7 +312,7 @@ jobs:
           retention-days: 7
 
   piece-ios-rn-canvas:
-    if: github.repository == 'MassyuRed/Cocolon'
+    if: github.repository == 'MassyuRed/Cocolon' && github.ref == 'refs/heads/agent/piece-latest-answer-native-20261114'
     runs-on: macos-15
     timeout-minutes: 45
     steps:
@@ -362,7 +354,7 @@ jobs:
           retention-days: 7
 
   piece-export-pods:
-    if: github.repository == 'MassyuRed/Cocolon'
+    if: github.repository == 'MassyuRed/Cocolon' && github.ref == 'refs/heads/agent/three-core-cmee-current-structure-20260815'
     runs-on: macos-15
     timeout-minutes: 25
     steps:
@@ -416,7 +408,7 @@ jobs:
           retention-days: 7
 
   piece-export-android:
-    if: github.repository == 'MassyuRed/Cocolon'
+    if: github.repository == 'MassyuRed/Cocolon' && github.ref == 'refs/heads/agent/three-core-cmee-current-structure-20260815'
     runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:

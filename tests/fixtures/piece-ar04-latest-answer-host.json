@@ -1,0 +1,945 @@
+{
+  "schema": "piece.recorded_free_normal_host_fixture.v1",
+  "cases": [
+    {
+      "name": "normal_host_LATEST-ADD-2",
+      "source_case_id": "LATEST-ADD-2",
+      "tier": "free",
+      "saved_input": {
+        "savedInputId": "ada5a166-bb92-4f28-8775-c3d219a51f7e",
+        "expectedUserId": "e32d52be-4a62-453b-9724-4dbd7a95fc6b",
+        "idempotencyKey": "ar04-latest-preview",
+        "supplementalAnswerIdentity": "001ce2ae-e282-4a1b-9bc8-a61f7ae73abc"
+      },
+      "preview": {
+        "content_payload": {
+          "body_blocks": [
+            "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。",
+            "今は、私は怖い。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "6cdb73806bac5e79296ee1854c29daba20775f7463fd2f20fd5af4ae672cdc74",
+        "eligible_formats": [
+          "short_essay"
+        ],
+        "expires_at": "2099-01-01T00:10:00+00:00",
+        "format_type": "short_essay",
+        "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。\n\n今は、私は怖い。",
+        "piece_text_hash": "c4a4d3aad56c0072456bb519258bc17d6a6cea5e66f2a11e30183ce7c1d80704",
+        "preview_id": "9f7d558c-d084-5732-70c7-0ff549b8b8f6",
+        "preview_revision": 1,
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+        "row_version": 1,
+        "visibility_scope": "private",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_small"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "soft_paper",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
+        "content_status": "ready",
+        "api_contract_version": "piece.api.v2",
+        "piece_contract_version": "piece.record.v2",
+        "quota": {
+          "contract_version": "piece.quota_consumption.v1",
+          "subscription_tier": "free",
+          "month_key": "2026-11",
+          "save_limit": 5,
+          "saved_count": 0,
+          "remaining_count": 5,
+          "can_save": true
+        },
+        "plan_capabilities": {
+          "format_selection": "fixed",
+          "theme_ids": [
+            "soft_paper",
+            "quiet_night"
+          ],
+          "aspect_ratios": [
+            "4:5"
+          ],
+          "branding_modes": [
+            "required_small"
+          ]
+        }
+      },
+      "save": {
+        "piece_id": "9f7d558c-d084-5732-70c7-0ff549b8b8f6",
+        "saved_at": "2026-11-14T03:45:11.979+09:00",
+        "row_version": 2,
+        "consumption_id": "a90c2884-464e-4149-b3da-6ab43d2122bb",
+        "lifecycle_status": "saved",
+        "visibility_scope": "private",
+        "idempotency_replayed": false
+      },
+      "detail": {
+        "api_contract_version": "piece.api.v2",
+        "piece_contract_version": "piece.record.v2",
+        "export_contract_version": "piece.export_contract.v1",
+        "render_interface_version": "piece.render_interface.v1",
+        "render_reproducibility_version": "piece.render_reproducibility.v1",
+        "format_type": "short_essay",
+        "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。\n\n今は、私は怖い。",
+        "piece_text_hash": "c4a4d3aad56c0072456bb519258bc17d6a6cea5e66f2a11e30183ce7c1d80704",
+        "content_payload": {
+          "body_blocks": [
+            "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。",
+            "今は、私は怖い。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "6cdb73806bac5e79296ee1854c29daba20775f7463fd2f20fd5af4ae672cdc74",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_small"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "soft_paper",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+        "piece_id": "9f7d558c-d084-5732-70c7-0ff549b8b8f6",
+        "public_id": "piece:9f7d558c-d084-5732-70c7-0ff549b8b8f6",
+        "lifecycle_status": "saved",
+        "visibility_scope": "private",
+        "row_version": 2,
+        "saved_at": "2026-11-14T03:45:11.979+09:00",
+        "content_status": "ready"
+      },
+      "transport": {
+        "owner": "e32d52be-4a62-453b-9724-4dbd7a95fc6b",
+        "steps": [
+          {
+            "path": "/emotion/piece/source-ref/ada5a166-bb92-4f28-8775-c3d219a51f7e?supplemental_answer_identity=001ce2ae-e282-4a1b-9bc8-a61f7ae73abc",
+            "method": "GET",
+            "headers": {
+              "X-Piece-Renderer": "piece.rn_bitmap_renderer.ios.v2",
+              "X-Piece-Palette": "3",
+              "Cache-Control": "no-store"
+            },
+            "status": 200,
+            "response": {
+              "source_input_id": "ada5a166-bb92-4f28-8775-c3d219a51f7e",
+              "source_input_version": "emlis.current_input_bundle.v1",
+              "source_input_bundle_commitment": "sha256:b4f00b2a3274f505ad2450b0fc59aab2bf64983a4dab543758dbf5813e9a3bec",
+              "emlis_observation_stage": "refined_observation",
+              "emlis_observation_result_identity": "615e5730-0393-400a-bc9a-cdc26f7ac19d",
+              "question_need_decision_identity": "8eefb9af-3a31-4b9a-b41f-b66d2ecdfe0c",
+              "supplemental_answer_identity": "001ce2ae-e282-4a1b-9bc8-a61f7ae73abc"
+            }
+          },
+          {
+            "path": "/emotion/piece/preview",
+            "method": "POST",
+            "headers": {
+              "X-Piece-Renderer": "piece.rn_bitmap_renderer.ios.v2",
+              "X-Piece-Palette": "3",
+              "Idempotency-Key": "ar04-latest-preview"
+            },
+            "body": {
+              "source_ref": {
+                "source_input_id": "ada5a166-bb92-4f28-8775-c3d219a51f7e",
+                "source_input_version": "emlis.current_input_bundle.v1",
+                "source_input_bundle_commitment": "sha256:b4f00b2a3274f505ad2450b0fc59aab2bf64983a4dab543758dbf5813e9a3bec",
+                "emlis_observation_stage": "refined_observation",
+                "emlis_observation_result_identity": "615e5730-0393-400a-bc9a-cdc26f7ac19d",
+                "question_need_decision_identity": "8eefb9af-3a31-4b9a-b41f-b66d2ecdfe0c",
+                "supplemental_answer_identity": "001ce2ae-e282-4a1b-9bc8-a61f7ae73abc"
+              },
+              "requested_format": null,
+              "visual_selection": {
+                "theme_id": null,
+                "aspect_ratio": null,
+                "branding_mode": null
+              }
+            },
+            "status": 200,
+            "response": {
+              "content_payload": {
+                "body_blocks": [
+                  "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。",
+                  "今は、私は怖い。"
+                ],
+                "format_type": "short_essay",
+                "language": "ja",
+                "meaning_contract_version": "piece.content_meaning.v1",
+                "safety_contract_version": "piece.public_safety_transformation.v1",
+                "schema_version": "piece.content_payload.v1",
+                "title": null
+              },
+              "content_payload_hash": "6cdb73806bac5e79296ee1854c29daba20775f7463fd2f20fd5af4ae672cdc74",
+              "eligible_formats": [
+                "short_essay"
+              ],
+              "expires_at": "2099-01-01T00:10:00+00:00",
+              "format_type": "short_essay",
+              "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。\n\n今は、私は怖い。",
+              "piece_text_hash": "c4a4d3aad56c0072456bb519258bc17d6a6cea5e66f2a11e30183ce7c1d80704",
+              "preview_id": "9f7d558c-d084-5732-70c7-0ff549b8b8f6",
+              "preview_revision": 1,
+              "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+              "row_version": 1,
+              "visibility_scope": "private",
+              "visual_recipe": {
+                "aspect_ratio": "4:5",
+                "branding": {
+                  "branding_mark_id": "cocolon_text_mark",
+                  "branding_mark_version": 1,
+                  "branding_mode": "required_small"
+                },
+                "font_style": {
+                  "font_style_id": "system_readable",
+                  "font_style_version": 1
+                },
+                "format_type": "short_essay",
+                "language": "ja",
+                "layout_policy_version": "piece.long_text_layout.v1",
+                "template": {
+                  "template_id": "essay_frame",
+                  "template_version": 1
+                },
+                "theme": {
+                  "theme_id": "soft_paper",
+                  "theme_version": 1
+                },
+                "visual_catalog_version": "piece.visual_catalog.v1",
+                "visual_recipe_version": "piece.visual_recipe.v1"
+              },
+              "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
+              "content_status": "ready",
+              "api_contract_version": "piece.api.v2",
+              "piece_contract_version": "piece.record.v2",
+              "quota": {
+                "contract_version": "piece.quota_consumption.v1",
+                "subscription_tier": "free",
+                "month_key": "2026-11",
+                "save_limit": 5,
+                "saved_count": 0,
+                "remaining_count": 5,
+                "can_save": true
+              },
+              "plan_capabilities": {
+                "format_selection": "fixed",
+                "theme_ids": [
+                  "soft_paper",
+                  "quiet_night"
+                ],
+                "aspect_ratios": [
+                  "4:5"
+                ],
+                "branding_modes": [
+                  "required_small"
+                ]
+              }
+            }
+          },
+          {
+            "path": "/emotion/piece/save",
+            "method": "POST",
+            "headers": {
+              "X-Piece-Renderer": "piece.rn_bitmap_renderer.ios.v2",
+              "X-Piece-Palette": "3",
+              "Cache-Control": "no-store"
+            },
+            "generatedIdempotencyHeader": true,
+            "body": {
+              "preview_id": "9f7d558c-d084-5732-70c7-0ff549b8b8f6",
+              "expected_preview_revision": 1,
+              "piece_text_hash": "c4a4d3aad56c0072456bb519258bc17d6a6cea5e66f2a11e30183ce7c1d80704",
+              "content_payload_hash": "6cdb73806bac5e79296ee1854c29daba20775f7463fd2f20fd5af4ae672cdc74",
+              "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
+              "visibility_scope": "private"
+            },
+            "status": 200,
+            "response": {
+              "piece_id": "9f7d558c-d084-5732-70c7-0ff549b8b8f6",
+              "saved_at": "2026-11-14T03:45:11.979+09:00",
+              "row_version": 2,
+              "consumption_id": "a90c2884-464e-4149-b3da-6ab43d2122bb",
+              "lifecycle_status": "saved",
+              "visibility_scope": "private",
+              "idempotency_replayed": false
+            }
+          },
+          {
+            "path": "/emotion/piece/9f7d558c-d084-5732-70c7-0ff549b8b8f6",
+            "method": "GET",
+            "headers": {
+              "Cache-Control": "no-store",
+              "X-Piece-Palette": "3"
+            },
+            "status": 200,
+            "response": {
+              "api_contract_version": "piece.api.v2",
+              "piece_contract_version": "piece.record.v2",
+              "export_contract_version": "piece.export_contract.v1",
+              "render_interface_version": "piece.render_interface.v1",
+              "render_reproducibility_version": "piece.render_reproducibility.v1",
+              "format_type": "short_essay",
+              "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。\n\n今は、私は怖い。",
+              "piece_text_hash": "c4a4d3aad56c0072456bb519258bc17d6a6cea5e66f2a11e30183ce7c1d80704",
+              "content_payload": {
+                "body_blocks": [
+                  "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。",
+                  "今は、私は怖い。"
+                ],
+                "format_type": "short_essay",
+                "language": "ja",
+                "meaning_contract_version": "piece.content_meaning.v1",
+                "safety_contract_version": "piece.public_safety_transformation.v1",
+                "schema_version": "piece.content_payload.v1",
+                "title": null
+              },
+              "content_payload_hash": "6cdb73806bac5e79296ee1854c29daba20775f7463fd2f20fd5af4ae672cdc74",
+              "visual_recipe": {
+                "aspect_ratio": "4:5",
+                "branding": {
+                  "branding_mark_id": "cocolon_text_mark",
+                  "branding_mark_version": 1,
+                  "branding_mode": "required_small"
+                },
+                "font_style": {
+                  "font_style_id": "system_readable",
+                  "font_style_version": 1
+                },
+                "format_type": "short_essay",
+                "language": "ja",
+                "layout_policy_version": "piece.long_text_layout.v1",
+                "template": {
+                  "template_id": "essay_frame",
+                  "template_version": 1
+                },
+                "theme": {
+                  "theme_id": "soft_paper",
+                  "theme_version": 1
+                },
+                "visual_catalog_version": "piece.visual_catalog.v1",
+                "visual_recipe_version": "piece.visual_recipe.v1"
+              },
+              "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
+              "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+              "piece_id": "9f7d558c-d084-5732-70c7-0ff549b8b8f6",
+              "public_id": "piece:9f7d558c-d084-5732-70c7-0ff549b8b8f6",
+              "lifecycle_status": "saved",
+              "visibility_scope": "private",
+              "row_version": 2,
+              "saved_at": "2026-11-14T03:45:11.979+09:00",
+              "content_status": "ready"
+            }
+          },
+          {
+            "path": "/emotion/piece/9f7d558c-d084-5732-70c7-0ff549b8b8f6/export",
+            "method": "GET",
+            "headers": {
+              "Cache-Control": "no-store",
+              "X-Piece-Palette": "3",
+              "X-Piece-Export-Receipt": "1"
+            },
+            "status": 200,
+            "response": {
+              "api_contract_version": "piece.api.v2",
+              "piece_contract_version": "piece.record.v2",
+              "export_contract_version": "piece.export_contract.v1",
+              "render_interface_version": "piece.render_interface.v1",
+              "render_reproducibility_version": "piece.render_reproducibility.v1",
+              "format_type": "short_essay",
+              "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。\n\n今は、私は怖い。",
+              "piece_text_hash": "c4a4d3aad56c0072456bb519258bc17d6a6cea5e66f2a11e30183ce7c1d80704",
+              "content_payload": {
+                "body_blocks": [
+                  "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。",
+                  "今は、私は怖い。"
+                ],
+                "format_type": "short_essay",
+                "language": "ja",
+                "meaning_contract_version": "piece.content_meaning.v1",
+                "safety_contract_version": "piece.public_safety_transformation.v1",
+                "schema_version": "piece.content_payload.v1",
+                "title": null
+              },
+              "content_payload_hash": "6cdb73806bac5e79296ee1854c29daba20775f7463fd2f20fd5af4ae672cdc74",
+              "visual_recipe": {
+                "aspect_ratio": "4:5",
+                "branding": {
+                  "branding_mark_id": "cocolon_text_mark",
+                  "branding_mark_version": 1,
+                  "branding_mode": "required_small"
+                },
+                "font_style": {
+                  "font_style_id": "system_readable",
+                  "font_style_version": 1
+                },
+                "format_type": "short_essay",
+                "language": "ja",
+                "layout_policy_version": "piece.long_text_layout.v1",
+                "template": {
+                  "template_id": "essay_frame",
+                  "template_version": 1
+                },
+                "theme": {
+                  "theme_id": "soft_paper",
+                  "theme_version": 1
+                },
+                "visual_catalog_version": "piece.visual_catalog.v1",
+                "visual_recipe_version": "piece.visual_recipe.v1"
+              },
+              "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
+              "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+              "piece_id": "9f7d558c-d084-5732-70c7-0ff549b8b8f6",
+              "public_id": "piece:9f7d558c-d084-5732-70c7-0ff549b8b8f6",
+              "lifecycle_status": "saved",
+              "visibility_scope": "private",
+              "row_version": 2,
+              "saved_at": "2026-11-14T03:45:11.979+09:00",
+              "content_status": "ready"
+            },
+            "response_headers": {
+              "cache-control": "no-store",
+              "content-length": "1864",
+              "content-type": "application/json"
+            }
+          }
+        ]
+      },
+      "projection": {
+        "source": "AR04 latest selected independent ADD / fictional public test source",
+        "api_source_ref": "dbb96aca197b76aa024b4a0ef68ce44e840a444d",
+        "product_source_ref": "c936d789789bc0e93a00f2ec9ddac1aef93b862e",
+        "harness_source_ref": "24f7ba8bbccb14bdbb14bd4ff67754a235e42347",
+        "original_saved_result_sha256": "b25eacc1139ff824eb31da3d7d4b38afdedd1e17b057dee1c6655f432589906c",
+        "saved_detail_sha256": "b3a351f22d9cfcdee4550d3fdf4350b94361b16629ba87077eaedd33b32cba61",
+        "canonical_artifact_sha256": "32dd484575090ced16c468613f8990585413b9a1de91bac874f2c10e0103f49d",
+        "preview_expiry": {
+          "original": "2026-11-14T03:55:11.739+09:00",
+          "test_only": "2099-01-01T00:10:00+00:00"
+        },
+        "quota": "Explicit synthetic Free state, not a live quota read",
+        "transport": "Existing five local API steps and ten synthetic session checks; no Auth/API/DB network",
+        "export_response": "Same admitted owner detail projected through existing export GET wire",
+        "fictional_source_already_public": "ai/tests/piece_v2/test_b05_natural_refined_saved_pipeline.py::_prepare_natural",
+        "selected_latest_answer_round": 2,
+        "model_generated_again": false,
+        "photos_or_share_called": false
+      }
+    },
+    {
+      "name": "normal_host_LATEST-ADD-3",
+      "source_case_id": "LATEST-ADD-3",
+      "tier": "free",
+      "saved_input": {
+        "savedInputId": "9aaeebdf-7e37-4bd0-81f2-2b2aeb139747",
+        "expectedUserId": "afab0042-f02a-4bfe-b972-0cdeb533d931",
+        "idempotencyKey": "ar04-latest-preview",
+        "supplementalAnswerIdentity": "d35bef0e-1851-43f3-a039-27c73afa1b2a"
+      },
+      "preview": {
+        "content_payload": {
+          "body_blocks": [
+            "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。",
+            "今は、私は寂しい。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "d25ef51125b421e5c36ec5d14996a3e5ea53f4165fed0317a4393d9e72a43739",
+        "eligible_formats": [
+          "short_essay"
+        ],
+        "expires_at": "2099-01-01T00:10:00+00:00",
+        "format_type": "short_essay",
+        "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。\n\n今は、私は寂しい。",
+        "piece_text_hash": "6272666bd0f24335c2ab4b271ea637e7ed46a2af1a06be282b781932f8621725",
+        "preview_id": "02f821e4-d405-3e5f-ec57-b96dbe901c1d",
+        "preview_revision": 1,
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+        "row_version": 1,
+        "visibility_scope": "private",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_small"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "soft_paper",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
+        "content_status": "ready",
+        "api_contract_version": "piece.api.v2",
+        "piece_contract_version": "piece.record.v2",
+        "quota": {
+          "contract_version": "piece.quota_consumption.v1",
+          "subscription_tier": "free",
+          "month_key": "2026-11",
+          "save_limit": 5,
+          "saved_count": 0,
+          "remaining_count": 5,
+          "can_save": true
+        },
+        "plan_capabilities": {
+          "format_selection": "fixed",
+          "theme_ids": [
+            "soft_paper",
+            "quiet_night"
+          ],
+          "aspect_ratios": [
+            "4:5"
+          ],
+          "branding_modes": [
+            "required_small"
+          ]
+        }
+      },
+      "save": {
+        "piece_id": "02f821e4-d405-3e5f-ec57-b96dbe901c1d",
+        "saved_at": "2026-11-14T03:45:14.053+09:00",
+        "row_version": 2,
+        "consumption_id": "016d1bae-1c29-4b01-96ad-05e69481b6e3",
+        "lifecycle_status": "saved",
+        "visibility_scope": "private",
+        "idempotency_replayed": false
+      },
+      "detail": {
+        "api_contract_version": "piece.api.v2",
+        "piece_contract_version": "piece.record.v2",
+        "export_contract_version": "piece.export_contract.v1",
+        "render_interface_version": "piece.render_interface.v1",
+        "render_reproducibility_version": "piece.render_reproducibility.v1",
+        "format_type": "short_essay",
+        "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。\n\n今は、私は寂しい。",
+        "piece_text_hash": "6272666bd0f24335c2ab4b271ea637e7ed46a2af1a06be282b781932f8621725",
+        "content_payload": {
+          "body_blocks": [
+            "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。",
+            "今は、私は寂しい。"
+          ],
+          "format_type": "short_essay",
+          "language": "ja",
+          "meaning_contract_version": "piece.content_meaning.v1",
+          "safety_contract_version": "piece.public_safety_transformation.v1",
+          "schema_version": "piece.content_payload.v1",
+          "title": null
+        },
+        "content_payload_hash": "d25ef51125b421e5c36ec5d14996a3e5ea53f4165fed0317a4393d9e72a43739",
+        "visual_recipe": {
+          "aspect_ratio": "4:5",
+          "branding": {
+            "branding_mark_id": "cocolon_text_mark",
+            "branding_mark_version": 1,
+            "branding_mode": "required_small"
+          },
+          "font_style": {
+            "font_style_id": "system_readable",
+            "font_style_version": 1
+          },
+          "format_type": "short_essay",
+          "language": "ja",
+          "layout_policy_version": "piece.long_text_layout.v1",
+          "template": {
+            "template_id": "essay_frame",
+            "template_version": 1
+          },
+          "theme": {
+            "theme_id": "soft_paper",
+            "theme_version": 1
+          },
+          "visual_catalog_version": "piece.visual_catalog.v1",
+          "visual_recipe_version": "piece.visual_recipe.v1"
+        },
+        "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
+        "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+        "piece_id": "02f821e4-d405-3e5f-ec57-b96dbe901c1d",
+        "public_id": "piece:02f821e4-d405-3e5f-ec57-b96dbe901c1d",
+        "lifecycle_status": "saved",
+        "visibility_scope": "private",
+        "row_version": 2,
+        "saved_at": "2026-11-14T03:45:14.053+09:00",
+        "content_status": "ready"
+      },
+      "transport": {
+        "owner": "afab0042-f02a-4bfe-b972-0cdeb533d931",
+        "steps": [
+          {
+            "path": "/emotion/piece/source-ref/9aaeebdf-7e37-4bd0-81f2-2b2aeb139747?supplemental_answer_identity=d35bef0e-1851-43f3-a039-27c73afa1b2a",
+            "method": "GET",
+            "headers": {
+              "X-Piece-Renderer": "piece.rn_bitmap_renderer.ios.v2",
+              "X-Piece-Palette": "3",
+              "Cache-Control": "no-store"
+            },
+            "status": 200,
+            "response": {
+              "source_input_id": "9aaeebdf-7e37-4bd0-81f2-2b2aeb139747",
+              "source_input_version": "emlis.current_input_bundle.v1",
+              "source_input_bundle_commitment": "sha256:beaaa7331f677a50ef6f96bb1dc9a9adcd2221d50bf8772a919f19738574497c",
+              "emlis_observation_stage": "refined_observation",
+              "emlis_observation_result_identity": "1d8b8f0e-3f3b-484a-9865-41c3f8b17a2e",
+              "question_need_decision_identity": "e04b7bb8-41b4-4cee-8694-53e6d2a8f173",
+              "supplemental_answer_identity": "d35bef0e-1851-43f3-a039-27c73afa1b2a"
+            }
+          },
+          {
+            "path": "/emotion/piece/preview",
+            "method": "POST",
+            "headers": {
+              "X-Piece-Renderer": "piece.rn_bitmap_renderer.ios.v2",
+              "X-Piece-Palette": "3",
+              "Idempotency-Key": "ar04-latest-preview"
+            },
+            "body": {
+              "source_ref": {
+                "source_input_id": "9aaeebdf-7e37-4bd0-81f2-2b2aeb139747",
+                "source_input_version": "emlis.current_input_bundle.v1",
+                "source_input_bundle_commitment": "sha256:beaaa7331f677a50ef6f96bb1dc9a9adcd2221d50bf8772a919f19738574497c",
+                "emlis_observation_stage": "refined_observation",
+                "emlis_observation_result_identity": "1d8b8f0e-3f3b-484a-9865-41c3f8b17a2e",
+                "question_need_decision_identity": "e04b7bb8-41b4-4cee-8694-53e6d2a8f173",
+                "supplemental_answer_identity": "d35bef0e-1851-43f3-a039-27c73afa1b2a"
+              },
+              "requested_format": null,
+              "visual_selection": {
+                "theme_id": null,
+                "aspect_ratio": null,
+                "branding_mode": null
+              }
+            },
+            "status": 200,
+            "response": {
+              "content_payload": {
+                "body_blocks": [
+                  "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。",
+                  "今は、私は寂しい。"
+                ],
+                "format_type": "short_essay",
+                "language": "ja",
+                "meaning_contract_version": "piece.content_meaning.v1",
+                "safety_contract_version": "piece.public_safety_transformation.v1",
+                "schema_version": "piece.content_payload.v1",
+                "title": null
+              },
+              "content_payload_hash": "d25ef51125b421e5c36ec5d14996a3e5ea53f4165fed0317a4393d9e72a43739",
+              "eligible_formats": [
+                "short_essay"
+              ],
+              "expires_at": "2099-01-01T00:10:00+00:00",
+              "format_type": "short_essay",
+              "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。\n\n今は、私は寂しい。",
+              "piece_text_hash": "6272666bd0f24335c2ab4b271ea637e7ed46a2af1a06be282b781932f8621725",
+              "preview_id": "02f821e4-d405-3e5f-ec57-b96dbe901c1d",
+              "preview_revision": 1,
+              "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+              "row_version": 1,
+              "visibility_scope": "private",
+              "visual_recipe": {
+                "aspect_ratio": "4:5",
+                "branding": {
+                  "branding_mark_id": "cocolon_text_mark",
+                  "branding_mark_version": 1,
+                  "branding_mode": "required_small"
+                },
+                "font_style": {
+                  "font_style_id": "system_readable",
+                  "font_style_version": 1
+                },
+                "format_type": "short_essay",
+                "language": "ja",
+                "layout_policy_version": "piece.long_text_layout.v1",
+                "template": {
+                  "template_id": "essay_frame",
+                  "template_version": 1
+                },
+                "theme": {
+                  "theme_id": "soft_paper",
+                  "theme_version": 1
+                },
+                "visual_catalog_version": "piece.visual_catalog.v1",
+                "visual_recipe_version": "piece.visual_recipe.v1"
+              },
+              "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
+              "content_status": "ready",
+              "api_contract_version": "piece.api.v2",
+              "piece_contract_version": "piece.record.v2",
+              "quota": {
+                "contract_version": "piece.quota_consumption.v1",
+                "subscription_tier": "free",
+                "month_key": "2026-11",
+                "save_limit": 5,
+                "saved_count": 0,
+                "remaining_count": 5,
+                "can_save": true
+              },
+              "plan_capabilities": {
+                "format_selection": "fixed",
+                "theme_ids": [
+                  "soft_paper",
+                  "quiet_night"
+                ],
+                "aspect_ratios": [
+                  "4:5"
+                ],
+                "branding_modes": [
+                  "required_small"
+                ]
+              }
+            }
+          },
+          {
+            "path": "/emotion/piece/save",
+            "method": "POST",
+            "headers": {
+              "X-Piece-Renderer": "piece.rn_bitmap_renderer.ios.v2",
+              "X-Piece-Palette": "3",
+              "Cache-Control": "no-store"
+            },
+            "generatedIdempotencyHeader": true,
+            "body": {
+              "preview_id": "02f821e4-d405-3e5f-ec57-b96dbe901c1d",
+              "expected_preview_revision": 1,
+              "piece_text_hash": "6272666bd0f24335c2ab4b271ea637e7ed46a2af1a06be282b781932f8621725",
+              "content_payload_hash": "d25ef51125b421e5c36ec5d14996a3e5ea53f4165fed0317a4393d9e72a43739",
+              "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
+              "visibility_scope": "private"
+            },
+            "status": 200,
+            "response": {
+              "piece_id": "02f821e4-d405-3e5f-ec57-b96dbe901c1d",
+              "saved_at": "2026-11-14T03:45:14.053+09:00",
+              "row_version": 2,
+              "consumption_id": "016d1bae-1c29-4b01-96ad-05e69481b6e3",
+              "lifecycle_status": "saved",
+              "visibility_scope": "private",
+              "idempotency_replayed": false
+            }
+          },
+          {
+            "path": "/emotion/piece/02f821e4-d405-3e5f-ec57-b96dbe901c1d",
+            "method": "GET",
+            "headers": {
+              "Cache-Control": "no-store",
+              "X-Piece-Palette": "3"
+            },
+            "status": 200,
+            "response": {
+              "api_contract_version": "piece.api.v2",
+              "piece_contract_version": "piece.record.v2",
+              "export_contract_version": "piece.export_contract.v1",
+              "render_interface_version": "piece.render_interface.v1",
+              "render_reproducibility_version": "piece.render_reproducibility.v1",
+              "format_type": "short_essay",
+              "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。\n\n今は、私は寂しい。",
+              "piece_text_hash": "6272666bd0f24335c2ab4b271ea637e7ed46a2af1a06be282b781932f8621725",
+              "content_payload": {
+                "body_blocks": [
+                  "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。",
+                  "今は、私は寂しい。"
+                ],
+                "format_type": "short_essay",
+                "language": "ja",
+                "meaning_contract_version": "piece.content_meaning.v1",
+                "safety_contract_version": "piece.public_safety_transformation.v1",
+                "schema_version": "piece.content_payload.v1",
+                "title": null
+              },
+              "content_payload_hash": "d25ef51125b421e5c36ec5d14996a3e5ea53f4165fed0317a4393d9e72a43739",
+              "visual_recipe": {
+                "aspect_ratio": "4:5",
+                "branding": {
+                  "branding_mark_id": "cocolon_text_mark",
+                  "branding_mark_version": 1,
+                  "branding_mode": "required_small"
+                },
+                "font_style": {
+                  "font_style_id": "system_readable",
+                  "font_style_version": 1
+                },
+                "format_type": "short_essay",
+                "language": "ja",
+                "layout_policy_version": "piece.long_text_layout.v1",
+                "template": {
+                  "template_id": "essay_frame",
+                  "template_version": 1
+                },
+                "theme": {
+                  "theme_id": "soft_paper",
+                  "theme_version": 1
+                },
+                "visual_catalog_version": "piece.visual_catalog.v1",
+                "visual_recipe_version": "piece.visual_recipe.v1"
+              },
+              "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
+              "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+              "piece_id": "02f821e4-d405-3e5f-ec57-b96dbe901c1d",
+              "public_id": "piece:02f821e4-d405-3e5f-ec57-b96dbe901c1d",
+              "lifecycle_status": "saved",
+              "visibility_scope": "private",
+              "row_version": 2,
+              "saved_at": "2026-11-14T03:45:14.053+09:00",
+              "content_status": "ready"
+            }
+          },
+          {
+            "path": "/emotion/piece/02f821e4-d405-3e5f-ec57-b96dbe901c1d/export",
+            "method": "GET",
+            "headers": {
+              "Cache-Control": "no-store",
+              "X-Piece-Palette": "3",
+              "X-Piece-Export-Receipt": "1"
+            },
+            "status": 200,
+            "response": {
+              "api_contract_version": "piece.api.v2",
+              "piece_contract_version": "piece.record.v2",
+              "export_contract_version": "piece.export_contract.v1",
+              "render_interface_version": "piece.render_interface.v1",
+              "render_reproducibility_version": "piece.render_reproducibility.v1",
+              "format_type": "short_essay",
+              "piece_text": "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。\n\n今は、私は寂しい。",
+              "piece_text_hash": "6272666bd0f24335c2ab4b271ea637e7ed46a2af1a06be282b781932f8621725",
+              "content_payload": {
+                "body_blocks": [
+                  "褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。",
+                  "今は、私は寂しい。"
+                ],
+                "format_type": "short_essay",
+                "language": "ja",
+                "meaning_contract_version": "piece.content_meaning.v1",
+                "safety_contract_version": "piece.public_safety_transformation.v1",
+                "schema_version": "piece.content_payload.v1",
+                "title": null
+              },
+              "content_payload_hash": "d25ef51125b421e5c36ec5d14996a3e5ea53f4165fed0317a4393d9e72a43739",
+              "visual_recipe": {
+                "aspect_ratio": "4:5",
+                "branding": {
+                  "branding_mark_id": "cocolon_text_mark",
+                  "branding_mark_version": 1,
+                  "branding_mode": "required_small"
+                },
+                "font_style": {
+                  "font_style_id": "system_readable",
+                  "font_style_version": 1
+                },
+                "format_type": "short_essay",
+                "language": "ja",
+                "layout_policy_version": "piece.long_text_layout.v1",
+                "template": {
+                  "template_id": "essay_frame",
+                  "template_version": 1
+                },
+                "theme": {
+                  "theme_id": "soft_paper",
+                  "theme_version": 1
+                },
+                "visual_catalog_version": "piece.visual_catalog.v1",
+                "visual_recipe_version": "piece.visual_recipe.v1"
+              },
+              "visual_recipe_hash": "25e3ed363f24da0f859e0f291d89e53a4905aca719dc6f37bb3e77d0d14e8924",
+              "renderer_version": "piece.rn_bitmap_renderer.ios.v2",
+              "piece_id": "02f821e4-d405-3e5f-ec57-b96dbe901c1d",
+              "public_id": "piece:02f821e4-d405-3e5f-ec57-b96dbe901c1d",
+              "lifecycle_status": "saved",
+              "visibility_scope": "private",
+              "row_version": 2,
+              "saved_at": "2026-11-14T03:45:14.053+09:00",
+              "content_status": "ready"
+            },
+            "response_headers": {
+              "cache-control": "no-store",
+              "content-length": "1864",
+              "content-type": "application/json"
+            }
+          }
+        ]
+      },
+      "projection": {
+        "source": "AR04 latest selected independent ADD / fictional public test source",
+        "api_source_ref": "dbb96aca197b76aa024b4a0ef68ce44e840a444d",
+        "product_source_ref": "c936d789789bc0e93a00f2ec9ddac1aef93b862e",
+        "harness_source_ref": "24f7ba8bbccb14bdbb14bd4ff67754a235e42347",
+        "original_saved_result_sha256": "e8ff91b19a92d86db7e7138863d21dc50daa7286f263df9cd263db4e1f1bac9e",
+        "saved_detail_sha256": "44444e453e4eed8efcd326d62b4f81e49c0229b74545f08d444099f3ea63c34d",
+        "canonical_artifact_sha256": "c360ace4b3f0c834f5cbfc6e0075548d99e76483cf4933678303a0c84316843f",
+        "preview_expiry": {
+          "original": "2026-11-14T03:55:13.674+09:00",
+          "test_only": "2099-01-01T00:10:00+00:00"
+        },
+        "quota": "Explicit synthetic Free state, not a live quota read",
+        "transport": "Existing five local API steps and ten synthetic session checks; no Auth/API/DB network",
+        "export_response": "Same admitted owner detail projected through existing export GET wire",
+        "fictional_source_already_public": "ai/tests/piece_v2/test_b05_natural_refined_saved_pipeline.py::_prepare_natural",
+        "selected_latest_answer_round": 3,
+        "model_generated_again": false,
+        "photos_or_share_called": false
+      }
+    }
+  ]
+}

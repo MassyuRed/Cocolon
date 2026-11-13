@@ -117,6 +117,52 @@ GETTER = '''
 '''
 
 
+def observe_candidate_rejections(instrumented, original):
+    # This asynchronous method crosses UIManager/main/candidate/worker queues.
+    # A per-call atomic owns only the first existing failure site; TLS would
+    # join unrelated requests or lose the worker's cause on the final queue.
+    match = re.search(r'(?m)^- \(void\)measureCandidateSnapshot:\(NSNumber \*\)tag[^;{}]*\n\{', original)
+    assert match, 'Missing candidate snapshot implementation'
+    start = match.start()
+    end = original.index('RCT_EXPORT_METHOD(inspect:', start)
+    method = original[start:end]
+    assert instrumented.count(method) == 1, 'Candidate method changed before observation'
+    markers = []
+    pattern = r'unavailable\(\);|failure->store\(true, std::memory_order_relaxed\);'
+    for occurrence in re.finditer(pattern, method):
+        offset = start + occurrence.start()
+        markers.append({'stage':len(markers)+1, 'offset':offset,
+            'original_line':original.count('\n',0,offset)+1,
+            'kind':'worker_failure' if occurrence.group(0).startswith('failure->') else 'unavailable',
+            'original_expression':occurrence.group(0)})
+    assert markers and len(markers) < 128, 'Missing or unbounded candidate failure map'
+    observed = method
+    for marker in reversed(markers):
+        offset = marker['offset'] - start
+        expression = marker['original_expression']
+        replacement = '(CocolonPieceCandidateDiagnosticMark(%d), %s);' % (marker['stage'], expression[:-1])
+        observed = observed[:offset] + replacement + observed[offset+len(expression):]
+    begin = """
+  const auto CocolonPieceCandidateDiagnosticStage = std::make_shared<std::atomic<int>>(0);
+  void (^CocolonPieceCandidateDiagnosticMark)(int) = ^(int stage) {
+    int unset = 0;
+    CocolonPieceCandidateDiagnosticStage->compare_exchange_strong(unset, stage, std::memory_order_relaxed);
+  };
+"""
+    method_open = match.group(0)[-2:]
+    assert method_open == '\n{'
+    opening = observed.index('{\n') + len('{\n')
+    observed = observed[:opening] + begin + observed[opening:]
+    reject = 'reject(@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE", @"Text measurement unavailable", nil);'
+    diagnostic = 'NSLog(@"PIECE_CANDIDATE_REJECTION tag=%lld font_size=%.17g stage=%d", tag.longLongValue, fontSize, CocolonPieceCandidateDiagnosticStage->load(std::memory_order_relaxed)); '
+    assert observed.count(reject) == 1, 'Unexpected candidate rejection owner'
+    observed = observed.replace(reject, diagnostic + reject, 1)
+    projection = observed.replace(begin, '', 1).replace(diagnostic, '', 1)
+    projection = re.sub(r'\(CocolonPieceCandidateDiagnosticMark\(\d+\), (unavailable\(\)|failure->store\(true, std::memory_order_relaxed\))\);', r'\1;', projection)
+    assert projection == method, 'Candidate observation changed original tokens'
+    return instrumented.replace(method, observed, 1), markers
+
+
 def build(original):
     assert hashlib.sha256(original.encode()).hexdigest() == EXPECTED_SHA256, 'Unexpected product preimage'
     assert 'CocolonPieceDiagnosticTLS' not in original
@@ -203,7 +249,8 @@ def build(original):
     declaration='// Read-only accessors added by the pinned RN patch; no KVC/private-ivar read.\n'
     assert instrumented.count(declaration)==1
     instrumented=instrumented.replace(declaration,PREFIX+'\n'+declaration,1)
-    return instrumented, {'preimage_sha256':EXPECTED_SHA256,'instrumented_sha256':hashlib.sha256(instrumented.encode()).hexdigest(),'markers':stages,'marker_count':len(stages),'tls_resets':3,'same_call_raster_observers':1,'same_call_v4_reference_observers':1,'first_v4_mismatch_observers':1,'scalar_tls_max_bytes':1024,'inspection_versions':[3,4],'postimage_is_test_instrumentation_only':True,'unchanged_original_lexical_projection':True}
+    instrumented, candidate_markers = observe_candidate_rejections(instrumented, original)
+    return instrumented, {'preimage_sha256':EXPECTED_SHA256,'instrumented_sha256':hashlib.sha256(instrumented.encode()).hexdigest(),'markers':stages,'marker_count':len(stages),'tls_resets':3,'same_call_raster_observers':1,'same_call_v4_reference_observers':1,'first_v4_mismatch_observers':1,'scalar_tls_max_bytes':1024,'inspection_versions':[3,4],'candidate_rejection_markers':candidate_markers,'candidate_rejection_marker_count':len(candidate_markers),'candidate_rejection_observation':'per_call_first_stage_atomic_and_scalar_NSLog_only','candidate_method_unchanged_original_lexical_projection':True,'postimage_is_test_instrumentation_only':True,'unchanged_original_lexical_projection':True}
 
 
 source=Path('ios/tempCocolon/PieceTextMetrics.mm')
@@ -224,17 +271,19 @@ PIECE_RN_CANVAS_PROFILE=output-grid-v4 PIECE_RN_ADMITTED_GROUP=1 node tests/nati
 PIECE_RN_CANVAS_PROFILE=output-grid-v4 PIECE_RN_EXPORT_GROUP=1 node tests/native/piece-rn-canvas-fixtures.cjs > tests/native/piece-rn-export-fixtures.json
 PIECE_RN_CANVAS_PROFILE=output-grid-v4 PIECE_RN_MODEL73_GROUP=1 node tests/native/piece-rn-canvas-fixtures.cjs > tests/native/piece-rn-model73-fixtures.json
 PIECE_RN_CANVAS_PROFILE=output-grid-v4 PIECE_RN_VISUAL_TRANSITION_GROUP=1 node tests/native/piece-rn-canvas-fixtures.cjs > tests/native/piece-rn-visual-transition-fixtures.json
+PIECE_RN_CANVAS_PROFILE=output-grid-v4 PIECE_RN_NORMAL_HOST_GROUP=1 node tests/native/piece-rn-canvas-fixtures.cjs > tests/native/piece-rn-normal-host-fixtures.json
 cat > tests/native/piece-rn-no-transport.js <<'JS'
-// Closed test-only transport for the one real-controller visual scenario.
-// No fetch/Auth implementation is imported. All other groups retain refusal.
+// Closed test-only transport for explicitly installed visual and normal-host scopes.
+// No fetch/Auth implementation is imported. Other groups retain refusal.
 let visualScope = null;
+let normalScope = null;
 const copy = value => JSON.parse(JSON.stringify(value));
 const canonical = value => Array.isArray(value) ? value.map(canonical) : value && typeof value === 'object'
   ? Object.fromEntries(Object.keys(value).sort().map(key => [key, canonical(value[key])])) : value;
 const same = (a, b) => JSON.stringify(canonical(a)) === JSON.stringify(canonical(b));
 const forbidden = () => { throw new Error('TRANSPORT_FORBIDDEN_IN_RENDER_TEST'); };
 export function installPieceVisualTransitionTransport(fixture) {
-  if (visualScope || fixture.mode !== 'parent_loading_remount') forbidden();
+  if (visualScope || normalScope || fixture.mode !== 'parent_loading_remount') forbidden();
   const scope = { fixture, api: [], sessions: [], pending: null, postSignal: null };
   visualScope = scope;
   const snapshot = () => ({ api: scope.api.map(copy), session_calls: scope.sessions.length,
@@ -247,7 +296,112 @@ export function installPieceVisualTransitionTransport(fixture) {
       scope.pending = null; scope.fixture = null; scope.postSignal = null; scope.api = []; scope.sessions = []; return result; },
   });
 }
+const exactKeys = (value, keys) => value && typeof value === 'object' && !Array.isArray(value) &&
+  same(Object.keys(value).sort(), keys.slice().sort());
+const validSignal = signal => signal && signal.aborted === false &&
+  typeof signal.addEventListener === 'function' && typeof signal.removeEventListener === 'function';
+function normalRequestCurrent(scope) {
+  const current = scope.current;
+  return !!current && validSignal(current.options.signal) &&
+    current.options.body === current.body && same(current.options.headers, current.headers);
+}
+export function installPieceNormalHostTransport(fixture) {
+  const transport = fixture?.transport;
+  if (visualScope || normalScope || !exactKeys(transport, ['owner', 'steps']) ||
+      typeof transport.owner !== 'string' || !transport.owner || !Array.isArray(transport.steps) ||
+      transport.steps.length !== 5) forbidden();
+  const steps = copy(transport.steps);
+  const routes = [
+    ['GET', /^\/emotion\/piece\/source-ref\/[0-9a-f-]{36}(?:\?supplemental_answer_identity=[0-9a-f-]{36})?$/],
+    ['POST', /^\/emotion\/piece\/preview$/], ['POST', /^\/emotion\/piece\/save$/],
+    ['GET', /^\/emotion\/piece\/[0-9a-f-]{36}$/], ['GET', /^\/emotion\/piece\/[0-9a-f-]{36}\/export$/],
+  ];
+  for (const [index, step] of steps.entries()) {
+    const generated = index === 2;
+    const keys = ['path', 'method', 'headers', 'status', 'response',
+      ...(step.method === 'GET' ? [] : ['body']),
+      ...(Object.prototype.hasOwnProperty.call(step, 'response_headers') ? ['response_headers'] : []),
+      ...(generated ? ['generatedIdempotencyHeader'] : [])];
+    if (!exactKeys(step, keys) || step.method !== routes[index][0] || !routes[index][1].test(step.path) ||
+        !step.headers || typeof step.headers !== 'object' || Array.isArray(step.headers) ||
+        !Object.values(step.headers).every(value => typeof value === 'string') ||
+        !Number.isInteger(step.status) || step.status < 100 || step.status > 599 ||
+        (generated && (step.generatedIdempotencyHeader !== true || Object.prototype.hasOwnProperty.call(step.headers, 'Idempotency-Key'))) ||
+        (step.response_headers !== undefined && (!step.response_headers || typeof step.response_headers !== 'object' ||
+          Array.isArray(step.response_headers) || !Object.values(step.response_headers).every(value => typeof value === 'string')))) forbidden();
+  }
+  const scope = { transport, original: copy(transport), owner: transport.owner, steps,
+    index: 0, phase: 'before', api: [], sessions: [], current: null, saveKey: null, closed: false };
+  normalScope = scope;
+  const snapshot = () => scope.closed ? { api: [], session_calls: 0, scope_closed: true, cleared: true } : {
+    api: scope.api.map(record => ({ ...record })), session_calls: scope.sessions.length,
+    session_owners_match: scope.sessions.every(owner => owner === scope.owner),
+    fixture_headers_intact: same(scope.transport, scope.original),
+    before_after_key_intact: scope.api.every(record => record.before_key_intact && record.after_key_intact),
+    save_key_generated_valid: typeof scope.saveKey === 'string' && /^piece-save-[0-9a-f]{32}$/.test(scope.saveKey),
+    complete: scope.index === scope.steps.length && scope.phase === 'before', scope_closed: false,
+  };
+  return Object.freeze({ snapshot, close: () => {
+    const result = snapshot();
+    if (normalScope === scope) normalScope = null;
+    scope.closed = true; scope.transport = null; scope.original = null; scope.owner = null;
+    scope.steps = []; scope.api = []; scope.sessions = []; scope.current = null; scope.saveKey = null;
+    return { ...result, scope_closed: true, cleared: true };
+  } });
+}
+function normalAccessToken(expectedUserId) {
+  const scope = normalScope;
+  if (!scope || scope.closed || expectedUserId !== scope.owner || scope.index >= scope.steps.length ||
+      !same(scope.transport, scope.original)) throw new Error('AUTH_FORBIDDEN_IN_RENDER_TEST');
+  if (scope.phase === 'before') {
+    scope.phase = 'request';
+  } else if (scope.phase === 'after' && normalRequestCurrent(scope)) {
+    const record = scope.api[scope.index];
+    record.after_key_intact = true; record.session_count = 2;
+    scope.index++; scope.phase = 'before'; scope.current = null;
+  } else throw new Error('AUTH_FORBIDDEN_IN_RENDER_TEST');
+  scope.sessions.push(expectedUserId);
+  return 'synthetic-native-normal-host-session';
+}
+function normalApiFetch(path, options) {
+  const scope = normalScope, step = scope?.steps[scope.index];
+  if (!scope || scope.closed || scope.phase !== 'request' || !step ||
+      !same(scope.transport, scope.original) || scope.sessions.length !== scope.index * 2 + 1) forbidden();
+  const preview = scope.index === 1, generated = step.generatedIdempotencyHeader === true;
+  const keys = ['method', 'auth', 'expectedUserId', 'headers', 'body', 'signal', ...(preview ? ['timeoutMs'] : [])];
+  const headers = { ...step.headers };
+  if (generated) {
+    const key = options?.headers?.['Idempotency-Key'];
+    if (typeof key !== 'string' || !/^piece-save-[0-9a-f]{32}$/.test(key) ||
+        scope.steps.some(value => value.headers['Idempotency-Key'] === key)) forbidden();
+    headers['Idempotency-Key'] = key;
+  }
+  let body;
+  if (step.method === 'GET') {
+    if (options.body !== undefined) forbidden();
+  } else {
+    try { body = JSON.parse(options.body); } catch { forbidden(); }
+    if (!same(body, step.body)) forbidden();
+  }
+  if (!exactKeys(options, keys) || path !== step.path || options.method !== step.method || options.auth !== true ||
+      options.expectedUserId !== scope.owner || !same(options.headers, headers) || !validSignal(options.signal) ||
+      (preview && options.timeoutMs !== 250000)) forbidden();
+  if (generated) scope.saveKey = headers['Idempotency-Key'];
+  scope.current = { options, headers: copy(headers), body: options.body };
+  scope.api.push({ path, method: options.method, session_count: 1, before_key_intact: true, after_key_intact: false });
+  scope.phase = 'json';
+  const responseHeaders = Object.fromEntries(Object.entries(step.response_headers || {}).map(([key, value]) => [key.toLowerCase(), value]));
+  return { status: step.status, headers: { get: name => responseHeaders[String(name).toLowerCase()] ?? null },
+    json: async () => {
+      if (normalScope !== scope || scope.phase !== 'json' || !normalRequestCurrent(scope)) forbidden();
+      scope.phase = 'after'; return copy(step.response);
+    } };
+}
+// The actual runtime/context modules may import this function, but this
+// isolated host never mounts their networked Providers or opens bootstrap IO.
+export const apiGet = forbidden;
 export async function getAccessToken(expectedUserId) {
+  if (normalScope) return normalAccessToken(expectedUserId);
   const scope = visualScope;
   if (!scope || expectedUserId !== scope.fixture.controller_context.expectedUserId || scope.sessions.length >= 4)
     throw new Error('AUTH_FORBIDDEN_IN_RENDER_TEST');
@@ -255,6 +409,7 @@ export async function getAccessToken(expectedUserId) {
   return 'synthetic-native-visual-session';
 }
 export async function apiFetch(path, options = {}) {
+  if (normalScope) return normalApiFetch(path, options);
   const scope = visualScope;
   if (!scope || scope.api.length >= 2) forbidden();
   const fixture = scope.fixture, context = fixture.controller_context, post = scope.api.length === 0;
@@ -275,6 +430,17 @@ export async function apiFetch(path, options = {}) {
   return new Promise(resolve => { scope.pending = resolve; });
 }
 JS
+cat > tests/native/piece-rn-no-supabase.js <<'JS'
+// Module evaluation must not construct the application's persisted Auth client.
+// Both import forms resolve; every subsequent access remains forbidden.
+const refuse = () => { throw new Error('SUPABASE_FORBIDDEN_IN_RENDER_TEST'); };
+export const supabase = new Proxy(Object.create(null), {
+  get: refuse, set: refuse, has: refuse, ownKeys: refuse,
+  getOwnPropertyDescriptor: refuse, defineProperty: refuse, deleteProperty: refuse,
+  getPrototypeOf: refuse, setPrototypeOf: refuse, preventExtensions: refuse,
+});
+export default supabase;
+JS
 cat > metro.piece-canvas.config.js <<'JS'
 const path = require('node:path');
 const { mergeConfig } = require('@react-native/metro-config');
@@ -283,6 +449,9 @@ module.exports = mergeConfig(config, { resolver: { resolveRequest(context, name,
   const resolved = context.resolveRequest(context, name, platform);
   if (resolved.type === 'sourceFile' && resolved.filePath === path.join(__dirname, 'lib/apiClient.js')) {
     return { type: 'sourceFile', filePath: path.join(__dirname, 'tests/native/piece-rn-no-transport.js') };
+  }
+  if (resolved.type === 'sourceFile' && resolved.filePath === path.join(__dirname, 'lib/supabase.ts')) {
+    return { type: 'sourceFile', filePath: path.join(__dirname, 'tests/native/piece-rn-no-supabase.js') };
   }
   return resolved;
 } } });
@@ -350,11 +519,14 @@ collect() {
   container=$(xcrun simctl get_app_container "$DEVICE" org.reactjs.native.example.tempCocolon data 2>/dev/null || true)
   if [ -n "$container" ] && [ -d "$container/Documents/piece-rn-canvas" ]; then
     cp -R "$container/Documents/piece-rn-canvas" "$OUT/evidence"
-    cat "$OUT/evidence/results.json"
+    cat "$OUT/evidence/normal-host-results.json"
   fi
   if [ -d "$OUT/result.xcresult" ]; then
     xcrun xcresulttool get --legacy --path "$OUT/result.xcresult" --format json 2>&1 | tee -a "$OUT/xcodebuild.log" || true
   fi
+  # Collect only this scalar rejection prefix before the simulator stops.
+  mkdir -p "$OUT/evidence"
+  xcrun simctl spawn "$DEVICE" log show --style json --last 5m --predicate 'eventMessage BEGINSWITH "PIECE_CANDIDATE_REJECTION "' > "$OUT/evidence/candidate-rejections.json" 2> "$OUT/evidence/candidate-rejections.stderr" || true
   xcrun simctl shutdown "$DEVICE" >/dev/null 2>&1 || true
 }
 trap collect EXIT
@@ -362,7 +534,7 @@ export SKIP_BUNDLING=1 RCT_NEW_ARCH_ENABLED=0
 XCODE=(xcodebuild -quiet -jobs 3 -workspace tempCocolon.xcworkspace -scheme tempCocolon \
   -configuration Debug -destination "platform=iOS Simulator,id=$DEVICE" \
   -derivedDataPath "$OUT/build" \
-  -parallel-testing-enabled NO -only-testing:tempCocolonTests/PieceRNCanvasTests \
+  -parallel-testing-enabled NO -only-testing:tempCocolonTests/PieceRNCanvasTests/testRecordedSavedInputHostSaveOwnerAndExportWithRealReactNative \
   CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY= \
   ONLY_ACTIVE_ARCH=YES ENABLE_DEBUG_DYLIB=NO)
 # Compile before booting the simulator, so its memory/CPU does not compete

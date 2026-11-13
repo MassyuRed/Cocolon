@@ -851,10 +851,29 @@ RCT_EXPORT_METHOD(captureBitmap:(nonnull NSNumber *)tag report:(NSDictionary *)r
       NSString *name=[raw[@"name"]stringByAppendingString:@".png"];
       BOOL written=[UIImagePNGRepresentation(image)writeToFile:[PieceEvidenceDirectory()stringByAppendingPathComponent:name]atomically:YES];
       if(written)report[@"png"]=name;else valid=NO;
-      if([raw[@"evidence_set"]isEqual:@"export_saved"]||[raw[@"evidence_set"]isEqual:@"model73_export"]){
+      if([raw[@"evidence_set"]isEqual:@"export_saved"]||[raw[@"evidence_set"]isEqual:@"model73_export"]||[raw[@"evidence_set"]isEqual:@"normal_host_export"]){
         NSString *uri=raw[@"export_capture_uri"],*cache=[NSSearchPathForDirectoriesInDomains(NSCachesDirectory,NSUserDomainMask,YES).firstObject stringByAppendingPathComponent:@"piece-capture"];
         NSString *path=[uri hasPrefix:@"file://"]?[uri substringFromIndex:7]:uri;
         BOOL owned=[path isKindOfClass:NSString.class]&&[[path stringByDeletingLastPathComponent]isEqual:cache]&&[[path lastPathComponent]hasPrefix:@"piece-"]&&[path.pathExtension isEqual:@"png"];
+        // The actual export job has already copied and released its raw
+        // capture. Only this normal-host group reads the surviving owned copy.
+        if([raw[@"evidence_set"]isEqual:@"normal_host_export"]){
+          NSDictionary *artifact=[raw[@"recorded_artifact"]isKindOfClass:NSDictionary.class]?raw[@"recorded_artifact"]:nil;
+          NSDictionary *recipe=[artifact[@"visual_recipe"]isKindOfClass:NSDictionary.class]?artifact[@"visual_recipe"]:nil;
+          NSString *pieceID=raw[@"host_linkage"][@"export_piece_id"],*recipeHash=artifact[@"visual_recipe_hash"],*ratio=recipe[@"aspect_ratio"];
+          BOOL identity=[pieceID isKindOfClass:NSString.class]&&[recipeHash isKindOfClass:NSString.class]&&[ratio isKindOfClass:NSString.class]&&
+            [[NSPredicate predicateWithFormat:@"SELF MATCHES %@",@"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"]evaluateWithObject:pieceID]&&
+            ![pieceID isEqual:@"00000000-0000-0000-0000-000000000000"]&&
+            [[NSPredicate predicateWithFormat:@"SELF MATCHES %@",@"^[0-9a-f]{64}$"]evaluateWithObject:recipeHash]&&[@[@"4:5",@"9:16"]containsObject:ratio];
+          NSString *exportRoot=[[cache stringByDeletingLastPathComponent]stringByAppendingPathComponent:@"piece-export"];
+          NSString *directory=[path isKindOfClass:NSString.class]?[path stringByDeletingLastPathComponent]:nil,*session=directory.lastPathComponent;
+          NSString *filename=identity?[NSString stringWithFormat:@"cocolon-piece_%@_%@_%@.png",[pieceID stringByReplacingOccurrencesOfString:@"-" withString:@""],
+            [recipeHash substringToIndex:12],[ratio stringByReplacingOccurrencesOfString:@":" withString:@"x"]]:nil;
+          owned=identity&&[path isKindOfClass:NSString.class]&&[path isAbsolutePath]&&[path isEqual:[path stringByStandardizingPath]]&&
+            [session isKindOfClass:NSString.class]&&[[NSPredicate predicateWithFormat:@"SELF MATCHES %@",@"^[0-9a-f]{32}$"]evaluateWithObject:session]&&
+            [[directory stringByDeletingLastPathComponent]isEqual:exportRoot]&&[[path lastPathComponent]isEqual:filename]&&
+            [path isEqual:[[exportRoot stringByAppendingPathComponent:session]stringByAppendingPathComponent:filename]];
+        }
         NSData *bytes=owned?[NSData dataWithContentsOfFile:path]:nil;
         UIImage *exportImage=bytes?[UIImage imageWithData:bytes]:nil;
         NSData *expected=PieceExportRGBA(image),*actual=PieceExportRGBA(exportImage);
@@ -1335,6 +1354,77 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
         for(NSString *key in @[@"recorded_artifact",@"blocks",@"rows",@"font_size",@"width",@"height",@"colors",@"branding_mode"])XCTAssertEqualObjects(preview[key],other[key]);
         NSString *previewPNG=[preview[@"png"]isKindOfClass:NSString.class]?preview[@"png"]:nil,*otherPNG=[other[@"png"]isKindOfClass:NSString.class]?other[@"png"]:nil;
         if(previewPNG&&otherPNG){NSData *a=[NSData dataWithContentsOfFile:[PieceEvidenceDirectory()stringByAppendingPathComponent:previewPNG]],*b=[NSData dataWithContentsOfFile:[PieceEvidenceDirectory()stringByAppendingPathComponent:otherPNG]];XCTAssertEqualObjects(a,b);}
+      }
+    }
+  }@finally{[bridge invalidate];}
+}
+
+- (void)testRecordedSavedInputHostSaveOwnerAndExportWithRealReactNative {
+  self.resultModule=[PieceCanvasTest new];self.resultModule.reports=[NSMutableArray new];self.resultModule.reportFilename=@"normal-host-results.json";
+  XCTestExpectation *done=[self expectationWithDescription:@"Recorded input host save, fresh owner read and actual export group"];
+  self.resultModule.completed=^{[done fulfill];};RCTBridge *bridge=[[RCTBridge alloc]initWithDelegate:self launchOptions:nil];
+  @try {
+    RCTRootView *root=[[RCTRootView alloc]initWithBridge:bridge moduleName:@"PieceCanvasCases" initialProperties:@{@"pieceGroup":@"normalHost"}];
+    UIWindow *window=[[[UIApplication sharedApplication]delegate]window];window.rootViewController.view=root;[window makeKeyAndVisible];
+    [self waitForExpectations:@[done] timeout:90];XCTAssertNil(self.resultModule.reportPersistenceError);
+    NSArray *names=@[@"normal_host_preview_LATEST-ADD-2",@"normal_host_saved_LATEST-ADD-2",@"normal_host_export_LATEST-ADD-2",
+      @"normal_host_preview_LATEST-ADD-3",@"normal_host_saved_LATEST-ADD-3",@"normal_host_export_LATEST-ADD-3"];
+    NSDictionary *expectedBlockCounts=@{@"LATEST-ADD-2":@2,@"LATEST-ADD-3":@2};
+    NSArray *canonicalKeys=@[@"format_type",@"piece_text",@"piece_text_hash",@"content_payload",@"content_payload_hash",@"visual_recipe",@"visual_recipe_hash",@"renderer_version"];
+    NSArray *hashKeys=@[@"piece_text_hash",@"content_payload_hash",@"visual_recipe_hash"];
+    NSPredicate *hex64=[NSPredicate predicateWithFormat:@"SELF MATCHES %@",@"^[0-9a-f]{64}$"];
+    XCTAssertEqual(self.resultModule.reports.count,6);XCTAssertEqualObjects([self.resultModule.reports valueForKey:@"name"],names);
+    for(NSDictionary *report in self.resultModule.reports){
+      BOOL preview=[report[@"evidence_set"]isEqual:@"normal_host_preview"],saved=[report[@"evidence_set"]isEqual:@"normal_host_saved"],exported=[report[@"evidence_set"]isEqual:@"normal_host_export"];
+      NSDictionary *artifact=[report[@"recorded_artifact"]isKindOfClass:NSDictionary.class]?report[@"recorded_artifact"]:nil;
+      NSDictionary *bitmap=[report[@"bitmap_canvas"]isKindOfClass:NSDictionary.class]?report[@"bitmap_canvas"]:nil;
+      NSDictionary *linkage=[report[@"host_linkage"]isKindOfClass:NSDictionary.class]?report[@"host_linkage"]:nil;
+      NSArray *blocks=[report[@"blocks"]isKindOfClass:NSArray.class]?report[@"blocks"]:nil;
+      XCTAssertTrue(preview||saved||exported);XCTAssertNotNil(artifact);XCTAssertEqual(artifact.count,8u);XCTAssertNotNil(blocks);XCTAssertNotNil(linkage);
+      if(artifact)XCTAssertEqualObjects([NSSet setWithArray:artifact.allKeys],[NSSet setWithArray:canonicalKeys]);
+      for(NSString *key in hashKeys){id value=artifact[key];XCTAssertTrue([value isKindOfClass:NSString.class]);if([value isKindOfClass:NSString.class])XCTAssertTrue([hex64 evaluateWithObject:value],@"%@",key);}
+      XCTAssertEqualObjects(report[@"renderer_version"],@"piece.rn_bitmap_renderer.ios.v2");XCTAssertEqualObjects(artifact[@"renderer_version"],@"piece.rn_bitmap_renderer.ios.v2");
+      XCTAssertEqualObjects(report[@"candidate_profile"],@"piece.rn_bitmap_preview.prototype.v1");
+      XCTAssertLessThan([report[@"elapsed_ms"]doubleValue],8000,@"%@",report);
+      XCTAssertEqualObjects(report[@"phase"],@"native_checked",@"%@",report);XCTAssertEqualObjects(report[@"body_preserved"],@YES);
+      XCTAssertEqualObjects(blocks,artifact[@"content_payload"][@"body_blocks"]);XCTAssertEqualObjects(artifact[@"piece_text"],[blocks componentsJoinedByString:@"\n\n"]);
+      NSNumber *expectedBlocks=[report[@"source_case_id"]isKindOfClass:NSString.class]?expectedBlockCounts[report[@"source_case_id"]]:nil;
+      NSString *expectedName=[NSString stringWithFormat:@"%@_%@",report[@"evidence_set"],report[@"source_case_id"]];
+      XCTAssertNotNil(expectedBlocks);XCTAssertEqualObjects(report[@"name"],expectedName);
+      if(expectedBlocks)XCTAssertEqual(blocks.count,expectedBlocks.unsignedIntegerValue);
+      XCTAssertEqualObjects(report[@"state_can_save"],@NO);XCTAssertEqualObjects(report[@"state_can_export"],@NO);
+      XCTAssertEqualObjects(report[@"native_canvas_valid"],@YES);XCTAssertEqualObjects(report[@"bitmap_all_cells_equal"],@YES);XCTAssertEqualObjects(report[@"capture_error"],@NO);
+      XCTAssertEqualObjects(bitmap[@"version"],@"piece.native_bitmap_canvas.v1");XCTAssertEqualObjects(bitmap[@"profile"],@"piece.rn_bitmap_preview.prototype.v1");XCTAssertEqualObjects(bitmap[@"checked"],@YES);
+      XCTAssertEqualObjects(report[@"branding"],@YES);NSMutableArray *texts=[report[@"rows"]mutableCopy];[texts addObject:@"Emlis"];XCTAssertEqualObjects(report[@"native_texts"],texts);
+      XCTAssertEqualObjects(report[@"save_fit_current"],preview?@YES:@NO);XCTAssertEqualObjects(report[@"save_fit_wrong_token_current"],@NO);XCTAssertEqualObjects(report[@"save_fit_handle_keys"],preview?@[@"isCurrent"]:@[]);
+      XCTAssertEqualObjects(linkage[@"recorded_artifact_matches"],@YES);
+      if(preview){for(NSString *key in @[@"source_ready",@"pre_fit_save_blocked",@"save_admitted"])XCTAssertEqualObjects(linkage[key],@YES,@"%@",key);}
+      if(saved){for(NSString *key in @[@"saved_receipt_matches",@"navigation_body_free",@"fresh_owner_read",@"owner_record_matches",@"native_modal_dismissal_awaited"])XCTAssertEqualObjects(linkage[key],@YES,@"%@",key);
+        NSArray *events=report[@"host_events"];NSUInteger close=[events indexOfObjectPassingTest:^BOOL(NSDictionary *e,NSUInteger i,BOOL *stop){return [e[@"event"]isEqual:@"preview_close_requested"];}];
+        NSUInteger navigate=[events indexOfObjectPassingTest:^BOOL(NSDictionary *e,NSUInteger i,BOOL *stop){return [e[@"event"]isEqual:@"navigate_after_preview_dismiss"];}];
+        NSUInteger mount=[events indexOfObjectPassingTest:^BOOL(NSDictionary *e,NSUInteger i,BOOL *stop){return [e[@"event"]isEqual:@"mount"]&&[e[@"stage"]isEqual:@"saved"];}];
+        XCTAssertNotEqual(close,NSNotFound);XCTAssertNotEqual(navigate,NSNotFound);XCTAssertNotEqual(mount,NSNotFound);XCTAssertLessThan(close,navigate);XCTAssertLessThan(navigate,mount);}
+      if(exported){
+        for(NSString *key in @[@"fresh_export_read",@"export_target_current",@"actual_job_capture"])XCTAssertEqualObjects(linkage[key],@YES,@"%@",key);
+        id sha=linkage[@"export_asset_sha256"];XCTAssertTrue([sha isKindOfClass:NSString.class]);if([sha isKindOfClass:NSString.class])XCTAssertTrue([hex64 evaluateWithObject:sha]);
+        XCTAssertEqualObjects(report[@"export_target_current"],@YES);XCTAssertEqualObjects(report[@"export_rejected"],@NO);XCTAssertEqualObjects(report[@"export_target_after"],@YES);
+        XCTAssertEqualObjects(report[@"export_pixels_equal"],@YES);XCTAssertEqualObjects(report[@"export_file_saved"],@YES);
+        XCTAssertTrue([linkage[@"export_piece_id"]isKindOfClass:NSString.class]);
+        NSDictionary *transport=[report[@"transport"]isKindOfClass:NSDictionary.class]?report[@"transport"]:nil;XCTAssertNotNil(transport);
+        XCTAssertEqualObjects(transport[@"session_calls"],@10);XCTAssertTrue([transport[@"api"]isKindOfClass:NSArray.class]);XCTAssertEqual([transport[@"api"]count],5u);
+        for(NSString *key in @[@"complete",@"scope_closed",@"cleared",@"before_after_key_intact",@"session_owners_match",@"fixture_headers_intact",@"save_key_generated_valid"])XCTAssertEqualObjects(transport[key],@YES,@"%@",key);
+      }
+      XCTAssertEqual([report[@"width"]integerValue],1080);XCTAssertEqual([report[@"height"]integerValue],1350);
+      for(NSString *key in @[@"png",@"natural_reference_png"]){id filename=report[key];XCTAssertTrue([filename isKindOfClass:NSString.class]);
+        if([filename isKindOfClass:NSString.class]){UIImage *image=[UIImage imageWithContentsOfFile:[PieceEvidenceDirectory()stringByAppendingPathComponent:filename]];XCTAssertNotNil(image);XCTAssertNotEqual(image.CGImage,NULL);
+          if(image.CGImage){XCTAssertEqual(CGImageGetWidth(image.CGImage),1080u);XCTAssertEqual(CGImageGetHeight(image.CGImage),1350u);}}}
+    }
+    for(NSUInteger i=0;i<6 && i+2<self.resultModule.reports.count;i+=3){NSDictionary *preview=self.resultModule.reports[i];
+      for(NSUInteger j=1;j<=2;j++){NSDictionary *other=self.resultModule.reports[i+j];
+        for(NSString *key in @[@"recorded_artifact",@"blocks",@"rows",@"font_size",@"width",@"height",@"colors",@"branding_mode"])XCTAssertEqualObjects(preview[key],other[key]);
+        for(NSString *key in hashKeys)XCTAssertEqualObjects(preview[@"recorded_artifact"][key],other[@"recorded_artifact"][key]);
+        NSString *previewPNG=[preview[@"png"]isKindOfClass:NSString.class]?preview[@"png"]:nil,*otherPNG=[other[@"png"]isKindOfClass:NSString.class]?other[@"png"]:nil;
+        if(previewPNG&&otherPNG){NSData *a=[NSData dataWithContentsOfFile:[PieceEvidenceDirectory()stringByAppendingPathComponent:previewPNG]],*b=[NSData dataWithContentsOfFile:[PieceEvidenceDirectory()stringByAppendingPathComponent:otherPNG]];XCTAssertNotNil(a);XCTAssertNotNil(b);XCTAssertEqualObjects(a,b);}
       }
     }
   }@finally{[bridge invalidate];}
