@@ -29,7 +29,7 @@ Mashは、根拠のある仮説を示し、本人が違う部分を説明して�
 
 旧Q1／Q3には、発行済みの問いへの本人回答から意味を追加・訂正・撤回する機構がある。Premiumの解釈フレームには、特定の仮の理解を確認・修正・不使用とし、本人の訂正を保存する機構がある。これらを不存在や一からの新規開発として扱わない。
 
-一方、既存frameの修正は特定の過去の理解を対象にし、保存直後に返答本文を自動再生成するものではない。現natural自身は初回FINAL／COMPLETEDであり、通常応答の任意の誤解を本人が説明して訂正する入口・反映の一往復は未接続である。既存の「理解を直す」があることを、新しい通常応答後の訂正導線が完成している証拠にはしない。既存source／版・訂正／撤回の資産を踏まえて接続を設計する。
+一方、既存frameの修正は特定の過去の理解を対象にし、保存直後に返答本文を自動再生成するものではない。11/12時点のnaturalは初回FINAL／COMPLETEDであり、この一往復は未接続だった。11/13に下記の二入力導線をコード接続したが、実4Bの意味保持と通常反映はまだ未達である。既存の「理解を直す」があることを、新しい通常応答後の訂正導線が完成している証拠にはしない。既存source／版・訂正／撤回の資産を踏まえて接続を設計する。
 
 ### 維持する決定と、今回確定しないこと
 
@@ -41,7 +41,7 @@ Mashは、根拠のある仮説を示し、本人が違う部分を説明して�
 
 同じ応答画面内に二入力formを置き、対象はcurrent応答event ID・thread revisionと、その本文に一度だけ出現するexact抜粋で指定する。両欄は各2,000文字以内。本人の送信操作で説明を別source保存し、具体説明がある場合は既存natural ownerで読み直した本文を保存する。単なる『違う』等でも異議は保存するが、NEEDS_DETAILのまま旧対象をcurrentへ使わず、追加説明をformで案内する。空欄の指摘・説明追加はAIのQUESTIONではなく、既存3問と受取ON/OFF・入力quotaを変えない。非空欄を意味のRESOLVEDや本人確認済みへ昇格しない。
 
-UI／API／保存・同版再読・履歴へのコード接続は[補助経路§9.28](../Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-post-reply-correction-20261113)。今回のAPI147／RN47成功は合成provider・隔離SQLの確認。実4Bの意味反映品質・live／端末は未確認。Premium本人フレーム、Analysis／Pieceへの訂正利用は後続の構築対象とし、既存Q1回答やframe feedbackで接続完了を代用しない。新料金・問数・quotaを作らない。
+UI／API／保存・同版再読・履歴へのコード接続は[補助経路§9.28](../Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-post-reply-correction-20261113)。今回のAPI147／RN47成功は合成provider・隔離SQLの確認。実4Bは後続[§9.29](../Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-post-reply-correction-actual4b-20261113)で確認し、同source保存・非生成再読は成立したが、意味保持は未達。生成指示候補を撤回し元実装を維持する。live／端末は未確認。Premium本人フレーム、Analysis／Pieceへの訂正利用は後続の構築対象とし、既存Q1回答やframe feedbackで接続完了を代用しない。新料金・問数・quotaを作らない。
 
 <a id="emlis-question-policy-20261112"></a>
 ## 2026-11-12 決定 — 全プラン最大3問・本人が選べる問い・回答後の応答

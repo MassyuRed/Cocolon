@@ -421,7 +421,7 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 | ID | 実施内容・既存残件 | 具体的な完了確認 | 依存／状態 |
 |---|---|---|---|
 | AR-01 | 現naturalの主体・所有者・否定・時点・留保を、旧失敗・意味比較・共通原因分析で改善。EM-01a/b | 現6境界と正常な短文／省略で、同入力の誤読を解消または明確に減らし、自然さ・別題材・既成功・保存再読を保持。検出増加／無出力だけでは完了しない | 継続中。新24実生成の4版は通常不採用。c6555fd5で疑問符なしの確認質問の保存抜けを修復、250局所PASS。同24rawは旧24保存→新22保存／2拒否、受理本文不変。全体の意味修復は未完 |
-| AR-02 | 現naturalの任意問い・回答・訂正・撤回・frameと、完了応答後の具体的な本人訂正。11/12採用仕様は§6.1。EM-02a/b、03b | 全plan最大3問、初期ON・前回選択保持、短い受け止め→回答後応答、0／1／2問終了・skip・上限時の不明保持、訂正対象と本人説明の二つの入力、説明不足時の未確定保持、対象だけ更新、撤回後の残存意味、同版再読、既存参照権利 | AR-01の全一般品質完成待ちにはしない。新Q3 naturalのsource-bound問い／回答更新／全plan3問／非生成再読を実装候補へ接続。公開の設定保持は§9.3の候補へ接続済み。二入力訂正・一般自由文と実4Bは未完 |
+| AR-02 | 現naturalの任意問い・回答・訂正・撤回・frameと、完了応答後の具体的な本人訂正。11/12採用仕様は§6.1。EM-02a/b、03b | 全plan最大3問、初期ON・前回選択保持、短い受け止め→回答後応答、0／1／2問終了・skip・上限時の不明保持、訂正対象と本人説明の二つの入力、説明不足時の未確定保持、対象だけ更新、撤回後の残存意味、同版再読、既存参照権利 | AR-01の全一般品質完成待ちにはしない。新Q3 naturalのsource-bound問い／回答更新／全plan3問／非生成再読を実装候補へ接続。公開の設定保持は§9.3の候補へ接続済み。二入力訂正は§9.28でコード接続、§9.29で実4Bと同source保存を確認したが意味品質未達。一般自由文・通常反映は未完 |
 | AR-03 | 適格履歴の意味ある利用。EM-03a/b | 同一／別場面・変化・無関係・訂正前を区別し、適切な履歴が今回へ効く。失効材料を使わない | 現related_contextと失効材料の再認可を継承。今回の意味利用全体は未完 |
 | AR-04 | Piece一般本文・単独伝達・refined・画像整合 | 原文の意味・一人称・本人補足と同版画像／保存を保持 | API87512ddaで固定実3件の読取拒否を修復し9隔離保存／非生成再読。旧73不変、追加GPU0。先行の通常host画像成功は継承。今回、既存planの内容選択をconfigured取得へ接続。2〜3回答後のPiece補足は未対応。一般編集品質・新本文の同版native画像・通常model採用／実Auth／DB／本人端末は未完。 |
 | AR-05 | 分析の本人基準・役割／選択・記録間関係と、項目・関係線への本人訂正。AN-03a/b/c、04 | 原記録→意味→図／全文→両端根拠の対応、再出現／変化／不明の正しさ、訂正対象と本人説明からの読み直し・再読 | 既存compiler由来のsource dutiesとsource文脈を明示v2へ接続し、図／本文・隔離SQL再読を確認。通常v1保持。実4B・通常採用・本人基準／訂正の全体は未完 |
@@ -1464,7 +1464,7 @@ STRUCTURE_MAP_DELTA_NONE：既存背景描画ownerの内部実装だけで、新
 API f5d2ce59a5625f738bc1b277cff755548556ba98で完了natural応答の二入力訂正を接続した。既存SQL／合成providerで147件成功、RNは既存CIと同じMetro bundle検証除外で47件成功（新4件を含む）。実4Bによる訂正後本文品質・稼働DB／Render・配布／本人端末は未確認。
 
 
-通常CIの追加確認（実装head固定）: API f5d2ce59a5625f738bc1b277cff755548556ba98 の43366400986/job131691713496は全工程success（新訂正検証を既存保存系suiteに含む）。RN 81975f78cc7cd22d593d109586231c5267ac63fc の43366761638/job131692868573は1453件＋305件すべて成功。phase6／既存System Context検証も成功。Analysis43366400970とRN iOS sourceの自動jobは記録時点で実行中であり、全CI成功・実4B品質・live／本人端末成功へ換算しない。
+通常CIの追加確認（実装head固定）: API f5d2ce59a5625f738bc1b277cff755548556ba98 の43366400986/job131691713496は全工程success（新訂正検証を既存保存系suiteに含む）。RN 81975f78cc7cd22d593d109586231c5267ac63fc の43366761638/job131692868573は1453件＋305件すべて成功。phase6／既存System Context検証も成功。当時実行中だったAnalysis43366400970はsuccess、RN iOS sourceは既存V4の19失敗で終了した。最終状態と実4Bは後続§9.29を参照し、全CI成功・意味品質合格・live／本人端末成功へ換算しない。
 ### 実装と利用者の一往復
 
 同じ応答Modalで「違うと感じた内容を伝える」を開き、「どの内容ですか？」「どう違いましたか？」を別々の必須欄にする。対象欄は当該応答の抜粋を指定し、同じ文字列が複数箇所なら前後も含める。送信は既存本人・thread revision・current observation event ID・一意なexact部分文字列へ束縛し、別応答・古い版・空欄を受け付けない。本人・入力・表示版変更で旧formを失効させ、backgroundでは送信しない。新しい独立画面や旧client向け分岐は追加しない。
@@ -1488,6 +1488,31 @@ STRUCTURE_MAP_DELTA_PRESENT：既存Modal／hook／API client、application serv
 ### 前回の通常枠採用CIの最終状態
 
 85752002の通常CI43362106823は全6job終了・全体failure。RN／Android sourceは成功。iOS sourceはcompile成功後に既存V4の19失敗、native canvasは6method中5成功・旧WholeCanvas1失敗。独立照合では旧run39727150432とsourceの19失敗名・順序が一致し、canvasのsnapshot本文を除くfailure記載119件も一致した。今回の枠修正による新規assert failureは検出していないが、全CI成功や既存負債解消にはしない。同sourceの研究9画面の成功は継承し、GPU／nativeの手動再実行は行っていない。
+
+<a id="emlis-post-reply-correction-actual4b-20261113"></a>
+## 9.29 2026-11-13 — 訂正後の実4B本文を原入力照合し、同じsourceで保存・再読
+
+実装はAPI `f5d2ce59a5625f738bc1b277cff755548556ba98`／RN `81975f78cc7cd22d593d109586231c5267ac63fc`を維持する。実4Bで訂正を受けた本文を確認したが、意味保持は未達であり生成指示の二候補は通常不採用とした。初回の誤ったAI応答は試験用の合成fixtureであり、実4Bの初回→訂正のlive一往復を証明したものではない。
+
+| trial | 実4Bの3訂正応答 | 原入力と全文を照合した結果 | 保存・非生成再読 |
+|---|---|---|---|
+| v2・現実装 | 8.350098823秒、3 HTTP200/stop | intentで助けた側と助けられた側を反転し過去の助けを今回へ移動。uncertaintyで一回の記述を「考えてしまいがち」へ拡張 | UI回収がprovider待受期限に間に合わず保存未成立。3保存成功に数えない |
+| v3・役割／時点／習慣の共通指示 | 8.039397989秒、3 HTTP200/stop | 役割反転と習慣追加はなくなったが、uncertaintyで発表中の表情を発表後へ移した。intentの語りも報告文寄り | 凍結した同source・要求へ実rawを無修補で戻し、3件の既存SQL保存／新service非生成再読が一致 |
+| v4・訂正後の応答目的と時点分離 | 10.436295715秒、3 HTTP200/stop | intentに性別未記載の「彼」を追加。uncertaintyの時点混同と、本人未記載の「事実と想像の境界線が曖昧」という認知評価を追加。conditionsは準備条件と緊張を保持するが反復が残る | 同sourceの3件保存／新service非生成再読が一致。別processへcheckpointを復元した非生成再読も照合 |
+
+計9実応答、model `cocolon-qwen35-4b-base-851bf6e`、PID80025を全trialで維持し前後health200。学習・retry・提供再起動0。初回の別aliasによるpreflight停止は生成前の0callとして分ける。3trialは同じ架空本文・model・decodingだが新しいIDと記録時刻を持ち、trial間の厳密byte同一A/Bとはしない。「同source保存」は各trial内の凍結要求から同じ隔離SQLへの保存に限る。
+
+v3/v4では原入力不変、元の合成応答を保存維持、QUESTION／ANSWER追加0、NEEDS_DETAIL後も説明だけでRESOLVEDにせずUNASSESSEDを維持した。Free／Plus／Premium各1題材であり、各題材を全3planへ広げた試験ではない。Auth・HTTP framingは合成、DBは隔離PGlite、生成だけが既存Podの実4B。32 CPU成功は不採用候補の動作確認であり意味品質に換算しない。全文・request／response SHA・checkpoint・保存原本・不採用候補差分は[実結果一式](https://chatgpt.com/library?file_id=libfile_fde3_f-033c04b501088191bab8063ebceb9a8d_2f7470f963808191aaebf050935e72de&account_id=personal)へ保持する。
+
+### 故障を限定できた既存接続と次の再開位置
+
+`admit_emlis_thread`は訂正の出所・版・全文をprefixへ束縛するが、説明の役割・時点・留保はまだ意味読取りへ移していない。`natural_reply_meaning._source_witnesses`は訂正付きrecordを有限比較から外し、説明自体も読んでいない。`_process_natural`も訂正時の独立比較を未実施としてUNASSESSEDへ退避する。保存成立や形式検査だけで意味成功にしない現状と、今回の実誤読は区別する。
+
+次は§4.5／§5.1の責務に従い、このsource意味読取り→作者材料／完成本文の独立逆読取りの未接続部分を既存ownerへ移す。移管元は既存の役割・肯否・finite時制reader、`read_cognition_clause`の認識時点／内容時点の別range、`_answer_nucleus`の「旧文は対象指定、新説明だけが意味を持つ」責務である。実ANSWER前提の関数を丸呼出ししたり、訂正を架空QUESTION／ANSWERへ変換したりしない。AI対象抜粋はlocator/controlのまま、未対応を本人の説明不足・意味合格・反対の意図へ変えない。新たなSYSTEM追加比較や学習を自動再開しない。
+
+通常の二入力訂正のコードは維持し、v3/v4の生成指示候補を撤回した。STRUCTURE_MAP_DELTA_NONE：今回の製品owner／公開型／route／DB／RN／Safety変更0。前回§9.28の構造追加を取り消すものではない。Premium frame／Analysis／ASTOR／Pieceへの訂正伝播、live DB適用・Render配置・配布／本人端末・一般品質・全補助経路は未完。Analysisは全plan・全保存期間の既存累積範囲を維持し、自然応答の履歴件数上限を移さない。
+
+通常CIの最終確認：API保存系43366400986とAnalysis43366400970はsuccess。RN81975f78の契約1453＋305はsuccess、iOS sourceのV4は既存19失敗で全体failure。旧job131677782190と現131692868647の該当21行は一致し、新規のassert failureは検出していない。既存V4負債を解消したとはしない。手動native／GPU旧要求の再実行は行わない。
 
 ## 10. 変更箇所と検証
 
@@ -1545,7 +1570,7 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 ### 11.2 現在の進行欄
 
-現在の構築・再開位置は[§9.28](#emlis-post-reply-correction-20261113)。実7件の履歴は[§9.4](#auxiliary-crosscore-actual7-20261112)。以下の個別試行は履歴として継承し、今回の三中核移管を単一のAR-04局所修復へ戻さない。
+現在の構築は[§9.28](#emlis-post-reply-correction-20261113)、実4B確認と再開位置は[§9.29](#emlis-post-reply-correction-actual4b-20261113)。実7件の履歴は[§9.4](#auxiliary-crosscore-actual7-20261112)。以下の個別試行は履歴として継承し、今回の三中核移管を単一のAR-04局所修復へ戻さない。
 
 **11/12・読取拒否修復前の実生成履歴（修復後は先頭更新とAR-04欄）：** 保存344aで同じ新3件を一回実生成し、段落／二欄／適格refinedともstop。候補3＋前後対照4の計7call、追加学習／retry0、復元込み内部116.995875秒・ZIP close後の外側完了観測181.715秒。元提供PID73476へ復元し、引数／環境／作業場所／両認証情報の保持とnormal／Analysis前後response一致を確認。実本文は常体化が中心で、原入力との全体読取では意味変異を見つけていないが、現CMEEは3/3をpiece_model_meaning_unassessed_or_changedで拒否。保存／追加S7／同版画像0、通常採用は保留。全file／全仕様確認と一般編集品質・live接続・本人端末・正式受入れは未完。 [実測と次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-general3-344a-actual-20261112)。
 
@@ -1607,7 +1632,7 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 ## 12. 今後の指示と再開方法
 
-**11/13・現在の再開点：** §9.28の二入力訂正はUI→本人／応答版への束縛→別source保存→既存natural再生成→非生成再読・適格履歴へ接続済み。API f5d2ce59a5625f738bc1b277cff755548556ba98で完了natural応答の二入力訂正を接続した。既存SQL／合成providerで147件成功、RNは既存CIと同じMetro bundle検証除外で47件成功（新4件を含む）。実4Bによる訂正後本文品質・稼働DB／Render・配布／本人端末は未確認。 次は実4Bの訂正反映品質と、Premium本人フレーム・Analysis／Pieceへの資格付き伝播を進める。AR-01／03の一般品質、一般Piece編集・複数回答利用、他AR・通常配置／本人端末は継続中。§9.25の実3件・研究9画面と枠修正採用は完了として継承し、同じGPU／nativeを繰り返さない。
+**11/13・現在の再開点：** §9.28の二入力訂正のコード接続を維持。§9.29で訂正後の実9応答を原入力照合し、v3/v4各3件の同source SQL保存・非生成再読は成立したが、役割／時点／留保等の意味保持は未達。生成指示の二候補は不採用で元f5実装へ戻した。次は訂正説明の別sourceを既存の意味読取り・認識時点readerと完成本文の独立逆読取りへ移す未接続境界。追加指示比較や追加学習を周回しない。Premium frame・Analysis／ASTOR／Pieceへの資格付き伝播と通常配置／端末は未完。完了済みの旧GPU／9native画面は繰り返さない。
 
 **11/12・当時の再開点（履歴）：** §9.4の実4B7件を一回完了し、実測された撤回後の質問保存抜けをAPI4183126dで修復した。同じGPU要求・旧73・344a固定3件・native検証を再実行しない。次は新旧本文比較で残ったEmlisの受け止め／回答後応答、Pieceの編集・氏名抽象化、Analysisの言葉と記録間関係の生成品質を現作者へ戻し、AR-02の二入力訂正・AR-03の意味ある履歴と既存依存を進める。候補の通常採用、Piece／Analysisの適格sourceでのSQL保存、live配置・本人端末は未完。今回の一回承認を追加生成・学習・再試行へ流用しない。
 

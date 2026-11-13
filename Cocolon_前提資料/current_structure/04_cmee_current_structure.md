@@ -2153,7 +2153,7 @@ STRUCTURE_MAP_DELTA_PRESENT。新e924候補と完了48更新を繰り返さず�
 
 ## 2026-11-13 構造差分 — 完了natural応答への二入力本人訂正
 
-当回訂正は全プラン、以後は既存の履歴／本人フレーム権利というMash判断委任の採用方針。通常応答の二入力、対象版の束縛、別source保存、再生成／非生成再読、適格履歴への反映を既存ownerで接続した。実装と検証・未接続は[補助経路§9.28](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-post-reply-correction-20261113)。STRUCTURE_MAP_DELTA_PRESENT、新製品file0。実4B・稼働DB／Render・端末は未確認、Premium frame／Analysis／Piece訂正利用は未接続。
+当回訂正は全プラン、以後は既存の履歴／本人フレーム権利というMash判断委任の採用方針。通常応答の二入力、対象版の束縛、別source保存、再生成／非生成再読、適格履歴への反映を既存ownerで接続した。実装と検証・未接続は[補助経路§9.28](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-post-reply-correction-20261113)。STRUCTURE_MAP_DELTA_PRESENT、新製品file0。実4Bの訂正後9応答は取得済み、二候補各3件の同source隔離SQL保存・非生成再読は一致したが意味保持は未達。両候補不採用、f5実装維持。次は訂正説明の別source意味読取り／完成本文の独立逆読取りの未接続境界。今回STRUCTURE_MAP_DELTA_NONE、稼働DB／Render・端末は未確認、Premium frame／Analysis／Piece訂正利用は未接続。[実結果と再開位置](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-post-reply-correction-actual4b-20261113)。
 
 - emlis_thread_contracts.InterpretationCorrectionSource／EmlisThreadInputV1.interpretation_corrections：原入力・AI抜粋参照・本人説明を分離。
 - emlis_thread_source.admit_emlis_thread：保存済み本人訂正をsource prefixへ束縛。AI抜粋はevidence spanへ昇格しない。

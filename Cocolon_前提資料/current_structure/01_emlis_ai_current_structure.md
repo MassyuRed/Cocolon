@@ -398,7 +398,7 @@ interpretive frameは本人情報から導く処理境界であり、本人が�
 |---|---|---|
 | TodayQuestion product | CURRENT_ACTUAL / 別product route | ai/services/ai_inference/api_today_question.py、ai/services/ai_inference/today_question_store.py。Emlis内部問いと混同しない |
 | Emlis internal question candidate | DORMANT_OR_PARTIAL | ai/services/ai_inference/emlis_ai_internal_question_service.py、ai/services/ai_inference/emlis_ai_question_dominance_guard.pyは存在するがcurrent reply serviceから未接続 |
-| Emlis observation-and-question system | 新Q3 naturalの根拠付き問い・回答更新と、入力画面の問い設定を候補へ接続／通常反映前 | 全plan最大3問は新natural policy。受取ON／OFF・初期ON／本人別前回保持・入力保存時固定を実装。新finite Q3もOFFを尊重し既存上限不変。二入力訂正・一般自由文品質・実4B／本人端末は未完。先頭のAR-02現在地を参照 |
+| Emlis observation-and-question system | 新Q3 naturalの根拠付き問い・回答更新と、入力画面の問い設定を候補へ接続／通常反映前 | 全plan最大3問は新natural policy。受取ON／OFF・初期ON／本人別前回保持・入力保存時固定を実装。新finite Q3もOFFを尊重し既存上限不変。二入力訂正は11/13コード接続。実4B確認は意味品質未達、通常反映／本人端末は未完。末尾のAR-02現在地を参照 |
 
 問い関連fileの存在を、問いsystemの商品完成へ変換しない。
 
@@ -2047,7 +2047,7 @@ RN4a103688で既存EmlisThreadModal内のPiece入口だけを拡張。表示し�
 
 ## 2026-11-13 構造差分 — 完了natural応答への二入力本人訂正
 
-当回訂正は全プラン、以後は既存の履歴／本人フレーム権利というMash判断委任の採用方針。通常応答の二入力、対象版の束縛、別source保存、再生成／非生成再読、適格履歴への反映を既存ownerで接続した。実装と検証・未接続は[補助経路§9.28](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-post-reply-correction-20261113)。STRUCTURE_MAP_DELTA_PRESENT、新製品file0。実4B・稼働DB／Render・端末は未確認、Premium frame／Analysis／Piece訂正利用は未接続。
+当回訂正は全プラン、以後は既存の履歴／本人フレーム権利というMash判断委任の採用方針。通常応答の二入力、対象版の束縛、別source保存、再生成／非生成再読、適格履歴への反映を既存ownerで接続した。実装と検証・未接続は[補助経路§9.28](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-post-reply-correction-20261113)。STRUCTURE_MAP_DELTA_PRESENT、新製品file0。実4Bの訂正後9応答は取得済み、二候補各3件の同source隔離SQL保存・非生成再読は一致したが意味保持は未達。両候補不採用、f5実装維持。次は訂正説明の別source意味読取り／完成本文の独立逆読取りの未接続境界。今回STRUCTURE_MAP_DELTA_NONE、稼働DB／Render・端末は未確認、Premium frame／Analysis／Piece訂正利用は未接続。[実結果と再開位置](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-post-reply-correction-actual4b-20261113)。
 
 - RN EmlisThreadModal／useEmlisThread／emlisThreadApi：同画面の二入力、owner／応答revision・eventへの束縛、通信結果不明時の同key照合、本人切替／close／版変更で旧form失効。
 - API api_emlis_thread／emlis_thread_service／api_contract_registry：POST corrections、公開DTOに本人説明と対象を分離。旧QUESTION回答やPremium frameへの偽装なし。
