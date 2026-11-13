@@ -9,6 +9,87 @@ const babel = require('@babel/core');
 const { act } = Renderer;
 const ROOT = path.resolve(__dirname, '..');
 
+function correctionDTO() {
+  return { schema_version: 'cocolon.emlis_thread.application.v1', thread_id: 'correction-thread', revision: 1,
+    state: 'COMPLETED', body_state: 'FINAL', can_write: true, can_correct: true,
+    original: { id: 'correction-input', memo: '会議が終わった。' },
+    current_observation: { event_id: 'reply-1', text: '会議を終えて安心できたのですね。' }, timeline: [] };
+}
+
+test('completed reply offers two required correction inputs and binds submission to its response', async t => {
+  const dto = correctionDTO(); let sent;
+  const h = await mountPollingReader(t, { get: async () => dto, correction: async (...args) => {
+    sent = args;
+    return { ...dto, revision: 2, correction_saved: true, correction_assessment: 'UNASSESSED',
+      current_observation: { event_id: 'reply-2', text: '終わっても、まだ心配は残っているのですね。' } };
+  } });
+  await act(async () => h.value.open('correction-input'));
+  const button = label => h.root.root.findAllByType('Button').find(x => x.props.children === label);
+  await act(async () => button('違うと感じた内容を伝える').props.onPress());
+  const input = label => h.root.root.findAllByType('TextInput').find(x => x.props.accessibilityLabel === label);
+  assert.ok(input('どの内容ですか？') && input('どう違いましたか？'));
+  assert.equal(button('説明を送って読み直す').props.disabled, true);
+  await act(async () => input('どの内容ですか？').props.onChangeText('安心できた'));
+  assert.equal(button('説明を送って読み直す').props.disabled, true);
+  await act(async () => input('どう違いましたか？').props.onChangeText('まだ心配が残っています。'));
+  assert.equal(button('説明を送って読み直す').props.disabled, false);
+  await act(async () => button('説明を送って読み直す').props.onPress());
+  assert.equal(sent[0], dto.thread_id);
+  assert.equal(sent[1].target_event_id, 'reply-1');
+  assert.equal(sent[1].expected_revision, 1);
+  assert.equal(sent[1].target_text, '安心できた');
+  assert.equal(sent[1].explanation, 'まだ心配が残っています。');
+  assert.equal(sent[3], 'owner');
+  assert.equal(h.value.dto.current_observation.event_id, 'reply-2');
+  assert.equal(h.root.root.findAllByType('TextInput').length, 0, 'the old editor draft is gone');
+});
+
+test('correction target must match one exact occurrence and old revision cannot submit', async t => {
+  const dto = { ...correctionDTO(), current_observation: { event_id: 'reply-1', text: '安心。安心。' } };
+  let calls = 0;
+  const h = await mountPollingReader(t, { get: async () => dto, correction: async () => { calls++; } });
+  await act(async () => h.value.open('correction-input'));
+  const old = h.value.correctInterpretation;
+  await act(async () => old(dto.current_observation, '安心', '心配です。', 0));
+  assert.equal(calls, 0);
+  await act(async () => h.root.root.findAllByType('Button').find(x => x.props.children === '違うと感じた内容を伝える').props.onPress());
+  await act(async () => {
+    h.root.root.findAllByType('TextInput').find(x => x.props.accessibilityLabel === 'どの内容ですか？').props.onChangeText('安心');
+    h.root.root.findAllByType('TextInput').find(x => x.props.accessibilityLabel === 'どう違いましたか？').props.onChangeText('心配です。');
+  });
+  assert.equal(h.root.root.findAllByType('Button').find(x => x.props.children === '説明を送って読み直す').props.disabled, true);
+  await h.user('another-owner');
+  await act(async () => old(dto.current_observation, '安心。安心。', '心配です。', 1));
+  assert.equal(calls, 0);
+});
+
+test('unknown correction ACK is reconciled by the same operation key without another POST', async t => {
+  let dto = correctionDTO(), payload, posts = 0;
+  const h = await mountPollingReader(t, { get: async () => dto, correction: async (_id, body) => {
+    posts++; payload = body; throw Error('unknown ACK');
+  } });
+  await act(async () => h.value.open('correction-input'));
+  await act(async () => h.value.correctInterpretation(dto.current_observation, '安心できた', '心配が残っています。', 1));
+  assert.equal(h.value.uncertain, true);
+  dto = { ...dto, revision: 2, timeline: [{ kind: 'CORRECTION', target_event_id: payload.target_event_id,
+    target_text: payload.target_text, text: payload.explanation, operation_key: payload.idempotency_key }] };
+  await act(async () => h.value.refresh());
+  assert.equal(h.value.uncertain, false);
+  assert.equal(posts, 1);
+});
+
+test('a late correction response cannot reopen a closed reader or cross accounts', async t => {
+  const dto = correctionDTO(); let finish, pending;
+  const h = await mountPollingReader(t, { get: async () => dto, correction: () => new Promise(resolve => { finish = resolve; }) });
+  await act(async () => h.value.open('correction-input'));
+  await act(async () => { pending = h.value.correctInterpretation(dto.current_observation, '安心できた', '心配です。', 1); });
+  await act(async () => h.value.close());
+  await h.user('another-owner');
+  await act(async () => { finish({ ...dto, revision: 2 }); await pending; });
+  assert.equal(h.value.visible, false);
+  assert.equal(h.value.dto, null);
+});
+
 // Natural replies keep the existing saved DTO and read-only hook boundary.
 async function mountPollingReader(t, api, initialUser = 'owner') {
   const native = Object.fromEntries(['ActivityIndicator','KeyboardAvoidingView','Modal','ScrollView','Text','TextInput','View'].map(x => [x,x]));

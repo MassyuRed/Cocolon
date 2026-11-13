@@ -2043,3 +2043,12 @@ API `a98c6e59`。`natural_reply_meaning.py` が既存原文分割／引用外判
 ## 2026-11-09 — 共用応答画面からPieceへ本人補足を明示選択
 
 RN4a103688で既存EmlisThreadModal内のPiece入口だけを拡張。表示した第一本人回答を選んだ場合に限り、本文なしのsavedInputへexact回答IDを追加して既存Piece画面へ渡す。未回答の従来入口、Emlis本文・問い／回答更新・hook／DTO／保存処理は不変。ADDの最終資格はPiece側serverが判定する。新しいEmlisの意味能力／naturalの問い接続とはしない。COMPLETED／REFINED等の表示条件、本人変更・背景化・古い操作・遅延dismissを確認。詳しい責務・検証・未build／実機未確認は[Piece map](02_piece_current_structure.md)末尾と[今回結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#refined-rn-selected-reuse-20261109)。STRUCTURE_MAP_DELTA_PRESENT（共用画面内の既存Piece入口のみ）。
+
+
+## 2026-11-13 構造差分 — 完了natural応答への二入力本人訂正
+
+当回訂正は全プラン、以後は既存の履歴／本人フレーム権利というMash判断委任の採用方針。通常応答の二入力、対象版の束縛、別source保存、再生成／非生成再読、適格履歴への反映を既存ownerで接続した。実装と検証・未接続は[補助経路§9.28](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-post-reply-correction-20261113)。STRUCTURE_MAP_DELTA_PRESENT、新製品file0。実4B・稼働DB／Render・端末は未確認、Premium frame／Analysis／Piece訂正利用は未接続。
+
+- RN EmlisThreadModal／useEmlisThread／emlisThreadApi：同画面の二入力、owner／応答revision・eventへの束縛、通信結果不明時の同key照合、本人切替／close／版変更で旧form失効。
+- API api_emlis_thread／emlis_thread_service／api_contract_registry：POST corrections、公開DTOに本人説明と対象を分離。旧QUESTION回答やPremium frameへの偽装なし。
+- 既存OPERATION journal、natural provider receiptと同commit RPC：保存・中断・同本文再読。新料金／input quota消費・QUESTION追加0。

@@ -12,6 +12,8 @@ export function threadStatus(dto) {
   if (dto.can_write === false && (!dto.current_observation || dto.pending_question || dto.can_continue)) return "応答の更新を一時停止しています。保存済みの本文と回答は確認できます。";
   if (dto.failure_code === "safe_state_answer_owner_required") return "この内容への専用の返事はまだ用意できていません。記録は保存されています。";
   if (dto.failure_code === "separate_safety_owner_required") return "この内容は通常の返事とは別の対応が必要です。";
+  if (dto.correction_assessment === "NEEDS_DETAIL") return "違うと感じた内容を保存しました。どう違ったのか、ご自身の考えや実際の状況をもう少し教えてください。";
+  if (dto.body_state === "CORRECTION_UNREFLECTED") return "説明は保存されています。読み直した返事はまだ用意できていません。";
   if (dto.body_state === "MEANING_UPDATED_BODY_UNAVAILABLE") return "回答と意味の訂正は保存されています。更新後の本文はまだ用意できていません。";
   if (dto.state === "INITIALIZING") return "記録をもとにEmlisの返事を準備しています。";
   if (dto.state === "REFINING") return "回答は保存済みです。Emlisの返事を更新しています。";
@@ -20,6 +22,7 @@ export function threadStatus(dto) {
   if (dto.body_state === "UNCHANGED") return "回答は保存済みです。返事を変える新しい材料はなかったため、本文はそのままです。";
   if (dto.state === "RESPONSE_FAILED") return "Emlisの返事を用意できませんでした。記録は保存されています。";
   if (dto.state === "AWAITING_CONTINUE") return dto.can_continue ? "回答を受けた返事です。必要なら、もう一点だけ続けられます。" : "回答後の返事です。この記録で追加できる質問はありません。";
+  if (dto.correction_saved && dto.current_observation) return "いただいた説明をもとに読み直した応答です。説明がない部分まで、理由や意図を決めたものではありません。";
   if (dto.body_state === "REFINED") return "回答を受けてEmlisの返事を更新しました。";
   if (dto.pending_question) return "答えられる範囲で大丈夫です。質問はスキップできます。";
   return "";
@@ -38,7 +41,7 @@ const savedIdentity = value => typeof value === "string"
 // This is a visible choice, not proof of the private ADD checkpoint. The source
 // request must still revalidate this exact saved answer on the server.
 export function selectedPieceSupplementalAnswer(dto) {
-  if (!savedIdentity(dto?.original?.id) || dto.state !== "COMPLETED" || dto.body_state !== "REFINED"
+  if (dto?.correction_saved || !savedIdentity(dto?.original?.id) || dto.state !== "COMPLETED" || dto.body_state !== "REFINED"
       || dto.answer_saved !== true || dto.answer_assessment !== "RESOLVED" || dto.meaning_updated !== true
       || !savedIdentity(dto.current_observation?.event_id) || dto.issued_count !== 1 || dto.pending_question || dto.can_continue
       || dto.can_retry || dto.failure_code || !Array.isArray(dto.timeline)) return null;
@@ -57,7 +60,7 @@ export function selectedPieceSupplementalAnswer(dto) {
 }
 
 function originalPieceSource(dto) {
-  return !!dto?.current_observation && !dto.answer_saved && savedIdentity(dto.original?.id)
+  return !!dto?.current_observation && !dto.correction_saved && !dto.answer_saved && savedIdentity(dto.original?.id)
     && ["FINAL", "PRE_QUESTION"].includes(dto.body_state)
     && !(dto.timeline || []).some(event => event?.kind === "ANSWER");
 }
@@ -87,6 +90,37 @@ function FrameEditor({ frame, thread, textStyle, borderColor }) {
       }}>訂正を保存</CocolonButton>
     </>}
     {frame.status !== "REJECTED" && <CocolonButton variant="secondary" disabled={disabled} onPress={() => thread.updateFrame(frame, "REJECTED")}>この理解は使わない</CocolonButton>}
+  </View>;
+}
+
+function InterpretationCorrectionEditor({ thread, textStyle, borderColor, active }) {
+  const dto = thread.dto;
+  const target = dto.current_observation || dto.correction_target;
+  const previous = [...(dto.timeline || [])].reverse().find(item => item.kind === "CORRECTION");
+  const [editing, setEditing] = useState(dto.correction_assessment === "NEEDS_DETAIL");
+  const [targetText, setTargetText] = useState(dto.correction_target ? previous?.target_text || "" : "");
+  const [explanation, setExplanation] = useState(dto.correction_target ? previous?.text || "" : "");
+  const disabled = !active || thread.busy || thread.uncertain || thread.rejected || thread.pendingAction || dto.can_write === false;
+  const first = target?.text?.indexOf(targetText) ?? -1;
+  const unique = !!targetText.trim() && first >= 0 && target.text.indexOf(targetText, first + 1) < 0;
+  const inLimit = [...targetText].length <= 2000 && [...explanation].length <= 2000;
+  return <View style={[s.section, { borderColor }]}>
+    <CocolonButton variant="secondary" disabled={disabled} onPress={() => setEditing(!editing)}>違うと感じた内容を伝える</CocolonButton>
+    {editing && <>
+      <Text style={[s.label, textStyle]}>どの内容ですか？</Text>
+      <Text style={[s.description, textStyle]}>応答の該当箇所をコピーしてください。同じ言葉がある場合は前後も含めてください。</Text>
+      {!!dto.correction_target && <Text selectable style={[s.body, textStyle]}>{target.text}</Text>}
+      <TextInput accessibilityLabel="どの内容ですか？" multiline value={targetText} onChangeText={setTargetText}
+        editable={!disabled} maxLength={4000} style={[s.input, textStyle, { borderColor }]} />
+      {!!targetText && !unique && <Text style={[s.description, textStyle]}>応答の中の一箇所に当てはまる文章を指定してください。</Text>}
+      <Text style={[s.label, textStyle]}>どう違いましたか？</Text>
+      <Text style={[s.description, textStyle]}>ご自身の考えや、実際の状況を教えてください。</Text>
+      <TextInput accessibilityLabel="どう違いましたか？" multiline value={explanation} onChangeText={setExplanation}
+        editable={!disabled} maxLength={4000} style={[s.input, textStyle, { borderColor }]} />
+      {!inLimit && <Text style={[s.description, textStyle]}>それぞれ2,000文字以内で入力してください。</Text>}
+      <CocolonButton disabled={disabled || !unique || !explanation.trim() || !inLimit}
+        onPress={() => thread.correctInterpretation(target, targetText, explanation, dto.revision)}>説明を送って読み直す</CocolonButton>
+    </>}
   </View>;
 }
 
@@ -203,6 +237,9 @@ export default function EmlisThreadModal({ thread, colors, navigation, userId = 
             {(busy || error || uncertain || thread.rejected) && <Text style={[s.body, textStyle]}>前回確認した内容です。反映状況はまだ確認できていません。</Text>}
             <Text selectable style={[s.body, textStyle]}>{dto.current_observation.text}</Text>
           </View>}
+          {thread.visible && dto?.can_correct && <InterpretationCorrectionEditor
+            key={`${userId}:${dto.thread_id}:${dto.revision}:${(dto.current_observation || dto.correction_target)?.event_id}`}
+            thread={thread} active={appState === "active"} textStyle={textStyle} borderColor={colors.CARD_BORDER} />}
           {dto?.pending_question && <View style={[s.section, { borderColor: colors.CARD_BORDER, backgroundColor: colors.SURFACE_TONAL }]}>
             <Text style={[s.label, textStyle]}>Emlisからの質問</Text>
             <Text selectable style={[s.body, textStyle]}>{dto.pending_question.text}</Text>
@@ -251,7 +288,9 @@ export default function EmlisThreadModal({ thread, colors, navigation, userId = 
           {history.map(event => <View key={event.event_id} style={[s.section, { borderColor: colors.CARD_BORDER }]}>
             <Text style={[s.label, textStyle]}>{event.kind === "QUESTION" ? `Emlisからの質問${event.round_index ? ` · ${event.round_index}問目` : ""}`
               : event.kind === "ANSWER" ? `あなたの回答 · ${dateLabel(event.authored_at || event.recorded_at)}`
-                : "以前の返事"}</Text>
+                : event.kind === "CORRECTION" ? "あなたからの説明"
+                  : event.is_disputed ? "以前の返事（違うと伝えた内容を含みます）" : "以前の返事"}</Text>
+            {event.kind === "CORRECTION" && <Text selectable style={[s.description, textStyle]}>「{event.target_text}」について</Text>}
             <Text selectable style={[s.body, textStyle]}>{event.text}</Text>
           </View>)}
           </View>}

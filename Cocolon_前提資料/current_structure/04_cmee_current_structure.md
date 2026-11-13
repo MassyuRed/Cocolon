@@ -2149,3 +2149,14 @@ STRUCTURE_MAP_DELTA_PRESENT。新e924候補と完了48更新を繰り返さず�
 最終の同18材料・108隔離SQLと、累計53 HTTP／最終追加0 HTTPの由来、途中不採用・残差は[実結果](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-finite-action-source-conditions-20261109)とweekly§50へ戻る。
 
 今回の全文有限動作条件と保存結果を継承し、評価の過去時点・未決定対象・混在文章の意味保持を改善する。同じ条件追加の周回や保存e924の完了48更新を再実行せず、教示と意味単位の不足へ戻る。模型作りの名詞形対応外はmodel誤生成と分けてsource側へ残す。一般再構成・同版画像／通常統合・本人端末、新候補の通常採用は未完了。AR-01の役割反転と他ARの新規活用も継続残件。
+
+
+## 2026-11-13 構造差分 — 完了natural応答への二入力本人訂正
+
+当回訂正は全プラン、以後は既存の履歴／本人フレーム権利というMash判断委任の採用方針。通常応答の二入力、対象版の束縛、別source保存、再生成／非生成再読、適格履歴への反映を既存ownerで接続した。実装と検証・未接続は[補助経路§9.28](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-post-reply-correction-20261113)。STRUCTURE_MAP_DELTA_PRESENT、新製品file0。実4B・稼働DB／Render・端末は未確認、Premium frame／Analysis／Piece訂正利用は未接続。
+
+- emlis_thread_contracts.InterpretationCorrectionSource／EmlisThreadInputV1.interpretation_corrections：原入力・AI抜粋参照・本人説明を分離。
+- emlis_thread_source.admit_emlis_thread：保存済み本人訂正をsource prefixへ束縛。AI抜粋はevidence spanへ昇格しない。
+- natural_reply：current／pastの本人説明、対象AI解釈を区別し、本人説明のSafetyを確認。同じsourceで通常作者へ渡す。
+- emlis_thread_history／natural_reply_meaning：新訂正を読めない旧有限plan／hint／比較ではRESOLVEDにしない。生成後の訂正意味はUNASSESSED。
+- 既存履歴RPC：当該stageのOPERATIONだけを適格本人履歴へ返す。検索は本人説明のみ。新汎用checker／controller／tableなし。

@@ -6953,3 +6953,12 @@ API `eea4761f7b5009128d497b2b69e1b1d0766ad57d`。既存owner内の差分であ�
 | `.github/workflows/piece-b2b-isolated-postgres.yml`、`analysis-observed-content.yml` | 既存CIへ新検証を追加。新しい実行Gateは作らない |
 
 実4B入力3packetと一回7要求scriptは未実行原本。uploadは自動承認審査で拒否され、GPU生成0・本番変更0。全sourceの意味読了や全仕様完成をこの差分表から主張しない。詳細は上記の詳細設計§9.2。
+
+
+## 2026-11-13 差分 — 通常応答の二入力本人訂正
+
+STRUCTURE_MAP_DELTA_PRESENT。既存RN screens/input/EmlisThreadModal.js、useEmlisThread.js、lib/api/emlisThreadApi.jsに、完了naturalの二入力→対象版束縛→保存・読み直しを追加した。本人／表示版変更・closeで旧form失効、結果不明の同key照合を維持。tests/emlis-thread.test.jsへ実Reactの4件を追加。全specの正式リリース前latest-onlyを適用し、旧client向けの新分岐は追加しない。
+
+API既存 api_emlis_thread.py、emlis_thread_service.py、api_contract_registry.py、CMEE emlis_thread_contracts.py／emlis_thread_source.py／emlis_thread_history.py／natural_reply.py／natural_reply_meaning.pyの責務を更新した。新しい製品fileはない。新しいai/tests/test_emlis_interpretation_correction.py、既存test_emlis_q3_application.py、既存CI2本は保存・source・履歴・再送の検証を担当する。新migrationは01Cの同日差分を参照。
+
+提供範囲・実装・検証・残件の正本は[補助経路§9.28](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-post-reply-correction-20261113)。新料金・追加AI問い・live配置・端末確認は0。Premium本人frame／Analysis／Pieceの訂正伝播は後続残件。

@@ -4768,3 +4768,12 @@ checkpointの詳細は07 / Planへ委譲し、本資料ではbackend support上�
 この追記より前の候補／未配置／点検中の記述は当時の履歴。最新source・全CIの実結果・配置と配布・未確認は[第10回§15.10](weekly_reviews/Cocolon_Weekly_Review_20261107.md#input-contract-repair-final-20261107)を参照する。7,817blob一致を全意味読了とせず、一般意味品質・保存currentの本人再解析・月次当時版の保持・実環境受入れをそれぞれ区別する。
 
 11/8設定差分：GlobalFrameLayout.headerRightSlotをMainTabsがSettings入口時だけ渡し、既存Accountへ進む。元HTML previewは保持。
+
+
+## 2026-11-13 差分 — 通常応答の本人訂正と履歴RPC
+
+- supabase/migrations/20261113041739_emlis_interpretation_correction_history.sql（CLI作成）：既存emlis_thread_related_context(uuid,uuid,jsonb)を同identityで置換。本人説明を関連検索へ加え、指定stage=INTERPRETATION_CORRECTIONのOPERATIONだけを履歴へ返す。security invoker／空search_path／service_role限定ACL、本人・保持期間・plan・guardを維持。新table・commit RPC変更なし。稼働DB未適用。
+- ai/tests/test_emlis_interpretation_correction.py（新規）：合成providerと実隔離SQLで、保存／非生成再読・対象版・NEEDS_DETAIL・ACK不明・C1/C2再送・既存plan履歴権利・DTO公開境界を確認。既存Q3 SQL fixtureが新migrationも読み込む。
+- 当回訂正は全プラン、継続利用は既存履歴／本人frame権利。新料金・input quota・QUESTION追加なし。API／RN・CMEEの既存ownerは01Aと各current mapへ反映。
+
+STRUCTURE_MAP_DELTA_PRESENT。実装・適用順migration→API→RN、未接続のPremium本人frame／Analysis／Piece・実4B品質・live／端末は[補助経路§9.28](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-post-reply-correction-20261113)を参照。

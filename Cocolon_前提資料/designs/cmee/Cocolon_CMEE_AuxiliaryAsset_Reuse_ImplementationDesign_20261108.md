@@ -4,11 +4,11 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-13 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR04_QUALIFIED_ACTUAL3_SAVE_NATIVE9_CONFIRMED_FRAME_ADOPTED_MODEL_OFF
+status: AR02_POST_REPLY_CORRECTION_CONNECTED_FRAME_ADOPTED_MODEL_OFF
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Qualified actual3 save/native9 and frame fix proven; latest-only pre-release policy permits current renderer frame adoption; AR02 two-input correction remains unconnected; keep model defaults OFF and do not repeat completed GPU/native work"
+current_next: "Post-reply correction UI/API/save/history connected; verify actual 4B correction quality and connect qualified Premium-frame/Analysis/Piece use; retain model defaults OFF; do not repeat completed generation/native runs"
 runtime_effect_of_this_document: 0
 ---
 
@@ -37,7 +37,7 @@ runtime_effect_of_this_document: 0
 
 # CMEE 補助経路の活用作業 — 詳細設計
 
-> **2026-11-12・AR-02の採用仕様と実装現在地：** [Emlis問い・応答の決定](v1/02_emlis_v1a_detailed_design.md#emlis-question-policy-20261112)を構築仕様とする。全plan最大3問・source-bound問い／回答更新は§9.2の新natural候補、初期ON・本人別前回保持・入力保存時の受取選択固定は§9.3のAPI／RN候補へ接続した。二入力訂正・一般自由文の問い判断、実4B品質・通常提供／端末は未完。AR-04の既存実績は継承する。
+> **2026-11-12・AR-02の採用仕様と実装現在地：** [Emlis問い・応答の決定](v1/02_emlis_v1a_detailed_design.md#emlis-question-policy-20261112)を構築仕様とする。全plan最大3問・source-bound問い／回答更新は§9.2の新natural候補、初期ON・本人別前回保持・入力保存時の受取選択固定は§9.3のAPI／RN候補へ接続した。二入力訂正のコード接続は後続§9.28、一般自由文の問い判断・実4B品質・通常提供／端末は未完。AR-04の既存実績は継承する。
 
 ## 0. 今回の決定と、この設計の責任
 
@@ -248,7 +248,7 @@ private reportを保存する場合の最小情報は、既存`source_prefix_ref
 
 原入力、AI解釈、本人訂正を分け、説明が示す範囲で読み直し、訂正されていない意味を残す。保存だけで完了にせず、後続応答への有効参照・失効と再読まで既存ownerへ接続する。旧Q1/Q3の補足・撤回やPremium frameの資産は回収対象だが、現naturalの完了後に任意の本文誤解を指摘し直す経路が既にあるとは扱わない。
 
-新導線は設計決定の記録段階。先の全plan最大3問、初期ON・前回選択保持、問い前に完成全文を要求しない順序は維持する。訂正時の追加確認と3問の関係、具体的な対象指定・画面遷移・保存/API・再生成時機やプラン別権利は、今回の対話だけで確定しない。
+新導線は設計決定の記録段階。先の全plan最大3問、初期ON・前回選択保持、問い前に完成全文を要求しない順序は維持する。11/12の対話だけでは具体化していなかった対象・保存／API・再生成・問い上限／プラン境界は、11/13の判断委任に基づく§9.28で構築方針へ具体化した。
 
 ### 6.2 履歴の関連性と版
 
@@ -1455,6 +1455,38 @@ Mashは「まだリリースしておらず、アプリを使っている人は�
 
 STRUCTURE_MAP_DELTA_NONE：既存背景描画ownerの内部実装だけで、新しい型／route／DB／file／責任分界はない。全file地図・Piece mapの既存ownerを継承し、関連する現在地と本設計・再現性契約を同単位で更新する。AR-02の完了応答後の二入力訂正、他ARの品質・通常反映・本人端末と全補助経路は未完。
 
+
+<a id="emlis-post-reply-correction-20261113"></a>
+## 9.28 2026-11-13 — 完了した通常応答へ、対象と本人説明の二入力訂正を接続
+
+**11/13・Mashから華恋へ判断を委任された提供方針：** 今回の応答への訂正・読み直しはFree／Plus／Premiumすべてに提供する。次回以降への活用は既存権利に合わせ、Freeは当回、Plusは適格履歴、Premiumは適格履歴と本人フレームを差にする。誤解を伝える入口や当回の読み直しを課金で閉じない。新料金・月間quota・問数増加は追加しない。Premium本人フレームへの新しい訂正の反映は構築目標であり、接続済みとはしない。
+
+API f5d2ce59a5625f738bc1b277cff755548556ba98で完了natural応答の二入力訂正を接続した。既存SQL／合成providerで147件成功、RNは既存CIと同じMetro bundle検証除外で47件成功（新4件を含む）。実4Bによる訂正後本文品質・稼働DB／Render・配布／本人端末は未確認。
+
+### 実装と利用者の一往復
+
+同じ応答Modalで「違うと感じた内容を伝える」を開き、「どの内容ですか？」「どう違いましたか？」を別々の必須欄にする。対象欄は当該応答の抜粋を指定し、同じ文字列が複数箇所なら前後も含める。送信は既存本人・thread revision・current observation event ID・一意なexact部分文字列へ束縛し、別応答・古い版・空欄を受け付けない。本人・入力・表示版変更で旧formを失効させ、backgroundでは送信しない。新しい独立画面や旧client向け分岐は追加しない。
+
+POST /emlis/threads/{thread_id}/correctionsを既存application ownerへ追加した。既存のQUESTIONへの回答、Premiumのframe_feedbackとは別commandであり、架空のQUESTIONやframeを発行しない。訂正OPERATIONはstage=INTERPRETATION_CORRECTION、私有InterpretationCorrectionSourceとして原入力／AI対象抜粋／本人説明を分離する。source prefixには同じ保存済み訂正を含め、原入力・入力件数・課金quotaを追加消費せず、issued_count・受取ON/OFFも変更しない。
+
+対象を指定して「違う」等だけを送った場合も、異議を保存する。NEEDS_DETAILとして旧応答をcurrentから外し、本人の具体説明を求めるformを残す。説明を追加するまでmodelを呼ばない。具体説明を受けた後も機械的に意味をRESOLVEDとせず、UNASSESSEDを維持して、本人が述べた範囲で既存natural ownerに読み直しを依頼する。AI対象抜粋は本人事実の根拠にせず、反対の意図・理由を補わない。本文の有限意味比較、旧回答checkpoint、追加QUESTIONで訂正済みを偽らない。
+
+既存commitのCAS／本人／source／期限とOPERATION journalを利用する。保存ACK不明は同commandの実保存を読み、同attempt／prefix／payloadを照合して再開する。受領済みmodel本文は既存receiptから保存し、providerを取り直さない。C1の後にC2が成立してからC1を再送しても、最新の本文を戻さない。生成失敗時も旧対象をcurrentへ復活させない。同じ保存本文のGETは非生成で、元の応答・訂正対象・本人説明の出所を区別する。対象previewも旧bodyのcontext権利を再確認し、timelineで隠した古い全文を再露出させない。
+
+### 履歴、保存と未接続範囲
+
+CLIで作成した20261113041739_emlis_interpretation_correction_history.sqlは、既存emlis_thread_related_contextの同identityを置換する。検索材料に本人の説明だけを加え、履歴eventでは指定stageのOPERATIONだけをQUESTION／ANSWERと併せて返す。AI本文・他OPERATION・provider receiptを履歴材料へ混ぜない。security invoker／空search_path、service_role限定ACL、本人／保持期間／plan／guardを保持し、新table・event CHECK・commit RPCの変更は不要だった。適用順はmigration→API→RN。稼働DBには未適用。
+
+保存済み訂正はcurrentだけでなくpast recordの再構築にも入り、Freeの次回履歴0、Plus／Premiumの既存参照権利内で本人説明を引き継ぐ。過去threadのrevision変更で、既に旧historyを参照した返答はCONTEXT_CHANGEDとなる。訂正を読めない旧有限history planやhintから、否定された理解を再確定しない。原入力と本人回答はそのまま保ち、naturalには原文と説明を別sourceで渡す。
+
+Premium本人フレーム、Analysis／ASTOR材料、Pieceへ新しい訂正を伝える経路は後続AR-06等の残件。既存frame全体をREJECTEDにしたり、本人説明を原入力／回答へ上書きしたりしない。訂正後のPiece作成は現在のsource資格へ昇格させず、RNからの誤ったhandoffを止める。実4Bでの意味反映・自然さ、説明が曖昧な一般文の理解精度は今回の合成検証では証明していない。
+
+STRUCTURE_MAP_DELTA_PRESENT：既存Modal／hook／API client、application service／DTO／source／history／natural／有限比較、既存履歴RPCの責務を更新した。新製品fileは0、新test1とmigration1。Emlis／CMEE map、01A／01C全file地図、全体現在地、Emlis商品仕様を同じ反映単位で更新する。新料金・運用flag変更・GPU／学習・Render配置・署名build／配布は0。
+
+### 前回の通常枠採用CIの最終状態
+
+85752002の通常CI43362106823は全6job終了・全体failure。RN／Android sourceは成功。iOS sourceはcompile成功後に既存V4の19失敗、native canvasは6method中5成功・旧WholeCanvas1失敗。独立照合では旧run39727150432とsourceの19失敗名・順序が一致し、canvasのsnapshot本文を除くfailure記載119件も一致した。今回の枠修正による新規assert failureは検出していないが、全CI成功や既存負債解消にはしない。同sourceの研究9画面の成功は継承し、GPU／nativeの手動再実行は行っていない。
+
 ## 10. 変更箇所と検証
 
 ### 10.1 実装候補の所有箇所
@@ -1511,7 +1543,7 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 ### 11.2 現在の進行欄
 
-現在の実装候補・実7件の結果と未成立範囲は[§9.4](#auxiliary-crosscore-actual7-20261112)。以下の個別試行は履歴として継承し、今回の三中核移管を単一のAR-04局所修復へ戻さない。
+現在の構築・再開位置は[§9.28](#emlis-post-reply-correction-20261113)。実7件の履歴は[§9.4](#auxiliary-crosscore-actual7-20261112)。以下の個別試行は履歴として継承し、今回の三中核移管を単一のAR-04局所修復へ戻さない。
 
 **11/12・読取拒否修復前の実生成履歴（修復後は先頭更新とAR-04欄）：** 保存344aで同じ新3件を一回実生成し、段落／二欄／適格refinedともstop。候補3＋前後対照4の計7call、追加学習／retry0、復元込み内部116.995875秒・ZIP close後の外側完了観測181.715秒。元提供PID73476へ復元し、引数／環境／作業場所／両認証情報の保持とnormal／Analysis前後response一致を確認。実本文は常体化が中心で、原入力との全体読取では意味変異を見つけていないが、現CMEEは3/3をpiece_model_meaning_unassessed_or_changedで拒否。保存／追加S7／同版画像0、通常採用は保留。全file／全仕様確認と一般編集品質・live接続・本人端末・正式受入れは未完。 [実測と次](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-general3-344a-actual-20261112)。
 
@@ -1573,9 +1605,9 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 ## 12. 今後の指示と再開方法
 
-**11/13・現在の再開点：** §9.25の資格固定3件は実4B取得→同source保存・非生成再読→研究native9frameまで確認済み。Pod7生成や今回nativeを繰り返さない。次の直接未接続は、AR-02の完了natural応答へ「どの内容ですか？」「どう違いましたか？」の二入力訂正を既存ownerで接続する単位。現在の回答は発行済みquestion／AWAITING_ANSWERに限定され、既存frame訂正はその対象frameへの一欄である。対象版への束縛・保存／API・再生成時機・問い上限／プラン境界は具体仕様が未確定の部分として扱い、既存frameを二入力完了経路と偽らない。AR-01／03／Analysisの接続済み品質未達、一般Piece編集、自然参照画像全体一致、通常採用／live／本人端末・全補助経路は継続中。
+**11/13・現在の再開点：** §9.28の二入力訂正はUI→本人／応答版への束縛→別source保存→既存natural再生成→非生成再読・適格履歴へ接続済み。API f5d2ce59a5625f738bc1b277cff755548556ba98で完了natural応答の二入力訂正を接続した。既存SQL／合成providerで147件成功、RNは既存CIと同じMetro bundle検証除外で47件成功（新4件を含む）。実4Bによる訂正後本文品質・稼働DB／Render・配布／本人端末は未確認。 次は実4Bの訂正反映品質と、Premium本人フレーム・Analysis／Pieceへの資格付き伝播を進める。AR-01／03の一般品質、一般Piece編集・複数回答利用、他AR・通常配置／本人端末は継続中。§9.25の実3件・研究9画面と枠修正採用は完了として継承し、同じGPU／nativeを繰り返さない。
 
-**11/12・現在の再開点：** §9.4の実4B7件を一回完了し、実測された撤回後の質問保存抜けをAPI4183126dで修復した。同じGPU要求・旧73・344a固定3件・native検証を再実行しない。次は新旧本文比較で残ったEmlisの受け止め／回答後応答、Pieceの編集・氏名抽象化、Analysisの言葉と記録間関係の生成品質を現作者へ戻し、AR-02の二入力訂正・AR-03の意味ある履歴と既存依存を進める。候補の通常採用、Piece／Analysisの適格sourceでのSQL保存、live配置・本人端末は未完。今回の一回承認を追加生成・学習・再試行へ流用しない。
+**11/12・当時の再開点（履歴）：** §9.4の実4B7件を一回完了し、実測された撤回後の質問保存抜けをAPI4183126dで修復した。同じGPU要求・旧73・344a固定3件・native検証を再実行しない。次は新旧本文比較で残ったEmlisの受け止め／回答後応答、Pieceの編集・氏名抽象化、Analysisの言葉と記録間関係の生成品質を現作者へ戻し、AR-02の二入力訂正・AR-03の意味ある履歴と既存依存を進める。候補の通常採用、Piece／Analysisの適格sourceでのSQL保存、live配置・本人端末は未完。今回の一回承認を追加生成・学習・再試行へ流用しない。
 
 **11/12・先行する通常画像実証の履歴：** 研究36335452/run43146249187はattempt1・新同1method成功。両作品のpreview/saved/export全6frameで本文/native canvas/alpha/元8秒が成立し、手動ACKなしの閉要求→native ACK後遷移→saved mountと両actual export PNG一致を確認。実検証は研究363のsourceで、同じ製品2/単体2fileを今回通常Draftへ採用する。native harnessは採用せず、新normal headのCI成功は主張しない。既存474PASS（独立18含む）・full JSXも継承。STRUCTURE_MAP_DELTA_PRESENT。native581/guard/renderer/8秒不変、model selector OFF/重み未採用・旧V4失敗14→26は未解決。AR-04一般編集品質/実Auth/API/DB/本人端末・正式0/3/他ARは未完。 前回24/48・73実4B/243SQL/static6/transition4は完了として継承し、旧6methodは今回未実行。
 

@@ -48,7 +48,11 @@ export function useEmlisThread({ userId, enabled: explicitEnabled, api = emlisTh
       // out admission rolled back. Keep the original payload/key for a replay.
       const answerAccepted = c.pending?.method === "answer" && (dto.timeline || []).some(
         event => event.kind === "ANSWER" && event.question_id === c.pending.payload.question_id && event.text === c.pending.payload.answer_text);
-      if (method !== "get" || answerAccepted) c.pending = null;
+      const correctionAccepted = c.pending?.method === "correction" && (dto.timeline || []).some(
+        event => event.kind === "CORRECTION" && event.target_event_id === c.pending.payload.target_event_id
+          && event.target_text === c.pending.payload.target_text && event.text === c.pending.payload.explanation
+          && event.operation_key === c.pending.payload.idempotency_key);
+      if (method !== "get" || answerAccepted || correctionAccepted) c.pending = null;
       setState(s => ({ ...s, dto, draft: method === "answer" || answerAccepted || (!c.pending && dto.pending_question?.question_id !== s.dto?.pending_question?.question_id) ? "" : s.draft,
         uncertain: Boolean(c.pending), reconciled: method === "get", rejected: false, busy: false, error: "" }));
       return dto;
@@ -126,8 +130,22 @@ export function useEmlisThread({ userId, enabled: explicitEnabled, api = emlisTh
     } };
     return perform("frame", c.pending);
   }
+  async function correctInterpretation(target, targetText, explanation, revision) {
+    const c = context.current;
+    const dto = state.dto;
+    if (c.userId !== userId || owner.current !== userId || !dto?.can_correct
+        || dto.can_write === false || state.rejected || c.busy || c.pending
+        || dto.revision !== revision || (dto.current_observation || dto.correction_target)?.event_id !== target?.event_id
+        || !targetText.trim() || !explanation.trim()
+        || [...targetText].length > 2000 || [...explanation].length > 2000) return false;
+    c.pending = { method: "correction", threadId: dto.thread_id, payload: {
+      expected_revision: revision, idempotency_key: operationKey(), target_event_id: target.event_id,
+      target_text: targetText, explanation,
+    } };
+    return perform("correction", c.pending);
+  }
   const safeState = context.current.userId === userId && enabled ? state : empty();
-  return { ...safeState, enabled, open, close: reset, reset, refresh: () => perform("get"), sendAnswer, action, updateFrame,
+  return { ...safeState, enabled, open, close: reset, reset, refresh: () => perform("get"), sendAnswer, action, updateFrame, correctInterpretation,
     pendingAction: Boolean(context.current.pending && context.current.pending.method !== "answer"),
     replayPending: () => {
       const pending = context.current.pending;
