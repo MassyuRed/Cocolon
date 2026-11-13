@@ -4,13 +4,15 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-13 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR02_CORRECTION16_FIT32_ACTUAL_REJECTED_NORMAL_OFF
+status: AR02_AR04_NATURAL_SINGLE_ANSWER_PIECE_CONNECTED_DRAFT_SQL_UNAPPLIED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Actual fresh16/32 and17 comparisons completed; candidate10b563 rejected for case/recipient-voice and unsupported additions; preserve raw/weights, inspect existing author/teaching/comparison duties; no automatic GPU or fit, normal OFF"
+current_next: "Natural real single ANSWER now reaches existing Piece source/save/reread in isolated tests; verify f7b44e0e CI, carry DB-to-API deployment and real4B/same-image work separately; fit16 candidate rejected and normal model selector OFF"
 runtime_effect_of_this_document: 0
 ---
+
+> **11/13・現naturalの実一回答をPieceへ渡す接続抜けを修復：** 画面で選べるCOMPLETED/REFINEDの一回答が、旧finite専用のAPI/SQL検査で拒否されていた。原入力と実ANSWERを別sourceのまま既存Pieceへ接続し、3plan×自然終了/本人終了の6経路で生成候補・保存・同一版の非生成再読、quota各1を確認。消費した履歴は新しい7記録で置換せず、改変・削除時は拒否する。新71件は分割実行で全成功、既存248件も成功。提供文とPiece HTTPは合成・DBは隔離PGliteであり、新実4B・live DB・Render・RN/build/本人端末の成功ではない。 [現接続と確認範囲§9.35](#piece-natural-single-answer-connection-20261113)。
 
 > **11/13・16教材32更新と17比較を一回完了、品質未達で通常不採用：** 承認207,620byteを既存Podで実行し、新規31応答＋前後4対照、全stop、再試行0。復元・対照終了237.196491秒／ZIP close237.885058秒、元提供PID83325→84398へ元args/env/cwdで復元、通常／Analysisの前後全response一致・独立health200。112tensor保存／fresh reload一致と原本・重み回収を確認。先生→妹の格崩れ・本人一人称の貼返しが残り、通常保持T06には未記載の支配状態を付加したため新10b563候補を採用しない。旧3＋新4の同source隔離保存・新service非生成再読は7成功、独立比較7UNASSESSED。通常OFFを維持する。 [実原本・採否・次](#emlis-correction-independent16-fit32-actual-20261113)。
 
@@ -2480,3 +2482,46 @@ NO_STRUCTURE_MAP_DELTA：source/test/公開型/route/DB/作者/controller/Gate�
 研究3646a285／source8c5eのrun43100979745は成功。clipのq支持をCqへ逆写像し、boundsへ伸縮せず配置する候補で、実RN由来高さのstandalone3形状×8対照=24/24（48call、非整列3／clip差2）を確認。途中clip/bounds変更6件は到達1／stage73で拒否、元195・別AR04_4／bitmap44も成功。初回runのstdout欠落は観測fileの先行保存で解消。通常.mm581/pinは不変・未採用、selector OFF・AR-04未完。次は同候補のactual RN自然描画／local／placed／元期限・PNGを既存harnessで照合する。
 
 研究4pathの候補実装と観測保存をGitHubへ保持した。通常作業側の製品.mm581／pin／公開型・route・DB・作者・renderer責務は変更0（STRUCTURE_MAP_DELTA_NONE）。既存ファイル地図の責務は継承する。候補の詳細・初回記録欠落と保存修復・数値は[既存trial](../../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-v4-inverse-clip-support-20261112)を参照。
+
+
+<a id="piece-natural-single-answer-connection-20261113"></a>
+## 9.35 2026-11-13 — 現naturalの実一回答からPieceへの既存接続を修復
+
+**11/13・現naturalの実一回答をPieceへ渡す接続抜けを修復：** 画面で選べるCOMPLETED/REFINEDの一回答が、旧finite専用のAPI/SQL検査で拒否されていた。原入力と実ANSWERを別sourceのまま既存Pieceへ接続し、3plan×自然終了/本人終了の6経路で生成候補・保存・同一版の非生成再読、quota各1を確認。消費した履歴は新しい7記録で置換せず、改変・削除時は拒否する。新71件は分割実行で全成功、既存248件も成功。提供文とPiece HTTPは合成・DBは隔離PGliteであり、新実4B・live DB・Render・RN/build/本人端末の成功ではない。 実装は[API f7b44e0e](https://github.com/MassyuRed/mashos-api/commit/f7b44e0eb12db168120a0fab5c12e51181db9bfe)へ保存し、変更5pathの全content/SHA・PR3 head一致を確認。記録時点でPiece CI [43400087856](https://github.com/MassyuRed/mashos-api/actions/runs/43400087856)はattempt1成功、Analysis CI [43400087749](https://github.com/MassyuRed/mashos-api/actions/runs/43400087749)はattempt1実行中。実DB未適用。
+
+前段の実17比較後の読取りでは、全34実本文の独立readerはparsed count0/UNASSESSEDでCHECKER_ERRORではなかった。有限readerの二つの役割witnessや旧typed文章化を、自然文全般の意味理解・本人向けの新作者へ読み替えない。本人説明の呼出し到達と保持8の学習/生成prompt token一致は確認済みだが、宛先の声・格崩れ・付加を解消する単純な未接続箇所は特定していない。今回のPiece接続修復を、その品質問題の解決として数えない。
+
+### 原因と実装範囲
+
+既存RN `screens/input/EmlisThreadModal.js:selectedPieceSupplementalAnswer` はnaturalも含む一回答のCOMPLETED/REFINEDを選択できる。一方、APIの既存 `resolve_refined_handoff` は古い `context()` とfinite専用checkpoint/OBS条件を使い、現naturalを `PIECE_SOURCE_NOT_ELIGIBLE` で拒否していた。旧sourceで架空の実natural一回答を通して同拒否を再現した。仕様追加で資格を緩めるのではなく、§7.1の適格refinedと§9.1の三中核接続を既存owner内で修復する。
+
+naturalはQ3/`native_bound_question.v1`、実1QUESTION/1ANSWER、round1、RESOLVED、ADDのみの一つのMEANING_UPDATE、初期/最終OBS、各STARTED→RECEIVED receiptがすべて一致する場合に限定する。原入力からの初期prefix、本人の実ANSWERとcurrent checkpointは既存 `prepare_emlis_meaning` で再導出する。自然文の本文は完了確認であり本人sourceにしない。初期naturalに存在しない旧finite checkpointを捏造しない。
+
+現保存cohortは `related_context(..., context_guards=...)` で取得する。両OBSとreceiptを現context ref/guards・prefix・model・artifact・attempt・時系列へ束縛し、本人が一回答後に終了した場合も同じ確定済みOBSだけを使う。二問目、重複receipt、未知policy/profile、失敗終了、改変original/ANSWER/checkpoint、消費履歴の編集/削除はAPIと既存3 SQL操作で拒否する。拒否後の作品・preview・quota不変も確認した。
+
+SQLは保存鎖と再構成した現context、既存source envelope/hash/ADDを検査する。原入力の言語意味とcheckpoint全文の再導出はAPI ownerが担い、SQLだけで同じ意味検査をしたとはしない。canonical保存lineageが持たないprivate `observation.source_prefix_ref` を要求せず、既存thread/checkpoint/receiptでprefixを束縛する。新しい公開fieldは追加しない。
+
+| 変更ファイル（mashos-api） | 現在の責務 |
+|---|---|
+| `ai/services/ai_inference/piece_v2_source_adapter.py` | 現natural Q3の保存時関連cohortを取得し、原入力＋実ANSWER、独立の初期/最終receipt、ADD意味checkpointの現ownerによる再導出を照合して既存refined handoffへ渡す。 |
+| `supabase/migrations/20261113085044_piece_natural_refined_source_fence.sql`（新） | 既存preview issue/save/visualの3 SQL関数へnatural一回答の保存鎖検査を追加。既存NULL-profile有限分岐・署名・table・ACL/RLS・quota/lockを保持し、未知profileは拒否する。実DB未適用。 |
+| `ai/tests/piece_v2/test_b05_natural_refined_saved_pipeline.py`（新） | natural実QUESTION/ANSWER/MEANING_UPDATEから既存Piece parser/CMEE/B8/Safety/隔離SQL保存/本人再読までの71検査。 |
+| `.github/workflows/piece-b2b-isolated-postgres.yml` / `.github/workflows/analysis-observed-content.yml` | 新suiteとmigrationを既存CIのpaths/実行stepへ登録。 |
+
+### 検証結果と限界
+
+| 確認 | 実績 |
+|---|---|
+| 新suite | 固有71件が分割実行で全成功。自然一回答6、改変13×SQL3操作39/API13、既存catalog1、旧finite2、natural原入力のみ1、不正終了3、履歴編集/削除×3操作6。重複runを加算しない。 |
+| 既存回帰 | refined意味/source/projection/preview/service/SQLとnatural questionの既存8suite、248成功・失敗/skip0、42.520秒。 |
+| 六つの正例 | Free/Plus/Premium×自然終了/本人終了。natural合成providerは各2call、Piece固定mock HTTPは各1call。実source/ANSWERは別根拠として同じ既存compiler/parserへ渡す。 |
+| 保存と再読 | preview/replay、paid visual、save/replay、別serviceの本人detailを通し、同本文/content/recipe/rendererを保持。保存枠各1、再読時生成0、原入力/Emlis event不変。 |
+| 履歴 | paid正例は保存時の一履歴を保持し、その後7件増えて旧contextの候補から外れても同cohortを使用。合成履歴原本の初期回収分と後続7件版は区別する。 |
+| 独立review | source/SQLの意味検査強度差、終了条件、履歴無効化、両CI組込みを別担当がread-only確認。保存を止める重大所見なし。 |
+| 試験中の訂正 | 第二QUESTIONのfixtureがround1の既存unique制約に当たり、round2へ訂正。paid履歴の初期期待を7新記録へ訂正。最初のSQL候補の非公開prefix参照はcanonical lineageに合わせ除去。これらの途中失敗を本番成功や意味改善へ数えない。 |
+
+合成Auth・natural prose・Piece HTTP framingと隔離PGliteを使った接続/保存検証である。PostgREST/Auth実環境、実4Bの新本文、RN Bitmap/PNG、端末・実書出しは今回未検証。RNの既存選択UIと公開DTO/source型/作者/renderer/rights/quotaは変更しない。STRUCTURE_MAP_DELTA_PRESENT：既存source adapter/SQLのprofile分岐と新migration/test/CI接続を01A/01B/01C・current01/02/04へ反映した。
+
+前回§9.34の新10b563候補不採用・通常model selector OFFを維持する。今回の一回答接続と、AI応答への二欄訂正・複数回答・REVISE/WITHDRAWの伝播は別範囲で、後者は未接続。一般的な応答/編集品質、同じ新本文の端末画像/書出し、全補助経路の受入れは未完。GPU・学習・本番SQL適用・Render配置・RN変更・新build/配布は0。
+
+次は当該headの既存CI結果を確認してこの接続を引き継ぐ。通常反映は累積migrationの依存を確認したDB→APIの順で扱い、実4B本文・同じ作品の保存/画像/再読は残件として区別する。旧finite作者や逆読取を自然文へ無条件に移す処置、本人一人称の機械置換、同じfit/hint/比較の自動反復は行わない。全file tree/責務差分の確認を全仕様意味読了の証明に置き換えない。

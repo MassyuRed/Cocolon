@@ -4777,3 +4777,12 @@ checkpointの詳細は07 / Planへ委譲し、本資料ではbackend support上�
 - 当回訂正は全プラン、継続利用は既存履歴／本人frame権利。新料金・input quota・QUESTION追加なし。API／RN・CMEEの既存ownerは01Aと各current mapへ反映。
 
 STRUCTURE_MAP_DELTA_PRESENT。実装・適用順migration→API→RN、未接続のPremium本人frame／Analysis／Piece・実4B品質・live／端末は[補助経路§9.28](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-post-reply-correction-20261113)を参照。
+
+<a id="piece-natural-single-answer-connection-20261113"></a>
+## 2026-11-13 — naturalの実一回答をPieceへ渡す既存接続の修復
+
+**11/13・現naturalの実一回答をPieceへ渡す接続抜けを修復：** 画面で選べるCOMPLETED/REFINEDの一回答が、旧finite専用のAPI/SQL検査で拒否されていた。原入力と実ANSWERを別sourceのまま既存Pieceへ接続し、3plan×自然終了/本人終了の6経路で生成候補・保存・同一版の非生成再読、quota各1を確認。消費した履歴は新しい7記録で置換せず、改変・削除時は拒否する。新71件は分割実行で全成功、既存248件も成功。提供文とPiece HTTPは合成・DBは隔離PGliteであり、新実4B・live DB・Render・RN/build/本人端末の成功ではない。 [実装 f7b44e0e](https://github.com/MassyuRed/mashos-api/commit/f7b44e0eb12db168120a0fab5c12e51181db9bfe)。新migrationは20261113085044_piece_natural_refined_source_fence.sql。既存preview issue/save/visualの3関数を置換し、ACL/RLS/署名/table/権利/quotaは保持。SQLの鎖検査とAPIの意味再導出を区別する。workflow2本へ同suite/pathsを追加した。
+
+前回§9.34の新10b563候補不採用・通常model selector OFFを維持する。今回の一回答接続と、AI応答への二欄訂正・複数回答・REVISE/WITHDRAWの伝播は別範囲で、後者は未接続。一般的な応答/編集品質、同じ新本文の端末画像/書出し、全補助経路の受入れは未完。GPU・学習・本番SQL適用・Render配置・RN変更・新build/配布は0。
+
+STRUCTURE_MAP_DELTA_PRESENT。詳細・責務/全71内訳・合成限界・次は[詳細設計§9.35](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-natural-single-answer-connection-20261113)を正本とする。記録時点でPiece CI [43400087856](https://github.com/MassyuRed/mashos-api/actions/runs/43400087856)はattempt1成功、Analysis CI [43400087749](https://github.com/MassyuRed/mashos-api/actions/runs/43400087749)はattempt1実行中。実DB未適用。

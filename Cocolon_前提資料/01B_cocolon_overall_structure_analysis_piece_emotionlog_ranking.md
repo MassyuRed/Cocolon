@@ -4016,3 +4016,19 @@ Analysisの4B候補は、API側別作者から既存Engine/semantic_admission/in
 | API `response_microcache.py`／`ai/tests/test_analysis_report_kokoro_weather.py` | 無効化後の旧inflight再cacheを防ぎ、ASGI既読mark競合で確認 |
 
 表示・guide・tutorial・購読・新規report／配布copyも同期。実配置8739cd80／配布7901、今回候補の未build／未配置と実機残件は[最新構造](current_structure/03_analysis_current_structure.md#kokoro-graph-history-read-20261108)へ分ける。
+
+<a id="piece-natural-single-answer-connection-20261113"></a>
+## 2026-11-13 — naturalの実一回答をPieceへ渡す既存接続の修復
+
+**11/13・現naturalの実一回答をPieceへ渡す接続抜けを修復：** 画面で選べるCOMPLETED/REFINEDの一回答が、旧finite専用のAPI/SQL検査で拒否されていた。原入力と実ANSWERを別sourceのまま既存Pieceへ接続し、3plan×自然終了/本人終了の6経路で生成候補・保存・同一版の非生成再読、quota各1を確認。消費した履歴は新しい7記録で置換せず、改変・削除時は拒否する。新71件は分割実行で全成功、既存248件も成功。提供文とPiece HTTPは合成・DBは隔離PGliteであり、新実4B・live DB・Render・RN/build/本人端末の成功ではない。 [実装 f7b44e0e](https://github.com/MassyuRed/mashos-api/commit/f7b44e0eb12db168120a0fab5c12e51181db9bfe)。Pieceの源泉ownerは原入力＋実ANSWER、完成OBSはcontrolに限定する。既存renderer/画像ownerは変更0。新testとAPI adapterの責務を下表に記録する。
+
+| 変更ファイル（mashos-api） | 現在の責務 |
+|---|---|
+| `ai/services/ai_inference/piece_v2_source_adapter.py` | 現natural Q3の保存時関連cohortを取得し、原入力＋実ANSWER、独立の初期/最終receipt、ADD意味checkpointの現ownerによる再導出を照合して既存refined handoffへ渡す。 |
+| `supabase/migrations/20261113085044_piece_natural_refined_source_fence.sql`（新） | 既存preview issue/save/visualの3 SQL関数へnatural一回答の保存鎖検査を追加。既存NULL-profile有限分岐・署名・table・ACL/RLS・quota/lockを保持し、未知profileは拒否する。実DB未適用。 |
+| `ai/tests/piece_v2/test_b05_natural_refined_saved_pipeline.py`（新） | natural実QUESTION/ANSWER/MEANING_UPDATEから既存Piece parser/CMEE/B8/Safety/隔離SQL保存/本人再読までの71検査。 |
+| `.github/workflows/piece-b2b-isolated-postgres.yml` / `.github/workflows/analysis-observed-content.yml` | 新suiteとmigrationを既存CIのpaths/実行stepへ登録。 |
+
+前回§9.34の新10b563候補不採用・通常model selector OFFを維持する。今回の一回答接続と、AI応答への二欄訂正・複数回答・REVISE/WITHDRAWの伝播は別範囲で、後者は未接続。一般的な応答/編集品質、同じ新本文の端末画像/書出し、全補助経路の受入れは未完。GPU・学習・本番SQL適用・Render配置・RN変更・新build/配布は0。
+
+STRUCTURE_MAP_DELTA_PRESENT。詳細・責務/全71内訳・合成限界・次は[詳細設計§9.35](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-natural-single-answer-connection-20261113)を正本とする。記録時点でPiece CI [43400087856](https://github.com/MassyuRed/mashos-api/actions/runs/43400087856)はattempt1成功、Analysis CI [43400087749](https://github.com/MassyuRed/mashos-api/actions/runs/43400087749)はattempt1実行中。実DB未適用。

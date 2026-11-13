@@ -3048,3 +3048,12 @@ NO_STRUCTURE_MAP_DELTA：source/test/公開型/route/DB/作者/controller/Gate�
 全件架空の段落／二欄／別本人補足3件を、稼働中base4Bから35.283987秒・一回で取得。3/3 HTTP200/stop、学習／提供停止／retry0。全field本文が原文そのままで、文章の編集改善は0。元requestへexactに結んだCMEE／S7と、既存隔離Free保存・同一本人再取得は3件成功、quota各1・保存後provider0だった。保存344a、live Auth／DB／本人端末の成功へ換算しない。
 
 毎作業前の全確認・理解を既存R2.1へ絶対規則として明記し、全体現在地の古い分析未接続／Piece未反映行を後続の実績へ整合させた。全file意味読了は未完で、確認・是正を続ける。current GPUの空き9,423MiBではBF16二重loadの余裕を確認できず、このbase確認時点では保存候補の新3件比較は未実行だった。その後の承認済み一回は完了し、生成3／CMEE拒否3／保存0として本書冒頭と既存trialの新記録へ更新した。詳細・出所・自動審査による旧5件送信拒否と新架空3件への縮小・保存時の非最終停止を[既存trial](../observation_learning/trials/2026-11-08-auxiliary-asset-reuse-ar01/piece_request_account_reuse_review.md#piece-general3-base-actual-20261112)へ記録。構造変更0・商品品質改善0を維持する。
+
+<a id="piece-natural-single-answer-connection-20261113"></a>
+## 2026-11-13 — naturalの実一回答をPieceへ渡す既存接続の修復
+
+**11/13・現naturalの実一回答をPieceへ渡す接続抜けを修復：** 画面で選べるCOMPLETED/REFINEDの一回答が、旧finite専用のAPI/SQL検査で拒否されていた。原入力と実ANSWERを別sourceのまま既存Pieceへ接続し、3plan×自然終了/本人終了の6経路で生成候補・保存・同一版の非生成再読、quota各1を確認。消費した履歴は新しい7記録で置換せず、改変・削除時は拒否する。新71件は分割実行で全成功、既存248件も成功。提供文とPiece HTTPは合成・DBは隔離PGliteであり、新実4B・live DB・Render・RN/build/本人端末の成功ではない。 [実装 f7b44e0e](https://github.com/MassyuRed/mashos-api/commit/f7b44e0eb12db168120a0fab5c12e51181db9bfe)。
+
+前回§9.34の新10b563候補不採用・通常model selector OFFを維持する。今回の一回答接続と、AI応答への二欄訂正・複数回答・REVISE/WITHDRAWの伝播は別範囲で、後者は未接続。一般的な応答/編集品質、同じ新本文の端末画像/書出し、全補助経路の受入れは未完。GPU・学習・本番SQL適用・Render配置・RN変更・新build/配布は0。
+
+STRUCTURE_MAP_DELTA_PRESENT。詳細・責務/全71内訳・合成限界・次は[詳細設計§9.35](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-natural-single-answer-connection-20261113)を正本とする。記録時点でPiece CI [43400087856](https://github.com/MassyuRed/mashos-api/actions/runs/43400087856)はattempt1成功、Analysis CI [43400087749](https://github.com/MassyuRed/mashos-api/actions/runs/43400087749)はattempt1実行中。実DB未適用。
