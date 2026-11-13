@@ -3134,4 +3134,14 @@ new2を凍結した同checkpointへ実receipt保存・別service非生成再読�
 
 API dbb96acaと既存RN Modalを適合し、原入力＋最新の自己完結ADD一件という既決契約のまま、naturalの2自然終了／2stop／3自然終了を接続。先行全roundは資格だけに使い、REVISE/WITHDRAW/未解決を拒否する。Python431固有＋38subtests、RN47固有成功、3plan計9保存再読・quota各1を確認した。これらは合成provider/Auth・隔離SQLで、実4B／native画像／live／本人端末の成功ではない。
 
-第2・第3回答を選ぶ実2作品は同checkpointと完全messagesを固定し、送信3file49,490byte、前後4対照＋health2GET込み300秒・一回・学習／再試行／再起動0の準備済み。新承認待ち・送信／model呼出0。通常selector OFF、frame新2不採用も維持する。STRUCTURE_MAP_DELTA_PRESENT。[実装file・確認・原本・残件§9.43](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-latest-later-add-selected-20261113)を正本とする。
+第2・第3回答を選ぶ実2作品は同checkpointと完全messagesを固定し、送信3file49,490byte、前後4対照＋health2GET込み300秒・一回・学習／再試行／再起動0の準備済み。準備時点では新承認待ち・送信／model呼出0だった。11/14承認分の実結果は次項へ更新した。通常selector OFF、frame新2不採用も維持する。実装単位のSTRUCTURE_MAP_DELTA_PRESENT。[実装file・確認・原本・残件§9.43](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-latest-later-add-selected-20261113)を正本とする。
+
+
+<a id="piece-latest-later-add-actual-20261114"></a>
+## 2026-11-14 — 最新一回答の実Piece2作品を取得、同状態の保存・再読まで一致
+
+承認49,490byte・3fileを一回実行し、新Piece2＋前後4応答は全200／stop／attempt1、health2GETも200。ZIP閉鎖94.076319秒、通常／Analysis前後の全response bytesとPID/starttime一致、学習／再試行／再起動／model load0。今回の許可は消費済みである。
+
+原入力＋第2/3回答の最新一件を保持し、先行回答や合成Emlisの混入なし。両field値は原文と同文で、否定・対比・過去と今の意味を保つ点に明確な問題は見つからなかった。編集差分0なので一般的な整形品質改善は未実証とする。同checkpointで実rawを各1回メモリ内受領し、プレビュー・保存・非生成再読2件が本文／内容／見た目recipeの各hash・renderer版まで一致。quota各1、原入力・thread/events不変、保存再開時のmodel再取得0。隔離SQL・合成Authの結果であり、live DB／native画像／全plan実4B／本人端末の成功ではない。
+
+同じ原本へ実raw・全文照合・保存結果を更新した。API dbb96acaのPiece／Analysis両CIはattempt1 success。今回のsource／SQL／RN変更は0、STRUCTURE_MAP_DELTA_NONE。主な到達点はTECHNICAL_CREDITで、次の直接未完は同版native画像・実機表示と長め段落／二欄の実本文品質。通常selector OFF、過去frame新2／新3と新10b563不採用を維持する。[原本・確認範囲・残件§9.44](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-latest-later-add-actual-20261114)を正本とする。

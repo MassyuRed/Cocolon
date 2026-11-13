@@ -4,15 +4,15 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-13 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR04_LATEST_SELECTED_ADD_AFTER_ROUND2_3_CONNECTED_ACTUAL_PREPARED
+status: AR04_LATEST_SELECTED_ADD_AFTER_ROUND2_3_ACTUAL_SAVED_REREAD_COMPLETE_PROSE_IMPROVEMENT_UNPROVEN
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Natural round2/3 latest independent ADD selection connected to existing Piece source, preparation, SQL and RN; original plus exactly one selected answer retained, all earlier rounds eligibility only; 431 Python tests and 47 RN tests pass; same-checkpoint actual2 packet 49490 bytes prepared, no upload or model call, new single-use authority pending; prior frame new2 not adopted and normal selector OFF"
+current_next: "Selected latest round2/3 independent ADD reached real Piece model2 and same-checkpoint save/reread2 in 94.076319 seconds; literals retain original plus exactly one latest answer, prose edit delta0 and general prose improvement unproven; next same-version native image/device and broader paragraph/two-field actual prose; no hosted SQL/deploy, prior frame new2 not adopted, selector OFF and single-use approval consumed"
 runtime_effect_of_this_document: 0
 ---
 
-> **11/13・第2/3回答後の最新一回答をPieceへ渡す候補：原入力＋画面で明示した最新の自己完結ADD一件を維持し、先行全roundは資格確認だけに使う。API dbb96aca、Python431固有＋38subtests、RN47固有成功。3plan×2自然／2stop／3自然の9保存再読を確認。実4B・本番SQL／配置・実機は未完、通常selector OFF。** [実装・確認範囲・実2準備§9.43](#piece-latest-later-add-selected-20261113)。
+> **11/14・最新一回答のPiece実4B2作品を94.076319秒で取得し、同checkpointで保存・再読2件一致。原入力＋第2/3回答の最新一件を保持し、先行回答の混入なし。実本文は原文と同文のため整形品質改善は未実証。前後4応答・health2GET成功、学習／再試行／再起動0。通常selector OFF、本番・native画像・本人端末は未完。** [実結果・確認範囲§9.44](#piece-latest-later-add-actual-20261114)。
 
 > **11/13・別記録の反復判断対象を実4Bで比較、本文新2は不採用：** 承認50,496byteを一回実行し、研究4＋前後4応答は全200/stop、health2GETも200。ZIP閉鎖まで97.762331秒、通常／Analysis前後全response bytesと同PID/starttimeを維持した。再修正側は今回の悲しみを落として過去へ結合し、不使用側は過去の重さ・戸惑いと未記載の自責傾向を追加した。同じnew2 checkpointで実receipt保存・別service非生成再読2成功、再取得0。保存成功と本文品質は別判定で、通常selector OFFを維持する。 [実原本・採否§9.42](#emlis-cross-record-frame-target-actual-20261113)。
 
@@ -2863,4 +2863,32 @@ STRUCTURE_MAP_DELTA_NONE。製品source／test／SQL／RN／model／SYSTEM／sel
 
 同checkpointを閉じて戻す固定CPU preflight2件では、既存4B受領contractをMockTransportで再演し、候補・保存・再読とquota1、source／thread／全events不変を確認した。準備中の要求SHAのJSON順序・合成応答format・trusted source_requestとblock順の機械的不整合を修正して最終一致を確認した。原checkpointと最終送信3fileを固定し、独立read-onlyでも照合済みである。取得後もrawを補修せず、既存partition順で同状態へ保存する。ZIP閉鎖後最終summaryを別原本として必須にし、閉鎖前summaryを上書きしない。
 
-新しい一回分の承認待ちで、Pod送信／実4B呼出は0。前回までの許可は消費済みで再使用しない。実2作品の原入力対照・自然さ・同版保存とnative画像、全planの実4B、live Auth/PostgREST・本番SQL適用・Render配置・本人端末は未実行／未確認。CPU候補や表示単体成功を作品品質改善済みとはしない。通常selector OFF、新10b563・§9.38新3・§9.42新2不採用を維持し、全補助経路の完成へ広げない。全file本文・全仕様の意味理解をこの限定変更やtest件数から全完了とは主張しない。
+準備時点では新しい一回分の承認待ちで、Pod送信／実4B呼出は0だった。11/14のMash明示承認で実行済みとなり、実2作品の本文対照・同状態保存の結果は§9.44へ更新した。今回分を含め過去の許可は消費済みで再使用しない。実2作品の原入力対照・同版保存は§9.44で確認済み。一般的な整形品質改善、native画像、全planの実4B、live Auth/PostgREST・本番SQL適用・Render配置・本人端末は引き続き未実証／未実行／未確認。CPU候補や表示単体成功を作品品質改善済みとはしない。通常selector OFF、新10b563・§9.38新3・§9.42新2不採用を維持し、全補助経路の完成へ広げない。全file本文・全仕様の意味理解をこの限定変更やtest件数から全完了とは主張しない。
+
+
+<a id="piece-latest-later-add-actual-20261114"></a>
+## 9.44 2026-11-14 — 最新一回答の実4B2作品と、元checkpointからの保存・再読
+
+### 承認一回分の実結果
+
+Mashの「49,490byte・3file、新2作品＋前後4応答＋稼働確認2GET、最大5分・一回・学習／再試行／再起動なし。既存2鍵は同Pod内認証だけ」への明示承認を実行した。凍結したrunner18,774byte・wire30,515byte・台帳201byteの全SHAが送付後も一致し、今回専用directoryでstarted排他を使った。既存Pod f1lle4xwq3wjlnの稼働中localhost提供だけを呼び、新Piece2＋通常／Analysis前後4＝6POST、health2GETを実施。全HTTP200、6応答ともstop／attempt1、ZIP閉鎖まで94.0763195469秒。学習／再試行／再起動／停止／model load0。通常／Analysisの前後全response bytes、PID84398／starttime212772776が一致した。既存2鍵は同Pod内localhost認証のメモリ内headerだけに使い、環境全体・鍵を出力／保存／外部送信しなかった。
+
+### 実本文の判定
+
+Freeの自然終了2回答／3回答後を各1件確認。両件の既存piece.field_slots.v1はmemo_0とanswer_text_private_1の2fieldで、値はそれぞれ原入力と選択した最新回答のliteralに完全一致した。第2回答作品は元の2節と最新の怖さ、第3回答作品は元の3節と最新の寂しさを保持する。嬉しくなかったという否定、過去の反応、最新回答の今、褒められた／誘われた／頼まれたの役割を保持し、先行の嬉しさ／怖さや合成Emlis本文の混入、未記載の原因・意図・感情の追加、過去から現在への連続変化の断定は見られない。
+
+全文照合と独立read-only確認で、この限定2件の意味保持に明確な問題は見つからなかった。一方、可視の文章編集差分は0で、原文の複写を整形品質改善とはしない。元から伝わる短文を維持したこと自体をFAILにもせず、一般的な長文・二欄の作品化、全回答取込、通常モデル採用や正式human Product Readへ広げない。
+
+### 同状態の保存・再読
+
+原取得前checkpoint2件をそのまま復元し、凍結prepared／完全messages／source commitment／最新回答IDが一致することを確認した。取得済みrawを補修せず、既存provider contractへMockTransportで各1回再演した。既存partition順でpreview・保存・非生成GETまで同じ本文・content payload・visual recipeと各hash／renderer版が一致し、各quota1、原入力・thread・既存eventsは不変。保存再開時の新model取得は0。rawのslot並びを変更した再生成や新Emlis start／answerはない。
+
+保存先は隔離PGlite、AuthとSQL callbackは合成で、先行Emlisも合成のまま資格確認だけに用いた。今回の実4BはPiece2作品と前後対照であり、Emlis全会話・全plan実生成、live Auth／PostgREST、本番SQL、native bitmap・端末の成功ではない。
+
+### 原本・到達点・次の未完
+
+原本は [Cocolon_CMEE_AR04_LatestAnswer_Piece_Actual_20261114.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-b1e9007b37fc8191b9be577a53a22038_2f7470f963808191aaebf050935e72de&account_id=personal) へ同じfile identityで更新した。9,765,108byte、SHA256 `e92dec0e3d4efc891ff8851eca21310020d95a4868fe83f2233145a43ee07993`、47member。prepared19memberはbyte変更せず、実取得folder archive／results.zip、全raw・完全要求、ZIP閉鎖前summaryと閉鎖後final_summaryの別原本、全文判定、同状態保存2結果を保持する。秘密値やpublic GitHubへのprivate本文追加はない。
+
+API dbb96acaのPiece CI43435593613とAnalysis CI43435593636はどちらもattempt1 successとなった。既報の431固有Python＋38subtests・47固有RNに今回の保存再演を新test数として加算しない。本作業でsource／SQL／RN／SYSTEM／hint／modelは変更せず、STRUCTURE_MAP_DELTA_NONE。実行と残件の差分だけを現在地・本書・weeklyへ反映する。
+
+主な到達点はTECHNICAL_CREDIT：最新独立ADD一回答が実4Bを通り、同版の候補・保存・再読まで接続した。次の直接未完は同版native画像・実機表示と、長め段落／思考・行動二欄の実本文品質。全回答集合や訂正／撤回を含む作品化、本番SQL適用・Render配置・本人端末・正式受入れは未完を維持する。通常selector OFF、新10b563・§9.38新3・§9.42新2不採用は変更なし。今回の一回分の許可は消費済みで、追加生成・再試行・本番反映に再使用しない。
