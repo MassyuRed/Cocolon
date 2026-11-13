@@ -1,4 +1,4 @@
-> **11/13・訂正対象AI文の出所分離候補を実装：** API3b727b3fで、保存原本を変えず、生成時だけ旧AI対象文をlocator付きassistant文脈へ分離。本人の原入力・全説明・対象全文・版を保持し、通常はOFF。新HTTP受付候補も明示設定のnatural限定。関連187件＋server20件成功。旧base3件と同sourceの新3生成要求・31,471byte、停止／復元込み最大10分の一回を準備したが未送信・新実4B0。旧原本の隔離3保存／非生成再読は新品質実績ではない。応答品質・通常採用・live／端末は未達。[候補・具体比較・境界](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-ai-target-context-prepared-20261113)。
+> **11/13・AI訂正対象の出所分離を実4Bで比較、通常不採用：** 承認31,471byteを一回実行し、候補3＋前後4対照・86.144974秒、学習/retry0。元提供PID80025→83325へargs/env/cwd・source/adapter/両鍵を保持して復元、natural/Analysis前後全文一致・health正常を確認。姉→先生の反転と先生→妹の格・態崩れが残り不採用、認識時点は保持したが旧baseも正しかった。3件の同source隔離SQL保存・新service非生成再読は一致し、意味合格とは区別する。通常OFF・独立比較全3UNASSESSED。新HTTP受付の実GPU/通常採用・live/端末・全補助経路は未完。[実原本・判断と次](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-ai-target-context-actual3-20261113)。
 
 > **11/13・Mashから華恋へ判断を委任された提供方針：** 今回の応答への訂正・読み直しはFree／Plus／Premiumすべてに提供する。次回以降への活用は既存権利に合わせ、Freeは当回、Plusは適格履歴、Premiumは適格履歴と本人フレームを差にする。誤解を伝える入口や当回の読み直しを課金で閉じない。新料金・月間quota・問数増加は追加しない。Premium本人フレームへの新しい訂正の反映は構築目標であり、接続済みとはしない。
 
