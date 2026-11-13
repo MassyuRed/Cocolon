@@ -3070,10 +3070,28 @@ STRUCTURE_MAP_DELTA_PRESENT。実装と責務・原本・途中環境失敗・�
 
 
 <a id="emlis-frame-feedback-target-context-prepared-20261113"></a>
-## 2026-11-13 — 本人判断と対象frameのprivate結合を修復
+## 2026-11-13 — 本人判断と対象frameのprivate結合を修復（準備時点の履歴・一回完了）
+
+> 本節は実行前の準備時点の履歴です。「未送信／未実行／承認待ち」および実生成0の記載は当時の状態を示します。Mashの具体承認後の一回は完了し、実結果・同源泉保存・不採用・残差は[§9.38](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-frame-feedback-target-context-actual-20261113)へ更新しました。
 
 **11/13・本人frame判断の対象欠落を修復、実4B比較を準備：** 次の作者材料に確認/不使用/修正のstatusだけが届き、どの仮理解への判断かが落ちていた。Premiumの適格履歴から既存ownerで対象を再導出し、記録ID/frame key/frame refの一意・完全一致と根拠を確認できたものだけAI解釈contextとして添える。後の修正viewや旧版は未確定に残し、本人のstatus/修正文を保持する。新12固有・既存316成功。新3の合成受領保存/新service非生成再読も一致。 実装はAPI 96c2085a。API 96c2085aのPiece CI [43411618714](https://github.com/MassyuRed/mashos-api/actions/runs/43411618714)とAnalysis CI [43411618653](https://github.com/MassyuRed/mashos-api/actions/runs/43411618653)は、ともにattempt1で全工程成功。追加dispatch/rerun0。
 
 83,777byte/3file、旧2＋新3と前後4model確認＋health2GET、300秒・一回・学習/再試行/再起動0の実比較を準備。未送信/未実行、今回分の承認待ち。SYSTEMの文章・モデル・作者・公開DTO/API・DB/SQL・RN・料金/問い数/quotaは変更しない。対象contextは本人sourceや有効frameではない。一般応答品質、反復修正時の対象復元、二欄訂正→frame/他core伝播、live/本人端末・正式受入れは未完。通常model selector OFF、新10b563不採用を維持する。
 
 STRUCTURE_MAP_DELTA_PRESENT。既存natural_reply.pyの対象投影、新testと既存workflow2本の責務/限界/原本を[詳細設計§9.37](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-frame-feedback-target-context-prepared-20261113)へ集約する。
+
+
+<a id="emlis-frame-feedback-target-context-actual-20261113"></a>
+## 2026-11-13 — frame本人判断の実5比較・同源泉3保存、自然本文は不採用
+
+承認済み83,777byte／3fileを既存Podで一回実行した。旧2＋新3の研究5、通常／Analysis前後4対照の計9model POSTは全HTTP200／stop、独立health前後2GETも200。実行98.005834247秒、archive close98.032634725秒で300秒以内に完了した。PID84398／starttime212772776は不変、通常／Analysisの前後生responseは各全byte一致。学習／再試行／提供停止／再起動／重みload／設定変更0で、この一回の承認は完了消費済みである。
+
+新3は本人判断を優先した本文の達成0/3、FAIL3/3として品質改善候補を不採用とした。拒否Aは「褒められた→重かった」、拒否Bは「誘われた→怖かった」という拒否済みmappingを断定し、修正Aは本人の「結果だけで判断されたことが気になった。」を反映せず旧mappingを再使用した。元の過去ANSWERは実在し、問題は感情の捏造ではなく、後の本人status／修正文を優先しない無留保の再使用である。旧拒否／旧修正の2rawは全文同一の現原入力復唱で、旧修正も本人文を反映していない。旧拒否の単純復唱を対象識別成功へ数えない。
+
+同じ新3checkpointに実receiptを保存し、新service GETで同本文の非生成再読3/3を確認した。再取得／model call0、原入力／ANSWER／feedback／先行event不変。拒否A/Bは指定frameのみを除いた各2frame、修正Aは本人修正文を含む3frameを保持した。保存本文への処置は既存providerと同じ外側空白stripだけで、実response.modelも保持し、語句・意味の修補はしていない。隔離PGlite／架空sourceの実HTTP本文保存であり、live DB／実Auth／Render／RN／本人端末ではない。
+
+対象情報は作者材料へ届くが、本人status／修正文を優先した自然本文にならない、という残差がある。今回5rawは「今は嬉しい」を保持し、明確な極性反転・時点逆転・内部label／ID／診断露出は認めなかった。この範囲を一般品質へ広げず、前記録と当回同文記録の識別不足、新3が当回の悲しさ／寂しさを過去mappingへ置換したように読める限界を残す。新Aの変化の受取りも具体訂正の受領を示すものではない。唯一原因は確定せず、追加hint／SYSTEM／fit比較へ進まない。
+
+STRUCTURE_MAP_DELTA_NONE：今回は実比較・同源泉保存再読・採否記録だけで、製品source／test／公開DTO/API／DB/SQL／RN／モデル／通常selectorの変更0。通常selector OFF、新10b563不採用を維持し、一般応答品質・反復修正時の対象復元・二欄訂正からframe／他coreへの意味伝播・live／本人端末・正式受入れは未完である。
+
+詳細・private原本・採否と保存の範囲は[補助設計§9.38](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-frame-feedback-target-context-actual-20261113)を正本とする。

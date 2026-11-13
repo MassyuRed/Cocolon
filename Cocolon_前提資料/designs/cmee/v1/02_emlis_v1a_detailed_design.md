@@ -732,7 +732,7 @@ Freeもthread／artifactを保存する。ただし、別入力の次回Emlis生
 
 ### 18.4 Premium interpretive frame
 
-**11/13対象結合の修復：** 本人の確認/不使用/修正に、対象と一意に同定できた元frameのAI解釈contextを結ぶ。記録ID/key/ref一致を要し、反復viewや旧版は未確定のまま本人文を保つ。SYSTEM変更なし・実本文効果は未確認。[実装/比較準備§9.37](../Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-frame-feedback-target-context-prepared-20261113)。
+**11/13実比較・本文不採用：** 対象AI解釈contextの結合候補を承認済み一回で旧2／新3比較し、新3は拒否済みmapping再使用・本人修正文無反映のため達成0/3、品質改善として不採用。同じ新3checkpointで実receipt保存／新service非生成再読3/3を確認した。対象情報は届くが、本人status／修正文を優先した本文にならない残差がある。一般品質・反復修正時の対象復元は未完。今回はSTRUCTURE_MAP_DELTA_NONE、追加hint／SYSTEM／fit比較へ進まず通常selector OFFを維持する。[実結果・採否§9.38](../Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-frame-feedback-target-context-actual-20261113)。
 
 **11/13実装差分：** 既存の根拠付き暫定frameの保存表示・確認/修正/不使用を現naturalへ接続した。本人修正文の次回作者材料への到達を隔離SQL/RN描画で確認。4B応答の品質改善・当回二欄訂正からframeへの伝播は未成立。料金/プランを変えず、当回訂正中は旧frameを表示しない。[範囲と原本§9.36](../Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-natural-owned-premium-frames-20261113)。
 
