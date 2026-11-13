@@ -3095,3 +3095,11 @@ STRUCTURE_MAP_DELTA_PRESENT。既存natural_reply.pyの対象投影、新testと
 STRUCTURE_MAP_DELTA_NONE：今回は実比較・同源泉保存再読・採否記録だけで、製品source／test／公開DTO/API／DB/SQL／RN／モデル／通常selectorの変更0。通常selector OFF、新10b563不採用を維持し、一般応答品質・反復修正時の対象復元・二欄訂正からframe／他coreへの意味伝播・live／本人端末・正式受入れは未完である。
 
 詳細・private原本・採否と保存の範囲は[補助設計§9.38](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-frame-feedback-target-context-actual-20261113)を正本とする。
+
+
+<a id="emlis-repeated-frame-target-same-thread-20261113"></a>
+## 2026-11-13 — 反復frame判断の同thread対象保持
+
+**11/13・同じthread内の反復frame判断で表示対象を保持：** API8cba3e0c。本人が見ていた修正文を既存OPERATIONへ保存し、最新判断のkey/ref/version・同じ源泉・根拠が一致する場合だけ次のprivate作者材料へ渡す。旧本人修正文はAI文章と分ける。関連399固有件成功、最終対象22件成功（重複加算なし）。合成provider・隔離SQLの接続確認で、実4B本文の改善ではない。別threadと旧未保存対象は未確定、通常selector OFF・前回新3不採用を維持する。
+
+STRUCTURE_MAP_DELTA_PRESENT。同じ保存threadの対象保持だけを閉じ、別threadと旧未保存対象の復元、実4B本文品質、live／端末は未完。料金・問い数・商品範囲の変更なし。[詳細設計§9.39](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-repeated-frame-target-same-thread-20261113)を正本とする。

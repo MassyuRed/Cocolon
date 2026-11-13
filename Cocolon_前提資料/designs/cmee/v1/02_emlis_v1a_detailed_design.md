@@ -732,6 +732,8 @@ Freeもthread／artifactを保存する。ただし、別入力の次回Emlis生
 
 ### 18.4 Premium interpretive frame
 
+**11/13・同じthread内の反復frame判断で表示対象を保持：** API8cba3e0c。本人が見ていた修正文を既存OPERATIONへ保存し、最新判断のkey/ref/version・同じ源泉・根拠が一致する場合だけ次のprivate作者材料へ渡す。旧本人修正文はAI文章と分ける。関連399固有件成功、最終対象22件成功（重複加算なし）。合成provider・隔離SQLの接続確認で、実4B本文の改善ではない。別threadと旧未保存対象は未確定、通常selector OFF・前回新3不採用を維持する。 [詳細§9.39](../Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-repeated-frame-target-same-thread-20261113)。
+
 **11/13実比較・本文不採用：** 対象AI解釈contextの結合候補を承認済み一回で旧2／新3比較し、新3は拒否済みmapping再使用・本人修正文無反映のため達成0/3、品質改善として不採用。同じ新3checkpointで実receipt保存／新service非生成再読3/3を確認した。対象情報は届くが、本人status／修正文を優先した本文にならない残差がある。一般品質・反復修正時の対象復元は未完。今回はSTRUCTURE_MAP_DELTA_NONE、追加hint／SYSTEM／fit比較へ進まず通常selector OFFを維持する。[実結果・採否§9.38](../Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-frame-feedback-target-context-actual-20261113)。
 
 **11/13実装差分：** 既存の根拠付き暫定frameの保存表示・確認/修正/不使用を現naturalへ接続した。本人修正文の次回作者材料への到達を隔離SQL/RN描画で確認。4B応答の品質改善・当回二欄訂正からframeへの伝播は未成立。料金/プランを変えず、当回訂正中は旧frameを表示しない。[範囲と原本§9.36](../Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-natural-owned-premium-frames-20261113)。

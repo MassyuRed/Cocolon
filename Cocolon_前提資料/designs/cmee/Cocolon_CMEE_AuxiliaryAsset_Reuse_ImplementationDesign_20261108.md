@@ -4,11 +4,11 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-13 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR03_FRAME_FEEDBACK_TARGET_COMPARISON_COMPLETE_NOT_ADOPTED
+status: AR03_REPEATED_FRAME_TARGET_SAME_THREAD_CONNECTED_PROSE_UNVERIFIED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Approved old2/new3 comparison completed; all actual new3 saved/reread, feedback-aware prose goal 0/3 and not adopted; target information reaches author but person status/correction is not honored in prose; no added hint/SYSTEM/fit comparison, normal model selector OFF"
+current_next: "Exact repeated frame display retained within the same saved thread; cross-thread target retrieval and model prose adherence remain uncompleted; preserve prior 0/3 rejection, no repeated hint/SYSTEM/fit trials, normal model selector OFF"
 runtime_effect_of_this_document: 0
 ---
 
@@ -2662,3 +2662,36 @@ private原本はactual/raw/results.private.jsonと全HTTP生bytes／要求、act
 対象情報は作者材料へ届くが、本人status／修正文を優先した本文にならない。この残差を唯一の内部原因へ断定せず、追加hint／SYSTEM／fit比較・同じ不採用runの反復へ進まない。既存12固有＋316成功とAPI96c2085aの両CI初回成功は前回完了として継承し、今回の新test／CI実行へ加算しない。
 
 STRUCTURE_MAP_DELTA_NONE：今回は実比較・同源泉保存再読・採否／残差の記録で、製品source／test／公開DTO/API／DB/SQL／RN／作者／モデル／通常selectorの変更0。対象contextは本人sourceや有効frameではなく、反復修正時の対象復元、二欄訂正→frame／Piece／Analysis伝播、一般応答／編集品質、live／本人端末・正式受入れは未完。通常model selector OFF、新10b563不採用を維持する。
+
+
+<a id="emlis-repeated-frame-target-same-thread-20261113"></a>
+## 9.39 2026-11-13 — 同じthread内の反復frame判断で、本人が見た正確な対象を保持
+
+### 直接修復した接続抜け
+
+§9.38の一般本文品質未達と、既知の反復対象喪失を分けた。既存FrameEditorは修正済みの理解に本人のcorrection_textを表示するが、frame_feedbackの操作記録にはstatusしかなく、最新feedback行の上書き後には以前の本人修正文を復元できなかった。元frameへのref完全一致だけでは二回目がUNRESOLVEDになる。過去に保存していない本人文を推測で作らず、操作時に実際の表示対象を保存する因果箇所だけを修復した。
+
+[API 8cba3e0c](https://github.com/MassyuRed/mashos-api/commit/8cba3e0cce2390288137dab83d94cf0616f49dcf)は既存3製品fileと既存test1fileの変更である。新table・列・migration・RPC・公開DTO/API・RN source・作者・SYSTEM・生成hint・モデル・selectorは追加変更しない。GPU生成・追加学習・Render配置・live DB変更・build・配布は0。
+
+### 責務と全file地図への差分
+
+| 既存owner | 今回の責務 |
+|---|---|
+| ai/services/ai_inference/emlis_thread_service.py | 現在の保存OBS artifactと公開frame-viewを完全一致させ、FrameEditorが表示していた本文・旧status・根拠・source guardと次feedback versionを既存OPERATION.payloadへ保存する。最新判断のrequest fingerprint/key/ref/input/versionに一意一致する同thread操作だけを_requestへ投影する。 |
+| cocolon_meaning_experience_engine/emlis_thread_history.py | FrameFeedbackSourceV1の任意target_context_jsonへ対象contextを運ぶ。本人のfeedback evidence_refから当該AI/UI contextを除外し、既存user-source identityと保存prefix互換を維持する。 |
+| cocolon_meaning_experience_engine/natural_reply.py | 既存original frame一致を優先し、後のviewは保存対象・源泉guard・根拠・Safetyが一致した場合だけBOUNDへする。以前の本人修正文はtarget_user_revision／USER_FRAME_REVISION_CONTEXT、AI対象は従来target_ai_interpretationと分離する。対象contextを現在有効なframeや本人特徴へ昇格しない。 |
+| ai/tests/test_emlis_frame_feedback_context.py | 既存12件のうち二回目2件の期待を正確な対象保持へ更新し、新10件を追加した計22件。隔離SQL・保存GET・合成providerで接続を確認する。 |
+
+上記2つのCMEE fileはai/services/ai_inference/配下。STRUCTURE_MAP_DELTA_PRESENTとしてcurrent01/04・全file地図01A/01C・商品現在地・Emlis詳細正本18.4・最新weeklyへ同じ範囲を反映する。新しい補助system／checker／controller／authority familyは作らない。
+
+### 実検証と独立確認
+
+最初の関連集合は121成功、追加した二件は2成功、非重複のnatural reply周辺は276成功、計399固有件が成功した。本人修正文をAI対象fieldから分離する最終修正後、対象file全22件も再確認して成功した。この22を399へ上乗せしない。新規は10件、既存反復対象2件は期待更新であり新規件数へ加算しない。既存Pydantic root_validator非推奨警告が各関連集合で1件あり、assert失敗・skipは0だった。
+
+修正→再修正／不使用、REFINED保存後の再修正、対象欠落・version/ref/input/guard不一致・重複、別threadでの未確定保持、feedback identity互換、以前の本人文がSafety不適格の場合を確認した。既存Free/Plus境界・source変更・訂正履歴・問い／回答更新・natural保存再読も関連集合で維持した。新providerは合成で、実4Bの品質評価ではない。独立read-onlyレビューが最終diffと実RN FrameEditorの表示選択を照合し、重大問題なしを確認した。正式human Product Readではない。
+
+### 限界と次の直接残件
+
+今回閉じたのは同じ保存thread内の対象保持である。過去AのframeをBで判断した場合、操作targetはB.eventsに保存される。別thread Cが過去Aだけを取得してもBの操作は渡らないため、反復targetは引き続きUNRESOLVEDとする。全threadへ接続済みとしない。跨threadを閉じる場合は、既存本人権利・最新feedbackに一致する操作targetを既存context読取へ渡す変更の範囲を先に確定する。新tableや別の検索systemを先に作らない。
+
+§9.38の拒否／修正不反映3件は不採用のまま、今回の材料保持成功で実本文の採否を変更しない。実4Bの一般応答品質、二欄訂正→frame／Piece／Analysis伝播、複数回答Piece、通常配置・本人端末・正式受入れは未完。追加hint／SYSTEM／fitの同型比較へ戻らず、既存の不採用run・消費済み承認を再使用しない。通常model selector OFFと新10b563不採用を維持する。全仕様・全file本文の意味理解を、この限定修復やtest件数から全完了とは主張しない。
