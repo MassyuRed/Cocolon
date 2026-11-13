@@ -1,4 +1,4 @@
-> **11/13・稼働PieceはBase利用と原本照合、保存済み作者×現編集3入力を準備：** 稼働旧providerの全文／hashを取得し、PieceがAnalysis adapterを外してBaseを呼ぶと確認。原文copyの強制・事後置換はない。前回実6はBaseへの編集材料追加の不採用結果で、学習済みPiece作者の結果ではない。既存344aは別general3で常体化まで確認済み。今回は同じcandidate messages3だけを既存Piece profileへ渡す未確認の組合せを38,745byteで固定した。候補3＋提供前後4確認、停止・復元込み最大10分／1回、学習・retry0。未送信・環境読取／生成／停止0、今回分の具体承認待ち。Base6再生成・新SYSTEM／metadata・教師追加0、通常OFF。 [確認と未実行範囲](<../../../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-selected-author-editorial-prepared-20261113>)。
+> **11/13・保存Piece作者の実3応答を完了、二欄／補足で限定改善・通常採用は保留：** 承認38,745byteを一回実行し、候補3stop＋提供前後4確認の計7生成、停止・復元・証跡書込込み111.841525秒、学習／retry0。元提供PID79715へ復元し、argv／env／cwd／2鍵・source／両adapterを保持、通常／Analysisの前後全response一致・health正常。二欄は氏名の役割化・本人反復省略・評価語順、補足も各source内の本人反復省略が現れ、段落は常体化だけ。raw無修補の既存S7は3 GENERATED。metadata単独効果・一般構成品質は未証明、通常OFF。比較用非UUID source／refined資格なしのため今回SQL／保存／native画像0。 [実結果・復元・残件](<../../../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-selected-author-editorial-actual3-20261113>)。
 
 > **11/12・固定実3件の意味読取拒否を修復：** API87512ddaで、既存述語／本人評価／感情／literal-self資産を、型付きoperatorと完全保持spanの独立比較へ回収。保存344aの同じ実raw3件は3拒否→3採用、旧73件の採否・全artifact・prepared／messages／rawは修正前後同一。新GPU・学習0。3plan計9件の隔離SQL保存・非生成再読、本文／recipe／renderer一致とquota各1を確認。Free refinedは元の適格ADD snapshot、Plus／Premiumは同じ全入力・回答から既存ownerでtier別資格を再導出。合成Auth／source・mock HTTP framingであり、実HTTP／live DB／本人端末ではない。新70を含む局所1774と既存SQL56が成功。Piece CI43174913229はattempt1・39step成功、model集合2021に新70を含む（重複加算なし）。生成本文自体は従来の常体化が中心で、一般編集品質・同じ新本文のnative画像・通常採用・AR-04／全補助経路は未完。 [修復・原本・確認範囲](#piece-general3-operator-review-repair-20261112)。
 
@@ -2880,7 +2880,7 @@ Analysis CI [43174913298](https://github.com/MassyuRed/mashos-api/actions/runs/4
 
 
 <a id="piece-selected-author-editorial-prepared-20261113"></a>
-## 2026-11-13 — 稼働Base作者の切り分けと保存344a×現編集3材料の準備（未実行）
+## 2026-11-13 — 保存344a×現編集3材料の準備（実行前の記録、後記実3で一回完了）
 
 **11/13・稼働PieceはBase利用と原本照合、保存済み作者×現編集3入力を準備：** 稼働旧providerの全文／hashを取得し、PieceがAnalysis adapterを外してBaseを呼ぶと確認。原文copyの強制・事後置換はない。前回実6はBaseへの編集材料追加の不採用結果で、学習済みPiece作者の結果ではない。既存344aは別general3で常体化まで確認済み。今回は同じcandidate messages3だけを既存Piece profileへ渡す未確認の組合せを38,745byteで固定した。候補3＋提供前後4確認、停止・復元込み最大10分／1回、学習・retry0。未送信・環境読取／生成／停止0、今回分の具体承認待ち。Base6再生成・新SYSTEM／metadata・教師追加0、通常OFF。
 
@@ -2891,3 +2891,17 @@ Analysis CI [43174913298](https://github.com/MassyuRed/mashos-api/actions/runs/4
 同じ[既存原本ZIP](https://chatgpt.com/library?file_id=libfile_fde3_f-f30655de312c8191978daec9b93b7008_2f7470f963808191aaebf050935e72de&account_id=personal)をversion6へ更新。369,448byte／74member、SHA256 `92b3af21523c94c3589ae5da01045dc0d643849e0030f85a990ecbc070cd03c2`。旧68memberは全byte保持し、固定実行物・凍結messages・範囲・live読取hash・独立static review・READMEの6fileを追加。秘密／全環境／browser screenshot／Git-backed製品sourceは追加しない。
 
 [詳細設計§9.22](<../../../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-selected-author-editorial-prepared-20261113>)を再開正本とする。STRUCTURE_MAP_DELTA_NONE、商品品質・保存／画像／通常適用・正式受入れ・AR-04／全補助経路の完了credit0。
+
+
+<a id="piece-selected-author-editorial-actual3-20261113"></a>
+## 2026-11-13 — 保存Piece344aの実3応答、二欄／補足で限定改善
+
+**11/13・保存Piece作者の実3応答を完了、二欄／補足で限定改善・通常採用は保留：** 承認38,745byteを一回実行し、候補3stop＋提供前後4確認の計7生成、停止・復元・証跡書込込み111.841525秒、学習／retry0。元提供PID79715へ復元し、argv／env／cwd／2鍵・source／両adapterを保持、通常／Analysisの前後全response一致・health正常。二欄は氏名の役割化・本人反復省略・評価語順、補足も各source内の本人反復省略が現れ、段落は常体化だけ。raw無修補の既存S7は3 GENERATED。metadata単独効果・一般構成品質は未証明、通常OFF。比較用非UUID source／refined資格なしのため今回SQL／保存／native画像0。
+
+固定一回の承認は実行済み・消費済み。回収ZIP27,298byte／7member、SHA256 `b58681b5f80739c6f2ec655aab734cd93378c81b84c90937f7beeba3576a21ea`をCRC・各原本／aggregate・wire／messagesと完全照合。rootと独立担当が全原文／Base／3rawを全文比較し、主体／対象／否定／時点／留保／別sourceの新変異は見つけていない。二欄・refinedの2/3は常体化を越える編集、段落はstyle-only。全焦点や一般構成品質の完成・metadata単独因果とは扱わない。
+
+既存receipt→Engine／S7のexact3再演は3 GENERATED、artifact本文は全rawと一致。新model call／pytest／CI dispatch／rerun0。normalの非UUID sourceとrefinedのqualified_saved_snapshot不在は保存資格外で、旧helperのID／時刻再束縛を同source保存の証拠へ使わない。静的資格判定であり実Auth拒否の観測ではない。新SQL／保存／native画像0、source/test変更0、通常OFF／S7／raw無修補を保持し、全補助経路未完。STRUCTURE_MAP_DELTA_NONE。
+
+同じ[既存原本ZIP](https://chatgpt.com/library?file_id=libfile_fde3_f-f30655de312c8191978daec9b93b7008_2f7470f963808191aaebf050935e72de&account_id=personal)をversion7へ更新。442,137byte／89member、SHA256 `177ccad5e95e9c00d79cfe390d06cf8e66dc6368c08e60519c33b821d43bed7c`。旧74memberの全byteを保持し、actual ZIP／展開7原本・再演script/report・独立全文review・原本照合・保存資格境界・README／承認実行記録を追加。秘密／全環境／browser screenshot／Git-backed製品sourceは追加していない。
+
+[詳細設計§9.23](<../../../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-selected-author-editorial-actual3-20261113>)が実行・判定・再開正本。次は限定的な役割化／本人継続省略を保持した作者改善と、保存資格を持つ原入力からの同版保存・画像を扱う。今回rawの別sourceへの付替え、同型比較／新学習／通常採用へ自動進行しない。

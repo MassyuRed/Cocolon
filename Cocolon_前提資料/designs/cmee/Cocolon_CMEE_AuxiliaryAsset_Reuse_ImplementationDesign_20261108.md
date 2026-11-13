@@ -4,15 +4,15 @@ title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修�
 revision_date: "2026-11-13 JST"
 decision_owner: Mash
 implementation_owner: Karen
-status: AR04_SELECTED_AUTHOR_EDITORIAL3_PREPARED_NOT_EXECUTED
+status: AR04_SELECTED_AUTHOR_ACTUAL3_LIMITED_GAIN_NOT_ADOPTED
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Base actual6 remains NOT_ADOPTED; live Piece base profile verified; frozen saved344a x same candidate3 prepared, no new SYSTEM/metadata/training; explicit new one-shot stop/restore scope pending"
+current_next: "Selected Piece344a actual3 complete/restored; limited editorial gain2, paragraph style-only, same-source save/image unqualified; retain defaults OFF, no automatic retry or learning"
 runtime_effect_of_this_document: 0
 ---
 
-> **11/13・稼働PieceはBase利用と原本照合、保存済み作者×現編集3入力を準備：** 稼働旧providerの全文／hashを取得し、PieceがAnalysis adapterを外してBaseを呼ぶと確認。原文copyの強制・事後置換はない。前回実6はBaseへの編集材料追加の不採用結果で、学習済みPiece作者の結果ではない。既存344aは別general3で常体化まで確認済み。今回は同じcandidate messages3だけを既存Piece profileへ渡す未確認の組合せを38,745byteで固定した。候補3＋提供前後4確認、停止・復元込み最大10分／1回、学習・retry0。未送信・環境読取／生成／停止0、今回分の具体承認待ち。Base6再生成・新SYSTEM／metadata・教師追加0、通常OFF。 [確認と未実行範囲](<#piece-selected-author-editorial-prepared-20261113>)。
+> **11/13・保存Piece作者の実3応答を完了、二欄／補足で限定改善・通常採用は保留：** 承認38,745byteを一回実行し、候補3stop＋提供前後4確認の計7生成、停止・復元・証跡書込込み111.841525秒、学習／retry0。元提供PID79715へ復元し、argv／env／cwd／2鍵・source／両adapterを保持、通常／Analysisの前後全response一致・health正常。二欄は氏名の役割化・本人反復省略・評価語順、補足も各source内の本人反復省略が現れ、段落は常体化だけ。raw無修補の既存S7は3 GENERATED。metadata単独効果・一般構成品質は未証明、通常OFF。比較用非UUID source／refined資格なしのため今回SQL／保存／native画像0。 [実結果・復元・残件](<#piece-selected-author-editorial-actual3-20261113>)。
 
 > **11/13・Piece編集候補の実6応答を完了、全3組で差分0のため不採用：** 承認14,489byteを既存Podで一回実行し52.420284秒、全6 HTTP200／stop／attempt1。PID77140と前後health200を保持、学習・retry・提供再起動0。段落・二欄・refinedの旧新全response／rawは各組完全一致・全欄原文copy、8編集選択の可視効果0。二欄では氏名が残り公開役割化も未達。原本のexact CPU再演は4 GENERATED／二欄2 UNAVAILABLEだが作品品質合格ではない。候補・通常optionはOFF、今回のSQL／native保存0、追加生成・S7緩和・raw補修なし。実原本と不採用理由を保全した。 [実比較・判定](<#piece-editorial-choices-actual6-20261113>)。
 
@@ -1219,7 +1219,7 @@ API ec4bd668の自動push [CI43332056239](https://github.com/MassyuRed/mashos-ap
 
 
 <a id="piece-selected-author-editorial-prepared-20261113"></a>
-## 9.22 2026-11-13 — 稼働作者の原本を照合し、保存Piece344a×現編集3入力を準備（未実行）
+## 9.22 2026-11-13 — 保存Piece344a×現編集3入力の準備（実行前の記録、§9.23で一回完了）
 
 ### 確認した不足と既存作者の境界
 
@@ -1248,11 +1248,54 @@ API ec4bd668の自動push [CI43332056239](https://github.com/MassyuRed/mashos-ap
 
 固定wireは39,022byte・SHA256 `b21fcc9e4d81f58fa593cabeaef75d71a598b208d3e21a14489c893f84e21968`。一ファイル内へ圧縮固定し、既存actual6のcandidate3 messagesと完全一致をCPU確認。親／childの構文確認と独立static reviewを実施し、proxy／redirectを使わないloopback通信を固定した。構文・static確認をPod実行や復元成功へ換算しない。
 
-**未送信・未承認・未実行。** この別の一回は元提供の一時停止と認証情報を含み得る起動環境の同Pod内保持・復元を伴い、消費済み14,489byte／6応答の承認は流用しない。具体的承認後に固定3候補だけを一回取得する。期待された操作の実行個数ではなく、原文の意味・自然さ・反復・公開役割化を本文から判定する。結果が良くても一般作品品質やmetadata単独効果へ広げない。
+**以下は準備時点の記録。固定一回は承認後、§9.23で実行済み・承認消費済み。** この別の一回は元提供の一時停止と認証情報を含み得る起動環境の同Pod内保持・復元を伴い、消費済み14,489byte／6応答の承認は流用しない。具体的承認後に固定3候補だけを一回取得する。期待された操作の実行個数ではなく、原文の意味・自然さ・反復・公開役割化を本文から判定する。結果が良くても一般作品品質やmetadata単独効果へ広げない。
 
 今回の製品source／test／提供設定の変更0、API ec4bd668を保持。通常option／selector OFF、S7・raw無修補・保存資格を維持し、保存／同版画像／通常適用・正式受入れ・AR-04／他AR／全補助経路の完了は未成立。STRUCTURE_MAP_DELTA_NONE。既存正本の意味保持と編集責務、fresh 00／rules／incident／地図の関係owner／最新weeklyを再確認した。巨大file地図の全本文・全repositoryの理解を主張せず、6MB manifestの取得不能も全読へ換算しない。
 
 同じ[既存原本ZIP](https://chatgpt.com/library?file_id=libfile_fde3_f-f30655de312c8191978daec9b93b7008_2f7470f963808191aaebf050935e72de&account_id=personal)をversion6へ更新。369,448byte／74member、SHA256 `92b3af21523c94c3589ae5da01045dc0d643849e0030f85a990ecbc070cd03c2`。旧68memberは全byte保持し、固定実行物・凍結messages・範囲・live読取hash・独立static review・READMEの6fileを追加。秘密／全環境／browser screenshot／Git-backed製品sourceは追加しない。
+
+<a id="piece-selected-author-editorial-actual3-20261113"></a>
+## 9.23 2026-11-13 — 保存Piece344a×現編集材料の実3応答、限定編集改善・通常保留
+
+### 承認された一回の実行・復元
+
+Mashは§9.22の固定38,745byteについて、保存済みPieceモデル3応答＋提供前後の確認計4応答を、停止・復元込み最大10分・一回・追加学習／retryなし、既存2鍵は同Pod内認証、起動環境は同Pod内復元だけに使うことを明示承認した。Pod送信後もbyte数とSHA256 `c1d17cc867bd71a1f9e222e51f15944a1c33ac9ae2e37ff16d2a0f6c0c366f43`を確認し、外側`timeout 600s`で一回実行。**この一回承認は実行済み・消費済み。**
+
+| 観測 | 実結果 |
+|---|---|
+| 新生成 | 保存344a direct候補3／全stop、通常とAnalysisの前後control計4 HTTP200／stop。合計7で追加取得・Base6／旧73／別general3の再生成0 |
+| 時間 | script記録111.84152465499938秒。停止・復元と証跡ZIP書込を含み、UI入力・回収時間は別 |
+| 作者 | current generator SHA `a8fdfbe1…601ef`、既存Piece weights `344a9def…fc337`／config `24f34137…d12c`、`profile=piece`、model load1。候補childはHTTP server／API鍵0 |
+| context | input token2444／3047／3517、出力枠2048込み4492／5095／5565で8192内。HTTP usageや原価は推定しない |
+| 提供復元 | 元PID77140を停止しGPU解放、child79597を解放後、元提供をPID79715へ復元。argv／env／cwd・両認証情報を完全比較して保持、元source／Analysis／Piece重みも不変 |
+| 対照 | normal／Analysis各前後の全requestと全responseが一致、health正常。control本文の商品品質の合格とは別 |
+| 原本 | 回収ZIP27,298byte／7member、SHA256 `b58681b5f80739c6f2ec655aab734cd93378c81b84c90937f7beeba3576a21ea`。CRC・path・aggregate／各原本・凍結wire／3messagesを完全照合 |
+
+既存2鍵はproxy／redirectのないloopback controlだけへ使用。元argv／env／cwdは同Pod親RAMだけへ保持して同提供の復元に使い、全値や鍵を証跡へ出していない。候補は同Podの既存cacheと指定した保存重みだけを使用し、新download／学習／重み変更／retry0。
+
+### 原文・Base・実本文の全文比較
+
+| 型 | 実rawに現れた差 | 保持／限界 |
+|---|---|---|
+| 長い段落 | 丁寧体→常体だけ | 仕事の比較希望、急ぐ返事の条件、「気がする」、読書の過去好み、未決定を保持。焦点構文・文順・本人再掲・話題接続は元のままで構成改善0 |
+| 思考／行動二欄 | 「同僚の森さん→同僚」の原文明記役割化、2回目「おれは」の省略、「僕にとって、…が重要だ」への評価語順整理 | おれ／僕・欄・その時間の対象、希望の未実行、視点、過去否定を保持。全焦点を直接語順へ変えた結果ではない |
+| 原入力＋別補足 | 原入力／補足それぞれの2回目本人主語を省略 | 僕／わたし・別source、それぞれのその時間、肯定希望／否定希望・過去否定を保持。source間の統合や因果を創作していない |
+
+rootと独立担当が全原入力／全3raw／Base候補側3rawを全文比較。新しい主体・対象・希望・否定・時点・留保・出所の意味変化は見つけていない。二欄／refinedの2/3ではcopy／常体化だけを越える**限定的な編集改善**が観測され、段落1/3はstyle-only。操作指示の達成個数を品質得点にせず、焦点構文を保持した自然な表現も誤りとは扱わない。一方、一般段落構成・全8編集成立・単独作品品質の完成は主張しない。
+
+3messagesは前回Base6のcandidate側とbyte同一で、Base6は再取得していない。344aのbeforeはないため、8編集選択単独の因果効果は切り分けられない。Base対保存作者という差を含む接続結果であり、344aの初接続、f6dae全能力の保持、独立未学習holdoutの証明にも換算しない。
+
+### 無修補S7・保存資格・残件
+
+API ec4bd668の依存9blobをfresh照合し、exact raw→既存receipt→Engine／独立S7を一回CPU再演。**3 GENERATED／拒否0**、全artifactの本文は実raw固定slotの内容と完全一致。source／prepared／receipt／rawは不変。直generator取得なのでprovider model／HTTP revisionはnullのまま、HTTP由来の証拠を創作しない。全有限artifact作者・外部HTTP・subprocess fallbackを禁止し、追加model call0。新pytest／CI dispatch／rerun0、既存ec4 CI成功を今回の新実行へ加算しない。
+
+今回SQL／同source保存／native画像は0。normalの比較用sourceは`ar04-synthetic-owner`／`ar04-synthetic-record`という非UUIDで、fresh ec4の`piece_v2_source_adapter.py` blob `3cbf86c094e8142130a279301cad1e61196b81ee`とローカルが一致し、既存`PieceSavedSourceAdapter._resolve_original_with_snapshot`のowner／saved_input UUID条件を満たさない。これは静的な資格判定で、実Auth／DB拒否を観測したという主張ではない。refinedも合成sourceで`qualified_saved_snapshot`を持たない。旧SQL helperのuuid4再束縛やcreated_at変更を、同source保存の証拠へ使わず、S7採用と保存資格を区別する。
+
+製品source／test／提供設定の恒久変更0、API ec4bd668、通常option／selector OFF、raw無修補／独立S7／保存資格を維持。STRUCTURE_MAP_DELTA_NONE：既存作者の実比較・限定効果と原本の記録で、新owner／公開型／route／DB／rendererの責務変更はない。限定編集は観測できたが、通常採用・一般作品品質・保存／同版画像・本人端末・正式受入れ・AR-04／他AR／全補助経路は未完。
+
+次は今回現れた公開役割化・本人継続省略を保持して、長い段落の構成・焦点編集の未達へ戻す。保存／画像へ通す材料は既存保存元ownerの資格を持つ原入力から確定し、今回rawを別sourceへ付け替えない。同型再比較・SYSTEM／metadata増量・新学習・通常有効化へは自動進行しない。
+
+同じ[既存原本ZIP](https://chatgpt.com/library?file_id=libfile_fde3_f-f30655de312c8191978daec9b93b7008_2f7470f963808191aaebf050935e72de&account_id=personal)をversion7へ更新。442,137byte／89member、SHA256 `177ccad5e95e9c00d79cfe390d06cf8e66dc6368c08e60519c33b821d43bed7c`。旧74memberの全byteを保持し、actual ZIP／展開7原本・再演script/report・独立全文review・原本照合・保存資格境界・README／承認実行記録を追加。秘密／全環境／browser screenshot／Git-backed製品sourceは追加していない。
 
 ## 10. 変更箇所と検証
 
