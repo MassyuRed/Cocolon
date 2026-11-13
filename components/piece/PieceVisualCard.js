@@ -705,9 +705,14 @@ export default class PieceVisualCard extends React.Component {
             style: { width: raw.contentWidth, fontSize: nextTypography.fontSize, lineHeight: nextTypography.lineHeight,
               fontWeight: '400', fontStyle: 'normal', letterSpacing: 0, includeFontPadding: false, textAlign: 'left', color: raw.colors.text },
           }, body))) : null,
-        element(View, { style: { position: 'absolute', left: input.margin / 2, top: input.margin / 2,
-          right: input.margin / 2, bottom: input.margin / 2, backgroundColor: input.colors.surface,
-          borderColor: input.colors.border, borderWidth: 2 } }),
+        // Paint the same two rectangles in display and layer-based capture.
+        // Avoid the bordered layer associated with bands in renderInContext.
+        element(View, { pointerEvents: 'none', collapsable: false,
+          style: { position: 'absolute', left: input.margin / 2, top: input.margin / 2,
+            right: input.margin / 2, bottom: input.margin / 2, backgroundColor: input.colors.border } },
+          element(View, { pointerEvents: 'none', collapsable: false,
+            style: { position: 'absolute', left: 2, top: 2, right: 2, bottom: 2,
+              backgroundColor: input.colors.surface } })),
         bitmap && BitmapCanvas ? element(BitmapCanvas, { testID: 'piece-bitmap-canvas', ref: this.bitmapRefFor(this.state.binding),
           bitmapBinding: this.bitmapBindingFor(measurement.generation), onBitmapInvalidated: this.bitmapInvalidated,
           collapsable: false, accessible: false, pointerEvents: 'none',
@@ -763,3 +768,4 @@ export default class PieceVisualCard extends React.Component {
     );
   }
 }
+
