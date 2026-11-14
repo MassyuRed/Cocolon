@@ -7173,3 +7173,10 @@ RN関連pathは `components/selfStructure/{CumulativeWatashiMapView,MapInterpret
 | `ai/tests/fixtures/cmee_current_4b_packet_20261114.json` | 新指示のIF preparedを再生成。他5case全dict不変。IF原文は保持、派生artifact／route refは更新 |
 
 実3候補を含む1set＋明示Saved1件の隔離SQL保存・別process再読・既存RN受口は成立。標準RNは本人案配列を送らないため、その自動3案の実生成品質へ換算しない。一般品質と条件表示の残差は補助設計§9.64。
+
+
+## 2026-11-14 — 標準IF3／本人条件の生成slot保持（§9.65・実4B前）
+
+**11/14最新：標準RN入力の自動3案で、元anchor・UNKNOWN・接続・本人条件を生成時に保持する修正をAPI候補d3daee549a848675cb200b3aa3360be38e94bf8fへ反映。** 関連168件成功、旧actual採否と保存bytesを保持。架空3案の合成保存・別process再読・Saved／RN受口は事前検証だけ。27,761bytes・2fileの既存Pod送付は具体的開示承認不足として自動審査で送信前拒否、実生成／Pod変更／本候補の通常反映0。通常API／workerはc7968c6 Liveを継続。本単位・補助全体未完、配布／実機保留を維持。
+
+既存製品2owner（serve_emlis_natural_reply::_if_output_schema／_if_json_schema_parser、if_route_realizer::prepare_if_model_request）と既存test2／fixture1の計5path。全path・責務は[補助設計§9.65](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-standard-three-conditions-prepared-20261114)。新owner／依存／公開API／DB／RN変更0、STRUCTURE_MAP_DELTA_NONE。

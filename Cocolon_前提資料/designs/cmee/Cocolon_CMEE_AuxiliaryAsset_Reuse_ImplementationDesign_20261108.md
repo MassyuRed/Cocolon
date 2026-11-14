@@ -1,3 +1,5 @@
+> **11/14最新：通常入力の自動3案・条件保持の修復をGitHubへ反映、実4B送付は審査で停止。** 候補d3daee5／関連168件成功。実生成・通常反映は未実施、稼働はc7968c6を維持。 [実施範囲・具体送付・再開§9.65](#if-standard-three-conditions-prepared-20261114)。
+
 > **11/14最新：本人提示3案の実4B出力を無修補で採用し、隔離DB保存・別プロセス再読・明示Saved・既存RN受口まで接続。** 通常API／worker `c7968c658277ec190c32d5e3913dbde13c01d68a` がLive。先行1／2候補の原本も同版保持。本人案がそろう1〜3候補の限定接続単位は完了。本人案なしの標準RN経路の実3案、条件表示・一般日本語品質・本人利用・AR-07／補助全体は未完。 [実結果・範囲・次§9.64](Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-person-three-fixed-slots-normal-rollout-20261114)。
 
 > **11/14・修正起動の明示承認後、実2取得・復元・同状態の保存再読まで完了。本文反復の改善は0。** 送信済み62,086byte・3fileは無変更／再送付0、1child／1loadで新2＋前後4対照＋health2GET、閉鎖後105.175913秒。通常／Analysis前後全文bytes一致、元args／env／cwd／2鍵・source／重みを保ってPID98755へ復元。新2 rawは旧2と全byte同一で、3省略候補は未使用。実raw無修補の2独立fork保存・非生成再読、canonical8／3hash・quota各1・原source／Emlis不変。旧保存ともcanonical8同一のため新native実行0。通常selector OFF、一般編集品質・通常経路／本人端末は未完。 [詳細§9.53](#piece-topic-editorial2-actual-unchanged-20261114)。
@@ -16,7 +18,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Section9.64 closes explicit complete-person-options actual3 same-raw isolated save/re-read, Saved and API/worker c7968 rollout. Keep generic/default-RN3, condition display and Japanese residuals; continue9.54 whole-core active meaning/history/long-source work without repeating accepted explicit1/2/3 generation or applied migrations. Build/TestFlight/device remain deferred."
+current_next: "Section9.65: standard RN auto3/known-condition source fix d3daee5 is committed and CPU verified; exact27761B 2file Pod upload rejected before transmission. Resolve concrete upload/once-execution approval, then actual raw quality, same-raw save/re-read/Saved and normal API/worker rollout. Live remains c7968. Build/device deferred."
 runtime_effect_of_this_document: 0
 ---
 
@@ -3763,3 +3765,47 @@ captured HTTP responseからproduction transportで受領receiptを作り、準�
 ### 次に残す仕事
 
 本人案がそろう1〜3候補の限定実生成・保存再読・Saved・通常反映は閉じる。次は§9.54の四作業と、本人案なしの標準RN入力からの実3候補、既知条件の表示と日本語の残差、一般意味／過去と今回・本人判断／長履歴の分割と跨ぐ関係を進める。先行成功1／2／今回3を同じ材料で再生成し続けない。AR-07全体・補助全体・正式受入れは未完。11/21判定・12/6候補、61.625％の管理評価を変更しない。配布／本人実機保留を他の補助作業の停止条件に戻さない。
+
+
+<a id="if-standard-three-conditions-prepared-20261114"></a>
+## 9.65 2026-11-14 — 通常入力の自動3案と本人条件の生成時保持を修復、実4B送付は審査で停止
+
+### 成立した範囲と未完
+
+本人案なしの標準RN入力で、全anchor・UNKNOWN・接続が自由生成のまま、既知条件を空欄にでき、CONSTRAINTをUSER_CHOICEへ使える原因を修復した。API候補 **d3daee549a848675cb200b3aa3360be38e94bf8f** の既存5pathへ反映し、全remote内容・変更path・親commitを読み戻して照合した。通常API／workerは先行c7968c6のLiveを継続し、本候補のPod適用・実生成・通常反映は未実施。本単位を閉じていない。
+
+全体設計・全ファイル地図・三中核current owner・最新weekly§5／§19と本設計§9.54／§9.64を照合。共有有効意味・各coreの作者・観測とIF／Savedの分離を保持する。端末／build保留を本単位の停止原因へ戻さない。追加の安全装置・Gate・発売条件を作らない。
+
+### 修復・全ファイル地図
+
+| API既存path | 差分責務 |
+|---|---|
+| `ai/tools/serve_emlis_natural_reply.py` | 汎用IFも全anchor＋提案＋UNKNOWNと仮想接続を生成slotへ拘束。提案はmodelのSIMULATED_EXTENSION又は完全sourceのUSER_CHOICE。CONSTRAINTを本人選択へ転用しない。既知条件の全文／番号をrequired_conditionsのobject tupleへ固定。部分本人案は候補として保持。追加の仮定はUNKNOWN／frictions／factorsで表示する。 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/if_route_realizer.py` | 標準生成の意味差・条件・日本語の指示を追加。直前版をFIXED_PERSONとして残し、旧5版のcanonicalをrequest_refとmessages hash双方で再導出。旧RESERVED／RECEIVED・保存rawを新指示へ貼り替えない。 |
+| `ai/tests/test_cmee_current_4b_packet.py` | 現生成slotの合成例、全anchor／条件落ち・条件変異・条件のUSER_CHOICE化の拒否、部分本人案と既存実parser／serving closureを検証。 |
+| `ai/tests/test_analysis_if_service.py` | 直前FIXED_PERSON版のRESERVED／RECEIVED非生成再開と混在hash拒否を追加。 |
+| `ai/tests/fixtures/cmee_current_4b_packet_20261114.json` | IF1caseだけ新canonical指示・対応request／wire identityへ再導出。他5case全値不変。 |
+
+IF専用parserのprivate namespace内で、tupleの提案slotにobjectのみのoneOfを許す。ordinary Emlis／通常Analysis／Pieceのupstream global parser、CPU意味採否、公開API／DB／RN・schema／policy／権利／Safetyを変更しない。新owner・新依存0、STRUCTURE_MAP_DELTA_NONE。三案の意味差・本人意向の反復・未知の適切さはgrammarだけで合格にせず、次の実raw全文読解を必要とする。
+
+### 検証と保存の事前確認
+
+- 最終関連5file **168 PASS／2既存warning**。最初のfixture旧slot期待の不一致と起動時のimport path不足は検証側で訂正し、製品の意味採否を緩めていない。旧actual1／2／最終本人3の3成功artifactと先行拒否3の採否を再演し、成功の全storage／Saved bytes一致・拒否維持を確認。新model call0。
+- 通常serviceの_identity→_request→prepareから本人案なしの新requestを固定。元二記録・base・source guardは生成前の既存DBで成立済み。別のfresh隔離DBも追跡SQLだけで再構成し、同じsource guard／base contextを確認（snapshotのnow／period_endは実行時刻に従い異なる）。
+- **合成出力だけ**でproduction transport→Engine→reserve/start/receive/commit/read/replay→別process再読→Saved→既存RN受口2artifactを事前確認。元map不変。実4Bの保存成功・本人認証・端末・品質改善へ加算しない。
+- `既存Piece CI run43603427255／job132472861524はstep31で2FAIL／305PASSとなり後続step32〜は未実行。失敗はEmlisのinterpretation_corrections欠落／pending_question=None。今回の既存IF5path以外のsourceは変更0で、失敗2件の個別再確認は2PASS、同じ順序の14file全307件も144.56秒・既存warning1で成功。CI上の初回DTO／因果は未確定であり、原因を断定せず無変更全workflow再試行や無関係製品修正をしない。Analysis CI43603427323は記録時点step8進行中、成功未確定。`
+
+### 具体的に準備済みの一回と停止理由
+
+| 同Podへ送るfile | bytes | SHA256 |
+|---|---:|---|
+| `if-standard-three-input.json` | 21,848 | `28e37c5a7d5bdff70fe98b46056791e3fcd254bec4ce2aecd7fbd3cce0c9ee34` |
+| `if-standard-three-run.py` | 5,913 | `4ea093ba29a765f5350d86ee9d9847c4bdcdec6bea9a27de1f688f5bf0069bcf` |
+
+既存Runpod `f1lle4xwq3wjln`／Jupyter `https://f1lle4xwq3wjln-8888.proxy.runpod.net/lab`へ合計 **27,761bytes・2file** を送る案。新しい標準入力IF3要求1回＋通常Emlis／Analysisの事後対照2要求、health前後2GET、既存直前の完走対照をbaselineとして使用。最大600秒、一回、追加学習／再試行／新Pod／重み変更なし。現提供PID109608とsource4797918…を起動前に照合し、不一致なら停止。公開GitHubの固定headのIF2関数だけをhash照合して差替え、既存args／env／cwdと2鍵を同Podメモリ内で保持。2鍵の用途はlocalhost認証と同Pod内復元だけ、値・環境全体・起動引数・serverログは回収ZIPへ含めない。失敗時は元sourceと提供条件へ復元する。
+
+**この2fileの送付操作は自動承認審査で送信前拒否。** 理由は「Runpod/Jupyter宛ての実行コード・生成入力にprivate source-derived dataが含まれ得るが、その宛先への具体的な開示承認がない」。送信・起動・model POST・提供停止・再起動・新実本文保存は0。別経路で迂回しない。後続の独立静的照合で、送付入力は既存架空2記録由来のanchor・意向・条件と既存対照2件だけ、実ユーザー本文・鍵・環境値を含まないことを確認した。現Pod実行結果や復元成功は未確認である。
+
+`実行前の2file・cases／normal request・元base／guard・compile／SQL手順・関連検証／旧actual再演・合成事前保存再読／RN・審査停止を、非公開 [Cocolon_CMEE_IF_StandardThree_Prepared_20261114.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-097030f8a6b08191873a7c3b42532f8b_2f7470f963808191aaebf050935e72de&account_id=personal)（103,988bytes／SHA256 `f011e5d091d920962f23b73089e689b7346e02e349c995b69f8498005decd415`）へ保存。鍵・環境全体・DB page・実ユーザー本文・モデル重みを含めない。旧§9.64の原本archiveは更新しない。`
+
+次は上記具体送付・同Pod限定実行の承認を解決し、実3案を全文照合して同raw保存・非生成再読・明示Saved・通常API／workerへ同じ単位で反映する。低品質・意味変異は採用せず、raw補修で成功へ変えない。完了した本人1〜3案の再生成には戻らない。AR-07／補助全体・一般意味／長履歴・正式受入れは未完、61.625％評価・11/21判定・12/6候補、build／TestFlight／本人実機保留を維持する。今回は限定TECHNICAL_CREDIT（source修復と既存保存境界の保持）であり、実商品品質creditは0。
