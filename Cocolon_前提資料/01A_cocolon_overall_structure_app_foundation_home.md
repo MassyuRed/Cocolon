@@ -1,4 +1,4 @@
-> **11/14・真正な自然Q3一回答の訂正・撤回をPieceへ接続し、通常DB／API反映までの限定技術単位を完了。** API `75e526d1`。現共有ownerが再導出した意味checkpointと完全一致する一回答だけ、原入力の残存範囲と実ANSWERの差替え節を既存作者へ渡す。WITHDRAWは回答本文を作品材料にせず、旧節はmodel材料・S7から除外。原文・七項目source_ref・作者／体裁／最大3slot・lineageは保持する。既存3 SQL関数のmigrationを稼働適用し、同commitのPiece／Analysis CI成功、API／workerともLive、healthz／bootstrap・worker通信200を再確認した。**新しいPiece実4B3件、同実本文の保存再読・画像は未完。** ZIP外部送付は具体内容／宛先の承認不足を理由に自動承認審査で2回とも送信前拒否、別経路で送らず停止した。中断で旧local原本が消失し、現存準備済みとは扱わない。一般訂正・多段更新・依存を跨ぐ更新、本文品質・補助全体は未完。build／TestFlight／本人実機の保留を継承する。 [範囲・通常反映・証跡と未完§9.58](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-natural-answer-active-source-20261114)。以下の日付付き旧経過の未接続／次作業は当時の範囲として読み、本節の限定接続と混同しない。
+> **11/14最新：共有有効意味・natural原根拠材料・マップ本人訂正・IF／Savedの実装を通常DB／APIへ反映。** API／worker `da9460b926787c5f9e32995293dd232a2a74ab08` がLive。マップ訂正2migrationを追加適用、対象関数本文・RLS／ACLを確認。4B受口は同じ重み・起動条件を保ち、通常応答／通常分析の対照が再起動前後で全文一致。IF実3応答は必要確認1／anchor不整合拒否2、候補保存0であり、IF実生成品質と補助全体は未完。build／TestFlight／本人実機はMash指示どおり後回し。 [実結果・通常反映・残件§9.62](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#shared-meaning-map-if-normal-rollout-20261114)。
 
 > **11/13・第2/3回答後の最新一回答をPieceへ渡す候補：原入力＋画面で明示した最新の自己完結ADD一件を維持し、先行全roundは資格確認だけに使う。API dbb96aca、Python431固有＋38subtests、RN47固有成功。3plan×2自然／2stop／3自然の9保存再読を確認。実4B・本番SQL／配置・実機は未完、通常selector OFF。** [範囲・原本・次§9.43](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-latest-later-add-selected-20261113)。
 
@@ -7070,3 +7070,77 @@ API [75e526d1](https://github.com/MassyuRed/mashos-api/commit/75e526d1a90b969643
 | 既存Piece／Analysis workflow2本とtest3本 | 既存CI内でsource→作者→SQL保存→新service再読と変異拒否を検査。別のcontroller／checker系列を作らない |
 
 migrationは稼働履歴actual `20261114054136`として適用済み。API／workerとも75e526d1でLive、healthz／bootstrap／新worker通信200を再確認した。旧ADD・第2／3回答の独立ADDと既存source_ref七項目／lineage、本人／quota／再送、RN／rendererは保持する。新private意味class exact1と既存private範囲fieldを追加した内部source接続であり、公開DTO・table・RN sourceの追加変更はない。新Piece実4B3件・同実本文の保存／画像は送付前停止で未完。STRUCTURE_MAP_DELTA_PRESENT。完了範囲・実配置・停止と証跡の限界は[補助設計§9.58](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-natural-answer-active-source-20261114)を参照する。
+
+<a id="shared-meaning-map-if-file-map-20261114"></a>
+## 2026-11-14 — 共有有効意味・マップ訂正・IF／Savedのファイル地図
+
+通常DB／APIはda9460b、RN sourceは8382ef5。既存全体地図へ次の差分を統合する。過去の日付付き候補・未実装表は当時の履歴で、現在は本節と補助設計§9.62を優先する。
+
+| 責任 | 現ownerと接続 |
+|---|---|
+| 本人の有効意味 | `natural_reply.py`／`emlis_thread_service.py`。原文・回答・明示訂正／撤回からactive材料を作り、OBSと原根拠付き分析材料を同じ保存境界へ渡す。AI本文を本人sourceへ戻さない |
+| Piece | `piece_v1c.py`／`piece_semantic_admission.py`／`piece_v2_source_adapter.py`／`piece_v2_generation.py`。同じ有効意味を既存作者・独立保存検査へ渡し、共有分析材料の版・資格・依存を再照合する |
+| マップ本人訂正 | `map_interpretation_correction.py`／`analysis_map_correction_service.py`／`api_self_structure.py`。対象map／項目・線と本人の二入力を別sourceへ束縛し、保存・更新queue・次回semantic材料・根拠表示へ接続。旧月次は不変 |
+| IF／Saved | `if_route_contracts.py`／`if_route_realizer.py`／`analysis_if_model_source.py`／`analysis_if_route_service.py`／`analysis_if_route_store.py`／`api_analysis_if_routes.py`。仮想候補と明示保存意向を別artifactとし、受領receiptからの復帰・idempotency・権利再確認・非生成再読・削除を所有 |
+| 4B受口 | `ai/tools/serve_emlis_natural_reply.py`。IF markerを専用JSON制約へ振り分ける。origin別のanchor／field束縛を追加。改行等を含む全文と空配列の一部は固定LMFEの限界があり、独立したCPU意味検査を保持。候補を含む実応答2件は拒否で保存しない |
+| RN | `CumulativeWatashiMapView.js`→`MapInterpretationCorrectionDialog.js`／`mapCorrectionContract.js`→`analysisMapCorrectionApi.js`。IFは`AnalysisIfRouteDialog.js`／`ifRouteContract.js`／`analysisIfRouteApi.js`。本人訂正をAI根拠と分け、月次と現在の入口を区別する |
+
+API cb6301ed→da9460bの変更全53path（再実装や全旧資産のimport件数ではない）：
+
+| リポジトリ内path | 責任 |
+|---|---|
+| `.github/workflows/analysis-observed-content.yml` | 既存CIへの対象検証登録 |
+| `.github/workflows/piece-b2b-isolated-postgres.yml` | 既存CIへの対象検証登録 |
+| `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | API／引継ぎ案内 |
+| `ai/docs/PUBLIC_API_REGISTRY.md` | API／引継ぎ案内 |
+| `ai/services/ai_inference/analysis_cumulative_service.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/analysis_if_model_source.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/analysis_if_route_service.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/analysis_if_route_store.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/analysis_map_correction_service.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/api_analysis_if_routes.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/api_contract_registry.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/api_self_structure.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/app.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/if_route_contracts.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/if_route_realizer.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/map_interpretation_correction.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/source_adapter.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/natural_reply.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_semantic_admission.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_v1c.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/emlis_thread_service.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/piece_model_source.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/piece_v2_generation.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/services/ai_inference/piece_v2_source_adapter.py` | 上記owner表のAPI／共有意味／保存・生成責任 |
+| `ai/tests/analysis_if_route_sql.cjs` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tests/analysis_map_correction_sql.cjs` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tests/fixtures/cmee_current_4b_packet_20261114.json` | 架空入力・固定検証材料（実品質の合格証ではない） |
+| `ai/tests/fixtures/piece_cmee_realization_recorded.json` | 架空入力・固定検証材料（実品質の合格証ではない） |
+| `ai/tests/piece_v2/test_b05_natural_refined_saved_pipeline.py` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tests/piece_v2/test_b05_shared_meaning_piece_pipeline.py` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tests/test_analysis_emlis_material_handoff.py` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tests/test_analysis_if_api.py` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tests/test_analysis_if_routes.py` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tests/test_analysis_if_service.py` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tests/test_analysis_map_correction_application.py` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tests/test_analysis_map_correction_handoff.py` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tests/test_analysis_map_correction_sql.py` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tests/test_cmee_current_4b_packet.py` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tests/test_emlis_active_meaning_application.py` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tests/test_emlis_analysis_material.py` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tests/test_piece_cmee_realization.py` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tests/test_piece_model_server_constraints.py` | 既存owner／HTTP／保存・再読／実parserの検証 |
+| `ai/tools/cmee_current_4b_packet.py` | 架空材料の準備／実受口・raw受領 |
+| `ai/tools/serve_emlis_natural_reply.py` | 架空材料の準備／実受口・raw受領 |
+| `supabase/migrations/20261114120000_analysis_if_route_artifacts.sql` | 稼働DBのtable／RPC／依存失効・保存境界 |
+| `supabase/migrations/20261114123000_analysis_emlis_material_handoff.sql` | 稼働DBのtable／RPC／依存失効・保存境界 |
+| `supabase/migrations/20261114124000_piece_shared_analysis_material_fence.sql` | 稼働DBのtable／RPC／依存失効・保存境界 |
+| `supabase/migrations/20261114132000_analysis_map_interpretation_corrections.sql` | 稼働DBのtable／RPC／依存失効・保存境界 |
+| `supabase/migrations/20261114133000_analysis_map_correction_handoff.sql` | 稼働DBのtable／RPC／依存失効・保存境界 |
+
+RN関連pathは `components/selfStructure/{CumulativeWatashiMapView,MapInterpretationCorrectionDialog,mapCorrectionContract,AnalysisIfRouteDialog,ifRouteContract}.js`、`lib/api/{analysisMapCorrectionApi,analysisIfRouteApi}.js`、`tests/{analysis-map-correction,analysis-if-route}.test.js`。build・配布は未実施。アカウント／購読／公開接点等の既存責任は01Cを維持する。

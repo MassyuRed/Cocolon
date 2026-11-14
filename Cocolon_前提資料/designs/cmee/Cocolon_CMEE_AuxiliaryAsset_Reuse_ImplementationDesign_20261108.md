@@ -1,4 +1,4 @@
-> **11/14最新：第2・第3回答の明示訂正／撤回を、先行ADDの資格確認を保ってPieceへ接続。通常DB／API反映単位を完了。** API `cb6301ed9a0b77fa7342e71c078d64a9075dad7a`、既存3writerのmigration適用、Render `dep-dbs16gafngtc73bek5a0` は16:53:56 JSTにLive。関連232件成功、全3plan×round2／3×REVISE／WITHDRAWの同本文保存・非生成再読と、通常selector OFFの既存作者経路を確認。原入力＋最新一回答を維持し、先行ADDの本文は使わない。先行訂正・補足を訂正する多段更新、一般意味／文章品質、natural分析材料NOT_GENERATED、全補助活用は未完。追加GPU／学習／RN変更／build／TestFlight／本人実機0。 [実装・通常反映と残件§9.61](#piece-latest-later-answer-update-20261114)。
+> **11/14最新：共有有効意味・natural原根拠材料・マップ本人訂正・IF／Savedの実装を通常DB／APIへ反映。** API／worker `da9460b926787c5f9e32995293dd232a2a74ab08` がLive。マップ訂正2migrationを追加適用、対象関数本文・RLS／ACLを確認。4B受口は同じ重み・起動条件を保ち、通常応答／通常分析の対照が再起動前後で全文一致。IF実3応答は必要確認1／anchor不整合拒否2、候補保存0であり、IF実生成品質と補助全体は未完。build／TestFlight／本人実機はMash指示どおり後回し。 [実結果・通常反映・残件§9.62](#shared-meaning-map-if-normal-rollout-20261114)。
 
 > **11/14・修正起動の明示承認後、実2取得・復元・同状態の保存再読まで完了。本文反復の改善は0。** 送信済み62,086byte・3fileは無変更／再送付0、1child／1loadで新2＋前後4対照＋health2GET、閉鎖後105.175913秒。通常／Analysis前後全文bytes一致、元args／env／cwd／2鍵・source／重みを保ってPID98755へ復元。新2 rawは旧2と全byte同一で、3省略候補は未使用。実raw無修補の2独立fork保存・非生成再読、canonical8／3hash・quota各1・原source／Emlis不変。旧保存ともcanonical8同一のため新native実行0。通常selector OFF、一般編集品質・通常経路／本人端末は未完。 [詳細§9.53](#piece-topic-editorial2-actual-unchanged-20261114)。
 
@@ -16,7 +16,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Section9.61 closes the latest round2/3 exact original-clause REVISE/WITHDRAW after ADD-only predecessors through normal SQL/APIcb6301ed. Preserve selected original plus latest one answer; prior ADDs are eligibility controls only. Continue9.54 multi-update/dependency meaning and general explanations, grounded natural Analysis NOT_GENERATED, real text quality, cumulative/map corrections and IF/Saved. Preserve9.60 actual3 evidence and deferred build/TestFlight/device/native; do not loop closed source/SQL/deploy. New GPU execution/selector/weights are not activated."
+current_next: "Section9.62 closes shared active meaning, grounded natural Analysis material and current-map correction normal DB/API rollout at da9460b. IF/Saved runtime is deployed, but actual IF is QUESTION_PENDING1 / anchor REJECTED2 / stored0. Continue IF original-anchor/session-field distinction to accepted unchanged raw and save/reread; retain general prose/history/long-source residuals from9.54. Do not replay closed migrations/deploys or restart build/TestFlight/device gates. Weights/research selectors unchanged."
 runtime_effect_of_this_document: 0
 ---
 
@@ -350,7 +350,7 @@ Mashの「Pieceでも4Bを使う」指示を通常生成の候補取得へ具体
 
 ### 7.2 Analysis
 
-**11/12採用：** [Analysisの仮説・本人訂正](v1/04_analysis_v1d_v1e_detailed_design.md#analysis-interpretation-correction-20261112)をAR-05/06へ追加する。項目・関係線を対象に「どの内容ですか？」「どう違いましたか？」を分け、本人の具体説明から読みを見直す。原記録編集・根拠参照・単なる分析更新とは区別し、対象と訂正内容が特定できない間はモデルで埋めない。現在の理解と、書き換えない月次当時版を区別し、原入力・AI解釈・本人訂正の出所を保って後続分析へ接続する。新しい訂正の入力・保存・利用導線は未実装。
+**11/12採用：** [Analysisの仮説・本人訂正](v1/04_analysis_v1d_v1e_detailed_design.md#analysis-interpretation-correction-20261112)をAR-05/06へ追加する。項目・関係線を対象に「どの内容ですか？」「どう違いましたか？」を分け、本人の具体説明から読みを見直す。原記録編集・根拠参照・単なる分析更新とは区別し、対象と訂正内容が特定できない間はモデルで埋めない。現在の理解と、書き換えない月次当時版を区別し、原入力・AI解釈・本人訂正の出所を保って後続分析へ接続する。11/14、現在mapの二入力訂正・対象版束縛・保存／再入場・更新queueと次回分析材料への導線を実装し、通常DB／APIへ反映した。月次当時版と独立した本人説明を保持する。一般訂正理解・配布／本人利用は未完（§9.62）。
 
 `cores/analysis/source_adapter.py`、`semantic_admission.py`、`intent_compiler.py`、`observed_route_realizer.py`を現ownerとする。旧source・根拠台帳・grounded plan・関係方向・unknownの知識を回収し、4B意味候補の誤りと図の対応を改善する。application側に第二のmap作者を作らない。
 
@@ -444,13 +444,13 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 | ID | 実施内容・既存残件 | 具体的な完了確認 | 依存／状態 |
 |---|---|---|---|
 | AR-01 | 現naturalの主体・所有者・否定・時点・留保を、旧失敗・意味比較・共通原因分析で改善。EM-01a/b | 現6境界と正常な短文／省略で、同入力の誤読を解消または明確に減らし、自然さ・別題材・既成功・保存再読を保持。検出増加／無出力だけでは完了しない | 継続中。新24実生成の4版は通常不採用。c6555fd5で疑問符なしの確認質問の保存抜けを修復、250局所PASS。同24rawは旧24保存→新22保存／2拒否、受理本文不変。全体の意味修復は未完 |
-| AR-02 | 現naturalの任意問い・回答・訂正・撤回・frameと、完了応答後の具体的な本人訂正。11/12採用仕様は§6.1。EM-02a/b、03b | 全plan最大3問、初期ON・前回選択保持、短い受け止め→回答後応答、0／1／2問終了・skip・上限時の不明保持、訂正対象と本人説明の二つの入力、説明不足時の未確定保持、対象だけ更新、撤回後の残存意味、同版再読、既存参照権利 | AR-01の全一般品質完成待ちにはしない。新Q3 naturalのsource-bound問い／回答更新／全plan3問／非生成再読を実装候補へ接続。公開の設定保持は§9.3の候補へ接続済み。二入力訂正は§9.28、別sourceの限定意味読取りは§9.30でコード接続。実4Bの生成品質未達・hint通常不採用。一般自由文・通常反映は未完 |
+| AR-02 | 現naturalの任意問い・回答・訂正・撤回・frameと、完了応答後の具体的な本人訂正。11/12採用仕様は§6.1。EM-02a/b、03b | 全plan最大3問、初期ON・前回選択保持、短い受け止め→回答後応答、0／1／2問終了・skip・上限時の不明保持、訂正対象と本人説明の二つの入力、説明不足時の未確定保持、対象だけ更新、撤回後の残存意味、同版再読、既存参照権利 | 最大3問・設定・二入力訂正・有効更新／失効と下流接続は通常DB／API反映済み（§9.55／62）。一般問い判断・本人説明の読取・自然な本文と本人一巡は未完。研究hint未採用 |
 | AR-03 | 適格履歴の意味ある利用。EM-03a/b | 同一／別場面・変化・無関係・訂正前を区別し、適切な履歴が今回へ効く。失効材料を使わない | 現related_contextと失効材料の再認可を継承。今回の意味利用全体は未完 |
-| AR-04 | 一人称・欄・役割等の既存限定改善と同版native、最新ADD1〜3・一回答REVISE／WITHDRAWを継承。§9.61で先行ADD後の最新第2／3回答の原入力一節訂正／撤回を同版保存・通常DB／APIcb6301edへ反映 | 一般文章化・単独伝達、一般本人訂正・多段／依存を跨ぐ更新、形式とmodel範囲、本人一巡。通常model選択OFF、実4B／nativeの新検証0。§9.53の反復改善0も継承 |
-| AR-05 | 分析の本人基準・役割／選択・記録間関係と、項目・関係線への本人訂正。AN-03a/b/c、04 | 原記録→意味→図／全文→両端根拠の対応、再出現／変化／不明の正しさ、訂正対象と本人説明からの読み直し・再読 | 既存compiler由来のsource dutiesとsource文脈を明示v2へ接続し、図／本文・隔離SQL再読を確認。通常v1保持。実4B・通常採用・本人基準／訂正の全体は未完 |
-| AR-06 | Emlis観測材料、訂正・削除・権利、長い蓄積と月次。EM-04/05、AN-02/06/08/10 | 本人sourceから材料を渡し、失効・分割範囲・当時版を保持。生成本文を本人事実にしない | AR-02/03/05の該当能力を利用。未開始 |
-| AR-07 | IF／Saved等の商品固有の残る意味保持責務。既存AN／PC残件 | 仮想・本人選択意向・観測を分離し、成立した経路で出力と保存を確認 | 既存商品の実装条件に従う。無断延期・新発売条件化をしない。未開始 |
-| AR-08 | 実証できた共通能力の通常適用と全体確認。EM-05/06/07等 | 採用版の意味保持・自然さ・権利・中断復帰・保存再読・実際の待ち時間／費用。未採用範囲は理由と残差を保持 | 各単位で通常採用可能。全core一括切替を強制しない。未開始 |
+| AR-04 | 一人称・欄・役割等の限定改善、最新適格回答／訂正の意味を既存Piece作者と独立保存検査へ接続 | 原材料→本文→保存再読・同版画像、一般文章化・単独伝達と有効更新の保持 | §9.61の通常反映を継承し、§9.62で共有有効意味・分析材料依存を通常反映。一般本文品質・model通常採用・本人一巡は未完 |
+| AR-05 | 分析の本人基準・役割／選択・記録間関係と、項目・関係線への本人訂正。AN-03a/b/c、04 | 原記録→意味→図／全文→両端根拠の対応、再出現／変化／不明の正しさ、訂正対象と本人説明からの読み直し・再読 | source duties・有効訂正、項目／線への二入力訂正と次回分析材料・独立根拠を実装し通常DB／APIへ反映（§9.62）。本人基準・条件差・記録間意味の品質、配布／本人一巡は未完 |
+| AR-06 | Emlis観測材料、訂正・削除・権利、長い蓄積と月次。EM-04/05、AN-02/06/08/10 | 本人sourceから材料を渡し、失効・分割範囲・当時版を保持。生成本文を本人事実にしない | 本人原根拠材料をnatural OBSと同時保存し三中核へ接続（§9.62）。成立意味GENERATED／未対応NOT_GENERATED・UNASSESSED。長履歴分割・跨ぐ関係・全量意味品質は未完 |
+| AR-07 | IF／Saved等の商品固有の残る意味保持責務。既存AN／PC残件 | 仮想・本人選択意向・観測を分離し、成立した経路で出力と保存を確認 | IF／SavedのAPI／RN／SQLと通常DB／APIを反映（§9.62）。実4Bは必要確認1／anchor不整合拒否2・実候補保存0。実候補の意味採用・同raw保存再読は未完 |
+| AR-08 | 実証できた共通能力の通常適用と全体確認。EM-05/06/07等 | 採用版の意味保持・自然さ・権利・中断復帰・保存再読・実際の待ち時間／費用。未採用範囲は理由と残差を保持 | §9.55／61を継承し、§9.62の5migrationとAPI／worker da9460b・4B IF受口を通常反映。build／TestFlight／本人実機は保留、一般品質・補助全体完了は未認定 |
 
 現在の実施順と作業単位は§9.1を正本とする。AR-04の固定実3件の読取拒否修復・9隔離保存／非生成再読は完了として継承し、一般編集品質・同版画像・通常適用等の残件を、他coreの能力移管と並行して減らす。旧73生成・先行native成功・今回の実7callを繰り返さない。
 
@@ -1760,28 +1760,28 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 設計、実装、局所検証、実モデル、通常稼働、実DB／端末、正式受入れを分けて記録する。華恋の全文確認は、明白な不足をMashへ戻さない事前確認であり、本人の正式受入れを代行しない。
 
 <a id="112-現在の進行欄"></a>
-### 11.2 現在の進行欄（11/14・全体完了主枠への改訂後）
+### 11.2 現在の進行欄（11/14・§9.62の通常反映後）
 
-**全体の作業は§9.54と第11回§5。§9.55のDB／API通常反映単位は完了として閉じる。** Cocolon PR30 e9d56cc7の統合RNとAPI99dbdaabを確認し、既存9migration・APIの通常反映を完了した。Mashの後続明示により、配布用アプリbuild・TestFlight送信・実機確認は後回しにする。統合RN配布と同版本人一巡は別の未確認項目として残し、その待ちを他の補助作業の開始条件にしない。本人の有効更新から返答・作品・分析への接続を続ける。補助全体は未完、新しいモデル生成・研究selector有効化は行っていない。
+全体主枠は§9.54／第11回§5。共有有効意味・natural原根拠材料・マップ本人訂正の通常DB／API反映単位は完了。API／worker da9460b、RN source8382ef5。IF／Savedのruntime実装とDB／API反映は成立したが、実4B候補の意味採用・同raw保存再読は未完。build／TestFlight／本人実機はMash指示で後回し。
 
-| 単位 | 最新までに成立したもの | 全体完了へ残る必要な工事 |
+| 単位 | 成立した接続と通常適用 | 残る必要工事 |
 |---|---|---|
-| AR-01 | 原文・役割・時点の既存能力と独立比較を現naturalへ限定回収。正常保存・再読の既存経路、局所修復あり | 材料が正しくても完成文で反転・付加等が残る。6境界／短文・省略・二欄・既成功・別題材を含む現責務群の実返答改善と通常採用 |
-| AR-02 | 最大3問・問い設定・skip／終了、二入力訂正のUI／API／保存、frame対象束縛・失効を接続し§9.55でDB／APIを通常反映。誤質問保存抜けの拒否修復 | 一般的な問い判断、回答／訂正／撤回後の意味・自然な応答、統合RN配布・同版本人一巡。拒否増加だけでは閉じない |
-| AR-03 | 適格履歴の再導出・送達予算の修復、本人判断対象の同thread／別記録束縛・失効。§9.55でDB／APIへ通常反映 | 実4Bで過去／今回・本人修正／不使用を正しく利用する内容と採用版、同版本人一巡。旧新実比較の不採用は§9.38／42等に保持 |
-| AR-04 | 一人称・受動役割・欄分離・評価・引用等の限定改善、最新ADD1〜3のSQL／APIを§9.55で通常反映、実raw保存再読・同版native画像。一部枠修正は通常source採用 | 一般文章化・単独伝達、具体訂正／撤回source、形式とmodel範囲、最新通常本人一巡。最後の§9.53は旧新2本文同一で反復改善0、通常model選択OFF |
-| AR-05 | 実4B→CMEE→実保存→7701本人表示、7801先行更新を継承。source duties v2の実装・限定比較／再読 | 本人基準・条件差・記録間関係の意味品質、通常v1／候補v2の採否と適用、項目／線の二入力訂正を次の現在mapへ通す工事 |
-| AR-06 | 原入力・適格最大3ANSWER、累積／月次保存と権利等の既存機構は継承 | 新natural本人原根拠の意味材料は未成立、NOT_GENERATED。有効訂正／撤回の下流伝播、現semantic長履歴と必要分割・跨ぐ関係・月次当時性を接続 |
-| AR-07 | IF／Savedの既存詳細設計・schemaあり | 仮想生成・必要確認・1〜3候補・API／RN／保存意向・再読削除がruntime未実装。適格現在mapから独立着手し、開始1例から必要仕様まで閉じる |
-| AR-08 | 既存の本人経路・iOS8001までの内部配布を継承。§9.55で後半機構の既存9migrationとAPI99dbdaabを稼働反映し、関数本文・ACL／RLSを照合 | DB／API反映単位は完了。Mash明示により配布用アプリbuild・TestFlight送信・実機確認を後回しとし、統合RN配布・同版本人利用は別の未確認項目として保持する。配布／実機待ちで他の補助作業を止めず、成立する能力ごとの接続・保存再読・通常適用を続ける |
+| AR-01 | 既存原文・役割・時点の能力、共有active meaningをnaturalの既定材料へ接続 | 一般本文での役割反転・付加・時点誤読と語り方の改善。研究hint／新重みは未採用 |
+| AR-02 | 最大3問・設定・skip／終了、二入力訂正・有効更新／依存失効・OBS同時保存を通常DB／APIへ接続 | 一般自由文の問い判断・回答後本文、配布／本人一巡 |
+| AR-03 | 本人原根拠・適格履歴・frame対象と本人判断・下流失効を保持 | 実4Bでの過去／今回と拒否／修正の扱い、一般履歴品質 |
+| AR-04 | 本人原入力・最新適格回答／訂正の意味を既存Piece作者・保存検査へ接続し、分析材料の版・資格も再照合 | 一般文章化・反復・単独伝達、model selector通常採用と本人一巡 |
+| AR-05 | source duties・有効訂正、現在mapの項目／線への二入力訂正と次回分析材料・独立根拠表示を通常反映 | 本人基準・条件差・記録間関係の意味品質、配布／本人利用 |
+| AR-06 | natural原入力・適格回答／訂正の原根拠材料をOBSと同時保存。成立意味GENERATED、未対応／未解決NOT_GENERATED・UNASSESSED | full_source_semantic_coverage=false。長履歴の分割・跨ぐ関係、一般的な全量意味理解は未完。月次当時版を保持 |
+| AR-07 | Premiumの現在map＋本人意向／制約、必要確認、1〜3候補、明示Saved、再読削除・受領復帰をAPI／RN／SQLへ実装し通常反映 | 実4B3応答は必要確認1／anchor不整合拒否2・候補保存0。実候補採用→同raw保存再読・本人利用は未完 |
+| AR-08 | §9.55／61を継承。対象5migration、通常API／worker da9460bと4B IF受口を反映。通常対照全文一致 | build／TestFlight／本人実機は明示保留。成立能力の通常化を進め、補助全体完成と混同しない |
 
-各行の実原本・採否・詳細は§9.2〜55と既存trial／weeklyへ戻る。AR-02／03／04のコード接続に対する通常DB／API反映は§9.55まで進んだが、同版RNの本人利用・本文品質の受入れは残る。[改訂前の進行欄](https://github.com/MassyuRed/Cocolon/blob/a770355c7a0518afecdaf80b41a67a323023829c/Cocolon_前提資料/designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#112-現在の進行欄)は履歴として保持する。補助全体完了・研究モデルの通常採用・正式受入れは認定しない。
+実原本・検証・配置・不成立は§9.62。研究モデル通常採用・正式受入れ・補助全体完了は認定しない。
 
 ## 12. 今後の指示と再開方法
 
-**11/14・現在の再開先：§9.54／第11回§5の四作業に沿う、本人の有効更新から返答・履歴・作品・分析への接続。** §9.55の既存9migrationとAPI99dbdaabの通常反映単位は完了として閉じる。Mashの後続明示により配布用アプリbuild・TestFlight送信・実機確認は後回しとし、配布承認・本人端末確認を待たず補助作業を続ける。統合RN配布・同版本人一巡は別の未確認項目で、成功認定・削除はしない。実生成の共通原因修復、全蓄積・IF／Savedと、各能力に必要なAR-08を同じ作業単位で進める。
+**11/14・現在の再開先：§9.54の四作業を維持し、§9.62で実測したIFの原map anchorと本人セッション意向／制約の混同を解消し、実候補の意味採用・同raw保存再読へ進める。** 共有有効意味・マップ訂正の通常DB／API反映単位は閉じた。一般意味／文章品質、履歴・長い蓄積・跨ぐ関係の必要工事も残る。明示入力の修正前／修正後2応答（各2scenario）はいずれもanchor不整合で保存0。出力後の本文・origin差替えや検査緩和で成功へしない。固定LMFEのJSON escape／空配列の限界を保持したまま、実出力に効く方法を既存ownerへ接続する。
 
-直近の実結果は§9.53（新2rawは旧2と全文同一、反復改善0、保存再読成立）。旧§9.30の訂正reader、Pieceの省略hint、個別不採用文の次手は、それぞれの原本・必要残差として使うが、全体をその局所作業へ戻す再開指示にはしない。完了済みの旧GPU・SQL・native結果を無根拠に繰り返さない。
+API／workerのLiveとDB照合は完了済みで、無変更再適用は不要。RN source8382ef5と内部8001を区別し、build／TestFlight／本人実機はMash指示どおり後回し。配布待ちを他作業の開始条件へ戻さない。実行済みの原prepared・raw・receiptと不採用理由を再利用し、既完の旧GPU／SQL／nativeを無根拠に繰り返さない。
 
 [改訂前§12の再開記録](https://github.com/MassyuRed/Cocolon/blob/a770355c7a0518afecdaf80b41a67a323023829c/Cocolon_前提資料/designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#12-今後の指示と再開方法)は履歴。本人更新・素材の資格／有効版・実本文／図／画像・同版保存・通常適用の未完単位から継続し、各局所比較を毎回の続行指示待ちの区切りにしない。
 
@@ -3556,3 +3556,73 @@ STRUCTURE_MAP_DELTA_PRESENT：既存Piece source adapter／refined ownerの受�
 primary outcomeはTECHNICAL_CREDIT。今回の限定source受付・同版保存と通常DB／API配置単位はCLOSED。実認証の本人端末一巡・新しい実4B作品／native画像・一般編集品質・全回答集合／多段訂正の完成へは換算しない。§9.60の実3本文・画像未確認という既存状態は保持する。
 
 次は§9.54の一般本人説明・複数更新／依存を同じ有効意味として三中核へ通す責務、natural Analysisの根拠付き意味材料とNOT_GENERATED解消、実本文の意味／日本語品質、全蓄積・本人map訂正・IF／Saved。閉じたlatest一回答のsource／SQL／配置だけを再周回しない。build／TestFlight／本人実機保留、研究selector／新重み不採用、補助全体未完と既存期限を維持する。
+
+
+<a id="shared-meaning-map-if-normal-rollout-20261114"></a>
+## 9.62 2026-11-14 — 中断した共有有効意味・マップ本人訂正を通常反映、IF実生成の不成立を保存せず継承
+
+### 引継ぎと実装範囲
+
+前回の引継ぎ原本2件とPR3 `97af253d633cf2b168954a671d655984d226cae6`／PR30 `8382ef5dbb7f183df0f919ab62e6dae970f37e21`を取得し、全体現在地・最新weekly・本設計・全体地図・三中核の現ownerから未反映差分を確認した。`main`へ戻さず既存の作業lineageを継承。System Contextは現行入口から原本へ進み、旧cacheを現行全確認へ流用していない。巨大な全repositoryの全行を意味精読したという報告ではない。2補助agentは読取・点検だけ、変更と通常反映はrootが実行した。
+
+| 能力 | 現在成立した接続 | 限界 |
+|---|---|---|
+| 共有有効意味 | 本人原入力・回答・明示訂正／撤回のactive材料をnaturalの既定profileへ渡し、同じ意味をPiece作者・Analysis source adapterへ接続 | 自由文を有限意味checkpointへ強制しない。未対応の意味更新を推測補完しない。一般本文・frame利用の品質は別に残る |
+| natural分析材料 | 原根拠付き材料をOBSと同じ保存境界で保存し、累積source／Piece依存の版と資格を再確認。成立意味GENERATED、未対応／pendingはNOT_GENERATED・未判定 | `coverage.full_source_semantic_coverage=false`、`interpretation_status=UNASSESSED`。AI応答本文を本人事実へ戻さない |
+| 現在map本人訂正 | 項目・線から「どの内容ですか？」「どう違いましたか？」を別入力し、map版・対象根拠・本人説明を保存。再入場、既存更新queue、次のsemantic材料、別出所の根拠表示へ接続 | 月次当時版は書き換えない。対象・説明不足をモデルで埋めない。一般訂正理解と本人端末の受入れは未完 |
+| IF／Saved | Premium・適格現在map・SELF_ONLY、本人意向／制約・必要確認・1〜3候補・明示保存・note・非生成再読・削除を実装。予約／受領receipt／idempotency／中断復帰をDB ownerへ接続 | runtime実装と通常反映は成立。実4Bの候補意味採用／同raw保存再読は0で未完。選択を行動・達成・人格へ昇格しない |
+
+API cb6301ed→最終da9460bの全53変更pathとRN ownerは[01Aの同日ファイル地図](../../01A_cocolon_overall_structure_app_foundation_home.md#shared-meaning-map-if-file-map-20261114)。共有意味／Piece／Analysis／IF／Savedの作者・採否・保存責任は既存ownerに残す。API・RNの新しい責任を同じ地図へ統合し、ファイル追加だけを活用成功へ数えない。
+
+### 通常DB／API／workerへの反映
+
+| 追跡migration filename | 稼働履歴version | 今回の操作 |
+|---|---|---|
+| `20261114120000_analysis_if_route_artifacts.sql` | `20261114104332` | 前回適用済みを継承し本文照合 |
+| `20261114123000_analysis_emlis_material_handoff.sql` | `20261114104340` | 前回適用済みを継承し本文照合 |
+| `20261114124000_piece_shared_analysis_material_fence.sql` | `20261114104350` | 前回適用済みを継承し本文照合 |
+| `20261114132000_analysis_map_interpretation_corrections.sql` | `20261114105238` | 今回適用成功 |
+| `20261114133000_analysis_map_correction_handoff.sql` | `20261114105248` | 今回適用成功 |
+
+対象21関数の本文hashを追跡SQLと照合。map correction tableのRLS有効、service_roleの限定権限とsecurity-definer RPCの所有者・空search_pathを確認した。今回の分析／IF／共有材料に該当する新しいadvisor WARNは0。既存の別領域のadvisor項目を本単位で解消したとは扱わない。稼働本人データへの架空記録挿入・削除は行っていない。
+
+API／workerを97af253へ先行反映し、続く受口修正 `da9460b926787c5f9e32995293dd232a2a74ab08`へ統一した。
+
+| 対象 | 最終deploy | Live日時 |
+|---|---|---|
+| 通常API | `dep-dbs4a02fngtc73bm8rug` | 2026-11-14 11:26:02.684508 UTC／20:26:02 JST |
+| 裏更新worker | `dep-dbs4bb49v7es73bldu6g` | 2026-11-14 11:28:29.253574 UTC／20:28:29 JST |
+
+両サービスのlinked branch／autoDeploy設定は変更せず、既存手動の指定commit配置で反映。通常health／bootstrapは200。IF一覧・Saved一覧・map correction再読の未認証要求は401で、本人情報を返さない。IF／Savedの401はprivate,no-store。read-only要求のみで本人の生成・保存を実行したとは扱わない。RNは8382ef5のsource統合まで、配布8001と同版ではない。build／TestFlight／本人実機はMashの保留を継承する。
+
+### 実4B受口・原出力・採否
+
+既存4Bのsemantic-120u／natural base-851bf6e、同じadapter・重み・起動引数・cwd・環境と専用鍵の分離を保持し、IF schemaだけを既存受口へ追加した。公開固定sourceから該当関数を取得・hash照合し、独自Piece wrapper等を維持。disk変更だけでは反映されないため制御再起動を行った。旧PID98755→107884、origin束縛修正後108127。2回の前後で通常Emlis／通常Analysisの対照全文response bytes一致、health200。鍵は同Pod内の既存認証・復元だけに使い、値・環境全体を外へ出していない。新Pod・学習・重み／adapter変更・研究selector有効化0。
+
+| 実要求 | CPU ownerの結果 | 保存 |
+|---|---|---|
+| 架空IF・30分条件の初回 | QUESTION_PENDING、CONSTRAINT_UNCLEAR | 候補artifactなし |
+| 読む／見直す比較と午後合計30分・追加費用なしを明示 | 2scenarioのrawを受領したが、本人制約をOBSERVED_ANCHOR／anchor_ref=nullとして出力。`analysis_if_model_anchor_unbound`で拒否 | 0 |
+| 同じ明示入力・生成時origin束縛の修正後 | anchor_refは固定されたが、制約文を元map観測として出力する混同が残り同理由で拒否 | 0 |
+
+受口修正はorigin別oneOfでanchor_ref／field全文・参照番号・UNKNOWNを束縛する。固定LMFE0.11.3ではJSON escape入り全文を単純enumで生成できず、maxItems=0でも最初の要素を許す場合があるため、該当する原文は生成可能性を保ち、CPU ownerの完全一致・空配列検査を緩めない。新rawは修補せず、原preparedとmessages hash／raw hashを束縛したreceiptを既存Engineへ渡した。拒否を形式受理・保存成功へ数えない。生成制約の修正がIF意味品質を完成させたとは扱わない。
+
+通常対照のEmlis本文は本人の明示訂正を保持し形式受理、Analysisは元の2入力から図・文章へGENERATED。Analysisの説明の不自然さ・二重否定等は残り、一般品質の合格ではない。実4Bの有効POSTは合計9（通常対照6＋IF3）。別に稼働確認pathの誤り404と、model名の誤指定400が各1あり、どちらも生成前の拒否。学習・自動再試行0。実ユーザーの保存一巡、残りのprepared各case、一般品質の追加比較を実行済みへ数えない。
+
+### 検証の範囲
+
+API97af253のAnalysis CI run43586587356／job132422305633は全step成功。pytest各stepは73／45／2882／1／1403／408の成功で、重複fileを含むため固有件数として合算しない。累積実SQLは201記録・15月次参照、IF／Saved隔離実SQLは予約・受領・同一再送・権利・保存再読・不変性・失効・削除・ACLを確認した。モデル部分は合成providerであり、今回の実IFraw保存成功の証拠ではない。
+
+受口da9460bの影響範囲は既存packet・IF owner・ordinary semantic schemaの75件が成功。実LMFEで誤origin組合せ拒否、真正な改行anchor受理、USER_CHOICEの全文／参照とUNKNOWNの独立owner拒否、ordinary schemaの全byte hash不変を確認。新依存は製品へ追加せず、CPU検証環境にpytest／固定LMFEを用意した。
+
+API97af253のPiece run43586587317は10分上限で取消。step1〜32成功、step33の主要群2424件成功まで到達、後続finite／native群は未実行。後続2群は今回runtime差分なし・前版85609406のrun43583460912で成功を継承するが、最新全CI成功とはしない。da9460bのPiece run43589511197も同上限取消、Analysis run43589511172／job132431059607は最終da9460bの全step成功。無変更のCI時間枠延長・全workflow再実行は行わない。
+
+RN8382ef5の主要source1453件＋UI操作331件は成功。全workflowはiOS source timeoutで取消、iOS canvasの20分失敗を保持し、新build／native／TestFlight成功へ数えない。
+
+実raw・前後対照・prepared・CPU採否とsource hashは非公開の `Cocolon_CMEE_SharedMeaning_Map_IF_NormalRollout_20261114.zip`（43,293bytes、SHA256 `803e73bcf5d1eeea4911496fad26a52547528ebcbb1815e7e84d8120b7e726b8`）へ回収・永続保管した。GitHubには本人本文・認証・環境値・個人原本を転載しない。
+
+### 閉じた単位と次の工事
+
+**共有有効意味・原根拠材料・現在map本人訂正のソース接続と通常DB／API反映単位は完了。IF／Savedのruntime実装・通常配置も完了したが、実候補の意味採用・同raw保存再読を含む単位は未完。** 次は元mapのAI観測anchorと本人セッション材料の混同を実生成で解消し、候補本文・図を原材料と照合した上で保存・再読・明示Savedへ通す。原出力の差替えや意味検査の緩和を成功手段にしない。
+
+§9.54の四作業と全体完了目標を維持する。一般意味／文章化、過去／今回・本人判断の使い分け、長履歴分割・跨ぐ関係、通常採用版・研究重み／selector、統合RNの本人利用は残件。11/21判定・12/6候補、61.625％の管理評価は変更しない。配布／実機保留を他作業の停止条件へ戻さない。STRUCTURE_MAP_DELTA_PRESENT。

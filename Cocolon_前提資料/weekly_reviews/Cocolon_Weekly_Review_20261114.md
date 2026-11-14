@@ -6,7 +6,7 @@
 記録担当：華恋  
 会議状態：**終了。11/14、Mashが報告会終了を明示。公開日未定・12/6までに提出可能候補、対象週は補助経路活用全体の完了へ集中する§5と、対応する補助設計の現在再開先を以後の前提として引き継ぐ。今後の短い継続指示と終了記録は§9。補助全体・商品完成・新しい実環境操作の実行を認定したものではない。**
 
-> **報告会後の最新到達点：§15。** 実4B3件を取得し、同じ無修補出力の原入力照合・隔離保存再読・JS描画入力一致まで確認。通常DB／API接続完了を継承し、この限定検証単位を閉じた。native画像／本人一巡・一般編集品質・全補助活用は未完。[§15](#piece-answer-update-actual3-saved-20261114)と補助設計§9.60を現在の到達点、全体主枠は§5とする。
+> **報告会後の最新到達点：§17。** 共有有効意味・原根拠材料・マップ本人訂正とIF／Savedの実装を通常DB／API／workerへ反映。実4Bの通常対照は全文一致、IFは必要確認1／anchor拒否2・保存0。通常反映の完了と実生成品質の未完を分ける。全体主枠§5、61.625％、11/21判定、12/6候補、build／TestFlight／本人実機保留は維持。
 
 [前回・第10回議事録](Cocolon_Weekly_Review_20261107.md)の決定・実行履歴・未達を継承する。今回の11/14〜11/21は記録を進める対象週であり、未来の作業を実績へ数えない。
 
@@ -828,3 +828,14 @@ HEALTH一行だけの修正候補（新runner SHAacb5665088574cd7d7e27c3b35c0eac
 **11/14最新：第2・第3回答の明示訂正／撤回を、先行ADDの資格確認を保ってPieceへ接続。通常DB／API反映単位を完了。** API `cb6301ed9a0b77fa7342e71c078d64a9075dad7a`、既存3writerのmigration適用、Render `dep-dbs16gafngtc73bek5a0` は16:53:56 JSTにLive。関連232件成功、全3plan×round2／3×REVISE／WITHDRAWの同本文保存・非生成再読と、通常selector OFFの既存作者経路を確認。原入力＋最新一回答を維持し、先行ADDの本文は使わない。先行訂正・補足を訂正する多段更新、一般意味／文章品質、natural分析材料NOT_GENERATED、全補助活用は未完。追加GPU／学習／RN変更／build／TestFlight／本人実機0。
 
 [詳細設計§9.61](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-latest-later-answer-update-20261114)。232 PASSは合成Auth／providerと隔離SQLのsource・保存検証。最新一回答の受付と通常DB／API適用を閉じた限定TECHNICAL_CREDITで、全回答の多段更新・Analysis材料・IF／Saved・補助全体を完了にはしていない。指定API配置とhealth／bootstrap200を確認し、配布用build／TestFlight／本人実機保留を維持した。
+
+<a id="shared-meaning-map-if-normal-rollout-20261114"></a>
+## 17. 2026-11-14 — 共有有効意味・マップ本人訂正・IF／Savedの通常反映と実4B結果
+
+**11/14最新：共有有効意味・natural原根拠材料・マップ本人訂正・IF／Savedの実装を通常DB／APIへ反映。** API／worker `da9460b926787c5f9e32995293dd232a2a74ab08` がLive。マップ訂正2migrationを追加適用、対象関数本文・RLS／ACLを確認。4B受口は同じ重み・起動条件を保ち、通常応答／通常分析の対照が再起動前後で全文一致。IF実3応答は必要確認1／anchor不整合拒否2、候補保存0であり、IF実生成品質と補助全体は未完。build／TestFlight／本人実機はMash指示どおり後回し。
+
+API97af253を先行反映後、IF生成時のorigin束縛を修正しda9460bへ統一。APIは20:26:02 JST（dep-dbs4a02fngtc73bm8rug）、workerは20:28:29 JST（dep-dbs4bb49v7es73bldu6g）にLive。対象5migrationのうちマップ訂正2本を今回適用。source・保存・権利を確認し、API既存Analysis CI全工程成功、関連実parser等75件成功。Piece／RNの長時間CI取消・未実行範囲は詳細設計に記録し、全CI成功とは扱わない。
+
+前回中断した共有意味・マップ訂正の通常DB／API反映単位は閉じる。IF／Savedのruntime未実装は解消したが、実候補を意味採用して同raw保存・再読する単位は未完。条件文を元mapの観測へ誤分類する実出力2件はCPU ownerが拒否、補正・保存しない。一般意味／文章品質、長履歴分割・跨ぐ関係、研究selector／重み採用、統合RNの本人利用も残る。本人端末待ちを独立作業の開始条件へ戻さない。
+
+原本・全変更path・検証範囲・次は[補助設計§9.62](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#shared-meaning-map-if-normal-rollout-20261114)。会議時点の未実装表は当時の履歴で、現在状態は本節を優先する。

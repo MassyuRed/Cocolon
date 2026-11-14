@@ -1,10 +1,10 @@
-> **11/14・訂正・撤回後の有効部分を4B分析材料へ接続。** API `bd602c35`。原入力中の一節を完全引用した明示更新だけ、全原文・欄hashを保ち、残る連続範囲と差替え本人節を別fieldで渡す。撤回された旧節、範囲をまたぐ連結、AI引用は材料へ戻さない。絶対scalar／UTF8座標とsource dutiesを統一。関連159件成功（新12内包）。実4B2件は明示v2で取得し、同じ生成前checkpoint・無修補rawから隔離SQL保存→現在版2回／月次版1回・全node根拠再読成功。通常v1の新実生成は未実施、両profileの材料・回帰を確認。既存CI全19工程成功、API／裏更新とも同版Live、healthz／bootstrap200・worker起動／DB通信200を確認。 新DB変更0、稼働履歴27と既存関数hash不変。一般説明はpendingを維持。同一記録を別記録と呼ぶ誤り、場面と行動の過剰結合・日本語の不自然さは残り、本文品質合格へ数えない。一般訂正理解・Piece更新・naturalの根拠付きAnalysis材料生成・補助全体は未完。build／TestFlight／本人実機は保留を維持。 [範囲・実結果・残件§9.57](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-active-update-semantic-material-20261114)。
+> **11/14最新：共有有効意味・natural原根拠材料・マップ本人訂正・IF／Savedの実装を通常DB／APIへ反映。** API／worker `da9460b926787c5f9e32995293dd232a2a74ab08` がLive。マップ訂正2migrationを追加適用、対象関数本文・RLS／ACLを確認。4B受口は同じ重み・起動条件を保ち、通常応答／通常分析の対照が再起動前後で全文一致。IF実3応答は必要確認1／anchor不整合拒否2、候補保存0であり、IF実生成品質と補助全体は未完。build／TestFlight／本人実機はMash指示どおり後回し。 [実結果・通常反映・残件§9.62](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#shared-meaning-map-if-normal-rollout-20261114)。
 
 > **11/12・三中核の実4B比較7件と保存抜け修復：** Mashの具体的承認後、既存Podで7件を一回・98.351秒、全HTTP200/stop。学習・再試行・提供再起動0、PID73476／health200を前後維持。撤回後の既発行問いが本文へ再出力・保存される実抜けをAPI `4183126d00c2ed4238c526cf17f6b28cdbb18dc6`で修復し、同rawの2保存維持／1拒否・非生成再読と関連103件成功を確認。Piece旧新は原2欄の完全コピー・編集改善0、CMEE2拒否。Analysis旧新の図／本文とartifact再読は成立し、新v2の場面引用を保持するが、反復・誤字・関係説明等の品質は未達。Piece／Analysisのexact SQL保存は未実施、通常採用／live反映／端末・全補助経路は未完。 [実原本・前後比較・保存範囲](<../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#auxiliary-crosscore-actual7-20261112>)。
 
 > **11/12・三中核への既存能力移管候補：** API `eea4761f7b5009128d497b2b69e1b1d0766ad57d`。明示semantic_map.source_duties.v2に限り、既存observed compilerの意味軸と未評価範囲を生成へ渡し、根拠付きの同記録文脈を図と同じ本文へ残す。通常v1と旧保存は保持。実4B・通常v2採用は未実証。 新規一括53件成功、実隔離SQL・保存後の非生成再読を含む。既存CIへ新検証を追加。新しい実4B比較7要求はuploadの自動承認拒否で未送信・生成0。通常採用／live DB適用／Render配置／本人端末・全補助経路は未完。 [実呼出し・確認範囲・次](<../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#auxiliary-crosscore-transfer-20261112>)。
 
-> **2026-11-12・Mashとの設計合意（未実装）：根拠と対象範囲の分かる仮説を保持し、わたしマップの項目・関係線への本人訂正入口を追加する方針。対象と「何がどう違うか」の本人説明を必須とし、不足をAIで補わない。現機能・未決事項は[同日節](#analysis-interpretation-correction-20261112)へ。**
+> **2026-11-12・設計合意の履歴（11/14の実装・通常反映は先頭と末尾同日節）：根拠と対象範囲の分かる仮説を保持し、わたしマップの項目・関係線への本人訂正入口を追加する方針。対象と「何がどう違うか」の本人説明を必須とし、不足をAIで補わない。現機能・未決事項は[同日節](#analysis-interpretation-correction-20261112)へ。**
 
 > 2026-11-08追加反映：先行こころグラフ／履歴metadata読取／既読cache修復を含むAPI497f7008がLive。更新担当と通知2cronも同版。共有4Bは分析予算・JSON制約・120u adapterを保持し、natural専用鍵の要求だけ順番待ちする。分析3node/2edge・全2入力mappedの実GPU合成確認後、待機した観測応答も完了。RN6fdea583の統合run#80は全19step成功、8001内部Testing。map通知の本人不達はglobal OFFの送信前除外、cron候補DB timeoutとは別。
 
@@ -1604,7 +1604,7 @@ Cocolon31pathとAPI10pathを各exact predecessorで反映し、remote bytes／�
 
 
 <a id="analysis-interpretation-correction-20261112"></a>
-## 2026-11-12 — わたしマップの本人訂正入口：方針採用・実装未接続
+## 2026-11-12 — わたしマップの本人訂正入口：11/12方針と11/14現在の接続
 
 Mashとの対話で、根拠と対象範囲を示せる仮説は保持し、項目・関係線について本人が読みの違いを伝えられる入口を追加する方針を採用した。曖昧な語尾だけで根拠不足を許さない。詳細は[Analysis設計の同日節](../designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#analysis-interpretation-correction-20261112)、共通原則は[観測・分析の合意](../observation_learning/README.md#observation-calibration-20261112)を参照する。
 
@@ -1612,16 +1612,30 @@ Mashとの対話で、根拠と対象範囲を示せる仮説は保持し、項�
 
 | 区分 | 確認した範囲 |
 |---|---|
-| 現行RN | `components/selfStructure/SemanticWatashiMap.js` は項目・関係線の選択、説明・未確定事項の表示、根拠参照を持つ。`CumulativeWatashiMapView.js` は現在／当時月次の閲覧・比較、分析更新、根拠の原入力／適格補足の表示を持つ。項目・線の読みを訂正する入力・送信の入口はない |
-| 現行API | `api_self_structure.py` の通常map latest/status/monthly ensureと、`api_self_structure_reports.py` のhistory/detail/evidenceに、マップ解釈への本人訂正を受け付ける入口はない。profile閲覧要求のaccept/rejectは解釈への賛否ではない |
-| 既存の訂正資産 | 原入力に束縛した本人補足のREVISE／WITHDRAW等は、元の記述を扱う資産。今回のマップ項目・関係線への本人訂正がUI・保存・将来分析まで接続済みという意味ではない |
+| 現行RN | `CumulativeWatashiMapView.js`は現在mapの項目・線から二入力Dialogへ接続。`MapInterpretationCorrectionDialog.js`／`mapCorrectionContract.js`と`analysisMapCorrectionApi.js`が対象版と本人説明を送信・再読し、独立した本人訂正根拠を表示。月次当時版に訂正入口を置かない。8382ef5 source統合、本人配布は未確認 |
+| 現行API | `api_self_structure.py`→`analysis_map_correction_service.py`→`analysis_map_correction_submit/read/sources` RPC。対象map／source guard／所有者／二入力を検査し、保存・再入場と既存更新queueへ接続。プロフィール閲覧のaccept/rejectとは別 |
+| 既存の訂正資産 | 原入力に束縛した本人補足のREVISE／WITHDRAW等は、元の記述を扱う資産。元記述のREVISE／WITHDRAWとは出所・対象を区別し、現在mapの本人訂正も専用UI／API／RPCと次回分析材料へ接続した |
 | 今回採用した方針 | 「どの内容ですか？」と「どう違いましたか？」を分け、どの読みの何がどう違うかという対象と本人の説明を必須にする。根拠を見る操作・原入力の編集・分析更新と区別する |
-| 未具体化・未実装 | 訂正のDB／API／UI、対象版への束縛、説明不足の確認、保存・更新と将来分析への反映方式。画面構成や質問数も未決であり、本節で実装済みにはしない |
+| 現在残る確認 | 訂正のUI／API／DB、対象版束縛・原根拠・本人説明の別source、更新・次回分析接続は実装・通常反映済み。説明不足は保留しAIで補わない。一般意味品質、IF実候補の採用・保存一巡、build／配布／本人利用は未完 |
 
 「違う」だけ、単なるnonnullや文字数の充足を訂正完了としない。不足は未確定にして確認し、AIが本人説明を補完しない。本人が否定した読みは、説明が未確定でも確定した本人特徴として使い続けない。無反応も同意としない。
 
 原記録・AI解釈・本人訂正を分け、本人の現訂正を将来分析へつなぐ方針とする。旧snapshotを遡及書換えせず、既存の削除・権限・保存寿命を維持する。全蓄積を扱う累積mapの対象を、訂正のために任意の数件・数日へ置き換えない。
 
-### 確認根拠と今回の実施範囲
+### 11/12時点の確認根拠と当時の実施範囲
 
 GitHub sourceの確認範囲はCocolon `90735e2ff448e8815796cb5112f318ef10198aa3`、mashos-api `8a0192b622c0ce76cde39062e9476f7c814e6e99`。対応する[項目・線renderer](https://github.com/MassyuRed/Cocolon/blob/90735e2ff448e8815796cb5112f318ef10198aa3/components/selfStructure/SemanticWatashiMap.js)、[累積map画面](https://github.com/MassyuRed/Cocolon/blob/90735e2ff448e8815796cb5112f318ef10198aa3/components/selfStructure/CumulativeWatashiMapView.js)、[通常map API](https://github.com/MassyuRed/mashos-api/blob/8a0192b622c0ce76cde39062e9476f7c814e6e99/ai/services/ai_inference/api_self_structure.py)、[履歴・詳細・根拠API](https://github.com/MassyuRed/mashos-api/blob/8a0192b622c0ce76cde39062e9476f7c814e6e99/ai/services/ai_inference/api_self_structure_reports.py)を読取確認した。今回はLive／実機の再確認ではない。商品source・DB・API・RN変更、GPU生成・学習・配置は行っていない。STRUCTURE_MAP_DELTA_NONE（設計方針と未接続残件の記録）。
+
+## 2026-11-14 — 現在map訂正・共有原根拠・IF／Savedの通常反映
+
+
+| 責任 | 現ownerと接続 |
+|---|---|
+| 本人の有効意味 | `natural_reply.py`／`emlis_thread_service.py`。原文・回答・明示訂正／撤回からactive材料を作り、OBSと原根拠付き分析材料を同じ保存境界へ渡す。AI本文を本人sourceへ戻さない |
+| Piece | `piece_v1c.py`／`piece_semantic_admission.py`／`piece_v2_source_adapter.py`／`piece_v2_generation.py`。同じ有効意味を既存作者・独立保存検査へ渡し、共有分析材料の版・資格・依存を再照合する |
+| マップ本人訂正 | `map_interpretation_correction.py`／`analysis_map_correction_service.py`／`api_self_structure.py`。対象map／項目・線と本人の二入力を別sourceへ束縛し、保存・更新queue・次回semantic材料・根拠表示へ接続。旧月次は不変 |
+| IF／Saved | `if_route_contracts.py`／`if_route_realizer.py`／`analysis_if_model_source.py`／`analysis_if_route_service.py`／`analysis_if_route_store.py`／`api_analysis_if_routes.py`。仮想候補と明示保存意向を別artifactとし、受領receiptからの復帰・idempotency・権利再確認・非生成再読・削除を所有 |
+| 4B受口 | `ai/tools/serve_emlis_natural_reply.py`。IF markerを専用JSON制約へ振り分ける。origin別のanchor／field束縛を追加。改行等を含む全文と空配列の一部は固定LMFEの限界があり、独立したCPU意味検査を保持。候補を含む実応答2件は拒否で保存しない |
+| RN | `CumulativeWatashiMapView.js`→`MapInterpretationCorrectionDialog.js`／`mapCorrectionContract.js`→`analysisMapCorrectionApi.js`。IFは`AnalysisIfRouteDialog.js`／`ifRouteContract.js`／`analysisIfRouteApi.js`。本人訂正をAI根拠と分け、月次と現在の入口を区別する |
+
+自然応答の本人原根拠はOBSと同時保存される。全文coverage=false、解釈UNASSESSEDと未対応部分を保持する。IF／SavedはPremium・適格現在map・SELF_ONLYに束縛し、観測map／AI仮説／本人の明示意向を別artifactにする。隔離実SQL・合成providerの保存再読は成功、実4Bは必要確認1／anchor拒否2・候補保存0。詳細・配置・再開先は補助設計§9.62。
