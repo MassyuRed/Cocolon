@@ -7180,3 +7180,10 @@ RN関連pathは `components/selfStructure/{CumulativeWatashiMapView,MapInterpret
 **11/14最新：標準RN入力の自動3案で、元anchor・UNKNOWN・接続・本人条件を生成時に保持する修正をAPI候補d3daee549a848675cb200b3aa3360be38e94bf8fへ反映。** 関連168件成功、旧actual採否と保存bytesを保持。架空3案の合成保存・別process再読・Saved／RN受口は事前検証だけ。27,761bytes・2fileの既存Pod送付は具体的開示承認不足として自動審査で送信前拒否、実生成／Pod変更／本候補の通常反映0。通常API／workerはc7968c6 Liveを継続。本単位・補助全体未完、配布／実機保留を維持。
 
 既存製品2owner（serve_emlis_natural_reply::_if_output_schema／_if_json_schema_parser、if_route_realizer::prepare_if_model_request）と既存test2／fixture1の計5path。全path・責務は[補助設計§9.65](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-standard-three-conditions-prepared-20261114)。新owner／依存／公開API／DB／RN変更0、STRUCTURE_MAP_DELTA_NONE。
+
+
+## 2026-11-15 — 通常IF3実原本と意向コピー除外（§9.66）
+
+**11/15最新：承認済み通常IF3の一回を完了、条件保持は成立したが、3案のgraphが同じ本人意向コピーのため商品不採用。** 実3POST全受領、通常Emlis／Analysis対照の前後全文一致、実行本体167.909910秒・追加学習／再試行0。受領rawは旧CPUでGENERATEDだが、見出しの違いだけを3ルート成立へ数えず候補SQL保存／通常API反映0。意向を選択候補から外す修正をAPI候補7f51a64e6cb58668ad5d418480b7de4499bfe6faへ反映し171件成功。新修正の実生成は未実施、28,480bytes・2fileの追加一回を準備。通常API／workerはc7968c6、Podは前回承認で差替えたd3のIF2関数版。配布／本人実機保留・補助全体未完を維持。
+
+serve_emlis_natural_replyのchoice_fieldsだけをPERSON_ALTERNATIVEへ限定し、if_route_realizerの新指示／旧6版lookup、既存test2とfixture1を同期。前節と同じ5path、新owner／依存／公開契約／DB／RN変更0。[全結果・同一原本・新送付準備](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-standard-three-actual-proposal-fix-20261115)。

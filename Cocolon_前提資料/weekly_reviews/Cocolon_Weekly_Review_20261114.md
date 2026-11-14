@@ -866,3 +866,10 @@ API97af253を先行反映後、IF生成時のorigin束縛を修正しda9460bへ�
 **11/14最新：標準RN入力の自動3案で、元anchor・UNKNOWN・接続・本人条件を生成時に保持する修正をAPI候補d3daee549a848675cb200b3aa3360be38e94bf8fへ反映。** 関連168件成功、旧actual採否と保存bytesを保持。架空3案の合成保存・別process再読・Saved／RN受口は事前検証だけ。27,761bytes・2fileの既存Pod送付は具体的開示承認不足として自動審査で送信前拒否、実生成／Pod変更／本候補の通常反映0。通常API／workerはc7968c6 Liveを継続。本単位・補助全体未完、配布／実機保留を維持。
 
 既知条件を空欄にできる／本人選択へ転用できる原因を修正。合成事前検証と旧raw再演を実4B品質へ数えない。CI詳細・具体送付内容と次は[補助設計§9.65](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-standard-three-conditions-prepared-20261114)。§5の補助全体主枠・管理評価を継承する。
+
+
+## 21. 11/15 — 承認済み通常IF3の実行は完了、graph未達で通常不採用
+
+**11/15最新：承認済み通常IF3の一回を完了、条件保持は成立したが、3案のgraphが同じ本人意向コピーのため商品不採用。** 実3POST全受領、通常Emlis／Analysis対照の前後全文一致、実行本体167.909910秒・追加学習／再試行0。受領rawは旧CPUでGENERATEDだが、見出しの違いだけを3ルート成立へ数えず候補SQL保存／通常API反映0。意向を選択候補から外す修正をAPI候補7f51a64e6cb58668ad5d418480b7de4499bfe6faへ反映し171件成功。新修正の実生成は未実施、28,480bytes・2fileの追加一回を準備。通常API／workerはc7968c6、Podは前回承認で差替えたd3のIF2関数版。配布／本人実機保留・補助全体未完を維持。
+
+原rawを変更せず、条件保持と形式成立を3ルートの商品成立へ換算しない。追加の実生成許可を消費したとはせず、修正版はCPU／通常wire準備まで。[詳細§9.66](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-standard-three-actual-proposal-fix-20261115)を再開点とし、§5の補助全体主枠と管理評価を維持する。
