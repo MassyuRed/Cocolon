@@ -1,4 +1,4 @@
-> **11/14最新：§9.60の実生成・同版保存検証単位は完了。** 送付済み6fileを再送せずHEALTH一行修正の承認済み追加一回で、実3応答全200/stop・前後health200を13.307356秒で取得。同じraw／checkpointからCMEE/S7・隔離SQL保存再読・JS描画入力一致を3件確認。通常DB／API75e526d1の完了は継承、native画像／本人一巡・一般品質・補助全体は未完。次は§9.54の未接続能力へ進み、閉じた送付／health／source／SQL確認だけを再周回しない。[実原本・範囲・次](#piece-answer-update-actual3-saved-20261114)。
+> **11/14最新：第2・第3回答の明示訂正／撤回を、先行ADDの資格確認を保ってPieceへ接続。通常DB／API反映単位を完了。** API `cb6301ed9a0b77fa7342e71c078d64a9075dad7a`、既存3writerのmigration適用、Render `dep-dbs16gafngtc73bek5a0` は16:53:56 JSTにLive。関連232件成功、全3plan×round2／3×REVISE／WITHDRAWの同本文保存・非生成再読と、通常selector OFFの既存作者経路を確認。原入力＋最新一回答を維持し、先行ADDの本文は使わない。先行訂正・補足を訂正する多段更新、一般意味／文章品質、natural分析材料NOT_GENERATED、全補助活用は未完。追加GPU／学習／RN変更／build／TestFlight／本人実機0。 [実装・通常反映と残件§9.61](#piece-latest-later-answer-update-20261114)。
 
 > **11/14・修正起動の明示承認後、実2取得・復元・同状態の保存再読まで完了。本文反復の改善は0。** 送信済み62,086byte・3fileは無変更／再送付0、1child／1loadで新2＋前後4対照＋health2GET、閉鎖後105.175913秒。通常／Analysis前後全文bytes一致、元args／env／cwd／2鍵・source／重みを保ってPID98755へ復元。新2 rawは旧2と全byte同一で、3省略候補は未使用。実raw無修補の2独立fork保存・非生成再読、canonical8／3hash・quota各1・原source／Emlis不変。旧保存ともcanonical8同一のため新native実行0。通常selector OFF、一般編集品質・通常経路／本人端末は未完。 [詳細§9.53](#piece-topic-editorial2-actual-unchanged-20261114)。
 
@@ -16,7 +16,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Section9.60 closes the bounded actual-three-response source-meaning, same-raw isolated save/read and JS-input verification unit. The approved additional healthz run completed3 POSTs and2 health GETs in13.307356s; no further upload, training, retry or provider restart. Normal DB/API75e526d1 remains completed. Continue9.54 general corrections and multi-update/dependency meaning across the three cores, grounded natural Analysis NOT_GENERATED, general editorial quality, cumulative history/personal-map corrections and IF/Saved. Native bitmap/device/header behavior remains unverified; keep builds/TestFlight/device checks deferred without blocking other work. Do not rerun closed transport/source/SQL units or treat three known short cases as broad product acceptance. New GPU execution is not automatically authorized."
+current_next: "Section9.61 closes the latest round2/3 exact original-clause REVISE/WITHDRAW after ADD-only predecessors through normal SQL/APIcb6301ed. Preserve selected original plus latest one answer; prior ADDs are eligibility controls only. Continue9.54 multi-update/dependency meaning and general explanations, grounded natural Analysis NOT_GENERATED, real text quality, cumulative/map corrections and IF/Saved. Preserve9.60 actual3 evidence and deferred build/TestFlight/device/native; do not loop closed source/SQL/deploy. New GPU execution/selector/weights are not activated."
 runtime_effect_of_this_document: 0
 ---
 
@@ -446,7 +446,7 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 | AR-01 | 現naturalの主体・所有者・否定・時点・留保を、旧失敗・意味比較・共通原因分析で改善。EM-01a/b | 現6境界と正常な短文／省略で、同入力の誤読を解消または明確に減らし、自然さ・別題材・既成功・保存再読を保持。検出増加／無出力だけでは完了しない | 継続中。新24実生成の4版は通常不採用。c6555fd5で疑問符なしの確認質問の保存抜けを修復、250局所PASS。同24rawは旧24保存→新22保存／2拒否、受理本文不変。全体の意味修復は未完 |
 | AR-02 | 現naturalの任意問い・回答・訂正・撤回・frameと、完了応答後の具体的な本人訂正。11/12採用仕様は§6.1。EM-02a/b、03b | 全plan最大3問、初期ON・前回選択保持、短い受け止め→回答後応答、0／1／2問終了・skip・上限時の不明保持、訂正対象と本人説明の二つの入力、説明不足時の未確定保持、対象だけ更新、撤回後の残存意味、同版再読、既存参照権利 | AR-01の全一般品質完成待ちにはしない。新Q3 naturalのsource-bound問い／回答更新／全plan3問／非生成再読を実装候補へ接続。公開の設定保持は§9.3の候補へ接続済み。二入力訂正は§9.28、別sourceの限定意味読取りは§9.30でコード接続。実4Bの生成品質未達・hint通常不採用。一般自由文・通常反映は未完 |
 | AR-03 | 適格履歴の意味ある利用。EM-03a/b | 同一／別場面・変化・無関係・訂正前を区別し、適切な履歴が今回へ効く。失効材料を使わない | 現related_contextと失効材料の再認可を継承。今回の意味利用全体は未完 |
-| AR-04 | Piece一般本文・単独伝達・refined・画像整合 | 原文の意味・一人称・本人補足と同版画像／保存を保持 | API87512ddaで固定実3件の読取拒否を修復し9隔離保存／非生成再読。旧73不変、追加GPU0。先行の通常host画像成功は継承。今回、既存planの内容選択をconfigured取得へ接続。2〜3回答後のPiece補足は未対応。一般編集品質・新本文の同版native画像・通常model採用／実Auth／DB／本人端末は未完。 |
+| AR-04 | 一人称・欄・役割等の既存限定改善と同版native、最新ADD1〜3・一回答REVISE／WITHDRAWを継承。§9.61で先行ADD後の最新第2／3回答の原入力一節訂正／撤回を同版保存・通常DB／APIcb6301edへ反映 | 一般文章化・単独伝達、一般本人訂正・多段／依存を跨ぐ更新、形式とmodel範囲、本人一巡。通常model選択OFF、実4B／nativeの新検証0。§9.53の反復改善0も継承 |
 | AR-05 | 分析の本人基準・役割／選択・記録間関係と、項目・関係線への本人訂正。AN-03a/b/c、04 | 原記録→意味→図／全文→両端根拠の対応、再出現／変化／不明の正しさ、訂正対象と本人説明からの読み直し・再読 | 既存compiler由来のsource dutiesとsource文脈を明示v2へ接続し、図／本文・隔離SQL再読を確認。通常v1保持。実4B・通常採用・本人基準／訂正の全体は未完 |
 | AR-06 | Emlis観測材料、訂正・削除・権利、長い蓄積と月次。EM-04/05、AN-02/06/08/10 | 本人sourceから材料を渡し、失効・分割範囲・当時版を保持。生成本文を本人事実にしない | AR-02/03/05の該当能力を利用。未開始 |
 | AR-07 | IF／Saved等の商品固有の残る意味保持責務。既存AN／PC残件 | 仮想・本人選択意向・観測を分離し、成立した経路で出力と保存を確認 | 既存商品の実装条件に従う。無断延期・新発売条件化をしない。未開始 |
@@ -3519,3 +3519,40 @@ Mashは§9.59のHEALTH一行修正、送付済み6file再送なし、同Podで�
 この限定的な実生成→有効意味保持→同版隔離保存再読→JS入力一致の確認単位を閉じる。通常DB／API／worker75e526d1の既完了は継承し、production／SQL／公開契約／RN／file地図構造の追加変更、新CI・DB migration・Render再配置0。NO_STRUCTURE_MAP_DELTA。研究selector／新重みは通常採用しない。
 
 次は§9.54の一般的な本人説明・複数更新／依存の有効意味を三中核へ通す接続、natural Analysisの根拠付き材料とNOT_GENERATED解消、実本文の一般編集・関係／日本語品質、全蓄積・本人map訂正・IF／Savedへ戻る。閉じたsource／SQL／health／送付確認だけを再周回しない。全補助活用と正式商品受入れは未完、build／TestFlight／本人実機保留を継承し、native画像の未確認を他の作業全体の待機条件にしない。全体評価と期限は再採点しない。
+
+
+<a id="piece-latest-later-answer-update-20261114"></a>
+## 9.61 2026-11-14 — 第2・第3回答の明示訂正／撤回をPieceへ接続し、通常DB／API単位を完了
+
+### 修正前と、閉じた範囲
+
+§9.60の実3応答・同raw保存検証を取り直さず、§9.54作業1・4の残りへ進んだ。現物は、一回答REVISE／WITHDRAWにだけ有効範囲があり、第2／3回答はADD限定だった。今回、先行回答がすべて独立ADDで、最新一回答が原入力の正確な一節をREVISE／WITHDRAWする場合を接続した。原入力の二欄・未変更の経験・感情は保持し、訂正対象の旧節を作品へ復活させない。差替え節は最新本人回答の元のscalar／UTF-8座標へ戻る。
+
+原入力＋明示選択された最新一回答という既存の作品仕様を維持する。先行ADDは全roundの発行QUESTION／ANSWER／checkpoint／receipt・時点・版を確認するためだけに使い、作品へ連結しない。先行REVISE／WITHDRAW、先行補足自体を対象にする更新、最新回答に複数種を混在させる更新、一般自由文訂正は未対応のまま拒否する。Analysisは全適格回答を使う別仕様を維持し、Emlis／Analysisの共有意味や作者を変更していない。
+
+### 現ファイル地図と既存能力の利用
+
+| repository／現owner | 差分と責務 |
+|---|---|
+| mashos-api `ai/services/ai_inference/piece_v2_source_adapter.py` | 全prefixを既存共有意味ownerで再導出し、先行ADDだけを資格確認。最終checkpointの解決済み一更新を既存有効範囲helperへ渡す。回答の固定先を先頭から最新へ変更し、原入力envelope／一節・依存の検査は維持 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_refined.py` | source adapterが確認した第2／3回答を、既存原入力有効範囲・最新補足作者へ通す。原入力＋最新補足の最大2source、既存3slot・S7・rendererを維持 |
+| `supabase/migrations/20261114074058_piece_natural_latest_answer_update.sql` | 既存preview発行／見た目変更／saveの3関数で、現在checkpoint完全一致、全prefix由来のaccepted_update_refs初出順一致、先行ADD限定、最終checkpoint一致を確認。関数signature／source lock／ACL／既存lineageを変更しない |
+| `ai/tests/piece_v2/test_b05_piece_answer_update_saved_pipeline.py` | 本人更新→source→作者→preview／visual／save→非生成owner再読、3writerの改変拒否、通常モデル選択OFFの既存作者を検証。既存CIの対象fileなのでworkflow追加0 |
+
+STRUCTURE_MAP_DELTA_PRESENT：既存Piece source adapter／refined ownerの受付範囲の限定拡張。新しい作者・保存基盤・公開API・response key・DB table・RN導線は0。
+
+### 検証・通常適用
+
+- 最終関連回帰：**232 PASS**。新規32件を含む更新pipeline53、既存later ADD・refinedの保存境界、共有Piece有効範囲／sourceを同時確認。Python3.12.14／pytest8.4.1／PGlite0.5.8、Auth／Emlis／HTTP model本文は架空。新実4B品質の証拠ではない。
+- round2／3 × REVISE／WITHDRAW × Free／Plus／Premiumの12保存再読。旧希望を除き、未変更経験と行動を保持し、REVISEだけ新しい希望を残す。先行ADDは作品材料へ混入せず、元source／Emlis不変、保存quota各1。
+- 3writer×6改変の18件は副作用なしで拒否。先行更新の改変、累積参照の欠落／追加／順序、期待checkpoint、元source編集を検査し、変えたcheckpointを要求側でechoしても通さない。
+- selector OFFの既存作者でもREVISE／WITHDRAWを生成・保存・非生成再読。4B選択をONにせず、model有効時の失敗を旧作者へ黙ってfallbackする変更はない。
+- GitHub API `cb6301ed9a0b77fa7342e71c078d64a9075dad7a` の4changed pathsと全remote bytes一致を確認。既存CI2本は記録時点で実行中、成功とは数えない。
+- 通常Supabase `piece_natural_latest_answer_update`（適用version `20261114074859`）を適用し、3関数の最新分岐／先行ADD fenceとACLを読み戻し確認。service_roleのみの実行権限を維持し、旧5引数preview関数の本文MD5は不変。新table／policy／権限追加0。
+- Render既存mashos-apiへ指定commitをmanual配置。`dep-dbs16gafngtc73bek5a0`、07:52:33Z開始→**07:53:56Z（16:53:56 JST）Live**。`/healthz`と`/app/bootstrap`は200、private5 ON／public3 OFF、linked main／autoDeploy=no/offを維持。限定07:52:33〜07:55:08Zのapp/errorログ0。Piece APIだけの変更でworker再配置は不要。新RN／build／TestFlight／本人実機0。
+
+### 判定と次の未完
+
+primary outcomeはTECHNICAL_CREDIT。今回の限定source受付・同版保存と通常DB／API配置単位はCLOSED。実認証の本人端末一巡・新しい実4B作品／native画像・一般編集品質・全回答集合／多段訂正の完成へは換算しない。§9.60の実3本文・画像未確認という既存状態は保持する。
+
+次は§9.54の一般本人説明・複数更新／依存を同じ有効意味として三中核へ通す責務、natural Analysisの根拠付き意味材料とNOT_GENERATED解消、実本文の意味／日本語品質、全蓄積・本人map訂正・IF／Saved。閉じたlatest一回答のsource／SQL／配置だけを再周回しない。build／TestFlight／本人実機保留、研究selector／新重み不採用、補助全体未完と既存期限を維持する。

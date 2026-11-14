@@ -819,3 +819,10 @@ HEALTH一行だけの修正候補（新runner SHAacb5665088574cd7d7e27c3b35c0eac
 各forkのpreview／保存／exportはcanonical8・3hash・JS描画入力が全3一致。v1/v2間は本文等7項目と3hashが同一で、差はrenderer版と既存ロゴ文字だけ。新native bitmap／PNG／OS共有／本人表示は未確認。通常DB/API75e526d1の完了を継承し、今回の限定実生成・保存検証単位は完了、production変更・新配置0。証跡保存版2、原本hash・境界と次は[補助設計§9.60](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-answer-update-actual3-saved-20261114)。
 
 次は§5の一般訂正・複数更新／依存・根拠付きnatural Analysis・一般編集・全蓄積／本人map訂正／IF／Savedを進める。補助全体は未完、build／TestFlight／本人実機保留と研究selector／新重み未採用を維持し、完了した搬送確認へ戻らない。全体評価・期限は再採点しない。
+
+
+## 16. 報告会後 — 第2・第3回答の原入力一節の訂正／撤回をPieceへ通常反映
+
+**11/14最新：第2・第3回答の明示訂正／撤回を、先行ADDの資格確認を保ってPieceへ接続。通常DB／API反映単位を完了。** API `cb6301ed9a0b77fa7342e71c078d64a9075dad7a`、既存3writerのmigration適用、Render `dep-dbs16gafngtc73bek5a0` は16:53:56 JSTにLive。関連232件成功、全3plan×round2／3×REVISE／WITHDRAWの同本文保存・非生成再読と、通常selector OFFの既存作者経路を確認。原入力＋最新一回答を維持し、先行ADDの本文は使わない。先行訂正・補足を訂正する多段更新、一般意味／文章品質、natural分析材料NOT_GENERATED、全補助活用は未完。追加GPU／学習／RN変更／build／TestFlight／本人実機0。
+
+[詳細設計§9.61](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-latest-later-answer-update-20261114)。232 PASSは合成Auth／providerと隔離SQLのsource・保存検証。最新一回答の受付と通常DB／API適用を閉じた限定TECHNICAL_CREDITで、全回答の多段更新・Analysis材料・IF／Saved・補助全体を完了にはしていない。指定API配置とhealth／bootstrap200を確認し、配布用build／TestFlight／本人実機保留を維持した。
