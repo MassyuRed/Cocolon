@@ -769,3 +769,9 @@ PR30 e9d56cc7の統合RNをbuild・TestFlightへuploadする既存workflowの起
 ## 11. 報告会後 — 本人訂正が分析材料から欠落する接続の修復
 
 **11/14・本人訂正が分析材料から消える接続を修復。** API `f73b034f`。累積SQLのQUESTION／ANSWER限定とPythonの回答だけの投影を修正し、本人説明を専用source、AI引用を対象controlとして分離。原入力中の一節を完全引用した、本人の明示的な訂正／撤回だけ既存の意味更新へ通し、通常4B経路では適用済み更新もpendingを維持する。一般説明はpendingとして当該記録の未訂正版利用を防ぐ。他の記録は継続。保存・根拠再読・月次当時版・編集後の不変性を含む対象284件成功（新14、重複再実行は加算しない）。新migration1件は稼働適用済み、2関数の本文hash／ACL一致、履歴27件。API／裏更新とも同版Live、healthz／bootstrap200・起動log確認。新4B／学習・RN変更・build／TestFlight0。一般訂正の意味理解・Piece反映・naturalの根拠付きanalysis材料生成・AR-06全体は未完。 詳細・現8ファイル地図・検証・完了範囲は[補助設計§9.56](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-person-correction-source-handoff-20261114)。DB／APIの前回完了を再計上せず、今回のsource欠落修復を限定TECHNICAL_CREDITとして記録する。一般訂正理解・Piece反映・AR-06全体と補助全体は未完。日程・61.625％の管理評価は再採点していない。
+
+
+<a id="analysis-active-update-semantic-material-20261114"></a>
+## 12. 報告会後 — 訂正・撤回後の有効部分を4B材料へ接続
+
+**11/14・訂正・撤回後の有効部分を4B分析材料へ接続。** API `bd602c35`。原入力中の一節を完全引用した明示更新だけ、全原文・欄hashを保ち、残る連続範囲と差替え本人節を別fieldで渡す。撤回された旧節、範囲をまたぐ連結、AI引用は材料へ戻さない。絶対scalar／UTF8座標とsource dutiesを統一。関連159件成功（新12内包）。実4B2件は明示v2で取得し、同じ生成前checkpoint・無修補rawから隔離SQL保存→現在版2回／月次版1回・全node根拠再読成功。通常v1の新実生成は未実施、両profileの材料・回帰を確認。既存CI全19工程成功、API／裏更新とも同版Live、healthz／bootstrap200・worker起動／DB通信200を確認。 新DB変更0、稼働履歴27と既存関数hash不変。一般説明はpendingを維持。同一記録を別記録と呼ぶ誤り、場面と行動の過剰結合・日本語の不自然さは残り、本文品質合格へ数えない。一般訂正理解・Piece更新・naturalの根拠付きAnalysis材料生成・補助全体は未完。build／TestFlight／本人実機は保留を維持。 詳細・現5ファイル地図・実出力と保存範囲は[補助設計§9.57](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-active-update-semantic-material-20261114)を参照する。§11で残した適用済み更新の材料pendingを今回の証明範囲だけ解消した。過去のsource欠落修復・DB反映を再計上せず、今回も限定TECHNICAL_CREDITとして記録する。実4Bの品質未達を隠さず、一般説明の対象理解、Pieceへの更新、NOT_GENERATED解消、関係・場面・日本語の品質を次の主線に残す。通常v2採用や重み変更は行わず、会議終了・公開日未定・12/6候補と61.625％の管理評価は維持する。

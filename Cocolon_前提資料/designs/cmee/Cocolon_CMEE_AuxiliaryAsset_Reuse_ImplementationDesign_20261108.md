@@ -16,7 +16,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Section 9.55 DB/API rollout unit is CLOSED; Mash explicitly deferred app distribution builds, TestFlight uploads and device verification. Continue section 9.54 valid user updates into replies, Piece and Analysis without waiting for distribution or device verification; keep deferred RN/device checks separate and retain unadopted research selectors off"
+current_next: "Sections 9.55 normal rollout and 9.56 correction source handoff are CLOSED. Section 9.57 active-range semantic handoff is CLOSED through normal API/worker rollout; continue remaining general user correction meaning, Piece updates and grounded natural Analysis materials. Keep app distribution builds, TestFlight and device checks deferred; do not repeat closed rollout or turn technical save receipts into product quality acceptance"
 runtime_effect_of_this_document: 0
 ---
 
@@ -3330,3 +3330,55 @@ API [f73b034f](https://github.com/MassyuRed/mashos-api/commit/f73b034f2b39e3b490
 本人の一般的な説明を対象と意味へ結び付けること、複数の更新の有効版と無関係部分を保つこと、Pieceの訂正／撤回source利用、naturalの根拠付きAnalysis材料生成（NOT_GENERATED解消）は引き続き未完。本修復は比較reportやraw source容器をGENERATEDへ変えず、naturalのanalysis_stateはNOT_GENERATEDを維持する。AR-02／06全体や補助全体の完了ではない。
 
 次は§9.54作業1・2の本人更新→有効意味→下流作者の接続を継続する。今回のpending除外を一般訂正理解の完成へ置換せず、完了した欠落修復と通常化を再周回しない。Piece研究selector／重み未採用、追加GPU・学習・RN変更・build／配布0、本人実機保留を維持する。
+
+
+<a id="analysis-active-update-semantic-material-20261114"></a>
+## 9.57 2026-11-14 — 訂正・撤回後の有効部分を4B分析材料へ渡し、同じ実出力を保存・再読
+
+§9.56で閉じた本人訂正sourceの欠落修復を再実施せず、その次の接点を扱った。既存の原入力中の一節の完全引用による明示REVISE／WITHDRAWは有限compilerへ届いても、通常semantic材料の`_model_fields_source`が更新ありの記録を一律拒否し、正常な別記録だけを残していた。本人の訂正が証明済みの場合にも記録全体がpendingになる欠落である。
+
+API [bd602c35](https://github.com/MassyuRed/mashos-api/commit/bd602c3529d03547a2c0fa2cc7fbf3ab24d1018d)で、既存semantic mapの材料生成だけが有効source更新を扱うようにした。ほかの旧model-fields利用箇所は従来の境界を維持する。
+
+- 全原文envelope・欄hash・原欄境界はそのまま保持し、原欄の有効な連続範囲だけを個別fieldにする。撤回部分をまたぐ連結は行わない。同一文が離れて2回残る場合も、位置の異なるfieldとして識別する。
+- REVISEの本人説明は、既存の有効意味処理が証明した差替え節の範囲だけを渡す。旧節、AIの対象引用、訂正定型文を本人の新事実へ混ぜない。説明の記録日時は原入力の記録日時と分離し、いずれも出来事日時とは決めない。
+- モデル内の引用座標を全原欄のscalar／UTF8絶対位置へ戻す。既存source dutiesも同じ範囲で照合する。全文原本を短文へ置換した新sourceを作らない。
+- 残ったmemo／memo_actionと正常な別記録、カテゴリ・感情は保持する。一般自由文や対象不明の本人説明はpendingのまま、全原文が撤回された記録は空材料として除外する。削除済み節・離れた範囲の連結引用・AI引用は拒否する。
+- 通常v1と既存の明示source_duties.v2の両profileを対象にする。更新のない2記録は、変更前後でrequest_ref・material・messages・dutiesが完全一致した。研究profileの通常採用やmodel／重み切替は行わない。
+
+### 現ファイル地図
+
+| 既存owner | 今回の変更 |
+|---|---|
+| `cores/analysis/source_adapter.py` | 内部parser viewの`scoped_memo_range`を保持。全原文の証拠容器は変更しない |
+| `cores/analysis/semantic_admission.py` | 有効連続範囲を別fieldへ切出し、全原欄への根拠座標と本人説明の日時を保持 |
+| `cores/analysis/intent_compiler.py` | source dutiesをenvelope／欄だけでなく一意の包含範囲へ結び、元座標へ戻す |
+| `ai/tests/test_analysis_active_update_material.py` | 新12条件。両profile、差替え・撤回・二欄・別記録・同文重複・誤引用拒否・空／pendingを確認 |
+| `.github/workflows/analysis-observed-content.yml` | 新testを既存CIの起動pathと累積scopeへ追加 |
+
+codeのprefixは`ai/services/ai_inference/cocolon_meaning_experience_engine/`。新production file・class・checker／controller・table・migration・公開route／DTO・RN変更はない。STRUCTURE_MAP_DELTA_PRESENT（既存Analysis source→semantic作者の有効範囲接続）。原入力全体の安全境界と既存の採否・保存責任は維持する。
+
+### 実4B・同版保存と、検証途中の停止
+
+全て架空の2記録・思考／行動二欄・カテゴリ／感情付きの同じfixtureから、差替えと撤回を各1件作った。合成Auth／先行Emlis応答・隔離PGliteを使い、実serviceでの訂正保存→累積SQLのsnapshot・source guard→生成前checkpoint・messages／request_refの固定まで行い、既存Podの稼働中4Bへ2要求を一回送った。今回の実4B2件はv2だけであり、通常v1は材料・回帰確認で、同profileの新4B生成は未実施。比較profileは`semantic_map.source_duties.v2`、提供名は`cocolon-qwen3.5-4b-analysis-semantic-120u`。2応答ともHTTP200／stop、82.455971秒、PID98755とhealth200を維持。学習・提供再起動・model切替・生成再試行0。実利用者データの読取・送付0、鍵は既存Pod内のlocalhost認証だけに使用した。
+
+最初のuploadは、架空fixtureの出自が明示されずprivateデータ送付と判定され、自動承認審査で送信前に拒否された。builderと全decoded fieldの照合、production読取0を独立確認し、架空データの出自を同梱した安全な送付へ変更して許可された。元の拒否操作を別経路で実行していない。最初の起動はserved model名の`cocolon-`接頭辞をscriptが欠いており、鍵読取・POST前のidentity assertionで停止した。messages／snapshotを変えずmodel IDだけを実提供名へ合わせ、別の排他実行場所から上記2要求を取得した。旧起動で生成された応答は0。
+
+取得rawを修補せず、生成前の同checkpointからCMEEへ通し、両方で原文の絶対引用座標を照合した。最初のSQL保存は隔離fixtureに既存semantic wire migrationが欠けていたためSQL23514で停止した。製品や稼働DBの不具合ではなく、検証環境の不足である。元checkpointを再復元し、既存`20261107071033_analysis_semantic_map_wire.sql`だけを隔離DBへ適用し、前後のsource guard／members不変を確認した。同じraw・messages・request_refをそのまま使い、artifact commit→現在版2回・月次版1回の非生成再読→全nodeの根拠読取を両件で成功させた。元checkpoint bytes・本人sourceは不変。再検証のモデル呼出し0、旧失敗記録も保持した。
+
+差替え・撤回ともsource_count／processed_count／mapped_count=2、excluded／unparsed=0。差替えは新本人節と残る5節、撤回は残る5節だけを根拠に使い、旧希望を復活させない。これは隔離SQLと実4Bの技術到達であり、稼働DBへ本人データを書いた実績や本人端末の一巡ではない。実raw・取得前snapshot・checkpoint・根拠・保存再読receiptはprivate証跡`Cocolon_CMEE_AnalysisActiveUpdate_20261114.zip`（SHA256 `1b4f04d28fdebecfa43799144a7d2fa5609e833148a1148e33086d2825067c6f`）へ保存済み。
+
+### 通常反映・検証
+
+関連159件成功（新12件を含み、再実行は重複加算しない）。既存Pydantic deprecation warning1を保持。GitHubの現5変更blobはlocal全文と一致し、差分も同5pathだけだった。既存Analysis CI [run43555588970](https://github.com/MassyuRed/mashos-api/actions/runs/43555588970)は配置と同じbd602c35・attempt1、全19工程success。73件、45件、分析2882件＋12236subtests、owner identity1件、累積1194件＋21subtests（新12を含む）、実SQL201 source／15月次、report408件＋738subtestsがそれぞれ成功した。重なるscopeを合算しない。
+
+通常APIの指定配置`dep-dbru6luk1f9s73fo302g`は13:29:17.278230 JST、裏更新workerの指定配置`dep-dbru7ajl550s73etfof0`は13:30:07.611157 JSTに同じbd602c35でLiveとなった。両方の前版はf73b034f。APIのhealthz／app/bootstrapは13:29:59 JSTにHTTP200、workerは13:30:16 JST起動と新instanceのDB通信200を確認。13:29:17〜13:31:07 JSTの取得範囲で両serviceのerror log0。環境変数・plan・instance数・model／重み・research selectorは変更0。
+
+新しいDB変更は0。稼働migration履歴27件、累積source／根拠2関数のprosrc長・SHA256は§9.56のまま、invokerを維持する。稼働DBは既存semantic v3の対応するpublic／private組の制約を保持しており、隔離fixtureの不足を本番へ追加migrationする処理は行わない。本人データ書換え・RN変更・配布用build・TestFlight0。通常コード反映と隔離SQL／実4Bの検証を、通常認証・通常DB・実4B・本人端末をそろえた一巡へ読み替えない。
+
+### 閉じた範囲と次の主線
+
+今回閉じるのは、既存処理で証明された原入力中の一節の完全引用によるREVISE／WITHDRAWの有効範囲を通常semantic作者へ渡す接続、正確な根拠座標、同じ実rawの保存再読、通常API／裏更新への配置まで。一般訂正の理解や文章品質の完成へ換算しない。
+
+実2本文には、同じ原記録の欄を「別の記録」と呼ぶ誤り、自宅と費用記録を未証明に結び付ける表現、希望を現在の本人基準へ広げる記載が残った。「もう方」「节点」「表れていることはできます」等もあり、全文の意味・関係・自然な日本語の品質合格は0。今回の受渡し・保存成功を、これらの出力品質改善へ加算しない。
+
+次は§9.54作業1・2の残りとして、一般的な本人説明を正確な対象と有効意味へ結び付けること、Pieceへの訂正／撤回source利用、naturalの根拠付きAnalysis材料生成（NOT_GENERATED解消）、実出力に残る関係・場面の過剰な結合と日本語品質を進める。完了したSQL／source欠落／範囲接続の確認だけを再周回しない。AR-02／06・全補助経路は未完。RN変更・配布用build・TestFlight・本人実機はMashの保留を維持する。
