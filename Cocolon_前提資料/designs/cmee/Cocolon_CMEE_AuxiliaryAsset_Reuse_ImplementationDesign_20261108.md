@@ -1,3 +1,5 @@
+> **11/14・修正起動の明示承認後、実2取得・復元・同状態の保存再読まで完了。本文反復の改善は0。** 送信済み62,086byte・3fileは無変更／再送付0、1child／1loadで新2＋前後4対照＋health2GET、閉鎖後105.175913秒。通常／Analysis前後全文bytes一致、元args／env／cwd／2鍵・source／重みを保ってPID98755へ復元。新2 rawは旧2と全byte同一で、3省略候補は未使用。実raw無修補の2独立fork保存・非生成再読、canonical8／3hash・quota各1・原source／Emlis不変。旧保存ともcanonical8同一のため新native実行0。通常selector OFF、一般編集品質・通常経路／本人端末は未完。 [詳細§9.53](#piece-topic-editorial2-actual-unchanged-20261114)。
+
 > **11/14・62,086byteの3file送付後、華恋の起動コマンド引数誤りで比較処理前に停止。** 必須ACK前の区切りを抜かし、main内の引数解析で終了。新model／HTTP／提供停止0、元提供PID95100／start217338131を維持、実行ROOT未作成。3fileの全byte／SHAは承認時と一致。追加実行はせず、区切りだけ直したargvを純粋parserで確認した。作業規則R10.3により修正後の新一回は明示承認待ち。新2本文は未取得・比較／保存／画像は未完、通常selector OFF。 [詳細§9.52](#piece-topic-editorial2-cli-stopped-20261114)。
 
 > **11/14・同じ本人の主語を省略する候補3箇所をsourceへ拘束：** API99dbdaabで生成材料とmodel opt-in S7を整合。原七項目／Prepared／SYSTEM・重み不変、旧TRUE材料との違いはeditorial_choices3箇所だけ。関連1,488件（新35）成功。旧実raw2の保存・再読維持と合成省略2の保存を確認したが、新実4B本文は未取得で、反復改善の証拠ではない。通常FALSEの生成messagesは同一、model S7のsource-proven省略受理範囲は広がる。新送付62,086byte・3fileで新2＋前後4対照＋2GET、復元込み600秒・一回・学習／再試行0を準備。前回の一回は消費済み、今回の送付・実行は確認待ち。通常selector OFF・STRUCTURE_MAP_DELTA_NONE。 [詳細§9.51](#piece-topic-editorial2-prepared-20261114)。
@@ -3184,3 +3186,47 @@ CURRENT_RULES.md §R10.3は「prior mechanical failureを閉じた後にMash様�
 [同じ資料](https://chatgpt.com/library?file_id=libfile_fde3_f-cd62a09cf4bc8191b9fc4cb0e29b49b4_2f7470f963808191aaebf050935e72de&account_id=personal)をLaunchStoppedとして更新した。4,866,089byte／50member、SHA256 `43c3aed3b24f1d71b6878d55e76addfa8c2a201ac4cb4f1da42b3a0bfb60361f`。旧Prepared38memberを元path／byteで全保持し、承認・送付後の実3file／stderr・read-only現況、修正argv／独立確認等の12memberを追加した。回収原ZIPは17,485byte、SHA256 `d419d395cc7d7c071436ff853e034c109c21d98758eb3d96ebc8db643f46a1f3`。public GitHubへ完全source／messages／raw／認証情報は転載しない。新raw自体は0である。
 
 primaryはBLOCKER_NARROWED、商品品質credit・human受入れ追加0。§9.51のAPI99dbdaab、関連1,488成功・両CI初回成功と§9.50の旧実2保存／native6は保持し、今回の起動・新本文・全補助経路の成功へ転用しない。製品source／test／DB／RN／SYSTEM／重み／selector変更0、STRUCTURE_MAP_DELTA_NONE。追加生成・無断retryをせず、次の一作業は上記の起動コマンド最小修正による明示承認済み一回だけとする。
+
+
+<a id="piece-topic-editorial2-actual-unchanged-20261114"></a>
+## 9.53 2026-11-14 — 新2取得・復元・保存再読完了、旧2と全文同一で反復改善0
+
+### 修正起動の承認と限定実行
+
+Mashが§9.52の「送信済み3fileを変更せず、起動コマンドの区切りだけ直した新一回」を明示承認した後、同じPodで実行した。前回のCLI解析失敗PID98272とその原本を保持し、今回は別の新logへ起動結果を記録した。追加file送付0、37,518／24,378／190byte・3SHAは承認時のまま。現PID95100／start217338131、新logと未作成ROOTを確認してから、options→区切り→ACKの正しいargvでrunner98541を開始した。
+
+保存344a・既存a8fdfbe1 generatorで、新しい段落／二欄2件を取得した。各stop、13.762342923786491／9.926912602968514秒、1child／1load・load attempt1。前後4対照POST、health2GETは全200、通常／Analysisの前後request／response全文bytes一致。全6model呼出／対照・healthの6HTTP、学習／再試行0で一回を完了した。
+
+元提供はPID98755／start218457281へ復元。元args／全env／cwd／2鍵、稼働source・Analysis adapter・344a/config不変、未解決停止なしを原本から確認した。既存2鍵は同Pod localhost認証だけ、起動環境全体は同Pod親RAMの復元だけに使用し、保存・出力・外部送信0。source／SYSTEM／decoder／重み・通常selectorの追加変更0である。
+
+閉鎖前snapshot105.17192473309115秒、ZIP閉鎖後sidecar105.1759132980369秒で、承認600秒以内。華恋が初期の画面読取から約121.2秒と速報した値は、回収した閉鎖後原本の105.1759132980369秒へ訂正する。原ZIP内と外側回収snapshotは全byte一致し、finalとの差は時間・archive_closed系だけだった。以後の時間claimは閉鎖後原本を使う。
+
+### 完全原入力・旧新全文の比較
+
+新rowの完全messagesは新wire／casesと一致し、原七項目／Preparedは旧新同一。旧messagesとの差はsource-bound editorial_choicesの既知3欄だけで、旧取得rawを新材料へ再束縛していない。旧2は旧来歴、新2は今回の別run／別instanceのまま記録する。
+
+**新2 rawは旧2 rawと全byte同一である。3つの省略候補は使用されず、本人主語の反復・文章構成の改善は0だった。**
+
+| 対象 | 取得本文の保持と限界 |
+|---|---|
+| 段落 | 過去経験・後からの気づき・言葉にできなかったこと、次回希望、メモを見返す希望、同僚への未伝達を保持。「私は」は旧新とも5文全てに残る |
+| 二欄の思考 | 明記された同僚という役割、同僚となら／なくても／気がする、次の日程未定を保持。「おれは」は旧新とも2回 |
+| 二欄の行動 | 昨日・一人で予定を考えたことと、相手に合わせるために変えたという解釈の否定を保持。「僕は」は旧新とも2回 |
+
+rootと独立read-onlyで原七項目・完全原文・両旧新全文を照合し、今回の2件で条件・留保・否定・時点・役割・二欄の分離の変異、未記載の原因／意図・相手＝同僚の補完は見つからなかった。段落の旧常体化、二欄の旧役割化＋常体化のままであり、編集品質・自然さ・human受入れの合格へ変換しない。省略可能箇所の提示だけではこの2本文が変わらないという観測までで、唯一の内部原因、学習不足、追加学習の必要性は確定しない。
+
+### 同checkpointへの保存・非生成再読と同版画像
+
+閉鎖後summary・元提供復元・4対照／2GET、runner／wire／source／保存344aのSHA、child／resultの一致が成立した原本を既存offline受領処理へ戻した。同じ取得前checkpointの2独立forkで、新rawを各1回、無修補で受領した。両件GENERATED、preview→private保存→別service非生成再読が一致し、canonical8／本文・内容・recipeの3hash、preview／persisted／detail一致、quota各1、原source／Emlis不変を確認した。受領中の新model・HTTP0である。
+
+旧344a保存2件ともcanonical8が全て同一だった。したがって新しいnative run／画像は0とし、既存e098efda／run43518729580・job132207272933の、同じcanonical8に対する2作品×preview／saved／exportの6画面証拠を継承する。新描画成功へ数え直さない。旧自然Text参照のRGBA差は残り、Photos／Share／本人端末・通常SQL／API／RN一巡は未確認のままである。
+
+保存は合成Auth／先行Emlisと隔離PGliteの確認であり、live Auth／PostgREST・稼働DB書込みではない。独立read-onlyでも取得原本・新旧全文・2保存と3hash／canonical8・元source／quotaを確認し、独立側のSQL／model／UI／編集0だった。
+
+### 原本・現在地・残件
+
+[同じ検証資料](https://chatgpt.com/library?file_id=libfile_fde3_f-cd62a09cf4bc8191b9fc4cb0e29b49b4_2f7470f963808191aaebf050935e72de&account_id=personal)をActualへ更新した。5,001,611byte／73member、SHA256 `52a06bde70ec913eb745400083ee3948f1dcd86263d116a9b3784c90b290c18c`。旧50memberを元path／byteで全保持し、修正起動の承認、取得／復元の原本、全文照合、2保存再読と同版照合等の23memberを追加した。回収captureは62,474byte／SHA256 `4918c20a0274ed8b80669b1b61ad6223974ecd77a313ed97ff3a0138f03a7d0b`。閉鎖原ZIPは21,979byte／SHA256 `0316b084192f03a28655f8b5ce0161dc61a2fa69707d3935e0c80b570fe6a653` で、全6memberを回収原本と照合した。public GitHubへ完全source／messages／raw／checkpoint／資格情報は転載しない。
+
+今回の限定比較・復元と同源泉保存再読は完了し、新しい一回の許可は消費済み。追加生成・学習・同じ入力へのhint／SYSTEM比較へ戻らず、同じ画像・保存診断も再周回しない。次に解消する商品未完は、反復を残したままの一般的な作品編集である。今回の候補提示差分だけでは実本文の編集改善が出なかったことを踏まえ、既存文章化／意味照合の責務に沿って共通原因を扱う。新規GPUやfitの許可を自動生成しない。
+
+限定TECHNICAL_CREDIT、本文品質向上・正式human Product Read／商品受入れ・AR-04／全補助経路の完了は追加0。API99dbdaabの既知1,488件・Piece／Analysis両CI初回成功を保持するが、今回の新test／新CIへ加算しない。製品source／test／公開型／API／DB／RN／SYSTEM／重み／selector追加変更0、STRUCTURE_MAP_DELTA_NONE。通常selector OFF、Render配置・live DB適用・build／配布0を維持する。

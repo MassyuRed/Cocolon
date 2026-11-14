@@ -3220,3 +3220,15 @@ API1237bc21／最終04153c52。既存model opt-inの有限活用と役割化×op
 承認された一回の起動で、華恋がACK前の区切りを抜かした。実stderrとsource順序、停止後のPID／ROOT不存在、回収した同3fileのbyteを照合した。モデルの失敗やCMEE拒否ではない。正しい区切りを置いたargvは純粋parseで確認済みだが、作業規則R10.3の新明示承認条件に従い、追加起動0。元の比較条件と認証／復元用途を変えず、再送付せずに新一回を行う案まで準備した。
 
 同じ資料へ旧38memberを保持して12memberを追加、4,866,089byte／50member、SHA256 43c3aed3b24f1d71b6878d55e76addfa8c2a201ac4cb4f1da42b3a0bfb60361f。BLOCKER_NARROWED／商品品質credit0、既存CIは既存証拠として維持。製品source／SQL／RN／重み変更0、STRUCTURE_MAP_DELTA_NONE。通常selector OFF・新本文／画像／通常経路／本人端末は未完。[原本・具体的修正案・確認範囲§9.52](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-topic-editorial2-cli-stopped-20261114)を正本とする。
+
+
+<a id="piece-topic-editorial2-actual-unchanged-20261114"></a>
+## 2026-11-14 補助経路AR-04 — 実2取得・復元・保存再読完了、本文編集改善0
+
+**11/14・修正起動の明示承認後、実2取得・復元・同状態の保存再読まで完了。本文反復の改善は0。** 送信済み62,086byte・3fileは無変更／再送付0、1child／1loadで新2＋前後4対照＋health2GET、閉鎖後105.175913秒。通常／Analysis前後全文bytes一致、元args／env／cwd／2鍵・source／重みを保ってPID98755へ復元。新2 rawは旧2と全byte同一で、3省略候補は未使用。実raw無修補の2独立fork保存・非生成再読、canonical8／3hash・quota各1・原source／Emlis不変。旧保存ともcanonical8同一のため新native実行0。通常selector OFF、一般編集品質・通常経路／本人端末は未完。
+
+修正コマンドの新一回をMashが明示承認し、旧CLI失敗を保持して実行した。新2stop、前後4対照／2GET・元提供の完全復元まで105.175913秒。先に画面読取で報告した約121.2秒は回収原本で訂正した。新2は旧2とraw全byte同一、5／2／2回の本人主語反復と旧構成は変わらない。原文の条件・留保・否定・時点・欄分離は保持するが、一般編集品質／human受入れの合格ではない。
+
+新rawを同checkpointの2独立forkへ無修補受領し、2保存・非生成再読、canonical8／3hash・quota各1・原source／Emlis不変を確認。旧保存とcanonical8同一のため同じnative画像は再実行せず、旧6画面の同版証拠を継承した。今回の新native0、通常／live／本人端末は未完。
+
+同じ資料の旧50memberを保持して23追加、5,001,611byte／73member、SHA256 52a06bde70ec913eb745400083ee3948f1dcd86263d116a9b3784c90b290c18c。rootと独立read-onlyで原本／来歴／全文／保存を照合済み。今回の許可は消費済みで、同じ入力へのhint比較・追加生成／fitは行わない。限定TECHNICAL_CREDIT、本文改善0・通常selector OFF・STRUCTURE_MAP_DELTA_NONE。製品変更・新CI・配置／配布は0。[詳細・原本・残件§9.53](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-topic-editorial2-actual-unchanged-20261114)を正本とする。
