@@ -1,10 +1,10 @@
-> **11/15最新：標準RNと同じ本人案なし入力で、実4Bの自動3案を採用し、同rawの隔離SQL保存・別process再読・Saved・既存RN受口から通常API／worker反映まで完了。** 追加一回は188.483632秒、3POST全受領、通常2対照全文一致、学習／再試行0。3案の具体的な手順がそれぞれSIMULATED_EXTENSIONに入り、全anchorと30分／追加費用なしを保持。API／workerは7f51a64e6cb58668ad5d418480b7de4499bfe6faでLive。標準自動3案の限定接続単位を閉じる。一般品質・正式本人受入れ・AR-07／補助全体は未完、build／TestFlight／本人実機保留を維持。 [実結果・通常反映§9.67](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-standard-proposal-three-normal-rollout-20261115)。
+> **11/15最新：先行する本人訂正・撤回を、後続回答から作るPieceの有効sourceへ接続。** 真正なEmlisの全prefixを再導出し、残る原入力の節・失効していない先行置換節・明示選択した最新補足だけを別sourceのまま既存作者／保存／再読へ渡す。IFでは同じ候補set／scenarioのSaved応答が確認できたカードへ「保存した関心の方向」を表示する。標準自動IF3の限定実生成・保存再読・7f51通常反映は成立済み。今回API版・最終検証・通常反映は§9.68、一般意味／編集品質・全多段更新・本人実機・補助全体は未完。build／TestFlight保留を維持。 [IF保存表示と三中核の有効source§9.68](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-effective-round-sources-and-if-saved-marker-20261115)。
 
-> **11/15最新：承認済み通常IF3の一回を完了、条件保持は成立したが、3案のgraphが同じ本人意向コピーのため商品不採用。** 実3POST全受領、通常Emlis／Analysis対照の前後全文一致、実行本体167.909910秒・追加学習／再試行0。受領rawは旧CPUでGENERATEDだが、見出しの違いだけを3ルート成立へ数えず候補SQL保存／通常API反映0。意向を選択候補から外す修正をAPI候補7f51a64e6cb58668ad5d418480b7de4499bfe6faへ反映し171件成功。新修正の実生成は未実施、28,480bytes・2fileの追加一回を準備。通常API／workerはc7968c6、Podは前回承認で差替えたd3のIF2関数版。配布／本人実機保留・補助全体未完を維持。 [詳細§9.66](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-standard-three-actual-proposal-fix-20261115)。
+> **11/15先行比較の履歴（修復後の実結果は§9.67）：承認済み通常IF3の一回を完了、条件保持は成立したが、3案のgraphが同じ本人意向コピーのため商品不採用。** 実3POST全受領、通常Emlis／Analysis対照の前後全文一致、実行本体167.909910秒・追加学習／再試行0。受領rawは旧CPUでGENERATEDだが、見出しの違いだけを3ルート成立へ数えず候補SQL保存／通常API反映0。意向を選択候補から外す修正をAPI候補7f51a64e6cb58668ad5d418480b7de4499bfe6faへ反映し171件成功。新修正の実生成は未実施、28,480bytes・2fileの追加一回を準備。通常API／workerはc7968c6、Podは前回承認で差替えたd3のIF2関数版。配布／本人実機保留・補助全体未完を維持。 [詳細§9.66](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-standard-three-actual-proposal-fix-20261115)。
 
-> **11/14最新：標準RN入力の自動3案で、元anchor・UNKNOWN・接続・本人条件を生成時に保持する修正をAPI候補d3daee549a848675cb200b3aa3360be38e94bf8fへ反映。** 関連168件成功、旧actual採否と保存bytesを保持。架空3案の合成保存・別process再読・Saved／RN受口は事前検証だけ。27,761bytes・2fileの既存Pod送付は具体的開示承認不足として自動審査で送信前拒否、実生成／Pod変更／本候補の通常反映0。通常API／workerはc7968c6 Liveを継続。本単位・補助全体未完、配布／実機保留を維持。 [詳細§9.65](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-standard-three-conditions-prepared-20261114)。
+> **11/14準備時点の履歴（後続実結果は§9.66／67）：標準RN入力の自動3案で、元anchor・UNKNOWN・接続・本人条件を生成時に保持する修正をAPI候補d3daee549a848675cb200b3aa3360be38e94bf8fへ反映。** 関連168件成功、旧actual採否と保存bytesを保持。架空3案の合成保存・別process再読・Saved／RN受口は事前検証だけ。27,761bytes・2fileの既存Pod送付は具体的開示承認不足として自動審査で送信前拒否、実生成／Pod変更／本候補の通常反映0。通常API／workerはc7968c6 Liveを継続。本単位・補助全体未完、配布／実機保留を維持。 [詳細§9.65](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-standard-three-conditions-prepared-20261114)。
 
-> **11/14最新：本人提示3案の実4B出力を無修補で採用し、隔離DB保存・別プロセス再読・明示Saved・既存RN受口まで接続。** 通常API／worker `c7968c658277ec190c32d5e3913dbde13c01d68a` がLive。先行1／2候補の原本も同版保持。本人案がそろう1〜3候補の限定接続単位は完了。本人案なしの標準RN経路の実3案、条件表示・一般日本語品質・本人利用・AR-07／補助全体は未完。 [実結果・範囲・次§9.64](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-person-three-fixed-slots-normal-rollout-20261114)。
+> **11/14本人提示3案の先行実績（標準自動3案の後続実績は§9.67）：実4B出力を無修補で採用し、隔離DB保存・別プロセス再読・明示Saved・既存RN受口まで接続。** 通常API／worker `c7968c658277ec190c32d5e3913dbde13c01d68a` がLive。先行1／2候補の原本も同版保持。本人案がそろう1〜3候補の限定接続単位は完了。本人案なしの標準RN経路の実3案、条件表示・一般日本語品質・本人利用・AR-07／補助全体は未完。 [実結果・範囲・次§9.64](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-person-three-fixed-slots-normal-rollout-20261114)。
 
 > **11/12・三中核の実4B比較7件と保存抜け修復：** Mashの具体的承認後、既存Podで7件を一回・98.351秒、全HTTP200/stop。学習・再試行・提供再起動0、PID73476／health200を前後維持。撤回後の既発行問いが本文へ再出力・保存される実抜けをAPI `4183126d00c2ed4238c526cf17f6b28cdbb18dc6`で修復し、同rawの2保存維持／1拒否・非生成再読と関連103件成功を確認。Piece旧新は原2欄の完全コピー・編集改善0、CMEE2拒否。Analysis旧新の図／本文とartifact再読は成立し、新v2の場面引用を保持するが、反復・誤字・関係説明等の品質は未達。Piece／Analysisのexact SQL保存は未実施、通常採用／live反映／端末・全補助経路は未完。 [実原本・前後比較・保存範囲](<../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#auxiliary-crosscore-actual7-20261112>)。
 
@@ -356,8 +356,8 @@ observed routeをbaseとし、ユーザーが選んだbranch intent／constraint
 | self structure | Watashi Map、role_switches、routes、crossroads、unknown_areas | evidence-bound ObservedSelfStructureMap |
 | route semantics | presentation-oriented fixed four-step／generic fallbackを含む | claim／edgeごとのexact evidence refs、partial route |
 | protective／burden | formal typed visible ownerは未実装 | direct observationとinterpretive hypothesisを型分離 |
-| IF route | `if_route_realizer.py`／`analysis_if_route_service.py`／store／model sourceとHTTP／RN／SQLを実装し通常DB／API反映済み | 本人提示の実1／2／3候補の隔離保存再読は§9.64で成立。本人案なしの標準RN3案、条件表示・一般品質・本人利用は未完 |
-| saved intent | IF ownerが明示選択・任意noteから別identityへ保存し、API／RN／SQLで非生成再読・削除 | 実1／2／3候補からの架空本人の明示Saved計3件を隔離保存再読。本人利用は未確認（§9.64） |
+| IF route | `if_route_realizer.py`／`analysis_if_route_service.py`／store／model sourceとHTTP／RN／SQLを実装し通常DB／API反映済み。本人提示の実1／2／3候補に加え、標準自動3案の実4B限定1set・同raw隔離保存再読・既存RN受口と7f51通常反映が§9.67で成立 | 条件／負荷／未知は既存RN表示。今回の同display内で保存成功を確認した候補への印は§9.68。一般意味／日本語品質・本人利用・正式受入れは未完 |
+| saved intent | IF ownerが明示選択・任意noteから別identityへ保存し、API／RN／SQLで非生成再読・削除。本人提示の実1／2／3候補から各1件に加え、標準自動3案から架空本人の明示Saved1件を隔離保存再読（§9.67） | 確認済み印は同set／scenario・同display内の保存成功だけを示し、別起動の過去保存を推測しない（§9.68）。本人利用は未確認 |
 | visual | current Watashi Map cards | observed／IF／unknownを見分けられるgraph + accessible text |
 
 上表のCurrent actualは稼働経路を示す。Draftのoffline observed実装は§4.5に分離する。
@@ -900,7 +900,7 @@ missing reasonとscopeを持つ別claim／gap marker。observed factを作るた
 1. V1-Dの生成・safe表示・補足・保存/API/RN接続とu102〜u118の内容修正版は配置済み。許可された集計で今回期間の不在を確認し、空snapshotを422にしていたAPIをu127で補正。修正版APIの配置とu122画面修正を含む6401のTestFlight送信はu128で成功。新版の端末導入・正常空表示の実機確認が残る。実生成は本人の通常入力後に別途確認する。
 2. current Watashi Mapはpresentation-orientedで、claim／edge evidence graph authorityではない。
 3. 五種類の限定node、原証拠、不一致の未確定表示、明示現在負荷と守る意向の注記を接続済み。一般的な各段階/矛盾/負荷/保護理解と解釈仮説は未完了。期間比較は永続保存/API接続まで実装し、SQL適用済み。development手順はMash報告、本人生成/期間比較の実機成功は未成立。
-4. IF／Savedは通常API／worker c7968c6。本人提示の実1／2／3候補各1setと明示Saved計3件の隔離保存再読が成立。新3候補由来の2artifactは同raw・production DTO・既存RN受口まで一致。本人案なしの標準RN3案、条件表示・日本語一般品質・本人利用は未完（補助設計§9.64）。
+4. IF／Savedの標準自動3案は、実4B限定1setの同raw隔離保存・別process再読・Saved1件・既存RN受口と7f51通常反映まで§9.67で成立。条件／負荷／未知は既存表示。現通常API／workerは今回Piece有効sourceのfc333bff8a76775d6fe14ed299ea769d22d35c9dが双方Liveで、前記IF実生成の由来7f51と区別する（補助設計§9.68）。同display内の確認済みSaved印は今回のRNソース差分であり、build／TestFlight／本人端末は未実施。一般意味／日本語品質・本人利用・正式受入れは未完。
 5. Analysis専用Product Read packetとactual-device IF map verificationは未実行。
 6. 保存identityの独立した実照合、修正版の実DB/端末検証、旧経路からのglobal cutoverと正式商品受入れは未完了。機械検証を商品完成へ換算しない。
 
@@ -1653,3 +1653,12 @@ GitHub sourceの確認範囲はCocolon `90735e2ff448e8815796cb5112f318ef10198aa3
 ## 2026-11-14 — 本人提示3案の後続結果
 
 §9.63の1／2候補成立と3候補拒否を継承し、§9.64で本人提示3案の同raw保存再読・明示Savedへ到達。全anchor／本人案／UNKNOWNと接続先を生成時に束縛し、受領後は修補しない。通常API／worker c7968c6。標準RN自動3案と一般品質は未確認。
+
+
+## 2026-11-15 — IF候補カードで確認済みの保存意向を表示
+
+`components/selfStructure/AnalysisIfRouteDialog.js` で、Saved APIの応答が送信した候補set／scenarioと完全一致する場合だけ、その候補カードへ「保存した関心の方向」を表示する。複数候補の保存は共存し、同setの再GET後も確認済み印を保持、削除成功／404で該当印を除去。結果不明・別set／scenarioの応答・旧本人／contextからは印を作らない。同じ表示状態で保存成功を確認したものに限り、別の起動・端末で以前に保存した履歴へ推測で付けない。条件／負荷／未知、非順位、仮想のつながりは既存表示を継承する。
+
+この印は本人が保存した関心であり、実行済み・達成・性格を示さない。元観測map・IF候補・Savedの別identityと本人source境界、保存・再読・削除API／DB wireを変更しない。標準自動3案の実4B限定1setと通常7f51反映は前節§9.67、今回のRN最終検証・採用版／配置・未確認は[§9.68](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-effective-round-sources-and-if-saved-marker-20261115)。新GPU／学習0、build／TestFlight／本人端末保留。
+
+STRUCTURE_MAP_DELTA_PRESENT：既存IF dialogの確認済みSaved表示状態の接続。新しい分析意味owner・公開型・table・rendererは追加しない。

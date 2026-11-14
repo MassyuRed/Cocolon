@@ -35,7 +35,8 @@ export default function AnalysisIfRouteDialog({ visible, onClose, ownerId, tier,
   useEffect(() => { operations.current.clear(); }, [ownerId, tier, baseMapRef]);
   useEffect(() => () => { abortAll(); operations.current.clear(); }, []);
   const active = token => current.current.scope === scope && current.current.visible && sequence.current === token;
-  const update = change => setState(previous => previous.scope === scope ? { ...previous, ...change } : previous);
+  const update = change => setState(previous => previous.scope === scope
+    ? { ...previous, ...(typeof change === 'function' ? change(previous) : change) } : previous);
   const options = controller => ({ expectedUserId: ownerId, signal: controller.signal });
   const createContext = `create:${scope}`;
   const pendingOperation = [...operations.current.entries()].find(([, operation]) => operation.scope === scope);
@@ -59,13 +60,19 @@ export default function AnalysisIfRouteDialog({ visible, onClose, ownerId, tier,
         update({ busy: false, recovery: { context, method }, message: 'まだ結果を確認中です。同じ内容で、もう一度結果を確認できます。' });
         return;
       }
+      if (operation.method === 'save' && result.status === 'GENERATED'
+        && (result.projection.source_scenario_set_ref !== operation.payload.source_scenario_set_ref
+          || result.projection.selected_scenario_ref !== operation.payload.selected_scenario_ref)) {
+        throw new Error('analysis_if_save_response_mismatch');
+      }
       operations.current.delete(context);
       if (result.status === 'QUESTION_PENDING') {
         update({ busy: false, recovery: null, question: result.clarification_request.prompt_private, result: null });
       } else if (result.status === 'SEPARATE_SAFETY') {
         update({ busy: false, recovery: null, question: null, error: 'この内容は、ここで選択肢として扱えませんでした。' });
       } else if (operation.method === 'save') {
-        update({ busy: false, recovery: null, message: '関心の方向を保存しました。', saved: result });
+        update(previous => ({ busy: false, recovery: null, message: '関心の方向を保存しました。',
+          confirmedSaved: [...(previous.confirmedSaved || []).filter(item => item.id !== result.id), result] }));
       } else {
         update({ busy: false, recovery: null, question: null, result, detail: null });
       }
@@ -115,11 +122,16 @@ export default function AnalysisIfRouteDialog({ visible, onClose, ownerId, tier,
     update({ busy: true, error: null });
     try {
       await analysisIfRouteApi.delete(kind, id, options(controller));
-      if (active(token)) update({ busy: false, detail: null, result: null, deleting: null,
-        items: (state.items || []).filter(item => item.id !== id), message: '削除しました。' });
+      if (active(token)) update(previous => ({ busy: false, detail: null, result: null, deleting: null,
+        items: (previous.items || []).filter(item => item.id !== id),
+        confirmedSaved: (previous.confirmedSaved || []).filter(item => kind === 'saved_intent'
+          ? item.id !== id : item.projection.source_scenario_set_ref !== previous.detail?.scenario_set_ref),
+        message: '削除しました。' }));
     } catch (error) {
       if (active(token)) update(error?.status === 404
-        ? { busy: false, detail: null, result: null, deleting: null, items: (state.items || []).filter(item => item.id !== id), message: 'この内容は削除されています。' }
+        ? { busy: false, detail: null, result: null, deleting: null, items: (state.items || []).filter(item => item.id !== id),
+          confirmedSaved: (state.confirmedSaved || []).filter(item => kind === 'saved_intent'
+            ? item.id !== id : item.projection.source_scenario_set_ref !== state.detail?.scenario_set_ref), message: 'この内容は削除されています。' }
         : { busy: false, error: '削除の結果を確認できませんでした。同じ内容の削除をもう一度確認できます。' });
     } finally { controllers.current.delete(controller); if (inFlight.current === token) inFlight.current = null; }
   };
@@ -170,6 +182,10 @@ export default function AnalysisIfRouteDialog({ visible, onClose, ownerId, tier,
             <Text style={styles.notice}>並び順はおすすめの順位ではありません。</Text>
             {result.projection.scenarios.map(scenario => <View key={scenario.scenario_ref} style={styles.card}>
               <Text style={styles.section}>{scenario.visible_label}</Text>
+              {(show.confirmedSaved || []).some(item => item.projection.source_scenario_set_ref === result.scenario_set_ref
+                && item.projection.selected_scenario_ref === scenario.scenario_ref)
+                ? <Text testID={`analysis-if-saved-marker-${scenario.scenario_ref}`} style={styles.notice}
+                  accessibilityLiveRegion="polite">保存した関心の方向</Text> : null}
               {scenario.nodes.map(node => <View key={node.node_ref} style={styles.node}>
                 <Text style={styles.meta}>{originLabel[node.origin]}</Text><Text style={styles.text}>{node.visible_label}</Text>
               </View>)}

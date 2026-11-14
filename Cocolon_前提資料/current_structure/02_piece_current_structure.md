@@ -1,4 +1,4 @@
-> **11/14最新：第2・第3回答の明示訂正／撤回を、先行ADDの資格確認を保ってPieceへ接続。通常DB／API反映単位を完了。** API `cb6301ed9a0b77fa7342e71c078d64a9075dad7a`、既存3writerのmigration適用、Render `dep-dbs16gafngtc73bek5a0` は16:53:56 JSTにLive。関連232件成功、全3plan×round2／3×REVISE／WITHDRAWの同本文保存・非生成再読と、通常selector OFFの既存作者経路を確認。原入力＋最新一回答を維持し、先行ADDの本文は使わない。先行訂正・補足を訂正する多段更新、一般意味／文章品質、natural分析材料NOT_GENERATED、全補助活用は未完。追加GPU／学習／RN変更／build／TestFlight／本人実機0。 [実装・通常反映と残件§9.61](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-latest-later-answer-update-20261114)。
+> **11/15最新：先行する本人訂正・撤回を、後続回答から作るPieceの有効sourceへ接続。** 真正なEmlisの全prefixを再導出し、残る原入力の節・失効していない先行置換節・明示選択した最新補足だけを別sourceのまま既存作者／保存／再読へ渡す。IFでは同じ候補set／scenarioのSaved応答が確認できたカードへ「保存した関心の方向」を表示する。標準自動IF3の限定実生成・保存再読・7f51通常反映は成立済み。今回API版・最終検証・通常反映は§9.68、一般意味／編集品質・全多段更新・本人実機・補助全体は未完。build／TestFlight保留を維持。 [Piece有効sourceの現在§9.68](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-effective-round-sources-and-if-saved-marker-20261115)。
 
 > **11/13・第2/3回答後の最新一回答をPieceへ渡す候補：原入力＋画面で明示した最新の自己完結ADD一件を維持し、先行全roundは資格確認だけに使う。API dbb96aca、Python431固有＋38subtests、RN47固有成功。3plan×2自然／2stop／3自然の9保存再読を確認。実4B・本番SQL／配置・実機は未完、通常selector OFF。** [範囲・原本・次§9.43](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-latest-later-add-selected-20261113)。
 
@@ -4414,3 +4414,16 @@ STRUCTURE_MAP_DELTA_PRESENT。詳細・責務/全71内訳・合成限界・次�
 codeのprefixは`ai/services/ai_inference/`、CMEE側はその下の`cocolon_meaning_experience_engine/`。全17pathは[01Bの地図](../01B_cocolon_overall_structure_analysis_piece_emotionlog_ranking.md#piece-natural-answer-active-source-files-20261114)。共有ownerが既に述語・完全文を証明した差替え節だけ、末尾句点を補うgrammar-only viewで既存Piece文法へ接続する。句点を元literal／根拠／座標へ付加せず、未証明断片を文へ昇格しない。別の残存範囲を連結した架空sourceやslotは作らず、同一原欄内の別範囲は同じslot内で区別する。
 
 原入力／ANSWERの全原文、source_ref七項目、既存作者・形式選択・最大3text slot・PUBLIC7参照・source_lineage・recipe／renderer・旧ADD・最新第2／3回答の独立ADDは保持。新公開route／DTO／top-level RPC引数／table／RN sourceは追加しない。migration filename `20261114051948_piece_natural_answer_active_source.sql`の実適用履歴versionは`20261114054136`。通常DB／APIとworkerは同75e526d1で反映済み、両CI成功までのbounded technical unitはCLOSED。新しいPiece実4B3件・同実本文の保存再読／画像、一般編集品質・通常本人一巡・正式受入れは未完であり、合成provider／隔離SQL成功を代用しない。研究selector／重み・RN／rendererは変更せず、build／TestFlight／本人実機保留を継承する。STRUCTURE_MAP_DELTA_PRESENT。通常配置・証跡消失・送付前停止と再開先は[補助設計§9.58](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-natural-answer-active-source-20261114)。
+
+
+## 2026-11-15 — 先行本人訂正・撤回を後続回答のPiece sourceへ渡す
+
+自然Q3の2／3prefixについて、既存 `piece_v2_source_adapter.py` が全request／checkpointを原保存chainから再導出する。残る原入力の節、失効していない先行REVISEの置換節、明示選択した最新補足をそれぞれの実source envelopeと絶対範囲のまま既存 `piece_refined.py`→`preparation_sources.py`→唯一作者へ渡す。無関係な先行ADD、失効節、訂正locatorの旧引用は作者本文へ追加しない。原入力七項目／全ANSWER／lineage／source identityは保持し、AI応答・Analysis推定を本人sourceへ使わない。
+
+`piece_model_source.py` は同じ分離sourceをprivate作者材料へ投影。`piece_v2_store.py` とmigration `20261114190006_piece_natural_effective_round_sources.sql` は、preview発行／見た目変更／保存の既存3RPCへ `meaning_checkpoints` 全件のsource lock再照合を接続する。旧単一checkpoint／ADD契約・公開署名・ACL／RLS・tableは不変。3body block超過・原入力active節0・未解決／複数操作混在等は引き続き拒否し、全多段・一般訂正・任意回答集合の完成としない。
+
+既存Piece CI `piece-b2b-isolated-postgres.yml` にsource-contract／SQL-fenceの2検証fileを登録し、既存suiteの途中取消を解消するためCI job枠のみ10→20分へ変更する。製品生成／GPU上限・採否・runtimeは変えない。
+
+通常作者と保存再読の隔離検証を、新実4B・同版native画像・本人一巡と分ける。GPU生成／学習／再試行0、研究selector／重み未採用。今回の採用commit・最終回帰・migration／通常反映・残差は[補助設計§9.68](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-effective-round-sources-and-if-saved-marker-20261115)。
+
+STRUCTURE_MAP_DELTA_PRESENT：共有Emlis有効意味から既存Pieceのsource／plan／SQL保存境界への受渡し拡張。新作者・新source保存基盤・公開wire・RN rendererを追加しない。build／TestFlight／本人実機保留を継承。

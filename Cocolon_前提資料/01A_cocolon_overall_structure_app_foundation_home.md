@@ -1,4 +1,4 @@
-> **11/14最新：本人提示3案の実4B出力を無修補で採用し、隔離DB保存・別プロセス再読・明示Saved・既存RN受口まで接続。** 通常API／worker `c7968c658277ec190c32d5e3913dbde13c01d68a` がLive。先行1／2候補の原本も同版保持。本人案がそろう1〜3候補の限定接続単位は完了。本人案なしの標準RN経路の実3案、条件表示・一般日本語品質・本人利用・AR-07／補助全体は未完。 [実結果・範囲・次§9.64](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-person-three-fixed-slots-normal-rollout-20261114)。
+> **11/15最新：先行する本人訂正・撤回を、後続回答から作るPieceの有効sourceへ接続。** 真正なEmlisの全prefixを再導出し、残る原入力の節・失効していない先行置換節・明示選択した最新補足だけを別sourceのまま既存作者／保存／再読へ渡す。IFでは同じ候補set／scenarioのSaved応答が確認できたカードへ「保存した関心の方向」を表示する。標準自動IF3の限定実生成・保存再読・7f51通常反映は成立済み。今回API版・最終検証・通常反映は§9.68、一般意味／編集品質・全多段更新・本人実機・補助全体は未完。build／TestFlight保留を維持。 [有効sourceと保存表示§9.68](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-effective-round-sources-and-if-saved-marker-20261115)。
 
 > **11/13・第2/3回答後の最新一回答をPieceへ渡す候補：原入力＋画面で明示した最新の自己完結ADD一件を維持し、先行全roundは資格確認だけに使う。API dbb96aca、Python431固有＋38subtests、RN47固有成功。3plan×2自然／2stop／3自然の9保存再読を確認。実4B・本番SQL／配置・実機は未完、通常selector OFF。** [範囲・原本・次§9.43](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-latest-later-add-selected-20261113)。
 
@@ -7194,3 +7194,19 @@ serve_emlis_natural_replyのchoice_fieldsだけをPERSON_ALTERNATIVEへ限定し
 **11/15最新：標準RNと同じ本人案なし入力で、実4Bの自動3案を採用し、同rawの隔離SQL保存・別process再読・Saved・既存RN受口から通常API／worker反映まで完了。** 追加一回は188.483632秒、3POST全受領、通常2対照全文一致、学習／再試行0。3案の具体的な手順がそれぞれSIMULATED_EXTENSIONに入り、全anchorと30分／追加費用なしを保持。API／workerは7f51a64e6cb58668ad5d418480b7de4499bfe6faでLive。標準自動3案の限定接続単位を閉じる。一般品質・正式本人受入れ・AR-07／補助全体は未完、build／TestFlight／本人実機保留を維持。
 
 既存IF2function／realizerの前節5pathを採用。新しい公開契約／DB／RN／owner／依存追加0、全ファイル配置の変更なし。通常APIとworkerは7f51、PodのIF生成2functionは同固定版。[全原本・保存・配置・残差](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-standard-proposal-three-normal-rollout-20261115)。
+
+
+## 2026-11-15 — 全prefixの本人更新を後続Pieceへ、IFの明示保存を候補表示へ
+
+**11/15最新：先行する本人訂正・撤回を、後続回答から作るPieceの有効sourceへ接続。** 真正なEmlisの全prefixを再導出し、残る原入力の節・失効していない先行置換節・明示選択した最新補足だけを別sourceのまま既存作者／保存／再読へ渡す。IFでは同じ候補set／scenarioのSaved応答が確認できたカードへ「保存した関心の方向」を表示する。標準自動IF3の限定実生成・保存再読・7f51通常反映は成立済み。今回API版・最終検証・通常反映は§9.68、一般意味／編集品質・全多段更新・本人実機・補助全体は未完。build／TestFlight保留を維持。 [実装・検証・通常反映](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-effective-round-sources-and-if-saved-marker-20261115)。
+
+| 現owner | 今回の接続と同時確認 |
+|---|---|
+| API `piece_v2_source_adapter.py` | 真正Emlis各prefixの再導出、active original／surviving prior revisions／latest selected answer。元source七項目・全ANSWER envelope・版／根拠を保持 |
+| API `cocolon_meaning_experience_engine/piece_refined.py`／`preparation_sources.py` | 原入力と回答sourceを分離し、active範囲だけ既存意味／plan／preparedへ渡す。最大3block・独立S7を維持 |
+| API `piece_model_source.py` | 有効な本人sourceだけを作者材料へ投影。無関係ADD・失効節・旧訂正引用を連結しない。新GPU生成はなし |
+| API `piece_v2_store.py`／migration `20261114190006_piece_natural_effective_round_sources.sql` | 既存preview／visual／save3RPCのprivate `meaning_checkpoints`全件をsource lock内で照合。署名・ACL／RLS・tableは不変 |
+| RN `components/selfStructure/AnalysisIfRouteDialog.js`／既存 `tests/analysis-if-route.test.js` | 同set／scenarioの保存確認応答だけ印を表示。複数保存・再GET保持・削除／404除去。wire／観測mapは不変 |
+| API `.github/workflows/piece-b2b-isolated-postgres.yml`／既存 `ai/tests/piece_v2/` | 新source-contract／SQL-fence2fileを既存集合へ登録。前工程の10分途中取消を受け、CI jobだけ20分へ変更。製品／GPUの一回上限・検査内容は不変 |
+
+STRUCTURE_MAP_DELTA_PRESENT。新しい公開route／DTO／保存table／作者／renderer／共通管理serviceは追加しない。旧地図のApp／Home入口と各coreの保存・権利境界を継承する。

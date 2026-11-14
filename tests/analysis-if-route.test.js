@@ -40,6 +40,16 @@ function saved() {
       visible_note: '今はこの方向を考えておきたい。', saved_at: '2026-11-14T09:00:00+00:00',
     } };
 }
+function savedFor(set, index, savedId = saved().id) {
+  const value = saved(), scenario = set.projection.scenarios[index];
+  value.id = savedId;
+  value.artifact_ref = `artifact:${savedId.replace(/-/g, '')}@1`;
+  value.projection.projection_of = value.artifact_ref;
+  value.projection.source_scenario_set_ref = set.scenario_set_ref;
+  value.projection.selected_scenario_ref = scenario.scenario_ref;
+  value.selected_scenario_label = scenario.visible_label;
+  return value;
+}
 function pending() { return { status: 'PENDING', operation_id: '00000000-0000-0000-0000-000000000072', state: 'CALL_STARTED',
   reason_codes: ['analysis_if_result_pending'], artifact: null }; }
 function question() { return { status: 'QUESTION_PENDING', reason_codes: ['analysis_if_intent_unclear'], artifact: null,
@@ -214,7 +224,131 @@ test('saving commits only the explicitly chosen scenario and optional note', asy
   assert.equal(payload.source_scenario_set_ref, 'scenario-set:choices@1');
   assert.equal(payload.user_note, '今はこの方向を考えておきたい。');
   assert(JSON.stringify(view.toJSON()).includes('関心の方向を保存しました。'));
+  assert.equal(view.root.findByProps({ testID: 'analysis-if-saved-marker-analysis-if-scenario:choice2@1' }).children[0], '保存した関心の方向');
+  assert.equal(view.root.findAllByProps({ testID: 'analysis-if-saved-marker-analysis-if-scenario:choice1@1' }).length, 0);
   await act(async () => view.unmount());
+});
+
+test('confirmed markers retain multiple explicit saves and follow the same set on history read', async () => {
+  const set = candidate(3), confirmed = [savedFor(set, 0), savedFor(set, 1, '00000000-0000-0000-0000-000000000073')];
+  let saves = 0;
+  const h = harness(async (url, options) => options.method === 'POST'
+    ? url.includes('saved-route-intents') ? confirmed[saves++] : set
+    : url.includes(`/${set.id}`) ? set : { status: 'ok', items: [set], limit: 60, offset: 0 });
+  const Dialog = h.load('components/selfStructure/AnalysisIfRouteDialog.js').default;
+  let view; await act(async () => { view = Renderer.create(React.createElement(Dialog, props())); }); await fill(view);
+  await act(async () => view.root.findByProps({ testID: 'analysis-if-create' }).props.onPress());
+  for (const index of [0, 1]) await act(async () => view.root.findByProps({
+    testID: `analysis-if-save-${set.projection.scenarios[index].scenario_ref}` }).props.onPress());
+  const markers = () => set.projection.scenarios.map(scenario => view.root.findAllByProps({
+    testID: `analysis-if-saved-marker-${scenario.scenario_ref}` }).length);
+  assert.deepEqual(markers(), [1, 1, 0]);
+  await act(async () => byTitle(view, '考えた選択肢').props.onPress());
+  await act(async () => byTitle(view, '保存した内容を開く').props.onPress());
+  assert.deepEqual(markers(), [1, 1, 0]);
+  assert.deepEqual(set, candidate(3));
+  assert.equal(h.calls.filter(call => call.method === 'POST').length, 3);
+  await act(async () => view.unmount());
+});
+
+test('a new set with reused scenario refs does not inherit confirmed markers', async () => {
+  const first = candidate(), next = candidate(); next.scenario_set_ref = 'scenario-set:another-set@1';
+  let creates = 0;
+  const h = harness(async url => url.includes('saved-route-intents') ? savedFor(first, 1) : ++creates === 1 ? first : next);
+  const Dialog = h.load('components/selfStructure/AnalysisIfRouteDialog.js').default;
+  let view; await act(async () => { view = Renderer.create(React.createElement(Dialog, props())); }); await fill(view);
+  await act(async () => view.root.findByProps({ testID: 'analysis-if-create' }).props.onPress());
+  await act(async () => view.root.findByProps({ testID: 'analysis-if-save-analysis-if-scenario:choice2@1' }).props.onPress());
+  await act(async () => byTitle(view, '入力から考え直す').props.onPress());
+  await act(async () => view.root.findByProps({ testID: 'analysis-if-create' }).props.onPress());
+  assert.equal(view.root.findAllByProps({ testID: 'analysis-if-saved-marker-analysis-if-scenario:choice2@1' }).length, 0);
+  await act(async () => view.unmount());
+});
+
+test('failed or mismatched save receipts never create a confirmed marker', async () => {
+  for (const outcome of ['failed', 'other-set', 'other-scenario']) {
+    const set = candidate(); let saves = 0;
+    const h = harness(async (url, options) => {
+      if (!url.includes('saved-route-intents')) return set;
+      saves += 1;
+      if (outcome === 'failed') return { ok: false, status: 503 };
+      const value = savedFor(set, outcome === 'other-scenario' ? 0 : 1);
+      if (outcome === 'other-set') value.projection.source_scenario_set_ref = 'scenario-set:other@1';
+      return value;
+    });
+    const Dialog = h.load('components/selfStructure/AnalysisIfRouteDialog.js').default;
+    let view; await act(async () => { view = Renderer.create(React.createElement(Dialog, props())); }); await fill(view);
+    await act(async () => view.root.findByProps({ testID: 'analysis-if-create' }).props.onPress());
+    await act(async () => view.root.findByProps({ testID: 'analysis-if-save-analysis-if-scenario:choice2@1' }).props.onPress());
+    for (const scenario of set.projection.scenarios) assert.equal(view.root.findAllByProps({
+      testID: `analysis-if-saved-marker-${scenario.scenario_ref}` }).length, 0, outcome);
+    assert.equal(saves, 1);
+    assert.equal(view.root.findByProps({ testID: 'analysis-if-retry-same' }).props.title, '同じ内容で結果を確認');
+    await act(async () => view.root.findByProps({ testID: 'analysis-if-retry-same' }).props.onPress());
+    assert.equal(h.calls[1].body, h.calls[2].body);
+    await act(async () => view.unmount());
+  }
+});
+
+test('scope changes and closed-dialog late save receipts never mark another view', async () => {
+  for (const change of ['owner', 'tier', 'projection', 'closed']) {
+    const wait = deferred(), set = candidate(), h = harness(async url => url.includes('saved-route-intents') ? wait.promise : set);
+    const Dialog = h.load('components/selfStructure/AnalysisIfRouteDialog.js').default, p = props();
+    let view; await act(async () => { view = Renderer.create(React.createElement(Dialog, p)); }); await fill(view);
+    await act(async () => view.root.findByProps({ testID: 'analysis-if-create' }).props.onPress());
+    let task; await act(async () => { task = view.root.findByProps({ testID: 'analysis-if-save-analysis-if-scenario:choice2@1' }).props.onPress(); });
+    await act(async () => view.update(React.createElement(Dialog, { ...p,
+      ...(change === 'owner' ? { ownerId: 'another-owner' } : change === 'tier' ? { tier: 'free' }
+        : change === 'projection' ? { baseMapRef: 'artifact:00000000000000000000000000000099@1' } : { visible: false }) })));
+    assert(h.calls[1].signal.aborted, change);
+    await act(async () => { wait.resolve(savedFor(set, 1)); await task; });
+    await act(async () => view.update(React.createElement(Dialog, p)));
+    assert.equal(view.root.findAllByProps({ testID: 'analysis-if-saved-marker-analysis-if-scenario:choice2@1' }).length, 0, change);
+    await act(async () => view.unmount());
+  }
+});
+
+test('confirmed selection markers are discarded when owner, tier or base scope changes', async () => {
+  for (const change of ['owner', 'tier', 'projection']) {
+    const set = candidate(), h = harness(async url => url.includes('saved-route-intents') ? savedFor(set, 1) : set);
+    const Dialog = h.load('components/selfStructure/AnalysisIfRouteDialog.js').default, p = props();
+    let view; await act(async () => { view = Renderer.create(React.createElement(Dialog, p)); }); await fill(view);
+    await act(async () => view.root.findByProps({ testID: 'analysis-if-create' }).props.onPress());
+    await act(async () => view.root.findByProps({ testID: 'analysis-if-save-analysis-if-scenario:choice2@1' }).props.onPress());
+    assert.equal(view.root.findAllByProps({ testID: 'analysis-if-saved-marker-analysis-if-scenario:choice2@1' }).length, 1);
+    await act(async () => view.update(React.createElement(Dialog, { ...p,
+      ...(change === 'owner' ? { ownerId: 'another-owner' } : change === 'tier' ? { tier: 'free' }
+        : { baseMapRef: 'artifact:00000000000000000000000000000099@1' }) })));
+    await act(async () => view.update(React.createElement(Dialog, p))); await fill(view);
+    await act(async () => view.root.findByProps({ testID: 'analysis-if-create' }).props.onPress());
+    assert.equal(view.root.findAllByProps({ testID: 'analysis-if-saved-marker-analysis-if-scenario:choice2@1' }).length, 0, change);
+    await act(async () => view.unmount());
+  }
+});
+
+test('deleted Saved confirmations do not mark a reread candidate set', async () => {
+  for (const deletedElsewhere of [false, true]) {
+    const set = candidate(), selection = savedFor(set, 1);
+    const h = harness(async (url, options) => {
+      if (options.method === 'POST') return url.includes('saved-route-intents') ? selection : set;
+      if (options.method === 'DELETE') return deletedElsewhere ? { ok: false, status: 404 } : { deleted: true, id: selection.id };
+      if (url.includes(`/${selection.id}`)) return selection;
+      if (url.includes(`/${set.id}`)) return set;
+      return { status: 'ok', items: [url.includes('saved-route-intents') ? selection : set], limit: 60, offset: 0 };
+    });
+    const Dialog = h.load('components/selfStructure/AnalysisIfRouteDialog.js').default;
+    let view; await act(async () => { view = Renderer.create(React.createElement(Dialog, props())); }); await fill(view);
+    await act(async () => view.root.findByProps({ testID: 'analysis-if-create' }).props.onPress());
+    await act(async () => view.root.findByProps({ testID: 'analysis-if-save-analysis-if-scenario:choice2@1' }).props.onPress());
+    await act(async () => byTitle(view, '保存した方向').props.onPress());
+    await act(async () => byTitle(view, '保存した内容を開く').props.onPress());
+    await act(async () => byTitle(view, 'この保存を削除').props.onPress());
+    await act(async () => byTitle(view, '削除する').props.onPress());
+    await act(async () => byTitle(view, '考えた選択肢').props.onPress());
+    await act(async () => byTitle(view, '保存した内容を開く').props.onPress());
+    assert.equal(view.root.findAllByProps({ testID: 'analysis-if-saved-marker-analysis-if-scenario:choice2@1' }).length, 0, deletedElsewhere);
+    await act(async () => view.unmount());
+  }
 });
 
 test('Saved history opens and deletes without any current map or new generation', async () => {

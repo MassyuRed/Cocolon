@@ -1,10 +1,10 @@
-> **11/15最新：標準RNと同じ本人案なし入力で、実4Bの自動3案を採用し、同rawの隔離SQL保存・別process再読・Saved・既存RN受口から通常API／worker反映まで完了。** 追加一回は188.483632秒、3POST全受領、通常2対照全文一致、学習／再試行0。3案の具体的な手順がそれぞれSIMULATED_EXTENSIONに入り、全anchorと30分／追加費用なしを保持。API／workerは7f51a64e6cb58668ad5d418480b7de4499bfe6faでLive。標準自動3案の限定接続単位を閉じる。一般品質・正式本人受入れ・AR-07／補助全体は未完、build／TestFlight／本人実機保留を維持。 [実原本・保存・配置§9.67](#if-standard-proposal-three-normal-rollout-20261115)。
+> **11/15最新：先行する本人訂正・撤回を、後続回答から作るPieceの有効sourceへ接続。** 真正なEmlisの全prefixを再導出し、残る原入力の節・失効していない先行置換節・明示選択した最新補足だけを別sourceのまま既存作者／保存／再読へ渡す。IFでは同じ候補set／scenarioのSaved応答が確認できたカードへ「保存した関心の方向」を表示する。標準自動IF3の限定実生成・保存再読・7f51通常反映は成立済み。今回API版・最終検証・通常反映は§9.68、一般意味／編集品質・全多段更新・本人実機・補助全体は未完。build／TestFlight保留を維持。 [全prefix・保存境界とRN表示§9.68](#piece-effective-round-sources-and-if-saved-marker-20261115)。
 
-> **11/15最新：承認済み通常IF3の一回を完了、条件保持は成立したが、3案のgraphが同じ本人意向コピーのため商品不採用。** 実3POST全受領、通常Emlis／Analysis対照の前後全文一致、実行本体167.909910秒・追加学習／再試行0。受領rawは旧CPUでGENERATEDだが、見出しの違いだけを3ルート成立へ数えず候補SQL保存／通常API反映0。意向を選択候補から外す修正をAPI候補7f51a64e6cb58668ad5d418480b7de4499bfe6faへ反映し171件成功。新修正の実生成は未実施、28,480bytes・2fileの追加一回を準備。通常API／workerはc7968c6、Podは前回承認で差替えたd3のIF2関数版。配布／本人実機保留・補助全体未完を維持。 [実結果・原因・新準備§9.66](#if-standard-three-actual-proposal-fix-20261115)。
+> **11/15先行比較の履歴（修復後の実結果は§9.67）：承認済み通常IF3の一回を完了、条件保持は成立したが、3案のgraphが同じ本人意向コピーのため商品不採用。** 実3POST全受領、通常Emlis／Analysis対照の前後全文一致、実行本体167.909910秒・追加学習／再試行0。受領rawは旧CPUでGENERATEDだが、見出しの違いだけを3ルート成立へ数えず候補SQL保存／通常API反映0。意向を選択候補から外す修正をAPI候補7f51a64e6cb58668ad5d418480b7de4499bfe6faへ反映し171件成功。新修正の実生成は未実施、28,480bytes・2fileの追加一回を準備。通常API／workerはc7968c6、Podは前回承認で差替えたd3のIF2関数版。配布／本人実機保留・補助全体未完を維持。 [実結果・原因・新準備§9.66](#if-standard-three-actual-proposal-fix-20261115)。
 
-> **11/14最新：通常入力の自動3案・条件保持の修復をGitHubへ反映、実4B送付は審査で停止。** 候補d3daee5／関連168件成功。実生成・通常反映は未実施、稼働はc7968c6を維持。 [実施範囲・具体送付・再開§9.65](#if-standard-three-conditions-prepared-20261114)。
+> **11/14準備時点の履歴（後続実結果は§9.66／67）：通常入力の自動3案・条件保持の修復をGitHubへ反映、実4B送付は審査で停止。** 候補d3daee5／関連168件成功。実生成・通常反映は未実施、稼働はc7968c6を維持。 [実施範囲・具体送付・再開§9.65](#if-standard-three-conditions-prepared-20261114)。
 
-> **11/14最新：本人提示3案の実4B出力を無修補で採用し、隔離DB保存・別プロセス再読・明示Saved・既存RN受口まで接続。** 通常API／worker `c7968c658277ec190c32d5e3913dbde13c01d68a` がLive。先行1／2候補の原本も同版保持。本人案がそろう1〜3候補の限定接続単位は完了。本人案なしの標準RN経路の実3案、条件表示・一般日本語品質・本人利用・AR-07／補助全体は未完。 [実結果・範囲・次§9.64](Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-person-three-fixed-slots-normal-rollout-20261114)。
+> **11/14本人提示3案の先行実績（標準自動3案の後続実績は§9.67）：実4B出力を無修補で採用し、隔離DB保存・別プロセス再読・明示Saved・既存RN受口まで接続。** 通常API／worker `c7968c658277ec190c32d5e3913dbde13c01d68a` がLive。先行1／2候補の原本も同版保持。本人案がそろう1〜3候補の限定接続単位は完了。本人案なしの標準RN経路の実3案、条件表示・一般日本語品質・本人利用・AR-07／補助全体は未完。 [実結果・範囲・次§9.64](Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-person-three-fixed-slots-normal-rollout-20261114)。
 
 > **11/14・修正起動の明示承認後、実2取得・復元・同状態の保存再読まで完了。本文反復の改善は0。** 送信済み62,086byte・3fileは無変更／再送付0、1child／1loadで新2＋前後4対照＋health2GET、閉鎖後105.175913秒。通常／Analysis前後全文bytes一致、元args／env／cwd／2鍵・source／重みを保ってPID98755へ復元。新2 rawは旧2と全byte同一で、3省略候補は未使用。実raw無修補の2独立fork保存・非生成再読、canonical8／3hash・quota各1・原source／Emlis不変。旧保存ともcanonical8同一のため新native実行0。通常selector OFF、一般編集品質・通常経路／本人端末は未完。 [詳細§9.53](#piece-topic-editorial2-actual-unchanged-20261114)。
 
@@ -15,14 +15,14 @@
 ---
 doc_id: cocolon.cmee.auxiliary_asset_reuse.implementation_design.20261108
 title: "CMEE 補助経路の活用作業 — 全必要資産の回収・改修・商品接続 詳細設計"
-revision_date: "2026-11-14 JST"
+revision_date: "2026-11-15 JST"
 decision_owner: Mash
 implementation_owner: Karen
 status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Section9.67: standard no-person-options actual IF3 accepted; same-raw isolated SQL save/re-read/Saved/RN validated; normal API and worker7f51 Live. This bounded automatic3 integration unit closed. Continue general quality and remaining auxiliary work under weekly5; build/device deferred, no further GPU execution authorized by consumed once."
+current_next: "Section9.68: genuine full-prefix Emlis updates feed only active original clauses, surviving prior replacements and the selected latest answer to Piece. Preserve separate source envelopes and all-prefix SQL checks; IF confirmed Saved marker belongs to the same set/scenario. Final source/test/normal rollout evidence is in9.68. Continue remaining general quality and auxiliary work under weekly5; build/device deferred; no new GPU/training/retry in this unit."
 runtime_effect_of_this_document: 0
 ---
 
@@ -452,11 +452,11 @@ AR-01で既存試行の候補比較を再利用し、AR-04／05では作品・ma
 | AR-01 | 現naturalの主体・所有者・否定・時点・留保を、旧失敗・意味比較・共通原因分析で改善。EM-01a/b | 現6境界と正常な短文／省略で、同入力の誤読を解消または明確に減らし、自然さ・別題材・既成功・保存再読を保持。検出増加／無出力だけでは完了しない | 継続中。新24実生成の4版は通常不採用。c6555fd5で疑問符なしの確認質問の保存抜けを修復、250局所PASS。同24rawは旧24保存→新22保存／2拒否、受理本文不変。全体の意味修復は未完 |
 | AR-02 | 現naturalの任意問い・回答・訂正・撤回・frameと、完了応答後の具体的な本人訂正。11/12採用仕様は§6.1。EM-02a/b、03b | 全plan最大3問、初期ON・前回選択保持、短い受け止め→回答後応答、0／1／2問終了・skip・上限時の不明保持、訂正対象と本人説明の二つの入力、説明不足時の未確定保持、対象だけ更新、撤回後の残存意味、同版再読、既存参照権利 | 最大3問・設定・二入力訂正・有効更新／失効と下流接続は通常DB／API反映済み（§9.55／62）。一般問い判断・本人説明の読取・自然な本文と本人一巡は未完。研究hint未採用 |
 | AR-03 | 適格履歴の意味ある利用。EM-03a/b | 同一／別場面・変化・無関係・訂正前を区別し、適切な履歴が今回へ効く。失効材料を使わない | 現related_contextと失効材料の再認可を継承。今回の意味利用全体は未完 |
-| AR-04 | 一人称・欄・役割等の限定改善、最新適格回答／訂正の意味を既存Piece作者と独立保存検査へ接続 | 原材料→本文→保存再読・同版画像、一般文章化・単独伝達と有効更新の保持 | §9.61の通常反映を継承し、§9.62で共有有効意味・分析材料依存を通常反映。一般本文品質・model通常採用・本人一巡は未完 |
+| AR-04 | 一人称・欄・役割等の限定改善、最新適格回答／訂正の意味を既存Piece作者と独立保存検査へ接続 | 原材料→本文→保存再読・同版画像、一般文章化・単独伝達と有効更新の保持 | §9.61／62を継承し、§9.68で全prefixの先行REVISE／WITHDRAWから有効原節・有効先行置換・明示最新補足を分離sourceのまま既存作者／保存へ接続し通常反映。3block等の境界・一般本文品質・model通常採用・本人一巡は残る |
 | AR-05 | 分析の本人基準・役割／選択・記録間関係と、項目・関係線への本人訂正。AN-03a/b/c、04 | 原記録→意味→図／全文→両端根拠の対応、再出現／変化／不明の正しさ、訂正対象と本人説明からの読み直し・再読 | source duties・有効訂正、項目／線への二入力訂正と次回分析材料・独立根拠を実装し通常DB／APIへ反映（§9.62）。本人基準・条件差・記録間意味の品質、配布／本人一巡は未完 |
 | AR-06 | Emlis観測材料、訂正・削除・権利、長い蓄積と月次。EM-04/05、AN-02/06/08/10 | 本人sourceから材料を渡し、失効・分割範囲・当時版を保持。生成本文を本人事実にしない | 本人原根拠材料をnatural OBSと同時保存し三中核へ接続（§9.62）。成立意味GENERATED／未対応NOT_GENERATED・UNASSESSED。長履歴分割・跨ぐ関係・全量意味品質は未完 |
-| AR-07 | IF／Saved等の商品固有の残る意味保持責務。既存AN／PC残件 | 仮想・本人選択意向・観測を分離し、成立した経路で出力と保存を確認 | 本人提示の実1／2／3候補各1setと明示Saved計3件を隔離保存再読。新3候補の同raw・production DTO・既存RN受口と通常API反映は§9.64。標準RN自動3案・条件表示・一般品質・本人利用・AR-07全体は未完 |
-| AR-08 | 実証できた共通能力の通常適用と全体確認。EM-05/06/07等 | 採用版の意味保持・自然さ・権利・中断復帰・保存再読・実際の待ち時間／費用。未採用範囲は理由と残差を保持 | §9.55／61を継承し、§9.62の5migrationを継承し、§9.64でAPI／worker c7968c6・4B IF受口を通常反映。build／TestFlight／本人実機は保留、一般品質・補助全体完了は未認定 |
+| AR-07 | IF／Saved等の商品固有の残る意味保持責務。既存AN／PC残件 | 仮想・本人選択意向・観測を分離し、成立した経路で出力と保存を確認 | 本人提示の実1／2／3候補各1set・Saved各1件を継承。本人案なし標準自動3案も実4B限定1set・同raw隔離保存再読・Saved1件・既存RN受口と7f51通常反映まで§9.67で成立。条件／負荷／未知は既存表示、同display内の確認済みSaved印は§9.68。一般品質・本人利用・AR-07全体は未完 |
+| AR-08 | 実証できた共通能力の通常適用と全体確認。EM-05/06/07等 | 採用版の意味保持・自然さ・権利・中断復帰・保存再読・実際の待ち時間／費用。未採用範囲は理由と残差を保持 | §9.55／61／62と§9.67の限定IF3・7f51反映を継承。今回は§9.68のPiece有効source・既存SQL3arm拡張を適用し、API／worker fc333bffが双方Live。RN印はソース差分で、build／TestFlight／本人実機は保留。稼働監視を実job成功・一般品質・補助全体完了へ換算しない |
 
 現在の実施順と作業単位は§9.1を正本とする。AR-04の固定実3件の読取拒否修復・9隔離保存／非生成再読は完了として継承し、一般編集品質・同版画像・通常適用等の残件を、他coreの能力移管と並行して減らす。旧73生成・先行native成功・今回の実7callを繰り返さない。
 
@@ -1766,22 +1766,22 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 設計、実装、局所検証、実モデル、通常稼働、実DB／端末、正式受入れを分けて記録する。華恋の全文確認は、明白な不足をMashへ戻さない事前確認であり、本人の正式受入れを代行しない。
 
 <a id="112-現在の進行欄"></a>
-### 11.2 現在の進行欄（11/14・§9.64の本人提示3案保存／通常反映後）
+### 11.2 現在の進行欄（11/15・§9.68のPiece有効source通常反映後）
 
-全体主枠は§9.54／第11回§5。共有有効意味・natural原根拠材料・マップ本人訂正の通常DB／API反映単位は完了。API／worker c7968c6、RN source8382ef5。本人提示の実1／2／3候補各1setと明示Saved計3件の隔離保存再読が成立。標準RN自動3案・条件表示・一般品質は未完。build／TestFlight／本人実機はMash指示で後回し。
+全体主枠は§9.54／第11回§5。共有有効意味・natural原根拠材料・マップ本人訂正の通常DB／API反映単位を継承し、今回は§9.68の全prefixから後続Pieceへ有効sourceを渡す接点を通常反映。API／workerの現稼働はfc333bff8a76775d6fe14ed299ea769d22d35c9dで双方Live。SQL履歴20261114192124はローカルCLI版20261114190006と同名の今回migrationに対応する。本人提示1／2／3候補の各限定実績に加え、標準自動3案の実4B限定1set・同raw隔離保存再読・Saved1件と通常7f51反映は§9.67の成立資産であり、現稼働版による新実4B結果ではない。条件／負荷／未知は既存RN表示。今回の保存印は同display内の確認済みSavedへ限定するRNソース差分で、build／TestFlight／本人実機はMash指示で後回し。一般品質・全多段更新・補助全体は未完。
 
 | 単位 | 成立した接続と通常適用 | 残る必要工事 |
 |---|---|---|
 | AR-01 | 既存原文・役割・時点の能力、共有active meaningをnaturalの既定材料へ接続 | 一般本文での役割反転・付加・時点誤読と語り方の改善。研究hint／新重みは未採用 |
 | AR-02 | 最大3問・設定・skip／終了、二入力訂正・有効更新／依存失効・OBS同時保存を通常DB／APIへ接続 | 一般自由文の問い判断・回答後本文、配布／本人一巡 |
 | AR-03 | 本人原根拠・適格履歴・frame対象と本人判断・下流失効を保持 | 実4Bでの過去／今回と拒否／修正の扱い、一般履歴品質 |
-| AR-04 | 本人原入力・最新適格回答／訂正の意味を既存Piece作者・保存検査へ接続し、分析材料の版・資格も再照合 | 一般文章化・反復・単独伝達、model selector通常採用と本人一巡 |
+| AR-04 | 本人原入力・最新適格回答／訂正を既存作者・保存検査へ接続。§9.68では全prefixの先行更新から有効原節・先行置換・選択最新補足を分離sourceで渡し、SQL3RPCで全checkpointを再照合 | 3block超過・原入力active0・混在操作等は拒否。一般文章化・反復・単独伝達、model selector通常採用と本人一巡 |
 | AR-05 | source duties・有効訂正、現在mapの項目／線への二入力訂正と次回分析材料・独立根拠表示を通常反映 | 本人基準・条件差・記録間関係の意味品質、配布／本人利用 |
 | AR-06 | natural原入力・適格回答／訂正の原根拠材料をOBSと同時保存。成立意味GENERATED、未対応／未解決NOT_GENERATED・UNASSESSED | full_source_semantic_coverage=false。長履歴の分割・跨ぐ関係、一般的な全量意味理解は未完。月次当時版を保持 |
-| AR-07 | Premiumの現在map＋本人意向／制約、必要確認、1〜3候補、明示Saved、再読削除・受領復帰をAPI／RN／SQLへ実装し通常反映 | 本人提示の実1／2／3候補各1setと明示Saved計3件を隔離保存再読。新3候補の同raw・production DTO・既存RN受口と通常API反映は§9.64。標準RN自動3案・条件表示・一般品質・本人利用・AR-07全体は未完 |
-| AR-08 | §9.55／61を継承。対象5migration、通常API／worker c7968c6と4B IF受口を反映。通常対照全文一致 | build／TestFlight／本人実機は明示保留。成立能力の通常化を進め、補助全体完成と混同しない |
+| AR-07 | Premiumの現在map＋本人意向／制約、必要確認、1〜3候補、明示Saved、再読削除・受領復帰をAPI／RN／SQLへ実装し通常反映 | 本人提示の実1／2／3候補各1set・Saved各1件を継承。本人案なし標準自動3案も実4B限定1set・同raw隔離保存再読・Saved1件・既存RN受口と7f51通常反映まで§9.67で成立。条件／負荷／未知は既存表示、同display内の確認済みSaved印は§9.68。一般品質・本人利用・AR-07全体は未完 |
+| AR-08 | §9.55／61／62・限定IF3の§9.67を継承。今回の既存SQL3arm拡張とAPI／worker fc333bffの双方Liveは§9.68。標準IF3実原本・通常対照全文一致は前単位の証拠 | 起動・queue poll・未認証HTTPの確認を認証済み生成／保存や実job成功へ数えない。build／TestFlight／本人実機は明示保留。一般品質・補助全体完成は未認定 |
 
-実原本・検証・配置・不成立の最新は§9.64（§9.62／63を継承）。研究モデル通常採用・正式受入れ・補助全体完了は認定しない。
+現在の実装・検証・配置・未対応は§9.68、標準自動IF3の実原本・同raw保存再読・旧7f51通常反映は§9.67へ戻る（§9.62〜66を履歴として継承）。今回の新実4B・学習・再試行0。研究モデル通常採用・正式受入れ・補助全体完了は認定しない。
 
 ## 12. 今後の指示と再開方法
 
@@ -3923,3 +3923,50 @@ UNKNOWNは将来の未観測結果であり、前回の「本人が成果を書�
 同一非公開成果物 [Cocolon_CMEE_IF_StandardThree_Prepared_20261114.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-097030f8a6b08191873a7c3b42532f8b_2f7470f963808191aaebf050935e72de&account_id=personal) **version2／325,904bytes／SHA `56d1a8c18f165f71ad7b56d6aef27992812eecda81592931c6a7fea53c1c3a54`** へ、旧68memberを全byte保持し、今回原本・独立読解・SQL再読・RN・配置・CIを追記保存。旧負例／合成preparedと今回actualを分けた。鍵／env／DB page／実ユーザー本文／重み／browser screenshotを含めない。
 
 **本人案なし標準自動3案の限定接続・同raw保存再読・通常反映の作業単位は完了。** 既存公開API／DB／RN／owner配置は変更せず、前節5pathのsource採用でSTRUCTURE_MAP_DELTA_NONE。三中核の通常材料・認証・保存の境界を保持。AR-07の一般品質・正式本人受入れと、他AR／補助全体は未完。次は週次§5に沿う残件を進め、この1setを全体完成に数えない。管理評価61.625％・11/21判定・12/6候補を据置き、build／TestFlight／本人実機保留を再承認条件にしない。今回承認の追加一回は消費済み。
+
+
+<a id="piece-effective-round-sources-and-if-saved-marker-20261115"></a>
+## 9.68 2026-11-15 — 先行本人更新を後続Pieceの有効sourceへ接続し、IF保存意向を候補カードへ表示
+
+### 全体方針と今回の単位
+
+週次§5の本人更新を三中核で一貫して扱う作業と、成立した能力を同じ単位で通常へ出す作業を継承。前節§9.67の標準自動IF3は限定接続単位として完了しており、同じ実生成を繰り返さない。今回は、先行する真正REVISE／WITHDRAWがあるため後続回答からPieceを作れなかった接点を、既存の共有意味・source adapter・作者・SQLへ通す。IFの候補本文・条件／負荷／未知は既に表示されるため表示欠落として新設せず、明示保存後にどの候補を残したかを示す表示だけ補う。
+
+### 有効な本人sourceだけをPiece作者へ渡す
+
+自然Q3の第2／3回答で、選択した最新ANSWERだけを見る旧ADD前提では、先行訂正・撤回の有効状態を作品へ運べなかった。既存Emlis ownerから各round prefixのrequestとcheckpointを再導出し、保存イベント／receipt／順序／ANSWER／QUESTION／操作対象・原根拠／時点・有効／失効の全値一致を確認する。AI応答本文は本人sourceへ採用しない。Analysisのtyped解釈成立をPieceの前提にせず、共有Emlisで解決済みの本人更新を使う。
+
+| 既存owner | 今回の責任 |
+|---|---|
+| `piece_v2_source_adapter.py` | 真正な2／3prefixを再導出し、残る原入力の節・失効していない先行REVISEの置換節・明示選択した最新補足だけをhandoffへ保持。先行ADDは資格照合だけに使い、無関係な本文へ連結しない。先行置換を後続で再訂正／撤回した場合は有効な節だけ残す |
+| `cocolon_meaning_experience_engine/piece_refined.py` | 原入力と各本人回答のenvelope／絶対scalar・UTF8根拠を分離したまま、active originalとprior revisionsを既存意味・planへ渡す。訂正syntax内の旧引用・locatorは新事実にしない |
+| `cocolon_meaning_experience_engine/preparation_sources.py`／`piece_model_source.py` | 有効な原入力の範囲と、それぞれのANSWERの原source ID／役割を保持して既存prepared・作者材料へ投影。凍結preparedを変更せず、原入力の偽連結sourceを作らない |
+| `piece_v2_store.py`／既存SQL3関数 | private expected source stateに`meaning_checkpoints`（2／3prefix全件）を渡し、source lock下で保存済みの各checkpointと原回答・依存・失効を再照合。preview発行／見た目変更／保存の途中で旧prefixへ戻したり、先行targetをすり替えたりできないよう既存境界へ接続 |
+
+原入力七項目・全ANSWER envelope・元source／record／版・原文hash／絶対根拠範囲・選択した最新回答identityを保持する。全原文は安全確認・lineageに残し、失効節／無関係ADD／旧引用を作者本文へ渡さない。旧ADDのprivate bytesは新fieldを空追加せず保持。既存唯一作者／独立S7、short_essay等の形式資格、最大3body block、recipe／renderer・公開契約・保存／quota責任を変えない。3blockを超える構成、原入力の有効節が0、未解決・複数操作混在・現文法で完全性を証明できない更新等は拒否を維持し、全多段・一般自由文訂正を完成扱いしない。
+
+### SQLと通常経路の証拠
+
+今回のmigration `20261114190006_piece_natural_effective_round_sources.sql` を使い、`piece_issue_preview_v2`／`piece_mutate_preview_visual_v2`／`piece_save_v2` の既存private expectation照合だけを拡張。公開RPC署名・top-level引数・ACL／RLS・table・原入力／eventの保存形は変更しない。従来のlatest-only `meaning_checkpoint` と新all-prefix `meaning_checkpoints` は同時指定しない。
+
+既存正例4構成は、先行REVISE→最新ADD、先行WITHDRAW→最新ADD、先行置換への後続REVISE、先行置換への後続WITHDRAW。正常な作者本文に未変更原節と有効置換／最新補足を含み、失効した旧節を含まないことを確認したうえで、実装の通常preview→明示保存→owner再読へ接続する。初期の4SQL PASSは隔離・合成認証／providerの証拠で、新実4Bや実ユーザー一巡ではない。全最終検証・否定条件・既存回帰の結果は下記に記録する。検証過程の失敗logは保全し、途中成功だけで最終全成功としない。
+
+既存 `.github/workflows/piece-b2b-isolated-postgres.yml` に、`test_b05_effective_round_source_contract.py` と `test_b05_effective_round_sql_fence.py` を既存検証集合として登録する。前工程で同じ既存suiteが10分job枠の途中で取消となったため、job全体の枠だけ10→20分へ変更し、途中までの実行を全成功へ数えず最後まで確認する。これはCI実行枠であり、製品生成・モデル／GPU・一回承認・retry・通常の待機時間上限を変更するものではない。検査内容・採否を緩めず、新しいchecker／workflow familyは追加しない。新commitのCI終状態は最終検証欄に記録する。
+
+- 今回のAPI採用commit：`fc333bff8a76775d6fe14ed299ea769d22d35c9d`
+- 最終検証と範囲：関連Python集合2,952 PASS（205＋2,653＋通常保存76＋新source／SQL18、重複再実行を除く）、RN24 PASS、前工程の実raw由来DTOを使うRN表示1 PASS。追加の3source材料は既存serving schemaへCPUで受理。新GPU／学習0。初回Piece CI43631803822は全25pytest invocationの合算5,387 PASS／1 FAILで、既存保存負例の初回Emlis startがRESPONSE_FAILEDとなり、当該負例の変更操作前に停止。原因情報が出ておらず断定しない。同じstep34第一集合33fileの隔離一回は2,465 PASS。診断だけをtest commit a0a5b420f14004e8143611cbd5674e5b8f6943f0へ追加し、同時刻source／as_ofの不適格境界も確認した。fixture作成時刻の前提修復と最終CI確認は進行中で、この確認単位はまだ閉じない。最終結果は本欄を差分更新する。
+- 必要migration／通常API・worker反映と確認：migration piece_natural_effective_round_sourcesを稼働履歴20261114192124へ一回適用（CLI原本20261114190006）。3既存RPCだけ全prefix expectationへ接続し、4関数の署名／ACL／SECURITY DEFINER／search_pathを前後一致確認、旧5引数preview本文は不変。API dep-dbsbbac9v7es73c7urtgは2026-11-14 19:26:47 UTC、worker dep-dbsbc10ae00c73d3supgは19:27:48 UTCに同じfc333でLive。health／bootstrap200、IF／Saved未認証401＋private,no-store、Piece本人履歴未認証401＋既存no-store。新worker起動とqueue GET200、failed171据置き、限定時間内の新error0を確認。実job成功・実ユーザー保存一巡の確認ではない。
+
+model source OFFの既存作者による通常経路と、model用の分離source投影を区別する。後者の材料確認／合成provider保存成功を、実4B本文品質改善へ数えない。今回のGPU生成・学習・再試行0。新しい提供key、別provider、新renderer、新しい意味管理serviceを追加しない。
+
+### IFの保存した関心を同じ候補へ示す
+
+既存RN `components/selfStructure/AnalysisIfRouteDialog.js` は、Saved API応答の`source_scenario_set_ref`／`selected_scenario_ref`が送信した選択と一致した場合だけ、同じ候補カードへ「保存した関心の方向」を表示する。別set／scenarioの成功応答や、結果不明の保存から印を作らない。複数候補の明示保存は共存し、同setの再GET後も確認済み印を保持、削除成功／404で該当印を除く。本人・表示contextの失効時は旧応答を再利用しない。印は同じ表示状態で保存成功を確認したものに限り、別の起動・端末で以前に保存した履歴へ推測で付けない。
+
+Savedは実行・達成・人格へ昇格しない。元観測map／IF候補／保存意向の別identity、任意メモ、非生成再読／削除は既存contractを継承する。RN検証は上記最終結果へ含めるが、build／TestFlight／本人端末確認には換算しない。標準自動3案の実4B1set・同raw保存再読・7f51通常反映は§9.67の成立資産として保持する。
+
+### 残る範囲
+
+この単位は、成立済みの本人更新を後続作品へ運ぶ接点と、確認済み保存意向の表示を閉じるものである。一般的な訂正理解・任意の多段／依存を跨ぐ更新、Emlis本人判断／時点の本文品質、Pieceの複写を越える一般編集品質、Analysisの記録間意味・長履歴・本人利用、研究model selector／重みの採用、正式受入れ・補助全体は未完。§5の三中核をまとめる主枠を維持し、単語修正や同じhint比較の直列へ戻さない。build／TestFlight／本人実機の保留、11/21判定・12/6提出可能候補・管理評価61.625％を維持する。
+
+STRUCTURE_MAP_DELTA_PRESENT：既存shared meaning→Piece source adapter／plan／保存競合の有効source境界と、RNのSaved表示状態を更新。新owner・公開API／DB／RN wire・table・依存を増やさず、全体地図01A、Piece02、Analysis03、CMEE04と全製品00を同じ資料単位で更新する。

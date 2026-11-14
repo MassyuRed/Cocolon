@@ -1,4 +1,4 @@
-> **11/14最新：本人提示3案の実4B出力を無修補で採用し、隔離DB保存・別プロセス再読・明示Saved・既存RN受口まで接続。** 通常API／worker `c7968c658277ec190c32d5e3913dbde13c01d68a` がLive。先行1／2候補の原本も同版保持。本人案がそろう1〜3候補の限定接続単位は完了。本人案なしの標準RN経路の実3案、条件表示・一般日本語品質・本人利用・AR-07／補助全体は未完。 [実結果・範囲・次§9.64](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-person-three-fixed-slots-normal-rollout-20261114)。
+> **11/15最新：先行する本人訂正・撤回を、後続回答から作るPieceの有効sourceへ接続。** 真正なEmlisの全prefixを再導出し、残る原入力の節・失効していない先行置換節・明示選択した最新補足だけを別sourceのまま既存作者／保存／再読へ渡す。IFでは同じ候補set／scenarioのSaved応答が確認できたカードへ「保存した関心の方向」を表示する。標準自動IF3の限定実生成・保存再読・7f51通常反映は成立済み。今回API版・最終検証・通常反映は§9.68、一般意味／編集品質・全多段更新・本人実機・補助全体は未完。build／TestFlight保留を維持。 [有効意味の受渡し§9.68](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-effective-round-sources-and-if-saved-marker-20261115)。
 
 > **11/14・既存補助能力の通常DB／API適用を前進：** 問い設定、二入力訂正履歴、frame対象と依存失効、Piece最新独立ADD等の9migrationとAPI99dbdaabを稼働反映。稼働8関数本文・ACL／RLSを照合し、healthz／bootstrapは200。統合PR30のiOS build・TestFlight uploadは自動承認審査の送信前拒否で未実行。DB／API反映単位は完了。Mash明示で配布用アプリbuild・TestFlight送信・実機確認を後回しとし、同版通常本人利用は別の未確認項目で保持して補助作業を続ける。研究hint・重み・selectorの一括採用や新モデル呼出しは0。[通常反映の範囲・次§9.55](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#auxiliary-normal-db-api-rollout-20261114)。各coreの作者・採否・保存責任は維持し、全補助経路完了へ換算しない。
 
@@ -2263,10 +2263,10 @@ source_ref七項目・PUBLIC7参照・source_lineage、Piece唯一作者・既�
 | Piece | `piece_v1c.py`／`piece_semantic_admission.py`／`piece_v2_source_adapter.py`／`piece_v2_generation.py`。同じ有効意味を既存作者・独立保存検査へ渡し、共有分析材料の版・資格・依存を再照合する |
 | マップ本人訂正 | `map_interpretation_correction.py`／`analysis_map_correction_service.py`／`api_self_structure.py`。対象map／項目・線と本人の二入力を別sourceへ束縛し、保存・更新queue・次回semantic材料・根拠表示へ接続。旧月次は不変 |
 | IF／Saved | `if_route_contracts.py`／`if_route_realizer.py`／`analysis_if_model_source.py`／`analysis_if_route_service.py`／`analysis_if_route_store.py`／`api_analysis_if_routes.py`。仮想候補と明示保存意向を別artifactとし、受領receiptからの復帰・idempotency・権利再確認・非生成再読・削除を所有 |
-| 4B受口 | `ai/tools/serve_emlis_natural_reply.py`。IF専用namespaceで完全引用・空配列を保持。要求数と同数の異なる本人案がある場合だけ、全anchor＋該当本人案＋UNKNOWNのobject tupleと接続先を生成時に束縛。本人案不足／重複は従来汎用経路を維持。CPU採否・ordinary／Pieceは不変。実3候補の同raw保存再読と残差は§9.64 |
+| 4B受口 | `ai/tools/serve_emlis_natural_reply.py`。IF専用namespaceで全anchor・既知条件全文・UNKNOWNと接続を保持。本人案不足時のchoiceは真正PERSON_ALTERNATIVE又はSIMULATED_EXTENSIONとし、BRANCH_INTENTをUSER_CHOICEへコピーしない。旧canonical指示と受領rawの同版再開を保持。CPU採否・ordinary／Pieceは不変。本人案なし標準3案の実1setと通常7f51反映は§9.67、一般品質は未完 |
 | RN | `CumulativeWatashiMapView.js`→`MapInterpretationCorrectionDialog.js`／`mapCorrectionContract.js`→`analysisMapCorrectionApi.js`。IFは`AnalysisIfRouteDialog.js`／`ifRouteContract.js`／`analysisIfRouteApi.js`。本人訂正をAI根拠と分け、月次と現在の入口を区別する |
 
-STRUCTURE_MAP_DELTA_PRESENT。新しい本人source、AI引用control、原根拠、AI解釈、仮想候補、保存した意向の責任を分離する。各coreの作者・保存・権利・失効は既存ownerに保持。通常反映と実原本の最新は補助設計§9.64。本人提示の実1／2／3候補各1setと明示Saved計3件の隔離保存再読が成立。標準RN自動3案・条件表示・一般意味／文章品質・本人利用は未完。
+STRUCTURE_MAP_DELTA_PRESENT。新しい本人source、AI引用control、原根拠、AI解釈、仮想候補、保存した意向の責任を分離する。各coreの作者・保存・権利・失効は既存ownerに保持。IFの通常反映と実原本は補助設計§9.67まで成立。本人提示の実1／2／3候補各1setに加え、標準自動3案の実1setとSaved1件の隔離保存再読が成立。条件／負荷／未知は既存RNで表示。今回の全prefix本人更新と確認済みSaved表示は§9.68、一般意味／文章品質・本人利用は未完。
 
 ## 2026-11-14 — IFの完全引用と同版再開
 
@@ -2275,3 +2275,14 @@ STRUCTURE_MAP_DELTA_PRESENT。新しい本人source、AI引用control、原根�
 ## 2026-11-14 — 本人提示3案の生成構造
 
 本人案が要求数そろう場合だけ、全anchorと本人案とUNKNOWNを既存IFの生成slotへ分ける。固定LMFEのobject prefixItems対応はIF専用namespaceに限定し、CPU採否・ordinary／Piece・保存形式は変更しない。旧4版の凍結preparedと受領rawはそのcanonicalのまま再開。実3候補set1＋Saved1の隔離保存再読と通常API／worker c7968c6反映は補助設計§9.64。STRUCTURE_MAP_DELTA_NONE。
+
+
+## 2026-11-15 — 全prefixの本人更新を既存Pieceへ移管し、Saved表示はRNへ保持
+
+共有 `prepare_emlis_meaning` は本人の意味更新を所有し、各coreの作者・何を言うか・保存／権利責任を奪わない。Piece adapterは自然Q3の2／3prefix全件を保存chainから再導出し、active原節・まだ有効な先行置換節・明示選択した最新補足を、元source／envelope／絶対根拠と別roleのまま `piece_refined.py`／`preparation_sources.py` へ渡す。無関係ADD・失効節・旧訂正引用を本文へ戻さず、原入力七項目と全回答は安全／lineageに保持する。Analysis typed成立をPieceの入口条件へ追加しない。
+
+既存 `piece_v2_store.py`／SQL3RPCはprivate `meaning_checkpoints` 全prefixをsource lockで再検査する。別の意味管理service・保存基盤・共通本文作者を作らず、3body block・既存形式／S7・公開wire・ACL／RLSを維持する。原入力active0・混在操作・未証明構文等の未対応は残す。
+
+IFの「保存した関心の方向」は同set／scenarioの確認済みSaved応答に由来するRN状態で、観測mapや本人の実行・達成へ昇格しない。今回のAPI採用版・最終検証・通常反映は[補助設計§9.68](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-effective-round-sources-and-if-saved-marker-20261115)。新GPU／学習／再試行0。一般品質・本人実機・補助全体の未完、配布保留を継承する。
+
+STRUCTURE_MAP_DELTA_PRESENT：shared意味→Piece source／plan／保存競合と、IFの保存意向表示の既存接点を拡張。新しいcore・author・公開contractは追加しない。
