@@ -615,9 +615,16 @@ export function createPieceCreateController(configuration = {}) {
       const entry = Object.freeze({ operation: captured, intent,
         visualSelection: Object.freeze(selectedVisual(preview.visual_recipe)) });
       if (!store.remember(entry)) {
-        restoreSaveRecovery({ expectedUserId: captured.expectedUserId,
+        const restored = restoreSaveRecovery({ expectedUserId: captured.expectedUserId,
           savedInputId: captured.request.source_ref.source_input_id,
-          idempotencyKey: contextOperation.idempotencyKey, saveEnabled });
+          idempotencyKey: contextOperation.idempotencyKey, saveEnabled,
+          expectedStage: captured.request.source_ref.emlis_observation_stage,
+          expectedObservationIdentity: captured.request.source_ref.emlis_observation_result_identity });
+        if (!restored) {
+          boundaryCode = 'PIECE_CONFLICT';
+          clearAttempt();
+          notify();
+        }
         return;
       }
       saveRecoveryEntry = { store, entry };
@@ -626,12 +633,17 @@ export function createPieceCreateController(configuration = {}) {
     await runSave();
   }
 
-  function restoreSaveRecovery({ savedInputId, expectedUserId, idempotencyKey, saveEnabled: allowSave }) {
+  function restoreSaveRecovery({ savedInputId, expectedUserId, idempotencyKey, saveEnabled: allowSave,
+      expectedStage, expectedObservationIdentity }) {
     if (disposed || saveIntent || cancelIntent) return false;
     const store = configuration.getSaveRecovery?.();
     const entry = store?.find(expectedUserId, savedInputId);
     if (!entry) return false;
     const captured = entry.operation;
+    const source = captured.request.source_ref;
+    if ((expectedStage === 'corrected_observation' || source.emlis_observation_stage === 'corrected_observation') &&
+        (source.emlis_observation_stage !== expectedStage ||
+          source.emlis_observation_result_identity !== expectedObservationIdentity)) return false;
     const binding = preparePiecePreviewRequest(captured.request, { expectedUserId, idempotencyKey });
     enabled = false;
     contextOperation = null;

@@ -10,6 +10,8 @@ const OWNER = '10000000-0000-4000-8000-000000000001';
 const INPUT = '20000000-0000-4000-8000-000000000002';
 const ANSWER = '30000000-0000-4000-8000-000000000003';
 const OTHER_ANSWER = '30000000-0000-4000-8000-000000000004';
+const OBSERVATION = '40000000-0000-4000-8000-000000000005';
+const OTHER_OBSERVATION = '40000000-0000-4000-8000-000000000006';
 const NOW = Date.parse('2026-10-08T10:00:00Z');
 const clone = value => JSON.parse(JSON.stringify(value));
 const tick = () => new Promise(resolve => setImmediate(resolve));
@@ -23,6 +25,9 @@ function reference(pre = false) {
 }
 const refinedReference = (answer = ANSWER) => ({ ...reference(true),
   emlis_observation_stage: 'refined_observation', supplemental_answer_identity: answer });
+const correctedReference = (observation = OBSERVATION) => ({ ...reference(),
+  emlis_observation_stage: 'corrected_observation', emlis_observation_result_identity: observation });
+const correctedSelection = () => ({ expectedObservationIdentity: OBSERVATION, expectedStage: 'corrected_observation' });
 function load({ send, session } = {}) {
   const calls = [], sessions = [];
   const context = vm.createContext({ AbortController, Date,
@@ -242,5 +247,124 @@ for (const value of [
   await assert.rejects(a.requestPiecePreview({ source_ref: value, requested_format: null,
     visual_selection: { theme_id: null, aspect_ratio: null, branding_mode: null } },
   opts({ idempotencyKey: 'explicit-refined-preview' })), closed('PIECE_SOURCE_NOT_ELIGIBLE'));
+  assert.equal(a.calls.length, 0); assert.equal(a.sessions.length, 0);
+});
+
+test('the chosen corrected observation keeps a seven-field GET and explicit preview request', async () => {
+  const raw = correctedReference(), expected = previewFixture();
+  const a = load({ send: async (_url, sent) => ({ status: 200,
+    json: async () => sent.method === 'GET' ? raw : expected }) });
+  const source_ref = await a.requestPieceSourceRef(INPUT, opts(correctedSelection()));
+  assert.equal(a.calls.length, 1, 'the source read does not start a preview');
+  const [url, sent] = a.calls[0];
+  assert.equal(url, '/emotion/piece/source-ref/' + INPUT);
+  assert.equal(sent.method, 'GET'); assert.equal(sent.body, undefined);
+  assert.equal(sent.headers['Idempotency-Key'], undefined);
+  assert.equal(sent.headers['Cache-Control'], 'no-store');
+  assert.deepEqual(clone(source_ref), correctedReference());
+  assert.equal(Object.keys(source_ref).length, 7); assert.ok(Object.isFrozen(source_ref));
+  raw.emlis_observation_result_identity = OTHER_OBSERVATION;
+  assert.equal(source_ref.emlis_observation_result_identity, OBSERVATION);
+  const request = { source_ref, requested_format: null,
+    visual_selection: { theme_id: null, aspect_ratio: null, branding_mode: null } };
+  await a.requestPiecePreview(request, opts({ idempotencyKey: 'explicit-corrected-preview' }));
+  assert.equal(a.calls.length, 2);
+  assert.equal(a.calls[1][0], '/emotion/piece/preview');
+  assert.deepEqual(JSON.parse(a.calls[1][1].body), clone(request));
+  assert.deepEqual(Object.keys(JSON.parse(a.calls[1][1].body)).sort(),
+    ['requested_format', 'source_ref', 'visual_selection']);
+  assert.deepEqual(a.sessions, [OWNER, OWNER, OWNER, OWNER]);
+});
+
+for (const selection of [
+  { expectedObservationIdentity: OBSERVATION },
+  { expectedStage: 'corrected_observation' },
+  { expectedObservationIdentity: null, expectedStage: 'corrected_observation' },
+  { expectedObservationIdentity: undefined, expectedStage: 'corrected_observation' },
+  { expectedObservationIdentity: '', expectedStage: 'corrected_observation' },
+  { expectedObservationIdentity: 'latest', expectedStage: 'corrected_observation' },
+  { expectedObservationIdentity: '00000000-0000-0000-0000-000000000000', expectedStage: 'corrected_observation' },
+  { expectedObservationIdentity: 'ABCDEFAB-0000-4000-8000-000000000005', expectedStage: 'corrected_observation' },
+  { expectedObservationIdentity: OBSERVATION.replaceAll('-', ''), expectedStage: 'corrected_observation' },
+  { expectedObservationIdentity: OBSERVATION, expectedStage: undefined },
+  { expectedObservationIdentity: OBSERVATION, expectedStage: null },
+  { expectedObservationIdentity: OBSERVATION, expectedStage: 'normal_observation' },
+  { expectedObservationIdentity: OBSERVATION, expectedStage: 'pre_question_observation' },
+  { expectedObservationIdentity: OBSERVATION, expectedStage: 'refined_observation' },
+  { ...correctedSelection(), supplementalAnswerIdentity: ANSWER },
+]) test('an incomplete, incoherent or mixed corrected selection is rejected before IO', async () => {
+  const a = load();
+  await assert.rejects(a.requestPieceSourceRef(INPUT, opts(selection)), closed('PIECE_REQUEST_INVALID'));
+  assert.equal(a.calls.length, 0); assert.equal(a.sessions.length, 0);
+});
+
+for (const returned of [reference(), reference(true), refinedReference(), correctedReference(OTHER_OBSERVATION),
+  { ...correctedReference(), question_need_decision_identity: 'unexpected-question' },
+  { ...correctedReference(), supplemental_answer_identity: ANSWER },
+  { ...correctedReference(), emlis_observation_result_identity: 'not-an-event-uuid' },
+  { ...correctedReference(), raw_observation: 'PRIVATE' }]) {
+  test('a corrected selection never adopts a changed observation, different stage or expanded source', async () => {
+    const a = load({ send: async () => ({ status: 200, json: async () => returned }) });
+    await assert.rejects(a.requestPieceSourceRef(INPUT, opts(correctedSelection())), closed('PIECE_TEMPORARILY_UNAVAILABLE'));
+    assert.equal(a.calls.length, 1);
+    assert.equal(a.calls[0][0], '/emotion/piece/source-ref/' + INPUT);
+    assert.equal(a.calls[0][1].method, 'GET');
+    await tick(); assert.equal(a.calls.length, 1);
+  });
+}
+
+for (const selection of [{}, { supplementalAnswerIdentity: ANSWER }]) {
+  test('a fresh original or selected refined read cannot acquire an unsolicited corrected source', async () => {
+    const a = load({ send: async () => ({ status: 200, json: async () => correctedReference() }) });
+    await assert.rejects(a.requestPieceSourceRef(INPUT, opts(selection)), closed('PIECE_TEMPORARILY_UNAVAILABLE'));
+    assert.equal(a.calls.length, 1);
+    assert.equal(a.calls[0][1].method, 'GET');
+  });
+}
+
+test('the selected observation and stage are captured before Auth can mutate caller options', async () => {
+  const options = opts(correctedSelection());
+  const a = load({ session: async (_owner, n) => {
+    if (n === 1) {
+      options.expectedObservationIdentity = OTHER_OBSERVATION;
+      options.expectedStage = 'normal_observation';
+      options.supplementalAnswerIdentity = ANSWER;
+    }
+    return 'synthetic-session';
+  }, send: async () => ({ status: 200, json: async () => correctedReference() }) });
+  const result = await a.requestPieceSourceRef(INPUT, options);
+  assert.equal(result.emlis_observation_result_identity, OBSERVATION);
+  assert.equal(result.emlis_observation_stage, 'corrected_observation');
+  assert.equal(a.calls[0][0], '/emotion/piece/source-ref/' + INPUT);
+});
+
+test('caller mutation cannot authorize a newer corrected observation returned after Auth', async () => {
+  const options = opts(correctedSelection());
+  const a = load({ session: async (_owner, n) => {
+    if (n === 1) options.expectedObservationIdentity = OTHER_OBSERVATION;
+    return 'synthetic-session';
+  }, send: async () => ({ status: 200, json: async () => correctedReference(OTHER_OBSERVATION) }) });
+  await assert.rejects(a.requestPieceSourceRef(INPUT, options), closed('PIECE_TEMPORARILY_UNAVAILABLE'));
+  assert.equal(a.calls.length, 1);
+});
+
+test('a rejected corrected selection has no latest-source or unbound preview fallback', async () => {
+  const a = load({ send: async () => ({ status: 422, json: async () => ({ code: 'PIECE_SOURCE_NOT_ELIGIBLE' }) }) });
+  await assert.rejects(a.requestPieceSourceRef(INPUT, opts(correctedSelection())), closed('PIECE_SOURCE_NOT_ELIGIBLE'));
+  await tick(); assert.equal(a.calls.length, 1);
+  assert.equal(a.calls[0][0], '/emotion/piece/source-ref/' + INPUT);
+  assert.equal(a.calls[0][1].method, 'GET');
+});
+
+for (const value of [
+  { ...correctedReference(), question_need_decision_identity: 'unexpected-question' },
+  { ...correctedReference(), supplemental_answer_identity: ANSWER },
+  { ...correctedReference(), emlis_observation_result_identity: 'not-an-event-uuid' },
+  { ...correctedReference(), emlis_observation_result_identity: '00000000-0000-0000-0000-000000000000' },
+]) test('preview requires the corrected source UUID and null question/answer pair before IO', async () => {
+  const a = load();
+  await assert.rejects(a.requestPiecePreview({ source_ref: value, requested_format: null,
+    visual_selection: { theme_id: null, aspect_ratio: null, branding_mode: null } },
+  opts({ idempotencyKey: 'invalid-corrected-preview' })), closed('PIECE_SOURCE_NOT_ELIGIBLE'));
   assert.equal(a.calls.length, 0); assert.equal(a.sessions.length, 0);
 });

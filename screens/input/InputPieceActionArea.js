@@ -42,9 +42,12 @@ function contextStamp(value) {
 function savedInputStamp(props) {
   const value = props.savedInput;
   const selectedAnswer = value && Object.prototype.hasOwnProperty.call(value, 'supplementalAnswerIdentity');
+  const selectedObservation = value && (Object.prototype.hasOwnProperty.call(value, 'expectedObservationIdentity') ||
+    Object.prototype.hasOwnProperty.call(value, 'expectedStage'));
   if (Object.prototype.hasOwnProperty.call(props, 'context') || !value ||
       typeof value !== 'object' || Array.isArray(value) ||
-      Object.keys(value).length !== (selectedAnswer ? 4 : 3) ||
+      (selectedAnswer && selectedObservation) ||
+      Object.keys(value).length !== (selectedObservation ? 5 : selectedAnswer ? 4 : 3) ||
       !['savedInputId', 'expectedUserId', 'idempotencyKey'].every(key =>
         Object.prototype.hasOwnProperty.call(value, key))) return null;
   const { savedInputId, expectedUserId, idempotencyKey } = value;
@@ -58,8 +61,15 @@ function savedInputStamp(props) {
   if (selectedAnswer && (typeof value.supplementalAnswerIdentity !== 'string' ||
       !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(value.supplementalAnswerIdentity) ||
       value.supplementalAnswerIdentity === '00000000-0000-0000-0000-000000000000')) return null;
+  if (selectedObservation && (!Object.prototype.hasOwnProperty.call(value, 'expectedObservationIdentity') ||
+      !Object.prototype.hasOwnProperty.call(value, 'expectedStage') ||
+      typeof value.expectedObservationIdentity !== 'string' ||
+      !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(value.expectedObservationIdentity) ||
+      value.expectedObservationIdentity === '00000000-0000-0000-0000-000000000000' ||
+      value.expectedStage !== 'corrected_observation')) return null;
   return JSON.stringify([savedInputId, expectedUserId, idempotencyKey,
-    ...(selectedAnswer ? [value.supplementalAnswerIdentity] : [])]);
+    ...(selectedObservation ? [null, value.expectedObservationIdentity, value.expectedStage]
+      : selectedAnswer ? [value.supplementalAnswerIdentity] : [])]);
 }
 
 export default class InputPieceActionArea extends React.Component {
@@ -312,8 +322,9 @@ export default class InputPieceActionArea extends React.Component {
 
   restoreSaveRecovery() {
     if (!this.props.saveRecovery || !this.savedMode || !this.isCurrent()) return false;
-    const [savedInputId, expectedUserId, idempotencyKey] = JSON.parse(this.boundSavedInputStamp);
+    const [savedInputId, expectedUserId, idempotencyKey, , expectedObservationIdentity, expectedStage] = JSON.parse(this.boundSavedInputStamp);
     return this.controller.restoreSaveRecovery({ savedInputId, expectedUserId, idempotencyKey,
+      ...(expectedStage === undefined ? {} : { expectedObservationIdentity, expectedStage }),
       saveEnabled: this.saveEnabled() });
   }
 
@@ -324,7 +335,7 @@ export default class InputPieceActionArea extends React.Component {
     const view = this.controller.getView();
     if (view.previewRestartToken || ['cancel', 'save'].includes(view.retryKind)) return;
     // Capture the exact saved ID, owner and future POST key before any await.
-    const [savedInputId, expectedUserId, originalKey, supplementalAnswerIdentity] = JSON.parse(this.boundStamp.slice(6));
+    const [savedInputId, expectedUserId, originalKey, supplementalAnswerIdentity, expectedObservationIdentity, expectedStage] = JSON.parse(this.boundStamp.slice(6));
     const idempotencyKey = this.sourceIdempotencyKey || originalKey;
     let abort;
     try { abort = new AbortController(); }
@@ -342,7 +353,8 @@ export default class InputPieceActionArea extends React.Component {
     if (this.sourceAttempt !== attempt || !this.isCurrent()) return;
     try {
       const source_ref = await requestPieceSourceRef(savedInputId, { expectedUserId, signal: abort.signal,
-        ...(supplementalAnswerIdentity === undefined ? {} : { supplementalAnswerIdentity }) });
+        ...(supplementalAnswerIdentity == null ? {} : { supplementalAnswerIdentity }),
+        ...(expectedStage === undefined ? {} : { expectedObservationIdentity, expectedStage }) });
       if (this.sourceAttempt !== attempt || !this.isCurrent()) return;
       const prepared = preparePiecePreviewRequest({ source_ref, requested_format: null,
         visual_selection: { theme_id: null, aspect_ratio: null, branding_mode: null } },

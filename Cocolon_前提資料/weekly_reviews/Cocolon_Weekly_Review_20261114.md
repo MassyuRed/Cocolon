@@ -891,3 +891,10 @@ API97af253を先行反映後、IF生成時のorigin束縛を修正しda9460bへ�
 IFの条件／負荷／未知表示は既存実装。今回追加する印は同set／scenarioの確認済みSaved応答だけに基づき、複数共存・再GET保持・削除／404除去を扱う。実行・達成・人格へ昇格しない。API採用版・最終検証・必要migration／通常反映の全結果は[補助設計§9.68](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-effective-round-sources-and-if-saved-marker-20261115)へ集約する。新GPU／学習／再試行0、build／TestFlight／本人実機保留、§5の三中核をまとめる方針・公開日未定・12/6候補・61.625％を維持。一般本文品質／全多段更新・正式本人受入れ・補助全体を完成へ数えない。
 
 **追加CI観測（source b2ac790）：** [既存RN CI43634012760](https://github.com/MassyuRed/Cocolon/actions/runs/43634012760)ではRN契約1,790件が成功したが、iOS V4 native検査は1成功／19失敗でworkflow全体はfailure。今回の通常DB／API能力の検証と分け、画像合格未認定・原因未解決と記録する。過去commitの限定画像成功を取り消す記録ではない。native source変更0・再実行0、build／TestFlight／本人実機保留を維持。直接根拠・artifact・変更path比較は[補助設計§9.68](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-effective-round-sources-and-if-saved-marker-20261115)。
+
+
+## 24. 11/15 — 応答後の二入力訂正からPieceへの接続
+
+本人の説明を実ANSWERへ偽装せず、proper correction sourceとして未変更原節・有効置換だけを既存Piece作者／独立S7・保存再読へ渡す。7key source_refにcorrected_observationを追加し、RNでは表示していたOBSを明示選択、別訂正へのGET／結果不明POST・保存復元の乗換えを止める。初回訂正1・ANSWER0・完全引用REVISE／WITHDRAW、short_essay／3blockの限定範囲。一般自由文・複数訂正／回答併存は未完。
+
+3planの訂正／撤回6作品と二欄1作品の隔離保存再読、本文・payload／recipeとhash、quota各1・原入力／Emlis不変を確認。合成Auth／recipient provider・PGliteの範囲で、新4B・本人保存・画像成功へ加算しない。取得時／SQL時の時系列検査差、S7親sourceの借用拒否を同じ単位で修復。最終CI・必要migration／指定配置は[補助設計§9.69](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-corrected-observation-source-20261115)へ集約する。通常反映の完了はその実結果で確定する。build／TestFlight／本人実機保留、model selector OFF、新GPU／学習0、§5の主枠・補助全体未完を維持。

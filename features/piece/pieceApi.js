@@ -108,8 +108,11 @@ function requestBody(value) {
     source.emlis_observation_stage === 'pre_question_observation' && text(source.question_need_decision_identity));
   const refinedSource = source.emlis_observation_stage === 'refined_observation' &&
     text(source.question_need_decision_identity) && pieceUuid(source.supplemental_answer_identity);
+  const correctedSource = source.emlis_observation_stage === 'corrected_observation' &&
+    source.question_need_decision_identity === null && source.supplemental_answer_identity === null &&
+    pieceUuid(source.emlis_observation_result_identity);
   if (source.source_input_version !== 'emlis.current_input_bundle.v1' ||
-      !(originalSource || refinedSource)) reject('PIECE_SOURCE_NOT_ELIGIBLE');
+      !(originalSource || refinedSource || correctedSource)) reject('PIECE_SOURCE_NOT_ELIGIBLE');
   if (snapshot.requested_format !== null && !FORMATS.includes(snapshot.requested_format)) {
     reject('PIECE_FORMAT_NOT_ELIGIBLE');
   }
@@ -273,6 +276,15 @@ async function requestPieceData(value, options = {}, savedInputId = null, visual
     signal = options.signal;
     checkAbort(signal);
     const sourceRead = savedInputId !== null;
+    const selectedObservation = Object.prototype.hasOwnProperty.call(options, 'expectedObservationIdentity');
+    const selectedStage = Object.prototype.hasOwnProperty.call(options, 'expectedStage');
+    const expectedObservationIdentity = options.expectedObservationIdentity;
+    const expectedStage = options.expectedStage;
+    // Bind the displayed corrected observation inside RN, before Auth/HTTP.
+    // These expectations never become GET query or request body fields.
+    if ((selectedObservation || selectedStage) && (!sourceRead || !selectedObservation || !selectedStage ||
+        !pieceUuid(expectedObservationIdentity) || expectedStage !== 'corrected_observation' ||
+        Object.prototype.hasOwnProperty.call(options, 'supplementalAnswerIdentity'))) reject('PIECE_REQUEST_INVALID');
     const selectedAnswer = sourceRead && Object.prototype.hasOwnProperty.call(options, 'supplementalAnswerIdentity')
       ? options.supplementalAnswerIdentity : null;
     if (sourceRead && Object.prototype.hasOwnProperty.call(options, 'supplementalAnswerIdentity') &&
@@ -323,9 +335,11 @@ async function requestPieceData(value, options = {}, savedInputId = null, visual
         visual_selection: { theme_id: null, aspect_ratio: null, branding_mode: null } })); }
       catch { reject('PIECE_TEMPORARILY_UNAVAILABLE'); }
       const ref = request.source_ref;
-      if (ref.source_input_id !== savedInputId || (selectedAnswer === null
-        ? ref.supplemental_answer_identity !== null || !['normal_observation', 'pre_question_observation'].includes(ref.emlis_observation_stage)
-        : ref.emlis_observation_stage !== 'refined_observation' || ref.supplemental_answer_identity !== selectedAnswer)) {
+      if (ref.source_input_id !== savedInputId || (selectedObservation
+        ? ref.emlis_observation_stage !== expectedStage || ref.emlis_observation_result_identity !== expectedObservationIdentity
+        : selectedAnswer === null
+          ? ref.supplemental_answer_identity !== null || !['normal_observation', 'pre_question_observation'].includes(ref.emlis_observation_stage)
+          : ref.emlis_observation_stage !== 'refined_observation' || ref.supplemental_answer_identity !== selectedAnswer)) {
         reject('PIECE_TEMPORARILY_UNAVAILABLE');
       }
       return freeze(ref);

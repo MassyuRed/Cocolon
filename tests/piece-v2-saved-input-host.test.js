@@ -63,6 +63,159 @@ function stackRecovery() {
   return vm.runInNewContext(helper.replace('export ', '') + '\ncreatePieceSaveRecovery')(OWNER);
 }
 
+const CORRECTED_OBSERVATION = '60000000-0000-4000-8000-000000000006';
+const OTHER_CORRECTED_OBSERVATION = '60000000-0000-4000-8000-000000000007';
+function correctedRef(observation = CORRECTED_OBSERVATION) {
+  return { ...ref(), emlis_observation_stage: 'corrected_observation',
+    emlis_observation_result_identity: observation };
+}
+function correctedFixture({ observation = CORRECTED_OBSERVATION, send, ...options } = {}) {
+  let u;
+  u = fixture({ ...options, send: send || (async (_url, sent) =>
+    packet(sent.method === 'GET' ? correctedRef(observation) : u.expected)) });
+  u.host.props.savedInput = { ...u.host.props.savedInput, expectedObservationIdentity: observation,
+    expectedStage: 'corrected_observation' };
+  return u;
+}
+
+test('a chosen corrected observation stays bound through source GET and explicit preview without new wire fields', async () => {
+  const u = correctedFixture(); u.mount(); assert.equal(u.calls.length, 0);
+  await resolver(u);
+  assert.equal(u.calls.length, 1); assert.equal(u.host.sourcePhase, 'ready');
+  assert.equal(u.calls[0][0], `/emotion/piece/source-ref/${INPUT}`);
+  assert.equal(u.calls[0][1].body, undefined);
+  assert.equal(Object.hasOwn(u.calls[0][1], 'expectedObservationIdentity'), false);
+  u.host.start(); u.host.start(); await tick();
+  assert.equal(u.calls.length, 2);
+  const request = JSON.parse(u.calls[1][1].body);
+  assert.deepEqual(request.source_ref, correctedRef());
+  assert.equal(Object.keys(request.source_ref).length, 7);
+  assert.doesNotMatch(u.calls[1][1].body, /expectedObservationIdentity|expectedStage|correction_id/);
+  assert.equal(u.body().children.join(''), u.expected.piece_text);
+  u.host.componentWillUnmount();
+});
+
+test('incomplete or expanded corrected navigation never reads a source or falls back to original', async () => {
+  for (const mutate of [
+    s => { delete s.expectedStage; }, s => { delete s.expectedObservationIdentity; },
+    s => { s.expectedStage = 'normal_observation'; }, s => { s.expectedObservationIdentity = 'latest'; },
+    s => { s.expectedObservationIdentity = '00000000-0000-0000-0000-000000000000'; },
+    s => { s.supplementalAnswerIdentity = ANSWER; }, s => { s.correction_id = 'PRIVATE'; },
+    s => { s.explanation = 'PRIVATE'; },
+  ]) {
+    const u = correctedFixture(); mutate(u.host.props.savedInput);
+    u.mount(); await resolver(u); u.host.start(); await tick();
+    assert.equal(u.calls.length, 0, mutate.toString());
+    assert.equal(u.body(), undefined); u.host.componentWillUnmount();
+  }
+});
+
+for (const changed of [correctedRef(OTHER_CORRECTED_OBSERVATION), ref(), ref(INPUT, true, ANSWER)]) {
+  test('a changed source response cannot replace the displayed correction selection', async () => {
+    const u = correctedFixture({ send: async () => packet(changed) });
+    u.mount(); await resolver(u); u.host.start(); await tick();
+    assert.equal(u.calls.length, 1); assert.equal(u.host.sourcePhase, 'unavailable');
+    assert.equal(u.body(), undefined); u.host.componentWillUnmount();
+  });
+}
+
+test('an explicit source recheck cannot acquire a newer corrected observation', async () => {
+  let reads = 0;
+  const u = correctedFixture({ send: async (_url, options) => options.method === 'GET'
+    ? packet(correctedRef(++reads === 1 ? CORRECTED_OBSERVATION : OTHER_CORRECTED_OBSERVATION))
+    : packet({ code: 'PIECE_CONFLICT' }, 409) });
+  u.mount(); await resolver(u); u.host.start(); await tick();
+  const failed = u.host.controller.getView(); assert.ok(failed.sourceRefreshToken);
+  await u.host.refreshSavedInput(failed.sourceRefreshToken); u.host.start(); await tick();
+  assert.deepEqual(copy(u.calls.map(([, sent]) => sent.method)), ['GET', 'POST', 'GET']);
+  assert.equal(u.calls[2][0], `/emotion/piece/source-ref/${INPUT}`);
+  assert.equal(u.host.props.savedInput.expectedObservationIdentity, CORRECTED_OBSERVATION);
+  assert.equal(u.host.sourcePhase, 'unavailable'); assert.equal(u.body(), undefined);
+  u.host.componentWillUnmount();
+});
+
+test('an unknown corrected preview outcome retries only the same source and key without another GET', async () => {
+  let posts = 0, u;
+  u = correctedFixture({ send: async (_url, options) => options.method === 'GET'
+    ? packet(correctedRef()) : ++posts === 1
+      ? packet({ code: 'PIECE_TEMPORARILY_UNAVAILABLE' }, 503) : packet(u.expected) });
+  u.mount(); await resolver(u); u.host.start(); await tick();
+  u.host.retry(); await tick();
+  assert.deepEqual(copy(u.calls.map(([, sent]) => sent.method)), ['GET', 'POST', 'POST']);
+  assert.equal(u.calls[1][1].body, u.calls[2][1].body);
+  assert.equal(u.calls[1][1].headers['Idempotency-Key'], u.calls[2][1].headers['Idempotency-Key']);
+  assert.equal(JSON.parse(u.calls[2][1].body).source_ref.emlis_observation_result_identity, CORRECTED_OBSERVATION);
+  u.host.componentWillUnmount();
+});
+
+test('a corrected observation A to B to A round trip invalidates an in-flight source read', async () => {
+  const seed = fixture(), pending = seed.deferred();
+  const u = correctedFixture({ send: async () => pending.promise });
+  u.mount(); const loading = resolver(u); await tick();
+  const a = { ...u.host.props.savedInput };
+  u.host.props.savedInput = { ...a, expectedObservationIdentity: OTHER_CORRECTED_OBSERVATION };
+  u.host.componentDidUpdate();
+  u.host.props.savedInput = a; u.host.componentDidUpdate();
+  pending.resolve(packet(correctedRef())); await loading; u.host.start(); await tick();
+  assert.equal(u.calls.length, 1); assert.equal(u.body(), undefined);
+  assert.equal(u.host.sourcePhase, 'idle'); u.host.componentWillUnmount();
+});
+
+test('a changed corrected selection hides the ready preview and requires a new explicit source action', async () => {
+  const u = correctedFixture(); u.mount(); await resolver(u); u.host.start(); await tick();
+  assert.ok(u.body());
+  u.host.props.savedInput = { ...u.host.props.savedInput, expectedObservationIdentity: OTHER_CORRECTED_OBSERVATION };
+  assert.equal(u.body(), undefined);
+  u.host.componentDidUpdate(); u.host.start(); await tick();
+  assert.equal(u.calls.length, 2); assert.equal(u.body(), undefined);
+  u.host.componentWillUnmount();
+});
+
+for (const [firstKind, nextKind] of [['corrected', 'same'], ['corrected', 'different'],
+  ['corrected', 'original'], ['original', 'corrected']]) {
+  test(`save recovery retains the chosen correction identity (${firstKind} to ${nextKind})`, async () => {
+    const seed = fixture(), recovery = stackRecovery();
+    let saves = 0, source = firstKind === 'corrected' ? correctedRef() : ref();
+    const send = async (url, options) => {
+      if (options.method === 'GET') return packet(source);
+      if (!url.endsWith('/save')) return packet(seed.expected);
+      if (++saves > 1) return packet(seed.saveReceipt({ idempotency_replayed: true }));
+      return packet({ code: 'PIECE_TEMPORARILY_UNAVAILABLE' }, 503);
+    };
+    const first = firstKind === 'corrected' ? correctedFixture({ send, admitSave: true, saveEnabled: true })
+      : fixture({ send, admitSave: true, saveEnabled: true });
+    first.host.props = { ...first.host.props, saveRecovery: recovery };
+    first.mount(); await resolver(first); first.host.start(); await tick();
+    await first.startSave();
+    const entry = recovery.find(OWNER, INPUT); assert.ok(entry);
+    first.host.componentWillUnmount();
+    source = nextKind === 'original' ? ref() : correctedRef(nextKind === 'different'
+      ? OTHER_CORRECTED_OBSERVATION : CORRECTED_OBSERVATION);
+    const second = nextKind === 'original' ? fixture({ send, admitSave: true, saveEnabled: true })
+      : correctedFixture({ observation: source.emlis_observation_result_identity, send, admitSave: true, saveEnabled: true });
+    second.host.props = { ...second.host.props, saveRecovery: recovery,
+      savedInput: { ...second.host.props.savedInput, idempotencyKey: 'fresh-explicit-navigation' } };
+    second.mount(); await resolver(second); second.host.start(); await tick();
+    if (nextKind === 'same') {
+      assert.equal(second.calls.length, 0);
+      assert.ok(second.names().includes('同じ保存要求で結果を確認'));
+      second.host.retry(); await tick();
+      assert.equal(second.calls.length, 1); assert.equal(second.calls[0][0], '/emotion/piece/save');
+      assert.equal(second.calls[0][1].body, first.calls[2][1].body);
+      assert.equal(second.host.controller.getView().phase, 'saved');
+    } else {
+      assert.equal(second.calls.length, 2); assert.ok(second.body());
+      await second.startSave(); await tick();
+      assert.equal(second.calls.length, 2, 'a mismatched recovery never replays the old save');
+      assert.equal(second.body(), undefined);
+      assert.equal(second.host.controller.getView().phase, 'unavailable');
+      assert.match(second.host.controller.getView().message, /状態が変わっています/);
+      assert.equal(recovery.find(OWNER, INPUT), entry, 'the old confirmation remains recoverable by its exact source');
+    }
+    second.host.componentWillUnmount();
+  });
+}
+
 for (const leaveInFlight of [false, true]) {
   test(`leaving Piece creation ${leaveInFlight ? 'in flight' : 'after a lost save ACK'} restores only same-key confirmation`, async () => {
     const seed = fixture(), pending = seed.deferred(), recovery = stackRecovery();

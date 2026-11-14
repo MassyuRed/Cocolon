@@ -1,3 +1,5 @@
+> **11/15現実装差分：完了応答への初回二入力訂正を、本人説明の別sourceとしてPieceへ接続。** 公開source_refは7keysのまま`corrected_observation`を追加し、現在CORRECTED OBSを固定、question／supplemental identityはnull。完全引用REVISE／WITHDRAWの限定受渡しで、一般自由文の訂正理解・返答品質・正式受入れは未完。SQL／通常反映／CIを含む最終結果は[補助設計§9.69](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-corrected-observation-source-20261115)へ集約し、build／TestFlight／本人実機保留を維持する。
+
 > **11/14・既存の問い設定／二入力訂正履歴／frame対象と失効を通常DB・APIへ反映：** 必要な既存9migrationを依存順に適用し、対象8関数の本文とACL／RLSを照合。API99dbdaabは11:52 JSTにLive。統合PR30のRNは既存sourceに含まれるが、iOS build・TestFlight uploadは自動承認審査の送信前拒否で未実行、最新配布8001。DB／API反映単位は完了。Mash明示により配布用アプリbuild・TestFlight送信・実機確認は後回しとし、同版本人一巡・実返答品質は別の未確認項目で保持する。配布／実機待ちで補助作業を止めない。研究hint・重み・selectorは未採用／OFF、モデル呼出し0。[通常反映の範囲・次§9.55](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#auxiliary-normal-db-api-rollout-20261114)。owner path・core責務は不変、稼働状態のみ更新。
 
 > **11/13・別記録への反復frame判断対象と失効を接続：** APIb8466c6a。本人が実際に見た対象を、最新判断と一致する一意な操作記録から既存context読取へ渡す。判断元の編集／削除・操作消失時は保存応答を非生成で抑止し、生成中保存とPiece作成／見た目変更／保存も拒否する。受取先での再修正・保存receipt再開を含む495固有件成功（新25）。合成provider・隔離SQLの確認であり、実4B品質・本番SQL／配置・本人端末は未完。 [範囲・検証・残件§9.40](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-cross-record-frame-target-20261113)。
@@ -70,7 +72,7 @@
 ---
 doc_id: cocolon_emlis_ai_current_structure
 title: "EmlisAI構造 — Current Structure"
-revision_date: "2026-10-10 JST"
+revision_date: "2026-11-15 JST"
 document_role: "EMLIS_AI_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -253,6 +255,10 @@ Q1は、今回の入力を読んだ初回観測とフォローを先に返し、
 
 
 ## 0. Current conclusion
+
+**11/15現実装差分：完了応答への初回二入力訂正を、本人説明の別sourceとしてPieceへ接続。** 公開source_refは7keysのまま`corrected_observation`を追加し、現在CORRECTED OBSを固定、question／supplemental identityはnull。完全引用REVISE／WITHDRAWの限定受渡しで、一般自由文の訂正理解・返答品質・正式受入れは未完。SQL／通常反映／CIを含む最終結果は[補助設計§9.69](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-corrected-observation-source-20261115)へ集約し、build／TestFlight／本人実機保留を維持する。
+
+以下のQ1段階の結果はその当時の履歴として保持する。
 
 2026-09-10現在はQ1のFree相当thread callableを既存本文作者へ接続し、意味更新・訂正・時点と実本文を検証済み。追加7ownerとアプリ境界は冒頭Q1地図、詳細はAPI既存 `CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` のQ1節、正本 `02_emlis_v1a_detailed_design.md` の「2026-09-10 Q1」、`05_json_schema_and_versioning.md` の「Emlis thread v1 profile」を使う。未公開・商品NON_PASSを維持する。
 
@@ -2052,6 +2058,12 @@ RN4a103688で既存EmlisThreadModal内のPiece入口だけを拡張。表示し�
 
 
 ## 2026-11-13 構造差分 — 完了natural応答への二入力本人訂正
+
+11/15現在、保存された本人説明をPieceへ渡す限定source追加を実装した。`EmlisThreadModal`の明示「説明を含めてピースを作成」から、RN内に固定したcurrent CORRECTED OBS UUID／corrected stageと既存source GETの返却値を一致させる。新query・新公開field・QUESTION／ANSWERへの偽装はない。初回訂正1件・ANSWER0・COMPLETED／FINALだけを候補とし、不足／未反映・複数訂正・回答混在は候補化しない。
+
+本人説明のroleは`USER_INTERPRETATION_CORRECTION`、AI対象はcontrolであり、Emlis本文を作品sourceへコピーしない。原七項目と訂正envelope・絶対範囲を保持し、完全引用による単一REVISE／WITHDRAWから残原節と有効な本人置換節だけを既存Piece作者へ渡す。原active節nonempty・最大3body block・short_essay／独立S7を維持する。corrected専用private4key lineageとsource fenceを通常保存境界へ接続する実装で、既存normal／refinedを変更しない。同OBS／stage以外の保存不明復元も拒否する。実証の最終採否・SQL／通常反映／CIは[§9.69](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-corrected-observation-source-20261115)へ戻る。新実4B・一般自由文理解・本人一巡の完成ではない。
+
+以下は11/13時点の実結果と未接続履歴であり、上記の限定source追加の現状と区別する。
 
 当回訂正は全プラン、以後は既存の履歴／本人フレーム権利というMash判断委任の採用方針。通常応答の二入力、対象版の束縛、別source保存、再生成／非生成再読、適格履歴への反映を既存ownerで接続した。実装と検証・未接続は[補助経路§9.28](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-post-reply-correction-20261113)。STRUCTURE_MAP_DELTA_PRESENT、新製品file0。実4Bの訂正後9応答は取得済み、二候補各3件の同source隔離SQL保存・非生成再読は一致したが意味保持は未達。両候補不採用、f5実装維持。次は訂正説明の別source意味読取り／完成本文の独立逆読取りの未接続境界。今回STRUCTURE_MAP_DELTA_NONE、稼働DB／Render・端末は未確認、Premium frame／Analysis／Piece訂正利用は未接続。[実結果と再開位置](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-post-reply-correction-actual4b-20261113)。
 

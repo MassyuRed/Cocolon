@@ -22,7 +22,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Section9.68: genuine full-prefix Emlis updates feed only active original clauses, surviving prior replacements and the selected latest answer to Piece. Preserve separate source envelopes and all-prefix SQL checks; IF confirmed Saved marker belongs to the same set/scenario. Normal DB/API closure and final CI evidence are in9.68. Continue remaining general meaning/editorial quality, unsupported updates and auxiliary work under weekly5; build/device deferred; no new GPU/training/retry in this unit."
+current_next: "Section9.69: completed first two-input interpretation correction with no answers feeds only effective original and person replacement to Piece; proper correction role and OBS identity, locked event/prefix fence, existing author/S7/save/reread. Continue weekly5 remaining general meaning/editorial quality, complex updates and long-history capability; build/device deferred; no new GPU/training/retry."
 runtime_effect_of_this_document: 0
 ---
 
@@ -1785,9 +1785,9 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 
 ## 12. 今後の指示と再開方法
 
-**11/14・現在の再開先：§9.54の四作業を維持する。** §9.64で本人提示3案の全anchor／本人案／UNKNOWN・仮想接続を同raw隔離保存再読・明示Saved・通常API／workerまで閉じた。先行1／2原本も保持する。この成立単位の再生成や既適用migrationを再周回しない。
+**11/15・現在の再開先：§9.54／第11回§5の四作業を維持する。** 標準自動IF3・本人条件表示と限定同raw保存再読／通常反映は§9.67、後続Pieceの全prefix有効sourceと同display内Saved印は§9.68で成立した。これらの実生成や既適用migrationを周回しない。今回の応答後二入力訂正→Pieceの採用範囲・通常適用は§9.69へ戻る。
 
-残るIF工事は本人案なしの標準RN入力からの実3候補、費用等の条件表示と一般日本語品質・本人利用。共有有効意味の一般理解、過去／今回・本人判断の使い分け、長履歴分割・跨ぐ関係も引き続き必要。build／TestFlight／本人実機はMash指示で後回し。他作業の停止条件にしない。AR-07／補助全体と正式受入れは未完。
+残件は一般意味・本人宛／作品／地図の内容実現、未対応の複合更新・長履歴分割／跨ぐ関係、一般IF品質と本人利用。条件表示や標準自動3案を未実装へ戻さず、必要能力の未接続・未適用は残す。build／TestFlight／本人実機はMash指示で後回しとし、別能力の作業停止条件にしない。AR-07／補助全体・正式受入れは未完。
 
 [改訂前§12の再開記録](https://github.com/MassyuRed/Cocolon/blob/a770355c7a0518afecdaf80b41a67a323023829c/Cocolon_前提資料/designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#12-今後の指示と再開方法)は履歴。本人更新・素材の資格／有効版・実本文／図／画像・同版保存・通常適用の未完単位から継続し、各局所比較を毎回の続行指示待ちの区切りにしない。
 
@@ -3978,3 +3978,41 @@ Savedは実行・達成・人格へ昇格しない。元観測map／IF候補／�
 この単位は、成立済みの本人更新を後続作品へ運ぶ接点と、確認済み保存意向の表示を閉じるものである。一般的な訂正理解・任意の多段／依存を跨ぐ更新、Emlis本人判断／時点の本文品質、Pieceの複写を越える一般編集品質、Analysisの記録間意味・長履歴・本人利用、研究model selector／重みの採用、正式受入れ・補助全体は未完。§5の三中核をまとめる主枠を維持し、単語修正や同じhint比較の直列へ戻さない。build／TestFlight／本人実機の保留、11/21判定・12/6提出可能候補・管理評価61.625％を維持する。
 
 STRUCTURE_MAP_DELTA_PRESENT：既存shared meaning→Piece source adapter／plan／保存競合の有効source境界と、RNのSaved表示状態を更新。新owner・公開API／DB／RN wire・table・依存を増やさず、全体地図01A、Piece02、Analysis03、CMEE04と全製品00を同じ資料単位で更新する。
+
+
+<a id="piece-corrected-observation-source-20261115"></a>
+## 9.69 2026-11-15 — 応答への二入力本人訂正を、別sourceのPiece作成・保存再読へ接続
+
+### 本人更新と三中核の責任
+
+週次§5.3の未接続を進める。問いへのANSWERの更新（§9.68）と、完了したAI応答への「どの内容ですか？／どう違いましたか？」の訂正は別履歴である。今回のproper sourceは既存InterpretationCorrectionSource／USER_INTERPRETATION_CORRECTION。correction_idをanswer_idへ付け替えず、QUESTION・意味checkpointを合成しない。原入力七項目は不変、AI対象文はlocator/controlのまま、本人説明だけを独立envelope・絶対scalar／UTF8根拠へ保持する。
+
+既存Analysis source freezerと_active_sourcesの原根拠更新責務を再利用する。Analysis graphの生成成功をPiece資格の前提にせず、完全な本人節への一意な引用REVISE／WITHDRAWと有効範囲を再導出する。原入力の残存節＋本人の有効置換だけを既存Piece作者・独立S7へ渡し、旧引用／撤回節／AI対象文を本文へ復活させない。Emlis本人宛本文と解釈UNASSESSED／meaning_updated=falseは元receiptのまま、Pieceのsource証明で書き換えない。一般的な訂正理解を完成扱いしない。
+
+### 現ownerと採用範囲
+
+| owner | 差分 |
+|---|---|
+| piece_v2_source_adapter／preview／source_ref_http | proper corrected handoff、保存済INITIAL→訂正→FINAL receipt→CORRECTED→finishとsource／contextの再導出。7key source_refにcorrected_observationだけを追加しquestion／supplementalはnull、表示対象のOBS identityを保持 |
+| piece_refined／piece_source／piece_v1c・semantic_admission／preparation_sources／piece_model_source | corrected専用private snapshot／本人説明meaning。既存作者・S7・serialized再読を使用、作者向け材料は有効sliceだけ。AI targetや旧引用を送信本文にしない。as_ofは資格時刻でsource identityを変えない |
+| piece_v2_generation／safety_review／content_policy | 新型dispatch、原入力全文と本人説明の個別scan、親sourceからのS7全体再導出。合法な別訂正のchild／plan借用も拒否。short_essayのみ、最大3body blockと旧形式資格を保持 |
+| piece_v2_store／既存3writer／Piece CHECK | private interpretation_correction期待をlocked full events／thread_data／metadata・explanation hashへ照合。prefixを元INITIAL Q3prefix＋proper sourceから独立再導出。既存署名・ACL／RLS・旧5引数preview／quota・時計・context／frame失効を保持 |
+| RN EmlisThreadModal／InputPieceActionArea／pieceApi／PieceCreateController | 「説明を含めてピースを作成」。表示OBS・stageとGETの一致を必須にし、取得途中の別訂正・再確認／結果不明POST／保存復元の乗換えを拒否。query・store keyは追加しない |
+
+対象は初回訂正1件・ANSWER0・完了CORRECTED／FINAL、原active節が残る完全引用REVISE／WITHDRAW。複数訂正・ANSWER併存・曖昧な説明・原active0・3block超過・依存／未証明の更新は拒否を維持する。旧normal／pre_question／refinedのsourceとprivate bytesは継承。lineageはcorrected stageだけbody-free interpretation_correction_source（correction_id／metadata source_version／explanation_commitment／target_event_id）を持ち、本人sourceとAI対象を混ぜない。新サービス・作者・table・model provider・rendererは追加しない。
+
+### 商品結果と検証の範囲
+
+修正前はUIとAPIの両方で二入力訂正後のPieceを作成できなかった。修正後はFree／Plus／Premiumの訂正・撤回各1構成（6作品）と、思考／行動二欄＋本人置換の1作品を既存通常作者から作成し、preview→見た目変更→明示保存→非生成再読へ通した。原「私は本を読みたい。私は仕事を続けたい。」への本人置換では未変更の読書と新しい家族を守る希望だけ、撤回では読書だけが残る。二欄では「私は資料を調べた。」も同じ原fieldで保持。保存本文／payload／recipe・hash一致、quota各1、原入力とEmlis events／thread不変。
+
+これは合成Auth／recipient providerと隔離PGlite0.5.8の証拠で、新実4B・liveでの本人保存・native bitmap成功ではない。model selectorはOFF。model用source分離／無修補受領・graft拒否・別process再導出のCPU確認を、4B本文改善へ換算しない。従来のV4 native 19失敗は未解決、build／TestFlight／本人実機保留を維持。
+
+### 最終検証・通常適用
+
+最終head、CI、migration適用・関数／制約読戻し、API／workerの指定反映とread-only確認を本欄へ確定する。現時点はsource実装・局所検証済みであり、通常DB／APIの最終完了を先取りしない。
+
+### 残る必要能力
+
+本単位は二入力訂正のsource未接続を閉じる範囲で、一般自由文の意味理解・複数訂正／回答併存、Emlisの本人判断・時点、Pieceの複写を越える編集品質、Analysisの記録間関係／長履歴、model selector／重み採用、本人利用・補助全体は未完。§5の主枠、11/21判定・公開日未定／12/6候補・管理評価61.625％を保持する。
+
+STRUCTURE_MAP_DELTA_PRESENT：correctedのsource role／stage、private lineage・保存fenceとRN明示選択を既存ownerへ接続。関連地図・PCE契約・全体現在地・本議事録を同じ資料単位で差分更新する。GPU／学習／再試行0。

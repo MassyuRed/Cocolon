@@ -46,6 +46,7 @@ export function selectedPieceSupplementalAnswer(dto) {
       || !savedIdentity(dto.current_observation?.event_id) || !Number.isInteger(dto.issued_count)
       || dto.issued_count < 1 || dto.issued_count > 3 || dto.pending_question || dto.can_continue
       || dto.can_retry || dto.failure_code || !Array.isArray(dto.timeline)) return null;
+  if (dto.timeline.some(event => event?.kind === 'CORRECTION')) return null;
   const answers = dto.timeline.filter(event => event?.kind === "ANSWER");
   const questions = dto.timeline.filter(event => event?.kind === "QUESTION");
   const current = dto.timeline.filter(event => event?.kind === "OBSERVATION" && event.is_current === true);
@@ -65,14 +66,41 @@ export function selectedPieceSupplementalAnswer(dto) {
   return answers[count - 1];
 }
 
+// Display qualification only. The saved-source API revalidates the private
+// correction and this exact observation before it becomes Piece material.
+export function selectedPieceCorrection(dto) {
+  if (!savedIdentity(dto?.original?.id) || dto.state !== 'COMPLETED' || dto.body_state !== 'FINAL' ||
+      dto.correction_saved !== true || dto.correction_assessment !== 'UNASSESSED' ||
+      dto.answer_saved !== false || dto.issued_count !== 0 || dto.pending_question || dto.can_continue ||
+      dto.can_retry || dto.failure_code || !savedIdentity(dto.current_observation?.event_id) ||
+      !Array.isArray(dto.timeline)) return null;
+  const corrections = dto.timeline.filter(event => event?.kind === 'CORRECTION');
+  const observations = dto.timeline.filter(event => event?.kind === 'OBSERVATION');
+  const current = observations.filter(event => event.is_current === true);
+  if (corrections.length !== 1 || observations.length !== 2 || current.length !== 1 ||
+      dto.timeline.some(event => ['QUESTION', 'ANSWER'].includes(event?.kind)) ||
+      current[0].event_id !== dto.current_observation.event_id || current[0].stage !== 'CORRECTED' ||
+      current[0].round_index !== 0) return null;
+  const correction = corrections[0];
+  const target = observations.find(event => event.event_id === correction.target_event_id);
+  if (!savedIdentity(correction.event_id) || correction.assessment !== 'UNASSESSED' ||
+      typeof correction.text !== 'string' || !correction.text.trim() ||
+      typeof correction.target_text !== 'string' || !correction.target_text.trim() ||
+      !savedIdentity(correction.target_event_id) || !target || target === current[0] ||
+      target.stage !== 'INITIAL' || target.round_index !== 0 ||
+      dto.timeline.indexOf(target) >= dto.timeline.indexOf(correction) ||
+      dto.timeline.indexOf(correction) >= dto.timeline.indexOf(current[0])) return null;
+  return correction;
+}
+
 function originalPieceSource(dto) {
   return !!dto?.current_observation && !dto.correction_saved && !dto.answer_saved && savedIdentity(dto.original?.id)
     && ["FINAL", "PRE_QUESTION"].includes(dto.body_state)
-    && !(dto.timeline || []).some(event => event?.kind === "ANSWER");
+    && Array.isArray(dto.timeline) && !dto.timeline.some(event => ['ANSWER', 'CORRECTION'].includes(event?.kind));
 }
 
 function pieceSourceStamp(dto) {
-  if (!originalPieceSource(dto) && !selectedPieceSupplementalAnswer(dto)) return null;
+  if (!originalPieceSource(dto) && !selectedPieceSupplementalAnswer(dto) && !selectedPieceCorrection(dto)) return null;
   return JSON.stringify([dto.thread_id, dto.revision, dto.original.id, dto.body_state,
     dto.current_observation.event_id, selectedPieceSupplementalAnswer(dto)?.event_id || null]);
 }
@@ -179,6 +207,9 @@ export default function EmlisThreadModal({ thread, colors, navigation, userId = 
     return () => clearTimeout(timer);
   }, [thread.visible, thread.waitForInitial, dto, busy, error, uncertain, thread.rejected, thread.pendingAction, appState, thread.refresh, readStopped]);
   useEffect(() => { if (thread.visible) pendingPiece.current = null; }, [thread.visible, dto?.original?.id]);
+  useEffect(() => {
+    if (dto && pendingPiece.current && pendingPiece.current.sourceStamp !== pieceSourceStamp(dto)) pendingPiece.current = null;
+  }, [dto]);
   useEffect(() => { pendingPiece.current = null; }, [userId, navigation, pieceEnabled]);
   useEffect(() => { if (appState && appState !== "active") pendingPiece.current = null; }, [appState]);
   const readOnly = dto?.can_write === false;
@@ -189,7 +220,7 @@ export default function EmlisThreadModal({ thread, colors, navigation, userId = 
 
   const canCreatePiece = value => !!value && value.pieceEnabled === true && !!value.userId &&
     typeof value.navigation?.getParent?.()?.navigate === "function" && value.navigation?.isFocused?.() !== false && value.thread.visible &&
-    (originalPieceSource(value.thread.dto) || !!selectedPieceSupplementalAnswer(value.thread.dto)) &&
+    (originalPieceSource(value.thread.dto) || !!selectedPieceSupplementalAnswer(value.thread.dto) || !!selectedPieceCorrection(value.thread.dto)) &&
     !value.thread.busy && !value.thread.error && !value.thread.uncertain &&
     !value.thread.rejected && !value.thread.pendingAction;
   const openPiece = () => {
@@ -213,9 +244,12 @@ export default function EmlisThreadModal({ thread, colors, navigation, userId = 
       const bytes = new Uint8Array(16);
       globalThis.crypto.getRandomValues(bytes);
       const supplementalAnswer = selectedPieceSupplementalAnswer(dto);
+      const correction = selectedPieceCorrection(dto);
       const savedInput = Object.freeze({ savedInputId: dto.original.id, expectedUserId: current.userId,
         idempotencyKey: "piece-preview-" + Array.from(bytes, v => v.toString(16).padStart(2, "0")).join(""),
-        ...(supplementalAnswer ? { supplementalAnswerIdentity: supplementalAnswer.event_id } : {}) });
+        ...(supplementalAnswer ? { supplementalAnswerIdentity: supplementalAnswer.event_id } : {}),
+        ...(correction ? { expectedObservationIdentity: dto.current_observation.event_id,
+          expectedStage: 'corrected_observation' } : {}) });
       pendingPiece.current = { savedInput, owner: current.userId, navigation: current.navigation, sourceStamp: pieceSourceStamp(dto) };
       current.thread.close();
       // iOS must finish dismissing this native modal before Piece opens its own.
@@ -230,6 +264,7 @@ export default function EmlisThreadModal({ thread, colors, navigation, userId = 
   const status = error || (readStopped && ["NOT_CREATED", "INITIALIZING", "REFINING"].includes(dto?.state)
     ? "応答の準備が続いています。「応答を確認する」から保存状態を確認できます。" : threadStatus(dto));
   const supplementalAnswer = selectedPieceSupplementalAnswer(dto);
+  const correction = selectedPieceCorrection(dto);
 
   return <Modal visible={thread.visible} transparent animationType={Platform.OS === "ios" ? "fade" : "none"}
     onRequestClose={thread.close} onDismiss={openPiece} supportedOrientations={MODAL_ORIENTATIONS}>
@@ -305,7 +340,12 @@ export default function EmlisThreadModal({ thread, colors, navigation, userId = 
           <Text selectable style={[s.body, textStyle]}>{supplementalAnswer.text}</Text>
           <Text style={[s.description, textStyle]}>元の記録と、この回答を使います。</Text>
         </View>}
-        <CocolonButton disabled={!canCreatePiece(live.current)} onPress={createPiece}>{supplementalAnswer ? "この回答を含めてピースを作成" : "ピースの作成"}</CocolonButton>
+        {correction && <View style={[s.section, { borderColor: colors.CARD_BORDER }]}>
+          <Text style={[s.label, textStyle]}>ピースに含めるあなたの説明</Text>
+          <Text selectable style={[s.body, textStyle]}>{correction.text}</Text>
+          <Text style={[s.description, textStyle]}>元の記録と、この説明を使います。</Text>
+        </View>}
+        <CocolonButton disabled={!canCreatePiece(live.current)} onPress={createPiece}>{correction ? '説明を含めてピースを作成' : supplementalAnswer ? "この回答を含めてピースを作成" : "ピースの作成"}</CocolonButton>
         <CocolonButton variant="secondary" onPress={thread.close} accessibilityLabel="Emlisからの応答を閉じる">閉じる</CocolonButton>
         </ScrollView>
       </View>

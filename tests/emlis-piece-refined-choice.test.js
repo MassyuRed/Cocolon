@@ -12,6 +12,9 @@ const ANSWER = '30000000-0000-4000-8000-000000000003';
 const OTHER_ANSWER = '30000000-0000-4000-8000-000000000004';
 const OBSERVATION = '40000000-0000-4000-8000-000000000004';
 const CREATE = 'この回答を含めてピースを作成';
+const CREATE_CORRECTED = '説明を含めてピースを作成';
+const CORRECTION = '50000000-0000-4000-8000-000000000005';
+const INITIAL_OBSERVATION = '40000000-0000-4000-8000-000000000001';
 
 function loadModal(native = {}) {
   const filename = path.resolve(__dirname, '../screens/input/EmlisThreadModal.js');
@@ -55,6 +58,20 @@ function original() {
     timeline: dto.timeline.filter(e => e.kind !== 'ANSWER'), pending_question: dto.timeline[1] };
 }
 
+function corrected() {
+  return { ...refined(), revision: 8, body_state: 'FINAL', answer_saved: false,
+    answer_assessment: 'NOT_APPLICABLE', meaning_updated: false, issued_count: 0,
+    correction_saved: true, correction_assessment: 'UNASSESSED',
+    timeline: [
+      { event_id: INITIAL_OBSERVATION, kind: 'OBSERVATION', stage: 'INITIAL', round_index: 0,
+        is_current: false, is_disputed: true, text: '以前のAIの読みです。' },
+      { event_id: CORRECTION, kind: 'CORRECTION', round_index: 0, assessment: 'UNASSESSED',
+        text: '私は家族を守りたい。', target_event_id: INITIAL_OBSERVATION, target_text: '以前のAIの読み' },
+      { event_id: OBSERVATION, kind: 'OBSERVATION', stage: 'CORRECTED', round_index: 0,
+        is_current: true, text: '説明後のEmlisの返事です。' },
+    ] };
+}
+
 async function mount(t, { dto = refined(), os = 'ios', props = {}, threadState = {} } = {}) {
   const routes = [], appStateListeners = new Set();
   const native = Object.fromEntries(['ActivityIndicator', 'KeyboardAvoidingView', 'Modal', 'ScrollView', 'Text', 'TextInput', 'View'].map(x => [x, x]));
@@ -83,6 +100,64 @@ async function mount(t, { dto = refined(), os = 'ios', props = {}, threadState =
 }
 
 const { selectedPieceSupplementalAnswer } = loadModal();
+const { selectedPieceCorrection } = loadModal();
+test('only the first saved explanation with its current corrected observation is a visible Piece choice', () => {
+  const dto = corrected();
+  assert.equal(selectedPieceCorrection(dto), dto.timeline[1]);
+  assert.equal(selectedPieceSupplementalAnswer(dto), null);
+  for (const mutate of [
+    d => { d.state = 'REFINING'; }, d => { d.body_state = 'CORRECTION_UNREFLECTED'; },
+    d => { d.body_state = 'CONTEXT_CHANGED'; }, d => { d.correction_assessment = 'NEEDS_DETAIL'; },
+    d => { d.timeline[1].assessment = 'NEEDS_DETAIL'; }, d => { d.correction_saved = false; },
+    d => { d.timeline.push({ ...d.timeline[1], event_id: OTHER_ANSWER }); },
+    d => { d.timeline.push(refined().timeline[2]); }, d => { d.answer_saved = true; },
+    d => { d.issued_count = 1; }, d => { d.current_observation.event_id = OTHER_ANSWER; },
+    d => { d.timeline[2].stage = 'INITIAL'; }, d => { d.timeline[0].is_current = true; },
+    d => { d.timeline[1].target_event_id = OTHER_ANSWER; }, d => { d.timeline[1].text = ' '; },
+    d => { d.can_retry = true; }, d => { d.failure_code = 'save_result_unknown'; },
+  ]) {
+    const invalid = corrected(); mutate(invalid);
+    assert.equal(selectedPieceCorrection(invalid), null, mutate.toString());
+  }
+});
+
+for (const os of ['ios', 'android']) test(`the displayed explanation starts one Piece request bound to the corrected OBS (${os})`, async t => {
+  const h = await mount(t, { os, dto: { ...corrected(), can_write: false } });
+  assert.equal(h.button(CREATE_CORRECTED).props.disabled, false);
+  const texts = h.root.root.findAllByType('Text').map(x => x.props.children);
+  assert.ok(texts.includes('元の記録と、この説明を使います。'));
+  const press = h.button(CREATE_CORRECTED).props.onPress;
+  await act(async () => { press(); press(); });
+  if (os === 'ios') { assert.equal(h.routes.length, 0); await h.dismiss(); await h.dismiss(); }
+  assert.equal(h.routes.length, 1);
+  const selected = h.routes[0][1].params.savedInput;
+  assert.deepEqual(Object.keys(selected).sort(), ['expectedObservationIdentity', 'expectedStage', 'expectedUserId', 'idempotencyKey', 'savedInputId']);
+  assert.equal(selected.expectedObservationIdentity, OBSERVATION);
+  assert.equal(selected.expectedStage, 'corrected_observation');
+  assert.equal(selected.savedInputId, INPUT);
+  assert.doesNotMatch(JSON.stringify(h.routes), /家族|AIの読み|Emlis|50000000|40000000-0000-4000-8000-000000000001/);
+});
+
+test('an unreflected or additional correction cannot fall back to an original Piece action', async t => {
+  for (const mutate of [d => { d.correction_saved = false; }, d => { d.body_state = 'CORRECTION_UNREFLECTED'; },
+    d => { d.correction_assessment = 'NEEDS_DETAIL'; }, d => { d.timeline.push({ ...d.timeline[1], event_id: OTHER_ANSWER }); }]) {
+    const dto = corrected(); mutate(dto);
+    const h = await mount(t, { dto });
+    assert.equal(h.button(CREATE_CORRECTED), undefined);
+    assert.equal(h.button('ピースの作成').props.disabled, true);
+    await act(async () => h.button('ピースの作成').props.onPress()); await h.dismiss();
+    assert.equal(h.routes.length, 0); await h.unmount();
+  }
+});
+
+test('an observed corrected DTO change invalidates dismissal even if an old DTO returns', async t => {
+  const a = corrected(), h = await mount(t, { dto: a });
+  const press = h.button(CREATE_CORRECTED).props.onPress;
+  await act(async () => press());
+  const b = corrected(); b.revision++; b.current_observation.event_id = OTHER_ANSWER; b.timeline[2].event_id = OTHER_ANSWER;
+  await h.thread({ dto: b }); await h.thread({ dto: a });
+  await h.dismiss(); assert.equal(h.routes.length, 0);
+});
 test('saved first answer is selected by its event identity, independently of the logical question identity', () => {
   const dto = refined();
   assert.equal(selectedPieceSupplementalAnswer(dto), dto.timeline[2]);
