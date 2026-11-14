@@ -16,7 +16,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Continue section 9.55: normal DB migrations and API99dbdaab are live; obtain concrete authorization for integrated PR30 iOS build and TestFlight upload after the pre-dispatch approval-review rejection, then verify the same-version user flow and saved reread; retain section 9.54 four-unit completion scope and keep unadopted research selectors off"
+current_next: "Section 9.55 DB/API rollout unit is CLOSED; Mash explicitly deferred app distribution builds, TestFlight uploads and device verification. Continue section 9.54 valid user updates into replies, Piece and Analysis without waiting for distribution or device verification; keep deferred RN/device checks separate and retain unadopted research selectors off"
 runtime_effect_of_this_document: 0
 ---
 
@@ -1762,7 +1762,7 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 <a id="112-現在の進行欄"></a>
 ### 11.2 現在の進行欄（11/14・全体完了主枠への改訂後）
 
-**全体の作業は§9.54と第11回§5、直後の再開先は§9.55。** Cocolon PR30 e9d56cc7の統合RNとAPI99dbdaabを確認し、既存9migration・APIの通常反映を完了した。統合iOS配布と同版本人一巡は未完で、補助全体の完了ではない。新しいモデル生成・研究selector有効化は行っていない。
+**全体の作業は§9.54と第11回§5。§9.55のDB／API通常反映単位は完了として閉じる。** Cocolon PR30 e9d56cc7の統合RNとAPI99dbdaabを確認し、既存9migration・APIの通常反映を完了した。Mashの後続明示により、配布用アプリbuild・TestFlight送信・実機確認は後回しにする。統合RN配布と同版本人一巡は別の未確認項目として残し、その待ちを他の補助作業の開始条件にしない。本人の有効更新から返答・作品・分析への接続を続ける。補助全体は未完、新しいモデル生成・研究selector有効化は行っていない。
 
 | 単位 | 最新までに成立したもの | 全体完了へ残る必要な工事 |
 |---|---|---|
@@ -1773,13 +1773,13 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 | AR-05 | 実4B→CMEE→実保存→7701本人表示、7801先行更新を継承。source duties v2の実装・限定比較／再読 | 本人基準・条件差・記録間関係の意味品質、通常v1／候補v2の採否と適用、項目／線の二入力訂正を次の現在mapへ通す工事 |
 | AR-06 | 原入力・適格最大3ANSWER、累積／月次保存と権利等の既存機構は継承 | 新natural本人原根拠の意味材料は未成立、NOT_GENERATED。有効訂正／撤回の下流伝播、現semantic長履歴と必要分割・跨ぐ関係・月次当時性を接続 |
 | AR-07 | IF／Savedの既存詳細設計・schemaあり | 仮想生成・必要確認・1〜3候補・API／RN／保存意向・再読削除がruntime未実装。適格現在mapから独立着手し、開始1例から必要仕様まで閉じる |
-| AR-08 | 既存の本人経路・iOS8001までの内部配布を継承。§9.55で後半機構の既存9migrationとAPI99dbdaabを稼働反映し、関数本文・ACL／RLSを照合 | 統合PR30のiOS build／TestFlight uploadは自動承認審査の送信前拒否で未実行。具体承認後の配布、通常の本人利用・同版図／画像・保存再読・復帰・実費を閉じる。全ARの全品質完成待ちにしない |
+| AR-08 | 既存の本人経路・iOS8001までの内部配布を継承。§9.55で後半機構の既存9migrationとAPI99dbdaabを稼働反映し、関数本文・ACL／RLSを照合 | DB／API反映単位は完了。Mash明示により配布用アプリbuild・TestFlight送信・実機確認を後回しとし、統合RN配布・同版本人利用は別の未確認項目として保持する。配布／実機待ちで他の補助作業を止めず、成立する能力ごとの接続・保存再読・通常適用を続ける |
 
 各行の実原本・採否・詳細は§9.2〜55と既存trial／weeklyへ戻る。AR-02／03／04のコード接続に対する通常DB／API反映は§9.55まで進んだが、同版RNの本人利用・本文品質の受入れは残る。[改訂前の進行欄](https://github.com/MassyuRed/Cocolon/blob/a770355c7a0518afecdaf80b41a67a323023829c/Cocolon_前提資料/designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#112-現在の進行欄)は履歴として保持する。補助全体完了・研究モデルの通常採用・正式受入れは認定しない。
 
 ## 12. 今後の指示と再開方法
 
-**11/14・現在の再開先：§9.55の統合iOS配布と、§9.54／第11回§5の四作業。** 実装済み機構の既存9migrationとAPI99dbdaabは通常反映済み。PR30統合版のiOS build・TestFlight uploadは自動承認審査で送信前に拒否されたため、新runを起動していない。具体的な配布承認を得て同版の本人利用・保存再読まで閉じる。これと並行して本人の有効更新を返答・履歴・作品・分析へ通す工事と、実生成の共通原因修復、全蓄積・IF／Savedを進める。AR-08は各単位の内部で閉じる。
+**11/14・現在の再開先：§9.54／第11回§5の四作業に沿う、本人の有効更新から返答・履歴・作品・分析への接続。** §9.55の既存9migrationとAPI99dbdaabの通常反映単位は完了として閉じる。Mashの後続明示により配布用アプリbuild・TestFlight送信・実機確認は後回しとし、配布承認・本人端末確認を待たず補助作業を続ける。統合RN配布・同版本人一巡は別の未確認項目で、成功認定・削除はしない。実生成の共通原因修復、全蓄積・IF／Savedと、各能力に必要なAR-08を同じ作業単位で進める。
 
 直近の実結果は§9.53（新2rawは旧2と全文同一、反復改善0、保存再読成立）。旧§9.30の訂正reader、Pieceの省略hint、個別不採用文の次手は、それぞれの原本・必要残差として使うが、全体をその局所作業へ戻す再開指示にはしない。完了済みの旧GPU・SQL・native結果を無根拠に繰り返さない。
 
@@ -3238,7 +3238,7 @@ source／本人／版の不整合はsource ownerへ、意味読取り・内容�
 今回の商品source・公開contract・DB・稼働・GPU・重み・配布・費用契約の変更は0。AR実績は§9.53までを継承し、今回の計画反映を品質改善・正式受入れへ加点しない。STRUCTURE_MAP_DELTA_NONE。
 
 <a id="auxiliary-normal-db-api-rollout-20261114"></a>
-## 9.55 2026-11-14 — 問い・訂正・frame・最新回答PieceのDB／APIを通常反映、統合iOS配布は送信前拒否で未完
+## 9.55 2026-11-14 — 問い・訂正・frame・最新回答PieceのDB／API反映単位を完了、配布・実機は別枠で後回し
 
 ### 今回進めた作業単位
 
@@ -3268,12 +3268,18 @@ Renderのmashos-apiを旧`497f7008`から指定`99dbdaab`へ配置し、deploy `
 
 対象RN104件、API259件は成功（APIはdeprecation warning1）。RNのMetro依存検証は既存CIの依存分離に従い対象外とし、全RN suite成功とは主張しない。API99dbdaabの既存Piece／Analysis CIは両方成功を確認した。新製品code・fixture・testを変更していない。過去の実4B・隔離保存・native画像は当時の範囲で継承し、今回の新成功へ加算しない。
 
-### 統合RN配布の未完と、次の再開先
+### DB／API反映単位の閉鎖と、配布・実機を待たない再開先
 
 既存iOS workflowで統合PR30版をbuild・TestFlightへuploadする操作は、外部TestFlight配布の明示承認がないという自動承認審査の理由で、dispatch送信前に拒否された。新しいrun／build／upload／配布は0で、最新内部配布は8001のまま。拒否された操作を別経路で起動していない。これは追加の独自承認段階ではなく、実際に起きた配布操作の停止である。
 
-次は、対象PR30統合版のiOS build・TestFlight uploadの具体承認を得て既存workflowを一回起動し、配布版をDB26件／API99dbdaabと対応させる。問いON／OFF・回答／二入力訂正、Premiumの本人判断、最新適格ADDからPieceの保存・再入場・同版画像を通常本人経路で確認する。必要な本人確認を済んだことにせず、DB／APIの配置完了を作業単位全体の終了へ変換しない。
+その後Mashは、配布用アプリbuild・TestFlight送信・実機確認を後回しとし、DB／API反映が完了した現在の単位を閉じて補助経路活用を続けるよう明示した。これに従い、本節の**DB／API通常反映単位はCLOSED**とする。直後は§9.54の本人の有効更新から返答・作品・分析への接続を続け、配布承認・本人端末確認を待機条件にしない。
+
+統合RN配布と、問いON／OFF・回答／二入力訂正、Premium本人判断、最新適格ADDからPieceの保存・再入場・同版画像の通常本人一巡は、別の未確認項目として保持する。これらを確認済みへ変えず、後回しの決定を補助作業全体の停止や、新しい配布操作の許可へ読み替えない。
 
 研究hint・新重み・Piece model selectorは未採用／OFFのまま。一般返答／作品編集／分析の意味品質、本人更新の全下流伝播、AR-06材料・長履歴・AR-07 IF／Saved等は継続中。今回の到達は既存機構の稼働DB／API反映で、本文品質向上、正式human受入れ、AR-01〜08全体完了の追加認定は0。公開日未定・12/6候補と全体管理評価61.625％は維持する。
 
 STRUCTURE_MAP_DELTA_PRESENT（deployment state only）：owner path・公開API／DTO・core責務・rendererの設計は不変。current Emlis／Piece／CMEE mapへ稼働DB／API到達とRN配布未完のpointerを更新し、新しいschema／checker／controller／記録系列は作らない。
+
+### ビルド保留後の接続確認（改修なし）
+
+累積SQLがnaturalのprofile／policyを省略することから、華恋は第2・第3回答が正しく扱われないと初期推測したが、実SQLを通した2／3回答×Free／Plus／Premiumの6条件では、現SQLと完全threadの採用回答数・source prefix・保存材料・source集合・envelope・根拠が全件一致した。過去回答の資格は現在の問い送達上限と別に保持されるため、回答脱落という見立ては撤回した。独立確認もFreeの3回答受理を確認した。この投影差を修復対象にせず、新migration・製品code変更・追加配置は0。本人の具体的訂正／撤回の有効意味をPiece／Analysisへ通す未接続とは分ける。
