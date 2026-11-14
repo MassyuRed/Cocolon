@@ -4034,3 +4034,25 @@ STRUCTURE_MAP_DELTA_PRESENT：既存shared meaning→Piece source adapter／plan
 本単位は二入力訂正のsource未接続を閉じる範囲で、一般自由文の意味理解・複数訂正／回答併存、Emlisの本人判断・時点、Pieceの複写を越える編集品質、Analysisの記録間関係／長履歴、model selector／重み採用、本人利用・補助全体は未完。§5の主枠、11/21判定・公開日未定／12/6候補・管理評価61.625％を保持する。
 
 STRUCTURE_MAP_DELTA_PRESENT：correctedのsource role／stage、private lineage・保存fenceとRN明示選択を既存ownerへ接続。関連地図・PCE契約・全体現在地・本議事録を同じ資料単位で差分更新する。GPU／学習／再試行0。
+
+
+<a id="piece-v4-normal-adoption-20261115"></a>
+## 9.70 2026-11-15 — 未採用のclip参照修復を通常sourceへ回収
+
+### 対象と未完了境界
+
+週次§5.2の同版画像・採用能力の通常適用に接続する。§9.69の二入力訂正→Piece通常DB／API反映は完了済みとして保持し、再施工しない。最新PR30 305255f7／API PR3 e5a1dc68から再開。通常画像検査には既存V4 1成功／19失敗が残り、研究3646a285にはその修復と小数座標24対照の成立資産がある。研究sourceを通常ownerへ採用して同じ検査を実行する限定単位である。
+
+必要性はOBSERVED_BLOCKER_MINIMAL_FIX。実装・最終判断・GitHub反映ownerは華恋、独立担当はread-only差分検査。Mashの補助経路継続・必要改修・通常反映指示の範囲で行う。完了条件は既存V4 20件と小数24件の現行版成功、既存native／bitmap各群の保持、通常sourceと検査pinのremote照合。8秒・32MiB・4096辺／4Mi画素・厳密alpha占有比較・snapshot一回消費を変更しない。未知のWholeCanvas残差を一括完了へ格上げしない。
+
+### 既存ownerへの回収
+
+- `ios/tempCocolon/PieceTextMetrics.mm`の既存`PieceNativeAndLayerV4Ink`だけを研究3646と同一bytesへ採用。source SHA256=8c5e9a37954cf013f6d0e28e72070b24498e6087998effc46d3266d33aed7e4b。観測clip∩boundsのq支持を独立した所有buffer・逆写像extent／CTMで描き、比較canvasへその原点で配置する。expanded Bの寸法へ押し込まない。途中のgrid／bounds変更を拒否する。
+- 既存runnerのsource pin・同call診断を対応させる。元104marker・元sourceへのlexical逆投影を保持し、新しい実行器・providerを作らない。
+- 既存native harnessへ研究の3小数形状×8対照を移す。元195検査と別分母24を保持し、control成立後の負対照・実fault到達・途中変更拒否を確認する。既存workflowに完全なJSON観測保存・検証部分だけを移し、通常trigger／全job／現行RN契約・fixtureは保持する。研究branch限定や旧test集合をコピーしない。
+
+通常ios.v1／v2 bitmapはこのV4の自然描画gateを通らない。共有native内の未回収修復の採用であり、通常bitmapの文章品質・保存品質の新改善とは呼ばない。WholeCanvasの自然描画未観測・4Mi画素超過は別の残差で、guard拡大・描画捏造・試験skipで解消しない。API／DB・権利・quota・model／selector・新GPU／学習・署名／TestFlight／本人端末の変更は0。
+
+### 現行版の検証
+
+通常sourceの採用と検査pin／同call投影はlocal照合済み。shell構文、workflow内Python compile、104marker／late_clip_stability73・原source逆投影を確認。remote native／RN検査は未完で、成功前に限定単位を完了扱いしない。STRUCTURE_MAP_DELTA_NONE：既存比較関数内の計算修復だけで、owner／route／wire／保存形式／renderer選択の責任は変わらない。

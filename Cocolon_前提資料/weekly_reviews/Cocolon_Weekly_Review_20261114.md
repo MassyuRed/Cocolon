@@ -898,3 +898,8 @@ IFの条件／負荷／未知表示は既存実装。今回追加する印は同
 本人の説明を実ANSWERへ偽装せず、proper correction sourceとして未変更原節・有効置換だけを既存Piece作者／独立S7・保存再読へ渡す。7key source_refにcorrected_observationを追加し、RNでは表示していたOBSを明示選択、別訂正へのGET／結果不明POST・保存復元の乗換えを止める。初回訂正1・ANSWER0・完全引用REVISE／WITHDRAW、short_essay／3blockの限定範囲。一般自由文・複数訂正／回答併存は未完。
 
 3planの訂正／撤回6作品と二欄1作品の隔離保存再読、本文・payload／recipeとhash、quota各1・原入力／Emlis不変を確認。合成Auth／recipient provider・PGliteの範囲で、新4B・本人保存・画像成功へ加算しない。取得時／SQL時の時系列検査差、S7親sourceの借用拒否を同じ単位で修復。最終CI・必要migration／指定配置は[補助設計§9.69](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-corrected-observation-source-20261115)へ集約する。通常DB／API反映の限定単位は完了。API／worker e5a1dc6が双方Live、SQL履歴20261114215806と関数・ACL／RLSを照合した。最終Piece CI43647458738はsuccess、製品source同一の09f Analysis CI43645344316もsuccess。RNは2ccで1841件成功だがworkflow全体は既存native19失敗でfailure、画像合格は未認定。旧版比較fixtureだけの修復と失敗履歴も§9.69へ保持した。build／TestFlight／本人実機保留、model selector OFF、新GPU／学習0、§5の主枠・補助全体未完を維持。
+
+
+## 24. 11/15 — 画像の既存V4修復を通常sourceへ回収
+
+前回§9.69の通常DB／API反映完了を継承。既存V4 19失敗について、研究3646のclip参照支持・CTM／配置原点修復と小数24対照を通常source／既存workflowへ採用した。現行版native・RN CIの結果確認は未完。通常bitmap／WholeCanvas／本人端末・補助全体の完了へ換算しない。詳細と最終結果は[補助設計§9.70](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-v4-normal-adoption-20261115)。API／DB／model設定変更0、配布保留と§5の主枠を維持する。
