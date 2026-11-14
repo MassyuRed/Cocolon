@@ -1,4 +1,4 @@
-> **11/14・natural最新独立ADD1〜3回答とframe依存失効のSQL／APIを通常反映：** 既存の補足資格・書出し受領を含む9migrationを適用し、Piece issue／visual／save等の関数本文・ACL／RLSを照合。API99dbdaabは11:52 JSTにLive、公開read／write／toggleはfalseを維持。統合PR30のiOS build・TestFlight uploadは自動承認審査の送信前拒否で未実行、最新配布8001。DB／API反映単位は完了。Mash明示で配布用アプリbuild・TestFlight送信・実機確認を後回しとし、通常本人経路の保存再読・同版画像は別の未確認項目として残す。他の補助作業の開始条件にはしない。研究model selectorはOFF。[通常反映の範囲・次§9.55](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#auxiliary-normal-db-api-rollout-20261114)。新作者・source型・renderer・モデル呼出しは追加0。
+> **11/14・真正な自然Q3一回答の訂正・撤回をPieceへ接続し、通常DB／API反映までの限定技術単位を完了。** API `75e526d1`。現共有ownerが再導出した意味checkpointと完全一致する一回答だけ、原入力の残存範囲と実ANSWERの差替え節を既存作者へ渡す。WITHDRAWは回答本文を作品材料にせず、旧節はmodel材料・S7から除外。原文・七項目source_ref・作者／体裁／最大3slot・lineageは保持する。既存3 SQL関数のmigrationを稼働適用し、同commitのPiece／Analysis CI成功、API／workerともLive、healthz／bootstrap・worker通信200を再確認した。**新しいPiece実4B3件、同実本文の保存再読・画像は未完。** ZIP外部送付は具体内容／宛先の承認不足を理由に自動承認審査で2回とも送信前拒否、別経路で送らず停止した。中断で旧local原本が消失し、現存準備済みとは扱わない。一般訂正・多段更新・依存を跨ぐ更新、本文品質・補助全体は未完。build／TestFlight／本人実機の保留を継承する。 [範囲・通常反映・証跡と未完§9.58](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-natural-answer-active-source-20261114)。以下の日付付き旧経過の未接続／次作業は当時の範囲として読み、本節の限定接続と混同しない。
 
 > **11/13・第2/3回答後の最新一回答をPieceへ渡す候補：原入力＋画面で明示した最新の自己完結ADD一件を維持し、先行全roundは資格確認だけに使う。API dbb96aca、Python431固有＋38subtests、RN47固有成功。3plan×2自然／2stop／3自然の9保存再読を確認。実4B・本番SQL／配置・実機は未完、通常selector OFF。** [範囲・原本・次§9.43](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-latest-later-add-selected-20261113)。
 
@@ -4395,3 +4395,22 @@ STRUCTURE_MAP_DELTA_NONE_FOR_PRODUCT。API d86f1eb2と既存CI43343955206を継�
 前回§9.34の新10b563候補不採用・通常model selector OFFを維持する。今回の一回答接続と、AI応答への二欄訂正・複数回答・REVISE/WITHDRAWの伝播は別範囲で、後者は未接続。一般的な応答/編集品質、同じ新本文の端末画像/書出し、全補助経路の受入れは未完。GPU・学習・本番SQL適用・Render配置・RN変更・新build/配布は0。
 
 STRUCTURE_MAP_DELTA_PRESENT。詳細・責務/全71内訳・合成限界・次は[詳細設計§9.35](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-natural-single-answer-connection-20261113)を正本とする。API f7b44e0eのPiece CI [43400087856](https://github.com/MassyuRed/mashos-api/actions/runs/43400087856)とAnalysis CI [43400087749](https://github.com/MassyuRed/mashos-api/actions/runs/43400087749)は、ともにattempt1で全工程成功。手動dispatch/rerun0、実DB未適用。
+
+
+<a id="piece-natural-answer-active-source-20261114"></a>
+## 2026-11-14 — 自然一回答REVISE／WITHDRAWの有効sourceを既存Pieceへ接続
+
+以前は自然Q3の真正一回答が共有意味ownerで解決済みでも、PieceのADD限定検査で停止した。API [75e526d1](https://github.com/MassyuRed/mashos-api/commit/75e526d1a90b969643211b3512b59826e78adbfd)は、保存checkpointを原入力・実QUESTION／ANSWER・contextから再導出してexact照合し、一回答／MATERIAL_UPDATE／EXPLICIT_CORRECTION／RESOLVEDだけを通す。対象は元memo／memo_actionの独立した完全文SELF node一つ、原時点と正確な原節anchor、残存原意味がある場合に限る。REVISEの新節も実ANSWER内の独立完全文SELFで、一般自由文訂正・解釈訂正OPERATION・多段／複数対象・依存を跨ぐ更新へ広げない。
+
+| 既存owner | 今回の責任 |
+|---|---|
+| `piece_v2_source_adapter.py`／`piece_refined.py` | 前者はexact共有checkpointとoperation／範囲を既存`PieceSavedRefinedHandoff`へ、後者は既存`PieceRefinedSourceSnapshot`の`original_active_ranges`／`supplemental_active_range`へ保持 |
+| `piece_refined.py`／`piece_source.py` | 前者が新private `PieceActiveOriginalMeaning` exact1を定義・構築・再検証し、後者の既存readerが受理する。全原文と残存nodeを分離し、元source・欄hash・絶対scalar／UTF8座標は不変 |
+| `piece_v1c.py`／`preparation_sources.py` | 元原欄の残存意味＋実回答の新節を既存唯一作者へ渡す。WITHDRAWではsupplemental Noneとし、実ANSWERはcontrol／lineageに保持 |
+| `piece_model_source.py`／`piece_v2_content_policy.py` | model wireには有効範囲だけを渡し、独立S7は残存完全文literalを確認。旧節を跨ぐ連結を使わない |
+| `piece_v2_safety_review.py` | 元原文・実ANSWER全文の安全確認を継承し、supplemental Noneを扱う |
+| preview／save service・`piece_v2_store.py`と既存SQL3関数 | 既存expected source state JSONの任意exact `meaning_checkpoint` objectを検査・移管し、locked sourceへ照合。生成後／保存前の変更と偽ADDへのすり替えを拒否 |
+
+codeのprefixは`ai/services/ai_inference/`、CMEE側はその下の`cocolon_meaning_experience_engine/`。全17pathは[01Bの地図](../01B_cocolon_overall_structure_analysis_piece_emotionlog_ranking.md#piece-natural-answer-active-source-files-20261114)。共有ownerが既に述語・完全文を証明した差替え節だけ、末尾句点を補うgrammar-only viewで既存Piece文法へ接続する。句点を元literal／根拠／座標へ付加せず、未証明断片を文へ昇格しない。別の残存範囲を連結した架空sourceやslotは作らず、同一原欄内の別範囲は同じslot内で区別する。
+
+原入力／ANSWERの全原文、source_ref七項目、既存作者・形式選択・最大3text slot・PUBLIC7参照・source_lineage・recipe／renderer・旧ADD・最新第2／3回答の独立ADDは保持。新公開route／DTO／top-level RPC引数／table／RN sourceは追加しない。migration filename `20261114051948_piece_natural_answer_active_source.sql`の実適用履歴versionは`20261114054136`。通常DB／APIとworkerは同75e526d1で反映済み、両CI成功までのbounded technical unitはCLOSED。新しいPiece実4B3件・同実本文の保存再読／画像、一般編集品質・通常本人一巡・正式受入れは未完であり、合成provider／隔離SQL成功を代用しない。研究selector／重み・RN／rendererは変更せず、build／TestFlight／本人実機保留を継承する。STRUCTURE_MAP_DELTA_PRESENT。通常配置・証跡消失・送付前停止と再開先は[補助設計§9.58](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-natural-answer-active-source-20261114)。

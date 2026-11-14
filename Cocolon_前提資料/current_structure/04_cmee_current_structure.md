@@ -1,4 +1,4 @@
-> **11/14・訂正・撤回後の有効部分を4B分析材料へ接続。** API `bd602c35`。原入力中の一節を完全引用した明示更新だけ、全原文・欄hashを保ち、残る連続範囲と差替え本人節を別fieldで渡す。撤回された旧節、範囲をまたぐ連結、AI引用は材料へ戻さない。絶対scalar／UTF8座標とsource dutiesを統一。関連159件成功（新12内包）。実4B2件は明示v2で取得し、同じ生成前checkpoint・無修補rawから隔離SQL保存→現在版2回／月次版1回・全node根拠再読成功。通常v1の新実生成は未実施、両profileの材料・回帰を確認。既存CI全19工程成功、API／裏更新とも同版Live、healthz／bootstrap200・worker起動／DB通信200を確認。 新DB変更0、稼働履歴27と既存関数hash不変。一般説明はpendingを維持。同一記録を別記録と呼ぶ誤り、場面と行動の過剰結合・日本語の不自然さは残り、本文品質合格へ数えない。一般訂正理解・Piece更新・naturalの根拠付きAnalysis材料生成・補助全体は未完。build／TestFlight／本人実機は保留を維持。 [範囲・実結果・残件§9.57](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-active-update-semantic-material-20261114)。
+> **11/14・真正な自然Q3一回答の訂正・撤回をPieceへ接続し、通常DB／API反映までの限定技術単位を完了。** API `75e526d1`。現共有ownerが再導出した意味checkpointと完全一致する一回答だけ、原入力の残存範囲と実ANSWERの差替え節を既存作者へ渡す。WITHDRAWは回答本文を作品材料にせず、旧節はmodel材料・S7から除外。原文・七項目source_ref・作者／体裁／最大3slot・lineageは保持する。既存3 SQL関数のmigrationを稼働適用し、同commitのPiece／Analysis CI成功、API／workerともLive、healthz／bootstrap・worker通信200を再確認した。**新しいPiece実4B3件、同実本文の保存再読・画像は未完。** ZIP外部送付は具体内容／宛先の承認不足を理由に自動承認審査で2回とも送信前拒否、別経路で送らず停止した。中断で旧local原本が消失し、現存準備済みとは扱わない。一般訂正・多段更新・依存を跨ぐ更新、本文品質・補助全体は未完。build／TestFlight／本人実機の保留を継承する。 [範囲・通常反映・証跡と未完§9.58](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-natural-answer-active-source-20261114)。以下の日付付き旧経過の未接続／次作業は当時の範囲として読み、本節の限定接続と混同しない。
 
 > **11/14・既存補助能力の通常DB／API適用を前進：** 問い設定、二入力訂正履歴、frame対象と依存失効、Piece最新独立ADD等の9migrationとAPI99dbdaabを稼働反映。稼働8関数本文・ACL／RLSを照合し、healthz／bootstrapは200。統合PR30のiOS build・TestFlight uploadは自動承認審査の送信前拒否で未実行。DB／API反映単位は完了。Mash明示で配布用アプリbuild・TestFlight送信・実機確認を後回しとし、同版通常本人利用は別の未確認項目で保持して補助作業を続ける。研究hint・重み・selectorの一括採用や新モデル呼出しは0。[通常反映の範囲・次§9.55](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#auxiliary-normal-db-api-rollout-20261114)。各coreの作者・採否・保存責任は維持し、全補助経路完了へ換算しない。
 
@@ -2241,3 +2241,15 @@ STRUCTURE_MAP_DELTA_PRESENT。既存natural_reply.pyの対象投影、新testと
 STRUCTURE_MAP_DELTA_NONE：今回は実比較・同源泉保存再読・採否記録だけで、製品source／test／公開DTO/API／DB/SQL／RN／モデル／通常selectorの変更0。通常selector OFF、新10b563不採用を維持し、一般応答品質・反復修正時の対象復元・二欄訂正からframe／他coreへの意味伝播・live／本人端末・正式受入れは未完である。
 
 詳細・private原本・採否と保存の範囲は[補助設計§9.38](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-frame-feedback-target-context-actual-20261113)を正本とする。
+
+
+<a id="piece-natural-answer-active-source-20261114"></a>
+## 2026-11-14 — 共有解決済み一回答の有効意味をPiece作者へ移管
+
+API [75e526d1](https://github.com/MassyuRed/mashos-api/commit/75e526d1a90b969643211b3512b59826e78adbfd)。共有`prepare_emlis_meaning`は意味更新のowner、Piece adapterは保存chain・現checkpointの再導出と資格、Piece既存作者は作品本文、独立S7は原意味保持、既存preview／save／SQLは競合と保存のownerのまま。新しい共有controller・意味更新owner・別本文作者を作らず、自然Q3の真正な最初の一回答／RESOLVED MATERIAL_UPDATE EXPLICIT_CORRECTIONに限るREVISE／WITHDRAWの接点を通した。
+
+既存handoff・snapshotに`original_active_ranges`／`supplemental_active_range`とprivate exact checkpointを保持し、新private意味classは`PieceActiveOriginalMeaning` exact1。原入力七項目と実ANSWERの全envelopeは不変で、残存する原欄の独立完全文と実ANSWERの差替えSELF節を別sourceのまま渡す。WITHDRAWはsupplemental Noneとし、回答を作者の新事実にしない。原欄の離れた範囲を繋ぐ架空sourceを作らず、model wireと独立S7から旧節を除外する。共有ownerが完全文として証明した新節のgrammar-only句点viewはparser用であり、原文literal・根拠座標へ句点を足さない。元原文と実ANSWERの全文安全確認を保持する。
+
+source_ref七項目・PUBLIC7参照・source_lineage、Piece唯一作者・既存体裁・最大3slot・renderer、旧ADD／最新2・3回答独立ADDを継承する。新table／公開DTO／route／top-level RPC引数／RN sourceは0。既存expected source state JSONへ有効更新だけexact meaning_checkpointを移し、locked sourceとの完全一致を既存issue／visual／saveの3関数で確認する。
+
+全17変更pathは[01B](../01B_cocolon_overall_structure_analysis_piece_emotionlog_ranking.md#piece-natural-answer-active-source-files-20261114)、Piece責務と未対応境界は[02](02_piece_current_structure.md#piece-natural-answer-active-source-20261114)。migration actual20261114054136、通常API／worker同75e526d1 Live・既存両CI成功までの限定技術単位はCLOSED。新しいPiece実4B3件・同実本文の保存再読／画像は未完、一般解釈訂正・多段／依存跨ぎ・一般商品品質・補助全体へ広げない。外部送付前停止と証跡消失を含む[補助設計§9.58](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-natural-answer-active-source-20261114)を現在の再開先とする。研究selector／重み不採用とbuild／TestFlight／本人実機保留は維持。STRUCTURE_MAP_DELTA_PRESENT。

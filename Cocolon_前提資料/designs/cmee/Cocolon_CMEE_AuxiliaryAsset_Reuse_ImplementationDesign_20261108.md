@@ -1,4 +1,4 @@
-> **11/14・週次計画改訂：補助経路活用の全体完了を当面の最優先主枠へ。** [§9.54](#auxiliary-completion-focus-20261114)と[第11回§5](../../weekly_reviews/Cocolon_Weekly_Review_20261114.md#weekly-priorities-through-20261121)を全体の実施順とし、通常反映の現在到達点・直後の再開先は[§9.55](#auxiliary-normal-db-api-rollout-20261114)を優先する。本人更新を三中核へ通す、意味／内容選択を実商品へ働かせる、蓄積・本人訂正・IF／Savedを接続する作業に集約し、各能力の通常適用AR-08まで同じ単位で閉じる。必要未実装・未接続・商品未適用を残したまま終了にしない。旧局所の次手は履歴で、効果0のPiece省略hint比較を全体の再開先へ戻さない。全体完了の新実績はなく、公開日未定・12/6提出可能候補は維持。
+> **11/14・現在到達点は§9.58：真正自然Q3一回答の有効意味→Pieceと通常DB／API反映までの限定技術単位はCLOSED、新Piece実4B3件・同実本文の保存／画像は未完。** [§9.58](#piece-natural-answer-active-source-20261114)を今回の到達点と再開先、[§9.54](#auxiliary-completion-focus-20261114)と[第11回§5](../../weekly_reviews/Cocolon_Weekly_Review_20261114.md#weekly-priorities-through-20261121)を全体の実施順とする。外部ZIP送付は自動承認審査で2回とも送信前拒否、代替経路で実行しない。中断でlocal CPU／raw・旧送付物が消失し、復旧原本を照合できる範囲だけ採用する。Analysisの比較v3／v4候補は品質FAILで通常不採用。完了済みSQL／source／通常配置だけの再周回へ戻らず、本文品質・一般訂正・長履歴・IF／Savedを含む補助全体の必要能力を続ける。build／TestFlight／本人実機保留、公開日未定・12/6提出可能候補は維持。
 
 > **11/14・修正起動の明示承認後、実2取得・復元・同状態の保存再読まで完了。本文反復の改善は0。** 送信済み62,086byte・3fileは無変更／再送付0、1child／1loadで新2＋前後4対照＋health2GET、閉鎖後105.175913秒。通常／Analysis前後全文bytes一致、元args／env／cwd／2鍵・source／重みを保ってPID98755へ復元。新2 rawは旧2と全byte同一で、3省略候補は未使用。実raw無修補の2独立fork保存・非生成再読、canonical8／3hash・quota各1・原source／Emlis不変。旧保存ともcanonical8同一のため新native実行0。通常selector OFF、一般編集品質・通常経路／本人端末は未完。 [詳細§9.53](#piece-topic-editorial2-actual-unchanged-20261114)。
 
@@ -16,7 +16,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Sections 9.55 normal rollout and 9.56 correction source handoff are CLOSED. Section 9.57 active-range semantic handoff is CLOSED through normal API/worker rollout; continue remaining general user correction meaning, Piece updates and grounded natural Analysis materials. Keep app distribution builds, TestFlight and device checks deferred; do not repeat closed rollout or turn technical save receipts into product quality acceptance"
+current_next: "Section 9.58 bounded technical unit is CLOSED through exact active-source handoff to Piece, isolated save/read checks and normal DB/API/worker rollout at 75e526d1. New actual 4B Piece REVISE/WITHDRAW/ADD outputs and same-raw save/image checks remain PENDING: both upload reviews rejected before transmission, and prior local evidence/ZIP was lost. A new six-file fictional packet has been prepared (16942 bytes, a757d2209ca6a5ab4b759989b10f47cb6abbaaee378474e82158f7125ea7ac62); obtain concrete file/destination approval before upload and do not bypass. This is new preparation, not restoration of the lost original. Analysis body-instruction comparison v3/v4 candidates are NOT_ADOPTED; prior v1/v2 restored. Continue remaining general corrections, multi-update/dependency meaning, grounded natural Analysis, cumulative history and IF/Saved under 9.54. Keep builds, TestFlight and device checks deferred; do not repeat closed rollout or promote technical receipts to product acceptance"
 runtime_effect_of_this_document: 0
 ---
 
@@ -3382,3 +3382,72 @@ codeのprefixは`ai/services/ai_inference/cocolon_meaning_experience_engine/`。
 実2本文には、同じ原記録の欄を「別の記録」と呼ぶ誤り、自宅と費用記録を未証明に結び付ける表現、希望を現在の本人基準へ広げる記載が残った。「もう方」「节点」「表れていることはできます」等もあり、全文の意味・関係・自然な日本語の品質合格は0。今回の受渡し・保存成功を、これらの出力品質改善へ加算しない。
 
 次は§9.54作業1・2の残りとして、一般的な本人説明を正確な対象と有効意味へ結び付けること、Pieceへの訂正／撤回source利用、naturalの根拠付きAnalysis材料生成（NOT_GENERATED解消）、実出力に残る関係・場面の過剰な結合と日本語品質を進める。完了したSQL／source欠落／範囲接続の確認だけを再周回しない。AR-02／06・全補助経路は未完。RN変更・配布用build・TestFlight・本人実機はMashの保留を維持する。
+
+
+<a id="piece-natural-answer-active-source-20261114"></a>
+## 9.58 2026-11-14 — 自然一回答の訂正・撤回をPieceへ接続し、通常DB／API反映までの限定技術単位を完了
+
+§9.54作業1・4のうち、共有意味では解決済みの真正な自然Q3一回答REVISE／WITHDRAWが、PieceのADD限定入口で落ちる接点を扱った。§9.55〜57の完了済みSQL／Analysis材料接続を再実施せず、本人原根拠の有効意味から既存Piece作者・保存競合防止・通常配置へ接続した。**このbounded technical unitはCLOSED。新しい実4B3件の作品本文、同実本文の保存再読／画像は未完で、商品結果の全単位や全補助活用の完了ではない。**
+
+### 一回答の適用境界と、原文を変えない作者材料
+
+API [75e526d1a90b969643211b3512b59826e78adbfd](https://github.com/MassyuRed/mashos-api/commit/75e526d1a90b969643211b3512b59826e78adbfd)はproduction11・test3・workflow2・migration1の17path。現共有`prepare_emlis_meaning`を原入力・実QUESTION／ANSWER・保存contextから再導出し、保存current checkpointとのexact一致を条件に既存refined handoffへ渡す。
+
+- 対象はnatural Q3の真正な最初の一回答、共有ownerのRESOLVED／MATERIAL_UPDATE／EXPLICIT_CORRECTION、memo／memo_action内の独立完全文SELF node一つの更新、正確な元節anchorとORIGINAL_OCCASION。残存原意味を少なくとも一つ保持する。REVISEの新節も実ANSWER内の独立完全文SELFである。未証明時点や別sourceから主体を補わない。
+- 原入力七項目・全原文envelope・欄hash、実ANSWER全envelope、scalar／UTF8の絶対座標は不変。既存handoff／snapshotに`original_active_ranges`と`supplemental_active_range`を持たせ、新private class `PieceActiveOriginalMeaning` exact1で、全原本と残存nodeを区別する。一般の新source型・新しいsource identity体系は作らない。
+- REVISEは原欄の残存範囲＋実ANSWERの差替え本人節だけを作者材料へ渡す。WITHDRAWのmeaning supplementalはNone、回答はcontrol／lineageとして残す。旧節の引用や「ではなく」「取り消す」等の訂正命令を本人の新事実にしない。
+- 内部Preparedは全原文を保持するが、model-visible wireには`active_text_ranges`／`literal_ranges`を使い、旧節を含む全文や旧evidenceを再露出しない。離れた原欄範囲を連結した架空sourceは作らず、同一原欄内の複数残存範囲は同じslot内で別範囲として扱う。最大3text slotを増やさない。
+- 独立S7は残存する完全文literalを照合し、削除節を挟む旧first→last sliceを使わない。引用内の新節は終端句点を欠く通常形があるため、共有意味ownerが述語・完全文を証明済みのSELF節だけ、parser用`literal + "。"`のgrammar-only viewを使う。**原文・quote・evidence literal・根拠座標には句点を追加しない。** 未証明断片を句点で完全文にしない。
+- 元原文と実ANSWERの全文安全確認、既存唯一作者・体裁選択・PUBLIC7参照・source_ref七項目・source_lineage・既存recipe／renderer／再送を保持する。未更新原入力・既存ADD・最新第2／3回答の独立ADDは維持する。
+
+AI応答への一般INTERPRETATION_CORRECTION、複数対象／多段／混合更新、条件・人物評価・名詞参照・役割alias等のnode間依存を跨ぐ更新は未対応で拒否する。真正な実回答の限定REVISE／WITHDRAWを、あらゆる本人訂正の意味理解へ広げない。Emlis本文・質問文を作品の本人sourceへ昇格しない。
+
+### 既存保存境界と全ファイル地図
+
+有効更新だけ、既存RPCの`p_expected_source_state` JSONへexactな`meaning_checkpoint` objectを追加する。原入力／ADDの既存4key状態は不変。既存SQL3関数がsourceをlockして現在のcheckpoint payloadと完全一致を確認し、Python証明後のcheckpoint変更、旧有効更新を偽ADDとして通す迂回も拒否する。新top-level RPC引数・公開route／DTO・table・RN sourceは追加しない。
+
+追跡migrationは`supabase/migrations/20261114051948_piece_natural_answer_active_source.sql`。変更するのは既存`piece_issue_preview_v2`／`piece_mutate_preview_visual_v2`／`piece_save_v2`の3関数だけで、元の署名・lock／再送順・ACL／RLS・quota primitiveを継承する。filenameのversionと、稼働履歴の実適用version `20261114054136`は別である。
+
+全17変更pathと個別責務は[01Bの今回地図](../../01B_cocolon_overall_structure_analysis_piece_emotionlog_ranking.md#piece-natural-answer-active-source-files-20261114)、基盤側は[01A](../../01A_cocolon_overall_structure_app_foundation_home.md#piece-natural-answer-active-source-files-20261114)、構造は[Piece map](../../current_structure/02_piece_current_structure.md#piece-natural-answer-active-source-20261114)／[CMEE map](../../current_structure/04_cmee_current_structure.md#piece-natural-answer-active-source-20261114)。STRUCTURE_MAP_DELTA_PRESENT（既存共有意味→Piece有効sourceと既存保存境界）。03 Analysis mapは本単位で変更しない。
+
+### 検証結果と、中断で消失した証跡の限界
+
+中断前のローカル関連結果は**544 passed／既存Pydantic warning1**。新42件＝core10＋wire11＋integration21を内包し、前段205件や重複再実行を加算しない。integration21の内訳は、3plan×REVISE／WITHDRAWの6件、既存ADD対照1件、未解決拒否2件、SQL3操作×4改変拒否12件である。6件はpreview→適用されるvisual変更→初回save／同key再送→別serviceの非生成同版再読へ通し、原source／Emlis不変・quota各1を確認した。4改変はcheckpoint、active→偽ADD、ANSWER本文、原入力本文で、拒否の無副作用を確認した。先行Emlis応答・Auth／Piece HTTPは合成、SQLは隔離PGliteであり、実4B品質の証明ではない。
+
+途中でSQLのJSON演算子と`||`の優先順位によるNULL、およびWITHDRAWのsupplemental Noneへの無条件role_bindings参照を確認し、前者は両JSON抽出operandの明示括弧、後者はNone分岐へ修復した。資格・S7・安全確認を緩めず、モデル出力の失敗とも扱わない。
+
+ただし処理中断後にscratchが消失し、上記ローカルCPU receipt、Analysis比較raw／checkpoints、未送信Piece ZIP等のlocal-only原本は失われた。**544件等は中断前の結果記録として区別し、失われたreceiptを現存保存済み・再検証済みとは書かない。** 新しく復元したtracked sourceやGitHub CI原本は旧local rawの復旧ではない。回復できた原本だけを照合して採用し、本文・hash・private archiveの再作成を推測で行わない。従前§9.57／weekly§12の実2取得記録を今回7応答やPiece3件の新成功へ付け替えない。
+
+GitHubへ反映した17blobは消失前にlocal全文／変更path一致を確認済み。同commitの既存Analysis CI [43562312172](https://github.com/MassyuRed/mashos-api/actions/runs/43562312172)は全19step、Piece CI [43562312140](https://github.com/MassyuRed/mashos-api/actions/runs/43562312140)は全39step success。中断後に両runのcompleted／success・commit75e526d1一致を再確認し、完全ログを復旧した。新42件のCI成功根拠はこの原本から再確認できる。さらにexact75e526d1のcheckoutと残存runtime／PGliteを復旧し、今回の新42件を一回再実行して**42 passed／既存warning1、12.42秒**をfresh確認した（原log `piece-answer-update-recovery/recovered_new42_pytest.log`）。実model call0であり、中断前544件へ重複加算せず、失われた544件全local receiptの復旧とも扱わない。この遠隔CI・fresh42・tracked source／稼働配置を、失われたbody-full rawとは別の技術証拠として保持する。
+
+### 通常DB／API／裏更新への反映
+
+稼働DBへ上記1migrationをactual `20261114054136`として適用した。中断後の独立再読でも、対象3関数のprosrc SHA256を再取得した。さらに新しい架空fixtureの生成前checkpointを隔離復元し、追跡SQL適用後のpg_proc metadataだけから期待hashを再計算して、fresh liveの3値すべてとの完全一致を確認した。元checkpointは前後SHA256不変、DDL・外部POST・model call0。ACLはpostgres／service_roleだけ、SECURITY DEFINERと`search_path=pg_catalog`を保持していた。API指定配置`dep-dbrvgpdg1s2s73domim0`は2026-11-14 **14:59:21 JST（05:59:21Z）**、worker指定配置`dep-dbrvgv3l550s73f17hpg`は**14:59:04 JST（05:59:04Z）**に、ともに75e526d1でLiveとなった。新モデル・重み・research selectorの採用は行わない。
+
+中断後、API healthzは15:09:50 JST、app/bootstrapは15:09:56 JSTにHTTP200を再確認した。新worker instance `x2xtj`は14:59:11 JST起動〜15:09:40 JSTのpoll200を再読し、14:59:22〜15:10 JSTまでの取得済み範囲で両serviceのerror-level log0を確認した。取得時点より未来の範囲を確認済みとせず、通常配置・通信成功を、通常認証／通常DB／実4B／本人端末をそろえた作品一巡へ変換しない。
+
+### 実Piece3件は送付前停止、Analysis比較候補も通常不採用
+
+新Piece確認はREVISE／WITHDRAW／ADD対照各1の3件を予定したが、ZIP外部送付の自動承認審査が2回とも**送信前に拒否**した。具体的なファイル内容とRunpod／Jupyter宛先への明示承認が不足する、という実際の拒否理由である。架空UUID・固定の架空MEMO／ACTION／ANSWERだけを使い、production本文や鍵値を含まない出自を独立照合した後の同UI再審査でも拒否されたため、再送・別経路・迂回は行わない。
+
+消失前の最終準備物は13,369byte・4fileのZIPだったが、現在も現存・準備済みとは扱わない。復旧した送付物の実byte・内容・宛先を確認できた範囲で提示し、必要な明示承認を解決してから実3件へ戻る。今回のPiece実4B生成0・同実本文の保存再読0・画像0、追加学習・4B提供再起動・新GPU借用0。合成保存6件を実作品3件の代用にせず、元のAnalysis rawや以前のADD画像も流用しない。
+
+本単位への移行前に試したAnalysis本文指示の比較候補v3の4応答・v4の3応答は、指示／方針の本文露出、無関係なsource／actionの欠落、未記載の同日／場面の結合、日本語の崩れ等が残り、品質FAIL／通常不採用とした。比較v3／v4は既存semantic wire schema v3と別であり、通常v1／明示v2とproduction候補差分は元へ復元した。当時の隔離保存の記録を、消失したraw／CPU receiptなしに現在の再検証済み証拠へ昇格しない。品質改善・新しい通常analysis profile採用の追加認定は0。
+
+### 中断後の新しい送付前準備（未送付・未実行）
+
+失われた原本と同じhashを再現したとはせず、exact75e526d1・既存真正Q3 fixtureを使って新UUIDのREVISE／WITHDRAW／ADD各1件を作り直した。原入力は思考「褒められたのに、嬉しくなかった。私は仕事を続けたい。」、行動「私は資料を調べた。」、仕事／不安medium。実ANSWERはREVISE `「私は仕事を続けたい」ではなく「私は家族を守りたい」です。`、WITHDRAW `「私は仕事を続けたい」は取り消します。`、ADD `今は、私は嬉しい。`を固定する。通常application factoryのHTTP POST bodyをMockTransportの503応答で捕捉し、作者の候補本文は作成していない。先行Emlis応答とAuthだけ合成、Q3保存／共有checkpoint／Piece適格性／model材料は既存実装と隔離SQLを使う。
+
+新準備物は`piece-one-answer-rebuilt-input-20261114.zip`、**16,942byte・6file**、SHA256 `a757d2209ca6a5ab4b759989b10f47cb6abbaaee378474e82158f7125ea7ac62`。内訳は`run_once.py`、`wire.private.json`、`provenance.private.json`、`wire/revise.request.json`、`wire/withdraw.request.json`、`wire/add.request.json`。新しい全source／prepared／隔離checkpointは送付ZIPの外で証跡に保持する。旧13,369byte・4fileのZIPとは別物である。
+
+送付先は既存Runpod `f1lle4xwq3wjln` のJupyter。予定実行は同Pod内`127.0.0.1:8000`へ固定3POST＋前後health2GET、最大300秒・一回、学習／再試行／提供再起動／依存追加／model変更0。既存PID98755のprogram・starttime・natural model `cocolon-qwen35-4b-base-851bf6e`を先に照合し、既存`EMLIS_NATURAL_REPLY_API_KEY`は同Pod内loopback認証だけに使う。新送付物も具体的内容と宛先の明示承認が得られるまで送らない。新しい準備であり、実3応答・保存・画像の成功ではない。
+
+新準備3件は、保存snapshotから共有checkpoint・Prepared・通常factory messagesを純CPUで独立再導出し、3件のcanonical HTTP body全byte一致を確認した。新独立監査は`PASS_STATIC_AND_PURE_CPU_PREPARATION_REVIEW`、JSON SHA256 `8c51b1ef178e390fabda386b8033a27d8e294969e24b376ca327732308830ca0`。実4B結果や送付許可ではない。新全source／checkpoint・固定送付ZIP・fresh42 log・両CI完全ログ・DB／稼働metadata・旧監査の再構成要約は[Cocolon_CMEE_Piece_AnswerUpdate_NormalDB_API_20261114.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-6af69c8803fc8191bf7c35bf7718f6cc_2f7470f963808191aaebf050935e72de&account_id=personal)（5,002,760byte、SHA256 `dc03a9a904776cf21538dd799ba8072ba233005e1e6adb4ab76973e50277d67c`）へ保存した。失われた旧raw／CPU receiptはこの保存物にも復元されていない。
+
+### 閉じた範囲と、次に残る商品結果
+
+primaryは限定TECHNICAL_CREDIT。真正一回答の有効範囲→既存Piece作者、独立S7、同じprivate checkpointによるpreview／visual／save競合防止、合成provider／隔離SQLの保存鎖、通常DB／API／worker配置までのbounded technical unitを閉じる。全補助活用・AR-02／04／06／08全体・一般日本語品質・正式human Product Read・商品受入れは未完である。
+
+この単位の次は、復旧できた具体的な架空3件送付物・宛先についての承認不足を解消し、真正共有checkpointのREVISE／WITHDRAWとADD対照の実4B本文→同raw無修補の保存再読→該当同版画像を確認すること。完了済みsource／SQL／通常配置だけの再周回や、品質FAILのAnalysis候補採用へ戻らない。§9.54の一般訂正・複数更新／依存の有効意味、naturalの根拠付きAnalysis材料生成（NOT_GENERATED解消）、実本文の意味／自然さ、全蓄積・本人マップ訂正・IF／Savedの必要能力は継続する。
+
+RN source／rendererは本単位で変更0。Mashのbuild／TestFlight／本人実機保留を継承し、それらを待機条件にも新実行許可にも変えない。公開日未定・12/6提出可能候補・全体管理評価61.625％は再採点せず維持する。

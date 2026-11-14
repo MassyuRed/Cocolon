@@ -1,4 +1,4 @@
-> **11/14・訂正・撤回後の有効部分を4B分析材料へ接続。** API `bd602c35`。原入力中の一節を完全引用した明示更新だけ、全原文・欄hashを保ち、残る連続範囲と差替え本人節を別fieldで渡す。撤回された旧節、範囲をまたぐ連結、AI引用は材料へ戻さない。絶対scalar／UTF8座標とsource dutiesを統一。関連159件成功（新12内包）。実4B2件は明示v2で取得し、同じ生成前checkpoint・無修補rawから隔離SQL保存→現在版2回／月次版1回・全node根拠再読成功。通常v1の新実生成は未実施、両profileの材料・回帰を確認。既存CI全19工程成功、API／裏更新とも同版Live、healthz／bootstrap200・worker起動／DB通信200を確認。 新DB変更0、稼働履歴27と既存関数hash不変。一般説明はpendingを維持。同一記録を別記録と呼ぶ誤り、場面と行動の過剰結合・日本語の不自然さは残り、本文品質合格へ数えない。一般訂正理解・Piece更新・naturalの根拠付きAnalysis材料生成・補助全体は未完。build／TestFlight／本人実機は保留を維持。 [範囲・実結果・残件§9.57](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-active-update-semantic-material-20261114)。
+> **11/14・真正な自然Q3一回答の訂正・撤回をPieceへ接続し、通常DB／API反映までの限定技術単位を完了。** API `75e526d1`。現共有ownerが再導出した意味checkpointと完全一致する一回答だけ、原入力の残存範囲と実ANSWERの差替え節を既存作者へ渡す。WITHDRAWは回答本文を作品材料にせず、旧節はmodel材料・S7から除外。原文・七項目source_ref・作者／体裁／最大3slot・lineageは保持する。既存3 SQL関数のmigrationを稼働適用し、同commitのPiece／Analysis CI成功、API／workerともLive、healthz／bootstrap・worker通信200を再確認した。**新しいPiece実4B3件、同実本文の保存再読・画像は未完。** ZIP外部送付は具体内容／宛先の承認不足を理由に自動承認審査で2回とも送信前拒否、別経路で送らず停止した。中断で旧local原本が消失し、現存準備済みとは扱わない。一般訂正・多段更新・依存を跨ぐ更新、本文品質・補助全体は未完。build／TestFlight／本人実機の保留を継承する。 [範囲・通常反映・証跡と未完§9.58](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-natural-answer-active-source-20261114)。以下の日付付き旧経過の未接続／次作業は当時の範囲として読み、本節の限定接続と混同しない。
 
 > **11/13・第2/3回答後の最新一回答をPieceへ渡す候補：原入力＋画面で明示した最新の自己完結ADD一件を維持し、先行全roundは資格確認だけに使う。API dbb96aca、Python431固有＋38subtests、RN47固有成功。3plan×2自然／2stop／3自然の9保存再読を確認。実4B・本番SQL／配置・実機は未完、通常selector OFF。** [範囲・原本・次§9.43](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-latest-later-add-selected-20261113)。
 
@@ -4038,3 +4038,33 @@ Analysisの4B候補は、API側別作者から既存Engine/semantic_admission/in
 前回§9.34の新10b563候補不採用・通常model selector OFFを維持する。今回の一回答接続と、AI応答への二欄訂正・複数回答・REVISE/WITHDRAWの伝播は別範囲で、後者は未接続。一般的な応答/編集品質、同じ新本文の端末画像/書出し、全補助経路の受入れは未完。GPU・学習・本番SQL適用・Render配置・RN変更・新build/配布は0。
 
 STRUCTURE_MAP_DELTA_PRESENT。詳細・責務/全71内訳・合成限界・次は[詳細設計§9.35](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-natural-single-answer-connection-20261113)を正本とする。API f7b44e0eのPiece CI [43400087856](https://github.com/MassyuRed/mashos-api/actions/runs/43400087856)とAnalysis CI [43400087749](https://github.com/MassyuRed/mashos-api/actions/runs/43400087749)は、ともにattempt1で全工程成功。手動dispatch/rerun0、実DB未適用。
+
+
+<a id="piece-natural-answer-active-source-files-20261114"></a>
+## 2026-11-14 — 自然一回答の有効意味をPieceへ渡す全変更ファイル
+
+API [75e526d1](https://github.com/MassyuRed/mashos-api/commit/75e526d1a90b969643211b3512b59826e78adbfd)の全17path（production11・test3・workflow2・migration1）を次に示す。§9.35のADD接続と§9.43の最新独立ADDは維持し、今回だけ真正自然Q3最初の一回答の解決済みREVISE／WITHDRAWへ接続する。一般の解釈訂正、多段・複数対象・依存を跨ぐ更新は未対応である。
+
+| 変更path（mashos-api） | この単位の責任 |
+|---|---|
+| `ai/services/ai_inference/piece_v2_source_adapter.py` | 原入力／QUESTION／実ANSWER／contextから現共有意味を再導出して保存checkpointと完全一致を確認。既存`PieceSavedRefinedHandoff`にoperation・有効範囲・private exact checkpointを保持 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_refined.py` | 既存`PieceRefinedSourceSnapshot`と`PieceSupplementalMeaning.active_range`を保持。新private class `PieceActiveOriginalMeaning` exact1の定義・構築・再検証 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py` | `piece_refined.py`のactive original meaningを既存readerで受理・再検証し、全原文と有効nodeを区別 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_v1c.py` | 残存原欄と差替え本人節を既存の唯一作者へ渡し、WITHDRAWのsupplemental Noneと体裁を扱う |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/preparation_sources.py` | 既存Preparedに原本・絶対根拠座標を保持。削除区間を繋いだ架空sourceを作らない |
+| `ai/services/ai_inference/piece_model_source.py` | model wireへactive_text_ranges／literal_rangesを投影し、旧節と訂正命令・全原文の漏れ戻りを防ぐ |
+| `ai/services/ai_inference/piece_v2_content_policy.py` | S7の意味保持を残存完全文literalへ拘束。削除節を跨ぐ旧first→last sliceを使わない |
+| `ai/services/ai_inference/piece_v2_safety_review.py` | 原入力／実ANSWERの全文安全確認を保持し、WITHDRAWのsupplemental Noneを正しく扱う |
+| `ai/services/ai_inference/piece_v2_preview_service.py` | 有効更新だけ既存expected_source_stateへexact meaning_checkpointを付け、preview／visualの競合境界へ渡す |
+| `ai/services/ai_inference/piece_v2_save_service.py` | 同じ有効更新のexact checkpointを既存保存RPCへ渡し、保存／再送の同版性を保持 |
+| `ai/services/ai_inference/piece_v2_store.py` | 既存RPC用expected source state JSONの任意`meaning_checkpoint` objectを受理・検査し、既存RPC引数内で渡す |
+| `supabase/migrations/20261114051948_piece_natural_answer_active_source.sql` | 既存issue／visual／saveの3関数で一回答有効更新とlocked checkpointを照合。実適用履歴versionは20261114054136 |
+| `ai/tests/test_cmee_piece_answer_updates.py` | 新10条件。原欄残存・REVISE新節・WITHDRAW・未対応更新拒否と原文の座標を検査 |
+| `ai/tests/test_piece_model_active_ranges.py` | 新11条件。active wire／独立S7／旧節・範囲跨ぎ・偽根拠の拒否を検査 |
+| `ai/tests/piece_v2/test_b05_piece_answer_update_saved_pipeline.py` | 新21条件。3plan×2更新の保存鎖、ADD対照、未解決拒否、SQL3操作×4改変の無副作用拒否を検査 |
+| `.github/workflows/piece-b2b-isolated-postgres.yml` | 既存Piece CIへ今回のSQL・integrationを登録。新workflow／jobを増やさない |
+| `.github/workflows/analysis-observed-content.yml` | 既存Analysis CIにも同じmigrationと回帰を登録し、共通source接点を確認 |
+
+原入力七項目と実ANSWER全envelope・欄hash・scalar／UTF8座標、source_ref七項目、作者／体裁／最大3slot／PUBLIC7参照／source_lineageを保つ。WITHDRAWは作者材料のsupplemental Noneで、保存ANSWERの削除ではない。引用された差替え節の終端句点を補う内部grammar viewは、共有意味ownerが完全文と証明したSELF節の読取りだけに使い、原文・証拠literal・座標へ句点を足さない。独立S7を弱めず、旧節と訂正命令を新事実にしない。
+
+通常migration actual20261114054136・API／worker同75e526d1 Live、既存Piece／Analysis両CI successまでを限定技術単位として閉じる。新Piece実4B3件・同実本文の保存／画像、一般編集品質・補助全体・本人端末は未完。中断前local原本の消失と外部送付の停止を含む[詳細§9.58](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-natural-answer-active-source-20261114)を証跡状態のownerとし、全file意味理解や全補助完了をこの地図から認定しない。STRUCTURE_MAP_DELTA_PRESENT。

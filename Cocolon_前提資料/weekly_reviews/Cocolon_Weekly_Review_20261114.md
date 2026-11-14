@@ -6,6 +6,8 @@
 記録担当：華恋  
 会議状態：**終了。11/14、Mashが報告会終了を明示。公開日未定・12/6までに提出可能候補、対象週は補助経路活用全体の完了へ集中する§5と、対応する補助設計の現在再開先を以後の前提として引き継ぐ。今後の短い継続指示と終了記録は§9。補助全体・商品完成・新しい実環境操作の実行を認定したものではない。**
 
+> **報告会後の最新到達点：§13。** 真正な自然Q3一回答のREVISE／WITHDRAWをPieceへ接続し、通常DB／API反映までの限定技術単位はCLOSED。新Piece実4B3件・同実本文の保存／画像は送付前停止で未完。Analysis比較v3／v4候補は通常不採用。local原本消失を含む証跡と再開先は[§13](#piece-natural-answer-active-source-20261114)、全体計画は§5を優先する。
+
 [前回・第10回議事録](Cocolon_Weekly_Review_20261107.md)の決定・実行履歴・未達を継承する。今回の11/14〜11/21は記録を進める対象週であり、未来の作業を実績へ数えない。
 
 ## 0. 確認した資料と報告の範囲
@@ -775,3 +777,23 @@ PR30 e9d56cc7の統合RNをbuild・TestFlightへuploadする既存workflowの起
 ## 12. 報告会後 — 訂正・撤回後の有効部分を4B材料へ接続
 
 **11/14・訂正・撤回後の有効部分を4B分析材料へ接続。** API `bd602c35`。原入力中の一節を完全引用した明示更新だけ、全原文・欄hashを保ち、残る連続範囲と差替え本人節を別fieldで渡す。撤回された旧節、範囲をまたぐ連結、AI引用は材料へ戻さない。絶対scalar／UTF8座標とsource dutiesを統一。関連159件成功（新12内包）。実4B2件は明示v2で取得し、同じ生成前checkpoint・無修補rawから隔離SQL保存→現在版2回／月次版1回・全node根拠再読成功。通常v1の新実生成は未実施、両profileの材料・回帰を確認。既存CI全19工程成功、API／裏更新とも同版Live、healthz／bootstrap200・worker起動／DB通信200を確認。 新DB変更0、稼働履歴27と既存関数hash不変。一般説明はpendingを維持。同一記録を別記録と呼ぶ誤り、場面と行動の過剰結合・日本語の不自然さは残り、本文品質合格へ数えない。一般訂正理解・Piece更新・naturalの根拠付きAnalysis材料生成・補助全体は未完。build／TestFlight／本人実機は保留を維持。 詳細・現5ファイル地図・実出力と保存範囲は[補助設計§9.57](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-active-update-semantic-material-20261114)を参照する。§11で残した適用済み更新の材料pendingを今回の証明範囲だけ解消した。過去のsource欠落修復・DB反映を再計上せず、今回も限定TECHNICAL_CREDITとして記録する。実4Bの品質未達を隠さず、一般説明の対象理解、Pieceへの更新、NOT_GENERATED解消、関係・場面・日本語の品質を次の主線に残す。通常v2採用や重み変更は行わず、会議終了・公開日未定・12/6候補と61.625％の管理評価は維持する。
+
+
+<a id="piece-natural-answer-active-source-20261114"></a>
+## 13. 報告会後 — 自然一回答の有効意味をPieceへ接続、通常DB／APIの限定技術単位を完了
+
+§5の作業1・4として、真正自然Q3の最初の一回答REVISE／WITHDRAWが、共有意味では解決済みでもPieceのADD限定入口で落ちる接点を修復した。API [75e526d1](https://github.com/MassyuRed/mashos-api/commit/75e526d1a90b969643211b3512b59826e78adbfd)は原入力・実QUESTION／ANSWER・contextから現共有checkpointを再導出して完全一致を確認し、原欄の残存範囲と差替え本人節を既存作者へ渡す。WITHDRAWはsupplemental Noneで、旧節・AI引用・訂正命令を作品の新事実にしない。原文／欄hash／根拠座標・source_ref七項目・最大3slot・唯一作者／S7・PUBLIC7参照・lineage・旧ADD／最新第2・3独立ADDは保持する。新private意味class exact1と既存範囲fieldの内部接続であり、新公開route／DTO／table／RNは追加しない。
+
+既存preview／visual／saveの3 SQL関数は、既存expected source state JSONのexact meaning_checkpointをlocked sourceと照合し、active更新から偽ADDへのすり替えを含めて拒否する。追跡filenameは`20261114051948_piece_natural_answer_active_source.sql`、稼働履歴の実適用versionは`20261114054136`。中断後、追跡SQLを適用した新架空fixtureの隔離checkpointから期待hashを再計算し、fresh liveのDB3関数hashとの完全一致、postgres／service_role限定ACL、SECURITY DEFINERとpg_catalog search_pathを独立再確認した。API配置`dep-dbrvgpdg1s2s73domim0`は14:59:21 JST、worker配置`dep-dbrvgv3l550s73f17hpg`は14:59:04 JSTに同75e526d1でLive。中断後15:09:50／15:09:56 JSTのhealthz／bootstrap200、新workerの起動・15:09:40 JSTまでのpoll200を再確認した。取得済み14:59:22〜15:10 JSTの範囲でerror-level log0。通常配置を通常本人一巡や作品品質へ換算しない。
+
+中断前ローカルは関連544 passed／既存warning1（内新42＝core10＋wire11＋integration21、重複scopeは加算しない）。合成Auth／先行Emlis／Piece HTTPと隔離PGliteで、3plan×2更新のpreview・該当visual変更・初回save／再送・別service非生成再読、quota各1・原source／Emlis不変、checkpoint／source改変の無副作用拒否を確認した。GitHubの既存Analysis CI [43562312172](https://github.com/MassyuRed/mashos-api/actions/runs/43562312172)／Piece CI [43562312140](https://github.com/MassyuRed/mashos-api/actions/runs/43562312140)は同commitでsuccess。中断後、両runのcompleted／success・commit一致と全19／39stepを再確認し、完全ログを復旧した。exact75e526d1と残存runtime／PGliteを復旧した新42件の一回再実行も42 passed／既存warning1・12.42秒、model call0。新42は旧544内の同じscopeで重複加算せず、失われた全544local receiptの復旧とは分ける。ただし中断でlocal CPU receipt／raw／未送信ZIP等は消失し、旧ローカル結果と現在復旧・再照合できる証拠を分ける。消失証跡を現在保存済み・再検証済みとしない。
+
+**真正一回答→Piece・保存競合防止・通常DB／API／workerまでのbounded technical unitはCLOSED、primaryは限定TECHNICAL_CREDIT。新Piece実4B3件・同実本文の保存再読／画像は未完。** 架空REVISE／WITHDRAW／ADD対照のZIP送付は、具体的ファイル内容とRunpod／Jupyter宛先への明示承認不足を理由に自動承認審査で2回とも送信前拒否となった。出自独立照合後の同UI再審査でも拒否されたため、別経路・追加送信をしていない。消失前13,369byte・4fileの準備物を現存準備済みとせず、復旧できた内容／宛先を具体化して必要な承認を解決する。Piece新実生成・同raw保存／画像0、追加学習・4B提供再起動・新GPU借用0。
+
+移行前に試したAnalysis本文指示の比較候補v3の4応答／v4の3応答は、指示／方針露出、無関係材料の脱落、未記載の同日／場面結合、日本語の崩れ等が残り、品質FAILで通常不採用。通常v1／明示v2とproduction候補差分は元へ復元した。比較候補名と既存semantic wire schema v3を混同せず、失われたraw／保存receiptを今回の追加成功へ変換しない。前節§12・設計§9.57の実2記録は保持し、今回7応答やPiece未取得3件と混ぜない。
+
+この単位の次は、必要な具体送付承認を解決したうえで、真正共有checkpointの実3本文→同raw無修補の保存再読→該当同版画像へ戻ること。一般解釈訂正・多段／依存を跨ぐ更新・一般本文品質・根拠付きnatural Analysis・全蓄積・マップ本人訂正・IF／Saved、全補助活用は継続中。RN／renderer変更0、build／TestFlight／本人実機保留を継承し、全体管理評価61.625％・公開日未定・12/6候補は再採点しない。全17ファイル地図、grammar-only句点viewを根拠に混ぜない境界、通常反映・証跡の状態は[補助設計§9.58](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-natural-answer-active-source-20261114)を実行記録とする。
+
+中断後、新UUIDの真正Q3三件から通常factoryのPOST bodyを503Mockで捕捉し、別の新送付物を準備した。16,942byte・6file、SHA256 `a757d2209ca6a5ab4b759989b10f47cb6abbaaee378474e82158f7125ea7ac62`。旧13,369byte原本の復元ではなく、外部送付・実4B0。具体的な内容・既存Pod宛先の承認待ちと実行上限は[補助設計§9.58](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-natural-answer-active-source-20261114)の新準備節を正本とする。
+
+新準備3件のnormalfactory body全byte一致の独立再導出はPASS、送付／GPU0。新checkpoint・固定ZIP・fresh検証原本は[Cocolon_CMEE_Piece_AnswerUpdate_NormalDB_API_20261114.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-6af69c8803fc8191bf7c35bf7718f6cc_2f7470f963808191aaebf050935e72de&account_id=personal)へ保存した。旧失われたraw／receiptを復元した証拠とはしない。

@@ -1,4 +1,4 @@
-> **11/14・訂正・撤回後の有効部分を4B分析材料へ接続。** API `bd602c35`。原入力中の一節を完全引用した明示更新だけ、全原文・欄hashを保ち、残る連続範囲と差替え本人節を別fieldで渡す。撤回された旧節、範囲をまたぐ連結、AI引用は材料へ戻さない。絶対scalar／UTF8座標とsource dutiesを統一。関連159件成功（新12内包）。実4B2件は明示v2で取得し、同じ生成前checkpoint・無修補rawから隔離SQL保存→現在版2回／月次版1回・全node根拠再読成功。通常v1の新実生成は未実施、両profileの材料・回帰を確認。既存CI全19工程成功、API／裏更新とも同版Live、healthz／bootstrap200・worker起動／DB通信200を確認。 新DB変更0、稼働履歴27と既存関数hash不変。一般説明はpendingを維持。同一記録を別記録と呼ぶ誤り、場面と行動の過剰結合・日本語の不自然さは残り、本文品質合格へ数えない。一般訂正理解・Piece更新・naturalの根拠付きAnalysis材料生成・補助全体は未完。build／TestFlight／本人実機は保留を維持。 [範囲・実結果・残件§9.57](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#analysis-active-update-semantic-material-20261114)。
+> **11/14・真正な自然Q3一回答の訂正・撤回をPieceへ接続し、通常DB／API反映までの限定技術単位を完了。** API `75e526d1`。現共有ownerが再導出した意味checkpointと完全一致する一回答だけ、原入力の残存範囲と実ANSWERの差替え節を既存作者へ渡す。WITHDRAWは回答本文を作品材料にせず、旧節はmodel材料・S7から除外。原文・七項目source_ref・作者／体裁／最大3slot・lineageは保持する。既存3 SQL関数のmigrationを稼働適用し、同commitのPiece／Analysis CI成功、API／workerともLive、healthz／bootstrap・worker通信200を再確認した。**新しいPiece実4B3件、同実本文の保存再読・画像は未完。** ZIP外部送付は具体内容／宛先の承認不足を理由に自動承認審査で2回とも送信前拒否、別経路で送らず停止した。中断で旧local原本が消失し、現存準備済みとは扱わない。一般訂正・多段更新・依存を跨ぐ更新、本文品質・補助全体は未完。build／TestFlight／本人実機の保留を継承する。 [範囲・通常反映・証跡と未完§9.58](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-natural-answer-active-source-20261114)。以下の日付付き旧経過の未接続／次作業は当時の範囲として読み、本節の限定接続と混同しない。
 
 > **11/13・第2/3回答後の最新一回答をPieceへ渡す候補：原入力＋画面で明示した最新の自己完結ADD一件を維持し、先行全roundは資格確認だけに使う。API dbb96aca、Python431固有＋38subtests、RN47固有成功。3plan×2自然／2stop／3自然の9保存再読を確認。実4B・本番SQL／配置・実機は未完、通常selector OFF。** [範囲・原本・次§9.43](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-latest-later-add-selected-20261113)。
 
@@ -7055,3 +7055,18 @@ STRUCTURE_MAP_DELTA_PRESENT。既存natural_reply.pyの対象投影、新testと
 STRUCTURE_MAP_DELTA_NONE：今回は実比較・同源泉保存再読・採否記録だけで、製品source／test／公開DTO/API／DB/SQL／RN／モデル／通常selectorの変更0。通常selector OFF、新10b563不採用を維持し、一般応答品質・反復修正時の対象復元・二欄訂正からframe／他coreへの意味伝播・live／本人端末・正式受入れは未完である。
 
 詳細・private原本・採否と保存の範囲は[補助設計§9.38](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-frame-feedback-target-context-actual-20261113)を正本とする。
+
+
+<a id="piece-natural-answer-active-source-files-20261114"></a>
+## 2026-11-14 — 自然一回答の訂正・撤回とPiece保存境界のファイル差分
+
+API [75e526d1](https://github.com/MassyuRed/mashos-api/commit/75e526d1a90b969643211b3512b59826e78adbfd)の変更は既存production11・test3・workflow2・migration1の全17path。全pathと個別責務は[01Bの今回差分](01B_cocolon_overall_structure_analysis_piece_emotionlog_ranking.md#piece-natural-answer-active-source-files-20261114)に列挙する。本mapはアプリ基盤と保存側の接点を示す。
+
+| 既存owner／path | 今回の接続 |
+|---|---|
+| `ai/services/ai_inference/piece_v2_source_adapter.py` | 現共有ownerと保存済みcheckpointをexact照合し、真正自然Q3の一回答REVISE／WITHDRAWを既存Pieceへ渡す |
+| `ai/services/ai_inference/piece_v2_preview_service.py`／`piece_v2_save_service.py`／`piece_v2_store.py` | 既存のpreview・visual・save RPCのexpected source state JSONへ有効更新のcheckpointを渡す。公開route／top-level RPC引数は追加しない |
+| `supabase/migrations/20261114051948_piece_natural_answer_active_source.sql` | locked sourceのcheckpoint完全一致を既存3関数で確認し、active更新から偽ADDへのすり替えも拒否する |
+| 既存Piece／Analysis workflow2本とtest3本 | 既存CI内でsource→作者→SQL保存→新service再読と変異拒否を検査。別のcontroller／checker系列を作らない |
+
+migrationは稼働履歴actual `20261114054136`として適用済み。API／workerとも75e526d1でLive、healthz／bootstrap／新worker通信200を再確認した。旧ADD・第2／3回答の独立ADDと既存source_ref七項目／lineage、本人／quota／再送、RN／rendererは保持する。新private意味class exact1と既存private範囲fieldを追加した内部source接続であり、公開DTO・table・RN sourceの追加変更はない。新Piece実4B3件・同実本文の保存／画像は送付前停止で未完。STRUCTURE_MAP_DELTA_PRESENT。完了範囲・実配置・停止と証跡の限界は[補助設計§9.58](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-natural-answer-active-source-20261114)を参照する。
