@@ -1,3 +1,5 @@
+> **11/14・62,086byteの3file送付後、華恋の起動コマンド引数誤りで比較処理前に停止。** 必須ACK前の区切りを抜かし、main内の引数解析で終了。新model／HTTP／提供停止0、元提供PID95100／start217338131を維持、実行ROOT未作成。3fileの全byte／SHAは承認時と一致。追加実行はせず、区切りだけ直したargvを純粋parserで確認した。作業規則R10.3により修正後の新一回は明示承認待ち。新2本文は未取得・比較／保存／画像は未完、通常selector OFF。 [詳細§9.52](#piece-topic-editorial2-cli-stopped-20261114)。
+
 > **11/14・同じ本人の主語を省略する候補3箇所をsourceへ拘束：** API99dbdaabで生成材料とmodel opt-in S7を整合。原七項目／Prepared／SYSTEM・重み不変、旧TRUE材料との違いはeditorial_choices3箇所だけ。関連1,488件（新35）成功。旧実raw2の保存・再読維持と合成省略2の保存を確認したが、新実4B本文は未取得で、反復改善の証拠ではない。通常FALSEの生成messagesは同一、model S7のsource-proven省略受理範囲は広がる。新送付62,086byte・3fileで新2＋前後4対照＋2GET、復元込み600秒・一回・学習／再試行0を準備。前回の一回は消費済み、今回の送付・実行は確認待ち。通常selector OFF・STRUCTURE_MAP_DELTA_NONE。 [詳細§9.51](#piece-topic-editorial2-prepared-20261114)。
 
 ---
@@ -3152,3 +3154,33 @@ wire SHA256はd2a731d44df22e16bd9104ded79210e8c4b7ef406002c92c27e4be2281581bee�
 受領処理も準備した。新しい閉鎖後summary・完全復元・前後対照bytes・wire／runner／source／344a同一性が成立した原本だけを受け取り、各新rawを無修補で各1独立checkpointへ保存・非生成再読する。その前後で完全原入力と全文を読み、主語反復の減少だけで条件・留保・否定・時点・役割の変異を見逃さない。反復が残れば改善なしと記録し、同じ入力へのhint追加・再取得へ戻らない。意味を保った採用本文が変われば、同じ保存版を既存native harnessのpreview／saved／exportへ通し、本文・画像・元期限を照合する。本文不変なら完了済みの同じ画像検証を再実行しない。
 
 STRUCTURE_MAP_DELTA_NONE。新しい型・source資格・公開API／route／DB／RN／component配置・作者・checker／controller／Gateの追加はなく、既存の生成材料／S7責務内の限定整合である。全treeと最新の全体設計・7地図・weeklyを確認したが、全fileの意味理解完了や全アプリの受入れを宣言しない。今回の到達は限定TECHNICAL_CREDIT、新実本文の改善・新native画像・通常SQL／API／RN一巡・本人端末・商品品質credit／正式受入れ・AR-04／全補助経路の完了は0／未完を維持する。通常selector OFF、Render／Supabase／重み／RN／build／配布への反映はない。
+
+
+<a id="piece-topic-editorial2-cli-stopped-20261114"></a>
+## 9.52 2026-11-14 — 承認3fileを送付、起動引数の誤りで実比較開始前に停止
+
+### 送付と停止の事実
+
+Mashが§9.51の62,086byte・3file、新2応答＋前後4対照＋health2GET、提供一時停止・復元込み最大600秒、一回・追加学習／再試行なしを具体承認した後に実施した。既存Pod f1lle4xwq3wjlnの新しいprepared folderへ3fileを送付し、37,518／24,378／190byteと3SHAの一致を確認した。
+
+その後、華恋が起動コマンドを組み立てる際、ハイフンで始まる必須位置引数ACKの前の `--` 区切りを抜かした。runner PID98272はmain冒頭のparse_argsで `the following arguments are required: ack` と終了した。モデル不良・意味変異・CMEEによる拒否へ読み替えない。原因は華恋のcommand construction errorである。
+
+実行ROOT／実結果archiveは未作成、runnerは終了し、元提供PID95100／start217338131の生存を停止後に確認した。新model load／生成、health／対照HTTP、提供一時停止、環境／鍵読取、学習／再試行、SQL／native画像は全0。引数解析はこれらの処理より前にあることをsourceと実stderrで照合した。新実2は未取得、比較・保存・同版画像は未着手である。
+
+回収原本のstatus `CLI_ACK_PARSE_FAILED_BEFORE_MAIN` は当時の不正確なlabelとしてbyte不変で保存する。実際にはmainが呼ばれ、そこでの引数解析が停止した。failure_reviewへこの訂正を記録し、原本を後から修正しない。module import時の定数／HTTP opener生成はnetwork送信ではなく、実HTTP0は維持する。元args／全envを改めて読取比較したというclaimは作らない。
+
+### 最小修正案と許可境界
+
+送付済みrunner／wire／SHA台帳、原七項目・Prepared／SYSTEM／重み／decoder・商品sourceは変更0。引数オプションを先に置き、末尾を `-- --run-topic-editorial2-piece344a-once` にする起動コマンドだけを修正する。全argvと、新しいlaunch_after_ack_fix.logへの出力案を原本へ保存した。old launch.logは上書きしない。未作成の専用ROOTを初めて使う案で、失敗したruntime rootの再利用ではない。
+
+凍結runnerのASTからArgumentParser／add_argument文だけを取り出し、修正argvの純粋parse成功を確認した。main・model・HTTPは呼んでいない。最初のローカル検証ではnamespaceへPathを渡し忘れたが、検証側へPathを与えて解消した。protected test／fixture／sourceを変更せず、これを新しいmodel試行へ数えない。独立read-onlyでもargvの順序、3SHA／byte不変、parse_argsが実処理より前であることを確認した。独立担当のUI／SQL／model／編集0。
+
+CURRENT_RULES.md §R10.3は「prior mechanical failureを閉じた後にMash様が明示承認したnew authority exact1だけで使用できます」と定める。このため現在の失敗記録を閉じ、修正後コマンドの追加起動は行わず、新しい一回の明示承認待ちとする。自動承認審査による拒否は今回発生していない。
+
+提案する次の一回は、送信済み同じ3file・同Pod・同じ架空2入力／保存344aの新2＋前後4対照＋2GET、提供一時停止・復元込み600秒／復元120秒、1child／1load、一回・学習／再試行0のまま。再送付0。既存2鍵は同Pod localhost認証、起動環境全体は同Pod親RAMで正確な復元だけに使い、保存・出力・外部送信しない。送付folderは停止原本を含むため、実行入力3fileを個別照合し、folder全体が3fileだけという旧launcher条件は使わない。起動先の新logと未作成ROOT・現PID／start・重み／sourceを確認してから始める。
+
+### 原本・現在地
+
+[同じ資料](https://chatgpt.com/library?file_id=libfile_fde3_f-cd62a09cf4bc8191b9fc4cb0e29b49b4_2f7470f963808191aaebf050935e72de&account_id=personal)をLaunchStoppedとして更新した。4,866,089byte／50member、SHA256 `43c3aed3b24f1d71b6878d55e76addfa8c2a201ac4cb4f1da42b3a0bfb60361f`。旧Prepared38memberを元path／byteで全保持し、承認・送付後の実3file／stderr・read-only現況、修正argv／独立確認等の12memberを追加した。回収原ZIPは17,485byte、SHA256 `d419d395cc7d7c071436ff853e034c109c21d98758eb3d96ebc8db643f46a1f3`。public GitHubへ完全source／messages／raw／認証情報は転載しない。新raw自体は0である。
+
+primaryはBLOCKER_NARROWED、商品品質credit・human受入れ追加0。§9.51のAPI99dbdaab、関連1,488成功・両CI初回成功と§9.50の旧実2保存／native6は保持し、今回の起動・新本文・全補助経路の成功へ転用しない。製品source／test／DB／RN／SYSTEM／重み／selector変更0、STRUCTURE_MAP_DELTA_NONE。追加生成・無断retryをせず、次の一作業は上記の起動コマンド最小修正による明示承認済み一回だけとする。

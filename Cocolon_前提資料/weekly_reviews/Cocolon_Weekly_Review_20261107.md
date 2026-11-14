@@ -3210,3 +3210,13 @@ API1237bc21／最終04153c52。既存model opt-inの有限活用と役割化×op
 同commitのPiece43528009915／Analysis43528009944はattempt1・全step success。新35件の実呼出しを含むPieceモデル関連2,311件成功、manual rerun0。今回のPod送付／GPU／提供停止・新nativeは0、旧実raw2と合成省略2の保存再読は別の確認として扱う。旧と新は別runで、messagesは候補3箇所分が異なり、前回の具体承認は再利用しない。新しい比較の送付・実行確認待ちである。
 
 [新しい準備原本](https://chatgpt.com/library?file_id=libfile_fde3_f-cd62a09cf4bc8191b9fc4cb0e29b49b4_2f7470f963808191aaebf050935e72de&account_id=personal)、4,825,131byte／38member、SHA256 40d2773383a78cce989c2c8831b10fd3cf74f44b336cf112ff7f0a1e6890e408。前回の実原本version4／95memberは保持。rootと独立read-onlyで全限定差分・3SHA・来歴・新offline受領処理の境界を照合済み。一般編集品質の改善、human受入れ、通常SQL／API／RN一巡・本人端末と全補助経路は未完。[責務・変更全4path・原本・限界・次§9.51](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-topic-editorial2-prepared-20261114)を正本とする。
+
+
+<a id="piece-topic-editorial2-cli-stopped-20261114"></a>
+## 2026-11-14 補助経路AR-04 — 承認3fileの送付後、引数解析で停止・実2未取得
+
+**11/14・62,086byteの3file送付後、華恋の起動コマンド引数誤りで比較処理前に停止。** 必須ACK前の区切りを抜かし、main内の引数解析で終了。新model／HTTP／提供停止0、元提供PID95100／start217338131を維持、実行ROOT未作成。3fileの全byte／SHAは承認時と一致。追加実行はせず、区切りだけ直したargvを純粋parserで確認した。作業規則R10.3により修正後の新一回は明示承認待ち。新2本文は未取得・比較／保存／画像は未完、通常selector OFF。
+
+承認された一回の起動で、華恋がACK前の区切りを抜かした。実stderrとsource順序、停止後のPID／ROOT不存在、回収した同3fileのbyteを照合した。モデルの失敗やCMEE拒否ではない。正しい区切りを置いたargvは純粋parseで確認済みだが、作業規則R10.3の新明示承認条件に従い、追加起動0。元の比較条件と認証／復元用途を変えず、再送付せずに新一回を行う案まで準備した。
+
+同じ資料へ旧38memberを保持して12memberを追加、4,866,089byte／50member、SHA256 43c3aed3b24f1d71b6878d55e76addfa8c2a201ac4cb4f1da42b3a0bfb60361f。BLOCKER_NARROWED／商品品質credit0、既存CIは既存証拠として維持。製品source／SQL／RN／重み変更0、STRUCTURE_MAP_DELTA_NONE。通常selector OFF・新本文／画像／通常経路／本人端末は未完。[原本・具体的修正案・確認範囲§9.52](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-topic-editorial2-cli-stopped-20261114)を正本とする。
