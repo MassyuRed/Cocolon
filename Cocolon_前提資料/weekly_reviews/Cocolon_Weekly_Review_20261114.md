@@ -755,3 +755,12 @@ Mashは、補助経路活用をせめて終えたい、他に高優先の作業�
 最新の議事録と詳細設計から、能力群と三中核の商品結果・保存再読・通常適用までを含む未完単位を選び、実装・実出力・必要検証・反映へ進める。資料確認・計画更新だけ、単一の局所比較だけを、全体作業の区切りにしない。既存の具体的な実行許可・費用・本番等の境界は維持し、会議終了を製品実行済みへ変換しない。
 
 今回行ったのは終了・継続方法の記録。商品source・GPU・DB・配置・配布・課金・実申請・公開の新実行はなく、全体管理評価61.625％と未完状態は維持する。STRUCTURE_MAP_DELTA_NONE。
+
+<a id="auxiliary-normal-db-api-rollout-20261114"></a>
+## 10. 報告会後 — 補助経路の既存機構を稼働DB／APIへ反映、統合iOS配布は未完
+
+11/14の継続指示を受け、§5.3／5.6と補助設計§9.54の作業1・4を進めた。問い設定・最大3問、二入力訂正履歴、frame対象と依存失効、Piece最新独立ADD1〜3回答等の既存9migrationを適用し、migration17→26件と対象8関数本文の全一致、ACL／RLSをread-only確認した。API99dbdaabは11:52 JSTにRenderでLive、healthz／bootstrapは200。対象RN104件・API259件成功、APIの既存両CI成功を確認した。詳細・適用順・確認限界は[補助設計§9.55](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#auxiliary-normal-db-api-rollout-20261114)を実行記録とする。
+
+PR30 e9d56cc7の統合RNをbuild・TestFlightへuploadする既存workflowの起動は、外部配布の明示承認不足を理由に自動承認審査でdispatch送信前拒否となった。新run／build／配布0、最新8001。次は当該統合iOS build・TestFlight uploadの具体承認後、同版の通常本人利用・保存再読まで閉じる。新しい承認chainやGPU再比較へ置き換えない。
+
+新製品source・モデル生成・学習・研究selector有効化0。DB／API反映を、RN配布・本人一巡・本文品質向上・補助全体完了へ加算しない。会議終了、補助全体への集中、公開日未定・12/6候補・全体61.625％を維持する。

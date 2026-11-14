@@ -1,4 +1,4 @@
-> **11/14・週次計画改訂：補助経路活用の全体完了を当面の最優先主枠へ。** [§9.54](#auxiliary-completion-focus-20261114)と[第11回§5](../../weekly_reviews/Cocolon_Weekly_Review_20261114.md#weekly-priorities-through-20261121)を現在の実施順・再開先とする。本人更新を三中核へ通す、意味／内容選択を実商品へ働かせる、蓄積・本人訂正・IF／Savedを接続する作業に集約し、各能力の通常適用AR-08まで同じ単位で閉じる。必要未実装・未接続・商品未適用を残したまま終了にしない。旧局所の次手は履歴で、効果0のPiece省略hint比較を全体の再開先へ戻さない。全体完了の新実績はなく、公開日未定・12/6提出可能候補は維持。
+> **11/14・週次計画改訂：補助経路活用の全体完了を当面の最優先主枠へ。** [§9.54](#auxiliary-completion-focus-20261114)と[第11回§5](../../weekly_reviews/Cocolon_Weekly_Review_20261114.md#weekly-priorities-through-20261121)を全体の実施順とし、通常反映の現在到達点・直後の再開先は[§9.55](#auxiliary-normal-db-api-rollout-20261114)を優先する。本人更新を三中核へ通す、意味／内容選択を実商品へ働かせる、蓄積・本人訂正・IF／Savedを接続する作業に集約し、各能力の通常適用AR-08まで同じ単位で閉じる。必要未実装・未接続・商品未適用を残したまま終了にしない。旧局所の次手は履歴で、効果0のPiece省略hint比較を全体の再開先へ戻さない。全体完了の新実績はなく、公開日未定・12/6提出可能候補は維持。
 
 > **11/14・修正起動の明示承認後、実2取得・復元・同状態の保存再読まで完了。本文反復の改善は0。** 送信済み62,086byte・3fileは無変更／再送付0、1child／1loadで新2＋前後4対照＋health2GET、閉鎖後105.175913秒。通常／Analysis前後全文bytes一致、元args／env／cwd／2鍵・source／重みを保ってPID98755へ復元。新2 rawは旧2と全byte同一で、3省略候補は未使用。実raw無修補の2独立fork保存・非生成再読、canonical8／3hash・quota各1・原source／Emlis不変。旧保存ともcanonical8同一のため新native実行0。通常selector OFF、一般編集品質・通常経路／本人端末は未完。 [詳細§9.53](#piece-topic-editorial2-actual-unchanged-20261114)。
 
@@ -16,7 +16,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Apply the four completion work units in section 9.54 and weekly section 5: align existing normal mechanisms, connect valid user updates across three cores, improve actual outputs, finish accumulation and IF/Saved, and close normal adoption per capability"
+current_next: "Continue section 9.55: normal DB migrations and API99dbdaab are live; obtain concrete authorization for integrated PR30 iOS build and TestFlight upload after the pre-dispatch approval-review rejection, then verify the same-version user flow and saved reread; retain section 9.54 four-unit completion scope and keep unadopted research selectors off"
 runtime_effect_of_this_document: 0
 ---
 
@@ -1762,24 +1762,24 @@ test runnerは既存runtime正本に従う。今回の設計保存では製品te
 <a id="112-現在の進行欄"></a>
 ### 11.2 現在の進行欄（11/14・全体完了主枠への改訂後）
 
-**現在の作業・再開先は§9.54と第11回§5。** ここは商品実績と必要残差を区別する現在欄。確認headはCocolon a770355c／API99dbdaab、製品sourceは前回と同一で、今回新しいlive・DB・端末照会や実生成はしていない。
+**全体の作業は§9.54と第11回§5、直後の再開先は§9.55。** Cocolon PR30 e9d56cc7の統合RNとAPI99dbdaabを確認し、既存9migration・APIの通常反映を完了した。統合iOS配布と同版本人一巡は未完で、補助全体の完了ではない。新しいモデル生成・研究selector有効化は行っていない。
 
 | 単位 | 最新までに成立したもの | 全体完了へ残る必要な工事 |
 |---|---|---|
 | AR-01 | 原文・役割・時点の既存能力と独立比較を現naturalへ限定回収。正常保存・再読の既存経路、局所修復あり | 材料が正しくても完成文で反転・付加等が残る。6境界／短文・省略・二欄・既成功・別題材を含む現責務群の実返答改善と通常採用 |
-| AR-02 | 最大3問・問い設定・skip／終了、二入力訂正のUI／API／保存、frame対象束縛・失効をコード接続。誤質問保存抜けの拒否修復 | 一般的な問い判断、回答／訂正／撤回後の意味・自然な応答、後半候補の通常適用・本人一巡。拒否増加だけでは閉じない |
-| AR-03 | 適格履歴の再導出・送達予算の修復、本人判断対象の同thread／別記録束縛・失効 | 実4Bで過去／今回・本人修正／不使用を正しく利用する内容と採用版。旧新実比較の不採用は§9.38／42等に保持 |
-| AR-04 | 一人称・受動役割・欄分離・評価・引用等の限定改善、最新ADD1〜3の候補、実raw保存再読・同版native画像。一部枠修正は通常source採用 | 一般文章化・単独伝達、具体訂正／撤回source、形式とmodel範囲、最新通常本人一巡。最後の§9.53は旧新2本文同一で反復改善0、通常model選択OFF |
+| AR-02 | 最大3問・問い設定・skip／終了、二入力訂正のUI／API／保存、frame対象束縛・失効を接続し§9.55でDB／APIを通常反映。誤質問保存抜けの拒否修復 | 一般的な問い判断、回答／訂正／撤回後の意味・自然な応答、統合RN配布・同版本人一巡。拒否増加だけでは閉じない |
+| AR-03 | 適格履歴の再導出・送達予算の修復、本人判断対象の同thread／別記録束縛・失効。§9.55でDB／APIへ通常反映 | 実4Bで過去／今回・本人修正／不使用を正しく利用する内容と採用版、同版本人一巡。旧新実比較の不採用は§9.38／42等に保持 |
+| AR-04 | 一人称・受動役割・欄分離・評価・引用等の限定改善、最新ADD1〜3のSQL／APIを§9.55で通常反映、実raw保存再読・同版native画像。一部枠修正は通常source採用 | 一般文章化・単独伝達、具体訂正／撤回source、形式とmodel範囲、最新通常本人一巡。最後の§9.53は旧新2本文同一で反復改善0、通常model選択OFF |
 | AR-05 | 実4B→CMEE→実保存→7701本人表示、7801先行更新を継承。source duties v2の実装・限定比較／再読 | 本人基準・条件差・記録間関係の意味品質、通常v1／候補v2の採否と適用、項目／線の二入力訂正を次の現在mapへ通す工事 |
 | AR-06 | 原入力・適格最大3ANSWER、累積／月次保存と権利等の既存機構は継承 | 新natural本人原根拠の意味材料は未成立、NOT_GENERATED。有効訂正／撤回の下流伝播、現semantic長履歴と必要分割・跨ぐ関係・月次当時性を接続 |
 | AR-07 | IF／Savedの既存詳細設計・schemaあり | 仮想生成・必要確認・1〜3候補・API／RN／保存意向・再読削除がruntime未実装。適格現在mapから独立着手し、開始1例から必要仕様まで閉じる |
-| AR-08 | 既存の本人経路・iOS8001までの内部配布と、一部通常source採用は継承 | 後半の機構・採用能力のmigration／API／RNを対応させ、通常の本人利用・同版図／画像・保存再読・復帰・実費を閉じる。全ARの全品質完成待ちにしない |
+| AR-08 | 既存の本人経路・iOS8001までの内部配布を継承。§9.55で後半機構の既存9migrationとAPI99dbdaabを稼働反映し、関数本文・ACL／RLSを照合 | 統合PR30のiOS build／TestFlight uploadは自動承認審査の送信前拒否で未実行。具体承認後の配布、通常の本人利用・同版図／画像・保存再読・復帰・実費を閉じる。全ARの全品質完成待ちにしない |
 
-各行の実原本・採否・詳細は§9.2〜53と既存trial／weeklyへ戻る。[改訂前の進行欄](https://github.com/MassyuRed/Cocolon/blob/a770355c7a0518afecdaf80b41a67a323023829c/Cocolon_前提資料/designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#112-現在の進行欄)は履歴として保持し、古い局所の次手を現在の全体再開先にしない。新たな補助全体完了・通常採用・正式受入れを認定したものではない。
+各行の実原本・採否・詳細は§9.2〜55と既存trial／weeklyへ戻る。AR-02／03／04のコード接続に対する通常DB／API反映は§9.55まで進んだが、同版RNの本人利用・本文品質の受入れは残る。[改訂前の進行欄](https://github.com/MassyuRed/Cocolon/blob/a770355c7a0518afecdaf80b41a67a323023829c/Cocolon_前提資料/designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#112-現在の進行欄)は履歴として保持する。補助全体完了・研究モデルの通常採用・正式受入れは認定しない。
 
 ## 12. 今後の指示と再開方法
 
-**11/14・現在の再開先：§9.54と第11回§5の四作業。** 最初に、実装済みの問い設定・二入力訂正・frame対象・最新ADD作品化の対応版差を確認し、採用可能な能力を通常へ運ぶ。これと並行して本人の有効更新を返答・履歴・作品・分析へ通す工事と、実生成の共通原因修復、全蓄積・IF／Savedを進める。AR-08は各単位の内部で閉じる。
+**11/14・現在の再開先：§9.55の統合iOS配布と、§9.54／第11回§5の四作業。** 実装済み機構の既存9migrationとAPI99dbdaabは通常反映済み。PR30統合版のiOS build・TestFlight uploadは自動承認審査で送信前に拒否されたため、新runを起動していない。具体的な配布承認を得て同版の本人利用・保存再読まで閉じる。これと並行して本人の有効更新を返答・履歴・作品・分析へ通す工事と、実生成の共通原因修復、全蓄積・IF／Savedを進める。AR-08は各単位の内部で閉じる。
 
 直近の実結果は§9.53（新2rawは旧2と全文同一、反復改善0、保存再読成立）。旧§9.30の訂正reader、Pieceの省略hint、個別不採用文の次手は、それぞれの原本・必要残差として使うが、全体をその局所作業へ戻す再開指示にはしない。完了済みの旧GPU・SQL・native結果を無根拠に繰り返さない。
 
@@ -3236,3 +3236,44 @@ source／本人／版の不整合はsource ownerへ、意味読取り・内容�
 11/21は活用全体完了を第一目標とした判定点とする。必要未実装・未接続・未適用があれば継続中と明記し、閉じた商品差、残る必要能力と現owner、通常化までの接点、12/6候補への残工程・影響を示す。今週の全体完了保証や12/6の自動延長は置かない。
 
 今回の商品source・公開contract・DB・稼働・GPU・重み・配布・費用契約の変更は0。AR実績は§9.53までを継承し、今回の計画反映を品質改善・正式受入れへ加点しない。STRUCTURE_MAP_DELTA_NONE。
+
+<a id="auxiliary-normal-db-api-rollout-20261114"></a>
+## 9.55 2026-11-14 — 問い・訂正・frame・最新回答PieceのDB／APIを通常反映、統合iOS配布は送信前拒否で未完
+
+### 今回進めた作業単位
+
+Mashの「通常反映まで含めて、未完の作業単位を閉じて」に従い、§9.54の作業1・4として、既に実装・検証された機構を通常DB／APIへ運んだ。対象は問いの受取設定と最大3問、二入力訂正履歴、本人が判断した正確なframe対象と依存失効、naturalの最新独立ADD一回答からのPiece、同版の書出し受領である。新しい製品source・研究hint・モデル・重みの採用は行わない。
+
+Cocolon PR30 `e9d56cc7ba8a76f997ad61346498a7fe927bb488`には対象RNが既に統合されている。API PR3 `99dbdaabbacce6cf4926cde6a3fe0c0a926f04e7`のSQL／APIと対応付け、既存の依存順でDB→APIへ反映した。全補助資産の再棚卸し、受領済みrawの再生成、効果0の省略hint比較は行っていない。
+
+### 稼働DBへ適用した既存9migration
+
+| 順序 | 追跡済みSQL | 通常へ反映する既存責務 |
+|---|---|---|
+| 1 | `20261104002458_piece_v2_export_receipt.sql` | 同版書出しの受領情報 |
+| 2 | `20261109024943_piece_refined_source_fence.sql` | 補足sourceと保存資格の照合 |
+| 3 | `20261112080628_emlis_natural_bound_questions.sql` | sourceに束縛した問いと保存 |
+| 4 | `20261112092202_emlis_question_receiving_preference.sql` | 入力時の問い受取選択 |
+| 5 | `20261113041739_emlis_interpretation_correction_history.sql` | 二入力訂正の適格履歴 |
+| 6 | `20261113085044_piece_natural_refined_source_fence.sql` | natural本人回答のPiece資格 |
+| 7 | `20261113120241_emlis_frame_feedback_target_context.sql` | 正確なframe判断対象・依存照合 |
+| 8 | `20261113120502_piece_frame_target_dependency_fence.sql` | Pieceの同じ依存と失効の照合 |
+| 9 | `20261113131810_piece_natural_later_add_answer.sql` | 第2・第3回答後の最新独立ADD選択 |
+
+全9適用が成功し、migration履歴は17→26件。適用後のread-only照合で、追跡SQLの差替えを合成した期待本文と稼働8関数の`prosrc`の長さ・SHA256が全件一致した。対象はthreadのcommit／read／related_context、Piece issueの5／7引数、visual変更、export受領、save。問い設定列と既存書出し列、対象tableのRLS、関数ごとの既存invoker／DEFINER区分・ACLを確認し、照合ERRORは0だった。Piece主要3関数の既存DEFINERは維持し、全8関数をinvokerへ変更したという意味ではない。これは稼働構造とsourceの一致であり、本人の実入力・新生成・実Auth／PostgREST保存往復の成功へ換算しない。
+
+### 指定API版の配置と確認
+
+Renderのmashos-apiを旧`497f7008`から指定`99dbdaab`へ配置し、deploy `dep-dbrsoslg1s2s73dgo5s0`は2026-11-14 11:52:10.800906 JSTにLiveとなった。環境変数・提供設定・GPU・重み・研究selectorは変更していない。postdeployの`healthz`とbootstrapはHTTP200、Emlis threadとPiece preview／save／owner-read／export／deleteの既存公開設定を確認した。Pieceのpublic read／write／toggleはfalseを維持する。02:51:30〜02:54:22 UTCの取得範囲にerror logはなかった。形式を満たす合成payloadによる訂正／frameの無認証POSTは、どちらも401 Missing bearer tokenで拒否され、本人データ書込み・モデル呼出し0だった。新しい一般応答品質や本人一巡の証拠とはしない。
+
+対象RN104件、API259件は成功（APIはdeprecation warning1）。RNのMetro依存検証は既存CIの依存分離に従い対象外とし、全RN suite成功とは主張しない。API99dbdaabの既存Piece／Analysis CIは両方成功を確認した。新製品code・fixture・testを変更していない。過去の実4B・隔離保存・native画像は当時の範囲で継承し、今回の新成功へ加算しない。
+
+### 統合RN配布の未完と、次の再開先
+
+既存iOS workflowで統合PR30版をbuild・TestFlightへuploadする操作は、外部TestFlight配布の明示承認がないという自動承認審査の理由で、dispatch送信前に拒否された。新しいrun／build／upload／配布は0で、最新内部配布は8001のまま。拒否された操作を別経路で起動していない。これは追加の独自承認段階ではなく、実際に起きた配布操作の停止である。
+
+次は、対象PR30統合版のiOS build・TestFlight uploadの具体承認を得て既存workflowを一回起動し、配布版をDB26件／API99dbdaabと対応させる。問いON／OFF・回答／二入力訂正、Premiumの本人判断、最新適格ADDからPieceの保存・再入場・同版画像を通常本人経路で確認する。必要な本人確認を済んだことにせず、DB／APIの配置完了を作業単位全体の終了へ変換しない。
+
+研究hint・新重み・Piece model selectorは未採用／OFFのまま。一般返答／作品編集／分析の意味品質、本人更新の全下流伝播、AR-06材料・長履歴・AR-07 IF／Saved等は継続中。今回の到達は既存機構の稼働DB／API反映で、本文品質向上、正式human受入れ、AR-01〜08全体完了の追加認定は0。公開日未定・12/6候補と全体管理評価61.625％は維持する。
+
+STRUCTURE_MAP_DELTA_PRESENT（deployment state only）：owner path・公開API／DTO・core責務・rendererの設計は不変。current Emlis／Piece／CMEE mapへ稼働DB／API到達とRN配布未完のpointerを更新し、新しいschema／checker／controller／記録系列は作らない。

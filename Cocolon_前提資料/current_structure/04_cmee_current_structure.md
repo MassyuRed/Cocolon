@@ -1,3 +1,5 @@
+> **11/14・既存補助能力の通常DB／API適用を前進：** 問い設定、二入力訂正履歴、frame対象と依存失効、Piece最新独立ADD等の9migrationとAPI99dbdaabを稼働反映。稼働8関数本文・ACL／RLSを照合し、healthz／bootstrapは200。統合PR30のiOS build・TestFlight uploadは自動承認審査の送信前拒否で未実行。同版の通常本人利用は残り、研究hint・重み・selectorの一括採用や新モデル呼出しは0。[通常反映の範囲・次§9.55](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#auxiliary-normal-db-api-rollout-20261114)。各coreの作者・採否・保存責任は維持し、全補助経路完了へ換算しない。
+
 > **11/13・第2/3回答後の最新一回答をPieceへ渡す候補：原入力＋画面で明示した最新の自己完結ADD一件を維持し、先行全roundは資格確認だけに使う。API dbb96aca、Python431固有＋38subtests、RN47固有成功。3plan×2自然／2stop／3自然の9保存再読を確認。実4B・本番SQL／配置・実機は未完、通常selector OFF。** [範囲・原本・次§9.43](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-latest-later-add-selected-20261113)。
 
 > **11/13・別記録への反復frame判断対象と失効を接続：** APIb8466c6a。本人が実際に見た対象を、最新判断と一致する一意な操作記録から既存context読取へ渡す。判断元の編集／削除・操作消失時は保存応答を非生成で抑止し、生成中保存とPiece作成／見た目変更／保存も拒否する。受取先での再修正・保存receipt再開を含む495固有件成功（新25）。合成provider・隔離SQLの確認であり、実4B品質・本番SQL／配置・本人端末は未完。 [範囲・検証・残件§9.40](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#emlis-cross-record-frame-target-20261113)。
