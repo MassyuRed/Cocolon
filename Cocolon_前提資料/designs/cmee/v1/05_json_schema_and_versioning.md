@@ -64,8 +64,8 @@
 | `cocolon.cmee.analysis_if_route_payload.v1alpha1` | private primary payload | V1-E future |
 | `cocolon.cmee.analysis_if_scenario_candidate_set.v1alpha1` | private primary payload | V1-E future |
 | `cocolon.cmee.analysis_saved_route_intent_payload.v1alpha1` | private primary payload | V1-E future |
-| `cocolon.cmee.analysis_if_safe_projection.v1alpha1` | audience-authorized product projection | 11/14実装・通常DB／API反映済み。実1／2候補の採用・隔離保存再読、3候補拒否／本人未確認は補助設計§9.63へ |
-| `cocolon.cmee.analysis_saved_intent_safe_projection.v1alpha1` | owner-authorized product projection | 11/14実装・通常DB／API反映済み。実1／2候補からの明示Saved2件を隔離保存再読。本人未確認は補助設計§9.63へ |
+| `cocolon.cmee.analysis_if_safe_projection.v1alpha1` | audience-authorized product projection | 11/14実装・通常DB／API反映済み。本人提示の実1／2／3候補の隔離保存再読、標準RN／本人未確認は補助設計§9.64へ |
+| `cocolon.cmee.analysis_saved_intent_safe_projection.v1alpha1` | owner-authorized product projection | 11/14実装・通常DB／API反映済み。本人提示の実1／2／3候補から明示Saved計3件を隔離保存再読。本人未確認は補助設計§9.64へ |
 
 11/14現在、上記IF／Savedのprivate payload3ID・HypotheticalScenarioGraph等の個別IDは設計候補のままで、現runtimeで同IDを発行しているとはしない。対応する仮説graph・候補set・選択意向・必要確認の責務は既存IF ownerで実装済み。private保存は`analysis.if-storage.v1`＋generation artifact bundle、model受口は`cocolon.analysis.if-candidates.model.v1`を使用する。実装の有無と個別schema IDの発行を区別する。
 
@@ -3433,3 +3433,7 @@ DTOのCOMPLETED／REFINED／RESOLVED等は選択候補のhint。ADDとcurrent資
 ### 2026-11-14 — IF受領済み材料の指示版
 
 IFの新準備材料は本人案の分離・anchor先頭／UNKNOWN末尾を示す指示を使う。旧予約／受領rawには旧canonical指示を保持し、既存request_refとmessages SHA双方に一致する旧／新の一方だけを再導出して再開する。未知の指示や旧新hash混在は拒否。storage／safe projection／policy IDの追加変更はなく、本文・graph・rawを新指示へ貼り替えない。
+
+### 2026-11-14 — 完全な本人案集合の生成slot
+
+要求数と同数の異なる本人案がある場合だけ、既存model.v1のnode／edge配列をIF専用prefixItems object tupleで生成する。model本文を受領後に修正せず、public／storage schema・policy・artifact版は不変。旧4版＋新版の既知canonicalをrequest_refとmessages SHA双方で照合する。部分案・重複案は従来の汎用生成を維持する。

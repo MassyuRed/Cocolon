@@ -1,4 +1,4 @@
-> **11/14最新：実4Bの1・2候補を無修補で採用し、隔離DB保存・別プロセス再読・明示Savedと既存RN受口まで接続。** API／worker `f1a7d323efb070da746482b9ab428043cdd5cea9` がLive。原根拠の完全引用・本人案の分離・旧予約／受領rawの非生成再開を保持する。実3候補はUNKNOWN分類と既知の順序の読みが未達で拒否・保存0。1／2候補の限定接続単位は完了、AR-07／補助全体・一般品質・配布／本人実機は未完。 [実結果・範囲・次§9.63](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-exact-quotes-saved-reuse-20261114)。
+> **11/14最新：本人提示3案の実4B出力を無修補で採用し、隔離DB保存・別プロセス再読・明示Saved・既存RN受口まで接続。** 通常API／worker `c7968c658277ec190c32d5e3913dbde13c01d68a` がLive。先行1／2候補の原本も同版保持。本人案がそろう1〜3候補の限定接続単位は完了。本人案なしの標準RN経路の実3案、条件表示・一般日本語品質・本人利用・AR-07／補助全体は未完。 [実結果・範囲・次§9.64](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-person-three-fixed-slots-normal-rollout-20261114)。
 
 > **11/13・第2/3回答後の最新一回答をPieceへ渡す候補：原入力＋画面で明示した最新の自己完結ADD一件を維持し、先行全roundは資格確認だけに使う。API dbb96aca、Python431固有＋38subtests、RN47固有成功。3plan×2自然／2stop／3自然の9保存再読を確認。実4B・本番SQL／配置・実機は未完、通常selector OFF。** [範囲・原本・次§9.43](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-latest-later-add-selected-20261113)。
 
@@ -4078,11 +4078,11 @@ API [75e526d1](https://github.com/MassyuRed/mashos-api/commit/75e526d1a90b969643
 | Piece | `piece_v1c.py`／`piece_semantic_admission.py`／`piece_v2_source_adapter.py`／`piece_v2_generation.py`。同じ有効意味を既存作者・独立保存検査へ渡し、共有分析材料の版・資格・依存を再照合する |
 | マップ本人訂正 | `map_interpretation_correction.py`／`analysis_map_correction_service.py`／`api_self_structure.py`。対象map／項目・線と本人の二入力を別sourceへ束縛し、保存・更新queue・次回semantic材料・根拠表示へ接続。旧月次は不変 |
 | IF／Saved | `if_route_contracts.py`／`if_route_realizer.py`／`analysis_if_model_source.py`／`analysis_if_route_service.py`／`analysis_if_route_store.py`／`api_analysis_if_routes.py`。仮想候補と明示保存意向を別artifactとし、受領receiptからの復帰・idempotency・権利再確認・非生成再読・削除を所有 |
-| 4B受口 | `ai/tools/serve_emlis_natural_reply.py`。IF markerを専用JSON制約へ振り分ける。origin別のanchor／field束縛を追加。改行等を含む全文・空配列はIF専用namespaceで生成時に保持。独立CPU意味検査を残し、実1／2候補の隔離保存再読と3候補拒否を確認（§9.63） |
+| 4B受口 | `ai/tools/serve_emlis_natural_reply.py`。IF専用namespaceで完全引用・空配列を保持。要求数と同数の異なる本人案がある場合だけ、全anchor＋該当本人案＋UNKNOWNのobject tupleと接続先を生成時に束縛。本人案不足／重複は従来汎用経路を維持。CPU採否・ordinary／Pieceは不変。実3候補の同raw保存再読と残差は§9.64 |
 | RN | `CumulativeWatashiMapView.js`→`MapInterpretationCorrectionDialog.js`／`mapCorrectionContract.js`→`analysisMapCorrectionApi.js`。IFは`AnalysisIfRouteDialog.js`／`ifRouteContract.js`／`analysisIfRouteApi.js`。本人訂正をAI根拠と分け、月次と現在の入口を区別する |
 
-全差分pathは[01Aの同日地図](01A_cocolon_overall_structure_app_foundation_home.md#shared-meaning-map-if-file-map-20261114)、通常反映と実品質の最新は補助設計§9.63。実1／2候補setと明示Saved各2件の隔離保存再読は成立、3候補・一般品質・本人利用は未完。runtime実装済みを実品質完成へ換算しない。
+全差分pathは[01Aの同日地図](01A_cocolon_overall_structure_app_foundation_home.md#shared-meaning-map-if-file-map-20261114)と同日§9.64追記。現在は本人提示の実1／2／3候補各1setと明示Saved計3件の隔離保存再読が成立し、API／worker c7968c6。標準RNの自動3案・条件表示・一般品質・本人利用は未完。最新は補助設計§9.64。
 
 ## 2026-11-14 — IF実候補から保存意向まで
 
-IF source ownerと既存4B受口内で完全引用・本人案分離・旧raw再開を修復し、実1／2候補setと明示Saved各2件を隔離DBへ保存・別プロセス再読、通常service DTOと既存RN受口の全4件一致まで接続した。3候補はUNKNOWN分類欠落・既知の順序の未提示扱いが残り拒否。公開API／DB／RN契約とPiece／Emlis作者の追加変更はない。7path地図は01Aの同日節、実原本と次は補助設計§9.63。
+IF source ownerと既存4B受口内で完全引用・本人案分離・旧raw再開を修復し、実1／2候補setと明示Saved各2件を隔離DBへ保存・別プロセス再読、通常service DTOと既存RN受口の全4件一致まで接続した。3候補はUNKNOWN分類欠落・既知の順序の未提示扱いが残り拒否。公開API／DB／RN契約とPiece／Emlis作者の追加変更はない。7path地図は01Aの同日節、§9.63時点の実原本・次手は同節。現在は補助設計§9.64。

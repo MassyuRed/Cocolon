@@ -1,4 +1,4 @@
-> **11/14最新：実4Bの1・2候補を無修補で採用し、隔離DB保存・別プロセス再読・明示Savedと既存RN受口まで接続。** API／worker `f1a7d323efb070da746482b9ab428043cdd5cea9` がLive。原根拠の完全引用・本人案の分離・旧予約／受領rawの非生成再開を保持する。実3候補はUNKNOWN分類と既知の順序の読みが未達で拒否・保存0。1／2候補の限定接続単位は完了、AR-07／補助全体・一般品質・配布／本人実機は未完。 [実結果・範囲・次§9.63](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-exact-quotes-saved-reuse-20261114)。
+> **11/14最新：本人提示3案の実4B出力を無修補で採用し、隔離DB保存・別プロセス再読・明示Saved・既存RN受口まで接続。** 通常API／worker `c7968c658277ec190c32d5e3913dbde13c01d68a` がLive。先行1／2候補の原本も同版保持。本人案がそろう1〜3候補の限定接続単位は完了。本人案なしの標準RN経路の実3案、条件表示・一般日本語品質・本人利用・AR-07／補助全体は未完。 [実結果・範囲・次§9.64](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-person-three-fixed-slots-normal-rollout-20261114)。
 
 > **11/14・既存補助能力の通常DB／API適用を前進：** 問い設定、二入力訂正履歴、frame対象と依存失効、Piece最新独立ADD等の9migrationとAPI99dbdaabを稼働反映。稼働8関数本文・ACL／RLSを照合し、healthz／bootstrapは200。統合PR30のiOS build・TestFlight uploadは自動承認審査の送信前拒否で未実行。DB／API反映単位は完了。Mash明示で配布用アプリbuild・TestFlight送信・実機確認を後回しとし、同版通常本人利用は別の未確認項目で保持して補助作業を続ける。研究hint・重み・selectorの一括採用や新モデル呼出しは0。[通常反映の範囲・次§9.55](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#auxiliary-normal-db-api-rollout-20261114)。各coreの作者・採否・保存責任は維持し、全補助経路完了へ換算しない。
 
@@ -2263,11 +2263,15 @@ source_ref七項目・PUBLIC7参照・source_lineage、Piece唯一作者・既�
 | Piece | `piece_v1c.py`／`piece_semantic_admission.py`／`piece_v2_source_adapter.py`／`piece_v2_generation.py`。同じ有効意味を既存作者・独立保存検査へ渡し、共有分析材料の版・資格・依存を再照合する |
 | マップ本人訂正 | `map_interpretation_correction.py`／`analysis_map_correction_service.py`／`api_self_structure.py`。対象map／項目・線と本人の二入力を別sourceへ束縛し、保存・更新queue・次回semantic材料・根拠表示へ接続。旧月次は不変 |
 | IF／Saved | `if_route_contracts.py`／`if_route_realizer.py`／`analysis_if_model_source.py`／`analysis_if_route_service.py`／`analysis_if_route_store.py`／`api_analysis_if_routes.py`。仮想候補と明示保存意向を別artifactとし、受領receiptからの復帰・idempotency・権利再確認・非生成再読・削除を所有 |
-| 4B受口 | `ai/tools/serve_emlis_natural_reply.py`。IF markerを専用JSON制約へ振り分ける。origin別のanchor／field束縛を追加。改行等を含む全文・空配列はIF専用namespace内で生成時に保持。独立したCPU意味検査を残し、実1／2候補の保存再読と3候補拒否は§9.63 |
+| 4B受口 | `ai/tools/serve_emlis_natural_reply.py`。IF専用namespaceで完全引用・空配列を保持。要求数と同数の異なる本人案がある場合だけ、全anchor＋該当本人案＋UNKNOWNのobject tupleと接続先を生成時に束縛。本人案不足／重複は従来汎用経路を維持。CPU採否・ordinary／Pieceは不変。実3候補の同raw保存再読と残差は§9.64 |
 | RN | `CumulativeWatashiMapView.js`→`MapInterpretationCorrectionDialog.js`／`mapCorrectionContract.js`→`analysisMapCorrectionApi.js`。IFは`AnalysisIfRouteDialog.js`／`ifRouteContract.js`／`analysisIfRouteApi.js`。本人訂正をAI根拠と分け、月次と現在の入口を区別する |
 
-STRUCTURE_MAP_DELTA_PRESENT。新しい本人source、AI引用control、原根拠、AI解釈、仮想候補、保存した意向の責任を分離する。各coreの作者・保存・権利・失効は既存ownerに保持。通常反映と実原本の最新は補助設計§9.63。実1／2候補と明示Saved各2件の隔離保存再読は成立し、3候補の不明分類・順序読取り、一般意味／文章品質と本人利用は未完。
+STRUCTURE_MAP_DELTA_PRESENT。新しい本人source、AI引用control、原根拠、AI解釈、仮想候補、保存した意向の責任を分離する。各coreの作者・保存・権利・失効は既存ownerに保持。通常反映と実原本の最新は補助設計§9.64。本人提示の実1／2／3候補各1setと明示Saved計3件の隔離保存再読が成立。標準RN自動3案・条件表示・一般意味／文章品質・本人利用は未完。
 
 ## 2026-11-14 — IFの完全引用と同版再開
 
 実装差分は既存の4B IF受口・IF owner・Engine dispatch・保存前照合内。旧／新のcanonical指示からrequest_refとmessages hash双方を再導出し、凍結preparedと受領rawを同版のまま採用する。旧材料を新指示へ貼り替えず、schema／policy／公開API／DB／RN契約・重みを変更しない。IF専用の完全JSON引用・空配列とfield順だけを修正し、ordinary／Pieceのparserは不変。実1／2候補の採用・保存／再読・Savedと3候補拒否は補助設計§9.63。STRUCTURE_MAP_DELTA_NONE。
+
+## 2026-11-14 — 本人提示3案の生成構造
+
+本人案が要求数そろう場合だけ、全anchorと本人案とUNKNOWNを既存IFの生成slotへ分ける。固定LMFEのobject prefixItems対応はIF専用namespaceに限定し、CPU採否・ordinary／Piece・保存形式は変更しない。旧4版の凍結preparedと受領rawはそのcanonicalのまま再開。実3候補set1＋Saved1の隔離保存再読と通常API／worker c7968c6反映は補助設計§9.64。STRUCTURE_MAP_DELTA_NONE。

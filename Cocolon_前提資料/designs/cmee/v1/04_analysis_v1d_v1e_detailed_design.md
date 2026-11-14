@@ -1,4 +1,4 @@
-> **11/14現在：IF／Savedは通常DB／APIへ実装・配置済み。実1／2候補setと明示Saved各2件の隔離保存・別プロセス再読・既存RN受口を確認。3候補はUNKNOWN分類・既知の順序の読取りが未達で拒否。** 最新の実結果・配置・未完は[補助設計§9.63](../Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-exact-quotes-saved-reuse-20261114)。以下の日付付き結果と初版metadataは当時の状態として扱う。
+> **11/14現在：IF／Savedは通常DB／APIへ実装・配置済み。本人提示の実1／2／3候補各1setと明示Saved計3件の隔離保存再読を確認。** 標準RN自動3案・条件表示・一般品質・配布／本人利用は未確認。最新は[補助設計§9.64](../Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-person-three-fixed-slots-normal-rollout-20261114)。日付付き過去結果は当時の状態。
 
 > **2026-11-12・設計合意の履歴（11/14の実装・通常反映は補助設計§9.62）：根拠と対象範囲の分かる仮説を保持し、わたしマップの項目・関係線への本人訂正入口を追加する方針。対象と「何がどう違うか」の本人説明を必須とし、不足をAIで補わない。現機能・未決事項は[同日節](#analysis-interpretation-correction-20261112)へ。**
 
@@ -17,7 +17,7 @@
 - document id: `cocolon.cmee.v1d_v1e.analysis_route.detailed_design`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
 - observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102〜u118 content correctionは未配置
-- IF-route runtime state: `IMPLEMENTED_NORMAL_DB_API_20261114`; runtime／API／SQLは通常反映済み。RNはsource統合・既存受口検証済みで、配布／本人利用は未確認。実1／2候補の隔離保存再読・Savedと3候補拒否、配布／本人利用の未確認は補助設計§9.63を参照
+- IF-route runtime state: `IMPLEMENTED_NORMAL_DB_API_20261114`; runtime／API／SQLは通常反映済み。RNはsource統合・既存受口検証済みで、配布／本人利用は未確認。本人提示の実1／2／3候補の限定保存再読・Savedと標準RN／本人未確認は補助設計§9.64を参照
 - Analysis activation: `STORAGE_APPROVED_AND_APPLIED_2026_10_04_JST`; API315f5b5…配置済み、Mashが6201実機確認OKを報告
 - API source effect: V2保存・read分岐実装、default off
 - DB effect: dedicated table 1 / migration 20261003204421 applied

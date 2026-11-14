@@ -1,4 +1,4 @@
-> **11/14最新：実4Bの1・2候補を無修補で採用し、隔離DB保存・別プロセス再読・明示Savedと既存RN受口まで接続。** API／worker `f1a7d323efb070da746482b9ab428043cdd5cea9` がLive。原根拠の完全引用・本人案の分離・旧予約／受領rawの非生成再開を保持する。実3候補はUNKNOWN分類と既知の順序の読みが未達で拒否・保存0。1／2候補の限定接続単位は完了、AR-07／補助全体・一般品質・配布／本人実機は未完。 [実結果・範囲・次§9.63](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-exact-quotes-saved-reuse-20261114)。
+> **11/14最新：本人提示3案の実4B出力を無修補で採用し、隔離DB保存・別プロセス再読・明示Saved・既存RN受口まで接続。** 通常API／worker `c7968c658277ec190c32d5e3913dbde13c01d68a` がLive。先行1／2候補の原本も同版保持。本人案がそろう1〜3候補の限定接続単位は完了。本人案なしの標準RN経路の実3案、条件表示・一般日本語品質・本人利用・AR-07／補助全体は未完。 [実結果・範囲・次§9.64](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#if-person-three-fixed-slots-normal-rollout-20261114)。
 
 > **11/13・第2/3回答後の最新一回答をPieceへ渡す候補：原入力＋画面で明示した最新の自己完結ADD一件を維持し、先行全roundは資格確認だけに使う。API dbb96aca、Python431固有＋38subtests、RN47固有成功。3plan×2自然／2stop／3自然の9保存再読を確認。実4B・本番SQL／配置・実機は未完、通常selector OFF。** [範囲・原本・次§9.43](designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-latest-later-add-selected-20261113)。
 
@@ -7074,7 +7074,7 @@ migrationは稼働履歴actual `20261114054136`として適用済み。API／wor
 <a id="shared-meaning-map-if-file-map-20261114"></a>
 ## 2026-11-14 — 共有有効意味・マップ訂正・IF／Savedのファイル地図
 
-本節は§9.62時点のAPI da9460b・RN source8382ef5の53path地図。後続のIF内部差分7pathは次節に統合し、現API／結果はf1a7d32・補助設計§9.63を優先する。過去の日付付き候補・未実装表は当時の履歴として保持する。
+本節は§9.62時点のAPI da9460b・RN source8382ef5の53path地図。後続のIF内部差分7pathは次節に統合し、現API／結果はc7968c6・補助設計§9.64を優先する。過去の日付付き候補・未実装表は当時の履歴として保持する。
 
 | 責任 | 現ownerと接続 |
 |---|---|
@@ -7082,7 +7082,7 @@ migrationは稼働履歴actual `20261114054136`として適用済み。API／wor
 | Piece | `piece_v1c.py`／`piece_semantic_admission.py`／`piece_v2_source_adapter.py`／`piece_v2_generation.py`。同じ有効意味を既存作者・独立保存検査へ渡し、共有分析材料の版・資格・依存を再照合する |
 | マップ本人訂正 | `map_interpretation_correction.py`／`analysis_map_correction_service.py`／`api_self_structure.py`。対象map／項目・線と本人の二入力を別sourceへ束縛し、保存・更新queue・次回semantic材料・根拠表示へ接続。旧月次は不変 |
 | IF／Saved | `if_route_contracts.py`／`if_route_realizer.py`／`analysis_if_model_source.py`／`analysis_if_route_service.py`／`analysis_if_route_store.py`／`api_analysis_if_routes.py`。仮想候補と明示保存意向を別artifactとし、受領receiptからの復帰・idempotency・権利再確認・非生成再読・削除を所有 |
-| 4B受口 | `ai/tools/serve_emlis_natural_reply.py`。IF markerを専用JSON制約へ振り分ける。origin別のanchor／field束縛を追加。改行等を含む全文・空配列はIF専用namespaceで生成時に保持。独立CPU意味検査を残し、実1／2候補の隔離保存再読と3候補拒否を確認（§9.63） |
+| 4B受口 | `ai/tools/serve_emlis_natural_reply.py`。IF専用namespaceで完全引用・空配列を保持。要求数と同数の異なる本人案がある場合だけ、全anchor＋該当本人案＋UNKNOWNのobject tupleと接続先を生成時に束縛。本人案不足／重複は従来汎用経路を維持。CPU採否・ordinary／Pieceは不変。実3候補の同raw保存再読と残差は§9.64 |
 | RN | `CumulativeWatashiMapView.js`→`MapInterpretationCorrectionDialog.js`／`mapCorrectionContract.js`→`analysisMapCorrectionApi.js`。IFは`AnalysisIfRouteDialog.js`／`ifRouteContract.js`／`analysisIfRouteApi.js`。本人訂正をAI根拠と分け、月次と現在の入口を区別する |
 
 API cb6301ed→da9460bの変更全53path（再実装や全旧資産のimport件数ではない）：
@@ -7159,3 +7159,17 @@ RN関連pathは `components/selfStructure/{CumulativeWatashiMapView,MapInterpret
 | `ai/tests/fixtures/cmee_current_4b_packet_20261114.json` | IF新準備材料。派生map／route参照も再生成した新fixtureであり、旧preparedと同byteとはしない。他5caseは完全一致 |
 
 新file・公開API／DB／RN契約・作者・保存ownerの追加0。da9460b→edcd2c9→f1a7d32の変更はこの既存7pathに限る。既存IF／Saved・現在mapとの寿命分離を保持。実1／2候補の保存・再読／Saved、3候補拒否と通常配置は補助設計§9.63。内部生成・再開責務の限定修正でSTRUCTURE_MAP_DELTA_NONE。
+
+## 2026-11-14 — 本人提示3案の生成・同版保存再読（§9.64）
+
+通常API／worker c7968c6。f1a7d32からの変更は下記の既存5pathだけ。新owner／公開API／DB／RN契約・製品依存の追加なし。既存7pathと53pathの地図を継承し、Engine／service／storeの所有責任は変更しない。STRUCTURE_MAP_DELTA_NONE。
+
+| mashos-api既存path | 今回の責任内差分 |
+|---|---|
+| `ai/tools/serve_emlis_natural_reply.py` | 本人案がそろう場合の全anchor・本人案・UNKNOWNと仮想接続。IF内だけでprefixItemsのobject tupleを扱い、通常parserを変更しない |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/if_route_realizer.py` | 未知と既知手順・別案の分離指示。旧4版＋新版の既知canonicalを同じrequest_ref／messages hashで再導出 |
+| `ai/tests/test_analysis_if_service.py` | 旧4版の予約／受領からの同raw再開、混在hash拒否 |
+| `ai/tests/test_cmee_current_4b_packet.py` | 1／2anchorのtuple、欠落／余分／順序・端点・別案束縛、空白／clone、部分案／重複案の汎用経路維持 |
+| `ai/tests/fixtures/cmee_current_4b_packet_20261114.json` | 新指示のIF preparedを再生成。他5case全dict不変。IF原文は保持、派生artifact／route refは更新 |
+
+実3候補を含む1set＋明示Saved1件の隔離SQL保存・別process再読・既存RN受口は成立。標準RNは本人案配列を送らないため、その自動3案の実生成品質へ換算しない。一般品質と条件表示の残差は補助設計§9.64。
