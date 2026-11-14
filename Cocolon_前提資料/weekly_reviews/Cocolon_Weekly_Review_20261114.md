@@ -6,7 +6,7 @@
 記録担当：華恋  
 会議状態：**終了。11/14、Mashが報告会終了を明示。公開日未定・12/6までに提出可能候補、対象週は補助経路活用全体の完了へ集中する§5と、対応する補助設計の現在再開先を以後の前提として引き継ぐ。今後の短い継続指示と終了記録は§9。補助全体・商品完成・新しい実環境操作の実行を認定したものではない。**
 
-> **報告会後の最新到達点：§14。** 通常DB／API接続完了は維持。承認済みPiece比較は稼働確認URL不一致で生成前停止（model POST0／health GET試行2）、一行修正候補は未実行。新3本文・同raw保存再読／画像、全補助活用は未完。[§14](#piece-answer-update-health-route-stop-20261114)と補助設計§9.59を現在の再開先、全体計画は§5とする。
+> **報告会後の最新到達点：§15。** 実4B3件を取得し、同じ無修補出力の原入力照合・隔離保存再読・JS描画入力一致まで確認。通常DB／API接続完了を継承し、この限定検証単位を閉じた。native画像／本人一巡・一般編集品質・全補助活用は未完。[§15](#piece-answer-update-actual3-saved-20261114)と補助設計§9.60を現在の到達点、全体主枠は§5とする。
 
 [前回・第10回議事録](Cocolon_Weekly_Review_20261107.md)の決定・実行履歴・未達を継承する。今回の11/14〜11/21は記録を進める対象週であり、未来の作業を実績へ数えない。
 
@@ -807,3 +807,15 @@ PR30 e9d56cc7の統合RNをbuild・TestFlightへuploadする既存workflowの起
 HEALTH一行だけの修正候補（新runner SHAacb5665088574cd7d7e27c3b35c0eac9b8cf5959dda5190169790eaa21faf7b1）はcompile／AST／既存handler純CPU契約を確認。送付済み6fileを再送せず、新exclusive dirから同じ3POST bodyを使う具体launchを準備したが未実行。「一回・再試行なし」の指定を越えず追加一回の具体承認待ち。停止原本・Prepared／checkpointは保持する。追加read-only確認で鍵存在を画面確認し、値の外部出力・追加HTTP0。小metadata原本はdownload timeoutのため画面観測と区別する。
 
 保存・非生成再読scriptと描画入力検証は準備だけ。新3応答・同raw保存／画像の成功0、補助全体未完、build／TestFlight／本人実機保留を維持する。停止原本と修正差分、保存版1の検証ZIPは[補助設計§9.59](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-answer-update-health-route-stop-20261114)を正本とする。production／map構造変更0、新CI・DB変更・Render配置0。
+
+
+<a id="piece-answer-update-actual3-saved-20261114"></a>
+## 15. 報告会後 — 訂正・撤回・追加の実三件を取得し、同版保存再読・描画入力確認を完了
+
+稼働確認URL一行修正の具体承認後、既存6file再送なしで追加一回を実行。実REVISE／WITHDRAW／ADDは全200/stop、前後health2GET200、13.307356秒、PID/start不変、学習／再試行／再起動0。旧0件STOPと分けて原本を保持した。原二欄と実ANSWERを照合し、旧希望を差替え／撤回で復活させず、残存の対比・行動、ADDの過去と今を保持。原文保持に近く、一般編集改善・正式human受入れの認定は0。
+
+同raw3を同checkpointから通常factoryへ一回replayし、固定wire body全byte一致、CMEE/S7全3GENERATED、同版preview／save・再送／別service非生成再読、quota各1・source/Emlis/cp/raw不変を確認。初版premium/v2と、実稼働起動既定v1を既存交渉ownerへ渡した別CPUforkの両方で成功したが、同じ実3応答であり新6応答と数えない。Auth合成／SQL隔離、実端末header未確認を維持する。
+
+各forkのpreview／保存／exportはcanonical8・3hash・JS描画入力が全3一致。v1/v2間は本文等7項目と3hashが同一で、差はrenderer版と既存ロゴ文字だけ。新native bitmap／PNG／OS共有／本人表示は未確認。通常DB/API75e526d1の完了を継承し、今回の限定実生成・保存検証単位は完了、production変更・新配置0。証跡保存版2、原本hash・境界と次は[補助設計§9.60](../designs/cmee/Cocolon_CMEE_AuxiliaryAsset_Reuse_ImplementationDesign_20261108.md#piece-answer-update-actual3-saved-20261114)。
+
+次は§5の一般訂正・複数更新／依存・根拠付きnatural Analysis・一般編集・全蓄積／本人map訂正／IF／Savedを進める。補助全体は未完、build／TestFlight／本人実機保留と研究selector／新重み未採用を維持し、完了した搬送確認へ戻らない。全体評価・期限は再採点しない。

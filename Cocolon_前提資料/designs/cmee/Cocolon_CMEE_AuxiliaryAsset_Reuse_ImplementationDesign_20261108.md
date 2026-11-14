@@ -1,4 +1,4 @@
-> **11/14最新：§9.59は承認済み一回実行の生成前STOP。** ZIP送付は完了、稼働確認URL不一致でmodel POST0／health GET試行2、0.033346秒、提供PID／start不変。URL一行だけの修正候補は未実行で、同じ送付済み6fileを再送せず使う追加一回の具体承認待ち。通常DB／API接続完了は§9.58のまま維持する。全体主枠§9.54／第11回§5、実3本文・同raw保存再読／画像と全補助活用未完、build／TestFlight／本人実機保留を引き継ぐ。[停止原本・原因・次](#piece-answer-update-health-route-stop-20261114)。
+> **11/14最新：§9.60の実生成・同版保存検証単位は完了。** 送付済み6fileを再送せずHEALTH一行修正の承認済み追加一回で、実3応答全200/stop・前後health200を13.307356秒で取得。同じraw／checkpointからCMEE/S7・隔離SQL保存再読・JS描画入力一致を3件確認。通常DB／API75e526d1の完了は継承、native画像／本人一巡・一般品質・補助全体は未完。次は§9.54の未接続能力へ進み、閉じた送付／health／source／SQL確認だけを再周回しない。[実原本・範囲・次](#piece-answer-update-actual3-saved-20261114)。
 
 > **11/14・修正起動の明示承認後、実2取得・復元・同状態の保存再読まで完了。本文反復の改善は0。** 送信済み62,086byte・3fileは無変更／再送付0、1child／1loadで新2＋前後4対照＋health2GET、閉鎖後105.175913秒。通常／Analysis前後全文bytes一致、元args／env／cwd／2鍵・source／重みを保ってPID98755へ復元。新2 rawは旧2と全byte同一で、3省略候補は未使用。実raw無修補の2独立fork保存・非生成再読、canonical8／3hash・quota各1・原source／Emlis不変。旧保存ともcanonical8同一のため新native実行0。通常selector OFF、一般編集品質・通常経路／本人端末は未完。 [詳細§9.53](#piece-topic-editorial2-actual-unchanged-20261114)。
 
@@ -16,7 +16,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Section 9.59: the specifically approved single attempt uploaded the exact packet but stopped before generation (0 model POSTs, 2 health GET attempts) because the private runner used /health while the existing handler exposes /healthz. Keep the completed normal DB/API unit at 75e526d1. A one-line private HEALTH correction and reuse of the six already-uploaded files in a separate exclusive directory are prepared, not executed. Obtain specific approval for that additional once-only 300s run; do not silently retry or re-upload. Actual Piece3, same-raw save/read/image and whole auxiliary completion remain pending. Preserve 9.54 priorities and deferred builds/TestFlight/device checks."
+current_next: "Section9.60 closes the bounded actual-three-response source-meaning, same-raw isolated save/read and JS-input verification unit. The approved additional healthz run completed3 POSTs and2 health GETs in13.307356s; no further upload, training, retry or provider restart. Normal DB/API75e526d1 remains completed. Continue9.54 general corrections and multi-update/dependency meaning across the three cores, grounded natural Analysis NOT_GENERATED, general editorial quality, cumulative history/personal-map corrections and IF/Saved. Native bitmap/device/header behavior remains unverified; keep builds/TestFlight/device checks deferred without blocking other work. Do not rerun closed transport/source/SQL units or treat three known short cases as broad product acceptance. New GPU execution is not automatically authorized."
 runtime_effect_of_this_document: 0
 ---
 
@@ -3481,3 +3481,41 @@ private runnerのHEALTH定数だけを`/healthz`へ変更する。8,925→8,926b
 停止原本、原因、保持source、修正一行と未実行launch、保存／描画の準備は同じ検証ZIPの保存版1へ追加した。[Cocolon_CMEE_Piece_AnswerUpdate_NormalDB_API_20261114.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-6af69c8803fc8191bf7c35bf7718f6cc_2f7470f963808191aaebf050935e72de&account_id=personal)、5,035,209byte／SHA256 `2cb6b100ad407a047775ed3887a9846d9de1a5ba500b0646b004c39fb2d86be3`。`LATEST.md`／`manifest_current.json`が現在一覧。§9.58にある旧SHAは前版0のもので、旧原本を保存済みの履歴として保持する。新しい実4B本文を保存したZIPではない。
 
 NO_STRUCTURE_MAP_DELTA：production／公開DTO／route／SQL／RN／renderer／source owner／file地図の構造変更0、稼働DB／API／worker75e526d1の完了は維持。今回の変更はprivate比較runnerの候補と実行状態だけで、新CI・新配置は不要。一般訂正・多段／依存・natural Analysis・長履歴・IF／Saved・一般本文品質、補助全体は未完。build／TestFlight／本人実機は保留のまま、全体評価や期限を再採点しない。
+
+
+<a id="piece-answer-update-actual3-saved-20261114"></a>
+## 9.60 2026-11-14 — 実4B三件の有効意味を保持し、同じ実出力の保存再読・描画入力一致まで完了
+
+Mashは§9.59のHEALTH一行修正、送付済み6file再送なし、同Podで架空3件＋前後2GET、最大5分・追加一回、学習／再試行／再起動なし、既存鍵の同Pod内認証だけの使用を具体承認した。その範囲で既存ZIPを照合し、別exclusive directory `/workspace/piece-answer-update-healthz-once-20261114`へ展開してrunner旧新SHAを確認した。新runner SHA256は`acb5665088574cd7d7e27c3b35c0eac9b8cf5959dda5190169790eaa21faf7b1`、変更はHEALTHの`/health`→`/healthz`だけ。他5file・3POST body・出自・Prepared・生成前checkpointは無変更。旧0件STOPは別に保持した。
+
+### 取得原本と、閉じた範囲
+
+実REVISE／WITHDRAW／ADD各1は全HTTP200／finish_reason=stop。model POST3、前後health GET2はともに200、全体13.307355700060725秒。提供PID98755／starttime218457281、programとnatural model名は前後同一。model名は`cocolon-qwen35-4b-base-851bf6e`、usage／loaded revisionの未提供を推測で埋めない。再送・学習・再試行・提供再起動・依存追加・新model／adapter変更・raw修補0。取得ZIP21,777byte／SHA256 `05516db999584a92d47ed170d27f7c6589ddcd8ae2073323c61de066992362fc`、summary SHA256 `02bc9e5bd63476d74d246ac11410ed6be8f69e4a39ac0e538b0e7c44a0341d7f`。各responseのsize／SHAと固定request bodyの全byte一致も照合した。今回の追加一回は終了・消費済みで、新しい実行へ流用しない。
+
+| 実本文 | 段落 | 原入力・本人回答との照合 |
+|---|---:|---|
+| REVISE | 3 | 元の対比と資料を調べた過去を保ち、旧「私は仕事を続けたい」を除いて新「私は家族を守りたい」だけを使う |
+| WITHDRAW | 2 | 元の対比と行動だけを残し、撤回された希望・回答の訂正命令を作品へ戻さない |
+| ADD対照 | 3 | 元memoの希望と行動を保持し、「今は、私は嬉しい。」を別の回答段落として加える |
+
+独立AI全文読取はこの固定3件で主体・過去／今・希望／実行・対比・欄分離の保持を確認し、未記載の因果・意図・感情や日本語の破綻を認めなかった。REVISE新節の終止句点以外は原文の写しに近い。これは限定した意味保持であり、一般編集品質の改善、A/B優位、正式human Product ReadやMash本人の受入れを追加認定しない。
+
+### 同じrawの保存再読と、実稼働既定に合わせたCPU確認
+
+各件で取得前の同checkpointを独立復元し、元source／共有checkpoint／Preparedと既存3SQL関数hashを照合した。通常application factoryが作ったPOST bodyが送付済wireと全byte一致した場合だけ、同じ無修補HTTP responseをlocal MockTransportで一回replayした。receiptはCANDIDATE_UNREVIEWEDから既存CMEE／S7へ進み、全3GENERATED。preview→同版save／同key再送→別serviceの非生成detailが成功し、quota各1、原source／Emlis／checkpoint／rawは不変。保存／再読でモデル再取得0。初版fixtureはpremium／ios.v2で、検証原本SHA256 `6217de0f6b6ae783e7be36e4bccb468c1f415d4fe9f1fde643be83c085be0aa2`、全文本文原本SHA256 `2032d128ef0a5a61f5acea80aeb33faed2e8e52ba2ab4b9c49513cd17ef9cfd5`。
+
+新たに稼働service metadataを読み、起動renderer既定がios.v1であることを確認したため、初版fixtureとの差を別CPUforkで検証した。元のheader無指定を維持し、起動runtime既定v1だけを既存`api_piece_v2._renderer_preferences`へ渡すと自然にv1が選ばれ、同じ3rawの通常factory body一致・CMEE／S7・同版保存再読・quota／source不変も全3成功した。v2 header controlは既存どおりv2を選ぶが、本forkのheaderや期待artifactを強制変更していない。v1検証原本SHA256 `f588445ade629f86f75d3d455baba6055de9fb56a0f83f001b4186073a6f9d47`、profile証明SHA256 `2a948406db4bcce2cf87654c23d3f1ae1ae125d1399f04799d206c06f8aab7c2`。同じ実3応答のCPU再生であり、新6応答と数えない。
+
+両forkともAuthは合成、SQLは隔離PGliteで、本番本人データの読取・書換え0。起動renderer既定を合わせたことを、全live runtime／実端末compiled header／通常認証・通常DBをそろえた本人一巡としない。今回のfixtureはPremiumだけ、旧42件に含む全プランの接続検証は既存creditであり、新しい全プラン実生成へ加算しない。
+
+### 同版描画入力と、未確認の画像
+
+各fork内でpreview／保存／exportのcanonical8・3hash・全段落・JS描画入力（生成keyを除く）が3件すべて一致した。v2入力証跡SHA256 `1006fdd3661906a52a9dc446ad3be9c258f49a81735eb1ecc05bae79f91a1c22`、v1入力証跡SHA256 `46a850f017f2df22500865a9c293cb18475efa9018cafb006a39a43de19164b2`。版を跨ぐ比較は本文／payload／recipe等7項目と3hashが同一で、JS入力差はrendererVersionと既存brandingTextだけ（v1=Cocolon／v2=Emlis）。新profile・RN分岐を製品へ追加していない。native bitmap／PNG・OS共有・本人表示の成功は0で、画像完成とは書かない。
+
+### 証跡と次の主線
+
+固定source／生成前checkpoint、取得raw3、同版保存原本、独立全文読取と両描画入力証跡は同じ検証ZIPの保存版2へ追加した。[Cocolon_CMEE_Piece_AnswerUpdate_NormalDB_API_20261114.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-6af69c8803fc8191bf7c35bf7718f6cc_2f7470f963808191aaebf050935e72de&account_id=personal)、5,232,467byte／SHA256 `d0078f7339854739ce03fc00ef86bcbd7c23e3eed1749adca2ff7b7f709f69bc`。`LATEST.md`／`manifest_current.json`が現在一覧。以前のSTOP・修正準備・保存版0／1の履歴を保持する。消失した旧Analysis rawの復元とは別である。
+
+この限定的な実生成→有効意味保持→同版隔離保存再読→JS入力一致の確認単位を閉じる。通常DB／API／worker75e526d1の既完了は継承し、production／SQL／公開契約／RN／file地図構造の追加変更、新CI・DB migration・Render再配置0。NO_STRUCTURE_MAP_DELTA。研究selector／新重みは通常採用しない。
+
+次は§9.54の一般的な本人説明・複数更新／依存の有効意味を三中核へ通す接続、natural Analysisの根拠付き材料とNOT_GENERATED解消、実本文の一般編集・関係／日本語品質、全蓄積・本人map訂正・IF／Savedへ戻る。閉じたsource／SQL／health／送付確認だけを再周回しない。全補助活用と正式商品受入れは未完、build／TestFlight／本人実機保留を継承し、native画像の未確認を他の作業全体の待機条件にしない。全体評価と期限は再採点しない。
