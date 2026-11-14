@@ -1,4 +1,4 @@
-> **11/14・現在到達点は§9.58：真正自然Q3一回答の有効意味→Pieceと通常DB／API反映までの限定技術単位はCLOSED、新Piece実4B3件・同実本文の保存／画像は未完。** [§9.58](#piece-natural-answer-active-source-20261114)を今回の到達点と再開先、[§9.54](#auxiliary-completion-focus-20261114)と[第11回§5](../../weekly_reviews/Cocolon_Weekly_Review_20261114.md#weekly-priorities-through-20261121)を全体の実施順とする。外部ZIP送付は自動承認審査で2回とも送信前拒否、代替経路で実行しない。中断でlocal CPU／raw・旧送付物が消失し、復旧原本を照合できる範囲だけ採用する。Analysisの比較v3／v4候補は品質FAILで通常不採用。完了済みSQL／source／通常配置だけの再周回へ戻らず、本文品質・一般訂正・長履歴・IF／Savedを含む補助全体の必要能力を続ける。build／TestFlight／本人実機保留、公開日未定・12/6提出可能候補は維持。
+> **11/14最新：§9.59は承認済み一回実行の生成前STOP。** ZIP送付は完了、稼働確認URL不一致でmodel POST0／health GET試行2、0.033346秒、提供PID／start不変。URL一行だけの修正候補は未実行で、同じ送付済み6fileを再送せず使う追加一回の具体承認待ち。通常DB／API接続完了は§9.58のまま維持する。全体主枠§9.54／第11回§5、実3本文・同raw保存再読／画像と全補助活用未完、build／TestFlight／本人実機保留を引き継ぐ。[停止原本・原因・次](#piece-answer-update-health-route-stop-20261114)。
 
 > **11/14・修正起動の明示承認後、実2取得・復元・同状態の保存再読まで完了。本文反復の改善は0。** 送信済み62,086byte・3fileは無変更／再送付0、1child／1loadで新2＋前後4対照＋health2GET、閉鎖後105.175913秒。通常／Analysis前後全文bytes一致、元args／env／cwd／2鍵・source／重みを保ってPID98755へ復元。新2 rawは旧2と全byte同一で、3省略候補は未使用。実raw無修補の2独立fork保存・非生成再読、canonical8／3hash・quota各1・原source／Emlis不変。旧保存ともcanonical8同一のため新native実行0。通常selector OFF、一般編集品質・通常経路／本人端末は未完。 [詳細§9.53](#piece-topic-editorial2-actual-unchanged-20261114)。
 
@@ -16,7 +16,7 @@ status: IN_PROGRESS_AR01_TO_AR08_COMPLETION_FOCUS
 working_lineage: "Cocolon PR30 / mashos-api PR3"
 product_spec_owner: "../../00_cocolon_current_product_and_state.md and each core canonical owner"
 continuation_instruction: "補助経路の活用作業を進めて"
-current_next: "Section 9.58 bounded technical unit is CLOSED through exact active-source handoff to Piece, isolated save/read checks and normal DB/API/worker rollout at 75e526d1. New actual 4B Piece REVISE/WITHDRAW/ADD outputs and same-raw save/image checks remain PENDING: both upload reviews rejected before transmission, and prior local evidence/ZIP was lost. A new six-file fictional packet has been prepared (16942 bytes, a757d2209ca6a5ab4b759989b10f47cb6abbaaee378474e82158f7125ea7ac62); obtain concrete file/destination approval before upload and do not bypass. This is new preparation, not restoration of the lost original. Analysis body-instruction comparison v3/v4 candidates are NOT_ADOPTED; prior v1/v2 restored. Continue remaining general corrections, multi-update/dependency meaning, grounded natural Analysis, cumulative history and IF/Saved under 9.54. Keep builds, TestFlight and device checks deferred; do not repeat closed rollout or promote technical receipts to product acceptance"
+current_next: "Section 9.59: the specifically approved single attempt uploaded the exact packet but stopped before generation (0 model POSTs, 2 health GET attempts) because the private runner used /health while the existing handler exposes /healthz. Keep the completed normal DB/API unit at 75e526d1. A one-line private HEALTH correction and reuse of the six already-uploaded files in a separate exclusive directory are prepared, not executed. Obtain specific approval for that additional once-only 300s run; do not silently retry or re-upload. Actual Piece3, same-raw save/read/image and whole auxiliary completion remain pending. Preserve 9.54 priorities and deferred builds/TestFlight/device checks."
 runtime_effect_of_this_document: 0
 ---
 
@@ -3451,3 +3451,33 @@ primaryは限定TECHNICAL_CREDIT。真正一回答の有効範囲→既存Piece�
 この単位の次は、復旧できた具体的な架空3件送付物・宛先についての承認不足を解消し、真正共有checkpointのREVISE／WITHDRAWとADD対照の実4B本文→同raw無修補の保存再読→該当同版画像を確認すること。完了済みsource／SQL／通常配置だけの再周回や、品質FAILのAnalysis候補採用へ戻らない。§9.54の一般訂正・複数更新／依存の有効意味、naturalの根拠付きAnalysis材料生成（NOT_GENERATED解消）、実本文の意味／自然さ、全蓄積・本人マップ訂正・IF／Savedの必要能力は継続する。
 
 RN source／rendererは本単位で変更0。Mashのbuild／TestFlight／本人実機保留を継承し、それらを待機条件にも新実行許可にも変えない。公開日未定・12/6提出可能候補・全体管理評価61.625％は再採点せず維持する。
+
+
+<a id="piece-answer-update-health-route-stop-20261114"></a>
+## 9.59 2026-11-14 — 承認済み一回比較は稼働確認URL不一致で生成前停止、追加実行は未承認
+
+Mashが§9.58の16,942byte・6file、既存Runpod `f1lle4xwq3wjln`、架空3件＋前後health2GET、最大5分・一回、学習／再試行／再起動なし、既存鍵の同Pod内認証だけの使用を明示承認した。先のZIP送付に対する承認不足はこの具体範囲で解消し、送付した。Pod側でもZIP SHA256 `a757d2209ca6a5ab4b759989b10f47cb6abbaaee378474e82158f7125ea7ac62` と6memberを照合し、`/workspace/piece-one-answer-rebuilt-20261114-once`へ展開、一回だけ起動した。runner child PID106308。送付と起動の試行を、モデル生成の成功へ数えない。
+
+### 実測と原因
+
+取得した無修補summaryはcompleted=false、model_posts=0、health_gets=2、elapsed_seconds=0.033345995005220175、初回／終端ともHTTPError。提供PID98755・starttime218457281・program・natural model名は前後一致。学習・再試行・提供再起動・依存追加・model変更・raw修補0。鍵を読む前の最初の稼働確認で止まり、candidate3/raw3は未取得である。
+
+私が準備したrunnerのHEALTH定数は`http://127.0.0.1:8000/health`だった。実serverの`do_GET`原本は`/healthz`だけを認め、ほかは404を返す。この実仕様と準備コードの不一致を原因とする。旧runnerはHTTPErrorの型だけを保存し、HTTP status/body自体を保存していないため、「404受信の生responseを保存済み」とは書かない。404は現handlerの読取から判定した。handler原本SHA256 `867f5557a8a1c32071d71002d1c05827ac75b6589498c9b33a85eb3276c59217`、回収ZIP7,375byte／SHA256 `e80cd9c53feca53893e1b270acdae1399f7dc8ac23c798ea2467801d52bf00b3`。提供を停止・変更していない。
+
+後続のread-only確認では既存process identityとnamed_key関数だけを同Pod内で使い、鍵の存在・形式は画面上でtrueを確認した。値を外部へ表示・保存せず、追加GET／POST0。小metadataのダウンロードはtimeoutし、これは画面観測の記録と区別する。鍵値や取得できなかったmetadata原本を復元したとはしない。
+
+### 一行だけの修正候補（未実行）
+
+private runnerのHEALTH定数だけを`/healthz`へ変更する。8,925→8,926byte、旧runner SHA256 `9319814124d58f9cb3e4234d1e12a6cce6420fd8590de8511ac45148d253ef2f`、新 `acb5665088574cd7d7e27c3b35c0eac9b8cf5959dda5190169790eaa21faf7b1`。ASTは当該定数以外同一、compileと取得済みdo_GETの純CPU契約確認が成功（旧path404／正pathかつ期限内200／期限超過503、ネットワーク0）。新pathの実HTTP成功を確認した結果ではない。
+
+同じ送付済みZIPをSHA／6member照合し、新exclusive directory `/workspace/piece-answer-update-healthz-once-20261114`へ展開して一行patchの旧新SHAを照合する具体launchを準備した。他5file、3POST body、出自・Prepared・checkpointは無変更。旧停止directory／summaryを保持する。親は既存Pythonの`sys.executable`を使い、新しい外部timeout commandや依存を追加しない。runner既存の300秒上限・295秒deadline・299秒alarm、同PID/start/model照合、固定3POST＋前後2GET、named keyの同Pod内loopback認証を維持する。準備launch SHA256 `4cb7ec0ba9c1afbc7b3d0a551616940347bc1bde4e3aa62832eace2a049e2f40`。送付0・実行0で、既存6fileの再送付は不要。
+
+今回指定の「一回・再試行なし」を越えて自動実行せず、この修正を適用した追加一回について具体承認を待つ。先の承認不足を蒸し返して新ZIP送付を求めるのではなく、失敗で終了した一回の次の実行を区別する。
+
+### 保存確認の準備と、保持する現在地
+
+無修補rawを同checkpointから通常factoryへ戻し、body bytes一致→CMEE／S7→preview／同版save・再送／別service非生成再読・quota／原source／Emlis不変を確認するprivate scriptを準備・独立reviewしたが、今回のrawは0件なのでmainは未実行。RN描画入力照合も再構成し、既存架空2fixtureのsmoke／改変拒否だけ確認した。今回の実本文Product Read・同raw保存再読・新native画像・本人端末の成功はすべて0。
+
+停止原本、原因、保持source、修正一行と未実行launch、保存／描画の準備は同じ検証ZIPの保存版1へ追加した。[Cocolon_CMEE_Piece_AnswerUpdate_NormalDB_API_20261114.zip](https://chatgpt.com/library?file_id=libfile_fde3_f-6af69c8803fc8191bf7c35bf7718f6cc_2f7470f963808191aaebf050935e72de&account_id=personal)、5,035,209byte／SHA256 `2cb6b100ad407a047775ed3887a9846d9de1a5ba500b0646b004c39fb2d86be3`。`LATEST.md`／`manifest_current.json`が現在一覧。§9.58にある旧SHAは前版0のもので、旧原本を保存済みの履歴として保持する。新しい実4B本文を保存したZIPではない。
+
+NO_STRUCTURE_MAP_DELTA：production／公開DTO／route／SQL／RN／renderer／source owner／file地図の構造変更0、稼働DB／API／worker75e526d1の完了は維持。今回の変更はprivate比較runnerの候補と実行状態だけで、新CI・新配置は不要。一般訂正・多段／依存・natural Analysis・長履歴・IF／Saved・一般本文品質、補助全体は未完。build／TestFlight／本人実機は保留のまま、全体評価や期限を再採点しない。
